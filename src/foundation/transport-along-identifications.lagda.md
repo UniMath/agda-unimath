@@ -98,7 +98,7 @@ substitution-law-tr :
 substitution-law-tr B f refl = refl
 ```
 
-### Coherences and algebraic identities for `tr²`
+### Computing transport in the type family of identifications with a fixed target
 
 ```agda
 module _
@@ -133,9 +133,14 @@ module _
       ( htpy-left-whisk (tr B q) (tr² B α) b)
       ( tr-concat p' q b)
   tr²-right-whisk refl refl b = inv right-unit
+
+tr-Id-left :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
 ```
 
-#### Coherences and algebraic identities for `tr³`
+### Computing transport in the type family of identifications with a fixed source
 
 ```agda
 module _
@@ -188,4 +193,18 @@ module _
           ( tr²-right-whisk α q b)
           ( tr²-left-whisk p' β b)))
   tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
+
+tr-Id-right :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
+tr-Id-right refl refl = refl
+```
+
+### Computing transport of loops
+
+```agda
+tr-loop :
+  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
+  (tr (λ y → y ＝ y) p l) ＝ ((inv p ∙ l) ∙ p)
+tr-loop refl l = inv right-unit
 ```

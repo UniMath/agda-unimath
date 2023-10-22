@@ -29,10 +29,12 @@ open import trees.directed-trees
 
 ## Idea
 
-Consider a vertex `x` in a directed graph `G`. The fiber of `G` at `x` is a
-directed tree of which the type of nodes consists of vertices `y` equipped with
-a walk `w` from `y` to `x`, and the type of edges from `(y , w)` to `(z , v)`
-consist of an edge `e : y → z` such that `w ＝ cons e v`.
+Consider a vertex `x` in a [directed graph](graph-theory.directed-graphs.md)
+`G`. The **fiber** of `G` at `x` is a [directed tree](trees.directed-trees.md)
+of which the type of nodes consists of vertices `y` equipped with a
+[walk](graph-theory.walks-directed-graphs.md) `w` from `y` to `x`, and the type
+of edges from `(y , w)` to `(z , v)` consist of an edge `e : y → z` such that
+`w ＝ cons e v`.
 
 ## Definitions
 
@@ -198,7 +200,7 @@ module _
     direct-predecessor-Directed-Graph G
       ( node-inclusion-fiber-Directed-Graph G x y)
   compute-direct-predecessor-fiber-Directed-Graph y =
-    ( right-unit-law-Σ-is-contr (λ (u , e) → is-contr-total-path' _)) ∘e
+    ( right-unit-law-Σ-is-contr (λ (u , e) → is-torsorial-path' _)) ∘e
     ( interchange-Σ-Σ _)
 
   map-compute-direct-predecessor-fiber-Directed-Graph :

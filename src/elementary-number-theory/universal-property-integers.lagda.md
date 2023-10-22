@@ -19,10 +19,11 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
-open import foundation.unit-type
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -48,7 +49,7 @@ abstract
     map-inv-is-equiv
       ( is-equiv-map-equiv (pS (inl (succ-ℕ x))))
       ( elim-ℤ P p0 pS (inl x))
-  elim-ℤ P p0 pS (inr (inl star)) = p0
+  elim-ℤ P p0 pS (inr (inl _)) = p0
   elim-ℤ P p0 pS (inr (inr zero-ℕ)) = map-equiv (pS zero-ℤ) p0
   elim-ℤ P p0 pS (inr (inr (succ-ℕ x))) =
     map-equiv
@@ -75,8 +76,8 @@ abstract
       ( is-section-map-inv-is-equiv
         ( is-equiv-map-equiv (pS (inl (succ-ℕ x))))
         ( elim-ℤ P p0 pS (succ-ℤ (inl (succ-ℕ x)))))
-  compute-succ-elim-ℤ P p0 pS (inr (inl star)) = refl
-  compute-succ-elim-ℤ P p0 pS (inr (inr x)) = refl
+  compute-succ-elim-ℤ P p0 pS (inr (inl _)) = refl
+  compute-succ-elim-ℤ P p0 pS (inr (inr _)) = refl
 
 ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
@@ -146,18 +147,18 @@ Eq-ELIM-ℤ-eq :
 Eq-ELIM-ℤ-eq P p0 pS s .s refl = reflexive-Eq-ELIM-ℤ P p0 pS s
 
 abstract
-  is-contr-total-Eq-ELIM-ℤ :
+  is-torsorial-Eq-ELIM-ℤ :
     { l1 : Level} (P : ℤ → UU l1) →
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-    ( s : ELIM-ℤ P p0 pS) → is-contr (Σ (ELIM-ℤ P p0 pS) (Eq-ELIM-ℤ P p0 pS s))
-  is-contr-total-Eq-ELIM-ℤ P p0 pS s =
-    is-contr-total-Eq-structure
+    ( s : ELIM-ℤ P p0 pS) → is-torsorial (Eq-ELIM-ℤ P p0 pS s)
+  is-torsorial-Eq-ELIM-ℤ P p0 pS s =
+    is-torsorial-Eq-structure
       ( λ f t H →
         ( zero-Eq-ELIM-ℤ P p0 pS s (pair f t) H) ×
         ( succ-Eq-ELIM-ℤ P p0 pS s (pair f t) H))
-      ( is-contr-total-htpy (pr1 s))
+      ( is-torsorial-htpy (pr1 s))
       ( pair (pr1 s) refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ p K
           ( q : zero-Eq-ELIM-ℤ P p0 pS s
             ( pair (pr1 s) (pair p K))
@@ -170,7 +171,7 @@ abstract
           ( tot (λ α → right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α → is-equiv-right-transpose-eq-concat refl α (pr1 (pr2 s))))
-          ( is-contr-total-path' (pr1 (pr2 s))))
+          ( is-torsorial-path' (pr1 (pr2 s))))
         ( pair (pr1 (pr2 s)) (inv (right-inv (pr1 (pr2 s)))))
         ( is-contr-is-equiv'
           ( Σ ( ( k : ℤ) → Id (pr1 s (succ-ℤ k)) (pr1 (pS k) (pr1 s k)))
@@ -179,7 +180,7 @@ abstract
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ β →
               is-equiv-right-transpose-htpy-concat refl-htpy β (pr2 (pr2 s))))
-          ( is-contr-total-htpy' (pr2 (pr2 s)))))
+          ( is-torsorial-htpy' (pr2 (pr2 s)))))
 
 abstract
   is-equiv-Eq-ELIM-ℤ-eq :
@@ -188,7 +189,7 @@ abstract
     ( s t : ELIM-ℤ P p0 pS) → is-equiv (Eq-ELIM-ℤ-eq P p0 pS s t)
   is-equiv-Eq-ELIM-ℤ-eq P p0 pS s =
     fundamental-theorem-id
-      ( is-contr-total-Eq-ELIM-ℤ P p0 pS s)
+      ( is-torsorial-Eq-ELIM-ℤ P p0 pS s)
       ( Eq-ELIM-ℤ-eq P p0 pS s)
 
 eq-Eq-ELIM-ℤ :

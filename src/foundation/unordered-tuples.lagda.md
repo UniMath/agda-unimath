@@ -12,7 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -21,11 +21,13 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -83,7 +85,7 @@ module _
 
   type-complement-point-unordered-tuple-UU-Fin : UU-Fin lzero n
   type-complement-point-unordered-tuple-UU-Fin =
-    complement-point-UU-Fin n
+    complement-element-UU-Fin n
       ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
 
   type-complement-point-unordered-tuple : UU lzero
@@ -93,13 +95,13 @@ module _
   inclusion-complement-point-unordered-tuple :
     type-complement-point-unordered-tuple → type-unordered-tuple (succ-ℕ n) t
   inclusion-complement-point-unordered-tuple =
-    inclusion-complement-point-UU-Fin n
+    inclusion-complement-element-UU-Fin n
       ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
 
   unordered-tuple-complement-point-type-unordered-tuple :
     unordered-tuple n A
   pr1 unordered-tuple-complement-point-type-unordered-tuple =
-    complement-point-UU-Fin n
+    complement-element-UU-Fin n
       ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
   pr2 unordered-tuple-complement-point-type-unordered-tuple =
     ( element-unordered-tuple (succ-ℕ n) t) ∘
@@ -140,21 +142,20 @@ module _
     (x y : unordered-tuple n A) → x ＝ y → Eq-unordered-tuple x y
   Eq-eq-unordered-tuple x .x refl = refl-Eq-unordered-tuple x
 
-  is-contr-total-Eq-unordered-tuple :
-    (x : unordered-tuple n A) →
-    is-contr (Σ (unordered-tuple n A) (Eq-unordered-tuple x))
-  is-contr-total-Eq-unordered-tuple x =
-    is-contr-total-Eq-structure
+  is-torsorial-Eq-unordered-tuple :
+    (x : unordered-tuple n A) → is-torsorial (Eq-unordered-tuple x)
+  is-torsorial-Eq-unordered-tuple x =
+    is-torsorial-Eq-structure
       ( λ i f e → element-unordered-tuple n x ~ (f ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n x))
+      ( is-torsorial-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n x))
       ( pair (type-unordered-tuple-UU-Fin n x) id-equiv)
-      ( is-contr-total-htpy (element-unordered-tuple n x))
+      ( is-torsorial-htpy (element-unordered-tuple n x))
 
   is-equiv-Eq-eq-unordered-tuple :
     (x y : unordered-tuple n A) → is-equiv (Eq-eq-unordered-tuple x y)
   is-equiv-Eq-eq-unordered-tuple x =
     fundamental-theorem-id
-      ( is-contr-total-Eq-unordered-tuple x)
+      ( is-torsorial-Eq-unordered-tuple x)
       ( Eq-eq-unordered-tuple x)
 
   extensionality-unordered-tuple :

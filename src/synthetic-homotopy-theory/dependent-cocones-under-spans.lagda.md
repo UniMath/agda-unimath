@@ -17,8 +17,10 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -99,10 +101,12 @@ dependent-cocone-map :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l5) →
   ( (x : X) → P x) → dependent-cocone f g c P
-dependent-cocone-map f g c P h =
-  ( λ a → h (horizontal-map-cocone f g c a)) ,
-  ( λ b → h (vertical-map-cocone f g c b)) ,
-  ( λ s → apd h (coherence-square-cocone f g c s))
+pr1 (dependent-cocone-map f g c P h) a =
+  h (horizontal-map-cocone f g c a)
+pr1 (pr2 (dependent-cocone-map f g c P h)) b =
+  h (vertical-map-cocone f g c b)
+pr2 (pr2 (dependent-cocone-map f g c P h)) s =
+  apd h (coherence-square-cocone f g c s)
 ```
 
 ## Properties
@@ -177,21 +181,21 @@ module _
       pr2 (pr2 (htpy-eq-dependent-cocone d' p))
 
   abstract
-    is-contr-total-htpy-dependent-cocone :
-      is-contr (Σ (dependent-cocone f g c P) htpy-dependent-cocone)
-    is-contr-total-htpy-dependent-cocone =
-      is-contr-total-Eq-structure
+    is-torsorial-htpy-dependent-cocone :
+      is-torsorial htpy-dependent-cocone
+    is-torsorial-htpy-dependent-cocone =
+      is-torsorial-Eq-structure
         ( λ α βγ K →
             Σ ( vertical-map-dependent-cocone f g c P d ~ pr1 βγ)
               ( coherence-htpy-dependent-cocone (α , βγ) K))
-        ( is-contr-total-htpy (horizontal-map-dependent-cocone f g c P d))
+        ( is-torsorial-htpy (horizontal-map-dependent-cocone f g c P d))
         ( horizontal-map-dependent-cocone f g c P d , refl-htpy)
-        ( is-contr-total-Eq-structure
+        ( is-torsorial-Eq-structure
           ( λ β γ →
             coherence-htpy-dependent-cocone
               ( horizontal-map-dependent-cocone f g c P d , β , γ)
               ( refl-htpy))
-          ( is-contr-total-htpy (vertical-map-dependent-cocone f g c P d))
+          ( is-torsorial-htpy (vertical-map-dependent-cocone f g c P d))
           ( vertical-map-dependent-cocone f g c P d , refl-htpy)
           ( is-contr-equiv
             ( Σ ( (s : S) →
@@ -201,7 +205,7 @@ module _
                     ( vertical-map-dependent-cocone f g c P d (g s)))
                 ( λ γ → coherence-square-dependent-cocone f g c P d ~ γ))
             ( equiv-tot (equiv-concat-htpy inv-htpy-right-unit-htpy))
-            ( is-contr-total-htpy
+            ( is-torsorial-htpy
               ( coherence-square-dependent-cocone f g c P d))))
 
   abstract
@@ -209,7 +213,7 @@ module _
       (d' : dependent-cocone f g c P) → is-equiv (htpy-eq-dependent-cocone d')
     is-equiv-htpy-eq-dependent-cocone =
       fundamental-theorem-id
-        ( is-contr-total-htpy-dependent-cocone)
+        ( is-torsorial-htpy-dependent-cocone)
         ( htpy-eq-dependent-cocone)
 
     eq-htpy-dependent-cocone :

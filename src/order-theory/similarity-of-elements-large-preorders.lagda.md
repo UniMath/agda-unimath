@@ -35,8 +35,8 @@ module _
     Prop (β l1 l2 ⊔ β l2 l1)
   sim-prop-Large-Preorder x y =
     prod-Prop
-      ( leq-Large-Preorder-Prop P x y)
-      ( leq-Large-Preorder-Prop P y x)
+      ( leq-prop-Large-Preorder P x y)
+      ( leq-prop-Large-Preorder P y x)
 
   sim-Large-Preorder :
     {l1 l2 : Level}
@@ -62,7 +62,7 @@ module _
   where
 
   refl-sim-Large-Preorder :
-    is-large-reflexive (type-Large-Preorder P) (sim-Large-Preorder P)
+    is-reflexive-Large-Relation (type-Large-Preorder P) (sim-Large-Preorder P)
   pr1 (refl-sim-Large-Preorder x) = refl-leq-Large-Preorder P x
   pr2 (refl-sim-Large-Preorder x) = refl-leq-Large-Preorder P x
 ```
@@ -75,7 +75,7 @@ module _
   where
 
   transitive-sim-Large-Preorder :
-    is-large-transitive (type-Large-Preorder P) (sim-Large-Preorder P)
+    is-transitive-Large-Relation (type-Large-Preorder P) (sim-Large-Preorder P)
   pr1 (transitive-sim-Large-Preorder x y z H K) =
     transitive-leq-Large-Preorder P x y z (pr1 H) (pr1 K)
   pr2 (transitive-sim-Large-Preorder x y z H K) =
@@ -90,7 +90,7 @@ module _
   where
 
   symmetric-sim-Large-Preorder :
-    is-large-symmetric (type-Large-Preorder P) (sim-Large-Preorder P)
+    is-symmetric-Large-Relation (type-Large-Preorder P) (sim-Large-Preorder P)
   pr1 (symmetric-sim-Large-Preorder _ _ H) = pr2 H
   pr2 (symmetric-sim-Large-Preorder _ _ H) = pr1 H
 ```

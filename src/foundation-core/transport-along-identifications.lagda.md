@@ -102,3 +102,16 @@ tr-ap :
   tr D (ap f p) (g x z) ＝ g y (tr B p z)
 tr-ap f g refl z = refl
 ```
+
+### Computing maps out of identity types as transports
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A}
+  (f : (x : A) → (a ＝ x) → B x)
+  where
+
+  compute-map-out-of-identity-type :
+    (x : A) (p : a ＝ x) → f x p ＝ tr B p (f a refl)
+  compute-map-out-of-identity-type x refl = refl
+```

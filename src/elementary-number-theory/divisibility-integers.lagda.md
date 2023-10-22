@@ -14,6 +14,7 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -481,7 +482,7 @@ is-zero-sim-unit-ℤ {x} {y} H p =
     ( λ g → g (inv (β g) ∙ (ap ((u g) *ℤ_) p ∙ right-zero-law-mul-ℤ (u g))))
   where
   K : is-nonzero-ℤ y → presim-unit-ℤ x y
-  K g = H (λ {(pair u v) → g v})
+  K g = H (λ (u , v) → g v)
   u : is-nonzero-ℤ y → ℤ
   u g = pr1 (pr1 (K g))
   v : is-nonzero-ℤ y → ℤ
@@ -546,8 +547,8 @@ transitive-presim-unit-ℤ x y z (pair (pair v K) q) (pair (pair u H) p) =
 transitive-sim-unit-ℤ : is-transitive sim-unit-ℤ
 transitive-sim-unit-ℤ x y z K H f =
   transitive-presim-unit-ℤ x y z
-    ( K (λ {(p , q) → f (is-zero-sim-unit-ℤ' H p , q)}))
-    ( H (λ {(p , q) → f (p , is-zero-sim-unit-ℤ K q)}))
+    ( K (λ (p , q) → f (is-zero-sim-unit-ℤ' H p , q)))
+    ( H (λ (p , q) → f (p , is-zero-sim-unit-ℤ K q)))
 ```
 
 ### `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`

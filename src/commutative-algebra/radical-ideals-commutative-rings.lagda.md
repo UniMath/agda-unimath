@@ -21,6 +21,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -42,9 +43,9 @@ module _
   {l1 l2 : Level} (A : Commutative-Ring l1)
   where
 
-  is-radical-ideal-commutative-ring-Prop :
+  is-radical-ideal-prop-Commutative-Ring :
     (I : ideal-Commutative-Ring l2 A) → Prop (l1 ⊔ l2)
-  is-radical-ideal-commutative-ring-Prop I =
+  is-radical-ideal-prop-Commutative-Ring I =
     Π-Prop
       ( type-Commutative-Ring A)
       ( λ f →
@@ -57,13 +58,13 @@ module _
   is-radical-ideal-Commutative-Ring :
     (I : ideal-Commutative-Ring l2 A) → UU (l1 ⊔ l2)
   is-radical-ideal-Commutative-Ring I =
-    type-Prop (is-radical-ideal-commutative-ring-Prop I)
+    type-Prop (is-radical-ideal-prop-Commutative-Ring I)
 
   is-prop-is-radical-ideal-Commutative-Ring :
     (I : ideal-Commutative-Ring l2 A) →
     is-prop (is-radical-ideal-Commutative-Ring I)
   is-prop-is-radical-ideal-Commutative-Ring I =
-    is-prop-type-Prop (is-radical-ideal-commutative-ring-Prop I)
+    is-prop-type-Prop (is-radical-ideal-prop-Commutative-Ring I)
 ```
 
 ### Radical ideals
@@ -183,14 +184,13 @@ module _
     refl-has-same-elements-ideal-Commutative-Ring A
       ( ideal-radical-ideal-Commutative-Ring A I)
 
-  is-contr-total-has-same-elements-radical-ideal-Commutative-Ring :
+  is-torsorial-has-same-elements-radical-ideal-Commutative-Ring :
     {l2 : Level} (I : radical-ideal-Commutative-Ring l2 A) →
-    is-contr
-      ( Σ ( radical-ideal-Commutative-Ring l2 A)
-          ( has-same-elements-radical-ideal-Commutative-Ring I))
-  is-contr-total-has-same-elements-radical-ideal-Commutative-Ring I =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-has-same-elements-ideal-Commutative-Ring A
+    is-torsorial
+      ( has-same-elements-radical-ideal-Commutative-Ring I)
+  is-torsorial-has-same-elements-radical-ideal-Commutative-Ring I =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-ideal-Commutative-Ring A
         ( ideal-radical-ideal-Commutative-Ring A I))
       ( is-prop-is-radical-ideal-Commutative-Ring A)
       ( ideal-radical-ideal-Commutative-Ring A I)
@@ -208,7 +208,7 @@ module _
     is-equiv (has-same-elements-eq-radical-ideal-Commutative-Ring I J)
   is-equiv-has-same-elements-eq-radical-ideal-Commutative-Ring I =
     fundamental-theorem-id
-      ( is-contr-total-has-same-elements-radical-ideal-Commutative-Ring I)
+      ( is-torsorial-has-same-elements-radical-ideal-Commutative-Ring I)
       ( has-same-elements-eq-radical-ideal-Commutative-Ring I)
 
   extensionality-radical-ideal-Commutative-Ring :

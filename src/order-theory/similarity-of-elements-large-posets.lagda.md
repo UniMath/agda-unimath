@@ -15,6 +15,7 @@ open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import order-theory.large-posets
@@ -68,7 +69,7 @@ module _
   where
 
   refl-sim-Large-Poset :
-    is-large-reflexive (type-Large-Poset P) (sim-Large-Poset P)
+    is-reflexive-Large-Relation (type-Large-Poset P) (sim-Large-Poset P)
   refl-sim-Large-Poset = refl-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
 
@@ -80,7 +81,7 @@ module _
   where
 
   transitive-sim-Large-Poset :
-    is-large-transitive (type-Large-Poset P) (sim-Large-Poset P)
+    is-transitive-Large-Relation (type-Large-Poset P) (sim-Large-Poset P)
   transitive-sim-Large-Poset =
     transitive-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
@@ -93,7 +94,7 @@ module _
   where
 
   symmetric-sim-Large-Poset :
-    is-large-symmetric (type-Large-Poset P) (sim-Large-Poset P)
+    is-symmetric-Large-Relation (type-Large-Poset P) (sim-Large-Poset P)
   symmetric-sim-Large-Poset =
     symmetric-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
@@ -124,10 +125,10 @@ module _
     is-prop-all-elements-equal
       ( all-elements-equal-total-sim-Large-Poset x)
 
-  is-contr-total-sim-Large-Poset :
+  is-torsorial-sim-Large-Poset :
     {l1 : Level} (x : type-Large-Poset P l1) →
-    is-contr (Σ (type-Large-Poset P l1) (sim-Large-Poset P x))
-  is-contr-total-sim-Large-Poset x =
+    is-torsorial (sim-Large-Poset P x)
+  is-torsorial-sim-Large-Poset x =
     is-proof-irrelevant-is-prop
       ( is-prop-total-sim-Large-Poset x)
       ( x , refl-sim-Large-Poset P x)
@@ -150,7 +151,7 @@ module _
     is-equiv (sim-eq-Large-Poset x y)
   is-equiv-sim-eq-Large-Poset x =
     fundamental-theorem-id
-      ( is-contr-total-sim-Large-Poset P x)
+      ( is-torsorial-sim-Large-Poset P x)
       ( sim-eq-Large-Poset x)
 
   extensionality-Large-Poset :

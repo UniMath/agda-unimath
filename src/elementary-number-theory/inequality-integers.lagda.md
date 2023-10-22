@@ -37,6 +37,9 @@ leq-ℤ x y = type-Prop (leq-ℤ-Prop x y)
 
 is-prop-leq-ℤ : (x y : ℤ) → is-prop (leq-ℤ x y)
 is-prop-leq-ℤ x y = is-prop-type-Prop (leq-ℤ-Prop x y)
+
+infix 30 _≤-ℤ_
+_≤-ℤ_ = leq-ℤ
 ```
 
 ## Properties

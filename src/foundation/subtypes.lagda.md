@@ -25,6 +25,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -83,12 +84,12 @@ module _
   pr1 (refl-has-same-elements-subtype x) = id
   pr2 (refl-has-same-elements-subtype x) = id
 
-  is-contr-total-has-same-elements-subtype :
-    is-contr (Σ (subtype l2 A) has-same-elements-subtype)
-  is-contr-total-has-same-elements-subtype =
-    is-contr-total-Eq-Π
+  is-torsorial-has-same-elements-subtype :
+    is-torsorial has-same-elements-subtype
+  is-torsorial-has-same-elements-subtype =
+    is-torsorial-Eq-Π
       ( λ x Q → P x ⇔ Q)
-      ( λ x → is-contr-total-iff (P x))
+      ( λ x → is-torsorial-iff (P x))
 
   has-same-elements-eq-subtype :
     (Q : subtype l2 A) → (P ＝ Q) → has-same-elements-subtype Q
@@ -99,7 +100,7 @@ module _
     (Q : subtype l2 A) → is-equiv (has-same-elements-eq-subtype Q)
   is-equiv-has-same-elements-eq-subtype =
     fundamental-theorem-id
-      is-contr-total-has-same-elements-subtype
+      is-torsorial-has-same-elements-subtype
       has-same-elements-eq-subtype
 
   extensionality-subtype :

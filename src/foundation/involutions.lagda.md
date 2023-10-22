@@ -13,14 +13,16 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.whiskering-homotopies
@@ -134,20 +136,20 @@ module _
   htpy-eq-involution : (s t : involution A) → s ＝ t → htpy-involution s t
   htpy-eq-involution s .s refl = refl-htpy-involution s
 
-  is-contr-total-htpy-involution :
-    (s : involution A) → is-contr (Σ (involution A) (htpy-involution s))
-  is-contr-total-htpy-involution s =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-involution :
+    (s : involution A) → is-torsorial (htpy-involution s)
+  is-torsorial-htpy-involution s =
+    is-torsorial-Eq-structure
       ( λ x z → coherence-htpy-involution s (x , z))
-      ( is-contr-total-htpy (map-involution s))
+      ( is-torsorial-htpy (map-involution s))
       ( map-involution s , refl-htpy)
-      ( is-contr-total-htpy (is-involution-map-involution s))
+      ( is-torsorial-htpy (is-involution-map-involution s))
 
   is-equiv-htpy-eq-involution :
     (s t : involution A) → is-equiv (htpy-eq-involution s t)
   is-equiv-htpy-eq-involution s =
     fundamental-theorem-id
-      ( is-contr-total-htpy-involution s)
+      ( is-torsorial-htpy-involution s)
       ( htpy-eq-involution s)
 
   extensionality-involution :

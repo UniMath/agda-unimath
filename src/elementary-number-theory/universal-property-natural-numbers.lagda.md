@@ -17,8 +17,10 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -59,30 +61,30 @@ module _
   htpy-eq-structure-preserving-map-ℕ {h} refl =
     refl-htpy-structure-preserving-map-ℕ h
 
-  is-contr-total-htpy-structure-preserving-map-ℕ :
+  is-torsorial-htpy-structure-preserving-map-ℕ :
     (h : structure-preserving-map-ℕ) →
-    is-contr (Σ structure-preserving-map-ℕ (htpy-structure-preserving-map-ℕ h))
-  is-contr-total-htpy-structure-preserving-map-ℕ h =
-    is-contr-total-Eq-structure
+    is-torsorial (htpy-structure-preserving-map-ℕ h)
+  is-torsorial-htpy-structure-preserving-map-ℕ h =
+    is-torsorial-Eq-structure
       ( λ g p (H : pr1 h ~ g) →
         ( pr1 (pr2 h) ＝ (H zero-ℕ ∙ pr1 p)) ×
         ( (n : ℕ) →
           (pr2 (pr2 h) n ∙ ap f (H n)) ＝ (H (succ-ℕ n) ∙ pr2 p n)))
-      ( is-contr-total-htpy (pr1 h))
+      ( is-torsorial-htpy (pr1 h))
       ( pair (pr1 h) refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ p0 pS q →
           (n : ℕ) → (pr2 (pr2 h) n ∙ refl) ＝ pS n)
-        ( is-contr-total-path (pr1 (pr2 h)))
+        ( is-torsorial-path (pr1 (pr2 h)))
         ( pair (pr1 (pr2 h)) refl)
-        ( is-contr-total-htpy (λ n → (pr2 (pr2 h) n ∙ refl))))
+        ( is-torsorial-htpy (λ n → (pr2 (pr2 h) n ∙ refl))))
 
   is-equiv-htpy-eq-structure-preserving-map-ℕ :
     (h k : structure-preserving-map-ℕ) →
     is-equiv (htpy-eq-structure-preserving-map-ℕ {h} {k})
   is-equiv-htpy-eq-structure-preserving-map-ℕ h =
     fundamental-theorem-id
-      ( is-contr-total-htpy-structure-preserving-map-ℕ h)
+      ( is-torsorial-htpy-structure-preserving-map-ℕ h)
       ( λ k → htpy-eq-structure-preserving-map-ℕ {h} {k})
 
   eq-htpy-structure-preserving-map-ℕ :

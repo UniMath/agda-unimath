@@ -14,8 +14,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.commuting-elements-groups
@@ -50,7 +52,7 @@ module _
     map-iterate-automorphism-ℤ k (equiv-mul-Group G g)
 ```
 
-### Powers by integers of group elements
+### Integer powers of group elements
 
 ```agda
 module _
@@ -60,6 +62,34 @@ module _
   integer-power-Group : ℤ → type-Group G → type-Group G
   integer-power-Group k g =
     map-iterate-automorphism-ℤ k (equiv-mul-Group G g) (unit-Group G)
+```
+
+### The predicate of being an integer power of an element in a group
+
+We say that an element `y` **is an integer power** of an element `x` if there
+[exists](foundation.existential-quantification.md) an integer `k` such that
+`xᵏ ＝ y`.
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-integer-power-of-element-prop-Group :
+    (x y : type-Group G) → Prop l
+  is-integer-power-of-element-prop-Group x y =
+    ∃-Prop ℤ (λ k → integer-power-Group G k x ＝ y)
+
+  is-integer-power-of-element-Group :
+    (x y : type-Group G) → UU l
+  is-integer-power-of-element-Group x y =
+    type-Prop (is-integer-power-of-element-prop-Group x y)
+
+  is-prop-is-integer-power-of-element-Group :
+    (x y : type-Group G) →
+    is-prop (is-integer-power-of-element-Group x y)
+  is-prop-is-integer-power-of-element-Group x y =
+    is-prop-type-Prop (is-integer-power-of-element-prop-Group x y)
 ```
 
 ## Properties
@@ -92,7 +122,7 @@ module _
         ( iterative-multiplication-by-element-Group G g (inl x) h1)
         ( h2)))
   associative-iterative-multiplication-by-element-Group
-    ( inr (inl star)) h1 h2 =
+    ( inr (inl _)) h1 h2 =
     refl
   associative-iterative-multiplication-by-element-Group
     ( inr (inr zero-ℕ)) h1 h2 =
@@ -220,7 +250,7 @@ module _
     transpose-eq-inv-Group G
       ( ( ap (inv-Group G) (integer-power-in-pos-Group G k x)) ∙
         ( inv (integer-power-in-neg-Group G k x)))
-  integer-power-neg-Group (inr (inl star)) x =
+  integer-power-neg-Group (inr (inl _)) x =
     integer-power-zero-Group G x ∙ inv (inv-unit-Group G)
   integer-power-neg-Group (inr (inr k)) x =
     ( integer-power-in-neg-Group G k x) ∙
@@ -303,7 +333,7 @@ module _
   integer-power-unit-Group (inl (succ-ℕ k)) =
     ( ap-mul-Group G (inv-unit-Group G) (integer-power-unit-Group (inl k))) ∙
     ( left-unit-law-mul-Group G (unit-Group G))
-  integer-power-unit-Group (inr (inl star)) = refl
+  integer-power-unit-Group (inr (inl _)) = refl
   integer-power-unit-Group (inr (inr zero-ℕ)) =
     integer-power-one-Group G (unit-Group G)
   integer-power-unit-Group (inr (inr (succ-ℕ k))) =
@@ -344,7 +374,7 @@ module _
       ( integer-power-Group G (inl k) y)
       ( commute-inv-Group G x y H)
       ( commute-integer-powers-Group' (inl k) H)
-  commute-integer-powers-Group' (inr (inl star)) {x} {y} H =
+  commute-integer-powers-Group' (inr (inl _)) {x} {y} H =
     commute-unit-Group G x
   commute-integer-powers-Group' (inr (inr zero-ℕ)) {x} {y} H =
     ( ap (x *_) (integer-power-one-Group G y)) ∙
@@ -376,7 +406,7 @@ module _
         ( commute-inv-Group G (y ^ l) x
           ( inv (commute-integer-powers-Group' l H)))
         ( inv (commute-integer-powers-Group (inl k) l H)))
-  commute-integer-powers-Group (inr (inl star)) l {x} {y} H =
+  commute-integer-powers-Group (inr (inl _)) l {x} {y} H =
     inv (commute-unit-Group G (y ^ l))
   commute-integer-powers-Group (inr (inr zero-ℕ)) l {x} {y} H =
     ( ap (_* (y ^ l)) (integer-power-one-Group G x)) ∙
@@ -449,7 +479,7 @@ module _
         ap-mul-Group G
           ( inv (integer-power-pred-Group G (inl k) x))
           ( inv (integer-power-pred-Group G (inl k) y))
-  distributive-integer-power-mul-Group (inr (inl star)) x y H =
+  distributive-integer-power-mul-Group (inr (inl _)) x y H =
     inv (left-unit-law-mul-Group G (unit-Group G))
   distributive-integer-power-mul-Group (inr (inr zero-ℕ)) x y H =
     ( integer-power-one-Group G (x * y)) ∙
@@ -520,7 +550,7 @@ module _
         inv (distributive-integer-power-add-Group G (x ^ k) neg-one-ℤ (inl l))
       ＝ (x ^ k) ^ (inl (succ-ℕ l))
         by ap ((x ^ k) ^_) (is-left-add-neg-one-pred-ℤ (inl l))
-  integer-power-mul-Group k (inr (inl star)) x =
+  integer-power-mul-Group k (inr (inl _)) x =
     ap (x ^_) (right-zero-law-mul-ℤ k)
   integer-power-mul-Group k (inr (inr zero-ℕ)) x =
     ( ap (x ^_) (right-unit-law-mul-ℤ k)) ∙
@@ -539,13 +569,22 @@ module _
       ＝ (x ^ k) ^ (succ-ℤ (in-pos l))
         by
         inv (integer-power-succ-Group' G (in-pos l) (x ^ k))
+
+  swap-integer-power-Group :
+    (k l : ℤ) (x : type-Group G) →
+    integer-power-Group G k (integer-power-Group G l x) ＝
+    integer-power-Group G l (integer-power-Group G k x)
+  swap-integer-power-Group k l x =
+    ( inv (integer-power-mul-Group l k x)) ∙
+    ( ap (λ t → integer-power-Group G t x) (commutative-mul-ℤ l k)) ∙
+    ( integer-power-mul-Group k l x)
 ```
 
 ### Group homomorphisms preserve integer powers
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   preserves-integer-powers-hom-Group :
@@ -564,7 +603,7 @@ module _
     ( ap-mul-Group H
       ( preserves-inv-hom-Group G H f x)
       ( preserves-integer-powers-hom-Group (inl k) x))
-  preserves-integer-powers-hom-Group (inr (inl star)) x =
+  preserves-integer-powers-hom-Group (inr (inl _)) x =
     preserves-unit-hom-Group G H f
   preserves-integer-powers-hom-Group (inr (inr zero-ℕ)) x =
     ( preserves-mul-hom-Group G H f x (unit-Group G)) ∙
@@ -576,11 +615,11 @@ module _
       ( preserves-integer-powers-hom-Group (inr (inr k)) x))
 
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   eq-integer-power-hom-Group :
-    (g : type-hom-Group G H) (k : ℤ) (x : type-Group G) →
+    (g : hom-Group G H) (k : ℤ) (x : type-Group G) →
     ( map-hom-Group G H f x ＝ map-hom-Group G H g x) →
     ( map-hom-Group G H f (integer-power-Group G k x) ＝
       map-hom-Group G H g (integer-power-Group G k x))

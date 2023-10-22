@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -27,6 +28,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.double-loop-spaces
+open import synthetic-homotopy-theory.eckmann-hilton-argument
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.powers-of-loops
@@ -136,12 +138,10 @@ module _
   pr1 (pr2 (pr2 refl-Eq-structure-Hatcher-Acyclic-Type)) = right-unit
   pr2 (pr2 (pr2 refl-Eq-structure-Hatcher-Acyclic-Type)) = right-unit
 
-  is-contr-total-Eq-structure-Hatcher-Acyclic-Type :
-    is-contr
-      ( Σ ( structure-Hatcher-Acyclic-Type A)
-          ( Eq-structure-Hatcher-Acyclic-Type))
-  is-contr-total-Eq-structure-Hatcher-Acyclic-Type =
-    is-contr-total-Eq-structure
+  is-torsorial-Eq-structure-Hatcher-Acyclic-Type :
+    is-torsorial Eq-structure-Hatcher-Acyclic-Type
+  is-torsorial-Eq-structure-Hatcher-Acyclic-Type =
+    is-torsorial-Eq-structure
       ( λ (ω : type-Ω A) u (p : pr1 s ＝ ω) →
           Σ ( pr1 (pr2 s) ＝ pr1 u)
             ( λ q →
@@ -150,9 +150,9 @@ module _
               ( ( pr2
                   ( pr2 (pr2 s)) ∙ ap (power-nat-Ω 2 A) (ap-binary _∙_ p q)) ＝
                 ( ap (power-nat-Ω 3 A) q ∙ pr2 (pr2 u)))))
-      ( is-contr-total-path (pr1 s))
+      ( is-torsorial-path (pr1 s))
       ( pr1 s , refl)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ ω u p →
           Σ ( ( pr1 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 3 A) p) ＝
               ( ap (power-nat-Ω 5 A) {pr1 s} refl ∙ pr1 u))
@@ -162,13 +162,13 @@ module _
                   ( power-nat-Ω 2 A)
                   ( ap-binary _∙_ {pr1 s} {pr1 s} refl p))) ＝
               ( ap (power-nat-Ω 3 A) p ∙ pr2 u)))
-        ( is-contr-total-path (pr1 (pr2 s)))
+        ( is-torsorial-path (pr1 (pr2 s)))
         ( pr1 (pr2 s) , refl)
-        ( is-contr-total-Eq-structure
+        ( is-torsorial-Eq-structure
           ( λ u v w → Id (pr2 (pr2 (pr2 s)) ∙ refl) v)
-          ( is-contr-total-path (pr1 (pr2 (pr2 s)) ∙ refl))
+          ( is-torsorial-path (pr1 (pr2 (pr2 s)) ∙ refl))
           ( pr1 (pr2 (pr2 s)) , right-unit)
-          ( is-contr-total-path (pr2 (pr2 (pr2 s)) ∙ refl))))
+          ( is-torsorial-path (pr2 (pr2 (pr2 s)) ∙ refl))))
 
   Eq-eq-structure-Hatcher-Acyclic-Type :
     (t : structure-Hatcher-Acyclic-Type A) →
@@ -181,7 +181,7 @@ module _
     is-equiv (Eq-eq-structure-Hatcher-Acyclic-Type t)
   is-equiv-Eq-eq-structure-Hatcher-Acyclic-Type =
     fundamental-theorem-id
-      is-contr-total-Eq-structure-Hatcher-Acyclic-Type
+      is-torsorial-Eq-structure-Hatcher-Acyclic-Type
       Eq-eq-structure-Hatcher-Acyclic-Type
 
   extensionality-structure-Hatcher-Acyclic-Type :
@@ -223,7 +223,7 @@ module _
               ( ( inv (power-nat-mul-Ω 3 2 (Ω A) a)) ∙
                 ( power-nat-succ-Ω' 5 (Ω A) a)))) ∘e
           ( ( ( left-unit-law-Σ-is-contr
-                ( is-contr-total-path' (a ∙ a))
+                ( is-torsorial-path' (a ∙ a))
                 ( a ∙ a , refl)) ∘e
               ( inv-associative-Σ
                 ( type-Ω (Ω A))
@@ -246,5 +246,11 @@ module _
                     ( equiv-concat'
                       ( power-nat-Ω 3 (Ω A) b)
                       ( interchange-concat-Ω² a b a b)))))))))
-        ( is-contr-total-path refl)
+        ( is-torsorial-path refl)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

@@ -19,8 +19,11 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-Two undirected graphs are said to be merely equivalent if there merely exists an
-equivalence of undirected graphs between them.
+Two [undirected graphs](graph-theory.undirected-graphs.md) are said to be
+**merely equivalent** if there merely
+[exists](foundation.existential-quantification.md) an
+[equivalence of undirected graphs](graph-theory.equivalences-undirected-graphs.md)
+between them.
 
 ## Definition
 
@@ -54,3 +57,12 @@ module _
   refl-mere-equiv-Undirected-Graph =
     unit-trunc-Prop (id-equiv-Undirected-Graph G)
 ```
+
+## External links
+
+- [Graph isomoprhism](https://www.wikidata.org/entity/Q303100) at Wikidata
+- [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
+  Wikipedia
+- [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
+  Wolfram Mathworld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab

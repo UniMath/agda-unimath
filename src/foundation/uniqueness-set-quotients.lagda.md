@@ -180,7 +180,7 @@ module _
             ( map-equiv e ∘ map-reflecting-map-Equivalence-Relation R f) ~
             ( map-reflecting-map-Equivalence-Relation R g)))
   uniqueness-set-quotient =
-    is-contr-total-Eq-subtype
+    is-torsorial-Eq-subtype
       ( universal-property-set-quotient-is-set-quotient R B f Uf C g)
       ( is-property-is-equiv)
       ( map-universal-property-set-quotient-is-set-quotient R B f Uf C g)

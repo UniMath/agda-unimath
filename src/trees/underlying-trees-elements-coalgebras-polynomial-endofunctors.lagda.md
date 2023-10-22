@@ -20,9 +20,11 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
@@ -165,7 +167,7 @@ module _
       ( root-coalgebra w ＝
         root-coalgebra w)
   is-contr-loop-space-root-element-coalgebra w =
-    is-contr-loop-space-isolated-point
+    is-contr-loop-space-isolated-element
       ( root-coalgebra w)
       ( is-isolated-root-element-coalgebra w)
 ```
@@ -239,15 +241,13 @@ module _
       ( contraction-total-Eq-node-element-coalgebra _
         ( _ , e))
 
-  is-contr-total-Eq-node-element-coalgebra :
+  is-torsorial-Eq-node-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
     (x : node-element-coalgebra X w) →
-    is-contr
-      ( Σ ( node-element-coalgebra X w)
-          ( Eq-node-element-coalgebra w x))
-  pr1 (is-contr-total-Eq-node-element-coalgebra w x) =
+    is-torsorial (Eq-node-element-coalgebra w x)
+  pr1 (is-torsorial-Eq-node-element-coalgebra w x) =
     center-total-Eq-node-element-coalgebra x
-  pr2 (is-contr-total-Eq-node-element-coalgebra w x) =
+  pr2 (is-torsorial-Eq-node-element-coalgebra w x) =
     contraction-total-Eq-node-element-coalgebra x
 
   Eq-eq-node-element-coalgebra :
@@ -263,7 +263,7 @@ module _
     is-equiv (Eq-eq-node-element-coalgebra w {x} {y})
   is-equiv-Eq-eq-node-element-coalgebra w x =
     fundamental-theorem-id
-      ( is-contr-total-Eq-node-element-coalgebra w x)
+      ( is-torsorial-Eq-node-element-coalgebra w x)
       ( λ y → Eq-eq-node-element-coalgebra w {x} {y})
 
   extensionality-node-element-coalgebra :
@@ -405,8 +405,7 @@ module _
     {v w : type-coalgebra-polynomial-endofunctor X}
     (H : v ∈ w in-coalgebra X)
     (x : node-element-coalgebra X v) →
-    ¬ ( root-coalgebra w ＝
-        node-inclusion-element-coalgebra H x)
+    root-coalgebra w ≠ node-inclusion-element-coalgebra H x
   is-empty-eq-root-node-inclusion-element-coalgebra
     H x ()
 

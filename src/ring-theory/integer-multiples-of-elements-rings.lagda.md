@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -60,6 +61,34 @@ module _
 
   integer-multiple-Ring : ℤ → type-Ring R → type-Ring R
   integer-multiple-Ring = integer-multiple-Ab (ab-Ring R)
+```
+
+### The predicate of being a natural multiple of an element in an ring
+
+We say that an element `y` **is an integer multiple** of an element `x` if there
+[exists](foundation.existential-quantification.md) an integer `k` such that
+`kx ＝ y`.
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-integer-multiple-of-element-prop-Ring :
+    (x y : type-Ring R) → Prop l
+  is-integer-multiple-of-element-prop-Ring =
+    is-integer-multiple-of-element-prop-Ab (ab-Ring R)
+
+  is-integer-multiple-of-element-Ring :
+    (x y : type-Ring R) → UU l
+  is-integer-multiple-of-element-Ring =
+    is-integer-multiple-of-element-Ab (ab-Ring R)
+
+  is-prop-is-integer-multiple-of-element-Ring :
+    (x y : type-Ring R) →
+    is-prop (is-integer-multiple-of-element-Ring x y)
+  is-prop-is-integer-multiple-of-element-Ring =
+    is-prop-is-integer-multiple-of-element-Ab (ab-Ring R)
 ```
 
 ## Properties
@@ -177,7 +206,7 @@ module _
     integer-multiple-neg-Ab (ab-Ring R)
 ```
 
-### `(k + 1)x = kx + x` and `(k+1)x = x + kx`
+### `(k + 1)x = kx + x` and `(k + 1)x = x + kx`
 
 ```agda
 module _
@@ -271,7 +300,7 @@ module _
           ( λ u → right-subtraction-Ring R u _)
           ( left-integer-multiple-law-mul-Ring (inl k) _ _)) ∙
         ( inv (integer-multiple-pred-Ring R (inl k) _))))
-  left-integer-multiple-law-mul-Ring (inr (inl star)) x y =
+  left-integer-multiple-law-mul-Ring (inr (inl _)) x y =
     ( ap (mul-Ring' R y) (integer-multiple-zero-Ring R x)) ∙
     ( left-zero-law-mul-Ring R y)
   left-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
@@ -300,7 +329,7 @@ module _
           ( add-Ring' R _)
           ( right-integer-multiple-law-mul-Ring (inl k) x y)) ∙
         ( inv (integer-multiple-pred-Ring R (inl k) _))))
-  right-integer-multiple-law-mul-Ring (inr (inl star)) x y =
+  right-integer-multiple-law-mul-Ring (inr (inl _)) x y =
     ( ap (mul-Ring R x) (integer-multiple-zero-Ring R y)) ∙
     ( right-zero-law-mul-Ring R x)
   right-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
@@ -337,7 +366,7 @@ module _
       ( commute-right-subtraction-Ring R
         ( commute-integer-multiple-Ring (inl k) H)
         ( H))
-  commute-integer-multiple-Ring (inr (inl star)) {x} H =
+  commute-integer-multiple-Ring (inr (inl _)) {x} H =
     tr
       ( commute-Ring R _)
       ( inv (integer-multiple-zero-Ring R x))
@@ -371,7 +400,7 @@ module _
         ( commute-right-subtraction-Ring R
           ( commute-integer-multiples-Ring l (inl k) (inv H))
           ( inv (commute-integer-multiple-Ring l H))))
-  commute-integer-multiples-Ring (inr (inl star)) l {x} H =
+  commute-integer-multiples-Ring (inr (inl _)) l {x} H =
     tr
       ( commute-Ring' R _)
       ( inv (integer-multiple-zero-Ring R x))
@@ -404,7 +433,7 @@ module _
   {l : Level} (R : Ring l) (k : ℤ)
   where
 
-  hom-ab-integer-multiple-Ring : type-hom-Ab (ab-Ring R) (ab-Ring R)
+  hom-ab-integer-multiple-Ring : hom-Ab (ab-Ring R) (ab-Ring R)
   hom-ab-integer-multiple-Ring = hom-integer-multiple-Ab (ab-Ring R) k
 ```
 
@@ -421,13 +450,20 @@ module _
     integer-multiple-Ring R k (integer-multiple-Ring R l x)
   integer-multiple-mul-Ring =
     integer-multiple-mul-Ab (ab-Ring R)
+
+  swap-integer-multiple-Ring :
+    (k l : ℤ) (x : type-Ring R) →
+    integer-multiple-Ring R k (integer-multiple-Ring R l x) ＝
+    integer-multiple-Ring R l (integer-multiple-Ring R k x)
+  swap-integer-multiple-Ring =
+    swap-integer-multiple-Ab (ab-Ring R)
 ```
 
 ### Ring homomorphisms preserve integer multiples
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   preserves-integer-multiples-hom-Ring :
@@ -441,11 +477,11 @@ module _
       ( hom-ab-hom-Ring R S f)
 
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   eq-integer-multiple-hom-Ring :
-    (g : type-hom-Ring R S) (k : ℤ) (x : type-Ring R) →
+    (g : hom-Ring R S) (k : ℤ) (x : type-Ring R) →
     ( map-hom-Ring R S f x ＝ map-hom-Ring R S g x) →
     map-hom-Ring R S f (integer-multiple-Ring R k x) ＝
     map-hom-Ring R S g (integer-multiple-Ring R k x)
@@ -455,4 +491,20 @@ module _
       ( ab-Ring S)
       ( hom-ab-hom-Ring R S f)
       ( hom-ab-hom-Ring R S g)
+```
+
+### Ring homomorphisms preserve integer multiples of `1`
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
+  where
+
+  preserves-integer-multiple-one-hom-Ring :
+    (k : ℤ) →
+    map-hom-Ring R S f (integer-multiple-Ring R k (one-Ring R)) ＝
+    integer-multiple-Ring S k (one-Ring S)
+  preserves-integer-multiple-one-hom-Ring k =
+    ( preserves-integer-multiples-hom-Ring R S f k (one-Ring R)) ∙
+    ( ap (integer-multiple-Ring S k) (preserves-one-hom-Ring R S f))
 ```

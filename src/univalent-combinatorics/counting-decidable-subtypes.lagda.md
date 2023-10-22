@@ -45,63 +45,64 @@ open import univalent-combinatorics.standard-finite-types
 ### The elements of a decidable subtype of a type equipped with a counting can be counted
 
 ```agda
-count-decidable-subtype' :
-  {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X) →
-  (k : ℕ) (e : Fin k ≃ X) → count (type-decidable-subtype P)
-count-decidable-subtype' P zero-ℕ e =
-  count-is-empty
-    ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl ∘ pr1)
-count-decidable-subtype' P (succ-ℕ k) e
-  with is-decidable-decidable-subtype P (map-equiv e (inr star))
-... | inl p =
-  count-equiv
-    ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))
-    ( count-equiv'
-      ( right-distributive-Σ-coprod
-        ( Fin k)
-        ( unit)
-        ( λ x → is-in-decidable-subtype P (map-equiv e x)))
-      ( pair
-        ( succ-ℕ
-          ( number-of-elements-count
-            ( count-decidable-subtype'
-              ( λ x → P (map-equiv e (inl x)))
-              ( k)
-              ( id-equiv))))
-        ( equiv-coprod
-          ( equiv-count
-            ( count-decidable-subtype'
-              ( λ x → P (map-equiv e (inl x)))
-              ( k)
-              ( id-equiv)))
-          ( equiv-is-contr
-            ( is-contr-unit)
-            ( is-contr-Σ
-              ( is-contr-unit)
-              ( star)
-              ( is-proof-irrelevant-is-prop
-                ( is-prop-is-in-decidable-subtype P
-                  ( map-equiv e (inr star)))
-                ( p)))))))
-... | inr f =
-  count-equiv
-    ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))
-    ( count-equiv'
-      ( right-distributive-Σ-coprod
-        ( Fin k)
-        ( unit)
-        ( λ x → is-in-decidable-subtype P (map-equiv e x)))
+abstract
+  count-decidable-subtype' :
+    {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X) →
+    (k : ℕ) (e : Fin k ≃ X) → count (type-decidable-subtype P)
+  count-decidable-subtype' P zero-ℕ e =
+    count-is-empty
+      ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl ∘ pr1)
+  count-decidable-subtype' P (succ-ℕ k) e
+    with is-decidable-decidable-subtype P (map-equiv e (inr star))
+  ... | inl p =
+    count-equiv
+      ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))
       ( count-equiv'
-        ( right-unit-law-coprod-is-empty
-          ( Σ ( Fin k)
-              ( λ x → is-in-decidable-subtype P (map-equiv e (inl x))))
-          ( Σ ( unit)
-              ( λ x → is-in-decidable-subtype P (map-equiv e (inr x))))
-          ( λ { (pair star p) → f p}))
-        ( count-decidable-subtype'
-          ( λ x → P (map-equiv e (inl x)))
-          ( k)
-          ( id-equiv))))
+        ( right-distributive-Σ-coprod
+          ( Fin k)
+          ( unit)
+          ( λ x → is-in-decidable-subtype P (map-equiv e x)))
+        ( pair
+          ( succ-ℕ
+            ( number-of-elements-count
+              ( count-decidable-subtype'
+                ( λ x → P (map-equiv e (inl x)))
+                ( k)
+                ( id-equiv))))
+          ( equiv-coprod
+            ( equiv-count
+              ( count-decidable-subtype'
+                ( λ x → P (map-equiv e (inl x)))
+                ( k)
+                ( id-equiv)))
+            ( equiv-is-contr
+              ( is-contr-unit)
+              ( is-contr-Σ
+                ( is-contr-unit)
+                ( star)
+                ( is-proof-irrelevant-is-prop
+                  ( is-prop-is-in-decidable-subtype P
+                    ( map-equiv e (inr star)))
+                  ( p)))))))
+  ... | inr f =
+    count-equiv
+      ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))
+      ( count-equiv'
+        ( right-distributive-Σ-coprod
+          ( Fin k)
+          ( unit)
+          ( λ x → is-in-decidable-subtype P (map-equiv e x)))
+        ( count-equiv'
+          ( right-unit-law-coprod-is-empty
+            ( Σ ( Fin k)
+                ( λ x → is-in-decidable-subtype P (map-equiv e (inl x))))
+            ( Σ ( unit)
+                ( λ x → is-in-decidable-subtype P (map-equiv e (inr x))))
+            ( λ where (star , p) → f p))
+          ( count-decidable-subtype'
+            ( λ x → P (map-equiv e (inl x)))
+            ( k)
+            ( id-equiv))))
 
 count-decidable-subtype :
   {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X) →

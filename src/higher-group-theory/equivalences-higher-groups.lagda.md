@@ -15,6 +15,7 @@ open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
@@ -62,8 +63,8 @@ module _
   {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2)
   where
 
-  is-iso-hom-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-∞-Group = is-iso-pointed-map
+  is-iso-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
+  is-iso-∞-Group = is-iso-pointed-map
 ```
 
 ## Properties
@@ -71,11 +72,12 @@ module _
 ### The total space of equivalences of higher groups is contractible
 
 ```agda
-is-contr-total-equiv-∞-Group :
-  {l1 : Level} (G : ∞-Group l1) → is-contr (Σ (∞-Group l1) (equiv-∞-Group G))
-is-contr-total-equiv-∞-Group G =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))
+is-torsorial-equiv-∞-Group :
+  {l1 : Level} (G : ∞-Group l1) →
+  is-torsorial (λ (H : ∞-Group l1) → equiv-∞-Group G H)
+is-torsorial-equiv-∞-Group G =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))
     ( λ X → is-prop-is-0-connected (type-Pointed-Type X))
     ( classifying-pointed-type-∞-Group G)
     ( id-pointed-equiv)
@@ -89,7 +91,7 @@ is-equiv-equiv-eq-∞-Group :
   {l1 : Level} (G H : ∞-Group l1) → is-equiv (equiv-eq-∞-Group G H)
 is-equiv-equiv-eq-∞-Group G =
   fundamental-theorem-id
-    ( is-contr-total-equiv-∞-Group G)
+    ( is-torsorial-equiv-∞-Group G)
     ( equiv-eq-∞-Group G)
 
 extensionality-∞-Group :

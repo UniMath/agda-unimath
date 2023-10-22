@@ -32,10 +32,14 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.homotopies
 
 open import structured-types.types-equipped-with-endomorphisms
 
@@ -46,9 +50,21 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
+## Idea
+
+**Modular arithmetic** is arithmetic of the integers modulo `n`. The integers
+modulo `n` have addition, negatives, and multiplication that satisfy many of the
+familiar properties of usual arithmetic of the
+[integers](elementary-number-theory.integers.md).
+
 Some modular arithmetic was already defined in
-`modular-arithmetic-standard-finite-types`. Here we package those results
-together in a more convenient package that also allows congruence modulo 0.
+`modular-arithmetic-standard-finite-types`. Here we collect those results in a
+more convenient format that also includes the integers modulo `0`, i.e., the
+integers.
+
+The fact that `ℤ-Mod n` is a [ring](ring-theory.rings.md) for every `n : ℕ` is
+recorded in
+[`elementary-number-theory.standard-cyclic-rings`](elementary-number-theory.standard-cyclic-rings.md).
 
 ```agda
 ℤ-Mod : ℕ → UU lzero
@@ -155,9 +171,9 @@ succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 succ-ℤ-Mod zero-ℕ = succ-ℤ
 succ-ℤ-Mod (succ-ℕ k) = succ-Fin (succ-ℕ k)
 
-ℤ-Mod-Endo : (k : ℕ) → Endo lzero
-pr1 (ℤ-Mod-Endo k) = ℤ-Mod k
-pr2 (ℤ-Mod-Endo k) = succ-ℤ-Mod k
+ℤ-Mod-Type-With-Endomorphism : (k : ℕ) → Type-With-Endomorphism lzero
+pr1 (ℤ-Mod-Type-With-Endomorphism k) = ℤ-Mod k
+pr2 (ℤ-Mod-Type-With-Endomorphism k) = succ-ℤ-Mod k
 
 abstract
   is-equiv-succ-ℤ-Mod : (k : ℕ) → is-equiv (succ-ℤ-Mod k)
@@ -639,7 +655,10 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
           ( k *ℕ (succ-ℕ x))
           ( congruence-mul-ℕ
             ( succ-ℕ k)
-            {k} {nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}
+            { k}
+            { nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))}
+            { k}
+            { succ-ℕ x}
             ( refl-cong-ℕ (succ-ℕ k) k)
             ( cong-nat-mod-succ-ℕ k (succ-ℕ x)))))
       ( cong-int-cong-ℕ
@@ -754,12 +773,12 @@ is-one-is-fixed-point-succ-ℤ-Mod k x p =
                 ( ap (succ-ℤ-Mod k) (is-section-int-ℤ-Mod k x))))))))
 
 has-no-fixed-points-succ-ℤ-Mod :
-  (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → ¬ (succ-ℤ-Mod k x ＝ x)
+  (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → succ-ℤ-Mod k x ≠ x
 has-no-fixed-points-succ-ℤ-Mod k x =
   map-neg (is-one-is-fixed-point-succ-ℤ-Mod k x)
 
 has-no-fixed-points-succ-Fin :
-  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → ¬ (succ-Fin k x ＝ x)
+  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → succ-Fin k x ≠ x
 has-no-fixed-points-succ-Fin {succ-ℕ k} x =
   has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
 ```
@@ -776,4 +795,24 @@ is-decidable-div-ℤ d x =
       ( abs-ℤ d)
       ( mod-ℤ (abs-ℤ d) x)
       ( zero-ℤ-Mod (abs-ℤ d)))
+```
+
+### `mod-ℤ` is surjective
+
+```agda
+is-surjective-succ-Fin-comp-mod-succ-ℕ :
+  (n : ℕ) → is-surjective (succ-Fin (succ-ℕ n) ∘ mod-succ-ℕ n)
+is-surjective-succ-Fin-comp-mod-succ-ℕ n =
+  is-surjective-comp
+    ( is-surjective-is-equiv (is-equiv-succ-Fin (succ-ℕ n)))
+    ( is-surjective-mod-succ-ℕ n)
+
+is-surjective-mod-ℤ : (n : ℕ) → is-surjective (mod-ℤ n)
+is-surjective-mod-ℤ zero-ℕ = is-surjective-id
+is-surjective-mod-ℤ (succ-ℕ n) =
+  is-surjective-left-factor
+    ( inr ∘ inr)
+    ( is-surjective-htpy
+      ( λ x → refl)
+      ( is-surjective-succ-Fin-comp-mod-succ-ℕ n))
 ```

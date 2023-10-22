@@ -45,7 +45,7 @@ abstract
   no-global-choice :
     {l : Level} → ¬ (Global-Choice l)
   no-global-choice f =
-    no-section-type-UU-Fin-two-ℕ
+    no-section-type-2-Element-Type
       ( λ X →
         f (pr1 X) (map-trunc-Prop (λ e → map-equiv e (zero-Fin 1)) (pr2 X)))
 ```

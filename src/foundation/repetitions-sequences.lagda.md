@@ -12,6 +12,7 @@ open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.negated-equality
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
 open import foundation.sequences
@@ -69,8 +70,7 @@ module _
       pair-of-distinct-elements-repetition-of-values-sequence
 
   distinction-repetition-of-values-sequence :
-    ¬ (first-repetition-of-values-sequence ＝
-    second-repetition-of-values-sequence)
+    first-repetition-of-values-sequence ≠ second-repetition-of-values-sequence
   distinction-repetition-of-values-sequence =
     distinction-pair-of-distinct-elements
       pair-of-distinct-elements-repetition-of-values-sequence
@@ -117,7 +117,7 @@ module _
   where
 
   ordered-repetition-of-values-repetition-of-values-ℕ' :
-    (f : ℕ → A) (a b : ℕ) → ¬ (a ＝ b) → f a ＝ f b →
+    (f : ℕ → A) (a b : ℕ) → a ≠ b → f a ＝ f b →
     ordered-repetition-of-values-ℕ f
   ordered-repetition-of-values-repetition-of-values-ℕ' f zero-ℕ zero-ℕ H p =
     ex-falso (H refl)

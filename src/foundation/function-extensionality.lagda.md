@@ -38,8 +38,8 @@ module _
   htpy-eq : {f g : (x : A) → B x} → (f ＝ g) → (f ~ g)
   htpy-eq refl = refl-htpy
 
-  FUNEXT : (f : (x : A) → B x) → UU (l1 ⊔ l2)
-  FUNEXT f = (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
+  function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
+  function-extensionality f = (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
 ```
 
 ## Postulate
@@ -49,7 +49,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  postulate funext : (f : (x : A) → B x) → FUNEXT f
+  postulate
+    funext : (f : (x : A) → B x) → function-extensionality f
 ```
 
 ### Components of `funext`

@@ -9,7 +9,7 @@ module ring-theory.division-rings where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.identity-types
-open import foundation.negation
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import ring-theory.invertible-elements-rings
@@ -31,5 +31,5 @@ is-division-Ring :
   { l : Level} → Ring l → UU l
 is-division-Ring R =
   (is-nontrivial-Ring R) ×
-  ((x : type-Ring R) → ¬ (Id (zero-Ring R) x) → is-invertible-element-Ring R x)
+  ((x : type-Ring R) → zero-Ring R ≠ x → is-invertible-element-Ring R x)
 ```

@@ -32,13 +32,13 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
 
-  is-emb-hom-Group : (type-hom-Group G H) → UU (l1 ⊔ l2)
+  is-emb-hom-Group : (hom-Group G H) → UU (l1 ⊔ l2)
   is-emb-hom-Group h = is-emb (map-hom-Group G H h)
 
   emb-Group : UU (l1 ⊔ l2)
-  emb-Group = Σ (type-hom-Group G H) is-emb-hom-Group
+  emb-Group = Σ (hom-Group G H) is-emb-hom-Group
 
-  hom-emb-Group : emb-Group → type-hom-Group G H
+  hom-emb-Group : emb-Group → hom-Group G H
   hom-emb-Group = pr1
 
   map-emb-hom-Group : emb-Group → type-Group G → type-Group H

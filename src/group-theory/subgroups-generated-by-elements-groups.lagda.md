@@ -106,10 +106,10 @@ module _
   is-closed-under-multiplication-subgroup-element-Group =
     is-closed-under-multiplication-Subgroup G subgroup-element-Group
 
-  is-closed-under-inv-subgroup-element-Group :
-    is-closed-under-inv-subset-Group G subset-subgroup-element-Group
-  is-closed-under-inv-subgroup-element-Group =
-    is-closed-under-inv-Subgroup G subgroup-element-Group
+  is-closed-under-inverses-subgroup-element-Group :
+    is-closed-under-inverses-subset-Group G subset-subgroup-element-Group
+  is-closed-under-inverses-subgroup-element-Group =
+    is-closed-under-inverses-Subgroup G subgroup-element-Group
 
   abstract
     is-subgroup-generated-by-element-subgroup-element-Group :

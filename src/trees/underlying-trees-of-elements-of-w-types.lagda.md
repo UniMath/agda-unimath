@@ -16,9 +16,11 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -166,7 +168,7 @@ module _
 
   is-empty-eq-root-node-inclusion-element-𝕎 :
     {v w : 𝕎 A B} (H : v ∈-𝕎 w) (x : node-element-𝕎 v) →
-    ¬ (root-𝕎 w ＝ node-inclusion-element-𝕎 H x)
+    root-𝕎 w ≠ node-inclusion-element-𝕎 H x
   is-empty-eq-root-node-inclusion-element-𝕎 =
     is-empty-eq-root-node-inclusion-element-coalgebra (𝕎-Coalg A B)
 ```
@@ -291,11 +293,11 @@ module _
     Eq-node-element-𝕎 w x x
   refl-Eq-node-element-𝕎 = refl-Eq-node-element-coalgebra (𝕎-Coalg A B)
 
-  is-contr-total-Eq-node-element-𝕎 :
+  is-torsorial-Eq-node-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
-    is-contr (Σ (node-element-𝕎 w) (Eq-node-element-𝕎 w x))
-  is-contr-total-Eq-node-element-𝕎 =
-    is-contr-total-Eq-node-element-coalgebra (𝕎-Coalg A B)
+    is-torsorial (Eq-node-element-𝕎 w x)
+  is-torsorial-Eq-node-element-𝕎 =
+    is-torsorial-Eq-node-element-coalgebra (𝕎-Coalg A B)
 
   Eq-eq-node-element-𝕎 :
     (w : 𝕎 A B) {x y : node-element-𝕎 w} →

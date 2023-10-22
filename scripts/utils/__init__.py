@@ -2,7 +2,24 @@ import re
 import pathlib
 import os
 import subprocess
+import sys
 from typing import List
+
+GITHUB_ROOT = 'https://github.com/'
+GITHUB_REPO = 'UniMath/agda-unimath'
+
+
+def github_page_for_commit(commit):
+    return f'{GITHUB_ROOT}{GITHUB_REPO}/commit/{commit}'
+
+
+def github_page_for_contributor(contributor):
+    github_username = contributor.get('github')
+    return github_username and f'{GITHUB_ROOT}{github_username}'
+
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 
 def get_files_recursive(startpath):

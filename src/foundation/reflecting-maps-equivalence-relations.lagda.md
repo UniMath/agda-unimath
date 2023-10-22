@@ -10,16 +10,18 @@ module foundation.reflecting-maps-equivalence-relations where
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -119,14 +121,11 @@ module _
   htpy-eq-reflecting-map-Equivalence-Relation .f refl =
     refl-htpy-reflecting-map-Equivalence-Relation
 
-  is-contr-total-htpy-reflecting-map-Equivalence-Relation :
-    is-contr
-      ( Σ
-        ( reflecting-map-Equivalence-Relation R (type-Set B))
-        ( htpy-reflecting-map-Equivalence-Relation))
-  is-contr-total-htpy-reflecting-map-Equivalence-Relation =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (pr1 f))
+  is-torsorial-htpy-reflecting-map-Equivalence-Relation :
+    is-torsorial (htpy-reflecting-map-Equivalence-Relation)
+  is-torsorial-htpy-reflecting-map-Equivalence-Relation =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (pr1 f))
       ( is-prop-reflects-Equivalence-Relation R B)
       ( pr1 f)
       ( refl-htpy)
@@ -137,7 +136,7 @@ module _
     is-equiv (htpy-eq-reflecting-map-Equivalence-Relation g)
   is-equiv-htpy-eq-reflecting-map-Equivalence-Relation =
     fundamental-theorem-id
-      is-contr-total-htpy-reflecting-map-Equivalence-Relation
+      is-torsorial-htpy-reflecting-map-Equivalence-Relation
       htpy-eq-reflecting-map-Equivalence-Relation
 
   extensionality-reflecting-map-Equivalence-Relation :

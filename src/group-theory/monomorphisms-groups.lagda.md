@@ -7,7 +7,7 @@ module group-theory.monomorphisms-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.monomorphisms-large-precategories
+open import category-theory.monomorphisms-in-large-precategories
 
 open import foundation.propositions
 open import foundation.universe-levels
@@ -32,12 +32,12 @@ is an embedding.
 ```agda
 module _
   {l1 l2 : Level} (l3 : Level) (G : Group l1)
-  (H : Group l2) (f : type-hom-Group G H)
+  (H : Group l2) (f : hom-Group G H)
   where
 
   is-mono-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Group-Prop =
-    is-mono-Large-Precategory-Prop Group-Large-Precategory l3 G H f
+    is-mono-prop-Large-Precategory Group-Large-Precategory l3 G H f
 
   is-mono-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Group = type-Prop is-mono-Group-Prop
@@ -53,7 +53,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (l3 : Level) (G : Group l1)
-  (H : Group l2) (f : type-iso-Group G H)
+  (H : Group l2) (f : iso-Group G H)
   where
 
   is-mono-iso-Group :

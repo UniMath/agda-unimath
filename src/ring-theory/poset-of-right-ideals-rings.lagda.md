@@ -43,11 +43,11 @@ module _
   {l1 : Level} (R : Ring l1)
   where
 
-  leq-right-ideal-Ring-Prop :
+  leq-prop-right-ideal-Ring :
     {l2 l3 : Level} →
     right-ideal-Ring l2 R → right-ideal-Ring l3 R → Prop (l1 ⊔ l2 ⊔ l3)
-  leq-right-ideal-Ring-Prop I J =
-    leq-subtype-Prop
+  leq-prop-right-ideal-Ring I J =
+    leq-prop-subtype
       ( subset-right-ideal-Ring R I)
       ( subset-right-ideal-Ring R J)
 
@@ -101,8 +101,8 @@ module _
     Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   type-Large-Preorder right-ideal-Ring-Large-Preorder l =
     right-ideal-Ring l R
-  leq-Large-Preorder-Prop right-ideal-Ring-Large-Preorder =
-    leq-right-ideal-Ring-Prop R
+  leq-prop-Large-Preorder right-ideal-Ring-Large-Preorder =
+    leq-prop-right-ideal-Ring R
   refl-leq-Large-Preorder right-ideal-Ring-Large-Preorder =
     refl-leq-right-ideal-Ring R
   transitive-leq-Large-Preorder right-ideal-Ring-Large-Preorder =
@@ -162,8 +162,8 @@ module _
   preserves-order-subset-right-ideal-Ring I J H = H
 
   subset-right-ideal-hom-large-poset-Ring :
-    hom-Large-Poset
-      ( id)
+    hom-set-Large-Poset
+      ( λ l → l)
       ( right-ideal-Ring-Large-Poset R)
       ( powerset-Large-Poset (type-Ring R))
   map-hom-Large-Preorder subset-right-ideal-hom-large-poset-Ring =

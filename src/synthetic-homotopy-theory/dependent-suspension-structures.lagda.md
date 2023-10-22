@@ -179,7 +179,7 @@ module _
               ( s))))
       ( equiv-dependent-universal-property-unit
         ( λ x → B (north-suspension-structure c)))
-      ( λ N-susp-c →
+      ( λ north-suspension-c →
         ( equiv-Σ
           ( λ s →
             (x : X) →
@@ -189,11 +189,11 @@ module _
               ( map-equiv
                 ( equiv-dependent-universal-property-unit
                   ( λ _ → B (north-suspension-structure c)))
-                ( N-susp-c))
+                ( north-suspension-c))
               ( s)))
           ( equiv-dependent-universal-property-unit
             ( const unit (UU l3) (B (south-suspension-structure c))))
-          ( λ S-susp-c → id-equiv))))
+          ( λ south-suspension-c → id-equiv))))
 
   htpy-map-inv-equiv-dependent-suspension-structure-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure :
     map-inv-equiv equiv-dependent-suspension-structure-suspension-cocone ~

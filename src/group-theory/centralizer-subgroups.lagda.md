@@ -17,7 +17,6 @@ open import foundation.universe-levels
 
 open import group-theory.conjugation
 open import group-theory.groups
-open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 ```
@@ -69,9 +68,9 @@ module _
     ( ( ap (conjugation-Group G x) (v z s)) ∙
       ( u z s))
 
-  is-closed-under-inv-centralizer-subset-Group :
-    is-closed-under-inv-subset-Group G subset-centralizer-subset-Group
-  is-closed-under-inv-centralizer-subset-Group x u y s =
+  is-closed-under-inverses-centralizer-subset-Group :
+    is-closed-under-inverses-subset-Group G subset-centralizer-subset-Group
+  is-closed-under-inverses-centralizer-subset-Group x u y s =
     transpose-eq-conjugation-inv-Group G (inv (u y s))
 
   centralizer-subset-Group : Subgroup (l1 ⊔ l2) G
@@ -82,5 +81,5 @@ module _
   pr1 (pr2 (pr2 centralizer-subset-Group)) =
     is-closed-under-multiplication-centralizer-subset-Group
   pr2 (pr2 (pr2 centralizer-subset-Group)) =
-    is-closed-under-inv-centralizer-subset-Group
+    is-closed-under-inverses-centralizer-subset-Group
 ```

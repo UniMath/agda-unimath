@@ -12,24 +12,33 @@ open import foundation-core.invertible-maps public
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.full-subtypes
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.function-types
-open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
+
+open import synthetic-homotopy-theory.free-loops
 ```
 
 </details>
@@ -94,29 +103,28 @@ module _
     (s t : is-invertible f) → s ＝ t → htpy-is-invertible s t
   htpy-eq-is-invertible s .s refl = refl-htpy-is-invertible s
 
-  is-contr-total-htpy-is-invertible :
-    (s : is-invertible f) →
-    is-contr (Σ (is-invertible f) (htpy-is-invertible s))
-  is-contr-total-htpy-is-invertible s =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-is-invertible :
+    (s : is-invertible f) → is-torsorial (htpy-is-invertible s)
+  is-torsorial-htpy-is-invertible s =
+    is-torsorial-Eq-structure
       ( λ x z → coherence-htpy-is-invertible s (x , z))
-      ( is-contr-total-htpy (map-inv-is-invertible s))
+      ( is-torsorial-htpy (map-inv-is-invertible s))
       ( map-inv-is-invertible s , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ x z a →
           coherence-htpy-retraction
             ( retraction-is-invertible s)
             ( retraction-is-invertible (map-inv-is-invertible s , x , z))
             ( refl-htpy))
-        ( is-contr-total-htpy (is-retraction-is-invertible s))
+        ( is-torsorial-htpy (is-retraction-is-invertible s))
         ( is-retraction-is-invertible s , refl-htpy)
-        (is-contr-total-htpy (is-section-is-invertible s)))
+        (is-torsorial-htpy (is-section-is-invertible s)))
 
   is-equiv-htpy-eq-is-invertible :
     (s t : is-invertible f) → is-equiv (htpy-eq-is-invertible s t)
   is-equiv-htpy-eq-is-invertible s =
     fundamental-theorem-id
-      ( is-contr-total-htpy-is-invertible s)
+      ( is-torsorial-htpy-is-invertible s)
       ( htpy-eq-is-invertible s)
 
   extensionality-is-invertible :
@@ -167,37 +175,36 @@ module _
     (s t : invertible-map A B) → s ＝ t → htpy-invertible-map s t
   htpy-eq-invertible-map s .s refl = refl-htpy-invertible-map s
 
-  is-contr-total-htpy-invertible-map :
-    (s : invertible-map A B) →
-    is-contr (Σ (invertible-map A B) (htpy-invertible-map s))
-  is-contr-total-htpy-invertible-map s =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-invertible-map :
+    (s : invertible-map A B) → is-torsorial (htpy-invertible-map s)
+  is-torsorial-htpy-invertible-map s =
+    is-torsorial-Eq-structure
       ( λ x z H →
         Σ ( map-inv-invertible-map s ~ map-inv-invertible-map (x , z))
           ( coherence-htpy-invertible-map s (x , z) H))
-      ( is-contr-total-htpy (map-invertible-map s))
+      ( is-torsorial-htpy (map-invertible-map s))
       ( map-invertible-map s , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ x z →
           coherence-htpy-invertible-map s
             ( map-invertible-map s , x , z)
             ( refl-htpy))
-        ( is-contr-total-htpy (map-inv-invertible-map s))
+        ( is-torsorial-htpy (map-inv-invertible-map s))
         ( map-inv-invertible-map s , refl-htpy)
-        ( is-contr-total-Eq-structure
+        ( is-torsorial-Eq-structure
           ( λ x z a →
             ( is-section-map-invertible-map s) ~
             ( is-section-map-invertible-map
               ( map-invertible-map s , map-inv-invertible-map s , x , z)))
-          ( is-contr-total-htpy (is-retraction-map-invertible-map s))
+          ( is-torsorial-htpy (is-retraction-map-invertible-map s))
           ( is-retraction-map-invertible-map s , refl-htpy)
-          ( is-contr-total-htpy (is-section-map-invertible-map s))))
+          ( is-torsorial-htpy (is-section-map-invertible-map s))))
 
   is-equiv-htpy-eq-invertible-map :
     (s t : invertible-map A B) → is-equiv (htpy-eq-invertible-map s t)
   is-equiv-htpy-eq-invertible-map s =
     fundamental-theorem-id
-      ( is-contr-total-htpy-invertible-map s)
+      ( is-torsorial-htpy-invertible-map s)
       ( htpy-eq-invertible-map s)
 
   extensionality-invertible-map :
@@ -291,6 +298,98 @@ abstract
         ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
       ( is-equiv-map-associative-Σ _ _ _)
+```
+
+### The type of invertible maps is equivalent to the type of free loops on equivalences
+
+#### The type of invertible equivalences is equivalent to the type of invertible maps
+
+**Proof:** Since every invertible map is an equivalence, the `Σ`-type of
+invertible maps which are equivalences forms a full subtype of the type of
+invertible maps. Swapping the order of `Σ`-types then shows that the `Σ`-type of
+invertible maps which are equivalences is equivalent to the `Σ`-type of
+equivalences which are invertible.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-equiv-prop-is-invertible : (invertible-map A B) → Prop (l1 ⊔ l2)
+  is-equiv-prop-is-invertible = is-equiv-Prop ∘ map-invertible-map
+
+  is-full-subtype-is-equiv-prop-is-invertible :
+    is-full-subtype is-equiv-prop-is-invertible
+  is-full-subtype-is-equiv-prop-is-invertible =
+    is-equiv-is-invertible' ∘ is-invertible-map-invertible-map
+
+  equiv-invertible-equivalence-invertible-map :
+    Σ (A ≃ B) (is-invertible ∘ map-equiv) ≃ invertible-map A B
+  equiv-invertible-equivalence-invertible-map =
+    ( equiv-inclusion-is-full-subtype
+      ( is-equiv-prop-is-invertible)
+      ( is-full-subtype-is-equiv-prop-is-invertible)) ∘e
+    ( equiv-right-swap-Σ)
+```
+
+#### The type of free loops on equivalences is equivalent to the type of invertible equivalences
+
+**Proof:** First, associating the order of `Σ`-types shows that a function being
+invertible is equivalent to it having a section, such that this section is also
+its retraction. Now, since equivalences have a contractible type of sections, a
+proof of invertibility of the underlying map `f` of an equivalence contracts to
+just a single homotopy `g ∘ f ~ id`, showing that a section `g` of `f` is also
+its retraction. As `g` is a section, composing on the left with `f` and
+canceling `f ∘ g` yields a loop `f ~ f`. By equivalence extensionality, this
+loop may be lifted to a loop on the entire equivalence.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  equiv-is-retraction-section-is-invertible :
+    (f : A → B) →
+    Σ (section f) (λ g → (map-section f g) ∘ f ~ id) ≃ is-invertible f
+  equiv-is-retraction-section-is-invertible f =
+    associative-Σ
+      ( B → A)
+      ( λ g → f ∘ g ~ id)
+      ( λ g → (map-section f g) ∘ f ~ id)
+
+  equiv-free-loop-equivalence-invertible-equivalence :
+    free-loop (A ≃ B) ≃ Σ (A ≃ B) (is-invertible ∘ map-equiv)
+  equiv-free-loop-equivalence-invertible-equivalence =
+    ( equiv-tot
+      ( equiv-is-retraction-section-is-invertible ∘ map-equiv)) ∘e
+    ( equiv-tot
+      ( λ f →
+        ( inv-left-unit-law-Σ-is-contr
+          ( is-contr-section-is-equiv (is-equiv-map-equiv f))
+          ( section-is-equiv (is-equiv-map-equiv f))) ∘e
+        ( inv-equiv
+          ( equiv-htpy-postcomp-htpy
+            ( f)
+            ( map-section-is-equiv (is-equiv-map-equiv f) ∘ map-equiv f)
+            ( id))) ∘e
+        ( equiv-concat-htpy
+          ( is-retraction-map-equiv f ·r map-equiv f)
+          ( map-equiv f)))) ∘e
+    ( equiv-tot (λ f → extensionality-equiv f f))
+```
+
+#### The equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  equiv-free-loop-equivalence-invertible-map :
+    free-loop (A ≃ B) ≃ invertible-map A B
+  equiv-free-loop-equivalence-invertible-map =
+    equiv-invertible-equivalence-invertible-map ∘e
+    equiv-free-loop-equivalence-invertible-equivalence
 ```
 
 ## See also

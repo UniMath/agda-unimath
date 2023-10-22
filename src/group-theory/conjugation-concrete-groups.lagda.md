@@ -16,8 +16,6 @@ open import group-theory.conjugation
 open import group-theory.homomorphisms-concrete-groups
 
 open import higher-group-theory.conjugation
-
-open import synthetic-homotopy-theory.conjugation-loops
 ```
 
 </details>

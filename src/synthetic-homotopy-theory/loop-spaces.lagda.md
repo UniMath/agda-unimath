@@ -12,7 +12,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.coherent-h-spaces
+open import structured-types.h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
@@ -24,8 +24,13 @@ open import structured-types.wild-quasigroups
 ## Idea
 
 The **loop space** of a [pointed type](structured-types.pointed-types.md) `A` is
-the pointed type of self-[identifications](foundation.identity-types.md) of the
-base point of `A`. The loop space comes equipped with a groupoidal structure.
+the pointed type of self-[identifications](foundation-core.identity-types.md) of
+the base point of `A`. The loop space comes equipped with a group-like structure
+induced by the groupoidal-like structure on identifications.
+
+## Table of files directly related to loop spaces
+
+{{#include tables/loop-spaces-concepts.md}}
 
 ## Definitions
 
@@ -61,7 +66,7 @@ module _
   pr2 Ω-Magma = mul-Ω
 ```
 
-### The wild unital magma of loops on a pointed space
+### The H-space of loops on a pointed space
 
 ```agda
 module _
@@ -76,12 +81,12 @@ module _
     (x : type-Ω A) → Id (mul-Ω A x (refl-Ω A)) x
   right-unit-law-mul-Ω x = right-unit
 
-  Ω-Coherent-H-Space : Coherent-H-Space l
-  pr1 Ω-Coherent-H-Space = Ω A
-  pr1 (pr2 Ω-Coherent-H-Space) = mul-Ω A
-  pr1 (pr2 (pr2 Ω-Coherent-H-Space)) = left-unit-law-mul-Ω
-  pr1 (pr2 (pr2 (pr2 Ω-Coherent-H-Space))) = right-unit-law-mul-Ω
-  pr2 (pr2 (pr2 (pr2 Ω-Coherent-H-Space))) = refl
+  Ω-H-Space : H-Space l
+  pr1 Ω-H-Space = Ω A
+  pr1 (pr2 Ω-H-Space) = mul-Ω A
+  pr1 (pr2 (pr2 Ω-H-Space)) = left-unit-law-mul-Ω
+  pr1 (pr2 (pr2 (pr2 Ω-H-Space))) = right-unit-law-mul-Ω
+  pr2 (pr2 (pr2 (pr2 Ω-H-Space))) = refl
 ```
 
 ### The wild quasigroup of loops on a pointed space

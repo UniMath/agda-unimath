@@ -12,7 +12,6 @@ open import foundation.large-locale-of-propositions
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
-open import foundation-core.propositions
 open import foundation-core.sets
 
 open import order-theory.greatest-lower-bounds-large-posets
@@ -74,14 +73,13 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
-  leq-powerset-Large-Locale-Prop :
+  leq-prop-powerset-Large-Locale :
     Large-Relation-Prop
       ( λ l2 → l1 ⊔ lsuc l2)
       ( λ l2 l3 → l1 ⊔ l2 ⊔ l3)
       ( type-powerset-Large-Locale A)
-
-  leq-powerset-Large-Locale-Prop =
-    leq-Large-Locale-Prop (powerset-Large-Locale A)
+  leq-prop-powerset-Large-Locale =
+    leq-prop-Large-Locale (powerset-Large-Locale A)
 
   leq-powerset-Large-Locale :
     Large-Relation
@@ -99,21 +97,21 @@ module _
     is-prop-leq-Large-Locale (powerset-Large-Locale A)
 
   refl-leq-powerset-Large-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( type-powerset-Large-Locale A)
       ( leq-powerset-Large-Locale)
   refl-leq-powerset-Large-Locale =
     refl-leq-Large-Locale (powerset-Large-Locale A)
 
   antisymmetric-leq-powerset-Large-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( type-powerset-Large-Locale A)
       ( leq-powerset-Large-Locale)
   antisymmetric-leq-powerset-Large-Locale =
     antisymmetric-leq-Large-Locale (powerset-Large-Locale A)
 
   transitive-leq-powerset-Large-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( type-powerset-Large-Locale A)
       ( leq-powerset-Large-Locale)
   transitive-leq-powerset-Large-Locale =

@@ -16,14 +16,22 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
 ```
 
 </details>
+
+## Idea
+
+A **morphism of directed graphs** from `G` to `H` consists of a map `f` from the
+vertices of `G` to the vertices of `H`, and a family of maps from the edges
+`E_G x y` in G`to the edges`E_H (f x) (f y)`in`H`.
 
 ## Definitions
 
@@ -171,11 +179,11 @@ module _
     (f g : hom-Directed-Graph G H) → f ＝ g → htpy-hom-Directed-Graph f g
   htpy-eq-hom-Directed-Graph f .f refl = refl-htpy-hom-Directed-Graph f
 
-  is-contr-total-htpy-hom-Directed-Graph :
+  is-torsorial-htpy-hom-Directed-Graph :
     (f : hom-Directed-Graph G H) →
-    is-contr (Σ (hom-Directed-Graph G H) (htpy-hom-Directed-Graph f))
-  is-contr-total-htpy-hom-Directed-Graph f =
-    is-contr-total-Eq-structure
+    is-torsorial (htpy-hom-Directed-Graph f)
+  is-torsorial-htpy-hom-Directed-Graph f =
+    is-torsorial-Eq-structure
       ( λ gV gE α →
         (x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
         binary-tr
@@ -184,24 +192,24 @@ module _
           ( α y)
           ( edge-hom-Directed-Graph G H f e) ＝
         gE x y e)
-      ( is-contr-total-htpy (vertex-hom-Directed-Graph G H f))
+      ( is-torsorial-htpy (vertex-hom-Directed-Graph G H f))
       ( pair
         ( vertex-hom-Directed-Graph G H f)
         ( refl-htpy))
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ x g →
           ( y : vertex-Directed-Graph G) →
           ( λ e → edge-hom-Directed-Graph G H f e) ~ g y)
         ( λ x →
-          is-contr-total-Eq-Π
+          is-torsorial-Eq-Π
             ( λ y g → (λ e → edge-hom-Directed-Graph G H f e) ~ g)
-            ( λ y → is-contr-total-htpy (edge-hom-Directed-Graph G H f))))
+            ( λ y → is-torsorial-htpy (edge-hom-Directed-Graph G H f))))
 
   is-equiv-htpy-eq-hom-Directed-Graph :
     (f g : hom-Directed-Graph G H) → is-equiv (htpy-eq-hom-Directed-Graph f g)
   is-equiv-htpy-eq-hom-Directed-Graph f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-Directed-Graph f)
+      ( is-torsorial-htpy-hom-Directed-Graph f)
       ( htpy-eq-hom-Directed-Graph f)
 
   extensionality-hom-Directed-Graph :
@@ -215,3 +223,9 @@ module _
   eq-htpy-hom-Directed-Graph f g =
     map-inv-equiv (extensionality-hom-Directed-Graph f g)
 ```
+
+## External links
+
+- [Graph homomorphism](https://www.wikidata.org/entity/Q3385162) on Wikidata
+- [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at
+  Wikipedia

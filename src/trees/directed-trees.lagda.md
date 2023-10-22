@@ -21,10 +21,12 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -253,23 +255,25 @@ module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   where
 
-  is-decidable-is-root-walk-Directed-Tree :
-    (x : node-Directed-Tree T)
-    (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
-    is-decidable (is-root-Directed-Tree T x)
-  is-decidable-is-root-walk-Directed-Tree ._ refl-walk-Directed-Graph =
-    inl refl
-  is-decidable-is-root-walk-Directed-Tree x
-    ( cons-walk-Directed-Graph {.x} {y} e w) =
-    inr
-      ( λ { refl →
+  abstract
+    is-decidable-is-root-walk-Directed-Tree :
+      (x : node-Directed-Tree T)
+      (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
+      is-decidable (is-root-Directed-Tree T x)
+    is-decidable-is-root-walk-Directed-Tree ._ refl-walk-Directed-Graph =
+      inl refl
+    is-decidable-is-root-walk-Directed-Tree x
+      ( cons-walk-Directed-Graph {.x} {y} e w) =
+      inr
+        ( λ where
+          refl →
             neq-cons-refl-walk-Directed-Graph
               ( graph-Directed-Tree T)
               ( x)
               ( y)
               ( e)
               ( w)
-              ( eq-is-contr (unique-walk-to-root-Directed-Tree T x))})
+              ( eq-is-contr (unique-walk-to-root-Directed-Tree T x)))
 
   is-isolated-root-Directed-Tree : is-isolated (root-Directed-Tree T)
   is-isolated-root-Directed-Tree x =
@@ -278,7 +282,7 @@ module _
   is-prop-is-root-Directed-Tree :
     (x : node-Directed-Tree T) → is-prop (is-root-Directed-Tree T x)
   is-prop-is-root-Directed-Tree =
-    is-prop-eq-isolated-point
+    is-prop-eq-isolated-element
       ( root-Directed-Tree T)
       ( is-isolated-root-Directed-Tree)
 
@@ -290,7 +294,7 @@ module _
   is-contr-loop-space-root-Directed-Tree :
     is-contr (root-Directed-Tree T ＝ root-Directed-Tree T)
   is-contr-loop-space-root-Directed-Tree =
-    is-contr-loop-space-isolated-point
+    is-contr-loop-space-isolated-element
       ( root-Directed-Tree T)
       ( is-isolated-root-Directed-Tree)
 
@@ -384,17 +388,17 @@ module _
   is-isolated-root-unique-direct-successor-Directed-Graph H x =
     map-coprod id (is-empty-left-summand-is-contr-coprod (H x)) (center (H x))
 
-  is-contr-walk-from-root-unique-direct-successor-Directed-Graph :
+  is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph :
     unique-direct-successor-Directed-Graph →
-    is-contr (Σ (vertex-Directed-Graph G) (λ y → walk-Directed-Graph G r y))
-  pr1 (is-contr-walk-from-root-unique-direct-successor-Directed-Graph H) =
+    is-torsorial (walk-Directed-Graph G r)
+  pr1 (is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H) =
     ( r , refl-walk-Directed-Graph)
   pr2
-    ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+    ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H)
     ( y , refl-walk-Directed-Graph) =
     refl
   pr2
-    ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+    ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H)
     ( y , cons-walk-Directed-Graph e w) =
     ex-falso
       ( no-direct-successor-root-unique-direct-successor-Directed-Graph H
@@ -403,14 +407,14 @@ module _
   is-contr-loop-space-root-unique-direct-successor-Directed-Graph :
     unique-direct-successor-Directed-Graph → is-contr (r ＝ r)
   is-contr-loop-space-root-unique-direct-successor-Directed-Graph H =
-    is-contr-loop-space-isolated-point r
+    is-contr-loop-space-isolated-element r
       ( is-isolated-root-unique-direct-successor-Directed-Graph H)
 
   is-not-root-has-unique-direct-successor-Directed-Graph :
     (x : vertex-Directed-Graph G) →
     is-contr
       ( (r ＝ x) + Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x)) →
-    Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x) → ¬ (r ＝ x)
+    Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x) → r ≠ x
   is-not-root-has-unique-direct-successor-Directed-Graph x H (y , e) =
     is-empty-left-summand-is-contr-coprod H (y , e)
 
@@ -443,7 +447,8 @@ module _
     ( pr2
       ( pair-eq-Σ
         ( eq-is-contr
-          ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+          ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph
+            H)
           { (r , refl-walk-Directed-Graph)}
           { (r , w)})))
   is-proof-irrelevant-walk-unique-direct-successor-Directed-Graph H x
@@ -590,12 +595,13 @@ module _
         ( f))
       ( unique-direct-successor-Directed-Tree x)
 
-  is-proof-irrelevant-direct-successor-Directed-Tree :
-    (x : node-Directed-Tree T) →
-    is-proof-irrelevant (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
-  is-proof-irrelevant-direct-successor-Directed-Tree x (y , e) =
-    unique-direct-successor-is-proper-node-Directed-Tree x
-      ( λ { refl → no-direct-successor-root-Directed-Tree T (y , e)})
+  abstract
+    is-proof-irrelevant-direct-successor-Directed-Tree :
+      (x : node-Directed-Tree T) →
+      is-proof-irrelevant (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
+    is-proof-irrelevant-direct-successor-Directed-Tree x (y , e) =
+      unique-direct-successor-is-proper-node-Directed-Tree x
+        ( λ where refl → no-direct-successor-root-Directed-Tree T (y , e))
 
   is-prop-direct-successor-Directed-Tree :
     (x : node-Directed-Tree T) →

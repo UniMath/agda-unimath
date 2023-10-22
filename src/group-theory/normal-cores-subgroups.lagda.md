@@ -113,11 +113,11 @@ module _
       ( inclusion-Subgroup G H (pr1 (v z)))) ∙
     ( ap-mul-Group G (pr2 (u z)) (pr2 (v z)))
 
-  is-closed-under-inv-normal-core-Subgroup :
-    is-closed-under-inv-subset-Group G subset-normal-core-Subgroup
-  pr1 (is-closed-under-inv-normal-core-Subgroup x u z) =
+  is-closed-under-inverses-normal-core-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-normal-core-Subgroup
+  pr1 (is-closed-under-inverses-normal-core-Subgroup x u z) =
     inv-Subgroup G H (pr1 (u z))
-  pr2 (is-closed-under-inv-normal-core-Subgroup x u z) =
+  pr2 (is-closed-under-inverses-normal-core-Subgroup x u z) =
     ( conjugation-inv-Group G z (inclusion-Subgroup G H (pr1 (u z)))) ∙
     ( ap (inv-Group G) (pr2 (u z)))
 
@@ -129,7 +129,7 @@ module _
   pr1 (pr2 (pr2 subgroup-normal-core-Subgroup)) =
     is-closed-under-multiplication-normal-core-Subgroup
   pr2 (pr2 (pr2 subgroup-normal-core-Subgroup)) =
-    is-closed-under-inv-normal-core-Subgroup
+    is-closed-under-inverses-normal-core-Subgroup
 
   is-normal-normal-core-Subgroup :
     is-normal-Subgroup G subgroup-normal-core-Subgroup
@@ -213,7 +213,7 @@ module _
         ( is-contained-in-subgroup-normal-core-Subgroup G H))
 
   normal-core-subgroup-hom-Large-Poset :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)
@@ -224,7 +224,7 @@ module _
 
   normal-core-subgroup-Galois-Connection :
     galois-connection-Large-Poset
-      ( id)
+      ( λ l → l)
       ( λ l2 → l1 ⊔ l2)
       ( Normal-Subgroup-Large-Poset G)
       ( Subgroup-Large-Poset G)

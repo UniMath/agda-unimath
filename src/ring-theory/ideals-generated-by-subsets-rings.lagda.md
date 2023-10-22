@@ -353,7 +353,7 @@ module _
         ( H))
 
   ideal-subset-hom-large-poset-Ring :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Ring A))
       ( ideal-Ring-Large-Poset A)
@@ -385,7 +385,7 @@ module _
 
   ideal-subset-galois-connection-Ring :
     galois-connection-Large-Poset
-      ( _⊔_ l1) id
+      ( _⊔_ l1) (λ l → l)
       ( powerset-Large-Poset (type-Ring A))
       ( ideal-Ring-Large-Poset A)
   lower-adjoint-galois-connection-Large-Poset
@@ -520,18 +520,19 @@ module _
       ( a i)
       ( unit-trunc-Prop (i , refl))
 
-  is-ideal-generated-by-family-of-elements-ideal-family-of-elements-Ring :
-    is-ideal-generated-by-family-of-elements-Ring R a
-      ideal-family-of-elements-Ring
-      contains-element-ideal-family-of-elements-Ring
-  is-ideal-generated-by-family-of-elements-ideal-family-of-elements-Ring J H =
-    is-ideal-generated-by-subset-ideal-subset-Ring R
-      ( generating-subset-ideal-family-of-elements-Ring)
-      ( J)
-      ( λ x p →
-        apply-universal-property-trunc-Prop p
-          ( subset-ideal-Ring R J x)
-          ( λ { (i , refl) → H}))
+  abstract
+    is-ideal-generated-by-family-of-elements-ideal-family-of-elements-Ring :
+      is-ideal-generated-by-family-of-elements-Ring R a
+        ideal-family-of-elements-Ring
+        contains-element-ideal-family-of-elements-Ring
+    is-ideal-generated-by-family-of-elements-ideal-family-of-elements-Ring J H =
+      is-ideal-generated-by-subset-ideal-subset-Ring R
+        ( generating-subset-ideal-family-of-elements-Ring)
+        ( J)
+        ( λ x p →
+          apply-universal-property-trunc-Prop p
+            ( subset-ideal-Ring R J x)
+            ( λ where (i , refl) → H))
 ```
 
 ## Properties
@@ -556,15 +557,16 @@ module _
         ( is-closed-under-left-multiplication-ideal-Ring R I _ _ (pr2 u)))
       ( cases-forward-inclusion-idempotent-ideal-subset-Ring l)
 
-  forward-inclusion-idempotent-ideal-subset-Ring :
-    leq-ideal-Ring R
-      ( ideal-subset-Ring R (subset-ideal-Ring R I))
-      ( I)
-  forward-inclusion-idempotent-ideal-subset-Ring x H =
-    apply-universal-property-trunc-Prop H
-      ( subset-ideal-Ring R I x)
-      ( λ { (l , refl) →
-            cases-forward-inclusion-idempotent-ideal-subset-Ring l})
+  abstract
+    forward-inclusion-idempotent-ideal-subset-Ring :
+      leq-ideal-Ring R
+        ( ideal-subset-Ring R (subset-ideal-Ring R I))
+        ( I)
+    forward-inclusion-idempotent-ideal-subset-Ring x H =
+      apply-universal-property-trunc-Prop H
+        ( subset-ideal-Ring R I x)
+        ( λ where
+          ( l , refl) → cases-forward-inclusion-idempotent-ideal-subset-Ring l)
 
   backward-inclusion-idempotent-ideal-subset-Ring :
     leq-ideal-Ring R

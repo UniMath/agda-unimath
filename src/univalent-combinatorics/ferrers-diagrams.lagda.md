@@ -19,6 +19,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -156,17 +157,17 @@ module _
     (E : ferrers-diagram l2 l3 A) → Id D E → equiv-ferrers-diagram E
   equiv-eq-ferrers-diagram .D refl = id-equiv-ferrers-diagram
 
-  is-contr-total-equiv-ferrers-diagram :
-    is-contr (Σ (ferrers-diagram l2 l3 A) (equiv-ferrers-diagram))
-  is-contr-total-equiv-ferrers-diagram =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-ferrers-diagram :
+    is-torsorial equiv-ferrers-diagram
+  is-torsorial-equiv-ferrers-diagram =
+    is-torsorial-Eq-structure
       ( λ X Y e →
         (x : row-ferrers-diagram D) →
         dot-ferrers-diagram D x ≃ pr1 Y (map-equiv e x))
-      ( is-contr-total-equiv (row-ferrers-diagram D))
+      ( is-torsorial-equiv (row-ferrers-diagram D))
       ( pair (row-ferrers-diagram D) id-equiv)
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-equiv-fam (dot-ferrers-diagram D))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-equiv-fam (dot-ferrers-diagram D))
         ( λ Y →
           is-prop-prod
             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
@@ -181,7 +182,7 @@ module _
     (E : ferrers-diagram l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram E)
   is-equiv-equiv-eq-ferrers-diagram =
     fundamental-theorem-id
-      is-contr-total-equiv-ferrers-diagram
+      is-torsorial-equiv-ferrers-diagram
       equiv-eq-ferrers-diagram
 
   eq-equiv-ferrers-diagram :
@@ -212,26 +213,26 @@ module _
     (E : ferrers-diagram-𝔽 l2 l3 A) → Id D E → equiv-ferrers-diagram-𝔽 E
   equiv-eq-ferrers-diagram-𝔽 .D refl = id-equiv-ferrers-diagram-𝔽
 
-  is-contr-total-equiv-ferrers-diagram-𝔽 :
-    is-contr (Σ (ferrers-diagram-𝔽 l2 l3 A) (equiv-ferrers-diagram-𝔽))
-  is-contr-total-equiv-ferrers-diagram-𝔽 =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-ferrers-diagram-𝔽 :
+    is-torsorial equiv-ferrers-diagram-𝔽
+  is-torsorial-equiv-ferrers-diagram-𝔽 =
+    is-torsorial-Eq-structure
       ( λ X Y e →
         (x : type-row-ferrers-diagram-𝔽 A D) →
         type-dot-ferrers-diagram-𝔽 A D x ≃ type-𝔽 (pr1 Y (map-equiv e x)))
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-equiv (type-row-ferrers-diagram-𝔽 A D))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-equiv (type-row-ferrers-diagram-𝔽 A D))
         ( is-prop-is-finite)
         ( type-row-ferrers-diagram-𝔽 A D)
         ( id-equiv)
         ( is-finite-type-row-ferrers-diagram-𝔽 A D))
       ( pair (row-ferrers-diagram-𝔽 A D) id-equiv)
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-Eq-Π
           ( λ x Y → type-dot-ferrers-diagram-𝔽 A D x ≃ type-𝔽 Y)
           ( λ x →
-            is-contr-total-Eq-subtype
-              ( is-contr-total-equiv (type-dot-ferrers-diagram-𝔽 A D x))
+            is-torsorial-Eq-subtype
+              ( is-torsorial-equiv (type-dot-ferrers-diagram-𝔽 A D x))
               ( is-prop-is-finite)
               ( type-dot-ferrers-diagram-𝔽 A D x)
               ( id-equiv)
@@ -250,7 +251,7 @@ module _
     (E : ferrers-diagram-𝔽 l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram-𝔽 E)
   is-equiv-equiv-eq-ferrers-diagram-𝔽 =
     fundamental-theorem-id
-      is-contr-total-equiv-ferrers-diagram-𝔽
+      is-torsorial-equiv-ferrers-diagram-𝔽
       equiv-eq-ferrers-diagram-𝔽
 
   eq-equiv-ferrers-diagram-𝔽 :

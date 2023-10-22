@@ -7,7 +7,7 @@ module category-theory.pregroupoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
@@ -24,9 +24,9 @@ A pregroupoid is a precategory in which every morphism is an isomorphism.
 ## Definition
 
 ```agda
-is-groupoid-Precategory-Prop :
+is-groupoid-prop-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) → Prop (l1 ⊔ l2)
-is-groupoid-Precategory-Prop C =
+is-groupoid-prop-Precategory C =
   Π-Prop
     ( obj-Precategory C)
     ( λ x →
@@ -34,12 +34,12 @@ is-groupoid-Precategory-Prop C =
         ( obj-Precategory C)
         ( λ y →
           Π-Prop
-            ( type-hom-Precategory C x y)
-            ( λ f → is-iso-Precategory-Prop C f)))
+            ( hom-Precategory C x y)
+            ( is-iso-prop-Precategory C)))
 
 is-groupoid-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
-is-groupoid-Precategory C = type-Prop (is-groupoid-Precategory-Prop C)
+is-groupoid-Precategory C = type-Prop (is-groupoid-prop-Precategory C)
 
 Pregroupoid :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

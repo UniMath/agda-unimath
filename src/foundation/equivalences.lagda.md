@@ -141,35 +141,74 @@ module _
 
 ### Equivalences have a contractible type of sections
 
+**Proof:** Since equivalences are
+[contractible maps](foundation.contractible-maps.md), and products of
+[contractible types](foundation-core.contractible-types.md) are contractible, it
+follows that the type
+
+```text
+  (b : B) → fiber f b
+```
+
+is contractible, for any equivalence `f`. However, by the
+[type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md)
+it follows that this type is equivalent to the type
+
+```text
+  Σ (B → A) (λ g → (b : B) → f (g b) ＝ b),
+```
+
+which is the type of [sections](foundation.sections.md) of `f`.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-section-is-equiv : {f : A → B} → is-equiv f → is-contr (section f)
-  is-contr-section-is-equiv {f} is-equiv-f =
-    is-contr-equiv'
-      ( (b : B) → fiber f b)
-      ( distributive-Π-Σ)
-      ( is-contr-Π (is-contr-map-is-equiv is-equiv-f))
+  abstract
+    is-contr-section-is-equiv : {f : A → B} → is-equiv f → is-contr (section f)
+    is-contr-section-is-equiv {f} is-equiv-f =
+      is-contr-equiv'
+        ( (b : B) → fiber f b)
+        ( distributive-Π-Σ)
+        ( is-contr-Π (is-contr-map-is-equiv is-equiv-f))
 ```
 
 ### Equivalences have a contractible type of retractions
 
+**Proof:** Since precomposing by an equivalence is an equivalence, and
+equivalences are contractible maps, it follows that the
+[fiber](foundation-core.fibers-of-maps.md) of the map
+
+```text
+  (B → A) → (A → A)
+```
+
+at `id : A → A` is contractible, i.e., the type `Σ (B → A) (λ h → h ∘ f ＝ id)`
+is contractible. Furthermore, since fiberwise equivalences induce equivalences
+on total spaces, it follows from
+[function extensionality](foundation.function-extensionality.md)` that the type
+
+```text
+  Σ (B → A) (λ h → h ∘ f ~ id)
+```
+
+is contractible. In other words, the type of retractions of an equivalence is
+contractible.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-retraction-is-equiv :
-    {f : A → B} → is-equiv f → is-contr (retraction f)
-  is-contr-retraction-is-equiv {f} is-equiv-f =
-    is-contr-is-equiv'
-      ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
-      ( tot (λ h → htpy-eq))
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ h → funext (h ∘ f) id))
-      ( is-contr-map-is-equiv (is-equiv-precomp-is-equiv f is-equiv-f A) id)
+  abstract
+    is-contr-retraction-is-equiv :
+      {f : A → B} → is-equiv f → is-contr (retraction f)
+    is-contr-retraction-is-equiv {f} is-equiv-f =
+      is-contr-equiv'
+        ( Σ (B → A) (λ h → h ∘ f ＝ id))
+        ( equiv-tot (λ h → equiv-funext))
+        ( is-contr-map-is-equiv (is-equiv-precomp-is-equiv f is-equiv-f A) id)
 ```
 
 ### Being an equivalence is a property
@@ -260,6 +299,24 @@ module _
     is-equiv f ≃ is-equiv (f ∘ map-equiv e)
   equiv-is-equiv-right-factor e {f} =
     equiv-is-equiv-right-factor-htpy e (f ∘ map-equiv e) refl-htpy
+```
+
+### Being an equivalence is closed under homotopies
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  equiv-is-equiv-htpy :
+    { f g : A → B} → (f ~ g) →
+    is-equiv f ≃ is-equiv g
+  equiv-is-equiv-htpy {f} {g} H =
+    equiv-prop
+      ( is-property-is-equiv f)
+      ( is-property-is-equiv g)
+      ( is-equiv-htpy f (inv-htpy H))
+      ( is-equiv-htpy g H)
 ```
 
 ### The groupoid laws for equivalences

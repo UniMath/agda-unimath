@@ -12,7 +12,9 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids
@@ -23,18 +25,49 @@ open import group-theory.monoids
 
 ## Idea
 
-The power operation on a monoid is the map `n x ↦ xⁿ`, which is defined by
-iteratively multiplying `x` with itself `n` times.
+The **power operation** on a [monoid](group-theory.monoids.md) is the map
+`n x ↦ xⁿ`, which is defined by [iteratively](foundation.iterating-functions.md)
+multiplying `x` with itself `n` times.
 
-## Definition
+## Definitions
+
+### Powers of elements of monoids
 
 ```agda
-power-Monoid :
-  {l : Level} (M : Monoid l) → ℕ → type-Monoid M → type-Monoid M
-power-Monoid M zero-ℕ x = unit-Monoid M
-power-Monoid M (succ-ℕ zero-ℕ) x = x
-power-Monoid M (succ-ℕ (succ-ℕ n)) x =
-  mul-Monoid M (power-Monoid M (succ-ℕ n) x) x
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  power-Monoid : ℕ → type-Monoid M → type-Monoid M
+  power-Monoid zero-ℕ x = unit-Monoid M
+  power-Monoid (succ-ℕ zero-ℕ) x = x
+  power-Monoid (succ-ℕ (succ-ℕ n)) x =
+    mul-Monoid M (power-Monoid (succ-ℕ n) x) x
+```
+
+### The predicate of being a power of an element of a monoid
+
+We say that an element `y` **is a power** of an element `x` if there
+[exists](foundation.existential-quantification.md) a number `n` such that
+`xⁿ ＝ y`.
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  is-power-of-element-prop-Monoid : (x y : type-Monoid M) → Prop l
+  is-power-of-element-prop-Monoid x y =
+    ∃-Prop ℕ (λ n → power-Monoid M n x ＝ y)
+
+  is-power-of-element-Monoid : (x y : type-Monoid M) → UU l
+  is-power-of-element-Monoid x y =
+    type-Prop (is-power-of-element-prop-Monoid x y)
+
+  is-prop-is-power-of-element-Monoid :
+    (x y : type-Monoid M) → is-prop (is-power-of-element-Monoid x y)
+  is-prop-is-power-of-element-Monoid x y =
+    is-prop-type-Prop (is-power-of-element-prop-Monoid x y)
 ```
 
 ## Properties
@@ -288,7 +321,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : type-hom-Monoid M N)
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
   preserves-powers-hom-Monoid :

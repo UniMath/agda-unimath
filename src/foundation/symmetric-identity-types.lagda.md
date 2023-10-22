@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
@@ -24,6 +24,8 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -61,14 +63,14 @@ module _
     pr1 (refl-Eq-symmetric-Id (x , H)) = refl
     pr2 (refl-Eq-symmetric-Id (x , H)) i = refl
 
-    is-contr-total-Eq-symmetric-Id :
-      (p : symmetric-Id a) → is-contr (Σ (symmetric-Id a) (Eq-symmetric-Id p))
-    is-contr-total-Eq-symmetric-Id (x , H) =
-      is-contr-total-Eq-structure
+    is-torsorial-Eq-symmetric-Id :
+      (p : symmetric-Id a) → is-torsorial (Eq-symmetric-Id p)
+    is-torsorial-Eq-symmetric-Id (x , H) =
+      is-torsorial-Eq-structure
         ( λ y K p → (i : type-unordered-pair a) → H i ＝ (p ∙ K i))
-        ( is-contr-total-path x)
+        ( is-torsorial-path x)
         ( x , refl)
-        ( is-contr-total-htpy H)
+        ( is-torsorial-htpy H)
 
     Eq-eq-symmetric-Id :
       (p q : symmetric-Id a) → (p ＝ q) → Eq-symmetric-Id p q
@@ -78,7 +80,7 @@ module _
       (p q : symmetric-Id a) → is-equiv (Eq-eq-symmetric-Id p q)
     is-equiv-Eq-eq-symmetric-Id p =
       fundamental-theorem-id
-        ( is-contr-total-Eq-symmetric-Id p)
+        ( is-torsorial-Eq-symmetric-Id p)
         ( Eq-eq-symmetric-Id p)
 
     extensionality-symmetric-Id :
@@ -101,23 +103,25 @@ module _
     map-inv-compute-symmetric-Id :
       a ＝ b → symmetric-Id (standard-unordered-pair a b)
     pr1 (map-inv-compute-symmetric-Id p) = a
-    pr2 (map-inv-compute-symmetric-Id p) (inl (inr star)) = refl
-    pr2 (map-inv-compute-symmetric-Id p) (inr star) = p
+    pr2 (map-inv-compute-symmetric-Id p) (inl (inr _)) = refl
+    pr2 (map-inv-compute-symmetric-Id p) (inr _) = p
 
     is-section-map-inv-compute-symmetric-Id :
       ( map-compute-symmetric-Id ∘ map-inv-compute-symmetric-Id) ~ id
     is-section-map-inv-compute-symmetric-Id refl = refl
 
-    is-retraction-map-inv-compute-symmetric-Id :
-      ( map-inv-compute-symmetric-Id ∘ map-compute-symmetric-Id) ~ id
-    is-retraction-map-inv-compute-symmetric-Id (x , f) =
-      eq-Eq-symmetric-Id
-        ( standard-unordered-pair a b)
-        ( map-inv-compute-symmetric-Id (map-compute-symmetric-Id (x , f)))
-        ( x , f)
-        ( ( inv (f (zero-Fin 1))) ,
-          ( λ { ( inl (inr star)) → inv (left-inv (f (zero-Fin 1))) ;
-                ( inr star) → refl}))
+    abstract
+      is-retraction-map-inv-compute-symmetric-Id :
+        ( map-inv-compute-symmetric-Id ∘ map-compute-symmetric-Id) ~ id
+      is-retraction-map-inv-compute-symmetric-Id (x , f) =
+        eq-Eq-symmetric-Id
+          ( standard-unordered-pair a b)
+          ( map-inv-compute-symmetric-Id (map-compute-symmetric-Id (x , f)))
+          ( x , f)
+          ( ( inv (f (zero-Fin 1))) ,
+            ( λ where
+              ( inl (inr _)) → inv (left-inv (f (zero-Fin 1)))
+              ( inr _) → refl))
 
     is-equiv-map-compute-symmetric-Id :
       is-equiv (map-compute-symmetric-Id)

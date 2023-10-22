@@ -27,7 +27,7 @@ open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.bracelets public
 open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.classical-finite-types public
-open import univalent-combinatorics.complements-isolated-points public
+open import univalent-combinatorics.complements-isolated-elements public
 open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.counting public
 open import univalent-combinatorics.counting-decidable-subtypes public
@@ -37,7 +37,7 @@ open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.cubes public
 open import univalent-combinatorics.cycle-partitions public
 open import univalent-combinatorics.cycle-prime-decomposition-natural-numbers public
-open import univalent-combinatorics.cyclic-types public
+open import univalent-combinatorics.cyclic-finite-types public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
 open import univalent-combinatorics.decidable-equivalence-relations public

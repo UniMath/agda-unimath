@@ -27,9 +27,11 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -558,30 +560,30 @@ equiv-Fam-pushout-eq :
 equiv-Fam-pushout-eq {P = P} {.P} refl =
   reflexive-equiv-Fam-pushout P
 
-is-contr-total-equiv-Fam-pushout :
+is-torsorial-equiv-Fam-pushout :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {f : S → A} {g : S → B} (P : Fam-pushout l f g) →
-  is-contr (Σ (Fam-pushout l f g) (equiv-Fam-pushout P))
-is-contr-total-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P =
-  is-contr-total-Eq-structure
+  is-torsorial (equiv-Fam-pushout P)
+is-torsorial-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P =
+  is-torsorial-Eq-structure
     ( λ PA' t eA →
       Σ ( (b : B) → (pr1 (pr2 P) b) ≃ (pr1 t b))
         ( coherence-equiv-Fam-pushout P (pair PA' t) eA))
-    ( is-contr-total-Eq-Π
+    ( is-torsorial-Eq-Π
       ( λ a X → (pr1 P a) ≃ X)
-      ( λ a → is-contr-total-equiv (pr1 P a)))
+      ( λ a → is-torsorial-equiv (pr1 P a)))
     ( pair (pr1 P) (λ a → id-equiv))
-    ( is-contr-total-Eq-structure
+    ( is-torsorial-Eq-structure
       ( λ PB' PS' eB →
         coherence-equiv-Fam-pushout
           P (pair (pr1 P) (pair PB' PS')) (λ a → id-equiv) eB)
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ b Y → (pr1 (pr2 P) b) ≃ Y)
-        ( λ b → is-contr-total-equiv (pr1 (pr2 P) b)))
+        ( λ b → is-torsorial-equiv (pr1 (pr2 P) b)))
       ( pair (pr1 (pr2 P)) (λ b → id-equiv))
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ s e → (map-equiv (pr2 (pr2 P) s)) ~ (map-equiv e))
-        ( λ s → is-contr-total-htpy-equiv (pr2 (pr2 P) s))))
+        ( λ s → is-torsorial-htpy-equiv (pr2 (pr2 P) s))))
 
 is-equiv-equiv-Fam-pushout-eq :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -589,7 +591,7 @@ is-equiv-equiv-Fam-pushout-eq :
   is-equiv (equiv-Fam-pushout-eq {P = P} {Q})
 is-equiv-equiv-Fam-pushout-eq P =
   fundamental-theorem-id
-    ( is-contr-total-equiv-Fam-pushout P)
+    ( is-torsorial-equiv-Fam-pushout P)
     ( λ Q → equiv-Fam-pushout-eq {P = P} {Q})
 
 equiv-equiv-Fam-pushout :
@@ -657,10 +659,11 @@ is-equiv-Fam-pushout-cocone-UU :
   is-equiv (Fam-pushout-cocone-UU l {f = f} {g})
 is-equiv-Fam-pushout-cocone-UU l {f = f} {g} =
   is-equiv-tot-is-fiberwise-equiv
-    ( λ PA → is-equiv-tot-is-fiberwise-equiv
-      ( λ PB → is-equiv-map-equiv-Π-equiv-family
-        ( λ s → equiv-eq)
-        ( λ s → univalence (PA (f s)) (PB (g s)))))
+    ( λ PA →
+      is-equiv-tot-is-fiberwise-equiv
+        ( λ PB →
+          is-equiv-map-Π-is-fiberwise-equiv
+            ( λ s → univalence (PA (f s)) (PB (g s)))))
 
 htpy-equiv-eq-ap-fam :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : Id x y) →

@@ -76,6 +76,15 @@ abstract
         ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
         ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
 
+abstract
+  is-0-connected-mere-eq-is-inhabited :
+    {l : Level} {A : UU l} →
+    is-inhabited A → ((x y : A) → mere-eq x y) → is-0-connected A
+  is-0-connected-mere-eq-is-inhabited H K =
+    apply-universal-property-trunc-Prop H
+      ( is-0-connected-Prop _)
+      ( λ a → is-0-connected-mere-eq a (K a))
+
 is-0-connected-is-surjective-point :
   {l1 : Level} {A : UU l1} (a : A) →
   is-surjective (point a) → is-0-connected A
@@ -87,14 +96,15 @@ is-0-connected-is-surjective-point a H =
         ( mere-eq-Prop a x)
         ( λ u → unit-trunc-Prop (pr2 u)))
 
-is-surjective-point-is-0-connected :
-  {l1 : Level} {A : UU l1} (a : A) →
-  is-0-connected A → is-surjective (point a)
-is-surjective-point-is-0-connected a H x =
-  apply-universal-property-trunc-Prop
-    ( mere-eq-is-0-connected H a x)
-    ( trunc-Prop (fiber (point a) x))
-    ( λ {refl → unit-trunc-Prop (pair star refl)})
+abstract
+  is-surjective-point-is-0-connected :
+    {l1 : Level} {A : UU l1} (a : A) →
+    is-0-connected A → is-surjective (point a)
+  is-surjective-point-is-0-connected a H x =
+    apply-universal-property-trunc-Prop
+      ( mere-eq-is-0-connected H a x)
+      ( trunc-Prop (fiber (point a) x))
+      ( λ where refl → unit-trunc-Prop (star , refl))
 
 is-trunc-map-ev-point-is-connected :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
@@ -108,7 +118,7 @@ is-trunc-map-ev-point-is-connected k {A} {B} a H K =
       ( universal-property-contr-is-contr star is-contr-unit B))
     ( is-trunc-map-precomp-Π-is-surjective k
       ( is-surjective-point-is-0-connected a H)
-      ( λ _ → pair B K))
+      ( λ _ → (B , K)))
 
 equiv-dependent-universal-property-is-0-connected :
   {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
@@ -131,11 +141,11 @@ abstract
   is-surjective-fiber-inclusion :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     is-0-connected A → (a : A) → is-surjective (fiber-inclusion B a)
-  is-surjective-fiber-inclusion {B = B} C a (pair x b) =
+  is-surjective-fiber-inclusion {B = B} C a (x , b) =
     apply-universal-property-trunc-Prop
       ( mere-eq-is-0-connected C a x)
-      ( trunc-Prop (fiber (fiber-inclusion B a) (pair x b)))
-      ( λ { refl → unit-trunc-Prop (pair b refl)})
+      ( trunc-Prop (fiber (fiber-inclusion B a) (x , b)))
+      ( λ where refl → unit-trunc-Prop (b , refl))
 
 abstract
   mere-eq-is-surjective-fiber-inclusion :
@@ -144,7 +154,7 @@ abstract
     (x : A) → mere-eq a x
   mere-eq-is-surjective-fiber-inclusion a H x =
     apply-universal-property-trunc-Prop
-      ( H (λ x → unit) (pair x star))
+      ( H (λ x → unit) (x , star))
       ( mere-eq-Prop a x)
       ( λ u → unit-trunc-Prop (ap pr1 (pr2 u)))
 

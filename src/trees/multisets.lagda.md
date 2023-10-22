@@ -25,11 +25,20 @@ family over the universe `UU l`.
 
 ## Definitions
 
-### The type of multisets
+### The type of small multisets
 
 ```agda
 𝕍 : (l : Level) → UU (lsuc l)
 𝕍 l = 𝕎 (UU l) (λ X → X)
+```
+
+### The large type of all multisets
+
+```agda
+data
+  Large-𝕍 : UUω
+  where
+  tree-Large-𝕍 : {l : Level} (X : UU l) → (X → Large-𝕍) → Large-𝕍
 ```
 
 ### The elementhood relation on multisets

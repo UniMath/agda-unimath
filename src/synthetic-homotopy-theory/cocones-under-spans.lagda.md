@@ -18,10 +18,13 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -74,79 +77,94 @@ module _
 ### Homotopies of cocones
 
 ```agda
-coherence-htpy-cocone :
+module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c c' : cocone f g X) →
-  (K : (horizontal-map-cocone f g c) ~ (horizontal-map-cocone f g c'))
-  (L : (vertical-map-cocone f g c) ~ (vertical-map-cocone f g c')) →
-  UU (l1 ⊔ l4)
-coherence-htpy-cocone f g c c' K L =
-  ((coherence-square-cocone f g c) ∙h (L ·r g)) ~
-  ((K ·r f) ∙h (coherence-square-cocone f g c'))
+  (f : S → A) (g : S → B) {X : UU l4}
+  where
 
-htpy-cocone :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} →
-  cocone f g X → cocone f g X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-htpy-cocone f g c c' =
-  Σ ( horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
-    ( λ K →
-      Σ ( vertical-map-cocone f g c ~ vertical-map-cocone f g c')
-        ( coherence-htpy-cocone f g c c' K))
+  statement-coherence-htpy-cocone :
+    (c c' : cocone f g X) →
+    (K : (horizontal-map-cocone f g c) ~ (horizontal-map-cocone f g c'))
+    (L : (vertical-map-cocone f g c) ~ (vertical-map-cocone f g c')) →
+    UU (l1 ⊔ l4)
+  statement-coherence-htpy-cocone c c' K L =
+    ((coherence-square-cocone f g c) ∙h (L ·r g)) ~
+    ((K ·r f) ∙h (coherence-square-cocone f g c'))
 
-reflexive-htpy-cocone :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  htpy-cocone f g c c
-pr1 (reflexive-htpy-cocone f g (i , j , H)) = refl-htpy
-pr1 (pr2 (reflexive-htpy-cocone f g (i , j , H))) = refl-htpy
-pr2 (pr2 (reflexive-htpy-cocone f g (i , j , H))) = right-unit-htpy
+  htpy-cocone : (c c' : cocone f g X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-cocone c c' =
+    Σ ( horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
+      ( λ K →
+        Σ ( vertical-map-cocone f g c ~ vertical-map-cocone f g c')
+          ( statement-coherence-htpy-cocone c c' K))
 
-htpy-cocone-eq :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c c' : cocone f g X) →
-  Id c c' → htpy-cocone f g c c'
-htpy-cocone-eq f g c .c refl = reflexive-htpy-cocone f g c
+  module _
+    (c c' : cocone f g X) (H : htpy-cocone c c')
+    where
 
-is-contr-total-htpy-cocone :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  is-contr (Σ (cocone f g X) (htpy-cocone f g c))
-is-contr-total-htpy-cocone f g c =
-  is-contr-total-Eq-structure
-    ( λ i' jH' K →
-      Σ ( vertical-map-cocone f g c ~ (pr1 jH'))
-        ( coherence-htpy-cocone f g c (i' , jH') K))
-    ( is-contr-total-htpy (horizontal-map-cocone f g c))
-    ( horizontal-map-cocone f g c , refl-htpy)
-    ( is-contr-total-Eq-structure
-      ( λ j' H' → coherence-htpy-cocone f g c
-        ( horizontal-map-cocone f g c , j' , H')
-        ( refl-htpy))
-      ( is-contr-total-htpy (vertical-map-cocone f g c))
-      ( vertical-map-cocone f g c , refl-htpy)
-      ( is-contr-is-equiv'
-        ( Σ ( ( horizontal-map-cocone f g c ∘ f) ~
-              ( vertical-map-cocone f g c ∘ g))
-            ( λ H' → coherence-square-cocone f g c ~ H'))
-        ( tot (λ H' M → right-unit-htpy ∙h M))
-        ( is-equiv-tot-is-fiberwise-equiv (λ H' → is-equiv-concat-htpy _ _))
-        ( is-contr-total-htpy (coherence-square-cocone f g c))))
+    horizontal-htpy-cocone :
+      horizontal-map-cocone f g c ~ horizontal-map-cocone f g c'
+    horizontal-htpy-cocone = pr1 H
 
-is-equiv-htpy-cocone-eq :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c c' : cocone f g X) →
-  is-equiv (htpy-cocone-eq f g c c')
-is-equiv-htpy-cocone-eq f g c =
-  fundamental-theorem-id
-    ( is-contr-total-htpy-cocone f g c)
-    ( htpy-cocone-eq f g c)
+    vertical-htpy-cocone :
+      vertical-map-cocone f g c ~ vertical-map-cocone f g c'
+    vertical-htpy-cocone = pr1 (pr2 H)
 
-eq-htpy-cocone :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c c' : cocone f g X) →
-  htpy-cocone f g c c' → Id c c'
-eq-htpy-cocone f g c c' = map-inv-is-equiv (is-equiv-htpy-cocone-eq f g c c')
+    coherence-htpy-cocone :
+      statement-coherence-htpy-cocone c c'
+        ( horizontal-htpy-cocone)
+        ( vertical-htpy-cocone)
+    coherence-htpy-cocone = pr2 (pr2 H)
+
+  reflexive-htpy-cocone :
+    (c : cocone f g X) → htpy-cocone c c
+  pr1 (reflexive-htpy-cocone (i , j , H)) = refl-htpy
+  pr1 (pr2 (reflexive-htpy-cocone (i , j , H))) = refl-htpy
+  pr2 (pr2 (reflexive-htpy-cocone (i , j , H))) = right-unit-htpy
+
+  htpy-eq-cocone :
+    (c c' : cocone f g X) → c ＝ c' → htpy-cocone c c'
+  htpy-eq-cocone c .c refl = reflexive-htpy-cocone c
+
+  is-torsorial-htpy-cocone :
+    (c : cocone f g X) → is-torsorial (htpy-cocone c)
+  is-torsorial-htpy-cocone c =
+    is-torsorial-Eq-structure
+      ( λ i' jH' K →
+        Σ ( vertical-map-cocone f g c ~ (pr1 jH'))
+          ( statement-coherence-htpy-cocone c (i' , jH') K))
+      ( is-torsorial-htpy (horizontal-map-cocone f g c))
+      ( horizontal-map-cocone f g c , refl-htpy)
+      ( is-torsorial-Eq-structure
+        ( λ j' H' →
+          statement-coherence-htpy-cocone c
+            ( horizontal-map-cocone f g c , j' , H')
+            ( refl-htpy))
+        ( is-torsorial-htpy (vertical-map-cocone f g c))
+        ( vertical-map-cocone f g c , refl-htpy)
+        ( is-contr-is-equiv'
+          ( Σ ( ( horizontal-map-cocone f g c ∘ f) ~
+                ( vertical-map-cocone f g c ∘ g))
+              ( λ H' → coherence-square-cocone f g c ~ H'))
+          ( tot (λ H' M → right-unit-htpy ∙h M))
+          ( is-equiv-tot-is-fiberwise-equiv (λ H' → is-equiv-concat-htpy _ _))
+          ( is-torsorial-htpy (coherence-square-cocone f g c))))
+
+  is-equiv-htpy-eq-cocone :
+    (c c' : cocone f g X) → is-equiv (htpy-eq-cocone c c')
+  is-equiv-htpy-eq-cocone c =
+    fundamental-theorem-id
+      ( is-torsorial-htpy-cocone c)
+      ( htpy-eq-cocone c)
+
+  extensionality-cocone :
+    (c c' : cocone f g X) → (c ＝ c') ≃ htpy-cocone c c'
+  pr1 (extensionality-cocone c c') = htpy-eq-cocone c c'
+  pr2 (extensionality-cocone c c') = is-equiv-htpy-eq-cocone c c'
+
+  eq-htpy-cocone :
+    (c c' : cocone f g X) → htpy-cocone c c' → c ＝ c'
+  eq-htpy-cocone c c' = map-inv-is-equiv (is-equiv-htpy-eq-cocone c c')
 ```
 
 ### Postcomposing cocones

@@ -83,3 +83,9 @@ module _
   universal-property-pullback-cone : universal-property-pullback l f g (pr1 c)
   universal-property-pullback-cone = pr2 c
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

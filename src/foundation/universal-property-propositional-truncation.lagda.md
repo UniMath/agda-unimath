@@ -203,7 +203,7 @@ abstract
     ({l : Level} → is-propositional-truncation l P' f') →
     is-contr (Σ (type-equiv-Prop P P') (λ e → (map-equiv e ∘ f) ~ f'))
   is-uniquely-unique-propositional-truncation P P' f f' is-ptr-f is-ptr-f' =
-    is-contr-total-Eq-subtype
+    is-torsorial-Eq-subtype
       ( universal-property-is-propositional-truncation _ P f is-ptr-f P' f')
       ( is-property-is-equiv)
       ( map-is-propositional-truncation P f is-ptr-f P' f')
@@ -345,7 +345,6 @@ abstract
         ( λ h a a' → h a (f' a'))
         ( λ h a p' → h (f a) p')
         ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))
-        ( is-equiv-map-equiv-Π-equiv-family
-          ( λ a g a' → g (f' a'))
+        ( is-equiv-map-Π-is-fiberwise-equiv
           ( λ a → is-ptr-f' Q)))
 ```

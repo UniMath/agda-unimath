@@ -14,9 +14,11 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -177,26 +179,26 @@ module _
     F ＝ F' → htpy-factorization-through F F'
   htpy-eq-factorization-through F .F refl = refl-htpy-factorization-through F
 
-  is-contr-total-htpy-factorization-through :
+  is-torsorial-htpy-factorization-through :
     (F : factorization-through f X) →
-    is-contr (Σ (factorization-through f X) (htpy-factorization-through F))
-  is-contr-total-htpy-factorization-through F =
-    is-contr-total-Eq-structure
+    is-torsorial (htpy-factorization-through F)
+  is-torsorial-htpy-factorization-through F =
+    is-torsorial-Eq-structure
       ( λ g hH R →
         Σ ( left-map-factorization-through F ~
             left-map-factorization-through (g , hH))
           ( coherence-htpy-factorization-through F (g , hH) R))
-      ( is-contr-total-htpy (right-map-factorization-through F))
+      ( is-torsorial-htpy (right-map-factorization-through F))
       ( right-map-factorization-through F , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ h H →
           coherence-htpy-factorization-through
             ( F)
             ( right-map-factorization-through F , h , H)
             ( refl-htpy))
-        ( is-contr-total-htpy (left-map-factorization-through F))
+        ( is-torsorial-htpy (left-map-factorization-through F))
         ( left-map-factorization-through F , refl-htpy)
-        ( is-contr-total-htpy
+        ( is-torsorial-htpy
           ( is-factorization-factorization-through F ∙h refl-htpy)))
 
   is-equiv-htpy-eq-factorization-through :
@@ -204,7 +206,7 @@ module _
     is-equiv (htpy-eq-factorization-through F F')
   is-equiv-htpy-eq-factorization-through F =
     fundamental-theorem-id
-      ( is-contr-total-htpy-factorization-through F)
+      ( is-torsorial-htpy-factorization-through F)
       ( htpy-eq-factorization-through F)
 
   extensionality-factorization-through :

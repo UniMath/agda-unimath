@@ -8,8 +8,7 @@ module foundation.category-of-sets where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-large-precategories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories
@@ -40,7 +39,7 @@ sets for each universe level, and there is a large category of sets.
 ```agda
 Set-Large-Precategory : Large-Precategory lsuc (_⊔_)
 obj-Large-Precategory Set-Large-Precategory = Set
-hom-Large-Precategory Set-Large-Precategory = hom-Set
+hom-set-Large-Precategory Set-Large-Precategory = hom-Set
 comp-hom-Large-Precategory Set-Large-Precategory g f = g ∘ f
 id-hom-Large-Precategory Set-Large-Precategory = id
 associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
@@ -68,7 +67,7 @@ is-large-category-Set-Large-Precategory {l} X =
     ( is-contr-equiv'
       ( Σ (Set l) (type-equiv-Set X))
       ( equiv-tot (equiv-iso-equiv-Set X))
-      ( is-contr-total-equiv-Set X))
+      ( is-torsorial-equiv-Set X))
     ( iso-eq-Set X)
 
 Set-Large-Category : Large-Category lsuc (_⊔_)

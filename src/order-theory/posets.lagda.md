@@ -8,7 +8,7 @@ module order-theory.posets where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.binary-relations
@@ -27,8 +27,10 @@ open import order-theory.preorders
 
 ## Idea
 
-A **poset** is a set equipped with a reflexive, antisymmetric, transitive
-relation that takes values in propositions.
+A **poset** is a [set](foundation-core.sets.md)
+[equipped](foundation.structure.md) with a reflexive, antisymmetric, transitive
+[relation](foundation.binary-relations.md) that takes values in
+[propositions](foundation-core.propositions.md).
 
 ## Definition
 
@@ -93,7 +95,7 @@ module _
       ( λ x y → leq-Poset x y × leq-Poset y x)
       ( λ x y → is-prop-prod (is-prop-leq-Poset x y) (is-prop-leq-Poset y x))
       ( λ x → refl-leq-Poset x , refl-leq-Poset x)
-      ( λ {x y (H , K) → antisymmetric-leq-Poset x y H K})
+      ( λ x y (H , K) → antisymmetric-leq-Poset x y H K)
 
   set-Poset : Set l1
   pr1 set-Poset = type-Poset
@@ -155,7 +157,7 @@ module _
   is-category-precategory-Poset x y =
     is-equiv-is-prop
       ( is-set-type-Poset X x y)
-      ( is-prop-iso-Precategory precategory-Poset x y (is-prop-leq-Poset X x y))
+      ( is-prop-iso-Precategory precategory-Poset (is-prop-leq-Poset X x y))
       ( λ f →
         antisymmetric-leq-Poset X x y
           ( hom-iso-Precategory precategory-Poset f)
@@ -168,7 +170,7 @@ module _
 module _
   {l1 l2 : Level} (C : Category l1 l2)
   ( is-prop-hom-C :
-    (x y : obj-Category C) → is-prop (type-hom-Category C x y))
+    (x y : obj-Category C) → is-prop (hom-Category C x y))
   where
 
   preorder-is-prop-hom-Category : Preorder l1 l2
@@ -181,7 +183,7 @@ module _
     map-inv-is-equiv
       ( is-category-Category C x y)
       ( iso-is-prop-hom-Precategory
-        ( precategory-Category C) x y is-prop-hom-C f g)
+        ( precategory-Category C) is-prop-hom-C f g)
 ```
 
 It remains to show that these constructions form inverses to eachother.

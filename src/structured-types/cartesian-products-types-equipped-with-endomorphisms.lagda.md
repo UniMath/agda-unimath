@@ -19,14 +19,33 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-The cartesian product of `(A , f)` and `(B , g)` is defined as `(A × B , f × g)`
+The **cartesian product** of two
+[types equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md)
+`(A , f)` and `(B , g)` is defined as `(A × B , f × g)`
 
 ## Definitions
 
 ```agda
-product-Endo :
-  {l1 l2 : Level} → Endo l1 → Endo l2 → Endo (l1 ⊔ l2)
-product-Endo A B =
-  (type-Endo A × type-Endo B) ,
-  map-prod (endomorphism-Endo A) (endomorphism-Endo B)
+module _
+  {l1 l2 : Level}
+  (A : Type-With-Endomorphism l1) (B : Type-With-Endomorphism l2)
+  where
+
+  type-prod-Type-With-Endomorphism : UU (l1 ⊔ l2)
+  type-prod-Type-With-Endomorphism =
+    type-Type-With-Endomorphism A × type-Type-With-Endomorphism B
+
+  endomorphism-prod-Type-With-Endomorphism :
+    type-prod-Type-With-Endomorphism → type-prod-Type-With-Endomorphism
+  endomorphism-prod-Type-With-Endomorphism =
+    map-prod
+      ( endomorphism-Type-With-Endomorphism A)
+      ( endomorphism-Type-With-Endomorphism B)
+
+  prod-Type-With-Endomorphism :
+    Type-With-Endomorphism (l1 ⊔ l2)
+  pr1 prod-Type-With-Endomorphism =
+    type-prod-Type-With-Endomorphism
+  pr2 prod-Type-With-Endomorphism =
+    endomorphism-prod-Type-With-Endomorphism
 ```

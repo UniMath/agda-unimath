@@ -85,17 +85,20 @@ module _
     unit-trunc-Prop
       ( unit-Group G , (x , h) , compute-conjugation-unit-Group G x)
 
-  is-closed-under-conjugation-generating-subset-normal-closure-Subgroup :
-    is-closed-under-conjugation-subset-Group G
-      generating-subset-normal-closure-Subgroup
-  is-closed-under-conjugation-generating-subset-normal-closure-Subgroup x y s =
-    apply-universal-property-trunc-Prop s
-      ( generating-subset-normal-closure-Subgroup (conjugation-Group G x y))
-      ( λ { (z , h , refl) →
+  abstract
+    is-closed-under-conjugation-generating-subset-normal-closure-Subgroup :
+      is-closed-under-conjugation-subset-Group G
+        generating-subset-normal-closure-Subgroup
+    is-closed-under-conjugation-generating-subset-normal-closure-Subgroup
+      x y s =
+      apply-universal-property-trunc-Prop s
+        ( generating-subset-normal-closure-Subgroup (conjugation-Group G x y))
+        ( λ where
+          ( z , h , refl) →
             unit-trunc-Prop
               ( mul-Group G x z ,
                 h ,
-                compute-conjugation-mul-Group G x z (pr1 h))})
+                compute-conjugation-mul-Group G x z (pr1 h)))
 
   subgroup-normal-closure-Subgroup : Subgroup (l1 ⊔ l2) G
   subgroup-normal-closure-Subgroup =
@@ -131,10 +134,10 @@ module _
   is-closed-under-multiplication-normal-closure-Subgroup =
     is-closed-under-multiplication-Subgroup G subgroup-normal-closure-Subgroup
 
-  is-closed-under-inv-normal-closure-Subgroup :
-    is-closed-under-inv-subset-Group G subset-normal-closure-Subgroup
-  is-closed-under-inv-normal-closure-Subgroup =
-    is-closed-under-inv-Subgroup G subgroup-normal-closure-Subgroup
+  is-closed-under-inverses-normal-closure-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-normal-closure-Subgroup
+  is-closed-under-inverses-normal-closure-Subgroup =
+    is-closed-under-inverses-Subgroup G subgroup-normal-closure-Subgroup
 
   contains-generating-subset-normal-closure-Subgroup :
     generating-subset-normal-closure-Subgroup ⊆ subset-normal-closure-Subgroup
@@ -185,15 +188,16 @@ module _
       ( u)
       ( contains-subgroup-normal-closure-Subgroup)
 
-  contains-generating-subset-normal-closure-Normal-Subgroup :
-    {l : Level} (N : Normal-Subgroup l G) →
-    leq-Subgroup G H (subgroup-Normal-Subgroup G N) →
-    generating-subset-normal-closure-Subgroup ⊆ subset-Normal-Subgroup G N
-  contains-generating-subset-normal-closure-Normal-Subgroup N u x g =
-    apply-universal-property-trunc-Prop g
-      ( subset-Normal-Subgroup G N x)
-      ( λ { (z , (y , h) , refl) →
-            is-normal-Normal-Subgroup G N z y (u y h)})
+  abstract
+    contains-generating-subset-normal-closure-Normal-Subgroup :
+      {l : Level} (N : Normal-Subgroup l G) →
+      leq-Subgroup G H (subgroup-Normal-Subgroup G N) →
+      generating-subset-normal-closure-Subgroup ⊆ subset-Normal-Subgroup G N
+    contains-generating-subset-normal-closure-Normal-Subgroup N u x g =
+      apply-universal-property-trunc-Prop g
+        ( subset-Normal-Subgroup G N x)
+        ( λ where
+          ( z , (y , h) , refl) → is-normal-Normal-Subgroup G N z y (u y h))
 
   backward-implication-is-normal-closure-normal-closure-Subgroup :
     {l : Level} (N : Normal-Subgroup l G) →
@@ -236,7 +240,7 @@ module _
         ( u))
 
   normal-closure-subgroup-hom-Large-Poset :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)
@@ -248,7 +252,7 @@ module _
   normal-closure-Galois-Connection :
     galois-connection-Large-Poset
       ( λ l2 → l1 ⊔ l2)
-      ( id)
+      ( λ l → l)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)
   normal-closure-Galois-Connection =

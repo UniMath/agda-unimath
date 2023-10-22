@@ -26,6 +26,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -65,14 +66,14 @@ module _
             ( is-equiv-tot-is-fiberwise-equiv
               ( λ h → funext (h ∘ f) id))
             ( is-contr-map-is-equiv
-              (( is-equiv-precomp-Π-is-equiv f H) (λ y → A))
+              ( is-equiv-precomp-Π-is-equiv H (λ y → A))
               ( id))))
         ( H)
 
   abstract
-    is-contr-total-htpy-equiv :
-      (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
-    is-contr-total-htpy-equiv e =
+    is-torsorial-htpy-equiv :
+      (e : A ≃ B) → is-torsorial (htpy-equiv e)
+    is-torsorial-htpy-equiv e =
       fundamental-theorem-id'
         ( map-equiv ∘ extensionality-equiv e)
         ( is-equiv-map-equiv ∘ extensionality-equiv e)
@@ -99,25 +100,25 @@ module _
   where
 
   abstract
-    Ind-htpy-equiv :
+    induction-principle-htpy-equiv :
       {l3 : Level} (e : A ≃ B)
       (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
       section
         ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
           h e (refl-htpy-equiv e))
-    Ind-htpy-equiv e =
+    induction-principle-htpy-equiv e =
       is-identity-system-is-torsorial e
         ( refl-htpy-equiv e)
-        ( is-contr-total-htpy-equiv e)
+        ( is-torsorial-htpy-equiv e)
 
   ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
     P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
-  ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
+  ind-htpy-equiv e P = pr1 (induction-principle-htpy-equiv e P)
 
   compute-ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
     ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
-  compute-ind-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
+  compute-ind-htpy-equiv e P = pr2 (induction-principle-htpy-equiv e P)
 ```

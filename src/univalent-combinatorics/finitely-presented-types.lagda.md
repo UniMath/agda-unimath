@@ -92,7 +92,7 @@ has-cardinality-components-has-presentation-of-cardinality :
 has-cardinality-components-has-presentation-of-cardinality {l} k {A} H =
   apply-universal-property-trunc-Prop H
     ( has-cardinality-components-Prop k A)
-    ( λ { (pair f E) → unit-trunc-Prop (pair (unit-trunc-Set ∘ f) E)})
+    ( λ (f , E) → unit-trunc-Prop (unit-trunc-Set ∘ f , E))
 ```
 
 ### To be finitely presented is a property

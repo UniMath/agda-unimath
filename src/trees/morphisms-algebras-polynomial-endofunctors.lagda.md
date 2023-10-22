@@ -15,8 +15,10 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -129,12 +131,10 @@ module _
   htpy-eq-hom-algebra-polynomial-endofunctor .f refl =
     refl-htpy-hom-algebra-polynomial-endofunctor
 
-  is-contr-total-htpy-hom-algebra-polynomial-endofunctor :
-    is-contr
-      ( Σ ( hom-algebra-polynomial-endofunctor X Y)
-          ( htpy-hom-algebra-polynomial-endofunctor))
-  is-contr-total-htpy-hom-algebra-polynomial-endofunctor =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-hom-algebra-polynomial-endofunctor :
+    is-torsorial htpy-hom-algebra-polynomial-endofunctor
+  is-torsorial-htpy-hom-algebra-polynomial-endofunctor =
+    is-torsorial-Eq-structure
       ( λ ( g : pr1 X → pr1 Y)
           ( G : (g ∘ pr2 X) ~ ((pr2 Y) ∘ (map-polynomial-endofunctor A B g)))
           ( H : map-hom-algebra-polynomial-endofunctor X Y f ~ g) →
@@ -142,7 +142,7 @@ module _
             ( ( structure-algebra-polynomial-endofunctor Y) ·l
               ( htpy-polynomial-endofunctor A B H))) ~
           ( ( H ·r structure-algebra-polynomial-endofunctor X) ∙h G))
-      ( is-contr-total-htpy (map-hom-algebra-polynomial-endofunctor X Y f))
+      ( is-torsorial-htpy (map-hom-algebra-polynomial-endofunctor X Y f))
       ( pair (map-hom-algebra-polynomial-endofunctor X Y f) refl-htpy)
       ( is-contr-equiv'
         ( Σ ( ( (pr1 f) ∘ pr2 X) ~
@@ -162,14 +162,14 @@ module _
                     ( coh-refl-htpy-polynomial-endofunctor A B (pr1 f) x)))
               ( H)) ∘e
             ( equiv-concat-htpy right-unit-htpy H)))
-        ( is-contr-total-htpy (pr2 f)))
+        ( is-torsorial-htpy (pr2 f)))
 
   is-equiv-htpy-eq-hom-algebra-polynomial-endofunctor :
     (g : hom-algebra-polynomial-endofunctor X Y) →
     is-equiv (htpy-eq-hom-algebra-polynomial-endofunctor g)
   is-equiv-htpy-eq-hom-algebra-polynomial-endofunctor =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-algebra-polynomial-endofunctor)
+      ( is-torsorial-htpy-hom-algebra-polynomial-endofunctor)
       ( htpy-eq-hom-algebra-polynomial-endofunctor)
 
   extensionality-hom-algebra-polynomial-endofunctor :

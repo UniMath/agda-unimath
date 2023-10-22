@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -56,6 +57,34 @@ module _
 
   integer-multiple-Ab : ℤ → type-Ab A → type-Ab A
   integer-multiple-Ab = integer-power-Group (group-Ab A)
+```
+
+### The predicate of being an integer multiple of an element in an abelian group
+
+We say that an element `y` **is an integer multiple** of an element `x` if there
+[exists](foundation.existential-quantification.md) an integer `k` such that
+`kx ＝ y`.
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-integer-multiple-of-element-prop-Ab :
+    (x y : type-Ab A) → Prop l
+  is-integer-multiple-of-element-prop-Ab =
+    is-integer-power-of-element-prop-Group (group-Ab A)
+
+  is-integer-multiple-of-element-Ab :
+    (x y : type-Ab A) → UU l
+  is-integer-multiple-of-element-Ab =
+    is-integer-power-of-element-Group (group-Ab A)
+
+  is-prop-is-integer-multiple-of-element-Ab :
+    (x y : type-Ab A) →
+    is-prop (is-integer-multiple-of-element-Ab x y)
+  is-prop-is-integer-multiple-of-element-Ab =
+    is-prop-is-integer-power-of-element-Group (group-Ab A)
 ```
 
 ## Properties
@@ -256,7 +285,7 @@ module _
   {l : Level} (A : Ab l) (k : ℤ)
   where
 
-  hom-integer-multiple-Ab : type-hom-Ab A A
+  hom-integer-multiple-Ab : hom-Ab A A
   pr1 hom-integer-multiple-Ab = integer-multiple-Ab A k
   pr2 hom-integer-multiple-Ab = left-distributive-integer-multiple-add-Ab A k
 ```
@@ -275,13 +304,22 @@ module _
   integer-multiple-mul-Ab k l x =
     ( ap (λ u → integer-multiple-Ab A u x) (commutative-mul-ℤ k l)) ∙
     ( integer-power-mul-Group (group-Ab A) l k x)
+
+  swap-integer-multiple-Ab :
+    (k l : ℤ) (x : type-Ab A) →
+    integer-multiple-Ab A k (integer-multiple-Ab A l x) ＝
+    integer-multiple-Ab A l (integer-multiple-Ab A k x)
+  swap-integer-multiple-Ab k l x =
+    ( inv (integer-multiple-mul-Ab k l x)) ∙
+    ( ap (λ t → integer-multiple-Ab A t x) (commutative-mul-ℤ k l)) ∙
+    ( integer-multiple-mul-Ab l k x)
 ```
 
 ### Abelian group homomorphisms preserve integer multiples
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
   preserves-integer-multiples-hom-Ab :
@@ -292,11 +330,11 @@ module _
     preserves-integer-powers-hom-Group (group-Ab A) (group-Ab B) f
 
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
   eq-integer-multiple-hom-Ab :
-    (g : type-hom-Ab A B) (k : ℤ) (x : type-Ab A) →
+    (g : hom-Ab A B) (k : ℤ) (x : type-Ab A) →
     ( map-hom-Ab A B f x ＝ map-hom-Ab A B g x) →
     ( map-hom-Ab A B f (integer-multiple-Ab A k x) ＝
       map-hom-Ab A B g (integer-multiple-Ab A k x))

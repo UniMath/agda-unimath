@@ -2,7 +2,7 @@
 # Run this script:
 # $ ./scripts/wrap_long_lines_simple.py fileName.lagda.md
 
-# Fix some easy to fix long lines
+# Wrap some easy to fix long lines
 # * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
 import sys
@@ -55,7 +55,7 @@ def check_wrap_line_definition(line):
     and if so add a line wrap after the equals sign.
     """
     tle = get_top_level_equality(line)
-    if tle:
+    if tle and tle < len(line) - 1:
         m = re.fullmatch(r'((\s*)\S.*)', line[:tle+1])
         if m:
             # # Check that the next line is not indented more than this one

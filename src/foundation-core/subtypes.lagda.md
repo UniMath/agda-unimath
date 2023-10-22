@@ -31,8 +31,10 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A subtype of a type `A` is a family of propositions over `A`. The underlying
-type of a subtype `P` of `A` is the total space `Σ A B`.
+A **subtype** of a type `A` is a family of
+[propositions](foundation-core.propositions.md) over `A`. The underlying type of
+a subtype `P` of `A` is the [total space](foundation.dependent-pair-types.md)
+`Σ A B`.
 
 ## Definitions
 
@@ -93,20 +95,20 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
-  leq-subtype-Prop :
+  leq-prop-subtype :
     {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
-  leq-subtype-Prop P Q =
+  leq-prop-subtype P Q =
     Π-Prop A (λ x → hom-Prop (P x) (Q x))
 
   infix 5 _⊆_
   _⊆_ :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
-  P ⊆ Q = type-Prop (leq-subtype-Prop P Q)
+  P ⊆ Q = type-Prop (leq-prop-subtype P Q)
 
   is-prop-leq-subtype :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → is-prop (P ⊆ Q)
   is-prop-leq-subtype P Q =
-    is-prop-type-Prop (leq-subtype-Prop P Q)
+    is-prop-type-Prop (leq-prop-subtype P Q)
 ```
 
 ## Properties
@@ -140,7 +142,7 @@ module _
 
   extensionality-type-subtype' :
     (a b : type-subtype P) → (a ＝ b) ≃ (pr1 a ＝ pr1 b)
-  extensionality-type-subtype' (pair a p) =
+  extensionality-type-subtype' (a , p) =
     extensionality-type-subtype P p refl (λ x → id-equiv)
 
   eq-type-subtype :
@@ -272,7 +274,7 @@ equiv-subtype-equiv :
   ((x : A) → type-Prop (C x) ↔ type-Prop (D (map-equiv e x))) →
   type-subtype C ≃ type-subtype D
 equiv-subtype-equiv e C D H =
-  equiv-Σ (type-Prop ∘ D) (e) (λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
+  equiv-Σ (type-Prop ∘ D) e (λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
 ```
 
 ```agda
@@ -284,7 +286,7 @@ abstract
     (f : A → B) (g : (x : A) → P x → Q (f x)) →
     is-equiv f → ((x : A) → (Q (f x)) → P x) → is-equiv (map-Σ Q f g)
   is-equiv-subtype-is-equiv {Q = Q} is-subtype-P is-subtype-Q f g is-equiv-f h =
-    is-equiv-map-Σ Q f g is-equiv-f
+    is-equiv-map-Σ Q is-equiv-f
       ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x)) (h x))
 
 abstract
@@ -298,7 +300,7 @@ abstract
     is-equiv (map-Σ Q f g)
   is-equiv-subtype-is-equiv' {P = P} {Q}
     is-subtype-P is-subtype-Q f g is-equiv-f h =
-    is-equiv-map-Σ Q f g is-equiv-f
+    is-equiv-map-Σ Q is-equiv-f
       ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x))
         ( (tr P (is-retraction-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
 ```

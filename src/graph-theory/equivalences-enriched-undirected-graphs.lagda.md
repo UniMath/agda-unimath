@@ -15,8 +15,10 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -29,9 +31,13 @@ open import graph-theory.neighbors-undirected-graphs
 
 ## Idea
 
-An equivalence of `(A,B)`-enriched undirected graphs from `G` to `H` consists of
-an equivalence `e` of the underlying graphs of `G` and `H` such that preserving
-the labeling and the equivalences on the neighbors
+An **equivalence of `(A,B)`-enriched undirected graphs** from an
+[`(A,B)`-enriched undirected graph](graph-theory.enriched-undirected-graphs.md)
+`G` to an `(A,B)`-enriched undirected graph `H` consists of an
+[equivalence](graph-theory.equivalences-undirected-graphs.md) `e` of the
+underlying graphs of `G` and `H` such that preserving the labeling and the
+[equivalences](foundation-core.equivalences.md) on the
+[neighbors](graph-theory.neighbors-undirected-graphs.md).
 
 ## Definition
 
@@ -183,12 +189,10 @@ module _
   (G : Enriched-Undirected-Graph l3 l4 A B)
   where
 
-  is-contr-total-equiv-Enriched-Undirected-Graph :
-    is-contr
-      ( Σ ( Enriched-Undirected-Graph l3 l4 A B)
-          ( equiv-Enriched-Undirected-Graph A B G))
-  is-contr-total-equiv-Enriched-Undirected-Graph =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Enriched-Undirected-Graph :
+    is-torsorial (equiv-Enriched-Undirected-Graph A B G)
+  is-torsorial-equiv-Enriched-Undirected-Graph =
+    is-torsorial-Eq-structure
       ( λ H fn e →
         Σ ( ( shape-vertex-Enriched-Undirected-Graph A B G) ~
             ( ( shape-vertex-Enriched-Undirected-Graph A B (H , fn)) ∘
@@ -211,13 +215,13 @@ module _
                     ( e)
                     ( x))) ∘e
                 ( equiv-tr B (α x)))))
-      ( is-contr-total-equiv-Undirected-Graph
+      ( is-torsorial-equiv-Undirected-Graph
         ( undirected-graph-Enriched-Undirected-Graph A B G))
       ( pair
         ( undirected-graph-Enriched-Undirected-Graph A B G)
         ( id-equiv-Undirected-Graph
           ( undirected-graph-Enriched-Undirected-Graph A B G)))
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ f α K →
           ( x : vertex-Enriched-Undirected-Graph A B G) →
           htpy-equiv
@@ -239,12 +243,12 @@ module _
                     ( undirected-graph-Enriched-Undirected-Graph A B G))
                 ( x)) ∘e
               ( equiv-tr B (K x))))
-        ( is-contr-total-htpy
+        ( is-torsorial-htpy
           ( shape-vertex-Enriched-Undirected-Graph A B G))
         ( pair
           ( shape-vertex-Enriched-Undirected-Graph A B G)
           ( refl-htpy))
-        ( is-contr-total-Eq-Π
+        ( is-torsorial-Eq-Π
           ( λ x →
             htpy-equiv
               ( ( equiv-neighbor-equiv-Undirected-Graph
@@ -255,7 +259,7 @@ module _
                     ( x)) ∘e
                 ( equiv-neighbor-Enriched-Undirected-Graph A B G x)))
           ( λ x →
-            is-contr-total-htpy-equiv
+            is-torsorial-htpy-equiv
               ( equiv-neighbor-equiv-Undirected-Graph
                   ( undirected-graph-Enriched-Undirected-Graph A B G)
                   ( undirected-graph-Enriched-Undirected-Graph A B G)
@@ -275,7 +279,7 @@ module _
     is-equiv (equiv-eq-Enriched-Undirected-Graph H)
   is-equiv-equiv-eq-Enriched-Undirected-Graph =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Enriched-Undirected-Graph)
+      ( is-torsorial-equiv-Enriched-Undirected-Graph)
       ( equiv-eq-Enriched-Undirected-Graph)
 
   extensionality-Enriched-Undirected-Graph :
@@ -292,3 +296,12 @@ module _
   eq-equiv-Enriched-Undirected-Graph H =
     map-inv-equiv (extensionality-Enriched-Undirected-Graph H)
 ```
+
+## External links
+
+- [Graph isomoprhism](https://www.wikidata.org/entity/Q303100) at Wikidata
+- [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
+  Wikipedia
+- [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
+  Wolfram Mathworld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab
