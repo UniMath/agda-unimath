@@ -27,6 +27,21 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 
 </details>
 
+## Idea
+
+Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
+`(A, a)`, consider a
+[cocone under it](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md)
+`c` with vertex `X`. The **dependent universal property of sequential colimits**
+is the statement that the dependent cocone postcomposition map
+
+```text
+dependent-cocone-map-sequential-diagram :
+  ((x : X) → P x) → dependent-cocone-sequential-diagram P
+```
+
+is an [equivalence](foundation.equivalences.md).
+
 ## Definitions
 
 ### The dependent universal property of sequential colimits
