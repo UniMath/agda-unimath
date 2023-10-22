@@ -65,28 +65,20 @@ module _
   is-acyclic-map-is-epimorphism e b =
     is-contr-equiv
       ( fiber (codiagonal-map f) b)
-      ( cogap terminal-map terminal-map (suspension-cocone-fiber f b) ,
-        is-equiv-up-pushout-up-pushout
-          ( terminal-map)
-          ( terminal-map)
-          ( cocone-pushout terminal-map terminal-map)
-          ( suspension-cocone-fiber f b)
-          ( cogap terminal-map terminal-map (suspension-cocone-fiber f b))
-          ( htpy-cocone-map-universal-property-pushout
-            ( terminal-map)
-            ( terminal-map)
-            ( cocone-pushout terminal-map terminal-map)
-            ( up-pushout terminal-map terminal-map)
-            ( suspension-cocone-fiber f b))
-          ( up-pushout terminal-map terminal-map)
-          ( universal-property-suspension-fiber f b))
+      ( suspension-fiber-is-fiber-codiagonal-map f b)
       ( is-contr-map-is-equiv
         ( is-equiv-codiagonal-map-is-epimorphism f e)
         ( b))
 
   is-epimorphism-if-is-acyclic-map : is-acyclic-map f → is-epimorphism f
-  is-epimorphism-if-is-acyclic-map a =
-    {!is-epimorphism-is-equiv-codiagonal-map!}
+  is-epimorphism-if-is-acyclic-map ac =
+    is-epimorphism-is-equiv-codiagonal-map f
+      ( is-equiv-is-contr-map
+        ( λ b →
+          ( is-contr-equiv
+            ( suspension (fiber f b))
+            ( inv-equiv (suspension-fiber-is-fiber-codiagonal-map f b))
+            ( ac b))))
 ```
 
 ## See also

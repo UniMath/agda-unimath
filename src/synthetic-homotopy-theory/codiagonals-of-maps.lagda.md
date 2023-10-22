@@ -27,6 +27,7 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
@@ -159,7 +160,7 @@ module _
         ( equiv-tot
           ( λ y →
             equiv-concat (inv (compute-inl-codiagonal-map f y)) b))
-        ( is-contr-total-path' b)
+        ( is-torsorial-path' b)
 
     bottom-left-is-unit : Σ B (λ y → P (inl-pushout f f y)) ≃ unit
     bottom-left-is-unit =
@@ -251,7 +252,7 @@ module _
         ( equiv-tot
           ( λ y →
             equiv-concat (inv (compute-inr-codiagonal-map f y)) b))
-        ( is-contr-total-path' b)
+        ( is-torsorial-path' b)
 
     top-right-is-unit : Σ B (λ y → P (inr-pushout f f y)) ≃ unit
     top-right-is-unit =
@@ -343,4 +344,23 @@ module _
       ( terminal-map)
       ( suspension-cocone-fiber)
   universal-property-suspension-fiber {l} = pushout-5
+
+  suspension-fiber-is-fiber-codiagonal-map :
+    suspension (fiber f b) ≃ fiber (codiagonal-map f) b
+  suspension-fiber-is-fiber-codiagonal-map =
+    ( cogap terminal-map terminal-map suspension-cocone-fiber ,
+      is-equiv-up-pushout-up-pushout
+        ( terminal-map)
+        ( terminal-map)
+        ( cocone-pushout terminal-map terminal-map)
+        ( suspension-cocone-fiber)
+        ( cogap terminal-map terminal-map (suspension-cocone-fiber))
+        ( htpy-cocone-map-universal-property-pushout
+          ( terminal-map)
+          ( terminal-map)
+          ( cocone-pushout terminal-map terminal-map)
+          ( up-pushout terminal-map terminal-map)
+          ( suspension-cocone-fiber))
+        ( up-pushout terminal-map terminal-map)
+        ( universal-property-suspension-fiber))
 ```
