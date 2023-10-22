@@ -31,6 +31,28 @@ open import synthetic-homotopy-theory.universal-property-coequalizers
 
 </details>
 
+## Idea
+
+Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
+`(A, a)`, consider a
+[cocone under it](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md)
+`c` with vertex `X`. The **universal property of sequential colimits** is the
+statement that the cocone postcomposition map
+
+```text
+cocone-map-sequential-diagram : (X → Y) → cocone-sequential-diagram Y
+```
+
+is an [equivalence](foundation.equivalences.md).
+
+A sequential colimit `X` may be visualized as a "point in infinity" in the
+diagram
+
+```text
+     a₀      a₁      a₂     i
+ A₀ ---> A₁ ---> A₂ ---> ⋯ --> X.
+```
+
 ## Definitions
 
 ### The universal property of sequential colimits
@@ -47,6 +69,9 @@ module _
 ```
 
 ### The map induced by the universal property of sequential colimits
+
+The universal property allows us to construct a map from the colimit by
+providing a cocone under the sequential diagram.
 
 ```agda
 module _
@@ -111,8 +136,9 @@ module _
 ### Correspondence between universal properties of sequential colimits and coequalizers
 
 A cocone under a sequential diagram has the universal property of sequential
-colimits if and only if the corresponding cofork has the universal property of
-coequalizers.
+colimits if and only if the
+[corresponding cofork](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md)
+has the universal property of coequalizers.
 
 ```agda
 module _
@@ -166,6 +192,11 @@ module _
 ```
 
 ### 3-for-2 property of sequential colimits
+
+Given two cocones under a sequential diagram, one of which has the universal
+property of sequential colimits, and a map between their vertices, we prove that
+the other has the universal property if and only if the map is an
+[equivalence](foundation.equivalences.md).
 
 ```agda
 module _
