@@ -11,13 +11,14 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncated-types
@@ -45,6 +46,16 @@ multivariable-htpy :
 multivariable-htpy {{base-telescope A}} f g = f ＝ g
 multivariable-htpy {{cons-telescope A}} f g =
   (x : _) → multivariable-htpy {{A x}} (f x) (g x)
+```
+
+### Multivariable homotopies between implicit functions
+
+```agda
+multivariable-htpy-implicit :
+  {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-implicit-Π A) → UU l
+multivariable-htpy-implicit {{base-telescope A}} f g = f ＝ g
+multivariable-htpy-implicit {{cons-telescope A}} f g =
+  (x : _) → multivariable-htpy-implicit {{A x}} (f {x}) (g {x})
 ```
 
 ### Iterated function extensionality
@@ -77,6 +88,61 @@ equiv-iterated-funext :
 equiv-iterated-funext .0 {{base-telescope A}} = id-equiv
 equiv-iterated-funext ._ {{cons-telescope A}} =
   equiv-Π-equiv-family (λ x → equiv-iterated-funext _ {{A x}}) ∘e equiv-funext
+```
+
+### Iterated function extensionality for implicit functions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : {x : A} → B x}
+  where
+
+  equiv-funext-implicit :
+    (Id {A = {x : A} → B x} f g) ≃ ((x : A) → f {x} ＝ g {x})
+  equiv-funext-implicit =
+    equiv-funext ∘e equiv-ap equiv-explicit-implicit-Π f g
+
+  htpy-eq-implicit :
+    Id {A = {x : A} → B x} f g → (x : A) → f {x} ＝ g {x}
+  htpy-eq-implicit = map-equiv equiv-funext-implicit
+
+  funext-implicit : is-equiv htpy-eq-implicit
+  funext-implicit = is-equiv-map-equiv equiv-funext-implicit
+
+  eq-htpy-implicit :
+    ((x : A) → f {x} ＝ g {x}) → Id {A = {x : A} → B x} f g
+  eq-htpy-implicit = map-inv-equiv equiv-funext-implicit
+```
+
+```agda
+refl-multivariable-htpy-implicit :
+  {l : Level} (n : ℕ) {{A : telescope l n}} {f : iterated-implicit-Π A} →
+  multivariable-htpy-implicit {{A}} f f
+refl-multivariable-htpy-implicit .0 {{base-telescope A}} = refl
+refl-multivariable-htpy-implicit ._ {{cons-telescope A}} x =
+  refl-multivariable-htpy-implicit _ {{A x}}
+
+multivariable-htpy-eq-implicit :
+  {l : Level} (n : ℕ) {{A : telescope l n}} {f g : iterated-implicit-Π A} →
+  Id {A = iterated-implicit-Π A} f g → multivariable-htpy-implicit {{A}} f g
+multivariable-htpy-eq-implicit .0 {{base-telescope A}} p = p
+multivariable-htpy-eq-implicit ._ {{cons-telescope A}} p x =
+  multivariable-htpy-eq-implicit _ {{A x}} (htpy-eq-implicit p x)
+
+eq-multivariable-htpy-implicit :
+  {l : Level} (n : ℕ) {{A : telescope l n}} {f g : iterated-implicit-Π A} →
+  multivariable-htpy-implicit {{A}} f g → Id {A = iterated-implicit-Π A} f g
+eq-multivariable-htpy-implicit .0 {{base-telescope A}} H = H
+eq-multivariable-htpy-implicit ._ {{cons-telescope A}} H =
+  eq-htpy-implicit (λ x → eq-multivariable-htpy-implicit _ {{A x}} (H x))
+
+equiv-iterated-funext-implicit :
+  {l : Level} (n : ℕ) {{A : telescope l n}} {f g : iterated-implicit-Π A} →
+  (Id {A = iterated-implicit-Π A} f g) ≃ multivariable-htpy-implicit {{A}} f g
+equiv-iterated-funext-implicit .0 {{base-telescope A}} = id-equiv
+equiv-iterated-funext-implicit ._ {{cons-telescope A}} =
+  ( equiv-Π-equiv-family (λ x → equiv-iterated-funext-implicit _ {{A x}})) ∘e
+  ( equiv-funext-implicit)
 ```
 
 ## See also
