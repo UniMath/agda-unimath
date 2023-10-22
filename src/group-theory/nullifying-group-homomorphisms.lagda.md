@@ -29,7 +29,7 @@ open import group-theory.normal-subgroups
 
 Consider a [group homomorphism](group-theory.homomorphisms-groups.md)
 `f : G → H` and a [normal subgroup](group-theory.normal-subgroups.md) `N` of the
-[group](group-theory.groups.md) `G`. We say that `f` \*\*nullifies `N` if it
+[group](group-theory.groups.md) `G`. We say that `f` **nullifies** `N` if it
 satisfies the condition
 
 ```text
