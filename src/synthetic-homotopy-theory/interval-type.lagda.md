@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-The interval type is a higher inductive type with two points and an
+**The interval type** is a higher inductive type with two points and an
 [identification](foundation.identity-types.md) between them.
 
 ## Postulates
