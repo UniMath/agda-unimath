@@ -12,7 +12,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
@@ -22,6 +21,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -235,8 +235,7 @@ module _
   abstract
     is-torsorial-htpy-sequential-diagram :
       ( f : hom-sequential-diagram A B) →
-      is-contr
-        ( Σ (hom-sequential-diagram A B) (htpy-hom-sequential-diagram B f))
+      is-torsorial (htpy-hom-sequential-diagram B f)
     is-torsorial-htpy-sequential-diagram f =
       is-torsorial-Eq-structure
         ( ev-pair (coherence-htpy-sequential-diagram B f))

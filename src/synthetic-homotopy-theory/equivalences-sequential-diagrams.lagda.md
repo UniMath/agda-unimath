@@ -9,7 +9,6 @@ module synthetic-homotopy-theory.equivalences-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
@@ -19,6 +18,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -134,7 +134,7 @@ equiv-eq-sequential-diagram A .A refl = id-equiv-sequential-diagram A
 abstract
   is-torsorial-equiv-sequential-diagram :
     { l1 : Level} (A : sequential-diagram l1) →
-    is-contr (Σ (sequential-diagram l1) (equiv-sequential-diagram A))
+    is-torsorial (equiv-sequential-diagram {l2 = l1} A)
   is-torsorial-equiv-sequential-diagram A =
     is-torsorial-Eq-structure _
       ( is-torsorial-Eq-Π

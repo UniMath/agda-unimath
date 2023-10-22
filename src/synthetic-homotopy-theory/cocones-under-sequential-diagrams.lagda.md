@@ -14,7 +14,6 @@ open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -25,6 +24,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -201,9 +201,7 @@ module _
   abstract
     is-torsorial-htpy-cocone-sequential-diagram :
       ( c : cocone-sequential-diagram A X) →
-      is-contr
-        ( Σ ( cocone-sequential-diagram A X)
-            ( htpy-cocone-sequential-diagram A c))
+      is-torsorial (htpy-cocone-sequential-diagram A c)
     is-torsorial-htpy-cocone-sequential-diagram c =
       is-torsorial-Eq-structure
         ( ev-pair (coherence-htpy-cocone-sequential-diagram A c))
