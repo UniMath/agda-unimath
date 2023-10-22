@@ -28,30 +28,77 @@ are [equivalently](foundation-core.equivalences.md) described as pointwise
 equalities between them. In other words, a function is completely determined by
 its values.
 
-## Statement
+## Definitions
+
+### Equalities induce homotopies
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  htpy-eq : {f g : (x : A) → B x} → (f ＝ g) → (f ~ g)
+  htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
   htpy-eq refl = refl-htpy
-
-  function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
-  function-extensionality f = (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
 ```
 
-## Postulate
+### An instance of function extensionality
+
+This property asserts that, _given_ two functions `f` and `g`, the map
+
+```text
+  htpy-eq : f ＝ g → f ~ g
+```
+
+is an equivalence.
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  instance-function-extensionality : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
+  instance-function-extensionality f g = is-equiv (htpy-eq {f = f} {g})
+```
+
+### Based function extensionality
+
+This property asserts that, _given_ a function `f`, the map
+
+```text
+  htpy-eq : f ＝ g → f ~ g
+```
+
+is an equivalence is an equivalence for any function `g` of the same type.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  based-function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
+  based-function-extensionality f =
+    (g : (x : A) → B x) → is-equiv (htpy-eq {f = f} {g})
+```
+
+### The function extensionality principle with respect to a universe level
+
+```agda
+function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+function-extensionality-Level l1 l2 =
+  {A : UU l1} {B : A → UU l2}
+  (f g : (x : A) → B x) →
+  instance-function-extensionality f g
+```
+
+### The function extensionality axiom
+
+```agda
+function-extensionality : UUω
+function-extensionality = {l1 l2 : Level} → function-extensionality-Level l1 l2
+
 postulate
   funext : function-extensionality
-```
 
-### Components of `funext`
-
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -98,7 +145,7 @@ square-htpy-eq :
 square-htpy-eq f g .g refl = refl
 ```
 
-### The action on paths of an evaluation map
+### Computing the action on paths of an evaluation map
 
 ```agda
 ap-ev :
