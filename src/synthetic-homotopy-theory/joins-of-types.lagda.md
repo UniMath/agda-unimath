@@ -33,7 +33,8 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 The **join** of `A` and `B` is the
-[pushout](synthetic-homotopy-theory.pushouts.md) of the [span](foundation.spans.md) `A ← A × B → B`.
+[pushout](synthetic-homotopy-theory.pushouts.md) of the
+[span](foundation.spans.md) `A ← A × B → B`.
 
 ## Definition
 
