@@ -31,7 +31,7 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A cocone under a span `A <-f- S -g-> B` with vertex `X` consists of two maps
+A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with vertex `X` consists of two maps
 `i : A → X` and `j : B → X` equipped with a [homotopy](foundation.homotopies.md)
 witnessing that the square
 
