@@ -45,7 +45,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The circle is the initial type equipped with a point and a
+**The circle** is the initial type equipped with a base point and a
 [loop](synthetic-homotopy-theory.loop-spaces.md).
 
 ## Postulates
