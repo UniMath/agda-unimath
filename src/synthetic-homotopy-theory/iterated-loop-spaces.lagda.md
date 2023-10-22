@@ -35,3 +35,8 @@ module _
   iterated-loop-space : ℕ → Pointed-Type l → Pointed-Type l
   iterated-loop-space n = iterate n Ω
 ```
+
+## See also
+
+- [Double loop spaces](synthetic-homotopy-theory.double-loop-spaces.md)
+- [Triple loop spaces](synthetic-homotopy-theory.triple-loop-spaces.md)
