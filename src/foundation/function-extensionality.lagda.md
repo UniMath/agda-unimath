@@ -35,17 +35,17 @@ defined in
 ## Postulate
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  postulate
-    funext : (f : (x : A) → B x) → function-extensionality f
+postulate
+  funext : function-extensionality
 ```
 
 ### Components of `funext`
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
   equiv-funext : {f g : (x : A) → B x} → (f ＝ g) ≃ (f ~ g)
   pr1 (equiv-funext) = htpy-eq
   pr2 (equiv-funext {f} {g}) = funext f g
