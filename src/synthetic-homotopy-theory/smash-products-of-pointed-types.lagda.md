@@ -118,7 +118,7 @@ module _
     map-pointed-map pointed-map-smash-prod-prod-Pointed-Type
 ```
 
-### Functions into pointed types `A` and `B` induce a function into `A ∧∗ B`
+### Pointed maps into pointed types `A` and `B` induce a pointed map into `A ∧∗ B`
 
 ```agda
 module _
@@ -210,6 +210,10 @@ module _
         ( glue-wedge-Pointed-Type A B))) ∙
     ( right-unit)
 ```
+
+### The map from the pointed product to the smash product identifies elements
+
+of the form (x, b) and (a, y).
 
 ```agda
 module _
@@ -314,7 +318,11 @@ module _
                 ( inclusion-point-Pointed-Type B)
                 ( cocone-prod-wedge-Pointed-Type A B))
               ( point-Pointed-Type unit-Pointed-Type))))))
+```
 
+### The universal property of the smash product
+
+```agda
 {-eval-smash-prod-Pointed-Type :
   {l1 l2 l3 : Level}
   (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3) →
