@@ -1,8 +1,6 @@
 # Identity systems
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.identity-systems where
 ```
 
