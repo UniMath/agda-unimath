@@ -24,6 +24,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -470,10 +471,10 @@ module _
   refl-constant-walk-Undirected-Graph-𝔽 =
     refl-constant-walk-Undirected-Graph (undirected-graph-Undirected-Graph-𝔽 G)
 
-  is-contr-total-constant-walk-Undirected-Graph-𝔽 :
-    is-contr (Σ (vertex-Undirected-Graph-𝔽 G) constant-walk-Undirected-Graph-𝔽)
-  is-contr-total-constant-walk-Undirected-Graph-𝔽 =
-    is-contr-total-constant-walk-Undirected-Graph
+  is-torsorial-constant-walk-Undirected-Graph-𝔽 :
+    is-torsorial constant-walk-Undirected-Graph-𝔽
+  is-torsorial-constant-walk-Undirected-Graph-𝔽 =
+    is-torsorial-constant-walk-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
 
   constant-walk-eq-Undirected-Graph-𝔽 :
