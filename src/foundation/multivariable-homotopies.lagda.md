@@ -93,28 +93,6 @@ equiv-iterated-funext ._ {{cons-telescope A}} =
 ### Iterated function extensionality for implicit functions
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : {x : A} → B x}
-  where
-
-  equiv-funext-implicit :
-    (Id {A = {x : A} → B x} f g) ≃ ((x : A) → f {x} ＝ g {x})
-  equiv-funext-implicit =
-    equiv-funext ∘e equiv-ap equiv-explicit-implicit-Π f g
-
-  htpy-eq-implicit :
-    Id {A = {x : A} → B x} f g → (x : A) → f {x} ＝ g {x}
-  htpy-eq-implicit = map-equiv equiv-funext-implicit
-
-  funext-implicit : is-equiv htpy-eq-implicit
-  funext-implicit = is-equiv-map-equiv equiv-funext-implicit
-
-  eq-htpy-implicit :
-    ((x : A) → f {x} ＝ g {x}) → Id {A = {x : A} → B x} f g
-  eq-htpy-implicit = map-inv-equiv equiv-funext-implicit
-```
-
-```agda
 refl-multivariable-htpy-implicit :
   {l : Level} (n : ℕ) {{A : telescope l n}} {f : iterated-implicit-Π A} →
   multivariable-htpy-implicit {{A}} f f
