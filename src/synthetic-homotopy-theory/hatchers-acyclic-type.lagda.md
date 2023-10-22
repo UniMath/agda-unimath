@@ -40,8 +40,8 @@ open import synthetic-homotopy-theory.powers-of-loops
 ## Idea
 
 **Hatcher's [acyclic type](synthetic-homotopy-theory.acyclic-types.md)** is a
-higher inductive type [equipped](foundation.structure.md) with a base point and two
-[loops](synthetic-homotopy-theory.loop-spaces.md) `a` and `b`, and
+higher inductive type [equipped](foundation.structure.md) with a base point and
+two [loops](synthetic-homotopy-theory.loop-spaces.md) `a` and `b`, and
 [identifications](foundation.identity-types.md) witnessing that `a⁵ ＝ b³` and
 `b³ = (ab)²`. This type is acyclic, because the structure on Hatcher's acyclic
 type on any loop space is [contractible](foundation.contractible-types.md).
