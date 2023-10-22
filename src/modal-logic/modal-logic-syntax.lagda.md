@@ -7,27 +7,27 @@ module modal-logic.modal-logic-syntax where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.binary-relations
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.universe-levels
-open import foundation.inhabited-types
-open import foundation.coproduct-types
-open import foundation.function-types
-open import foundation.empty-types
-open import foundation.unit-type
-open import foundation.negation
 open import foundation.double-negation
-open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
-open import foundation.decidable-propositions
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.law-of-excluded-middle
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -99,7 +99,7 @@ module _
 ```agda
 module _
   {l1 : Level}
-  ((w , _ ) : Inhabited-Type l1)
+  ((w , _) : Inhabited-Type l1)
   where
 
   record kripke-frame : UU (lsuc l1) where
@@ -157,7 +157,8 @@ module _
 
 ```agda
   is-classical-Prop : kripke-model W i l3 → Prop l
-  is-classical-Prop M = Π-Prop (formula i) (λ a → Π-Prop w (λ x → is-decidable-Prop (M , x ⊨ a)))
+  is-classical-Prop M =
+    Π-Prop (formula i) (λ a → Π-Prop w (λ x → is-decidable-Prop (M , x ⊨ a)))
 
   is-classical : kripke-model W i l3 → UU l
   is-classical = type-Prop ∘ is-classical-Prop
@@ -165,63 +166,83 @@ module _
   classical-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
   classical-model = Σ (kripke-model W i l3) is-classical
 
-  soundness : ((M , _) : classical-model)
-            → {a : formula i}
-            → ⊢ a
-            → type-Prop (M ⊨M a)
+  soundness :
+    ((M , _) : classical-model)
+    {a : formula i} →
+    ⊢ a →
+    type-Prop (M ⊨M a)
   soundness _ ax-k x = λ fa _ → fa
   soundness _ ax-s x = λ fabc fab fa → fabc fa (fab fa)
   soundness (_ , cl) {_ ⇒ a} ax-dn x with cl a x
   ... | inl fa = λ _ → fa
-  ... | inr nfa = λ fnna → ex-falso (map-inv-raise (fnna (λ fa → map-raise (nfa fa))))
+  ... | inr nfa =
+    λ fnna → ex-falso (map-inv-raise (fnna (λ fa → map-raise (nfa fa))))
   soundness _ ax-n x = λ fab fa y r → fab y r (fa y r)
   soundness CM (mp dab da) x = soundness CM dab x (soundness CM da x)
   soundness CM (nec d) x y _ = soundness CM d y
 
-  finite-is-classical : ((M , _) : finite-model W i l3)
-                      → (∀ n x → type-Prop (is-decidable-Prop (V M n x)))
-                      → (∀ x y → is-decidable (R (F M) x y))
-                      → is-classical M
+  finite-is-classical :
+    ((M , _) : finite-model W i l3) →
+    (∀ n x → type-Prop (is-decidable-Prop (V M n x))) →
+    (∀ x y → is-decidable (R (F M) x y)) →
+    is-classical M
   finite-is-classical (M , is-fin) dec-val dec-r (var n) x =
     is-decidable-raise _ _ (dec-val n x)
   finite-is-classical (M , is-fin) dec-val dec-r ⊥ x =
     inr map-inv-raise
   finite-is-classical (M , is-fin) dec-val dec-r (a ⇒ b) x =
     is-decidable-function-type
-      (finite-is-classical (M , is-fin) dec-val dec-r a x)
-      (finite-is-classical (M , is-fin) dec-val dec-r b x)
+      ( finite-is-classical (M , is-fin) dec-val dec-r a x)
+      ( finite-is-classical (M , is-fin) dec-val dec-r b x)
   finite-is-classical (M , is-fin) dec-val dec-r (□ a) x =
     is-decidable-Π-is-finite is-fin
-      (λ y →
+      ( λ y →
         is-decidable-function-type (dec-r x y)
         ((finite-is-classical (M , is-fin) dec-val dec-r a y)))
 
-  finite-soundness : ((M , _) : finite-model W i l3)
-                   → (∀ n x → type-Prop (is-decidable-Prop (V M n x)))
-                   → (∀ x y → is-decidable (R (F M) x y))
-                   → {a : formula i}
-                   → ⊢ a
-                   → type-Prop (M ⊨M a)
+  finite-soundness :
+    ((M , _) : finite-model W i l3) →
+    (∀ n x → type-Prop (is-decidable-Prop (V M n x))) →
+    (∀ x y → is-decidable (R (F M) x y)) →
+    {a : formula i} →
+    ⊢ a →
+    type-Prop (M ⊨M a)
   finite-soundness FM@(M , is-fin) dec-val dec-r =
     soundness (M , finite-is-classical FM dec-val dec-r)
 
+double-negation-LEM :
+  {l : Level} →
+  ((P : Prop l) →
+  ¬¬ (type-Prop P) →
+  (type-Prop P)) →
+  LEM l
+double-negation-LEM dnP P =
+  dnP (is-decidable-Prop P) (λ ndec → ndec (inr (λ p → ndec (inl p))))
 
-double-negation-LEM : {l : Level} → ((P : Prop l) → ¬¬ (type-Prop P) → (type-Prop P)) → LEM l
-double-negation-LEM dnP P = dnP (is-decidable-Prop P) (λ ndec → ndec (inr (λ p → ndec (inl p))))
-
-raise-dn : {l1 l2 : Level} {A : UU l1} → ¬¬ A → (raise l2 A → raise-empty l2) → raise-empty l2
+raise-dn :
+  {l1 l2 : Level}
+  {A : UU l1} →
+  ¬¬ A →
+  (raise l2 A → raise-empty l2) →
+  raise-empty l2
 raise-dn dnA rnA = map-raise (dnA λ a → map-inv-raise (rnA (map-raise a)))
 
-required-LEM : ({l1 l2 l3 : Level} (W : Inhabited-Type l1) (i : UU l2) (a : formula i)
-                (M : kripke-model W i l3)
-                → {a : formula i}
-                → ⊢ a
-                → type-Prop (M ⊨M a))
-             → {l : Level} → LEM l
+required-LEM :
+  ( {l1 l2 l3 : Level}
+    (W : Inhabited-Type l1)
+    (i : UU l2)
+    (a : formula i)
+    (M : kripke-model W i l3) →
+    {a : formula i} →
+    ⊢ a →
+    type-Prop (M ⊨M a)) →
+  {l : Level} →
+  LEM l
 required-LEM sound {l} = double-negation-LEM required-double-negation
   where
     required-double-negation : (P : Prop l) → ¬¬ (type-Prop P) → type-Prop P
-    required-double-negation P dnP = map-inv-raise (sound W unit b (M P) (ax-dn {a = a}) star (raise-dn dnP))
+    required-double-negation P dnP =
+      map-inv-raise (sound W unit b (M P) (ax-dn {a = a}) star (raise-dn dnP))
       where
       a = var star
       b = ~~ a ⇒ a
