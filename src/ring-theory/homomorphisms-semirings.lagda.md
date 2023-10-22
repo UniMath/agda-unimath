@@ -47,7 +47,7 @@ module _
       ( additive-commutative-monoid-Semiring S)) → Prop (l1 ⊔ l2)
   is-homomorphism-semiring-hom-Commutative-Monoid-Prop f =
     Σ-Prop
-      ( preserves-mul-semigroup-Prop
+      ( preserves-mul-prop-Semigroup
         ( multiplicative-semigroup-Semiring R)
         ( multiplicative-semigroup-Semiring S)
         ( map-hom-Commutative-Monoid

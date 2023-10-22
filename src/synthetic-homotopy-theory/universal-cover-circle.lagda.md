@@ -92,8 +92,6 @@ abstract
     (pair x l) {P} {Q} {f} is-equiv-f =
     is-equiv-map-Σ
       ( λ q₀ → Id (tr Q l q₀) q₀)
-      ( _)
-      ( _)
       ( is-equiv-f x)
       ( λ p₀ →
         is-equiv-comp
