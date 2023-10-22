@@ -32,8 +32,8 @@ family of [subtypes](foundation.subtypes.md) of the types
 
 Alternatively, we say that a
 [large subcategory](category-theory.large-subcategories.md) **is full** if for
-every two objects `X` and `Y` in the subcategory, the subtype of homomorphisms
-from `X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
+every two objects `X` and `Y` in the subcategory, the subtype of morphisms from
+`X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
 
 Note that full large subprecategories are not assumed to be closed under
 isomorphisms.
@@ -197,25 +197,24 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
-  (C : Large-Category α β)
-  (P : Full-Large-Subprecategory γ (large-precategory-Large-Category C))
+  (C : Large-Precategory α β)
+  (P : Full-Large-Subprecategory γ C)
   where
 
-  is-large-category-large-precategory-Full-Large-Subcategory :
+  is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory :
+    is-large-category-Large-Precategory C →
     is-large-category-Large-Precategory
-      ( large-precategory-Full-Large-Subprecategory
-        ( large-precategory-Large-Category C)
-        ( P))
-  is-large-category-large-precategory-Full-Large-Subcategory X =
+      ( large-precategory-Full-Large-Subprecategory C P)
+  is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory
+    is-large-category-C X =
     fundamental-theorem-id
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Large-Category C (inclusion-subtype P X))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Large-Category
+          ( make-Large-Category C is-large-category-C)
+          ( inclusion-subtype P X))
         ( is-prop-is-in-subtype P)
         ( inclusion-subtype P X)
-        ( id-iso-Large-Category C)
+        ( id-iso-Large-Precategory C)
         ( is-in-subtype-inclusion-subtype P X))
-      ( iso-eq-Full-Large-Subprecategory
-        ( large-precategory-Large-Category C)
-        ( P)
-        ( X))
+      ( iso-eq-Full-Large-Subprecategory C P X)
 ```

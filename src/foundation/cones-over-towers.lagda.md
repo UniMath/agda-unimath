@@ -23,6 +23,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -99,22 +100,22 @@ module _
   htpy-eq-cone-tower : (c c' : cone-tower A X) → c ＝ c' → htpy-cone-tower c c'
   htpy-eq-cone-tower c .c refl = refl-htpy-cone-tower c
 
-  is-contr-total-htpy-cone-tower :
-    (c : cone-tower A X) → is-contr (Σ (cone-tower A X) (htpy-cone-tower c))
-  is-contr-total-htpy-cone-tower c =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-cone-tower :
+    (c : cone-tower A X) → is-torsorial (htpy-cone-tower c)
+  is-torsorial-htpy-cone-tower c =
+    is-torsorial-Eq-structure
       ( λ x z → coherence-htpy-cone-tower c (x , z))
-      ( is-contr-total-binary-htpy (map-cone-tower A c))
+      ( is-torsorial-binary-htpy (map-cone-tower A c))
       ( map-cone-tower A c , (λ n → refl-htpy))
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ n → (coherence-cone-tower A c n ∙h refl-htpy) ~_)
-        ( λ n → is-contr-total-htpy (coherence-cone-tower A c n ∙h refl-htpy)))
+        ( λ n → is-torsorial-htpy (coherence-cone-tower A c n ∙h refl-htpy)))
 
   is-equiv-htpy-eq-cone-tower :
     (c c' : cone-tower A X) → is-equiv (htpy-eq-cone-tower c c')
   is-equiv-htpy-eq-cone-tower c =
     fundamental-theorem-id
-      ( is-contr-total-htpy-cone-tower c)
+      ( is-torsorial-htpy-cone-tower c)
       ( htpy-eq-cone-tower c)
 
   extensionality-cone-tower :

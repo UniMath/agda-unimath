@@ -7,6 +7,7 @@ module foundation-core.transport-along-identifications where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -25,7 +26,7 @@ The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
 recorded in
 [`foundation.transport-along-identifications`](foundation.transport-along-identifications.md).
 
-## Definition
+## Definitions
 
 ### Transport
 
@@ -79,6 +80,17 @@ preserves-tr :
 preserves-tr f refl x = refl
 ```
 
+### Transporting along the action on identifications of a function
+
+```agda
+tr-ap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
+  (f : A → C) (g : (x : A) → B x → D (f x))
+  {x y : A} (p : x ＝ y) (z : B x) →
+  tr D (ap f p) (g x z) ＝ g y (tr B p z)
+tr-ap f g refl z = refl
+```
+
 ### Computing maps out of identity types as transports
 
 ```agda
@@ -90,4 +102,22 @@ module _
   compute-map-out-of-identity-type :
     (x : A) (p : a ＝ x) → f x p ＝ tr B p (f a refl)
   compute-map-out-of-identity-type x refl = refl
+```
+
+### Computing transport in the type family of identifications with a fixed target
+
+```agda
+tr-Id-left :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
+```
+
+### Computing transport in the type family of identifications with a fixed source
+
+```agda
+tr-Id-right :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
+tr-Id-right refl refl = refl
 ```

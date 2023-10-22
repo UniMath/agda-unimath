@@ -161,7 +161,7 @@ module _
                 ( universal-property-product ∘e
                   equiv-postcomp X (C2 A B))) ∘e
               left-unit-law-Σ-is-contr
-                ( is-contr-total-equiv-subuniverse'
+                ( is-torsorial-equiv-subuniverse'
                   ( P)
                   ( inclusion-subuniverse P A ×
                     inclusion-subuniverse P B ,

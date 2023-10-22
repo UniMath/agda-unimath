@@ -94,7 +94,7 @@ module _
                 ( id-equiv)
                 ( equiv-universal-property-coprod X)) ∘e
               ( left-unit-law-Σ-is-contr
-                ( is-contr-total-equiv' (A + B))
+                ( is-torsorial-equiv' (A + B))
                 ( A + B , id-equiv))))) ∘e
       ( reassociate))
 ```

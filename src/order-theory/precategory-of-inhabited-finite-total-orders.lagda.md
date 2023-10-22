@@ -11,14 +11,10 @@ open import category-theory.full-large-subprecategories
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.cartesian-product-types
-open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.finite-total-orders
 open import order-theory.inhabited-finite-total-orders
 open import order-theory.precategory-of-posets
-open import order-theory.precategory-of-total-orders
 ```
 
 </details>

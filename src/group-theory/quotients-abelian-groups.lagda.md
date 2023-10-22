@@ -27,6 +27,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.nullifying-group-homomorphisms
 open import group-theory.quotient-groups
 open import group-theory.semigroups
 open import group-theory.subgroups-abelian-groups
@@ -84,12 +85,12 @@ module _
       ( group-Ab B)
       ( normal-subgroup-Subgroup-Ab A H)
 
-  nullifies-nullifying-hom-Ab :
+  nullifies-subgroup-nullifying-hom-Ab :
     (H : Subgroup-Ab l3 A) (f : nullifying-hom-Ab H) →
     nullifies-normal-subgroup-hom-Ab
       ( hom-nullifying-hom-Ab H f) H
-  nullifies-nullifying-hom-Ab H =
-    nullifies-nullifying-hom-Group
+  nullifies-subgroup-nullifying-hom-Ab H =
+    nullifies-normal-subgroup-nullifying-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( normal-subgroup-Subgroup-Ab A H)

@@ -194,13 +194,8 @@ module _
           ( c' x)))
       ( triangle-standard-pullback-tot-cone-cone-family)
       ( is-equiv-map-Σ _
-        ( gap f g c)
-        ( λ x → gap
-          ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
-          ( g' (pr1 (pr2 c) x))
-          ( c' x))
-          ( is-pb-c)
-          ( is-pb-c'))
+        ( is-pb-c)
+        ( is-pb-c'))
       ( is-equiv-map-standard-pullback-tot-cone-cone-family)
 ```
 

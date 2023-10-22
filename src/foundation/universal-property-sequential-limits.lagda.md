@@ -225,7 +225,7 @@ module _
         ( Σ (Y ≃ X)
             ( λ e → htpy-cone-tower A (cone-map-tower A c (map-equiv e)) c'))
     uniquely-unique-sequential-limit c' c up-c' up-c =
-      is-contr-total-Eq-subtype
+      is-torsorial-Eq-subtype
         ( uniqueness-universal-property-sequential-limit A c up-c Y c')
         ( is-property-is-equiv)
         ( map-universal-property-sequential-limit A c up-c c')

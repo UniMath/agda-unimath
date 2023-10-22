@@ -43,14 +43,22 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
+## Idea
+
+**The circle** is the initial type equipped with a base point and a
+[loop](synthetic-homotopy-theory.loop-spaces.md).
+
 ## Postulates
 
 ```agda
-postulate 𝕊¹ : UU lzero
+postulate
+  𝕊¹ : UU lzero
 
-postulate base-𝕊¹ : 𝕊¹
+postulate
+  base-𝕊¹ : 𝕊¹
 
-postulate loop-𝕊¹ : Id base-𝕊¹ base-𝕊¹
+postulate
+  loop-𝕊¹ : Id base-𝕊¹ base-𝕊¹
 
 free-loop-𝕊¹ : free-loop 𝕊¹
 pr1 free-loop-𝕊¹ = base-𝕊¹
@@ -60,7 +68,8 @@ pr2 free-loop-𝕊¹ = loop-𝕊¹
 pr1 𝕊¹-Pointed-Type = 𝕊¹
 pr2 𝕊¹-Pointed-Type = base-𝕊¹
 
-postulate ind-𝕊¹ : {l : Level} → induction-principle-circle l free-loop-𝕊¹
+postulate
+  ind-𝕊¹ : {l : Level} → induction-principle-circle l free-loop-𝕊¹
 ```
 
 ## Properties
@@ -297,13 +306,13 @@ sphere-1-circle-sphere-1-south-sphere-1 =
 apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 :
   ( n : Fin 2) →
   coherence-square-identifications
-    ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
-    ( sphere-1-circle-sphere-1-south-sphere-1)
     ( ap
       ( sphere-1-circle)
       ( ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹) ∙
         ( map-sphere-0-eq-base-𝕊¹ n)))
+    ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
     ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
+    ( sphere-1-circle-sphere-1-south-sphere-1)
 apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
   ( inv
     ( assoc
@@ -329,10 +338,10 @@ apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
 
 apply-loop-universal-property-𝕊¹-sphere-1-circle-sphere-1 :
   coherence-square-identifications
-    ( ap sphere-1-circle loop-𝕊¹)
-    ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
     ( sphere-1-circle-base-𝕊¹-eq-north-sphere-1)
+    ( ap sphere-1-circle loop-𝕊¹)
     ( meridian-sphere 0 (zero-Fin 1))
+    ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
 apply-loop-universal-property-𝕊¹-sphere-1-circle-sphere-1 =
   ( inv
     ( assoc
@@ -443,10 +452,10 @@ circle-sphere-1-circle-base-𝕊¹ =
 
 apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle :
   coherence-square-identifications
-    ( ap circle-sphere-1 (inv (meridian-sphere 0 (one-Fin 1))))
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
     ( refl)
+    ( ap circle-sphere-1 (inv (meridian-sphere 0 (one-Fin 1))))
     ( circle-sphere-1-south-sphere-1-eq-base-𝕊¹)
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
 apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle =
   ( identification-right-whisk
     ( ap-inv
@@ -474,10 +483,10 @@ apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle =
 
 apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle :
   coherence-square-identifications
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
     ( ap (circle-sphere-1) (north-sphere-1-loop))
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
     ( loop-𝕊¹)
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
 apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle =
   ( identification-right-whisk
     ( ap-concat
@@ -500,10 +509,10 @@ apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle =
 
 circle-sphere-1-circle-loop-𝕊¹ :
   coherence-square-identifications
+    ( circle-sphere-1-circle-base-𝕊¹)
     ( ap circle-sphere-1 (ap sphere-1-circle loop-𝕊¹))
-    ( circle-sphere-1-circle-base-𝕊¹)
-    ( circle-sphere-1-circle-base-𝕊¹)
     ( loop-𝕊¹)
+    ( circle-sphere-1-circle-base-𝕊¹)
 circle-sphere-1-circle-loop-𝕊¹ =
   ( inv
     ( assoc

@@ -17,6 +17,7 @@ open import foundation.universe-levels
 open import group-theory.commutators-of-elements-groups
 open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-families-of-elements-groups
@@ -97,6 +98,14 @@ module _
   is-closed-under-inverses-commutator-subgroup-Group =
     is-closed-under-inverses-subgroup-family-of-elements-Group G
       family-of-commutators-Group
+
+  contains-commutator-commutator-subgroup-Group :
+    (x y : type-Group G) →
+    is-in-commutator-subgroup-Group (commutator-Group G x y)
+  contains-commutator-commutator-subgroup-Group x y =
+    contains-element-subgroup-family-of-elements-Group G
+      ( family-of-commutators-Group)
+      ( x , y)
 
   is-subgroup-generated-by-family-of-commutators-commutator-subgroup-Group :
     is-subgroup-generated-by-family-of-elements-Group G

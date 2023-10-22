@@ -8,6 +8,7 @@ module category-theory.function-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.dependent-products-of-categories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories
@@ -72,10 +73,11 @@ module _
   associative-comp-hom-function-Category =
     associative-comp-hom-Category function-Category
 
-  associative-composition-structure-function-Category :
-    associative-composition-structure-Set hom-set-function-Category
-  associative-composition-structure-function-Category =
-    associative-composition-structure-Category function-Category
+  associative-composition-operation-function-Category :
+    associative-composition-operation-binary-family-Set
+      hom-set-function-Category
+  associative-composition-operation-function-Category =
+    associative-composition-operation-Category function-Category
 
   id-hom-function-Category :
     {x : obj-function-Category} → hom-function-Category x x
@@ -95,11 +97,11 @@ module _
     right-unit-law-comp-hom-Category function-Category
 
   is-unital-function-Category :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-function-Category
-      associative-composition-structure-function-Category
+      comp-hom-function-Category
   is-unital-function-Category =
-    is-unital-composition-structure-Category function-Category
+    is-unital-composition-operation-Category function-Category
 
   extensionality-obj-function-Category :
     (x y : obj-Category function-Category) →

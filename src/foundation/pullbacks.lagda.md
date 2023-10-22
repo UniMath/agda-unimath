@@ -33,6 +33,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -366,40 +367,39 @@ abstract
             ( (f ·l K) ∙h refl-htpy ∙h H'))))
 
 abstract
-  is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy :
+  is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) →
     (c : cone f g C) →
-    is-contr
-      ( Σ (cone f g C) (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c))
-  is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy {C = C} f g c =
+    is-torsorial (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c)
+  is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy {C = C} f g c =
     is-contr-is-equiv'
       ( Σ (cone f g C) (htpy-cone f g c))
       ( tot (htpy-parallel-cone-refl-htpy-htpy-cone f g c))
       ( is-equiv-tot-is-fiberwise-equiv
         ( is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone f g c))
-      ( is-contr-total-htpy-cone f g c)
+      ( is-torsorial-htpy-cone f g c)
 
 abstract
-  is-contr-total-htpy-parallel-cone-refl-htpy :
+  is-torsorial-htpy-parallel-cone-refl-htpy :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
-    is-contr (Σ (cone f g' C) (htpy-parallel-cone (refl-htpy' f) Hg c))
-  is-contr-total-htpy-parallel-cone-refl-htpy {C = C} f {g} =
+    is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg c)
+  is-torsorial-htpy-parallel-cone-refl-htpy {C = C} f {g} =
     ind-htpy g
       ( λ g'' Hg' →
-        ( c : cone f g C) →
-        is-contr (Σ (cone f g'' C) (htpy-parallel-cone (refl-htpy' f) Hg' c)))
-      ( is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy f g)
+        (c : cone f g C) →
+        is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg' c))
+      ( is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy f g)
 
 abstract
-  is-contr-total-htpy-parallel-cone :
+  is-torsorial-htpy-parallel-cone :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
-    is-contr (Σ (cone f' g' C) (htpy-parallel-cone Hf Hg c))
-  is-contr-total-htpy-parallel-cone
+    is-torsorial (htpy-parallel-cone Hf Hg c)
+  is-torsorial-htpy-parallel-cone
     {A = A} {B} {X} {C} {f} {f'} Hf {g} {g'} Hg =
     ind-htpy
       { A = A}
@@ -407,7 +407,7 @@ abstract
       ( f)
       ( λ f'' Hf' → (g g' : B → X) (Hg : g ~ g') (c : cone f g C) →
         is-contr (Σ (cone f'' g' C) (htpy-parallel-cone Hf' Hg c)))
-      ( λ g g' Hg → is-contr-total-htpy-parallel-cone-refl-htpy f Hg)
+      ( λ g g' Hg → is-torsorial-htpy-parallel-cone-refl-htpy f Hg)
       Hf g g' Hg
 
 tr-tr-refl-htpy-cone :
@@ -564,7 +564,7 @@ abstract
               ( concat (tr-tr-refl-htpy-cone f g c) c')
               ( inv-htpy (comp-htpy-parallel-cone-eq f g c c'))
               ( fundamental-theorem-id
-                ( is-contr-total-htpy-parallel-cone
+                ( is-torsorial-htpy-parallel-cone
                   ( refl-htpy' f)
                   ( refl-htpy' g)
                   ( c))
@@ -1052,11 +1052,11 @@ is-pullback-cone-ap f g (p , q , H) is-pb-c c1 c2 =
           ( p , q , H)
           ( cone-ap' f g (p , q , H) c1))
         ( is-equiv-is-contr _
-          ( is-contr-total-path (q c1))
-          ( is-contr-total-path (f (p c1))))
+          ( is-torsorial-path (q c1))
+          ( is-torsorial-path (f (p c1))))
         ( is-equiv-is-contr _
-          ( is-contr-total-path c1)
-          ( is-contr-total-path (p c1))))
+          ( is-torsorial-path c1)
+          ( is-torsorial-path (p c1))))
       ( c2))
 ```
 

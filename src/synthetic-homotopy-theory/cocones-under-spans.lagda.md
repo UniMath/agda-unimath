@@ -23,14 +23,17 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
 
 ## Idea
 
-A cocone under a span `A <-f- S -g-> B` with vertex `X` consists of two maps
-`i : A → X` and `j : B → X` equipped with a homotopy witnessing that the square
+A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
+`X` consists of two maps `i : A → X` and `j : B → X` equipped with a
+[homotopy](foundation.homotopies.md) witnessing that the square
 
 ```text
       g
@@ -42,7 +45,7 @@ A cocone under a span `A <-f- S -g-> B` with vertex `X` consists of two maps
       i
 ```
 
-commutes.
+[commutes](foundation.commuting-squares-of-maps.md).
 
 ## Definitions
 
@@ -123,21 +126,21 @@ module _
     (c c' : cocone f g X) → c ＝ c' → htpy-cocone c c'
   htpy-eq-cocone c .c refl = reflexive-htpy-cocone c
 
-  is-contr-total-htpy-cocone :
-    (c : cocone f g X) → is-contr (Σ (cocone f g X) (htpy-cocone c))
-  is-contr-total-htpy-cocone c =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-cocone :
+    (c : cocone f g X) → is-torsorial (htpy-cocone c)
+  is-torsorial-htpy-cocone c =
+    is-torsorial-Eq-structure
       ( λ i' jH' K →
         Σ ( vertical-map-cocone f g c ~ (pr1 jH'))
           ( statement-coherence-htpy-cocone c (i' , jH') K))
-      ( is-contr-total-htpy (horizontal-map-cocone f g c))
+      ( is-torsorial-htpy (horizontal-map-cocone f g c))
       ( horizontal-map-cocone f g c , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ j' H' →
           statement-coherence-htpy-cocone c
             ( horizontal-map-cocone f g c , j' , H')
             ( refl-htpy))
-        ( is-contr-total-htpy (vertical-map-cocone f g c))
+        ( is-torsorial-htpy (vertical-map-cocone f g c))
         ( vertical-map-cocone f g c , refl-htpy)
         ( is-contr-is-equiv'
           ( Σ ( ( horizontal-map-cocone f g c ∘ f) ~
@@ -145,13 +148,13 @@ module _
               ( λ H' → coherence-square-cocone f g c ~ H'))
           ( tot (λ H' M → right-unit-htpy ∙h M))
           ( is-equiv-tot-is-fiberwise-equiv (λ H' → is-equiv-concat-htpy _ _))
-          ( is-contr-total-htpy (coherence-square-cocone f g c))))
+          ( is-torsorial-htpy (coherence-square-cocone f g c))))
 
   is-equiv-htpy-eq-cocone :
     (c c' : cocone f g X) → is-equiv (htpy-eq-cocone c c')
   is-equiv-htpy-eq-cocone c =
     fundamental-theorem-id
-      ( is-contr-total-htpy-cocone c)
+      ( is-torsorial-htpy-cocone c)
       ( htpy-eq-cocone c)
 
   extensionality-cocone :

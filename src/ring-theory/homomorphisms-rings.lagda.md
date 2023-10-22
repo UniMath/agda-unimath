@@ -17,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
@@ -306,11 +307,11 @@ module _
     (g : hom-Ring R S) → (f ＝ g) → htpy-hom-Ring R S f g
   htpy-eq-hom-Ring .f refl = refl-htpy-hom-Ring R S f
 
-  is-contr-total-htpy-hom-Ring :
-    is-contr (Σ (hom-Ring R S) (htpy-hom-Ring R S f))
-  is-contr-total-htpy-hom-Ring =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy-hom-Ab
+  is-torsorial-htpy-hom-Ring :
+    is-torsorial (htpy-hom-Ring R S f)
+  is-torsorial-htpy-hom-Ring =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy-hom-Ab
         ( ab-Ring R)
         ( ab-Ring S)
         ( hom-ab-hom-Ring R S f))
@@ -323,7 +324,7 @@ module _
     (g : hom-Ring R S) → is-equiv (htpy-eq-hom-Ring g)
   is-equiv-htpy-eq-hom-Ring =
     fundamental-theorem-id
-      is-contr-total-htpy-hom-Ring
+      is-torsorial-htpy-hom-Ring
       htpy-eq-hom-Ring
 
   extensionality-hom-Ring :

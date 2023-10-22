@@ -26,6 +26,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -387,17 +388,17 @@ module _
   is-isolated-root-unique-direct-successor-Directed-Graph H x =
     map-coprod id (is-empty-left-summand-is-contr-coprod (H x)) (center (H x))
 
-  is-contr-walk-from-root-unique-direct-successor-Directed-Graph :
+  is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph :
     unique-direct-successor-Directed-Graph →
-    is-contr (Σ (vertex-Directed-Graph G) (λ y → walk-Directed-Graph G r y))
-  pr1 (is-contr-walk-from-root-unique-direct-successor-Directed-Graph H) =
+    is-torsorial (walk-Directed-Graph G r)
+  pr1 (is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H) =
     ( r , refl-walk-Directed-Graph)
   pr2
-    ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+    ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H)
     ( y , refl-walk-Directed-Graph) =
     refl
   pr2
-    ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+    ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H)
     ( y , cons-walk-Directed-Graph e w) =
     ex-falso
       ( no-direct-successor-root-unique-direct-successor-Directed-Graph H
@@ -446,7 +447,8 @@ module _
     ( pr2
       ( pair-eq-Σ
         ( eq-is-contr
-          ( is-contr-walk-from-root-unique-direct-successor-Directed-Graph H)
+          ( is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph
+            H)
           { (r , refl-walk-Directed-Graph)}
           { (r , w)})))
   is-proof-irrelevant-walk-unique-direct-successor-Directed-Graph H x

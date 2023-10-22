@@ -71,7 +71,7 @@ subtype-standard-singleton-subtype X x y = Id-Prop X x y
 standard-singleton-subtype :
   {l : Level} (X : Set l) → type-Set X → singleton-subtype l (type-Set X)
 pr1 (standard-singleton-subtype X x) = subtype-standard-singleton-subtype X x
-pr2 (standard-singleton-subtype X x) = is-contr-total-path x
+pr2 (standard-singleton-subtype X x) = is-torsorial-path x
 
 inhabited-subtype-standard-singleton-subtype :
   {l : Level} (X : Set l) → type-Set X → inhabited-subtype l (type-Set X)
