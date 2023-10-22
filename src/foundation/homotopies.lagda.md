@@ -213,6 +213,14 @@ module _
     map-compute-dependent-identification-eq-value f g p q r
   pr2 (compute-dependent-identification-eq-value p q r) =
     is-equiv-map-compute-dependent-identification-eq-value p q r
+
+  inv-map-compute-dependent-identification-eq-value :
+    {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+    (tr (eq-value f g) p q ＝ r) →
+    (((apd f p) ∙ r) ＝ ((ap (tr B p) q) ∙ (apd g p)))
+  inv-map-compute-dependent-identification-eq-value p q r =
+    map-inv-equiv
+      ( compute-dependent-identification-eq-value p q r)
 ```
 
 ### Computing dependent-identifications in the type family `eq-value` of ordinary functions
@@ -239,6 +247,13 @@ module _
     map-compute-dependent-identification-eq-value-function f g p q q'
   pr2 (compute-dependent-identification-eq-value-function p q q') =
     is-equiv-map-compute-dependent-identification-eq-value-function p q q'
+
+  inv-map-compute-dependent-identification-eq-value-function :
+    {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
+    ((tr (eq-value f g) p q) ＝ q') → (((ap f p) ∙ q') ＝ (q ∙ (ap g p)))
+  inv-map-compute-dependent-identification-eq-value-function p q q' =
+    map-inv-equiv
+      ( compute-dependent-identification-eq-value-function p q q')
 ```
 
 ### Relation between between `compute-dependent-identification-eq-value-function` and `nat-htpy`
