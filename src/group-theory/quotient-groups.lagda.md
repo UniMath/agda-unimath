@@ -265,15 +265,15 @@ module _
           ( ap
             ( mul-quotient-Group' (map-quotient-hom-Group z))
             ( compute-mul-quotient-Group x y)) ∙
-          ( ( compute-mul-quotient-Group (mul-Group G x y) z) ∙
-            ( ( ap
-                ( map-quotient-hom-Group)
-                ( associative-mul-Group G x y z)) ∙
-              ( ( inv
-                  ( compute-mul-quotient-Group x (mul-Group G y z))) ∙
-                ( ap
-                  ( mul-quotient-Group (map-quotient-hom-Group x))
-                  ( inv (compute-mul-quotient-Group y z)))))))
+          ( compute-mul-quotient-Group (mul-Group G x y) z) ∙
+          ( ap
+            ( map-quotient-hom-Group)
+            ( associative-mul-Group G x y z)) ∙
+          ( inv
+            ( compute-mul-quotient-Group x (mul-Group G y z))) ∙
+          ( ap
+            ( mul-quotient-Group (map-quotient-hom-Group x))
+            ( inv (compute-mul-quotient-Group y z))))
 
   abstract
     left-inverse-law-mul-quotient-Group :
@@ -292,9 +292,10 @@ module _
           ( ap
             ( mul-quotient-Group' (map-quotient-hom-Group x))
             ( compute-inv-quotient-Group x)) ∙
-          ( ( compute-mul-quotient-Group (inv-Group G x) x) ∙
-            ( ap map-quotient-hom-Group
-              ( left-inverse-law-mul-Group G x))))
+          ( compute-mul-quotient-Group (inv-Group G x) x) ∙
+          ( ap
+            ( map-quotient-hom-Group)
+            ( left-inverse-law-mul-Group G x)))
 
   abstract
     right-inverse-law-mul-quotient-Group :
@@ -313,9 +314,10 @@ module _
           ( ap
             ( mul-quotient-Group (map-quotient-hom-Group x))
             ( compute-inv-quotient-Group x)) ∙
-          ( ( compute-mul-quotient-Group x (inv-Group G x)) ∙
-            ( ap map-quotient-hom-Group
-              ( right-inverse-law-mul-Group G x))))
+          ( compute-mul-quotient-Group x (inv-Group G x)) ∙
+          ( ap
+            ( map-quotient-hom-Group)
+            ( right-inverse-law-mul-Group G x)))
 
   semigroup-quotient-Group : Semigroup (l1 ⊔ l2)
   pr1 semigroup-quotient-Group = set-quotient-Group

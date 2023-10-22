@@ -143,16 +143,6 @@ module _
   pr2 commutator-normal-subgroup-Group = is-normal-commutator-subgroup-Group
 ```
 
-## Properties
-
-### Every group homomorphism `f : G → H` maps `[G,G]` to `[H,H]`
-
-```agda
-module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
-  where
-```
-
 ## External links
 
 - [Commutator subgroup](https://ncatlab.org/nlab/show/commutator%20subgroup) at
