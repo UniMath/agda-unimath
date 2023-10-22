@@ -320,10 +320,27 @@ module _
        ( fiber (codiagonal-map f) b))
      ( suspension-cocone-fiber)
 
-  universal-property-suspension-fiber :
+  is-suspension-fiber :
     {l : Level} →
     is-suspension l (fiber f b) (fiber (codiagonal-map f) b)
-  universal-property-suspension-fiber =
+  is-suspension-fiber =
     suspension-structure-fiber ,
     pushout-5
+
+  {-
+  universal-property-suspension-fiber' :
+    {l : Level} →
+    universal-property-suspension' l
+      ( fiber f b)
+      ( fiber (codiagonal-map f) b)
+      ( suspension-structure-fiber)
+  universal-property-suspension-fiber' = pushout-5 -}
+
+  universal-property-suspension-fiber :
+    {l : Level} →
+    universal-property-pushout l
+      ( terminal-map)
+      ( terminal-map)
+      ( suspension-cocone-fiber)
+  universal-property-suspension-fiber {l} = pushout-5
 ```
