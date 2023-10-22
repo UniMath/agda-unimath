@@ -37,7 +37,7 @@ open import group-theory.quotient-groups
 
 ## Idea
 
-Consider a [group homomoprhism](group-theory.homomorphisms-groups.md)
+Consider a [group homomorphism](group-theory.homomorphisms-groups.md)
 `f : G → A` from a [group](group-theory.groups.md) `G` into an
 [abelian group](group-theory.abelian-groups.md) `A`. We say that `f` **is an
 abelianization** of `G` if the precomposition function
@@ -228,5 +228,3 @@ is-adjoint-pair-Adjunction-Large-Precategory abelianization-adjunction-Group =
 - [Abelianization](https://mathworld.wolfram.com/Abelianization.html) at Wolfram
   Mathworld
 - [Commutator subgroup](https://www.wikidata.org/entity/Q522216) at Wikidata
-
-<content id="https://www.wikidata.org/entity/Q522216" />
