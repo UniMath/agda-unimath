@@ -221,7 +221,7 @@ of the form (x, b) and (a, y).
 ```agda
 module _
   {l1 l2 : Level}
-  {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
   glue-smash-prod-Pointed-Type :
@@ -326,29 +326,43 @@ module _
 ### The universal property of the smash product
 
 ```agda
-{-eval-smash-prod-Pointed-Type :
+map-universal-property-smash-prod-Pointed-Type :
+  {l1 l2 l3 : Level}
+  (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3) →
+  ((A ∧∗ B) →∗ C) → (type-Pointed-Type A) → (B →∗ C)
+pr1 (map-universal-property-smash-prod-Pointed-Type A B C f x) y =
+  map-pointed-map f (map-smash-prod-prod-Pointed-Type A B (x , y))
+pr2 (map-universal-property-smash-prod-Pointed-Type A B C f x) =
+  ( ap
+    ( map-pointed-map f)
+    ( glue-smash-prod-Pointed-Type A B x (point-Pointed-Type B))) ∙
+  ( preserves-point-pointed-map f)
+
+universal-property-smash-prod-Pointed-Type :
   {l1 l2 l3 : Level}
   (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3) →
   ((A ∧∗ B) →∗ C) → (A →∗ (pointed-map-Pointed-Type B C))
-pr1 (pr1 (eval-smash-prod-Pointed-Type A B C f) x) y =
-  map f
-    ( map
-      ( pointed-map-smash-prod-prod-Pointed-Type A B) (x , y))
-pr2 (pr1 (eval-smash-prod-Pointed-Type A B C f) x) =
-  ( ap
-    ( map f)
-    ( glue-smash-prod-Pointed-Type x (point-Pointed-Type B))) ∙
-  ( preserves-point-pointed-map f)
-pr2 (eval-smash-prod-Pointed-Type A B C f) =
-  eq-pair-Σ
-    ( eq-htpy
-      ( λ y →
+pr1 (universal-property-smash-prod-Pointed-Type A B C f) =
+  map-universal-property-smash-prod-Pointed-Type A B C f
+pr2 (universal-property-smash-prod-Pointed-Type A B C f) =
+  eq-htpy-pointed-Π
+    ( map-universal-property-smash-prod-Pointed-Type A B C
+      ( f)
+      ( point-Pointed-Type A))
+    ( constant-pointed-map B C)
+    ( ( λ y →
         ( ap
-          ( map f)
+          ( map-pointed-map f)
           ( inv
-            ( glue-smash-prod-Pointed-Type (point-Pointed-Type A) y))) ∙
-        ( preserves-point-pointed-map f)))
-    {!!}-}
+            ( glue-smash-prod-Pointed-Type A B (point-Pointed-Type A) y)) ∙
+        ( preserves-point-pointed-map f))) ,
+      ( ( identification-right-whisk
+          ( ap²
+            ( map-pointed-map f)
+            ( ( ap inv (coh-glue-smash-prod-Pointed-Type A B) ∙
+              ( inv (coh-glue-smash-prod-Pointed-Type A B)))))
+          ( preserves-point-pointed-map f)) ∙
+        ( inv right-unit)))
 ```
 
 ## See also
