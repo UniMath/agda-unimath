@@ -24,7 +24,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Cavallo's trick is a way of upgrading an unpointed
+**Cavallo's trick** is a way of upgrading an unpointed
 [homotopy](foundation.homotopies.md) between
 [pointed maps](structured-types.pointed-maps.md) to a
 [pointed homotopy](structured-types.pointed-homotopies.md).
