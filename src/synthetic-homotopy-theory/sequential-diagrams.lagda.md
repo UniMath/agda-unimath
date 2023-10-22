@@ -20,7 +20,19 @@ open import foundation.universe-levels
 
 A **sequential diagram** `(A, a)` is a [sequence](foundation.sequences.md) of
 types `A : ℕ → 𝓤` over the natural numbers, equipped with a family of maps
-`aₙ : A n → A (n + 1)` for all `n`.
+`aₙ : Aₙ → Aₙ₊₁` for all `n`.
+
+They can be represented by diagrams
+
+```text
+     a₀      a₁      a₂
+ A₀ ---> A₁ ---> A₂ ---> ⋯
+```
+
+extending infinitely to the right.
+
+Sequential diagrams are dual to [towers](foundation.towers.md), and are also
+sometimes called **cotowers**.
 
 ## Definition
 
