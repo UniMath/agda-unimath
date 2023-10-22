@@ -24,6 +24,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -72,23 +73,22 @@ equiv-eq-tower :
   {l : Level} (A B : tower l) → A ＝ B → equiv-tower A B
 equiv-eq-tower A .A refl = id-equiv-tower A
 
-is-contr-total-equiv-tower :
-  {l : Level} (A : tower l) →
-  is-contr (Σ (tower l) (equiv-tower A))
-is-contr-total-equiv-tower A =
-  is-contr-total-Eq-structure _
-    ( is-contr-total-Eq-Π
+is-torsorial-equiv-tower :
+  {l : Level} (A : tower l) → is-torsorial (equiv-tower A)
+is-torsorial-equiv-tower A =
+  is-torsorial-Eq-structure _
+    ( is-torsorial-Eq-Π
       ( λ n → type-tower A n ≃_)
-      ( λ n → is-contr-total-equiv (type-tower A n)))
+      ( λ n → is-torsorial-equiv (type-tower A n)))
     ( type-tower A , λ n → id-equiv)
-    ( is-contr-total-Eq-Π _
-      ( λ n → is-contr-total-htpy (map-tower A n)))
+    ( is-torsorial-Eq-Π _
+      ( λ n → is-torsorial-htpy (map-tower A n)))
 
 is-equiv-equiv-eq-tower :
   {l : Level} (A B : tower l) → is-equiv (equiv-eq-tower A B)
 is-equiv-equiv-eq-tower A =
   fundamental-theorem-id
-    ( is-contr-total-equiv-tower A)
+    ( is-torsorial-equiv-tower A)
     ( equiv-eq-tower A)
 
 eq-equiv-tower :

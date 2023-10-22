@@ -19,6 +19,7 @@ open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 ```
 
@@ -29,12 +30,12 @@ open import foundation-core.truncation-levels
 ### The subuniverse of truncated types is itself truncated
 
 ```agda
-is-contr-total-equiv-Truncated-Type :
+is-torsorial-equiv-Truncated-Type :
   {l : Level} {k : 𝕋} (A : Truncated-Type l k) →
-  is-contr (Σ (Truncated-Type l k) (type-equiv-Truncated-Type A))
-is-contr-total-equiv-Truncated-Type A =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-equiv (type-Truncated-Type A))
+  is-torsorial (type-equiv-Truncated-Type A)
+is-torsorial-equiv-Truncated-Type A =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-equiv (type-Truncated-Type A))
     ( is-prop-is-trunc _)
     ( type-Truncated-Type A)
     ( id-equiv)

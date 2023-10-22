@@ -17,6 +17,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-monoids
@@ -175,14 +176,12 @@ refl-relate-same-elements-congruence-Semiring R S =
   refl-relate-same-elements-Equivalence-Relation
     ( eq-rel-congruence-Semiring R S)
 
-is-contr-total-relate-same-elements-congruence-Semiring :
+is-torsorial-relate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S : congruence-Semiring l2 R) →
-  is-contr
-    ( Σ ( congruence-Semiring l2 R)
-        ( relate-same-elements-congruence-Semiring R S))
-is-contr-total-relate-same-elements-congruence-Semiring R S =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-relate-same-elements-congruence-Monoid
+  is-torsorial (relate-same-elements-congruence-Semiring R S)
+is-torsorial-relate-same-elements-congruence-Semiring R S =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-relate-same-elements-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring R S))
     ( is-prop-is-congruence-Semiring R)
@@ -201,7 +200,7 @@ is-equiv-relate-same-elements-eq-congruence-Semiring :
   is-equiv (relate-same-elements-eq-congruence-Semiring R S T)
 is-equiv-relate-same-elements-eq-congruence-Semiring R S =
     fundamental-theorem-id
-      ( is-contr-total-relate-same-elements-congruence-Semiring R S)
+      ( is-torsorial-relate-same-elements-congruence-Semiring R S)
       ( relate-same-elements-eq-congruence-Semiring R S)
 
 extensionality-congruence-Semiring :

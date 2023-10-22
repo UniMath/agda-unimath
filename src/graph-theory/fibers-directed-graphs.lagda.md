@@ -200,7 +200,7 @@ module _
     direct-predecessor-Directed-Graph G
       ( node-inclusion-fiber-Directed-Graph G x y)
   compute-direct-predecessor-fiber-Directed-Graph y =
-    ( right-unit-law-Σ-is-contr (λ (u , e) → is-contr-total-path' _)) ∘e
+    ( right-unit-law-Σ-is-contr (λ (u , e) → is-torsorial-path' _)) ∘e
     ( interchange-Σ-Σ _)
 
   map-compute-direct-predecessor-fiber-Directed-Graph :

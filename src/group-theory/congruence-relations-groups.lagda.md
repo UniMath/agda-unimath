@@ -16,6 +16,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-semigroups
@@ -230,13 +231,11 @@ refl-relate-same-elements-congruence-Group :
 refl-relate-same-elements-congruence-Group G =
   refl-relate-same-elements-congruence-Semigroup (semigroup-Group G)
 
-is-contr-total-relate-same-elements-congruence-Group :
+is-torsorial-relate-same-elements-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
-  is-contr
-    ( Σ ( congruence-Group l2 G)
-        ( relate-same-elements-congruence-Group G R))
-is-contr-total-relate-same-elements-congruence-Group G =
-  is-contr-total-relate-same-elements-congruence-Semigroup
+  is-torsorial (relate-same-elements-congruence-Group G R)
+is-torsorial-relate-same-elements-congruence-Group G =
+  is-torsorial-relate-same-elements-congruence-Semigroup
     ( semigroup-Group G)
 
 relate-same-elements-eq-congruence-Group :

@@ -29,6 +29,7 @@ open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -82,7 +83,7 @@ is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
 
 ```agda
 has-unique-proper-divisor-ℕ : ℕ → UU lzero
-has-unique-proper-divisor-ℕ n = is-contr (Σ ℕ (is-proper-divisor-ℕ n))
+has-unique-proper-divisor-ℕ n = is-torsorial (is-proper-divisor-ℕ n)
 ```
 
 ## Properties

@@ -91,7 +91,7 @@ module _
                         ( center (is-modal-B q))))) ∘e
               ( equiv-up-join A (type-Prop Q) B))
             ( λ _ → id-equiv))
-          ( is-contr-total-path' f))
+          ( is-torsorial-path' f))
 
   reflective-subuniverse-closed-modality :
     reflective-subuniverse (l ⊔ lQ) (l ⊔ lQ)

@@ -29,6 +29,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.small-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.whiskering-homotopies
@@ -135,20 +136,20 @@ module _
   htpy-eq-map-over : (m m' : map-over f g i) → m ＝ m' → htpy-map-over m m'
   htpy-eq-map-over m .m refl = refl-htpy-map-over m
 
-  is-contr-total-htpy-map-over :
-    (m : map-over f g i) → is-contr (Σ (map-over f g i) (htpy-map-over m))
-  is-contr-total-htpy-map-over m =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-map-over :
+    (m : map-over f g i) → is-torsorial (htpy-map-over m)
+  is-torsorial-htpy-map-over m =
+    is-torsorial-Eq-structure
       ( λ g G → coherence-htpy-map-over m (g , G))
-      ( is-contr-total-htpy (map-total-map-over f g i m))
+      ( is-torsorial-htpy (map-total-map-over f g i m))
       ( map-total-map-over f g i m , refl-htpy)
-      ( is-contr-total-htpy
+      ( is-torsorial-htpy
         ( is-map-over-map-total-map-over f g i m ∙h refl-htpy))
 
   is-equiv-htpy-eq-map-over :
     (m m' : map-over f g i) → is-equiv (htpy-eq-map-over m m')
   is-equiv-htpy-eq-map-over m =
-    fundamental-theorem-id (is-contr-total-htpy-map-over m) (htpy-eq-map-over m)
+    fundamental-theorem-id (is-torsorial-htpy-map-over m) (htpy-eq-map-over m)
 
   extensionality-map-over :
     (m m' : map-over f g i) → (m ＝ m') ≃ (htpy-map-over m m')
@@ -192,31 +193,31 @@ module _
     (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'
   htpy-eq-fibered-map m .m refl = refl-htpy-fibered-map m
 
-  is-contr-total-htpy-fibered-map :
-    (m : fibered-map f g) → is-contr (Σ (fibered-map f g) (htpy-fibered-map m))
-  is-contr-total-htpy-fibered-map m =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-fibered-map :
+    (m : fibered-map f g) → is-torsorial (htpy-fibered-map m)
+  is-torsorial-htpy-fibered-map m =
+    is-torsorial-Eq-structure
       ( λ i hH I →
           Σ ( map-total-fibered-map f g m ~ map-total-fibered-map f g (i , hH))
             ( coherence-htpy-fibered-map m (i , hH) I))
-      ( is-contr-total-htpy (map-base-fibered-map f g m))
+      ( is-torsorial-htpy (map-base-fibered-map f g m))
       ( map-base-fibered-map f g m , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ h H →
           coherence-htpy-fibered-map
             ( m)
             ( map-base-fibered-map f g m , h , H)
             ( refl-htpy))
-        ( is-contr-total-htpy (map-total-fibered-map f g m))
+        ( is-torsorial-htpy (map-total-fibered-map f g m))
         ( map-total-fibered-map f g m , refl-htpy)
-        ( is-contr-total-htpy
+        ( is-torsorial-htpy
           ( is-map-over-map-total-fibered-map f g m ∙h refl-htpy)))
 
   is-equiv-htpy-eq-fibered-map :
     (m m' : fibered-map f g) → is-equiv (htpy-eq-fibered-map m m')
   is-equiv-htpy-eq-fibered-map m =
     fundamental-theorem-id
-      ( is-contr-total-htpy-fibered-map m)
+      ( is-torsorial-htpy-fibered-map m)
       ( htpy-eq-fibered-map m)
 
   extensionality-fibered-map :

@@ -33,6 +33,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -320,13 +321,12 @@ module _
   htpy-eq-hom-Equivalence-Relation f .f refl =
     refl-htpy-hom-Equivalence-Relation f
 
-  is-contr-total-htpy-hom-Equivalence-Relation :
+  is-torsorial-htpy-hom-Equivalence-Relation :
     (f : hom-Equivalence-Relation R S) →
-    is-contr
-      ( Σ (hom-Equivalence-Relation R S) (htpy-hom-Equivalence-Relation f))
-  is-contr-total-htpy-hom-Equivalence-Relation f =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (map-hom-Equivalence-Relation R S f))
+    is-torsorial (htpy-hom-Equivalence-Relation f)
+  is-torsorial-htpy-hom-Equivalence-Relation f =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-hom-Equivalence-Relation R S f))
       ( is-prop-preserves-sim-Equivalence-Relation R S)
       ( map-hom-Equivalence-Relation R S f)
       ( refl-htpy-hom-Equivalence-Relation f)
@@ -337,7 +337,7 @@ module _
     is-equiv (htpy-eq-hom-Equivalence-Relation f g)
   is-equiv-htpy-eq-hom-Equivalence-Relation f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-Equivalence-Relation f)
+      ( is-torsorial-htpy-hom-Equivalence-Relation f)
       ( htpy-eq-hom-Equivalence-Relation f)
 
   extensionality-hom-Equivalence-Relation :

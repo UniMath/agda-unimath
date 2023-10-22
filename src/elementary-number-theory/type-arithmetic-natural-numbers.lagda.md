@@ -31,6 +31,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
@@ -45,6 +46,36 @@ open import univalent-combinatorics.standard-finite-types
 We prove arithmetical laws involving the natural numbers
 
 ## Laws
+
+### The natural numbers is a fixpoint to the functor `X ↦ 1 + X`
+
+```agda
+map-equiv-ℕ : ℕ → unit + ℕ
+map-equiv-ℕ zero-ℕ = inl star
+map-equiv-ℕ (succ-ℕ n) = inr n
+
+map-inv-equiv-ℕ : unit + ℕ → ℕ
+map-inv-equiv-ℕ (inl x) = zero-ℕ
+map-inv-equiv-ℕ (inr n) = succ-ℕ n
+
+is-retraction-map-inv-equiv-ℕ :
+  ( map-inv-equiv-ℕ ∘ map-equiv-ℕ) ~ id
+is-retraction-map-inv-equiv-ℕ zero-ℕ = refl
+is-retraction-map-inv-equiv-ℕ (succ-ℕ n) = refl
+
+is-section-map-inv-equiv-ℕ :
+  ( map-equiv-ℕ ∘ map-inv-equiv-ℕ) ~ id
+is-section-map-inv-equiv-ℕ (inl star) = refl
+is-section-map-inv-equiv-ℕ (inr n) = refl
+
+equiv-ℕ : ℕ ≃ (unit + ℕ)
+pr1 equiv-ℕ = map-equiv-ℕ
+pr2 equiv-ℕ =
+  is-equiv-is-invertible
+    map-inv-equiv-ℕ
+    is-section-map-inv-equiv-ℕ
+    is-retraction-map-inv-equiv-ℕ
+```
 
 ### The coproduct `ℕ + ℕ` is equivalent to `ℕ`
 

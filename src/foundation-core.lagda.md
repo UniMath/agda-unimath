@@ -22,7 +22,6 @@ open import foundation-core.embeddings public
 open import foundation-core.empty-types public
 open import foundation-core.endomorphisms public
 open import foundation-core.equality-dependent-pair-types public
-open import foundation-core.equivalence-induction public
 open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
 open import foundation-core.fibers-of-maps public
@@ -46,6 +45,7 @@ open import foundation-core.sets public
 open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
+open import foundation-core.torsorial-type-families public
 open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public
 open import foundation-core.truncated-types public

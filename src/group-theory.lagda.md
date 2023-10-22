@@ -25,12 +25,14 @@ open import group-theory.central-elements-groups public
 open import group-theory.central-elements-monoids public
 open import group-theory.central-elements-semigroups public
 open import group-theory.centralizer-subgroups public
+open import group-theory.characteristic-subgroups public
 open import group-theory.commutative-monoids public
 open import group-theory.commutator-subgroups public
 open import group-theory.commutators-of-elements-groups public
 open import group-theory.commuting-elements-groups public
 open import group-theory.commuting-elements-monoids public
 open import group-theory.commuting-elements-semigroups public
+open import group-theory.commuting-squares-of-group-homomorphisms public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.concrete-monoids public
@@ -72,6 +74,7 @@ open import group-theory.function-commutative-monoids public
 open import group-theory.function-groups public
 open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
+open import group-theory.functoriality-quotient-groups public
 open import group-theory.furstenberg-groups public
 open import group-theory.generating-elements-groups public
 open import group-theory.generating-sets-groups public
@@ -84,6 +87,7 @@ open import group-theory.homomorphisms-concrete-groups public
 open import group-theory.homomorphisms-generated-subgroups public
 open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
+open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.images-of-group-homomorphisms public
@@ -119,6 +123,7 @@ open import group-theory.normal-subgroups-concrete-groups public
 open import group-theory.normal-submonoids public
 open import group-theory.normal-submonoids-commutative-monoids public
 open import group-theory.normalizer-subgroups public
+open import group-theory.nullifying-group-homomorphisms public
 open import group-theory.opposite-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-concrete-group-actions public

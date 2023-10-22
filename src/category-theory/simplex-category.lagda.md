@@ -7,6 +7,7 @@ module category-theory.simplex-category where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.precategories
 
 open import elementary-number-theory.inequality-standard-finite-types
@@ -81,11 +82,11 @@ associative-comp-hom-simplex-Category {n} {m} {r} {s} =
     ( Fin-Poset (succ-ℕ r))
     ( Fin-Poset (succ-ℕ s))
 
-associative-composition-structure-simplex-Category :
-  associative-composition-structure-Set hom-set-simplex-Category
-pr1 associative-composition-structure-simplex-Category {n} {m} {r} =
+associative-composition-operation-simplex-Category :
+  associative-composition-operation-binary-family-Set hom-set-simplex-Category
+pr1 associative-composition-operation-simplex-Category {n} {m} {r} =
   comp-hom-simplex-Category {n} {m} {r}
-pr2 associative-composition-structure-simplex-Category {n} {m} {r} {s} =
+pr2 associative-composition-operation-simplex-Category {n} {m} {r} {s} =
   associative-comp-hom-simplex-Category {n} {m} {r} {s}
 
 id-hom-simplex-Category : (n : obj-simplex-Category) → hom-simplex-Category n n
@@ -103,23 +104,23 @@ right-unit-law-comp-hom-simplex-Category :
 right-unit-law-comp-hom-simplex-Category {n} {m} =
   right-unit-law-comp-hom-Poset (Fin-Poset (succ-ℕ n)) (Fin-Poset (succ-ℕ m))
 
-is-unital-composition-structure-simplex-Category :
-  is-unital-composition-structure-Set
+is-unital-composition-operation-simplex-Category :
+  is-unital-composition-operation-binary-family-Set
     ( hom-set-simplex-Category)
-    ( associative-composition-structure-simplex-Category)
-pr1 is-unital-composition-structure-simplex-Category = id-hom-simplex-Category
-pr1 (pr2 is-unital-composition-structure-simplex-Category) {n} {m} =
+    ( comp-hom-simplex-Category)
+pr1 is-unital-composition-operation-simplex-Category = id-hom-simplex-Category
+pr1 (pr2 is-unital-composition-operation-simplex-Category) {n} {m} =
   left-unit-law-comp-hom-simplex-Category {n} {m}
-pr2 (pr2 is-unital-composition-structure-simplex-Category) {n} {m} =
+pr2 (pr2 is-unital-composition-operation-simplex-Category) {n} {m} =
   right-unit-law-comp-hom-simplex-Category {n} {m}
 
 simplex-Precategory : Precategory lzero lzero
 pr1 simplex-Precategory = obj-simplex-Category
 pr1 (pr2 simplex-Precategory) = hom-set-simplex-Category
 pr1 (pr2 (pr2 simplex-Precategory)) =
-  associative-composition-structure-simplex-Category
+  associative-composition-operation-simplex-Category
 pr2 (pr2 (pr2 simplex-Precategory)) =
-  is-unital-composition-structure-simplex-Category
+  is-unital-composition-operation-simplex-Category
 ```
 
 ### The simplex category

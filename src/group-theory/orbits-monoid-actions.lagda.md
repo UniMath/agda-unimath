@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.monoid-actions
@@ -72,12 +73,12 @@ module _
   htpy-eq-hom-orbit-Monoid-Action f .f refl =
     refl-htpy-hom-orbit-Monoid-Action f
 
-  is-contr-total-htpy-hom-orbit-Monoid-Action :
+  is-torsorial-htpy-hom-orbit-Monoid-Action :
     {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    is-contr (Σ (hom-orbit-Monoid-Action x y) (htpy-hom-orbit-Monoid-Action f))
-  is-contr-total-htpy-hom-orbit-Monoid-Action {x} {y} f =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-path (element-hom-orbit-Monoid-Action f))
+    is-torsorial (htpy-hom-orbit-Monoid-Action f)
+  is-torsorial-htpy-hom-orbit-Monoid-Action {x} {y} f =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-path (element-hom-orbit-Monoid-Action f))
       ( λ u →
         is-set-type-Monoid-Action M X (mul-Monoid-Action M X u x) y)
       ( element-hom-orbit-Monoid-Action f)
@@ -89,7 +90,7 @@ module _
     is-equiv (htpy-eq-hom-orbit-Monoid-Action f g)
   is-equiv-htpy-eq-hom-orbit-Monoid-Action f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-orbit-Monoid-Action f)
+      ( is-torsorial-htpy-hom-orbit-Monoid-Action f)
       ( htpy-eq-hom-orbit-Monoid-Action f)
 
   extensionality-hom-orbit-Monoid-Action :

@@ -148,7 +148,7 @@ module _
   pr2 id-iso-Precategory = is-iso-id-hom-Precategory
 ```
 
-### Equalities give rise to isomorphisms
+### Equalities induce isomorphisms
 
 An equality between objects `x y : A` gives rise to an isomorphism between them.
 This is because, by the J-rule, it is enough to construct an isomorphism given
@@ -164,7 +164,8 @@ module _
   iso-eq-Precategory :
     (x y : obj-Precategory C) →
     x ＝ y → iso-Precategory C x y
-  iso-eq-Precategory x .x refl = id-iso-Precategory C
+  pr1 (iso-eq-Precategory x y p) = hom-eq-Precategory C x y p
+  pr2 (iso-eq-Precategory x .x refl) = is-iso-id-hom-Precategory C
 
   compute-hom-iso-eq-Precategory :
     {x y : obj-Precategory C} →
@@ -696,7 +697,7 @@ module _
     is-prop-iso-Precategory is-prop-hom-C-x-y
 ```
 
-### When `hom x y` and `hom y x` are propositions, it suffices to provide a homomorphism in each direction to construct an isomorphism
+### When `hom x y` and `hom y x` are propositions, it suffices to provide a morphism in each direction to construct an isomorphism
 
 ```agda
 module _

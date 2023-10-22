@@ -8,6 +8,7 @@ module category-theory.dependent-products-of-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.dependent-products-of-precategories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories
@@ -84,10 +85,10 @@ module _
   associative-comp-hom-Π-Category =
     associative-comp-hom-Category Π-Category
 
-  associative-composition-structure-Π-Category :
-    associative-composition-structure-Set hom-set-Π-Category
-  associative-composition-structure-Π-Category =
-    associative-composition-structure-Category Π-Category
+  associative-composition-operation-Π-Category :
+    associative-composition-operation-binary-family-Set hom-set-Π-Category
+  associative-composition-operation-Π-Category =
+    associative-composition-operation-Category Π-Category
 
   id-hom-Π-Category :
     {x : obj-Π-Category} → hom-Π-Category x x
@@ -107,10 +108,10 @@ module _
     right-unit-law-comp-hom-Category Π-Category
 
   is-unital-Π-Category :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-Π-Category
-      associative-composition-structure-Π-Category
-  is-unital-Π-Category = is-unital-composition-structure-Category Π-Category
+      comp-hom-Π-Category
+  is-unital-Π-Category = is-unital-composition-operation-Category Π-Category
 
   extensionality-obj-Π-Category :
     (x y : obj-Category Π-Category) → (x ＝ y) ≃ iso-Category Π-Category x y

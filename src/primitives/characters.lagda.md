@@ -23,7 +23,9 @@ manipulate them. Characters are written between single quotes, e.g. `'a'`.
 ## Definitions
 
 ```agda
-postulate Char : UU lzero
+postulate
+  Char : UU lzero
+
 {-# BUILTIN CHAR Char #-}
 
 primitive

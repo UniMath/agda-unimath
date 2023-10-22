@@ -24,6 +24,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -102,10 +103,10 @@ module _
     (Y : Infinite-Cyclic-Type l1) → Id X Y → equiv-Infinite-Cyclic-Type Y
   equiv-eq-Infinite-Cyclic-Type = equiv-eq-Cyclic-Type zero-ℕ X
 
-  is-contr-total-equiv-Infinite-Cyclic-Type :
-    is-contr (Σ (Infinite-Cyclic-Type l1) equiv-Infinite-Cyclic-Type)
-  is-contr-total-equiv-Infinite-Cyclic-Type =
-    is-contr-total-equiv-Cyclic-Type zero-ℕ X
+  is-torsorial-equiv-Infinite-Cyclic-Type :
+    is-torsorial equiv-Infinite-Cyclic-Type
+  is-torsorial-equiv-Infinite-Cyclic-Type =
+    is-torsorial-equiv-Cyclic-Type zero-ℕ X
 
   is-equiv-equiv-eq-Infinite-Cyclic-Type :
     (Y : Infinite-Cyclic-Type l1) → is-equiv (equiv-eq-Infinite-Cyclic-Type Y)

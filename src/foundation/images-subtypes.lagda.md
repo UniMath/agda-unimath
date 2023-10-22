@@ -28,7 +28,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  subtype-im-subtype :
+  im-subtype :
     {l3 : Level} → subtype l3 A → subtype (l1 ⊔ l2 ⊔ l3) B
-  subtype-im-subtype S y = subtype-im (f ∘ inclusion-subtype S) y
+  im-subtype S y = subtype-im (f ∘ inclusion-subtype S) y
 ```

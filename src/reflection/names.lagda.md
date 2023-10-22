@@ -29,7 +29,9 @@ name by means of the `quote` keyword, e.g. `quote bool`.
 ## Definition
 
 ```agda
-postulate Name : UU lzero
+postulate
+  Name : UU lzero
+
 {-# BUILTIN QNAME Name #-}
 
 primitive
