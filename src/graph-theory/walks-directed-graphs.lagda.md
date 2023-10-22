@@ -342,8 +342,8 @@ module _
     (n : ℕ) {x y : vertex-Directed-Graph G} →
     walk-of-length-Directed-Graph G n x y →
     walk-of-length-Directed-Graph H n
-    ( vertex-hom-Directed-Graph G H f x)
-    ( vertex-hom-Directed-Graph G H f y)
+      ( vertex-hom-Directed-Graph G H f x)
+      ( vertex-hom-Directed-Graph G H f y)
   walk-of-length-hom-Directed-Graph zero-ℕ {x} {y} (map-raise p) =
     map-raise (ap (vertex-hom-Directed-Graph G H f) p)
   walk-of-length-hom-Directed-Graph (succ-ℕ n) =
