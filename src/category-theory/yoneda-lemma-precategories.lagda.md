@@ -136,6 +136,19 @@ module _
     lemma-yoneda-Small-Large-Precategory
 ```
 
+### The yoneda embedding into the large category of sets
+
+#### Taking representable functors is a functor
+
+```agda
+module _
+  {l1 l2 l3 : Level} (C : Precategory l1 l2) (c : obj-Precategory C)
+  (F : functor-Small-Large-Precategory C Set-Large-Precategory l3)
+  where
+
+  map-yoneda-Small-Large-Precategory :
+```
+
 ## The yoneda lemma into the small category of sets
 
 ```agda

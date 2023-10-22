@@ -58,10 +58,10 @@ module _
       ( obj-map-Small-Large-Precategory C D F x)
       ( obj-map-Small-Large-Precategory C D G x)
 
-  coherence-square-hom-family-map-Small-Large-Precategory :
+  naturality-hom-family-map-Small-Large-Precategory :
     hom-family-map-Small-Large-Precategory →
     {x y : obj-Precategory C} (f : hom-Precategory C x y) → UU (β γF γG)
-  coherence-square-hom-family-map-Small-Large-Precategory γ {x} {y} f =
+  naturality-hom-family-map-Small-Large-Precategory γ {x} {y} f =
     coherence-square-hom-Large-Precategory D
       ( hom-map-Small-Large-Precategory C D F f)
       ( γ x)
@@ -72,7 +72,7 @@ module _
     hom-family-map-Small-Large-Precategory → UU (l1 ⊔ l2 ⊔ β γF γG)
   is-natural-transformation-map-Small-Large-Precategory γ =
     {x y : obj-Precategory C} (f : hom-Precategory C x y) →
-    coherence-square-hom-family-map-Small-Large-Precategory γ f
+    naturality-hom-family-map-Small-Large-Precategory γ f
 
   natural-transformation-map-Small-Large-Precategory : UU (l1 ⊔ l2 ⊔ β γF γG)
   natural-transformation-map-Small-Large-Precategory =

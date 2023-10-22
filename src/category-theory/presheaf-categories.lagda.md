@@ -7,6 +7,7 @@ module category-theory.presheaf-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.category-of-functors-from-small-to-large-categories
 open import category-theory.large-categories
 open import category-theory.large-precategories
@@ -63,6 +64,16 @@ module _
         ( C)
         ( Set-Large-Precategory)
         ( is-large-category-Set-Large-Precategory)
+
+  copresheaf-precategory-Large-Precategory :
+    (l : Level) → Precategory (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
+  copresheaf-precategory-Large-Precategory =
+    precategory-Large-Precategory copresheaf-Large-Precategory
+
+  copresheaf-category-Large-Category :
+    (l : Level) → Category (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
+  copresheaf-category-Large-Category =
+    category-Large-Category copresheaf-Large-Category
 ```
 
 ### The presheaf category of a precategory
@@ -81,4 +92,14 @@ module _
     Large-Category (λ l → l1 ⊔ l2 ⊔ lsuc l) (λ l l' → l1 ⊔ l2 ⊔ l ⊔ l')
   presheaf-Large-Category =
     copresheaf-Large-Category (opposite-Precategory C)
+
+  presheaf-precategory-Large-Precategory :
+    (l : Level) → Precategory (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
+  presheaf-precategory-Large-Precategory =
+    precategory-Large-Precategory presheaf-Large-Precategory
+
+  presheaf-category-Large-Category :
+    (l : Level) → Category (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
+  presheaf-category-Large-Category =
+    category-Large-Category presheaf-Large-Category
 ```
