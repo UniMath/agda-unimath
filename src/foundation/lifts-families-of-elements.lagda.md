@@ -13,6 +13,7 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.transport-along-homotopies
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
@@ -169,7 +170,7 @@ again constructed by homotopy induction.
 ```agda
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
-  {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  {f g : A → B} (H : f ~ g) → UU ?
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
   (h : B → X) →
   ( triangle-precompose-lifts P H h) ~

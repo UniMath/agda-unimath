@@ -13,9 +13,10 @@ open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
-open import foundation-core.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+
+open import foundation-core.transport-along-identifications
 ```
 
 </details>

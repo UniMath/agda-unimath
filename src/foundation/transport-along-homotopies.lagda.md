@@ -10,6 +10,8 @@ module foundation.transport-along-homotopies where
 open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
