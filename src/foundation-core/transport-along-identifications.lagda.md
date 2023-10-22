@@ -36,18 +36,6 @@ tr :
 tr B refl b = b
 ```
 
-### The action on identifications of transport
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-  (B : A → UU l2)
-  where
-
-  tr² : (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
-  tr² α b0 = ap (λ t → tr B t b0) α
-```
-
 ## Properties
 
 ### Transport preserves concatenation of identifications
@@ -114,4 +102,22 @@ module _
   compute-map-out-of-identity-type :
     (x : A) (p : a ＝ x) → f x p ＝ tr B p (f a refl)
   compute-map-out-of-identity-type x refl = refl
+```
+
+### Computing transport in the type family of identifications with a fixed target
+
+```agda
+tr-Id-left :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
+```
+
+### Computing transport in the type family of identifications with a fixed source
+
+```agda
+tr-Id-right :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
+tr-Id-right refl refl = refl
 ```

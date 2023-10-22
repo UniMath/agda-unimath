@@ -14,6 +14,7 @@ open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.path-algebra
+open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -34,20 +35,6 @@ element `b : B x`, we can
 
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
 recorded in this file.
-
-## Definitions
-
-### The action on identifications of transport
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {x y : A} {p p' : x ＝ y}
-  {α α' : p ＝ p'}
-  where
-
-  tr³ : (B : A → UU l2) (β : α ＝ α') (b : B x) → (tr² B α b) ＝ (tr² B α' b)
-  tr³ B β b = ap (λ t → tr² B t b) β
-```
 
 ## Properties
 
@@ -96,108 +83,6 @@ substitution-law-tr :
   {x y : X} (p : x ＝ y) {x' : B (f x)} →
   tr B (ap f p) x' ＝ tr (B ∘ f) p x'
 substitution-law-tr B f refl = refl
-```
-
-### Computing transport in the type family of identifications with a fixed target
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {x y : A}
-  {B : A → UU l2}
-  where
-
-  tr²-concat :
-    {p p' p'' : x ＝ y} (α : p ＝ p') (α' : p' ＝ p'') (b : B x) →
-    (tr² B (α ∙ α') b) ＝ (tr² B α b ∙ tr² B α' b)
-  tr²-concat α α' b = ap-concat (λ t → tr B t b) α α'
-
-module _
-  {l1 l2 : Level} {A : UU l1} {x y z : A}
-  {B : A → UU l2}
-  where
-
-  tr²-left-whisk :
-    (p : x ＝ y) {q q' : y ＝ z} (β : q ＝ q') (b : B x) →
-    coherence-square-identifications
-      ( tr-concat p q b)
-      ( tr² B (identification-left-whisk p β) b)
-      ( htpy-right-whisk (tr² B β) (tr B p) b)
-      ( tr-concat p q' b)
-  tr²-left-whisk refl refl b = refl
-
-  tr²-right-whisk :
-    {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) (b : B x) →
-    coherence-square-identifications
-      ( tr-concat p q b)
-      ( tr² B (identification-right-whisk α q) b)
-      ( htpy-left-whisk (tr B q) (tr² B α) b)
-      ( tr-concat p' q b)
-  tr²-right-whisk refl refl b = inv right-unit
-
-tr-Id-left :
-  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
-  tr (_＝ a) q p ＝ ((inv q) ∙ p)
-tr-Id-left refl p = refl
-```
-
-### Computing transport in the type family of identifications with a fixed source
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {x y z : A}
-  {B : A → UU l2}
-  where
-
-  tr³-htpy-swap-path-swap :
-    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
-    coherence-square-identifications
-      ( ( identification-right-whisk
-          ( tr²-concat
-            ( identification-left-whisk p β)
-            ( identification-right-whisk α q')
-            ( b))
-          ( tr-concat p' q' b)) ∙
-        ( vertical-concat-square
-          ( tr² B (identification-left-whisk p β) b)
-          ( tr² B (identification-right-whisk α q') b)
-          ( tr-concat p' q' b)
-          ( tr-concat p q' b)
-          ( tr-concat p q b)
-          ( htpy-right-whisk (tr² B β) (tr B p) b)
-          ( htpy-left-whisk (tr B q') (tr² B α) b)
-          ( tr²-left-whisk p β b)
-          ( tr²-right-whisk α q' b)))
-      ( identification-right-whisk
-        ( tr³
-          ( B)
-          ( path-swap-nat-identification-left-whisk β α)
-          ( b))
-        ( tr-concat p' q' b))
-      ( identification-left-whisk
-        ( tr-concat p q b)
-        ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
-      ( ( identification-right-whisk
-          ( tr²-concat
-            ( identification-right-whisk α q)
-            ( identification-left-whisk p' β)
-            ( b))
-          ( tr-concat p' q' b)) ∙
-        ( vertical-concat-square
-          ( tr² B (identification-right-whisk α q) b)
-          ( tr² B (identification-left-whisk p' β) b)
-          ( tr-concat p' q' b)
-          ( tr-concat p' q b)
-          ( tr-concat p q b)
-          ( htpy-left-whisk (tr B q) (tr² B α) b)
-          ( htpy-right-whisk (tr² B β) (tr B p') b)
-          ( tr²-right-whisk α q b)
-          ( tr²-left-whisk p' β b)))
-  tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
-
-tr-Id-right :
-  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
-  tr (a ＝_) q p ＝ (p ∙ q)
-tr-Id-right refl refl = refl
 ```
 
 ### Computing transport of loops
