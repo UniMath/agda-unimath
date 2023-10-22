@@ -36,7 +36,7 @@ pushout of `S` if and only if the square
   Y^A -----> Y^S
 ```
 
-is a [pullback square](foundation.pullbacks.md) for every type `Y`. Below, we
+is a [pullback square](foundation.pullback-squares.md) for every type `Y`. Below, we
 first define the cone of this
 [commuting square](foundation.commuting-squares-of-maps.md), and then we
 introduce the type `pullback-property-pushout`, which states that the above
