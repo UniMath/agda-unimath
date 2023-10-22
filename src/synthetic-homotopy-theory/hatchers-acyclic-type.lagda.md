@@ -38,8 +38,7 @@ open import synthetic-homotopy-theory.powers-of-loops
 
 ## Idea
 
-**Hatcher's** example of an
-[acyclic type](synthetic-homotopy-theory.acyclic-types.md) is a higher inductive
+**Hatcher's [acyclic type](synthetic-homotopy-theory.acyclic-types.md)** is a higher inductive
 type equipped with a base point and two
 [loops](synthetic-homotopy-theory.loop-spaces.md) `a` and `b`, and
 [identifications](foundation.identity-types.md) witnessing that `a⁵ ＝ b³` and
