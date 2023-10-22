@@ -9,7 +9,9 @@ module category-theory.yoneda-lemma-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-categories
+open import category-theory.functors-from-small-to-large-precategories
 open import category-theory.natural-transformations-functors-categories
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories
 open import category-theory.representable-functors-categories
 open import category-theory.yoneda-lemma-precategories
 
@@ -40,7 +42,77 @@ natural transformations to the type `F c` defined by evaluating the component of
 the natural transformation at the object `c` at the identity arrow on `c` is an
 equivalence.
 
-## Definition
+## The yoneda lemma into the large category of sets
+
+```agda
+module _
+  {l1 l2 l3 : Level} (C : Category l1 l2) (c : obj-Category C)
+  (F :
+    functor-Small-Large-Precategory
+      ( precategory-Category C)
+      ( Set-Large-Precategory)
+      ( l3))
+  where
+
+  map-yoneda-Small-Large-Category :
+    natural-transformation-Small-Large-Precategory
+      ( precategory-Category C)
+      ( Set-Large-Precategory)
+      ( representable-functor-Category C c)
+      ( F) →
+    type-Set
+      ( obj-functor-Small-Large-Precategory
+        ( precategory-Category C)
+        ( Set-Large-Precategory)
+        ( F)
+        ( c))
+  map-yoneda-Small-Large-Category σ =
+    hom-family-natural-transformation-Small-Large-Precategory
+      ( precategory-Category C)
+      ( Set-Large-Precategory)
+      ( representable-functor-Category C c)
+      ( F)
+      ( σ)
+      ( c)
+      ( id-hom-Category C)
+
+  extension-yoneda-Small-Large-Category :
+    type-Set
+      ( obj-functor-Small-Large-Precategory
+        ( precategory-Category C)
+        ( Set-Large-Precategory)
+        ( F)
+        ( c)) →
+    natural-transformation-Small-Large-Precategory
+      ( precategory-Category C)
+      ( Set-Large-Precategory)
+      ( representable-functor-Category C c)
+      ( F)
+  extension-yoneda-Small-Large-Category =
+    extension-yoneda-Small-Large-Precategory (precategory-Category C) c F
+
+  lemma-yoneda-Small-Large-Category :
+    is-equiv map-yoneda-Small-Large-Category
+  lemma-yoneda-Small-Large-Category =
+    lemma-yoneda-Small-Large-Precategory (precategory-Category C) c F
+
+  equiv-lemma-yoneda-Small-Large-Category :
+    ( natural-transformation-Small-Large-Precategory
+      ( precategory-Category C)
+      ( Set-Large-Precategory)
+      ( representable-functor-Category C c)
+      ( F)) ≃
+    ( type-Set
+      ( obj-functor-Small-Large-Precategory
+        ( precategory-Category C)
+        ( Set-Large-Precategory)
+        ( F)
+        ( c)))
+  equiv-lemma-yoneda-Small-Large-Category =
+    equiv-lemma-yoneda-Small-Large-Precategory (precategory-Category C) c F
+```
+
+## The yoneda lemma into the small category of sets
 
 ```agda
 module _
@@ -48,41 +120,33 @@ module _
   (F : functor-Category C (Set-Category l2))
   where
 
-  yoneda-evid-Category :
+  map-yoneda-Category :
     natural-transformation-Category
       ( C)
       ( Set-Category l2)
       ( representable-functor-Category C c)
       ( F) →
     type-Set (obj-functor-Category C (Set-Category l2) F c)
-  yoneda-evid-Category = yoneda-evid-Precategory (precategory-Category C) c F
+  map-yoneda-Category = map-yoneda-Precategory (precategory-Category C) c F
 
-  yoneda-extension-Category :
+  extension-yoneda-Category :
     type-Set (obj-functor-Category C (Set-Category l2) F c) →
     natural-transformation-Category
       C (Set-Category l2) (representable-functor-Category C c) F
-  yoneda-extension-Category =
-    yoneda-extension-Precategory (precategory-Category C) c F
+  extension-yoneda-Category =
+    extension-yoneda-Precategory (precategory-Category C) c F
 
-  section-yoneda-evid-Category :
-    section yoneda-evid-Category
-  section-yoneda-evid-Category =
-    section-yoneda-evid-Precategory (precategory-Category C) c F
+  lemma-yoneda-Category : is-equiv map-yoneda-Category
+  lemma-yoneda-Category = lemma-yoneda-Precategory (precategory-Category C) c F
 
-  retraction-yoneda-evid-Category :
-    retraction yoneda-evid-Category
-  retraction-yoneda-evid-Category =
-    retraction-yoneda-evid-Precategory (precategory-Category C) c F
-
-  yoneda-lemma-Category : is-equiv yoneda-evid-Category
-  yoneda-lemma-Category = yoneda-lemma-Precategory (precategory-Category C) c F
-
-  equiv-yoneda-lemma-Category :
-    ( natural-transformation-Category
-      ( C)
-      ( Set-Category l2)
-      ( representable-functor-Category C c) (F)) ≃
+  equiv-lemma-yoneda-Category :
+    ( natural-transformation-Category C (Set-Category l2)
+      ( representable-functor-Category C c) F) ≃
     ( type-Set (obj-functor-Category C (Set-Category l2) F c))
-  pr1 equiv-yoneda-lemma-Category = yoneda-evid-Category
-  pr2 equiv-yoneda-lemma-Category = yoneda-lemma-Category
+  equiv-lemma-yoneda-Category =
+    equiv-lemma-yoneda-Precategory (precategory-Category C) c F
 ```
+
+## See also
+
+- [Presheaf categories](category-theory.presheaf-categories.md)

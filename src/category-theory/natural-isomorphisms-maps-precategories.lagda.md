@@ -161,7 +161,7 @@ module _
       ( hom-family-natural-transformation-map-Precategory C D F G
         ( natural-transformation-map-natural-isomorphism-map-Precategory))
   coherence-square-natural-isomorphism-map-Precategory =
-    coherence-square-natural-transformation-map-Precategory C D F G
+    naturality-natural-transformation-map-Precategory C D F G
       ( natural-transformation-map-natural-isomorphism-map-Precategory)
 
   is-natural-isomorphism-map-natural-isomorphism-map-Precategory :
@@ -415,7 +415,7 @@ module _
         ( ap
           ( comp-hom-Precategory' D _)
           ( inv
-            ( coherence-square-natural-transformation-map-Precategory
+            ( naturality-natural-transformation-map-Precategory
                 C D F G f g))) ∙
         ( associative-comp-hom-Precategory D
           ( hom-map-Precategory C D G g)
