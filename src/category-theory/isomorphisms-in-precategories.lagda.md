@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
@@ -432,6 +433,12 @@ module _
   pr1 (inv-iso-Precategory f) = hom-inv-iso-Precategory C f
   pr2 (inv-iso-Precategory f) =
     is-iso-inv-is-iso-Precategory C (is-iso-iso-Precategory C f)
+
+  is-iso-inv-iso-Precategory :
+    (f : iso-Precategory C x y) →
+    is-iso-Precategory C (hom-inv-iso-Precategory C f)
+  is-iso-inv-iso-Precategory f =
+    is-iso-iso-Precategory C (inv-iso-Precategory f)
 ```
 
 ### Groupoid laws of isomorphisms in precategories
@@ -517,6 +524,34 @@ module _
       ( comp-iso-Precategory C f (inv-iso-Precategory C f))
       ( id-iso-Precategory C)
       ( is-section-hom-inv-iso-Precategory C f)
+```
+
+### The inverse operation is a fibered involution on isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  where
+
+  is-fibered-involution-inv-iso-Precategory :
+    {x y : obj-Precategory C} →
+    inv-iso-Precategory C {y} {x} ∘ inv-iso-Precategory C {x} {y} ~ id
+  is-fibered-involution-inv-iso-Precategory f = refl
+
+  is-equiv-inv-iso-Precategory :
+    {x y : obj-Precategory C} → is-equiv (inv-iso-Precategory C {x} {y})
+  pr1 (pr1 is-equiv-inv-iso-Precategory) = inv-iso-Precategory C
+  pr2 (pr1 is-equiv-inv-iso-Precategory) =
+    is-fibered-involution-inv-iso-Precategory
+  pr1 (pr2 is-equiv-inv-iso-Precategory) = inv-iso-Precategory C
+  pr2 (pr2 is-equiv-inv-iso-Precategory) =
+    is-fibered-involution-inv-iso-Precategory
+
+  equiv-inv-iso-Precategory :
+    {x y : obj-Precategory C} → iso-Precategory C x y ≃ iso-Precategory C y x
+  pr1 equiv-inv-iso-Precategory = inv-iso-Precategory C
+  pr2 equiv-inv-iso-Precategory = is-equiv-inv-iso-Precategory
 ```
 
 ### A morphism `f` is an isomorphism if and only if precomposition by `f` is an equivalence

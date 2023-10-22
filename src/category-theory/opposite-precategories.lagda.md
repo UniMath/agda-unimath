@@ -7,14 +7,24 @@ module category-theory.opposite-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.involutions
+open import foundation.multivariable-homotopies
+open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -99,6 +109,108 @@ is-involution-opposite-Precategory C =
   eq-pair-Σ-eq-pr2
     ( eq-pair-Σ-eq-pr2
       ( eq-pair-Σ
-        ( eq-pair-Σ-eq-pr2 {! htpy-eq ?!})
-        {!   !}))
+        ( eq-pair-Σ-eq-pr2
+          ( eq-is-prop
+            ( is-prop-is-associative-composition-operation-binary-family-Set
+              ( hom-set-Precategory C)
+              ( comp-hom-Precategory C))))
+        ( eq-is-prop
+          ( is-prop-is-unital-composition-operation-binary-family-Set
+            ( hom-set-Precategory C)
+            ( comp-hom-Precategory C)))))
+
+involution-opposite-Precategory :
+  (l1 l2 : Level) → involution (Precategory l1 l2)
+pr1 (involution-opposite-Precategory l1 l2) = opposite-Precategory
+pr2 (involution-opposite-Precategory l1 l2) = is-involution-opposite-Precategory
+
+is-equiv-opposite-Precategory :
+  {l1 l2 : Level} → is-equiv (opposite-Precategory {l1} {l2})
+is-equiv-opposite-Precategory =
+  is-equiv-is-involution is-involution-opposite-Precategory
+
+equiv-opposite-Precategory :
+  (l1 l2 : Level) → Precategory l1 l2 ≃ Precategory l1 l2
+equiv-opposite-Precategory l1 l2 =
+  equiv-involution (involution-opposite-Precategory l1 l2)
+```
+
+### Computing the isomorphism sets of the opposite precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  map-compute-iso-inv-opposite-Precategory :
+    {x y : obj-Precategory C} →
+    iso-Precategory C x y → iso-Precategory (opposite-Precategory C) x y
+  pr1 (map-compute-iso-inv-opposite-Precategory f) = hom-inv-iso-Precategory C f
+  pr1 (pr2 (map-compute-iso-inv-opposite-Precategory f)) =
+    hom-iso-Precategory C f
+  pr1 (pr2 (pr2 (map-compute-iso-inv-opposite-Precategory f))) =
+    is-section-hom-inv-iso-Precategory C f
+  pr2 (pr2 (pr2 (map-compute-iso-inv-opposite-Precategory f))) =
+    is-retraction-hom-inv-iso-Precategory C f
+
+  map-inv-compute-iso-inv-opposite-Precategory :
+    {x y : obj-Precategory C} →
+    iso-Precategory (opposite-Precategory C) x y → iso-Precategory C x y
+  pr1 (map-inv-compute-iso-inv-opposite-Precategory f) =
+    hom-inv-iso-Precategory (opposite-Precategory C) f
+  pr1 (pr2 (map-inv-compute-iso-inv-opposite-Precategory f)) =
+    hom-iso-Precategory (opposite-Precategory C) f
+  pr1 (pr2 (pr2 (map-inv-compute-iso-inv-opposite-Precategory f))) =
+    is-section-hom-inv-iso-Precategory (opposite-Precategory C) f
+  pr2 (pr2 (pr2 (map-inv-compute-iso-inv-opposite-Precategory f))) =
+    is-retraction-hom-inv-iso-Precategory (opposite-Precategory C) f
+
+  is-equiv-map-compute-iso-inv-opposite-Precategory :
+    {x y : obj-Precategory C} →
+    is-equiv (map-compute-iso-inv-opposite-Precategory {x} {y})
+  pr1 (pr1 is-equiv-map-compute-iso-inv-opposite-Precategory) =
+    map-inv-compute-iso-inv-opposite-Precategory
+  pr2 (pr1 is-equiv-map-compute-iso-inv-opposite-Precategory) = refl-htpy
+  pr1 (pr2 is-equiv-map-compute-iso-inv-opposite-Precategory) =
+    map-inv-compute-iso-inv-opposite-Precategory
+  pr2 (pr2 is-equiv-map-compute-iso-inv-opposite-Precategory) = refl-htpy
+
+  compute-iso-inv-opposite-Precategory :
+    {x y : obj-Precategory C} →
+    iso-Precategory C x y ≃ iso-Precategory (opposite-Precategory C) x y
+  pr1 compute-iso-inv-opposite-Precategory =
+    map-compute-iso-inv-opposite-Precategory
+  pr2 compute-iso-inv-opposite-Precategory =
+    is-equiv-map-compute-iso-inv-opposite-Precategory
+```
+
+### The underlying precategory is a category if and only if the opposite is a category
+
+```agda
+abstract
+  is-category-opposite-is-category-Precategory :
+    {l1 l2 : Level} (C : Precategory l1 l2) →
+    is-category-Precategory C →
+    is-category-Precategory (opposite-Precategory C)
+  is-category-opposite-is-category-Precategory C is-category-C x y =
+    is-equiv-htpy-equiv
+      ( compute-iso-inv-opposite-Precategory C ∘e (_ , is-category-C x y))
+      ( λ where
+        refl →
+          eq-type-subtype
+            ( is-iso-prop-Precategory (opposite-Precategory C))
+            ( refl))
+
+abstract
+  is-category-is-category-opposite-Precategory :
+    {l1 l2 : Level} (C : Precategory l1 l2) →
+    is-category-Precategory (opposite-Precategory C) →
+    is-category-Precategory C
+  is-category-is-category-opposite-Precategory C is-category-op-C =
+    tr
+      ( is-category-Precategory)
+      ( is-involution-opposite-Precategory C)
+      ( is-category-opposite-is-category-Precategory
+        ( opposite-Precategory C)
+        ( is-category-op-C))
 ```
