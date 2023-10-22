@@ -41,7 +41,7 @@ module _
 
   map-compute-dependent-identification-eq-value :
     {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →
-    coherence-square-identifications (apd f p) r (ap (tr P p) q) (apd g p) →
+    coherence-square-identifications (ap (tr P p) q) (apd f p) (apd g p) r →
     dependent-identification eq-value p q r
   map-compute-dependent-identification-eq-value refl q r =
     inv ∘ (concat' r (right-unit ∙ ap-id q))
@@ -61,14 +61,14 @@ module _
 
   map-compute-dependent-identification-eq-value-function :
     {x y : X} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
-    coherence-square-identifications (ap f p) r q (ap g p) →
+    coherence-square-identifications q (ap f p) (ap g p) r →
     dependent-identification eq-value-function p q r
   map-compute-dependent-identification-eq-value-function refl q r =
     inv ∘ concat' r right-unit
 
 map-compute-dependent-identification-eq-value-id-id :
   {l1 : Level} {A : UU l1} {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
-  coherence-square-identifications p r q p →
+  coherence-square-identifications q p p r →
   dependent-identification (eq-value id id) p q r
 map-compute-dependent-identification-eq-value-id-id refl q r s =
   inv (s ∙ right-unit)
@@ -76,7 +76,7 @@ map-compute-dependent-identification-eq-value-id-id refl q r s =
 map-compute-dependent-identification-eq-value-comp-id :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : B → A) (f : A → B) {a b : A}
   (p : a ＝ b) (q : eq-value (g ∘ f) id a) (r : eq-value (g ∘ f) id b) →
-  coherence-square-identifications (ap g (ap f p)) r q p →
+  coherence-square-identifications q (ap g (ap f p)) p r →
   dependent-identification (eq-value (g ∘ f) id) p q r
 map-compute-dependent-identification-eq-value-comp-id g f refl q r s =
   inv (s ∙ right-unit)
@@ -335,7 +335,7 @@ syntax step-homotopy-reasoning p h q = p ~ h by q
 
 - We postulate that homotopies characterize identifications of (dependent)
   functions in the file
-  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+  [`foundation.function-extensionality`](foundation.function-extensionality.md).
 - [Multivariable homotopies](foundation.multivariable-homotopies.md).
 - The [whiskering operations](foundation.whiskering-homotopies.md) on
   homotopies.
