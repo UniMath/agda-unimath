@@ -105,33 +105,6 @@ module _
   map-universal-property-symmetric-core-Relation f x y s =
     counit-symmetric-core-Relation R (f (standard-unordered-pair x y) s)
 
-  map-inv-universal-property-symmetric-core-Relation :
-    hom-Relation (relation-Symmetric-Relation S) R →
-    hom-Symmetric-Relation S (symmetric-core-Relation R)
-  map-inv-universal-property-symmetric-core-Relation f p s i =
-    f ( element-unordered-pair p i)
-      ( other-element-unordered-pair p i)
-      ( tr-inv-Symmetric-Relation S
-        ( standard-unordered-pair
-          ( element-unordered-pair p i)
-          ( other-element-unordered-pair p i))
-        ( p)
-        ( compute-standard-unordered-pair-element-unordered-pair p i)
-        ( s))
-
-  is-section-map-inv-universal-property-symmetric-core-Relation :
-    map-universal-property-symmetric-core-Relation ∘
-    map-inv-universal-property-symmetric-core-Relation ~
-    id
-  is-section-map-inv-universal-property-symmetric-core-Relation f =
-    eq-htpy
-      ( λ p →
-        eq-htpy
-          ( λ s →
-            eq-htpy
-              ( λ i →
-                {!!})))
-
   equiv-universal-property-symmetric-core-Relation :
     hom-Symmetric-Relation S (symmetric-core-Relation R) ≃
     hom-Relation (relation-Symmetric-Relation S) R
