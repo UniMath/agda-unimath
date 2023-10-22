@@ -40,9 +40,9 @@ equipped with a counit
   (x y : A) → core R {x , y} → R x y
 ```
 
-that satisfyies the universal property of the symmetric core, i.e., it satisfies
-the property that for any symmetric relation `S : unordered-pair A → 𝒰` such
-that the precomposition function
+that satisfies the universal property of the symmetric core, i.e., it satisfies
+the property that for any symmetric relation `S : unordered-pair A → 𝒰`, the
+precomposition function
 
 ```text
   hom-Symmetric-Relation S (core R) → hom-Relation (rel S) R
