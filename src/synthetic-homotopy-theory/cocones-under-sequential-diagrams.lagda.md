@@ -43,8 +43,8 @@ family of [homotopies](foundation.homotopies.md) `Hₙ` asserting that the
 triangles
 
 ```text
-      aₙ
- A n ----> A (n + 1)
+       aₙ
+ Aₙ ------> Aₙ₊₁
    \       /
     \     /
   iₙ \   / iₙ₊₁
@@ -95,6 +95,16 @@ module _
 ```
 
 ### Homotopies of cocones under a sequential diagram
+
+A **homotopy** between two cocones `(X, i, H)` and `(X, j, L)` with the same
+vertex consists of a [sequence](foundation.dependent-sequences.md) of
+[homotopies](foundation.homotopies.md) `Kₙ : iₙ ~ jₙ` and a coherence datum
+filling the "pinched cylinder" with the faces `Kₙ`, `Hₙ`, `Lₙ` and `Kₙ₊₁`.
+
+The coherence datum may be better understood by viewing a cocone as a
+[morphism](synthetic-homotopy-theory.morphisms-sequential-diagrams.md) from
+`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)`. Then a homotopy of cocones is
+a regular homotopy of morphisms of sequential diagrams.
 
 ```agda
 module _
@@ -147,6 +157,9 @@ module _
 
 ### Postcomposing cocones under a sequential diagram with a map
 
+Given a cocone `c` with vertex `X` under `(A, a)` and a map `f : X → Y`, we may
+extend `c` to a cocone with vertex `Y`.
+
 ```agda
 module _
   { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
@@ -165,6 +178,9 @@ module _
 ## Properties
 
 ### Characterization of identity types of cocones under sequential diagrams
+
+[Equality](foundation.identity-types.md) of cocones with the same vertex is
+captured by a homotopy between them.
 
 ```agda
 module _
@@ -244,6 +260,10 @@ module _
 
 ### Postcomposing cocones under a sequential colimit distributes over function composition
 
+In other words, extending a cocone `c` with vertex `X` by the map
+`k ∘ h : X → Z` results in the same cocone as first extending by `h` and then by
+`k`.
+
 ```agda
 module _
   { l1 l2 l3 l4 : Level} (A : sequential-diagram l1)
@@ -266,6 +286,40 @@ module _
 ```
 
 ### Cocones under sequential diagrams are a special case of coequalizers
+
+The data of a cocone
+
+```text
+       aₙ
+ Aₙ ------> Aₙ₊₁
+   \  Hₙ   /
+    \ =>  /
+  iₙ \   / iₙ₊₁
+      V V
+       X
+```
+
+can be [uncurried](foundation.dependent-pair-types.md) to get the equivalent
+diagram comprising of the single triangle
+
+```text
+         tot₊₁ a
+ (Σ ℕ A) ------> (Σ ℕ A)
+        \       /
+         \     /
+       i  \   /  i
+           V V
+            X
+```
+
+which is exactly a cofork of the identity map and `tot₊₁ a`.
+
+Under this mapping
+[sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
+correspond to
+[coequalizers](synthetic-homotopy-theory.universal-property-coequalizers.md),
+which is formalized in
+[universal-property-sequential-colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md).
 
 ```agda
 module _
