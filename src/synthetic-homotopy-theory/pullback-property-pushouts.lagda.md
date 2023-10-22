@@ -40,7 +40,7 @@ is a [pullback square](foundation.pullbacks.md) for every type `Y`. Below, we
 first define the cone of this
 [commuting square](foundation.commuting-squares-of-maps.md), and then we
 introduce the type `pullback-property-pushout`, which states that the above
-square is a pullback.
+square is a [pullback](foundation-core.universal-property-pullbacks.md).
 
 ## Definition
 
