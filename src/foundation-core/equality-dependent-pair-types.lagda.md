@@ -60,17 +60,17 @@ module _
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 
-  eq-pair-Σ-eq-pr1 :
+  eq-pair-eq-pr1 :
     {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
-  eq-pair-Σ-eq-pr1 refl = refl
+  eq-pair-eq-pr1 refl = refl
 
-  eq-pair-Σ-eq-pr1' :
+  eq-pair-eq-pr1' :
     {x y : A} {t : B y} (p : x ＝ y) → (x , tr B (inv p) t) ＝ (y , t)
-  eq-pair-Σ-eq-pr1' refl = refl
+  eq-pair-eq-pr1' refl = refl
 
-  eq-pair-Σ-eq-pr2 :
+  eq-pair-eq-pr2 :
     {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
-  eq-pair-Σ-eq-pr2 {x} = ap {B = Σ A B} (pair x)
+  eq-pair-eq-pr2 {x} = ap {B = Σ A B} (pair x)
 
   is-retraction-pair-eq-Σ :
     (s t : Σ A B) →

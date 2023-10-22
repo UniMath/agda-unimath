@@ -106,10 +106,10 @@ module _
 is-involution-opposite-Precategory :
   {l1 l2 : Level} → is-involution (opposite-Precategory {l1} {l2})
 is-involution-opposite-Precategory C =
-  eq-pair-Σ-eq-pr2
-    ( eq-pair-Σ-eq-pr2
+  eq-pair-eq-pr2
+    ( eq-pair-eq-pr2
       ( eq-pair-Σ
-        ( eq-pair-Σ-eq-pr2
+        ( eq-pair-eq-pr2
           ( eq-is-prop
             ( is-prop-is-associative-composition-operation-binary-family-Set
               ( hom-set-Precategory C)
