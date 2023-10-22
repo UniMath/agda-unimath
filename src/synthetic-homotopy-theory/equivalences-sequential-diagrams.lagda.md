@@ -28,6 +28,16 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 </details>
 
+## Idea
+
+An **equivalence of sequential diagrams** `(A, a)` and `(B, b)` is a
+[sequence](foundation.dependent-sequences.md) of
+[equivalences](foundation.equivalences.md) `eₙ : Aₙ ≃ Bₙ` such that their
+underlying maps form a
+[morphism of sequential diagrams](synthetic-homotopy-theory.morphisms-sequential-diagrams.md).
+
+Specifically, the underlying maps need to satisfy the same naturality condition.
+
 ## Definitions
 
 ### Equivalences of sequential diagrams
@@ -111,6 +121,9 @@ module _
 ## Properties
 
 ### Characterization of equality of sequential diagrams
+
+[Equality](foundation.identity-types.md) of sequential diagrams is captured by
+an equivalence between them.
 
 ```agda
 equiv-eq-sequential-diagram :
