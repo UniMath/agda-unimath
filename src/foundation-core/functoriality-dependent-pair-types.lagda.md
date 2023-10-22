@@ -332,7 +332,7 @@ module _
     is-equiv-map-Σ :
       {f : A → B} {g : (x : A) → C x → D (f x)} →
       is-equiv f → is-fiberwise-equiv g → is-equiv (map-Σ D f g)
-    is-equiv-map-Σ is-equiv-f is-fiberwise-equiv-g =
+    is-equiv-map-Σ {f} {g} is-equiv-f is-fiberwise-equiv-g =
       is-equiv-comp-htpy
         ( map-Σ D _ _)
         ( map-Σ-map-base _ D)
