@@ -8,7 +8,6 @@ module modal-logic.modal-logic-syntax where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.binary-relations
@@ -23,10 +22,12 @@ open import foundation.unit-type
 open import foundation.negation
 open import foundation.double-negation
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.decidable-propositions
+open import foundation.law-of-excluded-middle
 
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.decidable-dependent-function-types
--- open import univalent-combinatorics.dependent-function-types
 ```
 
 </details>
@@ -37,32 +38,6 @@ TODO
 
 ## Definition
 
-```agda
--- I'am not found in lib
-module _
-  {a : Level} (l : Level)
-  where
-
-  record Lift (A : UU a) : UU (a ⊔ l) where
-    constructor lift
-    field lower : A
-  open Lift public
-
-  Lift-Prop : Prop a → Prop (a ⊔ l)
-  pr1 (Lift-Prop A) = Lift (type-Prop A)
-  pr2 (Lift-Prop A) =
-    is-prop-equiv'
-      (lift , is-equiv-is-invertible lower (λ _ → refl) (λ _ → refl))
-      (is-prop-type-Prop A)
-
-  is-decidable-Lift : {A : UU a} → is-decidable A → is-decidable (Lift A)
-  is-decidable-Lift (inl a) = inl (lift a)
-  is-decidable-Lift (inr na) = inr (na ∘ lower)
-
-LEM : (l : Level) → UU (lsuc l)
-LEM l = (T : UU l) → is-decidable T
-```
-
 **Syntax**
 
 ```agda
@@ -71,39 +46,52 @@ module _
   (i : UU l)
   where
 
+  infixr 4 _⇒_
+  infixr 7 □_
+
   data formula : UU l where
     var : i → formula
     ⊥ : formula
     _⇒_ : formula → formula → formula
-    □ : formula → formula
+    □_ : formula → formula
 
 module _
   {l : Level}
   {i : UU l}
   where
 
-  ~ : formula i → formula i
+  infixr 7 ~_
+  infixr 7 ~~_
+  infixr 5 _∨_
+  infixr 6 _∧_
+  infixr 7 ◇_
+  infixr 2 ⊢_
+
+  ~_ : formula i → formula i
   ~ a = a ⇒ ⊥
 
+  ~~_ : formula i → formula i
+  ~~ a = ~ ~ a
+
   _∨_ : formula i → formula i → formula i
-  a ∨ b = (~ a) ⇒ b
+  a ∨ b = ~ a ⇒ b
 
   _∧_ : formula i → formula i → formula i
-  a ∧ b = ~ (a ⇒ (~ b))
+  a ∧ b = ~ a ⇒ ~ b
 
   ⊤ : formula i
   ⊤ = ~ ⊥
 
-  ◇ : formula i → formula i
-  ◇ a = ~ (□ (~ a))
+  ◇_ : formula i → formula i
+  ◇ a = ~ □ ~ a
 
-  data ⊢ : formula i → UU l where
-    ax-k : {a b : formula i} → ⊢ (a ⇒ (b ⇒ a))
-    ax-s : {a b c : formula i} → ⊢ ((a ⇒ (b ⇒ c)) ⇒ ((a ⇒ b) ⇒ (a ⇒ c)))
-    ax-dn : {a : formula i} → ⊢ ((~ (~ a)) ⇒ a)
-    ax-n : {a b : formula i} → ⊢ ((□ (a ⇒ b)) ⇒ ((□ a) ⇒ (□ b)))
-    mp : {a b : formula i} → ⊢ (a ⇒ b) → ⊢ a → ⊢ b
-    nec : {a : formula i} → ⊢ a → ⊢ (□ a)
+  data ⊢_ : formula i → UU l where
+    ax-k : {a b : formula i} → ⊢ a ⇒ b ⇒ a
+    ax-s : {a b c : formula i} → ⊢ (a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ (a ⇒ c)
+    ax-dn : {a : formula i} → ⊢ ~~ a ⇒ a
+    ax-n : {a b : formula i} → ⊢ □ (a ⇒ b) ⇒ □ a ⇒ □ b
+    mp : {a b : formula i} → ⊢ a ⇒ b → ⊢ a → ⊢ b
+    nec : {a : formula i} → ⊢ a → ⊢ □ a
 ```
 
 **Semantics**
@@ -131,7 +119,7 @@ module _
     constructor model
     field
       F : kripke-frame w
-      V : i → w → UU l3
+      V : i → w → Prop l3
   open kripke-model public
 
   finite-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
@@ -146,50 +134,60 @@ module _
   private
     l = l1 ⊔ l2 ⊔ l3
 
-  _,_⊨_ : kripke-model w i l3 → w → formula i → UU l
-  M , x ⊨ var n = Lift l (V M n x)
-  M , x ⊨ ⊥ = Lift l empty
-  M , x ⊨ (a ⇒ b) = M , x ⊨ a → M , x ⊨ b
-  M , x ⊨ (□ a) = ∀ y → R (F M) x y → M , y ⊨ a
+  infix 2 _⊨_
+  infix 2 _⊭_
+  infix 2 _⊨M_
+  infix 2 _⊭M_
 
-  _,_⊭_ : kripke-model w i l3 → w → formula i → UU l
-  M , x ⊭ a = ¬ (M , x ⊨ a)
+  _⊨_ : kripke-model w i l3 × w → formula i → Prop l
+  M , x ⊨ var n = raise-Prop l (V M n x)
+  M , x ⊨ ⊥ = raise-empty-Prop l
+  M , x ⊨ a ⇒ b = hom-Prop (M , x ⊨ a) (M , x ⊨ b)
+  M , x ⊨ □ a = Π-Prop w λ y -> function-Prop (R (F M) x y) (M , y ⊨ a)
 
-  _⊨M_ : kripke-model w i l3 → formula i → UU l
-  M ⊨M a = ∀ x → M , x ⊨ a
+  _⊭_ : kripke-model w i l3 × w → formula i → Prop l
+  M , x ⊭ a = neg-Prop (M , x ⊨ a)
 
-  _⊭M_ : kripke-model w i l3 → formula i → UU l
-  M ⊭M a = ¬ (M ⊨M a)
+  _⊨M_ : kripke-model w i l3 → formula i → Prop l
+  M ⊨M a = Π-Prop w λ x → M , x ⊨ a
+
+  _⊭M_ : kripke-model w i l3 → formula i → Prop l
+  M ⊭M a = neg-Prop (M ⊨M a)
 ```
 
 **Soundness**
 
 ```agda
-  is-classical : kripke-model w i l3 → UU l
-  is-classical M = ∀ a x → is-decidable (M , x ⊨ a)
+  is-classical-Prop : kripke-model w i l3 → Prop l
+  is-classical-Prop M = Π-Prop (formula i) (λ a → Π-Prop w (λ x → is-decidable-Prop (M , x ⊨ a)))
 
-  soundness : {a : formula i}
+  is-classical : kripke-model w i l3 → UU l
+  is-classical = type-Prop ∘ is-classical-Prop
+
+  classical-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
+  classical-model = Σ (kripke-model w i l3) is-classical
+
+  soundness : ((M , _) : classical-model)
+            → {a : formula i}
             → ⊢ a
-            → (M : kripke-model w i l3)
-            → is-classical M
-            → M ⊨M a
-  soundness ax-k M dec x = λ fa _ → fa
-  soundness ax-s M dec x = λ fabc fab fa → fabc fa (fab fa)
-  soundness {_ ⇒ a} ax-dn M dec x with dec a x
+            → type-Prop (M ⊨M a)
+  soundness _ ax-k x = λ fa _ → fa
+  soundness _ ax-s x = λ fabc fab fa → fabc fa (fab fa)
+  soundness (_ , cl) {_ ⇒ a} ax-dn x with cl a x
   ... | inl fa = λ _ → fa
-  ... | inr nfa = λ fnna → ex-falso (lower (fnna (λ fa → lift (nfa fa))))
-  soundness ax-n M dec x = λ fab fa y r → fab y r (fa y r)
-  soundness (mp dab db) M dec x = soundness dab M dec x (soundness db M dec x)
-  soundness (nec d) M dec x y _ = soundness d M dec y
+  ... | inr nfa = λ fnna → ex-falso (map-inv-raise (fnna (λ fa → map-raise (nfa fa))))
+  soundness _ ax-n x = λ fab fa y r → fab y r (fa y r)
+  soundness CM (mp dab da) x = soundness CM dab x (soundness CM da x)
+  soundness CM (nec d) x y _ = soundness CM d y
 
   finite-is-classical : ((M , _) : finite-model w i l3)
-                      → (∀ n x → is-decidable (V M n x))
+                      → (∀ n x → type-Prop (is-decidable-Prop (V M n x)))
                       → (∀ x y → is-decidable (R (F M) x y))
                       → is-classical M
   finite-is-classical (M , is-fin) dec-val dec-r (var n) x =
-    is-decidable-Lift _ (dec-val n x)
+    is-decidable-raise _ _ (dec-val n x)
   finite-is-classical (M , is-fin) dec-val dec-r ⊥ x =
-    inr (λ ())
+    inr map-inv-raise
   finite-is-classical (M , is-fin) dec-val dec-r (a ⇒ b) x =
     is-decidable-function-type
       (finite-is-classical (M , is-fin) dec-val dec-r a x)
@@ -201,36 +199,39 @@ module _
         ((finite-is-classical (M , is-fin) dec-val dec-r a y)))
 
   finite-soundness : ((M , _) : finite-model w i l3)
-                   → (∀ n x → is-decidable (V M n x))
+                   → (∀ n x → type-Prop (is-decidable-Prop (V M n x)))
                    → (∀ x y → is-decidable (R (F M) x y))
                    → {a : formula i}
                    → ⊢ a
-                   → M ⊨M a
-  finite-soundness (M , is-fin) dec-val dec-r d =
-    soundness d M (finite-is-classical ((M , is-fin)) dec-val dec-r)
+                   → type-Prop (M ⊨M a)
+  finite-soundness FM@(M , is-fin) dec-val dec-r =
+    soundness (M , finite-is-classical FM dec-val dec-r)
 
 
-double-negation-LEM : {l : Level} → ((A : UU l) → ¬¬ A → A) → LEM l
-double-negation-LEM dn A = dn _ λ ndec → ndec (inr (λ a → ndec (inl a)))
+double-negation-LEM : {l : Level} → ((P : Prop l) → ¬¬ (type-Prop P) → (type-Prop P)) → LEM l
+double-negation-LEM dnP P = dnP (is-decidable-Prop P) (λ ndec → ndec (inr (λ p → ndec (inl p))))
 
-lift-dn : {l1 l2 : Level} {A : UU l1} → ¬¬ A → (Lift l2 A → Lift l2 empty) → Lift l2 empty
-lift-dn dn nA = lift (dn (λ a → lower (nA (lift a))))
+raise-dn : {l1 l2 : Level} {A : UU l1} → ¬¬ A → (raise l2 A → raise-empty l2) → raise-empty l2
+raise-dn dnA rnA = map-raise (dnA λ a → map-inv-raise (rnA (map-raise a)))
 
-required-LEM : ({l1 l2 l3 : Level} (i : UU l2) (a : formula i)
+required-LEM : ({l1 l2 l3 : Level} (w : UU l1) (i : UU l2) (a : formula i)
+                (M : kripke-model w i l3)
+                → {a : formula i}
                 → ⊢ a
-                → (w : UU l1)
-                → (M : kripke-model w i l3)
-                → M ⊨M a)
+                → type-Prop (M ⊨M a))
              → {l : Level} → LEM l
-required-LEM sound {l} =
-  double-negation-LEM λ A nnA → lower (sound unit b ax-dn unit (M A) star (lift-dn nnA))
+required-LEM sound {l} = double-negation-LEM required-double-negation
   where
-    a = var star
-    b = (~ (~ a)) ⇒ a
+    required-double-negation : (P : Prop l) → ¬¬ (type-Prop P) → type-Prop P
+    required-double-negation P dnP = map-inv-raise (sound unit unit b (M P) (ax-dn {a = a}) star (raise-dn dnP))
+      where
 
-    f : kripke-frame unit
-    f = frame (λ _ _ → empty) (unit-trunc-Prop star)
+      a = var star
+      b = ~~ a ⇒ a
 
-    M : UU l → kripke-model unit unit l
-    M A = model f (λ _ _ → A)
+      f : kripke-frame unit
+      f = frame (λ _ _ → empty) (unit-trunc-Prop star)
+
+      M : Prop l → kripke-model unit unit l
+      M P = model f (λ _ _ → P)
 ```
