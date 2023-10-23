@@ -59,6 +59,7 @@ open import category-theory.functors-from-small-to-large-precategories public
 open import category-theory.functors-large-categories public
 open import category-theory.functors-large-precategories public
 open import category-theory.functors-precategories public
+open import category-theory.gaunt-precategories public
 open import category-theory.groupoids public
 open import category-theory.homotopies-natural-transformations-large-precategories public
 open import category-theory.initial-objects-large-categories public
