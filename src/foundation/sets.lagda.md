@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.1-types
@@ -24,7 +25,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
-open import foundation-core.truncation-levels
 ```
 
 </details>
@@ -241,9 +241,25 @@ abstract
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} where
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
   is-emb-is-prop-is-set : is-prop A → is-set B → {f : A → B} → is-emb f
   is-emb-is-prop-is-set is-prop-A is-set-B {f} =
     is-emb-is-prop-map (λ b → is-prop-Σ is-prop-A (λ a → is-set-B (f a) b))
+```
+
+### Sets are `k`-truncated for every `k ≥ 0`
+
+```agda
+is-trunc-is-set :
+  {l : Level} (k : 𝕋) {A : UU l} → is-set A → is-trunc (succ-𝕋 (succ-𝕋 k)) A
+is-trunc-is-set neg-two-𝕋 is-set-A = is-set-A
+is-trunc-is-set (succ-𝕋 k) is-set-A =
+  is-trunc-succ-is-trunc (succ-𝕋 (succ-𝕋 k)) (is-trunc-is-set k is-set-A)
+
+set-Truncated-Type :
+  {l : Level} (k : 𝕋) → Set l → Truncated-Type l (succ-𝕋 (succ-𝕋 k))
+pr1 (set-Truncated-Type k A) = type-Set A
+pr2 (set-Truncated-Type k A) = is-trunc-is-set k (is-set-type-Set A)
 ```

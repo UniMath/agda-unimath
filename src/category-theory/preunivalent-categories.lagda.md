@@ -12,6 +12,7 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.1-types
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
@@ -153,6 +154,22 @@ module _
   is-preunivalent-Preunivalent-Category = pr2 C
 ```
 
+### The total hom-type of a preunivalent category
+
+```agda
+total-hom-Preunivalent-Category :
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) → UU (l1 ⊔ l2)
+total-hom-Preunivalent-Category C =
+  total-hom-Precategory (precategory-Preunivalent-Category C)
+
+obj-total-hom-Preunivalent-Category :
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) →
+  total-hom-Preunivalent-Category C →
+  obj-Preunivalent-Category C × obj-Preunivalent-Category C
+obj-total-hom-Preunivalent-Category C =
+  obj-total-hom-Precategory (precategory-Preunivalent-Category C)
+```
+
 ### Equalities induce morphisms
 
 ```agda
@@ -221,6 +238,27 @@ module _
   obj-1-type-Preunivalent-Category : 1-Type l1
   pr1 obj-1-type-Preunivalent-Category = obj-Preunivalent-Category C
   pr2 obj-1-type-Preunivalent-Category = is-1-type-obj-Preunivalent-Category
+```
+
+### The total hom-type of a preunivalent category is a 1-type
+
+```agda
+module _
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  where
+
+  is-1-type-total-hom-Preunivalent-Category :
+    is-1-type (total-hom-Preunivalent-Category C)
+  is-1-type-total-hom-Preunivalent-Category =
+    is-trunc-total-hom-is-trunc-obj-Precategory
+      ( precategory-Preunivalent-Category C)
+      ( is-1-type-obj-Preunivalent-Category C)
+
+  total-hom-1-type-Preunivalent-Category : 1-Type (l1 ⊔ l2)
+  total-hom-1-type-Preunivalent-Category =
+    total-hom-truncated-type-is-trunc-obj-Precategory
+      ( precategory-Preunivalent-Category C)
+      ( is-1-type-obj-Preunivalent-Category C)
 ```
 
 ## See also

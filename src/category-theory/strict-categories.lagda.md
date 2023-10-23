@@ -14,6 +14,7 @@ open import category-theory.precategories
 open import category-theory.preunivalent-categories
 
 open import foundation.1-types
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -160,6 +161,36 @@ module _
   preunivalent-category-Strict-Category : Preunivalent-Category l1 l2
   pr1 preunivalent-category-Strict-Category = precategory-Strict-Category C
   pr2 preunivalent-category-Strict-Category = is-preunivalent-Strict-Category
+```
+
+### The total hom-set of a strict category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Strict-Category l1 l2)
+  where
+
+  total-hom-Strict-Category : UU (l1 ⊔ l2)
+  total-hom-Strict-Category =
+    total-hom-Precategory (precategory-Strict-Category C)
+
+  obj-total-hom-Strict-Category :
+    total-hom-Strict-Category → obj-Strict-Category C × obj-Strict-Category C
+  obj-total-hom-Strict-Category =
+    obj-total-hom-Precategory (precategory-Strict-Category C)
+
+  is-set-total-hom-Strict-Category :
+    is-set total-hom-Strict-Category
+  is-set-total-hom-Strict-Category =
+    is-trunc-total-hom-is-trunc-obj-Precategory
+      ( precategory-Strict-Category C)
+      ( is-set-obj-Strict-Category C)
+
+  total-hom-set-Strict-Category : Set (l1 ⊔ l2)
+  total-hom-set-Strict-Category =
+    total-hom-truncated-type-is-trunc-obj-Precategory
+      ( precategory-Strict-Category C)
+      ( is-set-obj-Strict-Category C)
 ```
 
 ### Equalities induce morphisms

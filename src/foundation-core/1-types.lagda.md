@@ -54,9 +54,14 @@ pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
 ### Any set is a 1-type
 
 ```agda
+abstract
+  is-1-type-is-set :
+    {l : Level} {A : UU l} → is-set A → is-1-type A
+  is-1-type-is-set = is-trunc-succ-is-trunc zero-𝕋
+
 1-type-Set :
   {l : Level} → Set l → 1-Type l
-1-type-Set A = truncated-type-succ-Truncated-Type zero-𝕋 A
+1-type-Set = truncated-type-succ-Truncated-Type zero-𝕋
 ```
 
 ### Any proposition is a 1-type
