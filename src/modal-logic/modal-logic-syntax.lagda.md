@@ -96,58 +96,61 @@ module _
 
 ```agda
 module _
-  {l1 : Level} ((w , _) : Inhabited-Type l1)
+  {l1 : Level} ((w , _) : Inhabited-Type l1) (l2 : Level)
   where
 
-  record kripke-frame : UU (lsuc l1) where
+  record kripke-frame : UU (l1 ⊔ lsuc l2) where
     constructor frame
     field
-      frame-relation : Relation l1 w
+      frame-relation : Relation l2 w
   open kripke-frame public
 
 module _
-  {l1 l2 : Level} (W@(w , _) : Inhabited-Type l1) (i : UU l2) (l3 : Level)
+  {l1 : Level} (W@(w , _) : Inhabited-Type l1)
+  (l2 : Level)
+  {l3 : Level} (i : UU l3)
+  (l4 : Level)
   where
 
-  record kripke-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3) where
+  record kripke-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4) where
     constructor model
     field
-      model-frame : kripke-frame W
-      model-valuate : i → w → Prop l3
+      model-frame : kripke-frame W l2
+      model-valuate : i → w → Prop l4
   open kripke-model public
 
-  finite-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
+  finite-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
   finite-model = kripke-model × is-finite w
 
 module _
-  {l1 l2 l3 : Level} {W@(w , _) : Inhabited-Type l1} {i : UU l2}
+  {l1 l2 l3 l4 : Level} {W@(w , _) : Inhabited-Type l1} {i : UU l3}
   where
 
-  model-relation : kripke-model W i l3 → Relation l1 w
+  model-relation : kripke-model W l2 i l4 → Relation l2 w
   model-relation = frame-relation ∘ model-frame
 
   private
-    l = l1 ⊔ l2 ⊔ l3
+    l = l1 ⊔ l2 ⊔ l4
 
   infix 5 _⊨_
   infix 5 _⊭_
   infix 5 _⊨M_
   infix 5 _⊭M_
 
-  _⊨_ : kripke-model W i l3 × w → formula i → Prop l
+  _⊨_ : kripke-model W l2 i l4 × w → formula i → Prop l
   (M , x) ⊨ var n = raise-Prop l (model-valuate M n x)
   (M , x) ⊨ ⊥ = raise-empty-Prop l
   (M , x) ⊨ a ⇒ b = hom-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
   (M , x) ⊨ □ a =
     Π-Prop w (λ y -> function-Prop (model-relation M x y) ((M , y) ⊨ a))
 
-  _⊭_ : kripke-model W i l3 × w → formula i → Prop l
+  _⊭_ : kripke-model W l2 i l4 × w → formula i → Prop l
   (M , x) ⊭ a = neg-Prop ((M , x) ⊨ a)
 
-  _⊨M_ : kripke-model W i l3 → formula i → Prop l
+  _⊨M_ : kripke-model W l2 i l4 → formula i → Prop l
   M ⊨M a = Π-Prop w (λ x → (M , x) ⊨ a)
 
-  _⊭M_ : kripke-model W i l3 → formula i → Prop l
+  _⊭M_ : kripke-model W l2 i l4 → formula i → Prop l
   M ⊭M a = neg-Prop (M ⊨M a)
 ```
 
@@ -155,21 +158,21 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {W@(w , _) : Inhabited-Type l1} {i : UU l2}
+  {l1 l2 l3 l4 : Level} {W@(w , _) : Inhabited-Type l1} {i : UU l3}
   where
 
   private
-    l = l1 ⊔ l2 ⊔ l3
+    l = l1 ⊔ l2 ⊔ l3 ⊔ l4
 
-  is-classical-Prop : kripke-model W i l3 → Prop l
+  is-classical-Prop : kripke-model W l2 i l4 → Prop l
   is-classical-Prop M =
     Π-Prop (formula i) (λ a → Π-Prop w (λ x → is-decidable-Prop ((M , x) ⊨ a)))
 
-  is-classical : kripke-model W i l3 → UU l
+  is-classical : kripke-model W l2 i l4 → UU l
   is-classical = type-Prop ∘ is-classical-Prop
 
-  classical-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
-  classical-model = Σ (kripke-model W i l3) is-classical
+  classical-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
+  classical-model = Σ (kripke-model W l2 i l4) is-classical
 
   soundness :
     ((M , _) : classical-model)
@@ -186,7 +189,7 @@ module _
   soundness CM (nec d) x y _ = soundness CM d y
 
   module _
-    ((M , w-is-finite) : finite-model W i l3)
+    ((M , w-is-finite) : finite-model W l2 i l4)
     (dec-val : ∀ n x → type-Prop (is-decidable-Prop (model-valuate M n x)))
     (dec-r : ∀ x y → is-decidable (model-relation M x y))
     where
@@ -225,17 +228,22 @@ raise-dn :
   (raise l2 A → raise-empty l2) → raise-empty l2
 raise-dn dnA rnA = map-raise (dnA (λ a → map-inv-raise (rnA (map-raise a))))
 
-required-LEM :
-  ( {l1 l2 l3 : Level}
-    (W : Inhabited-Type l1)
-    {i : UU l2}
-    (M : kripke-model W i l3) →
-    {a : formula i} →
-    ⊢ a →
-    type-Prop (M ⊨M a)) →
+full-soundness : UUω
+full-soundness =
+  {l1 l2 l3 l4 : Level}
+  (W : Inhabited-Type l1)
+  {i : UU l3}
+  (M : kripke-model W l2 i l4)
+  {a : formula i} →
+  ⊢ a →
+  type-Prop (M ⊨M a)
+
+full-soundness-required-LEM :
+  full-soundness →
   (l : Level) →
   LEM l
-required-LEM sound l = double-negation-LEM required-double-negation
+full-soundness-required-LEM sound l =
+  double-negation-LEM required-double-negation
   where
   required-double-negation : (P : Prop l) → ¬¬ (type-Prop P) → type-Prop P
   required-double-negation P dnP =
