@@ -52,6 +52,21 @@ infixl 35 _+𝕋_
 _+𝕋_ = add-𝕋
 ```
 
+### Iterated successor functions on truncation levels
+
+Although we can define an addition operation on truncation levels, when it comes
+to doing induction on them, it is more natural to speak in terms of an iterated
+successor:
+
+```agda
+iterated-succ-𝕋 : ℕ → 𝕋 → 𝕋
+iterated-succ-𝕋 zero-ℕ x = x
+iterated-succ-𝕋 (succ-ℕ n) x = iterated-succ-𝕋 n (succ-𝕋 x)
+
+iterated-succ-𝕋' : 𝕋 → ℕ → 𝕋
+iterated-succ-𝕋' x n = iterated-succ-𝕋 n x
+```
+
 ## Properties
 
 ### Unit laws for addition of truncation levels

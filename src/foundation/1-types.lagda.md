@@ -11,15 +11,16 @@ open import foundation-core.1-types public
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.subuniverses
+open import foundation.truncated-types
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
-open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
 
@@ -35,8 +36,17 @@ abstract
 
 is-1-type-Prop :
   {l : Level} → UU l → Prop l
-pr1 (is-1-type-Prop A) = is-1-type A
-pr2 (is-1-type-Prop A) = is-prop-is-1-type A
+is-1-type-Prop = is-trunc-Prop one-𝕋
+```
+
+### The type of all 1-types in a universe is a 2-type
+
+```agda
+is-trunc-1-Type : {l : Level} → is-trunc two-𝕋 (1-Type l)
+is-trunc-1-Type = is-trunc-Truncated-Type one-𝕋
+
+1-Type-Truncated-Type : (l : Level) → Truncated-Type (lsuc l) two-𝕋
+1-Type-Truncated-Type l = Truncated-Type-Truncated-Type l one-𝕋
 ```
 
 ### Products of families of 1-types are 1-types
@@ -66,19 +76,17 @@ pr2 (Π-1-Type' A B) = is-1-type-type-Π-1-Type' A B
 type-Π-1-Type :
   {l1 l2 : Level} (A : 1-Type l1) (B : type-1-Type A → 1-Type l2) →
   UU (l1 ⊔ l2)
-type-Π-1-Type A B = type-Π-1-Type' (type-1-Type A) B
+type-Π-1-Type A = type-Π-1-Type' (type-1-Type A)
 
 is-1-type-type-Π-1-Type :
   {l1 l2 : Level} (A : 1-Type l1) (B : type-1-Type A → 1-Type l2) →
   is-1-type (type-Π-1-Type A B)
-is-1-type-type-Π-1-Type A B =
-  is-1-type-type-Π-1-Type' (type-1-Type A) B
+is-1-type-type-Π-1-Type A = is-1-type-type-Π-1-Type' (type-1-Type A)
 
 Π-1-Type :
   {l1 l2 : Level} (A : 1-Type l1) (B : type-1-Type A → 1-Type l2) →
   1-Type (l1 ⊔ l2)
-pr1 (Π-1-Type A B) = type-Π-1-Type A B
-pr2 (Π-1-Type A B) = is-1-type-type-Π-1-Type A B
+Π-1-Type = Π-Truncated-Type one-𝕋
 ```
 
 ### The type of functions into a 1-type is a 1-type
@@ -102,8 +110,35 @@ is-1-type-type-hom-1-Type A B =
 
 hom-1-Type :
   {l1 l2 : Level} (A : 1-Type l1) (B : 1-Type l2) → 1-Type (l1 ⊔ l2)
-pr1 (hom-1-Type A B) = type-hom-1-Type A B
-pr2 (hom-1-Type A B) = is-1-type-type-hom-1-Type A B
+hom-1-Type = hom-Truncated-Type one-𝕋
+```
+
+### 1-Types are closed under dependent pair types
+
+```agda
+abstract
+  is-1-type-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-1-type A → ((x : A) → is-1-type (B x)) → is-1-type (Σ A B)
+  is-1-type-Σ = is-trunc-Σ {k = one-𝕋}
+
+Σ-1-Type :
+  {l1 l2 : Level} (A : 1-Type l1) (B : pr1 A → 1-Type l2) → 1-Type (l1 ⊔ l2)
+Σ-1-Type = Σ-Truncated-Type
+```
+
+### 1-Types are closed under cartesian product types
+
+```agda
+abstract
+  is-1-type-prod :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-1-type A → is-1-type B → is-1-type (A × B)
+  is-1-type-prod = is-trunc-prod one-𝕋
+
+prod-1-Type :
+  {l1 l2 : Level} (A : 1-Type l1) (B : 1-Type l2) → 1-Type (l1 ⊔ l2)
+prod-1-Type A B = Σ-1-Type A (λ x → B)
 ```
 
 ### Subtypes of 1-types are 1-types

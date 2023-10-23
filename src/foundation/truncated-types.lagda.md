@@ -9,8 +9,11 @@ open import foundation-core.truncated-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.subtype-identity-principle
+open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -20,7 +23,6 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
-open import foundation-core.truncation-levels
 ```
 
 </details>
@@ -71,4 +73,24 @@ pr2 (Truncated-Type-Truncated-Type l k) = is-trunc-Truncated-Type k
 ```agda
 emb-type-Truncated-Type : (l : Level) (k : 𝕋) → Truncated-Type l k ↪ UU l
 emb-type-Truncated-Type l k = emb-subtype (is-trunc-Prop k)
+```
+
+### If a type is `k`-truncated, then it is `k+r`-truncated
+
+```agda
+abstract
+  is-trunc-iterated-succ-is-trunc :
+    (k : 𝕋) (r : ℕ) {l : Level} {A : UU l} →
+    is-trunc k A → is-trunc (iterated-succ-𝕋' k r) A
+  is-trunc-iterated-succ-is-trunc k zero-ℕ is-trunc-A = is-trunc-A
+  is-trunc-iterated-succ-is-trunc k (succ-ℕ r) is-trunc-A =
+    is-trunc-iterated-succ-is-trunc (succ-𝕋 k) r
+      ( is-trunc-succ-is-trunc k is-trunc-A)
+
+truncated-type-iterated-succ-Truncated-Type :
+  (k : 𝕋) (r : ℕ) {l : Level} →
+  Truncated-Type l k → Truncated-Type l (iterated-succ-𝕋' k r)
+pr1 (truncated-type-iterated-succ-Truncated-Type k r A) = type-Truncated-Type A
+pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
+  is-trunc-iterated-succ-is-trunc k r (is-trunc-type-Truncated-Type A)
 ```
