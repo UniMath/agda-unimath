@@ -140,7 +140,7 @@ module _
   _⊨_ : kripke-model W l2 i l4 × w → formula i → Prop l
   (M , x) ⊨ var n = raise-Prop l (model-valuate M n x)
   (M , x) ⊨ ⊥ = raise-empty-Prop l
-  (M , x) ⊨ a ⇒ b = hom-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
+  (M , x) ⊨ a ⇒ b = implication-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
   (M , x) ⊨ □ a =
     Π-Prop w (λ y -> function-Prop (model-relation M x y) ((M , y) ⊨ a))
 
@@ -221,12 +221,13 @@ double-negation-LEM :
 double-negation-LEM dnP P =
   dnP (is-decidable-Prop P) (λ ndec → ndec (inr (λ p → ndec (inl p))))
 
-raise-dn :
+raise-double-negation :
   {l1 l2 : Level}
   {A : UU l1} →
   ¬¬ A →
   (raise l2 A → raise-empty l2) → raise-empty l2
-raise-dn dnA rnA = map-raise (dnA (λ a → map-inv-raise (rnA (map-raise a))))
+raise-double-negation dnA rnA =
+  map-raise (dnA (λ a → map-inv-raise (rnA (map-raise a))))
 
 full-soundness : UUω
 full-soundness =
@@ -250,10 +251,8 @@ full-soundness-required-LEM sound l =
     map-inv-raise
       ( sound
         ( unit , unit-trunc-Prop star)
-        ( model
-          ( frame (λ _ _ → empty))
-          ( λ _ _ → P))
+        ( model (frame (λ _ _ → empty)) (λ _ _ → P))
         ( ax-dn (var star))
         star
-        ( raise-dn dnP))
+        ( raise-double-negation dnP))
 ```
