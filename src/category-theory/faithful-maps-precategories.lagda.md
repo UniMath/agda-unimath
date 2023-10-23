@@ -49,7 +49,7 @@ module _
 
   is-prop-is-faithful-map-Precategory : is-prop is-faithful-map-Precategory
   is-prop-is-faithful-map-Precategory =
-    is-prop-Π² (λ x y → is-prop-is-emb (hom-map-Precategory C D F {x} {y}))
+    is-prop-Π² (λ x y → is-property-is-emb (hom-map-Precategory C D F {x} {y}))
 
   is-faithful-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   pr1 is-faithful-prop-map-Precategory = is-faithful-map-Precategory

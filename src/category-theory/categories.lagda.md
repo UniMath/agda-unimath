@@ -20,6 +20,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 
@@ -57,6 +58,10 @@ module _
 
   is-category-Precategory : UU (l1 ⊔ l2)
   is-category-Precategory = type-Prop is-category-prop-Precategory
+
+  is-prop-is-category-Precategory : is-prop is-category-Precategory
+  is-prop-is-category-Precategory =
+    is-prop-type-Prop is-category-prop-Precategory
 ```
 
 ### The type of categories
@@ -238,4 +243,88 @@ module _
   total-hom-1-type-Category : 1-Type (l1 ⊔ l2)
   total-hom-1-type-Category =
     total-hom-1-type-Preunivalent-Category (preunivalent-category-Category C)
+```
+
+### A preunivalent category is a category if and only if `iso-eq` is surjective
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  is-surjective-iso-eq-prop-Precategory : Prop (l1 ⊔ l2)
+  is-surjective-iso-eq-prop-Precategory =
+    Π-Prop
+      ( obj-Precategory C)
+      ( λ x →
+        Π-Prop
+          ( obj-Precategory C)
+          ( λ y →
+            is-surjective-Prop
+              ( iso-eq-Precategory C x y)))
+
+  is-surjective-iso-eq-Precategory : UU (l1 ⊔ l2)
+  is-surjective-iso-eq-Precategory =
+    type-Prop is-surjective-iso-eq-prop-Precategory
+
+  is-prop-is-surjective-iso-eq-Precategory :
+    is-prop is-surjective-iso-eq-Precategory
+  is-prop-is-surjective-iso-eq-Precategory =
+    is-prop-type-Prop is-surjective-iso-eq-prop-Precategory
+```
+
+```agda
+module _
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  where
+
+  is-category-is-surjective-iso-eq-Preunivalent-Category :
+    is-surjective-iso-eq-Precategory (precategory-Preunivalent-Category C) →
+    is-category-Precategory (precategory-Preunivalent-Category C)
+  is-category-is-surjective-iso-eq-Preunivalent-Category
+    is-surjective-iso-eq-C x y =
+    is-equiv-is-emb-is-surjective
+      ( is-surjective-iso-eq-C x y)
+      ( is-preunivalent-Preunivalent-Category C x y)
+
+  is-surjective-iso-eq-is-category-Preunivalent-Category :
+    is-category-Precategory (precategory-Preunivalent-Category C) →
+    is-surjective-iso-eq-Precategory (precategory-Preunivalent-Category C)
+  is-surjective-iso-eq-is-category-Preunivalent-Category
+    is-category-C x y =
+    is-surjective-is-equiv (is-category-C x y)
+
+  is-equiv-is-category-is-surjective-iso-eq-Preunivalent-Category :
+    is-equiv is-category-is-surjective-iso-eq-Preunivalent-Category
+  is-equiv-is-category-is-surjective-iso-eq-Preunivalent-Category =
+    is-equiv-is-prop
+      ( is-prop-is-surjective-iso-eq-Precategory
+        ( precategory-Preunivalent-Category C))
+      ( is-prop-is-category-Precategory (precategory-Preunivalent-Category C))
+      ( is-surjective-iso-eq-is-category-Preunivalent-Category)
+
+  is-equiv-is-surjective-iso-eq-is-category-Preunivalent-Category :
+    is-equiv is-surjective-iso-eq-is-category-Preunivalent-Category
+  is-equiv-is-surjective-iso-eq-is-category-Preunivalent-Category =
+    is-equiv-is-prop
+      ( is-prop-is-category-Precategory (precategory-Preunivalent-Category C))
+      ( is-prop-is-surjective-iso-eq-Precategory
+        ( precategory-Preunivalent-Category C))
+      ( is-category-is-surjective-iso-eq-Preunivalent-Category)
+
+  equiv-is-category-is-surjective-iso-eq-Preunivalent-Category :
+    is-surjective-iso-eq-Precategory (precategory-Preunivalent-Category C) ≃
+    is-category-Precategory (precategory-Preunivalent-Category C)
+  pr1 equiv-is-category-is-surjective-iso-eq-Preunivalent-Category =
+    is-category-is-surjective-iso-eq-Preunivalent-Category
+  pr2 equiv-is-category-is-surjective-iso-eq-Preunivalent-Category =
+    is-equiv-is-category-is-surjective-iso-eq-Preunivalent-Category
+
+  equiv-is-surjective-iso-eq-is-category-Preunivalent-Category :
+    is-category-Precategory (precategory-Preunivalent-Category C) ≃
+    is-surjective-iso-eq-Precategory (precategory-Preunivalent-Category C)
+  pr1 equiv-is-surjective-iso-eq-is-category-Preunivalent-Category =
+    is-surjective-iso-eq-is-category-Preunivalent-Category
+  pr2 equiv-is-surjective-iso-eq-is-category-Preunivalent-Category =
+    is-equiv-is-surjective-iso-eq-is-category-Preunivalent-Category
 ```

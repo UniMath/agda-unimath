@@ -152,6 +152,14 @@ module _
   is-preunivalent-Preunivalent-Category :
     is-preunivalent-Precategory precategory-Preunivalent-Category
   is-preunivalent-Preunivalent-Category = pr2 C
+
+  emb-iso-eq-Preunivalent-Category :
+    {x y : obj-Preunivalent-Category} →
+    (x ＝ y) ↪ (iso-Precategory precategory-Preunivalent-Category x y)
+  pr1 (emb-iso-eq-Preunivalent-Category {x} {y}) =
+    iso-eq-Precategory precategory-Preunivalent-Category x y
+  pr2 (emb-iso-eq-Preunivalent-Category {x} {y}) =
+    is-preunivalent-Preunivalent-Category x y
 ```
 
 ### The total hom-type of a preunivalent category

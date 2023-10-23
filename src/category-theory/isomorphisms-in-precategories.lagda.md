@@ -721,15 +721,17 @@ module _
   {x y : obj-Precategory C}
   where
 
-  is-prop-iso-Precategory :
+  is-prop-iso-is-prop-hom-Precategory :
     is-prop (hom-Precategory C x y) → is-prop (iso-Precategory C x y)
-  is-prop-iso-Precategory = is-prop-type-subtype (is-iso-prop-Precategory C)
+  is-prop-iso-is-prop-hom-Precategory =
+    is-prop-type-subtype (is-iso-prop-Precategory C)
 
-  iso-prop-Precategory :
+  iso-prop-is-prop-hom-Precategory :
     is-prop (hom-Precategory C x y) → Prop l2
-  pr1 (iso-prop-Precategory _) = iso-Precategory C x y
-  pr2 (iso-prop-Precategory is-prop-hom-C-x-y) =
-    is-prop-iso-Precategory is-prop-hom-C-x-y
+  pr1 (iso-prop-is-prop-hom-Precategory is-prop-hom-C-x-y) =
+    iso-Precategory C x y
+  pr2 (iso-prop-is-prop-hom-Precategory is-prop-hom-C-x-y) =
+    is-prop-iso-is-prop-hom-Precategory is-prop-hom-C-x-y
 ```
 
 ### When `hom x y` and `hom y x` are propositions, it suffices to provide a morphism in each direction to construct an isomorphism

@@ -249,7 +249,7 @@ module _
     is-emb-is-prop-map (λ b → is-prop-Σ is-prop-A (λ a → is-set-B (f a) b))
 ```
 
-### Sets are `k`-truncated for every `k ≥ 0`
+### Sets are `k+2`-truncated for any `k`
 
 ```agda
 is-trunc-is-set :
