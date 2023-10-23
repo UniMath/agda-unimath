@@ -38,7 +38,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 A **cocone under a
 [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
-`(A, a)`** with vertex `X : 𝓤` consists of a family of maps `iₙ : A n → C` and a
+`(A, a)`** with codomain `X : 𝓤` consists of a family of maps `iₙ : A n → C` and a
 family of [homotopies](foundation.homotopies.md) `Hₙ` asserting that the
 triangles
 
