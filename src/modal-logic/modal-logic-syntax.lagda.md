@@ -45,8 +45,8 @@ module _
   {l : Level} (i : UU l)
   where
 
-  infixr 4 _⇒_
-  infixr 7 □_
+  infixr 6 _⇒_
+  infixr 25 □_
 
   data formula : UU l where
     var : i → formula
@@ -58,12 +58,12 @@ module _
   {l : Level} {i : UU l}
   where
 
-  infixr 7 ~_
-  infixr 7 ~~_
-  infixr 5 _∨_
-  infixr 6 _∧_
-  infixr 7 ◇_
-  infixr 2 ⊢_
+  infixr 25 ~_
+  infixr 25 ~~_
+  infixl 10 _∨_
+  infixl 15 _∧_
+  infixr 25 ◇_
+  infix 5 ⊢_
 
   ~_ : formula i → formula i
   ~ a = a ⇒ ⊥
@@ -129,23 +129,23 @@ module _
   private
     l = l1 ⊔ l2 ⊔ l3
 
-  infix 2 _⊨_
-  infix 2 _⊭_
-  infix 2 _⊨M_
-  infix 2 _⊭M_
+  infix 5 _⊨_
+  infix 5 _⊭_
+  infix 5 _⊨M_
+  infix 5 _⊭M_
 
   _⊨_ : kripke-model W i l3 × w → formula i → Prop l
-  M , x ⊨ var n = raise-Prop l (model-valuate M n x)
-  M , x ⊨ ⊥ = raise-empty-Prop l
-  M , x ⊨ a ⇒ b = hom-Prop (M , x ⊨ a) (M , x ⊨ b)
-  M , x ⊨ □ a =
-    Π-Prop w (λ y -> function-Prop (model-relation M x y) (M , y ⊨ a))
+  (M , x) ⊨ var n = raise-Prop l (model-valuate M n x)
+  (M , x) ⊨ ⊥ = raise-empty-Prop l
+  (M , x) ⊨ a ⇒ b = hom-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
+  (M , x) ⊨ □ a =
+    Π-Prop w (λ y -> function-Prop (model-relation M x y) ((M , y) ⊨ a))
 
   _⊭_ : kripke-model W i l3 × w → formula i → Prop l
-  M , x ⊭ a = neg-Prop (M , x ⊨ a)
+  (M , x) ⊭ a = neg-Prop ((M , x) ⊨ a)
 
   _⊨M_ : kripke-model W i l3 → formula i → Prop l
-  M ⊨M a = Π-Prop w (λ x → M , x ⊨ a)
+  M ⊨M a = Π-Prop w (λ x → (M , x) ⊨ a)
 
   _⊭M_ : kripke-model W i l3 → formula i → Prop l
   M ⊭M a = neg-Prop (M ⊨M a)
@@ -163,7 +163,7 @@ module _
 
   is-classical-Prop : kripke-model W i l3 → Prop l
   is-classical-Prop M =
-    Π-Prop (formula i) (λ a → Π-Prop w (λ x → is-decidable-Prop (M , x ⊨ a)))
+    Π-Prop (formula i) (λ a → Π-Prop w (λ x → is-decidable-Prop ((M , x) ⊨ a)))
 
   is-classical : kripke-model W i l3 → UU l
   is-classical = type-Prop ∘ is-classical-Prop
