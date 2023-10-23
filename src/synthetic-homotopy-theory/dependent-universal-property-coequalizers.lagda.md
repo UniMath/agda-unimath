@@ -186,14 +186,14 @@ module _
   universal-property-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( Y) =
-      is-equiv-comp-htpy
-        ( cofork-map f g e)
-        ( map-compute-dependent-cofork-constant-family f g e Y)
-        ( dependent-cofork-map f g e)
-        ( triangle-compute-dependent-cofork-constant-family f g e Y)
-        ( dup-coequalizer (λ _ → Y))
-        ( is-equiv-map-equiv
-          ( compute-dependent-cofork-constant-family f g e Y))
+    is-equiv-comp-htpy
+      ( cofork-map f g e)
+      ( map-compute-dependent-cofork-constant-family f g e Y)
+      ( dependent-cofork-map f g e)
+      ( triangle-compute-dependent-cofork-constant-family f g e Y)
+      ( dup-coequalizer (λ _ → Y))
+      ( is-equiv-map-equiv
+        ( compute-dependent-cofork-constant-family f g e Y))
 
   dependent-universal-property-universal-property-coequalizer :
     ( {l : Level} → universal-property-coequalizer l f g e) →
