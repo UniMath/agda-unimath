@@ -119,11 +119,11 @@ module _
     UU (l1 ⊔ l2)
   coherence-htpy-cocone-sequential-diagram c c' K =
     ( n : ℕ) →
-      coherence-square-homotopies
-        ( coherence-triangle-cocone-sequential-diagram A c n)
-        ( K (succ-ℕ n) ·r map-sequential-diagram A n)
-        ( K n)
-        ( coherence-triangle-cocone-sequential-diagram A c' n)
+    coherence-square-homotopies
+      ( coherence-triangle-cocone-sequential-diagram A c n)
+      ( K (succ-ℕ n) ·r map-sequential-diagram A n)
+      ( K n)
+      ( coherence-triangle-cocone-sequential-diagram A c' n)
 
   htpy-cocone-sequential-diagram :
     ( c c' : cocone-sequential-diagram A X) → UU (l1 ⊔ l2)
