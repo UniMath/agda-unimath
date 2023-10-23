@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.iterated-dependent-product-types
 open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.universe-levels
@@ -49,7 +50,8 @@ module _
 
   is-prop-is-faithful-map-Precategory : is-prop is-faithful-map-Precategory
   is-prop-is-faithful-map-Precategory =
-    is-prop-Π² (λ x y → is-property-is-emb (hom-map-Precategory C D F {x} {y}))
+    is-prop-iterated-Π 2
+      ( λ x y → is-property-is-emb (hom-map-Precategory C D F {x} {y}))
 
   is-faithful-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   pr1 is-faithful-prop-map-Precategory = is-faithful-map-Precategory
@@ -110,7 +112,7 @@ module _
   is-prop-is-injective-hom-map-Precategory :
     is-prop is-injective-hom-map-Precategory
   is-prop-is-injective-hom-map-Precategory =
-    is-prop-Π²
+    is-prop-iterated-Π 2
       ( λ x y →
         is-prop-is-injective
           ( is-set-hom-Precategory C x y)

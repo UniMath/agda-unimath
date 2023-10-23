@@ -36,7 +36,7 @@ the
 [isomorphism](category-theory.isomorphisms-in-categories.md)-[sets](foundation-core.sets.md)
 are [propositions](foundation-core.propositions.md), or equivalently a category
 such that the objects form a set. Thus, gaunt categories is the common
-intersection if (univalent) categories and
+intersection of (univalent) categories and
 [strict categories](category-theory.strict-categories.md). We have the following
 diagram relating the different notions of "category":
 
@@ -319,3 +319,9 @@ module _
   pr2 (is-gaunt-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C) =
     is-prop-iso-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C
 ```
+
+## External links
+
+- [Gaunt (pre)categories](https://1lab.dev/Cat.Gaunt.html) at 1lab
+- [gaunt category](https://ncatlab.org/nlab/show/gaunt+category#in_type_theory)
+  at nlab

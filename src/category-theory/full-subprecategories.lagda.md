@@ -58,30 +58,30 @@ module _
   (P : Full-Subprecategory l3 C)
   where
 
-  subtype-obj-Full-Subprecategory : subtype l3 (obj-Precategory C)
-  subtype-obj-Full-Subprecategory = P
+  subobj-Full-Subprecategory : subtype l3 (obj-Precategory C)
+  subobj-Full-Subprecategory = P
 
   obj-Full-Subprecategory : UU (l1 ⊔ l3)
-  obj-Full-Subprecategory = type-subtype subtype-obj-Full-Subprecategory
+  obj-Full-Subprecategory = type-subtype subobj-Full-Subprecategory
 
   inclusion-obj-Full-Subprecategory :
     obj-Full-Subprecategory → obj-Precategory C
   inclusion-obj-Full-Subprecategory =
-    inclusion-subtype subtype-obj-Full-Subprecategory
+    inclusion-subtype subobj-Full-Subprecategory
 
   is-in-obj-Full-Subprecategory : (x : obj-Precategory C) → UU l3
-  is-in-obj-Full-Subprecategory = is-in-subtype subtype-obj-Full-Subprecategory
+  is-in-obj-Full-Subprecategory = is-in-subtype subobj-Full-Subprecategory
 
   is-prop-is-in-obj-Full-Subprecategory :
     (x : obj-Precategory C) → is-prop (is-in-obj-Full-Subprecategory x)
   is-prop-is-in-obj-Full-Subprecategory =
-    is-prop-is-in-subtype subtype-obj-Full-Subprecategory
+    is-prop-is-in-subtype subobj-Full-Subprecategory
 
   is-in-obj-inclusion-obj-Full-Subprecategory :
     (x : obj-Full-Subprecategory) →
     is-in-obj-Full-Subprecategory (inclusion-obj-Full-Subprecategory x)
   is-in-obj-inclusion-obj-Full-Subprecategory =
-    is-in-subtype-inclusion-subtype subtype-obj-Full-Subprecategory
+    is-in-subtype-inclusion-subtype subobj-Full-Subprecategory
 ```
 
 ### The underlying precategory of a full subprecategory
@@ -279,7 +279,7 @@ module _
         ( C)
         ( inclusion-Full-Subprecategory C P))
   is-emb-obj-inclusion-Full-Subprecategory =
-    is-emb-inclusion-subtype (subtype-obj-Full-Subprecategory C P)
+    is-emb-inclusion-subtype (subobj-Full-Subprecategory C P)
 
   is-embedding-inclusion-Full-Subprecategory :
     is-embedding-functor-Precategory

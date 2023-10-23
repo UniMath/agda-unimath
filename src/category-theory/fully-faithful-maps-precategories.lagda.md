@@ -50,7 +50,7 @@ module _
   is-prop-is-fully-faithful-map-Precategory :
     is-prop is-fully-faithful-map-Precategory
   is-prop-is-fully-faithful-map-Precategory =
-    is-prop-Π²
+    is-prop-iterated-Π 2
       ( λ x y → is-property-is-equiv (hom-map-Precategory C D F {x} {y}))
 
   is-fully-faithful-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)

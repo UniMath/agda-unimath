@@ -40,11 +40,14 @@ preunivalent categories generalize both
 [strict categories](category-theory.strict-categories.md), which are
 precategories whose objects form a [set](foundation-core.sets.md).
 
-Summarized, the preunivalence condition on precategories states that the type of
-objects is a subgroupoid of the [groupoid](category-theory.groupoids.md) of
-isomorphisms. For univalent categories the groupoid of objects is equivalent to
-the groupoid of isomorphisms, while for strict categories the groupoid of
-objects is discrete.
+The preunivalence condition on precategories states that the type of objects is
+a subgroupoid of the [groupoid](category-theory.groupoids.md) of isomorphisms.
+For univalent categories the groupoid of objects is equivalent to the groupoid
+of isomorphisms, while for strict categories the groupoid of objects is
+discrete. Indeed, in this sense preunivalence provides a generalization of both
+notions of "category", with _no more structure_. This is opposed to the even
+more general notion of precategory, where the homotopy structure on the objects
+can be almost completely unrelated to the homotopy structure of the morphisms.
 
 ## Definitions
 

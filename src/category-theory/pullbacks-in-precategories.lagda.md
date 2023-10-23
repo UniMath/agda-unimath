@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.iterated-dependent-product-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.unique-existence
@@ -159,7 +160,8 @@ module _
   is-prop-is-pullback-Precategory :
     is-prop (is-pullback-Precategory C x y z f g w p₁ p₂ α)
   is-prop-is-pullback-Precategory =
-    is-prop-Π³ (λ w' p₁' p₂' → is-prop-function-type is-property-is-contr)
+    is-prop-iterated-Π 3
+      ( λ w' p₁' p₂' → is-prop-function-type is-property-is-contr)
 
   is-pullback-prop-Precategory : Prop (l1 ⊔ l2)
   pr1 is-pullback-prop-Precategory =

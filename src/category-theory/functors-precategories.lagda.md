@@ -16,6 +16,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.iterated-dependent-product-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -208,7 +209,7 @@ module _
           ( λ y →
             is-prop-Π'
               ( λ z →
-                is-prop-Π²
+                is-prop-iterated-Π 2
                   ( λ g f →
                     is-set-hom-Precategory D
                       ( obj-map-Precategory C D F x)
