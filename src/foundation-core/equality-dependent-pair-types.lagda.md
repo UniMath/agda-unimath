@@ -105,6 +105,16 @@ module _
 
   η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
   η-pair t = eq-pair-Σ refl refl
+
+  eq-base-eq-pair-Σ : {s t : Σ A B} → (s ＝ t) → (pr1 s ＝ pr1 t)
+  eq-base-eq-pair-Σ p =
+    pr1 (pair-eq-Σ p)
+
+  dependent-eq-eq-pair-Σ :
+    {s t : Σ A B} → (p : s ＝ t) →
+    dependent-identification B (eq-base-eq-pair-Σ p) (pr2 s) (pr2 t)
+  dependent-eq-eq-pair-Σ p =
+    pr2 (pair-eq-Σ p)
 ```
 
 ### Lifting equality to the total space
