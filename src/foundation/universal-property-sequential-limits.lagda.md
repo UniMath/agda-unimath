@@ -249,4 +249,4 @@ concept.
 ## See also
 
 - For sequential colimits, see
-  [`synthetic-homotopy-theory.27-sequences`](synthetic-homotopy-theory.27-sequences.md)
+  [`synthetic-homotopy-theory.universal-property-sequential-colimits`](synthetic-homotopy-theory.universal-property-sequential-colimits.md)

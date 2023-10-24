@@ -83,6 +83,7 @@ open import foundation.decidable-types public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
+open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-sequences public
@@ -290,6 +291,7 @@ open import foundation.towers public
 open import foundation.transfinite-cocomposition-of-maps public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
+open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
