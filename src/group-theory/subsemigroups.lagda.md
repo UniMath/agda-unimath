@@ -19,6 +19,7 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
+open import group-theory.subsets-semigroups
 ```
 
 </details>
@@ -30,72 +31,29 @@ multiplication.
 
 ## Definitions
 
-### Subsets of semigroups
-
-```agda
-subset-Semigroup :
-  {l1 : Level} (l2 : Level) (G : Semigroup l1) → UU (l1 ⊔ lsuc l2)
-subset-Semigroup l2 G = subtype l2 (type-Semigroup G)
-
-module _
-  {l1 l2 : Level} (G : Semigroup l1) (P : subset-Semigroup l2 G)
-  where
-
-  is-in-subset-Semigroup : type-Semigroup G → UU l2
-  is-in-subset-Semigroup = is-in-subtype P
-
-  is-prop-is-in-subset-Semigroup :
-    (x : type-Semigroup G) → is-prop (is-in-subset-Semigroup x)
-  is-prop-is-in-subset-Semigroup = is-prop-is-in-subtype P
-
-  type-subset-Semigroup : UU (l1 ⊔ l2)
-  type-subset-Semigroup = type-subtype P
-
-  is-set-type-subset-Semigroup : is-set type-subset-Semigroup
-  is-set-type-subset-Semigroup =
-    is-set-type-subtype P (is-set-type-Semigroup G)
-
-  set-subset-Semigroup : Set (l1 ⊔ l2)
-  set-subset-Semigroup = set-subset (set-Semigroup G) P
-
-  inclusion-subset-Semigroup : type-subset-Semigroup → type-Semigroup G
-  inclusion-subset-Semigroup = inclusion-subtype P
-
-  ap-inclusion-subset-Semigroup :
-    (x y : type-subset-Semigroup) →
-    x ＝ y → (inclusion-subset-Semigroup x ＝ inclusion-subset-Semigroup y)
-  ap-inclusion-subset-Semigroup = ap-inclusion-subtype P
-
-  is-in-subset-inclusion-subset-Semigroup :
-    (x : type-subset-Semigroup) →
-    is-in-subset-Semigroup (inclusion-subset-Semigroup x)
-  is-in-subset-inclusion-subset-Semigroup =
-    is-in-subtype-inclusion-subtype P
-```
-
 ### Subsemigroups
 
 ```agda
-is-subsemigroup-subset-Semigroup-Prop :
+is-closed-under-multiplication-prop-subset-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (P : subset-Semigroup l2 G) →
   Prop (l1 ⊔ l2)
-is-subsemigroup-subset-Semigroup-Prop G P =
-  Π-Prop
+is-closed-under-multiplication-prop-subset-Semigroup G P =
+  Π-Prop'
     ( type-Semigroup G)
     ( λ x →
-      Π-Prop
+      Π-Prop'
         ( type-Semigroup G)
         ( λ y → hom-Prop (P x) (hom-Prop (P y) (P (mul-Semigroup G x y)))))
 
-is-subsemigroup-subset-Semigroup :
+is-closed-under-multiplication-subset-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (P : subset-Semigroup l2 G) → UU (l1 ⊔ l2)
-is-subsemigroup-subset-Semigroup G P =
-  type-Prop (is-subsemigroup-subset-Semigroup-Prop G P)
+is-closed-under-multiplication-subset-Semigroup G P =
+  type-Prop (is-closed-under-multiplication-prop-subset-Semigroup G P)
 
 Subsemigroup :
   {l1 : Level} (l2 : Level) (G : Semigroup l1) → UU (l1 ⊔ lsuc l2)
 Subsemigroup l2 G =
-  type-subtype (is-subsemigroup-subset-Semigroup-Prop {l2 = l2} G)
+  type-subtype (is-closed-under-multiplication-prop-subset-Semigroup {l2 = l2} G)
 
 module _
   {l1 l2 : Level} (G : Semigroup l1) (P : Subsemigroup l2 G)
@@ -103,14 +61,26 @@ module _
 
   subset-Subsemigroup : subtype l2 (type-Semigroup G)
   subset-Subsemigroup =
-    inclusion-subtype (is-subsemigroup-subset-Semigroup-Prop G) P
+    inclusion-subtype (is-closed-under-multiplication-prop-subset-Semigroup G) P
 
-  is-subsemigroup-Subsemigroup :
-    is-subsemigroup-subset-Semigroup G subset-Subsemigroup
-  is-subsemigroup-Subsemigroup = pr2 P
+  is-closed-under-multiplication-Subsemigroup :
+    is-closed-under-multiplication-subset-Semigroup G subset-Subsemigroup
+  is-closed-under-multiplication-Subsemigroup = pr2 P
 
   is-in-Subsemigroup : type-Semigroup G → UU l2
   is-in-Subsemigroup = is-in-subtype subset-Subsemigroup
+
+  is-closed-under-eq-Subsemigroup :
+    {x y : type-Semigroup G} →
+    is-in-Subsemigroup x → x ＝ y → is-in-Subsemigroup y
+  is-closed-under-eq-Subsemigroup =
+    is-closed-under-eq-subset-Semigroup G subset-Subsemigroup
+
+  is-closed-under-eq-Subsemigroup' :
+    {x y : type-Semigroup G} →
+    is-in-Subsemigroup y → x ＝ y → is-in-Subsemigroup x
+  is-closed-under-eq-Subsemigroup' =
+    is-closed-under-eq-subset-Semigroup' G subset-Subsemigroup
 
   is-prop-is-in-Subsemigroup :
     (x : type-Semigroup G) → is-prop (is-in-Subsemigroup x)
@@ -145,12 +115,6 @@ module _
   is-in-subsemigroup-inclusion-Subsemigroup =
     is-in-subtype-inclusion-subtype subset-Subsemigroup
 
-  is-closed-under-multiplication-Subsemigroup :
-    {x y : type-Semigroup G} →
-    is-in-Subsemigroup x → is-in-Subsemigroup y →
-    is-in-Subsemigroup (mul-Semigroup G x y)
-  is-closed-under-multiplication-Subsemigroup {x} {y} = pr2 P x y
-
   mul-Subsemigroup :
     (x y : type-Subsemigroup) → type-Subsemigroup
   pr1 (mul-Subsemigroup x y) =
@@ -158,9 +122,7 @@ module _
       ( inclusion-Subsemigroup x)
       ( inclusion-Subsemigroup y)
   pr2 (mul-Subsemigroup x y) =
-    is-closed-under-multiplication-Subsemigroup
-      ( is-in-subsemigroup-inclusion-Subsemigroup x)
-      ( is-in-subsemigroup-inclusion-Subsemigroup y)
+    is-closed-under-multiplication-Subsemigroup (pr2 x) (pr2 y)
 
   associative-mul-Subsemigroup :
     (x y z : type-Subsemigroup) →
@@ -180,15 +142,14 @@ module _
   pr2 (pr2 semigroup-Subsemigroup) = associative-mul-Subsemigroup
 
   preserves-mul-inclusion-Subsemigroup :
-    (x y : type-Subsemigroup) →
-    inclusion-Subsemigroup (mul-Subsemigroup x y) ＝
-    mul-Semigroup G (inclusion-Subsemigroup x) (inclusion-Subsemigroup y)
-  preserves-mul-inclusion-Subsemigroup x y = refl
+    preserves-mul-Semigroup semigroup-Subsemigroup G inclusion-Subsemigroup
+  preserves-mul-inclusion-Subsemigroup = refl
 
   hom-inclusion-Subsemigroup :
     hom-Semigroup semigroup-Subsemigroup G
   pr1 hom-inclusion-Subsemigroup = inclusion-Subsemigroup
-  pr2 hom-inclusion-Subsemigroup = preserves-mul-inclusion-Subsemigroup
+  pr2 hom-inclusion-Subsemigroup {x} {y} =
+    preserves-mul-inclusion-Subsemigroup {x} {y}
 ```
 
 ## Properties
@@ -210,8 +171,8 @@ module _
     (K : Subsemigroup l2 G) → (H ＝ K) ≃ has-same-elements-Subsemigroup K
   extensionality-Subsemigroup =
     extensionality-type-subtype
-      ( is-subsemigroup-subset-Semigroup-Prop G)
-      ( is-subsemigroup-Subsemigroup G H)
+      ( is-closed-under-multiplication-prop-subset-Semigroup G)
+      ( is-closed-under-multiplication-Subsemigroup G H)
       ( λ x → pair id id)
       ( extensionality-subtype (subset-Subsemigroup G H))
 ```

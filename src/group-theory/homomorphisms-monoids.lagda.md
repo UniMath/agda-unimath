@@ -280,11 +280,11 @@ module _
   pr1 (preserves-invertible-elements-hom-Monoid (y , p , q)) =
     map-hom-Monoid M N f y
   pr1 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
-    ( inv (preserves-mul-hom-Monoid M N f _ y)) ∙
+    ( inv (preserves-mul-hom-Monoid M N f)) ∙
     ( ap (map-hom-Monoid M N f) p) ∙
     ( preserves-unit-hom-Monoid M N f)
   pr2 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
-    ( inv (preserves-mul-hom-Monoid M N f y _)) ∙
+    ( inv (preserves-mul-hom-Monoid M N f)) ∙
     ( ap (map-hom-Monoid M N f) q) ∙
     ( preserves-unit-hom-Monoid M N f)
 ```

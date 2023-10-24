@@ -182,7 +182,7 @@ module _
 
 ### The abelianization functor
 
-```agda
+```text
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
@@ -193,7 +193,7 @@ module _
     hom-quotient-Group G H
       ( commutator-normal-subgroup-Group G)
       ( commutator-normal-subgroup-Group H)
-      {!!}
+      {! !}
 
 abelianization-functor-Group :
   functor-Large-Category id Group-Large-Category Ab-Large-Category
@@ -202,7 +202,7 @@ abelianization-functor-Group = {!!}
 
 ### The abelianization adjunction
 
-```agda
+```text
 abelianization-adjunction-Group :
   Adjunction-Large-Category
     ( λ l → l)

@@ -85,7 +85,7 @@ module _
     htpy-eq
       ( ap pr1
         ( preserves-mul-hom-Group G
-          ( symmetric-Group set-Abstract-Group-Action) (pr2 X) g h))
+          ( symmetric-Group set-Abstract-Group-Action) (pr2 X)))
 
   transpose-eq-mul-Abstract-Group-Action :
     (g : type-Group G) (x y : type-Abstract-Group-Action) →

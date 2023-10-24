@@ -157,7 +157,7 @@ module _
   iterative-Monoid-Action : Monoid-Action l ℕ*-Monoid
   pr1 iterative-Monoid-Action = endo-Set X
   pr1 (pr1 (pr2 iterative-Monoid-Action)) k f = iterate k f
-  pr2 (pr1 (pr2 iterative-Monoid-Action)) k l =
+  pr2 (pr1 (pr2 iterative-Monoid-Action)) {k} {l} =
     eq-htpy (λ f → eq-htpy (λ x → iterate-mul-ℕ k l f x))
   pr2 (pr2 iterative-Monoid-Action) = refl
 ```

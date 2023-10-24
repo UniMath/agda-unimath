@@ -110,8 +110,8 @@ module _
       ( map-hom-Group G K f) →
     nullifies-normal-subgroup-hom-Group G K f H
   nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group f p x q =
-    ( p ( is-closed-under-multiplication-Normal-Subgroup G H _ _
-          ( is-closed-under-inverses-Normal-Subgroup G H x q)
+    ( p ( is-closed-under-multiplication-Normal-Subgroup G H
+          ( is-closed-under-inverses-Normal-Subgroup G H q)
           ( contains-unit-Normal-Subgroup G H))) ∙
     ( preserves-unit-hom-Group G K f)
 

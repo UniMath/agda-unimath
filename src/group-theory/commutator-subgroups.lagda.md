@@ -19,6 +19,7 @@ open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
+open import group-theory.pullbacks-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-families-of-elements-groups
 open import group-theory.subgroups-generated-by-subsets-groups
@@ -147,10 +148,17 @@ module _
 
 ### Every group homomorphism `f : G → H` maps `[G,G]` to `[H,H]`
 
-```agda
+```text
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
+
+  preserves-commutator-subgroup-hom-Group :
+    leq-Subgroup G
+      ( commutator-subgroup-Group G)
+      ( pullback-Subgroup G H f (commutator-subgroup-Group H))
+  preserves-commutator-subgroup-hom-Group x p =
+    preserves-order-subgroup-subset-Group H {!!} {!!} {!!} {!!} {!!}
 ```
 
 ## External links

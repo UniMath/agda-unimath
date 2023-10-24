@@ -64,8 +64,8 @@ module _
   where
 
   preserves-negatives-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
-  preserves-negatives-Ab f =
-    (x : type-Ab A) → Id (f (neg-Ab A x)) (neg-Ab B (f x))
+  preserves-negatives-Ab =
+    preserves-inverses-Group (group-Ab A) (group-Ab B)
 ```
 
 ### Homomorphisms of abelian groups

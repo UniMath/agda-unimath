@@ -378,10 +378,10 @@ module _
 
 ```agda
   distributive-inv-mul-Group :
-    (x y : type-Group G) →
+    {x y : type-Group G} →
     inv-Group G (mul-Group G x y) ＝
     mul-Group G (inv-Group G y) (inv-Group G x)
-  distributive-inv-mul-Group x y =
+  distributive-inv-mul-Group {x} {y} =
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
           ( ( associative-mul-Group G (inv-Group G (mul-Group G x y)) x y) ∙
@@ -392,7 +392,7 @@ module _
     (x y : type-Group G) → mul-Group G x y ＝ mul-Group G y x →
     inv-Group G (mul-Group G x y) ＝ mul-Group G (inv-Group G x) (inv-Group G y)
   distributive-inv-mul-Group' x y H =
-    ( distributive-inv-mul-Group x y) ∙
+    ( distributive-inv-mul-Group) ∙
     ( inv (double-transpose-eq-mul-Group (double-transpose-eq-mul-Group H)))
 ```
 
@@ -466,7 +466,7 @@ module _
     equational-reasoning
       inv-Group G (left-div-Group x y)
       ＝ left-div-Group y (inv-Group G (inv-Group G x))
-        by distributive-inv-mul-Group (inv-Group G x) y
+        by distributive-inv-mul-Group
       ＝ left-div-Group y x
         by ap (left-div-Group y) (inv-inv-Group x)
 ```
@@ -481,7 +481,7 @@ module _
     equational-reasoning
       inv-Group G (right-div-Group x y)
       ＝ right-div-Group (inv-Group G (inv-Group G y)) x
-        by distributive-inv-mul-Group x (inv-Group G y)
+        by distributive-inv-mul-Group
       ＝ right-div-Group y x
         by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
 ```

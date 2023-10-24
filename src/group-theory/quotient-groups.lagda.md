@@ -347,13 +347,11 @@ module _
 
   abstract
     preserves-mul-quotient-hom-Group :
-      (x y : type-Group G) →
-      map-quotient-hom-Group G N (mul-Group G x y) ＝
-      mul-quotient-Group G N
-        ( map-quotient-hom-Group G N x)
-        ( map-quotient-hom-Group G N y)
-    preserves-mul-quotient-hom-Group x y =
-      inv (compute-mul-quotient-Group G N x y)
+      preserves-mul-Group G
+        ( quotient-Group G N)
+        ( map-quotient-hom-Group G N)
+    preserves-mul-quotient-hom-Group =
+      inv (compute-mul-quotient-Group G N _ _)
 
   preserves-unit-quotient-hom-Group :
     map-quotient-hom-Group G N (unit-Group G) ＝ unit-quotient-Group G N
@@ -530,11 +528,12 @@ module _
             ( is-prop-preserves-mul-Group (quotient-Group G N) H f)
             ( is-prop-preserves-mul-Group G H
               ( f ∘ map-quotient-hom-Group G N))
-            ( λ μ →
+            ( λ μ {a} {b} →
               double-induction-quotient-Group G G N N
                 ( λ x y → Id-Prop (set-Group H) _ _)
-                ( λ x y →
-                  ap f (compute-mul-quotient-Group G N x y) ∙ μ x y)))
+                ( λ x y → ap f (compute-mul-quotient-Group G N x y) ∙ μ)
+                ( a)
+                ( b)))
 
   abstract
     is-quotient-group-quotient-Group :

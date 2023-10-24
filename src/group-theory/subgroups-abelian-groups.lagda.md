@@ -263,8 +263,8 @@ module _
 
   preserves-add-inclusion-Subgroup-Ab :
     preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
-  preserves-add-inclusion-Subgroup-Ab =
-    preserves-mul-inclusion-Subgroup (group-Ab A) B
+  preserves-add-inclusion-Subgroup-Ab {x} {y} =
+    preserves-mul-inclusion-Subgroup (group-Ab A) B {x} {y}
 
   preserves-zero-inclusion-Subgroup-Ab :
     preserves-zero-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
@@ -276,8 +276,8 @@ module _
       ( ab-Subgroup-Ab A B)
       ( A)
       ( map-inclusion-Subgroup-Ab A B)
-  preserves-negatives-inclusion-Subgroup-Ab =
-    preserves-inverses-inclusion-Subgroup (group-Ab A) B
+  preserves-negatives-inclusion-Subgroup-Ab {x} =
+    preserves-inverses-inclusion-Subgroup (group-Ab A) B {x}
 
   hom-inclusion-Subgroup-Ab : hom-Ab (ab-Subgroup-Ab A B) A
   hom-inclusion-Subgroup-Ab = hom-inclusion-Subgroup (group-Ab A) B

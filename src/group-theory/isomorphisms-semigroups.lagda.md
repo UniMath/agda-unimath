@@ -123,7 +123,7 @@ module _
   map-iso-Semigroup f = map-hom-Semigroup G H (hom-iso-Semigroup f)
 
   preserves-mul-iso-Semigroup :
-    (f : iso-Semigroup) (x y : type-Semigroup G) →
+    (f : iso-Semigroup) {x y : type-Semigroup G} →
     map-iso-Semigroup f (mul-Semigroup G x y) ＝
     mul-Semigroup H (map-iso-Semigroup f x) (map-iso-Semigroup f y)
   preserves-mul-iso-Semigroup f =
@@ -144,7 +144,7 @@ module _
     map-hom-Semigroup H G (hom-inv-iso-Semigroup f)
 
   preserves-mul-inv-iso-Semigroup :
-    (f : iso-Semigroup) (x y : type-Semigroup H) →
+    (f : iso-Semigroup) {x y : type-Semigroup H} →
     map-inv-iso-Semigroup f (mul-Semigroup H x y) ＝
     mul-Semigroup G (map-inv-iso-Semigroup f x) (map-inv-iso-Semigroup f y)
   preserves-mul-inv-iso-Semigroup f =
@@ -232,7 +232,7 @@ module _
       ( f : hom-Semigroup G H)
       ( U : is-equiv (map-hom-Semigroup G H f)) →
       preserves-mul-Semigroup H G (map-inv-is-equiv U)
-    preserves-mul-map-inv-is-equiv-Semigroup (f , μ-f) U x y =
+    preserves-mul-map-inv-is-equiv-Semigroup (f , μ-f) U {x} {y} =
       map-inv-is-equiv
         ( is-emb-is-equiv U
           ( map-inv-is-equiv U (mul-Semigroup H x y))
@@ -246,10 +246,7 @@ module _
               ( ap
                 ( mul-Semigroup H (f (map-inv-is-equiv U x)))
                 ( inv (is-section-map-inv-is-equiv U y))))) ∙
-          ( inv
-            ( μ-f
-              ( map-inv-is-equiv U x)
-              ( map-inv-is-equiv U y))))
+          ( inv μ-f))
 ```
 
 ### A homomorphism of semigroups is an equivalence of semigroups if and only if it is an isomorphism

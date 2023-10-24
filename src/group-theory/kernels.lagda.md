@@ -58,15 +58,15 @@ module _
 
   is-closed-under-multiplication-subset-kernel-hom-Group :
     is-closed-under-multiplication-subset-Group G subset-kernel-hom-Group
-  is-closed-under-multiplication-subset-kernel-hom-Group x y p q =
-    ( preserves-mul-hom-Group G H f x y) ∙
+  is-closed-under-multiplication-subset-kernel-hom-Group p q =
+    ( preserves-mul-hom-Group G H f) ∙
     ( ( ap (λ (x , y) → mul-Group H x y) (eq-pair p q)) ∙
       ( left-unit-law-mul-Group H _))
 
   is-closed-under-inverses-subset-kernel-hom-Group :
     is-closed-under-inverses-subset-Group G subset-kernel-hom-Group
-  is-closed-under-inverses-subset-kernel-hom-Group x p =
-    ( preserves-inv-hom-Group G H f x) ∙
+  is-closed-under-inverses-subset-kernel-hom-Group p =
+    ( preserves-inv-hom-Group G H f) ∙
     ( ap (inv-Group H) p ∙ inv-unit-Group H)
 
   subgroup-kernel-hom-Group : Subgroup k G
@@ -106,15 +106,15 @@ module _
   is-normal-kernel-hom-Group :
     is-normal-Subgroup G (subgroup-kernel-hom-Group G H f)
   is-normal-kernel-hom-Group g h =
-    ( preserves-mul-hom-Group G H f (mul-Group G g (pr1 h)) (inv-Group G g)) ∙
+    ( preserves-mul-hom-Group G H f) ∙
     ( ( ap
         ( mul-Group' H (map-hom-Group G H f (inv-Group G g)))
-        ( ( preserves-mul-hom-Group G H f g (pr1 h)) ∙
+        ( ( preserves-mul-hom-Group G H f) ∙
           ( ( ap (mul-Group H (map-hom-Group G H f g)) (pr2 h)) ∙
             ( right-unit-law-mul-Group H (map-hom-Group G H f g))))) ∙
       ( ( ap
           ( mul-Group H (map-hom-Group G H f g))
-          ( preserves-inv-hom-Group G H f g)) ∙
+          ( preserves-inv-hom-Group G H f)) ∙
         ( right-inverse-law-mul-Group H (map-hom-Group G H f g))))
 
   kernel-hom-Group : Normal-Subgroup l2 G

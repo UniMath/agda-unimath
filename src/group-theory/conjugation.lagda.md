@@ -74,12 +74,12 @@ module _
   conjugation-Abstract-Group-Action : Abstract-Group-Action G l1
   pr1 conjugation-Abstract-Group-Action = set-Group G
   pr1 (pr2 conjugation-Abstract-Group-Action) g = equiv-conjugation-Group G g
-  pr2 (pr2 conjugation-Abstract-Group-Action) g h =
+  pr2 (pr2 conjugation-Abstract-Group-Action) {g} {h} =
     eq-htpy-equiv
       ( λ x →
         ( ap-mul-Group G
           ( associative-mul-Group G g h x)
-          ( distributive-inv-mul-Group G g h)) ∙
+          ( distributive-inv-mul-Group G)) ∙
         ( ( inv
             ( associative-mul-Group G
               ( mul-Group G g (mul-Group G h x))
@@ -133,7 +133,7 @@ module _
   compute-conjugation-mul-Group x y z =
     ( ap-mul-Group G
       ( associative-mul-Group G x y z)
-      ( distributive-inv-mul-Group G x y)) ∙
+      ( distributive-inv-mul-Group G)) ∙
     ( ( inv
         ( associative-mul-Group G
           ( mul-Group G x (mul-Group G y z))
@@ -150,7 +150,7 @@ module _
   compute-conjugation-mul-Group' x y z =
     ( ap
       ( mul-Group' G (mul-Group G x y))
-      ( ( ap (mul-Group' G z) (distributive-inv-mul-Group G x y)) ∙
+      ( ( ap (mul-Group' G z) (distributive-inv-mul-Group G)) ∙
         ( associative-mul-Group G
           ( inv-Group G y)
           ( inv-Group G x)
@@ -248,12 +248,10 @@ module _
     ( inv (inv-inv-Group G (conjugation-Group G x (inv-Group G y)))) ∙
     ( ap
       ( inv-Group G)
-      ( ( distributive-inv-mul-Group G
-          ( mul-Group G x (inv-Group G y))
-          ( inv-Group G x)) ∙
+      ( ( distributive-inv-mul-Group G) ∙
         ( ( ap-mul-Group G
             ( inv-inv-Group G x)
-            ( ( distributive-inv-mul-Group G x (inv-Group G y)) ∙
+            ( ( distributive-inv-mul-Group G) ∙
               ( ap
                 ( mul-Group' G (inv-Group G x))
                 ( inv-inv-Group G y)))) ∙
@@ -264,14 +262,12 @@ module _
     conjugation-Group' G x (inv-Group G y) ＝
     inv-Group G (conjugation-Group' G x y)
   conjugation-inv-Group' x y =
-    ( ap (mul-Group' G x) (inv (distributive-inv-mul-Group G y x))) ∙
+    ( ap (mul-Group' G x) (inv (distributive-inv-mul-Group G))) ∙
     ( ( ap
         ( mul-Group G (inv-Group G (mul-Group G y x)))
         ( inv (inv-inv-Group G x))) ∙
       ( ( inv
-          ( distributive-inv-mul-Group G
-            ( inv-Group G x)
-            ( mul-Group G y x))) ∙
+          ( distributive-inv-mul-Group G)) ∙
         ( ap
           ( inv-Group G)
           ( inv (associative-mul-Group G (inv-Group G x) y x)))))
@@ -379,11 +375,11 @@ module _
 
   conjugation-hom-Group : type-Group G → hom-Group G G
   pr1 (conjugation-hom-Group x) = conjugation-Group G x
-  pr2 (conjugation-hom-Group x) = distributive-conjugation-mul-Group G x
+  pr2 (conjugation-hom-Group x) = distributive-conjugation-mul-Group G x _ _
 
   conjugation-equiv-Group : type-Group G → equiv-Group G G
   pr1 (conjugation-equiv-Group x) = equiv-conjugation-Group G x
-  pr2 (conjugation-equiv-Group x) = distributive-conjugation-mul-Group G x
+  pr2 (conjugation-equiv-Group x) = distributive-conjugation-mul-Group G x _ _
 
   conjugation-iso-Group : type-Group G → iso-Group G G
   conjugation-iso-Group x = iso-equiv-Group G G (conjugation-equiv-Group x)

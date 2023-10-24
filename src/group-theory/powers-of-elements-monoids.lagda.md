@@ -331,6 +331,6 @@ module _
   preserves-powers-hom-Monoid zero-ℕ x = preserves-unit-hom-Monoid M N f
   preserves-powers-hom-Monoid (succ-ℕ zero-ℕ) x = refl
   preserves-powers-hom-Monoid (succ-ℕ (succ-ℕ n)) x =
-    ( preserves-mul-hom-Monoid M N f _ _) ∙
+    ( preserves-mul-hom-Monoid M N f) ∙
     ( ap (mul-Monoid' N _) (preserves-powers-hom-Monoid (succ-ℕ n) x))
 ```

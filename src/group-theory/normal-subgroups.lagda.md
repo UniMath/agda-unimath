@@ -224,8 +224,6 @@ module _
   closure-property-Normal-Subgroup {x} {y} {z} p q =
     is-closed-under-eq-Normal-Subgroup
       ( is-closed-under-multiplication-Normal-Subgroup
-        ( conjugation-Group G x y)
-        ( mul-Group G x z)
         ( is-normal-Normal-Subgroup x y p)
         ( q))
       ( ( associative-mul-Group G
@@ -451,9 +449,7 @@ module _
     is-closed-under-eq-Normal-Subgroup G N
       ( is-normal-Normal-Subgroup G N y
         ( inv-Group G (left-div-Group G x y))
-        ( is-closed-under-inverses-Normal-Subgroup G N
-          ( left-div-Group G x y)
-          ( H)))
+        ( is-closed-under-inverses-Normal-Subgroup G N H))
       ( ( ap (conjugation-Group G y) (inv-left-div-Group G x y) ∙
         ( conjugation-left-div-Group G y x)))
 
@@ -465,9 +461,7 @@ module _
     is-closed-under-eq-Normal-Subgroup G N
       ( is-normal-Normal-Subgroup' G N x
         ( inv-Group G (right-div-Group G x y))
-        ( is-closed-under-inverses-Normal-Subgroup G N
-          ( right-div-Group G x y)
-          ( H)))
+        ( is-closed-under-inverses-Normal-Subgroup G N H))
       ( ( ap (conjugation-Group' G x) (inv-right-div-Group G x y)) ∙
         ( conjugation-right-div-Group G y x))
 ```
@@ -518,7 +512,7 @@ module _
                 ( x'))) ∙
             ( ap
               ( mul-Group' G x')
-              ( inv (distributive-inv-mul-Group G x y))))) ∙
+              ( inv (distributive-inv-mul-Group G))))) ∙
         ( associative-mul-Group G
           ( inv-Group G (mul-Group G x y))
           ( x')
@@ -551,7 +545,7 @@ module _
     sim-congruence-Normal-Subgroup x (unit-Group G)
   unit-congruence-Normal-Subgroup' {x} H =
     is-closed-under-eq-Normal-Subgroup' G N
-      ( is-closed-under-inverses-Normal-Subgroup G N x H)
+      ( is-closed-under-inverses-Normal-Subgroup G N H)
       ( right-unit-law-mul-Group G (inv-Group G x))
 ```
 
@@ -575,14 +569,14 @@ module _
 
   is-closed-under-multiplication-subset-congruence-Group :
     is-closed-under-multiplication-subset-Group G subset-congruence-Group
-  is-closed-under-multiplication-subset-congruence-Group x y H K =
+  is-closed-under-multiplication-subset-congruence-Group H K =
     concatenate-eq-sim-congruence-Group G R
       ( inv (left-unit-law-mul-Group G (unit-Group G)))
       ( mul-congruence-Group G R H K)
 
   is-closed-under-inverses-subset-congruence-Group :
     is-closed-under-inverses-subset-Group G subset-congruence-Group
-  is-closed-under-inverses-subset-congruence-Group x H =
+  is-closed-under-inverses-subset-congruence-Group H =
     concatenate-eq-sim-congruence-Group G R
       ( inv (inv-unit-Group G))
       ( inv-congruence-Group G R H)
