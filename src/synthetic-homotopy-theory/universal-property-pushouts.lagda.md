@@ -830,3 +830,180 @@ module _
             ( up-top)
             ( W)))
 ```
+
+### Extending pushouts by equivalences on the left
+
+If we have a pushout square on the right, equivalences S' ≃ S and A' ≃ A, and a
+map f' : S' → A' making the left square commute, then the outer rectangle is
+again a pushout.
+
+```text
+       i       g
+   S' ---> S ----> B
+   |   ≃   |       |
+f' |       | f     |
+   v   ≃   v    ⌜  v
+   A' ---> A ----> X
+       j
+```
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {A' : UU l6}
+  ( f : S → A) (g : S → B) (i : S' → S) (j : A' → A) (f' : S' → A')
+  ( c : cocone f g X)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( coh : coherence-square-maps i f' f j)
+  where
+
+  cocone-left-extended : cocone f' (g ∘ i) X
+  cocone-left-extended =
+    horizontal-map-cocone f g c ∘ j ,
+    vertical-map-cocone f g c ,
+    ( λ z →
+      equational-reasoning
+        (horizontal-map-cocone f g c ∘ j ∘ f') z
+        ＝ (horizontal-map-cocone f g c ∘ f ∘ i) z
+          by ap (horizontal-map-cocone f g c) (coh z)
+        ＝ (vertical-map-cocone f g c ∘ g ∘ i) z
+          by coherence-square-cocone f g c (i z))
+
+  universal-property-pushout-left-extended-by-equivalences :
+    is-equiv i → is-equiv j →
+    {l : Level} → universal-property-pushout l f' (g ∘ i) cocone-left-extended
+  universal-property-pushout-left-extended-by-equivalences ie je =
+    universal-property-pushout-rectangle-universal-property-pushout-right f' i g
+      ( j , f , coh)
+      ( c)
+      ( universal-property-pushout-is-equiv' f' i (j , f , coh) ie je)
+      ( up-c)
+```
+
+### Extending pushouts by equivalences at the top
+
+If we have a pushout square on the right, equivalences S' ≃ S and B' ≃ B, and a
+map g' : S' → B' making the top square commute, then the vertical rectangle is
+again a pushout.
+
+```text
+           g'
+       S' ---> B'
+       |       |
+     i | ≃   ≃ | j
+       |       |
+       v   g   v
+       S ----> B
+       |       |
+     f |       |
+       v    ⌜  v
+       A ----> X
+```
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {B' : UU l6}
+  ( f : S → A) (g : S → B) (i : S' → S) (j : B' → B) (g' : S' → B')
+  ( c : cocone f g X)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( coh : coherence-square-maps g' i j g)
+  where
+
+  cocone-top-extended : cocone (f ∘ i) g' X
+  cocone-top-extended = horizontal-map-cocone f g c ,
+                        vertical-map-cocone f g c ∘ j ,
+                        ( λ z →
+                          equational-reasoning
+                            (horizontal-map-cocone f g c ∘ f ∘ i) z
+                            ＝ (vertical-map-cocone f g c ∘ g ∘ i) z
+                              by coherence-square-cocone f g c (i z)
+                            ＝ (vertical-map-cocone f g c ∘ j ∘ g') z
+                              by ap (vertical-map-cocone f g c) (coh z))
+
+  universal-property-pushout-top-extended-by-equivalences :
+    is-equiv i → is-equiv j →
+    {l : Level} → universal-property-pushout l (f ∘ i) g' cocone-top-extended
+  universal-property-pushout-top-extended-by-equivalences ie je =
+    universal-property-pushout-rectangle-universal-property-pushout-top i g' f
+      ( g , j , coh)
+      ( c)
+      ( universal-property-pushout-is-equiv i g' (g , j , coh) ie je)
+      ( up-c)
+```
+
+### Extending pushouts by equivalences of cocones
+
+Given a commutative diagram where i, j and k are equivalences,
+
+```text
+          g'
+      S' ---> B'
+     / \       \
+ f' /   \ k     \ j
+   /     v   g   v
+  A'     S ----> B
+    \    |       |
+   i \   | f     |
+      \  v    ⌜  v
+       > A ----> X
+```
+
+the induced square is a pushout.
+
+```text
+   S' ---> B'
+   |       |
+   |       |
+   v       v
+   A' ---> X
+```
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  { S' : UU l5} {A' : UU l6} {B' : UU l7}
+  ( f : S → A) (g : S → B) (f' : S' → A') (g' : S' → B')
+  ( i : A' → A) (j : B' → B) (k : S' → S)
+  ( c : cocone f g X)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( coh-l : coherence-square-maps k f' f i)
+  ( coh-r : coherence-square-maps g' k j g)
+  where
+
+  cocone-extended-span : cocone f' g' X
+  cocone-extended-span =
+    horizontal-map-cocone f g c ∘ i ,
+    vertical-map-cocone f g c ∘ j ,
+    ( λ z →
+      equational-reasoning
+        (horizontal-map-cocone f g c ∘ i ∘ f') z
+        ＝ (horizontal-map-cocone f g c ∘ f ∘ k) z
+          by ap (horizontal-map-cocone f g c) (coh-l z)
+        ＝ (vertical-map-cocone f g c ∘ g ∘ k) z
+          by coherence-square-cocone f g c (k z)
+        ＝ (vertical-map-cocone f g c ∘ j ∘ g') z
+          by ap (vertical-map-cocone f g c) (coh-r z))
+
+  universal-property-pushout-extended-by-equivalences :
+    is-equiv i → is-equiv j → is-equiv k →
+    {l : Level} → universal-property-pushout l f' g' cocone-extended-span
+  universal-property-pushout-extended-by-equivalences ie je ke =
+    universal-property-pushout-top-extended-by-equivalences f'
+      ( g ∘ k)
+      ( id)
+      ( j)
+      ( g')
+      ( cocone-left-extended f g k i f' c up-c coh-l)
+      ( universal-property-pushout-left-extended-by-equivalences f g k i
+        ( f')
+        ( c)
+        ( up-c)
+        ( coh-l)
+        ( ke)
+        ( ie))
+      ( coh-r)
+      ( is-equiv-id)
+      ( je)
+```
