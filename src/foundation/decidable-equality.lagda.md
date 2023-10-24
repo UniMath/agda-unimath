@@ -33,10 +33,14 @@ open import foundation-core.transport-along-identifications
 
 </details>
 
-## Definition
+## Idea
 
-A type `A` is said to have decidable equality if `Id x y` is a decidable type
-for every `x y : A`.
+A type `A` is said to have **decidable equality** if `Id x y` is a
+[decidable type](foundation.decidable-types.md) for every `x y : A`.
+
+## Definitions
+
+### The predicate of having decidable equality
 
 ```agda
 has-decidable-equality : {l : Level} (A : UU l) → UU l

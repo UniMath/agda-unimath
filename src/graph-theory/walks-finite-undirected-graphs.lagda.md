@@ -226,12 +226,12 @@ module _
   (x : vertex-Undirected-Graph-𝔽 G)
   where
 
-  is-contr-vertex-on-walk-refl-walk-Undirected-Graph-𝔽 :
+  is-contr-vertex-on-refl-walk-Undirected-Graph-𝔽 :
     is-contr
       ( vertex-on-walk-Undirected-Graph-𝔽 G
         ( refl-walk-Undirected-Graph {x = x}))
-  is-contr-vertex-on-walk-refl-walk-Undirected-Graph-𝔽 =
-    is-contr-vertex-on-walk-refl-walk-Undirected-Graph
+  is-contr-vertex-on-refl-walk-Undirected-Graph-𝔽 =
+    is-contr-vertex-on-refl-walk-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
       ( x)
 ```
@@ -529,7 +529,8 @@ module _
   has-decidable-equality-total-walk-of-length-Undirected-Graph-𝔽 :
     {x y : vertex-Undirected-Graph-𝔽 G} →
     (n : ℕ) → has-decidable-equality (walk-of-length-Undirected-Graph-𝔽 G n x y)
-  has-decidable-equality-total-walk-of-length-Undirected-Graph-𝔽 = ?
+  has-decidable-equality-total-walk-of-length-Undirected-Graph-𝔽 .0 refl-walk-of-length-Undirected-Graph w' = inl {!!}
+  has-decidable-equality-total-walk-of-length-Undirected-Graph-𝔽 .(succ-ℕ n) (cons-walk-of-length-Undirected-Graph n p e w) w' = {!!}
 
   has-decidable-equality-walk-Undirected-Graph-𝔽 :
     {x y : vertex-Undirected-Graph-𝔽 G} →

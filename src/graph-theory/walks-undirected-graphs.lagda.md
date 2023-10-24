@@ -41,8 +41,15 @@ open import univalent-combinatorics.standard-finite-types
 
 A **walk** in an [undirected graph](graph-theory.undirected-graphs.md) consists
 of a [list](lists.lists.md) of edges that connect the starting point with the
-end point. Walks may repeat edges and pass through the same vertex multiple
-times.
+end point. More formally, it is defined as the inductive family of types over
+the type of vertices of an undirected graph `G`, with the following constructors
+
+- A **constant walk** `refl : walk-Undirected-Graph G x x` for every vertex `x`.
+- A function `cons e i : walk x (p i) → walk x (p -i)` for every [unordered pair](foundation.unordered-pairs.md) of vertices of `G`, every `e : edge p` and every element `i : type-unordered pair p`.
+
+Note that walks may repeat edges and pass through the same vertex multiple times.
+
+Alternatively, we may define **walks of (fixed) length** `n : ℕ` from `x` to `y` in an undirected graph. The definition of walks of length `n` is similar to the definition of walks, except that we specify the constant walk to have length `0`, and the walk `cons e i w` of a walk `w` of length `n` to have length `n + 1`.
 
 ## Definitions
 
@@ -282,10 +289,10 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G)
   where
 
-  is-contr-vertex-on-walk-refl-walk-Undirected-Graph :
+  is-contr-vertex-on-refl-walk-Undirected-Graph :
     is-contr
       ( vertex-on-walk-Undirected-Graph G (refl-walk-Undirected-Graph {x = x}))
-  is-contr-vertex-on-walk-refl-walk-Undirected-Graph =
+  is-contr-vertex-on-refl-walk-Undirected-Graph =
     is-torsorial-path x
 ```
 
@@ -302,7 +309,7 @@ module _
     Fin (succ-ℕ (length-walk-Undirected-Graph G w))
   compute-vertex-on-walk-Undirected-Graph refl-walk-Undirected-Graph =
     equiv-is-contr
-      ( is-contr-vertex-on-walk-refl-walk-Undirected-Graph G x)
+      ( is-contr-vertex-on-refl-walk-Undirected-Graph G x)
       ( is-contr-Fin-one-ℕ)
   compute-vertex-on-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e {y} w) =
