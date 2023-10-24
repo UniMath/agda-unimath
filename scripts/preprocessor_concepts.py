@@ -31,7 +31,7 @@ def sub_match_for_concept(m, mut_index, path):
     if wikidata_id is not None:
         index_entry['wikidata'] = wikidata_id
         index_entry['link'] = f'{path[:-2]}html#{wikidata_id}'
-        anchor = f'<a id="{wikidata_id}" style="display:none;" class="wikidata">{plaintext}</a>'
+        anchor = f'<a id="{wikidata_id}" class="wikidata"><span style="display:none">{plaintext}</span></a>'
     mut_index.append(index_entry)
     return f'{anchor}<b>{text}</b>'
 
