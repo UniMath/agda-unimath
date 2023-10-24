@@ -16,8 +16,10 @@ CONCEPT_REGEX = re.compile(
 LINK_REGEX = re.compile(
     r'\[(.*?)\]\(.*\)')
 
+
 def does_support(backend):
     return backend == 'html'
+
 
 def sub_match_for_concept(m, mut_index, path):
     wikidata_id = m.group(1)
@@ -35,11 +37,13 @@ def sub_match_for_concept(m, mut_index, path):
     mut_index.append(index_entry)
     return f'{anchor}<b>{text}</b>'
 
+
 def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
     chapter['content'] = CONCEPT_REGEX.sub(
         lambda m: sub_match_for_concept(m, mut_index, chapter['path']),
         chapter['content'])
     tag_concepts_sections_rec_mut(chapter['sub_items'], config, mut_index)
+
 
 def tag_concepts_sections_rec_mut(sections, config, mut_index):
     for section in sections:
@@ -49,12 +53,14 @@ def tag_concepts_sections_rec_mut(sections, config, mut_index):
 
         tag_concepts_chapter_rec_mut(chapter, config, mut_index)
 
+
 def tag_concepts_root_section(section, config, mut_index):
     chapter = section.get('Chapter')
     if chapter is not None:
         tag_concepts_chapter_rec_mut(chapter, config, mut_index)
 
     return section
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
