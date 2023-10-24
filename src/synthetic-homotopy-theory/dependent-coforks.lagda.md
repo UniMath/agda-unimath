@@ -76,10 +76,10 @@ module _
     Σ ( (b : B) → P (map-cofork f g e b))
       ( λ k →
         ( a : A) →
-          dependent-identification P
-            ( coherence-cofork f g e a)
-            ( k (f a))
-            ( k (g a)))
+        dependent-identification P
+          ( coherence-cofork f g e a)
+          ( k (f a))
+          ( k (g a)))
 
 module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
@@ -182,17 +182,8 @@ module _
         ( ev-pair (coherence-htpy-dependent-cofork f g P k))
         ( is-torsorial-htpy (map-dependent-cofork f g P k))
         ( map-dependent-cofork f g P k , refl-htpy)
-        ( is-contr-is-equiv'
-          ( Σ ( (a : A) →
-                dependent-identification P
-                  ( coherence-cofork f g e a)
-                  ( map-dependent-cofork f g P k (f a))
-                  ( map-dependent-cofork f g P k (g a)))
-              ( λ K → coherence-dependent-cofork f g P k ~ K))
-          ( tot (λ K M → right-unit-htpy ∙h M))
-          ( is-equiv-tot-is-fiberwise-equiv
-            ( is-equiv-concat-htpy right-unit-htpy))
-          ( is-torsorial-htpy (coherence-dependent-cofork f g P k)))
+        ( is-torsorial-htpy
+          ( coherence-dependent-cofork f g P k ∙h refl-htpy))
 
     is-equiv-htpy-dependent-cofork-eq :
       ( k k' : dependent-cofork f g e P) →
