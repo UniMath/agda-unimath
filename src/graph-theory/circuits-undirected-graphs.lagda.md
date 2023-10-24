@@ -21,8 +21,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A **circuit** in an [undirected graph](graph-theory.undirected-graphs.md) `G`
-consists of a [`k`-gon](graph-theory.polygons.md) `H` equipped with a
+A {{#concept WD=Q245595 "circuit"}} in an [undirected graph](graph-theory.undirected-graphs.md)
+`G` consists of a [`k`-gon](graph-theory.polygons.md) `H` equipped with a
 [totally faithful](graph-theory.totally-faithful-morphisms-undirected-graphs.md)
 [morphism](graph-theory.morphisms-undirected-graphs.md) of undirected graphs
 from `H` to `G`. In other words, a circuit is a closed walk with no repeated
@@ -49,5 +49,3 @@ module _
   at Wikipedia
 - [Graph Cycle](https://mathworld.wolfram.com/GraphCycle.html) at Wolfram
   Mathworld
-
-<concept id="https://www.wikidata.org/entity/Q245595" />

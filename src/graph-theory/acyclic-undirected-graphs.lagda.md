@@ -18,7 +18,7 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An **acyclic undirected graph** is an
+An {{#concept WD=Q3115453 "acyclic undirected graph"}} is an
 [undirected graph](graph-theory.undirected-graphs.md) of which the
 [geometric realization](graph-theory.geometric-realizations-undirected-graphs.md)
 is [contractible](foundation-core.contractible-types.md).
@@ -69,5 +69,3 @@ is-acyclic-Undirected-Graph l G =
   Wikipedia
 - [Acyclic graphs](https://mathworld.wolfram.com/AcyclicGraph.html) at Wolfram
   Mathworld.
-
-<concept id="https://www.wikidata.org/entity/Q3115453" />
