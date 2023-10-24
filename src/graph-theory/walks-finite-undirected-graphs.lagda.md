@@ -161,66 +161,59 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2)
-  (x : vertex-Undirected-Graph-𝔽 G)
   where
 
   walk-of-length-Undirected-Graph-𝔽 :
-    ℕ → vertex-Undirected-Graph-𝔽 G → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    ℕ → (x y : vertex-Undirected-Graph-𝔽 G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
   walk-of-length-Undirected-Graph-𝔽 =
-    walk-of-length-Undirected-Graph (undirected-graph-Undirected-Graph-𝔽 G) x
+    walk-of-length-Undirected-Graph (undirected-graph-Undirected-Graph-𝔽 G)
 
   map-compute-total-walk-of-length-Undirected-Graph-𝔽 :
-    (y : vertex-Undirected-Graph-𝔽 G) →
+    (x y : vertex-Undirected-Graph-𝔽 G) →
     walk-Undirected-Graph-𝔽 G x y →
-    Σ ℕ (λ n → walk-of-length-Undirected-Graph-𝔽 n y)
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph-𝔽 n x y)
   map-compute-total-walk-of-length-Undirected-Graph-𝔽 =
     map-compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
-      ( x)
 
   map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 :
-    (y : vertex-Undirected-Graph-𝔽 G) →
-    Σ ℕ (λ n → walk-of-length-Undirected-Graph-𝔽 n y) →
+    (x y : vertex-Undirected-Graph-𝔽 G) →
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph-𝔽 n x y) →
     walk-Undirected-Graph-𝔽 G x y
   map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 =
     map-inv-compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
-      ( x)
 
   is-section-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 :
-    (y : vertex-Undirected-Graph-𝔽 G) →
-    ( map-compute-total-walk-of-length-Undirected-Graph-𝔽 y ∘
-      map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 y) ~ id
+    (x y : vertex-Undirected-Graph-𝔽 G) →
+    ( map-compute-total-walk-of-length-Undirected-Graph-𝔽 x y ∘
+      map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 x y) ~ id
   is-section-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 =
     is-section-map-inv-compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
-      ( x)
 
   is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 :
-    (y : vertex-Undirected-Graph-𝔽 G) →
-    ( map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 y ∘
-      map-compute-total-walk-of-length-Undirected-Graph-𝔽 y) ~ id
+    (x y : vertex-Undirected-Graph-𝔽 G) →
+    ( map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 x y ∘
+      map-compute-total-walk-of-length-Undirected-Graph-𝔽 x y) ~ id
   is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 =
     is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
-      ( x)
 
   is-equiv-map-compute-total-walk-of-length-Undirected-Graph-𝔽 :
-    (y : vertex-Undirected-Graph-𝔽 G) →
-    is-equiv (map-compute-total-walk-of-length-Undirected-Graph-𝔽 y)
+    (x y : vertex-Undirected-Graph-𝔽 G) →
+    is-equiv (map-compute-total-walk-of-length-Undirected-Graph-𝔽 x y)
   is-equiv-map-compute-total-walk-of-length-Undirected-Graph-𝔽 =
     is-equiv-map-compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
-      ( x)
 
   compute-total-walk-of-length-Undirected-Graph-𝔽 :
-    (y : vertex-Undirected-Graph-𝔽 G) →
+    (x y : vertex-Undirected-Graph-𝔽 G) →
     walk-Undirected-Graph-𝔽 G x y ≃
-    Σ ℕ (λ n → walk-of-length-Undirected-Graph-𝔽 n y)
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph-𝔽 n x y)
   compute-total-walk-of-length-Undirected-Graph-𝔽 =
     compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
-      ( x)
 ```
 
 ## Properties
@@ -532,6 +525,11 @@ module _
 module _
   {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2)
   where
+
+  has-decidable-equality-total-walk-of-length-Undirected-Graph-𝔽 :
+    {x y : vertex-Undirected-Graph-𝔽 G} →
+    (n : ℕ) → has-decidable-equality (walk-of-length-Undirected-Graph-𝔽 G n x y)
+  has-decidable-equality-total-walk-of-length-Undirected-Graph-𝔽 = ?
 
   has-decidable-equality-walk-Undirected-Graph-𝔽 :
     {x y : vertex-Undirected-Graph-𝔽 G} →
