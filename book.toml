@@ -45,6 +45,10 @@ suppress_processing = [
   "ART.md"
 ]
 
+[preprocessor.concepts]
+command = "python3 ./scripts/preprocessor_concepts.py"
+output-file = "docs/concept_index.json"
+
 [output.linkcheck]
 follow-web-links = false
 
