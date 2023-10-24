@@ -11,8 +11,10 @@ open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
+open import category-theory.preunivalent-categories
 
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -91,7 +93,7 @@ module _
   pr1 (pr1 (pr2 (pr2 opposite-Precategory))) = comp-hom-opposite-Precategory
   pr2 (pr1 (pr2 (pr2 opposite-Precategory))) =
     associative-comp-hom-opposite-Precategory
-  pr1 (pr2 (pr2 (pr2 opposite-Precategory))) x = id-hom-opposite-Precategory
+  pr1 (pr2 (pr2 (pr2 opposite-Precategory))) x = id-hom-opposite-Precategory {x}
   pr1 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) =
     left-unit-law-comp-hom-opposite-Precategory
   pr2 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) =
@@ -139,49 +141,46 @@ equiv-opposite-Precategory l1 l2 =
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Precategory l1 l2)
+  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
   where
 
-  map-compute-iso-inv-opposite-Precategory :
-    {x y : obj-Precategory C} →
-    iso-Precategory C x y → iso-Precategory (opposite-Precategory C) x y
-  pr1 (map-compute-iso-inv-opposite-Precategory f) = hom-inv-iso-Precategory C f
-  pr1 (pr2 (map-compute-iso-inv-opposite-Precategory f)) =
+  map-compute-iso-opposite-Precategory :
+    iso-Precategory C x y → iso-Precategory (opposite-Precategory C) y x
+  pr1 (map-compute-iso-opposite-Precategory f) =
     hom-iso-Precategory C f
-  pr1 (pr2 (pr2 (map-compute-iso-inv-opposite-Precategory f))) =
-    is-section-hom-inv-iso-Precategory C f
-  pr2 (pr2 (pr2 (map-compute-iso-inv-opposite-Precategory f))) =
+  pr1 (pr2 (map-compute-iso-opposite-Precategory f)) =
+    hom-inv-iso-Precategory C f
+  pr1 (pr2 (pr2 (map-compute-iso-opposite-Precategory f))) =
     is-retraction-hom-inv-iso-Precategory C f
+  pr2 (pr2 (pr2 (map-compute-iso-opposite-Precategory f))) =
+    is-section-hom-inv-iso-Precategory C f
 
-  map-inv-compute-iso-inv-opposite-Precategory :
-    {x y : obj-Precategory C} →
-    iso-Precategory (opposite-Precategory C) x y → iso-Precategory C x y
-  pr1 (map-inv-compute-iso-inv-opposite-Precategory f) =
-    hom-inv-iso-Precategory (opposite-Precategory C) f
-  pr1 (pr2 (map-inv-compute-iso-inv-opposite-Precategory f)) =
+  map-inv-compute-iso-opposite-Precategory :
+    iso-Precategory (opposite-Precategory C) y x → iso-Precategory C x y
+  pr1 (map-inv-compute-iso-opposite-Precategory f) =
     hom-iso-Precategory (opposite-Precategory C) f
-  pr1 (pr2 (pr2 (map-inv-compute-iso-inv-opposite-Precategory f))) =
-    is-section-hom-inv-iso-Precategory (opposite-Precategory C) f
-  pr2 (pr2 (pr2 (map-inv-compute-iso-inv-opposite-Precategory f))) =
+  pr1 (pr2 (map-inv-compute-iso-opposite-Precategory f)) =
+    hom-inv-iso-Precategory (opposite-Precategory C) f
+  pr1 (pr2 (pr2 (map-inv-compute-iso-opposite-Precategory f))) =
     is-retraction-hom-inv-iso-Precategory (opposite-Precategory C) f
+  pr2 (pr2 (pr2 (map-inv-compute-iso-opposite-Precategory f))) =
+    is-section-hom-inv-iso-Precategory (opposite-Precategory C) f
 
-  is-equiv-map-compute-iso-inv-opposite-Precategory :
-    {x y : obj-Precategory C} →
-    is-equiv (map-compute-iso-inv-opposite-Precategory {x} {y})
-  pr1 (pr1 is-equiv-map-compute-iso-inv-opposite-Precategory) =
-    map-inv-compute-iso-inv-opposite-Precategory
-  pr2 (pr1 is-equiv-map-compute-iso-inv-opposite-Precategory) = refl-htpy
-  pr1 (pr2 is-equiv-map-compute-iso-inv-opposite-Precategory) =
-    map-inv-compute-iso-inv-opposite-Precategory
-  pr2 (pr2 is-equiv-map-compute-iso-inv-opposite-Precategory) = refl-htpy
+  is-equiv-map-compute-iso-opposite-Precategory :
+    is-equiv (map-compute-iso-opposite-Precategory)
+  pr1 (pr1 is-equiv-map-compute-iso-opposite-Precategory) =
+    map-inv-compute-iso-opposite-Precategory
+  pr2 (pr1 is-equiv-map-compute-iso-opposite-Precategory) = refl-htpy
+  pr1 (pr2 is-equiv-map-compute-iso-opposite-Precategory) =
+    map-inv-compute-iso-opposite-Precategory
+  pr2 (pr2 is-equiv-map-compute-iso-opposite-Precategory) = refl-htpy
 
-  compute-iso-inv-opposite-Precategory :
-    {x y : obj-Precategory C} →
-    iso-Precategory C x y ≃ iso-Precategory (opposite-Precategory C) x y
-  pr1 compute-iso-inv-opposite-Precategory =
-    map-compute-iso-inv-opposite-Precategory
-  pr2 compute-iso-inv-opposite-Precategory =
-    is-equiv-map-compute-iso-inv-opposite-Precategory
+  compute-iso-opposite-Precategory :
+    iso-Precategory C x y ≃ iso-Precategory (opposite-Precategory C) y x
+  pr1 compute-iso-opposite-Precategory =
+    map-compute-iso-opposite-Precategory
+  pr2 compute-iso-opposite-Precategory =
+    is-equiv-map-compute-iso-opposite-Precategory
 ```
 
 ### The underlying precategory is a category if and only if the opposite is a category
@@ -194,7 +193,9 @@ abstract
     is-category-Precategory (opposite-Precategory C)
   is-category-opposite-is-category-Precategory C is-category-C x y =
     is-equiv-htpy-equiv
-      ( compute-iso-inv-opposite-Precategory C ∘e (_ , is-category-C x y))
+      ( compute-iso-opposite-Precategory C ∘e
+        equiv-inv-iso-Precategory C ∘e
+        (_ , is-category-C x y))
       ( λ where
         refl →
           eq-type-subtype
@@ -213,4 +214,38 @@ abstract
       ( is-category-opposite-is-category-Precategory
         ( opposite-Precategory C)
         ( is-category-op-C))
+```
+
+### The underlying precategory is preunivalent if and only if the opposite is preunivalent
+
+```agda
+abstract
+  is-preunivalent-opposite-is-preunivalent-Precategory :
+    {l1 l2 : Level} (C : Precategory l1 l2) →
+    is-preunivalent-Precategory C →
+    is-preunivalent-Precategory (opposite-Precategory C)
+  is-preunivalent-opposite-is-preunivalent-Precategory C is-preunivalent-C x y =
+    is-emb-htpy-emb
+      ( comp-emb
+        ( emb-equiv
+          ( compute-iso-opposite-Precategory C ∘e equiv-inv-iso-Precategory C))
+        ( _ , is-preunivalent-C x y))
+      ( λ where
+        refl →
+          eq-type-subtype
+            ( is-iso-prop-Precategory (opposite-Precategory C))
+            ( refl))
+
+abstract
+  is-preunivalent-is-preunivalent-opposite-Precategory :
+    {l1 l2 : Level} (C : Precategory l1 l2) →
+    is-preunivalent-Precategory (opposite-Precategory C) →
+    is-preunivalent-Precategory C
+  is-preunivalent-is-preunivalent-opposite-Precategory C is-preunivalent-op-C =
+    tr
+      ( is-preunivalent-Precategory)
+      ( is-involution-opposite-Precategory C)
+      ( is-preunivalent-opposite-is-preunivalent-Precategory
+        ( opposite-Precategory C)
+        ( is-preunivalent-op-C))
 ```

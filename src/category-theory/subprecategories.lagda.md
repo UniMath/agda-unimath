@@ -18,9 +18,9 @@ open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.iterated-dependent-product-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subsingleton-induction
@@ -229,7 +229,6 @@ module _
       ( λ x₀ →
         Σ ( is-in-obj-Subprecategory y)
           ( λ y₀ → is-in-subtype (subhom-Subprecategory x y x₀ y₀) f))
-
 
   is-prop-is-in-hom-Subprecategory :
     (x y : obj-Precategory C) (f : hom-Precategory C x y) →

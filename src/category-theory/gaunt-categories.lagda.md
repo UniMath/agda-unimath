@@ -7,23 +7,23 @@ module category-theory.gaunt-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
-open import category-theory.categories
+open import category-theory.nonunital-precategories
+open import category-theory.precategories
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
-open import category-theory.precategories
-open import category-theory.nonunital-precategories
 
 open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
-open import foundation.surjective-maps
 open import foundation.propositions
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 

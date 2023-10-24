@@ -35,7 +35,7 @@ that the cube is presented as a lattice
         /   |   \
        B'   A    C'
        |\ /   \ /|
-       | \     ‌/ |
+       | \     / |
        |/ \   / \|
        B    D'   C'
         \   |   /

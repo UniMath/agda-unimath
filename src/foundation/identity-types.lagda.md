@@ -44,17 +44,17 @@ identifications in arbitrary types.
 ### The Mac Lane pentagon for identity types
 
 ```agda
-Mac-Lane-pentagon :
+mac-lane-pentagon :
   {l : Level} {A : UU l} {a b c d e : A}
   (p : a ＝ b) (q : b ＝ c) (r : c ＝ d) (s : d ＝ e) →
-  let α₁ = (ap (λ t → t ∙ s) (assoc p q r))
+  let α₁ = (ap (_∙ s) (assoc p q r))
       α₂ = (assoc p (q ∙ r) s)
-      α₃ = (ap (λ t → p ∙ t) (assoc q r s))
+      α₃ = (ap (p ∙_) (assoc q r s))
       α₄ = (assoc (p ∙ q) r s)
       α₅ = (assoc p q (r ∙ s))
   in
   ((α₁ ∙ α₂) ∙ α₃) ＝ (α₄ ∙ α₅)
-Mac-Lane-pentagon refl refl refl refl = refl
+mac-lane-pentagon refl refl refl refl = refl
 ```
 
 ### The groupoidal operations on identity types are equivalences
