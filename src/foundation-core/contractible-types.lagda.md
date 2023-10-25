@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.implicit-function-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -283,6 +284,13 @@ abstract
     map-inv-is-equiv
       ( funext (λ x → center (H x)) f)
       ( λ x → contraction (H x) (f x))
+
+abstract
+  is-contr-implicit-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-contr (B x)) → is-contr ({x : A} → B x)
+  is-contr-implicit-Π H =
+    is-contr-equiv _ equiv-explicit-implicit-Π (is-contr-Π H)
 ```
 
 ### The type of functions into a contractible type is contractible

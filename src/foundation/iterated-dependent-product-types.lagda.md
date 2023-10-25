@@ -116,6 +116,21 @@ section-iterated-Π-section-Π-section-codomain P f ._ {{base-telescope A}} H =
   H
 section-iterated-Π-section-Π-section-codomain P f ._ {{cons-telescope A}} H =
   f (λ x → section-iterated-Π-section-Π-section-codomain P f _ {{A x}} (H x))
+
+section-iterated-implicit-Π-section-Π-section-codomain :
+  (P : {l : Level} → UU l → UU l) →
+  ( {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → P (B x)) → P ({x : A} → B x)) →
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π P A → P (iterated-implicit-Π A)
+section-iterated-implicit-Π-section-Π-section-codomain
+  P f ._ {{base-telescope A}} H =
+  H
+section-iterated-implicit-Π-section-Π-section-codomain
+  P f ._ {{cons-telescope A}} H =
+  f ( λ x →
+      section-iterated-implicit-Π-section-Π-section-codomain
+        P f _ {{A x}} (H x))
 ```
 
 ### Iterated products of contractible types is contractible
@@ -126,6 +141,14 @@ is-contr-iterated-Π :
   apply-codomain-iterated-Π is-contr A → is-contr (iterated-Π A)
 is-contr-iterated-Π =
   section-iterated-Π-section-Π-section-codomain is-contr is-contr-Π
+
+is-contr-iterated-implicit-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-contr A → is-contr (iterated-implicit-Π A)
+is-contr-iterated-implicit-Π =
+  section-iterated-implicit-Π-section-Π-section-codomain
+    ( is-contr)
+    ( is-contr-implicit-Π)
 ```
 
 ### Iterated products of propositions are propositions
@@ -136,6 +159,12 @@ is-prop-iterated-Π :
   apply-codomain-iterated-Π is-prop A → is-prop (iterated-Π A)
 is-prop-iterated-Π =
   section-iterated-Π-section-Π-section-codomain is-prop is-prop-Π
+
+is-prop-iterated-implicit-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-prop A → is-prop (iterated-implicit-Π A)
+is-prop-iterated-implicit-Π =
+  section-iterated-implicit-Π-section-Π-section-codomain is-prop is-prop-Π'
 ```
 
 ### Iterated products of truncated types are truncated
