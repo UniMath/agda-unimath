@@ -301,7 +301,7 @@ subprecategory:
     is-in-hom-obj-subprecategory-inclusion-hom-Subprecategory x y f
 ```
 
-Subprecategories are subprecategories:
+#### Subprecategories are subprecategories
 
 ```agda
   is-subprecategory-Subprecategory :
