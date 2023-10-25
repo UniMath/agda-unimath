@@ -230,6 +230,29 @@ pr2 (pr2 (cocone-comp-horizontal f i k c d)) =
     ( coherence-square-cocone (vertical-map-cocone f i c) k d)
 ```
 
+A variation on the above:
+
+```text
+       i       k
+   A ----> B ----> C
+   |       |       |
+ f |     g |       |
+   v       v       v
+   X ----> Y ----> Z
+       j
+```
+
+```agda
+cocone-comp-horizontal' :
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  ( f : A → X) (i : A → B) (k : B → C) (g : B → Y) (j : X → Y) →
+  cocone g k Z → coherence-square-maps i f g j →
+  cocone f (k ∘ i) Z
+cocone-comp-horizontal' f i k g j c coh =
+  cocone-comp-horizontal f i k (j , g , coh) c
+```
+
 ### Vertical composition of cocones
 
 ```text
@@ -267,4 +290,78 @@ pr2 (pr2 (cocone-comp-vertical f i k c d)) =
     ( horizontal-map-cocone k (horizontal-map-cocone f i c) d)
     ( coherence-square-cocone f i c)
     ( coherence-square-cocone k (horizontal-map-cocone f i c) d)
+```
+
+A variation on the above:
+
+```text
+     i
+ A -----> X
+ |        |
+f|        |g
+ v   j    v
+ B -----> Y
+ |        |
+k|        |
+ v        v
+ C -----> Z
+```
+
+```agda
+cocone-comp-vertical' :
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  ( f : A → B) (i : A → X) (g : X → Y) (j : B → Y) (k : B → C) →
+  cocone k j Z → coherence-square-maps i f g j →
+  cocone (k ∘ f) i Z
+cocone-comp-vertical' f i g j k c coh =
+  cocone-comp-vertical f i k (j , g , coh) c
+```
+
+Given a commutative diagram like this,
+
+```text
+          g'
+      S' ---> B'
+     / \       \
+ f' /   \ k     \ j
+   /     v   g   v
+  A'     S ----> B
+    \    |       |
+   i \   | f     |
+      \  v       v
+       > A ----> X
+```
+
+we can compose both vertically and horizontally to get the following cocone:
+
+```text
+   S' ---> B'
+   |       |
+   |       |
+   v       v
+   A' ---> X
+```
+
+Notice that the triple (i,j,k) is really a morphism of spans. So the resulting
+cocone arises as a composition of the original cocone with this morphism of
+spans.
+
+```agda
+comp-cocone-hom-span :
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  { S' : UU l5} {A' : UU l6} {B' : UU l7}
+  ( f : S → A) (g : S → B) (f' : S' → A') (g' : S' → B')
+  ( i : A' → A) (j : B' → B) (k : S' → S) →
+  cocone f g X →
+  coherence-square-maps k f' f i → coherence-square-maps g' k j g →
+  cocone f' g' X
+comp-cocone-hom-span f g f' g' i j k c coh-l coh-r =
+  cocone-comp-vertical
+    ( id)
+    ( g')
+    ( f')
+    ( (g ∘ k , j , coh-r))
+    ( cocone-comp-horizontal f' k g (i , f , coh-l) c)
 ```
