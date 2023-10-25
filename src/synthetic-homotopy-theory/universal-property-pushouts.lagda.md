@@ -550,6 +550,50 @@ module _
               ( W))))
 ```
 
+#### Extending pushouts by equivalences on the left
+
+As a special case of the horizontal pushout pasting lemma we can extend a
+pushout square by equivalences on the left.
+
+If we have a pushout square on the right, equivalences S' ≃ S and A' ≃ A, and a
+map f' : S' → A' making the left square commute, then the outer rectangle is
+again a pushout.
+
+```text
+       i       g
+   S' ---> S ----> B
+   |   ≃   |       |
+f' |       | f     |
+   v   ≃   v    ⌜  v
+   A' ---> A ----> X
+       j
+```
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {A' : UU l6}
+  ( f : S → A) (g : S → B) (i : S' → S) (j : A' → A) (f' : S' → A')
+  ( c : cocone f g X)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( coh : coherence-square-maps i f' f j)
+  where
+
+  universal-property-pushout-left-extended-by-equivalences :
+    is-equiv i → is-equiv j →
+    {l : Level} →
+    universal-property-pushout l
+      ( f')
+      ( g ∘ i)
+      ( cocone-comp-horizontal' f' i g f j c coh)
+  universal-property-pushout-left-extended-by-equivalences ie je =
+    universal-property-pushout-rectangle-universal-property-pushout-right f' i g
+      ( j , f , coh)
+      ( c)
+      ( universal-property-pushout-is-equiv' f' i (j , f , coh) ie je)
+      ( up-c)
+```
+
 #### The vertical pushout pasting lemma
 
 If in the following diagram the top square is a pushout, then the outer
