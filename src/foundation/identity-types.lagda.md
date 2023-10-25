@@ -11,6 +11,7 @@ open import foundation-core.identity-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
+open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
@@ -53,7 +54,7 @@ mac-lane-pentagon :
       α₄ = (assoc (p ∙ q) r s)
       α₅ = (assoc p q (r ∙ s))
   in
-  ((α₁ ∙ α₂) ∙ α₃) ＝ (α₄ ∙ α₅)
+    coherence-pentagon-identifications α₁ α₄ α₂ α₅ α₃
 mac-lane-pentagon refl refl refl refl = refl
 ```
 
