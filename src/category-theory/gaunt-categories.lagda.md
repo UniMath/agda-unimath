@@ -54,7 +54,7 @@ diagram relating the different notions of "category":
 
 ## Definitions
 
-### The predicate on precategories of being gaunt
+### The predicate on precategories that there is at most one isomorphism between any two objects
 
 ```agda
 module _
