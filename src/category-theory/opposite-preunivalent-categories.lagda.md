@@ -7,7 +7,6 @@ module category-theory.opposite-preunivalent-categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories

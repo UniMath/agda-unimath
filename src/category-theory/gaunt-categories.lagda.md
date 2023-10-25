@@ -9,21 +9,17 @@ module category-theory.gaunt-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
 
-open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 
@@ -319,6 +315,10 @@ module _
   pr2 (is-gaunt-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C) =
     is-prop-iso-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C
 ```
+
+## See also
+
+- [Posets](order-theory.posets.md) are gaunt.
 
 ## External links
 

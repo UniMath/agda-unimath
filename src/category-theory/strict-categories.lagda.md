@@ -13,10 +13,8 @@ open import category-theory.nonunital-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
 
-open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
