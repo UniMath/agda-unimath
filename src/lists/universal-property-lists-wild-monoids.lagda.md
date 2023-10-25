@@ -290,7 +290,8 @@ elim-list-Wild-Monoid M f =
 
 ### Contractibility of the type `hom (list X) M` of morphisms of wild monoids
 
-This remains to be formalized. The following block contains some abandoned old code towards this goal:
+This remains to be formalized. The following block contains some abandoned old
+code towards this goal:
 
 ```text
 htpy-elim-list-Wild-Monoid :

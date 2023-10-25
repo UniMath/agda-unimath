@@ -604,7 +604,7 @@ pr2 (concrete-group-Cyclic-Type k) = is-set-type-Ω-Cyclic-Type k
 equiv-Ω-Cyclic-Type-Group :
   (k : ℕ) → equiv-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
 pr1 (equiv-Ω-Cyclic-Type-Group k) = equiv-compute-Ω-Cyclic-Type k
-pr2 (equiv-Ω-Cyclic-Type-Group k){x} {y} =
+pr2 (equiv-Ω-Cyclic-Type-Group k) {x} {y} =
   preserves-concat-equiv-compute-Ω-Cyclic-Type k {x} {y}
 
 iso-Ω-Cyclic-Type-Group :
