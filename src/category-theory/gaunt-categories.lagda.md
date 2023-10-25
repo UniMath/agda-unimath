@@ -31,8 +31,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **gaunt category** is a [category](category-theory.categories.md) for one of
-the following equivalent conditions hold:
+A **gaunt category** is a [category](category-theory.categories.md) such that
+one of the following equivalent conditions hold:
 
 1. The
    [isomorphism](category-theory.isomorphisms-in-categories.md)-[sets](foundation-core.sets.md)
@@ -121,8 +121,7 @@ module _
 
 ```agda
 Gaunt-Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Gaunt-Category l1 l2 =
-  Σ (Category l1 l2) (is-gaunt-Category)
+Gaunt-Category l1 l2 = Σ (Category l1 l2) (is-gaunt-Category)
 
 module _
   {l1 l2 : Level} (C : Gaunt-Category l1 l2)
@@ -254,14 +253,12 @@ module _
   where
 
   hom-eq-Gaunt-Category :
-    (x y : obj-Gaunt-Category C) →
-    x ＝ y → hom-Gaunt-Category C x y
+    (x y : obj-Gaunt-Category C) → x ＝ y → hom-Gaunt-Category C x y
   hom-eq-Gaunt-Category =
     hom-eq-Category (category-Gaunt-Category C)
 
   hom-inv-eq-Gaunt-Category :
-    (x y : obj-Gaunt-Category C) →
-    x ＝ y → hom-Gaunt-Category C y x
+    (x y : obj-Gaunt-Category C) → x ＝ y → hom-Gaunt-Category C y x
   hom-inv-eq-Gaunt-Category =
     hom-inv-eq-Category (category-Gaunt-Category C)
 ```
@@ -302,7 +299,7 @@ module _
     is-category-Precategory (precategory-Strict-Category C)
   is-category-is-surjective-iso-eq-Strict-Category =
     is-category-is-surjective-iso-eq-Preunivalent-Category
-      (preunivalent-category-Strict-Category C)
+      ( preunivalent-category-Strict-Category C)
 
   is-prop-iso-is-category-Strict-Category :
     is-category-Precategory (precategory-Strict-Category C) →
@@ -326,7 +323,7 @@ module _
     is-prop-iso-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C
 ```
 
-### A category is gaunt if every object is rigid
+### A category is gaunt if and only if every object is rigid
 
 **Proof:** Using the fact that a type is a
 [proposition](foundation-core.propositions.md) if and only if having an
