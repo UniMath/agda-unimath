@@ -541,12 +541,11 @@ module _
 
   is-equiv-inv-iso-Precategory :
     {x y : obj-Precategory C} → is-equiv (inv-iso-Precategory C {x} {y})
-  pr1 (pr1 is-equiv-inv-iso-Precategory) = inv-iso-Precategory C
-  pr2 (pr1 is-equiv-inv-iso-Precategory) =
-    is-fibered-involution-inv-iso-Precategory
-  pr1 (pr2 is-equiv-inv-iso-Precategory) = inv-iso-Precategory C
-  pr2 (pr2 is-equiv-inv-iso-Precategory) =
-    is-fibered-involution-inv-iso-Precategory
+  is-equiv-inv-iso-Precategory =
+    is-equiv-is-invertible
+      ( inv-iso-Precategory C)
+      ( is-fibered-involution-inv-iso-Precategory)
+      ( is-fibered-involution-inv-iso-Precategory)
 
   equiv-inv-iso-Precategory :
     {x y : obj-Precategory C} → iso-Precategory C x y ≃ iso-Precategory C y x
