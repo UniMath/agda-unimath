@@ -71,6 +71,7 @@ open import category-theory.isomorphisms-in-categories public
 open import category-theory.isomorphisms-in-large-categories public
 open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
+open import category-theory.isomorphisms-in-subprecategories public
 open import category-theory.large-categories public
 open import category-theory.large-function-categories public
 open import category-theory.large-function-precategories public
@@ -112,6 +113,7 @@ open import category-theory.preunivalent-categories public
 open import category-theory.products-in-precategories public
 open import category-theory.products-of-precategories public
 open import category-theory.pullbacks-in-precategories public
+open import category-theory.replete-subprecategories public
 open import category-theory.representable-functors-categories public
 open import category-theory.representable-functors-large-precategories public
 open import category-theory.representable-functors-precategories public
