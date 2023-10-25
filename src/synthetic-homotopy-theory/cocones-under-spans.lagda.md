@@ -230,6 +230,29 @@ pr2 (pr2 (cocone-comp-horizontal f i k c d)) =
     ( coherence-square-cocone (vertical-map-cocone f i c) k d)
 ```
 
+A variation on the above:
+
+```text
+       i       k
+   A ----> B ----> C
+   |       |       |
+ f |     g |       |
+   v       v       v
+   X ----> Y ----> Z
+       j
+```
+
+```agda
+cocone-comp-horizontal' :
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  ( f : A → X) (i : A → B) (k : B → C) (g : B → Y) (j : X → Y) →
+  cocone g k Z → coherence-square-maps i f g j →
+  cocone f (k ∘ i) Z
+cocone-comp-horizontal' f i k g j c coh =
+  cocone-comp-horizontal f i k (j , g , coh) c
+```
+
 ### Vertical composition of cocones
 
 ```text
