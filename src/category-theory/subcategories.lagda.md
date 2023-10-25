@@ -407,7 +407,7 @@ module _
 
 ### Subprecategories of categories are replete
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
@@ -418,33 +418,33 @@ module _
   (is-iso-f : is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f))
   where
 
-  -- contains-is-iso-is-category-Subprecategory : is-iso-Subprecategory C P f
-  -- contains-is-iso-is-category-Subprecategory =
-  --   ind-iso-Category (C , is-category-C)
-  --     ( λ Y e →
-  --       ( p : is-in-obj-Subprecategory C P Y)
-  --       ( q :
-  --         is-in-hom-Subprecategory C P
-  --           ( inclusion-obj-Subprecategory C P x)
-  --           ( Y)
-  --           ( hom-iso-Precategory C e)) →
-  --       is-iso-Subprecategory C P {x} {Y , p} (hom-iso-Precategory C e , q))
-  --     ( ( ind-subsingleton
-  --         ( is-prop-is-in-hom-Subprecategory C P
-  --           ( inclusion-obj-Subprecategory C P x)
-  --           ( inclusion-obj-Subprecategory C P x)
-  --           ( id-hom-Precategory C))
-  --         ( contains-id-Subprecategory C P
-  --           ( inclusion-obj-Subprecategory C P x)
-  --           ( is-in-obj-inclusion-obj-Subprecategory C P x))) ∘
-  --       ( ind-subsingleton
-  --         ( is-prop-is-in-obj-Subprecategory C P
-  --           ( inclusion-obj-Subprecategory C P x))
-  --         ( is-in-obj-inclusion-obj-Subprecategory C P x)
-  --         ( is-iso-id-hom-Precategory (precategory-Subprecategory C P) {x})))
-  --     ( inclusion-hom-Subprecategory C P x y f , is-iso-f)
-  --     ( is-in-obj-inclusion-obj-Subprecategory C P y)
-  --     ( is-in-hom-inclusion-hom-Subprecategory C P x y f)
+  contains-is-iso-is-category-Subprecategory : is-iso-Subprecategory C P f
+  contains-is-iso-is-category-Subprecategory =
+    ind-iso-Category (C , is-category-C)
+      ( λ Y e →
+        ( p : is-in-obj-Subprecategory C P Y)
+        ( q :
+          is-in-hom-Subprecategory C P
+            ( inclusion-obj-Subprecategory C P x)
+            ( Y)
+            ( hom-iso-Precategory C e)) →
+        is-iso-Subprecategory C P {x} {Y , p} (hom-iso-Precategory C e , q))
+      ( ( ind-subsingleton
+          ( is-prop-is-in-hom-Subprecategory C P
+            ( inclusion-obj-Subprecategory C P x)
+            ( inclusion-obj-Subprecategory C P x)
+            ( id-hom-Precategory C))
+          ( contains-id-Subprecategory C P
+            ( inclusion-obj-Subprecategory C P x)
+            ( is-in-obj-inclusion-obj-Subprecategory C P x))) ∘
+        ( ind-subsingleton
+          ( is-prop-is-in-obj-Subprecategory C P
+            ( inclusion-obj-Subprecategory C P x))
+          ( is-in-obj-inclusion-obj-Subprecategory C P x)
+          ( is-iso-id-hom-Precategory (precategory-Subprecategory C P) {x})))
+      ( inclusion-hom-Subprecategory C P x y f , is-iso-f)
+      ( is-in-obj-inclusion-obj-Subprecategory C P y)
+      ( is-in-hom-inclusion-hom-Subprecategory C P x y f)
 ```
 
-It remains to show that subprecategories of categories indeed are categories.
+This remains to complete.
