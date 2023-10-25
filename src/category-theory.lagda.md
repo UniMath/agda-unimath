@@ -100,6 +100,7 @@ open import category-theory.nonunital-precategories public
 open import category-theory.one-object-precategories public
 open import category-theory.opposite-categories public
 open import category-theory.opposite-precategories public
+open import category-theory.opposite-preunivalent-categories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-functors public
 open import category-theory.precategory-of-functors-from-small-to-large-precategories public

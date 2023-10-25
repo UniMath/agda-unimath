@@ -13,13 +13,15 @@ open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.iterated-dependent-product-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
@@ -162,27 +164,56 @@ pr2 (pr2 (pr2 (id-functor-Precategory C))) x = refl
 Any two compatible functors can be composed to a new functor.
 
 ```agda
-comp-functor-Precategory :
+module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  (C : Precategory l1 l2) (D : Precategory l3 l4) (E : Precategory l5 l6) →
-  functor-Precategory D E → functor-Precategory C D → functor-Precategory C E
-pr1 (comp-functor-Precategory C D E G F) =
-  obj-functor-Precategory D E G ∘ obj-functor-Precategory C D F
-pr1 (pr2 (comp-functor-Precategory C D E G F)) =
-  hom-functor-Precategory D E G ∘ hom-functor-Precategory C D F
-pr1 (pr2 (pr2 (comp-functor-Precategory C D E G F))) g f =
-  ( ap
-    ( hom-functor-Precategory D E G)
-    ( preserves-comp-functor-Precategory C D F g f)) ∙
-  ( preserves-comp-functor-Precategory D E G
-    ( hom-functor-Precategory C D F g)
-    ( hom-functor-Precategory C D F f))
-pr2 (pr2 (pr2 (comp-functor-Precategory C D E G F))) x =
-  ( ap
-    ( hom-functor-Precategory D E G)
-    ( preserves-id-functor-Precategory C D F x)) ∙
-  ( preserves-id-functor-Precategory D E G
-    ( obj-functor-Precategory C D F x))
+  (A : Precategory l1 l2) (B : Precategory l3 l4) (C : Precategory l5 l6)
+  (G : functor-Precategory B C) (F : functor-Precategory A B)
+  where
+
+  obj-comp-functor-Precategory : obj-Precategory A → obj-Precategory C
+  obj-comp-functor-Precategory =
+    obj-functor-Precategory B C G ∘ obj-functor-Precategory A B F
+
+  hom-comp-functor-Precategory :
+    {x y : obj-Precategory A} →
+    hom-Precategory A x y →
+    hom-Precategory C
+      ( obj-comp-functor-Precategory x)
+      ( obj-comp-functor-Precategory y)
+  hom-comp-functor-Precategory =
+    hom-functor-Precategory B C G ∘ hom-functor-Precategory A B F
+
+  map-comp-functor-precategory : map-Precategory A C
+  pr1 map-comp-functor-precategory = obj-comp-functor-Precategory
+  pr2 map-comp-functor-precategory = hom-comp-functor-Precategory
+
+  preserves-comp-comp-functor-Precategory :
+    preserves-comp-hom-map-Precategory A C map-comp-functor-precategory
+  preserves-comp-comp-functor-Precategory g f =
+    ( ap
+      ( hom-functor-Precategory B C G)
+      ( preserves-comp-functor-Precategory A B F g f)) ∙
+    ( preserves-comp-functor-Precategory B C G
+      ( hom-functor-Precategory A B F g)
+      ( hom-functor-Precategory A B F f))
+
+  preserves-id-comp-functor-Precategory :
+    preserves-id-hom-map-Precategory A C map-comp-functor-precategory
+  preserves-id-comp-functor-Precategory x =
+    ( ap
+      ( hom-functor-Precategory B C G)
+      ( preserves-id-functor-Precategory A B F x)) ∙
+    ( preserves-id-functor-Precategory B C G
+      ( obj-functor-Precategory A B F x))
+
+  comp-functor-Precategory : functor-Precategory A C
+  pr1 comp-functor-Precategory = obj-comp-functor-Precategory
+  pr1 (pr2 comp-functor-Precategory) =
+    hom-functor-Precategory B C G ∘ hom-functor-Precategory A B F
+  pr1 (pr2 (pr2 comp-functor-Precategory)) =
+    preserves-comp-comp-functor-Precategory
+  pr2 (pr2 (pr2 comp-functor-Precategory)) =
+    preserves-id-comp-functor-Precategory
 ```
 
 ## Properties
@@ -203,22 +234,17 @@ module _
   is-prop-preserves-comp-hom-map-Precategory :
     is-prop (preserves-comp-hom-map-Precategory C D F)
   is-prop-preserves-comp-hom-map-Precategory =
-    is-prop-Π'
-      ( λ x →
-        is-prop-Π'
-          ( λ y →
-            is-prop-Π'
-              ( λ z →
-                is-prop-iterated-Π 2
-                  ( λ g f →
-                    is-set-hom-Precategory D
-                      ( obj-map-Precategory C D F x)
-                      ( obj-map-Precategory C D F z)
-                      ( hom-map-Precategory C D F
-                        ( comp-hom-Precategory C g f))
-                      ( comp-hom-Precategory D
-                        ( hom-map-Precategory C D F g)
-                        ( hom-map-Precategory C D F f))))))
+    is-prop-iterated-implicit-Π 3
+      ( λ x y z →
+        is-prop-iterated-Π 2
+          ( λ g f →
+            is-set-hom-Precategory D
+              ( obj-map-Precategory C D F x)
+              ( obj-map-Precategory C D F z)
+              ( hom-map-Precategory C D F (comp-hom-Precategory C g f))
+              ( comp-hom-Precategory D
+                ( hom-map-Precategory C D F g)
+                ( hom-map-Precategory C D F f))))
 
   preserves-comp-hom-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   pr1 preserves-comp-hom-prop-map-Precategory =
@@ -421,6 +447,116 @@ module _
     preserves-is-iso-functor-Precategory
       ( hom-iso-Precategory C f)
       ( is-iso-iso-Precategory C f)
+```
+
+### Categorical laws for functor composition
+
+#### Unit laws for functor composition
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  where
+
+  left-unit-law-comp-functor-Precategory :
+    comp-functor-Precategory C D D (id-functor-Precategory D) F ＝ F
+  left-unit-law-comp-functor-Precategory =
+    eq-eq-map-functor-Precategory C D _ _ refl
+
+  right-unit-law-comp-functor-Precategory :
+    comp-functor-Precategory C C D F (id-functor-Precategory C) ＝ F
+  right-unit-law-comp-functor-Precategory = refl
+```
+
+#### Associativity of functor composition
+
+```agda
+module _
+  {l1 l1' l2 l2' l3 l3' l4 l4' : Level}
+  (A : Precategory l1 l1')
+  (B : Precategory l2 l2')
+  (C : Precategory l3 l3')
+  (D : Precategory l4 l4')
+  (F : functor-Precategory A B)
+  (G : functor-Precategory B C)
+  (H : functor-Precategory C D)
+  where
+
+  associative-comp-functor-Precategory :
+    comp-functor-Precategory A B D (comp-functor-Precategory B C D H G) F ＝
+    comp-functor-Precategory A C D H (comp-functor-Precategory A B C G F)
+  associative-comp-functor-Precategory =
+    eq-eq-map-functor-Precategory A D _ _ refl
+```
+
+#### MacLane pentagon for functor composition
+
+```text
+    (I(GH))F ---- I((GH)F)
+          /        \
+         /          \
+  ((IH)G)F          I(H(GF))
+          \        /
+            \    /
+           (IH)(GF)
+```
+
+The proof remains to be formalized.
+
+```text
+module _
+  {l1 l1' l2 l2' l3 l3' l4 l4' : Level}
+  (A : Precategory l1 l1')
+  (B : Precategory l2 l2')
+  (C : Precategory l3 l3')
+  (D : Precategory l4 l4')
+  (E : Precategory l4 l4')
+  (F : functor-Precategory A B)
+  (G : functor-Precategory B C)
+  (H : functor-Precategory C D)
+  (I : functor-Precategory D E)
+  where
+
+  mac-lane-pentagon-comp-functor-Precategory :
+    coherence-pentagon-identifications
+      { x =
+        comp-functor-Precategory A B E
+        ( comp-functor-Precategory B D E I
+          ( comp-functor-Precategory B C D H G))
+        ( F)}
+      { comp-functor-Precategory A D E I
+        ( comp-functor-Precategory A B D
+          ( comp-functor-Precategory B C D H G)
+          ( F))}
+      { comp-functor-Precategory A B E
+        ( comp-functor-Precategory B C E
+          ( comp-functor-Precategory C D E I H)
+          ( G))
+        ( F)}
+      { comp-functor-Precategory A D E
+        ( I)
+        ( comp-functor-Precategory A C D
+          ( H)
+          ( comp-functor-Precategory A B C G F))}
+      { comp-functor-Precategory A C E
+        ( comp-functor-Precategory C D E I H)
+        ( comp-functor-Precategory A B C G F)}
+      ( associative-comp-functor-Precategory A B D E
+        ( F) (comp-functor-Precategory B C D H G) (I))
+      ( ap
+        ( λ p → comp-functor-Precategory A B E p F)
+        ( inv (associative-comp-functor-Precategory B C D E G H I)))
+      ( ap
+        ( λ p → comp-functor-Precategory A D E I p)
+        ( associative-comp-functor-Precategory A B C D F G H))
+      ( associative-comp-functor-Precategory A B C E
+        ( F) (G) (comp-functor-Precategory C D E I H))
+      ( inv
+        ( associative-comp-functor-Precategory A C D E
+          (comp-functor-Precategory A B C G F) H I))
+  mac-lane-pentagon-comp-functor-Precategory = {!!}
 ```
 
 ## See also
