@@ -9,13 +9,17 @@ module category-theory.gaunt-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.isomorphism-induction-categories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
+open import category-theory.rigid-objects-precategories
 open import category-theory.strict-categories
 
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -27,12 +31,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **gaunt category** is a [category](category-theory.categories.md) for which
-the
-[isomorphism](category-theory.isomorphisms-in-categories.md)-[sets](foundation-core.sets.md)
-are [propositions](foundation-core.propositions.md), or equivalently a category
-such that the objects form a set. Thus, gaunt categories is the common
-intersection of (univalent) categories and
+A **gaunt category** is a [category](category-theory.categories.md) for one of
+the following equivalent conditions hold:
+
+1. The
+   [isomorphism](category-theory.isomorphisms-in-categories.md)-[sets](foundation-core.sets.md)
+   are [propositions](foundation-core.propositions.md).
+2. The objects form a set.
+3. Every object is [rigid](category-theory.rigid-objects.md), meaning its
+   [automorphism group](group-theory.automorphism-groups.md) is
+   [trivial](group-theory.trivial-groups.md).
+
+Thus, gaunt categories is the common intersection of (univalent) categories and
 [strict categories](category-theory.strict-categories.md). We have the following
 diagram relating the different notions of "category":
 
@@ -314,6 +324,28 @@ module _
     is-category-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C
   pr2 (is-gaunt-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C) =
     is-prop-iso-is-surjective-iso-eq-Strict-Category is-surj-iso-eq-C
+```
+
+### A category is gaunt if every object is rigid
+
+**Proof:** Using the fact that a type is a
+[proposition](foundation-core.propositions.md) if and only if having an
+inhabitant implies it is [contractible](foundation-core.contractible-types.md),
+we can apply
+[isomorphism induction](category-theory.isomorphism-induction-categories.md) to
+get our result.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  is-gaunt-is-rigid-Category :
+    ( (x : obj-Category C) →
+      is-rigid-obj-Precategory (precategory-Category C) x) →
+    is-gaunt-Category C
+  is-gaunt-is-rigid-Category is-rigid-obj-C x y =
+    is-prop-is-proof-irrelevant (ind-iso-Category C _ (is-rigid-obj-C x))
 ```
 
 ## See also
