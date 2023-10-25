@@ -44,7 +44,45 @@ of the morphisms of `C`, such that `P₁` contains all identity morphisms of
 objects in `P₀` and is closed under composition. By univalence, it therefore
 contains the isomorphisms, and hence defines a category.
 
-## Definition
+## Definitions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (P₀ : subtype l3 (obj-Category C))
+  (P₁ : subtype-hom-Precategory l4 (precategory-Category C) P₀)
+  where
+
+  contains-id-subtype-Category : UU (l1 ⊔ l3 ⊔ l4)
+  contains-id-subtype-Category =
+    contains-id-subtype-Precategory (precategory-Category C) P₀ P₁
+
+  is-prop-contains-id-subtype-Category :
+    is-prop contains-id-subtype-Category
+  is-prop-contains-id-subtype-Category =
+    is-prop-contains-id-subtype-Precategory (precategory-Category C) P₀ P₁
+
+  contains-id-prop-subtype-Category : Prop (l1 ⊔ l3 ⊔ l4)
+  contains-id-prop-subtype-Category =
+    contains-id-prop-subtype-Precategory (precategory-Category C) P₀ P₁
+
+  is-closed-under-composition-subtype-Category : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-closed-under-composition-subtype-Category =
+    is-closed-under-composition-subtype-Precategory
+      ( precategory-Category C) P₀ P₁
+
+  is-prop-is-closed-under-composition-subtype-Category :
+    is-prop is-closed-under-composition-subtype-Category
+  is-prop-is-closed-under-composition-subtype-Category =
+    is-prop-is-closed-under-composition-subtype-Precategory
+      ( precategory-Category C) P₀ P₁
+
+  is-closed-under-composition-prop-subtype-Category : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-closed-under-composition-prop-subtype-Category =
+    is-closed-under-composition-prop-subtype-Precategory
+      ( precategory-Category C) P₀ P₁
+```
 
 ### The predicate of being a subcategory
 
@@ -67,14 +105,13 @@ module _
 
   contains-id-is-subcategory :
     is-subcategory →
-    contains-id-subtype-Precategory (precategory-Category C) P₀ P₁
+    contains-id-subtype-Category C P₀ P₁
   contains-id-is-subcategory =
     contains-id-is-subprecategory (precategory-Category C) P₀ P₁
 
   is-closed-under-composition-is-subcategory :
     is-subcategory →
-    is-closed-under-composition-subtype-Precategory
-      ( precategory-Category C) P₀ P₁
+    is-closed-under-composition-subtype-Category C P₀ P₁
   is-closed-under-composition-is-subcategory =
     is-closed-under-composition-is-subprecategory (precategory-Category C) P₀ P₁
 ```
@@ -231,16 +268,14 @@ subcategory:
     is-subprecategory-Subprecategory (precategory-Category C) P
 
   contains-id-Subcategory :
-    contains-id-subtype-Precategory
-      ( precategory-Category C)
+    contains-id-subtype-Category C
       ( subtype-obj-Subcategory C P)
       ( subtype-hom-Subcategory)
   contains-id-Subcategory =
     contains-id-Subprecategory (precategory-Category C) P
 
   is-closed-under-composition-Subcategory :
-    is-closed-under-composition-subtype-Precategory
-      ( precategory-Category C)
+    is-closed-under-composition-subtype-Category C
       ( subtype-obj-Subcategory C P)
       ( subtype-hom-Subcategory)
   is-closed-under-composition-Subcategory =
@@ -404,47 +439,3 @@ module _
   is-emb-obj-inclusion-Category =
     is-emb-obj-inclusion-Subprecategory (precategory-Category C) P
 ```
-
-### Subprecategories of categories are replete
-
-```text
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (P : Subprecategory l3 l4 C)
-  (is-category-C : is-category-Precategory C)
-  {x y : obj-Subprecategory C P}
-  (f : hom-Subprecategory C P x y)
-  (is-iso-f : is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f))
-  where
-
-  contains-is-iso-is-category-Subprecategory : is-iso-Subprecategory C P f
-  contains-is-iso-is-category-Subprecategory =
-    ind-iso-Category (C , is-category-C)
-      ( λ Y e →
-        ( p : is-in-obj-Subprecategory C P Y)
-        ( q :
-          is-in-hom-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( Y)
-            ( hom-iso-Precategory C e)) →
-        is-iso-Subprecategory C P {x} {Y , p} (hom-iso-Precategory C e , q))
-      ( ( ind-subsingleton
-          ( is-prop-is-in-hom-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( inclusion-obj-Subprecategory C P x)
-            ( id-hom-Precategory C))
-          ( contains-id-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( is-in-obj-inclusion-obj-Subprecategory C P x))) ∘
-        ( ind-subsingleton
-          ( is-prop-is-in-obj-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x))
-          ( is-in-obj-inclusion-obj-Subprecategory C P x)
-          ( is-iso-id-hom-Precategory (precategory-Subprecategory C P) {x})))
-      ( inclusion-hom-Subprecategory C P x y f , is-iso-f)
-      ( is-in-obj-inclusion-obj-Subprecategory C P y)
-      ( is-in-hom-inclusion-hom-Subprecategory C P x y f)
-```
-
-This remains to complete.
