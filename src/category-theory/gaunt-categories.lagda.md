@@ -15,7 +15,7 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
-open import category-theory.rigid-objects-precategories
+open import category-theory.rigid-objects-categories
 open import category-theory.strict-categories
 
 open import foundation.cartesian-product-types
@@ -42,7 +42,7 @@ the following equivalent conditions hold:
    [automorphism group](group-theory.automorphism-groups.md) is
    [trivial](group-theory.trivial-groups.md).
 
-Thus, gaunt categories is the common intersection of (univalent) categories and
+Gaunt categories forms the common intersection of (univalent) categories and
 [strict categories](category-theory.strict-categories.md). We have the following
 diagram relating the different notions of "category":
 
@@ -274,7 +274,7 @@ module _
 is-strict-category-is-prop-iso-Preunivalent-Category :
   {l1 l2 : Level} (C : Preunivalent-Category l1 l2) →
   is-prop-iso-Precategory (precategory-Preunivalent-Category C) →
-  is-strict-category-Precategory (precategory-Preunivalent-Category C)
+  is-strict-category-Preunivalent-Category C
 is-strict-category-is-prop-iso-Preunivalent-Category C is-prop-iso-C x y =
   is-prop-emb (emb-iso-eq-Preunivalent-Category C) (is-prop-iso-C x y)
 ```
@@ -284,7 +284,7 @@ is-strict-category-is-prop-iso-Preunivalent-Category C is-prop-iso-C x y =
 ```agda
 is-strict-category-is-gaunt-Category :
   {l1 l2 : Level} (C : Category l1 l2) →
-  is-gaunt-Category C → is-strict-category-Precategory (precategory-Category C)
+  is-gaunt-Category C → is-strict-category-Category C
 is-strict-category-is-gaunt-Category C =
   is-strict-category-is-prop-iso-Preunivalent-Category
     ( preunivalent-category-Category C)
@@ -341,11 +341,14 @@ module _
   where
 
   is-gaunt-is-rigid-Category :
-    ( (x : obj-Category C) →
-      is-rigid-obj-Precategory (precategory-Category C) x) →
-    is-gaunt-Category C
+    ((x : obj-Category C) → is-rigid-obj-Category C x) → is-gaunt-Category C
   is-gaunt-is-rigid-Category is-rigid-obj-C x y =
     is-prop-is-proof-irrelevant (ind-iso-Category C _ (is-rigid-obj-C x))
+
+  is-rigid-is-gaunt-Category :
+    is-gaunt-Category C → (x : obj-Category C) → is-rigid-obj-Category C x
+  is-rigid-is-gaunt-Category is-gaunt-C x =
+    is-proof-irrelevant-is-prop (is-gaunt-C x x) (id-iso-Category C)
 ```
 
 ## See also

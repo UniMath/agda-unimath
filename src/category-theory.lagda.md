@@ -118,6 +118,7 @@ open import category-theory.representable-functors-categories public
 open import category-theory.representable-functors-large-precategories public
 open import category-theory.representable-functors-precategories public
 open import category-theory.representing-arrow-category public
+open import category-theory.rigid-objects-categories public
 open import category-theory.rigid-objects-precategories public
 open import category-theory.sieves-in-categories public
 open import category-theory.simplex-category public
