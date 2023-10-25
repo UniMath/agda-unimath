@@ -39,6 +39,8 @@ precategory** `Cᵒᵖ` is given by reversing every morphism.
 
 ## Definition
 
+### The opposite precategory
+
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
@@ -181,71 +183,4 @@ module _
     map-compute-iso-opposite-Precategory
   pr2 compute-iso-opposite-Precategory =
     is-equiv-map-compute-iso-opposite-Precategory
-```
-
-### The underlying precategory is a category if and only if the opposite is a category
-
-```agda
-abstract
-  is-category-opposite-is-category-Precategory :
-    {l1 l2 : Level} (C : Precategory l1 l2) →
-    is-category-Precategory C →
-    is-category-Precategory (opposite-Precategory C)
-  is-category-opposite-is-category-Precategory C is-category-C x y =
-    is-equiv-htpy-equiv
-      ( compute-iso-opposite-Precategory C ∘e
-        equiv-inv-iso-Precategory C ∘e
-        (_ , is-category-C x y))
-      ( λ where
-        refl →
-          eq-type-subtype
-            ( is-iso-prop-Precategory (opposite-Precategory C))
-            ( refl))
-
-abstract
-  is-category-is-category-opposite-Precategory :
-    {l1 l2 : Level} (C : Precategory l1 l2) →
-    is-category-Precategory (opposite-Precategory C) →
-    is-category-Precategory C
-  is-category-is-category-opposite-Precategory C is-category-op-C =
-    tr
-      ( is-category-Precategory)
-      ( is-involution-opposite-Precategory C)
-      ( is-category-opposite-is-category-Precategory
-        ( opposite-Precategory C)
-        ( is-category-op-C))
-```
-
-### The underlying precategory is preunivalent if and only if the opposite is preunivalent
-
-```agda
-abstract
-  is-preunivalent-opposite-is-preunivalent-Precategory :
-    {l1 l2 : Level} (C : Precategory l1 l2) →
-    is-preunivalent-Precategory C →
-    is-preunivalent-Precategory (opposite-Precategory C)
-  is-preunivalent-opposite-is-preunivalent-Precategory C is-preunivalent-C x y =
-    is-emb-htpy-emb
-      ( comp-emb
-        ( emb-equiv
-          ( compute-iso-opposite-Precategory C ∘e equiv-inv-iso-Precategory C))
-        ( _ , is-preunivalent-C x y))
-      ( λ where
-        refl →
-          eq-type-subtype
-            ( is-iso-prop-Precategory (opposite-Precategory C))
-            ( refl))
-
-abstract
-  is-preunivalent-is-preunivalent-opposite-Precategory :
-    {l1 l2 : Level} (C : Precategory l1 l2) →
-    is-preunivalent-Precategory (opposite-Precategory C) →
-    is-preunivalent-Precategory C
-  is-preunivalent-is-preunivalent-opposite-Precategory C is-preunivalent-op-C =
-    tr
-      ( is-preunivalent-Precategory)
-      ( is-involution-opposite-Precategory C)
-      ( is-preunivalent-opposite-is-preunivalent-Precategory
-        ( opposite-Precategory C)
-        ( is-preunivalent-op-C))
 ```

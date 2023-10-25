@@ -8,6 +8,7 @@ module category-theory.opposite-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
 
@@ -17,6 +18,7 @@ open import foundation.identity-types
 open import foundation.involutions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -27,7 +29,44 @@ open import foundation.universe-levels
 Let `C` be a [category](category-theory.categories.md), its **opposite
 category** `Cᵒᵖ` is given by reversing every morphism.
 
-## Definition
+## Lemma
+
+### The underlying precategory is a category if and only if the opposite is a category
+
+```agda
+abstract
+  is-category-opposite-is-category-Precategory :
+    {l1 l2 : Level} (C : Precategory l1 l2) →
+    is-category-Precategory C →
+    is-category-Precategory (opposite-Precategory C)
+  is-category-opposite-is-category-Precategory C is-category-C x y =
+    is-equiv-htpy-equiv
+      ( compute-iso-opposite-Precategory C ∘e
+        equiv-inv-iso-Precategory C ∘e
+        (_ , is-category-C x y))
+      ( λ where
+        refl →
+          eq-type-subtype
+            ( is-iso-prop-Precategory (opposite-Precategory C))
+            ( refl))
+
+abstract
+  is-category-is-category-opposite-Precategory :
+    {l1 l2 : Level} (C : Precategory l1 l2) →
+    is-category-Precategory (opposite-Precategory C) →
+    is-category-Precategory C
+  is-category-is-category-opposite-Precategory C is-category-op-C =
+    tr
+      ( is-category-Precategory)
+      ( is-involution-opposite-Precategory C)
+      ( is-category-opposite-is-category-Precategory
+        ( opposite-Precategory C)
+        ( is-category-op-C))
+```
+
+## Definitions
+
+### The opposite category
 
 ```agda
 module _
