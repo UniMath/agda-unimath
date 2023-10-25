@@ -50,19 +50,19 @@ module _
     Large-Subprecategory : UUω
     where
     field
-      subobj-Large-Subprecategory :
+      subtype-obj-Large-Subprecategory :
         (l : Level) → subtype (γ l) (obj-Large-Precategory C l)
-      subhom-Large-Subprecategory :
+      subtype-hom-Large-Subprecategory :
         {l1 l2 : Level}
         (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2) →
-        is-in-subtype (subobj-Large-Subprecategory l1) X →
-        is-in-subtype (subobj-Large-Subprecategory l2) Y →
+        is-in-subtype (subtype-obj-Large-Subprecategory l1) X →
+        is-in-subtype (subtype-obj-Large-Subprecategory l2) Y →
         subtype (β l1 l2) (hom-Large-Precategory C X Y)
       contains-id-Large-Subprecategory :
         {l1 : Level} (X : obj-Large-Precategory C l1) →
-        (H : is-in-subtype (subobj-Large-Subprecategory l1) X) →
+        (H : is-in-subtype (subtype-obj-Large-Subprecategory l1) X) →
         is-in-subtype
-          ( subhom-Large-Subprecategory X X H H)
+          ( subtype-hom-Large-Subprecategory X X H H)
           ( id-hom-Large-Precategory C)
       is-closed-under-composition-Large-Subprecategory :
         {l1 l2 l3 : Level}
@@ -71,13 +71,13 @@ module _
         (Z : obj-Large-Precategory C l3)
         (g : hom-Large-Precategory C Y Z)
         (f : hom-Large-Precategory C X Y) →
-        (K : is-in-subtype (subobj-Large-Subprecategory l1) X) →
-        (L : is-in-subtype (subobj-Large-Subprecategory l2) Y) →
-        (M : is-in-subtype (subobj-Large-Subprecategory l3) Z) →
-        is-in-subtype (subhom-Large-Subprecategory Y Z L M) g →
-        is-in-subtype (subhom-Large-Subprecategory X Y K L) f →
+        (K : is-in-subtype (subtype-obj-Large-Subprecategory l1) X) →
+        (L : is-in-subtype (subtype-obj-Large-Subprecategory l2) Y) →
+        (M : is-in-subtype (subtype-obj-Large-Subprecategory l3) Z) →
+        is-in-subtype (subtype-hom-Large-Subprecategory Y Z L M) g →
+        is-in-subtype (subtype-hom-Large-Subprecategory X Y K L) f →
         is-in-subtype
-          ( subhom-Large-Subprecategory X Z K M)
+          ( subtype-hom-Large-Subprecategory X Z K M)
           ( comp-hom-Large-Precategory C g f)
 
   open Large-Subprecategory public
@@ -92,5 +92,5 @@ module _
   is-in-obj-Large-Subprecategory :
     {l : Level} → obj-Large-Precategory C l → UU (γ l)
   is-in-obj-Large-Subprecategory =
-    is-in-subtype (subobj-Large-Subprecategory P _)
+    is-in-subtype (subtype-obj-Large-Subprecategory P _)
 ```

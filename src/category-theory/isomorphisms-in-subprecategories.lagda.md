@@ -66,7 +66,8 @@ module _
 
   is-in-is-iso-prop-Subprecategory : Prop l4
   is-in-is-iso-prop-Subprecategory =
-    subhom-subobj-Subprecategory C P y x (hom-inv-is-iso-Precategory C is-iso-f)
+    subtype-hom-obj-subprecategory-Subprecategory C P y x
+      ( hom-inv-is-iso-Precategory C is-iso-f)
 
   is-in-is-iso-Subprecategory : UU l4
   is-in-is-iso-Subprecategory =
@@ -82,9 +83,13 @@ module _
     hom-inv-is-iso-Precategory C is-iso-f
   pr2 (pr1 (is-iso-is-in-is-iso-Subprecategory is-in-is-iso-f)) = is-in-is-iso-f
   pr1 (pr2 (is-iso-is-in-is-iso-Subprecategory is-in-is-iso-f)) =
-    eq-type-subtype (subhom-subobj-Subprecategory C P y y) (pr1 (pr2 is-iso-f))
+    eq-type-subtype
+      ( subtype-hom-obj-subprecategory-Subprecategory C P y y)
+      ( pr1 (pr2 is-iso-f))
   pr2 (pr2 (is-iso-is-in-is-iso-Subprecategory is-in-is-iso-f)) =
-    eq-type-subtype (subhom-subobj-Subprecategory C P x x) (pr2 (pr2 is-iso-f))
+    eq-type-subtype
+      ( subtype-hom-obj-subprecategory-Subprecategory C P x x)
+      ( pr2 (pr2 is-iso-f))
 ```
 
 #### The predicate on an isomorphism between objects in the subprecategory of being contained in the subprecategory
@@ -101,31 +106,32 @@ module _
       ( inclusion-obj-Subprecategory C P y))
   where
 
-  is-in-iso-subobj-prop-Subprecategory : Prop l4
-  is-in-iso-subobj-prop-Subprecategory =
+  is-in-iso-obj-subprecategory-prop-Subprecategory : Prop l4
+  is-in-iso-obj-subprecategory-prop-Subprecategory =
     Σ-Prop
-      ( subhom-subobj-Subprecategory C P x y (hom-iso-Precategory C f))
+      ( subtype-hom-obj-subprecategory-Subprecategory C P x y
+        ( hom-iso-Precategory C f))
       ( λ f₀ →
         is-in-is-iso-prop-Subprecategory C P
           ( hom-iso-Precategory C f , f₀)
           ( is-iso-iso-Precategory C f))
 
-  is-in-iso-subobj-Subprecategory : UU l4
-  is-in-iso-subobj-Subprecategory =
-    type-Prop is-in-iso-subobj-prop-Subprecategory
+  is-in-iso-obj-subprecategory-Subprecategory : UU l4
+  is-in-iso-obj-subprecategory-Subprecategory =
+    type-Prop is-in-iso-obj-subprecategory-prop-Subprecategory
 
-  is-prop-is-in-iso-subobj-Subprecategory :
-    is-prop is-in-iso-subobj-Subprecategory
-  is-prop-is-in-iso-subobj-Subprecategory =
-    is-prop-type-Prop is-in-iso-subobj-prop-Subprecategory
+  is-prop-is-in-iso-obj-subprecategory-Subprecategory :
+    is-prop is-in-iso-obj-subprecategory-Subprecategory
+  is-prop-is-in-iso-obj-subprecategory-Subprecategory =
+    is-prop-type-Prop is-in-iso-obj-subprecategory-prop-Subprecategory
 
-  iso-is-in-iso-subobj-Subprecategory :
-    is-in-iso-subobj-Subprecategory → iso-Subprecategory C P x y
-  pr1 (pr1 (iso-is-in-iso-subobj-Subprecategory is-in-iso-f)) =
+  iso-is-in-iso-obj-subprecategory-Subprecategory :
+    is-in-iso-obj-subprecategory-Subprecategory → iso-Subprecategory C P x y
+  pr1 (pr1 (iso-is-in-iso-obj-subprecategory-Subprecategory is-in-iso-f)) =
     hom-iso-Precategory C f
-  pr2 (pr1 (iso-is-in-iso-subobj-Subprecategory is-in-iso-f)) =
+  pr2 (pr1 (iso-is-in-iso-obj-subprecategory-Subprecategory is-in-iso-f)) =
     pr1 is-in-iso-f
-  pr2 (iso-is-in-iso-subobj-Subprecategory is-in-iso-f) =
+  pr2 (iso-is-in-iso-obj-subprecategory-Subprecategory is-in-iso-f) =
     is-iso-is-in-is-iso-Subprecategory C P _
       ( is-iso-iso-Precategory C f)
       ( pr2 is-in-iso-f)
@@ -145,12 +151,13 @@ module _
   is-in-iso-prop-Subprecategory : Prop (l3 ⊔ l4)
   is-in-iso-prop-Subprecategory =
     Σ-Prop
-      ( subobj-Subprecategory C P x)
+      ( subtype-obj-Subprecategory C P x)
       ( λ x₀ →
         Σ-Prop
-          ( subobj-Subprecategory C P y)
+          ( subtype-obj-Subprecategory C P y)
           ( λ y₀ →
-            is-in-iso-subobj-prop-Subprecategory C P {x , x₀} {y , y₀} f))
+            is-in-iso-obj-subprecategory-prop-Subprecategory C P
+              { x , x₀} {y , y₀} f))
 
   is-in-iso-Subprecategory : UU (l3 ⊔ l4)
   is-in-iso-Subprecategory = type-Prop is-in-iso-prop-Subprecategory
@@ -163,5 +170,6 @@ module _
     (is-in-iso-f : is-in-iso-Subprecategory) →
     iso-Subprecategory C P (x , pr1 is-in-iso-f) (y , pr1 (pr2 is-in-iso-f))
   iso-is-in-iso-Subprecategory is-in-iso-f =
-    iso-is-in-iso-subobj-Subprecategory C P f (pr2 (pr2 is-in-iso-f))
+    iso-is-in-iso-obj-subprecategory-Subprecategory C P f
+      ( pr2 (pr2 is-in-iso-f))
 ```

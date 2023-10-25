@@ -52,9 +52,9 @@ module _
   (P : Full-Subcategory l3 C)
   where
 
-  subobj-Full-Subcategory : subtype l3 (obj-Category C)
-  subobj-Full-Subcategory =
-    subobj-Full-Subprecategory (precategory-Category C) P
+  subtype-obj-Full-Subcategory : subtype l3 (obj-Category C)
+  subtype-obj-Full-Subcategory =
+    subtype-obj-Full-Subprecategory (precategory-Category C) P
 
   obj-Full-Subcategory : UU (l1 ⊔ l3)
   obj-Full-Subcategory = obj-Full-Subprecategory (precategory-Category C) P

@@ -11,16 +11,16 @@ open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
-open import category-theory.maps-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.isomorphisms-in-subprecategories
+open import category-theory.maps-precategories
 open import category-theory.precategories
 open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.iterated-dependent-product-types
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -66,7 +66,8 @@ module _
 
   contains-iso-obj-prop-Subprecategory : Prop (l1 ⊔ l2 ⊔ l3)
   pr1 contains-iso-obj-prop-Subprecategory = contains-iso-obj-Subprecategory
-  pr2 contains-iso-obj-prop-Subprecategory = is-prop-contains-iso-obj-Subprecategory
+  pr2 contains-iso-obj-prop-Subprecategory =
+    is-prop-contains-iso-obj-Subprecategory
 ```
 
 ### The predicate of being a replete subprecategory
@@ -84,7 +85,7 @@ module _
     (y : obj-Precategory C)
     (f : iso-Precategory C (inclusion-obj-Subprecategory C P x) y) →
     Σ ( is-in-obj-Subprecategory C P y)
-      ( λ y₀ → is-in-iso-subobj-Subprecategory C P {x} {y , y₀} f)
+      ( λ y₀ → is-in-iso-obj-subprecategory-Subprecategory C P {x} {y , y₀} f)
 
   is-prop-is-replete-Subprecategory : is-prop (is-replete-Subprecategory)
   is-prop-is-replete-Subprecategory =
@@ -92,7 +93,9 @@ module _
       ( λ x y f →
         is-prop-Σ
           ( is-prop-is-in-obj-Subprecategory C P y)
-          ( λ y₀ → is-prop-is-in-iso-subobj-Subprecategory C P {x} {y , y₀} f))
+          ( λ y₀ →
+            is-prop-is-in-iso-obj-subprecategory-Subprecategory C P
+              { x} {y , y₀} f))
 
   is-replete-prop-Subprecategory : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pr1 is-replete-prop-Subprecategory = is-replete-Subprecategory
