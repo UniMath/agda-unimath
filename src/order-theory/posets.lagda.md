@@ -170,8 +170,7 @@ module _
 
 module _
   {l1 l2 : Level} (C : Category l1 l2)
-  ( is-prop-hom-C :
-    (x y : obj-Category C) → is-prop (hom-Category C x y))
+  (is-prop-hom-C : (x y : obj-Category C) → is-prop (hom-Category C x y))
   where
 
   preorder-is-prop-hom-Category : Preorder l1 l2
