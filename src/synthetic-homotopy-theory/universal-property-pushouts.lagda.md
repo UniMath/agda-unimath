@@ -750,6 +750,119 @@ module _
               ( W))))
 ```
 
+#### Extending pushouts by equivalences at the top
+
+If we have a pushout square on the right, equivalences S' ≃ S and B' ≃ B, and a
+map g' : S' → B' making the top square commute, then the vertical rectangle is
+again a pushout. This is a special case of the vertical pushout pasting lemma.
+
+```text
+           g'
+       S' ---> B'
+       |       |
+     i | ≃   ≃ | j
+       |       |
+       v   g   v
+       S ----> B
+       |       |
+     f |       |
+       v    ⌜  v
+       A ----> X
+```
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {B' : UU l6}
+  ( f : S → A) (g : S → B) (i : S' → S) (j : B' → B) (g' : S' → B')
+  ( c : cocone f g X)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( coh : coherence-square-maps g' i j g)
+  where
+
+  universal-property-pushout-top-extended-by-equivalences :
+    is-equiv i → is-equiv j →
+    {l : Level} →
+    universal-property-pushout l
+      ( f ∘ i)
+      ( g')
+      ( cocone-comp-vertical' i g' j g f c coh)
+  universal-property-pushout-top-extended-by-equivalences ie je =
+    universal-property-pushout-rectangle-universal-property-pushout-top i g' f
+      ( g , j , coh)
+      ( c)
+      ( universal-property-pushout-is-equiv i g' (g , j , coh) ie je)
+      ( up-c)
+```
+
+### Extending pushouts by equivalences of cocones
+
+Given a commutative diagram where i, j and k are equivalences,
+
+```text
+          g'
+      S' ---> B'
+     / \       \
+ f' /   \ k     \ j
+   /     v   g   v
+  A'     S ----> B
+    \    |       |
+   i \   | f     |
+      \  v    ⌜  v
+       > A ----> X
+```
+
+the induced square is a pushout.
+
+```text
+   S' ---> B'
+   |       |
+   |       |
+   v       v
+   A' ---> X
+```
+
+This combines both special cases of the pushout pasting lemmas for equivalences.
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  { S' : UU l5} {A' : UU l6} {B' : UU l7}
+  ( f : S → A) (g : S → B) (f' : S' → A') (g' : S' → B')
+  ( i : A' → A) (j : B' → B) (k : S' → S)
+  ( c : cocone f g X)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( coh-l : coherence-square-maps k f' f i)
+  ( coh-r : coherence-square-maps g' k j g)
+  where
+
+  universal-property-pushout-extended-by-equivalences :
+    is-equiv i → is-equiv j → is-equiv k →
+    {l : Level} →
+    universal-property-pushout l
+      ( f')
+      ( g')
+      ( cocone-comp-vertical-horizontal f g f' g' i j k c coh-l coh-r)
+  universal-property-pushout-extended-by-equivalences ie je ke =
+    universal-property-pushout-top-extended-by-equivalences f'
+      ( g ∘ k)
+      ( id)
+      ( j)
+      ( g')
+      ( cocone-comp-horizontal' f' k g f i c coh-l)
+      ( universal-property-pushout-left-extended-by-equivalences f g k i
+        ( f')
+        ( c)
+        ( up-c)
+        ( coh-l)
+        ( ke)
+        ( ie))
+      ( coh-r)
+      ( is-equiv-id)
+      ( je)
+```
+
 ### In a commuting cube where the vertical maps are equivalences, the bottom square is a pushout if and only if the top square is a pushout
 
 ```agda
@@ -873,156 +986,4 @@ module _
             ( h' , k' , top)
             ( up-top)
             ( W)))
-```
-
-### Extending pushouts by equivalences on the left
-
-If we have a pushout square on the right, equivalences S' ≃ S and A' ≃ A, and a
-map f' : S' → A' making the left square commute, then the outer rectangle is
-again a pushout.
-
-```text
-       i       g
-   S' ---> S ----> B
-   |   ≃   |       |
-f' |       | f     |
-   v   ≃   v    ⌜  v
-   A' ---> A ----> X
-       j
-```
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {A' : UU l6}
-  ( f : S → A) (g : S → B) (i : S' → S) (j : A' → A) (f' : S' → A')
-  ( c : cocone f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
-  ( coh : coherence-square-maps i f' f j)
-  where
-
-  universal-property-pushout-left-extended-by-equivalences :
-    is-equiv i → is-equiv j →
-    {l : Level} →
-    universal-property-pushout l
-      ( f')
-      ( g ∘ i)
-      ( cocone-comp-horizontal' f' i g f j c coh)
-  universal-property-pushout-left-extended-by-equivalences ie je =
-    universal-property-pushout-rectangle-universal-property-pushout-right f' i g
-      ( j , f , coh)
-      ( c)
-      ( universal-property-pushout-is-equiv' f' i (j , f , coh) ie je)
-      ( up-c)
-```
-
-### Extending pushouts by equivalences at the top
-
-If we have a pushout square on the right, equivalences S' ≃ S and B' ≃ B, and a
-map g' : S' → B' making the top square commute, then the vertical rectangle is
-again a pushout.
-
-```text
-           g'
-       S' ---> B'
-       |       |
-     i | ≃   ≃ | j
-       |       |
-       v   g   v
-       S ----> B
-       |       |
-     f |       |
-       v    ⌜  v
-       A ----> X
-```
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {B' : UU l6}
-  ( f : S → A) (g : S → B) (i : S' → S) (j : B' → B) (g' : S' → B')
-  ( c : cocone f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
-  ( coh : coherence-square-maps g' i j g)
-  where
-
-  universal-property-pushout-top-extended-by-equivalences :
-    is-equiv i → is-equiv j →
-    {l : Level} →
-    universal-property-pushout l
-      ( f ∘ i)
-      ( g')
-      ( cocone-comp-vertical' i g' j g f c coh)
-  universal-property-pushout-top-extended-by-equivalences ie je =
-    universal-property-pushout-rectangle-universal-property-pushout-top i g' f
-      ( g , j , coh)
-      ( c)
-      ( universal-property-pushout-is-equiv i g' (g , j , coh) ie je)
-      ( up-c)
-```
-
-### Extending pushouts by equivalences of cocones
-
-Given a commutative diagram where i, j and k are equivalences,
-
-```text
-          g'
-      S' ---> B'
-     / \       \
- f' /   \ k     \ j
-   /     v   g   v
-  A'     S ----> B
-    \    |       |
-   i \   | f     |
-      \  v    ⌜  v
-       > A ----> X
-```
-
-the induced square is a pushout.
-
-```text
-   S' ---> B'
-   |       |
-   |       |
-   v       v
-   A' ---> X
-```
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 l6 l7 : Level}
-  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  { S' : UU l5} {A' : UU l6} {B' : UU l7}
-  ( f : S → A) (g : S → B) (f' : S' → A') (g' : S' → B')
-  ( i : A' → A) (j : B' → B) (k : S' → S)
-  ( c : cocone f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
-  ( coh-l : coherence-square-maps k f' f i)
-  ( coh-r : coherence-square-maps g' k j g)
-  where
-
-  universal-property-pushout-extended-by-equivalences :
-    is-equiv i → is-equiv j → is-equiv k →
-    {l : Level} →
-    universal-property-pushout l
-      ( f')
-      ( g')
-      ( cocone-comp-vertical-horizontal f g f' g' i j k c coh-l coh-r)
-  universal-property-pushout-extended-by-equivalences ie je ke =
-    universal-property-pushout-top-extended-by-equivalences f'
-      ( g ∘ k)
-      ( id)
-      ( j)
-      ( g')
-      ( cocone-comp-horizontal' f' k g f i c coh-l)
-      ( universal-property-pushout-left-extended-by-equivalences f g k i
-        ( f')
-        ( c)
-        ( up-c)
-        ( coh-l)
-        ( ke)
-        ( ie))
-      ( coh-r)
-      ( is-equiv-id)
-      ( je)
 ```
