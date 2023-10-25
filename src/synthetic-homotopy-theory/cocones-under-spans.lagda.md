@@ -343,8 +343,12 @@ we can compose both vertically and horizontally to get the following cocone:
    A' ---> X
 ```
 
+Notice that the triple (i,j,k) is really a morphism of spans. So the resulting
+cocone arises as a composition of the original cocone with this morphism of
+spans.
+
 ```agda
-cocone-comp-vertical-horizontal :
+comp-cocone-hom-span :
   { l1 l2 l3 l4 l5 l6 l7 : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { S' : UU l5} {A' : UU l6} {B' : UU l7}
@@ -353,7 +357,7 @@ cocone-comp-vertical-horizontal :
   cocone f g X →
   coherence-square-maps k f' f i → coherence-square-maps g' k j g →
   cocone f' g' X
-cocone-comp-vertical-horizontal f g f' g' i j k c coh-l coh-r =
+comp-cocone-hom-span f g f' g' i j k c coh-l coh-r =
   cocone-comp-vertical
     ( id)
     ( g')

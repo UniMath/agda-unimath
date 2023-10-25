@@ -824,6 +824,9 @@ the induced square is a pushout.
 
 This combines both special cases of the pushout pasting lemmas for equivalences.
 
+Notice that the triple (i.j.k) is really an equivalence of spans. Thus, this
+result can be phrased as: the pushout is invariant under equivalence of spans.
+
 ```agda
 module _
   { l1 l2 l3 l4 l5 l6 l7 : Level}
@@ -843,7 +846,7 @@ module _
     universal-property-pushout l
       ( f')
       ( g')
-      ( cocone-comp-vertical-horizontal f g f' g' i j k c coh-l coh-r)
+      ( comp-cocone-hom-span f g f' g' i j k c coh-l coh-r)
   universal-property-pushout-extended-by-equivalences ie je ke =
     universal-property-pushout-top-extended-by-equivalences f'
       ( g ∘ k)
