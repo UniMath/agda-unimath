@@ -858,16 +858,7 @@ module _
   where
 
   cocone-left-extended : cocone f' (g ∘ i) X
-  cocone-left-extended =
-    horizontal-map-cocone f g c ∘ j ,
-    vertical-map-cocone f g c ,
-    ( λ z →
-      equational-reasoning
-        (horizontal-map-cocone f g c ∘ j ∘ f') z
-        ＝ (horizontal-map-cocone f g c ∘ f ∘ i) z
-          by ap (horizontal-map-cocone f g c) (coh z)
-        ＝ (vertical-map-cocone f g c ∘ g ∘ i) z
-          by coherence-square-cocone f g c (i z))
+  cocone-left-extended = cocone-comp-horizontal f' i g (j , f , coh) c
 
   universal-property-pushout-left-extended-by-equivalences :
     is-equiv i → is-equiv j →
@@ -911,15 +902,7 @@ module _
   where
 
   cocone-top-extended : cocone (f ∘ i) g' X
-  cocone-top-extended = horizontal-map-cocone f g c ,
-                        vertical-map-cocone f g c ∘ j ,
-                        ( λ z →
-                          equational-reasoning
-                            (horizontal-map-cocone f g c ∘ f ∘ i) z
-                            ＝ (vertical-map-cocone f g c ∘ g ∘ i) z
-                              by coherence-square-cocone f g c (i z)
-                            ＝ (vertical-map-cocone f g c ∘ j ∘ g') z
-                              by ap (vertical-map-cocone f g c) (coh z))
+  cocone-top-extended = cocone-comp-vertical i g' f (g , j , coh) c
 
   universal-property-pushout-top-extended-by-equivalences :
     is-equiv i → is-equiv j →
@@ -974,17 +957,12 @@ module _
 
   cocone-extended-span : cocone f' g' X
   cocone-extended-span =
-    horizontal-map-cocone f g c ∘ i ,
-    vertical-map-cocone f g c ∘ j ,
-    ( λ z →
-      equational-reasoning
-        (horizontal-map-cocone f g c ∘ i ∘ f') z
-        ＝ (horizontal-map-cocone f g c ∘ f ∘ k) z
-          by ap (horizontal-map-cocone f g c) (coh-l z)
-        ＝ (vertical-map-cocone f g c ∘ g ∘ k) z
-          by coherence-square-cocone f g c (k z)
-        ＝ (vertical-map-cocone f g c ∘ j ∘ g') z
-          by ap (vertical-map-cocone f g c) (coh-r z))
+    cocone-comp-vertical
+      ( id)
+      ( g')
+      ( f')
+      ( (g ∘ k , j , coh-r))
+      ( cocone-comp-horizontal f' k g (i , f , coh-l) c)
 
   universal-property-pushout-extended-by-equivalences :
     is-equiv i → is-equiv j → is-equiv k →
