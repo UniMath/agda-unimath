@@ -957,18 +957,13 @@ module _
   ( coh-r : coherence-square-maps g' k j g)
   where
 
-  cocone-extended-span : cocone f' g' X
-  cocone-extended-span =
-    cocone-comp-vertical
-      ( id)
-      ( g')
-      ( f')
-      ( (g ∘ k , j , coh-r))
-      ( cocone-comp-horizontal f' k g (i , f , coh-l) c)
-
   universal-property-pushout-extended-by-equivalences :
     is-equiv i → is-equiv j → is-equiv k →
-    {l : Level} → universal-property-pushout l f' g' cocone-extended-span
+    {l : Level} →
+    universal-property-pushout l
+      ( f')
+      ( g')
+      ( cocone-comp-vertical-horizontal f g f' g' i j k c coh-l coh-r)
   universal-property-pushout-extended-by-equivalences ie je ke =
     universal-property-pushout-top-extended-by-equivalences f'
       ( g ∘ k)

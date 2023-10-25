@@ -317,3 +317,47 @@ cocone-comp-vertical' :
 cocone-comp-vertical' f i g j k c coh =
   cocone-comp-vertical f i k (j , g , coh) c
 ```
+
+Given a commutative diagram like this,
+
+```text
+          g'
+      S' ---> B'
+     / \       \
+ f' /   \ k     \ j
+   /     v   g   v
+  A'     S ----> B
+    \    |       |
+   i \   | f     |
+      \  v       v
+       > A ----> X
+```
+
+we can compose both vertically and horizontally to get the following cocone:
+
+```text
+   S' ---> B'
+   |       |
+   |       |
+   v       v
+   A' ---> X
+```
+
+```agda
+cocone-comp-vertical-horizontal :
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  { S' : UU l5} {A' : UU l6} {B' : UU l7}
+  ( f : S → A) (g : S → B) (f' : S' → A') (g' : S' → B')
+  ( i : A' → A) (j : B' → B) (k : S' → S) →
+  cocone f g X →
+  coherence-square-maps k f' f i → coherence-square-maps g' k j g →
+  cocone f' g' X
+cocone-comp-vertical-horizontal f g f' g' i j k c coh-l coh-r =
+  cocone-comp-vertical
+    ( id)
+    ( g')
+    ( f')
+    ( (g ∘ k , j , coh-r))
+    ( cocone-comp-horizontal f' k g (i , f , coh-l) c)
+```
