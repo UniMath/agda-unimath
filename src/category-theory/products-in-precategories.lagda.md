@@ -127,7 +127,7 @@ module _
 
   is-prop-is-product-Precategory : is-prop (is-product-Precategory C x y p l r)
   is-prop-is-product-Precategory =
-    is-prop-Π³ (λ z f g → is-property-is-contr)
+    is-prop-iterated-Π 3 (λ z f g → is-property-is-contr)
 
   is-product-prop-Precategory : Prop (l1 ⊔ l2)
   pr1 is-product-prop-Precategory = is-product-Precategory C x y p l r

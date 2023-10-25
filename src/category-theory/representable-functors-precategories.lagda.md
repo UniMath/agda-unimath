@@ -146,15 +146,6 @@ module _
     representable-functor-Precategory C
   pr2 map-representable-functor-copresheaf-Precategory =
     representable-natural-transformation-Precategory C
-
-  -- functor-representable-functor-copresheaf-Precategory :
-  --   functor-Precategory
-  --     ( opposite-Precategory C)
-  --     ( copresheaf-precategory-Large-Precategory C l2)
-  -- pr1 functor-representable-functor-copresheaf-Precategory =
-  --   representable-functor-Precategory C
-  -- pr1 (pr2 functor-representable-functor-copresheaf-Precategory) =
-  --   representable-natural-transformation-Precategory C
-  -- pr1 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) = {!   !}
-  -- pr2 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) = {!   !}
 ```
+
+It remains to show that this map is functorial.
