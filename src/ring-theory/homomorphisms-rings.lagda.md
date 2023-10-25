@@ -45,7 +45,7 @@ preserves-mul-hom-Ab :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) →
   hom-Ab (ab-Ring R) (ab-Ring S) → UU (l1 ⊔ l2)
 preserves-mul-hom-Ab R S f =
-  (x y : type-Ring R) →
+  {x y : type-Ring R} →
   map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y) ＝
   mul-Ring S
     ( map-hom-Ab (ab-Ring R) (ab-Ring S) f x)
@@ -56,9 +56,9 @@ is-prop-preserves-mul-hom-Ab :
   ( f : hom-Ab (ab-Ring R) (ab-Ring S)) →
   is-prop (preserves-mul-hom-Ab R S f)
 is-prop-preserves-mul-hom-Ab R S f =
-  is-prop-Π
+  is-prop-Π'
     ( λ x →
-      is-prop-Π
+      is-prop-Π'
         ( λ y →
           is-set-type-Ring S
             ( map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y))
@@ -200,7 +200,7 @@ module _
   where
 
   preserves-mul-id-hom-Ring : preserves-mul-hom-Ab R R (id-hom-Ab (ab-Ring R))
-  preserves-mul-id-hom-Ring x y = refl
+  preserves-mul-id-hom-Ring = refl
 
   preserves-unit-id-hom-Ring : preserves-unit-hom-Ab R R (id-hom-Ab (ab-Ring R))
   preserves-unit-id-hom-Ring = refl

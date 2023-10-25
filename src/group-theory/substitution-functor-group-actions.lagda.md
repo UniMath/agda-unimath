@@ -164,7 +164,7 @@ module _
           ( inv-Group G g)
           ( ( ( ap
                 ( mul-Group' H h')
-                ( preserves-inv-hom-Group G H f g)) ∙
+                ( preserves-inv-hom-Group G H f)) ∙
               ( inv (transpose-eq-mul-Group' H p))) ,
             ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q))))
   pr2
@@ -189,7 +189,7 @@ module _
               ( mul-Group G g' g)
               ( ( ( ap
                     ( mul-Group' H h)
-                    ( preserves-mul-hom-Group G H f g' g)) ∙
+                    ( preserves-mul-hom-Group G H f)) ∙
                   ( ( associative-mul-Group H
                       ( map-hom-Group G H f g')
                       ( map-hom-Group G H f g)

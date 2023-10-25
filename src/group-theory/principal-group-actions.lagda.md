@@ -32,6 +32,6 @@ module _
   principal-Abstract-Group-Action : Abstract-Group-Action G l1
   pr1 principal-Abstract-Group-Action = set-Group G
   pr1 (pr2 principal-Abstract-Group-Action) g = equiv-mul-Group G g
-  pr2 (pr2 principal-Abstract-Group-Action) g h =
+  pr2 (pr2 principal-Abstract-Group-Action) {g} {h} =
     eq-htpy-equiv (associative-mul-Group G g h)
 ```

@@ -331,7 +331,7 @@ module _
       ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
   pr1 (quotient-delooping-sign-loop n) = map-quotient-delooping-sign-loop-Fin n
-  pr2 (quotient-delooping-sign-loop n) p q =
+  pr2 (quotient-delooping-sign-loop n) {p} {q} =
     ( ap
       ( ap (equivalence-class ∘ R (n +ℕ 2)))
       ( ap

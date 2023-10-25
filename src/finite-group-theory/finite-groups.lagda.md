@@ -273,7 +273,7 @@ module _
     transpose-eq-mul-Group' group-Group-𝔽
 
   distributive-inv-mul-Group-𝔽 :
-    (x y : type-Group-𝔽) →
+    {x y : type-Group-𝔽} →
     ( inv-Group-𝔽 (mul-Group-𝔽 x y)) ＝
     ( mul-Group-𝔽 (inv-Group-𝔽 y) (inv-Group-𝔽 x))
   distributive-inv-mul-Group-𝔽 =

@@ -171,15 +171,17 @@ module _
   preserves-unit-inclusion-Submonoid = refl
 
   preserves-mul-inclusion-Submonoid :
-    (x y : type-Submonoid) →
+    {x y : type-Submonoid} →
     inclusion-Submonoid (mul-Submonoid x y) ＝
     mul-Monoid M (inclusion-Submonoid x) (inclusion-Submonoid y)
-  preserves-mul-inclusion-Submonoid x y = refl
+  preserves-mul-inclusion-Submonoid = refl
 
   hom-inclusion-Submonoid :
     hom-Monoid monoid-Submonoid M
-  pr1 (pr1 hom-inclusion-Submonoid) = inclusion-Submonoid
-  pr2 (pr1 hom-inclusion-Submonoid) = preserves-mul-inclusion-Submonoid
+  pr1 (pr1 hom-inclusion-Submonoid) =
+    inclusion-Submonoid
+  pr2 (pr1 hom-inclusion-Submonoid) {x} {y} =
+    preserves-mul-inclusion-Submonoid {x} {y}
   pr2 hom-inclusion-Submonoid = preserves-unit-inclusion-Submonoid
 ```
 

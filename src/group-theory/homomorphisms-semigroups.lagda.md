@@ -40,7 +40,10 @@ module _
   where
 
   preserves-mul : (μA : A → A → A) (μB : B → B → B) → (A → B) → UU (l1 ⊔ l2)
-  preserves-mul μA μB f = {x y : A} → Id (f (μA x y)) (μB (f x) (f y))
+  preserves-mul μA μB f = {x y : A} → f (μA x y) ＝ μB (f x) (f y)
+
+  preserves-mul' : (μA : A → A → A) (μB : B → B → B) → (A → B) → UU (l1 ⊔ l2)
+  preserves-mul' μA μB f = (x y : A) → f (μA x y) ＝ μB (f x) (f y)
 
 module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)

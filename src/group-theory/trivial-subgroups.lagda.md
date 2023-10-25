@@ -46,8 +46,8 @@ module _
   trivial-Subgroup : Subgroup l1 G
   pr1 trivial-Subgroup x = is-unit-group-Prop G x
   pr1 (pr2 trivial-Subgroup) = refl
-  pr1 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) .(unit-Group G) refl refl =
+  pr1 (pr2 (pr2 trivial-Subgroup)) refl refl =
     left-unit-law-mul-Group G (unit-Group G)
-  pr2 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) refl =
+  pr2 (pr2 (pr2 trivial-Subgroup)) refl =
     inv-unit-Group G
 ```

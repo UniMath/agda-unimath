@@ -107,8 +107,13 @@ module _
     (k l : ℤ) →
     map-initial-hom-Ring (add-ℤ k l) ＝
     add-Ring R (map-initial-hom-Ring k) (map-initial-hom-Ring l)
-  preserves-add-initial-hom-Ring =
-    preserves-mul-hom-Group ℤ-Group (group-Ring R) hom-group-initial-hom-Ring
+  preserves-add-initial-hom-Ring k l =
+    preserves-mul-hom-Group
+      ( ℤ-Group)
+      ( group-Ring R)
+      ( hom-group-initial-hom-Ring)
+      { k}
+      { l}
 
   preserves-one-initial-hom-Ring : map-initial-hom-Ring one-ℤ ＝ one-Ring R
   preserves-one-initial-hom-Ring = integer-multiple-one-Ring R (one-Ring R)
@@ -125,7 +130,7 @@ module _
 
   initial-hom-Ring : hom-Ring ℤ-Ring R
   pr1 initial-hom-Ring = hom-group-initial-hom-Ring
-  pr1 (pr2 initial-hom-Ring) = preserves-mul-initial-hom-Ring
+  pr1 (pr2 initial-hom-Ring) {x} {y} = preserves-mul-initial-hom-Ring x y
   pr2 (pr2 initial-hom-Ring) = preserves-one-initial-hom-Ring
 ```
 

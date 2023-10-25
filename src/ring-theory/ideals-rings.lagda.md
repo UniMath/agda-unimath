@@ -340,8 +340,6 @@ module _
   is-congruence-monoid-mul-congruence-ideal-Ring {x} {y} {u} {v} e f =
     ( is-closed-under-eq-ideal-Ring R I
       ( is-closed-under-addition-ideal-Ring R I
-        ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
-        ( mul-Ring R y (add-Ring R (neg-Ring R u) v))
         ( is-closed-under-right-multiplication-ideal-Ring R I
           ( add-Ring R (neg-Ring R x) y)
           ( u)
@@ -430,14 +428,14 @@ module _
 
   is-closed-under-addition-subset-congruence-Ring :
     is-closed-under-addition-subset-Ring R subset-congruence-Ring
-  is-closed-under-addition-subset-congruence-Ring x y H K =
+  is-closed-under-addition-subset-congruence-Ring H K =
     concatenate-eq-sim-congruence-Ring R S
       ( inv (left-unit-law-add-Ring R (zero-Ring R)))
       ( add-congruence-Ring R S H K)
 
   is-closed-under-negatives-subset-congruence-Ring :
     is-closed-under-negatives-subset-Ring R subset-congruence-Ring
-  is-closed-under-negatives-subset-congruence-Ring x H =
+  is-closed-under-negatives-subset-congruence-Ring H =
       concatenate-eq-sim-congruence-Ring R S
         ( inv (neg-zero-Ring R))
         ( neg-congruence-Ring R S H)

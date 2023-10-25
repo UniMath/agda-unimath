@@ -189,8 +189,8 @@ module _
     mul-Commutative-Monoid M
       ( inclusion-Commutative-Submonoid x)
       ( inclusion-Commutative-Submonoid y)
-  preserves-mul-inclusion-Commutative-Submonoid =
-    preserves-mul-inclusion-Submonoid (monoid-Commutative-Monoid M) P
+  preserves-mul-inclusion-Commutative-Submonoid x y =
+    preserves-mul-inclusion-Submonoid (monoid-Commutative-Monoid M) P {x} {y}
 
   hom-inclusion-Commutative-Submonoid :
     hom-Commutative-Monoid commutative-monoid-Commutative-Submonoid M

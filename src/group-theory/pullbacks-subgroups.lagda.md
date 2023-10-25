@@ -23,7 +23,11 @@ open import group-theory.subsets-groups
 
 ## Idea
 
-Given a [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` into a [group](group-theory.groups.md) `H` equipped with a [subgroup](group-theory.subgroups.md) `K ≤ H`, the **pullback** `f∗K` of `K` along `f` is defined by substituting `f` in `K`. In other words, it is the subgroup `f∗K` of `G` consisting of the elements `x : G` such that `f x ∈ K`.
+Given a [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H`
+into a [group](group-theory.groups.md) `H` equipped with a
+[subgroup](group-theory.subgroups.md) `K ≤ H`, the **pullback** `f∗K` of `K`
+along `f` is defined by substituting `f` in `K`. In other words, it is the
+subgroup `f∗K` of `G` consisting of the elements `x : G` such that `f x ∈ K`.
 
 ## Definitions
 

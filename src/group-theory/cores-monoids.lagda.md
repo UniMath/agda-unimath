@@ -131,13 +131,13 @@ module _
     inclusion-Submonoid M submonoid-core-Monoid
 
   preserves-mul-inclusion-core-Monoid :
-    (x y : type-core-Monoid) →
+    {x y : type-core-Monoid} →
     inclusion-core-Monoid (mul-core-Monoid x y) ＝
     mul-Monoid M
       ( inclusion-core-Monoid x)
       ( inclusion-core-Monoid y)
-  preserves-mul-inclusion-core-Monoid =
-    preserves-mul-inclusion-Submonoid M submonoid-core-Monoid
+  preserves-mul-inclusion-core-Monoid {x} {y} =
+    preserves-mul-inclusion-Submonoid M submonoid-core-Monoid {x} {y}
 
   hom-inclusion-core-Monoid :
     hom-Monoid monoid-core-Monoid M
@@ -162,13 +162,13 @@ module _
     preserves-invertible-elements-hom-Monoid M N f (pr2 x)
 
   preserves-mul-hom-core-hom-Monoid :
-    (x y : type-core-Monoid M) →
+    {x y : type-core-Monoid M} →
     map-core-hom-Monoid (mul-core-Monoid M x y) ＝
     mul-core-Monoid N (map-core-hom-Monoid x) (map-core-hom-Monoid y)
-  preserves-mul-hom-core-hom-Monoid x y =
+  preserves-mul-hom-core-hom-Monoid =
     eq-type-subtype
       ( subtype-core-Monoid N)
-      ( preserves-mul-hom-Monoid M N f (pr1 x) (pr1 y))
+      ( preserves-mul-hom-Monoid M N f)
 
   hom-core-hom-Monoid : hom-Group (core-Monoid M) (core-Monoid N)
   pr1 hom-core-hom-Monoid = map-core-hom-Monoid
@@ -180,7 +180,7 @@ module _
     preserves-unit-hom-Group (core-Monoid M) (core-Monoid N) hom-core-hom-Monoid
 
   preserves-inv-hom-core-hom-Monoid :
-    (x : type-core-Monoid M) →
+    {x : type-core-Monoid M} →
     map-core-hom-Monoid (inv-core-Monoid M x) ＝
     inv-core-Monoid N (map-core-hom-Monoid x)
   preserves-inv-hom-core-hom-Monoid =

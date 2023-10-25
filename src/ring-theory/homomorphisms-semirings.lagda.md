@@ -112,7 +112,7 @@ module _
         ( hom-additive-commutative-monoid-hom-Semiring)
 
     preserves-addition-hom-Semiring :
-      (x y : type-Semiring R) →
+      {x y : type-Semiring R} →
       map-hom-Semiring (add-Semiring R x y) ＝
       add-Semiring S (map-hom-Semiring x) (map-hom-Semiring y)
     preserves-addition-hom-Semiring =
@@ -130,7 +130,7 @@ module _
         ( hom-additive-commutative-monoid-hom-Semiring)
 
     preserves-mul-hom-Semiring :
-      (x y : type-Semiring R) →
+      {x y : type-Semiring R} →
       map-hom-Semiring (mul-Semiring R x y) ＝
       mul-Semiring S (map-hom-Semiring x) (map-hom-Semiring y)
     preserves-mul-hom-Semiring = pr1 (pr2 f)
@@ -172,8 +172,8 @@ module _
     id-hom-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   preserves-mul-id-hom-Semiring :
-    (x y : type-Semiring R) → mul-Semiring R x y ＝ mul-Semiring R x y
-  preserves-mul-id-hom-Semiring x y = refl
+    {x y : type-Semiring R} → mul-Semiring R x y ＝ mul-Semiring R x y
+  preserves-mul-id-hom-Semiring = refl
 
   preserves-unit-id-hom-Semiring :
     one-Semiring R ＝ one-Semiring R
@@ -227,7 +227,7 @@ module _
       ( hom-additive-commutative-monoid-comp-hom-Semiring)
 
   preserves-mul-comp-hom-Semiring :
-    (x y : type-Semiring R) →
+    {x y : type-Semiring R} →
     map-comp-hom-Semiring (mul-Semiring R x y) ＝
     mul-Semiring T (map-comp-hom-Semiring x) (map-comp-hom-Semiring y)
   preserves-mul-comp-hom-Semiring =

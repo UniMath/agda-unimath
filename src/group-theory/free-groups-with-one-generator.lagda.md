@@ -82,7 +82,7 @@ module _
 
   hom-element-Group : hom-Group ℤ-Group G
   pr1 hom-element-Group = map-hom-element-Group
-  pr2 hom-element-Group = preserves-mul-map-hom-element-Group
+  pr2 hom-element-Group {x} {y} = preserves-mul-map-hom-element-Group x y
 
   htpy-hom-element-Group :
     (h : hom-Group ℤ-Group G) → map-hom-Group ℤ-Group G h one-ℤ ＝ g →
@@ -98,7 +98,7 @@ module _
             ( ap
               ( map-hom-Group ℤ-Group G h)
               ( is-left-add-one-succ-ℤ x)) ∙
-            ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
+            ( ( preserves-mul-hom-Group ℤ-Group G h) ∙
               ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
 
   is-torsorial-hom-element-Group :

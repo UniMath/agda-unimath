@@ -334,8 +334,8 @@ module _
       ( group-Subgroup-𝔽 G H)
       ( group-Group-𝔽 G)
       ( inclusion-Subgroup-𝔽 G H)
-  preserves-mul-inclusion-group-Subgroup-𝔽 =
-    preserves-mul-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
+  preserves-mul-inclusion-group-Subgroup-𝔽 {x} {y} =
+    preserves-mul-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H {x} {y}
 
   preserves-unit-inclusion-group-Subgroup-𝔽 :
     preserves-unit-Group
@@ -350,8 +350,8 @@ module _
       ( group-Subgroup-𝔽 G H)
       ( group-Group-𝔽 G)
       ( inclusion-Subgroup-𝔽 G H)
-  preserves-inverses-inclusion-group-Subgroup-𝔽 =
-    preserves-inverses-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
+  preserves-inverses-inclusion-group-Subgroup-𝔽 {x} =
+    preserves-inverses-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H {x}
 
   inclusion-group-Subgroup-𝔽 :
     hom-Group (group-Subgroup-𝔽 G H) (group-Group-𝔽 G)

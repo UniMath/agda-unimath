@@ -147,6 +147,8 @@ open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
 open import group-theory.products-of-elements-monoids public
 open import group-theory.products-of-tuples-of-elements-commutative-monoids public
+open import group-theory.pullbacks-subgroups public
+open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
@@ -172,6 +174,7 @@ open import group-theory.subsets-abelian-groups public
 open import group-theory.subsets-commutative-monoids public
 open import group-theory.subsets-groups public
 open import group-theory.subsets-monoids public
+open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.surjective-group-homomorphisms public

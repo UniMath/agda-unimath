@@ -76,24 +76,24 @@ module _
   abstract
     is-closed-under-multiplication-image-hom-Group :
       is-closed-under-multiplication-subset-Group H subset-image-hom-Group
-    is-closed-under-multiplication-image-hom-Group x y K L =
+    is-closed-under-multiplication-image-hom-Group {x} {y} K L =
       apply-twice-universal-property-trunc-Prop K L
         ( subset-image-hom-Group (mul-Group H x y))
         ( λ where
           ( g , refl) (h , refl) →
             unit-trunc-Prop
-              ( mul-Group G g h , preserves-mul-hom-Group G H f g h))
+              ( mul-Group G g h , preserves-mul-hom-Group G H f))
 
   abstract
     is-closed-under-inverses-image-hom-Group :
       is-closed-under-inverses-subset-Group H subset-image-hom-Group
-    is-closed-under-inverses-image-hom-Group x K =
+    is-closed-under-inverses-image-hom-Group {x} K =
       apply-universal-property-trunc-Prop K
         ( subset-image-hom-Group (inv-Group H x))
         ( λ where
           ( g , refl) →
             unit-trunc-Prop
-              ( inv-Group G g , preserves-inv-hom-Group G H f g))
+              ( inv-Group G g , preserves-inv-hom-Group G H f))
 
   is-subgroup-image-hom-Group :
     is-subgroup-subset-Group H subset-image-hom-Group
@@ -149,26 +149,26 @@ module _
   abstract
     is-closed-under-multiplication-im-hom-Subgroup :
       is-closed-under-multiplication-subset-Group H subset-im-hom-Subgroup
-    is-closed-under-multiplication-im-hom-Subgroup x y u v =
+    is-closed-under-multiplication-im-hom-Subgroup {x} {y} u v =
       apply-twice-universal-property-trunc-Prop u v
         ( subset-im-hom-Subgroup (mul-Group H x y))
         ( λ where
           ((x' , k) , refl) ((y' , l) , refl) →
             unit-trunc-Prop
               ( ( mul-Subgroup G K (x' , k) (y' , l)) ,
-                ( preserves-mul-hom-Group G H f x' y')))
+                ( preserves-mul-hom-Group G H f)))
 
   abstract
     is-closed-under-inverses-im-hom-Subgroup :
       is-closed-under-inverses-subset-Group H subset-im-hom-Subgroup
-    is-closed-under-inverses-im-hom-Subgroup x u =
+    is-closed-under-inverses-im-hom-Subgroup {x} u =
       apply-universal-property-trunc-Prop u
         ( subset-im-hom-Subgroup (inv-Group H x))
         ( λ where
           ((x' , k) , refl) →
             unit-trunc-Prop
               ( ( inv-Subgroup G K (x' , k)) ,
-                ( preserves-inv-hom-Group G H f x')))
+                ( preserves-inv-hom-Group G H f)))
 
   im-hom-Subgroup : Subgroup (l1 ⊔ l2 ⊔ l3) H
   pr1 im-hom-Subgroup =

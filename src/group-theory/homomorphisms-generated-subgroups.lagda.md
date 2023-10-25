@@ -59,49 +59,44 @@ module _
         ( group-Subgroup G (subgroup-subset-Group G S))
         ( G')
         ( f)
-        ( pair
-          ( ev-formal-combination-subset-Group G S l)
-          ( unit-trunc-Prop (pair l refl))))
+        ( ( ev-formal-combination-subset-Group G S l) ,
+          ( unit-trunc-Prop (l , refl))))
       ( fold-list
         ( unit-Group G')
-        ( λ (pair s x) →
+        ( λ (s , x) →
           mul-Group
             ( G')
             ( map-hom-Group
               ( group-Subgroup G (subgroup-subset-Group G S))
               ( G')
               ( f)
-              ( pair
-                ( ev-formal-combination-subset-Group G S (unit-list (pair s x)))
-                ( unit-trunc-Prop (pair (unit-list (pair s x)) refl)))))
+              ( ( ev-formal-combination-subset-Group G S (unit-list (s , x))) ,
+                ( unit-trunc-Prop (unit-list (s , x) , refl)))))
         ( l))
   distributivity-hom-group-ev-formal-combination f nil =
     preserves-unit-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' f
-  distributivity-hom-group-ev-formal-combination f (cons (pair s x) l) =
+  distributivity-hom-group-ev-formal-combination f (cons (s , x) l) =
     ( ap
       ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' f)
       ( eq-pair-Σ
         ( preserves-concat-ev-formal-combination-subset-Group G S
-          ( unit-list (pair s x))
+          ( unit-list (s , x))
           ( l))
         ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-      ( preserves-mul-hom-Group
-        ( group-Subgroup G (subgroup-subset-Group G S))
-        ( G')
-        ( f)
-        ( pair
-          ( ev-formal-combination-subset-Group G S (unit-list (pair s x)))
-          ( unit-trunc-Prop (pair (unit-list (pair s x)) refl)))
-        ( pair
-          ( ev-formal-combination-subset-Group G S l)
-          ( unit-trunc-Prop (pair l refl))) ∙
-        ( ap
-          ( mul-Group G'
-            ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' f
-              ( pair
-                ( ev-formal-combination-subset-Group G S (unit-list (pair s x)))
-                ( unit-trunc-Prop (pair (unit-list (pair s x)) refl)))))
-          ( distributivity-hom-group-ev-formal-combination f l)))
+      ( ( preserves-mul-hom-Group
+          ( group-Subgroup G (subgroup-subset-Group G S))
+          ( G')
+          ( f)) ∙
+        ( ( ap
+            ( mul-Group G'
+              ( map-hom-Group
+                ( group-Subgroup G (subgroup-subset-Group G S))
+                ( G')
+                ( f)
+                ( pair
+                  ( ev-formal-combination-subset-Group G S (unit-list (s , x)))
+                  ( unit-trunc-Prop (unit-list (s , x) , refl)))))
+            ( distributivity-hom-group-ev-formal-combination f l))))
 
   map-restriction-generating-subset-Subgroup :
     hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' →
@@ -249,16 +244,10 @@ module _
         ( eq-pair-Σ
           ( right-unit-law-mul-Group G (inv-Group G x))
           ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-        ( preserves-inv-hom-Group
-          ( group-Subgroup G (subgroup-subset-Group G S))
-          ( G')
-          ( f)
-          ( pair
-            ( x)
-            ( unit-trunc-Prop
-              ( pair
-                ( unit-list (pair (inr star) (pair x s)))
-                ( right-unit-law-mul-Group G x)))) ∙
+        ( ( preserves-inv-hom-Group
+            ( group-Subgroup G (subgroup-subset-Group G S))
+            ( G')
+            ( f)) ∙
           ( (ap
             ( inv-Group G')
             ( ( ap
@@ -267,6 +256,13 @@ module _
                 ( G')
                 ( f))
               ( eq-pair-Σ
+                { s =
+                  pair
+                    ( x)
+                    ( unit-trunc-Prop
+                      ( pair
+                        ( unit-list (pair (inr star) (pair x s)))
+                        ( right-unit-law-mul-Group G x)))}
                 ( inv (right-unit-law-mul-Group G x))
                 ( eq-is-prop is-prop-type-trunc-Prop))) ∙
               ( ( P (pair x s)) ∙
@@ -276,19 +272,27 @@ module _
                     ( G')
                     ( g))
                   ( eq-pair-Σ
+                    { s =
+                      pair
+                        ( mul-Group G x (unit-Group G))
+                        ( unit-trunc-Prop
+                          ( pair
+                            ( unit-list (pair (inr star) (pair x s)))
+                            ( refl)))}
+                    { t =
+                      pair
+                        ( x)
+                        ( unit-trunc-Prop
+                          ( pair
+                            ( unit-list (pair (inr star) (pair x s)))
+                            ( right-unit-law-mul-Group G x)))}
                     ( right-unit-law-mul-Group G x)
                     ( eq-is-prop is-prop-type-trunc-Prop)))))) ∙
             ( ( inv
               ( preserves-inv-hom-Group
                 ( group-Subgroup G (subgroup-subset-Group G S))
                 ( G')
-                ( g)
-                ( pair
-                  ( x)
-                  ( unit-trunc-Prop
-                    ( pair
-                      ( unit-list (pair (inr star) (pair x s)))
-                      ( right-unit-law-mul-Group G x)))))) ∙
+                ( g))) ∙
                 ( ap
                   ( map-hom-Group
                     ( group-Subgroup G (subgroup-subset-Group G S))
@@ -325,7 +329,7 @@ module _
             ( G)
             ( G')
             ( f)
-            ( pair pr1 (λ x y → refl)))
+            ( pair pr1 (λ {x} {y} → refl)))
         ( is-epi-iso-Group l3
           ( group-Subgroup G (subgroup-subset-Group G S))
           ( G)

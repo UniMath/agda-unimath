@@ -67,11 +67,11 @@ module _
   where
 
   is-central-element-mul-Group :
-    (x y : type-Group G) →
+    {x y : type-Group G} →
     is-central-element-Group G x → is-central-element-Group G y →
     is-central-element-Group G (mul-Group G x y)
-  is-central-element-mul-Group =
-    is-central-element-mul-Monoid (monoid-Group G)
+  is-central-element-mul-Group {x} {y} =
+    is-central-element-mul-Monoid (monoid-Group G) x y
 ```
 
 ### The inverse of a central element is central
@@ -82,9 +82,9 @@ module _
   where
 
   is-central-element-inv-Group :
-    (x : type-Group G) → is-central-element-Group G x →
+    {x : type-Group G} → is-central-element-Group G x →
     is-central-element-Group G (inv-Group G x)
-  is-central-element-inv-Group x H y =
+  is-central-element-inv-Group {x} H y =
     ( inv (inv-left-div-Group G y x)) ∙
     ( ( ap (inv-Group G) (inv (H (inv-Group G y)))) ∙
       ( inv-right-div-Group G x y))

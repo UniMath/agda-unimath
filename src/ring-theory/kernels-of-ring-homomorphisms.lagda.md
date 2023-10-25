@@ -76,14 +76,14 @@ module _
   is-closed-under-left-multiplication-kernel-hom-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-kernel-hom-Ring
   is-closed-under-left-multiplication-kernel-hom-Ring x y H =
-    ( preserves-mul-hom-Ring R S f x y) ∙
+    ( preserves-mul-hom-Ring R S f) ∙
     ( ap (mul-Ring S _) H) ∙
     ( right-zero-law-mul-Ring S _)
 
   is-closed-under-right-multiplication-kernel-hom-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-kernel-hom-Ring
   is-closed-under-right-multiplication-kernel-hom-Ring x y H =
-    ( preserves-mul-hom-Ring R S f x y) ∙
+    ( preserves-mul-hom-Ring R S f) ∙
     ( ap (mul-Ring' S _) H) ∙
     ( left-zero-law-mul-Ring S _)
 

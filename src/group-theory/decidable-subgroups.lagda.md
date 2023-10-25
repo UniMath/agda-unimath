@@ -300,8 +300,8 @@ module _
       ( group-Decidable-Subgroup G H)
       ( G)
       ( map-inclusion-Decidable-Subgroup G H)
-  preserves-mul-inclusion-Decidable-Subgroup =
-    preserves-mul-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H)
+  preserves-mul-inclusion-Decidable-Subgroup {x} {y} =
+    preserves-mul-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H) {x} {y}
 
   preserves-unit-inclusion-Decidable-Subgroup :
     preserves-unit-Group
@@ -316,9 +316,10 @@ module _
       ( group-Decidable-Subgroup G H)
       ( G)
       ( map-inclusion-Decidable-Subgroup G H)
-  preserves-inverses-inclusion-Decidable-Subgroup =
+  preserves-inverses-inclusion-Decidable-Subgroup {x} =
     preserves-inverses-inclusion-Subgroup G
       ( subgroup-Decidable-Subgroup G H)
+      { x}
 
   hom-inclusion-Decidable-Subgroup :
     hom-Group (group-Decidable-Subgroup G H) G

@@ -599,10 +599,10 @@ module _
       ( X))
 
   preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group :
-    ( p q :
+    { p q :
       Id
         ( principal-Torsor-Abstract-Group G)
-        ( principal-Torsor-Abstract-Group G)) →
+        ( principal-Torsor-Abstract-Group G)} →
     Id
       ( map-equiv
         ( equiv-Eq-equiv-Torsor-Abstract-Group
@@ -617,7 +617,7 @@ module _
           ( equiv-Eq-equiv-Torsor-Abstract-Group
             ( principal-Torsor-Abstract-Group G))
           ( q)))
-  preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group p q =
+  preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group {p} {q} =
     ( ap
       ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G))
       ( preserves-mul-equiv-eq-Torsor-Abstract-Group G
@@ -673,17 +673,6 @@ module _
       ( pair
         ( equiv-Eq-equiv-Torsor-Abstract-Group
           ( principal-Torsor-Abstract-Group G))
-        ( preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group))
-
-{-
-module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2)
-  where
-
-  map-Torsor-Abstract-Group :
-    hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
-  pr1 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
-  pr2 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
-  pr2 (map-Torsor-Abstract-Group f X) = {!!}
--}
+        ( λ {p} {q} →
+          preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group {p} {q}))
 ```

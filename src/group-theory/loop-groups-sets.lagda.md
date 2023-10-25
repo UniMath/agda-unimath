@@ -118,7 +118,7 @@ module _
     hom-Group (loop-group-Set X) (symmetric-Group X)
   pr1 hom-symmetric-group-loop-group-Set =
     map-hom-symmetric-group-loop-group-Set X X
-  pr2 hom-symmetric-group-loop-group-Set p q =
+  pr2 hom-symmetric-group-loop-group-Set {p} {q} =
     ( ap equiv-eq (distributive-inv-concat p q)) ∙
     ( inv (compute-equiv-eq-concat (inv q) (inv p)))
 
@@ -126,7 +126,7 @@ module _
     hom-Group (symmetric-Group X) (loop-group-Set X)
   pr1 hom-inv-symmetric-group-loop-group-Set =
     map-hom-inv-symmetric-group-loop-group-Set X X
-  pr2 hom-inv-symmetric-group-loop-group-Set f g =
+  pr2 hom-inv-symmetric-group-loop-group-Set {f} {g} =
     ( ap
       ( inv)
       ( inv
@@ -213,7 +213,7 @@ module _
         ( p)
         ( eq-is-prop (is-prop-is-set (type-Set X))))
       ( eq-is-prop is-prop-type-trunc-Prop)
-  pr2 hom-abstract-automorphism-group-loop-group-Set p q =
+  pr2 hom-abstract-automorphism-group-loop-group-Set {p} {q} =
     ( ap
       ( λ r → eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
       ( ( ap
@@ -244,7 +244,7 @@ module _
       ( loop-group-Set X)
   pr1 hom-inv-abstract-automorphism-group-loop-group-Set p =
     pr1 (pair-eq-Σ (pr1 (pair-eq-Σ p)))
-  pr2 hom-inv-abstract-automorphism-group-loop-group-Set p q =
+  pr2 hom-inv-abstract-automorphism-group-loop-group-Set {p} {q} =
     ( ap
       ( λ r → pr1 (pair-eq-Σ r))
       ( pr1-interchange-concat-pair-eq-Σ p q)) ∙

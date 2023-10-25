@@ -53,7 +53,8 @@ is-closed-under-multiplication-subset-Semigroup G P =
 Subsemigroup :
   {l1 : Level} (l2 : Level) (G : Semigroup l1) → UU (l1 ⊔ lsuc l2)
 Subsemigroup l2 G =
-  type-subtype (is-closed-under-multiplication-prop-subset-Semigroup {l2 = l2} G)
+  type-subtype
+    ( is-closed-under-multiplication-prop-subset-Semigroup {l2 = l2} G)
 
 module _
   {l1 l2 : Level} (G : Semigroup l1) (P : Subsemigroup l2 G)

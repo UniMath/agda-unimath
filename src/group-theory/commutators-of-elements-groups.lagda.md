@@ -108,7 +108,8 @@ module _
 
 ### Group homomorphisms preserve commutators
 
-**Proof:** Consider a [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` and two elements `x y : G`. Then we calculate
+**Proof:** Consider a [group homomorphism](group-theory.homomorphisms-groups.md)
+`f : G → H` and two elements `x y : G`. Then we calculate
 
 ```text
   f([x,y]) ≐ f((xy)(yx)⁻¹)

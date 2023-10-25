@@ -64,13 +64,13 @@ module _
     inclusion-Submonoid M center-Monoid
 
   preserves-mul-inclusion-center-Monoid :
-    (x y : type-center-Monoid) →
+    {x y : type-center-Monoid} →
     inclusion-center-Monoid (mul-center-Monoid x y) ＝
     mul-Monoid M
       ( inclusion-center-Monoid x)
       ( inclusion-center-Monoid y)
-  preserves-mul-inclusion-center-Monoid =
-    preserves-mul-inclusion-Submonoid M center-Monoid
+  preserves-mul-inclusion-center-Monoid {x} {y} =
+    preserves-mul-inclusion-Submonoid M center-Monoid {x} {y}
 
   hom-inclusion-center-Monoid :
     hom-Monoid monoid-center-Monoid M

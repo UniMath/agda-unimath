@@ -20,7 +20,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-A **subset of a semigroup** `G` is simply a [subtype](foundation.subtypes.md) of the underlying type of the [semigroup](group-theory.semigroups.md) `G`.
+A **subset of a semigroup** `G` is simply a [subtype](foundation.subtypes.md) of
+the underlying type of the [semigroup](group-theory.semigroups.md) `G`.
 
 ## Definitions
 
