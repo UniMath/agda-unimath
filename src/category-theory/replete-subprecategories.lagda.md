@@ -172,7 +172,7 @@ module _
 
 This remains to complete.
 
-### If a full subprecategory is closed under isomorphic objects, then it is replete
+### If a full subprecategory is closed under isomorphic objects then it is replete
 
 This remains to be formalized.
 
