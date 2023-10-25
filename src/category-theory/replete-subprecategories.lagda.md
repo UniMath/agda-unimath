@@ -7,6 +7,8 @@ module category-theory.replete-subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
+open import category-theory.isomorphism-induction-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.isomorphisms-in-subprecategories
 open import category-theory.precategories
@@ -15,6 +17,7 @@ open import category-theory.subprecategories
 open import foundation.dependent-pair-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -121,47 +124,37 @@ module _
 
 ### Subprecategories of categories are replete
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (P : Subprecategory l3 l4 C)
   (is-category-C : is-category-Precategory C)
-  {x y : obj-Subprecategory C P}
-  (f : hom-Subprecategory C P x y)
-  (is-iso-f : is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f))
   where
 
-  contains-is-iso-is-category-Subprecategory : is-iso-Subprecategory C P f
-  contains-is-iso-is-category-Subprecategory =
-    ind-iso-Category (C , is-category-C)
-      ( λ Y e →
-        ( p : is-in-obj-Subprecategory C P Y)
-        ( q :
-          is-in-hom-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( Y)
-            ( hom-iso-Precategory C e)) →
-        is-iso-Subprecategory C P {x} {Y , p} (hom-iso-Precategory C e , q))
-      ( ( ind-subsingleton
-          ( is-prop-is-in-hom-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( inclusion-obj-Subprecategory C P x)
-            ( id-hom-Precategory C))
-          ( contains-id-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( is-in-obj-inclusion-obj-Subprecategory C P x))) ∘
-        ( ind-subsingleton
-          ( is-prop-is-in-obj-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x))
-          ( is-in-obj-inclusion-obj-Subprecategory C P x)
-          ( is-iso-id-hom-Precategory (precategory-Subprecategory C P) {x})))
-      ( inclusion-hom-Subprecategory C P x y f , is-iso-f)
-      ( is-in-obj-inclusion-obj-Subprecategory C P y)
-      ( is-in-hom-inclusion-hom-Subprecategory C P x y f)
-```
+  based-is-in-iso-is-category-Subprecategory :
+    {x : obj-Subprecategory C P}
+    {y : obj-Precategory C}
+    (f : iso-Precategory C (inclusion-obj-Subprecategory C P x) y) →
+    is-in-iso-Subprecategory C P f
+  based-is-in-iso-is-category-Subprecategory {x} f =
+    ind-iso-Category
+      ( C , is-category-C)
+      ( λ B e → is-in-iso-Subprecategory C P e)
+      ( is-in-iso-id-Subprecategory C P x)
+      ( f)
 
-This remains to complete.
+  is-replete-is-category-Subprecategory : is-replete-Subprecategory C P
+  is-replete-is-category-Subprecategory x y f =
+    ind-iso-Category
+      ( C , is-category-C)
+      ( λ z e →
+        Σ ( is-in-obj-Subprecategory C P z)
+          ( λ z₀ →
+            is-in-iso-obj-subprecategory-Subprecategory C P {x} {z , z₀} e))
+      ( pr2 (is-in-iso-id-Subprecategory C P x))
+      ( f)
+```
 
 ### If a full subprecategory is closed under isomorphic objects then it is replete
 
@@ -169,8 +162,7 @@ This remains to be formalized.
 
 ## See also
 
-- Every [subcategory](category-theory.subcategories.md) of a
-  [category](category-theory.categories.md) is replete.
+- Every [subcategory](category-theory.subcategories.md) is replete.
 
 ## External links
 

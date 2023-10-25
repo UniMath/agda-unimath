@@ -56,6 +56,7 @@ module _
   is-in-is-iso-prop-Subprecategory =
     subtype-hom-obj-subprecategory-Subprecategory C P y x
       ( hom-inv-is-iso-Precategory C is-iso-f)
+  {-# INLINE is-in-is-iso-prop-Subprecategory #-}
 
   is-in-is-iso-Subprecategory : UU l4
   is-in-is-iso-Subprecategory =
@@ -104,6 +105,8 @@ module _
           ( hom-iso-Precategory C f , f₀)
           ( is-iso-iso-Precategory C f))
 
+  {-# INLINE is-in-iso-obj-subprecategory-prop-Subprecategory #-}
+
   is-in-iso-obj-subprecategory-Subprecategory : UU l4
   is-in-iso-obj-subprecategory-Subprecategory =
     type-Prop is-in-iso-obj-subprecategory-prop-Subprecategory
@@ -146,6 +149,7 @@ module _
           ( λ y₀ →
             is-in-iso-obj-subprecategory-prop-Subprecategory C P
               { x , x₀} {y , y₀} f))
+  {-# INLINE is-in-iso-prop-Subprecategory #-}
 
   is-in-iso-Subprecategory : UU (l3 ⊔ l4)
   is-in-iso-Subprecategory = type-Prop is-in-iso-prop-Subprecategory
@@ -160,4 +164,43 @@ module _
   iso-is-in-iso-Subprecategory is-in-iso-f =
     iso-is-in-iso-obj-subprecategory-Subprecategory C P f
       ( pr2 (pr2 is-in-iso-f))
+```
+
+### If a subprecategory contains an object, it contains its identity ismorphism
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (P : Subprecategory l3 l4 C)
+  (x : obj-Subprecategory C P)
+  where
+
+  is-iso-id-hom-Subprecategory :
+    is-iso-Subprecategory C P (id-hom-Subprecategory C P {x})
+  is-iso-id-hom-Subprecategory =
+    is-iso-id-hom-Precategory (precategory-Subprecategory C P)
+
+  is-in-is-iso-id-obj-subprecategory-Subprecategory :
+    is-in-is-iso-Subprecategory C P {x}
+      (id-hom-Subprecategory C P) (is-iso-id-hom-Precategory C)
+  is-in-is-iso-id-obj-subprecategory-Subprecategory =
+    contains-id-Subprecategory C P
+      ( inclusion-obj-Subprecategory C P x)
+      ( is-in-obj-inclusion-obj-Subprecategory C P x)
+
+  is-in-iso-id-obj-subprecategory-Subprecategory :
+    is-in-iso-obj-subprecategory-Subprecategory C P (id-iso-Precategory C)
+  pr1 is-in-iso-id-obj-subprecategory-Subprecategory =
+    is-in-is-iso-id-obj-subprecategory-Subprecategory
+  pr2 is-in-iso-id-obj-subprecategory-Subprecategory =
+    is-in-is-iso-id-obj-subprecategory-Subprecategory
+
+  is-in-iso-id-Subprecategory :
+    is-in-iso-Subprecategory C P (id-iso-Precategory C)
+  pr1 is-in-iso-id-Subprecategory = is-in-obj-inclusion-obj-Subprecategory C P x
+  pr1 (pr2 is-in-iso-id-Subprecategory) =
+    is-in-obj-inclusion-obj-Subprecategory C P x
+  pr2 (pr2 is-in-iso-id-Subprecategory) =
+    is-in-iso-id-obj-subprecategory-Subprecategory
 ```

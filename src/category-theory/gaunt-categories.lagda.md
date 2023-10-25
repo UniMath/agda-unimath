@@ -38,8 +38,8 @@ the following equivalent conditions hold:
    [isomorphism](category-theory.isomorphisms-in-categories.md)-[sets](foundation-core.sets.md)
    are [propositions](foundation-core.propositions.md).
 2. The objects form a set.
-3. Every object is [rigid](category-theory.rigid-objects.md), meaning its
-   [automorphism group](group-theory.automorphism-groups.md) is
+3. Every object is [rigid](category-theory.rigid-objects-in-categories.md),
+   meaning its [automorphism group](group-theory.automorphism-groups.md) is
    [trivial](group-theory.trivial-groups.md).
 
 Gaunt categories forms the common intersection of (univalent) categories and
