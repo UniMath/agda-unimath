@@ -43,7 +43,7 @@ open import higher-group-theory.higher-groups
 ## Idea
 
 A **torsor** of `G` is a [group action](group-theory.group-actions.md) which is
-[merely equivalent](foundation.mere-equivalence.md) to the
+[merely equivalent](foundation.mere-equivalences.md) to the
 [principal group action](group-theory.principal-group-actions.md) of `G`.
 
 ## Definitions
