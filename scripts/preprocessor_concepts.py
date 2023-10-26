@@ -95,8 +95,9 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
         index_entry['link'] = f'{url_path}#{wikidata_id}'
         target_id = wikidata_id
         anchor += f'<a id="{target_id}" class="wikidata"><span style="display:none">{plaintext}</span></a>'
-        references.append(sup_link_reference(config.get(
-            'mage-template').format(wikidata_id=wikidata_id), 'WD', True, True))
+        # TODO: decide if we want this
+        # references.append(sup_link_reference(config.get(
+        #     'mage-template').format(wikidata_id=wikidata_id), 'WD', True, True))
     if agda_name is not None:
         target_id = f'concept-{agda_name}'
         anchor += f'<a id="{target_id}" class="concept"></a>'
@@ -104,12 +105,12 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
         if agda_id is not None:
             destination = f'{url_path}#{agda_id}'
             index_entry['definition'] = destination
-            references.append(sup_link_reference(destination, 'AG'))
+            # TODO: decide if we want this
+            # references.append(sup_link_reference(destination, 'AG'))
         else:
             eprint('Concept definition not found:', plaintext,
                    '; expected', agda_name, 'to exist in', path)
     if target_id is not None:
-        references.append(f'<sup><a href="#{target_id}"></a></sup>')
         references.append(sup_link_reference(f'#{target_id}', '¶', False))
     if wikidata_label is not None:
         index_entry['__wikidata_label'] = wikidata_label
@@ -134,9 +135,9 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
                 f'<a href="{mage_link}">{wikidata_label}</a> at MaGE')
             wikidata_link = config.get(
                 'wikidata-template').format(wikidata_id=wikidata_id)
-            external_references.append(
-                f'<a href="{wikidata_link}">{wikidata_label}</a> at Wikidata')
-            pass
+            # TODO: Decide if we want this
+            # external_references.append(
+            #     f'<a href="{wikidata_link}">{wikidata_label}</a> at Wikidata')
         mut_index.append(entry)
     if external_references != []:
         formatted_references = ''.join(
