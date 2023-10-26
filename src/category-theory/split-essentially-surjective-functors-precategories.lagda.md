@@ -7,20 +7,20 @@ module category-theory.split-essentially-surjective-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.precategories
 open import category-theory.categories
-open import category-theory.isomorphism-induction-categories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.subprecategories
 open import category-theory.essential-fibers-of-functors-precategories
 open import category-theory.essentially-surjective-functors-precategories
+open import category-theory.functors-precategories
+open import category-theory.isomorphism-induction-categories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
+open import category-theory.subprecategories
 
-open import foundation.functoriality-dependent-pair-types
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -31,11 +31,9 @@ open import foundation.universe-levels
 
 A [functor](category-theory.functors-precategories.md) `F : C → D` between
 [precategories](category-theory.precategories.md) is **split essentially
-surjective** if its
-[essential image](category-theory.essential-image-functor-precategory.md)
-contains every object of `D`, or
-[equivalently](foundation-core.equivalences.md), if there is a section of the
-[essential fiber](category-theory.essential-fibers-of-functors-precategories.md).
+surjective** if there is a section of the
+[essential fiber](category-theory.essential-fibers-of-functors-precategories.md)
+over every object of `D`.
 
 ## Definitions
 
@@ -127,7 +125,8 @@ module _
   is-split-essentially-surjective-split-essentially-surjective-functor-Precategory :
     is-split-essentially-surjective-functor-Precategory C D
       ( functor-split-essentially-surjective-functor-Precategory)
-  is-split-essentially-surjective-split-essentially-surjective-functor-Precategory = pr2 F
+  is-split-essentially-surjective-split-essentially-surjective-functor-Precategory =
+    pr2 F
 
   obj-split-essentially-surjective-functor-Precategory :
     obj-Precategory C → obj-Precategory D
@@ -177,10 +176,6 @@ module _
 
 This remains to be shown. This is Lemma 6.8 of _Univalent Categories and the
 Rezk completion_.
-
-## See also
-
-- [Essential image of a functor between precategories](category-theory.essential-images-of-functors-precategories.md)
 
 ## References
 

@@ -111,7 +111,6 @@ Rezk completion_.
 
 ## See also
 
-- [Essential image of a functor between precategories](category-theory.essential-images-of-functors-precategories.md)
 - [Split essentially surjective functor between precategories](category-theory.split-essential-surjective-functor-precategories.md)
 
 ## References
