@@ -14,12 +14,12 @@ open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.propositions
-open import foundation.propositional-truncations
-open import foundation.iterated-dependent-product-types
-open import foundation.surjective-maps
-open import foundation.subtypes
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 

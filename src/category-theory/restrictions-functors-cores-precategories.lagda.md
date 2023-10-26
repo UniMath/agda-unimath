@@ -8,8 +8,8 @@ module category-theory.restrictions-functors-cores-precategories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.cores-precategories
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.cores-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.fully-faithful-functors-precategories
 open import category-theory.functors-precategories
@@ -18,8 +18,8 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 open import category-theory.pregroupoids
-open import category-theory.pseudomonic-functors-precategories
 open import category-theory.preunivalent-categories
+open import category-theory.pseudomonic-functors-precategories
 open import category-theory.replete-subprecategories
 open import category-theory.subprecategories
 open import category-theory.wide-subprecategories
@@ -78,7 +78,7 @@ that fit into a natural diagram
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)  (D : Precategory l3 l4)
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
   (F : functor-Precategory C D)
   where
 
@@ -151,7 +151,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)  (D : Precategory l3 l4)
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
   where
 
   is-faithful-functor-core-is-faithful-functor-Precategory :
@@ -170,7 +170,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)  (D : Precategory l3 l4)
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
   where
 
   is-fully-faithful-functor-core-is-fully-faithful-functor-Precategory :

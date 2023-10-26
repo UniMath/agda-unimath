@@ -27,6 +27,7 @@ open import category-theory.commuting-squares-of-morphisms-in-large-precategorie
 open import category-theory.commuting-squares-of-morphisms-in-nonunital-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.composition-operations-on-binary-families-of-sets public
+open import category-theory.conservative-functors-precategories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.cores-precategories public
 open import category-theory.dependent-products-of-categories public
@@ -43,6 +44,7 @@ open import category-theory.equivalences-of-categories public
 open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.essential-fibers-of-functors-precategories public
+open import category-theory.essentially-injective-functors-precategories public
 open import category-theory.essentially-surjective-functors-precategories public
 open import category-theory.exponential-objects-precategories public
 open import category-theory.faithful-functors-precategories public
@@ -126,6 +128,7 @@ open import category-theory.representable-functors-categories public
 open import category-theory.representable-functors-large-precategories public
 open import category-theory.representable-functors-precategories public
 open import category-theory.representing-arrow-category public
+open import category-theory.restrictions-functors-cores-precategories public
 open import category-theory.rigid-objects-categories public
 open import category-theory.rigid-objects-precategories public
 open import category-theory.set-magmoids public
