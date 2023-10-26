@@ -570,3 +570,7 @@ module _
    Categories and the Rezk completion_ (2015)
    ([arXiv:1303.0584](https://arxiv.org/abs/1303.0584),
    [DOI:10.1017/S0960129514000486](https://doi.org/10.1017/S0960129514000486))
+
+## External links
+
+- [Functors](https://1lab.dev/Cat.Base.html#functors) at 1lab

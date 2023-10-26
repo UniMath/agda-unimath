@@ -50,7 +50,7 @@ The **core of a [precategory](category-theory.precategories.md)** `C` is the
 maximal subpregroupoid of it. It consists of all objects and
 [isomorphisms](category-theory.isomorphisms-in-precategories.md) in `C`.
 
-## Definition
+## Definitions
 
 ### The core wide subprecategory
 
