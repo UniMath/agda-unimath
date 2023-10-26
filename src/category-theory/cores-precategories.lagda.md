@@ -214,6 +214,10 @@ module _
   is-idempotent-core-Precategory = {!   !}
 ```
 
+### Faithful functors restrict to faithful functors on the core
+
+This remains to be written down formally.
+
 ## See also
 
 - [Cores of monoids](group-theory.cores-monoids.md)

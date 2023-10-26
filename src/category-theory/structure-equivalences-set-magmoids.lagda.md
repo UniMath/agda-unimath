@@ -61,14 +61,16 @@ module _
   is-structure-equiv-functor-Set-Magmoid : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-structure-equiv-functor-Set-Magmoid =
     ( is-equiv (obj-functor-Set-Magmoid A B F)) ×
-    ( {x y : obj-Set-Magmoid A} → is-equiv (hom-functor-Set-Magmoid A B F {x} {y}))
+    ( {x y : obj-Set-Magmoid A} →
+      is-equiv (hom-functor-Set-Magmoid A B F {x} {y}))
 
   is-prop-is-structure-equiv-functor-Set-Magmoid :
     is-prop is-structure-equiv-functor-Set-Magmoid
   is-prop-is-structure-equiv-functor-Set-Magmoid =
     is-prop-prod
       ( is-property-is-equiv (obj-functor-Set-Magmoid A B F))
-      ( is-prop-iterated-implicit-Π 2 (λ x y → is-property-is-equiv (hom-functor-Set-Magmoid A B F {x} {y})))
+      ( is-prop-iterated-implicit-Π 2
+        ( λ x y → is-property-is-equiv (hom-functor-Set-Magmoid A B F {x} {y})))
 
   is-equiv-prop-functor-Set-Magmoid :
     Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -111,7 +113,7 @@ module _
 
 ## Properties
 
-## Computing the type of structure equivalences
+### Computing the type of structure equivalences
 
 ```agda
 module _

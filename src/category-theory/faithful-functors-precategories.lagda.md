@@ -9,12 +9,15 @@ module category-theory.faithful-functors-precategories where
 ```agda
 open import category-theory.faithful-maps-precategories
 open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -170,4 +173,26 @@ module _
   equiv-is-faithful-is-injective-hom-functor-Precategory =
     equiv-is-faithful-is-injective-hom-map-Precategory C D
       ( map-functor-Precategory C D F)
+```
+
+### Faithful functors are faithful on isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-faithful-F : is-faithful-functor-Precategory C D F)
+  where
+
+  is-faithful-iso-is-faithful-functor-Precategory :
+    (x y : obj-Precategory C) →
+    is-emb (preserves-iso-functor-Precategory C D F {x} {y})
+  is-faithful-iso-is-faithful-functor-Precategory x y =
+    is-emb-right-factor _ _
+      ( is-emb-inclusion-subtype (is-iso-prop-Precategory D))
+      ( is-emb-comp _ _
+        ( is-faithful-F x y)
+        ( is-emb-inclusion-subtype (is-iso-prop-Precategory C)))
 ```
