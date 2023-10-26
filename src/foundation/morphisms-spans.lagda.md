@@ -49,8 +49,8 @@ of a map `w : S → T` [equipped](foundation.structure.md) with two
 
 ### Morphisms of binary spans
 
-A **morphism of spans** from a [span](foundation.spans) `A <-f- S -g-> B` to a
-span `C <-h- T -k-> D` consists of maps `u : A → C`, `v : B → D`, and
+A **morphism of spans** from a [span](foundation.spans.md) `A <-f- S -g-> B` to
+a span `C <-h- T -k-> D` consists of maps `u : A → C`, `v : B → D`, and
 `w : S → T` [equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
