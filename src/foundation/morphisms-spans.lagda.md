@@ -128,8 +128,9 @@ module _
       ( coherence-hom-span-fixed-domain-codomain)
 
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {s t : span-fixed-domain-codomain l3 A B}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (s : span-fixed-domain-codomain l3 A B)
+  (t : span-fixed-domain-codomain l4 A B)
   (f : hom-span-fixed-domain-codomain s t)
   where
 
@@ -156,11 +157,49 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3) (t : span l4 l5 l6)
   where
 
-  hom-span : UU {!!}
+  hom-span : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   hom-span =
     Σ ( domain-span s → domain-span t)
       ( λ f →
         Σ ( codomain-span s → codomain-span t)
           ( λ g →
-            hom-span-fixed-domain-codomain {!!} {!!}))
+            hom-span-fixed-domain-codomain
+              ( extend-span-fixed-domain-codomain
+                ( span-fixed-domain-codomain-span s)
+                ( f)
+                ( g))
+              ( span-fixed-domain-codomain-span t)))
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3) (t : span l4 l5 l6)
+  (f : hom-span s t)
+  where
+
+  map-domain-hom-span :
+    domain-span s → domain-span t
+  map-domain-hom-span = pr1 f
+
+  map-codomain-hom-span :
+    codomain-span s → codomain-span t
+  map-codomain-hom-span = pr1 (pr2 f)
+
+  hom-span-fixed-domain-codomain-hom-span :
+    hom-span-fixed-domain-codomain
+      ( extend-span-fixed-domain-codomain
+        ( span-fixed-domain-codomain-span s)
+        ( map-domain-hom-span)
+        ( map-codomain-hom-span))
+      ( span-fixed-domain-codomain-span t)
+  hom-span-fixed-domain-codomain-hom-span = pr2 (pr2 f)
+
+  map-spanning-type-hom-span :
+    spanning-type-span s → spanning-type-span t
+  map-spanning-type-hom-span =
+    map-hom-span-fixed-domain-codomain
+      ( extend-span-fixed-domain-codomain
+        ( span-fixed-domain-codomain-span s)
+        ( map-domain-hom-span)
+        ( map-codomain-hom-span))
+      ( span-fixed-domain-codomain-span t)
+      ( hom-span-fixed-domain-codomain-hom-span)
 ```
