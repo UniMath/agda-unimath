@@ -1,4 +1,4 @@
-# Essential fibers of a functor between precategories
+# Essential fibers of functors between precategories
 
 ```agda
 module category-theory.essential-fibers-of-functors-precategories where
