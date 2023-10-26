@@ -18,8 +18,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An {{#concept "acyclic undirected graph" WDID=Q3115453 WD="Acyclic graph"}} is an
-[undirected graph](graph-theory.undirected-graphs.md) of which the
+An {{#concept "acyclic undirected graph" WDID=Q3115453 WD="Acyclic graph"}} is
+an [undirected graph](graph-theory.undirected-graphs.md) of which the
 [geometric realization](graph-theory.geometric-realizations-undirected-graphs.md)
 is [contractible](foundation-core.contractible-types.md).
 

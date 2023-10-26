@@ -21,8 +21,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A {{#concept "circuit" Agda=circuit-Undirected-Graph WD="Cycle" WDID=Q245595}} in an
-[undirected graph](graph-theory.undirected-graphs.md) `G` consists of a
+A {{#concept "circuit" Agda=circuit-Undirected-Graph WD="Cycle" WDID=Q245595}}
+in an [undirected graph](graph-theory.undirected-graphs.md) `G` consists of a
 [`k`-gon](graph-theory.polygons.md) `H` equipped with a
 [totally faithful](graph-theory.totally-faithful-morphisms-undirected-graphs.md)
 [morphism](graph-theory.morphisms-undirected-graphs.md) of undirected graphs
