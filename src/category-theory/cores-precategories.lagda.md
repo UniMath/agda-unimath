@@ -216,6 +216,8 @@ module _
 
 ## See also
 
+- [Cores of monoids](group-theory.cores-monoids.md)
+
 ## External links
 
 - [The core of a category](https://1lab.dev/Cat.Instances.Core.html) at 1lab
