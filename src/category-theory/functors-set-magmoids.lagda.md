@@ -30,7 +30,9 @@ A **functor between [set-magmoids](category-theory.set-magmoids.md)** is a
 family of maps on the hom-[sets](foundation-core.sets.md) that preserve the
 [composition operation](category-theory.composition-operations-on-binary-families-of-sets.md).
 
-## Definition
+## Definitions
+
+### The predicate of being a functor of set-magmoids
 
 ```agda
 module _
@@ -42,15 +44,15 @@ module _
     hom-Set-Magmoid A x y → hom-Set-Magmoid B (F₀ x) (F₀ y))
   where
 
-  preserves-comp-functor-Set-Magmoid : UU (l1 ⊔ l2 ⊔ l4)
-  preserves-comp-functor-Set-Magmoid =
+  preserves-comp-hom-map-Set-Magmoid : UU (l1 ⊔ l2 ⊔ l4)
+  preserves-comp-hom-map-Set-Magmoid =
     {x y z : obj-Set-Magmoid A}
     (g : hom-Set-Magmoid A y z) (f : hom-Set-Magmoid A x y) →
     F₁ (comp-hom-Set-Magmoid A g f) ＝ comp-hom-Set-Magmoid B (F₁ g) (F₁ f)
 
-  is-prop-preserves-comp-functor-Set-Magmoid :
-    is-prop preserves-comp-functor-Set-Magmoid
-  is-prop-preserves-comp-functor-Set-Magmoid =
+  is-prop-preserves-comp-hom-map-Set-Magmoid :
+    is-prop preserves-comp-hom-map-Set-Magmoid
+  is-prop-preserves-comp-hom-map-Set-Magmoid =
     is-prop-iterated-implicit-Π 3
       ( λ x y z →
         is-prop-iterated-Π 2
@@ -59,25 +61,56 @@ module _
               ( F₁ (comp-hom-Set-Magmoid A g f))
               ( comp-hom-Set-Magmoid B (F₁ g) (F₁ f))))
 
-  preserves-comp-prop-functor-Set-Magmoid :
-    Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 preserves-comp-prop-functor-Set-Magmoid =
-    preserves-comp-functor-Set-Magmoid
-  pr2 preserves-comp-prop-functor-Set-Magmoid =
-    is-prop-preserves-comp-functor-Set-Magmoid
+  preserves-comp-hom-prop-map-Set-Magmoid : Prop (l1 ⊔ l2 ⊔ l4)
+  pr1 preserves-comp-hom-prop-map-Set-Magmoid =
+    preserves-comp-hom-map-Set-Magmoid
+  pr2 preserves-comp-hom-prop-map-Set-Magmoid =
+    is-prop-preserves-comp-hom-map-Set-Magmoid
+```
 
+### The type of functors between set-magmoids
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (A : Set-Magmoid l1 l2) (B : Set-Magmoid l3 l4)
   where
 
-  functor-Set-Magmoid : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  functor-Set-Magmoid :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   functor-Set-Magmoid =
     Σ ( obj-Set-Magmoid A → obj-Set-Magmoid B)
       ( λ F₀ →
         Σ ( {x y : obj-Set-Magmoid A} →
             hom-Set-Magmoid A x y → hom-Set-Magmoid B (F₀ x) (F₀ y))
-          ( preserves-comp-functor-Set-Magmoid A B F₀))
+          ( preserves-comp-hom-map-Set-Magmoid A B F₀))
+
+  obj-functor-Set-Magmoid :
+    functor-Set-Magmoid →
+    obj-Set-Magmoid A →
+    obj-Set-Magmoid B
+  obj-functor-Set-Magmoid = pr1
+
+  hom-functor-Set-Magmoid :
+    (F : functor-Set-Magmoid) →
+    {x y : obj-Set-Magmoid A} →
+    (f : hom-Set-Magmoid A x y) →
+    hom-Set-Magmoid B
+      ( obj-functor-Set-Magmoid F x)
+      ( obj-functor-Set-Magmoid F y)
+  hom-functor-Set-Magmoid F = pr1 (pr2 F)
+
+  preserves-comp-hom-functor-Set-Magmoid :
+    (F : functor-Set-Magmoid)
+    {x y z : obj-Set-Magmoid A}
+    (g : hom-Set-Magmoid A y z)
+    (f : hom-Set-Magmoid A x y) →
+    ( hom-functor-Set-Magmoid F
+      ( comp-hom-Set-Magmoid A g f)) ＝
+    ( comp-hom-Set-Magmoid B
+      ( hom-functor-Set-Magmoid F g)
+      ( hom-functor-Set-Magmoid F f))
+  preserves-comp-hom-functor-Set-Magmoid = pr2 ∘ pr2
 ```
 
 ### The identity morphism of composition operations on binary families of sets

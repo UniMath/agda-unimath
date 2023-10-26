@@ -26,10 +26,13 @@ open import foundation.universe-levels
 A **set-magmoid** is simply the [structure](foundation.structure.md) of a
 [composition operation on a binary family of sets](category-theory.composition-operations-on-binary-family-of-sets.md),
 and are in one sense the "oidification" of [magmas](structured-types.magmas.md)
-in [sets](foundation-core.sets.md).
+in [sets](foundation-core.sets.md). We call elements of the indexing type
+**objects**, and elements of the set-family **morphisms** or **homomorphisms**.
 
-Set-magmoids may be referred to as _magmoids_ in the literature. However, we use
-the "set-" prefix to underline its relation to magmas.
+Set-magmoids are mostly referred to as _magmoids_ in the literature, but we use
+the "set-" prefix to make clear its relation to magmas. Set-magmoids should not
+be confused with _strict_ magmoids, which would be set-magmoids whose objects
+form a set.
 
 ## Definition
 
