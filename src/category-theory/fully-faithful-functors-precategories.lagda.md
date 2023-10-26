@@ -7,16 +7,24 @@ module category-theory.fully-faithful-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.essentially-injective-functors-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.full-functors-precategories
 open import category-theory.fully-faithful-maps-precategories
 open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
+open import category-theory.pseudomonic-functors-precategories
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
@@ -242,6 +250,107 @@ module _
       ( is-fully-faithful-fully-faithful-functor-Precategory C D F)
 ```
 
+### Fully faithful functors are essentially injective
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-ff-F : is-fully-faithful-functor-Precategory C D F)
+  where
+
+  is-essentially-injective-is-fully-faithful-functor-Precategory :
+    is-essentially-injective-functor-Precategory C D F
+  pr1 (is-essentially-injective-is-fully-faithful-functor-Precategory
+      x y (e , e' , l , r)) =
+    map-inv-hom-is-fully-faithful-functor-Precategory C D F is-ff-F e
+  pr1 (pr2 (is-essentially-injective-is-fully-faithful-functor-Precategory
+    x y (e , e' , l , r))) =
+    map-inv-hom-is-fully-faithful-functor-Precategory C D F is-ff-F e'
+  pr1 (pr2 (pr2 (is-essentially-injective-is-fully-faithful-functor-Precategory
+    x y (e , e' , l , r)))) =
+    ( inv
+      ( is-retraction-map-inv-is-equiv
+        ( is-ff-F y y)
+        ( comp-hom-Precategory C
+          ( map-inv-is-equiv (is-ff-F x y) e)
+          ( map-inv-is-equiv (is-ff-F y x) e')))) ∙
+    ( ap
+      ( map-inv-hom-is-fully-faithful-functor-Precategory C D F is-ff-F)
+      ( ( preserves-comp-functor-Precategory C D F
+          ( map-inv-is-equiv (is-ff-F x y) e)
+          ( map-inv-is-equiv (is-ff-F y x) e')) ∙
+        ( ap-binary
+          ( comp-hom-Precategory D)
+          ( is-section-map-inv-is-equiv (is-ff-F x y) e)
+          ( is-section-map-inv-is-equiv (is-ff-F y x) e')) ∙
+        ( l) ∙
+        ( inv (preserves-id-functor-Precategory C D F y)))) ∙
+    ( is-retraction-map-inv-is-equiv (is-ff-F y y) (id-hom-Precategory C))
+  pr2 (pr2 (pr2 (is-essentially-injective-is-fully-faithful-functor-Precategory
+    x y (e , e' , l , r)))) =
+    ( inv
+      ( is-retraction-map-inv-is-equiv
+        ( is-ff-F x x)
+        ( comp-hom-Precategory C
+          ( map-inv-is-equiv (is-ff-F y x) e')
+          ( map-inv-is-equiv (is-ff-F x y) e)))) ∙
+    ( ap
+      ( map-inv-hom-is-fully-faithful-functor-Precategory C D F is-ff-F)
+      ( ( preserves-comp-functor-Precategory C D F
+          ( map-inv-is-equiv (is-ff-F y x) e')
+          ( map-inv-is-equiv (is-ff-F x y) e)) ∙
+        ( ap-binary
+          (comp-hom-Precategory D)
+          ( is-section-map-inv-is-equiv (is-ff-F y x) e')
+          ( is-section-map-inv-is-equiv (is-ff-F x y) e)) ∙
+        ( r) ∙
+        ( inv (preserves-id-functor-Precategory C D F x)))) ∙
+    ( is-retraction-map-inv-is-equiv (is-ff-F x x) (id-hom-Precategory C))
+```
+
+### Fully faithful functors are pseudomonic
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-ff-F : is-fully-faithful-functor-Precategory C D F)
+  where
+
+  is-full-on-isos-is-fully-faithful-functor-Precategory :
+    (x y : obj-Precategory C) →
+    is-surjective (preserves-iso-functor-Precategory C D F {x} {y})
+  is-full-on-isos-is-fully-faithful-functor-Precategory x y e =
+    unit-trunc-Prop
+      ( ( is-essentially-injective-is-fully-faithful-functor-Precategory
+            C D F is-ff-F x y e) ,
+        eq-type-subtype
+          ( is-iso-prop-Precategory D)
+          ( is-section-map-inv-is-equiv (is-ff-F x y) (pr1 e)))
+
+  is-pseudomonic-is-fully-faithful-functor-Precategory :
+    is-pseudomonic-functor-Precategory C D F
+  pr1 is-pseudomonic-is-fully-faithful-functor-Precategory =
+    is-faithful-is-fully-faithful-functor-Precategory C D F is-ff-F
+  pr2 is-pseudomonic-is-fully-faithful-functor-Precategory =
+    is-full-on-isos-is-fully-faithful-functor-Precategory
+```
+
 ### Fully faithful functors reflect isomorphisms
 
 This remains to be formalized.
+
+## External links
+
+- [Fully Faithful Functors](https://1lab.dev/Cat.Functor.Properties.html#fully-faithful-functors)
+  at 1lab
+- [full and faithful functor](https://ncatlab.org/nlab/show/full+and+faithful+functor)
+  at nlab
+- [Full and faithful functors](https://en.wikipedia.org/wiki/Full_and_faithful_functors)
+  at Wikipedia
+- [fully faithful functor](https://wikidata.org/wiki/Q120721906) at Wikidata
