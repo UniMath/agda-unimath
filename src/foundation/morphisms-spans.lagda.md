@@ -29,8 +29,8 @@ concepts of spans:
 ### Morphisms of binary spans with fixed domain and codomain
 
 A **morphism of spans with fixed domain and codomain** from a
-[span](foundation.spans) `A <-f- S -g-> B` to a span `A <-h- T -k-> B` consists
-of a map `w : S → T` [equipped](foundation.structure.md) with two
+[span](foundation.spans.md) `A <-f- S -g-> B` to a span `A <-h- T -k-> B`
+consists of a map `w : S → T` [equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
 ```text
