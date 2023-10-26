@@ -122,6 +122,7 @@ open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-maybe public
+open import foundation.equivalences-spans public
 open import foundation.equivalences-towers public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
@@ -195,6 +196,7 @@ open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
+open import foundation.morphisms-spans public
 open import foundation.morphisms-towers public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public

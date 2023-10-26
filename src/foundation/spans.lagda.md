@@ -28,116 +28,152 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A **span** is a pair of functions with a common domain.
+A **(binary) span** is a pair of functions with a common domain, i.e., it is a
+diagram of the form
+
+```text
+  A <----- S -----> B.
+```
+
+More precisely, a **binary span from `A` to `B`** consists of a type `S` and two
+maps `f : S → A` and `g : S → B`. In this case, the types `A` and `B` are also
+referred to as the **domain** and **codomain** of the span, respectively, and
+the type `S` is referred to as the **spanning type** of the span.
+
+We also consider the notion of **total (binary) span**, which consists of two
+types `A` and `B` and a binary span from `A` to `B`.
+
+More generally, given a family of types `A i` indexed by `i : I`, a **span** on
+`A` consists of a type `S` and a family of maps `f i : S → A i` indexed by
+`i : I`.
 
 ## Definition
 
-### Spans
+### (Binary) spans with fixed domain and codomain
 
 ```agda
-span :
+span-fixed-domain-codomain :
   {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
-span l A B =
+span-fixed-domain-codomain l A B =
   Σ (UU l) (λ X → (X → A) × (X → B))
 
 module _
-  {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} (c : span l A B)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  (c : span-fixed-domain-codomain l3 A B)
   where
 
-  domain-span : UU l
-  domain-span = pr1 c
+  spanning-type-span-fixed-domain-codomain : UU l3
+  spanning-type-span-fixed-domain-codomain = pr1 c
 
-  left-map-span : domain-span → A
-  left-map-span = pr1 (pr2 c)
+  left-map-span-fixed-domain-codomain :
+    spanning-type-span-fixed-domain-codomain → A
+  left-map-span-fixed-domain-codomain = pr1 (pr2 c)
 
-  right-map-span : domain-span → B
-  right-map-span = pr2 (pr2 c)
+  right-map-span-fixed-domain-codomain :
+    spanning-type-span-fixed-domain-codomain → B
+  right-map-span-fixed-domain-codomain = pr2 (pr2 c)
 ```
 
-### Homomorphisms between spans with fixed codomains
+### (Binary) spans
 
-One notion of homomorphism of spans `c` and `d` with common codomains is a map
-between their domains so that the triangles on either side commute:
+```agda
+span : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+span l1 l2 l3 =
+  Σ (UU l1) (λ A → Σ (UU l2) (λ B → span-fixed-domain-codomain l3 A B))
 
-```text
-  A ===== A
-  ^       ^
-  |       |
-  C ----> D
-  |       |
-  v       v
-  B ===== B
+module _
+  {l1 l2 l3 : Level} (s : span l1 l2 l3)
+  where
+
+  domain-span : UU l1
+  domain-span = pr1 s
+
+  codomain-span : UU l2
+  codomain-span = pr1 (pr2 s)
+
+  span-fixed-domain-codomain-span :
+    span-fixed-domain-codomain l3 domain-span codomain-span
+  span-fixed-domain-codomain-span = pr2 (pr2 s)
+
+  spanning-type-span : UU l3
+  spanning-type-span =
+    spanning-type-span-fixed-domain-codomain span-fixed-domain-codomain-span
+
+  left-map-span : spanning-type-span → domain-span
+  left-map-span =
+    left-map-span-fixed-domain-codomain span-fixed-domain-codomain-span
+
+  right-map-span : spanning-type-span → codomain-span
+  right-map-span =
+    right-map-span-fixed-domain-codomain span-fixed-domain-codomain-span
 ```
+
+### Spans of fixed families of types
 
 ```agda
 module _
-  {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} (l3 : Level) {I : UU l1} (A : I → UU l2)
   where
 
-  coherence-hom-domain-span :
-    (c d : span l A B) → (domain-span c → domain-span d) → UU (l1 ⊔ l2 ⊔ l)
-  coherence-hom-domain-span c d h =
-    ( coherence-triangle-maps (left-map-span c) (left-map-span d) h) ×
-    ( coherence-triangle-maps (right-map-span c) (right-map-span d) h)
+  span-fixed-family-of-types : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  span-fixed-family-of-types = Σ (UU l3) (λ S → (i : I) → S → A i)
 
-  hom-domain-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
-  hom-domain-span c d =
-    Σ (domain-span c → domain-span d) (coherence-hom-domain-span c d)
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
+  (s : span-fixed-family-of-types l3 A)
+  where
+
+  spanning-type-span-fixed-family-of-types : UU l3
+  spanning-type-span-fixed-family-of-types = pr1 s
+
+  map-span-fixed-family-of-types :
+    (i : I) → spanning-type-span-fixed-family-of-types → A i
+  map-span-fixed-family-of-types = pr2 s
 ```
 
-### Characterizing equality of spans
+### Spans of families of types
+
+Note: We might have to rename the following definition of spans of families of
+types to _spans of families of types with fixed indexing type_.
 
 ```agda
+span-family-of-types :
+  {l1 : Level} (l2 l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+span-family-of-types l2 l3 I =
+  Σ (I → UU l2) (λ A → span-fixed-family-of-types l3 A)
+
 module _
-  {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2)
+  {l1 l2 l3 : Level} {I : UU l1} (s : span-family-of-types l2 l3 I)
   where
 
-  htpy-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
-  htpy-span c d =
-    Σ ( domain-span c ≃ domain-span d)
-      ( λ e → coherence-hom-domain-span c d (map-equiv e))
+  family-span-family-of-types : I → UU l2
+  family-span-family-of-types = pr1 s
 
-  refl-htpy-span : (c : span l A B) → htpy-span c c
-  pr1 (refl-htpy-span c) = id-equiv
-  pr1 (pr2 (refl-htpy-span c)) = refl-htpy
-  pr2 (pr2 (refl-htpy-span c)) = refl-htpy
+  span-fixed-family-of-types-span-family-of-types :
+    span-fixed-family-of-types l3 family-span-family-of-types
+  span-fixed-family-of-types-span-family-of-types = pr2 s
 
-  htpy-eq-span : (c d : span l A B) → c ＝ d → htpy-span c d
-  htpy-eq-span c .c refl = refl-htpy-span c
+  spanning-type-span-family-of-types : UU l3
+  spanning-type-span-family-of-types =
+    spanning-type-span-fixed-family-of-types
+      ( span-fixed-family-of-types-span-family-of-types)
 
-  is-torsorial-htpy-span :
-    (c : span l A B) → is-torsorial (htpy-span c)
-  is-torsorial-htpy-span c =
-    is-torsorial-Eq-structure
-      ( λ X d e → coherence-hom-domain-span c (X , d) (map-equiv e))
-      ( is-torsorial-equiv (pr1 c))
-      ( domain-span c , id-equiv)
-      ( is-torsorial-Eq-structure
-        ( λ _ f a → coherence-triangle-maps (right-map-span c) f id)
-        ( is-torsorial-htpy (left-map-span c))
-        ( left-map-span c , refl-htpy)
-        (is-torsorial-htpy (right-map-span c)))
-
-  is-equiv-htpy-eq-span :
-    (c d : span l A B) → is-equiv (htpy-eq-span c d)
-  is-equiv-htpy-eq-span c =
-    fundamental-theorem-id (is-torsorial-htpy-span c) (htpy-eq-span c)
-
-  extensionality-span :
-    (c d : span l A B) → (c ＝ d) ≃ (htpy-span c d)
-  pr1 (extensionality-span c d) = htpy-eq-span c d
-  pr2 (extensionality-span c d) = is-equiv-htpy-eq-span c d
-
-  eq-htpy-span : (c d : span l A B) → htpy-span c d → c ＝ d
-  eq-htpy-span c d = map-inv-equiv (extensionality-span c d)
+  map-span-family-of-types :
+    (i : I) → spanning-type-span-family-of-types →
+    family-span-family-of-types i
+  map-span-family-of-types =
+    map-span-fixed-family-of-types
+      ( span-fixed-family-of-types-span-family-of-types)
 ```
 
-### Spans are equivalent to binary relations
+## Properties
+
+### Binary spans with fixed domain and codomain are equivalent to binary relations
 
 This remains to be shown.
 [#767](https://github.com/UniMath/agda-unimath/issues/767)
 
 ## See also
 
-- The formal dual of spans is [cospans](foundation.cospans.md).
+- The dual concept of spans is [cospans](foundation.cospans.md).
