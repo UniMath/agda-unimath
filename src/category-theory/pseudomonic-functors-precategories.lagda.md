@@ -170,7 +170,7 @@ module _
     map-equiv inv-equiv-iso-is-pseudomonic-functor-Precategory
 ```
 
-The previous entry records what is also known as "being essentially injective".
+The previous entry records what is also known as "essential injectivivty".
 
 ```agda
 module _
@@ -207,7 +207,7 @@ module _
     map-equiv inv-equiv-iso-pseudomonic-functor-Precategory
 ```
 
-The previous entry records what is also known as "being essentially injective".
+The previous entry records what is also known as "essential injectivivty".
 
 ### Pseudomonic functors are conservative
 
