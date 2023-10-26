@@ -30,26 +30,26 @@ distributivity of Π over Σ, is also known as the type theoretic principle of
 choice. Indeed, it is the Curry-Howard interpretation of (one formulation of)
 the axiom of choice.
 
-## Definitions
+## Distributivity of Π over Σ
 
-### Distributivity of Π over Σ
+### Definitions
 
 ```agda
-Π-total-fam :
+module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (C : (x : A) → B x → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-Π-total-fam {A = A} {B} C = (x : A) → Σ (B x) (C x)
+  (C : (x : A) → B x → UU l3)
+  where
 
-universally-structured-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (C : (x : A) → B x → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-universally-structured-Π {A = A} {B} C =
-  Σ ((x : A) → B x) (λ f → (x : A) → C x (f x))
+  Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
+  Π-total-fam = (x : A) → Σ (B x) (C x)
+
+  universally-structured-Π : UU (l1 ⊔ l2 ⊔ l3)
+  universally-structured-Π = Σ ((x : A) → B x) (λ f → (x : A) → C x (f x))
 ```
 
-## Properties
+### Properties
 
-### Characterizing the identity type of `universally-structured-Π`
+#### Characterizing the identity type of `universally-structured-Π`
 
 ```agda
 module _
@@ -81,113 +81,210 @@ module _
     map-inv-equiv (extensionality-universally-structured-Π t t')
 ```
 
-### The distributivity of Π over Σ
+#### The distributivity of Π over Σ
 
 ```agda
-map-distributive-Π-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-  Π-total-fam C → universally-structured-Π C
-pr1 (map-distributive-Π-Σ φ) x = pr1 (φ x)
-pr2 (map-distributive-Π-Σ φ) x = pr2 (φ x)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
 
-map-inv-distributive-Π-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-  universally-structured-Π C → Π-total-fam C
-pr1 (map-inv-distributive-Π-Σ ψ x) = (pr1 ψ) x
-pr2 (map-inv-distributive-Π-Σ ψ x) = (pr2 ψ) x
+  map-distributive-Π-Σ : Π-total-fam C → universally-structured-Π C
+  pr1 (map-distributive-Π-Σ φ) x = pr1 (φ x)
+  pr2 (map-distributive-Π-Σ φ) x = pr2 (φ x)
 
-is-section-map-inv-distributive-Π-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-  ( ( map-distributive-Π-Σ {A = A} {B = B} {C = C}) ∘
-    ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})) ~ id
-is-section-map-inv-distributive-Π-Σ {A = A} {C = C} (pair ψ ψ') =
-  eq-htpy-universally-structured-Π C (pair refl-htpy refl-htpy)
+  map-inv-distributive-Π-Σ : universally-structured-Π C → Π-total-fam C
+  pr1 (map-inv-distributive-Π-Σ ψ x) = (pr1 ψ) x
+  pr2 (map-inv-distributive-Π-Σ ψ x) = (pr2 ψ) x
 
-is-retraction-map-inv-distributive-Π-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-  ( ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C}) ∘
-    ( map-distributive-Π-Σ {A = A} {B = B} {C = C})) ~ id
-is-retraction-map-inv-distributive-Π-Σ φ =
-  eq-htpy (λ x → eq-pair-Σ refl refl)
+  is-section-map-inv-distributive-Π-Σ :
+    map-distributive-Π-Σ ∘ map-inv-distributive-Π-Σ ~ id
+  is-section-map-inv-distributive-Π-Σ (pair ψ ψ') =
+    eq-htpy-universally-structured-Π C (pair refl-htpy refl-htpy)
 
-abstract
-  is-equiv-map-distributive-Π-Σ :
-    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-    is-equiv (map-distributive-Π-Σ {A = A} {B = B} {C = C})
-  is-equiv-map-distributive-Π-Σ {A = A} {B = B} {C = C} =
-    is-equiv-is-invertible
-      ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
+  is-retraction-map-inv-distributive-Π-Σ :
+    map-inv-distributive-Π-Σ ∘ map-distributive-Π-Σ ~ id
+  is-retraction-map-inv-distributive-Π-Σ φ =
+    eq-htpy (λ x → eq-pair-Σ refl refl)
 
-distributive-Π-Σ :
-  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-  Π-total-fam C ≃ universally-structured-Π C
-pr1 distributive-Π-Σ = map-distributive-Π-Σ
-pr2 distributive-Π-Σ = is-equiv-map-distributive-Π-Σ
+  abstract
+    is-equiv-map-distributive-Π-Σ : is-equiv (map-distributive-Π-Σ)
+    is-equiv-map-distributive-Π-Σ =
+      is-equiv-is-invertible
+        ( map-inv-distributive-Π-Σ)
+        ( is-section-map-inv-distributive-Π-Σ)
+        ( is-retraction-map-inv-distributive-Π-Σ)
 
-abstract
-  is-equiv-map-inv-distributive-Π-Σ :
-    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-    is-equiv (map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
-  is-equiv-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C} =
-    is-equiv-is-invertible
-      ( map-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
+  distributive-Π-Σ : Π-total-fam C ≃ universally-structured-Π C
+  pr1 distributive-Π-Σ = map-distributive-Π-Σ
+  pr2 distributive-Π-Σ = is-equiv-map-distributive-Π-Σ
 
-inv-distributive-Π-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
-  (universally-structured-Π C) ≃ (Π-total-fam C)
-pr1 inv-distributive-Π-Σ = map-inv-distributive-Π-Σ
-pr2 inv-distributive-Π-Σ = is-equiv-map-inv-distributive-Π-Σ
+  abstract
+    is-equiv-map-inv-distributive-Π-Σ : is-equiv (map-inv-distributive-Π-Σ)
+    is-equiv-map-inv-distributive-Π-Σ =
+      is-equiv-is-invertible
+        ( map-distributive-Π-Σ)
+        ( is-retraction-map-inv-distributive-Π-Σ)
+        ( is-section-map-inv-distributive-Π-Σ)
+
+  inv-distributive-Π-Σ : universally-structured-Π C ≃ Π-total-fam C
+  pr1 inv-distributive-Π-Σ = map-inv-distributive-Π-Σ
+  pr2 inv-distributive-Π-Σ = is-equiv-map-inv-distributive-Π-Σ
 ```
 
-## Consequences
+### Consequences
 
-### Characterizing the identity type of `Π-total-fam`
+#### Characterizing the identity type of `Π-total-fam`
 
 ```agda
-Eq-Π-total-fam :
+module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  (t t' : (a : A) → Σ (B a) (C a)) → UU (l1 ⊔ l2 ⊔ l3)
-Eq-Π-total-fam {A = A} C t t' =
-  Π-total-fam (λ x (p : pr1 (t x) ＝ pr1 (t' x)) →
-    tr (C x) p (pr2 (t x)) ＝ pr2 (t' x))
+  (f g : (a : A) → Σ (B a) (C a))
+  where
 
-extensionality-Π-total-fam :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  (f g : (a : A) → Σ (B a) (C a)) → (f ＝ g) ≃ Eq-Π-total-fam C f g
-extensionality-Π-total-fam C f g =
-  ( inv-distributive-Π-Σ ∘e
+  Eq-Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
+  Eq-Π-total-fam =
+    Π-total-fam (λ x (p : pr1 (f x) ＝ pr1 (g x)) →
+      tr (C x) p (pr2 (f x)) ＝ pr2 (g x))
+
+  extensionality-Π-total-fam : (f ＝ g) ≃ Eq-Π-total-fam
+  extensionality-Π-total-fam =
+    ( inv-distributive-Π-Σ) ∘e
     ( extensionality-universally-structured-Π C
       ( map-distributive-Π-Σ f)
-      ( map-distributive-Π-Σ g))) ∘e
-  ( equiv-ap distributive-Π-Σ f g)
+      ( map-distributive-Π-Σ g)) ∘e
+    ( equiv-ap distributive-Π-Σ f g)
 
-eq-Eq-Π-total-fam :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  (f g : (a : A) → Σ (B a) (C a)) → Eq-Π-total-fam C f g → f ＝ g
-eq-Eq-Π-total-fam C f g = map-inv-equiv (extensionality-Π-total-fam C f g)
+  eq-Eq-Π-total-fam : Eq-Π-total-fam → f ＝ g
+  eq-Eq-Π-total-fam = map-inv-equiv extensionality-Π-total-fam
 ```
 
-### Ordinary functions into a Σ-type
+#### Ordinary functions into a Σ-type
 
 ```agda
-mapping-into-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
-  (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
-mapping-into-Σ {B = B} = map-distributive-Π-Σ {B = λ _ → B}
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  where
 
-abstract
-  is-equiv-mapping-into-Σ :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-    {C : B → UU l3} → is-equiv (mapping-into-Σ {A = A} {C = C})
-  is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
+  mapping-into-Σ :
+    (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
+  mapping-into-Σ = map-distributive-Π-Σ {B = λ _ → B}
 
-equiv-mapping-into-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
-  (A → Σ B C) ≃ Σ (A → B) (λ f → (x : A) → C (f x))
-pr1 equiv-mapping-into-Σ = mapping-into-Σ
-pr2 equiv-mapping-into-Σ = is-equiv-mapping-into-Σ
+  abstract
+    is-equiv-mapping-into-Σ : is-equiv mapping-into-Σ
+    is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
+
+  equiv-mapping-into-Σ :
+    (A → Σ B C) ≃ Σ (A → B) (λ f → (x : A) → C (f x))
+  pr1 equiv-mapping-into-Σ = mapping-into-Σ
+  pr2 equiv-mapping-into-Σ = is-equiv-mapping-into-Σ
+```
+
+## Distributivity of implicit Π over Σ
+
+### Definitions
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  (C : (x : A) → B x → UU l3)
+  where
+
+  implicit-Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
+  implicit-Π-total-fam = {x : A} → Σ (B x) (C x)
+
+  universally-structured-implicit-Π : UU (l1 ⊔ l2 ⊔ l3)
+  universally-structured-implicit-Π =
+    Σ ({x : A} → B x) (λ f → {x : A} → C x (f {x}))
+```
+
+### Properties
+
+#### Characterizing the identity type of `universally-structured-implicit-Π`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  where
+
+  htpy-universally-structured-implicit-Π :
+    (t t' : universally-structured-implicit-Π C) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-universally-structured-implicit-Π t t' =
+    universally-structured-Π
+      ( λ (x : A) (p : (pr1 t) {x} ＝ (pr1 t') {x}) →
+        tr (C x) p ((pr2 t) {x}) ＝ (pr2 t') {x})
+
+  extensionality-universally-structured-implicit-Π :
+    (t t' : universally-structured-implicit-Π C) →
+    (t ＝ t') ≃ htpy-universally-structured-implicit-Π t t'
+  extensionality-universally-structured-implicit-Π (pair f g) =
+    extensionality-Σ
+      ( λ {f'} g' H → (x : A) → tr (C x) (H x) (g {x}) ＝ g' {x})
+      ( refl-htpy)
+      ( refl-htpy)
+      ( λ f' → equiv-funext-implicit)
+      ( λ g' → equiv-funext-implicit)
+
+  eq-htpy-universally-structured-implicit-Π :
+    {t t' : universally-structured-implicit-Π C} →
+    htpy-universally-structured-implicit-Π t t' → t ＝ t'
+  eq-htpy-universally-structured-implicit-Π {t} {t'} =
+    map-inv-equiv (extensionality-universally-structured-implicit-Π t t')
+```
+
+#### The distributivity of implicit Π over Σ
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
+
+  map-distributive-implicit-Π-Σ :
+    implicit-Π-total-fam C → universally-structured-implicit-Π C
+  pr1 (map-distributive-implicit-Π-Σ φ) {x} = pr1 (φ {x})
+  pr2 (map-distributive-implicit-Π-Σ φ) {x} = pr2 (φ {x})
+
+  map-inv-distributive-implicit-Π-Σ :
+    universally-structured-implicit-Π C → implicit-Π-total-fam C
+  pr1 (map-inv-distributive-implicit-Π-Σ ψ {x}) = (pr1 ψ) {x}
+  pr2 (map-inv-distributive-implicit-Π-Σ ψ {x}) = (pr2 ψ) {x}
+
+  is-section-map-inv-distributive-implicit-Π-Σ :
+    ( ( map-distributive-implicit-Π-Σ) ∘
+      ( map-inv-distributive-implicit-Π-Σ)) ~ id
+  is-section-map-inv-distributive-implicit-Π-Σ (pair ψ ψ') =
+    eq-htpy-universally-structured-implicit-Π C (pair refl-htpy refl-htpy)
+
+  is-retraction-map-inv-distributive-implicit-Π-Σ :
+    ( ( map-inv-distributive-implicit-Π-Σ) ∘
+      ( map-distributive-implicit-Π-Σ)) ~ id
+  is-retraction-map-inv-distributive-implicit-Π-Σ φ =
+    eq-htpy-implicit (λ x → eq-pair-Σ refl refl)
+
+  abstract
+    is-equiv-map-distributive-implicit-Π-Σ :
+      is-equiv (map-distributive-implicit-Π-Σ)
+    is-equiv-map-distributive-implicit-Π-Σ =
+      is-equiv-is-invertible
+        ( map-inv-distributive-implicit-Π-Σ)
+        ( is-section-map-inv-distributive-implicit-Π-Σ)
+        ( is-retraction-map-inv-distributive-implicit-Π-Σ)
+
+  distributive-implicit-Π-Σ :
+    implicit-Π-total-fam C ≃ universally-structured-implicit-Π C
+  pr1 distributive-implicit-Π-Σ = map-distributive-implicit-Π-Σ
+  pr2 distributive-implicit-Π-Σ = is-equiv-map-distributive-implicit-Π-Σ
+
+  abstract
+    is-equiv-map-inv-distributive-implicit-Π-Σ :
+      is-equiv (map-inv-distributive-implicit-Π-Σ)
+    is-equiv-map-inv-distributive-implicit-Π-Σ =
+      is-equiv-is-invertible
+        ( map-distributive-implicit-Π-Σ)
+        ( is-retraction-map-inv-distributive-implicit-Π-Σ)
+        ( is-section-map-inv-distributive-implicit-Π-Σ)
+
+  inv-distributive-implicit-Π-Σ :
+    (universally-structured-implicit-Π C) ≃ (implicit-Π-total-fam C)
+  pr1 inv-distributive-implicit-Π-Σ = map-inv-distributive-implicit-Π-Σ
+  pr2 inv-distributive-implicit-Π-Σ = is-equiv-map-inv-distributive-implicit-Π-Σ
 ```
