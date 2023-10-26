@@ -8,6 +8,7 @@ module category-theory.maps-precategories where
 
 ```agda
 open import category-theory.commuting-squares-of-morphisms-in-precategories
+open import category-theory.maps-nonunital-precategories
 open import category-theory.precategories
 
 open import foundation.binary-transport
@@ -36,7 +37,7 @@ precategory `D` consists of:
 - a map `F₀ : C → D` on objects,
 - a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms
 
-## Definition
+## Definitions
 
 ### Maps between precategories
 
@@ -49,15 +50,16 @@ module _
 
   map-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   map-Precategory =
-    Σ ( obj-Precategory C → obj-Precategory D)
-      ( λ F₀ →
-        {x y : obj-Precategory C} →
-        hom-Precategory C x y →
-        hom-Precategory D (F₀ x) (F₀ y))
+    map-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+      ( nonunital-precategory-Precategory D)
 
   obj-map-Precategory :
     (F : map-Precategory) → obj-Precategory C → obj-Precategory D
-  obj-map-Precategory = pr1
+  obj-map-Precategory =
+    obj-map-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+      ( nonunital-precategory-Precategory D)
 
   hom-map-Precategory :
     (F : map-Precategory)
@@ -66,7 +68,10 @@ module _
     hom-Precategory D
       ( obj-map-Precategory F x)
       ( obj-map-Precategory F y)
-  hom-map-Precategory = pr2
+  hom-map-Precategory =
+    hom-map-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+      ( nonunital-precategory-Precategory D)
 ```
 
 ## Properties
