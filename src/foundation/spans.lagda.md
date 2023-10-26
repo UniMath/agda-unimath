@@ -167,6 +167,63 @@ module _
       ( span-fixed-family-of-types-span-family-of-types)
 ```
 
+### Extensions of spans with fixed domain and codomain
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {A' : UU l2}
+  {B : UU l3} {B' : UU l4}
+  where
+
+  extend-span-fixed-domain-codomain :
+    span-fixed-domain-codomain l5 A B → (A → A') → (B → B') →
+    span-fixed-domain-codomain l5 A' B'
+  pr1 (extend-span-fixed-domain-codomain s f g) =
+    spanning-type-span-fixed-domain-codomain s
+  pr1 (pr2 (extend-span-fixed-domain-codomain s f g)) =
+    f ∘ left-map-span-fixed-domain-codomain s
+  pr2 (pr2 (extend-span-fixed-domain-codomain s f g)) =
+    g ∘ right-map-span-fixed-domain-codomain s
+```
+
+### The opposite of a span with fixed domain and codomain
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  opposite-span-fixed-domain-codomain :
+    span-fixed-domain-codomain l3 A B →
+    span-fixed-domain-codomain l3 B A
+  pr1 (opposite-span-fixed-domain-codomain s) =
+    spanning-type-span-fixed-domain-codomain s
+  pr1 (pr2 (opposite-span-fixed-domain-codomain s)) =
+    right-map-span-fixed-domain-codomain s
+  pr2 (pr2 (opposite-span-fixed-domain-codomain s)) =
+    left-map-span-fixed-domain-codomain s
+```
+
+### Permutations of spans of fixed families of types
+
+Permutations of spans of fixed families of types are a generalization of the
+opposite of a binary span with fixed domain and codomain.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
+  where
+
+  permutation-span-fixed-family-of-types :
+    (e : I ≃ I) → span-fixed-family-of-types l3 A →
+    span-fixed-family-of-types l3 (A ∘ map-equiv e)
+  pr1 (permutation-span-fixed-family-of-types e s) =
+    spanning-type-span-fixed-family-of-types s
+  pr2 (permutation-span-fixed-family-of-types e s) i =
+    map-span-fixed-family-of-types s (map-equiv e i)
+```
+
 ## Properties
 
 ### Binary spans with fixed domain and codomain are equivalent to binary relations

@@ -52,8 +52,7 @@ module _
     Σ ( spanning-type-span-fixed-domain-codomain c ≃
         spanning-type-span-fixed-domain-codomain d)
       ( λ e →
-        coherence-hom-spanning-type-span-fixed-domain-codomain c d
-          ( map-equiv e))
+        coherence-hom-span-fixed-domain-codomain c d (map-equiv e))
 
   id-equiv-span-fixed-domain-codomain :
     (c : span-fixed-domain-codomain l A B) →
@@ -74,7 +73,7 @@ module _
   is-torsorial-equiv-span-fixed-domain-codomain c =
     is-torsorial-Eq-structure
       ( λ X d e →
-        coherence-hom-spanning-type-span-fixed-domain-codomain c
+        coherence-hom-span-fixed-domain-codomain c
           ( X , d)
           ( map-equiv e))
       ( is-torsorial-equiv (pr1 c))

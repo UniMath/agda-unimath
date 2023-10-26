@@ -90,28 +90,77 @@ map between their domains so that the triangles on either side commute:
 
 ```agda
 module _
-  {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (s : span-fixed-domain-codomain l3 A B)
+  (t : span-fixed-domain-codomain l4 A B)
   where
 
-  coherence-hom-spanning-type-span-fixed-domain-codomain :
-    (c d : span-fixed-domain-codomain l A B) →
-    ( spanning-type-span-fixed-domain-codomain c →
-      spanning-type-span-fixed-domain-codomain d) →
-    UU (l1 ⊔ l2 ⊔ l)
-  coherence-hom-spanning-type-span-fixed-domain-codomain c d h =
-    ( coherence-triangle-maps
-      ( left-map-span-fixed-domain-codomain c)
-      ( left-map-span-fixed-domain-codomain d)
-      ( h)) ×
-    ( coherence-triangle-maps
-      ( right-map-span-fixed-domain-codomain c)
-      ( right-map-span-fixed-domain-codomain d)
-      ( h))
+  left-coherence-hom-span-fixed-domain-codomain :
+    ( spanning-type-span-fixed-domain-codomain s →
+      spanning-type-span-fixed-domain-codomain t) →
+    UU (l1 ⊔ l3)
+  left-coherence-hom-span-fixed-domain-codomain =
+    coherence-triangle-maps
+      ( left-map-span-fixed-domain-codomain s)
+      ( left-map-span-fixed-domain-codomain t)
 
-  hom-spanning-type-span-fixed-domain-codomain :
-    ( c d : span-fixed-domain-codomain l A B) → UU (l1 ⊔ l2 ⊔ l)
-  hom-spanning-type-span-fixed-domain-codomain c d =
-    Σ ( spanning-type-span-fixed-domain-codomain c →
-        spanning-type-span-fixed-domain-codomain d)
-      ( coherence-hom-spanning-type-span-fixed-domain-codomain c d)
+  right-coherence-hom-span-fixed-domain-codomain :
+    ( spanning-type-span-fixed-domain-codomain s →
+      spanning-type-span-fixed-domain-codomain t) →
+    UU (l2 ⊔ l3)
+  right-coherence-hom-span-fixed-domain-codomain =
+    coherence-triangle-maps
+      ( right-map-span-fixed-domain-codomain s)
+      ( right-map-span-fixed-domain-codomain t)
+
+  coherence-hom-span-fixed-domain-codomain :
+    ( spanning-type-span-fixed-domain-codomain s →
+      spanning-type-span-fixed-domain-codomain t) →
+    UU (l1 ⊔ l2 ⊔ l3)
+  coherence-hom-span-fixed-domain-codomain f =
+    left-coherence-hom-span-fixed-domain-codomain f ×
+    right-coherence-hom-span-fixed-domain-codomain f
+
+  hom-span-fixed-domain-codomain : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-span-fixed-domain-codomain =
+    Σ ( spanning-type-span-fixed-domain-codomain s →
+        spanning-type-span-fixed-domain-codomain t)
+      ( coherence-hom-span-fixed-domain-codomain)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {s t : span-fixed-domain-codomain l3 A B}
+  (f : hom-span-fixed-domain-codomain s t)
+  where
+
+  map-hom-span-fixed-domain-codomain :
+    spanning-type-span-fixed-domain-codomain s →
+    spanning-type-span-fixed-domain-codomain t
+  map-hom-span-fixed-domain-codomain = pr1 f
+
+  left-triangle-hom-span-fixed-domain-codomain :
+    left-coherence-hom-span-fixed-domain-codomain s t
+      ( map-hom-span-fixed-domain-codomain)
+  left-triangle-hom-span-fixed-domain-codomain = pr1 (pr2 f)
+
+  right-triangle-hom-span-fixed-domain-codomain :
+    right-coherence-hom-span-fixed-domain-codomain s t
+      ( map-hom-span-fixed-domain-codomain)
+  right-triangle-hom-span-fixed-domain-codomain = pr2 (pr2 f)
+```
+
+### Morphisms of spans
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3) (t : span l4 l5 l6)
+  where
+
+  hom-span : UU {!!}
+  hom-span =
+    Σ ( domain-span s → domain-span t)
+      ( λ f →
+        Σ ( codomain-span s → codomain-span t)
+          ( λ g →
+            hom-span-fixed-domain-codomain {!!} {!!}))
 ```
