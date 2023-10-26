@@ -251,24 +251,11 @@ module _
     fiber (horizontal-map-cocone f g c ∘ f) x →
     fiber (vertical-map-cocone f g c) x
   vertical-map-span-cogap-fiber =
-    -- Choosen to make a coherence square commute almost trivially
+    -- TODO (Comment): Choosen to make a coherence square commute almost trivially
     ( map-inv-equiv equiv-fiber-vertical-map-cocone-cogap-inr) ∘
     ( horizontal-map-span-flattening-pushout
       ( λ y → (cogap f g c y) ＝ x) f g (cocone-pushout f g)) ∘
     ( map-equiv equiv-fiber-horizontal-map-cocone-cogap-inl-horizontal-span)
-
-{-
-  statement-span-cocone-cogap-fiber : {!!}
-  statement-span-cocone-cogap-fiber =
-    ( Σ
-      ( fiber (horizontal-map-cocone f g c ∘ f) x →
-        fiber (horizontal-map-cocone f g c) x)
-      ( λ f' →
-        ( Σ
-          ( fiber (horizontal-map-cocone f g c ∘ f) x →
-            fiber (vertical-map-cocone f g c) x)
-          ( λ g' → cocone f' g' (fiber (cogap f g c) x)))))
--}
 
   statement-universal-property-pushout-cogap-fiber : UUω
   statement-universal-property-pushout-cogap-fiber =
@@ -326,120 +313,45 @@ module _
       ( is-equiv-map-equiv
         ( equiv-fiber-horizontal-map-cocone-cogap-inl-horizontal-span))
 
-{-
-  S' : UU (l1 ⊔ l4)
-  S' = fiber (cogap f g c ∘ inl-pushout f g ∘ f) x
+  module _
+    { l5 l6 l7 : Level} (T : UU l5) (F : UU l6) (G : UU l7)
+    ( i : F ≃ fiber (horizontal-map-cocone f g c) x)
+    ( j : G ≃ fiber (vertical-map-cocone f g c) x)
+    ( k : T ≃ fiber (horizontal-map-cocone f g c ∘ f) x)
+    ( u : T → F)
+    ( v : T → G)
+    ( coh-l : coherence-square-maps
+                ( map-equiv k)
+                ( u)
+                ( horizontal-map-span-cogap-fiber)
+                ( map-equiv i))
+    ( coh-r : coherence-square-maps
+                ( v)
+                ( map-equiv k)
+                ( map-equiv j)
+                ( vertical-map-span-cogap-fiber))
+    where
 
-  A' : UU (l2 ⊔ l4)
-  A' = fiber (cogap f g c ∘ inl-pushout f g) x
-
-  B' : UU (l3 ⊔ l4)
-  B' = fiber (cogap f g c ∘ inr-pushout f g) x
-
-  f' : S' → A'
-  f' = map-Σ-map-base f (λ a → (cogap f g c ∘ inl-pushout f g) a ＝ x)
-
-  g' : S' → B'
-  g' =
-    map-Σ
-      ( λ b → (cogap f g c ∘ inr-pushout f g) b ＝ x)
-      ( g)
-      ( λ s → concat (ap (cogap f g c) (inv (glue-pushout f g s))) x)
--}
-
-  private
-    P : pushout f g → UU l4
-    P y = cogap f g c y ＝ x
-
-  T : UU (l1 ⊔ l4)
-  T = fiber (horizontal-map-cocone f g c ∘ f) x
-
-  F : UU (l2 ⊔ l4)
-  F = fiber (horizontal-map-cocone f g c) x
-
-  G : UU (l3 ⊔ l4)
-  G = fiber (vertical-map-cocone f g c) x
-
-  f' : T → F
-  f' = map-Σ-map-base f (λ a → horizontal-map-cocone f g c a ＝ x)
-
-{-
-  g' : T → G
-  g' =
-    map-Σ
-      ( λ b → vertical-map-cocone f g c b ＝ x)
-      ( g)
-      ( λ s → concat (inv (coherence-square-cocone f g c s)) x)
--}
-
-  k-equiv : T ≃ fiber (cogap f g c ∘ inl-pushout f g ∘ f) x
-  k-equiv = equiv-tot (λ s → equiv-concat (compute-inl-cogap f g c (f s)) x)
-
-  i-equiv : F ≃ fiber (cogap f g c ∘ inl-pushout f g) x
-  i-equiv = equiv-tot (λ a → equiv-concat (compute-inl-cogap f g c a) x)
-
-  j-equiv : G ≃ fiber (cogap f g c ∘ inr-pushout f g) x
-  j-equiv = equiv-tot (λ b → equiv-concat (compute-inr-cogap f g c b) x)
-
-  g' : T → G
-  g' =
-    map-inv-equiv j-equiv ∘
-    horizontal-map-span-flattening-pushout P f g (cocone-pushout f g) ∘
-    map-equiv k-equiv
-
-  coh-l :
-    coherence-square-maps
-      ( map-equiv k-equiv)
-      ( f')
-      ( vertical-map-span-flattening-pushout P f g (cocone-pushout f g))
-      ( map-equiv i-equiv)
-  coh-l _ = refl
-
-  coh-r :
-    coherence-square-maps
-      ( g')
-      ( map-equiv k-equiv)
-      ( map-equiv j-equiv)
-      ( horizontal-map-span-flattening-pushout P f g (cocone-pushout f g))
-  coh-r _ = inv (is-section-map-inv-equiv j-equiv _)
-
-  test :
-    {l : Level} →
-    universal-property-pushout l f' g'
-    (comp-cocone-hom-span
-      ( vertical-map-span-flattening-pushout P f g (cocone-pushout f g))
-      ( horizontal-map-span-flattening-pushout P f g (cocone-pushout f g))
-      ( f')
-      ( g')
-      ( map-equiv i-equiv)
-      ( map-equiv j-equiv)
-      ( map-equiv k-equiv)
-      ( cocone-flattening-pushout P f g (cocone-pushout f g)) coh-l coh-r)
-  test =
-    universal-property-pushout-extended-by-equivalences
-      ( vertical-map-span-flattening-pushout P f g (cocone-pushout f g))
-      ( horizontal-map-span-flattening-pushout P f g (cocone-pushout f g))
-      ( f')
-      ( g')
-      ( map-equiv i-equiv) -- TO DO: Fold up lemmas as ≃
-      ( map-equiv j-equiv)
-      ( map-equiv k-equiv)
-      ( cocone-flattening-pushout P f g (cocone-pushout f g))
-      ( flattening-lemma-pushout P f g
-        ( cocone-pushout f g)
-        ( dependent-up-pushout f g))
-      ( coh-l)
-      ( coh-r)
-      ( is-equiv-map-equiv i-equiv)
-      ( is-equiv-map-equiv j-equiv)
-      ( is-equiv-map-equiv k-equiv)
-
-{-
-  universal-property-pushout-cogap-map-fibers : {l : Level} → {!universal-property-pushout!}
-  universal-property-pushout-cogap-map-fibers =
-    flattening-lemma-pushout P f g
-      ( cocone-pushout f g)
-      ( dependent-up-pushout f g)
-      ( X)
--}
+    universal-property-pushout-cogap-fiber-up-to-equiv :
+      { l : Level} →
+      ( Σ
+        ( cocone u v (fiber (cogap f g c) x))
+        ( λ c → universal-property-pushout l u v c))
+    pr1 universal-property-pushout-cogap-fiber-up-to-equiv = _
+    pr2 (universal-property-pushout-cogap-fiber-up-to-equiv {l}) =
+      universal-property-pushout-extended-by-equivalences
+        ( horizontal-map-span-cogap-fiber)
+        ( vertical-map-span-cogap-fiber)
+        ( u)
+        ( v)
+        ( map-equiv i)
+        ( map-equiv j)
+        ( map-equiv k)
+        ( pr1 ( universal-property-pushout-cogap-fiber {l}))
+        ( pr2 universal-property-pushout-cogap-fiber)
+        ( coh-l)
+        ( coh-r)
+        ( is-equiv-map-equiv i)
+        ( is-equiv-map-equiv j)
+        ( is-equiv-map-equiv k)
 ```
