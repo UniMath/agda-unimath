@@ -24,8 +24,8 @@ open import category-theory.category-of-functors-from-small-to-large-categories 
 open import category-theory.category-of-maps-categories public
 open import category-theory.category-of-maps-from-small-to-large-categories public
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
-open import category-theory.commuting-squares-of-morphisms-in-nonunital-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
+open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
 open import category-theory.composition-operations-on-binary-families-of-sets public
 open import category-theory.conservative-functors-precategories public
 open import category-theory.coproducts-in-precategories public
