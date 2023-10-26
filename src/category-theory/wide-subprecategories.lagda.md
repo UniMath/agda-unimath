@@ -34,7 +34,7 @@ open import foundation.universe-levels
 
 A **wide subprecategory** of a [precategory](category-theory.precategories.md)
 `C` is a [subprecategory](category-theory.subprecategories.md) that contains all
-the objects.
+the objects of `C`.
 
 ## Definitions
 
