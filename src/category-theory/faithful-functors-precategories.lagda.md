@@ -62,38 +62,38 @@ module _
 ### The type of faithful functors between two precategories
 
 ```agda
-module _
+faithful-functor-Precategory :
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
-  (D : Precategory l3 l4)
+  (D : Precategory l3 l4) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+faithful-functor-Precategory C D =
+  Σ (functor-Precategory C D) (is-faithful-functor-Precategory C D)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : faithful-functor-Precategory C D)
   where
 
-  faithful-functor-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  faithful-functor-Precategory =
-    Σ (functor-Precategory C D) (is-faithful-functor-Precategory C D)
-
-  functor-faithful-functor-Precategory :
-    faithful-functor-Precategory → functor-Precategory C D
-  functor-faithful-functor-Precategory = pr1
+  functor-faithful-functor-Precategory : functor-Precategory C D
+  functor-faithful-functor-Precategory = pr1 F
 
   is-faithful-faithful-functor-Precategory :
-    (F : faithful-functor-Precategory) →
-    is-faithful-functor-Precategory C D (functor-faithful-functor-Precategory F)
-  is-faithful-faithful-functor-Precategory = pr2
+    is-faithful-functor-Precategory C D functor-faithful-functor-Precategory
+  is-faithful-faithful-functor-Precategory = pr2 F
 
-  obj-faithful-functor-Precategory :
-    faithful-functor-Precategory → obj-Precategory C → obj-Precategory D
+  obj-faithful-functor-Precategory : obj-Precategory C → obj-Precategory D
   obj-faithful-functor-Precategory =
-    obj-functor-Precategory C D ∘ functor-faithful-functor-Precategory
+    obj-functor-Precategory C D functor-faithful-functor-Precategory
 
   hom-faithful-functor-Precategory :
-    (F : faithful-functor-Precategory) {x y : obj-Precategory C} →
+    {x y : obj-Precategory C} →
     hom-Precategory C x y →
     hom-Precategory D
-      ( obj-faithful-functor-Precategory F x)
-      ( obj-faithful-functor-Precategory F y)
+      ( obj-faithful-functor-Precategory x)
+      ( obj-faithful-functor-Precategory y)
   hom-faithful-functor-Precategory =
-    hom-functor-Precategory C D ∘ functor-faithful-functor-Precategory
+    hom-functor-Precategory C D functor-faithful-functor-Precategory
 ```
 
 ### The predicate of being injective on hom-sets on functors between precategories
