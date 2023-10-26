@@ -168,7 +168,11 @@ module _
     iso-Precategory C x y
   map-inv-iso-is-pseudomonic-functor-Precategory =
     map-equiv inv-equiv-iso-is-pseudomonic-functor-Precategory
+```
 
+The previous entry records what is also known as "being essentially injective".
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2) (D : Precategory l3 l4)
@@ -202,6 +206,8 @@ module _
   map-inv-hom-pseudomonic-functor-Precategory =
     map-equiv inv-equiv-iso-pseudomonic-functor-Precategory
 ```
+
+The previous entry records what is also known as "being essentially injective".
 
 ### Pseudomonic functors are conservative
 
