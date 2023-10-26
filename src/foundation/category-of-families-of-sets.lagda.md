@@ -7,8 +7,8 @@ module foundation.category-of-families-of-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-categories
 open import category-theory.categories
+open import category-theory.large-categories
 open import category-theory.large-function-categories
 open import category-theory.large-function-precategories
 open import category-theory.large-precategories
