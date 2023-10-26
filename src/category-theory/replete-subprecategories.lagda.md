@@ -100,8 +100,7 @@ module _
 
 ```agda
 Replete-Subprecategory :
-  {l1 l2 : Level} (l3 l4 : Level)
-  (C : Precategory l1 l2) →
+  {l1 l2 : Level} (l3 l4 : Level) (C : Precategory l1 l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
 Replete-Subprecategory l3 l4 C =
   Σ (Subprecategory l3 l4 C) (is-replete-Subprecategory C)
@@ -170,3 +169,5 @@ This remains to be formalized.
   at nlab
 - [Isomorphism-closed subcategory](https://en.wikipedia.org/wiki/Isomorphism-closed_subcategory)
   at Wikipedia
+- [isomorphism-closed subcategory](https://www.wikidata.org/wiki/Q6086096) at
+  Wikidata

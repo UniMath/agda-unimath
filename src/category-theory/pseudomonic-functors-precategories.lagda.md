@@ -140,6 +140,14 @@ module _
   {x y : obj-Precategory C}
   where
 
+  is-equiv-preserves-iso-is-pseudomonic-functor-Precategory :
+    is-equiv (preserves-iso-functor-Precategory C D F {x} {y})
+  is-equiv-preserves-iso-is-pseudomonic-functor-Precategory =
+    is-equiv-is-emb-is-surjective
+      ( pr2 is-pseudomonic-F x y)
+      ( is-faithful-iso-is-faithful-functor-Precategory
+          C D F (pr1 is-pseudomonic-F) x y)
+
   equiv-iso-is-pseudomonic-functor-Precategory :
     iso-Precategory C x y ≃
     iso-Precategory D
@@ -148,10 +156,7 @@ module _
   pr1 equiv-iso-is-pseudomonic-functor-Precategory =
     preserves-iso-functor-Precategory C D F
   pr2 equiv-iso-is-pseudomonic-functor-Precategory =
-    is-equiv-is-emb-is-surjective
-      ( pr2 is-pseudomonic-F x y)
-      ( is-faithful-iso-is-faithful-functor-Precategory
-          C D F (pr1 is-pseudomonic-F) x y)
+    is-equiv-preserves-iso-is-pseudomonic-functor-Precategory
 
   inv-equiv-iso-is-pseudomonic-functor-Precategory :
     iso-Precategory D

@@ -29,10 +29,10 @@ and are in one sense the "oidification" of [magmas](structured-types.magmas.md)
 in [sets](foundation-core.sets.md). We call elements of the indexing type
 **objects**, and elements of the set-family **morphisms** or **homomorphisms**.
 
-Set-magmoids are mostly referred to as _magmoids_ in the literature, but we use
-the "set-" prefix to make clear its relation to magmas. Set-magmoids should not
-be confused with _strict_ magmoids, which would be set-magmoids whose objects
-form a set.
+Set-magmoids are commonly referred to as _magmoids_ in the literature, but we
+use the "set-" prefix to make clear its relation to magmas. Set-magmoids should
+not be confused with _strict_ magmoids, which would be set-magmoids whose
+objects form a set.
 
 ## Definition
 
@@ -80,7 +80,7 @@ module _
   comp-hom-Set-Magmoid' f g = comp-hom-Set-Magmoid g f
 ```
 
-### The total hom-type of a magmoid
+### The total hom-type of a set-magmoid
 
 ```agda
 total-hom-Set-Magmoid :
@@ -114,7 +114,7 @@ module _
   postcomp-hom-Set-Magmoid = comp-hom-Set-Magmoid M f
 ```
 
-### The predicate on magmoids of being associative
+### The predicate on set-magmoids of being associative
 
 ```agda
 module _
@@ -144,7 +144,7 @@ module _
       ( comp-hom-Set-Magmoid M)
 ```
 
-### The predicate on magmoids of being unital
+### The predicate on set-magmoids of being unital
 
 **Proof:** To show that unitality is a proposition, suppose
 `e e' : (x : A) → hom-set x x` are both right and left units with regard to
@@ -184,7 +184,7 @@ module _
 
 ## Properties
 
-### If the objects of a magmoid are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
+### If the objects of a set-magmoid are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
 
 ```agda
 module _
@@ -218,10 +218,12 @@ module _
 ## See also
 
 - [Nonunital precategories](category-theory.nonunital-precategories.md) are
-  associative magmoids.
+  associative set-magmoids.
 - [Precategories](category-theory.precategories.md) are associative and unital
-  magmoids.
+  set-magmoids.
 
 ## External links
 
 - [magmoid](https://ncatlab.org/nlab/show/magmoid) at nlab
+
+A wikidata identifier was not available for this concept.
