@@ -10,6 +10,7 @@ module modal-logic.kripke-semantics where
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -18,9 +19,12 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import modal-logic.formulas
+open import modal-logic.logic-syntax
 
 open import univalent-combinatorics.finite-types
 ```
@@ -63,6 +67,12 @@ module _
   finite-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
   finite-model = kripke-model × is-finite (type-Inhabited-Type w)
 
+  model-class : (l5 : Level) → UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5)
+  model-class l5 = subtype l5 kripke-model
+
+  all-models : model-class lzero
+  all-models _ = unit-Prop
+
 module _
   {l1 l2 l3 l4 : Level} {w : Inhabited-Type l1} {i : Set l3}
   where
@@ -85,7 +95,7 @@ module _
   (M , x) ⊨ □ a =
     Π-Prop
       ( type-Inhabited-Type w)
-      ( λ y -> function-Prop (model-relation M x y) ((M , y) ⊨ a))
+      ( λ y → function-Prop (model-relation M x y) ((M , y) ⊨ a))
 
   _⊭_ : kripke-model w l2 i l4 × (type-Inhabited-Type w) → formula i → Prop l
   (M , x) ⊭ a = neg-Prop ((M , x) ⊨ a)
@@ -95,6 +105,43 @@ module _
 
   _⊭M_ : kripke-model w l2 i l4 → formula i → Prop l
   M ⊭M a = neg-Prop (M ⊨M a)
+
+  decidable-class : model-class w l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  decidable-class M = Π-Prop (formula i) (λ a → M ⊨M a)
+
+module _
+  {l1 l2 l3 l4 l5 : Level} {w : Inhabited-Type l1} {i : Set l3}
+  where
+
+  _⊨C_ :
+    model-class w l2 i l4 l5 →
+    formula i →
+    Prop (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5)
+  C ⊨C a =
+    Π-Prop
+      ( kripke-model w l2 i l4)
+      ( λ M → function-Prop (is-in-subtype C M) (M ⊨M a))
+
+  class-modal-logic :
+    model-class w l2 i l4 l5 →
+    formulas (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5) i
+  class-modal-logic C a = C ⊨C a
+
+module _
+  {l1 : Level} (w : Inhabited-Type l1)
+  (l2 : Level)
+  {l3 : Level} (i : Set l3)
+  (l4 : Level)
+  where
+
+  decidable-models : model-class w l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  decidable-models M =
+    Π-Prop
+      ( formula i)
+      ( λ a →
+        ( Π-Prop
+          ( type-Inhabited-Type w)
+          ( λ x → is-decidable-Prop ((M , x) ⊨ a))))
 
 module _
   {l1 l2 l3 l4 : Level} {w : Inhabited-Type l1} {i : Set l3}
