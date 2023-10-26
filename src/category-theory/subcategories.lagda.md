@@ -435,3 +435,8 @@ module _
   is-emb-obj-inclusion-Category =
     is-emb-obj-inclusion-Subprecategory (precategory-Category C) P
 ```
+
+## External links
+
+- [Univalent Subcategories](https://1lab.dev/Cat.Functor.Subcategory.html#univalent-subcategories)
+  at 1lab

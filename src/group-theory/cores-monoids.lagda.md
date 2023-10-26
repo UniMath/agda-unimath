@@ -1,4 +1,4 @@
-# Core of a monoid
+# Cores of monoids
 
 ```agda
 module group-theory.cores-monoids where

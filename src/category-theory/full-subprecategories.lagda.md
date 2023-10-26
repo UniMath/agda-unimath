@@ -296,3 +296,13 @@ module _
   pr1 embedding-Full-Subprecategory = inclusion-Full-Subprecategory C P
   pr2 embedding-Full-Subprecategory = is-embedding-inclusion-Full-Subprecategory
 ```
+
+## See also
+
+- [Wide subprecategories](category-theory.wide-subprecategories.md)
+
+## External links
+
+- [Full subcategories](https://1lab.dev/Cat.Functor.FullSubcategory.html) at
+  1lab
+- [full subcategory](https://ncatlab.org/nlab/show/full+subcategory) at nlab
