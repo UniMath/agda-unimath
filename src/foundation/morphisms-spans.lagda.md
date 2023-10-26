@@ -8,6 +8,7 @@ module foundation.morphisms-spans where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.spans
@@ -152,6 +153,43 @@ module _
 
 ### Morphisms of spans
 
+The definition of morphisms of spans is given concisely in terms of the notion
+of morphisms of spans with fixed domain and codomain. In the resulting
+definitions, the commuting squares of morphisms of spans are oriented in the
+following way:
+
+- A homotopy
+  `map-domain-hom-span ∘ left-map-span s ~ left-map-span t ∘ spanning-map-hom-span`
+  witnessing that the square
+
+  ```text
+                       spanning-map-hom-span
+                    S ----------------------> T
+                    |                         |
+    left-map-span s |                         | left-map-span t
+                    V                         V
+                    A ----------------------> C
+                        map-domain-hom-span
+  ```
+
+  commutes.
+
+- A homotopy
+  `map-domain-hom-span ∘ right-map-span s ~ right-map-span t ∘ spanning-map-hom-span`
+  witnessing that the square
+
+  ```text
+                        spanning-map-hom-span
+                     S ----------------------> T
+                     |                         |
+    right-map-span s |                         | right-map-span t
+                     V                         V
+                     B ----------------------> D
+                        map-codomain-hom-span
+  ```
+
+  commutes.
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3) (t : span l4 l5 l6)
@@ -192,10 +230,40 @@ module _
       ( span-fixed-domain-codomain-span t)
   hom-span-fixed-domain-codomain-hom-span = pr2 (pr2 f)
 
-  map-spanning-type-hom-span :
+  spanning-map-hom-span :
     spanning-type-span s → spanning-type-span t
-  map-spanning-type-hom-span =
+  spanning-map-hom-span =
     map-hom-span-fixed-domain-codomain
+      ( extend-span-fixed-domain-codomain
+        ( span-fixed-domain-codomain-span s)
+        ( map-domain-hom-span)
+        ( map-codomain-hom-span))
+      ( span-fixed-domain-codomain-span t)
+      ( hom-span-fixed-domain-codomain-hom-span)
+
+  left-square-hom-span :
+    coherence-square-maps
+      ( spanning-map-hom-span)
+      ( left-map-span s)
+      ( left-map-span t)
+      ( map-domain-hom-span)
+  left-square-hom-span =
+    left-triangle-hom-span-fixed-domain-codomain
+      ( extend-span-fixed-domain-codomain
+        ( span-fixed-domain-codomain-span s)
+        ( map-domain-hom-span)
+        ( map-codomain-hom-span))
+      ( span-fixed-domain-codomain-span t)
+      ( hom-span-fixed-domain-codomain-hom-span)
+
+  right-square-hom-span :
+    coherence-square-maps
+      ( spanning-map-hom-span)
+      ( right-map-span s)
+      ( right-map-span t)
+      ( map-codomain-hom-span)
+  right-square-hom-span =
+    right-triangle-hom-span-fixed-domain-codomain
       ( extend-span-fixed-domain-codomain
         ( span-fixed-domain-codomain-span s)
         ( map-domain-hom-span)

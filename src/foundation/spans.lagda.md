@@ -187,6 +187,24 @@ module _
     g ∘ right-map-span-fixed-domain-codomain s
 ```
 
+### Extensions of spans
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  where
+
+  extend-span :
+    (s : span l1 l2 l3)
+    {A' : UU l4} (f : domain-span s → A')
+    {B' : UU l5} (g : codomain-span s → B') →
+    span l4 l5 l3
+  pr1 (extend-span s {A'} f {B'} g) = A'
+  pr1 (pr2 (extend-span s {A'} f {B'} g)) = B'
+  pr2 (pr2 (extend-span s {A'} f {B'} g)) =
+    extend-span-fixed-domain-codomain (span-fixed-domain-codomain-span s) f g
+```
+
 ### The opposite of a span with fixed domain and codomain
 
 ```agda
