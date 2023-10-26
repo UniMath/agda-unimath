@@ -10,6 +10,7 @@ module modal-logic.modal-logic-K where
 open import foundation.inhabited-types
 open import foundation.intersections-subtypes
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
@@ -37,6 +38,15 @@ module _
   modal-logic-K : formulas l i
   modal-logic-K = modal-logic (union-subtype (modal-logic-IK i) (ax-dn i))
 
+  IK-subtype-K : modal-logic-IK i ⊆ modal-logic-K
+  IK-subtype-K =
+    transitive-leq-subtype
+      ( modal-logic-IK i)
+      ( union-subtype (modal-logic-IK i) (ax-dn i))
+      ( modal-logic-K)
+      ( axioms-subset-modal-logic _)
+      ( subtype-union-left (modal-logic-IK i) (ax-dn i))
+
 module _
   {l1 l2 l3 : Level}
   (i : Set l1) (axioms : formulas l2 i)
@@ -44,7 +54,15 @@ module _
   {l4 l5 : Level}
   where
 
-  -- soundness-K : soundness (modal-logic-K i) (decidable-models w l4 i l5)
-  -- soundness-K =
-  --   {!  !}
+  soundness-K : soundness (modal-logic-K i) (decidable-models w l4 i l5)
+  soundness-K =
+    soundness-modal-logic-union-subclass-right-sublevels
+      ( modal-logic-IK i)
+      ( ax-dn i)
+      ( l1 ⊔ l3 ⊔ l4 ⊔ l5)
+      ( all-models w l4 i l5)
+      ( decidable-models w l4 i l5)
+      ( soundness-IK i w l4 l5)
+      ( ax-dn-soundness i w l4 l5)
+      ( all-models-is-biggest-class w l4 i l5 (decidable-models w l4 i l5))
 ```

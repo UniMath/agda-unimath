@@ -74,10 +74,7 @@ module _
   (l3 l4 : Level)
   where
 
-  ax-k-soundness :
-    (a : formula i) →
-    is-in-subtype (ax-k i) a →
-    type-Prop (all-models w l3 i l4 ⊨C a)
+  ax-k-soundness : soundness (ax-k i) (all-models w l3 i l4)
   ax-k-soundness (a₁ ⇒ b ⇒ a₁) refl M in-class x fa _ = fa
   ax-k-soundness (var _) (map-raise ())
   ax-k-soundness ⊥ (map-raise ())
@@ -86,14 +83,12 @@ module _
   ax-k-soundness (_ ⇒ ⊥) (map-raise ())
   ax-k-soundness (_ ⇒ □ _) (map-raise ())
 
-  ax-n-soundness :
-    (a : formula i) →
-    is-in-subtype (ax-n i) a →
-    type-Prop (all-models w l3 i l4 ⊨C a)
+  ax-n-soundness : soundness (ax-n i) (all-models w l3 i l4)
   ax-n-soundness
     (□ (a₁ ⇒ b₁) ⇒ □ a₁ ⇒ □ b₁)
     (refl , refl)
-    M in-class x fab fa y r = fab y r (fa y r)
+    M in-class x fab fa y r =
+      fab y r (fa y r)
   ax-n-soundness (var _) (map-raise ())
   ax-n-soundness ⊥ (map-raise ())
   ax-n-soundness (□ _) (map-raise ())
@@ -113,14 +108,12 @@ module _
   ax-n-soundness (□ (_ ⇒ _) ⇒ □ _ ⇒ ⊥) (map-raise ())
   ax-n-soundness (□ (_ ⇒ _) ⇒ □ _ ⇒ _ ⇒ _) (map-raise ())
 
-  ax-s-soundness :
-    (a : formula i) →
-    is-in-subtype (ax-s i) a →
-    type-Prop (all-models w l3 i l4 ⊨C a)
+  ax-s-soundness : soundness (ax-s i) (all-models w l3 i l4)
   ax-s-soundness
     ((a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c)
     (refl , refl , refl , refl)
-    M in-class x fabc fab fa = fabc fa (fab fa)
+    M in-class x fabc fab fa =
+      fabc fa (fab fa)
   ax-s-soundness (var _) (map-raise ())
   ax-s-soundness ⊥ (map-raise ())
   ax-s-soundness (□ _) (map-raise ())
@@ -140,10 +133,7 @@ module _
   ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ (_ ⇒ _) ⇒ ⊥) (map-raise ())
   ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ (_ ⇒ _) ⇒ □ _) (map-raise ())
 
-  ax-dn-soundness :
-    (a : formula i) →
-    is-in-subtype (ax-dn i) a →
-    type-Prop (decidable-models w l3 i l4 ⊨C a)
+  ax-dn-soundness : soundness (ax-dn i) (decidable-models w l3 i l4)
   ax-dn-soundness (((a ⇒ ⊥) ⇒ ⊥) ⇒ a) refl M is-dec x f with is-dec a x
   ... | inl fa = fa
   ... | inr fna = raise-ex-falso _ (f (λ fa → map-raise (fna fa)))

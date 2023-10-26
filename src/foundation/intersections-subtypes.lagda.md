@@ -14,6 +14,7 @@ open import foundation.identity-types
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
@@ -87,7 +88,7 @@ module _
   intersection-family-of-subtypes {I} P x = Π-Prop I (λ i → P i x)
 ```
 
-##
+## TODO: Change title
 
 ```agda
 -- It's too simple =)
@@ -123,30 +124,31 @@ module _
   intersection-subtype-right-subtype Q-sub-P =
     subtype-both-intersection Q Q-sub-P (refl-leq-subtype Q)
 
+  equiv-intersection-subtype-left :
+    P ⊆ Q → equiv-subtypes (intersection-subtype P Q) P
+  equiv-intersection-subtype-left P-sub-Q =
+    equiv-antisymmetric-leq-subtype
+      ( intersection-subtype P Q)
+      ( P)
+      ( subtype-intersection-left)
+      ( intersection-subtype-left-subtype P-sub-Q)
+
+  equiv-intersection-subtype-right :
+    Q ⊆ P → equiv-subtypes (intersection-subtype P Q) Q
+  equiv-intersection-subtype-right Q-sub-P =
+    equiv-antisymmetric-leq-subtype
+      ( intersection-subtype P Q)
+      ( Q)
+      ( subtype-intersection-right)
+      ( intersection-subtype-right-subtype Q-sub-P)
+
 module _
-  {l1 l2 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l2 X)
+  {l1 : Level} {X : UU l1}
   where
 
-  intersection-subtype-left :
-    P ⊆ Q → intersection-subtype P Q ＝ P
-  intersection-subtype-left P-sub-Q =
-    antisymmetric-leq-subtype _ _
-      ( subtype-intersection-left P Q)
-      ( intersection-subtype-left-subtype P Q P-sub-Q)
-
-  intersection-subtype-right :
-    Q ⊆ P → intersection-subtype P Q ＝ Q
-  intersection-subtype-right Q-sub-P =
-    antisymmetric-leq-subtype _ _
-      ( subtype-intersection-right P Q)
-      ( intersection-subtype-right-subtype P Q Q-sub-P)
-
-module _
-  {l1 l2 : Level} {X : UU l1} (P : subtype l2 X)
-  where
-
-  is-reflexivity-intersection : intersection-subtype P P ＝ P
-  is-reflexivity-intersection =
+  is-reflexivity-intersection :
+    {l2 : Level} (P : subtype l2 X) → intersection-subtype P P ＝ P
+  is-reflexivity-intersection P =
     antisymmetric-leq-subtype _ _
       ( subtype-intersection-left P P)
       ( subtype-both-intersection
@@ -156,26 +158,47 @@ module _
         ( refl-leq-subtype P)
         ( refl-leq-subtype P))
 
-module _
-  {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)
-  where
-
   is-commutative-subtype-intersection :
+    {l2 l3 : Level} (P : subtype l2 X) (Q : subtype l3 X) →
     intersection-subtype P Q ⊆ intersection-subtype Q P
-  is-commutative-subtype-intersection =
+  is-commutative-subtype-intersection P Q =
     subtype-both-intersection Q P
       ( intersection-subtype P Q)
       ( subtype-intersection-right P Q)
       ( subtype-intersection-left P Q)
 
-module _
-  {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)
-  where
-
   is-commutative-intersection :
+    {l2 l3 : Level} (P : subtype l2 X) (Q : subtype l3 X) →
     intersection-subtype P Q ＝ intersection-subtype Q P
-  is-commutative-intersection =
+  is-commutative-intersection P Q =
     antisymmetric-leq-subtype _ _
       ( is-commutative-subtype-intersection P Q)
       ( is-commutative-subtype-intersection Q P)
+
+  intersection-subtype-left-sublevels :
+    {l2 : Level} (l3 : Level) (P : subtype (l2 ⊔ l3) X) (Q : subtype l2 X) →
+    P ⊆ Q → intersection-subtype P Q ＝ P
+  intersection-subtype-left-sublevels _ P Q P-sub-Q =
+    antisymmetric-leq-subtype _ _
+      ( subtype-intersection-left P Q)
+      ( intersection-subtype-left-subtype P Q P-sub-Q)
+
+  intersection-subtype-right-sublevels :
+    {l2 : Level} (l3 : Level) (P : subtype l2 X) (Q : subtype (l2 ⊔ l3) X) →
+    Q ⊆ P → intersection-subtype P Q ＝ Q
+  intersection-subtype-right-sublevels l3 P Q Q-sub-P =
+    tr
+      ( _＝ Q)
+      ( is-commutative-intersection Q P)
+      ( intersection-subtype-left-sublevels l3 Q P Q-sub-P)
+
+  intersection-subtype-left :
+    {l2 : Level} (P Q : subtype l2 X) →
+    P ⊆ Q → intersection-subtype P Q ＝ P
+  intersection-subtype-left = intersection-subtype-left-sublevels lzero
+
+  intersection-subtype-right :
+    {l2 : Level} (P Q : subtype l2 X) →
+    Q ⊆ P → intersection-subtype P Q ＝ Q
+  intersection-subtype-right = intersection-subtype-right-sublevels lzero
 ```

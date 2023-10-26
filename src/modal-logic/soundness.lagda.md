@@ -104,18 +104,49 @@ module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {i : Set l1} (ax₁ : formulas l2 i) (ax₂ : formulas l3 i)
   {w : Inhabited-Type l4}
-  (C₁ : model-class w l5 i l6 l7) (C₂ : model-class w l5 i l6 l7)
-  (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂)
   where
 
-  soundness-modal-logic-union-subclass-left :
+  soundness-modal-logic-union-subclass-left-sublevels :
+    (l8 : Level)
+    (C₁ : model-class w l5 i l6 (l7 ⊔ l8)) (C₂ : model-class w l5 i l6 l7)
+    (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
     C₁ ⊆ C₂ →
     soundness (modal-logic (union-subtype ax₁ ax₂)) C₁
-  soundness-modal-logic-union-subclass-left C₁-sub-C₂ =
-    tr
-      ( soundness (modal-logic (union-subtype ax₁ ax₂)))
-      ( intersection-subtype-left C₁ C₂ C₁-sub-C₂)
-      ( soundness-modal-logic-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
+  soundness-modal-logic-union-subclass-left-sublevels
+    l8 C₁ C₂ sound₁ sound₂ C₁-sub-C₂ =
+      tr
+        ( soundness (modal-logic (union-subtype ax₁ ax₂)))
+        ( intersection-subtype-left-sublevels l8 C₁ C₂ C₁-sub-C₂)
+        ( soundness-modal-logic-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
+
+  soundness-modal-logic-union-subclass-right-sublevels :
+    (l8 : Level)
+    (C₁ : model-class w l5 i l6 l7) (C₂ : model-class w l5 i l6 (l7 ⊔ l8))
+    (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
+    C₂ ⊆ C₁ →
+    soundness (modal-logic (union-subtype ax₁ ax₂)) C₂
+  soundness-modal-logic-union-subclass-right-sublevels
+    l8 C₁ C₂ sound₁ sound₂ C₂-sub-C₁ =
+      tr
+        ( soundness (modal-logic (union-subtype ax₁ ax₂)))
+        ( intersection-subtype-right-sublevels l8 C₁ C₂ C₂-sub-C₁)
+        ( soundness-modal-logic-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
+
+  soundness-modal-logic-union-subclass-left :
+    (C₁ : model-class w l5 i l6 l7) (C₂ : model-class w l5 i l6 l7)
+    (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
+    C₁ ⊆ C₂ →
+    soundness (modal-logic (union-subtype ax₁ ax₂)) C₁
+  soundness-modal-logic-union-subclass-left =
+    soundness-modal-logic-union-subclass-left-sublevels lzero
+
+  soundness-modal-logic-union-subclass-right :
+    (C₁ : model-class w l5 i l6 l7) (C₂ : model-class w l5 i l6 l7)
+    (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
+    C₂ ⊆ C₁ →
+    soundness (modal-logic (union-subtype ax₁ ax₂)) C₂
+  soundness-modal-logic-union-subclass-right =
+    soundness-modal-logic-union-subclass-right-sublevels lzero
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}

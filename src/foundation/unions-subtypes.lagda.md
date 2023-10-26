@@ -88,3 +88,17 @@ module _
       ( union-family-of-subtypes B x)
       ( λ (i , q) → unit-trunc-Prop (i , H i x q))
 ```
+
+## TODO: Change title
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)
+  where
+
+  subtype-union-left : P ⊆ union-subtype P Q
+  subtype-union-left x = inl-disj-Prop (P x) (Q x)
+
+  subtype-union-right : Q ⊆ union-subtype P Q
+  subtype-union-right x = inr-disj-Prop (P x) (Q x)
+```

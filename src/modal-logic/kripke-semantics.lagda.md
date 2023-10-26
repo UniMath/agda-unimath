@@ -73,6 +73,10 @@ module _
   all-models : model-class lzero
   all-models _ = unit-Prop
 
+  all-models-is-biggest-class :
+    {l : Level} (C : model-class l) → C ⊆ all-models
+  all-models-is-biggest-class _ _ _ = star
+
 module _
   {l1 l2 l3 l4 : Level} {w : Inhabited-Type l1} {i : Set l3}
   where

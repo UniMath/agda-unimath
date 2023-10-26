@@ -143,9 +143,13 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
+  equiv-subtypes :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
+  equiv-subtypes P Q = (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
+
   equiv-antisymmetric-leq-subtype :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
-    (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
+    equiv-subtypes P Q
   equiv-antisymmetric-leq-subtype P Q H K x =
     equiv-iff-is-prop
       ( is-prop-is-in-subtype P x)
