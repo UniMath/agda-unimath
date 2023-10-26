@@ -48,6 +48,8 @@ suppress_processing = [
 [preprocessor.concepts]
 command = "python3 ./scripts/preprocessor_concepts.py"
 output-file = "docs/concept_index.json"
+mage-template = "https://katjabercic.github.io/MaGE/?id={wikidata_id}"
+wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
 
 [output.linkcheck]
 follow-web-links = false
