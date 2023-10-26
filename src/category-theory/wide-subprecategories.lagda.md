@@ -7,7 +7,6 @@ module category-theory.wide-subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
@@ -15,14 +14,14 @@ open import category-theory.maps-precategories
 open import category-theory.precategories
 open import category-theory.subprecategories
 
-open import foundation.embeddings
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.iterated-dependent-product-types
 open import foundation.dependent-pair-types
-open import foundation.sets
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -174,7 +173,8 @@ module _
   obj-Wide-Subprecategory : UU l1
   obj-Wide-Subprecategory = obj-Precategory C
 
-  inclusion-obj-Wide-Subprecategory : obj-Wide-Subprecategory → obj-Precategory C
+  inclusion-obj-Wide-Subprecategory :
+    obj-Wide-Subprecategory → obj-Precategory C
   inclusion-obj-Wide-Subprecategory = id
 ```
 
@@ -271,11 +271,12 @@ Wide subprecategories are subprecategories:
   pr2 is-subprecategory-Wide-Subprecategory x y z g f _ _ _ =
     is-closed-under-composition-Wide-Subprecategory x y z g f
 
-
   subprecategory-Wide-Subprecategory : Subprecategory lzero l3 C
   pr1 subprecategory-Wide-Subprecategory = subtype-obj-Wide-Subprecategory C P
-  pr1 (pr2 subprecategory-Wide-Subprecategory) = subtype-hom-subprecategory-Wide-Subprecategory
-  pr2 (pr2 subprecategory-Wide-Subprecategory) = is-subprecategory-Wide-Subprecategory
+  pr1 (pr2 subprecategory-Wide-Subprecategory) =
+    subtype-hom-subprecategory-Wide-Subprecategory
+  pr2 (pr2 subprecategory-Wide-Subprecategory) =
+    is-subprecategory-Wide-Subprecategory
 
   is-wide-Wide-Subprecategory :
     is-wide-Subprecategory C (subprecategory-Wide-Subprecategory)
@@ -299,8 +300,10 @@ module _
       ( subtype-hom-Wide-Subprecategory C P x y)
 
   is-set-hom-Wide-Subprecategory :
-    (x y : obj-Wide-Subprecategory C P) → is-set (hom-Wide-Subprecategory C P x y)
-  is-set-hom-Wide-Subprecategory x y = is-set-type-Set (hom-set-Wide-Subprecategory x y)
+    (x y : obj-Wide-Subprecategory C P) →
+    is-set (hom-Wide-Subprecategory C P x y)
+  is-set-hom-Wide-Subprecategory x y =
+    is-set-type-Set (hom-set-Wide-Subprecategory x y)
 
   id-hom-Wide-Subprecategory :
     {x : obj-Wide-Subprecategory C P} → hom-Wide-Subprecategory C P x x
@@ -363,8 +366,10 @@ module _
   associative-composition-operation-Wide-Subprecategory :
     associative-composition-operation-binary-family-Set
       ( hom-set-Wide-Subprecategory)
-  pr1 associative-composition-operation-Wide-Subprecategory = comp-hom-Wide-Subprecategory
-  pr2 associative-composition-operation-Wide-Subprecategory = associative-comp-hom-Wide-Subprecategory
+  pr1 associative-composition-operation-Wide-Subprecategory =
+    comp-hom-Wide-Subprecategory
+  pr2 associative-composition-operation-Wide-Subprecategory =
+    associative-comp-hom-Wide-Subprecategory
 
   is-unital-composition-operation-Wide-Subprecategory :
     is-unital-composition-operation-binary-family-Set
@@ -374,7 +379,8 @@ module _
     id-hom-Wide-Subprecategory
   pr1 (pr2 is-unital-composition-operation-Wide-Subprecategory) =
     left-unit-law-comp-hom-Wide-Subprecategory
-  pr2 (pr2 is-unital-composition-operation-Wide-Subprecategory) = right-unit-law-comp-hom-Wide-Subprecategory
+  pr2 (pr2 is-unital-composition-operation-Wide-Subprecategory) =
+    right-unit-law-comp-hom-Wide-Subprecategory
 
   precategory-Wide-Subprecategory : Precategory l1 (l2 ⊔ l3)
   pr1 precategory-Wide-Subprecategory = obj-Wide-Subprecategory C P
