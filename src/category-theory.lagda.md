@@ -42,6 +42,8 @@ open import category-theory.epimorphisms-in-large-precategories public
 open import category-theory.equivalences-of-categories public
 open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
+open import category-theory.essential-fibers-of-functors-precategories public
+open import category-theory.essentially-surjective-functors-precategories public
 open import category-theory.exponential-objects-precategories public
 open import category-theory.faithful-functors-precategories public
 open import category-theory.faithful-maps-precategories public
@@ -130,6 +132,7 @@ open import category-theory.set-magmoids public
 open import category-theory.sieves-in-categories public
 open import category-theory.simplex-category public
 open import category-theory.slice-precategories public
+open import category-theory.split-essentially-surjective-functors-precategories public
 open import category-theory.strict-categories public
 open import category-theory.structure-equivalences-set-magmoids public
 open import category-theory.subcategories public

@@ -1,7 +1,7 @@
 # Essential fibers of a functor between precategories
 
 ```agda
-module category-theory.essential-fiber-functor-precategories where
+module category-theory.essential-fibers-of-functors-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -51,7 +51,7 @@ module _
 
 ## See also
 
-- [Essential images of functors between precategories](category-theory.essential-image-functor-precategories.md)
+- [Essential images of functors between precategories](category-theory.essential-images-of-functors-precategories.md)
 - [Essentially surjective functors between precategories](category-theory.essentially-surjective-functor-precategories.md)
 - [Split essentially surjective functors between precategories](category-theory.split.essentially-surjective-functor-precategories.md)
 

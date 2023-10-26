@@ -223,3 +223,5 @@ This remains to be written down formally.
   at 1lab
 - [pseudomonic functor](https://ncatlab.org/nlab/show/pseudomonic+functor) at
   nlab
+
+A wikidata identifier was not available for this concept.

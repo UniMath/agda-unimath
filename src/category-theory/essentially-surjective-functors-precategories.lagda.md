@@ -106,12 +106,20 @@ module _
 
 ### Precomposing by essentially surjective functors define fully faithful functors
 
-This remains to be shown.
+This remains to be shown. This is Lemma 8.2 of _Univalent Categories and the
+Rezk completion_.
 
 ## See also
 
-- [Essential image of a functor between precategories](category-theory.essential-image-functor-precategories.md)
+- [Essential image of a functor between precategories](category-theory.essential-images-of-functors-precategories.md)
 - [Split essentially surjective functor between precategories](category-theory.split-essential-surjective-functor-precategories.md)
+
+## References
+
+1. Benedikt Ahrens and Krzysztof Kapulkin and Michael Shulman, _Univalent
+   Categories and the Rezk completion_ (2015)
+   ([arXiv:1303.0584](https://arxiv.org/abs/1303.0584),
+   [DOI:10.1017/S0960129514000486](https://doi.org/10.1017/S0960129514000486))
 
 ## External links
 
