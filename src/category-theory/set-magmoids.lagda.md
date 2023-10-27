@@ -29,12 +29,19 @@ and are in one sense the "oidification" of [magmas](structured-types.magmas.md)
 in [sets](foundation-core.sets.md). We call elements of the indexing type
 **objects**, and elements of the set-family **morphisms** or **homomorphisms**.
 
+These objects serve as our starting point in the study of the
+[stucture](foundation.structure.md) of
+[categories](category-theory.categories.md). Indeed, categories form a
+[subtype](foundation-core.subtypes.md) of set-magmoids, although
+structure-preserving maps of set-magmoids do not automatically preserve
+identity-morphisms.
+
 Set-magmoids are commonly referred to as _magmoids_ in the literature, but we
 use the "set-" prefix to make clear its relation to magmas. Set-magmoids should
 not be confused with _strict_ magmoids, which would be set-magmoids whose
 objects form a set.
 
-## Definition
+## Definitions
 
 ### The type of set-magmoids
 
@@ -91,8 +98,7 @@ total-hom-Set-Magmoid M =
 
 obj-total-hom-Set-Magmoid :
   {l1 l2 : Level} (M : Set-Magmoid l1 l2) →
-  total-hom-Set-Magmoid M →
-  obj-Set-Magmoid M × obj-Set-Magmoid M
+  total-hom-Set-Magmoid M → obj-Set-Magmoid M × obj-Set-Magmoid M
 pr1 (obj-total-hom-Set-Magmoid M (x , y , f)) = x
 pr2 (obj-total-hom-Set-Magmoid M (x , y , f)) = y
 ```
@@ -205,13 +211,9 @@ module _
   total-hom-truncated-type-is-trunc-obj-Set-Magmoid :
     is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Set-Magmoid M) →
     Truncated-Type (l1 ⊔ l2) (succ-𝕋 (succ-𝕋 k))
-  pr1
-    ( total-hom-truncated-type-is-trunc-obj-Set-Magmoid
-      is-trunc-obj-M) =
+  pr1 (total-hom-truncated-type-is-trunc-obj-Set-Magmoid is-trunc-obj-M) =
     total-hom-Set-Magmoid M
-  pr2
-    ( total-hom-truncated-type-is-trunc-obj-Set-Magmoid
-      is-trunc-obj-M) =
+  pr2 (total-hom-truncated-type-is-trunc-obj-Set-Magmoid is-trunc-obj-M) =
     is-trunc-total-hom-is-trunc-obj-Set-Magmoid is-trunc-obj-M
 ```
 
@@ -221,6 +223,10 @@ module _
   associative set-magmoids.
 - [Precategories](category-theory.precategories.md) are associative and unital
   set-magmoids.
+- [Categories](category-theory.categories.md) are univalent, associative and
+  unital set-magmoids.
+- [Strict categories](category-theory.categories.md) are associative and unital
+  set-magmoids whose objects form a set.
 
 ## External links
 
