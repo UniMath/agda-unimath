@@ -504,13 +504,11 @@ module _
 
   equiv-trunc-Σ-Set :
     type-trunc-Set (Σ A B) ≃ type-trunc-Set (Σ A (λ x → type-trunc-Set (B x)))
-  equiv-trunc-Σ-Set =
-    pr1 (center trunc-Σ-Set)
+  equiv-trunc-Σ-Set = pr1 (center trunc-Σ-Set)
 
   map-equiv-trunc-Σ-Set :
     type-trunc-Set (Σ A B) → type-trunc-Set (Σ A (λ x → type-trunc-Set (B x)))
-  map-equiv-trunc-Σ-Set =
-    map-equiv equiv-trunc-Σ-Set
+  map-equiv-trunc-Σ-Set = map-equiv equiv-trunc-Σ-Set
 ```
 
 ### `trunc-Set` distributes over products
@@ -553,6 +551,11 @@ module _
     type-trunc-Set (A × B) → type-trunc-Set A × type-trunc-Set B
   map-equiv-distributive-trunc-prod-Set =
     map-equiv equiv-distributive-trunc-prod-Set
+
+  map-inv-equiv-distributive-trunc-prod-Set :
+    type-trunc-Set A × type-trunc-Set B → type-trunc-Set (A × B)
+  map-inv-equiv-distributive-trunc-prod-Set =
+    map-inv-equiv equiv-distributive-trunc-prod-Set
 
   triangle-distributive-trunc-prod-Set :
     ( map-equiv-distributive-trunc-prod-Set ∘ unit-trunc-Set) ~
