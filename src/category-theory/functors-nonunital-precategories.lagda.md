@@ -184,13 +184,15 @@ module _
     hom-functor-Nonunital-Precategory B C G ∘
     hom-functor-Nonunital-Precategory A B F
 
-  map-comp-functor-precategory : map-Nonunital-Precategory A C
-  pr1 map-comp-functor-precategory = obj-comp-functor-Nonunital-Precategory
-  pr2 map-comp-functor-precategory = hom-comp-functor-Nonunital-Precategory
+  map-comp-functor-Nonunital-Precategory : map-Nonunital-Precategory A C
+  pr1 map-comp-functor-Nonunital-Precategory =
+    obj-comp-functor-Nonunital-Precategory
+  pr2 map-comp-functor-Nonunital-Precategory =
+    hom-comp-functor-Nonunital-Precategory
 
   preserves-comp-comp-functor-Nonunital-Precategory :
     preserves-comp-hom-map-Nonunital-Precategory A C
-      ( map-comp-functor-precategory)
+      ( map-comp-functor-Nonunital-Precategory)
   preserves-comp-comp-functor-Nonunital-Precategory g f =
     ( ap
       ( hom-functor-Nonunital-Precategory B C G)

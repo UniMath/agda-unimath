@@ -181,12 +181,12 @@ module _
   hom-comp-functor-Precategory =
     hom-functor-Precategory B C G ∘ hom-functor-Precategory A B F
 
-  map-comp-functor-precategory : map-Precategory A C
-  pr1 map-comp-functor-precategory = obj-comp-functor-Precategory
-  pr2 map-comp-functor-precategory = hom-comp-functor-Precategory
+  map-comp-functor-Precategory : map-Precategory A C
+  pr1 map-comp-functor-Precategory = obj-comp-functor-Precategory
+  pr2 map-comp-functor-Precategory = hom-comp-functor-Precategory
 
   preserves-comp-comp-functor-Precategory :
-    preserves-comp-hom-map-Precategory A C map-comp-functor-precategory
+    preserves-comp-hom-map-Precategory A C map-comp-functor-Precategory
   preserves-comp-comp-functor-Precategory g f =
     ( ap
       ( hom-functor-Precategory B C G)
@@ -196,7 +196,7 @@ module _
       ( hom-functor-Precategory A B F f))
 
   preserves-id-comp-functor-Precategory :
-    preserves-id-hom-map-Precategory A C map-comp-functor-precategory
+    preserves-id-hom-map-Precategory A C map-comp-functor-Precategory
   preserves-id-comp-functor-Precategory x =
     ( ap
       ( hom-functor-Precategory B C G)

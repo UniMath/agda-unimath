@@ -8,10 +8,16 @@ module category-theory.functors-set-magmoids where
 
 ```agda
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.maps-set-magmoids
 open import category-theory.set-magmoids
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.embeddings
+open import foundation.homotopies
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
@@ -85,32 +91,37 @@ module _
             hom-Set-Magmoid A x y → hom-Set-Magmoid B (F₀ x) (F₀ y))
           ( preserves-comp-hom-map-Set-Magmoid A B F₀))
 
-  obj-functor-Set-Magmoid :
-    functor-Set-Magmoid →
-    obj-Set-Magmoid A →
-    obj-Set-Magmoid B
-  obj-functor-Set-Magmoid = pr1
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Set-Magmoid l1 l2) (B : Set-Magmoid l3 l4)
+  (F : functor-Set-Magmoid A B)
+  where
+
+  obj-functor-Set-Magmoid : obj-Set-Magmoid A → obj-Set-Magmoid B
+  obj-functor-Set-Magmoid = pr1 F
 
   hom-functor-Set-Magmoid :
-    (F : functor-Set-Magmoid) →
     {x y : obj-Set-Magmoid A} →
     (f : hom-Set-Magmoid A x y) →
     hom-Set-Magmoid B
-      ( obj-functor-Set-Magmoid F x)
-      ( obj-functor-Set-Magmoid F y)
-  hom-functor-Set-Magmoid F = pr1 (pr2 F)
+      ( obj-functor-Set-Magmoid x)
+      ( obj-functor-Set-Magmoid y)
+  hom-functor-Set-Magmoid = pr1 (pr2 F)
 
-  preserves-comp-hom-functor-Set-Magmoid :
-    (F : functor-Set-Magmoid)
+  map-functor-Set-Magmoid : map-Set-Magmoid A B
+  pr1 map-functor-Set-Magmoid = obj-functor-Set-Magmoid
+  pr2 map-functor-Set-Magmoid = hom-functor-Set-Magmoid
+
+  preserves-comp-functor-Set-Magmoid :
     {x y z : obj-Set-Magmoid A}
     (g : hom-Set-Magmoid A y z)
     (f : hom-Set-Magmoid A x y) →
-    ( hom-functor-Set-Magmoid F
+    ( hom-functor-Set-Magmoid
       ( comp-hom-Set-Magmoid A g f)) ＝
     ( comp-hom-Set-Magmoid B
-      ( hom-functor-Set-Magmoid F g)
-      ( hom-functor-Set-Magmoid F f))
-  preserves-comp-hom-functor-Set-Magmoid = pr2 ∘ pr2
+      ( hom-functor-Set-Magmoid g)
+      ( hom-functor-Set-Magmoid f))
+  preserves-comp-functor-Set-Magmoid = pr2 (pr2 F)
 ```
 
 ### The identity morphism of composition operations on binary families of sets
@@ -157,13 +168,14 @@ module _
     hom-functor-Set-Magmoid B C G ∘
     hom-functor-Set-Magmoid A B F
 
-  -- map-comp-functor-precategory : map-Set-Magmoid A C
-  -- pr1 map-comp-functor-precategory = obj-comp-functor-Set-Magmoid
-  -- pr2 map-comp-functor-precategory = hom-comp-functor-Set-Magmoid
+  map-comp-functor-Set-Magmoid : map-Set-Magmoid A C
+  pr1 map-comp-functor-Set-Magmoid = obj-comp-functor-Set-Magmoid
+  pr2 map-comp-functor-Set-Magmoid = hom-comp-functor-Set-Magmoid
 
   preserves-comp-comp-functor-Set-Magmoid :
     preserves-comp-hom-map-Set-Magmoid A C
-      ( map-comp-functor-precategory)
+      obj-comp-functor-Set-Magmoid
+      hom-comp-functor-Set-Magmoid
   preserves-comp-comp-functor-Set-Magmoid g f =
     ( ap
       ( hom-functor-Set-Magmoid B C G)
@@ -200,18 +212,18 @@ module _
     ( F ＝ G) ≃
     ( map-functor-Set-Magmoid C D F ＝
       map-functor-Set-Magmoid C D G)
-  equiv-eq-map-eq-functor-Set-Magmoid =
-    equiv-ap-emb
-      ( comp-emb
-        ( emb-subtype (preserves-comp-hom-prop-map-Set-Magmoid C D))
-        ( emb-equiv
-          ( inv-associative-Σ
-            ( obj-Set-Magmoid C → obj-Set-Magmoid D)
-            ( λ F₀ →
-              { x y : obj-Set-Magmoid C} →
-              hom-Set-Magmoid C x y →
-              hom-Set-Magmoid D (F₀ x) (F₀ y))
-            ( pr1 ∘ preserves-comp-hom-prop-map-Set-Magmoid C D))))
+  equiv-eq-map-eq-functor-Set-Magmoid = {!   !}
+    -- equiv-ap-emb
+    --   ( comp-emb
+    --     ( emb-subtype (preserves-comp-hom-prop-map-Set-Magmoid C D _))
+    --     ( emb-equiv
+    --       ( inv-associative-Σ
+    --         ( obj-Set-Magmoid C → obj-Set-Magmoid D)
+    --         ( λ F₀ →
+    --           { x y : obj-Set-Magmoid C} →
+    --           hom-Set-Magmoid C x y →
+    --           hom-Set-Magmoid D (F₀ x) (F₀ y))
+    --         ( pr1 ∘ preserves-comp-hom-prop-map-Set-Magmoid C D))))
 
   eq-map-eq-functor-Set-Magmoid :
     ( F ＝ G) →
