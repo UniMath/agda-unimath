@@ -28,6 +28,7 @@ open import category-theory.commuting-squares-of-morphisms-in-precategories publ
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
 open import category-theory.composition-operations-on-binary-families-of-sets public
 open import category-theory.conservative-functors-precategories public
+open import category-theory.copresheaf-categories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.cores-precategories public
 open import category-theory.dependent-products-of-categories public
