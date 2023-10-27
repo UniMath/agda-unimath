@@ -186,10 +186,10 @@ module _
   (is-faithful-F : is-faithful-functor-Precategory C D F)
   where
 
-  is-faithful-iso-is-faithful-functor-Precategory :
+  is-faithful-on-isos-is-faithful-functor-Precategory :
     (x y : obj-Precategory C) →
     is-emb (preserves-iso-functor-Precategory C D F {x} {y})
-  is-faithful-iso-is-faithful-functor-Precategory x y =
+  is-faithful-on-isos-is-faithful-functor-Precategory x y =
     is-emb-right-factor _ _
       ( is-emb-inclusion-subtype (is-iso-prop-Precategory D))
       ( is-emb-comp _ _

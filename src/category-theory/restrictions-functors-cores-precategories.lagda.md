@@ -162,7 +162,7 @@ module _
       ( core-precategory-Precategory D)
       ( functor-core-Precategory C D F)
   is-faithful-functor-core-is-faithful-functor-Precategory =
-    is-faithful-iso-is-faithful-functor-Precategory C D
+    is-faithful-on-isos-is-faithful-functor-Precategory C D
 ```
 
 ### Fully faithful functors restrict to fully faithful functors on the core

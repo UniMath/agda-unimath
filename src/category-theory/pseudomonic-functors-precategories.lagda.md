@@ -145,7 +145,7 @@ module _
   is-equiv-preserves-iso-is-pseudomonic-functor-Precategory =
     is-equiv-is-emb-is-surjective
       ( pr2 is-pseudomonic-F x y)
-      ( is-faithful-iso-is-faithful-functor-Precategory
+      ( is-faithful-on-isos-is-faithful-functor-Precategory
           C D F (pr1 is-pseudomonic-F) x y)
 
   equiv-iso-is-pseudomonic-functor-Precategory :

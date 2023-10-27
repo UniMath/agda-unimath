@@ -29,9 +29,8 @@ open import foundation.universe-levels
 A [functor](category-theory.functors-precategories.md) `F : C → D` between
 [precategories](category-theory.precategories.md) is **essentially injective**
 if every pair of objects that are mapped to
-[isomorphic](category-theory.isomorphisms-in-precategories.md) objects are
-themselves isomorphic. In particular, essentially injective functors are full on
-isomorphism-[sets](foundation-core.sets.md).
+[isomorphic](category-theory.isomorphisms-in-precategories.md) objects in `D`
+are isomorphic in `D`.
 
 ## Definitions
 

@@ -24,9 +24,9 @@ open import foundation.universe-levels
 
 A [functor](category-theory.functors-precategories.md) `F : C → D` between
 [precategories](category-theory.precategories.md) is **essentially surjective**
-if there for every `y : D`
-[merely exists](foundation.existential-quantification.md) an `x : C` such that
-`F x ≅ y`.
+if there for every object `y : D`
+[merely exists](foundation.existential-quantification.md) an object `x : C` such
+that `F x ≅ y`.
 
 ## Definitions
 
