@@ -33,6 +33,7 @@ module _
   {l : Level} (i : Set l)
   where
 
+-- TODO: It's not Intuitionistic K
   modal-logic-IK : formulas l i
   modal-logic-IK =
     modal-logic (union-subtype (ax-k i) (union-subtype (ax-s i) (ax-n i)))
@@ -40,7 +41,7 @@ module _
 module _
   {l1 l2 : Level}
   (i : Set l1)
-  (w : Inhabited-Type l2)
+  (w : UU l2)
   (l3 l4 : Level)
   where
 

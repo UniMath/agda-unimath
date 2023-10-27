@@ -70,7 +70,7 @@ module _
 module _
   {l1 l2 : Level}
   (i : Set l1)
-  (w : Inhabited-Type l2)
+  (w : UU l2)
   (l3 l4 : Level)
   where
 

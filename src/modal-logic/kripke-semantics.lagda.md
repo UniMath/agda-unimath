@@ -41,31 +41,31 @@ TODO
 
 ```agda
 module _
-  {l1 : Level} (w : Inhabited-Type l1) (l2 : Level)
+  {l1 : Level} (w : UU l1) (l2 : Level)
   where
 
-  record kripke-frame : UU (l1 ⊔ lsuc l2) where
-    constructor frame
-    field
-      frame-relation : Relation-Prop l2 (type-Inhabited-Type w)
-  open kripke-frame public
+  kripke-frame : UU (l1 ⊔ lsuc l2)
+  kripke-frame = is-inhabited w × Relation-Prop l2 w
 
 module _
-  {l1 : Level} (w : Inhabited-Type l1)
+  {l1 l2 : Level} {w : UU l1}
+  where
+
+  frame-inhabited : kripke-frame w l2 → is-inhabited w
+  frame-inhabited = pr1
+
+  frame-relation : kripke-frame w l2 → Relation l2 w
+  frame-relation = type-Relation-Prop ∘ pr2
+
+module _
+  {l1 : Level} (w : UU l1)
   (l2 : Level)
   {l3 : Level} (i : Set l3)
   (l4 : Level)
   where
 
-  record kripke-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4) where
-    constructor model
-    field
-      model-frame : kripke-frame w l2
-      model-valuate : type-Set i → type-Inhabited-Type w → Prop l4
-  open kripke-model public
-
-  finite-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
-  finite-model = kripke-model × is-finite (type-Inhabited-Type w)
+  kripke-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
+  kripke-model = (kripke-frame w l2) × (type-Set i → w → Prop l4)
 
   model-class : (l5 : Level) → UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5)
   model-class l5 = subtype l5 kripke-model
@@ -78,11 +78,18 @@ module _
   all-models-is-biggest-class _ _ _ = star
 
 module _
-  {l1 l2 l3 l4 : Level} {w : Inhabited-Type l1} {i : Set l3}
+  {l1 l2 l3 l4 : Level} {w : UU l1} {i : Set l3}
   where
 
-  model-relation : kripke-model w l2 i l4 → Relation l2 (type-Inhabited-Type w)
-  model-relation = type-Relation-Prop ∘ frame-relation ∘ model-frame
+  model-frame : kripke-model w l2 i l4 → kripke-frame w l2
+  model-frame = pr1
+
+  model-valuate :
+    kripke-model w l2 i l4 → type-Set i → w → Prop l4
+  model-valuate = pr2
+
+  model-relation : kripke-model w l2 i l4 → Relation l2 w
+  model-relation = frame-relation ∘ model-frame
 
   private
     l = l1 ⊔ l2 ⊔ l4
@@ -92,20 +99,20 @@ module _
   infix 5 _⊨M_
   infix 5 _⊭M_
 
-  _⊨_ : kripke-model w l2 i l4 × (type-Inhabited-Type w) → formula i → Prop l
+  _⊨_ : kripke-model w l2 i l4 × w → formula i → Prop l
   (M , x) ⊨ var n = raise-Prop l (model-valuate M n x)
   (M , x) ⊨ ⊥ = raise-empty-Prop l
   (M , x) ⊨ a ⇒ b = implication-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
   (M , x) ⊨ □ a =
     Π-Prop
-      ( type-Inhabited-Type w)
+      ( w)
       ( λ y → function-Prop (model-relation M x y) ((M , y) ⊨ a))
 
-  _⊭_ : kripke-model w l2 i l4 × (type-Inhabited-Type w) → formula i → Prop l
+  _⊭_ : kripke-model w l2 i l4 × w → formula i → Prop l
   (M , x) ⊭ a = neg-Prop ((M , x) ⊨ a)
 
   _⊨M_ : kripke-model w l2 i l4 → formula i → Prop l
-  M ⊨M a = Π-Prop (type-Inhabited-Type w) (λ x → (M , x) ⊨ a)
+  M ⊨M a = Π-Prop w (λ x → (M , x) ⊨ a)
 
   _⊭M_ : kripke-model w l2 i l4 → formula i → Prop l
   M ⊭M a = neg-Prop (M ⊨M a)
@@ -114,7 +121,7 @@ module _
   decidable-class M = Π-Prop (formula i) (λ a → M ⊨M a)
 
 module _
-  {l1 l2 l3 l4 l5 : Level} {w : Inhabited-Type l1} {i : Set l3}
+  {l1 l2 l3 l4 l5 : Level} {w : UU l1} {i : Set l3}
   where
 
   _⊨C_ :
@@ -132,7 +139,7 @@ module _
   class-modal-logic C a = C ⊨C a
 
 module _
-  {l1 : Level} (w : Inhabited-Type l1)
+  {l1 : Level} (w : UU l1)
   (l2 : Level)
   {l3 : Level} (i : Set l3)
   (l4 : Level)
@@ -142,33 +149,5 @@ module _
   decidable-models M =
     Π-Prop
       ( formula i)
-      ( λ a →
-        ( Π-Prop
-          ( type-Inhabited-Type w)
-          ( λ x → is-decidable-Prop ((M , x) ⊨ a))))
-
-module _
-  {l1 l2 l3 l4 : Level} {w : Inhabited-Type l1} {i : Set l3}
-  where
-
-  private
-    l = l1 ⊔ l2 ⊔ l3 ⊔ l4
-
-  is-decidable-model-Prop : kripke-model w l2 i l4 → Prop l
-  is-decidable-model-Prop M =
-    Π-Prop
-      ( formula i)
-      ( λ a →
-        Π-Prop (type-Inhabited-Type w) (λ x → is-decidable-Prop ((M , x) ⊨ a)))
-
-  is-decidable-model : kripke-model w l2 i l4 → UU l
-  is-decidable-model = type-Prop ∘ is-decidable-model-Prop
-
-decidable-model :
-  {l1 : Level} (w : Inhabited-Type l1)
-  (l2 : Level)
-  {l3 : Level} (i : Set l3)
-  (l4 : Level) →
-  UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
-decidable-model w l2 i l4 = Σ (kripke-model w l2 i l4) is-decidable-model
+      ( λ a → (Π-Prop w (λ x → is-decidable-Prop ((M , x) ⊨ a))))
 ```

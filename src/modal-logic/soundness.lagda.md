@@ -37,7 +37,7 @@ TODO
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {i : Set l1} (logic : formulas l2 i)
-  {w : Inhabited-Type l3} (C : model-class w l4 i l5 l6)
+  {w : UU l3} (C : model-class w l4 i l5 l6)
   where
 
   soundness : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
@@ -46,7 +46,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {i : Set l1} {axioms : formulas l2 i}
-  {w : Inhabited-Type l3} (C : model-class w l4 i l5 l6)
+  {w : UU l3} (C : model-class w l4 i l5 l6)
   where
 
   soundness-axioms :
@@ -71,7 +71,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   {i : Set l1} (ax₁ : formulas l2 i) (ax₂ : formulas l3 i)
-  {w : Inhabited-Type l4}
+  {w : UU l4}
   (C₁ : model-class w l5 i l6 l7) (C₂ : model-class w l5 i l6 l8)
   (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂)
   where
@@ -103,7 +103,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {i : Set l1} (ax₁ : formulas l2 i) (ax₂ : formulas l3 i)
-  {w : Inhabited-Type l4}
+  {w : UU l4}
   where
 
   soundness-modal-logic-union-subclass-left-sublevels :
@@ -151,7 +151,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {i : Set l1} (ax₁ : formulas l2 i) (ax₂ : formulas l3 i)
-  {w : Inhabited-Type l4}
+  {w : UU l4}
   (C : model-class w l5 i l6 l7)
   (sound₁ : soundness ax₁ C) (sound₂ : soundness ax₂ C)
   where

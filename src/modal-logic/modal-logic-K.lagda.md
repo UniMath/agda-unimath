@@ -50,7 +50,7 @@ module _
 module _
   {l1 l2 l3 : Level}
   (i : Set l1) (axioms : formulas l2 i)
-  (w : Inhabited-Type l3)
+  (w : UU l3)
   {l4 l5 : Level}
   where
 
