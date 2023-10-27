@@ -8,10 +8,16 @@ module foundation.spans where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-duality
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -135,8 +141,36 @@ module _
 
 ### Spans are equivalent to binary relations
 
-This remains to be shown.
-[#767](https://github.com/UniMath/agda-unimath/issues/767)
+```agda
+module _
+  { l1 l2 l : Level} (A : UU l1) (B : UU l2)
+  where
+
+  equiv-span-binary-relation :
+    ( A → B → UU (l1 ⊔ l2 ⊔ l)) ≃ span (l1 ⊔ l2 ⊔ l) A B
+  equiv-span-binary-relation =
+    ( associative-Σ (UU (l1 ⊔ l2 ⊔ l)) (λ X → X → A) (λ T → pr1 T → B)) ∘e
+    ( equiv-Σ (λ T → pr1 T → B) (equiv-Pr1 (l2 ⊔ l) A) (λ P → equiv-ind-Σ)) ∘e
+    ( distributive-Π-Σ) ∘e
+    ( equiv-Π-equiv-family
+      ( λ a → equiv-Pr1 (l1 ⊔ l) B))
+
+  span-binary-relation :
+    ( A → B → UU (l1 ⊔ l2 ⊔ l)) → span (l1 ⊔ l2 ⊔ l) A B
+  pr1 (span-binary-relation R) = Σ A (λ a → Σ B (λ b → R a b))
+  pr1 (pr2 (span-binary-relation R)) = pr1
+  pr2 (pr2 (span-binary-relation R)) = pr1 ∘ pr2
+
+  compute-span-binary-relation :
+    map-equiv equiv-span-binary-relation ~ span-binary-relation
+  compute-span-binary-relation = refl-htpy
+
+  binary-relation-span :
+    span (l1 ⊔ l2 ⊔ l) A B → (A → B → UU (l1 ⊔ l2 ⊔ l))
+  binary-relation-span S a b =
+    Σ ( domain-span S)
+      ( λ s → (left-map-span S s ＝ a) × (right-map-span S s ＝ b))
+```
 
 ## See also
 
