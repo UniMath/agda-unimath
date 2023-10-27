@@ -7,15 +7,20 @@ module category-theory.pseudomonic-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.conservative-functors-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.iterated-dependent-product-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
@@ -85,6 +90,16 @@ module _
     is-prop is-pseudomonic-functor-Precategory
   is-prop-is-pseudomonic-functor-Precategory =
     is-prop-type-Prop is-pseudomonic-prop-functor-Precategory
+
+  is-faithful-is-pseudomonic-functor-Precategory :
+    is-pseudomonic-functor-Precategory →
+    is-faithful-functor-Precategory C D F
+  is-faithful-is-pseudomonic-functor-Precategory = pr1
+
+  is-full-on-isos-is-pseudomonic-functor-Precategory :
+    is-pseudomonic-functor-Precategory →
+    is-full-on-isos-functor-Precategory C D F
+  is-full-on-isos-is-pseudomonic-functor-Precategory = pr2
 ```
 
 ### The type of pseudomonic functors between two precategories
@@ -124,6 +139,21 @@ module _
       ( obj-pseudomonic-functor-Precategory y)
   hom-pseudomonic-functor-Precategory =
     hom-functor-Precategory C D functor-pseudomonic-functor-Precategory
+
+  is-faithful-pseudomonic-functor-Precategory :
+    is-faithful-functor-Precategory C D functor-pseudomonic-functor-Precategory
+  is-faithful-pseudomonic-functor-Precategory =
+    is-faithful-is-pseudomonic-functor-Precategory C D
+      functor-pseudomonic-functor-Precategory
+      is-pseudomonic-pseudomonic-functor-Precategory
+
+  is-full-on-isos-pseudomonic-functor-Precategory :
+    is-full-on-isos-functor-Precategory C D
+      functor-pseudomonic-functor-Precategory
+  is-full-on-isos-pseudomonic-functor-Precategory =
+    is-full-on-isos-is-pseudomonic-functor-Precategory C D
+      functor-pseudomonic-functor-Precategory
+      is-pseudomonic-pseudomonic-functor-Precategory
 ```
 
 ## Properties
@@ -216,7 +246,41 @@ The previous entry records what is also known as "essential injectivivty".
 
 ### Pseudomonic functors are conservative
 
-This remains to be written down formally.
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-pseudomonic-F : is-pseudomonic-functor-Precategory C D F)
+  {x y : obj-Precategory C}
+  where
+
+  is-conservative-is-pseudomonic-functor-Precategory :
+    is-conservative-functor-Precategory C D F
+  is-conservative-is-pseudomonic-functor-Precategory f is-iso-Ff =
+    ind-trunc-Prop
+      ( λ _ → is-iso-prop-Precategory C f)
+      ( λ ((e , e' , l , r) , p) →
+        ( e' ,
+          ( inv
+            ( ap
+              ( λ g → comp-hom-Precategory C g e')
+              ( is-injective-is-emb
+                ( is-faithful-is-pseudomonic-functor-Precategory
+                    ( C) D F is-pseudomonic-F _ _)
+                ( ap pr1 p)))) ∙
+          ( l) ,
+          ( inv
+            ( ap
+              ( comp-hom-Precategory C e')
+              ( is-injective-is-emb
+                ( is-faithful-is-pseudomonic-functor-Precategory
+                    ( C) D F is-pseudomonic-F _ _)
+                ( ap pr1 p)))) ∙
+          ( r)))
+      (pr2 (is-pseudomonic-F) _ _ (hom-functor-Precategory C D F f , is-iso-Ff))
+```
 
 ## See also
 
