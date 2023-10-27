@@ -100,6 +100,7 @@ open import category-theory.natural-isomorphisms-maps-categories public
 open import category-theory.natural-isomorphisms-maps-precategories public
 open import category-theory.natural-numbers-object-precategories public
 open import category-theory.natural-transformations-functors-categories public
+open import category-theory.natural-transformations-functors-from-small-to-large-categories public
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories public
 open import category-theory.natural-transformations-functors-large-categories public
 open import category-theory.natural-transformations-functors-large-precategories public

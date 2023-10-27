@@ -8,6 +8,7 @@ module category-theory.representable-functors-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.copresheaf-categories
 open import category-theory.functors-categories
 open import category-theory.natural-transformations-functors-categories
 open import category-theory.representable-functors-precategories
