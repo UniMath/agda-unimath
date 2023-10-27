@@ -279,7 +279,7 @@ module _
                     ( C) D F is-pseudomonic-F _ _)
                 ( ap pr1 p)))) ∙
           ( r)))
-      (pr2 (is-pseudomonic-F) _ _ (hom-functor-Precategory C D F f , is-iso-Ff))
+      ( pr2 is-pseudomonic-F _ _ (hom-functor-Precategory C D F f , is-iso-Ff))
 ```
 
 ## See also

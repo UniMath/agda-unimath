@@ -7,6 +7,7 @@ module category-theory.fully-faithful-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.conservative-functors-precategories
 open import category-theory.essentially-injective-functors-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.full-functors-precategories
@@ -389,9 +390,24 @@ module _
     is-full-on-isos-is-fully-faithful-functor-Precategory
 ```
 
-### Fully faithful functors reflect isomorphisms
+### Fully faithful functors are conservative
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-ff-F : is-fully-faithful-functor-Precategory C D F)
+  where
+
+  is-conservative-is-fully-faithful-functor-Precategory :
+    is-conservative-functor-Precategory C D F
+  is-conservative-is-fully-faithful-functor-Precategory {x} {y} =
+    is-conservative-is-pseudomonic-functor-Precategory C D F
+      ( is-pseudomonic-is-fully-faithful-functor-Precategory C D F is-ff-F)
+      { x} {y}
+```
 
 ## External links
 
