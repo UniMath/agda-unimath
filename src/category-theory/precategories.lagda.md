@@ -9,6 +9,7 @@ module category-theory.precategories where
 ```agda
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.nonunital-precategories
+open import category-theory.set-magmoids
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -167,6 +168,18 @@ module _
   pr1 (pr2 (pr2 nonunital-precategory-Precategory)) = comp-hom-Precategory C
   pr2 (pr2 (pr2 nonunital-precategory-Precategory)) =
     associative-comp-hom-Precategory C
+```
+
+### The underlying set-magmoid of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  set-magmoid-Precategory : Set-Magmoid l1 l2
+  set-magmoid-Precategory =
+    set-magmoid-Nonunital-Precategory (nonunital-precategory-Precategory C)
 ```
 
 ### The total hom-type of a precategory

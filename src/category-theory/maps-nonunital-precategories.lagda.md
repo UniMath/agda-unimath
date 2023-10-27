@@ -7,7 +7,7 @@ module category-theory.maps-nonunital-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-nonunital-precategories
+open import category-theory.commuting-squares-of-morphisms-in-set-magmoids
 open import category-theory.nonunital-precategories
 
 open import foundation.binary-transport

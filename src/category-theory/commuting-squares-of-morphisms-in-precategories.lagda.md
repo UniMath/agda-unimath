@@ -47,6 +47,5 @@ coherence-square-hom-Precategory :
   (bottom : hom-Precategory C z w) →
   UU l2
 coherence-square-hom-Precategory C =
-  coherence-square-hom-Set-Magmoid
-    ( nonunital-precategory-Precategory C)
+  coherence-square-hom-Set-Magmoid (set-magmoid-Precategory C)
 ```
