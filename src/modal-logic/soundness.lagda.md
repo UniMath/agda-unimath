@@ -69,6 +69,21 @@ module _
 
 ```agda
 module _
+  {l1 l2 l3 l4 l5 l6 l7 : Level}
+  {i : Set l1} (logic : formulas l2 i)
+  {w : UU l3}
+  (C₁ : model-class w l4 i l5 l6) (C₂ : model-class w l4 i l5 l7)
+  where
+
+  soundness-subclass : C₂ ⊆ C₁ → soundness logic C₁ → soundness logic C₂
+  soundness-subclass sub =
+    transitive-leq-subtype
+      ( logic)
+      ( class-modal-logic C₁)
+      ( class-modal-logic C₂)
+      ( class-modal-logic-monotic C₂ C₁ sub)
+
+module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   {i : Set l1} (ax₁ : formulas l2 i) (ax₂ : formulas l3 i)
   {w : UU l4}

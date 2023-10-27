@@ -38,8 +38,8 @@ module _
   modal-logic-K : formulas l i
   modal-logic-K = modal-logic (union-subtype (modal-logic-IK i) (ax-dn i))
 
-  IK-subtype-K : modal-logic-IK i ⊆ modal-logic-K
-  IK-subtype-K =
+  IK-subset-K : modal-logic-IK i ⊆ modal-logic-K
+  IK-subset-K =
     transitive-leq-subtype
       ( modal-logic-IK i)
       ( union-subtype (modal-logic-IK i) (ax-dn i))
@@ -64,5 +64,14 @@ module _
       ( decidable-models w l4 i l5)
       ( soundness-IK i w l4 l5)
       ( ax-dn-soundness i w l4 l5)
-      ( all-models-is-biggest-class w l4 i l5 (decidable-models w l4 i l5))
+      ( all-models-is-largest-class w l4 i l5 (decidable-models w l4 i l5))
+
+  soundness-K-finite : soundness (modal-logic-K i) (finite-models w l4 i l5)
+  soundness-K-finite =
+    soundness-subclass
+      ( modal-logic-K i)
+      ( decidable-models w l4 i l5)
+      ( finite-models w l4 i l5)
+      ( finite-models-subclass-decidable-models w l4 i l5)
+      ( soundness-K)
 ```
