@@ -7,8 +7,10 @@ module category-theory.functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-set-magmoids
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
+open import category-theory.maps-set-magmoids
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -51,14 +53,21 @@ module _
   (F : map-Precategory C D)
   where
 
+  preserves-comp-hom-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
+  preserves-comp-hom-prop-map-Precategory =
+    preserves-comp-hom-prop-map-Set-Magmoid
+      ( set-magmoid-Precategory C)
+      ( set-magmoid-Precategory D)
+      (F)
+
   preserves-comp-hom-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
   preserves-comp-hom-map-Precategory =
-    {x y z : obj-Precategory C}
-    (g : hom-Precategory C y z) (f : hom-Precategory C x y) →
-    ( hom-map-Precategory C D F (comp-hom-Precategory C g f)) ＝
-    ( comp-hom-Precategory D
-      ( hom-map-Precategory C D F g)
-      ( hom-map-Precategory C D F f))
+    type-Prop preserves-comp-hom-prop-map-Precategory
+
+  is-prop-preserves-comp-hom-map-Precategory :
+    is-prop preserves-comp-hom-map-Precategory
+  is-prop-preserves-comp-hom-map-Precategory =
+    is-prop-type-Prop preserves-comp-hom-prop-map-Precategory
 
   preserves-id-hom-map-Precategory : UU (l1 ⊔ l4)
   preserves-id-hom-map-Precategory =
@@ -66,10 +75,36 @@ module _
     ( hom-map-Precategory C D F (id-hom-Precategory C {x})) ＝
     ( id-hom-Precategory D {obj-map-Precategory C D F x})
 
-  is-functor-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
-  is-functor-map-Precategory =
-    preserves-comp-hom-map-Precategory ×
+  is-prop-preserves-id-hom-map-Precategory :
+    is-prop preserves-id-hom-map-Precategory
+  is-prop-preserves-id-hom-map-Precategory =
+    is-prop-Π
+      ( λ x →
+        is-set-hom-Precategory D
+          ( obj-map-Precategory C D F x)
+          ( obj-map-Precategory C D F x)
+          ( hom-map-Precategory C D F (id-hom-Precategory C {x}))
+          ( id-hom-Precategory D {obj-map-Precategory C D F x}))
+
+  preserves-id-hom-prop-map-Precategory : Prop (l1 ⊔ l4)
+  pr1 preserves-id-hom-prop-map-Precategory =
     preserves-id-hom-map-Precategory
+  pr2 preserves-id-hom-prop-map-Precategory =
+    is-prop-preserves-id-hom-map-Precategory
+
+  is-functor-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
+  is-functor-prop-map-Precategory =
+    prod-Prop
+      preserves-comp-hom-prop-map-Precategory
+      preserves-id-hom-prop-map-Precategory
+
+  is-functor-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
+  is-functor-map-Precategory = type-Prop is-functor-prop-map-Precategory
+
+  is-prop-is-functor-map-Precategory :
+    is-prop is-functor-map-Precategory
+  is-prop-is-functor-map-Precategory =
+    is-prop-type-Prop is-functor-prop-map-Precategory
 
   preserves-comp-is-functor-map-Precategory :
     is-functor-map-Precategory → preserves-comp-hom-map-Precategory
@@ -215,69 +250,6 @@ module _
 ```
 
 ## Properties
-
-### Respecting identities and compositions are propositions
-
-This follows from the fact that the hom-types are
-[sets](foundation-core.sets.md).
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (D : Precategory l3 l4)
-  (F : map-Precategory C D)
-  where
-
-  is-prop-preserves-comp-hom-map-Precategory :
-    is-prop (preserves-comp-hom-map-Precategory C D F)
-  is-prop-preserves-comp-hom-map-Precategory =
-    is-prop-iterated-implicit-Π 3
-      ( λ x y z →
-        is-prop-iterated-Π 2
-          ( λ g f →
-            is-set-hom-Precategory D
-              ( obj-map-Precategory C D F x)
-              ( obj-map-Precategory C D F z)
-              ( hom-map-Precategory C D F (comp-hom-Precategory C g f))
-              ( comp-hom-Precategory D
-                ( hom-map-Precategory C D F g)
-                ( hom-map-Precategory C D F f))))
-
-  preserves-comp-hom-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 preserves-comp-hom-prop-map-Precategory =
-    preserves-comp-hom-map-Precategory C D F
-  pr2 preserves-comp-hom-prop-map-Precategory =
-    is-prop-preserves-comp-hom-map-Precategory
-
-  is-prop-preserves-id-hom-map-Precategory :
-    is-prop (preserves-id-hom-map-Precategory C D F)
-  is-prop-preserves-id-hom-map-Precategory =
-    is-prop-Π
-      ( λ x →
-        is-set-hom-Precategory D
-          ( obj-map-Precategory C D F x)
-          ( obj-map-Precategory C D F x)
-          ( hom-map-Precategory C D F (id-hom-Precategory C {x}))
-          ( id-hom-Precategory D {obj-map-Precategory C D F x}))
-
-  preserves-id-hom-prop-map-Precategory : Prop (l1 ⊔ l4)
-  pr1 preserves-id-hom-prop-map-Precategory =
-    preserves-id-hom-map-Precategory C D F
-  pr2 preserves-id-hom-prop-map-Precategory =
-    is-prop-preserves-id-hom-map-Precategory
-
-  is-prop-is-functor-map-Precategory :
-    is-prop (is-functor-map-Precategory C D F)
-  is-prop-is-functor-map-Precategory =
-    is-prop-prod
-      ( is-prop-preserves-comp-hom-map-Precategory)
-      ( is-prop-preserves-id-hom-map-Precategory)
-
-  is-functor-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 is-functor-prop-map-Precategory = is-functor-map-Precategory C D F
-  pr2 is-functor-prop-map-Precategory = is-prop-is-functor-map-Precategory
-```
 
 ### Extensionality of functors between precategories
 
@@ -489,7 +461,7 @@ module _
     eq-eq-map-functor-Precategory A D _ _ refl
 ```
 
-#### MacLane pentagon for functor composition
+#### Mac Lane pentagon for functor composition
 
 ```text
     (I(GH))F ---- I((GH)F)

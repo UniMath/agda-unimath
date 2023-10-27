@@ -131,7 +131,7 @@ module _
 
   coherence-htpy-map-Precategory :
     (f g : map-Precategory C D) →
-    (obj-map-Precategory C D f ~ obj-map-Precategory C D g) →
+    obj-map-Precategory C D f ~ obj-map-Precategory C D g →
     UU (l1 ⊔ l2 ⊔ l4)
   coherence-htpy-map-Precategory f g H =
     {x y : obj-Precategory C}
@@ -164,7 +164,7 @@ module _
       ( hom-map-Precategory C D f a)
 
   htpy-eq-map-Precategory :
-    (f g : map-Precategory C D) → (f ＝ g) → htpy-map-Precategory f g
+    (f g : map-Precategory C D) → f ＝ g → htpy-map-Precategory f g
   htpy-eq-map-Precategory f .f refl = refl-htpy-map-Precategory f
 
   is-torsorial-htpy-map-Precategory :
@@ -202,11 +202,10 @@ module _
   equiv-htpy-eq-map-Precategory :
     (f g : map-Precategory C D) → (f ＝ g) ≃ htpy-map-Precategory f g
   pr1 (equiv-htpy-eq-map-Precategory f g) = htpy-eq-map-Precategory f g
-  pr2 (equiv-htpy-eq-map-Precategory f g) =
-    is-equiv-htpy-eq-map-Precategory f g
+  pr2 (equiv-htpy-eq-map-Precategory f g) = is-equiv-htpy-eq-map-Precategory f g
 
   eq-htpy-map-Precategory :
-    (f g : map-Precategory C D) → htpy-map-Precategory f g → (f ＝ g)
+    (f g : map-Precategory C D) → htpy-map-Precategory f g → f ＝ g
   eq-htpy-map-Precategory f g =
     map-inv-equiv (equiv-htpy-eq-map-Precategory f g)
 ```

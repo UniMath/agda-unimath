@@ -93,10 +93,6 @@ abstract
                       ( is-set-truncation-is-equiv
                         ( Π-Set (Fin-Set k) (λ x → trunc-Set (A (inl x))))
                         ( map-Π (λ x → unit-trunc-Set))
-                        { map-equiv
-                          ( pr1
-                            ( center
-                              ( distributive-trunc-Π-Fin-Set k (A ∘ inl))))}
                         ( pr2
                           ( center (distributive-trunc-Π-Fin-Set k (A ∘ inl))))
                         ( is-equiv-map-equiv
@@ -106,9 +102,7 @@ abstract
                         ( Π-Set' (A (inr star)) (λ a → B)))) ∘e
                     ( equiv-postcomp
                       ( (x : Fin k) → type-trunc-Set (A (inl x)))
-                      ( equiv-universal-property-trunc-Set
-                        ( A (inr star))
-                        ( B)))) ∘e
+                      ( equiv-universal-property-trunc-Set B))) ∘e
                   ( equiv-ev-pair))))
             ( is-equiv-precomp-is-equiv
               ( ev-Maybe)

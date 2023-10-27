@@ -165,23 +165,44 @@ module _
     is-faithful-on-isos-is-faithful-functor-Precategory C D
 ```
 
+### Pseudomonic functors restrict to fully faithful functors on the core
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-pseudomonic-F : is-pseudomonic-functor-Precategory C D F)
+  where
+
+  is-fully-faithful-functor-core-is-pseudomonic-functor-Precategory :
+    is-fully-faithful-functor-Precategory
+      ( core-precategory-Precategory C)
+      ( core-precategory-Precategory D)
+      ( functor-core-Precategory C D F)
+  is-fully-faithful-functor-core-is-pseudomonic-functor-Precategory x y =
+    is-equiv-preserves-iso-is-pseudomonic-functor-Precategory
+      C D F is-pseudomonic-F
+```
+
 ### Fully faithful functors restrict to fully faithful functors on the core
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-ff-F : is-fully-faithful-functor-Precategory C D F)
   where
 
   is-fully-faithful-functor-core-is-fully-faithful-functor-Precategory :
-    (F : functor-Precategory C D) →
-    is-fully-faithful-functor-Precategory C D F →
     is-fully-faithful-functor-Precategory
       ( core-precategory-Precategory C)
       ( core-precategory-Precategory D)
       ( functor-core-Precategory C D F)
   is-fully-faithful-functor-core-is-fully-faithful-functor-Precategory =
-    {! is-equiv-preserves-iso-is-pseudomonic-functor-Precategory  !}
+    is-fully-faithful-functor-core-is-pseudomonic-functor-Precategory C D F
+      ( is-pseudomonic-is-fully-faithful-functor-Precategory C D F is-ff-F)
 ```
 
 ## External links

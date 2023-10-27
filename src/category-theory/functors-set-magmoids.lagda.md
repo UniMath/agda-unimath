@@ -308,7 +308,7 @@ module _
     eq-eq-map-functor-Set-Magmoid A D _ _ refl
 ```
 
-#### MacLane pentagon for functor composition
+#### Mac Lane pentagon for functor composition
 
 ```text
     (I(GH))F ---- I((GH)F)

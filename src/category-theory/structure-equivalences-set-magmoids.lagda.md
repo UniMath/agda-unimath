@@ -128,7 +128,7 @@ module _
             hom-Set-Magmoid A x y ≃
             hom-Set-Magmoid B (map-equiv E₀ x) (map-equiv E₀ y))
           ( λ E₁ →
-            preserves-comp-hom-map-Set-Magmoid A B
+            preserves-comp-hom-Set-Magmoid A B
               ( map-equiv E₀) (map-equiv E₁)))
 
   compute-structure-equiv-Set-Magmoid :
@@ -146,31 +146,14 @@ module _
             ( equiv-right-swap-Σ) ∘e
             ( equiv-Σ-equiv-base
               ( λ E₁' →
-                preserves-comp-hom-map-Set-Magmoid A B F₀ (λ f → pr1 E₁' f))
+                preserves-comp-hom-Set-Magmoid A B F₀ (λ f → pr1 E₁' f))
               ( ( distributive-implicit-Π-Σ) ∘e
                 ( equiv-implicit-Π-equiv-family
                   ( λ _ → distributive-implicit-Π-Σ)))))))) ∘e
     ( associative-Σ _ _ _)
 ```
 
-### asdas is torsorial
-
-```agda
-module _
-  {l1 l2 : Level}
-  where
-
-  is-torsorial-equiv-binary-family-Set :
-    (A : Set-Magmoid l1 l2) →
-    is-torsorial
-      ( λ (B' : (x y : obj-Set-Magmoid A) → Set l2) →
-        (x y : obj-Set-Magmoid A) → hom-Set-Magmoid A x y ≃ type-Set (B' x y))
-  is-torsorial-equiv-binary-family-Set A =
-    is-torsorial-Eq-Π _
-      ( λ x → is-torsorial-Eq-Π _ λ x₁ → {! is-torsorial-equiv' ?  !})
-```
-
-### Structure equivalences of set magmoids characterize their equality
+### Structure equivalences of set-magmoids characterize their equality
 
 ```agda
 module _
@@ -182,7 +165,12 @@ module _
     A ＝ B → structure-equiv-Set-Magmoid A B
   structure-equiv-eq-Set-Magmoid A .A refl =
     id-structure-equiv-Set-Magmoid A
+```
 
+The rest remains to be figured out. We need the fact that binary families of
+equivalences of sets are torsorial.
+
+```text
   is-torsorial-structure-equiv-Set-Magmoid :
     (A : Set-Magmoid l1 l2) → is-torsorial (structure-equiv-Set-Magmoid A)
   is-torsorial-structure-equiv-Set-Magmoid A =
