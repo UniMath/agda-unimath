@@ -7,7 +7,6 @@ module synthetic-homotopy-theory.pushouts where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -17,7 +16,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functoriality-dependent-pair-types
 
 open import synthetic-homotopy-theory.26-descent
