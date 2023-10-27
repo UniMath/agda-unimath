@@ -214,6 +214,34 @@ module _
 
 ### Fibers of the cogap map
 
+We characterize the fibers of the cogap map as a pushout of fibers. This is an
+application of the flattening lemma for pushouts.
+
+Given a pushout square with a cocone
+
+```text
+       g
+   S ----> B
+   |       | \
+ f |    inr|  \  n
+   v    ⌜  v   \
+   A ----> ∙    \
+    \ inl   \   |
+  m  \  cogap\  |
+      \       \ v
+       \-----> X
+```
+
+we have, for every x : X, a pushout square of fibers:
+
+```text
+   fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
+          |                       |
+          |                       |
+          v                    ⌜  v
+fiber (cogap ∘ inl) x ----> fiber cogap x
+```
+
 ```agda
 module _
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -244,12 +272,18 @@ module _
     fiber (horizontal-map-cocone f g c) x
   horizontal-map-span-cogap-fiber =
     map-Σ-map-base f (λ a → horizontal-map-cocone f g c a ＝ x)
+```
 
+Since our pushout square of fibers has `fiber (m ∘ f) x` as its top-left corner
+and not `fiber (n ∘ g) x`, things are "left-biased". For this reason, the
+following map is constructed as a composition which makes a later coherence
+square commute (almost) trivially.
+
+```agda
   vertical-map-span-cogap-fiber :
     fiber (horizontal-map-cocone f g c ∘ f) x →
     fiber (vertical-map-cocone f g c) x
   vertical-map-span-cogap-fiber =
-    -- TODO (Comment): Choosen to make a coherence square commute almost trivially
     ( map-inv-equiv equiv-fiber-vertical-map-cocone-cogap-inr) ∘
     ( horizontal-map-span-flattening-pushout
       ( λ y → (cogap f g c y) ＝ x) f g (cocone-pushout f g)) ∘
@@ -310,7 +344,26 @@ module _
       ( is-equiv-map-equiv equiv-fiber-vertical-map-cocone-cogap-inr)
       ( is-equiv-map-equiv
         ( equiv-fiber-horizontal-map-cocone-cogap-inl-horizontal-span))
+```
 
+We record the following auxiliary lemma which says that if we have types `T`,
+`F` and `G` such that `T ≃ fiber (m ∘ f) x`, `F ≃ fiber (cogap ∘ inl) x` and
+`G ≃ fiber (cogap ∘ inr) x`, together with suitable maps `u : T → F` and
+`v : T → G`, then we get a pushout square:
+
+```text
+          v
+   T ----------> G
+   |             |
+ u |             |
+   v          ⌜  v
+   F ----> fiber cogap x
+```
+
+Thus, this lemma is useful in case we have convenient descriptions of the
+fibers.
+
+```agda
   module _
     { l5 l6 l7 : Level} (T : UU l5) (F : UU l6) (G : UU l7)
     ( i : F ≃ fiber (horizontal-map-cocone f g c) x)
