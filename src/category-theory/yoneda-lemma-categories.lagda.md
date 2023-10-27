@@ -9,27 +9,12 @@ module category-theory.yoneda-lemma-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.copresheaf-categories
-open import category-theory.functors-categories
-open import category-theory.functors-from-small-to-large-categories
-open import category-theory.natural-transformations-functors-categories
 open import category-theory.natural-transformations-functors-from-small-to-large-categories
-open import category-theory.natural-transformations-functors-from-small-to-large-precategories
-open import category-theory.presheaf-categories
 open import category-theory.representable-functors-categories
 open import category-theory.yoneda-lemma-precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.category-of-sets
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

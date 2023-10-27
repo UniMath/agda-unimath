@@ -9,12 +9,8 @@ module category-theory.natural-transformations-functors-from-small-to-large-cate
 ```agda
 open import category-theory.categories
 open import category-theory.functors-from-small-to-large-categories
-open import category-theory.functors-from-small-to-large-precategories
 open import category-theory.large-categories
-open import category-theory.large-precategories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories
-open import category-theory.natural-transformations-maps-from-small-to-large-precategories
-open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings

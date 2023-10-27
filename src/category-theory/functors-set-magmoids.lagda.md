@@ -7,22 +7,18 @@ module category-theory.functors-set-magmoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.maps-set-magmoids
 open import category-theory.set-magmoids
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

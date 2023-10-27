@@ -8,16 +8,13 @@ module foundation.functoriality-set-truncation where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.images
-open import foundation.iterated-dependent-product-types
 open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.slice
 open import foundation.surjective-maps
-open import foundation.telescopes
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-truncations
 open import foundation.universal-property-image

@@ -13,7 +13,6 @@ open import category-theory.maps-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
-open import category-theory.presheaf-categories
 
 open import foundation.category-of-sets
 open import foundation.dependent-pair-types

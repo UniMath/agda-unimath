@@ -10,7 +10,6 @@ module group-theory.cores-monoids where
 open import category-theory.functors-large-precategories
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes

@@ -11,11 +11,11 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.identity-types
 ```

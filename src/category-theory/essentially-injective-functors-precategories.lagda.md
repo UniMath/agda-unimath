@@ -10,15 +10,8 @@ module category-theory.essentially-injective-functors-precategories where
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
-open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 

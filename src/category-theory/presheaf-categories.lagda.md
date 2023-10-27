@@ -8,15 +8,12 @@ module category-theory.presheaf-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.category-of-functors-from-small-to-large-categories
 open import category-theory.copresheaf-categories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
-open import category-theory.precategory-of-functors-from-small-to-large-precategories
 
-open import foundation.category-of-sets
 open import foundation.universe-levels
 ```
 

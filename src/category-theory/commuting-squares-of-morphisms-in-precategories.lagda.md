@@ -10,7 +10,6 @@ module category-theory.commuting-squares-of-morphisms-in-precategories where
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids
 open import category-theory.precategories
 
-open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

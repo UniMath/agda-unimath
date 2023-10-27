@@ -12,7 +12,6 @@ open import category-theory.category-of-functors-from-small-to-large-categories
 open import category-theory.functors-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
-open import category-theory.opposite-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors-from-small-to-large-precategories
 

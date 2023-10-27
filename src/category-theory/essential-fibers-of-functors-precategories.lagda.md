@@ -10,11 +10,8 @@ module category-theory.essential-fibers-of-functors-precategories where
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
-open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.sets
 open import foundation.universe-levels
 ```
 

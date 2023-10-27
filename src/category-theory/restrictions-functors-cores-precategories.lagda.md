@@ -7,41 +7,17 @@ module category-theory.restrictions-functors-cores-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.cores-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.fully-faithful-functors-precategories
 open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
-open import category-theory.pregroupoids
-open import category-theory.preunivalent-categories
 open import category-theory.pseudomonic-functors-precategories
-open import category-theory.replete-subprecategories
-open import category-theory.subprecategories
-open import category-theory.wide-subprecategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
-open import foundation.torsorial-type-families
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 

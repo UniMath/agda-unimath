@@ -11,7 +11,6 @@ open import category-theory.composition-operations-on-binary-families-of-sets
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.truncated-types

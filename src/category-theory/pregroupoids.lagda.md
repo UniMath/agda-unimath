@@ -10,7 +10,6 @@ module category-theory.pregroupoids where
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types

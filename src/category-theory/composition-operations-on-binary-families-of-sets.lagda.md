@@ -10,7 +10,6 @@ module category-theory.composition-operations-on-binary-families-of-sets where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
