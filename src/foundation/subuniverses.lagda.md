@@ -55,7 +55,7 @@ module _
   {l1 l2 : Level} (P : subuniverse l1 l2)
   where
 
-  type-subuniverse : UU ((lsuc l1) ⊔ l2)
+  type-subuniverse : UU (lsuc l1 ⊔ l2)
   type-subuniverse = type-subtype P
 
   is-in-subuniverse : UU l1 → UU l2
@@ -120,33 +120,6 @@ module _
     is-essentially-in-subuniverse X
   pr2 (is-essentially-in-subuniverse-Prop X) =
     is-prop-is-essentially-in-subuniverse X
-```
-
-### Global subuniverses
-
-```agda
-is-global-subuniverse :
-  (α : Level → Level) (P : (l : Level) → subuniverse l (α l)) →
-  (l1 l2 : Level) → UU (α l1 ⊔ α l2 ⊔ lsuc l1 ⊔ lsuc l2)
-is-global-subuniverse α P l1 l2 =
-  (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
-
-record global-subuniverse (α : Level → Level) : UUω where
-  field
-    subuniverse-global-subuniverse : (l : Level) → subuniverse l (α l)
-    is-global-global-subuniverse :
-      (l1 l2 : Level) →
-      is-global-subuniverse α subuniverse-global-subuniverse l1 l2
-
-open global-subuniverse public
-
-module _
-  (α : Level → Level) (P : global-subuniverse α)
-  where
-
-  is-in-global-subuniverse : {l : Level} → UU l → UU (α l)
-  is-in-global-subuniverse X =
-    is-in-subuniverse (subuniverse-global-subuniverse P _) X
 ```
 
 ## Properties
