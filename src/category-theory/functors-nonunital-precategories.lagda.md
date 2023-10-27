@@ -7,8 +7,10 @@ module category-theory.functors-nonunital-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-set-magmoids
 open import category-theory.maps-nonunital-precategories
 open import category-theory.nonunital-precategories
+open import category-theory.set-magmoids
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -60,6 +62,28 @@ module _
     ( comp-hom-Nonunital-Precategory D
       ( hom-map-Nonunital-Precategory C D F g)
       ( hom-map-Nonunital-Precategory C D F f))
+
+  is-prop-preserves-comp-hom-map-Nonunital-Precategory :
+    is-prop preserves-comp-hom-map-Nonunital-Precategory
+  is-prop-preserves-comp-hom-map-Nonunital-Precategory =
+    is-prop-iterated-implicit-Π 3
+      ( λ x y z →
+        is-prop-iterated-Π 2
+          ( λ g f →
+            is-set-hom-Nonunital-Precategory D
+              ( obj-map-Nonunital-Precategory C D F x)
+              ( obj-map-Nonunital-Precategory C D F z)
+              ( hom-map-Nonunital-Precategory C D F
+                ( comp-hom-Nonunital-Precategory C g f))
+              ( comp-hom-Nonunital-Precategory D
+                ( hom-map-Nonunital-Precategory C D F g)
+                ( hom-map-Nonunital-Precategory C D F f))))
+
+  preserves-comp-hom-prop-map-Nonunital-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
+  pr1 preserves-comp-hom-prop-map-Nonunital-Precategory =
+    preserves-comp-hom-map-Nonunital-Precategory
+  pr2 preserves-comp-hom-prop-map-Nonunital-Precategory =
+    is-prop-preserves-comp-hom-map-Nonunital-Precategory
 ```
 
 ### functors between nonunital precategories
@@ -125,9 +149,8 @@ There is an identity functor on any nonunital precategory.
 id-functor-Nonunital-Precategory :
   {l1 l2 : Level} (C : Nonunital-Precategory l1 l2) →
   functor-Nonunital-Precategory C C
-pr1 (id-functor-Nonunital-Precategory C) = id
-pr1 (pr2 (id-functor-Nonunital-Precategory C)) = id
-pr2 (pr2 (id-functor-Nonunital-Precategory C)) g f = refl
+id-functor-Nonunital-Precategory C =
+  id-functor-Set-Magmoid (set-magmoid-Nonunital-Precategory C)
 ```
 
 ### Composition of nonunital functors
@@ -187,42 +210,6 @@ module _
 ```
 
 ## Properties
-
-### Respecting identities and compositions are propositions
-
-This follows from the fact that the hom-types are
-[sets](foundation-core.sets.md).
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Nonunital-Precategory l1 l2)
-  (D : Nonunital-Precategory l3 l4)
-  (F : map-Nonunital-Precategory C D)
-  where
-
-  is-prop-preserves-comp-hom-map-Nonunital-Precategory :
-    is-prop (preserves-comp-hom-map-Nonunital-Precategory C D F)
-  is-prop-preserves-comp-hom-map-Nonunital-Precategory =
-    is-prop-iterated-implicit-Π 3
-      ( λ x y z →
-        is-prop-iterated-Π 2
-          ( λ g f →
-            is-set-hom-Nonunital-Precategory D
-              ( obj-map-Nonunital-Precategory C D F x)
-              ( obj-map-Nonunital-Precategory C D F z)
-              ( hom-map-Nonunital-Precategory C D F
-                ( comp-hom-Nonunital-Precategory C g f))
-              ( comp-hom-Nonunital-Precategory D
-                ( hom-map-Nonunital-Precategory C D F g)
-                ( hom-map-Nonunital-Precategory C D F f))))
-
-  preserves-comp-hom-prop-map-Nonunital-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 preserves-comp-hom-prop-map-Nonunital-Precategory =
-    preserves-comp-hom-map-Nonunital-Precategory C D F
-  pr2 preserves-comp-hom-prop-map-Nonunital-Precategory =
-    is-prop-preserves-comp-hom-map-Nonunital-Precategory
-```
 
 ### Extensionality of functors between nonunital precategories
 

@@ -89,8 +89,8 @@ open import category-theory.large-subprecategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-from-small-to-large-categories public
 open import category-theory.maps-from-small-to-large-precategories public
-open import category-theory.maps-nonunital-precategories public
 open import category-theory.maps-precategories public
+open import category-theory.maps-set-magmoids public
 open import category-theory.monomorphisms-in-large-precategories public
 open import category-theory.natural-isomorphisms-functors-categories public
 open import category-theory.natural-isomorphisms-functors-large-precategories public

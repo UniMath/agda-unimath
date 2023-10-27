@@ -30,11 +30,11 @@ A [functor](category-theory.functors-precategories.md) `F : C → D` between
 [precategories](category-theory.precategories.md) is **essentially injective**
 if every pair of objects that are mapped to
 [isomorphic](category-theory.isomorphisms-in-precategories.md) objects in `D`
-are isomorphic in `D`.
+are isomorphic in `C`.
 
 ## Definitions
 
-### The predicate of being essentially injective
+### The type of proofs of being essentially injective
 
 ```agda
 module _

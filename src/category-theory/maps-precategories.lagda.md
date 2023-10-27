@@ -8,7 +8,7 @@ module category-theory.maps-precategories where
 
 ```agda
 open import category-theory.commuting-squares-of-morphisms-in-precategories
-open import category-theory.maps-nonunital-precategories
+open import category-theory.maps-set-magmoids
 open import category-theory.precategories
 
 open import foundation.binary-transport
@@ -50,16 +50,16 @@ module _
 
   map-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   map-Precategory =
-    map-Nonunital-Precategory
-      ( nonunital-precategory-Precategory C)
-      ( nonunital-precategory-Precategory D)
+    map-Set-Magmoid
+      ( set-magmoid-Precategory C)
+      ( set-magmoid-Precategory D)
 
   obj-map-Precategory :
     (F : map-Precategory) → obj-Precategory C → obj-Precategory D
   obj-map-Precategory =
-    obj-map-Nonunital-Precategory
-      ( nonunital-precategory-Precategory C)
-      ( nonunital-precategory-Precategory D)
+    obj-map-Set-Magmoid
+      ( set-magmoid-Precategory C)
+      ( set-magmoid-Precategory D)
 
   hom-map-Precategory :
     (F : map-Precategory)
@@ -69,9 +69,9 @@ module _
       ( obj-map-Precategory F x)
       ( obj-map-Precategory F y)
   hom-map-Precategory =
-    hom-map-Nonunital-Precategory
-      ( nonunital-precategory-Precategory C)
-      ( nonunital-precategory-Precategory D)
+    hom-map-Set-Magmoid
+      ( set-magmoid-Precategory C)
+      ( set-magmoid-Precategory D)
 ```
 
 ## Properties

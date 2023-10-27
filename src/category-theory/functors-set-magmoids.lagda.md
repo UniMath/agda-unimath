@@ -120,9 +120,240 @@ module _
   {l1 l2 : Level} (A : Set-Magmoid l1 l2)
   where
 
-  id-functor-Set-Magmoid :
-    functor-Set-Magmoid A A
+  id-functor-Set-Magmoid : functor-Set-Magmoid A A
   pr1 id-functor-Set-Magmoid = id
   pr1 (pr2 id-functor-Set-Magmoid) = id
   pr2 (pr2 id-functor-Set-Magmoid) g f = refl
+```
+
+### Composition of nonunital functors
+
+Any two compatible nonunital functors can be composed to a new nonunital
+functor.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (A : Set-Magmoid l1 l2)
+  (B : Set-Magmoid l3 l4)
+  (C : Set-Magmoid l5 l6)
+  (G : functor-Set-Magmoid B C)
+  (F : functor-Set-Magmoid A B)
+  where
+
+  obj-comp-functor-Set-Magmoid :
+    obj-Set-Magmoid A → obj-Set-Magmoid C
+  obj-comp-functor-Set-Magmoid =
+    obj-functor-Set-Magmoid B C G ∘
+    obj-functor-Set-Magmoid A B F
+
+  hom-comp-functor-Set-Magmoid :
+    {x y : obj-Set-Magmoid A} →
+    hom-Set-Magmoid A x y →
+    hom-Set-Magmoid C
+      ( obj-comp-functor-Set-Magmoid x)
+      ( obj-comp-functor-Set-Magmoid y)
+  hom-comp-functor-Set-Magmoid =
+    hom-functor-Set-Magmoid B C G ∘
+    hom-functor-Set-Magmoid A B F
+
+  -- map-comp-functor-precategory : map-Set-Magmoid A C
+  -- pr1 map-comp-functor-precategory = obj-comp-functor-Set-Magmoid
+  -- pr2 map-comp-functor-precategory = hom-comp-functor-Set-Magmoid
+
+  preserves-comp-comp-functor-Set-Magmoid :
+    preserves-comp-hom-map-Set-Magmoid A C
+      ( map-comp-functor-precategory)
+  preserves-comp-comp-functor-Set-Magmoid g f =
+    ( ap
+      ( hom-functor-Set-Magmoid B C G)
+      ( preserves-comp-functor-Set-Magmoid A B F g f)) ∙
+    ( preserves-comp-functor-Set-Magmoid B C G
+      ( hom-functor-Set-Magmoid A B F g)
+      ( hom-functor-Set-Magmoid A B F f))
+
+  comp-functor-Set-Magmoid : functor-Set-Magmoid A C
+  pr1 comp-functor-Set-Magmoid =
+    obj-comp-functor-Set-Magmoid
+  pr1 (pr2 comp-functor-Set-Magmoid) =
+    hom-functor-Set-Magmoid B C G ∘
+    hom-functor-Set-Magmoid A B F
+  pr2 (pr2 comp-functor-Set-Magmoid) =
+    preserves-comp-comp-functor-Set-Magmoid
+```
+
+## Properties
+
+### Extensionality of functors between nonunital precategories
+
+#### Equality of functors is equality of underlying maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Set-Magmoid l1 l2)
+  (D : Set-Magmoid l3 l4)
+  (F G : functor-Set-Magmoid C D)
+  where
+
+  equiv-eq-map-eq-functor-Set-Magmoid :
+    ( F ＝ G) ≃
+    ( map-functor-Set-Magmoid C D F ＝
+      map-functor-Set-Magmoid C D G)
+  equiv-eq-map-eq-functor-Set-Magmoid =
+    equiv-ap-emb
+      ( comp-emb
+        ( emb-subtype (preserves-comp-hom-prop-map-Set-Magmoid C D))
+        ( emb-equiv
+          ( inv-associative-Σ
+            ( obj-Set-Magmoid C → obj-Set-Magmoid D)
+            ( λ F₀ →
+              { x y : obj-Set-Magmoid C} →
+              hom-Set-Magmoid C x y →
+              hom-Set-Magmoid D (F₀ x) (F₀ y))
+            ( pr1 ∘ preserves-comp-hom-prop-map-Set-Magmoid C D))))
+
+  eq-map-eq-functor-Set-Magmoid :
+    ( F ＝ G) →
+    ( map-functor-Set-Magmoid C D F ＝
+      map-functor-Set-Magmoid C D G)
+  eq-map-eq-functor-Set-Magmoid =
+    map-equiv equiv-eq-map-eq-functor-Set-Magmoid
+
+  eq-eq-map-functor-Set-Magmoid :
+    ( map-functor-Set-Magmoid C D F ＝
+      map-functor-Set-Magmoid C D G) →
+    ( F ＝ G)
+  eq-eq-map-functor-Set-Magmoid =
+    map-inv-equiv equiv-eq-map-eq-functor-Set-Magmoid
+
+  is-section-eq-eq-map-functor-Set-Magmoid :
+    eq-map-eq-functor-Set-Magmoid ∘
+    eq-eq-map-functor-Set-Magmoid ~
+    id
+  is-section-eq-eq-map-functor-Set-Magmoid =
+    is-section-map-inv-equiv equiv-eq-map-eq-functor-Set-Magmoid
+
+  is-retraction-eq-eq-map-functor-Set-Magmoid :
+    eq-eq-map-functor-Set-Magmoid ∘
+    eq-map-eq-functor-Set-Magmoid ~
+    id
+  is-retraction-eq-eq-map-functor-Set-Magmoid =
+    is-retraction-map-inv-equiv equiv-eq-map-eq-functor-Set-Magmoid
+```
+
+### Categorical laws for nonunital functor composition
+
+#### Unit laws for nonunital functor composition
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Set-Magmoid l1 l2) (D : Set-Magmoid l3 l4)
+  (F : functor-Set-Magmoid C D)
+  where
+
+  left-unit-law-comp-functor-Set-Magmoid :
+    comp-functor-Set-Magmoid C D D
+      ( id-functor-Set-Magmoid D) (F) ＝
+    F
+  left-unit-law-comp-functor-Set-Magmoid =
+    eq-eq-map-functor-Set-Magmoid C D _ _ refl
+
+  right-unit-law-comp-functor-Set-Magmoid :
+    comp-functor-Set-Magmoid C C D
+      ( F) (id-functor-Set-Magmoid C) ＝
+    F
+  right-unit-law-comp-functor-Set-Magmoid = refl
+```
+
+#### Associativity of functor composition
+
+```agda
+module _
+  {l1 l1' l2 l2' l3 l3' l4 l4' : Level}
+  (A : Set-Magmoid l1 l1')
+  (B : Set-Magmoid l2 l2')
+  (C : Set-Magmoid l3 l3')
+  (D : Set-Magmoid l4 l4')
+  (F : functor-Set-Magmoid A B)
+  (G : functor-Set-Magmoid B C)
+  (H : functor-Set-Magmoid C D)
+  where
+
+  associative-comp-functor-Set-Magmoid :
+    comp-functor-Set-Magmoid A B D
+      ( comp-functor-Set-Magmoid B C D H G) (F) ＝
+    comp-functor-Set-Magmoid A C D
+      ( H) (comp-functor-Set-Magmoid A B C G F)
+  associative-comp-functor-Set-Magmoid =
+    eq-eq-map-functor-Set-Magmoid A D _ _ refl
+```
+
+#### MacLane pentagon for nonunital functor composition
+
+```text
+    (I(GH))F ---- I((GH)F)
+          /        \
+         /          \
+  ((IH)G)F          I(H(GF))
+          \        /
+            \    /
+           (IH)(GF)
+```
+
+The proof remains to be formalized.
+
+```text
+module _
+  {l1 l1' l2 l2' l3 l3' l4 l4' : Level}
+  (A : Set-Magmoid l1 l1')
+  (B : Set-Magmoid l2 l2')
+  (C : Set-Magmoid l3 l3')
+  (D : Set-Magmoid l4 l4')
+  (E : Set-Magmoid l4 l4')
+  (F : functor-Set-Magmoid A B)
+  (G : functor-Set-Magmoid B C)
+  (H : functor-Set-Magmoid C D)
+  (I : functor-Set-Magmoid D E)
+  where
+
+  mac-lane-pentagon-comp-functor-Set-Magmoid :
+    coherence-pentagon-identifications
+      { x =
+        comp-functor-Set-Magmoid A B E
+        ( comp-functor-Set-Magmoid B D E I
+          ( comp-functor-Set-Magmoid B C D H G))
+        ( F)}
+      { comp-functor-Set-Magmoid A D E I
+        ( comp-functor-Set-Magmoid A B D
+          ( comp-functor-Set-Magmoid B C D H G)
+          ( F))}
+      { comp-functor-Set-Magmoid A B E
+        ( comp-functor-Set-Magmoid B C E
+          ( comp-functor-Set-Magmoid C D E I H)
+          ( G))
+        ( F)}
+      { comp-functor-Set-Magmoid A D E
+        ( I)
+        ( comp-functor-Set-Magmoid A C D
+          ( H)
+          ( comp-functor-Set-Magmoid A B C G F))}
+      { comp-functor-Set-Magmoid A C E
+        ( comp-functor-Set-Magmoid C D E I H)
+        ( comp-functor-Set-Magmoid A B C G F)}
+      ( associative-comp-functor-Set-Magmoid A B D E
+        ( F) (comp-functor-Set-Magmoid B C D H G) (I))
+      ( ap
+        ( λ p → comp-functor-Set-Magmoid A B E p F)
+        ( inv (associative-comp-functor-Set-Magmoid B C D E G H I)))
+      ( ap
+        ( λ p → comp-functor-Set-Magmoid A D E I p)
+        ( associative-comp-functor-Set-Magmoid A B C D F G H))
+      ( associative-comp-functor-Set-Magmoid A B C E
+        ( F) (G) (comp-functor-Set-Magmoid C D E I H))
+      ( inv
+        ( associative-comp-functor-Set-Magmoid A C D E
+          (comp-functor-Set-Magmoid A B C G F) H I))
+  mac-lane-pentagon-comp-functor-Set-Magmoid = {!!}
 ```
