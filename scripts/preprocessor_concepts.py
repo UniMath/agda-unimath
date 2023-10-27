@@ -68,6 +68,14 @@ def get_definition_id(name, content):
     return m.group(1)
 
 
+def slugify_markdown(md):
+    text = md.replace(' ', '-')
+    for markup_char in ['*', '_', '~', '(', ')']:
+        text = text.replace(markup_char, '')
+
+    return text
+
+
 def sup_link_reference(href, content, brackets=True, new_tab=False):
     # f-strings can't contain backslashes, so we can't escape the quotes
     link_target = new_tab * ' target="_blank"'
@@ -88,19 +96,21 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
     }
     anchor = ''
     target = ''
-    target_id = None
+    target_id = f'concept-{slugify_markdown(plaintext)}'
     references = []
     if wikidata_id is not None and wikidata_id != 'NA':
         index_entry['wikidata'] = wikidata_id
-        index_entry['link'] = f'{url_path}#{wikidata_id}'
+        # index_entry['link'] = f'{url_path}#{wikidata_id}'
         target_id = wikidata_id
-        anchor += f'<a id="{target_id}" class="wikidata"><span style="display:none">{plaintext}</span></a>'
+        # Useful if we wanted to link to a concept by WDID and give information
+        # to scrapers; currently we don't really want either
+        # anchor += f'<a id="{target_id}" class="wikidata"><span style="display:none">{plaintext}</span></a>'
+
         # TODO: decide if we want this
         # references.append(sup_link_reference(config.get(
         #     'mage-template').format(wikidata_id=wikidata_id), 'WD', True, True))
     if agda_name is not None:
         target_id = f'concept-{agda_name}'
-        anchor += f'<a id="{target_id}" class="concept"></a>'
         agda_id = get_definition_id(agda_name, initial_content)
         if agda_id is not None:
             destination = f'{url_path}#{agda_id}'
@@ -110,8 +120,14 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
         else:
             eprint('Concept definition not found:', plaintext,
                    '; expected', agda_name, 'to exist in', path)
-    if target_id is not None:
-        references.append(sup_link_reference(f'#{target_id}', '¶', False))
+    anchor += f'<a id="{target_id}" class="concept"></a>'
+    index_entry['link'] = f'{url_path}#{target_id}'
+    # For now the link is the best thing we have as an identifier
+    # - it should be unique (for a given point in time), and
+    #   with the way we generate `target_id` it should be as stable
+    #   as we can get
+    index_entry['id'] = index_entry['link']
+    references.append(sup_link_reference(f'#{target_id}', '¶', False))
     if wikidata_label is not None:
         index_entry['__wikidata_label'] = wikidata_label
     mut_index.append(index_entry)
@@ -132,7 +148,7 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
             mage_link = config.get(
                 'mage-template').format(wikidata_id=wikidata_id)
             external_references.append(
-                f'<a href="{mage_link}">{wikidata_label}</a> at MaGE')
+                f'<a href="{mage_link}">{wikidata_label}</a> at Mathswitch')
             wikidata_link = config.get(
                 'wikidata-template').format(wikidata_id=wikidata_id)
             # TODO: Decide if we want this
