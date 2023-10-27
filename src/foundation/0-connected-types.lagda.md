@@ -55,8 +55,8 @@ abstract
     {l : Level} {A : UU l} → is-0-connected A → is-inhabited A
   is-inhabited-is-0-connected {l} {A} C =
     apply-universal-property-trunc-Set'
-      ( center C)
       ( set-Prop (trunc-Prop A))
+      ( center C)
       ( unit-trunc-Prop)
 
 abstract

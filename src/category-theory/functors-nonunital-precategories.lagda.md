@@ -8,7 +8,7 @@ module category-theory.functors-nonunital-precategories where
 
 ```agda
 open import category-theory.functors-set-magmoids
-open import category-theory.maps-nonunital-precategories
+open import category-theory.maps-set-magmoids
 open import category-theory.nonunital-precategories
 open import category-theory.set-magmoids
 
