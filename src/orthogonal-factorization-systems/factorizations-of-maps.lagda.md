@@ -25,9 +25,6 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
-
-open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.global-function-classes
 ```
 
 </details>
@@ -105,21 +102,21 @@ module _
   factorization : (l3 : Level) (f : A → B) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   factorization l3 f = Σ (UU l3) (factorization-through f)
 
-  type-factorization : {l3 : Level} {f : A → B} → factorization l3 f → UU l3
-  type-factorization = pr1
+  image-factorization : {l3 : Level} {f : A → B} → factorization l3 f → UU l3
+  image-factorization = pr1
 
   factorization-through-factorization :
     {l3 : Level} {f : A → B} (F : factorization l3 f) →
-    factorization-through f (type-factorization F)
+    factorization-through f (image-factorization F)
   factorization-through-factorization = pr2
 
   right-map-factorization :
-    {l3 : Level} {f : A → B} (F : factorization l3 f) → type-factorization F → B
+    {l3 : Level} {f : A → B} (F : factorization l3 f) → image-factorization F → B
   right-map-factorization F =
     right-map-factorization-through (factorization-through-factorization F)
 
   left-map-factorization :
-    {l3 : Level} {f : A → B} (F : factorization l3 f) → A → type-factorization F
+    {l3 : Level} {f : A → B} (F : factorization l3 f) → A → image-factorization F
   left-map-factorization F =
     left-map-factorization-through (factorization-through-factorization F)
 
@@ -129,66 +126,6 @@ module _
   is-factorization-factorization F =
     is-factorization-factorization-through
       ( factorization-through-factorization F)
-```
-
-## Factorizations with function classes
-
-```agda
-module _
-  {l1 l2 lF lL lR : Level}
-  (L : function-class l1 lF lL)
-  (R : function-class lF l2 lR)
-  {A : UU l1} {B : UU l2}
-  (f : A → B)
-  where
-
-  is-factorization-prop-function-class :
-    factorization lF f → Prop (lL ⊔ lR)
-  is-factorization-prop-function-class F =
-    conj-Prop (L (left-map-factorization F)) (R (right-map-factorization F))
-
-  is-factorization-function-class :
-    factorization lF f → UU (lL ⊔ lR)
-  is-factorization-function-class =
-    type-Prop ∘ is-factorization-prop-function-class
-
-  factorization-function-class :
-    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  factorization-function-class =
-    Σ (factorization lF f) (is-factorization-function-class)
-```
-
-## Factorizations with global function classes
-
-```agda
-module _
-  {βL βR : Level → Level → Level}
-  (L : global-function-class βL)
-  (R : global-function-class βR)
-  {l1 l2 : Level}
-  {A : UU l1} {B : UU l2}
-  where
-
-  is-factorization-global-function-class-Prop :
-    {l3 : Level} (f : A → B) → factorization l3 f → Prop (βL l1 l3 ⊔ βR l3 l2)
-  is-factorization-global-function-class-Prop =
-    is-factorization-prop-function-class
-      ( function-class-global-function-class L)
-      ( function-class-global-function-class R)
-
-  is-factorization-global-function-class :
-    {l3 : Level} (f : A → B) → factorization l3 f → UU (βL l1 l3 ⊔ βR l3 l2)
-  is-factorization-global-function-class =
-    is-factorization-function-class
-      ( function-class-global-function-class L)
-      ( function-class-global-function-class R)
-
-  factorization-global-function-class :
-    (l3 : Level) (f : A → B) → UU (βL l1 l3 ⊔ βR l3 l2 ⊔ l1 ⊔ l2 ⊔ lsuc l3)
-  factorization-global-function-class l3 =
-    factorization-function-class {lF = l3}
-      ( function-class-global-function-class L)
-      ( function-class-global-function-class R)
 ```
 
 ## Properties
@@ -253,19 +190,10 @@ module _
     (F : factorization-through f X) →
     is-torsorial (htpy-factorization-through F)
   is-torsorial-htpy-factorization-through F =
-    is-torsorial-Eq-structure
-      ( λ g hH R →
-        Σ ( left-map-factorization-through F ~
-            left-map-factorization-through (g , hH))
-          ( coherence-htpy-factorization-through F (g , hH) R))
+    is-torsorial-Eq-structure _
       ( is-torsorial-htpy (right-map-factorization-through F))
       ( right-map-factorization-through F , refl-htpy)
-      ( is-torsorial-Eq-structure
-        ( λ h H →
-          coherence-htpy-factorization-through
-            ( F)
-            ( right-map-factorization-through F , h , H)
-            ( refl-htpy))
+      ( is-torsorial-Eq-structure _
         ( is-torsorial-htpy (left-map-factorization-through F))
         ( left-map-factorization-through F , refl-htpy)
         ( is-torsorial-htpy (is-factorization-factorization-through F)))
@@ -303,7 +231,7 @@ module _
   equiv-factorization :
     (F E : factorization l3 f) → UU (l1 ⊔ l2 ⊔ l3)
   equiv-factorization F E =
-    Σ ( type-factorization F ≃ type-factorization E)
+    Σ ( image-factorization F ≃ image-factorization E)
       ( λ e →
         htpy-factorization-through f
           ( whisker-image-factorization-through f
@@ -311,24 +239,24 @@ module _
             ( factorization-through-factorization F))
           ( factorization-through-factorization E))
 
-  refl-equiv-factorization :
+  id-equiv-factorization :
     (F : factorization l3 f) → equiv-factorization F F
-  pr1 (refl-equiv-factorization F) = id-equiv
-  pr2 (refl-equiv-factorization F) =
+  pr1 (id-equiv-factorization F) = id-equiv
+  pr2 (id-equiv-factorization F) =
     refl-htpy-factorization-through f (factorization-through-factorization F)
 
   equiv-eq-factorization :
     (F E : factorization l3 f) →
     F ＝ E → equiv-factorization F E
-  equiv-eq-factorization F .F refl = refl-equiv-factorization F
+  equiv-eq-factorization F .F refl = id-equiv-factorization F
 
   is-torsorial-equiv-factorization :
     (F : factorization l3 f) →
     is-torsorial (equiv-factorization F)
   is-torsorial-equiv-factorization F =
     is-torsorial-Eq-structure _
-      ( is-torsorial-equiv (type-factorization F))
-      ( type-factorization F , id-equiv)
+      ( is-torsorial-equiv (image-factorization F))
+      ( image-factorization F , id-equiv)
       ( is-torsorial-htpy-factorization-through f
         ( factorization-through-factorization F))
 
@@ -348,3 +276,7 @@ module _
     (F E : factorization l3 f) → equiv-factorization F E → F ＝ E
   eq-equiv-factorization F E = map-inv-equiv (extensionality-factorization F E)
 ```
+
+## See also
+
+- [Factorizations of maps into function classes](orthogonal-factorization-systems.factorizations-of-maps-function-classes.md)

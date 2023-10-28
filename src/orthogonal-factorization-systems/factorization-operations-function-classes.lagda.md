@@ -48,17 +48,17 @@ module _
   factorization-operation-function-class :
     UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   factorization-operation-function-class =
-    (f : A → B) → factorization-function-class L R f
+    (f : A → B) → function-class-factorization L R f
 
   mere-factorization-property-function-class :
     UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   mere-factorization-property-function-class =
-    (f : A → B) → is-inhabited (factorization-function-class L R f)
+    (f : A → B) → is-inhabited (function-class-factorization L R f)
 
   unique-factorization-operation-function-class :
     UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   unique-factorization-operation-function-class =
-    (f : A → B) → is-contr (factorization-function-class L R f)
+    (f : A → B) → is-contr (function-class-factorization L R f)
 ```
 
 ## Properties
@@ -76,7 +76,7 @@ module _
   mere-factorization-property-function-class-Prop :
     Prop (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   mere-factorization-property-function-class-Prop =
-    Π-Prop (A → B) (is-inhabited-Prop ∘ factorization-function-class L R)
+    Π-Prop (A → B) (is-inhabited-Prop ∘ function-class-factorization L R)
 
   is-prop-mere-factorization-property-function-class :
     is-prop (mere-factorization-property-function-class L R A B)
@@ -97,7 +97,7 @@ module _
   unique-factorization-operation-function-class-Prop :
     Prop (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
   unique-factorization-operation-function-class-Prop =
-    Π-Prop (A → B) (is-contr-Prop ∘ factorization-function-class L R)
+    Π-Prop (A → B) (is-contr-Prop ∘ function-class-factorization L R)
 
   is-prop-unique-factorization-operation-function-class :
     is-prop (unique-factorization-operation-function-class L R A B)
