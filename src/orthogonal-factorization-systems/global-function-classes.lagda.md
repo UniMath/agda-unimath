@@ -42,13 +42,17 @@ module _
   (P : {l1 l2 : Level} {A : UU l1} {B : UU l2} → subtype (β l1 l2) (A → B))
   where
 
-  is-closed-under-equiv-comp-function-classes :
-    (l1 l2 l3 : Level) →
-    UU (β l1 l2 ⊔ β l1 l3 ⊔ β l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-  is-closed-under-equiv-comp-function-classes l1 l2 l3 =
+  is-closed-under-equiv-precomp-function-classes :
+    (l1 l2 l3 : Level) → UU (β l1 l2 ⊔ β l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  is-closed-under-equiv-precomp-function-classes l1 l2 l3 =
     {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) → is-in-subtype P f →
-    ((e : C ≃ A) → is-in-subtype P (f ∘ map-equiv e)) ×
-    ((e : B ≃ C) → is-in-subtype P (map-equiv e ∘ f))
+    (e : C ≃ A) → is-in-subtype P (f ∘ map-equiv e)
+
+  is-closed-under-equiv-postcomp-function-classes :
+    (l1 l2 l3 : Level) → UU (β l1 l2 ⊔ β l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  is-closed-under-equiv-postcomp-function-classes l1 l2 l3 =
+    {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) → is-in-subtype P f →
+    (e : C ≃ A) → is-in-subtype P (f ∘ map-equiv e)
 ```
 
 ### The large type of global function classes
@@ -59,9 +63,15 @@ record global-function-class (β : Level → Level → Level) : UUω where
     function-class-global-function-class :
       {l1 l2 : Level} → function-class l1 l2 (β l1 l2)
 
-    is-closed-under-equiv-comp-global-function-class :
+    is-closed-under-equiv-precomp-global-function-class :
       {l1 l2 l3 : Level} →
-      is-closed-under-equiv-comp-function-classes
+      is-closed-under-equiv-precomp-function-classes
+        ( function-class-global-function-class)
+        l1 l2 l3
+
+    is-closed-under-equiv-postcomp-global-function-class :
+      {l1 l2 l3 : Level} →
+      is-closed-under-equiv-postcomp-function-classes
         ( function-class-global-function-class)
         l1 l2 l3
 
@@ -96,8 +106,7 @@ module _
   is-emb-inclusion-global-function-class =
     is-emb-inclusion-function-class (function-class-global-function-class P)
 
-  emb-global-function-class :
-    type-global-function-class P A B ↪ (A → B)
+  emb-global-function-class : type-global-function-class P A B ↪ (A → B)
   emb-global-function-class =
     emb-function-class (function-class-global-function-class P)
 ```
@@ -202,10 +211,10 @@ module _
   has-equivalences-has-identity-maps-global-function-class :
     has-identity-maps-global-function-class P →
     has-equivalences-global-function-class P
-  has-equivalences-has-identity-maps-global-function-class has-id-P f f' =
-    pr1
-      ( is-closed-under-equiv-comp-global-function-class P id (has-id-P _))
-      ( f , f')
+  has-equivalences-has-identity-maps-global-function-class
+    has-id-P {B = B} f f' =
+    is-closed-under-equiv-precomp-global-function-class
+      P id (has-id-P B) (f , f')
 
   has-identity-maps-has-equivalences-global-function-class :
     has-equivalences-global-function-class P →
