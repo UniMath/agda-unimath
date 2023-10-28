@@ -380,6 +380,20 @@ module _
 
 ## Properties
 
+### Subcategories are categories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (P : Subcategory l3 l4 C)
+  where
+
+  is-category-Subcategory :
+    is-category-Precategory (precategory-Subcategory C P)
+  is-category-Subcategory = {!   !}
+```
+
 ### The inclusion functor is an embedding on objects and hom-sets
 
 ```agda
