@@ -39,5 +39,5 @@ module _
   where
 
   factorization-operation : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
-  factorization-operation l3 = (f : A → B) → factorization f l3
+  factorization-operation l3 = (f : A → B) → factorization l3 f
 ```
