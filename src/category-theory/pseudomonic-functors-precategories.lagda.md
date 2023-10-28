@@ -33,7 +33,13 @@ A [functor](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is **pseudomonic**
 if it is [faithful](category-theory.faithful-functors-precategories.md) on all
 morphism-[sets](foundation-core.sets.md) and full on
-[isomorphisms](category-theory.isomorphisms-in-precategories.md).
+[isomorphisms](category-theory.isomorphisms-in-precategories.md). In particular,
+this means it induces an equivalence on isomorphism-sets.
+
+Pseudomonic functors present
+[replete subprecategories](category-theory.replete-subprecategories.md), which
+is the "right notion" of subcategory with respect to the _principle of
+invariance under equivalences_.
 
 ## Definition
 
@@ -283,6 +289,8 @@ module _
 
 ## See also
 
+- Pseudomonic functors present
+  [replete subprecategories](category-theory.replete-subprecategories.md).
 - [Fully faithful functors between precategories](category-theory.pseudomonic-functors-precategories.md)
 
 ## External links
