@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.propositions
 open import foundation.universe-levels
 open import foundation.unit-type
 
@@ -81,55 +82,40 @@ module _
 
 ### Properties
 
+The codiagonal is the fiberwise suspension (as claimed at the top).
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
   where
 
---  fiber (horizontal-map-cocone f f (cocone-codiagonal-map f)) b
-  test : fiber (horizontal-map-cocone f f (cocone-codiagonal-map f)) b ≃ fiber id b
-  test = id , {!id-is-equiv!}
-
-  suspension-cocone-fiber : suspension-cocone (fiber f b) (fiber (codiagonal-map f) b)
-  suspension-cocone-fiber = pr1 (
-    universal-property-pushout-cogap-fiber-up-to-equiv
-     f
-     f
-     (cocone-codiagonal-map f)
-     b
-     (fiber f b)
-     unit
-     unit
-     (inv-equiv (terminal-map , (is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
-     (inv-equiv (terminal-map , (is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
-     (id , is-equiv-id)
-     terminal-map
-     terminal-map
-     (λ x → {!!})
-     (λ x → {!!}))
-
-  suspension-structure-fiber' : suspension-structure (fiber f b) (fiber (codiagonal-map f) b)
-  suspension-structure-fiber' = {!!} {-
-    map-equiv
-     ( equiv-suspension-structure-suspension-cocone
-       ( fiber f b)
-       ( fiber (codiagonal-map f) b))
-     ( suspension-cocone-fiber) -}
-
-  is-suspension-fiber :
+  universal-property-suspension-cocone-fiber :
     {l : Level} →
-    is-suspension l (fiber f b) (fiber (codiagonal-map f) b)
-  is-suspension-fiber = {!!}
+    Σ ( cocone terminal-map terminal-map (fiber (codiagonal-map f) b))
+      ( universal-property-pushout l terminal-map terminal-map)
+  universal-property-suspension-cocone-fiber =
+    universal-property-pushout-cogap-fiber-up-to-equiv f f
+     ( cocone-codiagonal-map f)
+     ( b)
+     ( fiber f b)
+     ( unit)
+     ( unit)
+     ( inv-equiv
+       ( terminal-map ,
+       ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
+     ( inv-equiv
+       ( terminal-map ,
+       ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
+     ( id , is-equiv-id)
+     ( terminal-map)
+     ( terminal-map)
+     ( λ _ → eq-is-prop (is-prop-is-contr (is-torsorial-path' b)))
+     ( λ _ → eq-is-prop (is-prop-is-contr (is-torsorial-path' b)))
 
-  {-
-  universal-property-suspension-fiber' :
-    {l : Level} →
-    universal-property-suspension' l
-      ( fiber f b)
-      ( fiber (codiagonal-map f) b)
-      ( suspension-structure-fiber)
-  universal-property-suspension-fiber' = pushout-5 -}
-
+  suspension-cocone-fiber :
+    suspension-cocone (fiber f b) (fiber (codiagonal-map f) b)
+  suspension-cocone-fiber =
+    pr1 (universal-property-suspension-cocone-fiber {lzero})
 
   universal-property-suspension-fiber :
     {l : Level} →
@@ -137,11 +123,12 @@ module _
       ( terminal-map)
       ( terminal-map)
       ( suspension-cocone-fiber)
-  universal-property-suspension-fiber {l} = {!!}
+  universal-property-suspension-fiber =
+    pr2 universal-property-suspension-cocone-fiber
 
-  suspension-fiber-is-fiber-codiagonal-map :
+  equiv-suspension-fiber-fiber-codiagonal-map :
     suspension (fiber f b) ≃ fiber (codiagonal-map f) b
-  suspension-fiber-is-fiber-codiagonal-map =
+  equiv-suspension-fiber-fiber-codiagonal-map =
     ( cogap terminal-map terminal-map suspension-cocone-fiber ,
       is-equiv-up-pushout-up-pushout
         ( terminal-map)
