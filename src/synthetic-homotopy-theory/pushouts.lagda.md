@@ -384,9 +384,8 @@ fibers.
 
     universal-property-pushout-cogap-fiber-up-to-equiv :
       { l : Level} →
-      ( Σ
-        ( cocone u v (fiber (cogap f g c) x))
-        ( λ c → universal-property-pushout l u v c))
+      ( Σ ( cocone u v (fiber (cogap f g c) x))
+          ( λ c → universal-property-pushout l u v c))
     pr1 universal-property-pushout-cogap-fiber-up-to-equiv = _
     pr2 (universal-property-pushout-cogap-fiber-up-to-equiv {l}) =
       universal-property-pushout-extended-by-equivalences
