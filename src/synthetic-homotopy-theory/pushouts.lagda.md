@@ -214,10 +214,12 @@ module _
 
 ### Fibers of the cogap map
 
-We characterize the fibers of the cogap map as a pushout of fibers. This is an
-application of the flattening lemma for pushouts.
+We characterize the [fibers](foundation-core.fibers-of-maps.md) of the cogap map
+as a pushout of fibers. This is an application of the
+[flattening lemma for pushouts](synthetic-homotopy-theory.flattening-lemma-pushouts.md).
 
-Given a pushout square with a cocone
+Given a pushout square with a
+[cocone](synthetic-homotopy-theory.cocones-under-spans.md)
 
 ```text
        g
