@@ -579,18 +579,6 @@ module _
   ( coh : coherence-square-maps i f' f j)
   where
 
-  universal-property-pushout-left-extension-by-equivalences :
-    {l : Level} → is-equiv i → is-equiv j →
-    Σ (cocone f' (g ∘ i) X) (universal-property-pushout l f' (g ∘ i))
-  pr1 (universal-property-pushout-left-extension-by-equivalences ie je) =
-    cocone-comp-horizontal' f' i g f j c coh
-  pr2 (universal-property-pushout-left-extension-by-equivalences ie je) =
-    universal-property-pushout-rectangle-universal-property-pushout-right f' i g
-      ( j , f , coh)
-      ( c)
-      ( universal-property-pushout-is-equiv' f' i (j , f , coh) ie je)
-      ( up-c)
-
   universal-property-pushout-left-extended-by-equivalences :
     is-equiv i → is-equiv j →
     {l : Level} →
@@ -599,7 +587,19 @@ module _
       ( g ∘ i)
       ( cocone-comp-horizontal' f' i g f j c coh)
   universal-property-pushout-left-extended-by-equivalences ie je =
-    pr2 (universal-property-pushout-left-extension-by-equivalences ie je)
+    universal-property-pushout-rectangle-universal-property-pushout-right f' i g
+      ( j , f , coh)
+      ( c)
+      ( universal-property-pushout-is-equiv' f' i (j , f , coh) ie je)
+      ( up-c)
+
+  universal-property-pushout-left-extension-by-equivalences :
+    {l : Level} → is-equiv i → is-equiv j →
+    Σ (cocone f' (g ∘ i) X) (universal-property-pushout l f' (g ∘ i))
+  pr1 (universal-property-pushout-left-extension-by-equivalences ie je) =
+    cocone-comp-horizontal' f' i g f j c coh
+  pr2 (universal-property-pushout-left-extension-by-equivalences ie je) =
+    universal-property-pushout-left-extended-by-equivalences ie je
 ```
 
 #### The vertical pushout pasting lemma
@@ -789,18 +789,6 @@ module _
   ( coh : coherence-square-maps g' i j g)
   where
 
-  universal-property-pushout-top-extension-by-equivalences :
-    {l : Level} → is-equiv i → is-equiv j →
-    Σ (cocone (f ∘ i) g' X) (universal-property-pushout l (f ∘ i) g')
-  pr1 (universal-property-pushout-top-extension-by-equivalences ie je) =
-    cocone-comp-vertical' i g' j g f c coh
-  pr2 (universal-property-pushout-top-extension-by-equivalences ie je) =
-    universal-property-pushout-rectangle-universal-property-pushout-top i g' f
-      ( g , j , coh)
-      ( c)
-      ( universal-property-pushout-is-equiv i g' (g , j , coh) ie je)
-      ( up-c)
-
   universal-property-pushout-top-extended-by-equivalences :
     is-equiv i → is-equiv j →
     {l : Level} →
@@ -809,7 +797,19 @@ module _
       ( g')
       ( cocone-comp-vertical' i g' j g f c coh)
   universal-property-pushout-top-extended-by-equivalences ie je =
-    pr2 (universal-property-pushout-top-extension-by-equivalences ie je)
+    universal-property-pushout-rectangle-universal-property-pushout-top i g' f
+      ( g , j , coh)
+      ( c)
+      ( universal-property-pushout-is-equiv i g' (g , j , coh) ie je)
+      ( up-c)
+
+  universal-property-pushout-top-extension-by-equivalences :
+    {l : Level} → is-equiv i → is-equiv j →
+    Σ (cocone (f ∘ i) g' X) (universal-property-pushout l (f ∘ i) g')
+  pr1 (universal-property-pushout-top-extension-by-equivalences ie je) =
+    cocone-comp-vertical' i g' j g f c coh
+  pr2 (universal-property-pushout-top-extension-by-equivalences ie je) =
+    universal-property-pushout-top-extended-by-equivalences ie je
 ```
 
 ### Extending pushouts by equivalences of cocones
