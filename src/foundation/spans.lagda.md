@@ -8,6 +8,7 @@ module foundation.spans where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -23,7 +24,6 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -170,6 +170,29 @@ module _
   binary-relation-span S a b =
     Σ ( domain-span S)
       ( λ s → (left-map-span S s ＝ a) × (right-map-span S s ＝ b))
+
+  compute-binary-relation-span :
+    map-inv-equiv equiv-span-binary-relation ~ binary-relation-span
+  compute-binary-relation-span S =
+    inv
+      ( map-eq-transpose-equiv equiv-span-binary-relation
+        ( eq-htpy-span
+          ( l1 ⊔ l2 ⊔ l)
+          ( A)
+          ( B)
+          ( _)
+          ( _)
+          ( ( equiv-pr1 (λ s → is-torsorial-path (left-map-span S s))) ∘e
+            ( equiv-left-swap-Σ) ∘e
+            ( equiv-tot
+              ( λ a →
+                ( equiv-tot
+                  ( λ s →
+                    equiv-pr1 (λ _ → is-torsorial-path (right-map-span S s)) ∘e
+                    equiv-left-swap-Σ)) ∘e
+                ( equiv-left-swap-Σ))) ,
+            ( inv-htpy (pr1 ∘ pr2 ∘ pr2 ∘ pr2)) ,
+            ( inv-htpy (pr2 ∘ pr2 ∘ pr2 ∘ pr2)))))
 ```
 
 ## See also
