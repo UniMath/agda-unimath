@@ -8,9 +8,11 @@ module modal-logic.axioms where
 
 ```agda
 open import foundation.conjunction
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
@@ -66,6 +68,23 @@ module _
   ax-dn (((a₁ ⇒ ⊥) ⇒ ⊥) ⇒ a₂) = Id-formula-Prop a₁ a₂
   {-# CATCHALL #-}
   ax-dn _ = raise-empty-Prop l
+
+  ax-dn' : formulas l i
+  ax-dn' f = ∃-Prop (formula i) (λ a → f ＝ (~~ a ⇒ a))
+
+  ax-dn'' : formulas l i
+  pr1 (ax-dn'' f) = Σ (formula i) (λ a → f ＝ (~~ a ⇒ a))
+  pr2 (ax-dn'' (((a₁ ⇒ ⊥) ⇒ ⊥) ⇒ a₁)) (a₁ , refl) =
+    is-prop-is-contr
+      ( is-contr-Σ-is-prop
+        ( a₁)
+        ( refl)
+        ( λ _ → is-set-formula i _ _)
+        ( λ _ → arrow-right-eq))
+      ( a₁ , refl)
+    where
+    arrow-right-eq : {a b x y : formula i} → x ⇒ a ＝ y ⇒ b → a ＝ b
+    arrow-right-eq refl = refl
 
 module _
   {l1 l2 : Level}
@@ -152,4 +171,31 @@ module _
   ax-dn-soundness (((_ ⇒ ⊥) ⇒ var _) ⇒ _) (map-raise ())
   ax-dn-soundness (((_ ⇒ ⊥) ⇒ _ ⇒ _) ⇒ _) (map-raise ())
   ax-dn-soundness (((_ ⇒ ⊥) ⇒ □ _) ⇒ _) (map-raise ())
+
+  ax-dn-soundness' : soundness (ax-dn' i) (decidable-models w l3 i l4)
+  ax-dn-soundness' a =
+    map-universal-property-trunc-Prop
+      ( decidable-models w l3 i l4 ⊨C a)
+      ( aux)
+      -- with inductor
+      -- ( λ {
+      --   (b , refl) M is-dec x f →
+      --     ( ind-coprod
+      --         ( λ _ → type-Prop ((M , x) ⊨ b))
+      --         ( id)
+      --         ( λ fna → raise-ex-falso _ (f (λ fa -> map-raise (fna fa))))
+      --         ( is-dec b x))})
+    where
+    aux :
+      Σ (formula i) (λ b → a ＝ ((b ⇒ ⊥) ⇒ ⊥) ⇒ b) →
+      type-Prop (decidable-models w l3 i l4 ⊨C a)
+    aux (b , refl) M is-dec x f with (is-dec b x)
+    ... | inl fa = fa
+    ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))
+
+  ax-dn-soundness'' : soundness (ax-dn'' i) (decidable-models w l3 i l4)
+  ax-dn-soundness''
+    (((a ⇒ ⊥) ⇒ ⊥) ⇒ a) (a , refl) _ is-dec x f with (is-dec a x)
+  ... | inl fa = fa
+  ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))
 ```

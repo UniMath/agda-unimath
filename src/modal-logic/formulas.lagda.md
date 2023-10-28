@@ -36,7 +36,7 @@ module _
   {l : Level} (i : Set l)
   where
 
-  infixr 6 _⇒_
+  infixr 7 _⇒_
   infixr 25 □_
 
   data formula : UU l where
