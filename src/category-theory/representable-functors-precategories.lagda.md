@@ -7,12 +7,12 @@ module category-theory.representable-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.copresheaf-categories
 open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
-open import category-theory.presheaf-categories
 
 open import foundation.category-of-sets
 open import foundation.dependent-pair-types
@@ -141,7 +141,7 @@ module _
   map-representable-functor-copresheaf-Precategory :
     map-Precategory
       ( opposite-Precategory C)
-      ( copresheaf-precategory-Large-Precategory C l2)
+      ( copresheaf-Precategory C l2)
   pr1 map-representable-functor-copresheaf-Precategory =
     representable-functor-Precategory C
   pr2 map-representable-functor-copresheaf-Precategory =

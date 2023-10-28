@@ -26,6 +26,7 @@ open import category-theory.category-of-maps-from-small-to-large-categories publ
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.composition-operations-on-binary-families-of-sets public
+open import category-theory.copresheaf-categories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.dependent-products-of-categories public
 open import category-theory.dependent-products-of-large-categories public
@@ -90,6 +91,7 @@ open import category-theory.natural-isomorphisms-maps-categories public
 open import category-theory.natural-isomorphisms-maps-precategories public
 open import category-theory.natural-numbers-object-precategories public
 open import category-theory.natural-transformations-functors-categories public
+open import category-theory.natural-transformations-functors-from-small-to-large-categories public
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories public
 open import category-theory.natural-transformations-functors-large-categories public
 open import category-theory.natural-transformations-functors-large-precategories public
