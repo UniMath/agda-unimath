@@ -9,6 +9,7 @@ module foundation.equality-dependent-function-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.implicit-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
