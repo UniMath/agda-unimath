@@ -30,7 +30,12 @@ open import orthogonal-factorization-systems.function-classes
 ## Idea
 
 A **global function class** is a global [subtype](foundation.subtypes.md) of
-function types that is closed under equivalences.
+function types that is closed under composition with
+[equivalences](foundation-core.equivalences.md).
+
+Note that composition with homogenous equivalences follows from
+[univalence](foundation.univalence.md), so this condition should hold for the
+correct universe polymorphic definition.
 
 ## Definitions
 
@@ -203,6 +208,8 @@ module _
 
 ### Having identities is equivalent to having equivalences
 
+This follows from either of the closure properties of global function classes.
+
 ```agda
 module _
   {β : Level → Level → Level} (P : global-function-class β)
@@ -214,6 +221,14 @@ module _
   has-equivalences-has-identity-maps-global-function-class
     has-id-P {B = B} f f' =
     is-closed-under-equiv-precomp-global-function-class
+      P id (has-id-P B) (f , f')
+
+  has-equivalences-has-identity-maps-global-function-class' :
+    has-identity-maps-global-function-class P →
+    has-equivalences-global-function-class P
+  has-equivalences-has-identity-maps-global-function-class'
+    has-id-P {B = B} f f' =
+    is-closed-under-equiv-postcomp-global-function-class
       P id (has-id-P B) (f , f')
 
   has-identity-maps-has-equivalences-global-function-class :
