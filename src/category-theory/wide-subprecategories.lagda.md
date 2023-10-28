@@ -7,21 +7,35 @@ module category-theory.wide-subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
+open import category-theory.isomorphism-induction-categories
+open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.isomorphisms-in-subprecategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
+open import category-theory.replete-subprecategories
+open import category-theory.subcategories
 open import category-theory.subprecategories
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -56,7 +70,7 @@ module _
   is-prop-is-wide-Subprecategory = is-prop-type-Prop is-wide-prop-Subprecategory
 ```
 
-### asdasd
+### Wide sub-hom-families of precategories
 
 ```agda
 module _

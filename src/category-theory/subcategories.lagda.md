@@ -53,12 +53,24 @@ contains the isomorphisms, and hence defines a category.
 
 ## Definitions
 
+### Sub-hom-families of categories
+
+```agda
+subtype-hom-Category :
+  {l1 l2 l3 : Level} (l4 : Level)
+  (C : Category l1 l2)
+  (P₀ : subtype l3 (obj-Category C)) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
+subtype-hom-Category l4 C = subtype-hom-Precategory l4 (precategory-Category C)
+```
+
+### Categorical predicates on sub-hom-families of categories
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Category l1 l2)
   (P₀ : subtype l3 (obj-Category C))
-  (P₁ : subtype-hom-Precategory l4 (precategory-Category C) P₀)
+  (P₁ : subtype-hom-Category l4 C P₀)
   where
 
   contains-id-subtype-Category : UU (l1 ⊔ l3 ⊔ l4)
@@ -98,7 +110,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Category l1 l2)
   (P₀ : subtype l3 (obj-Category C))
-  (P₁ : subtype-hom-Precategory l4 (precategory-Category C) P₀)
+  (P₁ : subtype-hom-Category l4 C P₀)
   where
 
   is-subcategory-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -177,9 +189,7 @@ module _
   where
 
   subtype-hom-Subcategory :
-    subtype-hom-Precategory l4
-      ( precategory-Category C)
-      ( subtype-obj-Subcategory C P)
+    subtype-hom-Category l4 C (subtype-obj-Subcategory C P)
   subtype-hom-Subcategory =
     subtype-hom-Subprecategory (precategory-Category C) P
 
