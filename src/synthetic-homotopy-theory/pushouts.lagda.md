@@ -233,7 +233,7 @@ Given a pushout square with a
        \-----> X
 ```
 
-we have, for every x : X, a pushout square of fibers:
+we have, for every `x : X`, a pushout square of fibers:
 
 ```text
    fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
