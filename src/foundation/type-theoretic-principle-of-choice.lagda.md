@@ -279,7 +279,7 @@ module _
   eq-Eq-implicit-Π-total-fam = map-inv-equiv extensionality-implicit-Π-total-fam
 ```
 
-### The distributivity of implicit Π over Σ
+### Ordinary functions into a Σ-type
 
 ```agda
 module _
