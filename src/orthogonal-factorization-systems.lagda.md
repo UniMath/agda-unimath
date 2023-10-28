@@ -15,6 +15,8 @@ open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorization-operations-function-classes public
 open import orthogonal-factorization-systems.factorization-operations-global-function-classes public
 open import orthogonal-factorization-systems.factorizations-of-maps public
+open import orthogonal-factorization-systems.factorizations-of-maps-function-classes public
+open import orthogonal-factorization-systems.factorizations-of-maps-global-function-classes public
 open import orthogonal-factorization-systems.function-classes public
 open import orthogonal-factorization-systems.functoriality-pullback-hom public
 open import orthogonal-factorization-systems.global-function-classes public

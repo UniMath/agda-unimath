@@ -8,12 +8,12 @@ module orthogonal-factorization-systems.factorization-operations-global-function
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.inhabited-types
-open import foundation.propositions
 open import foundation.iterated-dependent-product-types
+open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.dependent-pair-types
 
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.global-function-classes
@@ -52,7 +52,7 @@ module _
     (l1 l2 l3 : Level) → UU (βL l1 l3 ⊔ βR l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   factorization-operation-global-function-class-Level l1 l2 l3 =
     {A : UU l1} {B : UU l2} (f : A → B) →
-    factorization-global-function-class L R l3 f
+    global-function-class-factorization L R l3 f
 
   factorization-operation-global-function-class : UUω
   factorization-operation-global-function-class =
@@ -73,7 +73,7 @@ module _
     (l1 l2 l3 : Level) → UU (βL l1 l3 ⊔ βR l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   unique-factorization-operation-global-function-class-Level l1 l2 l3 =
     {A : UU l1} {B : UU l2} (f : A → B) →
-    is-contr (factorization-global-function-class L R l3 f)
+    is-contr (global-function-class-factorization L R l3 f)
 
   is-prop-unique-factorization-operation-global-function-class-Level :
     {l1 l2 l3 : Level} →
@@ -109,7 +109,7 @@ module _
     (l1 l2 l3 : Level) → UU (βL l1 l3 ⊔ βR l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   mere-factorization-property-global-function-class-Level l1 l2 l3 =
     {A : UU l1} {B : UU l2} (f : A → B) →
-    is-inhabited (factorization-global-function-class L R l3 f)
+    is-inhabited (global-function-class-factorization L R l3 f)
 
   is-prop-mere-factorization-property-global-function-class-Level :
     {l1 l2 l3 : Level} →
@@ -120,7 +120,7 @@ module _
         is-prop-Π
           ( λ f →
             is-property-is-inhabited
-              ( factorization-global-function-class L R l3 f)))
+              ( global-function-class-factorization L R l3 f)))
 
   mere-factorization-property-global-function-class-Prop :
     (l1 l2 l3 : Level) →
