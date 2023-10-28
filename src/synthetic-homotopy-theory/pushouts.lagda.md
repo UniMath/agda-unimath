@@ -303,9 +303,8 @@ square commute (almost) trivially.
 
   universal-property-pushout-cogap-fiber :
     statement-universal-property-pushout-cogap-fiber
-  pr1 universal-property-pushout-cogap-fiber = _
-  pr2 universal-property-pushout-cogap-fiber =
-    universal-property-pushout-extended-by-equivalences
+  universal-property-pushout-cogap-fiber =
+    universal-property-pushout-extension-by-equivalences
       ( vertical-map-span-flattening-pushout
         ( λ y → cogap f g c y ＝ x)
         ( f)
@@ -387,9 +386,8 @@ fibers.
       { l : Level} →
       ( Σ ( cocone u v (fiber (cogap f g c) x))
           ( λ c → universal-property-pushout l u v c))
-    pr1 universal-property-pushout-cogap-fiber-up-to-equiv = _
-    pr2 (universal-property-pushout-cogap-fiber-up-to-equiv {l}) =
-      universal-property-pushout-extended-by-equivalences
+    universal-property-pushout-cogap-fiber-up-to-equiv {l} =
+      universal-property-pushout-extension-by-equivalences
         ( horizontal-map-span-cogap-fiber)
         ( vertical-map-span-cogap-fiber)
         ( u)
