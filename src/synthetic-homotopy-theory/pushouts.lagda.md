@@ -236,11 +236,11 @@ Given a pushout square with a
 we have, for every `x : X`, a pushout square of fibers:
 
 ```text
-   fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
-          |                       |
-          |                       |
-          v                    ⌜  v
-fiber (cogap ∘ inl) x ----> fiber cogap x
+    fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
+           |                       |
+           |                       |
+           v                    ⌜  v
+ fiber (cogap ∘ inl) x ----> fiber cogap x
 ```
 
 ```agda
