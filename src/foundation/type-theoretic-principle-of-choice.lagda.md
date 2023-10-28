@@ -9,6 +9,7 @@ module foundation.type-theoretic-principle-of-choice where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.implicit-function-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -30,9 +31,9 @@ distributivity of Π over Σ, is also known as the type theoretic principle of
 choice. Indeed, it is the Curry-Howard interpretation of (one formulation of)
 the axiom of choice.
 
-## Distributivity of Π over Σ
+We establish this equivalence both for explicit and implicit function types.
 
-### Definitions
+## Definitions
 
 ```agda
 module _
@@ -45,11 +46,18 @@ module _
 
   universally-structured-Π : UU (l1 ⊔ l2 ⊔ l3)
   universally-structured-Π = Σ ((x : A) → B x) (λ f → (x : A) → C x (f x))
+
+  implicit-Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
+  implicit-Π-total-fam = {x : A} → Σ (B x) (C x)
+
+  universally-structured-implicit-Π : UU (l1 ⊔ l2 ⊔ l3)
+  universally-structured-implicit-Π =
+    Σ ({x : A} → B x) (λ f → {x : A} → C x (f {x}))
 ```
 
-### Properties
+## Lemma
 
-#### Characterizing the identity type of `universally-structured-Π`
+### Characterizing the identity type of `universally-structured-Π`
 
 ```agda
 module _
@@ -81,7 +89,41 @@ module _
     map-inv-equiv (extensionality-universally-structured-Π t t')
 ```
 
-#### The distributivity of Π over Σ
+### Characterizing the identity type of `universally-structured-implicit-Π`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  where
+
+  htpy-universally-structured-implicit-Π :
+    (t t' : universally-structured-implicit-Π C) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-universally-structured-implicit-Π t t' =
+    universally-structured-Π
+      ( λ (x : A) (p : (pr1 t) {x} ＝ (pr1 t') {x}) →
+        tr (C x) p ((pr2 t) {x}) ＝ (pr2 t') {x})
+
+  extensionality-universally-structured-implicit-Π :
+    (t t' : universally-structured-implicit-Π C) →
+    (t ＝ t') ≃ htpy-universally-structured-implicit-Π t t'
+  extensionality-universally-structured-implicit-Π (f , g) =
+    extensionality-Σ
+      ( λ {f'} g' H → (x : A) → tr (C x) (H x) (g {x}) ＝ g' {x})
+      ( refl-htpy)
+      ( refl-htpy)
+      ( λ f' → equiv-funext-implicit)
+      ( λ g' → equiv-funext-implicit)
+
+  eq-htpy-universally-structured-implicit-Π :
+    {t t' : universally-structured-implicit-Π C} →
+    htpy-universally-structured-implicit-Π t t' → t ＝ t'
+  eq-htpy-universally-structured-implicit-Π {t} {t'} =
+    map-inv-equiv (extensionality-universally-structured-implicit-Π t t')
+```
+
+## Theorem
+
+### The distributivity of Π over Σ
 
 ```agda
 module _
@@ -131,107 +173,7 @@ module _
   pr2 inv-distributive-Π-Σ = is-equiv-map-inv-distributive-Π-Σ
 ```
 
-### Consequences
-
-#### Characterizing the identity type of `Π-total-fam`
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  (f g : (a : A) → Σ (B a) (C a))
-  where
-
-  Eq-Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
-  Eq-Π-total-fam =
-    Π-total-fam (λ x (p : pr1 (f x) ＝ pr1 (g x)) →
-      tr (C x) p (pr2 (f x)) ＝ pr2 (g x))
-
-  extensionality-Π-total-fam : (f ＝ g) ≃ Eq-Π-total-fam
-  extensionality-Π-total-fam =
-    ( inv-distributive-Π-Σ) ∘e
-    ( extensionality-universally-structured-Π C
-      ( map-distributive-Π-Σ f)
-      ( map-distributive-Π-Σ g)) ∘e
-    ( equiv-ap distributive-Π-Σ f g)
-
-  eq-Eq-Π-total-fam : Eq-Π-total-fam → f ＝ g
-  eq-Eq-Π-total-fam = map-inv-equiv extensionality-Π-total-fam
-```
-
-#### Ordinary functions into a Σ-type
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
-  where
-
-  mapping-into-Σ :
-    (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
-  mapping-into-Σ = map-distributive-Π-Σ {B = λ _ → B}
-
-  abstract
-    is-equiv-mapping-into-Σ : is-equiv mapping-into-Σ
-    is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
-
-  equiv-mapping-into-Σ :
-    (A → Σ B C) ≃ Σ (A → B) (λ f → (x : A) → C (f x))
-  pr1 equiv-mapping-into-Σ = mapping-into-Σ
-  pr2 equiv-mapping-into-Σ = is-equiv-mapping-into-Σ
-```
-
-## Distributivity of implicit Π over Σ
-
-### Definitions
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (C : (x : A) → B x → UU l3)
-  where
-
-  implicit-Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
-  implicit-Π-total-fam = {x : A} → Σ (B x) (C x)
-
-  universally-structured-implicit-Π : UU (l1 ⊔ l2 ⊔ l3)
-  universally-structured-implicit-Π =
-    Σ ({x : A} → B x) (λ f → {x : A} → C x (f {x}))
-```
-
-### Properties
-
-#### Characterizing the identity type of `universally-structured-implicit-Π`
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  where
-
-  htpy-universally-structured-implicit-Π :
-    (t t' : universally-structured-implicit-Π C) → UU (l1 ⊔ l2 ⊔ l3)
-  htpy-universally-structured-implicit-Π t t' =
-    universally-structured-Π
-      ( λ (x : A) (p : (pr1 t) {x} ＝ (pr1 t') {x}) →
-        tr (C x) p ((pr2 t) {x}) ＝ (pr2 t') {x})
-
-  extensionality-universally-structured-implicit-Π :
-    (t t' : universally-structured-implicit-Π C) →
-    (t ＝ t') ≃ htpy-universally-structured-implicit-Π t t'
-  extensionality-universally-structured-implicit-Π (pair f g) =
-    extensionality-Σ
-      ( λ {f'} g' H → (x : A) → tr (C x) (H x) (g {x}) ＝ g' {x})
-      ( refl-htpy)
-      ( refl-htpy)
-      ( λ f' → equiv-funext-implicit)
-      ( λ g' → equiv-funext-implicit)
-
-  eq-htpy-universally-structured-implicit-Π :
-    {t t' : universally-structured-implicit-Π C} →
-    htpy-universally-structured-implicit-Π t t' → t ＝ t'
-  eq-htpy-universally-structured-implicit-Π {t} {t'} =
-    map-inv-equiv (extensionality-universally-structured-implicit-Π t t')
-```
-
-#### The distributivity of implicit Π over Σ
+### The distributivity of implicit Π over Σ
 
 ```agda
 module _
@@ -287,4 +229,72 @@ module _
     (universally-structured-implicit-Π C) ≃ (implicit-Π-total-fam C)
   pr1 inv-distributive-implicit-Π-Σ = map-inv-distributive-implicit-Π-Σ
   pr2 inv-distributive-implicit-Π-Σ = is-equiv-map-inv-distributive-implicit-Π-Σ
+```
+
+## Corollaries
+
+### Characterizing the identity type of `Π-total-fam`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  (f g : (a : A) → Σ (B a) (C a))
+  where
+
+  Eq-Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
+  Eq-Π-total-fam =
+    Π-total-fam (λ x (p : pr1 (f x) ＝ pr1 (g x)) →
+      tr (C x) p (pr2 (f x)) ＝ pr2 (g x))
+
+  extensionality-Π-total-fam : (f ＝ g) ≃ Eq-Π-total-fam
+  extensionality-Π-total-fam =
+    ( inv-distributive-Π-Σ) ∘e
+    ( extensionality-universally-structured-Π C
+      ( map-distributive-Π-Σ f)
+      ( map-distributive-Π-Σ g)) ∘e
+    ( equiv-ap distributive-Π-Σ f g)
+
+  eq-Eq-Π-total-fam : Eq-Π-total-fam → f ＝ g
+  eq-Eq-Π-total-fam = map-inv-equiv extensionality-Π-total-fam
+```
+
+### Characterizing the identity type of `implicit-Π-total-fam`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  (f g : {a : A} → Σ (B a) (C a))
+  where
+
+  extensionality-implicit-Π-total-fam :
+    (Id {A = {a : A} → Σ (B a) (C a)} f g) ≃
+    Eq-Π-total-fam C (λ x → f {x}) (λ x → g {x})
+  extensionality-implicit-Π-total-fam =
+    ( extensionality-Π-total-fam C (λ x → f {x}) (λ x → g {x})) ∘e
+    ( equiv-ap equiv-explicit-implicit-Π f g)
+
+  eq-Eq-implicit-Π-total-fam :
+    Eq-Π-total-fam C (λ x → f {x}) (λ x → g {x}) →
+    (Id {A = {a : A} → Σ (B a) (C a)} f g)
+  eq-Eq-implicit-Π-total-fam = map-inv-equiv extensionality-implicit-Π-total-fam
+```
+
+### The distributivity of implicit Π over Σ
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  where
+
+  mapping-into-Σ : (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
+  mapping-into-Σ = map-distributive-Π-Σ {B = λ _ → B}
+
+  abstract
+    is-equiv-mapping-into-Σ : is-equiv mapping-into-Σ
+    is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
+
+  equiv-mapping-into-Σ :
+    (A → Σ B C) ≃ Σ (A → B) (λ f → (x : A) → C (f x))
+  pr1 equiv-mapping-into-Σ = mapping-into-Σ
+  pr2 equiv-mapping-into-Σ = is-equiv-mapping-into-Σ
 ```

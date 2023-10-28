@@ -53,7 +53,7 @@ module _
   pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
 ```
 
-### Equality if explicit functions is equality of implicit functions
+### Equality of explicit functions is equality of implicit functions
 
 ```agda
 module _
