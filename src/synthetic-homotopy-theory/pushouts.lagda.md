@@ -294,16 +294,13 @@ square commute (almost) trivially.
   statement-universal-property-pushout-cogap-fiber : UUω
   statement-universal-property-pushout-cogap-fiber =
     { l : Level} →
-    ( Σ
-      ( cocone
+    Σ ( cocone
         ( horizontal-map-span-cogap-fiber)
         ( vertical-map-span-cogap-fiber)
         ( fiber (cogap f g c) x))
-      ( λ c →
-        universal-property-pushout l
+      ( universal-property-pushout l
         ( horizontal-map-span-cogap-fiber)
-        ( vertical-map-span-cogap-fiber)
-        ( c)))
+        ( vertical-map-span-cogap-fiber))
 
   universal-property-pushout-cogap-fiber :
     statement-universal-property-pushout-cogap-fiber
