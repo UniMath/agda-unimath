@@ -141,6 +141,12 @@ module _
 
 ### Spans are equivalent to binary relations
 
+Using the principles of [type duality](foundation.type-duality.md) and
+[type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md),
+we can show that the type of spans `A <-- S --> B` is
+[equivalent](foundation.equivalences.md) to the type of type-valued binary
+relations `A → B → 𝓤`.
+
 ```agda
 module _
   { l1 l2 l : Level} (A : UU l1) (B : UU l2)
