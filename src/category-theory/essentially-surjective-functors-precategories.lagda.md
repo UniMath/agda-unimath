@@ -110,7 +110,7 @@ Rezk completion_.
 
 ## See also
 
-- [Split essentially surjective functor between precategories](category-theory.split-essential-surjective-functors-precategories.md)
+- [Split essentially surjective functor between precategories](category-theory.split-essentially-surjective-functors-precategories.md)
 
 ## References
 
