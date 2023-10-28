@@ -259,7 +259,8 @@ subprecategory:
     Σ ( is-in-obj-Subprecategory C P x)
       ( λ x₀ →
         Σ ( is-in-obj-Subprecategory C P y)
-          ( λ y₀ → is-in-subtype (subtype-hom-Subprecategory x y x₀ y₀) f))
+          ( λ y₀ →
+            is-in-hom-obj-subprecategory-Subprecategory (x , x₀) (y , y₀) f))
 
   is-prop-is-in-hom-Subprecategory :
     (x y : obj-Precategory C) (f : hom-Precategory C x y) →

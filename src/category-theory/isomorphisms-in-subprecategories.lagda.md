@@ -14,6 +14,7 @@ open import category-theory.subprecategories
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -29,16 +30,38 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (P : Subprecategory l3 l4 C)
+  {x y : obj-Subprecategory C P}
+  (f : hom-Subprecategory C P x y)
   where
 
-  is-iso-Subprecategory :
-    {x y : obj-Subprecategory C P} → hom-Subprecategory C P x y → UU (l2 ⊔ l4)
-  is-iso-Subprecategory {x} {y} =
-    is-iso-Precategory (precategory-Subprecategory C P) {x} {y}
+  is-iso-prop-Subprecategory : Prop (l2 ⊔ l4)
+  is-iso-prop-Subprecategory =
+    is-iso-prop-Precategory (precategory-Subprecategory C P) {x} {y} f
 
-  iso-Subprecategory :
-    (x y : obj-Subprecategory C P) → UU (l2 ⊔ l4)
-  iso-Subprecategory = iso-Precategory (precategory-Subprecategory C P)
+  is-iso-Subprecategory : UU (l2 ⊔ l4)
+  is-iso-Subprecategory = type-Prop is-iso-prop-Subprecategory
+
+  is-prop-is-iso-Subprecategory : is-prop is-iso-Subprecategory
+  is-prop-is-iso-Subprecategory = is-prop-type-Prop is-iso-prop-Subprecategory
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (P : Subprecategory l3 l4 C)
+  (x y : obj-Subprecategory C P)
+  where
+
+  iso-set-Subprecategory : Set (l2 ⊔ l4)
+  iso-set-Subprecategory =
+    iso-set-Precategory (precategory-Subprecategory C P) {x} {y}
+
+  iso-Subprecategory : UU (l2 ⊔ l4)
+  iso-Subprecategory = type-Set iso-set-Subprecategory
+
+  is-set-iso-Subprecategory : is-set iso-Subprecategory
+  is-set-iso-Subprecategory = is-set-type-Set iso-set-Subprecategory
 ```
 
 #### The predicate on an isomorphism proof of being contained in a subprecategory
@@ -115,6 +138,12 @@ module _
   is-prop-is-in-iso-obj-subprecategory-Subprecategory =
     is-prop-type-Prop is-in-iso-obj-subprecategory-prop-Subprecategory
 
+  is-iso-is-in-iso-obj-subprecategory-Subprecategory :
+    ((f₀ , f₁) : is-in-iso-obj-subprecategory-Subprecategory) →
+    is-iso-Subprecategory C P (hom-iso-Precategory C f , f₀)
+  is-iso-is-in-iso-obj-subprecategory-Subprecategory (f₀ , f₁) =
+    is-iso-is-in-is-iso-Subprecategory C P (pr1 f , f₀) (pr2 f) f₁
+
   iso-is-in-iso-obj-subprecategory-Subprecategory :
     is-in-iso-obj-subprecategory-Subprecategory → iso-Subprecategory C P x y
   pr1 (pr1 (iso-is-in-iso-obj-subprecategory-Subprecategory is-in-iso-f)) =
@@ -162,6 +191,13 @@ module _
   iso-is-in-iso-Subprecategory is-in-iso-f =
     iso-is-in-iso-obj-subprecategory-Subprecategory C P f
       ( pr2 (pr2 is-in-iso-f))
+
+  is-iso-is-in-iso-Subprecategory :
+    ( is-in-iso-f : is-in-iso-Subprecategory) →
+    is-iso-Subprecategory C P
+      ( pr1 f , pr2 (pr1 (iso-is-in-iso-Subprecategory is-in-iso-f)))
+  is-iso-is-in-iso-Subprecategory is-in-iso-f =
+    pr2 (iso-is-in-iso-Subprecategory is-in-iso-f)
 ```
 
 ### If a subprecategory contains an object, it contains its identity ismorphism
@@ -218,8 +254,7 @@ module _
   is-iso-base-is-iso-Subprecategory :
     {f : hom-Subprecategory C P x y} →
     is-iso-Subprecategory C P f →
-    is-iso-Precategory C
-      ( inclusion-hom-Subprecategory C P x y f)
+    is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f)
   pr1 (is-iso-base-is-iso-Subprecategory is-iso-f) =
     pr1 (pr1 is-iso-f)
   pr1 (pr2 (is-iso-base-is-iso-Subprecategory is-iso-f)) =
