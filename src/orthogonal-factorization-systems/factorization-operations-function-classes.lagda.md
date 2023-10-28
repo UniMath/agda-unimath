@@ -14,6 +14,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.factorizations-of-maps
+open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
 open import orthogonal-factorization-systems.function-classes
 ```
 

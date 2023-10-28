@@ -36,23 +36,24 @@ open import orthogonal-factorization-systems.global-function-classes
 
 ## Idea
 
-A **factorization** of a map `f : A → B` into
+A **factorization into
 [global function classes](orthogonal-factorization-systems.global-function-classes.md)
-`L` and `R` is a pair of maps `l : A → X` and `r : X → B`, where `l ∈ L` and
-`r ∈ R`, such that their composite `r ∘ l` is `f`.
+classes `L` and `R`** of a map `f : A → B` is a pair of maps `l : A → X` and
+`r : X → B`, where `l ∈ L` and `r ∈ R`, such that their composite `r ∘ l` is
+`f`.
 
 ```text
-       X
-      ^ \
-   l /   \ r
-    /     v
-  A -----> B
-      f
+         X
+        ^ \
+ L ∋ l /   \ r ∈ R
+      /     v
+    A -----> B
+        f
 ```
 
 ## Definitions
 
-### The predicate of being a global function class factorization
+### The predicate of being a factorization into global function classes
 
 ```agda
 module _
