@@ -48,9 +48,8 @@ module _
 
 ## See also
 
-- [Essential images of functors between precategories](category-theory.essential-images-of-functors-precategories.md)
-- [Essentially surjective functors between precategories](category-theory.essentially-surjective-functor-precategories.md)
-- [Split essentially surjective functors between precategories](category-theory.split.essentially-surjective-functor-precategories.md)
+- [Essentially surjective functors between precategories](category-theory.essentially-surjective-functors-precategories.md)
+- [Split essentially surjective functors between precategories](category-theory.split-essentially-surjective-functors-precategories.md)
 
 ## External links
 

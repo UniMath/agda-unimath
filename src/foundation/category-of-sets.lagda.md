@@ -99,12 +99,15 @@ is-category-Set-Precategory l =
   is-category-Category (Set-Category l)
 ```
 
+## Comments
+
+Since sets are equivalent to their set-truncations, the category of sets forms a
+[full subprecategory](category-theory.full-large-subprecategories.md) of the
+homotopy precategory of types.
+
 ## See also
 
 - [Presheaf categories](category-theory.presheaf-categories.md)
-- The category of sets forms a
-  [full subprecategory](category-theory.full-large-subprecategories.md) of the
-  [homotopy precategory of types](foundation.homotopy-precategory-of-types.md).
 
 ## External links
 

@@ -27,7 +27,7 @@ open import foundation-core.whiskering-homotopies
 ## Idea
 
 The
-[universal property of truncations](foundation.universal-property-truncations.md)
+[universal property of truncations](foundation.universal-property-truncation.md)
 can be used to define the functorial action of
 [truncations](foundation.truncations.md).
 

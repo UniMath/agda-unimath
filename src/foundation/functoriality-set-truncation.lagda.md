@@ -42,7 +42,7 @@ open import foundation-core.whiskering-homotopies
 
 The
 [universal property of the set truncation](foundation.universal-property-set-truncation.md)
-implies that the [set truncation](foundation.set-truncation.md) acts
+implies that the [set truncation](foundation.set-truncations.md) acts
 functorially on maps between types.
 
 ## Definitions
