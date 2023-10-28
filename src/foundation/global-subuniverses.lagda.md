@@ -41,7 +41,7 @@ for homogenous equivalences, i.e. equivalences in a single universe.
 
 ## Definitions
 
-### The predicate on of being a global subuniverse
+### The predicate on a family of subuniverses of being closed under equivalences
 
 ```agda
 module _
