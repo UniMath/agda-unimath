@@ -239,12 +239,12 @@ module _
   (x y : obj-Subprecategory C P)
   where
 
-  equiv-iso-iso-base-is-replete-Subprecategory :
+  compute-iso-is-replete-Subprecategory :
     iso-Precategory C
       ( inclusion-obj-Subprecategory C P x)
       ( inclusion-obj-Subprecategory C P y) ≃
     iso-Subprecategory C P x y
-  equiv-iso-iso-base-is-replete-Subprecategory =
+  compute-iso-is-replete-Subprecategory =
     ( equiv-tot
       ( equiv-is-iso-is-iso-base-is-replete-Subprecategory
           C P is-replete-P {x} {y})) ∘e
@@ -264,13 +264,13 @@ module _
               ( is-replete-P x (pr1 y) (f , is-iso-C-f) .pr2 .pr1)
               ( pr2 y))))))
 
-  equiv-iso-base-iso-is-replete-Subprecategory :
+  inv-compute-iso-is-replete-Subprecategory :
     iso-Subprecategory C P x y ≃
     iso-Precategory C
       ( inclusion-obj-Subprecategory C P x)
       ( inclusion-obj-Subprecategory C P y)
-  equiv-iso-base-iso-is-replete-Subprecategory =
-    inv-equiv equiv-iso-iso-base-is-replete-Subprecategory
+  inv-compute-iso-is-replete-Subprecategory =
+    inv-equiv compute-iso-is-replete-Subprecategory
 ```
 
 ### Subprecategories of categories are replete

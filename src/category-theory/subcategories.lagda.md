@@ -11,14 +11,25 @@ open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.isomorphisms-in-subprecategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
+open import category-theory.replete-subprecategories
 open import category-theory.subprecategories
 
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -380,6 +391,43 @@ module _
 
 ## Properties
 
+### Subcategories are replete
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (P : Subcategory l3 l4 C)
+  where
+
+  is-replete-Subcategory : is-replete-Subprecategory (precategory-Category C) P
+  is-replete-Subcategory =
+    is-replete-subprecategory-is-category-Subprecategory
+      ( precategory-Category C)
+      ( P)
+      ( is-category-Category C)
+
+  compute-iso-Subcategory :
+    {x y : obj-Subcategory C P} →
+    iso-Category C
+      ( inclusion-obj-Subcategory C P x)
+      ( inclusion-obj-Subcategory C P y) ≃
+    iso-Subprecategory (precategory-Category C) P x y
+  compute-iso-Subcategory {x} {y} =
+    compute-iso-is-replete-Subprecategory
+      ( precategory-Category C) P is-replete-Subcategory x y
+
+  inv-compute-iso-Subcategory :
+    {x y : obj-Subcategory C P} →
+    iso-Subprecategory (precategory-Category C) P x y ≃
+    iso-Category C
+      ( inclusion-obj-Subcategory C P x)
+      ( inclusion-obj-Subcategory C P y)
+  inv-compute-iso-Subcategory {x} {y} =
+    inv-compute-iso-is-replete-Subprecategory
+      ( precategory-Category C) P is-replete-Subcategory x y
+```
+
 ### Subcategories are categories
 
 ```agda
@@ -391,7 +439,21 @@ module _
 
   is-category-Subcategory :
     is-category-Precategory (precategory-Subcategory C P)
-  is-category-Subcategory = {!   !}
+  is-category-Subcategory x =
+    fundamental-theorem-id
+      ( is-contr-equiv _
+        ( equiv-tot (λ y → inv-compute-iso-Subcategory C P {x} {y}))
+        ( is-torsorial-Eq-subtype
+          (is-torsorial-iso-Category C (inclusion-obj-Subcategory C P x))
+          ( is-prop-is-in-obj-Subcategory C P)
+          ( inclusion-obj-Subcategory C P x)
+          ( id-iso-Category C)
+          ( is-in-obj-inclusion-obj-Subcategory C P x)))
+      ( iso-eq-Precategory (precategory-Subcategory C P) x)
+
+  category-Subcategory : Category (l1 ⊔ l3) (l2 ⊔ l4)
+  pr1 category-Subcategory = precategory-Subcategory C P
+  pr2 category-Subcategory = is-category-Subcategory
 ```
 
 ### The inclusion functor is an embedding on objects and hom-sets
@@ -421,34 +483,9 @@ module _
     is-emb-obj-inclusion-Subprecategory (precategory-Category C) P
 ```
 
-## Properties
+### The inclusion functor is pseudomonic
 
-### The inclusion functor is faithful and an embedding on objects
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Category l1 l2)
-  (P : Subcategory l3 l4 C)
-  where
-
-  is-faithful-inclusion-Category :
-    is-faithful-functor-Precategory
-      ( precategory-Subcategory C P)
-      ( precategory-Category C)
-      ( inclusion-Subcategory C P)
-  is-faithful-inclusion-Category =
-    is-faithful-inclusion-Subprecategory (precategory-Category C) P
-
-  is-emb-obj-inclusion-Category :
-    is-emb
-      ( obj-functor-Precategory
-        ( precategory-Subcategory C P)
-        ( precategory-Category C)
-        ( inclusion-Subcategory C P))
-  is-emb-obj-inclusion-Category =
-    is-emb-obj-inclusion-Subprecategory (precategory-Category C) P
-```
+This is another consequence of repleteness.
 
 ## External links
 
