@@ -376,11 +376,12 @@ fibers.
         ( u)
         ( horizontal-map-span-cogap-fiber)
         ( map-equiv i))
-    ( coh-r : coherence-square-maps
-                ( v)
-                ( map-equiv k)
-                ( map-equiv j)
-                ( vertical-map-span-cogap-fiber))
+    ( coh-r :
+      coherence-square-maps
+        ( v)
+        ( map-equiv k)
+        ( map-equiv j)
+        ( vertical-map-span-cogap-fiber))
     where
 
     universal-property-pushout-cogap-fiber-up-to-equiv :
