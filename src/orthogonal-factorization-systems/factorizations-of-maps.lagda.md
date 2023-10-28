@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import orthogonal-factorization-systems.function-classes
+open import orthogonal-factorization-systems.global-function-classes
 ```
 
 </details>
@@ -123,21 +124,56 @@ module _
   {l1 l2 lF lL lR : Level}
   (L : function-class l1 lF lL)
   (R : function-class lF l2 lR)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {A : UU l1} {B : UU l2}
   where
 
-  is-factorization-function-class-Prop : factorization f lF → Prop (lL ⊔ lR)
-  is-factorization-function-class-Prop F =
+  is-factorization-prop-function-class :
+    {f : A → B} → factorization f lF → Prop (lL ⊔ lR)
+  is-factorization-prop-function-class F =
     conj-Prop (L (left-map-factorization F)) (R (right-map-factorization F))
 
-  is-factorization-function-class : factorization f lF → UU (lL ⊔ lR)
+  is-factorization-function-class :
+    {f : A → B} → factorization f lF → UU (lL ⊔ lR)
   is-factorization-function-class =
-    type-Prop ∘ is-factorization-function-class-Prop
+    type-Prop ∘ is-factorization-prop-function-class
 
   factorization-function-class :
-    UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
-  factorization-function-class =
+    (f : A → B) → UU (l1 ⊔ l2 ⊔ lsuc lF ⊔ lL ⊔ lR)
+  factorization-function-class f =
     Σ (factorization f lF) (is-factorization-function-class)
+```
+
+## Factorizations with global function classes
+
+```agda
+module _
+  {βL βR : Level → Level → Level}
+  (L : global-function-class βL)
+  (R : global-function-class βR)
+  {l1 l2 : Level}
+  {A : UU l1} {B : UU l2}
+  where
+
+  is-factorization-global-function-class-Prop :
+    {l3 : Level} {f : A → B} → factorization f l3 → Prop (βL l1 l3 ⊔ βR l3 l2)
+  is-factorization-global-function-class-Prop =
+    is-factorization-prop-function-class
+      ( function-class-global-function-class L)
+      ( function-class-global-function-class R)
+
+  is-factorization-global-function-class :
+    {l3 : Level} {f : A → B} → factorization f l3 → UU (βL l1 l3 ⊔ βR l3 l2)
+  is-factorization-global-function-class =
+    is-factorization-function-class
+      ( function-class-global-function-class L)
+      ( function-class-global-function-class R)
+
+  factorization-global-function-class :
+    (l3 : Level) (f : A → B) → UU (βL l1 l3 ⊔ βR l3 l2 ⊔ l1 ⊔ l2 ⊔ lsuc l3)
+  factorization-global-function-class l3 =
+    factorization-function-class {lF = l3}
+      ( function-class-global-function-class L)
+      ( function-class-global-function-class R)
 ```
 
 ## Properties

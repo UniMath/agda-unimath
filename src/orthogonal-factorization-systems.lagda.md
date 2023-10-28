@@ -13,6 +13,7 @@ open import orthogonal-factorization-systems.closed-modalities public
 open import orthogonal-factorization-systems.extensions-of-maps public
 open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorization-operations-function-classes public
+open import orthogonal-factorization-systems.factorization-operations-global-function-classes public
 open import orthogonal-factorization-systems.factorizations-of-maps public
 open import orthogonal-factorization-systems.function-classes public
 open import orthogonal-factorization-systems.functoriality-pullback-hom public
@@ -45,5 +46,6 @@ open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverse
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
+open import orthogonal-factorization-systems.wide-global-function-classes public
 open import orthogonal-factorization-systems.zero-modality public
 ```
