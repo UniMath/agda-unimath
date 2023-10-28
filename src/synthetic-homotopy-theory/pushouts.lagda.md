@@ -370,11 +370,12 @@ fibers.
     ( k : T ≃ fiber (horizontal-map-cocone f g c ∘ f) x)
     ( u : T → F)
     ( v : T → G)
-    ( coh-l : coherence-square-maps
-                ( map-equiv k)
-                ( u)
-                ( horizontal-map-span-cogap-fiber)
-                ( map-equiv i))
+    ( coh-l :
+      coherence-square-maps
+        ( map-equiv k)
+        ( u)
+        ( horizontal-map-span-cogap-fiber)
+        ( map-equiv i))
     ( coh-r : coherence-square-maps
                 ( v)
                 ( map-equiv k)
