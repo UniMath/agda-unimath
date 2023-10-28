@@ -13,19 +13,11 @@ open import category-theory.groupoids
 open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories
 open import category-theory.pregroupoids
-open import category-theory.replete-subprecategories
 open import category-theory.subcategories
-open import category-theory.subprecategories
 open import category-theory.wide-subcategories
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.subtypes
-open import foundation.torsorial-type-families
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
