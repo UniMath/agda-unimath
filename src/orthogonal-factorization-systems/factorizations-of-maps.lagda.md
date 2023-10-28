@@ -111,12 +111,14 @@ module _
   factorization-through-factorization = pr2
 
   right-map-factorization :
-    {l3 : Level} {f : A → B} (F : factorization l3 f) → image-factorization F → B
+    {l3 : Level} {f : A → B} (F : factorization l3 f) →
+    image-factorization F → B
   right-map-factorization F =
     right-map-factorization-through (factorization-through-factorization F)
 
   left-map-factorization :
-    {l3 : Level} {f : A → B} (F : factorization l3 f) → A → image-factorization F
+    {l3 : Level} {f : A → B} (F : factorization l3 f) →
+    A → image-factorization F
   left-map-factorization F =
     left-map-factorization-through (factorization-through-factorization F)
 

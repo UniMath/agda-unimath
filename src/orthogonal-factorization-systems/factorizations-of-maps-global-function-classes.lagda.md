@@ -176,7 +176,8 @@ module _
       ( right-map-global-function-class-factorization)
       ( left-map-global-function-class-factorization)
   is-factorization-global-function-class-factorization =
-    is-factorization-factorization factorization-global-function-class-factorization
+    is-factorization-factorization
+      ( factorization-global-function-class-factorization)
 
   is-in-left-class-left-map-global-function-class-factorization :
     is-in-global-function-class L left-map-global-function-class-factorization

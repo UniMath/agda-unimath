@@ -77,7 +77,8 @@ module _
 
   is-prop-unique-factorization-operation-global-function-class-Level :
     {l1 l2 l3 : Level} →
-    is-prop (unique-factorization-operation-global-function-class-Level l1 l2 l3)
+    is-prop
+      ( unique-factorization-operation-global-function-class-Level l1 l2 l3)
   is-prop-unique-factorization-operation-global-function-class-Level =
     is-prop-iterated-implicit-Π 2
       ( λ A B → is-prop-Π (λ f → is-property-is-contr))
@@ -85,9 +86,13 @@ module _
   unique-factorization-operation-global-function-class-Level-Prop :
     (l1 l2 l3 : Level) →
     Prop (βL l1 l3 ⊔ βR l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-  pr1 (unique-factorization-operation-global-function-class-Level-Prop l1 l2 l3) =
+  pr1
+    ( unique-factorization-operation-global-function-class-Level-Prop
+      l1 l2 l3) =
     unique-factorization-operation-global-function-class-Level l1 l2 l3
-  pr2 (unique-factorization-operation-global-function-class-Level-Prop l1 l2 l3) =
+  pr2
+    ( unique-factorization-operation-global-function-class-Level-Prop
+      l1 l2 l3) =
     is-prop-unique-factorization-operation-global-function-class-Level
 
   unique-factorization-operation-global-function-class : UUω
