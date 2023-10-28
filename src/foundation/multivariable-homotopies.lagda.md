@@ -16,6 +16,7 @@ open import foundation.function-extensionality
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.identity-types
 ```

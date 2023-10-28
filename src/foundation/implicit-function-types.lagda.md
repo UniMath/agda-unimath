@@ -12,6 +12,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 ```
 
 </details>
@@ -50,6 +51,28 @@ module _
   equiv-explicit-implicit-Π : ({x : A} → B x) ≃ ((x : A) → B x)
   pr1 equiv-explicit-implicit-Π = explicit-implicit-Π
   pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
+```
+
+### Equality of explicit functions is equality of implicit functions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g : (x : A) → B x}
+  where
+
+  equiv-eq-implicit-eq-explicit-Π : (f ＝ g) ≃ (Id (λ {x} → f x) (λ {x} → g x))
+  equiv-eq-implicit-eq-explicit-Π = equiv-ap equiv-implicit-explicit-Π f g
+
+  eq-implicit-eq-explicit-Π : (f ＝ g) → (Id (λ {x} → f x) (λ {x} → g x))
+  eq-implicit-eq-explicit-Π = map-equiv equiv-eq-implicit-eq-explicit-Π
+
+  equiv-eq-explicit-eq-implicit-Π : (Id (λ {x} → f x) (λ {x} → g x)) ≃ (f ＝ g)
+  equiv-eq-explicit-eq-implicit-Π =
+    equiv-ap equiv-explicit-implicit-Π (λ {x} → f x) (λ {x} → g x)
+
+  eq-explicit-eq-implicit-Π : (Id (λ {x} → f x) (λ {x} → g x)) → (f ＝ g)
+  eq-explicit-eq-implicit-Π = map-equiv equiv-eq-explicit-eq-implicit-Π
 ```
 
 ## See also

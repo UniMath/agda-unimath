@@ -11,9 +11,12 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.implicit-function-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -131,6 +134,24 @@ section-iterated-implicit-Π-section-Π-section-codomain
   f ( λ x →
       section-iterated-implicit-Π-section-Π-section-codomain
         P f _ {{A x}} (H x))
+```
+
+### Multivariable function types are equivalent to multivariable implicit function types
+
+```agda
+equiv-explicit-implicit-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  iterated-implicit-Π A ≃ iterated-Π A
+equiv-explicit-implicit-iterated-Π .0 ⦃ base-telescope A ⦄ = id-equiv
+equiv-explicit-implicit-iterated-Π ._ ⦃ cons-telescope A ⦄ =
+  equiv-Π-equiv-family (λ x → equiv-explicit-implicit-iterated-Π _ {{A x}}) ∘e
+  equiv-explicit-implicit-Π
+
+equiv-implicit-explicit-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  iterated-Π A ≃ iterated-implicit-Π A
+equiv-implicit-explicit-iterated-Π n {{A}} =
+  inv-equiv (equiv-explicit-implicit-iterated-Π n {{A}})
 ```
 
 ### Iterated products of contractible types is contractible
