@@ -109,8 +109,8 @@ module _
       ( id , is-equiv-id)
       ( terminal-map)
       ( terminal-map)
-      ( λ _ → eq-is-prop (is-prop-is-contr (is-torsorial-path' b)))
-      ( λ _ → eq-is-prop (is-prop-is-contr (is-torsorial-path' b)))
+      ( λ _ → eq-is-contr (is-torsorial-path' b))
+      ( λ _ → eq-is-contr (is-torsorial-path' b))
 
   suspension-cocone-fiber :
     suspension-cocone (fiber f b) (fiber (codiagonal-map f) b)
