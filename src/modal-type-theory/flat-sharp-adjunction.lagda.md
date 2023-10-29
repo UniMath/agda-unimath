@@ -206,64 +206,69 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  sf1 : ♯ (♭ A) → ♯ A
-  sf1 = rec-♯ (unit-♯ ∘ counit-♭)
+  ap-♯-counit-♭ : ♯ (♭ A) → ♯ A
+  ap-♯-counit-♭ = rec-♯ (unit-♯ ∘ counit-♭)
 
-  sf2 : ♯ A → ♯ (♭ A)
-  sf2 =
+  ap-♯-cons-♭ : ♯ A → ♯ (♭ A)
+  ap-♯-cons-♭ =
     rec-♯
       ( crisp-rec-♯
         ( ♯ (♭ A))
         ( is-codiscrete-♯ (♭ A))
         ( λ x → unit-♯ (cons-♭ x)))
+```
 
-  -- is-section-sf2 : sf1 ∘ sf2 ~ id
-  -- is-section-sf2 =
-  --   ind-subuniverse-♯
-  --     ( A)
-  --     ( λ x → sf1 (sf2 x) ＝ x)
-  --     ( λ x → is-codiscrete-Id-♯ (sf1 (sf2 x)) x)
-  --     ( λ x →
-  --         crisp-rec-♯
-  --           ( sf1 (sf2 (unit-♯ x)) ＝ unit-♯ x)
-  --           ( is-codiscrete-Id-♯ (sf1 (sf2 (unit-♯ x))) (unit-♯ x))
-  --           ( λ y →
-  --             compute-rec-subuniverse-♯
-  --               {!   !} (♯ A) {!  is-codiscrete-♯ ?  !} {!   !} {!   !})
-  --           {!   !})
+It remains to show that these two are inverses to eachother.
+
+```text
+  is-section-cons-♭ : ap-♯-counit-♭ ∘ cons-♭ ~ id
+  is-section-cons-♭ =
+    ind-subuniverse-♯
+      ( A)
+      ( λ x → ap-♯-counit-♭ (cons-♭ x) ＝ x)
+      ( λ x → is-codiscrete-Id-♯ (ap-♯-counit-♭ (cons-♭ x)) x)
+      ( λ x →
+          crisp-rec-♯
+            ( ap-♯-counit-♭ (cons-♭ (unit-♯ x)) ＝ unit-♯ x)
+            ( is-codiscrete-Id-♯ (ap-♯-counit-♭ (cons-♭ (unit-♯ x))) (unit-♯ x))
+            ( λ y →
+              compute-rec-subuniverse-♯
+                {!   !} (♯ A) {!  is-codiscrete-♯ ?  !} {!   !} {!   !})
+            {!   !})
 ```
 
 ### Sharp is uniquely eliminating
 
-```agda
---  precomp-Π unit-♯ (♯ ∘ P)
--- map-crisp-retraction-precomp-unit-♯ :
---   {l1 : Level} {l2 : Level} {X : UU l1} {P : ♯ X → UU l2} →
---   ((x : ♯ X) → ♯ (P x)) → (x : X) → ♯ (P (unit-♯ x))
--- map-crisp-retraction-precomp-unit-♯ {P = P} f = {!   !}
+This remains to be formalized.
 
--- crisp-elim-♯' :
---     {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
--- crisp-elim-♯' {A = A} x = crisp-ind-♯ {!   !} {!   !} {!   !} {!   !}
+```text
+map-crisp-retraction-precomp-unit-♯ :
+  {l1 : Level} {l2 : Level} {X : UU l1} {P : ♯ X → UU l2} →
+  ((x : ♯ X) → ♯ (P x)) → (x : X) → ♯ (P (unit-♯ x))
+map-crisp-retraction-precomp-unit-♯ {P = P} f = {!   !}
 
--- is-retraction-map-crisp-retraction-precomp-unit-♯ :
---   {@♭ l1 : Level} {l2 : Level} {@♭ X : UU l1} {P : ♯ X → UU l2} →
---   map-crisp-retraction-precomp-unit-♯ {X = X} {P} ∘ {! precomp-Π (unit-♯) (♯ ∘ P)  !} ~ id
--- is-retraction-map-crisp-retraction-precomp-unit-♯ = {!   !}
+crisp-elim-♯' :
+    {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
+crisp-elim-♯' {A = A} x = crisp-ind-♯ {!   !} {!   !} {!   !} {!   !}
 
--- is-uniquely-eliminating-♯ :
---   {l : Level} → is-uniquely-eliminating-modality (unit-♯ {l})
--- is-uniquely-eliminating-♯ X P .pr1 =
---   section-multivariable-section 2 (precomp-Π unit-♯ (♯ ∘ P)) (induction-principle-♯ X P)
--- is-uniquely-eliminating-♯ {l} X P .pr2 .pr1 x =
--- is-uniquely-eliminating-♯ X P .pr2 .pr2 f =
---   eq-htpy
---   ( λ x →
---     equational-reasoning
---       {!   !}
---       ＝ {!   !} by {!   !}
---       ＝ {!   !} by compute-crisp-ind-♯ (♯ ∘ P) {! is-codiscrete-♯ ∘ P  !} crisp-elim-♯ {! f !}
---       ＝ {!   !} by {!   !})
+is-retraction-map-crisp-retraction-precomp-unit-♯ :
+  {@♭ l1 : Level} {l2 : Level} {@♭ X : UU l1} {P : ♯ X → UU l2} →
+  map-crisp-retraction-precomp-unit-♯ {X = X} {P} ∘ {! precomp-Π (unit-♯) (♯ ∘ P)  !} ~ id
+is-retraction-map-crisp-retraction-precomp-unit-♯ = {!   !}
+
+is-uniquely-eliminating-♯ :
+  {l : Level} → is-uniquely-eliminating-modality (unit-♯ {l})
+is-uniquely-eliminating-♯ X P .pr1 =
+  section-multivariable-section 2 (precomp-Π unit-♯ (♯ ∘ P)) (induction-principle-♯ X P)
+is-uniquely-eliminating-♯ {l} X P .pr2 .pr1 x =
+is-uniquely-eliminating-♯ X P .pr2 .pr2 f =
+  eq-htpy
+  ( λ x →
+    equational-reasoning
+      {!   !}
+      ＝ {!   !} by {!   !}
+      ＝ {!   !} by compute-crisp-ind-♯ (♯ ∘ P) {! is-codiscrete-♯ ∘ P  !} crisp-elim-♯ {! f !}
+      ＝ {!   !} by {!   !})
 ```
 
 ## See also
