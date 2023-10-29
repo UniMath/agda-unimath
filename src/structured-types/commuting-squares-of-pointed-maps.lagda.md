@@ -46,7 +46,7 @@ module _
 
   coherence-square-pointed-maps : UU (l3 ⊔ l4)
   coherence-square-pointed-maps =
-    bottom ∘∗ left ~∗ right ∘∗ top
+    (bottom ∘∗ left) ~∗ (right ∘∗ top)
 
   coherence-square-maps-coherence-square-pointed-maps :
     coherence-square-pointed-maps →
