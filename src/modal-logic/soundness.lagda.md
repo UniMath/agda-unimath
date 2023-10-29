@@ -41,8 +41,12 @@ module _
   where
 
   soundness : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
-  soundness = logic ⊆ (class-modal-logic C)
+  soundness = logic ⊆ class-modal-logic C
+```
 
+## Properties
+
+```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {i : Set l1} {axioms : formulas l2 i}
@@ -50,24 +54,17 @@ module _
   where
 
   soundness-axioms :
-    ((a : formula i) → is-in-subtype axioms a → type-Prop (C ⊨C a)) →
-    {a : formula i} → axioms ⊢ a → type-Prop (C ⊨C a)
+    soundness axioms C → {a : formula i} → axioms ⊢ a → type-Prop (C ⊨C a)
   soundness-axioms H (ax x) = H _ x
   soundness-axioms H (mp dab da) M in-class x =
     soundness-axioms H dab M in-class x (soundness-axioms H da M in-class x)
   soundness-axioms H (nec d) M in-class _ y _ =
     soundness-axioms H d M in-class y
 
-  soundness-deduction :
-    ((a : formula i) → is-in-subtype axioms a → type-Prop (C ⊨C a)) →
-    soundness (modal-logic axioms) C
-  soundness-deduction H a =
+  soundness-modal-logic : soundness axioms C → soundness (modal-logic axioms) C
+  soundness-modal-logic H a =
     map-universal-property-trunc-Prop (C ⊨C a) (soundness-axioms H)
-```
 
-## Properties
-
-```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {i : Set l1} (logic : formulas l2 i)
@@ -113,7 +110,7 @@ module _
   soundness-modal-logic-union :
     soundness (modal-logic (union-subtype ax₁ ax₂)) (intersection-subtype C₁ C₂)
   soundness-modal-logic-union =
-    soundness-deduction (intersection-subtype C₁ C₂) soundness-union
+    soundness-modal-logic (intersection-subtype C₁ C₂) soundness-union
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
@@ -181,5 +178,5 @@ module _
   soundness-modal-logic-union-same-class :
     soundness (modal-logic (union-subtype ax₁ ax₂)) C
   soundness-modal-logic-union-same-class =
-    soundness-deduction C soundness-union-same-class
+    soundness-modal-logic C soundness-union-same-class
 ```

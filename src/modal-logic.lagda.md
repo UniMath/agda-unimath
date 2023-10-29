@@ -4,6 +4,7 @@
 module modal-logic where
 
 open import modal-logic.axioms public
+open import modal-logic.completeness public
 open import modal-logic.formulas public
 open import modal-logic.kripke-semantics public
 open import modal-logic.logic-syntax public
