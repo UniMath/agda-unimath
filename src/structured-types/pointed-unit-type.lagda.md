@@ -42,7 +42,7 @@ module _
   pr1 terminal-pointed-map _ = star
   pr2 terminal-pointed-map = refl
 
-  map-terminal-pointed-map : ( type-Pointed-Type X) → unit
+  map-terminal-pointed-map : type-Pointed-Type X → unit
   map-terminal-pointed-map =
     map-pointed-map {A = X} {B = unit-Pointed-Type}
       terminal-pointed-map
@@ -54,8 +54,6 @@ module _
 
   is-initial-unit-Pointed-Type :
     ( f : unit-Pointed-Type →∗ X) → f ~∗ inclusion-point-Pointed-Type
-  pr1 (is-initial-unit-Pointed-Type f) _ =
-    preserves-point-pointed-map f
-  pr2 (is-initial-unit-Pointed-Type f) =
-    inv right-unit
+  pr1 (is-initial-unit-Pointed-Type f) _ = preserves-point-pointed-map f
+  pr2 (is-initial-unit-Pointed-Type f) = inv right-unit
 ```

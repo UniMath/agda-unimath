@@ -102,7 +102,7 @@ map-cogap-smash-prod-Pointed-Type c =
 
 ## Properties
 
-### The canonical pointed map from the product to the smash product
+### The canonical pointed map from the cartesian product to the smash product
 
 ```agda
 module _
@@ -216,7 +216,8 @@ module _
 
 ### The map from the pointed product to the smash product identifies elements
 
-of the form (x, b) and (a, y).
+of the form `(x, b)` and `(a, y)`, where `b` and `a` are the base points of `B`
+and `A` respectively.
 
 ```agda
 module _
@@ -353,8 +354,7 @@ pr2 (universal-property-smash-prod-Pointed-Type A B C f) =
     ( ( λ y →
         ( ap
           ( map-pointed-map f)
-          ( inv
-            ( glue-smash-prod-Pointed-Type A B (point-Pointed-Type A) y)) ∙
+          ( inv (glue-smash-prod-Pointed-Type A B (point-Pointed-Type A) y)) ∙
         ( preserves-point-pointed-map f))) ,
       ( ( identification-right-whisk
           ( ap²

@@ -103,7 +103,7 @@ indexed wedge sum, `⋁∗`, is the
 
 ## Properties
 
-### The images of the points `a : A` and `b : B` are identified in `A ∨∗ B`
+### The images of the base points `a : A` and `b : B` are identified in `A ∨∗ B`
 
 ```agda
 glue-wedge-Pointed-Type :
@@ -112,10 +112,8 @@ glue-wedge-Pointed-Type :
   map-inr-wedge-Pointed-Type A B (point-Pointed-Type B)
 glue-wedge-Pointed-Type A B =
   glue-pushout
-    ( map-pointed-map
-      ( inclusion-point-Pointed-Type A))
-    ( map-pointed-map
-      ( inclusion-point-Pointed-Type B))
+    ( map-pointed-map (inclusion-point-Pointed-Type A))
+    ( map-pointed-map (inclusion-point-Pointed-Type B))
     ( point-Pointed-Type unit-Pointed-Type)
 ```
 
@@ -124,8 +122,8 @@ glue-wedge-Pointed-Type A B =
 There is a canonical inclusion of the wedge sum into the pointed product that is
 defined by the cogap map induced by the canonical inclusions `A → A ×∗ B ← B`.
 
-Elements of the form (x, b) and (a, y) lie in the image of the inclusion of the
-wedge sum into the pointed product.
+Elements of the form `(x, b)` and `(a, y)`, where `b` and `a` are basepoints,
+lie in the image of the inclusion of the wedge sum into the pointed product.
 
 ```agda
 module _
