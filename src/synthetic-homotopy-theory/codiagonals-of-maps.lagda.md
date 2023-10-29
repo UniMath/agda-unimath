@@ -106,7 +106,7 @@ module _
       ( inv-equiv
         ( terminal-map ,
           ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
-      ( id , is-equiv-id)
+      ( id-equiv)
       ( terminal-map)
       ( terminal-map)
       ( λ _ → eq-is-contr (is-torsorial-path' b))
