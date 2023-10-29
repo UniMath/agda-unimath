@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.functoriality-higher-modalities where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -60,14 +61,14 @@ module _
       ( λ x →
         ( ap
           ( ap-map-higher-modality m g)
-          ( compute-rec-higher-modality m X Y
+          ( compute-rec-higher-modality m
             ( unit-higher-modality m ∘ f)
             ( x))) ∙
-        ( ( compute-rec-higher-modality m Y Z
+        ( ( compute-rec-higher-modality m
             ( unit-higher-modality m ∘ g)
             ( f x)) ∙
           ( inv
-            ( compute-rec-higher-modality m X Z
+            ( compute-rec-higher-modality m
               ( unit-higher-modality m ∘ (g ∘ f))
               ( x)))))
 ```
@@ -128,7 +129,7 @@ module _
   compute-naturality-unit-ind-modality {X} {Y} {Z} g f x =
     ( ap
       ( _∙
-        compute-rec-higher-modality m X Z (unit-higher-modality m ∘ (g ∘ f)) x)
+        compute-rec-higher-modality m (unit-higher-modality m ∘ (g ∘ f)) x)
       ( compute-ind-subuniverse-Id-higher-modality m
         ( ap-map-higher-modality m g ∘ ap-map-higher-modality m f)
         ( ap-map-higher-modality m (g ∘ f))
@@ -137,24 +138,35 @@ module _
     ( assoc
       ( ap
         ( ap-map-higher-modality m g)
-        ( compute-rec-higher-modality m X Y (unit-higher-modality m ∘ f) x))
-      ( ( compute-rec-higher-modality m Y Z
-          ( unit-higher-modality m ∘ g)
-          ( f x)) ∙
+        ( compute-rec-higher-modality m (unit-higher-modality m ∘ f) x))
+      ( ( compute-rec-higher-modality m (unit-higher-modality m ∘ g) (f x)) ∙
         ( inv
-          ( compute-rec-higher-modality m X Z
-            ( unit-higher-modality m ∘ g ∘ f)
-            ( x))))
-      ( compute-rec-higher-modality m X Z (unit-higher-modality m ∘ g ∘ f) x)) ∙
+          ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)))
+      ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)) ∙
     ( ap
       ( ap
         ( ap-map-higher-modality m g)
-        ( compute-rec-higher-modality m X Y (unit-higher-modality m ∘ f) x) ∙_)
+        ( compute-rec-higher-modality m (unit-higher-modality m ∘ f) x) ∙_)
       ( is-section-right-concat-inv
-        ( compute-rec-higher-modality m Y Z (unit-higher-modality m ∘ g) (f x))
-        ( compute-rec-higher-modality m X Z
-          ( unit-higher-modality m ∘ g ∘ f)
-          ( x))))
+        ( compute-rec-higher-modality m (unit-higher-modality m ∘ g) (f x))
+        ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)))
+```
+
+### Action on homotopies
+
+This definition of action on homotopies avoids using function extensionality.
+
+```agda
+module _
+  {l : Level}
+  (m : higher-modality l l)
+  where
+
+  htpy-ap-higher-modality :
+    {X Y : UU l} {f g : X → Y} →
+    (f ~ g) → ap-map-higher-modality m f ~ ap-map-higher-modality m g
+  htpy-ap-higher-modality H x' =
+    ap (λ f → ap-map-higher-modality m f x') (eq-htpy H)
 ```
 
 ## References

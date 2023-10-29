@@ -61,12 +61,12 @@ module _
   where
 
   ind-open-modality : ind-modality {l} (unit-open-modality Q)
-  ind-open-modality X P f z q =
+  ind-open-modality P f z q =
     tr P (eq-htpy λ q' → ap z (eq-is-prop (is-prop-type-Prop Q))) (f (z q) q)
 
   compute-ind-open-modality :
     compute-ind-modality {l} (unit-open-modality Q) (ind-open-modality)
-  compute-ind-open-modality X P f a =
+  compute-ind-open-modality P f a =
     eq-htpy
       ( λ q →
         ap
@@ -79,8 +79,8 @@ module _
 
   induction-principle-open-modality :
     induction-principle-modality {l} (unit-open-modality Q)
-  pr1 (induction-principle-open-modality X P) = ind-open-modality X P
-  pr2 (induction-principle-open-modality X P) = compute-ind-open-modality X P
+  pr1 (induction-principle-open-modality P) = ind-open-modality P
+  pr2 (induction-principle-open-modality P) = compute-ind-open-modality P
 ```
 
 For local smallness with respect to the appropriate universe level, we must take

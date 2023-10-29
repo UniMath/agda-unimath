@@ -205,6 +205,7 @@ open import foundation.multivariable-functoriality-set-quotients public
 open import foundation.multivariable-homotopies public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
+open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
@@ -249,7 +250,6 @@ open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.russells-paradox public
 open import foundation.sections public
-open import foundation.sections-of-maps-of-maps public
 open import foundation.separated-types public
 open import foundation.sequences public
 open import foundation.sequential-limits public

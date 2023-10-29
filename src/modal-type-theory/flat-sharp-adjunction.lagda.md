@@ -12,10 +12,13 @@ module modal-type-theory.flat-sharp-adjunction where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.locally-small-types
+open import foundation.multivariable-sections
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import modal-type-theory.codiscrete-types
@@ -25,6 +28,7 @@ open import modal-type-theory.sharp-modality
 
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-induction
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>
@@ -45,21 +49,25 @@ axioms, and they may be subject to change in the future.
 
 ## Postulates
 
-### Codiscrete types are local at the flat counit
+### Crisp induction for `♯`
+
+Codiscrete types are local at the flat counit.
 
 ```agda
 postulate
-  promote :
+  crisp-ind-♯ :
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
     ((x : A) → is-codiscrete (C x)) →
-    ((@♭ x : A) → (C x)) → (x : A) → (C x)
-  promoteβ :
+    ((@♭ x : A) → C x) → (x : A) → C x
+
+  compute-crisp-ind-♯ :
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
-    (cc : ((x : A) → is-codiscrete (C x))) (f : (@♭ x : A) → (C x)) →
-    (@♭ x : A) → (promote C cc f x) ＝ f x
+    (is-codiscrete-C : (x : A) → is-codiscrete (C x))
+    (f : (@♭ x : A) → C x) →
+    (@♭ x : A) → crisp-ind-♯ C is-codiscrete-C f x ＝ f x
 ```
 
-### Crisp elimination for the sharp modality
+### Crisp elimination of `♯`
 
 ```agda
 postulate
@@ -77,7 +85,77 @@ postulate
     uniqueness-crisp-elim-♯ (unit-♯ x) ＝ ap unit-♯ (compute-crisp-elim-♯ x)
 ```
 
+## Definitions
+
+### Crisp recursion for `♯`
+
+```agda
+crisp-rec-♯ :
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2) →
+  (is-codiscrete C) →
+  ((@♭ x : A) → C) → A → C
+crisp-rec-♯ C is-codiscrete-C =
+  crisp-ind-♯ (λ _ → C) (λ _ → is-codiscrete-C)
+
+compute-crisp-rec-♯ :
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2)
+  (is-codiscrete-C : is-codiscrete C)
+  (f : (@♭ x : A) → C) →
+  (@♭ x : A) → crisp-rec-♯ C is-codiscrete-C f x ＝ f x
+compute-crisp-rec-♯ C is-codiscrete-C =
+  compute-crisp-ind-♯ (λ _ → C) (λ _ → is-codiscrete-C)
+```
+
 ## Properties
+
+```agda
+crisp-tr-sharp :
+  {@♭ l : Level} {@♭ A : UU l} {B : UU l} → (p : A ＝ B) →
+  {@♭ x : ♯ A} → unit-♯ (tr (λ X → X) p (crisp-elim-♯ x)) ＝ tr ♯ p x
+crisp-tr-sharp refl {x} = uniqueness-crisp-elim-♯ x
+```
+
+### Crisp induction on `♯` implies typal induction
+
+```agda
+ind-crisp-ind-♯ :
+  {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
+  ((x : ♯ A) → is-codiscrete (C x)) → ((x : A) → C (unit-♯ x)) → (x : ♯ A) → C x
+ind-crisp-ind-♯ {A = A} C is-codiscrete-C f x' =
+  crisp-ind-♯
+    ( λ X → (x : ♯ X) (p : X ＝ A) → C (tr ♯ p x))
+    ( λ x →
+      is-codiscrete-Π
+        ( λ y → is-codiscrete-Π
+          ( λ p → is-codiscrete-C (tr ♯ p y))))
+    ( λ A' →
+      crisp-ind-♯
+        ( λ y → (p : A' ＝ A) → C (tr ♯ p y))
+        ( λ y → is-codiscrete-Π (λ p → is-codiscrete-C (tr ♯ p y)))
+        ( λ x p → tr C (crisp-tr-sharp p) (f (tr id p (crisp-elim-♯ x)))))
+    ( A)
+    ( x')
+    ( refl)
+```
+
+The accompanying computation principle remains to be fully formalized.
+
+```text
+compute-ind-crisp-ind-♯ :
+  {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
+  (is-codiscrete-C : (x : ♯ A) → is-codiscrete (C x)) →
+  (f : (x : A) → C (unit-♯ x)) → (x : A) →
+  ind-crisp-ind-♯ C is-codiscrete-C f (unit-♯ x) ＝ f x
+compute-ind-crisp-ind-♯ {A = A} C is-codiscrete-C f x =
+  crisp-ind-♯
+    ( λ X → (x : X) (p : X ＝ A) →
+      ind-crisp-ind-♯ {!   !} {!   !} {!   !} {!   !})
+    ( {!   !})
+    {!   !}
+    ( A)
+    ( x)
+    ( refl)
+```
 
 ### Flat after sharp
 
@@ -129,19 +207,63 @@ module _
   where
 
   sf1 : ♯ (♭ A) → ♯ A
-  sf1 = rec-♯ A (unit-♯ ∘ counit-♭)
+  sf1 = rec-♯ (unit-♯ ∘ counit-♭)
 
   sf2 : ♯ A → ♯ (♭ A)
   sf2 =
     rec-♯
-      ( ♭ A)
-      ( promote
-        ( λ _ → ♯ (♭ A))
-        ( λ _ → is-codiscrete-♯ (♭ A))
+      ( crisp-rec-♯
+        ( ♯ (♭ A))
+        ( is-codiscrete-♯ (♭ A))
         ( λ x → unit-♯ (cons-♭ x)))
 
   -- is-section-sf2 : sf1 ∘ sf2 ~ id
-  -- is-section-sf2 = {!  ind-♯ ? ?!}
+  -- is-section-sf2 =
+  --   ind-subuniverse-♯
+  --     ( A)
+  --     ( λ x → sf1 (sf2 x) ＝ x)
+  --     ( λ x → is-codiscrete-Id-♯ (sf1 (sf2 x)) x)
+  --     ( λ x →
+  --         crisp-rec-♯
+  --           ( sf1 (sf2 (unit-♯ x)) ＝ unit-♯ x)
+  --           ( is-codiscrete-Id-♯ (sf1 (sf2 (unit-♯ x))) (unit-♯ x))
+  --           ( λ y →
+  --             compute-rec-subuniverse-♯
+  --               {!   !} (♯ A) {!  is-codiscrete-♯ ?  !} {!   !} {!   !})
+  --           {!   !})
+```
+
+### Sharp is uniquely eliminating
+
+```agda
+--  precomp-Π unit-♯ (♯ ∘ P)
+-- map-crisp-retraction-precomp-unit-♯ :
+--   {l1 : Level} {l2 : Level} {X : UU l1} {P : ♯ X → UU l2} →
+--   ((x : ♯ X) → ♯ (P x)) → (x : X) → ♯ (P (unit-♯ x))
+-- map-crisp-retraction-precomp-unit-♯ {P = P} f = {!   !}
+
+-- crisp-elim-♯' :
+--     {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
+-- crisp-elim-♯' {A = A} x = crisp-ind-♯ {!   !} {!   !} {!   !} {!   !}
+
+-- is-retraction-map-crisp-retraction-precomp-unit-♯ :
+--   {@♭ l1 : Level} {l2 : Level} {@♭ X : UU l1} {P : ♯ X → UU l2} →
+--   map-crisp-retraction-precomp-unit-♯ {X = X} {P} ∘ {! precomp-Π (unit-♯) (♯ ∘ P)  !} ~ id
+-- is-retraction-map-crisp-retraction-precomp-unit-♯ = {!   !}
+
+-- is-uniquely-eliminating-♯ :
+--   {l : Level} → is-uniquely-eliminating-modality (unit-♯ {l})
+-- is-uniquely-eliminating-♯ X P .pr1 =
+--   section-multivariable-section 2 (precomp-Π unit-♯ (♯ ∘ P)) (induction-principle-♯ X P)
+-- is-uniquely-eliminating-♯ {l} X P .pr2 .pr1 x =
+-- is-uniquely-eliminating-♯ X P .pr2 .pr2 f =
+--   eq-htpy
+--   ( λ x →
+--     equational-reasoning
+--       {!   !}
+--       ＝ {!   !} by {!   !}
+--       ＝ {!   !} by compute-crisp-ind-♯ (♯ ∘ P) {! is-codiscrete-♯ ∘ P  !} crisp-elim-♯ {! f !}
+--       ＝ {!   !} by {!   !})
 ```
 
 ## See also

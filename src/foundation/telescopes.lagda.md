@@ -63,6 +63,34 @@ data
 open telescope public
 ```
 
+A very slight reformulation of `cons-telescope` for convenience:
+
+```agda
+prepend-telescope :
+  {l1 l2 : Level} {n : ℕ} →
+  (A : UU l1) → ({x : A} → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
+prepend-telescope A B = cons-telescope {X = A} (λ x → B {x})
+```
+
+### Small telescopes
+
+One issue with the previous definition of telescopes is that it is impossible to
+extract any type information from it. At the expense of giving up full universe
+polymorphism, we can define a notion of **small telescopes** with respect to a
+universe that admits such projections.
+
+```agda
+data small-telescope (l : Level) : ℕ → UU (lsuc l)
+  where
+  base-small-telescope :
+    UU l → small-telescope l 0
+  cons-small-telescope :
+    {n : ℕ} {X : UU l} →
+    (X → small-telescope l n) → small-telescope l (succ-ℕ n)
+
+open telescope public
+```
+
 ### Transformations on telescopes
 
 Given an operation on universes, we can apply it at the base of the telescope.

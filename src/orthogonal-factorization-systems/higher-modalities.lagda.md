@@ -353,8 +353,6 @@ module _
           ( is-small-x'=y')
           ( is-modal-small-x'=y')))
       ( compute-rec-higher-modality m
-        ( x' ＝ y')
-        ( type-is-small is-small-x'=y')
         ( unit-higher-modality m ∘ map-equiv-is-small is-small-x'=y')
         ( p))) ∙
     ( htpy-eq
@@ -413,7 +411,7 @@ module _
     (f ∘ unit-higher-modality m) ~ (g ∘ unit-higher-modality m) →
     f ~ g
   ind-subuniverse-Id-higher-modality {X} f g =
-    strong-ind-subuniverse-higher-modality m X
+    strong-ind-subuniverse-higher-modality m
       ( λ x' → f x' ＝ g x')
       ( λ _ → retraction-unit-Id-higher-modality m)
 
@@ -423,14 +421,14 @@ module _
       (x' : operator-higher-modality m X) → operator-higher-modality m (Y x')) →
     (H : (f ∘ unit-higher-modality m) ~ (g ∘ unit-higher-modality m)) →
     (x : X) →
-    ( strong-ind-subuniverse-higher-modality m X
+    ( strong-ind-subuniverse-higher-modality m
       ( λ x' → f x' ＝ g x')
       ( λ _ → retraction-unit-Id-higher-modality m)
       ( H)
       ( unit-higher-modality m x)) ＝
     ( H x)
-  compute-ind-subuniverse-Id-higher-modality {X} f g =
-    compute-strong-ind-subuniverse-higher-modality m X
+  compute-ind-subuniverse-Id-higher-modality f g =
+    compute-strong-ind-subuniverse-higher-modality m
       ( λ x → f x ＝ g x)
       ( λ _ → retraction-unit-Id-higher-modality m)
 ```
@@ -439,23 +437,20 @@ module _
 
 ```agda
 module _
-  {l : Level} (m : higher-modality l l)
-  (X : UU l)
+  {l : Level} (m : higher-modality l l) (X : UU l)
   where
 
   map-inv-unit-higher-modality :
     operator-higher-modality m (operator-higher-modality m X) →
     operator-higher-modality m X
-  map-inv-unit-higher-modality =
-    rec-higher-modality m (operator-higher-modality m X) X id
+  map-inv-unit-higher-modality = rec-higher-modality m id
 
   is-retraction-map-inv-unit-higher-modality :
-    (map-inv-unit-higher-modality ∘ unit-higher-modality m) ~ id
-  is-retraction-map-inv-unit-higher-modality =
-    compute-rec-higher-modality m (operator-higher-modality m X) X id
+    map-inv-unit-higher-modality ∘ unit-higher-modality m ~ id
+  is-retraction-map-inv-unit-higher-modality = compute-rec-higher-modality m id
 
   is-section-map-inv-unit-higher-modality :
-    (unit-higher-modality m ∘ map-inv-unit-higher-modality) ~ id
+    unit-higher-modality m ∘ map-inv-unit-higher-modality ~ id
   is-section-map-inv-unit-higher-modality =
     ind-subuniverse-Id-higher-modality m _ _
       ( ap (unit-higher-modality m) ∘
@@ -480,7 +475,7 @@ is-section-ind-higher-modality :
   {l1 l2 : Level} (m : higher-modality l1 l2)
   {X : UU l1} {P : operator-higher-modality m X → UU l1} →
   ( ( precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)) ∘
-    ( ind-higher-modality m X P)) ~
+    ( ind-higher-modality m P)) ~
   ( id)
 is-section-ind-higher-modality m =
   is-section-ind-modality
@@ -493,38 +488,38 @@ module _
   where
 
   is-retraction-ind-higher-modality :
-    {X : UU l} {P : operator-higher-modality m X → UU l} →
-    ( ind-higher-modality m X P ∘
+    {X : UU l} (P : operator-higher-modality m X → UU l) →
+    ( ind-higher-modality m P ∘
       precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)) ~
     ( id)
-  is-retraction-ind-higher-modality {X} {P} s =
+  is-retraction-ind-higher-modality P s =
     eq-htpy
       ( ind-subuniverse-Id-higher-modality m _ _
-        ( compute-ind-higher-modality m X P (s ∘ unit-higher-modality m)))
+        ( compute-ind-higher-modality m P (s ∘ unit-higher-modality m)))
 
   is-equiv-ind-higher-modality :
-    (X : UU l) (P : operator-higher-modality m X → UU l) →
-    is-equiv (ind-higher-modality m X P)
-  pr1 (pr1 (is-equiv-ind-higher-modality X P)) =
+    {X : UU l} (P : operator-higher-modality m X → UU l) →
+    is-equiv (ind-higher-modality m P)
+  pr1 (pr1 (is-equiv-ind-higher-modality P)) =
     precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)
-  pr2 (pr1 (is-equiv-ind-higher-modality X P)) =
-    is-retraction-ind-higher-modality
-  pr1 (pr2 (is-equiv-ind-higher-modality X P)) =
+  pr2 (pr1 (is-equiv-ind-higher-modality P)) =
+    is-retraction-ind-higher-modality P
+  pr1 (pr2 (is-equiv-ind-higher-modality P)) =
     precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)
-  pr2 (pr2 (is-equiv-ind-higher-modality X P)) =
+  pr2 (pr2 (is-equiv-ind-higher-modality P)) =
     is-section-ind-higher-modality m
 
   equiv-ind-higher-modality :
-    (X : UU l) (P : operator-higher-modality m X → UU l) →
+    {X : UU l} (P : operator-higher-modality m X → UU l) →
     ((x : X) → operator-higher-modality m (P (unit-higher-modality m x))) ≃
     ((x' : operator-higher-modality m X) → operator-higher-modality m (P x'))
-  pr1 (equiv-ind-higher-modality X P) = ind-higher-modality m X P
-  pr2 (equiv-ind-higher-modality X P) = is-equiv-ind-higher-modality X P
+  pr1 (equiv-ind-higher-modality P) = ind-higher-modality m P
+  pr2 (equiv-ind-higher-modality P) = is-equiv-ind-higher-modality P
 
   is-uniquely-eliminating-higher-modality :
     is-uniquely-eliminating-modality (unit-higher-modality m)
-  is-uniquely-eliminating-higher-modality X P =
-    is-equiv-map-inv-is-equiv (is-equiv-ind-higher-modality X P)
+  is-uniquely-eliminating-higher-modality P =
+    is-equiv-map-inv-is-equiv (is-equiv-ind-higher-modality P)
 ```
 
 ## See also

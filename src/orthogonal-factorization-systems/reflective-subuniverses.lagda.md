@@ -212,7 +212,7 @@ module _
 
   rec-modality-is-reflective-subuniverse :
     rec-modality (unit-is-reflective-subuniverse P is-reflective-P)
-  rec-modality-is-reflective-subuniverse X Y =
+  rec-modality-is-reflective-subuniverse {X} {Y} =
     map-inv-is-equiv
       ( is-local-is-in-subuniverse-is-reflective-subuniverse
         ( P)

@@ -149,8 +149,8 @@ is-small-lsuc {l} X = is-small-lmax (lsuc l) X
 is-small-equiv :
   {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
   A ≃ B → is-small l3 B → is-small l3 A
-pr1 (is-small-equiv B e (pair X h)) = X
-pr2 (is-small-equiv B e (pair X h)) = h ∘e e
+pr1 (is-small-equiv B e (X , h)) = X
+pr2 (is-small-equiv B e (X , h)) = h ∘e e
 
 is-small-equiv' :
   {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
@@ -195,9 +195,9 @@ pr2 (is-small-is-contr l H) = equiv-is-contr H is-contr-raise-unit
 is-small-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
   is-small l3 A → ((x : A) → is-small l4 (B x)) → is-small (l3 ⊔ l4) (Σ A B)
-pr1 (is-small-Σ {B = B} (pair X e) H) =
+pr1 (is-small-Σ {B = B} (X , e) H) =
   Σ X (λ x → pr1 (H (map-inv-equiv e x)))
-pr2 (is-small-Σ {B = B} (pair X e) H) =
+pr2 (is-small-Σ {B = B} (X , e) H) =
   equiv-Σ
     ( λ x → pr1 (H (map-inv-equiv e x)))
     ( e)
@@ -238,9 +238,9 @@ is-small-Π :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
   is-small l3 A → ((x : A) → is-small l4 (B x)) →
   is-small (l3 ⊔ l4) ((x : A) → B x)
-pr1 (is-small-Π {B = B} (pair X e) H) =
+pr1 (is-small-Π {B = B} (X , e) H) =
   (x : X) → pr1 (H (map-inv-equiv e x))
-pr2 (is-small-Π {B = B} (pair X e) H) =
+pr2 (is-small-Π {B = B} (X , e) H) =
   equiv-Π
     ( λ (x : X) → pr1 (H (map-inv-equiv e x)))
     ( e)

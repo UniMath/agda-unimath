@@ -16,9 +16,9 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.multivariable-sections
 open import foundation.retractions
 open import foundation.sections
-open import foundation.sections-of-maps-of-maps
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -35,7 +35,7 @@ Given a [modal operator](orthogonal-factorization-systems.modal-operators.md)
 [section of maps of maps](foundation.sections-of-maps-of-maps.md):
 
 ```text
-  section-Π (precomp-Π unit-○ (○ ∘ P))
+  multivariable-section 2 (precomp-Π unit-○ (○ ∘ P))
 ```
 
 for all families `P` over some `○ X`.
@@ -57,29 +57,32 @@ module _
 
   ind-modality : UU (lsuc l1 ⊔ l2)
   ind-modality =
-    (X : UU l1) (P : ○ X → UU l1) →
+    {X : UU l1} (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) →
     (x' : ○ X) → ○ (P x')
 
   compute-ind-modality : ind-modality → UU (lsuc l1 ⊔ l2)
   compute-ind-modality ind-○ =
-    (X : UU l1) (P : ○ X → UU l1) →
+    {X : UU l1} (P : ○ X → UU l1) →
     (f : (x : X) → ○ (P (unit-○ x))) →
-    (x : X) → ind-○ X P f (unit-○ x) ＝ f x
+    (x : X) → ind-○ P f (unit-○ x) ＝ f x
 
   induction-principle-modality : UU (lsuc l1 ⊔ l2)
   induction-principle-modality =
-    (X : UU l1) (P : ○ X → UU l1) → section-Π (precomp-Π unit-○ (○ ∘ P))
+    {X : UU l1} (P : ○ X → UU l1) →
+    multivariable-section 1 (precomp-Π unit-○ (○ ∘ P))
 
   ind-induction-principle-modality : induction-principle-modality → ind-modality
-  ind-induction-principle-modality I X P =
-    map-section-Π (precomp-Π unit-○ (○ ∘ P)) (I X P)
+  ind-induction-principle-modality I P =
+    map-multivariable-section 1 (precomp-Π unit-○ (○ ∘ P)) (I P)
 
   compute-ind-induction-principle-modality :
     (I : induction-principle-modality) →
     compute-ind-modality (ind-induction-principle-modality I)
-  compute-ind-induction-principle-modality I X P f =
-    (is-section-Π-map-section-Π (precomp-Π unit-○ (○ ∘ P)) (I X P)) f
+  compute-ind-induction-principle-modality I P =
+    is-multivariable-section-map-multivariable-section 1
+      ( precomp-Π unit-○ (○ ∘ P))
+      ( I P)
 ```
 
 ### Modal recursion
@@ -92,27 +95,28 @@ module _
   where
 
   rec-modality : UU (lsuc l1 ⊔ l2)
-  rec-modality = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
+  rec-modality = {X Y : UU l1} → (X → ○ Y) → ○ X → ○ Y
 
   compute-rec-modality : rec-modality → UU (lsuc l1 ⊔ l2)
   compute-rec-modality rec-○ =
-    (X : UU l1) (Y : UU l1) →
+    {X Y : UU l1} →
     (f : X → ○ Y) →
-    (x : X) → rec-○ X Y f (unit-○ x) ＝ f x
+    (x : X) → rec-○ f (unit-○ x) ＝ f x
 
   recursion-principle-modality : UU (lsuc l1 ⊔ l2)
   recursion-principle-modality =
-    (X : UU l1) (Y : UU l1) → section-Π (precomp {A = X} unit-○ (○ Y))
+    {X Y : UU l1} → multivariable-section 1 (precomp {A = X} unit-○ (○ Y))
 
   rec-recursion-principle-modality : recursion-principle-modality → rec-modality
-  rec-recursion-principle-modality I X Y =
-    map-section-Π (precomp unit-○ (○ Y)) (I X Y)
+  rec-recursion-principle-modality I {Y = Y} =
+    map-multivariable-section 1 (precomp unit-○ (○ Y)) I
 
   compute-rec-recursion-principle-modality :
     (I : recursion-principle-modality) →
     compute-rec-modality (rec-recursion-principle-modality I)
-  compute-rec-recursion-principle-modality I X Y f =
-    (is-section-Π-map-section-Π (precomp unit-○ (○ Y)) (I X Y)) f
+  compute-rec-recursion-principle-modality I {Y = Y} =
+    is-multivariable-section-map-multivariable-section 1
+      ( precomp unit-○ (○ Y)) I
 ```
 
 ## Properties
@@ -127,18 +131,18 @@ module _
   where
 
   rec-ind-modality : ind-modality unit-○ → rec-modality unit-○
-  rec-ind-modality ind X Y = ind X (λ _ → Y)
+  rec-ind-modality ind {Y = Y} = ind (λ _ → Y)
 
   compute-rec-compute-ind-modality :
     (ind-○ : ind-modality unit-○) →
     compute-ind-modality unit-○ ind-○ →
     compute-rec-modality unit-○ (rec-ind-modality ind-○)
-  compute-rec-compute-ind-modality ind-○ compute-ind-○ X Y =
-    compute-ind-○ X (λ _ → Y)
+  compute-rec-compute-ind-modality ind-○ compute-ind-○ {Y = Y} =
+    compute-ind-○ (λ _ → Y)
 
   recursion-principle-induction-principle-modality :
     induction-principle-modality unit-○ → recursion-principle-modality unit-○
-  recursion-principle-induction-principle-modality I X Y = I X (λ _ → Y)
+  recursion-principle-induction-principle-modality I {Y = Y} = I (λ _ → Y)
 ```
 
 ### Modal induction gives an inverse to the unit
@@ -150,9 +154,9 @@ is-section-ind-modality :
   (unit-○ : unit-modality ○)
   (ind-○ : ind-modality unit-○)
   (compute-ind-○ : compute-ind-modality unit-○ ind-○)
-  {X : UU l1} {P : ○ X → UU l1} → (precomp-Π unit-○ (○ ∘ P) ∘ ind-○ X P) ~ id
+  {X : UU l1} {P : ○ X → UU l1} → (precomp-Π unit-○ (○ ∘ P) ∘ ind-○ P) ~ id
 is-section-ind-modality unit-○ ind-○ compute-ind-○ {X} {P} =
-  eq-htpy ∘ compute-ind-○ X P
+  eq-htpy ∘ compute-ind-○ P
 
 is-retraction-ind-id-modality :
   {l : Level}
@@ -160,9 +164,9 @@ is-retraction-ind-id-modality :
   (unit-○ : unit-modality ○)
   (ind-○ : ind-modality unit-○)
   (compute-ind-○ : compute-ind-modality unit-○ ind-○)
-  {X : UU l} → (ind-○ (○ X) (λ _ → X) id ∘ unit-○) ~ id
+  {X : UU l} → (ind-○ (λ _ → X) id ∘ unit-○) ~ id
 is-retraction-ind-id-modality {○ = ○} unit-○ ind-○ compute-ind-○ {X} =
-  compute-ind-○ (○ X) (λ _ → X) id
+  compute-ind-○ (λ _ → X) id
 
 module _
   {l1 l2 : Level}
@@ -174,23 +178,23 @@ module _
 
   is-retraction-rec-map-modality :
     {X Y : UU l1} (f : ○ X → Y) (r : retraction f) →
-    (rec-○ Y X (map-retraction f r) ∘ (unit-○ ∘ f)) ~ id
+    (rec-○ (map-retraction f r) ∘ (unit-○ ∘ f)) ~ id
   is-retraction-rec-map-modality {X} {Y} f r =
-    ( compute-rec-○ Y X (map-retraction f r) ∘ f) ∙h
+    ( compute-rec-○ (map-retraction f r) ∘ f) ∙h
     ( is-retraction-map-retraction f r)
 
   retraction-rec-map-modality :
     {X Y : UU l1} (f : ○ X → Y) →
     retraction f → retraction (unit-○ ∘ f)
-  pr1 (retraction-rec-map-modality {X} {Y} f r) = rec-○ Y X (map-retraction f r)
+  pr1 (retraction-rec-map-modality {X} {Y} f r) = rec-○ (map-retraction f r)
   pr2 (retraction-rec-map-modality f r) = is-retraction-rec-map-modality f r
 
   section-rec-map-modality :
     {X Y : UU l1} (f : X → ○ Y) →
-    section f → section (rec-○ X Y f)
+    section f → section (rec-○ f)
   pr1 (section-rec-map-modality f s) = unit-○ ∘ map-section f s
   pr2 (section-rec-map-modality {X} {Y} f s) =
-    (compute-rec-○ X Y f ∘ map-section f s) ∙h is-section-map-section f s
+    (compute-rec-○ f ∘ map-section f s) ∙h is-section-map-section f s
 ```
 
 ### A modal induction principle consists precisely of an induction rule and a computation rule
@@ -201,23 +205,25 @@ equiv-section-unit-induction-principle-modality :
   { ○ : operator-modality l1 l2}
   ( unit-○ : unit-modality ○) →
   ( induction-principle-modality unit-○) ≃
-  Σ ( (X : UU l1) (P : ○ X → UU l1) →
+  Σ ( {X : UU l1} (P : ○ X → UU l1) →
       ((x : X) → ○ (P (unit-○ x))) → (x' : ○ X) → ○ (P x'))
     ( λ I →
-      (X : UU l1) (P : ○ X → UU l1) (f : (x : X) → ○ (P (unit-○ x))) →
-      I X P f ∘ unit-○ ~ f)
+      {X : UU l1} (P : ○ X → UU l1) (f : (x : X) → ○ (P (unit-○ x))) →
+      I P f ∘ unit-○ ~ f)
 equiv-section-unit-induction-principle-modality unit-○ =
-  distributive-Π-Σ ∘e equiv-Π-equiv-family (λ _ → distributive-Π-Σ)
+  distributive-implicit-Π-Σ ∘e
+  equiv-implicit-Π-equiv-family (λ _ → distributive-Π-Σ)
 
 equiv-section-unit-recursion-principle-modality :
   { l1 l2 : Level}
   { ○ : operator-modality l1 l2}
   ( unit-○ : unit-modality ○) →
   ( recursion-principle-modality unit-○) ≃
-    Σ ( (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y)
-    ( λ I → (X Y : UU l1) (f : X → ○ Y) → I X Y f ∘ unit-○ ~ f)
+    Σ ( {X Y : UU l1} → (X → ○ Y) → ○ X → ○ Y)
+    ( λ I → {X Y : UU l1} (f : X → ○ Y) → I f ∘ unit-○ ~ f)
 equiv-section-unit-recursion-principle-modality unit-○ =
-  distributive-Π-Σ ∘e equiv-Π-equiv-family (λ _ → distributive-Π-Σ)
+  distributive-implicit-Π-Σ ∘e
+  equiv-implicit-Π-equiv-family (λ _ → distributive-implicit-Π-Σ)
 ```
 
 ### The modal operator's action on maps
@@ -231,7 +237,7 @@ module _
 
   ap-map-rec-modality :
     rec-modality unit-○ → {X Y : UU l1} → (X → Y) → ○ X → ○ Y
-  ap-map-rec-modality rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
+  ap-map-rec-modality rec-○ f = rec-○ (unit-○ ∘ f)
 
   ap-map-ind-modality :
     ind-modality unit-○ → {X Y : UU l1} → (X → Y) → ○ X → ○ Y
@@ -265,8 +271,8 @@ module _
   naturality-unit-rec-modality :
     {X Y : UU l1} (f : X → Y) →
     (ap-map-rec-modality unit-○ rec-○ f ∘ unit-○) ~ (unit-○ ∘ f)
-  naturality-unit-rec-modality {X} {Y} f =
-    compute-rec-○ X Y (unit-○ ∘ f)
+  naturality-unit-rec-modality f =
+    compute-rec-○ (unit-○ ∘ f)
 
   naturality-unit-rec-modality' :
     {X Y : UU l1} (f : X → Y) {x x' : X} →

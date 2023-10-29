@@ -73,8 +73,8 @@ pr2 (♯-locally-small-operator-modality l) A = is-locally-small' {l} {♯ A}
 
 ```agda
 induction-principle-♯ : {l : Level} → induction-principle-modality {l} unit-♯
-pr1 (induction-principle-♯ X P) = ind-♯ P
-pr2 (induction-principle-♯ X P) = compute-ind-♯ P
+pr1 (induction-principle-♯ P) = ind-♯ P
+pr2 (induction-principle-♯ P) = compute-ind-♯ P
 
 strong-induction-principle-subuniverse-♯ :
   {l : Level} → strong-induction-principle-subuniverse-modality {l} unit-♯
@@ -124,19 +124,19 @@ compute-ind-subuniverse-♯ =
 
 ```agda
 rec-♯ :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A → ♯ B) → (♯ A → ♯ B)
-rec-♯ B = ind-♯ (λ _ → B)
+rec-♯ {B = B} = ind-♯ (λ _ → B)
 
 compute-rec-♯ :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → ♯ B) →
-  (rec-♯ B f ∘ unit-♯) ~ f
-compute-rec-♯ B = compute-ind-♯ (λ _ → B)
+  (rec-♯ f ∘ unit-♯) ~ f
+compute-rec-♯ {B = B} = compute-ind-♯ (λ _ → B)
 
 recursion-principle-♯ : {l : Level} → recursion-principle-modality {l} unit-♯
-pr1 (recursion-principle-♯ X Y) = rec-♯ Y
-pr2 (recursion-principle-♯ X Y) = compute-rec-♯ Y
+pr1 (recursion-principle-♯) = rec-♯
+pr2 (recursion-principle-♯) = compute-rec-♯
 
 strong-recursion-principle-subuniverse-♯ :
   {l : Level} → strong-recursion-principle-subuniverse-modality {l} unit-♯
@@ -186,7 +186,7 @@ compute-rec-subuniverse-♯ =
 
 ```agda
 ap-♯ : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
-ap-♯ {B = B} f = rec-♯ B (unit-♯ ∘ f)
+ap-♯ f = rec-♯ (unit-♯ ∘ f)
 ```
 
 ## See also
