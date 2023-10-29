@@ -126,11 +126,14 @@ module _
   universal-property-suspension-fiber =
     pr2 universal-property-suspension-cocone-fiber
 
-  equiv-suspension-fiber-fiber-codiagonal-map :
-    suspension (fiber f b) ≃ fiber (codiagonal-map f) b
-  pr1 equiv-suspension-fiber-fiber-codiagonal-map =
+  fiber-codiagonal-map-suspension-fiber :
+    suspension (fiber f b) → fiber (codiagonal-map f) b
+  fiber-codiagonal-map-suspension-fiber =
     cogap terminal-map terminal-map suspension-cocone-fiber
-  pr2 equiv-suspension-fiber-fiber-codiagonal-map =
+
+  is-equiv-fiber-codiagonal-map-suspension-fiber :
+    is-equiv fiber-codiagonal-map-suspension-fiber
+  is-equiv-fiber-codiagonal-map-suspension-fiber =
     is-equiv-up-pushout-up-pushout
       ( terminal-map)
       ( terminal-map)
@@ -145,4 +148,11 @@ module _
         ( suspension-cocone-fiber))
       ( up-pushout terminal-map terminal-map)
       ( universal-property-suspension-fiber)
+
+  equiv-fiber-codiagonal-map-suspension-fiber :
+    suspension (fiber f b) ≃ fiber (codiagonal-map f) b
+  pr1 equiv-fiber-codiagonal-map-suspension-fiber =
+    fiber-codiagonal-map-suspension-fiber
+  pr2 equiv-fiber-codiagonal-map-suspension-fiber =
+    is-equiv-fiber-codiagonal-map-suspension-fiber
 ```
