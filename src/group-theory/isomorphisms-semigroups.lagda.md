@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -22,8 +23,6 @@ open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import foundation-core.function-extensionality
 
 open import group-theory.equivalences-semigroups
 open import group-theory.homomorphisms-semigroups

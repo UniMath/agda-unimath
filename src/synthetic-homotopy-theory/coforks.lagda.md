@@ -179,7 +179,7 @@ module _
     eq-htpy-cofork f g
       ( cofork-map f g e id)
       ( e)
-      (refl-htpy , (right-unit-htpy ∙h (ap-id ∘ coherence-cofork f g e)))
+      ( refl-htpy , (right-unit-htpy ∙h (ap-id ∘ coherence-cofork f g e)))
 ```
 
 ### Postcomposing coforks distributes over function composition
