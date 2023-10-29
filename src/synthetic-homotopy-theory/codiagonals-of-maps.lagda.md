@@ -80,9 +80,9 @@ module _
     compute-glue-cogap f f cocone-codiagonal-map
 ```
 
-### Properties
+## Properties
 
-The codiagonal is the fiberwise suspension (as claimed at the top).
+### The codiagonal is the fiberwise suspension
 
 ```agda
 module _
