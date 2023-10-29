@@ -7,22 +7,18 @@ module synthetic-homotopy-theory.acyclic-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.contractible-types
-open import foundation-core.equivalences -- REMOVE
 open import foundation.contractible-maps
-open import foundation.dependent-pair-types -- REMOVE(?)
+open import foundation.contractible-types
 open import foundation.epimorphisms
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.propositions
-open import foundation.universe-levels
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.acyclic-types
 open import synthetic-homotopy-theory.codiagonals-of-maps
-open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.universal-property-pushouts
-open import synthetic-homotopy-theory.cocones-under-spans -- REMOVE
 ```
 
 </details>
@@ -54,7 +50,7 @@ module _
 
 ## Properties
 
-### A map is acyclic if and only if it is an epimorphism
+### A map is acyclic if and only if it is an [epimorphism](foundation.epimorphisms.md)
 
 ```agda
 module _
