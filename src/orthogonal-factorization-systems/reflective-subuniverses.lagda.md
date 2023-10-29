@@ -145,22 +145,6 @@ module _
 
 ## Properties
 
-### Locality at families of the unit
-
-```agda
-module _
-  {l1 l2 : Level} (P : subuniverse l1 l2)
-  (is-reflective-P : is-reflective-subuniverse P)
-  where
-
-  -- is-local-family-is-in-subuniverse-is-reflective-subuniverse :
-  --     (X : UU l1) (Q : X → UU l1) →
-  --     is-in-subuniverse P X → (x : X) →
-  --     is-local (unit-is-reflective-subuniverse {Q x}) X
-  --   is-local-is-in-subuniverse-is-reflective-subuniverse =
-  --     pr2 (pr2 (pr2 is-reflective-P))
-```
-
 ### Reflective subuniverses are subuniverses that have all localizations
 
 ```agda
