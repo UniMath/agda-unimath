@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-commutative-monoids
@@ -287,12 +288,10 @@ module _
   (f : hom-Commutative-Semiring A B)
   where
 
-  is-contr-total-htpy-hom-Commutative-Semiring :
-    is-contr
-      ( Σ ( hom-Commutative-Semiring A B)
-          ( htpy-hom-Commutative-Semiring A B f))
-  is-contr-total-htpy-hom-Commutative-Semiring =
-    is-contr-total-htpy-hom-Semiring
+  is-torsorial-htpy-hom-Commutative-Semiring :
+    is-torsorial (htpy-hom-Commutative-Semiring A B f)
+  is-torsorial-htpy-hom-Commutative-Semiring =
+    is-torsorial-htpy-hom-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
       ( f)

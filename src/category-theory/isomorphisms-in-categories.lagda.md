@@ -12,11 +12,14 @@ open import category-theory.isomorphisms-in-precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -136,7 +139,7 @@ module _
   id-iso-Category = id-iso-Precategory (precategory-Category C)
 ```
 
-### Equalities give rise to isomorphisms
+### Equalities induce isomorphisms
 
 An equality between objects `x y : A` gives rise to an isomorphism between them.
 This is because, by the J-rule, it is enough to construct an isomorphism given
@@ -563,7 +566,7 @@ module _
   iso-prop-Category = iso-prop-Precategory (precategory-Category C)
 ```
 
-### When `hom x y` and `hom y x` are propositions, it suffices to provide a homomorphism in each direction to construct an isomorphism
+### When `hom x y` and `hom y x` are propositions, it suffices to provide a morphism in each direction to construct an isomorphism
 
 ```agda
 module _
@@ -648,6 +651,28 @@ module _
     eq-iso-Category (iso-eq-Category C x y p) ＝ p
   is-retraction-eq-iso-Category {x} {y} =
     is-retraction-map-inv-equiv (extensionality-obj-Category x y)
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  (X : obj-Category C)
+  where
+
+  is-torsorial-iso-Category :
+    is-torsorial (iso-Category C X)
+  is-torsorial-iso-Category =
+    is-contr-equiv'
+      ( Σ (obj-Category C) (X ＝_))
+      ( equiv-tot (extensionality-obj-Category C X))
+      ( is-torsorial-path X)
+
+  is-torsorial-iso-Category' :
+    is-torsorial (λ Y → iso-Category C Y X)
+  is-torsorial-iso-Category' =
+    is-contr-equiv'
+      ( Σ (obj-Category C) (_＝ X))
+      ( equiv-tot (λ Y → extensionality-obj-Category C Y X))
+      ( is-torsorial-path' X)
 ```
 
 ### Functoriality of `eq-iso`

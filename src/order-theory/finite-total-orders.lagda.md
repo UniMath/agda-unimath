@@ -14,7 +14,6 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.finite-posets
-open import order-theory.finite-preorders
 open import order-theory.posets
 open import order-theory.total-orders
 

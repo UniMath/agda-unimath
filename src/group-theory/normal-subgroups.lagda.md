@@ -314,6 +314,15 @@ leq-Normal-Subgroup G H K =
     ( subgroup-Normal-Subgroup G H)
     ( subgroup-Normal-Subgroup G K)
 
+is-prop-leq-Normal-Subgroup :
+  {l1 l2 l3 : Level} (G : Group l1) →
+  (N : Normal-Subgroup l2 G) (M : Normal-Subgroup l3 G) →
+  is-prop (leq-Normal-Subgroup G N M)
+is-prop-leq-Normal-Subgroup G N M =
+  is-prop-leq-Subgroup G
+    ( subgroup-Normal-Subgroup G N)
+    ( subgroup-Normal-Subgroup G M)
+
 refl-leq-Normal-Subgroup :
   {l1 : Level} (G : Group l1) →
   is-reflexive-Large-Relation
@@ -382,7 +391,8 @@ preserves-order-subgroup-Normal-Subgroup G N M = id
 
 subgroup-normal-subgroup-hom-Large-Poset :
   {l1 : Level} (G : Group l1) →
-  hom-set-Large-Poset id
+  hom-set-Large-Poset
+    ( λ l → l)
     ( Normal-Subgroup-Large-Poset G)
     ( Subgroup-Large-Poset G)
 subgroup-normal-subgroup-hom-Large-Poset G =

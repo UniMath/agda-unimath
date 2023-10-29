@@ -7,6 +7,7 @@ module univalent-combinatorics.standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers

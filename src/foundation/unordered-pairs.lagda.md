@@ -35,6 +35,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.2-element-types
@@ -183,21 +184,21 @@ module _
     (p q : unordered-pair A) → p ＝ q → Eq-unordered-pair p q
   Eq-eq-unordered-pair p .p refl = refl-Eq-unordered-pair p
 
-  is-contr-total-Eq-unordered-pair :
+  is-torsorial-Eq-unordered-pair :
     (p : unordered-pair A) →
-    is-contr (Σ (unordered-pair A) (Eq-unordered-pair p))
-  is-contr-total-Eq-unordered-pair (pair X p) =
-    is-contr-total-Eq-structure
+    is-torsorial (Eq-unordered-pair p)
+  is-torsorial-Eq-unordered-pair (pair X p) =
+    is-torsorial-Eq-structure
       ( λ Y q e → p ~ (q ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin {k = 2} X)
+      ( is-torsorial-equiv-UU-Fin {k = 2} X)
       ( pair X (id-equiv-UU-Fin {k = 2} X))
-      ( is-contr-total-htpy p)
+      ( is-torsorial-htpy p)
 
   is-equiv-Eq-eq-unordered-pair :
     (p q : unordered-pair A) → is-equiv (Eq-eq-unordered-pair p q)
   is-equiv-Eq-eq-unordered-pair p =
     fundamental-theorem-id
-      ( is-contr-total-Eq-unordered-pair p)
+      ( is-torsorial-Eq-unordered-pair p)
       ( Eq-eq-unordered-pair p)
 
   extensionality-unordered-pair :
@@ -264,7 +265,7 @@ module _
         ( triangle-ev-refl-Eq-unordered-pair)
         ( dependent-universal-property-contr-is-contr
           ( p , refl-Eq-unordered-pair p)
-          ( is-contr-total-Eq-unordered-pair p)
+          ( is-torsorial-Eq-unordered-pair p)
           ( λ u → B (pr1 u) (pr2 u)))
         ( is-equiv-ev-pair)
 

@@ -17,6 +17,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -110,18 +111,17 @@ module _
   htpy-eq-hom-Type-With-Endomorphism f .f refl =
     refl-htpy-hom-Type-With-Endomorphism f
 
-  is-contr-total-htpy-hom-Type-With-Endomorphism :
+  is-torsorial-htpy-hom-Type-With-Endomorphism :
     (f : hom-Type-With-Endomorphism X Y) →
-    is-contr
-      ( Σ (hom-Type-With-Endomorphism X Y) (htpy-hom-Type-With-Endomorphism f))
-  is-contr-total-htpy-hom-Type-With-Endomorphism f =
-    is-contr-total-Eq-structure
+    is-torsorial (htpy-hom-Type-With-Endomorphism f)
+  is-torsorial-htpy-hom-Type-With-Endomorphism f =
+    is-torsorial-Eq-structure
       ( λ g G H →
         ( ( H ·r endomorphism-Type-With-Endomorphism X) ∙h
           ( G)) ~
         ( ( coherence-square-hom-Type-With-Endomorphism X Y f) ∙h
           ( endomorphism-Type-With-Endomorphism Y ·l H)))
-      ( is-contr-total-htpy (map-hom-Type-With-Endomorphism X Y f))
+      ( is-torsorial-htpy (map-hom-Type-With-Endomorphism X Y f))
       ( map-hom-Type-With-Endomorphism X Y f , refl-htpy)
       ( is-contr-equiv
         ( Σ ( coherence-square-maps
@@ -131,7 +131,7 @@ module _
               ( map-hom-Type-With-Endomorphism X Y f))
             ( λ H → H ~ coherence-square-hom-Type-With-Endomorphism X Y f))
         ( equiv-tot (λ H → equiv-concat-htpy' H right-unit-htpy))
-        ( is-contr-total-htpy'
+        ( is-torsorial-htpy'
           ( coherence-square-hom-Type-With-Endomorphism X Y f)))
 
   is-equiv-htpy-eq-hom-Type-With-Endomorphism :
@@ -139,7 +139,7 @@ module _
     is-equiv (htpy-eq-hom-Type-With-Endomorphism f g)
   is-equiv-htpy-eq-hom-Type-With-Endomorphism f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-Type-With-Endomorphism f)
+      ( is-torsorial-htpy-hom-Type-With-Endomorphism f)
       ( htpy-eq-hom-Type-With-Endomorphism f)
 
   extensionality-hom-Type-With-Endomorphism :

@@ -13,7 +13,9 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -44,6 +46,15 @@ module _
   preserves-mul-Group' f =
     preserves-mul-Semigroup' (semigroup-Group G) (semigroup-Group H) f
 
+  is-prop-preserves-mul-Group :
+    (f : type-Group G → type-Group H) → is-prop (preserves-mul-Group f)
+  is-prop-preserves-mul-Group =
+    is-prop-preserves-mul-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  preserves-mul-prop-Group : (type-Group G → type-Group H) → Prop (l1 ⊔ l2)
+  preserves-mul-prop-Group =
+    preserves-mul-prop-Semigroup (semigroup-Group G) (semigroup-Group H)
+
   hom-Group : UU (l1 ⊔ l2)
   hom-Group =
     hom-Semigroup
@@ -72,14 +83,38 @@ id-hom-Group G = id-hom-Semigroup (semigroup-Group G)
 ### Composition of group homomorphisms
 
 ```agda
-comp-hom-Group :
-  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3) →
-  hom-Group H K → hom-Group G H → hom-Group G K
-comp-hom-Group G H K =
-  comp-hom-Semigroup
-    ( semigroup-Group G)
-    ( semigroup-Group H)
-    ( semigroup-Group K)
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
+  (g : hom-Group H K) (f : hom-Group G H)
+  where
+
+  comp-hom-Group : hom-Group G K
+  comp-hom-Group =
+    comp-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( semigroup-Group K)
+      ( g)
+      ( f)
+
+  map-comp-hom-Group : type-Group G → type-Group K
+  map-comp-hom-Group =
+    map-comp-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( semigroup-Group K)
+      ( g)
+      ( f)
+
+  preserves-mul-comp-hom-Group :
+    preserves-mul-Group G K map-comp-hom-Group
+  preserves-mul-comp-hom-Group =
+    preserves-mul-comp-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( semigroup-Group K)
+      ( g)
+      ( f)
 ```
 
 ## Properties
@@ -107,11 +142,10 @@ module _
       ( semigroup-Group H)
 
   abstract
-    is-contr-total-htpy-hom-Group :
-      ( f : hom-Group G H) →
-      is-contr (Σ (hom-Group G H) (htpy-hom-Group f))
-    is-contr-total-htpy-hom-Group =
-      is-contr-total-htpy-hom-Semigroup
+    is-torsorial-htpy-hom-Group :
+      ( f : hom-Group G H) → is-torsorial (htpy-hom-Group f)
+    is-torsorial-htpy-hom-Group =
+      is-torsorial-htpy-hom-Semigroup
         ( semigroup-Group G)
         ( semigroup-Group H)
 
@@ -295,4 +329,28 @@ module _
   hom-monoid-hom-Group : hom-Monoid (monoid-Group G) (monoid-Group H)
   pr1 hom-monoid-hom-Group = f
   pr2 hom-monoid-hom-Group = preserves-unit-hom-Group G H f
+```
+
+### Group homomorphisms preserve left and right division
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  preserves-left-div-hom-Group :
+    {x y : type-Group G} →
+    map-hom-Group G H f (left-div-Group G x y) ＝
+    left-div-Group H (map-hom-Group G H f x) (map-hom-Group G H f y)
+  preserves-left-div-hom-Group =
+    ( preserves-mul-hom-Group G H f _ _) ∙
+    ( ap (mul-Group' H _) (preserves-inv-hom-Group G H f _))
+
+  preserves-right-div-hom-Group :
+    {x y : type-Group G} →
+    map-hom-Group G H f (right-div-Group G x y) ＝
+    right-div-Group H (map-hom-Group G H f x) (map-hom-Group G H f y)
+  preserves-right-div-hom-Group =
+    ( preserves-mul-hom-Group G H f _ _) ∙
+    ( ap (mul-Group H _) (preserves-inv-hom-Group G H f _))
 ```

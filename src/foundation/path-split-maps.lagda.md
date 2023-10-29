@@ -9,11 +9,12 @@ open import foundation-core.path-split-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.propositions
 ```
 
@@ -36,11 +37,11 @@ module _
           ( is-contr-prod
             ( is-contr-section-is-equiv
               ( is-equiv-is-path-split f is-path-split-f))
-            ( is-contr-Π
-              ( λ x → is-contr-Π
-                ( λ y → is-contr-section-is-equiv
+            ( is-contr-iterated-Π 2
+              ( λ x y →
+                is-contr-section-is-equiv
                   ( is-emb-is-equiv
-                    ( is-equiv-is-path-split f is-path-split-f) x y))))))
+                    ( is-equiv-is-path-split f is-path-split-f) x y)))))
 
   abstract
     is-equiv-is-path-split-is-equiv :

@@ -7,6 +7,7 @@ module category-theory.function-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.dependent-products-of-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
@@ -64,10 +65,11 @@ module _
   associative-comp-hom-function-Precategory =
     associative-comp-hom-Precategory function-Precategory
 
-  associative-composition-structure-function-Precategory :
-    associative-composition-structure-Set hom-set-function-Precategory
-  associative-composition-structure-function-Precategory =
-    associative-composition-structure-Precategory function-Precategory
+  associative-composition-operation-function-Precategory :
+    associative-composition-operation-binary-family-Set
+      hom-set-function-Precategory
+  associative-composition-operation-function-Precategory =
+    associative-composition-operation-Precategory function-Precategory
 
   id-hom-function-Precategory :
     {x : obj-function-Precategory} → hom-function-Precategory x x
@@ -87,11 +89,11 @@ module _
     right-unit-law-comp-hom-Precategory function-Precategory
 
   is-unital-function-Precategory :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-function-Precategory
-      associative-composition-structure-function-Precategory
+      comp-hom-function-Precategory
   is-unital-function-Precategory =
-    is-unital-composition-structure-Precategory function-Precategory
+    is-unital-composition-operation-Precategory function-Precategory
 ```
 
 ### Isomorphisms in the function precategory are fiberwise isomorphisms

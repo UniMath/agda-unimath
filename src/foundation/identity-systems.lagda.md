@@ -16,6 +16,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -32,22 +33,37 @@ also follows for identity systems.
 
 ## Definitions
 
-### The predicate of being an identity system
+### Evaluating at the base point
 
 ```agda
 ev-refl-identity-system :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {a : A} (b : B a)
   {P : (x : A) (y : B x) → UU l3} →
   ((x : A) (y : B x) → P x y) → P a b
-ev-refl-identity-system b f = f _ b
+ev-refl-identity-system {a = a} b f = f a b
+```
 
+### The predicate of being an identity system with respect to a universe level
+
+```agda
 module _
   {l1 l2 : Level} (l : Level) {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
   where
 
-  is-identity-system : UU (l1 ⊔ l2 ⊔ lsuc l)
-  is-identity-system =
+  is-identity-system-Level : UU (l1 ⊔ l2 ⊔ lsuc l)
+  is-identity-system-Level =
     (P : (x : A) (y : B x) → UU l) → section (ev-refl-identity-system b {P})
+```
+
+### The predicate of being an identity system
+
+```agda
+module _
+    {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
+    where
+
+    is-identity-system : UUω
+    is-identity-system = {l : Level} → is-identity-system-Level l B a b
 ```
 
 ## Properties
@@ -64,8 +80,7 @@ module _
 
   abstract
     is-identity-system-is-torsorial :
-      (H : is-contr (Σ A B)) →
-      {l : Level} → is-identity-system l B a b
+      (H : is-torsorial B) → is-identity-system B a b
     pr1 (is-identity-system-is-torsorial H P) p x y =
       tr
         ( fam-Σ P)
@@ -75,21 +90,21 @@ module _
       ap
         ( λ t → tr (fam-Σ P) t p)
         ( eq-is-contr'
-          ( is-prop-is-contr H (pair a b) (pair a b))
+          ( is-prop-is-contr H (a , b) (a , b))
           ( eq-is-contr H)
           ( refl))
 
   abstract
     is-torsorial-is-identity-system :
-      ({l : Level} → is-identity-system l B a b) → is-contr (Σ A B)
+      is-identity-system B a b → is-torsorial B
     pr1 (pr1 (is-torsorial-is-identity-system H)) = a
     pr2 (pr1 (is-torsorial-is-identity-system H)) = b
-    pr2 (is-torsorial-is-identity-system H) (pair x y) =
-      pr1 (H (λ x' y' → (pair a b) ＝ (pair x' y'))) refl x y
+    pr2 (is-torsorial-is-identity-system H) (x , y) =
+      pr1 (H (λ x' y' → (a , b) ＝ (x' , y'))) refl x y
 
   abstract
     fundamental-theorem-id-is-identity-system :
-      ({l : Level} → is-identity-system l B a b) →
+      is-identity-system B a b →
       (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
     fundamental-theorem-id-is-identity-system H f =
       fundamental-theorem-id

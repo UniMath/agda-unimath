@@ -7,6 +7,7 @@ module category-theory.natural-isomorphisms-functors-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.commuting-squares-of-morphisms-in-large-precategories
 open import category-theory.functors-large-precategories
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
@@ -35,8 +36,8 @@ module _
   {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  (F : functor-Large-Precategory C D γF)
-  (G : functor-Large-Precategory C D γG)
+  (F : functor-Large-Precategory γF C D)
+  (G : functor-Large-Precategory γG C D)
   where
 
   iso-family-functor-Large-Precategory : UUω
@@ -51,31 +52,31 @@ module _
     where
     constructor make-natural-isomorphism
     field
-      components-natural-isomorphism-Large-Precategory :
+      iso-natural-isomorphism-Large-Precategory :
         iso-family-functor-Large-Precategory
-      coherence-square-natural-isomorphism-Large-Precategory :
+      naturality-natural-isomorphism-Large-Precategory :
         { l1 l2 : Level}
         { X : obj-Large-Precategory C l1}
         { Y : obj-Large-Precategory C l2}
         ( f : hom-Large-Precategory C X Y) →
-        coherence-square-Large-Precategory D
-          ( hom-iso-Large-Precategory D
-            ( components-natural-isomorphism-Large-Precategory X))
+        coherence-square-hom-Large-Precategory D
           ( hom-functor-Large-Precategory F f)
-          ( hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
-            ( components-natural-isomorphism-Large-Precategory Y))
+            ( iso-natural-isomorphism-Large-Precategory X))
+          ( hom-iso-Large-Precategory D
+            ( iso-natural-isomorphism-Large-Precategory Y))
+          ( hom-functor-Large-Precategory G f)
 
   open natural-isomorphism-Large-Precategory public
 
   natural-transformation-natural-isomorphism-Large-Precategory :
     natural-isomorphism-Large-Precategory →
-    natural-transformation-Large-Precategory F G
-  hom-family-natural-transformation-Large-Precategory
+    natural-transformation-Large-Precategory C D F G
+  hom-natural-transformation-Large-Precategory
     ( natural-transformation-natural-isomorphism-Large-Precategory γ) X =
     hom-iso-Large-Precategory D
-      ( components-natural-isomorphism-Large-Precategory γ X)
-  coherence-square-natural-transformation-Large-Precategory
-    (natural-transformation-natural-isomorphism-Large-Precategory γ) =
-      coherence-square-natural-isomorphism-Large-Precategory γ
+      ( iso-natural-isomorphism-Large-Precategory γ X)
+  naturality-natural-transformation-Large-Precategory
+    ( natural-transformation-natural-isomorphism-Large-Precategory γ) =
+      naturality-natural-isomorphism-Large-Precategory γ
 ```

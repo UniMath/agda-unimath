@@ -432,6 +432,13 @@ leq-Subgroup :
   Subgroup l2 G → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
 leq-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
 
+is-prop-leq-Subgroup :
+  {l1 l2 l3 : Level} (G : Group l1) →
+  (H : Subgroup l2 G) (K : Subgroup l3 G) →
+  is-prop (leq-Subgroup G H K)
+is-prop-leq-Subgroup G H K =
+  is-prop-leq-subtype (subset-Subgroup G H) (subset-Subgroup G K)
+
 refl-leq-Subgroup :
   {l1 : Level} (G : Group l1) →
   is-reflexive-Large-Relation (λ l → Subgroup l G) (leq-Subgroup G)
@@ -490,7 +497,7 @@ preserves-order-subset-Subgroup G H K = id
 subset-subgroup-hom-large-poset-Group :
   {l1 : Level} (G : Group l1) →
   hom-set-Large-Poset
-    ( id)
+    ( λ l → l)
     ( Subgroup-Large-Poset G)
     ( powerset-Large-Poset (type-Group G))
 map-hom-Large-Preorder

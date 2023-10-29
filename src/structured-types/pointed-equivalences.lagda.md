@@ -21,6 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -158,14 +159,14 @@ module _
   {l1 : Level} (A : Pointed-Type l1)
   where
 
-  is-contr-total-equiv-Pointed-Type :
-    is-contr (Σ (Pointed-Type l1) (λ B → A ≃∗ B))
-  is-contr-total-equiv-Pointed-Type =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Pointed-Type :
+    is-torsorial (λ B → A ≃∗ B)
+  is-torsorial-equiv-Pointed-Type =
+    is-torsorial-Eq-structure
       ( λ X x e → map-equiv e (point-Pointed-Type A) ＝ x)
-      ( is-contr-total-equiv (type-Pointed-Type A))
+      ( is-torsorial-equiv (type-Pointed-Type A))
       ( pair (type-Pointed-Type A) id-equiv)
-      ( is-contr-total-path (point-Pointed-Type A))
+      ( is-torsorial-path (point-Pointed-Type A))
 
   extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃∗ B)
   extensionality-Pointed-Type =
@@ -190,7 +191,7 @@ module _
   is-contr-section-is-equiv-pointed-map :
     is-equiv-pointed-map f → is-contr (section-pointed-map f)
   is-contr-section-is-equiv-pointed-map H =
-    is-contr-total-Eq-structure
+    is-torsorial-Eq-structure
       ( λ g p (G : (map-pointed-map f ∘ g) ~ id) →
         Id
           { A =
@@ -232,7 +233,7 @@ module _
   is-contr-retraction-is-equiv-pointed-map :
     is-equiv-pointed-map f → is-contr (retraction-pointed-map f)
   is-contr-retraction-is-equiv-pointed-map H =
-    is-contr-total-Eq-structure
+    is-torsorial-Eq-structure
       ( λ g p (G : g ∘ map-pointed-map f ~ id) →
         Id
           ( G (point-Pointed-Type A))

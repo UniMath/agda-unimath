@@ -51,7 +51,8 @@ the Cauchy product is also a species of subuniverse from `P` to `Q`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   where
 
   type-cauchy-product-species-subuniverse :
@@ -73,7 +74,7 @@ module _
 
 ```agda
 is-closed-under-cauchy-product-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
   UUω
 is-closed-under-cauchy-product-species-subuniverse {l1} {l2} P Q =
   {l3 l4 : Level}
@@ -89,7 +90,8 @@ is-closed-under-cauchy-product-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   where
 
@@ -109,7 +111,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   ( C2 : is-closed-under-coproducts-subuniverse P)
   where
@@ -246,7 +249,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
@@ -289,7 +292,7 @@ unit-cauchy-product-species-subuniverse P Q C X =
   is-empty (inclusion-subuniverse P X) , C X
 
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (C2 : is-in-subuniverse P (raise-empty l1))
   (C3 :
@@ -312,7 +315,7 @@ module _
     inclusion-subuniverse (subuniverse-global-subuniverse Q l3) (S X)
   equiv-right-unit-law-cauchy-product-species-subuniverse X =
     ( ( left-unit-law-Σ-is-contr
-        ( is-contr-total-equiv-subuniverse P X)
+        ( is-torsorial-equiv-subuniverse P X)
         ( X , id-equiv)) ∘e
       ( ( equiv-Σ-equiv-base
           ( λ p →
@@ -372,7 +375,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   ( C2 : is-closed-under-coproducts-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))

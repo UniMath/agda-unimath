@@ -252,7 +252,7 @@ module _
   normal-closure-Galois-Connection :
     galois-connection-Large-Poset
       ( λ l2 → l1 ⊔ l2)
-      ( id)
+      ( λ l → l)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)
   normal-closure-Galois-Connection =

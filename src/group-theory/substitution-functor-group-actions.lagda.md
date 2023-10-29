@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -85,10 +86,9 @@ module _
   preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
 
   subst-Abstract-Group-Action :
-    functor-Large-Precategory
+    functor-Large-Precategory (λ l → l)
       ( Abstract-Group-Action-Large-Precategory H)
       ( Abstract-Group-Action-Large-Precategory G)
-      ( λ l → l)
   obj-functor-Large-Precategory subst-Abstract-Group-Action =
     obj-subst-Abstract-Group-Action
   hom-functor-Large-Precategory subst-Abstract-Group-Action {X = X} {Y} =
@@ -96,7 +96,8 @@ module _
   preserves-comp-functor-Large-Precategory subst-Abstract-Group-Action
     {l1} {l2} {l3} {X} {Y} {Z} =
     preserves-comp-subst-Abstract-Group-Action X Y Z
-  preserves-id-functor-Large-Precategory subst-Abstract-Group-Action {l1} {X} =
+  preserves-id-functor-Large-Precategory
+    subst-Abstract-Group-Action {l1} {X} =
     preserves-id-subst-Abstract-Group-Action X
 ```
 

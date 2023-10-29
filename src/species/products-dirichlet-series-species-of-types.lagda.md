@@ -112,7 +112,7 @@ module _
                 ( universal-property-product ∘e
                   equiv-postcomp X (C1 A B))) ∘e
               ( left-unit-law-Σ-is-contr
-                ( is-contr-total-equiv' (A × B))
+                ( is-torsorial-equiv' (A × B))
                 ( A × B , id-equiv))))) ∘e
       ( reassociate))
 ```

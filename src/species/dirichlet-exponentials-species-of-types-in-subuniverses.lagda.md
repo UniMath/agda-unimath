@@ -53,7 +53,7 @@ the Dirichlet exponential is also a species of types in subuniverse from `P` to
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   where
 
   type-dirichlet-exponential-species-subuniverse :
@@ -72,7 +72,7 @@ module _
 
 ```agda
 is-closed-under-dirichlet-exponential-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
   UUω
 is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
   {l3 : Level}
@@ -87,7 +87,7 @@ is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   where
 
@@ -105,7 +105,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   ( C2 :
     ( U : UU l1) →
@@ -212,7 +212,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   ( C2 : is-closed-under-coproduct-species-subuniverse P Q)
   ( C3 : is-closed-under-dirichlet-product-species-subuniverse P Q)

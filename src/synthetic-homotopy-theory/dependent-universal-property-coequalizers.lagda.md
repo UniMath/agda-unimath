@@ -15,6 +15,7 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-coforks
@@ -56,10 +57,10 @@ module _
   ( dup-coequalizer : dependent-universal-property-coequalizer l4 f g e)
   where
 
-  map-dependent-universal-property-coequalizers :
+  map-dependent-universal-property-coequalizer :
     dependent-cofork f g e P →
     (x : X) → P x
-  map-dependent-universal-property-coequalizers =
+  map-dependent-universal-property-coequalizer =
     map-inv-is-equiv (dup-coequalizer P)
 ```
 
@@ -75,28 +76,28 @@ module _
   ( k : dependent-cofork f g e P)
   where
 
-  htpy-dependent-cofork-map-dependent-universal-property-coequalizer :
+  htpy-dependent-cofork-dependent-universal-property-coequalizer :
     htpy-dependent-cofork f g P
       ( dependent-cofork-map f g e
-        ( map-dependent-universal-property-coequalizers f g e
+        ( map-dependent-universal-property-coequalizer f g e
           ( dup-coequalizer)
           ( k)))
       ( k)
-  htpy-dependent-cofork-map-dependent-universal-property-coequalizer =
+  htpy-dependent-cofork-dependent-universal-property-coequalizer =
     htpy-dependent-cofork-eq f g P
       ( dependent-cofork-map f g e
-        ( map-dependent-universal-property-coequalizers f g e
+        ( map-dependent-universal-property-coequalizer f g e
           ( dup-coequalizer)
           ( k)))
       ( k)
       ( is-section-map-inv-is-equiv (dup-coequalizer P) k)
 
   abstract
-    uniqueness-dependent-universal-property-coequalizers :
+    uniqueness-dependent-universal-property-coequalizer :
       is-contr
         ( Σ ((x : X) → P x)
           ( λ h → htpy-dependent-cofork f g P (dependent-cofork-map f g e h) k))
-    uniqueness-dependent-universal-property-coequalizers =
+    uniqueness-dependent-universal-property-coequalizer =
       is-contr-is-equiv'
         ( fiber (dependent-cofork-map f g e) k)
         ( tot
@@ -108,30 +109,6 @@ module _
               ( dependent-cofork-map f g e h)
               ( k)))
         ( is-contr-map-is-equiv (dup-coequalizer P) k)
-```
-
-### The dependent universal property of coequializers implies the universal property of coequalizers
-
-```agda
-module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
-  ( e : cofork f g X)
-  where
-
-  universal-property-dependent-universal-property-coequalizer :
-    ( {l : Level} → dependent-universal-property-coequalizer l f g e) →
-    ( {l : Level} → universal-property-coequalizer l f g e)
-  universal-property-dependent-universal-property-coequalizer
-    ( dup-coequalizer)
-    ( Y) =
-      is-equiv-comp-htpy
-        ( cofork-map f g e)
-        ( map-compute-dependent-cofork-constant-family f g e Y)
-        ( dependent-cofork-map f g e)
-        ( triangle-compute-dependent-cofork-constant-family f g e Y)
-        ( dup-coequalizer (λ _ → Y))
-        ( is-equiv-map-equiv
-          ( compute-dependent-cofork-constant-family f g e Y))
 ```
 
 ### A cofork has the dependent universal property of coequalizers if and only if the corresponding cocone has the dependent universal property of pushouts
@@ -193,4 +170,46 @@ module _
       ( triangle-dependent-cofork-dependent-cocone-codiagonal f g e P)
       ( is-equiv-dependent-cofork-dependent-cocone-codiagonal f g e P)
       ( dup-coequalizer P)
+```
+
+### The universal property of coequalizers is equivalent to the dependent universal property of coequalizers
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
+  ( e : cofork f g X)
+  where
+
+  universal-property-dependent-universal-property-coequalizer :
+    ( {l : Level} → dependent-universal-property-coequalizer l f g e) →
+    ( {l : Level} → universal-property-coequalizer l f g e)
+  universal-property-dependent-universal-property-coequalizer
+    ( dup-coequalizer)
+    ( Y) =
+    is-equiv-comp-htpy
+      ( cofork-map f g e)
+      ( map-compute-dependent-cofork-constant-family f g e Y)
+      ( dependent-cofork-map f g e)
+      ( triangle-compute-dependent-cofork-constant-family f g e Y)
+      ( dup-coequalizer (λ _ → Y))
+      ( is-equiv-map-equiv
+        ( compute-dependent-cofork-constant-family f g e Y))
+
+  dependent-universal-property-universal-property-coequalizer :
+    ( {l : Level} → universal-property-coequalizer l f g e) →
+    ( {l : Level} → dependent-universal-property-coequalizer l f g e)
+  dependent-universal-property-universal-property-coequalizer up-coequalizer =
+    dependent-universal-property-coequalizer-dependent-universal-property-pushout
+      ( f)
+      ( g)
+      ( e)
+      ( λ {l : Level} →
+        dependent-universal-property-universal-property-pushout
+          ( vertical-map-span-cocone-cofork f g)
+          ( horizontal-map-span-cocone-cofork f g)
+          ( cocone-codiagonal-cofork f g e)
+          ( λ l →
+            universal-property-pushout-universal-property-coequalizer f g e
+              ( up-coequalizer))
+          ( l))
 ```

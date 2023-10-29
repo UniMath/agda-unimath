@@ -60,7 +60,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (l3 : Level) (G : Group l1)
-  (H : Group l2) (f : type-iso-Group G H)
+  (H : Group l2) (f : iso-Group G H)
   where
 
   is-epi-iso-Group :

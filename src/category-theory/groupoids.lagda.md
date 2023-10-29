@@ -22,6 +22,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.iterated-dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
@@ -151,16 +152,15 @@ module _
             ( λ yp →
               Σ ( Σ (pr1 yp ＝ x) (λ q → (q ∙ pr2 yp) ＝ refl))
                 ( λ ql → (pr2 yp ∙ pr1 ql) ＝ refl))))
-        ( is-contr-Σ
-          ( is-contr-total-path x)
-          ( x , refl)
-          ( is-contr-Σ
+        ( is-contr-iterated-Σ 2
+          ( is-torsorial-path x ,
+            ( x , refl) ,
             ( is-contr-equiv
               ( Σ (x ＝ x) (λ q → q ＝ refl))
               ( equiv-tot
                 ( λ q → equiv-concat (inv right-unit) refl))
-              ( is-contr-total-path' refl))
-            ( refl , refl)
+              ( is-torsorial-path' refl)) ,
+            ( refl , refl) ,
             ( is-proof-irrelevant-is-prop
               ( is-1-type-type-1-Type X x x refl refl)
               ( refl)))))
@@ -186,7 +186,7 @@ module _
   where
 
   1-type-Groupoid : 1-Type l1
-  1-type-Groupoid = obj-Category-1-Type (category-Groupoid G)
+  1-type-Groupoid = obj-1-type-Category (category-Groupoid G)
 ```
 
 #### The groupoid obtained from the 1-type induced by a groupoid `G` is `G` itself

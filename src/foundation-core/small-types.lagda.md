@@ -103,7 +103,7 @@ is-prop-is-small l A =
       is-contr-equiv'
         ( Σ (UU l) (λ Y → (pr1 Xe) ≃ Y))
         ( equiv-tot ((λ Y → equiv-precomp-equiv (pr2 Xe) Y)))
-        ( is-contr-total-equiv (pr1 Xe)))
+        ( is-torsorial-equiv (pr1 Xe)))
 
 is-small-Prop :
   (l : Level) {l1 : Level} (A : UU l1) → Prop (lsuc l ⊔ l1)

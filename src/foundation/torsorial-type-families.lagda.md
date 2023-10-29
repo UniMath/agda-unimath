@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.torsorial-type-families where
+
+open import foundation-core.torsorial-type-families public
 ```
 
 <details><summary>Imports</summary>
@@ -31,7 +33,7 @@ A type family `E` over `B` is said to be **torsorial** if its
 it follows that a type family `E` is torsorial if and only if it is in the
 [image](foundation.images.md) of `Id : B → (B → 𝒰)`.
 
-## Definition
+## Definitions
 
 ### The predicate of being a torsorial type family over `B`
 
@@ -39,10 +41,6 @@ it follows that a type family `E` is torsorial if and only if it is in the
 is-torsorial-Prop :
   {l1 l2 : Level} {B : UU l1} → (B → UU l2) → Prop (l1 ⊔ l2)
 is-torsorial-Prop E = is-contr-Prop (Σ _ E)
-
-is-torsorial :
-  {l1 l2 : Level} {B : UU l1} → (B → UU l2) → UU (l1 ⊔ l2)
-is-torsorial E = type-Prop (is-torsorial-Prop E)
 
 is-prop-is-torsorial :
   {l1 l2 : Level} {B : UU l1} (E : B → UU l2) → is-prop (is-torsorial E)
@@ -70,7 +68,7 @@ module _
 
 ## Properties
 
-#### `fiber Id B ≃ is-contr (Σ A B)` for any type family `B` over `A`
+### `fiber Id B ≃ is-torsorial B` for any type family `B` over `A`
 
 In other words, a type family `B` over `A` is in the
 [image](foundation.images.md) of `Id : A → (A → 𝒰)` if and only if `B` is
@@ -103,7 +101,7 @@ module _
     f x refl = b
 
   compute-fiber-Id :
-    (Σ A (λ a → (x : A) → (a ＝ x) ≃ B x)) ≃ is-contr (Σ A B)
+    (Σ A (λ a → (x : A) → (a ＝ x) ≃ B x)) ≃ is-torsorial B
   compute-fiber-Id =
     equiv-iff
       ( Σ A (λ a → (x : A) → (a ＝ x) ≃ B x) ,

@@ -33,6 +33,7 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -131,15 +132,12 @@ module _
   binary-htpy-eq-hom-Equivalence-Relation f .f refl =
     refl-binary-htpy-hom-Equivalence-Relation f
 
-  is-contr-total-binary-htpy-hom-Equivalence-Relation :
+  is-torsorial-binary-htpy-hom-Equivalence-Relation :
     (f : binary-hom-Equivalence-Relation R S T) →
-    is-contr
-      ( Σ
-        ( binary-hom-Equivalence-Relation R S T)
-        ( binary-htpy-hom-Equivalence-Relation f))
-  is-contr-total-binary-htpy-hom-Equivalence-Relation f =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-binary-htpy
+    is-torsorial (binary-htpy-hom-Equivalence-Relation f)
+  is-torsorial-binary-htpy-hom-Equivalence-Relation f =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-binary-htpy
         ( map-binary-hom-Equivalence-Relation R S T f))
       ( is-prop-preserves-sim-binary-map-Equivalence-Relation R S T)
       ( map-binary-hom-Equivalence-Relation R S T f)
@@ -151,7 +149,7 @@ module _
     is-equiv (binary-htpy-eq-hom-Equivalence-Relation f g)
   is-equiv-binary-htpy-eq-hom-Equivalence-Relation f =
     fundamental-theorem-id
-      ( is-contr-total-binary-htpy-hom-Equivalence-Relation f)
+      ( is-torsorial-binary-htpy-hom-Equivalence-Relation f)
       ( binary-htpy-eq-hom-Equivalence-Relation f)
 
   extensionality-binary-hom-Equivalence-Relation :

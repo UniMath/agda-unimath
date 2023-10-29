@@ -17,6 +17,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import order-theory.preorders
@@ -91,12 +92,11 @@ module _
     (f g : hom-Preorder P Q) → Id f g → htpy-hom-Preorder f g
   htpy-eq-hom-Preorder f .f refl = refl-htpy-hom-Preorder f
 
-  is-contr-total-htpy-hom-Preorder :
-    (f : hom-Preorder P Q) →
-    is-contr (Σ (hom-Preorder P Q) (htpy-hom-Preorder f))
-  is-contr-total-htpy-hom-Preorder f =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (map-hom-Preorder P Q f))
+  is-torsorial-htpy-hom-Preorder :
+    (f : hom-Preorder P Q) → is-torsorial (htpy-hom-Preorder f)
+  is-torsorial-htpy-hom-Preorder f =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-hom-Preorder P Q f))
       ( is-prop-preserves-order-Preorder P Q)
       ( map-hom-Preorder P Q f)
       ( refl-htpy)
@@ -106,7 +106,7 @@ module _
     (f g : hom-Preorder P Q) → is-equiv (htpy-eq-hom-Preorder f g)
   is-equiv-htpy-eq-hom-Preorder f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-Preorder f)
+      ( is-torsorial-htpy-hom-Preorder f)
       ( htpy-eq-hom-Preorder f)
 
   extensionality-hom-Preorder :

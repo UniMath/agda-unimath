@@ -19,8 +19,10 @@ open import synthetic-homotopy-theory.acyclic-types
 
 ## Idea
 
-The **plus-principle** asserts that any acyclic 1-connected type is
-contractible.
+The **plus-principle** asserts that any
+[acyclic](synthetic-homotopy-theory.acyclic-types.md)
+[1-connected type](foundation.connected-types.md) is
+[contractible](foundation.contractible-types.md).
 
 ## Definition
 

@@ -111,12 +111,12 @@ module _
   pr2 equiv-group-inclusion-full-Subgroup =
     preserves-mul-inclusion-full-Subgroup
 
-  iso-full-Subgroup : type-iso-Group group-full-Subgroup G
+  iso-full-Subgroup : iso-Group group-full-Subgroup G
   iso-full-Subgroup =
     iso-equiv-Group group-full-Subgroup G equiv-group-inclusion-full-Subgroup
 
   inv-iso-full-Subgroup :
-    type-iso-Group G group-full-Subgroup
+    iso-Group G group-full-Subgroup
   inv-iso-full-Subgroup =
     inv-iso-Group group-full-Subgroup G iso-full-Subgroup
 ```
@@ -141,7 +141,7 @@ module _
       ( is-equiv-inclusion-is-full-subtype (subset-Subgroup G H) K)
 
   iso-inclusion-is-full-Subgroup :
-    is-full-Subgroup G H → type-iso-Group (group-Subgroup G H) G
+    is-full-Subgroup G H → iso-Group (group-Subgroup G H) G
   pr1 (iso-inclusion-is-full-Subgroup K) = hom-inclusion-Subgroup G H
   pr2 (iso-inclusion-is-full-Subgroup K) = is-iso-inclusion-is-full-Subgroup K
 

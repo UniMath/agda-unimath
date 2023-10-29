@@ -90,7 +90,7 @@ module _
                         ( f' a)
                         ( center (is-modal-B q))))) ∘e
               ( equiv-up-join B)))
-          ( is-contr-total-path' f))
+          ( is-torsorial-path' f))
 
   reflective-subuniverse-closed-modality :
     reflective-subuniverse (l ⊔ lQ) (l ⊔ lQ)

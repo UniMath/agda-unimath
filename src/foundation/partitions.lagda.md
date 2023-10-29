@@ -38,6 +38,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -414,10 +415,9 @@ module _
     refl-has-same-elements-inhabited-subtype
       ( inhabited-subtype-block-partition P B)
 
-  is-contr-total-has-same-elements-block-partition :
-    is-contr
-      ( Σ (block-partition P) has-same-elements-block-partition)
-  is-contr-total-has-same-elements-block-partition =
+  is-torsorial-has-same-elements-block-partition :
+    is-torsorial has-same-elements-block-partition
+  is-torsorial-has-same-elements-block-partition =
     is-contr-equiv'
       ( Σ ( block-partition P)
           ( λ C →
@@ -443,7 +443,7 @@ module _
     is-equiv (has-same-elements-eq-block-partition C)
   is-equiv-has-same-elements-eq-block-partition =
     fundamental-theorem-id
-      is-contr-total-has-same-elements-block-partition
+      is-torsorial-has-same-elements-block-partition
       has-same-elements-eq-block-partition
 
   extensionality-block-partition :
@@ -641,7 +641,7 @@ module _
                         ( subtype-inhabited-subtype Q x)) ∘e
                     ( equiv-inv-equiv))) ∘e
                 ( left-unit-law-Σ-is-contr
-                  ( is-contr-total-path (index-Set-Indexed-Σ-Decomposition D a))
+                  ( is-torsorial-path (index-Set-Indexed-Σ-Decomposition D a))
                   ( pair
                     ( index-Set-Indexed-Σ-Decomposition D a)
                     ( refl)))) ∘e
@@ -651,7 +651,7 @@ module _
           ( inhabited-subtype l2 A)
           ( is-block-partition-Set-Indexed-Σ-Decomposition)
           ( λ B → is-in-inhabited-subtype (pr1 B) a)))
-      ( is-contr-total-has-same-elements-inhabited-subtype
+      ( is-torsorial-has-same-elements-inhabited-subtype
         ( pair
           ( λ x →
             Id-Prop

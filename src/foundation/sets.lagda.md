@@ -23,6 +23,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 ```
 
@@ -205,9 +206,9 @@ module _
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
 
   abstract
-    is-contr-total-equiv-Set : is-contr (Σ (Set l) (type-equiv-Set X))
-    is-contr-total-equiv-Set =
-      is-contr-total-equiv-subuniverse is-set-Prop X
+    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → type-equiv-Set X Y)
+    is-torsorial-equiv-Set =
+      is-torsorial-equiv-subuniverse is-set-Prop X
 
   abstract
     is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)
