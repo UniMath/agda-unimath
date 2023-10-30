@@ -35,7 +35,7 @@ Given a [modal operator](orthogonal-factorization-systems.modal-operators.md)
 [section of maps of maps](foundation.multivariable-sections.md):
 
 ```text
-  multivariable-section 2 (precomp-Π unit-○ (○ ∘ P))
+  multivariable-section 1 (precomp-Π unit-○ (○ ∘ P))
 ```
 
 for all families `P` over some `○ X`.
