@@ -13,7 +13,6 @@ open import foundation.epimorphisms
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.propositions
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.acyclic-types
