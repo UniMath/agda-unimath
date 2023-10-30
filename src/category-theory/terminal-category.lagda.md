@@ -18,8 +18,11 @@ open import category-theory.precategories
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -182,7 +185,36 @@ module _
 
 ### The terminal category represents objects
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  is-equiv-point-Precategory : is-equiv (point-Precategory C)
+  is-equiv-point-Precategory =
+    is-equiv-is-invertible
+      ( λ F → obj-functor-Precategory terminal-Precategory C F star)
+      ( λ F →
+        eq-htpy-functor-Precategory terminal-Precategory C _ F
+          ( refl-htpy ,
+            ( λ _ →
+              ap
+                ( λ f → comp-hom-Precategory C f (id-hom-Precategory C))
+                ( preserves-id-functor-Precategory terminal-Precategory C F
+                  ( star)))))
+      ( refl-htpy)
+
+  equiv-point-Precategory :
+    obj-Precategory C ≃ functor-Precategory terminal-Precategory C
+  pr1 equiv-point-Precategory = point-Precategory C
+  pr2 equiv-point-Precategory = is-equiv-point-Precategory
+
+  inv-equiv-point-Precategory :
+    functor-Precategory terminal-Precategory C ≃ obj-Precategory C
+  inv-equiv-point-Precategory = inv-equiv equiv-point-Precategory
+```
+
+It remains to show functoriality of `point-Precategory`.
 
 ### The terminal category is terminal
 
