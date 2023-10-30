@@ -66,8 +66,8 @@ module _
         ( is-equiv-codiagonal-map-is-epimorphism f e)
         ( b))
 
-  is-epimorphism-if-is-acyclic-map : is-acyclic-map f → is-epimorphism f
-  is-epimorphism-if-is-acyclic-map ac =
+  is-epimorphism-is-acyclic-map : is-acyclic-map f → is-epimorphism f
+  is-epimorphism-is-acyclic-map ac =
     is-epimorphism-is-equiv-codiagonal-map f
       ( is-equiv-is-contr-map
         ( λ b →
