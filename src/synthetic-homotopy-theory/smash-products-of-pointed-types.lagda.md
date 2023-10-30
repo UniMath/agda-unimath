@@ -169,17 +169,17 @@ module _
         ( terminal-pointed-map (A ∨∗ B)))
       ( x)) ∙
     ( htpy-right-whisk
-        ( htpy-pointed-htpy
+      ( htpy-pointed-htpy
+        ( inr-pushout-Pointed-Type
+          ( pointed-map-prod-wedge-Pointed-Type A B)
+          ( terminal-pointed-map (A ∨∗ B)))
+        ( inclusion-point-Pointed-Type (A ∧∗ B))
+        ( is-initial-unit-Pointed-Type
+          ( A ∧∗ B)
           ( inr-pushout-Pointed-Type
             ( pointed-map-prod-wedge-Pointed-Type A B)
-            ( terminal-pointed-map (A ∨∗ B)))
-          ( inclusion-point-Pointed-Type (A ∧∗ B))
-          ( is-initial-unit-Pointed-Type
-            ( A ∧∗ B)
-            ( inr-pushout-Pointed-Type
-              ( pointed-map-prod-wedge-Pointed-Type A B)
-              ( terminal-pointed-map (A ∨∗ B)))))
-        ( map-terminal-pointed-map (A ∨∗ B))
+            ( terminal-pointed-map (A ∨∗ B)))))
+      ( map-terminal-pointed-map (A ∨∗ B))
       ( x)) ∙
     ( preserves-point-pointed-map
       ( inclusion-point-Pointed-Type (A ∧∗ B)))
