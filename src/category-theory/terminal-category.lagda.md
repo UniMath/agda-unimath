@@ -9,14 +9,18 @@ module category-theory.terminal-category where
 ```agda
 open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.functors-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
+open import category-theory.yoneda-lemma-categories
+open import category-theory.strict-categories
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.unit-type
+open import foundation.contractible-types
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
@@ -101,65 +105,65 @@ pr1 (pr2 is-unital-composition-operation-terminal-Category) =
 pr2 (pr2 is-unital-composition-operation-terminal-Category) =
   right-unit-law-comp-hom-terminal-Category
 
-precategory-terminal-Category : Precategory lzero lzero
-pr1 precategory-terminal-Category = obj-terminal-Category
-pr1 (pr2 precategory-terminal-Category) = hom-set-terminal-Category
-pr1 (pr2 (pr2 precategory-terminal-Category)) =
+terminal-Precategory : Precategory lzero lzero
+pr1 terminal-Precategory = obj-terminal-Category
+pr1 (pr2 terminal-Precategory) = hom-set-terminal-Category
+pr1 (pr2 (pr2 terminal-Precategory)) =
   associative-composition-operation-terminal-Category
-pr2 (pr2 (pr2 precategory-terminal-Category)) =
+pr2 (pr2 (pr2 terminal-Precategory)) =
   is-unital-composition-operation-terminal-Category
 ```
 
-### The representing arrow category
+### The terminal category
 
-```text
+```agda
 is-category-terminal-Category :
-  is-category-Precategory precategory-terminal-Category
-is-category-terminal-Category true true =
-    is-equiv-is-prop
-    ( is-set-bool true true)
-    ( is-prop-type-subtype
-      ( is-iso-prop-Precategory
-        ( precategory-terminal-Category) {true} {true})
-      ( is-prop-unit))
-    ( λ _ → refl)
-is-category-terminal-Category true false =
-  is-equiv-is-empty
-    ( iso-eq-Precategory precategory-terminal-Category true false)
-    ( hom-iso-Precategory precategory-terminal-Category)
-is-category-terminal-Category false true =
-  is-equiv-is-empty
-    ( iso-eq-Precategory precategory-terminal-Category false true)
-    ( hom-inv-iso-Precategory precategory-terminal-Category)
-is-category-terminal-Category false false =
-  is-equiv-is-prop
-    ( is-set-bool false false)
-    ( is-prop-type-subtype
-      ( is-iso-prop-Precategory
-        ( precategory-terminal-Category) {false} {false})
-      ( is-prop-unit))
-    ( λ _ → refl)
+  is-category-Precategory terminal-Precategory
+is-category-terminal-Category x y =
+  is-equiv-is-contr
+    ( iso-eq-Precategory terminal-Precategory x y)
+    ( is-prop-is-contr is-contr-unit x y)
+    ( is-contr-Σ is-contr-unit star
+      ( is-proof-irrelevant-is-prop
+        ( is-prop-is-iso-Precategory terminal-Precategory star)
+        ( star , refl , refl)))
 
-terminal-Category-Category : Category lzero lzero
-pr1 terminal-Category-Category = precategory-terminal-Category
-pr2 terminal-Category-Category = is-category-terminal-Category
+terminal-Category : Category lzero lzero
+pr1 terminal-Category = terminal-Precategory
+pr2 terminal-Category = is-category-terminal-Category
 ```
 
 ## Properties
 
-### The terminal category represent objects
+### The terminal category represents objects
 
 This is a consequence of the
 [Yoneda lemma](category-theory.yoneda-lemma-categories.md).
 
-### The terminal category is gaunt
-
 ### The terminal category is strict
 
+```agda
+is-strict-category-terminal-Category :
+  is-strict-category-Precategory terminal-Precategory
+is-strict-category-terminal-Category = is-set-unit
+```
+
 ### The terminal category is a poset
+
+This remains to be formalized.
+
+### The terminal category is gaunt
+
+This remains to be formalized.
 
 ## See also
 
 - [The initial category](category-theory.initial-category.lagda.md)
 
 ## External links
+
+- [Terminal category](https://1lab.dev/Cat.Instances.Shape.Terminal.html) at
+  1lab
+- [Terminal category](https://ncatlab.org/nlab/show/terminal+category) at nlab
+
+A wikidata identifier was not available for this concept.
