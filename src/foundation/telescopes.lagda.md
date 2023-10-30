@@ -88,7 +88,7 @@ data small-telescope (l : Level) : ℕ → UU (lsuc l)
     {n : ℕ} {X : UU l} →
     (X → small-telescope l n) → small-telescope l (succ-ℕ n)
 
-open telescope public
+open small-telescope public
 ```
 
 ### Transformations on telescopes
