@@ -99,9 +99,9 @@ module _
   is-retraction-map-inv-equiv-bool-Decidable-Prop' :
     (map-inv-equiv-bool-Decidable-Prop' ∘ map-equiv-bool-Decidable-Prop') ~ id
   is-retraction-map-inv-equiv-bool-Decidable-Prop' (inl x) =
-    ap inl (eq-is-contr is-contr-total-true-Prop)
+    ap inl (eq-is-contr is-torsorial-true-Prop)
   is-retraction-map-inv-equiv-bool-Decidable-Prop' (inr x) =
-    ap inr (eq-is-contr is-contr-total-false-Prop)
+    ap inr (eq-is-contr is-torsorial-false-Prop)
 
   is-equiv-map-equiv-bool-Decidable-Prop' :
     is-equiv map-equiv-bool-Decidable-Prop'

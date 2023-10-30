@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-monoids
@@ -171,14 +172,12 @@ refl-relate-same-elements-saturated-congruence-Monoid M R =
   refl-relate-same-elements-congruence-Monoid M
     ( congruence-saturated-congruence-Monoid M R)
 
-is-contr-total-relate-same-elements-saturated-congruence-Monoid :
+is-torsorial-relate-same-elements-saturated-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R : saturated-congruence-Monoid l2 M) →
-  is-contr
-    ( Σ ( saturated-congruence-Monoid l2 M)
-        ( relate-same-elements-saturated-congruence-Monoid M R))
-is-contr-total-relate-same-elements-saturated-congruence-Monoid M R =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-relate-same-elements-congruence-Monoid M
+  is-torsorial (relate-same-elements-saturated-congruence-Monoid M R)
+is-torsorial-relate-same-elements-saturated-congruence-Monoid M R =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-relate-same-elements-congruence-Monoid M
       ( congruence-saturated-congruence-Monoid M R))
     ( is-prop-is-saturated-congruence-Monoid M)
     ( congruence-saturated-congruence-Monoid M R)
@@ -197,7 +196,7 @@ is-equiv-relate-same-elements-eq-saturated-congruence-Monoid :
   is-equiv (relate-same-elements-eq-saturated-congruence-Monoid M R S)
 is-equiv-relate-same-elements-eq-saturated-congruence-Monoid M R =
   fundamental-theorem-id
-    ( is-contr-total-relate-same-elements-saturated-congruence-Monoid M R)
+    ( is-torsorial-relate-same-elements-saturated-congruence-Monoid M R)
     ( relate-same-elements-eq-saturated-congruence-Monoid M R)
 
 extensionality-saturated-congruence-Monoid :

@@ -19,6 +19,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
@@ -147,13 +148,11 @@ module _
   equiv-eq-Dependent-Type-With-Automorphism Q .Q refl =
     id-equiv-Dependent-Type-With-Automorphism Q
 
-  is-contr-total-equiv-Dependent-Type-With-Automorphism :
+  is-torsorial-equiv-Dependent-Type-With-Automorphism :
     ( Q : Dependent-Type-With-Automorphism l2 P) →
-    is-contr
-      ( Σ ( Dependent-Type-With-Automorphism l2 P)
-          ( equiv-Dependent-Type-With-Automorphism P Q))
-  is-contr-total-equiv-Dependent-Type-With-Automorphism Q =
-    is-contr-total-Eq-structure
+    is-torsorial (equiv-Dependent-Type-With-Automorphism P Q)
+  is-torsorial-equiv-Dependent-Type-With-Automorphism Q =
+    is-torsorial-Eq-structure
       ( λ R K H →
         ( x : type-Type-With-Automorphism P) →
         coherence-square-maps
@@ -161,15 +160,15 @@ module _
           ( map-Dependent-Type-With-Automorphism P Q)
           ( map-equiv (K x))
           ( map-equiv (H (map-Type-With-Automorphism P x))))
-      ( is-contr-total-equiv-fam (family-Dependent-Type-With-Automorphism P Q))
+      ( is-torsorial-equiv-fam (family-Dependent-Type-With-Automorphism P Q))
       ( family-Dependent-Type-With-Automorphism P Q ,
         id-equiv-fam (family-Dependent-Type-With-Automorphism P Q))
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ x K →
           ( map-Dependent-Type-With-Automorphism P Q) ~
           ( map-equiv K))
         ( λ x →
-          is-contr-total-htpy-equiv
+          is-torsorial-htpy-equiv
             ( dependent-automorphism-Dependent-Type-With-Automorphism P Q x)))
 
   is-equiv-equiv-eq-Dependent-Type-With-Automorphism :
@@ -177,7 +176,7 @@ module _
     is-equiv (equiv-eq-Dependent-Type-With-Automorphism Q T)
   is-equiv-equiv-eq-Dependent-Type-With-Automorphism Q =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Dependent-Type-With-Automorphism Q)
+      ( is-torsorial-equiv-Dependent-Type-With-Automorphism Q)
       ( equiv-eq-Dependent-Type-With-Automorphism Q)
 
   extensionality-Dependent-Type-With-Automorphism :

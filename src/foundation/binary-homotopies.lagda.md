@@ -17,6 +17,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -46,19 +47,19 @@ module _
     (f g : (x : A) (y : B x) → C x y) → (f ＝ g) → binary-htpy f g
   binary-htpy-eq f .f refl = refl-binary-htpy f
 
-  is-contr-total-binary-htpy :
+  is-torsorial-binary-htpy :
     (f : (x : A) (y : B x) → C x y) →
-    is-contr (Σ ((x : A) (y : B x) → C x y) (binary-htpy f))
-  is-contr-total-binary-htpy f =
-    is-contr-total-Eq-Π
+    is-torsorial (binary-htpy f)
+  is-torsorial-binary-htpy f =
+    is-torsorial-Eq-Π
       ( λ x g → f x ~ g)
-      ( λ x → is-contr-total-htpy (f x))
+      ( λ x → is-torsorial-htpy (f x))
 
   is-equiv-binary-htpy-eq :
     (f g : (x : A) (y : B x) → C x y) → is-equiv (binary-htpy-eq f g)
   is-equiv-binary-htpy-eq f =
     fundamental-theorem-id
-      ( is-contr-total-binary-htpy f)
+      ( is-torsorial-binary-htpy f)
       ( binary-htpy-eq f)
 
   extensionality-binary-Π :

@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -657,21 +658,21 @@ module _
   (X : obj-Category C)
   where
 
-  is-contr-total-iso-Category :
-    is-contr (Σ (obj-Category C) (iso-Category C X))
-  is-contr-total-iso-Category =
+  is-torsorial-iso-Category :
+    is-torsorial (iso-Category C X)
+  is-torsorial-iso-Category =
     is-contr-equiv'
       ( Σ (obj-Category C) (X ＝_))
       ( equiv-tot (extensionality-obj-Category C X))
-      ( is-contr-total-path X)
+      ( is-torsorial-path X)
 
-  is-contr-total-iso-Category' :
-    is-contr (Σ (obj-Category C) (λ Y → iso-Category C Y X))
-  is-contr-total-iso-Category' =
+  is-torsorial-iso-Category' :
+    is-torsorial (λ Y → iso-Category C Y X)
+  is-torsorial-iso-Category' =
     is-contr-equiv'
       ( Σ (obj-Category C) (_＝ X))
       ( equiv-tot (λ Y → extensionality-obj-Category C Y X))
-      ( is-contr-total-path' X)
+      ( is-torsorial-path' X)
 ```
 
 ### Functoriality of `eq-iso`

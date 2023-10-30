@@ -63,6 +63,6 @@ equiv-fixed-Slice-structure {l} P X A =
           ( equiv-postcomp-equiv (equiv-total-fiber (pr1 (pr2 s))) X))) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
-          ( is-contr-total-equiv X)
+          ( is-torsorial-equiv X)
           ( X , id-equiv)))))
 ```

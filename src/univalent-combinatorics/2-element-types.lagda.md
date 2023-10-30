@@ -7,6 +7,7 @@ module univalent-combinatorics.2-element-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
@@ -39,6 +40,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -179,11 +181,11 @@ equiv-eq-2-Element-Type :
 equiv-eq-2-Element-Type X Y = equiv-eq-component-UU-Level
 
 abstract
-  is-contr-total-equiv-2-Element-Type :
+  is-torsorial-equiv-2-Element-Type :
     {l1 : Level} (X : 2-Element-Type l1) →
-    is-contr (Σ (2-Element-Type l1) (equiv-2-Element-Type X))
-  is-contr-total-equiv-2-Element-Type X =
-    is-contr-total-equiv-component-UU-Level X
+    is-torsorial (λ (Y : 2-Element-Type l1) → equiv-2-Element-Type X Y)
+  is-torsorial-equiv-2-Element-Type X =
+    is-torsorial-equiv-component-UU-Level X
 
 abstract
   is-equiv-equiv-eq-2-Element-Type :
@@ -364,7 +366,7 @@ abstract
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
           ( equiv-precomp-equiv (compute-raise-Fin l 2) (pr1 X))))
-      ( is-contr-total-equiv-subuniverse
+      ( is-torsorial-equiv-subuniverse
         ( has-cardinality-Prop 2)
         ( standard-2-Element-Type l))
 ```
@@ -401,14 +403,14 @@ eq-point-2-Element-Type =
   map-inv-equiv equiv-point-eq-2-Element-Type
 
 is-identity-system-type-2-Element-Type :
-  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
-  is-identity-system l2 (type-2-Element-Type {l1}) X x
+  {l1 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  is-identity-system (type-2-Element-Type {l1}) X x
 is-identity-system-type-2-Element-Type X x =
   is-identity-system-is-torsorial X x (is-contr-pointed-2-Element-Type)
 
 dependent-universal-property-identity-system-type-2-Element-Type :
-  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
-  dependent-universal-property-identity-system l2
+  {l1 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  dependent-universal-property-identity-system
     { B = type-2-Element-Type {l1}}
     { a = X}
     ( x)
@@ -468,7 +470,7 @@ module _
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr
           ( tot (ev-zero-htpy-equiv-Fin-two-ℕ e))
-          ( is-contr-total-htpy-equiv e)
+          ( is-torsorial-htpy-equiv e)
           ( is-contr-equiv
             ( fiber (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
             ( equiv-tot

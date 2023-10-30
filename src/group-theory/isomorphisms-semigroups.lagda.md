@@ -13,16 +13,16 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-
-open import foundation-core.function-extensionality
 
 open import group-theory.equivalences-semigroups
 open import group-theory.homomorphisms-semigroups
@@ -298,13 +298,13 @@ module _
   {l : Level} (G : Semigroup l)
   where
 
-  is-contr-total-iso-Semigroup :
-    is-contr (Σ (Semigroup l) (iso-Semigroup G))
-  is-contr-total-iso-Semigroup =
+  is-torsorial-iso-Semigroup :
+    is-torsorial (iso-Semigroup G)
+  is-torsorial-iso-Semigroup =
     is-contr-equiv'
       ( Σ (Semigroup l) (equiv-Semigroup G))
       ( equiv-tot (equiv-iso-equiv-Semigroup G))
-      ( is-contr-total-equiv-Semigroup G)
+      ( is-torsorial-equiv-Semigroup G)
 
   id-iso-Semigroup : iso-Semigroup G G
   id-iso-Semigroup =

@@ -14,6 +14,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-semigroups
@@ -125,13 +126,11 @@ refl-relate-same-elements-congruence-Monoid :
 refl-relate-same-elements-congruence-Monoid M =
   refl-relate-same-elements-congruence-Semigroup (semigroup-Monoid M)
 
-is-contr-total-relate-same-elements-congruence-Monoid :
+is-torsorial-relate-same-elements-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M) →
-  is-contr
-    ( Σ ( congruence-Monoid l2 M)
-        ( relate-same-elements-congruence-Monoid M R))
-is-contr-total-relate-same-elements-congruence-Monoid M =
-  is-contr-total-relate-same-elements-congruence-Semigroup (semigroup-Monoid M)
+  is-torsorial (relate-same-elements-congruence-Monoid M R)
+is-torsorial-relate-same-elements-congruence-Monoid M =
+  is-torsorial-relate-same-elements-congruence-Semigroup (semigroup-Monoid M)
 
 relate-same-elements-eq-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R S : congruence-Monoid l2 M) →

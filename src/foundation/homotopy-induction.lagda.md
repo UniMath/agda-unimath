@@ -16,6 +16,7 @@ open import foundation-core.contractible-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -35,15 +36,25 @@ ev-refl-htpy :
 ev-refl-htpy f C φ = φ f refl-htpy
 
 induction-principle-homotopies :
-  {l1 l2 : Level} (l3 : Level) {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) → UU (l1 ⊔ l2 ⊔ lsuc l3)
-induction-principle-homotopies l3 f =
-  is-identity-system l3 (f ~_) f (refl-htpy)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (f : (x : A) → B x) → UUω
+induction-principle-homotopies f =
+  is-identity-system (f ~_) f (refl-htpy)
 ```
 
 ## Propositions
 
 ### The total space of homotopies is contractible
+
+Type families of which the [total space](foundation.dependent-pair-types.md) is
+[contractible](foundation-core.contractible-types.md) are also called
+[torsorial](foundation-core.torsorial-type-families.md). This terminology
+originates from higher group theory, where a
+[higher group action](higher-group-theory.higher-group-actions.md) is torsorial
+if its type of [orbits](higher-group-theory.orbits-higher-group-actions.md),
+i.e., its total space, is contractible. Our claim that the total space of all
+homotopies from a function `f` is contractible can therefore be stated more
+succinctly as the claim that the family of homotopies from `f` is torsorial.
 
 ```agda
 module _
@@ -51,42 +62,42 @@ module _
   where
 
   abstract
-    is-contr-total-htpy : is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
-    is-contr-total-htpy =
+    is-torsorial-htpy : is-torsorial (λ g → f ~ g)
+    is-torsorial-htpy =
       is-contr-equiv'
         ( Σ ((x : A) → B x) (Id f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-contr-total-path f)
+        ( is-torsorial-path f)
 
   abstract
-    is-contr-total-htpy' : is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
-    is-contr-total-htpy' =
+    is-torsorial-htpy' : is-torsorial (λ g → g ~ f)
+    is-torsorial-htpy' =
       is-contr-equiv'
         ( Σ ((x : A) → B x) (λ g → g ＝ f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-contr-total-path' f)
+        ( is-torsorial-path' f)
 ```
 
 ### Homotopy induction is equivalent to function extensionality
 
 ```agda
 abstract
-  induction-principle-homotopies-function-extensionality :
+  induction-principle-homotopies-based-function-extensionality :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    function-extensionality f →
-    (l3 : Level) → induction-principle-homotopies l3 f
-  induction-principle-homotopies-function-extensionality
-    {A = A} {B} f funext-f l3 =
+    based-function-extensionality f →
+    induction-principle-homotopies f
+  induction-principle-homotopies-based-function-extensionality
+    {A = A} {B} f funext-f =
     is-identity-system-is-torsorial f
       ( refl-htpy)
-      ( is-contr-total-htpy f)
+      ( is-torsorial-htpy f)
 
 abstract
-  function-extensionality-induction-principle-homotopies :
+  based-function-extensionality-induction-principle-homotopies :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    ({l3 : Level} → induction-principle-homotopies l3 f) →
-    function-extensionality f
-  function-extensionality-induction-principle-homotopies f ind-htpy-f =
+    induction-principle-homotopies f →
+    based-function-extensionality f
+  based-function-extensionality-induction-principle-homotopies f ind-htpy-f =
     fundamental-theorem-id-is-identity-system f
       ( refl-htpy)
       ( ind-htpy-f)
@@ -97,22 +108,24 @@ abstract
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   abstract
     induction-principle-htpy :
-      (f : (x : A) → B x) → induction-principle-homotopies l3 f
+      (f : (x : A) → B x) → induction-principle-homotopies f
     induction-principle-htpy f =
-      induction-principle-homotopies-function-extensionality f (funext f) l3
+      induction-principle-homotopies-based-function-extensionality f (funext f)
 
     ind-htpy :
-      (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
+      {l3 : Level} (f : (x : A) → B x)
+      (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
     ind-htpy f C t {g} = pr1 (induction-principle-htpy f C) t g
 
     compute-ind-htpy :
-      (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
+      {l3 : Level} (f : (x : A) → B x)
+      (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
     compute-ind-htpy f C = pr2 (induction-principle-htpy f C)
 ```
@@ -120,4 +133,4 @@ module _
 ## See also
 
 - [Homotopies](foundation.homotopies.md).
-- [Function extensionality](foundation-core.function-extensionality.md).
+- [Function extensionality](foundation.function-extensionality.md).

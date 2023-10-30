@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -100,15 +101,13 @@ module _
             ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
               ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
 
-  is-contr-total-hom-element-Group :
-    is-contr
-      ( Σ ( hom-Group ℤ-Group G)
-          ( λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g))
-  pr1 (pr1 is-contr-total-hom-element-Group) =
+  is-torsorial-hom-element-Group :
+    is-torsorial (λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g)
+  pr1 (pr1 is-torsorial-hom-element-Group) =
     hom-element-Group
-  pr2 (pr1 is-contr-total-hom-element-Group) =
+  pr2 (pr1 is-torsorial-hom-element-Group) =
     right-unit-law-mul-Group G g
-  pr2 is-contr-total-hom-element-Group (pair h p) =
+  pr2 is-torsorial-hom-element-Group (pair h p) =
     eq-type-subtype
       ( λ f → Id-Prop (set-Group G) (map-hom-Group ℤ-Group G f one-ℤ) g)
       ( eq-htpy-hom-Group ℤ-Group G
@@ -118,5 +117,5 @@ abstract
   is-free-group-with-one-generator-ℤ :
     is-free-group-with-one-generator ℤ-Group one-ℤ
   is-free-group-with-one-generator-ℤ G =
-    is-equiv-is-contr-map (is-contr-total-hom-element-Group G)
+    is-equiv-is-contr-map (is-torsorial-hom-element-Group G)
 ```

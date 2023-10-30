@@ -226,12 +226,12 @@ module _
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( meridian-dependent-suspension-structure d x)
-              ( S-htpy)
               ( ap
                 ( tr B (meridian-suspension-structure c x))
                 ( N-htpy))
-              ( meridian-dependent-suspension-structure d' x)))
+              ( meridian-dependent-suspension-structure d x)
+              ( meridian-dependent-suspension-structure d' x)
+              ( S-htpy)))
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
@@ -256,12 +256,12 @@ module _
       htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1) →
     ( x : X) →
     coherence-square-identifications
-      ( meridian-dependent-suspension-structure d-susp-str0 x)
-      ( south-htpy-dependent-suspension-structure d-susp-str)
       ( ap
         ( tr B (meridian-suspension-structure susp-str x))
         ( north-htpy-dependent-suspension-structure d-susp-str))
+      ( meridian-dependent-suspension-structure d-susp-str0 x)
       ( meridian-dependent-suspension-structure d-susp-str1 x)
+      ( south-htpy-dependent-suspension-structure d-susp-str)
   meridian-htpy-dependent-suspension-structure = pr2 ∘ pr2
 
 module _
@@ -281,10 +281,10 @@ module _
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( meridian-dependent-suspension-structure d x)
-              ( S-htpy)
               ( ap (tr B (meridian-suspension-structure c x)) N-htpy)
-              ( m x)))
+              ( meridian-dependent-suspension-structure d x)
+              ( m x)
+              ( S-htpy)))
       ( refl)
       ( refl , λ x → right-unit)
       ( λ N → id-equiv)

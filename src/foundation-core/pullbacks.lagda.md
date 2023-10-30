@@ -859,8 +859,6 @@ module _
           ( is-equiv-inv-map-compute-fiber-comp g h (f x))
           ( is-equiv-map-Σ
             ( λ t → fiber h (pr1 t))
-            ( map-fiber-cone f g c x)
-            ( λ t → map-fiber-cone (horizontal-map-cone f g c) h d (pr1 t))
             ( is-fiberwise-equiv-map-fiber-cone-is-pullback f g c is-pb-c x)
             ( λ t → is-fiberwise-equiv-map-fiber-cone-is-pullback
               (horizontal-map-cone f g c) h d is-pb-d (pr1 t))))

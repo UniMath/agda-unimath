@@ -23,6 +23,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.isomorphisms-abelian-groups
@@ -398,11 +399,11 @@ module _
   where
 
   abstract
-    is-contr-total-iso-Commutative-Ring :
-      is-contr (Σ (Commutative-Ring l) (iso-Commutative-Ring A))
-    is-contr-total-iso-Commutative-Ring =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Ring (ring-Commutative-Ring A))
+    is-torsorial-iso-Commutative-Ring :
+      is-torsorial (λ (B : Commutative-Ring l) → iso-Commutative-Ring A B)
+    is-torsorial-iso-Commutative-Ring =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Ring (ring-Commutative-Ring A))
         ( is-prop-is-commutative-Ring)
         ( ring-Commutative-Ring A)
         ( id-iso-Ring (ring-Commutative-Ring A))
@@ -412,7 +413,7 @@ module _
     (B : Commutative-Ring l) → is-equiv (iso-eq-Commutative-Ring A B)
   is-equiv-iso-eq-Commutative-Ring =
     fundamental-theorem-id
-      ( is-contr-total-iso-Commutative-Ring)
+      ( is-torsorial-iso-Commutative-Ring)
       ( iso-eq-Commutative-Ring A)
 
   extensionality-Commutative-Ring :

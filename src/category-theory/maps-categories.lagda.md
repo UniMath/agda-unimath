@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -96,11 +97,10 @@ module _
       ( precategory-Category C)
       ( precategory-Category D)
 
-  is-contr-total-htpy-map-Category :
-    (f : map-Category C D) →
-    is-contr (Σ (map-Category C D) (htpy-map-Category f))
-  is-contr-total-htpy-map-Category =
-    is-contr-total-htpy-map-Precategory
+  is-torsorial-htpy-map-Category :
+    (f : map-Category C D) → is-torsorial (htpy-map-Category f)
+  is-torsorial-htpy-map-Category =
+    is-torsorial-htpy-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
 

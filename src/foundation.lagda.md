@@ -83,9 +83,11 @@ open import foundation.decidable-types public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
+open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-sequences public
+open import foundation.dependent-telescopes public
 open import foundation.dependent-towers public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
@@ -156,6 +158,7 @@ open import foundation.identity-truncated-types public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.images-subtypes public
+open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
@@ -169,6 +172,8 @@ open import foundation.involutions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
+open import foundation.iterated-dependent-pair-types public
+open import foundation.iterated-dependent-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
@@ -196,6 +201,7 @@ open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
 open import foundation.multivariable-functoriality-set-quotients public
+open import foundation.multivariable-homotopies public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
 open import foundation.negated-equality public
@@ -279,12 +285,14 @@ open import foundation.symmetric-cores-binary-relations public
 open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
+open import foundation.telescopes public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.towers public
 open import foundation.transfinite-cocomposition-of-maps public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
+open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public

@@ -25,6 +25,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -129,21 +130,21 @@ module _
   htpy-eq-hom-tower : (f g : hom-tower A B) → f ＝ g → htpy-hom-tower f g
   htpy-eq-hom-tower f .f refl = refl-htpy-hom-tower f
 
-  is-contr-total-htpy-hom-tower :
-    (f : hom-tower A B) → is-contr (Σ (hom-tower A B) (htpy-hom-tower f))
-  is-contr-total-htpy-hom-tower f =
-    is-contr-total-Eq-structure _
-      ( is-contr-total-binary-htpy (map-hom-tower A B f))
+  is-torsorial-htpy-hom-tower :
+    (f : hom-tower A B) → is-torsorial (htpy-hom-tower f)
+  is-torsorial-htpy-hom-tower f =
+    is-torsorial-Eq-structure _
+      ( is-torsorial-binary-htpy (map-hom-tower A B f))
       ( map-hom-tower A B f , refl-binary-htpy (map-hom-tower A B f))
-      ( is-contr-total-Eq-Π _
+      ( is-torsorial-Eq-Π _
         ( λ n →
-          is-contr-total-htpy (naturality-map-hom-tower A B f n ∙h refl-htpy)))
+          is-torsorial-htpy (naturality-map-hom-tower A B f n ∙h refl-htpy)))
 
   is-equiv-htpy-eq-hom-tower :
     (f g : hom-tower A B) → is-equiv (htpy-eq-hom-tower f g)
   is-equiv-htpy-eq-hom-tower f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-tower f)
+      ( is-torsorial-htpy-hom-tower f)
       ( htpy-eq-hom-tower f)
 
   extensionality-hom-tower :

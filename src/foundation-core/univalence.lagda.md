@@ -16,6 +16,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -42,14 +43,14 @@ map-eq = map-equiv ∘ equiv-eq
 instance-univalence : {l : Level} (A B : UU l) → UU (lsuc l)
 instance-univalence A B = is-equiv (equiv-eq {A = A} {B = B})
 
-axiom-based-univalence : {l : Level} (A : UU l) → UU (lsuc l)
-axiom-based-univalence {l} A = (B : UU l) → instance-univalence A B
+based-univalence-axiom : {l : Level} (A : UU l) → UU (lsuc l)
+based-univalence-axiom {l} A = (B : UU l) → instance-univalence A B
 
-axiom-univalence-Level : (l : Level) → UU (lsuc l)
-axiom-univalence-Level l = (A B : UU l) → instance-univalence A B
+univalence-axiom-Level : (l : Level) → UU (lsuc l)
+univalence-axiom-Level l = (A B : UU l) → instance-univalence A B
 
-axiom-univalence : UUω
-axiom-univalence = {l : Level} → axiom-univalence-Level l
+univalence-axiom : UUω
+univalence-axiom = {l : Level} → univalence-axiom-Level l
 ```
 
 ## Properties
@@ -58,10 +59,10 @@ axiom-univalence = {l : Level} → axiom-univalence-Level l
 
 ```agda
 abstract
-  is-contr-total-equiv-based-univalence :
+  is-torsorial-equiv-based-univalence :
     {l : Level} (A : UU l) →
-    axiom-based-univalence A → is-contr (Σ (UU l) (A ≃_))
-  is-contr-total-equiv-based-univalence A UA =
+    based-univalence-axiom A → is-torsorial (λ (B : UU l) → A ≃ B)
+  is-torsorial-equiv-based-univalence A UA =
     fundamental-theorem-id' (λ B → equiv-eq) UA
 ```
 
@@ -69,10 +70,10 @@ abstract
 
 ```agda
 abstract
-  based-univalence-is-contr-total-equiv :
+  based-univalence-is-torsorial-equiv :
     {l : Level} (A : UU l) →
-    is-contr (Σ (UU l) (A ≃_)) → axiom-based-univalence A
-  based-univalence-is-contr-total-equiv A c =
+    is-torsorial (λ (B : UU l) → A ≃ B) → based-univalence-axiom A
+  based-univalence-is-torsorial-equiv A c =
     fundamental-theorem-id c (λ B → equiv-eq)
 ```
 

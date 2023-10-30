@@ -25,6 +25,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.small-types
+open import foundation-core.torsorial-type-families
 
 open import structured-types.pointed-types
 ```
@@ -42,10 +43,10 @@ equivalences
 ```
 
 indexed by `x : B`. Note that the type of such a **torsorial structure** on the
-type family `E` is [equivalent](foundation.equivalences.md) to the type
+type family `E` is [equivalent](foundation-core.equivalences.md) to the type
 
 ```text
-  E pt × is-contr (Σ B E)
+  E pt × is-torsorial E
 ```
 
 Indeed, if `E` is pointed torsorial, then `refl : pt ＝ pt` induces an element
@@ -78,9 +79,9 @@ module _
   point-is-pointed-torsorial-family-of-types =
     map-inv-equiv (T (point-Pointed-Type B)) refl
 
-  is-contr-total-space-is-pointed-torsorial-family-of-types :
-    is-contr (Σ (type-Pointed-Type B) E)
-  is-contr-total-space-is-pointed-torsorial-family-of-types =
+  is-torsorial-space-is-pointed-torsorial-family-of-types :
+    is-torsorial E
+  is-torsorial-space-is-pointed-torsorial-family-of-types =
     fundamental-theorem-id'
       ( λ x → map-inv-equiv (T x))
       ( λ x → is-equiv-map-inv-equiv (T x))
@@ -124,7 +125,7 @@ module _
   pr2
     ( point-and-contractible-total-space-is-pointed-torsorial-family-of-types H)
     =
-    is-contr-total-space-is-pointed-torsorial-family-of-types B H
+    is-torsorial-space-is-pointed-torsorial-family-of-types B H
 ```
 
 ### Pointed connected types equipped with a pointed torsorial family of types of universe level `l` are locally `l`-small

@@ -127,10 +127,10 @@ module _
                                         ( inv-equiv (pr2 B')))
                                       ( X))) ∘e
                             ( ( inv-left-unit-law-Σ-is-contr
-                                  ( is-contr-total-equiv' (Σ A YA))
+                                  ( is-torsorial-equiv' (Σ A YA))
                                   ( Σ A YA , id-equiv)) ∘e
                               ( inv-left-unit-law-Σ-is-contr
-                                  ( is-contr-total-equiv' (Σ B YB))
+                                  ( is-torsorial-equiv' (Σ B YB))
                                   ( Σ B YB , id-equiv)))))) ∘e
                     ( ( equiv-Σ-equiv-base
                           ( λ (YA , YB) → X ≃ (Σ A YA + Σ B YB))
@@ -141,7 +141,7 @@ module _
                                 ( right-distributive-Σ-coprod A B Y)
                                 ( X))) ∘e
                           ( left-unit-law-Σ-is-contr
-                              ( is-contr-total-equiv' (A + B))
+                              ( is-torsorial-equiv' (A + B))
                               ((A + B) , id-equiv))))))))) ∘e
       ( reassociate)))
 
@@ -192,10 +192,10 @@ module _
         ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
         ( inv
             ( contraction
-                ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                 ( (pr1 (pr2 D) + pr1 (pr2 (pr2 D))) , id-equiv)) ∙
           contraction
-            ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+            ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                 ( pr1 (pr1 D) , pr2 (pr2 (pr2 D))))
         ( inl a)
 
@@ -216,10 +216,10 @@ module _
           ( matching-correspondence-binary-coproduct-Decomposition (pr2 D))
           ( inv
               ( contraction
-                  ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+                  ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                   ( (pr1 (pr2 D) + pr1 (pr2 (pr2 D))) , id-equiv)) ∙
             contraction
-              ( is-contr-total-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
+              ( is-torsorial-equiv' (pr1 (pr2 D) + pr1 (pr2 (pr2 D))))
                   ( pr1 (pr1 D) , pr2 (pr2 (pr2 D))))
           ( inr b)
 ```

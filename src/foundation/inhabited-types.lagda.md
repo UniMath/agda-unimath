@@ -20,6 +20,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -98,11 +99,11 @@ module _
   {l : Level} (X : Inhabited-Type l)
   where
 
-  is-contr-total-equiv-Inhabited-Type :
-    is-contr (Σ (Inhabited-Type l) (equiv-Inhabited-Type X))
-  is-contr-total-equiv-Inhabited-Type =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv (type-Inhabited-Type X))
+  is-torsorial-equiv-Inhabited-Type :
+    is-torsorial (equiv-Inhabited-Type X)
+  is-torsorial-equiv-Inhabited-Type =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv (type-Inhabited-Type X))
       ( λ X → is-prop-type-trunc-Prop)
       ( type-Inhabited-Type X)
       ( id-equiv)
@@ -116,7 +117,7 @@ module _
     (Y : Inhabited-Type l) → is-equiv (equiv-eq-Inhabited-Type Y)
   is-equiv-equiv-eq-Inhabited-Type =
     fundamental-theorem-id
-      is-contr-total-equiv-Inhabited-Type
+      is-torsorial-equiv-Inhabited-Type
       equiv-eq-Inhabited-Type
 
   extensionality-Inhabited-Type :
@@ -146,12 +147,12 @@ module _
   id-equiv-Fam-Inhabited-Types : equiv-Fam-Inhabited-Types Y Y
   id-equiv-Fam-Inhabited-Types = id-equiv-fam (type-Fam-Inhabited-Types Y)
 
-  is-contr-total-equiv-Fam-Inhabited-Types :
-    is-contr (Σ (Fam-Inhabited-Types l2 X) (equiv-Fam-Inhabited-Types Y))
-  is-contr-total-equiv-Fam-Inhabited-Types =
-    is-contr-total-Eq-Π
+  is-torsorial-equiv-Fam-Inhabited-Types :
+    is-torsorial (equiv-Fam-Inhabited-Types Y)
+  is-torsorial-equiv-Fam-Inhabited-Types =
+    is-torsorial-Eq-Π
       ( λ x → equiv-Inhabited-Type (Y x))
-      ( λ x → is-contr-total-equiv-Inhabited-Type (Y x))
+      ( λ x → is-torsorial-equiv-Inhabited-Type (Y x))
 
   equiv-eq-Fam-Inhabited-Types :
     (Z : Fam-Inhabited-Types l2 X) → (Y ＝ Z) → equiv-Fam-Inhabited-Types Y Z
@@ -161,7 +162,7 @@ module _
     (Z : Fam-Inhabited-Types l2 X) → is-equiv (equiv-eq-Fam-Inhabited-Types Z)
   is-equiv-equiv-eq-Fam-Inhabited-Types =
     fundamental-theorem-id
-      is-contr-total-equiv-Fam-Inhabited-Types
+      is-torsorial-equiv-Fam-Inhabited-Types
       equiv-eq-Fam-Inhabited-Types
 ```
 

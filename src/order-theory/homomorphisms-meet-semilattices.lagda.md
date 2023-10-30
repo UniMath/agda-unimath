@@ -42,7 +42,7 @@ module _
   preserves-meet-Prop :
     (type-Meet-Semilattice A → type-Meet-Semilattice B) → Prop (l1 ⊔ l2)
   preserves-meet-Prop =
-    preserves-mul-semigroup-Prop
+    preserves-mul-prop-Semigroup
       ( semigroup-Meet-Semilattice A)
       ( semigroup-Meet-Semilattice B)
 
