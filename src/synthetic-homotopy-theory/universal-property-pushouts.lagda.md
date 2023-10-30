@@ -401,54 +401,57 @@ If in the following diagram the left square is a pushout, then the outer
 rectangle is a pushout if and only if the right square is a pushout.
 
 ```text
-      g       k
-   A ----> B ----> C
+      g       h
+   S ----> B ----> C
    |       |       |
   f|       |       |
    v       v       v
-   X ----> Y ----> Z
+   A ----> X ----> Y
 ```
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( f : A → X) (g : A → B) (k : B → C)
-  ( c : cocone-span f g Y) (d : cocone-span (vertical-map-cocone-span f g c) k Z)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  { l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
+  { C : UU l4} {X : UU l5} {Y : UU l6}
+  ( h : codomain-span s → C)
+  ( c : cocone-span s X)
+  ( d : cocone-span (make-span (vertical-map-cocone-span s c) h) Y)
+  ( up-c : universal-property-pushout s c)
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-right :
-    ( {l : Level} →
-      universal-property-pushout l (vertical-map-cocone-span f g c) k d) →
-    ( {l : Level} →
-      universal-property-pushout l f (k ∘ g) (horizontal-comp-cocone-span f g k c d))
+    universal-property-pushout
+      ( make-span (vertical-map-cocone-span s c) h)
+      ( d) →
+    universal-property-pushout
+      ( right-extend-span s h)
+      ( horizontal-comp-cocone-span s h c d)
   universal-property-pushout-rectangle-universal-property-pushout-right
     ( up-d)
     { l} =
-    universal-property-pushout-pullback-property-pushout l f
-      ( k ∘ g)
-      ( horizontal-comp-cocone-span f g k c d)
+    universal-property-pushout-pullback-property-pushout
+      ( right-extend-span s h)
+      ( horizontal-comp-cocone-span s h c d)
       ( λ W →
         tr
-          ( is-pullback (precomp f W) (precomp (k ∘ g) W))
+          ( is-pullback
+            ( precomp (left-map-span s) W)
+            ( precomp (h ∘ right-map-span s) W))
           ( inv
             ( eq-htpy-cone
-              ( precomp f W)
-              ( precomp (k ∘ g) W)
+              ( precomp (left-map-span s) W)
+              ( precomp (h ∘ right-map-span s) W)
               ( cone-pullback-property-pushout
-                ( f)
-                ( k ∘ g)
-                ( horizontal-comp-cocone-span f g k c d)
+                ( right-extend-span s h)
+                ( horizontal-comp-cocone-span s h c d)
                 ( W))
               ( pasting-vertical-cone
-                ( precomp f W)
-                ( precomp g W)
-                ( precomp k W)
-                ( cone-pullback-property-pushout f g c W)
+                ( precomp (left-map-span s) W)
+                ( precomp (right-map-span s) W)
+                ( precomp h W)
+                ( cone-pullback-property-pushout s c W)
                 ( cone-pullback-property-pushout
-                  ( vertical-map-cocone-span f g c)
-                  ( k)
+                  ( make-span (vertical-map-cocone-span s c) h)
                   ( d)
                   ( W)))
               ( refl-htpy ,
@@ -456,74 +459,83 @@ module _
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-horizontal-coherence-square-maps
                   ( W)
-                  ( g)
-                  ( k)
-                  ( f)
-                  ( vertical-map-cocone-span f g c)
-                  ( vertical-map-cocone-span (vertical-map-cocone-span f g c) k d)
-                  ( horizontal-map-cocone-span f g c)
-                  ( horizontal-map-cocone-span (vertical-map-cocone-span f g c) k d)
-                  ( coherence-square-cocone-span f g c)
-                  ( coherence-square-cocone-span (vertical-map-cocone-span f g c) k d)))))
+                  ( right-map-span s)
+                  ( h)
+                  ( left-map-span s)
+                  ( vertical-map-cocone-span s c)
+                  ( vertical-map-cocone-span
+                    ( make-span (vertical-map-cocone-span s c) h)
+                    ( d))
+                  ( horizontal-map-cocone-span s c)
+                  ( horizontal-map-cocone-span
+                    ( make-span (vertical-map-cocone-span s c) h)
+                    ( d))
+                  ( coherence-square-cocone-span s c)
+                  ( coherence-square-cocone-span
+                    ( make-span (vertical-map-cocone-span s c) h)
+                    ( d))))))
           ( is-pullback-rectangle-is-pullback-top
-            ( precomp f W)
-            ( precomp g W)
-            ( precomp k W)
-            ( cone-pullback-property-pushout f g c W)
-            ( cone-pullback-property-pushout (vertical-map-cocone-span f g c) k d W)
-            ( pullback-property-pushout-universal-property-pushout l f g c
+            ( precomp (left-map-span s) W)
+            ( precomp (right-map-span s) W)
+            ( precomp h W)
+            ( cone-pullback-property-pushout s c W)
+            ( cone-pullback-property-pushout
+              ( make-span (vertical-map-cocone-span s c) h)
+              ( d)
+              ( W))
+            ( pullback-property-pushout-universal-property-pushout s c
               ( up-c)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout l
-              ( vertical-map-cocone-span f g c)
-              ( k)
+            ( pullback-property-pushout-universal-property-pushout
+              ( make-span (vertical-map-cocone-span s c) h)
               ( d)
               ( up-d)
               ( W))))
 
   universal-property-pushout-right-universal-property-pushout-rectangle :
-    ( {l : Level} →
-      universal-property-pushout
-        ( l)
-        ( f)
-        ( k ∘ g)
-        ( horizontal-comp-cocone-span f g k c d)) →
-    ( {l : Level} →
-      universal-property-pushout l (vertical-map-cocone-span f g c) k d)
+    universal-property-pushout
+      ( right-extend-span s h)
+      ( horizontal-comp-cocone-span s h c d) →
+    universal-property-pushout
+      ( make-span (vertical-map-cocone-span s c) h)
+      ( d)
   universal-property-pushout-right-universal-property-pushout-rectangle
     ( up-r)
     { l} =
-    universal-property-pushout-pullback-property-pushout l
-      ( vertical-map-cocone-span f g c)
-      ( k)
+    universal-property-pushout-pullback-property-pushout
+      ( make-span (vertical-map-cocone-span s c) h)
       ( d)
       ( λ W →
         is-pullback-top-is-pullback-rectangle
-          ( precomp f W)
-          ( precomp g W)
-          ( precomp k W)
-          ( cone-pullback-property-pushout f g c W)
-          ( cone-pullback-property-pushout (vertical-map-cocone-span f g c) k d W)
-          ( pullback-property-pushout-universal-property-pushout l f g c
+          ( precomp (left-map-span s) W)
+          ( precomp (right-map-span s) W)
+          ( precomp h W)
+          ( cone-pullback-property-pushout s c W)
+          ( cone-pullback-property-pushout
+            ( make-span (vertical-map-cocone-span s c) h)
+            ( d)
+            ( W))
+          ( pullback-property-pushout-universal-property-pushout s c
             ( up-c)
             ( W))
           ( tr
-            ( is-pullback (precomp f W) (precomp (k ∘ g) W))
+            ( is-pullback
+              ( precomp (left-map-span s) W)
+              ( precomp (h ∘ (right-map-span s)) W))
             ( eq-htpy-cone
-              ( precomp f W)
-              ( precomp (k ∘ g) W)
-              ( cone-pullback-property-pushout f
-                ( k ∘ g)
-                ( horizontal-comp-cocone-span f g k c d)
+              ( precomp (left-map-span s) W)
+              ( precomp (h ∘ right-map-span s) W)
+              ( cone-pullback-property-pushout
+                ( right-extend-span s h)
+                ( horizontal-comp-cocone-span s h c d)
                 ( W))
               ( pasting-vertical-cone
-                ( precomp f W)
-                ( precomp g W)
-                ( precomp k W)
-                ( cone-pullback-property-pushout f g c W)
+                ( precomp (left-map-span s) W)
+                ( precomp (right-map-span s) W)
+                ( precomp h W)
+                ( cone-pullback-property-pushout s c W)
                 ( cone-pullback-property-pushout
-                  ( vertical-map-cocone-span f g c)
-                  ( k)
+                  ( make-span (vertical-map-cocone-span s c) h)
                   ( d)
                   ( W)))
               ( refl-htpy ,
@@ -531,18 +543,24 @@ module _
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-horizontal-coherence-square-maps
                   ( W)
-                  ( g)
-                  ( k)
-                  ( f)
-                  ( vertical-map-cocone-span f g c)
-                  ( vertical-map-cocone-span (vertical-map-cocone-span f g c) k d)
-                  ( horizontal-map-cocone-span f g c)
-                  ( horizontal-map-cocone-span (vertical-map-cocone-span f g c) k d)
-                  ( coherence-square-cocone-span f g c)
-                  ( coherence-square-cocone-span (vertical-map-cocone-span f g c) k d))))
-            ( pullback-property-pushout-universal-property-pushout l f
-              ( k ∘ g)
-              ( horizontal-comp-cocone-span f g k c d)
+                  ( right-map-span s)
+                  ( h)
+                  ( left-map-span s)
+                  ( vertical-map-cocone-span s c)
+                  ( vertical-map-cocone-span
+                    ( make-span (vertical-map-cocone-span s c) h)
+                    ( d))
+                  ( horizontal-map-cocone-span s c)
+                  ( horizontal-map-cocone-span
+                    ( make-span (vertical-map-cocone-span s c) h)
+                    ( d))
+                  ( coherence-square-cocone-span s c)
+                  ( coherence-square-cocone-span
+                    ( make-span (vertical-map-cocone-span s c) h)
+                    ( d)))))
+            ( pullback-property-pushout-universal-property-pushout
+              ( right-extend-span s h)
+              ( horizontal-comp-cocone-span s h c d)
               ( up-r)
               ( W))))
 ```
