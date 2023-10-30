@@ -11,6 +11,7 @@ open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.copresheaf-categories
 open import category-theory.functors-categories
+open import category-theory.indiscrete-precategories
 open import category-theory.functors-precategories
 open import category-theory.gaunt-categories
 open import category-theory.isomorphisms-in-precategories
@@ -47,7 +48,7 @@ one object and only the identity on that object. This category
 
 ## Definition
 
-### The objects and hom-sets of the representing arrow
+### The objects and hom-sets of the terminal category
 
 ```agda
 obj-terminal-Category : UU lzero
@@ -55,7 +56,7 @@ obj-terminal-Category = unit
 
 hom-set-terminal-Category :
   obj-terminal-Category → obj-terminal-Category → Set lzero
-hom-set-terminal-Category x x₁ = unit-Set
+hom-set-terminal-Category _ _ = unit-Set
 
 hom-terminal-Category :
   obj-terminal-Category → obj-terminal-Category → UU lzero
@@ -83,10 +84,8 @@ associative-comp-hom-terminal-Category h g f = refl
 
 associative-composition-operation-terminal-Category :
   associative-composition-operation-binary-family-Set hom-set-terminal-Category
-pr1 associative-composition-operation-terminal-Category {x} =
-  comp-hom-terminal-Category {x}
-pr2 associative-composition-operation-terminal-Category =
-  associative-comp-hom-terminal-Category
+associative-composition-operation-terminal-Category =
+  associative-composition-operation-indiscrete-Precategory unit
 
 id-hom-terminal-Category :
   {x : obj-terminal-Category} → hom-terminal-Category x x
@@ -108,20 +107,11 @@ is-unital-composition-operation-terminal-Category :
   is-unital-composition-operation-binary-family-Set
     ( hom-set-terminal-Category)
     ( λ {x} {y} {z} → comp-hom-terminal-Category {x} {y} {z})
-pr1 is-unital-composition-operation-terminal-Category x =
-  id-hom-terminal-Category {x}
-pr1 (pr2 is-unital-composition-operation-terminal-Category) =
-  left-unit-law-comp-hom-terminal-Category
-pr2 (pr2 is-unital-composition-operation-terminal-Category) =
-  right-unit-law-comp-hom-terminal-Category
+is-unital-composition-operation-terminal-Category =
+  is-unital-composition-operation-indiscrete-Precategory unit
 
 terminal-Precategory : Precategory lzero lzero
-pr1 terminal-Precategory = obj-terminal-Category
-pr1 (pr2 terminal-Precategory) = hom-set-terminal-Category
-pr1 (pr2 (pr2 terminal-Precategory)) =
-  associative-composition-operation-terminal-Category
-pr2 (pr2 (pr2 terminal-Precategory)) =
-  is-unital-composition-operation-terminal-Category
+terminal-Precategory = indiscrete-Precategory unit
 ```
 
 ### The terminal category
