@@ -9,18 +9,28 @@ module category-theory.terminal-category where
 ```agda
 open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.copresheaf-categories
 open import category-theory.functors-categories
+open import category-theory.functors-precategories
+open import category-theory.gaunt-categories
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories
-open import category-theory.yoneda-lemma-categories
+open import category-theory.precategory-of-functors
+open import category-theory.preunivalent-categories
+open import category-theory.representable-functors-categories
+open import category-theory.representable-functors-precategories
 open import category-theory.strict-categories
+open import category-theory.yoneda-lemma-categories
+open import category-theory.yoneda-lemma-precategories
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.unit-type
-open import foundation.contractible-types
+open import order-theory.posets
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
@@ -133,12 +143,43 @@ pr1 terminal-Category = terminal-Precategory
 pr2 terminal-Category = is-category-terminal-Category
 ```
 
+### The terminal preunivalent category
+
+```agda
+is-preunivalent-terminal-Category :
+  is-preunivalent-Precategory terminal-Precategory
+is-preunivalent-terminal-Category =
+  is-preunivalent-category-Category terminal-Category
+
+terminal-Preunivalent-Category : Preunivalent-Category lzero lzero
+terminal-Preunivalent-Category =
+  preunivalent-category-Category terminal-Category
+```
+
+### Points in a precategory
+
+Using the terminal category as the representing category of objects, we can
+define, given an object in a category `x ∈ C`, the _point_ at `x` as the
+constant functor from the terminal category to `C` at `x`.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (x : obj-Precategory C)
+  where
+
+  point-Precategory : functor-Precategory terminal-Precategory C
+  pr1 point-Precategory _ = x
+  pr1 (pr2 point-Precategory) _ = id-hom-Precategory C
+  pr1 (pr2 (pr2 point-Precategory)) _ _ =
+    inv (left-unit-law-comp-hom-Precategory C (id-hom-Precategory C))
+  pr2 (pr2 (pr2 point-Precategory)) _ = refl
+```
+
 ## Properties
 
 ### The terminal category represents objects
 
-This is a consequence of the
-[Yoneda lemma](category-theory.yoneda-lemma-categories.md).
+This remains to be formalized.
 
 ### The terminal category is strict
 
@@ -146,15 +187,23 @@ This is a consequence of the
 is-strict-category-terminal-Category :
   is-strict-category-Precategory terminal-Precategory
 is-strict-category-terminal-Category = is-set-unit
+
+terminal-Strict-Category : Strict-Category lzero lzero
+pr1 terminal-Strict-Category = terminal-Precategory
+pr2 terminal-Strict-Category = is-strict-category-terminal-Category
 ```
-
-### The terminal category is a poset
-
-This remains to be formalized.
 
 ### The terminal category is gaunt
 
-This remains to be formalized.
+```agda
+is-gaunt-terminal-Category : is-gaunt-Category terminal-Category
+is-gaunt-terminal-Category _ _ =
+  is-prop-Σ is-prop-unit (λ _ → is-prop-is-iso-Category terminal-Category star)
+
+terminal-Gaunt-Category : Gaunt-Category lzero lzero
+pr1 terminal-Gaunt-Category = terminal-Category
+pr2 terminal-Gaunt-Category = is-gaunt-terminal-Category
+```
 
 ## See also
 
