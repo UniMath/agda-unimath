@@ -28,8 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **function class** is a [subtype](foundation.subtypes.md) of the type of all
-functions in a given universe.
+A **(small) function class** is a [subtype](foundation.subtypes.md) of the type
+of all functions in a given universe.
 
 ## Definitions
 
@@ -67,42 +67,44 @@ module _
 ### Function classes containing the identities
 
 ```agda
-has-identity-maps-function-class :
-  {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
-has-identity-maps-function-class {l1} {l2} P =
-  (A : UU l1) → is-in-function-class P (id {A = A})
+module _
+  {l1 l2 : Level} (P : function-class l1 l1 l2)
+  where
+  has-identity-maps-function-class : UU (lsuc l1 ⊔ l2)
+  has-identity-maps-function-class =
+    {A : UU l1} → is-in-function-class P (id {A = A})
 
-has-identity-maps-function-class-Prop :
-  {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)
-has-identity-maps-function-class-Prop {l1} P =
-  Π-Prop (UU l1) λ A → P (id {A = A})
+  has-identity-maps-function-class-Prop : Prop (lsuc l1 ⊔ l2)
+  has-identity-maps-function-class-Prop =
+    Π-Prop' (UU l1) λ A → P (id {A = A})
 
-is-prop-has-identity-maps-function-class :
-  {l1 l2 : Level} (P : function-class l1 l1 l2) →
-  is-prop (has-identity-maps-function-class P)
-is-prop-has-identity-maps-function-class =
-  is-prop-type-Prop ∘ has-identity-maps-function-class-Prop
+  is-prop-has-identity-maps-function-class :
+    is-prop has-identity-maps-function-class
+  is-prop-has-identity-maps-function-class =
+    is-prop-type-Prop has-identity-maps-function-class-Prop
 ```
 
 ### Function classes containing the equivalences
 
 ```agda
-has-equivalences-function-class :
-  {l1 l2 l3 : Level} → function-class l1 l2 l3 → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)
-has-equivalences-function-class {l1} {l2} P =
-  (A : UU l1) (B : UU l2) (f : A → B) → is-equiv f → is-in-function-class P f
+module _
+  {l1 l2 l3 : Level} (P : function-class l1 l2 l3)
+  where
 
-has-equivalences-function-class-Prop :
-  {l1 l2 l3 : Level} → function-class l1 l2 l3 → Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3)
-has-equivalences-function-class-Prop {l1} {l2} {l3} P =
-  Π-Prop (UU l1) λ A → Π-Prop (UU l2) λ B → Π-Prop (A → B)
-    ( λ f → function-Prop (is-equiv f) (P f))
+  has-equivalences-function-class : UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)
+  has-equivalences-function-class =
+    {A : UU l1} {B : UU l2} (f : A → B) → is-equiv f → is-in-function-class P f
 
-is-prop-has-equivalences-function-class :
-  {l1 l2 l3 : Level} (P : function-class l1 l2 l3) →
-  is-prop (has-equivalences-function-class P)
-is-prop-has-equivalences-function-class =
-  is-prop-type-Prop ∘ has-equivalences-function-class-Prop
+  is-prop-has-equivalences-function-class :
+    is-prop has-equivalences-function-class
+  is-prop-has-equivalences-function-class =
+    is-prop-iterated-implicit-Π 2
+      ( λ A B → is-prop-iterated-Π 2 (λ f _ → is-prop-is-in-function-class P f))
+
+  has-equivalences-function-class-Prop : Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3)
+  pr1 has-equivalences-function-class-Prop = has-equivalences-function-class
+  pr2 has-equivalences-function-class-Prop =
+    is-prop-has-equivalences-function-class
 ```
 
 ### Composition closed function classes
@@ -111,31 +113,46 @@ We say a function class is **composition closed** if it is closed under taking
 composites.
 
 ```agda
-is-closed-under-composition-function-class :
-  {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
-is-closed-under-composition-function-class {l1} {l2} P =
-  (A B C : UU l1) (f : A → B) (g : B → C) →
-  is-in-function-class P f → is-in-function-class P g →
-  is-in-function-class P (g ∘ f)
+module _
+  {l1 l2 : Level} (P : function-class l1 l1 l2)
+  where
+
+  is-closed-under-composition-function-class : UU (lsuc l1 ⊔ l2)
+  is-closed-under-composition-function-class =
+    {A B C : UU l1} (f : A → B) (g : B → C) →
+    is-in-function-class P f → is-in-function-class P g →
+    is-in-function-class P (g ∘ f)
+
+  is-prop-is-closed-under-composition-function-class :
+    is-prop is-closed-under-composition-function-class
+  is-prop-is-closed-under-composition-function-class =
+    is-prop-iterated-implicit-Π 3
+      ( λ A B C →
+        is-prop-iterated-Π 4
+          ( λ f g _ _ → is-prop-is-in-function-class P (g ∘ f)))
+
+  is-closed-under-composition-function-class-Prop : Prop (lsuc l1 ⊔ l2)
+  pr1 is-closed-under-composition-function-class-Prop =
+    is-closed-under-composition-function-class
+  pr2 is-closed-under-composition-function-class-Prop =
+    is-prop-is-closed-under-composition-function-class
 
 composition-closed-function-class :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 composition-closed-function-class l1 l2 =
   Σ (function-class l1 l1 l2) (is-closed-under-composition-function-class)
 
-is-prop-is-closed-under-composition-function-class :
-  {l1 l2 : Level} (P : function-class l1 l1 l2) →
-  is-prop (is-closed-under-composition-function-class P)
-is-prop-is-closed-under-composition-function-class P =
-  is-prop-iterated-Π 7
-    ( λ A B C f g _ _ → is-prop-is-in-function-class P (g ∘ f))
+module _
+  {l1 l2 : Level} (P : composition-closed-function-class l1 l2)
+  where
 
-is-closed-under-composition-function-class-Prop :
-  {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)
-pr1 (is-closed-under-composition-function-class-Prop P) =
-  is-closed-under-composition-function-class P
-pr2 (is-closed-under-composition-function-class-Prop P) =
-  is-prop-is-closed-under-composition-function-class P
+  function-class-composition-closed-function-class : function-class l1 l1 l2
+  function-class-composition-closed-function-class = pr1 P
+
+  is-closed-under-composition-composition-closed-function-class :
+    is-closed-under-composition-function-class
+      ( function-class-composition-closed-function-class)
+  is-closed-under-composition-composition-closed-function-class = pr2 P
 ```
 
 ## Pullback-stable function classes
@@ -144,35 +161,40 @@ A function class is said to be **pullback-stable** if given a function in it,
 then its pullback along any map is also in the function class.
 
 ```agda
-is-pullback-stable-function-class :
-  {l1 l2 l3 : Level} (l : Level) → function-class l1 l2 l3 →
-  UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
-is-pullback-stable-function-class {l1} {l2} l P =
-  (A : UU l1) (B C : UU l2) (f : A → C) (g : B → C)
-  (p : Σ (UU l1) (pullback-cone l f g)) →
-  is-in-function-class P f →
-  is-in-function-class P (horizontal-map-pullback-cone f g (pr2 p))
+module _
+  {l1 l2 l3 : Level} (P : function-class l1 l2 l3)
+  where
+
+  is-pullback-stable-function-class-Level :
+    (l : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
+  is-pullback-stable-function-class-Level l =
+    {A : UU l1} {B C : UU l2} (f : A → C) (g : B → C)
+    (p : Σ (UU l1) (pullback-cone l f g)) →
+    is-in-function-class P f →
+    is-in-function-class P (horizontal-map-pullback-cone f g (pr2 p))
+
+  is-prop-is-pullback-stable-function-class :
+    (l : Level) → is-prop (is-pullback-stable-function-class-Level l)
+  is-prop-is-pullback-stable-function-class l =
+    is-prop-iterated-implicit-Π 3
+    ( λ A B C →
+      is-prop-iterated-Π 4
+        ( λ f g p _ →
+          is-prop-is-in-function-class P
+            ( horizontal-map-pullback-cone f g (pr2 p))))
+
+  is-pullback-stable-function-class-Prop :
+    (l : Level) → Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
+  pr1 (is-pullback-stable-function-class-Prop l) =
+    is-pullback-stable-function-class-Level l
+  pr2 (is-pullback-stable-function-class-Prop l) =
+    is-prop-is-pullback-stable-function-class l
 
 pullback-stable-function-class :
   (l1 l2 l3 l4 : Level) → UU (lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4))
 pullback-stable-function-class l1 l2 l3 l4 =
-  Σ (function-class l1 l2 l3) (is-pullback-stable-function-class l4)
-
-is-prop-is-pullback-stable-function-class :
-  {l1 l2 l3 : Level} (l : Level) (P : function-class l1 l2 l3) →
-  is-prop (is-pullback-stable-function-class l P)
-is-prop-is-pullback-stable-function-class l P =
-  is-prop-iterated-Π 7
-    ( λ A B C f g p _ →
-      is-prop-is-in-function-class P (horizontal-map-pullback-cone f g (pr2 p)))
-
-is-pullback-stable-function-class-Prop :
-  {l1 l2 l3 : Level} (l : Level) (P : function-class l1 l2 l3) →
-  Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
-pr1 (is-pullback-stable-function-class-Prop l P) =
-  is-pullback-stable-function-class l P
-pr2 (is-pullback-stable-function-class-Prop l P) =
-  is-prop-is-pullback-stable-function-class l P
+  Σ ( function-class l1 l2 l3)
+    ( λ P → is-pullback-stable-function-class-Level P l4)
 ```
 
 ## Properties
@@ -188,13 +210,13 @@ module _
 
   has-identity-maps-has-equivalences-function-class :
     has-equivalences-function-class P → has-identity-maps-function-class P
-  has-identity-maps-has-equivalences-function-class has-equivs-P A =
-    has-equivs-P A A id is-equiv-id
+  has-identity-maps-has-equivalences-function-class has-equivs-P =
+    has-equivs-P id is-equiv-id
 
   htpy-has-identity-maps-function-class :
     has-identity-maps-function-class P →
     {X Y : UU l1} (p : X ＝ Y) → is-in-function-class P (map-eq p)
-  htpy-has-identity-maps-function-class has-ids-P {X} refl = has-ids-P X
+  htpy-has-identity-maps-function-class has-ids-P {X} refl = has-ids-P
 
   has-equivalence-has-identity-maps-function-class :
     has-identity-maps-function-class P →
@@ -207,7 +229,7 @@ module _
 
   has-equivalences-has-identity-maps-function-class :
     has-identity-maps-function-class P → has-equivalences-function-class P
-  has-equivalences-has-identity-maps-function-class has-ids-P A B f is-equiv-f =
+  has-equivalences-has-identity-maps-function-class has-ids-P f is-equiv-f =
     has-equivalence-has-identity-maps-function-class has-ids-P (f , is-equiv-f)
 
   is-equiv-has-identity-maps-has-equivalences-function-class :

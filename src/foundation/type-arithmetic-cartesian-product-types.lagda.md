@@ -103,16 +103,22 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (is-contr-B : is-contr B)
   where
 
-  right-unit-law-prod-is-contr : (A × B) ≃ A
+  right-unit-law-prod-is-contr : A × B ≃ A
   right-unit-law-prod-is-contr = right-unit-law-Σ-is-contr (λ a → is-contr-B)
+
+  inv-right-unit-law-prod-is-contr : A ≃ A × B
+  inv-right-unit-law-prod-is-contr = inv-equiv right-unit-law-prod-is-contr
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (is-contr-A : is-contr A)
   where
 
-  left-unit-law-prod-is-contr : (A × B) ≃ B
+  left-unit-law-prod-is-contr : A × B ≃ B
   left-unit-law-prod-is-contr =
     left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
+
+  inv-left-unit-law-prod-is-contr : B ≃ A × B
+  inv-left-unit-law-prod-is-contr = inv-equiv left-unit-law-prod-is-contr
 
   is-equiv-pr2-prod-is-contr : is-equiv (pr2 {B = λ a → B})
   is-equiv-pr2-prod-is-contr =
@@ -132,7 +138,7 @@ module _
 ```agda
 equiv-add-redundant-prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (is-prop B) → (f : A → B) → (A ≃ (A × B))
+  is-prop B → (f : A → B) → A ≃ A × B
 pr1 (equiv-add-redundant-prop is-prop-B f) a = a , f a
 pr2 (equiv-add-redundant-prop is-prop-B f) =
   is-equiv-is-invertible
