@@ -377,7 +377,9 @@ module _
   pr2 retraction-unit-Id-higher-modality = is-section-unit-Id-higher-modality
 ```
 
-We get this retraction without applying univalence, so, using strong subuniverse induction we can generally avoid it. However, we appeal to univalence to get the full equivalence.
+We get this retraction without applying univalence, so, using strong subuniverse
+induction we can generally avoid it. However, we appeal to univalence to get the
+full equivalence.
 
 ```agda
   is-modal-Id-higher-modality :
