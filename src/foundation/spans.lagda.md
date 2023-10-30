@@ -75,12 +75,37 @@ module _
   right-map-span-fixed-domain-codomain = pr2 (pr2 c)
 ```
 
+### Identity spans with fixed domain and codomain
+
+```agda
+module _
+  {l1 : Level} {X : UU l1}
+  where
+
+  id-span-fixed-domain-codomain : span-fixed-domain-codomain l1 X X
+  pr1 id-span-fixed-domain-codomain = X
+  pr1 (pr2 id-span-fixed-domain-codomain) = id
+  pr2 (pr2 id-span-fixed-domain-codomain) = id
+```
+
 ### (Binary) spans
 
 ```agda
 span : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 span l1 l2 l3 =
   Σ (UU l1) (λ A → Σ (UU l2) (λ B → span-fixed-domain-codomain l3 A B))
+
+module _
+  {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  make-span :
+    (S → A) → (S → B) → span l2 l3 l1
+  pr1 (make-span f g) = A
+  pr1 (pr2 (make-span f g)) = B
+  pr1 (pr2 (pr2 (make-span f g))) = S
+  pr1 (pr2 (pr2 (pr2 (make-span f g)))) = f
+  pr2 (pr2 (pr2 (pr2 (make-span f g)))) = g
 
 module _
   {l1 l2 l3 : Level} (s : span l1 l2 l3)
@@ -107,6 +132,19 @@ module _
   right-map-span : spanning-type-span → codomain-span
   right-map-span =
     right-map-span-fixed-domain-codomain span-fixed-domain-codomain-span
+```
+
+### Constant spans
+
+```agda
+module _
+  {l1 : Level}
+  where
+
+  constant-span : UU l1 → span l1 l1 l1
+  pr1 (constant-span X) = X
+  pr1 (pr2 (constant-span X)) = X
+  pr2 (pr2 (constant-span X)) = id-span-fixed-domain-codomain
 ```
 
 ### Spans of fixed families of types
@@ -169,6 +207,8 @@ module _
 
 ### Extensions of spans with fixed domain and codomain
 
+#### Extensions on both sides
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
@@ -187,7 +227,41 @@ module _
     g ∘ right-map-span-fixed-domain-codomain s
 ```
 
+#### Extensions on the left
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {A' : UU l2}
+  {B : UU l3}
+  where
+
+  left-extend-span-fixed-domain-codomain :
+    span-fixed-domain-codomain l4 A B → (A → A') →
+    span-fixed-domain-codomain l4 A' B
+  left-extend-span-fixed-domain-codomain s f =
+    extend-span-fixed-domain-codomain s f id
+```
+
+#### Extensions on the right
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1}
+  {B : UU l3} {B' : UU l4}
+  where
+
+  right-extend-span-fixed-domain-codomain :
+    span-fixed-domain-codomain l4 A B → (B → B') →
+    span-fixed-domain-codomain l4 A B'
+  right-extend-span-fixed-domain-codomain s g =
+    extend-span-fixed-domain-codomain s id g
+```
+
 ### Extensions of spans
+
+#### Extensions on both sides
 
 ```agda
 module _
@@ -203,6 +277,30 @@ module _
   pr1 (pr2 (extend-span s {A'} f {B'} g)) = B'
   pr2 (pr2 (extend-span s {A'} f {B'} g)) =
     extend-span-fixed-domain-codomain (span-fixed-domain-codomain-span s) f g
+```
+
+#### Etensions on the left
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  where
+
+  left-extend-span :
+    (s : span l1 l2 l3) {A' : UU l4} (f : domain-span s → A') → span l4 l2 l3
+  left-extend-span s f = extend-span s f id
+```
+
+#### Extensions on the right
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  where
+
+  right-extend-span :
+    (s : span l1 l2 l3) {B' : UU l4} (g : codomain-span s → B') → span l1 l4 l3
+  right-extend-span s g = extend-span s id g
 ```
 
 ### The opposite of a span with fixed domain and codomain

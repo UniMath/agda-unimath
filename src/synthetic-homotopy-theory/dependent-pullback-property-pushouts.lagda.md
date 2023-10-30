@@ -12,6 +12,7 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.pullbacks
+open import foundation.spans
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -37,31 +38,34 @@ of pushouts is shown in
 
 ```agda
 cone-dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-  let i = pr1 c
-      j = pr1 (pr2 c)
-      H = pr2 (pr2 c)
-  in
+  {l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) (P : X → UU l5) →
   cone
-    ( λ (h : (a : A) → P (i a)) → λ (s : S) → tr P (H s) (h (f s)))
-    ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
+    ( λ ( h : (a : domain-span s) → P (horizontal-map-cocone-span s c a))
+        ( x : spanning-type-span s) →
+        tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
+    ( λ ( h : (b : codomain-span s) → P (vertical-map-cocone-span s c b))
+        ( x : spanning-type-span s) →
+        h (right-map-span s x))
     ( (x : X) → P x)
-pr1 (cone-dependent-pullback-property-pushout f g (i , j , H) P) h a =
-  h (i a)
-pr1 (pr2 (cone-dependent-pullback-property-pushout f g (i , j , H) P)) h b =
-  h (j b)
-pr2 (pr2 (cone-dependent-pullback-property-pushout f g (i , j , H) P)) h =
-  eq-htpy (λ s → apd h (H s))
+pr1 (cone-dependent-pullback-property-pushout s c P) h a =
+  h (horizontal-map-cocone-span s c a)
+pr1 (pr2 (cone-dependent-pullback-property-pushout s c P)) h b =
+  h (vertical-map-cocone-span s c b)
+pr2 (pr2 (cone-dependent-pullback-property-pushout s c P)) h =
+  eq-htpy (λ x → apd h (coherence-square-cocone-span s c x))
 
 dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-dependent-pullback-property-pushout l {S} {A} {B} f g {X} (i , j , H) =
-  (P : X → UU l) →
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) → UUω
+dependent-pullback-property-pushout s {X} c =
+  {l : Level} (P : X → UU l) →
   is-pullback
-    ( λ (h : (a : A) → P (i a)) → λ s → tr P (H s) (h (f s)))
-    ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
-    ( cone-dependent-pullback-property-pushout f g (i , j , H) P)
+    ( λ ( h : (a : domain-span s) → P (horizontal-map-cocone-span s c a))
+        ( x : spanning-type-span s) →
+        tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
+    ( λ ( h : (b : codomain-span s) → P (vertical-map-cocone-span s c b))
+        ( x : spanning-type-span s) →
+        h (right-map-span s x))
+    ( cone-dependent-pullback-property-pushout s c P)
 ```

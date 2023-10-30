@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.spans
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -109,7 +110,7 @@ module _
     equiv-fiber (precomp f X) (g ∘ f)
 
   compute-total-fiber-precomp :
-    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
+    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone-span (make-span f f) X
   compute-total-fiber-precomp =
     equiv-tot compute-fiber-precomp
 ```

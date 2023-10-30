@@ -12,6 +12,7 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.pullbacks
+open import foundation.spans
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -47,31 +48,32 @@ square is a [pullback](foundation-core.universal-property-pullbacks.md).
 ### The pullback property of pushouts
 
 ```agda
-cone-pullback-property-pushout :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (Y : UU l) →
-  cone (_∘ f) (_∘ g) (X → Y)
-pr1 (cone-pullback-property-pushout f g c Y) =
-  precomp (horizontal-map-cocone f g c) Y
-pr1 (pr2 (cone-pullback-property-pushout f g c Y)) =
-  precomp (vertical-map-cocone f g c) Y
-pr2 (pr2 (cone-pullback-property-pushout f g c Y)) =
-  precomp-coherence-square-maps
-    ( g)
-    ( f)
-    ( vertical-map-cocone f g c)
-    ( horizontal-map-cocone f g c)
-    ( coherence-square-cocone f g c)
-    ( Y)
+module _
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X)
+  where
+  
+  cone-pullback-property-pushout :
+    {l : Level} (Y : UU l) →
+    cone (_∘ left-map-span s) (_∘ right-map-span s) (X → Y)
+  pr1 (cone-pullback-property-pushout Y) =
+    precomp (horizontal-map-cocone-span s c) Y
+  pr1 (pr2 (cone-pullback-property-pushout Y)) =
+    precomp (vertical-map-cocone-span s c) Y
+  pr2 (pr2 (cone-pullback-property-pushout Y)) =
+    precomp-coherence-square-maps
+      ( right-map-span s)
+      ( left-map-span s)
+      ( vertical-map-cocone-span s c)
+      ( horizontal-map-cocone-span s c)
+      ( coherence-square-cocone-span s c)
+      ( Y)
 
-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-pullback-property-pushout l f g c =
-  (Y : UU l) →
-  is-pullback
-    ( precomp f Y)
-    ( precomp g Y)
-    ( cone-pullback-property-pushout f g c Y)
+  pullback-property-pushout : UUω
+  pullback-property-pushout =
+    {l : Level} (Y : UU l) →
+    is-pullback
+      ( precomp (left-map-span s) Y)
+      ( precomp (right-map-span s) Y)
+      ( cone-pullback-property-pushout Y)
 ```

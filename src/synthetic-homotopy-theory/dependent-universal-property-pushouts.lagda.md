@@ -20,6 +20,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
+open import foundation.spans
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -46,11 +47,10 @@ the pushout.
 
 ```agda
 dependent-universal-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-dependent-universal-property-pushout l f g {X} c =
-  (P : X → UU l) → is-equiv (dependent-cocone-map f g c P)
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X) →
+  UUω
+dependent-universal-property-pushout s {X} c =
+  {l : Level} (P : X → UU l) → is-equiv (dependent-cocone-span-map s c P)
 ```
 
 ## Properties
@@ -60,24 +60,28 @@ dependent-universal-property-pushout l f g {X} c =
 ```agda
 abstract
   uniqueness-dependent-universal-property-pushout :
-    { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-    ( f : S → A) (g : S → B) (c : cocone f g X)
-    ( dup-c : dependent-universal-property-pushout l f g c) →
-    ( P : X → UU l) ( h : dependent-cocone f g c P) →
+    { l1 l2 l3 l4 l : Level} (s : span l1 l2 l3)
+    { X : UU l4} ( c : cocone-span s X)
+    ( dup-c : dependent-universal-property-pushout s c) →
+    ( P : X → UU l) ( h : dependent-cocone-span s c P) →
     is-contr
       ( Σ ( (x : X) → P x)
           ( λ k →
-            htpy-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
-  uniqueness-dependent-universal-property-pushout f g c dup-c P h =
+            htpy-dependent-cocone-span s c P
+              ( dependent-cocone-span-map s c P k)
+              ( h)))
+  uniqueness-dependent-universal-property-pushout s c dup-c P h =
     is-contr-is-equiv'
-      ( fiber (dependent-cocone-map f g c P) h)
+      ( fiber (dependent-cocone-span-map s c P) h)
       ( tot
         ( λ k →
-          htpy-eq-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
+          htpy-eq-dependent-cocone-span s c P
+            ( dependent-cocone-span-map s c P k)
+            ( h)))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ k →
-          is-equiv-htpy-eq-dependent-cocone f g c P
-            ( dependent-cocone-map f g c P k)
+          is-equiv-htpy-eq-dependent-cocone-span s c P
+            ( dependent-cocone-span-map s c P k)
             ( h)))
       ( is-contr-map-is-equiv (dup-c P) h)
 ```
@@ -87,76 +91,73 @@ abstract
 #### The induction principle of pushouts implies the dependent universal property of pushouts
 
 ```agda
-htpy-eq-dependent-cocone-map :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ( H : induction-principle-pushout l f g c)
-  { P : X → UU l} (h h' : (x : X) → P x) →
-  dependent-cocone-map f g c P h ＝ dependent-cocone-map f g c P h' → h ~ h'
-htpy-eq-dependent-cocone-map f g c ind-c {P} h h' p =
-  ind-induction-principle-pushout f g c ind-c
-    ( λ x → Id (h x) (h' x))
-    ( pair
-      ( horizontal-htpy-eq-dependent-cocone f g c P
-        ( dependent-cocone-map f g c P h)
-        ( dependent-cocone-map f g c P h')
-        ( p))
+module _
+  { l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
+  { X : UU l4} (c : cocone-span s X)
+  ( H : induction-principle-pushout s c)
+  where
+  
+  htpy-eq-dependent-cocone-span-map :
+    {l : Level} {P : X → UU l} (h h' : (x : X) → P x) →
+    dependent-cocone-span-map s c P h ＝ dependent-cocone-span-map s c P h' →
+    h ~ h'
+  htpy-eq-dependent-cocone-span-map {l} {P} h h' p =
+    ind-induction-principle-pushout s c H
+      ( λ x → Id (h x) (h' x))
       ( pair
-        ( vertical-htpy-eq-dependent-cocone f g c P
-          ( dependent-cocone-map f g c P h)
-          ( dependent-cocone-map f g c P h')
+        ( horizontal-htpy-eq-dependent-cocone-span s c P
+          ( dependent-cocone-span-map s c P h)
+          ( dependent-cocone-span-map s c P h')
           ( p))
-        ( λ s →
-          map-compute-dependent-identification-eq-value h h'
-            ( coherence-square-cocone f g c s)
-            ( horizontal-htpy-eq-dependent-cocone f g c P
-              ( dependent-cocone-map f g c P h)
-              ( dependent-cocone-map f g c P h')
-              ( p)
-              ( f s))
-            ( vertical-htpy-eq-dependent-cocone f g c P
-              ( dependent-cocone-map f g c P h)
-              ( dependent-cocone-map f g c P h')
-              ( p)
-              ( g s))
-            ( coherence-square-htpy-eq-dependent-cocone f g c P
-              ( dependent-cocone-map f g c P h)
-              ( dependent-cocone-map f g c P h')
-              ( p)
-              ( s)))))
+        ( pair
+          ( vertical-htpy-eq-dependent-cocone-span s c P
+            ( dependent-cocone-span-map s c P h)
+            ( dependent-cocone-span-map s c P h')
+            ( p))
+          ( λ x →
+            map-compute-dependent-identification-eq-value h h'
+              ( coherence-square-cocone-span s c x)
+              ( horizontal-htpy-eq-dependent-cocone-span s c P
+                ( dependent-cocone-span-map s c P h)
+                ( dependent-cocone-span-map s c P h')
+                ( p)
+                ( left-map-span s x))
+              ( vertical-htpy-eq-dependent-cocone-span s c P
+                ( dependent-cocone-span-map s c P h)
+                ( dependent-cocone-span-map s c P h')
+                ( p)
+                ( right-map-span s x))
+              ( coherence-square-htpy-eq-dependent-cocone-span s c P
+                ( dependent-cocone-span-map s c P h)
+                ( dependent-cocone-span-map s c P h')
+                ( p)
+                ( x)))))
 
-dependent-universal-property-pushout-induction-principle-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ((l : Level) → induction-principle-pushout l f g c) →
-  ((l : Level) → dependent-universal-property-pushout l f g c)
-dependent-universal-property-pushout-induction-principle-pushout
-  f g c ind-c l P =
-  is-equiv-is-invertible
-    ( ind-induction-principle-pushout f g c (ind-c l) P)
-    ( pr2 (ind-c l P))
-    ( λ h →
-      eq-htpy (htpy-eq-dependent-cocone-map f g c
-        ( ind-c l)
-        ( ind-induction-principle-pushout f g c
-          ( ind-c l)
-          ( P)
-          ( dependent-cocone-map f g c P h))
-        ( h)
-        ( pr2 (ind-c l P) (dependent-cocone-map f g c P h))))
+  dependent-universal-property-pushout-induction-principle-pushout :
+    dependent-universal-property-pushout s c
+  dependent-universal-property-pushout-induction-principle-pushout P =
+    is-equiv-is-invertible
+      ( ind-induction-principle-pushout s c H P)
+      ( pr2 (H P))
+      ( λ h →
+        eq-htpy
+          ( htpy-eq-dependent-cocone-span-map
+            ( ind-induction-principle-pushout s c H P
+              ( dependent-cocone-span-map s c P h))
+            ( h)
+            ( pr2 (H P) (dependent-cocone-span-map s c P h))))
 ```
 
 #### The dependent universal property of pushouts implies the induction principle of pushouts
 
 ```agda
 induction-principle-pushout-dependent-universal-property-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ((l : Level) → dependent-universal-property-pushout l f g c) →
-  ((l : Level) → induction-principle-pushout l f g c)
-induction-principle-pushout-dependent-universal-property-pushout
-  f g c dup-c l P =
-  pr1 (dup-c l P)
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) →
+  dependent-universal-property-pushout s c →
+  induction-principle-pushout s c
+induction-principle-pushout-dependent-universal-property-pushout s c H P =
+  pr1 (H P)
 ```
 
 ### The dependent pullback property of pushouts is equivalent to the dependent universal property of pushouts
@@ -164,65 +165,87 @@ induction-principle-pushout-dependent-universal-property-pushout
 #### The dependent universal property of pushouts implies the dependent pullback property of pushouts
 
 ```agda
-triangle-dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-  let i = pr1 c
-      j = pr1 (pr2 c)
-      H = pr2 (pr2 c)
-  in
-  ( dependent-cocone-map f g c P) ~
-  ( ( tot (λ h → tot (λ h' → htpy-eq))) ∘
-    ( gap
-      ( λ (h : (a : A) → P (i a)) → λ s → tr P (H s) (h (f s)))
-      ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
-      ( cone-dependent-pullback-property-pushout f g c P)))
-triangle-dependent-pullback-property-pushout f g (pair i (pair j H)) P h =
-  eq-pair-Σ refl (eq-pair-Σ refl (inv (is-section-eq-htpy (apd h ∘ H))))
+module _
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
+  where
+  
+  triangle-dependent-pullback-property-pushout :
+    {l5 : Level} (P : X → UU l5) →
+    let i = pr1 c
+        j = pr1 (pr2 c)
+        H = pr2 (pr2 c)
+    in
+    ( dependent-cocone-span-map s c P) ~
+    ( ( tot (λ h → tot (λ h' → htpy-eq))) ∘
+      ( gap
+        ( λ ( h : (a : domain-span s) → P (i a))
+            ( x : spanning-type-span s) →
+            tr P (H x) (h (left-map-span s x)))
+        ( λ ( h : (b : codomain-span s) → P (j b))
+            ( x : spanning-type-span s) →
+            h (right-map-span s x))
+        ( cone-dependent-pullback-property-pushout s c P)))
+  triangle-dependent-pullback-property-pushout P h =
+    eq-pair-Σ
+      ( refl)
+      ( eq-pair-Σ
+        ( refl)
+        ( inv (is-section-eq-htpy (apd h ∘ coherence-square-cocone-span s c))))
 
-dependent-pullback-property-dependent-universal-property-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ((l : Level) → dependent-universal-property-pushout l f g c) →
-  ((l : Level) → dependent-pullback-property-pushout l f g c)
-dependent-pullback-property-dependent-universal-property-pushout
-  f g (pair i (pair j H)) I l P =
-  let c = (pair i (pair j H)) in
-  is-equiv-right-factor-htpy
-    ( dependent-cocone-map f g c P)
-    ( tot (λ h → tot (λ h' → htpy-eq)))
-    ( gap
-      ( λ h x → tr P (H x) (h (f x)))
-      ( _∘ g)
-      ( cone-dependent-pullback-property-pushout f g c P))
-    ( triangle-dependent-pullback-property-pushout f g c P)
-    ( is-equiv-tot-is-fiberwise-equiv
-      ( λ h → is-equiv-tot-is-fiberwise-equiv
-        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
-    ( I l P)
+  dependent-pullback-property-dependent-universal-property-pushout :
+    dependent-universal-property-pushout s c →
+    dependent-pullback-property-pushout s c
+  dependent-pullback-property-dependent-universal-property-pushout I P =
+    is-equiv-right-factor-htpy
+      ( dependent-cocone-span-map s c P)
+      ( tot (λ h → tot (λ h' → htpy-eq)))
+      ( gap
+        ( λ h x →
+          tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
+        ( _∘ right-map-span s)
+        ( cone-dependent-pullback-property-pushout s c P))
+        ( triangle-dependent-pullback-property-pushout P)
+      ( is-equiv-tot-is-fiberwise-equiv
+        ( λ h → is-equiv-tot-is-fiberwise-equiv
+          ( λ h' →
+            funext
+              ( λ x →
+                tr P
+                  ( coherence-square-cocone-span s c x)
+                  ( h (left-map-span s x)))
+              ( h' ∘ right-map-span s))))
+      ( I P)
 ```
 
 #### The dependent pullback property of pushouts implies the dependent universal property of pushouts
 
 ```agda
-dependent-universal-property-dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ((l : Level) → dependent-pullback-property-pushout l f g c) →
-  ((l : Level) → dependent-universal-property-pushout l f g c)
-dependent-universal-property-dependent-pullback-property-pushout
-  f g (pair i (pair j H)) dpullback-c l P =
-  let c = (pair i (pair j H)) in
-  is-equiv-comp-htpy
-    ( dependent-cocone-map f g c P)
-    ( tot (λ h → tot (λ h' → htpy-eq)))
-    ( gap
-      ( λ h x → tr P (H x) (h (f x)))
-      ( _∘ g)
-      ( cone-dependent-pullback-property-pushout f g c P))
-    ( triangle-dependent-pullback-property-pushout f g c P)
-    ( dpullback-c l P)
-    ( is-equiv-tot-is-fiberwise-equiv
-      ( λ h → is-equiv-tot-is-fiberwise-equiv
-        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
+module _
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
+  where
+  
+  dependent-universal-property-dependent-pullback-property-pushout :
+    dependent-pullback-property-pushout s c →
+    dependent-universal-property-pushout s c
+  dependent-universal-property-dependent-pullback-property-pushout H P =
+    is-equiv-comp-htpy
+      ( dependent-cocone-span-map s c P)
+      ( tot (λ h → tot (λ h' → htpy-eq)))
+      ( gap
+        ( λ h x →
+          tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
+        ( _∘ right-map-span s)
+        ( cone-dependent-pullback-property-pushout s c P))
+      ( triangle-dependent-pullback-property-pushout s c P)
+      ( H P)
+      ( is-equiv-tot-is-fiberwise-equiv
+        ( λ h →
+          is-equiv-tot-is-fiberwise-equiv
+            ( λ h' →
+              funext
+                ( λ x →
+                  tr P
+                    ( coherence-square-cocone-span s c x)
+                    ( h (left-map-span s x)))
+                ( h' ∘ right-map-span s))))
 ```

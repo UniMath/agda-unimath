@@ -357,9 +357,28 @@ module _
       ( interchange-Σ-Σ _)
 ```
 
+### The identity equivalence of spans
+
+```agda
+module _
+  {l1 l2 l3 : Level} (s : span l1 l2 l3)
+  where
+
+  id-equiv-span : equiv-span s s
+  pr1 id-equiv-span =
+    id-equiv
+  pr1 (pr2 id-equiv-span) =
+    id-equiv
+  pr2 (pr2 id-equiv-span) =
+    id-equiv-span-fixed-domain-codomain (span-fixed-domain-codomain-span s)
+```
+
 ## Properties
 
-### Characterizing equality of spans with fixed domain and codomain
+### Characterization of equality of spans with fixed domain and codomain
+
+Equality of spans with fixed domain and codomain is equivalent to equivalences
+of such spans.
 
 ```agda
 module _
@@ -411,4 +430,46 @@ module _
     equiv-span-fixed-domain-codomain c d → c ＝ d
   eq-equiv-span-fixed-domain-codomain c d =
     map-inv-equiv (extensionality-span-fixed-domain-codomain c d)
+```
+
+### Characterization of equality of spans
+
+Equality of spans is equivalent to equivalences of spans
+
+```agda
+module _
+  {l1 l2 l3 : Level} (s : span l1 l2 l3)
+  where
+
+  equiv-eq-span :
+    (t : span l1 l2 l3) → (s ＝ t) → equiv-span s t
+  equiv-eq-span t refl = id-equiv-span s
+
+  is-torsorial-equiv-span :
+    is-torsorial (equiv-span {l1} {l2} {l3} {l1} {l2} {l3} s)
+  is-torsorial-equiv-span =
+    is-torsorial-Eq-structure
+      ( λ C DT e → Σ _ _)
+      ( is-torsorial-equiv (domain-span s))
+      ( domain-span s , id-equiv)
+      ( is-torsorial-Eq-structure
+        ( λ D T e → Σ _ _)
+        ( is-torsorial-equiv (codomain-span s))
+        ( codomain-span s , id-equiv)
+        ( is-torsorial-equiv-span-fixed-domain-codomain
+          ( span-fixed-domain-codomain-span s)))
+
+  is-equiv-equiv-eq-span :
+    (t : span l1 l2 l3) → is-equiv (equiv-eq-span t)
+  is-equiv-equiv-eq-span =
+    fundamental-theorem-id is-torsorial-equiv-span equiv-eq-span
+
+  extensionality-span :
+    (t : span l1 l2 l3) → (s ＝ t) ≃ equiv-span s t
+  pr1 (extensionality-span t) = equiv-eq-span t
+  pr2 (extensionality-span t) = is-equiv-equiv-eq-span t
+
+  eq-equiv-span :
+    (t : span l1 l2 l3) → equiv-span s t → s ＝ t
+  eq-equiv-span t = map-inv-equiv (extensionality-span t)
 ```

@@ -19,6 +19,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.spans
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -57,56 +58,59 @@ and a family of
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  ( f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l5)
+  { l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) (P : X → UU l5)
   where
 
-  dependent-cocone : UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
-  dependent-cocone =
-    Σ ( (a : A) → P (horizontal-map-cocone f g c a))
+  dependent-cocone-span : UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
+  dependent-cocone-span =
+    Σ ( (a : domain-span s) → P (horizontal-map-cocone-span s c a))
       ( λ hA →
-        Σ ( (b : B) → P (vertical-map-cocone f g c b))
+        Σ ( (b : codomain-span s) → P (vertical-map-cocone-span s c b))
           ( λ hB →
-            (s : S) →
+            (x : spanning-type-span s) →
             dependent-identification P
-              ( coherence-square-cocone f g c s)
-              ( hA (f s))
-              ( hB (g s))))
+              ( coherence-square-cocone-span s c x)
+              ( hA (left-map-span s x))
+              ( hB (right-map-span s x))))
 
   module _
-    (d : dependent-cocone)
+    (d : dependent-cocone-span)
     where
 
-    horizontal-map-dependent-cocone :
-      (a : A) → P (horizontal-map-cocone f g c a)
-    horizontal-map-dependent-cocone = pr1 d
+    horizontal-map-dependent-cocone-span :
+      (a : domain-span s) → P (horizontal-map-cocone-span s c a)
+    horizontal-map-dependent-cocone-span = pr1 d
 
-    vertical-map-dependent-cocone :
-      (b : B) → P (vertical-map-cocone f g c b)
-    vertical-map-dependent-cocone = pr1 (pr2 d)
+    vertical-map-dependent-cocone-span :
+      (b : codomain-span s) → P (vertical-map-cocone-span s c b)
+    vertical-map-dependent-cocone-span = pr1 (pr2 d)
 
-    coherence-square-dependent-cocone :
-      (s : S) →
+    coherence-square-dependent-cocone-span :
+      (x : spanning-type-span s) →
       dependent-identification P
-        ( coherence-square-cocone f g c s)
-        ( horizontal-map-dependent-cocone (f s))
-        ( vertical-map-dependent-cocone (g s))
-    coherence-square-dependent-cocone = pr2 (pr2 d)
+        ( coherence-square-cocone-span s c x)
+        ( horizontal-map-dependent-cocone-span (left-map-span s x))
+        ( vertical-map-dependent-cocone-span (right-map-span s x))
+    coherence-square-dependent-cocone-span = pr2 (pr2 d)
 ```
 
 ### Postcomposing dependent cocones with maps
 
 ```agda
-dependent-cocone-map :
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  ( f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l5) →
-  ( (x : X) → P x) → dependent-cocone f g c P
-pr1 (dependent-cocone-map f g c P h) a =
-  h (horizontal-map-cocone f g c a)
-pr1 (pr2 (dependent-cocone-map f g c P h)) b =
-  h (vertical-map-cocone f g c b)
-pr2 (pr2 (dependent-cocone-map f g c P h)) s =
-  apd h (coherence-square-cocone f g c s)
+module _
+  {l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) (P : X → UU l5)
+  where
+  
+  dependent-cocone-span-map :
+    ((x : X) → P x) → dependent-cocone-span s c P
+  pr1 (dependent-cocone-span-map h) a =
+    h (horizontal-map-cocone-span s c a)
+  pr1 (pr2 (dependent-cocone-span-map h)) b =
+    h (vertical-map-cocone-span s c b)
+  pr2 (pr2 (dependent-cocone-span-map h)) x =
+    apd h (coherence-square-cocone-span s c x)
 ```
 
 ## Properties
@@ -115,121 +119,127 @@ pr2 (pr2 (dependent-cocone-map f g c P h)) s =
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  {S : UU l1} {A : UU l2} {B : UU l3} (f : S → A) (g : S → B)
-  {X : UU l4} (c : cocone f g X)
-  (P : X → UU l5) (d : dependent-cocone f g c P)
+  {l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) (P : X → UU l5)
+  (d : dependent-cocone-span s c P)
   where
 
-  coherence-htpy-dependent-cocone :
-    ( d' : dependent-cocone f g c P)
+  coherence-htpy-dependent-cocone-span :
+    ( d' : dependent-cocone-span s c P)
     ( K :
-      horizontal-map-dependent-cocone f g c P d ~
-      horizontal-map-dependent-cocone f g c P d')
+      horizontal-map-dependent-cocone-span s c P d ~
+      horizontal-map-dependent-cocone-span s c P d')
     ( L :
-      vertical-map-dependent-cocone f g c P d ~
-      vertical-map-dependent-cocone f g c P d') →
-    UU (l1 ⊔ l5)
-  coherence-htpy-dependent-cocone d' K L =
-    (s : S) →
-    ( ( coherence-square-dependent-cocone f g c P d s) ∙ (L (g s))) ＝
-    ( ( ap (tr P (coherence-square-cocone f g c s)) (K (f s))) ∙
-      ( coherence-square-dependent-cocone f g c P d' s))
+      vertical-map-dependent-cocone-span s c P d ~
+      vertical-map-dependent-cocone-span s c P d') →
+    UU (l3 ⊔ l5)
+  coherence-htpy-dependent-cocone-span d' K L =
+    (x : spanning-type-span s) →
+    ( ( coherence-square-dependent-cocone-span s c P d x) ∙
+      ( L (right-map-span s x))) ＝
+    ( ( ap
+        ( tr P (coherence-square-cocone-span s c x))
+        ( K (left-map-span s x))) ∙
+      ( coherence-square-dependent-cocone-span s c P d' x))
 
-  htpy-dependent-cocone :
-    (d' : dependent-cocone f g c P) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
-  htpy-dependent-cocone d' =
-    Σ ( horizontal-map-dependent-cocone f g c P d ~
-        horizontal-map-dependent-cocone f g c P d')
+  htpy-dependent-cocone-span :
+    (d' : dependent-cocone-span s c P) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
+  htpy-dependent-cocone-span d' =
+    Σ ( horizontal-map-dependent-cocone-span s c P d ~
+        horizontal-map-dependent-cocone-span s c P d')
       ( λ K →
-        Σ ( vertical-map-dependent-cocone f g c P d ~
-            vertical-map-dependent-cocone f g c P d')
-          ( coherence-htpy-dependent-cocone d' K))
+        Σ ( vertical-map-dependent-cocone-span s c P d ~
+            vertical-map-dependent-cocone-span s c P d')
+          ( coherence-htpy-dependent-cocone-span d' K))
 
-  refl-htpy-dependent-cocone :
-    htpy-dependent-cocone d
-  pr1 refl-htpy-dependent-cocone = refl-htpy
-  pr1 (pr2 refl-htpy-dependent-cocone) = refl-htpy
-  pr2 (pr2 refl-htpy-dependent-cocone) = right-unit-htpy
+  refl-htpy-dependent-cocone-span :
+    htpy-dependent-cocone-span d
+  pr1 refl-htpy-dependent-cocone-span = refl-htpy
+  pr1 (pr2 refl-htpy-dependent-cocone-span) = refl-htpy
+  pr2 (pr2 refl-htpy-dependent-cocone-span) = right-unit-htpy
 
-  htpy-eq-dependent-cocone :
-    (d' : dependent-cocone f g c P) → d ＝ d' → htpy-dependent-cocone d'
-  htpy-eq-dependent-cocone .d refl = refl-htpy-dependent-cocone
+  htpy-eq-dependent-cocone-span :
+    (d' : dependent-cocone-span s c P) → d ＝ d' → htpy-dependent-cocone-span d'
+  htpy-eq-dependent-cocone-span .d refl = refl-htpy-dependent-cocone-span
 
   module _
-    (d' : dependent-cocone f g c P)
+    (d' : dependent-cocone-span s c P)
     (p : d ＝ d')
     where
 
-    horizontal-htpy-eq-dependent-cocone :
-      horizontal-map-dependent-cocone f g c P d ~
-      horizontal-map-dependent-cocone f g c P d'
-    horizontal-htpy-eq-dependent-cocone =
-      pr1 (htpy-eq-dependent-cocone d' p)
+    horizontal-htpy-eq-dependent-cocone-span :
+      horizontal-map-dependent-cocone-span s c P d ~
+      horizontal-map-dependent-cocone-span s c P d'
+    horizontal-htpy-eq-dependent-cocone-span =
+      pr1 (htpy-eq-dependent-cocone-span d' p)
 
-    vertical-htpy-eq-dependent-cocone :
-      vertical-map-dependent-cocone f g c P d ~
-      vertical-map-dependent-cocone f g c P d'
-    vertical-htpy-eq-dependent-cocone =
-      pr1 (pr2 (htpy-eq-dependent-cocone d' p))
+    vertical-htpy-eq-dependent-cocone-span :
+      vertical-map-dependent-cocone-span s c P d ~
+      vertical-map-dependent-cocone-span s c P d'
+    vertical-htpy-eq-dependent-cocone-span =
+      pr1 (pr2 (htpy-eq-dependent-cocone-span d' p))
 
-    coherence-square-htpy-eq-dependent-cocone :
-      coherence-htpy-dependent-cocone d'
-        ( horizontal-htpy-eq-dependent-cocone)
-        ( vertical-htpy-eq-dependent-cocone)
-    coherence-square-htpy-eq-dependent-cocone =
-      pr2 (pr2 (htpy-eq-dependent-cocone d' p))
+    coherence-square-htpy-eq-dependent-cocone-span :
+      coherence-htpy-dependent-cocone-span d'
+        ( horizontal-htpy-eq-dependent-cocone-span)
+        ( vertical-htpy-eq-dependent-cocone-span)
+    coherence-square-htpy-eq-dependent-cocone-span =
+      pr2 (pr2 (htpy-eq-dependent-cocone-span d' p))
 
   abstract
-    is-torsorial-htpy-dependent-cocone :
-      is-torsorial htpy-dependent-cocone
-    is-torsorial-htpy-dependent-cocone =
+    is-torsorial-htpy-dependent-cocone-span :
+      is-torsorial htpy-dependent-cocone-span
+    is-torsorial-htpy-dependent-cocone-span =
       is-torsorial-Eq-structure
         ( λ α βγ K →
-            Σ ( vertical-map-dependent-cocone f g c P d ~ pr1 βγ)
-              ( coherence-htpy-dependent-cocone (α , βγ) K))
-        ( is-torsorial-htpy (horizontal-map-dependent-cocone f g c P d))
-        ( horizontal-map-dependent-cocone f g c P d , refl-htpy)
+            Σ ( vertical-map-dependent-cocone-span s c P d ~ pr1 βγ)
+              ( coherence-htpy-dependent-cocone-span (α , βγ) K))
+        ( is-torsorial-htpy (horizontal-map-dependent-cocone-span s c P d))
+        ( horizontal-map-dependent-cocone-span s c P d , refl-htpy)
         ( is-torsorial-Eq-structure
           ( λ β γ →
-            coherence-htpy-dependent-cocone
-              ( horizontal-map-dependent-cocone f g c P d , β , γ)
+            coherence-htpy-dependent-cocone-span
+              ( horizontal-map-dependent-cocone-span s c P d , β , γ)
               ( refl-htpy))
-          ( is-torsorial-htpy (vertical-map-dependent-cocone f g c P d))
-          ( vertical-map-dependent-cocone f g c P d , refl-htpy)
+          ( is-torsorial-htpy (vertical-map-dependent-cocone-span s c P d))
+          ( vertical-map-dependent-cocone-span s c P d , refl-htpy)
           ( is-contr-equiv
-            ( Σ ( (s : S) →
+            ( Σ ( (x : spanning-type-span s) →
                   dependent-identification P
-                    ( coherence-square-cocone f g c s)
-                    ( horizontal-map-dependent-cocone f g c P d (f s))
-                    ( vertical-map-dependent-cocone f g c P d (g s)))
-                ( λ γ → coherence-square-dependent-cocone f g c P d ~ γ))
+                    ( coherence-square-cocone-span s c x)
+                    ( horizontal-map-dependent-cocone-span s c P d
+                      ( left-map-span s x))
+                    ( vertical-map-dependent-cocone-span s c P d
+                      ( right-map-span s x)))
+                ( λ γ → coherence-square-dependent-cocone-span s c P d ~ γ))
             ( equiv-tot (equiv-concat-htpy inv-htpy-right-unit-htpy))
             ( is-torsorial-htpy
-              ( coherence-square-dependent-cocone f g c P d))))
+              ( coherence-square-dependent-cocone-span s c P d))))
 
   abstract
-    is-equiv-htpy-eq-dependent-cocone :
-      (d' : dependent-cocone f g c P) → is-equiv (htpy-eq-dependent-cocone d')
-    is-equiv-htpy-eq-dependent-cocone =
+    is-equiv-htpy-eq-dependent-cocone-span :
+      (d' : dependent-cocone-span s c P) →
+      is-equiv (htpy-eq-dependent-cocone-span d')
+    is-equiv-htpy-eq-dependent-cocone-span =
       fundamental-theorem-id
-        ( is-torsorial-htpy-dependent-cocone)
-        ( htpy-eq-dependent-cocone)
+        ( is-torsorial-htpy-dependent-cocone-span)
+        ( htpy-eq-dependent-cocone-span)
 
-    eq-htpy-dependent-cocone :
-      (d' : dependent-cocone f g c P) → htpy-dependent-cocone d' → d ＝ d'
-    eq-htpy-dependent-cocone d' =
-      map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
+    eq-htpy-dependent-cocone-span :
+      (d' : dependent-cocone-span s c P) →
+      htpy-dependent-cocone-span d' → d ＝ d'
+    eq-htpy-dependent-cocone-span d' =
+      map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone-span d')
 
-    is-section-eq-htpy-dependent-cocone :
-      (d' : dependent-cocone f g c P) →
-      ( htpy-eq-dependent-cocone d' ∘ eq-htpy-dependent-cocone d') ~ id
-    is-section-eq-htpy-dependent-cocone d' =
-      is-section-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
+    is-section-eq-htpy-dependent-cocone-span :
+      (d' : dependent-cocone-span s c P) →
+      htpy-eq-dependent-cocone-span d' ∘ eq-htpy-dependent-cocone-span d' ~ id
+    is-section-eq-htpy-dependent-cocone-span d' =
+      is-section-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone-span d')
 
-    is-retraction-eq-htpy-dependent-cocone :
-      (d' : dependent-cocone f g c P) →
-      ( eq-htpy-dependent-cocone d' ∘ htpy-eq-dependent-cocone d') ~ id
-    is-retraction-eq-htpy-dependent-cocone d' =
-      is-retraction-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
+    is-retraction-eq-htpy-dependent-cocone-span :
+      (d' : dependent-cocone-span s c P) →
+      eq-htpy-dependent-cocone-span d' ∘ htpy-eq-dependent-cocone-span d' ~ id
+    is-retraction-eq-htpy-dependent-cocone-span d' =
+      is-retraction-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone-span d')
 ```
