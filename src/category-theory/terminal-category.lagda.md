@@ -11,11 +11,11 @@ open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.copresheaf-categories
 open import category-theory.functors-categories
-open import category-theory.indiscrete-precategories
 open import category-theory.functors-precategories
 open import category-theory.gaunt-categories
-open import category-theory.isomorphisms-in-precategories
+open import category-theory.indiscrete-precategories
 open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors
 open import category-theory.preunivalent-categories
@@ -31,11 +31,12 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
-open import order-theory.posets
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.posets
 ```
 
 </details>
@@ -146,6 +147,30 @@ terminal-Preunivalent-Category =
   preunivalent-category-Category terminal-Category
 ```
 
+### The terminal strict category
+
+```agda
+is-strict-category-terminal-Category :
+  is-strict-category-Precategory terminal-Precategory
+is-strict-category-terminal-Category = is-set-unit
+
+terminal-Strict-Category : Strict-Category lzero lzero
+pr1 terminal-Strict-Category = terminal-Precategory
+pr2 terminal-Strict-Category = is-strict-category-terminal-Category
+```
+
+### The terminal gaunt category
+
+```agda
+is-gaunt-terminal-Category : is-gaunt-Category terminal-Category
+is-gaunt-terminal-Category _ _ =
+  is-prop-Σ is-prop-unit (λ _ → is-prop-is-iso-Category terminal-Category star)
+
+terminal-Gaunt-Category : Gaunt-Category lzero lzero
+pr1 terminal-Gaunt-Category = terminal-Category
+pr2 terminal-Gaunt-Category = is-gaunt-terminal-Category
+```
+
 ### Points in a precategory
 
 Using the terminal category as the representing category of objects, we can
@@ -171,29 +196,9 @@ module _
 
 This remains to be formalized.
 
-### The terminal category is strict
+### The terminal category is terminal
 
-```agda
-is-strict-category-terminal-Category :
-  is-strict-category-Precategory terminal-Precategory
-is-strict-category-terminal-Category = is-set-unit
-
-terminal-Strict-Category : Strict-Category lzero lzero
-pr1 terminal-Strict-Category = terminal-Precategory
-pr2 terminal-Strict-Category = is-strict-category-terminal-Category
-```
-
-### The terminal category is gaunt
-
-```agda
-is-gaunt-terminal-Category : is-gaunt-Category terminal-Category
-is-gaunt-terminal-Category _ _ =
-  is-prop-Σ is-prop-unit (λ _ → is-prop-is-iso-Category terminal-Category star)
-
-terminal-Gaunt-Category : Gaunt-Category lzero lzero
-pr1 terminal-Gaunt-Category = terminal-Category
-pr2 terminal-Gaunt-Category = is-gaunt-terminal-Category
-```
+This remains to be formalized.
 
 ## See also
 

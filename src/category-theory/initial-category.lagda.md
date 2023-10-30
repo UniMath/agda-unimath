@@ -1,0 +1,155 @@
+# The initial category
+
+```agda
+module category-theory.initial-category where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.copresheaf-categories
+open import category-theory.functors-categories
+open import category-theory.functors-precategories
+open import category-theory.gaunt-categories
+open import category-theory.indiscrete-precategories
+open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
+open import category-theory.precategory-of-functors
+open import category-theory.preunivalent-categories
+open import category-theory.representable-functors-categories
+open import category-theory.representable-functors-precategories
+open import category-theory.strict-categories
+open import category-theory.yoneda-lemma-categories
+open import category-theory.yoneda-lemma-precategories
+
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.unit-type
+open import foundation.universe-levels
+
+open import order-theory.posets
+```
+
+</details>
+
+## Idea
+
+The **initial category** is the [category](category-theory.categories.md) with
+no objects.
+
+## Definition
+
+### The objects and hom-sets of the initial category
+
+```agda
+obj-initial-Category : UU lzero
+obj-initial-Category = empty
+
+hom-set-initial-Category :
+  obj-initial-Category → obj-initial-Category → Set lzero
+hom-set-initial-Category _ _ = unit-Set
+
+hom-initial-Category :
+  obj-initial-Category → obj-initial-Category → UU lzero
+hom-initial-Category x y = type-Set (hom-set-initial-Category x y)
+```
+
+### The underlying precategory of the initial category
+
+```agda
+comp-hom-initial-Category =
+  comp-hom-indiscrete-Precategory empty
+
+associative-comp-hom-initial-Category =
+  associative-comp-hom-indiscrete-Precategory empty
+
+associative-composition-operation-initial-Category =
+  associative-composition-operation-indiscrete-Precategory empty
+
+id-hom-initial-Category = id-hom-indiscrete-Precategory empty
+
+left-unit-law-comp-hom-initial-Category =
+  left-unit-law-comp-hom-indiscrete-Precategory empty
+
+right-unit-law-comp-hom-initial-Category =
+  right-unit-law-comp-hom-indiscrete-Precategory empty
+
+is-unital-composition-operation-initial-Category =
+  is-unital-composition-operation-indiscrete-Precategory empty
+
+initial-Precategory : Precategory lzero lzero
+initial-Precategory = indiscrete-Precategory empty
+```
+
+### The initial category
+
+```agda
+is-category-initial-Category :
+  is-category-Precategory initial-Precategory
+is-category-initial-Category ()
+
+initial-Category : Category lzero lzero
+pr1 initial-Category = initial-Precategory
+pr2 initial-Category = is-category-initial-Category
+```
+
+### The initial preunivalent category
+
+```agda
+is-preunivalent-initial-Category :
+  is-preunivalent-Precategory initial-Precategory
+is-preunivalent-initial-Category =
+  is-preunivalent-category-Category initial-Category
+
+initial-Preunivalent-Category : Preunivalent-Category lzero lzero
+initial-Preunivalent-Category =
+  preunivalent-category-Category initial-Category
+```
+
+### The initial strict category
+
+```agda
+is-strict-category-initial-Category :
+  is-strict-category-Precategory initial-Precategory
+is-strict-category-initial-Category = is-set-empty
+
+initial-Strict-Category : Strict-Category lzero lzero
+pr1 initial-Strict-Category = initial-Precategory
+pr2 initial-Strict-Category = is-strict-category-initial-Category
+```
+
+### The initial gaunt category
+
+```agda
+is-gaunt-initial-Category : is-gaunt-Category initial-Category
+is-gaunt-initial-Category ()
+
+initial-Gaunt-Category : Gaunt-Category lzero lzero
+pr1 initial-Gaunt-Category = initial-Category
+pr2 initial-Gaunt-Category = is-gaunt-initial-Category
+```
+
+## Properties
+
+### The initial category is initial
+
+This remains to be formalized.
+
+## See also
+
+- [The terminal category](category-theory.terminal-category.lagda.md)
+
+## External links
+
+- [empty category](https://ncatlab.org/nlab/show/empty+category) at nlab
+
+A wikidata identifier was not available for this concept.

@@ -13,8 +13,8 @@ open import category-theory.copresheaf-categories
 open import category-theory.functors-categories
 open import category-theory.functors-precategories
 open import category-theory.gaunt-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors
 open import category-theory.preunivalent-categories
@@ -30,11 +30,12 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
-open import order-theory.posets
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.posets
 ```
 
 </details>

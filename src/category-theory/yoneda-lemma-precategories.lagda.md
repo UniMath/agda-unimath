@@ -191,7 +191,3 @@ module _
 - [The Yoneda lemma](https://www.math3ma.com/blog/the-yoneda-lemma) at Math3ma
 - [Yoneda lemma](https://en.wikipedia.org/wiki/Yoneda_lemma) at Wikipedia
 - [Yoneda lemma](https://www.wikidata.org/wiki/Q320577) at Wikidata
-
-```
-
-```
