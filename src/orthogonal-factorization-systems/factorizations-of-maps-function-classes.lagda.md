@@ -258,6 +258,5 @@ module _
 
 ## See also
 
-- [Factorizations of maps into global function classes](orthogonal-factorization-systems.factorizations-of-maps-global-function-classes.md).
-  This is the required generalization be able to speak of universe polymorphic
-  composites of maps.
+- [Factorizations of maps into global function classes](orthogonal-factorization-systems.factorizations-of-maps-global-function-classes.md)
+  for the universe polymorphic version.
