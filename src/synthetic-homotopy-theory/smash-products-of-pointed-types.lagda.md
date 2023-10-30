@@ -316,6 +316,18 @@ module _
 
 ### The universal property of the smash product
 
+Fixing a pointed type `B`, the _universal property of the smash product_ states
+that the functor `- ∧∗ B` forms the left-adjoint to the functor `B →∗ -` of
+[pointed maps](structured-types.pointed-maps.md) with source `B`. In the
+language of type theory, this means that we have a pointed equivalence:
+
+```text
+  ((A ∧∗ B) →∗ C) ≃∗ (A →∗ B →∗ C).
+```
+
+**Note:** The categorical product in the category of pointed types is the
+[pointed cartesian product](structured-types.pointed-cartesian-product-types.md).
+
 ```agda
 map-universal-property-smash-prod-Pointed-Type :
   {l1 l2 l3 : Level}
