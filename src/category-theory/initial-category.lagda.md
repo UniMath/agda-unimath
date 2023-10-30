@@ -8,14 +8,17 @@ module category-theory.initial-category where
 
 ```agda
 open import category-theory.categories
+open import category-theory.functors-precategories
 open import category-theory.gaunt-categories
 open import category-theory.indiscrete-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -124,7 +127,35 @@ pr2 initial-Gaunt-Category = is-gaunt-initial-Category
 
 ### The initial category is initial
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  initial-functor-Precategory : functor-Precategory initial-Precategory C
+  pr1 initial-functor-Precategory ()
+  pr1 (pr2 initial-functor-Precategory) {()}
+  pr1 (pr2 (pr2 initial-functor-Precategory)) {()}
+  pr2 (pr2 (pr2 initial-functor-Precategory)) ()
+
+  uniqueness-initial-functor-Precategory :
+    (F : functor-Precategory initial-Precategory C) →
+    initial-functor-Precategory ＝ F
+  uniqueness-initial-functor-Precategory F =
+    eq-htpy-functor-Precategory
+      ( initial-Precategory)
+      ( C)
+      ( initial-functor-Precategory)
+      ( F)
+      ( (λ where ()) , (λ where {()}))
+
+  is-contr-functor-initial-Precategory :
+    is-contr (functor-Precategory initial-Precategory C)
+  pr1 is-contr-functor-initial-Precategory =
+    initial-functor-Precategory
+  pr2 is-contr-functor-initial-Precategory =
+    uniqueness-initial-functor-Precategory
+```
 
 ## See also
 
