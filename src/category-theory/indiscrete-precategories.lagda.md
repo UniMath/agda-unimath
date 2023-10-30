@@ -29,6 +29,11 @@ Given a type `X`, we can define its associated **indiscrete precategory** as the
 precategory whose hom-[sets](foundation-core.sets.md) are
 [contractible](foundation-core.contractible-types.md) everywhere.
 
+This construction demonstrates one essential aspect of precategories. While the
+structure of types [embed](foundation-core.embeddings.md) into precategories as
+indiscrete precategories, up to weak categorical equivalence, every indiscrete
+precategory is subterminal.
+
 ## Definition
 
 ### The objects and hom-sets of an indiscrete category
@@ -146,6 +151,14 @@ module _
         ( is-prop-unit)
         ( is-prop-is-iso-Precategory (indiscrete-Precategory X) {x} {y}))
 ```
+
+### The indiscrete precategory construction embeds types into precategories
+
+This remains to be formalized.
+
+### There is a fully faithful functor into the terminal category
+
+This remains to be formalized.
 
 ## External links
 
