@@ -444,7 +444,7 @@ module _
       ( is-contr-equiv _
         ( equiv-tot (λ y → inv-compute-iso-Subcategory C P {x} {y}))
         ( is-torsorial-Eq-subtype
-          (is-torsorial-iso-Category C (inclusion-obj-Subcategory C P x))
+          ( is-torsorial-iso-Category C (inclusion-obj-Subcategory C P x))
           ( is-prop-is-in-obj-Subcategory C P)
           ( inclusion-obj-Subcategory C P x)
           ( id-iso-Category C)
