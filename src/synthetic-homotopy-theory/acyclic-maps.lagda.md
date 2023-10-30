@@ -70,10 +70,10 @@ module _
     is-epimorphism-is-equiv-codiagonal-map f
       ( is-equiv-is-contr-map
         ( λ b →
-          ( is-contr-equiv
+          is-contr-equiv
             ( suspension (fiber f b))
             ( inv-equiv (equiv-fiber-codiagonal-map-suspension-fiber f b))
-            ( ac b))))
+            ( ac b)))
 ```
 
 ## See also
