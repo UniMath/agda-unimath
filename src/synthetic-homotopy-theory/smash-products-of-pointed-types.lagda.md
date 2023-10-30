@@ -311,7 +311,7 @@ module _
                       ( point-Pointed-Type unit-Pointed-Type)) ∙
                     ( right-unit))))))))
       ( eq-map-smash-prod-wedge-Pointed-Type A B
-         ( map-inr-wedge-Pointed-Type A B (point-Pointed-Type B))))
+        ( map-inr-wedge-Pointed-Type A B (point-Pointed-Type B))))
 ```
 
 ### The universal property of the smash product
