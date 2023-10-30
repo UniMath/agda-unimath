@@ -34,7 +34,7 @@ open import foundation-core.propositions
 ## Idea
 
 A type is said to be **small** with respect to a universe `UU l` if it is
-[equivalent](foundation-core.equivalence.md) to a type in `UU l`.
+[equivalent](foundation-core.equivalences.md) to a type in `UU l`.
 
 ## Definitions
 

@@ -32,7 +32,7 @@ open import orthogonal-factorization-systems.modal-operators
 
 Given a [modal operator](orthogonal-factorization-systems.modal-operators.md)
 `○` and a modal unit, a **modal induction principle** for the modality is a
-[section of maps of maps](foundation.sections-of-maps-of-maps.md):
+[section of maps of maps](foundation.multivariable-sections.md):
 
 ```text
   multivariable-section 2 (precomp-Π unit-○ (○ ∘ P))

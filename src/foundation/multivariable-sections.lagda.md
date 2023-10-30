@@ -55,8 +55,8 @@ identity at
 Note that sections of multivariable maps are equivalent to common
 [sections](foundation-core.sections.md) by function extensionality, so this
 definition only finds it utility in avoiding unnecessary applications of
-[function extensionality](foundation-core.function-extensionality.md). For
-instance, this is useful when defining induction principles on function types.
+[function extensionality](foundation.function-extensionality.md). For instance,
+this is useful when defining induction principles on function types.
 
 ## Definition
 

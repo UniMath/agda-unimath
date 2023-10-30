@@ -32,7 +32,7 @@ Given a [modal operator](orthogonal-factorization-systems.modal-operators.md)
 of modal types as those types whose unit is an
 [equivalence](foundation-core.equivalences.md). A **modal subuniverse induction
 principle** for the modality is then a
-[section of maps of maps](foundation.sections-of-maps-of-maps.md):
+[section of maps of maps](foundation.multivariable-sections.md):
 
 ```text
   multivariable-section (precomp-Π unit-○ P)

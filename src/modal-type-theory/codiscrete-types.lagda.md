@@ -28,8 +28,8 @@ open import orthogonal-factorization-systems.higher-modalities
 ## Idea
 
 A type is said to be **codiscrete** if it is
-[sharp](modal-type-theory.sharp-modality) modal, i.e. if the sharp unit `η_♯` is
-an [equivalence](foundation-core.equivalences) at that type.
+[sharp](modal-type-theory.sharp-modality.md) modal, i.e. if the sharp unit `η_♯`
+is an [equivalence](foundation-core.equivalences.md) at that type.
 
 We postulate that codiscrete types are closed under
 
