@@ -186,7 +186,35 @@ This remains to be formalized.
 
 ### The terminal category is terminal
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  terminal-functor-Precategory : functor-Precategory C terminal-Precategory
+  pr1 terminal-functor-Precategory _ = star
+  pr1 (pr2 terminal-functor-Precategory) _ = star
+  pr1 (pr2 (pr2 terminal-functor-Precategory)) _ _ = refl
+  pr2 (pr2 (pr2 terminal-functor-Precategory)) _ = refl
+
+  uniqueness-terminal-functor-Precategory :
+    (F : functor-Precategory C terminal-Precategory) →
+    terminal-functor-Precategory ＝ F
+  uniqueness-terminal-functor-Precategory F =
+    eq-htpy-functor-Precategory
+      ( C)
+      ( terminal-Precategory)
+      ( terminal-functor-Precategory)
+      ( F)
+      ((λ _ → refl) , (λ _ → refl))
+
+  is-contr-functor-terminal-Precategory :
+    is-contr (functor-Precategory C terminal-Precategory)
+  pr1 is-contr-functor-terminal-Precategory =
+    terminal-functor-Precategory
+  pr2 is-contr-functor-terminal-Precategory =
+    uniqueness-terminal-functor-Precategory
+```
 
 ## See also
 
