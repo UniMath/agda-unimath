@@ -377,10 +377,7 @@ module _
   pr2 retraction-unit-Id-higher-modality = is-section-unit-Id-higher-modality
 ```
 
-So far, we have not applied univalence. However, to get the full equivalence in
-general, this is the easiest approach. Note that univalence should not strictly
-be necessary. In the worst case, we could have given a separate definition for
-higher modalities when `l1 = l2`.
+We get this retraction without applying univalence, so, using strong subuniverse induction we can generally avoid it. However, we appeal to univalence to get the full equivalence.
 
 ```agda
   is-modal-Id-higher-modality :
