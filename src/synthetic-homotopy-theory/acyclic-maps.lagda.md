@@ -61,7 +61,7 @@ module _
   is-acyclic-map-is-epimorphism e b =
     is-contr-equiv
       ( fiber (codiagonal-map f) b)
-      ( equiv-suspension-fiber-fiber-codiagonal-map f b)
+      ( equiv-fiber-codiagonal-map-suspension-fiber f b)
       ( is-contr-map-is-equiv
         ( is-equiv-codiagonal-map-is-epimorphism f e)
         ( b))
@@ -73,7 +73,7 @@ module _
         ( λ b →
           ( is-contr-equiv
             ( suspension (fiber f b))
-            ( inv-equiv (equiv-suspension-fiber-fiber-codiagonal-map f b))
+            ( inv-equiv (equiv-fiber-codiagonal-map-suspension-fiber f b))
             ( ac b))))
 ```
 
