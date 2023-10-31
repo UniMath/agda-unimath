@@ -92,8 +92,7 @@ pr2 initial-Category = is-category-initial-Category
 ```agda
 is-preunivalent-initial-Category :
   is-preunivalent-Precategory initial-Precategory
-is-preunivalent-initial-Category =
-  is-preunivalent-category-Category initial-Category
+is-preunivalent-initial-Category ()
 
 initial-Preunivalent-Category : Preunivalent-Category lzero lzero
 initial-Preunivalent-Category =
@@ -105,7 +104,7 @@ initial-Preunivalent-Category =
 ```agda
 is-strict-category-initial-Category :
   is-strict-category-Precategory initial-Precategory
-is-strict-category-initial-Category = is-set-empty
+is-strict-category-initial-Category ()
 
 initial-Strict-Category : Strict-Category lzero lzero
 pr1 initial-Strict-Category = initial-Precategory
@@ -159,7 +158,7 @@ module _
 
 ## See also
 
-- [The terminal category](category-theory.terminal-category.lagda.md)
+- [The terminal category](category-theory.terminal-category.md)
 
 ## External links
 

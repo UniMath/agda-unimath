@@ -142,7 +142,7 @@ module _
 
 ## Properties
 
-### If the indiscrete precategory is preunivalent then it is a strict category
+### If an indiscrete precategory is preunivalent then it is a strict category
 
 ```agda
 module _
@@ -161,7 +161,7 @@ module _
         ( is-prop-is-iso-Precategory (indiscrete-Precategory X) {x} {y}))
 ```
 
-### The construction `indiscrete-Precategory` is a section
+### The construction of `indiscrete-Precategory` is a section of `obj-Precategory`
 
 ```agda
 is-section-indiscrete-Precategory :

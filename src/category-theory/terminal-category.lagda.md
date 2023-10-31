@@ -260,7 +260,7 @@ module _
 
 ## See also
 
-- [The initial category](category-theory.initial-category.lagda.md)
+- [The initial category](category-theory.initial-category.md)
 
 ## External links
 
