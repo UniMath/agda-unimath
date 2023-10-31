@@ -8,16 +8,25 @@ module category-theory.indiscrete-precategories where
 
 ```agda
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.fully-faithful-functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
+open import category-theory.terminal-category
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.action-on-identifications-functions
 open import foundation.propositions
+open import foundation.subtype-identity-principle
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.sets
+open import foundation.function-types
+open import foundation.embeddings
+open import foundation.homotopies
 open import foundation.unit-type
+open import foundation.equivalences
 open import foundation.universe-levels
 ```
 
@@ -26,13 +35,13 @@ open import foundation.universe-levels
 ## Idea
 
 Given a type `X`, we can define its associated **indiscrete precategory** as the
-precategory whose hom-[sets](foundation-core.sets.md) are
+[precategory](category-theory.precategories.md) whose
+hom-[sets](foundation-core.sets.md) are
 [contractible](foundation-core.contractible-types.md) everywhere.
 
-This construction demonstrates one essential aspect of precategories. While the
-structure of types [embed](foundation-core.embeddings.md) into precategories as
-indiscrete precategories, up to weak categorical equivalence, every indiscrete
-precategory is subterminal.
+This construction demonstrates one essential aspect about precategories: While
+it displays `obj-Precategory` as a [retraction](foundation-core.retractions.md),
+up to weak categorical equivalence, every indiscrete precategory is subterminal.
 
 ## Definition
 
@@ -152,13 +161,28 @@ module _
         ( is-prop-is-iso-Precategory (indiscrete-Precategory X) {x} {y}))
 ```
 
-### The indiscrete precategory construction embeds types into precategories
+### The construction `indiscrete-Precategory` is a section
 
-This remains to be formalized.
+```agda
+is-section-indiscrete-Precategory :
+  {l : Level} → obj-Precategory ∘ indiscrete-Precategory {l} ~ id
+is-section-indiscrete-Precategory X = refl
+```
 
-### There is a fully faithful functor into the terminal category
+### The terminal projection functor is fully faithful
 
-This remains to be formalized.
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  is-fully-faithful-terminal-functor-indiscrete-Precategory :
+    is-fully-faithful-functor-Precategory
+      ( indiscrete-Precategory X)
+      ( terminal-Precategory)
+      (terminal-functor-Precategory (indiscrete-Precategory X))
+  is-fully-faithful-terminal-functor-indiscrete-Precategory x y = is-equiv-id
+```
 
 ## External links
 
