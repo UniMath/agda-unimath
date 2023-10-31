@@ -213,7 +213,7 @@ module _
     is-fully-faithful-functor-Precategory
       ( indiscrete-Precategory X)
       ( terminal-Precategory)
-      (terminal-functor-Precategory (indiscrete-Precategory X))
+      ( terminal-functor-Precategory (indiscrete-Precategory X))
   is-fully-faithful-terminal-functor-indiscrete-Precategory x y = is-equiv-id
 ```
 
