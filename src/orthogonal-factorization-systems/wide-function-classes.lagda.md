@@ -23,9 +23,8 @@ open import orthogonal-factorization-systems.function-classes
 We say a
 [(small) function class](orthogonal-factorization-systems.function-classes.md)
 is **wide** if it contains all [equivalences](foundation-core.equivalences.md)
-and is [composition](foundation.function-types.md) closed. This means it is
-morally a wide sub-∞-category of the ∞-category of types at a fixed universe
-level.
+and is composition closed. This means it is morally a wide sub-∞-category of the
+∞-category of types at a fixed universe level.
 
 ## Definition
 
