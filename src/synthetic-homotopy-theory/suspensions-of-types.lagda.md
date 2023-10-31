@@ -15,10 +15,12 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -297,9 +299,7 @@ module _
 
 ### Consequences of the dependent universal property
 
-#### Characterization of homotopies between functions with domain a
-
-suspension
+#### Characterization of homotopies between functions with domain a suspension
 
 ```agda
 module _
@@ -394,4 +394,107 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
       ( is-equiv-is-contr terminal-map is-contr-X is-contr-unit)
       ( up-pushout terminal-map terminal-map))
     ( is-contr-unit)
+```
+
+### Functoriality of suspensions (TODO: Move to new file)
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  map-suspension-structure : suspension-structure A (suspension B)
+  map-suspension-structure =
+    north-suspension , south-suspension , meridian-suspension ∘ f
+
+  map-suspension : suspension A → suspension B
+  map-suspension =
+    map-inv-up-suspension A (suspension B) map-suspension-structure
+
+  compute-north-map-suspension :
+    map-suspension (north-suspension) ＝ north-suspension
+  compute-north-map-suspension =
+    up-suspension-north-suspension A (suspension B) map-suspension-structure
+
+  compute-south-map-suspension :
+    map-suspension (south-suspension) ＝ south-suspension
+  compute-south-map-suspension =
+    up-suspension-south-suspension A (suspension B) map-suspension-structure
+
+  compute-meridian-map-suspension :
+    (a : A) →
+    coherence-square-identifications
+      ( compute-north-map-suspension)
+      ( ap map-suspension (meridian-suspension a))
+      ( meridian-suspension (f a))
+      ( compute-south-map-suspension)
+  compute-meridian-map-suspension a =
+    up-suspension-meridian-suspension A (suspension B) map-suspension-structure a
+
+module _
+  {l : Level} (A : UU l)
+  where
+
+  htpy-function-out-of-suspension-id-map-suspension :
+    htpy-function-out-of-suspension A (map-suspension id) id
+  pr1 htpy-function-out-of-suspension-id-map-suspension =
+    compute-north-map-suspension id
+  pr1 (pr2 htpy-function-out-of-suspension-id-map-suspension) =
+    compute-south-map-suspension id
+  pr2 (pr2 htpy-function-out-of-suspension-id-map-suspension) a =
+    coherence-square-identifications-right-paste
+      (ap (map-suspension id) (meridian-suspension a))
+      (compute-south-map-suspension id)
+      (compute-north-map-suspension id)
+      ( meridian-suspension a)
+      ( inv (ap-id (meridian-suspension a)))
+      ( compute-meridian-map-suspension id a)
+
+  id-map-suspension : map-suspension (id {A = A}) ~ id
+  id-map-suspension =
+    htpy-htpy-function-out-of-suspension A
+      ( map-suspension id)
+      ( id)
+      ( htpy-function-out-of-suspension-id-map-suspension)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → B) (g : B → C)
+  where
+
+  htpy-function-out-of-suspension-comp-map-suspension :
+    htpy-function-out-of-suspension A (map-suspension (g ∘ f)) (map-suspension g ∘ map-suspension f)
+  pr1 htpy-function-out-of-suspension-comp-map-suspension =
+    compute-north-map-suspension (g ∘ f) ∙ inv (ap (map-suspension g) (compute-north-map-suspension f) ∙ compute-north-map-suspension g)
+  pr1 (pr2 htpy-function-out-of-suspension-comp-map-suspension) =
+    compute-south-map-suspension (g ∘ f) ∙ inv (ap (map-suspension g) (compute-south-map-suspension f) ∙ compute-south-map-suspension g)
+  pr2 (pr2 htpy-function-out-of-suspension-comp-map-suspension) =
+    {!!}
+    where
+      foo : (a : A) →
+              coherence-square-identifications
+              (compute-north-map-suspension (g ∘ f))
+              (ap (map-suspension (g ∘ f)) (meridian-suspension a))
+              (meridian-suspension ((g ∘ f) a))
+              (compute-south-map-suspension (g ∘ f))
+      foo = compute-meridian-map-suspension (g ∘ f)
+
+  preserves-comp-map-suspension :
+    map-suspension (g ∘ f) ~ map-suspension g ∘ map-suspension f
+  preserves-comp-map-suspension = {!!}
+
+
+{-
+   -- htpy-eq (is-injective-is-equiv (is-equiv-map-inv-equiv {!equiv-up-suspension!}) baz)
+    where -- map-inv-equiv (equiv-up-suspension Z)
+      foo : suspension-structure A (suspension A) → suspension A → suspension A
+      foo = map-inv-up-suspension A (suspension A)
+      val1 : {!!}
+      val1 = foo (map-suspension-structure id)
+      val2 : {!!}
+      val2 = foo (suspension-structure-suspension A)
+      baz : val1 ＝ val2
+      baz = refl
+      test : map-suspension-structure id ＝ suspension-structure-suspension A
+      test = is-injective-is-equiv (is-equiv-map-inv-equiv (equiv-up-suspension A (suspension A))) baz -}
 ```
