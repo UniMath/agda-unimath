@@ -13,6 +13,7 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
+open import category-theory.pregroupoids
 open import category-theory.terminal-category
 
 open import foundation.action-on-identifications-functions
@@ -138,6 +139,38 @@ module _
     associative-composition-operation-indiscrete-Precategory
   pr2 (pr2 (pr2 indiscrete-Precategory)) =
     is-unital-composition-operation-indiscrete-Precategory
+```
+
+### The pregroupoid structure of indiscrete precategories
+
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  is-iso-hom-indiscrete-Precategory :
+    {x y : obj-indiscrete-Precategory X}
+    (f : hom-indiscrete-Precategory X x y) →
+    is-iso-Precategory (indiscrete-Precategory X) {x} {y} f
+  pr1 (is-iso-hom-indiscrete-Precategory _) = star
+  pr1 (pr2 (is-iso-hom-indiscrete-Precategory _)) = refl
+  pr2 (pr2 (is-iso-hom-indiscrete-Precategory _)) = refl
+
+  iso-obj-indiscrete-Precategory :
+    (x y : obj-indiscrete-Precategory X) →
+    iso-Precategory (indiscrete-Precategory X) x y
+  pr1 (iso-obj-indiscrete-Precategory x y) = star
+  pr2 (iso-obj-indiscrete-Precategory x y) =
+    is-iso-hom-indiscrete-Precategory {x} {y} star
+
+  is-pregroupoid-indiscrete-Precategory :
+    is-pregroupoid-Precategory (indiscrete-Precategory X)
+  is-pregroupoid-indiscrete-Precategory x y =
+    is-iso-hom-indiscrete-Precategory {x} {y}
+
+  indiscrete-Pregroupoid : Pregroupoid l lzero
+  pr1 indiscrete-Pregroupoid = indiscrete-Precategory X
+  pr2 indiscrete-Pregroupoid = is-pregroupoid-indiscrete-Precategory
 ```
 
 ## Properties
