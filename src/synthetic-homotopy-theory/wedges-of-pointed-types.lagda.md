@@ -152,21 +152,21 @@ module _
     type-Pointed-Type (A ∨∗ B) → type-Pointed-Type (A ×∗ B)
   map-prod-wedge-Pointed-Type = pr1 pointed-map-prod-wedge-Pointed-Type
 
-  inl-prod-wedge-Pointed-Type :
+  compute-inl-prod-wedge-Pointed-Type :
     ( x : type-Pointed-Type A) →
     ( map-prod-wedge-Pointed-Type (map-inl-wedge-Pointed-Type A B x)) ＝
     ( x , point-Pointed-Type B)
-  inl-prod-wedge-Pointed-Type =
+  compute-inl-prod-wedge-Pointed-Type =
     compute-inl-cogap-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
       ( cocone-prod-wedge-Pointed-Type)
 
-  inr-prod-wedge-Pointed-Type :
+  compute-inr-prod-wedge-Pointed-Type :
     ( y : type-Pointed-Type B) →
     ( map-prod-wedge-Pointed-Type (map-inr-wedge-Pointed-Type A B y)) ＝
     ( point-Pointed-Type A , y)
-  inr-prod-wedge-Pointed-Type =
+  compute-inr-prod-wedge-Pointed-Type =
     compute-inr-cogap-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
