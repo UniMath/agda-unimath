@@ -11,9 +11,12 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.implicit-function-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -116,6 +119,39 @@ section-iterated-Π-section-Π-section-codomain P f ._ {{base-telescope A}} H =
   H
 section-iterated-Π-section-Π-section-codomain P f ._ {{cons-telescope A}} H =
   f (λ x → section-iterated-Π-section-Π-section-codomain P f _ {{A x}} (H x))
+
+section-iterated-implicit-Π-section-Π-section-codomain :
+  (P : {l : Level} → UU l → UU l) →
+  ( {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → P (B x)) → P ({x : A} → B x)) →
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π P A → P (iterated-implicit-Π A)
+section-iterated-implicit-Π-section-Π-section-codomain
+  P f ._ {{base-telescope A}} H =
+  H
+section-iterated-implicit-Π-section-Π-section-codomain
+  P f ._ {{cons-telescope A}} H =
+  f ( λ x →
+      section-iterated-implicit-Π-section-Π-section-codomain
+        P f _ {{A x}} (H x))
+```
+
+### Multivariable function types are equivalent to multivariable implicit function types
+
+```agda
+equiv-explicit-implicit-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  iterated-implicit-Π A ≃ iterated-Π A
+equiv-explicit-implicit-iterated-Π .0 ⦃ base-telescope A ⦄ = id-equiv
+equiv-explicit-implicit-iterated-Π ._ ⦃ cons-telescope A ⦄ =
+  equiv-Π-equiv-family (λ x → equiv-explicit-implicit-iterated-Π _ {{A x}}) ∘e
+  equiv-explicit-implicit-Π
+
+equiv-implicit-explicit-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  iterated-Π A ≃ iterated-implicit-Π A
+equiv-implicit-explicit-iterated-Π n {{A}} =
+  inv-equiv (equiv-explicit-implicit-iterated-Π n {{A}})
 ```
 
 ### Iterated products of contractible types is contractible
@@ -126,6 +162,14 @@ is-contr-iterated-Π :
   apply-codomain-iterated-Π is-contr A → is-contr (iterated-Π A)
 is-contr-iterated-Π =
   section-iterated-Π-section-Π-section-codomain is-contr is-contr-Π
+
+is-contr-iterated-implicit-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-contr A → is-contr (iterated-implicit-Π A)
+is-contr-iterated-implicit-Π =
+  section-iterated-implicit-Π-section-Π-section-codomain
+    ( is-contr)
+    ( is-contr-implicit-Π)
 ```
 
 ### Iterated products of propositions are propositions
@@ -136,6 +180,12 @@ is-prop-iterated-Π :
   apply-codomain-iterated-Π is-prop A → is-prop (iterated-Π A)
 is-prop-iterated-Π =
   section-iterated-Π-section-Π-section-codomain is-prop is-prop-Π
+
+is-prop-iterated-implicit-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-prop A → is-prop (iterated-implicit-Π A)
+is-prop-iterated-implicit-Π =
+  section-iterated-implicit-Π-section-Π-section-codomain is-prop is-prop-Π'
 ```
 
 ### Iterated products of truncated types are truncated

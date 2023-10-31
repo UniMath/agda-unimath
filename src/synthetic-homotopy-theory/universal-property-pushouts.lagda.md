@@ -607,6 +607,14 @@ module _
       ( c)
       ( universal-property-pushout-is-equiv' f' i (j , f , coh) ie je)
       ( up-c)
+
+  universal-property-pushout-left-extension-by-equivalences :
+    {l : Level} → is-equiv i → is-equiv j →
+    Σ (cocone f' (g ∘ i) X) (universal-property-pushout l f' (g ∘ i))
+  pr1 (universal-property-pushout-left-extension-by-equivalences ie je) =
+    cocone-comp-horizontal' f' i g f j c coh
+  pr2 (universal-property-pushout-left-extension-by-equivalences ie je) =
+    universal-property-pushout-left-extended-by-equivalences ie je
 ```
 
 #### The vertical pushout pasting lemma
@@ -767,9 +775,10 @@ module _
 
 #### Extending pushouts by equivalences at the top
 
-If we have a pushout square on the right, equivalences S' ≃ S and B' ≃ B, and a
-map g' : S' → B' making the top square commute, then the vertical rectangle is
-again a pushout. This is a special case of the vertical pushout pasting lemma.
+If we have a pushout square on the right, equivalences `S' ≃ S` and `B' ≃ B`,
+and a map `g' : S' → B'` making the top square commute, then the vertical
+rectangle is again a pushout. This is a special case of the vertical pushout
+pasting lemma.
 
 ```text
            g'
@@ -808,11 +817,19 @@ module _
       ( c)
       ( universal-property-pushout-is-equiv i g' (g , j , coh) ie je)
       ( up-c)
+
+  universal-property-pushout-top-extension-by-equivalences :
+    {l : Level} → is-equiv i → is-equiv j →
+    Σ (cocone (f ∘ i) g' X) (universal-property-pushout l (f ∘ i) g')
+  pr1 (universal-property-pushout-top-extension-by-equivalences ie je) =
+    cocone-comp-vertical' i g' j g f c coh
+  pr2 (universal-property-pushout-top-extension-by-equivalences ie je) =
+    universal-property-pushout-top-extended-by-equivalences ie je
 ```
 
 ### Extending pushouts by equivalences of cocones
 
-Given a commutative diagram where i, j and k are equivalences,
+Given a commutative diagram where `i`, `j` and `k` are equivalences,
 
 ```text
           g'
@@ -839,7 +856,7 @@ the induced square is a pushout.
 
 This combines both special cases of the pushout pasting lemmas for equivalences.
 
-Notice that the triple (i.j.k) is really an equivalence of spans. Thus, this
+Notice that the triple `(i,j,k)` is really an equivalence of spans. Thus, this
 result can be phrased as: the pushout is invariant under equivalence of spans.
 
 ```agda
@@ -855,15 +872,23 @@ module _
   ( coh-r : coherence-square-maps g' k j g)
   where
 
-  universal-property-pushout-extended-by-equivalences :
-    is-equiv i → is-equiv j → is-equiv k →
-    {l : Level} →
-    universal-property-pushout l
+  universal-property-pushout-extension-by-equivalences :
+    {l : Level} → is-equiv i → is-equiv j → is-equiv k →
+    Σ (cocone f' g' X) (λ d → universal-property-pushout l f' g' d)
+  universal-property-pushout-extension-by-equivalences ie je ke =
+    universal-property-pushout-top-extension-by-equivalences
       ( f')
+
+{-
+<<<<<<< HEAD
       ( g')
       ( comp-cocone-span-hom-span f g f' g' i j k c coh-l coh-r)
   universal-property-pushout-extended-by-equivalences ie je ke =
     universal-property-pushout-top-extended-by-equivalences f'
+=======
+>>>>>>> 0ea91d68392b1cabaad0e5b5a712cdfab687a4c1
+-}
+
       ( g ∘ k)
       ( id)
       ( j)
@@ -879,6 +904,16 @@ module _
       ( coh-r)
       ( is-equiv-id)
       ( je)
+
+  universal-property-pushout-extended-by-equivalences :
+    is-equiv i → is-equiv j → is-equiv k →
+    {l : Level} →
+    universal-property-pushout l
+      ( f')
+      ( g')
+      ( comp-cocone-hom-span f g f' g' i j k c coh-l coh-r)
+  universal-property-pushout-extended-by-equivalences ie je ke =
+    pr2 (universal-property-pushout-extension-by-equivalences ie je ke)
 ```
 
 ### In a commuting cube where the vertical maps are equivalences, the bottom square is a pushout if and only if the top square is a pushout

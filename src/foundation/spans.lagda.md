@@ -8,20 +8,11 @@ module foundation.spans where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.structure-identity-principle
-open import foundation.univalence
+open import foundation.equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.contractible-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -340,13 +331,7 @@ module _
     map-span-fixed-family-of-types s (map-equiv e i)
 ```
 
-## Properties
-
-### Binary spans with fixed domain and codomain are equivalent to binary relations
-
-This remains to be shown.
-[#767](https://github.com/UniMath/agda-unimath/issues/767)
-
 ## See also
 
 - The dual concept of spans is [cospans](foundation.cospans.md).
+- In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we show that [binary relations](foundation.binary-relations.md) are equivalently described as spans of types.
