@@ -11,6 +11,7 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
