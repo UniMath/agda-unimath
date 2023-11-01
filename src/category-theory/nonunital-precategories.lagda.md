@@ -14,6 +14,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
 
@@ -167,6 +169,39 @@ module _
     is-unital-prop-composition-operation-binary-family-Set
       ( hom-set-Nonunital-Precategory C)
       ( comp-hom-Nonunital-Precategory C)
+```
+
+## Properties
+
+### If the objects of a nonunital precategory are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} (C : Nonunital-Precategory l1 l2)
+  where
+
+  is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Nonunital-Precategory C) →
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (total-hom-Nonunital-Precategory C)
+  is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory is-trunc-obj-C =
+    is-trunc-Σ
+      ( is-trunc-obj-C)
+      ( λ x →
+        is-trunc-Σ
+          ( is-trunc-obj-C)
+          ( λ y → is-trunc-is-set k (is-set-hom-Nonunital-Precategory C x y)))
+
+  total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Nonunital-Precategory C) →
+    Truncated-Type (l1 ⊔ l2) (succ-𝕋 (succ-𝕋 k))
+  pr1
+    ( total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
+      is-trunc-obj-C) =
+    total-hom-Nonunital-Precategory C
+  pr2
+    ( total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
+      is-trunc-obj-C) =
+    is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory is-trunc-obj-C
 ```
 
 ## Comments

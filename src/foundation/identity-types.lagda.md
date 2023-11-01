@@ -11,6 +11,7 @@ open import foundation-core.identity-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
+open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
@@ -44,17 +45,17 @@ identifications in arbitrary types.
 ### The Mac Lane pentagon for identity types
 
 ```agda
-Mac-Lane-pentagon :
+mac-lane-pentagon :
   {l : Level} {A : UU l} {a b c d e : A}
   (p : a ＝ b) (q : b ＝ c) (r : c ＝ d) (s : d ＝ e) →
-  let α₁ = (ap (λ t → t ∙ s) (assoc p q r))
+  let α₁ = (ap (_∙ s) (assoc p q r))
       α₂ = (assoc p (q ∙ r) s)
-      α₃ = (ap (λ t → p ∙ t) (assoc q r s))
+      α₃ = (ap (p ∙_) (assoc q r s))
       α₄ = (assoc (p ∙ q) r s)
       α₅ = (assoc p q (r ∙ s))
   in
-  ((α₁ ∙ α₂) ∙ α₃) ＝ (α₄ ∙ α₅)
-Mac-Lane-pentagon refl refl refl refl = refl
+    coherence-pentagon-identifications α₁ α₄ α₂ α₅ α₃
+mac-lane-pentagon refl refl refl refl = refl
 ```
 
 ### The groupoidal operations on identity types are equivalences

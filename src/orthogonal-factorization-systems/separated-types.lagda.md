@@ -38,5 +38,4 @@ module _
 ## References
 
 1. Egbert Rijke, _Classifying Types_
-   ([arXiv:1906.09435](https://arxiv.org/abs/1906.09435),
-   [doi:10.48550](https://doi.org/10.48550/arXiv.1906.09435))
+   ([arXiv:1906.09435](https://arxiv.org/abs/1906.09435))
