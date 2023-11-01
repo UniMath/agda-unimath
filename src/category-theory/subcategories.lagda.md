@@ -25,6 +25,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -453,7 +454,7 @@ module _
       ( is-contr-equiv _
         ( equiv-tot (λ y → inv-compute-iso-Subcategory C P {x} {y}))
         ( is-torsorial-Eq-subtype
-          (is-torsorial-iso-Category C (inclusion-obj-Subcategory C P x))
+          ( is-torsorial-iso-Category C (inclusion-obj-Subcategory C P x))
           ( is-prop-is-in-obj-Subcategory C P)
           ( inclusion-obj-Subcategory C P x)
           ( id-iso-Category C)

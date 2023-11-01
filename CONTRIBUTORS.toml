@@ -55,6 +55,18 @@ graph theory from a univalent point of view.
 '''
 
 [[contributors]]
+displayName = "Vojtěch Štěpančík"
+maintainer = true
+usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
+homepage = "https://vojtechstep.eu/"
+github = "VojtechStep"
+bio = '''
+Vojtěch is a master\'s student at Charles University in Prague. His background
+is in software engineering, and he\'s working on formalizing synthetic
+homotopy theoretic topics for his thesis.
+'''
+
+[[contributors]]
 displayName = "Eléonore Mangel"
 usernames = [ "Eléonore Mangel", "EleonoreMangel", "Léo Mangel", "LeoMangel" ]
 github = "EleonoreMangel"
@@ -78,12 +90,6 @@ github = "ElifUskuplu"
 displayName = "Victor Blanchi"
 usernames = [ "VictorBlanchi" ]
 github = "VictorBlanchi"
-
-[[contributors]]
-displayName = "Vojtěch Štěpančík"
-usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
-homepage = "https://vojtechstep.eu/"
-github = "VojtechStep"
 
 [[contributors]]
 displayName = "Fernando Chu"

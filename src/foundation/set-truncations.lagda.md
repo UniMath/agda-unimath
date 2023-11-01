@@ -130,7 +130,6 @@ universal-property-trunc-Set A = universal-property-trunc zero-𝕋 A
 module _
   {l1 l2 : Level} {A : UU l1} (B : Set l2)
   where
-
   equiv-universal-property-trunc-Set :
     (type-trunc-Set A → type-Set B) ≃ (A → type-Set B)
   equiv-universal-property-trunc-Set = equiv-universal-property-trunc A B
@@ -151,10 +150,11 @@ module _
   Map-trunc-Set f =
     Σ (type-trunc-Set A → type-Set B) (λ g → g ∘ unit-trunc-Set ~ f)
 
-  apply-universal-property-trunc-Set' :
-    (t : type-trunc-Set A) → (A → type-Set B) → type-Set B
-  apply-universal-property-trunc-Set' t f =
-    map-universal-property-trunc-Set f t
+apply-unival-property-trunc-Set' :
+  {l1 l2 : Level} {A : UU l1} (t : type-trunc-Set A) (B : Set l2) →
+  (A → type-Set B) → type-Set B
+apply-universal-property-trunc-Set' t B f =
+  map-universal-property-trunc-Set B f t
 ```
 
 ### The set truncation of `X` is the set quotient by the mere equality relation

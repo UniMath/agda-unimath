@@ -180,6 +180,20 @@ obj-total-hom-Category :
 obj-total-hom-Category C = obj-total-hom-Precategory (precategory-Category C)
 ```
 
+### The total hom-type of a preunivalent category
+
+```agda
+total-hom-Category :
+  {l1 l2 : Level} (C : Category l1 l2) → UU (l1 ⊔ l2)
+total-hom-Category C = total-hom-Precategory (precategory-Category C)
+
+obj-total-hom-Category :
+  {l1 l2 : Level} (C : Category l1 l2) →
+  total-hom-Category C →
+  obj-Category C × obj-Category C
+obj-total-hom-Category C = obj-total-hom-Precategory (precategory-Category C)
+```
+
 ### Equalities induce morphisms
 
 ```agda
