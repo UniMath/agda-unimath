@@ -75,8 +75,8 @@ module _
   id-hom-Groupoid = id-hom-Category category-Groupoid
 
   comp-hom-Groupoid :
-    {x y z : obj-Groupoid} → hom-Groupoid y z →
-    hom-Groupoid x y → hom-Groupoid x z
+    {x y z : obj-Groupoid} →
+    hom-Groupoid y z → hom-Groupoid x y → hom-Groupoid x z
   comp-hom-Groupoid = comp-hom-Category category-Groupoid
 
   associative-comp-hom-Groupoid :
@@ -135,30 +135,29 @@ module _
     fundamental-theorem-id
       ( is-contr-equiv'
         ( Σ ( Σ (type-1-Type X) (λ y → x ＝ y))
-            ( λ yp →
-              Σ ( Σ (pr1 yp ＝ x) (λ q → (q ∙ pr2 yp) ＝ refl))
-                ( λ ql → (pr2 yp ∙ pr1 ql) ＝ refl)))
+            ( λ (y , p) →
+              Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
+                ( λ (q , l) → p ∙ q ＝ refl)))
         ( ( equiv-tot
             ( λ y →
               equiv-tot
                 ( λ p →
                   associative-Σ
                     ( y ＝ x)
-                    ( λ q → (q ∙ p) ＝ refl)
-                    ( λ qr → (p ∙ pr1 qr) ＝ refl)))) ∘e
+                    ( λ q → q ∙ p ＝ refl)
+                    ( λ (q , r) → p ∙ q ＝ refl)))) ∘e
           ( associative-Σ
             ( type-1-Type X)
             ( λ y → x ＝ y)
-            ( λ yp →
-              Σ ( Σ (pr1 yp ＝ x) (λ q → (q ∙ pr2 yp) ＝ refl))
-                ( λ ql → (pr2 yp ∙ pr1 ql) ＝ refl))))
+            ( λ (y , p) →
+              Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
+                ( λ (q , l) → p ∙ q ＝ refl))))
         ( is-contr-iterated-Σ 2
           ( is-torsorial-path x ,
             ( x , refl) ,
             ( is-contr-equiv
               ( Σ (x ＝ x) (λ q → q ＝ refl))
-              ( equiv-tot
-                ( λ q → equiv-concat (inv right-unit) refl))
+              ( equiv-tot (λ q → equiv-concat (inv right-unit) refl))
               ( is-torsorial-path' refl)) ,
             ( refl , refl) ,
             ( is-proof-irrelevant-is-prop
