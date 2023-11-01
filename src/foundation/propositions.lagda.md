@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.universe-levels
 
-open import foundation-core.embeddings
 open import foundation-core.retractions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

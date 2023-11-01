@@ -135,8 +135,6 @@ open import category-theory.restrictions-functors-cores-precategories public
 open import category-theory.rigid-objects-categories public
 open import category-theory.rigid-objects-precategories public
 open import category-theory.set-magmoids public
-open import category-theory.rigid-objects-categories public
-open import category-theory.rigid-objects-precategories public
 open import category-theory.sieves-in-categories public
 open import category-theory.simplex-category public
 open import category-theory.slice-precategories public
