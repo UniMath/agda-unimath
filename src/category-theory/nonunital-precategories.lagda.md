@@ -8,6 +8,7 @@ module category-theory.nonunital-precategories where
 
 ```agda
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.set-magmoids
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -90,6 +91,19 @@ module _
     pr2 associative-composition-operation-Nonunital-Precategory
 ```
 
+### The underlying set-magmoid of a nonunital precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Nonunital-Precategory l1 l2)
+  where
+
+  set-magmoid-Nonunital-Precategory : Set-Magmoid l1 l2
+  pr1 set-magmoid-Nonunital-Precategory = obj-Nonunital-Precategory C
+  pr1 (pr2 set-magmoid-Nonunital-Precategory) = hom-set-Nonunital-Precategory C
+  pr2 (pr2 set-magmoid-Nonunital-Precategory) = comp-hom-Nonunital-Precategory C
+```
+
 ### The total hom-type of a nonunital precategory
 
 ```agda
@@ -107,30 +121,23 @@ pr1 (obj-total-hom-Nonunital-Precategory C (x , y , f)) = x
 pr2 (obj-total-hom-Nonunital-Precategory C (x , y , f)) = y
 ```
 
-### Precomposition by a morphism
+### Pre- and postcomposition by a morphism
 
 ```agda
-precomp-hom-Nonunital-Precategory :
+module _
   {l1 l2 : Level} (C : Nonunital-Precategory l1 l2)
   {x y : obj-Nonunital-Precategory C}
   (f : hom-Nonunital-Precategory C x y)
-  (z : obj-Nonunital-Precategory C) →
-  hom-Nonunital-Precategory C y z → hom-Nonunital-Precategory C x z
-precomp-hom-Nonunital-Precategory C f z g =
-  comp-hom-Nonunital-Precategory C g f
-```
+  (z : obj-Nonunital-Precategory C)
+  where
 
-### Postcomposition by a morphism
+  precomp-hom-Nonunital-Precategory :
+    hom-Nonunital-Precategory C y z → hom-Nonunital-Precategory C x z
+  precomp-hom-Nonunital-Precategory g = comp-hom-Nonunital-Precategory C g f
 
-```agda
-postcomp-hom-Nonunital-Precategory :
-  {l1 l2 : Level} (C : Nonunital-Precategory l1 l2)
-  {x y : obj-Nonunital-Precategory C}
-  (f : hom-Nonunital-Precategory C x y)
-  (z : obj-Nonunital-Precategory C) →
-  hom-Nonunital-Precategory C z x → hom-Nonunital-Precategory C z y
-postcomp-hom-Nonunital-Precategory C f z =
-  comp-hom-Nonunital-Precategory C f
+  postcomp-hom-Nonunital-Precategory :
+    hom-Nonunital-Precategory C z x → hom-Nonunital-Precategory C z y
+  postcomp-hom-Nonunital-Precategory = comp-hom-Nonunital-Precategory C f
 ```
 
 ### The predicate on nonunital precategories of being unital
@@ -183,25 +190,16 @@ module _
   is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory :
     is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Nonunital-Precategory C) →
     is-trunc (succ-𝕋 (succ-𝕋 k)) (total-hom-Nonunital-Precategory C)
-  is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory is-trunc-obj-C =
-    is-trunc-Σ
-      ( is-trunc-obj-C)
-      ( λ x →
-        is-trunc-Σ
-          ( is-trunc-obj-C)
-          ( λ y → is-trunc-is-set k (is-set-hom-Nonunital-Precategory C x y)))
+  is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory =
+    is-trunc-total-hom-is-trunc-obj-Set-Magmoid
+      ( set-magmoid-Nonunital-Precategory C)
 
   total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory :
     is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Nonunital-Precategory C) →
     Truncated-Type (l1 ⊔ l2) (succ-𝕋 (succ-𝕋 k))
-  pr1
-    ( total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
-      is-trunc-obj-C) =
-    total-hom-Nonunital-Precategory C
-  pr2
-    ( total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
-      is-trunc-obj-C) =
-    is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory is-trunc-obj-C
+  total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory =
+    total-hom-truncated-type-is-trunc-obj-Set-Magmoid
+      ( set-magmoid-Nonunital-Precategory C)
 ```
 
 ## Comments
@@ -219,3 +217,9 @@ is an [equivalence](foundation-core.equivalences.md).
 
 We can also define one notion of "isomorphism" as those morphisms that induce
 equivalences of hom-[sets](foundation-core.sets.md) by pre- and postcomposition.
+
+## External links
+
+- [Semicategories](https://ncatlab.org/nlab/show/semicategory) at nlab
+- [Semigroupoid](https://en.wikipedia.org/wiki/Semigroupoid) at Wikipedia
+- [semigroupoid](https://www.wikidata.org/wiki/Q4164581) at Wikidata

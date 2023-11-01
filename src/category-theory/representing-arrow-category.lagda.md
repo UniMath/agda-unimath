@@ -159,3 +159,9 @@ pr2 representing-arrow-Category = is-category-representing-arrow
 
 This is a consequence of the
 [Yoneda lemma](category-theory.yoneda-lemma-categories.md).
+
+## External links
+
+- [Interval category](https://1lab.dev/Cat.Instances.Shape.Interval.html#interval-category)
+  at 1lab
+- [interval category](https://ncatlab.org/nlab/show/interval+category) at nlab

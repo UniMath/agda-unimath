@@ -20,6 +20,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
@@ -456,11 +457,7 @@ module _
       ( λ f → is-iso-Ab (ab-Ring R) (ab-Ring S) (pr1 f))) ∘e
     ( equiv-type-subtype
       ( is-prop-is-iso-Ring R S)
-      ( λ f →
-        is-prop-is-iso-Ab
-          ( ab-Ring R)
-          ( ab-Ring S)
-          ( hom-ab-hom-Ring R S f))
+      ( λ f → is-prop-is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f))
       ( is-iso-ab-is-iso-Ring)
       ( is-iso-ring-is-iso-Ab))
 ```
@@ -490,13 +487,8 @@ module _
                 ( λ x m → (y : type-Ring R) → mul-Ring R x y ＝ m y)
                 ( λ x → is-torsorial-htpy (mul-Ring R x)))
               ( λ μ →
-                is-prop-Π
-                  ( λ x →
-                    is-prop-Π
-                      ( λ y →
-                        is-prop-Π
-                          ( λ z →
-                            is-set-type-Ring R (μ (μ x y) z) (μ x (μ y z))))))
+                is-prop-iterated-Π 3
+                  ( λ x y z → is-set-type-Ring R (μ (μ x y) z) (μ x (μ y z))))
               ( mul-Ring R)
               ( λ x y → refl)
               ( associative-mul-Ring R))
@@ -513,28 +505,16 @@ module _
                 ( left-unit-law-mul-Ring R , right-unit-law-mul-Ring R))
               ( λ u →
                 is-prop-prod
-                  ( is-prop-Π
-                    ( λ x →
-                      is-prop-Π
-                        ( λ y →
-                          is-prop-Π
-                            ( λ z →
-                              is-set-type-Ring R
-                                ( mul-Ring R x (add-Ring R y z))
-                                ( add-Ring R
-                                  ( mul-Ring R x y)
-                                  ( mul-Ring R x z))))))
-                  ( is-prop-Π
-                    ( λ x →
-                      is-prop-Π
-                        ( λ y →
-                          is-prop-Π
-                            ( λ z →
-                              is-set-type-Ring R
-                                ( mul-Ring R (add-Ring R x y) z)
-                                ( add-Ring R
-                                  ( mul-Ring R x z)
-                                  ( mul-Ring R y z)))))))
+                  ( is-prop-iterated-Π 3
+                    ( λ x y z →
+                      is-set-type-Ring R
+                        ( mul-Ring R x (add-Ring R y z))
+                        ( add-Ring R (mul-Ring R x y) (mul-Ring R x z))))
+                  ( is-prop-iterated-Π 3
+                    ( λ x y z →
+                      is-set-type-Ring R
+                        ( mul-Ring R (add-Ring R x y) z)
+                        ( add-Ring R (mul-Ring R x z) (mul-Ring R y z)))))
               ( is-unital-Ring R)
               ( refl)
               ( left-distributive-mul-add-Ring R ,

@@ -215,11 +215,10 @@ module _
     is-0-connected A →
     ((f : (x : A) → (a ＝ x) → B x) → (x : A) → is-trunc-map k (f x)) →
     is-trunc (succ-𝕋 k) (Σ A B)
-  forward-implication-extended-fundamental-theorem-id-truncated H =
+  forward-implication-extended-fundamental-theorem-id-truncated =
     forward-implication-extended-fundamental-theorem-id
       ( is-trunc-Prop k)
       ( a)
-      ( H)
 
   backward-implication-extended-fundamental-theorem-id-truncated :
     is-trunc (succ-𝕋 k) (Σ A B) →
