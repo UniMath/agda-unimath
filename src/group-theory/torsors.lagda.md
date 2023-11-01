@@ -651,7 +651,7 @@ module _
         ( q)))
 ```
 
-### From torsors to concrete groups
+### From torsors to concrete group
 
 ```agda
   ∞-group-Group : ∞-Group (lsuc l1)
