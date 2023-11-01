@@ -336,7 +336,7 @@ equiv-unit-trunc-empty-Set = equiv-unit-trunc-Set empty-Set
 abstract
   is-empty-trunc-Set :
     {l : Level} {A : UU l} → is-empty A → is-empty (type-trunc-Set A)
-  is-empty-trunc-Set f x = apply-universal-property-trunc-Set' empty-Set x f
+  is-empty-trunc-Set f x = apply-universal-property-trunc-Set' x empty-Set f
 
 abstract
   is-empty-is-empty-trunc-Set :
