@@ -48,7 +48,6 @@ is-prop-is-preidempotent-is-set is-set-A f =
 
 - Mike Shulman, _Idempotents in intensional type theory_, Logical Methods in
   Computer Science, Volume 12, Issue 3, 2017
-  ([arXiv:1507.03634](https://arxiv.org/abs/1507.03634),
-  [DOI:10.48550](https://doi.org/10.48550/arXiv.1507.03634))
+  ([arXiv:1507.03634](https://arxiv.org/abs/1507.03634))
 - Mike Shulman, _Splitting Idempotents_,
   <https://homotopytypetheory.org/2014/12/08/splitting-idempotents/>

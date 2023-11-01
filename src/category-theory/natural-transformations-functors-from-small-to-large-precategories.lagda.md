@@ -74,12 +74,12 @@ module _
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 
-  coherence-square-natural-transformation-Small-Large-Precategory :
+  naturality-natural-transformation-Small-Large-Precategory :
     (γ : natural-transformation-Small-Large-Precategory) →
     is-natural-transformation-Small-Large-Precategory
       ( hom-family-natural-transformation-Small-Large-Precategory γ)
-  coherence-square-natural-transformation-Small-Large-Precategory =
-    coherence-square-natural-transformation-map-Small-Large-Precategory C D
+  naturality-natural-transformation-Small-Large-Precategory =
+    naturality-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 ```

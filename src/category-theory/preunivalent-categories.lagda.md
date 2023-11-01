@@ -12,6 +12,7 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.1-types
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
@@ -39,11 +40,14 @@ preunivalent categories generalize both
 [strict categories](category-theory.strict-categories.md), which are
 precategories whose objects form a [set](foundation-core.sets.md).
 
-Summarized, the preunivalence condition on precategories states that the type of
-objects is a subgroupoid of the [groupoid](category-theory.groupoids.md) of
-isomorphisms. For univalent categories the groupoid of objects is equivalent to
-the groupoid of isomorphisms, while for strict categories the groupoid of
-objects is discrete.
+The preunivalence condition on precategories states that the type of objects is
+a subgroupoid of the [groupoid](category-theory.groupoids.md) of isomorphisms.
+For univalent categories the groupoid of objects is equivalent to the groupoid
+of isomorphisms, while for strict categories the groupoid of objects is
+discrete. Indeed, in this sense preunivalence provides a generalization of both
+notions of "category", with _no more structure_. This is opposed to the even
+more general notion of precategory, where the homotopy structure on the objects
+can be almost completely unrelated to the homotopy structure of the morphisms.
 
 ## Definitions
 
@@ -151,6 +155,30 @@ module _
   is-preunivalent-Preunivalent-Category :
     is-preunivalent-Precategory precategory-Preunivalent-Category
   is-preunivalent-Preunivalent-Category = pr2 C
+
+  emb-iso-eq-Preunivalent-Category :
+    {x y : obj-Preunivalent-Category} →
+    (x ＝ y) ↪ (iso-Precategory precategory-Preunivalent-Category x y)
+  pr1 (emb-iso-eq-Preunivalent-Category {x} {y}) =
+    iso-eq-Precategory precategory-Preunivalent-Category x y
+  pr2 (emb-iso-eq-Preunivalent-Category {x} {y}) =
+    is-preunivalent-Preunivalent-Category x y
+```
+
+### The total hom-type of a preunivalent category
+
+```agda
+total-hom-Preunivalent-Category :
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) → UU (l1 ⊔ l2)
+total-hom-Preunivalent-Category C =
+  total-hom-Precategory (precategory-Preunivalent-Category C)
+
+obj-total-hom-Preunivalent-Category :
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) →
+  total-hom-Preunivalent-Category C →
+  obj-Preunivalent-Category C × obj-Preunivalent-Category C
+obj-total-hom-Preunivalent-Category C =
+  obj-total-hom-Precategory (precategory-Preunivalent-Category C)
 ```
 
 ### Equalities induce morphisms
@@ -221,6 +249,27 @@ module _
   obj-1-type-Preunivalent-Category : 1-Type l1
   pr1 obj-1-type-Preunivalent-Category = obj-Preunivalent-Category C
   pr2 obj-1-type-Preunivalent-Category = is-1-type-obj-Preunivalent-Category
+```
+
+### The total hom-type of a preunivalent category is a 1-type
+
+```agda
+module _
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  where
+
+  is-1-type-total-hom-Preunivalent-Category :
+    is-1-type (total-hom-Preunivalent-Category C)
+  is-1-type-total-hom-Preunivalent-Category =
+    is-trunc-total-hom-is-trunc-obj-Precategory
+      ( precategory-Preunivalent-Category C)
+      ( is-1-type-obj-Preunivalent-Category C)
+
+  total-hom-1-type-Preunivalent-Category : 1-Type (l1 ⊔ l2)
+  total-hom-1-type-Preunivalent-Category =
+    total-hom-truncated-type-is-trunc-obj-Precategory
+      ( precategory-Preunivalent-Category C)
+      ( is-1-type-obj-Preunivalent-Category C)
 ```
 
 ## See also

@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
@@ -432,6 +433,12 @@ module _
   pr1 (inv-iso-Precategory f) = hom-inv-iso-Precategory C f
   pr2 (inv-iso-Precategory f) =
     is-iso-inv-is-iso-Precategory C (is-iso-iso-Precategory C f)
+
+  is-iso-inv-iso-Precategory :
+    (f : iso-Precategory C x y) →
+    is-iso-Precategory C (hom-inv-iso-Precategory C f)
+  is-iso-inv-iso-Precategory f =
+    is-iso-iso-Precategory C (inv-iso-Precategory f)
 ```
 
 ### Groupoid laws of isomorphisms in precategories
@@ -517,6 +524,33 @@ module _
       ( comp-iso-Precategory C f (inv-iso-Precategory C f))
       ( id-iso-Precategory C)
       ( is-section-hom-inv-iso-Precategory C f)
+```
+
+### The inverse operation is a fibered involution on isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  where
+
+  is-fibered-involution-inv-iso-Precategory :
+    {x y : obj-Precategory C} →
+    inv-iso-Precategory C {y} {x} ∘ inv-iso-Precategory C {x} {y} ~ id
+  is-fibered-involution-inv-iso-Precategory f = refl
+
+  is-equiv-inv-iso-Precategory :
+    {x y : obj-Precategory C} → is-equiv (inv-iso-Precategory C {x} {y})
+  is-equiv-inv-iso-Precategory =
+    is-equiv-is-invertible
+      ( inv-iso-Precategory C)
+      ( is-fibered-involution-inv-iso-Precategory)
+      ( is-fibered-involution-inv-iso-Precategory)
+
+  equiv-inv-iso-Precategory :
+    {x y : obj-Precategory C} → iso-Precategory C x y ≃ iso-Precategory C y x
+  pr1 equiv-inv-iso-Precategory = inv-iso-Precategory C
+  pr2 equiv-inv-iso-Precategory = is-equiv-inv-iso-Precategory
 ```
 
 ### A morphism `f` is an isomorphism if and only if precomposition by `f` is an equivalence
@@ -686,15 +720,17 @@ module _
   {x y : obj-Precategory C}
   where
 
-  is-prop-iso-Precategory :
+  is-prop-iso-is-prop-hom-Precategory :
     is-prop (hom-Precategory C x y) → is-prop (iso-Precategory C x y)
-  is-prop-iso-Precategory = is-prop-type-subtype (is-iso-prop-Precategory C)
+  is-prop-iso-is-prop-hom-Precategory =
+    is-prop-type-subtype (is-iso-prop-Precategory C)
 
-  iso-prop-Precategory :
+  iso-prop-is-prop-hom-Precategory :
     is-prop (hom-Precategory C x y) → Prop l2
-  pr1 (iso-prop-Precategory _) = iso-Precategory C x y
-  pr2 (iso-prop-Precategory is-prop-hom-C-x-y) =
-    is-prop-iso-Precategory is-prop-hom-C-x-y
+  pr1 (iso-prop-is-prop-hom-Precategory is-prop-hom-C-x-y) =
+    iso-Precategory C x y
+  pr2 (iso-prop-is-prop-hom-Precategory is-prop-hom-C-x-y) =
+    is-prop-iso-is-prop-hom-Precategory is-prop-hom-C-x-y
 ```
 
 ### When `hom x y` and `hom y x` are propositions, it suffices to provide a morphism in each direction to construct an isomorphism

@@ -58,10 +58,10 @@ module _
       ( obj-map-Small-Large-Precategory C D F x)
       ( obj-map-Small-Large-Precategory C D G x)
 
-  coherence-square-hom-family-map-Small-Large-Precategory :
+  naturality-hom-family-map-Small-Large-Precategory :
     hom-family-map-Small-Large-Precategory →
     {x y : obj-Precategory C} (f : hom-Precategory C x y) → UU (β γF γG)
-  coherence-square-hom-family-map-Small-Large-Precategory γ {x} {y} f =
+  naturality-hom-family-map-Small-Large-Precategory γ {x} {y} f =
     coherence-square-hom-Large-Precategory D
       ( hom-map-Small-Large-Precategory C D F f)
       ( γ x)
@@ -72,7 +72,7 @@ module _
     hom-family-map-Small-Large-Precategory → UU (l1 ⊔ l2 ⊔ β γF γG)
   is-natural-transformation-map-Small-Large-Precategory γ =
     {x y : obj-Precategory C} (f : hom-Precategory C x y) →
-    coherence-square-hom-family-map-Small-Large-Precategory γ f
+    naturality-hom-family-map-Small-Large-Precategory γ f
 
   natural-transformation-map-Small-Large-Precategory : UU (l1 ⊔ l2 ⊔ β γF γG)
   natural-transformation-map-Small-Large-Precategory =
@@ -84,11 +84,11 @@ module _
     hom-family-map-Small-Large-Precategory
   hom-family-natural-transformation-map-Small-Large-Precategory = pr1
 
-  coherence-square-natural-transformation-map-Small-Large-Precategory :
+  naturality-natural-transformation-map-Small-Large-Precategory :
     (γ : natural-transformation-map-Small-Large-Precategory) →
     is-natural-transformation-map-Small-Large-Precategory
       ( hom-family-natural-transformation-map-Small-Large-Precategory γ)
-  coherence-square-natural-transformation-map-Small-Large-Precategory = pr2
+  naturality-natural-transformation-map-Small-Large-Precategory = pr2
 ```
 
 ## Composition and identity of natural transformations
@@ -140,7 +140,7 @@ module _
       ( comp-hom-Large-Precategory' D
         ( hom-family-natural-transformation-map-Small-Large-Precategory
             C D F G α X))
-      ( coherence-square-natural-transformation-map-Small-Large-Precategory
+      ( naturality-natural-transformation-map-Small-Large-Precategory
           C D G H β f)) ∙
     ( associative-comp-hom-Large-Precategory D
       ( hom-family-natural-transformation-map-Small-Large-Precategory
@@ -152,7 +152,7 @@ module _
       ( comp-hom-Large-Precategory D
         ( hom-family-natural-transformation-map-Small-Large-Precategory
             C D G H β Y))
-      ( coherence-square-natural-transformation-map-Small-Large-Precategory
+      ( naturality-natural-transformation-map-Small-Large-Precategory
           C D F G α f)) ∙
     ( inv
       ( associative-comp-hom-Large-Precategory D

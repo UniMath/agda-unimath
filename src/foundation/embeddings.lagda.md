@@ -44,13 +44,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-prop-is-emb : (f : A → B) → is-prop (is-emb f)
-  is-prop-is-emb f =
+  is-property-is-emb : (f : A → B) → is-prop (is-emb f)
+  is-property-is-emb f =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv (ap f)))
 
   is-emb-Prop : (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-emb-Prop f) = is-emb f
-  pr2 (is-emb-Prop f) = is-prop-is-emb f
+  pr2 (is-emb-Prop f) = is-property-is-emb f
 ```
 
 ### Embeddings are closed under homotopies

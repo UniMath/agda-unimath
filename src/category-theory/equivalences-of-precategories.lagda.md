@@ -59,5 +59,5 @@ module _
 
 ```agda
   equiv-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-Precategory = Σ (functor-Precategory C D) is-equiv-functor-Precategory
+  equiv-Precategory = Σ (functor-Precategory C D) (is-equiv-functor-Precategory)
 ```

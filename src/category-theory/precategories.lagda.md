@@ -16,6 +16,8 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
 
@@ -167,6 +169,21 @@ module _
     associative-comp-hom-Precategory C
 ```
 
+### The total hom-type of a precategory
+
+```agda
+total-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
+total-hom-Precategory C =
+  total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
+
+obj-total-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) →
+  total-hom-Precategory C → obj-Precategory C × obj-Precategory C
+obj-total-hom-Precategory C =
+  obj-total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
+```
+
 ### Equalities induce morphisms
 
 ```agda
@@ -184,21 +201,6 @@ module _
   hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
 ```
 
-### The total hom-type of a precategory
-
-```agda
-total-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
-total-hom-Precategory C =
-  total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
-
-obj-total-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) →
-  total-hom-Precategory C → obj-Precategory C × obj-Precategory C
-obj-total-hom-Precategory C =
-  obj-total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
-```
-
 ### Pre- and postcomposition by a morphism
 
 ```agda
@@ -213,4 +215,26 @@ postcomp-hom-Precategory :
   (f : hom-Precategory C x y) (z : obj-Precategory C) →
   hom-Precategory C z x → hom-Precategory C z y
 postcomp-hom-Precategory C f z = comp-hom-Precategory C f
+```
+
+## If the objects of a precategory are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} (C : Precategory l1 l2)
+  where
+
+  is-trunc-total-hom-is-trunc-obj-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Precategory C) →
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (total-hom-Precategory C)
+  is-trunc-total-hom-is-trunc-obj-Precategory =
+    is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+
+  total-hom-truncated-type-is-trunc-obj-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Precategory C) →
+    Truncated-Type (l1 ⊔ l2) (succ-𝕋 (succ-𝕋 k))
+  total-hom-truncated-type-is-trunc-obj-Precategory =
+    total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
 ```
