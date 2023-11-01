@@ -20,8 +20,8 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.semigroups
 open import group-theory.monoids
+open import group-theory.semigroups
 
 open import higher-group-theory.higher-groups
 
