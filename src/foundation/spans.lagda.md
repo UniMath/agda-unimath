@@ -8,16 +8,22 @@ module foundation.spans where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-duality
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -135,8 +141,65 @@ module _
 
 ### Spans are equivalent to binary relations
 
-This remains to be shown.
-[#767](https://github.com/UniMath/agda-unimath/issues/767)
+Using the principles of [type duality](foundation.type-duality.md) and
+[type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md),
+we can show that the type of spans `A <-- S --> B` is
+[equivalent](foundation.equivalences.md) to the type of type-valued binary
+relations `A → B → 𝓤`.
+
+```agda
+module _
+  { l1 l2 l : Level} (A : UU l1) (B : UU l2)
+  where
+
+  equiv-span-binary-relation :
+    ( A → B → UU (l1 ⊔ l2 ⊔ l)) ≃ span (l1 ⊔ l2 ⊔ l) A B
+  equiv-span-binary-relation =
+    ( associative-Σ (UU (l1 ⊔ l2 ⊔ l)) (λ X → X → A) (λ T → pr1 T → B)) ∘e
+    ( equiv-Σ (λ T → pr1 T → B) (equiv-Pr1 (l2 ⊔ l) A) (λ P → equiv-ind-Σ)) ∘e
+    ( distributive-Π-Σ) ∘e
+    ( equiv-Π-equiv-family
+      ( λ a → equiv-Pr1 (l1 ⊔ l) B))
+
+  span-binary-relation :
+    ( A → B → UU (l1 ⊔ l2 ⊔ l)) → span (l1 ⊔ l2 ⊔ l) A B
+  pr1 (span-binary-relation R) = Σ A (λ a → Σ B (λ b → R a b))
+  pr1 (pr2 (span-binary-relation R)) = pr1
+  pr2 (pr2 (span-binary-relation R)) = pr1 ∘ pr2
+
+  compute-span-binary-relation :
+    map-equiv equiv-span-binary-relation ~ span-binary-relation
+  compute-span-binary-relation = refl-htpy
+
+  binary-relation-span :
+    span (l1 ⊔ l2 ⊔ l) A B → (A → B → UU (l1 ⊔ l2 ⊔ l))
+  binary-relation-span S a b =
+    Σ ( domain-span S)
+      ( λ s → (left-map-span S s ＝ a) × (right-map-span S s ＝ b))
+
+  compute-binary-relation-span :
+    map-inv-equiv equiv-span-binary-relation ~ binary-relation-span
+  compute-binary-relation-span S =
+    inv
+      ( map-eq-transpose-equiv equiv-span-binary-relation
+        ( eq-htpy-span
+          ( l1 ⊔ l2 ⊔ l)
+          ( A)
+          ( B)
+          ( _)
+          ( _)
+          ( ( equiv-pr1 (λ s → is-torsorial-path (left-map-span S s))) ∘e
+            ( equiv-left-swap-Σ) ∘e
+            ( equiv-tot
+              ( λ a →
+                ( equiv-tot
+                  ( λ s →
+                    equiv-pr1 (λ _ → is-torsorial-path (right-map-span S s)) ∘e
+                    equiv-left-swap-Σ)) ∘e
+                ( equiv-left-swap-Σ))) ,
+            ( inv-htpy (pr1 ∘ pr2 ∘ pr2 ∘ pr2)) ,
+            ( inv-htpy (pr2 ∘ pr2 ∘ pr2 ∘ pr2)))))
+```
 
 ## See also
 

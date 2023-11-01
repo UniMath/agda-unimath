@@ -721,7 +721,7 @@ module _
             ( ap
               ( concat' (g (i a)) (M (f a)))
               ( is-section-map-inv-is-equiv
-                ( K (i a) ((j (f a))))
+                ( K (i a) (j (f a)))
                 ( L a ∙ inv (M (f a))))) ∙
             ( is-section-inv-concat' (g (i a)) (M (f a)) (L a)))))
     where

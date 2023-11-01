@@ -159,7 +159,7 @@ abstract
     is-trunc-is-equiv' k A f is-equiv-f
 ```
 
-### If a type embeds into a `k+1`-truncated type, then it is (k+1)-truncated
+### If a type embeds into a `k+1`-truncated type, then it is `k+1`-truncated
 
 ```agda
 abstract
