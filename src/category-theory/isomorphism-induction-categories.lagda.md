@@ -13,14 +13,11 @@ open import category-theory.isomorphisms-in-categories
 
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.sections
-open import foundation.torsorial-type-families
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 ```
