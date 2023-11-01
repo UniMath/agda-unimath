@@ -9,10 +9,11 @@ module foundation.binary-type-duality where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.equivalences-spans
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.equivalences-spans
 open import foundation.spans
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-duality
@@ -21,7 +22,6 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
@@ -100,4 +100,3 @@ module _
             ( inv-htpy (pr1 ∘ pr2 ∘ pr2 ∘ pr2)) ,
             ( inv-htpy (pr2 ∘ pr2 ∘ pr2 ∘ pr2)))))
 ```
-

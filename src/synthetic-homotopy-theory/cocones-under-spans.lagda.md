@@ -50,7 +50,11 @@ A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
 
 [commutes](foundation.commuting-squares-of-maps.md).
 
-Equivalently, a cocone with codomain `X` under a span `s` given by `A <-f- S -g-> B` can be described as a [morphism of spans](foundation.morphisms-spans.md) from `s` into the constant span at `X`. In other words, a cocone under `s` with codomain `X` is a commuting diagram of the form
+Equivalently, a cocone with codomain `X` under a span `s` given by
+`A <-f- S -g-> B` can be described as a
+[morphism of spans](foundation.morphisms-spans.md) from `s` into the constant
+span at `X`. In other words, a cocone under `s` with codomain `X` is a commuting
+diagram of the form
 
 ```text
          f       g
@@ -69,7 +73,7 @@ Equivalently, a cocone with codomain `X` under a span `s` given by `A <-f- S -g-
 module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
   where
-  
+
   cocone-span :
     UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   cocone-span X =
@@ -211,7 +215,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3) {X : UU l4} {Y : UU l5}
   where
-  
+
   cocone-span-map : cocone-span s X → (X → Y) → cocone-span s Y
   pr1 (cocone-span-map c h) = h ∘ horizontal-map-cocone-span s c
   pr1 (pr2 (cocone-span-map c h)) = h ∘ vertical-map-cocone-span s c
@@ -220,7 +224,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4}
   where
-  
+
   cocone-span-map-id :
     (c : cocone-span s X) → cocone-span-map s c id ＝ c
   cocone-span-map-id c =
@@ -231,7 +235,7 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {X : UU l4} {Y : UU l5} {Z : UU l6}
   where
-  
+
   cocone-span-map-comp :
     (c : cocone-span s X) (h : X → Y) (k : Y → Z) →
     cocone-span-map s c (k ∘ h) ＝ cocone-span-map s (cocone-span-map s c h) k
@@ -255,7 +259,7 @@ module _
   { l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span s → C)
   where
-  
+
   horizontal-comp-cocone-span :
     ( c : cocone-span s X) →
     cocone-span (make-span (vertical-map-cocone-span s c) h) Y →
@@ -302,7 +306,7 @@ module _
   {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span s → C)
   (j : codomain-span s → X) (i : domain-span s → X)
   where
-  
+
   horizontal-comp-cocone-span' :
     cocone-span (make-span j h) Y →
     coherence-square-maps (right-map-span s) (left-map-span s) j i →
@@ -331,7 +335,7 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {C : UU l4} (h : domain-span s → C) {X : UU l5} {Y : UU l6}
   where
-  
+
   vertical-comp-cocone-span :
     (c : cocone-span s X) →
     cocone-span (make-span h (horizontal-map-cocone-span s c)) Y →
@@ -381,7 +385,7 @@ module _
   {C : UU l4} {X : UU l5} {Y : UU l6} (h : domain-span s → C)
   (i : domain-span s → X) (j : codomain-span s → X)
   where
-  
+
   vertical-comp-cocone-span' :
     cocone-span (make-span h i) Y →
     coherence-square-maps (right-map-span s) (left-map-span s) j i →
@@ -430,7 +434,7 @@ module _
   (s' : span l1 l2 l3) (s : span l4 l5 l6) (h : hom-span s' s)
   {X : UU l7}
   where
-  
+
   comp-cocone-span-hom-span :
     cocone-span s X → cocone-span s' X
   pr1 (comp-cocone-span-hom-span c) =

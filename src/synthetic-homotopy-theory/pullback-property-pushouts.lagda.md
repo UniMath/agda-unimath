@@ -52,7 +52,7 @@ module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
   {X : UU l4} (c : cocone-span s X)
   where
-  
+
   cone-pullback-property-pushout :
     {l : Level} (Y : UU l) →
     cone (_∘ left-map-span s) (_∘ right-map-span s) (X → Y)

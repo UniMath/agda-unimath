@@ -32,8 +32,8 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-We consider four concepts of equivalences between spans, according to our different
-concepts of spans:
+We consider four concepts of equivalences between spans, according to our
+different concepts of spans:
 
 - Equivalences of (binary) spans with fixed domain and codomain.
 - Equivalences of (binary) spans.
@@ -44,7 +44,8 @@ concepts of spans:
 
 A **equivalence of spans with fixed domain and codomain** from a
 [span](foundation.spans.md) `A <-f- S -g-> B` to a span `A <-h- T -k-> B`
-consists of an [equivalence](foundation-core.equivalences.md) `w : S ≃ T` [equipped](foundation.structure.md) with two
+consists of an [equivalence](foundation-core.equivalences.md) `w : S ≃ T`
+[equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
 ```text
@@ -63,9 +64,9 @@ consists of an [equivalence](foundation-core.equivalences.md) `w : S ≃ T` [equ
 
 ### Equivalences of binary spans
 
-A **equivalence of spans** from a [span](foundation.spans.md) `A <-f- S -g-> B` to
-a span `C <-h- T -k-> D` consists of equivalences `u : A ≃ C`, `v : B ≃ D`, and
-`w : S ≃ T` [equipped](foundation.structure.md) with two
+A **equivalence of spans** from a [span](foundation.spans.md) `A <-f- S -g-> B`
+to a span `C <-h- T -k-> D` consists of equivalences `u : A ≃ C`, `v : B ≃ D`,
+and `w : S ≃ T` [equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
 ```text
@@ -82,8 +83,9 @@ commutes.
 
 ### Equivalences of spans of families of types
 
-The notion of **equivalence of spans of (fixed) families of types** is the natural
-generalization of the notion of equivalences of (fixed) families of types.
+The notion of **equivalence of spans of (fixed) families of types** is the
+natural generalization of the notion of equivalences of (fixed) families of
+types.
 
 ## Definitions
 

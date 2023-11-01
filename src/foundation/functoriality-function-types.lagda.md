@@ -110,7 +110,8 @@ module _
     equiv-fiber (precomp f X) (g ∘ f)
 
   compute-total-fiber-precomp :
-    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone-span (make-span f f) X
+    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃
+    cocone-span (make-span f f) X
   compute-total-fiber-precomp =
     equiv-tot compute-fiber-precomp
 ```

@@ -334,4 +334,6 @@ module _
 ## See also
 
 - The dual concept of spans is [cospans](foundation.cospans.md).
-- In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we show that [binary relations](foundation.binary-relations.md) are equivalently described as spans of types.
+- In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we
+  show that [binary relations](foundation.binary-relations.md) are equivalently
+  described as spans of types.

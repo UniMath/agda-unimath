@@ -96,7 +96,7 @@ module _
   { X : UU l4} (c : cocone-span s X)
   ( H : induction-principle-pushout s c)
   where
-  
+
   htpy-eq-dependent-cocone-span-map :
     {l : Level} {P : X → UU l} (h h' : (x : X) → P x) →
     dependent-cocone-span-map s c P h ＝ dependent-cocone-span-map s c P h' →
@@ -168,7 +168,7 @@ induction-principle-pushout-dependent-universal-property-pushout s c H P =
 module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
   where
-  
+
   triangle-dependent-pullback-property-pushout :
     {l5 : Level} (P : X → UU l5) →
     let i = pr1 c
@@ -223,7 +223,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
   where
-  
+
   dependent-universal-property-dependent-pullback-property-pushout :
     dependent-pullback-property-pushout s c →
     dependent-universal-property-pushout s c

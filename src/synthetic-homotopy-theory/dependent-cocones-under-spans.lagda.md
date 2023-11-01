@@ -102,7 +102,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
   {X : UU l4} (c : cocone-span s X) (P : X → UU l5)
   where
-  
+
   dependent-cocone-span-map :
     ((x : X) → P x) → dependent-cocone-span s c P
   pr1 (dependent-cocone-span-map h) a =

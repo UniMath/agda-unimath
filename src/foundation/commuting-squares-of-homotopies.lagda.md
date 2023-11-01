@@ -39,7 +39,7 @@ module _
   where
 
   coherence-square-homotopies :
-     (top : f ~ g)(left : f ~ h) (right : g ~ i) (bottom : h ~ i) → UU (l1 ⊔ l2)
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) → UU (l1 ⊔ l2)
   coherence-square-homotopies top left right bottom =
     left ∙h bottom ~ top ∙h right
 ```

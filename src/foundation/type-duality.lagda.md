@@ -338,4 +338,6 @@ fiber-Σ {l1} {l2} X A =
 
 ## See also
 
-- In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we show that [binary relations](foundation.binary-relations.md) are equivalently described as [spans of types](foundation.spans.md).
+- In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we
+  show that [binary relations](foundation.binary-relations.md) are equivalently
+  described as [spans of types](foundation.spans.md).

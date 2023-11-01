@@ -23,6 +23,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.morphisms-spans
 open import foundation.pullbacks
 open import foundation.spans
 open import foundation.subtype-identity-principle
@@ -236,15 +237,15 @@ uniquely-unique-pushout s c d up-c up-d =
 ### The universal property of pushouts is equivalent to the pullback property of pushouts
 
 In order to show that the universal property of pushouts is equivalent to the
-pullback property, we show that the maps `cocone-span-map` and the gap map fit in a
-commuting triangle, where the third map is an equivalence. The claim then
+pullback property, we show that the maps `cocone-span-map` and the gap map fit
+in a commuting triangle, where the third map is an equivalence. The claim then
 follows from the 3-for-2 property of equivalences.
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
   where
-  
+
   triangle-pullback-property-pushout-universal-property-pushout :
     {l : Level} (Y : UU l) →
     cocone-span-map s c ~
@@ -350,7 +351,7 @@ pr2 (equiv-universal-property-pushout e g c up-c) =
 module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {C : UU l4} (c : cocone-span s C)
   where
-  
+
   is-equiv-universal-property-pushout' :
     is-equiv (right-map-span s) →
     universal-property-pushout s c →
@@ -587,34 +588,36 @@ f' |       | f     |
 ```agda
 module _
   { l1 l2 l3 l4 l5 l6 : Level}
-  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {A' : UU l6}
-  ( f : S → A) (g : S → B) (i : S' → S) (j : A' → A) (f' : S' → A')
-  ( c : cocone-span f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
-  ( coh : coherence-square-maps i f' f j)
+  ( s : span l1 l2 l3) {X : UU l4} {S' : UU l5} {A' : UU l6}
+  ( i : S' → spanning-type-span s) (j : A' → domain-span s) (f' : S' → A')
+  ( c : cocone-span s X)
+  ( up-c : universal-property-pushout s c)
+  ( coh : coherence-square-maps i f' (left-map-span s) j)
   where
 
   universal-property-pushout-left-extended-by-equivalences :
     is-equiv i → is-equiv j →
-    {l : Level} →
-    universal-property-pushout l
-      ( f')
-      ( g ∘ i)
-      ( horizontal-comp-cocone-span' f' i g f j c coh)
+    universal-property-pushout
+      ( make-span f' (right-map-span s ∘ i))
+      ( horizontal-comp-cocone-span'
+        ( make-span f' i)
+        ( right-map-span s)
+        ( left-map-span s)
+        ( j)
+        ( c)
+        ( coh))
   universal-property-pushout-left-extended-by-equivalences ie je =
-    universal-property-pushout-rectangle-universal-property-pushout-right f' i g
-      ( j , f , coh)
+    universal-property-pushout-rectangle-universal-property-pushout-right
+      ( make-span f' i)
+      ( right-map-span s)
+      ( j , left-map-span s , coh)
       ( c)
-      ( universal-property-pushout-is-equiv' f' i (j , f , coh) ie je)
+      ( universal-property-pushout-is-equiv'
+        ( make-span f' i)
+        ( j , left-map-span s , coh)
+        ( ie)
+        ( je))
       ( up-c)
-
-  universal-property-pushout-left-extension-by-equivalences :
-    {l : Level} → is-equiv i → is-equiv j →
-    Σ (cocone f' (g ∘ i) X) (universal-property-pushout l f' (g ∘ i))
-  pr1 (universal-property-pushout-left-extension-by-equivalences ie je) =
-    cocone-comp-horizontal' f' i g f j c coh
-  pr2 (universal-property-pushout-left-extension-by-equivalences ie je) =
-    universal-property-pushout-left-extended-by-equivalences ie je
 ```
 
 #### The vertical pushout pasting lemma
@@ -624,151 +627,156 @@ rectangle is a pushout if and only if the bottom square is a pushout.
 
 ```text
        g
-   A -----> X
+   S -----> B
    |        |
   f|        |
    v        v
-   B -----> Y
+   A -----> X
    |        |
-  k|        |
+  h|        |
    v        v
-   C -----> Z
+   C -----> Y
 ```
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( f : A → B) (g : A → X) (k : B → C)
-  ( c : cocone-span f g Y) (d : cocone-span k (horizontal-map-cocone-span f g c) Z)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  { l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
+  { C : UU l4} {X : UU l5} {Y : UU l6} (h : domain-span s → C)
+  ( c : cocone-span s X)
+  ( d : cocone-span (make-span h (horizontal-map-cocone-span s c)) Y)
+  ( up-c : universal-property-pushout s c)
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-top :
-    ( {l : Level} →
-      universal-property-pushout l k (horizontal-map-cocone-span f g c) d) →
-    ( {l : Level} →
-      universal-property-pushout l (k ∘ f) g (vertical-comp-cocone-span f g k c d))
-  universal-property-pushout-rectangle-universal-property-pushout-top
-    ( up-d)
-    { l} =
-    universal-property-pushout-pullback-property-pushout l
-      ( k ∘ f)
-      ( g)
-      ( vertical-comp-cocone-span f g k c d)
+    ( universal-property-pushout
+      ( make-span h (horizontal-map-cocone-span s c))
+      ( d)) →
+    ( universal-property-pushout
+      ( make-span (h ∘ left-map-span s) (right-map-span s))
+      ( vertical-comp-cocone-span s h c d))
+  universal-property-pushout-rectangle-universal-property-pushout-top up-d =
+    universal-property-pushout-pullback-property-pushout
+      ( make-span (h ∘ left-map-span s) (right-map-span s))
+      ( vertical-comp-cocone-span s h c d)
       ( λ W →
         tr
-          ( is-pullback (precomp (k ∘ f) W) (precomp g W))
+          ( is-pullback (precomp (h ∘ left-map-span s) W) (precomp (right-map-span s) W))
           ( inv
             ( eq-htpy-cone
-              ( precomp (k ∘ f) W)
-              ( precomp g W)
+              ( precomp (h ∘ left-map-span s) W)
+              ( precomp (right-map-span s) W)
               ( cone-pullback-property-pushout
-                ( k ∘ f)
-                ( g)
-                ( vertical-comp-cocone-span f g k c d)
+                ( make-span (h ∘ left-map-span s) (right-map-span s))
+                ( vertical-comp-cocone-span s h c d)
                 ( W))
               ( pasting-horizontal-cone
-                ( precomp k W)
-                ( precomp f W)
-                ( precomp g W)
-                ( cone-pullback-property-pushout f g c W)
-                ( cone-pullback-property-pushout k
-                  ( horizontal-map-cocone-span f g c)
+                ( precomp h W)
+                ( precomp (left-map-span s) W)
+                ( precomp (right-map-span s) W)
+                ( cone-pullback-property-pushout s c W)
+                ( cone-pullback-property-pushout
+                  ( make-span h (horizontal-map-cocone-span s c))
                   ( d)
                   ( W)))
               ( refl-htpy ,
                 refl-htpy ,
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-vertical-coherence-square-maps W
-                  ( g)
-                  ( f)
-                  ( vertical-map-cocone-span f g c)
-                  ( horizontal-map-cocone-span f g c)
-                  ( k)
-                  ( vertical-map-cocone-span k (horizontal-map-cocone-span f g c) d)
-                  ( horizontal-map-cocone-span k (horizontal-map-cocone-span f g c) d)
-                  ( coherence-square-cocone-span f g c)
-                  ( coherence-square-cocone-span k
-                    ( horizontal-map-cocone-span f g c)
+                  ( right-map-span s)
+                  ( left-map-span s)
+                  ( vertical-map-cocone-span s c)
+                  ( horizontal-map-cocone-span s c)
+                  ( h)
+                  ( vertical-map-cocone-span
+                    ( make-span h (horizontal-map-cocone-span s c))
+                    ( d))
+                  ( horizontal-map-cocone-span
+                    ( make-span h (horizontal-map-cocone-span s c))
+                    ( d))
+                  ( coherence-square-cocone-span s c)
+                  ( coherence-square-cocone-span
+                    ( make-span h (horizontal-map-cocone-span s c))
                     ( d))))))
           ( is-pullback-rectangle-is-pullback-left-square
-            ( precomp k W)
-            ( precomp f W)
-            ( precomp g W)
-            ( cone-pullback-property-pushout f g c W)
-            ( cone-pullback-property-pushout k
-              ( horizontal-map-cocone-span f g c)
+            ( precomp h W)
+            ( precomp (left-map-span s) W)
+            ( precomp (right-map-span s) W)
+            ( cone-pullback-property-pushout s c W)
+            ( cone-pullback-property-pushout
+              ( make-span h (horizontal-map-cocone-span s c))
               ( d)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout l f g c
+            ( pullback-property-pushout-universal-property-pushout s c
               ( up-c)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout l k
-              ( horizontal-map-cocone-span f g c)
+            ( pullback-property-pushout-universal-property-pushout
+              ( make-span h (horizontal-map-cocone-span s c))
               ( d)
               ( up-d)
               ( W))))
 
   universal-property-pushout-top-universal-property-pushout-rectangle :
-    ( {l : Level} →
-      universal-property-pushout l (k ∘ f) g (vertical-comp-cocone-span f g k c d)) →
-    ( {l : Level} →
-      universal-property-pushout l k (horizontal-map-cocone-span f g c) d)
-  universal-property-pushout-top-universal-property-pushout-rectangle
-    ( up-r)
-    { l} =
-    universal-property-pushout-pullback-property-pushout l k
-      ( horizontal-map-cocone-span f g c)
+    universal-property-pushout
+      ( make-span (h ∘ left-map-span s) (right-map-span s))
+      ( vertical-comp-cocone-span s h c d) →
+    universal-property-pushout
+      ( make-span h (horizontal-map-cocone-span s c))
+      ( d)
+  universal-property-pushout-top-universal-property-pushout-rectangle up-r =
+    universal-property-pushout-pullback-property-pushout
+      ( make-span h (horizontal-map-cocone-span s c))
       ( d)
       ( λ W →
         is-pullback-left-square-is-pullback-rectangle
-          ( precomp k W)
-          ( precomp f W)
-          ( precomp g W)
-          ( cone-pullback-property-pushout f g c W)
-          ( cone-pullback-property-pushout k (horizontal-map-cocone-span f g c) d W)
-          ( pullback-property-pushout-universal-property-pushout l f g c up-c W)
+          ( precomp h W)
+          ( precomp (left-map-span s) W)
+          ( precomp (right-map-span s) W)
+          ( cone-pullback-property-pushout s c W)
+          ( cone-pullback-property-pushout
+            ( make-span h (horizontal-map-cocone-span s c))
+            ( d)
+            ( W))
+          ( pullback-property-pushout-universal-property-pushout s c up-c W)
           ( tr
-            ( is-pullback (precomp (k ∘ f) W) (precomp g W))
+            ( is-pullback (precomp (h ∘ left-map-span s) W) (precomp (right-map-span s) W))
             ( eq-htpy-cone
-              ( precomp (k ∘ f) W)
-              ( precomp g W)
+              ( precomp (h ∘ left-map-span s) W)
+              ( precomp (right-map-span s) W)
               ( cone-pullback-property-pushout
-                ( k ∘ f)
-                ( g)
-                ( vertical-comp-cocone-span f g k c d)
+                ( make-span (h ∘ left-map-span s) (right-map-span s))
+                ( vertical-comp-cocone-span s h c d)
                 ( W))
               ( pasting-horizontal-cone
-                ( precomp k W)
-                ( precomp f W)
-                ( precomp g W)
-                ( cone-pullback-property-pushout f g c W)
-                ( cone-pullback-property-pushout k
-                  ( horizontal-map-cocone-span f g c)
+                ( precomp h W)
+                ( precomp (left-map-span s) W)
+                ( precomp (right-map-span s) W)
+                ( cone-pullback-property-pushout s c W)
+                ( cone-pullback-property-pushout
+                  ( make-span h (horizontal-map-cocone-span s c))
                   ( d)
                   ( W)))
               ( refl-htpy ,
                 refl-htpy ,
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-vertical-coherence-square-maps W
-                  ( g)
-                  ( f)
-                  ( vertical-map-cocone-span f g c)
-                  ( horizontal-map-cocone-span f g c)
-                  ( k)
-                  ( vertical-map-cocone-span k
-                    ( horizontal-map-cocone-span f g c)
+                  ( right-map-span s)
+                  ( left-map-span s)
+                  ( vertical-map-cocone-span s c)
+                  ( horizontal-map-cocone-span s c)
+                  ( h)
+                  ( vertical-map-cocone-span
+                    ( make-span h (horizontal-map-cocone-span s c))
                     ( d))
-                  ( horizontal-map-cocone-span k
-                    ( horizontal-map-cocone-span f g c)
+                  ( horizontal-map-cocone-span
+                    ( make-span h (horizontal-map-cocone-span s c))
                     ( d))
-                  ( coherence-square-cocone-span f g c)
-                  ( coherence-square-cocone-span k
-                    ( horizontal-map-cocone-span f g c)
+                  ( coherence-square-cocone-span s c)
+                  ( coherence-square-cocone-span
+                    ( make-span h (horizontal-map-cocone-span s c))
                     ( d)))))
-            ( pullback-property-pushout-universal-property-pushout l (k ∘ f) g
-              ( vertical-comp-cocone-span f g k c d)
+            ( pullback-property-pushout-universal-property-pushout
+              ( make-span (h ∘ left-map-span s) (right-map-span s))
+              ( vertical-comp-cocone-span s h c d)
               ( up-r)
               ( W))))
 ```
@@ -796,35 +804,31 @@ pasting lemma.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {B' : UU l6}
-  ( f : S → A) (g : S → B) (i : S' → S) (j : B' → B) (g' : S' → B')
-  ( c : cocone-span f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
-  ( coh : coherence-square-maps g' i j g)
+  { l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
+  { X : UU l4} {S' : UU l5} {B' : UU l6}
+  ( i : S' → spanning-type-span s) (j : B' → codomain-span s) (g' : S' → B')
+  ( c : cocone-span s X)
+  ( up-c : universal-property-pushout s c)
+  ( coh : coherence-square-maps g' i j (right-map-span s))
   where
 
   universal-property-pushout-top-extended-by-equivalences :
     is-equiv i → is-equiv j →
-    {l : Level} →
-    universal-property-pushout l
-      ( f ∘ i)
-      ( g')
-      ( vertical-comp-cocone-span' i g' j g f c coh)
+    universal-property-pushout
+      ( make-span (left-map-span s ∘ i) g')
+      ( vertical-comp-cocone-span'
+        ( make-span i g')
+        ( j)
+        ( right-map-span s)
+        ( left-map-span s)
+        ( c)
+        ( coh))
   universal-property-pushout-top-extended-by-equivalences ie je =
-    universal-property-pushout-rectangle-universal-property-pushout-top i g' f
-      ( g , j , coh)
+    universal-property-pushout-rectangle-universal-property-pushout-top i g' (left-map-span s)
+      ( right-map-span s , j , coh)
       ( c)
-      ( universal-property-pushout-is-equiv i g' (g , j , coh) ie je)
+      ( universal-property-pushout-is-equiv i g' (right-map-span s , j , coh) ie je)
       ( up-c)
-
-  universal-property-pushout-top-extension-by-equivalences :
-    {l : Level} → is-equiv i → is-equiv j →
-    Σ (cocone (f ∘ i) g' X) (universal-property-pushout l (f ∘ i) g')
-  pr1 (universal-property-pushout-top-extension-by-equivalences ie je) =
-    cocone-comp-vertical' i g' j g f c coh
-  pr2 (universal-property-pushout-top-extension-by-equivalences ie je) =
-    universal-property-pushout-top-extended-by-equivalences ie je
 ```
 
 ### Extending pushouts by equivalences of cocones
@@ -874,9 +878,9 @@ module _
 
   universal-property-pushout-extension-by-equivalences :
     {l : Level} → is-equiv i → is-equiv j → is-equiv k →
-    Σ (cocone f' g' X) (λ d → universal-property-pushout l f' g' d)
+    Σ (cocone-span f' g' X) (λ d → universal-property-pushout l f' g' d)
   universal-property-pushout-extension-by-equivalences ie je ke =
-    universal-property-pushout-top-extension-by-equivalences
+    universal-property-pushout-top-extended-by-equivalences
       ( f')
 
 {-
@@ -911,7 +915,7 @@ module _
     universal-property-pushout l
       ( f')
       ( g')
-      ( comp-cocone-hom-span f g f' g' i j k c coh-l coh-r)
+      ( comp-cocone-span-hom-span f g f' g' i j k c coh-l coh-r)
   universal-property-pushout-extended-by-equivalences ie je ke =
     pr2 (universal-property-pushout-extension-by-equivalences ie je ke)
 ```
