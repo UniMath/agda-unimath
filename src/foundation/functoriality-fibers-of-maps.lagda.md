@@ -65,7 +65,7 @@ module _
     ( map-fiber-cone j h c (i x) ∘ map-fiber-cone i (pr1 c) d x)
   map-fiber-pasting-horizontal-cone
     (g , q , K) (f , p , H) .(f a) (a , refl) =
-    eq-pair-Σ-eq-pr2
+    eq-pair-eq-pr2
       ( ( ap
           ( concat' (h (q (p a))) refl)
           ( distributive-inv-concat (ap j (H a)) (K (p a)))) ∙
@@ -97,7 +97,7 @@ module _
   map-fiber-pasting-vertical-cone
     (p , q , H) (p' , q' , H') .(p (p' a))
     ((.(p' a) , refl) , (a , refl)) =
-    eq-pair-Σ-eq-pr2
+    eq-pair-eq-pr2
       ( ( right-unit) ∙
         ( distributive-inv-concat (H (p' a)) (ap g (H' a))) ∙
         ( ap

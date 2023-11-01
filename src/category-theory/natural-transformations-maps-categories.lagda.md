@@ -74,12 +74,12 @@ module _
       ( F)
       ( G)
 
-  coherence-square-natural-transformation-map-Category :
+  naturality-natural-transformation-map-Category :
     (γ : natural-transformation-map-Category) →
     is-natural-transformation-map-Category
       ( hom-family-natural-transformation-map-Category γ)
-  coherence-square-natural-transformation-map-Category =
-    coherence-square-natural-transformation-map-Precategory
+  naturality-natural-transformation-map-Category =
+    naturality-natural-transformation-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)

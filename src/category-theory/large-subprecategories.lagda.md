@@ -89,8 +89,8 @@ module _
   (P : Large-Subprecategory γ δ C)
   where
 
-  is-in-subtype-obj-Large-Subprecategory :
+  is-in-obj-Large-Subprecategory :
     {l : Level} → obj-Large-Precategory C l → UU (γ l)
-  is-in-subtype-obj-Large-Subprecategory =
+  is-in-obj-Large-Subprecategory =
     is-in-subtype (subtype-obj-Large-Subprecategory P _)
 ```

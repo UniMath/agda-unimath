@@ -15,6 +15,7 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
@@ -50,7 +51,7 @@ module _
   is-prop-is-fully-faithful-map-Precategory :
     is-prop is-fully-faithful-map-Precategory
   is-prop-is-fully-faithful-map-Precategory =
-    is-prop-Π²
+    is-prop-iterated-Π 2
       ( λ x y → is-property-is-equiv (hom-map-Precategory C D F {x} {y}))
 
   is-fully-faithful-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)

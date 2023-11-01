@@ -377,5 +377,4 @@ module _
 ## References
 
 - Egbert Rijke, _The join construction_, 2017
-  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538),
-  [DOI:10.48550](https://doi.org/10.48550/arXiv.1701.07538))
+  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538))

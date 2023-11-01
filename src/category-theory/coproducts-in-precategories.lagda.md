@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.unique-existence
 open import foundation.universe-levels
@@ -121,7 +122,7 @@ module _
   is-prop-is-coproduct-Precategory :
     is-prop (is-coproduct-Precategory C x y p l r)
   is-prop-is-coproduct-Precategory =
-    is-prop-Π³ (λ z f g → is-property-is-contr)
+    is-prop-iterated-Π 3 (λ z f g → is-property-is-contr)
 
   is-coproduct-prop-Precategory : Prop (l1 ⊔ l2)
   pr1 is-coproduct-prop-Precategory = is-coproduct-Precategory C x y p l r
