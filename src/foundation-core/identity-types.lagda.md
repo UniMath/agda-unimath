@@ -132,24 +132,24 @@ module _
     ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r))
   assoc refl q r = refl
 
-  left-unit : {x y : A} {p : x ＝ y} → (refl ∙ p) ＝ p
+  left-unit : {x y : A} {p : x ＝ y} → refl ∙ p ＝ p
   left-unit = refl
 
-  right-unit : {x y : A} {p : x ＝ y} → (p ∙ refl) ＝ p
+  right-unit : {x y : A} {p : x ＝ y} → p ∙ refl ＝ p
   right-unit {p = refl} = refl
 
-  left-inv : {x y : A} (p : x ＝ y) → ((inv p) ∙ p) ＝ refl
+  left-inv : {x y : A} (p : x ＝ y) → inv p ∙ p ＝ refl
   left-inv refl = refl
 
-  right-inv : {x y : A} (p : x ＝ y) → (p ∙ (inv p)) ＝ refl
+  right-inv : {x y : A} (p : x ＝ y) → p ∙ (inv p) ＝ refl
   right-inv refl = refl
 
-  inv-inv : {x y : A} (p : x ＝ y) → (inv (inv p)) ＝ p
+  inv-inv : {x y : A} (p : x ＝ y) → inv (inv p) ＝ p
   inv-inv refl = refl
 
   distributive-inv-concat :
     {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) →
-    (inv (p ∙ q)) ＝ ((inv q) ∙ (inv p))
+    inv (p ∙ q) ＝ inv q ∙ inv p
   distributive-inv-concat refl refl = refl
 ```
 

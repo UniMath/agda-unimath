@@ -12,6 +12,7 @@ open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
@@ -45,7 +46,7 @@ module _
 
   is-prop-is-full-map-Precategory : is-prop is-full-map-Precategory
   is-prop-is-full-map-Precategory =
-    is-prop-Π²
+    is-prop-iterated-Π 2
       ( λ x y → is-prop-is-surjective (hom-map-Precategory C D F {x} {y}))
 
   is-full-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)

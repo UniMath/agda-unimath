@@ -69,12 +69,12 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 
-  coherence-square-natural-transformation-Precategory :
+  naturality-natural-transformation-Precategory :
     (γ : natural-transformation-Precategory) →
     is-natural-transformation-Precategory
       ( hom-family-natural-transformation-Precategory γ)
-  coherence-square-natural-transformation-Precategory =
-    coherence-square-natural-transformation-map-Precategory C D
+  naturality-natural-transformation-Precategory =
+    naturality-natural-transformation-map-Precategory C D
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 ```

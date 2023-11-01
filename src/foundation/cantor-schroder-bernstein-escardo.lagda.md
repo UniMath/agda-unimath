@@ -175,6 +175,6 @@ module _
 
 - Martín H. Escardó, _The Cantor–Schröder–Bernstein Theorem for ∞-groupoids_,
   Journal of Homotopy and Related Structures, Volume 16, Issue 3, 2021
-  ([arXiv:2002.07079](https://arxiv.org/abs/2002.07079),[DOI:10.1007](https://doi.org/10.1007/s40062-021-00284-6))
+  ([arXiv:2002.07079](https://arxiv.org/abs/2002.07079),[DOI:10.1007/S40062-021-00284-6](https://doi.org/10.1007/s40062-021-00284-6))
   - <https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md>
   - <https://github.com/martinescardo/TypeTopology>

@@ -99,8 +99,8 @@ triangle-map-standard-pullback-exponent :
       ( exponent-cone T f g c)))
 triangle-map-standard-pullback-exponent
   {A = A} {B} T f g c h =
-  eq-pair-Σ-eq-pr2
-    ( eq-pair-Σ-eq-pr2
+  eq-pair-eq-pr2
+    ( eq-pair-eq-pr2
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
 
 abstract
@@ -186,7 +186,7 @@ cone-Id' :
   cone (const unit (A × A) t) (diagonal A) (pr1 t ＝ pr2 t)
 pr1 (cone-Id' {A = A} (x , y)) = const (x ＝ y) unit star
 pr1 (pr2 (cone-Id' {A = A} (x , y))) = const (x ＝ y) A x
-pr2 (pr2 (cone-Id' {A = A} (x , y))) p = eq-pair-Σ-eq-pr2 (inv p)
+pr2 (pr2 (cone-Id' {A = A} (x , y))) p = eq-pair-eq-pr2 (inv p)
 
 inv-gap-cone-Id' :
   {l : Level} {A : UU l} (t : A × A) →

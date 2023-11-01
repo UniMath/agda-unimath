@@ -9,7 +9,6 @@ module foundation.transport-along-higher-identifications where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
-open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra

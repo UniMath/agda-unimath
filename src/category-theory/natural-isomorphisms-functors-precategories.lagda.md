@@ -177,7 +177,7 @@ module _
       ( hom-family-natural-transformation-Precategory C D F G
         ( natural-transformation-natural-isomorphism-Precategory))
   coherence-square-natural-isomorphism-Precategory =
-    coherence-square-natural-transformation-Precategory C D F G
+    naturality-natural-transformation-Precategory C D F G
       ( natural-transformation-natural-isomorphism-Precategory)
 
   is-natural-isomorphism-natural-isomorphism-Precategory :
