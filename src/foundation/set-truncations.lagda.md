@@ -150,7 +150,7 @@ module _
   Map-trunc-Set f =
     Σ (type-trunc-Set A → type-Set B) (λ g → g ∘ unit-trunc-Set ~ f)
 
-apply-unival-property-trunc-Set' :
+apply-universal-property-trunc-Set' :
   {l1 l2 : Level} {A : UU l1} (t : type-trunc-Set A) (B : Set l2) →
   (A → type-Set B) → type-Set B
 apply-universal-property-trunc-Set' t B f =
