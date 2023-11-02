@@ -462,6 +462,37 @@ module _
   (f : A → B) (g : B → C)
   where
 
+  sq1 : (a : A) →
+          coherence-square-identifications
+          (compute-north-map-suspension (g ∘ f))
+          (ap (map-suspension (g ∘ f)) (meridian-suspension a))
+          (meridian-suspension ((g ∘ f) a))
+          (compute-south-map-suspension (g ∘ f))
+  sq1 = compute-meridian-map-suspension (g ∘ f)
+
+  sq1' : (a : A) →           coherence-square-identifications
+          (inv (compute-north-map-suspension (g ∘ f)))
+          (meridian-suspension ((g ∘ f) a))
+          (ap (map-suspension (g ∘ f)) (meridian-suspension a))
+          (inv (compute-south-map-suspension (g ∘ f)))
+  sq1' a = coherence-square-identifications-horizontal-inv
+          (ap (map-suspension (g ∘ f)) (meridian-suspension a))
+          (compute-south-map-suspension (g ∘ f))
+          (compute-north-map-suspension (g ∘ f))
+          (meridian-suspension ((g ∘ f) a))
+             ( compute-meridian-map-suspension (g ∘ f) a)
+
+  sq2 : (b : B) →
+          coherence-square-identifications
+          (compute-north-map-suspension g)
+          (ap (map-suspension g) (meridian-suspension b))
+          (meridian-suspension (g b))
+          (compute-south-map-suspension g)
+  sq2 = compute-meridian-map-suspension g
+
+  sq3 : {!!}
+  sq3 = ap (map-suspension g) {!compute-meridian-map-suspension f!}
+
   htpy-function-out-of-suspension-comp-map-suspension :
     htpy-function-out-of-suspension A (map-suspension (g ∘ f)) (map-suspension g ∘ map-suspension f)
   pr1 htpy-function-out-of-suspension-comp-map-suspension =

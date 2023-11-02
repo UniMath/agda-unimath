@@ -8,6 +8,7 @@ module foundation.commuting-squares-of-identifications where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -181,4 +182,38 @@ module _
       left bottom top (right ∙ refl) (inv right-unit)) ∘
     ( coherence-square-identifications-right-paste
       left bottom top right (inv right-unit))
+```
+
+### Inverting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  where
+
+  coherence-square-identifications-horizontal-inv :
+    (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications (inv top) right left (inv bottom)
+  coherence-square-identifications-horizontal-inv left refl refl refl coh =
+    inv coh ∙ right-unit
+```
+
+### Functions acting on squares of identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y z w : A} (f : A → B)
+  where
+
+  coherence-square-identifications-ap :
+    (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications
+      ( ap f top)
+      ( ap f left)
+      ( ap f right)
+      ( ap f bottom)
+  coherence-square-identifications-ap left refl refl refl coh =
+    ap (λ q → ap f q ∙ ap f refl) (inv right-unit ∙ coh)
 ```
