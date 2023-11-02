@@ -11,16 +11,16 @@ open import foundation-core.equality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.universe-levels
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.function-extensionality
-open import foundation.contractible-types
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.identity-types
@@ -191,7 +191,7 @@ module _
     eq-base-eq-pair-Σ p ＝
     eq-base-eq-pair-Σ (eq-base-eq-pair-Σ (ap (map-inv-associative-Σ A B C) p))
   coh-triple-eq-Σ refl = refl
-    
+
   dependent-eq-family-eq-iterated-Σ :
     (s t : Σ A (λ x → Σ (B x) λ y → C (x , y))) (p : s ＝ t) →
     dependent-identification B (eq-base-eq-pair-Σ p) (pr1 (pr2 s)) (pr1 (pr2 t))
@@ -204,7 +204,6 @@ module _
             ( map-inv-associative-Σ A B C s)
             ( map-inv-associative-Σ A B C t))
           ( ap (map-inv-associative-Σ A B C) p))))
-    
 ```
 
 ## See also
