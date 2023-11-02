@@ -15,6 +15,12 @@ open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.function-extensionality
+open import foundation.contractible-types
+open import foundation.type-arithmetic-dependent-pair-types
 
 open import foundation-core.function-types
 open import foundation-core.identity-types
@@ -113,7 +119,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {Y : UU l3} (f : Σ A B → Y)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {Y : UU l3} (f : Σ A B → Y)
   where
 
   compute-ap-eq-pair-Σ :
@@ -127,7 +133,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
   triangle-eq-pair-Σ :
@@ -135,6 +141,70 @@ module _
     { b : B a} {b' : B a'} (q : dependent-identification B p b b') →
     eq-pair-Σ p q ＝ (eq-pair-Σ p refl ∙ eq-pair-Σ refl q)
   triangle-eq-pair-Σ refl q = refl
+```
+
+### Computing dependent identifications in iterated dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
+  where
+
+  equiv-triple-eq-Σ :
+    (s t : Σ (Σ A B) C) →
+    (s ＝ t) ≃
+    ( Σ
+      ( Σ
+        ( pr1 (pr1 s) ＝ pr1 (pr1 t))
+        ( λ p → dependent-identification B p (pr2 (pr1 s)) (pr2 (pr1 t))))
+      ( λ q → dependent-identification C (eq-pair-Σ' q) (pr2 s) (pr2 t)))
+  equiv-triple-eq-Σ s t =
+    ( equiv-Σ
+      ( λ q →
+        ( dependent-identification
+          ( C)
+          ( eq-pair-Σ' q)
+          ( pr2 s)
+          ( pr2 t)))
+      ( equiv-pair-eq-Σ (pr1 s) (pr1 t))
+      ( λ p →
+        ( equiv-tr
+          ( λ q → dependent-identification C q (pr2 s) (pr2 t))
+          ( map-equiv-ap
+            ( equiv-pair-eq-Σ (pr1 s) (pr1 t))
+            ( p)
+            ( eq-pair-Σ' (pair-eq-Σ p))
+        ( inv-map-eq-transpose-equiv'
+          ( equiv-pair-eq-Σ (pr1 s) (pr1 t))
+          ( htpy-eq
+            ( eq-base-eq-pair-Σ
+              ( eq-is-contr'
+                ( is-contr-section-is-equiv
+                  ( is-equiv-pair-eq-Σ (pr1 s) (pr1 t)))
+                ( section-is-equiv (is-equiv-pair-eq-Σ (pr1 s) (pr1 t)))
+                ( eq-pair-Σ' , is-retraction-pair-eq-Σ (pr1 s) (pr1 t))))
+            ( pair-eq-Σ p))))))) ∘e
+    ( equiv-pair-eq-Σ s t)
+
+  coh-triple-eq-Σ :
+    {s t : Σ A (λ x → Σ (B x) λ y → C (x , y))} (p : s ＝ t) →
+    eq-base-eq-pair-Σ p ＝
+    eq-base-eq-pair-Σ (eq-base-eq-pair-Σ (ap (map-inv-associative-Σ A B C) p))
+  coh-triple-eq-Σ refl = refl
+    
+  dependent-eq-family-eq-iterated-Σ :
+    (s t : Σ A (λ x → Σ (B x) λ y → C (x , y))) (p : s ＝ t) →
+    dependent-identification B (eq-base-eq-pair-Σ p) (pr1 (pr2 s)) (pr1 (pr2 t))
+  dependent-eq-family-eq-iterated-Σ s t p =
+    ( ap (λ q → tr B q (pr1 (pr2 s))) (coh-triple-eq-Σ p)) ∙
+    ( pr2
+      ( pr1
+        ( map-equiv
+          ( equiv-triple-eq-Σ
+            ( map-inv-associative-Σ A B C s)
+            ( map-inv-associative-Σ A B C t))
+          ( ap (map-inv-associative-Σ A B C) p))))
+    
 ```
 
 ## See also
