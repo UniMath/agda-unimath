@@ -7,22 +7,18 @@ module category-theory.subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
-open import category-theory.isomorphism-induction-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.function-types
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subsingleton-induction
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -44,24 +40,39 @@ objects in `P₀` and is closed under composition.
 
 ## Definition
 
+### Sub-hom-families
+
+```agda
+subtype-hom-Precategory :
+  {l1 l2 l3 : Level} (l4 : Level)
+  (C : Precategory l1 l2)
+  (P₀ : subtype l3 (obj-Precategory C)) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
+subtype-hom-Precategory l4 C P₀ =
+  (x y : obj-Precategory C) → is-in-subtype P₀ x → is-in-subtype P₀ y →
+  subtype l4 (hom-Precategory C x y)
+```
+
+### Categorical predicates on sub-hom-families
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (P₀ : subtype l3 (obj-Precategory C))
-  (P₁ : (x y : obj-Precategory C) → subtype l4 (hom-Precategory C x y))
+  (P₁ : subtype-hom-Precategory l4 C P₀)
   where
 
   contains-id-subtype-Precategory : UU (l1 ⊔ l3 ⊔ l4)
   contains-id-subtype-Precategory =
     (x : obj-Precategory C) →
-    is-in-subtype P₀ x → is-in-subtype (P₁ x x) (id-hom-Precategory C)
+    (x₀ : is-in-subtype P₀ x) →
+    is-in-subtype (P₁ x x x₀ x₀) (id-hom-Precategory C)
 
   is-prop-contains-id-subtype-Precategory :
     is-prop contains-id-subtype-Precategory
   is-prop-contains-id-subtype-Precategory =
-    is-prop-Π²
-      ( λ x _ → is-prop-is-in-subtype (P₁ x x) (id-hom-Precategory C))
+    is-prop-iterated-Π 2
+      ( λ x x₀ → is-prop-is-in-subtype (P₁ x x x₀ x₀) (id-hom-Precategory C))
 
   contains-id-prop-subtype-Precategory : Prop (l1 ⊔ l3 ⊔ l4)
   pr1 contains-id-prop-subtype-Precategory =
@@ -74,19 +85,19 @@ module _
     (x y z : obj-Precategory C) →
     (g : hom-Precategory C y z) →
     (f : hom-Precategory C x y) →
-    is-in-subtype P₀ x →
-    is-in-subtype P₀ y →
-    is-in-subtype P₀ z →
-    is-in-subtype (P₁ y z) g →
-    is-in-subtype (P₁ x y) f →
-    is-in-subtype (P₁ x z) (comp-hom-Precategory C g f)
+    (x₀ : is-in-subtype P₀ x) →
+    (y₀ : is-in-subtype P₀ y) →
+    (z₀ : is-in-subtype P₀ z) →
+    is-in-subtype (P₁ y z y₀ z₀) g →
+    is-in-subtype (P₁ x y x₀ y₀) f →
+    is-in-subtype (P₁ x z x₀ z₀) (comp-hom-Precategory C g f)
 
   is-prop-is-closed-under-composition-subtype-Precategory :
     is-prop is-closed-under-composition-subtype-Precategory
   is-prop-is-closed-under-composition-subtype-Precategory =
-    is-prop-Π¹⁰
-      ( λ x y z g f _ _ _ _ _ →
-        is-prop-is-in-subtype (P₁ x z) (comp-hom-Precategory C g f))
+    is-prop-iterated-Π 10
+      ( λ x y z g f x₀ _ z₀ _ _ →
+        is-prop-is-in-subtype (P₁ x z x₀ z₀) (comp-hom-Precategory C g f))
 
   is-closed-under-composition-prop-subtype-Precategory :
     Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -103,7 +114,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (P₀ : subtype l3 (obj-Precategory C))
-  (P₁ : (x y : obj-Precategory C) → subtype l4 (hom-Precategory C x y))
+  (P₁ : subtype-hom-Precategory l4 C P₀)
   where
 
   is-subprecategory-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -137,9 +148,13 @@ Subprecategory :
 Subprecategory l3 l4 C =
   Σ ( subtype l3 (obj-Precategory C))
     ( λ P₀ →
-      Σ ( (x y : obj-Precategory C) → subtype l4 (hom-Precategory C x y))
+      Σ ( subtype-hom-Precategory l4 C P₀)
         ( is-subprecategory C P₀))
+```
 
+#### Objects in subprecategories
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
@@ -168,73 +183,145 @@ module _
     is-in-obj-Subprecategory (inclusion-obj-Subprecategory x)
   is-in-obj-inclusion-obj-Subprecategory =
     is-in-subtype-inclusion-subtype subtype-obj-Subprecategory
+```
+
+#### Morphisms in subprecategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (P : Subprecategory l3 l4 C)
+  where
 
   subtype-hom-Subprecategory :
-    (x y : obj-Precategory C) → subtype l4 (hom-Precategory C x y)
+    subtype-hom-Precategory l4 C (subtype-obj-Subprecategory C P)
   subtype-hom-Subprecategory = pr1 (pr2 P)
 
-  hom-Subprecategory : (x y : obj-Subprecategory) → UU (l2 ⊔ l4)
+  subtype-hom-obj-subprecategory-Subprecategory :
+    (x y : obj-Subprecategory C P) →
+    subtype l4
+      ( hom-Precategory C
+        ( inclusion-obj-Subprecategory C P x)
+        ( inclusion-obj-Subprecategory C P y))
+  subtype-hom-obj-subprecategory-Subprecategory x y =
+    subtype-hom-Subprecategory
+      ( inclusion-obj-Subprecategory C P x)
+      ( inclusion-obj-Subprecategory C P y)
+      ( is-in-obj-inclusion-obj-Subprecategory C P x)
+      ( is-in-obj-inclusion-obj-Subprecategory C P y)
+
+  hom-Subprecategory : (x y : obj-Subprecategory C P) → UU (l2 ⊔ l4)
   hom-Subprecategory x y =
-    type-subtype
-      ( subtype-hom-Subprecategory
-        ( inclusion-obj-Subprecategory x)
-        ( inclusion-obj-Subprecategory y))
+    type-subtype (subtype-hom-obj-subprecategory-Subprecategory x y)
 
   inclusion-hom-Subprecategory :
-    (x y : obj-Subprecategory) →
+    (x y : obj-Subprecategory C P) →
     hom-Subprecategory x y →
     hom-Precategory C
-      ( inclusion-obj-Subprecategory x)
-      ( inclusion-obj-Subprecategory y)
+      ( inclusion-obj-Subprecategory C P x)
+      ( inclusion-obj-Subprecategory C P y)
   inclusion-hom-Subprecategory x y =
-    inclusion-subtype
-      ( subtype-hom-Subprecategory
-        ( inclusion-obj-Subprecategory x)
-        ( inclusion-obj-Subprecategory y))
+    inclusion-subtype (subtype-hom-obj-subprecategory-Subprecategory x y)
+```
 
+The predicate on a morphism between subobjects of being contained in the
+subprecategory:
+
+```agda
+  is-in-hom-obj-subprecategory-Subprecategory :
+    ( x y : obj-Subprecategory C P) →
+    hom-Precategory C
+      ( inclusion-obj-Subprecategory C P x)
+      ( inclusion-obj-Subprecategory C P y) →
+    UU l4
+  is-in-hom-obj-subprecategory-Subprecategory x y =
+    is-in-subtype (subtype-hom-obj-subprecategory-Subprecategory x y)
+
+  is-prop-is-in-hom-obj-subprecategory-Subprecategory :
+    ( x y : obj-Subprecategory C P)
+    ( f :
+      hom-Precategory C
+        ( inclusion-obj-Subprecategory C P x)
+        ( inclusion-obj-Subprecategory C P y)) →
+    is-prop (is-in-hom-obj-subprecategory-Subprecategory x y f)
+  is-prop-is-in-hom-obj-subprecategory-Subprecategory x y =
+    is-prop-is-in-subtype (subtype-hom-obj-subprecategory-Subprecategory x y)
+```
+
+The predicate on a morphism between any objects of being contained in the
+subprecategory:
+
+```agda
   is-in-hom-Subprecategory :
-    (x y : obj-Precategory C) (f : hom-Precategory C x y) → UU l4
-  is-in-hom-Subprecategory x y = is-in-subtype (subtype-hom-Subprecategory x y)
+    (x y : obj-Precategory C) (f : hom-Precategory C x y) → UU (l3 ⊔ l4)
+  is-in-hom-Subprecategory x y f =
+    Σ ( is-in-obj-Subprecategory C P x)
+      ( λ x₀ →
+        Σ ( is-in-obj-Subprecategory C P y)
+          ( λ y₀ →
+            is-in-hom-obj-subprecategory-Subprecategory (x , x₀) (y , y₀) f))
 
   is-prop-is-in-hom-Subprecategory :
     (x y : obj-Precategory C) (f : hom-Precategory C x y) →
     is-prop (is-in-hom-Subprecategory x y f)
-  is-prop-is-in-hom-Subprecategory x y =
-    is-prop-is-in-subtype (subtype-hom-Subprecategory x y)
+  is-prop-is-in-hom-Subprecategory x y f =
+    is-prop-Σ
+      ( is-prop-is-in-obj-Subprecategory C P x)
+      ( λ x₀ →
+        is-prop-Σ
+          ( is-prop-is-in-obj-Subprecategory C P y)
+          ( λ y₀ →
+            is-prop-is-in-hom-obj-subprecategory-Subprecategory
+              ( x , x₀) (y , y₀) f))
+
+  is-in-hom-obj-subprecategory-inclusion-hom-Subprecategory :
+    (x y : obj-Subprecategory C P)
+    (f : hom-Subprecategory x y) →
+    is-in-hom-obj-subprecategory-Subprecategory x y
+      ( inclusion-hom-Subprecategory x y f)
+  is-in-hom-obj-subprecategory-inclusion-hom-Subprecategory x y f = pr2 f
 
   is-in-hom-inclusion-hom-Subprecategory :
-    (x y : obj-Subprecategory) (f : hom-Subprecategory x y) →
+    (x y : obj-Subprecategory C P)
+    (f : hom-Subprecategory x y) →
     is-in-hom-Subprecategory
-      ( inclusion-obj-Subprecategory x)
-      ( inclusion-obj-Subprecategory y)
+      ( inclusion-obj-Subprecategory C P x)
+      ( inclusion-obj-Subprecategory C P y)
       ( inclusion-hom-Subprecategory x y f)
-  is-in-hom-inclusion-hom-Subprecategory x y =
-    is-in-subtype-inclusion-subtype
-      ( subtype-hom-Subprecategory
-        ( inclusion-obj-Subprecategory x)
-        ( inclusion-obj-Subprecategory y))
+  pr1 (is-in-hom-inclusion-hom-Subprecategory x y f) =
+    is-in-obj-inclusion-obj-Subprecategory C P x
+  pr1 (pr2 (is-in-hom-inclusion-hom-Subprecategory x y f)) =
+    is-in-obj-inclusion-obj-Subprecategory C P y
+  pr2 (pr2 (is-in-hom-inclusion-hom-Subprecategory x y f)) =
+    is-in-hom-obj-subprecategory-inclusion-hom-Subprecategory x y f
+```
 
+#### Subprecategories are subprecategories
+
+```agda
   is-subprecategory-Subprecategory :
-    is-subprecategory C subtype-obj-Subprecategory subtype-hom-Subprecategory
+    is-subprecategory C
+      ( subtype-obj-Subprecategory C P) (subtype-hom-Subprecategory)
   is-subprecategory-Subprecategory = pr2 (pr2 P)
 
   contains-id-Subprecategory :
     contains-id-subtype-Precategory C
-      ( subtype-obj-Subprecategory)
+      ( subtype-obj-Subprecategory C P)
       ( subtype-hom-Subprecategory)
   contains-id-Subprecategory =
     contains-id-is-subprecategory C
-      ( subtype-obj-Subprecategory)
+      ( subtype-obj-Subprecategory C P)
       ( subtype-hom-Subprecategory)
       ( is-subprecategory-Subprecategory)
 
   is-closed-under-composition-Subprecategory :
     is-closed-under-composition-subtype-Precategory C
-      ( subtype-obj-Subprecategory)
+      ( subtype-obj-Subprecategory C P)
       ( subtype-hom-Subprecategory)
   is-closed-under-composition-Subprecategory =
     is-closed-under-composition-is-subprecategory C
-      ( subtype-obj-Subprecategory)
+      ( subtype-obj-Subprecategory C P)
       ( subtype-hom-Subprecategory)
       ( is-subprecategory-Subprecategory)
 ```
@@ -254,9 +341,7 @@ module _
       ( hom-set-Precategory C
         ( inclusion-obj-Subprecategory C P x)
         ( inclusion-obj-Subprecategory C P y))
-      ( subtype-hom-Subprecategory C P
-        ( inclusion-obj-Subprecategory C P x)
-        ( inclusion-obj-Subprecategory C P y))
+      ( subtype-hom-obj-subprecategory-Subprecategory C P x y)
 
   is-set-hom-Subprecategory :
     (x y : obj-Subprecategory C P) → is-set (hom-Subprecategory C P x y)
@@ -289,8 +374,8 @@ module _
       ( is-in-obj-inclusion-obj-Subprecategory C P x)
       ( is-in-obj-inclusion-obj-Subprecategory C P y)
       ( is-in-obj-inclusion-obj-Subprecategory C P z)
-      ( is-in-hom-inclusion-hom-Subprecategory C P y z g)
-      ( is-in-hom-inclusion-hom-Subprecategory C P x y f)
+      ( pr2 g)
+      ( pr2 f)
 
   associative-comp-hom-Subprecategory :
     {x y z w : obj-Subprecategory C P}
@@ -305,7 +390,9 @@ module _
     eq-type-subtype
       ( subtype-hom-Subprecategory C P
         ( inclusion-obj-Subprecategory C P x)
-        ( inclusion-obj-Subprecategory C P w))
+        ( inclusion-obj-Subprecategory C P w)
+        ( is-in-obj-inclusion-obj-Subprecategory C P x)
+        ( is-in-obj-inclusion-obj-Subprecategory C P w))
       ( associative-comp-hom-Precategory C
         ( inclusion-hom-Subprecategory C P z w h)
         ( inclusion-hom-Subprecategory C P y z g)
@@ -319,7 +406,9 @@ module _
     eq-type-subtype
       ( subtype-hom-Subprecategory C P
         ( inclusion-obj-Subprecategory C P x)
-        ( inclusion-obj-Subprecategory C P y))
+        ( inclusion-obj-Subprecategory C P y)
+        ( is-in-obj-inclusion-obj-Subprecategory C P x)
+        ( is-in-obj-inclusion-obj-Subprecategory C P y))
       ( left-unit-law-comp-hom-Precategory C
         ( inclusion-hom-Subprecategory C P x y f))
 
@@ -331,7 +420,9 @@ module _
     eq-type-subtype
       ( subtype-hom-Subprecategory C P
         ( inclusion-obj-Subprecategory C P x)
-        ( inclusion-obj-Subprecategory C P y))
+        ( inclusion-obj-Subprecategory C P y)
+        ( is-in-obj-inclusion-obj-Subprecategory C P x)
+        ( is-in-obj-inclusion-obj-Subprecategory C P y))
       ( right-unit-law-comp-hom-Precategory C
         ( inclusion-hom-Subprecategory C P x y f))
 
@@ -396,25 +487,6 @@ module _
     is-functor-inclusion-Subprecategory
 ```
 
-### Isomorphisms in subprecategories
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (P : Subprecategory l3 l4 C)
-  where
-
-  is-iso-Subprecategory :
-    {x y : obj-Subprecategory C P} → hom-Subprecategory C P x y → UU (l2 ⊔ l4)
-  is-iso-Subprecategory {x} {y} =
-    is-iso-Precategory (precategory-Subprecategory C P) {x} {y}
-
-  iso-Subprecategory :
-    (x y : obj-Subprecategory C P) → UU (l2 ⊔ l4)
-  iso-Subprecategory = iso-Precategory (precategory-Subprecategory C P)
-```
-
 ## Properties
 
 ### The inclusion functor is an embedding on objects and hom-sets
@@ -435,7 +507,9 @@ module _
     is-emb-inclusion-subtype
       ( subtype-hom-Subprecategory C P
         ( inclusion-obj-Subprecategory C P x)
-        ( inclusion-obj-Subprecategory C P y))
+        ( inclusion-obj-Subprecategory C P y)
+        ( is-in-obj-inclusion-obj-Subprecategory C P x)
+        ( is-in-obj-inclusion-obj-Subprecategory C P y))
 
   is-emb-obj-inclusion-Subprecategory :
     is-emb
@@ -447,46 +521,14 @@ module _
     is-emb-inclusion-subtype (subtype-obj-Subprecategory C P)
 ```
 
-### Subprecategories of categories are categories
+## See also
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (P : Subprecategory l3 l4 C)
-  (is-category-C : is-category-Precategory C)
-  {x y : obj-Subprecategory C P}
-  (f : hom-Subprecategory C P x y)
-  (is-iso-f : is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f))
-  where
+- [Large subprecategories](category-theory.large-subprecategories.md)
+- [Subcategories](category-theory.subcategories.md)
 
-  contains-is-iso-is-category-Subprecategory : is-iso-Subprecategory C P f
-  contains-is-iso-is-category-Subprecategory =
-    ind-iso-Category (C , is-category-C)
-      ( λ Y e →
-        ( p : is-in-obj-Subprecategory C P Y)
-        ( q :
-          is-in-hom-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( Y)
-            ( hom-iso-Precategory C e)) →
-        is-iso-Subprecategory C P {x} {Y , p} (hom-iso-Precategory C e , q))
-      ( ( ind-subsingleton
-          ( is-prop-is-in-hom-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( inclusion-obj-Subprecategory C P x)
-            ( id-hom-Precategory C))
-          ( contains-id-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x)
-            ( is-in-obj-inclusion-obj-Subprecategory C P x))) ∘
-        ( ind-subsingleton
-          ( is-prop-is-in-obj-Subprecategory C P
-            ( inclusion-obj-Subprecategory C P x))
-          ( is-in-obj-inclusion-obj-Subprecategory C P x)
-          ( is-iso-id-hom-Precategory (precategory-Subprecategory C P) {x})))
-      ( inclusion-hom-Subprecategory C P x y f , is-iso-f)
-      ( is-in-obj-inclusion-obj-Subprecategory C P y)
-      ( is-in-hom-inclusion-hom-Subprecategory C P x y f)
-```
+## External links
 
-It remains to show that subprecategories of categories indeed are categories.
+- [subcategory](https://ncatlab.org/nlab/show/subcategory) at nlab
+- [Subcategory](https://en.wikipedia.org/wiki/Subcategory) at Wikipedia
+- [Subcategory](https://mathworld.wolfram.com/Subcategory.html) at Wolfram
+  MathWorld

@@ -9,7 +9,6 @@ module group-theory.torsors where
 ```agda
 open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -42,8 +41,9 @@ open import higher-group-theory.higher-groups
 
 ## Idea
 
-A torsor of `G` is a group action wich merely equivalent to the principal group
-action of `G`.
+A **torsor** of `G` is a [group action](group-theory.group-actions.md) which is
+[merely equivalent](foundation.mere-equivalences.md) to the
+[principal group action](group-theory.principal-group-actions.md) of `G`.
 
 ## Definitions
 

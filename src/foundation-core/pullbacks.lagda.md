@@ -298,8 +298,8 @@ inv-inv-map-commutative-standard-pullback :
   ( map-commutative-standard-pullback f g ∘
     map-commutative-standard-pullback g f) ~ id
 inv-inv-map-commutative-standard-pullback f g x =
-  eq-pair-Σ-eq-pr2
-    ( eq-pair-Σ-eq-pr2
+  eq-pair-eq-pr2
+    ( eq-pair-eq-pr2
       ( inv-inv (coherence-square-standard-pullback x)))
 
 abstract
@@ -522,7 +522,7 @@ triangle-map-prod-cone :
   ( gap (map-prod f f') (map-prod g g') (prod-cone f g f' g' c c')) ~
   ( map-prod-cone f g f' g' ∘ map-prod (gap f g c) (gap f' g' c'))
 triangle-map-prod-cone f g c f' g' c' z =
-  eq-pair-Σ-eq-pr2 (eq-pair-Σ-eq-pr2 right-unit)
+  eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
 
 abstract
   is-equiv-map-prod-cone :
@@ -688,8 +688,8 @@ module _
     ( gap f g c ∘ map-equiv-total-fiber (pr1 c)) ~
     ( tot (λ a → tot (λ b → inv)) ∘ tot (map-fiber-cone f g c))
   square-tot-map-fiber-cone (.(vertical-map-cone f g c x) , x , refl) =
-    eq-pair-Σ-eq-pr2
-      ( eq-pair-Σ-eq-pr2
+    eq-pair-eq-pr2
+      ( eq-pair-eq-pr2
         ( inv (ap inv right-unit ∙ inv-inv (coherence-square-cone f g c x))))
 
   abstract

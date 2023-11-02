@@ -314,7 +314,7 @@ module _
 
 equiv-Σ-equiv-base :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3) (e : A ≃ B) →
-  Σ A (C ∘ (map-equiv e)) ≃ Σ B C
+  Σ A (C ∘ map-equiv e) ≃ Σ B C
 pr1 (equiv-Σ-equiv-base C (pair f is-equiv-f)) = map-Σ-map-base f C
 pr2 (equiv-Σ-equiv-base C (pair f is-equiv-f)) =
   is-equiv-map-Σ-map-base f C is-equiv-f

@@ -100,8 +100,7 @@ module _
   equiv-binary-product-Decomposition-Π-Decomposition :
     Σ ( Π-Decomposition l l X)
       ( λ d →
-        binary-coproduct-Decomposition l l
-          ( indexing-type-Π-Decomposition d)) ≃
+        binary-coproduct-Decomposition l l (indexing-type-Π-Decomposition d)) ≃
     Σ ( binary-product-Decomposition l l X)
       ( λ d →
         Π-Decomposition l l
