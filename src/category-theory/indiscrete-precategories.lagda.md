@@ -17,6 +17,7 @@ open import category-theory.strict-categories
 open import category-theory.terminal-category
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -24,6 +25,7 @@ open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -44,9 +46,11 @@ This construction demonstrates one essential aspect about precategories: While
 it displays `obj-Precategory` as a [retraction](foundation-core.retractions.md),
 up to weak categorical equivalence, every indiscrete precategory is subterminal.
 
-## Definition
+## Definitions
 
-### The objects and hom-sets of an indiscrete category
+### The indiscrete precategory associated to a type
+
+#### The objects and hom-sets of the indiscrete precategory associated to a type
 
 ```agda
 module _
@@ -65,7 +69,7 @@ module _
   hom-indiscrete-Precategory x y = type-Set (hom-set-indiscrete-Precategory x y)
 ```
 
-### The precategory structure of an indiscrete precategory
+#### The precategory structure of the indiscrete precategory associated to a type
 
 ```agda
 module _
@@ -108,8 +112,7 @@ module _
     {x y : obj-indiscrete-Precategory X} →
     (f : hom-indiscrete-Precategory X x y) →
     comp-hom-indiscrete-Precategory {x} {y} {y}
-      ( id-hom-indiscrete-Precategory {y})
-      ( f) ＝
+      ( id-hom-indiscrete-Precategory {y}) (f) ＝
     f
   left-unit-law-comp-hom-indiscrete-Precategory f = refl
 
@@ -141,7 +144,7 @@ module _
     is-unital-composition-operation-indiscrete-Precategory
 ```
 
-### The pregroupoid structure of indiscrete precategories
+#### The pregroupoid structure of the indiscrete precategory associated to a type
 
 ```agda
 module _
@@ -171,6 +174,41 @@ module _
   indiscrete-Pregroupoid : Pregroupoid l lzero
   pr1 indiscrete-Pregroupoid = indiscrete-Precategory X
   pr2 indiscrete-Pregroupoid = is-pregroupoid-indiscrete-Precategory
+```
+
+### The predicate on a precategory of being indiscrete
+
+For completeness, we also record the predicate on a precategory of being
+indiscrete.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  is-indiscrete-Precategory : UU (l1 ⊔ l2)
+  is-indiscrete-Precategory =
+    (x y : obj-Precategory C) → is-contr (hom-Precategory C x y)
+
+  is-prop-is-indiscrete-Precategory : is-prop is-indiscrete-Precategory
+  is-prop-is-indiscrete-Precategory =
+    is-prop-iterated-Π 2 (λ x y → is-property-is-contr)
+
+  is-indiscrete-prop-Precategory : Prop (l1 ⊔ l2)
+  pr1 is-indiscrete-prop-Precategory = is-indiscrete-Precategory
+  pr2 is-indiscrete-prop-Precategory = is-prop-is-indiscrete-Precategory
+```
+
+#### The indiscrete precategory associated to a type is indiscrete
+
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  is-indiscrete-indiscrete-Precategory :
+    is-indiscrete-Precategory (indiscrete-Precategory X)
+  is-indiscrete-indiscrete-Precategory x y = is-contr-unit
 ```
 
 ## Properties
