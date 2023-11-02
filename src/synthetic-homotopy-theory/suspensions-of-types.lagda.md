@@ -14,8 +14,8 @@ open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -428,8 +428,10 @@ module _
       ( ap map-suspension (meridian-suspension a))
       ( meridian-suspension (f a))
       ( compute-south-map-suspension)
-  compute-meridian-map-suspension a =
-    up-suspension-meridian-suspension A (suspension B) map-suspension-structure a
+  compute-meridian-map-suspension =
+    up-suspension-meridian-suspension A
+      ( suspension B)
+      ( map-suspension-structure)
 
 module _
   {l : Level} (A : UU l)
@@ -443,9 +445,9 @@ module _
     compute-south-map-suspension id
   pr2 (pr2 htpy-function-out-of-suspension-id-map-suspension) a =
     coherence-square-identifications-right-paste
-      (ap (map-suspension id) (meridian-suspension a))
-      (compute-south-map-suspension id)
-      (compute-north-map-suspension id)
+      ( ap (map-suspension id) (meridian-suspension a))
+      ( compute-south-map-suspension id)
+      ( compute-north-map-suspension id)
       ( meridian-suspension a)
       ( inv (ap-id (meridian-suspension a)))
       ( compute-meridian-map-suspension id a)
@@ -462,70 +464,83 @@ module _
   (f : A → B) (g : B → C)
   where
 
-  sq1 : (a : A) →
-          coherence-square-identifications
-          (compute-north-map-suspension (g ∘ f))
-          (ap (map-suspension (g ∘ f)) (meridian-suspension a))
-          (meridian-suspension ((g ∘ f) a))
-          (compute-south-map-suspension (g ∘ f))
-  sq1 = compute-meridian-map-suspension (g ∘ f)
+  preserves-comp-map-suspension-north :
+    (map-suspension g ∘ map-suspension f) north-suspension ＝
+    map-suspension (g ∘ f) north-suspension
+  preserves-comp-map-suspension-north =
+    ap (map-suspension g) (compute-north-map-suspension f) ∙
+    (compute-north-map-suspension g ∙
+    inv (compute-north-map-suspension (g ∘ f)))
 
-  sq1' : (a : A) →           coherence-square-identifications
-          (inv (compute-north-map-suspension (g ∘ f)))
-          (meridian-suspension ((g ∘ f) a))
-          (ap (map-suspension (g ∘ f)) (meridian-suspension a))
-          (inv (compute-south-map-suspension (g ∘ f)))
-  sq1' a = coherence-square-identifications-horizontal-inv
-          (ap (map-suspension (g ∘ f)) (meridian-suspension a))
-          (compute-south-map-suspension (g ∘ f))
-          (compute-north-map-suspension (g ∘ f))
-          (meridian-suspension ((g ∘ f) a))
-             ( compute-meridian-map-suspension (g ∘ f) a)
+  preserves-comp-map-suspension-south :
+    (map-suspension g ∘ map-suspension f) south-suspension ＝
+    map-suspension (g ∘ f) south-suspension
+  preserves-comp-map-suspension-south =
+    ap (map-suspension g) (compute-south-map-suspension f) ∙
+    (compute-south-map-suspension g ∙
+    inv (compute-south-map-suspension (g ∘ f)))
 
-  sq2 : (b : B) →
-          coherence-square-identifications
-          (compute-north-map-suspension g)
-          (ap (map-suspension g) (meridian-suspension b))
-          (meridian-suspension (g b))
-          (compute-south-map-suspension g)
-  sq2 = compute-meridian-map-suspension g
-
-  sq3 : {!!}
-  sq3 = ap (map-suspension g) {!compute-meridian-map-suspension f!}
+  coherence-square-identifications-comp-map-suspension :
+    (a : A) →
+    coherence-square-identifications
+      ( preserves-comp-map-suspension-north)
+      ( ap (map-suspension g ∘ map-suspension f) (meridian-suspension a))
+      ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
+      ( preserves-comp-map-suspension-south)
+  coherence-square-identifications-comp-map-suspension a =
+    coherence-square-identifications-comp-horizontal
+      ( ap (map-suspension g ∘ map-suspension f) (meridian-suspension a))
+      ( ap (map-suspension g) (meridian-suspension (f a)))
+      ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
+      ( coherence-square-identifications-left-paste
+        ( ap (map-suspension g) (ap (map-suspension f) (meridian-suspension a)))
+        ( ap (map-suspension g) (compute-south-map-suspension f))
+        ( ap (map-suspension g) (compute-north-map-suspension f))
+        ( ap (map-suspension g) (meridian-suspension (f a)))
+        ( inv
+          ( ap-comp
+            ( map-suspension g)
+            ( map-suspension f)
+            ( meridian-suspension a)))
+        ( coherence-square-identifications-ap
+          ( map-suspension g)
+          ( ap (map-suspension f) (meridian-suspension a))
+          ( compute-south-map-suspension f)
+          ( compute-north-map-suspension f)
+          ( meridian-suspension (f a))
+          ( compute-meridian-map-suspension f a)))
+      ( coherence-square-identifications-comp-horizontal
+        ( ap (map-suspension g) (meridian-suspension (f a)))
+        ( meridian-suspension (g (f a)))
+        ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
+        ( compute-meridian-map-suspension g (f a))
+        ( coherence-square-identifications-horizontal-inv
+          ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
+          ( compute-south-map-suspension (g ∘ f))
+          ( compute-north-map-suspension (g ∘ f))
+          ( meridian-suspension (g (f a)))
+          ( compute-meridian-map-suspension (g ∘ f) a)))
 
   htpy-function-out-of-suspension-comp-map-suspension :
-    htpy-function-out-of-suspension A (map-suspension (g ∘ f)) (map-suspension g ∘ map-suspension f)
+    htpy-function-out-of-suspension A
+      ( map-suspension g ∘ map-suspension f)
+      ( map-suspension (g ∘ f))
   pr1 htpy-function-out-of-suspension-comp-map-suspension =
-    compute-north-map-suspension (g ∘ f) ∙ inv (ap (map-suspension g) (compute-north-map-suspension f) ∙ compute-north-map-suspension g)
+    preserves-comp-map-suspension-north
   pr1 (pr2 htpy-function-out-of-suspension-comp-map-suspension) =
-    compute-south-map-suspension (g ∘ f) ∙ inv (ap (map-suspension g) (compute-south-map-suspension f) ∙ compute-south-map-suspension g)
+    preserves-comp-map-suspension-south
   pr2 (pr2 htpy-function-out-of-suspension-comp-map-suspension) =
-    {!!}
-    where
-      foo : (a : A) →
-              coherence-square-identifications
-              (compute-north-map-suspension (g ∘ f))
-              (ap (map-suspension (g ∘ f)) (meridian-suspension a))
-              (meridian-suspension ((g ∘ f) a))
-              (compute-south-map-suspension (g ∘ f))
-      foo = compute-meridian-map-suspension (g ∘ f)
+    coherence-square-identifications-comp-map-suspension
+
+  preserves-comp-map-suspension' :
+    map-suspension g ∘ map-suspension f ~ map-suspension (g ∘ f)
+  preserves-comp-map-suspension' =
+    htpy-htpy-function-out-of-suspension A
+      ( map-suspension g ∘ map-suspension f)
+      ( map-suspension (g ∘ f))
+      ( htpy-function-out-of-suspension-comp-map-suspension)
 
   preserves-comp-map-suspension :
     map-suspension (g ∘ f) ~ map-suspension g ∘ map-suspension f
-  preserves-comp-map-suspension = {!!}
-
-
-{-
-   -- htpy-eq (is-injective-is-equiv (is-equiv-map-inv-equiv {!equiv-up-suspension!}) baz)
-    where -- map-inv-equiv (equiv-up-suspension Z)
-      foo : suspension-structure A (suspension A) → suspension A → suspension A
-      foo = map-inv-up-suspension A (suspension A)
-      val1 : {!!}
-      val1 = foo (map-suspension-structure id)
-      val2 : {!!}
-      val2 = foo (suspension-structure-suspension A)
-      baz : val1 ＝ val2
-      baz = refl
-      test : map-suspension-structure id ＝ suspension-structure-suspension A
-      test = is-injective-is-equiv (is-equiv-map-inv-equiv (equiv-up-suspension A (suspension A))) baz -}
+  preserves-comp-map-suspension = inv-htpy preserves-comp-map-suspension'
 ```
