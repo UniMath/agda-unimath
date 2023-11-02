@@ -108,7 +108,7 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
 
         # TODO: decide if we want this
         # references.append(sup_link_reference(config.get(
-        #     'mage-template').format(wikidata_id=wikidata_id), 'WD', True, True))
+        #     'mathswitch-template').format(wikidata_id=wikidata_id), 'WD', True, True))
     if agda_name is not None:
         target_id = f'concept-{agda_name}'
         agda_id = get_definition_id(agda_name, initial_content)
@@ -145,10 +145,10 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
         wikidata_label = entry.pop('__wikidata_label', None)
         wikidata_id = entry.get('wikidata', None)
         if wikidata_label is not None and wikidata_id is not None:
-            mage_link = config.get(
-                'mage-template').format(wikidata_id=wikidata_id)
+            mathswitch_link = config.get(
+                'mathswitch-template').format(wikidata_id=wikidata_id)
             external_references.append(
-                f'<a href="{mage_link}">{wikidata_label}</a> at Mathswitch')
+                f'<a href="{mathswitch_link}">{wikidata_label}</a> at Mathswitch')
             wikidata_link = config.get(
                 'wikidata-template').format(wikidata_id=wikidata_id)
             # TODO: Decide if we want this
