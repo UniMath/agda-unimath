@@ -12,12 +12,8 @@ open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import group-theory.trivial-groups
 ```
 
 </details>

@@ -8,17 +8,10 @@ module category-theory.rigid-objects-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-in-categories
 open import category-theory.rigid-objects-precategories
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import group-theory.trivial-groups
 ```
 
 </details>

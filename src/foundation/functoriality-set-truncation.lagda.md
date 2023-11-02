@@ -40,10 +40,14 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-The universal property of the set truncation implies that the set truncation
-acts functorially on maps between types.
+The
+[universal property of the set truncation](foundation.universal-property-set-truncation.md)
+implies that the [set truncation](foundation.set-truncations.md) acts
+functorially on maps between types.
 
-## Definition
+## Definitions
+
+### The functorial action of set-truncations on maps
 
 ```agda
 module _
@@ -57,19 +61,33 @@ module _
             ( λ h → (h ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)))
     unique-map-trunc-Set = unique-map-trunc zero-𝕋 f
 
-  map-trunc-Set :
-    type-trunc-Set A → type-trunc-Set B
+  map-trunc-Set : type-trunc-Set A → type-trunc-Set B
   map-trunc-Set = map-trunc zero-𝕋 f
 
   naturality-unit-trunc-Set :
-    (map-trunc-Set ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)
+    map-trunc-Set ∘ unit-trunc-Set ~ unit-trunc-Set ∘ f
   naturality-unit-trunc-Set = naturality-unit-trunc zero-𝕋 f
 
   htpy-uniqueness-map-trunc-Set :
     (h : type-trunc-Set A → type-trunc-Set B) →
-    (H : (h ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)) →
+    (H : h ∘ unit-trunc-Set ~ unit-trunc-Set ∘ f) →
     map-trunc-Set ~ h
   htpy-uniqueness-map-trunc-Set = htpy-uniqueness-map-trunc zero-𝕋 f
+```
+
+### Functorial action of set-truncation on binary maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  where
+
+  binary-map-trunc-Set :
+    type-trunc-Set A → type-trunc-Set B → type-trunc-Set C
+  binary-map-trunc-Set x y =
+    map-trunc-Set
+      ( λ (x' , y') → f x' y')
+      ( map-inv-equiv-distributive-trunc-prod-Set A B (x , y))
 ```
 
 ## Properties
@@ -77,8 +95,7 @@ module _
 ### The functorial action of set truncations preserves identity maps
 
 ```agda
-id-map-trunc-Set :
-  {l1 : Level} {A : UU l1} → map-trunc-Set (id {A = A}) ~ id
+id-map-trunc-Set : {l1 : Level} {A : UU l1} → map-trunc-Set (id {A = A}) ~ id
 id-map-trunc-Set = id-map-trunc zero-𝕋
 ```
 
