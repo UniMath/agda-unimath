@@ -215,5 +215,5 @@ module _
       ( ap f right)
       ( ap f bottom)
   coherence-square-identifications-ap left refl refl refl coh =
-    ap (λ q → ap f q ∙ ap f refl) (inv right-unit ∙ coh)
+    ap (λ q → ap f q ∙ refl) (inv right-unit ∙ coh)
 ```
