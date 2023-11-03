@@ -192,7 +192,7 @@ module _
   where
 
   coherence-square-identifications-horizontal-inv :
-     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (inv top) right left (inv bottom)
   coherence-square-identifications-horizontal-inv refl refl right refl coh =
