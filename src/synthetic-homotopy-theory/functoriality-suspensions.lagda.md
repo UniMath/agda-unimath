@@ -243,6 +243,10 @@ module _
 ### Equivalent types have equivalent suspensions
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
   is-equiv-map-suspension-is-equiv :
     (f : A → B) → is-equiv f → is-equiv (map-suspension f)
   pr1 (is-equiv-map-suspension-is-equiv f e) =
