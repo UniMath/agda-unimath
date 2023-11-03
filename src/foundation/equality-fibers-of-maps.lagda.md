@@ -95,11 +95,6 @@ module _
   pr1 (equiv-fiber-ap-eq-fiber s t) = fiber-ap-eq-fiber s t
   pr2 (equiv-fiber-ap-eq-fiber s t) = is-equiv-fiber-ap-eq-fiber s t
 
-  eq-eq-fiber-fiber-ap :
-    (s t : fiber f b) →
-    fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t)) → s ＝ t
-  eq-eq-fiber-fiber-ap s t = map-inv-equiv (equiv-fiber-ap-eq-fiber s t)
-
   map-inv-fiber-ap-eq-fiber :
     (s t : fiber f b) →
     fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t)) →
