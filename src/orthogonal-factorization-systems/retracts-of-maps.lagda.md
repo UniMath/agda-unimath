@@ -41,7 +41,7 @@ into a commutative diagram
 with coherences
 
 ```text
-  S : s' ∘ g ~ f ∘ s  and   R : r' ∘ f ~ g ∘ r'
+  S : s' ∘ g ~ f ∘ s  and   R : r' ∘ f ~ g ∘ r
 ```
 
 and a higher coherence
@@ -213,26 +213,31 @@ module _
 
 This remains to be formalized.
 
-Note that none of the following results require the higher order coherence.
-
 ### If `f` has a section, then retracts of `f` have a section
+
+In fact, we only need the following data to show this:
+
+```text
+                 r
+            X ------> A
+            |         |
+            f    R    g
+            v         v
+  B ------> Y ------> B.
+       s'   H'   r'
+```
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : A retract-of X) (r' : B retract-of Y)
-  (S : coherence-square-maps (section-retract-of r) g f (section-retract-of r'))
-  (R :
-    coherence-square-maps
-      ( retraction-retract-of r) f g (retraction-retract-of r'))
+  (f : X → Y) (g : A → B) (r : X → A) (r' : B retract-of Y)
+  (R : coherence-square-maps r f g (retraction-retract-of r'))
   (section-f : section f)
   where
 
   map-has-section-is-retract-of-has-section' : B → A
   map-has-section-is-retract-of-has-section' =
-    retraction-retract-of r ∘
-    map-section f section-f ∘
-    section-retract-of r'
+    r ∘ map-section f section-f ∘ section-retract-of r'
 
   is-section-map-has-section-is-retract-of-has-section' :
     g ∘ map-has-section-is-retract-of-has-section' ~ id
@@ -256,30 +261,36 @@ module _
   has-section-retract-of-has-section : section f → section g
   has-section-retract-of-has-section =
     has-section-is-retract-of-has-section' f g
-      ( retract-of-domain-retract-of-map f g k)
+      ( retraction-of-domain-retract-of-map f g k)
       ( retract-of-codomain-retract-of-map f g k)
-      ( coherence-section-retract-of-map f g k)
       ( coherence-retraction-retract-of-map f g k)
 ```
 
 ### If `f` has a retraction, then retracts of `f` have a retraction
 
+In fact, we only need the following data to show this:
+
+```text
+       s         r
+  A ------> X ------> A
+  |         |
+  g    S    f
+  v         v
+  B ------> Y.
+       s'
+```
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : A retract-of X) (r' : B retract-of Y)
-  (S : coherence-square-maps (section-retract-of r) g f (section-retract-of r'))
-  (R :
-    coherence-square-maps
-      ( retraction-retract-of r) f g (retraction-retract-of r'))
+  (f : X → Y) (g : A → B) (r : A retract-of X) (s' : B → Y)
+  (S : coherence-square-maps (section-retract-of r) g f s')
   (retraction-f : retraction f)
   where
 
   map-has-retraction-is-retract-of-has-retraction' : B → A
   map-has-retraction-is-retract-of-has-retraction' =
-    retraction-retract-of r ∘
-    map-retraction f retraction-f ∘
-    section-retract-of r'
+    retraction-retract-of r ∘ map-retraction f retraction-f ∘ s'
 
   is-retraction-map-has-retraction-is-retract-of-has-retraction' :
     map-has-retraction-is-retract-of-has-retraction' ∘ g ~ id
@@ -304,12 +315,13 @@ module _
   has-retraction-retract-of-has-retraction =
     has-retraction-is-retract-of-has-retraction' f g
       ( retract-of-domain-retract-of-map f g k)
-      ( retract-of-codomain-retract-of-map f g k)
+      ( section-of-codomain-retract-of-map f g k)
       ( coherence-section-retract-of-map f g k)
-      ( coherence-retraction-retract-of-map f g k)
 ```
 
 ### Equivalences are closed under retracts of maps
+
+Note that the higher coherence of a retract of maps is not needed.
 
 ```agda
 module _
@@ -324,10 +336,10 @@ module _
 
   is-equiv-is-retract-of-is-equiv' : is-equiv g
   pr1 is-equiv-is-retract-of-is-equiv' =
-    has-section-is-retract-of-has-section' f g r r' S R
+    has-section-is-retract-of-has-section' f g (retraction-retract-of r) r' R
       ( section-is-equiv is-equiv-f)
   pr2 is-equiv-is-retract-of-is-equiv' =
-    has-retraction-is-retract-of-has-retraction' f g r r' S R
+    has-retraction-is-retract-of-has-retraction' f g r (section-retract-of r') S
       ( retraction-is-equiv is-equiv-f)
 
 module _
