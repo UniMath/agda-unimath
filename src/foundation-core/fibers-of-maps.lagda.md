@@ -182,11 +182,10 @@ module _
   pr1 (map-inv-equiv-fiber (x , refl)) = x
   pr2 (map-inv-equiv-fiber (x , refl)) = refl
 
-  is-section-map-inv-equiv-fiber : (map-equiv-fiber ∘ map-inv-equiv-fiber) ~ id
+  is-section-map-inv-equiv-fiber : map-equiv-fiber ∘ map-inv-equiv-fiber ~ id
   is-section-map-inv-equiv-fiber (x , refl) = refl
 
-  is-retraction-map-inv-equiv-fiber :
-    (map-inv-equiv-fiber ∘ map-equiv-fiber) ~ id
+  is-retraction-map-inv-equiv-fiber : map-inv-equiv-fiber ∘ map-equiv-fiber ~ id
   is-retraction-map-inv-equiv-fiber (x , refl) = refl
 
   is-equiv-map-equiv-fiber : is-equiv map-equiv-fiber

@@ -24,8 +24,24 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Any [commuting square](foundation-core.commuting-squares-of-maps.md) induces a
-map between the fibers of the vertical maps.
+Any [commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+        f'
+    S -----> B
+    |        |
+  g'|        | g
+    v        v
+    A -----> X
+        f
+```
+
+induces a map between the [fibers](foundation-core.fibers-of-maps.md) of the
+vertical maps
+
+```text
+  fiber g' x → fiber g (f x).
+```
 
 ## Definitions
 
@@ -39,13 +55,12 @@ module _
 
   map-fiber-cone : (x : A) → fiber (pr1 c) x → fiber g (f x)
   pr1 (map-fiber-cone x t) = pr1 (pr2 c) (pr1 t)
-  pr2 (map-fiber-cone x t) = (inv (pr2 (pr2 c) (pr1 t))) ∙ (ap f (pr2 t))
+  pr2 (map-fiber-cone x t) = inv (pr2 (pr2 c) (pr1 t)) ∙ ap f (pr2 t)
 
 map-fiber-cone-id :
   {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
   map-fiber-cone id g (g , id , refl-htpy) x ~ id
-map-fiber-cone-id g .(g b) (b , refl) =
-  refl
+map-fiber-cone-id g .(g b) (b , refl) = refl
 ```
 
 ## Properties
@@ -113,6 +128,12 @@ module _
           ( ( inv (ap-inv g (H' a))) ∙
             ( ap (ap g) (inv right-unit)))))
 ```
+
+## See also
+
+- In [retracts of maps](orthogonal-factorization-systems.retracts-of-maps.md),
+  we show that if `g` is a retract of `g'`, then the fibers of `g` are retracts
+  of the fibers of `g'`.
 
 ## Table of files about fibers of maps
 

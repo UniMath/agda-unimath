@@ -63,7 +63,7 @@ respectively.
 
 ## Definition
 
-### The predicate of being a predicate of maps
+### The predicate of being a retract of maps
 
 ```agda
 module _
