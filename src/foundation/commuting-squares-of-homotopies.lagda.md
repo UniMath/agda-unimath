@@ -28,7 +28,7 @@ A square of [homotopies](foundation-core.homotopies.md)
         bottom
 ```
 
-is said to **commute** if there is a homotopy `top ∙h right ~ left ∙h bottom`.
+is said to **commute** if there is a homotopy `left ∙h bottom ~ top ∙h right `.
 Such a homotopy is called a **coherence** of the square.
 
 ## Definition
