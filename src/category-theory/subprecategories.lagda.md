@@ -520,3 +520,15 @@ module _
   is-emb-obj-inclusion-Subprecategory =
     is-emb-inclusion-subtype (subtype-obj-Subprecategory C P)
 ```
+
+## See also
+
+- [Large subprecategories](category-theory.large-subprecategories.md)
+- [Subcategories](category-theory.subcategories.md)
+
+## External links
+
+- [subcategory](https://ncatlab.org/nlab/show/subcategory) at nlab
+- [Subcategory](https://en.wikipedia.org/wiki/Subcategory) at Wikipedia
+- [Subcategory](https://mathworld.wolfram.com/Subcategory.html) at Wolfram
+  MathWorld

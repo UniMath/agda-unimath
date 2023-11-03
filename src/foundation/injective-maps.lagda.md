@@ -19,13 +19,14 @@ open import foundation-core.negation
 
 ## Idea
 
-A map `f : A → B` is injective if `f x ＝ f y` implies `x ＝ y`.
+A map `f : A → B` is **injective** if `f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 
 The notion of injective map is, however, not homotopically coherent. It is fine
-to use injectivity for maps between sets, but for maps between general types it
-is recommended to use the notion of embedding.
+to use injectivity for maps between [sets](foundation-core.sets.md), but for
+maps between general types it is recommended to use the notion of
+[embedding](foundation-core.embeddings.md).
 
 ## Definitions
 
