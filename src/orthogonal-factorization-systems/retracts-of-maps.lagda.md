@@ -87,8 +87,8 @@ module _
     coherence-square-homotopies
       ( R ·r section-retract-of r)
       ( retraction-retract-of r' ·l inv-htpy S)
-      ( g ·l is-retraction-retract-of r)
-      ( is-retraction-retract-of r' ·r g)
+      ( g ·l is-retract-retract-of r)
+      ( is-retract-retract-of r' ·r g)
 
   is-retract-of-map : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-retract-of-map =
@@ -161,7 +161,7 @@ module _
   is-retraction-of-domain-retract-of-map :
     retraction-of-domain-retract-of-map ∘ section-of-domain-retract-of-map ~ id
   is-retraction-of-domain-retract-of-map =
-    is-retraction-retract-of retract-of-domain-retract-of-map
+    is-retract-retract-of retract-of-domain-retract-of-map
 
   section-of-codomain-retract-of-map : B → Y
   section-of-codomain-retract-of-map =
@@ -175,7 +175,7 @@ module _
     retraction-of-codomain-retract-of-map ∘ section-of-codomain-retract-of-map ~
     id
   is-retraction-of-codomain-retract-of-map =
-    is-retraction-retract-of retract-of-codomain-retract-of-map
+    is-retract-retract-of retract-of-codomain-retract-of-map
 
   coherence-section-retract-of-map :
     coherence-square-maps
@@ -377,7 +377,7 @@ module _
     ( inv-htpy R ·r (map-section f section-f ∘ section-retract-of r')) ∙h
     ( ( retraction-retract-of r') ·l
       ( is-section-map-section f section-f ·r section-retract-of r')) ∙h
-    ( is-retraction-retract-of r')
+    ( is-retract-retract-of r')
 
   has-section-is-retract-of-has-section' : section g
   pr1 has-section-is-retract-of-has-section' =
@@ -430,7 +430,7 @@ module _
     ( ( retraction-retract-of r ∘ map-retraction f retraction-f) ·l S) ∙h
     ( ( retraction-retract-of r) ·l
       ( is-retraction-map-retraction f retraction-f ·r section-retract-of r)) ∙h
-    ( is-retraction-retract-of r)
+    ( is-retract-retract-of r)
 
   has-retraction-is-retract-of-has-retraction' : retraction g
   pr1 has-retraction-is-retract-of-has-retraction' =
