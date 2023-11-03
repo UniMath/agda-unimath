@@ -202,11 +202,11 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  section-map-suspension-section :
+  has-section-map-suspension-has-section :
     (f : A → B) → section f → section (map-suspension f)
-  pr1 (section-map-suspension-section f S) =
+  pr1 (has-section-map-suspension-has-section f S) =
     map-suspension (map-section f S)
-  pr2 (section-map-suspension-section f (s , h)) =
+  pr2 (has-section-map-suspension-has-section f (s , h)) =
     homotopy-reasoning
       map-suspension f ∘ map-suspension s
       ~ map-suspension (f ∘ s)
@@ -216,11 +216,11 @@ module _
       ~ id
         by id-map-suspension B
 
-  retraction-map-suspension-retraction :
+  has-retraction-map-suspension-has-retraction :
     (f : A → B) → retraction f → retraction (map-suspension f)
-  pr1 (retraction-map-suspension-retraction f S) =
+  pr1 (has-retraction-map-suspension-has-retraction f S) =
     map-suspension (map-retraction f S)
-  pr2 (retraction-map-suspension-retraction f (r , h)) =
+  pr2 (has-retraction-map-suspension-has-retraction f (r , h)) =
     homotopy-reasoning
       map-suspension r ∘ map-suspension f
       ~ map-suspension (r ∘ f)
@@ -230,12 +230,12 @@ module _
       ~ id
         by id-map-suspension A
 
-  suspension-retract-of-suspension-retract-of :
+  retract-of-suspension-retract-of :
     A retract-of B → (suspension A) retract-of (suspension B)
-  pr1 (suspension-retract-of-suspension-retract-of R) =
+  pr1 (retract-of-suspension-retract-of R) =
     map-suspension (section-retract-of R)
-  pr2 (suspension-retract-of-suspension-retract-of R) =
-    retraction-map-suspension-retraction
+  pr2 (retract-of-suspension-retract-of R) =
+    has-retraction-map-suspension-has-retraction
       ( section-retract-of R)
       ( retraction-section-retract-of R)
 ```
@@ -250,9 +250,9 @@ module _
   is-equiv-map-suspension-is-equiv :
     (f : A → B) → is-equiv f → is-equiv (map-suspension f)
   pr1 (is-equiv-map-suspension-is-equiv f e) =
-    section-map-suspension-section f (section-is-equiv e)
+    has-section-map-suspension-has-section f (section-is-equiv e)
   pr2 (is-equiv-map-suspension-is-equiv f e) =
-    retraction-map-suspension-retraction f (retraction-is-equiv e)
+    has-retraction-map-suspension-has-retraction f (retraction-is-equiv e)
 
   equiv-suspension : A ≃ B → suspension A ≃ suspension B
   pr1 (equiv-suspension e) =
