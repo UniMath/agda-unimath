@@ -202,16 +202,16 @@ module _
                     ap
                       ( is-map-over-map-total-fibered-map f g h x ∙_)
                       ( inv-htpy-left-whisk-inv-htpy g E x))) ∘e
-                ( ( equiv-right-transpose-htpy-concat
-                    ( inv-htpy (L ·r f))
-                    ( g ·l E)
-                    ( is-map-over-map-total-fibered-map f g h)) ∘e
-                  ( equiv-left-transpose-htpy-concat'
-                    ( g ·l E)
-                    ( L ·r f)
-                    ( is-map-over-map-total-fibered-map f g h)))))) ∘e
-        ( ( equiv-left-swap-Σ) ∘e
-          ( extensionality-fibered-map f g (pullback-hom f g j) h)))
+                ( equiv-right-transpose-htpy-concat
+                  ( inv-htpy (L ·r f))
+                  ( g ·l E)
+                  ( is-map-over-map-total-fibered-map f g h)) ∘e
+                ( equiv-left-transpose-htpy-concat'
+                  ( g ·l E)
+                  ( L ·r f)
+                  ( is-map-over-map-total-fibered-map f g h))))) ∘e
+        ( equiv-left-swap-Σ) ∘e
+        ( extensionality-fibered-map f g (pullback-hom f g j) h))
 
   compute-fiber-pullback-hom :
     lifting-square-fibered-map f g h ≃ fiber (pullback-hom f g) h
