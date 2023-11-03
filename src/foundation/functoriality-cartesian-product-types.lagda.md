@@ -93,20 +93,18 @@ module _
   is-section-map-inv-map-prod :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     map-prod f g ∘ map-inv-map-prod f g H K ~ id
-  is-section-map-inv-map-prod f g H K (c , d) =
+  is-section-map-inv-map-prod f g H K =
     htpy-map-prod
       ( is-section-map-inv-is-equiv H)
       ( is-section-map-inv-is-equiv K)
-      ( c , d)
 
   is-retraction-map-inv-map-prod :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     map-inv-map-prod f g H K ∘ map-prod f g ~ id
-  is-retraction-map-inv-map-prod f g H K (a , b) =
+  is-retraction-map-inv-map-prod f g H K =
     htpy-map-prod
       ( is-retraction-map-inv-is-equiv H)
       ( is-retraction-map-inv-is-equiv K)
-      ( a , b)
 
   is-equiv-map-prod :
     (f : A → C) (g : B → D) →
@@ -154,9 +152,9 @@ module _
 
   map-inv-compute-fiber-map-prod :
     fiber f (pr1 t) × fiber g (pr2 t) → fiber (map-prod f g) t
-  pr1 (pr1 (map-inv-compute-fiber-map-prod ((x , refl) , y , refl))) = x
-  pr2 (pr1 (map-inv-compute-fiber-map-prod ((x , refl) , y , refl))) = y
-  pr2 (map-inv-compute-fiber-map-prod ((x , refl) , y , refl)) = refl
+  pr1 (pr1 (map-inv-compute-fiber-map-prod ((x , refl) , (y , refl)))) = x
+  pr2 (pr1 (map-inv-compute-fiber-map-prod ((x , refl) , (y , refl)))) = y
+  pr2 (map-inv-compute-fiber-map-prod ((x , refl) , (y , refl))) = refl
 
   is-section-map-inv-compute-fiber-map-prod :
     map-compute-fiber-map-prod ∘ map-inv-compute-fiber-map-prod ~ id
