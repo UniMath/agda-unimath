@@ -10,7 +10,7 @@ module graph-theory.complete-multipartite-graphs where
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
-open import graph-theory.finite-graphs
+open import graph-theory.finite-undirected-graphs
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.dependent-function-types

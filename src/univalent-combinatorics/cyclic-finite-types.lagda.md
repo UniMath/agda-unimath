@@ -1,6 +1,8 @@
 # Cyclic finite types
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module univalent-combinatorics.cyclic-finite-types where
 ```
 
@@ -8,6 +10,7 @@ module univalent-combinatorics.cyclic-finite-types where
 
 ```agda
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
@@ -53,9 +56,11 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-A cyclic type is a type `X` equipped with an endomorphism `f : X → X` such that
-the pair `(X, f)` is merely equivalent to the pair `(ℤ-Mod k, +1)` for some
-`k : ℕ`.
+A cyclic type is a
+[type `X` equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md)
+`f : X → X` such that the pair `(X, f)` is
+[merely equivalent](structured-types.mere-equivalences-types-equipped-with-endomorphisms.md)
+to the pair `(ℤ-Mod k, +1)` for some `k : ℕ`.
 
 ## Definitions
 
@@ -221,6 +226,8 @@ module _
 
 ## Properties
 
+### Characterization of equality of equivalences of cyclic types
+
 ```agda
 module _
   {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
@@ -286,7 +293,11 @@ module _
     (e f : equiv-Cyclic-Type k X Y) → htpy-equiv-Cyclic-Type e f → e ＝ f
   eq-htpy-equiv-Cyclic-Type e f =
     map-inv-equiv (extensionality-equiv-Cyclic-Type e f)
+```
 
+### Composition of equivalences of cyclic types
+
+```agda
 comp-equiv-Cyclic-Type :
   {l1 l2 l3 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   (Z : Cyclic-Type l3 k) →
@@ -296,7 +307,11 @@ comp-equiv-Cyclic-Type k X Y Z =
     ( endo-Cyclic-Type k X)
     ( endo-Cyclic-Type k Y)
     ( endo-Cyclic-Type k Z)
+```
 
+### Inverses of equivalences of cyclic types
+
+```agda
 inv-equiv-Cyclic-Type :
   {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k) →
   equiv-Cyclic-Type k X Y → equiv-Cyclic-Type k Y X
@@ -304,7 +319,11 @@ inv-equiv-Cyclic-Type k X Y =
   inv-equiv-Type-With-Endomorphism
     ( endo-Cyclic-Type k X)
     ( endo-Cyclic-Type k Y)
+```
 
+### Associativity of composition of equivalences of cyclic types
+
+```agda
 associative-comp-equiv-Cyclic-Type :
   {l1 l2 l3 l4 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   (Z : Cyclic-Type l3 k) (W : Cyclic-Type l4 k) (g : equiv-Cyclic-Type k Z W)
@@ -320,7 +339,11 @@ associative-comp-equiv-Cyclic-Type k X Y Z W g f e =
     ( comp-equiv-Cyclic-Type
         k X Z W g (comp-equiv-Cyclic-Type k X Y Z f e))
     ( refl-htpy)
+```
 
+### Unit laws for composition of equivalences of cyclic types
+
+```agda
 module _
   {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   (e : equiv-Cyclic-Type k X Y)
@@ -341,6 +364,15 @@ module _
       ( comp-equiv-Cyclic-Type k X X Y e (id-equiv-Cyclic-Type k X))
       ( e)
       ( refl-htpy)
+```
+
+### Inverse laws for equivalences of cyclic types
+
+```agda
+module _
+  {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
+  (e : equiv-Cyclic-Type k X Y)
+  where
 
   left-inverse-law-comp-equiv-Cyclic-Type :
     Id
@@ -361,7 +393,11 @@ module _
       ( comp-equiv-Cyclic-Type k Y X Y e (inv-equiv-Cyclic-Type k X Y e))
       ( id-equiv-Cyclic-Type k Y)
       ( is-section-map-inv-equiv (equiv-equiv-Cyclic-Type k X Y e))
+```
 
+### Any two cyclic types of order `k` are merely equal
+
+```agda
 mere-eq-Cyclic-Type : {l : Level} (k : ℕ) (X Y : Cyclic-Type l k) → mere-eq X Y
 mere-eq-Cyclic-Type k X Y =
   apply-universal-property-trunc-Prop
@@ -376,19 +412,34 @@ mere-eq-Cyclic-Type k X Y =
             ( eq-equiv-Cyclic-Type k X Y
               ( comp-equiv-Cyclic-Type k X (ℤ-Mod-Cyclic-Type k) Y f
                 ( inv-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X e)))))
+```
 
+### The type of cyclic types of order `k` is `0`-connected
+
+```agda
 is-0-connected-Cyclic-Type :
   (k : ℕ) → is-0-connected (Cyclic-Type lzero k)
 is-0-connected-Cyclic-Type k =
   is-0-connected-mere-eq
     ( ℤ-Mod-Cyclic-Type k)
     ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
+```
 
+### The higher group of cyclic types
+
+```agda
 ∞-group-Cyclic-Type :
   (k : ℕ) → ∞-Group (lsuc lzero)
 pr1 (∞-group-Cyclic-Type k) = Cyclic-Type-Pointed-Type k
 pr2 (∞-group-Cyclic-Type k) = is-0-connected-Cyclic-Type k
+```
 
+### Characterization of equality of cyclic types
+
+To show that a cyclic type `X` is equal to a standard cyclic type, it suffices
+to construct a point in `X`.
+
+```agda
 Eq-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero k → UU lzero
 Eq-Cyclic-Type k X = type-Cyclic-Type k X
 
@@ -589,7 +640,11 @@ is-set-type-Ω-Cyclic-Type k =
     ( ℤ-Mod k)
     ( equiv-compute-Ω-Cyclic-Type k)
     ( is-set-ℤ-Mod k)
+```
 
+### The concrete group of cyclic types
+
+```agda
 concrete-group-Cyclic-Type :
   (k : ℕ) → Concrete-Group (lsuc lzero)
 pr1 (concrete-group-Cyclic-Type k) = ∞-group-Cyclic-Type k
@@ -614,6 +669,18 @@ iso-Ω-Cyclic-Type-Group k =
     ( Ω-Cyclic-Type-Group k)
     ( ℤ-Mod-Group k)
     ( equiv-Ω-Cyclic-Type-Group k)
+```
+
+### Reduction of a cyclic type to a linear ordering, given an element
+
+```agda
+module _
+  {l1 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (x : type-Cyclic-Type k X)
+  where
+
+  leq-Cyclic-Type :
+    (y z : type-Cyclic-Type k X) → UU {!!}
+  leq-Cyclic-Type y z = leq-Fin k {!equiv-compute-Ω-Cyclic-Type k!} {!!}
 ```
 
 ## See also
