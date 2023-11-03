@@ -39,9 +39,9 @@ module _
   where
 
   map-suspension-structure : suspension-structure A (suspension B)
-pr1 map-suspension-structure = north-suspension
-pr1 (pr2 map-suspension-structure) = south-suspension
-pr2 (pr2 map-suspension-structure) = meridian-suspension ∘ f
+  pr1 map-suspension-structure = north-suspension
+  pr1 (pr2 map-suspension-structure) = south-suspension
+  pr2 (pr2 map-suspension-structure) = meridian-suspension ∘ f
 
   map-suspension : suspension A → suspension B
   map-suspension =
