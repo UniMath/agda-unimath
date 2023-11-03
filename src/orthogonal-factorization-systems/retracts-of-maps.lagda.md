@@ -403,7 +403,7 @@ module _
 In fact, we only need the following data to show this:
 
 ```text
-       s         r
+       s    H    r
   A ------> X ------> A
   |         |
   g    S    f
