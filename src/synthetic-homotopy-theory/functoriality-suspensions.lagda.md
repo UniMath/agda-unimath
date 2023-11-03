@@ -178,9 +178,9 @@ module _
   pr2 (pr2 htpy-function-out-of-suspension-comp-map-suspension) =
     coherence-square-identifications-comp-map-suspension
 
-  preserves-comp-map-suspension' :
+  inv-preserves-comp-map-suspension :
     map-suspension g ∘ map-suspension f ~ map-suspension (g ∘ f)
-  preserves-comp-map-suspension' =
+  inv-preserves-comp-map-suspension =
     htpy-htpy-function-out-of-suspension A
       ( map-suspension g ∘ map-suspension f)
       ( map-suspension (g ∘ f))
@@ -188,5 +188,5 @@ module _
 
   preserves-comp-map-suspension :
     map-suspension (g ∘ f) ~ map-suspension g ∘ map-suspension f
-  preserves-comp-map-suspension = inv-htpy preserves-comp-map-suspension'
+  preserves-comp-map-suspension = inv-htpy inv-preserves-comp-map-suspension
 ```
