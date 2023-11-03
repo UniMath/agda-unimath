@@ -281,31 +281,31 @@ module _
       ( is-retract-of-codomain-retract-of-map f g k y) ∙
       ( inv p)
     coherence-is-retraction-fiber-retract-of-map y (x , refl) =
-      ( ( ( ( left-transpose-htpy-concat
+      ( ( ( left-transpose-htpy-concat
+            ( coherence-retraction-retract-of-map f g k ·r
+              section-of-domain-retract-of-map f g k)
+            ( g ·l is-retract-of-domain-retract-of-map f g k)
+            ( ( retraction-of-codomain-retract-of-map f g k ·l
+                inv-htpy (coherence-section-retract-of-map f g k)) ∙h
+              ( is-retract-of-codomain-retract-of-map f g k ·r g))
+            ( inv-htpy (coherence-retract-of-map f g k))) ∙h
+          ( inv-htpy-assoc-htpy
+            ( inv-htpy
               ( coherence-retraction-retract-of-map f g k ·r
-                section-of-domain-retract-of-map f g k)
-              ( g ·l is-retract-of-domain-retract-of-map f g k)
-              ( ( retraction-of-codomain-retract-of-map f g k ·l
-                  inv-htpy (coherence-section-retract-of-map f g k)) ∙h
-                ( is-retract-of-codomain-retract-of-map f g k ·r g))
-              ( inv-htpy (coherence-retract-of-map f g k))) ∙h
-            ( inv-htpy-assoc-htpy
-              ( inv-htpy
-                ( coherence-retraction-retract-of-map f g k ·r
-                  section-of-domain-retract-of-map f g k))
-              ( retraction-of-codomain-retract-of-map f g k ·l
-                inv-htpy (coherence-section-retract-of-map f g k))
-              ( is-retract-of-codomain-retract-of-map f g k ·r g)))
-          ( x)) ∙
-        ( ap
-          ( λ p →
-            ( inv
-              ( coherence-retraction-retract-of-map f g k
-                ( section-of-domain-retract-of-map f g k x))) ∙
-            ( ap (retraction-of-codomain-retract-of-map f g k) p) ∙
-            ( is-retract-of-codomain-retract-of-map f g k y))
-          ( inv right-unit)) ∙
-        ( inv right-unit))
+                section-of-domain-retract-of-map f g k))
+            ( retraction-of-codomain-retract-of-map f g k ·l
+              inv-htpy (coherence-section-retract-of-map f g k))
+            ( is-retract-of-codomain-retract-of-map f g k ·r g)))
+        ( x)) ∙
+      ( ap
+        ( λ p →
+          ( inv
+            ( coherence-retraction-retract-of-map f g k
+              ( section-of-domain-retract-of-map f g k x))) ∙
+          ( ap (retraction-of-codomain-retract-of-map f g k) p) ∙
+          ( is-retract-of-codomain-retract-of-map f g k y))
+        ( inv right-unit)) ∙
+      ( inv right-unit)
 
   is-retraction-fiber-retract-of-map :
     (y : B) →
