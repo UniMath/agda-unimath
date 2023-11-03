@@ -678,11 +678,11 @@ module _
   is-0-connected-classifying-type-Group =
     is-0-connected-classifying-type-Concrete-Group concrete-group-Group
 
-  abstract-group-concrete-group-Group :
-    iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
-  abstract-group-concrete-group-Group =
+  group-concrete-group-Group :
+    iso-Group (group-Concrete-Group concrete-group-Group) G
+  group-concrete-group-Group =
     iso-equiv-Group
-      ( abstract-group-Concrete-Group concrete-group-Group)
+      ( group-Concrete-Group concrete-group-Group)
       ( G)
       ( ( equiv-Eq-equiv-Torsor-Abstract-Group
           ( principal-Torsor-Abstract-Group G)) ,
