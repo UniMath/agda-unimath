@@ -305,6 +305,14 @@ module _
   pr1 interchange-Σ-Σ = map-interchange-Σ-Σ
   pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
 
+  interchange-iterated-Σ-Σ :
+    Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y))) ≃
+    Σ A (λ x → Σ (C x) (λ z → Σ (B x) λ y → D x y z))
+  interchange-iterated-Σ-Σ =
+    associative-Σ' A C (λ x z → Σ (B x) λ y → D x y z) ∘e
+    interchange-Σ-Σ ∘e
+    inv-associative-Σ' A B (λ x y → Σ (C x) (D x y))
+
   eq-interchange-Σ-Σ-is-contr :
     {a : A} {b : B a} → is-torsorial (D a b) →
     {x y : Σ (C a) (D a b)} →
