@@ -18,7 +18,6 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.morphisms-cospans
 open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks
