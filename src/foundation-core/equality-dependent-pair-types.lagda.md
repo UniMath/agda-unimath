@@ -72,9 +72,12 @@ module _
     {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
   eq-pair-eq-pr2 {x} = ap {B = Σ A B} (pair x)
 
+  ap-pr1-eq-pair-eq-pr2 :
+    {x : A} {s t : B x} (p : s ＝ t) → ap pr1 (eq-pair-eq-pr2 p) ＝ refl
+  ap-pr1-eq-pair-eq-pr2 refl = refl
+
   is-retraction-pair-eq-Σ :
-    (s t : Σ A B) →
-    ((pair-eq-Σ {s} {t}) ∘ (eq-pair-Σ' {s} {t})) ~ id {A = Eq-Σ s t}
+    (s t : Σ A B) → pair-eq-Σ {s} {t} ∘ eq-pair-Σ' {s} {t} ~ id {A = Eq-Σ s t}
   is-retraction-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
 
   is-section-pair-eq-Σ :
