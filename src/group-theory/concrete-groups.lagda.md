@@ -21,6 +21,8 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.monoids
+open import group-theory.opposite-groups
+open import group-theory.opposite-semigroups
 open import group-theory.semigroups
 
 open import higher-group-theory.higher-groups
@@ -181,21 +183,21 @@ module _
   pr2 (pr2 is-unital-semigroup-Concrete-Group) =
     right-unit-law-mul-Concrete-Group
 
-  is-abstract-group-Concrete-Group' :
+  is-group-Concrete-Group' :
     is-group' semigroup-Concrete-Group is-unital-semigroup-Concrete-Group
-  pr1 is-abstract-group-Concrete-Group' = inv-Concrete-Group
-  pr1 (pr2 is-abstract-group-Concrete-Group') =
+  pr1 is-group-Concrete-Group' = inv-Concrete-Group
+  pr1 (pr2 is-group-Concrete-Group') =
     left-inverse-law-mul-Concrete-Group
-  pr2 (pr2 is-abstract-group-Concrete-Group') =
+  pr2 (pr2 is-group-Concrete-Group') =
     right-inverse-law-mul-Concrete-Group
 
-  is-abstract-group-Concrete-Group : is-group semigroup-Concrete-Group
-  pr1 is-abstract-group-Concrete-Group = is-unital-semigroup-Concrete-Group
-  pr2 is-abstract-group-Concrete-Group = is-abstract-group-Concrete-Group'
+  is-group-Concrete-Group : is-group semigroup-Concrete-Group
+  pr1 is-group-Concrete-Group = is-unital-semigroup-Concrete-Group
+  pr2 is-group-Concrete-Group = is-group-Concrete-Group'
 
-  abstract-group-Concrete-Group : Group l
-  pr1 abstract-group-Concrete-Group = semigroup-Concrete-Group
-  pr2 abstract-group-Concrete-Group = is-abstract-group-Concrete-Group
+  group-Concrete-Group : Group l
+  pr1 group-Concrete-Group = semigroup-Concrete-Group
+  pr2 group-Concrete-Group = is-group-Concrete-Group
 ```
 
 ### The opposite abstract group associated to a concrete group
@@ -206,33 +208,16 @@ module _
   where
 
   op-semigroup-Concrete-Group : Semigroup l
-  pr1 op-semigroup-Concrete-Group = set-Concrete-Group G
-  pr1 (pr2 op-semigroup-Concrete-Group) = mul-Concrete-Group' G
-  pr2 (pr2 op-semigroup-Concrete-Group) x y z =
-    inv (associative-mul-Concrete-Group G z y x)
+  op-semigroup-Concrete-Group = op-Semigroup (semigroup-Concrete-Group G)
 
   is-unital-op-semigroup-Concrete-Group :
     is-unital-Semigroup op-semigroup-Concrete-Group
-  pr1 is-unital-op-semigroup-Concrete-Group = unit-Concrete-Group G
-  pr1 (pr2 is-unital-op-semigroup-Concrete-Group) =
-    right-unit-law-mul-Concrete-Group G
-  pr2 (pr2 is-unital-op-semigroup-Concrete-Group) =
-    left-unit-law-mul-Concrete-Group G
+  is-unital-op-semigroup-Concrete-Group =
+    is-unital-op-Group (group-Concrete-Group G)
 
-  is-abstract-group-op-Concrete-Group' :
-    is-group' op-semigroup-Concrete-Group is-unital-op-semigroup-Concrete-Group
-  pr1 is-abstract-group-op-Concrete-Group' = inv-Concrete-Group G
-  pr1 (pr2 is-abstract-group-op-Concrete-Group') =
-    right-inverse-law-mul-Concrete-Group G
-  pr2 (pr2 is-abstract-group-op-Concrete-Group') =
-    left-inverse-law-mul-Concrete-Group G
+  is-group-op-Concrete-Group : is-group op-semigroup-Concrete-Group
+  is-group-op-Concrete-Group = is-group-op-Group (group-Concrete-Group G)
 
-  is-abstract-group-op-Concrete-Group : is-group op-semigroup-Concrete-Group
-  pr1 is-abstract-group-op-Concrete-Group =
-    is-unital-op-semigroup-Concrete-Group
-  pr2 is-abstract-group-op-Concrete-Group = is-abstract-group-op-Concrete-Group'
-
-  op-abstract-group-Concrete-Group : Group l
-  pr1 op-abstract-group-Concrete-Group = op-semigroup-Concrete-Group
-  pr2 op-abstract-group-Concrete-Group = is-abstract-group-op-Concrete-Group
+  op-group-Concrete-Group : Group l
+  op-group-Concrete-Group = op-Group (group-Concrete-Group G)
 ```
