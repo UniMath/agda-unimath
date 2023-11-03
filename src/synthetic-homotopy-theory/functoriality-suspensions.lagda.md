@@ -150,10 +150,10 @@ module _
             ( meridian-suspension a)))
         ( coherence-square-identifications-ap
           ( map-suspension g)
-          ( ap (map-suspension f) (meridian-suspension a))
-          ( compute-south-map-suspension f)
           ( compute-north-map-suspension f)
+          ( ap (map-suspension f) (meridian-suspension a))
           ( meridian-suspension (f a))
+          ( compute-south-map-suspension f)
           ( compute-meridian-map-suspension f a)))
       ( coherence-square-identifications-comp-horizontal
         ( ap (map-suspension g) (meridian-suspension (f a)))
@@ -161,10 +161,10 @@ module _
         ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
         ( compute-meridian-map-suspension g (f a))
         ( coherence-square-identifications-horizontal-inv
-          ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
-          ( compute-south-map-suspension (g ∘ f))
           ( compute-north-map-suspension (g ∘ f))
+          ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
           ( meridian-suspension (g (f a)))
+          ( compute-south-map-suspension (g ∘ f))
           ( compute-meridian-map-suspension (g ∘ f) a)))
 
   htpy-function-out-of-suspension-comp-map-suspension :

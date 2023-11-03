@@ -192,11 +192,11 @@ module _
   where
 
   coherence-square-identifications-horizontal-inv :
-    (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w) →
+     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (inv top) right left (inv bottom)
-  coherence-square-identifications-horizontal-inv left refl refl refl coh =
-    inv coh ∙ right-unit
+  coherence-square-identifications-horizontal-inv refl refl right refl coh =
+    right-unit ∙ inv coh
 ```
 
 ### Functions acting on squares of identifications
@@ -207,13 +207,12 @@ module _
   where
 
   coherence-square-identifications-ap :
-    (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w) →
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications
       ( ap f top)
       ( ap f left)
       ( ap f right)
       ( ap f bottom)
-  coherence-square-identifications-ap left refl refl refl coh =
-    ap (λ q → ap f q ∙ refl) (inv right-unit ∙ coh)
+  coherence-square-identifications-ap refl refl right refl coh = ap (ap f) coh
 ```
