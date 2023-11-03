@@ -49,9 +49,9 @@ module _
           ( comp-functor-Precategory C D C G F)
           ( id-functor-Precategory C))) ×
     Σ ( functor-Precategory D C)
-      ( λ G →
+      ( λ H →
         ( natural-isomorphism-Precategory D D
-          ( comp-functor-Precategory D C D F G)
+          ( comp-functor-Precategory D C D F H)
           ( id-functor-Precategory D)))
 ```
 

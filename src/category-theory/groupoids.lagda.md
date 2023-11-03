@@ -33,7 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A groupoid is a category in which every morphism is an isomorphism.
+A **groupoid** is a [category](category-theory.categories.md) in which every
+morphism is an [isomorphism](category-theory.isomorphisms-in-categories.md).
 
 ## Definition
 
@@ -41,12 +42,12 @@ A groupoid is a category in which every morphism is an isomorphism.
 is-groupoid-prop-Category :
   {l1 l2 : Level} (C : Category l1 l2) → Prop (l1 ⊔ l2)
 is-groupoid-prop-Category C =
-  is-groupoid-prop-Precategory (precategory-Category C)
+  is-pregroupoid-prop-Precategory (precategory-Category C)
 
 is-groupoid-Category :
   {l1 l2 : Level} (C : Category l1 l2) → UU (l1 ⊔ l2)
 is-groupoid-Category C =
-  is-groupoid-Precategory (precategory-Category C)
+  is-pregroupoid-Precategory (precategory-Category C)
 
 Groupoid : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Groupoid l1 l2 = Σ (Category l1 l2) is-groupoid-Category
@@ -167,7 +168,7 @@ module _
       ( iso-eq-Precategory precategory-Groupoid-1-Type x)
 
   is-groupoid-groupoid-1-Type :
-    is-groupoid-Precategory precategory-Groupoid-1-Type
+    is-pregroupoid-Precategory precategory-Groupoid-1-Type
   pr1 (is-groupoid-groupoid-1-Type x y p) = inv p
   pr1 (pr2 (is-groupoid-groupoid-1-Type x y p)) = left-inv p
   pr2 (pr2 (is-groupoid-groupoid-1-Type x y p)) = right-inv p
@@ -219,3 +220,7 @@ module _
     type-equiv-1-Type (1-type-Groupoid (groupoid-1-Type X)) X
   equiv-1-type-groupoid-1-Type = id-equiv
 ```
+
+## External links
+
+- [univalent groupoid](https://ncatlab.org/nlab/show/univalent+groupoid) at nlab
