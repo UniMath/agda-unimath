@@ -332,7 +332,7 @@ module _
     is-retraction-fiber-retract-of-map y
 ```
 
-### If `g` is a retract of `f`, then the fiber projection of `g` is a retract of the fiber projection of `f`
+### If `g` is a retract of `f`, then the fiber projections of `g` are retracts of the fiber projections of `f`
 
 ```agda
 module _
