@@ -589,9 +589,9 @@ module _
   pr1 (equiv-ap e x y) = ap (map-equiv e)
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 
-  map-equiv-ap :
+  inv-map-equiv-ap :
     (e : A ≃ B) (x y : A) → (map-equiv e x ＝ map-equiv e y) → (x ＝ y)
-  map-equiv-ap e x y = map-equiv (inv-equiv (equiv-ap e x y))
+  inv-map-equiv-ap e x y = map-equiv (inv-equiv (equiv-ap e x y))
 ```
 
 ## Equivalence reasoning

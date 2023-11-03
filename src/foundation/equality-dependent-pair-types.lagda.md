@@ -154,9 +154,7 @@ module _
     (s t : Σ (Σ A B) C) →
     (s ＝ t) ≃
     ( Σ
-      ( Σ
-        ( pr1 (pr1 s) ＝ pr1 (pr1 t))
-        ( λ p → dependent-identification B p (pr2 (pr1 s)) (pr2 (pr1 t))))
+      ( Eq-Σ (pr1 s) (pr1 t))
       ( λ q → dependent-identification C (eq-pair-Σ' q) (pr2 s) (pr2 t)))
   equiv-triple-eq-Σ s t =
     ( equiv-Σ
@@ -170,33 +168,28 @@ module _
       ( λ p →
         ( equiv-tr
           ( λ q → dependent-identification C q (pr2 s) (pr2 t))
-          ( map-equiv-ap
-            ( equiv-pair-eq-Σ (pr1 s) (pr1 t))
-            ( p)
-            ( eq-pair-Σ' (pair-eq-Σ p))
-        ( inv-map-eq-transpose-equiv'
-          ( equiv-pair-eq-Σ (pr1 s) (pr1 t))
-          ( htpy-eq
-            ( eq-base-eq-pair-Σ
-              ( eq-is-contr'
-                ( is-contr-section-is-equiv
-                  ( is-equiv-pair-eq-Σ (pr1 s) (pr1 t)))
-                ( section-is-equiv (is-equiv-pair-eq-Σ (pr1 s) (pr1 t)))
-                ( eq-pair-Σ' , is-retraction-pair-eq-Σ (pr1 s) (pr1 t))))
-            ( pair-eq-Σ p))))))) ∘e
+          ( inv (is-section-pair-eq-Σ (pr1 s) (pr1 t) p))))) ∘e
     ( equiv-pair-eq-Σ s t)
 
-  coh-triple-eq-Σ :
+  triple-eq-Σ :
+    (s t : Σ (Σ A B) C) →
+    (s ＝ t) →
+    ( Σ
+      ( Eq-Σ (pr1 s) (pr1 t))
+      ( λ q → dependent-identification C (eq-pair-Σ' q) (pr2 s) (pr2 t)))
+  triple-eq-Σ s t = map-equiv (equiv-triple-eq-Σ s t)
+
+  coh-triple-Σ :
     {s t : Σ A (λ x → Σ (B x) λ y → C (x , y))} (p : s ＝ t) →
     eq-base-eq-pair-Σ p ＝
     eq-base-eq-pair-Σ (eq-base-eq-pair-Σ (ap (map-inv-associative-Σ A B C) p))
-  coh-triple-eq-Σ refl = refl
+  coh-triple-Σ refl = refl
 
-  dependent-eq-family-eq-iterated-Σ :
+  dependent-eq-snd-eq-iterated-Σ :
     (s t : Σ A (λ x → Σ (B x) λ y → C (x , y))) (p : s ＝ t) →
     dependent-identification B (eq-base-eq-pair-Σ p) (pr1 (pr2 s)) (pr1 (pr2 t))
-  dependent-eq-family-eq-iterated-Σ s t p =
-    ( ap (λ q → tr B q (pr1 (pr2 s))) (coh-triple-eq-Σ p)) ∙
+  dependent-eq-snd-eq-iterated-Σ s t p =
+    ( ap (λ q → tr B q (pr1 (pr2 s))) (coh-triple-Σ p)) ∙
     ( pr2
       ( pr1
         ( map-equiv
