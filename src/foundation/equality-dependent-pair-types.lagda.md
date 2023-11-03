@@ -143,20 +143,24 @@ module _
   triangle-eq-pair-Σ refl q = refl
 ```
 
-### Computing dependent identifications in iterated dependent pair types
+### Computing identifications in iterated dependent pair types
+
+#### Computing identifications in dependent pair types of the form Σ (Σ A B) C
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
   where
 
-  equiv-triple-eq-Σ :
+  Eq-Σ²' : (s t : Σ (Σ A B) C) → UU (l1 ⊔ l2 ⊔ l3)
+  Eq-Σ²' s t =
+    Σ ( Eq-Σ (pr1 s) (pr1 t))
+      ( λ q → dependent-identification C (eq-pair-Σ' q) (pr2 s) (pr2 t))
+
+  equiv-triple-eq-Σ' :
     (s t : Σ (Σ A B) C) →
-    (s ＝ t) ≃
-    ( Σ
-      ( Eq-Σ (pr1 s) (pr1 t))
-      ( λ q → dependent-identification C (eq-pair-Σ' q) (pr2 s) (pr2 t)))
-  equiv-triple-eq-Σ s t =
+    (s ＝ t) ≃ Eq-Σ²' s t
+  equiv-triple-eq-Σ' s t =
     ( equiv-Σ
       ( λ q →
         ( dependent-identification
@@ -171,32 +175,62 @@ module _
           ( inv (is-section-pair-eq-Σ (pr1 s) (pr1 t) p))))) ∘e
     ( equiv-pair-eq-Σ s t)
 
-  triple-eq-Σ :
+  triple-eq-Σ' :
     (s t : Σ (Σ A B) C) →
-    (s ＝ t) →
-    ( Σ
-      ( Eq-Σ (pr1 s) (pr1 t))
-      ( λ q → dependent-identification C (eq-pair-Σ' q) (pr2 s) (pr2 t)))
-  triple-eq-Σ s t = map-equiv (equiv-triple-eq-Σ s t)
+    (s ＝ t) → Eq-Σ²' s t
+  triple-eq-Σ' s t = map-equiv (equiv-triple-eq-Σ' s t)
+```
 
-  coh-triple-Σ :
-    {s t : Σ A (λ x → Σ (B x) λ y → C (x , y))} (p : s ＝ t) →
+#### Computing dependent identifications on the second component
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
+
+  coh-eq-base-Σ² :
+    {s t : Σ A (λ x → Σ (B x) λ y → C x y)} (p : s ＝ t) →
     eq-base-eq-pair-Σ p ＝
-    eq-base-eq-pair-Σ (eq-base-eq-pair-Σ (ap (map-inv-associative-Σ A B C) p))
-  coh-triple-Σ refl = refl
+    eq-base-eq-pair-Σ (eq-base-eq-pair-Σ (ap (map-inv-associative-Σ' A B C) p))
+  coh-eq-base-Σ² refl = refl
 
-  dependent-eq-snd-eq-iterated-Σ :
-    (s t : Σ A (λ x → Σ (B x) λ y → C (x , y))) (p : s ＝ t) →
+  dependent-eq-second-component-eq-Σ² :
+    {s t : Σ A (λ x → Σ (B x) λ y → C x y)} (p : s ＝ t) →
     dependent-identification B (eq-base-eq-pair-Σ p) (pr1 (pr2 s)) (pr1 (pr2 t))
-  dependent-eq-snd-eq-iterated-Σ s t p =
-    ( ap (λ q → tr B q (pr1 (pr2 s))) (coh-triple-Σ p)) ∙
+  dependent-eq-second-component-eq-Σ² {s = s} {t = t} p =
+    ( ap (λ q → tr B q (pr1 (pr2 s))) (coh-eq-base-Σ² p)) ∙
     ( pr2
       ( pr1
-        ( map-equiv
-          ( equiv-triple-eq-Σ
-            ( map-inv-associative-Σ A B C s)
-            ( map-inv-associative-Σ A B C t))
-          ( ap (map-inv-associative-Σ A B C) p))))
+        ( triple-eq-Σ'
+          ( map-inv-associative-Σ' A B C s)
+          ( map-inv-associative-Σ' A B C t)
+          ( ap (map-inv-associative-Σ' A B C) p))))
+```
+
+#### Computing dependent identifications on the third component
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (D : (x : A) → B x → C x → UU l4)
+  where
+
+  coh-eq-base-Σ³ :
+    { s t : Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y)))} (p : s ＝ t) →
+    eq-base-eq-pair-Σ p ＝
+    eq-base-eq-pair-Σ (ap (map-equiv (interchange-Σ-Σ-Σ D)) p)
+  coh-eq-base-Σ³ refl = refl
+
+  dependent-eq-third-component-eq-Σ³ :
+    { s t : Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y)))} (p : s ＝ t) →
+    dependent-identification C
+      ( eq-base-eq-pair-Σ p)
+      ( pr1 (pr2 (pr2 s)))
+      ( pr1 (pr2 (pr2 t)))
+  dependent-eq-third-component-eq-Σ³ {s = s} {t = t} p =
+    ( ap (λ q → tr C q (pr1 (pr2 (pr2 s)))) (coh-eq-base-Σ³ p)) ∙
+    ( dependent-eq-second-component-eq-Σ²
+      ( ap (map-equiv (interchange-Σ-Σ-Σ D)) p))
 ```
 
 ## See also

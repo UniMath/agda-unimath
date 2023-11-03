@@ -305,10 +305,10 @@ module _
   pr1 interchange-Σ-Σ = map-interchange-Σ-Σ
   pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
 
-  interchange-iterated-Σ-Σ :
+  interchange-Σ-Σ-Σ :
     Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y))) ≃
     Σ A (λ x → Σ (C x) (λ z → Σ (B x) λ y → D x y z))
-  interchange-iterated-Σ-Σ =
+  interchange-Σ-Σ-Σ =
     associative-Σ' A C (λ x z → Σ (B x) λ y → D x y z) ∘e
     interchange-Σ-Σ ∘e
     inv-associative-Σ' A B (λ x y → Σ (C x) (D x y))
