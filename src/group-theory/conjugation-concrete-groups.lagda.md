@@ -62,7 +62,7 @@ module _
     map-hom-Concrete-Group G G conjugation-Concrete-Group
 
   compute-map-conjugation-Concrete-Group :
-    conjugation-Group' (abstract-group-Concrete-Group G) g ~
+    conjugation-Group' (group-Concrete-Group G) g ~
     map-conjugation-Concrete-Group
   compute-map-conjugation-Concrete-Group x =
     ( assoc (inv g) x g) ∙
