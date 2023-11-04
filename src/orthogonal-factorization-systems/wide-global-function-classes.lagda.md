@@ -54,16 +54,6 @@ function-class-wide-global-function-class P =
   function-class-global-function-class
     ( global-function-class-wide-global-function-class P)
 
-is-closed-under-equiv-comp-wide-global-function-class :
-  {β : Level → Level → Level} (P : wide-global-function-class β) →
-  {l1 l2 l3 : Level} →
-  is-closed-under-equiv-comp-function-classes
-    ( function-class-wide-global-function-class P)
-    l1 l2 l3
-is-closed-under-equiv-comp-wide-global-function-class P =
-  is-closed-under-equiv-comp-global-function-class
-    ( global-function-class-wide-global-function-class P)
-
 type-wide-global-function-class :
   {β : Level → Level → Level} (P : wide-global-function-class β)
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (β l1 l2 ⊔ l1 ⊔ l2)

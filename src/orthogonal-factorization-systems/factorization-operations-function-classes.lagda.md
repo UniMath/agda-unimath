@@ -62,10 +62,16 @@ module _
   (R : function-class l3 l2 lR)
   where
 
+  instance-factorization-operation-function-class :
+    (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lL ⊔ lR)
+  instance-factorization-operation-function-class A B =
+    (f : A → B) → function-class-factorization L R f
+
   factorization-operation-function-class :
     UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lL ⊔ lR)
   factorization-operation-function-class =
-    {A : UU l1} {B : UU l2} (f : A → B) → function-class-factorization L R f
+    {A : UU l1} {B : UU l2} →
+    instance-factorization-operation-function-class A B
 ```
 
 ### Unique factorization operations into function classes
@@ -77,11 +83,16 @@ module _
   (R : function-class l3 l2 lR)
   where
 
+  instance-unique-factorization-operation-function-class :
+    (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lL ⊔ lR)
+  instance-unique-factorization-operation-function-class A B =
+    (f : A → B) → is-contr (function-class-factorization L R f)
+
   unique-factorization-operation-function-class :
     UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lL ⊔ lR)
   unique-factorization-operation-function-class =
-    {A : UU l1} {B : UU l2} (f : A → B) →
-    is-contr (function-class-factorization L R f)
+    {A : UU l1} {B : UU l2} →
+    instance-unique-factorization-operation-function-class A B
 
   is-prop-unique-factorization-operation-function-class :
     is-prop unique-factorization-operation-function-class
@@ -112,11 +123,16 @@ module _
   (R : function-class l3 l2 lR)
   where
 
+  instance-mere-factorization-property-function-class :
+    (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lL ⊔ lR)
+  instance-mere-factorization-property-function-class A B =
+    (f : A → B) → is-inhabited (function-class-factorization L R f)
+
   mere-factorization-property-function-class :
     UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lL ⊔ lR)
   mere-factorization-property-function-class =
-    {A : UU l1} {B : UU l2} (f : A → B) →
-    is-inhabited (function-class-factorization L R f)
+    {A : UU l1} {B : UU l2} →
+    instance-mere-factorization-property-function-class A B
 
   is-prop-mere-factorization-property-function-class :
     is-prop mere-factorization-property-function-class

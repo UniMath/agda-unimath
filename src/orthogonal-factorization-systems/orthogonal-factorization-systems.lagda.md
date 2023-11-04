@@ -56,8 +56,7 @@ module _
   is-orthogonal-factorization-system =
     ( is-wide-function-class L) ×
     ( ( is-wide-function-class R) ×
-      ( {A B : UU l} →
-        unique-factorization-operation-function-class L R {A} {B}))
+      ( unique-factorization-operation-function-class L R))
 
   is-prop-is-orthogonal-factorization-system :
     is-prop is-orthogonal-factorization-system
@@ -66,9 +65,7 @@ module _
       ( is-prop-is-wide-function-class L)
       ( is-prop-prod
         ( is-prop-is-wide-function-class R)
-        ( is-prop-iterated-implicit-Π 2
-            ( λ A B →
-              is-prop-unique-factorization-operation-function-class L R)))
+        ( is-prop-unique-factorization-operation-function-class L R))
 
   is-orthogonal-factorization-system-Prop : Prop (lsuc l ⊔ lL ⊔ lR)
   pr1 is-orthogonal-factorization-system-Prop =
@@ -130,12 +127,12 @@ module _
       ( is-wide-right-class-is-orthogonal-factorization-system)
 
   unique-factorization-operation-is-orthogonal-factorization-system :
-    {A B : UU l} → unique-factorization-operation-function-class L R {A} {B}
-  unique-factorization-operation-is-orthogonal-factorization-system {A} {B} =
-    pr2 (pr2 is-OFS) {A} {B}
+    unique-factorization-operation-function-class L R
+  unique-factorization-operation-is-orthogonal-factorization-system =
+    pr2 (pr2 is-OFS)
 
   factorization-operation-is-orthogonal-factorization-system :
-    {A B : UU l} → factorization-operation-function-class L R {A} {B}
+    factorization-operation-function-class L R
   factorization-operation-is-orthogonal-factorization-system f =
     center
       ( unique-factorization-operation-is-orthogonal-factorization-system f)
@@ -209,11 +206,9 @@ module _
       ( is-orthogonal-factorization-system-orthogonal-factorization-system)
 
   unique-factorization-operation-orthogonal-factorization-system :
-    {A B : UU l} →
     unique-factorization-operation-function-class
       ( left-class-orthogonal-factorization-system)
       ( right-class-orthogonal-factorization-system)
-      { A} {B}
   unique-factorization-operation-orthogonal-factorization-system =
     unique-factorization-operation-is-orthogonal-factorization-system
       ( left-class-orthogonal-factorization-system)
@@ -221,11 +216,9 @@ module _
       ( is-orthogonal-factorization-system-orthogonal-factorization-system)
 
   factorization-operation-orthogonal-factorization-system :
-    {A B : UU l} →
     factorization-operation-function-class
       ( left-class-orthogonal-factorization-system)
       ( right-class-orthogonal-factorization-system)
-      { A} {B}
   factorization-operation-orthogonal-factorization-system =
     factorization-operation-is-orthogonal-factorization-system
       ( left-class-orthogonal-factorization-system)
