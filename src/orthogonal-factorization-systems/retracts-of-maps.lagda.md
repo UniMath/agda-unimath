@@ -518,7 +518,7 @@ module _
 
 ## External links
 
-- [retract#In arrow categories](https://ncatlab.org/nlab/show/retract#in_arrow_categories)
+- [Retracts in arrow categories](https://ncatlab.org/nlab/show/retract#in_arrow_categories)
   at nlab
 
 A wikidata identifier was not available for this concept.
