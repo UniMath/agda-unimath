@@ -34,8 +34,7 @@ module _
   where
 
   square-fiber :
-    ( f ∘ (pr1 {B = λ x → Id (f x) b})) ~
-    ( (const unit B b) ∘ (const (fiber f b) unit star))
+    f ∘ pr1 ~ const unit B b ∘ const (fiber f b) unit star
   square-fiber = pr2
 
   cone-fiber : cone f (const unit B b) (fiber f b)
@@ -47,7 +46,7 @@ module _
     is-pullback-cone-fiber : is-pullback f (const unit B b) cone-fiber
     is-pullback-cone-fiber =
       is-equiv-tot-is-fiberwise-equiv
-        (λ a → is-equiv-map-inv-left-unit-law-prod)
+        ( λ a → is-equiv-map-inv-left-unit-law-prod)
 
   abstract
     universal-property-pullback-cone-fiber :

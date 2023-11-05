@@ -45,7 +45,7 @@ module _
   coherence-square-identifications :
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) → UU l
   coherence-square-identifications top left right bottom =
-    (left ∙ bottom) ＝ (top ∙ right)
+    left ∙ bottom ＝ top ∙ right
 ```
 
 ## Operations

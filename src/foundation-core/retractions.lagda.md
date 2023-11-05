@@ -26,7 +26,9 @@ A **retraction** is a map that has a right inverse, i.e. a section. Thus,
 homotopic to the identity at `A`. Moreover, in this case we say that `A` _is a
 retract of_ `B`.
 
-## Definition
+## Definitions
+
+### The type of retractions
 
 ```agda
 module _
@@ -40,11 +42,14 @@ module _
   map-retraction f = pr1
 
   is-retraction-map-retraction :
-    (f : A → B) (r : retraction f) → (map-retraction f r ∘ f) ~ id
+    (f : A → B) (r : retraction f) → map-retraction f r ∘ f ~ id
   is-retraction-map-retraction f = pr2
+```
 
-_retract-of_ :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+### Retracts of a type
+
+```agda
+_retract-of_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A retract-of B = Σ (A → B) retraction
 
 module _
@@ -58,13 +63,12 @@ module _
     (R : A retract-of B) → retraction (section-retract-of R)
   retraction-section-retract-of = pr2
 
-  retraction-retract-of : (A retract-of B) → B → A
+  retraction-retract-of : A retract-of B → B → A
   retraction-retract-of R = pr1 (retraction-section-retract-of R)
 
-  is-retraction-retraction-retract-of :
-    (R : A retract-of B) →
-    (retraction-retract-of R ∘ section-retract-of R) ~ id
-  is-retraction-retraction-retract-of R = pr2 (retraction-section-retract-of R)
+  is-retract-retract-of :
+    (R : A retract-of B) → retraction-retract-of R ∘ section-retract-of R ~ id
+  is-retract-retract-of R = pr2 (retraction-section-retract-of R)
 ```
 
 ## Properties
