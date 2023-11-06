@@ -130,6 +130,7 @@ universal-property-trunc-Set A = universal-property-trunc zero-𝕋 A
 module _
   {l1 l2 : Level} {A : UU l1} (B : Set l2)
   where
+
   equiv-universal-property-trunc-Set :
     (type-trunc-Set A → type-Set B) ≃ (A → type-Set B)
   equiv-universal-property-trunc-Set = equiv-universal-property-trunc A B
