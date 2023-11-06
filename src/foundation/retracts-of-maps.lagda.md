@@ -264,11 +264,11 @@ module _
            i''                 r''
   fib g x -----> fib f (i' x) -----> fib g x
      |               |                  |
-     |       I'      |          R'      |
+     |       I'      |        R'        |
      v               v                  v
      A ----- i ----> X ------ r ------> A
      |               |                  |
-   g |       I       f          R       | g
+   g |       I       f        R         | g
      v               v                  v
      B ------------> Y ---------------> B
              i'               r'
