@@ -461,8 +461,8 @@ module _
   (f : X → Y) (g : A → B) (k : g retract-of-map f)
   where
 
-  section-retract-section : section f → section g
-  section-retract-section =
+  section-retract-map-section : section f → section g
+  section-retract-map-section =
     section-retract-map-section' f g
       ( map-retraction-domain-retract-map f g k)
       ( retract-codomain-retract-map f g k)
@@ -568,7 +568,7 @@ module _
 
   section-retract-map-is-equiv : section g
   section-retract-map-is-equiv =
-    section-retract-section f g k (section-is-equiv H)
+    section-retract-map-section f g k (section-is-equiv H)
 
   retraction-retract-map-is-equiv : retraction g
   retraction-retract-map-is-equiv =
