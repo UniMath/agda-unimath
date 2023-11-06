@@ -128,16 +128,16 @@ module _
 
 ### If the right map has a retraction, then the reversed triangle with the retraction on the right commutes
 
-If `r : B → A` is a section of the top map `h`, then the triangle
+If `r : X → B` is a retraction of the right map `g` in a triangle `f ~ g ∘ h`, then the triangle
 
 ```text
-       t
-  B ------> A
+       f
+  A ------> X
    \       /
-   g\     /f
+   h\     /r
      \   /
       V V
-       X,
+       B,
 ```
 
 commutes.
