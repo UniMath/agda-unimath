@@ -345,6 +345,10 @@ along equivalences. Similarly, the map `j⁻¹ ∘ g` is a retraction of `h`, si
 we have `(g ∘ h ~ j) → (j⁻¹ ∘ g ∘ h ~ id)` by transposing along equivalences.
 Since `h` therefore has a section and a retraction, it is an equivalence.
 
+In fact, the above argument shows that if the top map has a section and the
+bottom map has a retraction, then the diagonal filler, and hence all other maps
+are equivalences.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -352,53 +356,68 @@ module _
   (u : coherence-triangle-maps i h f) (v : coherence-triangle-maps j g h)
   where
 
-  map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
-    is-equiv i → X → B
-  map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H =
-    f ∘ map-inv-is-equiv H
-
-  is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
-    (H : is-equiv i) →
-    h ∘ map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H ~ id
-  is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H x =
-    ( inv (u (map-inv-is-equiv H x))) ∙
-    ( is-section-map-inv-is-equiv H x)
+  section-diagonal-filler-section-top-square :
+    section i → section h
+  section-diagonal-filler-section-top-square =
+    section-right-map-triangle i h f u
 
   section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
     is-equiv i → section h
-  pr1 (section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H) =
-    map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H
-  pr2 (section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H) =
-    is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H
+  section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H =
+    section-diagonal-filler-section-top-square (section-is-equiv H)
+
+  map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    is-equiv i → X → B
+  map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H =
+    map-section h
+      ( section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H)
+
+  is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    (H : is-equiv i) →
+    is-section h
+      ( map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H)
+  is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H =
+    is-section-map-section h
+      ( section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H)
+
+  retraction-diagonal-filler-retraction-bottom-square :
+    retraction j → retraction h
+  retraction-diagonal-filler-retraction-bottom-square =
+    retraction-top-map-triangle j g h v
+
+  retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    is-equiv j → retraction h
+  retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K =
+    retraction-diagonal-filler-retraction-bottom-square (retraction-is-equiv K)
 
   map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
     is-equiv j → X → B
   map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K =
-    map-inv-is-equiv K ∘ g
+    map-retraction h
+      ( retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K)
 
   is-retraction-retraction-diagonal-fller-is-equiv-top-is-equiv-bottom-square :
     (K : is-equiv j) →
-    map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K ∘ h ~
-    id
+    is-retraction h
+      ( map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K)
   is-retraction-retraction-diagonal-fller-is-equiv-top-is-equiv-bottom-square
-    K b =
-    ( inv (ap (map-inv-is-equiv K) (v b))) ∙
-    ( is-retraction-map-inv-is-equiv K b)
+    K =
+    is-retraction-map-retraction h
+      ( retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K)
 
-  retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
-    (K : is-equiv j) → retraction h
-  pr1 (retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K) =
-    map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K
-  pr2 (retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K) =
-    is-retraction-retraction-diagonal-fller-is-equiv-top-is-equiv-bottom-square
-      K
+  is-equiv-diagonal-filler-section-top-retraction-bottom-square :
+    section i → retraction j → is-equiv h
+  pr1 (is-equiv-diagonal-filler-section-top-retraction-bottom-square H K) =
+    section-diagonal-filler-section-top-square H
+  pr2 (is-equiv-diagonal-filler-section-top-retraction-bottom-square H K) =
+    retraction-diagonal-filler-retraction-bottom-square K
 
   is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
     is-equiv i → is-equiv j → is-equiv h
-  pr1 (is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K) =
-    section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H
-  pr2 (is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K) =
-    retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K
+  is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K =
+    is-equiv-diagonal-filler-section-top-retraction-bottom-square
+      ( section-is-equiv H)
+      ( retraction-is-equiv K)
 
   is-equiv-left-is-equiv-top-is-equiv-bottom-square :
     is-equiv i → is-equiv j → is-equiv f
