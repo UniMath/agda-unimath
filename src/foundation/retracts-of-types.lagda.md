@@ -30,9 +30,9 @@ come equipped with **retract data**, i.e., with maps
   A -----> B -----> A
 ```
 
-and a [homotopy](foundation-core.homotopies.md) `r ∘ i ~ id`. The map `i` is called the **inclusion** of the
-retract data, and the map `r` is called the **underlying map of the
-retraction**.
+and a [homotopy](foundation-core.homotopies.md) `r ∘ i ~ id`. The map `i` is
+called the **inclusion** of the retract data, and the map `r` is called the
+**underlying map of the retraction**.
 
 ## Definitions
 

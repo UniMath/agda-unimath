@@ -435,7 +435,9 @@ In fact, we only need the following data to show this:
             B.
 ```
 
-Since both `r'` and `f` are assumed to have [sections](foundation-core.sections.md), it follows that the composite `r' ∘ f` has a section, and therefore `g` has a section.
+Since both `r'` and `f` are assumed to have
+[sections](foundation-core.sections.md), it follows that the composite `r' ∘ f`
+has a section, and therefore `g` has a section.
 
 ```agda
 module _
@@ -493,7 +495,8 @@ In fact, we only need the following data to show this:
            Y.
 ```
 
-Since both `f` and `i` are assumed to have retractions, it follows that `f ∘ i` has a retraction, and hence that `g` has a retraction.
+Since both `f` and `i` are assumed to have retractions, it follows that `f ∘ i`
+has a retraction, and hence that `g` has a retraction.
 
 ```agda
 module _
