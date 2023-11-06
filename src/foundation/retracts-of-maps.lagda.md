@@ -107,13 +107,13 @@ module _
   is-retract-of-map : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-retract-of-map =
     Σ ( coherence-square-maps (inclusion-retract r) g f (inclusion-retract r'))
-      ( λ S →
+      ( λ I →
         Σ ( coherence-square-maps
             ( map-retraction-retract r)
             ( f)
             ( g)
             ( map-retraction-retract r'))
-          ( coherence-retract-of-map f g r r' S))
+          ( coherence-retract-of-map f g r r' I))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
