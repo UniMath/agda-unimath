@@ -12,6 +12,7 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -24,10 +25,61 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Any [commuting square](foundation-core.commuting-squares-of-maps.md) induces a
-map between the fibers of the vertical maps.
+Any [commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+        f'
+    C -----> B
+    |        |
+  g'|        | g
+    v        v
+    A -----> X
+        f
+```
+
+induces a map between the [fibers](foundation-core.fibers-of-maps.md) of the
+vertical maps
+
+```text
+  fiber g' x → fiber g (f x).
+```
 
 ## Definitions
+
+### Any commuting square induces a family of maps between the fibers of the vertical maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (top : C → B) (left : C → A) (right : B → X) (bottom : A → X)
+  where
+
+  map-fiber-square' :
+    (H : coherence-square-maps' top left right bottom)
+    (x : A) → fiber left x → fiber right (bottom x)
+  pr1 (map-fiber-square' H x (y , p)) = top y
+  pr2 (map-fiber-square' H x (y , p)) = H y ∙ ap bottom p
+
+  coherence-fiber-square' :
+    (H : coherence-square-maps' top left right bottom)
+    (x : A) → coherence-square-maps' (map-fiber-square' H x) pr1 pr1 top
+  coherence-fiber-square' H x p = refl
+
+  map-fiber-square :
+    (H : coherence-square-maps top left right bottom)
+    (x : A) → fiber left x → fiber right (bottom x)
+  map-fiber-square H = map-fiber-square' (inv-htpy H)
+
+  coherence-fiber-square :
+    (H : coherence-square-maps top left right bottom)
+    (x : A) → coherence-square-maps (map-fiber-square H x) pr1 pr1 top
+  coherence-fiber-square H x p = refl
+
+map-fiber-square-id :
+  {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
+  map-fiber-square id g g id refl-htpy x ~ id
+map-fiber-square-id g .(g b) (b , refl) = refl
+```
 
 ### Any cone induces a family of maps between the fibers of the vertical maps
 
@@ -38,14 +90,13 @@ module _
   where
 
   map-fiber-cone : (x : A) → fiber (pr1 c) x → fiber g (f x)
-  pr1 (map-fiber-cone x t) = pr1 (pr2 c) (pr1 t)
-  pr2 (map-fiber-cone x t) = (inv (pr2 (pr2 c) (pr1 t))) ∙ (ap f (pr2 t))
-
-map-fiber-cone-id :
-  {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
-  map-fiber-cone id g (g , id , refl-htpy) x ~ id
-map-fiber-cone-id g .(g b) (b , refl) =
-  refl
+  map-fiber-cone =
+    map-fiber-square
+      ( horizontal-map-cone f g c)
+      ( vertical-map-cone f g c)
+      ( g)
+      ( f)
+      ( coherence-square-cone f g c)
 ```
 
 ## Properties
@@ -65,7 +116,7 @@ module _
     ( map-fiber-cone j h c (i x) ∘ map-fiber-cone i (pr1 c) d x)
   map-fiber-pasting-horizontal-cone
     (g , q , K) (f , p , H) .(f a) (a , refl) =
-    eq-pair-Σ-eq-pr2
+    eq-pair-eq-pr2
       ( ( ap
           ( concat' (h (q (p a))) refl)
           ( distributive-inv-concat (ap j (H a)) (K (p a)))) ∙
@@ -97,7 +148,7 @@ module _
   map-fiber-pasting-vertical-cone
     (p , q , H) (p' , q' , H') .(p (p' a))
     ((.(p' a) , refl) , (a , refl)) =
-    eq-pair-Σ-eq-pr2
+    eq-pair-eq-pr2
       ( ( right-unit) ∙
         ( distributive-inv-concat (H (p' a)) (ap g (H' a))) ∙
         ( ap
@@ -113,6 +164,12 @@ module _
           ( ( inv (ap-inv g (H' a))) ∙
             ( ap (ap g) (inv right-unit)))))
 ```
+
+## See also
+
+- In [retracts of maps](orthogonal-factorization-systems.retracts-of-maps.md),
+  we show that if `g` is a retract of `g'`, then the fibers of `g` are retracts
+  of the fibers of `g'`.
 
 ## Table of files about fibers of maps
 

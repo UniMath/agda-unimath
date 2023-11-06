@@ -181,7 +181,7 @@ module _
 
   preserves-mul-compute-symmetric-Concrete-Group :
     preserves-mul-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
       ( map-compute-symmetric-Concrete-Group)
   preserves-mul-compute-symmetric-Concrete-Group {x} {y} =
@@ -194,7 +194,7 @@ module _
 
   equiv-group-compute-symmetric-Concrete-Group :
     equiv-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   pr1 equiv-group-compute-symmetric-Concrete-Group =
     equiv-compute-symmetric-Concrete-Group
@@ -203,24 +203,24 @@ module _
 
   compute-symmetric-Concrete-Group' :
     iso-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   compute-symmetric-Concrete-Group' =
     iso-equiv-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
       ( equiv-group-compute-symmetric-Concrete-Group)
 
   compute-symmetric-Concrete-Group :
     iso-Group
-      ( abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   compute-symmetric-Concrete-Group =
     comp-iso-Group
-      ( abstract-group-Concrete-Group (symmetric-Concrete-Group A))
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
       ( compute-symmetric-Concrete-Group')
       ( iso-inv-Group
-        ( abstract-group-Concrete-Group (symmetric-Concrete-Group A)))
+        ( group-Concrete-Group (symmetric-Concrete-Group A)))
 ```

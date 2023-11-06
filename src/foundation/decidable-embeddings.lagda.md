@@ -222,7 +222,7 @@ abstract
     is-prop-is-inhabited
       ( λ H →
         is-prop-prod
-          ( is-prop-is-emb f)
+          ( is-property-is-emb f)
           ( is-prop-Π
             ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
 ```

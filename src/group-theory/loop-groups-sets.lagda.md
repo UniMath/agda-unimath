@@ -205,7 +205,7 @@ module _
   hom-abstract-automorphism-group-loop-group-Set :
     hom-Group
       ( loop-group-Set X)
-      ( abstract-group-Concrete-Group
+      ( group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
   pr1 hom-abstract-automorphism-group-loop-group-Set p =
     eq-pair-Σ
@@ -239,7 +239,7 @@ module _
 
   hom-inv-abstract-automorphism-group-loop-group-Set :
     hom-Group
-      ( abstract-group-Concrete-Group
+      ( group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
       ( loop-group-Set X)
   pr1 hom-inv-abstract-automorphism-group-loop-group-Set p =
@@ -253,15 +253,15 @@ module _
   is-section-hom-inv-abstract-automorphism-group-loop-group-Set :
     Id
       ( comp-hom-Group
-        ( abstract-group-Concrete-Group
+        ( group-Concrete-Group
           ( Automorphism-Group (Set-1-Type l) X))
         ( loop-group-Set X)
-        ( abstract-group-Concrete-Group
+        ( group-Concrete-Group
           ( Automorphism-Group (Set-1-Type l) X))
         ( hom-abstract-automorphism-group-loop-group-Set)
         ( hom-inv-abstract-automorphism-group-loop-group-Set))
       ( id-hom-Group
-        ( abstract-group-Concrete-Group
+        ( group-Concrete-Group
           ( Automorphism-Group (Set-1-Type l) X)))
   is-section-hom-inv-abstract-automorphism-group-loop-group-Set =
     eq-pair-Σ
@@ -284,10 +284,10 @@ module _
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group
-            ( abstract-group-Concrete-Group
+            ( group-Concrete-Group
               ( Automorphism-Group (Set-1-Type l) X)))
           ( semigroup-Group
-            ( abstract-group-Concrete-Group
+            ( group-Concrete-Group
               ( Automorphism-Group (Set-1-Type l) X)))
           ( id)))
 
@@ -295,7 +295,7 @@ module _
     Id
       ( comp-hom-Group
         ( loop-group-Set X)
-        ( abstract-group-Concrete-Group
+        ( group-Concrete-Group
           ( Automorphism-Group (Set-1-Type l) X))
         ( loop-group-Set X)
         ( hom-inv-abstract-automorphism-group-loop-group-Set)
@@ -327,7 +327,7 @@ module _
   iso-abstract-automorphism-group-loop-group-Set :
     iso-Group
       ( loop-group-Set X)
-      ( abstract-group-Concrete-Group
+      ( group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
   pr1 iso-abstract-automorphism-group-loop-group-Set =
     hom-abstract-automorphism-group-loop-group-Set

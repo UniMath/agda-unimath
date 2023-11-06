@@ -29,8 +29,10 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The **category of sets** consists of sets and functions. There is a category of
-sets for each universe level, and there is a large category of sets.
+The **category of [sets](foundation-core.sets.md)** consists of sets and
+functions. There is a [category](category-theory.categories.md) of sets for each
+universe level, and there is a
+[large category](category-theory.large-categories.md) of sets.
 
 ## Definitions
 
@@ -96,3 +98,19 @@ is-category-Set-Precategory :
 is-category-Set-Precategory l =
   is-category-Category (Set-Category l)
 ```
+
+## Comments
+
+Since sets are equivalent to their set-truncations, the category of sets forms a
+[full subprecategory](category-theory.full-large-subprecategories.md) of the
+homotopy precategory of types.
+
+## See also
+
+- [Presheaf categories](category-theory.presheaf-categories.md)
+
+## External links
+
+- [Set](https://ncatlab.org/nlab/show/Set) at nlab
+- [Category of sets](https://en.wikipedia.org/wiki/Category_of_sets) at
+  Wikipedia

@@ -41,24 +41,22 @@ module _
   where
 
   map-inv-left-unit-law-Σ-is-contr : B a → Σ A B
-  map-inv-left-unit-law-Σ-is-contr b = pair a b
+  pr1 (map-inv-left-unit-law-Σ-is-contr b) = a
+  pr2 (map-inv-left-unit-law-Σ-is-contr b) = b
 
   map-left-unit-law-Σ-is-contr : Σ A B → B a
   map-left-unit-law-Σ-is-contr =
-    ind-Σ
-      ( ind-singleton a C
-        ( λ x → B x → B a)
-        ( id))
+    ind-Σ (ind-singleton a C (λ x → B x → B a) (id))
 
   is-section-map-inv-left-unit-law-Σ-is-contr :
-    ( map-left-unit-law-Σ-is-contr ∘ map-inv-left-unit-law-Σ-is-contr) ~ id
+    map-left-unit-law-Σ-is-contr ∘ map-inv-left-unit-law-Σ-is-contr ~ id
   is-section-map-inv-left-unit-law-Σ-is-contr b =
     ap
       ( λ (f : B a → B a) → f b)
       ( compute-ind-singleton a C (λ x → B x → B a) id)
 
   is-retraction-map-inv-left-unit-law-Σ-is-contr :
-    ( map-inv-left-unit-law-Σ-is-contr ∘ map-left-unit-law-Σ-is-contr) ~ id
+    map-inv-left-unit-law-Σ-is-contr ∘ map-left-unit-law-Σ-is-contr ~ id
   is-retraction-map-inv-left-unit-law-Σ-is-contr =
     ind-Σ
       ( ind-singleton a C
@@ -67,8 +65,8 @@ module _
             Id
               ( ( map-inv-left-unit-law-Σ-is-contr ∘
                   map-left-unit-law-Σ-is-contr)
-                ( pair x y))
-              ( pair x y))
+                ( x , y))
+              ( x , y))
         ( λ y → ap
           ( map-inv-left-unit-law-Σ-is-contr)
           ( ap
@@ -138,12 +136,12 @@ module _
 
   is-section-map-inv-right-unit-law-Σ-is-contr :
     (H : (a : A) → is-contr (B a)) →
-    ( pr1 ∘ map-inv-right-unit-law-Σ-is-contr H) ~ id
+    pr1 ∘ map-inv-right-unit-law-Σ-is-contr H ~ id
   is-section-map-inv-right-unit-law-Σ-is-contr H = refl-htpy
 
   is-retraction-map-inv-right-unit-law-Σ-is-contr :
     (H : (a : A) → is-contr (B a)) →
-    ( map-inv-right-unit-law-Σ-is-contr H ∘ pr1) ~ id
+    map-inv-right-unit-law-Σ-is-contr H ∘ pr1 ~ id
   is-retraction-map-inv-right-unit-law-Σ-is-contr H (a , b) =
     eq-pair-Σ refl (eq-is-contr (H a))
 
@@ -173,23 +171,23 @@ module _
   {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : Σ A B → UU l3)
   where
 
-  map-associative-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
+  map-associative-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (x , y)))
   pr1 (map-associative-Σ ((x , y) , z)) = x
   pr1 (pr2 (map-associative-Σ ((x , y) , z))) = y
   pr2 (pr2 (map-associative-Σ ((x , y) , z))) = z
 
-  map-inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) → Σ (Σ A B) C
+  map-inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (x , y))) → Σ (Σ A B) C
   pr1 (pr1 (map-inv-associative-Σ (x , y , z))) = x
   pr2 (pr1 (map-inv-associative-Σ (x , y , z))) = y
   pr2 (map-inv-associative-Σ (x , y , z)) = z
 
   is-retraction-map-inv-associative-Σ :
-    (map-inv-associative-Σ ∘ map-associative-Σ) ~ id
-  is-retraction-map-inv-associative-Σ (pair (pair x y) z) = refl
+    map-inv-associative-Σ ∘ map-associative-Σ ~ id
+  is-retraction-map-inv-associative-Σ ((x , y) , z) = refl
 
   is-section-map-inv-associative-Σ :
-    (map-associative-Σ ∘ map-inv-associative-Σ) ~ id
-  is-section-map-inv-associative-Σ (pair x (pair y z)) = refl
+    map-associative-Σ ∘ map-inv-associative-Σ ~ id
+  is-section-map-inv-associative-Σ (x , (y , z)) = refl
 
   abstract
     is-equiv-map-associative-Σ : is-equiv map-associative-Σ
@@ -199,11 +197,11 @@ module _
         is-section-map-inv-associative-Σ
         is-retraction-map-inv-associative-Σ
 
-  associative-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
+  associative-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (x , y)))
   pr1 associative-Σ = map-associative-Σ
   pr2 associative-Σ = is-equiv-map-associative-Σ
 
-  inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) ≃ Σ (Σ A B) C
+  inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (x , y))) ≃ Σ (Σ A B) C
   pr1 inv-associative-Σ = map-inv-associative-Σ
   pr2 inv-associative-Σ =
     is-equiv-is-invertible
@@ -232,12 +230,12 @@ module _
   pr2 (map-inv-associative-Σ' (x , y , z)) = z
 
   is-section-map-inv-associative-Σ' :
-    (map-associative-Σ' ∘ map-inv-associative-Σ') ~ id
-  is-section-map-inv-associative-Σ' (pair x (pair y z)) = refl
+    map-associative-Σ' ∘ map-inv-associative-Σ' ~ id
+  is-section-map-inv-associative-Σ' (x , (y , z)) = refl
 
   is-retraction-map-inv-associative-Σ' :
-    ( map-inv-associative-Σ' ∘ map-associative-Σ') ~ id
-  is-retraction-map-inv-associative-Σ' (pair (pair x y) z) = refl
+    map-inv-associative-Σ' ∘ map-associative-Σ' ~ id
+  is-retraction-map-inv-associative-Σ' ((x , y) , z) = refl
 
   is-equiv-map-associative-Σ' : is-equiv map-associative-Σ'
   is-equiv-map-associative-Σ' =
@@ -265,7 +263,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   ( D : (x : A) → B x → C x → UU l4)
   where
 
@@ -286,12 +284,12 @@ module _
   pr2 (pr2 (map-inv-interchange-Σ-Σ t)) = pr2 (pr2 t)
 
   is-section-map-inv-interchange-Σ-Σ :
-    ( map-interchange-Σ-Σ ∘ map-inv-interchange-Σ-Σ) ~ id
-  is-section-map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)) = refl
+    map-interchange-Σ-Σ ∘ map-inv-interchange-Σ-Σ ~ id
+  is-section-map-inv-interchange-Σ-Σ ((a , c) , (b , d)) = refl
 
   is-retraction-map-inv-interchange-Σ-Σ :
-    ( map-inv-interchange-Σ-Σ ∘ map-interchange-Σ-Σ) ~ id
-  is-retraction-map-inv-interchange-Σ-Σ (pair (pair a b) (pair c d)) = refl
+    map-inv-interchange-Σ-Σ ∘ map-interchange-Σ-Σ ~ id
+  is-retraction-map-inv-interchange-Σ-Σ ((a , b) , (c , d)) = refl
 
   abstract
     is-equiv-map-interchange-Σ-Σ : is-equiv map-interchange-Σ-Σ
@@ -335,11 +333,11 @@ module _
   pr2 (pr2 (map-inv-left-swap-Σ (b , a , c))) = c
 
   is-retraction-map-inv-left-swap-Σ :
-    (map-inv-left-swap-Σ ∘ map-left-swap-Σ) ~ id
-  is-retraction-map-inv-left-swap-Σ (pair a (pair b c)) = refl
+    map-inv-left-swap-Σ ∘ map-left-swap-Σ ~ id
+  is-retraction-map-inv-left-swap-Σ (a , (b , c)) = refl
 
-  is-section-map-inv-left-swap-Σ : (map-left-swap-Σ ∘ map-inv-left-swap-Σ) ~ id
-  is-section-map-inv-left-swap-Σ (pair b (pair a c)) = refl
+  is-section-map-inv-left-swap-Σ : map-left-swap-Σ ∘ map-inv-left-swap-Σ ~ id
+  is-section-map-inv-left-swap-Σ (b , (a , c)) = refl
 
   abstract
     is-equiv-map-left-swap-Σ : is-equiv map-left-swap-Σ
@@ -372,12 +370,12 @@ module _
   pr2 (map-inv-right-swap-Σ ((a , c) , b)) = c
 
   is-section-map-inv-right-swap-Σ :
-    (map-right-swap-Σ ∘ map-inv-right-swap-Σ) ~ id
-  is-section-map-inv-right-swap-Σ (pair (pair x y) z) = refl
+    map-right-swap-Σ ∘ map-inv-right-swap-Σ ~ id
+  is-section-map-inv-right-swap-Σ ((x , y) , z) = refl
 
   is-retraction-map-inv-right-swap-Σ :
-    (map-inv-right-swap-Σ ∘ map-right-swap-Σ) ~ id
-  is-retraction-map-inv-right-swap-Σ (pair (pair x z) y) = refl
+    map-inv-right-swap-Σ ∘ map-right-swap-Σ ~ id
+  is-retraction-map-inv-right-swap-Σ ((x , z) , y) = refl
 
   is-equiv-map-right-swap-Σ : is-equiv map-right-swap-Σ
   is-equiv-map-right-swap-Σ =

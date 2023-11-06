@@ -24,11 +24,11 @@ A square of [homotopies](foundation-core.homotopies.md)
       |         |
  left |         | right
       v         v
-      z ------> i
+      h ------> i
         bottom
 ```
 
-is said to **commute** if there is a homotopy `left ∙h bottom ~ top ∙h right`.
+is said to **commute** if there is a homotopy `left ∙h bottom ~ top ∙h right `.
 Such a homotopy is called a **coherence** of the square.
 
 ## Definition
@@ -39,7 +39,7 @@ module _
   where
 
   coherence-square-homotopies :
-    (left : f ~ h) (bottom : h ~ i) (top : f ~ g) (right : g ~ i) → UU (l1 ⊔ l2)
-  coherence-square-homotopies left bottom top right =
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) → UU (l1 ⊔ l2)
+  coherence-square-homotopies top left right bottom =
     left ∙h bottom ~ top ∙h right
 ```

@@ -7,7 +7,6 @@ module foundation.equivalence-induction where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-systems
 open import foundation.subuniverses
@@ -17,6 +16,7 @@ open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies

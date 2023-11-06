@@ -33,7 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A groupoid is a category in which every morphism is an isomorphism.
+A **groupoid** is a [category](category-theory.categories.md) in which every
+morphism is an [isomorphism](category-theory.isomorphisms-in-categories.md).
 
 ## Definition
 
@@ -41,12 +42,12 @@ A groupoid is a category in which every morphism is an isomorphism.
 is-groupoid-prop-Category :
   {l1 l2 : Level} (C : Category l1 l2) → Prop (l1 ⊔ l2)
 is-groupoid-prop-Category C =
-  is-groupoid-prop-Precategory (precategory-Category C)
+  is-pregroupoid-prop-Precategory (precategory-Category C)
 
 is-groupoid-Category :
   {l1 l2 : Level} (C : Category l1 l2) → UU (l1 ⊔ l2)
 is-groupoid-Category C =
-  is-groupoid-Precategory (precategory-Category C)
+  is-pregroupoid-Precategory (precategory-Category C)
 
 Groupoid : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Groupoid l1 l2 = Σ (Category l1 l2) is-groupoid-Category
@@ -75,8 +76,8 @@ module _
   id-hom-Groupoid = id-hom-Category category-Groupoid
 
   comp-hom-Groupoid :
-    {x y z : obj-Groupoid} → hom-Groupoid y z →
-    hom-Groupoid x y → hom-Groupoid x z
+    {x y z : obj-Groupoid} →
+    hom-Groupoid y z → hom-Groupoid x y → hom-Groupoid x z
   comp-hom-Groupoid = comp-hom-Category category-Groupoid
 
   associative-comp-hom-Groupoid :
@@ -135,30 +136,29 @@ module _
     fundamental-theorem-id
       ( is-contr-equiv'
         ( Σ ( Σ (type-1-Type X) (λ y → x ＝ y))
-            ( λ yp →
-              Σ ( Σ (pr1 yp ＝ x) (λ q → (q ∙ pr2 yp) ＝ refl))
-                ( λ ql → (pr2 yp ∙ pr1 ql) ＝ refl)))
+            ( λ (y , p) →
+              Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
+                ( λ (q , l) → p ∙ q ＝ refl)))
         ( ( equiv-tot
             ( λ y →
               equiv-tot
                 ( λ p →
                   associative-Σ
                     ( y ＝ x)
-                    ( λ q → (q ∙ p) ＝ refl)
-                    ( λ qr → (p ∙ pr1 qr) ＝ refl)))) ∘e
+                    ( λ q → q ∙ p ＝ refl)
+                    ( λ (q , r) → p ∙ q ＝ refl)))) ∘e
           ( associative-Σ
             ( type-1-Type X)
             ( λ y → x ＝ y)
-            ( λ yp →
-              Σ ( Σ (pr1 yp ＝ x) (λ q → (q ∙ pr2 yp) ＝ refl))
-                ( λ ql → (pr2 yp ∙ pr1 ql) ＝ refl))))
+            ( λ (y , p) →
+              Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
+                ( λ (q , l) → p ∙ q ＝ refl))))
         ( is-contr-iterated-Σ 2
           ( is-torsorial-path x ,
             ( x , refl) ,
             ( is-contr-equiv
               ( Σ (x ＝ x) (λ q → q ＝ refl))
-              ( equiv-tot
-                ( λ q → equiv-concat (inv right-unit) refl))
+              ( equiv-tot (λ q → equiv-concat (inv right-unit) refl))
               ( is-torsorial-path' refl)) ,
             ( refl , refl) ,
             ( is-proof-irrelevant-is-prop
@@ -167,7 +167,7 @@ module _
       ( iso-eq-Precategory precategory-Groupoid-1-Type x)
 
   is-groupoid-groupoid-1-Type :
-    is-groupoid-Precategory precategory-Groupoid-1-Type
+    is-pregroupoid-Precategory precategory-Groupoid-1-Type
   pr1 (is-groupoid-groupoid-1-Type x y p) = inv p
   pr1 (pr2 (is-groupoid-groupoid-1-Type x y p)) = left-inv p
   pr2 (pr2 (is-groupoid-groupoid-1-Type x y p)) = right-inv p
@@ -219,3 +219,7 @@ module _
     type-equiv-1-Type (1-type-Groupoid (groupoid-1-Type X)) X
   equiv-1-type-groupoid-1-Type = id-equiv
 ```
+
+## External links
+
+- [univalent groupoid](https://ncatlab.org/nlab/show/univalent+groupoid) at nlab

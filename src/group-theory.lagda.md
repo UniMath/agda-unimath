@@ -126,6 +126,7 @@ open import group-theory.normal-submonoids-commutative-monoids public
 open import group-theory.normalizer-subgroups public
 open import group-theory.nullifying-group-homomorphisms public
 open import group-theory.opposite-groups public
+open import group-theory.opposite-semigroups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public

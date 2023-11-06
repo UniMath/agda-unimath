@@ -17,7 +17,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
@@ -111,7 +110,7 @@ module _
 
   is-prop-is-transitive-Relation-Prop : is-prop is-transitive-Relation-Prop
   is-prop-is-transitive-Relation-Prop =
-    is-prop-Π³
+    is-prop-iterated-Π 3
       ( λ x y z →
         is-prop-function-type
           ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))

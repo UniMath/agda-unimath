@@ -33,7 +33,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The automorphim group of `a : A` is the group of symmetries of `a` in `A`.
+The **automorphim group** of `a : A` is the [group](group-theory.groups.md) of
+symmetries of `a` in `A`.
 
 ## Definitions
 

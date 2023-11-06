@@ -9,6 +9,7 @@ module category-theory.precategories where
 ```agda
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.nonunital-precategories
+open import category-theory.set-magmoids
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -16,6 +17,8 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
 
@@ -167,21 +170,16 @@ module _
     associative-comp-hom-Precategory C
 ```
 
-### Equalities induce morphisms
+### The underlying set-magmoid of a precategory
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (C : Precategory l1 l2)
+  {l1 l2 : Level} (C : Precategory l1 l2)
   where
 
-  hom-eq-Precategory :
-    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C x y
-  hom-eq-Precategory x .x refl = id-hom-Precategory C
-
-  hom-inv-eq-Precategory :
-    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C y x
-  hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
+  set-magmoid-Precategory : Set-Magmoid l1 l2
+  set-magmoid-Precategory =
+    set-magmoid-Nonunital-Precategory (nonunital-precategory-Precategory C)
 ```
 
 ### The total hom-type of a precategory
@@ -199,18 +197,72 @@ obj-total-hom-Precategory C =
   obj-total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
 ```
 
+### Equalities induce morphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  hom-eq-Precategory :
+    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C x y
+  hom-eq-Precategory x .x refl = id-hom-Precategory C
+
+  hom-inv-eq-Precategory :
+    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C y x
+  hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
+```
+
 ### Pre- and postcomposition by a morphism
 
 ```agda
-precomp-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : hom-Precategory C x y) (z : obj-Precategory C) →
-  hom-Precategory C y z → hom-Precategory C x z
-precomp-hom-Precategory C f z g = comp-hom-Precategory C g f
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  (f : hom-Precategory C x y)
+  (z : obj-Precategory C)
+  where
 
-postcomp-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : hom-Precategory C x y) (z : obj-Precategory C) →
-  hom-Precategory C z x → hom-Precategory C z y
-postcomp-hom-Precategory C f z = comp-hom-Precategory C f
+  precomp-hom-Precategory : hom-Precategory C y z → hom-Precategory C x z
+  precomp-hom-Precategory g = comp-hom-Precategory C g f
+
+  postcomp-hom-Precategory : hom-Precategory C z x → hom-Precategory C z y
+  postcomp-hom-Precategory = comp-hom-Precategory C f
 ```
+
+## Properties
+
+### If the objects of a precategory are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} (C : Precategory l1 l2)
+  where
+
+  is-trunc-total-hom-is-trunc-obj-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Precategory C) →
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (total-hom-Precategory C)
+  is-trunc-total-hom-is-trunc-obj-Precategory =
+    is-trunc-total-hom-is-trunc-obj-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+
+  total-hom-truncated-type-is-trunc-obj-Precategory :
+    is-trunc (succ-𝕋 (succ-𝕋 k)) (obj-Precategory C) →
+    Truncated-Type (l1 ⊔ l2) (succ-𝕋 (succ-𝕋 k))
+  total-hom-truncated-type-is-trunc-obj-Precategory =
+    total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
+      ( nonunital-precategory-Precategory C)
+```
+
+## See also
+
+- [Categories](category-theory.categories.md) are univalent precategories.
+- [Functors between precategories](category-theory.categories.md) are
+  [structure](foundation.structure.md)-preserving maps of precategories.
+- [Large precategories](category-theory.large-precategories.md) are
+  precategories whose collection of objects form a large type.
+
+## External links
+
+- [Precategories](https://1lab.dev/Cat.Base.html) at 1lab
+- [precategory](https://ncatlab.org/nlab/show/precategory) at nlab
