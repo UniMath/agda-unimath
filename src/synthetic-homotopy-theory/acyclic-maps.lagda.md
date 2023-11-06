@@ -13,6 +13,7 @@ open import foundation.epimorphisms
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.propositions
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.acyclic-types
@@ -74,6 +75,24 @@ module _
             ( suspension (fiber f b))
             ( inv-equiv (equiv-fiber-codiagonal-map-suspension-fiber f b))
             ( ac b)))
+```
+
+### A type is acyclic if and only if its terminal map is an acyclic map
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  is-acyclic-map-terminal-map-is-acyclic :
+    is-acyclic A → is-acyclic-map (terminal-map {A = A})
+  is-acyclic-map-terminal-map-is-acyclic ac u =
+    is-acyclic-equiv (equiv-fiber-terminal-map u) ac
+
+  is-acyclic-is-acyclic-map-terminal-map :
+    is-acyclic-map (terminal-map {A = A}) → is-acyclic A
+  is-acyclic-is-acyclic-map-terminal-map ac =
+    is-acyclic-equiv inv-equiv-fiber-terminal-map-star (ac star)
 ```
 
 ## See also
