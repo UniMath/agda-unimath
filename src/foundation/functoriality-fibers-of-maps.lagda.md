@@ -167,7 +167,7 @@ module _
 
 ## See also
 
-- In [retracts of maps](orthogonal-factorization-systems.retracts-of-maps.md),
+- In [retracts of maps](foundation.retracts-of-maps.md),
   we show that if `g` is a retract of `g'`, then the fibers of `g` are retracts
   of the fibers of `g'`.
 
