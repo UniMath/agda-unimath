@@ -56,7 +56,7 @@ module _
 
   hom-loop-group-fin-UU-Fin-Group :
     hom-Group
-      ( abstract-group-Concrete-Group (UU-Fin-Group l n))
+      ( group-Concrete-Group (UU-Fin-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
   pr1 hom-loop-group-fin-UU-Fin-Group p = pr1 (pair-eq-Σ p)
   pr2 hom-loop-group-fin-UU-Fin-Group p q =
@@ -65,7 +65,7 @@ module _
   hom-inv-loop-group-fin-UU-Fin-Group :
     hom-Group
       ( loop-group-Set (raise-Set l (Fin-Set n)))
-      ( abstract-group-Concrete-Group (UU-Fin-Group l n))
+      ( group-Concrete-Group (UU-Fin-Group l n))
   pr1 hom-inv-loop-group-fin-UU-Fin-Group p =
     eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)
   pr2 hom-inv-loop-group-fin-UU-Fin-Group p q =
@@ -82,7 +82,7 @@ module _
     Id
       ( comp-hom-Group
         ( loop-group-Set (raise-Set l (Fin-Set n)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l n))
+        ( group-Concrete-Group (UU-Fin-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
         ( hom-loop-group-fin-UU-Fin-Group)
         ( hom-inv-loop-group-fin-UU-Fin-Group))
@@ -105,12 +105,12 @@ module _
   is-retraction-hom-inv-loop-group-fin-UU-Fin-Group :
     Id
       ( comp-hom-Group
-        ( abstract-group-Concrete-Group (UU-Fin-Group l n))
+        ( group-Concrete-Group (UU-Fin-Group l n))
         ( loop-group-Set (raise-Set l (Fin-Set n)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group l n))
+        ( group-Concrete-Group (UU-Fin-Group l n))
         ( hom-inv-loop-group-fin-UU-Fin-Group)
         ( hom-loop-group-fin-UU-Fin-Group))
-      ( id-hom-Group (abstract-group-Concrete-Group (UU-Fin-Group l n)))
+      ( id-hom-Group (group-Concrete-Group (UU-Fin-Group l n)))
   is-retraction-hom-inv-loop-group-fin-UU-Fin-Group =
     eq-pair-Σ
       ( eq-htpy
@@ -121,13 +121,13 @@ module _
             ( is-section-pair-eq-Σ (Fin-UU-Fin l n) (Fin-UU-Fin l n) p)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
-          ( semigroup-Group (abstract-group-Concrete-Group (UU-Fin-Group l n)))
-          ( semigroup-Group (abstract-group-Concrete-Group (UU-Fin-Group l n)))
+          ( semigroup-Group (group-Concrete-Group (UU-Fin-Group l n)))
+          ( semigroup-Group (group-Concrete-Group (UU-Fin-Group l n)))
           ( id)))
 
   iso-loop-group-fin-UU-Fin-Group :
     iso-Group
-      ( abstract-group-Concrete-Group (UU-Fin-Group l n))
+      ( group-Concrete-Group (UU-Fin-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
   pr1 iso-loop-group-fin-UU-Fin-Group =
     hom-loop-group-fin-UU-Fin-Group

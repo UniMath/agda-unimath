@@ -25,7 +25,9 @@ A **retraction** of a map `f : A → B` consists of a map `r : B → A` equipped
 with a homotopy `r ∘ f ~ id`. In other words, a retraction of a map `f` is a
 left inverse of `f`.
 
-## Definition
+## Definitions
+
+### The type of retractions
 
 ```agda
 module _
@@ -42,7 +44,7 @@ module _
   map-retraction f = pr1
 
   is-retraction-map-retraction :
-    (f : A → B) (r : retraction f) → (map-retraction f r ∘ f) ~ id
+    (f : A → B) (r : retraction f) → map-retraction f r ∘ f ~ id
   is-retraction-map-retraction f = pr2
 ```
 

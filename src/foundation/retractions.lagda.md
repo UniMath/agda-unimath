@@ -67,8 +67,7 @@ is-retraction-retraction-left-map-triangle :
 is-retraction-retraction-left-map-triangle f g h H (l , L) (k , K) =
   eq-htpy-retraction
     ( ( retraction-top-map-triangle f g h H
-        ( retraction-left-map-triangle f g h H (l , L) (k , K)
-          )))
+        ( retraction-left-map-triangle f g h H (l , L) (k , K))))
     ( k , K)
     ( k ·l L)
     ( ( inv-htpy-assoc-htpy
@@ -83,7 +82,7 @@ is-retraction-retraction-left-map-triangle f g h H (l , L) (k , K) =
 
 retraction-right-factor-retract-of-retraction-left-factor :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) →
   retraction g → (retraction h) retract-of (retraction f)
 pr1 (retraction-right-factor-retract-of-retraction-left-factor f g h H rg) =
   retraction-left-map-triangle f g h H rg

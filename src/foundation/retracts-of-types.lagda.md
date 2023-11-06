@@ -29,40 +29,49 @@ come equipped with **retract data**, i.e., with maps
   A -----> B -----> A
 ```
 
-and a homotopy `r ∘ i ~ id`. The map `i` is called the **inclusion of the
+and a homotopy `r ∘ i ~ id`. The map `i` is called the **inclusion** of the
 retract data, and the map `r` is called the **(underlying map of the) retract
-data\*\*.
+data**.
 
 ## Definitions
 
 ### The type of witnesses that `A` is a retract of `B`
 
+The predicate `retract B` is used to assert that a type is a retract of `B`,
+i.e., the type `retract B A` is the type of maps from `A` to `B` that come
+equipped with a retraction.
+
+We also introduce more intuitive infix notation `A retract-of B` to assert that
+`A` is a retract of `B`.
+
 ```agda
 retract : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-retract A B = Σ (A → B) retraction
+retract B A = Σ (A → B) retraction
+
+infix 6 _retract-of_
 
 _retract-of_ :
   {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-A retract-of B = retract A B
+A retract-of B = retract B A
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  inclusion-retract : retract A B → A → B
+  inclusion-retract : retract B A → A → B
   inclusion-retract = pr1
 
   retraction-retract :
-    (R : retract A B) → retraction (inclusion-retract R)
+    (R : retract B A) → retraction (inclusion-retract R)
   retraction-retract = pr2
 
-  map-retraction-retract : retract A B → B → A
+  map-retraction-retract : retract B A → B → A
   map-retraction-retract R = pr1 (retraction-retract R)
 
-  is-retraction-retraction-retract :
-    (R : retract A B) →
+  is-retraction-map-retraction-retract :
+    (R : retract B A) →
     map-retraction-retract R ∘ inclusion-retract R ~ id
-  is-retraction-retraction-retract R = pr2 (retraction-retract R)
+  is-retraction-map-retraction-retract R = pr2 (retraction-retract R)
 ```
 
 ## Properties
@@ -71,7 +80,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : retract A B) (x y : A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : retract B A) (x y : A)
   where
 
   retract-eq :

@@ -156,15 +156,19 @@ module _
 ### Transposing inverses
 
 ```agda
-left-transpose-eq-concat :
-  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z)
-  (r : x ＝ z) → ((p ∙ q) ＝ r) → q ＝ ((inv p) ∙ r)
-left-transpose-eq-concat refl q r s = s
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
 
-right-transpose-eq-concat :
-  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z)
-  (r : x ＝ z) → ((p ∙ q) ＝ r) → p ＝ (r ∙ (inv q))
-right-transpose-eq-concat p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
+  left-transpose-eq-concat :
+    (p : x ＝ y) {z : A} (q : y ＝ z) (r : x ＝ z) →
+    p ∙ q ＝ r → q ＝ inv p ∙ r
+  left-transpose-eq-concat refl q r s = s
+
+  right-transpose-eq-concat :
+    (p : x ＝ y) {z : A} (q : y ＝ z) (r : x ＝ z) →
+    p ∙ q ＝ r → p ＝ r ∙ inv q
+  right-transpose-eq-concat p refl r s = (inv right-unit ∙ s) ∙ inv right-unit
 ```
 
 The fact that `left-transpose-eq-concat` and `right-transpose-eq-concat` are
