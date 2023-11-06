@@ -137,7 +137,19 @@ module _
   coh-is-retract-of-map = pr2 (pr2 k)
 ```
 
-### The type of retracts of maps
+### The predicate that a map is a retract of a map `f`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  retract-map : (X → Y) → (A → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  retract-map f g =
+    Σ (retract X A) (λ r → Σ (retract Y B) (is-retract-of-map f g r))
+```
+
+### The binary relation `g f ↦ g retract-of-map f` asserting that `g` is a retract of the map `f`
 
 ```agda
 module _
@@ -145,12 +157,10 @@ module _
   (g : A → B) (f : X → Y)
   where
 
-  retract-map : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  retract-map =
-    Σ (retract X A) (λ r → Σ (retract Y B) (is-retract-of-map f g r))
+  infix 6 _retract-of-map_
 
   _retract-of-map_ : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  _retract-of-map_ = retract-map
+  _retract-of-map_ = retract-map f g
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -353,19 +363,19 @@ module _
           ( inclusion-fiber g z)) ,
         ( coherence-is-retraction-fiber-retract-map y z))
 
-  retract-of-fiber-retract-map :
+  retract-fiber-retract-map :
     (y : B) →
     ( fiber g y) retract-of
     ( fiber f (inclusion-codomain-retract-map f g k y))
-  pr1 (retract-of-fiber-retract-map y) =
+  pr1 (retract-fiber-retract-map y) =
     inclusion-fiber-retract-map y
-  pr1 (pr2 (retract-of-fiber-retract-map y)) =
+  pr1 (pr2 (retract-fiber-retract-map y)) =
     map-retraction-fiber-retract-map y
-  pr2 (pr2 (retract-of-fiber-retract-map y)) =
+  pr2 (pr2 (retract-fiber-retract-map y)) =
     is-retraction-fiber-retract-map y
 ```
 
-### If `g` is a retract of `f`, then the fiber projections of `g` are retracts of the fiber projections of `f`
+### If `g` is a retract of `f`, then the fiber inclusions of `g` are retracts of the fiber inclusions of `f`
 
 ```agda
 module _
@@ -375,18 +385,21 @@ module _
 
   is-retract-map-fiber-retract-map :
     is-retract-of-map
-      ( pr1)
-      ( pr1)
-      ( retract-of-fiber-retract-map f g k y)
+      ( inclusion-fiber f)
+      ( inclusion-fiber g)
+      ( retract-fiber-retract-map f g k y)
       ( retract-domain-retract-map f g k)
-  pr1 is-retract-map-fiber-retract-map = refl-htpy
-  pr1 (pr2 is-retract-map-fiber-retract-map) = refl-htpy
-  pr2 (pr2 is-retract-map-fiber-retract-map) (x , p) =
-    inv (ap-pr1-map-inv-fiber-ap-eq-fiber g _ (x , p) _)
+  pr1 is-retract-map-fiber-retract-map =
+    refl-htpy
+  pr1 (pr2 is-retract-map-fiber-retract-map) =
+    refl-htpy
+  pr2 (pr2 is-retract-map-fiber-retract-map) z =
+    inv (ap-pr1-map-inv-fiber-ap-eq-fiber g _ z _)
 
-  retract-map-fiber-retract-map : pr1 retract-of-map pr1
+  retract-map-fiber-retract-map :
+    (inclusion-fiber g) retract-of-map (inclusion-fiber f)
   pr1 retract-map-fiber-retract-map =
-    retract-of-fiber-retract-map f g k y
+    retract-fiber-retract-map f g k y
   pr1 (pr2 retract-map-fiber-retract-map) =
     retract-domain-retract-map f g k
   pr2 (pr2 retract-map-fiber-retract-map) =
@@ -401,7 +414,7 @@ In fact, we only need the following data to show this:
                  r
             X ------> A
             |         |
-            f    R    g
+          f |    R    | g
             v         v
   B ------> Y ------> B.
        s'   H'   r'
@@ -420,7 +433,7 @@ module _
     r ∘ map-section f section-f ∘ inclusion-retract r'
 
   is-section-map-section-is-retract-of-section' :
-    g ∘ map-section-is-retract-of-section' ~ id
+    is-section g map-section-is-retract-of-section'
   is-section-map-section-is-retract-of-section' =
     ( inv-htpy R ·r (map-section f section-f ∘ inclusion-retract r')) ∙h
     ( ( map-retraction-retract r') ·l
@@ -510,8 +523,11 @@ module _
   (S : coherence-square-maps (inclusion-retract r) g f (inclusion-retract r'))
   (R :
     coherence-square-maps
-      ( map-retraction-retract r) f g (map-retraction-retract r'))
-  (is-equiv-f : is-equiv f)
+      ( map-retraction-retract r)
+      ( f)
+      ( g)
+      ( map-retraction-retract r'))
+  (H : is-equiv f)
   where
 
   is-equiv-is-retract-of-is-equiv' : is-equiv g
@@ -520,27 +536,26 @@ module _
       ( map-retraction-retract r)
       ( r')
       ( R)
-      ( section-is-equiv is-equiv-f)
+      ( section-is-equiv H)
   pr2 is-equiv-is-retract-of-is-equiv' =
     has-retraction-is-retract-of-has-retraction' f g
       ( r)
       ( inclusion-retract r')
       ( S)
-      ( retraction-is-equiv is-equiv-f)
+      ( retraction-is-equiv H)
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (k : g retract-of-map f) (is-equiv-f : is-equiv f)
+  (f : X → Y) (g : A → B) (k : g retract-of-map f) (H : is-equiv f)
   where
 
   section-retract-of-is-equiv : section g
   section-retract-of-is-equiv =
-    section-retract-section f g k (section-is-equiv is-equiv-f)
+    section-retract-section f g k (section-is-equiv H)
 
   retraction-retract-of-is-equiv : retraction g
   retraction-retract-of-is-equiv =
-    has-map-retraction-retract-has-retraction f g k
-      ( retraction-is-equiv is-equiv-f)
+    has-map-retraction-retract-has-retraction f g k (retraction-is-equiv H)
 
   is-equiv-retract-of-is-equiv : is-equiv g
   pr1 is-equiv-retract-of-is-equiv = section-retract-of-is-equiv
