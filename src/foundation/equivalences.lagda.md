@@ -324,6 +324,7 @@ Consider a commuting diagram of maps
 
 The **6-for-2 property of equivalences** asserts that if `i` and `j` are
 equivalences, then so are `h`, `f`, `g`, and the triple composite `g ∘ h ∘ f`.
+The 6-for-2 property is also commonly known as the **2-out-of-6 property**.
 
 **First proof:** Since `i` is an equivalence, it follows that `i` is surjective.
 This implies that `h` is surjective. Furthermore, since `j` is an equivalence it
@@ -666,3 +667,9 @@ equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+
+## External links
+
+- The
+  [2-out-of-6 property](https://ncatlab.org/nlab/show/two-out-of-six+property)
+  at the nLab.
