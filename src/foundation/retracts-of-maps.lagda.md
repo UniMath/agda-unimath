@@ -417,7 +417,7 @@ In fact, we only need the following data to show this:
           f |    R    | g
             v         v
   B ------> Y ------> B.
-       s'   H'   r'
+       i'   H'   r'
 ```
 
 ```agda
