@@ -323,7 +323,7 @@ Consider a commuting diagram of maps
 ```
 
 The **6-for-2 property of equivalences** asserts that if `i` and `j` are
-equivalences, then all maps are equivalences.
+equivalences, then so are `h`, `f`, `g`, and the triple composite `g ∘ h ∘ f`.
 
 **First proof:** Since `i` is an equivalence, it follows that `i` is surjective.
 This implies that `h` is surjective. Furthermore, since `j` is an equivalence it
@@ -411,6 +411,16 @@ module _
   is-equiv-right-is-equiv-top-is-equiv-bottom-square H K =
     is-equiv-right-map-triangle j g h v K
       ( is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K)
+
+  is-equiv-triple-comp :
+    is-equiv i → is-equiv j → is-equiv (g ∘ h ∘ f)
+  is-equiv-triple-comp H K =
+    is-equiv-comp g
+      ( h ∘ f)
+      ( is-equiv-comp h f
+        ( is-equiv-left-is-equiv-top-is-equiv-bottom-square H K)
+        ( is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K))
+      ( is-equiv-right-is-equiv-top-is-equiv-bottom-square H K)
 ```
 
 ### Being an equivalence is closed under homotopies
