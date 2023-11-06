@@ -464,13 +464,13 @@ module _
 In fact, we only need the following data to show this:
 
 ```text
-       s    H    r
+       i    H    r
   A ------> X ------> A
   |         |
-  g    S    f
+  g    I    f
   v         v
   B ------> Y.
-       s'
+       i'
 ```
 
 ```agda
