@@ -10,7 +10,10 @@ open import foundation-core.fibers-of-maps public
 
 ```agda
 open import foundation.cones-over-cospans
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -56,6 +59,53 @@ module _
         ( const unit B b)
         ( cone-fiber)
         ( is-pullback-cone-fiber)
+```
+
+### The fiber of the terminal map at any point is equivalent to its domain
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  equiv-fiber-terminal-map :
+    (u : unit) → fiber (terminal-map {A = A}) u ≃ A
+  equiv-fiber-terminal-map u =
+    right-unit-law-Σ-is-contr
+      ( λ a → is-prop-is-contr is-contr-unit (terminal-map a) u)
+
+  inv-equiv-fiber-terminal-map :
+    (u : unit) → A ≃ fiber (terminal-map {A = A}) u
+  inv-equiv-fiber-terminal-map u =
+    inv-equiv (equiv-fiber-terminal-map u)
+
+  equiv-fiber-terminal-map-star :
+    fiber (terminal-map {A = A}) star ≃ A
+  equiv-fiber-terminal-map-star = equiv-fiber-terminal-map star
+
+  inv-equiv-fiber-terminal-map-star :
+    A ≃ fiber (terminal-map {A = A}) star
+  inv-equiv-fiber-terminal-map-star =
+    inv-equiv equiv-fiber-terminal-map-star
+```
+
+### The total space of the fibers of the terminal map is equivalent to its domain
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  equiv-total-fiber-terminal-map :
+    Σ unit (fiber (terminal-map {A = A})) ≃ A
+  equiv-total-fiber-terminal-map =
+    ( left-unit-law-Σ-is-contr is-contr-unit star) ∘e
+    ( equiv-tot equiv-fiber-terminal-map)
+
+  inv-equiv-total-fiber-terminal-map :
+    A ≃ Σ unit (fiber (terminal-map {A = A}))
+  inv-equiv-total-fiber-terminal-map =
+    inv-equiv equiv-total-fiber-terminal-map
 ```
 
 ## Table of files about fibers of maps
