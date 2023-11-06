@@ -262,7 +262,7 @@ module _
 
 ```text
            i''                 r''
-  fib g x -----> fib f (s' x) -----> fib g x
+  fib g x -----> fib f (i' x) -----> fib g x
      |               |                  |
      |       I'      |          R'      |
      v               v                  v
