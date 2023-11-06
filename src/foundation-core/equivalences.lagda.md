@@ -181,14 +181,12 @@ and hence an equivalence.
 For the converse, suppose that `f : A → B` is an equivalence with section
 `g : B → A` equipped with `G : f ∘ g ~ id`, and retraction `h : B → A` equipped
 with `H : h ∘ f ~ id`. We claim that the map `g : B → A` is also a retraction.
-To see this, we concatenate the following identifications
+To see this, we concatenate the following homotopies
 
 ```text
-           H (g (f x))⁻¹                  ap h (G (f x))           H x
-  g (f x) =============== h (f (g (f x)) ================ h (f x) ===== x
+         H⁻¹ ·r g ·r f                  h ·l G ·r f           H
+  g ∘ h ---------------> h ∘ f ∘ g ∘ f -------------> h ∘ f -----> id.
 ```
-
-for any element `x : A`.
 
 ```agda
 module _

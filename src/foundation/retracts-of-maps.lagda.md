@@ -86,12 +86,15 @@ module _
   coherence-retract-of-map :
     coherence-square-maps (inclusion-retract r) g f (inclusion-retract r') →
     coherence-square-maps
-      ( map-retraction-retract r) f g (map-retraction-retract r') →
+      ( map-retraction-retract r)
+      ( f)
+      ( g)
+      ( map-retraction-retract r') →
     UU (l1 ⊔ l2)
-  coherence-retract-of-map S R =
+  coherence-retract-of-map I R =
     coherence-square-homotopies
       ( R ·r inclusion-retract r)
-      ( map-retraction-retract r' ·l inv-htpy S)
+      ( map-retraction-retract r' ·l inv-htpy I)
       ( g ·l is-retraction-map-retraction-retract r)
       ( is-retraction-map-retraction-retract r' ·r g)
 ```
@@ -406,7 +409,7 @@ module _
     is-retract-map-fiber-retract-map
 ```
 
-### If `f` has a section, then retracts of `f` have a section
+### Retracts of maps with sections have sections
 
 In fact, we only need the following data to show this:
 
@@ -420,31 +423,36 @@ In fact, we only need the following data to show this:
        i'   H'   r'
 ```
 
+**Proof:** Note that `g` is the right map of a triangle
+
+```text
+            r
+       X ------> A
+        \       /
+  r' ∘ f \     / g
+          \   /
+           V V
+            B.
+```
+
+Since both `r'` and `f` are assumed to have [sections](foundation-core.sections.md), it follows that the composite `r' ∘ f` has a section, and therefore `g` has a section.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : X → Y) (g : A → B) (r : X → A) (r' : B retract-of Y)
   (R : coherence-square-maps r f g (map-retraction-retract r'))
-  (section-f : section f)
+  (s : section f)
   where
 
-  map-section-is-retract-of-section' : B → A
-  map-section-is-retract-of-section' =
-    r ∘ map-section f section-f ∘ inclusion-retract r'
-
-  is-section-map-section-is-retract-of-section' :
-    is-section g map-section-is-retract-of-section'
-  is-section-map-section-is-retract-of-section' =
-    ( inv-htpy R ·r (map-section f section-f ∘ inclusion-retract r')) ∙h
-    ( ( map-retraction-retract r') ·l
-      ( is-section-map-section f section-f ·r inclusion-retract r')) ∙h
-    ( is-retraction-map-retraction-retract r')
-
-  section-is-retract-of-section' : section g
-  pr1 section-is-retract-of-section' =
-    map-section-is-retract-of-section'
-  pr2 section-is-retract-of-section' =
-    is-section-map-section-is-retract-of-section'
+  section-retract-map-section' : section g
+  section-retract-map-section' =
+    section-right-map-triangle
+      ( map-retraction-retract r' ∘ f)
+      ( g)
+      ( r)
+      ( R)
+      ( section-comp (map-retraction-retract r') f s (section-retract r'))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -453,60 +461,66 @@ module _
 
   section-retract-section : section f → section g
   section-retract-section =
-    section-is-retract-of-section' f g
+    section-retract-map-section' f g
       ( map-retraction-domain-retract-map f g k)
       ( retract-codomain-retract-map f g k)
       ( coh-map-retraction-retract-map f g k)
 ```
 
-### If `f` has a retraction, then retracts of `f` have a retraction
+### Retracts of maps with retractions have retractions
 
 In fact, we only need the following data to show this:
 
 ```text
-       i    H    r
-  A ------> X ------> A
-  |         |
-  g    I    f
-  v         v
-  B ------> Y.
-       i'
+         i    H    r
+    A ------> X ------> A
+    |         |
+  g |    I    | f
+    v         v
+    B ------> Y.
+         i'
 ```
+
+**Proof:** Note that `g` is the top map in the triangle
+
+```text
+           g
+      A ------> B
+       \       /
+  f ∘ i \     / i'
+         \   /
+          V V
+           Y.
+```
+
+Since both `f` and `i` are assumed to have retractions, it follows that `f ∘ i` has a retraction, and hence that `g` has a retraction.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : A retract-of X) (s' : B → Y)
-  (S : coherence-square-maps (inclusion-retract r) g f s')
-  (retraction-f : retraction f)
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} (f : X → Y) (g : A → B)
+  (r : A retract-of X) (i' : B → Y)
+  (I : coherence-square-maps (inclusion-retract r) g f i')
+  (s : retraction f)
   where
 
-  map-has-retraction-is-retract-of-has-retraction' : B → A
-  map-has-retraction-is-retract-of-has-retraction' =
-    map-retraction-retract r ∘ map-retraction f retraction-f ∘ s'
-
-  is-retraction-map-has-retraction-is-retract-of-has-retraction' :
-    map-has-retraction-is-retract-of-has-retraction' ∘ g ~ id
-  is-retraction-map-has-retraction-is-retract-of-has-retraction' =
-    ( ( map-retraction-retract r ∘ map-retraction f retraction-f) ·l S) ∙h
-    ( ( map-retraction-retract r) ·l
-      ( is-retraction-map-retraction f retraction-f ·r inclusion-retract r)) ∙h
-    ( is-retraction-map-retraction-retract r)
-
-  has-retraction-is-retract-of-has-retraction' : retraction g
-  pr1 has-retraction-is-retract-of-has-retraction' =
-    map-has-retraction-is-retract-of-has-retraction'
-  pr2 has-retraction-is-retract-of-has-retraction' =
-    is-retraction-map-has-retraction-is-retract-of-has-retraction'
+  retraction-retract-map-retraction' : retraction g
+  retraction-retract-map-retraction' =
+    retraction-top-map-triangle
+      ( f ∘ inclusion-retract r)
+      ( i')
+      ( g)
+      ( inv-htpy I)
+      ( retraction-comp f (inclusion-retract r) s (retraction-retract r))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : X → Y) (g : A → B) (k : g retract-of-map f)
   where
 
-  has-map-retraction-retract-has-retraction : retraction f → retraction g
-  has-map-retraction-retract-has-retraction =
-    has-retraction-is-retract-of-has-retraction' f g
+  retraction-retract-map-retraction : retraction f → retraction g
+  retraction-retract-map-retraction =
+    retraction-retract-map-retraction' f g
       ( retract-domain-retract-map f g k)
       ( inclusion-codomain-retract-map f g k)
       ( coh-inclusion-retract-map f g k)
@@ -520,7 +534,7 @@ Note that the higher coherence of a retract of maps is not needed.
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : X → Y) (g : A → B) (r : A retract-of X) (r' : B retract-of Y)
-  (S : coherence-square-maps (inclusion-retract r) g f (inclusion-retract r'))
+  (I : coherence-square-maps (inclusion-retract r) g f (inclusion-retract r'))
   (R :
     coherence-square-maps
       ( map-retraction-retract r)
@@ -530,18 +544,18 @@ module _
   (H : is-equiv f)
   where
 
-  is-equiv-is-retract-of-is-equiv' : is-equiv g
-  pr1 is-equiv-is-retract-of-is-equiv' =
-    section-is-retract-of-section' f g
+  is-equiv-retract-map-is-equiv' : is-equiv g
+  pr1 is-equiv-retract-map-is-equiv' =
+    section-retract-map-section' f g
       ( map-retraction-retract r)
       ( r')
       ( R)
       ( section-is-equiv H)
-  pr2 is-equiv-is-retract-of-is-equiv' =
-    has-retraction-is-retract-of-has-retraction' f g
+  pr2 is-equiv-retract-map-is-equiv' =
+    retraction-retract-map-retraction' f g
       ( r)
       ( inclusion-retract r')
-      ( S)
+      ( I)
       ( retraction-is-equiv H)
 
 module _
@@ -549,17 +563,17 @@ module _
   (f : X → Y) (g : A → B) (k : g retract-of-map f) (H : is-equiv f)
   where
 
-  section-retract-of-is-equiv : section g
-  section-retract-of-is-equiv =
+  section-retract-map-is-equiv : section g
+  section-retract-map-is-equiv =
     section-retract-section f g k (section-is-equiv H)
 
-  retraction-retract-of-is-equiv : retraction g
-  retraction-retract-of-is-equiv =
-    has-map-retraction-retract-has-retraction f g k (retraction-is-equiv H)
+  retraction-retract-map-is-equiv : retraction g
+  retraction-retract-map-is-equiv =
+    retraction-retract-map-retraction f g k (retraction-is-equiv H)
 
-  is-equiv-retract-of-is-equiv : is-equiv g
-  pr1 is-equiv-retract-of-is-equiv = section-retract-of-is-equiv
-  pr2 is-equiv-retract-of-is-equiv = retraction-retract-of-is-equiv
+  is-equiv-retract-map-is-equiv : is-equiv g
+  pr1 is-equiv-retract-map-is-equiv = section-retract-map-is-equiv
+  pr2 is-equiv-retract-map-is-equiv = retraction-retract-map-is-equiv
 ```
 
 ## References

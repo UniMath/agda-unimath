@@ -15,6 +15,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -29,9 +30,9 @@ come equipped with **retract data**, i.e., with maps
   A -----> B -----> A
 ```
 
-and a homotopy `r ∘ i ~ id`. The map `i` is called the **inclusion** of the
-retract data, and the map `r` is called the **(underlying map of the) retract
-data**.
+and a [homotopy](foundation-core.homotopies.md) `r ∘ i ~ id`. The map `i` is called the **inclusion** of the
+retract data, and the map `r` is called the **underlying map of the
+retraction**.
 
 ## Definitions
 
@@ -55,23 +56,26 @@ _retract-of_ :
 A retract-of B = retract B A
 
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : retract B A)
   where
 
-  inclusion-retract : retract B A → A → B
-  inclusion-retract = pr1
+  inclusion-retract : A → B
+  inclusion-retract = pr1 R
 
-  retraction-retract :
-    (R : retract B A) → retraction (inclusion-retract R)
-  retraction-retract = pr2
+  retraction-retract : retraction inclusion-retract
+  retraction-retract = pr2 R
 
-  map-retraction-retract : retract B A → B → A
-  map-retraction-retract R = pr1 (retraction-retract R)
+  map-retraction-retract : B → A
+  map-retraction-retract = map-retraction inclusion-retract retraction-retract
 
   is-retraction-map-retraction-retract :
-    (R : retract B A) →
-    map-retraction-retract R ∘ inclusion-retract R ~ id
-  is-retraction-map-retraction-retract R = pr2 (retraction-retract R)
+    is-section map-retraction-retract inclusion-retract
+  is-retraction-map-retraction-retract =
+    is-retraction-map-retraction inclusion-retract retraction-retract
+
+  section-retract : section map-retraction-retract
+  pr1 section-retract = inclusion-retract
+  pr2 section-retract = is-retraction-map-retraction-retract
 ```
 
 ## Properties
@@ -90,3 +94,7 @@ module _
   pr2 retract-eq =
     retraction-ap (inclusion-retract R) (retraction-retract R) x y
 ```
+
+## See also
+
+- [Retracts of maps](foundation.retracts-of-maps.md)
