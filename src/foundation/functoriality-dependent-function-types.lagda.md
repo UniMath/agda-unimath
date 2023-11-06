@@ -129,12 +129,12 @@ module _
   { l1 l2 l3 : Level} {A : UU l1}
   where
 
-  equiv-htpy-Π-preleft-map-triangle :
+  equiv-htpy-Π-precomp-htpy :
     { B : UU l2} {C : B → UU l3} →
     ( f g : (b : B) → C b) (e : A ≃ B) →
     ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
     ( f ~ g)
-  equiv-htpy-Π-preleft-map-triangle f g e =
+  equiv-htpy-Π-precomp-htpy f g e =
     equiv-Π
       ( eq-value f g)
       ( e)

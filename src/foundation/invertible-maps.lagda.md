@@ -373,7 +373,7 @@ module _
             ( map-section-is-equiv (is-equiv-map-equiv f) ∘ map-equiv f)
             ( id))) ∘e
         ( equiv-concat-htpy
-          ( is-retraction-map-equiv f ·r map-equiv f)
+          ( is-section-map-section-map-equiv f ·r map-equiv f)
           ( map-equiv f)))) ∘e
     ( equiv-tot (λ f → extensionality-equiv f f))
 ```

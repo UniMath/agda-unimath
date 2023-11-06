@@ -101,32 +101,36 @@ A ≃ B = equiv A B
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
   where
 
-  map-equiv : (A ≃ B) → (A → B)
-  map-equiv e = pr1 e
+  map-equiv : A → B
+  map-equiv = pr1 e
 
-  is-equiv-map-equiv : (e : A ≃ B) → is-equiv (map-equiv e)
-  is-equiv-map-equiv e = pr2 e
+  is-equiv-map-equiv : is-equiv map-equiv
+  is-equiv-map-equiv = pr2 e
 
-  retraction-map-equiv : (e : A ≃ B) → retraction (map-equiv e)
-  retraction-map-equiv = retraction-is-equiv ∘ is-equiv-map-equiv
+  section-map-equiv : section map-equiv
+  section-map-equiv = section-is-equiv is-equiv-map-equiv
 
-  section-map-equiv : (e : A ≃ B) → section (map-equiv e)
-  section-map-equiv = section-is-equiv ∘ is-equiv-map-equiv
+  map-section-map-equiv : B → A
+  map-section-map-equiv = map-section map-equiv section-map-equiv
 
-  is-retraction-map-equiv :
-    (e : A ≃ B) →
-    ( map-equiv e ∘ map-section-is-equiv (is-equiv-map-equiv e)) ~ id
-  is-retraction-map-equiv =
-    is-section-map-section-is-equiv ∘ is-equiv-map-equiv
+  is-section-map-section-map-equiv :
+    is-section map-equiv map-section-map-equiv
+  is-section-map-section-map-equiv =
+    is-section-map-section map-equiv section-map-equiv
 
-  is-section-map-equiv :
-    (e : A ≃ B) →
-    ( map-retraction-is-equiv (is-equiv-map-equiv e) ∘ map-equiv e) ~ id
-  is-section-map-equiv =
-    is-retraction-map-retraction-is-equiv ∘ is-equiv-map-equiv
+  retraction-map-equiv : retraction map-equiv
+  retraction-map-equiv = retraction-is-equiv is-equiv-map-equiv
+
+  map-retraction-map-equiv : B → A
+  map-retraction-map-equiv = map-retraction map-equiv retraction-map-equiv
+
+  is-retraction-map-retraction-map-equiv :
+    is-retraction map-equiv map-retraction-map-equiv
+  is-retraction-map-retraction-map-equiv =
+    is-retraction-map-retraction map-equiv retraction-map-equiv
 ```
 
 ### Families of equivalences
