@@ -7,11 +7,13 @@ module modal-logic.axioms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
@@ -44,47 +46,98 @@ module _
   where
 
   ax-k : formulas l i
-  ax-k (a₁ ⇒ b ⇒ a₂) = Id-formula-Prop a₁ a₂
-  {-# CATCHALL #-}
-  ax-k _ = raise-empty-Prop l
-
-  ax-s : formulas l i
-  ax-s ((a₁ ⇒ b₁ ⇒ c₁) ⇒ (a₂ ⇒ b₂) ⇒ a₃ ⇒ c₂) =
-    Id-formula-Prop a₁ a₂ ∧
-    Id-formula-Prop a₂ a₃ ∧
-    Id-formula-Prop b₁ b₂ ∧
-    Id-formula-Prop c₁ c₂
-  {-# CATCHALL #-}
-  ax-s _ = raise-empty-Prop l
-
-  ax-n : formulas l i
-  ax-n (□ (a₁ ⇒ b₁) ⇒ □ a₂ ⇒ □ b₂) =
-    Id-formula-Prop a₁ a₂ ∧
-    Id-formula-Prop b₁ b₂
-  {-# CATCHALL #-}
-  ax-n _ = raise-empty-Prop l
-
-  ax-dn : formulas l i
-  ax-dn (((a₁ ⇒ ⊥) ⇒ ⊥) ⇒ a₂) = Id-formula-Prop a₁ a₂
-  {-# CATCHALL #-}
-  ax-dn _ = raise-empty-Prop l
-
-  ax-dn' : formulas l i
-  ax-dn' f = ∃-Prop (formula i) (λ a → f ＝ (~~ a ⇒ a))
-
-  ax-dn'' : formulas l i
-  pr1 (ax-dn'' f) = Σ (formula i) (λ a → f ＝ (~~ a ⇒ a))
-  pr2 (ax-dn'' (((a₁ ⇒ ⊥) ⇒ ⊥) ⇒ a₁)) (a₁ , refl) =
+  pr1 (ax-k f) = Σ (formula i) (λ a → Σ (formula i) (λ b → f ＝ a ⇒ b ⇒ a))
+  pr2 (ax-k (a ⇒ b ⇒ a)) (_ , _ , refl) =
     is-prop-is-contr
       ( is-contr-Σ-is-prop
-        ( a₁)
+        ( a)
+        ( b , refl)
+        ( λ x y →
+          ( is-prop-is-contr
+            ( is-contr-Σ-is-prop
+              ( b)
+              ( ap _ ((eq-implication-left ∘ pr2) y))
+              ( λ _ → is-set-formula i _ _)
+              ( λ _ → eq-implication-left ∘ eq-implication-right))
+            ( y)))
+        ( λ _ → eq-implication-left ∘ pr2))
+      ( a , b , refl)
+
+  ax-s : formulas l i
+  pr1 (ax-s f) =
+    Σ
+      ( formula i)
+      ( λ a →
+        ( Σ
+          ( formula i)
+          ( λ b → Σ (formula i) (λ c → f ＝ (a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c))))
+  pr2 (ax-s ((a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c)) (_ , _ , _ , refl) =
+    is-prop-is-contr
+      ( is-contr-Σ-is-prop
+        ( a)
+        ( b , c , refl)
+        ( λ x y →
+          ( is-prop-is-contr
+            ( is-contr-Σ-is-prop
+              ( pr1 y)
+              ( pr2 y)
+              ( λ z e →
+                ( is-prop-is-contr
+                  ( is-contr-Σ-is-prop
+                    ( c)
+                    ( ap-binary _
+                      ( eq-implication-left (eq-implication-left (pr2 (pr2 y))))
+                      ( eq-implication-left
+                        ( eq-implication-right (eq-implication-left (pr2 e)))))
+                    ( λ _ → is-set-formula i _ _)
+                    ( λ _ →
+                      ( eq-implication-right ∘
+                        eq-implication-right ∘
+                        eq-implication-right)))
+                    ( e)))
+              ( λ z e →
+                _∙_
+                ( inv
+                  ( eq-implication-left
+                    ( eq-implication-right
+                      ( eq-implication-left (pr2 (pr2 y))))))
+                ( eq-implication-left
+                  ( eq-implication-right
+                    ( eq-implication-left (pr2 e))))))
+            ( y)))
+        ( λ _ → eq-implication-left ∘ eq-implication-left ∘ pr2 ∘ pr2))
+      ( a , b , c , refl)
+
+  ax-n : formulas l i
+  pr1 (ax-n f) =
+    Σ (formula i) (λ a → Σ (formula i) (λ b → f ＝ □ (a ⇒ b) ⇒ □ a ⇒ □ b))
+  pr2 (ax-n (□ (a ⇒ b) ⇒ □ a ⇒ □ b)) (_ , _ , refl) =
+    is-prop-is-contr
+      ( is-contr-Σ-is-prop
+        ( a)
+        ( b , refl)
+        ( λ x y →
+          ( is-prop-is-contr
+            ( is-contr-Σ-is-prop
+              ( b)
+              ( ap _
+                ( eq-box (eq-implication-left (eq-implication-right (pr2 y)))))
+              ( λ _ → is-set-formula i _ _)
+              ( λ _ → eq-box ∘ eq-implication-right ∘ eq-implication-right))
+            ( y)))
+        ( λ _ → eq-box ∘ eq-implication-left ∘ eq-implication-right ∘ pr2))
+      ( a , b , refl)
+
+  ax-dn : formulas l i
+  pr1 (ax-dn f) = Σ (formula i) (λ a → f ＝ ~~ a ⇒ a)
+  pr2 (ax-dn (((a ⇒ ⊥) ⇒ ⊥) ⇒ a)) (_ , refl) =
+    is-prop-is-contr
+      ( is-contr-Σ-is-prop
+        ( a)
         ( refl)
         ( λ _ → is-set-formula i _ _)
-        ( λ _ → arrow-right-eq))
-      ( a₁ , refl)
-    where
-    arrow-right-eq : {a b x y : formula i} → x ⇒ a ＝ y ⇒ b → a ＝ b
-    arrow-right-eq refl = refl
+        ( λ _ → eq-implication-right))
+      ( a , refl)
 
 module _
   {l1 l2 : Level}
@@ -94,108 +147,25 @@ module _
   where
 
   ax-k-soundness : soundness (ax-k i) (all-models w l3 i l4)
-  ax-k-soundness (a₁ ⇒ b ⇒ a₁) refl M in-class x fa _ = fa
-  ax-k-soundness (var _) (map-raise ())
-  ax-k-soundness ⊥ (map-raise ())
-  ax-k-soundness (□ _) (map-raise ())
-  ax-k-soundness (_ ⇒ var _) (map-raise ())
-  ax-k-soundness (_ ⇒ ⊥) (map-raise ())
-  ax-k-soundness (_ ⇒ □ _) (map-raise ())
+  ax-k-soundness (a ⇒ b ⇒ a) (_ , _ , refl) M _ x fa _ = fa
 
   ax-n-soundness : soundness (ax-n i) (all-models w l3 i l4)
   ax-n-soundness
-    (□ (a₁ ⇒ b₁) ⇒ □ a₁ ⇒ □ b₁)
-    (refl , refl)
+    (□ (a ⇒ b) ⇒ □ a ⇒ □ b)
+    (_ , _ , refl)
     M in-class x fab fa y r =
       fab y r (fa y r)
-  ax-n-soundness (var _) (map-raise ())
-  ax-n-soundness ⊥ (map-raise ())
-  ax-n-soundness (□ _) (map-raise ())
-  ax-n-soundness (var _ ⇒ _) (map-raise ())
-  ax-n-soundness (⊥ ⇒ _) (map-raise ())
-  ax-n-soundness ((_ ⇒ _) ⇒ _) (map-raise ())
-  ax-n-soundness (□ var _ ⇒ _) (map-raise ())
-  ax-n-soundness (□ ⊥ ⇒ _) (map-raise ())
-  ax-n-soundness (□ □ _ ⇒ _) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ var _) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ ⊥) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ □ _) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ var _ ⇒ _) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ ⊥ ⇒ _) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ (_ ⇒ _) ⇒ _) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ □ _ ⇒ var _) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ □ _ ⇒ ⊥) (map-raise ())
-  ax-n-soundness (□ (_ ⇒ _) ⇒ □ _ ⇒ _ ⇒ _) (map-raise ())
 
   ax-s-soundness : soundness (ax-s i) (all-models w l3 i l4)
   ax-s-soundness
     ((a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c)
-    (refl , refl , refl , refl)
+    (_ , _ , _ , refl)
     M in-class x fabc fab fa =
       fabc fa (fab fa)
-  ax-s-soundness (var _) (map-raise ())
-  ax-s-soundness ⊥ (map-raise ())
-  ax-s-soundness (□ _) (map-raise ())
-  ax-s-soundness (var _ ⇒ _) (map-raise ())
-  ax-s-soundness (⊥ ⇒ _) (map-raise ())
-  ax-s-soundness (□ _ ⇒ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ var _) ⇒ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ ⊥) ⇒ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ □ _) ⇒ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ var _) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ ⊥) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ □ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ var _ ⇒ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ ⊥ ⇒ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ □ _ ⇒ _) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ (_ ⇒ _) ⇒ var _) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ (_ ⇒ _) ⇒ ⊥) (map-raise ())
-  ax-s-soundness ((_ ⇒ _ ⇒ _) ⇒ (_ ⇒ _) ⇒ □ _) (map-raise ())
 
   ax-dn-soundness : soundness (ax-dn i) (decidable-models w l3 i l4)
-  ax-dn-soundness (((a ⇒ ⊥) ⇒ ⊥) ⇒ a) refl M is-dec x f with is-dec a x
-  ... | inl fa = fa
-  ... | inr fna = raise-ex-falso _ (f (λ fa → map-raise (fna fa)))
-  ax-dn-soundness (var _) (map-raise ())
-  ax-dn-soundness ⊥ (map-raise ())
-  ax-dn-soundness (□ _) (map-raise ())
-  ax-dn-soundness (var _ ⇒ _) (map-raise ())
-  ax-dn-soundness (⊥ ⇒ _) (map-raise ())
-  ax-dn-soundness (□ _ ⇒ _) (map-raise ())
-  ax-dn-soundness ((var _ ⇒ _) ⇒ _) (map-raise ())
-  ax-dn-soundness ((⊥ ⇒ _) ⇒ _) (map-raise ())
-  ax-dn-soundness ((□ _ ⇒ _) ⇒ _) (map-raise ())
-  ax-dn-soundness (((_ ⇒ var _) ⇒ _) ⇒ _) (map-raise ())
-  ax-dn-soundness (((_ ⇒ _ ⇒ _) ⇒ _) ⇒ _) (map-raise ())
-  ax-dn-soundness (((_ ⇒ □ _) ⇒ _) ⇒ _) (map-raise ())
-  ax-dn-soundness (((_ ⇒ ⊥) ⇒ var _) ⇒ _) (map-raise ())
-  ax-dn-soundness (((_ ⇒ ⊥) ⇒ _ ⇒ _) ⇒ _) (map-raise ())
-  ax-dn-soundness (((_ ⇒ ⊥) ⇒ □ _) ⇒ _) (map-raise ())
-
-  ax-dn-soundness' : soundness (ax-dn' i) (decidable-models w l3 i l4)
-  ax-dn-soundness' a =
-    map-universal-property-trunc-Prop
-      ( decidable-models w l3 i l4 ⊨C a)
-      ( aux)
-      -- with inductor
-      -- ( λ {
-      --   (b , refl) M is-dec x f →
-      --     ( ind-coprod
-      --         ( λ _ → type-Prop ((M , x) ⊨ b))
-      --         ( id)
-      --         ( λ fna → raise-ex-falso _ (f (λ fa -> map-raise (fna fa))))
-      --         ( is-dec b x))})
-    where
-    aux :
-      Σ (formula i) (λ b → a ＝ ((b ⇒ ⊥) ⇒ ⊥) ⇒ b) →
-      type-Prop (decidable-models w l3 i l4 ⊨C a)
-    aux (b , refl) M is-dec x f with (is-dec b x)
-    ... | inl fa = fa
-    ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))
-
-  ax-dn-soundness'' : soundness (ax-dn'' i) (decidable-models w l3 i l4)
-  ax-dn-soundness''
-    (((a ⇒ ⊥) ⇒ ⊥) ⇒ a) (a , refl) _ is-dec x f with (is-dec a x)
+  ax-dn-soundness (((a ⇒ ⊥) ⇒ ⊥) ⇒ a) (_ , refl) _ is-dec x f
+    with (is-dec a x)
   ... | inl fa = fa
   ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))
 ```

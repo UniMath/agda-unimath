@@ -72,6 +72,15 @@ module _
 
   ◇_ : formula i → formula i
   ◇ a = ~ □ ~ a
+
+  eq-implication-left : {a b c d : formula i} → a ⇒ b ＝ c ⇒ d → a ＝ c
+  eq-implication-left refl = refl
+
+  eq-implication-right : {a b c d : formula i} → a ⇒ b ＝ c ⇒ d → b ＝ d
+  eq-implication-right refl = refl
+
+  eq-box : {a b : formula i} → □ a ＝ □ b → a ＝ b
+  eq-box refl = refl
 ```
 
 ## Properties
