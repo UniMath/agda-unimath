@@ -160,7 +160,7 @@ module _
         ( g' (pr1 (pr2 c) x))
         ( c' x))
       ( is-pb-c)
-      ( is-equiv-right-factor-htpy
+      ( is-equiv-top-map-triangle
         ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
         ( map-standard-pullback-tot-cone-cone-family)
         ( map-Σ _
@@ -183,7 +183,7 @@ module _
     is-pullback
       (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family
   is-pullback-tot-is-pullback-family is-pb-c is-pb-c' =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
       ( map-standard-pullback-tot-cone-cone-family)
       ( map-Σ _

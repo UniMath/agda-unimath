@@ -284,7 +284,7 @@ abstract
   is-equiv-is-invertible-id-htpy-id-id :
     {l : Level} (A : UU l) → is-equiv (is-invertible-id-htpy-id-id A)
   is-equiv-is-invertible-id-htpy-id-id A =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( is-invertible-id-htpy-id-id A)
       ( map-associative-Σ
         ( A → A)
@@ -368,7 +368,7 @@ module _
           ( is-contr-section-is-equiv (is-equiv-map-equiv f))
           ( section-is-equiv (is-equiv-map-equiv f))) ∘e
         ( inv-equiv
-          ( equiv-htpy-postcomp-htpy
+          ( equiv-htpy-postleft-map-triangle
             ( f)
             ( map-section-is-equiv (is-equiv-map-equiv f) ∘ map-equiv f)
             ( id))) ∘e

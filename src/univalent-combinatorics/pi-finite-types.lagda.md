@@ -874,7 +874,7 @@ abstract
           ( is-surjective-map-unit-im (f ∘ inl))
       is-emb-i : is-emb i
       is-emb-i =
-        is-emb-right-factor-htpy
+        is-emb-top-map-triangle
           ( (unit-trunc-Set ∘ f) ∘ inl)
           ( inclusion-trunc-im-Set (f ∘ inl))
           ( i)

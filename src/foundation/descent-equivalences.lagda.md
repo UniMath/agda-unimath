@@ -57,7 +57,7 @@ module _
       ( map-inv-is-equiv-precomp-Π-is-equiv
         ( is-equiv-i)
         ( λ y → is-equiv (map-fiber-cone j h c y))
-        ( λ x → is-equiv-left-factor-htpy
+        ( λ x → is-equiv-right-map-triangle
           ( map-fiber-cone (j ∘ i) h
             ( pasting-horizontal-cone i j h c d) x)
           ( map-fiber-cone j h c (i x))

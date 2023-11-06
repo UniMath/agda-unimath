@@ -284,7 +284,7 @@ module _
         ( map-equiv equiv-ev-pair³)
         ( cocone-map-flattening-pushout Y ∘ ind-Σ)
         ( is-equiv-map-equiv equiv-ev-pair³)
-        ( is-equiv-right-factor-htpy
+        ( is-equiv-top-map-triangle
           ( dependent-cocone-map f g c (λ x → P x → Y))
           ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
           ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)

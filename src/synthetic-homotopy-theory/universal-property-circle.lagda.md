@@ -226,7 +226,7 @@ module _
       ({l : Level} → dependent-universal-property-circle l α) →
       ({l : Level} → universal-property-circle l α)
     universal-property-dependent-universal-property-circle dup-circle Y =
-      is-equiv-right-factor-htpy
+      is-equiv-top-map-triangle
         ( ev-free-loop-Π α (λ x → Y))
         ( map-compute-free-dependent-loop-const α Y)
         ( ev-free-loop α Y)

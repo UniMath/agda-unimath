@@ -129,23 +129,23 @@ module _
   { l1 l2 l3 : Level} {A : UU l1}
   where
 
-  equiv-htpy-Π-precomp-htpy :
+  equiv-htpy-Π-preleft-map-triangle :
     { B : UU l2} {C : B → UU l3} →
     ( f g : (b : B) → C b) (e : A ≃ B) →
     ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
     ( f ~ g)
-  equiv-htpy-Π-precomp-htpy f g e =
+  equiv-htpy-Π-preleft-map-triangle f g e =
     equiv-Π
       ( eq-value f g)
       ( e)
       ( λ a → id-equiv)
 
-  equiv-htpy-Π-postcomp-htpy :
+  equiv-htpy-Π-postleft-map-triangle :
     { B : A → UU l2} { C : UU l3} →
     ( e : (a : A) → B a ≃ C) (f g : (a : A) → B a) →
     ( f ~ g) ≃
     ( (a : A) → ( map-equiv (e a) (f a) ＝ map-equiv (e a) (g a)))
-  equiv-htpy-Π-postcomp-htpy e f g =
+  equiv-htpy-Π-postleft-map-triangle e f g =
     equiv-Π-equiv-family
       ( λ a → equiv-ap (e a) (f a) (g a))
 ```

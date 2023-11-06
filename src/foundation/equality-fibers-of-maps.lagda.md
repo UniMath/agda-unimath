@@ -83,7 +83,7 @@ module _
     is-equiv-fiber-ap-eq-fiber :
       (s t : fiber f b) → is-equiv (fiber-ap-eq-fiber s t)
     is-equiv-fiber-ap-eq-fiber s t =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( fiber-ap-eq-fiber s t)
         ( tot (fiber-ap-eq-fiber-fiberwise s t))
         ( pair-eq-Σ {s = s} {t})

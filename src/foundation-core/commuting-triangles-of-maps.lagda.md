@@ -10,8 +10,9 @@ module foundation-core.commuting-triangles-of-maps where
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -22,16 +23,16 @@ open import foundation-core.whiskering-homotopies
 A triangle of maps
 
 ```text
-      top
-   A ----> B
-    \     /
-left \   / right
-      V V
-       X
+        top
+     A ----> B
+      \     /
+  left \   / right
+        V V
+         X
 ```
 
-is said to commute if there is a homotopy between the map on the left and the
-composite map
+is said to **commute** if there is a [homotopy](foundation-core.homotopies.md)
+between the map on the left and the composite of the top and right maps:
 
 ```text
   left ~ right ∘ top.
@@ -71,46 +72,87 @@ module _
     H ∙h (K ·r i)
 ```
 
-### Any commuting triangle of maps induces a commuting triangle of function spaces
-
-```agda
-module _
-  { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  ( left : A → X) (right : B → X) (top : A → B)
-  where
-
-  precomp-coherence-triangle-maps :
-    coherence-triangle-maps left right top →
-    ( W : UU l4) →
-    coherence-triangle-maps
-      ( precomp left W)
-      ( precomp top W)
-      ( precomp right W)
-  precomp-coherence-triangle-maps H W = htpy-precomp H W
-
-  precomp-coherence-triangle-maps' :
-    coherence-triangle-maps' left right top →
-    ( W : UU l4) →
-    coherence-triangle-maps'
-      ( precomp left W)
-      ( precomp top W)
-      ( precomp right W)
-  precomp-coherence-triangle-maps' H W = htpy-precomp H W
-```
-
 ### Coherences of commuting triangles of maps with fixed vertices
 
 This or its opposite should be the coherence in the characterization of
 identifications of commuting triangles of maps with fixed end vertices.
 
 ```agda
-coherence-htpy-triangle-maps :
+module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (left : A → X) (right : B → X) (top : A → B)
-  (left' : A → X) (right' : B → X) (top' : A → B) →
-  coherence-triangle-maps left right top →
-  coherence-triangle-maps left' right' top' →
-  left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
-coherence-htpy-triangle-maps left right top left' right' top' c c' L R T =
-  c ∙h htpy-comp-horizontal T R ~ L ∙h c'
+  (left' : A → X) (right' : B → X) (top' : A → B)
+  (c : coherence-triangle-maps left right top)
+  (c' : coherence-triangle-maps left' right' top')
+  where
+
+  coherence-htpy-triangle-maps :
+    left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
+  coherence-htpy-triangle-maps L R T =
+    c ∙h htpy-comp-horizontal T R ~ L ∙h c'
+```
+
+## Properties
+
+### If the top map has a section, then the reversed triangle with the section on top commutes
+
+If `t : B → A` is a [section](foundation-core.sections.md) of the top map `h`,
+then the triangle
+
+```text
+       t
+  B ------> A
+   \       /
+   g\     /f
+     \   /
+      V V
+       X,
+```
+
+commutes.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : coherence-triangle-maps f g h)
+  (t : section h)
+  where
+
+  inv-triangle-section : coherence-triangle-maps' g f (map-section h t)
+  inv-triangle-section =
+    (H ·r map-section h t) ∙h (g ·l is-section-map-section h t)
+
+  triangle-section : coherence-triangle-maps g f (map-section h t)
+  triangle-section = inv-htpy inv-triangle-section
+```
+
+### If the right map has a retraction, then the reversed triangle with the retraction on the right commutes
+
+If `r : B → A` is a section of the top map `h`, then the triangle
+
+```text
+       t
+  B ------> A
+   \       /
+   g\     /f
+     \   /
+      V V
+       X,
+```
+
+commutes.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : coherence-triangle-maps f g h)
+  (r : retraction g)
+  where
+
+  inv-triangle-retraction : coherence-triangle-maps' h (map-retraction g r) f
+  inv-triangle-retraction =
+    (map-retraction g r ·l H) ∙h (is-retraction-map-retraction g r ·r h)
+
+  triangle-retraction : coherence-triangle-maps h (map-retraction g r) f
+  triangle-retraction = inv-htpy inv-triangle-retraction
 ```

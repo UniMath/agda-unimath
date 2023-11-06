@@ -20,6 +20,7 @@ open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
@@ -256,23 +257,24 @@ module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  equiv-is-equiv-left-factor-htpy :
-    { f : A → B} (e : B ≃ C) (h : A → C) (H : h ~ (map-equiv e ∘ f)) →
+  equiv-is-equiv-right-map-triangle :
+    { f : A → B} (e : B ≃ C) (h : A → C)
+    ( H : coherence-triangle-maps h (map-equiv e) f) →
     is-equiv f ≃ is-equiv h
-  equiv-is-equiv-left-factor-htpy {f} e h H =
+  equiv-is-equiv-right-map-triangle {f} e h H =
     equiv-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv h)
       ( λ is-equiv-f →
-        is-equiv-comp-htpy h (map-equiv e) f H is-equiv-f
+        is-equiv-left-map-triangle h (map-equiv e) f H is-equiv-f
           ( is-equiv-map-equiv e))
-      ( is-equiv-right-factor-htpy h (map-equiv e) f H (is-equiv-map-equiv e))
+      ( is-equiv-top-map-triangle h (map-equiv e) f H (is-equiv-map-equiv e))
 
   equiv-is-equiv-left-factor :
     { f : A → B} (e : B ≃ C) →
     is-equiv f ≃ is-equiv (map-equiv e ∘ f)
   equiv-is-equiv-left-factor {f} e =
-    equiv-is-equiv-left-factor-htpy e (map-equiv e ∘ f) refl-htpy
+    equiv-is-equiv-right-map-triangle e (map-equiv e ∘ f) refl-htpy
 ```
 
 #### If the left factor is an equivalence, then the right factor being an equivalence is equivalent to the composite being one
@@ -282,23 +284,133 @@ module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  equiv-is-equiv-right-factor-htpy :
-    ( e : A ≃ B) {f : B → C} (h : A → C) (H : h ~ (f ∘ map-equiv e)) →
+  equiv-is-equiv-top-map-triangle :
+    ( e : A ≃ B) {f : B → C} (h : A → C)
+    ( H : coherence-triangle-maps h f (map-equiv e)) →
     is-equiv f ≃ is-equiv h
-  equiv-is-equiv-right-factor-htpy e {f} h H =
+  equiv-is-equiv-top-map-triangle e {f} h H =
     equiv-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv h)
-      ( is-equiv-comp-htpy h f (map-equiv e) H (is-equiv-map-equiv e))
+      ( is-equiv-left-map-triangle h f (map-equiv e) H (is-equiv-map-equiv e))
       ( λ is-equiv-h →
-        is-equiv-left-factor-htpy h f (map-equiv e) H is-equiv-h
+        is-equiv-right-map-triangle h f
+          ( map-equiv e)
+          ( H)
+          ( is-equiv-h)
           ( is-equiv-map-equiv e))
 
   equiv-is-equiv-right-factor :
     ( e : A ≃ B) {f : B → C} →
     is-equiv f ≃ is-equiv (f ∘ map-equiv e)
   equiv-is-equiv-right-factor e {f} =
-    equiv-is-equiv-right-factor-htpy e (f ∘ map-equiv e) refl-htpy
+    equiv-is-equiv-top-map-triangle e (f ∘ map-equiv e) refl-htpy
+```
+
+### The 6-for-2 property of equivalences
+
+Consider a commuting diagram of maps
+
+```text
+       i
+    A ---> X
+    |    ∧ |
+    |   /  |
+  f |  h   | g
+    V /    V
+    B ---> Y
+       j
+```
+
+The **6-for-2 property of equivalences** asserts that if `i` and `j` are
+equivalences, then all maps are equivalences.
+
+**First proof:** Since `i` is an equivalence, it follows that `i` is surjective.
+This implies that `h` is surjective. Furthermore, since `j` is an equivalence it
+follows that `j` is an embedding. This implies that `h` is an embedding. The map
+`h` is therefore both surjective and an embedding, so it must be an equivalence.
+The fact that `f` and `g` are equivalences now follows from a simple application
+of the 3-for-2 property of equivalences.
+
+Unfortunately, the above proof requires us to import `surjective-maps`, which
+causes a cyclic module dependency. We therefore give a second proof, which
+avoids the fact that maps that are both surjective and an embedding are
+equivalences.
+
+**Second proof:** By reasoning similar to that in the first proof, it suffices
+to show that the diagonal filler `h` is an equivalence. The map `f ∘ i⁻¹` is a
+section of `h`, since we have `(h ∘ f ~ i) → (h ∘ f ∘ i⁻¹ ~ id)` by transposing
+along equivalences. Similarly, the map `j⁻¹ ∘ g` is a retraction of `h`, since
+we have `(g ∘ h ~ j) → (j⁻¹ ∘ g ∘ h ~ id)` by transposing along equivalences.
+Since `h` therefore has a section and a retraction, it is an equivalence.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) {i : A → X} {j : B → Y} (h : B → X)
+  (u : coherence-triangle-maps i h f) (v : coherence-triangle-maps j g h)
+  where
+
+  map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    is-equiv i → X → B
+  map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H =
+    f ∘ map-inv-is-equiv H
+
+  is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    (H : is-equiv i) →
+    h ∘ map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H ~ id
+  is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H x =
+    ( inv (u (map-inv-is-equiv H x))) ∙
+    ( is-section-map-inv-is-equiv H x)
+
+  section-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    is-equiv i → section h
+  pr1 (section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H) =
+    map-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H
+  pr2 (section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H) =
+    is-section-section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H
+
+  map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    is-equiv j → X → B
+  map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K =
+    map-inv-is-equiv K ∘ g
+
+  is-retraction-retraction-diagonal-fller-is-equiv-top-is-equiv-bottom-square :
+    (K : is-equiv j) →
+    map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K ∘ h ~
+    id
+  is-retraction-retraction-diagonal-fller-is-equiv-top-is-equiv-bottom-square
+    K b =
+    ( inv (ap (map-inv-is-equiv K) (v b))) ∙
+    ( is-retraction-map-inv-is-equiv K b)
+
+  retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    (K : is-equiv j) → retraction h
+  pr1 (retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K) =
+    map-retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K
+  pr2 (retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K) =
+    is-retraction-retraction-diagonal-fller-is-equiv-top-is-equiv-bottom-square
+      K
+
+  is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square :
+    is-equiv i → is-equiv j → is-equiv h
+  pr1 (is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K) =
+    section-diagonal-filler-is-equiv-top-is-equiv-bottom-square H
+  pr2 (is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K) =
+    retraction-diagonal-filler-is-equiv-top-is-equiv-bottom-square K
+
+  is-equiv-left-is-equiv-top-is-equiv-bottom-square :
+    is-equiv i → is-equiv j → is-equiv f
+  is-equiv-left-is-equiv-top-is-equiv-bottom-square H K =
+    is-equiv-top-map-triangle i h f u
+      ( is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K)
+      ( H)
+
+  is-equiv-right-is-equiv-top-is-equiv-bottom-square :
+    is-equiv i → is-equiv j → is-equiv g
+  is-equiv-right-is-equiv-top-is-equiv-bottom-square H K =
+    is-equiv-right-map-triangle j g h v K
+      ( is-equiv-diagonal-filler-is-equiv-top-is-equiv-bottom-square H K)
 ```
 
 ### Being an equivalence is closed under homotopies

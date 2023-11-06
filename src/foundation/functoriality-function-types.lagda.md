@@ -74,21 +74,21 @@ module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  equiv-htpy-precomp-htpy :
+  equiv-htpy-preleft-map-triangle :
     ( f g : B → C) (e : A ≃ B) →
     ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
     ( f ~ g)
-  equiv-htpy-precomp-htpy f g e =
+  equiv-htpy-preleft-map-triangle f g e =
     equiv-Π
       ( eq-value f g)
       ( e)
       ( λ a → id-equiv)
 
-  equiv-htpy-postcomp-htpy :
+  equiv-htpy-postleft-map-triangle :
     ( e : B ≃ C) (f g : A → B) →
     ( f ~ g) ≃
     ( (map-equiv e ∘ f) ~ (map-equiv e ∘ g))
-  equiv-htpy-postcomp-htpy e f g =
+  equiv-htpy-postleft-map-triangle e f g =
     equiv-Π-equiv-family
       ( λ a → equiv-ap e (f a) (g a))
 ```

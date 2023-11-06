@@ -93,7 +93,7 @@ is-equiv-ev-suspension :
   ( up-Y : universal-property-suspension' l3 X Y s) →
   ( Z : UU l3) → is-equiv (ev-suspension s Z)
 is-equiv-ev-suspension {X = X} s up-Y Z =
-  is-equiv-comp-htpy
+  is-equiv-left-map-triangle
     ( ev-suspension s Z)
     ( map-equiv-suspension-structure-suspension-cocone X Z)
     ( cocone-map
