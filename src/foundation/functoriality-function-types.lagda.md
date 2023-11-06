@@ -84,11 +84,11 @@ module _
       ( e)
       ( λ a → id-equiv)
 
-  equiv-htpy-postleft-map-triangle :
+  equiv-htpy-postcomp-htpy :
     ( e : B ≃ C) (f g : A → B) →
     ( f ~ g) ≃
     ( (map-equiv e ∘ f) ~ (map-equiv e ∘ g))
-  equiv-htpy-postleft-map-triangle e f g =
+  equiv-htpy-postcomp-htpy e f g =
     equiv-Π-equiv-family
       ( λ a → equiv-ap e (f a) (g a))
 ```

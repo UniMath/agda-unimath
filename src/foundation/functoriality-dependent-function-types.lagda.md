@@ -140,12 +140,12 @@ module _
       ( e)
       ( λ a → id-equiv)
 
-  equiv-htpy-Π-postleft-map-triangle :
+  equiv-htpy-Π-postcomp-htpy :
     { B : A → UU l2} { C : UU l3} →
     ( e : (a : A) → B a ≃ C) (f g : (a : A) → B a) →
     ( f ~ g) ≃
     ( (a : A) → ( map-equiv (e a) (f a) ＝ map-equiv (e a) (g a)))
-  equiv-htpy-Π-postleft-map-triangle e f g =
+  equiv-htpy-Π-postcomp-htpy e f g =
     equiv-Π-equiv-family
       ( λ a → equiv-ap (e a) (f a) (g a))
 ```

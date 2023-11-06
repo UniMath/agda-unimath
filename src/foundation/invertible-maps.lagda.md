@@ -368,7 +368,7 @@ module _
           ( is-contr-section-is-equiv (is-equiv-map-equiv f))
           ( section-is-equiv (is-equiv-map-equiv f))) ∘e
         ( inv-equiv
-          ( equiv-htpy-postleft-map-triangle
+          ( equiv-htpy-postcomp-htpy
             ( f)
             ( map-section-is-equiv (is-equiv-map-equiv f) ∘ map-equiv f)
             ( id))) ∘e
