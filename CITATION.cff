@@ -5,7 +5,7 @@ abstract: "The agda-unimath library is a community formalization project for uni
 authors:
   - family-names: "Rijke"
     given-names: "Egbert"
-  - family-names: "Bonnevier"
+  - family-names: "Stenholm"
     given-names: "Elisabeth"
   - family-names: "Prieto-Cubides"
     given-names: "Jonathan"

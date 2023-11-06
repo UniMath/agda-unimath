@@ -751,28 +751,28 @@ module _
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
+        ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
         ( comp-hom-Group
           ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
-          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
+          ( group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
+          ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
           ( hom-group-hom-Concrete-Group
             ( UU-Fin-Group l (n +ℕ 2))
             ( UU-Fin-Group (lsuc lzero ⊔ l) 2)
             ( simpson-delooping-sign (n +ℕ 2)))
           ( hom-inv-iso-Group
-            ( abstract-group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
+            ( group-Concrete-Group (UU-Fin-Group l (n +ℕ 2)))
             ( loop-group-Set (raise-Fin-Set l (n +ℕ 2)))
             ( iso-loop-group-fin-UU-Fin-Group l (n +ℕ 2))))
         ( hom-inv-symmetric-group-loop-group-Set (raise-Fin-Set l (n +ℕ 2))))
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l (n +ℕ 2)))
         ( symmetric-Group (Fin-Set (n +ℕ 2)))
-        ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
+        ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
         ( comp-hom-Group
           ( symmetric-Group (Fin-Set (n +ℕ 2)))
           ( symmetric-Group (Fin-Set 2))
-          ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
+          ( group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( λ n X → Fin n ≃ type-UU-Fin n X)
             ( sign-comp-Equivalence-Relation)
