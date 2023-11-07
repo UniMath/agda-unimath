@@ -63,7 +63,8 @@ module _
 ```
 
 The converse of the above, that every epimorphism is a dependent epimorphism,
-can be found in the file on [acyclic maps](synthetic-homotopy-theory.acyclic-maps.md).
+can be found in the file on
+[acyclic maps](synthetic-homotopy-theory.acyclic-maps.md).
 
 ## See also
 
