@@ -28,20 +28,24 @@ open import foundation-core.identity-types
 Any [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
-        f'
-    C -----> B
-    |        |
-  g'|        | g
-    v        v
+        i
     A -----> X
-        f
+    |        |
+  f |        | g
+    v        v
+    B -----> Y
+        j
 ```
 
 induces a map between the [fibers](foundation-core.fibers-of-maps.md) of the
-vertical maps
+vertical maps, which fits in a commuting square
 
 ```text
-  fiber g' x → fiber g (f x).
+  fiber f b -----> fiber g (j b)
+      |                  |
+      |                  |
+      V                  V
+      A ---------------> X
 ```
 
 ## Definitions
@@ -52,33 +56,41 @@ vertical maps
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
   (top : C → B) (left : C → A) (right : B → X) (bottom : A → X)
+  (H : coherence-square-maps' top left right bottom)
   where
 
   map-fiber-square' :
-    (H : coherence-square-maps' top left right bottom)
     (x : A) → fiber left x → fiber right (bottom x)
-  pr1 (map-fiber-square' H x (y , p)) = top y
-  pr2 (map-fiber-square' H x (y , p)) = H y ∙ ap bottom p
+  pr1 (map-fiber-square' x (y , p)) = top y
+  pr2 (map-fiber-square' x (y , p)) = H y ∙ ap bottom p
 
   coherence-fiber-square' :
-    (H : coherence-square-maps' top left right bottom)
-    (x : A) → coherence-square-maps' (map-fiber-square' H x) pr1 pr1 top
-  coherence-fiber-square' H x p = refl
+    (x : A) →
+    coherence-square-maps'
+      ( map-fiber-square' x)
+      ( inclusion-fiber left)
+      ( inclusion-fiber right)
+      ( top)
+  coherence-fiber-square' x p = refl
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (top : C → B) (left : C → A) (right : B → X) (bottom : A → X)
+  (H : coherence-square-maps top left right bottom)
+  where
 
   map-fiber-square :
-    (H : coherence-square-maps top left right bottom)
     (x : A) → fiber left x → fiber right (bottom x)
-  map-fiber-square H = map-fiber-square' (inv-htpy H)
+  map-fiber-square = map-fiber-square' top left right bottom (inv-htpy H)
 
   coherence-fiber-square :
-    (H : coherence-square-maps top left right bottom)
-    (x : A) → coherence-square-maps (map-fiber-square H x) pr1 pr1 top
-  coherence-fiber-square H x p = refl
-
-map-fiber-square-id :
-  {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
-  map-fiber-square id g g id refl-htpy x ~ id
-map-fiber-square-id g .(g b) (b , refl) = refl
+    (x : A) →
+    coherence-square-maps
+      ( map-fiber-square x)
+      ( inclusion-fiber left)
+      ( inclusion-fiber right)
+      ( top)
+  coherence-fiber-square x p = refl
 ```
 
 ### Any cone induces a family of maps between the fibers of the vertical maps
@@ -100,6 +112,15 @@ module _
 ```
 
 ## Properties
+
+### The functorial action of `fiber` preserves the identity function
+
+```agda
+map-fiber-square-id :
+  {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
+  map-fiber-square id g g id refl-htpy x ~ id
+map-fiber-square-id g .(g b) (b , refl) = refl
+```
 
 ### Computing `map-fiber-cone` of a horizontal pasting of cones
 

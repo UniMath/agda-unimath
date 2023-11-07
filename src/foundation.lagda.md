@@ -195,6 +195,7 @@ open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-towers public
