@@ -62,6 +62,9 @@ module _
   is-epimorphism-is-dependent-epimorphism e X = e (λ _ → X)
 ```
 
+The converse of the above, that every epimorphism is a dependent epimorphism,
+can be found in the file on [acyclic maps](synthetic-homotopy-theory.acyclic-maps.md).
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
