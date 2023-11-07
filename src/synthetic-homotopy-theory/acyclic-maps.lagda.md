@@ -132,8 +132,8 @@ module _
       ( is-emb-is-equiv (is-equiv-map-inv-left-unit-law-function-type X))
 
   is-acyclic-is-emb-const :
-    ({l' : Level} (X : UU l') → is-emb (const A X))
-    → is-acyclic A
+    ({l' : Level} (X : UU l') → is-emb (const A X)) →
+    is-acyclic A
   is-acyclic-is-emb-const e =
     is-acyclic-is-acyclic-map-terminal-map A
       ( is-acyclic-map-is-epimorphism
