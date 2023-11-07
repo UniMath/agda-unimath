@@ -7,6 +7,7 @@ module foundation.dependent-epimorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.epimorphisms
 open import foundation.function-types
 open import foundation.universe-levels
 
@@ -45,6 +46,20 @@ module _
   is-dependent-epimorphism : (A → B) → UUω
   is-dependent-epimorphism f =
     {l : Level} (C : B → UU l) → is-emb (precomp-Π f C)
+```
+
+## Properties
+
+### Every dependent epimorphism is an epimorphism
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-epimorphism-is-dependent-epimorphism :
+    is-dependent-epimorphism f → is-epimorphism f
+  is-epimorphism-is-dependent-epimorphism e X = e (λ _ → X)
 ```
 
 ## See also
