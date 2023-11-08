@@ -16,12 +16,14 @@ open import foundation.subtype-identity-principle
 open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.propositions
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
+open import foundation-core.truncated-types public
 ```
 
 </details>
@@ -92,4 +94,16 @@ truncated-type-iterated-succ-Truncated-Type :
 pr1 (truncated-type-iterated-succ-Truncated-Type k r A) = type-Truncated-Type A
 pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
   is-trunc-iterated-succ-is-trunc k r (is-trunc-type-Truncated-Type A)
+
+### Two equivalent types are equivalently k-truncated
+
+```agda
+equiv-is-trunc-equiv : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  → A ≃ B → is-trunc k A ≃ is-trunc k B
+equiv-is-trunc-equiv k {A} {B} e =
+  equiv-prop
+    (is-prop-is-trunc k A)
+    (is-prop-is-trunc k B)
+    (is-trunc-equiv' k A e)
+    (is-trunc-equiv k B e)
 ```

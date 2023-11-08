@@ -91,6 +91,17 @@ is-trunc-map-is-equiv k H =
   is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
 ```
 
+### A (-1)-truncated map is `k+1`-truncated
+
+```agda
+is-trunc-map-neg-one-trunc-map :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-trunc-map neg-one-𝕋 f → is-trunc-map (succ-𝕋 k) f
+is-trunc-map-neg-one-trunc-map neg-two-𝕋 p = p
+is-trunc-map-neg-one-trunc-map (succ-𝕋 k) p =
+  is-trunc-map-succ-is-trunc-map (succ-𝕋 k) (is-trunc-map-neg-one-trunc-map k p)
+```
+
 ### A map is `k+1`-truncated if and only if its action on identifications is `k`-truncated
 
 ```agda
@@ -116,6 +127,23 @@ module _
         ( eq-fiber-fiber-ap f x y p)
         ( is-equiv-eq-fiber-fiber-ap f x y p)
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
+```
+
+### The domain of any `k`-truncated map into a `k+1`-truncated type is `k+1`-truncated
+
+```agda
+is-trunc-is-trunc-map-into-is-trunc :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
+  is-trunc (succ-𝕋 k) B → is-trunc-map k f →
+  is-trunc (succ-𝕋 k) A
+is-trunc-is-trunc-map-into-is-trunc neg-two-𝕋 f is-trunc-B is-trunc-map-f =
+  is-trunc-is-equiv _ _ f (is-equiv-is-contr-map is-trunc-map-f) is-trunc-B
+is-trunc-is-trunc-map-into-is-trunc (succ-𝕋 k) f is-trunc-B is-trunc-map-f a a' =
+  is-trunc-is-trunc-map-into-is-trunc
+    ( k)
+    ( ap f)
+    ( is-trunc-B (f a) (f a'))
+    ( is-trunc-map-ap-is-trunc-map k f is-trunc-map-f a a')
 ```
 
 ### A family of types is a family of `k`-truncated types if and only of the projection map is `k`-truncated
@@ -214,6 +242,14 @@ abstract
         ( is-trunc-Σ
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t)))
+
+comp-trunc-map :
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  {X : UU l3} (g : trunc-map k B X) (h : trunc-map k A B) →
+  trunc-map k A X
+pr1 (comp-trunc-map k g h) = pr1 g ∘ pr1 h
+pr2 (comp-trunc-map k g h) =
+  is-trunc-map-comp k (pr1 g) (pr1 h) (pr2 g) (pr2 h)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}

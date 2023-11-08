@@ -36,12 +36,13 @@ truncation-level-ℕ : ℕ → 𝕋
 truncation-level-ℕ = succ-𝕋 ∘ truncation-level-minus-one-ℕ
 ```
 
-### The inclusion of double successors of truncation levels into the natural numbers
+### Inclusion of the truncation levels into the natural numbers
 
 ```agda
-nat-succ-succ-𝕋 : 𝕋 → ℕ
-nat-succ-succ-𝕋 neg-two-𝕋 = zero-ℕ
-nat-succ-succ-𝕋 (succ-𝕋 k) = succ-ℕ (nat-succ-succ-𝕋 k)
+ℕ-plus-two-truncation-level : 𝕋 → ℕ
+ℕ-plus-two-truncation-level neg-two-𝕋 = zero-ℕ
+ℕ-plus-two-truncation-level (succ-𝕋 n) =
+  succ-ℕ (ℕ-plus-two-truncation-level n)
 ```
 
 ### Addition of truncation levels

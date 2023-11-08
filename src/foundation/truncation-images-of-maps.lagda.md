@@ -59,7 +59,6 @@ module _
   Eq-unit-trunc-im : A → A → UU (l1 ⊔ l2)
   Eq-unit-trunc-im x y = trunc-im k (ap f {x} {y})
 
-{-
   extensionality-trunc-im :
     (x y : A) →
     ( unit-trunc-im (succ-𝕋 k) f x ＝ unit-trunc-im (succ-𝕋 k) f y) ≃
@@ -67,9 +66,38 @@ module _
   extensionality-trunc-im x y =
     ( equiv-tot
       ( λ q →
-        {!!})) ∘e
+        equiv-trunc k (equiv-tot (λ p → equiv-concat (inv right-unit) q) ∘e equiv-Eq-eq-fib f (f y)) ∘e
+        ( inv-equiv (effectiveness-trunc k (x , q) (y , refl)) ∘e
+          ( equiv-concat (ap unit-trunc (inv (tr-fib f q refl))) (unit-trunc (y , refl)) ∘e
+            equiv-concat (preserves-tr (λ _ → unit-trunc) q (x , refl)) (unit-trunc (y , refl)))))) ∘e
     ( equiv-pair-eq-Σ
       ( unit-trunc-im (succ-𝕋 k) f x)
       ( unit-trunc-im (succ-𝕋 k) f y))
--}
+```
+
+### The map projection-trunc-im k is k-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-trunc-map-projection-trunc-im : is-trunc-map k (projection-trunc-im k f)
+  is-trunc-map-projection-trunc-im = is-trunc-map-pr1 k (λ _ → is-trunc-type-trunc)
+```
+
+### The map unit-trunc-im k is k-connected
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-connected-map-unit-trunc-im : is-connected-map k (unit-trunc-im k f)
+  is-connected-map-unit-trunc-im =
+    is-connected-map-comp k _ _
+      ( is-connected-map-tot-is-fiberwise-connected-map k
+        ( λ b → unit-trunc)
+        ( λ b → is-connected-map-unit-trunc k))
+      ( is-connected-map-is-equiv k (is-equiv-map-inv-equiv-total-fib f))
 ```
