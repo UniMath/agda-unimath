@@ -53,7 +53,7 @@ module _
   where
 
   Eq-fiber : fiber f b → fiber f b → UU (l1 ⊔ l2)
-  Eq-fiber s t = Σ (pr1 s ＝ pr1 t) (λ α → ((ap f α) ∙ (pr2 t)) ＝ (pr2 s))
+  Eq-fiber s t = Σ (pr1 s ＝ pr1 t) (λ α → ap f α ∙ pr2 t ＝ pr2 s)
 
   refl-Eq-fiber : (s : fiber f b) → Eq-fiber s s
   pr1 (refl-Eq-fiber s) = refl
@@ -66,16 +66,15 @@ module _
   eq-Eq-fiber-uncurry (refl , refl) = refl
 
   eq-Eq-fiber :
-    {s t : fiber f b} (α : pr1 s ＝ pr1 t) →
-    ((ap f α) ∙ (pr2 t)) ＝ pr2 s → s ＝ t
+    {s t : fiber f b} (α : pr1 s ＝ pr1 t) → ap f α ∙ pr2 t ＝ pr2 s → s ＝ t
   eq-Eq-fiber α β = eq-Eq-fiber-uncurry (α , β)
 
   is-section-eq-Eq-fiber :
-    {s t : fiber f b} → (Eq-eq-fiber {s} {t} ∘ eq-Eq-fiber-uncurry {s} {t}) ~ id
+    {s t : fiber f b} → Eq-eq-fiber {s} {t} ∘ eq-Eq-fiber-uncurry {s} {t} ~ id
   is-section-eq-Eq-fiber (refl , refl) = refl
 
   is-retraction-eq-Eq-fiber :
-    {s t : fiber f b} → (eq-Eq-fiber-uncurry {s} {t} ∘ Eq-eq-fiber {s} {t}) ~ id
+    {s t : fiber f b} → eq-Eq-fiber-uncurry {s} {t} ∘ Eq-eq-fiber {s} {t} ~ id
   is-retraction-eq-Eq-fiber refl = refl
 
   abstract
@@ -112,7 +111,7 @@ module _
   where
 
   Eq-fiber' : fiber' f b → fiber' f b → UU (l1 ⊔ l2)
-  Eq-fiber' s t = Σ (pr1 s ＝ pr1 t) (λ α → (pr2 t ＝ ((pr2 s) ∙ (ap f α))))
+  Eq-fiber' s t = Σ (pr1 s ＝ pr1 t) (λ α → pr2 t ＝ pr2 s ∙ ap f α)
 
   refl-Eq-fiber' : (s : fiber' f b) → Eq-fiber' s s
   pr1 (refl-Eq-fiber' s) = refl
@@ -126,18 +125,17 @@ module _
     ap (pair x) (inv right-unit)
 
   eq-Eq-fiber' :
-    {s t : fiber' f b} (α : pr1 s ＝ pr1 t) →
-    (pr2 t) ＝ ((pr2 s) ∙ (ap f α)) → s ＝ t
+    {s t : fiber' f b} (α : pr1 s ＝ pr1 t) → pr2 t ＝ pr2 s ∙ ap f α → s ＝ t
   eq-Eq-fiber' α β = eq-Eq-fiber-uncurry' (α , β)
 
   is-section-eq-Eq-fiber' :
     {s t : fiber' f b} →
-    (Eq-eq-fiber' {s} {t} ∘ eq-Eq-fiber-uncurry' {s} {t}) ~ id
+    Eq-eq-fiber' {s} {t} ∘ eq-Eq-fiber-uncurry' {s} {t} ~ id
   is-section-eq-Eq-fiber' {x , refl} (refl , refl) = refl
 
   is-retraction-eq-Eq-fiber' :
     {s t : fiber' f b} →
-    (eq-Eq-fiber-uncurry' {s} {t} ∘ Eq-eq-fiber' {s} {t}) ~ id
+    eq-Eq-fiber-uncurry' {s} {t} ∘ Eq-eq-fiber' {s} {t} ~ id
   is-retraction-eq-Eq-fiber' {x , refl} refl = refl
 
   abstract
@@ -182,11 +180,10 @@ module _
   pr1 (map-inv-equiv-fiber (x , refl)) = x
   pr2 (map-inv-equiv-fiber (x , refl)) = refl
 
-  is-section-map-inv-equiv-fiber : (map-equiv-fiber ∘ map-inv-equiv-fiber) ~ id
+  is-section-map-inv-equiv-fiber : map-equiv-fiber ∘ map-inv-equiv-fiber ~ id
   is-section-map-inv-equiv-fiber (x , refl) = refl
 
-  is-retraction-map-inv-equiv-fiber :
-    (map-inv-equiv-fiber ∘ map-equiv-fiber) ~ id
+  is-retraction-map-inv-equiv-fiber : map-inv-equiv-fiber ∘ map-equiv-fiber ~ id
   is-retraction-map-inv-equiv-fiber (x , refl) = refl
 
   is-equiv-map-equiv-fiber : is-equiv map-equiv-fiber
@@ -315,13 +312,11 @@ module _
   inv-map-compute-fiber-comp :
     Σ (fiber g x) (λ t → fiber h (pr1 t)) → fiber (g ∘ h) x
   pr1 (inv-map-compute-fiber-comp t) = pr1 (pr2 t)
-  pr2 (inv-map-compute-fiber-comp t) =
-    ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
+  pr2 (inv-map-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
   is-section-inv-map-compute-fiber-comp :
     (map-compute-fiber-comp ∘ inv-map-compute-fiber-comp) ~ id
-  is-section-inv-map-compute-fiber-comp
-    ((.(h a) , refl) , (a , refl)) = refl
+  is-section-inv-map-compute-fiber-comp ((.(h a) , refl) , (a , refl)) = refl
 
   is-retraction-inv-map-compute-fiber-comp :
     (inv-map-compute-fiber-comp ∘ map-compute-fiber-comp) ~ id
