@@ -9,10 +9,15 @@ module foundation.raising-universe-levels where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
+open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -141,7 +146,7 @@ is-emb-raise l {l1} =
                 ( equiv-precomp-equiv (compute-raise l A') (raise l A) ∘e
                   ( equiv-univalence ∘e
                     equiv-concat' (raise l A') (inv p)))))
-            (is-contr-total-equiv' A)))
+            (is-torsorial-equiv' A)))
 
 emb-raise : (l : Level) {l1 : Level} → UU l1 ↪ UU (l1 ⊔ l)
 pr1 (emb-raise l) = raise l

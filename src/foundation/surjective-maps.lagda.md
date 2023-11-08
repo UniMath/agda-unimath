@@ -48,7 +48,6 @@ open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
@@ -479,7 +478,7 @@ module _
     (A ↠ C) → (B ↠ D) → ((A × B) ↠ (C × D))
   pr1 (surjection-prod f g) = map-prod (map-surjection f) (map-surjection g)
   pr2 (surjection-prod f g) =
-    is-surjective-prod
+    is-surjective-map-prod
       ( is-surjective-map-surjection f)
       ( is-surjective-map-surjection g)
 ```
@@ -858,12 +857,12 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
         ( λ a → (g a , λ (a' , p') → H a' a p')))
     where
       P : B → UU (l1 ⊔ l2 ⊔ l3)
-      P b = Σ (type-Set C) (λ c → (s : fib (map-surjection f) b) → g (pr1 s) ＝ c)
+      P b = Σ (type-Set C) (λ c → (s : fiber (map-surjection f) b) → g (pr1 s) ＝ c)
 
       e : ((b : B) → P b) ≃
           Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
       e =
-        (equiv-tot (λ h → equiv-precomp-Π (inv-equiv-total-fib (map-surjection f)) _)) ∘e
+        (equiv-tot (λ h → equiv-precomp-Π (inv-equiv-total-fiber (map-surjection f)) _)) ∘e
         (equiv-tot (λ h → inv-equiv equiv-ev-pair) ∘e
         (distributive-Π-Σ))
 
@@ -872,7 +871,7 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
         is-prop-all-elements-equal
           ( λ (pair c q) (pair c' q') →
             eq-type-subtype
-              ( λ c'' → Π-Prop (fib (map-surjection f) b) (λ s → Id-Prop C (g (pr1 s)) c''))
+              ( λ c'' → Π-Prop (fiber (map-surjection f) b) (λ s → Id-Prop C (g (pr1 s)) c''))
               ( map-universal-property-trunc-Prop
                 ( Id-Prop C c c')
                 ( λ s → inv (q s) ∙ q' s)

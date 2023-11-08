@@ -22,7 +22,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types

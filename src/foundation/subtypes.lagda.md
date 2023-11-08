@@ -10,8 +10,8 @@ open import foundation-core.subtypes public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equality-dependent-function-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.injective-maps
@@ -20,7 +20,6 @@ open import foundation.propositional-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -192,7 +191,7 @@ module _
     Σ (X ↪ A) (λ f → (x : X) → is-in-subtype B (map-emb f x)) ≃ (X ↪ type-subtype B)
   pr1 equiv-emb-into-subtype = ind-Σ (emb-into-subtype B)
   pr2 equiv-emb-into-subtype =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       inv-emb-into-subtype
       issec-map-inv-emb-into-subtype
       isretr-map-inv-emb-into-subtype

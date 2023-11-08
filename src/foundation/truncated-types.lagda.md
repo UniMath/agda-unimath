@@ -94,8 +94,9 @@ truncated-type-iterated-succ-Truncated-Type :
 pr1 (truncated-type-iterated-succ-Truncated-Type k r A) = type-Truncated-Type A
 pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
   is-trunc-iterated-succ-is-trunc k r (is-trunc-type-Truncated-Type A)
+```
 
-### Two equivalent types are equivalently k-truncated
+### Two equivalent types are equivalently `k`-truncated
 
 ```agda
 equiv-is-trunc-equiv : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}

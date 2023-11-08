@@ -405,7 +405,7 @@ reduce-Π-fiber f C = reduce-Π-fiber' f (λ y z → C y)
 tr-fib :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   → {x : A} {y y' : B} (p : y ＝ y') (q : f x ＝ y)
-  → tr (fib f) p (x , q) ＝ (x , q ∙ p)
+  → tr (fiber f) p (x , q) ＝ (x , q ∙ p)
 tr-fib f {x = x} refl q = ap (λ r → (x , r)) (inv right-unit)
 ```
 

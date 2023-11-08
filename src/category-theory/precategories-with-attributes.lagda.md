@@ -7,23 +7,25 @@ title: Precategories with attributes
 
 module category-theory.precategories-with-attributes where
 
+open import foundation.action-on-identifications-functions
+open import foundation.category-of-sets
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import category-theory.functors-precategories
-open import category-theory.natural-transformations-precategories
-open import category-theory.opposite-precategory
+open import category-theory.natural-transformations-functors-precategories
+open import category-theory.opposite-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-elements-of-a-presheaf
-open import category-theory.pullbacks-precategories
+open import category-theory.pullbacks-in-precategories
 ```
 
 ## Idea
@@ -39,27 +41,27 @@ such that
 This is a reformulation of Definition 1, slide 24 of https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf
 
 ```agda
-record CwA {i j} (C : Precat i j) (k : Level) : UU (i ⊔ j ⊔ lsuc k) where
+record CwA {i j} (C : Precategory i j) (k : Level) : UU (i ⊔ j ⊔ lsuc k) where
   field
-    Ty-F : functor-Precat (op C) (Set-Precat k)
-    ext : functor-Precat (element-Precat C Ty-F) C
-    p : nat-trans-Precat (element-Precat C Ty-F) C ext (proj₁-functor-element-Precat C Ty-F)
-    is-pullback-p : (x y : obj-Precat (element-Precat C Ty-F)) (f : type-hom-Precat (element-Precat C Ty-F) x y) →
-      is-pullback C _ _ _ _ _ _ _ _
-        (squares-nat-trans-Precat (element-Precat C Ty-F) C ext (proj₁-functor-element-Precat C Ty-F) p f)
+    Ty-F : functor-Precategory (opposite-Precategory C) (Set-Precategory k)
+    ext : functor-Precategory (element-Precategory C Ty-F) C
+    p : natural-transformation-Precategory (element-Precategory C Ty-F) C ext (proj₁-functor-element-Precategory C Ty-F)
+    is-pullback-p : (x y : obj-Precategory (element-Precategory C Ty-F)) (f : hom-Precategory (element-Precategory C Ty-F) x y) →
+      is-pullback-Precategory C _ _ _ _ _ _ _ _
+        (naturality-natural-transformation-Precategory (element-Precategory C Ty-F) C ext (proj₁-functor-element-Precategory C Ty-F) p f)
 
   -- Notation
   Ctx : UU i
-  Ctx = obj-Precat C
+  Ctx = obj-Precategory C
 
   Sub : Ctx → Ctx → UU j
-  Sub = type-hom-Precat C
+  Sub = hom-Precategory C
 
   Ty : Ctx → UU k
   Ty Γ = pr1 (pr1 Ty-F Γ)
 
   _⋆_ : (Γ : Ctx)
-      → (A : type-Set (obj-functor-Precat (op C) (Set-Precat k) Ty-F Γ))
+      → (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F Γ))
       → Ctx
   Γ ⋆ A = pr1 ext (Γ , A)
 
@@ -78,17 +80,17 @@ The terms are defined as sections to `ext`.
 
 ```agda
   module _ (Γ : Ctx)
-    (A : type-Set (obj-functor-Precat (op C) (Set-Precat k) Ty-F Γ)) where
+    (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F Γ)) where
 
     Tm : UU j
     Tm = Σ (Sub Γ (Γ ⋆ A)) λ t →
-           comp-hom-Precat C (pr1 p (Γ , A)) t ＝ id-hom-Precat C
+           comp-hom-Precategory C (pr1 p (Γ , A)) t ＝ id-hom-Precategory C
 
     is-set-Tm : is-set Tm
     is-set-Tm =
       is-set-type-subtype
-        (λ t → Id-Prop (hom-Precat C Γ Γ) (comp-hom-Precat C (pr1 p (Γ , A)) t) (id-hom-Precat C))
-        (is-set-type-hom-Precat C Γ (Γ ⋆ A))
+        (λ t → Id-Prop (hom-set-Precategory C Γ Γ) (comp-hom-Precategory C (pr1 p (Γ , A)) t) (id-hom-Precategory C))
+        (is-set-hom-Precategory C Γ (Γ ⋆ A))
 
     Tm-Set : Set j
     pr1 Tm-Set = Tm
@@ -101,32 +103,32 @@ The terms are defined as sections to `ext`.
        → Tm Γ (A · σ)
   _[_] {Γ} {Δ} {A} (s , eq) σ = (pr1 gap-map , pr1 (pr2 gap-map))
     where
-    sq : comp-hom-Precat C σ (id-hom-Precat C)
-       ＝ comp-hom-Precat C (pr1 p (Δ , A)) (comp-hom-Precat C s σ)
+    sq : comp-hom-Precategory C σ (id-hom-Precategory C)
+       ＝ comp-hom-Precategory C (pr1 p (Δ , A)) (comp-hom-Precategory C s σ)
     sq =
       equational-reasoning
-        comp-hom-Precat C σ (id-hom-Precat C)
-          ＝ σ                                       by right-unit-law-comp-hom-Precat C σ
-          ＝ comp-hom-Precat C (id-hom-Precat C) σ   by inv (left-unit-law-comp-hom-Precat C σ)
-          ＝ comp-hom-Precat C
-               (comp-hom-Precat C (pr1 p (Δ , A)) s)
-               σ                                     by ap (λ k → comp-hom-Precat C k σ) (inv eq)
-          ＝ comp-hom-Precat C
+        comp-hom-Precategory C σ (id-hom-Precategory C)
+          ＝ σ                                       by right-unit-law-comp-hom-Precategory C σ
+          ＝ comp-hom-Precategory C (id-hom-Precategory C) σ   by inv (left-unit-law-comp-hom-Precategory C σ)
+          ＝ comp-hom-Precategory C
+               (comp-hom-Precategory C (pr1 p (Δ , A)) s)
+               σ                                     by ap (λ k → comp-hom-Precategory C k σ) (inv eq)
+          ＝ comp-hom-Precategory C
                (pr1 p (Δ , A))
-               (comp-hom-Precat C s σ)               by assoc-comp-hom-Precat C _ _ _
+               (comp-hom-Precategory C s σ)               by associative-comp-hom-Precategory C _ _ _
 
     gap-map : Σ (Sub Γ (Γ ⋆ (A · σ))) λ g
-            → (comp-hom-Precat C (pr1 p (Γ , (A · σ))) g ＝ id-hom-Precat C)
-            × (comp-hom-Precat C (pr1 (pr2 ext) (σ , refl)) g ＝ comp-hom-Precat C s σ)
+            → (comp-hom-Precategory C (pr1 p (Γ , (A · σ))) g ＝ id-hom-Precategory C)
+            × (comp-hom-Precategory C (pr1 (pr2 ext) (σ , refl)) g ＝ comp-hom-Precategory C s σ)
     gap-map =
-      pr1 (is-pullback-p (Γ , (A · σ)) (Δ , A) (σ , refl) Γ (id-hom-Precat C)
-             (comp-hom-Precat C s σ) sq)
+      pr1 (is-pullback-p (Γ , (A · σ)) (Δ , A) (σ , refl) Γ (id-hom-Precategory C)
+             (comp-hom-Precategory C s σ) sq)
 ```
 
 ### Π-types
 
 ```agda
-record Π-structure {i j} (C : Precat i j) (k : Level) (cwa : CwA C k) : UU (i ⊔ j ⊔ lsuc k) where
+record Π-structure {i j} (C : Precategory i j) (k : Level) (cwa : CwA C k) : UU (i ⊔ j ⊔ lsuc k) where
   open CwA cwa
 
   field

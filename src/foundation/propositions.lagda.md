@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.retractions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -60,6 +61,8 @@ abstract
   is-prop-emb :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B) → is-prop B → is-prop A
   is-prop-emb = is-trunc-emb neg-two-𝕋
+```
+
 ### Two equivalent types are equivalently propositions
 
 ```agda

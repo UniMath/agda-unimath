@@ -9,6 +9,7 @@ module foundation.connected-maps where
 ```agda
 open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -16,7 +17,9 @@ open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.truncated-types
+open import foundation.truncations
 open import foundation.truncation-levels
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -224,18 +227,18 @@ is-connected-map-dependent-universal-property-connected-map k {A = A} {B = B} {f
     ( c ,
       λ b →
         function-dependent-universal-property-trunc
-          ( Id-Truncated-Type' (trunc k (fib f b)) _)
-          ( inv-map-reduce-Π-fib
+          ( Id-Truncated-Type' (trunc k (fiber f b)) _)
+          ( inv-map-reduce-Π-fiber
               ( f)
               ( λ b' s → c b' ＝ unit-trunc s)
-              ( λ a → htpy-eq (issec-map-inv-equiv e (λ a → unit-trunc (a , refl))) a) b))
+              ( λ a → htpy-eq (is-section-map-inv-equiv e (λ a → unit-trunc (a , refl))) a) b))
   where
-    e : ((b : B) → type-trunc k (fib f b))
-      ≃ ((a : A) → type-trunc k (fib f (f a)))
-    pr1 e = precomp-Π f (λ b → type-trunc k (fib f b))
-    pr2 e = H (λ b' → trunc k (fib f b'))
+    e : ((b : B) → type-trunc k (fiber f b))
+      ≃ ((a : A) → type-trunc k (fiber f (f a)))
+    pr1 e = precomp-Π f (λ b → type-trunc k (fiber f b))
+    pr2 e = H (λ b' → trunc k (fiber f b'))
 
-    c : (b : B) → type-trunc k (fib f b)
+    c : (b : B) → type-trunc k (fiber f b)
     c = map-inv-equiv e (λ a → unit-trunc (a , refl))
 ```
 
@@ -428,7 +431,7 @@ is-connected-map-comp :
 is-connected-map-comp k g f K H c =
   is-connected-equiv
     ( k)
-    ( equiv-compute-fib-comp g f c)
+    ( equiv-compute-fiber-comp g f c)
     ( is-connected-Σ k (K c) (λ (b , _) → H b))
 ```
 
@@ -443,13 +446,13 @@ module _ {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} {C : A → 
     ((x : A) → is-connected-map k (f x)) →
     is-connected-map k (tot f)
   is-connected-map-tot-is-fiberwise-connected-map H (x , y) =
-    is-connected-equiv k (compute-fib-tot f (x , y)) (H x y)
+    is-connected-equiv k (compute-fiber-tot f (x , y)) (H x y)
 
   is-fiberwise-connected-map-is-connected-map-tot :
     is-connected-map k (tot f) →
     (x : A) → is-connected-map k (f x)
   is-fiberwise-connected-map-is-connected-map-tot H x y =
-    is-connected-equiv k (inv-compute-fib-tot f (x , y)) (H (x , y))
+    is-connected-equiv k (inv-compute-fiber-tot f (x , y)) (H (x , y))
 ```
 
 ### The map `unit-trunc {k}` is `k`-connected
