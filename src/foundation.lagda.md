@@ -199,6 +199,7 @@ open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-towers public
+open import foundation.morphisms-twisted-arrows public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public

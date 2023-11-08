@@ -31,25 +31,26 @@ open import foundation.whiskering-homotopies
 
 ## Idea
 
-A **retract** of a map `f : X → Y` is a map `g : A → B` that is a retract in the
-arrow category of types. Hence, it consists of
+A map `g : A → B` is said to be a **retract** of a map `f : X → Y` if it is a retract in the arrow category of types. In other words, `g` is a retract of `f` if there are [morphisms of arrows] `i : g → f` and `r : f → g` equipped with a homotopy of morphisms of arrows `r ∘ i ~ id`.
+
+More explicitly, it consists of
 [retracts](foundation-core.retractions.md) `A` of `X` and `B` of `Y` that fit
 into a commutative diagram
 
 ```text
-         i         r
+         i₀        r₀
     A ------> X ------> A
     |         |         |
-  g |    I    | f   R   | g
+  g |    i    | f   r   | g
     v         v         v
     B ------> Y ------> B
-         i'        r'
+         i₁        r₁
 ```
 
 with coherences
 
 ```text
-  I : i' ∘ g ~ f ∘ i  and   R : r' ∘ f ~ g ∘ r
+  i : i₁ ∘ g ~ f ∘ i₀  and   r : r₁ ∘ f ~ g ∘ r₀
 ```
 
 witnessing that the left and right
@@ -57,15 +58,15 @@ witnessing that the left and right
 coherence
 
 ```text
-                   R ·r i
-       r' ∘ f ∘ i --------> g ∘ r ∘ i
-            |                |
-            |                |
-  r' ·l I⁻¹ |        L       | g ·l H
-            |                |
-            V                V
-      r' ∘ i' ∘ g ---------> g
-                   H' ·r g
+                    r₀ ·r i₀
+       r₁ ∘ f ∘ i₀ ----------> g ∘ r₀ ∘ i₀
+            |                      |
+            |                      |
+  r₁ ·l i⁻¹ |          L           | g ·l H
+            |                      |
+            V                      V
+      r₁ ∘ i₁ ∘ g ---------------> g
+                       H' ·r g
 ```
 
 witnessing that the
@@ -465,12 +466,10 @@ module _
   inclusion-fiber-retract-map :
     (y : B) → fiber g y → fiber f (inclusion-codomain-retract-map f g k y)
   inclusion-fiber-retract-map =
-    map-fiber-square
-      ( inclusion-domain-retract-map f g k)
-      ( g)
-      ( f)
-      ( inclusion-codomain-retract-map f g k)
-      ( coh-inclusion-retract-map f g k)
+    map-fiber-square g f
+      ( inclusion-domain-retract-map f g k ,
+        inclusion-codomain-retract-map f g k ,
+        coh-inclusion-retract-map f g k)
 
   map-retraction-fiber-retract-map' :
     (y : Y) →

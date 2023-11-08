@@ -74,6 +74,21 @@ module _
   coh-hom-arrow = pr2 ∘ pr2
 ```
 
+### Transposing morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  transpose-hom-arrow :
+    hom-arrow (map-domain-hom-arrow f g α) (map-codomain-hom-arrow f g α)
+  pr1 transpose-hom-arrow = f
+  pr1 (pr2 transpose-hom-arrow) = g
+  pr2 (pr2 transpose-hom-arrow) = inv-htpy (coh-hom-arrow f g α)
+```
+
 ### The identity morphism of arrows
 
 ```agda
@@ -242,7 +257,7 @@ module _
 
 ### Associativity of composition of morphisms of arrows
 
-**Proof:** Consider a commuting diagram of the form
+Consider a commuting diagram of the form
 
 ```text
         α₀       β₀       γ₀
@@ -253,6 +268,9 @@ module _
     B -----> Y -----> V -----> L
         α₁       β₁       γ₁
 ```
+
+Then associativity of composition of morphisms of arrows follows directly from
+associativity of horizontal pasting of commutative squares of maps.
 
 ```agda
 module _
@@ -268,5 +286,66 @@ module _
       ( comp-hom-arrow f h i γ (comp-hom-arrow f g h β α))
   pr1 assoc-comp-hom-arrow = refl-htpy
   pr1 (pr2 assoc-comp-hom-arrow) = refl-htpy
-  pr2 (pr2 assoc-comp-hom-arrow) = {!!}
+  pr2 (pr2 assoc-comp-hom-arrow) =
+    ( right-unit-htpy) ∙h
+    ( inv-htpy
+      ( assoc-pasting-horizontal-coherence-square-maps
+        ( map-domain-hom-arrow f g α)
+        ( map-domain-hom-arrow g h β)
+        ( map-domain-hom-arrow h i γ)
+        ( f)
+        ( g)
+        ( h)
+        ( i)
+        ( map-codomain-hom-arrow f g α)
+        ( map-codomain-hom-arrow g h β)
+        ( map-codomain-hom-arrow h i γ)
+        ( coh-hom-arrow f g α)
+        ( coh-hom-arrow g h β)
+        ( coh-hom-arrow h i γ)))
 ```
+
+### The left unit law for composition of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  left-unit-law-comp-hom-arrow :
+    htpy-hom-arrow f g
+      ( comp-hom-arrow f g g id-hom-arrow α)
+      ( α)
+  pr1 left-unit-law-comp-hom-arrow = refl-htpy
+  pr1 (pr2 left-unit-law-comp-hom-arrow) = refl-htpy
+  pr2 (pr2 left-unit-law-comp-hom-arrow) =
+    ( right-unit-htpy) ∙h
+    ( right-unit-law-pasting-horizontal-coherence-square-maps
+      ( map-domain-hom-arrow f g α)
+      ( f)
+      ( g)
+      ( map-codomain-hom-arrow f g α)
+      ( coh-hom-arrow f g α))
+```
+
+### The right unit law for composition of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  right-unit-law-comp-hom-arrow :
+    htpy-hom-arrow f g
+      ( comp-hom-arrow f f g α id-hom-arrow)
+      ( α)
+  pr1 right-unit-law-comp-hom-arrow = refl-htpy
+  pr1 (pr2 right-unit-law-comp-hom-arrow) = refl-htpy
+  pr2 (pr2 right-unit-law-comp-hom-arrow) = right-unit-htpy
+```
+
+## See also
+
+- [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
