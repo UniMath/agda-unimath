@@ -74,7 +74,7 @@ We record the components of the large category of copresheaves on a precategory.
     obj-Large-Precategory copresheaf-Large-Precategory
 
   hom-set-copresheaf-Large-Category =
-    hom-set-Large-Precategory copresheaf-Large-Precategory
+    hom-Large-Precategory copresheaf-Large-Precategory
 
   hom-copresheaf-Large-Category =
     hom-Large-Precategory copresheaf-Large-Precategory

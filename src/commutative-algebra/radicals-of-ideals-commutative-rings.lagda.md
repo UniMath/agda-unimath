@@ -238,7 +238,7 @@ module _
         ( H))
 
   radical-of-ideal-hom-large-poset-Commutative-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)

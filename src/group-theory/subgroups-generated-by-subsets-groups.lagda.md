@@ -329,7 +329,7 @@ module _
         ( H))
 
   subgroup-subset-hom-large-poset-Group :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Group G))
       ( Subgroup-Large-Poset G)

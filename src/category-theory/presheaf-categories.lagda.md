@@ -66,7 +66,7 @@ We record the components of the large category of presheaves on a precategory.
     obj-Large-Precategory presheaf-Large-Precategory
 
   hom-set-presheaf-Large-Category =
-    hom-set-Large-Precategory presheaf-Large-Precategory
+    hom-Large-Precategory presheaf-Large-Precategory
 
   hom-presheaf-Large-Category =
     hom-Large-Precategory presheaf-Large-Precategory

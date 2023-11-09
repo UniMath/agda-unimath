@@ -307,7 +307,7 @@ module _
         ( H))
 
   left-ideal-subset-hom-large-poset-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Ring A))
       ( left-ideal-Ring-Large-Poset A)
