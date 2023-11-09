@@ -196,8 +196,8 @@ In a commuting triangle of the form
 ```
 
 if `r : X → A` is a retraction of the map `g` on the right and `s : B → A` is a
-retraction of the map `h` on top, then `s ∘ r` is a retraction of the map `f` on the
-left.
+retraction of the map `h` on top, then `s ∘ r` is a retraction of the map `f` on
+the left.
 
 ```agda
 module _
