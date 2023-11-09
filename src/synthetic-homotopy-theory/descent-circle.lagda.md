@@ -344,7 +344,7 @@ module _
     ( up-circle : universal-property-circle (lsuc l2) l) →
     is-equiv (descent-data-family-circle l)
   is-equiv-descent-data-family-circle-universal-property-circle up-circle =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( descent-data-family-circle l)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))

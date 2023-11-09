@@ -258,7 +258,7 @@ module _
   abstract
     is-equiv-ev-refl-Eq-unordered-pair : is-equiv ev-refl-Eq-unordered-pair
     is-equiv-ev-refl-Eq-unordered-pair =
-      is-equiv-left-factor-htpy
+      is-equiv-right-map-triangle
         ( ev-point (p , refl-Eq-unordered-pair p))
         ( ev-refl-Eq-unordered-pair)
         ( ev-pair)
