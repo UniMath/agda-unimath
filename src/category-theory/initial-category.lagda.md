@@ -162,6 +162,6 @@ module _
 
 ## External links
 
-- [empty category](https://ncatlab.org/nlab/show/empty+category) at nlab
+- [empty category](https://ncatlab.org/nlab/show/empty+category) at $n$Lab
 
 A wikidata identifier was not available for this concept.

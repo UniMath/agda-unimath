@@ -258,7 +258,7 @@ module _
 ## External links
 
 - [indiscrete category](https://ncatlab.org/nlab/show/indiscrete+category) at
-  nlab
+  $n$Lab
 - [Indiscrete category](https://en.wikipedia.org/wiki/Indiscrete_category) at
   Wikipedia
 

@@ -74,7 +74,7 @@ formalized.
 ## External links
 
 - [Cayley's Theorem](https://1lab.dev/Algebra.Group.Cayley.html) at 1lab
-- [Cayley's theorem](https://ncatlab.org/nlab/show/Cayley%27s+theorem) at nlab
+- [Cayley's theorem](https://ncatlab.org/nlab/show/Cayley%27s+theorem) at $n$Lab
 - [Cayley's theorem](https://en.wikipedia.org/wiki/Cayley%27s_theorem) at
   Wikipedia
 - [Cayley's theorem](https://www.wikidata.org/wiki/Q179208) at Wikidata

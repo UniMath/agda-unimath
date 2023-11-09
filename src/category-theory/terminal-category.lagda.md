@@ -266,6 +266,6 @@ module _
 
 - [Terminal category](https://1lab.dev/Cat.Instances.Shape.Terminal.html) at
   1lab
-- [Terminal category](https://ncatlab.org/nlab/show/terminal+category) at nlab
+- [Terminal category](https://ncatlab.org/nlab/show/terminal+category) at $n$Lab
 
 A wikidata identifier was not available for this concept.
