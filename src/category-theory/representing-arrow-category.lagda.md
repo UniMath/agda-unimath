@@ -164,4 +164,4 @@ This is a consequence of the
 
 - [Interval category](https://1lab.dev/Cat.Instances.Shape.Interval.html#interval-category)
   at 1lab
-- [interval category](https://ncatlab.org/nlab/show/interval+category) at nlab
+- [interval category](https://ncatlab.org/nlab/show/interval+category) at $n$Lab

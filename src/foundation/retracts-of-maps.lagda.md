@@ -697,6 +697,6 @@ module _
 ## External links
 
 - [Retracts in arrow categories](https://ncatlab.org/nlab/show/retract#in_arrow_categories)
-  at nlab
+  at $n$Lab
 
 A wikidata identifier was not available for this concept.

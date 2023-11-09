@@ -184,6 +184,6 @@ Rezk completion_.
 - [Essential Fibres](https://1lab.dev/Cat.Functor.Properties.html#essential-fibres)
   at 1lab
 - [split essentially surjective functor](https://ncatlab.org/nlab/show/split+essentially+surjective+functor)
-  at nlab
+  at $n$Lab
 
 A wikidata identifier was not available for this concept.

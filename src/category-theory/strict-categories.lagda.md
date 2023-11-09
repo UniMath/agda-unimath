@@ -277,6 +277,6 @@ postcomp-hom-Strict-Category C =
 
 - [Strict Precategories](https://1lab.dev/Cat.Strict.html#strict-precategories)
   at 1lab
-- [strict category](https://ncatlab.org/nlab/show/strict+category) at nlab
+- [strict category](https://ncatlab.org/nlab/show/strict+category) at $n$Lab
 - [Category (mathematics)](<https://en.wikipedia.org/wiki/Category_(mathematics)>)
   at Wikipedia

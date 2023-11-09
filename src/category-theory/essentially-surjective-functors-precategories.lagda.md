@@ -124,7 +124,7 @@ Rezk completion_.
 - [Essential Fibres](https://1lab.dev/Cat.Functor.Properties.html#essential-fibres)
   at 1lab
 - [essentially surjective functor](https://ncatlab.org/nlab/show/essentially+surjective+functor)
-  at nlab
+  at $n$Lab
 - [Fully Faithful and Essentially Surjective Functors](https://kerodon.net/tag/01JG)
   at Kerodon
 - [Essentially surjective functor](https://en.wikipedia.org/wiki/Essentially_surjective_functor)

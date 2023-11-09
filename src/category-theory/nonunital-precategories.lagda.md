@@ -205,7 +205,7 @@ module _
 ## Comments
 
 As discussed in [Semicategories](https://ncatlab.org/nlab/show/semicategory) at
-nlab, it seems that a nonunital precategory should be the underlying nonunital
+$n$Lab, it seems that a nonunital precategory should be the underlying nonunital
 precategory of a [category](category-theory.categories.md) if and only if the
 projection map
 
@@ -220,6 +220,6 @@ equivalences of hom-[sets](foundation-core.sets.md) by pre- and postcomposition.
 
 ## External links
 
-- [Semicategories](https://ncatlab.org/nlab/show/semicategory) at nlab
+- [Semicategories](https://ncatlab.org/nlab/show/semicategory) at $n$Lab
 - [Semigroupoid](https://en.wikipedia.org/wiki/Semigroupoid) at Wikipedia
 - [semigroupoid](https://www.wikidata.org/wiki/Q4164581) at Wikidata
