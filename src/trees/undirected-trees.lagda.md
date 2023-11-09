@@ -211,7 +211,7 @@ module _
   is-constant-walk-Undirected-Tree-Prop :
     {x y : node-Undirected-Tree} → walk-Undirected-Tree x y → Prop lzero
   is-constant-walk-Undirected-Tree-Prop =
-    is-constant-walk-Undirected-Graph-Prop undirected-graph-Undirected-Tree
+    is-constant-prop-walk-Undirected-Graph undirected-graph-Undirected-Tree
 
   is-constant-walk-Undirected-Tree :
     {x y : node-Undirected-Tree} → walk-Undirected-Tree x y → UU lzero
@@ -228,7 +228,7 @@ module _
   is-constant-trail-Undirected-Tree-Prop :
     {x y : node-Undirected-Tree} → trail-Undirected-Tree x y → Prop lzero
   is-constant-trail-Undirected-Tree-Prop =
-    is-constant-trail-Undirected-Graph-Prop undirected-graph-Undirected-Tree
+    is-constant-prop-trail-Undirected-Graph undirected-graph-Undirected-Tree
 
   is-constant-trail-Undirected-Tree :
     {x y : node-Undirected-Tree} → trail-Undirected-Tree x y → UU lzero

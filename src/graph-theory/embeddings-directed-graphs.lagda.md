@@ -44,9 +44,9 @@ module _
   {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
   where
 
-  is-emb-hom-Directed-Graph-Prop :
+  is-emb-prop-hom-Directed-Graph :
     hom-Directed-Graph G H → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-emb-hom-Directed-Graph-Prop f =
+  is-emb-prop-hom-Directed-Graph f =
     prod-Prop
       ( is-emb-Prop (vertex-hom-Directed-Graph G H f))
       ( Π-Prop
@@ -57,7 +57,7 @@ module _
             ( λ y → is-emb-Prop (edge-hom-Directed-Graph G H f {x} {y}))))
 
   is-emb-hom-Directed-Graph : hom-Directed-Graph G H → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-emb-hom-Directed-Graph f = type-Prop (is-emb-hom-Directed-Graph-Prop f)
+  is-emb-hom-Directed-Graph f = type-Prop (is-emb-prop-hom-Directed-Graph f)
 
   emb-Directed-Graph : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   emb-Directed-Graph = Σ (hom-Directed-Graph G H) is-emb-hom-Directed-Graph

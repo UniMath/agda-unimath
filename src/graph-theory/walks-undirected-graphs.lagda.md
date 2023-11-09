@@ -19,7 +19,9 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.torsorial-type-families
@@ -39,8 +41,15 @@ open import univalent-combinatorics.standard-finite-types
 
 A **walk** in an [undirected graph](graph-theory.undirected-graphs.md) consists
 of a [list](lists.lists.md) of edges that connect the starting point with the
-end point. Walks may repeat edges and pass through the same vertex multiple
-times.
+end point. More formally, it is defined as the inductive family of types over
+the type of vertices of an undirected graph `G`, with the following constructors
+
+- A **constant walk** `refl : walk-Undirected-Graph G x x` for every vertex `x`.
+- A function `cons e i : walk x (p i) → walk x (p -i)` for every [unordered pair](foundation.unordered-pairs.md) of vertices of `G`, every `e : edge p` and every element `i : type-unordered pair p`.
+
+Note that walks may repeat edges and pass through the same vertex multiple times.
+
+Alternatively, we may define **walks of (fixed) length** `n : ℕ` from `x` to `y` in an undirected graph. The definition of walks of length `n` is similar to the definition of walks, except that we specify the constant walk to have length `0`, and the walk `cons e i w` of a walk `w` of length `n` to have length `n + 1`.
 
 ## Definitions
 
@@ -156,6 +165,121 @@ module _
     succ-ℕ (length-walk-Undirected-Graph w)
 ```
 
+### Walks of a fixed length
+
+```agda
+module _
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2)
+  where
+
+  data walk-of-length-Undirected-Graph :
+    ℕ → (x y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    where
+    refl-walk-of-length-Undirected-Graph :
+      {x : vertex-Undirected-Graph G} → walk-of-length-Undirected-Graph 0 x x
+    cons-walk-of-length-Undirected-Graph :
+      (n : ℕ) {x : vertex-Undirected-Graph G}
+      (p : unordered-pair-vertices-Undirected-Graph G)
+      (e : edge-Undirected-Graph G p) {i : type-unordered-pair p} →
+      walk-of-length-Undirected-Graph n x (element-unordered-pair p i) →
+      walk-of-length-Undirected-Graph
+        ( succ-ℕ n)
+        ( x)
+        ( other-element-unordered-pair p i)
+
+  map-compute-total-walk-of-length-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) →
+    walk-Undirected-Graph G x y →
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph n x y)
+  map-compute-total-walk-of-length-Undirected-Graph x .x
+    refl-walk-Undirected-Graph =
+    ( 0 , refl-walk-of-length-Undirected-Graph)
+  map-compute-total-walk-of-length-Undirected-Graph x ._
+    ( cons-walk-Undirected-Graph p e w) =
+    map-Σ
+      ( λ n →
+        walk-of-length-Undirected-Graph n x (other-element-unordered-pair p _))
+      ( succ-ℕ)
+      ( λ n → cons-walk-of-length-Undirected-Graph n p e)
+      ( map-compute-total-walk-of-length-Undirected-Graph
+        ( x)
+        ( element-unordered-pair p _)
+        ( w))
+
+  map-inv-compute-total-walk-of-length-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) →
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph n x y) →
+    walk-Undirected-Graph G x y
+  map-inv-compute-total-walk-of-length-Undirected-Graph x y
+    ( .0 , refl-walk-of-length-Undirected-Graph) =
+    refl-walk-Undirected-Graph
+  map-inv-compute-total-walk-of-length-Undirected-Graph x
+    .(other-element-unordered-pair p _)
+    (.(succ-ℕ n) , cons-walk-of-length-Undirected-Graph n p e w) =
+    cons-walk-Undirected-Graph p e
+      ( map-inv-compute-total-walk-of-length-Undirected-Graph
+        ( x)
+        ( element-unordered-pair p _)
+        ( n , w))
+
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) →
+    ( map-compute-total-walk-of-length-Undirected-Graph x y ∘
+      map-inv-compute-total-walk-of-length-Undirected-Graph x y) ~ id
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph x y
+    ( .0 , refl-walk-of-length-Undirected-Graph) =
+    refl
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph x
+    .(other-element-unordered-pair p _)
+    (.(succ-ℕ n) , cons-walk-of-length-Undirected-Graph n p e w) =
+    ap
+      ( map-Σ
+        ( λ n →
+          walk-of-length-Undirected-Graph n x
+            ( other-element-unordered-pair p _))
+        ( succ-ℕ)
+        ( λ n → cons-walk-of-length-Undirected-Graph n p e))
+      ( is-section-map-inv-compute-total-walk-of-length-Undirected-Graph
+        ( x)
+        ( element-unordered-pair p _)
+        ( n , w))
+
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) →
+    ( map-inv-compute-total-walk-of-length-Undirected-Graph x y ∘
+      map-compute-total-walk-of-length-Undirected-Graph x y) ~ id
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph x y
+    refl-walk-Undirected-Graph =
+    refl
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph x
+    .(other-element-unordered-pair p _)
+    (cons-walk-Undirected-Graph p e w) =
+    ap
+      ( cons-walk-Undirected-Graph p e)
+      ( is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph
+        ( x)
+        ( element-unordered-pair p _)
+        ( w))
+
+  is-equiv-map-compute-total-walk-of-length-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) →
+    is-equiv (map-compute-total-walk-of-length-Undirected-Graph x y)
+  is-equiv-map-compute-total-walk-of-length-Undirected-Graph x y =
+    is-equiv-is-invertible
+      ( map-inv-compute-total-walk-of-length-Undirected-Graph x y)
+      ( is-section-map-inv-compute-total-walk-of-length-Undirected-Graph x y)
+      ( is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph x y)
+
+  compute-total-walk-of-length-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) →
+    walk-Undirected-Graph G x y ≃
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph n x y)
+  pr1 (compute-total-walk-of-length-Undirected-Graph x y) =
+    map-compute-total-walk-of-length-Undirected-Graph x y
+  pr2 (compute-total-walk-of-length-Undirected-Graph x y) =
+    is-equiv-map-compute-total-walk-of-length-Undirected-Graph x y
+```
+
 ## Properties
 
 ### The type of vertices on the constant walk is contractible
@@ -165,10 +289,10 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G)
   where
 
-  is-contr-vertex-on-walk-refl-walk-Undirected-Graph :
+  is-contr-vertex-on-refl-walk-Undirected-Graph :
     is-contr
       ( vertex-on-walk-Undirected-Graph G (refl-walk-Undirected-Graph {x = x}))
-  is-contr-vertex-on-walk-refl-walk-Undirected-Graph =
+  is-contr-vertex-on-refl-walk-Undirected-Graph =
     is-torsorial-path x
 ```
 
@@ -185,7 +309,7 @@ module _
     Fin (succ-ℕ (length-walk-Undirected-Graph G w))
   compute-vertex-on-walk-Undirected-Graph refl-walk-Undirected-Graph =
     equiv-is-contr
-      ( is-contr-vertex-on-walk-refl-walk-Undirected-Graph G x)
+      ( is-contr-vertex-on-refl-walk-Undirected-Graph G x)
       ( is-contr-Fin-one-ℕ)
   compute-vertex-on-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e {y} w) =
@@ -450,16 +574,16 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) {x : vertex-Undirected-Graph G}
   where
 
-  is-constant-walk-Undirected-Graph-Prop :
+  is-constant-prop-walk-Undirected-Graph :
     {y : vertex-Undirected-Graph G} →
     walk-Undirected-Graph G x y → Prop lzero
-  is-constant-walk-Undirected-Graph-Prop w =
+  is-constant-prop-walk-Undirected-Graph w =
     is-zero-ℕ-Prop (length-walk-Undirected-Graph G w)
 
   is-constant-walk-Undirected-Graph :
     {y : vertex-Undirected-Graph G} → walk-Undirected-Graph G x y → UU lzero
   is-constant-walk-Undirected-Graph w =
-    type-Prop (is-constant-walk-Undirected-Graph-Prop w)
+    type-Prop (is-constant-prop-walk-Undirected-Graph w)
 
   constant-walk-Undirected-Graph :
     (y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
