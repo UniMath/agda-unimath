@@ -111,6 +111,11 @@ module _
   equiv-eq-Eq-fiber : {s t : fiber f b} → Eq-fiber s t ≃ (s ＝ t)
   pr1 equiv-eq-Eq-fiber = eq-Eq-fiber-uncurry
   pr2 equiv-eq-Eq-fiber = is-equiv-eq-Eq-fiber
+
+  compute-ap-inclusion-fiber-eq-Eq-fiber :
+    {s t : fiber f b} (α : pr1 s ＝ pr1 t) (β : ap f α ∙ pr2 t ＝ pr2 s) →
+    ap (inclusion-fiber f) (eq-Eq-fiber α β) ＝ α
+  compute-ap-inclusion-fiber-eq-Eq-fiber refl refl = refl
 ```
 
 #### The case of `fiber'`

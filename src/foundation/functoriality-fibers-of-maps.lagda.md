@@ -21,6 +21,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -28,7 +29,8 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-Any [morphism of arrows](foundation.morphisms-arrows.md) `(i , j , H)` from `f` to `g`
+Any [morphism of arrows](foundation.morphisms-arrows.md) `(i , j , H)` from `f`
+to `g`
 
 ```text
         i
@@ -40,7 +42,9 @@ Any [morphism of arrows](foundation.morphisms-arrows.md) `(i , j , H)` from `f` 
         j
 ```
 
-induces a morphism of arrows between the [fiber inclusions](foundation-core.fibers-of-maps.md) of `f` and `g`, i.e., a [commuting square](foundation-core.commuting-squares-of-maps.md)
+induces a morphism of arrows between the
+[fiber inclusions](foundation-core.fibers-of-maps.md) of `f` and `g`, i.e., a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
   fiber f b -----> fiber g (j b)
@@ -50,11 +54,17 @@ induces a morphism of arrows between the [fiber inclusions](foundation-core.fibe
       A ---------------> X.
 ```
 
-This operation from morphisms of arrows from `f` to `g` to morphisms of arrows between their fiber inclusions is the **functorial action of fibers**. The functorial action obeys the functor laws, i.e., it preserves identity morphisms and composition.
+This operation from morphisms of arrows from `f` to `g` to morphisms of arrows
+between their fiber inclusions is the **functorial action of fibers**. The
+functorial action obeys the functor laws, i.e., it preserves identity morphisms
+and composition.
 
 ## Definitions
 
 ### Any commuting square induces a family of maps between the fibers of the vertical maps
+
+Our definition of `map-domain-hom-arrow-fiber` is given in such a way that it
+always computes nicely.
 
 ```agda
 module _
@@ -64,9 +74,11 @@ module _
 
   map-domain-hom-arrow-fiber :
     fiber f b → fiber g (map-codomain-hom-arrow f g α b)
-  pr1 (map-domain-hom-arrow-fiber (y , p)) = map-domain-hom-arrow f g α y
-  pr2 (map-domain-hom-arrow-fiber (y , p)) =
-    inv (coh-hom-arrow f g α y) ∙ ap (map-codomain-hom-arrow f g α) p
+  map-domain-hom-arrow-fiber =
+    map-Σ _
+      ( map-domain-hom-arrow f g α)
+      ( λ a p →
+        inv (coh-hom-arrow f g α a) ∙ ap (map-codomain-hom-arrow f g α) p)
 
   map-fiber :
     fiber f b → fiber g (map-codomain-hom-arrow f g α b)
@@ -109,6 +121,21 @@ module _
       ( a)
 ```
 
+### For any `f : A → B` and any identification `p : b ＝ b'` in `B`, we obtain a morphism of arrows between the fiber inclusion at `b` to the fiber inclusion at `b'`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  tr-hom-arrow-inclusion-fiber :
+    {b b' : B} (p : b ＝ b') →
+    hom-arrow (inclusion-fiber f {b}) (inclusion-fiber f {b'})
+  pr1 (tr-hom-arrow-inclusion-fiber p) = tot (λ a → concat' (f a) p)
+  pr1 (pr2 (tr-hom-arrow-inclusion-fiber p)) = id
+  pr2 (pr2 (tr-hom-arrow-inclusion-fiber p)) = refl-htpy
+```
+
 ## Properties
 
 ### The functorial action of `fiber` preserves the identity function
@@ -117,7 +144,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
   where
-  
+
   preserves-id-map-fiber :
     map-domain-hom-arrow-fiber f f id-hom-arrow b ~ id
   preserves-id-map-fiber (a , refl) = refl
@@ -128,7 +155,7 @@ module _
       ( refl-htpy)
       ( coh-hom-arrow-fiber f f id-hom-arrow b)
       ( inclusion-fiber f ·l preserves-id-map-fiber)
-  coh-preserves-id-hom-arrow-fiber (a , refl) = refl 
+  coh-preserves-id-hom-arrow-fiber (a , refl) = refl
 
   preserves-id-hom-arrow-fiber :
     htpy-hom-arrow
@@ -196,7 +223,7 @@ module _
     ap
       ( concat _ _)
       ( compute-left-whisker-inclusion-fiber-preserves-comp-map-fiber p)
-  
+
   preserves-comp-hom-arrow-fiber :
     htpy-hom-arrow
       ( inclusion-fiber f)
@@ -213,6 +240,191 @@ module _
   pr2 (pr2 preserves-comp-hom-arrow-fiber) = coh-preserves-comp-hom-arrow-fiber
 ```
 
+### The functorial action of `fiber` preserves homotopies of morphisms of fibers
+
+Given two morphisms of arrows
+
+```text
+        α₀
+      ------>
+    A ------> X
+    |   β₀    |
+    |         |
+  f |  α  β   | g
+    |         |
+    V   α₁    V
+    B ------> Y
+      ------>
+        β₁
+```
+
+with a homotopy `γ : α ~ β` of morphisms of arrows, we obtain a commuting
+diagram of the form
+
+```text
+           fiber g (α₁ b)
+            ∧     |   \
+           /      |    \ (x , q) ↦ (x , q ∙ γ₁ b)
+          /       |     \
+         /        |      V
+  fiber f b --------> fiber g (β₁ b)
+        |         |     /
+        |         |    /
+        |         |   /
+        |         |  /
+        V         V V
+        A -------> X
+```
+
+To show that we have such a commuting diagram, we have to show that the top
+triangle commutes, and that there is a homotopy filling the diagram:
+
+We first show that the top triangle commutes. To see this, let
+`(a , refl) : fiber f (f a)`. Then we have to show that
+
+```text
+  ((x , q) ↦ (x , q ∙ γ₁ b)) (map-fiber f g α (a , refl)) ＝
+  map-fiber f g β (a , refl)
+```
+
+Simply computing the left-hand side and the right-hand side, we're tasked with
+constructing an identification
+
+```text
+  (α₀ a , ((α a)⁻¹ ∙ refl) ∙ γ₁ (f a)) ＝ (β₀ a , (β a)⁻¹ ∙ refl)
+```
+
+By the characterization of equality in fibers, it suffices to construct
+identifications
+
+```text
+  p : α₀ a ＝ β₀ a
+  q : ap g p ∙ ((β a)⁻¹ ∙ refl) ＝ ((α a)⁻¹ ∙ refl) ∙ γ₁ (f a)
+```
+
+The first identification is simply `γ₀ a`. To obtain the second identification,
+we first simplify using the right unit law. I.e., it suffices to construct an
+identification
+
+```text
+  ap g p ∙ (β a)⁻¹ ＝ (α a)⁻¹ ∙ γ₁ (f a).
+```
+
+Now we proceed by transposing equality on both sides, i.e., it suffices to
+costruct an identification
+
+```text
+  α a ∙ ap g p ＝ γ₁ (f a) ∙ β a.
+```
+
+The identification `γ a` has exactly this type. This completes the construction
+of the homotopy witnessing that the upper triangle commutes. Since it is
+constructed as a family of identifications of the form
+
+```text
+  eq-Eq-fiber g (γ₀ a) _,
+```
+
+it follows that when we left-whisker this homotopy with `inclusion-fiber g`, we
+recover the homotopy `γ₀ ·r inclusion-fiber f`.
+
+Now it remains to fill a coherence for the square of homotopies
+
+```text
+                   γ₀ ·r i
+                · ---------> ·
+                |            |
+ coh (tr ∘ α b) |            | coh-hom-arrow-fiber f g β b
+    ≐ refl-htpy |            | ≐ refl-htpy
+                V            V
+                · ---------> ·
+                   i ·r H
+```
+
+where `H` is the homotopy that we just constructed, witnessing that the upper
+triangle commutes, and where we have written `i` for all fiber inclusions.
+
+coherence-square-homotopies (pr1 (pr2 htpy-hom-arrow-fiber) ·r inclusion-fiber
+f) (coh-hom-arrow (inclusion-fiber f) (inclusion-fiber g) (comp-hom-arrow
+(inclusion-fiber f) (inclusion-fiber g) (inclusion-fiber g)
+(tr-hom-arrow-inclusion-fiber g (htpy-codomain-htpy-hom-arrow f g α β γ b))
+(hom-arrow-fiber f g α b))) (coh-hom-arrow (inclusion-fiber f) (inclusion-fiber
+g) (hom-arrow-fiber f g β b)) (inclusion-fiber g ·l pr1 htpy-hom-arrow-fiber)
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α β : hom-arrow f g) (γ : htpy-hom-arrow f g α β)
+  (b : B)
+  where
+
+  htpy-fiber :
+    ( tot (λ x → concat' (g x) (htpy-codomain-htpy-hom-arrow f g α β γ b)) ∘
+      map-fiber f g α b) ~
+    ( map-fiber f g β b)
+  htpy-fiber (a , refl) =
+    eq-Eq-fiber g
+      ( map-codomain-hom-arrow f g β (f a))
+      ( htpy-domain-htpy-hom-arrow f g α β γ a)
+      ( ( ap
+          ( concat
+            ( ap g (htpy-domain-htpy-hom-arrow f g α β γ a))
+            ( map-codomain-hom-arrow f g β (f a)))
+          ( right-unit)) ∙
+        ( double-transpose-eq-concat'
+          ( htpy-codomain-htpy-hom-arrow f g α β γ (f a))
+          ( coh-hom-arrow f g α a)
+          ( coh-hom-arrow f g β a)
+          ( ap g (htpy-domain-htpy-hom-arrow f g α β γ a))
+          ( coh-htpy-hom-arrow f g α β γ a)) ∙
+        ( inv
+          ( ap
+            ( concat'
+              ( g (map-domain-hom-arrow f g α a))
+              ( htpy-codomain-htpy-hom-arrow f g α β γ (f a)))
+            ( right-unit))))
+
+  compute-left-whisker-inclusion-fiber-htpy-fiber :
+    inclusion-fiber g ·l htpy-fiber ~
+    htpy-domain-htpy-hom-arrow f g α β γ ·r inclusion-fiber f
+  compute-left-whisker-inclusion-fiber-htpy-fiber (a , refl) =
+    compute-ap-inclusion-fiber-eq-Eq-fiber g
+      ( map-codomain-hom-arrow f g β (f a))
+      ( htpy-domain-htpy-hom-arrow f g α β γ a)
+      ( _)
+
+  htpy-codomain-htpy-hom-arrow-fiber :
+    map-codomain-hom-arrow-fiber f g α b ~
+    map-codomain-hom-arrow-fiber f g β b
+  htpy-codomain-htpy-hom-arrow-fiber =
+    htpy-domain-htpy-hom-arrow f g α β γ
+
+  coh-htpy-hom-arrow-fiber :
+    coherence-square-homotopies
+      ( htpy-domain-htpy-hom-arrow f g α β γ ·r inclusion-fiber f)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( inclusion-fiber g ·l htpy-fiber)
+  coh-htpy-hom-arrow-fiber =
+    compute-left-whisker-inclusion-fiber-htpy-fiber ∙h inv-htpy right-unit-htpy
+
+  htpy-hom-arrow-fiber :
+    htpy-hom-arrow
+      ( inclusion-fiber f)
+      ( inclusion-fiber g)
+      ( comp-hom-arrow
+        ( inclusion-fiber f)
+        ( inclusion-fiber g)
+        ( inclusion-fiber g)
+        ( tr-hom-arrow-inclusion-fiber g
+          ( htpy-codomain-htpy-hom-arrow f g α β γ b))
+        ( hom-arrow-fiber f g α b))
+      ( hom-arrow-fiber f g β b)
+  pr1 htpy-hom-arrow-fiber = htpy-fiber
+  pr1 (pr2 htpy-hom-arrow-fiber) = htpy-codomain-htpy-hom-arrow-fiber
+  pr2 (pr2 htpy-hom-arrow-fiber) = coh-htpy-hom-arrow-fiber
+```
+
 ### Computing `map-fiber-cone` of a horizontal pasting of cones
 
 ```agda
@@ -222,25 +434,24 @@ module _
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
 
-  map-fiber-pasting-horizontal-cone :
+  preserves-pasting-horizontal-map-fiber-cone :
     (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) (x : X) →
     ( map-fiber-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x) ~
     ( map-fiber-cone j h c (i x) ∘
       map-fiber-cone i (vertical-map-cone j h c) d x)
-  map-fiber-pasting-horizontal-cone
-    (g , q , K) (f , p , H) .(f a) (a , refl) =
-    eq-pair-eq-pr2
-      ( ( ap
-          ( concat' (h (q (p a))) refl)
-          ( distributive-inv-concat (ap j (H a)) (K (p a)))) ∙
-        ( assoc (inv (K (p a))) (inv (ap j (H a))) refl) ∙
-        ( ap
-          ( concat (inv (K (p a))) (j (i (f a))))
-          ( ( ap (concat' (j (g (p a))) refl) (inv (ap-inv j (H a)))) ∙
-            ( inv (ap-concat j (inv (H a)) refl)))))
+  preserves-pasting-horizontal-map-fiber-cone c d =
+    preserves-comp-map-fiber
+      ( vertical-map-cone i (vertical-map-cone j h c) d)
+      ( vertical-map-cone j h c)
+      ( h)
+      ( hom-arrow-cone j h c)
+      ( hom-arrow-cone i (vertical-map-cone j h c) d)
 ```
 
 ### Computing `map-fiber-cone` of a horizontal pasting of cones
+
+Note: There should be a definition of vertical composition of morphisms of
+arrows, and a proof that `hom-arrow-fiber` preserves vertical composition.
 
 ```agda
 module _
@@ -249,7 +460,7 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  map-fiber-pasting-vertical-cone :
+  preserves-pasting-vertical-map-fiber-cone :
     (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
     ( ( map-fiber-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x) ∘
       ( inv-map-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
@@ -258,7 +469,7 @@ module _
         ( λ t → fiber h (pr1 t))
         ( map-fiber-cone f g c x)
         ( λ t → map-fiber-cone (pr1 (pr2 c)) h d (pr1 t))))
-  map-fiber-pasting-vertical-cone
+  preserves-pasting-vertical-map-fiber-cone
     (p , q , H) (p' , q' , H') .(p (p' a))
     ((.(p' a) , refl) , (a , refl)) =
     eq-pair-eq-pr2

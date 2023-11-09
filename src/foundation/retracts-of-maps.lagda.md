@@ -19,6 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.morphisms-arrows
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.sections
@@ -31,17 +32,19 @@ open import foundation.whiskering-homotopies
 
 ## Idea
 
-A map `g : A → B` is said to be a **retract** of a map `f : X → Y` if it is a retract in the arrow category of types. In other words, `g` is a retract of `f` if there are [morphisms of arrows] `i : g → f` and `r : f → g` equipped with a homotopy of morphisms of arrows `r ∘ i ~ id`.
+A map `g : A → B` is said to be a **retract** of a map `f : X → Y` if it is a
+retract in the arrow category of types. In other words, `g` is a retract of `f`
+if there are [morphisms of arrows] `i : g → f` and `r : f → g` equipped with a
+homotopy of morphisms of arrows `r ∘ i ~ id`.
 
-More explicitly, it consists of
-[retracts](foundation-core.retractions.md) `A` of `X` and `B` of `Y` that fit
-into a commutative diagram
+More explicitly, it consists of [retracts](foundation-core.retractions.md) `A`
+of `X` and `B` of `Y` that fit into a commutative diagram
 
 ```text
          i₀        r₀
     A ------> X ------> A
     |         |         |
-  g |    i    | f   r   | g
+  f |    i    | g   r   | f
     v         v         v
     B ------> Y ------> B
          i₁        r₁
@@ -50,7 +53,7 @@ into a commutative diagram
 with coherences
 
 ```text
-  i : i₁ ∘ g ~ f ∘ i₀  and   r : r₁ ∘ f ~ g ∘ r₀
+  i : i₁ ∘ f ~ g ∘ i₀  and   r : r₁ ∘ g ~ f ∘ r₀
 ```
 
 witnessing that the left and right
@@ -59,98 +62,88 @@ coherence
 
 ```text
                     r₀ ·r i₀
-       r₁ ∘ f ∘ i₀ ----------> g ∘ r₀ ∘ i₀
+       r₁ ∘ g ∘ i₀ ----------> f ∘ r₀ ∘ i₀
             |                      |
             |                      |
-  r₁ ·l i⁻¹ |          L           | g ·l H
+  r₁ ·l i⁻¹ |          L           | f ·l H₀
             |                      |
             V                      V
-      r₁ ∘ i₁ ∘ g ---------------> g
-                       H' ·r g
+      r₁ ∘ i₁ ∘ f ---------------> f
+                       H₁ ·r f
 ```
 
 witnessing that the
 [square of homotopies](foundation.commuting-squares-of-homotopies.md) commutes,
-where `H` and `H'` are the retracting homotopies of `r ∘ i` and `r' ∘ i'`
+where `H₀` and `H₁` are the retracting homotopies of `r₀ ∘ i₀` and `r₁ ∘ i₁`
 respectively.
 
 ## Definition
+
+### The predicate of being a retraction of a morphism of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (i : hom-arrow f g) (r : hom-arrow g f)
+  where
+
+  is-retraction-hom-arrow : UU (l1 ⊔ l2)
+  is-retraction-hom-arrow =
+    htpy-hom-arrow f f
+      ( comp-hom-arrow f g f r i)
+      ( id-hom-arrow)
+```
+
+### The type of retractions of a morphism of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (i : hom-arrow f g)
+  where
+
+  retraction-hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  retraction-hom-arrow = Σ (hom-arrow g f) (is-retraction-hom-arrow f g i)
+
+  module _
+    (r : retraction-hom-arrow)
+    where
+
+    hom-retraction-hom-arrow : hom-arrow g f
+    hom-retraction-hom-arrow = pr1 r
+
+    is-retraction-hom-retraction-hom-arrow :
+      is-retraction-hom-arrow f g i hom-retraction-hom-arrow
+    is-retraction-hom-retraction-hom-arrow = pr2 r
+```
+
+### The predicate that a morphism `f` is a retract of a morphism `g`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  retract-map : (g : X → Y) (f : A → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  retract-map g f = Σ (hom-arrow f g) (retraction-hom-arrow f g)
+```
 
 ### The higher coherence in the definition of retracts of maps
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : A retract-of X) (r' : B retract-of Y)
+  (f : A → B) (g : X → Y) (i : hom-arrow f g) (r : hom-arrow g f)
   where
 
-  coherence-retract-of-map :
-    coherence-square-maps (inclusion-retract r) g f (inclusion-retract r') →
-    coherence-square-maps
-      ( map-retraction-retract r)
-      ( f)
-      ( g)
-      ( map-retraction-retract r') →
+  coherence-retract-map :
+    is-retraction (map-domain-hom-arrow f g i) (map-domain-hom-arrow g f r) →
+    is-retraction
+      ( map-codomain-hom-arrow f g i)
+      ( map-codomain-hom-arrow g f r) →
     UU (l1 ⊔ l2)
-  coherence-retract-of-map I R =
-    coherence-square-homotopies
-      ( R ·r inclusion-retract r)
-      ( map-retraction-retract r' ·l inv-htpy I)
-      ( g ·l is-retraction-map-retraction-retract r)
-      ( is-retraction-map-retraction-retract r' ·r g)
-```
-
-### The predicate of being a retract of maps
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : A retract-of X) (r' : B retract-of Y)
-  where
-
-  is-retract-of-map : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-retract-of-map =
-    Σ ( coherence-square-maps (inclusion-retract r) g f (inclusion-retract r'))
-      ( λ I →
-        Σ ( coherence-square-maps
-            ( map-retraction-retract r)
-            ( f)
-            ( g)
-            ( map-retraction-retract r'))
-          ( coherence-retract-of-map f g r r' I))
-
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : A retract-of X) (r' : B retract-of Y)
-  (k : is-retract-of-map f g r r')
-  where
-
-  coh-inclusion-is-retract-of-map :
-    coherence-square-maps (inclusion-retract r) g f (inclusion-retract r')
-  coh-inclusion-is-retract-of-map = pr1 k
-
-  coh-retraction-is-retract-of-map :
-    coherence-square-maps
-      ( map-retraction-retract r) f g (map-retraction-retract r')
-  coh-retraction-is-retract-of-map = pr1 (pr2 k)
-
-  coh-is-retract-of-map :
-    coherence-retract-of-map f g r r'
-      coh-inclusion-is-retract-of-map
-      coh-retraction-is-retract-of-map
-  coh-is-retract-of-map = pr2 (pr2 k)
-```
-
-### The predicate that a map is a retract of a map `f`
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  where
-
-  retract-map : (X → Y) → (A → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  retract-map f g =
-    Σ (retract X A) (λ r → Σ (retract Y B) (is-retract-of-map f g r))
+  coherence-retract-map =
+    coherence-htpy-hom-arrow f f (comp-hom-arrow f g f r i) id-hom-arrow
 ```
 
 ### The binary relation `g f ↦ g retract-of-map f` asserting that `g` is a retract of the map `f`
@@ -158,106 +151,118 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (g : A → B) (f : X → Y)
+  (f : A → B) (g : X → Y)
   where
 
   infix 6 _retract-of-map_
 
   _retract-of-map_ : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  _retract-of-map_ = retract-map f g
+  _retract-of-map_ = retract-map g f
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (k : g retract-of-map f)
+  (f : A → B) (g : X → Y) (R : f retract-of-map g)
   where
 
-  retract-domain-retract-map : A retract-of X
-  retract-domain-retract-map = pr1 k
+  inclusion-retract-map : hom-arrow f g
+  inclusion-retract-map = pr1 R
 
-  retract-codomain-retract-map : B retract-of Y
-  retract-codomain-retract-map = pr1 (pr2 k)
+  map-domain-inclusion-retract-map : A → X
+  map-domain-inclusion-retract-map =
+    map-domain-hom-arrow f g inclusion-retract-map
 
-  is-retract-of-map-retract-map :
-    is-retract-of-map f g
-      retract-domain-retract-map
-      retract-codomain-retract-map
-  is-retract-of-map-retract-map = pr2 (pr2 k)
-
-  inclusion-domain-retract-map : A → X
-  inclusion-domain-retract-map =
-    inclusion-retract retract-domain-retract-map
-
-  retraction-domain-retract-map :
-    retraction inclusion-domain-retract-map
-  retraction-domain-retract-map =
-    retraction-retract retract-domain-retract-map
-
-  map-retraction-domain-retract-map : X → A
-  map-retraction-domain-retract-map =
-    map-retraction-retract retract-domain-retract-map
-
-  is-retraction-map-retraction-domain-retract-map :
-    is-retraction
-      inclusion-domain-retract-map
-      map-retraction-domain-retract-map
-  is-retraction-map-retraction-domain-retract-map =
-    is-retraction-map-retraction-retract retract-domain-retract-map
-
-  inclusion-codomain-retract-map : B → Y
-  inclusion-codomain-retract-map =
-    inclusion-retract retract-codomain-retract-map
-
-  retraction-codomain-retract-map :
-    retraction inclusion-codomain-retract-map
-  retraction-codomain-retract-map =
-    retraction-retract retract-codomain-retract-map
-
-  map-retraction-codomain-retract-map : Y → B
-  map-retraction-codomain-retract-map =
-    map-retraction-retract retract-codomain-retract-map
-
-  is-retraction-map-retraction-codomain-retract-map :
-    is-retraction
-      inclusion-codomain-retract-map
-      map-retraction-codomain-retract-map
-  is-retraction-map-retraction-codomain-retract-map =
-    is-retraction-map-retraction-retract retract-codomain-retract-map
+  map-codomain-inclusion-retract-map : B → Y
+  map-codomain-inclusion-retract-map =
+    map-codomain-hom-arrow f g inclusion-retract-map
 
   coh-inclusion-retract-map :
     coherence-square-maps
-      ( inclusion-domain-retract-map)
-      ( g)
+      ( map-domain-inclusion-retract-map)
       ( f)
-      ( inclusion-codomain-retract-map)
+      ( g)
+      ( map-codomain-inclusion-retract-map)
   coh-inclusion-retract-map =
-    coh-inclusion-is-retract-of-map f g
-      ( retract-domain-retract-map)
-      ( retract-codomain-retract-map)
-      ( is-retract-of-map-retract-map)
+    coh-hom-arrow f g inclusion-retract-map
 
-  coh-map-retraction-retract-map :
+  retraction-retract-map : retraction-hom-arrow f g inclusion-retract-map
+  retraction-retract-map = pr2 R
+
+  hom-retraction-retract-map : hom-arrow g f
+  hom-retraction-retract-map =
+    hom-retraction-hom-arrow f g inclusion-retract-map retraction-retract-map
+
+  map-domain-hom-retraction-retract-map : X → A
+  map-domain-hom-retraction-retract-map =
+    map-domain-hom-arrow g f hom-retraction-retract-map
+
+  map-codomain-hom-retraction-retract-map : Y → B
+  map-codomain-hom-retraction-retract-map =
+    map-codomain-hom-arrow g f hom-retraction-retract-map
+
+  coh-hom-retraction-retract-map :
     coherence-square-maps
-      ( map-retraction-domain-retract-map)
-      ( f)
+      ( map-domain-hom-retraction-retract-map)
       ( g)
-      ( map-retraction-codomain-retract-map)
-  coh-map-retraction-retract-map =
-    coh-retraction-is-retract-of-map f g
-      ( retract-domain-retract-map)
-      ( retract-codomain-retract-map)
-      ( is-retract-of-map-retract-map)
+      ( f)
+      ( map-codomain-hom-retraction-retract-map)
+  coh-hom-retraction-retract-map =
+    coh-hom-arrow g f hom-retraction-retract-map
+
+  is-retraction-hom-retraction-retract-map :
+    is-retraction-hom-arrow f g inclusion-retract-map hom-retraction-retract-map
+  is-retraction-hom-retraction-retract-map =
+    is-retraction-hom-retraction-hom-arrow f g
+      ( inclusion-retract-map)
+      ( retraction-retract-map)
+
+  is-retraction-map-domain-hom-retraction-retract-map :
+    is-retraction
+      ( map-domain-inclusion-retract-map)
+      ( map-domain-hom-retraction-retract-map)
+  is-retraction-map-domain-hom-retraction-retract-map =
+    htpy-domain-htpy-hom-arrow f f
+      ( comp-hom-arrow f g f hom-retraction-retract-map inclusion-retract-map)
+      ( id-hom-arrow)
+      ( is-retraction-hom-retraction-retract-map)
+
+  retract-domain-retract-map :
+    A retract-of X
+  pr1 retract-domain-retract-map =
+    map-domain-inclusion-retract-map
+  pr1 (pr2 retract-domain-retract-map) =
+    map-domain-hom-retraction-retract-map
+  pr2 (pr2 retract-domain-retract-map) =
+    is-retraction-map-domain-hom-retraction-retract-map
+
+  is-retraction-map-codomain-hom-retraction-retract-map :
+    is-retraction
+      ( map-codomain-inclusion-retract-map)
+      ( map-codomain-hom-retraction-retract-map)
+  is-retraction-map-codomain-hom-retraction-retract-map =
+    htpy-codomain-htpy-hom-arrow f f
+      ( comp-hom-arrow f g f hom-retraction-retract-map inclusion-retract-map)
+      ( id-hom-arrow)
+      ( is-retraction-hom-retraction-retract-map)
+
+  retract-codomain-retract-map : B retract-of Y
+  pr1 retract-codomain-retract-map =
+    map-codomain-inclusion-retract-map
+  pr1 (pr2 retract-codomain-retract-map) =
+    map-codomain-hom-retraction-retract-map
+  pr2 (pr2 retract-codomain-retract-map) =
+    is-retraction-map-codomain-hom-retraction-retract-map
 
   coh-retract-map :
-    coherence-retract-of-map f g
-      retract-domain-retract-map
-      retract-codomain-retract-map
-      coh-inclusion-retract-map
-      coh-map-retraction-retract-map
+    coherence-retract-map f g
+      ( inclusion-retract-map)
+      ( hom-retraction-retract-map)
+      ( is-retraction-map-domain-hom-retraction-retract-map)
+      ( is-retraction-map-codomain-hom-retraction-retract-map)
   coh-retract-map =
-    coh-is-retract-of-map f g
-      ( retract-domain-retract-map)
-      ( retract-codomain-retract-map)
-      ( is-retract-of-map-retract-map)
+    coh-htpy-hom-arrow f f
+      ( comp-hom-arrow f g f hom-retraction-retract-map inclusion-retract-map)
+      ( id-hom-arrow)
+      ( is-retraction-hom-retraction-retract-map)
 ```
 
 ## Properties
@@ -267,59 +272,59 @@ module _
 In fact, we only need the following data to show this:
 
 ```text
-                 r
+                 r₀
             X ------> A
             |         |
-          f |    R    | g
+          g |    r    | f
             v         v
   B ------> Y ------> B.
-       i'   H'   r'
+       i₁   H₁   r₁
 ```
 
-**Proof:** Note that `g` is the right map of a triangle
+**Proof:** Note that `f` is the right map of a triangle
 
 ```text
-            r
+            r₀
        X ------> A
         \       /
-  r' ∘ f \     / g
+  r₁ ∘ g \     / f
           \   /
            V V
             B.
 ```
 
-Since both `r'` and `f` are assumed to have
-[sections](foundation-core.sections.md), it follows that the composite `r' ∘ f`
-has a section, and therefore `g` has a section.
+Since both `r₁` and `g` are assumed to have
+[sections](foundation-core.sections.md), it follows that the composite `r₁ ∘ g`
+has a section, and therefore `f` has a section.
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : X → A) (r' : B retract-of Y)
-  (R : coherence-square-maps r f g (map-retraction-retract r'))
-  (s : section f)
+  (f : A → B) (g : X → Y) (r₀ : X → A) (R₁ : B retract-of Y)
+  (r : coherence-square-maps r₀ g f (map-retraction-retract R₁))
+  (s : section g)
   where
 
-  section-retract-map-section' : section g
+  section-retract-map-section' : section f
   section-retract-map-section' =
     section-right-map-triangle
-      ( map-retraction-retract r' ∘ f)
-      ( g)
+      ( map-retraction-retract R₁ ∘ g)
+      ( f)
+      ( r₀)
       ( r)
-      ( R)
-      ( section-comp (map-retraction-retract r') f s (section-retract r'))
+      ( section-comp (map-retraction-retract R₁) g s (section-retract R₁))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (k : g retract-of-map f)
+  (f : A → B) (g : X → Y) (R : f retract-of-map g)
   where
 
-  section-retract-map-section : section f → section g
+  section-retract-map-section : section g → section f
   section-retract-map-section =
     section-retract-map-section' f g
-      ( map-retraction-domain-retract-map f g k)
-      ( retract-codomain-retract-map f g k)
-      ( coh-map-retraction-retract-map f g k)
+      ( map-domain-hom-retraction-retract-map f g R)
+      ( retract-codomain-retract-map f g R)
+      ( coh-hom-retraction-retract-map f g R)
 ```
 
 ### Retracts of maps with retractions have retractions
@@ -327,59 +332,58 @@ module _
 In fact, we only need the following data to show this:
 
 ```text
-         i    H    r
+         i₀    H   r₀
     A ------> X ------> A
     |         |
-  g |    I    | f
+  f |    i    | g
     v         v
     B ------> Y.
-         i'
+         i₁
 ```
 
-**Proof:** Note that `g` is the top map in the triangle
+**Proof:** Note that `f` is the top map in the triangle
 
 ```text
-           g
-      A ------> B
-       \       /
-  f ∘ i \     / i'
-         \   /
-          V V
-           Y.
+            f
+       A ------> B
+        \       /
+  g ∘ i₀ \     / i₁
+          \   /
+           V V
+            Y.
 ```
 
-Since both `f` and `i` are assumed to have retractions, it follows that `f ∘ i`
-has a retraction, and hence that `g` has a retraction.
+Since both `g` and `i₀` are assumed to have retractions, it follows that
+`g ∘ i₀` has a retraction, and hence that `f` has a retraction.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} (f : X → Y) (g : A → B)
-  (r : A retract-of X) (i' : B → Y)
-  (I : coherence-square-maps (inclusion-retract r) g f i')
-  (s : retraction f)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R₀ : A retract-of X) (i₁ : B → Y)
+  (i : coherence-square-maps (inclusion-retract R₀) f g i₁)
+  (s : retraction g)
   where
 
-  retraction-retract-map-retraction' : retraction g
+  retraction-retract-map-retraction' : retraction f
   retraction-retract-map-retraction' =
     retraction-top-map-triangle
-      ( f ∘ inclusion-retract r)
-      ( i')
-      ( g)
-      ( inv-htpy I)
-      ( retraction-comp f (inclusion-retract r) s (retraction-retract r))
+      ( g ∘ inclusion-retract R₀)
+      ( i₁)
+      ( f)
+      ( inv-htpy i)
+      ( retraction-comp g (inclusion-retract R₀) s (retraction-retract R₀))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (k : g retract-of-map f)
+  (f : A → B) (g : X → Y) (R : f retract-of-map g)
   where
 
-  retraction-retract-map-retraction : retraction f → retraction g
+  retraction-retract-map-retraction : retraction g → retraction f
   retraction-retract-map-retraction =
     retraction-retract-map-retraction' f g
-      ( retract-domain-retract-map f g k)
-      ( inclusion-codomain-retract-map f g k)
-      ( coh-inclusion-retract-map f g k)
+      ( retract-domain-retract-map f g R)
+      ( map-codomain-inclusion-retract-map f g R)
+      ( coh-inclusion-retract-map f g R)
 ```
 
 ### Equivalences are closed under retracts of maps
@@ -389,202 +393,296 @@ Note that the higher coherence of a retract of maps is not needed.
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (r : A retract-of X) (r' : B retract-of Y)
-  (I : coherence-square-maps (inclusion-retract r) g f (inclusion-retract r'))
-  (R :
+  (f : A → B) (g : X → Y) (R₀ : A retract-of X) (R₁ : B retract-of Y)
+  (i : coherence-square-maps (inclusion-retract R₀) f g (inclusion-retract R₁))
+  (r :
     coherence-square-maps
-      ( map-retraction-retract r)
-      ( f)
+      ( map-retraction-retract R₀)
       ( g)
-      ( map-retraction-retract r'))
-  (H : is-equiv f)
+      ( f)
+      ( map-retraction-retract R₁))
+  (H : is-equiv g)
   where
 
-  is-equiv-retract-map-is-equiv' : is-equiv g
+  is-equiv-retract-map-is-equiv' : is-equiv f
   pr1 is-equiv-retract-map-is-equiv' =
     section-retract-map-section' f g
-      ( map-retraction-retract r)
-      ( r')
-      ( R)
+      ( map-retraction-retract R₀)
+      ( R₁)
+      ( r)
       ( section-is-equiv H)
   pr2 is-equiv-retract-map-is-equiv' =
     retraction-retract-map-retraction' f g
-      ( r)
-      ( inclusion-retract r')
-      ( I)
+      ( R₀)
+      ( inclusion-retract R₁)
+      ( i)
       ( retraction-is-equiv H)
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (k : g retract-of-map f) (H : is-equiv f)
+  (f : A → B) (g : X → Y) (R : f retract-of-map g) (H : is-equiv g)
   where
 
-  section-retract-map-is-equiv : section g
+  section-retract-map-is-equiv : section f
   section-retract-map-is-equiv =
-    section-retract-map-section f g k (section-is-equiv H)
+    section-retract-map-section f g R (section-is-equiv H)
 
-  retraction-retract-map-is-equiv : retraction g
+  retraction-retract-map-is-equiv : retraction f
   retraction-retract-map-is-equiv =
-    retraction-retract-map-retraction f g k (retraction-is-equiv H)
+    retraction-retract-map-retraction f g R (retraction-is-equiv H)
 
-  is-equiv-retract-map-is-equiv : is-equiv g
+  is-equiv-retract-map-is-equiv : is-equiv f
   pr1 is-equiv-retract-map-is-equiv = section-retract-map-is-equiv
   pr2 is-equiv-retract-map-is-equiv = retraction-retract-map-is-equiv
 ```
 
-### If `g` is a retract of `f`, then the fibers of `g` are retracts of the fibers of `f`
+### If `f` is a retract of `g`, then the fiber inclusions of `f` are retracts of the fiber inclusions of `g`
 
-Consider a retract `g : A → B` of a map `f : X → Y`, as indicated in the bottom
+Consider a retract `f : A → B` of a map `g : X → Y`, as indicated in the bottom
 row of squares in the diagram below.
 
 ```text
-           i''                 r''
-  fib g x -----> fib f (i' x) -----> fib g x
-     |               |                  |
-     |       I'      |        R'        |
-     v               v                  v
-     A ----- i ----> X ------ r ------> A
-     |               |                  |
-   g |       I       | f      R         | g
-     v               v                  v
-     B ------------> Y ---------------> B
-             i'               r'
+              j                     s
+  fiber f b -----> fiber g (i₁ b) -----> fiber f b
+     |                 |                    |
+     |       i'        |         r'         |
+     v                 v                    v
+     A ----- i₀ -----> X ------- r₀ ------> A
+     |                 |                    |
+   f |       i         | g       r          | f
+     v                 v                    v
+     B --------------> Y -----------------> B
+             i₁                  r₁
 ```
 
 Then we claim that the [fiber inclusion](foundation-core.fibers-of-maps.md)
-`fib g x → A` is a retract of the fiber inclusion `fib f (i' x) → X`.
+`fiber f b → A` is a retract of the fiber inclusion `fiber g (i' x) → X`.
 
-**Proof:** The proof is immediate by
-[functoriality of fibers of maps](foundation.functoriality-fibers-of-maps.md).
+**Proof:** By
+[functoriality of fibers of maps](foundation.functoriality-fibers-of-maps.md) we
+obtain a commuting diagram
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (k : g retract-of-map f)
-  where
-
-  inclusion-fiber-retract-map :
-    (y : B) → fiber g y → fiber f (inclusion-codomain-retract-map f g k y)
-  inclusion-fiber-retract-map =
-    map-fiber-square g f
-      ( inclusion-domain-retract-map f g k ,
-        inclusion-codomain-retract-map f g k ,
-        coh-inclusion-retract-map f g k)
-
-  map-retraction-fiber-retract-map' :
-    (y : Y) →
-    fiber f y → fiber g (map-retraction-codomain-retract-map f g k y)
-  map-retraction-fiber-retract-map' =
-    map-fiber-square
-      ( map-retraction-domain-retract-map f g k)
-      ( f)
-      ( g)
-      ( map-retraction-codomain-retract-map f g k)
-      ( coh-map-retraction-retract-map f g k)
-
-  map-retraction-fiber-retract-map :
-    (y : B) → fiber f (inclusion-codomain-retract-map f g k y) → fiber g y
-  pr1 (map-retraction-fiber-retract-map y (x , p)) =
-    map-retraction-domain-retract-map f g k x
-  pr2 (map-retraction-fiber-retract-map y (x , p)) =
-    ( inv (coh-map-retraction-retract-map f g k x)) ∙
-    ( ap (map-retraction-codomain-retract-map f g k) p) ∙
-    ( is-retraction-map-retraction-codomain-retract-map f g k y)
-
-  coherence-is-retraction-fiber-retract-map :
-    (y : B) (z : fiber g y) →
-    ( g ·l is-retraction-map-retraction-domain-retract-map f g k)
-      ( inclusion-fiber g z) ＝
-    ( inv
-      ( coh-map-retraction-retract-map f g k
-        ( inclusion-fiber f (inclusion-fiber-retract-map y z)))) ∙
-    ( ap
-      ( map-retraction-codomain-retract-map f g k)
-      ( compute-value-inclusion-fiber f (inclusion-fiber-retract-map y z))) ∙
-    ( is-retraction-map-retraction-codomain-retract-map f g k y) ∙
-    ( inv (compute-value-inclusion-fiber g z))
-  coherence-is-retraction-fiber-retract-map y (x , refl) =
-    ( ( ( left-transpose-htpy-concat
-          ( coh-map-retraction-retract-map f g k ·r
-            inclusion-domain-retract-map f g k)
-          ( g ·l is-retraction-map-retraction-domain-retract-map f g k)
-          ( ( map-retraction-codomain-retract-map f g k ·l
-              inv-htpy (coh-inclusion-retract-map f g k)) ∙h
-            ( is-retraction-map-retraction-codomain-retract-map f g k ·r g))
-          ( inv-htpy (coh-retract-map f g k))) ∙h
-        ( inv-htpy-assoc-htpy
-          ( inv-htpy
-            ( coh-map-retraction-retract-map f g k ·r
-              inclusion-domain-retract-map f g k))
-          ( map-retraction-codomain-retract-map f g k ·l
-            inv-htpy (coh-inclusion-retract-map f g k))
-          ( is-retraction-map-retraction-codomain-retract-map f g k ·r g)))
-      ( x)) ∙
-    ( ap
-      ( λ p →
-        ( inv
-          ( coh-map-retraction-retract-map f g k
-            ( inclusion-domain-retract-map f g k x))) ∙
-        ( ap (map-retraction-codomain-retract-map f g k) p) ∙
-        ( is-retraction-map-retraction-codomain-retract-map f g k y))
-      ( inv right-unit)) ∙
-    ( inv right-unit)
-
-  is-retraction-fiber-retract-map :
-    (y : B) →
-    is-retraction
-      ( inclusion-fiber-retract-map y)
-      ( map-retraction-fiber-retract-map y)
-  is-retraction-fiber-retract-map y z =
-    map-inv-fiber-ap-eq-fiber g
-      ( map-retraction-fiber-retract-map y
-        ( inclusion-fiber-retract-map y z))
-      ( z)
-      ( ( is-retraction-map-retraction-domain-retract-map f g k
-          ( inclusion-fiber g z)) ,
-        ( coherence-is-retraction-fiber-retract-map y z))
-
-  retract-fiber-retract-map :
-    (y : B) →
-    ( fiber g y) retract-of
-    ( fiber f (inclusion-codomain-retract-map f g k y))
-  pr1 (retract-fiber-retract-map y) =
-    inclusion-fiber-retract-map y
-  pr1 (pr2 (retract-fiber-retract-map y)) =
-    map-retraction-fiber-retract-map y
-  pr2 (pr2 (retract-fiber-retract-map y)) =
-    is-retraction-fiber-retract-map y
+```text
+              j                     s                          ≃
+  fiber f b -----> fiber g (i₁ b) -----> fiber f (r₀ (i₀ b)) -----> fiber f b
+     |                 |                       |                        |
+     |       i'        |           r'          |                        |
+     v                 v                       v                        V
+     A --------------> X --------------------> A ---------------------> A
+             i₀                    r₀                       id
 ```
 
-### If `g` is a retract of `f`, then the fiber inclusions of `g` are retracts of the fiber inclusions of `f`
+which is homotopic to the identity morphism of arrows. We then finish off the
+proof with the following steps:
+
+1. We reassociate the composition of morphisms of fibers, which is associated in
+   the above diagram as `□ (□ □)`.
+2. Then we use that `hom-arrow-fiber` preserves composition.
+3. Next, we apply the action on `htpy-hom-arrow` of `fiber`.
+4. Finally, we use that `hom-arrow-fiber` preserves identity morphisms of
+   arrows.
+
+While each of these steps are very simple to formalize, the operations that are
+involved take a lot of arguments and therefore the code is somewhat lengthy.
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : X → Y) (g : A → B) (k : g retract-of-map f) (y : B)
+  (f : A → B) (g : X → Y) (R : f retract-of-map g) (b : B)
   where
 
-  is-retract-map-fiber-retract-map :
-    is-retract-of-map
+  inclusion-retract-map-inclusion-fiber-retract-map :
+    hom-arrow
+      ( inclusion-fiber f {b})
+      ( inclusion-fiber g {map-codomain-inclusion-retract-map f g R b})
+  inclusion-retract-map-inclusion-fiber-retract-map =
+    hom-arrow-fiber f g (inclusion-retract-map f g R) b
+
+  hom-retraction-retract-map-inclusion-fiber-retract-map :
+    hom-arrow
+      ( inclusion-fiber g {map-codomain-inclusion-retract-map f g R b})
+      ( inclusion-fiber f {b})
+  hom-retraction-retract-map-inclusion-fiber-retract-map =
+    comp-hom-arrow
+      ( inclusion-fiber g)
+      ( inclusion-fiber f)
+      ( inclusion-fiber f)
+      ( tr-hom-arrow-inclusion-fiber f
+        ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+      ( hom-arrow-fiber g f
+        ( hom-retraction-retract-map f g R)
+        ( map-codomain-inclusion-retract-map f g R b))
+
+  is-retraction-hom-retraction-retract-map-inclusion-fiber-retract-map :
+    is-retraction-hom-arrow
       ( inclusion-fiber f)
       ( inclusion-fiber g)
-      ( retract-fiber-retract-map f g k y)
-      ( retract-domain-retract-map f g k)
-  pr1 is-retract-map-fiber-retract-map =
-    refl-htpy
-  pr1 (pr2 is-retract-map-fiber-retract-map) =
-    refl-htpy
-  pr2 (pr2 is-retract-map-fiber-retract-map) z =
-    inv (ap-pr1-map-inv-fiber-ap-eq-fiber g _ z _)
+      ( inclusion-retract-map-inclusion-fiber-retract-map)
+      ( hom-retraction-retract-map-inclusion-fiber-retract-map)
+  is-retraction-hom-retraction-retract-map-inclusion-fiber-retract-map =
+    concat-htpy-hom-arrow
+      ( inclusion-fiber f)
+      ( inclusion-fiber f)
+      ( comp-hom-arrow
+        ( inclusion-fiber f)
+        ( inclusion-fiber g)
+        ( inclusion-fiber f)
+        ( comp-hom-arrow
+          ( inclusion-fiber g)
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( tr-hom-arrow-inclusion-fiber f
+            ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+          ( hom-arrow-fiber g f
+            ( hom-retraction-retract-map f g R)
+            ( map-codomain-inclusion-retract-map f g R b)))
+        ( inclusion-retract-map-inclusion-fiber-retract-map))
+      ( comp-hom-arrow
+        ( inclusion-fiber f)
+        ( inclusion-fiber f)
+        ( inclusion-fiber f)
+        ( tr-hom-arrow-inclusion-fiber f
+          ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+        ( comp-hom-arrow
+          ( inclusion-fiber f)
+          ( inclusion-fiber g)
+          ( inclusion-fiber f)
+          ( hom-arrow-fiber g f
+            ( hom-retraction-retract-map f g R)
+            ( map-codomain-inclusion-retract-map f g R b))
+          ( inclusion-retract-map-inclusion-fiber-retract-map)))
+      ( id-hom-arrow)
+      ( inv-assoc-comp-hom-arrow
+        ( inclusion-fiber f)
+        ( inclusion-fiber g)
+        ( inclusion-fiber f)
+        ( inclusion-fiber f)
+        ( tr-hom-arrow-inclusion-fiber f
+          ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+        ( hom-arrow-fiber g f
+          ( hom-retraction-retract-map f g R)
+          ( map-codomain-inclusion-retract-map f g R b))
+        ( inclusion-retract-map-inclusion-fiber-retract-map))
+      ( concat-htpy-hom-arrow
+        ( inclusion-fiber f)
+        ( inclusion-fiber f)
+        ( comp-hom-arrow
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( tr-hom-arrow-inclusion-fiber f
+            ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+          ( comp-hom-arrow
+            ( inclusion-fiber f)
+            ( inclusion-fiber g)
+            ( inclusion-fiber f)
+            ( hom-arrow-fiber g f
+              ( hom-retraction-retract-map f g R)
+              ( map-codomain-inclusion-retract-map f g R b))
+            ( inclusion-retract-map-inclusion-fiber-retract-map)))
+        ( comp-hom-arrow
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( tr-hom-arrow-inclusion-fiber f
+            ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+          ( hom-arrow-fiber f f
+            ( comp-hom-arrow f g f
+              ( hom-retraction-retract-map f g R)
+              ( inclusion-retract-map f g R))
+            ( b)))
+        ( id-hom-arrow)
+        ( left-whisker-htpy-hom-arrow
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( tr-hom-arrow-inclusion-fiber f
+            ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+          ( comp-hom-arrow
+            ( inclusion-fiber f)
+            ( inclusion-fiber g)
+            ( inclusion-fiber f)
+            ( hom-arrow-fiber g f
+              ( hom-retraction-retract-map f g R)
+              ( map-codomain-inclusion-retract-map f g R b))
+            ( hom-arrow-fiber f g (inclusion-retract-map f g R) b))
+          ( hom-arrow-fiber f f
+            ( comp-hom-arrow f g f
+              ( hom-retraction-retract-map f g R)
+              ( inclusion-retract-map f g R))
+            ( b))
+          ( inv-htpy-hom-arrow
+            ( inclusion-fiber f)
+            ( inclusion-fiber f)
+            ( hom-arrow-fiber f f
+              ( comp-hom-arrow f g f
+                ( hom-retraction-retract-map f g R)
+                ( inclusion-retract-map f g R))
+              ( b))
+            ( comp-hom-arrow
+              ( inclusion-fiber f)
+              ( inclusion-fiber g)
+              ( inclusion-fiber f)
+              ( hom-arrow-fiber g f
+                ( hom-retraction-retract-map f g R)
+                ( map-codomain-inclusion-retract-map f g R b))
+              ( hom-arrow-fiber f g (inclusion-retract-map f g R) b))
+            ( preserves-comp-hom-arrow-fiber f g f
+              ( hom-retraction-retract-map f g R)
+              ( inclusion-retract-map f g R)
+              ( b))))
+        ( concat-htpy-hom-arrow
+          ( inclusion-fiber f)
+          ( inclusion-fiber f)
+          ( comp-hom-arrow
+            ( inclusion-fiber f)
+            ( inclusion-fiber f)
+            ( inclusion-fiber f)
+            ( tr-hom-arrow-inclusion-fiber f
+              ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
+            ( hom-arrow-fiber f f
+              ( comp-hom-arrow f g f
+                ( hom-retraction-retract-map f g R)
+                ( inclusion-retract-map f g R))
+              ( b)))
+          ( hom-arrow-fiber f f id-hom-arrow b)
+          ( id-hom-arrow)
+          ( htpy-hom-arrow-fiber f f
+            ( comp-hom-arrow f g f
+              ( hom-retraction-retract-map f g R)
+              ( inclusion-retract-map f g R))
+            ( id-hom-arrow)
+            ( is-retraction-hom-retraction-retract-map f g R)
+            ( b))
+          ( preserves-id-hom-arrow-fiber f b)))
 
-  retract-map-fiber-retract-map :
-    (inclusion-fiber g) retract-of-map (inclusion-fiber f)
-  pr1 retract-map-fiber-retract-map =
-    retract-fiber-retract-map f g k y
-  pr1 (pr2 retract-map-fiber-retract-map) =
-    retract-domain-retract-map f g k
-  pr2 (pr2 retract-map-fiber-retract-map) =
-    is-retract-map-fiber-retract-map
+  retract-map-inclusion-fiber-retract-map :
+    ( inclusion-fiber f {b}) retract-of-map
+    ( inclusion-fiber g {map-codomain-inclusion-retract-map f g R b})
+  pr1 retract-map-inclusion-fiber-retract-map =
+    inclusion-retract-map-inclusion-fiber-retract-map
+  pr1 (pr2 retract-map-inclusion-fiber-retract-map) =
+    hom-retraction-retract-map-inclusion-fiber-retract-map
+  pr2 (pr2 retract-map-inclusion-fiber-retract-map) =
+    is-retraction-hom-retraction-retract-map-inclusion-fiber-retract-map
+```
+
+### If `f` is a retract of `g`, then the fibers of `f` are retracts of the fibers of `g`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R : f retract-of-map g) (b : B)
+  where
+
+  retract-fiber-retract-map :
+    ( fiber f b) retract-of
+    ( fiber g (map-codomain-inclusion-retract-map f g R b))
+  retract-fiber-retract-map =
+    retract-domain-retract-map
+      ( inclusion-fiber f)
+      ( inclusion-fiber g)
+      ( retract-map-inclusion-fiber-retract-map f g R b)
 ```
 
 ## References

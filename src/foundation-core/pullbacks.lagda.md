@@ -751,7 +751,7 @@ module _
             ( map-fiber-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x)
             ( map-fiber-cone j h c (i x))
             ( map-fiber-cone i (vertical-map-cone j h c) d x)
-            ( map-fiber-pasting-horizontal-cone i j h c d x)
+            ( preserves-pasting-horizontal-map-fiber-cone i j h c d x)
             ( is-fiberwise-equiv-map-fiber-cone-is-pullback i
               ( vertical-map-cone j h c)
               ( d)
@@ -775,7 +775,7 @@ module _
             ( map-fiber-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x)
             ( map-fiber-cone j h c (i x))
             ( map-fiber-cone i (vertical-map-cone j h c) d x)
-            ( map-fiber-pasting-horizontal-cone i j h c d x)
+            ( preserves-pasting-horizontal-map-fiber-cone i j h c d x)
             ( is-fiberwise-equiv-map-fiber-cone-is-pullback j h c is-pb-c (i x))
             ( is-fiberwise-equiv-map-fiber-cone-is-pullback
               ( j ∘ i)
@@ -824,7 +824,7 @@ module _
                 ( g ∘ h)
                 ( pasting-vertical-cone f g h c d)
                 ( vertical-map-cone f g c x))
-              ( map-fiber-pasting-vertical-cone f g h c d
+              ( preserves-pasting-vertical-map-fiber-cone f g h c d
                 ( vertical-map-cone f g c x))
               ( is-equiv-inv-map-compute-fiber-comp
                 ( vertical-map-cone f g c)
@@ -860,7 +860,7 @@ module _
               ( map-fiber-cone f g c x)
               ( λ t → map-fiber-cone (horizontal-map-cone f g c) h d (pr1 t)))
             ( map-fiber-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x)
-            ( map-fiber-pasting-vertical-cone f g h c d x)
+            ( preserves-pasting-vertical-map-fiber-cone f g h c d x)
             ( is-equiv-inv-map-compute-fiber-comp
               ( vertical-map-cone f g c)
               ( vertical-map-cone (horizontal-map-cone f g c) h d)
