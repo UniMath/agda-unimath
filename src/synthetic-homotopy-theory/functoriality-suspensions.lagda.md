@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.universe-levels
 
@@ -233,11 +234,11 @@ module _
   retract-of-suspension-retract-of :
     A retract-of B → (suspension A) retract-of (suspension B)
   pr1 (retract-of-suspension-retract-of R) =
-    map-suspension (section-retract-of R)
+    map-suspension (inclusion-retract R)
   pr2 (retract-of-suspension-retract-of R) =
     retraction-map-suspension-retraction
-      ( section-retract-of R)
-      ( retraction-section-retract-of R)
+      ( inclusion-retract R)
+      ( retraction-retract R)
 ```
 
 ### Equivalent types have equivalent suspensions

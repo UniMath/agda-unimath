@@ -113,7 +113,7 @@ abstract
       ( postcomp T g)
       ( exponent-cone T f g c)
   is-pullback-exponent-is-pullback f g c is-pb-c T =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( cone-map f g c)
       ( map-standard-pullback-exponent f g T)
       ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
@@ -132,7 +132,7 @@ abstract
     is-pullback f g c
   is-pullback-is-pullback-exponent f g c is-pb-exp =
     is-pullback-universal-property-pullback f g c
-      ( λ T → is-equiv-comp-htpy
+      ( λ T → is-equiv-left-map-triangle
         ( cone-map f g c)
         ( map-standard-pullback-exponent f g T)
         ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
@@ -286,7 +286,7 @@ module _
       (Hc : htpy-parallel-cone Hf Hg c c') →
       is-pullback f' g' c' → is-pullback f g c
     is-pullback-htpy {c = p , q , H} (p' , q' , H') (Hp , Hq , HH) is-pb-c' =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( gap f g (p , q , H))
         ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' (p' , q' , H'))
@@ -301,7 +301,7 @@ module _
       (Hc : htpy-parallel-cone Hf Hg c c') →
       is-pullback f g c → is-pullback f' g' c'
     is-pullback-htpy' (p , q , H) {p' , q' , H'} (Hp , Hq , HH) is-pb-c =
-      is-equiv-right-factor-htpy
+      is-equiv-top-map-triangle
         ( gap f g (p , q , H))
         ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' (p' , q' , H'))
@@ -442,13 +442,13 @@ htpy-eq-square-refl-htpy f g c c' =
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
     ( htpy-eq-square f g c c')
 
-comp-htpy-eq-square-refl-htpy :
+left-map-triangle-eq-square-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c c' : cone f g C) →
   ( htpy-eq-square-refl-htpy f g c c' ∘
     concat (tr-tr-refl-htpy-cone f g c) c') ~
   ( htpy-eq-square f g c c')
-comp-htpy-eq-square-refl-htpy f g c c' =
+left-map-triangle-eq-square-refl-htpy f g c c' =
   is-section-map-inv-is-equiv-precomp-Π-is-equiv
     ( is-equiv-concat (tr-tr-refl-htpy-cone f g c) c')
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
@@ -477,13 +477,13 @@ abstract
         htpy-parallel-cone refl-htpy Hg' c c')
       ( htpy-eq-square-refl-htpy f g)
 
-  comp-htpy-parallel-cone-eq' :
+  left-map-triangle-parallel-cone-eq' :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c c' : cone f g C) →
     ( ( htpy-parallel-cone-eq' f refl-htpy c c') ∘
       ( concat (tr-tr-refl-htpy-cone f g c) c')) ~
     ( htpy-eq-square f g c c')
-  comp-htpy-parallel-cone-eq' {A = A} {B} {X} {C} f g c c' =
+  left-map-triangle-parallel-cone-eq' {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
       ( htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy g
         ( λ g'' Hg' →
@@ -494,7 +494,7 @@ abstract
           htpy-parallel-cone refl-htpy Hg' c c')
       ( htpy-eq-square-refl-htpy f g)) c) c'))
       ( concat (tr-tr-refl-htpy-cone f g c) c') ∙h
-    ( comp-htpy-eq-square-refl-htpy f g c c')
+    ( left-map-triangle-eq-square-refl-htpy f g c c')
 
 abstract
   htpy-parallel-cone-eq :
@@ -517,13 +517,13 @@ abstract
     ( λ g g' → htpy-parallel-cone-eq' f {g = g} {g' = g'})
     Hf g g' Hg c c' p
 
-  comp-htpy-parallel-cone-eq :
+  left-map-triangle-parallel-cone-eq :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c c' : cone f g C) →
     ( ( htpy-parallel-cone-eq refl-htpy refl-htpy c c') ∘
       ( concat (tr-tr-refl-htpy-cone f g c) c')) ~
     ( htpy-eq-square f g c c')
-  comp-htpy-parallel-cone-eq {A = A} {B} {X} {C} f g c c' =
+  left-map-triangle-parallel-cone-eq {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
       ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy f
         ( λ f'' Hf' →
@@ -538,7 +538,7 @@ abstract
         ( λ g g' → htpy-parallel-cone-eq' f {g = g} {g' = g'})) g) g)
         refl-htpy) c) c'))
       ( concat (tr-tr-refl-htpy-cone f g c) c') ∙h
-      ( comp-htpy-parallel-cone-eq' f g c c')
+      ( left-map-triangle-parallel-cone-eq' f g c c')
 
 abstract
   is-fiberwise-equiv-htpy-parallel-cone-eq :
@@ -558,11 +558,11 @@ abstract
             ( c : cone f g C) (c' : cone f g' C) →
               is-equiv (htpy-parallel-cone-eq refl-htpy Hg c c'))
           ( λ c c' →
-            is-equiv-left-factor-htpy
+            is-equiv-right-map-triangle
               ( htpy-eq-square f g c c')
               ( htpy-parallel-cone-eq refl-htpy refl-htpy c c')
               ( concat (tr-tr-refl-htpy-cone f g c) c')
-              ( inv-htpy (comp-htpy-parallel-cone-eq f g c c'))
+              ( inv-htpy (left-map-triangle-parallel-cone-eq f g c c'))
               ( fundamental-theorem-id
                 ( is-torsorial-htpy-parallel-cone
                   ( refl-htpy' f)
@@ -684,7 +684,7 @@ abstract
     ((i : I) → is-pullback (f i) (g i) (c i)) →
     is-pullback (map-Π f) (map-Π g) (cone-Π f g c)
   is-pullback-cone-Π f g c is-pb-c =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( map-Π (λ i → gap (f i) (g i) (c i)))
       ( map-standard-pullback-Π f g)
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))

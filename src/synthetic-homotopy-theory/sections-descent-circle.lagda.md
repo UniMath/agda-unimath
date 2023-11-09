@@ -235,7 +235,7 @@ module _
     ( dependent-universal-property-circle l2 l) →
     is-equiv ev-fixpoint-descent-data-circle
   is-equiv-ev-fixpoint-descent-data-circle dup-circle =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( ev-free-loop-Π l (family-family-with-descent-data-circle A))
       ( comparison-fixpoint-descent-data-circle)
       ( ev-fixpoint-descent-data-circle)

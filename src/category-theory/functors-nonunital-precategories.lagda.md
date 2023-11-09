@@ -335,4 +335,4 @@ module _
 
 ## External links
 
-- [semifunctor](https://ncatlab.org/nlab/show/semifunctor) at nlab
+- [semifunctor](https://ncatlab.org/nlab/show/semifunctor) at $n$Lab

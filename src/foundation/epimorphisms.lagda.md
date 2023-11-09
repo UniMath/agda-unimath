@@ -182,6 +182,25 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
   is-epimorphism-is-pushout = is-epimorphism-is-equiv-codiagonal-map
 ```
 
+### The class of epimorphisms is closed under composition and has the right cancellation property
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B)
+  where
+
+  is-epimorphism-comp :
+    is-epimorphism g → is-epimorphism f → is-epimorphism (g ∘ f)
+  is-epimorphism-comp eg ef X =
+    is-emb-comp (precomp f X) (precomp g X) (ef X) (eg X)
+
+  is-epimorphism-left-factor :
+    is-epimorphism (g ∘ f) → is-epimorphism f → is-epimorphism g
+  is-epimorphism-left-factor ec ef X =
+    is-emb-right-factor (precomp f X) (precomp g X) (ef X) (ec X)
+```
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)

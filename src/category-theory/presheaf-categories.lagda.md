@@ -156,5 +156,5 @@ module _
 - [Presheaf precategories](https://1lab.dev/Cat.Functor.Base.html#presheaf-precategories)
   at 1lab
 - [category of presheaves](https://ncatlab.org/nlab/show/category+of+presheaves)
-  at nlab
-- [presheaf](https://ncatlab.org/nlab/show/presheaf) at nlab
+  at $n$Lab
+- [presheaf](https://ncatlab.org/nlab/show/presheaf) at $n$Lab

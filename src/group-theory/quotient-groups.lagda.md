@@ -541,7 +541,7 @@ module _
         ( quotient-Group G N)
         ( nullifying-quotient-hom-Group G N)
     is-quotient-group-quotient-Group H =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( precomp-nullifying-hom-Group G N
           ( quotient-Group G N)
           ( nullifying-quotient-hom-Group G N)

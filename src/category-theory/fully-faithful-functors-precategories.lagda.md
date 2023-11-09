@@ -414,7 +414,7 @@ module _
 - [Fully Faithful Functors](https://1lab.dev/Cat.Functor.Properties.html#fully-faithful-functors)
   at 1lab
 - [full and faithful functor](https://ncatlab.org/nlab/show/full+and+faithful+functor)
-  at nlab
+  at $n$Lab
 - [Full and faithful functors](https://en.wikipedia.org/wiki/Full_and_faithful_functors)
   at Wikipedia
 - [fully faithful functor](https://wikidata.org/wiki/Q120721906) at Wikidata

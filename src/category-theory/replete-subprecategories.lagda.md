@@ -325,7 +325,7 @@ This remains to be formalized.
 ## External links
 
 - [replete subcategory](https://ncatlab.org/nlab/show/replete+replete-subprecategory)
-  at nlab
+  at $n$Lab
 - [Isomorphism-closed subcategory](https://en.wikipedia.org/wiki/Isomorphism-closed_subcategory)
   at Wikipedia
 - [isomorphism-closed subcategory](https://www.wikidata.org/wiki/Q6086096) at

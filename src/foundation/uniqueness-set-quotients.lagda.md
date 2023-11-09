@@ -137,7 +137,7 @@ module _
     is-equiv h → ({l : Level} → is-set-quotient l R B f) →
     {l : Level} → is-set-quotient l R C g
   is-set-quotient-is-set-quotient-is-equiv E Uf {l} X =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( precomp-Set-Quotient R C g X)
       ( precomp-Set-Quotient R B f X)
       ( precomp h (type-Set X))
@@ -153,7 +153,7 @@ module _
     ({l : Level} → is-set-quotient l R C g) → is-equiv h →
     {l : Level} → is-set-quotient l R B f
   is-set-quotient-is-equiv-is-set-quotient Ug E {l} X =
-    is-equiv-left-factor-htpy
+    is-equiv-right-map-triangle
       ( precomp-Set-Quotient R C g X)
       ( precomp-Set-Quotient R B f X)
       ( precomp h (type-Set X))

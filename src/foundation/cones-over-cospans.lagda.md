@@ -10,6 +10,7 @@ module foundation.cones-over-cospans where
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
+open import foundation.morphisms-arrows
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -71,6 +72,14 @@ module _
   coherence-square-cone :
     coherence-square-maps horizontal-map-cone vertical-map-cone g f
   coherence-square-cone = pr2 (pr2 c)
+
+  hom-arrow-cone : hom-arrow vertical-map-cone g
+  pr1 hom-arrow-cone = horizontal-map-cone
+  pr1 (pr2 hom-arrow-cone) = f
+  pr2 (pr2 hom-arrow-cone) = coherence-square-cone
+
+  hom-arrow-cone' : hom-arrow horizontal-map-cone f
+  hom-arrow-cone' = transpose-hom-arrow vertical-map-cone g hom-arrow-cone
 ```
 
 ### Dependent cones over cospans

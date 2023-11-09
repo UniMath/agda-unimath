@@ -71,4 +71,4 @@ module _
 
 ## External links
 
-- [rigid object](https://ncatlab.org/nlab/show/rigid+object) at nlab
+- [rigid object](https://ncatlab.org/nlab/show/rigid+object) at $n$Lab
