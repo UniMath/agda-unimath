@@ -250,4 +250,4 @@ This remains to be shown.
 - [Orthogonal factorisation systems](https://1lab.dev/Cat.Morphism.Factorisation.html#orthogonal-factorisation-systems)
   at 1lab
 - [orthogonal factorization system in an (infinity,1)-category](https://ncatlab.org/nlab/show/orthogonal+factorization+system+in+an+%28infinity%2C1%29-category)
-  at nlab
+  at $n$Lab
