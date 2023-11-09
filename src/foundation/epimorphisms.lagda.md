@@ -187,12 +187,12 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : A → B) (g : B → C)
+  (g : B → C) (f : A → B)
   where
 
   is-epimorphism-comp :
-    is-epimorphism f → is-epimorphism g → is-epimorphism (g ∘ f)
-  is-epimorphism-comp ef eg X =
+    is-epimorphism g → is-epimorphism f → is-epimorphism (g ∘ f)
+  is-epimorphism-comp eg ef X =
     is-emb-comp (precomp f X) (precomp g X) (ef X) (eg X)
 
   is-epimorphism-left-factor :

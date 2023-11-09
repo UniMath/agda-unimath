@@ -217,22 +217,22 @@ corresponding facts about [epimorphisms](foundation.epimorphisms.md).
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : A → B) (g : B → C)
+  (g : B → C) (f : A → B)
   where
 
   is-acyclic-map-comp :
-    is-acyclic-map f → is-acyclic-map g → is-acyclic-map (g ∘ f)
-  is-acyclic-map-comp af ag =
+    is-acyclic-map g → is-acyclic-map f → is-acyclic-map (g ∘ f)
+  is-acyclic-map-comp ag af =
     is-acyclic-map-is-epimorphism (g ∘ f)
-      ( is-epimorphism-comp f g
-        ( is-epimorphism-is-acyclic-map f af)
-        ( is-epimorphism-is-acyclic-map g ag))
+      ( is-epimorphism-comp g f
+        ( is-epimorphism-is-acyclic-map g ag)
+        ( is-epimorphism-is-acyclic-map f af))
 
   is-acyclic-map-left-factor :
     is-acyclic-map f → is-acyclic-map (g ∘ f) → is-acyclic-map g
   is-acyclic-map-left-factor af ac =
     is-acyclic-map-is-epimorphism g
-      ( is-epimorphism-left-factor f g
+      ( is-epimorphism-left-factor g f
         ( is-epimorphism-is-acyclic-map f af)
         ( is-epimorphism-is-acyclic-map (g ∘ f) ac))
 ```
