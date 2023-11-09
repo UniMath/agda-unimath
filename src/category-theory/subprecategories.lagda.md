@@ -528,7 +528,7 @@ module _
 
 ## External links
 
-- [subcategory](https://ncatlab.org/nlab/show/subcategory) at nlab
+- [subcategory](https://ncatlab.org/nlab/show/subcategory) at $n$Lab
 - [Subcategory](https://en.wikipedia.org/wiki/Subcategory) at Wikipedia
 - [Subcategory](https://mathworld.wolfram.com/Subcategory.html) at Wolfram
   MathWorld

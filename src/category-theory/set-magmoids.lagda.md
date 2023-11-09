@@ -229,6 +229,6 @@ module _
 
 ## External links
 
-- [magmoid](https://ncatlab.org/nlab/show/magmoid) at nlab
+- [magmoid](https://ncatlab.org/nlab/show/magmoid) at $n$Lab
 
 A wikidata identifier was not available for this concept.

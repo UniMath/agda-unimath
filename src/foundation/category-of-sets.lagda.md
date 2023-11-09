@@ -111,6 +111,6 @@ homotopy precategory of types.
 
 ## External links
 
-- [Set](https://ncatlab.org/nlab/show/Set) at nlab
+- [Set](https://ncatlab.org/nlab/show/Set) at $n$Lab
 - [Category of sets](https://en.wikipedia.org/wiki/Category_of_sets) at
   Wikipedia

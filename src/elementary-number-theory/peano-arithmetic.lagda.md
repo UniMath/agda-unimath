@@ -155,7 +155,7 @@ peano-9-ℕ P = ind-ℕ {P = type-Prop ∘ P}
 
 ## External links
 
-- [Peano arithmetic](https://ncatlab.org/nlab/show/Peano+arithmetic) at nlab
+- [Peano arithmetic](https://ncatlab.org/nlab/show/Peano+arithmetic) at $n$Lab
 - [Peano axioms](https://www.wikidata.org/wiki/Q842755) at Wikidata
 - [Peano axioms](https://www.britannica.com/science/Peano-axioms) at Britannica
 - [Peano axioms](https://en.wikipedia.org/wiki/Peano_axioms) at Wikipedia
