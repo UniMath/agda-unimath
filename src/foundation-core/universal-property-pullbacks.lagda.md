@@ -91,7 +91,7 @@ module _
     is-equiv-up-pullback-up-pullback up up' =
       is-equiv-is-equiv-postcomp h
         ( λ D →
-          is-equiv-right-factor-htpy
+          is-equiv-top-map-triangle
             ( cone-map f g c')
             ( cone-map f g c)
             ( postcomp D h)
@@ -105,7 +105,7 @@ module _
       ({l : Level} → universal-property-pullback l f g c) →
       ({l : Level} → universal-property-pullback l f g c')
     up-pullback-up-pullback-is-equiv is-equiv-h up D =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( cone-map f g c')
         ( cone-map f g c)
         ( postcomp D h)
@@ -119,7 +119,7 @@ module _
       is-equiv h →
       ({l : Level} → universal-property-pullback l f g c)
     up-pullback-is-equiv-up-pullback up' is-equiv-h D =
-      is-equiv-left-factor-htpy
+      is-equiv-right-map-triangle
         ( cone-map f g c')
         ( cone-map f g c)
         ( postcomp D h)

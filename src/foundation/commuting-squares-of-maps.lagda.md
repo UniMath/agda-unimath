@@ -457,7 +457,7 @@ module _
   ( top : A → X) (left : A → B) (right : X → Y) (bottom : B → Y)
   where
 
-  distributive-precomp-coherence-square-comp-htpy-coherence-triangle-maps :
+  distributive-precomp-coherence-square-left-map-triangle-coherence-triangle-maps :
     { diagonal-left diagonal-right : A → Y} →
     ( L : diagonal-left ~ diagonal-right) →
     ( H : coherence-triangle-maps' diagonal-left bottom left) →
@@ -484,7 +484,7 @@ module _
       ( htpy-precomp L W)
       ( precomp-coherence-triangle-maps' diagonal-left bottom left H W)
       ( precomp-coherence-triangle-maps diagonal-right right top K W))
-  distributive-precomp-coherence-square-comp-htpy-coherence-triangle-maps
+  distributive-precomp-coherence-square-left-map-triangle-coherence-triangle-maps
     { diagonal-right = diagonal-right}
     ( L)
     ( H)
@@ -495,7 +495,7 @@ module _
       ( _∙ precomp-coherence-triangle-maps diagonal-right right top K W h)
       ( compute-concat-htpy-precomp H L W h))
 
-  distributive-precomp-coherence-square-comp-htpy-coherence-triangle-maps' :
+  distributive-precomp-coherence-square-left-map-triangle-coherence-triangle-maps' :
     { diagonal-left diagonal-right : A → Y} →
     ( L : diagonal-left ~ diagonal-right) →
     ( H : coherence-triangle-maps' diagonal-left bottom left) →
@@ -522,7 +522,7 @@ module _
       ( htpy-precomp L W)
       ( precomp-coherence-triangle-maps' diagonal-left bottom left H W)
       ( precomp-coherence-triangle-maps diagonal-right right top K W))
-  distributive-precomp-coherence-square-comp-htpy-coherence-triangle-maps'
+  distributive-precomp-coherence-square-left-map-triangle-coherence-triangle-maps'
     { diagonal-left = diagonal-left}
     ( L)
     ( H)

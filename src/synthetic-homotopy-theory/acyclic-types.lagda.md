@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.acyclic-types where
 open import foundation.contractible-types
 open import foundation.equivalences
 open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.functoriality-suspensions
@@ -52,6 +53,18 @@ is-acyclic-equiv' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A ≃ B → is-acyclic A → is-acyclic B
 is-acyclic-equiv' e = is-acyclic-equiv (inv-equiv e)
+```
+
+### Acyclic types are closed under retracts
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-acyclic-retract-of : A retract-of B → is-acyclic B → is-acyclic A
+  is-acyclic-retract-of R ac =
+    is-contr-retract-of (suspension B) (retract-of-suspension-retract-of R) ac
 ```
 
 ## See also
