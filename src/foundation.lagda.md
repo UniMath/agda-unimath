@@ -46,6 +46,7 @@ open import foundation.commuting-3-simplices-of-homotopies public
 open import foundation.commuting-3-simplices-of-maps public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
+open import foundation.commuting-pentagons-of-identifications public
 open import foundation.commuting-squares-of-homotopies public
 open import foundation.commuting-squares-of-identifications public
 open import foundation.commuting-squares-of-maps public
@@ -158,6 +159,7 @@ open import foundation.identity-truncated-types public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.images-subtypes public
+open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public

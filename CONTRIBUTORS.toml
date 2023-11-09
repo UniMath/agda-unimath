@@ -32,11 +32,11 @@ in Trondheim. His research is on homotopy theory and higher category theory.
 '''
 
 [[contributors]]
-displayName = "Elisabeth Bonnevier"
+displayName = "Elisabeth Stenholm"
 maintainer = true
-usernames = [ "Elisabeth Bonnevier" ]
+usernames = [ "Elisabeth Stenholm", "Elisabeth Bonnevier" ]
 homepage = "https://elisabeth.bonnevier.one"
-github = "elisabethbonnevier"
+github = "elisabethstenholm"
 bio = '''
 Elisabeth is a PhD student at the University of Bergen. Her research is on
 homotopy type theory.
@@ -52,6 +52,18 @@ bio = '''
 Jonathan is a researcher and a compiler engineer at Heliax designing and
 implementing the functional programming language Juvix. His PhD research is on
 graph theory from a univalent point of view.
+'''
+
+[[contributors]]
+displayName = "Vojtěch Štěpančík"
+maintainer = true
+usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
+homepage = "https://vojtechstep.eu/"
+github = "VojtechStep"
+bio = '''
+Vojtěch is a master\'s student at Charles University in Prague. His background
+is in software engineering, and he\'s working on formalizing synthetic
+homotopy theoretic topics for his thesis.
 '''
 
 [[contributors]]
@@ -78,12 +90,6 @@ github = "ElifUskuplu"
 displayName = "Victor Blanchi"
 usernames = [ "VictorBlanchi" ]
 github = "VictorBlanchi"
-
-[[contributors]]
-displayName = "Vojtěch Štěpančík"
-usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
-homepage = "https://vojtechstep.eu/"
-github = "VojtechStep"
 
 [[contributors]]
 displayName = "Fernando Chu"

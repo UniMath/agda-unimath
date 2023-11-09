@@ -12,12 +12,12 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-towers
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.morphisms-towers
 open import foundation.sequential-limits
 open import foundation.towers
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.identity-types
 ```
 

@@ -44,6 +44,10 @@ module _
   equiv-ev-pair : ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (pair a b))
   pr1 equiv-ev-pair = ev-pair
   pr2 equiv-ev-pair = is-equiv-ev-pair
+
+  equiv-ind-Σ : ((a : A) (b : B a) → C (a , b)) ≃ ((x : Σ A B) → C x)
+  pr1 equiv-ind-Σ = ind-Σ
+  pr2 equiv-ind-Σ = is-equiv-ind-Σ
 ```
 
 ## Properties

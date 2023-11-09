@@ -105,8 +105,8 @@ module _
   hom-group-hom-Concrete-Group :
     hom-Concrete-Group →
     hom-Group
-      ( abstract-group-Concrete-Group G)
-      ( abstract-group-Concrete-Group H)
+      ( group-Concrete-Group G)
+      ( group-Concrete-Group H)
   hom-group-hom-Concrete-Group f =
     pair (map-hom-Concrete-Group f) (preserves-mul-map-hom-Concrete-Group f)
 ```

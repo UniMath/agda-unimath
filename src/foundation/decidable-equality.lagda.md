@@ -35,7 +35,7 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-A type `A` is said to have **decidable equality** if `Id x y` is a
+A type `A` is said to have **decidable equality** if `x ＝ y` is a
 [decidable type](foundation.decidable-types.md) for every `x y : A`.
 
 ## Definitions
@@ -278,7 +278,7 @@ abstract
             ( is-set-has-decidable-equality dA (pr1 t) x)))
 ```
 
-### If B is a family of types with decidable equality, the total space has decidable equality, and B has a section, then the base type has decidable equality
+### If `B` is a family of types with decidable equality, the total space has decidable equality, and `B` has a section, then the base type has decidable equality
 
 ```agda
 abstract

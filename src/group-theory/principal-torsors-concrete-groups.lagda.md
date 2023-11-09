@@ -17,7 +17,8 @@ open import group-theory.concrete-groups
 
 ## Idea
 
-The principal torsor of a concrete group `G` is the identity type of `BG`.
+The **principal torsor** of a [concrete group](group-theory.concrete-groups.md)
+`G` is the [identity type](foundation-core.identity-types.md) of `BG`.
 
 ## Definition
 
