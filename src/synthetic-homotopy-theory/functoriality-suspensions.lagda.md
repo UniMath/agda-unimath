@@ -10,9 +10,13 @@ module synthetic-homotopy-theory.functoriality-suspensions where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.suspension-structures
@@ -189,4 +193,70 @@ module _
   preserves-comp-map-suspension :
     map-suspension (g ∘ f) ~ map-suspension g ∘ map-suspension f
   preserves-comp-map-suspension = inv-htpy inv-preserves-comp-map-suspension
+```
+
+### Suspensions preserve retracts
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  section-map-suspension-section :
+    (f : A → B) → section f → section (map-suspension f)
+  pr1 (section-map-suspension-section f S) =
+    map-suspension (map-section f S)
+  pr2 (section-map-suspension-section f (s , h)) =
+    homotopy-reasoning
+      map-suspension f ∘ map-suspension s
+      ~ map-suspension (f ∘ s)
+        by inv-preserves-comp-map-suspension s f
+      ~ map-suspension id
+        by htpy-eq (ap map-suspension (eq-htpy h))
+      ~ id
+        by id-map-suspension B
+
+  retraction-map-suspension-retraction :
+    (f : A → B) → retraction f → retraction (map-suspension f)
+  pr1 (retraction-map-suspension-retraction f S) =
+    map-suspension (map-retraction f S)
+  pr2 (retraction-map-suspension-retraction f (r , h)) =
+    homotopy-reasoning
+      map-suspension r ∘ map-suspension f
+      ~ map-suspension (r ∘ f)
+        by inv-preserves-comp-map-suspension f r
+      ~ map-suspension id
+        by htpy-eq (ap map-suspension (eq-htpy h))
+      ~ id
+        by id-map-suspension A
+
+  retract-of-suspension-retract-of :
+    A retract-of B → (suspension A) retract-of (suspension B)
+  pr1 (retract-of-suspension-retract-of R) =
+    map-suspension (section-retract-of R)
+  pr2 (retract-of-suspension-retract-of R) =
+    retraction-map-suspension-retraction
+      ( section-retract-of R)
+      ( retraction-section-retract-of R)
+```
+
+### Equivalent types have equivalent suspensions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-equiv-map-suspension-is-equiv :
+    (f : A → B) → is-equiv f → is-equiv (map-suspension f)
+  pr1 (is-equiv-map-suspension-is-equiv f e) =
+    section-map-suspension-section f (section-is-equiv e)
+  pr2 (is-equiv-map-suspension-is-equiv f e) =
+    retraction-map-suspension-retraction f (retraction-is-equiv e)
+
+  equiv-suspension : A ≃ B → suspension A ≃ suspension B
+  pr1 (equiv-suspension e) =
+    map-suspension (map-equiv e)
+  pr2 (equiv-suspension e) =
+    is-equiv-map-suspension-is-equiv (map-equiv e) (is-equiv-map-equiv e)
 ```
