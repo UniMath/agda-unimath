@@ -15,6 +15,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.function-types

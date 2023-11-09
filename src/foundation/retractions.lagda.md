@@ -12,6 +12,7 @@ open import foundation-core.retractions public
 open import foundation.action-on-identifications-functions
 open import foundation.coslice
 open import foundation.dependent-pair-types
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -57,16 +58,16 @@ module _
 ### If the left factor of a composite has a retraction, then the type of retractions of the right factor is a retract of the type of retractions of the composite
 
 ```agda
-is-retraction-retraction-comp-htpy :
+is-retraction-retraction-left-map-triangle :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B)
   (H : f ~ (g ∘ h)) (rg : retraction g) →
-  ( ( retraction-right-factor-htpy f g h H) ∘
-    ( retraction-comp-htpy f g h H rg)) ~ id
-is-retraction-retraction-comp-htpy f g h H (l , L) (k , K) =
+  ( ( retraction-top-map-triangle f g h H) ∘
+    ( retraction-left-map-triangle f g h H rg)) ~ id
+is-retraction-retraction-left-map-triangle f g h H (l , L) (k , K) =
   eq-htpy-retraction
-    ( ( retraction-right-factor-htpy f g h H
-        ( retraction-comp-htpy f g h H (l , L) (k , K))))
+    ( ( retraction-top-map-triangle f g h H
+        ( retraction-left-map-triangle f g h H (l , L) (k , K))))
     ( k , K)
     ( k ·l L)
     ( ( inv-htpy-assoc-htpy
@@ -84,15 +85,15 @@ retraction-right-factor-retract-of-retraction-left-factor :
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) →
   retraction g → (retraction h) retract-of (retraction f)
 pr1 (retraction-right-factor-retract-of-retraction-left-factor f g h H rg) =
-  retraction-comp-htpy f g h H rg
+  retraction-left-map-triangle f g h H rg
 pr1
   ( pr2
     ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
-  retraction-right-factor-htpy f g h H
+  retraction-top-map-triangle f g h H
 pr2
   ( pr2
     ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
-  is-retraction-retraction-comp-htpy f g h H rg
+  is-retraction-retraction-left-map-triangle f g h H rg
 ```
 
 ### If `f` has a retraction, then `f` is injective

@@ -15,6 +15,7 @@ open import foundation.hilberts-epsilon-operators
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.retracts-of-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels

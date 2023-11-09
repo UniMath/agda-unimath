@@ -690,7 +690,7 @@ is-equiv-desc-fam :
   ((l' : Level) → universal-property-pushout l' f g c) →
   is-equiv (desc-fam {l = l} {f = f} {g} c)
 is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
-  is-equiv-comp-htpy
+  is-equiv-left-map-triangle
     ( desc-fam c)
     ( Fam-pushout-cocone-UU l)
     ( cocone-map f g c)

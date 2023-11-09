@@ -136,7 +136,7 @@ module _
   dependent-universal-property-coequalizer-dependent-universal-property-pushout
     ( dup-pushout)
     ( P) =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( dependent-cofork-map f g e)
       ( dependent-cofork-dependent-cocone-codiagonal f g e P)
       ( dependent-cocone-map
@@ -159,7 +159,7 @@ module _
   dependent-universal-property-pushout-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( P) =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( dependent-cofork-map f g e)
       ( dependent-cofork-dependent-cocone-codiagonal f g e P)
       ( dependent-cocone-map
@@ -186,7 +186,7 @@ module _
   universal-property-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( Y) =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( cofork-map f g e)
       ( map-compute-dependent-cofork-constant-family f g e Y)
       ( dependent-cofork-map f g e)
