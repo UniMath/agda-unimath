@@ -19,6 +19,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
