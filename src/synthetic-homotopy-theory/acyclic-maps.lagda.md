@@ -229,12 +229,12 @@ module _
         ( is-epimorphism-is-acyclic-map f af))
 
   is-acyclic-map-left-factor :
-    is-acyclic-map f → is-acyclic-map (g ∘ f) → is-acyclic-map g
-  is-acyclic-map-left-factor af ac =
+    is-acyclic-map (g ∘ f) → is-acyclic-map f → is-acyclic-map g
+  is-acyclic-map-left-factor ac af =
     is-acyclic-map-is-epimorphism g
       ( is-epimorphism-left-factor g f
-        ( is-epimorphism-is-acyclic-map f af)
-        ( is-epimorphism-is-acyclic-map (g ∘ f) ac))
+        ( is-epimorphism-is-acyclic-map (g ∘ f) ac)
+        ( is-epimorphism-is-acyclic-map f af))
 ```
 
 ## See also

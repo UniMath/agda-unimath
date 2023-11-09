@@ -196,8 +196,8 @@ module _
     is-emb-comp (precomp f X) (precomp g X) (ef X) (eg X)
 
   is-epimorphism-left-factor :
-    is-epimorphism f → is-epimorphism (g ∘ f) → is-epimorphism g
-  is-epimorphism-left-factor ef ec X =
+    is-epimorphism (g ∘ f) → is-epimorphism f → is-epimorphism g
+  is-epimorphism-left-factor ec ef X =
     is-emb-right-factor (precomp f X) (precomp g X) (ef X) (ec X)
 ```
 
