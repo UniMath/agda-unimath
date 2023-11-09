@@ -118,7 +118,7 @@ module _
     ( {l : Level} →
       universal-property-coequalizer l f g e)
   universal-property-coequalizer-universal-property-pushout up-pushout Y =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( cofork-map f g e)
       ( cofork-cocone-codiagonal f g)
       ( cocone-map
@@ -138,7 +138,7 @@ module _
         ( horizontal-map-span-cocone-cofork f g)
         ( cocone-codiagonal-cofork f g e))
   universal-property-pushout-universal-property-coequalizer up-coequalizer Y =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( cofork-map f g e)
       ( cofork-cocone-codiagonal f g)
       ( cocone-map
