@@ -44,7 +44,7 @@ module _
 
 ## External links
 
-- [Perfect group](https://ncatlab.org/nlab/show/perfect+group) at nlab
+- [Perfect group](https://ncatlab.org/nlab/show/perfect+group) at $n$Lab
 - [Perfect group](https://en.wikipedia.org/wiki/Perfect_group) at Wikipedia
 
 A wikidata identifier was not available for this concept.

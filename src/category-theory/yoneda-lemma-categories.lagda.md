@@ -107,7 +107,7 @@ The inverse to the Yoneda map:
 
 - [The Yoneda embedding](https://1lab.dev/Cat.Functor.Hom.html#the-yoneda-embedding)
   at 1lab
-- [Yoneda lemma](https://ncatlab.org/nlab/show/Yoneda+lemma) at nlab
+- [Yoneda lemma](https://ncatlab.org/nlab/show/Yoneda+lemma) at $n$Lab
 - [The Yoneda lemma](https://www.math3ma.com/blog/the-yoneda-lemma) at Math3ma
 - [Yoneda lemma](https://en.wikipedia.org/wiki/Yoneda_lemma) at Wikipedia
 - [Yoneda lemma](https://www.wikidata.org/wiki/Q320577) at Wikidata

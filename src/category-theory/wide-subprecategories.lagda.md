@@ -454,4 +454,4 @@ module _
 
 - [Wide subcategories](https://1lab.dev/Cat.Functor.WideSubcategory.html) at
   1lab
-- [wide subcategory](https://ncatlab.org/nlab/show/wide+subcategory) at nlab
+- [wide subcategory](https://ncatlab.org/nlab/show/wide+subcategory) at $n$Lab
