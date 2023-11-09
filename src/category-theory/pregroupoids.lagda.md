@@ -141,4 +141,4 @@ module _
 ## External links
 
 - [Groupoids](https://1lab.dev/Cat.Groupoid.html) at 1lab
-- [pregroupoid](https://ncatlab.org/nlab/show/pregroupoid) at nlab
+- [pregroupoid](https://ncatlab.org/nlab/show/pregroupoid) at $n$Lab

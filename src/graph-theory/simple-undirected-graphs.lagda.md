@@ -67,7 +67,7 @@ Simple-Undirected-Graph l1 l2 =
 
 ## External links
 
-- [Graph](https://ncatlab.org/nlab/show/graph) at nlab
+- [Graph](https://ncatlab.org/nlab/show/graph) at $n$Lab
 - [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
   at Wikipedia
 - [Simple graph](https://www.wikidata.org/entity/Q15838309) on Wikidata

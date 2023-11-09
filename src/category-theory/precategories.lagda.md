@@ -265,4 +265,4 @@ module _
 ## External links
 
 - [Precategories](https://1lab.dev/Cat.Base.html) at 1lab
-- [precategory](https://ncatlab.org/nlab/show/precategory) at nlab
+- [precategory](https://ncatlab.org/nlab/show/precategory) at $n$Lab

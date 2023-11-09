@@ -171,6 +171,6 @@ This remains to be formalized.
 
 - [Interval category](https://1lab.dev/Cat.Instances.Shape.Interval.html#interval-category)
   at 1lab
-- [interval category](https://ncatlab.org/nlab/show/interval+category) at nlab
+- [interval category](https://ncatlab.org/nlab/show/interval+category) at $n$Lab
 
 A wikidata identifier was not available for this concept.

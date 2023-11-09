@@ -305,4 +305,4 @@ module _
 
 - [Full subcategories](https://1lab.dev/Cat.Functor.FullSubcategory.html) at
   1lab
-- [full subcategory](https://ncatlab.org/nlab/show/full+subcategory) at nlab
+- [full subcategory](https://ncatlab.org/nlab/show/full+subcategory) at $n$Lab

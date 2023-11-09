@@ -112,4 +112,4 @@ module _
   Wikipedia
 - [Commutator](https://mathworld.wolfram.com/Commutator.html) at Wolfram
   Mathworld
-- [Group commutator](https://ncatlab.org/nlab/show/group+commutator) at nlab
+- [Group commutator](https://ncatlab.org/nlab/show/group+commutator) at $n$Lab
