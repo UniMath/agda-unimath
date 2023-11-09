@@ -160,5 +160,5 @@ module _
 
 ## See also
 
-- [Factorization operations into global function classes](orthogonal-factorization-operations.factorization-operations-function-classes.md)
+- [Factorization operations into global function classes](orthogonal-factorization-systems.factorization-operations-global-function-classes.md)
   for the universe polymorphic version.
