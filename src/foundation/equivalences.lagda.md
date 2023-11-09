@@ -345,9 +345,9 @@ along equivalences. Similarly, the map `j⁻¹ ∘ g` is a retraction of `h`, si
 we have `(g ∘ h ~ j) → (j⁻¹ ∘ g ∘ h ~ id)` by transposing along equivalences.
 Since `h` therefore has a section and a retraction, it is an equivalence.
 
-In fact, the above argument shows that if the top map has a section and the
-bottom map has a retraction, then the diagonal filler, and hence all other maps
-are equivalences.
+In fact, the above argument shows that if the top map `i` has a section and the
+bottom map `j` has a retraction, then the diagonal filler, and hence all other
+maps are equivalences.
 
 ```agda
 module _
@@ -691,4 +691,4 @@ equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
 
 - The
   [2-out-of-6 property](https://ncatlab.org/nlab/show/two-out-of-six+property)
-  at the nLab.
+  at nlab

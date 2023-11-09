@@ -106,7 +106,7 @@ then the triangle
    g\     /f
      \   /
       V V
-       X,
+       X
 ```
 
 commutes.
@@ -138,7 +138,7 @@ then the triangle
    h\     /r
      \   /
       V V
-       B,
+       B
 ```
 
 commutes.

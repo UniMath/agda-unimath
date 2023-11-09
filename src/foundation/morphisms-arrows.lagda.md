@@ -118,7 +118,7 @@ Consider a commuting diagram of the form
         α₁       β₁
 ```
 
-Then the outer rectangle commutes by horizontal pasing of commuting squares of
+Then the outer rectangle commutes by horizontal pasting of commuting squares of
 maps.
 
 ```agda
@@ -165,7 +165,7 @@ module _
 
 ### Homotopies of morphsims of arrows
 
-A \*\*homotopy of morphisms of arrows from `(i , j , H)` to `(i' , j' , H')` is
+A **homotopy of morphisms of arrows** from `(i , j , H)` to `(i' , j' , H')` is
 a triple `(I , J , K)` consisting of homotopies `I : i ~ i'` and `J : j ~ j'`
 and a homotopy `K` witnessing that the
 [square of homotopies](foundation.commuting-squares-of-homotopies.md)

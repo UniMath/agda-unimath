@@ -780,7 +780,9 @@ module _
             ( is-fiberwise-equiv-map-fiber-cone-is-pullback
               ( j ∘ i)
               ( h)
-              ( pasting-horizontal-cone i j h c d) is-pb-rect x))
+              ( pasting-horizontal-cone i j h c d)
+              ( is-pb-rect)
+              ( x)))
 ```
 
 ### The vertical pullback pasting property

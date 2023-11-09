@@ -325,7 +325,7 @@ constructed as a family of identifications of the form
   eq-Eq-fiber g (γ₀ a) _,
 ```
 
-it follows that when we left-whisker this homotopy with `inclusion-fiber g`, we
+it follows that when we left whisker this homotopy with `inclusion-fiber g`, we
 recover the homotopy `γ₀ ·r inclusion-fiber f`.
 
 Now it remains to fill a coherence for the square of homotopies
@@ -343,13 +343,6 @@ Now it remains to fill a coherence for the square of homotopies
 
 where `H` is the homotopy that we just constructed, witnessing that the upper
 triangle commutes, and where we have written `i` for all fiber inclusions.
-
-coherence-square-homotopies (pr1 (pr2 htpy-hom-arrow-fiber) ·r inclusion-fiber
-f) (coh-hom-arrow (inclusion-fiber f) (inclusion-fiber g) (comp-hom-arrow
-(inclusion-fiber f) (inclusion-fiber g) (inclusion-fiber g)
-(tr-hom-arrow-inclusion-fiber g (htpy-codomain-htpy-hom-arrow f g α β γ b))
-(hom-arrow-fiber f g α b))) (coh-hom-arrow (inclusion-fiber f) (inclusion-fiber
-g) (hom-arrow-fiber f g β b)) (inclusion-fiber g ·l pr1 htpy-hom-arrow-fiber)
 
 ```agda
 module _

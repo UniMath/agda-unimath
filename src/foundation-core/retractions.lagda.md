@@ -22,8 +22,8 @@ open import foundation-core.whiskering-homotopies
 ## Idea
 
 A **retraction** of a map `f : A → B` consists of a map `r : B → A` equipped
-with a homotopy `r ∘ f ~ id`. In other words, a retraction of a map `f` is a
-left inverse of `f`.
+with a [homotopy](foundation-core.homotopies.md) `r ∘ f ~ id`. In other words, a
+retraction of a map `f` is a left inverse of `f`.
 
 ## Definitions
 
@@ -70,7 +70,7 @@ i.e., that the concatenation
 
 is identical to `p : x ＝ y` for all `p : x ＝ y`, we simply proceed by
 identification elimination. Then it suffices to show that `(H x)⁻¹ ∙ (H x)` is
-identical by `refl`, which is indeed the case by the left inverse law of
+identical to `refl`, which is indeed the case by the left inverse law of
 concatenation of identifications.
 
 ```agda
@@ -161,7 +161,7 @@ that would result in a cyclic module dependency.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   (r : retraction f)
   where
 
@@ -195,8 +195,8 @@ In a commuting triangle of the form
        X,
 ```
 
-if `r : X → A` is a section of the map `g` on the right and `t : B → A` is a
-section of the map `h` on top, then `t ∘ s` is a section of the map `f` on the
+if `r : X → A` is a retraction of the map `g` on the right and `s : B → A` is a
+retraction of the map `h` on top, then `s ∘ r` is a retraction of the map `f` on the
 left.
 
 ```agda

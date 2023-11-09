@@ -38,6 +38,9 @@ A **morphism of twisted arrows** from `f : A → B` to `g : X → Y` is a triple
 
   commutes.
 
+Thus, a morphism of twisted arrows can also be understood as _a factorization of
+`g` through `f`_.
+
 ## Definitions
 
 ```agda

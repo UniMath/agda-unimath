@@ -657,8 +657,9 @@ module _
           ( preserves-id-hom-arrow-fiber f b)))
 
   retract-map-inclusion-fiber-retract-map :
-    ( inclusion-fiber f {b}) retract-of-map
-    ( inclusion-fiber g {map-codomain-inclusion-retract-map f g R b})
+    retract-map
+      ( inclusion-fiber g {map-codomain-inclusion-retract-map f g R b})
+      ( inclusion-fiber f {b})
   pr1 retract-map-inclusion-fiber-retract-map =
     inclusion-retract-map-inclusion-fiber-retract-map
   pr1 (pr2 retract-map-inclusion-fiber-retract-map) =
@@ -676,8 +677,9 @@ module _
   where
 
   retract-fiber-retract-map :
-    ( fiber f b) retract-of
-    ( fiber g (map-codomain-inclusion-retract-map f g R b))
+    retract
+      ( fiber g (map-codomain-inclusion-retract-map f g R b))
+      ( fiber f b)
   retract-fiber-retract-map =
     retract-domain-retract-map
       ( inclusion-fiber f)

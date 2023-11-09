@@ -56,7 +56,8 @@ module _
         ( h)
         ( cone-descent-Σ)
         ( ind-Σ
-          ( λ i a → is-equiv-right-map-triangle
+          ( λ i a →
+            is-equiv-right-map-triangle
             ( map-fiber-cone (f i) h (c i) a)
             ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a))
             ( map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))
@@ -71,7 +72,8 @@ module _
       ((i : I) → is-pullback (f i) h (c i))
     descent-Σ' is-pb-dsq i =
       is-pullback-is-fiberwise-equiv-map-fiber-cone (f i) h (c i)
-        ( λ a → is-equiv-left-map-triangle
+        ( λ a →
+          is-equiv-left-map-triangle
           ( map-fiber-cone (f i) h (c i) a)
           ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a))
           ( map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))

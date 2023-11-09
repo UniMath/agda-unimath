@@ -144,7 +144,8 @@ module _
       is-pullback f i cone-A'
     descent-coprod-inl (pair h (pair f' H)) (pair k (pair g' K)) is-pb-dsq =
         is-pullback-is-fiberwise-equiv-map-fiber-cone f i (triple h f' H)
-          ( λ a → is-equiv-left-map-triangle
+          ( λ a →
+            is-equiv-left-map-triangle
             ( map-fiber-cone f i (triple h f' H) a)
             ( map-fiber-cone (ind-coprod _ f g) i
               ( cone-descent-coprod (triple h f' H) (triple k g' K))
@@ -165,7 +166,8 @@ module _
       is-pullback g i cone-B'
     descent-coprod-inr (pair h (pair f' H)) (pair k (pair g' K)) is-pb-dsq =
         is-pullback-is-fiberwise-equiv-map-fiber-cone g i (triple k g' K)
-          ( λ b → is-equiv-left-map-triangle
+          ( λ b →
+            is-equiv-left-map-triangle
             ( map-fiber-cone g i (triple k g' K) b)
             ( map-fiber-cone (ind-coprod _ f g) i
               ( cone-descent-coprod (triple h f' H) (triple k g' K))

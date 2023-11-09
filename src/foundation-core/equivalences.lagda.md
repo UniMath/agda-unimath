@@ -34,11 +34,12 @@ also called being **biinvertible**.
 
 The condition of biinvertibility may look odd: Why not say that an equivalence
 is a map that has a [2-sided inverse](foundation-core.invertible-maps.md)? The
-reason is that the condition of invertibility is structure, whereas the
-condition of being biinvertible is a
-[property](foundation-core.propositions.md). To quickly see this: if `f` is an
-equivalence, then it has up to [homotopy](foundation-core.homotopies.md) only
-one section, and it has up to homotopy only one retraction.
+reason is that the condition of invertibility is
+[structure](foundation.structure.md), whereas the condition of being
+biinvertible is a [property](foundation-core.propositions.md). To quickly see
+this: if `f` is an equivalence, then it has up to
+[homotopy](foundation-core.homotopies.md) only one section, and it has up to
+homotopy only one retraction.
 
 ## Definition
 
