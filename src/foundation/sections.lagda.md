@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.retracts-of-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
@@ -95,15 +96,15 @@ module _
 ### If the right factor of a composite has a section, then the type of sections of the left factor is a retract of the type of sections of the composite
 
 ```agda
-is-retraction-section-comp-htpy :
+is-retraction-section-left-map-triangle :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B)
   (H : f ~ (g ∘ h)) (s : section h) →
-  (section-left-factor-htpy f g h H ∘ section-comp-htpy f g h H s) ~ id
-is-retraction-section-comp-htpy f g h H (k , K) (l , L) =
+  section-right-map-triangle f g h H ∘ section-left-map-triangle f g h H s ~ id
+is-retraction-section-left-map-triangle f g h H (k , K) (l , L) =
   eq-htpy-section
-    ( ( section-left-factor-htpy f g h H ∘
-        section-comp-htpy f g h H (k , K))
+    ( ( section-right-map-triangle f g h H ∘
+        section-left-map-triangle f g h H (k , K))
       ( l , L))
     ( l , L)
     ( K ·r l)
@@ -122,12 +123,12 @@ section-left-factor-retract-of-section-composition :
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
   section h → (section g) retract-of (section f)
 pr1 (section-left-factor-retract-of-section-composition f g h H s) =
-  section-comp-htpy f g h H s
+  section-left-map-triangle f g h H s
 pr1 (pr2 (section-left-factor-retract-of-section-composition f g h H s)) =
-  section-left-factor-htpy f g h H
+  section-right-map-triangle f g h H
 
 pr2 (pr2 (section-left-factor-retract-of-section-composition f g h H s)) =
-  is-retraction-section-comp-htpy f g h H s
+  is-retraction-section-left-map-triangle f g h H s
 ```
 
 ### The equivalence of sections of the projection map and sections of the type family
@@ -159,7 +160,7 @@ module _
   is-equiv-map-section-family :
     ((x : A) → is-contr (B x)) → is-equiv (map-section-family b)
   is-equiv-map-section-family C =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( id)
       ( pr1)
       ( map-section-family b)
@@ -176,7 +177,7 @@ module _
     is-equiv (map-section-family b) → ((x : A) → is-contr (B x))
   is-contr-fam-is-equiv-map-section-family H =
     is-contr-is-equiv-pr1
-      ( is-equiv-left-factor-htpy id pr1
+      ( is-equiv-right-map-triangle id pr1
         ( map-section-family b)
         ( htpy-map-section-family b)
         ( is-equiv-id)

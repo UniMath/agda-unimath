@@ -10,7 +10,7 @@ module synthetic-homotopy-theory.acyclic-types where
 open import foundation.contractible-types
 open import foundation.equivalences
 open import foundation.propositions
-open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.functoriality-suspensions

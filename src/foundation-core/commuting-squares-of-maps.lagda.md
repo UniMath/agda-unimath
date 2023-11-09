@@ -7,11 +7,13 @@ module foundation-core.commuting-squares-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -113,3 +115,110 @@ module _
       ( pasting-vertical-coherence-square-maps sq-top sq-bottom)) ∙h
     ( inv-htpy (K ·r top))
 ```
+
+### Associativity of horizontal pasting
+
+**Proof:** Consider a commuting diagram of the form
+
+```text
+        α₀       β₀       γ₀
+    A -----> X -----> U -----> K
+    |        |        |        |
+  f |   α  g |   β  h |   γ    | i
+    V        V        V        V
+    B -----> Y -----> V -----> L.
+        α₁       β₁       γ₁
+```
+
+Then we can make the following calculation, in which we write `□` for horizontal
+pasting of squares:
+
+```text
+  (α □ β) □ γ
+  ＝ (γ₁ ·l ((β₁ ·l α) ∙h (β ·r α₀))) ∙h (γ ·r (β₀ ∘ α₀))
+  ＝ ((γ₁ ·l (β₁ ·l α)) ∙h (γ₁ ·l (β ·r α₀))) ∙h (γ ·r (β₀ ∘ α₀))
+  ＝ ((γ₁ ∘ β₁) ·l α) ∙h (((γ₁ ·l β) ·r α₀) ∙h ((γ ·r β₀) ·r α₀))
+  ＝ ((γ₁ ∘ β₁) ·l α) ∙h (((γ₁ ·l β) ∙h (γ ·r β₀)) ·r α₀)
+  ＝ α □ (β □ γ)
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  {K : UU l7} {L : UU l8}
+  (α₀ : A → X) (β₀ : X → U) (γ₀ : U → K)
+  (f : A → B) (g : X → Y) (h : U → V) (i : K → L)
+  (α₁ : B → Y) (β₁ : Y → V) (γ₁ : V → L)
+  (α : coherence-square-maps α₀ f g α₁)
+  (β : coherence-square-maps β₀ g h β₁)
+  (γ : coherence-square-maps γ₀ h i γ₁)
+  where
+
+  assoc-pasting-horizontal-coherence-square-maps :
+    pasting-horizontal-coherence-square-maps
+      ( β₀ ∘ α₀)
+      ( γ₀)
+      ( f)
+      ( h)
+      ( i)
+      ( β₁ ∘ α₁)
+      ( γ₁)
+      ( pasting-horizontal-coherence-square-maps α₀ β₀ f g h α₁ β₁ α β)
+      ( γ) ~
+    pasting-horizontal-coherence-square-maps
+      ( α₀)
+      ( γ₀ ∘ β₀)
+      ( f)
+      ( g)
+      ( i)
+      ( α₁)
+      ( γ₁ ∘ β₁)
+      ( α)
+      ( pasting-horizontal-coherence-square-maps β₀ γ₀ g h i β₁ γ₁ β γ)
+  assoc-pasting-horizontal-coherence-square-maps a =
+    ( ap
+      ( _∙ _)
+      ( ( ap-concat γ₁ (ap β₁ (α a)) (β (α₀ a))) ∙
+        ( inv (ap (_∙ _) (ap-comp γ₁ β₁ (α a)))))) ∙
+    ( assoc (ap (γ₁ ∘ β₁) (α a)) (ap γ₁ (β (α₀ a))) (γ (β₀ (α₀ a))))
+```
+
+### The unit laws for horizontal pasting of commuting squares of maps
+
+#### The left unit law
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (i : A → X) (f : A → B) (g : X → Y) (j : B → Y)
+  (α : coherence-square-maps i f g j)
+  where
+
+  left-unit-law-pasting-horizontal-coherence-square-maps :
+    pasting-horizontal-coherence-square-maps id i f f g id j refl-htpy α ~ α
+  left-unit-law-pasting-horizontal-coherence-square-maps = refl-htpy
+```
+
+### The right unit law
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (i : A → X) (f : A → B) (g : X → Y) (j : B → Y)
+  (α : coherence-square-maps i f g j)
+  where
+
+  right-unit-law-pasting-horizontal-coherence-square-maps :
+    pasting-horizontal-coherence-square-maps i id f g g j id α refl-htpy ~ α
+  right-unit-law-pasting-horizontal-coherence-square-maps a =
+    right-unit ∙ ap-id (α a)
+```
+
+## See also
+
+Several structures make essential use of commuting squares of maps:
+
+- [Cones over cospans](foundation.cones-over-cospans.md)
+- [Cocones under spans](synthetic-homotopy-theory.cocones-under-spans.md)
+- [Morphisms of arrows](foundation.morphisms-arrows.md)

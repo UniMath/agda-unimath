@@ -13,6 +13,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.negation
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type

@@ -15,7 +15,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
