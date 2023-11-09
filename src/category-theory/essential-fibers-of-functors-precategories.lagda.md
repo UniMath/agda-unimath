@@ -55,4 +55,4 @@ module _
 
 - [Essential Fibres](https://1lab.dev/Cat.Functor.Properties.html#essential-fibres)
   at 1lab
-- [essential fiber](https://ncatlab.org/nlab/show/essential+fiber) at nlab
+- [essential fiber](https://ncatlab.org/nlab/show/essential+fiber) at $n$Lab

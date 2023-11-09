@@ -691,4 +691,4 @@ equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
 
 - The
   [2-out-of-6 property](https://ncatlab.org/nlab/show/two-out-of-six+property)
-  at nlab
+  at $n$Lab

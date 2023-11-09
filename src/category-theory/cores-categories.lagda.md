@@ -139,4 +139,4 @@ module _
 ## External links
 
 - [The core of a category](https://1lab.dev/Cat.Instances.Core.html) at 1lab
-- [core groupoid](https://ncatlab.org/nlab/show/core+groupoid) at nlab
+- [core groupoid](https://ncatlab.org/nlab/show/core+groupoid) at $n$Lab

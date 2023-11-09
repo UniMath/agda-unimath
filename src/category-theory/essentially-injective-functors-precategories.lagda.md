@@ -94,4 +94,4 @@ module _
 ## External links
 
 - [essentially injective functor](https://ncatlab.org/nlab/show/essentially+injective+functor)
-  at nlab
+  at $n$Lab

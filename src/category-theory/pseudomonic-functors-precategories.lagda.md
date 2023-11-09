@@ -298,6 +298,6 @@ module _
 - [Pseudomonic Functors](https://1lab.dev/Cat.Functor.Properties.html#pseudomonic-functors)
   at 1lab
 - [pseudomonic functor](https://ncatlab.org/nlab/show/pseudomonic+functor) at
-  nlab
+  $n$Lab
 
 A wikidata identifier was not available for this concept.
