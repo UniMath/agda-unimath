@@ -32,10 +32,10 @@ open import foundation.whiskering-homotopies
 
 ## Idea
 
-A map `g : A → B` is said to be a **retract** of a map `f : X → Y` if it is a
-retract in the arrow category of types. In other words, `g` is a retract of `f`
-if there are [morphisms of arrows](foundation.morphisms-arrows.md) `i : g → f`
-and `r : f → g` equipped with a homotopy of morphisms of arrows `r ∘ i ~ id`.
+A map `f : A → B` is said to be a **retract** of a map `g : X → Y` if it is a
+retract in the arrow category of types. In other words, `f` is a retract of `g`
+if there are [morphisms of arrows](foundation.morphisms-arrows.md) `i : f → g`
+and `r : g → f` equipped with a homotopy of morphisms of arrows `r ∘ i ~ id`.
 
 More explicitly, it consists of [retracts](foundation-core.retractions.md) `A`
 of `X` and `B` of `Y` that fit into a commutative diagram
