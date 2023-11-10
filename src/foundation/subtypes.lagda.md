@@ -15,6 +15,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
+open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -143,9 +144,15 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
+  --- TODO: replace with equiv-fam
   equiv-subtypes :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
   equiv-subtypes P Q = (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
+
+  inv-equiv-subtypes :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
+    equiv-subtypes P Q → equiv-subtypes Q P
+  inv-equiv-subtypes P Q e x = inv-equiv (e x)
 
   equiv-antisymmetric-leq-subtype :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
@@ -176,6 +183,19 @@ is-set-subtype P Q =
 subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
 pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
+```
+
+### TODO
+
+```agda
+raise-subtype :
+  {l1 l2 : Level} {A : UU l1} (l3 : Level) → subtype l2 A → subtype (l2 ⊔ l3) A
+raise-subtype l3 P x = raise-Prop l3 (P x)
+
+compute-raise-subtype :
+  {l1 l2 : Level} {A : UU l1} (l3 : Level) (S : subtype l2 A) →
+  equiv-subtypes S (raise-subtype l3 S)
+compute-raise-subtype l3 S x = compute-raise l3 (type-Prop (S x))
 ```
 
 ### Characterisation of embeddings into subtypes

@@ -10,12 +10,13 @@ module foundation.unions-subtypes where
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.universe-levels
-
-open import foundation-core.subtypes
 
 open import order-theory.least-upper-bounds-large-posets
 ```
@@ -101,4 +102,25 @@ module _
 
   subtype-union-right : Q ⊆ union-subtype P Q
   subtype-union-right x = inr-disj-Prop (P x) (Q x)
+
+  subtype-union-both :
+    {l3 : Level} (S : subtype l3 X) → P ⊆ S → Q ⊆ S → union-subtype P Q ⊆ S
+  subtype-union-both S P-sub-S Q-sub-S x =
+    elim-disj-Prop (P x) (Q x) (S x) (P-sub-S x , Q-sub-S x)
+
+module _
+  {l1 l2 : Level} {X : UU l1} (P : subtype l2 X)
+  where
+
+  subtype-union-same : union-subtype P P ⊆ P
+  subtype-union-same =
+    subtype-union-both P P P (refl-leq-subtype P) (refl-leq-subtype P)
+
+  eq-union-same : P ＝ union-subtype P P
+  eq-union-same =
+    antisymmetric-leq-subtype
+    ( P)
+    ( union-subtype P P)
+    ( subtype-union-left P P)
+    ( subtype-union-same)
 ```

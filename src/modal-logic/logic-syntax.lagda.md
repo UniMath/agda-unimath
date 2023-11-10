@@ -12,10 +12,12 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.unions-subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -42,6 +44,13 @@ module _
   {l1 l2 : Level} {i : Set l1}
   where
 
+  theory-add-formula : formula i → formulas l2 i → formulas (l1 ⊔ l2) i
+  theory-add-formula a = union-subtype (Id-formula-Prop a)
+
+module _
+  {l1 l2 : Level} {i : Set l1}
+  where
+
   infix 5 _⊢_
 
   data _⊢_ (axioms : formulas l2 i) : formula i → UU (l1 ⊔ l2) where
@@ -51,6 +60,18 @@ module _
 
   modal-logic : formulas l2 i → formulas (l1 ⊔ l2) i
   modal-logic axioms a = trunc-Prop (axioms ⊢ a)
+
+  is-contradictory-modal-logic-Prop : formulas l2 i → Prop l2
+  is-contradictory-modal-logic-Prop logic = logic ⊥
+
+  is-contradictory-modal-logic : formulas l2 i → UU l2
+  is-contradictory-modal-logic = type-Prop ∘ is-contradictory-modal-logic-Prop
+
+  is-consistent-modal-logic-Prop : formulas l2 i → Prop l2
+  is-consistent-modal-logic-Prop = neg-Prop ∘ is-contradictory-modal-logic-Prop
+
+  is-consistent-modal-logic : formulas l2 i → UU l2
+  is-consistent-modal-logic = type-Prop ∘ is-consistent-modal-logic-Prop
 
 module _
   {l1 : Level} {i : Set l1}
@@ -63,7 +84,7 @@ module _
   modal-logic-closed :
     {l2 : Level} {axioms : formulas l2 i} {a : formula i} →
     modal-logic axioms ⊢ a →
-    type-Prop (modal-logic axioms a)
+    is-in-subtype (modal-logic axioms) a
   modal-logic-closed (ax x) = x
   modal-logic-closed {axioms = axioms} {a} (mp tdab tda) =
     apply-twice-universal-property-trunc-Prop
@@ -116,10 +137,9 @@ module _
   {l1 l2 l3 : Level} {i : Set l1} {ax₁ : formulas l2 i} {ax₂ : formulas l3 i}
   where
 
-  -- TODO: change name
-  modal-logic-CHOOSE-NAME :
+  subset-modal-logic-if-subset-axioms :
     ax₁ ⊆ modal-logic ax₂ → modal-logic ax₁ ⊆ modal-logic ax₂
-  modal-logic-CHOOSE-NAME leq =
+  subset-modal-logic-if-subset-axioms leq =
     transitive-leq-subtype
       ( modal-logic ax₁)
       ( modal-logic (modal-logic ax₂))

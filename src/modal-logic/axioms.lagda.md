@@ -96,14 +96,14 @@ module _
                         eq-implication-right)))
                     ( e)))
               ( λ z e →
-                _∙_
-                ( inv
+                ( _∙_
+                  ( inv
+                    ( eq-implication-left
+                      ( eq-implication-right
+                        ( eq-implication-left (pr2 (pr2 y))))))
                   ( eq-implication-left
                     ( eq-implication-right
-                      ( eq-implication-left (pr2 (pr2 y))))))
-                ( eq-implication-left
-                  ( eq-implication-right
-                    ( eq-implication-left (pr2 e))))))
+                      ( eq-implication-left (pr2 e)))))))
             ( y)))
         ( λ _ → eq-implication-left ∘ eq-implication-left ∘ pr2 ∘ pr2))
       ( a , b , c , refl)
