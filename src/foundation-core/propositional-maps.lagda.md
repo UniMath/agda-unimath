@@ -30,11 +30,16 @@ is equivalent to being an embedding.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level}
   where
 
-  is-prop-map : (A → B) → UU (l1 ⊔ l2)
-  is-prop-map f = (b : B) → is-prop (fiber f b)
+  is-prop-map :
+    {A : UU l1} {B : UU l2} →
+    (A → B) → UU (l1 ⊔ l2)
+  is-prop-map {B = B} f = (b : B) → is-prop (fiber f b)
+
+  prop-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+  prop-map A B = Σ (A → B) is-prop-map
 ```
 
 ## Properties

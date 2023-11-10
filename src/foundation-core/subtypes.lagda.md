@@ -151,6 +151,25 @@ module _
   eq-type-subtype {a} {b} = map-inv-equiv (extensionality-type-subtype' a b)
 ```
 
+### If `B` is a subtype of `A`, then the projection map `Σ A B → A` is a propositional map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
+  where
+
+  is-prop-map-inclusion-subtype : is-prop-map (inclusion-subtype B)
+  is-prop-map-inclusion-subtype =
+    ( λ x →
+      is-prop-equiv
+        ( equiv-fiber-pr1 (is-in-subtype B) x)
+        ( is-prop-is-in-subtype B x))
+
+  prop-map-subtype : prop-map (type-subtype B) A
+  pr1 prop-map-subtype = inclusion-subtype B
+  pr2 prop-map-subtype = is-prop-map-inclusion-subtype
+```
+
 ### If `B` is a subtype of `A`, then the projection map `Σ A B → A` is an embedding
 
 ```agda
@@ -158,14 +177,11 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
   where
 
-  abstract
-    is-emb-inclusion-subtype : is-emb (inclusion-subtype B)
-    is-emb-inclusion-subtype =
-      is-emb-is-prop-map
-        ( λ x →
-          is-prop-equiv
-            ( equiv-fiber-pr1 (is-in-subtype B) x)
-            ( is-prop-is-in-subtype B x))
+  is-emb-inclusion-subtype : is-emb (inclusion-subtype B)
+  is-emb-inclusion-subtype =
+    is-emb-is-prop-map
+      ( is-prop-map-inclusion-subtype B)
+        
 
   emb-subtype : type-subtype B ↪ A
   pr1 emb-subtype = inclusion-subtype B
