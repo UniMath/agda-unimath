@@ -19,8 +19,8 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.unions-subtypes
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import modal-logic.axioms
@@ -187,7 +187,7 @@ module _
         ( Id-formula-Prop a b)
         ( axioms b)
         ( (weak-modal-logic axioms) (a ⇒ b))
-        ( (λ { refl → deduction-a->a a })
+        ( (λ { refl → deduction-a->a a})
         , (λ in-axioms →
             ( apply-universal-property-trunc-Prop
               ( contains-ax-k _ (b , a , refl))
@@ -215,7 +215,6 @@ module _
       map-universal-property-trunc-Prop
         ( weak-modal-logic (theory-add-formula a axioms) b)
         ( backward-deduction-lemma)
-
 
 module _
   {l1 l2 : Level} {i : Set l1} (axioms : formulas l2 i)

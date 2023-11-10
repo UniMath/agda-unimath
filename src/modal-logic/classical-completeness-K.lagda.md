@@ -26,16 +26,9 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.unions-subtypes
+open import foundation.unit-type
 open import foundation.universe-levels
-
-open import order-theory.maximal-elements-posets
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.subposets
-open import order-theory.chains-posets
-open import order-theory.top-elements-posets
 
 open import modal-logic.axioms
 open import modal-logic.completeness
@@ -44,6 +37,13 @@ open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
+
+open import order-theory.chains-posets
+open import order-theory.maximal-elements-posets
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.subposets
+open import order-theory.top-elements-posets
 ```
 
 </details>
@@ -91,7 +91,8 @@ module _
     L-consistent-theory → L-consistent-theory → Prop (l1 ⊔ l2)
   L-consistent-theory-leq-Prop x y = leq-prop-subtype (pr1 x) (pr1 y)
 
-  L-consistent-theory-leq : L-consistent-theory → L-consistent-theory → UU (l1 ⊔ l2)
+  L-consistent-theory-leq :
+    L-consistent-theory → L-consistent-theory → UU (l1 ⊔ l2)
   L-consistent-theory-leq x y = type-Prop (L-consistent-theory-leq-Prop x y)
 
   theories-Poset : Poset (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2)
@@ -138,7 +139,7 @@ module _
                     ( weak-modal-logic-monotic
                       ( subtype-union-right axioms (pr1 x))
                       ( a)
-                      ( unit-trunc-Prop wd)) })
+                      ( unit-trunc-Prop wd))})
                   ( transitive-leq-subtype
                     ( pr1 x)
                     ( union-subtype axioms (pr1 x))
@@ -189,7 +190,7 @@ module _
                     ( weak-modal-logic-monotic
                       ( subtype-union-left axioms (pr1 x))
                       ( a)
-                      ( unit-trunc-Prop wd)) })
+                      ( unit-trunc-Prop wd))})
                   ( transitive-leq-subtype
                     ( pr1 x)
                     ( union-subtype axioms (pr1 x))
@@ -250,7 +251,7 @@ module _
                           ( weak-modal-logic-monotic
                             ( axioms-subset-L-complete-theory x is-comp))
                           ( contains-ax-k))
-                        (  transitive-leq-subtype
+                        ( transitive-leq-subtype
                           ( ax-s i)
                           ( weak-modal-logic (axioms))
                           ( weak-modal-logic (pr1 x))
@@ -260,7 +261,9 @@ module _
                         ( ~ a)
                         ( ⊥))
                       ( weak-modal-logic-monotic
-                        { ax₁ = union-subtype axioms (theory-add-formula (~ a) (pr1 x))}
+                        { ax₁ =
+                          ( union-subtype axioms
+                            ( theory-add-formula (~ a) (pr1 x)))}
                         { ax₂ = theory-add-formula (~ a) (pr1 x)}
                         ( subtype-union-both
                           ( axioms)
@@ -291,15 +294,6 @@ module _
                           ( wd-bot))))))))
             ( subtype-union-right (Id-formula-Prop (~ a)) (pr1 x)))
           ( subtype-union-left (Id-formula-Prop (~ a)) (pr1 x) (~ a) refl)))
-    -- tr
-    --   ( λ y → type-disj-Prop ((pr1 y) a) ((pr1 y) (~ a)))
-    --   ( is-comp
-    --     ( theory-add-formula (~ a) (pr1 x)
-    --     , λ bot-in-logic →
-    --       ( {!   !}))
-    --     ( subtype-union-right (Id-formula-Prop (~ a)) (pr1 x)))
-    --   ( unit-trunc-Prop
-    --     ( inr (subtype-union-left (Id-formula-Prop (~ a)) (pr1 x) (~ a) refl)))
 
   complete-theory-implication :
     LEM (l1 ⊔ l2) →
@@ -446,7 +440,7 @@ module _
                       { ax₂ = union-subtype (Id-formula-Prop a) (pr1 x)}
                       ( subtype-union-right (Id-formula-Prop a) (pr1 x))
                       ( ~ a)
-                      ( unit-trunc-Prop (w-ax not-a-in-logic)))))) })
+                      ( unit-trunc-Prop (w-ax not-a-in-logic))))))})
 
   canonical-worlds : subtype (lsuc l1 ⊔ lsuc l2) (formulas (l1 ⊔ l2) i)
   canonical-worlds x =
