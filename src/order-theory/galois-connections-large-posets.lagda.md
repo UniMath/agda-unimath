@@ -7,6 +7,8 @@ module order-theory.galois-connections-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 
@@ -36,7 +38,40 @@ the agda-unimath library
 
 {{#include tables/galois-connections.md}}
 
-## Definition
+## Definitions
+
+### The adjoint relation between order preserving maps between large posets
+
+```agda
+module _
+  {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (F : hom-Large-Poset γ P Q) (G : hom-Large-Poset δ Q P)
+  where
+
+  forward-implication-adjoint-relation-hom-Large-Poset : UUω
+  forward-implication-adjoint-relation-hom-Large-Poset =
+    {l1 l2 : Level}
+    {x : type-Large-Poset P l1} {y : type-Large-Poset Q l2} →
+    leq-Large-Poset Q (map-hom-Large-Poset P Q F x) y →
+    leq-Large-Poset P x (map-hom-Large-Poset Q P G y)
+
+  backward-implication-adjoint-relation-hom-Large-Poset : UUω
+  backward-implication-adjoint-relation-hom-Large-Poset =
+    {l1 l2 : Level}
+    {x : type-Large-Poset P l1} {y : type-Large-Poset Q l2} →
+    leq-Large-Poset P x (map-hom-Large-Poset Q P G y) →
+    leq-Large-Poset Q (map-hom-Large-Poset P Q F x) y
+
+  adjoint-relation-hom-Large-Poset : UUω
+  adjoint-relation-hom-Large-Poset =
+    {l1 l2 : Level}
+    (x : type-Large-Poset P l1) (y : type-Large-Poset Q l2) →
+    leq-Large-Poset Q (map-hom-Large-Poset P Q F x) y ↔
+    leq-Large-Poset P x (map-hom-Large-Poset Q P G y)
+```
+
+### Galois connections between large posets
 
 ```agda
 module _
@@ -56,17 +91,9 @@ module _
       upper-adjoint-galois-connection-Large-Poset :
         hom-Large-Poset δ Q P
       adjoint-relation-galois-connection-Large-Poset :
-        {l1 l2 : Level}
-        (x : type-Large-Poset P l1) (y : type-Large-Poset Q l2) →
-        leq-Large-Poset Q
-          ( map-hom-Large-Poset P Q
-            ( lower-adjoint-galois-connection-Large-Poset)
-            ( x))
-          ( y) ↔
-        leq-Large-Poset P x
-          ( map-hom-Large-Poset Q P
-            ( upper-adjoint-galois-connection-Large-Poset)
-            ( y))
+        adjoint-relation-hom-Large-Poset P Q
+          lower-adjoint-galois-connection-Large-Poset
+          upper-adjoint-galois-connection-Large-Poset
 
   open galois-connection-Large-Poset public
 
@@ -108,7 +135,118 @@ module _
   preserves-order-upper-adjoint-galois-connection-Large-Poset =
     preserves-order-hom-Large-Poset Q P
       ( upper-adjoint-galois-connection-Large-Poset G)
+
+  forward-implication-adjoint-relation-galois-connection-Large-Poset :
+    forward-implication-adjoint-relation-hom-Large-Poset P Q
+      ( lower-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset G)
+  forward-implication-adjoint-relation-galois-connection-Large-Poset =
+    forward-implication (adjoint-relation-galois-connection-Large-Poset G _ _)
+
+  backward-implication-adjoint-relation-galois-connection-Large-Poset :
+    backward-implication-adjoint-relation-hom-Large-Poset P Q
+      ( lower-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset G)
+  backward-implication-adjoint-relation-galois-connection-Large-Poset =
+    backward-implication (adjoint-relation-galois-connection-Large-Poset G _ _)
 ```
+
+### Composition of Galois connections
+
+```agda
+module _
+  {αP αQ αR : Level → Level} {βP βQ βR : Level → Level → Level}
+  {γG γH : Level → Level} {δG δH : Level → Level}
+  (P : Large-Poset αP βP)
+  (Q : Large-Poset αQ βQ)
+  (R : Large-Poset αR βR)
+  (H : galois-connection-Large-Poset γH δH Q R)
+  (G : galois-connection-Large-Poset γG δG P Q)
+  where
+
+  lower-adjoint-comp-galois-connection-Large-Poset :
+    hom-Large-Poset (λ l → γH (γG l)) P R
+  lower-adjoint-comp-galois-connection-Large-Poset =
+    comp-hom-Large-Poset P Q R
+      ( lower-adjoint-galois-connection-Large-Poset H)
+      ( lower-adjoint-galois-connection-Large-Poset G)
+
+  map-lower-adjoint-comp-galois-connection-Large-Poset :
+    {l : Level} → type-Large-Poset P l → type-Large-Poset R (γH (γG l))
+  map-lower-adjoint-comp-galois-connection-Large-Poset =
+    map-comp-hom-Large-Poset P Q R
+      ( lower-adjoint-galois-connection-Large-Poset H)
+      ( lower-adjoint-galois-connection-Large-Poset G)
+
+  preserves-order-lower-adjoint-comp-galois-connection-Large-Poset :
+    preserves-order-map-Large-Poset P R
+      map-lower-adjoint-comp-galois-connection-Large-Poset
+  preserves-order-lower-adjoint-comp-galois-connection-Large-Poset =
+    preserves-order-comp-hom-Large-Poset P Q R
+      ( lower-adjoint-galois-connection-Large-Poset H)
+      ( lower-adjoint-galois-connection-Large-Poset G)
+
+  upper-adjoint-comp-galois-connection-Large-Poset :
+    hom-Large-Poset (λ l → δG (δH l)) R P
+  upper-adjoint-comp-galois-connection-Large-Poset =
+    comp-hom-Large-Poset R Q P
+      ( upper-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset H)
+
+  map-upper-adjoint-comp-galois-connection-Large-Poset :
+    {l : Level} → type-Large-Poset R l → type-Large-Poset P (δG (δH l))
+  map-upper-adjoint-comp-galois-connection-Large-Poset =
+    map-comp-hom-Large-Poset R Q P
+      ( upper-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset H)
+
+  preserves-order-upper-adjoint-comp-galois-connection-Large-Poset :
+    preserves-order-map-Large-Poset R P
+      map-upper-adjoint-comp-galois-connection-Large-Poset
+  preserves-order-upper-adjoint-comp-galois-connection-Large-Poset =
+    preserves-order-comp-hom-Large-Poset R Q P
+      ( upper-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset H)
+
+  forward-implication-adjoint-relation-comp-galois-connection-Large-Poset :
+    forward-implication-adjoint-relation-hom-Large-Poset P R
+      lower-adjoint-comp-galois-connection-Large-Poset
+      upper-adjoint-comp-galois-connection-Large-Poset
+  forward-implication-adjoint-relation-comp-galois-connection-Large-Poset =
+    forward-implication-adjoint-relation-galois-connection-Large-Poset P Q G ∘
+    forward-implication-adjoint-relation-galois-connection-Large-Poset Q R H
+
+  backward-implication-adjoint-relation-comp-galois-connection-Large-Poset :
+    backward-implication-adjoint-relation-hom-Large-Poset P R
+      lower-adjoint-comp-galois-connection-Large-Poset
+      upper-adjoint-comp-galois-connection-Large-Poset
+  backward-implication-adjoint-relation-comp-galois-connection-Large-Poset =
+    backward-implication-adjoint-relation-galois-connection-Large-Poset Q R H ∘
+    backward-implication-adjoint-relation-galois-connection-Large-Poset P Q G
+
+  adjoint-relation-comp-galois-connection-Large-Poset :
+    adjoint-relation-hom-Large-Poset P R
+      lower-adjoint-comp-galois-connection-Large-Poset
+      upper-adjoint-comp-galois-connection-Large-Poset
+  pr1 (adjoint-relation-comp-galois-connection-Large-Poset x y) =
+    forward-implication-adjoint-relation-comp-galois-connection-Large-Poset
+  pr2 (adjoint-relation-comp-galois-connection-Large-Poset x y) =
+    backward-implication-adjoint-relation-comp-galois-connection-Large-Poset
+
+  comp-galois-connection-Large-Poset :
+    galois-connection-Large-Poset (λ l → γH (γG l)) (λ l → δG (δH l)) P R
+  lower-adjoint-galois-connection-Large-Poset
+    comp-galois-connection-Large-Poset =
+    lower-adjoint-comp-galois-connection-Large-Poset
+  upper-adjoint-galois-connection-Large-Poset
+    comp-galois-connection-Large-Poset =
+    upper-adjoint-comp-galois-connection-Large-Poset
+  adjoint-relation-galois-connection-Large-Poset
+    comp-galois-connection-Large-Poset =
+    adjoint-relation-comp-galois-connection-Large-Poset
+```
+
+## Properties
 
 ### The lower adjoint of a Galois connection preserves all existing joins
 

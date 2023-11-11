@@ -70,6 +70,7 @@ open import group-theory.exponents-groups public
 open import group-theory.free-concrete-group-actions public
 open import group-theory.free-groups-with-one-generator public
 open import group-theory.full-subgroups public
+open import group-theory.full-subsemigroups public
 open import group-theory.function-abelian-groups public
 open import group-theory.function-commutative-monoids public
 open import group-theory.function-groups public
@@ -92,6 +93,7 @@ open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups pub
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.images-of-group-homomorphisms public
+open import group-theory.images-of-semigroup-homomorphisms public
 open import group-theory.integer-multiples-of-elements-abelian-groups public
 open import group-theory.integer-powers-of-elements-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
@@ -179,6 +181,7 @@ open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.surjective-group-homomorphisms public
+open import group-theory.surjective-semigroup-homomorphisms public
 open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
 open import group-theory.torsion-elements-groups public

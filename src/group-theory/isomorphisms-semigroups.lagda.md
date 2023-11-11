@@ -118,7 +118,7 @@ module _
 module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2) (f : iso-Semigroup G H)
   where
-  
+
   hom-iso-Semigroup : hom-Semigroup G H
   hom-iso-Semigroup =
     hom-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H} f

@@ -99,8 +99,10 @@ module _
   where
 
   preserves-order-pullback-subtype :
-    {l3 l4 : Level} (S : subtype l3 B) (T : subtype l4 B) →
-    S ⊆ T → pullback-subtype f S ⊆ pullback-subtype f T
+    preserves-order-map-Large-Poset
+      ( powerset-Large-Poset B)
+      ( powerset-Large-Poset A)
+      ( pullback-subtype f)
   preserves-order-pullback-subtype S T H x = H (f x)
 
   pullback-subtype-hom-Large-Poset :

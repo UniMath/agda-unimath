@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.images-subtypes
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
@@ -27,6 +28,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.images-of-group-homomorphisms
 open import group-theory.normal-subgroups
+open import group-theory.pullbacks-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 
@@ -118,11 +120,11 @@ module _
   ev-formal-combination-subset-Group :
     formal-combination-subset-Group → type-Group G
   ev-formal-combination-subset-Group nil = unit-Group G
-  ev-formal-combination-subset-Group (cons (pair (inl (inr star)) x) l) =
+  ev-formal-combination-subset-Group (cons (inl (inr star) , x) l) =
     mul-Group G
       ( inv-Group G (inclusion-subtype S x))
       ( ev-formal-combination-subset-Group l)
-  ev-formal-combination-subset-Group (cons (pair (inr star) x) l) =
+  ev-formal-combination-subset-Group (cons (inr star , x) l) =
     mul-Group G (inclusion-subtype S x) (ev-formal-combination-subset-Group l)
 
   preserves-concat-ev-formal-combination-subset-Group :
@@ -135,7 +137,7 @@ module _
   preserves-concat-ev-formal-combination-subset-Group nil v =
     inv (left-unit-law-mul-Group G (ev-formal-combination-subset-Group v))
   preserves-concat-ev-formal-combination-subset-Group
-    ( cons (pair (inl (inr star)) x) u)
+    ( cons (inl (inr star) , x) u)
     ( v) =
     ( ap
       ( mul-Group G (inv-Group G (inclusion-subtype S x)))
@@ -146,7 +148,7 @@ module _
           ( ev-formal-combination-subset-Group u)
           ( ev-formal-combination-subset-Group v)))
   preserves-concat-ev-formal-combination-subset-Group
-    ( cons (pair (inr star) x) u)
+    ( cons (inr star , x) u)
     ( v) =
     ( ap
       ( mul-Group G (inclusion-subtype S x))
@@ -160,10 +162,10 @@ module _
   inv-formal-combination-subset-Group :
     formal-combination-subset-Group → formal-combination-subset-Group
   inv-formal-combination-subset-Group nil = nil
-  inv-formal-combination-subset-Group (cons (pair s x) u) =
+  inv-formal-combination-subset-Group (cons (s , x) u) =
     concat-list
       ( inv-formal-combination-subset-Group u)
-      ( unit-list (pair (succ-Fin 2 s) x))
+      ( unit-list (succ-Fin 2 s , x))
 
   preserves-inv-ev-formal-combination-subset-Group :
     (u : formal-combination-subset-Group) →
@@ -174,10 +176,10 @@ module _
   preserves-inv-ev-formal-combination-subset-Group nil =
     inv (inv-unit-Group G)
   preserves-inv-ev-formal-combination-subset-Group
-    ( cons (pair (inl (inr star)) x) u) =
+    ( cons (inl (inr star) , x) u) =
     ( preserves-concat-ev-formal-combination-subset-Group
       ( inv-formal-combination-subset-Group u)
-      ( unit-list (pair (inr star) x))) ∙
+      ( unit-list (inr star , x))) ∙
       ( ( ap
         ( λ y →
           mul-Group G y (mul-Group G (inclusion-subtype S x) (unit-Group G)))
@@ -188,10 +190,10 @@ module _
             ( inv (inv-inv-Group G (inclusion-subtype S x))))) ∙
           ( inv (distributive-inv-mul-Group G))))
   preserves-inv-ev-formal-combination-subset-Group
-    ( cons (pair (inr star) x) u) =
+    ( cons (inr star , x) u) =
     ( preserves-concat-ev-formal-combination-subset-Group
       ( inv-formal-combination-subset-Group u)
-      ( unit-list (pair (inl (inr star)) x))) ∙
+      ( unit-list (inl (inr star) , x))) ∙
       ( ( ap
         ( λ y →
           mul-Group G
@@ -221,21 +223,17 @@ module _
 
   contains-unit-subgroup-subset-Group :
     contains-unit-subset-Group G subset-subgroup-subset-Group
-  contains-unit-subgroup-subset-Group = unit-trunc-Prop (pair nil refl)
+  contains-unit-subgroup-subset-Group = unit-trunc-Prop (nil , refl)
 
   is-closed-under-multiplication-subgroup-subset-Group' :
     {x y : type-Group G} →
     subset-subgroup-subset-Group' x → subset-subgroup-subset-Group' y →
     subset-subgroup-subset-Group' (mul-Group G x y)
-  pr1
-    ( is-closed-under-multiplication-subgroup-subset-Group'
-      ( pair l p) (pair k q)) =
+  pr1 (is-closed-under-multiplication-subgroup-subset-Group' (l , p) (k , q)) =
     concat-list l k
-  pr2
-    ( is-closed-under-multiplication-subgroup-subset-Group'
-      ( pair l p) (pair k q)) =
+  pr2 (is-closed-under-multiplication-subgroup-subset-Group' (l , p) (k , q)) =
     ( preserves-concat-ev-formal-combination-subset-Group l k) ∙
-      ( ap-mul-Group G p q)
+    ( ap-mul-Group G p q)
 
   is-closed-under-multiplication-subgroup-subset-Group :
     is-closed-under-multiplication-subset-Group G subset-subgroup-subset-Group
@@ -250,9 +248,9 @@ module _
     {x : type-Group G} →
     subset-subgroup-subset-Group' x →
     subset-subgroup-subset-Group' (inv-Group G x)
-  pr1 (is-closed-under-inverses-subgroup-subset-Group' (pair l p)) =
+  pr1 (is-closed-under-inverses-subgroup-subset-Group' (l , p)) =
     inv-formal-combination-subset-Group l
-  pr2 (is-closed-under-inverses-subgroup-subset-Group' (pair l p)) =
+  pr2 (is-closed-under-inverses-subgroup-subset-Group' (l , p)) =
     ( preserves-inv-ev-formal-combination-subset-Group l) ∙
       ( ap (inv-Group G) p)
 
@@ -275,9 +273,8 @@ module _
     S ⊆ subset-subgroup-subset-Group
   contains-subset-subgroup-subset-Group s H =
     unit-trunc-Prop
-      ( pair
-        ( unit-list (pair (inr star) (pair s H)))
-        ( right-unit-law-mul-Group G (inclusion-subtype S (pair s H))))
+      ( ( unit-list (inr star , s , H)) ,
+        ( right-unit-law-mul-Group G (inclusion-subtype S (s , H))))
 
   contains-formal-combinations-Subgroup :
     {l3 : Level} (U : Subgroup l3 G) → S ⊆ subset-Subgroup G U →
@@ -285,15 +282,11 @@ module _
     is-in-Subgroup G U (ev-formal-combination-subset-Group x)
   contains-formal-combinations-Subgroup U H nil =
     contains-unit-Subgroup G U
-  contains-formal-combinations-Subgroup U H
-    ( cons (pair (inl (inr star)) (pair s K)) c) =
+  contains-formal-combinations-Subgroup U H (cons (inl (inr star) , s , K) c) =
     is-closed-under-multiplication-Subgroup G U
       ( is-closed-under-inverses-Subgroup G U (H s K))
       ( contains-formal-combinations-Subgroup U H c)
-  contains-formal-combinations-Subgroup
-    ( U)
-    ( H)
-    ( cons (pair (inr star) (pair s K)) c) =
+  contains-formal-combinations-Subgroup U H (cons (inr star , s , K) c) =
     is-closed-under-multiplication-Subgroup G U
       ( H s K)
       ( contains-formal-combinations-Subgroup U H c)
@@ -306,7 +299,7 @@ module _
     apply-universal-property-trunc-Prop H (subset-Subgroup G U' x) P
     where
     P : subset-subgroup-subset-Group' x → is-in-Subgroup G U' x
-    P (pair c refl) = contains-formal-combinations-Subgroup U' K c
+    P (c , refl) = contains-formal-combinations-Subgroup U' K c
 ```
 
 #### The subset relation is preserved by generating subgroups
@@ -454,9 +447,14 @@ might appear somewhat convoluted. It breaks down into three parts:
   [is-subgroup-generated-by-subset]-[image-subgroup-subset]-[hom-Group]
 ```
 
-1. It asserts that a certain subgroup is the subgroup generated by a subset. This is signified by the first part of the name: `is-subgroup-generated-by-subset`.
-2. The subgroup it asserts to be the subgroup generated by a subset is the image of the subgroup generated by a subset. This is signified by the second part of the name: `image-subgroup-subset`
-3. The image is taken under a group homomorphism, which is input for the entry, so the last part of the name is `hom-Group`.
+1. It asserts that a certain subgroup is the subgroup generated by a subset.
+   This is signified by the first part of the name:
+   `is-subgroup-generated-by-subset`.
+2. The subgroup it asserts to be the subgroup generated by a subset is the image
+   of the subgroup generated by a subset. This is signified by the second part
+   of the name: `image-subgroup-subset`
+3. The image is taken under a group homomorphism, which is input for the entry,
+   so the last part of the name is `hom-Group`.
 
 ```agda
 module _
@@ -464,8 +462,40 @@ module _
   (S : subset-Group l3 G)
   where
 
+  forward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group :
+    {l : Level} (U : Subgroup l H) →
+    leq-Subgroup H (im-hom-Subgroup G H f (subgroup-subset-Group G S)) U →
+    im-subtype (map-hom-Group G H f) S ⊆ subset-Subgroup H U
+  forward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group
+    U p =
+    transitive-leq-subtype
+      ( im-subtype (map-hom-Group G H f) S)
+      ( subset-im-hom-Subgroup G H f (subgroup-subset-Group G S))
+      ( subset-Subgroup H U)
+      ( p)
+      ( preserves-order-im-subtype
+        ( map-hom-Group G H f)
+        ( S)
+        ( subset-subgroup-subset-Group G S)
+        ( contains-subset-subgroup-subset-Group G S))
+
+  backward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group :
+    {l : Level} (U : Subgroup l H) →
+    im-subtype (map-hom-Group G H f) S ⊆ subset-Subgroup H U →
+    leq-Subgroup H (im-hom-Subgroup G H f (subgroup-subset-Group G S)) U
+  backward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group
+    U p =
+    backward-implication-is-image-subgroup-im-hom-Subgroup G H f
+      ( subgroup-subset-Group G S)
+      ( U)
+      {!!}
+
   is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group :
-    is-subgroup-generated-by-subset-Group H
-      ( image-subgroup-hom-Group G H f (subgroup-subset-Group G S))
-  is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group = ?
+    adjoint-relation-subgroup-generated-by-subset-Group H
+      ( im-subtype (map-hom-Group G H f) S)
+      ( im-hom-Subgroup G H f (subgroup-subset-Group G S))
+  pr1 (is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group U) =
+    forward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group
+      ( U)
+  pr2 (is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group U) = {!!}
 ```

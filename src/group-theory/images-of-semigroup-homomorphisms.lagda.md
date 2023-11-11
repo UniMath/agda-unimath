@@ -16,14 +16,13 @@ open import foundation.propositional-truncations
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
-open import group-theory.full-subsemigroups
-open import group-theory.semigroups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.pullbacks-subsemigroups
+open import group-theory.semigroups
 open import group-theory.subsemigroups
 open import group-theory.subsets-semigroups
-open import group-theory.surjective-semigroup-homomorphisms
 
+open import order-theory.galois-connections-large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 ```
@@ -32,19 +31,25 @@ open import order-theory.order-preserving-maps-large-preorders
 
 ## Idea
 
-The **image** of a [semigroup homomorphism](group-theory.homomorphisms-semigroups.md) `f : G → H` consists of the [image](foundation.images.md) of the underlying map of `f`. This contains
-the unit element and is closed under multiplication and inverses. It is
+The **image** of a
+[semigroup homomorphism](group-theory.homomorphisms-semigroups.md) `f : G → H`
+consists of the [image](foundation.images.md) of the underlying map of `f`. This
+contains the unit element and is closed under multiplication and inverses. It is
 therefore a [subsemigroup](group-theory.subsemigroups.md) of the
-[semigroup](group-theory.semigroups.md) `H`. Alternatively, it can be described as the
-least subsemigroup of `H` that contains all the values of `f`.
+[semigroup](group-theory.semigroups.md) `H`. Alternatively, it can be described
+as the least subsemigroup of `H` that contains all the values of `f`.
 
-More generally, the **image of a subsemigroup** `S` under a semigroup homomorphism `f : G → H` is the subsemigroup consisting of all the elements in the image of the underlying subset of `S` under the underlying map of `f`. Since the image of a subsemigroup satisfies the following adjoint relation
+More generally, the **image of a subsemigroup** `S` under a semigroup
+homomorphism `f : G → H` is the subsemigroup consisting of all the elements in
+the image of the underlying subset of `S` under the underlying map of `f`. Since
+the image of a subsemigroup satisfies the following adjoint relation
 
 ```text
   (im f S ⊆ T) ↔ (S ⊆ T ∘ f)
 ```
 
-it follows that we obtain a [Galois connection](order-theory.galois-connections.md)
+it follows that we obtain a
+[Galois connection](order-theory.galois-connections.md)
 
 ## Definitions
 
@@ -68,8 +73,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (G : Semigroup l1) (H : Semigroup l2) (f : hom-Semigroup G H)
-  (S : Subsemigroup l3 G) (T : Subsemigroup l4 H)
+  {l1 l2 l3 l4 : Level} (G : Semigroup l1) (H : Semigroup l2)
+  (f : hom-Semigroup G H) (S : Subsemigroup l3 G) (T : Subsemigroup l4 H)
   where
 
   is-image-subsemigroup-hom-Semigroup : UUω
@@ -220,24 +225,20 @@ module _
     im-hom-Subsemigroup G H f
   preserves-order-hom-Large-Preorder im-hom-subsemigroup-hom-Large-Poset =
     preserves-order-im-hom-Subsemigroup
-```
 
-## Properties
-
-### A semigroup homomorphism is surjective if and only if its image is the full subsemigroup
-
-```agda
-module _
-  {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2) (f : hom-Semigroup G H)
-  where
-
-  is-surjective-is-full-subsemigroup-image-hom-Semigroup :
-    is-full-Subsemigroup H (image-hom-Semigroup G H f) →
-    is-surjective-hom-Semigroup G H f
-  is-surjective-is-full-subsemigroup-image-hom-Semigroup u = u
-
-  is-full-subsemigroup-image-is-surjective-hom-Semigroup :
-    is-surjective-hom-Semigroup G H f →
-    is-full-Subsemigroup H (image-hom-Semigroup G H f)
-  is-full-subsemigroup-image-is-surjective-hom-Semigroup u = u
+  image-pullback-galois-connection-Subsemigroup :
+    galois-connection-Large-Poset
+      ( λ l → l1 ⊔ l2 ⊔ l)
+      ( λ l → l)
+      ( Subsemigroup-Large-Poset G)
+      ( Subsemigroup-Large-Poset H)
+  lower-adjoint-galois-connection-Large-Poset
+    image-pullback-galois-connection-Subsemigroup =
+    im-hom-subsemigroup-hom-Large-Poset
+  upper-adjoint-galois-connection-Large-Poset
+    image-pullback-galois-connection-Subsemigroup =
+    pullback-subsemigroup-hom-Large-Poset G H f
+  adjoint-relation-galois-connection-Large-Poset
+    image-pullback-galois-connection-Subsemigroup K =
+    is-image-subsemigroup-im-hom-Subsemigroup G H f K
 ```

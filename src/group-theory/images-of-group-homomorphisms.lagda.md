@@ -22,6 +22,7 @@ open import group-theory.pullbacks-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 
+open import order-theory.galois-connections-large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 ```
@@ -30,19 +31,24 @@ open import order-theory.order-preserving-maps-large-preorders
 
 ## Idea
 
-The **image** of a [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` consists of the [image](foundation.images.md) of the underlying map of `f`. This contains
-the unit element and is closed under multiplication and inverses. It is
-therefore a [subgroup](group-theory.subgroups.md) of the
+The **image** of a [group homomorphism](group-theory.homomorphisms-groups.md)
+`f : G → H` consists of the [image](foundation.images.md) of the underlying map
+of `f`. This contains the unit element and is closed under multiplication and
+inverses. It is therefore a [subgroup](group-theory.subgroups.md) of the
 [group](group-theory.groups.md) `H`. Alternatively, it can be described as the
 least subgroup of `H` that contains all the values of `f`.
 
-More generally, the **image of a subgroup** `S` under a group homomorphism `f : G → H` is the subgroup consisting of all the elements in the image of the underlying subset of `S` under the underlying map of `f`. Since the image of a subgroup satisfies the following adjoint relation
+More generally, the **image of a subgroup** `S` under a group homomorphism
+`f : G → H` is the subgroup consisting of all the elements in the image of the
+underlying subset of `S` under the underlying map of `f`. Since the image of a
+subgroup satisfies the following adjoint relation
 
 ```text
   (im f S ⊆ T) ↔ (S ⊆ T ∘ f)
 ```
 
-it follows that we obtain a [Galois connection](order-theory.galois-connections.md)
+it follows that we obtain a
+[Galois connection](order-theory.galois-connections.md)
 
 ## Definitions
 
@@ -258,4 +264,20 @@ module _
     im-hom-Subgroup G H f
   preserves-order-hom-Large-Preorder im-hom-subgroup-hom-Large-Poset =
     preserves-order-im-hom-Subgroup
+
+  image-pullback-galois-connection-Subgroup :
+    galois-connection-Large-Poset
+      ( λ l → l1 ⊔ l2 ⊔ l)
+      ( λ l → l)
+      ( Subgroup-Large-Poset G)
+      ( Subgroup-Large-Poset H)
+  lower-adjoint-galois-connection-Large-Poset
+    image-pullback-galois-connection-Subgroup =
+    im-hom-subgroup-hom-Large-Poset
+  upper-adjoint-galois-connection-Large-Poset
+    image-pullback-galois-connection-Subgroup =
+    pullback-subgroup-hom-Large-Poset G H f
+  adjoint-relation-galois-connection-Large-Poset
+    image-pullback-galois-connection-Subgroup K =
+    is-image-subgroup-im-hom-Subgroup G H f K
 ```

@@ -8,6 +8,7 @@ module order-theory.similarity-of-elements-large-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
@@ -93,4 +94,17 @@ module _
     is-symmetric-Large-Relation (type-Large-Preorder P) (sim-Large-Preorder P)
   pr1 (symmetric-sim-Large-Preorder _ _ H) = pr2 H
   pr2 (symmetric-sim-Large-Preorder _ _ H) = pr1 H
+```
+
+### Equal elements are similar
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Preorder α β)
+  where
+
+  sim-eq-Large-Preorder :
+    {l : Level} {x y : type-Large-Preorder P l} →
+    x ＝ y → sim-Large-Preorder P x y
+  sim-eq-Large-Preorder refl = refl-sim-Large-Preorder P _
 ```

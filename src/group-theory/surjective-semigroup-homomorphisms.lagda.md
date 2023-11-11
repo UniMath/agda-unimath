@@ -11,14 +11,16 @@ open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import group-theory.semigroups
+open import group-theory.full-subsemigroups
 open import group-theory.homomorphisms-semigroups
+open import group-theory.images-of-semigroup-homomorphisms
+open import group-theory.semigroups
 ```
 
 </details>
 
-A [semigroup homomorphism](group-theory.homomorphisms-semigroups.md) `f : G → H` is said
-to be **surjective** if its underlying map is
+A [semigroup homomorphism](group-theory.homomorphisms-semigroups.md) `f : G → H`
+is said to be **surjective** if its underlying map is
 [surjective](foundation.surjective-maps.md)
 
 ## Definition
@@ -40,4 +42,24 @@ module _
   is-prop-is-surjective-hom-Semigroup : is-prop is-surjective-hom-Semigroup
   is-prop-is-surjective-hom-Semigroup =
     is-prop-type-Prop is-surjective-prop-hom-Semigroup
+```
+
+## Properties
+
+### A semigroup homomorphism is surjective if and only if its image is the full subsemigroup
+
+```agda
+module _
+  {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2) (f : hom-Semigroup G H)
+  where
+
+  is-surjective-is-full-subsemigroup-image-hom-Semigroup :
+    is-full-Subsemigroup H (image-hom-Semigroup G H f) →
+    is-surjective-hom-Semigroup G H f
+  is-surjective-is-full-subsemigroup-image-hom-Semigroup u = u
+
+  is-full-subsemigroup-image-is-surjective-hom-Semigroup :
+    is-surjective-hom-Semigroup G H f →
+    is-full-Subsemigroup H (image-hom-Semigroup G H f)
+  is-full-subsemigroup-image-is-surjective-hom-Semigroup u = u
 ```

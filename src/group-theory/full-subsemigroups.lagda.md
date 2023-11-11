@@ -14,9 +14,9 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.equivalences-semigroups
-open import group-theory.semigroups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-semigroups
+open import group-theory.semigroups
 open import group-theory.subsemigroups
 open import group-theory.subsets-semigroups
 ```

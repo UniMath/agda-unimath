@@ -11,6 +11,8 @@ open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
+open import order-theory.commuting-squares-of-galois-connections-large-posets public
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets public
 open import order-theory.coverings-locales public
 open import order-theory.decidable-posets public
 open import order-theory.decidable-preorders public
@@ -100,4 +102,6 @@ open import order-theory.total-orders public
 open import order-theory.total-preorders public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
+open import order-theory.weak-homotopies-order-preserving-maps-large-posets public
+open import order-theory.weak-homotopies-order-preserving-maps-large-preorders public
 ```

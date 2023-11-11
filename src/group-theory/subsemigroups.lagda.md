@@ -283,7 +283,8 @@ Subsemigroup-Poset :
 Subsemigroup-Poset l2 G = poset-Large-Poset (Subsemigroup-Large-Poset G) l2
 
 preserves-order-subset-Subsemigroup :
-  {l1 l2 l3 : Level} (G : Semigroup l1) (H : Subsemigroup l2 G) (K : Subsemigroup l3 G) →
+  {l1 l2 l3 : Level}
+  (G : Semigroup l1) (H : Subsemigroup l2 G) (K : Subsemigroup l3 G) →
   leq-Subsemigroup G H K → (subset-Subsemigroup G H ⊆ subset-Subsemigroup G K)
 preserves-order-subset-Subsemigroup G H K = id
 

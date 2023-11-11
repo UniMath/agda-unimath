@@ -142,22 +142,22 @@ module _
   where
 
   sim-eq-Large-Poset :
-    {l1 : Level} (x y : type-Large-Poset P l1) →
+    {l1 : Level} {x y : type-Large-Poset P l1} →
     x ＝ y → sim-Large-Poset P x y
-  sim-eq-Large-Poset x .x refl = refl-sim-Large-Poset P x
+  sim-eq-Large-Poset refl = refl-sim-Large-Poset P _
 
   is-equiv-sim-eq-Large-Poset :
     {l1 : Level} (x y : type-Large-Poset P l1) →
-    is-equiv (sim-eq-Large-Poset x y)
+    is-equiv (sim-eq-Large-Poset {l1} {x} {y})
   is-equiv-sim-eq-Large-Poset x =
     fundamental-theorem-id
       ( is-torsorial-sim-Large-Poset P x)
-      ( sim-eq-Large-Poset x)
+      ( λ y → sim-eq-Large-Poset {_} {x} {y})
 
   extensionality-Large-Poset :
     {l1 : Level} (x y : type-Large-Poset P l1) →
     (x ＝ y) ≃ sim-Large-Poset P x y
-  pr1 (extensionality-Large-Poset x y) = sim-eq-Large-Poset x y
+  pr1 (extensionality-Large-Poset x y) = sim-eq-Large-Poset
   pr2 (extensionality-Large-Poset x y) = is-equiv-sim-eq-Large-Poset x y
 
   eq-sim-Large-Poset :
