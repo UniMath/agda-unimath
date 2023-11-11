@@ -9,6 +9,7 @@ module group-theory.pullbacks-subgroups where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.pullbacks-subtypes
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -17,6 +18,9 @@ open import group-theory.pullbacks-subsemigroups
 open import group-theory.subgroups
 open import group-theory.subsemigroups
 open import group-theory.subsets-groups
+
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 ```
 
 </details>
@@ -118,4 +122,31 @@ module _
   pullback-Subgroup : Subgroup l3 G
   pr1 pullback-Subgroup = subset-pullback-Subgroup
   pr2 pullback-Subgroup = is-subgroup-pullback-Subgroup
+```
+
+### The order preserving map `pullback-Subgroup`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  preserves-order-pullback-Subgroup :
+    {l3 l4 : Level} (S : Subgroup l3 H) (T : Subgroup l4 H) →
+    leq-Subgroup H S T →
+    leq-Subgroup G (pullback-Subgroup G H f S) (pullback-Subgroup G H f T)
+  preserves-order-pullback-Subgroup S T =
+    preserves-order-pullback-Subsemigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( f)
+      ( subsemigroup-Subgroup H S)
+      ( subsemigroup-Subgroup H T)
+
+  pullback-subgroup-hom-Large-Poset :
+    hom-Large-Poset (λ l → l) (Subgroup-Large-Poset H) (Subgroup-Large-Poset G)
+  map-hom-Large-Preorder pullback-subgroup-hom-Large-Poset =
+    pullback-Subgroup G H f
+  preserves-order-hom-Large-Preorder pullback-subgroup-hom-Large-Poset =
+    preserves-order-pullback-Subgroup
 ```

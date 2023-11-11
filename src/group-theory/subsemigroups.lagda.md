@@ -11,6 +11,8 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -20,6 +22,13 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 open import group-theory.subsets-semigroups
+
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>
@@ -162,7 +171,15 @@ module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Subsemigroup l2 G)
   where
 
-  has-same-elements-Subsemigroup : Subsemigroup l2 G → UU (l1 ⊔ l2)
+  has-same-elements-prop-Subsemigroup :
+    {l3 : Level} → Subsemigroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-prop-Subsemigroup K =
+    has-same-elements-subtype-Prop
+      ( subset-Subsemigroup G H)
+      ( subset-Subsemigroup G K)
+
+  has-same-elements-Subsemigroup :
+    {l3 : Level} → Subsemigroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-Subsemigroup K =
     has-same-elements-subtype
       ( subset-Subsemigroup G H)
@@ -174,6 +191,112 @@ module _
     extensionality-type-subtype
       ( is-closed-under-multiplication-prop-subset-Semigroup G)
       ( is-closed-under-multiplication-Subsemigroup G H)
-      ( λ x → pair id id)
+      ( λ x → id , id)
       ( extensionality-subtype (subset-Subsemigroup G H))
+
+  refl-has-same-elements-Subsemigroup : has-same-elements-Subsemigroup H
+  refl-has-same-elements-Subsemigroup =
+    refl-has-same-elements-subtype (subset-Subsemigroup G H)
+
+  has-same-elements-eq-Subsemigroup :
+    (K : Subsemigroup l2 G) → (H ＝ K) → has-same-elements-Subsemigroup K
+  has-same-elements-eq-Subsemigroup K =
+    map-equiv (extensionality-Subsemigroup K)
+
+  eq-has-same-elements-Subsemigroup :
+    (K : Subsemigroup l2 G) → has-same-elements-Subsemigroup K → (H ＝ K)
+  eq-has-same-elements-Subsemigroup K =
+    map-inv-equiv (extensionality-Subsemigroup K)
+```
+
+### The containment relation of subsemigroups
+
+```agda
+leq-prop-Subsemigroup :
+  {l1 l2 l3 : Level} (G : Semigroup l1) →
+  Subsemigroup l2 G → Subsemigroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
+leq-prop-Subsemigroup G H K =
+  leq-prop-subtype
+    ( subset-Subsemigroup G H)
+    ( subset-Subsemigroup G K)
+
+leq-Subsemigroup :
+  {l1 l2 l3 : Level} (G : Semigroup l1) →
+  Subsemigroup l2 G → Subsemigroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
+leq-Subsemigroup G H K = subset-Subsemigroup G H ⊆ subset-Subsemigroup G K
+
+is-prop-leq-Subsemigroup :
+  {l1 l2 l3 : Level} (G : Semigroup l1) →
+  (H : Subsemigroup l2 G) (K : Subsemigroup l3 G) →
+  is-prop (leq-Subsemigroup G H K)
+is-prop-leq-Subsemigroup G H K =
+  is-prop-leq-subtype (subset-Subsemigroup G H) (subset-Subsemigroup G K)
+
+refl-leq-Subsemigroup :
+  {l1 : Level} (G : Semigroup l1) →
+  is-reflexive-Large-Relation (λ l → Subsemigroup l G) (leq-Subsemigroup G)
+refl-leq-Subsemigroup G H = refl-leq-subtype (subset-Subsemigroup G H)
+
+transitive-leq-Subsemigroup :
+  {l1 : Level} (G : Semigroup l1) →
+  is-transitive-Large-Relation (λ l → Subsemigroup l G) (leq-Subsemigroup G)
+transitive-leq-Subsemigroup G H K L =
+  transitive-leq-subtype
+    ( subset-Subsemigroup G H)
+    ( subset-Subsemigroup G K)
+    ( subset-Subsemigroup G L)
+
+antisymmetric-leq-Subsemigroup :
+  {l1 : Level} (G : Semigroup l1) →
+  is-antisymmetric-Large-Relation (λ l → Subsemigroup l G) (leq-Subsemigroup G)
+antisymmetric-leq-Subsemigroup G H K α β =
+  eq-has-same-elements-Subsemigroup G H K (λ x → (α x , β x))
+
+Subsemigroup-Large-Preorder :
+  {l1 : Level} (G : Semigroup l1) →
+  Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+type-Large-Preorder (Subsemigroup-Large-Preorder G) l2 = Subsemigroup l2 G
+leq-prop-Large-Preorder (Subsemigroup-Large-Preorder G) H K =
+  leq-prop-Subsemigroup G H K
+refl-leq-Large-Preorder (Subsemigroup-Large-Preorder G) =
+  refl-leq-Subsemigroup G
+transitive-leq-Large-Preorder (Subsemigroup-Large-Preorder G) =
+  transitive-leq-Subsemigroup G
+
+Subsemigroup-Preorder :
+  {l1 : Level} (l2 : Level) (G : Semigroup l1) →
+  Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Subsemigroup-Preorder l2 G =
+  preorder-Large-Preorder (Subsemigroup-Large-Preorder G) l2
+
+Subsemigroup-Large-Poset :
+  {l1 : Level} (G : Semigroup l1) →
+  Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+large-preorder-Large-Poset (Subsemigroup-Large-Poset G) =
+  Subsemigroup-Large-Preorder G
+antisymmetric-leq-Large-Poset (Subsemigroup-Large-Poset G) =
+  antisymmetric-leq-Subsemigroup G
+
+Subsemigroup-Poset :
+  {l1 : Level} (l2 : Level) (G : Semigroup l1) →
+  Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Subsemigroup-Poset l2 G = poset-Large-Poset (Subsemigroup-Large-Poset G) l2
+
+preserves-order-subset-Subsemigroup :
+  {l1 l2 l3 : Level} (G : Semigroup l1) (H : Subsemigroup l2 G) (K : Subsemigroup l3 G) →
+  leq-Subsemigroup G H K → (subset-Subsemigroup G H ⊆ subset-Subsemigroup G K)
+preserves-order-subset-Subsemigroup G H K = id
+
+subset-subsemigroup-hom-large-poset-Semigroup :
+  {l1 : Level} (G : Semigroup l1) →
+  hom-Large-Poset
+    ( λ l → l)
+    ( Subsemigroup-Large-Poset G)
+    ( powerset-Large-Poset (type-Semigroup G))
+map-hom-Large-Preorder
+  ( subset-subsemigroup-hom-large-poset-Semigroup G) =
+  subset-Subsemigroup G
+preserves-order-hom-Large-Preorder
+  ( subset-subsemigroup-hom-large-poset-Semigroup G) =
+  preserves-order-subset-Subsemigroup G
 ```

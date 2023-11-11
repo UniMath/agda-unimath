@@ -10,12 +10,16 @@ module group-theory.pullbacks-subsemigroups where
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.pullbacks-subtypes
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 open import group-theory.subsemigroups
 open import group-theory.subsets-semigroups
+
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 ```
 
 </details>
@@ -72,4 +76,34 @@ module _
     is-in-pullback-Subsemigroup y → x ＝ y → is-in-pullback-Subsemigroup x
   is-closed-under-eq-pullback-Subsemigroup' =
     is-closed-under-eq-Subsemigroup' G pullback-Subsemigroup
+```
+
+### The order preserving operation `pullback-Subsemigroup
+
+```agda
+module _
+  {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2) (f : hom-Semigroup G H)
+  where
+
+  preserves-order-pullback-Subsemigroup :
+    {l3 l4 : Level} (S : Subsemigroup l3 H) (T : Subsemigroup l4 H) →
+    leq-Subsemigroup H S T →
+    leq-Subsemigroup G
+      ( pullback-Subsemigroup G H f S)
+      ( pullback-Subsemigroup G H f T)
+  preserves-order-pullback-Subsemigroup S T =
+    preserves-order-pullback-subtype
+      ( map-hom-Semigroup G H f)
+      ( subset-Subsemigroup H S)
+      ( subset-Subsemigroup H T)
+
+  pullback-subsemigroup-hom-Large-Poset :
+    hom-Large-Poset
+      ( λ l → l)
+      ( Subsemigroup-Large-Poset H)
+      ( Subsemigroup-Large-Poset G)
+  map-hom-Large-Preorder pullback-subsemigroup-hom-Large-Poset =
+    pullback-Subsemigroup G H f
+  preserves-order-hom-Large-Preorder pullback-subsemigroup-hom-Large-Poset =
+    preserves-order-pullback-Subsemigroup
 ```
