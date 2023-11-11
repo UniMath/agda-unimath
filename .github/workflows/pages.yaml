@@ -44,7 +44,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.0.0
+        uses: wenkokke/setup-agda@v2.1.0
         with:
           agda-version: ${{ matrix.agda }}
 
