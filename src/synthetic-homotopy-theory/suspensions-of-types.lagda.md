@@ -332,17 +332,21 @@ module _
 
   equiv-htpy-function-out-of-suspension-htpy :
     (f ~ g) ≃ htpy-function-out-of-suspension
-  equiv-htpy-function-out-of-suspension-htpy = equivalence-reasoning_
-    (f ~ g) ≃ (f ＝ g) by inv-equiv equiv-funext
-    ≃ ( ( ev-suspension (suspension-structure-suspension X) Y f) ＝
-      ( ev-suspension (suspension-structure-suspension X) Y g))
-    by ( equiv-ap (equiv-up-suspension X Y) f g)
-    ≃ htpy-suspension-structure
-      ( ev-suspension (suspension-structure-suspension X) Y f)
-      ( ev-suspension (suspension-structure-suspension X) Y g)
-    by extensionality-suspension-structure
-      ( ev-suspension (suspension-structure-suspension X) Y f)
-      ( ev-suspension (suspension-structure-suspension X) Y g)
+  equiv-htpy-function-out-of-suspension-htpy =
+    equivalence-reasoning
+      (f ~ g)
+      ≃ (f ＝ g)
+        by inv-equiv equiv-funext
+      ≃ ( ( ev-suspension (suspension-structure-suspension X) Y f) ＝
+          ( ev-suspension (suspension-structure-suspension X) Y g))
+        by equiv-ap (equiv-up-suspension X Y) f g
+      ≃ htpy-suspension-structure
+          ( ev-suspension (suspension-structure-suspension X) Y f)
+          ( ev-suspension (suspension-structure-suspension X) Y g)
+        by
+        extensionality-suspension-structure
+          ( ev-suspension (suspension-structure-suspension X) Y f)
+          ( ev-suspension (suspension-structure-suspension X) Y g)
 
   htpy-function-out-of-suspension-htpy :
     (f ~ g) → htpy-function-out-of-suspension
