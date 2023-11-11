@@ -18,6 +18,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -628,6 +630,81 @@ module _
     is-section-hom-inv-is-iso-is-equiv-precomp-hom-Precategory
   pr2 (pr2 is-iso-is-equiv-precomp-hom-Precategory) =
     is-retraction-hom-inv-is-iso-is-equiv-precomp-hom-Precategory
+
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  {f : hom-Precategory C x y}
+  (is-iso-f : is-iso-Precategory C f)
+  (z : obj-Precategory C)
+  where
+
+  map-inv-precomp-hom-is-iso-Precategory :
+    hom-Precategory C x z → hom-Precategory C y z
+  map-inv-precomp-hom-is-iso-Precategory =
+    precomp-hom-Precategory C (hom-inv-is-iso-Precategory C is-iso-f) z
+
+  is-section-map-inv-precomp-hom-is-iso-Precategory :
+    is-section
+      ( precomp-hom-Precategory C f z)
+      ( map-inv-precomp-hom-is-iso-Precategory)
+  is-section-map-inv-precomp-hom-is-iso-Precategory g =
+    ( associative-comp-hom-Precategory C
+      ( g)
+      ( hom-inv-is-iso-Precategory C is-iso-f)
+      ( f)) ∙
+    ( ap
+      ( comp-hom-Precategory C g)
+      ( is-retraction-hom-inv-is-iso-Precategory C is-iso-f)) ∙
+    ( right-unit-law-comp-hom-Precategory C g)
+
+  is-retraction-map-inv-precomp-hom-is-iso-Precategory :
+    is-retraction
+      ( precomp-hom-Precategory C f z)
+      ( map-inv-precomp-hom-is-iso-Precategory)
+  is-retraction-map-inv-precomp-hom-is-iso-Precategory g =
+    ( associative-comp-hom-Precategory C
+      ( g)
+      ( f)
+      ( hom-inv-is-iso-Precategory C is-iso-f)) ∙
+    ( ap
+      ( comp-hom-Precategory C g)
+      ( is-section-hom-inv-is-iso-Precategory C is-iso-f)) ∙
+    ( right-unit-law-comp-hom-Precategory C g)
+
+  is-equiv-precomp-hom-is-iso-Precategory :
+    is-equiv (precomp-hom-Precategory C f z)
+  is-equiv-precomp-hom-is-iso-Precategory =
+    is-equiv-is-invertible
+      ( map-inv-precomp-hom-is-iso-Precategory)
+      ( is-section-map-inv-precomp-hom-is-iso-Precategory)
+      ( is-retraction-map-inv-precomp-hom-is-iso-Precategory)
+
+  equiv-precomp-hom-is-iso-Precategory :
+    hom-Precategory C y z ≃ hom-Precategory C x z
+  pr1 equiv-precomp-hom-is-iso-Precategory =
+    precomp-hom-Precategory C f z
+  pr2 equiv-precomp-hom-is-iso-Precategory =
+    is-equiv-precomp-hom-is-iso-Precategory
+
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  (f : iso-Precategory C x y)
+  (z : obj-Precategory C)
+  where
+
+  is-equiv-precomp-hom-iso-Precategory :
+    is-equiv (precomp-hom-Precategory C (hom-iso-Precategory C f) z)
+  is-equiv-precomp-hom-iso-Precategory =
+    is-equiv-precomp-hom-is-iso-Precategory C (is-iso-iso-Precategory C f) z
+
+  equiv-precomp-hom-iso-Precategory :
+    hom-Precategory C y z ≃ hom-Precategory C x z
+  equiv-precomp-hom-iso-Precategory =
+    equiv-precomp-hom-is-iso-Precategory C (is-iso-iso-Precategory C f) z
 ```
 
 ### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence
@@ -681,8 +758,8 @@ module _
     is-section-map-inv-is-equiv (H y) (id-hom-Precategory C)
 
   is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Precategory :
-    ( comp-hom-Precategory C
-      ( hom-inv-is-iso-is-equiv-postcomp-hom-Precategory))
+    comp-hom-Precategory C
+      ( hom-inv-is-iso-is-equiv-postcomp-hom-Precategory)
       ( f) ＝
     ( id-hom-Precategory C)
   is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Precategory =
@@ -706,6 +783,83 @@ module _
     is-section-hom-inv-is-iso-is-equiv-postcomp-hom-Precategory
   pr2 (pr2 is-iso-is-equiv-postcomp-hom-Precategory) =
     is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Precategory
+
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  {f : hom-Precategory C x y}
+  (is-iso-f : is-iso-Precategory C f)
+  (z : obj-Precategory C)
+  where
+
+  map-inv-postcomp-hom-is-iso-Precategory :
+    hom-Precategory C z y → hom-Precategory C z x
+  map-inv-postcomp-hom-is-iso-Precategory =
+    postcomp-hom-Precategory C (hom-inv-is-iso-Precategory C is-iso-f) z
+
+  is-section-map-inv-postcomp-hom-is-iso-Precategory :
+    is-section
+      ( postcomp-hom-Precategory C f z)
+      ( map-inv-postcomp-hom-is-iso-Precategory)
+  is-section-map-inv-postcomp-hom-is-iso-Precategory g =
+    ( inv
+      ( associative-comp-hom-Precategory C
+        ( f)
+        ( hom-inv-is-iso-Precategory C is-iso-f)
+        ( g))) ∙
+    ( ap
+      ( comp-hom-Precategory' C g)
+      ( is-section-hom-inv-is-iso-Precategory C is-iso-f)) ∙
+    ( left-unit-law-comp-hom-Precategory C g)
+
+  is-retraction-map-inv-postcomp-hom-is-iso-Precategory :
+    is-retraction
+      ( postcomp-hom-Precategory C f z)
+      ( map-inv-postcomp-hom-is-iso-Precategory)
+  is-retraction-map-inv-postcomp-hom-is-iso-Precategory g =
+    ( inv
+      ( associative-comp-hom-Precategory C
+        ( hom-inv-is-iso-Precategory C is-iso-f)
+        ( f)
+        ( g))) ∙
+    ( ap
+      ( comp-hom-Precategory' C g)
+      ( is-retraction-hom-inv-is-iso-Precategory C is-iso-f)) ∙
+    ( left-unit-law-comp-hom-Precategory C g)
+
+  is-equiv-postcomp-hom-is-iso-Precategory :
+    is-equiv (postcomp-hom-Precategory C f z)
+  is-equiv-postcomp-hom-is-iso-Precategory =
+    is-equiv-is-invertible
+      ( map-inv-postcomp-hom-is-iso-Precategory)
+      ( is-section-map-inv-postcomp-hom-is-iso-Precategory)
+      ( is-retraction-map-inv-postcomp-hom-is-iso-Precategory)
+
+  equiv-postcomp-hom-is-iso-Precategory :
+    hom-Precategory C z x ≃ hom-Precategory C z y
+  pr1 equiv-postcomp-hom-is-iso-Precategory =
+    postcomp-hom-Precategory C f z
+  pr2 equiv-postcomp-hom-is-iso-Precategory =
+    is-equiv-postcomp-hom-is-iso-Precategory
+
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  (f : iso-Precategory C x y)
+  (z : obj-Precategory C)
+  where
+
+  is-equiv-postcomp-hom-iso-Precategory :
+    is-equiv (postcomp-hom-Precategory C (hom-iso-Precategory C f) z)
+  is-equiv-postcomp-hom-iso-Precategory =
+    is-equiv-postcomp-hom-is-iso-Precategory C (is-iso-iso-Precategory C f) z
+
+  equiv-postcomp-hom-iso-Precategory :
+    hom-Precategory C z x ≃ hom-Precategory C z y
+  equiv-postcomp-hom-iso-Precategory =
+    equiv-postcomp-hom-is-iso-Precategory C (is-iso-iso-Precategory C f) z
 ```
 
 ### When `hom x y` is a proposition, The type of isomorphisms from `x` to `y` is a proposition
