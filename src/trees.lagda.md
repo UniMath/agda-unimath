@@ -1,7 +1,7 @@
 # Trees
 
 ```agda
-{-# OPTIONS --guardedness #-}
+{-# OPTIONS --cubical-compatible --guardedness #-}
 ```
 
 ## Files in the `trees` module

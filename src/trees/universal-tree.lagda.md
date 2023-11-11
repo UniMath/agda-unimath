@@ -1,7 +1,7 @@
 # The universal tree
 
 ```agda
-{-# OPTIONS --guardedness #-}
+{-# OPTIONS --cubical-compatible --guardedness #-}
 
 module trees.universal-tree where
 ```
