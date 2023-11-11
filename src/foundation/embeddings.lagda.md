@@ -22,6 +22,7 @@ open import foundation.truncated-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -44,13 +45,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-prop-is-emb : (f : A → B) → is-prop (is-emb f)
-  is-prop-is-emb f =
+  is-property-is-emb : (f : A → B) → is-prop (is-emb f)
+  is-property-is-emb f =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv (ap f)))
 
   is-emb-Prop : (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-emb-Prop f) = is-emb f
-  pr2 (is-emb-Prop f) = is-prop-is-emb f
+  pr2 (is-emb-Prop f) = is-property-is-emb f
 ```
 
 ### Embeddings are closed under homotopies
@@ -108,15 +109,19 @@ module _
   is-emb-comp :
     (g : B → C) (h : A → B) → is-emb g → is-emb h → is-emb (g ∘ h)
   is-emb-comp g h is-emb-g is-emb-h x y =
-    is-equiv-comp-htpy (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
+    is-equiv-left-map-triangle
+      ( ap (g ∘ h))
+      ( ap g)
+      ( ap h)
+      ( ap-comp g h)
       ( is-emb-h x y)
       ( is-emb-g (h x) (h y))
 
   abstract
-    is-emb-comp-htpy :
-      (f : A → C) (g : B → C) (h : A → B) (H : f ~ g ∘ h) → is-emb g →
-      is-emb h → is-emb f
-    is-emb-comp-htpy f g h H is-emb-g is-emb-h =
+    is-emb-left-map-triangle :
+      (f : A → C) (g : B → C) (h : A → B) (H : coherence-triangle-maps f g h) →
+      is-emb g → is-emb h → is-emb f
+    is-emb-left-map-triangle f g h H is-emb-g is-emb-h =
       is-emb-htpy H (is-emb-comp g h is-emb-g is-emb-h)
 
   comp-emb :
@@ -136,7 +141,7 @@ module _
     (g : B → C) (h : A → B) →
     is-emb g → is-emb (g ∘ h) → is-emb h
   is-emb-right-factor g h is-emb-g is-emb-gh x y =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( ap (g ∘ h))
       ( ap g)
       ( ap h)
@@ -145,11 +150,11 @@ module _
       ( is-emb-gh x y)
 
   abstract
-    is-emb-right-factor-htpy :
-      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) →
+    is-emb-top-map-triangle :
+      (f : A → C) (g : B → C) (h : A → B) (H : coherence-triangle-maps f g h) →
       is-emb g → is-emb f → is-emb h
-    is-emb-right-factor-htpy f g h H is-emb-g is-emb-f x y =
-      is-equiv-right-factor-htpy
+    is-emb-top-map-triangle f g h H is-emb-g is-emb-f x y =
+      is-equiv-top-map-triangle
         ( ap (g ∘ h))
         ( ap g)
         ( ap h)
@@ -159,10 +164,10 @@ module _
 
   abstract
     is-emb-triangle-is-equiv :
-      (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
+      (f : A → C) (g : B → C) (e : A → B) (H : coherence-triangle-maps f g e) →
       is-equiv e → is-emb g → is-emb f
     is-emb-triangle-is-equiv f g e H is-equiv-e is-emb-g =
-      is-emb-comp-htpy f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
+      is-emb-left-map-triangle f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -170,7 +175,7 @@ module _
 
   abstract
     is-emb-triangle-is-equiv' :
-      (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
+      (f : A → C) (g : B → C) (e : A → B) (H : coherence-triangle-maps f g e) →
       is-equiv e → is-emb f → is-emb g
     is-emb-triangle-is-equiv' f g e H is-equiv-e is-emb-f =
       is-emb-triangle-is-equiv g f

@@ -177,10 +177,10 @@ module _
   coherence-htpy-sequential-diagram H =
     ( n : ℕ) →
     coherence-square-homotopies
-      ( naturality-map-hom-sequential-diagram B f n)
-      ( H (succ-ℕ n) ·r map-sequential-diagram A n)
       ( map-sequential-diagram B n ·l H n)
+      ( naturality-map-hom-sequential-diagram B f n)
       ( naturality-map-hom-sequential-diagram B g n)
+      ( H (succ-ℕ n) ·r map-sequential-diagram A n)
 
   htpy-hom-sequential-diagram : UU (l1 ⊔ l2)
   htpy-hom-sequential-diagram =

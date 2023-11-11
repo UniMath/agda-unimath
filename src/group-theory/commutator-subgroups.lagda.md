@@ -146,7 +146,7 @@ module _
 ## External links
 
 - [Commutator subgroup](https://ncatlab.org/nlab/show/commutator%20subgroup) at
-  nlab
+  $n$Lab
 - [Commutator subgroup](https://www.wikidata.org/wiki/Q522216) at Wikidata
 - [Commutator subgroup](https://en.wikipedia.org/wiki/Commutator_subgroup) at
   Wikipedia

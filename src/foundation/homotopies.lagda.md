@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
 
+open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
@@ -208,12 +209,19 @@ module _
 
   compute-dependent-identification-eq-value :
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
-    (((apd f p) ∙ r) ＝ ((ap (tr B p) q) ∙ (apd g p))) ≃
-    (tr (eq-value f g) p q ＝ r)
+    coherence-square-identifications (ap (tr B p) q) (apd f p) (apd g p) r ≃
+    dependent-identification (eq-value f g) p q r
   pr1 (compute-dependent-identification-eq-value p q r) =
     map-compute-dependent-identification-eq-value f g p q r
   pr2 (compute-dependent-identification-eq-value p q r) =
     is-equiv-map-compute-dependent-identification-eq-value p q r
+
+  inv-map-compute-dependent-identification-eq-value :
+    {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+    dependent-identification (eq-value f g) p q r →
+    coherence-square-identifications (ap (tr B p) q) (apd f p) (apd g p) r
+  inv-map-compute-dependent-identification-eq-value p q r =
+    map-inv-equiv (compute-dependent-identification-eq-value p q r)
 ```
 
 ### Computing dependent-identifications in the type family `eq-value` of ordinary functions
@@ -224,23 +232,30 @@ module _
   where
 
   is-equiv-map-compute-dependent-identification-eq-value-function :
-    {x y : A} (p : x ＝ y) (q : eq-value f g x) (q' : eq-value f g y) →
-    is-equiv (map-compute-dependent-identification-eq-value-function f g p q q')
-  is-equiv-map-compute-dependent-identification-eq-value-function refl q q' =
+    {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+    is-equiv (map-compute-dependent-identification-eq-value-function f g p q r)
+  is-equiv-map-compute-dependent-identification-eq-value-function refl q r =
     is-equiv-comp
       ( inv)
-      ( concat' q' right-unit)
-      ( is-equiv-concat' q' right-unit)
-      ( is-equiv-inv q' q)
+      ( concat' r right-unit)
+      ( is-equiv-concat' r right-unit)
+      ( is-equiv-inv r q)
 
   compute-dependent-identification-eq-value-function :
-    {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
-    ( coherence-square-identifications q (ap f p) (ap g p) q') ≃
-    ( tr (eq-value f g) p q ＝ q')
-  pr1 (compute-dependent-identification-eq-value-function p q q') =
-    map-compute-dependent-identification-eq-value-function f g p q q'
-  pr2 (compute-dependent-identification-eq-value-function p q q') =
-    is-equiv-map-compute-dependent-identification-eq-value-function p q q'
+    {x y : A} (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
+    coherence-square-identifications q (ap f p) (ap g p) r ≃
+    dependent-identification (eq-value f g) p q r
+  pr1 (compute-dependent-identification-eq-value-function p q r) =
+    map-compute-dependent-identification-eq-value-function f g p q r
+  pr2 (compute-dependent-identification-eq-value-function p q r) =
+    is-equiv-map-compute-dependent-identification-eq-value-function p q r
+
+  inv-map-compute-dependent-identification-eq-value-function :
+    {x y : A} (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
+    dependent-identification (eq-value f g) p q r →
+    coherence-square-identifications q (ap f p) (ap g p) r
+  inv-map-compute-dependent-identification-eq-value-function p q r =
+    map-inv-equiv (compute-dependent-identification-eq-value-function p q r)
 ```
 
 ### Relation between between `compute-dependent-identification-eq-value-function` and `nat-htpy`

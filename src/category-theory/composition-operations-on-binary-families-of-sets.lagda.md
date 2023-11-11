@@ -10,7 +10,6 @@ module category-theory.composition-operations-on-binary-families-of-sets where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -35,7 +34,7 @@ For such operations, we can consider
 [properties](foundation-core.propositions.md) such as **associativity** and
 **unitality**.
 
-## Definition
+## Definitions
 
 ### Composition operations in binary families of sets
 
@@ -190,6 +189,9 @@ module _
 ```
 
 ## See also
+
+- [Set-magmoids](category-theory.set-magmoids.md) capture the structure of
+  composition operations on binary families of sets.
 
 - [Precategories](category-theory.precategories.md) are associative and unital
   composition operations on binary families of sets.

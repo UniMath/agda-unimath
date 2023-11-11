@@ -246,9 +246,7 @@ module _
   is-category-precategory-is-category-Full-Subprecategory is-category-C X =
     fundamental-theorem-id
       ( is-torsorial-Eq-subtype
-        ( is-torsorial-iso-Category
-          ( C , is-category-C)
-          ( inclusion-subtype P X))
+        ( is-torsorial-iso-Category (C , is-category-C) (inclusion-subtype P X))
         ( is-prop-is-in-subtype P)
         ( inclusion-subtype P X)
         ( id-iso-Precategory C)
@@ -298,3 +296,13 @@ module _
   pr1 embedding-Full-Subprecategory = inclusion-Full-Subprecategory C P
   pr2 embedding-Full-Subprecategory = is-embedding-inclusion-Full-Subprecategory
 ```
+
+## See also
+
+- [Wide subprecategories](category-theory.wide-subprecategories.md)
+
+## External links
+
+- [Full subcategories](https://1lab.dev/Cat.Functor.FullSubcategory.html) at
+  1lab
+- [full subcategory](https://ncatlab.org/nlab/show/full+subcategory) at $n$Lab

@@ -46,6 +46,7 @@ open import foundation.commuting-3-simplices-of-homotopies public
 open import foundation.commuting-3-simplices-of-maps public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
+open import foundation.commuting-pentagons-of-identifications public
 open import foundation.commuting-squares-of-homotopies public
 open import foundation.commuting-squares-of-identifications public
 open import foundation.commuting-squares-of-maps public
@@ -194,9 +195,11 @@ open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-towers public
+open import foundation.morphisms-twisted-arrows public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
@@ -246,6 +249,8 @@ open import foundation.repetitions-of-values public
 open import foundation.repetitions-sequences public
 open import foundation.replacement public
 open import foundation.retractions public
+open import foundation.retracts-of-maps public
+open import foundation.retracts-of-types public
 open import foundation.russells-paradox public
 open import foundation.sections public
 open import foundation.separated-types public

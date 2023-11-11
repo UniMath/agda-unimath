@@ -63,8 +63,7 @@ module _
   (H : Group l2) (f : iso-Group G H)
   where
 
-  is-epi-iso-Group :
-    is-epi-Group l3 G H (hom-iso-Group G H f)
+  is-epi-iso-Group : is-epi-Group l3 G H (hom-iso-Group G H f)
   is-epi-iso-Group =
     is-epi-iso-Large-Precategory Group-Large-Precategory l3 G H f
 ```

@@ -575,6 +575,60 @@ module _
     is-iso-is-equiv-precomp-hom-Large-Precategory
       ( large-precategory-Large-Category C)
       ( H)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  {f : hom-Large-Category C X Y}
+  (is-iso-f : is-iso-Large-Category C f)
+  (Z : obj-Large-Category C l3)
+  where
+
+  map-inv-precomp-hom-is-iso-Large-Category :
+    hom-Large-Category C X Z → hom-Large-Category C Y Z
+  map-inv-precomp-hom-is-iso-Large-Category =
+    precomp-hom-Large-Category C
+      ( hom-inv-is-iso-Large-Category C f is-iso-f)
+      ( Z)
+
+  is-equiv-precomp-hom-is-iso-Large-Category :
+    is-equiv (precomp-hom-Large-Category C f Z)
+  is-equiv-precomp-hom-is-iso-Large-Category =
+    is-equiv-precomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+  equiv-precomp-hom-is-iso-Large-Category :
+    hom-Large-Category C Y Z ≃ hom-Large-Category C X Z
+  equiv-precomp-hom-is-iso-Large-Category =
+    equiv-precomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  (f : iso-Large-Category C X Y)
+  (Z : obj-Large-Category C l3)
+  where
+
+  is-equiv-precomp-hom-iso-Large-Category :
+    is-equiv (precomp-hom-Large-Category C (hom-iso-Large-Category C f) Z)
+  is-equiv-precomp-hom-iso-Large-Category =
+    is-equiv-precomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
+
+  equiv-precomp-hom-iso-Large-Category :
+    hom-Large-Category C Y Z ≃ hom-Large-Category C X Z
+  equiv-precomp-hom-iso-Large-Category =
+    equiv-precomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
 ```
 
 ### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence
@@ -650,4 +704,59 @@ module _
     is-iso-is-equiv-postcomp-hom-Large-Precategory
       ( large-precategory-Large-Category C)
       ( H)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  {f : hom-Large-Category C X Y}
+  (is-iso-f : is-iso-Large-Category C f)
+  (Z : obj-Large-Category C l3)
+  where
+
+  map-inv-postcomp-hom-is-iso-Large-Category :
+    hom-Large-Category C Z Y → hom-Large-Category C Z X
+  map-inv-postcomp-hom-is-iso-Large-Category =
+    postcomp-hom-Large-Category C
+      ( Z)
+      ( hom-inv-is-iso-Large-Category C f is-iso-f)
+
+  is-equiv-postcomp-hom-is-iso-Large-Category :
+    is-equiv (postcomp-hom-Large-Category C Z f)
+  is-equiv-postcomp-hom-is-iso-Large-Category =
+    is-equiv-postcomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+  equiv-postcomp-hom-is-iso-Large-Category :
+    hom-Large-Category C Z X ≃ hom-Large-Category C Z Y
+  equiv-postcomp-hom-is-iso-Large-Category =
+    equiv-postcomp-hom-is-iso-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-iso-f)
+      ( Z)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  (f : iso-Large-Category C X Y)
+  (Z : obj-Large-Category C l3)
+  where
+
+  is-equiv-postcomp-hom-iso-Large-Category :
+    is-equiv
+      ( postcomp-hom-Large-Category C Z (hom-iso-Large-Category C f))
+  is-equiv-postcomp-hom-iso-Large-Category =
+    is-equiv-postcomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
+
+  equiv-postcomp-hom-iso-Large-Category :
+    hom-Large-Category C Z X ≃ hom-Large-Category C Z Y
+  equiv-postcomp-hom-iso-Large-Category =
+    equiv-postcomp-hom-is-iso-Large-Category C
+      ( is-iso-iso-Large-Category C f)
+      ( Z)
 ```

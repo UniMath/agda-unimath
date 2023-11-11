@@ -41,7 +41,7 @@ module _
 
 ## External links
 
-- [Reflexive graph](https://ncatlab.org/nlab/show/reflexive+graph) at nlab
+- [Reflexive graph](https://ncatlab.org/nlab/show/reflexive+graph) at $n$Lab
 - [Graph](https://www.wikidata.org/entity/Q141488) on Wikidata
 - [Directed graph](https://en.wikipedia.org/wiki/Directed_graph) at Wikipedia
 - [Reflexive graph](https://mathworld.wolfram.com/ReflexiveGraph.html) at

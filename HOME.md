@@ -8,7 +8,7 @@ typed programming language [Agda](https://github.com/agda/agda).
 <img class="invertible-image" align="right" width="300" alt="agda-unimath" src="website/images/agda-unimath-logo.svg" />
 </a>
 
-The library project was created by Elisabeth Bonnevier, Jonathan Prieto-Cubides,
+The library project was created by Elisabeth Stenholm, Jonathan Prieto-Cubides,
 and Egbert Rijke, and is also maintained by Fredrik Bakke. Our goal is to create
 an online encyclopedia of formalized mathematics containing an extensive
 curriculum of topics from a univalent point of view. We think libraries of

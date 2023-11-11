@@ -158,10 +158,10 @@ module _
         sequence-standard-sequential-limit A t)
       ( λ H →
         coherence-square-homotopies
-          ( coherence-standard-sequential-limit A s)
-          ( λ n → ap (map-tower A n) (H (succ-ℕ n)))
           ( H)
-          ( coherence-standard-sequential-limit A t))
+          ( coherence-standard-sequential-limit A s)
+          ( coherence-standard-sequential-limit A t)
+          ( λ n → ap (map-tower A n) (H (succ-ℕ n))))
 
   refl-Eq-standard-sequential-limit :
     (s : standard-sequential-limit A) → Eq-standard-sequential-limit s s

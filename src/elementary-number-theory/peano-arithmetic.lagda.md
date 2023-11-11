@@ -41,7 +41,8 @@ peano-1-ℕ = zero-ℕ
 
 ## Peano's 2nd axiom
 
-The identity relation on the natural numbers is reflexive.
+The identity relation on the natural numbers is reflexive. I.e. for every
+natural number `x`, it is true that `x ＝ x`.
 
 ```agda
 peano-axiom-2 : {l : Level} → UU l → UU l
@@ -53,7 +54,8 @@ peano-2-ℕ x = refl
 
 ### Peano's 3rd axiom
 
-The identity relation on the natural numbers is symmetric.
+The identity relation on the natural numbers is symmetric. I.e. if `x ＝ y`,
+then `y ＝ x`.
 
 ```agda
 peano-axiom-3 : {l : Level} → UU l → UU l
@@ -65,7 +67,8 @@ peano-3-ℕ x y = inv
 
 ### Peano's 4th axiom
 
-The identity relation on the natural numbers is transitive.
+The identity relation on the natural numbers is transitive. I.e. if `y ＝ z` and
+`x ＝ y`, then `x ＝ z`.
 
 ```agda
 peano-axiom-4 : {l : Level} → UU l → UU l
@@ -80,7 +83,8 @@ peano-4-ℕ x y z = concat' x
 The 5th axiom of peano's arithmetic states that for every `x` and `y`, if
 `x ＝ y` and `y` is a natural number, then `x` is a natural number. This axiom
 does not make sense in type theory, as every element by definition lives in a
-specified type.
+specified type. To even pose the question of whether two elements are equal, we
+must already know that they are elements of the same type.
 
 ### Peano's 6th axiom
 
@@ -151,7 +155,7 @@ peano-9-ℕ P = ind-ℕ {P = type-Prop ∘ P}
 
 ## External links
 
-- [Peano arithmetic](https://ncatlab.org/nlab/show/Peano+arithmetic) at nlab
+- [Peano arithmetic](https://ncatlab.org/nlab/show/Peano+arithmetic) at $n$Lab
 - [Peano axioms](https://www.wikidata.org/wiki/Q842755) at Wikidata
 - [Peano axioms](https://www.britannica.com/science/Peano-axioms) at Britannica
 - [Peano axioms](https://en.wikipedia.org/wiki/Peano_axioms) at Wikipedia

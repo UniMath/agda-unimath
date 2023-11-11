@@ -194,7 +194,7 @@ module _
       ( hom-family-natural-transformation-map-Category C D F G
         ( natural-transformation-map-natural-isomorphism-map-Category))
   coherence-square-natural-isomorphism-map-Category =
-    coherence-square-natural-transformation-map-Category C D F G
+    naturality-natural-transformation-map-Category C D F G
       ( natural-transformation-map-natural-isomorphism-map-Category)
 
   is-natural-isomorphism-map-natural-isomorphism-map-Category :

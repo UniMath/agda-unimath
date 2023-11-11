@@ -297,9 +297,7 @@ module _
 
 ### Consequences of the dependent universal property
 
-#### Characterization of homotopies between functions with domain a
-
-suspension
+#### Characterization of homotopies between functions with domain a suspension
 
 ```agda
 module _

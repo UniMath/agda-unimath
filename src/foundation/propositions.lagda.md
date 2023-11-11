@@ -11,6 +11,8 @@ open import foundation-core.propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.retractions
@@ -44,4 +46,19 @@ module _
 
   is-prop-retract-of : A retract-of B → is-prop B → is-prop A
   is-prop-retract-of = is-trunc-retract-of
+```
+
+### If a type embeds into a proposition, then it is a proposition
+
+```agda
+abstract
+  is-prop-is-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-emb f → is-prop B → is-prop A
+  is-prop-is-emb = is-trunc-is-emb neg-two-𝕋
+
+abstract
+  is-prop-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B) → is-prop B → is-prop A
+  is-prop-emb = is-trunc-emb neg-two-𝕋
 ```

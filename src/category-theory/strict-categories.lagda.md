@@ -7,15 +7,15 @@ module category-theory.strict-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
 
-open import foundation.1-types
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
@@ -30,9 +30,10 @@ open import foundation.universe-levels
 
 A **strict category** is a [precategory](category-theory.precategories.md) for
 which the type of objects form a [set](foundation-core.sets.md). Such categories
-are the set-theoretic analogue to (univalent)
-[categories](category-theory.categories.md), and have the defect that strict
-categorical constructions may generally fail to be invariant under isomorphisms.
+are the set-theoretic analogue to
+[(univalent) categories](category-theory.categories.md), and have the defect
+that strict categorical constructions may generally fail to be invariant under
+equivalences.
 
 ## Definitions
 
@@ -48,7 +49,45 @@ module _
     is-set-Prop (obj-Precategory C)
 
   is-strict-category-Precategory : UU l1
-  is-strict-category-Precategory = type-Prop is-strict-category-prop-Precategory
+  is-strict-category-Precategory =
+    type-Prop is-strict-category-prop-Precategory
+```
+
+### The predicate on preunivalent categories of being a strict category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  where
+
+  is-strict-category-prop-Preunivalent-Category : Prop l1
+  is-strict-category-prop-Preunivalent-Category =
+    is-strict-category-prop-Precategory (precategory-Preunivalent-Category C)
+
+  is-strict-category-Preunivalent-Category : UU l1
+  is-strict-category-Preunivalent-Category =
+    type-Prop is-strict-category-prop-Preunivalent-Category
+```
+
+### The predicate on categories of being a strict category
+
+We note that [(univalent) categories](category-theory.categories.md) that are
+strict form a very restricted class of strict categories where every
+[isomorphism](category-theory.isomorphisms-in-categories.md)-set is a
+[proposition](foundation-core.propositions.md). Such a category is called
+[gaunt](category-theory.gaunt-categories.md).
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  is-strict-category-prop-Category : Prop l1
+  is-strict-category-prop-Category =
+    is-strict-category-prop-Precategory (precategory-Category C)
+
+  is-strict-category-Category : UU l1
+  is-strict-category-Category = type-Prop is-strict-category-prop-Category
 ```
 
 ### The type of strict categories
@@ -162,6 +201,36 @@ module _
   pr2 preunivalent-category-Strict-Category = is-preunivalent-Strict-Category
 ```
 
+### The total hom-set of a strict category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Strict-Category l1 l2)
+  where
+
+  total-hom-Strict-Category : UU (l1 ⊔ l2)
+  total-hom-Strict-Category =
+    total-hom-Precategory (precategory-Strict-Category C)
+
+  obj-total-hom-Strict-Category :
+    total-hom-Strict-Category → obj-Strict-Category C × obj-Strict-Category C
+  obj-total-hom-Strict-Category =
+    obj-total-hom-Precategory (precategory-Strict-Category C)
+
+  is-set-total-hom-Strict-Category :
+    is-set total-hom-Strict-Category
+  is-set-total-hom-Strict-Category =
+    is-trunc-total-hom-is-trunc-obj-Precategory
+      ( precategory-Strict-Category C)
+      ( is-set-obj-Strict-Category C)
+
+  total-hom-set-Strict-Category : Set (l1 ⊔ l2)
+  total-hom-set-Strict-Category =
+    total-hom-truncated-type-is-trunc-obj-Precategory
+      ( precategory-Strict-Category C)
+      ( is-set-obj-Strict-Category C)
+```
+
 ### Equalities induce morphisms
 
 ```agda
@@ -201,3 +270,13 @@ postcomp-hom-Strict-Category C =
 
 - [Preunivalent categories](category-theory.preunivalent-categories.md) for the
   common generalization of (univalent) categories and strict categories.
+- [Gaunt categories](category-theory.gaunt-categories.md) for the common
+  intersection of (univalent) categories and strict categories.
+
+## External links
+
+- [Strict Precategories](https://1lab.dev/Cat.Strict.html#strict-precategories)
+  at 1lab
+- [strict category](https://ncatlab.org/nlab/show/strict+category) at $n$Lab
+- [Category (mathematics)](<https://en.wikipedia.org/wiki/Category_(mathematics)>)
+  at Wikipedia
