@@ -1,6 +1,8 @@
 # Isomorphisms of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.isomorphisms-monoids where
 ```
 

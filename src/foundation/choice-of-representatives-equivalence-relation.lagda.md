@@ -1,6 +1,8 @@
 # Choice of representatives for an equivalence relation
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.choice-of-representatives-equivalence-relation where
 ```
 

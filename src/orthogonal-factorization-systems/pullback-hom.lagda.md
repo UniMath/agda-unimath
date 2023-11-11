@@ -1,6 +1,8 @@
 # The pullback-hom
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.pullback-hom where
 ```
 

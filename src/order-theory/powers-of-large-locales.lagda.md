@@ -1,6 +1,8 @@
 # Powers of large locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.powers-of-large-locales where
 ```
 

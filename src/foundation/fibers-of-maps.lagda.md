@@ -1,6 +1,8 @@
 # Fibers of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.fibers-of-maps where
 
 open import foundation-core.fibers-of-maps public

@@ -1,6 +1,8 @@
 # Isomorphisms of semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.isomorphisms-semigroups where
 ```
 

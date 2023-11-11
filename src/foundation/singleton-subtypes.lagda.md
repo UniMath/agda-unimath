@@ -1,6 +1,8 @@
 # Singleton subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.singleton-subtypes where
 ```
 

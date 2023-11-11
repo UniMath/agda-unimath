@@ -1,6 +1,8 @@
 # The dependent binomial theorem for types (distributivity of dependent function types over coproduct types)
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dependent-binomial-theorem where
 ```
 

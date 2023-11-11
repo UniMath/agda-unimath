@@ -1,6 +1,8 @@
 # Boolean rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.boolean-rings where
 ```
 

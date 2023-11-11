@@ -1,6 +1,8 @@
 # Homomorphisms of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.homomorphisms-semirings where
 ```
 

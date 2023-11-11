@@ -1,6 +1,8 @@
 # Pullbacks
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.pullbacks where
 ```
 

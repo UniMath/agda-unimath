@@ -1,6 +1,8 @@
 # Trivial groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.trivial-groups where
 ```
 

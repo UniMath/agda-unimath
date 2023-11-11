@@ -1,6 +1,8 @@
 # The rational numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.rational-numbers where
 ```
 

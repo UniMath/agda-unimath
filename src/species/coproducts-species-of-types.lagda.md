@@ -1,6 +1,8 @@
 # Coproducts of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.coproducts-species-of-types where
 ```
 

@@ -1,6 +1,8 @@
 # Implicit function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.implicit-function-types where
 ```
 

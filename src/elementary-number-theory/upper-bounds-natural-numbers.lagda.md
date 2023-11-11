@@ -1,6 +1,8 @@
 # Upper bounds for type families over the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.upper-bounds-natural-numbers where
 ```
 

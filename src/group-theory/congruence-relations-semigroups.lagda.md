@@ -1,6 +1,8 @@
 # Congruence relations on semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.congruence-relations-semigroups where
 ```
 

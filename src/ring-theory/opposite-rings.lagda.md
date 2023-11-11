@@ -1,6 +1,8 @@
 # Opposite rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.opposite-rings where
 ```
 

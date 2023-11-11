@@ -1,6 +1,8 @@
 # The poset of right ideals of a ring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.poset-of-right-ideals-rings where
 ```
 

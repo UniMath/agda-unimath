@@ -1,6 +1,8 @@
 # Functoriality of the list operation
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.functoriality-lists where
 ```
 

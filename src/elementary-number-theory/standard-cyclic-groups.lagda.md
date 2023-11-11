@@ -1,6 +1,8 @@
 # The standard cyclic groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.standard-cyclic-groups where
 ```
 

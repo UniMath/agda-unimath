@@ -1,6 +1,8 @@
 # Subsets of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.subsets-abelian-groups where
 ```
 

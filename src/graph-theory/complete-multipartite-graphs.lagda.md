@@ -1,6 +1,8 @@
 # Complete multipartite graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.complete-multipartite-graphs where
 ```
 

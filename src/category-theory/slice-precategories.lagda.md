@@ -1,6 +1,8 @@
 # Slice precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.slice-precategories where
 ```
 

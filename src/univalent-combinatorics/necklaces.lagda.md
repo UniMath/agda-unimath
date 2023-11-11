@@ -1,6 +1,8 @@
 # Necklaces
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.necklaces where
 ```
 

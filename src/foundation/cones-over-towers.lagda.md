@@ -1,6 +1,8 @@
 # Cones over towers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.cones-over-towers where
 ```
 

@@ -1,6 +1,8 @@
 # Based strong induction for the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.based-strong-induction-natural-numbers where
 ```
 

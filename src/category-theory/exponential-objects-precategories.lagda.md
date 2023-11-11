@@ -1,6 +1,8 @@
 # Exponential objects in precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.exponential-objects-precategories where
 ```
 

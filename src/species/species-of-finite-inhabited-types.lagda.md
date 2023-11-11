@@ -1,6 +1,8 @@
 # Species of finite inhabited types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.species-of-finite-inhabited-types where
 ```
 

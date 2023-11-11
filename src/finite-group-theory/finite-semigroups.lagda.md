@@ -1,6 +1,8 @@
 # Finite semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.finite-semigroups where
 ```
 

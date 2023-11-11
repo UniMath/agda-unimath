@@ -1,6 +1,8 @@
 # Wedges of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.wedges-of-pointed-types where
 ```
 

@@ -1,6 +1,8 @@
 # Addition on the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.addition-natural-numbers where
 ```
 

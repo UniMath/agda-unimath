@@ -1,6 +1,8 @@
 # Equality of coproduct types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equality-coproduct-types where
 ```
 

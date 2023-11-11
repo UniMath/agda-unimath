@@ -1,6 +1,8 @@
 # Subsets of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.subsets-monoids where
 ```
 

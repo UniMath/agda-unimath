@@ -1,6 +1,8 @@
 # Functoriality of matrices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.functoriality-matrices where
 ```
 

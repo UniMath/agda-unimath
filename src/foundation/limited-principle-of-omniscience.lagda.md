@@ -1,6 +1,8 @@
 # The limited principle of omniscience
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.limited-principle-of-omniscience where
 ```
 

@@ -1,6 +1,8 @@
 # The group of multiplicative units of a ring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.groups-of-units-rings where
 ```
 

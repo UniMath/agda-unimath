@@ -1,6 +1,8 @@
 # Characteristic subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.characteristic-subgroups where
 ```
 

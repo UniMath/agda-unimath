@@ -1,6 +1,8 @@
 # Prime ideals of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.prime-ideals-commutative-rings where
 ```
 

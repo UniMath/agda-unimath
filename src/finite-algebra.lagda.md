@@ -1,5 +1,9 @@
 # Finite algebra
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the finite algebra folder
 
 ```agda

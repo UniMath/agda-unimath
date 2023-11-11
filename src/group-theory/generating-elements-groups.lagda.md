@@ -1,6 +1,8 @@
 # Generating elements of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.generating-elements-groups where
 ```
 

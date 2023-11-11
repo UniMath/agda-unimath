@@ -1,6 +1,8 @@
 # Decidable subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.decidable-subtypes where
 ```
 

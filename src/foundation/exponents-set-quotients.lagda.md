@@ -1,7 +1,7 @@
 # Exponents of set quotients
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module foundation.exponents-set-quotients where
 ```

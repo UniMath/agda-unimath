@@ -1,6 +1,8 @@
 # The universal property of identity systems
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-identity-systems where
 ```
 

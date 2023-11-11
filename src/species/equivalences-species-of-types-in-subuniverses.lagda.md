@@ -1,6 +1,8 @@
 # Equivalences of species of types in subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.equivalences-species-of-types-in-subuniverses where
 ```
 

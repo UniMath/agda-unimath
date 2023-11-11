@@ -1,6 +1,8 @@
 # Upper bounds in large posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.upper-bounds-large-posets where
 ```
 

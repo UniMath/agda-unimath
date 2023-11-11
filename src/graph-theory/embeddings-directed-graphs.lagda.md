@@ -1,6 +1,8 @@
 # Embeddings of directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.embeddings-directed-graphs where
 ```
 

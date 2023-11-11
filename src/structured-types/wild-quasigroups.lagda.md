@@ -1,6 +1,8 @@
 # Wild quasigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.wild-quasigroups where
 ```
 

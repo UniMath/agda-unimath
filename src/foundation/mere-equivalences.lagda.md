@@ -1,6 +1,8 @@
 # Mere equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.mere-equivalences where
 ```
 

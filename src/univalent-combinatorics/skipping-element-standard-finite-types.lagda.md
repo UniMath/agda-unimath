@@ -1,6 +1,8 @@
 # Skipping elements in standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.skipping-element-standard-finite-types where
 ```
 

@@ -1,6 +1,8 @@
 # The flattening lemma for coequalizers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.flattening-lemma-coequalizers where
 ```
 

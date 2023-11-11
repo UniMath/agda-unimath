@@ -1,6 +1,8 @@
 # Pushouts
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.pushouts where
 ```
 

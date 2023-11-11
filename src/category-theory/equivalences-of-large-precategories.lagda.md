@@ -1,6 +1,8 @@
 # Equivalences between large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.equivalences-of-large-precategories where
 ```
 

@@ -1,6 +1,8 @@
 # Involutive types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.involutive-types where
 ```
 

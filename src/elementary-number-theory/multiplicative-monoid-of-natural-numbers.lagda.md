@@ -1,6 +1,8 @@
 # The multiplicative monoid of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.multiplicative-monoid-of-natural-numbers where
 ```
 

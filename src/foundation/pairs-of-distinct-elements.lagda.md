@@ -1,6 +1,8 @@
 # Pairs of distinct elements
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.pairs-of-distinct-elements where
 ```
 

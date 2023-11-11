@@ -1,6 +1,8 @@
 # Retracts of the type of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.retracts-of-natural-numbers where
 ```
 

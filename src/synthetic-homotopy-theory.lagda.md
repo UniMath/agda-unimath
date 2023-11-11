@@ -1,5 +1,9 @@
 # Synthetic homotopy theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the synthetic homotopy theory folder
 
 ```agda

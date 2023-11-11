@@ -1,6 +1,8 @@
 # Suspensions of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.suspensions-of-types where
 ```
 

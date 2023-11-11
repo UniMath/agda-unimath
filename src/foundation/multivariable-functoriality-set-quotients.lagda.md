@@ -1,6 +1,8 @@
 # Multivariable functoriality of set quotients
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.multivariable-functoriality-set-quotients where
 ```
 

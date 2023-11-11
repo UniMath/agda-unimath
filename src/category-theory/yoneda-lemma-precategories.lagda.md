@@ -1,6 +1,8 @@
 # The Yoneda lemma for precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.yoneda-lemma-precategories where
 ```
 

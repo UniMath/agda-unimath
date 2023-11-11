@@ -1,6 +1,8 @@
 # Subsets of commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.subsets-commutative-monoids where
 ```
 

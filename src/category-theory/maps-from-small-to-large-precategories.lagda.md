@@ -1,6 +1,8 @@
 # Maps from small to large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.maps-from-small-to-large-precategories where
 ```
 

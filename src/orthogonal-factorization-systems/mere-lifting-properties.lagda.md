@@ -1,6 +1,8 @@
 # Mere lifting properties
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.mere-lifting-properties where
 ```
 

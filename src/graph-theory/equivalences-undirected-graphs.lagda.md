@@ -1,6 +1,8 @@
 # Equivalences of undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.equivalences-undirected-graphs where
 ```
 

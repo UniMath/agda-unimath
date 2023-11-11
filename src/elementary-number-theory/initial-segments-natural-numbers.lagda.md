@@ -1,6 +1,8 @@
 # Initial segments of the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.initial-segments-natural-numbers where
 ```
 

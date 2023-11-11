@@ -1,6 +1,8 @@
 # The type theoretic principle of choice
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-theoretic-principle-of-choice where
 ```
 

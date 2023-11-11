@@ -1,6 +1,8 @@
 # Involutions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.involutions where
 ```
 

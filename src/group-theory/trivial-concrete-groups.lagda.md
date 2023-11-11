@@ -1,6 +1,8 @@
 # Trivial concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.trivial-concrete-groups where
 ```
 

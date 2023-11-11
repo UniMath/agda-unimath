@@ -1,6 +1,8 @@
 # Surjective maps between finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.surjective-maps where
 
 open import foundation.surjective-maps public

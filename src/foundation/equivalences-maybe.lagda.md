@@ -1,6 +1,8 @@
 # Equivalences on `Maybe`
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equivalences-maybe where
 ```
 

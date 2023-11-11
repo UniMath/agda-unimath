@@ -1,6 +1,8 @@
 # Trivial Σ-decompositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.trivial-sigma-decompositions where
 ```
 

@@ -1,6 +1,8 @@
 # Functional correspondences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functional-correspondences where
 ```
 

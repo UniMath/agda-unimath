@@ -1,6 +1,8 @@
 # Modal operators
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.modal-operators where
 ```
 

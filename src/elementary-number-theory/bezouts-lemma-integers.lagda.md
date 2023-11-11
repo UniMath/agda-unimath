@@ -1,6 +1,8 @@
 # Bezout's lemma in the integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.bezouts-lemma-integers where
 ```
 

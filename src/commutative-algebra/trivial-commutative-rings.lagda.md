@@ -1,6 +1,8 @@
 # Trivial commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.trivial-commutative-rings where
 ```
 

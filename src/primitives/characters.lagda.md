@@ -1,6 +1,8 @@
 # Characters
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module primitives.characters where
 ```
 

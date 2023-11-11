@@ -1,6 +1,8 @@
 # Fibers of enriched directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.fibers-enriched-directed-trees where
 ```
 

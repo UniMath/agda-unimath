@@ -1,6 +1,8 @@
 # Formalization of the Symmetry book - 26 id pushout
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.26-id-pushout where
 ```
 

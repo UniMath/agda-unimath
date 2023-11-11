@@ -1,6 +1,8 @@
 # Normal cores of subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.normal-cores-subgroups where
 ```
 

@@ -1,6 +1,8 @@
 # Commuting elements of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.commuting-elements-groups where
 ```
 

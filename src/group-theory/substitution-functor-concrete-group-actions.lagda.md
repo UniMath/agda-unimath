@@ -1,6 +1,8 @@
 # The substitution functor of concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.substitution-functor-concrete-group-actions where
 ```
 

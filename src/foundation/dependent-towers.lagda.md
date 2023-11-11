@@ -1,6 +1,8 @@
 # Dependent towers of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dependent-towers where
 ```
 

@@ -1,6 +1,8 @@
 # The universal property of propositional truncations with respect to sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-propositional-truncation-into-sets where
 ```
 

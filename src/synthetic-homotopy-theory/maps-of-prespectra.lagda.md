@@ -1,6 +1,8 @@
 # Maps of prespectra
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.maps-of-prespectra where
 ```
 

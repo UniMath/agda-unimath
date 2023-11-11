@@ -1,6 +1,8 @@
 # Floats
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module primitives.floats where
 ```
 

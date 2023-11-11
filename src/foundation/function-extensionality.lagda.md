@@ -1,6 +1,8 @@
 # Function extensionality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.function-extensionality where
 ```
 

@@ -1,7 +1,7 @@
 # Multiplication on the rational numbers
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module elementary-number-theory.multiplication-rational-numbers where
 ```

@@ -1,6 +1,8 @@
 # Contravariant pushforwards of concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.contravariant-pushforward-concrete-group-actions where
 ```
 

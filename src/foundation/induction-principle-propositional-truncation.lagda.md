@@ -1,6 +1,8 @@
 # The induction principle for propositional truncation
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.induction-principle-propositional-truncation where
 ```
 

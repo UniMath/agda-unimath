@@ -1,6 +1,8 @@
 # The large locale of propositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.large-locale-of-propositions where
 ```
 

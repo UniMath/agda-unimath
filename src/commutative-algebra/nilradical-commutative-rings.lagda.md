@@ -1,6 +1,8 @@
 # Nilradical of a commutative ring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.nilradical-commutative-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Symmetric difference of finite subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.symmetric-difference where
 
 open import foundation.symmetric-difference public

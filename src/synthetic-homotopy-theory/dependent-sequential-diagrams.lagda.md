@@ -1,6 +1,8 @@
 # Dependent sequential diagrams
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.dependent-sequential-diagrams where
 ```
 

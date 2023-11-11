@@ -1,6 +1,8 @@
 # Products of equivalence relataions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.products-equivalence-relations where
 ```
 

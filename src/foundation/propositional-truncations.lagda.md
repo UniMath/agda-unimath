@@ -1,6 +1,8 @@
 # Propositional truncations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.propositional-truncations where
 ```
 

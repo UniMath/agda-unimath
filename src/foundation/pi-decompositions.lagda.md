@@ -1,7 +1,7 @@
 # Π-decompositions of types
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module foundation.pi-decompositions where
 ```

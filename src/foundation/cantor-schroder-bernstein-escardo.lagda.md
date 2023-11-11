@@ -1,6 +1,8 @@
 # The Cantor–Schröder–Bernstein–Escardó theorem
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.cantor-schroder-bernstein-escardo where
 ```
 

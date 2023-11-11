@@ -1,6 +1,8 @@
 # Natural isomorphisms between functors between large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.natural-isomorphisms-functors-large-precategories where
 ```
 

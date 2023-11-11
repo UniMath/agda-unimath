@@ -1,6 +1,8 @@
 # Transporting ring structures along isomorphisms of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module
   ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups
   where

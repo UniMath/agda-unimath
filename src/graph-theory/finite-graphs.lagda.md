@@ -1,6 +1,8 @@
 # Finite graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.finite-graphs where
 ```
 

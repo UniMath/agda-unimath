@@ -1,6 +1,8 @@
 # The based induction principle of the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.based-induction-natural-numbers where
 ```
 

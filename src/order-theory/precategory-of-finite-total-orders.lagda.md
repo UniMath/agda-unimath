@@ -1,6 +1,8 @@
 # The precategory of finite total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.precategory-of-finite-total-orders where
 ```
 

@@ -1,6 +1,8 @@
 # Cores of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.cores-monoids where
 ```
 

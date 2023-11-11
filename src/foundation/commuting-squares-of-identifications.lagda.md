@@ -1,6 +1,8 @@
 # Commuting squares of identifications
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.commuting-squares-of-identifications where
 ```
 

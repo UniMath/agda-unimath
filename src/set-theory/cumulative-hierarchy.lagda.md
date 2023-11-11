@@ -1,6 +1,8 @@
 # Cumulative hierarchy
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module set-theory.cumulative-hierarchy where
 ```
 

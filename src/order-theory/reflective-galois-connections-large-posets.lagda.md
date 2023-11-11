@@ -1,6 +1,8 @@
 # Reflective Galois connections between large posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.reflective-galois-connections-large-posets where
 ```
 

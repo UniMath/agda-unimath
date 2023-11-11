@@ -1,6 +1,8 @@
 # Symmetric H-spaces
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.symmetric-h-spaces where
 ```
 

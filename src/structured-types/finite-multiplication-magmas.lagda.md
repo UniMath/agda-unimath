@@ -1,6 +1,8 @@
 # Finite multiplication in magmas
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.finite-multiplication-magmas where
 ```
 

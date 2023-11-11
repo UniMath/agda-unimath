@@ -1,6 +1,8 @@
 # Decidable subtypes of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.decidable-subtypes where
 
 open import foundation.decidable-subtypes public

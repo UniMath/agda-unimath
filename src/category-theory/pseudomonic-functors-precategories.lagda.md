@@ -1,6 +1,8 @@
 # Pseudomonic functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.pseudomonic-functors-precategories where
 ```
 

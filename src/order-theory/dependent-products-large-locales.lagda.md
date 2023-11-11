@@ -1,6 +1,8 @@
 # Dependent products of large locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.dependent-products-large-locales where
 ```
 

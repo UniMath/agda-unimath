@@ -1,6 +1,8 @@
 # The binomial theorem for rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.binomial-theorem-rings where
 ```
 

@@ -1,6 +1,8 @@
 # The precategory of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.precategory-of-semirings where
 ```
 

@@ -1,6 +1,8 @@
 # Equivalences of concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.equivalences-concrete-group-actions where
 ```
 

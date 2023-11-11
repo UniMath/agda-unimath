@@ -1,6 +1,8 @@
 # Constant maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.constant-maps where
 
 open import foundation-core.constant-maps public

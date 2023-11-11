@@ -1,6 +1,8 @@
 # Baire space
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module set-theory.baire-space where
 ```
 

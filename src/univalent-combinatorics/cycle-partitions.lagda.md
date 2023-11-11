@@ -1,6 +1,8 @@
 # Cycle partitions of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.cycle-partitions where
 ```
 

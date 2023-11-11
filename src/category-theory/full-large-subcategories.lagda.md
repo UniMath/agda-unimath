@@ -1,6 +1,8 @@
 # Full large subcategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.full-large-subcategories where
 ```
 

@@ -1,6 +1,8 @@
 # Free concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.free-concrete-group-actions where
 ```
 

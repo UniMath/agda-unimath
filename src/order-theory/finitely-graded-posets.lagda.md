@@ -1,6 +1,8 @@
 # Finitely graded posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.finitely-graded-posets where
 ```
 

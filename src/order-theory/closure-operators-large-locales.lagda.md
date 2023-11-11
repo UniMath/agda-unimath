@@ -1,6 +1,8 @@
 # Closure operators on large locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.closure-operators-large-locales where
 ```
 

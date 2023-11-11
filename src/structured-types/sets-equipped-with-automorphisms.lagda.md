@@ -1,6 +1,8 @@
 # Sets equipped with automorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.sets-equipped-with-automorphisms where
 ```
 

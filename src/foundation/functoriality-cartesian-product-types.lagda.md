@@ -1,6 +1,8 @@
 # Functoriality of cartesian product types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-cartesian-product-types where
 ```
 

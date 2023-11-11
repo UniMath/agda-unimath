@@ -1,6 +1,8 @@
 # The Zariski locale
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.zariski-locale where
 ```
 

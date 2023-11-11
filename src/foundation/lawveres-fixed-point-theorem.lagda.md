@@ -1,6 +1,8 @@
 # Lawvere's fixed point theorem
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.lawveres-fixed-point-theorem where
 ```
 

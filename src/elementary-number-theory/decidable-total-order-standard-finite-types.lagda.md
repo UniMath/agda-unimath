@@ -1,6 +1,8 @@
 # The decidable total order of a standard finite type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.decidable-total-order-standard-finite-types where
 ```
 

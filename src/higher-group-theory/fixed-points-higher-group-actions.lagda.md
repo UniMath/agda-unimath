@@ -1,6 +1,8 @@
 # Fixed points of higher group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.fixed-points-higher-group-actions where
 ```
 

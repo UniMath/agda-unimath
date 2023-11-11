@@ -1,6 +1,8 @@
 # Hatcher's acyclic type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.hatchers-acyclic-type where
 ```
 

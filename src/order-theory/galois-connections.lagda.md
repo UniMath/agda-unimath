@@ -1,6 +1,8 @@
 # Galois connections
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.galois-connections where
 ```
 

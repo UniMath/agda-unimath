@@ -1,6 +1,8 @@
 # The congruence relations on the integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.congruence-integers where
 ```
 

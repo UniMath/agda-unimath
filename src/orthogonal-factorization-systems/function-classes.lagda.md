@@ -1,6 +1,8 @@
 # Function classes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.function-classes where
 ```
 

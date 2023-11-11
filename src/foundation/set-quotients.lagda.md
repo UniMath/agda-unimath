@@ -1,6 +1,8 @@
 # Set quotients
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.set-quotients where
 ```
 

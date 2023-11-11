@@ -1,6 +1,8 @@
 # Dependent products of H-spaces
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.dependent-products-h-spaces where
 ```
 

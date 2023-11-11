@@ -1,6 +1,8 @@
 # Unit similarity on the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.unit-similarity-standard-finite-types where
 ```
 

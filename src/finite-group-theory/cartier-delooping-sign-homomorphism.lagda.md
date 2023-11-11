@@ -1,7 +1,7 @@
 # Cartier's delooping of the sign homomorphism
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module finite-group-theory.cartier-delooping-sign-homomorphism where
 ```

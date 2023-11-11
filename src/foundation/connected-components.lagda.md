@@ -1,6 +1,8 @@
 # Connected components of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.connected-components where
 ```
 

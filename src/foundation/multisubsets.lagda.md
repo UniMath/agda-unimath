@@ -1,6 +1,8 @@
 # Multisubsets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.multisubsets where
 ```
 

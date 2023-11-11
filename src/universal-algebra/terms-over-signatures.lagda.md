@@ -1,6 +1,8 @@
 # Terms over signatures
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.terms-over-signatures where
 ```
 

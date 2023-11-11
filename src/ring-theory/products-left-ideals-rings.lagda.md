@@ -1,6 +1,8 @@
 # Products of left ideals of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.products-left-ideals-rings where
 ```
 

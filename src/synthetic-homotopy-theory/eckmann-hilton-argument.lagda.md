@@ -1,6 +1,8 @@
 # The Eckmann-Hilton Argument
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.eckmann-hilton-argument where
 ```
 

@@ -1,6 +1,8 @@
 # Surjective group homomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.surjective-group-homomorphisms where
 ```
 

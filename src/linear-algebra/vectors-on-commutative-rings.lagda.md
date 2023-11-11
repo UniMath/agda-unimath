@@ -1,6 +1,8 @@
 # Vectors on commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.vectors-on-commutative-rings where
 ```
 

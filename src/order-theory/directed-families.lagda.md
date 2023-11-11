@@ -1,6 +1,8 @@
 # Directed families in posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.directed-families where
 ```
 

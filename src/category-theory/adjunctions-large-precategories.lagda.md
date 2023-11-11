@@ -1,6 +1,8 @@
 # Adjunctions between large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.adjunctions-large-precategories where
 ```
 

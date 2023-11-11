@@ -1,6 +1,8 @@
 # Logical equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.logical-equivalences where
 ```
 

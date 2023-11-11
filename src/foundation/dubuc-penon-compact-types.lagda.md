@@ -1,6 +1,8 @@
 # Dubuc-Penon compact types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dubuc-penon-compact-types where
 ```
 

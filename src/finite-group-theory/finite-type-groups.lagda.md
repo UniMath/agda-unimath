@@ -1,7 +1,7 @@
 # The group of n-element types
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module finite-group-theory.finite-type-groups where
 ```

@@ -1,5 +1,9 @@
 # Linear algebra
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the linear algebra folder
 
 ```agda

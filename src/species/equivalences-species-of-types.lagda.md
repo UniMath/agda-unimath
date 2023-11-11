@@ -1,6 +1,8 @@
 # Equivalences of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.equivalences-species-of-types where
 ```
 

@@ -1,6 +1,8 @@
 # The principle of omniscience
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.principle-of-omniscience where
 ```
 

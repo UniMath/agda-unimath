@@ -1,6 +1,8 @@
 # Reflecting maps of undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.reflecting-maps-undirected-graphs where
 ```
 

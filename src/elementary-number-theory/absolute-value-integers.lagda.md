@@ -1,6 +1,8 @@
 # The absolute value function on the integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.absolute-value-integers where
 ```
 

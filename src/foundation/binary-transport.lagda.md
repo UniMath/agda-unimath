@@ -1,6 +1,8 @@
 # Binary transport
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.binary-transport where
 ```
 

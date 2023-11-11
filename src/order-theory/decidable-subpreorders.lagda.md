@@ -1,6 +1,8 @@
 # Decidable subpreorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.decidable-subpreorders where
 ```
 

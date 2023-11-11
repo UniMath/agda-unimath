@@ -1,6 +1,8 @@
 # The standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.standard-finite-types where
 ```
 

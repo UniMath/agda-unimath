@@ -1,6 +1,8 @@
 # Constant matrices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.constant-matrices where
 ```
 

@@ -1,6 +1,8 @@
 # Equality in finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.equality-finite-types where
 ```
 

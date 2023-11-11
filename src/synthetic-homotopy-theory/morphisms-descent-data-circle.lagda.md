@@ -1,6 +1,8 @@
 # Morphisms of descent data of the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.morphisms-descent-data-circle where
 ```
 

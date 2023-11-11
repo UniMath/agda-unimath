@@ -1,6 +1,8 @@
 # The universal property of the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.universal-property-standard-finite-types where
 ```
 

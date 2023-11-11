@@ -1,6 +1,8 @@
 # Equivalence relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.equivalence-relations where
 ```
 

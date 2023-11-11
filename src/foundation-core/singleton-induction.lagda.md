@@ -1,6 +1,8 @@
 # Singleton induction
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.singleton-induction where
 ```
 

@@ -1,6 +1,8 @@
 # `2`-element types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.2-element-types where
 ```
 

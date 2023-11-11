@@ -1,6 +1,8 @@
 # Cycle index series of species
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.cycle-index-series-species-of-types where
 ```
 

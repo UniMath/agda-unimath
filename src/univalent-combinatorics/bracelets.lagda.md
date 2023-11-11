@@ -1,6 +1,8 @@
 # Bracelets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.bracelets where
 ```
 

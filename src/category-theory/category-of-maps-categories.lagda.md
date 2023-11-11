@@ -1,6 +1,8 @@
 # The category of maps and natural transformations between two categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.category-of-maps-categories where
 ```
 

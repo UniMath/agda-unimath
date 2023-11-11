@@ -1,6 +1,8 @@
 # Sections
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.sections where
 
 open import foundation-core.sections public

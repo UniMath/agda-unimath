@@ -1,6 +1,8 @@
 # The Jacobi symbol
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.jacobi-symbol where
 ```
 

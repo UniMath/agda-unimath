@@ -1,6 +1,8 @@
 # Decidability of dependent function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.decidable-dependent-function-types where
 ```
 

@@ -1,6 +1,8 @@
 # Parity of the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.parity-natural-numbers where
 ```
 

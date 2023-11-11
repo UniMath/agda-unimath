@@ -1,6 +1,8 @@
 # The binomial coefficients
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.binomial-coefficients where
 ```
 

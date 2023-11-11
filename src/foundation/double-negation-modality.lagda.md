@@ -1,6 +1,8 @@
 # The double negation modality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.double-negation-modality where
 ```
 

@@ -1,6 +1,8 @@
 # Cartesian products of semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.cartesian-products-semigroups where
 ```
 

@@ -1,6 +1,8 @@
 # The group of integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.group-of-integers where
 ```
 

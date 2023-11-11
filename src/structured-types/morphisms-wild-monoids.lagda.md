@@ -1,6 +1,8 @@
 # Morphisms of wild monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.morphisms-wild-monoids where
 ```
 

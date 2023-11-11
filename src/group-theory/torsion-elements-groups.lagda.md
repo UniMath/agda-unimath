@@ -1,6 +1,8 @@
 # Torsion elements of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.torsion-elements-groups where
 ```
 

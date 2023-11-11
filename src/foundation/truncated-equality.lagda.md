@@ -1,6 +1,8 @@
 # Truncated equality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.truncated-equality where
 ```
 

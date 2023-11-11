@@ -1,6 +1,8 @@
 # Congruences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.congruences where
 ```
 

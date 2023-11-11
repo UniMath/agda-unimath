@@ -1,6 +1,8 @@
 # Global choice
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.global-choice where
 ```
 

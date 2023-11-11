@@ -1,6 +1,8 @@
 # The abstract quaternion group of order `8`
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.abstract-quaternion-group where
 ```
 

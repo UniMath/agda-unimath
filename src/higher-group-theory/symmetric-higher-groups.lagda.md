@@ -1,6 +1,8 @@
 # Symmetric higher groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.symmetric-higher-groups where
 ```
 

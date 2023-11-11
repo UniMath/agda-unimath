@@ -1,6 +1,8 @@
 # Connected maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.connected-maps where
 ```
 

@@ -1,6 +1,8 @@
 # Dependent products large preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.dependent-products-large-preorders where
 ```
 

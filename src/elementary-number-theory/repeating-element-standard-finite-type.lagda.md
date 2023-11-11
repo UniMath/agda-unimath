@@ -1,6 +1,8 @@
 # Repeating an element in a standard finite type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.repeating-element-standard-finite-type where
 ```
 

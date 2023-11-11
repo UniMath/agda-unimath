@@ -1,6 +1,8 @@
 # Standard finite pruned trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.standard-finite-pruned-trees where
 ```
 

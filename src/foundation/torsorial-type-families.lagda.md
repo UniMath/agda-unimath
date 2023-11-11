@@ -1,6 +1,8 @@
 # Torsorial type families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.torsorial-type-families where
 
 open import foundation-core.torsorial-type-families public

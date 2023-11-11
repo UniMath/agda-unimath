@@ -1,6 +1,8 @@
 # Terminal objects in a precategory
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.terminal-objects-precategories where
 ```
 

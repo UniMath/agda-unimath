@@ -1,6 +1,8 @@
 # Morphisms of cospans
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.morphisms-cospans where
 ```
 

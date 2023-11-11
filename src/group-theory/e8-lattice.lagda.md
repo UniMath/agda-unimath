@@ -1,6 +1,8 @@
 # The `E₈`-lattice
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.e8-lattice where
 ```
 

@@ -1,6 +1,8 @@
 # The category of cyclic rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.category-of-cyclic-rings where
 ```
 

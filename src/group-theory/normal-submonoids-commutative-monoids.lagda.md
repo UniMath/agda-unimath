@@ -1,6 +1,8 @@
 # Normal submonoids of commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.normal-submonoids-commutative-monoids where
 ```
 

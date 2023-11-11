@@ -1,6 +1,8 @@
 # Homomorphisms of groups equipped with normal subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.homomorphisms-groups-equipped-with-normal-subgroups where
 ```
 

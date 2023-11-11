@@ -1,6 +1,8 @@
 # Multiset-indexed dependent products of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.multiset-indexed-dependent-products-of-types where
 ```
 

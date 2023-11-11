@@ -1,6 +1,8 @@
 # The precategory of total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.precategory-of-total-orders where
 ```
 

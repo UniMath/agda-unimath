@@ -1,6 +1,8 @@
 # Dependent products of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.dependent-products-commutative-rings where
 ```
 

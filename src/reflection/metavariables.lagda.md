@@ -1,6 +1,8 @@
 # Metavariables
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.metavariables where
 ```
 

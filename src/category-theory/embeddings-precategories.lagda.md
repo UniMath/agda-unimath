@@ -1,6 +1,8 @@
 # Embeddings between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.embeddings-precategories where
 ```
 

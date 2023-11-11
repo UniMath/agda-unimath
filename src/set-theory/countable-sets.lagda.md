@@ -1,6 +1,8 @@
 # Countable sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module set-theory.countable-sets where
 ```
 

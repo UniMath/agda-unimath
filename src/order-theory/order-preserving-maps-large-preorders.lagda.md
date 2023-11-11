@@ -1,6 +1,8 @@
 # Order preserving maps between large preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.order-preserving-maps-large-preorders where
 ```
 

@@ -1,6 +1,8 @@
 # Equality in the fibers of a map
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equality-fibers-of-maps where
 ```
 

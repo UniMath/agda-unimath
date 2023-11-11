@@ -1,6 +1,8 @@
 # Frames
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.frames where
 ```
 

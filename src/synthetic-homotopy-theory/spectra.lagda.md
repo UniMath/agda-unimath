@@ -1,6 +1,8 @@
 # Spectra
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.spectra where
 ```
 

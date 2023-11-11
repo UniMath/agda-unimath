@@ -1,6 +1,8 @@
 # Dependent epimorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dependent-epimorphisms where
 ```
 

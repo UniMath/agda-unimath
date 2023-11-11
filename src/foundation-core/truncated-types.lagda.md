@@ -1,6 +1,8 @@
 # Truncated types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.truncated-types where
 ```
 

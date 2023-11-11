@@ -1,6 +1,8 @@
 # Fibers of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.fibers-of-maps where
 ```
 

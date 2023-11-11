@@ -1,6 +1,8 @@
 # The nilradical of a commutative semiring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.nilradicals-commutative-semirings where
 ```
 

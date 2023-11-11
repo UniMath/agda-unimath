@@ -1,6 +1,8 @@
 # The elementhood relation on W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.elementhood-relation-w-types where
 ```
 

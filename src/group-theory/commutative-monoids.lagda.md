@@ -1,6 +1,8 @@
 # Commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.commutative-monoids where
 ```
 

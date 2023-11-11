@@ -1,6 +1,8 @@
 # Maps fibered over a map
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.fibered-maps where
 ```
 

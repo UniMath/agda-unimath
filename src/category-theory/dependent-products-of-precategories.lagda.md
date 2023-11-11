@@ -1,6 +1,8 @@
 # Dependent products of precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.dependent-products-of-precategories where
 ```
 

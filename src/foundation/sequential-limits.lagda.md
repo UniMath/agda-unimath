@@ -1,6 +1,8 @@
 # Sequential limits
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.sequential-limits where
 ```
 

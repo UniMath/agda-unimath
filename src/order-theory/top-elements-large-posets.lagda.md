@@ -1,6 +1,8 @@
 # Top elements in large posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.top-elements-large-posets where
 ```
 

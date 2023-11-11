@@ -1,6 +1,8 @@
 # Subterminal types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.subterminal-types where
 ```
 

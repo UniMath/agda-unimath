@@ -1,6 +1,8 @@
 # Dependent descent for the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.dependent-descent-circle where
 ```
 

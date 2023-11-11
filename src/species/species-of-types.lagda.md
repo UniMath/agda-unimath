@@ -1,6 +1,8 @@
 # Species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.species-of-types where
 ```
 

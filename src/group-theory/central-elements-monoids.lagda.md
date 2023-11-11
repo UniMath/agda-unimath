@@ -1,6 +1,8 @@
 # Central elements of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.central-elements-monoids where
 ```
 

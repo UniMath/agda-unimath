@@ -1,6 +1,8 @@
 # Shriek of concrete group homomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.shriek-concrete-group-actions where
 ```
 

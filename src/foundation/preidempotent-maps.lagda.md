@@ -1,6 +1,8 @@
 # Preidempotent maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.preidempotent-maps where
 ```
 

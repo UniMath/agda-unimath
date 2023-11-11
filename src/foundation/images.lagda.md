@@ -1,6 +1,8 @@
 # The image of a map
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.images where
 ```
 

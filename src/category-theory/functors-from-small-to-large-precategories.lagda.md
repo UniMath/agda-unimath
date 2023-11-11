@@ -1,6 +1,8 @@
 # Functors from small to large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.functors-from-small-to-large-precategories where
 ```
 

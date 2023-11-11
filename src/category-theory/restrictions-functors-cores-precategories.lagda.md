@@ -1,6 +1,8 @@
 # Restrictions of functors to cores of precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.restrictions-functors-cores-precategories where
 ```
 

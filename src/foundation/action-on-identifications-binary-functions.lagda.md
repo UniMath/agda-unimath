@@ -1,6 +1,8 @@
 # The binary action on identifications of binary functions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.action-on-identifications-binary-functions where
 ```
 

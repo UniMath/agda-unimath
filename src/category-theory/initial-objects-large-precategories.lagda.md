@@ -1,6 +1,8 @@
 # Initial objects of large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.initial-objects-large-precategories where
 ```
 

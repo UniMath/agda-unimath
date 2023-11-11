@@ -1,6 +1,8 @@
 # Cartesian products of set quotients
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.cartesian-products-set-quotients where
 ```
 

@@ -1,6 +1,8 @@
 # Local families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.local-families where
 ```
 

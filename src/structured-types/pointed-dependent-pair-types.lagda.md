@@ -1,6 +1,8 @@
 # Pointed dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-dependent-pair-types where
 ```
 

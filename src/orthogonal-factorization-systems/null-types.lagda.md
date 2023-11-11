@@ -1,6 +1,8 @@
 # Null types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.null-types where
 ```
 

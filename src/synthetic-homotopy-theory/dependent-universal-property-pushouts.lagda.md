@@ -1,6 +1,8 @@
 # The dependent universal property of pushouts
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.dependent-universal-property-pushouts where
 ```
 

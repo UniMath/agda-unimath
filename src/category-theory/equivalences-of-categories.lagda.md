@@ -1,6 +1,8 @@
 # Equivalences between categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.equivalences-of-categories where
 ```
 

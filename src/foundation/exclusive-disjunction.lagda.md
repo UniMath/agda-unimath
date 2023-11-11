@@ -1,6 +1,8 @@
 # Exclusive disjunction of propositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.exclusive-disjunction where
 ```
 

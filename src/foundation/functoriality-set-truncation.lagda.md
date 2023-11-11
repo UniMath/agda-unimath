@@ -1,6 +1,8 @@
 # Functoriality of set truncation
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-set-truncation where
 ```
 

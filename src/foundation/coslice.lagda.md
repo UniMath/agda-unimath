@@ -1,6 +1,8 @@
 # Morphisms in the coslice category of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.coslice where
 ```
 

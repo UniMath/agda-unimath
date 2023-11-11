@@ -1,6 +1,8 @@
 # The infinitude of primes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.infinitude-of-primes where
 ```
 

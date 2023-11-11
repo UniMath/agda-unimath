@@ -1,6 +1,8 @@
 # Cauchy products of species of types in a subuniverse
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.cauchy-products-species-of-types-in-subuniverses where
 ```
 

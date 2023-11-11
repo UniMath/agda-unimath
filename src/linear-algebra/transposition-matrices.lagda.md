@@ -1,6 +1,8 @@
 # Transposition of matrices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.transposition-matrices where
 ```
 

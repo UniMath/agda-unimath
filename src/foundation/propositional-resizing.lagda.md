@@ -1,6 +1,8 @@
 # Propositional resizing
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.propositional-resizing where
 ```
 

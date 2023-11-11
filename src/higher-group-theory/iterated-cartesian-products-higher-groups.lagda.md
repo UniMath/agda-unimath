@@ -1,6 +1,8 @@
 # Iterated cartesian products of higher groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.iterated-cartesian-products-higher-groups where
 ```
 

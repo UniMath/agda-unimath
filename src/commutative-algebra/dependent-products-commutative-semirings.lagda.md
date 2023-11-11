@@ -1,6 +1,8 @@
 # Dependent products of commutative semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.dependent-products-commutative-semirings where
 ```
 

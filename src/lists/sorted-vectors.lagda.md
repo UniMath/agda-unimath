@@ -1,6 +1,8 @@
 # Sorted vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.sorted-vectors where
 ```
 

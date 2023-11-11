@@ -1,6 +1,8 @@
 # Normal submonoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.normal-submonoids where
 ```
 

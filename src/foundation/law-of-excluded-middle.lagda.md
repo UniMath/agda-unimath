@@ -1,6 +1,8 @@
 # The law of excluded middle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.law-of-excluded-middle where
 ```
 

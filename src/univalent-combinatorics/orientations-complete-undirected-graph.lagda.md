@@ -1,7 +1,7 @@
 # Orientations of the complete undirected graph
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module univalent-combinatorics.orientations-complete-undirected-graph where
 ```

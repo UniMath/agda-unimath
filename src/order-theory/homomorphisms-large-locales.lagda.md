@@ -1,6 +1,8 @@
 # Homomorphisms of large locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-large-locales where
 ```
 

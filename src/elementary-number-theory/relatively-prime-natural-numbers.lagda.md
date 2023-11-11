@@ -1,6 +1,8 @@
 # Relatively prime natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.relatively-prime-natural-numbers where
 ```
 

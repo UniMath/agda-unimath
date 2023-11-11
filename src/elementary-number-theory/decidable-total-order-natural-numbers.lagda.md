@@ -1,6 +1,8 @@
 # The decidable total order of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.decidable-total-order-natural-numbers where
 ```
 

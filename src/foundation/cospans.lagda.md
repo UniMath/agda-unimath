@@ -1,6 +1,8 @@
 # Cospans of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.cospans where
 ```
 

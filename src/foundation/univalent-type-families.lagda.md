@@ -1,6 +1,8 @@
 # Univalent type families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.univalent-type-families where
 ```
 

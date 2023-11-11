@@ -1,6 +1,8 @@
 # Partitions of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.partitions where
 ```
 

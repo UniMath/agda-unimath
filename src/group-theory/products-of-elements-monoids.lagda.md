@@ -1,6 +1,8 @@
 # Products of elements in a monoid
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.products-of-elements-monoids where
 ```
 

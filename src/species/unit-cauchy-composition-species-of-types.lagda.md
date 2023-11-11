@@ -1,6 +1,8 @@
 # The unit of Cauchy composition of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.unit-cauchy-composition-species-of-types where
 ```
 

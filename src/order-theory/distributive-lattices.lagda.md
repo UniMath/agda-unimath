@@ -1,6 +1,8 @@
 # Distributive lattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.distributive-lattices where
 ```
 

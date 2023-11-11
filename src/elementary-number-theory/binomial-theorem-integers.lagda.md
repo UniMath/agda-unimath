@@ -1,6 +1,8 @@
 # The binomial theorem for the integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.binomial-theorem-integers where
 ```
 

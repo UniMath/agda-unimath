@@ -1,6 +1,8 @@
 # Σ-decompositions of types into types in a subuniverse
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.sigma-decomposition-subuniverse where
 ```
 

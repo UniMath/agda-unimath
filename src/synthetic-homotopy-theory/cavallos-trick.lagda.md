@@ -1,6 +1,8 @@
 # Cavallo's trick
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.cavallos-trick where
 ```
 

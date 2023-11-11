@@ -1,6 +1,8 @@
 # Truncation images of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.truncation-images-of-maps where
 ```
 

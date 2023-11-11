@@ -1,6 +1,8 @@
 # Coproduct decompositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.coproduct-decompositions where
 ```
 

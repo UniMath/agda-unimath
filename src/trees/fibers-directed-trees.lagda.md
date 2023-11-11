@@ -1,6 +1,8 @@
 # Fibers of directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.fibers-directed-trees where
 ```
 

@@ -1,6 +1,8 @@
 # The Gaussian integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.gaussian-integers where
 ```
 

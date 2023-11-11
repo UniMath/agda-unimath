@@ -1,6 +1,8 @@
 # Permutations of lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.permutation-lists where
 ```
 

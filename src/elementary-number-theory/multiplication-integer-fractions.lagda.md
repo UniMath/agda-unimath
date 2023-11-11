@@ -1,6 +1,8 @@
 # Multiplication on integer fractions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.multiplication-integer-fractions where
 ```
 

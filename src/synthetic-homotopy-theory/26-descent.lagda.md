@@ -1,6 +1,8 @@
 # Formalization of the Symmetry book - 26 descent
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.26-descent where
 ```
 

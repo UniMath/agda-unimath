@@ -1,6 +1,8 @@
 # Embeddings of undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.embeddings-undirected-graphs where
 ```
 

@@ -1,6 +1,8 @@
 # Subsemigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.subsemigroups where
 ```
 

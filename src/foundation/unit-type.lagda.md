@@ -1,6 +1,8 @@
 # The unit type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.unit-type where
 ```
 

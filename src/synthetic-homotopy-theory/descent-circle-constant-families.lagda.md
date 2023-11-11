@@ -1,6 +1,8 @@
 # Descent data for constant type families over the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.descent-circle-constant-families where
 ```
 

@@ -1,6 +1,8 @@
 # Repetitions of values of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.repetitions-of-values where
 ```
 

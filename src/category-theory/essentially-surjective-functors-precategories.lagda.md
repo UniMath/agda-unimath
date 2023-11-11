@@ -1,6 +1,8 @@
 # Essentially surjective functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.essentially-surjective-functors-precategories where
 ```
 

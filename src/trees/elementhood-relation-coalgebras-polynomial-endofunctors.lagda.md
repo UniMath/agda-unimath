@@ -1,6 +1,8 @@
 # The elementhood relation on coalgebras of polynomial endofunctors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.elementhood-relation-coalgebras-polynomial-endofunctors where
 ```
 

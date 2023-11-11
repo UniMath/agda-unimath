@@ -1,6 +1,8 @@
 # Mersenne primes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.mersenne-primes where
 ```
 

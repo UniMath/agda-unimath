@@ -1,5 +1,9 @@
 # Real numbers
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the real numbers folder
 
 ```agda

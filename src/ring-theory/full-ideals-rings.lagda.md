@@ -1,6 +1,8 @@
 # Full ideals of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.full-ideals-rings where
 ```
 

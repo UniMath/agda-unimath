@@ -1,6 +1,8 @@
 # Natural transformations between maps from small to large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.natural-transformations-maps-from-small-to-large-precategories where
 ```
 

@@ -1,6 +1,8 @@
 # Central elements of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.central-elements-semirings where
 ```
 

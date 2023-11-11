@@ -1,6 +1,8 @@
 # Weak function extensionality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.weak-function-extensionality where
 ```
 

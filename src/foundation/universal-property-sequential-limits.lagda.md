@@ -1,6 +1,8 @@
 # The universal property of sequential limits
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-sequential-limits where
 ```
 

@@ -1,6 +1,8 @@
 # Monomorphisms in the category of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.monomorphisms-groups where
 ```
 

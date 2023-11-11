@@ -1,6 +1,8 @@
 # Lower types in preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.lower-types-preorders where
 ```
 

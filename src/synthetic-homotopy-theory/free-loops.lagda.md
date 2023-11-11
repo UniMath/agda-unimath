@@ -1,6 +1,8 @@
 # Free loops
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.free-loops where
 ```
 

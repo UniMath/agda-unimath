@@ -1,6 +1,8 @@
 # The dependent pullback property of pushouts
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.dependent-pullback-property-pushouts where
 ```
 

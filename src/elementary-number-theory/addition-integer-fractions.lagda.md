@@ -1,6 +1,8 @@
 # Addition on integer fractions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.addition-integer-fractions where
 ```
 

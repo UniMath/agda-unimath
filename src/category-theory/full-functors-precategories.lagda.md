@@ -1,6 +1,8 @@
 # Full functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.full-functors-precategories where
 ```
 

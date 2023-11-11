@@ -1,6 +1,8 @@
 # Injective maps between finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.injective-maps where
 
 open import foundation.injective-maps public

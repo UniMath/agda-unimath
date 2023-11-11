@@ -1,6 +1,8 @@
 # The natural numbers base `k`
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.finitary-natural-numbers where
 ```
 

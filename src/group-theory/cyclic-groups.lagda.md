@@ -1,6 +1,8 @@
 # Cyclic groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.cyclic-groups where
 ```
 

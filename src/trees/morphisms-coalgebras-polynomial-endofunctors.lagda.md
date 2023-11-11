@@ -1,6 +1,8 @@
 # Morphisms of coalgebras of polynomial endofunctors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.morphisms-coalgebras-polynomial-endofunctors where
 ```
 

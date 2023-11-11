@@ -1,6 +1,8 @@
 # Descent data for families of function types over the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.descent-circle-function-types where
 ```
 

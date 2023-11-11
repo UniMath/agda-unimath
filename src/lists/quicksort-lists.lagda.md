@@ -1,6 +1,8 @@
 # Quicksort for lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.quicksort-lists where
 ```
 

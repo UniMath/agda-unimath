@@ -1,6 +1,8 @@
 # Wild monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.wild-monoids where
 ```
 

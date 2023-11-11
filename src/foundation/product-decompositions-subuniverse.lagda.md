@@ -1,6 +1,8 @@
 # Product decompositions of types in a subuniverse
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.product-decompositions-subuniverse where
 ```
 

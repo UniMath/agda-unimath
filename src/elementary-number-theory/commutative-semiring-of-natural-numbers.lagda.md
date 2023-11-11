@@ -1,6 +1,8 @@
 # The commutative semiring of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.commutative-semiring-of-natural-numbers where
 ```
 

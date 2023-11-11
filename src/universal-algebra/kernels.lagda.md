@@ -1,6 +1,8 @@
 # Kernels of homomorphisms of algebras
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.kernels where
 ```
 

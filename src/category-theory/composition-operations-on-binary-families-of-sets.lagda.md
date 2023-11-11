@@ -1,6 +1,8 @@
 # Composition operations on binary families of sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.composition-operations-on-binary-families-of-sets where
 ```
 

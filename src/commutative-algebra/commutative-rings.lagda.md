@@ -1,6 +1,8 @@
 # Commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.commutative-rings where
 ```
 

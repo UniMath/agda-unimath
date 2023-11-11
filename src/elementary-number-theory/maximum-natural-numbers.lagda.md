@@ -1,6 +1,8 @@
 # Maximum on the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.maximum-natural-numbers where
 ```
 

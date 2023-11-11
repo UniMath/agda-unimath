@@ -1,6 +1,8 @@
 # Iterated cartesian products of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.iterated-pointed-cartesian-product-types where
 ```
 

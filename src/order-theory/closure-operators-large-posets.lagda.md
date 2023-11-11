@@ -1,6 +1,8 @@
 # Closure operators on large posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.closure-operators-large-posets where
 ```
 

@@ -1,6 +1,8 @@
 # Mere equivalences of types equipped with endomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.mere-equivalences-types-equipped-with-endomorphisms where
 ```
 

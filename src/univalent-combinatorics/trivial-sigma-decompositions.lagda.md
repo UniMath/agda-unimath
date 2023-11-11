@@ -1,6 +1,8 @@
 # Finite trivial Σ-decompositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.trivial-sigma-decompositions where
 
 open import foundation.trivial-sigma-decompositions public

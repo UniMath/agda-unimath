@@ -1,6 +1,8 @@
 # Dependent products of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.dependent-products-monoids where
 ```
 

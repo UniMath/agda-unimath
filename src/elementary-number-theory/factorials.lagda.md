@@ -1,6 +1,8 @@
 # Factorials of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.factorials where
 ```
 

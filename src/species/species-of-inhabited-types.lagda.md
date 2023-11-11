@@ -1,6 +1,8 @@
 # Species of inhabited types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.species-of-inhabited-types where
 ```
 

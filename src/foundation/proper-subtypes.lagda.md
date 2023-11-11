@@ -1,6 +1,8 @@
 # Proper subsets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.proper-subtypes where
 ```
 

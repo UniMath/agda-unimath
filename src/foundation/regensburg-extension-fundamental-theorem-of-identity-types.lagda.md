@@ -1,6 +1,8 @@
 # The Regensburg extension of the fundamental theorem of identity types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module
   foundation.regensburg-extension-fundamental-theorem-of-identity-types
   where

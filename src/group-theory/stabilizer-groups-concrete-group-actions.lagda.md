@@ -1,6 +1,8 @@
 # Stabilizers of concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.stabilizer-groups-concrete-group-actions where
 ```
 

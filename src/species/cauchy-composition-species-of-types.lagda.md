@@ -1,6 +1,8 @@
 # Cauchy composition of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.cauchy-composition-species-of-types where
 ```
 

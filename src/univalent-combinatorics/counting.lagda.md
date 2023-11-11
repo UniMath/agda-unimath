@@ -1,6 +1,8 @@
 # Counting in type theory
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.counting where
 ```
 

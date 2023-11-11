@@ -1,6 +1,8 @@
 # Decidable propositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.decidable-propositions where
 ```
 

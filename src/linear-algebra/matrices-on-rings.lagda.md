@@ -1,6 +1,8 @@
 # Matrices on rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.matrices-on-rings where
 ```
 

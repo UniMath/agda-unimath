@@ -1,6 +1,8 @@
 # Discrete reflexive relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.discrete-reflexive-relations where
 ```
 

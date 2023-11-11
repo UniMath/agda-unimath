@@ -1,5 +1,9 @@
 # Primitives
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the primitives folder
 
 ```agda

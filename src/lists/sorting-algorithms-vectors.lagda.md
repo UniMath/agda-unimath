@@ -1,6 +1,8 @@
 # Sorting algorithms for vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.sorting-algorithms-vectors where
 ```
 

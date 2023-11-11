@@ -1,6 +1,8 @@
 # Group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.group-actions where
 ```
 

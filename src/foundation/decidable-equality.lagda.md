@@ -1,6 +1,8 @@
 # Decidable equality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.decidable-equality where
 ```
 

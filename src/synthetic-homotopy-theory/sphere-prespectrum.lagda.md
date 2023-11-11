@@ -1,6 +1,8 @@
 # The sphere prespectrum
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.sphere-prespectrum where
 ```
 

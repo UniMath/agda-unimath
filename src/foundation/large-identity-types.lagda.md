@@ -1,6 +1,8 @@
 # Large identity types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.large-identity-types where
 ```
 

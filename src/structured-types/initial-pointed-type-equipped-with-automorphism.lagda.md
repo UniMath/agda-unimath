@@ -1,6 +1,8 @@
 # The initial pointed type equipped with an automorphism
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.initial-pointed-type-equipped-with-automorphism where
 ```
 

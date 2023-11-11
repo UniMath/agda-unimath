@@ -1,6 +1,8 @@
 # Tight apartness relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.tight-apartness-relations where
 ```
 

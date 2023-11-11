@@ -1,6 +1,8 @@
 # Complements of isolated elements of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.complements-isolated-elements where
 ```
 

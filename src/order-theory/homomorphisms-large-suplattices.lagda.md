@@ -1,6 +1,8 @@
 # Homomorphisms of large suplattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-large-suplattices where
 ```
 

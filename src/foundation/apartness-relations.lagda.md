@@ -1,6 +1,8 @@
 # Apartness relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.apartness-relations where
 ```
 

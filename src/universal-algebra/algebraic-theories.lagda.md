@@ -1,6 +1,8 @@
 # Algebraic theories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.algebraic-theories where
 ```
 

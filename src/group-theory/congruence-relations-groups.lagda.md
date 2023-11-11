@@ -1,6 +1,8 @@
 # Congruence relations on groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.congruence-relations-groups where
 ```
 

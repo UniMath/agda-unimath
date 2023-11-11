@@ -1,6 +1,8 @@
 # Subsets of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.subsets-rings where
 ```
 

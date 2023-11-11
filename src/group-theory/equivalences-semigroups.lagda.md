@@ -1,6 +1,8 @@
 # Equivalences between semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.equivalences-semigroups where
 ```
 

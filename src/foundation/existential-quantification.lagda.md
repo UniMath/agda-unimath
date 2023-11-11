@@ -1,6 +1,8 @@
 # Existential quantification
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.existential-quantification where
 ```
 

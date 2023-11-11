@@ -1,6 +1,8 @@
 # Dependent products of wild monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.dependent-products-wild-monoids where
 ```
 

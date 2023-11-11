@@ -1,6 +1,8 @@
 # Unlabeled partitions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.unlabeled-partitions where
 ```
 

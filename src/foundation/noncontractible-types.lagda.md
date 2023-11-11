@@ -1,6 +1,8 @@
 # Non-contractible types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.noncontractible-types where
 ```
 

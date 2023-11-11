@@ -1,6 +1,8 @@
 # Machine integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module primitives.machine-integers where
 ```
 

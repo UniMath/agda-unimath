@@ -1,6 +1,8 @@
 # Finite posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.finite-posets where
 ```
 

@@ -1,6 +1,8 @@
 # Identity types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.identity-types where
 ```
 

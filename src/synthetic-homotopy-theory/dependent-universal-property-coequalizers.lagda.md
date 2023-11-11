@@ -1,6 +1,8 @@
 # The dependent universal property of coequalizers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.dependent-universal-property-coequalizers where
 ```
 

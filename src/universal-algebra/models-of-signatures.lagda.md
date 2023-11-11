@@ -1,6 +1,8 @@
 # Models of signatures
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.models-of-signatures where
 ```
 

@@ -1,6 +1,8 @@
 # Total preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.total-preorders where
 ```
 

@@ -1,6 +1,8 @@
 # Type arithmetic for cartesian product types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-arithmetic-cartesian-product-types where
 ```
 

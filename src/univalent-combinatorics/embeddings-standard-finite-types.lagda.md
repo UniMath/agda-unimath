@@ -1,6 +1,8 @@
 # Embeddings between standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.embeddings-standard-finite-types where
 ```
 

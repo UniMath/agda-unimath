@@ -1,6 +1,8 @@
 # Ramsey theory
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.ramsey-theory where
 ```
 

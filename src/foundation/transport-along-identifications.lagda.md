@@ -1,6 +1,8 @@
 # Transport along identifications
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.transport-along-identifications where
 
 open import foundation-core.transport-along-identifications public

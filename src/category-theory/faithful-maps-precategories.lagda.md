@@ -1,6 +1,8 @@
 # Faithful maps between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.faithful-maps-precategories where
 ```
 

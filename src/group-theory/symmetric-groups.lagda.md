@@ -1,6 +1,8 @@
 # Symmetric groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.symmetric-groups where
 ```
 

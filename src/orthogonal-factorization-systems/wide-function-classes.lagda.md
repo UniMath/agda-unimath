@@ -1,6 +1,8 @@
 # Wide function classes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.wide-function-classes where
 ```
 

@@ -1,6 +1,8 @@
 # Subtypes of descent data for the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.descent-circle-subtypes where
 ```
 

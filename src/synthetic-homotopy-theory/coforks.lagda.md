@@ -1,6 +1,8 @@
 # Coforks
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.coforks where
 ```
 

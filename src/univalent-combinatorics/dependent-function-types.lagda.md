@@ -1,6 +1,8 @@
 # Counting the elements of dependent function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.dependent-function-types where
 ```
 

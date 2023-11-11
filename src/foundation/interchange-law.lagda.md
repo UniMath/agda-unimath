@@ -1,6 +1,8 @@
 # The interchange law
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.interchange-law where
 ```
 

@@ -1,7 +1,7 @@
 # The type checking monad
 
 ```agda
-{-# OPTIONS --no-exact-split #-}
+{-# OPTIONS --cubical-compatible --no-exact-split #-}
 
 module reflection.type-checking-monad where
 ```

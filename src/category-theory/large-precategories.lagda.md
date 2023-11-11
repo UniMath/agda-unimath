@@ -1,6 +1,8 @@
 # Large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.large-precategories where
 ```
 

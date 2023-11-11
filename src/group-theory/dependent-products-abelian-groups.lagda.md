@@ -1,6 +1,8 @@
 # Dependent products of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.dependent-products-abelian-groups where
 ```
 

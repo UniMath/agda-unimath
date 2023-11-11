@@ -1,6 +1,8 @@
 # Full subtypes of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.full-subtypes where
 ```
 

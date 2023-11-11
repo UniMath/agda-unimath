@@ -1,6 +1,8 @@
 # Abstractions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.abstractions where
 ```
 

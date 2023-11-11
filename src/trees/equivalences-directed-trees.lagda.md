@@ -1,6 +1,8 @@
 # Equivalences of directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.equivalences-directed-trees where
 ```
 

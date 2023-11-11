@@ -1,6 +1,8 @@
 # Commuting triangles of homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.commuting-triangles-of-homotopies where
 ```
 

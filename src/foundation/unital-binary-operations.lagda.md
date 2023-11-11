@@ -1,6 +1,8 @@
 # Unital binary operations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.unital-binary-operations where
 ```
 

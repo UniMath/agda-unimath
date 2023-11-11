@@ -1,6 +1,8 @@
 # Sums of elements in rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.sums-rings where
 ```
 

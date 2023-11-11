@@ -1,6 +1,8 @@
 # Locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.locales where
 ```
 

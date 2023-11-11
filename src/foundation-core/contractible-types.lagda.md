@@ -1,6 +1,8 @@
 # Contractible types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.contractible-types where
 ```
 

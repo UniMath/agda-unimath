@@ -1,6 +1,8 @@
 # Square-free natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.square-free-natural-numbers where
 ```
 

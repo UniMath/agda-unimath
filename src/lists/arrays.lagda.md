@@ -1,6 +1,8 @@
 # Arrays
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.arrays where
 ```
 

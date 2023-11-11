@@ -1,6 +1,8 @@
 # Morphisms of towers of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.morphisms-towers where
 ```
 

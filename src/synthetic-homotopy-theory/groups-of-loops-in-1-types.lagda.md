@@ -1,6 +1,8 @@
 # Groups of loops in `1`-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.groups-of-loops-in-1-types where
 ```
 

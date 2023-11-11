@@ -1,6 +1,8 @@
 # Methane
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module organic-chemistry.methane where
 ```
 

@@ -1,6 +1,8 @@
 # Coherently invertible maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.coherently-invertible-maps where
 ```
 

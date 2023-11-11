@@ -1,6 +1,8 @@
 # Strings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module primitives.strings where
 ```
 

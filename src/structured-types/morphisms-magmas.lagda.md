@@ -1,6 +1,8 @@
 # Morphisms of magmas
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.morphisms-magmas where
 ```
 

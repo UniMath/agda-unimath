@@ -1,6 +1,8 @@
 # Euclidean division on the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.euclidean-division-natural-numbers where
 ```
 

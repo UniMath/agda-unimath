@@ -1,6 +1,8 @@
 # Prime numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.prime-numbers where
 ```
 

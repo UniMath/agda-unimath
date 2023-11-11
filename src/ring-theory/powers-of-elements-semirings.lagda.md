@@ -1,6 +1,8 @@
 # Powers of elements in semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.powers-of-elements-semirings where
 ```
 

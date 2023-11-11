@@ -1,6 +1,8 @@
 # Equivalences of enriched undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.equivalences-enriched-undirected-graphs where
 ```
 

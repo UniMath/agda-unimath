@@ -1,6 +1,8 @@
 # Ideals of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.ideals-commutative-rings where
 ```
 

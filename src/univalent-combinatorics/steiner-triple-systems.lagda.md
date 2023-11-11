@@ -1,6 +1,8 @@
 # Steiner triple systems
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.steiner-triple-systems where
 ```
 

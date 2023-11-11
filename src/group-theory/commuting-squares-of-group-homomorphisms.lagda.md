@@ -1,6 +1,8 @@
 # Commuting squares of group homomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.commuting-squares-of-group-homomorphisms where
 ```
 

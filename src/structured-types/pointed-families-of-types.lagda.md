@@ -1,6 +1,8 @@
 # Pointed families of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-families-of-types where
 ```
 

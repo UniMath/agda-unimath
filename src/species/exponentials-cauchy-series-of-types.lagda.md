@@ -1,6 +1,8 @@
 # Exponential of Cauchy series of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.exponentials-cauchy-series-of-types where
 ```
 

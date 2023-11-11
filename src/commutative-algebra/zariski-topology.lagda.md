@@ -1,6 +1,8 @@
 # The Zariski topology on the set of prime ideals of a commutative ring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.zariski-topology where
 ```
 

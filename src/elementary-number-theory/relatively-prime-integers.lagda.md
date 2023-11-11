@@ -1,6 +1,8 @@
 # Relatively prime integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.relatively-prime-integers where
 ```
 

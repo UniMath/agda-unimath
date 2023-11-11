@@ -1,6 +1,8 @@
 # Iterated cartesian products of types equipped with endomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module
   structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms
   where

@@ -1,6 +1,8 @@
 # Central elements of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.central-elements-semigroups where
 ```
 

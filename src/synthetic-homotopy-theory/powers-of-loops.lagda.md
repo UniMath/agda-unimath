@@ -1,6 +1,8 @@
 # Powers of loops
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.powers-of-loops where
 ```
 

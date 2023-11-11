@@ -1,6 +1,8 @@
 # Large homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.large-homotopies where
 ```
 

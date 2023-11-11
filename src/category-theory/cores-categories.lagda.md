@@ -1,6 +1,8 @@
 # Cores of categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.cores-categories where
 ```
 

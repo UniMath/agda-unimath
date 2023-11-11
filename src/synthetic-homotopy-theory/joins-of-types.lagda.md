@@ -1,6 +1,8 @@
 # Joins of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.joins-of-types where
 ```
 

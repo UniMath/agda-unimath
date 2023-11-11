@@ -1,6 +1,8 @@
 # Algebras
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.algebras-of-theories where
 ```
 

@@ -1,6 +1,8 @@
 # Powers of elements in commutative semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.powers-of-elements-commutative-semirings where
 ```
 

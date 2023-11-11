@@ -1,6 +1,8 @@
 # Faithful maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.faithful-maps where
 ```
 

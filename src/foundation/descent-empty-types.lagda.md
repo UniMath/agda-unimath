@@ -1,6 +1,8 @@
 # Descent for the empty type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.descent-empty-types where
 ```
 

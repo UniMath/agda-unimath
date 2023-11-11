@@ -1,6 +1,8 @@
 # The coalgebra of directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.coalgebra-of-directed-trees where
 ```
 

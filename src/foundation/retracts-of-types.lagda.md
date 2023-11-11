@@ -1,6 +1,8 @@
 # Retracts of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.retracts-of-types where
 ```
 

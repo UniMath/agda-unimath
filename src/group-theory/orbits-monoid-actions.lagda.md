@@ -1,6 +1,8 @@
 # The precategory of orbits of a monoid action
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.orbits-monoid-actions where
 ```
 

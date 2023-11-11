@@ -1,6 +1,8 @@
 # Cantor space
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module set-theory.cantor-space where
 ```
 

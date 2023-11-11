@@ -1,6 +1,8 @@
 # `0`-Maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.0-maps where
 ```
 

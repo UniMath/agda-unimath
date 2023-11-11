@@ -1,6 +1,8 @@
 # Isomorphisms of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.isomorphisms-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Finitely cyclic maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.finitely-cyclic-maps where
 ```
 

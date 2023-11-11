@@ -1,6 +1,8 @@
 # Set-magmoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.set-magmoids where
 ```
 

@@ -1,6 +1,8 @@
 # Localizations at maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.localizations-maps where
 ```
 

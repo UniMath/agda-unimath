@@ -1,6 +1,8 @@
 # Natural transformations between maps between categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.natural-transformations-maps-categories where
 ```
 

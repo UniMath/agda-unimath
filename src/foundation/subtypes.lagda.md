@@ -1,6 +1,8 @@
 # Subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.subtypes where
 
 open import foundation-core.subtypes public

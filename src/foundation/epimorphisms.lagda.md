@@ -1,6 +1,8 @@
 # Epimorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.epimorphisms where
 ```
 

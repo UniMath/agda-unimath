@@ -1,6 +1,8 @@
 # Equality on dependent function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equality-dependent-function-types where
 ```
 

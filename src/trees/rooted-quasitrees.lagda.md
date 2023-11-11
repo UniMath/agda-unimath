@@ -1,6 +1,8 @@
 # Rooted quasitrees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.rooted-quasitrees where
 ```
 

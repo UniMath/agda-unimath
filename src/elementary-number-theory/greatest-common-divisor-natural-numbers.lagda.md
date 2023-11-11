@@ -1,6 +1,8 @@
 # The greatest common divisor of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 ```
 

@@ -1,6 +1,8 @@
 # Functoriality of W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.functoriality-w-types where
 ```
 

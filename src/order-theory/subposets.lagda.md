@@ -1,6 +1,8 @@
 # Subposets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.subposets where
 ```
 

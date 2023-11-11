@@ -1,6 +1,8 @@
 # Iterating functions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.iterating-functions where
 ```
 

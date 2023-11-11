@@ -1,6 +1,8 @@
 # Homomorphisms of suplattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-sup-lattices where
 ```
 

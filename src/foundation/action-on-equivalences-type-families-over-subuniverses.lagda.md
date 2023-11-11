@@ -1,6 +1,8 @@
 # Action on equivalences in type families over subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.action-on-equivalences-type-families-over-subuniverses where
 ```
 

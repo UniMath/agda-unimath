@@ -1,6 +1,8 @@
 # The multiplication operation on the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.multiplication-circle where
 ```
 

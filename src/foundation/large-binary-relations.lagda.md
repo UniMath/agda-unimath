@@ -1,6 +1,8 @@
 # Large binary relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.large-binary-relations where
 ```
 

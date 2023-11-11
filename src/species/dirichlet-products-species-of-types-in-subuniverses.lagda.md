@@ -1,6 +1,8 @@
 # Dirichlet products of species of types in subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.dirichlet-products-species-of-types-in-subuniverses where
 ```
 

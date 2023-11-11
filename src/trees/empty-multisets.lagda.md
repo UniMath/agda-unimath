@@ -1,6 +1,8 @@
 # Empty multisets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.empty-multisets where
 ```
 

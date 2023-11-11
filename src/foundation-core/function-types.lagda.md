@@ -1,6 +1,8 @@
 # Function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.function-types where
 ```
 

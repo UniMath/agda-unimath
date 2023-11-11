@@ -1,6 +1,8 @@
 # Predicates on lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.predicates-on-lists where
 ```
 

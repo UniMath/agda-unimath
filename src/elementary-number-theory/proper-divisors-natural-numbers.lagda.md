@@ -1,6 +1,8 @@
 # Proper divisors of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.proper-divisors-natural-numbers where
 ```
 

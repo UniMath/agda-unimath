@@ -1,6 +1,8 @@
 # Separated types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.separated-types where
 ```
 

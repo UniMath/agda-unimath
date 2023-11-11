@@ -1,6 +1,8 @@
 # Inequality on integer fractions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.inequality-integer-fractions where
 ```
 

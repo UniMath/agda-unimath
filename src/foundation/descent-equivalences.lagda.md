@@ -1,6 +1,8 @@
 # Descent for equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.descent-equivalences where
 ```
 

@@ -1,6 +1,8 @@
 # Dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dependent-pair-types where
 ```
 

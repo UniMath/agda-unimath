@@ -1,6 +1,8 @@
 # Fixity
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.fixity where
 ```
 

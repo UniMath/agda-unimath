@@ -1,6 +1,8 @@
 # Raising universe levels of directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.raising-universe-levels-directed-trees where
 ```
 

@@ -1,6 +1,8 @@
 # Integral domains
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.integral-domains where
 ```
 

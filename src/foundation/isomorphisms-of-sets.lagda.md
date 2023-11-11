@@ -1,6 +1,8 @@
 # Isomorphisms of sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.isomorphisms-of-sets where
 ```
 

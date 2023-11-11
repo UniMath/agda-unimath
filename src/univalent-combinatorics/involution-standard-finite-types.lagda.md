@@ -1,6 +1,8 @@
 # An involution on the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.involution-standard-finite-types where
 ```
 

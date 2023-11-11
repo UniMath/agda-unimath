@@ -1,6 +1,8 @@
 # Constant type families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.constant-type-families where
 ```
 

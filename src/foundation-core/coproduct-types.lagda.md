@@ -1,6 +1,8 @@
 # Coproduct types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.coproduct-types where
 ```
 

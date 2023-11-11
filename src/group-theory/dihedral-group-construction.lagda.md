@@ -1,6 +1,8 @@
 # The dihedral group construction
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.dihedral-group-construction where
 ```
 

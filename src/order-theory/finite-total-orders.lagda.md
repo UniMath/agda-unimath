@@ -1,6 +1,8 @@
 # Finite total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.finite-total-orders where
 ```
 

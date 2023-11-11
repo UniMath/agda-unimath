@@ -1,6 +1,8 @@
 # Regular undirected graph
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.regular-undirected-graphs where
 ```
 

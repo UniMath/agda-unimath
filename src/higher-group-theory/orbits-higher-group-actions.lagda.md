@@ -1,6 +1,8 @@
 # Orbits of higher group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.orbits-higher-group-actions where
 ```
 

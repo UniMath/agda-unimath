@@ -1,6 +1,8 @@
 # Decidable embeddings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.decidable-embeddings where
 ```
 

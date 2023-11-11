@@ -1,6 +1,8 @@
 # The involutive type of H-space structures on a pointed type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.involutive-type-of-h-space-structures where
 ```
 

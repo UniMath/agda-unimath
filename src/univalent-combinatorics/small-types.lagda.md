@@ -1,6 +1,8 @@
 # Small types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.small-types where
 
 open import foundation.small-types public

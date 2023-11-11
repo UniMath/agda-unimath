@@ -1,6 +1,8 @@
 # Factorization operations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.factorization-operations where
 ```
 

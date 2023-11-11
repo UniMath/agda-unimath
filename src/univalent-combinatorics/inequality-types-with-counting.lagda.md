@@ -1,6 +1,8 @@
 # Inequality on types equipped with a counting
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.inequality-types-with-counting where
 ```
 

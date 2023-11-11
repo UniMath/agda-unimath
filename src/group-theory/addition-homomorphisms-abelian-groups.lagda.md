@@ -1,6 +1,8 @@
 # Pointwise addition of morphisms of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.addition-homomorphisms-abelian-groups where
 ```
 

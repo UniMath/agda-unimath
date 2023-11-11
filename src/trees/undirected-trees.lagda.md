@@ -1,6 +1,8 @@
 # Undirected rees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.undirected-trees where
 ```
 

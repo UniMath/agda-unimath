@@ -1,6 +1,8 @@
 # Nonunital precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.nonunital-precategories where
 ```
 

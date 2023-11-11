@@ -1,6 +1,8 @@
 # The classical definition of the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.classical-finite-types where
 ```
 

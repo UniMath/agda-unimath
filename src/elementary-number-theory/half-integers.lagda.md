@@ -1,6 +1,8 @@
 # The half-integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.half-integers where
 ```
 

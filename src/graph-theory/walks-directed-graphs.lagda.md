@@ -1,6 +1,8 @@
 # Walks in directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.walks-directed-graphs where
 ```
 

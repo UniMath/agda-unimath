@@ -1,6 +1,8 @@
 # `0`-Images of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.0-images-of-maps where
 ```
 

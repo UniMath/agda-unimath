@@ -1,6 +1,8 @@
 # Tetrahedra in `3`-dimensional space
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.tetrahedra-in-3-space where
 ```
 

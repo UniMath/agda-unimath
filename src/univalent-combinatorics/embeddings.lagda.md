@@ -1,6 +1,8 @@
 # Injective maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.embeddings where
 
 open import foundation.embeddings public

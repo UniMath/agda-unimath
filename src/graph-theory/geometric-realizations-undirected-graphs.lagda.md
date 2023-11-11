@@ -1,6 +1,8 @@
 # Geometric realizations of undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.geometric-realizations-undirected-graphs where
 ```
 

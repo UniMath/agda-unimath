@@ -1,6 +1,8 @@
 # Inequality on the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.inequality-standard-finite-types where
 ```
 

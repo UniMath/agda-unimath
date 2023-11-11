@@ -1,6 +1,8 @@
 # Binary equivalences on unordered pairs of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.binary-equivalences-unordered-pairs-of-types where
 ```
 

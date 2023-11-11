@@ -1,6 +1,8 @@
 # Initial objects in a precategory
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.initial-objects-precategories where
 ```
 

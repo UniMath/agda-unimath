@@ -1,6 +1,8 @@
 # Iterated dependent product types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.iterated-dependent-product-types where
 
 open import foundation.telescopes public

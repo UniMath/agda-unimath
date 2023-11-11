@@ -1,6 +1,8 @@
 # Propositional extensionality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.propositional-extensionality where
 ```
 

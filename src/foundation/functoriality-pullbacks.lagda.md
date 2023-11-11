@@ -1,6 +1,8 @@
 # Functorialty of pullbacks
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-pullbacks where
 ```
 

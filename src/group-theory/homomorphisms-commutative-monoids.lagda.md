@@ -1,6 +1,8 @@
 # Homomorphisms of commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.homomorphisms-commutative-monoids where
 ```
 

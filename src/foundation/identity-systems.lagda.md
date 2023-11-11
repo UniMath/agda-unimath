@@ -1,6 +1,8 @@
 # Identity systems
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.identity-systems where
 ```
 

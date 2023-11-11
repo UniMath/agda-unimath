@@ -1,6 +1,8 @@
 # Fully faithful functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.fully-faithful-functors-precategories where
 ```
 

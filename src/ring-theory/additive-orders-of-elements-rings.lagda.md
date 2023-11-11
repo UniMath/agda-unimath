@@ -1,6 +1,8 @@
 # Additive orders of elements of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.additive-orders-of-elements-rings where
 ```
 

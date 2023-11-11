@@ -1,6 +1,8 @@
 # Replete subprecategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.replete-subprecategories where
 ```
 

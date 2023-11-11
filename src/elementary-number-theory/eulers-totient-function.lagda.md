@@ -1,7 +1,7 @@
 # Euler's totient function
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
+{-# OPTIONS --cubical-compatible #-}
 
 module elementary-number-theory.eulers-totient-function where
 ```

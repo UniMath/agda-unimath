@@ -1,6 +1,8 @@
 # Functoriality of propositional truncations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-propositional-truncation where
 ```
 

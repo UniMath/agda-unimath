@@ -1,6 +1,8 @@
 # Equivalences of directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.equivalences-directed-graphs where
 ```
 

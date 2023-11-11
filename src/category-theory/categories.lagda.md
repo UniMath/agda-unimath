@@ -1,6 +1,8 @@
 # Categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.categories where
 ```
 

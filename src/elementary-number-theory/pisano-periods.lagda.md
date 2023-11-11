@@ -1,6 +1,8 @@
 # Pisano periods
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.pisano-periods where
 ```
 

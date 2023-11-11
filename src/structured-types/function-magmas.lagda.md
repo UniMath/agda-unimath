@@ -1,6 +1,8 @@
 # Function magmas
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.function-magmas where
 ```
 

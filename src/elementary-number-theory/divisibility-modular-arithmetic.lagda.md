@@ -1,6 +1,8 @@
 # Divisibility in modular arithmetic
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.divisibility-modular-arithmetic where
 ```
 

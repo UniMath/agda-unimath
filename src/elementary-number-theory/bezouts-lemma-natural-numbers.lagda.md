@@ -1,6 +1,8 @@
 # Bezout's lemma on the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.bezouts-lemma-natural-numbers where
 ```
 

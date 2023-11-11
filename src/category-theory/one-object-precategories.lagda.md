@@ -1,6 +1,8 @@
 # One object precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.one-object-precategories where
 ```
 

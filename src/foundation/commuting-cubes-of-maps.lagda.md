@@ -1,6 +1,8 @@
 # Commuting cubes of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.commuting-cubes-of-maps where
 ```
 

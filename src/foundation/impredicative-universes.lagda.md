@@ -1,6 +1,8 @@
 # Impredicative universes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.impredicative-universes where
 ```
 

@@ -1,6 +1,8 @@
 # `0`-Connected types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.0-connected-types where
 ```
 

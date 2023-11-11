@@ -1,6 +1,8 @@
 # The universal property of lists with respect to wild monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.universal-property-lists-wild-monoids where
 ```
 

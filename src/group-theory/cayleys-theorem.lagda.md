@@ -1,6 +1,8 @@
 # Cayley's theorem
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.cayleys-theorem where
 ```
 

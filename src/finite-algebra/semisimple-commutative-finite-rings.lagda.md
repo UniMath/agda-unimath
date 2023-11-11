@@ -1,6 +1,8 @@
 # Semisimple commutative finite rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.semisimple-commutative-finite-rings where
 ```
 

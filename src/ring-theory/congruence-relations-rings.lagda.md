@@ -1,6 +1,8 @@
 # Congruence relations on rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.congruence-relations-rings where
 ```
 

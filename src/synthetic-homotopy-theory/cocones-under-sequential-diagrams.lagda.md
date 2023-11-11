@@ -1,6 +1,8 @@
 # Cocones under sequential diagrams
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.cocones-under-sequential-diagrams where
 ```
 

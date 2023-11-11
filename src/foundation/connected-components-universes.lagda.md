@@ -1,6 +1,8 @@
 # Connected components of universes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.connected-components-universes where
 ```
 

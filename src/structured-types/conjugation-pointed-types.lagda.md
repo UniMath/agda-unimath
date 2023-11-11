@@ -1,6 +1,8 @@
 # Conjugation of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.conjugation-pointed-types where
 ```
 

@@ -1,5 +1,9 @@
 # Graph theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the graph theory folder
 
 ```agda

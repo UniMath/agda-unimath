@@ -1,6 +1,8 @@
 # Meet-semilattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.meet-semilattices where
 ```
 

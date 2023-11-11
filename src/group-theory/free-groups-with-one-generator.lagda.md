@@ -1,6 +1,8 @@
 # Free groups with one generator
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.free-groups-with-one-generator where
 ```
 

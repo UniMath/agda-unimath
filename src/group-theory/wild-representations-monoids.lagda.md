@@ -1,6 +1,8 @@
 # Wild representations of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.wild-representations-monoids where
 ```
 

@@ -1,6 +1,8 @@
 # Morphisms of directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.morphisms-directed-trees where
 ```
 

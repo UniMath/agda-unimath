@@ -1,6 +1,8 @@
 # Localizations at subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.localizations-subuniverses where
 ```
 

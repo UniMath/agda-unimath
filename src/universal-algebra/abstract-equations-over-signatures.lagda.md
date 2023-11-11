@@ -1,6 +1,8 @@
 # Abstract equations over signatures
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.abstract-equations-over-signatures where
 ```
 

@@ -1,6 +1,8 @@
 # Strongly extensional maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.strongly-extensional-maps where
 ```
 

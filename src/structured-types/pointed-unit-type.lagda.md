@@ -1,6 +1,8 @@
 # The pointed unit type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-unit-type where
 ```
 

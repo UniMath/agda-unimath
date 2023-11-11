@@ -1,6 +1,8 @@
 # Joins of radical ideals of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.joins-radical-ideals-commutative-rings where
 ```
 

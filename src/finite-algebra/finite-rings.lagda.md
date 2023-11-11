@@ -1,6 +1,8 @@
 # Finite rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.finite-rings where
 ```
 

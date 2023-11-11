@@ -1,6 +1,8 @@
 # Weakly constant maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.weakly-constant-maps where
 ```
 

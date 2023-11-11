@@ -1,6 +1,8 @@
 # Subsingleton induction
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.subsingleton-induction where
 ```
 

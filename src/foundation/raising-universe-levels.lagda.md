@@ -1,6 +1,8 @@
 # Raising universe levels
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.raising-universe-levels where
 ```
 

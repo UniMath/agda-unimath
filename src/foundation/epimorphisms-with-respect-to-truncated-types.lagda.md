@@ -1,6 +1,8 @@
 # Epimorphisms with respect to truncated types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.epimorphisms-with-respect-to-truncated-types where
 ```
 

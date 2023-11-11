@@ -1,6 +1,8 @@
 # Presheaf categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.presheaf-categories where
 ```
 

@@ -1,6 +1,8 @@
 # Multiplication of matrices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.multiplication-matrices where
 ```
 

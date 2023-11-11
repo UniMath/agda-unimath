@@ -1,6 +1,8 @@
 # Multiplicative orders of elements of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.multiplicative-orders-of-units-rings where
 ```
 

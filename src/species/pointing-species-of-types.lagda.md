@@ -1,6 +1,8 @@
 # Pointing of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.pointing-species-of-types where
 ```
 

@@ -1,6 +1,8 @@
 # Sort by insertion for vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.sort-by-insertion-vectors where
 ```
 

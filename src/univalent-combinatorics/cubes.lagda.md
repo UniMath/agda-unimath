@@ -1,6 +1,8 @@
 # Cubes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.cubes where
 ```
 

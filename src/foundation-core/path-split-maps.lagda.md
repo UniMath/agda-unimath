@@ -1,6 +1,8 @@
 # Path-split maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.path-split-maps where
 ```
 

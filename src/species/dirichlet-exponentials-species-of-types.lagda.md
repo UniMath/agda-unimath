@@ -1,6 +1,8 @@
 # Dirichlet exponentials of a species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.dirichlet-exponentials-species-of-types where
 ```
 

@@ -1,6 +1,8 @@
 # Action on equivalences of functions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.action-on-equivalences-functions where
 ```
 

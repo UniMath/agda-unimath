@@ -1,6 +1,8 @@
 # Finite discrete Σ-decompositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.discrete-sigma-decompositions where
 
 open import foundation.discrete-sigma-decompositions public

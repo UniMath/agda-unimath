@@ -1,6 +1,8 @@
 # Dependent products of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.dependent-products-rings where
 ```
 

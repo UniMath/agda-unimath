@@ -1,6 +1,8 @@
 # Type arithmetic with the empty type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-arithmetic-empty-type where
 ```
 

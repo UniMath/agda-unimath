@@ -1,5 +1,9 @@
 # Orthogonal factorization systems
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Examples of higher modalities
 
 {{#include tables/higher-modalities.md}}

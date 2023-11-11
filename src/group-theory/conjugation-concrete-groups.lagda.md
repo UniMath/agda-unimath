@@ -1,6 +1,8 @@
 # Conjugation on concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.conjugation-concrete-groups where
 ```
 

@@ -1,6 +1,8 @@
 # The precategory of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.precategory-of-monoids where
 ```
 

@@ -1,6 +1,8 @@
 # Rational commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.rational-commutative-monoids where
 ```
 

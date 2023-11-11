@@ -1,6 +1,8 @@
 # Isomorphisms of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.isomorphisms-commutative-rings where
 ```
 

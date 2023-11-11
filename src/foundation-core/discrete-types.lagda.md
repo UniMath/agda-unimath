@@ -1,6 +1,8 @@
 # Discrete types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.discrete-types where
 ```
 

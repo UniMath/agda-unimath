@@ -1,6 +1,8 @@
 # Dependent products of large frames
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.dependent-products-large-frames where
 ```
 

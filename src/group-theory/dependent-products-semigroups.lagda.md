@@ -1,6 +1,8 @@
 # Dependent products of semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.dependent-products-semigroups where
 ```
 

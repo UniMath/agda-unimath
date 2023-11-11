@@ -1,6 +1,8 @@
 # Orientations of cubes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.orientations-cubes where
 ```
 

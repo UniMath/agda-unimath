@@ -1,6 +1,8 @@
 # Lifting squares
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.lifting-squares where
 ```
 

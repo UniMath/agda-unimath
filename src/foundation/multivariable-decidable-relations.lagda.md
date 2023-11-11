@@ -1,6 +1,8 @@
 # Multivariable decidable relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.multivariable-decidable-relations where
 ```
 

@@ -1,6 +1,8 @@
 # Induction principles on W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.induction-w-types where
 ```
 

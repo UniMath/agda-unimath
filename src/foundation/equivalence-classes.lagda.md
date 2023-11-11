@@ -1,6 +1,8 @@
 # Equivalence classes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equivalence-classes where
 ```
 

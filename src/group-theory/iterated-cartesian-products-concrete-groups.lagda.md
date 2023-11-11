@@ -1,6 +1,8 @@
 # Iterated cartesian products of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.iterated-cartesian-products-concrete-groups where
 ```
 

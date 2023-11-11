@@ -1,6 +1,8 @@
 # The well-ordering principle of the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.well-ordering-principle-standard-finite-types where
 ```
 

@@ -1,6 +1,8 @@
 # The binomial types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.binomial-types where
 ```
 

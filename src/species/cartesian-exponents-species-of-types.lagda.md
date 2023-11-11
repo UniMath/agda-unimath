@@ -1,6 +1,8 @@
 # Cartesian exponents of species
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.cartesian-exponents-species-of-types where
 ```
 

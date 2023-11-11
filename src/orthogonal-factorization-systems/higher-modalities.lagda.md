@@ -1,6 +1,8 @@
 # Higher modalities
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.higher-modalities where
 ```
 

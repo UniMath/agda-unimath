@@ -1,6 +1,8 @@
 # Exponents of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.exponents-abelian-groups where
 ```
 

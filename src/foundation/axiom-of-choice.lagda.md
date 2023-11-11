@@ -1,6 +1,8 @@
 # The axiom of choice
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.axiom-of-choice where
 ```
 

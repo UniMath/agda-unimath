@@ -1,6 +1,8 @@
 # Equivalences between finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.equivalences where
 
 open import foundation.equivalences public

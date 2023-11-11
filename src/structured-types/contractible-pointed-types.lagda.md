@@ -1,6 +1,8 @@
 # Contractible pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.contractible-pointed-types where
 ```
 

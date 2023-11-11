@@ -1,6 +1,8 @@
 # The simplex category
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.simplex-category where
 ```
 

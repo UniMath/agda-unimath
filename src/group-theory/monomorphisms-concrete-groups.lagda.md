@@ -1,6 +1,8 @@
 # Monomorphisms of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.monomorphisms-concrete-groups where
 ```
 

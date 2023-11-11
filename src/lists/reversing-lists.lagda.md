@@ -1,6 +1,8 @@
 # Reversing lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.reversing-lists where
 ```
 

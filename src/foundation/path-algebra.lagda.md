@@ -1,6 +1,8 @@
 # Path algebra
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.path-algebra where
 ```
 

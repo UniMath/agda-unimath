@@ -1,6 +1,8 @@
 # The action on equivalences of functions out of subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.action-on-equivalences-functions-out-of-subuniverses where
 ```
 

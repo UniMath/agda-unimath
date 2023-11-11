@@ -1,6 +1,8 @@
 # Pointed sections of pointed maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-sections where
 ```
 

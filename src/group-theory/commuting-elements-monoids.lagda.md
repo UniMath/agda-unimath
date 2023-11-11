@@ -1,6 +1,8 @@
 # Commuting elements of monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.commuting-elements-monoids where
 ```
 

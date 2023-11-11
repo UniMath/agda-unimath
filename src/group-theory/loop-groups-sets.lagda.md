@@ -1,6 +1,8 @@
 # Concrete automorphism groups on sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.loop-groups-sets where
 ```
 

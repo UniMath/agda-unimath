@@ -1,6 +1,8 @@
 # Bottom elements in preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.bottom-elements-preorders where
 ```
 

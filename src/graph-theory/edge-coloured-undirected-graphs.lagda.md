@@ -1,6 +1,8 @@
 # Edge-coloured undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.edge-coloured-undirected-graphs where
 ```
 

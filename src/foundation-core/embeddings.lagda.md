@@ -1,6 +1,8 @@
 # Embeddings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.embeddings where
 ```
 

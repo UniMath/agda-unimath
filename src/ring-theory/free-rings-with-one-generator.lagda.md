@@ -1,6 +1,8 @@
 # The free ring with one generator
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.free-rings-with-one-generator where
 ```
 

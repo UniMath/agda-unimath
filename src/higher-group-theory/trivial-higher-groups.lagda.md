@@ -1,6 +1,8 @@
 # Trivial higher groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.trivial-higher-groups where
 ```
 

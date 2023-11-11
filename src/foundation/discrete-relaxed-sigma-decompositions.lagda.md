@@ -1,6 +1,8 @@
 # Discrete relaxed Σ-decompositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.discrete-relaxed-sigma-decompositions where
 ```
 

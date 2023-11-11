@@ -1,6 +1,8 @@
 # Sorted lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.sorted-lists where
 ```
 

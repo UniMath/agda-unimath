@@ -1,6 +1,8 @@
 # The univalence axiom
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.univalence where
 
 open import foundation-core.univalence public

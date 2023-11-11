@@ -1,6 +1,8 @@
 # Maximal ideals of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.maximal-ideals-rings where
 ```
 

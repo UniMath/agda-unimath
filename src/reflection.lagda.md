@@ -1,5 +1,9 @@
 # Reflection
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the reflection folder
 
 ```agda

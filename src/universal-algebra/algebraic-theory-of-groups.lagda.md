@@ -1,6 +1,8 @@
 # Algebraic theory of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.algebraic-theory-of-groups where
 ```
 

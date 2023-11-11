@@ -1,6 +1,8 @@
 # Subgroups of finite groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.subgroups-finite-groups where
 ```
 

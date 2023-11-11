@@ -1,6 +1,8 @@
 # Normalizer subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.normalizer-subgroups where
 ```
 

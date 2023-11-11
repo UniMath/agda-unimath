@@ -1,7 +1,7 @@
 # Set truncations
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module foundation.set-truncations where
 ```

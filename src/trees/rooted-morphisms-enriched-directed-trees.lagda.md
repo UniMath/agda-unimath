@@ -1,6 +1,8 @@
 # Rooted morphisms of enriched directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.rooted-morphisms-enriched-directed-trees where
 ```
 

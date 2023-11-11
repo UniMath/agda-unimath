@@ -1,6 +1,8 @@
 # The unit of Cauchy composition of species of types in subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.unit-cauchy-composition-species-of-types-in-subuniverses where
 ```
 

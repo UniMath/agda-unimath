@@ -1,6 +1,8 @@
 # Sums of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.sums-of-natural-numbers where
 ```
 

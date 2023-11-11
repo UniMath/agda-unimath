@@ -1,6 +1,8 @@
 # Locally small types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.locally-small-types where
 ```
 

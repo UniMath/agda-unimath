@@ -1,6 +1,8 @@
 # Total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.total-orders where
 ```
 

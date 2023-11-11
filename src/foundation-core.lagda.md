@@ -1,5 +1,9 @@
 # Foundation core
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the foundation-core folder
 
 ```agda

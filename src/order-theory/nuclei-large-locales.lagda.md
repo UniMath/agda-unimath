@@ -1,6 +1,8 @@
 # Nuclei on large locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.nuclei-large-locales where
 ```
 

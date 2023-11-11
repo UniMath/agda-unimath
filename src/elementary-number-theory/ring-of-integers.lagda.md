@@ -1,6 +1,8 @@
 # The ring of integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.ring-of-integers where
 ```
 

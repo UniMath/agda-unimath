@@ -1,6 +1,8 @@
 # Closed walks in undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.closed-walks-undirected-graphs where
 ```
 

@@ -1,6 +1,8 @@
 # Terms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.terms where
 ```
 

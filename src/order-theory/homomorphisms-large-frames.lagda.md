@@ -1,6 +1,8 @@
 # Homomorphisms of large frames
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-large-frames where
 ```
 

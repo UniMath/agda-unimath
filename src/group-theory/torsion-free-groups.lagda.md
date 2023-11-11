@@ -1,6 +1,8 @@
 # Torsion-free groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.torsion-free-groups where
 ```
 

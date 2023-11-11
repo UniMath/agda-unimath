@@ -1,6 +1,8 @@
 # Polygons
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.polygons where
 ```
 

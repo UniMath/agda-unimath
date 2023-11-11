@@ -1,6 +1,8 @@
 # Locally small modal-operators
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.locally-small-modal-operators where
 ```
 

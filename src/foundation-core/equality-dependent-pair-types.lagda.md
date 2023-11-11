@@ -1,6 +1,8 @@
 # Equality of dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.equality-dependent-pair-types where
 ```
 

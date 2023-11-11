@@ -1,6 +1,8 @@
 # Truncated types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.truncated-types where
 
 open import foundation-core.truncated-types public

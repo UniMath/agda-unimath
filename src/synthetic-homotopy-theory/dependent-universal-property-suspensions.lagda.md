@@ -1,6 +1,8 @@
 # Dependent universal property of suspensions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.dependent-universal-property-suspensions where
 ```
 

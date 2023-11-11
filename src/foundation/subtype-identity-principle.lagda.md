@@ -1,6 +1,8 @@
 # The subtype identity principle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.subtype-identity-principle where
 ```
 

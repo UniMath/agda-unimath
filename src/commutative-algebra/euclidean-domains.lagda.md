@@ -1,6 +1,8 @@
 # Euclidean domains
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.euclidean-domains where
 ```
 

@@ -1,6 +1,8 @@
 # Transport along homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.transport-along-homotopies where
 ```
 

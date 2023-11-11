@@ -1,6 +1,8 @@
 # Exponents of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.exponents-groups where
 ```
 

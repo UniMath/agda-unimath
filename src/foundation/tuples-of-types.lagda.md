@@ -1,6 +1,8 @@
 # Tuples of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.tuples-of-types where
 ```
 

@@ -1,6 +1,8 @@
 # The binomial theorem for semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.binomial-theorem-semirings where
 ```
 

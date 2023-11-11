@@ -1,6 +1,8 @@
 # The maybe modality on finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.maybe where
 
 open import foundation.maybe public

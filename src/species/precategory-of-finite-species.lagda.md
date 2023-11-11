@@ -1,6 +1,8 @@
 # The precategory of finite species
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.precategory-of-finite-species where
 ```
 

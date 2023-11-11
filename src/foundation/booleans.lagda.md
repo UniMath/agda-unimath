@@ -1,6 +1,8 @@
 # The booleans
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.booleans where
 ```
 

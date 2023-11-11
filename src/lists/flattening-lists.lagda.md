@@ -1,6 +1,8 @@
 # Flattening of lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.flattening-lists where
 ```
 

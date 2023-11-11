@@ -1,6 +1,8 @@
 # Bases of directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.bases-directed-trees where
 ```
 

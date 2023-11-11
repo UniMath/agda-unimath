@@ -1,6 +1,8 @@
 # The symmetric identity types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.symmetric-identity-types where
 ```
 

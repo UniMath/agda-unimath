@@ -1,6 +1,8 @@
 # The large locale of subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.large-locale-of-subtypes where
 ```
 

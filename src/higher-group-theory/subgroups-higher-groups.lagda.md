@@ -1,6 +1,8 @@
 # Subgroups of higher groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.subgroups-higher-groups where
 ```
 

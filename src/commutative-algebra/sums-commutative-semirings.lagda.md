@@ -1,6 +1,8 @@
 # Sums in commutative semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.sums-commutative-semirings where
 ```
 

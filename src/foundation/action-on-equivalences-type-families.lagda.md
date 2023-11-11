@@ -1,6 +1,8 @@
 # Action on equivalences of type families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.action-on-equivalences-type-families where
 ```
 

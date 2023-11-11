@@ -1,6 +1,8 @@
 # The action on identifications of dependent functions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.action-on-identifications-dependent-functions where
 ```
 

@@ -1,6 +1,8 @@
 # Repetitions of values in sequences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.repetitions-of-values-sequences where
 ```
 

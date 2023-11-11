@@ -1,6 +1,8 @@
 # The category of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.category-of-abelian-groups where
 ```
 

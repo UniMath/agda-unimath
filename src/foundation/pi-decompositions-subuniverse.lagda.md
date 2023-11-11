@@ -1,6 +1,8 @@
 # Π-decompositions of types into types in a subuniverse
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.pi-decompositions-subuniverse where
 ```
 

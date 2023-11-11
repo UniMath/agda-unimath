@@ -1,6 +1,8 @@
 # The congruence relations on the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.congruence-natural-numbers where
 ```
 

@@ -1,6 +1,8 @@
 # Catalan numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.catalan-numbers where
 ```
 

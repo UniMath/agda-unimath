@@ -1,6 +1,8 @@
 # Functors between nonunital precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.functors-nonunital-precategories where
 ```
 

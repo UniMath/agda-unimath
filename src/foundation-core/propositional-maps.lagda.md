@@ -1,6 +1,8 @@
 # Propositional maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.propositional-maps where
 ```
 

@@ -1,6 +1,8 @@
 # Decidable relations on types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.decidable-relations where
 ```
 

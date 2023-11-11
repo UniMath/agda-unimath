@@ -1,6 +1,8 @@
 # Copresheaf categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.copresheaf-categories where
 ```
 

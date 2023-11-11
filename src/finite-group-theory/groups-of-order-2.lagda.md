@@ -1,7 +1,7 @@
 # Groups of order `2`
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module finite-group-theory.groups-of-order-2 where
 ```

@@ -1,6 +1,8 @@
 # Counting the elements of decidable subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.counting-decidable-subtypes where
 
 open import foundation.decidable-subtypes public

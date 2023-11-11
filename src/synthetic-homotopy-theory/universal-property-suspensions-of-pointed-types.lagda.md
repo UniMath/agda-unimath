@@ -1,6 +1,8 @@
 # Universal Property of suspensions of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types where
 ```
 

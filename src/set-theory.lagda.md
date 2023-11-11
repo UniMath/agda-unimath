@@ -1,5 +1,9 @@
 # Set theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the set theory folder
 
 ```agda

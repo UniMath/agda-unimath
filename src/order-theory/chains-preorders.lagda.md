@@ -1,6 +1,8 @@
 # Chains in preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.chains-preorders where
 ```
 

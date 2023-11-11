@@ -1,6 +1,8 @@
 # Nilpotent elements in semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.nilpotent-elements-semirings where
 ```
 

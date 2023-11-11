@@ -1,6 +1,8 @@
 # `2`-Types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.2-types where
 ```
 

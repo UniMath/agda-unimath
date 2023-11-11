@@ -1,6 +1,8 @@
 # Chains in posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.chains-posets where
 ```
 

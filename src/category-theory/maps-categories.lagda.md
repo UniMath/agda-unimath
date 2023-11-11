@@ -1,6 +1,8 @@
 # Maps between categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.maps-categories where
 ```
 

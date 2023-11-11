@@ -1,6 +1,8 @@
 # Matchings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.matchings where
 ```
 

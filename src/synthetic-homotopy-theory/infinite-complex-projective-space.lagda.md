@@ -1,6 +1,8 @@
 # The infinite complex projective space
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.infinite-complex-projective-space where
 ```
 

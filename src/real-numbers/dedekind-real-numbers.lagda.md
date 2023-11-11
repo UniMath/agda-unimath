@@ -1,6 +1,8 @@
 # Dedekind real numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module real-numbers.dedekind-real-numbers where
 ```
 

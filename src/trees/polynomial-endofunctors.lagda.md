@@ -1,6 +1,8 @@
 # Polynomial endofunctors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.polynomial-endofunctors where
 ```
 

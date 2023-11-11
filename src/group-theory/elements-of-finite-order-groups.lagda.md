@@ -1,6 +1,8 @@
 # Elements of finite order
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.elements-of-finite-order-groups where
 ```
 

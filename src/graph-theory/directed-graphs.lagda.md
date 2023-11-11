@@ -1,6 +1,8 @@
 # Directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.directed-graphs where
 ```
 

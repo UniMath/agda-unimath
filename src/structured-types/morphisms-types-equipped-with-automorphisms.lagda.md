@@ -1,6 +1,8 @@
 # Morphisms of types equipped with automorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.morphisms-types-equipped-with-automorphisms where
 ```
 

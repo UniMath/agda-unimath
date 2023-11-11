@@ -1,6 +1,8 @@
 # Small types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.small-types where
 
 open import foundation-core.small-types public

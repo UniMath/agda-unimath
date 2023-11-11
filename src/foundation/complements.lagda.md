@@ -1,6 +1,8 @@
 # Complements of type families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.complements where
 ```
 

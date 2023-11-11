@@ -1,6 +1,8 @@
 # The distance between integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.distance-integers where
 ```
 

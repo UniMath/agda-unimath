@@ -1,6 +1,8 @@
 # Retracts of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.retracts-of-finite-types where
 ```
 

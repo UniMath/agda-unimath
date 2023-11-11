@@ -1,6 +1,8 @@
 # Finiteness of the type of connected components
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.finite-connected-components where
 ```
 

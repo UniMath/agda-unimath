@@ -1,6 +1,8 @@
 # Equivalences between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.equivalences-of-precategories where
 ```
 

@@ -1,6 +1,8 @@
 # Sums in commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.sums-commutative-rings where
 ```
 

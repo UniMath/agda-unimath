@@ -1,6 +1,8 @@
 # The universal propert of cartesian product types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-cartesian-product-types where
 ```
 

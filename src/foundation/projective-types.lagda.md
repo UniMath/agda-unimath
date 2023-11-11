@@ -1,6 +1,8 @@
 # Projective types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.projective-types where
 ```
 

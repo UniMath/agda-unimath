@@ -1,6 +1,8 @@
 # Large posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.large-posets where
 ```
 

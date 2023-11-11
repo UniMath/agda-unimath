@@ -1,5 +1,9 @@
 # Online encyclopedia of integer sequences
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the OEIS folder
 
 ```agda

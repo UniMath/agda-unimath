@@ -1,6 +1,8 @@
 # Names
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.names where
 ```
 

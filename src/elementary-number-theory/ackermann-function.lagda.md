@@ -1,6 +1,8 @@
 # The Ackermann function
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.ackermann-function where
 ```
 

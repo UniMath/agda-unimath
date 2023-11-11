@@ -1,6 +1,8 @@
 # Reflective subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.reflective-subuniverses where
 ```
 

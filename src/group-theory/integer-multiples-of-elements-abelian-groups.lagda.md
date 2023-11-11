@@ -1,6 +1,8 @@
 # Integer multiples of elements in abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.integer-multiples-of-elements-abelian-groups where
 ```
 

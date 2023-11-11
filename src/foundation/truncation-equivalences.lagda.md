@@ -1,6 +1,8 @@
 # `k`-Equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.truncation-equivalences where
 ```
 

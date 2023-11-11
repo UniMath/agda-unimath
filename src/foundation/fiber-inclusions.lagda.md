@@ -1,6 +1,8 @@
 # Fiber inclusions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.fiber-inclusions where
 ```
 

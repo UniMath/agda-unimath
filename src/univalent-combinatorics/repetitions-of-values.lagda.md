@@ -1,6 +1,8 @@
 # Repetitions of values
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.repetitions-of-values where
 
 open import foundation.repetitions-of-values public

@@ -1,6 +1,8 @@
 # Anafunctors between categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.anafunctors-categories where
 ```
 

@@ -1,6 +1,8 @@
 # Decidability of dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.decidable-dependent-pair-types where
 ```
 

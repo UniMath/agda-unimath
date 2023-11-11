@@ -1,6 +1,8 @@
 # Fibered equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.fibered-equivalences where
 ```
 

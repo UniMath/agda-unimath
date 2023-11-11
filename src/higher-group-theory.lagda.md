@@ -1,5 +1,9 @@
 # Higher group theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the higher group theory folder
 
 ```agda

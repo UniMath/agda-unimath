@@ -1,6 +1,8 @@
 # Voltage graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.voltage-graphs where
 ```
 

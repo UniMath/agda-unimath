@@ -1,6 +1,8 @@
 # The precategory of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.precategory-of-rings where
 ```
 

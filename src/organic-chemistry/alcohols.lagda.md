@@ -1,6 +1,8 @@
 # Alcohols
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module organic-chemistry.alcohols where
 ```
 

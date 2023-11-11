@@ -1,6 +1,8 @@
 # Kernels of ring homomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.kernels-of-ring-homomorphisms where
 ```
 

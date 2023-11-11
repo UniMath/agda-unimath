@@ -1,6 +1,8 @@
 # Repetitions in sequences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.repetitions-sequences where
 ```
 

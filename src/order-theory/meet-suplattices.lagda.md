@@ -1,6 +1,8 @@
 # Meet-suplattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.meet-suplattices where
 ```
 

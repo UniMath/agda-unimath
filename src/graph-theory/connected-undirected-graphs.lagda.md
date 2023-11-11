@@ -1,6 +1,8 @@
 # Connected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.connected-undirected-graphs where
 ```
 

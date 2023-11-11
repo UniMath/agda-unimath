@@ -1,6 +1,8 @@
 # Vectors on commutative semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.vectors-on-commutative-semirings where
 ```
 

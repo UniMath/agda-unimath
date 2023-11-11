@@ -1,6 +1,8 @@
 # Symmetric difference of subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.symmetric-difference where
 ```
 

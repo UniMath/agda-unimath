@@ -1,6 +1,8 @@
 # Powers of elements in commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.powers-of-elements-commutative-monoids where
 ```
 

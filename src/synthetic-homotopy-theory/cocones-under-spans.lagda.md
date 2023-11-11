@@ -1,6 +1,8 @@
 # Cocones under spans
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.cocones-under-spans where
 ```
 

@@ -1,7 +1,7 @@
 # Addition on the rational numbers
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module elementary-number-theory.addition-rational-numbers where
 ```

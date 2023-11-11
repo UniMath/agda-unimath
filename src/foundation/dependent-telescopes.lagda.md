@@ -1,6 +1,8 @@
 # Dependent telescopes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dependent-telescopes where
 ```
 

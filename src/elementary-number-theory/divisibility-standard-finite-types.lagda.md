@@ -1,6 +1,8 @@
 # The divisibility relation on the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.divisibility-standard-finite-types where
 ```
 

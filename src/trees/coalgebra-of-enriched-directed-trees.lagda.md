@@ -1,7 +1,7 @@
 # The coalgebra of enriched directed trees
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module trees.coalgebra-of-enriched-directed-trees where
 ```

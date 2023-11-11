@@ -1,6 +1,8 @@
 # Functoriality of fibers of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-fibers-of-maps where
 ```
 

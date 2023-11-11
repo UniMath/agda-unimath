@@ -1,6 +1,8 @@
 # The Fibonacci sequence
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.fibonacci-sequence where
 ```
 

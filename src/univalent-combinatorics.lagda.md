@@ -1,5 +1,9 @@
 # Univalent combinatorics
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Idea
 
 Univalent combinatorics is the study of finite univalent mathematics. Finiteness

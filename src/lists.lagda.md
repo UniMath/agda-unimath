@@ -1,5 +1,9 @@
 # Lists
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the lists folder
 
 ```agda

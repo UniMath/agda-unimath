@@ -1,6 +1,8 @@
 # Pointed equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-equivalences where
 ```
 

@@ -1,6 +1,8 @@
 # Congruence relations on semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.congruence-relations-semirings where
 ```
 

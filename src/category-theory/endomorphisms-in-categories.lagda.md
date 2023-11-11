@@ -1,6 +1,8 @@
 # Endomorphisms in categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.endomorphisms-in-categories where
 ```
 

@@ -1,6 +1,8 @@
 # Finite function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.function-types where
 ```
 

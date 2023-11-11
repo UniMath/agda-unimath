@@ -1,6 +1,8 @@
 # Dependent identifications
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.dependent-identifications where
 ```
 

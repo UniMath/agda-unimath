@@ -1,6 +1,8 @@
 # Petri-nets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.petri-nets where
 ```
 

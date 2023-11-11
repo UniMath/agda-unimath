@@ -1,6 +1,8 @@
 # Opposite preunivalent categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.opposite-preunivalent-categories where
 ```
 

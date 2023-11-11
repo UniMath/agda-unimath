@@ -1,6 +1,8 @@
 # The precategory of finite posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.precategory-of-finite-posets where
 ```
 

@@ -1,6 +1,8 @@
 # Hydrocarbons
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module organic-chemistry.hydrocarbons where
 ```
 

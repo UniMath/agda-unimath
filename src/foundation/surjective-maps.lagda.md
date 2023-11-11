@@ -1,6 +1,8 @@
 # Surjective maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.surjective-maps where
 ```
 

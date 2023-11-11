@@ -1,6 +1,8 @@
 # Semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.semirings where
 ```
 

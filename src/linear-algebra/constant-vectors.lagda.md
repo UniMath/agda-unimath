@@ -1,6 +1,8 @@
 # Diagonal vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.constant-vectors where
 ```
 

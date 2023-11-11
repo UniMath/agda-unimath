@@ -1,5 +1,9 @@
 # Organic Chemistry
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the organic chemistry folder
 
 ```agda

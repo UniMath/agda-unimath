@@ -1,6 +1,8 @@
 # Cyclic higher groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.cyclic-higher-groups where
 ```
 

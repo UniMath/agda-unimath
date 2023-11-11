@@ -1,6 +1,8 @@
 # Dirichlet products of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.dirichlet-products-species-of-types where
 ```
 

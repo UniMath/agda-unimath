@@ -1,6 +1,8 @@
 # The substitution functor of group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.substitution-functor-group-actions where
 ```
 

@@ -1,6 +1,8 @@
 # The Eisenstein integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.eisenstein-integers where
 ```
 

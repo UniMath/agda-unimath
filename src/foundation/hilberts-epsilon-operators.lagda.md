@@ -1,6 +1,8 @@
 # Hilbert's `ε`-operators
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.hilberts-epsilon-operators where
 ```
 

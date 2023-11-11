@@ -1,6 +1,8 @@
 # Concrete monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.concrete-monoids where
 ```
 

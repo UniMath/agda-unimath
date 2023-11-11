@@ -1,6 +1,8 @@
 # Rooted undirected trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.rooted-undirected-trees where
 ```
 

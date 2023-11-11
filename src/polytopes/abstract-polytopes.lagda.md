@@ -1,6 +1,8 @@
 # Abstract polytopes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module polytopes.abstract-polytopes where
 ```
 

@@ -1,6 +1,8 @@
 # Homotopies of binary operations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.binary-homotopies where
 ```
 

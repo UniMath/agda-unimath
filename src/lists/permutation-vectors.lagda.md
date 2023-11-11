@@ -1,6 +1,8 @@
 # Permutations of vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.permutation-vectors where
 ```
 

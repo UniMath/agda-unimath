@@ -1,6 +1,8 @@
 # Walks in undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.walks-undirected-graphs where
 ```
 

@@ -1,6 +1,8 @@
 # Maps between set-magmoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.maps-set-magmoids where
 ```
 

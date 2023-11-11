@@ -1,6 +1,8 @@
 # Products of unordered tuples of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.products-unordered-tuples-of-types where
 ```
 

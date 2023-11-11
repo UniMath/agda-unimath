@@ -1,5 +1,9 @@
 # Order theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the order theory folder
 
 ```agda

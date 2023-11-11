@@ -1,6 +1,8 @@
 # Retractions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.retractions where
 
 open import foundation-core.retractions public

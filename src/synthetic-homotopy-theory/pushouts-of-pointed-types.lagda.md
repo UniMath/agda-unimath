@@ -1,6 +1,8 @@
 # Pushouts of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.pushouts-of-pointed-types where
 ```
 

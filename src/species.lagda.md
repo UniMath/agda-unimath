@@ -1,5 +1,9 @@
 # Species
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the species folder
 
 ```agda

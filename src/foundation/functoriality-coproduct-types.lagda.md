@@ -1,6 +1,8 @@
 # Functoriality of coproduct types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-coproduct-types where
 ```
 

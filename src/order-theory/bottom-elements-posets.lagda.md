@@ -1,6 +1,8 @@
 # Bottom elements in posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.bottom-elements-posets where
 ```
 

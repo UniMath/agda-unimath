@@ -1,6 +1,8 @@
 # Transpositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.transpositions where
 ```
 

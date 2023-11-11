@@ -1,6 +1,8 @@
 # The W-type of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.w-type-of-natural-numbers where
 ```
 

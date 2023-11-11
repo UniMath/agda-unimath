@@ -1,6 +1,8 @@
 # The category of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.category-of-concrete-groups where
 ```
 

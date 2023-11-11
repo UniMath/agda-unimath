@@ -1,6 +1,8 @@
 # Abstract finite groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.finite-groups where
 ```
 

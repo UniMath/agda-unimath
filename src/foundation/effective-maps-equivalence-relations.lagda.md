@@ -1,6 +1,8 @@
 # Effective maps for equivalence relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.effective-maps-equivalence-relations where
 ```
 

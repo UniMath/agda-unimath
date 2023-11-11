@@ -1,6 +1,8 @@
 # The sign homomorphism
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.sign-homomorphism where
 ```
 

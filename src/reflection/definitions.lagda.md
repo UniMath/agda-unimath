@@ -1,6 +1,8 @@
 # Definitions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.definitions where
 ```
 

@@ -1,6 +1,8 @@
 # The preunivalence axiom
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.preunivalence where
 ```
 

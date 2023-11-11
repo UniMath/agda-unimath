@@ -1,6 +1,8 @@
 # The Legendre symbol
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.legendre-symbol where
 ```
 

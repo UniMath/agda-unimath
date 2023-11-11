@@ -1,6 +1,8 @@
 # Morphisms of undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.morphisms-undirected-graphs where
 ```
 

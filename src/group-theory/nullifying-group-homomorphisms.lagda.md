@@ -1,6 +1,8 @@
 # Nullifying group homomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.nullifying-group-homomorphisms where
 ```
 

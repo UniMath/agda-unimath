@@ -1,6 +1,8 @@
 # Nil ideals of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.nil-ideals-rings where
 ```
 

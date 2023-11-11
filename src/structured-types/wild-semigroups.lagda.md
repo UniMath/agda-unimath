@@ -1,6 +1,8 @@
 # Wild semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.wild-semigroups where
 ```
 

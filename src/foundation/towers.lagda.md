@@ -1,6 +1,8 @@
 # Towers of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.towers where
 ```
 

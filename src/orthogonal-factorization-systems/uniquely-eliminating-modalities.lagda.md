@@ -1,6 +1,8 @@
 # Uniquely eliminating modalities
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.uniquely-eliminating-modalities where
 ```
 

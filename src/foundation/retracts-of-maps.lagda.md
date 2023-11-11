@@ -1,6 +1,8 @@
 # Retracts of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.retracts-of-maps where
 ```
 

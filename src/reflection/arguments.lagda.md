@@ -1,6 +1,8 @@
 # Arguments
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.arguments where
 ```
 

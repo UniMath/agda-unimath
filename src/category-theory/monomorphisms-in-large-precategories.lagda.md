@@ -1,6 +1,8 @@
 # Monomorphisms in large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.monomorphisms-in-large-precategories where
 ```
 

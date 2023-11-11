@@ -1,6 +1,8 @@
 # Arithmetic law for product decomposition and Π-decomposition
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.arithmetic-law-product-and-pi-decompositions where
 ```
 

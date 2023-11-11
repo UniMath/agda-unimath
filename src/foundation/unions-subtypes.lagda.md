@@ -1,6 +1,8 @@
 # Unions of subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.unions-subtypes where
 ```
 

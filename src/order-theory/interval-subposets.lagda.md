@@ -1,6 +1,8 @@
 # Interval subposets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.interval-subposets where
 ```
 

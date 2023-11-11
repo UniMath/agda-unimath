@@ -1,6 +1,8 @@
 # Multiples of elements in commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.multiples-of-elements-commutative-rings where
 ```
 

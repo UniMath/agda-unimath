@@ -1,6 +1,8 @@
 # Vectors on euclidean domains
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.vectors-on-euclidean-domains where
 ```
 

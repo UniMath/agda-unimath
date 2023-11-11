@@ -1,6 +1,8 @@
 # Large subsuplattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.large-subsuplattices where
 ```
 

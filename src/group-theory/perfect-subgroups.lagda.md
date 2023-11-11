@@ -1,6 +1,8 @@
 # Perfect subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.perfect-subgroups where
 ```
 

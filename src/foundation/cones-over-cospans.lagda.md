@@ -1,6 +1,8 @@
 # Cones over cospans
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.cones-over-cospans where
 ```
 

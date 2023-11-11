@@ -1,6 +1,8 @@
 # Decidable dependent function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.decidable-dependent-function-types where
 
 open import foundation.decidable-dependent-function-types public

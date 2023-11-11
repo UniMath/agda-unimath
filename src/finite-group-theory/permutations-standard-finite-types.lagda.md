@@ -1,7 +1,7 @@
 # Permutations of standard finite types
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module finite-group-theory.permutations-standard-finite-types where
 ```

@@ -1,6 +1,8 @@
 # Products of finite rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.products-finite-rings where
 ```
 

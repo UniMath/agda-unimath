@@ -1,6 +1,8 @@
 # Essential fibers of functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.essential-fibers-of-functors-precategories where
 ```
 

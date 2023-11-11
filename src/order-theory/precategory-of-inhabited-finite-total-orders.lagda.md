@@ -1,6 +1,8 @@
 # The precategory of inhabited finite total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.precategory-of-inhabited-finite-total-orders where
 ```
 

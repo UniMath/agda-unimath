@@ -1,6 +1,8 @@
 # Unordered tuples of elements in commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.unordered-tuples-of-elements-commutative-monoids where
 ```
 

@@ -1,6 +1,8 @@
 # The groupoid of main classes of Latin hypercubes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.main-classes-of-latin-hypercubes where
 ```
 

@@ -1,6 +1,8 @@
 # Codiagonals of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.codiagonals-of-maps where
 ```
 

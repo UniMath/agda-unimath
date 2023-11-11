@@ -1,6 +1,8 @@
 # Products of ideals of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.products-ideals-commutative-rings where
 ```
 

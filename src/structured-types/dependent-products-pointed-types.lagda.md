@@ -1,6 +1,8 @@
 # Dependent products of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.dependent-products-pointed-types where
 ```
 

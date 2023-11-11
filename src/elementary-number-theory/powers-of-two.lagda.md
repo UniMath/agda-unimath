@@ -1,6 +1,8 @@
 # Powers of two
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.powers-of-two where
 ```
 

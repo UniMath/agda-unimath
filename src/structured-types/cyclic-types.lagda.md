@@ -1,6 +1,8 @@
 # Cyclic types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.cyclic-types where
 ```
 

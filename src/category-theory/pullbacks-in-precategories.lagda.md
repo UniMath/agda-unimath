@@ -1,6 +1,8 @@
 # Pullbacks in precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.pullbacks-in-precategories where
 ```
 

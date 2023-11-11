@@ -1,6 +1,8 @@
 # Strictly ordered pairs of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.strictly-ordered-pairs-of-natural-numbers where
 ```
 

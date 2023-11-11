@@ -1,6 +1,8 @@
 # The binomial theorem for the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.binomial-theorem-natural-numbers where
 ```
 

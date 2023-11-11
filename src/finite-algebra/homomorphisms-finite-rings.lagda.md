@@ -1,6 +1,8 @@
 # Homomorphisms of finite rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.homomorphisms-finite-rings where
 ```
 

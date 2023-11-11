@@ -1,6 +1,8 @@
 # Dependent sequences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dependent-sequences where
 ```
 

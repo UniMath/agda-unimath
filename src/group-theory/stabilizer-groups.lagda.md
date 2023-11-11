@@ -1,6 +1,8 @@
 # Stabilizer groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.stabilizer-groups where
 ```
 

@@ -1,6 +1,8 @@
 # Centralizer subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.centralizer-subgroups where
 ```
 

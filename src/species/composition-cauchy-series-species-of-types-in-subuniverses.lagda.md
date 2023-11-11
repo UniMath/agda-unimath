@@ -1,6 +1,8 @@
 # Composition of Cauchy series of species of types in subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.composition-cauchy-series-species-of-types-in-subuniverses where
 ```
 

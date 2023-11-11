@@ -1,6 +1,8 @@
 # Cycles in undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.cycles-undirected-graphs where
 ```
 

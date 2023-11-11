@@ -1,6 +1,8 @@
 # Essentially injective functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.essentially-injective-functors-precategories where
 ```
 

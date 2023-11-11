@@ -1,6 +1,8 @@
 # The poset of ideals of a commutative ring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.poset-of-ideals-commutative-rings where
 ```
 

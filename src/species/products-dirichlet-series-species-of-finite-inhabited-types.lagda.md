@@ -1,6 +1,8 @@
 # Products of Dirichlet series of species of finite inhabited types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.products-dirichlet-series-species-of-finite-inhabited-types where
 ```
 

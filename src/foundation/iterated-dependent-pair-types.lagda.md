@@ -1,6 +1,8 @@
 # Iterated dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.iterated-dependent-pair-types where
 
 open import foundation.telescopes public

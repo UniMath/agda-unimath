@@ -1,6 +1,8 @@
 # Nontrivial groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.nontrivial-groups where
 ```
 

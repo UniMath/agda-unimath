@@ -1,6 +1,8 @@
 # Multivariable homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.multivariable-homotopies where
 
 open import foundation.telescopes public

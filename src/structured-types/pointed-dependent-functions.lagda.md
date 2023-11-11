@@ -1,6 +1,8 @@
 # Pointed dependent functions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-dependent-functions where
 ```
 

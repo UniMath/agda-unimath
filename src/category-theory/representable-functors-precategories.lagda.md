@@ -1,6 +1,8 @@
 # Representable functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.representable-functors-precategories where
 ```
 

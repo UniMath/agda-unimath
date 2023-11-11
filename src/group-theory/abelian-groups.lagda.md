@@ -1,6 +1,8 @@
 # Abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.abelian-groups where
 ```
 

@@ -1,6 +1,8 @@
 # Principal torsors of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.principal-torsors-concrete-groups where
 ```
 

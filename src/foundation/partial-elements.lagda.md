@@ -1,6 +1,8 @@
 # Partial elements
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.partial-elements where
 ```
 

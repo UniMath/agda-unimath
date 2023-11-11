@@ -1,6 +1,8 @@
 # Directed graph structures on standard finite sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.directed-graph-structures-on-standard-finite-sets where
 ```
 

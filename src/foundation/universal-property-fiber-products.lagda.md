@@ -1,6 +1,8 @@
 # The universal property of fiber products
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-fiber-products where
 ```
 

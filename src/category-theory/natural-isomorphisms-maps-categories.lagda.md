@@ -1,6 +1,8 @@
 # Natural isomorphisms between maps between categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.natural-isomorphisms-maps-categories where
 ```
 

@@ -1,6 +1,8 @@
 # Negated equality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.negated-equality where
 ```
 

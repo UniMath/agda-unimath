@@ -1,5 +1,9 @@
 # Elementary number theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the elementary number theory folder
 
 ```agda

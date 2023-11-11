@@ -1,6 +1,8 @@
 # Invertible maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.invertible-maps where
 
 open import foundation-core.invertible-maps public

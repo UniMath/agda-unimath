@@ -1,6 +1,8 @@
 # Inequality of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.inequality-natural-numbers where
 ```
 

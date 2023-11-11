@@ -1,6 +1,8 @@
 # Sheargroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.sheargroups where
 ```
 

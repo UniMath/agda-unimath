@@ -1,6 +1,8 @@
 # Mere equality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.mere-equality where
 ```
 

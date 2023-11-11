@@ -1,6 +1,8 @@
 # Coproducts in precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.coproducts-in-precategories where
 ```
 

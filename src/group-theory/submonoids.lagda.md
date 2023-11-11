@@ -1,6 +1,8 @@
 # Submonoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.submonoids where
 ```
 

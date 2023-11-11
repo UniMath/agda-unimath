@@ -1,6 +1,8 @@
 # The opposite of a group
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.opposite-groups where
 ```
 

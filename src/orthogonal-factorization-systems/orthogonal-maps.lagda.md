@@ -1,6 +1,8 @@
 # Orthogonal maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.orthogonal-maps where
 ```
 

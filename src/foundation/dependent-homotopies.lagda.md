@@ -1,6 +1,8 @@
 # Dependent homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.dependent-homotopies where
 ```
 

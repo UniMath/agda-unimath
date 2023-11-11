@@ -1,6 +1,8 @@
 # Top elements in posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.top-elements-posets where
 ```
 

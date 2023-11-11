@@ -1,6 +1,8 @@
 # Divisibility of integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.divisibility-integers where
 ```
 

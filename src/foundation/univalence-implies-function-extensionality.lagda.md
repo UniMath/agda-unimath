@@ -1,6 +1,8 @@
 # The univalence axiom implies function extensionality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.univalence-implies-function-extensionality where
 ```
 

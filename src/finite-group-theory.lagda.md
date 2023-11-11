@@ -1,5 +1,9 @@
 # Finite group theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the finite group theory folder
 
 ```agda

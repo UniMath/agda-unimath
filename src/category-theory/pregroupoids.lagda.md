@@ -1,6 +1,8 @@
 # Pregroupoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.pregroupoids where
 ```
 

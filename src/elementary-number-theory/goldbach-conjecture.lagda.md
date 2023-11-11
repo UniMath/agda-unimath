@@ -1,6 +1,8 @@
 # The Goldbach conjecture
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.goldbach-conjecture where
 ```
 

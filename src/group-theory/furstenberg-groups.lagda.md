@@ -1,6 +1,8 @@
 # Furstenberg groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.furstenberg-groups where
 ```
 

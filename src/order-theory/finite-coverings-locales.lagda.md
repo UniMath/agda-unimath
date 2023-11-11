@@ -1,6 +1,8 @@
 # Finite coverings in locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.finite-coverings-locales where
 ```
 

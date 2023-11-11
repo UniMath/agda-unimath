@@ -1,6 +1,8 @@
 # Functoriality of function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-function-types where
 
 open import foundation-core.functoriality-function-types public

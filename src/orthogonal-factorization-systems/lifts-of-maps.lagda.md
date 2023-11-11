@@ -1,6 +1,8 @@
 # Lifts of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.lifts-of-maps where
 ```
 

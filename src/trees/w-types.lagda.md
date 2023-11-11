@@ -1,6 +1,8 @@
 # W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.w-types where
 ```
 

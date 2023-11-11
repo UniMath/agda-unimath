@@ -1,6 +1,8 @@
 # Intersections of subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.intersections-subtypes where
 ```
 

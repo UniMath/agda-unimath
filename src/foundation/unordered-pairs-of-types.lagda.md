@@ -1,6 +1,8 @@
 # Unordered pairs of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.unordered-pairs-of-types where
 ```
 

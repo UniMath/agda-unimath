@@ -1,6 +1,8 @@
 # Decidable equivalence relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.decidable-equivalence-relations where
 ```
 

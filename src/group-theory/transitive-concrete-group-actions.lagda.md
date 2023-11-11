@@ -1,6 +1,8 @@
 # Transitive concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.transitive-concrete-group-actions where
 ```
 

@@ -1,6 +1,8 @@
 # Homomorphisms of meet sup lattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-meet-sup-lattices where
 ```
 

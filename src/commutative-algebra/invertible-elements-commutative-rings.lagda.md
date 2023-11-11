@@ -1,6 +1,8 @@
 # Invertible elements in commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.invertible-elements-commutative-rings where
 ```
 

@@ -1,6 +1,8 @@
 # The type of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.natural-numbers where
 ```
 

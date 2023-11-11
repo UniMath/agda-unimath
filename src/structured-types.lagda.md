@@ -1,5 +1,9 @@
 # Structured types
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the structured types folder
 
 ```agda

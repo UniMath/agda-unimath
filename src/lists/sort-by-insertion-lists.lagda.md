@@ -1,6 +1,8 @@
 # Sort by insertion for lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.sort-by-insertion-lists where
 ```
 

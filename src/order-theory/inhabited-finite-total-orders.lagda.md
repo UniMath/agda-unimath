@@ -1,6 +1,8 @@
 # Inhabited finite total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.inhabited-finite-total-orders where
 ```
 

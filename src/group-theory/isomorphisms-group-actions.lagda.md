@@ -1,6 +1,8 @@
 # Isomorphisms of group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.isomorphisms-group-actions where
 ```
 

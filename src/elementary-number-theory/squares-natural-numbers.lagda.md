@@ -1,6 +1,8 @@
 # Squares in the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.squares-natural-numbers where
 ```
 

@@ -1,6 +1,8 @@
 # Unordered `n`-tuples of elements in a type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.unordered-tuples where
 ```
 

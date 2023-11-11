@@ -1,6 +1,8 @@
 # Local rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.local-rings where
 ```
 

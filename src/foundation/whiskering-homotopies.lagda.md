@@ -1,6 +1,8 @@
 # Whiskering homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.whiskering-homotopies where
 
 open import foundation-core.whiskering-homotopies public

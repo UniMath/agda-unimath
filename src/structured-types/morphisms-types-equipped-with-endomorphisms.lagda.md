@@ -1,6 +1,8 @@
 # Morphisms of types equipped with endomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.morphisms-types-equipped-with-endomorphisms where
 ```
 

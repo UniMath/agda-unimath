@@ -1,6 +1,8 @@
 # Ideals of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.ideals-semirings where
 ```
 

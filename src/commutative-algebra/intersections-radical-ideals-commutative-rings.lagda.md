@@ -1,6 +1,8 @@
 # Intersections of radical ideals of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.intersections-radical-ideals-commutative-rings where
 ```
 

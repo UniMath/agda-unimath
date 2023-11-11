@@ -1,6 +1,8 @@
 # Sieves in categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.sieves-in-categories where
 ```
 

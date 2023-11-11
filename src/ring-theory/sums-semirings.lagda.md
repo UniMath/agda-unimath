@@ -1,6 +1,8 @@
 # Sums of elements in semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.sums-semirings where
 ```
 

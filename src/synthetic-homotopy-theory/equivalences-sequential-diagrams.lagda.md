@@ -1,6 +1,8 @@
 # Equivalences of sequential diagrams
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.equivalences-sequential-diagrams where
 ```
 

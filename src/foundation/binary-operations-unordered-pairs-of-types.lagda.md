@@ -1,6 +1,8 @@
 # Binary operations on unordered pairs of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.binary-operations-unordered-pairs-of-types where
 ```
 

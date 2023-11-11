@@ -1,6 +1,8 @@
 # The universal property of pushouts
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.universal-property-pushouts where
 ```
 

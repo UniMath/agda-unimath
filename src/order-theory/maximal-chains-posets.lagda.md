@@ -1,6 +1,8 @@
 # Maximal chains in posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.maximal-chains-posets where
 ```
 

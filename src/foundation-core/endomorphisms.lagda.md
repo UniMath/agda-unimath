@@ -1,6 +1,8 @@
 # Endomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.endomorphisms where
 ```
 

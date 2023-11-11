@@ -1,6 +1,8 @@
 # Double counting
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.double-counting where
 ```
 

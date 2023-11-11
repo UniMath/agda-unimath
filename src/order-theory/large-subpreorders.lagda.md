@@ -1,6 +1,8 @@
 # Large subpreorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.large-subpreorders where
 ```
 

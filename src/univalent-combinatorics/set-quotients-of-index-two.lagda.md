@@ -1,7 +1,7 @@
 # Set quotients of index `2`
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module univalent-combinatorics.set-quotients-of-index-two where
 ```

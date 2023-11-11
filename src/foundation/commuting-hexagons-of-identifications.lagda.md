@@ -1,6 +1,8 @@
 # Commuting hexagons of identifications
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.commuting-hexagons-of-identifications where
 ```
 

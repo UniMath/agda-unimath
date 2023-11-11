@@ -1,6 +1,8 @@
 # Pythagorean triples
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.pythagorean-triples where
 ```
 

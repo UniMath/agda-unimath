@@ -1,6 +1,8 @@
 # Conjugation of loops
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.conjugation-loops where
 ```
 

@@ -1,6 +1,8 @@
 # Sorial type families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.sorial-type-families where
 ```
 

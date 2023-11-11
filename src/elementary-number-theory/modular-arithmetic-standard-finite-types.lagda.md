@@ -1,6 +1,8 @@
 # Modular arithmetic on the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.modular-arithmetic-standard-finite-types where
 ```
 

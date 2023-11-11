@@ -1,6 +1,8 @@
 # Equivalences of higher groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.equivalences-higher-groups where
 ```
 

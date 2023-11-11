@@ -1,6 +1,8 @@
 # The universal property of maybe
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-maybe where
 ```
 

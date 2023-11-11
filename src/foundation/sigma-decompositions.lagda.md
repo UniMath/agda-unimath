@@ -1,7 +1,7 @@
 # Σ-decompositions of types
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module foundation.sigma-decompositions where
 ```

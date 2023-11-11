@@ -1,6 +1,8 @@
 # Wild loops
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.wild-loops where
 ```
 

@@ -1,6 +1,8 @@
 # Binary embeddings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.binary-embeddings where
 ```
 

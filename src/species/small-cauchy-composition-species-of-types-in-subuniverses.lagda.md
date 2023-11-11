@@ -1,6 +1,8 @@
 # Small Cauchy composition of species types in subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.small-cauchy-composition-species-of-types-in-subuniverses where
 ```
 

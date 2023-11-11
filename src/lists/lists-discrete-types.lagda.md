@@ -1,6 +1,8 @@
 # Lists of elements in discrete types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.lists-discrete-types where
 ```
 

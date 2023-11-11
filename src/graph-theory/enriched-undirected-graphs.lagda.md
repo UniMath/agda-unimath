@@ -1,6 +1,8 @@
 # Enriched undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.enriched-undirected-graphs where
 ```
 

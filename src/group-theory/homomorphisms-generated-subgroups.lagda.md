@@ -1,6 +1,8 @@
 # Homomorphisms of generated subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.homomorphisms-generated-subgroups where
 ```
 

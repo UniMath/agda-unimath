@@ -1,6 +1,8 @@
 # Torsors of abstract groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.torsors where
 ```
 

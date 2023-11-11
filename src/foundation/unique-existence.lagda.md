@@ -1,6 +1,8 @@
 # Unique existence
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.unique-existence where
 ```
 

@@ -1,6 +1,8 @@
 # The universal cover of the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.universal-cover-circle where
 ```
 

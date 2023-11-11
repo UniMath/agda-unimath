@@ -1,6 +1,8 @@
 # Isomorphisms in subprecategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.isomorphisms-in-subprecategories where
 ```
 

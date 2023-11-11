@@ -1,6 +1,8 @@
 # Circuits in undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.circuits-undirected-graphs where
 ```
 

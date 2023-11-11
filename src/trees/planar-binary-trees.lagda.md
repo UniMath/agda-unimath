@@ -1,6 +1,8 @@
 # Planar binary trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.planar-binary-trees where
 ```
 

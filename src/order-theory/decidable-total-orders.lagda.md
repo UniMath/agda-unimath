@@ -1,6 +1,8 @@
 # Decidable total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.decidable-total-orders where
 ```
 

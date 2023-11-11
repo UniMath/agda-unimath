@@ -1,6 +1,8 @@
 # Pointed torsorial type families
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.pointed-torsorial-type-families where
 ```
 

@@ -1,6 +1,8 @@
 # Concatenation of lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.concatenation-lists where
 ```
 

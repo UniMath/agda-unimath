@@ -1,6 +1,8 @@
 # Hasse-Weil species
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.hasse-weil-species where
 ```
 

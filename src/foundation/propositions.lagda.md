@@ -1,6 +1,8 @@
 # Propositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.propositions where
 
 open import foundation-core.propositions public

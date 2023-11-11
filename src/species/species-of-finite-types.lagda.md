@@ -1,6 +1,8 @@
 # Species of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.species-of-finite-types where
 ```
 

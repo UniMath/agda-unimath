@@ -1,6 +1,8 @@
 # Homotopies of natural transformations in large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.homotopies-natural-transformations-large-precategories where
 ```
 

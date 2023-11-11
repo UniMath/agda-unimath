@@ -1,6 +1,8 @@
 # Constant maps of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.constant-maps-pointed-types where
 ```
 

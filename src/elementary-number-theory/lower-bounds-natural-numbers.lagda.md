@@ -1,6 +1,8 @@
 # Lower bounds of type families over the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.lower-bounds-natural-numbers where
 ```
 

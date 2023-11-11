@@ -1,6 +1,8 @@
 # Cartesian products of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.cartesian-products-species-of-types where
 ```
 

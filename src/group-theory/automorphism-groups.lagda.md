@@ -1,6 +1,8 @@
 # Automorphism groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.automorphism-groups where
 ```
 

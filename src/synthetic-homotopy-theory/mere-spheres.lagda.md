@@ -1,6 +1,8 @@
 # Mere spheres
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.mere-spheres where
 ```
 

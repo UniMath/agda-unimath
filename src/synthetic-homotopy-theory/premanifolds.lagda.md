@@ -1,6 +1,8 @@
 # Premanifolds
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.premanifolds where
 ```
 

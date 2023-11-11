@@ -1,6 +1,8 @@
 # Mere embeddings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.mere-embeddings where
 ```
 

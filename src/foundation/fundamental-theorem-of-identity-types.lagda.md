@@ -1,6 +1,8 @@
 # The fundamental theorem of identity types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.fundamental-theorem-of-identity-types where
 ```
 

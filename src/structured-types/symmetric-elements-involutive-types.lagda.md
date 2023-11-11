@@ -1,6 +1,8 @@
 # Symmetric elements of involutive types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.symmetric-elements-involutive-types where
 ```
 

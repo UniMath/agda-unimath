@@ -1,6 +1,8 @@
 # Structured type duality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.structured-type-duality where
 ```
 

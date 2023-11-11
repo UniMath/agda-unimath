@@ -1,6 +1,8 @@
 # Multiplication of integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.multiplication-integers where
 ```
 

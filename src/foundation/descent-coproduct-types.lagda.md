@@ -1,6 +1,8 @@
 # Descent for coproduct types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.descent-coproduct-types where
 ```
 

@@ -1,6 +1,8 @@
 # Structure
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.structure where
 ```
 

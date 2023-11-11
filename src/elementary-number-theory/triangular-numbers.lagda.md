@@ -1,6 +1,8 @@
 # The triangular numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.triangular-numbers where
 ```
 

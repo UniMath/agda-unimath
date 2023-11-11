@@ -1,6 +1,8 @@
 # Intersections of ideals of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.intersections-ideals-rings where
 ```
 

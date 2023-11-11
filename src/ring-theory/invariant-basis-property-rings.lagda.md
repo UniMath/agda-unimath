@@ -1,6 +1,8 @@
 # The invariant basis property of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.invariant-basis-property-rings where
 ```
 

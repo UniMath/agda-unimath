@@ -1,6 +1,8 @@
 # Truncation levels
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.truncation-levels where
 
 open import foundation-core.truncation-levels public

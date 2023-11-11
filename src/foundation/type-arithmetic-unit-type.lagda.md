@@ -1,6 +1,8 @@
 # Type arithmetic with the unit type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-arithmetic-unit-type where
 ```
 

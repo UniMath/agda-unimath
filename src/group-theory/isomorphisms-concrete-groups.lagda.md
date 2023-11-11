@@ -1,6 +1,8 @@
 # Isomorphisms of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.isomorphisms-concrete-groups where
 ```
 

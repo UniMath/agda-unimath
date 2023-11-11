@@ -1,6 +1,8 @@
 # Sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.sets where
 
 open import foundation-core.sets public

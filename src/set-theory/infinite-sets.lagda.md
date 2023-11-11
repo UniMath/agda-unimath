@@ -1,6 +1,8 @@
 # Infinite sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module set-theory.infinite-sets where
 ```
 

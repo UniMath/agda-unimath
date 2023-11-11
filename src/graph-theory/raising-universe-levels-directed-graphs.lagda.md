@@ -1,6 +1,8 @@
 # Raising universe levels of directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.raising-universe-levels-directed-graphs where
 ```
 

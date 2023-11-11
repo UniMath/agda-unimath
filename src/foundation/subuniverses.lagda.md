@@ -1,6 +1,8 @@
 # Subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.subuniverses where
 ```
 

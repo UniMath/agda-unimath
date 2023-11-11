@@ -1,6 +1,8 @@
 # The category of families of sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.category-of-families-of-sets where
 ```
 

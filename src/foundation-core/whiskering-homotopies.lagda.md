@@ -1,6 +1,8 @@
 # Whiskering homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.whiskering-homotopies where
 ```
 

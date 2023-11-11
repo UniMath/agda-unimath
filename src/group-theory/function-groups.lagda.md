@@ -1,6 +1,8 @@
 # Function groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.function-groups where
 ```
 

@@ -1,6 +1,8 @@
 # Functoriality of the type of vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.functoriality-vectors where
 ```
 

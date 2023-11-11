@@ -1,6 +1,8 @@
 # The precategory of decidable total orders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.precategory-of-decidable-total-orders where
 ```
 

@@ -1,6 +1,8 @@
 # Minimum on the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.minimum-natural-numbers where
 ```
 

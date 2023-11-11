@@ -1,6 +1,8 @@
 # Arithmetic law for coproduct decomposition and Σ-decomposition
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.arithmetic-law-coproduct-and-sigma-decompositions where
 ```
 

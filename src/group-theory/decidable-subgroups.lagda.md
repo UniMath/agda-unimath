@@ -1,6 +1,8 @@
 # Decidable subgroups of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.decidable-subgroups where
 ```
 

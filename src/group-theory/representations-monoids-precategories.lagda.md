@@ -1,6 +1,8 @@
 # Representations of monoids in precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.representations-monoids-precategories where
 ```
 

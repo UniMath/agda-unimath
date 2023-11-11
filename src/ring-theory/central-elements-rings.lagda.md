@@ -1,6 +1,8 @@
 # Central elements of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.central-elements-rings where
 ```
 

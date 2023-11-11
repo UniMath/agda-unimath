@@ -1,6 +1,8 @@
 # The representing arrow category
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.representing-arrow-category where
 ```
 

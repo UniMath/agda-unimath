@@ -1,6 +1,8 @@
 # Ferrers diagrams (unlabeled partitions)
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.ferrers-diagrams where
 ```
 

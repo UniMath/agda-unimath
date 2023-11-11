@@ -1,6 +1,8 @@
 # The identity modality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.identity-modality where
 ```
 

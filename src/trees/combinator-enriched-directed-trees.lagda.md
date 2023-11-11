@@ -1,6 +1,8 @@
 # Combinators of enriched directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.combinator-enriched-directed-trees where
 ```
 

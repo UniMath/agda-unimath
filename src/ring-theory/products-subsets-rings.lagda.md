@@ -1,6 +1,8 @@
 # Products of subsets of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.products-subsets-rings where
 ```
 

@@ -1,5 +1,9 @@
 # Commutative algebra
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the commutative algebra folder
 
 ```agda

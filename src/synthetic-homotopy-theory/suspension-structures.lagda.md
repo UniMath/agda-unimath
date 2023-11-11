@@ -1,6 +1,8 @@
 # Suspension Structures
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.suspension-structures where
 ```
 

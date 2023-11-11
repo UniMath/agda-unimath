@@ -1,6 +1,8 @@
 # Equivalences of cubes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.equivalences-cubes where
 ```
 

@@ -1,6 +1,8 @@
 # Function groups of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.function-abelian-groups where
 ```
 

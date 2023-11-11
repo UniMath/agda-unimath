@@ -1,6 +1,8 @@
 # Automorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.automorphisms where
 ```
 

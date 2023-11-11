@@ -1,6 +1,8 @@
 # Extensional W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.extensional-w-types where
 ```
 

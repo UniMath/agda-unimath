@@ -1,6 +1,8 @@
 # Ethane
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module organic-chemistry.ethane where
 ```
 

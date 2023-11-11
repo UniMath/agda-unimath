@@ -1,6 +1,8 @@
 # Finite choice
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.finite-choice where
 ```
 

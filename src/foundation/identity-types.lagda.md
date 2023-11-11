@@ -1,6 +1,8 @@
 # Identity types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.identity-types where
 
 open import foundation-core.identity-types public

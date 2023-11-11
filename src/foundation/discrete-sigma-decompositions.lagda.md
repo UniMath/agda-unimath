@@ -1,6 +1,8 @@
 # Discrete Σ-decompositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.discrete-sigma-decompositions where
 ```
 

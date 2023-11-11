@@ -1,6 +1,8 @@
 # Functors between set-magmoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.functors-set-magmoids where
 ```
 

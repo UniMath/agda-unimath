@@ -1,6 +1,8 @@
 # Sequences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.sequences where
 ```
 

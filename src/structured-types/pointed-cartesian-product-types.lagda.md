@@ -1,6 +1,8 @@
 # Pointed cartesian product types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-cartesian-product-types where
 ```
 

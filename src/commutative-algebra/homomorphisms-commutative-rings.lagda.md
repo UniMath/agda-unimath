@@ -1,6 +1,8 @@
 # Homomorphisms of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.homomorphisms-commutative-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Unions of finite subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.unions-subtypes where
 
 open import foundation.unions-subtypes public

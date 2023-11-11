@@ -1,6 +1,8 @@
 # Split essentially surjective functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.split-essentially-surjective-functors-precategories where
 ```
 

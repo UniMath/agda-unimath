@@ -1,6 +1,8 @@
 # The order of an element in a group
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.orders-of-elements-groups where
 ```
 

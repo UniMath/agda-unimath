@@ -1,6 +1,8 @@
 # Bands
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.bands where
 ```
 

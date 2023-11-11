@@ -1,6 +1,8 @@
 # The category of sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.category-of-sets where
 ```
 

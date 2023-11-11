@@ -1,6 +1,8 @@
 # Reflexive graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.reflexive-graphs where
 ```
 

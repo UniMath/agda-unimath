@@ -1,6 +1,8 @@
 # Type arithmetic for coproduct types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-arithmetic-coproduct-types where
 ```
 

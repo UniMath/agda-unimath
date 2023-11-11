@@ -1,6 +1,8 @@
 # Inequality on the rational numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.inequality-rational-numbers where
 ```
 

@@ -1,6 +1,8 @@
 # Idempotent elements in rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.idempotent-elements-rings where
 ```
 

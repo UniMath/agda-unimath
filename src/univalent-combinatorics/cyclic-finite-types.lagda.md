@@ -1,6 +1,8 @@
 # Cyclic finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.cyclic-finite-types where
 ```
 

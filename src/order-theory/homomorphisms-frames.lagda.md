@@ -1,6 +1,8 @@
 # Homomorphisms of frames
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-frames where
 ```
 

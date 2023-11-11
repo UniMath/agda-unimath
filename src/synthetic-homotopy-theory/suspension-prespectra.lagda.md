@@ -1,6 +1,8 @@
 # Suspension prespectra
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.suspension-prespectra where
 ```
 

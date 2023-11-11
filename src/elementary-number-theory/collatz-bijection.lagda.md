@@ -1,6 +1,8 @@
 # The Collatz bijection
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.collatz-bijection where
 ```
 

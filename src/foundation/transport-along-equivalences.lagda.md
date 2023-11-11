@@ -1,6 +1,8 @@
 # Transport along equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.transport-along-equivalences where
 ```
 

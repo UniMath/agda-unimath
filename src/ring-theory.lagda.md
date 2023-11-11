@@ -1,5 +1,9 @@
 # Ring theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the ring theory folder
 
 ```agda

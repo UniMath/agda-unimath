@@ -1,6 +1,8 @@
 # Commuting elements of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.commuting-elements-rings where
 ```
 

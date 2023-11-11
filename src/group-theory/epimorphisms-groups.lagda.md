@@ -1,6 +1,8 @@
 # Epimorphisms in groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.epimorphisms-groups where
 ```
 

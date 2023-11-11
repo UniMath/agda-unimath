@@ -1,6 +1,8 @@
 # Cycle prime decompositions of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.cycle-prime-decomposition-natural-numbers where
 ```
 

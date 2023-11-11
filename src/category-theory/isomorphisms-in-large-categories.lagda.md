@@ -1,6 +1,8 @@
 # Isomorphisms in large categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.isomorphisms-in-large-categories where
 ```
 

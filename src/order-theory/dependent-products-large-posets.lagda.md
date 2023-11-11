@@ -1,6 +1,8 @@
 # Dependent products of large posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.dependent-products-large-posets where
 ```
 

@@ -1,6 +1,8 @@
 # Dependent types equipped with automorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.dependent-types-equipped-with-automorphisms where
 ```
 

@@ -1,6 +1,8 @@
 # Peano arithmetic
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.peano-arithmetic where
 ```
 

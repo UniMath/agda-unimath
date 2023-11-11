@@ -1,6 +1,8 @@
 # Fibers of directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.fibers-directed-graphs where
 ```
 

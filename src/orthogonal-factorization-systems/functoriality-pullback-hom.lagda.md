@@ -1,6 +1,8 @@
 # Functoriality of the pullback-hom
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.functoriality-pullback-hom where
 ```
 

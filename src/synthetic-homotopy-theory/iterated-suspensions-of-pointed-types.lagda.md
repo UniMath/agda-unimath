@@ -1,6 +1,8 @@
 # Iterated suspensions of pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.iterated-suspensions-of-pointed-types where
 ```
 

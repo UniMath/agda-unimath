@@ -1,6 +1,8 @@
 # Unpointed maps between pointed types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.unpointed-maps where
 ```
 

@@ -1,6 +1,8 @@
 # Homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.homotopies where
 
 open import foundation-core.homotopies public

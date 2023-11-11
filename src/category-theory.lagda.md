@@ -1,5 +1,9 @@
 # Category theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Examples of categories and large categories
 
 {{#include tables/categories.md}}

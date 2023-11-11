@@ -1,6 +1,8 @@
 # Perfect cores
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.perfect-cores where
 ```
 

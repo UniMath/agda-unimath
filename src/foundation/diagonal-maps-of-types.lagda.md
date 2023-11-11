@@ -1,6 +1,8 @@
 # Diagonal maps of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.diagonal-maps-of-types where
 
 open import foundation-core.diagonal-maps-of-types public

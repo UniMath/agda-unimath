@@ -1,6 +1,8 @@
 # Coequalizers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.coequalizers where
 ```
 

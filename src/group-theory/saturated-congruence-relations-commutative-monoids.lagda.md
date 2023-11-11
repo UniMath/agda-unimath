@@ -1,6 +1,8 @@
 # Saturated congruence relations on commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.saturated-congruence-relations-commutative-monoids where
 ```
 

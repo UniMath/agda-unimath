@@ -1,6 +1,8 @@
 # Dependent products of large categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.dependent-products-of-large-categories where
 ```
 

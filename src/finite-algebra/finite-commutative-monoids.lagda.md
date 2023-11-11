@@ -1,6 +1,8 @@
 # Finite Commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.finite-commutative-monoids where
 ```
 

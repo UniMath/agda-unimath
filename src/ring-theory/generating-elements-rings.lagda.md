@@ -1,6 +1,8 @@
 # Generating elements of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.generating-elements-rings where
 ```
 

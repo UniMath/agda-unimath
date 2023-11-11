@@ -1,6 +1,8 @@
 # Least upper bounds in posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.least-upper-bounds-posets where
 ```
 

@@ -1,6 +1,8 @@
 # Functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.functors-precategories where
 ```
 

@@ -1,6 +1,8 @@
 # Truncated maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.truncated-maps where
 ```
 

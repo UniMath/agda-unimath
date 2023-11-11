@@ -1,6 +1,8 @@
 # The difference between integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.difference-integers where
 ```
 

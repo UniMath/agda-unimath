@@ -1,6 +1,8 @@
 # Multiplicative units in the integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.multiplicative-units-integers where
 ```
 

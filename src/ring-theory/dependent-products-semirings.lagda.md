@@ -1,6 +1,8 @@
 # Dependent products of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.dependent-products-semirings where
 ```
 

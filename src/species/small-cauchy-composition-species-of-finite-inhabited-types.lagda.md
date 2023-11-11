@@ -1,7 +1,7 @@
 # Small Composition of species of finite inhabited types
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module species.small-cauchy-composition-species-of-finite-inhabited-types where
 ```

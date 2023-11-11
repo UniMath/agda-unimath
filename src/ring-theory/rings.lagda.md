@@ -1,6 +1,8 @@
 # Rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.rings where
 ```
 

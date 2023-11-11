@@ -1,6 +1,8 @@
 # Conservative functors between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.conservative-functors-precategories where
 ```
 

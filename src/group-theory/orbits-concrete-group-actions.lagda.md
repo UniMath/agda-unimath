@@ -1,6 +1,8 @@
 # Orbits of concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.orbits-concrete-group-actions where
 ```
 

@@ -1,6 +1,8 @@
 # Large semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.large-semigroups where
 ```
 

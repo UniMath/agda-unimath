@@ -1,7 +1,7 @@
 # Functoriality of quotient groups
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module group-theory.functoriality-quotient-groups where
 ```

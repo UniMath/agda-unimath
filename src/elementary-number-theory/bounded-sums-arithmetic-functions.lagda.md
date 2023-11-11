@@ -1,6 +1,8 @@
 # Bounded sums of arithmetic functions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.bounded-sums-arithmetic-functions where
 ```
 

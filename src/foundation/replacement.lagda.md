@@ -1,6 +1,8 @@
 # The type theoretic replacement axiom
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.replacement where
 ```
 

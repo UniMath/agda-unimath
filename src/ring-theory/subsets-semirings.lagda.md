@@ -1,6 +1,8 @@
 # Subsets of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.subsets-semirings where
 ```
 

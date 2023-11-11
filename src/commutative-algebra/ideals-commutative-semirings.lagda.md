@@ -1,6 +1,8 @@
 # Ideals of commutative semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.ideals-commutative-semirings where
 ```
 

@@ -1,6 +1,8 @@
 # Split surjective maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.split-surjective-maps where
 ```
 

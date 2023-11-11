@@ -1,6 +1,8 @@
 # The action on identifications of functions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.action-on-identifications-functions where
 ```
 

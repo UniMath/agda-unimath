@@ -1,6 +1,8 @@
 # The fundamental theorem of arithmetic
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.fundamental-theorem-of-arithmetic where
 ```
 

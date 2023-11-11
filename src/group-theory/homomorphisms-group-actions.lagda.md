@@ -1,6 +1,8 @@
 # Homomorphisms of group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.homomorphisms-group-actions where
 ```
 

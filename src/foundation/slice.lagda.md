@@ -1,6 +1,8 @@
 # Morphisms in the slice category of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.slice where
 ```
 

@@ -1,6 +1,8 @@
 # Addition on the integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.addition-integers where
 ```
 

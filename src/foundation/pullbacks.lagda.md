@@ -1,6 +1,8 @@
 # Pullbacks
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.pullbacks where
 
 open import foundation-core.pullbacks public

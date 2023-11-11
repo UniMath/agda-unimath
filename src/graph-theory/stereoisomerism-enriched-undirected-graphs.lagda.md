@@ -1,6 +1,8 @@
 # Stereoisomerism for enriched undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.stereoisomerism-enriched-undirected-graphs where
 ```
 

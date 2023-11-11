@@ -1,6 +1,8 @@
 # Large meet-subsemilattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.large-meet-subsemilattices where
 ```
 

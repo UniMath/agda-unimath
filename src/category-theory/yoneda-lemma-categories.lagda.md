@@ -1,6 +1,8 @@
 # The Yoneda lemma for categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.yoneda-lemma-categories where
 ```
 

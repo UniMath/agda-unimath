@@ -1,6 +1,8 @@
 # Equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equivalences where
 
 open import foundation-core.equivalences public

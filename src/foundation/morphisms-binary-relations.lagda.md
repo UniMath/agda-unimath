@@ -1,6 +1,8 @@
 # Morphisms of binary relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.morphisms-binary-relations where
 ```
 

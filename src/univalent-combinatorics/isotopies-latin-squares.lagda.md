@@ -1,6 +1,8 @@
 # Isotopies of Latin squares
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.isotopies-latin-squares where
 ```
 

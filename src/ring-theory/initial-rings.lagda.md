@@ -1,6 +1,8 @@
 # Initial rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.initial-rings where
 ```
 

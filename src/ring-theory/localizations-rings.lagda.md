@@ -1,6 +1,8 @@
 # Localizations of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.localizations-rings where
 ```
 

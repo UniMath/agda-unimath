@@ -1,6 +1,8 @@
 # Decidable propositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.decidable-propositions where
 
 open import foundation.decidable-propositions public

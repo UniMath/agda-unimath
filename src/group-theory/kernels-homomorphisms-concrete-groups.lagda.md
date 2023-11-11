@@ -1,6 +1,8 @@
 # Kernels of homomorphisms of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.kernels-homomorphisms-concrete-groups where
 ```
 

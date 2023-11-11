@@ -1,6 +1,8 @@
 # Groupoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.groupoids where
 ```
 

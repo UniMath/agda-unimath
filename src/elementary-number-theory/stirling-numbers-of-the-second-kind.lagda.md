@@ -1,6 +1,8 @@
 # Stirling numbers of the second kind
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.stirling-numbers-of-the-second-kind where
 ```
 

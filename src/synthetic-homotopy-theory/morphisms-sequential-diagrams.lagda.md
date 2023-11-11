@@ -1,6 +1,8 @@
 # Morphisms of sequential diagrams
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.morphisms-sequential-diagrams where
 ```
 

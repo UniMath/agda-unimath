@@ -1,6 +1,8 @@
 # Cartesian product types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.cartesian-product-types where
 
 open import foundation-core.cartesian-product-types public

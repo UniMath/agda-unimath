@@ -1,6 +1,8 @@
 # Decidable maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.decidable-maps where
 ```
 

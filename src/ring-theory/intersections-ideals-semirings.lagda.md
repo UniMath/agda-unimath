@@ -1,6 +1,8 @@
 # Intersections of ideals of semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.intersections-ideals-semirings where
 ```
 

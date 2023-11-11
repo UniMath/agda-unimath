@@ -1,6 +1,8 @@
 # The image of a map
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.image-of-maps where
 
 open import foundation.images public

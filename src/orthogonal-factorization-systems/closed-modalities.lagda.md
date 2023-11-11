@@ -1,6 +1,8 @@
 # The closed modalities
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.closed-modalities where
 ```
 

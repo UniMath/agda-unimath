@@ -1,6 +1,8 @@
 # The universal property of the integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.universal-property-integers where
 ```
 

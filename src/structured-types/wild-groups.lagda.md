@@ -1,6 +1,8 @@
 # Wild groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.wild-groups where
 ```
 

@@ -1,6 +1,8 @@
 # Free higher group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.free-higher-group-actions where
 ```
 

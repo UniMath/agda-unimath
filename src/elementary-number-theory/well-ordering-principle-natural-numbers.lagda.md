@@ -1,6 +1,8 @@
 # The Well-Ordering Principle of the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.well-ordering-principle-natural-numbers where
 ```
 

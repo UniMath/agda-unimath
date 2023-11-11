@@ -1,6 +1,8 @@
 # The distance between natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.distance-natural-numbers where
 ```
 

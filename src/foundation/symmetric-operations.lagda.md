@@ -1,6 +1,8 @@
 # Symmetric operations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.symmetric-operations where
 ```
 

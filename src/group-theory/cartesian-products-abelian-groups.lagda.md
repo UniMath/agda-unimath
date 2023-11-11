@@ -1,6 +1,8 @@
 # Cartesian products of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.cartesian-products-abelian-groups where
 ```
 

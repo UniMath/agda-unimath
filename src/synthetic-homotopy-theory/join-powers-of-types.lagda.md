@@ -1,6 +1,8 @@
 # Join powers of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.join-powers-of-types where
 ```
 

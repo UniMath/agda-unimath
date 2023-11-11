@@ -1,6 +1,8 @@
 # Commuting squares of morphisms in large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.commuting-squares-of-morphisms-in-large-precategories where
 ```
 

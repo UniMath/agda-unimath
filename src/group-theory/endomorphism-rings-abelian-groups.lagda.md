@@ -1,6 +1,8 @@
 # The endomorphism rings of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.endomorphism-rings-abelian-groups where
 ```
 

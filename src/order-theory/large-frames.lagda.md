@@ -1,6 +1,8 @@
 # Large frames
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.large-frames where
 ```
 

@@ -1,6 +1,8 @@
 # Faithful pointed maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.faithful-pointed-maps where
 ```
 

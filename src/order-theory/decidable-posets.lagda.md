@@ -1,6 +1,8 @@
 # Decidable posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.decidable-posets where
 ```
 

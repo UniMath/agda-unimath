@@ -1,6 +1,8 @@
 # Posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.posets where
 ```
 

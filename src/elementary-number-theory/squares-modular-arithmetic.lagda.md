@@ -1,6 +1,8 @@
 # Squares in ℤₚ
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.squares-modular-arithmetic where
 ```
 

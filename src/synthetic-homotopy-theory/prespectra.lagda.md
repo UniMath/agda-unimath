@@ -1,6 +1,8 @@
 # Prespectra
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.prespectra where
 ```
 

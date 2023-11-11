@@ -1,6 +1,8 @@
 # The category of functors and natural transformations from small to large categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.category-of-functors-from-small-to-large-categories where
 ```
 

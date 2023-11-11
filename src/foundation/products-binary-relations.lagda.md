@@ -1,6 +1,8 @@
 # Products of binary relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.products-binary-relations where
 ```
 

@@ -1,6 +1,8 @@
 # The strong induction principle for the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.strong-induction-natural-numbers where
 ```
 

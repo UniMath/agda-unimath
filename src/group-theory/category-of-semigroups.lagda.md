@@ -1,6 +1,8 @@
 # The category of semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.category-of-semigroups where
 ```
 

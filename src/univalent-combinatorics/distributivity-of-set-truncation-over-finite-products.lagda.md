@@ -1,6 +1,8 @@
 # Distributivity of set truncation over finite products
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.distributivity-of-set-truncation-over-finite-products where
 ```
 

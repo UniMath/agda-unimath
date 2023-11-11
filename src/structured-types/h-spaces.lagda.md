@@ -1,6 +1,8 @@
 # H-spaces
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.h-spaces where
 ```
 

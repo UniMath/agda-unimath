@@ -1,6 +1,8 @@
 # Diagonals of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.diagonals-of-maps where
 ```
 

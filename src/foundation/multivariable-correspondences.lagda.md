@@ -1,6 +1,8 @@
 # Multivariable correspondences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.multivariable-correspondences where
 ```
 

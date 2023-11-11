@@ -1,6 +1,8 @@
 # Minimum on the standard finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.minimum-standard-finite-types where
 ```
 

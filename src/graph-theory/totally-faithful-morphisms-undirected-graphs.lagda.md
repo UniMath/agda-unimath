@@ -1,6 +1,8 @@
 # Totally faithful morphisms of undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.totally-faithful-morphisms-undirected-graphs where
 ```
 

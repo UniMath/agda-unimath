@@ -1,6 +1,8 @@
 # Rigid objects in a precategory
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.rigid-objects-precategories where
 ```
 

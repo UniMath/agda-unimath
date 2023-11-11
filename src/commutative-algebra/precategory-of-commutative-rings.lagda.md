@@ -1,6 +1,8 @@
 # The precategory of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.precategory-of-commutative-rings where
 ```
 

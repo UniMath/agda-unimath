@@ -1,6 +1,8 @@
 # Kernels
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.kernels where
 ```
 

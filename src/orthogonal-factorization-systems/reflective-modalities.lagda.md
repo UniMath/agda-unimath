@@ -1,6 +1,8 @@
 # Reflective modalities
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.reflective-modalities where
 ```
 

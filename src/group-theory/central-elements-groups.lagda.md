@@ -1,6 +1,8 @@
 # Central elements of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.central-elements-groups where
 ```
 

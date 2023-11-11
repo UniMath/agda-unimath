@@ -1,6 +1,8 @@
 # Dirichlet series of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.dirichlet-series-species-of-types where
 ```
 

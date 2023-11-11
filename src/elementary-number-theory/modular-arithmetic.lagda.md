@@ -1,6 +1,8 @@
 # Modular arithmetic
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.modular-arithmetic where
 ```
 

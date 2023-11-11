@@ -1,6 +1,8 @@
 # Literals
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.literals where
 ```
 

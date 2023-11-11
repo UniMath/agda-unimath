@@ -1,6 +1,8 @@
 # Trails in directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.trails-directed-graphs where
 ```
 

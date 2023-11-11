@@ -1,6 +1,8 @@
 # The poset of left ideals of a ring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.poset-of-left-ideals-rings where
 ```
 

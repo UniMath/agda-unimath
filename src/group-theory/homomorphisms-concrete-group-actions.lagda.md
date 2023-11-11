@@ -1,6 +1,8 @@
 # Morphisms of concrete group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.homomorphisms-concrete-group-actions where
 ```
 

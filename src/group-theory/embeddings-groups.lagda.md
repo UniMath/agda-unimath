@@ -1,6 +1,8 @@
 # Embeddings of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.embeddings-groups where
 ```
 

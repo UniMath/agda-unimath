@@ -1,6 +1,8 @@
 # The Twin Prime conjecture
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.twin-prime-conjecture where
 ```
 

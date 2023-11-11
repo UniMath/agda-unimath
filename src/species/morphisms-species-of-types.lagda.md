@@ -1,6 +1,8 @@
 # Morphisms of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.morphisms-species-of-types where
 ```
 

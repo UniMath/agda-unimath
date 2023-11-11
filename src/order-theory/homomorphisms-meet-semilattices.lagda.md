@@ -1,6 +1,8 @@
 # Homomorphisms of meet-semilattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-meet-semilattices where
 ```
 

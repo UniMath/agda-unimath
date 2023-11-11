@@ -1,6 +1,8 @@
 # Trails in undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.trails-undirected-graphs where
 ```
 

@@ -1,6 +1,8 @@
 # Telescopes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.telescopes where
 ```
 

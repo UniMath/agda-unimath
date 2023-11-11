@@ -1,6 +1,8 @@
 # The poset of natural numbers ordered by divisibility
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module
   elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility
   where

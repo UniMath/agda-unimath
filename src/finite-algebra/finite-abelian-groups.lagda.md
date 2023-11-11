@@ -1,6 +1,8 @@
 # Abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.finite-abelian-groups where
 ```
 

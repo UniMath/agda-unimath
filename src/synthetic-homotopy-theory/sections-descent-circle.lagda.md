@@ -1,6 +1,8 @@
 # Sections of families over the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.sections-descent-circle where
 ```
 

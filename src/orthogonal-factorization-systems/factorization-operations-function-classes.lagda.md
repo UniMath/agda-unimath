@@ -1,6 +1,8 @@
 # Factorization operations into function classes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.factorization-operations-function-classes where
 ```
 

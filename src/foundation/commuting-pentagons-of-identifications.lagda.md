@@ -1,6 +1,8 @@
 # Commuting pentagons of identifications
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.commuting-pentagons-of-identifications where
 ```
 

@@ -1,6 +1,8 @@
 # Group solver
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.group-solver where
 ```
 

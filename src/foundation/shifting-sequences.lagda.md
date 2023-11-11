@@ -1,6 +1,8 @@
 # Shifting sequences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.shifting-sequences where
 ```
 

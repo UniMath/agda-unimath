@@ -1,6 +1,8 @@
 # Alternating concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.alternating-concrete-groups where
 ```
 

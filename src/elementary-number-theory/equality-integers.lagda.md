@@ -1,6 +1,8 @@
 # Equality of integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.equality-integers where
 ```
 

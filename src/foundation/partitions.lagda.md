@@ -1,6 +1,8 @@
 # Partitions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.partitions where
 ```
 

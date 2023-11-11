@@ -1,6 +1,8 @@
 # Subsets of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.subsets-groups where
 ```
 

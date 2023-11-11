@@ -1,6 +1,8 @@
 # Decidable types in elementary number theory
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.decidable-types where
 ```
 

@@ -1,6 +1,8 @@
 # The universal property of dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-dependent-pair-types where
 ```
 

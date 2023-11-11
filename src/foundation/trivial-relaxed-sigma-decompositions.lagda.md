@@ -1,6 +1,8 @@
 # Trivial relaxed Σ-decompositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.trivial-relaxed-sigma-decompositions where
 ```
 

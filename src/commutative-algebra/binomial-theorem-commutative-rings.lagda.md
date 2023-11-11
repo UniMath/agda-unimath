@@ -1,6 +1,8 @@
 # The binomial theorem in commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.binomial-theorem-commutative-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Vertex covers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.vertex-covers where
 ```
 

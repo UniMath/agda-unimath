@@ -1,6 +1,8 @@
 # The ordinal induction principle for the natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.ordinal-induction-natural-numbers where
 ```
 

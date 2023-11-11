@@ -1,6 +1,8 @@
 # Similarity of elements in large preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.similarity-of-elements-large-preorders where
 ```
 

@@ -1,6 +1,8 @@
 # Counting the elements of dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.counting-dependent-pair-types where
 ```
 

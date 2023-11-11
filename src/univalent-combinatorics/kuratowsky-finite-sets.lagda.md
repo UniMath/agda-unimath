@@ -1,6 +1,8 @@
 # Kuratowsky finite sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.kuratowsky-finite-sets where
 ```
 

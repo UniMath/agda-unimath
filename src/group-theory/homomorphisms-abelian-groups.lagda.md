@@ -1,6 +1,8 @@
 # Homomorphisms of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.homomorphisms-abelian-groups where
 ```
 

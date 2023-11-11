@@ -1,6 +1,8 @@
 # Intersections of subgroups of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.intersections-subgroups-groups where
 ```
 

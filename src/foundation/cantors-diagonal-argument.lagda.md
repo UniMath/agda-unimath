@@ -1,6 +1,8 @@
 # Cantor's diagonal argument
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.cantors-diagonal-argument where
 ```
 

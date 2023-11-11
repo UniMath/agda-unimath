@@ -1,6 +1,8 @@
 # Connected set bundles over the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.connected-set-bundles-circle where
 ```
 

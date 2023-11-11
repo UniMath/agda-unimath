@@ -1,7 +1,7 @@
 # Precategory solver
 
 ```agda
-{-# OPTIONS --no-exact-split #-}
+{-# OPTIONS --cubical-compatible --no-exact-split #-}
 
 module reflection.precategory-solver where
 ```

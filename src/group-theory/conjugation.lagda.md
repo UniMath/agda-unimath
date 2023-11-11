@@ -1,6 +1,8 @@
 # Conjugation in groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.conjugation where
 ```
 

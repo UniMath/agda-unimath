@@ -1,6 +1,8 @@
 # Boolean reflection
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module reflection.boolean-reflection where
 ```
 

@@ -1,6 +1,8 @@
 # Isomorphisms of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.isomorphisms-abelian-groups where
 ```
 

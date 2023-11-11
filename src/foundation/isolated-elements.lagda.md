@@ -1,6 +1,8 @@
 # Isolated elements
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.isolated-elements where
 ```
 

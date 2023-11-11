@@ -1,6 +1,8 @@
 # Morphisms of arrows
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.morphisms-arrows where
 ```
 

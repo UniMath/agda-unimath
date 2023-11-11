@@ -1,6 +1,8 @@
 # Commuting squares of pointed maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.commuting-squares-of-pointed-maps where
 ```
 

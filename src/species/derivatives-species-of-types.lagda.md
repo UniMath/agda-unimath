@@ -1,6 +1,8 @@
 # Derivatives of species
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.derivatives-species-of-types where
 ```
 

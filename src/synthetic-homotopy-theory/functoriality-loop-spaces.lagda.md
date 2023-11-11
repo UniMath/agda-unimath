@@ -1,6 +1,8 @@
 # Functoriality of the loop space operation
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.functoriality-loop-spaces where
 ```
 

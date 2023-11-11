@@ -1,6 +1,8 @@
 # Decidable equivalence relations on finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.decidable-equivalence-relations where
 ```
 

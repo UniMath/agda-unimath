@@ -1,6 +1,8 @@
 # Natural transformations between functors between large categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.natural-transformations-functors-large-categories where
 ```
 

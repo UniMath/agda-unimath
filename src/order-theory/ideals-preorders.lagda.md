@@ -1,6 +1,8 @@
 # Ideals in preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.ideals-preorders where
 ```
 

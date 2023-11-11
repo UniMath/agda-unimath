@@ -1,6 +1,8 @@
 # Transporting commutative ring structures along isomorphisms of abelian groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module
   commutative-algebra.transporting-commutative-ring-structure-isomorphisms-abelian-groups
   where

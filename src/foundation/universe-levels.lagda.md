@@ -1,6 +1,8 @@
 # Universe levels
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universe-levels where
 
 open import Agda.Primitive

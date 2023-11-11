@@ -1,6 +1,8 @@
 # Epimorphism in large precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.epimorphisms-in-large-precategories where
 ```
 

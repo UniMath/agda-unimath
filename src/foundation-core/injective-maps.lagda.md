@@ -1,6 +1,8 @@
 # Injective maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.injective-maps where
 ```
 

@@ -1,6 +1,8 @@
 # Functoriality of the fiber operation on directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.functoriality-fiber-directed-tree where
 ```
 

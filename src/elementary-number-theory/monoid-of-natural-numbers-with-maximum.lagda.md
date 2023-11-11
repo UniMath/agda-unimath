@@ -1,6 +1,8 @@
 # The monoid of the natural numbers with maximum
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.monoid-of-natural-numbers-with-maximum where
 ```
 

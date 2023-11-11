@@ -1,6 +1,8 @@
 # Multisets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.multisets where
 ```
 

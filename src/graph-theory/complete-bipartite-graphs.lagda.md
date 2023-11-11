@@ -1,6 +1,8 @@
 # Complete bipartite graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.complete-bipartite-graphs where
 ```
 

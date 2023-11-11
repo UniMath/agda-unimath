@@ -1,6 +1,8 @@
 # Perfect images
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.perfect-images where
 ```
 

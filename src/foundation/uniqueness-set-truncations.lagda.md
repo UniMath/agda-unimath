@@ -1,6 +1,8 @@
 # Uniqueness of set truncations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.uniqueness-set-truncations where
 ```
 

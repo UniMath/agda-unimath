@@ -1,6 +1,8 @@
 # Large dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.large-dependent-pair-types where
 ```
 

@@ -1,6 +1,8 @@
 # The universal property of the empty type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-empty-type where
 ```
 

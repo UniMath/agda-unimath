@@ -1,6 +1,8 @@
 # Invertible elements in monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.invertible-elements-monoids where
 ```
 

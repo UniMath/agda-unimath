@@ -1,6 +1,8 @@
 # Cauchy series of species of types in a subuniverse
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.cauchy-series-species-of-types-in-subuniverses where
 ```
 

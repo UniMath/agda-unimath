@@ -1,6 +1,8 @@
 # Pointed homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.pointed-homotopies where
 ```
 

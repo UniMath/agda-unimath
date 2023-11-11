@@ -1,6 +1,8 @@
 # Joins of ideals of rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.joins-ideals-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Maximal chains in preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.maximal-chains-preorders where
 ```
 

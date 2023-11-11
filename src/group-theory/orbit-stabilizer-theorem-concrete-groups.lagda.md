@@ -1,6 +1,8 @@
 # The orbit-stabilizer theorem for concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.orbit-stabilizer-theorem-concrete-groups where
 ```
 

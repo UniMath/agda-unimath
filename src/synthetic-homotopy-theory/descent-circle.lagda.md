@@ -1,6 +1,8 @@
 # The descent property of the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.descent-circle where
 ```
 

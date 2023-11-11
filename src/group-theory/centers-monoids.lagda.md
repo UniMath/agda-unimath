@@ -1,6 +1,8 @@
 # Center of a monoid
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.centers-monoids where
 ```
 

@@ -1,6 +1,8 @@
 # Dedekind finite sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.dedekind-finite-sets where
 ```
 

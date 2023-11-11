@@ -1,6 +1,8 @@
 # Invertible elements in rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.invertible-elements-rings where
 ```
 

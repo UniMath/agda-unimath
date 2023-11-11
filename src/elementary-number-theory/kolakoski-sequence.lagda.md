@@ -1,6 +1,8 @@
 # The Kolakoski sequence
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.kolakoski-sequence where
 ```
 

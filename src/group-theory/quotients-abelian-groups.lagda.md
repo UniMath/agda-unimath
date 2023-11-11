@@ -1,7 +1,7 @@
 # Quotients of abelian groups
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module group-theory.quotients-abelian-groups where
 ```

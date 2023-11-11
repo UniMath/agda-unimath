@@ -1,6 +1,8 @@
 # Lattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.lattices where
 ```
 

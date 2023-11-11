@@ -1,6 +1,8 @@
 # Inhabited finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.inhabited-finite-types where
 ```
 

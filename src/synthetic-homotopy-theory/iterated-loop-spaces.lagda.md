@@ -1,6 +1,8 @@
 # Iterated loop spaces
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.iterated-loop-spaces where
 ```
 

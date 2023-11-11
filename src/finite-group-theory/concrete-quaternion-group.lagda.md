@@ -1,6 +1,8 @@
 # The concrete quaternion group
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-group-theory.concrete-quaternion-group where
 ```
 

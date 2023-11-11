@@ -1,6 +1,8 @@
 # Abstract groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.groups where
 ```
 

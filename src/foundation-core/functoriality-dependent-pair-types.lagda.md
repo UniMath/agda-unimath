@@ -1,6 +1,8 @@
 # Functoriality of dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.functoriality-dependent-pair-types where
 ```
 

@@ -1,6 +1,8 @@
 # Impredicative encodings of the logical operations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.impredicative-encodings where
 ```
 

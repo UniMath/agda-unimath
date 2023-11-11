@@ -1,6 +1,8 @@
 # Lower types of elements in W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.lower-types-w-types where
 ```
 

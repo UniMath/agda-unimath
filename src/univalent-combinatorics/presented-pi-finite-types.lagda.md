@@ -1,6 +1,8 @@
 # Finitely π-presented types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.presented-pi-finite-types where
 ```
 

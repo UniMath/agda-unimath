@@ -1,6 +1,8 @@
 # The universal property of set truncations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-set-truncation where
 ```
 

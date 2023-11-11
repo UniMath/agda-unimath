@@ -1,6 +1,8 @@
 # Coproduct decompositions in a subuniverse
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.coproduct-decompositions-subuniverse where
 ```
 

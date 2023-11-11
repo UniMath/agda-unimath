@@ -1,6 +1,8 @@
 # Small universes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.small-universes where
 ```
 

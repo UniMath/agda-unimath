@@ -1,6 +1,8 @@
 # Spans of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.spans where
 ```
 

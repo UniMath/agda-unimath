@@ -1,6 +1,8 @@
 # Pullback squares
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.pullback-squares where
 ```
 

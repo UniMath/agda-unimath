@@ -1,6 +1,8 @@
 # The sieve of Eratosthenes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.sieve-of-eratosthenes where
 ```
 

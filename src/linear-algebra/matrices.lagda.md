@@ -1,6 +1,8 @@
 # Matrices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.matrices where
 ```
 

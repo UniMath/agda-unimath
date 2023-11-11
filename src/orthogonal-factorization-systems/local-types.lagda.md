@@ -1,6 +1,8 @@
 # Local types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.local-types where
 ```
 

@@ -1,6 +1,8 @@
 # The pigeonhole principle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.pigeonhole-principle where
 ```
 

@@ -1,6 +1,8 @@
 # The center of a group
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.centers-groups where
 ```
 

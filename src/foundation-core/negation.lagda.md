@@ -1,6 +1,8 @@
 # Negation
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.negation where
 ```
 

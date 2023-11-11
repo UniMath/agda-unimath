@@ -1,6 +1,8 @@
 # Infinite cyclic types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.infinite-cyclic-types where
 ```
 

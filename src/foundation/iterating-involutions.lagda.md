@@ -1,6 +1,8 @@
 # Iterating involutions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.iterating-involutions where
 ```
 

@@ -1,6 +1,8 @@
 # Dependent products of large suplattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.dependent-products-large-suplattices where
 ```
 

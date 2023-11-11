@@ -1,6 +1,8 @@
 # Congruence relations on commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.congruence-relations-commutative-monoids where
 ```
 

@@ -1,6 +1,8 @@
 # The opposite of a semigroup
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.opposite-semigroups where
 ```
 

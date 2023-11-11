@@ -1,6 +1,8 @@
 # Commuting squares of morphisms in set-magmoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.commuting-squares-of-morphisms-in-set-magmoids where
 ```
 

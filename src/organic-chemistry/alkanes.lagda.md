@@ -1,6 +1,8 @@
 # Alkanes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module organic-chemistry.alkanes where
 ```
 

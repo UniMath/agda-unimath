@@ -1,6 +1,8 @@
 # Quotient algebras
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.quotient-algebras where
 ```
 

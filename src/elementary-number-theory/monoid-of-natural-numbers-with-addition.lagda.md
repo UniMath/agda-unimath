@@ -1,6 +1,8 @@
 # The monoid of natural numbers with addition
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.monoid-of-natural-numbers-with-addition where
 ```
 

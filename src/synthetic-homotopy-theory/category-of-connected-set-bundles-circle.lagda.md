@@ -1,6 +1,8 @@
 # The category of connected set bundles over the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.category-of-connected-set-bundles-circle where
 ```
 

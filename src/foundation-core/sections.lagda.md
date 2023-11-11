@@ -1,6 +1,8 @@
 # Sections
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.sections where
 ```
 

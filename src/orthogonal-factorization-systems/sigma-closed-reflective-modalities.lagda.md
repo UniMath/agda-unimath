@@ -1,6 +1,8 @@
 # Σ-closed reflective modalities
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.sigma-closed-reflective-modalities where
 ```
 

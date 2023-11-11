@@ -1,6 +1,8 @@
 # Structure equivalences between set-magmoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.structure-equivalences-set-magmoids where
 ```
 

@@ -1,6 +1,8 @@
 # Nilpotent elements in rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.nilpotent-elements-rings where
 ```
 

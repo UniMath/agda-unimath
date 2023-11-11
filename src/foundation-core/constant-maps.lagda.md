@@ -1,6 +1,8 @@
 # Constant maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.constant-maps where
 ```
 

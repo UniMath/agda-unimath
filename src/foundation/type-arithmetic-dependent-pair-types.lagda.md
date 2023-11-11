@@ -1,6 +1,8 @@
 # Type arithmetic for dependent pair types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-arithmetic-dependent-pair-types where
 ```
 

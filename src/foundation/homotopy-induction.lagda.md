@@ -1,6 +1,8 @@
 # Homotopy induction
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.homotopy-induction where
 ```
 

@@ -1,6 +1,8 @@
 # Hypergraphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.hypergraphs where
 ```
 

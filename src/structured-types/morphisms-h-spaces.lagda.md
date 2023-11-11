@@ -1,6 +1,8 @@
 # Morphisms of H-spaces
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.morphisms-h-spaces where
 ```
 

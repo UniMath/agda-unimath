@@ -1,6 +1,8 @@
 # The category of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.category-of-groups where
 ```
 

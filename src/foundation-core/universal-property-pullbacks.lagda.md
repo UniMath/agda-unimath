@@ -1,6 +1,8 @@
 # The universal property of pullbacks
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.universal-property-pullbacks where
 ```
 

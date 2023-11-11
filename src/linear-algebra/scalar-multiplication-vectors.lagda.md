@@ -1,6 +1,8 @@
 # Scalar multiplication of vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.scalar-multiplication-vectors where
 ```
 

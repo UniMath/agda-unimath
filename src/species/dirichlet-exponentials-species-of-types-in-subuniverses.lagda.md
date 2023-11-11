@@ -1,6 +1,8 @@
 # Dirichlet exponentials of species of types in a subuniverse
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.dirichlet-exponentials-species-of-types-in-subuniverses where
 ```
 

@@ -1,6 +1,8 @@
 # The universal property of the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.universal-property-circle where
 ```
 

@@ -1,6 +1,8 @@
 # Subsets of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.subsets-commutative-rings where
 ```
 

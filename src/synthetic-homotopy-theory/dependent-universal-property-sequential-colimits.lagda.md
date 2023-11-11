@@ -1,6 +1,8 @@
 # The dependent universal property of sequential colimits
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.dependent-universal-property-sequential-colimits where
 ```
 

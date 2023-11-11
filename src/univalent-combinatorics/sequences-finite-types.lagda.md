@@ -1,6 +1,8 @@
 # Sequences of elements in finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.sequences-finite-types where
 ```
 

@@ -1,6 +1,8 @@
 # Double powersets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.double-powersets where
 ```
 

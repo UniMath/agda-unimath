@@ -1,6 +1,8 @@
 # The underlying trees of elements of coalgebras of polynomial endofunctors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.underlying-trees-elements-coalgebras-polynomial-endofunctors where
 ```
 

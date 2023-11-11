@@ -1,6 +1,8 @@
 # Unlabeled trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.unlabeled-trees where
 ```
 

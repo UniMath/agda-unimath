@@ -1,6 +1,8 @@
 # Fibers of pointed maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.fibers-of-pointed-maps where
 ```
 

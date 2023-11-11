@@ -1,6 +1,8 @@
 # Descent data for families of dependent pair types over the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.descent-circle-dependent-pair-types where
 ```
 

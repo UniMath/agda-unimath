@@ -1,6 +1,8 @@
 # Monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.monoids where
 ```
 

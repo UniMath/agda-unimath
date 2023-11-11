@@ -1,6 +1,8 @@
 # The dihedral groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.dihedral-groups where
 ```
 

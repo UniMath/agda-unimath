@@ -1,7 +1,7 @@
 # Deloopings of the sign homomorphism
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module finite-group-theory.delooping-sign-homomorphism where
 ```

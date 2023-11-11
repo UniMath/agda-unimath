@@ -1,6 +1,8 @@
 # Algebras over rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.algebras-rings where
 ```
 

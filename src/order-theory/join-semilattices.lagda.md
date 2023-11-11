@@ -1,6 +1,8 @@
 # Join-semilattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.join-semilattices where
 ```
 

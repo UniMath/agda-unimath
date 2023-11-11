@@ -1,6 +1,8 @@
 # Incidence in undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.neighbors-undirected-graphs where
 ```
 

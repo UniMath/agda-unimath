@@ -1,6 +1,8 @@
 # Monomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.monomorphisms where
 ```
 

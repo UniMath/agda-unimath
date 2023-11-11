@@ -1,6 +1,8 @@
 # Sequences of the online encyclopedia of integer sequences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module online-encyclopedia-of-integer-sequences.oeis where
 ```
 

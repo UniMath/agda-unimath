@@ -1,6 +1,8 @@
 # Epimorphisms with respect to maps into sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.epimorphisms-with-respect-to-sets where
 ```
 

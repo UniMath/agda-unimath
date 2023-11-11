@@ -1,6 +1,8 @@
 # Finite fields
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module finite-algebra.finite-fields where
 ```
 

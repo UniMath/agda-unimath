@@ -1,6 +1,8 @@
 # The circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.circle where
 ```
 

@@ -1,6 +1,8 @@
 # Coproduct types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.coproduct-types where
 
 open import foundation-core.coproduct-types public

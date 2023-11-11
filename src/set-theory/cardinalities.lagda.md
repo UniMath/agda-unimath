@@ -1,6 +1,8 @@
 # Cardinalities of sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module set-theory.cardinalities where
 ```
 

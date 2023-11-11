@@ -1,6 +1,8 @@
 # Quotient groups of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.quotient-groups-concrete-groups where
 ```
 

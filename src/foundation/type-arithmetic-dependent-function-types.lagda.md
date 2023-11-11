@@ -1,6 +1,8 @@
 # Type arithmetic with dependent function types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-arithmetic-dependent-function-types where
 ```
 

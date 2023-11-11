@@ -1,6 +1,8 @@
 # Descent data for families of equivalence types over the circle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.descent-circle-equivalence-types where
 ```
 

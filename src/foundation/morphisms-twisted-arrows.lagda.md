@@ -1,6 +1,8 @@
 # Morphisms of twisted arrows
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.morphisms-twisted-arrows where
 ```
 

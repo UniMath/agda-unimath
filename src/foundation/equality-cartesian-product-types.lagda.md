@@ -1,6 +1,8 @@
 # Equality of cartesian product types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equality-cartesian-product-types where
 ```
 

@@ -1,6 +1,8 @@
 # Embedding maps between precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.embedding-maps-precategories where
 ```
 

@@ -1,6 +1,8 @@
 # Dependent products of large meet-semilattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.dependent-products-large-meet-semilattices where
 ```
 

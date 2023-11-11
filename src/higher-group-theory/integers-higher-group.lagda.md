@@ -1,6 +1,8 @@
 # The higher group of integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module higher-group-theory.integers-higher-group where
 ```
 

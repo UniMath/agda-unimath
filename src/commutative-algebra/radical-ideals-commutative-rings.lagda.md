@@ -1,6 +1,8 @@
 # Radical ideals of commutative rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.radical-ideals-commutative-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Large function categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.large-function-categories where
 ```
 

@@ -1,7 +1,7 @@
 # The universal property of set quotients
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module foundation.universal-property-set-quotients where
 ```

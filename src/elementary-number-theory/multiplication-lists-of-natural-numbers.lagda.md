@@ -1,6 +1,8 @@
 # Multiplication of the elements of a list of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.multiplication-lists-of-natural-numbers where
 ```
 

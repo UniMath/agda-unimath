@@ -1,6 +1,8 @@
 # Large locales
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.large-locales where
 ```
 

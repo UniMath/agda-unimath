@@ -1,6 +1,8 @@
 # Scalar multiplication of vectors on rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.scalar-multiplication-vectors-on-rings where
 ```
 

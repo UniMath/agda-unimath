@@ -1,6 +1,8 @@
 # Equivalences of towers of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equivalences-towers where
 ```
 

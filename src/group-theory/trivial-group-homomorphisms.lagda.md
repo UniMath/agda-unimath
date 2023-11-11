@@ -1,6 +1,8 @@
 # Trivial group homomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.trivial-group-homomorphisms where
 ```
 

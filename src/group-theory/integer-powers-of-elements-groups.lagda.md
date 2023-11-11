@@ -1,6 +1,8 @@
 # Integer powers of elements of groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.integer-powers-of-elements-groups where
 ```
 

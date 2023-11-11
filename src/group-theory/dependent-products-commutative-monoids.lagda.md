@@ -1,6 +1,8 @@
 # Dependent products of commutative monoids
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.dependent-products-commutative-monoids where
 ```
 

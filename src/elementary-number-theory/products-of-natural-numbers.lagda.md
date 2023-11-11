@@ -1,6 +1,8 @@
 # Products of natural numbers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.products-of-natural-numbers where
 ```
 

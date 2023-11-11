@@ -1,6 +1,8 @@
 # Preimages of subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.preimages-of-subtypes where
 ```
 

@@ -1,6 +1,8 @@
 # Division rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.division-rings where
 ```
 

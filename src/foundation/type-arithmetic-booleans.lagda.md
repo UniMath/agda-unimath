@@ -1,6 +1,8 @@
 # Type arithmetic with the booleans
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-arithmetic-booleans where
 ```
 

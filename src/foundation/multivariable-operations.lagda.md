@@ -1,6 +1,8 @@
 # Multivariable operations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.multivariable-operations where
 ```
 

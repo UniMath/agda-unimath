@@ -1,6 +1,8 @@
 # The plus-principle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.plus-principle where
 ```
 

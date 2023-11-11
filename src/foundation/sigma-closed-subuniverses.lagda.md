@@ -1,6 +1,8 @@
 # Σ-closed subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.sigma-closed-subuniverses where
 ```
 

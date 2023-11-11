@@ -1,6 +1,8 @@
 # Galois connections between large posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.galois-connections-large-posets where
 ```
 

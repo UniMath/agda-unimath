@@ -1,6 +1,8 @@
 # Acyclic types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.acyclic-types where
 ```
 

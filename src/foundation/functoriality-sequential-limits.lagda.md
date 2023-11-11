@@ -1,6 +1,8 @@
 # Functoriality of sequential limits
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.functoriality-sequential-limits where
 ```
 

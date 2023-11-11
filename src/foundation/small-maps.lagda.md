@@ -1,6 +1,8 @@
 # Small maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.small-maps where
 ```
 

@@ -1,6 +1,8 @@
 # The zero modality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.zero-modality where
 ```
 

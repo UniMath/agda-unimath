@@ -1,6 +1,8 @@
 # Discrete fields
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.discrete-fields where
 ```
 

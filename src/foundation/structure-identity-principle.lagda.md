@@ -1,6 +1,8 @@
 # The structure identity principle
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.structure-identity-principle where
 ```
 

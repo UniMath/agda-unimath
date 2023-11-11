@@ -1,6 +1,8 @@
 # The precategory of commutative semirings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.precategory-of-commutative-semirings where
 ```
 

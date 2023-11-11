@@ -1,6 +1,8 @@
 # Homomorphisms of algebras
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module universal-algebra.homomorphisms-of-algebras where
 ```
 

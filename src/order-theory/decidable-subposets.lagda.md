@@ -1,6 +1,8 @@
 # Decidable subposets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.decidable-subposets where
 ```
 

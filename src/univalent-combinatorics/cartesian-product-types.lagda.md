@@ -1,6 +1,8 @@
 # Cartesian products of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.cartesian-product-types where
 ```
 

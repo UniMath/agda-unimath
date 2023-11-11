@@ -1,6 +1,8 @@
 # Dependent pair types of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.dependent-pair-types where
 
 open import foundation.dependent-pair-types public

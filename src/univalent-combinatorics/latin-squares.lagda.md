@@ -1,6 +1,8 @@
 # Latin squares
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.latin-squares where
 ```
 

@@ -1,6 +1,8 @@
 # Identity types of truncated types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.identity-truncated-types where
 ```
 

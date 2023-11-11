@@ -1,6 +1,8 @@
 # Trivial rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.trivial-rings where
 ```
 

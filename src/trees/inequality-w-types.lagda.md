@@ -1,6 +1,8 @@
 # Inequality on W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.inequality-w-types where
 ```
 

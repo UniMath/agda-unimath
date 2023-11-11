@@ -1,6 +1,8 @@
 # Normal closures of subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.normal-closures-subgroups where
 ```
 

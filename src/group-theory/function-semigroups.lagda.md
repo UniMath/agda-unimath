@@ -1,6 +1,8 @@
 # Function semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.function-semigroups where
 ```
 

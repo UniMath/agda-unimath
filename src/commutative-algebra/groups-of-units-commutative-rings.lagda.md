@@ -1,6 +1,8 @@
 # The group of multiplicative units of a commutative ring
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module commutative-algebra.groups-of-units-commutative-rings where
 ```
 

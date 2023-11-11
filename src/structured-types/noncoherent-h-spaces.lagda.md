@@ -1,6 +1,8 @@
 # Non-coherent H-spaces
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module structured-types.noncoherent-h-spaces where
 ```
 

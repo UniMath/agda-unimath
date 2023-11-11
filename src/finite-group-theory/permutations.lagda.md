@@ -1,7 +1,7 @@
 # Permutations
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module finite-group-theory.permutations where
 ```

@@ -1,6 +1,8 @@
 # Codiagonal maps of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.codiagonal-maps-of-types where
 ```
 

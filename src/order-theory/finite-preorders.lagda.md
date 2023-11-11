@@ -1,6 +1,8 @@
 # Finite preorders
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.finite-preorders where
 ```
 

@@ -1,6 +1,8 @@
 # Sets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.sets where
 ```
 

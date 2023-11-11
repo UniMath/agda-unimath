@@ -1,6 +1,8 @@
 # The category of maps and natural transformations from small to large categories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.category-of-maps-from-small-to-large-categories where
 ```
 

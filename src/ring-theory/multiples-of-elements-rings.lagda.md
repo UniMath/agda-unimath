@@ -1,6 +1,8 @@
 # Multiples of elements in rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.multiples-of-elements-rings where
 ```
 

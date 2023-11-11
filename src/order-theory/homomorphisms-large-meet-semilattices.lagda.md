@@ -1,6 +1,8 @@
 # Homomorphisms of large meet-semilattices
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.homomorphisms-large-meet-semilattices where
 ```
 

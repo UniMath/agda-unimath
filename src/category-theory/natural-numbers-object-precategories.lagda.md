@@ -1,6 +1,8 @@
 # Natural numbers object in a precategory
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.natural-numbers-object-precategories where
 ```
 

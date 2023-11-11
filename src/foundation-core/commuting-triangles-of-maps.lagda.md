@@ -1,6 +1,8 @@
 # Commuting triangles of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.commuting-triangles-of-maps where
 ```
 

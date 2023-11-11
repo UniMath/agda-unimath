@@ -1,6 +1,8 @@
 # The raise modalities
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.raise-modalities where
 ```
 

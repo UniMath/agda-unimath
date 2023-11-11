@@ -1,6 +1,8 @@
 # Type duality of finite types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.type-duality where
 
 open import foundation.type-duality public

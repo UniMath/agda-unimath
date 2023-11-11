@@ -1,6 +1,8 @@
 # Function precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.function-precategories where
 ```
 

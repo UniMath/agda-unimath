@@ -1,6 +1,8 @@
 # Equivalence extensionality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equivalence-extensionality where
 ```
 

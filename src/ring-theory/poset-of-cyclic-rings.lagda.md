@@ -1,6 +1,8 @@
 # The poset of cyclic rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module ring-theory.poset-of-cyclic-rings where
 ```
 

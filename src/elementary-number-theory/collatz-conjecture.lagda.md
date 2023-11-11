@@ -1,6 +1,8 @@
 # The Collatz conjecture
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.collatz-conjecture where
 ```
 

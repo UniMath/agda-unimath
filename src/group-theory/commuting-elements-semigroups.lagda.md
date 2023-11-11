@@ -1,6 +1,8 @@
 # Commuting elements of semigroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.commuting-elements-semigroups where
 ```
 

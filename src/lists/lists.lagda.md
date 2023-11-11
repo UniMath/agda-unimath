@@ -1,6 +1,8 @@
 # Lists
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module lists.lists where
 ```
 

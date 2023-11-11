@@ -1,6 +1,8 @@
 # Commuting squares of homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.commuting-squares-of-homotopies where
 ```
 

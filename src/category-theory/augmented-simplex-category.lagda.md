@@ -1,6 +1,8 @@
 # The augmented simplex category
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.augmented-simplex-category where
 ```
 

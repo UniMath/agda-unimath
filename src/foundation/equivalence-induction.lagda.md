@@ -1,6 +1,8 @@
 # Equivalence induction
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.equivalence-induction where
 ```
 

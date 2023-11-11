@@ -1,6 +1,8 @@
 # Eulerian circuits in undirected graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.eulerian-circuits-undirected-graphs where
 ```
 

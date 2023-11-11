@@ -1,6 +1,8 @@
 # Finite presentations of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.finite-presentations where
 ```
 

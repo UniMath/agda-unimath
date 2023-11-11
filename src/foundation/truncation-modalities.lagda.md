@@ -1,6 +1,8 @@
 # The truncation modalities
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.truncation-modalities where
 ```
 

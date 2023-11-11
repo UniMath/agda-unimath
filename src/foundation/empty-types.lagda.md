@@ -1,6 +1,8 @@
 # Empty types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.empty-types where
 
 open import foundation-core.empty-types public

@@ -1,6 +1,8 @@
 # Images of subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.images-subtypes where
 ```
 

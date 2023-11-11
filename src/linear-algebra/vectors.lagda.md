@@ -1,6 +1,8 @@
 # Vectors
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module linear-algebra.vectors where
 ```
 

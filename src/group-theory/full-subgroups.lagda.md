@@ -1,6 +1,8 @@
 # The full subgroup of a group
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.full-subgroups where
 ```
 

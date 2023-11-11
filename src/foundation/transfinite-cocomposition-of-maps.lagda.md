@@ -1,6 +1,8 @@
 # Transfinite cocomposition of maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.transfinite-cocomposition-of-maps where
 ```
 

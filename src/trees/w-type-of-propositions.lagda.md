@@ -1,6 +1,8 @@
 # The W-type of the type of propositions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.w-type-of-propositions where
 ```
 

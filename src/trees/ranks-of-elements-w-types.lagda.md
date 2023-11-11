@@ -1,6 +1,8 @@
 # Ranks of elements in W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.ranks-of-elements-w-types where
 ```
 

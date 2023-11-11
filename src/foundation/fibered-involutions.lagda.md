@@ -1,6 +1,8 @@
 # Fibered involutions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.fibered-involutions where
 ```
 

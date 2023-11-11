@@ -1,6 +1,8 @@
 # Morphisms of directed graphs
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module graph-theory.morphisms-directed-graphs where
 ```
 

@@ -1,6 +1,8 @@
 # The universal property of coequalizers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.universal-property-coequalizers where
 ```
 

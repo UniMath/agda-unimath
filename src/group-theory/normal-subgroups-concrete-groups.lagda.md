@@ -1,6 +1,8 @@
 # Normal subgroups of concrete groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.normal-subgroups-concrete-groups where
 ```
 

@@ -1,7 +1,7 @@
 # Transpositions of standard finite types
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module finite-group-theory.transpositions-standard-finite-types where
 ```

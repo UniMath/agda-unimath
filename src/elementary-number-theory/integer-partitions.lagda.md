@@ -1,6 +1,8 @@
 # Integer partitions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.integer-partitions where
 ```
 

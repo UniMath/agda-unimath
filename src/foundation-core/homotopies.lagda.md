@@ -1,6 +1,8 @@
 # Homotopies
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.homotopies where
 ```
 

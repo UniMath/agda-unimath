@@ -1,6 +1,8 @@
 # Inhabited types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.inhabited-types where
 ```
 

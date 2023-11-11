@@ -1,6 +1,8 @@
 # Saturated carbons
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module organic-chemistry.saturated-carbons where
 ```
 

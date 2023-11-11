@@ -1,6 +1,8 @@
 # Standard apartness relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.standard-apartness-relations where
 ```
 

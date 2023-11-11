@@ -1,6 +1,8 @@
 # Images of group homomorphisms
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.images-of-group-homomorphisms where
 ```
 

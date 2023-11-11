@@ -1,6 +1,8 @@
 # The interval
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.interval-type where
 ```
 

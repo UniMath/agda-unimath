@@ -1,6 +1,8 @@
 # Principal group actions
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.principal-group-actions where
 ```
 

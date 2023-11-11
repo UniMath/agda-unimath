@@ -1,6 +1,8 @@
 # Quotient groups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.quotient-groups where
 ```
 

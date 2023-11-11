@@ -1,6 +1,8 @@
 # The universal property of the unit type
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-unit-type where
 ```
 

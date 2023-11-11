@@ -1,6 +1,8 @@
 # The maybe modality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.maybe where
 ```
 

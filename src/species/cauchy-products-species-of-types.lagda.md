@@ -1,6 +1,8 @@
 # Cauchy products of species of types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.cauchy-products-species-of-types where
 ```
 

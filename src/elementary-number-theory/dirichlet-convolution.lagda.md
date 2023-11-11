@@ -1,6 +1,8 @@
 # Dirichlet convolution
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.dirichlet-convolution where
 ```
 

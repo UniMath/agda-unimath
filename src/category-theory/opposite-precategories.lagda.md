@@ -1,6 +1,8 @@
 # Opposite precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.opposite-precategories where
 ```
 

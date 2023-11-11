@@ -1,6 +1,8 @@
 # Binary equivalences
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.binary-equivalences where
 ```
 

@@ -1,6 +1,8 @@
 # Indexed W-types
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.indexed-w-types where
 ```
 

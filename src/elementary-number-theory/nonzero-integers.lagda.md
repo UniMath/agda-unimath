@@ -1,6 +1,8 @@
 # Nonzero integers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.nonzero-integers where
 ```
 

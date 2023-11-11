@@ -1,6 +1,8 @@
 # Contractible maps
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation-core.contractible-maps where
 ```
 

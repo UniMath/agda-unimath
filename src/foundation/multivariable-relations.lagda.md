@@ -1,6 +1,8 @@
 # Multivariable relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.multivariable-relations where
 ```
 

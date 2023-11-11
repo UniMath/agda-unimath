@@ -1,6 +1,8 @@
 # The induction principle of pushouts
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.induction-principle-pushouts where
 ```
 

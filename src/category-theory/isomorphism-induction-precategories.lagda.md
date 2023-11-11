@@ -1,6 +1,8 @@
 # Isomorphism induction in precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.isomorphism-induction-precategories where
 ```
 

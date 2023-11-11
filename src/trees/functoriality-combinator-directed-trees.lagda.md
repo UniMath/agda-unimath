@@ -1,6 +1,8 @@
 # Functoriality of the combinator of directed trees
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.functoriality-combinator-directed-trees where
 ```
 

@@ -1,5 +1,9 @@
 # Group theory
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the group theory folder
 
 ```agda

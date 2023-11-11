@@ -1,6 +1,8 @@
 # Multiset coefficients
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.multiset-coefficients where
 ```
 

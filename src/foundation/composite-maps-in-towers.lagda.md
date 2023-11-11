@@ -1,6 +1,8 @@
 # Composite maps in towers
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.composite-maps-in-towers where
 ```
 

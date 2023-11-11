@@ -1,6 +1,8 @@
 # Order preserving maps on posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.order-preserving-maps-posets where
 ```
 

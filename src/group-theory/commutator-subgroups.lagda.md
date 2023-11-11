@@ -1,6 +1,8 @@
 # Commutator subgroups
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.commutator-subgroups where
 ```
 

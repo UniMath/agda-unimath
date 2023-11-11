@@ -1,6 +1,8 @@
 # Stable orthogonal factorization systems
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.stable-orthogonal-factorization-systems where
 ```
 

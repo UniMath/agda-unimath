@@ -1,6 +1,8 @@
 # The flattening lemma for pushouts
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module synthetic-homotopy-theory.flattening-lemma-pushouts where
 ```
 

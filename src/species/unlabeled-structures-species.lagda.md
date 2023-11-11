@@ -1,6 +1,8 @@
 # Unlabeled structures of finite species
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module species.unlabeled-structures-species where
 ```
 

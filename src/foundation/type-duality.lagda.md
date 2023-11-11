@@ -1,6 +1,8 @@
 # Type duality
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.type-duality where
 ```
 

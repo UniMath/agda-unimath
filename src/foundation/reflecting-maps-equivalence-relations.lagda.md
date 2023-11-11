@@ -1,6 +1,8 @@
 # Reflecting maps for equivalence relations
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.reflecting-maps-equivalence-relations where
 ```
 

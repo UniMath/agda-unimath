@@ -1,7 +1,7 @@
 # Functoriality of set quotients
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --cubical-compatible --lossy-unification #-}
 
 module foundation.functoriality-set-quotients where
 ```

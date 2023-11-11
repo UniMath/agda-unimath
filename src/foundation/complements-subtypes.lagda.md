@@ -1,6 +1,8 @@
 # Complements of subtypes
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.complements-subtypes where
 ```
 

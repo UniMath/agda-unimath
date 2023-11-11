@@ -1,6 +1,8 @@
 # Directed complete posets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module order-theory.directed-complete-posets where
 ```
 

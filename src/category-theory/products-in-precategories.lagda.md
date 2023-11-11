@@ -1,6 +1,8 @@
 # Products in precategories
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module category-theory.products-in-precategories where
 ```
 

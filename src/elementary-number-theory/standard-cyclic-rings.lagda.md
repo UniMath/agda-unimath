@@ -1,6 +1,8 @@
 # The standard cyclic rings
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module elementary-number-theory.standard-cyclic-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Transitive multisets
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module trees.transitive-multisets where
 ```
 

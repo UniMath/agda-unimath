@@ -1,5 +1,9 @@
 # Universal Algebra
 
+```agda
+{-# OPTIONS --cubical-compatible #-}
+```
+
 ## Files in the universal algebra folder
 
 ```agda

@@ -1,6 +1,8 @@
 # The universal property of the image of a map
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module foundation.universal-property-image where
 ```
 

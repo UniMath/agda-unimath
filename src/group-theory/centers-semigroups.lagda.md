@@ -1,6 +1,8 @@
 # Center of a semigroup
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module group-theory.centers-semigroups where
 ```
 

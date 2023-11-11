@@ -1,6 +1,8 @@
 # Σ-closed reflective subuniverses
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module orthogonal-factorization-systems.sigma-closed-reflective-subuniverses where
 ```
 

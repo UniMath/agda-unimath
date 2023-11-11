@@ -1,6 +1,8 @@
 # Counting the elements in Maybe
 
 ```agda
+{-# OPTIONS --cubical-compatible #-}
+
 module univalent-combinatorics.counting-maybe where
 ```
 
