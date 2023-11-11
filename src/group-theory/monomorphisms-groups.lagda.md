@@ -56,8 +56,7 @@ module _
   (H : Group l2) (f : iso-Group G H)
   where
 
-  is-mono-iso-Group :
-    is-mono-Group l3 G H (hom-iso-Group G H f)
+  is-mono-iso-Group : is-mono-Group l3 G H (hom-iso-Group G H f)
   is-mono-iso-Group =
     is-mono-iso-Large-Precategory Group-Large-Precategory l3 G H f
 ```
