@@ -61,12 +61,14 @@ module _
 
 We record the components of the large category of presheaves on a precategory.
 
+**Alert:** These definitions should come equipped with their specifications.
+
 ```agda
   obj-presheaf-Large-Category =
     obj-Large-Precategory presheaf-Large-Precategory
 
   hom-set-presheaf-Large-Category =
-    hom-Large-Precategory presheaf-Large-Precategory
+    hom-set-Large-Precategory presheaf-Large-Precategory
 
   hom-presheaf-Large-Category =
     hom-Large-Precategory presheaf-Large-Precategory
