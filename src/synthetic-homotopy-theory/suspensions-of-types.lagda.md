@@ -14,6 +14,7 @@ open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -295,9 +296,7 @@ module _
         ( is-section-map-inv-dependent-up-suspension d))
 ```
 
-### Consequences of the dependent universal property
-
-#### Characterization of homotopies between functions with domain a suspension
+### Characterization of homotopies between functions with domain a suspension
 
 ```agda
 module _
@@ -307,16 +306,9 @@ module _
 
   htpy-function-out-of-suspension : UU (l1 ⊔ l2)
   htpy-function-out-of-suspension =
-    Σ ( f north-suspension ＝ g north-suspension)
-      ( λ p →
-        Σ ( f south-suspension ＝ g south-suspension)
-          ( λ q →
-            (x : X) →
-            coherence-square-identifications
-              ( p)
-              ( ap f (meridian-suspension x))
-              ( ap g (meridian-suspension x))
-              ( q)))
+    htpy-suspension-structure
+      ( ev-suspension (suspension-structure-suspension X) Y f)
+      ( ev-suspension (suspension-structure-suspension X) Y g)
 
   north-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension →
@@ -341,22 +333,20 @@ module _
   equiv-htpy-function-out-of-suspension-htpy :
     (f ~ g) ≃ htpy-function-out-of-suspension
   equiv-htpy-function-out-of-suspension-htpy =
-    ( equiv-tot
-      ( λ p →
-        equiv-tot
-          ( λ q →
-            equiv-Π-equiv-family
-              ( λ x →
-                inv-equiv
-                  ( compute-dependent-identification-eq-value-function
-                    ( f)
-                    ( g)
-                    ( meridian-suspension-structure
-                      ( suspension-structure-suspension X)
-                      ( x))
-                    ( p)
-                    ( q)))))) ∘e
-    ( equiv-dependent-up-suspension (eq-value f g))
+    equivalence-reasoning
+      (f ~ g)
+      ≃ (f ＝ g)
+        by inv-equiv equiv-funext
+      ≃ ( ( ev-suspension (suspension-structure-suspension X) Y f) ＝
+          ( ev-suspension (suspension-structure-suspension X) Y g))
+        by equiv-ap (equiv-up-suspension X Y) f g
+      ≃ htpy-suspension-structure
+          ( ev-suspension (suspension-structure-suspension X) Y f)
+          ( ev-suspension (suspension-structure-suspension X) Y g)
+        by
+        extensionality-suspension-structure
+          ( ev-suspension (suspension-structure-suspension X) Y f)
+          ( ev-suspension (suspension-structure-suspension X) Y g)
 
   htpy-function-out-of-suspension-htpy :
     (f ~ g) → htpy-function-out-of-suspension
