@@ -344,7 +344,6 @@ module _
       ( ev-suspension (suspension-structure-suspension X) Y f)
       ( ev-suspension (suspension-structure-suspension X) Y g)
 
-
   htpy-function-out-of-suspension-htpy :
     (f ~ g) → htpy-function-out-of-suspension
   htpy-function-out-of-suspension-htpy =
