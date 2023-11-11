@@ -66,7 +66,7 @@ module _
   is-epi-iso-Group :
     is-epi-Group l3 G H (hom-iso-Group G H f)
   is-epi-iso-Group =
-    is-epi-iso-Large-Precategory Group-Large-Precategory l3 G H f
+    is-epi-iso-Large-Precategory Group-Large-Precategory l3 {G} {H} f
 ```
 
 ### A group homomorphism is surjective if and only if it is an epimorphism
