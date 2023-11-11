@@ -59,7 +59,7 @@ module _
 module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l1 l2 : Level} (l3 : Level)
-  {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
+  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2)
   (f : iso-Large-Precategory C X Y)
   where
 
