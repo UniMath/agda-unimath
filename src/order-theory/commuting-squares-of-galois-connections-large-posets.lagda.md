@@ -1,4 +1,4 @@
-# Commuting squares of galois connections between large posets
+# Commuting squares of Galois connections between large posets
 
 ```agda
 module order-theory.commuting-squares-of-galois-connections-large-posets where
@@ -63,15 +63,56 @@ module _
   (J : galois-connection-Large-Poset γJ δJ Q V)
   where
 
-  coherence-square-lower-adjoint-galois-connection-Large-Poset : UUω
-  coherence-square-lower-adjoint-galois-connection-Large-Poset =
-    sim-lower-adjoint-galois-connection-Large-Poset P V
+  lower-coherence-square-galois-connection-Large-Poset : UUω
+  lower-coherence-square-galois-connection-Large-Poset =
+    lower-sim-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P Q V J F)
       ( comp-galois-connection-Large-Poset P U V G I)
 
-  coherence-square-upper-adjoint-galois-connection-Large-Poset : UUω
-  coherence-square-upper-adjoint-galois-connection-Large-Poset =
-    sim-upper-adjoint-galois-connection-Large-Poset P V
+  upper-coherence-square-galois-connection-Large-Poset : UUω
+  upper-coherence-square-galois-connection-Large-Poset =
+    upper-sim-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P U V G I)
       ( comp-galois-connection-Large-Poset P Q V J F)
 ```
+
+## Properties
+
+### A commuting square of lower adjoints of galois connections induces a commuting square of upper adjoints and vice versa
+
+```agda
+module _
+  {αP αQ αU αV γF γG γI γJ δF δG δI δJ : Level → Level}
+  {βP βQ βU βV : Level → Level → Level}
+  (P : Large-Poset αP βP)
+  (Q : Large-Poset αQ βQ)
+  (U : Large-Poset αU βU)
+  (V : Large-Poset αV βV)
+  (I : galois-connection-Large-Poset γI δI P U)
+  (F : galois-connection-Large-Poset γF δF P Q)
+  (G : galois-connection-Large-Poset γG δG U V)
+  (J : galois-connection-Large-Poset γJ δJ Q V)
+  where
+
+  lower-coherence-square-upper-coherence-square-galois-connection-Large-Poset :
+    upper-coherence-square-galois-connection-Large-Poset
+      P Q U V I F G J →
+    lower-coherence-square-galois-connection-Large-Poset
+      P Q U V I F G J
+  lower-coherence-square-upper-coherence-square-galois-connection-Large-Poset =
+    lower-sim-upper-sim-galois-connection-Large-Poset P V
+      ( comp-galois-connection-Large-Poset P Q V J F)
+      ( comp-galois-connection-Large-Poset P U V G I)
+
+  upper-coherence-square-lower-coherence-square-galois-connection-Large-Poset :
+    lower-coherence-square-galois-connection-Large-Poset
+      P Q U V I F G J →
+    upper-coherence-square-galois-connection-Large-Poset
+      P Q U V I F G J
+  upper-coherence-square-lower-coherence-square-galois-connection-Large-Poset =
+    upper-sim-lower-sim-galois-connection-Large-Poset P V
+      ( comp-galois-connection-Large-Poset P Q V J F)
+      ( comp-galois-connection-Large-Poset P U V G I)
+```
+
+### A commuting square of galois connections induces a commuting square in which the vertical maps are lower adjoints and the vertical maps are upper adjoints

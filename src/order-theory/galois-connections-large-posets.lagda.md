@@ -10,6 +10,7 @@ module order-theory.galois-connections-large-posets where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 
@@ -268,14 +269,14 @@ module _
   (G H : galois-connection-Large-Poset γ δ P Q)
   where
 
-  htpy-lower-adjoint-galois-connection-Large-Poset : UUω
-  htpy-lower-adjoint-galois-connection-Large-Poset =
+  lower-htpy-galois-connection-Large-Poset : UUω
+  lower-htpy-galois-connection-Large-Poset =
     htpy-hom-Large-Poset P Q
       ( lower-adjoint-galois-connection-Large-Poset G)
       ( lower-adjoint-galois-connection-Large-Poset H)
 
-  htpy-upper-adjoint-galois-connection-Large-Poset : UUω
-  htpy-upper-adjoint-galois-connection-Large-Poset =
+  upper-htpy-galois-connection-Large-Poset : UUω
+  upper-htpy-galois-connection-Large-Poset =
     htpy-hom-Large-Poset Q P
       ( upper-adjoint-galois-connection-Large-Poset G)
       ( upper-adjoint-galois-connection-Large-Poset H)
@@ -289,6 +290,11 @@ either their lower or their upper adjoints. We will show below that similarities
 between lower adjoints induce similarities between upper adjoints and vice
 versa.
 
+**Note:** Since the notion of similarity applies to galois connections with not
+necessarily the same universe level reindexing function, it is slightly more
+flexible. For this reason, it may be easier to work with similarity of galois
+connections.
+
 ```agda
 module _
   {αP αQ γG γH δG δH : Level → Level} {βP βQ : Level → Level → Level}
@@ -297,14 +303,14 @@ module _
   (H : galois-connection-Large-Poset γH δH P Q)
   where
 
-  sim-lower-adjoint-galois-connection-Large-Poset : UUω
-  sim-lower-adjoint-galois-connection-Large-Poset =
+  lower-sim-galois-connection-Large-Poset : UUω
+  lower-sim-galois-connection-Large-Poset =
     sim-hom-Large-Poset P Q
       ( lower-adjoint-galois-connection-Large-Poset G)
       ( lower-adjoint-galois-connection-Large-Poset H)
 
-  sim-upper-adjoint-galois-connection-Large-Poset : UUω
-  sim-upper-adjoint-galois-connection-Large-Poset =
+  upper-sim-galois-connection-Large-Poset : UUω
+  upper-sim-galois-connection-Large-Poset =
     sim-hom-Large-Poset Q P
       ( upper-adjoint-galois-connection-Large-Poset G)
       ( upper-adjoint-galois-connection-Large-Poset H)
@@ -327,37 +333,40 @@ hence they must be equal.
 
 ```agda
 module _
-  {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
+  {αP αQ γG γH δG δH : Level → Level} {βP βQ : Level → Level → Level}
   (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
-  (G H : galois-connection-Large-Poset γ δ P Q)
+  (G : galois-connection-Large-Poset γG δG P Q)
+  (H : galois-connection-Large-Poset γH δH P Q)
   where
 
-  sim-upper-adjoint-sim-lower-adjoint-galois-connection-Large-Poset :
-    sim-lower-adjoint-galois-connection-Large-Poset P Q G H →
-    sim-upper-adjoint-galois-connection-Large-Poset P Q G H
-  sim-upper-adjoint-sim-lower-adjoint-galois-connection-Large-Poset
+  upper-sim-lower-sim-galois-connection-Large-Poset :
+    lower-sim-galois-connection-Large-Poset P Q G H →
+    upper-sim-galois-connection-Large-Poset P Q H G
+  upper-sim-lower-sim-galois-connection-Large-Poset
     p x =
     sim-has-same-elements-lower-set-element-Large-Poset P
       ( λ y →
         logical-equivalence-reasoning
           leq-Large-Poset P y
-            ( map-upper-adjoint-galois-connection-Large-Poset P Q G x)
-          ↔ leq-Large-Poset Q
-              ( map-lower-adjoint-galois-connection-Large-Poset P Q G y)
-              ( x)
-            by inv-iff (adjoint-relation-galois-connection-Large-Poset G y x)
+            ( map-upper-adjoint-galois-connection-Large-Poset P Q H x)
           ↔ leq-Large-Poset Q
               ( map-lower-adjoint-galois-connection-Large-Poset P Q H y)
               ( x)
-            by has-same-elements-upper-set-element-sim-Large-Poset Q (p y) x
+            by inv-iff (adjoint-relation-galois-connection-Large-Poset H y x)
+          ↔ leq-Large-Poset Q
+              ( map-lower-adjoint-galois-connection-Large-Poset P Q G y)
+              ( x)
+            by
+            inv-iff
+              ( has-same-elements-upper-set-element-sim-Large-Poset Q (p y) x)
           ↔ leq-Large-Poset P y
-              ( map-upper-adjoint-galois-connection-Large-Poset P Q H x)
-            by adjoint-relation-galois-connection-Large-Poset H y x)
+              ( map-upper-adjoint-galois-connection-Large-Poset P Q G x)
+            by adjoint-relation-galois-connection-Large-Poset G y x)
 
-  sim-lower-adjoint-sim-upper-adjoint-galois-connection-Large-Poset :
-    sim-upper-adjoint-galois-connection-Large-Poset P Q G H →
-    sim-lower-adjoint-galois-connection-Large-Poset P Q G H
-  sim-lower-adjoint-sim-upper-adjoint-galois-connection-Large-Poset
+  lower-sim-upper-sim-galois-connection-Large-Poset :
+    upper-sim-galois-connection-Large-Poset P Q H G →
+    lower-sim-galois-connection-Large-Poset P Q G H
+  lower-sim-upper-sim-galois-connection-Large-Poset
     p y =
     sim-has-same-elements-upper-set-element-Large-Poset Q
       ( λ x →
@@ -370,7 +379,9 @@ module _
             by adjoint-relation-galois-connection-Large-Poset G y x
           ↔ leq-Large-Poset P y
               ( map-upper-adjoint-galois-connection-Large-Poset P Q H x)
-            by has-same-elements-lower-set-element-sim-Large-Poset P (p x) y
+            by
+            inv-iff
+              ( has-same-elements-lower-set-element-sim-Large-Poset P (p x) y)
           ↔ leq-Large-Poset Q
               ( map-lower-adjoint-galois-connection-Large-Poset P Q H y)
               ( x)
@@ -397,39 +408,31 @@ module _
   (G H : galois-connection-Large-Poset γ δ P Q)
   where
 
-  htpy-upper-adjoint-htpy-lower-adjoint-galois-connection-Large-Poset :
-    htpy-lower-adjoint-galois-connection-Large-Poset P Q G H →
-    htpy-upper-adjoint-galois-connection-Large-Poset P Q G H
-  htpy-upper-adjoint-htpy-lower-adjoint-galois-connection-Large-Poset p =
+  upper-htpy-lower-htpy-galois-connection-Large-Poset :
+    lower-htpy-galois-connection-Large-Poset P Q G H →
+    upper-htpy-galois-connection-Large-Poset P Q G H
+  upper-htpy-lower-htpy-galois-connection-Large-Poset p =
     htpy-sim-hom-Large-Poset Q P
       ( upper-adjoint-galois-connection-Large-Poset G)
       ( upper-adjoint-galois-connection-Large-Poset H)
-      ( sim-upper-adjoint-sim-lower-adjoint-galois-connection-Large-Poset
-
-        ( P)
-        ( Q)
-        ( G)
-        ( H)
+      ( upper-sim-lower-sim-galois-connection-Large-Poset P Q H G
         ( sim-htpy-hom-Large-Poset P Q
-          ( lower-adjoint-galois-connection-Large-Poset G)
           ( lower-adjoint-galois-connection-Large-Poset H)
-          ( p)))
+          ( lower-adjoint-galois-connection-Large-Poset G)
+          ( inv-htpy p)))
 
-  htpy-lower-adjoint-htpy-upper-adjoint-galois-connection-Large-Poset :
-    htpy-upper-adjoint-galois-connection-Large-Poset P Q G H →
-    htpy-lower-adjoint-galois-connection-Large-Poset P Q G H
-  htpy-lower-adjoint-htpy-upper-adjoint-galois-connection-Large-Poset p =
+  lower-htpy-upper-htpy-galois-connection-Large-Poset :
+    upper-htpy-galois-connection-Large-Poset P Q H G →
+    lower-htpy-galois-connection-Large-Poset P Q G H
+  lower-htpy-upper-htpy-galois-connection-Large-Poset p =
     htpy-sim-hom-Large-Poset P Q
       ( lower-adjoint-galois-connection-Large-Poset G)
       ( lower-adjoint-galois-connection-Large-Poset H)
-      ( sim-lower-adjoint-sim-upper-adjoint-galois-connection-Large-Poset
-        ( P)
-        ( Q)
-        ( G)
-        ( H)
+      ( lower-sim-upper-sim-galois-connection-Large-Poset P Q G H
         ( sim-htpy-hom-Large-Poset Q P
+          ( upper-adjoint-galois-connection-Large-Poset H)
           ( upper-adjoint-galois-connection-Large-Poset G)
-          ( upper-adjoint-galois-connection-Large-Poset H) p))
+          ( p)))
 ```
 
 ### The lower adjoint of a Galois connection preserves all existing joins
