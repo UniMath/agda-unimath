@@ -7,6 +7,7 @@ module order-theory.galois-connections-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.logical-equivalences
@@ -14,7 +15,11 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.lower-sets-large-posets
 open import order-theory.order-preserving-maps-large-posets
+open import order-theory.similarity-of-elements-large-posets
+open import order-theory.upper-sets-large-posets
+open import order-theory.weak-homotopies-order-preserving-maps-large-posets
 ```
 
 </details>
@@ -248,6 +253,10 @@ module _
 
 ### Homotopies of Galois connections
 
+**Homotopies of Galois connections** are pointwise identifications between either their lower adjoints or their upper adjoints. We will show below that homotopies between lower adjoints induce homotopies between upper adjoints and vice versa.
+
+**Note:** We can only have homotopies between Galois connections with the same universe level reindexing functions.
+
 ```agda
 module _
   {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
@@ -268,12 +277,38 @@ module _
       ( upper-adjoint-galois-connection-Large-Poset H)
 ```
 
+### Weak homotopies of Galois connections
+
+**Weak homotopies of Galois connections** are pointwise [similarities](order-theory.similarity-of-elements-large-posets.md) between either their lower or their upper adjoints. We will show below that weak homotopies between lower adjoints induce weak homotopies between upper adjoints and vice versa.
+
+
+```agda
+module _
+  {αP αQ γG γH δG δH : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G : galois-connection-Large-Poset γG δG P Q)
+  (H : galois-connection-Large-Poset γH δH P Q)
+  where
+
+  weak-htpy-lower-adjoint-galois-connection-Large-Poset : UUω
+  weak-htpy-lower-adjoint-galois-connection-Large-Poset =
+    weak-htpy-hom-Large-Poset P Q
+      ( lower-adjoint-galois-connection-Large-Poset G)
+      ( lower-adjoint-galois-connection-Large-Poset H)
+
+  weak-htpy-upper-adjoint-galois-connection-Large-Poset : UUω
+  weak-htpy-upper-adjoint-galois-connection-Large-Poset =
+    weak-htpy-hom-Large-Poset Q P
+      ( upper-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset H)
+```
+
 ## Properties
 
-### A homotopy betwee lower adjoints of a galois connection induces a homotopy between upper adjoints, and vice versa
+### A weak homotopy between lower adjoints of a Galois connection induces a weak homotopy between upper adjoints, and vice versa
 
 **Proof:** Consider two Galois connections `LG ⊣ UG` and `LH ⊣ UH` between `P`
-and `Q`, and suppose that `LG(x) ＝ LH(x)` for all elements `x : P`. Then it
+and `Q`, and suppose that `LG(x) ~ LH(x)` for all elements `x : P`. Then it
 follows that
 
 ```text
@@ -290,10 +325,102 @@ module _
   (G H : galois-connection-Large-Poset γ δ P Q)
   where
 
+  weak-htpy-upper-adjoint-weak-htpy-lower-adjoint-galois-connection-Large-Poset :
+    weak-htpy-lower-adjoint-galois-connection-Large-Poset P Q G H →
+    weak-htpy-upper-adjoint-galois-connection-Large-Poset P Q G H
+  weak-htpy-upper-adjoint-weak-htpy-lower-adjoint-galois-connection-Large-Poset
+    p x =
+    sim-has-same-elements-lower-set-element-Large-Poset P
+      ( λ y →
+        logical-equivalence-reasoning
+          leq-Large-Poset P y
+            ( map-upper-adjoint-galois-connection-Large-Poset P Q G x)
+          ↔ leq-Large-Poset Q
+              ( map-lower-adjoint-galois-connection-Large-Poset P Q G y)
+              ( x)
+            by inv-iff (adjoint-relation-galois-connection-Large-Poset G y x)
+          ↔ leq-Large-Poset Q
+              ( map-lower-adjoint-galois-connection-Large-Poset P Q H y)
+              ( x)
+            by has-same-elements-upper-set-element-sim-Large-Poset Q (p y) x
+          ↔ leq-Large-Poset P y
+              ( map-upper-adjoint-galois-connection-Large-Poset P Q H x)
+            by adjoint-relation-galois-connection-Large-Poset H y x)
+
+  weak-htpy-lower-adjoint-weak-htpy-upper-adjoint-galois-connection-Large-Poset :
+    weak-htpy-upper-adjoint-galois-connection-Large-Poset P Q G H →
+    weak-htpy-lower-adjoint-galois-connection-Large-Poset P Q G H
+  weak-htpy-lower-adjoint-weak-htpy-upper-adjoint-galois-connection-Large-Poset
+    p y =
+    sim-has-same-elements-upper-set-element-Large-Poset Q
+      ( λ x →
+        logical-equivalence-reasoning
+          leq-Large-Poset Q
+            ( map-lower-adjoint-galois-connection-Large-Poset P Q G y)
+            ( x)
+          ↔ leq-Large-Poset P y
+              ( map-upper-adjoint-galois-connection-Large-Poset P Q G x)
+            by adjoint-relation-galois-connection-Large-Poset G y x
+          ↔ leq-Large-Poset P y
+              ( map-upper-adjoint-galois-connection-Large-Poset P Q H x)
+            by has-same-elements-lower-set-element-sim-Large-Poset P (p x) y
+          ↔ leq-Large-Poset Q
+              ( map-lower-adjoint-galois-connection-Large-Poset P Q H y)
+              ( x)
+            by inv-iff (adjoint-relation-galois-connection-Large-Poset H y x))
+```
+
+### A homotopy between lower adjoints of a Galois connection induces a homotopy between upper adjoints, and vice versa
+
+**Proof:** Consider two Galois connections `LG ⊣ UG` and `LH ⊣ UH` between `P`
+and `Q`, and suppose that `LG ~ LH`. Then there is a weak homotopy `LG ~w LH`, and this induces a weak homotopy `UG ~w UH`. In other words, we obtain that
+
+```text
+  UG y ~ UH y
+```
+
+for any element `y : Q`. Since `UG y` and `UH y` are of the same universe level, it follows that they are equal.
+
+```agda
+module _
+  {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G H : galois-connection-Large-Poset γ δ P Q)
+  where
+
   htpy-upper-adjoint-htpy-lower-adjoint-galois-connection-Large-Poset :
     htpy-lower-adjoint-galois-connection-Large-Poset P Q G H →
     htpy-upper-adjoint-galois-connection-Large-Poset P Q G H
-  htpy-upper-adjoint-htpy-lower-adjoint-galois-connection-Large-Poset = {!!}
+  htpy-upper-adjoint-htpy-lower-adjoint-galois-connection-Large-Poset p =
+    htpy-weak-htpy-hom-Large-Poset Q P
+      ( upper-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset H)
+      ( weak-htpy-upper-adjoint-weak-htpy-lower-adjoint-galois-connection-Large-Poset
+      
+        ( P)
+        ( Q)
+        ( G)
+        ( H)
+        ( weak-htpy-htpy-hom-Large-Poset P Q
+          ( lower-adjoint-galois-connection-Large-Poset G)
+          ( lower-adjoint-galois-connection-Large-Poset H)
+          ( p)))
+
+  htpy-lower-adjoint-htpy-upper-adjoint-galois-connection-Large-Poset :
+    htpy-upper-adjoint-galois-connection-Large-Poset P Q G H →
+    htpy-lower-adjoint-galois-connection-Large-Poset P Q G H
+  htpy-lower-adjoint-htpy-upper-adjoint-galois-connection-Large-Poset p =
+    htpy-weak-htpy-hom-Large-Poset P Q
+      ( lower-adjoint-galois-connection-Large-Poset G)
+      ( lower-adjoint-galois-connection-Large-Poset H)
+      ( weak-htpy-lower-adjoint-weak-htpy-upper-adjoint-galois-connection-Large-Poset
+        ( P)
+        ( Q)
+        ( G)
+        ( H)
+        ( weak-htpy-htpy-hom-Large-Poset Q P
+          ( upper-adjoint-galois-connection-Large-Poset G)
+          ( upper-adjoint-galois-connection-Large-Poset H) p))
 ```
 
 ### The lower adjoint of a Galois connection preserves all existing joins

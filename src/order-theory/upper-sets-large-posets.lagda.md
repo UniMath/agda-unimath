@@ -79,12 +79,12 @@ module _
 
 ## Properties
 
-### If the upper sets `↑(x)` and `↑(y)` have the same elements, then `x` and `y` are similar
+### The upper sets `↑(x)` and `↑(y)` have the same elements if and only if `x` and `y` are similar
 
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
-  {l1 l2 : Level} (x : type-Large-Poset P l1) (y : type-Large-Poset P l2)
+  {l1 l2 : Level} {x : type-Large-Poset P l1} {y : type-Large-Poset P l2}
   where
 
   sim-has-same-elements-upper-set-element-Large-Poset :
@@ -96,6 +96,16 @@ module _
     backward-implication (H y) (refl-leq-Large-Poset P y)
   pr2 (sim-has-same-elements-upper-set-element-Large-Poset H) =
     forward-implication (H x) (refl-leq-Large-Poset P x)
+
+  has-same-elements-upper-set-element-sim-Large-Poset :
+    sim-Large-Poset P x y →
+    has-same-elements-Large-Subposet P
+      ( upper-set-element-Large-Poset P x)
+      ( upper-set-element-Large-Poset P y)
+  pr1 (has-same-elements-upper-set-element-sim-Large-Poset (H , K) z) p =
+    transitive-leq-Large-Poset P y x z p K
+  pr2 (has-same-elements-upper-set-element-sim-Large-Poset (H , K) z) q =
+    transitive-leq-Large-Poset P x y z q H
 ```
 
 ### For two elements `x` and `y` of a large poset the same universe level, if the upper sets `↑(x)` and `↑(y)` have the same elements, then `x` and `y` are equal
@@ -113,6 +123,6 @@ module _
     x ＝ y
   eq-has-same-elements-upper-set-element-Large-Poset H =
     antisymmetric-leq-Large-Poset P x y
-      ( pr1 (sim-has-same-elements-upper-set-element-Large-Poset P x y H))
-      ( pr2 (sim-has-same-elements-upper-set-element-Large-Poset P x y H))
+      ( pr1 (sim-has-same-elements-upper-set-element-Large-Poset P H))
+      ( pr2 (sim-has-same-elements-upper-set-element-Large-Poset P H))
 ```

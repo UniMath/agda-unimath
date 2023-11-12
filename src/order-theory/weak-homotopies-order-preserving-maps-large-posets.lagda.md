@@ -76,7 +76,7 @@ module _
 
 ## Properties
 
-### Homotopic order preserving maps are weakly homotopic
+### Order preserving maps with the same universe level reindexing function are homotopic if and only if they are weakly homotopic
 
 ```agda
 module _
@@ -95,4 +95,12 @@ module _
       ( large-preorder-Large-Poset Q)
       ( f)
       ( g)
+
+  htpy-weak-htpy-hom-Large-Poset :
+    weak-htpy-hom-Large-Poset P Q f g → htpy-hom-Large-Poset P Q f g
+  htpy-weak-htpy-hom-Large-Poset H x =
+    eq-sim-Large-Poset Q
+      ( map-hom-Large-Poset P Q f x)
+      ( map-hom-Large-Poset P Q g x)
+      ( H x)
 ```
