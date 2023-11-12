@@ -32,8 +32,6 @@ add-ℕ : ℕ → ℕ → ℕ
 add-ℕ x 0 = x
 add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 
-{-# BUILTIN NATPLUS add-ℕ #-}
-
 infixl 35 _+ℕ_
 _+ℕ_ = add-ℕ
 
