@@ -90,11 +90,6 @@ only define instances for fixed length telescopes. We have defined instances of
 telescopes up to length 18, so although Agda cannot infer a telescope of a
 general length using this approach, it can infer them up to this given length.
 
-In the case of telescopes, this has the unfortunate disadvantage that we can
-only define instances for fixed length telescopes. We have defined instances of
-telescopes up to length 18, so although Agda cannot infer a telescope of a
-general length using this approach, it can infer them up to this given length.
-
 ```agda
 instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
 instance-telescope {{x}} = x

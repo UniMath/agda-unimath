@@ -42,6 +42,7 @@ Maybe X = X + unit
 data Maybe' {l} (X : UU l) : UU l where
   unit-Maybe' : X → Maybe' X
   exception-Maybe' : Maybe' X
+
 {-# BUILTIN MAYBE Maybe' #-}
 
 unit-Maybe : {l : Level} {X : UU l} → X → Maybe X
