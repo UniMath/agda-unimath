@@ -470,6 +470,35 @@ implies that the square
 
 commutes.
 
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  coherence-square-image-subgroup-subset-Group :
+    coherence-square-hom-Large-Poset
+      ( powerset-Large-Poset (type-Group G))
+      ( Subgroup-Large-Poset G)
+      ( powerset-Large-Poset (type-Group H))
+      ( Subgroup-Large-Poset H)
+      ( im-subtype-hom-Large-Poset (map-hom-Group G H f))
+      ( subgroup-subset-hom-large-poset-Group G)
+      ( subgroup-subset-hom-large-poset-Group H)
+      ( im-hom-subgroup-hom-Large-Poset G H f)
+  coherence-square-image-subgroup-subset-Group =
+    lower-coherence-square-upper-coherence-square-galois-connection-Large-Poset
+      ( powerset-Large-Poset (type-Group G))
+      ( Subgroup-Large-Poset G)
+      ( powerset-Large-Poset (type-Group H))
+      ( Subgroup-Large-Poset H)
+      ( image-pullback-subtype-galois-connection-Large-Poset
+        ( map-hom-Group G H f))
+      ( subgroup-subset-galois-connection-Group G)
+      ( subgroup-subset-galois-connection-Group H)
+      ( image-pullback-galois-connection-Subgroup G H f)
+      ( coherence-square-pullback-subset-Subgroup G H f)
+```
+
 **Remark:** The name
 
 ```text
@@ -490,47 +519,3 @@ might appear somewhat convoluted. It breaks down into three parts:
    of the name: `image-subgroup-subset`
 3. The image is taken under a group homomorphism, which is input for the entry,
    so the last part of the name is `hom-Group`.
-
-```text
-module _
-  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
-  (S : subset-Group l3 G)
-  where
-
-  forward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group :
-    {l : Level} (U : Subgroup l H) →
-    leq-Subgroup H (im-hom-Subgroup G H f (subgroup-subset-Group G S)) U →
-    im-subtype (map-hom-Group G H f) S ⊆ subset-Subgroup H U
-  forward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group
-    U p =
-    transitive-leq-subtype
-      ( im-subtype (map-hom-Group G H f) S)
-      ( subset-im-hom-Subgroup G H f (subgroup-subset-Group G S))
-      ( subset-Subgroup H U)
-      ( p)
-      ( preserves-order-im-subtype
-        ( map-hom-Group G H f)
-        ( S)
-        ( subset-subgroup-subset-Group G S)
-        ( contains-subset-subgroup-subset-Group G S))
-
-  backward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group :
-    {l : Level} (U : Subgroup l H) →
-    im-subtype (map-hom-Group G H f) S ⊆ subset-Subgroup H U →
-    leq-Subgroup H (im-hom-Subgroup G H f (subgroup-subset-Group G S)) U
-  backward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group
-    U p =
-    backward-implication-is-image-subgroup-im-hom-Subgroup G H f
-      ( subgroup-subset-Group G S)
-      ( U)
-      {!!}
-
-  is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group :
-    adjoint-relation-subgroup-generated-by-subset-Group H
-      ( im-subtype (map-hom-Group G H f) S)
-      ( im-hom-Subgroup G H f (subgroup-subset-Group G S))
-  pr1 (is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group U) =
-    forward-implication-is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group
-      ( U)
-  pr2 (is-subgroup-generated-by-subset-image-subgroup-subset-hom-Group U) = {!!}
-```
