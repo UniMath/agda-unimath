@@ -93,6 +93,8 @@ open import order-theory.preorders public
 open import order-theory.reflective-galois-connections-large-posets public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
+open import order-theory.similarity-of-order-preserving-maps-large-posets public
+open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.suplattices public
@@ -104,6 +106,4 @@ open import order-theory.total-preorders public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
-open import order-theory.weak-homotopies-order-preserving-maps-large-posets public
-open import order-theory.weak-homotopies-order-preserving-maps-large-preorders public
 ```

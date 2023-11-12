@@ -9,6 +9,7 @@ module group-theory.pullbacks-subgroups where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.powersets
 open import foundation.pullbacks-subtypes
 open import foundation.universe-levels
 
@@ -19,8 +20,10 @@ open import group-theory.subgroups
 open import group-theory.subsemigroups
 open import group-theory.subsets-groups
 
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.similarity-of-order-preserving-maps-large-posets
 ```
 
 </details>
@@ -149,4 +152,52 @@ module _
     pullback-Subgroup G H f
   preserves-order-hom-Large-Preorder pullback-subgroup-hom-Large-Poset =
     preserves-order-pullback-Subgroup
+```
+
+## Properties
+
+### The pullback operation commutes with the underlying subtype operation
+
+The square
+
+```text
+                   pullback f
+     Subgroup H ----------------> Subgroup G
+         |                            |
+  K ↦ UK |                            | K ↦ UK
+         |                            |
+         V                            V
+   subset-Group H ------------> subset-Group G
+                   pullback f
+```
+
+of [order preserving maps](order-theory.order-preserving-maps-large-posets.md)
+[commutes](order-theory.commuting-squares-of-order-preserving-maps-large-posets.md)
+by reflexivity.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  coherence-square-pullback-subset-Subgroup :
+    coherence-square-hom-Large-Poset
+      ( Subgroup-Large-Poset H)
+      ( powerset-Large-Poset (type-Group H))
+      ( Subgroup-Large-Poset G)
+      ( powerset-Large-Poset (type-Group G))
+      ( pullback-subgroup-hom-Large-Poset G H f)
+      ( subset-subgroup-hom-large-poset-Group H)
+      ( subset-subgroup-hom-large-poset-Group G)
+      ( pullback-subtype-hom-Large-Poset (map-hom-Group G H f))
+  coherence-square-pullback-subset-Subgroup =
+    refl-sim-hom-Large-Poset
+      ( Subgroup-Large-Poset H)
+      ( powerset-Large-Poset (type-Group G))
+      ( comp-hom-Large-Poset
+        ( Subgroup-Large-Poset H)
+        ( Subgroup-Large-Poset G)
+        ( powerset-Large-Poset (type-Group G))
+        ( subset-subgroup-hom-large-poset-Group G)
+        ( pullback-subgroup-hom-Large-Poset G H f))
 ```

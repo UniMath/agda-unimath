@@ -1,7 +1,7 @@
-# Weak homotopies of order preserving maps between large preorders
+# Similarity of order preserving maps between large preorders
 
 ```agda
-module order-theory.weak-homotopies-order-preserving-maps-large-preorders where
+module order-theory.similarity-of-order-preserving-maps-large-preorders where
 ```
 
 <details><summary>Imports</summary>
@@ -22,20 +22,22 @@ open import order-theory.similarity-of-elements-large-preorders
 Consider two order preserving maps `f : hom-Large-Preorder γf P Q` and
 `g : hom-Large-Preorder γg P Q` between the same two large preorders `P` and
 `Q`, but each specified with their own universe level reindexing functions. We
-say that `f` and `g` are **weakly homotopic** if the values `f x` and `g x` are
+say that `f` and `g` are **similar** if the values `f x` and `g x` are
 [similar](order-theory.similarity-of-elements-large-preorders.md) for each
-`x : P`. In other words, a **weak homotopy of order preserving maps** between
-`f` and `g` consists of an assignment `x ↦ h x` where
+`x : P`. In other words, a **similarity of order preserving maps** between `f`
+and `g` consists of an assignment `x ↦ h x` where
 
 ```text
-  h x : (f x ≤ g x) ∧ (g x ≤ f x)
+  h x : f x ≈ g x
 ```
 
-for each `x : type-Large-Preorder P`.
+for each `x : type-Large-Preorder P`. In informal writing we will use the
+notation `f ≈ g` to assert that the order preserving map `f` is similar to the
+order preserving map `g`.
 
 ## Definitions
 
-### Weak homotopies of order preserving maps between large preorders
+### Similarities of order preserving maps between large preorders
 
 ```agda
 module _
@@ -46,15 +48,15 @@ module _
   (g : hom-Large-Preorder γg P Q)
   where
 
-  weak-htpy-hom-Large-Preorder : UUω
-  weak-htpy-hom-Large-Preorder =
+  sim-hom-Large-Preorder : UUω
+  sim-hom-Large-Preorder =
     {l : Level} (x : type-Large-Preorder P l) →
     sim-Large-Preorder Q
       ( map-hom-Large-Preorder f x)
       ( map-hom-Large-Preorder g x)
 ```
 
-### The reflexive weak homotopy of order preserving maps between large preorders
+### The reflexive similarity of order preserving maps between large preorders
 
 ```agda
 module _
@@ -64,14 +66,14 @@ module _
   (f : hom-Large-Preorder γf P Q)
   where
 
-  refl-weak-htpy-hom-Large-Preorder : weak-htpy-hom-Large-Preorder P Q f f
-  refl-weak-htpy-hom-Large-Preorder x =
+  refl-sim-hom-Large-Preorder : sim-hom-Large-Preorder P Q f f
+  refl-sim-hom-Large-Preorder x =
     refl-sim-Large-Preorder Q (map-hom-Large-Preorder f x)
 ```
 
 ## Properties
 
-### Homotopic order preserving maps are weakly homotopic
+### Homotopic order preserving maps are similar
 
 ```agda
 module _
@@ -82,7 +84,7 @@ module _
   (g : hom-Large-Preorder γ P Q)
   where
 
-  weak-htpy-htpy-hom-Large-Preorder :
-    htpy-hom-Large-Preorder P Q f g → weak-htpy-hom-Large-Preorder P Q f g
-  weak-htpy-htpy-hom-Large-Preorder H x = sim-eq-Large-Preorder Q (H x)
+  sim-htpy-hom-Large-Preorder :
+    htpy-hom-Large-Preorder P Q f g → sim-hom-Large-Preorder P Q f g
+  sim-htpy-hom-Large-Preorder H x = sim-eq-Large-Preorder Q (H x)
 ```

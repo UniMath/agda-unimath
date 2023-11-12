@@ -19,6 +19,7 @@ open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.pullbacks-subtypes
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -35,9 +36,12 @@ open import group-theory.subsets-groups
 open import lists.concatenation-lists
 open import lists.lists
 
+open import order-theory.commuting-squares-of-galois-connections-large-posets
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets
 open import order-theory.galois-connections-large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.similarity-of-order-preserving-maps-large-posets
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -433,7 +437,38 @@ module _
         is-normal-is-closed-under-conjugation-subgroup-subset-Group' x y)
 ```
 
-### If `f : G → H` is a group homomorphism, then `im f ⟨S⟩ ＝ ⟨im f S⟩`
+### If `f : G → H` is a group homomorphism, then `im f (S) ＝ (im f S)`
+
+**Proof:** Note that the square
+
+```text
+                    pullback f
+   subset-Group G <------------ subset-Group H
+         ∧                            ∧
+         |                            |
+  K ↦ UK |                            | K ↦ UK
+         |                            |
+     Subgroup G <---------------- Subgroup H
+                    pullback f
+```
+
+[commutes](order-theory.commuting-squares-of-order-preserving-maps-large-posets.md)
+by reflexivity. By the adjointness relations of
+[galois connections](order-theory.galois-connections-large-posets.md), this
+implies that the square
+
+```text
+                    im f
+    subset-Group G ------> subset-Group H
+          |                      |
+  S ↦ (S) |                      | S ↦ (S)
+          |                      |
+          V                      V
+      Subgroup G ----------> Subgroup H
+                    im f
+```
+
+commutes.
 
 **Remark:** The name
 
@@ -456,7 +491,7 @@ might appear somewhat convoluted. It breaks down into three parts:
 3. The image is taken under a group homomorphism, which is input for the entry,
    so the last part of the name is `hom-Group`.
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   (S : subset-Group l3 G)

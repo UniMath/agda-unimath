@@ -31,6 +31,9 @@ are said to be **similar** if both `x ≤ y` and `y ≤ x` hold. Note that the
 similarity relation is defined across universe levels, and that only similar
 elements of the same universe level are equal.
 
+In informal writing we will use the notation `x ≈ y` to assert that `x` and `y`
+are similar elements in a poset `P`.
+
 ## Definition
 
 ```agda

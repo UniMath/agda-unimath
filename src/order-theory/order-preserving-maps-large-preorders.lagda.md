@@ -186,5 +186,5 @@ module _
 
 - [Order preserving maps](order-theory.order-preserving-maps-large-posets.md)
   between large posets
-- [Weak homotopies](order-theory.weak-homotopies-order-preserving-maps-large-preorders.md)
+- [Similarity](order-theory.similarity-of-order-preserving-maps-large-preorders.md)
   of order preserving maps between large preorders

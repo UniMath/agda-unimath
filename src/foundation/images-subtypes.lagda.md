@@ -127,19 +127,19 @@ module _
   pr2 (adjoint-relation-image-pullback-subtype S T) =
     backward-implication-adjoint-relation-image-pullback-subtype S T
 
-  image-pullback-subtype-Galois-Connection :
+  image-pullback-subtype-galois-connection-Large-Poset :
     galois-connection-Large-Poset
       ( λ l → l1 ⊔ l2 ⊔ l)
       ( λ l → l)
       ( powerset-Large-Poset A)
       ( powerset-Large-Poset B)
   lower-adjoint-galois-connection-Large-Poset
-    image-pullback-subtype-Galois-Connection =
+    image-pullback-subtype-galois-connection-Large-Poset =
     im-subtype-hom-Large-Poset f
   upper-adjoint-galois-connection-Large-Poset
-    image-pullback-subtype-Galois-Connection =
+    image-pullback-subtype-galois-connection-Large-Poset =
     pullback-subtype-hom-Large-Poset f
   adjoint-relation-galois-connection-Large-Poset
-    image-pullback-subtype-Galois-Connection =
+    image-pullback-subtype-galois-connection-Large-Poset =
     adjoint-relation-image-pullback-subtype
 ```

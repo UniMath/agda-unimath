@@ -38,12 +38,12 @@ Consider a diagram of
 ```
 
 between large posets. We say that the diagram commutes if there is a
-[weak homotopy](order-theory.weak-homotopies-order-preserving-maps-large-posets.md)
-`LJ ∘ LF ~ LG ∘ LI`. This condition is equivalent the condition that there is a
-weak homotopy `UF ∘ UJ ~ UI ∘ UG`.
+[similarity](order-theory.similarity-of-order-preserving-maps-large-posets.md)
+`LJ ∘ LF ≈ LG ∘ LI`. This condition is equivalent the condition that there is a
+similarity `UF ∘ UJ ≈ UI ∘ UG`.
 
 By the adjoint relations between the galois connection it also follows that
-there are weak homotopies `LI ∘ UF ~ UG ∘ LJ` and `LF ∘ UI ~ UJ ∘ LG`.
+there are similarities `LI ∘ UF ≈ UG ∘ LJ` and `LF ∘ UI ≈ UJ ∘ LG`.
 
 ## Definitions
 
@@ -65,13 +65,13 @@ module _
 
   coherence-square-lower-adjoint-galois-connection-Large-Poset : UUω
   coherence-square-lower-adjoint-galois-connection-Large-Poset =
-    weak-htpy-lower-adjoint-galois-connection-Large-Poset P V
+    sim-lower-adjoint-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P Q V J F)
       ( comp-galois-connection-Large-Poset P U V G I)
 
   coherence-square-upper-adjoint-galois-connection-Large-Poset : UUω
   coherence-square-upper-adjoint-galois-connection-Large-Poset =
-    weak-htpy-upper-adjoint-galois-connection-Large-Poset P V
+    sim-upper-adjoint-galois-connection-Large-Poset P V
       ( comp-galois-connection-Large-Poset P U V G I)
       ( comp-galois-connection-Large-Poset P Q V J F)
 ```

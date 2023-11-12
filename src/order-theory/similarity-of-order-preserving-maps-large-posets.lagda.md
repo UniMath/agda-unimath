@@ -1,7 +1,7 @@
-# Weak homotopies of order preserving maps between large posets
+# Similarity of order preserving maps between large posets
 
 ```agda
-module order-theory.weak-homotopies-order-preserving-maps-large-posets where
+module order-theory.similarity-of-order-preserving-maps-large-posets where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.universe-levels
 open import order-theory.large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.similarity-of-elements-large-posets
-open import order-theory.weak-homotopies-order-preserving-maps-large-preorders
+open import order-theory.similarity-of-order-preserving-maps-large-preorders
 ```
 
 </details>
@@ -23,20 +23,22 @@ open import order-theory.weak-homotopies-order-preserving-maps-large-preorders
 Consider two order preserving maps `f : hom-Large-Poset γf P Q` and
 `g : hom-Large-Poset γg P Q` between the same two large posets `P` and `Q`, but
 each specified with their own universe level reindexing functions. We say that
-`f` and `g` are **weakly homotopic** if the values `f x` and `g x` are
+`f` and `g` are **similar** if the values `f x` and `g x` are
 [similar](order-theory.similarity-of-elements-large-posets.md) for each `x : P`.
-In other words, a **weak homotopy of order preserving maps** between `f` and `g`
+In other words, a **similarity of order preserving maps** between `f` and `g`
 consists of an assignment `x ↦ h x` where
 
 ```text
-  h x : (f x ≤ g x) ∧ (g x ≤ f x)
+  h x : f x ≈ g x
 ```
 
-for each `x : type-Large-Poset P`.
+for each `x : type-Large-Poset P`. In informal writing we will use the notation
+`f ≈ g` to assert that the order preserving map `f` is similar to the order
+preserving map `g`.
 
 ## Definitions
 
-### Weak homotopies of order preserving maps between large posets
+### Similarity of order preserving maps between large posets
 
 ```agda
 module _
@@ -47,16 +49,16 @@ module _
   (g : hom-Large-Poset γg P Q)
   where
 
-  weak-htpy-hom-Large-Poset : UUω
-  weak-htpy-hom-Large-Poset =
-    weak-htpy-hom-Large-Preorder
+  sim-hom-Large-Poset : UUω
+  sim-hom-Large-Poset =
+    sim-hom-Large-Preorder
       ( large-preorder-Large-Poset P)
       ( large-preorder-Large-Poset Q)
       ( f)
       ( g)
 ```
 
-### The reflexive weak homotopy of order preserving maps between large posets
+### The reflexive similarity of order preserving maps between large posets
 
 ```agda
 module _
@@ -66,9 +68,9 @@ module _
   (f : hom-Large-Poset γf P Q)
   where
 
-  refl-weak-htpy-hom-Large-Poset : weak-htpy-hom-Large-Poset P Q f f
-  refl-weak-htpy-hom-Large-Poset =
-    refl-weak-htpy-hom-Large-Preorder
+  refl-sim-hom-Large-Poset : sim-hom-Large-Poset P Q f f
+  refl-sim-hom-Large-Poset =
+    refl-sim-hom-Large-Preorder
       ( large-preorder-Large-Poset P)
       ( large-preorder-Large-Poset Q)
       ( f)
@@ -76,7 +78,7 @@ module _
 
 ## Properties
 
-### Order preserving maps with the same universe level reindexing function are homotopic if and only if they are weakly homotopic
+### Order preserving maps with the same universe level reindexing function are homotopic if and only if they are similar
 
 ```agda
 module _
@@ -87,18 +89,18 @@ module _
   (g : hom-Large-Poset γ P Q)
   where
 
-  weak-htpy-htpy-hom-Large-Poset :
-    htpy-hom-Large-Poset P Q f g → weak-htpy-hom-Large-Poset P Q f g
-  weak-htpy-htpy-hom-Large-Poset =
-    weak-htpy-htpy-hom-Large-Preorder
+  sim-htpy-hom-Large-Poset :
+    htpy-hom-Large-Poset P Q f g → sim-hom-Large-Poset P Q f g
+  sim-htpy-hom-Large-Poset =
+    sim-htpy-hom-Large-Preorder
       ( large-preorder-Large-Poset P)
       ( large-preorder-Large-Poset Q)
       ( f)
       ( g)
 
-  htpy-weak-htpy-hom-Large-Poset :
-    weak-htpy-hom-Large-Poset P Q f g → htpy-hom-Large-Poset P Q f g
-  htpy-weak-htpy-hom-Large-Poset H x =
+  htpy-sim-hom-Large-Poset :
+    sim-hom-Large-Poset P Q f g → htpy-hom-Large-Poset P Q f g
+  htpy-sim-hom-Large-Poset H x =
     eq-sim-Large-Poset Q
       ( map-hom-Large-Poset P Q f x)
       ( map-hom-Large-Poset P Q g x)

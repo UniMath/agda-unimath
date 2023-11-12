@@ -15,7 +15,7 @@ open import foundation-core.commuting-squares-of-maps
 
 open import order-theory.large-posets
 open import order-theory.order-preserving-maps-large-posets
-open import order-theory.weak-homotopies-order-preserving-maps-large-posets
+open import order-theory.similarity-of-order-preserving-maps-large-posets
 ```
 
 </details>
@@ -46,7 +46,7 @@ for each `x : type-Large-Poset P l` the elements
 are [similar](order-theory.similarity-of-elements-large-posets.md). In other
 words, we say that the square above commutes if the composites `j ∘ f` and
 `g ∘ i` are
-[weakly homotopic](order-theory.weak-homotopies-order-preserving-maps-large-posets.md).
+[similar](order-theory.similarity-of-order-preserving-maps-large-posets.md).
 
 ## Definitions
 
@@ -66,7 +66,7 @@ module _
 
   coherence-square-hom-Large-Poset : UUω
   coherence-square-hom-Large-Poset =
-    weak-htpy-hom-Large-Poset P V
+    sim-hom-Large-Poset P V
       ( comp-hom-Large-Poset P Q V j f)
       ( comp-hom-Large-Poset P U V g i)
 ```
