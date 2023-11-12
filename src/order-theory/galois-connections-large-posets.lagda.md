@@ -246,7 +246,55 @@ module _
     adjoint-relation-comp-galois-connection-Large-Poset
 ```
 
+### Homotopies of Galois connections
+
+```agda
+module _
+  {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G H : galois-connection-Large-Poset γ δ P Q)
+  where
+
+  htpy-lower-adjoint-galois-connection-Large-Poset : UUω
+  htpy-lower-adjoint-galois-connection-Large-Poset =
+    htpy-hom-Large-Poset P Q
+      ( lower-adjoint-galois-connection-Large-Poset G)
+      ( lower-adjoint-galois-connection-Large-Poset H)
+
+  htpy-upper-adjoint-galois-connection-Large-Poset : UUω
+  htpy-upper-adjoint-galois-connection-Large-Poset =
+    htpy-hom-Large-Poset Q P
+      ( upper-adjoint-galois-connection-Large-Poset G)
+      ( upper-adjoint-galois-connection-Large-Poset H)
+```
+
 ## Properties
+
+### A homotopy betwee lower adjoints of a galois connection induces a homotopy between upper adjoints, and vice versa
+
+**Proof:** Consider two Galois connections `LG ⊣ UG` and `LH ⊣ UH` between `P`
+and `Q`, and suppose that `LG(x) ＝ LH(x)` for all elements `x : P`. Then it
+follows that
+
+```text
+  (x ≤ UG(y)) ↔ (LG(x) ≤ y) ↔ (LH(x) ≤ y) ↔ (x ≤ UH(y)).
+```
+
+Therefore it follows that `UG(y)` and `UH(y)` have the same lower sets, and
+hence they must be equal.
+
+```agda
+module _
+  {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G H : galois-connection-Large-Poset γ δ P Q)
+  where
+
+  htpy-upper-adjoint-htpy-lower-adjoint-galois-connection-Large-Poset :
+    htpy-lower-adjoint-galois-connection-Large-Poset P Q G H →
+    htpy-upper-adjoint-galois-connection-Large-Poset P Q G H
+  htpy-upper-adjoint-htpy-lower-adjoint-galois-connection-Large-Poset = {!!}
+```
 
 ### The lower adjoint of a Galois connection preserves all existing joins
 

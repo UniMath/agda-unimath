@@ -131,8 +131,6 @@ module _
     is-antisymmetric-is-large-poset-Large-Category H
 ```
 
-## Properties
-
 ### Small posets from large posets
 
 ```agda
@@ -153,6 +151,8 @@ module _
   is-set-type-Large-Poset : {l : Level} → is-set (type-Large-Poset X l)
   is-set-type-Large-Poset {l} = is-set-type-Poset (poset-Large-Poset l)
 ```
+
+## Properties
 
 ### Large posets are large categories
 
