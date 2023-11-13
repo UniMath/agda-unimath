@@ -59,7 +59,7 @@ module _
   where
 
   data Id (x : A) : A → UU l where
-    refl : Id x x
+    instance refl : Id x x
 
   infix 6 _＝_
   _＝_ : A → A → UU l
