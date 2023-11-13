@@ -127,7 +127,7 @@ module _
         ↔ leq-Subgroup G subgroup-element-Group H
           by
           inv-iff
-            ( adjoint-relation-subgroup-subset-Group G
+            ( is-subgroup-generated-by-subset-subgroup-subset-Group G
               ( subtype-standard-singleton-subtype (set-Group G) g)
               ( H))
 

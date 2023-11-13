@@ -316,6 +316,65 @@ module _
       ( upper-adjoint-galois-connection-Large-Poset H)
 ```
 
+### Lower universal objects of galois connections
+
+Consider a Galois connection `G : P → Q` and an element `x : P`. An element
+`x' : Q` is then said to satisfy the **lower universal property** with respect
+to `x` if the logical equivalence
+
+```text
+  (x' ≤-Q y) ↔ (x ≤-P UG y)
+```
+
+holds for every element `y : Q`.
+
+```agda
+module _
+  {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G : galois-connection-Large-Poset γ δ P Q)
+  {l1 l2 : Level} (x : type-Large-Poset P l1)
+  (x' : type-Large-Poset Q l2)
+  where
+
+  is-lower-element-galois-connection-Large-Poset : UUω
+  is-lower-element-galois-connection-Large-Poset =
+    {l : Level} (y : type-Large-Poset Q l) →
+    leq-Large-Poset Q x' y ↔
+    leq-Large-Poset P x
+      ( map-upper-adjoint-galois-connection-Large-Poset P Q G y)
+```
+
+### Upper universal objects of galois connections
+
+Consider a Galois connection `G : P → Q` and an element `y : Q`. An element
+`y' : P` is then said to satisfy the **upper universal property** with respect
+to `y` if the logical equivalence
+
+```text
+  (LG x ≤-Q y) ↔ (x ≤-P y')
+```
+
+holds for every element `x : P`.
+
+```agda
+module _
+  {αP αQ γ δ : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G : galois-connection-Large-Poset γ δ P Q)
+  {l1 l2 : Level} (y : type-Large-Poset Q l1)
+  (y' : type-Large-Poset P l2)
+  where
+
+  is-upper-element-galois-connection-Large-Poset : UUω
+  is-upper-element-galois-connection-Large-Poset =
+    {l : Level} (x : type-Large-Poset P l) →
+    leq-Large-Poset Q
+      ( map-lower-adjoint-galois-connection-Large-Poset P Q G x)
+      ( y) ↔
+    leq-Large-Poset P x y'
+```
+
 ## Properties
 
 ### A similarity between lower adjoints of a Galois connection induces a similarity between upper adjoints, and vice versa
@@ -433,6 +492,88 @@ module _
           ( upper-adjoint-galois-connection-Large-Poset H)
           ( upper-adjoint-galois-connection-Large-Poset G)
           ( p)))
+```
+
+### An element `x' : Q` satisfies the lower universal property with respect to `x : P` if and only if it is similar to the element `LG x`
+
+```agda
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level}
+  {γ δ : Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G : galois-connection-Large-Poset γ δ P Q)
+  {l1 l2 : Level} (x : type-Large-Poset P l1) (x' : type-Large-Poset Q l2)
+  where
+
+  is-lower-element-sim-galois-connection-Large-Poset :
+    sim-Large-Poset Q
+      ( map-lower-adjoint-galois-connection-Large-Poset P Q G x)
+      ( x') →
+    is-lower-element-galois-connection-Large-Poset P Q G x x'
+  pr1 (is-lower-element-sim-galois-connection-Large-Poset s y) p =
+    forward-implication-adjoint-relation-galois-connection-Large-Poset P Q G
+      ( transitive-leq-Large-Poset Q _ x' y p (pr1 s))
+  pr2 (is-lower-element-sim-galois-connection-Large-Poset s y) p =
+    transitive-leq-Large-Poset Q x' _ y
+      ( backward-implication-adjoint-relation-galois-connection-Large-Poset
+        P Q G p)
+      ( pr2 s)
+
+  sim-is-lower-element-galois-connection-Large-Poset :
+    is-lower-element-galois-connection-Large-Poset P Q G x x' →
+    sim-Large-Poset Q
+      ( map-lower-adjoint-galois-connection-Large-Poset P Q G x)
+      ( x')
+  sim-is-lower-element-galois-connection-Large-Poset l =
+    sim-has-same-elements-upper-set-element-Large-Poset Q
+      ( λ y →
+        logical-equivalence-reasoning
+          leq-Large-Poset Q _ y
+          ↔ leq-Large-Poset P x _
+            by adjoint-relation-galois-connection-Large-Poset G x y
+          ↔ leq-Large-Poset Q x' y
+            by inv-iff (l y))
+```
+
+### An element `y' : P` satisfies the upper universal property with respect to `y : Q` if and only if it is similar to the element `UG y`
+
+```agda
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level}
+  {γ δ : Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (G : galois-connection-Large-Poset γ δ P Q)
+  {l1 l2 : Level} (y : type-Large-Poset Q l1) (y' : type-Large-Poset P l2)
+  where
+
+  is-upper-element-sim-galois-connection-Large-Poset :
+    sim-Large-Poset P
+      ( map-upper-adjoint-galois-connection-Large-Poset P Q G y)
+      ( y') →
+    is-upper-element-galois-connection-Large-Poset P Q G y y'
+  pr1 (is-upper-element-sim-galois-connection-Large-Poset s x) p =
+    transitive-leq-Large-Poset P x _ y'
+      ( pr1 s)
+      ( forward-implication-adjoint-relation-galois-connection-Large-Poset
+        P Q G p)
+  pr2 (is-upper-element-sim-galois-connection-Large-Poset s x) p =
+    backward-implication-adjoint-relation-galois-connection-Large-Poset P Q G
+      ( transitive-leq-Large-Poset P x y' _ (pr2 s) p)
+
+  sim-is-upper-element-galois-connection-Large-Poset :
+    is-upper-element-galois-connection-Large-Poset P Q G y y' →
+    sim-Large-Poset P
+      ( map-upper-adjoint-galois-connection-Large-Poset P Q G y)
+      ( y')
+  sim-is-upper-element-galois-connection-Large-Poset u =
+    sim-has-same-elements-lower-set-element-Large-Poset P
+      ( λ x →
+        logical-equivalence-reasoning
+          leq-Large-Poset P x _
+          ↔ leq-Large-Poset Q _ y
+            by inv-iff (adjoint-relation-galois-connection-Large-Poset G x y)
+          ↔ leq-Large-Poset P x y'
+            by u x)
 ```
 
 ### The lower adjoint of a Galois connection preserves all existing joins

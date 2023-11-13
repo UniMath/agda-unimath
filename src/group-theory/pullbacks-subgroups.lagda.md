@@ -146,11 +146,12 @@ module _
       ( subsemigroup-Subgroup H S)
       ( subsemigroup-Subgroup H T)
 
-  pullback-subgroup-hom-Large-Poset :
+  pullback-subgroup-hom-large-poset-hom-Group :
     hom-Large-Poset (λ l → l) (Subgroup-Large-Poset H) (Subgroup-Large-Poset G)
-  map-hom-Large-Preorder pullback-subgroup-hom-Large-Poset =
+  map-hom-Large-Preorder pullback-subgroup-hom-large-poset-hom-Group =
     pullback-Subgroup G H f
-  preserves-order-hom-Large-Preorder pullback-subgroup-hom-Large-Poset =
+  preserves-order-hom-Large-Preorder
+    pullback-subgroup-hom-large-poset-hom-Group =
     preserves-order-pullback-Subgroup
 ```
 
@@ -186,7 +187,7 @@ module _
       ( powerset-Large-Poset (type-Group H))
       ( Subgroup-Large-Poset G)
       ( powerset-Large-Poset (type-Group G))
-      ( pullback-subgroup-hom-Large-Poset G H f)
+      ( pullback-subgroup-hom-large-poset-hom-Group G H f)
       ( subset-subgroup-hom-large-poset-Group H)
       ( subset-subgroup-hom-large-poset-Group G)
       ( pullback-subtype-hom-Large-Poset (map-hom-Group G H f))
@@ -199,5 +200,5 @@ module _
         ( Subgroup-Large-Poset G)
         ( powerset-Large-Poset (type-Group G))
         ( subset-subgroup-hom-large-poset-Group G)
-        ( pullback-subgroup-hom-Large-Poset G H f))
+        ( pullback-subgroup-hom-large-poset-hom-Group G H f))
 ```

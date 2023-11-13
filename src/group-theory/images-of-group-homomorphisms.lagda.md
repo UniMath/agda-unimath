@@ -255,14 +255,14 @@ module _
       ( subset-Subgroup G K)
       ( subset-Subgroup G L)
 
-  im-hom-subgroup-hom-Large-Poset :
+  im-subgroup-hom-large-poset-hom-Group :
     hom-Large-Poset
       ( λ l → l1 ⊔ l2 ⊔ l)
       ( Subgroup-Large-Poset G)
       ( Subgroup-Large-Poset H)
-  map-hom-Large-Preorder im-hom-subgroup-hom-Large-Poset =
+  map-hom-Large-Preorder im-subgroup-hom-large-poset-hom-Group =
     im-hom-Subgroup G H f
-  preserves-order-hom-Large-Preorder im-hom-subgroup-hom-Large-Poset =
+  preserves-order-hom-Large-Preorder im-subgroup-hom-large-poset-hom-Group =
     preserves-order-im-hom-Subgroup
 
   image-pullback-galois-connection-Subgroup :
@@ -273,11 +273,49 @@ module _
       ( Subgroup-Large-Poset H)
   lower-adjoint-galois-connection-Large-Poset
     image-pullback-galois-connection-Subgroup =
-    im-hom-subgroup-hom-Large-Poset
+    im-subgroup-hom-large-poset-hom-Group
   upper-adjoint-galois-connection-Large-Poset
     image-pullback-galois-connection-Subgroup =
-    pullback-subgroup-hom-Large-Poset G H f
+    pullback-subgroup-hom-large-poset-hom-Group G H f
   adjoint-relation-galois-connection-Large-Poset
     image-pullback-galois-connection-Subgroup K =
     is-image-subgroup-im-hom-Subgroup G H f K
+```
+
+## Properties
+
+### Any subgroup `U` of `H` has the same elements as `im f K` if and only if `U` satisfies the universal property of the image of `K` under `f`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  (K : Subgroup l3 G) (U : Subgroup l4 H)
+  where
+
+  is-image-subgroup-has-same-elements-Subgroup :
+    has-same-elements-Subgroup H (im-hom-Subgroup G H f K) U →
+    is-image-subgroup-hom-Group G H f K U
+  is-image-subgroup-has-same-elements-Subgroup s =
+    is-lower-element-sim-galois-connection-Large-Poset
+      ( Subgroup-Large-Poset G)
+      ( Subgroup-Large-Poset H)
+      ( image-pullback-galois-connection-Subgroup G H f)
+      ( K)
+      ( U)
+      ( similar-has-same-elements-Subgroup H (im-hom-Subgroup G H f K) U s)
+
+  has-same-elements-is-image-Subgroup :
+    is-image-subgroup-hom-Group G H f K U →
+    has-same-elements-Subgroup H (im-hom-Subgroup G H f K) U
+  has-same-elements-is-image-Subgroup i =
+    has-same-elements-similar-Subgroup H
+      ( im-hom-Subgroup G H f K)
+      ( U)
+      ( sim-is-lower-element-galois-connection-Large-Poset
+        ( Subgroup-Large-Poset G)
+        ( Subgroup-Large-Poset H)
+        ( image-pullback-galois-connection-Subgroup G H f)
+        ( K)
+        ( U)
+        ( i))
 ```

@@ -21,6 +21,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
+open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -43,6 +44,7 @@ open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-large-posets
 ```
 
 </details>
@@ -510,6 +512,40 @@ module _
 
   is-set-Subgroup : {l2 : Level} → is-set (Subgroup l2 G)
   is-set-Subgroup = is-set-type-Poset (Subgroup-Poset _ G)
+```
+
+### Subgroups have the same elements if and only if they are similar in the poset of subgroups
+
+**Note:** We don't abbreviate the word `similar` in the name of the similarity
+relation on subgroups, because below we will define for each subgroup `H` of `G`
+two equivalence relations on `G`, which we will call `right-sim-Subgroup` and
+`left-sim-Subgroup`.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Subgroup l2 G) (K : Subgroup l3 G)
+  where
+
+  similar-Subgroup : UU (l1 ⊔ l2 ⊔ l3)
+  similar-Subgroup = sim-Large-Poset (Subgroup-Large-Poset G) H K
+
+  has-same-elements-similar-Subgroup :
+    similar-Subgroup → has-same-elements-Subgroup G H K
+  pr1 (has-same-elements-similar-Subgroup (s , t) x) = s x
+  pr2 (has-same-elements-similar-Subgroup (s , t) x) = t x
+
+  leq-has-same-elements-Subgroup :
+    has-same-elements-Subgroup G H K → leq-Subgroup G H K
+  leq-has-same-elements-Subgroup s x = forward-implication (s x)
+
+  leq-has-same-elements-Subgroup' :
+    has-same-elements-Subgroup G H K → leq-Subgroup G K H
+  leq-has-same-elements-Subgroup' s x = backward-implication (s x)
+
+  similar-has-same-elements-Subgroup :
+    has-same-elements-Subgroup G H K → similar-Subgroup
+  pr1 (similar-has-same-elements-Subgroup s) = leq-has-same-elements-Subgroup s
+  pr2 (similar-has-same-elements-Subgroup s) = leq-has-same-elements-Subgroup' s
 ```
 
 ### Every subgroup induces two equivalence relations

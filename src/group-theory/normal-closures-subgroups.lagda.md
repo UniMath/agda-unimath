@@ -149,7 +149,6 @@ module _
     is-subgroup-generated-by-subset-Group G
       generating-subset-normal-closure-Subgroup
       subgroup-normal-closure-Subgroup
-      contains-generating-subset-normal-closure-Subgroup
   is-subgroup-generated-by-generating-subset-normal-closure-Subgroup =
     is-subgroup-generated-by-subset-subgroup-subset-Group G
       generating-subset-normal-closure-Subgroup
@@ -204,8 +203,9 @@ module _
     leq-Subgroup G H (subgroup-Normal-Subgroup G N) →
     leq-Normal-Subgroup G normal-closure-Subgroup N
   backward-implication-is-normal-closure-normal-closure-Subgroup N u =
-    is-subgroup-generated-by-generating-subset-normal-closure-Subgroup
-      ( subgroup-Normal-Subgroup G N)
+    backward-implication
+      ( is-subgroup-generated-by-generating-subset-normal-closure-Subgroup
+        ( subgroup-Normal-Subgroup G N))
       ( contains-generating-subset-normal-closure-Normal-Subgroup N u)
 
   is-normal-closure-normal-closure-Subgroup :

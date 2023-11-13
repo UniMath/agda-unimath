@@ -124,7 +124,10 @@ module _
         leq-Subgroup G subgroup-family-of-elements-Group H
         ↔ generating-subset-subgroup-family-of-elements-Group ⊆
           subset-Subgroup G H
-          by adjoint-relation-subgroup-subset-Group G (subtype-im x) H
+          by
+          is-subgroup-generated-by-subset-subgroup-subset-Group G
+            ( subtype-im x)
+            ( H)
         ↔ ((i : I) → is-in-Subgroup G H (x i))
           by is-image-subtype-subtype-im x (subset-Subgroup G H)
 
