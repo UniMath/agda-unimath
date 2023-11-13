@@ -38,10 +38,10 @@ every set `C` the precomposition function `(B → C) → (A → C)` is an embedd
 
 ```agda
 is-epimorphism-Set :
-  {l1 l2 : Level} (l : Level) {A : UU l1} {B : UU l2}
-  (f : A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)
-is-epimorphism-Set l f =
-  is-epimorphism-Truncated-Type l zero-𝕋 f
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) → UUω
+is-epimorphism-Set f =
+  is-epimorphism-Truncated-Type zero-𝕋 f
 ```
 
 ## Properties
@@ -52,7 +52,7 @@ is-epimorphism-Set l f =
 abstract
   is-epimorphism-is-surjective-Set :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-surjective f → {l : Level} → is-epimorphism-Set l f
+    is-surjective f → is-epimorphism-Set f
   is-epimorphism-is-surjective-Set H C =
     is-emb-is-injective
       ( is-set-function-type (is-set-type-Set C))
@@ -73,7 +73,7 @@ abstract
 abstract
   is-surjective-is-epimorphism-Set :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    ({l : Level} → is-epimorphism-Set l f) → is-surjective f
+    is-epimorphism-Set f → is-surjective f
   is-surjective-is-epimorphism-Set {l1} {l2} {A} {B} {f} H b =
     map-equiv
       ( equiv-eq
