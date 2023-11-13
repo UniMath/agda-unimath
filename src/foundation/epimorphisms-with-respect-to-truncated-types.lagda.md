@@ -109,6 +109,26 @@ module _
       ( is-truncation-trunc X)
       ( is-truncation-trunc X)
       ( H X)
+
+  is-epimorphism-map-trunc-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type l3 k f →
+    is-epimorphism-Truncated-Type l3 k (map-trunc k f)
+  is-epimorphism-map-trunc-is-epimorphism-Truncated-Type H X =
+    is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps
+      ( precomp (map-trunc k f) (type-Truncated-Type X))
+      ( precomp unit-trunc (type-Truncated-Type X))
+      ( precomp unit-trunc (type-Truncated-Type X))
+      ( precomp f (type-Truncated-Type X))
+      ( precomp-coherence-square-maps
+        ( unit-trunc)
+        ( f)
+        ( map-trunc k f)
+        ( unit-trunc)
+        ( inv-htpy (coherence-square-map-trunc k f))
+        ( type-Truncated-Type X))
+      ( is-truncation-trunc X)
+      ( is-truncation-trunc X)
+      ( H X)
 ```
 
 ## See also
