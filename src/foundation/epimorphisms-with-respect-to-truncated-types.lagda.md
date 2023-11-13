@@ -110,10 +110,10 @@ module _
       ( is-truncation-trunc X)
       ( H X)
 
-  is-epimorphism-map-trunc-Truncated-Type-is-epimorphism :
+  is-epimorphism-map-trunc-is-epimorphism-Truncated-Type :
     is-epimorphism-Truncated-Type l3 k f →
     is-epimorphism-Truncated-Type l3 k (map-trunc k f)
-  is-epimorphism-map-trunc-Truncated-Type-is-epimorphism H X =
+  is-epimorphism-map-trunc-is-epimorphism-Truncated-Type H X =
     is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps
       ( precomp (map-trunc k f) (type-Truncated-Type X))
       ( precomp unit-trunc (type-Truncated-Type X))
