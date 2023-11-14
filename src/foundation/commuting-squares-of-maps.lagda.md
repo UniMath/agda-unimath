@@ -1,6 +1,7 @@
 # Commuting squares of maps
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
 module foundation.commuting-squares-of-maps where
 
 open import foundation-core.commuting-squares-of-maps public
@@ -11,8 +12,11 @@ open import foundation-core.commuting-squares-of-maps public
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-prisms-of-maps
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.path-algebra
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -20,7 +24,6 @@ open import foundation.whiskering-homotopies
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
 
@@ -161,6 +164,157 @@ precomp-coherence-square-maps top left right bottom H X =
 ```
 
 ## Properties
+
+### Taking inversions of squares is an inverse operation
+
+In other words, vertical (horizontal) composition of a square with the square
+obtained by inverting the vertical (horizontal) maps fits into a
+[prism](foundation.commuting-prisms-of-maps.md) with the reflexivity square.
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level}
+  { A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  ( top : A → X) (left : A ≃ B) (right : X ≃ Y) (bottom : B → Y)
+  where
+
+  left-inverse-law-pasting-vertical-coherence-square-maps :
+    ( H : coherence-square-maps top (map-equiv left) (map-equiv right) bottom) →
+    horizontal-coherence-prism-maps
+      ( top)
+      ( id)
+      ( map-equiv left)
+      ( id)
+      ( map-equiv right)
+      ( bottom)
+      ( map-inv-equiv left)
+      ( map-inv-equiv right)
+      ( top)
+      ( H)
+      ( is-retraction-map-inv-equiv left)
+      ( is-retraction-map-inv-equiv right)
+      ( refl-htpy)
+      ( coherence-square-inv-vertical top left right bottom H)
+  left-inverse-law-pasting-vertical-coherence-square-maps H a =
+    ( right-unit) ∙
+    ( inv
+      {!!})
+
+  right-inverse-law-pasting-vertical-coherence-square-maps :
+    ( H : coherence-square-maps top (map-equiv left) (map-equiv right) bottom) →
+    horizontal-coherence-prism-maps
+      ( bottom)
+      ( id)
+      ( map-inv-equiv left)
+      ( id)
+      ( map-inv-equiv right)
+      ( top)
+      ( map-equiv left)
+      ( map-equiv right)
+      ( bottom)
+      ( coherence-square-inv-vertical top left right bottom H)
+      ( is-section-map-inv-equiv left)
+      ( is-section-map-inv-equiv right)
+      ( refl-htpy)
+      ( H)
+  right-inverse-law-pasting-vertical-coherence-square-maps H a =
+    ( right-unit) ∙
+    ( inv
+      ( ( assoc
+          ( H (map-inv-equiv left a))
+          ( ap
+            ( map-equiv right)
+            ( coherence-square-inv-vertical top left right bottom H a))
+          ( is-section-map-inv-equiv right (bottom a))) ∙
+        ( ap
+          ( H (map-inv-equiv left a) ∙_)
+          ( triangle-eq-transpose-equiv
+            ( right)
+            ( ( inv (H (map-inv-equiv left a))) ∙
+              ( ap bottom (is-section-map-inv-equiv left a))))) ∙
+        ( is-retraction-left-concat-inv
+          ( H (map-inv-equiv left a))
+          ( ap bottom (is-section-map-inv-equiv left a)))))
+```
+
+### Associativity of vertical pasting
+
+The proof of associativity of horizontal pasting may be found in
+[`foundation-core.commuting-squares-of-maps`](foundation-core.commuting-squares-of-maps.md).
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  { X : UU l5} {Y : UU l6} {Z : UU l7} {W : UU l8}
+  ( top : A → X) (top-left : A → B) (top-right : X → Y)
+  ( mid-top : B → Y) (mid-left : B → C) (mid-right : Y → Z) (mid-bottom : C → Z)
+  ( bottom-left : C → D) (bottom-right : Z → W) (bottom : D → W)
+  ( sq-top : coherence-square-maps top top-left top-right mid-top)
+  ( sq-mid : coherence-square-maps mid-top mid-left mid-right mid-bottom)
+  ( sq-bottom :
+      coherence-square-maps mid-bottom bottom-left bottom-right bottom)
+  where
+
+  assoc-pasting-vertical-coherence-square-maps :
+    pasting-vertical-coherence-square-maps
+      ( top)
+      ( mid-left ∘ top-left)
+      ( mid-right ∘ top-right)
+      ( mid-bottom)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom)
+      ( pasting-vertical-coherence-square-maps
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( mid-top)
+        ( mid-left)
+        ( mid-right)
+        ( mid-bottom)
+        ( sq-top)
+        ( sq-mid))
+      ( sq-bottom) ~
+    pasting-vertical-coherence-square-maps
+      ( top)
+      ( top-left)
+      ( top-right)
+      ( mid-top)
+      ( bottom-left ∘ mid-left)
+      ( bottom-right ∘ mid-right)
+      ( bottom)
+      ( sq-top)
+      ( pasting-vertical-coherence-square-maps
+        ( mid-top)
+        ( mid-left)
+        ( mid-right)
+        ( mid-bottom)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( sq-mid)
+        ( sq-bottom))
+  assoc-pasting-vertical-coherence-square-maps =
+    ( ap-concat-htpy
+      ( sq-bottom ·r mid-left ·r top-left)
+      ( bottom-right ·l (sq-mid ·r top-left ∙h (mid-right ·l sq-top)))
+      ( ( bottom-right ·l (sq-mid ·r top-left)) ∙h
+        ( ( bottom-right ∘ mid-right) ·l sq-top))
+      ( ( distributive-left-whisk-concat-htpy
+          ( bottom-right)
+          ( sq-mid ·r top-left)
+          ( mid-right ·l sq-top)) ∙h
+        ( ap-concat-htpy
+          ( bottom-right ·l (sq-mid ·r top-left))
+          ( bottom-right ·l mid-right ·l sq-top)
+          ( ( bottom-right ∘ mid-right) ·l sq-top)
+          ( associative-left-whisk-comp bottom-right mid-right sq-top)))) ∙h
+    ( inv-htpy-assoc-htpy
+      ( sq-bottom ·r mid-left ·r top-left)
+      ( bottom-right ·l (sq-mid ·r top-left))
+      ( ( bottom-right ∘ mid-right) ·l sq-top))
+```
 
 ### Distributivity of pasting squares and transposing by precomposition
 
