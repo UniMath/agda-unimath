@@ -144,7 +144,7 @@ module _
       ( H X)
 ```
 
-### The codiagonal of a `k`-epimorphism is an `k`-equivalence
+### The codiagonal of a `k`-epimorphism is a `k`-equivalence
 
 ```agda
 module _
