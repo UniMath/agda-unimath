@@ -209,6 +209,34 @@ module _
       ( is-acyclic-map-is-epimorphism f e)
 ```
 
+### The class of acyclic maps is closed under composition and has the right cancellation property
+
+Since the acyclic maps are precisely the epimorphisms this follows from the
+corresponding facts about [epimorphisms](foundation.epimorphisms.md).
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B)
+  where
+
+  is-acyclic-map-comp :
+    is-acyclic-map g → is-acyclic-map f → is-acyclic-map (g ∘ f)
+  is-acyclic-map-comp ag af =
+    is-acyclic-map-is-epimorphism (g ∘ f)
+      ( is-epimorphism-comp g f
+        ( is-epimorphism-is-acyclic-map g ag)
+        ( is-epimorphism-is-acyclic-map f af))
+
+  is-acyclic-map-left-factor :
+    is-acyclic-map (g ∘ f) → is-acyclic-map f → is-acyclic-map g
+  is-acyclic-map-left-factor ac af =
+    is-acyclic-map-is-epimorphism g
+      ( is-epimorphism-left-factor g f
+        ( is-epimorphism-is-acyclic-map (g ∘ f) ac)
+        ( is-epimorphism-is-acyclic-map f af))
+```
+
 ## See also
 
 - [Dependent epimorphisms](foundation.dependent-epimorphisms.md)

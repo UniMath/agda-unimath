@@ -222,4 +222,5 @@ module _
 
 ## External links
 
-- [univalent groupoid](https://ncatlab.org/nlab/show/univalent+groupoid) at nlab
+- [univalent groupoid](https://ncatlab.org/nlab/show/univalent+groupoid) at
+  $n$Lab

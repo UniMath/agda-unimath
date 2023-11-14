@@ -471,4 +471,4 @@ This remains to be formalized. This is a consequence of repeleteness.
 
 - [Wide subcategories](https://1lab.dev/Cat.Functor.WideSubcategory.html) at
   1lab
-- [wide subcategory](https://ncatlab.org/nlab/show/wide+subcategory) at nlab
+- [wide subcategory](https://ncatlab.org/nlab/show/wide+subcategory) at $n$Lab

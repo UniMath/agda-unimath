@@ -263,11 +263,11 @@ module _
   is-prop-map-comp = is-trunc-map-comp neg-one-𝕋 g h
 
 abstract
-  is-trunc-map-comp-htpy :
+  is-trunc-map-left-map-triangle :
     {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
     {X : UU l3} (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-trunc-map k g → is-trunc-map k h → is-trunc-map k f
-  is-trunc-map-comp-htpy k f g h H is-trunc-g is-trunc-h =
+  is-trunc-map-left-map-triangle k f g h H is-trunc-g is-trunc-h =
     is-trunc-map-htpy k H
       ( is-trunc-map-comp k g h is-trunc-g is-trunc-h)
 
@@ -276,24 +276,26 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  is-contr-map-comp-htpy :
+  is-contr-map-left-map-triangle :
     is-contr-map g → is-contr-map h → is-contr-map f
-  is-contr-map-comp-htpy = is-trunc-map-comp-htpy neg-two-𝕋 f g h H
+  is-contr-map-left-map-triangle =
+    is-trunc-map-left-map-triangle neg-two-𝕋 f g h H
 
-  is-prop-map-comp-htpy :
+  is-prop-map-left-map-triangle :
     is-prop-map g → is-prop-map h → is-prop-map f
-  is-prop-map-comp-htpy = is-trunc-map-comp-htpy neg-one-𝕋 f g h H
+  is-prop-map-left-map-triangle =
+    is-trunc-map-left-map-triangle neg-one-𝕋 f g h H
 ```
 
 ### If a composite is truncated, then its right factor is truncated
 
 ```agda
 abstract
-  is-trunc-map-right-factor-htpy :
+  is-trunc-map-top-map-triangle :
     {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-trunc-map k g → is-trunc-map k f → is-trunc-map k h
-  is-trunc-map-right-factor-htpy k {A} f g h H is-trunc-g is-trunc-f b =
+  is-trunc-map-top-map-triangle k {A} f g h H is-trunc-g is-trunc-f b =
     is-trunc-fam-is-trunc-Σ k
       ( is-trunc-g (g b))
       ( is-trunc-is-equiv' k
@@ -308,22 +310,22 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  is-contr-map-right-factor-htpy :
+  is-contr-map-top-map-triangle :
     is-contr-map g → is-contr-map f → is-contr-map h
-  is-contr-map-right-factor-htpy =
-    is-trunc-map-right-factor-htpy neg-two-𝕋 f g h H
+  is-contr-map-top-map-triangle =
+    is-trunc-map-top-map-triangle neg-two-𝕋 f g h H
 
-  is-prop-map-right-factor-htpy :
+  is-prop-map-top-map-triangle :
     is-prop-map g → is-prop-map f → is-prop-map h
-  is-prop-map-right-factor-htpy =
-    is-trunc-map-right-factor-htpy neg-one-𝕋 f g h H
+  is-prop-map-top-map-triangle =
+    is-trunc-map-top-map-triangle neg-one-𝕋 f g h H
 
 is-trunc-map-right-factor :
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
   (g : B → X) (h : A → B) →
   is-trunc-map k g → is-trunc-map k (g ∘ h) → is-trunc-map k h
 is-trunc-map-right-factor k {A} g h =
-  is-trunc-map-right-factor-htpy k (g ∘ h) g h refl-htpy
+  is-trunc-map-top-map-triangle k (g ∘ h) g h refl-htpy
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -353,7 +355,7 @@ module _
   is-trunc-map-top-is-trunc-map-bottom-is-equiv :
     is-equiv g → is-equiv h → is-trunc-map k i → is-trunc-map k f
   is-trunc-map-top-is-trunc-map-bottom-is-equiv K L M =
-    is-trunc-map-right-factor-htpy k (i ∘ g) h f H
+    is-trunc-map-top-map-triangle k (i ∘ g) h f H
       ( is-trunc-map-is-equiv k L)
       ( is-trunc-map-comp k i g M
         ( is-trunc-map-is-equiv k K))
@@ -431,7 +433,7 @@ module _
     is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
     is-trunc-map k (map-Σ D f g)
   is-trunc-map-map-Σ k D {f} {g} H K =
-    is-trunc-map-comp-htpy k
+    is-trunc-map-left-map-triangle k
       ( map-Σ D f g)
       ( map-Σ-map-base f D)
       ( tot g)

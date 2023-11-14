@@ -57,12 +57,13 @@ module _
       ( map-inv-is-equiv-precomp-Π-is-equiv
         ( is-equiv-i)
         ( λ y → is-equiv (map-fiber-cone j h c y))
-        ( λ x → is-equiv-left-factor-htpy
+        ( λ x →
+          is-equiv-right-map-triangle
           ( map-fiber-cone (j ∘ i) h
             ( pasting-horizontal-cone i j h c d) x)
           ( map-fiber-cone j h c (i x))
           ( map-fiber-cone i (vertical-map-cone j h c) d x)
-          ( map-fiber-pasting-horizontal-cone i j h c d x)
+          ( preserves-pasting-horizontal-map-fiber-cone i j h c d x)
           ( is-fiberwise-equiv-map-fiber-cone-is-pullback (j ∘ i) h
             ( pasting-horizontal-cone i j h c d)
             ( is-pb-rectangle)

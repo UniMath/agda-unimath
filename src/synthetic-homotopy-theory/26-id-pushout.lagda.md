@@ -262,7 +262,7 @@ is-equiv-hom-Fam-pushout-map :
   ( P : X → UU l5) (Q : X → UU l6) →
   is-equiv (hom-Fam-pushout-map c P Q)
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
-  is-equiv-comp-htpy
+  is-equiv-left-map-triangle
     ( hom-Fam-pushout-map c P Q)
     ( hom-Fam-pushout-dependent-cocone c P Q)
     ( dependent-cocone-map f g c (λ x → P x → Q x))
@@ -327,7 +327,7 @@ is-universal-id-Fam-pushout' :
       ( desc-fam c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
-  is-equiv-left-factor-htpy
+  is-equiv-right-map-triangle
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
     ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
