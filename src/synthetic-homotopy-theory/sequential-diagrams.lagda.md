@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.universe-levels
 ```
 
@@ -49,6 +50,16 @@ module _
   map-sequential-diagram :
     (n : ℕ) → family-sequential-diagram n → family-sequential-diagram (succ-ℕ n)
   map-sequential-diagram = pr2 A
+```
+
+```agda
+module _
+  { l : Level} (X : UU l)
+  where
+
+  constant-sequential-diagram : sequential-diagram l
+  pr1 constant-sequential-diagram _ = X
+  pr2 constant-sequential-diagram _ = id
 ```
 
 ## Properties
