@@ -1,12 +1,12 @@
----
-title: Precategories with attributes
----
+# Precategories with attributes
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.precategories-with-attributes where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.action-on-identifications-functions
 open import foundation.category-of-sets
 open import foundation.cartesian-product-types
@@ -27,6 +27,8 @@ open import category-theory.precategories
 open import category-theory.precategory-of-elements-of-a-presheaf
 open import category-theory.pullbacks-in-precategories
 ```
+
+</details>
 
 ## Idea
 
