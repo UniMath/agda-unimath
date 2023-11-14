@@ -137,7 +137,7 @@ module _
 ```agda
 module _
   { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
-  ( c c' : cocone-sequential-diagram A X)
+  { c c' : cocone-sequential-diagram A X}
   ( H : htpy-cocone-sequential-diagram A c c')
   where
 
