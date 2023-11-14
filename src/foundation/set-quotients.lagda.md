@@ -181,15 +181,13 @@ module _
         ( is-effective-class R x y)
 
   apply-effectiveness-quotient-map :
-    {x y : A} →
-    quotient-map R x ＝ quotient-map R y →
+    {x y : A} → quotient-map R x ＝ quotient-map R y →
     sim-Equivalence-Relation R x y
   apply-effectiveness-quotient-map {x} {y} =
     map-equiv (is-effective-quotient-map x y)
 
   apply-effectiveness-quotient-map' :
-    {x y : A} →
-    sim-Equivalence-Relation R x y →
+    {x y : A} → sim-Equivalence-Relation R x y →
     quotient-map R x ＝ quotient-map R y
   apply-effectiveness-quotient-map' {x} {y} =
     map-inv-equiv (is-effective-quotient-map x y)
@@ -222,16 +220,14 @@ module _
       ( is-surjective-and-effective-quotient-map R)
 
   inv-precomp-set-quotient :
-    {l : Level} →
-    (X : Set l) →
+    {l : Level} (X : Set l) →
     reflecting-map-Equivalence-Relation R (type-Set X) →
-    (type-hom-Set (quotient-Set R) X)
+    hom-Set (quotient-Set R) X
   inv-precomp-set-quotient X =
     pr1 (pr1 (is-set-quotient-set-quotient X))
 
   is-section-inv-precomp-set-quotient :
-    {l : Level} →
-    (X : Set l) →
+    {l : Level} (X : Set l) →
     (f : reflecting-map-Equivalence-Relation R (type-Set X)) →
     (a : A) →
     inv-precomp-set-quotient X f (quotient-map R a) ＝
@@ -245,20 +241,16 @@ module _
           ( f)))
 
   is-retraction-inv-precomp-set-quotient :
-    { l : Level} →
-    ( X : Set l) →
-    ( f : type-hom-Set (quotient-Set R) X) →
+    {l : Level} (X : Set l) (f : hom-Set (quotient-Set R) X) →
     inv-precomp-set-quotient X
       ( precomp-Set-Quotient R
         ( quotient-Set R)
         ( reflecting-map-quotient-map R)
         ( X)
         ( f)) ＝
-      f
+    f
   is-retraction-inv-precomp-set-quotient X f =
-      ( is-retraction-map-inv-is-equiv
-        ( is-set-quotient-set-quotient X)
-        ( f))
+    is-retraction-map-inv-is-equiv (is-set-quotient-set-quotient X) f
 ```
 
 ### Induction into propositions on the set quotient
@@ -311,7 +303,7 @@ module _
   double-induction-set-quotient :
     ( (x : A) (y : B) →
       type-Prop (P (quotient-map R x) (quotient-map S y))) →
-    ((x : set-quotient R) (y : set-quotient S) → type-Prop (P x y))
+    (x : set-quotient R) (y : set-quotient S) → type-Prop (P x y)
   double-induction-set-quotient =
     map-inv-equiv equiv-double-induction-set-quotient
 ```
@@ -333,7 +325,7 @@ module _
   double-induction-set-quotient' :
     ( (x y : A) →
       type-Prop (P (quotient-map R x) (quotient-map R y))) →
-    ((x y : set-quotient R) → type-Prop (P x y))
+    (x y : set-quotient R) → type-Prop (P x y)
   double-induction-set-quotient' =
     double-induction-set-quotient R R P
 ```

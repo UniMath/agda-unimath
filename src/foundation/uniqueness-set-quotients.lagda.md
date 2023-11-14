@@ -42,8 +42,8 @@ unique.
 precomp-comp-Set-Quotient :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   (B : Set l3) (f : reflecting-map-Equivalence-Relation R (type-Set B))
-  (C : Set l4) (g : type-hom-Set B C)
-  (D : Set l5) (h : type-hom-Set C D) →
+  (C : Set l4) (g : hom-Set B C)
+  (D : Set l5) (h : hom-Set C D) →
   ( precomp-Set-Quotient R B f D (h ∘ g)) ＝
   ( precomp-Set-Quotient R C (precomp-Set-Quotient R B f C g) D h)
 precomp-comp-Set-Quotient R B f C g D h =

@@ -34,7 +34,7 @@ uniquely unique.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
-  (C : Set l3) (g : A → type-Set C) {h : type-hom-Set B C}
+  (C : Set l3) (g : A → type-Set C) {h : hom-Set B C}
   (H : (h ∘ f) ~ g)
   where
 

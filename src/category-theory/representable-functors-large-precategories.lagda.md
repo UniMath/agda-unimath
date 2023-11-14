@@ -55,7 +55,7 @@ module _
     {l2 l3 : Level}
     {X : obj-Large-Precategory C l2} {Y : obj-Large-Precategory C l3} →
     hom-Large-Precategory C X Y →
-    type-hom-Set
+    hom-Set
       ( obj-representable-functor-Large-Precategory X)
       ( obj-representable-functor-Large-Precategory Y)
   hom-representable-functor-Large-Precategory =

@@ -85,11 +85,11 @@ module _
     reflecting-map-Equivalence-Relation
       ( prod-Equivalence-Relation R S)
       ( type-Set X) →
-    type-hom-Set prod-set-quotient-Set X
+    hom-Set prod-set-quotient-Set X
   inv-precomp-set-quotient-prod-set-quotient X (f , H) (qa , qb) =
     inv-precomp-set-quotient
       ( R)
-      ( hom-Set (quotient-Set S) X)
+      ( hom-set-Set (quotient-Set S) X)
       ( pair
         ( λ a qb' →
           inv-precomp-set-quotient S X
@@ -122,7 +122,7 @@ module _
         ( λ (a , b) →
           ( htpy-eq
             ( is-section-inv-precomp-set-quotient R
-              ( hom-Set (quotient-Set S) X) _ a)
+              ( hom-set-Set (quotient-Set S) X) _ a)
             ( quotient-map S b) ∙
           ( is-section-inv-precomp-set-quotient S X _ b))))
       ( eq-is-prop
@@ -147,7 +147,7 @@ module _
           ( ap
             ( inv-precomp-set-quotient
               ( R)
-              ( hom-Set (quotient-Set S) X))
+              ( hom-set-Set (quotient-Set S) X))
               ( eq-pair-Σ
                 ( eq-htpy λ a →
                   ( ap
@@ -158,9 +158,9 @@ module _
                     ( is-retraction-inv-precomp-set-quotient S X _))
                 ( eq-is-prop
                   ( is-prop-reflects-Equivalence-Relation R
-                    (hom-Set (quotient-Set S) X) _))) ∙
+                    ( hom-set-Set (quotient-Set S) X) _))) ∙
             ( is-retraction-inv-precomp-set-quotient R
-                ( hom-Set (quotient-Set S) X)
+                ( hom-set-Set (quotient-Set S) X)
                 ( λ qa qb → f (qa , qb))))
           ( qa))
           ( qb)))

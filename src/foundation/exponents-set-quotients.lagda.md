@@ -225,7 +225,7 @@ module _
   where
 
   universal-map-is-set-quotient-hom-Equivalence-Relation :
-    hom-Equivalence-Relation R S → type-hom-Set QR QS
+    hom-Equivalence-Relation R S → hom-Set QR QS
   universal-map-is-set-quotient-hom-Equivalence-Relation =
     map-is-set-quotient R QR qR S QS qS UqR UqS
 
@@ -250,7 +250,7 @@ module _
   universal-reflecting-map-is-set-quotient-hom-Equivalence-Relation :
     reflecting-map-Equivalence-Relation
       ( eq-rel-hom-Equivalence-Relation R S)
-      ( type-hom-Set QR QS)
+      ( hom-Set QR QS)
   pr1 universal-reflecting-map-is-set-quotient-hom-Equivalence-Relation =
     universal-map-is-set-quotient-hom-Equivalence-Relation
   pr2 universal-reflecting-map-is-set-quotient-hom-Equivalence-Relation =
@@ -356,7 +356,7 @@ module _
 
   unique-inclusion-is-set-quotient-hom-Equivalence-Relation :
     is-contr
-      ( Σ ( type-hom-Set QH (hom-Set QR QS))
+      ( Σ ( hom-Set QH (hom-set-Set QR QS))
           ( λ μ →
             ( μ ∘
               map-reflecting-map-Equivalence-Relation
@@ -370,12 +370,12 @@ module _
       ( QH)
       ( qH)
       ( UH)
-      ( hom-Set QR QS)
+      ( hom-set-Set QR QS)
       ( universal-reflecting-map-is-set-quotient-hom-Equivalence-Relation
         R QR qR UR S QS qS US)
 
   inclusion-is-set-quotient-hom-Equivalence-Relation :
-    type-hom-Set QH (hom-Set QR QS)
+    hom-Set QH (hom-set-Set QR QS)
   inclusion-is-set-quotient-hom-Equivalence-Relation =
     pr1 (center (unique-inclusion-is-set-quotient-hom-Equivalence-Relation))
 
@@ -397,7 +397,7 @@ module _
       ( QH)
       ( qH)
       ( UH)
-      ( hom-Set QR QS)
+      ( hom-set-Set QR QS)
       ( universal-reflecting-map-is-set-quotient-hom-Equivalence-Relation
         R QR qR UR S QS qS US)
       ( λ g h p a →
@@ -410,7 +410,7 @@ module _
             ( a)))
 
   emb-inclusion-is-set-quotient-hom-Equivalence-Relation :
-    type-Set QH ↪ type-hom-Set QR QS
+    type-Set QH ↪ hom-Set QR QS
   pr1 emb-inclusion-is-set-quotient-hom-Equivalence-Relation =
     inclusion-is-set-quotient-hom-Equivalence-Relation
   pr2 emb-inclusion-is-set-quotient-hom-Equivalence-Relation =
@@ -473,7 +473,7 @@ module _
       ( quotient-hom-Equivalence-Relation-Set)
       ( reflecting-map-quotient-map-hom-Equivalence-Relation)
       ( is-set-quotient-set-quotient-hom-Equivalence-Relation)
-      ( hom-Set (quotient-Set R) (quotient-Set S))
+      ( hom-set-Set (quotient-Set R) (quotient-Set S))
       ( universal-reflecting-map-set-quotient-hom-Equivalence-Relation R S)
 
   inclusion-set-quotient-hom-Equivalence-Relation :
@@ -497,7 +497,7 @@ module _
       ( quotient-hom-Equivalence-Relation-Set)
       ( reflecting-map-quotient-map-hom-Equivalence-Relation)
       ( is-set-quotient-set-quotient-hom-Equivalence-Relation)
-      ( hom-Set (quotient-Set R) (quotient-Set S))
+      ( hom-set-Set (quotient-Set R) (quotient-Set S))
       ( universal-reflecting-map-set-quotient-hom-Equivalence-Relation R S)
       ( λ g h p a →
         apply-effectiveness-quotient-map S

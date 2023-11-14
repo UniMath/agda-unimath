@@ -307,6 +307,21 @@ module _
         ( contains-subset-subgroup-subset-Group G T)
         ( H))
 
+  has-same-elements-subgroup-subset-has-same-elements-subset-Group :
+    {l2 l3 : Level} (S : subset-Group l2 G) (T : subset-Group l3 G) →
+    has-same-elements-subtype S T →
+    has-same-elements-Subgroup G
+      ( subgroup-subset-Group G S)
+      ( subgroup-subset-Group G T)
+  pr1
+    ( has-same-elements-subgroup-subset-has-same-elements-subset-Group S T H x)
+    =
+    preserves-order-subgroup-subset-Group S T (forward-implication ∘ H) x
+  pr2
+    ( has-same-elements-subgroup-subset-has-same-elements-subset-Group S T H x)
+    =
+    preserves-order-subgroup-subset-Group T S (backward-implication ∘ H) x
+
   subgroup-subset-hom-large-poset-Group :
     hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)

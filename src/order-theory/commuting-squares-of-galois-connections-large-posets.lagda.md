@@ -9,6 +9,7 @@ module order-theory.commuting-squares-of-galois-connections-large-posets where
 ```agda
 open import foundation.universe-levels
 
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets
 open import order-theory.galois-connections-large-posets
 open import order-theory.large-posets
 ```
@@ -41,9 +42,6 @@ between large posets. We say that the diagram commutes if there is a
 [similarity](order-theory.similarity-of-order-preserving-maps-large-posets.md)
 `LJ ∘ LF ≈ LG ∘ LI`. This condition is equivalent the condition that there is a
 similarity `UF ∘ UJ ≈ UI ∘ UG`.
-
-By the adjoint relations between the galois connection it also follows that
-there are similarities `LI ∘ UF ≈ UG ∘ LJ` and `LF ∘ UI ≈ UJ ∘ LG`.
 
 ## Definitions
 
@@ -114,5 +112,3 @@ module _
       ( comp-galois-connection-Large-Poset P Q V J F)
       ( comp-galois-connection-Large-Poset P U V G I)
 ```
-
-### A commuting square of galois connections induces a commuting square in which the vertical maps are lower adjoints and the vertical maps are upper adjoints

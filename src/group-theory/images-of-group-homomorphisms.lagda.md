@@ -13,6 +13,7 @@ open import foundation.images
 open import foundation.images-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
@@ -169,6 +170,9 @@ module _
   subset-im-hom-Subgroup : subset-Group (l1 ⊔ l2 ⊔ l3) H
   subset-im-hom-Subgroup =
     im-subtype (map-hom-Group G H f) (subset-Subgroup G K)
+
+  is-in-im-hom-Subgroup : type-Group H → UU (l1 ⊔ l2 ⊔ l3)
+  is-in-im-hom-Subgroup = is-in-subtype subset-im-hom-Subgroup
 
   contains-unit-im-hom-Subgroup :
     contains-unit-subset-Group H subset-im-hom-Subgroup

@@ -410,7 +410,7 @@ module _
         ( is-set-quotient-set-quotient-hom-Equivalence-Relation S T)
         ( hom-binary-hom-Equivalence-Relation R S T f))
 
-  binary-map-is-set-quotient : type-hom-Set QR (hom-Set QS QT)
+  binary-map-is-set-quotient : hom-Set QR (hom-set-Set QS QT)
   binary-map-is-set-quotient =
     pr1 (center unique-binary-map-is-set-quotient)
 

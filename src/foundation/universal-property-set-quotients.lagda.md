@@ -67,7 +67,7 @@ module _
 
   precomp-Set-Quotient :
     {l : Level} (X : Set l) →
-    (type-hom-Set B X) → reflecting-map-Equivalence-Relation R (type-Set X)
+    (hom-Set B X) → reflecting-map-Equivalence-Relation R (type-Set X)
   pr1 (precomp-Set-Quotient X g) =
     g ∘ (map-reflecting-map-Equivalence-Relation R f)
   pr2 (precomp-Set-Quotient X g) r =
@@ -90,7 +90,7 @@ module _
   universal-property-set-quotient =
     (X : Set l) (g : reflecting-map-Equivalence-Relation R (type-Set X)) →
     is-contr
-      ( Σ ( type-hom-Set B X)
+      ( Σ ( hom-Set B X)
           ( λ h →
             ( h ∘ map-reflecting-map-Equivalence-Relation R f) ~
             ( map-reflecting-map-Equivalence-Relation R g)))
@@ -167,7 +167,7 @@ module _
     is-equiv-is-contr-map
       ( λ g →
         is-contr-equiv
-          ( Σ ( type-hom-Set B X)
+          ( Σ ( hom-Set B X)
               ( λ h →
                 ( h ∘ map-reflecting-map-Equivalence-Relation R f) ~
                 ( map-reflecting-map-Equivalence-Relation R g)))
