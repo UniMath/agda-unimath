@@ -8,11 +8,11 @@ module foundation-core.commuting-squares-of-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.homotopies
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies
 ```
@@ -213,6 +213,155 @@ module _
     pasting-horizontal-coherence-square-maps i id f g g j id α refl-htpy ~ α
   right-unit-law-pasting-horizontal-coherence-square-maps a =
     right-unit ∙ ap-id (α a)
+```
+
+### Commutativity of horizontal and vertical pasting
+
+```agda
+[i] :
+  { l1 l2 : Level} {A : UU l1} {B : UU l2} {f g h k l : A → B} →
+  ( H : f ~ g) (K : g ~ h) (L : h ~ k) (M : k ~ l) →
+  ( H ∙h K) ∙h (L ∙h M) ~ H ∙h (K ∙h L) ∙h M
+[i] H K L M =
+  ( inv-htpy-assoc-htpy (H ∙h K) L M) ∙h
+  ( ap-concat-htpy' _ _ M (assoc-htpy H K L))
+
+[ii] :
+  { l1 l2 : Level} {A : UU l1} {B : UU l2} {f g h h' k l : A → B} →
+  ( H : f ~ g) (K : g ~ h) (K' : g ~ h') (L : h ~ k) (L' : h' ~ k) (M : k ~ l) →
+  ( α : K ∙h L ~ K' ∙h L') →
+  (H ∙h K) ∙h (L ∙h M) ~ (H ∙h K') ∙h (L' ∙h M)
+[ii] H K K' L L' M α =
+  ( [i] H K L M) ∙h
+  ( ap-concat-htpy' _ _ M (ap-concat-htpy H _ _ α)) ∙h
+  ( inv-htpy ([i] H K' L' M))
+
+[iii] :
+  { l1 l2 l3 l4 l5 l6 l7 : Level} →
+  { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  { X : UU l5} {Y : UU l6} {Z : UU l7} →
+  ( top : A → B) (left : A → C) (mid-top : B → D) (mid-left : C → D)
+  ( mid-right : D → X) (mid-bottom : D → Y) (right : X → Z) (bottom : Y → Z)
+  ( H : coherence-square-maps top left mid-top mid-left)
+  ( K : coherence-square-maps mid-right mid-bottom right bottom) →
+  ( ( K ·r mid-left ·r left) ∙h (right ·l mid-right ·l H)) ~
+  ( bottom ·l mid-bottom ·l H) ∙h (K ·r mid-top ·r top)
+[iii] top left mid-top mid-left mid-right mid-bottom right bottom H K =
+  ( ap-concat-htpy
+    ( K ·r mid-left ·r left)
+    ( _)
+    ( _)
+    ( associative-left-whisk-comp right mid-right H)) ∙h
+  ( htpy-swap-nat-right-htpy K H) ∙h
+  ( ap-concat-htpy' _ _
+    ( K ·r mid-top ·r top)
+    ( inv-htpy (associative-left-whisk-comp  bottom mid-bottom H)))
+
+module _
+  { l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  { M : UU l7} {N : UU l8} {O : UU l9}
+  ( top-left : A → B) (top-right : B → C)
+  ( left-top : A → X) (mid-top : B → Y) (right-top : C → Z)
+  ( mid-left : X → Y) (mid-right : Y → Z)
+  ( left-bottom : X → M) (mid-bottom : Y → N) (right-bottom : Z → O)
+  ( bottom-left : M → N) (bottom-right : N → O)
+  ( sq-left-top : coherence-square-maps top-left left-top mid-top mid-left)
+  ( sq-right-top : coherence-square-maps top-right mid-top right-top mid-right)
+  ( sq-left-bottom :
+      coherence-square-maps mid-left left-bottom mid-bottom bottom-left)
+  ( sq-right-bottom :
+      coherence-square-maps mid-right mid-bottom right-bottom bottom-right)
+  where
+
+  commutative-pasting-vertical-pasting-horizontal-coherence-square-maps :
+    ( pasting-horizontal-coherence-square-maps
+      ( top-left)
+      ( top-right)
+      ( left-bottom ∘ left-top)
+      ( mid-bottom ∘ mid-top)
+      ( right-bottom ∘ right-top)
+      ( bottom-left)
+      ( bottom-right)
+      ( pasting-vertical-coherence-square-maps
+        ( top-left)
+        ( left-top)
+        ( mid-top)
+        ( mid-left)
+        ( left-bottom)
+        ( mid-bottom)
+        ( bottom-left)
+        ( sq-left-top)
+        ( sq-left-bottom))
+      ( pasting-vertical-coherence-square-maps
+        ( top-right)
+        ( mid-top)
+        ( right-top)
+        ( mid-right)
+        ( mid-bottom)
+        ( right-bottom)
+        ( bottom-right)
+        ( sq-right-top)
+        ( sq-right-bottom))) ~
+    ( pasting-vertical-coherence-square-maps
+      ( top-right ∘ top-left)
+      ( left-top)
+      ( right-top)
+      ( mid-right ∘ mid-left)
+      ( left-bottom)
+      ( right-bottom)
+      ( bottom-right ∘ bottom-left)
+      ( pasting-horizontal-coherence-square-maps
+        ( top-left)
+        ( top-right)
+        ( left-top)
+        ( mid-top)
+        ( right-top)
+        ( mid-left)
+        ( mid-right)
+        ( sq-left-top)
+        ( sq-right-top))
+      ( pasting-horizontal-coherence-square-maps
+        ( mid-left)
+        ( mid-right)
+        ( left-bottom)
+        ( mid-bottom)
+        ( right-bottom)
+        ( bottom-left)
+        ( bottom-right)
+        ( sq-left-bottom)
+        ( sq-right-bottom)))
+  commutative-pasting-vertical-pasting-horizontal-coherence-square-maps =
+    ( ap-concat-htpy' _ _ _
+      ( distributive-left-whisk-concat-htpy
+        ( bottom-right)
+        ( sq-left-bottom ·r left-top)
+        ( mid-bottom ·l sq-left-top)) ∙h
+      ( [ii]
+        ( bottom-right ·l (sq-left-bottom ·r left-top))
+        ( bottom-right ·l mid-bottom ·l sq-left-top)
+        ( sq-right-bottom ·r mid-left ·r left-top)
+        ( sq-right-bottom ·r mid-top ·r top-left)
+        ( right-bottom ·l mid-right ·l sq-left-top)
+        ( right-bottom ·l (sq-right-top ·r top-left))
+        ( inv-htpy
+          ( [iii]
+            ( top-left)
+            ( left-top)
+            ( mid-top)
+            ( mid-left)
+            ( mid-right)
+            ( mid-bottom)
+            ( right-bottom)
+            ( bottom-right)
+            ( sq-left-top)
+            ( sq-right-bottom))))) ∙h
+      ( ap-concat-htpy _ _ _
+        ( inv-htpy
+          ( distributive-left-whisk-concat-htpy
+            ( right-bottom)
+            ( mid-right ·l sq-left-top)
+            ( sq-right-top ·r top-left))))
 ```
 
 ## See also
