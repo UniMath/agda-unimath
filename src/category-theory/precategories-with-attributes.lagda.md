@@ -32,7 +32,7 @@ open import category-theory.pullbacks-in-precategories
 
 ## Idea
 
-A category with attributes consists of:
+A **precategory with attributes** consists of:
 * a category `C`, which we think of as a category of contexts and context morphisms
 * a presheaf `Ty` on `C`, which we think of as giving the types in each context
 * a functor `ext` from `∫ Ty` to `C`, which we think of as context extension
