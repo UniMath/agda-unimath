@@ -34,7 +34,7 @@ open import category-theory.pullbacks-in-precategories
 
 A **precategory with attributes** consists of:
 * a [precategory](category-theory.precategories.md) `C`, which we think of as a category of contexts and context morphisms
-* a presheaf `Ty` on `C`, which we think of as giving the types in each context
+* a [presheaf](category-theory.presheaf-categories.md) `Ty` on `C`, which we think of as giving the types in each context
 * a functor `ext` from `∫ Ty` to `C`, which we think of as context extension
 * a natural transformation `p` from `ext` to the projection from `∫ Ty` to `C`
 such that
