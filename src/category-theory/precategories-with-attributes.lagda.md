@@ -40,7 +40,7 @@ A **precategory with attributes** consists of:
 such that
 * the components of `p` are [pullback](category-theory.pullbacks-in-precategories.md) squares
 
-This is a reformulation of Definition 1, slide 24 of https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf
+This is a reformulation of Definition 1, slide 24 of <https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf>
 
 ```agda
 record CwA {i j} (C : Precategory i j) (k : Level) : UU (i ⊔ j ⊔ lsuc k) where
