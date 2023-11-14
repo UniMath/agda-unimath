@@ -2,20 +2,25 @@
   description = "agda-unimath";
 
   inputs = {
-    # Unstable is needed for Agda 2.6.3, latest stable 22.11 only has 2.6.2.2
+    # Unstable is needed for Agda 2.6.4, latest stable 23.05 only has 2.6.3
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    # Nixpkgs with tested versions of mdbook crates;
+    # may be removed once we backport new mdbook assets to our
+    # modified versions
+    nixpkgs-mdbook.url = "github:NixOS/nixpkgs?rev=7fdd1421774a52277fb56d64b26aaf7765e1b3fa";
     mdbook-catppuccin = {
       url = "github:catppuccin/mdBook/v1.2.0";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-mdbook";
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, mdbook-catppuccin }:
+  outputs = { self, nixpkgs, nixpkgs-mdbook, flake-utils, mdbook-catppuccin }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = nixpkgs.legacyPackages."${system}";
+          pkgs-mdbook = nixpkgs-mdbook.legacyPackages."${system}";
           python = pkgs.python38.withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
@@ -67,17 +72,16 @@
             packages = [
               # maintanance scripts
               python
-              # working on the website
-              pkgs.mdbook
-              pkgs.mdbook-katex
-              pkgs.mdbook-pagetoc
-              pkgs.mdbook-linkcheck
-              mdbook-catppuccin.packages."${system}".default
               # pre-commit checks
               pkgs.pre-commit
-            ];
+            ] ++ (with pkgs-mdbook; [
+              # working on the website
+              mdbook
+              mdbook-katex
+              mdbook-pagetoc
+              mdbook-linkcheck
+              mdbook-catppuccin.packages."${system}".default
+            ]);
           };
-
-          devShell = self.devShells."${system}".default;
         });
 }
