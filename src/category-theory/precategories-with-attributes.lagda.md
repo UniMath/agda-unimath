@@ -38,7 +38,7 @@ A **precategory with attributes** consists of:
 * a [functor](category-theory.functors-precategories.md) `ext` from `∫ Ty` to `C`, which we think of as context extension
 * a [natural transformation](category-theory.natural-transformations-functors-precategories.md) `p` from `ext` to the projection from `∫ Ty` to `C`
 such that
-* the components of `p` are pullback squares
+* the components of `p` are [pullback](category-theory.pullbacks-in-precategories.md) squares
 
 This is a reformulation of Definition 1, slide 24 of https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf
 
