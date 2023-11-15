@@ -76,3 +76,4 @@ module _
 ## See also
 
 - [Principal lower sets](order-theory.principal-lower-sets-large-posets.md)
+- [Upper sets](order-theory.upper-sets-large-posets.md)
