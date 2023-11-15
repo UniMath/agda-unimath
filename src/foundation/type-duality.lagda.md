@@ -200,7 +200,7 @@ module _
                     ( equiv-is-small
                       ( is-small-Σ H (λ a → is-small' {l} {B a}))))
                   ( pr1 b))
-            by equiv-compute-fiber-comp pr1 _ a
+            by compute-fiber-comp pr1 _ a
           ≃ fiber (pr1 {B = B}) a
             by
             right-unit-law-Σ-is-contr

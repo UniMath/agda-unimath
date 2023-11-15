@@ -114,4 +114,4 @@ abstract
 
 - The equivalent principle of
   [subsingleton induction](foundation.subsingleton-induction.md)
-- [Singleton subsets](foundation.singleton-subsets.md)
+- [Singleton subsets](foundation.singleton-subtypes.md)

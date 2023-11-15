@@ -7,12 +7,14 @@ module order-theory.order-preserving-maps-large-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 
 open import order-theory.large-preorders
+open import order-theory.similarity-of-elements-large-preorders
 ```
 
 </details>
@@ -180,6 +182,29 @@ module _
       ( comp-hom-Large-Preorder P P Q f (id-hom-Large-Preorder P))
       ( f)
   right-unit-law-comp-hom-Large-Preorder = refl-htpy
+```
+
+### Order preserving maps preserve similarity of elements
+
+```agda
+module _
+  {αP αQ γf : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Preorder αP βP)
+  (Q : Large-Preorder αQ βQ)
+  (f : hom-Large-Preorder γf P Q)
+  where
+
+  preserves-sim-hom-Large-Preorder :
+    {l1 l2 : Level}
+    (x : type-Large-Preorder P l1) (y : type-Large-Preorder P l2) →
+    sim-Large-Preorder P x y →
+    sim-Large-Preorder Q
+      ( map-hom-Large-Preorder f x)
+      ( map-hom-Large-Preorder f y)
+  pr1 (preserves-sim-hom-Large-Preorder x y (s , t)) =
+    preserves-order-hom-Large-Preorder f x y s
+  pr2 (preserves-sim-hom-Large-Preorder x y (s , t)) =
+    preserves-order-hom-Large-Preorder f y x t
 ```
 
 ## See also

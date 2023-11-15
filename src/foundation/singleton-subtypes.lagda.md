@@ -45,7 +45,7 @@ equivalent to the predicate of being the least subtype containing a given
 element. The latter condition is rather is
 [equivalent](foundation.logical-equivalences.md) to the predicate that the
 underlying type of the subtype is
-[0-connected](foundation-core.0-connected-types.md). In other words, the least
+[0-connected](foundation.0-connected-types.md). In other words, the least
 subtype containing a given element `x` is the
 [connected component](foundation.connected-components.md) of `X` at `x`.
 

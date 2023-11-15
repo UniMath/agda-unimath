@@ -14,6 +14,7 @@ open import foundation-core.homotopies
 
 open import order-theory.large-posets
 open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.similarity-of-elements-large-posets
 ```
 
 </details>
@@ -219,6 +220,29 @@ module _
       ( f)
   right-unit-law-comp-hom-Large-Poset =
     right-unit-law-comp-hom-Large-Preorder
+      ( large-preorder-Large-Poset P)
+      ( large-preorder-Large-Poset Q)
+      ( f)
+```
+
+### Order preserving maps preserve similarity of elements
+
+```agda
+module _
+  {αP αQ γf : Level → Level} {βP βQ : Level → Level → Level}
+  (P : Large-Poset αP βP)
+  (Q : Large-Poset αQ βQ)
+  (f : hom-Large-Poset γf P Q)
+  where
+
+  preserves-sim-hom-Large-Poset :
+    {l1 l2 : Level} (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+    sim-Large-Poset P x y →
+    sim-Large-Poset Q
+      ( map-hom-Large-Poset P Q f x)
+      ( map-hom-Large-Poset P Q f y)
+  preserves-sim-hom-Large-Poset =
+    preserves-sim-hom-Large-Preorder
       ( large-preorder-Large-Poset P)
       ( large-preorder-Large-Poset Q)
       ( f)
