@@ -33,9 +33,9 @@ open import order-theory.order-preserving-maps-large-preorders
 
 The **image** of a
 [semigroup homomorphism](group-theory.homomorphisms-semigroups.md) `f : G → H`
-consists of the [image](foundation.images.md) of the underlying map of `f`. This
-contains the unit element and is closed under multiplication and inverses. It is
-therefore a [subsemigroup](group-theory.subsemigroups.md) of the
+consists of the [image](foundation.images.md) of the underlying map of `f`.
+Thissubset is closed under multiplication, so it is a
+[subsemigroup](group-theory.subsemigroups.md) of the
 [semigroup](group-theory.semigroups.md) `H`. Alternatively, it can be described
 as the least subsemigroup of `H` that contains all the values of `f`.
 
@@ -49,7 +49,7 @@ the image of a subsemigroup satisfies the following adjoint relation
 ```
 
 it follows that we obtain a
-[Galois connection](order-theory.galois-connections.md)
+[Galois connection](order-theory.galois-connections.md).
 
 ## Definitions
 

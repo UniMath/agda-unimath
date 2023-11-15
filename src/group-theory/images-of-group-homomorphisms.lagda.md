@@ -49,7 +49,7 @@ subgroup satisfies the following adjoint relation
 ```
 
 it follows that we obtain a
-[Galois connection](order-theory.galois-connections.md)
+[Galois connection](order-theory.galois-connections.md).
 
 ## Definitions
 
