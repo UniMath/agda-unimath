@@ -44,14 +44,14 @@ subtype `S` under `f` satisfies the universal property that
   (im f S ⊆ U) ↔ (S ⊆ U ∘ f).
 ```
 
-The image operation on subtypes is of course an
-[order preserving map](order-theory.order-preserving-maps-large-posets.md) of
-[large posets](order-theory.large-posets.md), and by the above universal
-property we obtain a
-[galois connection](order-theory.galois-connections-large-posets.md)
+The image operation on subtypes is an
+[order preserving map](order-theory.order-preserving-maps-large-posets.md) from
+the [large poset](order-theory.large-posets.md) of subtypes of `A` to the large
+poset of subtypes of `B`, and by the above universal property we obtain a
+[Galois connection](order-theory.galois-connections-large-posets.md)
 
 ```text
-  image-subtype f ⊣ pullback-subtype f
+  image-subtype f ⊣ pullback-subtype f.
 ```
 
 ## Definitions

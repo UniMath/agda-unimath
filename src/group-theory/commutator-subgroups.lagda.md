@@ -18,6 +18,7 @@ open import group-theory.commutators-of-elements-groups
 open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.images-of-group-homomorphisms
 open import group-theory.normal-subgroups
 open import group-theory.pullbacks-subgroups
 open import group-theory.subgroups
@@ -148,10 +149,34 @@ module _
 
 ### Every group homomorphism `f : G → H` maps `[G,G]` to `[H,H]`
 
+There are two equivalent ways to express this fact:
+
+1. The [image](group-theory.images-of-group-homomorphisms.md) `im f [G,G]` of
+   the commutator subgroup of `G` is contained in the commutator subgroup of
+   `H`.
+2. The commutator subgroup of `G` is contained in the
+   [pullback](group-theory.pullbacks-subgroups.md) of the commutator subgroup
+   `[H,H]` along the [group homomorphism](group-theory.homomorphisms-groups.md)
+   `f`.
+
+Indeed, by the image-pullback
+[Galois connection](order-theory.galois-connections-large-posets.md) there is a
+[logical equivalence](foundation.logical-equivalences.md)
+
 ```text
+  (im f [G,G] ⊆ [H,H]) ↔ ([G,G] ⊆ pullback f [H,H]).
+```
+
+```agda
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
+
+  preserves-commutator-subgroup-hom-Group' :
+    leq-Subgroup H
+      ( im-hom-Subgroup G H f (commutator-subgroup-Group G))
+      ( commutator-subgroup-Group H)
+  preserves-commutator-subgroup-hom-Group' = ?
 
   preserves-commutator-subgroup-hom-Group :
     leq-Subgroup G

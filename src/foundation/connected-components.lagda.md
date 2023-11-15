@@ -32,6 +32,11 @@ open import structured-types.pointed-types
 The **connected component** of a type `A` at an element `a : A` is the type of
 all `x : A` that are [merely equal](foundation.mere-equality.md) to `a`.
 
+The [subtype](foundation-core.subtypes.md) of elements merely equal to `a` is
+also the least subtype of `A` containing `a`. In other words, if a subtype
+satisfies the universal property of being the least subtype of `A` containing
+`a`, then its underlying type is the connected component of `A` at `a`.
+
 ## Definitions
 
 ### The predicate of being the least subtype containing a given element
