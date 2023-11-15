@@ -23,7 +23,7 @@ An **lower set** or **downwards closed set** in a
 i.e., that satisfies the condition that
 
 ```text
-  ∀ (x y : P), (x ≤ y) → x ∈ S → y ∈ S.
+  ∀ (x y : P), (y ≤ x) → x ∈ S → y ∈ S.
 ```
 
 ## Definitions
