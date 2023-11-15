@@ -24,30 +24,30 @@ open import order-theory.order-preserving-maps-large-preorders
 ## Idea
 
 Consider a [subtype](foundation-core.subtypes.md) `T` of a type `B` and a map
-`f : A → B`. Then the **pullback subtype** `f∗ T` of `A` is defined to be
-`T ∘ f`. This fits in a [pullback diagram](foundation-core.pullbacks.md)
+`f : A → B`. Then the **pullback subtype** `pullback f T` of `A` is defined to
+be `T ∘ f`. This fits in a [pullback diagram](foundation-core.pullbacks.md)
 
 ```text
-           π₂
-    f∗ T -----> T
-     |          |
-  π₁ |          | i
-     |          |
-     V          V
-     A -------> B
-        f
+                 π₂
+  pullback f T -----> T
+       |              |
+    π₁ |              | i
+       |              |
+       V              V
+       A -----------> B
+               f
 ```
 
 The
 [universal property of pullbacks](foundation.universal-property-pullbacks.md)
-quite literally returns the definition of the subtype `f∗ T`, because it
+quite literally returns the definition of the subtype `pullback f T`, because it
 essentially asserts that
 
 ```text
-  (S ⊆ f∗ T) ↔ ((x : A) → is-in-subtype S x → is-in-subtype T (f x)).
+  (S ⊆ pullback f T) ↔ ((x : A) → is-in-subtype S x → is-in-subtype T (f x)).
 ```
 
-The operation `f∗ : subtype B → subtype A` is an
+The operation `pullback f : subtype B → subtype A` is an
 [order preserving map](order-theory.order-preserving-maps-large-posets.md)
 between the [large posets](order-theory.large-posets.md).
 
