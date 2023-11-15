@@ -40,14 +40,12 @@ A **singleton subtype** of a type `X` is a [subtype](foundation.subtypes.md) `P`
 of `X` of which the underlying type is
 [contractible](foundation-core.contractible-types.md).
 
-**Note:** The predicate of being a singleton subtype is in general _not_
-equivalent to the predicate of being the least subtype containing a given
-element. The latter condition is rather is
-[equivalent](foundation.logical-equivalences.md) to the predicate that the
-underlying type of the subtype is
-[0-connected](foundation.0-connected-types.md). In other words, the least
-subtype containing a given element `x` is the
-[connected component](foundation.connected-components.md) of `X` at `x`.
+**Note:** If a subtype containing an element `x` is a singleton subtype, then it
+is also the least subtype containing `x`. However, the reverse implication does
+not necessarily hold. The condition that a subtype is the least subtype
+containing an element `x` is only equivalent to the condition that its
+underlying type is [0-connected](foundation.0-connected-types.md), which is a
+weaker condition than being a singleton subtype.
 
 ## Definitions
 
