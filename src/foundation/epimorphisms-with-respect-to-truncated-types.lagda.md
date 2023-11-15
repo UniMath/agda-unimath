@@ -254,8 +254,8 @@ module _
   is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map e X =
     is-equiv-left-factor
       ( horizontal-map-cocone f f)
-      ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X)) ∘
-        precomp (codiagonal-map f) (type-Truncated-Type X))
+      ( ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X))) ∘
+        ( precomp (codiagonal-map f) (type-Truncated-Type X)))
       ( is-equiv-htpy
         ( id)
         ( λ g → eq-htpy (λ b → ap g (compute-inl-codiagonal-map f b)))
