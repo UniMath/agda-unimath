@@ -19,10 +19,12 @@ open import order-theory.similarity-of-elements-large-preorders
 
 ## Idea
 
-Consider two order preserving maps `f : hom-Large-Preorder γf P Q` and
-`g : hom-Large-Preorder γg P Q` between the same two large preorders `P` and
-`Q`, but each specified with their own universe level reindexing functions. We
-say that `f` and `g` are **similar** if the values `f x` and `g x` are
+Consider two
+[order preserving maps](order-theory.order-preserving-maps-large-preorders.md)
+`f : hom-Large-Preorder γf P Q` and `g : hom-Large-Preorder γg P Q` between the
+same two [large preorders](order-theory.large-preorders.md) `P` and `Q`, but
+each specified with their own universe level reindexing functions. We say that
+`f` and `g` are **similar** if the values `f x` and `g x` are
 [similar](order-theory.similarity-of-elements-large-preorders.md) for each
 `x : P`. In other words, a **similarity of order preserving maps** between `f`
 and `g` consists of an assignment `x ↦ h x` where
