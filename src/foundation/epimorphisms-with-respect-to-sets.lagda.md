@@ -32,7 +32,7 @@ open import foundation-core.univalence
 
 ## Idea
 
-An epimorphism with respect to maps into sets are maps `f : A → B` suc that for
+An epimorphism with respect to maps into sets are maps `f : A → B` such that for
 every set `C` the precomposition function `(B → C) → (A → C)` is an embedding.
 
 ## Definition
@@ -42,7 +42,7 @@ is-epimorphism-Set :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → B) → UUω
 is-epimorphism-Set f =
-  {l : Level} (X : Set l) → is-emb (precomp f (type-Set X))
+  {l : Level} (C : Set l) → is-emb (precomp f (type-Set C))
 ```
 
 ## Properties
