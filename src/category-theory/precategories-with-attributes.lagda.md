@@ -38,12 +38,12 @@ A **precategory with attributes** consists of:
 * a [functor](category-theory.functors-precategories.md) `ext` from `∫ Ty` to `C`, which we think of as context extension
 * a [natural transformation](category-theory.natural-transformations-functors-precategories.md) `p` from `ext` to the projection from `∫ Ty` to `C`
 such that
-* the components of `p` are [pullback](category-theory.pullbacks-in-precategories.md) squares
+* the naturality squares of `p` are [pullback](category-theory.pullbacks-in-precategories.md) squares
 
 This is a reformulation of Definition 1, slide 24 of <https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf>
 
 ```agda
-record CwA {l1 l2 : Level} (C : Precategory l1 l2) (l3 : Level) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
+record Precategory-With-Attributes {l1 l2 : Level} (C : Precategory l1 l2) (l3 : Level) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
   field
     Ty-F : functor-Precategory (opposite-Precategory C) (Set-Precategory l3)
     ext : functor-Precategory (element-Precategory C Ty-F) C
@@ -53,28 +53,28 @@ record CwA {l1 l2 : Level} (C : Precategory l1 l2) (l3 : Level) : UU (l1 ⊔ l2 
         (naturality-natural-transformation-Precategory (element-Precategory C Ty-F) C ext (proj₁-functor-element-Precategory C Ty-F) p f)
 
   -- Notation
-  Ctx : UU i
+  Ctx : UU l1
   Ctx = obj-Precategory C
 
-  Sub : Ctx → Ctx → UU j
+  Sub : Ctx → Ctx → UU l2
   Sub = hom-Precategory C
 
-  Ty : Ctx → UU k
+  Ty : Ctx → UU l3
   Ty Γ = pr1 (pr1 Ty-F Γ)
 
-  _⋆_ : (Γ : Ctx)
-      → (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F Γ))
-      → Ctx
+  _⋆_ : (Γ : Ctx) →
+      (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory l3) Ty-F Γ)) →
+      Ctx
   Γ ⋆ A = pr1 ext (Γ , A)
 
-  _·_ : {Γ Δ : Ctx}
-      → (A : Ty Δ)
-      → (σ : Sub Γ Δ)
-      → Ty Γ
+  _·_ : {Γ Δ : Ctx} →
+      (A : Ty Δ) →
+      (σ : Sub Γ Δ) →
+      Ty Γ
   A · σ = pr1 (pr2 Ty-F) σ A
 
-  ⟨_,_⟩ : {Γ Δ : Ctx} (σ : Sub Γ Δ) (A : Ty Δ)
-        → Sub (Γ ⋆ (A · σ)) (Δ ⋆ A)
+  ⟨_,_⟩ : {Γ Δ : Ctx} (σ : Sub Γ Δ) (A : Ty Δ) →
+        Sub (Γ ⋆ (A · σ)) (Δ ⋆ A)
   ⟨ σ , A ⟩ = pr1 (pr2 ext) (σ , refl)
 ```
 
@@ -82,9 +82,9 @@ The terms are defined as sections to `ext`.
 
 ```agda
   module _ (Γ : Ctx)
-    (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F Γ)) where
+    (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory l3) Ty-F Γ)) where
 
-    Tm : UU j
+    Tm : UU l2
     Tm = Σ (Sub Γ (Γ ⋆ A)) λ t →
            comp-hom-Precategory C (pr1 p (Γ , A)) t ＝ id-hom-Precategory C
 
@@ -94,15 +94,15 @@ The terms are defined as sections to `ext`.
         (λ t → Id-Prop (hom-set-Precategory C Γ Γ) (comp-hom-Precategory C (pr1 p (Γ , A)) t) (id-hom-Precategory C))
         (is-set-hom-Precategory C Γ (Γ ⋆ A))
 
-    Tm-Set : Set j
+    Tm-Set : Set l2
     pr1 Tm-Set = Tm
     pr2 Tm-Set = is-set-Tm
 
-  _[_] : {Γ Δ : Ctx}
-       → {A : Ty Δ}
-       → (t : Tm Δ A)
-       → (σ : Sub Γ Δ)
-       → Tm Γ (A · σ)
+  _[_] : {Γ Δ : Ctx} →
+       {A : Ty Δ} →
+       (t : Tm Δ A) →
+       (σ : Sub Γ Δ) →
+       Tm Γ (A · σ)
   _[_] {Γ} {Δ} {A} (s , eq) σ = (pr1 gap-map , pr1 (pr2 gap-map))
     where
     sq : comp-hom-Precategory C σ (id-hom-Precategory C)
@@ -127,30 +127,30 @@ The terms are defined as sections to `ext`.
              (comp-hom-Precategory C s σ) sq)
 ```
 
-### Π-types
+### Π-types in a precategory with attributes
 
 ```agda
-record Π-structure {i j} (C : Precategory i j) (k : Level) (cwa : CwA C k) : UU (i ⊔ j ⊔ lsuc k) where
-  open CwA cwa
+record Π-structure {l1 l2} (C : Precategory l1 l2) (l3 : Level) (cwa : Precategory-With-Attributes C l3) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
+  open Precategory-With-Attributes cwa
 
   field
     Π : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) → Ty Γ
-    Π-iso : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A))
-          → Tm Γ (Π A B) ≃ Tm (Γ ⋆ A) B
+    Π-iso : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) →
+          Tm Γ (Π A B) ≃ Tm (Γ ⋆ A) B
 
-  app : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A))
-      → Tm Γ (Π A B) → Tm (Γ ⋆ A) B
+  app : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) →
+      Tm Γ (Π A B) → Tm (Γ ⋆ A) B
   app A B = map-equiv (Π-iso A B)
 
-  lam : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A))
-      → Tm (Γ ⋆ A) B → Tm Γ (Π A B)
+  lam : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) →
+      Tm (Γ ⋆ A) B → Tm Γ (Π A B)
   lam A B = map-inv-equiv (Π-iso A B)
 
   field
-    Π-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ)
-              → ((Π A B) · σ) ＝ Π (A · σ) (B · ⟨ σ , A ⟩)
-    Π-iso-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ)
-                  → (t : Tm Δ (Π A B))
-                  → app (A · σ) (B · ⟨ σ , A ⟩) (tr (Tm Γ) (Π-sub-law A B σ) (t [ σ ]))
-                  ＝ (app A B t [ ⟨ σ , A ⟩ ])
+    Π-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ) →
+              ((Π A B) · σ) ＝ Π (A · σ) (B · ⟨ σ , A ⟩)
+    Π-iso-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ) →
+                  (t : Tm Δ (Π A B)) →
+                  app (A · σ) (B · ⟨ σ , A ⟩) (tr (Tm Γ) (Π-sub-law A B σ) (t [ σ ])) ＝
+                  (app A B t [ ⟨ σ , A ⟩ ])
 ```

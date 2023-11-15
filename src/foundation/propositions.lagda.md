@@ -67,8 +67,8 @@ abstract
 ### Two equivalent types are equivalently propositions
 
 ```agda
-equiv-is-prop-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  → A ≃ B → is-prop A ≃ is-prop B
+equiv-is-prop-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-prop A ≃ is-prop B
 equiv-is-prop-equiv {A = A} {B = B} e =
   equiv-prop
     (is-prop-is-prop A)

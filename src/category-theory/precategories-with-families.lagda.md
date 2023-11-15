@@ -1,12 +1,12 @@
----
-title: Precategories with families
----
+# Precategories with families
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.precategories-with-families where
+```
 
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.category-of-sets
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -26,60 +26,69 @@ open import category-theory.precategories
 open import category-theory.precategory-of-elements-of-a-presheaf
 open import category-theory.pullbacks-in-precategories
 ```
-TODO
+
+</details>
+
+## Idea
+
+A **precategory with families** consists of:
+* a [precategory](category-theory.precategories.md) `C`, which we think of as a category of contexts and context morphisms
+* a [presheaf](category-theory.presheaf-categories.md) `Ty` on `C`, which we think of as giving the types in each context
+* a [presheaf](category-theory.presheaf-categories.md) `Tm` on `∫ Ty`, which we think of as giving the terms of each type in each context
+* a [functor](category-theory.functors-precategories.md) `ext` from `∫ Ty` to `C`, which we think of as context extension
+such that
+* for every pair of contexts `Γ` and `Δ`, and types `A` in context `Γ`, there is an equivalence between the type of context
+  morphisms from `Δ` to `Γ` extended by `A`, and the type of context morphisms from `Δ` to `Γ` together with terms of `A`.
 
 ```agda
-record CwF {i j} (C : Precategory i j) (k : Level) : UU (i ⊔ j ⊔ lsuc k) where
+record Precategory-With-Families {l1 l2} (C : Precategory l1 l2) (l3 : Level) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
   field
-    Ty-F : functor-Precategory (opposite-Precategory C) (Set-Precategory k)
-    Tm-F : functor-Precategory (opposite-Precategory (element-Precategory C Ty-F)) (Set-Precategory k)
-
+    Ty-F : functor-Precategory (opposite-Precategory C) (Set-Precategory l3)
+    Tm-F : functor-Precategory (opposite-Precategory (element-Precategory C Ty-F)) (Set-Precategory l3)
     ext : functor-Precategory (element-Precategory C Ty-F) C
-
-    -- Maps into Γ.A ~ maps into Γ and terms of A.
     ext-iso :
-      (Δ Γ : obj-Precategory C)
-      → (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F Γ))
-      → hom-Precategory C Δ (pr1 ext (Γ , A))
-        ≃ Σ (hom-Precategory C Δ Γ) λ γ → type-Set (pr1 Tm-F (Δ , pr1 (pr2 Ty-F) γ A))
+      (Δ Γ : obj-Precategory C) →
+      (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory l3) Ty-F Γ)) →
+      hom-Precategory C Δ (pr1 ext (Γ , A)) ≃
+        Σ (hom-Precategory C Δ Γ) λ γ → type-Set (pr1 Tm-F (Δ , pr1 (pr2 Ty-F) γ A))
 
   -- Notation
-  Ctx : UU i
+  Ctx : UU l1
   Ctx = obj-Precategory C
 
-  Sub : Ctx → Ctx → UU j
+  Sub : Ctx → Ctx → UU l2
   Sub = hom-Precategory C
 
-  Ty : Ctx → UU k
+  Ty : Ctx → UU l3
   Ty Γ = pr1 (pr1 Ty-F Γ)
 
-  Tm : (Γ : Ctx)(A : Ty Γ) → UU k
+  Tm : (Γ : Ctx)(A : Ty Γ) → UU l3
   Tm Γ A = pr1 (pr1 Tm-F (Γ , A))
 
-  _⋆_ : (Γ : Ctx)
-      → (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F Γ))
-      → Ctx
+  _⋆_ : (Γ : Ctx) →
+      (A : type-Set (obj-functor-Precategory (opposite-Precategory C) (Set-Precategory l3) Ty-F Γ)) →
+      Ctx
   Γ ⋆ A = pr1 ext (Γ , A)
 
-  _·_ : {Δ Γ : Ctx}
-      → (A : Ty Γ)
-      → (γ : Sub Δ Γ)
-      → Ty Δ
+  _·_ : {Δ Γ : Ctx} →
+      (A : Ty Γ) →
+      (γ : Sub Δ Γ) →
+      Ty Δ
   A · γ = pr1 (pr2 Ty-F) γ A
 
-  ·-comp : {Δ Δ' Γ : Ctx}
-      → (A : Ty Γ)
-      → (γ : Sub Δ' Γ)
-      → (δ : Sub Δ Δ')
-      → (A · (comp-hom-Precategory (opposite-Precategory C) δ γ)) ＝ ((A · γ) · δ)
-  ·-comp A γ δ = htpy-eq (preserves-comp-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F δ γ) A
+  ·-comp : {Δ Δ' Γ : Ctx} →
+    (A : Ty Γ) →
+    (γ : Sub Δ' Γ) →
+    (δ : Sub Δ Δ') →
+    (A · (comp-hom-Precategory (opposite-Precategory C) δ γ)) ＝ ((A · γ) · δ)
+  ·-comp A γ δ = htpy-eq (preserves-comp-functor-Precategory (opposite-Precategory C) (Set-Precategory l3) Ty-F δ γ) A
 
   ·-id : {Γ : Ctx} → (A : Ty Γ) → (A · id-hom-Precategory C) ＝ A
-  ·-id {Γ} A = htpy-eq (preserves-id-functor-Precategory (opposite-Precategory C) (Set-Precategory k) Ty-F Γ) A
+  ·-id {Γ} A = htpy-eq (preserves-id-functor-Precategory (opposite-Precategory C) (Set-Precategory l3) Ty-F Γ) A
 
-  ext-sub : {Δ Γ : Ctx} (A : Ty Γ) (γ : Sub Δ Γ)
-    → Tm Δ (A · γ)
-    → Sub Δ (Γ ⋆ A)
+  ext-sub : {Δ Γ : Ctx} (A : Ty Γ) (γ : Sub Δ Γ) →
+    Tm Δ (A · γ) →
+    Sub Δ (Γ ⋆ A)
   ext-sub {Δ} {Γ} A γ M = map-inv-equiv (ext-iso Δ Γ A) (γ , M)
 
   wk : {Γ : Ctx} (A : Ty Γ) → Sub (Γ ⋆ A) Γ
@@ -98,11 +107,11 @@ record CwF {i j} (C : Precategory i j) (k : Level) : UU (i ⊔ j ⊔ lsuc k) whe
   _[_] {Δ} {Γ} {A} M γ = pr1 (pr2 Tm-F) (γ , refl) M
 ```
 
--- ### Π-types
+### Π-types in a precategory with families
 
 ```agda
-record Π-structure {i j} (C : Precategory i j) (k : Level) (cwf : CwF C k) : UU (i ⊔ j ⊔ lsuc k) where
-  open CwF cwf
+record Π-structure {l1 l2} (C : Precategory l1 l2) (l3 : Level) (cwf : Precategory-With-Families C l3) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
+  open Precategory-With-Families cwf
 
   field
     Π : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) → Ty Γ
@@ -115,10 +124,10 @@ record Π-structure {i j} (C : Precategory i j) (k : Level) (cwf : CwF C k) : UU
   lam A B = map-inv-equiv (Π-iso A B)
 
   field
-    Π-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ)
-              → ((Π A B) · σ) ＝ Π (A · σ) (B · ⟨ σ , A ⟩)
-    Π-iso-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ)
-                  → (t : Tm Δ (Π A B))
-                  → app (A · σ) (B · ⟨ σ , A ⟩) (tr (Tm Γ) (Π-sub-law A B σ) (t [ σ ]))
-                  ＝ (app A B t [ ⟨ σ , A ⟩ ])
+    Π-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ) →
+              ((Π A B) · σ) ＝ Π (A · σ) (B · ⟨ σ , A ⟩)
+    Π-iso-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ) →
+                  (t : Tm Δ (Π A B)) →
+                  app (A · σ) (B · ⟨ σ , A ⟩) (tr (Tm Γ) (Π-sub-law A B σ) (t [ σ ])) ＝
+                  (app A B t [ ⟨ σ , A ⟩ ])
 ```

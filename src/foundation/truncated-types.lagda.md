@@ -99,8 +99,8 @@ pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
 ### Two equivalent types are equivalently `k`-truncated
 
 ```agda
-equiv-is-trunc-equiv : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
-  → A ≃ B → is-trunc k A ≃ is-trunc k B
+equiv-is-trunc-equiv : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  A ≃ B → is-trunc k A ≃ is-trunc k B
 equiv-is-trunc-equiv k {A} {B} e =
   equiv-prop
     (is-prop-is-trunc k A)

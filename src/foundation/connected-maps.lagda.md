@@ -233,8 +233,8 @@ is-connected-map-dependent-universal-property-connected-map k {A = A} {B = B} {f
               ( λ b' s → c b' ＝ unit-trunc s)
               ( λ a → htpy-eq (is-section-map-inv-equiv e (λ a → unit-trunc (a , refl))) a) b))
   where
-    e : ((b : B) → type-trunc k (fiber f b))
-      ≃ ((a : A) → type-trunc k (fiber f (f a)))
+    e : ((b : B) → type-trunc k (fiber f b)) ≃
+      ((a : A) → type-trunc k (fiber f (f a)))
     pr1 e = precomp-Π f (λ b → type-trunc k (fiber f b))
     pr2 e = H (λ b' → trunc k (fiber f b'))
 

@@ -820,7 +820,7 @@ module _
       ( is-emb-map-emb g)
 ```
 
-### Maps from the codomain of a surjection into a set
+### Maps from the domain of a surjection into a set
 
 ```agda
 module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
