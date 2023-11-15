@@ -16,11 +16,11 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.least-upper-bounds-large-posets
-open import order-theory.lower-sets-large-posets
 open import order-theory.order-preserving-maps-large-posets
+open import order-theory.principal-lower-sets-large-posets
+open import order-theory.principal-upper-sets-large-posets
 open import order-theory.similarity-of-elements-large-posets
 open import order-theory.similarity-of-order-preserving-maps-large-posets
-open import order-theory.upper-sets-large-posets
 ```
 
 </details>
@@ -403,7 +403,7 @@ module _
     upper-sim-galois-connection-Large-Poset P Q H G
   upper-sim-lower-sim-galois-connection-Large-Poset
     p x =
-    sim-has-same-elements-lower-set-element-Large-Poset P
+    sim-has-same-elements-principal-lower-set-element-Large-Poset P
       ( λ y →
         logical-equivalence-reasoning
           leq-Large-Poset P y
@@ -417,7 +417,9 @@ module _
               ( x)
             by
             inv-iff
-              ( has-same-elements-upper-set-element-sim-Large-Poset Q (p y) x)
+              ( has-same-elements-principal-upper-set-element-sim-Large-Poset Q
+                ( p y)
+                ( x))
           ↔ leq-Large-Poset P y
               ( map-upper-adjoint-galois-connection-Large-Poset P Q G x)
             by adjoint-relation-galois-connection-Large-Poset G y x)
@@ -427,7 +429,7 @@ module _
     lower-sim-galois-connection-Large-Poset P Q G H
   lower-sim-upper-sim-galois-connection-Large-Poset
     p y =
-    sim-has-same-elements-upper-set-element-Large-Poset Q
+    sim-has-same-elements-principal-upper-set-element-Large-Poset Q
       ( λ x →
         logical-equivalence-reasoning
           leq-Large-Poset Q
@@ -440,7 +442,9 @@ module _
               ( map-upper-adjoint-galois-connection-Large-Poset P Q H x)
             by
             inv-iff
-              ( has-same-elements-lower-set-element-sim-Large-Poset P (p x) y)
+              ( has-same-elements-principal-lower-set-element-sim-Large-Poset P
+                ( p x)
+                ( y))
           ↔ leq-Large-Poset Q
               ( map-lower-adjoint-galois-connection-Large-Poset P Q H y)
               ( x)
@@ -525,7 +529,7 @@ module _
       ( map-lower-adjoint-galois-connection-Large-Poset P Q G x)
       ( x')
   sim-is-lower-element-galois-connection-Large-Poset l =
-    sim-has-same-elements-upper-set-element-Large-Poset Q
+    sim-has-same-elements-principal-upper-set-element-Large-Poset Q
       ( λ y →
         logical-equivalence-reasoning
           leq-Large-Poset Q _ y
@@ -566,7 +570,7 @@ module _
       ( map-upper-adjoint-galois-connection-Large-Poset P Q G y)
       ( y')
   sim-is-upper-element-galois-connection-Large-Poset u =
-    sim-has-same-elements-lower-set-element-Large-Poset P
+    sim-has-same-elements-principal-lower-set-element-Large-Poset P
       ( λ x →
         logical-equivalence-reasoning
           leq-Large-Poset P x _
