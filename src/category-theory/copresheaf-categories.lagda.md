@@ -69,8 +69,6 @@ module _
 
 We record the components of the large category of copresheaves on a precategory.
 
-**Alert:** These definitions should come equipped with their specifications.
-
 ```agda
   obj-copresheaf-Large-Category =
     obj-Large-Precategory copresheaf-Large-Precategory
