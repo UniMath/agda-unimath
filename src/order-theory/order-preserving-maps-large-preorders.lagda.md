@@ -28,10 +28,11 @@ An **order preserving map** between
   f : type-Large-Preorder P l1 → type-Large-Preorder Q (γ l1)
 ```
 
-for each universe level `l1`, such that `x ≤ y` implies `f x ≤ f y` for any two
-elements `x y : P`. The function `γ : Level → Level` that specifies the universe
-level of `f x` in terms of the universe level of `x` is called the **universe
-level reindexing function** of the order preserving map `f`.
+for each [universe level](foundation.universe-levels.md) `l1`, such that `x ≤ y`
+implies `f x ≤ f y` for any two elements `x y : P`. The function
+`γ : Level → Level` that specifies the universe level of `f x` in terms of the
+universe level of `x` is called the **universe level reindexing function** of
+the order preserving map `f`.
 
 ## Definitions
 
