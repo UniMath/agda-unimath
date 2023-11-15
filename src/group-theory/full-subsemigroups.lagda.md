@@ -25,7 +25,11 @@ open import group-theory.subsets-semigroups
 
 ## Idea
 
-The full subset of a semigroup is a normal subsemigroup.
+The **full subsemigroup** of a [semigroup](group-theory.semigroups.md) `G` is
+the [subsemigroup](group-theory.subsemigroups.md) consisting of all elements of
+the semigroup `G`. In other words, the full subsemigroup is the subsemigroup
+whose underlying subset is the [full subset](foundation.full-subtypes.md) of the
+semigroup.
 
 ## Definition
 

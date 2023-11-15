@@ -24,7 +24,10 @@ open import group-theory.subsets-groups
 
 ## Idea
 
-The full subset of a group is a normal subgroup.
+The **full subgroup** of a [group](group-theory.groups.md) `G` is the
+[subgroup](group-theory.subgroups.md) consisting of all elements of the group
+`G`. In other words, the full subgroup is the subgroup whose underlying subset
+is the [full subset](foundation.full-subtypes.md) of the group.
 
 ## Definition
 
