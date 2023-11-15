@@ -17,7 +17,10 @@ open import order-theory.large-subposets
 
 ## Idea
 
-An **lower set** or **upwards closed set** in a [large poset](order-theory.large-posets.md) is a [large subposet](order-theory.large-subposets.md) that is upwards closed, i.e., that satisfies the condition that
+An **lower set** or **upwards closed set** in a
+[large poset](order-theory.large-posets.md) is a
+[large subposet](order-theory.large-subposets.md) that is upwards closed, i.e.,
+that satisfies the condition that
 
 ```text
   ∀ (x y : P), (x ≤ y) → x ∈ S → y ∈ S.
@@ -63,7 +66,7 @@ module _
   {α γ : Level → Level} {β : Level → Level → Level}
   (P : Large-Poset α β) (L : lower-set-Large-Poset γ P)
   where
-    
+
   is-in-lower-set-Large-Poset :
     {l : Level} (x : type-Large-Poset P l) → UU (γ l)
   is-in-lower-set-Large-Poset =

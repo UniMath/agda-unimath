@@ -70,6 +70,7 @@ open import order-theory.locales public
 open import order-theory.locally-finite-posets public
 open import order-theory.lower-bounds-large-posets public
 open import order-theory.lower-bounds-posets public
+open import order-theory.lower-sets-large-posets public
 open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
@@ -106,4 +107,5 @@ open import order-theory.total-orders public
 open import order-theory.total-preorders public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
+open import order-theory.upper-sets-large-posets public
 ```
