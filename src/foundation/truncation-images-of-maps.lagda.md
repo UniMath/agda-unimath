@@ -73,10 +73,18 @@ module _
   extensionality-trunc-im x y =
     ( equiv-tot
       ( λ q →
-        equiv-trunc k (equiv-tot (λ p → equiv-concat (inv right-unit) q) ∘e equiv-Eq-eq-fiber f (f y)) ∘e
+        equiv-trunc
+          k
+          (equiv-tot
+            (λ p → equiv-concat (inv right-unit) q) ∘e
+            equiv-Eq-eq-fiber f (f y)) ∘e
         ( inv-equiv (effectiveness-trunc k (x , q) (y , refl)) ∘e
-          ( equiv-concat (ap unit-trunc (inv (tr-fiber f q refl))) (unit-trunc (y , refl)) ∘e
-            equiv-concat (preserves-tr (λ _ → unit-trunc) q (x , refl)) (unit-trunc (y , refl)))))) ∘e
+          ( equiv-concat
+              (ap unit-trunc (inv (tr-fiber f q refl)))
+              (unit-trunc (y , refl)) ∘e
+            equiv-concat
+              (preserves-tr (λ _ → unit-trunc) q (x , refl))
+              (unit-trunc (y , refl)))))) ∘e
     ( equiv-pair-eq-Σ
       ( unit-trunc-im (succ-𝕋 k) f x)
       ( unit-trunc-im (succ-𝕋 k) f y))
@@ -90,7 +98,8 @@ module _
   where
 
   is-trunc-map-projection-trunc-im : is-trunc-map k (projection-trunc-im k f)
-  is-trunc-map-projection-trunc-im = is-trunc-map-pr1 k (λ _ → is-trunc-type-trunc)
+  is-trunc-map-projection-trunc-im =
+    is-trunc-map-pr1 k (λ _ → is-trunc-type-trunc)
 ```
 
 ### The map unit-trunc-im k is k-connected

@@ -20,11 +20,9 @@ open import foundation.propositional-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
@@ -188,7 +186,8 @@ module _
         refl)
 
   equiv-emb-into-subtype :
-    Σ (X ↪ A) (λ f → (x : X) → is-in-subtype B (map-emb f x)) ≃ (X ↪ type-subtype B)
+    Σ (X ↪ A) (λ f →
+      (x : X) → is-in-subtype B (map-emb f x)) ≃ (X ↪ type-subtype B)
   pr1 equiv-emb-into-subtype = ind-Σ (emb-into-subtype B)
   pr2 equiv-emb-into-subtype =
     is-equiv-is-invertible

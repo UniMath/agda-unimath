@@ -21,15 +21,21 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a type `X` with a binary relation `_<_ : X → X → Type` we say that `x : X` is accessible if `y` is accessible for all `y < x`. The relation `_<_` is well-founded if all elements of `X` are accessible.
+Given a type `X` with a binary relation `_<_ : X → X → Type` we say that `x : X`
+is accessible if `y` is accessible for all `y < x`. The relation `_<_` is
+well-founded if all elements of `X` are accessible.
 
-We can use well-founded induction on a type with a well-founded relation: if from `(y : Y) → y < x → P y` we can prove `P x`, then `(x : X) → P x`.
+We can use well-founded induction on a type with a well-founded relation: if
+from `(y : Y) → y < x → P y` we can prove `P x`, then `(x : X) → P x`.
 
 ## Definition
 
 ```agda
-data Accessible-Relation {l1 l2} {X : UU l1} (_<_ : Relation l2 X) (x : X) : UU (l1 ⊔ l2) where
-  accessible : ((y : X) → y < x → Accessible-Relation _<_ y) → Accessible-Relation _<_ x
+data Accessible-Relation {l1 l2} {X : UU l1}
+  (_<_ : Relation l2 X) (x : X) : UU (l1 ⊔ l2)
+  where
+  accessible :
+    ((y : X) → y < x → Accessible-Relation _<_ y) → Accessible-Relation _<_ x
 
 accessible-rel-elem :
   ∀ {l1 l2} {X : UU l1} (_<_ : Relation l2 X) →
@@ -66,14 +72,20 @@ ind-well-founded (_<_ , wf) P IH x =
   ind-accessible _<_ P (λ x _ → IH x) x (wf x)
 ```
 
-### Accessibility is a property.
+### Accessibility is a property
 
 ```agda
 module _ {l1 l2} {X : UU l1} (_<_ : Relation l2 X) where
 
-  all-elements-equal-Accessible-Relation : (x : X) → all-elements-equal (Accessible-Relation _<_ x)
+  all-elements-equal-Accessible-Relation :
+    (x : X) → all-elements-equal (Accessible-Relation _<_ x)
   all-elements-equal-Accessible-Relation x (accessible f) (accessible f') =
-    ap accessible (eq-htpy (λ y → eq-htpy (λ y<x → all-elements-equal-Accessible-Relation y (f y y<x) (f' y y<x))))
+    ap accessible
+        (eq-htpy
+          (λ y →
+            eq-htpy
+              (λ y<x →
+                all-elements-equal-Accessible-Relation y (f y y<x) (f' y y<x))))
 
   is-prop-Accessible-Relation : (x : X) → is-prop (Accessible-Relation _<_ x)
   is-prop-Accessible-Relation x =

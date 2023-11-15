@@ -181,7 +181,6 @@ module _
   is-emb-inclusion-subtype =
     is-emb-is-prop-map
       ( is-prop-map-inclusion-subtype B)
-        
 
   emb-subtype : type-subtype B ↪ A
   pr1 emb-subtype = inclusion-subtype B

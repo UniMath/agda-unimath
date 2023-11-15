@@ -66,14 +66,17 @@ is-equiv-diagonal-is-connected B H =
 
 is-connected-is-equiv-diagonal :
   {l1 : Level} {k : 𝕋} {A : UU l1} →
-  ({l2 : Level} (B : Truncated-Type l2 k) → is-equiv (const A (type-Truncated-Type B))) →
+  ({l2 : Level} (B : Truncated-Type l2 k) →
+  is-equiv (const A (type-Truncated-Type B))) →
   is-connected k A
 is-connected-is-equiv-diagonal {k = k} {A = A} H =
   tot
     ( λ x →
       function-dependent-universal-property-trunc
         ( Id-Truncated-Type' (trunc k A) x))
-    ( tot (λ _ → htpy-eq) (center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
+    ( tot
+      (λ _ → htpy-eq)
+      (center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
 ```
 
 ### A contractible type is `k`-connected for any `k`
@@ -95,7 +98,10 @@ is-connected-is-connected-succ-𝕋 :
   is-connected (succ-𝕋 k) A → is-connected k A
 is-connected-is-connected-succ-𝕋 k H =
   is-connected-is-equiv-diagonal
-    λ B → is-equiv-diagonal-is-connected (truncated-type-succ-Truncated-Type k B) H
+    λ B →
+      is-equiv-diagonal-is-connected
+        (truncated-type-succ-Truncated-Type k B)
+        H
 ```
 
 ### Any type that is equivalent to a `k`-connected type is `k`-connected

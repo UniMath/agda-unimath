@@ -416,14 +416,16 @@ module _
   issec-inv-map-Σ-emb-base :
     ( map-Σ-map-base (map-emb f) C ∘ inv-map-Σ-emb-base) ~ id
   issec-inv-map-Σ-emb-base (b , c) =
-    ap (λ s → (pr1 s , inv-tr C (pr2 s) c))
-       (eq-is-contr (is-torsorial-path' b))
+    ap
+      (λ s → (pr1 s , inv-tr C (pr2 s) c))
+      (eq-is-contr (is-torsorial-path' b))
 
   isretr-inv-map-Σ-emb-base :
     ( inv-map-Σ-emb-base ∘ map-Σ-map-base (map-emb f) C) ~ id
   isretr-inv-map-Σ-emb-base (a , c) =
-    ap (λ s → (pr1 s , inv-tr C (pr2 s) c))
-       (eq-is-prop (is-prop-map-is-emb (pr2 f) (map-emb f a)))
+    ap
+      (λ s → (pr1 s , inv-tr C (pr2 s) c))
+      (eq-is-prop (is-prop-map-is-emb (pr2 f) (map-emb f a)))
 
   equiv-Σ-emb-base : Σ A (C ∘ map-emb f) ≃ Σ B C
   pr1 equiv-Σ-emb-base = map-Σ-map-base (map-emb f) C

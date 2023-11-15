@@ -138,7 +138,8 @@ is-trunc-is-trunc-map-into-is-trunc :
   is-trunc (succ-𝕋 k) A
 is-trunc-is-trunc-map-into-is-trunc neg-two-𝕋 f is-trunc-B is-trunc-map-f =
   is-trunc-is-equiv _ _ f (is-equiv-is-contr-map is-trunc-map-f) is-trunc-B
-is-trunc-is-trunc-map-into-is-trunc (succ-𝕋 k) f is-trunc-B is-trunc-map-f a a' =
+is-trunc-is-trunc-map-into-is-trunc
+  (succ-𝕋 k) f is-trunc-B is-trunc-map-f a a' =
   is-trunc-is-trunc-map-into-is-trunc
     ( k)
     ( ap f)

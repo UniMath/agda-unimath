@@ -17,8 +17,8 @@ open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.truncated-types
-open import foundation.truncations
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
@@ -207,7 +207,8 @@ module _
 
   equiv-dependent-universal-property-is-connected-map :
     is-connected-map k f → (P : B → Truncated-Type l3 k) →
-    ((b : B) → type-Truncated-Type (P b)) ≃ ((a : A) → type-Truncated-Type (P (f a)))
+    ((b : B) → type-Truncated-Type (P b)) ≃
+    ((a : A) → type-Truncated-Type (P (f a)))
   pr1 (equiv-dependent-universal-property-is-connected-map H P) =
     precomp-Π f (λ b → type-Truncated-Type (P b))
   pr2 (equiv-dependent-universal-property-is-connected-map H P) =
@@ -222,7 +223,8 @@ is-connected-map-dependent-universal-property-connected-map :
   ({l3 : Level} (P : B → Truncated-Type l3 k) →
     is-equiv (precomp-Π f (λ b → type-Truncated-Type (P b)))) →
   is-connected-map k f
-is-connected-map-dependent-universal-property-connected-map k {A = A} {B = B} {f = f} H =
+is-connected-map-dependent-universal-property-connected-map
+  k {A = A} {B = B} {f = f} H =
   map-inv-distributive-Π-Σ
     ( c ,
       λ b →
@@ -231,7 +233,13 @@ is-connected-map-dependent-universal-property-connected-map k {A = A} {B = B} {f
           ( inv-map-reduce-Π-fiber
               ( f)
               ( λ b' s → c b' ＝ unit-trunc s)
-              ( λ a → htpy-eq (is-section-map-inv-equiv e (λ a → unit-trunc (a , refl))) a) b))
+              ( λ a →
+                htpy-eq
+                  (is-section-map-inv-equiv
+                    e
+                    (λ a → unit-trunc (a , refl)))
+                  a)
+              b))
   where
     e : ((b : B) → type-trunc k (fiber f b)) ≃
       ((a : A) → type-trunc k (fiber f (f a)))

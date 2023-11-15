@@ -25,8 +25,8 @@ open import foundation.monomorphisms
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
-open import foundation.subtypes
 open import foundation.subtype-identity-principle
+open import foundation.subtypes
 open import foundation.truncated-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -40,7 +40,6 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
@@ -548,7 +547,8 @@ is-surjective-is-connected-map :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
   {f : A → B} → is-connected-map (succ-𝕋 k) f →
   is-surjective f
-is-surjective-is-connected-map neg-two-𝕋 H = is-surjective-is-neg-one-connected-map H
+is-surjective-is-connected-map neg-two-𝕋 H =
+  is-surjective-is-neg-one-connected-map H
 is-surjective-is-connected-map (succ-𝕋 k) H =
   is-surjective-is-connected-map
     ( k)
@@ -857,12 +857,15 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
         ( λ a → (g a , λ (a' , p') → H a' a p')))
     where
       P : B → UU (l1 ⊔ l2 ⊔ l3)
-      P b = Σ (type-Set C) (λ c → (s : fiber (map-surjection f) b) → g (pr1 s) ＝ c)
+      P b =
+        Σ (type-Set C) (λ c → (s : fiber (map-surjection f) b) → g (pr1 s) ＝ c)
 
       e : ((b : B) → P b) ≃
           Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
       e =
-        (equiv-tot (λ h → equiv-precomp-Π (inv-equiv-total-fiber (map-surjection f)) _)) ∘e
+        (equiv-tot
+          (λ h →
+            equiv-precomp-Π (inv-equiv-total-fiber (map-surjection f)) _)) ∘e
         (equiv-tot (λ h → inv-equiv equiv-ev-pair) ∘e
         (distributive-Π-Σ))
 
@@ -871,7 +874,10 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
         is-prop-all-elements-equal
           ( λ (pair c q) (pair c' q') →
             eq-type-subtype
-              ( λ c'' → Π-Prop (fiber (map-surjection f) b) (λ s → Id-Prop C (g (pr1 s)) c''))
+              ( λ c'' →
+                Π-Prop
+                  (fiber (map-surjection f) b)
+                  (λ s → Id-Prop C (g (pr1 s)) c''))
               ( map-universal-property-trunc-Prop
                 ( Id-Prop C c c')
                 ( λ s → inv (q s) ∙ q' s)
@@ -880,11 +886,15 @@ module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
   equiv-universal-property-surj-into-set :
     Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)) ≃
     ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a')
-  pr1 equiv-universal-property-surj-into-set = map-universal-property-surj-into-set
+  pr1 equiv-universal-property-surj-into-set =
+    map-universal-property-surj-into-set
   pr2 equiv-universal-property-surj-into-set =
     is-equiv-is-prop
       ( is-prop-surj-comm-map-into-set)
-      ( is-prop-Π (λ a → is-prop-Π (λ a' → is-prop-function-type (is-set-type-Set C (g a) (g a')))))
+      ( is-prop-Π
+        (λ a →
+          is-prop-Π
+            (λ a' → is-prop-function-type (is-set-type-Set C (g a) (g a')))))
       ( inv-universal-property-surj-into-set)
 
   function-inv-universal-property-surj-into-set :
