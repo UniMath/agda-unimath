@@ -25,7 +25,7 @@ open import order-theory.similarity-of-elements-large-posets
 The **principal upper set** `↑{x}` of an element `x` of a
 [large poset](order-theory.large-posets.md) `P` is the
 [large subposet](order-theory.large-subposets.md) consisting of all elements
-`y ≤ x` in `P`.
+`x ≤ y` in `P`.
 
 Two elements `x` and `y` in a large poset `P` are
 [similar](order-theory.similarity-of-elements-large-posets.md) if and only if
