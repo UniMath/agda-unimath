@@ -91,7 +91,7 @@ is-trunc-map-is-equiv k H =
   is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
 ```
 
-### A (-1)-truncated map is `k+1`-truncated
+### A `-1`-truncated map is `k+1`-truncated
 
 ```agda
 is-trunc-map-neg-one-trunc-map :

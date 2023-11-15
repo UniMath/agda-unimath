@@ -194,7 +194,7 @@ module _
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
 ```
 
-### Restriction of a k-truncated map to a k-truncated map into a subtype
+### Restriction of a `k`-truncated map to a `k`-truncated map into a subtype
 
 ```agda
 module _
