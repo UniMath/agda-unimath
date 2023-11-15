@@ -38,7 +38,9 @@ open import foundation-core.propositions
 
 A **singleton subtype** of a type `X` is a [subtype](foundation.subtypes.md) `P`
 of `X` of which the underlying type is
-[contractible](foundation-core.contractible-types.md).
+[contractible](foundation-core.contractible-types.md). In informal writing, we
+will write `{x}` for the **standard singleton subtype** of a
+[set](foundation-core.sets.md) `X` containing the element `x`.
 
 **Note:** If a subtype containing an element `x` is a singleton subtype, then it
 is also the least subtype containing `x`. However, the reverse implication does
