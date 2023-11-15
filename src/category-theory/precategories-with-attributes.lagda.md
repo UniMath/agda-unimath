@@ -43,9 +43,9 @@ such that
 This is a reformulation of Definition 1, slide 24 of <https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf>
 
 ```agda
-record CwA {i j} (C : Precategory i j) (k : Level) : UU (i ⊔ j ⊔ lsuc k) where
+record CwA {l1 l2 : Level} (C : Precategory l1 l2) (l3 : Level) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
   field
-    Ty-F : functor-Precategory (opposite-Precategory C) (Set-Precategory k)
+    Ty-F : functor-Precategory (opposite-Precategory C) (Set-Precategory l3)
     ext : functor-Precategory (element-Precategory C Ty-F) C
     p : natural-transformation-Precategory (element-Precategory C Ty-F) C ext (proj₁-functor-element-Precategory C Ty-F)
     is-pullback-p : (x y : obj-Precategory (element-Precategory C Ty-F)) (f : hom-Precategory (element-Precategory C Ty-F) x y) →
