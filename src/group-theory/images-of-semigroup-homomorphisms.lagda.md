@@ -84,7 +84,7 @@ module _
     leq-Subsemigroup G S (pullback-Subsemigroup G H f U)
 ```
 
-### The image subsemigroup of a semigroup homomorphism
+### The image subsemigroup under a semigroup homomorphism
 
 ```agda
 module _
@@ -137,7 +137,7 @@ module _
     backward-implication (is-image-image-hom-Semigroup K)
 ```
 
-### The image of a subsemigroup of a semigroup homomorphism
+### The image of a subsemigroup under a semigroup homomorphism
 
 ```agda
 module _

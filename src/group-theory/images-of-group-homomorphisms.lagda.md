@@ -82,7 +82,7 @@ module _
     leq-Subgroup H T U ↔ leq-Subgroup G S (pullback-Subgroup G H f U)
 ```
 
-### The image subgroup of a group homomorphism
+### The image subgroup under a group homomorphism
 
 ```agda
 module _
@@ -159,7 +159,7 @@ module _
     backward-implication (is-image-image-hom-Group K)
 ```
 
-### The image of a subgroup of a group homomorphism
+### The image of a subgroup under a group homomorphism
 
 ```agda
 module _
