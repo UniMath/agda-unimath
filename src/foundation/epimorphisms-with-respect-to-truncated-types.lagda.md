@@ -220,8 +220,8 @@ module _
       ( codiagonal-map f)
       ( λ l X →
         is-equiv-right-factor
-          ( horizontal-map-cocone f f ∘
-            map-equiv (equiv-up-pushout f f (type-Truncated-Type X)))
+          ( ( horizontal-map-cocone f f) ∘
+            ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
           ( precomp (codiagonal-map f) (type-Truncated-Type X))
           ( is-equiv-comp
             ( horizontal-map-cocone f f)
