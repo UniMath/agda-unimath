@@ -22,7 +22,7 @@ open import group-theory.surjective-semigroup-homomorphisms
 
 A [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` is said
 to be **surjective** if its underlying map is
-[surjective](foundation.surjective-maps.md)
+[surjective](foundation.surjective-maps.md).
 
 ## Definition
 
