@@ -28,10 +28,10 @@ open import order-theory.order-preserving-maps-large-preorders
 
 Given a [semigroup homomorphism](group-theory.homomorphisms-semigroups.md)
 `f : G → H` into a [semigroup](group-theory.semigroups.md) `H` equipped with a
-[subsemigroup](group-theory.subsemigroups.md) `K ≤ H`, the **pullback** `f∗K` of
-`K` along `f` is defined by substituting `f` in `K`. In other words, it is the
-subsemigroup `f∗K` of `G` consisting of the elements `x : G` such that
-`f x ∈ K`.
+[subsemigroup](group-theory.subsemigroups.md) `K ≤ H`, the **pullback**
+`pullback f K` of `K` along `f` is defined by substituting `f` in `K`. In other
+words, it is the subsemigroup `pullback f K` of `G` consisting of the elements
+`x : G` such that `f x ∈ K`.
 
 ## Definitions
 
