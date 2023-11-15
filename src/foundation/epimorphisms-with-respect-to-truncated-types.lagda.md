@@ -163,15 +163,9 @@ module _
           ( is-prop-map-is-emb (e X) (g ∘ f))
           ( g , refl))
 
-  diagonal-into-cocone :
-    (B → type-Truncated-Type X) → cocone f f (type-Truncated-Type X)
-  pr1 (diagonal-into-cocone g) = g
-  pr1 (pr2 (diagonal-into-cocone g)) = g
-  pr2 (pr2 (diagonal-into-cocone g)) = refl-htpy
-
   is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type :
     is-epimorphism-Truncated-Type k f →
-    is-equiv diagonal-into-cocone
+    is-equiv (diagonal-into-cocone f (type-Truncated-Type X))
   is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e =
     is-equiv-comp
       ( map-equiv (compute-total-fiber-precomp f (type-Truncated-Type X)))
@@ -187,7 +181,7 @@ module _
   is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type e =
     is-equiv-left-factor
       ( horizontal-map-cocone f f)
-      ( diagonal-into-cocone)
+      ( diagonal-into-cocone f (type-Truncated-Type X))
       ( is-equiv-id)
       ( is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e)
 ```
