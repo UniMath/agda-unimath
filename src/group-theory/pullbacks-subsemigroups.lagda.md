@@ -10,6 +10,7 @@ module group-theory.pullbacks-subsemigroups where
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.powersets
 open import foundation.pullbacks-subtypes
 open import foundation.universe-levels
 
@@ -18,8 +19,10 @@ open import group-theory.semigroups
 open import group-theory.subsemigroups
 open import group-theory.subsets-semigroups
 
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.similarity-of-order-preserving-maps-large-posets
 ```
 
 </details>
@@ -97,13 +100,61 @@ module _
       ( subset-Subsemigroup H S)
       ( subset-Subsemigroup H T)
 
-  pullback-subsemigroup-hom-Large-Poset :
+  pullback-hom-large-poset-Subsemigroup :
     hom-Large-Poset
       ( λ l → l)
       ( Subsemigroup-Large-Poset H)
       ( Subsemigroup-Large-Poset G)
-  map-hom-Large-Preorder pullback-subsemigroup-hom-Large-Poset =
+  map-hom-Large-Preorder pullback-hom-large-poset-Subsemigroup =
     pullback-Subsemigroup G H f
-  preserves-order-hom-Large-Preorder pullback-subsemigroup-hom-Large-Poset =
+  preserves-order-hom-Large-Preorder pullback-hom-large-poset-Subsemigroup =
     preserves-order-pullback-Subsemigroup
+```
+
+## Properties
+
+### The pullback operation commutes with the underlying subtype operation
+
+The square
+
+```text
+                       pullback f
+    Subsemigroup H ----------------> Subsemigroup G
+          |                                |
+   K ↦ UK |                                | K ↦ UK
+          |                                |
+          V                                V
+  subset-Semigroup H ------------> subset-Semigroup G
+                      pullback f
+```
+
+of [order preserving maps](order-theory.order-preserving-maps-large-posets.md)
+[commutes](order-theory.commuting-squares-of-order-preserving-maps-large-posets.md)
+by reflexivity.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2) (f : hom-Semigroup G H)
+  where
+
+  coherence-square-pullback-subset-Subsemigroup :
+    coherence-square-hom-Large-Poset
+      ( Subsemigroup-Large-Poset H)
+      ( powerset-Large-Poset (type-Semigroup H))
+      ( Subsemigroup-Large-Poset G)
+      ( powerset-Large-Poset (type-Semigroup G))
+      ( pullback-hom-large-poset-Subsemigroup G H f)
+      ( subset-subsemigroup-hom-large-poset-Semigroup H)
+      ( subset-subsemigroup-hom-large-poset-Semigroup G)
+      ( pullback-subtype-hom-Large-Poset (map-hom-Semigroup G H f))
+  coherence-square-pullback-subset-Subsemigroup =
+    refl-sim-hom-Large-Poset
+      ( Subsemigroup-Large-Poset H)
+      ( powerset-Large-Poset (type-Semigroup G))
+      ( comp-hom-Large-Poset
+        ( Subsemigroup-Large-Poset H)
+        ( Subsemigroup-Large-Poset G)
+        ( powerset-Large-Poset (type-Semigroup G))
+        ( subset-subsemigroup-hom-large-poset-Semigroup G)
+        ( pullback-hom-large-poset-Subsemigroup G H f))
 ```
