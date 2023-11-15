@@ -17,10 +17,10 @@ open import order-theory.large-subposets
 
 ## Idea
 
-An **lower set** or **upwards closed set** in a
+An **lower set** or **downwards closed set** in a
 [large poset](order-theory.large-posets.md) is a
-[large subposet](order-theory.large-subposets.md) that is upwards closed, i.e.,
-that satisfies the condition that
+[large subposet](order-theory.large-subposets.md) that is downwards closed,
+i.e., that satisfies the condition that
 
 ```text
   ∀ (x y : P), (x ≤ y) → x ∈ S → y ∈ S.
