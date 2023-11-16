@@ -16,6 +16,7 @@ open import category-theory.set-magmoids
 open import foundation.cartesian-product-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
@@ -176,6 +177,141 @@ module _
       id-hom-Displayed-Precategory
   right-unit-law-comp-hom-Displayed-Precategory =
     pr2 (pr2 is-unital-comp-hom-Displayed-Precategory)
+```
+
+### The total precategory associated to a displayed precategory
+
+Given a displayed precategory `D` over `C`, the total structure `∫D` whose
+objects are
+
+```text
+  ob ∫D := Σ (x : ob C) (ob D x)
+```
+
+and hom-sets are
+
+```text
+  hom ∫D (x , x') (y , y') := Σ (f : hom C x y) (hom D f x' y')
+```
+
+form a precategory we call the **total precategory** of `D`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Displayed-Precategory l3 l4 C)
+  where
+
+  obj-total-precategory-Displayed-Precategory : UU (l1 ⊔ l3)
+  obj-total-precategory-Displayed-Precategory =
+    Σ (obj-Precategory C) (obj-Displayed-Precategory C D)
+
+  hom-set-total-precategory-Displayed-Precategory :
+    (x y : obj-total-precategory-Displayed-Precategory) → Set (l2 ⊔ l4)
+  hom-set-total-precategory-Displayed-Precategory (x , x') (y , y') =
+    Σ-Set
+      ( hom-set-Precategory C x y)
+      ( λ f → hom-set-Displayed-Precategory C D f x' y')
+
+  hom-total-precategory-Displayed-Precategory :
+    (x y : obj-total-precategory-Displayed-Precategory) → UU (l2 ⊔ l4)
+  hom-total-precategory-Displayed-Precategory x y =
+    type-Set (hom-set-total-precategory-Displayed-Precategory x y)
+
+  comp-hom-total-precategory-Displayed-Precategory :
+    {x y z : obj-total-precategory-Displayed-Precategory} →
+    hom-total-precategory-Displayed-Precategory y z →
+    hom-total-precategory-Displayed-Precategory x y →
+    hom-total-precategory-Displayed-Precategory x z
+  pr1 (comp-hom-total-precategory-Displayed-Precategory (g , g') (f , f')) =
+    comp-hom-Precategory C g f
+  pr2 (comp-hom-total-precategory-Displayed-Precategory (g , g') (f , f')) =
+    comp-hom-Displayed-Precategory C D g f g' f'
+
+  associative-comp-hom-total-precategory-Displayed-Precategory :
+    {x y z w : obj-total-precategory-Displayed-Precategory}
+    (h : hom-total-precategory-Displayed-Precategory z w)
+    (g : hom-total-precategory-Displayed-Precategory y z)
+    (f : hom-total-precategory-Displayed-Precategory x y) →
+    ( comp-hom-total-precategory-Displayed-Precategory
+      ( comp-hom-total-precategory-Displayed-Precategory h g)
+      ( f)) ＝
+    ( comp-hom-total-precategory-Displayed-Precategory
+      ( h)
+      ( comp-hom-total-precategory-Displayed-Precategory g f))
+  associative-comp-hom-total-precategory-Displayed-Precategory
+    ( h , h') (g , g') (f , f') =
+    eq-pair-Σ
+      ( associative-comp-hom-Precategory C h g f)
+      ( associative-comp-hom-Displayed-Precategory C D h g f h' g' f')
+
+  associative-composition-operation-total-precategory-Displayed-Precategory :
+    associative-composition-operation-binary-family-Set
+      ( hom-set-total-precategory-Displayed-Precategory)
+  pr1
+    associative-composition-operation-total-precategory-Displayed-Precategory =
+    comp-hom-total-precategory-Displayed-Precategory
+  pr2
+    associative-composition-operation-total-precategory-Displayed-Precategory =
+    associative-comp-hom-total-precategory-Displayed-Precategory
+
+  id-hom-total-precategory-Displayed-Precategory :
+    {x : obj-total-precategory-Displayed-Precategory} →
+    hom-total-precategory-Displayed-Precategory x x
+  pr1 (id-hom-total-precategory-Displayed-Precategory {x , x'}) =
+    id-hom-Precategory C
+  pr2 (id-hom-total-precategory-Displayed-Precategory {x , x'}) =
+    id-hom-Displayed-Precategory C D x'
+
+  left-unit-law-comp-hom-total-precategory-Displayed-Precategory :
+    {x y : obj-total-precategory-Displayed-Precategory} →
+    (f : hom-total-precategory-Displayed-Precategory x y) →
+    comp-hom-total-precategory-Displayed-Precategory
+      ( id-hom-total-precategory-Displayed-Precategory)
+      ( f) ＝
+    f
+  left-unit-law-comp-hom-total-precategory-Displayed-Precategory (f , f') =
+    eq-pair-Σ
+      ( left-unit-law-comp-hom-Precategory C f)
+      ( left-unit-law-comp-hom-Displayed-Precategory C D f f')
+
+  right-unit-law-comp-hom-total-precategory-Displayed-Precategory :
+    {x y : obj-total-precategory-Displayed-Precategory} →
+    (f : hom-total-precategory-Displayed-Precategory x y) →
+    comp-hom-total-precategory-Displayed-Precategory
+      ( f)
+      ( id-hom-total-precategory-Displayed-Precategory) ＝
+    f
+  right-unit-law-comp-hom-total-precategory-Displayed-Precategory (f , f') =
+    eq-pair-Σ
+      ( right-unit-law-comp-hom-Precategory C f)
+      ( right-unit-law-comp-hom-Displayed-Precategory C D f f')
+
+  is-unital-composition-operation-total-precategory-Displayed-Precategory :
+    is-unital-composition-operation-binary-family-Set
+      ( hom-set-total-precategory-Displayed-Precategory)
+      ( comp-hom-total-precategory-Displayed-Precategory)
+  pr1
+    is-unital-composition-operation-total-precategory-Displayed-Precategory x =
+    id-hom-total-precategory-Displayed-Precategory
+  pr1
+    ( pr2
+      is-unital-composition-operation-total-precategory-Displayed-Precategory) =
+        left-unit-law-comp-hom-total-precategory-Displayed-Precategory
+  pr2
+    ( pr2
+      is-unital-composition-operation-total-precategory-Displayed-Precategory) =
+        right-unit-law-comp-hom-total-precategory-Displayed-Precategory
+
+  total-precategory-Displayed-Precategory : Precategory (l1 ⊔ l3) (l2 ⊔ l4)
+  pr1 total-precategory-Displayed-Precategory =
+    obj-total-precategory-Displayed-Precategory
+  pr1 (pr2 total-precategory-Displayed-Precategory) =
+    hom-set-total-precategory-Displayed-Precategory
+  pr1 (pr2 (pr2 total-precategory-Displayed-Precategory)) =
+    associative-composition-operation-total-precategory-Displayed-Precategory
+  pr2 (pr2 (pr2 total-precategory-Displayed-Precategory)) =
+    is-unital-composition-operation-total-precategory-Displayed-Precategory
 ```
 
 ## References
