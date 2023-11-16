@@ -262,7 +262,7 @@ module _
   commutator-subgroup-Ab = commutator-subgroup-Group (group-Ab A)
 ```
 
-### Any group element yields a type equipped with an automorphism
+### Any abelian group element yields a type equipped with an automorphism
 
 ```agda
 module _
