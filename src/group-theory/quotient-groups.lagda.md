@@ -91,6 +91,14 @@ universal-property-quotient-Group G N Q q =
 
 #### The quotient map and the underlying set of the quotient group
 
+The underlying [set](foundation-core.sets.md) of the quotient group is defined as the [set quotient](foundation.set-quotiens.md) of the [equivalence relation](foundation.equivalence.relations.md) induced by the normal subgroup `N` of `G`. By this construction we immediately obtain the quotient map `q : G → G/N`, which will be [surjective](foundation.surjective-maps.md) and [effective](foundation.effective-maps-equivalence-relations.md). This means that the quotient group satisfies the condition
+
+```text
+  x⁻¹y ∈ N ↔ q x ＝ q y. 
+```
+
+We will conclude later that this implies that the quotient map nullifies the normal subgroup `N`.
+
 ```agda
 module _
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
@@ -163,9 +171,23 @@ module _
 
 #### The group structure on the quotient group
 
+We now introduce the group structure on the underlying set of the quotient group. The multiplication, unit, and inverses are defined by the universal property of the set quotient as the unique maps equipped with identifications
+
+```text
+   qx qy ＝ q(xy)
+       1 ＝ q1
+  (qx)⁻¹ =  q(x⁻¹)
+```
+
+The group laws follow by the induction principle for set quotients.
+
 ```agda
-  unit-quotient-Group : type-quotient-Group
-  unit-quotient-Group = map-quotient-hom-Group (unit-Group G)
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  unit-quotient-Group : type-quotient-Group G N
+  unit-quotient-Group = map-quotient-hom-Group G N (unit-Group G)
 
   binary-hom-mul-quotient-Group :
     binary-hom-Equivalence-Relation
@@ -177,7 +199,7 @@ module _
     mul-congruence-Normal-Subgroup G N
 
   mul-quotient-Group :
-    (x y : type-quotient-Group) → type-quotient-Group
+    (x y : type-quotient-Group G N) → type-quotient-Group G N
   mul-quotient-Group =
     binary-map-set-quotient
       ( eq-rel-congruence-Normal-Subgroup G N)
@@ -186,16 +208,16 @@ module _
       ( binary-hom-mul-quotient-Group)
 
   mul-quotient-Group' :
-    (x y : type-quotient-Group) → type-quotient-Group
+    (x y : type-quotient-Group G N) → type-quotient-Group G N
   mul-quotient-Group' x y = mul-quotient-Group y x
 
   abstract
     compute-mul-quotient-Group :
       (x y : type-Group G) →
       mul-quotient-Group
-        ( map-quotient-hom-Group x)
-        ( map-quotient-hom-Group y) ＝
-      map-quotient-hom-Group (mul-Group G x y)
+        ( map-quotient-hom-Group G N x)
+        ( map-quotient-hom-Group G N y) ＝
+      map-quotient-hom-Group G N (mul-Group G x y)
     compute-mul-quotient-Group =
       compute-binary-map-set-quotient
         ( eq-rel-congruence-Normal-Subgroup G N)
@@ -210,7 +232,7 @@ module _
   pr1 hom-inv-quotient-Group = inv-Group G
   pr2 hom-inv-quotient-Group = inv-congruence-Normal-Subgroup G N
 
-  inv-quotient-Group : type-quotient-Group → type-quotient-Group
+  inv-quotient-Group : type-quotient-Group G N → type-quotient-Group G N
   inv-quotient-Group =
     map-set-quotient
       ( eq-rel-congruence-Normal-Subgroup G N)
@@ -220,8 +242,8 @@ module _
   abstract
     compute-inv-quotient-Group :
       (x : type-Group G) →
-      inv-quotient-Group (map-quotient-hom-Group x) ＝
-      map-quotient-hom-Group (inv-Group G x)
+      inv-quotient-Group (map-quotient-hom-Group G N x) ＝
+      map-quotient-hom-Group G N (inv-Group G x)
     compute-inv-quotient-Group =
       coherence-square-map-set-quotient
         ( eq-rel-congruence-Normal-Subgroup G N)
@@ -230,39 +252,39 @@ module _
 
   abstract
     left-unit-law-mul-quotient-Group :
-      (x : type-quotient-Group) →
+      (x : type-quotient-Group G N) →
       mul-quotient-Group unit-quotient-Group x ＝ x
     left-unit-law-mul-quotient-Group =
       induction-set-quotient
         ( eq-rel-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
-            ( set-quotient-Group)
+            ( set-quotient-Group G N)
             ( mul-quotient-Group unit-quotient-Group y)
             ( y))
         ( λ x →
           ( compute-mul-quotient-Group (unit-Group G) x) ∙
-          ( ap map-quotient-hom-Group (left-unit-law-mul-Group G x)))
+          ( ap (map-quotient-hom-Group G N) (left-unit-law-mul-Group G x)))
 
   abstract
     right-unit-law-mul-quotient-Group :
-      (x : type-quotient-Group) →
+      (x : type-quotient-Group G N) →
       mul-quotient-Group x unit-quotient-Group ＝ x
     right-unit-law-mul-quotient-Group =
       induction-set-quotient
         ( eq-rel-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
-            ( set-quotient-Group)
+            ( set-quotient-Group G N)
             ( mul-quotient-Group y unit-quotient-Group)
             ( y))
         ( λ x →
           ( compute-mul-quotient-Group x (unit-Group G)) ∙
-          ( ap map-quotient-hom-Group (right-unit-law-mul-Group G x)))
+          ( ap (map-quotient-hom-Group G N) (right-unit-law-mul-Group G x)))
 
   abstract
     associative-mul-quotient-Group :
-      (x y z : type-quotient-Group) →
+      (x y z : type-quotient-Group G N) →
       ( mul-quotient-Group (mul-quotient-Group x y) z) ＝
       ( mul-quotient-Group x (mul-quotient-Group y z))
     associative-mul-quotient-Group =
@@ -270,26 +292,26 @@ module _
         ( eq-rel-congruence-Normal-Subgroup G N)
         ( λ x y z →
           Id-Prop
-            ( set-quotient-Group)
+            ( set-quotient-Group G N)
             ( mul-quotient-Group (mul-quotient-Group x y) z)
             ( mul-quotient-Group x (mul-quotient-Group y z)))
         ( λ x y z →
           ( ap
-            ( mul-quotient-Group' (map-quotient-hom-Group z))
+            ( mul-quotient-Group' (map-quotient-hom-Group G N z))
             ( compute-mul-quotient-Group x y)) ∙
           ( compute-mul-quotient-Group (mul-Group G x y) z) ∙
           ( ap
-            ( map-quotient-hom-Group)
+            ( map-quotient-hom-Group G N)
             ( associative-mul-Group G x y z)) ∙
           ( inv
             ( compute-mul-quotient-Group x (mul-Group G y z))) ∙
           ( ap
-            ( mul-quotient-Group (map-quotient-hom-Group x))
+            ( mul-quotient-Group (map-quotient-hom-Group G N x))
             ( inv (compute-mul-quotient-Group y z))))
 
   abstract
     left-inverse-law-mul-quotient-Group :
-      (x : type-quotient-Group) →
+      (x : type-quotient-Group G N) →
       ( mul-quotient-Group (inv-quotient-Group x) x) ＝
       ( unit-quotient-Group)
     left-inverse-law-mul-quotient-Group =
@@ -297,21 +319,21 @@ module _
         ( eq-rel-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
-            ( set-quotient-Group)
+            ( set-quotient-Group G N)
             ( mul-quotient-Group (inv-quotient-Group y) y)
             ( unit-quotient-Group))
         ( λ x →
           ( ap
-            ( mul-quotient-Group' (map-quotient-hom-Group x))
+            ( mul-quotient-Group' (map-quotient-hom-Group G N x))
             ( compute-inv-quotient-Group x)) ∙
           ( compute-mul-quotient-Group (inv-Group G x) x) ∙
           ( ap
-            ( map-quotient-hom-Group)
+            ( map-quotient-hom-Group G N)
             ( left-inverse-law-mul-Group G x)))
 
   abstract
     right-inverse-law-mul-quotient-Group :
-      (x : type-quotient-Group) →
+      (x : type-quotient-Group G N) →
       ( mul-quotient-Group x (inv-quotient-Group x)) ＝
       ( unit-quotient-Group)
     right-inverse-law-mul-quotient-Group =
@@ -319,20 +341,20 @@ module _
         ( eq-rel-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
-            ( set-quotient-Group)
+            ( set-quotient-Group G N)
             ( mul-quotient-Group y (inv-quotient-Group y))
             ( unit-quotient-Group))
         ( λ x →
           ( ap
-            ( mul-quotient-Group (map-quotient-hom-Group x))
+            ( mul-quotient-Group (map-quotient-hom-Group G N x))
             ( compute-inv-quotient-Group x)) ∙
           ( compute-mul-quotient-Group x (inv-Group G x)) ∙
           ( ap
-            ( map-quotient-hom-Group)
+            ( map-quotient-hom-Group G N)
             ( right-inverse-law-mul-Group G x)))
 
   semigroup-quotient-Group : Semigroup (l1 ⊔ l2)
-  pr1 semigroup-quotient-Group = set-quotient-Group
+  pr1 semigroup-quotient-Group = set-quotient-Group G N
   pr1 (pr2 semigroup-quotient-Group) = mul-quotient-Group
   pr2 (pr2 semigroup-quotient-Group) = associative-mul-quotient-Group
 
@@ -351,6 +373,8 @@ module _
 ```
 
 #### The quotient homomorphism into the quotient group
+
+The quotient map `q : G → G/N` preserves the group structure and nullifies the normal subgroup `N`. Both these claims follow fairly directly from the definitions of the quotient map `q` and the  group operations on `G/N`.
 
 ```agda
 module _
@@ -398,6 +422,8 @@ module _
 
 #### Induction on quotient groups
 
+The **induction principle** of quotient groups asserts that for any property `P` of elements of the quotient group `G/N`, in order to show that `P x` holds for all `x : G/N` it suffices to show that `P qy` holds for all `y : G`. 
+
 ```agda
 module _
   {l1 l2 l3 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
@@ -423,6 +449,8 @@ module _
 ```
 
 #### Double induction on quotient groups
+
+The **double induction principle** of quotient groups asserts that for any property `P` of pairs of elements of the quotient group `G/N`, in order to show that `P x y` holds for all `x y : G/N` it suffices to show that `P qu qv` holds for all `u v : G`.
 
 ```agda
 module _
@@ -459,6 +487,14 @@ module _
 ```
 
 #### The universal property of the quotient group
+
+The universal property of the quotient group `G/N` asserts that for any group `H` the precomposition function
+
+```text
+  hom-Group G/N H → nullifying-hom-Group G H N
+```
+
+is an equivalence.
 
 **Proof:** Let `G` and `H` be groups and let `N` be a normal subgroup of `G`.
 Our goal is to show that the precomposition function
@@ -566,6 +602,18 @@ module _
 ```
 
 ### The unique mapping property of the quotient group
+
+The unique mapping property of the quotient group `G/N` asserts that for any group `H` and any `N`-nullifying group homomorphism `f : G → H`, the type of group homomorphisms `g : G/N → H` such that `f ~ g ∘ q` is [contractible](foundation-core.contractible-types.md). In other words, it asserts that any nullifying group homomorphism `f : G → H` extends uniquely along `q`:
+
+```text
+     G
+    | \
+  q |  \ f
+    |   \
+    V    V
+   G/N -> H.
+       ∃!
+```
 
 ```agda
 module _
