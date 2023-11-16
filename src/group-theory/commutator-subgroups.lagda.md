@@ -10,6 +10,7 @@ module group-theory.commutator-subgroups where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
@@ -172,19 +173,34 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
-  preserves-commutator-subgroup-hom-Group' :
+  contains-image-commutator-subgroup-hom-Group :
     leq-Subgroup H
       ( im-hom-Subgroup G H f (commutator-subgroup-Group G))
       ( commutator-subgroup-Group H)
-  preserves-commutator-subgroup-hom-Group' =
-    {!!}
+  contains-image-commutator-subgroup-hom-Group =
+    leq-subgroup-is-subgroup-generated-by-family-of-elements-Group H
+      ( map-hom-Group G H f ∘ family-of-commutators-Group G)
+      ( im-hom-Subgroup G H f (commutator-subgroup-Group G))
+      ( is-subgroup-generated-by-family-of-elements-image-subgroup-family-of-elements-Group
+        ( G)
+        ( H)
+        ( f)
+        ( family-of-commutators-Group G))
+      ( commutator-subgroup-Group H)
+      ( λ x →
+        is-closed-under-eq-commutator-subgroup-Group' H
+          ( contains-commutator-commutator-subgroup-Group H _ _)
+          ( preserves-commutator-hom-Group G H f))
 
   preserves-commutator-subgroup-hom-Group :
     leq-Subgroup G
       ( commutator-subgroup-Group G)
       ( pullback-Subgroup G H f (commutator-subgroup-Group H))
-  preserves-commutator-subgroup-hom-Group x p =
-    preserves-order-subgroup-subset-Group H {!!} {!!} {!!} {!!} {!!}
+  preserves-commutator-subgroup-hom-Group =
+    forward-implication-is-image-subgroup-im-hom-Subgroup G H f
+      ( commutator-subgroup-Group G)
+      ( commutator-subgroup-Group H)
+      ( contains-image-commutator-subgroup-hom-Group)
 ```
 
 ## External links
