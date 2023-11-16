@@ -77,6 +77,14 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
+  emb-prop-map : prop-map A B → A ↪ B
+  pr1 (emb-prop-map (f , p)) = f
+  pr2 (emb-prop-map (f , p)) = is-emb-is-prop-map p
+
+  prop-map-emb : A ↪ B → prop-map A B
+  pr1 (prop-map-emb (f , p)) = f
+  pr2 (prop-map-emb (f , p)) = is-prop-map-is-emb p
+
   is-prop-map-emb : (f : A ↪ B) → is-prop-map (map-emb f)
   is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
 
