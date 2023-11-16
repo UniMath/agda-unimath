@@ -20,6 +20,7 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks-subtypes
+open import foundation.singleton-subtypes
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -32,6 +33,7 @@ open import group-theory.normal-subgroups
 open import group-theory.pullbacks-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
+open import group-theory.trivial-subgroups
 
 open import lists.concatenation-lists
 open import lists.lists
@@ -273,10 +275,10 @@ module _
       ( H s K)
       ( contains-formal-combinations-Subgroup U H c)
 
-  backward-implication-is-subgroup-generated-by-subset-subgroup-subset-Group :
+  leq-subgroup-subset-Group :
     {l : Level} (U : Subgroup l G) → (S ⊆ subset-Subgroup G U) →
     leq-Subgroup G subgroup-subset-Group U
-  backward-implication-is-subgroup-generated-by-subset-subgroup-subset-Group
+  leq-subgroup-subset-Group
     U K x H =
     apply-universal-property-trunc-Prop H (subset-Subgroup G U x) P
     where
@@ -296,7 +298,7 @@ module _
     S ⊆ T →
     leq-Subgroup G (subgroup-subset-Group G S) (subgroup-subset-Group G T)
   preserves-order-subgroup-subset-Group S T H =
-    backward-implication-is-subgroup-generated-by-subset-subgroup-subset-Group
+    leq-subgroup-subset-Group
       ( G)
       ( S)
       ( subgroup-subset-Group G T)
@@ -351,8 +353,7 @@ module _
       ( H)
       ( contains-subset-subgroup-subset-Group G S)
   pr2 (is-subgroup-generated-by-subset-subgroup-subset-Group S U) =
-    backward-implication-is-subgroup-generated-by-subset-subgroup-subset-Group
-      G S U
+    leq-subgroup-subset-Group G S U
 
   subgroup-subset-galois-connection-Group :
     galois-connection-Large-Poset
@@ -592,4 +593,28 @@ module _
       ( subgroup-subset-Group G S)
       ( subgroup-subset-Group H (im-subtype (map-hom-Group G H f) S))
       ( compute-image-subgroup-subset-Group S)
+```
+
+### The subgroup `⟨S⟩` is trivial if and only if `S ⊆ {e}`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (S : subset-Group l2 G)
+  where
+
+  is-trivial-subgroup-subset-Group :
+    S ⊆ subtype-standard-singleton-subtype (set-Group G) (unit-Group G) →
+    is-trivial-Subgroup G (subgroup-subset-Group G S)
+  is-trivial-subgroup-subset-Group =
+    leq-subgroup-subset-Group G S (trivial-Subgroup G)
+
+  leq-singleton-subtype-unit-is-trivial-subgroup-subset-Group :
+    is-trivial-Subgroup G (subgroup-subset-Group G S) →
+    S ⊆ subtype-standard-singleton-subtype (set-Group G) (unit-Group G)
+  leq-singleton-subtype-unit-is-trivial-subgroup-subset-Group H =
+    transitive-leq-subtype S
+      ( subset-subgroup-subset-Group G S)
+      ( subtype-standard-singleton-subtype (set-Group G) (unit-Group G))
+      ( H)
+      ( contains-subset-subgroup-subset-Group G S)
 ```

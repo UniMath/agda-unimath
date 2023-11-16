@@ -8,9 +8,9 @@ module group-theory.category-of-abelian-groups where
 
 ```agda
 open import category-theory.categories
+open import category-theory.full-large-subcategories
 open import category-theory.functors-large-categories
 open import category-theory.functors-large-precategories
-open import category-theory.full-large-subcategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories

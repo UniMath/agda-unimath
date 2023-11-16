@@ -22,7 +22,7 @@ open import foundation.universe-levels
 **Semigroups** are [sets](foundation-core.sets.md) equipped with an associative
 binary operation.
 
-## Definition
+## Definitions
 
 ```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l
@@ -100,7 +100,7 @@ module _
       ( inv (associative-mul-Semigroup _ _ _)))
 ```
 
-### Equip a type with the structure of a semigroup
+### The structure of a semigroup
 
 ```agda
 structure-semigroup :

@@ -203,6 +203,13 @@ module _
       ( contains-image-commutator-subgroup-hom-Group)
 ```
 
+## See also
+
+- The fact that the commutator subgroup is
+  [trivial](group-theory.trivial-subgroups.md) if and only if the ambient group
+  is abelian is recorded in
+  [`group-theory.abelian-groups`](group-theory.abelian-groups.md).
+
 ## External links
 
 - [Commutator subgroup](https://ncatlab.org/nlab/show/commutator%20subgroup) at

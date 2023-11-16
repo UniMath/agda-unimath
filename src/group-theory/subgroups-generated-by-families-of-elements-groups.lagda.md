@@ -24,6 +24,7 @@ open import group-theory.images-of-group-homomorphisms
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.subsets-groups
+open import group-theory.trivial-subgroups
 ```
 
 </details>
@@ -270,4 +271,24 @@ module _
       ( map-hom-Group G H f ∘ x)
       ( im-hom-Subgroup G H f (subgroup-family-of-elements-Group G x))
       ( inv-iff ∘ compute-image-subgroup-family-of-elements-Group)
+```
+
+### The subgroup `⟨xᵢ⟩` is trivial if and only if `unit-Group G ＝ xᵢ` for every `i`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) {I : UU l2} (x : I → type-Group G)
+  where
+
+  is-trivial-subgroup-family-of-elements-Group :
+    ((i : I) → is-unit-Group' G (x i)) →
+    is-trivial-Subgroup G (subgroup-family-of-elements-Group G x)
+  is-trivial-subgroup-family-of-elements-Group =
+    leq-subgroup-family-of-elements-Group G x (trivial-Subgroup G)
+
+  is-family-of-units-is-trivial-subgroup-family-of-elements-Group :
+    is-trivial-Subgroup G (subgroup-family-of-elements-Group G x) →
+    (i : I) → is-unit-Group' G (x i)
+  is-family-of-units-is-trivial-subgroup-family-of-elements-Group H i =
+    H (x i) (contains-element-subgroup-family-of-elements-Group G x i)
 ```

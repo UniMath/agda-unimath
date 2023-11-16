@@ -131,14 +131,24 @@ module _
   unit-Group = pr1 is-unital-Group
 
   is-unit-Group : type-Group → UU l
-  is-unit-Group x = Id x unit-Group
+  is-unit-Group x = x ＝ unit-Group
+
+  is-unit-Group' : type-Group → UU l
+  is-unit-Group' x = unit-Group ＝ x
 
   is-prop-is-unit-Group : (x : type-Group) → is-prop (is-unit-Group x)
   is-prop-is-unit-Group x = is-set-type-Group x unit-Group
 
+  is-prop-is-unit-Group' : (x : type-Group) → is-prop (is-unit-Group' x)
+  is-prop-is-unit-Group' x = is-set-type-Group unit-Group x
+
   is-unit-group-Prop : type-Group → Prop l
   pr1 (is-unit-group-Prop x) = is-unit-Group x
   pr2 (is-unit-group-Prop x) = is-prop-is-unit-Group x
+
+  is-unit-group-Prop' : type-Group → Prop l
+  pr1 (is-unit-group-Prop' x) = is-unit-Group' x
+  pr2 (is-unit-group-Prop' x) = is-prop-is-unit-Group' x
 
   left-unit-law-mul-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x
@@ -198,6 +208,20 @@ module _
     mul-Group (mul-Group x z) (mul-Group y w)
   interchange-mul-mul-Group =
     interchange-mul-mul-Semigroup semigroup-Group
+```
+
+### The structure of a group
+
+```agda
+structure-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-group X =
+  Σ (structure-semigroup X) (λ p → is-group (compute-structure-semigroup X p))
+
+compute-structure-group :
+  {l1 : Level} → (X : UU l1) → structure-group X → Group l1
+pr1 (compute-structure-group X (p , q)) = compute-structure-semigroup X p
+pr2 (compute-structure-group X (p , q)) = q
 ```
 
 ## Properties
@@ -607,18 +631,4 @@ module _
   pointed-type-with-aut-Group : Pointed-Type-With-Aut l
   pr1 pointed-type-with-aut-Group = pointed-type-Group G
   pr2 pointed-type-with-aut-Group = equiv-mul-Group G g
-```
-
-### Equip a type with a structure of group
-
-```agda
-structure-group :
-  {l1 : Level} → UU l1 → UU l1
-structure-group X =
-  Σ (structure-semigroup X) (λ p → is-group (compute-structure-semigroup X p))
-
-compute-structure-group :
-  {l1 : Level} → (X : UU l1) → structure-group X → Group l1
-pr1 (compute-structure-group X (p , q)) = compute-structure-semigroup X p
-pr2 (compute-structure-group X (p , q)) = q
 ```

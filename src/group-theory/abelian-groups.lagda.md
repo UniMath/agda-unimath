@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -25,10 +26,15 @@ open import foundation.universe-levels
 
 open import group-theory.central-elements-groups
 open import group-theory.commutative-monoids
+open import group-theory.commutator-subgroups
+open import group-theory.commutators-of-elements-groups
 open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
+open import group-theory.subgroups
+open import group-theory.subgroups-generated-by-families-of-elements-groups
+open import group-theory.trivial-subgroups
 
 open import lists.concatenation-lists
 open import lists.lists
@@ -120,6 +126,9 @@ module _
   is-zero-Ab : type-Ab → UU l
   is-zero-Ab = is-unit-Group group-Ab
 
+  is-zero-Ab' : type-Ab → UU l
+  is-zero-Ab' = is-unit-Group' group-Ab
+
   is-prop-is-zero-Ab : (x : type-Ab) → is-prop (is-zero-Ab x)
   is-prop-is-zero-Ab = is-prop-is-unit-Group group-Ab
 
@@ -194,6 +203,20 @@ module _
   transpose-eq-neg-Ab' = transpose-eq-inv-Group' group-Ab
 ```
 
+### The structure of an abelian group
+
+```agda
+structure-abelian-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-abelian-group X =
+  Σ (structure-group X) (λ p → is-abelian-Group (compute-structure-group X p))
+
+compute-structure-abelian-group :
+  {l1 : Level} → (X : UU l1) → structure-abelian-group X → Ab l1
+pr1 (compute-structure-abelian-group X (p , q)) = compute-structure-group X p
+pr2 (compute-structure-abelian-group X (p , q)) = q
+```
+
 ### Conjugation in an abelian group
 
 ```agda
@@ -212,6 +235,42 @@ module _
 
   conjugation-Ab' : (x : type-Ab A) → type-Ab A → type-Ab A
   conjugation-Ab' = conjugation-Group' (group-Ab A)
+```
+
+### Commutators in an abelian group
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  commutator-Ab : type-Ab A → type-Ab A → type-Ab A
+  commutator-Ab x y = commutator-Group (group-Ab A) x y
+```
+
+### The commutator subgroup of an abelian group
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  family-of-commutators-Ab : type-Ab A × type-Ab A → type-Ab A
+  family-of-commutators-Ab = family-of-commutators-Group (group-Ab A)
+
+  commutator-subgroup-Ab : Subgroup l (group-Ab A)
+  commutator-subgroup-Ab = commutator-subgroup-Group (group-Ab A)
+```
+
+### Any group element yields a type equipped with an automorphism
+
+```agda
+module _
+  {l : Level} (A : Ab l) (a : type-Ab A)
+  where
+
+  pointed-type-with-aut-Ab : Pointed-Type-With-Aut l
+  pointed-type-with-aut-Ab = pointed-type-with-aut-Group (group-Ab A) a
 ```
 
 ## Properties
@@ -648,27 +707,80 @@ module _
   every-element-central-is-abelian-Group = id
 ```
 
-### Any group element yields a type equipped with an automorphism
+### A group is abelian if and only if every commutator is equal to the unit
 
 ```agda
 module _
-  {l : Level} (A : Ab l) (a : type-Ab A)
+  {l : Level} (G : Group l)
   where
 
-  pointed-type-with-aut-Ab : Pointed-Type-With-Aut l
-  pointed-type-with-aut-Ab = pointed-type-with-aut-Group (group-Ab A) a
+  is-abelian-is-unit-commutator-Group :
+    ((x y : type-Group G) → is-unit-Group G (commutator-Group G x y)) →
+    is-abelian-Group G
+  is-abelian-is-unit-commutator-Group H x y =
+    eq-is-unit-right-div-Group G (H x y)
+
+  is-abelian-is-unit-commutator-Group' :
+    ((x y : type-Group G) → is-unit-Group' G (commutator-Group G x y)) →
+    is-abelian-Group G
+  is-abelian-is-unit-commutator-Group' H x y =
+    eq-is-unit-right-div-Group G (inv (H x y))
+
+  is-unit-commutator-is-abelian-Group :
+    is-abelian-Group G →
+    (x y : type-Group G) → is-unit-Group G (commutator-Group G x y)
+  is-unit-commutator-is-abelian-Group H x y =
+    is-unit-right-div-eq-Group G (H x y)
+
+  is-unit-commutator-is-abelian-Group' :
+    is-abelian-Group G →
+    (x y : type-Group G) → is-unit-Group' G (commutator-Group G x y)
+  is-unit-commutator-is-abelian-Group' H x y =
+    inv (is-unit-right-div-eq-Group G (H x y))
+
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-zero-commutator-Ab :
+    (x y : type-Ab A) → is-zero-Ab A (commutator-Ab A x y)
+  is-zero-commutator-Ab =
+    is-unit-commutator-is-abelian-Group (group-Ab A) (commutative-add-Ab A)
+
+  is-zero-commutator-Ab' :
+    (x y : type-Ab A) → is-zero-Ab' A (commutator-Ab A x y)
+  is-zero-commutator-Ab' =
+    is-unit-commutator-is-abelian-Group' (group-Ab A) (commutative-add-Ab A)
 ```
 
-### Equip a type with a structure of abelian groups
+### A group is abelian if and only if its commutator subgroup is trivial
 
 ```agda
-structure-abelian-group :
-  {l1 : Level} → UU l1 → UU l1
-structure-abelian-group X =
-  Σ (structure-group X) (λ p → is-abelian-Group (compute-structure-group X p))
+module _
+  {l : Level} (G : Group l)
+  where
 
-compute-structure-abelian-group :
-  {l1 : Level} → (X : UU l1) → structure-abelian-group X → Ab l1
-pr1 (compute-structure-abelian-group X (p , q)) = compute-structure-group X p
-pr2 (compute-structure-abelian-group X (p , q)) = q
+  is-abelian-is-trivial-commutator-subgroup-Group :
+    is-trivial-Subgroup G (commutator-subgroup-Group G) →
+    is-abelian-Group G
+  is-abelian-is-trivial-commutator-subgroup-Group H =
+    is-abelian-is-unit-commutator-Group' G
+      ( λ x y →
+        is-family-of-units-is-trivial-subgroup-family-of-elements-Group G
+          ( family-of-commutators-Group G)
+          ( H)
+          ( x , y))
+
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    is-trivial-commutator-subgroup-Ab :
+      is-trivial-Subgroup (group-Ab A) (commutator-subgroup-Ab A)
+    is-trivial-commutator-subgroup-Ab =
+      is-trivial-subgroup-family-of-elements-Group
+        ( group-Ab A)
+        ( family-of-commutators-Ab A)
+        ( λ (x , y) → is-zero-commutator-Ab' A x y)
 ```

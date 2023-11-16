@@ -24,18 +24,6 @@ it only contains the unit element of `G`.
 
 ## Definitions
 
-### Trivial subgroups
-
-```agda
-module _
-  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
-  where
-
-  is-trivial-Subgroup : UU (l1 ⊔ l2)
-  is-trivial-Subgroup =
-    (x : type-Group G) → is-in-Subgroup G H x → x ＝ unit-Group G
-```
-
 ### The trivial subgroup
 
 ```agda
@@ -44,10 +32,21 @@ module _
   where
 
   trivial-Subgroup : Subgroup l1 G
-  pr1 trivial-Subgroup x = is-unit-group-Prop G x
+  pr1 trivial-Subgroup x = is-unit-group-Prop' G x
   pr1 (pr2 trivial-Subgroup) = refl
   pr1 (pr2 (pr2 trivial-Subgroup)) refl refl =
-    left-unit-law-mul-Group G (unit-Group G)
+    inv (left-unit-law-mul-Group G (unit-Group G))
   pr2 (pr2 (pr2 trivial-Subgroup)) refl =
-    inv-unit-Group G
+    inv (inv-unit-Group G)
+```
+
+### The predicate of being a trivial subgroup
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
+  where
+
+  is-trivial-Subgroup : UU (l1 ⊔ l2)
+  is-trivial-Subgroup = leq-Subgroup G H (trivial-Subgroup G)
 ```

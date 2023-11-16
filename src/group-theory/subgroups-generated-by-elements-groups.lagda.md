@@ -27,6 +27,7 @@ open import group-theory.integer-powers-of-elements-groups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.subsets-groups
+open import group-theory.trivial-subgroups
 ```
 
 </details>
@@ -374,4 +375,28 @@ module _
       ( map-hom-Group G H f x)
       ( im-hom-Subgroup G H f (subgroup-element-Group G x))
       ( inv-iff ∘ compute-image-subgroup-element-Group)
+```
+
+### The subgroup `⟨x⟩` is trivial if and only if `unit-Group G ＝ x`
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  is-trivial-subgroup-unit-Group :
+    is-trivial-Subgroup G (subgroup-element-Group G (unit-Group G))
+  is-trivial-subgroup-unit-Group =
+    leq-subgroup-element-Group G (unit-Group G) (trivial-Subgroup G) refl
+
+  is-trivial-subgroup-element-Group :
+    (x : type-Group G) →
+    is-unit-Group' G x → is-trivial-Subgroup G (subgroup-element-Group G x)
+  is-trivial-subgroup-element-Group ._ refl = is-trivial-subgroup-unit-Group
+
+  is-unit-is-trivial-subgroup-element-Group :
+    (x : type-Group G) →
+    is-trivial-Subgroup G (subgroup-element-Group G x) → is-unit-Group' G x
+  is-unit-is-trivial-subgroup-element-Group x H =
+    H x (contains-element-subgroup-element-Group G x)
 ```

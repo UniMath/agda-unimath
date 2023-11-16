@@ -181,6 +181,14 @@ module _
   pr2 abelianization-Group = commutative-add-abelianization-Group
 ```
 
+### The universal property of abelianization
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+```
+
 ### The abelianization functor
 
 ```agda
@@ -257,7 +265,7 @@ equiv-is-adjoint-pair-Large-Precategory
 naturality-equiv-is-adjoint-pair-Large-Precategory
   is-adjoint-pair-abelianization-forgetful-functor-Ab =
   {!!}
-  
+
 abelianization-adjunction-Group :
   Adjunction-Large-Category
     ( λ l → l)

@@ -85,13 +85,16 @@ module _
 
 ### The identity reflecting group homomorphism
 
-We define two variations of the identity reflecting group homomorphism. We will define the standard identity reflecting group homomorphism, but we will also we define a generalized version which takes as an argument an arbitrary element of
+We define two variations of the identity reflecting group homomorphism. We will
+define the standard identity reflecting group homomorphism, but we will also we
+define a generalized version which takes as an argument an arbitrary element of
 
 ```text
   reflects-normal-subgroup-hom-Group G G N N (id-hom-Group G).
 ```
 
-The purpose is that in functoriality proofs, the proof that the identity homomorphism is reflecting is not always the standard one.
+The purpose is that in functoriality proofs, the proof that the identity
+homomorphism is reflecting is not always the standard one.
 
 ```agda
 module _
