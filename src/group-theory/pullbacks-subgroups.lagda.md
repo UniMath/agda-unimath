@@ -13,8 +13,10 @@ open import foundation.powersets
 open import foundation.pullbacks-subtypes
 open import foundation.universe-levels
 
+open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.normal-subgroups
 open import group-theory.pullbacks-subsemigroups
 open import group-theory.subgroups
 open import group-theory.subsemigroups
@@ -202,4 +204,31 @@ module _
         ( powerset-Large-Poset (type-Group G))
         ( subset-subgroup-hom-large-poset-Group G)
         ( pullback-subgroup-hom-large-poset-hom-Group G H f))
+```
+
+### Pullbacks of normal subgroups are normal
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  (N : Normal-Subgroup l3 H)
+  where
+
+  subgroup-pullback-Normal-Subgroup : Subgroup l3 G
+  subgroup-pullback-Normal-Subgroup =
+    pullback-Subgroup G H f (subgroup-Normal-Subgroup H N)
+
+  is-normal-pullback-Normal-Subgroup :
+    is-normal-Subgroup G subgroup-pullback-Normal-Subgroup
+  is-normal-pullback-Normal-Subgroup x (y , n) =
+    is-closed-under-eq-Normal-Subgroup' H N
+      ( is-normal-Normal-Subgroup H N
+        ( map-hom-Group G H f x)
+        ( map-hom-Group G H f y)
+        ( n))
+      ( preserves-conjugation-hom-Group G H f)
+
+  pullback-Normal-Subgroup : Normal-Subgroup l3 G
+  pr1 pullback-Normal-Subgroup = subgroup-pullback-Normal-Subgroup
+  pr2 pullback-Normal-Subgroup = is-normal-pullback-Normal-Subgroup
 ```

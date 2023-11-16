@@ -391,3 +391,19 @@ module _
   preserves-integer-powers-conjugation-Group k g =
     preserves-integer-powers-hom-Group G G (conjugation-hom-Group g) k
 ```
+
+### Any group homomorphism preserves conjugation
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  preserves-conjugation-hom-Group :
+    {x y : type-Group G} →
+    map-hom-Group G H f (conjugation-Group G x y) ＝
+    conjugation-Group H (map-hom-Group G H f x) (map-hom-Group G H f y)
+  preserves-conjugation-hom-Group =
+    ( preserves-right-div-hom-Group G H f) ∙
+    ( ap (mul-Group' H _) (preserves-mul-hom-Group G H f))
+```
