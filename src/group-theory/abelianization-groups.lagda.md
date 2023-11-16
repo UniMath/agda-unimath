@@ -187,6 +187,14 @@ module _
 module _
   {l1 : Level} (G : Group l1)
   where
+
+  is-quotient-group-abelianization-Group :
+    universal-property-quotient-Group G
+      ( commutator-normal-subgroup-Group G)
+      ( group-abelianization-Group G)
+      ( nullifying-quotient-hom-Group G (commutator-normal-subgroup-Group G))
+  is-quotient-group-abelianization-Group =
+    is-quotient-group-quotient-Group G (commutator-normal-subgroup-Group G)
 ```
 
 ### The abelianization functor
@@ -287,7 +295,7 @@ is-adjoint-pair-Adjunction-Large-Precategory
 
 - [Abelianization](https://groupprops.subwiki.org/wiki/Abelianization) at
   Groupprops
-- [Abelianization](https://ncatlab.org/nlab/show/abelianization) at nlab
+- [Abelianization](https://ncatlab.org/nlab/show/abelianization) at $n$lab
 - [Abelianization](https://en.wikipedia.org/wiki/Commutator_subgroup#Abelianization)
   at Wikipedia
 - [Abelianization](https://mathworld.wolfram.com/Abelianization.html) at Wolfram

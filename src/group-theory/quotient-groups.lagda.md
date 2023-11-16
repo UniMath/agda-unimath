@@ -60,7 +60,9 @@ that the map
 
 from group homomorphisms `G/N → H` to
 [`N`-nullifying group homomorphism](group-theory.nullifying-group-homomorphisms.md)
-`G → H` is an [equivalence](founcation-core.equivalences.md).
+`G → H` is an [equivalence](founcation-core.equivalences.md). Recall that a
+group homomorphism is said to be `N`-nullifying if `N` is contained in the
+[kernel](group-theory.kernels.md) of `f`.
 
 ## Definitions
 
@@ -91,13 +93,21 @@ universal-property-quotient-Group G N Q q =
 
 #### The quotient map and the underlying set of the quotient group
 
-The underlying [set](foundation-core.sets.md) of the quotient group is defined as the [set quotient](foundation.set-quotiens.md) of the [equivalence relation](foundation.equivalence.relations.md) induced by the normal subgroup `N` of `G`. By this construction we immediately obtain the quotient map `q : G → G/N`, which will be [surjective](foundation.surjective-maps.md) and [effective](foundation.effective-maps-equivalence-relations.md). This means that the quotient group satisfies the condition
+The underlying [set](foundation-core.sets.md) of the quotient group is defined
+as the [set quotient](foundation.set-quotiens.md) of the
+[equivalence relation](foundation.equivalence.relations.md) induced by the
+normal subgroup `N` of `G`. By this construction we immediately obtain the
+quotient map `q : G → G/N`, which will be
+[surjective](foundation.surjective-maps.md) and
+[effective](foundation.effective-maps-equivalence-relations.md). This means that
+the quotient group satisfies the condition
 
 ```text
-  x⁻¹y ∈ N ↔ q x ＝ q y. 
+  x⁻¹y ∈ N ↔ q x ＝ q y.
 ```
 
-We will conclude later that this implies that the quotient map nullifies the normal subgroup `N`.
+We will conclude later that this implies that the quotient map nullifies the
+normal subgroup `N`.
 
 ```agda
 module _
@@ -171,12 +181,14 @@ module _
 
 #### The group structure on the quotient group
 
-We now introduce the group structure on the underlying set of the quotient group. The multiplication, unit, and inverses are defined by the universal property of the set quotient as the unique maps equipped with identifications
+We now introduce the group structure on the underlying set of the quotient
+group. The multiplication, unit, and inverses are defined by the universal
+property of the set quotient as the unique maps equipped with identifications
 
 ```text
-   qx qy ＝ q(xy)
-       1 ＝ q1
-  (qx)⁻¹ =  q(x⁻¹)
+  (qx)(qy) ＝ q(xy)
+         1 ＝ q1
+    (qx)⁻¹ =  q(x⁻¹)
 ```
 
 The group laws follow by the induction principle for set quotients.
@@ -374,7 +386,9 @@ module _
 
 #### The quotient homomorphism into the quotient group
 
-The quotient map `q : G → G/N` preserves the group structure and nullifies the normal subgroup `N`. Both these claims follow fairly directly from the definitions of the quotient map `q` and the  group operations on `G/N`.
+The quotient map `q : G → G/N` preserves the group structure and nullifies the
+normal subgroup `N`. Both these claims follow fairly directly from the
+definitions of the quotient map `q` and the group operations on `G/N`.
 
 ```agda
 module _
@@ -422,7 +436,9 @@ module _
 
 #### Induction on quotient groups
 
-The **induction principle** of quotient groups asserts that for any property `P` of elements of the quotient group `G/N`, in order to show that `P x` holds for all `x : G/N` it suffices to show that `P qy` holds for all `y : G`. 
+The **induction principle** of quotient groups asserts that for any property `P`
+of elements of the quotient group `G/N`, in order to show that `P x` holds for
+all `x : G/N` it suffices to show that `P qy` holds for all `y : G`.
 
 ```agda
 module _
@@ -450,7 +466,10 @@ module _
 
 #### Double induction on quotient groups
 
-The **double induction principle** of quotient groups asserts that for any property `P` of pairs of elements of the quotient group `G/N`, in order to show that `P x y` holds for all `x y : G/N` it suffices to show that `P qu qv` holds for all `u v : G`.
+The **double induction principle** of quotient groups asserts that for any
+property `P` of pairs of elements of the quotient group `G/N`, in order to show
+that `P x y` holds for all `x y : G/N` it suffices to show that `P qu qv` holds
+for all `u v : G`.
 
 ```agda
 module _
@@ -488,7 +507,8 @@ module _
 
 #### The universal property of the quotient group
 
-The universal property of the quotient group `G/N` asserts that for any group `H` the precomposition function
+The universal property of the quotient group `G/N` asserts that for any group
+`H` the precomposition function
 
 ```text
   hom-Group G/N H → nullifying-hom-Group G H N
@@ -603,7 +623,12 @@ module _
 
 ### The unique mapping property of the quotient group
 
-The unique mapping property of the quotient group `G/N` asserts that for any group `H` and any `N`-nullifying group homomorphism `f : G → H`, the type of group homomorphisms `g : G/N → H` such that `f ~ g ∘ q` is [contractible](foundation-core.contractible-types.md). In other words, it asserts that any nullifying group homomorphism `f : G → H` extends uniquely along `q`:
+The unique mapping property of the quotient group `G/N` asserts that for any
+group `H` and any `N`-nullifying group homomorphism `f : G → H`, the type of
+group homomorphisms `g : G/N → H` such that `f ~ g ∘ q` is
+[contractible](foundation-core.contractible-types.md). In other words, it
+asserts that any nullifying group homomorphism `f : G → H` extends uniquely
+along `q`:
 
 ```text
      G
