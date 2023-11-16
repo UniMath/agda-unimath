@@ -237,7 +237,7 @@ module _
     im-hom-subsemigroup-hom-Large-Poset
   upper-adjoint-galois-connection-Large-Poset
     image-pullback-galois-connection-Subsemigroup =
-    pullback-subsemigroup-hom-Large-Poset G H f
+    pullback-hom-large-poset-Subsemigroup G H f
   adjoint-relation-galois-connection-Large-Poset
     image-pullback-galois-connection-Subsemigroup K =
     is-image-subsemigroup-im-hom-Subsemigroup G H f K
