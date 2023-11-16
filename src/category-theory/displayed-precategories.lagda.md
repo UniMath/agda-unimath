@@ -8,20 +8,20 @@ module category-theory.displayed-precategories where
 
 ```agda
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.dependent-composition-operations-over-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
-open import category-theory.dependent-composition-operations-over-precategories
 open import category-theory.set-magmoids
 
 open import foundation.cartesian-product-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.function-types
-open import foundation.iterated-dependent-product-types
 open import foundation.identity-types
-open import foundation.dependent-identifications
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
-open import foundation.transport-along-identifications
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
