@@ -69,11 +69,13 @@ module _
 If the map `f : A → B` is epi, then the commutative square
 
 ```text
-      f
-    A → B
-  f ↓   ↓ id
-    B → B
-      id
+        f
+    A -----> B
+    |        |
+  f |        | id
+    V      ⌜ V
+    B -----> B
+        id
 ```
 
 is a pushout square.

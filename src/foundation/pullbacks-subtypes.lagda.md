@@ -30,7 +30,7 @@ be `T ∘ f`. This fits in a [pullback diagram](foundation-core.pullbacks.md)
 ```text
                  π₂
   pullback f T -----> T
-       |              |
+       | ⌟            |
     π₁ |              | i
        |              |
        V              V
