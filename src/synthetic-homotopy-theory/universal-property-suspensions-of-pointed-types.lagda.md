@@ -26,8 +26,8 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.universal-property-suspensions
 ```

@@ -348,7 +348,6 @@ module _
       ( equiv-Π-equiv-family e)
       ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
       ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
-
 ```
 
 ## See also

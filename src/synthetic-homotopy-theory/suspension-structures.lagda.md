@@ -187,21 +187,21 @@ module _
             ( p ∙ meridian-suspension-structure c' x)))
 
   north-htpy-suspension-structure :
-    {c c' : suspension-structure X Z} → 
+    {c c' : suspension-structure X Z} →
     htpy-suspension-structure c c' → north-suspension-structure c ＝ north-suspension-structure c'
   north-htpy-suspension-structure = pr1
 
   south-htpy-suspension-structure :
-    {c c' : suspension-structure X Z} → 
+    {c c' : suspension-structure X Z} →
     htpy-suspension-structure c c' → south-suspension-structure c ＝ south-suspension-structure c'
   south-htpy-suspension-structure = pr1 ∘ pr2
 
   meridian-htpy-suspension-structure :
-    {c c' : suspension-structure X Z} → 
+    {c c' : suspension-structure X Z} →
     (h : htpy-suspension-structure c c') →
     ( x : X) →
       ( meridian-suspension-structure c x ∙ (south-htpy-suspension-structure h)) ＝
-      ( ( north-htpy-suspension-structure h) ∙ meridian-suspension-structure c' x)   
+      ( ( north-htpy-suspension-structure h) ∙ meridian-suspension-structure c' x)
   meridian-htpy-suspension-structure = pr2 ∘ pr2
 
   extensionality-suspension-structure :
@@ -254,7 +254,7 @@ module _
       ( is-section-map-inv-equiv
         ( extensionality-suspension-structure c c)
         ( refl-htpy-suspension-structure))
-        
+
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c : suspension-structure X Z}
   where
@@ -317,9 +317,9 @@ module _
       ( refl , inv-htpy right-unit-htpy)
       ( λ n' → id-equiv)
       ( extensionality-Σ
-        ( λ h' q → 
+        ( λ h' q →
           (x : X) →
-            ( (identification-left-whisk (meridian-suspension-structure c x) q) ∙ (h' x)) ＝
+            ( ( identification-left-whisk (meridian-suspension-structure c x) q) ∙ (h' x)) ＝
             ( (h x) ∙ identification-right-whisk refl (meridian-suspension-structure c' x)))
         ( refl)
         ( inv-htpy right-unit-htpy)
@@ -357,12 +357,10 @@ module _
         ( meridian-suspension-structure c' x)))
   meridian-htpy-in-htpy-suspension-structure = pr2 ∘ pr2
 
-
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
   {c c' : suspension-structure X Z} {h h' : htpy-suspension-structure c c'}
   where
-
 
   htpy-eq-htpy-suspension-structure :
     h ＝ h' → htpy-in-htpy-suspension-structure h h'

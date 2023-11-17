@@ -298,7 +298,7 @@ module _
       htpy-equiv
         ( inv-equiv (equiv-tot e))
         ( equiv-tot (λ x → inv-equiv (e x)))
-  compute-inv-equiv-equiv-tot e (a , c)  =
+  compute-inv-equiv-equiv-tot e (a , c) =
     is-injective-map-equiv
       ( equiv-tot e)
       ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙
