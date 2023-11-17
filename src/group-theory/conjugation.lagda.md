@@ -80,16 +80,16 @@ module _
         ( ap-mul-Group G
           ( associative-mul-Group G g h x)
           ( distributive-inv-mul-Group G)) ∙
-        ( ( inv
-            ( associative-mul-Group G
-              ( mul-Group G g (mul-Group G h x))
-              ( inv-Group G h)
-              ( inv-Group G g))) ∙
-          ( ap
-            ( mul-Group' G (inv-Group G g))
-            ( associative-mul-Group G g
-              ( mul-Group G h x)
-              ( inv-Group G h)))))
+        ( inv
+          ( associative-mul-Group G
+            ( mul-Group G g (mul-Group G h x))
+            ( inv-Group G h)
+            ( inv-Group G g))) ∙
+        ( ap
+          ( mul-Group' G (inv-Group G g))
+          ( associative-mul-Group G g
+            ( mul-Group G h x)
+            ( inv-Group G h))))
 ```
 
 ### The predicate on subsets of groups of being closed under conjugation
@@ -134,14 +134,14 @@ module _
     ( ap-mul-Group G
       ( associative-mul-Group G x y z)
       ( distributive-inv-mul-Group G)) ∙
-    ( ( inv
-        ( associative-mul-Group G
-          ( mul-Group G x (mul-Group G y z))
-          ( inv-Group G y)
-          ( inv-Group G x))) ∙
-      ( ap
-        ( mul-Group' G (inv-Group G x))
-        ( associative-mul-Group G x (mul-Group G y z) (inv-Group G y))))
+    ( inv
+      ( associative-mul-Group G
+        ( mul-Group G x (mul-Group G y z))
+        ( inv-Group G y)
+        ( inv-Group G x))) ∙
+    ( ap
+      ( mul-Group' G (inv-Group G x))
+      ( associative-mul-Group G x (mul-Group G y z) (inv-Group G y)))
 
   compute-conjugation-mul-Group' :
     (x y : type-Group G) →
@@ -155,18 +155,18 @@ module _
           ( inv-Group G y)
           ( inv-Group G x)
           ( z)))) ∙
-    ( ( associative-mul-Group G
+    ( associative-mul-Group G
+      ( inv-Group G y)
+      ( left-div-Group G x z)
+      ( mul-Group G x y)) ∙
+    ( ap
+      ( left-div-Group G y)
+      ( inv (associative-mul-Group G (left-div-Group G x z) x y))) ∙
+    ( inv
+      ( associative-mul-Group G
         ( inv-Group G y)
-        ( left-div-Group G x z)
-        ( mul-Group G x y)) ∙
-      ( ( ap
-          ( left-div-Group G y)
-          ( inv (associative-mul-Group G (left-div-Group G x z) x y))) ∙
-        ( inv
-          ( associative-mul-Group G
-            ( inv-Group G y)
-            ( conjugation-Group' G x z)
-            ( y)))))
+        ( conjugation-Group' G x z)
+        ( y)))
 
   htpy-conjugation-Group :
     (x : type-Group G) →
@@ -208,10 +208,10 @@ module _
     mul-Group G (conjugation-Group G x y) x ＝ mul-Group G x y
   left-conjugation-law-mul-Group x y =
     ( associative-mul-Group G (mul-Group G x y) (inv-Group G x) x) ∙
-    ( ( ap
-        ( mul-Group G (mul-Group G x y))
-        ( left-inverse-law-mul-Group G x)) ∙
-      ( right-unit-law-mul-Group G (mul-Group G x y)))
+    ( ap
+      ( mul-Group G (mul-Group G x y))
+      ( left-inverse-law-mul-Group G x)) ∙
+    ( right-unit-law-mul-Group G (mul-Group G x y))
 
   left-conjugation-law-mul-Group' :
     (x y : type-Group G) →
@@ -227,10 +227,10 @@ module _
   distributive-conjugation-mul-Group x y z =
     ( ap
       ( mul-Group' G (inv-Group G x))
-      ( ( ( inv (associative-mul-Group G x y z)) ∙
-          ( ap
-            ( mul-Group' G z)
-            ( inv (is-section-right-div-Group G x (mul-Group G x y))))) ∙
+      ( ( inv (associative-mul-Group G x y z)) ∙
+        ( ap
+          ( mul-Group' G z)
+          ( inv (is-section-right-div-Group G x (mul-Group G x y)))) ∙
         ( associative-mul-Group G
           ( conjugation-Group G x y)
           ( x)
@@ -249,13 +249,13 @@ module _
     ( ap
       ( inv-Group G)
       ( ( distributive-inv-mul-Group G) ∙
-        ( ( ap-mul-Group G
-            ( inv-inv-Group G x)
-            ( ( distributive-inv-mul-Group G) ∙
-              ( ap
-                ( mul-Group' G (inv-Group G x))
-                ( inv-inv-Group G y)))) ∙
-          ( inv (associative-mul-Group G x y ( inv-Group G x))))))
+        ( ap-mul-Group G
+          ( inv-inv-Group G x)
+          ( ( distributive-inv-mul-Group G) ∙
+            ( ap
+              ( mul-Group' G (inv-Group G x))
+              ( inv-inv-Group G y)))) ∙
+        ( inv (associative-mul-Group G x y ( inv-Group G x)))))
 
   conjugation-inv-Group' :
     (x y : type-Group G) →
@@ -263,14 +263,14 @@ module _
     inv-Group G (conjugation-Group' G x y)
   conjugation-inv-Group' x y =
     ( ap (mul-Group' G x) (inv (distributive-inv-mul-Group G))) ∙
-    ( ( ap
-        ( mul-Group G (inv-Group G (mul-Group G y x)))
-        ( inv (inv-inv-Group G x))) ∙
-      ( ( inv
-          ( distributive-inv-mul-Group G)) ∙
-        ( ap
-          ( inv-Group G)
-          ( inv (associative-mul-Group G (inv-Group G x) y x)))))
+    ( ap
+      ( mul-Group G (inv-Group G (mul-Group G y x)))
+      ( inv (inv-inv-Group G x))) ∙
+    ( inv
+      ( distributive-inv-mul-Group G)) ∙
+    ( ap
+      ( inv-Group G)
+      ( inv (associative-mul-Group G (inv-Group G x) y x)))
 
   conjugation-left-div-Group :
     (x y : type-Group G) →

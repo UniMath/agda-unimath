@@ -156,8 +156,8 @@ module _
     concatenate-eq-sim-eq-congruence-Group
       ( inv
         ( ( associative-mul-Group G x (inv-Group G y) y) ∙
-          ( ( ap (mul-Group G x) (left-inverse-law-mul-Group G y)) ∙
-            ( right-unit-law-mul-Group G x))))
+          ( ap (mul-Group G x) (left-inverse-law-mul-Group G y)) ∙
+          ( right-unit-law-mul-Group G x)))
       ( right-mul-congruence-Group H y)
       ( left-unit-law-mul-Group G y)
 
@@ -200,10 +200,10 @@ module _
             ( inv-Group G x)
             ( y)
             ( inv-Group G y)) ∙
-          ( ( ap
-              ( mul-Group G (inv-Group G x))
-              ( right-inverse-law-mul-Group G y)) ∙
-            ( right-unit-law-mul-Group G (inv-Group G x)))))
+          ( ap
+            ( mul-Group G (inv-Group G x))
+            ( right-inverse-law-mul-Group G y)) ∙
+          ( right-unit-law-mul-Group G (inv-Group G x))))
       ( symmetric-congruence-Group _ _
         ( right-mul-congruence-Group
           ( left-mul-congruence-Group (inv-Group G x) H)

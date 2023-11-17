@@ -65,8 +65,8 @@ module _
       subset-centralizer-subset-Group
   is-closed-under-multiplication-centralizer-subset-Group {x} {y} u v z s =
     ( compute-conjugation-mul-Group G x y z) ∙
-    ( ( ap (conjugation-Group G x) (v z s)) ∙
-      ( u z s))
+    ( ap (conjugation-Group G x) (v z s)) ∙
+    ( u z s)
 
   is-closed-under-inverses-centralizer-subset-Group :
     is-closed-under-inverses-subset-Group G subset-centralizer-subset-Group

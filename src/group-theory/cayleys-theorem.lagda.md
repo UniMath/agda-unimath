@@ -43,8 +43,8 @@ module _
   is-injective-map-Cayleys-theorem : is-injective map-Cayleys-theorem
   is-injective-map-Cayleys-theorem {x} {y} p =
     ( inv (right-unit-law-mul-Group G x)) ∙
-    ( ( htpy-eq-equiv p (unit-Group G)) ∙
-      ( right-unit-law-mul-Group G y))
+    ( htpy-eq-equiv p (unit-Group G)) ∙
+    ( right-unit-law-mul-Group G y)
 
   is-emb-map-Cayleys-theorem : is-emb map-Cayleys-theorem
   is-emb-map-Cayleys-theorem =

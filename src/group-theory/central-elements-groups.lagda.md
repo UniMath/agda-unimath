@@ -86,8 +86,8 @@ module _
     is-central-element-Group G (inv-Group G x)
   is-central-element-inv-Group {x} H y =
     ( inv (inv-left-div-Group G y x)) ∙
-    ( ( ap (inv-Group G) (inv (H (inv-Group G y)))) ∙
-      ( inv-right-div-Group G x y))
+    ( ap (inv-Group G) (inv (H (inv-Group G y)))) ∙
+    ( inv-right-div-Group G x y)
 ```
 
 ### The central elements are closed under conjugation

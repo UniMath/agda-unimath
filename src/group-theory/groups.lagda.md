@@ -186,7 +186,7 @@ module _
     Id (inv-Group unit-Group) unit-Group
   inv-unit-Group =
     ( inv (left-unit-law-mul-Group (inv-Group unit-Group))) ∙
-      ( right-inverse-law-mul-Group unit-Group)
+    ( right-inverse-law-mul-Group unit-Group)
 
   left-swap-mul-Group :
     {x y z : type-Group} → mul-Group x y ＝ mul-Group y x →

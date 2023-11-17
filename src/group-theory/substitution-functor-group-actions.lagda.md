@@ -153,7 +153,9 @@ module _
     ( pr2
       ( pr2
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)))
-    ( h , x) (h' , x') e =
+    ( h , x)
+    ( h' , x')
+    ( e) =
     apply-universal-property-trunc-Prop e
       ( pr1
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
@@ -171,7 +173,11 @@ module _
     ( pr2
       ( pr2
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)))
-    ( h , x) (h' , x') (h'' , x'') d e =
+    ( h , x)
+    ( h' , x')
+    ( h'' , x'')
+    ( d)
+    ( e) =
     apply-universal-property-trunc-Prop e
       ( pr1
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
@@ -190,14 +196,15 @@ module _
               ( ( ( ap
                     ( mul-Group' H h)
                     ( preserves-mul-hom-Group G H f)) ∙
-                  ( ( associative-mul-Group H
-                      ( map-hom-Group G H f g')
-                      ( map-hom-Group G H f g)
-                      ( h)) ∙
-                    ( ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
-                      ( p')))) ,
+                  ( associative-mul-Group H
+                    ( map-hom-Group G H f g')
+                    ( map-hom-Group G H f g)
+                    ( h)) ∙
+                  ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
+                  ( p')) ,
                 ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
-                  ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))))
+                  ( ap (mul-Abstract-Group-Action G X g') q) ∙
+                  ( q')))))
 
   set-left-adjoint-subst-Abstract-Group-Action :
     {l3 : Level} → Abstract-Group-Action G l3 →
@@ -205,14 +212,4 @@ module _
   set-left-adjoint-subst-Abstract-Group-Action X =
     equivalence-class-Set
       ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
-
-{-
-  obj-left-adjoint-subst-Abstract-Group-Action :
-    {l3 : Level} → Abstract-Group-Action G l3 →
-    Abstract-Group-Action H (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-  pr1 (obj-left-adjoint-subst-Abstract-Group-Action X) =
-    set-left-adjoint-subst-Abstract-Group-Action X
-  pr1 (pr2 (obj-left-adjoint-subst-Abstract-Group-Action X)) h = {!!}
-  pr2 (pr2 (obj-left-adjoint-subst-Abstract-Group-Action X)) = {!!}
--}
 ```

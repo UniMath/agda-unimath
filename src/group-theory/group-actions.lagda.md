@@ -91,8 +91,7 @@ module _
     (g : type-Group G) (x y : type-Abstract-Group-Action) →
     Id (mul-Abstract-Group-Action g x) y →
     Id x (mul-Abstract-Group-Action (inv-Group G g) y)
-  transpose-eq-mul-Abstract-Group-Action g x
-    .(mul-Abstract-Group-Action g x) refl =
+  transpose-eq-mul-Abstract-Group-Action g x ._ refl =
     ( inv
       ( ( ap (mul-Abstract-Group-Action' x) (left-inverse-law-mul-Group G g)) ∙
         ( preserves-unit-mul-Abstract-Group-Action x))) ∙

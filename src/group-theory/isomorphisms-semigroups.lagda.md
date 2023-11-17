@@ -243,13 +243,13 @@ module _
           ( mul-Semigroup G
             ( map-inv-is-equiv U x)
             ( map-inv-is-equiv U y)))
-        ( ( ( is-section-map-inv-is-equiv U (mul-Semigroup H x y)) ∙
-            ( ( ap
-                ( λ t → mul-Semigroup H t y)
-                ( inv (is-section-map-inv-is-equiv U x))) ∙
-              ( ap
-                ( mul-Semigroup H (f (map-inv-is-equiv U x)))
-                ( inv (is-section-map-inv-is-equiv U y))))) ∙
+        ( ( is-section-map-inv-is-equiv U (mul-Semigroup H x y)) ∙
+          ( ap
+            ( λ t → mul-Semigroup H t y)
+            ( inv (is-section-map-inv-is-equiv U x))) ∙
+          ( ap
+            ( mul-Semigroup H (f (map-inv-is-equiv U x)))
+            ( inv (is-section-map-inv-is-equiv U y))) ∙
           ( inv μ-f))
 ```
 

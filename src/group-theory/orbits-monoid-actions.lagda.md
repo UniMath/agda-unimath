@@ -146,8 +146,8 @@ module _
       ( element-hom-orbit-Monoid-Action g)
       ( element-hom-orbit-Monoid-Action f)
       ( x)) ∙
-    ( ( ap-mul-Monoid-Action M X (eq-hom-orbit-Monoid-Action f)) ∙
-      ( eq-hom-orbit-Monoid-Action g))
+    ( ap-mul-Monoid-Action M X (eq-hom-orbit-Monoid-Action f)) ∙
+    ( eq-hom-orbit-Monoid-Action g)
 
   associative-comp-hom-orbit-Monoid-Action :
     {x y z w : type-Monoid-Action M X} (h : hom-orbit-Monoid-Action z w)

@@ -302,8 +302,8 @@ module _
           ( add-quotient-Ab y x))
       ( λ x y →
         ( compute-add-quotient-Ab x y) ∙
-        ( ( ap map-quotient-hom-Ab (commutative-add-Ab A x y)) ∙
-          ( inv (compute-add-quotient-Ab y x))))
+        ( ap map-quotient-hom-Ab (commutative-add-Ab A x y)) ∙
+        ( inv (compute-add-quotient-Ab y x)))
 
   semigroup-quotient-Ab : Semigroup (l1 ⊔ l2)
   semigroup-quotient-Ab =

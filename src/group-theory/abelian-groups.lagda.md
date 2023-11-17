@@ -174,15 +174,15 @@ module _
     (a b c : type-Ab) → add-Ab (add-Ab a b) c ＝ add-Ab (add-Ab a c) b
   right-swap-add-Ab a b c =
     ( associative-add-Ab a b c) ∙
-    ( ( ap (add-Ab a) (commutative-add-Ab b c)) ∙
-      ( inv (associative-add-Ab a c b)))
+    ( ap (add-Ab a) (commutative-add-Ab b c)) ∙
+    ( inv (associative-add-Ab a c b))
 
   left-swap-add-Ab :
     (a b c : type-Ab) → add-Ab a (add-Ab b c) ＝ add-Ab b (add-Ab a c)
   left-swap-add-Ab a b c =
     ( inv (associative-add-Ab a b c)) ∙
-    ( ( ap (add-Ab' c) (commutative-add-Ab a b)) ∙
-      ( associative-add-Ab b a c))
+    ( ap (add-Ab' c) (commutative-add-Ab a b)) ∙
+    ( associative-add-Ab b a c)
 
   distributive-neg-add-Ab :
     (x y : type-Ab) →

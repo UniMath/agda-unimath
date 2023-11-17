@@ -78,8 +78,8 @@ module _
     mul-Semigroup y (mul-Semigroup x z)
   left-swap-mul-Semigroup H =
     ( inv (associative-mul-Semigroup _ _ _)) ∙
-    ( ( ap (mul-Semigroup' _) H) ∙
-      ( associative-mul-Semigroup _ _ _))
+    ( ap (mul-Semigroup' _) H) ∙
+    ( associative-mul-Semigroup _ _ _)
 
   right-swap-mul-Semigroup :
     {x y z : type-Semigroup} → mul-Semigroup y z ＝ mul-Semigroup z y →
@@ -87,8 +87,8 @@ module _
     mul-Semigroup (mul-Semigroup x z) y
   right-swap-mul-Semigroup H =
     ( associative-mul-Semigroup _ _ _) ∙
-    ( ( ap (mul-Semigroup _) H) ∙
-      ( inv (associative-mul-Semigroup _ _ _)))
+    ( ap (mul-Semigroup _) H) ∙
+    ( inv (associative-mul-Semigroup _ _ _))
 
   interchange-mul-mul-Semigroup :
     {x y z w : type-Semigroup} → mul-Semigroup y z ＝ mul-Semigroup z y →
@@ -96,8 +96,8 @@ module _
     mul-Semigroup (mul-Semigroup x z) (mul-Semigroup y w)
   interchange-mul-mul-Semigroup H =
     ( associative-mul-Semigroup _ _ _) ∙
-    ( ( ap (mul-Semigroup _) (left-swap-mul-Semigroup H)) ∙
-      ( inv (associative-mul-Semigroup _ _ _)))
+    ( ap (mul-Semigroup _) (left-swap-mul-Semigroup H)) ∙
+    ( inv (associative-mul-Semigroup _ _ _))
 ```
 
 ### The structure of a semigroup
