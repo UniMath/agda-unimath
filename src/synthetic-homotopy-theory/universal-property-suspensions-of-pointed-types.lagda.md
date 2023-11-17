@@ -11,10 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -142,10 +144,46 @@ module _
 
 We now show these maps are inverses of each other.
 
+
 ```agda
+module _
+  {l1 l2 : Level} (X : UU l1) {Y : UU l2}
+  (c c' : suspension-structure X Y)
+  where
+
+  testing :
+    ( htpy-suspension-structure c c') ≃ ((map-inv-up-suspension X Y c) ~ (map-inv-up-suspension X Y c'))
+  testing =
+    ( equiv-funext) ∘e
+    ( equiv-ap (inv-equiv (equiv-up-suspension X Y)) c c') ∘e
+    ( inv-equiv (extensionality-suspension-structure c c'))
+module _
+  {l1 l2 : Level} (X : UU l1) {Y : UU l2}
+  (c : suspension-structure X Y)
+  where
+  
+  tarting :
+    map-equiv (testing X c c) (refl-htpy-suspension-structure) ＝ refl-htpy
+  tarting =
+    ap (map-equiv (( equiv-funext) ∘e ( equiv-ap (inv-equiv (equiv-up-suspension X Y)) c c))) (extensionality-suspension-structure-refl-htpy-suspension-structure)
+  
+module _
+  {l1 l2 : Level} (X : UU l1) {Y : UU l2}
+  (c : suspension-structure X Y)
+  where
+
+  compute-north :
+    (d : suspension-structure X Y) (h : htpy-suspension-structure c d) →
+    (map-equiv (testing X c d) h north-suspension) ∙ up-suspension-north-suspension X Y d ＝ (up-suspension-north-suspension X Y c) ∙ north-htpy-suspension-structure h
+  compute-north h =
+    ind-htpy-suspension-structure
+      ( λ d h → (map-equiv (testing X c d) h north-suspension) ∙ up-suspension-north-suspension X Y d ＝ (up-suspension-north-suspension X Y c) ∙ north-htpy-suspension-structure h)
+      ( identification-right-whisk (htpy-eq (tarting X c) north-suspension) (up-suspension-north-suspension X Y c) ∙ inv right-unit) h
+
 module _
   {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
   where
+
 
   test :
     (f∗ : suspension-Pointed-Type X →∗ Y) →
@@ -172,15 +210,7 @@ module _
       ( ( ( inv-transpose-suspension-loop-adjunction X Y) ∘
       ( transpose-suspension-loop-adjunction X Y))
         ( f∗)))
-  tte f∗ =
-    htpy-htpy-function-out-of-suspension
-      ( type-Pointed-Type X)
-      ( map-pointed-map f∗)
-      ( map-pointed-map
-        ( ( ( inv-transpose-suspension-loop-adjunction X Y) ∘
-        ( transpose-suspension-loop-adjunction X Y))
-          ( f∗)))
-      ( {!test f∗!})
+  tte f∗ = htpy-eq (inv (is-retraction-map-inv-equiv (equiv-up-suspension (type-Pointed-Type X) (type-Pointed-Type Y)) (map-pointed-map f∗))) ∙h map-equiv (testing (type-Pointed-Type X) _ _) (test f∗)
 ```
 
 #### The transposing equivalence between pointed maps out of the suspension of `X` and pointed maps into the loop space of `Y`
