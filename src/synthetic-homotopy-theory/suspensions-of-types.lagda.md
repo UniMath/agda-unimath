@@ -584,11 +584,7 @@ module _
   equiv-htpy-function-out-of-suspension-htpy-meridian-suspension c x =
     {!!}-}
 ```
-meridian-htpy-in-htpy-suspension-structure
-      ( ( htpy-eq-htpy-suspension-structure
-        ( is-section-htpy-htpy-function-out-of-suspension c)))
-        
-ap pr1  (is-section-htpy-htpy-function-out-of-suspension c)
+
 ### The suspension of a contractible type is contractible
 
 ```agda
