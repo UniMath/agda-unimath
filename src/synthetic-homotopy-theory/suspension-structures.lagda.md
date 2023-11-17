@@ -246,6 +246,15 @@ module _
     refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
   is-refl-refl-htpy-suspension-structure = refl
 
+  extensionality-suspension-structure-refl-htpy-suspension-structure :
+    eq-htpy-suspension-structure refl-htpy-suspension-structure ＝ refl
+  extensionality-suspension-structure-refl-htpy-suspension-structure =
+    is-injective-map-equiv
+      ( extensionality-suspension-structure c c)
+      ( is-section-map-inv-equiv
+        ( extensionality-suspension-structure c c)
+        ( refl-htpy-suspension-structure))
+        
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c : suspension-structure X Z}
   where

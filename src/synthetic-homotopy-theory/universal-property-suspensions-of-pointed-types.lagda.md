@@ -7,11 +7,13 @@ module synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -23,7 +25,9 @@ open import structured-types.pointed-types
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
 </details>
@@ -137,6 +141,47 @@ module _
 ```
 
 We now show these maps are inverses of each other.
+
+```agda
+module _
+  {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
+  where
+
+  test :
+    (f∗ : suspension-Pointed-Type X →∗ Y) →
+    htpy-suspension-structure
+      ( ev-suspension (suspension-structure-suspension (type-Pointed-Type X)) (type-Pointed-Type Y) (map-pointed-map f∗))
+      ( suspension-structure-map-into-Ω
+        ( type-Pointed-Type X)
+        ( Y)
+        ( map-pointed-map (transpose-suspension-loop-adjunction X Y f∗)))
+  pr1 (test (f , refl)) = refl
+  pr1 (pr2 (test (f , refl))) =
+    ap f ( inv (meridian-suspension (point-Pointed-Type X)))
+  pr2 (pr2 (test (f , refl))) x =
+    inv
+      ( ap-concat
+        ( f)
+        ( meridian-suspension x)
+        ( inv (meridian-suspension (point-Pointed-Type X))))
+
+  tte :
+    (f∗ : suspension-Pointed-Type X →∗ Y) →
+    ( map-pointed-map f∗) ~
+    ( map-pointed-map
+      ( ( ( inv-transpose-suspension-loop-adjunction X Y) ∘
+      ( transpose-suspension-loop-adjunction X Y))
+        ( f∗)))
+  tte f∗ =
+    htpy-htpy-function-out-of-suspension
+      ( type-Pointed-Type X)
+      ( map-pointed-map f∗)
+      ( map-pointed-map
+        ( ( ( inv-transpose-suspension-loop-adjunction X Y) ∘
+        ( transpose-suspension-loop-adjunction X Y))
+          ( f∗)))
+      ( {!test f∗!})
+```
 
 #### The transposing equivalence between pointed maps out of the suspension of `X` and pointed maps into the loop space of `Y`
 
