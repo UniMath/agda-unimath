@@ -12,7 +12,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.embeddings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
-open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-groups
 open import group-theory.subgroups-abelian-groups
 open import group-theory.subsets-abelian-groups
 ```
@@ -21,7 +21,11 @@ open import group-theory.subsets-abelian-groups
 
 ## Idea
 
-The **kernel** of a [group homomorphism](group-theory.homomorphisms-abelian-groups.lagda.md) `f : A → B` between [abelian groups](group-theory.abelian-groups.md) `A` and `B` is the [subgroup](group-theory.subgroups-abelian-groups.md) of `A` consisting of those elements `x : A` such that `f x ＝ zero-Ab B`.
+The **kernel** of a
+[group homomorphism](group-theory.homomorphisms-abelian-groups.lagda.md)
+`f : A → B` between [abelian groups](group-theory.abelian-groups.md) `A` and `B`
+is the [subgroup](group-theory.subgroups-abelian-groups.md) of `A` consisting of
+those elements `x : A` such that `f x ＝ zero-Ab B`.
 
 ## Definitions
 
@@ -81,4 +85,3 @@ module _
   emb-inclusion-kernel-hom-Ab =
     emb-inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
 ```
-

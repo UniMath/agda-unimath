@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-groups
 open import group-theory.subgroups-abelian-groups
 
 open import ring-theory.homomorphisms-rings

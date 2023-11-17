@@ -1,7 +1,7 @@
-# Kernels
+# Kernels of homomorphisms of groups
 
 ```agda
-module group-theory.kernels where
+module group-theory.kernels-homomorphisms-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -27,7 +27,10 @@ open import group-theory.subsets-groups
 
 ## Idea
 
-The **kernel** of a [group homomorphism](group-theory.homomorphisms-groups.lagda.md) `f : G → H` is the [normal subgroup](group-theory.normal-subgroups.md) of `G` consisting of those elements `x : G` such that `f x ＝ unit-Group H`.
+The **kernel** of a
+[group homomorphism](group-theory.homomorphisms-groups.lagda.md) `f : G → H` is
+the [normal subgroup](group-theory.normal-subgroups.md) of `G` consisting of
+those elements `x : G` such that `f x ＝ unit-Group H`.
 
 ## Definition
 

@@ -35,7 +35,7 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
-open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.nullifying-group-homomorphisms
 open import group-theory.semigroups

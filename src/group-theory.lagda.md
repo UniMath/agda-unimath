@@ -107,8 +107,9 @@ open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-monoids public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
-open import group-theory.kernels public
+open import group-theory.kernels-homomorphisms-abelian-groups public
 open import group-theory.kernels-homomorphisms-concrete-groups public
+open import group-theory.kernels-homomorphisms-groups public
 open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
