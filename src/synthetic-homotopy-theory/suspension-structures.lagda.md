@@ -188,20 +188,25 @@ module _
 
   north-htpy-suspension-structure :
     {c c' : suspension-structure X Z} →
-    htpy-suspension-structure c c' → north-suspension-structure c ＝ north-suspension-structure c'
+    htpy-suspension-structure c c' →
+    north-suspension-structure c ＝ north-suspension-structure c'
   north-htpy-suspension-structure = pr1
 
   south-htpy-suspension-structure :
     {c c' : suspension-structure X Z} →
-    htpy-suspension-structure c c' → south-suspension-structure c ＝ south-suspension-structure c'
+    htpy-suspension-structure c c' →
+    south-suspension-structure c ＝ south-suspension-structure c'
   south-htpy-suspension-structure = pr1 ∘ pr2
 
   meridian-htpy-suspension-structure :
     {c c' : suspension-structure X Z} →
     (h : htpy-suspension-structure c c') →
     ( x : X) →
-      ( meridian-suspension-structure c x ∙ (south-htpy-suspension-structure h)) ＝
-      ( ( north-htpy-suspension-structure h) ∙ meridian-suspension-structure c' x)
+      coherence-square-identifications
+        ( north-htpy-suspension-structure h)
+        ( meridian-suspension-structure c x)
+        ( meridian-suspension-structure c' x)
+        ( south-htpy-suspension-structure h)
   meridian-htpy-suspension-structure = pr2 ∘ pr2
 
   extensionality-suspension-structure :
@@ -299,8 +304,15 @@ module _
         Σ (s ＝ s')
           ( λ q →
             (x : X) →
-              ( (identification-left-whisk (meridian-suspension-structure c x) q) ∙ (h' x)) ＝
-              ( (h x) ∙ identification-right-whisk p (meridian-suspension-structure c' x))))
+              coherence-square-identifications
+                ( h x)
+                ( identification-left-whisk
+                  ( meridian-suspension-structure c x)
+                  ( q))
+                ( identification-right-whisk
+                  ( p)
+                  ( meridian-suspension-structure c' x))
+                ( h' x)))
 
   extensionality-htpy-suspension-structure :
     (h h' : htpy-suspension-structure c c') →
@@ -311,16 +323,28 @@ module _
         Σ (s ＝ pr1 y)
           ( λ q →
             (x : X) →
-              ( (identification-left-whisk (meridian-suspension-structure c x) q) ∙ ((pr2 y) x)) ＝
-              ( (h x) ∙ identification-right-whisk p (meridian-suspension-structure c' x))))
+              ( coherence-square-identifications
+                ( h x)
+                ( identification-left-whisk
+                  ( meridian-suspension-structure c x)
+                  ( q))
+                ( identification-right-whisk
+                  ( p)
+                  ( meridian-suspension-structure c' x))
+                ( pr2 y x))))
       ( refl)
       ( refl , inv-htpy right-unit-htpy)
       ( λ n' → id-equiv)
       ( extensionality-Σ
         ( λ h' q →
           (x : X) →
-            ( ( identification-left-whisk (meridian-suspension-structure c x) q) ∙ (h' x)) ＝
-            ( (h x) ∙ identification-right-whisk refl (meridian-suspension-structure c' x)))
+            ( coherence-square-identifications
+              ( h x)
+              ( identification-left-whisk (meridian-suspension-structure c x) q)
+              ( identification-right-whisk
+                ( refl)
+                ( meridian-suspension-structure c' x))
+              ( h' x)))
         ( refl)
         ( inv-htpy right-unit-htpy)
         ( λ q → id-equiv)
@@ -347,14 +371,15 @@ module _
     {h h' : htpy-suspension-structure c c'} →
     (H : htpy-in-htpy-suspension-structure h h') →
     (x : X) →
-      ( ( identification-left-whisk
-        ( meridian-suspension-structure c x)
-        ( south-htpy-in-htpy-suspension-structure H)) ∙
-      ( meridian-htpy-suspension-structure h' x)) ＝
-      ( (meridian-htpy-suspension-structure h x) ∙
-      ( identification-right-whisk
-        ( north-htpy-in-htpy-suspension-structure H)
-        ( meridian-suspension-structure c' x)))
+      coherence-square-identifications
+        ( meridian-htpy-suspension-structure h x)
+        ( identification-left-whisk
+          ( meridian-suspension-structure c x)
+          ( south-htpy-in-htpy-suspension-structure H))
+        ( identification-right-whisk
+          ( north-htpy-in-htpy-suspension-structure H)
+          ( meridian-suspension-structure c' x))
+        ( meridian-htpy-suspension-structure h' x)
   meridian-htpy-in-htpy-suspension-structure = pr2 ∘ pr2
 
 module _

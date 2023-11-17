@@ -357,7 +357,9 @@ module _
 
   equiv-dependent-suspension-structure-htpy-function-out-of-suspension :
     ( htpy-function-out-of-suspension) ≃
-    ( dependent-suspension-structure (eq-value f g) (suspension-structure-suspension X))
+    ( dependent-suspension-structure
+      ( eq-value f g)
+      ( suspension-structure-suspension X))
   equiv-dependent-suspension-structure-htpy-function-out-of-suspension =
     ( equiv-tot
       ( λ p →
@@ -376,7 +378,8 @@ module _
 
   compute-inv-equiv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure :
     htpy-equiv
-      ( inv-equiv equiv-htpy-function-out-of-suspension-dependent-suspension-structure)
+      ( inv-equiv
+        ( equiv-htpy-function-out-of-suspension-dependent-suspension-structure))
       ( equiv-dependent-suspension-structure-htpy-function-out-of-suspension)
   compute-inv-equiv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure
     x =
