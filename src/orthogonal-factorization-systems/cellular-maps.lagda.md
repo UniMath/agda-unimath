@@ -18,7 +18,7 @@ open import orthogonal-factorization-systems.mere-lifting-properties
 
 ## Idea
 
-A map `f : A → B` is said to be **`k`-cellular** if it satisfies the right
+A map `f : A → B` is said to be **`k`-cellular** if it satisfies the left
 [mere lifting propery](orthogonal-factorization-systems.mere-lifting-properties.md)
 with respect to [`k`-connected maps](foundation.connected-maps.md). In other
 words, a map `f` is `k`-cellular if the
@@ -42,8 +42,8 @@ maps**. This emphasizes the condition that `k`-projective maps lift against
 `k`-connected maps.
 
 The `k`-cellular maps are the left class of an _external_ weak factorization
-system of which the right class is the class of `k`-connected maps, but there is
-no such weak factorization system definable internally.
+system on spaces of which the right class is the class of `k`-connected maps,
+but there is no such weak factorization system definable internally.
 
 ## Definitions
 
