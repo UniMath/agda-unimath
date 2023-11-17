@@ -15,6 +15,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -811,4 +812,30 @@ module _
       ( pullback-Subgroup G (group-Ab A) f (trivial-Subgroup (group-Ab A)))
       ( λ x → is-trivial-commutator-subgroup-Ab A _)
       ( preserves-commutator-subgroup-hom-Group G (group-Ab A) f)
+
+  is-equiv-hom-nullifying-hom-group-Ab :
+    is-equiv
+      ( hom-nullifying-hom-Group G
+        ( group-Ab A)
+        ( commutator-normal-subgroup-Group G))
+  is-equiv-hom-nullifying-hom-group-Ab =
+    is-equiv-inclusion-is-full-subtype
+      ( λ f →
+        nullifies-normal-subgroup-prop-hom-Group G
+          ( group-Ab A)
+          ( f)
+          ( commutator-normal-subgroup-Group G))
+      ( nullifies-commutator-normal-subgroup-hom-group-Ab)
+
+  compute-nullifying-hom-group-Ab :
+    nullifying-hom-Group G (group-Ab A) (commutator-normal-subgroup-Group G) ≃
+    hom-Group G (group-Ab A)
+  compute-nullifying-hom-group-Ab =
+    equiv-inclusion-is-full-subtype
+      ( λ f →
+        nullifies-normal-subgroup-prop-hom-Group G
+          ( group-Ab A)
+          ( f)
+          ( commutator-normal-subgroup-Group G))
+      ( nullifies-commutator-normal-subgroup-hom-group-Ab)
 ```

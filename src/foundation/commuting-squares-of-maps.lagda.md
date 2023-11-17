@@ -32,12 +32,12 @@ open import foundation-core.identity-types
 Two commuting triangles
 
 ```text
-  A        A ---> X
-  | \       \  K  |
-  |   \   L   \   |
-  |  H  \       \ |
-  v      v        v
-  B ---> Y        Y
+   A         A --> X
+  | \         \    |
+  |  \ H  L  K \   |
+  |   \         \  |
+  v    v         v v
+  B --> Y         Y
 ```
 
 with a homotopic diagonal may be pasted into a commuting square

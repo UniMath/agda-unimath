@@ -13,7 +13,10 @@ open import category-theory.adjunctions-large-categories
 open import category-theory.adjunctions-large-precategories
 open import category-theory.functors-large-categories
 open import category-theory.functors-large-precategories
+open import category-theory.natural-transformations-functors-large-categories
+open import category-theory.natural-transformations-functors-large-precategories
 
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -21,16 +24,19 @@ open import foundation.identity-types
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import group-theory.abelian-groups
 open import group-theory.category-of-abelian-groups
 open import group-theory.category-of-groups
 open import group-theory.commutator-subgroups
+open import group-theory.commuting-squares-of-group-homomorphisms
 open import group-theory.functoriality-quotient-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
+open import group-theory.nullifying-group-homomorphisms
 open import group-theory.quotient-groups
 ```
 
@@ -181,22 +187,6 @@ module _
   pr2 abelianization-Group = commutative-add-abelianization-Group
 ```
 
-### The universal property of abelianization
-
-```agda
-module _
-  {l1 : Level} (G : Group l1)
-  where
-
-  is-quotient-group-abelianization-Group :
-    universal-property-quotient-Group G
-      ( commutator-normal-subgroup-Group G)
-      ( group-abelianization-Group G)
-      ( nullifying-quotient-hom-Group G (commutator-normal-subgroup-Group G))
-  is-quotient-group-abelianization-Group =
-    is-quotient-group-quotient-Group G (commutator-normal-subgroup-Group G)
-```
-
 ### The abelianization functor
 
 ```agda
@@ -253,13 +243,137 @@ preserves-id-functor-Large-Precategory
   preserves-id-abelianization-functor-Group G
 ```
 
+### The unit of the abelianization adjunction
+
+```agda
+hom-unit-abelianization-Group :
+  {l1 : Level} (G : Group l1) → hom-Group G (group-abelianization-Group G)
+hom-unit-abelianization-Group G =
+  quotient-hom-Group G (commutator-normal-subgroup-Group G)
+
+naturality-unit-abelianization-Group :
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H) →
+  coherence-square-hom-Group G H
+    ( group-abelianization-Group G)
+    ( group-abelianization-Group H)
+    ( f)
+    ( hom-unit-abelianization-Group G)
+    ( hom-unit-abelianization-Group H)
+    ( abelianization-hom-Group G H f)
+naturality-unit-abelianization-Group =
+  {!!}
+
+naturality-unit-abelianization-Group' :
+  naturality-family-of-morphisms-functor-Large-Category
+    ( Group-Large-Category)
+    ( Group-Large-Category)
+    ( id-functor-Large-Category Group-Large-Category)
+    ( comp-functor-Large-Category
+      ( Group-Large-Category)
+      ( Ab-Large-Category)
+      ( Group-Large-Category)
+      ( forgetful-functor-Ab)
+      ( abelianization-functor-Group))
+    ( hom-unit-abelianization-Group)
+naturality-unit-abelianization-Group' {X = G} {H} f =
+  eq-htpy-hom-Group G
+    ( group-abelianization-Group H)
+    ( naturality-unit-abelianization-Group G H f)
+
+unit-abelianization-Group :
+  natural-transformation-Large-Category
+    ( Group-Large-Category)
+    ( Group-Large-Category)
+    ( id-functor-Large-Category Group-Large-Category)
+    ( comp-functor-Large-Category
+      ( Group-Large-Category)
+      ( Ab-Large-Category)
+      ( Group-Large-Category)
+      ( forgetful-functor-Ab)
+      ( abelianization-functor-Group))
+
+hom-natural-transformation-Large-Precategory
+  unit-abelianization-Group =
+  hom-unit-abelianization-Group
+naturality-natural-transformation-Large-Precategory
+  unit-abelianization-Group =
+  naturality-unit-abelianization-Group'
+```
+
+### The universal property of abelianization
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  is-quotient-group-abelianization-Group :
+    universal-property-quotient-Group G
+      ( commutator-normal-subgroup-Group G)
+      ( group-abelianization-Group G)
+      ( nullifying-quotient-hom-Group G (commutator-normal-subgroup-Group G))
+  is-quotient-group-abelianization-Group =
+    is-quotient-group-quotient-Group G (commutator-normal-subgroup-Group G)
+
+  is-abelianization-abelianization-Group :
+    is-abelianization-Group G
+      ( abelianization-Group G)
+      ( hom-unit-abelianization-Group G)
+  is-abelianization-abelianization-Group A =
+    is-equiv-comp
+      ( hom-nullifying-hom-Group G
+        ( group-Ab A)
+        ( commutator-normal-subgroup-Group G))
+      ( precomp-nullifying-hom-Group G
+        ( commutator-normal-subgroup-Group G)
+        ( group-abelianization-Group G)
+        ( nullifying-quotient-hom-Group G
+          ( commutator-normal-subgroup-Group G))
+        ( group-Ab A))
+      ( is-quotient-group-abelianization-Group (group-Ab A))
+      ( is-equiv-hom-nullifying-hom-group-Ab G A)
+```
+
 ### The abelianization adjunction
 
-```text
+```agda
 equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab :
   {l1 l2 : Level} (G : Group l1) (A : Ab l2) →
   hom-Ab (abelianization-Group G) A ≃ hom-Group G (group-Ab A)
-equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab = {!!}
+pr1 (equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A) h =
+  comp-hom-Group G
+    ( group-abelianization-Group G)
+    ( group-Ab A)
+    ( h)
+    ( hom-unit-abelianization-Group G)
+pr2 (equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A) =
+  is-abelianization-abelianization-Group G A
+
+naturality-equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab :
+  {l1 l2 l3 l4 : Level}
+  (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  (A : Ab l3) (B : Ab l4) (g : hom-Ab A B) →
+  coherence-square-maps
+    ( map-equiv (equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab H A))
+    ( λ h →
+      comp-hom-Ab
+        ( abelianization-Group G)
+        ( abelianization-Group H)
+        ( B)
+        ( comp-hom-Ab (abelianization-Group H) A B g h)
+        ( abelianization-hom-Group G H f))
+    ( λ h →
+      comp-hom-Group G H
+        ( group-Ab B)
+        ( comp-hom-Group H (group-Ab A) (group-Ab B) g h)
+        ( f))
+    ( map-equiv (equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G B))
+naturality-equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab
+  G H f A B g h =
+  eq-htpy-hom-Group G
+    ( group-Ab B)
+    ( ( map-hom-Ab A B g ∘ map-hom-Ab (abelianization-Group H) A h) ·l
+      {!!})
 
 is-adjoint-pair-abelianization-forgetful-functor-Ab :
   is-adjoint-pair-Large-Category
@@ -268,11 +382,11 @@ is-adjoint-pair-abelianization-forgetful-functor-Ab :
     ( abelianization-functor-Group)
     ( forgetful-functor-Ab)
 equiv-is-adjoint-pair-Large-Precategory
-  is-adjoint-pair-abelianization-forgetful-functor-Ab =
-  {!!}
+  is-adjoint-pair-abelianization-forgetful-functor-Ab G A =
+  inv-equiv (equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A)
 naturality-equiv-is-adjoint-pair-Large-Precategory
   is-adjoint-pair-abelianization-forgetful-functor-Ab =
-  {!!}
+  {!inv-horizontal-commuting-square-maps!}
 
 abelianization-adjunction-Group :
   Adjunction-Large-Category
