@@ -27,6 +27,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
@@ -328,6 +329,26 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( funext g h)
         ( funext (g ∘ f) (h ∘ f))
         ( H g h))
+```
+
+### Computing the inverse of `equiv-Π-equiv-family
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  compute-inv-equiv-equiv-Π-equiv-family :
+    (e : (x : A) → B x ≃ C x) →
+    htpy-equiv
+      ( inv-equiv (equiv-Π-equiv-family e))
+      ( equiv-Π-equiv-family λ x → (inv-equiv (e x)))
+  compute-inv-equiv-equiv-Π-equiv-family e f =
+    is-injective-map-equiv
+      ( equiv-Π-equiv-family e)
+      ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
+      ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
+
 ```
 
 ## See also
