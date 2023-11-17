@@ -97,10 +97,10 @@ module _
     (x : type-Ring R) →
     div-order-element-Group (group-Ring R) x (one-Ring R)
   div-additive-order-element-additive-order-one-Ring x k H =
-    ( ap (integer-multiple-Ring R k) (inv (left-unit-law-mul-Ring R x))) ∙
-    ( inv (left-integer-multiple-law-mul-Ring R k _ _)) ∙
+    ( inv (left-zero-law-mul-Ring R x)) ∙
     ( ap (mul-Ring' R x) H) ∙
-    ( left-zero-law-mul-Ring R x)
+    ( left-integer-multiple-law-mul-Ring R k _ _) ∙
+    ( ap (integer-multiple-Ring R k) (left-unit-law-mul-Ring R x))
 ```
 
 ### If there exists an integer `k` such that `k·x ＝ y` then the order of `y` divides the order of `x`
@@ -123,10 +123,10 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-additive-order-element-Ring R y l)
       ( λ (k , q) →
-        ( ap (integer-multiple-Ring R l) (inv q)) ∙
-        ( swap-integer-multiple-Ring R l k x) ∙
+        ( inv (right-zero-law-integer-multiple-Ring R k)) ∙
         ( ap (integer-multiple-Ring R k) p) ∙
-        ( right-zero-law-integer-multiple-Ring R k))
+        ( swap-integer-multiple-Ring R k l x ∙
+        ( ap (integer-multiple-Ring R l) q)))
 ```
 
 ### If there exists an integer `k` such that `k·x ＝ 1` then the order of `x` is the order of `1`

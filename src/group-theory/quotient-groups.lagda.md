@@ -76,10 +76,10 @@ precomp-nullifying-hom-Group :
 pr1 (precomp-nullifying-hom-Group G N H f K g) =
   comp-hom-Group G H K g (hom-nullifying-hom-Group G H N f)
 pr2 (precomp-nullifying-hom-Group G N H f K g) h p =
+  ( inv (preserves-unit-hom-Group H K g)) ∙
   ( ap
     ( map-hom-Group H K g)
-    ( nullifies-normal-subgroup-nullifying-hom-Group G H N f h p)) ∙
-  ( preserves-unit-hom-Group H K g)
+    ( nullifies-normal-subgroup-nullifying-hom-Group G H N f h p))
 
 universal-property-quotient-Group :
   {l1 l2 l3 : Level} (G : Group l1)
@@ -425,8 +425,9 @@ module _
       ( quotient-hom-Group)
       ( N)
   nullifies-normal-subgroup-quotient-hom-Group x n =
-    apply-effectiveness-map-quotient-hom-Group' G N
-      ( unit-congruence-Normal-Subgroup' G N n)
+    inv
+      ( apply-effectiveness-map-quotient-hom-Group' G N
+        ( unit-congruence-Normal-Subgroup' G N n))
 
   nullifying-quotient-hom-Group : nullifying-hom-Group G (quotient-Group G N) N
   pr1 nullifying-quotient-hom-Group = quotient-hom-Group
@@ -719,5 +720,5 @@ module _
       is-in-Normal-Subgroup G N x
     is-in-normal-subgroup-is-in-kernel-quotient-hom-Group {x} H =
       unit-congruence-Normal-Subgroup G N
-        ( apply-effectiveness-map-quotient-hom-Group G N H)
+        ( apply-effectiveness-map-quotient-hom-Group G N (inv H))
 ```

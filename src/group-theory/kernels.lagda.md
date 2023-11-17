@@ -15,16 +15,11 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.embeddings-abelian-groups
 open import group-theory.embeddings-groups
 open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
-open import group-theory.subgroups-abelian-groups
-open import group-theory.subsets-abelian-groups
 open import group-theory.subsets-groups
 ```
 
@@ -32,8 +27,7 @@ open import group-theory.subsets-groups
 
 ## Idea
 
-The **kernel** of a group homomorphism `f : A → B` is the subgroup of A
-consisting of those elements which `f` sends to the unit of B.
+The **kernel** of a [group homomorphism](group-theory.homomorphisms-groups.lagda.md) `f : G → H` is the [normal subgroup](group-theory.normal-subgroups.md) of `G` consisting of those elements `x : G` such that `f x ＝ unit-Group H`.
 
 ## Definition
 
@@ -47,27 +41,28 @@ module _
 
   subset-kernel-hom-Group : subset-Group k G
   subset-kernel-hom-Group x =
-    Id-Prop (set-Group H) (map-hom-Group G H f x) (unit-Group H)
+    is-unit-prop-Group' H (map-hom-Group G H f x)
 
   is-in-kernel-hom-Group : type-Group G → UU k
   is-in-kernel-hom-Group x = type-Prop (subset-kernel-hom-Group x)
 
   contains-unit-subset-kernel-hom-Group :
     is-in-kernel-hom-Group (unit-Group G)
-  contains-unit-subset-kernel-hom-Group = preserves-unit-hom-Group G H f
+  contains-unit-subset-kernel-hom-Group = inv (preserves-unit-hom-Group G H f)
 
   is-closed-under-multiplication-subset-kernel-hom-Group :
     is-closed-under-multiplication-subset-Group G subset-kernel-hom-Group
   is-closed-under-multiplication-subset-kernel-hom-Group p q =
-    ( preserves-mul-hom-Group G H f) ∙
-    ( ( ap (λ (x , y) → mul-Group H x y) (eq-pair p q)) ∙
-      ( left-unit-law-mul-Group H _))
+    ( inv (left-unit-law-mul-Group H _)) ∙
+    ( ap-mul-Group H p q) ∙
+    ( inv (preserves-mul-hom-Group G H f))
 
   is-closed-under-inverses-subset-kernel-hom-Group :
     is-closed-under-inverses-subset-Group G subset-kernel-hom-Group
   is-closed-under-inverses-subset-kernel-hom-Group p =
-    ( preserves-inv-hom-Group G H f) ∙
-    ( ap (inv-Group H) p ∙ inv-unit-Group H)
+    ( inv (inv-unit-Group H)) ∙
+    ( ap (inv-Group H) p) ∙
+    ( inv (preserves-inv-hom-Group G H f))
 
   subgroup-kernel-hom-Group : Subgroup k G
   pr1 subgroup-kernel-hom-Group = subset-kernel-hom-Group
@@ -83,6 +78,19 @@ module _
   inclusion-kernel-hom-Group : hom-Group group-kernel-hom-Group G
   inclusion-kernel-hom-Group =
     hom-inclusion-Subgroup G subgroup-kernel-hom-Group
+
+  type-kernel-hom-Group : UU (l ⊔ k)
+  type-kernel-hom-Group = type-Subgroup G subgroup-kernel-hom-Group
+
+  map-inclusion-kernel-hom-Group : type-kernel-hom-Group → type-Group G
+  map-inclusion-kernel-hom-Group =
+    map-hom-Group group-kernel-hom-Group G inclusion-kernel-hom-Group
+
+  is-in-subgroup-inclusion-kernel-hom-Group :
+    (x : type-kernel-hom-Group) →
+    is-in-kernel-hom-Group (map-inclusion-kernel-hom-Group x)
+  is-in-subgroup-inclusion-kernel-hom-Group =
+    is-in-subgroup-inclusion-Subgroup G subgroup-kernel-hom-Group
 
   is-emb-inclusion-kernel-hom-Group :
     is-emb-hom-Group group-kernel-hom-Group G inclusion-kernel-hom-Group
@@ -106,75 +114,20 @@ module _
   is-normal-kernel-hom-Group :
     is-normal-Subgroup G (subgroup-kernel-hom-Group G H f)
   is-normal-kernel-hom-Group g h =
-    ( preserves-mul-hom-Group G H f) ∙
-    ( ( ap
-        ( mul-Group' H (map-hom-Group G H f (inv-Group G g)))
-        ( ( preserves-mul-hom-Group G H f) ∙
-          ( ( ap (mul-Group H (map-hom-Group G H f g)) (pr2 h)) ∙
-            ( right-unit-law-mul-Group H (map-hom-Group G H f g))))) ∙
-      ( ( ap
-          ( mul-Group H (map-hom-Group G H f g))
-          ( preserves-inv-hom-Group G H f)) ∙
-        ( right-inverse-law-mul-Group H (map-hom-Group G H f g))))
+    inv
+      ( ( preserves-mul-hom-Group G H f) ∙
+        ( ap
+          ( mul-Group' H (map-hom-Group G H f (inv-Group G g)))
+          ( ( preserves-mul-hom-Group G H f) ∙
+            ( inv
+              ( ap
+                ( mul-Group H (map-hom-Group G H f g))
+                ( is-in-subgroup-inclusion-kernel-hom-Group G H f h))) ∙
+            ( right-unit-law-mul-Group H (map-hom-Group G H f g)))) ∙
+        ( ap (mul-Group H _) (preserves-inv-hom-Group G H f)) ∙
+        ( right-inverse-law-mul-Group H (map-hom-Group G H f g)))
 
   kernel-hom-Group : Normal-Subgroup l2 G
   pr1 kernel-hom-Group = subgroup-kernel-hom-Group G H f
   pr2 kernel-hom-Group = is-normal-kernel-hom-Group
-```
-
-### Kernels of group homomorphisms between abelian groups
-
-```agda
-module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
-  where
-
-  subset-kernel-hom-Ab : subset-Ab l2 A
-  subset-kernel-hom-Ab =
-    subset-kernel-hom-Group (group-Ab A) (group-Ab B) f
-
-  is-in-kernel-hom-Ab : type-Ab A → UU l2
-  is-in-kernel-hom-Ab =
-    is-in-kernel-hom-Group (group-Ab A) (group-Ab B) f
-
-  contains-zero-subset-kernel-hom-Ab :
-    is-in-kernel-hom-Ab (zero-Ab A)
-  contains-zero-subset-kernel-hom-Ab =
-    contains-unit-subset-kernel-hom-Group (group-Ab A) (group-Ab B) f
-
-  is-closed-under-addition-subset-kernel-hom-Ab :
-    is-closed-under-addition-subset-Ab A subset-kernel-hom-Ab
-  is-closed-under-addition-subset-kernel-hom-Ab =
-    is-closed-under-multiplication-subset-kernel-hom-Group
-      ( group-Ab A)
-      ( group-Ab B)
-      ( f)
-
-  is-closed-under-negatives-subset-kernel-hom-Ab :
-    is-closed-under-negatives-subset-Ab A subset-kernel-hom-Ab
-  is-closed-under-negatives-subset-kernel-hom-Ab =
-    is-closed-under-inverses-subset-kernel-hom-Group
-      ( group-Ab A)
-      ( group-Ab B)
-      ( f)
-
-  kernel-hom-Ab : Subgroup-Ab l2 A
-  kernel-hom-Ab =
-    subgroup-kernel-hom-Group (group-Ab A) (group-Ab B) f
-
-  ab-kernel-hom-Ab : Ab (l1 ⊔ l2)
-  ab-kernel-hom-Ab = ab-Subgroup-Ab A kernel-hom-Ab
-
-  inclusion-kernel-hom-Ab : hom-Ab ab-kernel-hom-Ab A
-  inclusion-kernel-hom-Ab =
-    inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
-
-  is-emb-inclusion-kernel-hom-Ab :
-    is-emb-hom-Ab ab-kernel-hom-Ab A inclusion-kernel-hom-Ab
-  is-emb-inclusion-kernel-hom-Ab =
-    is-emb-inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
-
-  emb-inclusion-kernel-hom-Ab : emb-Ab ab-kernel-hom-Ab A
-  emb-inclusion-kernel-hom-Ab =
-    emb-inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
 ```

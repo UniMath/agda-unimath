@@ -100,7 +100,7 @@ module _
   reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group f p α =
     ( inv (right-unit-law-mul-Group K _)) ∙
     ( inv-transpose-eq-mul-Group' K
-      ( ( inv (p (left-div-Group G _ _) α)) ∙
+      ( ( p (left-div-Group G _ _) α) ∙
         ( preserves-left-div-hom-Group G K f)))
 
   nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group :
@@ -110,10 +110,11 @@ module _
       ( map-hom-Group G K f) →
     nullifies-normal-subgroup-hom-Group G K f H
   nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group f p x q =
+    ( inv (preserves-unit-hom-Group G K f)) ∙
     ( p ( is-closed-under-multiplication-Normal-Subgroup G H
-          ( is-closed-under-inverses-Normal-Subgroup G H q)
-          ( contains-unit-Normal-Subgroup G H))) ∙
-    ( preserves-unit-hom-Group G K f)
+          ( is-closed-under-inverses-Normal-Subgroup G H
+            ( contains-unit-Normal-Subgroup G H))
+          ( q)))
 
   compute-nullifying-hom-Group :
     Σ ( reflecting-map-Equivalence-Relation

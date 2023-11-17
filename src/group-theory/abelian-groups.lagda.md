@@ -30,7 +30,10 @@ open import group-theory.commutator-subgroups
 open import group-theory.commutators-of-elements-groups
 open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.monoids
+open import group-theory.nullifying-group-homomorphisms
+open import group-theory.pullbacks-subgroups
 open import group-theory.semigroups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-families-of-elements-groups
@@ -132,8 +135,8 @@ module _
   is-prop-is-zero-Ab : (x : type-Ab) → is-prop (is-zero-Ab x)
   is-prop-is-zero-Ab = is-prop-is-unit-Group group-Ab
 
-  is-zero-ab-Prop : type-Ab → Prop l
-  is-zero-ab-Prop = is-unit-group-Prop group-Ab
+  is-zero-prop-Ab : type-Ab → Prop l
+  is-zero-prop-Ab = is-unit-prop-Group group-Ab
 
   left-unit-law-add-Ab : (x : type-Ab) → add-Ab zero-Ab x ＝ x
   left-unit-law-add-Ab = left-unit-law-mul-Group group-Ab
@@ -783,4 +786,29 @@ module _
         ( group-Ab A)
         ( family-of-commutators-Ab A)
         ( λ (x , y) → is-zero-commutator-Ab' A x y)
+```
+
+### Every group homomorphism into an abelian group nullifies the commutator subgroup
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (A : Ab l2)
+  where
+
+  nullifies-commutator-normal-subgroup-hom-group-Ab :
+    (f : hom-Group G (group-Ab A)) →
+    nullifies-normal-subgroup-hom-Group G
+      ( group-Ab A)
+      ( f)
+      ( commutator-normal-subgroup-Group G)
+  nullifies-commutator-normal-subgroup-hom-group-Ab f =
+    transitive-leq-Subgroup G
+      ( commutator-subgroup-Group G)
+      ( pullback-Subgroup G
+        ( group-Ab A)
+        ( f)
+        ( commutator-subgroup-Group (group-Ab A)))
+      ( pullback-Subgroup G (group-Ab A) f (trivial-Subgroup (group-Ab A)))
+      ( λ x → is-trivial-commutator-subgroup-Ab A _)
+      ( preserves-commutator-subgroup-hom-Group G (group-Ab A) f)
 ```

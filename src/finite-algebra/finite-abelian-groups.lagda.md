@@ -129,8 +129,8 @@ module _
   is-prop-is-zero-Ab-𝔽 : (x : type-Ab-𝔽) → is-prop (is-zero-Ab-𝔽 x)
   is-prop-is-zero-Ab-𝔽 = is-prop-is-unit-Group group-Ab-𝔽
 
-  is-zero-finite-ab-Prop : type-Ab-𝔽 → Prop l
-  is-zero-finite-ab-Prop = is-unit-group-Prop group-Ab-𝔽
+  is-zero-prop-Ab-𝔽 : type-Ab-𝔽 → Prop l
+  is-zero-prop-Ab-𝔽 = is-unit-prop-Group group-Ab-𝔽
 
   left-unit-law-add-Ab-𝔽 : (x : type-Ab-𝔽) → add-Ab-𝔽 zero-Ab-𝔽 x ＝ x
   left-unit-law-add-Ab-𝔽 = left-unit-law-mul-Group group-Ab-𝔽

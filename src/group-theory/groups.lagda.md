@@ -142,13 +142,13 @@ module _
   is-prop-is-unit-Group' : (x : type-Group) → is-prop (is-unit-Group' x)
   is-prop-is-unit-Group' x = is-set-type-Group unit-Group x
 
-  is-unit-group-Prop : type-Group → Prop l
-  pr1 (is-unit-group-Prop x) = is-unit-Group x
-  pr2 (is-unit-group-Prop x) = is-prop-is-unit-Group x
+  is-unit-prop-Group : type-Group → Prop l
+  pr1 (is-unit-prop-Group x) = is-unit-Group x
+  pr2 (is-unit-prop-Group x) = is-prop-is-unit-Group x
 
-  is-unit-group-Prop' : type-Group → Prop l
-  pr1 (is-unit-group-Prop' x) = is-unit-Group' x
-  pr2 (is-unit-group-Prop' x) = is-prop-is-unit-Group' x
+  is-unit-prop-Group' : type-Group → Prop l
+  pr1 (is-unit-prop-Group' x) = is-unit-Group' x
+  pr2 (is-unit-prop-Group' x) = is-prop-is-unit-Group' x
 
   left-unit-law-mul-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x

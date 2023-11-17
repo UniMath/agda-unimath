@@ -32,7 +32,7 @@ module _
   where
 
   trivial-Subgroup : Subgroup l1 G
-  pr1 trivial-Subgroup x = is-unit-group-Prop' G x
+  pr1 trivial-Subgroup x = is-unit-prop-Group' G x
   pr1 (pr2 trivial-Subgroup) = refl
   pr1 (pr2 (pr2 trivial-Subgroup)) refl refl =
     inv (left-unit-law-mul-Group G (unit-Group G))
