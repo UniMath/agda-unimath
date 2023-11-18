@@ -23,7 +23,7 @@ open import group-theory.groups
 A [group](group-theory.groups.md) `G` is said to **act transitively** on a
 [set](foundation-core.sets.md) `X` if for every `x : X` the map
 
-```textbf
+```text
   g ↦ gx : G → X
 ```
 
