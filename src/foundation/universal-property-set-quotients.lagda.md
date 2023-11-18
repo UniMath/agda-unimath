@@ -597,14 +597,14 @@ module _
           ( equiv-tot
             ( λ _ →
               equiv-ap-inclusion-subtype
-                ( reflects-Equivalence-Relation-Prop R X)))
+                ( reflects-prop-Equivalence-Relation R X)))
           ( is-prop-map-is-emb
             ( is-epimorphism-is-surjective-Set (pr1 E) X)
             ( pr1 f)))
         ( pair
           ( λ b → pr1 (α E X f b))
           ( eq-type-subtype
-            ( reflects-Equivalence-Relation-Prop R X)
+            ( reflects-prop-Equivalence-Relation R X)
             ( eq-htpy (λ a → ap pr1 (β E X f a))))))
 
   universal-property-set-quotient-is-surjective-and-effective :

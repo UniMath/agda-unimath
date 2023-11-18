@@ -33,7 +33,8 @@ open import group-theory.symmetric-groups
 
 ## Idea
 
-Given a group homomorphism `f : G → H` and an H-set `Y`, we obtain a G-action on
+Given a [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H`
+and an [`H`-set](group-theory.group-actions.md) `Y`, we obtain a `G`-action on
 `Y` by `g,x ↦ f(g)x`. This operation is functorial in `Y`.
 
 ## Definition
@@ -126,13 +127,13 @@ module _
   is-set-pretype-obj-left-adjoint-subst-action-Group X =
     is-set-type-Set (preset-obj-left-adjoint-subst-action-Group X)
 
-  Equivalence-Relation-obj-left-adjoint-subst-action-Group :
+  equivalence-relation-obj-left-adjoint-subst-action-Group :
     {l3 : Level} (X : action-Group G l3) →
     Equivalence-Relation
       ( l1 ⊔ l2 ⊔ l3)
       ( pretype-obj-left-adjoint-subst-action-Group X)
   pr1
-    ( Equivalence-Relation-obj-left-adjoint-subst-action-Group X)
+    ( equivalence-relation-obj-left-adjoint-subst-action-Group X)
     ( h , x)
     ( h' , x') =
     ∃-Prop
@@ -141,7 +142,7 @@ module _
         ( Id (mul-Group H (map-hom-Group G H f g) h) h') ×
         ( Id (mul-action-Group G X g x) x'))
   pr1
-    ( pr2 (Equivalence-Relation-obj-left-adjoint-subst-action-Group X))
+    ( pr2 (equivalence-relation-obj-left-adjoint-subst-action-Group X))
     ( h , x) =
     intro-∃
       ( unit-Group G)
@@ -152,13 +153,13 @@ module _
   pr1
     ( pr2
       ( pr2
-        ( Equivalence-Relation-obj-left-adjoint-subst-action-Group X)))
+        ( equivalence-relation-obj-left-adjoint-subst-action-Group X)))
     ( h , x)
     ( h' , x')
     ( e) =
     apply-universal-property-trunc-Prop e
       ( pr1
-        ( Equivalence-Relation-obj-left-adjoint-subst-action-Group X)
+        ( equivalence-relation-obj-left-adjoint-subst-action-Group X)
         ( h' , x')
         ( h , x))
       ( λ (g , p , q) →
@@ -172,7 +173,7 @@ module _
   pr2
     ( pr2
       ( pr2
-        ( Equivalence-Relation-obj-left-adjoint-subst-action-Group X)))
+        ( equivalence-relation-obj-left-adjoint-subst-action-Group X)))
     ( h , x)
     ( h' , x')
     ( h'' , x'')
@@ -180,13 +181,13 @@ module _
     ( e) =
     apply-universal-property-trunc-Prop e
       ( pr1
-        ( Equivalence-Relation-obj-left-adjoint-subst-action-Group X)
+        ( equivalence-relation-obj-left-adjoint-subst-action-Group X)
         ( h , x)
         ( h'' , x''))
       ( λ (g , p , q) →
         apply-universal-property-trunc-Prop d
           ( pr1
-            ( Equivalence-Relation-obj-left-adjoint-subst-action-Group
+            ( equivalence-relation-obj-left-adjoint-subst-action-Group
               ( X))
             ( h , x)
             ( h'' , x''))
@@ -211,5 +212,5 @@ module _
     Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   set-left-adjoint-subst-action-Group X =
     equivalence-class-Set
-      ( Equivalence-Relation-obj-left-adjoint-subst-action-Group X)
+      ( equivalence-relation-obj-left-adjoint-subst-action-Group X)
 ```

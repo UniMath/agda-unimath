@@ -20,8 +20,16 @@ open import group-theory.groups
 
 ## Idea
 
-A group `G` is said to act transitively on a set `X` if for every `x` and `y` in
-`X` there is a group element `g` such that `gx = y`.
+A [group](group-theory.groups.md) `G` is said to **act transitively** on a
+[set](foundation-core.sets.md) `X` if for every `x : X` the map
+
+```textbf
+  g ↦ gx : G → X
+```
+
+is [surjective](foundation.surjective-maps.md). In other words, a
+[group action](group-theory.group-actions.md) is transitive if any two elements
+are in the same [orbit](group-theory.orbits-group-actions.md).
 
 ## Definition
 

@@ -59,9 +59,9 @@ module _
   {C : UU l5} (T : Equivalence-Relation l6 C)
   where
 
-  preserves-sim-binary-map-Equivalence-Relation-Prop :
+  preserves-sim-prop-binary-map-Equivalence-Relation :
     (A → B → C) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l6)
-  preserves-sim-binary-map-Equivalence-Relation-Prop f =
+  preserves-sim-prop-binary-map-Equivalence-Relation f =
     Π-Prop' A
       ( λ x →
         Π-Prop' A
@@ -79,16 +79,16 @@ module _
   preserves-sim-binary-map-Equivalence-Relation :
     (A → B → C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l6)
   preserves-sim-binary-map-Equivalence-Relation f =
-    type-Prop (preserves-sim-binary-map-Equivalence-Relation-Prop f)
+    type-Prop (preserves-sim-prop-binary-map-Equivalence-Relation f)
 
   is-prop-preserves-sim-binary-map-Equivalence-Relation :
     (f : A → B → C) → is-prop (preserves-sim-binary-map-Equivalence-Relation f)
   is-prop-preserves-sim-binary-map-Equivalence-Relation f =
-    is-prop-type-Prop (preserves-sim-binary-map-Equivalence-Relation-Prop f)
+    is-prop-type-Prop (preserves-sim-prop-binary-map-Equivalence-Relation f)
 
   binary-hom-Equivalence-Relation : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   binary-hom-Equivalence-Relation =
-    type-subtype preserves-sim-binary-map-Equivalence-Relation-Prop
+    type-subtype preserves-sim-prop-binary-map-Equivalence-Relation
 
   map-binary-hom-Equivalence-Relation :
     (f : binary-hom-Equivalence-Relation) → A → B → C

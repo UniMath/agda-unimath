@@ -116,15 +116,15 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
-  is-block-partition-Equivalence-Relation-Prop :
+  is-block-prop-partition-Equivalence-Relation :
     subtype (l1 ⊔ l2) (inhabited-subtype l2 A)
-  is-block-partition-Equivalence-Relation-Prop Q =
+  is-block-prop-partition-Equivalence-Relation Q =
     is-equivalence-class-Prop R (subtype-inhabited-subtype Q)
 
   is-block-partition-Equivalence-Relation :
     inhabited-subtype l2 A → UU (l1 ⊔ l2)
   is-block-partition-Equivalence-Relation Q =
-    type-Prop (is-block-partition-Equivalence-Relation-Prop Q)
+    type-Prop (is-block-prop-partition-Equivalence-Relation Q)
 
   is-partition-is-equivalence-class-inhabited-subtype-Equivalence-Relation :
     is-partition (is-equivalence-class-inhabited-subtype-Equivalence-Relation R)
@@ -147,7 +147,7 @@ module _
 
   partition-Equivalence-Relation : partition l2 (l1 ⊔ l2) A
   pr1 partition-Equivalence-Relation =
-    is-block-partition-Equivalence-Relation-Prop
+    is-block-prop-partition-Equivalence-Relation
   pr2 partition-Equivalence-Relation =
     is-partition-is-equivalence-class-inhabited-subtype-Equivalence-Relation
 

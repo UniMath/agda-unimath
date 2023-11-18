@@ -53,8 +53,8 @@ module _
   {B : UU l3} (S : Equivalence-Relation l4 B)
   where
 
-  preserves-sim-Equivalence-Relation-Prop : (f : A → B) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-sim-Equivalence-Relation-Prop f =
+  preserves-sim-prop-Equivalence-Relation : (f : A → B) → Prop (l1 ⊔ l2 ⊔ l4)
+  preserves-sim-prop-Equivalence-Relation f =
     Π-Prop' A
       ( λ x →
         Π-Prop' A
@@ -65,16 +65,16 @@ module _
 
   preserves-sim-Equivalence-Relation : (f : A → B) → UU (l1 ⊔ l2 ⊔ l4)
   preserves-sim-Equivalence-Relation f =
-    type-Prop (preserves-sim-Equivalence-Relation-Prop f)
+    type-Prop (preserves-sim-prop-Equivalence-Relation f)
 
   is-prop-preserves-sim-Equivalence-Relation :
     (f : A → B) → is-prop (preserves-sim-Equivalence-Relation f)
   is-prop-preserves-sim-Equivalence-Relation f =
-    is-prop-type-Prop (preserves-sim-Equivalence-Relation-Prop f)
+    is-prop-type-Prop (preserves-sim-prop-Equivalence-Relation f)
 
   hom-Equivalence-Relation : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Equivalence-Relation =
-    type-subtype preserves-sim-Equivalence-Relation-Prop
+    type-subtype preserves-sim-prop-Equivalence-Relation
 
   map-hom-Equivalence-Relation : hom-Equivalence-Relation → A → B
   map-hom-Equivalence-Relation = pr1

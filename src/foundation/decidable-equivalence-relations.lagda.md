@@ -491,11 +491,11 @@ has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
     ( x)
     ( y)
 
-is-decidable-Equivalence-Relation-Surjection-Into-Set :
+is-decidable-eq-rel-Surjection-Into-Set :
   {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A) →
   has-decidable-equality (type-Surjection-Into-Set surj) →
   is-decidable-Equivalence-Relation (eq-rel-Surjection-Into-Set surj)
-is-decidable-Equivalence-Relation-Surjection-Into-Set surj dec-eq x y =
+is-decidable-eq-rel-Surjection-Into-Set surj dec-eq x y =
   dec-eq (map-Surjection-Into-Set surj x) (map-Surjection-Into-Set surj y)
 
 equiv-Surjection-Into-Set-Decidable-Equivalence-Relation :
@@ -536,7 +536,7 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
                           ( y)))))
             ( λ _ → is-prop-has-decidable-equality)
             ( λ s → has-decidable-equality-type-Surjection-Into-Set s)
-            ( λ s → is-decidable-Equivalence-Relation-Surjection-Into-Set s)) ∘e
+            ( λ s → is-decidable-eq-rel-Surjection-Into-Set s)) ∘e
           ( ( inv-equiv
               ( equiv-Σ-equiv-base
                 ( λ R → is-decidable-Equivalence-Relation R)

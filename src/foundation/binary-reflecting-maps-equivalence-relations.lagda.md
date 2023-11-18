@@ -77,11 +77,11 @@ module _
                       ( is-prop-function-type
                         ( is-set-type-Set X (f x y) (f x' y')))))))
 
-  binary-reflects-Equivalence-Relation-Prop :
+  binary-reflects-prop-Equivalence-Relation :
     (X : Set l5) (f : A → B → type-Set X) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  pr1 (binary-reflects-Equivalence-Relation-Prop X f) =
+  pr1 (binary-reflects-prop-Equivalence-Relation X f) =
     binary-reflects-Equivalence-Relation f
-  pr2 (binary-reflects-Equivalence-Relation-Prop X f) =
+  pr2 (binary-reflects-prop-Equivalence-Relation X f) =
     is-prop-binary-reflects-Equivalence-Relation X f
 ```
 

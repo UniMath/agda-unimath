@@ -68,10 +68,10 @@ module _
           ( λ y →
             is-prop-function-type (is-set-type-Set B (f x) (f y))))
 
-  reflects-Equivalence-Relation-Prop :
+  reflects-prop-Equivalence-Relation :
     {l3 : Level} (B : Set l3) (f : A → type-Set B) → Prop (l1 ⊔ l2 ⊔ l3)
-  pr1 (reflects-Equivalence-Relation-Prop B f) = reflects-Equivalence-Relation f
-  pr2 (reflects-Equivalence-Relation-Prop B f) =
+  pr1 (reflects-prop-Equivalence-Relation B f) = reflects-Equivalence-Relation f
+  pr2 (reflects-prop-Equivalence-Relation B f) =
     is-prop-reflects-Equivalence-Relation B f
 ```
 
@@ -85,17 +85,17 @@ module _
   (q : A → type-Set B)
   where
 
-  reflects-Equivalence-Relation-is-surjective-and-effective :
+  reflects-equivalence-relation-is-surjective-and-effective :
     is-surjective-and-effective R q → reflects-Equivalence-Relation R q
-  reflects-Equivalence-Relation-is-surjective-and-effective E {x} {y} =
+  reflects-equivalence-relation-is-surjective-and-effective E {x} {y} =
     map-inv-equiv (pr2 E x y)
 
-  reflecting-map-Equivalence-Relation-is-surjective-and-effective :
+  reflecting-map-equivalence-relation-is-surjective-and-effective :
     is-surjective-and-effective R q →
     reflecting-map-Equivalence-Relation R (type-Set B)
-  pr1 (reflecting-map-Equivalence-Relation-is-surjective-and-effective E) = q
-  pr2 (reflecting-map-Equivalence-Relation-is-surjective-and-effective E) =
-    reflects-Equivalence-Relation-is-surjective-and-effective E
+  pr1 (reflecting-map-equivalence-relation-is-surjective-and-effective E) = q
+  pr2 (reflecting-map-equivalence-relation-is-surjective-and-effective E) =
+    reflects-equivalence-relation-is-surjective-and-effective E
 ```
 
 ### Characterizing the identity type of reflecting maps into sets
