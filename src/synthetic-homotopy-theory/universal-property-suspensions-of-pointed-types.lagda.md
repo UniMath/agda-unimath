@@ -7,16 +7,13 @@ module synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -26,10 +23,8 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
 </details>
