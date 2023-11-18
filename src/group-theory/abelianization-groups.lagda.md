@@ -317,10 +317,11 @@ is an equivalence for any group `H`. That is, any group homomorphism `f : G → 
 of which the [kernel](group-theory.kernels-homomorphisms-groups.md) contains the
 commutator subgroup `[G,G]` extends uniquely to the abelianization.
 
-Since abelian groups have trivial commutator subgroups and since the inclusion
-`f [G,G] ⊆ [H,H]` holds for any group homomorphism, it follows that any group
-homomorphism `G → A` into an abelian group `A` extends uniquely to the
-abelianization `Gᵃᵇ`. This proves the claim.
+Since abelian groups have [trivial](group-theory.trivial-subgroups.md)
+commutator subgroups and since the inclusion `f [G,G] ⊆ [H,H]` holds for any
+group homomorphism, it follows that any group homomorphism `G → A` into an
+abelian group `A` extends uniquely to the abelianization `Gᵃᵇ`. This proves the
+claim.
 
 ```agda
 module _
