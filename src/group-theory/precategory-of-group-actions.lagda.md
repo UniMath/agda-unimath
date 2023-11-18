@@ -24,8 +24,8 @@ open import group-theory.homomorphisms-group-actions
 
 The [large precategory](category-theory.large-precategories.md) of
 [group actions](group-theory.group-actions.md) consists of group actions and
-[morphisms of group actions](group-theory.morphisms-group-actions.md) between
-them.
+[morphisms of group actions](group-theory.homomorphisms-group-actions.md)
+between them.
 
 ## Definitions
 

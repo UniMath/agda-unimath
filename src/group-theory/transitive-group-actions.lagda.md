@@ -10,6 +10,7 @@ module group-theory.transitive-group-actions where
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import group-theory.group-actions
@@ -38,15 +39,9 @@ module _
   {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
   where
 
-  is-transitive-action-Group : Prop (l1 ⊔ l2)
-  is-transitive-action-Group =
+  is-transitive-prop-action-Group : Prop (l1 ⊔ l2)
+  is-transitive-prop-action-Group =
     Π-Prop
       ( type-action-Group G X)
-      ( λ x →
-        Π-Prop
-          ( type-action-Group G X)
-          ( λ y →
-            ∃-Prop
-              ( type-Group G)
-              ( λ g → Id (mul-action-Group G X g x) y)))
+      ( λ x → is-surjective-Prop (λ g → mul-action-Group G X g x))
 ```
