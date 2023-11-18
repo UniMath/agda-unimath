@@ -1,4 +1,4 @@
-# Abelianization of abstract groups
+# Abelianization of groups
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -65,8 +65,9 @@ Therefore we obtain an
   hom Gᵃᵇ A ≃ hom G A,
 ```
 
-i.e., the abelianization is left adjoint to the inclusion functor from abelian
-groups into groups.
+i.e., the abelianization is left adjoint to the inclusion functor from the
+[category of abelian groups](group-theory.category-of-abelian-groups.md) into
+the [category of groups](group-theory.category-of-groups.md).
 
 ## Definitions
 
@@ -304,6 +305,23 @@ naturality-natural-transformation-Large-Precategory
 ```
 
 ### The universal property of abelianization
+
+**Proof:** Since the abelianization is constructed as the quotient group
+`G/[G,G]`, we immediately obtain that the precomposition function
+
+```text
+  hom-Group Gᵃᵇ H → nullifying-hom-Group G H [G,G]
+```
+
+is an equivalence for any group `H`. That is, any group homomorphism `f : G → H`
+of which the [kernel](group-theory.kernels-homomorphisms-groups.md) contains the
+commutator subgroup `[G,G]` extends uniquely to the abelianization.
+
+Since abelian groups have trivial commutator subgroups and since any group
+homomorphism preserves
+[commutators](group-theory.commutators-of-elements-groups.md), it follows that
+any group homomorphism `G → A` into an abelian group `A` extends uniquely to the
+abelianization `Gᵃᵇ`. This proves the claim.
 
 ```agda
 module _
