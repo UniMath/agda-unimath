@@ -22,9 +22,11 @@ open import order-theory.large-posets
 ## Idea
 
 A **subset** of a [group](group-theory.groups.md) `G` is a
-[subtype](foundation.subtypes.md) of the underlying type of `G`.
+[subtype](foundation.subtypes.md) of the underlying type of `G`. The
+[large poset](order-theory.large-posets.md) of all subsets of `G` is called the
+**powerset** of `G`.
 
-## Definition
+## Definitions
 
 ### The large locale of subsets of a group
 

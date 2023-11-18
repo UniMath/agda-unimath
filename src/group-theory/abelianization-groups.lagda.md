@@ -306,7 +306,7 @@ naturality-natural-transformation-Large-Precategory
 
 ### The universal property of abelianization
 
-**Proof:** Since the abelianization is constructed as the quotient group
+**Proof:** Since the abelianization of `G` is constructed as the quotient group
 `G/[G,G]`, we immediately obtain that the precomposition function
 
 ```text
@@ -317,10 +317,9 @@ is an equivalence for any group `H`. That is, any group homomorphism `f : G → 
 of which the [kernel](group-theory.kernels-homomorphisms-groups.md) contains the
 commutator subgroup `[G,G]` extends uniquely to the abelianization.
 
-Since abelian groups have trivial commutator subgroups and since any group
-homomorphism preserves
-[commutators](group-theory.commutators-of-elements-groups.md), it follows that
-any group homomorphism `G → A` into an abelian group `A` extends uniquely to the
+Since abelian groups have trivial commutator subgroups and since the inclusion
+`f [G,G] ⊆ [H,H]` holds for any group homomorphism, it follows that any group
+homomorphism `G → A` into an abelian group `A` extends uniquely to the
 abelianization `Gᵃᵇ`. This proves the claim.
 
 ```agda
