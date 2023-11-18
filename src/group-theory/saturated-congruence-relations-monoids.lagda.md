@@ -40,8 +40,8 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M)
   where
 
-  is-saturated-congruence-monoid-Prop : Prop (l1 ⊔ l2)
-  is-saturated-congruence-monoid-Prop =
+  is-saturated-prop-congruence-Monoid : Prop (l1 ⊔ l2)
+  is-saturated-prop-congruence-Monoid =
     Π-Prop
       ( type-Monoid M)
       ( λ x →
@@ -59,12 +59,12 @@ module _
               ( prop-congruence-Monoid M R x y)))
 
   is-saturated-congruence-Monoid : UU (l1 ⊔ l2)
-  is-saturated-congruence-Monoid = type-Prop is-saturated-congruence-monoid-Prop
+  is-saturated-congruence-Monoid = type-Prop is-saturated-prop-congruence-Monoid
 
   is-prop-is-saturated-congruence-Monoid :
     is-prop is-saturated-congruence-Monoid
   is-prop-is-saturated-congruence-Monoid =
-    is-prop-type-Prop is-saturated-congruence-monoid-Prop
+    is-prop-type-Prop is-saturated-prop-congruence-Monoid
 
 saturated-congruence-Monoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) → UU (l1 ⊔ lsuc l2)

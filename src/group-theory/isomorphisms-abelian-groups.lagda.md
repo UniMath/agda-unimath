@@ -187,7 +187,7 @@ abstract
     {l : Level} (A B : Ab l) → Id A B ≃ iso-Ab A B
   equiv-iso-eq-Ab' A B =
     ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
-    ( equiv-ap-inclusion-subtype is-abelian-group-Prop {A} {B})
+    ( equiv-ap-inclusion-subtype is-abelian-prop-Group {A} {B})
 
 abstract
   is-torsorial-iso-Ab :

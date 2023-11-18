@@ -32,7 +32,7 @@ module _
   where
 
   subtype-center-Semigroup : type-Semigroup G → Prop l
-  subtype-center-Semigroup = is-central-element-semigroup-Prop G
+  subtype-center-Semigroup = is-central-element-prop-Semigroup G
 
   center-Semigroup : Subsemigroup l G
   pr1 center-Semigroup = subtype-center-Semigroup

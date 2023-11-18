@@ -33,10 +33,10 @@ such that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we h
 ## Definition
 
 ```agda
-is-congruence-semigroup-Prop :
+is-congruence-prop-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) →
   Equivalence-Relation l2 (type-Semigroup G) → Prop (l1 ⊔ l2)
-is-congruence-semigroup-Prop G R =
+is-congruence-prop-Semigroup G R =
   Π-Prop'
     ( type-Semigroup G)
     ( λ x1 →
@@ -61,14 +61,14 @@ is-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) →
   Equivalence-Relation l2 (type-Semigroup G) → UU (l1 ⊔ l2)
 is-congruence-Semigroup G R =
-  type-Prop (is-congruence-semigroup-Prop G R)
+  type-Prop (is-congruence-prop-Semigroup G R)
 
 is-prop-is-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1)
   (R : Equivalence-Relation l2 (type-Semigroup G)) →
   is-prop (is-congruence-Semigroup G R)
 is-prop-is-congruence-Semigroup G R =
-  is-prop-type-Prop (is-congruence-semigroup-Prop G R)
+  is-prop-type-Prop (is-congruence-prop-Semigroup G R)
 
 congruence-Semigroup :
   {l : Level} (l2 : Level) (G : Semigroup l) → UU (l ⊔ lsuc l2)

@@ -70,8 +70,8 @@ module _
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
   where
 
-  is-transitive-action-Concrete-Group-Prop : Prop (l1 ⊔ l2)
-  is-transitive-action-Concrete-Group-Prop =
+  is-transitive-prop-action-Concrete-Group : Prop (l1 ⊔ l2)
+  is-transitive-prop-action-Concrete-Group =
     is-transitive-prop-action-∞-Group
       ( ∞-group-Concrete-Group G)
       ( type-Set ∘ X)
@@ -123,7 +123,7 @@ module _
 transitive-action-Concrete-Group :
   {l1 : Level} (l2 : Level) (G : Concrete-Group l1) → UU (l1 ⊔ lsuc l2)
 transitive-action-Concrete-Group l2 G =
-  type-subtype (is-transitive-action-Concrete-Group-Prop {l2 = l2} G)
+  type-subtype (is-transitive-prop-action-Concrete-Group {l2 = l2} G)
 
 module _
   {l1 l2 : Level} (G : Concrete-Group l1)
@@ -250,7 +250,7 @@ module _
       ( action-transitive-action-Concrete-Group G X)
       ( action-transitive-action-Concrete-Group G Y)) ∘e
     ( extensionality-type-subtype'
-      ( is-transitive-action-Concrete-Group-Prop G)
+      ( is-transitive-prop-action-Concrete-Group G)
       ( X)
       ( Y))
 ```
@@ -273,9 +273,9 @@ module _
       ( e)
       ( f)
 
-  htpy-equiv-transitive-action-Concrete-Group-Prop : Prop (l2 ⊔ l3)
-  htpy-equiv-transitive-action-Concrete-Group-Prop =
-    htpy-equiv-action-Concrete-Group-Prop G
+  htpy-prop-equiv-transitive-action-Concrete-Group : Prop (l2 ⊔ l3)
+  htpy-prop-equiv-transitive-action-Concrete-Group =
+    htpy-prop-equiv-action-Concrete-Group G
       ( action-transitive-action-Concrete-Group G X)
       ( action-transitive-action-Concrete-Group G Y)
       ( e)
@@ -289,7 +289,7 @@ module _
     htpy-equiv-transitive-action-Concrete-Group
   htpy-exists-equiv-transitive-action-Concrete-Group H =
     apply-universal-property-trunc-Prop H
-      ( htpy-equiv-transitive-action-Concrete-Group-Prop)
+      ( htpy-prop-equiv-transitive-action-Concrete-Group)
       ( λ (x , p) y →
         apply-universal-property-trunc-Prop
           ( pr2
@@ -324,7 +324,7 @@ module _
     is-1-type (transitive-action-Concrete-Group l2 G)
   is-1-type-transitive-action-Concrete-Group =
     is-1-type-type-subtype
-      ( is-transitive-action-Concrete-Group-Prop G)
+      ( is-transitive-prop-action-Concrete-Group G)
       ( is-1-type-action-Concrete-Group G)
 
   transitive-action-1-type-Concrete-Group : 1-Type (l1 ⊔ lsuc l2)

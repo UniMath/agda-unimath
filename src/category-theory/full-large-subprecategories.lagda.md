@@ -7,11 +7,13 @@ module category-theory.full-large-subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-large-precategories
 open import category-theory.isomorphisms-in-large-categories
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -188,6 +190,34 @@ module _
     (X ＝ Y) → iso-Full-Large-Subprecategory X Y
   iso-eq-Full-Large-Subprecategory =
     iso-eq-Large-Precategory large-precategory-Full-Large-Subprecategory
+```
+
+### The forgetful functor from a full large subprecategory to the ambient large precategory
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
+  (C : Large-Precategory α β)
+  (P : Full-Large-Subprecategory γ C)
+  where
+
+  forgetful-functor-Full-Large-Subprecategory :
+    functor-Large-Precategory
+      ( λ l → l)
+      ( large-precategory-Full-Large-Subprecategory C P)
+      ( C)
+  obj-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory =
+    inclusion-subtype P
+  hom-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory =
+    id
+  preserves-comp-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory g f =
+    refl
+  preserves-id-functor-Large-Precategory
+    forgetful-functor-Full-Large-Subprecategory =
+    refl
 ```
 
 ## Properties

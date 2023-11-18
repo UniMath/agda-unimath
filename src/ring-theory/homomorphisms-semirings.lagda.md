@@ -41,11 +41,11 @@ module _
   {l1 l2 : Level} (R : Semiring l1) (S : Semiring l2)
   where
 
-  is-homomorphism-semiring-hom-Commutative-Monoid-Prop :
+  is-homomorphism-semiring-prop-hom-Commutative-Monoid :
     ( hom-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
       ( additive-commutative-monoid-Semiring S)) → Prop (l1 ⊔ l2)
-  is-homomorphism-semiring-hom-Commutative-Monoid-Prop f =
+  is-homomorphism-semiring-prop-hom-Commutative-Monoid f =
     Σ-Prop
       ( preserves-mul-prop-Semigroup
         ( multiplicative-semigroup-Semiring R)
@@ -55,7 +55,7 @@ module _
           ( additive-commutative-monoid-Semiring S)
           ( f)))
       ( λ H →
-        preserves-unit-hom-semigroup-Prop
+        preserves-unit-prop-hom-Semigroup
           ( multiplicative-monoid-Semiring R)
           ( multiplicative-monoid-Semiring S)
           ( ( map-hom-Commutative-Monoid
@@ -69,7 +69,7 @@ module _
       ( additive-commutative-monoid-Semiring R)
       ( additive-commutative-monoid-Semiring S)) → UU (l1 ⊔ l2)
   is-homomorphism-semiring-hom-Commutative-Monoid f =
-    type-Prop (is-homomorphism-semiring-hom-Commutative-Monoid-Prop f)
+    type-Prop (is-homomorphism-semiring-prop-hom-Commutative-Monoid f)
 
   is-prop-is-homomorphism-semiring-hom-Commutative-Monoid :
     ( f :
@@ -78,7 +78,7 @@ module _
         ( additive-commutative-monoid-Semiring S)) →
     is-prop (is-homomorphism-semiring-hom-Commutative-Monoid f)
   is-prop-is-homomorphism-semiring-hom-Commutative-Monoid f =
-    is-prop-type-Prop (is-homomorphism-semiring-hom-Commutative-Monoid-Prop f)
+    is-prop-type-Prop (is-homomorphism-semiring-prop-hom-Commutative-Monoid f)
 
   hom-set-Semiring : Set (l1 ⊔ l2)
   hom-set-Semiring =
@@ -86,7 +86,7 @@ module _
       ( hom-set-Commutative-Monoid
         ( additive-commutative-monoid-Semiring R)
         ( additive-commutative-monoid-Semiring S))
-      ( is-homomorphism-semiring-hom-Commutative-Monoid-Prop)
+      ( is-homomorphism-semiring-prop-hom-Commutative-Monoid)
 
   hom-Semiring : UU (l1 ⊔ l2)
   hom-Semiring = type-Set hom-set-Semiring

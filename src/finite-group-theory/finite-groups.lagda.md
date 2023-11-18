@@ -305,7 +305,7 @@ is-finite-is-group {l} n G =
     ( is-finite-Prop _)
     ( λ e →
       is-finite-is-decidable-Prop
-        ( is-group-Prop (pr1 G))
+        ( is-group-prop-Semigroup (pr1 G))
         ( is-decidable-Σ-count
           ( count-Σ
             ( pair n e)

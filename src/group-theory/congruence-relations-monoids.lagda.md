@@ -31,10 +31,10 @@ semigroup of `M`.
 ## Definition
 
 ```agda
-is-congruence-monoid-Prop :
+is-congruence-prop-Monoid :
   {l1 l2 : Level} (M : Monoid l1) →
   Equivalence-Relation l2 (type-Monoid M) → Prop (l1 ⊔ l2)
-is-congruence-monoid-Prop M = is-congruence-semigroup-Prop (semigroup-Monoid M)
+is-congruence-prop-Monoid M = is-congruence-prop-Semigroup (semigroup-Monoid M)
 
 is-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) →

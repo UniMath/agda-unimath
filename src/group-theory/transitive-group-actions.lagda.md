@@ -27,18 +27,18 @@ A group `G` is said to act transitively on a set `X` if for every `x` and `y` in
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
   where
 
-  is-transitive-Abstract-Group-Action : Prop (l1 ⊔ l2)
-  is-transitive-Abstract-Group-Action =
+  is-transitive-action-Group : Prop (l1 ⊔ l2)
+  is-transitive-action-Group =
     Π-Prop
-      ( type-Abstract-Group-Action G X)
+      ( type-action-Group G X)
       ( λ x →
         Π-Prop
-          ( type-Abstract-Group-Action G X)
+          ( type-action-Group G X)
           ( λ y →
             ∃-Prop
               ( type-Group G)
-              ( λ g → Id (mul-Abstract-Group-Action G X g x) y)))
+              ( λ g → Id (mul-action-Group G X g x) y)))
 ```

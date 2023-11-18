@@ -31,11 +31,11 @@ the underlying monoid of `M`.
 ## Definition
 
 ```agda
-is-congruence-commutative-monoid-Prop :
+is-congruence-prop-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →
   Equivalence-Relation l2 (type-Commutative-Monoid M) → Prop (l1 ⊔ l2)
-is-congruence-commutative-monoid-Prop M =
-  is-congruence-monoid-Prop (monoid-Commutative-Monoid M)
+is-congruence-prop-Commutative-Monoid M =
+  is-congruence-prop-Monoid (monoid-Commutative-Monoid M)
 
 is-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →

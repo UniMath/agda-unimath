@@ -581,9 +581,9 @@ abstract
       ( λ e →
         is-prop-all-elements-equal (all-elements-equal-is-group G e))
 
-is-group-Prop : {l : Level} (G : Semigroup l) → Prop l
-pr1 (is-group-Prop G) = is-group G
-pr2 (is-group-Prop G) = is-prop-is-group G
+is-group-prop-Semigroup : {l : Level} (G : Semigroup l) → Prop l
+pr1 (is-group-prop-Semigroup G) = is-group G
+pr2 (is-group-prop-Semigroup G) = is-prop-is-group G
 ```
 
 ### Any idempotent element in a group is the unit

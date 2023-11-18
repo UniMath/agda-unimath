@@ -96,7 +96,7 @@ module _
   is-ring-homomorphism-hom-Ab-Prop :
     hom-Ab (ab-Ring R) (ab-Ring S) → Prop (l1 ⊔ l2)
   is-ring-homomorphism-hom-Ab-Prop f =
-    is-homomorphism-semiring-hom-Commutative-Monoid-Prop
+    is-homomorphism-semiring-prop-hom-Commutative-Monoid
       ( semiring-Ring R)
       ( semiring-Ring S)
       ( hom-commutative-monoid-hom-Ab (ab-Ring R) (ab-Ring S) f)

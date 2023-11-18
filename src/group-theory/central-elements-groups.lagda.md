@@ -32,9 +32,9 @@ module _
   {l : Level} (G : Group l)
   where
 
-  is-central-element-group-Prop : type-Group G → Prop l
-  is-central-element-group-Prop =
-    is-central-element-monoid-Prop (monoid-Group G)
+  is-central-element-prop-Group : type-Group G → Prop l
+  is-central-element-prop-Group =
+    is-central-element-prop-Monoid (monoid-Group G)
 
   is-central-element-Group : type-Group G → UU l
   is-central-element-Group = is-central-element-Monoid (monoid-Group G)
@@ -109,7 +109,7 @@ module _
     is-central-element-Group G (conjugation-Group G y x)
   is-central-element-conjugation-Group x y H =
     is-closed-under-eq-subtype'
-      ( is-central-element-group-Prop G)
+      ( is-central-element-prop-Group G)
       ( H)
       ( is-fixed-point-conjugation-is-central-element-Group x y H)
 ```

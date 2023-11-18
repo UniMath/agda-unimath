@@ -27,9 +27,13 @@ open import group-theory.transitive-concrete-group-actions
 
 ## Idea
 
-The stabilizer of an element `x : X point` of a concrete G-set `X : BG → Set` is
-the connected component of `point , x` in the type of orbits of `X`. Its loop
-space is indeed the type of elements `g : G` such that `g x = x`.
+The **stabilizer** of an element `x : X point` of a
+[concrete `G`-set](group-theory.concrete-group-actions.md) `X : BG → Set` is the
+[connected component](foundation.connected-components.md) at the element
+`(point , x)` in the type of
+[orbits](group-theory.orbits-concrete-group-actions.md) of `X`. This type is a
+indeed concrete group of which the underlying type is the type of elements
+`g : G` such that `g x = x`.
 
 ## Definition
 

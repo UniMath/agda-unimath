@@ -161,7 +161,7 @@ module _
   is-unit-Commutative-Monoid : type-Commutative-Monoid M → UU l
   is-unit-Commutative-Monoid x = Id x unit-Commutative-Monoid
 
-  is-unit-monoid-Prop : type-Commutative-Monoid M → Prop l
-  is-unit-monoid-Prop x =
+  is-unit-prop-Commutative-Monoid : type-Commutative-Monoid M → Prop l
+  is-unit-prop-Commutative-Monoid x =
     Id-Prop (set-Commutative-Monoid M) x unit-Commutative-Monoid
 ```

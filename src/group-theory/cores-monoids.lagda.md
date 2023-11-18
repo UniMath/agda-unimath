@@ -42,7 +42,7 @@ module _
   where
 
   subtype-core-Monoid : type-Monoid M → Prop l
-  subtype-core-Monoid = is-invertible-element-monoid-Prop M
+  subtype-core-Monoid = is-invertible-element-prop-Monoid M
 
   submonoid-core-Monoid : Submonoid l M
   pr1 submonoid-core-Monoid = subtype-core-Monoid

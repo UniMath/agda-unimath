@@ -41,8 +41,8 @@ module _
   (R : congruence-Commutative-Monoid l2 M)
   where
 
-  is-saturated-congruence-commutative-monoid-Prop : Prop (l1 ⊔ l2)
-  is-saturated-congruence-commutative-monoid-Prop =
+  is-saturated-prop-congruence-Commutative-Monoid : Prop (l1 ⊔ l2)
+  is-saturated-prop-congruence-Commutative-Monoid =
     Π-Prop
       ( type-Commutative-Monoid M)
       ( λ x →
@@ -61,12 +61,12 @@ module _
 
   is-saturated-congruence-Commutative-Monoid : UU (l1 ⊔ l2)
   is-saturated-congruence-Commutative-Monoid =
-    type-Prop is-saturated-congruence-commutative-monoid-Prop
+    type-Prop is-saturated-prop-congruence-Commutative-Monoid
 
   is-prop-is-saturated-congruence-Commutative-Monoid :
     is-prop is-saturated-congruence-Commutative-Monoid
   is-prop-is-saturated-congruence-Commutative-Monoid =
-    is-prop-type-Prop is-saturated-congruence-commutative-monoid-Prop
+    is-prop-type-Prop is-saturated-prop-congruence-Commutative-Monoid
 
 saturated-congruence-Commutative-Monoid :
   {l1 : Level} (l2 : Level) (M : Commutative-Monoid l1) → UU (l1 ⊔ lsuc l2)

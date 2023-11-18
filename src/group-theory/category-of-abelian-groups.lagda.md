@@ -42,7 +42,7 @@ Ab-Large-Category : Large-Category lsuc _⊔_
 Ab-Large-Category =
   large-category-Full-Large-Subcategory
     ( Group-Large-Category)
-    ( is-abelian-group-Prop)
+    ( is-abelian-prop-Group)
 ```
 
 ### The large precategory of abelian groups
@@ -72,8 +72,8 @@ Ab-Precategory = precategory-Large-Category Ab-Large-Category
 ```agda
 forgetful-functor-Ab :
   functor-Large-Category (λ l → l) Ab-Large-Category Group-Large-Category
-obj-functor-Large-Precategory forgetful-functor-Ab = group-Ab
-hom-functor-Large-Precategory forgetful-functor-Ab = id
-preserves-comp-functor-Large-Precategory forgetful-functor-Ab g f = refl
-preserves-id-functor-Large-Precategory forgetful-functor-Ab = refl
+forgetful-functor-Ab =
+  forgetful-functor-Full-Large-Subcategory
+    ( Group-Large-Category)
+    ( is-abelian-prop-Group)
 ```

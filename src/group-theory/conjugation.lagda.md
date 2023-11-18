@@ -71,10 +71,10 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  conjugation-Abstract-Group-Action : Abstract-Group-Action G l1
-  pr1 conjugation-Abstract-Group-Action = set-Group G
-  pr1 (pr2 conjugation-Abstract-Group-Action) g = equiv-conjugation-Group G g
-  pr2 (pr2 conjugation-Abstract-Group-Action) {g} {h} =
+  conjugation-action-Group : action-Group G l1
+  pr1 conjugation-action-Group = set-Group G
+  pr1 (pr2 conjugation-action-Group) g = equiv-conjugation-Group G g
+  pr2 (pr2 conjugation-action-Group) {g} {h} =
     eq-htpy-equiv
       ( λ x →
         ( ap-mul-Group G

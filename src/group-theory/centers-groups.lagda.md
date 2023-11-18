@@ -33,7 +33,7 @@ module _
   where
 
   subtype-center-Group : type-Group G → Prop l
-  subtype-center-Group = is-central-element-group-Prop G
+  subtype-center-Group = is-central-element-prop-Group G
 
   subgroup-center-Group : Subgroup l G
   pr1 subgroup-center-Group =

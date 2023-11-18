@@ -33,7 +33,7 @@ module _
   where
 
   subtype-center-Monoid : type-Monoid M → Prop l
-  subtype-center-Monoid = is-central-element-monoid-Prop M
+  subtype-center-Monoid = is-central-element-prop-Monoid M
 
   center-Monoid : Submonoid l M
   pr1 center-Monoid = subtype-center-Monoid

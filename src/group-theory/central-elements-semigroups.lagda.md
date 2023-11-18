@@ -30,8 +30,8 @@ module _
   {l : Level} (G : Semigroup l)
   where
 
-  is-central-element-semigroup-Prop : type-Semigroup G → Prop l
-  is-central-element-semigroup-Prop x =
+  is-central-element-prop-Semigroup : type-Semigroup G → Prop l
+  is-central-element-prop-Semigroup x =
     Π-Prop
       ( type-Semigroup G)
       ( λ y →
@@ -42,12 +42,12 @@ module _
 
   is-central-element-Semigroup : type-Semigroup G → UU l
   is-central-element-Semigroup x =
-    type-Prop (is-central-element-semigroup-Prop x)
+    type-Prop (is-central-element-prop-Semigroup x)
 
   is-prop-is-central-element-Semigroup :
     (x : type-Semigroup G) → is-prop (is-central-element-Semigroup x)
   is-prop-is-central-element-Semigroup x =
-    is-prop-type-Prop (is-central-element-semigroup-Prop x)
+    is-prop-type-Prop (is-central-element-prop-Semigroup x)
 ```
 
 ## Properties

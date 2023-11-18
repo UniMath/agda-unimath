@@ -160,10 +160,10 @@ module _
     is-prop-all-elements-equal
       ( all-elements-equal-is-invertible-element-Monoid x)
 
-  is-invertible-element-monoid-Prop : type-Monoid M → Prop l
-  pr1 (is-invertible-element-monoid-Prop x) =
+  is-invertible-element-prop-Monoid : type-Monoid M → Prop l
+  pr1 (is-invertible-element-prop-Monoid x) =
     is-invertible-element-Monoid M x
-  pr2 (is-invertible-element-monoid-Prop x) =
+  pr2 (is-invertible-element-prop-Monoid x) =
     is-prop-is-invertible-element-Monoid x
 ```
 

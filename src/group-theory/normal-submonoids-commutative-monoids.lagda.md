@@ -52,8 +52,8 @@ module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Commutative-Submonoid l2 M)
   where
 
-  is-normal-commutative-submonoid-Prop : Prop (l1 ⊔ l2)
-  is-normal-commutative-submonoid-Prop =
+  is-normal-prop-Commutative-Submonoid : Prop (l1 ⊔ l2)
+  is-normal-prop-Commutative-Submonoid =
     Π-Prop
       ( type-Commutative-Monoid M)
       ( λ x →
@@ -69,12 +69,12 @@ module _
 
   is-normal-Commutative-Submonoid : UU (l1 ⊔ l2)
   is-normal-Commutative-Submonoid =
-    type-Prop is-normal-commutative-submonoid-Prop
+    type-Prop is-normal-prop-Commutative-Submonoid
 
   is-prop-is-normal-Commutative-Submonoid :
     is-prop is-normal-Commutative-Submonoid
   is-prop-is-normal-Commutative-Submonoid =
-    is-prop-type-Prop is-normal-commutative-submonoid-Prop
+    is-prop-type-Prop is-normal-prop-Commutative-Submonoid
 
 Normal-Commutative-Submonoid :
   {l1 : Level} (l2 : Level) → Commutative-Monoid l1 → UU (l1 ⊔ lsuc l2)
@@ -98,7 +98,7 @@ module _
     subset-Commutative-Submonoid M submonoid-Normal-Commutative-Submonoid
 
   is-submonoid-Normal-Commutative-Submonoid :
-    is-submonoid-Commutative-Monoid M subset-Normal-Commutative-Submonoid
+    is-submonoid-subset-Commutative-Monoid M subset-Normal-Commutative-Submonoid
   is-submonoid-Normal-Commutative-Submonoid =
     is-submonoid-Commutative-Submonoid M submonoid-Normal-Commutative-Submonoid
 
@@ -253,7 +253,7 @@ module _
     (N ＝ K) ≃ has-same-elements-Normal-Commutative-Submonoid K
   extensionality-Normal-Commutative-Submonoid =
     extensionality-type-subtype
-      ( is-normal-commutative-submonoid-Prop M)
+      ( is-normal-prop-Commutative-Submonoid M)
       ( is-normal-Normal-Commutative-Submonoid M N)
       ( λ x → (id , id))
       ( extensionality-Commutative-Submonoid M

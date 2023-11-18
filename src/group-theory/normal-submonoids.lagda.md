@@ -57,8 +57,8 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Submonoid l2 M)
   where
 
-  is-normal-submonoid-Prop : Prop (l1 ⊔ l2)
-  is-normal-submonoid-Prop =
+  is-normal-prop-Submonoid : Prop (l1 ⊔ l2)
+  is-normal-prop-Submonoid =
     Π-Prop
       ( type-Monoid M)
       ( λ x →
@@ -75,10 +75,10 @@ module _
                     ( subset-Submonoid M N (mul-Monoid M x y))))))
 
   is-normal-Submonoid : UU (l1 ⊔ l2)
-  is-normal-Submonoid = type-Prop is-normal-submonoid-Prop
+  is-normal-Submonoid = type-Prop is-normal-prop-Submonoid
 
   is-prop-is-normal-Submonoid : is-prop is-normal-Submonoid
-  is-prop-is-normal-Submonoid = is-prop-type-Prop is-normal-submonoid-Prop
+  is-prop-is-normal-Submonoid = is-prop-type-Prop is-normal-prop-Submonoid
 
 Normal-Submonoid :
   {l1 : Level} (l2 : Level) → Monoid l1 → UU (l1 ⊔ lsuc l2)
@@ -98,7 +98,8 @@ module _
   subset-Normal-Submonoid =
     subset-Submonoid M submonoid-Normal-Submonoid
 
-  is-submonoid-Normal-Submonoid : is-submonoid-Monoid M subset-Normal-Submonoid
+  is-submonoid-Normal-Submonoid :
+    is-submonoid-subset-Monoid M subset-Normal-Submonoid
   is-submonoid-Normal-Submonoid =
     is-submonoid-Submonoid M submonoid-Normal-Submonoid
 
@@ -213,7 +214,7 @@ module _
     (N ＝ K) ≃ has-same-elements-Normal-Submonoid K
   extensionality-Normal-Submonoid =
     extensionality-type-subtype
-      ( is-normal-submonoid-Prop M)
+      ( is-normal-prop-Submonoid M)
       ( is-normal-Normal-Submonoid M N)
       ( λ x → (id , id))
       ( extensionality-Submonoid M (submonoid-Normal-Submonoid M N))

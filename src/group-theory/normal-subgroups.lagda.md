@@ -47,9 +47,9 @@ conjugation.
 ## Definition
 
 ```agda
-is-normal-subgroup-Prop :
+is-normal-prop-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) → Prop (l1 ⊔ l2)
-is-normal-subgroup-Prop G H =
+is-normal-prop-Subgroup G H =
   Π-Prop
     ( type-Group G)
     ( λ g →
@@ -61,13 +61,13 @@ is-normal-subgroup-Prop G H =
 
 is-normal-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) → UU (l1 ⊔ l2)
-is-normal-Subgroup G H = type-Prop (is-normal-subgroup-Prop G H)
+is-normal-Subgroup G H = type-Prop (is-normal-prop-Subgroup G H)
 
 is-prop-is-normal-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
   is-prop (is-normal-Subgroup G H)
 is-prop-is-normal-Subgroup G H =
-  is-prop-type-Prop (is-normal-subgroup-Prop G H)
+  is-prop-type-Prop (is-normal-prop-Subgroup G H)
 
 is-normal-Subgroup' :
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) → UU (l1 ⊔ l2)
@@ -280,7 +280,7 @@ module _
     (N ＝ K) ≃ has-same-elements-Normal-Subgroup K
   extensionality-Normal-Subgroup =
     extensionality-type-subtype
-      ( is-normal-subgroup-Prop G)
+      ( is-normal-prop-Subgroup G)
       ( λ x y →
         is-normal-Normal-Subgroup G N x (pr1 y) (pr2 y))
       ( λ x → pair id id)

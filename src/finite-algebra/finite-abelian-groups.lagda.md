@@ -39,16 +39,16 @@ Abelian groups are groups of which the group operation is commutative
 ### The condition of being an abelian group
 
 ```agda
-is-abelian-group-Prop-𝔽 : {l : Level} → Group-𝔽 l → Prop l
-is-abelian-group-Prop-𝔽 G = is-abelian-group-Prop (group-Group-𝔽 G)
+is-abelian-prop-Group-𝔽 : {l : Level} → Group-𝔽 l → Prop l
+is-abelian-prop-Group-𝔽 G = is-abelian-prop-Group (group-Group-𝔽 G)
 
 is-abelian-Group-𝔽 : {l : Level} → Group-𝔽 l → UU l
-is-abelian-Group-𝔽 G = type-Prop (is-abelian-group-Prop-𝔽 G)
+is-abelian-Group-𝔽 G = type-Prop (is-abelian-prop-Group-𝔽 G)
 
 is-prop-is-abelian-Group-𝔽 :
   {l : Level} (G : Group-𝔽 l) → is-prop (is-abelian-Group-𝔽 G)
 is-prop-is-abelian-Group-𝔽 G =
-  is-prop-type-Prop (is-abelian-group-Prop-𝔽 G)
+  is-prop-type-Prop (is-abelian-prop-Group-𝔽 G)
 ```
 
 ### The type of abelian groups

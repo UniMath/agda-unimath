@@ -66,8 +66,8 @@ for the inverse of `x`.
 ### The condition of being an abelian group
 
 ```agda
-is-abelian-group-Prop : {l : Level} → Group l → Prop l
-is-abelian-group-Prop G =
+is-abelian-prop-Group : {l : Level} → Group l → Prop l
+is-abelian-prop-Group G =
   Π-Prop
     ( type-Group G)
     ( λ x →
@@ -77,12 +77,12 @@ is-abelian-group-Prop G =
           Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x)))
 
 is-abelian-Group : {l : Level} → Group l → UU l
-is-abelian-Group G = type-Prop (is-abelian-group-Prop G)
+is-abelian-Group G = type-Prop (is-abelian-prop-Group G)
 
 is-prop-is-abelian-Group :
   {l : Level} (G : Group l) → is-prop (is-abelian-Group G)
 is-prop-is-abelian-Group G =
-  is-prop-type-Prop (is-abelian-group-Prop G)
+  is-prop-type-Prop (is-abelian-prop-Group G)
 ```
 
 ### The type of abelian groups
