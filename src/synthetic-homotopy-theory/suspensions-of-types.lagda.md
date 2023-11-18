@@ -1,4 +1,4 @@
-# Suspensions of types
+-# Suspensions of types
 
 ```agda
 module synthetic-homotopy-theory.suspensions-of-types where
@@ -568,30 +568,6 @@ module _
     south-htpy-in-htpy-suspension-structure
       ( ( htpy-eq-htpy-suspension-structure
         ( is-section-htpy-htpy-function-out-of-suspension c)))
-
-{-  equiv-htpy-function-out-of-suspension-htpy-meridian-suspension :
-    (c : htpy-function-out-of-suspension) →
-      (x : X) →
-        coherence-square-identifications
-          ( identification-left-whisk
-            ( ap f (meridian-suspension x))
-            ( equiv-htpy-function-out-of-suspension-htpy-south-suspension c))
-          ( map-inv-equiv
-            ( compute-dependent-identification-eq-value-function
-              ( f)
-              ( g)
-              ( meridian-suspension x)
-              ( htpy-htpy-function-out-of-suspension c north-suspension)
-              ( htpy-htpy-function-out-of-suspension c south-suspension))
-            ( apd
-              ( htpy-htpy-function-out-of-suspension c)
-              ( meridian-suspension x)))
-          ( meridian-htpy-function-out-of-suspension c x)
-          ( identification-right-whisk
-            ( equiv-htpy-function-out-of-suspension-htpy-north-suspension c)
-            ( ap g (meridian-suspension x)))
-  equiv-htpy-function-out-of-suspension-htpy-meridian-suspension c x =
-    {!!}-}
 ```
 
 ### The suspension of a contractible type is contractible
