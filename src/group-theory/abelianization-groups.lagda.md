@@ -260,8 +260,11 @@ naturality-unit-abelianization-Group :
     ( hom-unit-abelianization-Group G)
     ( hom-unit-abelianization-Group H)
     ( abelianization-hom-Group G H f)
-naturality-unit-abelianization-Group =
-  {!!}
+naturality-unit-abelianization-Group G H f =
+  naturality-hom-quotient-Group G H
+    ( commutator-normal-subgroup-Group G)
+    ( commutator-normal-subgroup-Group H)
+    ( f , preserves-commutator-subgroup-hom-Group G H f)
 
 naturality-unit-abelianization-Group' :
   naturality-family-of-morphisms-functor-Large-Category
@@ -373,7 +376,7 @@ naturality-equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab
   eq-htpy-hom-Group G
     ( group-Ab B)
     ( ( map-hom-Ab A B g ∘ map-hom-Ab (abelianization-Group H) A h) ·l
-      {!!})
+      ( naturality-unit-abelianization-Group G H f))
 
 is-adjoint-pair-abelianization-forgetful-functor-Ab :
   is-adjoint-pair-Large-Category
@@ -385,8 +388,30 @@ equiv-is-adjoint-pair-Large-Precategory
   is-adjoint-pair-abelianization-forgetful-functor-Ab G A =
   inv-equiv (equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A)
 naturality-equiv-is-adjoint-pair-Large-Precategory
-  is-adjoint-pair-abelianization-forgetful-functor-Ab =
-  {!inv-horizontal-commuting-square-maps!}
+  is-adjoint-pair-abelianization-forgetful-functor-Ab
+  { X1 = G}
+  { X2 = H}
+  { Y1 = A}
+  { Y2 = B}
+  ( f)
+  ( g) =
+  coherence-square-inv-horizontal
+    ( equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A)
+    ( λ h →
+      comp-hom-Ab
+        ( abelianization-Group H)
+        ( abelianization-Group G)
+        ( B)
+        ( comp-hom-Ab (abelianization-Group G) A B g h)
+        ( abelianization-hom-Group H G f))
+    ( λ h →
+      comp-hom-Group H G
+        ( group-Ab B)
+        ( comp-hom-Group G (group-Ab A) (group-Ab B) g h)
+        ( f))
+    ( equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab H B)
+    ( naturality-equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab
+      H G f A B g)
 
 abelianization-adjunction-Group :
   Adjunction-Large-Category

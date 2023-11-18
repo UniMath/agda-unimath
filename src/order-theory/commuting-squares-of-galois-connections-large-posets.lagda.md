@@ -38,9 +38,11 @@ Consider a diagram of
            UJ
 ```
 
-between large posets. We say that the diagram commutes if there is a
+between [large posets](order-theory.large-posets.md). We say that the diagram
+**commutes** if there is a
 [similarity](order-theory.similarity-of-order-preserving-maps-large-posets.md)
-`LJ ∘ LF ≈ LG ∘ LI`. This condition is equivalent the condition that there is a
+`LJ ∘ LF ≈ LG ∘ LI`. This condition is
+[equivalent](foundation.logical-equivalences.md) the condition that there is a
 similarity `UF ∘ UJ ≈ UI ∘ UG`.
 
 ## Definitions

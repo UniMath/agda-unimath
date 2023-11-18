@@ -89,7 +89,7 @@ module _
     ap (_∙ K x) right-unit
 ```
 
-### Composing and inverting squares horizontally and vertically
+### Inverting squares horizontally and vertically
 
 If the horizontal/vertical maps in a commuting square are both equivalences,
 then the square remains commuting if we invert those equivalences.

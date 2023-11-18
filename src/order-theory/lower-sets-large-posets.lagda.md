@@ -1,4 +1,4 @@
-# Lower sets of large posets
+# Lower sets in large posets
 
 ```agda
 module order-theory.lower-sets-large-posets where
@@ -17,7 +17,7 @@ open import order-theory.large-subposets
 
 ## Idea
 
-An **lower set** or **downwards closed set** in a
+A **lower set** or **downwards closed set** in a
 [large poset](order-theory.large-posets.md) is a
 [large subposet](order-theory.large-subposets.md) that is downwards closed,
 i.e., that satisfies the condition that
@@ -28,7 +28,7 @@ i.e., that satisfies the condition that
 
 ## Definitions
 
-### The predicate of being an lower set
+### The predicate of being a lower set
 
 ```agda
 module _

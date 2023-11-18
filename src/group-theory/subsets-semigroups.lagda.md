@@ -8,12 +8,17 @@ module group-theory.subsets-semigroups where
 
 ```agda
 open import foundation.identity-types
+open import foundation.large-locale-of-subtypes
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.semigroups
+
+open import order-theory.large-locales
+open import order-theory.large-posets
 ```
 
 </details>
@@ -21,9 +26,37 @@ open import group-theory.semigroups
 ## Idea
 
 A **subset of a semigroup** `G` is simply a [subtype](foundation.subtypes.md) of
-the underlying type of the [semigroup](group-theory.semigroups.md) `G`.
+the underlying type of the [semigroup](group-theory.semigroups.md) `G`. The
+**powerset** of a semigroup is the [large poset](order-theory.large-posets.md)
+of all subsets of `G`, i.e., it is the [powerset](foundation.powersets.md) of
+the underlying [set](foundation.sets.md) of `G`.
 
 ## Definitions
+
+### The large locale of subsets of a semigroup
+
+```agda
+module _
+  {l1 : Level} (G : Semigroup l1)
+  where
+
+  powerset-large-locale-Semigroup :
+    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) lzero
+  powerset-large-locale-Semigroup =
+    powerset-Large-Locale (type-Semigroup G)
+```
+
+### The large poset of subsets of a semigroup
+
+```agda
+module _
+  {l1 : Level} (G : Semigroup l1)
+  where
+
+  powerset-large-poset-Semigroup :
+    Large-Poset (λ l → l1 ⊔ lsuc l) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  powerset-large-poset-Semigroup = powerset-Large-Poset (type-Semigroup G)
+```
 
 ### Subsets of semigroups
 

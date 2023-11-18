@@ -46,9 +46,9 @@ subtype `S` under `f` satisfies the universal property that
 
 The image operation on subtypes is an
 [order preserving map](order-theory.order-preserving-maps-large-posets.md) from
-the [large poset](order-theory.large-posets.md) of subtypes of `A` to the large
-poset of subtypes of `B`, and by the above universal property we obtain a
-[Galois connection](order-theory.galois-connections-large-posets.md)
+the [powerset](foundation.powersets.md) of `A` to the powerset of `B`. Thus we
+obtain a [Galois connection](order-theory.galois-connections-large-posets.md)
+between the powersets of `A` and `B`: the **image-pullback Galois connection**
 
 ```text
   image-subtype f ⊣ pullback-subtype f.

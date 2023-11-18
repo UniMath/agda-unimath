@@ -34,15 +34,16 @@ open import order-theory.order-preserving-maps-large-preorders
 
 The **image** of a [group homomorphism](group-theory.homomorphisms-groups.md)
 `f : G → H` consists of the [image](foundation.images.md) of the underlying map
-of `f`. This contains the unit element and is closed under multiplication and
-inverses. It is therefore a [subgroup](group-theory.subgroups.md) of the
-[group](group-theory.groups.md) `H`. Alternatively, it can be described as the
-least subgroup of `H` that contains all the values of `f`.
+of `f`. This [subset](group-theory.subsets-groups.md) contains the unit element
+and is closed under multiplication and inverses. It is therefore a
+[subgroup](group-theory.subgroups.md) of the [group](group-theory.groups.md)
+`H`. Alternatively, it can be described as the least subgroup of `H` that
+contains all the values of `f`.
 
 More generally, the **image of a subgroup** `S` under a group homomorphism
 `f : G → H` is the subgroup consisting of all the elements in the image of the
-underlying subset of `S` under the underlying map of `f`. Since the image of a
-subgroup satisfies the following adjoint relation
+underlying [subset](foundation-core.subsets.md) of `S` under the underlying map
+of `f`. Since the image of a subgroup satisfies the following adjoint relation
 
 ```text
   (im f S ⊆ T) ↔ (S ⊆ T ∘ f)

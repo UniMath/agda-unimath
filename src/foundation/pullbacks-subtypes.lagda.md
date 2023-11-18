@@ -49,7 +49,11 @@ essentially asserts that
 
 The operation `pullback f : subtype B → subtype A` is an
 [order preserving map](order-theory.order-preserving-maps-large-posets.md)
-between the [large posets](order-theory.large-posets.md).
+between the [powersets](order-theory.powersets.md) of `B` and `A`.
+
+In the file [Images of subtypes](foundation.images-subtypes.md) we show that the
+pullback operation on subtypes is the upper adjoint of a
+[Galois connection](order-theory.galois-connections-large-posets.md).
 
 ## Definitions
 

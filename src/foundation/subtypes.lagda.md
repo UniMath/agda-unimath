@@ -176,3 +176,10 @@ subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
 pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
 ```
+
+## See also
+
+- [Images of subtypes](foundation.images-subtypes.md)
+- [Large locale of subtypes](foundation.large-locale-of-subtypes.md)
+- [Powersets](foundation.powersets.md)
+- [Pullbacks of subtypes](foundation.pullbacks-subtypes.md)

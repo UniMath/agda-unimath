@@ -34,15 +34,16 @@ open import order-theory.order-preserving-maps-large-preorders
 The **image** of a
 [semigroup homomorphism](group-theory.homomorphisms-semigroups.md) `f : G → H`
 consists of the [image](foundation.images.md) of the underlying map of `f`. This
-[subset](foundation-core.subsets.md) is closed under multiplication, so it is a
-[subsemigroup](group-theory.subsemigroups.md) of the
+[subset](group-theory.subsets-semigroups.md) is closed under multiplication, so
+it is a [subsemigroup](group-theory.subsemigroups.md) of the
 [semigroup](group-theory.semigroups.md) `H`. Alternatively, it can be described
 as the least subsemigroup of `H` that contains all the values of `f`.
 
 More generally, the **image of a subsemigroup** `S` under a semigroup
 homomorphism `f : G → H` is the subsemigroup consisting of all the elements in
-the image of the underlying subset of `S` under the underlying map of `f`. Since
-the image of a subsemigroup satisfies the following adjoint relation
+the image of the underlying [subset](foundation-core.subtypes.md) of `S` under
+the underlying map of `f`. Since the image of a subsemigroup satisfies the
+following adjoint relation
 
 ```text
   (im f S ⊆ T) ↔ (S ⊆ T ∘ f)
