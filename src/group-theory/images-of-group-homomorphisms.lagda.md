@@ -42,7 +42,7 @@ contains all the values of `f`.
 
 More generally, the **image of a subgroup** `S` under a group homomorphism
 `f : G → H` is the subgroup consisting of all the elements in the image of the
-underlying [subset](foundation-core.subsets.md) of `S` under the underlying map
+underlying [subset](foundation-core.subtypes.md) of `S` under the underlying map
 of `f`. Since the image of a subgroup satisfies the following adjoint relation
 
 ```text

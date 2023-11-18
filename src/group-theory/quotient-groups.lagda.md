@@ -60,9 +60,9 @@ that the map
 
 from group homomorphisms `G/N → H` to
 [`N`-nullifying group homomorphism](group-theory.nullifying-group-homomorphisms.md)
-`G → H` is an [equivalence](founcation-core.equivalences.md). Recall that a
+`G → H` is an [equivalence](foundation-core.equivalences.md). Recall that a
 group homomorphism is said to be `N`-nullifying if `N` is contained in the
-[kernel](group-theory.kernels.md) of `f`.
+[kernel](group-theory.kernels-homomorphisms-groups.md) of `f`.
 
 ## Definitions
 
@@ -94,8 +94,8 @@ universal-property-quotient-Group G N Q q =
 #### The quotient map and the underlying set of the quotient group
 
 The underlying [set](foundation-core.sets.md) of the quotient group is defined
-as the [set quotient](foundation.set-quotiens.md) of the
-[equivalence relation](foundation.equivalence.relations.md) induced by the
+as the [set quotient](foundation.set-quotients.md) of the
+[equivalence relation](foundation.equivalence-relations.md) induced by the
 normal subgroup `N` of `G`. By this construction we immediately obtain the
 quotient map `q : G → G/N`, which will be
 [surjective](foundation.surjective-maps.md) and
