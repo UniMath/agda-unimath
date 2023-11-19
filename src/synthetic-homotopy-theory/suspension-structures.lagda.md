@@ -286,6 +286,7 @@ module _
           ( is-torsorial-path c))
         ( P))
 ```
+
 #### The action of paths of the projections have the expected effect
 
 ```agda
