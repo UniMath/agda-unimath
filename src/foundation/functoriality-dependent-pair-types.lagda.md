@@ -285,7 +285,6 @@ module _
   compute-ap-map-Σ-map-base-eq-pair-Σ refl refl = refl
 ```
 
-
 #### Computing the inverse of `equiv-tot`
 
 ```agda
