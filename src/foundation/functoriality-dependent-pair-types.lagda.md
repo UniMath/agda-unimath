@@ -295,14 +295,14 @@ module _
 
   compute-inv-equiv-equiv-tot :
     (e : (x : A) → B x ≃ C x) →
-      htpy-equiv
-        ( inv-equiv (equiv-tot e))
-        ( equiv-tot (λ x → inv-equiv (e x)))
+    htpy-equiv
+      ( inv-equiv (equiv-tot e))
+      ( equiv-tot (λ x → inv-equiv (e x)))
   compute-inv-equiv-equiv-tot e (a , c) =
     is-injective-map-equiv
       ( equiv-tot e)
       ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙
-      ( eq-pair-Σ refl (inv (is-section-map-inv-equiv (e a) c))))
+        ( eq-pair-Σ refl (inv (is-section-map-inv-equiv (e a) c))))
 ```
 
 ## See also

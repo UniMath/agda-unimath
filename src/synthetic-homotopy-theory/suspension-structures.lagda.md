@@ -202,11 +202,11 @@ module _
     {c c' : suspension-structure X Z} →
     (h : htpy-suspension-structure c c') →
     ( x : X) →
-      coherence-square-identifications
-        ( north-htpy-suspension-structure h)
-        ( meridian-suspension-structure c x)
-        ( meridian-suspension-structure c' x)
-        ( south-htpy-suspension-structure h)
+    coherence-square-identifications
+      ( north-htpy-suspension-structure h)
+      ( meridian-suspension-structure c x)
+      ( meridian-suspension-structure c' x)
+      ( south-htpy-suspension-structure h)
   meridian-htpy-suspension-structure = pr2 ∘ pr2
 
   extensionality-suspension-structure :
@@ -299,20 +299,20 @@ module _
     htpy-suspension-structure c c' →
     htpy-suspension-structure c c' → UU (l1 ⊔ l2)
   htpy-in-htpy-suspension-structure (n , s , h) (n' , s' , h') =
-    Σ (n ＝ n')
+    Σ ( n ＝ n')
       ( λ p →
-        Σ (s ＝ s')
+        Σ ( s ＝ s')
           ( λ q →
             (x : X) →
-              coherence-square-identifications
-                ( h x)
-                ( identification-left-whisk
-                  ( meridian-suspension-structure c x)
-                  ( q))
-                ( identification-right-whisk
-                  ( p)
-                  ( meridian-suspension-structure c' x))
-                ( h' x)))
+            coherence-square-identifications
+              ( h x)
+              ( identification-left-whisk
+                ( meridian-suspension-structure c x)
+                ( q))
+              ( identification-right-whisk
+                ( p)
+                ( meridian-suspension-structure c' x))
+              ( h' x)))
 
   extensionality-htpy-suspension-structure :
     (h h' : htpy-suspension-structure c c') →
@@ -320,31 +320,31 @@ module _
   extensionality-htpy-suspension-structure (n , s , h) =
     extensionality-Σ
       ( λ y p →
-        Σ (s ＝ pr1 y)
+        Σ ( s ＝ pr1 y)
           ( λ q →
             (x : X) →
-              ( coherence-square-identifications
-                ( h x)
-                ( identification-left-whisk
-                  ( meridian-suspension-structure c x)
-                  ( q))
-                ( identification-right-whisk
-                  ( p)
-                  ( meridian-suspension-structure c' x))
-                ( pr2 y x))))
+            coherence-square-identifications
+              ( h x)
+              ( identification-left-whisk
+                ( meridian-suspension-structure c x)
+                ( q))
+              ( identification-right-whisk
+                ( p)
+                ( meridian-suspension-structure c' x))
+              ( pr2 y x)))
       ( refl)
       ( refl , inv-htpy right-unit-htpy)
       ( λ n' → id-equiv)
       ( extensionality-Σ
         ( λ h' q →
           (x : X) →
-            ( coherence-square-identifications
-              ( h x)
-              ( identification-left-whisk (meridian-suspension-structure c x) q)
-              ( identification-right-whisk
-                ( refl)
-                ( meridian-suspension-structure c' x))
-              ( h' x)))
+          coherence-square-identifications
+            ( h x)
+            ( identification-left-whisk (meridian-suspension-structure c x) q)
+            ( identification-right-whisk
+              ( refl)
+              ( meridian-suspension-structure c' x))
+            ( h' x))
         ( refl)
         ( inv-htpy right-unit-htpy)
         ( λ q → id-equiv)

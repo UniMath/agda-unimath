@@ -331,7 +331,7 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( H g h))
 ```
 
-### Computing the inverse of `equiv-Π-equiv-family
+### Computing the inverse of `equiv-Π-equiv-family`
 
 ```agda
 module _
@@ -347,7 +347,7 @@ module _
     is-injective-map-equiv
       ( equiv-Π-equiv-family e)
       ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
-      ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
+        ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
 ```
 
 ## See also

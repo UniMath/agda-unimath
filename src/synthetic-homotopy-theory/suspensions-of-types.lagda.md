@@ -518,8 +518,8 @@ module _
   equiv-htpy-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension ≃ (f ~ g)
   equiv-htpy-htpy-function-out-of-suspension =
-    ( ( inv-equiv (equiv-dependent-up-suspension (eq-value f g))) ∘e
-      ( equiv-dependent-suspension-structure-htpy-function-out-of-suspension))
+    ( inv-equiv (equiv-dependent-up-suspension (eq-value f g))) ∘e
+    ( equiv-dependent-suspension-structure-htpy-function-out-of-suspension)
 
   htpy-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension → (f ~ g)
@@ -547,8 +547,8 @@ module _
     ( id)
   is-section-htpy-htpy-function-out-of-suspension c =
     ( ap
-    ( htpy-function-out-of-suspension-htpy)
-    ( inv (compute-inv-equiv-equiv-htpy-function-out-of-suspension-htpy c))) ∙
+      ( htpy-function-out-of-suspension-htpy)
+      ( inv (compute-inv-equiv-equiv-htpy-function-out-of-suspension-htpy c))) ∙
     ( is-section-map-inv-equiv (equiv-htpy-function-out-of-suspension-htpy) c)
 
   equiv-htpy-function-out-of-suspension-htpy-north-suspension :
@@ -557,8 +557,8 @@ module _
       ( north-htpy-function-out-of-suspension c)
   equiv-htpy-function-out-of-suspension-htpy-north-suspension c =
     north-htpy-in-htpy-suspension-structure
-      ( ( htpy-eq-htpy-suspension-structure
-        ( is-section-htpy-htpy-function-out-of-suspension c)))
+      ( htpy-eq-htpy-suspension-structure
+        ( is-section-htpy-htpy-function-out-of-suspension c))
 
   equiv-htpy-function-out-of-suspension-htpy-south-suspension :
     (c : htpy-function-out-of-suspension) →
@@ -566,8 +566,8 @@ module _
       ( south-htpy-function-out-of-suspension c)
   equiv-htpy-function-out-of-suspension-htpy-south-suspension c =
     south-htpy-in-htpy-suspension-structure
-      ( ( htpy-eq-htpy-suspension-structure
-        ( is-section-htpy-htpy-function-out-of-suspension c)))
+      ( htpy-eq-htpy-suspension-structure
+        ( is-section-htpy-htpy-function-out-of-suspension c))
 ```
 
 ### The suspension of a contractible type is contractible
