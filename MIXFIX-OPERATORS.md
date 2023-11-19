@@ -33,7 +33,7 @@ is parsed as `x +ℕ (y *ℕ z)`.
 In addition to a precedence level, every infix operator can be defined to be
 either left or right
 [associative](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html#associativity)
-using the keywords `infixl`{.Agda} and `infixr`. It can be beneficial to define
+using the keywords `infixl` and `infixr`. It can be beneficial to define
 associativity of operators, to avoid excessively parenthesized expressions. The
 parenthization should, however, never be omitted when this can make the code
 more ambiguous or harder to read.
