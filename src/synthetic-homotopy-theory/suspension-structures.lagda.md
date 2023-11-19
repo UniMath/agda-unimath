@@ -286,6 +286,38 @@ module _
           ( is-torsorial-path c))
         ( P))
 ```
+#### The action of paths of the projections have the expected effect
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-structure X Z)
+  where
+
+  ap-pr1-eq-htpy-suspension-structure :
+    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
+    (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H)
+  ap-pr1-eq-htpy-suspension-structure =
+    ind-htpy-suspension-structure
+      ( λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
+      ( (ap
+        ( ap pr1)
+        ( is-retraction-map-inv-equiv
+          ( extensionality-suspension-structure c c)
+          ( refl))))
+
+  ap-pr1∘pr2-eq-htpy-suspension-structure :
+    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
+    (ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H)) ＝ ((pr1 ∘ pr2) H)
+  ap-pr1∘pr2-eq-htpy-suspension-structure =
+    ind-htpy-suspension-structure
+      ( λ c' H →
+        ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
+      ( ap
+        ( ap (pr1 ∘ pr2))
+        ( is-retraction-map-inv-equiv
+          ( extensionality-suspension-structure c c)
+          ( refl)))
+```
 
 ### Characterization of equalities in `htpy-suspension-structure`
 
@@ -396,37 +428,4 @@ module _
     htpy-in-htpy-suspension-structure h h' → h ＝ h'
   eq-htpy-in-htpy-suspension-structure =
     map-inv-equiv (extensionality-htpy-suspension-structure h h')
-```
-
-#### The action of paths of the projections have the expected effect
-
-```agda
-module _
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-structure X Z)
-  where
-
-  ap-pr1-eq-htpy-suspension-structure :
-    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
-    (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H)
-  ap-pr1-eq-htpy-suspension-structure =
-    ind-htpy-suspension-structure
-      ( λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
-      ( (ap
-        ( ap pr1)
-        ( is-retraction-map-inv-equiv
-          ( extensionality-suspension-structure c c)
-          ( refl))))
-
-  ap-pr1∘pr2-eq-htpy-suspension-structure :
-    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
-    (ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H)) ＝ ((pr1 ∘ pr2) H)
-  ap-pr1∘pr2-eq-htpy-suspension-structure =
-    ind-htpy-suspension-structure
-      ( λ c' H →
-        ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
-      ( ap
-        ( ap (pr1 ∘ pr2))
-        ( is-retraction-map-inv-equiv
-          ( extensionality-suspension-structure c c)
-          ( refl)))
 ```
