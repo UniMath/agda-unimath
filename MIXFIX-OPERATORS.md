@@ -52,12 +52,12 @@ higher precedence than parametric operators. Parametric operators are operators
 that take a universe level as one of their arguments. We consider an operator to
 be parametric even if it only takes a universe level as an implicit argument.
 Examples are the
-[cartesian product type former`_×_`](foundation-core.cartesian-product-types.md)
-, the [identity type former `_＝_`](foundation-core.identity-types.md) and the
+[cartesian product type former`_×_`](foundation-core.cartesian-product-types.md),
+the [identity type former `_＝_`](foundation-core.identity-types.md), and the
 [pairing operator `_,_`](foundation.dependent-pair-types.md). Examples of
 non-parametric operators are
-[difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md)
-[strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md)
+[difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md),
+[strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md),
 and
 [multiplication of Eisenstein integers `_*ℤ[ω]_`](commutative-algebra.eisenstein-integers.md).
 
@@ -128,7 +128,7 @@ Below, we outline a list of general rules when assigning associativities.
 - **Non-parametric arithmetic operators** are often naturally computed from left
   to right. For instance, the expression `1 - 2 - 3` is computed as
   `(1 - 2) - 3 = -1 - 3 = -4`, hence should be _left associative_. This applies
-  to addition, subtraction, multiplication and division. Note that for
+  to addition, subtraction, multiplication, and division. Note that for
   non-parametric exponentiation, we compute from right to left. I.e. `2 ^ 3 ^ 4`
   should compute as `2 ^ (3 ^ 4)`. Hence it will usually be _right associative_.
 
