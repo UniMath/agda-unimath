@@ -12,7 +12,6 @@ open import foundation-core.functoriality-dependent-pair-types public
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -286,19 +285,19 @@ module _
   compute-ap-map-Σ-map-base-eq-pair-Σ refl refl = refl
 ```
 
-### Computing the inverse of `equiv-tot`
+
+#### Computing the inverse of `equiv-tot`
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  compute-inv-equiv-equiv-tot :
+  compute-inv-equiv-tot :
     (e : (x : A) → B x ≃ C x) →
-    htpy-equiv
-      ( inv-equiv (equiv-tot e))
-      ( equiv-tot (λ x → inv-equiv (e x)))
-  compute-inv-equiv-equiv-tot e (a , c) =
+    ( map-inv-equiv (equiv-tot e)) ~
+    ( map-equiv (equiv-tot (λ x → inv-equiv (e x))))
+  compute-inv-equiv-tot e (a , c) =
     is-injective-map-equiv
       ( equiv-tot e)
       ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙

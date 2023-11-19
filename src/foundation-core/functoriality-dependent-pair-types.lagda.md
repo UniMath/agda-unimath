@@ -233,6 +233,8 @@ module _
     is-equiv-tot-is-fiberwise-equiv (λ x → is-equiv-map-equiv (e x))
 ```
 
+A computation of the inverse of `equiv-tot` is in 
+
 ### The fibers of `map-Σ-map-base`
 
 ```agda

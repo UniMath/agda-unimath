@@ -376,133 +376,57 @@ module _
                   ( p)
                   ( q))))))
 
-  compute-inv-equiv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure :
+  compute-inv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure :
     htpy-equiv
       ( inv-equiv
         ( equiv-htpy-function-out-of-suspension-dependent-suspension-structure))
       ( equiv-dependent-suspension-structure-htpy-function-out-of-suspension)
-  compute-inv-equiv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure
-    x =
-    equational-reasoning
-      ( map-inv-equiv
-        ( equiv-tot
-          ( λ p →
-            equiv-tot
-              ( λ q →
-                equiv-Π-equiv-family
-                  ( λ x →
-                    inv-equiv
-                      ( compute-dependent-identification-eq-value-function
-                        ( f)
-                        ( g)
-                        ( meridian-suspension-structure
-                          ( suspension-structure-suspension X)
-                          ( x))
-                        ( p)
-                        ( q))))))
-        ( x))
-      ＝ ( map-equiv
-          ( equiv-tot
-            ( λ p →
-              inv-equiv
-                ( equiv-tot
-                  ( λ q →
-                    equiv-Π-equiv-family
-                      ( λ x →
-                        inv-equiv
-                          ( compute-dependent-identification-eq-value-function
-                            ( f)
-                            ( g)
-                            ( meridian-suspension-structure
-                              ( suspension-structure-suspension X)
-                              ( x))
-                            ( p)
-                            ( q)))))))
-          ( x))
-        by
-        ( compute-inv-equiv-equiv-tot
-          ( λ p →
-            equiv-tot
-              ( λ q →
-                equiv-Π-equiv-family
-                  ( λ x →
-                    inv-equiv
-                      ( compute-dependent-identification-eq-value-function
-                        ( f)
-                        ( g)
-                        ( meridian-suspension-structure
-                          ( suspension-structure-suspension X)
-                          ( x))
-                        ( p)
-                        ( q))))) x)
-      ＝ ( map-equiv
-          ( equiv-tot
-            ( λ p →
-                ( equiv-tot
-                  ( λ q →
-                    inv-equiv
-                      ( equiv-Π-equiv-family
-                        ( λ x →
-                          inv-equiv
-                            ( compute-dependent-identification-eq-value-function
-                              ( f)
-                              ( g)
-                              ( meridian-suspension-structure
-                                ( suspension-structure-suspension X)
-                                ( x))
-                              ( p)
-                              ( q))))))))
-          ( x))
-        by
+  compute-inv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure =
+    ( compute-inv-equiv-tot
+      ( λ p →
+        equiv-tot
+          ( λ q →
+            equiv-Π-equiv-family
+              ( λ x →
+                inv-equiv
+                  ( compute-dependent-identification-eq-value-function
+                    ( f)
+                    ( g)
+                    ( meridian-suspension-structure
+                      ( suspension-structure-suspension X)
+                      ( x))
+                    ( p)
+                    ( q)))))) ∙h
+    ( tot-htpy
+      ( λ p →
+        compute-inv-equiv-tot
+          ( λ q →
+            equiv-Π-equiv-family
+              ( λ x →
+                inv-equiv
+                  ( compute-dependent-identification-eq-value-function
+                    ( f)
+                    ( g)
+                    ( meridian-suspension-structure
+                      ( suspension-structure-suspension X)
+                      ( x))
+                    ( p)
+                    ( q)))))) ∙h
+    ( tot-htpy
+      ( λ p →
         ( tot-htpy
-          ( λ p →
-            compute-inv-equiv-equiv-tot
-              ( λ q →
-                equiv-Π-equiv-family
-                  ( λ x →
-                    inv-equiv
-                      ( compute-dependent-identification-eq-value-function
-                        ( f)
-                        ( g)
-                        ( meridian-suspension-structure
-                          ( suspension-structure-suspension X)
-                          ( x))
-                        ( p)
-                        ( q)))))
-          ( x))
-      ＝ ( map-equiv
-          ( equiv-tot
-            ( λ p →
-                ( equiv-tot
-                  ( λ q →
-                    ( equiv-Π-equiv-family
-                      ( λ x →
-                        compute-dependent-identification-eq-value-function
-                          ( f)
-                          ( g)
-                          ( meridian-suspension-structure
-                            ( suspension-structure-suspension X)
-                            ( x))
-                          ( p)
-                          ( q)))))))
-          ( x))
-        by
-        ( tot-htpy
-          ( λ p →
-            ( tot-htpy
-              ( λ q →
-                compute-inv-equiv-equiv-Π-equiv-family
-                  ( λ x →
-                    inv-equiv
-                      ( compute-dependent-identification-eq-value-function
-                        ( f)
-                        ( g)
-                        ( meridian-suspension-structure
-                          ( suspension-structure-suspension X)
-                          ( x))
-                        ( p)
-                        ( q))))))
-          ( x))
+          ( λ q →
+            compute-inv-equiv-Π-equiv-family
+              ( λ x →
+                inv-equiv
+                  ( compute-dependent-identification-eq-value-function
+                    ( f)
+                    ( g)
+                    ( meridian-suspension-structure
+                      ( suspension-structure-suspension X)
+                      ( x))
+                    ( p)
+                    ( q)))))))
 
   equiv-htpy-function-out-of-suspension-htpy :
     (f ~ g) ≃ htpy-function-out-of-suspension
@@ -526,11 +450,11 @@ module _
   htpy-htpy-function-out-of-suspension =
     map-equiv equiv-htpy-htpy-function-out-of-suspension
 
-  compute-inv-equiv-equiv-htpy-function-out-of-suspension-htpy :
+  compute-inv-equiv-htpy-function-out-of-suspension-htpy :
     htpy-equiv
       ( inv-equiv equiv-htpy-function-out-of-suspension-htpy)
       ( equiv-htpy-htpy-function-out-of-suspension)
-  compute-inv-equiv-equiv-htpy-function-out-of-suspension-htpy c =
+  compute-inv-equiv-htpy-function-out-of-suspension-htpy c =
     ( htpy-eq-equiv
       ( distributive-inv-comp-equiv
         ( equiv-dependent-up-suspension (eq-value f g))
@@ -538,7 +462,7 @@ module _
       ( c)) ∙
     ( ap
       ( map-inv-equiv (equiv-dependent-up-suspension (eq-value-function f g)))
-      ( compute-inv-equiv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure
+      ( compute-inv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure
         ( c)))
 
   is-section-htpy-htpy-function-out-of-suspension :
@@ -548,7 +472,7 @@ module _
   is-section-htpy-htpy-function-out-of-suspension c =
     ( ap
       ( htpy-function-out-of-suspension-htpy)
-      ( inv (compute-inv-equiv-equiv-htpy-function-out-of-suspension-htpy c))) ∙
+      ( inv (compute-inv-equiv-htpy-function-out-of-suspension-htpy c))) ∙
     ( is-section-map-inv-equiv (equiv-htpy-function-out-of-suspension-htpy) c)
 
   equiv-htpy-function-out-of-suspension-htpy-north-suspension :
