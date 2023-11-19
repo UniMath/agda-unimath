@@ -8,17 +8,26 @@ module synthetic-homotopy-theory.pushout-products where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.homotopies
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
 
 ## Idea
 
-Consider two maps `f : A → X` and `g : B → Y`. The **pushout-product** `f □ g` of `f` and `g` is defined as the [cogap map](synthetic-homotopy-theory.pushouts.md) of the [commuting square](foundation-core.commuting-squares-of-maps.md)
+Consider two maps `f : A → X` and `g : B → Y`. The **pushout-product** `f □ g`
+of `f` and `g` is defined as the
+[cogap map](synthetic-homotopy-theory.pushouts.md) of the
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
               f × id
@@ -43,19 +52,39 @@ equipped with [homotopies](foundation-core.homotopies.md)
   L : (f □ g) ∘ inr ~ id × g
 ```
 
-and a homotopy `M` witnessing that the [square of homotopies](foundation.commuting-squares-of-homotopies.md)
+and a homotopy `M` witnessing that the
+[square of homotopies](foundation.commuting-squares-of-homotopies.md)
 
 ```text
-
+                                 K ·r (id × g)
+       (f □ g) ∘ inl ∘ (id × g) ---------------> (f × id) ∘ (id × g)
+                  |                                       |
+  (f □ g) ·l glue |                                       | H
+                  |                                       |
+                  V                                       V
+       (f □ g) ∘ inr ∘ (f × id) ---------------> (id × g) ∘ (f × id)
+                                 L ·r (f × id)
 ```
 
-commutes. The pushout-products is often called the **fiberwise join**, because for each `(x , y) : X × Y` we have an [equivalence](foundation-core.equivalences.md)
+commutes. The pushout-products is often called the **fiberwise join**, because
+for each `(x , y) : X × Y` we have an
+[equivalence](foundation-core.equivalences.md)
 
 ```text
   fiber (f □ g) (x , y) ≃ (fiber f x) * (fiber g y).
 ```
 
-from the [fibers](foundation-core.fibers-of-maps.md) of `f □ g` to the [join](synthetic-homotopy-theory.joins-of-types.md) of the fibers of `f` and `g`.
+from the [fibers](foundation-core.fibers-of-maps.md) of `f □ g` to the
+[join](synthetic-homotopy-theory.joins-of-types.md) of the fibers of `f` and
+`g`.
+
+There is an "adjoint relation" between the pushout-product and the
+[pullback-hom](orthogonal-factorization-systems.pullback-hom.md): For any three
+maps `f`, `g`, and `h` we have a [homotopy](foundation-core.homotopies.md)
+
+```text
+  ⟨f □ g , h⟩ ~ ⟨f , ⟨g , h⟩⟩.
+```
 
 ## Definitions
 
@@ -67,8 +96,67 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  domain-pushout-product : UU {!!}
-  domain-pushout-product = {!!}
+  domain-pushout-product : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  domain-pushout-product =
+    pushout (map-prod id g) (map-prod f id)
+
+  cocone-pushout-product : cocone (map-prod id g) (map-prod f id) (X × Y)
+  pr1 cocone-pushout-product = map-prod f id
+  pr1 (pr2 cocone-pushout-product) = map-prod id g
+  pr2 (pr2 cocone-pushout-product) = coherence-square-map-prod f g
+
+  abstract
+    uniqueness-pushout-product :
+      is-contr
+        ( Σ ( domain-pushout-product → X × Y)
+            ( λ h →
+              htpy-cocone
+                ( map-prod id g)
+                ( map-prod f id)
+                ( cocone-map
+                  ( map-prod id g)
+                  ( map-prod f id)
+                  ( cocone-pushout (map-prod id g) (map-prod f id))
+                  ( h))
+                ( cocone-pushout-product)))
+    uniqueness-pushout-product =
+      uniqueness-map-universal-property-pushout
+        ( map-prod id g)
+        ( map-prod f id)
+        ( cocone-pushout (map-prod id g) (map-prod f id))
+        ( up-pushout (map-prod id g) (map-prod f id))
+        ( cocone-pushout-product)
+
+  abstract
+    pushout-product : domain-pushout-product → X × Y
+    pushout-product = pr1 (center uniqueness-pushout-product)
+
+    compute-inl-pushout-product :
+      pushout-product ∘ inl-pushout (map-prod id g) (map-prod f id) ~
+      map-prod f id
+    compute-inl-pushout-product =
+      pr1 (pr2 (center uniqueness-pushout-product))
+
+    compute-inr-pushout-product :
+      pushout-product ∘ inr-pushout (map-prod id g) (map-prod f id) ~
+      map-prod id g
+    compute-inr-pushout-product =
+      pr1 (pr2 (pr2 (center uniqueness-pushout-product)))
+
+    compute-glue-pushout-product :
+      statement-coherence-htpy-cocone
+        ( map-prod id g)
+        ( map-prod f id)
+        ( cocone-map
+          ( map-prod id g)
+          ( map-prod f id)
+          ( cocone-pushout (map-prod id g) (map-prod f id))
+          ( pushout-product))
+        ( cocone-pushout-product)
+        ( compute-inl-pushout-product)
+        ( compute-inr-pushout-product)
+    compute-glue-pushout-product =
+      pr2 (pr2 (pr2 (center uniqueness-pushout-product)))
 ```
 
 ## See also
