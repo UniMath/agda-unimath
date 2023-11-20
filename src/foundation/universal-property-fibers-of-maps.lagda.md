@@ -93,7 +93,7 @@ module _
 
 ## Properties
 
-### The 3-for-2 Property for fibers of maps
+### The 3-for-2 Property for fibers of maps {- THIS REQUIRES INFRASTRUCTURE FOR COMPOSING DEPENDENT FUNCTIONS -}
 
 ```agda
 module _

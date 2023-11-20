@@ -1,4 +1,4 @@
-# Function types
+ # Function types
 
 ```agda
 module foundation.function-types where
