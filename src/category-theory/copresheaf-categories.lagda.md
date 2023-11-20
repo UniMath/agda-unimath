@@ -148,12 +148,11 @@ module _
       ( f)
       ( id-hom-copresheaf-Large-Category X) ＝
     f
-  right-unit-law-comp-hom-copresheaf-Large-Category X Y f =
+  right-unit-law-comp-hom-copresheaf-Large-Category X Y =
     right-unit-law-comp-hom-Large-Precategory
       ( copresheaf-Large-Precategory)
       { X = X}
       { Y}
-      ( f)
 ```
 
 ### The category of small copresheaves on a precategory
