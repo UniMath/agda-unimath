@@ -45,6 +45,8 @@ The [fiber](founcation-core.fibers-of-maps.md) of the dependent pushout product 
   fiber f x * fiber (g x) y
 ```
 
+A special case is of interest, where `Y` is the family of contractible types, and `B` is a family of propositions. 
+
 ## Definitions
 
 ### Dependent pushout-products
