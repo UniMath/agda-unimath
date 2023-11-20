@@ -139,12 +139,11 @@ module _
     comp-hom-presheaf-Large-Category X X Y f
       ( id-hom-presheaf-Large-Category X) ＝
     f
-  right-unit-law-comp-hom-presheaf-Large-Category X Y f =
+  right-unit-law-comp-hom-presheaf-Large-Category X Y =
     right-unit-law-comp-hom-Large-Precategory
       ( presheaf-Large-Precategory)
       { X = X}
       { Y}
-      ( f)
 ```
 
 ### The category of small presheaves on a precategory
