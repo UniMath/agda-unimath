@@ -140,22 +140,22 @@ module _
   (g : B → C) (f : A → B)
   where
 
-  is-epimorphism-Truncated-Type-comp :
+  is-epimorphism-comp-Truncated-Type :
     is-epimorphism-Truncated-Type k g →
     is-epimorphism-Truncated-Type k f →
     is-epimorphism-Truncated-Type k (g ∘ f)
-  is-epimorphism-Truncated-Type-comp eg ef X =
+  is-epimorphism-comp-Truncated-Type eg ef X =
     is-emb-comp
       ( precomp f (type-Truncated-Type X))
       ( precomp g (type-Truncated-Type X))
       ( ef X)
       ( eg X)
 
-  is-epimorphism-Truncated-Type-left-factor :
+  is-epimorphism-left-factor-Truncated-Type :
     is-epimorphism-Truncated-Type k (g ∘ f) →
     is-epimorphism-Truncated-Type k f →
     is-epimorphism-Truncated-Type k g
-  is-epimorphism-Truncated-Type-left-factor ec ef X =
+  is-epimorphism-left-factor-Truncated-Type ec ef X =
     is-emb-right-factor
       ( precomp f (type-Truncated-Type X))
       ( precomp g (type-Truncated-Type X))
