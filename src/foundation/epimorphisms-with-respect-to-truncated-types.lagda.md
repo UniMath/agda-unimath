@@ -132,6 +132,37 @@ module _
       ( H X)
 ```
 
+### The class of `k`-epimorphisms is closed under composition and has the right cancellation property
+
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B)
+  where
+
+  is-epimorphism-comp-Truncated-Type :
+    is-epimorphism-Truncated-Type k g →
+    is-epimorphism-Truncated-Type k f →
+    is-epimorphism-Truncated-Type k (g ∘ f)
+  is-epimorphism-comp-Truncated-Type eg ef X =
+    is-emb-comp
+      ( precomp f (type-Truncated-Type X))
+      ( precomp g (type-Truncated-Type X))
+      ( ef X)
+      ( eg X)
+
+  is-epimorphism-left-factor-Truncated-Type :
+    is-epimorphism-Truncated-Type k (g ∘ f) →
+    is-epimorphism-Truncated-Type k f →
+    is-epimorphism-Truncated-Type k g
+  is-epimorphism-left-factor-Truncated-Type ec ef X =
+    is-emb-right-factor
+      ( precomp f (type-Truncated-Type X))
+      ( precomp g (type-Truncated-Type X))
+      ( ef X)
+      ( ec X)
+```
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
