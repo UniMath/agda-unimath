@@ -9,7 +9,7 @@ module foundation.epimorphisms-with-respect-to-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.epimorphisms-with-respect-to-truncated-types
+open import foundation.embeddings
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.propositional-extensionality
@@ -20,6 +20,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
@@ -31,7 +32,7 @@ open import foundation-core.univalence
 
 ## Idea
 
-An epimorphism with respect to maps into sets are maps `f : A → B` suc that for
+An epimorphism with respect to maps into sets are maps `f : A → B` such that for
 every set `C` the precomposition function `(B → C) → (A → C)` is an embedding.
 
 ## Definition
@@ -41,7 +42,7 @@ is-epimorphism-Set :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → B) → UUω
 is-epimorphism-Set f =
-  is-epimorphism-Truncated-Type zero-𝕋 f
+  {l : Level} (C : Set l) → is-emb (precomp f (type-Set C))
 ```
 
 ## Properties

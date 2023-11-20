@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -112,6 +113,10 @@ module _
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
   compute-total-fiber-precomp =
     equiv-tot compute-fiber-precomp
+
+  diagonal-into-fibers-precomp :
+    (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
+  diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
 ```
 
 ### A map is truncated iff postcomposition by it is truncated
