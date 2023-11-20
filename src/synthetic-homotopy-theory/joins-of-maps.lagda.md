@@ -51,8 +51,8 @@ the cogap map of any cartesian square
         i
 ```
 
-is the join of `i` and `g`. The join of maps
-is also called the **fiberwise join** because for each `x : X` we have an
+is the join of `i` and `g`. The join of maps is also called the **fiberwise
+join** because for each `x : X` we have an
 [equivalence](foundation-core.equivalences.md)
 
 ```text
@@ -87,7 +87,8 @@ fits in a [pullback diagram](foundation.pullback-squares.md)
                  Δ
 ```
 
-A second way in which the pushout-product is related to the join of maps, is that there is a commuting triangle
+A second way in which the pushout-product is related to the join of maps, is
+that there is a commuting triangle
 
 ```text
                               ≃
@@ -99,7 +100,9 @@ A second way in which the pushout-product is related to the join of maps, is tha
                             X × Y
 ```
 
-This is an immediate consequence of the fact that the ambient square of the pushout-product is cartesian, and therefore its cogap map is the join of the two terminal maps in the square.
+This is an immediate consequence of the fact that the ambient square of the
+pushout-product is cartesian, and therefore its cogap map is the join of the two
+terminal maps in the square.
 
 ## Definitions
 

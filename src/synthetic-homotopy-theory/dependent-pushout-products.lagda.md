@@ -39,13 +39,16 @@ the [commuting square](foundation-core.commuting-squares-of-maps.md)
                        Σ f id
 ```
 
-The [fiber](founcation-core.fibers-of-maps.md) of the dependent pushout product at `(x , y)` is [equivalent](foundation-core.equivalences.md) to the join of fibers
+The [fiber](founcation-core.fibers-of-maps.md) of the dependent pushout product
+at `(x , y)` is [equivalent](foundation-core.equivalences.md) to the join of
+fibers
 
 ```text
   fiber f x * fiber (g x) y
 ```
 
-A special case is of interest, where `Y` is the family of contractible types, and `B` is a family of propositions. 
+A special case is of interest, where `Y` is the family of contractible types,
+and `B` is a family of propositions.
 
 ## Definitions
 
