@@ -92,8 +92,8 @@ module _
     (Z : obj-copresheaf-Large-Category l5) →
     hom-copresheaf-Large-Category Y Z → hom-copresheaf-Large-Category X Y →
     hom-copresheaf-Large-Category X Z
-  comp-hom-copresheaf-Large-Category X Y Z g h =
-    comp-hom-Large-Precategory copresheaf-Large-Precategory {X = X} {Y} {Z} g h
+  comp-hom-copresheaf-Large-Category X Y Z =
+    comp-hom-Large-Precategory copresheaf-Large-Precategory {X = X} {Y} {Z}
 
   id-hom-copresheaf-Large-Category :
     {l3 : Level} (X : obj-copresheaf-Large-Category l3) →
