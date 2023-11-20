@@ -133,12 +133,11 @@ module _
       ( id-hom-copresheaf-Large-Category Y)
       ( f) ＝
     f
-  left-unit-law-comp-hom-copresheaf-Large-Category X Y f =
+  left-unit-law-comp-hom-copresheaf-Large-Category X Y =
     left-unit-law-comp-hom-Large-Precategory
       ( copresheaf-Large-Precategory)
       { X = X}
       { Y}
-      ( f)
 
   right-unit-law-comp-hom-copresheaf-Large-Category :
     {l3 l4 : Level}
