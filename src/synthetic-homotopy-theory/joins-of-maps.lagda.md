@@ -38,7 +38,20 @@ Consider two maps `f : A → X` and `g : B → X` with a common codomain. The
            f
 ```
 
-We often write `A *_X B` for the domain of the fiberwise join. The join of maps
+We often write `A *_X B` for the domain of the fiberwise join. In other words,
+the cogap map of any cartesian square
+
+```text
+        i
+    A -----> X
+    | ⌟      |
+  f |        | g
+    V        V
+    B -----> Y
+        i
+```
+
+is the join of `i` and `g`. The join of maps
 is also called the **fiberwise join** because for each `x : X` we have an
 [equivalence](foundation-core.equivalences.md)
 
@@ -73,6 +86,20 @@ fits in a [pullback diagram](foundation.pullback-squares.md)
         X ----------------> X × X.
                  Δ
 ```
+
+A second way in which the pushout-product is related to the join of maps, is that there is a commuting triangle
+
+```text
+                              ≃
+  (X × B) ⊔_{A × B} (A × X) ----> (A × Y) *_{X × Y} (X × B)
+                        \           /
+                   f □ g \         / (f × id) * (id × g)
+                          \       /
+                           V     V
+                            X × Y
+```
+
+This is an immediate consequence of the fact that the ambient square of the pushout-product is cartesian, and therefore its cogap map is the join of the two terminal maps in the square.
 
 ## Definitions
 
