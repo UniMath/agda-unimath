@@ -7,9 +7,14 @@ module foundation.epimorphisms-with-respect-to-truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.function-extensionality
+open import foundation.functoriality-function-types
 open import foundation.functoriality-truncation
+open import foundation.sections
 open import foundation.truncation-equivalences
 open import foundation.truncations
 open import foundation.universe-levels
@@ -17,9 +22,16 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.codiagonals-of-maps
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
@@ -161,6 +173,123 @@ module _
       ( precomp g (type-Truncated-Type X))
       ( ef X)
       ( ec X)
+```
+
+### The codiagonal of a `k`-epimorphism is a `k`-equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  (X : Truncated-Type l3 k)
+  where
+
+  is-equiv-diagonal-into-fibers-precomp-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f →
+    is-equiv (diagonal-into-fibers-precomp f (type-Truncated-Type X))
+  is-equiv-diagonal-into-fibers-precomp-is-epimorphism-Truncated-Type e =
+    is-equiv-map-section-family
+      ( λ g → g , refl)
+      ( λ g →
+        is-proof-irrelevant-is-prop
+          ( is-prop-map-is-emb (e X) (g ∘ f))
+          ( g , refl))
+
+  is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f →
+    is-equiv (diagonal-into-cocone f (type-Truncated-Type X))
+  is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e =
+    is-equiv-comp
+      ( map-equiv (compute-total-fiber-precomp f (type-Truncated-Type X)))
+      ( diagonal-into-fibers-precomp f (type-Truncated-Type X))
+      ( is-equiv-diagonal-into-fibers-precomp-is-epimorphism-Truncated-Type e)
+      ( is-equiv-map-equiv
+        ( compute-total-fiber-precomp f
+          ( type-Truncated-Type X)))
+
+  is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f →
+    is-equiv (horizontal-map-cocone {X = type-Truncated-Type X} f f)
+  is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type e =
+    is-equiv-left-factor
+      ( horizontal-map-cocone f f)
+      ( diagonal-into-cocone f (type-Truncated-Type X))
+      ( is-equiv-id)
+      ( is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e)
+```
+
+We now get the desired result, the codiagonal of `f` is a `k`-equivalence if `f`
+is a `k`-epi, by considering the commutative diagram for any `k`-type `X`:
+
+```text
+           horizontal-map-cocone (fst)
+ (B → X) <---------------------------- cocone f f X
+    |                  ≃                  |
+ id | ≃                                 ≃ | (universal property)
+    v                                     |
+ (B → X) ------------------------> (pushout f f → X)
+          precomp (codiagonal f)
+```
+
+Since the top, left and right maps are all equivalences, so is the bottom map.
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-truncation-equivalence-codiagonal-map-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f →
+    is-truncation-equivalence k (codiagonal-map f)
+  is-truncation-equivalence-codiagonal-map-is-epimorphism-Truncated-Type e =
+    is-truncation-equivalence-is-equiv-precomp k
+      ( codiagonal-map f)
+      ( λ l X →
+        is-equiv-right-factor
+          ( ( horizontal-map-cocone f f) ∘
+            ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
+          ( precomp (codiagonal-map f) (type-Truncated-Type X))
+          ( is-equiv-comp
+            ( horizontal-map-cocone f f)
+            ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X)))
+            ( is-equiv-map-equiv (equiv-up-pushout f f (type-Truncated-Type X)))
+            ( is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type
+              ( k)
+              ( f)
+              ( X)
+              ( e)))
+          ( is-equiv-htpy
+            ( id)
+            ( λ g → eq-htpy (λ b → ap g (compute-inl-codiagonal-map f b)))
+            ( is-equiv-id)))
+```
+
+### A map is a `k`-epimorphism if its codiagonal is a `k`-equivalence
+
+We use the same diagram as above.
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map :
+    is-truncation-equivalence k (codiagonal-map f) →
+    {l : Level} (X : Truncated-Type l k) →
+    is-equiv (horizontal-map-cocone {X = type-Truncated-Type X} f f)
+  is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map e X =
+    is-equiv-left-factor
+      ( horizontal-map-cocone f f)
+      ( ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X))) ∘
+        ( precomp (codiagonal-map f) (type-Truncated-Type X)))
+      ( is-equiv-htpy
+        ( id)
+        ( λ g → eq-htpy (λ b → ap g (compute-inl-codiagonal-map f b)))
+        ( is-equiv-id))
+      ( is-equiv-comp
+        ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X)))
+        ( precomp (codiagonal-map f) (type-Truncated-Type X))
+        ( is-equiv-precomp-is-truncation-equivalence k (codiagonal-map f) e X)
+        ( is-equiv-map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
 ```
 
 ## See also
