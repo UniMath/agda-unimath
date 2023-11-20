@@ -116,16 +116,13 @@ module _
     comp-hom-copresheaf-Large-Category X Z W
       ( h)
       ( comp-hom-copresheaf-Large-Category X Y Z g f)
-  associative-comp-hom-copresheaf-Large-Category X Y Z W h g f =
+  associative-comp-hom-copresheaf-Large-Category X Y Z W =
     associative-comp-hom-Large-Precategory
       ( copresheaf-Large-Precategory)
       { X = X}
       { Y}
       { Z}
       { W}
-      ( h)
-      ( g)
-      ( f)
 
   left-unit-law-comp-hom-copresheaf-Large-Category :
     {l3 l4 : Level}
