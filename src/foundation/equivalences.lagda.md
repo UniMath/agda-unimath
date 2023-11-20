@@ -248,6 +248,19 @@ module _
   pr2 emb-map-equiv = is-emb-map-equiv
 ```
 
+### Being a fiberwise equivalence is a proposition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  is-property-is-fiberwise-equiv :
+    (f : (a : A) → B a → C a) → is-prop (is-fiberwise-equiv f)
+  is-property-is-fiberwise-equiv f =
+    is-prop-Π (λ a → is-property-is-equiv (f a))
+```
+
 ### The 3-for-2 property of being an equivalence
 
 #### If the right factor is an equivalence, then the left factor being an equivalence is equivalent to the composite being one
