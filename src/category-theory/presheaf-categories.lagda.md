@@ -108,16 +108,13 @@ module _
       ( f) ＝
     comp-hom-presheaf-Large-Category X Z W h
       ( comp-hom-presheaf-Large-Category X Y Z g f)
-  associative-comp-hom-presheaf-Large-Category X Y Z W h g f =
+  associative-comp-hom-presheaf-Large-Category X Y Z W =
     associative-comp-hom-Large-Precategory
       ( presheaf-Large-Precategory)
       { X = X}
       { Y}
       { Z}
       { W}
-      ( h)
-      ( g)
-      ( f)
 
   left-unit-law-comp-hom-presheaf-Large-Category :
     {l3 l4 : Level}
