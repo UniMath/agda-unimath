@@ -37,8 +37,8 @@ The **pullback-hom** or **pullback-power** of two maps `f : A → B` and
 [commuting square](foundation-core.commuting-squares-of-maps.md):
 
 ```text
-             - ∘ f
-      B → X -------> A → X
+              - ∘ f
+      B → X --------> A → X
         |               |
   g ∘ - |               | g ∘ -
         V               V

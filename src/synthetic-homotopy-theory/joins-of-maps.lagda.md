@@ -181,3 +181,7 @@ module _
     compute-glue-join-maps =
       pr2 (pr2 (pr2 (center uniqueness-join-maps)))
 ```
+
+## External links
+
+- [Join of maps](https://ncatlab.org/nlab/show/join+of+maps) at the $n$Lab
