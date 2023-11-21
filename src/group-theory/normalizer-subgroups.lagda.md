@@ -12,10 +12,13 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.functoriality-dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 ```
@@ -28,11 +31,11 @@ Consider a [subgroup](group-theory.subgroups.md) `H` of a
 [group](group-theory.groups.md) `G`. The **normalizer subgroup** `Nᴳ(H)` of `G`
 is the largest subgroup of `G` of which `H` is a
 [normal subgroup](group-theory.normal-subgroups.md). The normalizer subgroup
-consists of all elements `g : G` such that `h ∈ H ⇔ (gh)g⁻¹ ∈ H` for all
-`h ∈ G`. In other words, the normalizer subgroup consists of all elements `g`
-such that `(gH)g⁻¹ ＝ H`.
+consists of all elements `g : G` such that `h ∈ H ⇔ ghg⁻¹ ∈ H` for all `g ∈ G`.
+In other words, the normalizer subgroup consists of all elements `g` such that
+`gHg⁻¹ ＝ H`.
 
-The weaker condition that `(gH)g⁻¹ ⊆ H` is
+The weaker condition that `gHg⁻¹ ⊆ H` is
 [not sufficient](https://math.stackexchange.com/q/107862) in the case of
 infinite groups. In this case, the group elements satisfying this weaker
 condition may not be closed under inverses.
@@ -54,7 +57,8 @@ module _
   is-normalizer-Subgroup : UUω
   is-normalizer-Subgroup =
     {l : Level} (K : Subgroup l G) →
-    ( {x y : type-Group G} → is-in-Subgroup G K x →
+    ( {x y : type-Group G} →
+      is-in-Subgroup G K x →
       is-in-Subgroup G H y →
       is-in-Subgroup G H (conjugation-Group G x y)) ↔
     leq-Subgroup G K N
@@ -74,8 +78,7 @@ module _
       ( λ y →
         iff-Prop
           ( subset-Subgroup G H y)
-          ( subset-Subgroup G H
-            ( conjugation-Group G x y)))
+          ( subset-Subgroup G H (conjugation-Group G x y)))
 
   is-in-normalizer-Subgroup : type-Group G → UU (l1 ⊔ l2)
   is-in-normalizer-Subgroup =
@@ -162,8 +165,45 @@ module _
     backward-implication-is-normalizer-normalizer-Subgroup K
 ```
 
+### The inclusion of `H` into its normalizer `Nᴳ(H)`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Subgroup l2 G) (N : Subgroup l3 G)
+  (is-normalizer-G-H-N : is-normalizer-Subgroup G H N)
+  where
+
+  is-in-normalizer-is-in-type-Subgroup :
+    (x : type-Group G) → is-in-Subgroup G H x → is-in-Subgroup G N x
+  is-in-normalizer-is-in-type-Subgroup =
+    forward-implication
+      ( is-normalizer-G-H-N H)
+      ( λ x' y' →
+        is-closed-under-multiplication-Subgroup G H
+          ( is-closed-under-multiplication-Subgroup G H x' y')
+          ( is-closed-under-inverses-Subgroup G H x'))
+
+  inclusion-is-normalizer-Subgroup : type-Subgroup G H → type-Subgroup G N
+  inclusion-is-normalizer-Subgroup = tot is-in-normalizer-is-in-type-Subgroup
+
+  hom-inclusion-is-normalizer-Subgroup :
+    hom-Group (group-Subgroup G H) (group-Subgroup G N)
+  pr1 hom-inclusion-is-normalizer-Subgroup =
+    inclusion-is-normalizer-Subgroup
+  pr2 hom-inclusion-is-normalizer-Subgroup =
+    eq-type-subtype (subset-Subgroup G N) refl
+```
+
 ## See also
 
 - [Centralizer subgroups](group-theory.centralizer-subgroups.md)
 - [Normal closures of subgroups](group-theory.normal-closures-subgroups.md)
 - [Normal cores of subgroups](group-theory.normal-cores-subgroups.md)
+
+## External links
+
+- [Centralizer and normalizer](https://en.wikipedia.org/wiki/Centralizer_and_normalizer)
+  at Wikipedia
+- [Normalizer of a subgroup](https://groupprops.subwiki.org/wiki/Normalizer_of_a_subgroup)
+  at Groupprops
+- [normalizer](https://ncatlab.org/nlab/show/normalizer) at $n$Lab
