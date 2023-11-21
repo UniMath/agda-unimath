@@ -39,7 +39,7 @@ the [commuting square](foundation-core.commuting-squares-of-maps.md)
                        Σ f id
 ```
 
-The [fiber](founcation-core.fibers-of-maps.md) of the dependent pushout product
+The [fiber](foundation-core.fibers-of-maps.md) of the dependent pushout product
 at `(x , y)` is [equivalent](foundation-core.equivalences.md) to the join of
 fibers
 

@@ -1,4 +1,4 @@
-# Pushout products
+# Pushout-products
 
 ```agda
 module synthetic-homotopy-theory.pushout-products where
@@ -39,7 +39,7 @@ of `f` and `g` is defined as the
               f × id
 ```
 
-In other words, the pushout product is the unique map
+In other words, the pushout-product is the unique map
 
 ```text
   f □ g : (X × B) ⊔_{A × B} (A × Y) → X × Y
@@ -162,3 +162,9 @@ module _
 ## See also
 
 - [The dependent pushout-product](synthetic-homotopy-theory.dependent-pushout-products.md)
+
+## External links
+
+- [Pushout-product](https://ncatlab.org/nlab/show/pushout-product) at $n$lab
+
+A wikidata identifier for this concept is not available.
