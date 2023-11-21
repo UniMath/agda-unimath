@@ -7,6 +7,7 @@ module foundation.universal-property-fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -65,6 +66,20 @@ defined by a point `b₀ : B` and the universal property of `unit`, we have
 which essentialy tells us `fiber f : B → UU` has the same universal property as
 `Id b₀ : B → UU`.
 
+### Temporary lemmas
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {D : A → UU l4}
+  where
+
+  dependent-comp :
+    ((a : A) → C a → D a) → ((a : A) → B a → C a) → (a : A) → B a → D a
+  dependent-comp g f a b = g a (f a b)
+
+```
+
 ## Definition
 
 ```agda
@@ -81,44 +96,80 @@ module _
     (l : Level) (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
   universal-property-fiber l f F δ = (P : B → UU l) → is-equiv (ev-fiber f F δ P)
-
-  fiberwise-map-universal-property-fiber :
-    (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) {l4 : Level} →
-    ({l : Level} → universal-property-fiber l f F δ) →
-    {l4 : Level} (P : B → UU l4) → ((a : A) → P (f a)) →
-    (b : B) → F b → P b
-  fiberwise-map-universal-property-fiber f F δ u P γ =
-    map-inv-is-equiv (u P) γ
 ```
 
 ## Properties
-
-### The 3-for-2 Property for fibers of maps {- THIS REQUIRES INFRASTRUCTURE FOR COMPOSING DEPENDENT FUNCTIONS -}
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B) {F : B → UU l3}
-  (δ : (a : A) → F (f a)) {P : B → UU l4} (γ : (a : A) → P (f a))
-  (h : (b : B) → F b → P b) (H : (ev-fiber f F δ P h) ~ γ)
-  where
-
-  triangle-ev-fiber :
-    {l5 : Level} (C : B → UU l5) →
-    (ev-fiber f P γ C) ~ ((ev-fiber f F δ C ) ∘ (λ (k : (b : B) → P b → C b) b t → k b (h b t)))
-  triangle-ev-fiber C = {!!}  
-```
 
 ### Fibers are uniquely unique
 
 ```agda
 module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {f : A → B} (F : B → UU l3)
+  (δ : (a : A) → F (f a)) (P : B → UU l4) (γ : (a : A) → P (f a))
+  where
+
+  section-preserving-fiberwise-map-fiber : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  section-preserving-fiberwise-map-fiber =
+    Σ ((b : B) → F b → P b) (λ h → (ev-fiber f F δ P h) ~ γ)
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {f : A → B} {F : B → UU l3}
+  {δ : (a : A) → F (f a)} {P : B → UU l4} {γ : (a : A) → P (f a)}
+  where
+
+  fiberwise-map-section-preserving-fiberwise-map-fiber :
+    section-preserving-fiberwise-map-fiber F δ P γ → (b : B) → F b → P b
+  fiberwise-map-section-preserving-fiberwise-map-fiber = pr1
+
+  preserves-section-section-preserving-fiberwise-map-fiber :
+    (w : section-preserving-fiberwise-map-fiber F δ P γ) →
+    (ev-fiber
+      ( f)
+      ( F)
+      ( δ)
+      ( P)
+      ( fiberwise-map-section-preserving-fiberwise-map-fiber w)) ~
+    ( γ)
+  preserves-section-section-preserving-fiberwise-map-fiber = pr2
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {F : B → UU l3}
+  {δ : (a : A) → F (f a)}
+  where
+  
+  id-section-preserving-fiberwise-map-fiber :
+    section-preserving-fiberwise-map-fiber F δ F δ
+  pr1 id-section-preserving-fiberwise-map-fiber = λ b → id
+  pr2 id-section-preserving-fiberwise-map-fiber = refl-htpy
+
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {f : A → B} {F : B → UU l3}
+  {δ : (a : A) → F (f a)} {P : B → UU l4} {γ : (a : A) → P (f a)}
+  {Q : B → UU l5} {η :(a : A) → Q (f a)}
+  where
+
+  dependent-comp-section-preserving-fiberwise-map-fiber :
+    ( section-preserving-fiberwise-map-fiber P γ Q η) →
+    ( section-preserving-fiberwise-map-fiber F δ P γ) →
+    ( section-preserving-fiberwise-map-fiber F δ Q η)
+  pr1 (dependent-comp-section-preserving-fiberwise-map-fiber g h) =
+    dependent-comp
+      ( fiberwise-map-section-preserving-fiberwise-map-fiber g)
+      ( fiberwise-map-section-preserving-fiberwise-map-fiber h)
+  pr2 (dependent-comp-section-preserving-fiberwise-map-fiber g h) a =
+    ( ap
+      ( (fiberwise-map-section-preserving-fiberwise-map-fiber g) (f a))
+      ( preserves-section-section-preserving-fiberwise-map-fiber h a)) ∙
+    ( preserves-section-section-preserving-fiberwise-map-fiber g a)
+  
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B) (F : B → UU l3)
   (δ : (a : A) → F (f a)) (u : {l : Level} → universal-property-fiber l f F δ)
   (P : B → UU l4) (γ : (a : A) → P (f a))
   where
-
+  
   uniqueness-fiberwise-map-universal-property-fiber :
-    is-contr (Σ ((b : B) → F b → P b) (λ h → (ev-fiber f F δ P h) ~ γ))
+    is-contr (section-preserving-fiberwise-map-fiber F δ P γ)
   uniqueness-fiberwise-map-universal-property-fiber =
     is-contr-equiv
       ( fiber (ev-fiber f F δ P) γ)
@@ -126,25 +177,108 @@ module _
         ( λ h → equiv-eq-htpy))
       (  is-contr-map-is-equiv (u P) γ)
 
+  section-preserving-fiberwise-map-universal-property-fiber :
+    section-preserving-fiberwise-map-fiber F δ P γ
+  section-preserving-fiberwise-map-universal-property-fiber =
+    ( center uniqueness-fiberwise-map-universal-property-fiber)
+
+  fiberwise-map-universal-property-fiber :
+    (b : B) → F b → P b
+  fiberwise-map-universal-property-fiber =
+    fiberwise-map-section-preserving-fiberwise-map-fiber
+      section-preserving-fiberwise-map-universal-property-fiber
+
+  preserves-section-fiberwise-map-universal-property-fiber :
+    (ev-fiber f F δ P fiberwise-map-universal-property-fiber) ~ γ
+  preserves-section-fiberwise-map-universal-property-fiber =
+    preserves-section-section-preserving-fiberwise-map-fiber
+      section-preserving-fiberwise-map-universal-property-fiber
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B) (F : B → UU l3)
+  (δ : (a : A) → F (f a)) (u : {l : Level} → universal-property-fiber l f F δ)
+  (P : B → UU l4) (γ : (a : A) → P (f a)) (u' : {l : Level} → universal-property-fiber l f P γ)
+  where
+
+  dependent-comp-retraction-fiberwise-map-universal-property-fiber-universal-property-fiber :
+    ( dependent-comp-section-preserving-fiberwise-map-fiber
+      ( section-preserving-fiberwise-map-universal-property-fiber f P γ u' F δ)
+      ( section-preserving-fiberwise-map-universal-property-fiber f F δ u P γ)) ＝
+    ( id-section-preserving-fiberwise-map-fiber)
+  dependent-comp-retraction-fiberwise-map-universal-property-fiber-universal-property-fiber =
+    eq-is-contr
+      ( uniqueness-fiberwise-map-universal-property-fiber f F δ u F δ)
+
+  dependent-comp-section-fiberwise-map-universal-property-fiber-universal-property-fiber :
+    ( dependent-comp-section-preserving-fiberwise-map-fiber
+      ( section-preserving-fiberwise-map-universal-property-fiber f F δ u P γ))
+      ( section-preserving-fiberwise-map-universal-property-fiber f P γ u' F δ)＝
+    ( id-section-preserving-fiberwise-map-fiber)
+  dependent-comp-section-fiberwise-map-universal-property-fiber-universal-property-fiber =
+    eq-is-contr
+      ( uniqueness-fiberwise-map-universal-property-fiber f P γ u' P γ)
+
+  is-fiberwise-retraction-fiberwise-map-universal-property-fiber-universal-property-fiber :
+    (b : B) →
+    ( ( fiberwise-map-universal-property-fiber f P γ u' F δ b) ∘
+    ( fiberwise-map-universal-property-fiber f F δ u P γ b)) ~
+    ( id)
+  is-fiberwise-retraction-fiberwise-map-universal-property-fiber-universal-property-fiber b =
+    htpy-eq (htpy-eq (ap pr1 dependent-comp-retraction-fiberwise-map-universal-property-fiber-universal-property-fiber) b)
+
+  is-fiberwise-section-fiberwise-map-universal-property-fiber-universal-property-fiber :
+    (b : B) →
+    ( ( fiberwise-map-universal-property-fiber f F δ u P γ b) ∘
+    ( fiberwise-map-universal-property-fiber f P γ u' F δ b)) ~
+    ( id)
+  is-fiberwise-section-fiberwise-map-universal-property-fiber-universal-property-fiber b =
+    htpy-eq (htpy-eq (ap pr1 dependent-comp-section-fiberwise-map-universal-property-fiber-universal-property-fiber) b)
+
+  is-fiberwise-equiv-fiberwise-map-universal-property-fiber-universal-property-fiber :
+    is-fiberwise-equiv (fiberwise-map-universal-property-fiber f F δ u P γ)
+  is-fiberwise-equiv-fiberwise-map-universal-property-fiber-universal-property-fiber b =
+    is-equiv-is-invertible
+      ( fiberwise-map-section-preserving-fiberwise-map-fiber
+        ( section-preserving-fiberwise-map-universal-property-fiber
+          ( f)
+          ( P)
+          ( γ)
+          ( u')
+          ( F)
+          ( δ))
+        ( b))
+      (is-fiberwise-section-fiberwise-map-universal-property-fiber-universal-property-fiber b)
+      (is-fiberwise-retraction-fiberwise-map-universal-property-fiber-universal-property-fiber b)
+
   uniquely-unique-fiberwise-map-universal-property-fiber :
-    (u' : {l : Level} → universal-property-fiber l f P γ) →
     is-contr
       ( Σ (fiberwise-equiv F P) (λ h → (ev-fiber f F δ P (fiberwise-map-fiberwise-equiv h)) ~ γ))
-  uniquely-unique-fiberwise-map-universal-property-fiber u' =
+  uniquely-unique-fiberwise-map-universal-property-fiber =
     is-torsorial-Eq-subtype
-      ( uniqueness-fiberwise-map-universal-property-fiber)
+      ( uniqueness-fiberwise-map-universal-property-fiber f F δ u P γ)
       ( is-property-is-fiberwise-equiv)
       ( fiberwise-map-universal-property-fiber f F δ u P γ)
-      ( htpy-eq (is-section-map-inv-is-equiv (u P) γ))
-      ( {!!})
-```
-  unique-fiber :
-    ({l : Level} → universal-property-fiber l f F δ) →
-    ({l : Level} → universal-property-fiber l f F' δ') → (b : B) → F b ≃ F' b
-  pr1 (unique-fiber u u' b) = map-inv-is-equiv (u F') δ' b
-  pr2 (unique-fiber u u' b) =
-    is-equiv-is-invertible
-      ( map-inv-is-equiv (u' F) δ b)
-      ( {!s!})
-      ( {!r!})
+      ( preserves-section-fiberwise-map-universal-property-fiber f F δ u P γ)
+      ( is-fiberwise-equiv-fiberwise-map-universal-property-fiber-universal-property-fiber)
 
+  section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber :
+    Σ (fiberwise-equiv F P) (λ h → (ev-fiber f F δ P (fiberwise-map-fiberwise-equiv h)) ~ γ)
+  section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber =
+    center uniquely-unique-fiberwise-map-universal-property-fiber 
+
+  fiberwise-equiv-unique-fiberwise-map-universal-property-fiber :
+    fiberwise-equiv F P
+  fiberwise-equiv-unique-fiberwise-map-universal-property-fiber =
+    pr1 section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber
+
+  preserves-section-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber :
+    (ev-fiber
+      ( f)
+      ( F)
+      ( δ)
+      ( P)
+      ( fiberwise-map-fiberwise-equiv fiberwise-equiv-unique-fiberwise-map-universal-property-fiber)) ~
+    ( γ)
+  preserves-section-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber =
+    pr2 section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber
+```
