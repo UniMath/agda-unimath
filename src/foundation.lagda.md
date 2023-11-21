@@ -96,6 +96,7 @@ open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
+open import foundation.diagonals-of-morphisms-arrows public
 open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
