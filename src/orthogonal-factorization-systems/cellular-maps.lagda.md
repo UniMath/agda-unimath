@@ -30,7 +30,8 @@ words, a map `f` is `k`-cellular if the
 
 with any `k`-connected map `g` is [surjective](foundation.surjective-maps.md).
 The terminology `k`-cellular comes from the fact that the `k`-connected maps are
-precisely the maps that are right orthogonal to the spheres
+precisely the maps that satisfy the right mere lifting property wtih respect to
+the [spheres](synthetic-homotopy-theory.spheres.md)
 
 ```text
   Sⁱ → unit
@@ -41,9 +42,10 @@ spheres". Alternatively, `k`-cellular maps might also be called **`k`-projective
 maps**. This emphasizes the condition that `k`-projective maps lift against
 `k`-connected maps.
 
-The `k`-cellular maps are the left class of an _external_ weak factorization
-system on spaces of which the right class is the class of `k`-connected maps,
-but there is no such weak factorization system definable internally.
+In the topos of spaces, the `k`-cellular maps are the left class of an
+_external_ weak factorization system on spaces of which the right class is the
+class of `k`-connected maps, but there is no such weak factorization system
+definable internally.
 
 ## Definitions
 
