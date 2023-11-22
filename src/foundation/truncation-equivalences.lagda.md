@@ -9,8 +9,11 @@ module foundation.truncation-equivalences where
 ```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.truncations
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-truncation
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -104,6 +107,38 @@ is-truncation-equivalence-is-equiv-precomp k {A} {B} f H =
         ( is-truncation-trunc X)
         ( is-truncation-trunc X)
         ( H _ X))
+```
+
+### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
+
+This is Lemma 2.27 of Christensen, Opie, Rijke & Scoccola listed below.
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋}
+  {X : UU l1} (P : (type-trunc (succ-𝕋 k) X) → UU l2)
+  where
+
+  map-Σ-map-base-unit-trunc :
+    Σ X (P ∘ unit-trunc) → Σ (type-trunc (succ-𝕋 k) X) P
+  map-Σ-map-base-unit-trunc = map-Σ-map-base unit-trunc P
+
+  is-truncation-equivalence-map-Σ-map-base-unit-trunc :
+    is-truncation-equivalence k map-Σ-map-base-unit-trunc
+  is-truncation-equivalence-map-Σ-map-base-unit-trunc =
+    is-truncation-equivalence-is-equiv-precomp k
+      ( map-Σ-map-base-unit-trunc)
+      ( λ l X →
+        is-equiv-equiv
+          ( equiv-ev-pair)
+          ( equiv-ev-pair)
+          ( refl-htpy)
+          ( dependent-universal-property-trunc
+            ( λ t →
+              ( ( P t → type-Truncated-Type X) ,
+                ( is-trunc-succ-is-trunc k
+                  ( is-trunc-function-type k
+                    ( is-trunc-type-Truncated-Type X)))))))
 ```
 
 ## References
