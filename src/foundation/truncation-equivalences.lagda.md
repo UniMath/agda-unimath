@@ -109,6 +109,18 @@ is-truncation-equivalence-is-equiv-precomp k {A} {B} f H =
         ( H _ X))
 ```
 
+### An equivalence is a `k`-equivalence for all `k`
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-truncation-equivalence-is-equiv :
+    is-equiv f → is-truncation-equivalence k f
+  is-truncation-equivalence-is-equiv e = is-equiv-map-equiv-trunc k (f , e)
+```
+
 ### The `k`-equivalences are closed under composition
 
 ```agda
