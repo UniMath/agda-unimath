@@ -109,3 +109,15 @@ module _
                 ( λ where refl → refl)
                 ( center (K a x)))))
 ```
+
+### Contractible types are `k`-connected for any `k`
+
+```agda
+module _
+  (k : 𝕋) {l : Level} {A : UU l}
+  where
+
+  is-connected-is-contr : is-contr A → is-connected k A
+  is-connected-is-contr c =
+    is-contr-is-equiv' A unit-trunc (is-equiv-unit-trunc-is-contr k A c) c
+```
