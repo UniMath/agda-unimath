@@ -1,9 +1,9 @@
-# Sharp-Codiscrete maps
+# Sharp codiscrete maps
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.codiscrete-maps where
+module modal-type-theory.sharp-codiscrete-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -22,7 +22,7 @@ open import modal-type-theory.sharp-codiscrete-types
 
 A map is said to be **(sharp) codiscrete** if its
 [fibers](foundation-core.fibers-of-maps.md) are
-[codiscrete](modal-type-theory.sharp-codiscrete-types.md).
+[(sharp) codiscrete](modal-type-theory.sharp-codiscrete-types.md).
 
 ## Definition
 
