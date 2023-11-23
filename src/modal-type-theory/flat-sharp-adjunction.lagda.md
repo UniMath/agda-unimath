@@ -43,9 +43,10 @@ In [The sharp modality](modal-type-theory.sharp-modality.md) we postulated that
 `♯` is a modal operator that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
 In the file [Codiscrete types](modal-type-theory.codiscrete-types.md), we
-postulated that the [subuniverse](foundation.subuniverses.md) of sharp modal types has appropriate closure
-properties. Please note that there is some redundancy between the postulated
-axioms, and they may be subject to change in the future.
+postulated that the [subuniverse](foundation.subuniverses.md) of sharp modal
+types has appropriate closure properties. Please note that there is some
+redundancy between the postulated axioms, and they may be subject to change in
+the future.
 
 ## Postulates
 
@@ -164,39 +165,39 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  ap-♭-elim-sharp : ♭ (♯ A) → ♭ A
-  ap-♭-elim-sharp = crisp-ap-♭ crisp-elim-sharp
+  ap-flat-elim-sharp : ♭ (♯ A) → ♭ A
+  ap-flat-elim-sharp = crisp-ap-flat crisp-elim-sharp
 
-  ap-♭-unit-sharp : ♭ A → ♭ (♯ A)
-  ap-♭-unit-sharp = ap-♭ unit-sharp
+  ap-flat-unit-sharp : ♭ A → ♭ (♯ A)
+  ap-flat-unit-sharp = ap-flat unit-sharp
 
-  is-section-ap-♭-unit-sharp : ap-♭-elim-sharp ∘ ap-♭-unit-sharp ~ id
-  is-section-ap-♭-unit-sharp (cons-♭ x) =
-    crisp-ap cons-♭ (compute-crisp-elim-sharp x)
+  is-section-ap-flat-unit-sharp : ap-flat-elim-sharp ∘ ap-flat-unit-sharp ~ id
+  is-section-ap-flat-unit-sharp (cons-flat x) =
+    crisp-ap cons-flat (compute-crisp-elim-sharp x)
 
-  is-retraction-ap-♭-unit-sharp : ap-♭-unit-sharp ∘ ap-♭-elim-sharp ~ id
-  is-retraction-ap-♭-unit-sharp (cons-♭ x) =
-    crisp-ap cons-♭ (uniqueness-crisp-elim-sharp x)
+  is-retraction-ap-flat-unit-sharp : ap-flat-unit-sharp ∘ ap-flat-elim-sharp ~ id
+  is-retraction-ap-flat-unit-sharp (cons-flat x) =
+    crisp-ap cons-flat (uniqueness-crisp-elim-sharp x)
 
-  is-equiv-ap-♭-elim-sharp : is-equiv ap-♭-elim-sharp
-  pr1 (pr1 is-equiv-ap-♭-elim-sharp) = ap-♭-unit-sharp
-  pr2 (pr1 is-equiv-ap-♭-elim-sharp) = is-section-ap-♭-unit-sharp
-  pr1 (pr2 is-equiv-ap-♭-elim-sharp) = ap-♭-unit-sharp
-  pr2 (pr2 is-equiv-ap-♭-elim-sharp) = is-retraction-ap-♭-unit-sharp
+  is-equiv-ap-flat-elim-sharp : is-equiv ap-flat-elim-sharp
+  pr1 (pr1 is-equiv-ap-flat-elim-sharp) = ap-flat-unit-sharp
+  pr2 (pr1 is-equiv-ap-flat-elim-sharp) = is-section-ap-flat-unit-sharp
+  pr1 (pr2 is-equiv-ap-flat-elim-sharp) = ap-flat-unit-sharp
+  pr2 (pr2 is-equiv-ap-flat-elim-sharp) = is-retraction-ap-flat-unit-sharp
 
-  equiv-ap-♭-elim-sharp : ♭ (♯ A) ≃ ♭ A
-  pr1 equiv-ap-♭-elim-sharp = ap-♭-elim-sharp
-  pr2 equiv-ap-♭-elim-sharp = is-equiv-ap-♭-elim-sharp
+  equiv-ap-flat-elim-sharp : ♭ (♯ A) ≃ ♭ A
+  pr1 equiv-ap-flat-elim-sharp = ap-flat-elim-sharp
+  pr2 equiv-ap-flat-elim-sharp = is-equiv-ap-flat-elim-sharp
 
-  is-equiv-ap-♭-unit-sharp : is-equiv ap-♭-unit-sharp
-  pr1 (pr1 is-equiv-ap-♭-unit-sharp) = ap-♭-elim-sharp
-  pr2 (pr1 is-equiv-ap-♭-unit-sharp) = is-retraction-ap-♭-unit-sharp
-  pr1 (pr2 is-equiv-ap-♭-unit-sharp) = ap-♭-elim-sharp
-  pr2 (pr2 is-equiv-ap-♭-unit-sharp) = is-section-ap-♭-unit-sharp
+  is-equiv-ap-flat-unit-sharp : is-equiv ap-flat-unit-sharp
+  pr1 (pr1 is-equiv-ap-flat-unit-sharp) = ap-flat-elim-sharp
+  pr2 (pr1 is-equiv-ap-flat-unit-sharp) = is-retraction-ap-flat-unit-sharp
+  pr1 (pr2 is-equiv-ap-flat-unit-sharp) = ap-flat-elim-sharp
+  pr2 (pr2 is-equiv-ap-flat-unit-sharp) = is-section-ap-flat-unit-sharp
 
-  equiv-ap-♭-unit-sharp : ♭ A ≃ ♭ (♯ A)
-  pr1 equiv-ap-♭-unit-sharp = ap-♭-unit-sharp
-  pr2 equiv-ap-♭-unit-sharp = is-equiv-ap-♭-unit-sharp
+  equiv-ap-flat-unit-sharp : ♭ A ≃ ♭ (♯ A)
+  pr1 equiv-ap-flat-unit-sharp = ap-flat-unit-sharp
+  pr2 equiv-ap-flat-unit-sharp = is-equiv-ap-flat-unit-sharp
 ```
 
 ### Sharp after flat
@@ -206,31 +207,31 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  ap-sharp-counit-♭ : ♯ (♭ A) → ♯ A
-  ap-sharp-counit-♭ = rec-sharp (unit-sharp ∘ counit-♭)
+  ap-sharp-counit-flat : ♯ (♭ A) → ♯ A
+  ap-sharp-counit-flat = rec-sharp (unit-sharp ∘ counit-flat)
 
-  ap-sharp-cons-♭ : ♯ A → ♯ (♭ A)
-  ap-sharp-cons-♭ =
+  ap-sharp-cons-flat : ♯ A → ♯ (♭ A)
+  ap-sharp-cons-flat =
     rec-sharp
       ( crisp-rec-sharp
         ( ♯ (♭ A))
         ( is-codiscrete-sharp (♭ A))
-        ( λ x → unit-sharp (cons-♭ x)))
+        ( λ x → unit-sharp (cons-flat x)))
 ```
 
 It remains to show that these two are inverses to each other.
 
 ```text
-  is-section-cons-♭ : ap-sharp-counit-♭ ∘ cons-♭ ~ id
-  is-section-cons-♭ =
+  is-section-cons-flat : ap-sharp-counit-flat ∘ cons-flat ~ id
+  is-section-cons-flat =
     ind-subuniverse-sharp
       ( A)
-      ( λ x → ap-sharp-counit-♭ (cons-♭ x) ＝ x)
-      ( λ x → is-codiscrete-Id-sharp (ap-sharp-counit-♭ (cons-♭ x)) x)
+      ( λ x → ap-sharp-counit-flat (cons-flat x) ＝ x)
+      ( λ x → is-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat x)) x)
       ( λ x →
           crisp-rec-sharp
-            ( ap-sharp-counit-♭ (cons-♭ (unit-sharp x)) ＝ unit-sharp x)
-            ( is-codiscrete-Id-sharp (ap-sharp-counit-♭ (cons-♭ (unit-sharp x))) (unit-sharp x))
+            ( ap-sharp-counit-flat (cons-flat (unit-sharp x)) ＝ unit-sharp x)
+            ( is-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat (unit-sharp x))) (unit-sharp x))
             ( λ y →
               compute-rec-subuniverse-sharp
                 {!   !} (♯ A) {!  is-codiscrete-sharp ?  !} {!   !} {!   !})

@@ -34,7 +34,7 @@ that type is an [equivalence](foundation-core.equivalences.md).
 
 ```agda
 is-flat : {@♭ l : Level} (@♭ A : UU l) → UU l
-is-flat {l} A = is-equiv (counit-♭ {l} {A})
+is-flat {l} A = is-equiv (counit-flat {l} {A})
 ```
 
 ## Properties
@@ -43,10 +43,10 @@ is-flat {l} A = is-equiv (counit-♭ {l} {A})
 
 ```agda
 is-property-is-flat : {@♭ l : Level} (@♭ A : UU l) → is-prop (is-flat A)
-is-property-is-flat {l} A = is-property-is-equiv (counit-♭ {l} {A})
+is-property-is-flat {l} A = is-property-is-equiv (counit-flat {l} {A})
 
 is-flat-Prop : {@♭ l : Level} (@♭ A : UU l) → Prop l
-is-flat-Prop {l} A = is-equiv-Prop (counit-♭ {l} {A})
+is-flat-Prop {l} A = is-equiv-Prop (counit-flat {l} {A})
 ```
 
 ### The empty type is flat
@@ -55,11 +55,11 @@ is-flat-Prop {l} A = is-equiv-Prop (counit-♭ {l} {A})
 map-is-flat-empty : empty → ♭ empty
 map-is-flat-empty ()
 
-is-section-map-is-flat-empty : (counit-♭ ∘ map-is-flat-empty) ~ id
+is-section-map-is-flat-empty : (counit-flat ∘ map-is-flat-empty) ~ id
 is-section-map-is-flat-empty ()
 
-is-retraction-map-is-flat-empty : (map-is-flat-empty ∘ counit-♭) ~ id
-is-retraction-map-is-flat-empty (cons-♭ ())
+is-retraction-map-is-flat-empty : (map-is-flat-empty ∘ counit-flat) ~ id
+is-retraction-map-is-flat-empty (cons-flat ())
 
 is-flat-empty : is-flat empty
 is-flat-empty =
@@ -73,13 +73,13 @@ is-flat-empty =
 
 ```agda
 map-is-flat-unit : unit → ♭ unit
-map-is-flat-unit star = cons-♭ star
+map-is-flat-unit star = cons-flat star
 
-is-section-map-is-flat-unit : (counit-♭ ∘ map-is-flat-unit) ~ id
+is-section-map-is-flat-unit : (counit-flat ∘ map-is-flat-unit) ~ id
 is-section-map-is-flat-unit _ = refl
 
-is-retraction-map-is-flat-unit : (map-is-flat-unit ∘ counit-♭) ~ id
-is-retraction-map-is-flat-unit (cons-♭ _) = refl
+is-retraction-map-is-flat-unit : (map-is-flat-unit ∘ counit-flat) ~ id
+is-retraction-map-is-flat-unit (cons-flat _) = refl
 
 is-flat-unit : is-flat unit
 is-flat-unit =
