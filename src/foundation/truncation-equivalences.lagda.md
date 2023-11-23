@@ -109,6 +109,38 @@ is-truncation-equivalence-is-equiv-precomp k {A} {B} f H =
         ( H _ X))
 ```
 
+### The `k`-equivalences are closed under composition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  is-truncation-equivalence-comp :
+    (g : B → C) (f : A → B) →
+    is-truncation-equivalence k f →
+    is-truncation-equivalence k g →
+    is-truncation-equivalence k (g ∘ f)
+  is-truncation-equivalence-comp g f ef eg =
+    is-equiv-htpy
+      ( map-trunc k g ∘ map-trunc k f)
+      ( preserves-comp-map-trunc k g f)
+      ( is-equiv-comp (map-trunc k g) (map-trunc k f) ef eg)
+
+  truncation-equivalence-comp :
+    truncation-equivalence k B C →
+    truncation-equivalence k A B →
+    truncation-equivalence k A C
+  pr1 (truncation-equivalence-comp g f) =
+    map-truncation-equivalence k g ∘ map-truncation-equivalence k f
+  pr2 (truncation-equivalence-comp g f) =
+    is-truncation-equivalence-comp
+      ( map-truncation-equivalence k g)
+      ( map-truncation-equivalence k f)
+      ( is-truncation-equivalence-truncation-equivalence k f)
+      ( is-truncation-equivalence-truncation-equivalence k g)
+```
+
 ### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
 
 This is Lemma 2.27 of Christensen, Opie, Rijke & Scoccola listed below.
