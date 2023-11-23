@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.postcomposition
+open import foundation.sections
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels

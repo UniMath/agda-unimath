@@ -175,7 +175,7 @@ module _
     (p : x ＝ y) →
     hom-eq-Precategory C x y p ＝
     hom-iso-Precategory C (iso-eq-Precategory x y p)
-  compute-hom-iso-eq-Precategory refl = refl
+  compute-hom-iso-eq-Precategory p = refl
 ```
 
 ## Properties

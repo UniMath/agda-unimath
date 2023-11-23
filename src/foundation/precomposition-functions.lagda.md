@@ -15,6 +15,7 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions-into-subuniverses
+open import foundation.sections
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
@@ -25,7 +26,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
-open import foundation-core.sections
 open import foundation-core.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -125,4 +125,8 @@ module _
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
   compute-total-fiber-precomp =
     equiv-tot compute-fiber-precomp
+
+  diagonal-into-fibers-precomp :
+    (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
+  diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
 ```
