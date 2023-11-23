@@ -128,16 +128,17 @@ module _
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  is-truncation-equivalence-comp :
-    (g : B → C) (f : A → B) →
-    is-truncation-equivalence k f →
-    is-truncation-equivalence k g →
-    is-truncation-equivalence k (g ∘ f)
-  is-truncation-equivalence-comp g f ef eg =
-    is-equiv-htpy
-      ( map-trunc k g ∘ map-trunc k f)
-      ( preserves-comp-map-trunc k g f)
-      ( is-equiv-comp (map-trunc k g) (map-trunc k f) ef eg)
+  abstract
+    is-truncation-equivalence-comp :
+      (g : B → C) (f : A → B) →
+      is-truncation-equivalence k f →
+      is-truncation-equivalence k g →
+      is-truncation-equivalence k (g ∘ f)
+    is-truncation-equivalence-comp g f ef eg =
+      is-equiv-htpy
+        ( map-trunc k g ∘ map-trunc k f)
+          ( preserves-comp-map-trunc k g f)
+        ( is-equiv-comp (map-trunc k g) (map-trunc k f) ef eg)
 
   truncation-equivalence-comp :
     truncation-equivalence k B C →
