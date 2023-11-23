@@ -8,6 +8,10 @@ module foundation.truncation-equivalences where
 
 ```agda
 open import foundation.commuting-squares-of-maps
+open import foundation.connected-maps
+open import foundation.connected-types
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
@@ -302,6 +306,45 @@ module _
   pr1 truncation-equivalence-fiber-map-trunc-fiber = fiber-map-trunc-fiber
   pr2 truncation-equivalence-fiber-map-trunc-fiber =
     is-truncation-equivalence-fiber-map-trunc-fiber
+```
+
+### Being `k`-connected is invariant under `k`-equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-is-truncation-equivalence :
+    (f : A → B) → is-truncation-equivalence k f →
+    is-connected k B → is-connected k A
+  is-connected-is-truncation-equivalence f e =
+    is-contr-equiv (type-trunc k B) (map-trunc k f , e)
+
+  is-connected-truncation-equivalence :
+    truncation-equivalence k A B → is-connected k B → is-connected k A
+  is-connected-truncation-equivalence f =
+    is-connected-is-truncation-equivalence
+      ( map-truncation-equivalence k f)
+      ( is-truncation-equivalence-truncation-equivalence k f)
+```
+
+### Every `(k+1)`-equivalence is `k`-connected
+
+This is an instance of Proposition 2.30 in Christensen, Opie, Rijke & Scoccola
+listed below.
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-connected-map-is-truncation-equivalence :
+    is-truncation-equivalence (succ-𝕋 k) f → is-connected-map k f
+  is-connected-map-is-truncation-equivalence e b =
+    is-connected-truncation-equivalence
+      ( truncation-equivalence-fiber-map-trunc-fiber f b)
+      ( is-connected-is-contr k (is-contr-map-is-equiv e (unit-trunc b)))
 ```
 
 ## References
