@@ -159,79 +159,13 @@ module _
   inv-equiv-flat-counit-flat = inv-equiv equiv-flat-counit-flat
 ```
 
-### Flat distributes over dependent function types
-
-```agda
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
-  where
-
-  map-crisp-distributive-flat-Π : ♭ ((x : A) → B x) → ((@♭ x : A) → ♭ (B x))
-  map-crisp-distributive-flat-Π (cons-flat f) x = cons-flat (f x)
-
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
-  where
-
-  map-crisp-distributive-flat-function-types : ♭ (A → B) → (@♭ A → ♭ B)
-  map-crisp-distributive-flat-function-types = map-crisp-distributive-flat-Π
-
-  map-distributive-flat-function-types : ♭ (A → B) → (♭ A → ♭ B)
-  map-distributive-flat-function-types f (cons-flat x) =
-    map-crisp-distributive-flat-function-types f x
-```
-
-### Flat distributes over Σ-types
-
-```agda
-Σ-♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : A → UU l2) → UU (l1 ⊔ l2)
-Σ-♭ A B = Σ (♭ A) (λ {(cons-flat x) → ♭ (B x)})
-
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
-  where
-
-  map-distributive-flat-Σ : ♭ (Σ A B) → Σ-♭ A B
-  pr1 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat x
-  pr2 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat y
-
-  map-inv-distributive-flat-Σ : Σ-♭ A B → ♭ (Σ A B)
-  map-inv-distributive-flat-Σ (cons-flat x , cons-flat y) = cons-flat (x , y)
-
-  is-section-distributive-flat-Σ :
-    (map-inv-distributive-flat-Σ ∘ map-distributive-flat-Σ) ~ id
-  is-section-distributive-flat-Σ (cons-flat _) = refl
-
-  is-retraction-distributive-flat-Σ :
-    (map-distributive-flat-Σ ∘ map-inv-distributive-flat-Σ) ~ id
-  is-retraction-distributive-flat-Σ (cons-flat _ , cons-flat _) = refl
-
-  section-distributive-flat-Σ : section map-distributive-flat-Σ
-  pr1 section-distributive-flat-Σ = map-inv-distributive-flat-Σ
-  pr2 section-distributive-flat-Σ = is-retraction-distributive-flat-Σ
-
-  retraction-distributive-flat-Σ : retraction map-distributive-flat-Σ
-  pr1 retraction-distributive-flat-Σ = map-inv-distributive-flat-Σ
-  pr2 retraction-distributive-flat-Σ = is-section-distributive-flat-Σ
-
-  is-equiv-distributive-flat-Σ : is-equiv map-distributive-flat-Σ
-  pr1 is-equiv-distributive-flat-Σ = section-distributive-flat-Σ
-  pr2 is-equiv-distributive-flat-Σ = retraction-distributive-flat-Σ
-
-  equiv-distributive-flat-Σ : ♭ (Σ A B) ≃ Σ-♭ A B
-  pr1 equiv-distributive-flat-Σ = map-distributive-flat-Σ
-  pr2 equiv-distributive-flat-Σ = is-equiv-distributive-flat-Σ
-
-  inv-equiv-distributive-flat-Σ : Σ-♭ A B ≃ ♭ (Σ A B)
-  inv-equiv-distributive-flat-Σ = inv-equiv equiv-distributive-flat-Σ
-```
-
 ## See also
 
 - In [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md) we
   postulate that the flat modality is left adjoint to the
   [sharp modality](modal-type-theory.sharp-modality.md).
-- [Flat types](modal-type-theory.flat-types.md) for types that are flat modal.
+- [Flat discrete types](modal-type-theory.flat-discrete-types.md) for types that
+  are flat modal.
 
 ## References
 
