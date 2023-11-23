@@ -45,7 +45,7 @@ module _
         ( right-bottom)
         ( front-bottom)
         ( back)
-        ( bottom) ) ∙h
+        ( bottom)) ∙h
       ( right ·r top))
 ```
 
@@ -265,12 +265,26 @@ module _
     ( top : coherence-triangle-maps top-front top-right top-left)
     ( left : coherence-square-maps top-left front-left back bottom-left)
     ( inv-right : coherence-square-maps back top-right bottom-right front-right)
-    ( inv-front : coherence-square-maps front-left top-front bottom-front front-right)
+    ( inv-front :
+        coherence-square-maps front-left top-front bottom-front front-right)
     ( bottom : coherence-triangle-maps bottom-front bottom-right bottom-left) →
     ( ( inv-front ∙h ((bottom ·r front-left) ∙h (bottom-right ·l left))) ~
       ( (front-right ·l top) ∙h (inv-right ·r top-left))) →
-    vertical-coherence-prism-maps top-left top-right top-front front-left back front-right
-    bottom-left bottom-right bottom-front top left (inv-htpy inv-right) (inv-htpy inv-front) bottom
+    vertical-coherence-prism-maps
+      ( top-left)
+      ( top-right)
+      ( top-front)
+      ( front-left)
+      ( back)
+      ( front-right)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom-front)
+      ( top)
+      ( left)
+      ( inv-htpy inv-right)
+      ( inv-htpy inv-front)
+      ( bottom)
   [v] top left inv-right inv-front bottom α a =
     ( inv
       ( assoc
