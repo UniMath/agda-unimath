@@ -154,6 +154,56 @@ module _
       ( is-truncation-equivalence-truncation-equivalence k g)
 ```
 
+### Composing `k`-equivalences with equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  is-truncation-equivalence-is-equiv-is-truncation-equivalence :
+    (g : B → C) (f : A → B) →
+    is-truncation-equivalence k g →
+    is-equiv f →
+    is-truncation-equivalence k (g ∘ f)
+  is-truncation-equivalence-is-equiv-is-truncation-equivalence g f eg ef =
+    is-truncation-equivalence-comp g f
+      ( is-truncation-equivalence-is-equiv f ef)
+      ( eg)
+
+  is-truncation-equivalence-is-truncation-equivalence-is-equiv :
+    (g : B → C) (f : A → B) →
+    is-equiv g →
+    is-truncation-equivalence k f →
+    is-truncation-equivalence k (g ∘ f)
+  is-truncation-equivalence-is-truncation-equivalence-is-equiv g f eg ef =
+    is-truncation-equivalence-comp g f
+      ( ef)
+      ( is-truncation-equivalence-is-equiv g eg)
+
+  is-truncation-equivalence-equiv-is-truncation-equivalence :
+    (g : B → C) (f : A ≃ B) →
+    is-truncation-equivalence k g →
+    is-truncation-equivalence k (g ∘ map-equiv f)
+  is-truncation-equivalence-equiv-is-truncation-equivalence g f eg =
+    is-truncation-equivalence-is-equiv-is-truncation-equivalence g
+      ( map-equiv f)
+      ( eg)
+      ( is-equiv-map-equiv f)
+
+  is-truncation-equivalence-is-truncation-equivalence-equiv :
+    (g : B ≃ C) (f : A → B) →
+    is-truncation-equivalence k f →
+    is-truncation-equivalence k (map-equiv g ∘ f)
+  is-truncation-equivalence-is-truncation-equivalence-equiv g f ef =
+    is-truncation-equivalence-is-truncation-equivalence-is-equiv
+      ( map-equiv g)
+      ( f)
+      ( is-equiv-map-equiv g)
+      ( ef)
+```
+
+
 ### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
 
 This is Lemma 2.27 of Christensen, Opie, Rijke & Scoccola listed below.
