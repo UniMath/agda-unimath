@@ -147,3 +147,8 @@ is-sharp-codiscrete-sharp : {l : Level} (X : UU l) → is-sharp-codiscrete (♯ 
 is-sharp-codiscrete-sharp {l} =
   is-modal-operator-type-higher-modality (sharp-higher-modality l)
 ```
+
+## See also
+
+- [Flat discrete types](modal-type-theory.flat-discrete-types.md) for the dual
+  notion.

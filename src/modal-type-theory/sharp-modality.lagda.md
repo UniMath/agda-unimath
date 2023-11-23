@@ -34,9 +34,10 @@ postulate as a right adjoint to the
 In this file, we only postulate that `♯` is a
 [modal operator](orthogonal-factorization-systems.modal-operators.md) that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
-In the file about [codiscrete types](modal-type-theory.codiscrete-types.md), we
-postulate that the [subuniverse](foundation.subuniverses.md) of sharp modal
-types has appropriate closure properties. In
+In the file about
+[codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we postulate
+that the [subuniverse](foundation.subuniverses.md) of sharp modal types has
+appropriate closure properties. In
 [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md), we
 postulate that it has the appropriate relation to the flat modality, making it a
 lex modality. Please note that there is some redundancy between the postulated
@@ -202,8 +203,8 @@ ap-sharp f = rec-sharp (unit-sharp ∘ f)
 
 ## See also
 
-- In [codiscrete types](modal-type-theory.codiscrete-types.md), we postulate
-  that the sharp modality is a
+- In [codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
+  postulate that the sharp modality is a
   [higher modality](orthogonal-factorization-systems.higher-modalities.md).
 - and in [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md)
   we moreover postulate that the sharp modality is right adjoint to the

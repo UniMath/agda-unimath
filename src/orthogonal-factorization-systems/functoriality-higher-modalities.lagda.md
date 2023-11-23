@@ -27,6 +27,28 @@ open import orthogonal-factorization-systems.modal-subuniverse-induction
 
 </details>
 
+## Idea
+
+Every [higher modality](orthogonal-factorization-systems.higher-modalities.md)
+`○` is functorial. Given a map `f : A → B`, there is a
+[unique](foundation-core.contractible-types.md) map `○f : ○A → ○B` that fits
+into a [natural square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+         f
+    X ------> Y
+    |         |
+    |         |
+    v         v
+   ○ X ----> ○ Y.
+        ○ f
+```
+
+This construction preserves [composition](foundation-core.function-types.md),
+[identifications](foundation-core.identity-types.md),
+[homotopies](foundation-core.homotopies.md), and
+[equivalences](foundation-core.equivalences.md).
+
 ## Properties
 
 ### Action on maps
@@ -61,12 +83,8 @@ module _
       ( λ x →
         ( ap
           ( ap-map-higher-modality m g)
-          ( compute-rec-higher-modality m
-            ( unit-higher-modality m ∘ f)
-            ( x))) ∙
-        ( ( compute-rec-higher-modality m
-            ( unit-higher-modality m ∘ g)
-            ( f x)) ∙
+          ( compute-rec-higher-modality m (unit-higher-modality m ∘ f) x)) ∙
+        ( ( compute-rec-higher-modality m (unit-higher-modality m ∘ g) (f x)) ∙
           ( inv
             ( compute-rec-higher-modality m
               ( unit-higher-modality m ∘ (g ∘ f))
@@ -126,7 +144,7 @@ module _
         ( ap-map-higher-modality m g)
         ( naturality-unit-higher-modality m f x)) ∙
       ( naturality-unit-higher-modality m g (f x)))
-  compute-naturality-unit-ind-modality {X} {Y} {Z} g f x =
+  compute-naturality-unit-ind-modality g f x =
     ( ap
       ( _∙
         compute-rec-higher-modality m (unit-higher-modality m ∘ (g ∘ f)) x)
@@ -161,13 +179,12 @@ for future work.
 
 ```agda
 module _
-  {l : Level}
-  (m : higher-modality l l)
+  {l : Level} (m : higher-modality l l)
   where
 
   htpy-ap-higher-modality :
     {X Y : UU l} {f g : X → Y} →
-    (f ~ g) → ap-map-higher-modality m f ~ ap-map-higher-modality m g
+    f ~ g → ap-map-higher-modality m f ~ ap-map-higher-modality m g
   htpy-ap-higher-modality H x' =
     ap (λ f → ap-map-higher-modality m f x') (eq-htpy H)
 ```

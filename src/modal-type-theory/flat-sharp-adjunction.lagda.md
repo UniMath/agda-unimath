@@ -21,9 +21,9 @@ open import foundation.multivariable-sections
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import modal-type-theory.codiscrete-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
+open import modal-type-theory.sharp-codiscrete-types
 open import modal-type-theory.sharp-modality
 
 open import orthogonal-factorization-systems.locally-small-modal-operators
@@ -43,7 +43,8 @@ In [The sharp modality](modal-type-theory.sharp-modality.md) we postulated that
 `♯` is a [modal operator](orthogonal-factorization-systems.modal-operators.md)
 that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
-In the file [Sharp-Codiscrete types](modal-type-theory.codiscrete-types.md), we
+In the file
+[Sharp-Codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
 postulated that the [subuniverse](foundation.subuniverses.md) of sharp modal
 types has appropriate closure properties. Please note that there is some
 redundancy between the postulated axioms, and they may be subject to change in
@@ -281,8 +282,8 @@ is-uniquely-eliminating-sharp X P .pr2 .pr2 f =
 
 ## See also
 
-- In [codiscrete types](modal-type-theory.codiscrete-types.md), we postulate
-  that the sharp modality is a
+- In [codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
+  postulate that the sharp modality is a
   [higher modality](orthogonal-factorization-systems.higher-modalities.md).
 
 ## References

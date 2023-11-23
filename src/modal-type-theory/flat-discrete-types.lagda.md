@@ -96,5 +96,5 @@ is-flat-discrete-unit =
 
 ## See also
 
-- [Sharp-Codiscrete types](modal-type-theory.codiscrete-types.md) for the dual
-  notion.
+- [Sharp codiscrete types](modal-type-theory.sharp-codiscrete-types.md) for the
+  dual notion.

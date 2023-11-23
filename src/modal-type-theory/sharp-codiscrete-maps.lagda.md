@@ -13,7 +13,7 @@ open import foundation.fibers-of-maps
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import modal-type-theory.codiscrete-types
+open import modal-type-theory.sharp-codiscrete-types
 ```
 
 </details>
@@ -22,7 +22,7 @@ open import modal-type-theory.codiscrete-types
 
 A map is said to be **(sharp) codiscrete** if its
 [fibers](foundation-core.fibers-of-maps.md) are
-[codiscrete](modal-type-theory.codiscrete-types.md).
+[codiscrete](modal-type-theory.sharp-codiscrete-types.md).
 
 ## Definition
 
