@@ -552,7 +552,7 @@ module _
 
   distributive-map-inv-comp-equiv :
     (e : X ≃ Y) (f : Y ≃ Z) →
-    (map-inv-equiv (f ∘e e)) ＝ ((map-inv-equiv e) ∘ (map-inv-equiv f))
+    map-inv-equiv (f ∘e e) ＝ map-inv-equiv e ∘ map-inv-equiv f
   distributive-map-inv-comp-equiv e f =
     ap map-equiv (distributive-inv-comp-equiv e f)
 ```
