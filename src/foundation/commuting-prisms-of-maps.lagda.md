@@ -80,16 +80,6 @@ module _
 ```
 
 ```agda
-[iv] :
-  { l1 l2 : Level} {A : UU l1} {B : UU l2}
-  { f g g' h k : A → B} (H : f ~ g) (H' : f ~ g') (K : g ~ h) (K' : g' ~ h)
-  ( L : h ~ k) → ( α : H ∙h K ~ H' ∙h K') →
-  H ∙h (K ∙h L) ~ H' ∙h (K' ∙h L)
-[iv] H H' K K' L α =
-  ( inv-htpy-assoc-htpy H K L) ∙h
-  ( ap-concat-htpy' (H ∙h K) (H' ∙h K') L α) ∙h
-  ( assoc-htpy H' K' L)
-
 module _
   { l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
@@ -219,22 +209,11 @@ module _
         ( right-top)
         ( left-bottom)
         ( right-bottom))) ∙h
-    ( [iv]
-      ( bottom ·r front-left-bottom ·r front-left-top)
+    ( right-whisk-square-htpy
       ( front-bottom ·r front-left-top)
-      ( ( pasting-horizontal-coherence-square-maps
-          ( mid-left)
-          ( mid-right)
-          ( front-left-bottom)
-          ( back-bottom)
-          ( front-right-bottom)
-          ( bottom-left)
-          ( bottom-right)
-          ( left-bottom)
-          ( right-bottom)) ·r
-        ( front-left-top))
-      ( ( front-right-bottom ·l mid) ·r front-left-top)
-      ( front-right-bottom ·l _)
+      ( bottom ·r front-left-bottom ·r front-left-top)
+      ( ( front-right-bottom) ·l
+        ( (mid-right ·l left-top) ∙h (right-top ·r top-left)))
       ( prism-bottom ·r front-left-top)) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r front-left-top)
