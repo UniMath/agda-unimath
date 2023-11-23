@@ -43,7 +43,7 @@ In [The sharp modality](modal-type-theory.sharp-modality.md) we postulated that
 `♯` is a [modal operator](orthogonal-factorization-systems.modal-operators.md)
 that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
-In the file [Codiscrete types](modal-type-theory.codiscrete-types.md), we
+In the file [Sharp-Codiscrete types](modal-type-theory.codiscrete-types.md), we
 postulated that the [subuniverse](foundation.subuniverses.md) of sharp modal
 types has appropriate closure properties. Please note that there is some
 redundancy between the postulated axioms, and they may be subject to change in
@@ -53,20 +53,20 @@ the future.
 
 ### Crisp induction for `♯`
 
-Codiscrete types are local at the flat counit.
+Sharp-Codiscrete types are local at the flat counit.
 
 ```agda
 postulate
   crisp-ind-sharp :
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
-    ((x : A) → is-codiscrete (C x)) →
+    ((x : A) → is-sharp-codiscrete (C x)) →
     ((@♭ x : A) → C x) → (x : A) → C x
 
   compute-crisp-ind-sharp :
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
-    (is-codiscrete-C : (x : A) → is-codiscrete (C x))
+    (is-sharp-codiscrete-C : (x : A) → is-sharp-codiscrete (C x))
     (f : (@♭ x : A) → C x) →
-    (@♭ x : A) → crisp-ind-sharp C is-codiscrete-C f x ＝ f x
+    (@♭ x : A) → crisp-ind-sharp C is-sharp-codiscrete-C f x ＝ f x
 ```
 
 ### Crisp elimination of `♯`
@@ -97,18 +97,18 @@ postulate
 ```agda
 crisp-rec-sharp :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2) →
-  (is-codiscrete C) →
+  (is-sharp-codiscrete C) →
   ((@♭ x : A) → C) → A → C
-crisp-rec-sharp C is-codiscrete-C =
-  crisp-ind-sharp (λ _ → C) (λ _ → is-codiscrete-C)
+crisp-rec-sharp C is-sharp-codiscrete-C =
+  crisp-ind-sharp (λ _ → C) (λ _ → is-sharp-codiscrete-C)
 
 compute-crisp-rec-sharp :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2)
-  (is-codiscrete-C : is-codiscrete C)
+  (is-sharp-codiscrete-C : is-sharp-codiscrete C)
   (f : (@♭ x : A) → C) →
-  (@♭ x : A) → crisp-rec-sharp C is-codiscrete-C f x ＝ f x
-compute-crisp-rec-sharp C is-codiscrete-C =
-  compute-crisp-ind-sharp (λ _ → C) (λ _ → is-codiscrete-C)
+  (@♭ x : A) → crisp-rec-sharp C is-sharp-codiscrete-C f x ＝ f x
+compute-crisp-rec-sharp C is-sharp-codiscrete-C =
+  compute-crisp-ind-sharp (λ _ → C) (λ _ → is-sharp-codiscrete-C)
 ```
 
 ## Properties
@@ -125,20 +125,20 @@ crisp-tr-sharp refl {x} = uniqueness-crisp-elim-sharp x
 ```agda
 ind-crisp-ind-sharp :
   {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
-  ((x : ♯ A) → is-codiscrete (C x)) →
+  ((x : ♯ A) → is-sharp-codiscrete (C x)) →
   ((x : A) → C (unit-sharp x)) →
   (x : ♯ A) → C x
-ind-crisp-ind-sharp {A = A} C is-codiscrete-C f x' =
+ind-crisp-ind-sharp {A = A} C is-sharp-codiscrete-C f x' =
   crisp-ind-sharp
     ( λ X → (x : ♯ X) (p : X ＝ A) → C (tr ♯ p x))
     ( λ x →
-      is-codiscrete-Π
-        ( λ y → is-codiscrete-Π
-          ( λ p → is-codiscrete-C (tr ♯ p y))))
+      is-sharp-codiscrete-Π
+        ( λ y → is-sharp-codiscrete-Π
+          ( λ p → is-sharp-codiscrete-C (tr ♯ p y))))
     ( λ A' →
       crisp-ind-sharp
         ( λ y → (p : A' ＝ A) → C (tr ♯ p y))
-        ( λ y → is-codiscrete-Π (λ p → is-codiscrete-C (tr ♯ p y)))
+        ( λ y → is-sharp-codiscrete-Π (λ p → is-sharp-codiscrete-C (tr ♯ p y)))
         ( λ x p → tr C (crisp-tr-sharp p) (f (tr id p (crisp-elim-sharp x)))))
     ( A)
     ( x')
@@ -150,10 +150,10 @@ The accompanying computation principle remains to be fully formalized.
 ```text
 compute-ind-crisp-ind-sharp :
   {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
-  (is-codiscrete-C : (x : ♯ A) → is-codiscrete (C x)) →
+  (is-sharp-codiscrete-C : (x : ♯ A) → is-sharp-codiscrete (C x)) →
   (f : (x : A) → C (unit-sharp x)) → (x : A) →
-  ind-crisp-ind-sharp C is-codiscrete-C f (unit-sharp x) ＝ f x
-compute-ind-crisp-ind-sharp {A = A} C is-codiscrete-C f x =
+  ind-crisp-ind-sharp C is-sharp-codiscrete-C f (unit-sharp x) ＝ f x
+compute-ind-crisp-ind-sharp {A = A} C is-sharp-codiscrete-C f x =
   crisp-ind-sharp
     ( λ X → (x : X) (p : X ＝ A) →
       ind-crisp-ind-sharp {!   !} {!   !} {!   !} {!   !})
@@ -222,7 +222,7 @@ module _
     rec-sharp
       ( crisp-rec-sharp
         ( ♯ (♭ A))
-        ( is-codiscrete-sharp (♭ A))
+        ( is-sharp-codiscrete-sharp (♭ A))
         ( λ x → unit-sharp (cons-flat x)))
 ```
 
@@ -234,14 +234,14 @@ It remains to show that these two are inverses to each other.
     ind-subuniverse-sharp
       ( A)
       ( λ x → ap-sharp-counit-flat (cons-flat x) ＝ x)
-      ( λ x → is-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat x)) x)
+      ( λ x → is-sharp-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat x)) x)
       ( λ x →
           crisp-rec-sharp
             ( ap-sharp-counit-flat (cons-flat (unit-sharp x)) ＝ unit-sharp x)
-            ( is-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat (unit-sharp x))) (unit-sharp x))
+            ( is-sharp-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat (unit-sharp x))) (unit-sharp x))
             ( λ y →
               compute-rec-subuniverse-sharp
-                {!   !} (♯ A) {!  is-codiscrete-sharp ?  !} {!   !} {!   !})
+                {!   !} (♯ A) {!  is-sharp-codiscrete-sharp ?  !} {!   !} {!   !})
             {!   !})
 ```
 
@@ -275,7 +275,7 @@ is-uniquely-eliminating-sharp X P .pr2 .pr2 f =
     equational-reasoning
       {!   !}
       ＝ {!   !} by {!   !}
-      ＝ {!   !} by compute-crisp-ind-sharp (♯ ∘ P) {! is-codiscrete-sharp ∘ P  !} crisp-elim-sharp {! f !}
+      ＝ {!   !} by compute-crisp-ind-sharp (♯ ∘ P) {! is-sharp-codiscrete-sharp ∘ P  !} crisp-elim-sharp {! f !}
       ＝ {!   !} by {!   !})
 ```
 

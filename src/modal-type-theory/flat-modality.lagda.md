@@ -132,11 +132,11 @@ module _
   diagonal-flat (cons-flat x) = cons-flat (cons-flat x)
 
   is-section-flat-counit-flat :
-    (diagonal-flat ∘ map-flat-counit-flat) ~ id
+    diagonal-flat ∘ map-flat-counit-flat ~ id
   is-section-flat-counit-flat (cons-flat (cons-flat _)) = refl
 
   is-retraction-flat-counit-flat :
-    (map-flat-counit-flat ∘ diagonal-flat) ~ id
+    map-flat-counit-flat ∘ diagonal-flat ~ id
   is-retraction-flat-counit-flat (cons-flat _) = refl
 
   section-flat-counit-flat : section map-flat-counit-flat

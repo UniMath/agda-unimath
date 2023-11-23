@@ -1,4 +1,4 @@
-# Codiscrete maps
+# Sharp-Codiscrete maps
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
@@ -20,16 +20,16 @@ open import modal-type-theory.codiscrete-types
 
 ## Idea
 
-A map is said to be **codiscrete** if its
+A map is said to be **(sharp) codiscrete** if its
 [fibers](foundation-core.fibers-of-maps.md) are
 [codiscrete](modal-type-theory.codiscrete-types.md).
 
 ## Definition
 
 ```agda
-is-codiscrete-map :
+is-sharp-codiscrete-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-codiscrete-map f = is-codiscrete-family (fiber f)
+is-sharp-codiscrete-map f = is-sharp-codiscrete-family (fiber f)
 ```
 
 ## Properties
@@ -41,9 +41,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-codiscrete-map-Prop : Prop (l1 ⊔ l2)
-  is-codiscrete-map-Prop = is-codiscrete-family-Prop (fiber f)
+  is-sharp-codiscrete-map-Prop : Prop (l1 ⊔ l2)
+  is-sharp-codiscrete-map-Prop = is-sharp-codiscrete-family-Prop (fiber f)
 
-  is-prop-is-codiscrete-map : is-prop (is-codiscrete-map f)
-  is-prop-is-codiscrete-map = is-prop-type-Prop is-codiscrete-map-Prop
+  is-prop-is-sharp-codiscrete-map : is-prop (is-sharp-codiscrete-map f)
+  is-prop-is-sharp-codiscrete-map =
+    is-prop-type-Prop is-sharp-codiscrete-map-Prop
 ```
