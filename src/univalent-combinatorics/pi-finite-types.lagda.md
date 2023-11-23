@@ -29,7 +29,6 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
@@ -39,6 +38,7 @@ open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
+open import foundation.precomposition
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions

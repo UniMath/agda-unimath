@@ -14,7 +14,6 @@ open import category-theory.isomorphisms-in-subprecategories
 open import category-theory.precategories
 open import category-theory.subprecategories
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
@@ -22,7 +21,6 @@ open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subsingleton-induction
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

@@ -18,7 +18,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-elements
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications

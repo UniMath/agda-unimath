@@ -51,20 +51,6 @@ ev-point' :
 ev-point' a f = f a
 ```
 
-### Precomposition functions
-
-```agda
-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3) →
-  ((b : B) → C b) → ((a : A) → C (f a))
-precomp-Π f C h a = h (f a)
-
-precomp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
-  (B → C) → (A → C)
-precomp f C = precomp-Π f (λ b → C)
-```
-
 ### Postcomposition functions
 
 ```agda
@@ -91,3 +77,8 @@ map-Π' :
   ((j : J) → B (α j))
 map-Π' α f = map-Π (f ∘ α)
 ```
+
+## See also
+
+- [Postcomposition](foundation.postcomposition.md)
+- [Precomposition](foundation.precomposition.md)

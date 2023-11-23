@@ -13,8 +13,8 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.precomposition
 open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types

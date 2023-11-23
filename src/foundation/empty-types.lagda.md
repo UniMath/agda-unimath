@@ -16,8 +16,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subuniverses
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 

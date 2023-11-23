@@ -17,6 +17,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.precomposition
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
 open import foundation.subtypes

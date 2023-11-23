@@ -10,12 +10,11 @@ module foundation.truncation-equivalences where
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.functoriality-truncation
+open import foundation.precomposition
 open import foundation.truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

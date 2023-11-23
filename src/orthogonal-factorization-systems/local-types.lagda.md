@@ -16,10 +16,9 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-function-types
 open import foundation.identity-types
+open import foundation.precomposition
 open import foundation.propositions
-open import foundation.retractions
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
@@ -129,12 +128,6 @@ module _
   {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
   where
 
-  retraction-section-precomp-domain : section (precomp f Y) → retraction f
-  pr1 (retraction-section-precomp-domain section-precomp-Y) =
-    pr1 section-precomp-Y id
-  pr2 (retraction-section-precomp-domain section-precomp-Y) =
-    htpy-eq (pr2 section-precomp-Y id)
-
   section-is-local-domains' : section (precomp f Y) → is-local f X → section f
   pr1 (section-is-local-domains' section-precomp-Y is-local-X) =
     pr1 section-precomp-Y id
@@ -151,7 +144,7 @@ module _
   pr1 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
     section-is-local-domains' section-precomp-Y is-local-X
   pr2 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
-    retraction-section-precomp-domain section-precomp-Y
+    retraction-section-precomp-domain f section-precomp-Y
 
   is-equiv-is-local-domains : is-local f Y → is-local f X → is-equiv f
   is-equiv-is-local-domains is-local-Y =

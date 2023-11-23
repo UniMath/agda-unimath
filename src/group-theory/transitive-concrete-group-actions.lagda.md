@@ -7,11 +7,9 @@ module group-theory.transitive-concrete-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -22,13 +20,11 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
-open import group-theory.orbits-concrete-group-actions
 
 open import higher-group-theory.transitive-higher-group-actions
 ```

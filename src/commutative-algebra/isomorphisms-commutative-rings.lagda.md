@@ -14,7 +14,6 @@ open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.precategory-of-commutative-rings
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types

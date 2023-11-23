@@ -9,7 +9,6 @@ module univalent-combinatorics.equivalences-cubes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality

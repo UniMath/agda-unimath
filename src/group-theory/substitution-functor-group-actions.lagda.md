@@ -15,7 +15,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets

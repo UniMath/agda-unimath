@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.intersections-subtypes
 open import foundation.logical-equivalences

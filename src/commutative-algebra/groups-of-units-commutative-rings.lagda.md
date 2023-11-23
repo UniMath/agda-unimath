@@ -14,7 +14,6 @@ open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.precategory-of-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -30,9 +29,6 @@ open import group-theory.semigroups
 open import group-theory.submonoids
 
 open import ring-theory.groups-of-units-rings
-open import ring-theory.homomorphisms-rings
-open import ring-theory.invertible-elements-rings
-open import ring-theory.rings
 ```
 
 </details>

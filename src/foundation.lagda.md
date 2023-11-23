@@ -128,6 +128,7 @@ open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
 open import foundation.faithful-maps public
+open import foundation.families-of-equivalences public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
@@ -219,7 +220,9 @@ open import foundation.perfect-images public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
+open import foundation.postcomposition public
 open import foundation.powersets public
+open import foundation.precomposition public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public

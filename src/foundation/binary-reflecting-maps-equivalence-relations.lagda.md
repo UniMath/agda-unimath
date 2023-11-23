@@ -14,7 +14,6 @@ open import foundation.homotopy-induction
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.homotopies

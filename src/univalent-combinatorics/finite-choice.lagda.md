@@ -18,11 +18,11 @@ open import foundation.equivalences
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators
 open import foundation.identity-types
+open import foundation.precomposition
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.unit-type

@@ -19,6 +19,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.precomposition
 open import foundation.propositions
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type

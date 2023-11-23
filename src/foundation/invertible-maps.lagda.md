@@ -33,7 +33,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

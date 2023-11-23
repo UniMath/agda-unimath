@@ -11,7 +11,6 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes

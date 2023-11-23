@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.precomposition
 open import foundation.unit-type
 open import foundation.universe-levels
 

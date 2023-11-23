@@ -16,7 +16,6 @@ open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types

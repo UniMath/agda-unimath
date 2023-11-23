@@ -14,6 +14,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.locally-small-types
 open import foundation.negation
+open import foundation.precomposition
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.surjective-maps
@@ -25,7 +26,6 @@ open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 
 open import trees.multisets
 open import trees.small-multisets

@@ -24,10 +24,7 @@ open import foundation.existential-quantification
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.surjective-maps
-open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.function-types
 
 open import group-theory.cyclic-groups
 open import group-theory.generating-elements-groups
@@ -35,8 +32,6 @@ open import group-theory.generating-elements-groups
 open import ring-theory.cyclic-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

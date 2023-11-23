@@ -14,7 +14,6 @@ open import category-theory.natural-transformations-functors-large-precategories
 open import foundation.category-of-sets
 open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels

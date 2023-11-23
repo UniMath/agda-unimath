@@ -16,13 +16,10 @@ open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sections
-open import foundation-core.singleton-induction
 open import foundation-core.torsorial-type-families
 ```
 

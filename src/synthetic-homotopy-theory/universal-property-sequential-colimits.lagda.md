@@ -14,12 +14,10 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
+open import foundation.precomposition
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 

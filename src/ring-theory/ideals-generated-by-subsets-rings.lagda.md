@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.powersets

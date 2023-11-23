@@ -11,13 +11,10 @@ open import foundation-core.equality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

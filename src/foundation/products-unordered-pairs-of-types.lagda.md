@@ -10,6 +10,7 @@ module foundation.products-unordered-pairs-of-types where
 open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.precomposition
 open import foundation.symmetric-operations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
