@@ -37,13 +37,13 @@ The **pullback-hom** or **pullback-power** of two maps `f : A → B` and
 [commuting square](foundation-core.commuting-squares-of-maps.md):
 
 ```text
-              - ∘ f
-      B → X --------> A → X
-        |               |
-  g ∘ - |               | g ∘ -
-        V               V
-      B → Y --------> A → Y.
-              - ∘ f
+             - ∘ f
+      B → X -------> A → X
+        |              |
+  g ∘ - |              | g ∘ -
+        V              V
+      B → Y -------> A → Y.
+             - ∘ f
 ```
 
 The pullback of `- ∘ f` and `g ∘ -` can be understood as the type of
