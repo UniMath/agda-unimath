@@ -13,6 +13,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.fiber-inclusions
@@ -22,7 +23,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators
 open import foundation.identity-types
-open import foundation.precomposition
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.unit-type

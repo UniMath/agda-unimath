@@ -1,7 +1,7 @@
-# Precomposition
+# Precomposition of dependent functions
 
 ```agda
-module foundation-core.precomposition where
+module foundation-core.precomposition-dependent-functions where
 ```
 
 <details><summary>Imports</summary>
@@ -25,19 +25,11 @@ Given a function `f : A → B` and a type family `X` over `B`, the
   - ∘ f : ((y : B) → X b) → ((x : A) → X (f x))
 ```
 
-is defined by `λ h x → h (f x)`. The precomposition function takes a simpler
-form without dependent types: Given a type `X` the precomposition function by
-`f`
-
-```text
-  - ∘ f : (B → X) → (A → X)
-```
-
-is given by `λ h x → h (f x)`.
+is defined by `λ h x → h (f x)`.
 
 ## Definitions
 
-### The dependent precomposition function
+### The precomposition operation on dependent function
 
 ```agda
 module _
@@ -46,17 +38,6 @@ module _
 
   precomp-Π : ((b : B) → C b) → ((a : A) → C (f a))
   precomp-Π h a = h (f a)
-```
-
-### The (nondependent) precomposition function
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3)
-  where
-
-  precomp : (B → C) → (A → C)
-  precomp = precomp-Π f (λ b → C)
 ```
 
 ## Properties

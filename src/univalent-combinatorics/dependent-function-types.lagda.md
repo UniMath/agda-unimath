@@ -11,10 +11,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.precomposition
 open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types

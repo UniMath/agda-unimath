@@ -11,7 +11,8 @@ open import foundation.fibered-maps
 open import foundation.function-types
 open import foundation.functoriality-pullbacks
 open import foundation.morphisms-cospans
-open import foundation.precomposition
+open import foundation.postcomposition
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.pullback-hom

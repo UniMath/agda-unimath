@@ -13,11 +13,11 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
-open import foundation.precomposition
 open import foundation.slice
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

@@ -11,19 +11,23 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
-open import foundation.precomposition
+open import foundation.postcomposition
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 ```
 
@@ -117,7 +121,7 @@ module _
   where
 
   is-equiv-is-local :
-    ((l : Level) (A : UU l) → is-local f A) → is-equiv f
+    ({l : Level} (A : UU l) → is-local f A) → is-equiv f
   is-equiv-is-local = is-equiv-is-equiv-precomp f
 ```
 

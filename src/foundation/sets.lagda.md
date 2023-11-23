@@ -11,7 +11,7 @@ open import foundation-core.sets public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.precomposition
+open import foundation.precomposition-functions
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.truncation-levels

@@ -17,11 +17,11 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.precomposition
 open import foundation.propositional-maps
 open import foundation.structured-type-duality
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

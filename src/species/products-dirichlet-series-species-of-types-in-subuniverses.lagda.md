@@ -15,6 +15,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.homotopies
+open import foundation.postcomposition
 open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-cartesian-product-types

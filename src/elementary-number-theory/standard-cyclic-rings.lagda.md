@@ -142,7 +142,7 @@ compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) =
     ( pred-ℤ-Mod (succ-ℕ n))
     ( compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl x))) ∙
   ( inv (preserves-predecessor-mod-ℤ (succ-ℕ n) (inl x)))
-compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl star)) = refl
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl _)) = refl
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
   ( integer-multiple-one-Ring
     ( ℤ-Mod-Ring (succ-ℕ n))

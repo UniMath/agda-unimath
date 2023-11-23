@@ -10,10 +10,10 @@ module foundation.universal-property-set-truncation where
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.mere-equality
-open import foundation.precomposition
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 

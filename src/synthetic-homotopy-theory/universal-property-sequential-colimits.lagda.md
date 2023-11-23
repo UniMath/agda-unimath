@@ -17,8 +17,9 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.precomposition
+open import foundation.precomposition-functions
 open import foundation.subtype-identity-principle
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
@@ -239,7 +240,7 @@ module _
       ( up-sequential-colimit)
       ( up-sequential-colimit') =
       is-equiv-is-equiv-precomp h
-        ( λ l Z →
+        ( λ Z →
           is-equiv-top-map-triangle
             ( cocone-map-sequential-diagram A c')
             ( cocone-map-sequential-diagram A c)

@@ -90,6 +90,7 @@ open import foundation.dependent-pair-types public
 open import foundation.dependent-sequences public
 open import foundation.dependent-telescopes public
 open import foundation.dependent-towers public
+open import foundation.dependent-universal-property-equivalences public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
@@ -222,7 +223,9 @@ open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
 open import foundation.postcomposition public
 open import foundation.powersets public
-open import foundation.precomposition public
+open import foundation.precomposition-dependent-functions public
+open import foundation.precomposition-functions public
+open import foundation.precomposition-functions-into-subuniverses public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
@@ -338,6 +341,7 @@ open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
+open import foundation.universal-property-equivalences public
 open import foundation.universal-property-fiber-products public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public

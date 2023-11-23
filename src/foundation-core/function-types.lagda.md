@@ -54,12 +54,6 @@ ev-point' a f = f a
 ### Postcomposition functions
 
 ```agda
-postcomp :
-  {l1 l2 l3 : Level}
-  {X : UU l1} {Y : UU l2} (A : UU l3) →
-  (X → Y) → (A → X) → (A → Y)
-postcomp A f h = f ∘ h
-
 map-Π :
   {l1 l2 l3 : Level}
   {I : UU l1} {A : I → UU l2} {B : I → UU l3}
@@ -81,4 +75,8 @@ map-Π' α f = map-Π (f ∘ α)
 ## See also
 
 - [Postcomposition](foundation.postcomposition.md)
-- [Precomposition](foundation.precomposition.md)
+- [Precomposition](foundation.precomposition-functions.md)
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

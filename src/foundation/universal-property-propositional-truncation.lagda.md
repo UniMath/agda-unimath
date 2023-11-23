@@ -11,10 +11,11 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
-open import foundation.precomposition
+open import foundation.precomposition-functions-into-subuniverses
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -24,6 +25,8 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
+open import foundation-core.precomposition-functions
 open import foundation-core.propositions
 open import foundation-core.type-theoretic-principle-of-choice
 ```

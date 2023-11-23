@@ -18,6 +18,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
@@ -38,7 +39,6 @@ open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
-open import foundation.precomposition
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions

@@ -739,3 +739,7 @@ syntax step-equivalence-reasoning e Z f = e ≃ Z by f
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

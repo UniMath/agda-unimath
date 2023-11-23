@@ -10,6 +10,7 @@ module foundation.epimorphisms where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functoriality-function-types
+open import foundation.precomposition-functions
 open import foundation.propositional-maps
 open import foundation.sections
 open import foundation.universe-levels
@@ -20,7 +21,6 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.precomposition
 open import foundation-core.propositions
 
 open import synthetic-homotopy-theory.cocones-under-spans

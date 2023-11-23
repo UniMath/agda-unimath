@@ -9,6 +9,7 @@ module foundation.equivalence-induction where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-systems
+open import foundation.postcomposition
 open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universal-property-identity-systems

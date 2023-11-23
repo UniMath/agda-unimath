@@ -8,10 +8,10 @@ module foundation.equivalence-extensionality where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
-open import foundation.precomposition
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 

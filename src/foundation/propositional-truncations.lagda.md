@@ -10,7 +10,6 @@ module foundation.propositional-truncations where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.precomposition
 open import foundation.propositions
 open import foundation.truncations
 open import foundation.universal-property-propositional-truncation
@@ -23,6 +22,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types

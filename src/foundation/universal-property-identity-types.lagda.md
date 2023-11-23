@@ -9,6 +9,7 @@ module foundation.universal-property-identity-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.full-subtypes
@@ -16,7 +17,6 @@ open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
-open import foundation.precomposition
 open import foundation.preunivalence
 open import foundation.univalence
 open import foundation.universe-levels

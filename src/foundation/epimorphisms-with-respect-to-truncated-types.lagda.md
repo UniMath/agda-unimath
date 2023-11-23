@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
-open import foundation-core.precomposition
+open import foundation-core.precomposition-functions
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

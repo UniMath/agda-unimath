@@ -8,9 +8,9 @@ module foundation.descent-equivalences where
 
 ```agda
 open import foundation.cones-over-cospans
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
 open import foundation.functoriality-fibers-of-maps
-open import foundation.precomposition
 open import foundation.universe-levels
 
 open import foundation-core.function-types

@@ -11,7 +11,7 @@ open import foundation.epimorphisms
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
-open import foundation-core.precomposition
+open import foundation-core.precomposition-dependent-functions
 ```
 
 </details>

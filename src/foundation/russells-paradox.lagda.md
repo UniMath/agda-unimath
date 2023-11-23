@@ -14,12 +14,12 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.locally-small-types
 open import foundation.negation
-open import foundation.precomposition
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

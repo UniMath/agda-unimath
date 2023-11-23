@@ -16,8 +16,8 @@ open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
-open import foundation.precomposition
 open import foundation.truncated-maps
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
@@ -680,6 +680,10 @@ module _
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}
 
 ## External links
 

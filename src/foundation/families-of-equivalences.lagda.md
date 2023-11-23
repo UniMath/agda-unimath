@@ -60,6 +60,17 @@ module _
 
   fam-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   fam-equiv B C = (x : A) → B x ≃ C x
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (e : fam-equiv B C)
+  where
+
+  map-fam-equiv : (x : A) → B x → C x
+  map-fam-equiv x = map-equiv (e x)
+
+  is-equiv-map-fam-equiv : is-fiberwise-equiv map-fam-equiv
+  is-equiv-map-fam-equiv x = is-equiv-map-equiv (e x)
 ```
 
 ## Properties
@@ -76,6 +87,6 @@ equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
 ## See also
 
 - In
-  [Functoriality of dependent pair types](foundation-core.functoriality-dependent-pair-types)
+  [Functoriality of dependent pair types](foundation-core.functoriality-dependent-pair-types.md)
   we show that a family of maps is a fiberwise equivalence if and only if it
   induces an equivalence on [total spaces](foundation.dependent-pair-types.md).
