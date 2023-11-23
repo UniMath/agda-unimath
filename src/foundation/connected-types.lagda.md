@@ -45,6 +45,13 @@ is-prop-is-connected k A = is-prop-type-Prop (is-connected-Prop k A)
 
 ## Properties
 
+### All types are `(-2)`-connected
+
+```agda
+is-neg-two-connected : {l : Level} (A : UU l) → is-connected neg-two-𝕋 A
+is-neg-two-connected A = is-trunc-type-trunc
+```
+
 ### A type `A` is `k`-connected if and only if the map `B → (A → B)` is an equivalence for every `k`-truncated type `B`
 
 ```agda
