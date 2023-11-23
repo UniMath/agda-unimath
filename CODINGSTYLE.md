@@ -448,6 +448,16 @@ the story. Here's how we handle indentation and line breaks in the
 
 ## Coding practices we tend to avoid
 
+- Agda permits us to make quick definitions without specifying their types, but
+  we avoid making such untyped definitions. While the type of the entry might be
+  clear to you when you are writing the code, it puts a burden on the reader if
+  you omit them. It is also hugely beneficial if you can see the specification
+  of a certain entry by jumping to its definition. Furthermore, omitting
+  specifications of entries might make maintainance a bit more difficult,
+  because some name changes might still result in valid definitions, but with an
+  unintended specifications. Catching such mistakes becomes a bit harder when
+  you leave your entries untyped.
+
 - Using Unicode characters in names is entirely permissible, but we recommend
   restraint to maintain readability. Just a few well-placed symbols can often
   express a lot.
