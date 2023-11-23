@@ -10,11 +10,15 @@ open import foundation-core.whiskering-homotopies public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-homotopies
 open import foundation.function-extensionality
+open import foundation.path-algebra
 open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
@@ -99,4 +103,55 @@ module _
       ( λ K → eq-htpy (h ·l K))
       ( inv (is-section-eq-htpy H))) ∙
     ( compute-eq-htpy-htpy-eq-left-whisk (eq-htpy H))
+```
+
+### Whiskerings of higher homotopies are equivalences
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2}
+  { f g g' h k : A → B}
+  where
+
+  module _
+    ( H : f ~ g) (H' : f ~ g') {K : g ~ h} {K' : g' ~ h} (L : h ~ k)
+    where
+
+    equiv-right-whisk-square-htpy :
+      ( coherence-square-homotopies H H' K K') ≃
+      ( coherence-square-homotopies H H' (K ∙h L) (K' ∙h L))
+    equiv-right-whisk-square-htpy =
+      equiv-Π-equiv-family
+        ( λ a → equiv-right-whisk-square-identification (H a) (H' a) (L a))
+
+    right-whisk-square-htpy :
+      coherence-square-homotopies H H' K K' →
+      coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
+    right-whisk-square-htpy = map-equiv equiv-right-whisk-square-htpy
+
+    right-unwhisk-square-htpy :
+      coherence-square-homotopies H H' (K ∙h L) (K' ∙h L) →
+      coherence-square-homotopies H H' K K'
+    right-unwhisk-square-htpy = map-inv-equiv equiv-right-whisk-square-htpy
+
+  module _
+    ( H : k ~ f) {K : f ~ g} {K' : f ~ g'} {L : g ~ h} {L' : g' ~ h}
+    where
+
+    equiv-left-whisk-square-htpy :
+      ( coherence-square-homotopies K K' L L') ≃
+      ( coherence-square-homotopies (H ∙h K) (H ∙h K') L L')
+    equiv-left-whisk-square-htpy =
+      equiv-Π-equiv-family
+        ( λ a → equiv-left-whisk-square-identification (H a))
+
+    left-whisk-square-htpy :
+      coherence-square-homotopies K K' L L' →
+      coherence-square-homotopies (H ∙h K) (H ∙h K') L L'
+    left-whisk-square-htpy = map-equiv equiv-left-whisk-square-htpy
+
+    left-unwhisk-square-htpy :
+      coherence-square-homotopies (H ∙h K) (H ∙h K') L L' →
+      coherence-square-homotopies K K' L L'
+    left-unwhisk-square-htpy = map-inv-equiv equiv-left-whisk-square-htpy
 ```

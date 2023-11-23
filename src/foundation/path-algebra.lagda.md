@@ -12,10 +12,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.commuting-squares-of-identifications
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 ```
@@ -247,6 +249,85 @@ module _
   htpy-identification-left-whisk :
     {q q' : y ＝ z} → q ＝ q' → (_∙ q) ~ (_∙ q')
   htpy-identification-left-whisk β p = identification-left-whisk p β
+```
+
+### Whiskerings of identifications are equivalences
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  is-equiv-identification-left-whisk :
+    (p : x ＝ y) {q q' : y ＝ z} →
+    is-equiv (identification-left-whisk p {q} {q'})
+  is-equiv-identification-left-whisk p {q} {q'} =
+    is-emb-is-equiv (is-equiv-concat p z) q q'
+
+  equiv-identification-left-whisk :
+    (p : x ＝ y) {q q' : y ＝ z} →
+    (q ＝ q') ≃ (p ∙ q ＝ p ∙ q')
+  pr1 (equiv-identification-left-whisk p) = identification-left-whisk p
+  pr2 (equiv-identification-left-whisk p) = is-equiv-identification-left-whisk p
+
+  is-equiv-identification-right-whisk :
+    {p p' : x ＝ y} → (q : y ＝ z) →
+    is-equiv (λ (α : p ＝ p') → identification-right-whisk α q)
+  is-equiv-identification-right-whisk {p} {p'} q =
+    is-emb-is-equiv (is-equiv-concat' x q) p p'
+
+  equiv-identification-right-whisk :
+    {p p' : x ＝ y} → (q : y ＝ z) →
+    (p ＝ p') ≃ (p ∙ q ＝ p' ∙ q)
+  pr1 (equiv-identification-right-whisk q) α = identification-right-whisk α q
+  pr2 (equiv-identification-right-whisk q) =
+    is-equiv-identification-right-whisk q
+```
+
+### Reassociating one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u : A}
+  where
+
+  equiv-concat-assoc :
+    (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : x ＝ u) →
+    ((p ∙ q) ∙ r ＝ s) ≃ (p ∙ (q ∙ r) ＝ s)
+  pr1 (equiv-concat-assoc p q r s) = concat (inv (assoc p q r)) s
+  pr2 (equiv-concat-assoc p q r s) = is-equiv-concat (inv (assoc p q r)) s
+
+  equiv-concat-assoc' :
+    (s : x ＝ u) (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) →
+    (s ＝ (p ∙ q) ∙ r) ≃ (s ＝ p ∙ (q ∙ r))
+  pr1 (equiv-concat-assoc' s p q r) = concat' s (assoc p q r)
+  pr2 (equiv-concat-assoc' s p q r) = is-equiv-concat' s (assoc p q r)
+```
+
+### Whiskering of squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u w : A}
+  where
+
+  equiv-right-whisk-square-identification :
+    (p : x ＝ y) (p' : x ＝ z) {q : y ＝ u} {q' : z ＝ u} (r : u ＝ w) →
+    ( coherence-square-identifications p p' q q') ≃
+    ( coherence-square-identifications p p' (q ∙ r) (q' ∙ r))
+  equiv-right-whisk-square-identification p p' {q} {q'} r =
+    ( equiv-concat-assoc' (p' ∙ (q' ∙ r)) p q r) ∘e
+    ( equiv-concat-assoc p' q' r (p ∙ q ∙ r)) ∘e
+    ( equiv-identification-right-whisk r)
+
+  equiv-left-whisk-square-identification :
+    (p : w ＝ x) {q : x ＝ y} {q' : x ＝ z} {r : y ＝ u} {r' : z ＝ u} →
+    ( coherence-square-identifications q q' r r') ≃
+    ( coherence-square-identifications (p ∙ q) (p ∙ q') r r')
+  equiv-left-whisk-square-identification p {q} {q'} {r} {r'} =
+    ( inv-equiv (equiv-concat-assoc p q' r' (p ∙ q ∙ r))) ∘e
+    ( inv-equiv (equiv-concat-assoc' (p ∙ (q' ∙ r')) p q r)) ∘e
+    ( equiv-identification-left-whisk p)
 ```
 
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences
