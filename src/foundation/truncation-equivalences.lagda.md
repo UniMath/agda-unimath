@@ -9,8 +9,10 @@ module foundation.truncation-equivalences where
 ```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-truncation
+open import foundation.identity-types
 open import foundation.truncations
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-truncation
@@ -206,7 +208,7 @@ module _
 
 ### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
 
-This is Lemma 2.27 of Christensen, Opie, Rijke & Scoccola listed below.
+This is an instance of Lemma 2.27 in Christensen, Opie, Rijke & Scoccola listed below.
 
 ```agda
 module _
@@ -234,6 +236,71 @@ module _
                 ( is-trunc-succ-is-trunc k
                   ( is-trunc-function-type k
                     ( is-trunc-type-Truncated-Type X)))))))
+```
+
+### There is an `k`-equivalence between the fiber of a map and the fiber of its `(k+1)`-truncation
+
+This is an instance of Corollary 2.29 in Christensen, Opie, Rijke & Scoccola listed below.
+
+We consider the following composition of maps
+
+```text
+   fiber f b = Σ A (λ a → f a = b)
+             → Σ A (λ a → ∥ f a ＝ b ∥)
+             ≃ Σ A (λ a → | f a | = | b |
+             ≃ Σ A (λ a → ∥ f ∥ | a | = | b |)
+             → Σ ∥ A ∥ (λ t → ∥ f ∥ t = | b |)
+             = fiber ∥ f ∥ | b |
+```
+
+where the first and last maps are `k`-equivalences.
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
+  where
+
+  fiber-map-trunc-fiber :
+    fiber f b → fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b)
+  fiber-map-trunc-fiber =
+    ( map-Σ-map-base-unit-trunc
+      ( λ t → map-trunc (succ-𝕋 k) f t ＝ unit-trunc b)) ∘
+    ( tot
+      ( λ a →
+        ( concat (naturality-unit-trunc (succ-𝕋 k) f a) (unit-trunc b)) ∘
+        ( map-effectiveness-trunc k (f a) b) ∘
+        ( unit-trunc)))
+
+  is-truncation-equivalence-fiber-map-trunc-fiber :
+    is-truncation-equivalence k fiber-map-trunc-fiber
+  is-truncation-equivalence-fiber-map-trunc-fiber =
+    is-truncation-equivalence-comp
+      ( map-Σ-map-base-unit-trunc
+        ( λ t → map-trunc (succ-𝕋 k) f t ＝ unit-trunc b))
+      ( tot
+        ( λ a →
+          ( concat (naturality-unit-trunc (succ-𝕋 k) f a) (unit-trunc b)) ∘
+          ( map-effectiveness-trunc k (f a) b) ∘
+          ( unit-trunc)))
+      ( is-truncation-equivalence-is-truncation-equivalence-equiv
+        ( equiv-tot
+          ( λ a →
+            ( equiv-concat
+              ( naturality-unit-trunc (succ-𝕋 k) f a)
+              ( unit-trunc b)) ∘e
+            ( effectiveness-trunc k (f a) b)))
+        ( λ (a , p) → a , unit-trunc p)
+        ( is-equiv-map-equiv (equiv-trunc-Σ k)))
+      ( is-truncation-equivalence-map-Σ-map-base-unit-trunc
+        ( λ t → map-trunc (succ-𝕋 k) f t ＝ unit-trunc b))
+
+  truncation-equivalence-fiber-map-trunc-fiber :
+    truncation-equivalence k
+      ( fiber f b)
+      ( fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b))
+  pr1 truncation-equivalence-fiber-map-trunc-fiber = fiber-map-trunc-fiber
+  pr2 truncation-equivalence-fiber-map-trunc-fiber =
+    is-truncation-equivalence-fiber-map-trunc-fiber
 ```
 
 ## References
