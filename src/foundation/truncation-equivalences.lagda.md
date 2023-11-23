@@ -395,6 +395,110 @@ module _
       ( is-connected-is-contr k (is-contr-map-is-equiv e (unit-trunc b)))
 ```
 
+### The codomain of a `k`-connected map is `(k+1)`-connected if its domain is `(k+1)`-connected
+
+This follows part of the proof of Proposition 2.31 in [CORS'20].
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-trunc-fiber-map-trunc-is-succ-connected :
+    is-connected (succ-𝕋 k) A →
+    (b : B) →
+    is-trunc k (fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b))
+  is-trunc-fiber-map-trunc-is-succ-connected c b =
+    is-trunc-equiv k
+      ( map-trunc (succ-𝕋 k) f (center c) ＝ unit-trunc b)
+      ( left-unit-law-Σ-is-contr c (center c))
+      ( is-trunc-type-trunc (map-trunc (succ-𝕋 k) f (center c)) (unit-trunc b))
+
+  is-succ-connected-is-connected-map-is-succ-connected :
+    is-connected (succ-𝕋 k) A →
+    is-connected-map k f →
+    is-connected (succ-𝕋 k) B
+  is-succ-connected-is-connected-map-is-succ-connected cA cf =
+    is-contr-is-equiv'
+      ( type-trunc (succ-𝕋 k) A)
+      ( map-trunc (succ-𝕋 k) f)
+      ( is-equiv-is-contr-map
+        ( λ t →
+          apply-universal-property-trunc-Prop
+            ( is-surjective-is-truncation
+              ( trunc (succ-𝕋 k) B)
+              ( is-truncation-trunc)
+              ( t))
+            ( is-contr-Prop (fiber (map-trunc (succ-𝕋 k) f) t))
+            ( λ (b , p) →
+              tr
+                ( λ s → is-contr (fiber (map-trunc (succ-𝕋 k) f) s))
+                ( p)
+                ( is-contr-equiv'
+                  ( type-trunc k (fiber f b))
+                  ( ( inv-equiv
+                      ( equiv-unit-trunc
+                        ( fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b) ,
+                          is-trunc-fiber-map-trunc-is-succ-connected cA b))) ∘e
+                    ( map-trunc k (fiber-map-trunc-fiber f b) ,
+                      is-truncation-equivalence-fiber-map-trunc-fiber f b))
+                  ( cf b)))))
+      ( cA)
+```
+
+### If `g ∘ f` is `(k+1)`-connected, then `f` is `k`-connected if and only if `g` is `(k+1)`-connected
+
+This is an instance of Proposition 2.31 in [CORS'20].
+
+```agda
+module _
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B) (cgf : is-connected-map (succ-𝕋 k) (g ∘ f))
+  where
+
+  is-connected-map-right-factor-is-succ-connected-map-left-factor :
+    is-connected-map (succ-𝕋 k) g → is-connected-map k f
+  is-connected-map-right-factor-is-succ-connected-map-left-factor cg =
+    is-connected-map-is-succ-truncation-equivalence f
+      ( is-truncation-equivalence-right-factor g f
+        ( is-truncation-equivalence-is-connected-map (g ∘ f) cgf)
+        ( is-truncation-equivalence-is-connected-map g cg))
+
+  is-connected-map-right-factor-is-succ-connected-map-right-factor :
+    is-connected-map k f → is-connected-map (succ-𝕋 k) g
+  is-connected-map-right-factor-is-succ-connected-map-right-factor cf c =
+    is-succ-connected-is-connected-map-is-succ-connected
+      ( pr1)
+      ( is-connected-equiv' (equiv-compute-fiber-comp g f c) (cgf c))
+      ( λ p →
+        is-connected-equiv
+          ( equiv-fiber-pr1 (fiber f ∘ pr1) p)
+          ( cf (pr1 p)))
+```
+
+### A `k`-equivalence with a section is `k`-connected
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-connected-map-is-truncation-equivalence-section :
+    (k : 𝕋) →
+    section f → is-truncation-equivalence k f → is-connected-map k f
+  is-connected-map-is-truncation-equivalence-section neg-two-𝕋 (s , h) e =
+    is-neg-two-connected-map f
+  is-connected-map-is-truncation-equivalence-section (succ-𝕋 k) (s , h) e =
+    is-connected-map-right-factor-is-succ-connected-map-right-factor f s
+      ( is-connected-map-is-equiv (f ∘ s) (is-equiv-htpy id h is-equiv-id))
+      ( is-connected-map-is-succ-truncation-equivalence s
+        ( is-truncation-equivalence-right-factor f s
+          ( is-truncation-equivalence-is-equiv
+            ( f ∘ s)
+            ( is-equiv-htpy id h is-equiv-id))
+          ( e)))
+```
+
 ## References
 
 The notion of `k`-equivalence is a special case of the notion of
