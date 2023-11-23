@@ -364,34 +364,33 @@ module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
   where
 
-  is-connected-is-truncation-equivalence :
+  is-connected-is-truncation-equivalence-is-connected :
     (f : A → B) → is-truncation-equivalence k f →
     is-connected k B → is-connected k A
-  is-connected-is-truncation-equivalence f e =
+  is-connected-is-truncation-equivalence-is-connected f e =
     is-contr-equiv (type-trunc k B) (map-trunc k f , e)
 
-  is-connected-truncation-equivalence :
+  is-connected-truncation-equivalence-is-connected :
     truncation-equivalence k A B → is-connected k B → is-connected k A
-  is-connected-truncation-equivalence f =
-    is-connected-is-truncation-equivalence
+  is-connected-truncation-equivalence-is-connected f =
+    is-connected-is-truncation-equivalence-is-connected
       ( map-truncation-equivalence k f)
       ( is-truncation-equivalence-truncation-equivalence k f)
 ```
 
 ### Every `(k+1)`-equivalence is `k`-connected
 
-This is an instance of Proposition 2.30 in Christensen, Opie, Rijke & Scoccola
-listed below.
+This is an instance of Proposition 2.30 in [CORS'20].
 
 ```agda
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-connected-map-is-truncation-equivalence :
+  is-connected-map-is-succ-truncation-equivalence :
     is-truncation-equivalence (succ-𝕋 k) f → is-connected-map k f
-  is-connected-map-is-truncation-equivalence e b =
-    is-connected-truncation-equivalence
+  is-connected-map-is-succ-truncation-equivalence e b =
+    is-connected-truncation-equivalence-is-connected
       ( truncation-equivalence-fiber-map-trunc-fiber f b)
       ( is-connected-is-contr k (is-contr-map-is-equiv e (unit-trunc b)))
 ```
