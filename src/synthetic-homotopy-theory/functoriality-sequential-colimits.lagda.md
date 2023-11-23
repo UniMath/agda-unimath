@@ -279,21 +279,6 @@ module _
                     ( succ-ℕ n)))) ·r
               ( map-sequential-diagram A n))) ∙h
           ( ap-concat-htpy'
-            ( ( ( map-hom-standard-sequential-colimit C
-                  ( comp-hom-sequential-diagram A B C g f)) ·l
-                ( coherence-triangle-cocone-standard-sequential-colimit A n)) ∙h
-              ( ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C
-                  ( comp-hom-sequential-diagram A B C g f)
-                  ( succ-ℕ n)) ·r
-                ( map-sequential-diagram A n)))
-            ( ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C
-                ( comp-hom-sequential-diagram A B C g f)
-                ( n)) ∙h
-              ( coherence-triangle-cocone-sequential-diagram A
-                ( map-hom-cocone-sequential-colimit
-                  ( comp-hom-sequential-diagram A B C g f)
-                  ( cocone-standard-sequential-colimit C))
-                ( n)))
             ( ( pasting-vertical-coherence-square-maps
                 ( map-cocone-standard-sequential-colimit A (succ-ℕ n))
                 ( map-hom-sequential-diagram B f (succ-ℕ n))
@@ -340,43 +325,6 @@ module _
             ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C
               ( comp-hom-sequential-diagram A B C g f)
               ( n))
-            ( ( coherence-triangle-cocone-sequential-diagram A
-                ( map-hom-cocone-sequential-colimit
-                  ( comp-hom-sequential-diagram A B C g f)
-                  ( cocone-standard-sequential-colimit C))
-                ( n)) ∙h
-              ( ( pasting-vertical-coherence-square-maps
-                  ( map-cocone-standard-sequential-colimit A (succ-ℕ n))
-                  ( map-hom-sequential-diagram B f (succ-ℕ n))
-                  ( map-hom-standard-sequential-colimit B f)
-                  ( map-cocone-standard-sequential-colimit B (succ-ℕ n))
-                  ( map-hom-sequential-diagram C g (succ-ℕ n))
-                  ( map-hom-standard-sequential-colimit C g)
-                  ( map-cocone-standard-sequential-colimit C (succ-ℕ n))
-                  ( inv-htpy
-                    ( htpy-htpy-cocone-map-hom-standard-sequential-colimit B f
-                      ( succ-ℕ n)))
-                  ( inv-htpy
-                    ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C g
-                      ( succ-ℕ n)))) ·r
-                ( map-sequential-diagram A n)))
-            ( ( pasting-vertical-coherence-square-maps
-                ( map-cocone-standard-sequential-colimit A n)
-                ( map-hom-sequential-diagram B f n)
-                ( map-hom-standard-sequential-colimit B f)
-                ( map-cocone-standard-sequential-colimit B n)
-                ( map-hom-sequential-diagram C g n)
-                ( map-hom-standard-sequential-colimit C g)
-                ( map-cocone-standard-sequential-colimit C n)
-                ( inv-htpy
-                  ( htpy-htpy-cocone-map-hom-standard-sequential-colimit B f
-                    ( n)))
-                ( inv-htpy
-                  ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C g
-                    ( n)))) ∙h
-              ( ( ( map-hom-standard-sequential-colimit C g) ∘
-                  ( map-hom-standard-sequential-colimit B f)) ·l
-                ( coherence-triangle-cocone-standard-sequential-colimit A n)))
             ( ( assoc-htpy
                 ( ( coherence-triangle-cocone-standard-sequential-colimit C
                     ( n)) ·r

@@ -190,8 +190,6 @@ module _
   pasting-vertical-coherence-prism-maps prism-top prism-bottom =
     ( ap-concat-htpy
       ( bottom ·r front-left-bottom ·r front-left-top)
-      ( _)
-      ( _)
       ( commutative-pasting-vertical-pasting-horizontal-coherence-square-maps
         ( top-left)
         ( top-right)
@@ -217,8 +215,6 @@ module _
       ( prism-bottom ·r front-left-top)) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r front-left-top)
-      ( _)
-      ( _)
       ( ( inv-htpy
           ( distributive-left-whisk-concat-htpy
             ( front-right-bottom)
@@ -240,8 +236,6 @@ module _
           ( front-right-top ·l top)) ∙h
         ap-concat-htpy
           ( front-right-bottom ·l front-top)
-          ( _)
-          ( _)
           ( associative-left-whisk-comp
             ( front-right-bottom)
             ( front-right-top)

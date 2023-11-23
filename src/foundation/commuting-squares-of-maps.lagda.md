@@ -298,17 +298,12 @@ module _
   assoc-pasting-vertical-coherence-square-maps =
     ( ap-concat-htpy
       ( sq-bottom ·r mid-left ·r top-left)
-      ( bottom-right ·l (sq-mid ·r top-left ∙h (mid-right ·l sq-top)))
-      ( ( bottom-right ·l (sq-mid ·r top-left)) ∙h
-        ( ( bottom-right ∘ mid-right) ·l sq-top))
       ( ( distributive-left-whisk-concat-htpy
           ( bottom-right)
           ( sq-mid ·r top-left)
           ( mid-right ·l sq-top)) ∙h
         ( ap-concat-htpy
           ( bottom-right ·l (sq-mid ·r top-left))
-          ( bottom-right ·l mid-right ·l sq-top)
-          ( ( bottom-right ∘ mid-right) ·l sq-top)
           ( associative-left-whisk-comp bottom-right mid-right sq-top)))) ∙h
     ( inv-htpy-assoc-htpy
       ( sq-bottom ·r mid-left ·r top-left)

@@ -360,8 +360,6 @@ module _
       ( bottom ·r hA)
       ( (k ·l back-right) ∙h (refl-htpy' (k ∘ (hC ∘ g'))))) ∙h
     ( ( ap-concat-htpy'
-        ( h ·l (inv-htpy back-left))
-        ( inv-htpy (h ·l back-left))
         ( _)
         ( left-whisk-inv-htpy h back-left)) ∙h
       ( inv-htpy-left-transpose-htpy-concat (h ·l back-left) _ _
@@ -372,7 +370,7 @@ module _
                 ( (inv-htpy front-right) ·r g')) ∙h
               ( inv-htpy-right-transpose-htpy-concat _ (front-right ·r g') _
                 ( (assoc-htpy (bottom ·r hA) _ _) ∙h (inv-htpy c))))) ∙h
-          ( ap-concat-htpy (bottom ·r hA) _ _ inv-htpy-right-unit-htpy))))
+          ( ap-concat-htpy (bottom ·r hA) inv-htpy-right-unit-htpy))))
 ```
 
 ### Any commuting cube of maps induces a commuting cube of function spaces
