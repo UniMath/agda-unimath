@@ -175,7 +175,8 @@ module _
   is-section-ap-flat-unit-sharp (cons-flat x) =
     crisp-ap cons-flat (compute-crisp-elim-sharp x)
 
-  is-retraction-ap-flat-unit-sharp : ap-flat-unit-sharp ∘ ap-flat-elim-sharp ~ id
+  is-retraction-ap-flat-unit-sharp :
+    ap-flat-unit-sharp ∘ ap-flat-elim-sharp ~ id
   is-retraction-ap-flat-unit-sharp (cons-flat x) =
     crisp-ap cons-flat (uniqueness-crisp-elim-sharp x)
 

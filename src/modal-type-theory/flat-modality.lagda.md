@@ -90,7 +90,8 @@ module _
   coap-flat : (♭ A → ♭ B) → (@♭ A → B)
   coap-flat f x = counit-flat (f (cons-flat x))
 
-  is-crisp-retraction-coap-flat : (@♭ f : @♭ A → B) → coap-flat (crisp-ap-flat f) ＝ f
+  is-crisp-retraction-coap-flat :
+    (@♭ f : @♭ A → B) → coap-flat (crisp-ap-flat f) ＝ f
   is-crisp-retraction-coap-flat _ = refl
 ```
 

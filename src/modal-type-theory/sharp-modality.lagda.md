@@ -72,7 +72,8 @@ pr2 (sharp-locally-small-operator-modality l) A = is-locally-small' {l} {♯ A}
 ### The sharp induction principle
 
 ```agda
-induction-principle-sharp : {l : Level} → induction-principle-modality {l} unit-sharp
+induction-principle-sharp :
+  {l : Level} → induction-principle-modality {l} unit-sharp
 pr1 (induction-principle-sharp P) = ind-sharp P
 pr2 (induction-principle-sharp P) = compute-ind-sharp P
 
@@ -134,7 +135,8 @@ compute-rec-sharp :
   (rec-sharp f ∘ unit-sharp) ~ f
 compute-rec-sharp {B = B} = compute-ind-sharp (λ _ → B)
 
-recursion-principle-sharp : {l : Level} → recursion-principle-modality {l} unit-sharp
+recursion-principle-sharp :
+  {l : Level} → recursion-principle-modality {l} unit-sharp
 pr1 (recursion-principle-sharp) = rec-sharp
 pr2 (recursion-principle-sharp) = compute-rec-sharp
 

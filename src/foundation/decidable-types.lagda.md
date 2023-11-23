@@ -33,8 +33,9 @@ open import foundation-core.retractions
 
 A type is said to be **decidable** if we can either construct an element, or we
 can prove that it is [empty](foundation-core.empty-types.md). In other words, we
-interpret decidability via the [Curry-Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence) of logic into type
-theory. A related concept is that a type is either
+interpret decidability via the
+[Curry-Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logic into type theory. A related concept is that a type is either
 [inhabited](foundation.inhabited-types.md) or empty, where inhabitedness of a
 type is expressed using the
 [propositional truncation](foundation.propositional-truncations.md).
