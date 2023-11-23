@@ -10,11 +10,11 @@ module foundation-core.commuting-squares-of-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.homotopies
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -218,24 +218,6 @@ module _
 ### Commutativity of horizontal and vertical pasting
 
 ```agda
-[i] :
-  { l1 l2 : Level} {A : UU l1} {B : UU l2} {f g h k l : A → B} →
-  ( H : f ~ g) (K : g ~ h) (L : h ~ k) (M : k ~ l) →
-  ( H ∙h K) ∙h (L ∙h M) ~ H ∙h (K ∙h L) ∙h M
-[i] H K L M =
-  ( inv-htpy-assoc-htpy (H ∙h K) L M) ∙h
-  ( ap-concat-htpy' M (assoc-htpy H K L))
-
-[ii] :
-  { l1 l2 : Level} {A : UU l1} {B : UU l2} {f g h h' k l : A → B} →
-  ( H : f ~ g) (K : g ~ h) (K' : g ~ h') (L : h ~ k) (L' : h' ~ k) (M : k ~ l) →
-  ( α : K ∙h L ~ K' ∙h L') →
-  (H ∙h K) ∙h (L ∙h M) ~ (H ∙h K') ∙h (L' ∙h M)
-[ii] H K K' L L' M α =
-  ( [i] H K L M) ∙h
-  ( ap-concat-htpy' M (ap-concat-htpy H α)) ∙h
-  ( inv-htpy ([i] H K' L' M))
-
 [iii] :
   { l1 l2 l3 l4 l5 l6 l7 : Level} →
   { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
@@ -335,12 +317,8 @@ module _
         ( bottom-right)
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
-      ( [ii]
+      ( both-whisk-square-htpy
         ( bottom-right ·l (sq-left-bottom ·r left-top))
-        ( bottom-right ·l mid-bottom ·l sq-left-top)
-        ( sq-right-bottom ·r mid-left ·r left-top)
-        ( sq-right-bottom ·r mid-top ·r top-left)
-        ( right-bottom ·l mid-right ·l sq-left-top)
         ( right-bottom ·l (sq-right-top ·r top-left))
         ( inv-htpy
           ( [iii]
