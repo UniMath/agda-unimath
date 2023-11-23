@@ -54,7 +54,8 @@ module _
 
   hom-inv-is-iso-action-Group : hom-action-Group G Y X
   hom-inv-is-iso-action-Group =
-    hom-inv-is-iso-Large-Precategory (action-Group-Large-Precategory G) {X = X} {Y = Y} f is-iso-f
+    hom-inv-is-iso-Large-Precategory
+      ( action-Group-Large-Precategory G) {X = X} {Y = Y} f is-iso-f
 
   map-hom-inv-is-iso-action-Group :
     type-action-Group G Y → type-action-Group G X
@@ -65,13 +66,15 @@ module _
     ( comp-hom-action-Group G Y X Y f hom-inv-is-iso-action-Group) ＝
     ( id-hom-action-Group G Y)
   is-section-hom-inv-is-iso-action-Group =
-    is-section-hom-inv-is-iso-Large-Precategory (action-Group-Large-Precategory G) {X = X} {Y = Y} f is-iso-f
+    is-section-hom-inv-is-iso-Large-Precategory
+      ( action-Group-Large-Precategory G) {X = X} {Y = Y} f is-iso-f
 
   is-retraction-hom-inv-is-iso-action-Group :
     ( comp-hom-action-Group G X Y X hom-inv-is-iso-action-Group f) ＝
     ( id-hom-action-Group G X)
   is-retraction-hom-inv-is-iso-action-Group =
-    is-retraction-hom-inv-is-iso-Large-Precategory (action-Group-Large-Precategory G) {X = X} {Y = Y} f is-iso-f
+    is-retraction-hom-inv-is-iso-Large-Precategory
+      ( action-Group-Large-Precategory G) {X = X} {Y = Y} f is-iso-f
 ```
 
 ### The type of isomorphisms of group actions
