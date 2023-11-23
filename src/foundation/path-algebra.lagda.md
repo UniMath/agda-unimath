@@ -308,11 +308,11 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} {x y z u w : A}
+  {l : Level} {A : UU l} {x y z u v : A}
   where
 
   equiv-right-whisk-square-identification :
-    (p : x ＝ y) (p' : x ＝ z) {q : y ＝ u} {q' : z ＝ u} (r : u ＝ w) →
+    (p : x ＝ y) (p' : x ＝ z) {q : y ＝ u} {q' : z ＝ u} (r : u ＝ v) →
     ( coherence-square-identifications p p' q q') ≃
     ( coherence-square-identifications p p' (q ∙ r) (q' ∙ r))
   equiv-right-whisk-square-identification p p' {q} {q'} r =
@@ -321,13 +321,26 @@ module _
     ( equiv-identification-right-whisk r)
 
   equiv-left-whisk-square-identification :
-    (p : w ＝ x) {q : x ＝ y} {q' : x ＝ z} {r : y ＝ u} {r' : z ＝ u} →
+    (p : v ＝ x) {q : x ＝ y} {q' : x ＝ z} {r : y ＝ u} {r' : z ＝ u} →
     ( coherence-square-identifications q q' r r') ≃
     ( coherence-square-identifications (p ∙ q) (p ∙ q') r r')
   equiv-left-whisk-square-identification p {q} {q'} {r} {r'} =
     ( inv-equiv (equiv-concat-assoc p q' r' (p ∙ q ∙ r))) ∘e
     ( inv-equiv (equiv-concat-assoc' (p ∙ (q' ∙ r')) p q r)) ∘e
     ( equiv-identification-left-whisk p)
+
+module _
+  {l : Level} {A : UU l} {x y z u v w : A}
+  where
+
+  equiv-both-whisk-square-identifications :
+    (p : x ＝ y) {q : y ＝ z} {q' : y ＝ u} {r : z ＝ v} {r' : u ＝ v} →
+    (s : v ＝ w) →
+    ( coherence-square-identifications q q' r r') ≃
+    ( coherence-square-identifications (p ∙ q) (p ∙ q') (r ∙ s) (r' ∙ s))
+  equiv-both-whisk-square-identifications p {q} {q'} s =
+    ( equiv-left-whisk-square-identification p) ∘e
+    ( equiv-right-whisk-square-identification q q' s)
 ```
 
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences

@@ -154,4 +154,27 @@ module _
       coherence-square-homotopies (H ∙h K) (H ∙h K') L L' →
       coherence-square-homotopies K K' L L'
     left-unwhisk-square-htpy = map-inv-equiv equiv-left-whisk-square-htpy
+
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2}
+  { f g h h' k m : A → B}
+  ( H : f ~ g) {K : g ~ h} {K' : g ~ h'} {L : h ~ k} {L' : h' ~ k} (M : k ~ m)
+  where
+
+  equiv-both-whisk-square-htpy :
+    ( coherence-square-homotopies K K' L L') ≃
+    ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
+  equiv-both-whisk-square-htpy =
+    equiv-Π-equiv-family
+      ( λ a → equiv-both-whisk-square-identifications (H a) (M a))
+
+  both-whisk-square-htpy :
+    ( coherence-square-homotopies K K' L L') →
+    ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
+  both-whisk-square-htpy = map-equiv equiv-both-whisk-square-htpy
+
+  both-unwhisk-square-htpy :
+    ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M)) →
+    ( coherence-square-homotopies K K' L L')
+  both-unwhisk-square-htpy = map-inv-equiv equiv-both-whisk-square-htpy
 ```
