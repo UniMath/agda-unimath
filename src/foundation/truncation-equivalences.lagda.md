@@ -205,10 +205,10 @@ module _
       ( ef)
 ```
 
-
 ### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
 
-This is an instance of Lemma 2.27 in Christensen, Opie, Rijke & Scoccola listed below.
+This is an instance of Lemma 2.27 in Christensen, Opie, Rijke & Scoccola listed
+below.
 
 ```agda
 module _
@@ -240,7 +240,8 @@ module _
 
 ### There is an `k`-equivalence between the fiber of a map and the fiber of its `(k+1)`-truncation
 
-This is an instance of Corollary 2.29 in Christensen, Opie, Rijke & Scoccola listed below.
+This is an instance of Corollary 2.29 in Christensen, Opie, Rijke & Scoccola
+listed below.
 
 We consider the following composition of maps
 
