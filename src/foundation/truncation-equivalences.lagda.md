@@ -148,17 +148,16 @@ module _
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  abstract
-    is-truncation-equivalence-comp :
-      (g : B → C) (f : A → B) →
-      is-truncation-equivalence k f →
-      is-truncation-equivalence k g →
-      is-truncation-equivalence k (g ∘ f)
-    is-truncation-equivalence-comp g f ef eg =
-      is-equiv-htpy
-        ( map-trunc k g ∘ map-trunc k f)
-          ( preserves-comp-map-trunc k g f)
-        ( is-equiv-comp (map-trunc k g) (map-trunc k f) ef eg)
+  is-truncation-equivalence-comp :
+    (g : B → C) (f : A → B) →
+    is-truncation-equivalence k f →
+    is-truncation-equivalence k g →
+    is-truncation-equivalence k (g ∘ f)
+  is-truncation-equivalence-comp g f ef eg =
+    is-equiv-htpy
+      ( map-trunc k g ∘ map-trunc k f)
+        ( preserves-comp-map-trunc k g f)
+      ( is-equiv-comp (map-trunc k g) (map-trunc k f) ef eg)
 
   truncation-equivalence-comp :
     truncation-equivalence k B C →
@@ -225,8 +224,8 @@ module _
 
 ### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
 
-This is an instance of Lemma 2.27 in Christensen, Opie, Rijke & Scoccola listed
-below.
+This is an instance of Lemma 2.27 in Christensen, Opie, Rijke & Scoccola
+[CORS'20] listed below.
 
 ```agda
 module _
@@ -258,8 +257,7 @@ module _
 
 ### There is an `k`-equivalence between the fiber of a map and the fiber of its `(k+1)`-truncation
 
-This is an instance of Corollary 2.29 in Christensen, Opie, Rijke & Scoccola
-listed below.
+This is an instance of Corollary 2.29 in [CORS'20].
 
 We consider the following composition of maps
 
@@ -368,7 +366,7 @@ The notion of `k`-equivalence is a special case of the notion of
 paper
 
 - J. D. Christensen, M. Opie, E. Rijke, and L. Scoccola. Localization in
-  Homotopy Type Theory. Higher Structures, 2020.
+  Homotopy Type Theory. Higher Structures, 2020. [CORS'20]
 
 The class of `k`-equivalences is left orthogonal to the class of `k`-étale maps.
 This was shown in
