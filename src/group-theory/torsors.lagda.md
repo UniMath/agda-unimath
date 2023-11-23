@@ -154,15 +154,13 @@ module _
 
   equiv-eq-Torsor-Group :
     (Y : Torsor-Group G l2) → Id X Y → equiv-Torsor-Group Y
-  equiv-eq-Torsor-Group .X refl =
-    id-equiv-Torsor-Group
+  equiv-eq-Torsor-Group .X refl = id-equiv-Torsor-Group
 
   is-torsorial-equiv-Torsor-Group :
     is-torsorial equiv-Torsor-Group
   is-torsorial-equiv-Torsor-Group =
     is-torsorial-Eq-subtype
-      ( is-torsorial-equiv-action-Group G
-        ( action-Torsor-Group G X))
+      ( is-torsorial-equiv-action-Group G (action-Torsor-Group G X))
       ( is-prop-is-torsor-Group G)
       ( action-Torsor-Group G X)
       ( id-equiv-Torsor-Group)

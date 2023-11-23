@@ -10,11 +10,16 @@ module group-theory.isomorphisms-group-actions where
 open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.commuting-squares-of-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.equivalences-group-actions
@@ -112,8 +117,7 @@ module _
     iso-action-Group →
     type-action-Group G Y → type-action-Group G X
   map-hom-inv-iso-action-Group f =
-    map-hom-action-Group G Y X
-      ( hom-inv-iso-action-Group f)
+    map-hom-action-Group G Y X (hom-inv-iso-action-Group f)
 
   is-section-hom-inv-iso-action-Group :
     (f : iso-action-Group) →
@@ -148,8 +152,9 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (G : Group l1) (X : action-Group G l2)
-  (Y : action-Group G l3) (f : hom-action-Group G X Y)
+  {l1 l2 l3 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3)
+  (f : hom-action-Group G X Y)
   where
 
   is-equiv-hom-is-iso-action-Group :
@@ -185,9 +190,42 @@ module _
       ( preserves-action-prop-Group G X X)
       ( eq-htpy (is-retraction-map-inv-is-equiv is-equiv-f))
 
+  is-equiv-is-equiv-hom-is-iso-action-Group :
+    is-equiv is-equiv-hom-is-iso-action-Group
+  is-equiv-is-equiv-hom-is-iso-action-Group =
+    is-equiv-is-prop
+      ( is-prop-is-iso-Large-Precategory
+        ( action-Group-Large-Precategory G) {X = X} {Y = Y} f)
+      ( is-property-is-equiv (map-hom-action-Group G X Y f))
+      ( is-iso-is-equiv-hom-action-Group)
+
+  is-equiv-is-iso-is-equiv-hom-action-Group :
+    is-equiv is-iso-is-equiv-hom-action-Group
+  is-equiv-is-iso-is-equiv-hom-action-Group =
+    is-equiv-is-prop
+      ( is-property-is-equiv (map-hom-action-Group G X Y f))
+      ( is-prop-is-iso-Large-Precategory
+        ( action-Group-Large-Precategory G) {X = X} {Y = Y} f)
+      ( is-equiv-hom-is-iso-action-Group)
+
+  equiv-is-equiv-hom-is-iso-action-Group :
+    is-iso-action-Group G X Y f ≃ is-equiv-hom-action-Group G X Y f
+  pr1 equiv-is-equiv-hom-is-iso-action-Group =
+    is-equiv-hom-is-iso-action-Group
+  pr2 equiv-is-equiv-hom-is-iso-action-Group =
+    is-equiv-is-equiv-hom-is-iso-action-Group
+
+  equiv-is-iso-is-equiv-hom-action-Group :
+    is-equiv-hom-action-Group G X Y f ≃ is-iso-action-Group G X Y f
+  pr1 equiv-is-iso-is-equiv-hom-action-Group =
+    is-iso-is-equiv-hom-action-Group
+  pr2 equiv-is-iso-is-equiv-hom-action-Group =
+    is-equiv-is-iso-is-equiv-hom-action-Group
+
 module _
-  {l1 l2 l3 : Level} (G : Group l1) (X : action-Group G l2)
-  (Y : action-Group G l3) (f : iso-action-Group G X Y)
+  {l1 l2 l3 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3)
+  (f : iso-action-Group G X Y)
   where
 
   is-equiv-map-iso-action-Group : is-equiv (map-iso-action-Group G X Y f)
@@ -200,4 +238,36 @@ module _
   pr1 (pr1 equiv-iso-action-Group) = map-iso-action-Group G X Y f
   pr2 (pr1 equiv-iso-action-Group) = is-equiv-map-iso-action-Group
   pr2 equiv-iso-action-Group = preserves-action-iso-action-Group G X Y f
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3)
+  where
+
+  equiv-equiv-iso-action-Group :
+    iso-action-Group G X Y ≃ equiv-action-Group G X Y
+  equiv-equiv-iso-action-Group =
+    equiv-right-swap-Σ ∘e
+    equiv-tot (equiv-is-equiv-hom-is-iso-action-Group G X Y)
+
+  equiv-iso-equiv-action-Group :
+    equiv-action-Group G X Y ≃ iso-action-Group G X Y
+  equiv-iso-equiv-action-Group =
+    equiv-tot (equiv-is-iso-is-equiv-hom-action-Group G X Y) ∘e
+    equiv-right-swap-Σ
+```
+
+### Isomorphisms characterize equality of `G`-sets
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
+  where
+
+  is-torsorial-iso-action-Group : is-torsorial (iso-action-Group {l3 = l2} G X)
+  is-torsorial-iso-action-Group =
+    is-contr-equiv
+      ( Σ (action-Group G l2) (equiv-action-Group G X))
+      ( equiv-tot (equiv-equiv-iso-action-Group G X))
+      ( is-torsorial-equiv-action-Group G X)
 ```
