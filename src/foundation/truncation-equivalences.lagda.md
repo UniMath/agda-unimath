@@ -173,6 +173,38 @@ module _
       ( is-truncation-equivalence-truncation-equivalence k g)
 ```
 
+### The class of `k`-equivalences has the 3-for-2 property
+
+```agda
+module _
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B) (e : is-truncation-equivalence k (g ∘ f))
+  where
+
+  is-truncation-equivalence-left-factor :
+    is-truncation-equivalence k f → is-truncation-equivalence k g
+  is-truncation-equivalence-left-factor ef =
+    is-equiv-left-factor
+      ( map-trunc k g)
+      ( map-trunc k f)
+      ( is-equiv-htpy
+        ( map-trunc k (g ∘ f))
+        ( inv-htpy (preserves-comp-map-trunc k g f)) e)
+      ( ef)
+
+  is-truncation-equivalence-right-factor :
+    is-truncation-equivalence k g → is-truncation-equivalence k f
+  is-truncation-equivalence-right-factor eg =
+    is-equiv-right-factor
+      ( map-trunc k g)
+      ( map-trunc k f)
+      ( eg)
+      ( is-equiv-htpy
+        ( map-trunc k (g ∘ f))
+        ( inv-htpy (preserves-comp-map-trunc k g f))
+        ( e))
+```
+
 ### Composing `k`-equivalences with equivalences
 
 ```agda
