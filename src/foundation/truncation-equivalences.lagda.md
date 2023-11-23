@@ -127,6 +127,20 @@ module _
   is-truncation-equivalence-is-equiv e = is-equiv-map-equiv-trunc k (f , e)
 ```
 
+### Every `k`-connected map is a `k`-equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-truncation-equivalence-is-connected-map :
+    is-connected-map k f → is-truncation-equivalence k f
+  is-truncation-equivalence-is-connected-map c =
+    is-truncation-equivalence-is-equiv-precomp k f
+      ( λ l X → dependent-universal-property-is-connected-map k c (λ _ → X))
+```
+
 ### The `k`-equivalences are closed under composition
 
 ```agda
