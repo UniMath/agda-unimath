@@ -1,7 +1,7 @@
 # The orbit category of a group
 
 ```agda
-module group-theory.orbit-category-groups where
+module group-theory.category-of-orbits-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -31,12 +31,11 @@ open import group-theory.transitive-group-actions
 
 ## Idea
 
-The **orbit category of a group** `Orb(G)` is the
+The **orbit category of a group** `(G)` is the
 [full subcategory](category-theory.full-large-subcategories.md) of the
 [category of `G`-sets](group-theory.category-of-group-actions.md) consisting of
-_homogenous_ `G`-sets, i.e. `G`-sets whose
-[`G`-action](group-theory.group-actions.md) is
-[transitive](group-theory.transitive-group-actions.md).
+orbits of `G`, i.e. [transitive](group-theory.transitive-group-actions.md)
+[`G`-sets](group-theory.group-actions.md).
 
 ## Definitions
 

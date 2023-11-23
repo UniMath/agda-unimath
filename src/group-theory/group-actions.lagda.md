@@ -19,7 +19,9 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.subgroups
 open import group-theory.symmetric-groups
+open import group-theory.trivial-group-homomorphisms
 ```
 
 </details>
@@ -31,7 +33,9 @@ An **action** of a [group](group-theory.groups.md) `G` on a
 [group homomorphism](group-theory.homomorphisms-groups.md) from `G` into
 `symmetric-Group X`. A set equipped with a `G`-action is called a **`G`-set**.
 
-## Definition
+## Definitions
+
+### The type of `G`-sets
 
 ```agda
 module _
@@ -90,6 +94,23 @@ module _
       ( ( ap (mul-action-Group' x) (left-inverse-law-mul-Group G g)) ∙
         ( preserves-unit-mul-action-Group x))) ∙
     ( preserves-mul-action-Group (inv-Group G g) g x)
+```
+
+## Examples
+
+### Trivial `G`-sets
+
+Every set gives rise to a `G`-set by having every point fixed under the action
+of `G`.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (X : Set l2)
+  where
+
+  trivial-action-Group : action-Group G l2
+  pr1 trivial-action-Group = X
+  pr2 trivial-action-Group = trivial-hom-Group G (symmetric-Group X)
 ```
 
 ## External links
