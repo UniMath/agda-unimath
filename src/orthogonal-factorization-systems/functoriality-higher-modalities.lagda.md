@@ -154,7 +154,10 @@ module _
 
 ### Action on homotopies
 
-This definition of action on homotopies avoids using function extensionality.
+This definition of action on [homotopies](foundation-core.homotopies.md) is
+meant to avoid using
+[function extensionality](foundation.function-extensionality.md). This is left
+for future work.
 
 ```agda
 module _

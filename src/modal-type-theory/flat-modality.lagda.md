@@ -84,14 +84,14 @@ module _
   ap-flat : @♭ (A → B) → (♭ A → ♭ B)
   ap-flat f (cons-flat x) = cons-flat (f x)
 
-  crisp-ap-flat : @♭ (@♭ A → B) → (♭ A → ♭ B)
-  crisp-ap-flat f (cons-flat x) = cons-flat (f x)
+  ap-crisp-flat : @♭ (@♭ A → B) → (♭ A → ♭ B)
+  ap-crisp-flat f (cons-flat x) = cons-flat (f x)
 
   coap-flat : (♭ A → ♭ B) → (@♭ A → B)
   coap-flat f x = counit-flat (f (cons-flat x))
 
   is-crisp-retraction-coap-flat :
-    (@♭ f : @♭ A → B) → coap-flat (crisp-ap-flat f) ＝ f
+    (@♭ f : @♭ A → B) → coap-flat (ap-crisp-flat f) ＝ f
   is-crisp-retraction-coap-flat _ = refl
 ```
 
@@ -128,23 +128,23 @@ module _
   map-flat-counit-flat : ♭ (♭ A) → ♭ A
   map-flat-counit-flat (cons-flat x) = x
 
-  diag-flat : ♭ A → ♭ (♭ A)
-  diag-flat (cons-flat x) = cons-flat (cons-flat x)
+  diagonal-flat : ♭ A → ♭ (♭ A)
+  diagonal-flat (cons-flat x) = cons-flat (cons-flat x)
 
   is-section-flat-counit-flat :
-    (diag-flat ∘ map-flat-counit-flat) ~ id
+    (diagonal-flat ∘ map-flat-counit-flat) ~ id
   is-section-flat-counit-flat (cons-flat (cons-flat _)) = refl
 
   is-retraction-flat-counit-flat :
-    (map-flat-counit-flat ∘ diag-flat) ~ id
+    (map-flat-counit-flat ∘ diagonal-flat) ~ id
   is-retraction-flat-counit-flat (cons-flat _) = refl
 
   section-flat-counit-flat : section map-flat-counit-flat
-  pr1 section-flat-counit-flat = diag-flat
+  pr1 section-flat-counit-flat = diagonal-flat
   pr2 section-flat-counit-flat = is-retraction-flat-counit-flat
 
   retraction-flat-counit-flat : retraction map-flat-counit-flat
-  pr1 retraction-flat-counit-flat = diag-flat
+  pr1 retraction-flat-counit-flat = diagonal-flat
   pr2 retraction-flat-counit-flat = is-section-flat-counit-flat
 
   is-equiv-flat-counit-flat : is-equiv map-flat-counit-flat
@@ -184,18 +184,18 @@ module _
 ### Flat distributes over Σ-types
 
 ```agda
-Σ♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : A → UU l2) → UU (l1 ⊔ l2)
-Σ♭ A B = Σ (♭ A) (λ {(cons-flat x) → ♭ (B x)})
+Σ-♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : A → UU l2) → UU (l1 ⊔ l2)
+Σ-♭ A B = Σ (♭ A) (λ {(cons-flat x) → ♭ (B x)})
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
   where
 
-  map-distributive-flat-Σ : ♭ (Σ A B) → Σ♭ A B
+  map-distributive-flat-Σ : ♭ (Σ A B) → Σ-♭ A B
   pr1 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat x
   pr2 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat y
 
-  map-inv-distributive-flat-Σ : Σ♭ A B → ♭ (Σ A B)
+  map-inv-distributive-flat-Σ : Σ-♭ A B → ♭ (Σ A B)
   map-inv-distributive-flat-Σ (cons-flat x , cons-flat y) = cons-flat (x , y)
 
   is-section-distributive-flat-Σ :
@@ -218,11 +218,11 @@ module _
   pr1 is-equiv-distributive-flat-Σ = section-distributive-flat-Σ
   pr2 is-equiv-distributive-flat-Σ = retraction-distributive-flat-Σ
 
-  equiv-distributive-flat-Σ : ♭ (Σ A B) ≃ Σ♭ A B
+  equiv-distributive-flat-Σ : ♭ (Σ A B) ≃ Σ-♭ A B
   pr1 equiv-distributive-flat-Σ = map-distributive-flat-Σ
   pr2 equiv-distributive-flat-Σ = is-equiv-distributive-flat-Σ
 
-  inv-equiv-distributive-flat-Σ : Σ♭ A B ≃ ♭ (Σ A B)
+  inv-equiv-distributive-flat-Σ : Σ-♭ A B ≃ ♭ (Σ A B)
   inv-equiv-distributive-flat-Σ = inv-equiv equiv-distributive-flat-Σ
 ```
 

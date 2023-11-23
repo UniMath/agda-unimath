@@ -28,13 +28,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **cardinality** of a [set](foundation-core.sets.md) is its isomorphism
-class. We take isomorphism classes of sets by
-[set truncating](foundation.set-truncations.md) the universe of sets of any
-given universe level. Note that this definition takes advantage of the
-[univalence axiom](foundation.univalence.md): By the univalence axiom isomorphic
-sets are equal, and will be mapped to the same element in the set truncation of
-the universe of all sets.
+The **cardinality** of a [set](foundation-core.sets.md) is its
+[isomorphism](category-theory.isomorphisms-in-categories.md) class. We take
+isomorphism classes of sets by [set truncating](foundation.set-truncations.md)
+the universe of sets of any given
+[universe level](foundation.universe-levels.md). Note that this definition takes
+advantage of the [univalence axiom](foundation.univalence.md): By the univalence
+axiom [isomorphic sets](foundation.isomorphisms-of-sets.md) are
+[equal](foundation-core.identity-types.md), and will be mapped to the same
+element in the set truncation of the universe of all sets.
 
 ## Definition
 

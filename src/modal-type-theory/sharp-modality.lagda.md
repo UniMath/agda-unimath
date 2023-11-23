@@ -26,14 +26,17 @@ open import orthogonal-factorization-systems.modal-subuniverse-induction
 
 ## Idea
 
-The **sharp modality `♯`** is an axiomatized monadic modality we postulate as a
-right adjoint to the [flat modality](modal-type-theory.flat-modality.md).
+The **sharp modality `♯`** is an axiomatized
+[monadic modality](orthogonal-factorization-systems.higher-modalities.md) we
+postulate as a right adjoint to the
+[flat modality](modal-type-theory.flat-modality.md).
 
-In this file, we only postulate that `♯` is a modal operator that has a
+In this file, we only postulate that `♯` is a
+[modal operator](orthogonal-factorization-systems.modal-operators.md) that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
 In the file about [codiscrete types](modal-type-theory.codiscrete-types.md), we
-postulate that the subuniverse of sharp modal types has appropriate closure
-properties. In
+postulate that the [subuniverse](foundation.subuniverses.md) of sharp modal
+types has appropriate closure properties. In
 [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md), we
 postulate that it has the appropriate relation to the flat modality, making it a
 lex modality. Please note that there is some redundancy between the postulated

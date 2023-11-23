@@ -38,6 +38,12 @@ principle** for the modality is then a
   multivariable-section (precomp-Π unit-○ P)
 ```
 
+where
+
+```text
+  precomp-Π unit-○ P : ((x' : ○ X) → P x') → (x : X) → P (unit-○ x)
+```
+
 for all families of modal types `P` over some `○ X`.
 
 Note that for such principles to coincide with
@@ -128,10 +134,10 @@ module _
 ### Strong subuniverse induction
 
 We can weaken the assumption that the codomain is modal and only ask that the
-unit has a retraction. We call this principle **strong subuniverse induction**.
-Note that such a retraction may not in general be
-[unique](foundation-core.contractible-types.md), and the computational behaviour
-of this induction principle depends on the choice of retraction.
+unit has a [retraction](foundation-core.retractions.md). We call this principle
+**strong subuniverse induction**. Note that such a retraction may not in general
+be [unique](foundation-core.contractible-types.md), and the computational
+behaviour of this induction principle depends on the choice of retraction.
 
 ```agda
 module _

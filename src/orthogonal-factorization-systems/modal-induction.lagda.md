@@ -38,6 +38,12 @@ Given a [modal operator](orthogonal-factorization-systems.modal-operators.md)
   multivariable-section 1 (precomp-Π unit-○ (○ ∘ P))
 ```
 
+where
+
+```text
+  precomp-Π unit-○ (○ ∘ P) : ((x' : ○ X) → ○ (P x')) → (x : X) → ○ (P (unit-○ x))
+```
+
 for all families `P` over some `○ X`.
 
 Note that for such principles to coincide with
@@ -247,7 +253,8 @@ module _
 
 ### Naturality of the unit
 
-For every `f : X → Y` there is an associated naturality square
+For every `f : X → Y` there is an associated
+[naturality square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
          f

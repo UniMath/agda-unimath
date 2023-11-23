@@ -40,7 +40,8 @@ a crisp left adjoint to the
 [sharp modality](modal-type-theory.sharp-modality.md) `♯`.
 
 In [The sharp modality](modal-type-theory.sharp-modality.md) we postulated that
-`♯` is a modal operator that has a
+`♯` is a [modal operator](orthogonal-factorization-systems.modal-operators.md)
+that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
 In the file [Codiscrete types](modal-type-theory.codiscrete-types.md), we
 postulated that the [subuniverse](foundation.subuniverses.md) of sharp modal
@@ -171,19 +172,19 @@ module _
   where
 
   ap-flat-elim-sharp : ♭ (♯ A) → ♭ A
-  ap-flat-elim-sharp = crisp-ap-flat crisp-elim-sharp
+  ap-flat-elim-sharp = ap-crisp-flat crisp-elim-sharp
 
   ap-flat-unit-sharp : ♭ A → ♭ (♯ A)
   ap-flat-unit-sharp = ap-flat unit-sharp
 
   is-section-ap-flat-unit-sharp : ap-flat-elim-sharp ∘ ap-flat-unit-sharp ~ id
   is-section-ap-flat-unit-sharp (cons-flat x) =
-    crisp-ap cons-flat (compute-crisp-elim-sharp x)
+    ap-crisp cons-flat (compute-crisp-elim-sharp x)
 
   is-retraction-ap-flat-unit-sharp :
     ap-flat-unit-sharp ∘ ap-flat-elim-sharp ~ id
   is-retraction-ap-flat-unit-sharp (cons-flat x) =
-    crisp-ap cons-flat (uniqueness-crisp-elim-sharp x)
+    ap-crisp cons-flat (uniqueness-crisp-elim-sharp x)
 
   is-equiv-ap-flat-elim-sharp : is-equiv ap-flat-elim-sharp
   pr1 (pr1 is-equiv-ap-flat-elim-sharp) = ap-flat-unit-sharp

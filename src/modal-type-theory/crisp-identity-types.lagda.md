@@ -23,15 +23,15 @@ We record here some basic facts about
 ## Properties
 
 ```agda
-crisp-ind-path :
+ind-path-crisp :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {@♭ a : A} →
   (C : (@♭ y : A) (p : a ＝ y) → UU l2) →
   C a refl →
   (@♭ y : A) (@♭ p : a ＝ y) → C y p
-crisp-ind-path C b _ refl = b
+ind-path-crisp C b _ refl = b
 
-crisp-ap :
+ap-crisp :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {B : UU l2} {@♭ x y : A}
   (f : (@♭ x : A) → B) → @♭ (x ＝ y) → (f x) ＝ (f y)
-crisp-ap f refl = refl
+ap-crisp f refl = refl
 ```

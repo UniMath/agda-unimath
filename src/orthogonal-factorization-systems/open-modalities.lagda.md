@@ -83,9 +83,10 @@ module _
   pr2 (induction-principle-open-modality P) = compute-ind-open-modality P
 ```
 
-For local smallness with respect to the appropriate universe level, we must take
-the maximum of `l` and `lQ` as our domain. In practice, this only allows `lQ` to
-be smaller than `l`.
+For [local smallness](foundation.locally-small-types.md) with respect to the
+appropriate [universe level](foundation.universe-levels.md), we must take the
+maximum of `l` and `lQ` as our domain. In practice, this only allows `lQ` to be
+smaller than `l`.
 
 ```agda
 module _
