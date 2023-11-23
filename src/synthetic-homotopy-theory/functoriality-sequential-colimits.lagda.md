@@ -11,10 +11,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-prisms-of-maps
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
-open import foundation.commuting-prisms-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -28,8 +28,8 @@ open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.sequential-colimits
+open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ```
 
@@ -40,11 +40,8 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 A
 [morphism of sequential diagrams](synthetic-homotopy-theory.morphisms-sequential-diagrams.md)
 `f : (A, a) → (B, b)` induces a map `f∞ : A∞ → B∞` between the
-[standard sequential colimits](synthetic-homotopy-theory.standard-sequential-colimit.md)
+[standard sequential colimits](synthetic-homotopy-theory.sequential-colimits.md)
 of the diagrams.
-
-```text
-```
 
 ## Properties
 
@@ -117,7 +114,7 @@ module _
           pr2
           (map-hom-cocone-sequential-colimit f
           (cocone-standard-sequential-colimit B))
-          n) )
+          n))
       ( htpy-htpy-cocone-map-hom-standard-sequential-colimit (succ-ℕ n)
         ·r pr2 A n)
   coherence-htpy-cocone-map-hom-standard-sequential-colimit =
@@ -138,7 +135,8 @@ module _
       ( map-cocone-standard-sequential-colimit B n)
       ( coherence-triangle-cocone-standard-sequential-colimit A n)
       ( naturality-map-hom-sequential-diagram B f n)
-      ( inv-htpy (htpy-htpy-cocone-map-hom-standard-sequential-colimit (succ-ℕ n)))
+      ( inv-htpy
+        ( htpy-htpy-cocone-map-hom-standard-sequential-colimit (succ-ℕ n)))
       ( inv-htpy (htpy-htpy-cocone-map-hom-standard-sequential-colimit n))
       ( coherence-triangle-cocone-standard-sequential-colimit B n)
   prism-htpy-cocone-map-hom-standard-sequential-colimit n =
@@ -158,7 +156,6 @@ module _
       ( htpy-htpy-cocone-map-hom-standard-sequential-colimit n)
       ( coherence-triangle-cocone-standard-sequential-colimit B n)
       ( inv-htpy (coherence-htpy-cocone-map-hom-standard-sequential-colimit n))
-
 ```
 
 ### Homotopies between morphisms of sequential diagrams induce homotopies of maps of sequential colimits
@@ -381,8 +378,10 @@ module _
                   ( map-hom-standard-sequential-colimit B f)) ·l
                 ( coherence-triangle-cocone-standard-sequential-colimit A n)))
             ( ( assoc-htpy
-                ( ( coherence-triangle-cocone-standard-sequential-colimit C n) ·r
-                  ( map-hom-sequential-diagram C g n ∘ map-hom-sequential-diagram B f n))
+                ( ( coherence-triangle-cocone-standard-sequential-colimit C
+                    ( n)) ·r
+                  ( ( map-hom-sequential-diagram C g n) ∘
+                    ( map-hom-sequential-diagram B f n)))
                 ( map-cocone-standard-sequential-colimit C (succ-ℕ n) ·l _)
                 ( _)) ∙h
               ( pasting-vertical-coherence-prism-maps
@@ -404,18 +403,21 @@ module _
                 ( coherence-triangle-cocone-standard-sequential-colimit A n)
                 ( naturality-map-hom-sequential-diagram B f n)
                 ( inv-htpy
-                  ( htpy-htpy-cocone-map-hom-standard-sequential-colimit B f (succ-ℕ n)))
+                  ( htpy-htpy-cocone-map-hom-standard-sequential-colimit B f
+                    ( succ-ℕ n)))
                 ( inv-htpy
                   ( htpy-htpy-cocone-map-hom-standard-sequential-colimit B f n))
                 ( coherence-triangle-cocone-standard-sequential-colimit B n)
                 ( naturality-map-hom-sequential-diagram C g n)
                 ( inv-htpy
-                  ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C g (succ-ℕ n)))
+                  ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C g
+                    ( succ-ℕ n)))
                 ( inv-htpy
                   ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C g n))
                 ( coherence-triangle-cocone-standard-sequential-colimit C n)
                 ( prism-htpy-cocone-map-hom-standard-sequential-colimit B f n)
-                ( prism-htpy-cocone-map-hom-standard-sequential-colimit C g n)))) ∙h
+                ( prism-htpy-cocone-map-hom-standard-sequential-colimit C g
+                  ( n))))) ∙h
           ( inv-htpy-assoc-htpy
             ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C
               ( comp-hom-sequential-diagram A B C g f)
@@ -436,7 +438,8 @@ module _
                   ( n))))
             ( ( ( map-hom-standard-sequential-colimit C g) ∘
                   ( map-hom-standard-sequential-colimit B f)) ·l
-                ( coherence-triangle-cocone-standard-sequential-colimit A n))))))
+                ( coherence-triangle-cocone-standard-sequential-colimit A
+                  ( n)))))))
 ```
 
 ### An equivalence of sequential diagrams induces an equivalence of cocones
