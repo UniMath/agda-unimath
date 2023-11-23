@@ -43,7 +43,7 @@ In [The sharp modality](modal-type-theory.sharp-modality.md) we postulated that
 `♯` is a modal operator that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
 In the file [Codiscrete types](modal-type-theory.codiscrete-types.md), we
-postulated that the subuniverse of sharp modal types has appropriate closure
+postulated that the [subuniverse](foundation.subuniverses.md) of sharp modal types has appropriate closure
 properties. Please note that there is some redundancy between the postulated
 axioms, and they may be subject to change in the future.
 
