@@ -76,14 +76,17 @@ postulate
     {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
 
   compute-crisp-elim-sharp :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) → (crisp-elim-sharp (unit-sharp x)) ＝ x
+    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
+    crisp-elim-sharp (unit-sharp x) ＝ x
 
   uniqueness-crisp-elim-sharp :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) → unit-sharp (crisp-elim-sharp x) ＝ x
+    {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) →
+    unit-sharp (crisp-elim-sharp x) ＝ x
 
   coherence-uniqueness-crisp-elim-sharp :
     {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
-    uniqueness-crisp-elim-sharp (unit-sharp x) ＝ ap unit-sharp (compute-crisp-elim-sharp x)
+    ( uniqueness-crisp-elim-sharp (unit-sharp x)) ＝
+    ( ap unit-sharp (compute-crisp-elim-sharp x))
 ```
 
 ## Definitions
@@ -121,7 +124,9 @@ crisp-tr-sharp refl {x} = uniqueness-crisp-elim-sharp x
 ```agda
 ind-crisp-ind-sharp :
   {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
-  ((x : ♯ A) → is-codiscrete (C x)) → ((x : A) → C (unit-sharp x)) → (x : ♯ A) → C x
+  ((x : ♯ A) → is-codiscrete (C x)) →
+  ((x : A) → C (unit-sharp x)) →
+  (x : ♯ A) → C x
 ind-crisp-ind-sharp {A = A} C is-codiscrete-C f x' =
   crisp-ind-sharp
     ( λ X → (x : ♯ X) (p : X ＝ A) → C (tr ♯ p x))

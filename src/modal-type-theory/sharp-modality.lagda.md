@@ -93,7 +93,9 @@ strong-ind-subuniverse-sharp =
 
 compute-strong-ind-subuniverse-sharp :
   {l : Level} →
-  compute-strong-ind-subuniverse-modality {l} unit-sharp strong-ind-subuniverse-sharp
+  compute-strong-ind-subuniverse-modality {l}
+    unit-sharp
+    strong-ind-subuniverse-sharp
 compute-strong-ind-subuniverse-sharp =
   compute-strong-ind-strong-induction-principle-subuniverse-modality
     ( unit-sharp)
@@ -114,7 +116,8 @@ ind-subuniverse-sharp =
     ( induction-principle-subuniverse-sharp)
 
 compute-ind-subuniverse-sharp :
-  {l : Level} → compute-ind-subuniverse-modality {l} unit-sharp ind-subuniverse-sharp
+  {l : Level} →
+  compute-ind-subuniverse-modality {l} unit-sharp ind-subuniverse-sharp
 compute-ind-subuniverse-sharp =
   compute-ind-induction-principle-subuniverse-modality
     ( unit-sharp)
@@ -156,7 +159,9 @@ strong-rec-subuniverse-sharp =
 
 compute-strong-rec-subuniverse-sharp :
   {l : Level} →
-  compute-strong-rec-subuniverse-modality {l} unit-sharp strong-rec-subuniverse-sharp
+  compute-strong-rec-subuniverse-modality {l}
+    unit-sharp
+    strong-rec-subuniverse-sharp
 compute-strong-rec-subuniverse-sharp =
   compute-strong-rec-strong-recursion-principle-subuniverse-modality
     ( unit-sharp)
@@ -177,7 +182,8 @@ rec-subuniverse-sharp =
     ( recursion-principle-subuniverse-sharp)
 
 compute-rec-subuniverse-sharp :
-  {l : Level} → compute-rec-subuniverse-modality {l} unit-sharp rec-subuniverse-sharp
+  {l : Level} →
+  compute-rec-subuniverse-modality {l} unit-sharp rec-subuniverse-sharp
 compute-rec-subuniverse-sharp =
   compute-rec-recursion-principle-subuniverse-modality
     ( unit-sharp)
