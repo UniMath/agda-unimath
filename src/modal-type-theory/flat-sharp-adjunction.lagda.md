@@ -218,7 +218,7 @@ module _
         ( λ x → unit-♯ (cons-♭ x)))
 ```
 
-It remains to show that these two are inverses to eachother.
+It remains to show that these two are inverses to each other.
 
 ```text
   is-section-cons-♭ : ap-♯-counit-♭ ∘ cons-♭ ~ id
