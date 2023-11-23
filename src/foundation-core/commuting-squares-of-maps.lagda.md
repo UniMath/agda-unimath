@@ -224,7 +224,7 @@ module _
   ( H ∙h K) ∙h (L ∙h M) ~ H ∙h (K ∙h L) ∙h M
 [i] H K L M =
   ( inv-htpy-assoc-htpy (H ∙h K) L M) ∙h
-  ( ap-concat-htpy' _ _ M (assoc-htpy H K L))
+  ( ap-concat-htpy' M (assoc-htpy H K L))
 
 [ii] :
   { l1 l2 : Level} {A : UU l1} {B : UU l2} {f g h h' k l : A → B} →
@@ -233,7 +233,7 @@ module _
   (H ∙h K) ∙h (L ∙h M) ~ (H ∙h K') ∙h (L' ∙h M)
 [ii] H K K' L L' M α =
   ( [i] H K L M) ∙h
-  ( ap-concat-htpy' _ _ M (ap-concat-htpy H _ _ α)) ∙h
+  ( ap-concat-htpy' M (ap-concat-htpy H α)) ∙h
   ( inv-htpy ([i] H K' L' M))
 
 [iii] :
@@ -249,13 +249,11 @@ module _
 [iii] top left mid-top mid-left mid-right mid-bottom right bottom H K =
   ( ap-concat-htpy
     ( K ·r mid-left ·r left)
-    ( _)
-    ( _)
     ( associative-left-whisk-comp right mid-right H)) ∙h
   ( htpy-swap-nat-right-htpy K H) ∙h
-  ( ap-concat-htpy' _ _
+  ( ap-concat-htpy'
     ( K ·r mid-top ·r top)
-    ( inv-htpy (associative-left-whisk-comp  bottom mid-bottom H)))
+    ( inv-htpy (associative-left-whisk-comp bottom mid-bottom H)))
 
 module _
   { l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
@@ -332,7 +330,7 @@ module _
         ( sq-left-bottom)
         ( sq-right-bottom)))
   commutative-pasting-vertical-pasting-horizontal-coherence-square-maps =
-    ( ap-concat-htpy' _ _ _
+    ( ap-concat-htpy' _
       ( distributive-left-whisk-concat-htpy
         ( bottom-right)
         ( sq-left-bottom ·r left-top)
@@ -356,7 +354,7 @@ module _
             ( bottom-right)
             ( sq-left-top)
             ( sq-right-bottom))))) ∙h
-      ( ap-concat-htpy _ _ _
+      ( ap-concat-htpy _
         ( inv-htpy
           ( distributive-left-whisk-concat-htpy
             ( right-bottom)

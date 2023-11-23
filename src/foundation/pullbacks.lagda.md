@@ -341,8 +341,8 @@ htpy-parallel-cone-refl-htpy-htpy-cone f g (p , q , H) (p' , q' , H') =
   tot
     ( λ K → tot
       ( λ L M →
-        ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
-        ( M ∙h ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy)))
+        ( ap-concat-htpy H right-unit-htpy) ∙h
+        ( M ∙h ap-concat-htpy' H' inv-htpy-right-unit-htpy)))
 
 abstract
   is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone :
@@ -356,11 +356,11 @@ abstract
       ( λ K → is-equiv-tot-is-fiberwise-equiv
         ( λ L → is-equiv-comp
           ( concat-htpy
-            ( ap-concat-htpy H _ _ right-unit-htpy)
+            ( ap-concat-htpy H right-unit-htpy)
             ( (f ·l K) ∙h refl-htpy ∙h H'))
           ( concat-htpy'
             ( H ∙h (g ·l L))
-            ( ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy))
+            ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
           ( is-equiv-concat-htpy'
             ( H ∙h (g ·l L))
             ( λ x → ap (λ z → z ∙ H' x) (inv right-unit)))
@@ -897,10 +897,8 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
           ( inv-htpy c) ∙h
           ( assoc-htpy (h ·l back-left) (front-left ·r f') (hD ·l top)) ∙h
           ( ap-concat-htpy'
-            ( h ·l back-left)
-            ( (h ·l back-left) ∙h refl-htpy)
             ( (front-left ·r f') ∙h (hD ·l top))
-            ( inv-htpy-right-unit-htpy))))
+            ( inv-htpy-right-unit-htpy {H = h ·l back-left}))))
       ( is-pullback-rectangle-is-pullback-top h k hC
         ( f , g , bottom)
         ( hA , g' , back-right)
