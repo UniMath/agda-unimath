@@ -30,7 +30,7 @@ A triangle of [identifications](foundation-core.identity-types.md)
 ```
 
 is said to **commute** if there is a higher identification between the `x ＝ z`
-and and the composite identification `x ＝ y ＝ z`.
+and the concatenated identification `x ＝ y ＝ z`.
 
 ## Definition
 

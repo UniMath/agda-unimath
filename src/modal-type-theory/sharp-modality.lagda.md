@@ -45,17 +45,17 @@ axioms, and they may be subject to change in the future.
 postulate
   ♯ : {l : Level} (A : UU l) → UU l
 
-  @♭ unit-♯ : {l : Level} {A : UU l} → A → ♯ A
+  @♭ unit-sharp : {l : Level} {A : UU l} → A → ♯ A
 
-  ind-♯ :
+  ind-sharp :
     {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
-    ((x : A) → ♯ (C (unit-♯ x))) →
+    ((x : A) → ♯ (C (unit-sharp x))) →
     ((x : ♯ A) → ♯ (C x))
 
-  compute-ind-♯ :
+  compute-ind-sharp :
     {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2)
-    (f : (x : A) → ♯ (C (unit-♯ x))) →
-    (ind-♯ C f ∘ unit-♯) ~ f
+    (f : (x : A) → ♯ (C (unit-sharp x))) →
+    (ind-sharp C f ∘ unit-sharp) ~ f
 ```
 
 ## Definitions
@@ -63,130 +63,130 @@ postulate
 ### The sharp modal operator
 
 ```agda
-♯-locally-small-operator-modality :
+sharp-locally-small-operator-modality :
   (l : Level) → locally-small-operator-modality l l l
-pr1 (♯-locally-small-operator-modality l) = ♯ {l}
-pr2 (♯-locally-small-operator-modality l) A = is-locally-small' {l} {♯ A}
+pr1 (sharp-locally-small-operator-modality l) = ♯ {l}
+pr2 (sharp-locally-small-operator-modality l) A = is-locally-small' {l} {♯ A}
 ```
 
 ### The sharp induction principle
 
 ```agda
-induction-principle-♯ : {l : Level} → induction-principle-modality {l} unit-♯
-pr1 (induction-principle-♯ P) = ind-♯ P
-pr2 (induction-principle-♯ P) = compute-ind-♯ P
+induction-principle-sharp : {l : Level} → induction-principle-modality {l} unit-sharp
+pr1 (induction-principle-sharp P) = ind-sharp P
+pr2 (induction-principle-sharp P) = compute-ind-sharp P
 
-strong-induction-principle-subuniverse-♯ :
-  {l : Level} → strong-induction-principle-subuniverse-modality {l} unit-♯
-strong-induction-principle-subuniverse-♯ =
+strong-induction-principle-subuniverse-sharp :
+  {l : Level} → strong-induction-principle-subuniverse-modality {l} unit-sharp
+strong-induction-principle-subuniverse-sharp =
   strong-induction-principle-subuniverse-induction-principle-modality
-    ( unit-♯)
-    ( induction-principle-♯)
+    ( unit-sharp)
+    ( induction-principle-sharp)
 
-strong-ind-subuniverse-♯ :
-  {l : Level} → strong-ind-subuniverse-modality {l} unit-♯
-strong-ind-subuniverse-♯ =
+strong-ind-subuniverse-sharp :
+  {l : Level} → strong-ind-subuniverse-modality {l} unit-sharp
+strong-ind-subuniverse-sharp =
   strong-ind-strong-induction-principle-subuniverse-modality
-    ( unit-♯)
-    ( strong-induction-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( strong-induction-principle-subuniverse-sharp)
 
-compute-strong-ind-subuniverse-♯ :
+compute-strong-ind-subuniverse-sharp :
   {l : Level} →
-  compute-strong-ind-subuniverse-modality {l} unit-♯ strong-ind-subuniverse-♯
-compute-strong-ind-subuniverse-♯ =
+  compute-strong-ind-subuniverse-modality {l} unit-sharp strong-ind-subuniverse-sharp
+compute-strong-ind-subuniverse-sharp =
   compute-strong-ind-strong-induction-principle-subuniverse-modality
-    ( unit-♯)
-    ( strong-induction-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( strong-induction-principle-subuniverse-sharp)
 
-induction-principle-subuniverse-♯ :
-  {l : Level} → induction-principle-subuniverse-modality {l} unit-♯
-induction-principle-subuniverse-♯ =
+induction-principle-subuniverse-sharp :
+  {l : Level} → induction-principle-subuniverse-modality {l} unit-sharp
+induction-principle-subuniverse-sharp =
   induction-principle-subuniverse-induction-principle-modality
-    ( unit-♯)
-    ( induction-principle-♯)
+    ( unit-sharp)
+    ( induction-principle-sharp)
 
-ind-subuniverse-♯ :
-  {l : Level} → ind-subuniverse-modality {l} unit-♯
-ind-subuniverse-♯ =
+ind-subuniverse-sharp :
+  {l : Level} → ind-subuniverse-modality {l} unit-sharp
+ind-subuniverse-sharp =
   ind-induction-principle-subuniverse-modality
-    ( unit-♯)
-    ( induction-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( induction-principle-subuniverse-sharp)
 
-compute-ind-subuniverse-♯ :
-  {l : Level} → compute-ind-subuniverse-modality {l} unit-♯ ind-subuniverse-♯
-compute-ind-subuniverse-♯ =
+compute-ind-subuniverse-sharp :
+  {l : Level} → compute-ind-subuniverse-modality {l} unit-sharp ind-subuniverse-sharp
+compute-ind-subuniverse-sharp =
   compute-ind-induction-principle-subuniverse-modality
-    ( unit-♯)
-    ( induction-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( induction-principle-subuniverse-sharp)
 ```
 
 ### Sharp recursion
 
 ```agda
-rec-♯ :
+rec-sharp :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A → ♯ B) → (♯ A → ♯ B)
-rec-♯ {B = B} = ind-♯ (λ _ → B)
+rec-sharp {B = B} = ind-sharp (λ _ → B)
 
-compute-rec-♯ :
+compute-rec-sharp :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → ♯ B) →
-  (rec-♯ f ∘ unit-♯) ~ f
-compute-rec-♯ {B = B} = compute-ind-♯ (λ _ → B)
+  (rec-sharp f ∘ unit-sharp) ~ f
+compute-rec-sharp {B = B} = compute-ind-sharp (λ _ → B)
 
-recursion-principle-♯ : {l : Level} → recursion-principle-modality {l} unit-♯
-pr1 (recursion-principle-♯) = rec-♯
-pr2 (recursion-principle-♯) = compute-rec-♯
+recursion-principle-sharp : {l : Level} → recursion-principle-modality {l} unit-sharp
+pr1 (recursion-principle-sharp) = rec-sharp
+pr2 (recursion-principle-sharp) = compute-rec-sharp
 
-strong-recursion-principle-subuniverse-♯ :
-  {l : Level} → strong-recursion-principle-subuniverse-modality {l} unit-♯
-strong-recursion-principle-subuniverse-♯ =
+strong-recursion-principle-subuniverse-sharp :
+  {l : Level} → strong-recursion-principle-subuniverse-modality {l} unit-sharp
+strong-recursion-principle-subuniverse-sharp =
   strong-recursion-principle-subuniverse-recursion-principle-modality
-    ( unit-♯)
-    ( recursion-principle-♯)
+    ( unit-sharp)
+    ( recursion-principle-sharp)
 
-strong-rec-subuniverse-♯ :
-  {l : Level} → strong-rec-subuniverse-modality {l} unit-♯
-strong-rec-subuniverse-♯ =
+strong-rec-subuniverse-sharp :
+  {l : Level} → strong-rec-subuniverse-modality {l} unit-sharp
+strong-rec-subuniverse-sharp =
   strong-rec-strong-recursion-principle-subuniverse-modality
-    ( unit-♯)
-    ( strong-recursion-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( strong-recursion-principle-subuniverse-sharp)
 
-compute-strong-rec-subuniverse-♯ :
+compute-strong-rec-subuniverse-sharp :
   {l : Level} →
-  compute-strong-rec-subuniverse-modality {l} unit-♯ strong-rec-subuniverse-♯
-compute-strong-rec-subuniverse-♯ =
+  compute-strong-rec-subuniverse-modality {l} unit-sharp strong-rec-subuniverse-sharp
+compute-strong-rec-subuniverse-sharp =
   compute-strong-rec-strong-recursion-principle-subuniverse-modality
-    ( unit-♯)
-    ( strong-recursion-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( strong-recursion-principle-subuniverse-sharp)
 
-recursion-principle-subuniverse-♯ :
-  {l : Level} → recursion-principle-subuniverse-modality {l} unit-♯
-recursion-principle-subuniverse-♯ =
+recursion-principle-subuniverse-sharp :
+  {l : Level} → recursion-principle-subuniverse-modality {l} unit-sharp
+recursion-principle-subuniverse-sharp =
   recursion-principle-subuniverse-recursion-principle-modality
-    ( unit-♯)
-    ( recursion-principle-♯)
+    ( unit-sharp)
+    ( recursion-principle-sharp)
 
-rec-subuniverse-♯ :
-  {l : Level} → rec-subuniverse-modality {l} unit-♯
-rec-subuniverse-♯ =
+rec-subuniverse-sharp :
+  {l : Level} → rec-subuniverse-modality {l} unit-sharp
+rec-subuniverse-sharp =
   rec-recursion-principle-subuniverse-modality
-    ( unit-♯)
-    ( recursion-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( recursion-principle-subuniverse-sharp)
 
-compute-rec-subuniverse-♯ :
-  {l : Level} → compute-rec-subuniverse-modality {l} unit-♯ rec-subuniverse-♯
-compute-rec-subuniverse-♯ =
+compute-rec-subuniverse-sharp :
+  {l : Level} → compute-rec-subuniverse-modality {l} unit-sharp rec-subuniverse-sharp
+compute-rec-subuniverse-sharp =
   compute-rec-recursion-principle-subuniverse-modality
-    ( unit-♯)
-    ( recursion-principle-subuniverse-♯)
+    ( unit-sharp)
+    ( recursion-principle-subuniverse-sharp)
 ```
 
 ### Action on maps
 
 ```agda
-ap-♯ : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
-ap-♯ f = rec-♯ (unit-♯ ∘ f)
+ap-sharp : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
+ap-sharp f = rec-sharp (unit-sharp ∘ f)
 ```
 
 ## See also

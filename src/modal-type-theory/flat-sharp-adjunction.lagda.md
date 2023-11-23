@@ -55,34 +55,34 @@ Codiscrete types are local at the flat counit.
 
 ```agda
 postulate
-  crisp-ind-♯ :
+  crisp-ind-sharp :
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
     ((x : A) → is-codiscrete (C x)) →
     ((@♭ x : A) → C x) → (x : A) → C x
 
-  compute-crisp-ind-♯ :
+  compute-crisp-ind-sharp :
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
     (is-codiscrete-C : (x : A) → is-codiscrete (C x))
     (f : (@♭ x : A) → C x) →
-    (@♭ x : A) → crisp-ind-♯ C is-codiscrete-C f x ＝ f x
+    (@♭ x : A) → crisp-ind-sharp C is-codiscrete-C f x ＝ f x
 ```
 
 ### Crisp elimination of `♯`
 
 ```agda
 postulate
-  crisp-elim-♯ :
+  crisp-elim-sharp :
     {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
 
-  compute-crisp-elim-♯ :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) → (crisp-elim-♯ (unit-♯ x)) ＝ x
+  compute-crisp-elim-sharp :
+    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) → (crisp-elim-sharp (unit-sharp x)) ＝ x
 
-  uniqueness-crisp-elim-♯ :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) → unit-♯ (crisp-elim-♯ x) ＝ x
+  uniqueness-crisp-elim-sharp :
+    {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) → unit-sharp (crisp-elim-sharp x) ＝ x
 
-  coherence-uniqueness-crisp-elim-♯ :
+  coherence-uniqueness-crisp-elim-sharp :
     {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
-    uniqueness-crisp-elim-♯ (unit-♯ x) ＝ ap unit-♯ (compute-crisp-elim-♯ x)
+    uniqueness-crisp-elim-sharp (unit-sharp x) ＝ ap unit-sharp (compute-crisp-elim-sharp x)
 ```
 
 ## Definitions
@@ -90,20 +90,20 @@ postulate
 ### Crisp recursion for `♯`
 
 ```agda
-crisp-rec-♯ :
+crisp-rec-sharp :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2) →
   (is-codiscrete C) →
   ((@♭ x : A) → C) → A → C
-crisp-rec-♯ C is-codiscrete-C =
-  crisp-ind-♯ (λ _ → C) (λ _ → is-codiscrete-C)
+crisp-rec-sharp C is-codiscrete-C =
+  crisp-ind-sharp (λ _ → C) (λ _ → is-codiscrete-C)
 
-compute-crisp-rec-♯ :
+compute-crisp-rec-sharp :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2)
   (is-codiscrete-C : is-codiscrete C)
   (f : (@♭ x : A) → C) →
-  (@♭ x : A) → crisp-rec-♯ C is-codiscrete-C f x ＝ f x
-compute-crisp-rec-♯ C is-codiscrete-C =
-  compute-crisp-ind-♯ (λ _ → C) (λ _ → is-codiscrete-C)
+  (@♭ x : A) → crisp-rec-sharp C is-codiscrete-C f x ＝ f x
+compute-crisp-rec-sharp C is-codiscrete-C =
+  compute-crisp-ind-sharp (λ _ → C) (λ _ → is-codiscrete-C)
 ```
 
 ## Properties
@@ -111,28 +111,28 @@ compute-crisp-rec-♯ C is-codiscrete-C =
 ```agda
 crisp-tr-sharp :
   {@♭ l : Level} {@♭ A : UU l} {B : UU l} → (p : A ＝ B) →
-  {@♭ x : ♯ A} → unit-♯ (tr (λ X → X) p (crisp-elim-♯ x)) ＝ tr ♯ p x
-crisp-tr-sharp refl {x} = uniqueness-crisp-elim-♯ x
+  {@♭ x : ♯ A} → unit-sharp (tr (λ X → X) p (crisp-elim-sharp x)) ＝ tr ♯ p x
+crisp-tr-sharp refl {x} = uniqueness-crisp-elim-sharp x
 ```
 
 ### Crisp induction on `♯` implies typal induction
 
 ```agda
-ind-crisp-ind-♯ :
+ind-crisp-ind-sharp :
   {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
-  ((x : ♯ A) → is-codiscrete (C x)) → ((x : A) → C (unit-♯ x)) → (x : ♯ A) → C x
-ind-crisp-ind-♯ {A = A} C is-codiscrete-C f x' =
-  crisp-ind-♯
+  ((x : ♯ A) → is-codiscrete (C x)) → ((x : A) → C (unit-sharp x)) → (x : ♯ A) → C x
+ind-crisp-ind-sharp {A = A} C is-codiscrete-C f x' =
+  crisp-ind-sharp
     ( λ X → (x : ♯ X) (p : X ＝ A) → C (tr ♯ p x))
     ( λ x →
       is-codiscrete-Π
         ( λ y → is-codiscrete-Π
           ( λ p → is-codiscrete-C (tr ♯ p y))))
     ( λ A' →
-      crisp-ind-♯
+      crisp-ind-sharp
         ( λ y → (p : A' ＝ A) → C (tr ♯ p y))
         ( λ y → is-codiscrete-Π (λ p → is-codiscrete-C (tr ♯ p y)))
-        ( λ x p → tr C (crisp-tr-sharp p) (f (tr id p (crisp-elim-♯ x)))))
+        ( λ x p → tr C (crisp-tr-sharp p) (f (tr id p (crisp-elim-sharp x)))))
     ( A)
     ( x')
     ( refl)
@@ -141,15 +141,15 @@ ind-crisp-ind-♯ {A = A} C is-codiscrete-C f x' =
 The accompanying computation principle remains to be fully formalized.
 
 ```text
-compute-ind-crisp-ind-♯ :
+compute-ind-crisp-ind-sharp :
   {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
   (is-codiscrete-C : (x : ♯ A) → is-codiscrete (C x)) →
-  (f : (x : A) → C (unit-♯ x)) → (x : A) →
-  ind-crisp-ind-♯ C is-codiscrete-C f (unit-♯ x) ＝ f x
-compute-ind-crisp-ind-♯ {A = A} C is-codiscrete-C f x =
-  crisp-ind-♯
+  (f : (x : A) → C (unit-sharp x)) → (x : A) →
+  ind-crisp-ind-sharp C is-codiscrete-C f (unit-sharp x) ＝ f x
+compute-ind-crisp-ind-sharp {A = A} C is-codiscrete-C f x =
+  crisp-ind-sharp
     ( λ X → (x : X) (p : X ＝ A) →
-      ind-crisp-ind-♯ {!   !} {!   !} {!   !} {!   !})
+      ind-crisp-ind-sharp {!   !} {!   !} {!   !} {!   !})
     ( {!   !})
     {!   !}
     ( A)
@@ -164,39 +164,39 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  ap-♭-elim-♯ : ♭ (♯ A) → ♭ A
-  ap-♭-elim-♯ = crisp-ap-♭ crisp-elim-♯
+  ap-♭-elim-sharp : ♭ (♯ A) → ♭ A
+  ap-♭-elim-sharp = crisp-ap-♭ crisp-elim-sharp
 
-  ap-♭-unit-♯ : ♭ A → ♭ (♯ A)
-  ap-♭-unit-♯ = ap-♭ unit-♯
+  ap-♭-unit-sharp : ♭ A → ♭ (♯ A)
+  ap-♭-unit-sharp = ap-♭ unit-sharp
 
-  is-section-ap-♭-unit-♯ : ap-♭-elim-♯ ∘ ap-♭-unit-♯ ~ id
-  is-section-ap-♭-unit-♯ (cons-♭ x) =
-    crisp-ap cons-♭ (compute-crisp-elim-♯ x)
+  is-section-ap-♭-unit-sharp : ap-♭-elim-sharp ∘ ap-♭-unit-sharp ~ id
+  is-section-ap-♭-unit-sharp (cons-♭ x) =
+    crisp-ap cons-♭ (compute-crisp-elim-sharp x)
 
-  is-retraction-ap-♭-unit-♯ : ap-♭-unit-♯ ∘ ap-♭-elim-♯ ~ id
-  is-retraction-ap-♭-unit-♯ (cons-♭ x) =
-    crisp-ap cons-♭ (uniqueness-crisp-elim-♯ x)
+  is-retraction-ap-♭-unit-sharp : ap-♭-unit-sharp ∘ ap-♭-elim-sharp ~ id
+  is-retraction-ap-♭-unit-sharp (cons-♭ x) =
+    crisp-ap cons-♭ (uniqueness-crisp-elim-sharp x)
 
-  is-equiv-ap-♭-elim-♯ : is-equiv ap-♭-elim-♯
-  pr1 (pr1 is-equiv-ap-♭-elim-♯) = ap-♭-unit-♯
-  pr2 (pr1 is-equiv-ap-♭-elim-♯) = is-section-ap-♭-unit-♯
-  pr1 (pr2 is-equiv-ap-♭-elim-♯) = ap-♭-unit-♯
-  pr2 (pr2 is-equiv-ap-♭-elim-♯) = is-retraction-ap-♭-unit-♯
+  is-equiv-ap-♭-elim-sharp : is-equiv ap-♭-elim-sharp
+  pr1 (pr1 is-equiv-ap-♭-elim-sharp) = ap-♭-unit-sharp
+  pr2 (pr1 is-equiv-ap-♭-elim-sharp) = is-section-ap-♭-unit-sharp
+  pr1 (pr2 is-equiv-ap-♭-elim-sharp) = ap-♭-unit-sharp
+  pr2 (pr2 is-equiv-ap-♭-elim-sharp) = is-retraction-ap-♭-unit-sharp
 
-  equiv-ap-♭-elim-♯ : ♭ (♯ A) ≃ ♭ A
-  pr1 equiv-ap-♭-elim-♯ = ap-♭-elim-♯
-  pr2 equiv-ap-♭-elim-♯ = is-equiv-ap-♭-elim-♯
+  equiv-ap-♭-elim-sharp : ♭ (♯ A) ≃ ♭ A
+  pr1 equiv-ap-♭-elim-sharp = ap-♭-elim-sharp
+  pr2 equiv-ap-♭-elim-sharp = is-equiv-ap-♭-elim-sharp
 
-  is-equiv-ap-♭-unit-♯ : is-equiv ap-♭-unit-♯
-  pr1 (pr1 is-equiv-ap-♭-unit-♯) = ap-♭-elim-♯
-  pr2 (pr1 is-equiv-ap-♭-unit-♯) = is-retraction-ap-♭-unit-♯
-  pr1 (pr2 is-equiv-ap-♭-unit-♯) = ap-♭-elim-♯
-  pr2 (pr2 is-equiv-ap-♭-unit-♯) = is-section-ap-♭-unit-♯
+  is-equiv-ap-♭-unit-sharp : is-equiv ap-♭-unit-sharp
+  pr1 (pr1 is-equiv-ap-♭-unit-sharp) = ap-♭-elim-sharp
+  pr2 (pr1 is-equiv-ap-♭-unit-sharp) = is-retraction-ap-♭-unit-sharp
+  pr1 (pr2 is-equiv-ap-♭-unit-sharp) = ap-♭-elim-sharp
+  pr2 (pr2 is-equiv-ap-♭-unit-sharp) = is-section-ap-♭-unit-sharp
 
-  equiv-ap-♭-unit-♯ : ♭ A ≃ ♭ (♯ A)
-  pr1 equiv-ap-♭-unit-♯ = ap-♭-unit-♯
-  pr2 equiv-ap-♭-unit-♯ = is-equiv-ap-♭-unit-♯
+  equiv-ap-♭-unit-sharp : ♭ A ≃ ♭ (♯ A)
+  pr1 equiv-ap-♭-unit-sharp = ap-♭-unit-sharp
+  pr2 equiv-ap-♭-unit-sharp = is-equiv-ap-♭-unit-sharp
 ```
 
 ### Sharp after flat
@@ -206,34 +206,34 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  ap-♯-counit-♭ : ♯ (♭ A) → ♯ A
-  ap-♯-counit-♭ = rec-♯ (unit-♯ ∘ counit-♭)
+  ap-sharp-counit-♭ : ♯ (♭ A) → ♯ A
+  ap-sharp-counit-♭ = rec-sharp (unit-sharp ∘ counit-♭)
 
-  ap-♯-cons-♭ : ♯ A → ♯ (♭ A)
-  ap-♯-cons-♭ =
-    rec-♯
-      ( crisp-rec-♯
+  ap-sharp-cons-♭ : ♯ A → ♯ (♭ A)
+  ap-sharp-cons-♭ =
+    rec-sharp
+      ( crisp-rec-sharp
         ( ♯ (♭ A))
-        ( is-codiscrete-♯ (♭ A))
-        ( λ x → unit-♯ (cons-♭ x)))
+        ( is-codiscrete-sharp (♭ A))
+        ( λ x → unit-sharp (cons-♭ x)))
 ```
 
 It remains to show that these two are inverses to each other.
 
 ```text
-  is-section-cons-♭ : ap-♯-counit-♭ ∘ cons-♭ ~ id
+  is-section-cons-♭ : ap-sharp-counit-♭ ∘ cons-♭ ~ id
   is-section-cons-♭ =
-    ind-subuniverse-♯
+    ind-subuniverse-sharp
       ( A)
-      ( λ x → ap-♯-counit-♭ (cons-♭ x) ＝ x)
-      ( λ x → is-codiscrete-Id-♯ (ap-♯-counit-♭ (cons-♭ x)) x)
+      ( λ x → ap-sharp-counit-♭ (cons-♭ x) ＝ x)
+      ( λ x → is-codiscrete-Id-sharp (ap-sharp-counit-♭ (cons-♭ x)) x)
       ( λ x →
-          crisp-rec-♯
-            ( ap-♯-counit-♭ (cons-♭ (unit-♯ x)) ＝ unit-♯ x)
-            ( is-codiscrete-Id-♯ (ap-♯-counit-♭ (cons-♭ (unit-♯ x))) (unit-♯ x))
+          crisp-rec-sharp
+            ( ap-sharp-counit-♭ (cons-♭ (unit-sharp x)) ＝ unit-sharp x)
+            ( is-codiscrete-Id-sharp (ap-sharp-counit-♭ (cons-♭ (unit-sharp x))) (unit-sharp x))
             ( λ y →
-              compute-rec-subuniverse-♯
-                {!   !} (♯ A) {!  is-codiscrete-♯ ?  !} {!   !} {!   !})
+              compute-rec-subuniverse-sharp
+                {!   !} (♯ A) {!  is-codiscrete-sharp ?  !} {!   !} {!   !})
             {!   !})
 ```
 
@@ -242,32 +242,32 @@ It remains to show that these two are inverses to each other.
 This remains to be formalized.
 
 ```text
-map-crisp-retraction-precomp-unit-♯ :
+map-crisp-retraction-precomp-unit-sharp :
   {l1 : Level} {l2 : Level} {X : UU l1} {P : ♯ X → UU l2} →
-  ((x : ♯ X) → ♯ (P x)) → (x : X) → ♯ (P (unit-♯ x))
-map-crisp-retraction-precomp-unit-♯ {P = P} f = {!   !}
+  ((x : ♯ X) → ♯ (P x)) → (x : X) → ♯ (P (unit-sharp x))
+map-crisp-retraction-precomp-unit-sharp {P = P} f = {!   !}
 
-crisp-elim-♯' :
+crisp-elim-sharp' :
     {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
-crisp-elim-♯' {A = A} x = crisp-ind-♯ {!   !} {!   !} {!   !} {!   !}
+crisp-elim-sharp' {A = A} x = crisp-ind-sharp {!   !} {!   !} {!   !} {!   !}
 
-is-retraction-map-crisp-retraction-precomp-unit-♯ :
+is-retraction-map-crisp-retraction-precomp-unit-sharp :
   {@♭ l1 : Level} {l2 : Level} {@♭ X : UU l1} {P : ♯ X → UU l2} →
-  map-crisp-retraction-precomp-unit-♯ {X = X} {P} ∘ {! precomp-Π (unit-♯) (♯ ∘ P)  !} ~ id
-is-retraction-map-crisp-retraction-precomp-unit-♯ = {!   !}
+  map-crisp-retraction-precomp-unit-sharp {X = X} {P} ∘ {! precomp-Π (unit-sharp) (♯ ∘ P)  !} ~ id
+is-retraction-map-crisp-retraction-precomp-unit-sharp = {!   !}
 
-is-uniquely-eliminating-♯ :
-  {l : Level} → is-uniquely-eliminating-modality (unit-♯ {l})
-is-uniquely-eliminating-♯ X P .pr1 =
-  section-multivariable-section 2 (precomp-Π unit-♯ (♯ ∘ P)) (induction-principle-♯ X P)
-is-uniquely-eliminating-♯ {l} X P .pr2 .pr1 x =
-is-uniquely-eliminating-♯ X P .pr2 .pr2 f =
+is-uniquely-eliminating-sharp :
+  {l : Level} → is-uniquely-eliminating-modality (unit-sharp {l})
+is-uniquely-eliminating-sharp X P .pr1 =
+  section-multivariable-section 2 (precomp-Π unit-sharp (♯ ∘ P)) (induction-principle-sharp X P)
+is-uniquely-eliminating-sharp {l} X P .pr2 .pr1 x =
+is-uniquely-eliminating-sharp X P .pr2 .pr2 f =
   eq-htpy
   ( λ x →
     equational-reasoning
       {!   !}
       ＝ {!   !} by {!   !}
-      ＝ {!   !} by compute-crisp-ind-♯ (♯ ∘ P) {! is-codiscrete-♯ ∘ P  !} crisp-elim-♯ {! f !}
+      ＝ {!   !} by compute-crisp-ind-sharp (♯ ∘ P) {! is-codiscrete-sharp ∘ P  !} crisp-elim-sharp {! f !}
       ＝ {!   !} by {!   !})
 ```
 

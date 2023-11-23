@@ -47,7 +47,7 @@ be subject to change in the future.
 
 ```agda
 is-codiscrete : {l : Level} (A : UU l) → UU l
-is-codiscrete {l} A = is-equiv (unit-♯ {l} {A})
+is-codiscrete {l} A = is-equiv (unit-sharp {l} {A})
 
 is-codiscrete-family :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
@@ -63,7 +63,7 @@ Codiscrete l = Σ (UU l) (is-codiscrete)
 
 ```agda
 postulate
-  is-codiscrete-Id-♯ :
+  is-codiscrete-Id-sharp :
     {l1 : Level} {A : UU l1} (x y : ♯ A) → is-codiscrete (x ＝ y)
 
 is-codiscrete-Id :
@@ -72,7 +72,7 @@ is-codiscrete-Id x y is-codiscrete-A =
   map-tr-equiv
     ( is-codiscrete)
     ( inv-equiv-ap-is-emb (is-emb-is-equiv is-codiscrete-A))
-    ( is-codiscrete-Id-♯ (unit-♯ x) (unit-♯ y))
+    ( is-codiscrete-Id-sharp (unit-sharp x) (unit-sharp y))
 ```
 
 ### A `Π`-type is codiscrete if its codomain is
@@ -102,7 +102,7 @@ module _
   where
 
   is-codiscrete-Prop : Prop l
-  is-codiscrete-Prop = is-equiv-Prop (unit-♯ {l} {A})
+  is-codiscrete-Prop = is-equiv-Prop (unit-sharp {l} {A})
 
   is-property-is-codiscrete : is-prop (is-codiscrete A)
   is-property-is-codiscrete = is-prop-type-Prop is-codiscrete-Prop
@@ -125,21 +125,21 @@ module _
   (l : Level)
   where
 
-  is-higher-modality-♯ :
-    is-higher-modality (♯-locally-small-operator-modality l) (unit-♯)
-  pr1 is-higher-modality-♯ = induction-principle-♯
-  pr2 is-higher-modality-♯ X = is-codiscrete-Id-♯
+  is-higher-modality-sharp :
+    is-higher-modality (sharp-locally-small-operator-modality l) (unit-sharp)
+  pr1 is-higher-modality-sharp = induction-principle-sharp
+  pr2 is-higher-modality-sharp X = is-codiscrete-Id-sharp
 
-  ♯-higher-modality : higher-modality l l
-  pr1 ♯-higher-modality = ♯-locally-small-operator-modality l
-  pr1 (pr2 ♯-higher-modality) = unit-♯
-  pr2 (pr2 ♯-higher-modality) = is-higher-modality-♯
+  sharp-higher-modality : higher-modality l l
+  pr1 sharp-higher-modality = sharp-locally-small-operator-modality l
+  pr1 (pr2 sharp-higher-modality) = unit-sharp
+  pr2 (pr2 sharp-higher-modality) = is-higher-modality-sharp
 ```
 
 ### Types in the image of `♯` are codiscrete
 
 ```agda
-is-codiscrete-♯ : {l : Level} (X : UU l) → is-codiscrete (♯ X)
-is-codiscrete-♯ {l} =
-  is-modal-operator-type-higher-modality (♯-higher-modality l)
+is-codiscrete-sharp : {l : Level} (X : UU l) → is-codiscrete (♯ X)
+is-codiscrete-sharp {l} =
+  is-modal-operator-type-higher-modality (sharp-higher-modality l)
 ```
