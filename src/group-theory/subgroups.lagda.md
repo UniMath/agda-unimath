@@ -565,9 +565,9 @@ module _
   is-prop-right-sim-Subgroup x y =
     is-prop-is-in-Subgroup G H (left-div-Group G x y)
 
-  prop-right-eq-rel-Subgroup : (x y : type-Group G) → Prop l2
-  pr1 (prop-right-eq-rel-Subgroup x y) = right-sim-Subgroup x y
-  pr2 (prop-right-eq-rel-Subgroup x y) =
+  prop-right-equivalence-relation-Subgroup : (x y : type-Group G) → Prop l2
+  pr1 (prop-right-equivalence-relation-Subgroup x y) = right-sim-Subgroup x y
+  pr2 (prop-right-equivalence-relation-Subgroup x y) =
     is-prop-right-sim-Subgroup x y
 
   refl-right-sim-Subgroup : is-reflexive right-sim-Subgroup
@@ -593,11 +593,14 @@ module _
         ( q)
         ( p))
 
-  right-eq-rel-Subgroup : Equivalence-Relation l2 (type-Group G)
-  pr1 right-eq-rel-Subgroup = prop-right-eq-rel-Subgroup
-  pr1 (pr2 right-eq-rel-Subgroup) = refl-right-sim-Subgroup
-  pr1 (pr2 (pr2 right-eq-rel-Subgroup)) = symmetric-right-sim-Subgroup
-  pr2 (pr2 (pr2 right-eq-rel-Subgroup)) = transitive-right-sim-Subgroup
+  right-equivalence-relation-Subgroup : equivalence-relation l2 (type-Group G)
+  pr1 right-equivalence-relation-Subgroup =
+    prop-right-equivalence-relation-Subgroup
+  pr1 (pr2 right-equivalence-relation-Subgroup) = refl-right-sim-Subgroup
+  pr1 (pr2 (pr2 right-equivalence-relation-Subgroup)) =
+    symmetric-right-sim-Subgroup
+  pr2 (pr2 (pr2 right-equivalence-relation-Subgroup)) =
+    transitive-right-sim-Subgroup
 ```
 
 #### The equivalence relation where `x ~ y` if and only if `xy⁻¹ ∈ H`
@@ -615,9 +618,9 @@ module _
   is-prop-left-sim-Subgroup x y =
     is-prop-is-in-Subgroup G H (right-div-Group G x y)
 
-  prop-left-eq-rel-Subgroup : (x y : type-Group G) → Prop l2
-  pr1 (prop-left-eq-rel-Subgroup x y) = left-sim-Subgroup x y
-  pr2 (prop-left-eq-rel-Subgroup x y) =
+  prop-left-equivalence-relation-Subgroup : (x y : type-Group G) → Prop l2
+  pr1 (prop-left-equivalence-relation-Subgroup x y) = left-sim-Subgroup x y
+  pr2 (prop-left-equivalence-relation-Subgroup x y) =
     is-prop-left-sim-Subgroup x y
 
   refl-left-sim-Subgroup : is-reflexive left-sim-Subgroup
@@ -641,11 +644,14 @@ module _
       ( mul-right-div-Group G x y z)
       ( is-closed-under-multiplication-Subgroup G H q p)
 
-  left-eq-rel-Subgroup : Equivalence-Relation l2 (type-Group G)
-  pr1 left-eq-rel-Subgroup = prop-left-eq-rel-Subgroup
-  pr1 (pr2 left-eq-rel-Subgroup) = refl-left-sim-Subgroup
-  pr1 (pr2 (pr2 left-eq-rel-Subgroup)) = symmetric-left-sim-Subgroup
-  pr2 (pr2 (pr2 left-eq-rel-Subgroup)) = transitive-left-sim-Subgroup
+  left-equivalence-relation-Subgroup : equivalence-relation l2 (type-Group G)
+  pr1 left-equivalence-relation-Subgroup =
+    prop-left-equivalence-relation-Subgroup
+  pr1 (pr2 left-equivalence-relation-Subgroup) = refl-left-sim-Subgroup
+  pr1 (pr2 (pr2 left-equivalence-relation-Subgroup)) =
+    symmetric-left-sim-Subgroup
+  pr2 (pr2 (pr2 left-equivalence-relation-Subgroup)) =
+    transitive-left-sim-Subgroup
 ```
 
 ### Any proposition `P` induces a subgroup of any group `G`

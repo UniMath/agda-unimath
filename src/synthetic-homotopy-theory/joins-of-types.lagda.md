@@ -346,17 +346,24 @@ module _
         ( λ _ → eq-is-prop (is-prop-type-disj-Prop A B))
         ( pair
           ( λ _ → eq-is-prop (is-prop-type-disj-Prop A B))
-          ( λ (a , b) → eq-is-contr
-            ( is-prop-type-disj-Prop A B
-              ( horizontal-map-cocone pr1 pr2
-                ( cocone-map pr1 pr2
-                  ( cocone-join (pr1 A) (pr1 B))
-                  ( map-disj-join-Prop))
-                ( a))
-              ( vertical-map-cocone pr1 pr2 cocone-disj b)))))
+          ( λ (a , b) →
+            eq-is-contr
+              ( is-prop-type-disj-Prop A B
+                ( horizontal-map-cocone pr1 pr2
+                  ( cocone-map pr1 pr2
+                    ( cocone-join (pr1 A) (pr1 B))
+                    ( map-disj-join-Prop))
+                  ( a))
+                ( vertical-map-cocone pr1 pr2 cocone-disj b)))))
       ( is-equiv-map-disj-join-Prop)
       ( up-join (pr1 A) (pr1 B))
 ```
+
+## See also
+
+- [Joins of maps](synthetic-homotopy-theory.joins-of-maps.md)
+- [Pushout-products](synthetic-homotopy-theory.pushout-products.md)
+- [Dependent pushout-products](synthetic-homotopy-theory.dependent-pushout-products.md)
 
 ## References
 

@@ -88,10 +88,10 @@ module _
       congruence-saturated-congruence-Commutative-Monoid
   is-saturated-saturated-congruence-Commutative-Monoid = pr2 R
 
-  eq-rel-saturated-congruence-Commutative-Monoid :
-    Equivalence-Relation l2 (type-Commutative-Monoid M)
-  eq-rel-saturated-congruence-Commutative-Monoid =
-    eq-rel-congruence-Commutative-Monoid M
+  equivalence-relation-saturated-congruence-Commutative-Monoid :
+    equivalence-relation l2 (type-Commutative-Monoid M)
+  equivalence-relation-saturated-congruence-Commutative-Monoid =
+    equivalence-relation-congruence-Commutative-Monoid M
       congruence-saturated-congruence-Commutative-Monoid
 
   prop-saturated-congruence-Commutative-Monoid :
@@ -165,7 +165,7 @@ module _
 
   mul-saturated-congruence-Commutative-Monoid :
     is-congruence-Commutative-Monoid M
-      eq-rel-saturated-congruence-Commutative-Monoid
+      equivalence-relation-saturated-congruence-Commutative-Monoid
   mul-saturated-congruence-Commutative-Monoid =
     mul-congruence-Commutative-Monoid M
       congruence-saturated-congruence-Commutative-Monoid
@@ -237,11 +237,12 @@ pr1 (extensionality-saturated-congruence-Commutative-Monoid M R S) =
 pr2 (extensionality-saturated-congruence-Commutative-Monoid M R S) =
   is-equiv-relate-same-elements-eq-saturated-congruence-Commutative-Monoid M R S
 
-eq-relate-same-elements-saturated-congruence-Commutative-Monoid :
+equivalence-relationate-same-elements-saturated-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R S : saturated-congruence-Commutative-Monoid l2 M) →
   relate-same-elements-saturated-congruence-Commutative-Monoid M R S → R ＝ S
-eq-relate-same-elements-saturated-congruence-Commutative-Monoid M R S =
+equivalence-relationate-same-elements-saturated-congruence-Commutative-Monoid
+  M R S =
   map-inv-equiv (extensionality-saturated-congruence-Commutative-Monoid M R S)
 ```
 
