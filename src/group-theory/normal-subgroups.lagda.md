@@ -421,16 +421,16 @@ module _
   prop-congruence-Normal-Subgroup :
     (x y : type-Group G) → Prop l2
   prop-congruence-Normal-Subgroup =
-    prop-right-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
+    prop-right-equivalence-relation-Subgroup G (subgroup-Normal-Subgroup G N)
 ```
 
 #### The left equivalence relation obtained from a normal subgroup
 
 ```agda
-  left-eq-rel-congruence-Normal-Subgroup :
-    Equivalence-Relation l2 (type-Group G)
-  left-eq-rel-congruence-Normal-Subgroup =
-    left-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
+  left-equivalence-relation-congruence-Normal-Subgroup :
+    equivalence-relation l2 (type-Group G)
+  left-equivalence-relation-congruence-Normal-Subgroup =
+    left-equivalence-relation-Subgroup G (subgroup-Normal-Subgroup G N)
 
   left-sim-congruence-Normal-Subgroup :
     type-Group G → type-Group G → UU l2
@@ -484,21 +484,21 @@ module _
   transitive-congruence-Normal-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  eq-rel-congruence-Normal-Subgroup : Equivalence-Relation l2 (type-Group G)
-  eq-rel-congruence-Normal-Subgroup =
-    right-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
+  equivalence-relation-congruence-Normal-Subgroup : equivalence-relation l2 (type-Group G)
+  equivalence-relation-congruence-Normal-Subgroup =
+    right-equivalence-relation-Subgroup G (subgroup-Normal-Subgroup G N)
 
   relate-same-elements-left-sim-congruence-Normal-Subgroup :
-    relate-same-elements-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup)
-      ( left-eq-rel-congruence-Normal-Subgroup)
+    relate-same-elements-equivalence-relation
+      ( equivalence-relation-congruence-Normal-Subgroup)
+      ( left-equivalence-relation-congruence-Normal-Subgroup)
   pr1 (relate-same-elements-left-sim-congruence-Normal-Subgroup x y) =
     left-sim-sim-congruence-Normal-Subgroup x y
   pr2 (relate-same-elements-left-sim-congruence-Normal-Subgroup x y) =
     sim-left-sim-congruence-Normal-Subgroup x y
 
   mul-congruence-Normal-Subgroup :
-    is-congruence-Group G eq-rel-congruence-Normal-Subgroup
+    is-congruence-Group G equivalence-relation-congruence-Normal-Subgroup
   mul-congruence-Normal-Subgroup
     {x} {x'} {y} {y'} p q =
     is-closed-under-eq-Normal-Subgroup G N
@@ -519,7 +519,7 @@ module _
           ( y')))
 
   congruence-Normal-Subgroup : congruence-Group l2 G
-  pr1 congruence-Normal-Subgroup = eq-rel-congruence-Normal-Subgroup
+  pr1 congruence-Normal-Subgroup = equivalence-relation-congruence-Normal-Subgroup
   pr2 congruence-Normal-Subgroup =
     mul-congruence-Normal-Subgroup
 
@@ -665,7 +665,7 @@ is-section-normal-subgroup-congruence-Group :
     ( normal-subgroup-congruence-Group G R)) ＝
   ( R)
 is-section-normal-subgroup-congruence-Group G R =
-  eq-relate-same-elements-congruence-Group G
+  equivalence-relationate-same-elements-congruence-Group G
     ( congruence-Normal-Subgroup G
       ( normal-subgroup-congruence-Group G R))
     ( R)

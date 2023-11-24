@@ -265,18 +265,18 @@ module _
     is-transitive sim-congruence-Normal-Submonoid
   transitive-congruence-Normal-Submonoid _ _ _ H K u v = (H u v) ∘iff (K u v)
 
-  eq-rel-congruence-Normal-Submonoid :
-    Equivalence-Relation (l1 ⊔ l2) (type-Monoid M)
-  pr1 eq-rel-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
-  pr1 (pr2 eq-rel-congruence-Normal-Submonoid) =
+  equivalence-relation-congruence-Normal-Submonoid :
+    equivalence-relation (l1 ⊔ l2) (type-Monoid M)
+  pr1 equivalence-relation-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
+  pr1 (pr2 equivalence-relation-congruence-Normal-Submonoid) =
     refl-congruence-Normal-Submonoid
-  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Submonoid)) =
+  pr1 (pr2 (pr2 equivalence-relation-congruence-Normal-Submonoid)) =
     symmetric-congruence-Normal-Submonoid
-  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Submonoid)) =
+  pr2 (pr2 (pr2 equivalence-relation-congruence-Normal-Submonoid)) =
     transitive-congruence-Normal-Submonoid
 
   is-congruence-congruence-Normal-Submonoid :
-    is-congruence-Monoid M eq-rel-congruence-Normal-Submonoid
+    is-congruence-Monoid M equivalence-relation-congruence-Normal-Submonoid
   pr1 (is-congruence-congruence-Normal-Submonoid {x} {x'} {y} {y'} H K u v) L =
     is-closed-under-eq-Normal-Submonoid M N
       ( forward-implication
@@ -303,7 +303,7 @@ module _
         ( ap (mul-Monoid' M v) (associative-mul-Monoid M u x y)))
 
   congruence-Normal-Submonoid : congruence-Monoid (l1 ⊔ l2) M
-  pr1 congruence-Normal-Submonoid = eq-rel-congruence-Normal-Submonoid
+  pr1 congruence-Normal-Submonoid = equivalence-relation-congruence-Normal-Submonoid
   pr2 congruence-Normal-Submonoid = is-congruence-congruence-Normal-Submonoid
 ```
 
@@ -546,7 +546,7 @@ is-retraction-saturated-congruence-Normal-Submonoid :
     ( normal-submonoid-saturated-congruence-Monoid M R)) ＝
   ( R)
 is-retraction-saturated-congruence-Normal-Submonoid l2 M R =
-  eq-relate-same-elements-saturated-congruence-Monoid M
+  equivalence-relationate-same-elements-saturated-congruence-Monoid M
     ( saturated-congruence-Normal-Submonoid M
       ( normal-submonoid-saturated-congruence-Monoid M R))
     ( R)

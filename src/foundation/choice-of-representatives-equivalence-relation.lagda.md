@@ -36,13 +36,13 @@ we can construct the set quotient as a retract of the original type.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
+  {l1 l2 l3 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where
 
   is-choice-of-representatives :
     (A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   is-choice-of-representatives P =
-    (a : A) → is-contr (Σ A (λ x → P x × sim-Equivalence-Relation R a x))
+    (a : A) → is-contr (Σ A (λ x → P x × sim-equivalence-relation R a x))
 
   representatives :
     {P : A → UU l3} → is-choice-of-representatives P → UU (l1 ⊔ l3)
@@ -67,13 +67,13 @@ module _
             ( pair
               ( pair (pr1 (center (H a))) (pr1 (pr2 (center (H a)))))
               ( ( apply-effectiveness-class' R
-                  ( symmetric-Equivalence-Relation R _ _
+                  ( symmetric-equivalence-relation R _ _
                     ( pr2 (pr2 (center (H a)))))) ∙
                 ( eq-class-equivalence-class R
                   ( pair Q K)
                   ( backward-implication
                     ( φ a)
-                    ( refl-Equivalence-Relation R _))))))
+                    ( refl-equivalence-relation R _))))))
 
   abstract
     is-emb-class-representatives :
@@ -82,8 +82,8 @@ module _
     is-emb-class-representatives {P} H (pair a p) =
       fundamental-theorem-id
         ( is-contr-equiv
-          ( Σ A (λ x → P x × sim-Equivalence-Relation R a x))
-          ( ( associative-Σ A P (λ z → sim-Equivalence-Relation R a (pr1 z))) ∘e
+          ( Σ A (λ x → P x × sim-equivalence-relation R a x))
+          ( ( associative-Σ A P (λ z → sim-equivalence-relation R a (pr1 z))) ∘e
             ( equiv-tot
               ( λ t →
                 is-effective-class R a (pr1 t))))

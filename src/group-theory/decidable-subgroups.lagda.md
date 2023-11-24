@@ -373,10 +373,10 @@ module _
   is-prop-right-sim-Decidable-Subgroup =
     is-prop-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  prop-right-eq-rel-Decidable-Subgroup :
+  prop-right-equivalence-relation-Decidable-Subgroup :
     (x y : type-Group G) → Prop l2
-  prop-right-eq-rel-Decidable-Subgroup =
-    prop-right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  prop-right-equivalence-relation-Decidable-Subgroup =
+    prop-right-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   refl-right-sim-Decidable-Subgroup :
     is-reflexive right-sim-Decidable-Subgroup
@@ -393,9 +393,9 @@ module _
   transitive-right-sim-Decidable-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  right-eq-rel-Decidable-Subgroup : Equivalence-Relation l2 (type-Group G)
-  right-eq-rel-Decidable-Subgroup =
-    right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  right-equivalence-relation-Decidable-Subgroup : equivalence-relation l2 (type-Group G)
+  right-equivalence-relation-Decidable-Subgroup =
+    right-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```
 
 #### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`
@@ -414,9 +414,9 @@ module _
   is-prop-left-sim-Decidable-Subgroup =
     is-prop-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  prop-left-eq-rel-Decidable-Subgroup : (x y : type-Group G) → Prop l2
-  prop-left-eq-rel-Decidable-Subgroup =
-    prop-left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  prop-left-equivalence-relation-Decidable-Subgroup : (x y : type-Group G) → Prop l2
+  prop-left-equivalence-relation-Decidable-Subgroup =
+    prop-left-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   refl-left-sim-Decidable-Subgroup :
     is-reflexive left-sim-Decidable-Subgroup
@@ -433,7 +433,7 @@ module _
   transitive-left-sim-Decidable-Subgroup =
     transitive-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  left-eq-rel-Decidable-Subgroup : Equivalence-Relation l2 (type-Group G)
-  left-eq-rel-Decidable-Subgroup =
-    left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
+  left-equivalence-relation-Decidable-Subgroup : equivalence-relation l2 (type-Group G)
+  left-equivalence-relation-Decidable-Subgroup =
+    left-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```

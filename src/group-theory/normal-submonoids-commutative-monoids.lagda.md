@@ -306,20 +306,20 @@ module _
   transitive-congruence-Normal-Commutative-Submonoid _ _ _ H K u =
     (H u) ∘iff (K u)
 
-  eq-rel-congruence-Normal-Commutative-Submonoid :
-    Equivalence-Relation (l1 ⊔ l2) (type-Commutative-Monoid M)
-  pr1 eq-rel-congruence-Normal-Commutative-Submonoid =
+  equivalence-relation-congruence-Normal-Commutative-Submonoid :
+    equivalence-relation (l1 ⊔ l2) (type-Commutative-Monoid M)
+  pr1 equivalence-relation-congruence-Normal-Commutative-Submonoid =
     rel-congruence-Normal-Commutative-Submonoid
-  pr1 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid) =
+  pr1 (pr2 equivalence-relation-congruence-Normal-Commutative-Submonoid) =
     refl-congruence-Normal-Commutative-Submonoid
-  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid)) =
+  pr1 (pr2 (pr2 equivalence-relation-congruence-Normal-Commutative-Submonoid)) =
     symmetric-congruence-Normal-Commutative-Submonoid
-  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid)) =
+  pr2 (pr2 (pr2 equivalence-relation-congruence-Normal-Commutative-Submonoid)) =
     transitive-congruence-Normal-Commutative-Submonoid
 
   is-congruence-congruence-Normal-Commutative-Submonoid :
     is-congruence-Commutative-Monoid M
-      eq-rel-congruence-Normal-Commutative-Submonoid
+      equivalence-relation-congruence-Normal-Commutative-Submonoid
   pr1
     ( is-congruence-congruence-Normal-Commutative-Submonoid
       {x} {x'} {y} {y'} H K u)
@@ -354,7 +354,7 @@ module _
   congruence-Normal-Commutative-Submonoid :
     congruence-Commutative-Monoid (l1 ⊔ l2) M
   pr1 congruence-Normal-Commutative-Submonoid =
-    eq-rel-congruence-Normal-Commutative-Submonoid
+    equivalence-relation-congruence-Normal-Commutative-Submonoid
   pr2 congruence-Normal-Commutative-Submonoid =
     is-congruence-congruence-Normal-Commutative-Submonoid
 ```
@@ -614,7 +614,7 @@ is-retraction-saturated-congruence-Normal-Commutative-Submonoid :
     ( normal-submonoid-saturated-congruence-Commutative-Monoid M R)) ＝
   ( R)
 is-retraction-saturated-congruence-Normal-Commutative-Submonoid l2 M R =
-  eq-relate-same-elements-saturated-congruence-Commutative-Monoid M
+  equivalence-relationate-same-elements-saturated-congruence-Commutative-Monoid M
     ( saturated-congruence-Normal-Commutative-Submonoid M
       ( normal-submonoid-saturated-congruence-Commutative-Monoid M R))
     ( R)

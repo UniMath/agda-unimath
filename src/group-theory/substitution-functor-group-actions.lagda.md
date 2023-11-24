@@ -129,7 +129,7 @@ module _
 
   equivalence-relation-obj-left-adjoint-subst-action-Group :
     {l3 : Level} (X : action-Group G l3) →
-    Equivalence-Relation
+    equivalence-relation
       ( l1 ⊔ l2 ⊔ l3)
       ( pretype-obj-left-adjoint-subst-action-Group X)
   pr1

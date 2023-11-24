@@ -116,31 +116,31 @@ module _
 
   set-quotient-Group : Set (l1 ⊔ l2)
   set-quotient-Group =
-    quotient-Set (eq-rel-congruence-Normal-Subgroup G N)
+    quotient-Set (equivalence-relation-congruence-Normal-Subgroup G N)
 
   type-quotient-Group : UU (l1 ⊔ l2)
   type-quotient-Group =
-    set-quotient (eq-rel-congruence-Normal-Subgroup G N)
+    set-quotient (equivalence-relation-congruence-Normal-Subgroup G N)
 
   is-set-type-quotient-Group : is-set type-quotient-Group
   is-set-type-quotient-Group =
-    is-set-set-quotient (eq-rel-congruence-Normal-Subgroup G N)
+    is-set-set-quotient (equivalence-relation-congruence-Normal-Subgroup G N)
 
   map-quotient-hom-Group : type-Group G → type-quotient-Group
   map-quotient-hom-Group =
-    quotient-map (eq-rel-congruence-Normal-Subgroup G N)
+    quotient-map (equivalence-relation-congruence-Normal-Subgroup G N)
 
   is-surjective-map-quotient-hom-Group :
     is-surjective map-quotient-hom-Group
   is-surjective-map-quotient-hom-Group =
-    is-surjective-quotient-map (eq-rel-congruence-Normal-Subgroup G N)
+    is-surjective-quotient-map (equivalence-relation-congruence-Normal-Subgroup G N)
 
   is-effective-map-quotient-hom-Group :
     is-effective
-      ( eq-rel-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( map-quotient-hom-Group)
   is-effective-map-quotient-hom-Group =
-    is-effective-quotient-map (eq-rel-congruence-Normal-Subgroup G N)
+    is-effective-quotient-map (equivalence-relation-congruence-Normal-Subgroup G N)
 
   abstract
     apply-effectiveness-map-quotient-hom-Group :
@@ -149,7 +149,7 @@ module _
       sim-congruence-Normal-Subgroup G N x y
     apply-effectiveness-map-quotient-hom-Group =
       apply-effectiveness-quotient-map
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
 
   abstract
     apply-effectiveness-map-quotient-hom-Group' :
@@ -158,25 +158,25 @@ module _
       map-quotient-hom-Group x ＝ map-quotient-hom-Group y
     apply-effectiveness-map-quotient-hom-Group' =
       apply-effectiveness-quotient-map'
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
 
   reflecting-map-quotient-hom-Group :
-    reflecting-map-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup G N)
+    reflecting-map-equivalence-relation
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( type-quotient-Group)
   reflecting-map-quotient-hom-Group =
     reflecting-map-quotient-map
-      ( eq-rel-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
 
   is-set-quotient-set-quotient-Group :
     {l : Level} →
     is-set-quotient l
-      ( eq-rel-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( set-quotient-Group)
       ( reflecting-map-quotient-hom-Group)
   is-set-quotient-set-quotient-Group =
     is-set-quotient-set-quotient
-      ( eq-rel-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
 ```
 
 #### The group structure on the quotient group
@@ -202,10 +202,10 @@ module _
   unit-quotient-Group = map-quotient-hom-Group G N (unit-Group G)
 
   binary-hom-mul-quotient-Group :
-    binary-hom-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup G N)
-      ( eq-rel-congruence-Normal-Subgroup G N)
-      ( eq-rel-congruence-Normal-Subgroup G N)
+    binary-hom-equivalence-relation
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
   pr1 binary-hom-mul-quotient-Group = mul-Group G
   pr2 binary-hom-mul-quotient-Group =
     mul-congruence-Normal-Subgroup G N
@@ -214,9 +214,9 @@ module _
     (x y : type-quotient-Group G N) → type-quotient-Group G N
   mul-quotient-Group =
     binary-map-set-quotient
-      ( eq-rel-congruence-Normal-Subgroup G N)
-      ( eq-rel-congruence-Normal-Subgroup G N)
-      ( eq-rel-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( binary-hom-mul-quotient-Group)
 
   mul-quotient-Group' :
@@ -232,23 +232,23 @@ module _
       map-quotient-hom-Group G N (mul-Group G x y)
     compute-mul-quotient-Group =
       compute-binary-map-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
-        ( eq-rel-congruence-Normal-Subgroup G N)
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( binary-hom-mul-quotient-Group)
 
   hom-inv-quotient-Group :
-    hom-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup G N)
-      ( eq-rel-congruence-Normal-Subgroup G N)
+    hom-equivalence-relation
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
   pr1 hom-inv-quotient-Group = inv-Group G
   pr2 hom-inv-quotient-Group = inv-congruence-Normal-Subgroup G N
 
   inv-quotient-Group : type-quotient-Group G N → type-quotient-Group G N
   inv-quotient-Group =
     map-set-quotient
-      ( eq-rel-congruence-Normal-Subgroup G N)
-      ( eq-rel-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( hom-inv-quotient-Group)
 
   abstract
@@ -258,8 +258,8 @@ module _
       map-quotient-hom-Group G N (inv-Group G x)
     compute-inv-quotient-Group =
       coherence-square-map-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( hom-inv-quotient-Group)
 
   abstract
@@ -268,7 +268,7 @@ module _
       mul-quotient-Group unit-quotient-Group x ＝ x
     left-unit-law-mul-quotient-Group =
       induction-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
             ( set-quotient-Group G N)
@@ -284,7 +284,7 @@ module _
       mul-quotient-Group x unit-quotient-Group ＝ x
     right-unit-law-mul-quotient-Group =
       induction-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
             ( set-quotient-Group G N)
@@ -301,7 +301,7 @@ module _
       ( mul-quotient-Group x (mul-quotient-Group y z))
     associative-mul-quotient-Group =
       triple-induction-set-quotient'
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( λ x y z →
           Id-Prop
             ( set-quotient-Group G N)
@@ -328,7 +328,7 @@ module _
       ( unit-quotient-Group)
     left-inverse-law-mul-quotient-Group =
       induction-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
             ( set-quotient-Group G N)
@@ -350,7 +350,7 @@ module _
       ( unit-quotient-Group)
     right-inverse-law-mul-quotient-Group =
       induction-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( λ y →
           Id-Prop
             ( set-quotient-Group G N)
@@ -452,7 +452,7 @@ module _
     ((x : type-Group G) → type-Prop (P (map-quotient-hom-Group G N x)))
   equiv-induction-quotient-Group =
     equiv-induction-set-quotient
-      ( eq-rel-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( P)
 
   abstract
@@ -461,7 +461,7 @@ module _
       ((x : type-quotient-Group G N) → type-Prop (P x))
     induction-quotient-Group =
       induction-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( P)
 ```
 
@@ -488,8 +488,8 @@ module _
         ( P (map-quotient-hom-Group G N x) (map-quotient-hom-Group H M y)))
   equiv-double-induction-quotient-Group =
     equiv-double-induction-set-quotient
-      ( eq-rel-congruence-Normal-Subgroup G N)
-      ( eq-rel-congruence-Normal-Subgroup H M)
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
+      ( equivalence-relation-congruence-Normal-Subgroup H M)
       ( P)
 
   abstract
@@ -501,8 +501,8 @@ module _
         type-Prop (P x y))
     double-induction-quotient-Group =
       double-induction-set-quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
-        ( eq-rel-congruence-Normal-Subgroup H M)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup H M)
         ( P)
 ```
 
@@ -548,18 +548,18 @@ module _
   top-triangle-is-quotient-group-quotient-Group :
     {l : Level} (H : Group l) →
     hom-Group (quotient-Group G N) H →
-    Σ ( reflecting-map-Equivalence-Relation
-        ( eq-rel-congruence-Normal-Subgroup G N)
+    Σ ( reflecting-map-equivalence-relation
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( type-Group H))
       ( λ f → preserves-mul-Group G H (pr1 f))
   top-triangle-is-quotient-group-quotient-Group H =
     map-Σ
       ( λ f → preserves-mul-Group G H (pr1 f))
       ( precomp-Set-Quotient
-        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( equivalence-relation-congruence-Normal-Subgroup G N)
         ( set-quotient-Group G N)
         ( reflecting-map-quotient-map
-          ( eq-rel-congruence-Normal-Subgroup G N))
+          ( equivalence-relation-congruence-Normal-Subgroup G N))
         ( set-Group H))
       ( λ f μ →
         preserves-mul-comp-hom-Group G
@@ -590,7 +590,7 @@ module _
       is-equiv-map-Σ
         ( λ f → preserves-mul-Group G H (pr1 f))
         ( is-set-quotient-set-quotient
-          ( eq-rel-congruence-Normal-Subgroup G N)
+          ( equivalence-relation-congruence-Normal-Subgroup G N)
           ( set-Group H))
         ( λ f →
           is-equiv-is-prop

@@ -163,8 +163,8 @@ apply-universal-property-trunc-Set' t B f =
 ```agda
 reflecting-map-mere-eq-unit-trunc-Set :
   {l : Level} (A : UU l) →
-  reflecting-map-Equivalence-Relation
-    ( mere-eq-Equivalence-Relation A)
+  reflecting-map-equivalence-relation
+    ( mere-eq-equivalence-relation A)
     ( type-trunc-Set A)
 reflecting-map-mere-eq-unit-trunc-Set A =
   pair unit-trunc-Set (reflects-mere-eq (trunc-Set A) unit-trunc-Set)
@@ -173,7 +173,7 @@ abstract
   is-set-quotient-trunc-Set :
     {l1 l2 : Level} (A : UU l1) →
     is-set-quotient l2
-      ( mere-eq-Equivalence-Relation A)
+      ( mere-eq-equivalence-relation A)
       ( trunc-Set A)
       ( reflecting-map-mere-eq-unit-trunc-Set A)
   is-set-quotient-trunc-Set A =
@@ -190,11 +190,11 @@ module _
     is-surjective-and-effective-unit-trunc-Set :
       (A : UU l) →
       is-surjective-and-effective
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( unit-trunc-Set)
     is-surjective-and-effective-unit-trunc-Set A =
       is-surjective-and-effective-is-set-quotient
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( trunc-Set A)
         ( unit-trunc-Set ,
           reflects-mere-eq (trunc-Set A) unit-trunc-Set)
@@ -209,7 +209,7 @@ module _
   abstract
     is-effective-unit-trunc-Set :
       (A : UU l) →
-      is-effective (mere-eq-Equivalence-Relation A) (unit-trunc-Set {A = A})
+      is-effective (mere-eq-equivalence-relation A) (unit-trunc-Set {A = A})
     is-effective-unit-trunc-Set A =
       pr2 (is-surjective-and-effective-unit-trunc-Set A)
 
@@ -228,7 +228,7 @@ module _
   emb-trunc-Set : (A : UU l) → type-trunc-Set A ↪ (A → Prop l)
   emb-trunc-Set A =
     emb-is-surjective-and-effective
-      ( mere-eq-Equivalence-Relation A)
+      ( mere-eq-equivalence-relation A)
       ( trunc-Set A)
       ( unit-trunc-Set)
       ( is-surjective-and-effective-unit-trunc-Set A)
@@ -238,7 +238,7 @@ module _
   pr1 (hom-slice-trunc-Set A) = unit-trunc-Set
   pr2 (hom-slice-trunc-Set A) =
     triangle-emb-is-surjective-and-effective
-      ( mere-eq-Equivalence-Relation A)
+      ( mere-eq-equivalence-relation A)
       ( trunc-Set A)
       ( unit-trunc-Set)
       ( is-surjective-and-effective-unit-trunc-Set A)
@@ -252,7 +252,7 @@ module _
         ( hom-slice-trunc-Set A)
     is-image-trunc-Set A =
       is-image-is-surjective-and-effective
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( trunc-Set A)
         ( unit-trunc-Set)
         ( is-surjective-and-effective-unit-trunc-Set A)

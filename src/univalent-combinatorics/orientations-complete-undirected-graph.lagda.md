@@ -411,7 +411,7 @@ module _
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
           ( is-finite-2-Element-Decidable-Subtype n X))
   even-difference-orientation-Complete-Undirected-Graph :
-    Equivalence-Relation lzero orientation-Complete-Undirected-Graph
+    equivalence-relation lzero orientation-Complete-Undirected-Graph
   pr1 even-difference-orientation-Complete-Undirected-Graph d d' =
     Id-Prop
       ( Fin-Set 2)
@@ -439,7 +439,7 @@ module _
     is-decidable-even-difference-orientation-Complete-Undirected-Graph :
       (Y Y' : orientation-Complete-Undirected-Graph) →
       is-decidable
-        ( sim-Equivalence-Relation
+        ( sim-equivalence-relation
             ( even-difference-orientation-Complete-Undirected-Graph)
             ( Y)
             ( Y'))
@@ -557,11 +557,11 @@ module _
     preserves-even-difference-orientation-complete-undirected-graph-equiv :
       (X X' : UU-Fin l n) ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
       ( d d' : orientation-Complete-Undirected-Graph n X) →
-      ( sim-Equivalence-Relation
+      ( sim-equivalence-relation
         ( even-difference-orientation-Complete-Undirected-Graph n X)
         ( d)
         ( d') ↔
-        sim-Equivalence-Relation
+        sim-equivalence-relation
           ( even-difference-orientation-Complete-Undirected-Graph n X')
           ( map-orientation-complete-undirected-graph-equiv X X' e d)
           ( map-orientation-complete-undirected-graph-equiv X X' e d'))
@@ -667,7 +667,7 @@ module _
       P =
       tr
         ( λ g →
-          sim-Equivalence-Relation
+          sim-equivalence-relation
             ( even-difference-orientation-Complete-Undirected-Graph n X)
             ( map-equiv g d)
             ( map-equiv g d'))
@@ -3110,7 +3110,7 @@ module _
             ( has-decidable-equality-count eX)
             ( np))))
       ( orientation-two-elements-count j i (np ∘ inv))) →
-    ¬ ( sim-Equivalence-Relation
+    ¬ ( sim-equivalence-relation
       ( even-difference-orientation-Complete-Undirected-Graph
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -3135,7 +3135,7 @@ module _
     i j np (inl pl) =
     tr
       ( λ d →
-        ¬ ( sim-Equivalence-Relation
+        ¬ ( sim-equivalence-relation
           ( even-difference-orientation-Complete-Undirected-Graph
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -3151,7 +3151,7 @@ module _
       ( inv pl)
       ( tr
         ( λ d →
-          ¬ ( sim-Equivalence-Relation
+          ¬ ( sim-equivalence-relation
             ( even-difference-orientation-Complete-Undirected-Graph
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -3171,7 +3171,7 @@ module _
     i j np (inr pr) =
     tr
       ( λ d →
-        ¬ ( sim-Equivalence-Relation
+        ¬ ( sim-equivalence-relation
           ( even-difference-orientation-Complete-Undirected-Graph
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -3187,7 +3187,7 @@ module _
       ( inv pr)
       ( tr
         ( λ d →
-          ¬ ( sim-Equivalence-Relation
+          ¬ ( sim-equivalence-relation
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -3218,7 +3218,7 @@ module _
 
   not-even-difference-orientation-aut-transposition-count :
     ( Y : 2-Element-Decidable-Subtype l X) →
-    ¬ ( sim-Equivalence-Relation
+    ¬ ( sim-equivalence-relation
       ( even-difference-orientation-Complete-Undirected-Graph
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -3232,7 +3232,7 @@ module _
   not-even-difference-orientation-aut-transposition-count Y =
     tr
       ( λ Y' →
-        ¬ ( sim-Equivalence-Relation
+        ¬ ( sim-equivalence-relation
           ( even-difference-orientation-Complete-Undirected-Graph
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -3508,7 +3508,7 @@ module _
     section-orientation (inl (inr star)) (inr NQ) =
       ex-falso
         ( NQ
-          ( refl-Equivalence-Relation
+          ( refl-equivalence-relation
             ( even-difference-orientation-Complete-Undirected-Graph
               ( number-of-elements-count eX)
               ( X , (unit-trunc-Prop (equiv-count eX))))
