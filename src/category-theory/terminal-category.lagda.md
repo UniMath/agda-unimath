@@ -9,6 +9,8 @@ module category-theory.terminal-category where
 ```agda
 open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.constant-functors
+open import category-theory.functors-categories
 open import category-theory.functors-precategories
 open import category-theory.gaunt-categories
 open import category-theory.isomorphisms-in-categories
@@ -172,11 +174,12 @@ pr1 terminal-Gaunt-Category = terminal-Category
 pr2 terminal-Gaunt-Category = is-gaunt-terminal-Category
 ```
 
-### Points in a precategory
+### Points in a categories
 
 Using the terminal category as the representing category of objects, we can
 define, given an object in a category `x ∈ C`, the _point_ at `x` as the
-constant functor from the terminal category to `C` at `x`.
+[constant functor](category-theory.constant-functors.md) from the terminal
+category to `C` at `x`.
 
 ```agda
 module _
@@ -184,11 +187,14 @@ module _
   where
 
   point-Precategory : functor-Precategory terminal-Precategory C
-  pr1 point-Precategory _ = x
-  pr1 (pr2 point-Precategory) _ = id-hom-Precategory C
-  pr1 (pr2 (pr2 point-Precategory)) _ _ =
-    inv (left-unit-law-comp-hom-Precategory C (id-hom-Precategory C))
-  pr2 (pr2 (pr2 point-Precategory)) _ = refl
+  point-Precategory = constant-functor-Precategory terminal-Precategory C x
+
+module _
+  {l1 l2 : Level} (C : Category l1 l2) (x : obj-Category C)
+  where
+
+  point-Category : functor-Category terminal-Category C
+  point-Category = point-Precategory (precategory-Category C) x
 ```
 
 ## Properties
@@ -234,10 +240,8 @@ module _
   where
 
   terminal-functor-Precategory : functor-Precategory C terminal-Precategory
-  pr1 terminal-functor-Precategory _ = star
-  pr1 (pr2 terminal-functor-Precategory) _ = star
-  pr1 (pr2 (pr2 terminal-functor-Precategory)) _ _ = refl
-  pr2 (pr2 (pr2 terminal-functor-Precategory)) _ = refl
+  terminal-functor-Precategory =
+    constant-functor-Precategory C terminal-Precategory star
 
   uniqueness-terminal-functor-Precategory :
     (F : functor-Precategory C terminal-Precategory) →
@@ -248,7 +252,7 @@ module _
       ( terminal-Precategory)
       ( terminal-functor-Precategory)
       ( F)
-      (refl-htpy , refl-htpy)
+      ( refl-htpy , refl-htpy)
 
   is-contr-functor-terminal-Precategory :
     is-contr (functor-Precategory C terminal-Precategory)
