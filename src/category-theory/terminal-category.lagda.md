@@ -206,7 +206,7 @@ module _
       ( λ F → obj-functor-Precategory terminal-Precategory C F star)
       ( λ F →
         eq-htpy-functor-Precategory terminal-Precategory C _ F
-          ( refl-htpy ,
+          ( ( refl-htpy) ,
             ( λ _ →
               ap
                 ( λ f → comp-hom-Precategory C f (id-hom-Precategory C))
@@ -248,7 +248,7 @@ module _
       ( terminal-Precategory)
       ( terminal-functor-Precategory)
       ( F)
-      ((λ _ → refl) , (λ _ → refl))
+      (refl-htpy , refl-htpy)
 
   is-contr-functor-terminal-Precategory :
     is-contr (functor-Precategory C terminal-Precategory)

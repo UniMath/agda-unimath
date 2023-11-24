@@ -145,6 +145,7 @@ open import category-theory.strict-categories public
 open import category-theory.structure-equivalences-set-magmoids public
 open import category-theory.subcategories public
 open import category-theory.subprecategories public
+open import category-theory.subterminal-precategories public
 open import category-theory.terminal-category public
 open import category-theory.terminal-objects-precategories public
 open import category-theory.wide-subcategories public
