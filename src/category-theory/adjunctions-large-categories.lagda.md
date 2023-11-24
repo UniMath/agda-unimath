@@ -51,6 +51,12 @@ it often coincides with the direction of the natural map. For example, in the
 [abelianization adjunction](group-theory.abelianization.md), the natural
 candidate for an equivalence is given by precomposition
 
+```text
+  - ∘ η : hom (abelianization-Group G) A → hom G (group-Ab A)
+```
+
+by the unit of the adjunction.
+
 ## Definition
 
 ### The predicate of being an adjoint pair of functors
