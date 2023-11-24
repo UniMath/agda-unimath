@@ -26,6 +26,7 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-coforks public
 open import synthetic-homotopy-theory.dependent-descent-circle public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
+open import synthetic-homotopy-theory.dependent-pushout-products public
 open import synthetic-homotopy-theory.dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.dependent-suspension-structures public
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers public
@@ -55,6 +56,7 @@ open import synthetic-homotopy-theory.interval-type public
 open import synthetic-homotopy-theory.iterated-loop-spaces public
 open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.join-powers-of-types public
+open import synthetic-homotopy-theory.joins-of-maps public
 open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
@@ -67,6 +69,7 @@ open import synthetic-homotopy-theory.powers-of-loops public
 open import synthetic-homotopy-theory.premanifolds public
 open import synthetic-homotopy-theory.prespectra public
 open import synthetic-homotopy-theory.pullback-property-pushouts public
+open import synthetic-homotopy-theory.pushout-products public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.sections-descent-circle public

@@ -11,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
+open import foundation.global-subuniverses
 open import foundation.subuniverses
 open import foundation.universe-levels
 

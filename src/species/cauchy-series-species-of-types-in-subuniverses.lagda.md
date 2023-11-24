@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
+open import foundation.global-subuniverses
 open import foundation.postcomposition
 open import foundation.propositions
 open import foundation.subuniverses

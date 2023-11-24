@@ -9,6 +9,8 @@ module species.unit-cauchy-composition-species-of-types-in-subuniverses where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.global-subuniverses
 open import foundation.subuniverses
 open import foundation.universe-levels
 
