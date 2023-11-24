@@ -46,7 +46,7 @@ hom-[sets](foundation-core.sets.md) are
 This construction demonstrates one essential aspect about precategories: While
 it displays `obj-Precategory` as a [retraction](foundation-core.retractions.md),
 every indiscrete precategory is
-[subterminal](category-theory.subterminal-precategories.lagda.md).
+[subterminal](category-theory.subterminal-precategories.md).
 
 ## Definitions
 
