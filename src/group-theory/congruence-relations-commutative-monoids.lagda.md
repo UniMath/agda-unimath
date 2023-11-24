@@ -31,21 +31,21 @@ the underlying monoid of `M`.
 ## Definition
 
 ```agda
-is-congruence-commutative-monoid-Prop :
+is-congruence-prop-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →
-  Equivalence-Relation l2 (type-Commutative-Monoid M) → Prop (l1 ⊔ l2)
-is-congruence-commutative-monoid-Prop M =
-  is-congruence-monoid-Prop (monoid-Commutative-Monoid M)
+  equivalence-relation l2 (type-Commutative-Monoid M) → Prop (l1 ⊔ l2)
+is-congruence-prop-Commutative-Monoid M =
+  is-congruence-prop-Monoid (monoid-Commutative-Monoid M)
 
 is-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →
-  Equivalence-Relation l2 (type-Commutative-Monoid M) → UU (l1 ⊔ l2)
+  equivalence-relation l2 (type-Commutative-Monoid M) → UU (l1 ⊔ l2)
 is-congruence-Commutative-Monoid M =
   is-congruence-Monoid (monoid-Commutative-Monoid M)
 
 is-prop-is-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
-  (R : Equivalence-Relation l2 (type-Commutative-Monoid M)) →
+  (R : equivalence-relation l2 (type-Commutative-Monoid M)) →
   is-prop (is-congruence-Commutative-Monoid M R)
 is-prop-is-congruence-Commutative-Monoid M =
   is-prop-is-congruence-Monoid (monoid-Commutative-Monoid M)
@@ -60,10 +60,10 @@ module _
   (R : congruence-Commutative-Monoid l2 M)
   where
 
-  eq-rel-congruence-Commutative-Monoid :
-    Equivalence-Relation l2 (type-Commutative-Monoid M)
-  eq-rel-congruence-Commutative-Monoid =
-    eq-rel-congruence-Monoid (monoid-Commutative-Monoid M) R
+  equivalence-relation-congruence-Commutative-Monoid :
+    equivalence-relation l2 (type-Commutative-Monoid M)
+  equivalence-relation-congruence-Commutative-Monoid =
+    equivalence-relation-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   prop-congruence-Commutative-Monoid :
     Relation-Prop l2 (type-Commutative-Monoid M)
@@ -124,7 +124,8 @@ module _
     transitive-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   mul-congruence-Commutative-Monoid :
-    is-congruence-Commutative-Monoid M eq-rel-congruence-Commutative-Monoid
+    is-congruence-Commutative-Monoid M
+      equivalence-relation-congruence-Commutative-Monoid
   mul-congruence-Commutative-Monoid =
     mul-congruence-Monoid (monoid-Commutative-Monoid M) R
 ```
@@ -178,10 +179,11 @@ extensionality-congruence-Commutative-Monoid :
 extensionality-congruence-Commutative-Monoid M =
   extensionality-congruence-Monoid (monoid-Commutative-Monoid M)
 
-eq-relate-same-elements-congruence-Commutative-Monoid :
+equivalence-relationate-same-elements-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R S : congruence-Commutative-Monoid l2 M) →
   relate-same-elements-congruence-Commutative-Monoid M R S → R ＝ S
-eq-relate-same-elements-congruence-Commutative-Monoid M =
-  eq-relate-same-elements-congruence-Monoid (monoid-Commutative-Monoid M)
+equivalence-relationate-same-elements-congruence-Commutative-Monoid M =
+  equivalence-relationate-same-elements-congruence-Monoid
+    ( monoid-Commutative-Monoid M)
 ```

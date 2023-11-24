@@ -122,7 +122,7 @@ module _
   map-iso-Ab = map-iso-Group (group-Ab A) (group-Ab B)
 
   preserves-add-iso-Ab :
-    (f : iso-Ab) (x y : type-Ab A) →
+    (f : iso-Ab) {x y : type-Ab A} →
     map-iso-Ab f (add-Ab A x y) ＝ add-Ab B (map-iso-Ab f x) (map-iso-Ab f y)
   preserves-add-iso-Ab =
     preserves-mul-iso-Group (group-Ab A) (group-Ab B)
@@ -137,7 +137,7 @@ module _
   map-inv-iso-Ab = map-inv-iso-Group (group-Ab A) (group-Ab B)
 
   preserves-add-inv-iso-Ab :
-    (f : iso-Ab) (x y : type-Ab B) →
+    (f : iso-Ab) {x y : type-Ab B} →
     map-inv-iso-Ab f (add-Ab B x y) ＝
     add-Ab A (map-inv-iso-Ab f x) (map-inv-iso-Ab f y)
   preserves-add-inv-iso-Ab =
@@ -187,7 +187,7 @@ abstract
     {l : Level} (A B : Ab l) → Id A B ≃ iso-Ab A B
   equiv-iso-eq-Ab' A B =
     ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
-    ( equiv-ap-inclusion-subtype is-abelian-group-Prop {A} {B})
+    ( equiv-ap-inclusion-subtype is-abelian-prop-Group {A} {B})
 
 abstract
   is-torsorial-iso-Ab :

@@ -102,11 +102,11 @@ module _
 
   is-closed-under-multiplication-normalizer-Subgroup :
     is-closed-under-multiplication-subset-Group G subset-normalizer-Subgroup
-  pr1 (is-closed-under-multiplication-normalizer-Subgroup x y u v) w =
+  pr1 (is-closed-under-multiplication-normalizer-Subgroup {x} {y} u v) w =
     is-closed-under-eq-Subgroup' G H
       ( forward-implication u (forward-implication v w))
       ( compute-conjugation-mul-Group G x y _)
-  pr2 (is-closed-under-multiplication-normalizer-Subgroup x y u v) w =
+  pr2 (is-closed-under-multiplication-normalizer-Subgroup {x} {y} u v) w =
     backward-implication v
       ( backward-implication u
         ( is-closed-under-eq-Subgroup G H w
@@ -114,11 +114,11 @@ module _
 
   is-closed-under-inverses-normalizer-Subgroup :
     is-closed-under-inverses-subset-Group G subset-normalizer-Subgroup
-  pr1 (is-closed-under-inverses-normalizer-Subgroup x u {y}) h =
+  pr1 (is-closed-under-inverses-normalizer-Subgroup {x} u {y}) h =
     backward-implication u
       ( is-closed-under-eq-Subgroup' G H h
         ( is-section-conjugation-inv-Group G x y))
-  pr2 (is-closed-under-inverses-normalizer-Subgroup x u {y}) h =
+  pr2 (is-closed-under-inverses-normalizer-Subgroup {x} u {y}) h =
     is-closed-under-eq-Subgroup G H
       ( forward-implication u h)
       ( is-section-conjugation-inv-Group G x y)
@@ -143,7 +143,7 @@ module _
     u k h
   pr2 (forward-implication-is-normalizer-normalizer-Subgroup K u x k {y}) h =
     is-closed-under-eq-Subgroup G H
-      ( u (is-closed-under-inverses-Subgroup G K x k) h)
+      ( u (is-closed-under-inverses-Subgroup G K {x} k) h)
       ( is-retraction-conjugation-inv-Group G x y)
 
   backward-implication-is-normalizer-normalizer-Subgroup :

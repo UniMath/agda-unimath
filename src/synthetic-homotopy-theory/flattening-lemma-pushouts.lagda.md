@@ -45,7 +45,7 @@ given a pushout square
   S -----> B
   |        |
  f|        |j
-  V        V
+  V      ⌜ V
   A -----> X
       i
 ```
@@ -57,7 +57,7 @@ commuting square
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
            |                                                 |
            |                                                 |
-           V                                                 V
+           V                                               ⌜ V
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 

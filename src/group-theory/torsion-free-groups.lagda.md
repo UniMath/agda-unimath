@@ -54,7 +54,7 @@ holds for all elements `x : G`. This condition can be formulated in several
    ```text
              q
        · ---------> Prop
-       |              |
+       | ⌟            |
       p|              | P ↦ {k : ℤ ∣ (k ＝ 0) ∨ P}
        V              V
        G -------> Subgroup ℤ

@@ -151,6 +151,7 @@ open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
+open import foundation.global-subuniverses public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.homotopy-induction public
@@ -240,6 +241,7 @@ open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullback-squares public
 open import foundation.pullbacks public
+open import foundation.pullbacks-subtypes public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public

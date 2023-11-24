@@ -246,10 +246,10 @@ module _
 #### The left equivalence relation obtained from an ideal
 
 ```agda
-  left-eq-rel-congruence-ideal-Ring :
-    Equivalence-Relation l2 (type-Ring R)
-  left-eq-rel-congruence-ideal-Ring =
-    left-eq-rel-congruence-Subgroup-Ab
+  left-equivalence-relation-congruence-ideal-Ring :
+    equivalence-relation l2 (type-Ring R)
+  left-equivalence-relation-congruence-ideal-Ring =
+    left-equivalence-relation-congruence-Subgroup-Ab
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I)
 
@@ -307,16 +307,17 @@ module _
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I)
 
-  eq-rel-congruence-ideal-Ring : Equivalence-Relation l2 (type-Ring R)
-  eq-rel-congruence-ideal-Ring =
-    eq-rel-congruence-Subgroup-Ab
+  equivalence-relation-congruence-ideal-Ring :
+    equivalence-relation l2 (type-Ring R)
+  equivalence-relation-congruence-ideal-Ring =
+    equivalence-relation-congruence-Subgroup-Ab
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I)
 
   relate-same-elements-left-sim-congruence-ideal-Ring :
-    relate-same-elements-Equivalence-Relation
-      ( eq-rel-congruence-ideal-Ring)
-      ( left-eq-rel-congruence-ideal-Ring)
+    relate-same-elements-equivalence-relation
+      ( equivalence-relation-congruence-ideal-Ring)
+      ( left-equivalence-relation-congruence-ideal-Ring)
   relate-same-elements-left-sim-congruence-ideal-Ring =
     relate-same-elements-left-sim-congruence-Subgroup-Ab
       ( ab-Ring R)
@@ -325,7 +326,7 @@ module _
   add-congruence-ideal-Ring :
     ( is-congruence-Ab
       ( ab-Ring R)
-      ( eq-rel-congruence-ideal-Ring))
+      ( equivalence-relation-congruence-ideal-Ring))
   add-congruence-ideal-Ring =
     ( add-congruence-Subgroup-Ab
       ( ab-Ring R)
@@ -340,8 +341,6 @@ module _
   is-congruence-monoid-mul-congruence-ideal-Ring {x} {y} {u} {v} e f =
     ( is-closed-under-eq-ideal-Ring R I
       ( is-closed-under-addition-ideal-Ring R I
-        ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
-        ( mul-Ring R y (add-Ring R (neg-Ring R u) v))
         ( is-closed-under-right-multiplication-ideal-Ring R I
           ( add-Ring R (neg-Ring R x) y)
           ( u)
@@ -399,13 +398,13 @@ module _
   mul-congruence-ideal-Ring :
     ( is-congruence-Monoid
       ( multiplicative-monoid-Ring R)
-      ( eq-rel-congruence-ideal-Ring))
+      ( equivalence-relation-congruence-ideal-Ring))
   mul-congruence-ideal-Ring =
     is-congruence-monoid-mul-congruence-ideal-Ring
 
   congruence-ideal-Ring : congruence-Ring l2 R
   congruence-ideal-Ring = construct-congruence-Ring R
-    ( eq-rel-congruence-ideal-Ring)
+    ( equivalence-relation-congruence-ideal-Ring)
     ( add-congruence-ideal-Ring)
     ( mul-congruence-ideal-Ring)
 ```
@@ -430,14 +429,14 @@ module _
 
   is-closed-under-addition-subset-congruence-Ring :
     is-closed-under-addition-subset-Ring R subset-congruence-Ring
-  is-closed-under-addition-subset-congruence-Ring x y H K =
+  is-closed-under-addition-subset-congruence-Ring H K =
     concatenate-eq-sim-congruence-Ring R S
       ( inv (left-unit-law-add-Ring R (zero-Ring R)))
       ( add-congruence-Ring R S H K)
 
   is-closed-under-negatives-subset-congruence-Ring :
     is-closed-under-negatives-subset-Ring R subset-congruence-Ring
-  is-closed-under-negatives-subset-congruence-Ring x H =
+  is-closed-under-negatives-subset-congruence-Ring H =
       concatenate-eq-sim-congruence-Ring R S
         ( inv (neg-zero-Ring R))
         ( neg-congruence-Ring R S H)
@@ -533,7 +532,7 @@ module _
   is-section-ideal-congruence-Ring :
     congruence-ideal-Ring R (ideal-congruence-Ring R S) ＝ S
   is-section-ideal-congruence-Ring =
-    eq-relate-same-elements-congruence-Ring R
+    equivalence-relationate-same-elements-congruence-Ring R
       ( congruence-ideal-Ring R (ideal-congruence-Ring R S))
       ( S)
       ( relate-same-elements-congruence-ideal-congruence-Ring)

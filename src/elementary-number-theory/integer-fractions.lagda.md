@@ -184,11 +184,11 @@ transitive-sim-fraction-ℤ x y z s r =
                             ( denominator-fraction-ℤ x)
                             ( denominator-fraction-ℤ y)))))))))))))
 
-eq-rel-sim-fraction-ℤ : Equivalence-Relation lzero fraction-ℤ
-pr1 eq-rel-sim-fraction-ℤ = sim-fraction-ℤ-Prop
-pr1 (pr2 eq-rel-sim-fraction-ℤ) = refl-sim-fraction-ℤ
-pr1 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = symmetric-sim-fraction-ℤ
-pr2 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = transitive-sim-fraction-ℤ
+equivalence-relation-sim-fraction-ℤ : equivalence-relation lzero fraction-ℤ
+pr1 equivalence-relation-sim-fraction-ℤ = sim-fraction-ℤ-Prop
+pr1 (pr2 equivalence-relation-sim-fraction-ℤ) = refl-sim-fraction-ℤ
+pr1 (pr2 (pr2 equivalence-relation-sim-fraction-ℤ)) = symmetric-sim-fraction-ℤ
+pr2 (pr2 (pr2 equivalence-relation-sim-fraction-ℤ)) = transitive-sim-fraction-ℤ
 ```
 
 ### The greatest common divisor of the numerator and a denominator of a fraction is always a positive integer

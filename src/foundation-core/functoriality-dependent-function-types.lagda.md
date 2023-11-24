@@ -26,6 +26,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.path-split-maps
 open import foundation-core.transport-along-identifications
 ```
@@ -103,6 +104,24 @@ pr1 (equiv-Π-equiv-family e) = map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =
   is-equiv-map-Π-is-fiberwise-equiv
     ( λ i → is-equiv-map-equiv (e i))
+```
+
+##### Computing the inverse of `equiv-Π-equiv-family`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  compute-inv-equiv-Π-equiv-family :
+    (e : (x : A) → B x ≃ C x) →
+    ( map-inv-equiv (equiv-Π-equiv-family e)) ~
+    ( map-equiv (equiv-Π-equiv-family λ x → (inv-equiv (e x))))
+  compute-inv-equiv-Π-equiv-family e f =
+    is-injective-map-equiv
+      ( equiv-Π-equiv-family e)
+      ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
+        ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
 ```
 
 We also record a version for dependent function types with implicit arguments.

@@ -161,7 +161,7 @@ module _
 
   is-invertible-element-prop-Ring : type-Ring R → Prop l
   is-invertible-element-prop-Ring =
-    is-invertible-element-monoid-Prop
+    is-invertible-element-prop-Monoid
       ( multiplicative-monoid-Ring R)
 ```
 

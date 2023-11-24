@@ -22,6 +22,10 @@ open import group-theory.symmetric-groups
 
 </details>
 
+## Theorem
+
+### Direct proof of Cayley's theorem
+
 ```agda
 module _
   {l1 : Level} (G : Group l1)
@@ -33,7 +37,7 @@ module _
 
   preserves-mul-map-Cayleys-theorem :
     preserves-mul-Group G (symmetric-Group (set-Group G)) map-Cayleys-theorem
-  preserves-mul-map-Cayleys-theorem x y =
+  preserves-mul-map-Cayleys-theorem {x} {y} =
     eq-htpy-equiv (λ z → associative-mul-Group G x y z)
 
   hom-Cayleys-theorem : hom-Group G (symmetric-Group (set-Group G))
@@ -43,8 +47,8 @@ module _
   is-injective-map-Cayleys-theorem : is-injective map-Cayleys-theorem
   is-injective-map-Cayleys-theorem {x} {y} p =
     ( inv (right-unit-law-mul-Group G x)) ∙
-    ( ( htpy-eq-equiv p (unit-Group G)) ∙
-      ( right-unit-law-mul-Group G y))
+    ( htpy-eq-equiv p (unit-Group G)) ∙
+    ( right-unit-law-mul-Group G y)
 
   is-emb-map-Cayleys-theorem : is-emb map-Cayleys-theorem
   is-emb-map-Cayleys-theorem =
@@ -56,3 +60,21 @@ module _
   pr1 Cayleys-theorem = hom-Cayleys-theorem
   pr2 Cayleys-theorem = is-emb-map-Cayleys-theorem
 ```
+
+### Cayley's theorem as a corollary of the Yoneda lemma
+
+This is Corollary 2.2.10 of _Category theory in context_, and remains to be
+formalized.
+
+## References
+
+1. Emily Riehl, _Category Theory in Context_, 2016
+   ([PDF](https://math.jhu.edu/~eriehl/context.pdf))
+
+## External links
+
+- [Cayley's Theorem](https://1lab.dev/Algebra.Group.Cayley.html) at 1lab
+- [Cayley's theorem](https://ncatlab.org/nlab/show/Cayley%27s+theorem) at $n$Lab
+- [Cayley's theorem](https://en.wikipedia.org/wiki/Cayley%27s_theorem) at
+  Wikipedia
+- [Cayley's theorem](https://www.wikidata.org/wiki/Q179208) at Wikidata

@@ -15,11 +15,13 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.implicit-function-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
@@ -143,18 +145,18 @@ module _
   preserves-one-iso-Ring f = preserves-one-hom-Ring R S (hom-iso-Ring f)
 
   preserves-add-iso-Ring :
-    (f : iso-Ring) (x y : type-Ring R) →
+    (f : iso-Ring) {x y : type-Ring R} →
     map-iso-Ring f (add-Ring R x y) ＝
     add-Ring S (map-iso-Ring f x) (map-iso-Ring f y)
   preserves-add-iso-Ring f = preserves-add-hom-Ring R S (hom-iso-Ring f)
 
   preserves-neg-iso-Ring :
-    (f : iso-Ring) (x : type-Ring R) →
+    (f : iso-Ring) {x : type-Ring R} →
     map-iso-Ring f (neg-Ring R x) ＝ neg-Ring S (map-iso-Ring f x)
   preserves-neg-iso-Ring f = preserves-neg-hom-Ring R S (hom-iso-Ring f)
 
   preserves-mul-iso-Ring :
-    (f : iso-Ring) (x y : type-Ring R) →
+    (f : iso-Ring) {x y : type-Ring R} →
     map-iso-Ring f (mul-Ring R x y) ＝
     mul-Ring S (map-iso-Ring f x) (map-iso-Ring f y)
   preserves-mul-iso-Ring f =
@@ -183,20 +185,20 @@ module _
     preserves-one-hom-Ring S R (hom-inv-iso-Ring f)
 
   preserves-add-inv-iso-Ring :
-    (f : iso-Ring) (x y : type-Ring S) →
+    (f : iso-Ring) {x y : type-Ring S} →
     map-inv-iso-Ring f (add-Ring S x y) ＝
     add-Ring R (map-inv-iso-Ring f x) (map-inv-iso-Ring f y)
   preserves-add-inv-iso-Ring f =
     preserves-add-hom-Ring S R (hom-inv-iso-Ring f)
 
   preserves-neg-inv-iso-Ring :
-    (f : iso-Ring) (x : type-Ring S) →
+    (f : iso-Ring) {x : type-Ring S} →
     map-inv-iso-Ring f (neg-Ring S x) ＝ neg-Ring R (map-inv-iso-Ring f x)
   preserves-neg-inv-iso-Ring f =
     preserves-neg-hom-Ring S R (hom-inv-iso-Ring f)
 
   preserves-mul-inv-iso-Ring :
-    (f : iso-Ring) (x y : type-Ring S) →
+    (f : iso-Ring) {x y : type-Ring S} →
     map-inv-iso-Ring f (mul-Ring S x y) ＝
     mul-Ring R (map-inv-iso-Ring f x) (map-inv-iso-Ring f y)
   preserves-mul-inv-iso-Ring f =
@@ -338,13 +340,11 @@ module _
       preserves-mul-hom-Ab R S f →
       preserves-mul-hom-Ab S R
         ( hom-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U)
-    preserves-mul-inv-is-iso-Ab f U μ x y =
+    preserves-mul-inv-is-iso-Ab f U μ {x} {y} =
       ( inv
         ( ap
           ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U)
-          ( ( μ
-              ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U x)
-              ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U y)) ∙
+          ( ( μ) ∙
             ( ap-mul-Ring S
               ( is-section-map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U x)
               ( is-section-map-inv-is-iso-Ab
@@ -483,16 +483,24 @@ module _
           ( is-torsorial-Eq-structure
             ( λ μ H pres-mul → one-Ring R ＝ pr1 (pr1 H))
             ( is-torsorial-Eq-subtype
-              ( is-torsorial-Eq-Π
-                ( λ x m → (y : type-Ring R) → mul-Ring R x y ＝ m y)
-                ( λ x → is-torsorial-htpy (mul-Ring R x)))
+              ( is-contr-equiv
+                ( Σ ( (x y : type-Ring R) → type-Ring R)
+                    ( λ g →
+                      (x y : type-Ring R) → mul-Ring R x y ＝ g x y))
+                ( equiv-tot
+                  ( λ m →
+                    equiv-Π-equiv-family (λ x → equiv-explicit-implicit-Π) ∘e
+                    equiv-explicit-implicit-Π))
+                ( is-torsorial-Eq-Π
+                  ( λ x m → (y : type-Ring R) → mul-Ring R x y ＝ m y)
+                  ( λ x → is-torsorial-htpy (mul-Ring R x))))
               ( λ μ →
                 is-prop-iterated-Π 3
                   ( λ x y z → is-set-type-Ring R (μ (μ x y) z) (μ x (μ y z))))
               ( mul-Ring R)
-              ( λ x y → refl)
+              ( λ {x} {y} → refl)
               ( associative-mul-Ring R))
-            ( (mul-Ring R , associative-mul-Ring R) , λ x y → refl)
+            ( (mul-Ring R , associative-mul-Ring R) , λ {x} {y} → refl)
             ( is-torsorial-Eq-subtype
               ( is-torsorial-Eq-subtype
                 ( is-torsorial-path (one-Ring R))

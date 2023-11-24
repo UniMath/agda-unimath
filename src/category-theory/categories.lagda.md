@@ -156,13 +156,17 @@ module _
   {l1 l2 : Level} (C : Category l1 l2)
   where
 
+  is-preunivalent-category-Category :
+    is-preunivalent-Precategory (precategory-Category C)
+  is-preunivalent-category-Category x y =
+    is-emb-is-equiv (is-category-Category C x y)
+
   preunivalent-category-Category : Preunivalent-Category l1 l2
   pr1 preunivalent-category-Category = precategory-Category C
-  pr2 preunivalent-category-Category x y =
-    is-emb-is-equiv (is-category-Category C x y)
+  pr2 preunivalent-category-Category = is-preunivalent-category-Category
 ```
 
-### The total hom-type of a preunivalent category
+### The total hom-type of a category
 
 ```agda
 total-hom-Category :

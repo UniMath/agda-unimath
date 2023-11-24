@@ -60,7 +60,7 @@ module _
 
   not-even-difference-action-equiv-family-on-subuniverse :
     (n : ℕ) (Y : 2-Element-Decidable-Subtype l (raise-Fin l (n +ℕ 2))) →
-    ¬ ( sim-Equivalence-Relation
+    ¬ ( sim-equivalence-relation
       ( even-difference-orientation-Complete-Undirected-Graph
         ( n +ℕ 2)
         ( raise-Fin l (n +ℕ 2) ,
@@ -85,7 +85,7 @@ module _
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
           ( raise-Fin l (n +ℕ 2))) →
-            ¬ ( sim-Equivalence-Relation
+            ¬ ( sim-equivalence-relation
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( n +ℕ 2)
                 ( raise-Fin l (n +ℕ 2) ,

@@ -56,7 +56,7 @@ universal-property-set-truncation :
   (B : Set l2) (f : A → type-Set B) → UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-set-truncation l {A = A} B f =
   (C : Set l) (g : A → type-Set C) →
-  is-contr (Σ (type-hom-Set B C) (λ h → h ∘ f ~ g))
+  is-contr (Σ (hom-Set B C) (λ h → h ∘ f ~ g))
 ```
 
 ### The dependent universal property of set truncations
@@ -88,7 +88,7 @@ abstract
   is-set-truncation-universal-property l B f up-f C =
     is-equiv-is-contr-map
       ( λ g → is-contr-equiv
-        ( Σ (type-hom-Set B C) (λ h → h ∘ f ~ g))
+        ( Σ (hom-Set B C) (λ h → h ∘ f ~ g))
         ( equiv-tot (λ h → equiv-funext))
         ( up-f C g))
 ```
@@ -103,14 +103,14 @@ abstract
     is-set-truncation l B f → universal-property-set-truncation l B f
   universal-property-is-set-truncation l B f is-settr-f C g =
     is-contr-equiv'
-      ( Σ (type-hom-Set B C) (λ h → (h ∘ f) ＝ g))
+      ( Σ (hom-Set B C) (λ h → (h ∘ f) ＝ g))
       ( equiv-tot (λ h → equiv-funext))
       ( is-contr-map-is-equiv (is-settr-f C) g)
 
 map-is-set-truncation :
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
   ({l : Level} → is-set-truncation l B f) →
-  (C : Set l3) (g : A → type-Set C) → type-hom-Set B C
+  (C : Set l3) (g : A → type-Set C) → hom-Set B C
 map-is-set-truncation B f is-settr-f C g =
   pr1 (center (universal-property-is-set-truncation _ B f is-settr-f C g))
 
@@ -186,7 +186,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     ( {l : Level} →
       is-set-quotient l
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( B)
         ( reflecting-map-mere-eq B f)) →
     is-set-truncation l3 B f
@@ -194,7 +194,7 @@ abstract
     is-equiv-comp
       ( pr1)
       ( precomp-Set-Quotient
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
@@ -202,8 +202,8 @@ abstract
       ( is-equiv-pr1-is-contr
         ( λ h →
           is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Equivalence-Relation
-              ( mere-eq-Equivalence-Relation A) X h)
+            ( is-prop-reflects-equivalence-relation
+              ( mere-eq-equivalence-relation A) X h)
             ( reflects-mere-eq X h)))
 ```
 
@@ -215,22 +215,22 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     ( {l : Level} → is-set-truncation l B f) →
     is-set-quotient l3
-      ( mere-eq-Equivalence-Relation A)
+      ( mere-eq-equivalence-relation A)
       ( B)
       ( reflecting-map-mere-eq B f)
   is-set-quotient-is-set-truncation {A = A} B f H X =
     is-equiv-right-factor
       ( pr1)
       ( precomp-Set-Quotient
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
       ( is-equiv-pr1-is-contr
         ( λ h →
           is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Equivalence-Relation
-              ( mere-eq-Equivalence-Relation A) X h)
+            ( is-prop-reflects-equivalence-relation
+              ( mere-eq-equivalence-relation A) X h)
             ( reflects-mere-eq X h)))
       ( H X)
 ```

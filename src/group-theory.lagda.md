@@ -6,6 +6,7 @@
 module group-theory where
 
 open import group-theory.abelian-groups public
+open import group-theory.abelianization-groups public
 open import group-theory.addition-homomorphisms-abelian-groups public
 open import group-theory.automorphism-groups public
 open import group-theory.cartesian-products-abelian-groups public
@@ -69,6 +70,7 @@ open import group-theory.exponents-groups public
 open import group-theory.free-concrete-group-actions public
 open import group-theory.free-groups-with-one-generator public
 open import group-theory.full-subgroups public
+open import group-theory.full-subsemigroups public
 open import group-theory.function-abelian-groups public
 open import group-theory.function-commutative-monoids public
 open import group-theory.function-groups public
@@ -91,6 +93,7 @@ open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups pub
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.images-of-group-homomorphisms public
+open import group-theory.images-of-semigroup-homomorphisms public
 open import group-theory.integer-multiples-of-elements-abelian-groups public
 open import group-theory.integer-powers-of-elements-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
@@ -104,8 +107,9 @@ open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-monoids public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
-open import group-theory.kernels public
+open import group-theory.kernels-homomorphisms-abelian-groups public
 open import group-theory.kernels-homomorphisms-concrete-groups public
+open import group-theory.kernels-homomorphisms-groups public
 open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
@@ -147,6 +151,8 @@ open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
 open import group-theory.products-of-elements-monoids public
 open import group-theory.products-of-tuples-of-elements-commutative-monoids public
+open import group-theory.pullbacks-subgroups public
+open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
@@ -172,9 +178,11 @@ open import group-theory.subsets-abelian-groups public
 open import group-theory.subsets-commutative-monoids public
 open import group-theory.subsets-groups public
 open import group-theory.subsets-monoids public
+open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.surjective-group-homomorphisms public
+open import group-theory.surjective-semigroup-homomorphisms public
 open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
 open import group-theory.torsion-elements-groups public

@@ -79,14 +79,14 @@ module _
   is-closed-under-addition-full-ideal-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring A
       subset-full-ideal-Commutative-Ring
-  is-closed-under-addition-full-ideal-Commutative-Ring =
-    is-closed-under-addition-full-ideal-Ring (ring-Commutative-Ring A)
+  is-closed-under-addition-full-ideal-Commutative-Ring {x} {y} =
+    is-closed-under-addition-full-ideal-Ring (ring-Commutative-Ring A) {x} {y}
 
   is-closed-under-negatives-full-ideal-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring A
       subset-full-ideal-Commutative-Ring
-  is-closed-under-negatives-full-ideal-Commutative-Ring =
-    is-closed-under-negatives-full-ideal-Ring (ring-Commutative-Ring A)
+  is-closed-under-negatives-full-ideal-Commutative-Ring {x} =
+    is-closed-under-negatives-full-ideal-Ring (ring-Commutative-Ring A) {x}
 
   is-additive-subgroup-full-ideal-Commutative-Ring :
     is-additive-subgroup-subset-Commutative-Ring A

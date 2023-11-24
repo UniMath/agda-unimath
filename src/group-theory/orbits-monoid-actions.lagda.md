@@ -28,9 +28,11 @@ open import group-theory.monoids
 
 ## Idea
 
-Given a monoid action `M → endo-Monoid X` we can define a category in which the
-objects are the elements of the set `X` and a morphism from `x` to `y` is an
-element `m` of the monoid `M` such that `mx = y`.
+The [precategory](category-theory.precategories.md) of **orbits** of a
+[monoid action](group-theory.monoid-actions.md) of `M` on `X` consists of the
+elements of the [set](foundation-core.sets.md) `X` as the objects, and a
+morphism from `x` to `y` is an element `m` of the
+[monoid](group-theory.monoids.md) `M` such that `mx = y`.
 
 ## Definition
 
@@ -38,155 +40,155 @@ element `m` of the monoid `M` such that `mx = y`.
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Monoid l1) (X : Monoid-Action l2 M)
+  {l1 l2 : Level} (M : Monoid l1) (X : action-Monoid l2 M)
   where
 
-  hom-orbit-Monoid-Action : (x y : type-Monoid-Action M X) → UU (l1 ⊔ l2)
-  hom-orbit-Monoid-Action x y =
-    Σ (type-Monoid M) ( λ m → Id (mul-Monoid-Action M X m x) y)
+  hom-orbit-action-Monoid : (x y : type-action-Monoid M X) → UU (l1 ⊔ l2)
+  hom-orbit-action-Monoid x y =
+    Σ (type-Monoid M) ( λ m → Id (mul-action-Monoid M X m x) y)
 
-  element-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} → hom-orbit-Monoid-Action x y → type-Monoid M
-  element-hom-orbit-Monoid-Action f = pr1 f
+  element-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} → hom-orbit-action-Monoid x y → type-Monoid M
+  element-hom-orbit-action-Monoid f = pr1 f
 
-  eq-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    Id (mul-Monoid-Action M X (element-hom-orbit-Monoid-Action f) x) y
-  eq-hom-orbit-Monoid-Action f = pr2 f
+  eq-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
+    Id (mul-action-Monoid M X (element-hom-orbit-action-Monoid f) x) y
+  eq-hom-orbit-action-Monoid f = pr2 f
 
-  htpy-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
+  htpy-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f g : hom-orbit-action-Monoid x y) →
     UU l1
-  htpy-hom-orbit-Monoid-Action {x} {y} f g =
+  htpy-hom-orbit-action-Monoid {x} {y} f g =
     Id
-      ( element-hom-orbit-Monoid-Action f)
-      ( element-hom-orbit-Monoid-Action g)
+      ( element-hom-orbit-action-Monoid f)
+      ( element-hom-orbit-action-Monoid g)
 
-  refl-htpy-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    htpy-hom-orbit-Monoid-Action f f
-  refl-htpy-hom-orbit-Monoid-Action f = refl
+  refl-htpy-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
+    htpy-hom-orbit-action-Monoid f f
+  refl-htpy-hom-orbit-action-Monoid f = refl
 
-  htpy-eq-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
-    Id f g → htpy-hom-orbit-Monoid-Action f g
-  htpy-eq-hom-orbit-Monoid-Action f .f refl =
-    refl-htpy-hom-orbit-Monoid-Action f
+  htpy-eq-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f g : hom-orbit-action-Monoid x y) →
+    Id f g → htpy-hom-orbit-action-Monoid f g
+  htpy-eq-hom-orbit-action-Monoid f .f refl =
+    refl-htpy-hom-orbit-action-Monoid f
 
-  is-torsorial-htpy-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    is-torsorial (htpy-hom-orbit-Monoid-Action f)
-  is-torsorial-htpy-hom-orbit-Monoid-Action {x} {y} f =
+  is-torsorial-htpy-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
+    is-torsorial (htpy-hom-orbit-action-Monoid f)
+  is-torsorial-htpy-hom-orbit-action-Monoid {x} {y} f =
     is-torsorial-Eq-subtype
-      ( is-torsorial-path (element-hom-orbit-Monoid-Action f))
+      ( is-torsorial-path (element-hom-orbit-action-Monoid f))
       ( λ u →
-        is-set-type-Monoid-Action M X (mul-Monoid-Action M X u x) y)
-      ( element-hom-orbit-Monoid-Action f)
+        is-set-type-action-Monoid M X (mul-action-Monoid M X u x) y)
+      ( element-hom-orbit-action-Monoid f)
       ( refl)
-      ( eq-hom-orbit-Monoid-Action f)
+      ( eq-hom-orbit-action-Monoid f)
 
-  is-equiv-htpy-eq-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
-    is-equiv (htpy-eq-hom-orbit-Monoid-Action f g)
-  is-equiv-htpy-eq-hom-orbit-Monoid-Action f =
+  is-equiv-htpy-eq-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f g : hom-orbit-action-Monoid x y) →
+    is-equiv (htpy-eq-hom-orbit-action-Monoid f g)
+  is-equiv-htpy-eq-hom-orbit-action-Monoid f =
     fundamental-theorem-id
-      ( is-torsorial-htpy-hom-orbit-Monoid-Action f)
-      ( htpy-eq-hom-orbit-Monoid-Action f)
+      ( is-torsorial-htpy-hom-orbit-action-Monoid f)
+      ( htpy-eq-hom-orbit-action-Monoid f)
 
-  extensionality-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
-    Id f g ≃ htpy-hom-orbit-Monoid-Action f g
-  pr1 (extensionality-hom-orbit-Monoid-Action f g) =
-    htpy-eq-hom-orbit-Monoid-Action f g
-  pr2 (extensionality-hom-orbit-Monoid-Action f g) =
-    is-equiv-htpy-eq-hom-orbit-Monoid-Action f g
+  extensionality-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f g : hom-orbit-action-Monoid x y) →
+    Id f g ≃ htpy-hom-orbit-action-Monoid f g
+  pr1 (extensionality-hom-orbit-action-Monoid f g) =
+    htpy-eq-hom-orbit-action-Monoid f g
+  pr2 (extensionality-hom-orbit-action-Monoid f g) =
+    is-equiv-htpy-eq-hom-orbit-action-Monoid f g
 
-  eq-htpy-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} {f g : hom-orbit-Monoid-Action x y} →
-    htpy-hom-orbit-Monoid-Action f g → Id f g
-  eq-htpy-hom-orbit-Monoid-Action {x} {y} {f} {g} =
-    map-inv-is-equiv (is-equiv-htpy-eq-hom-orbit-Monoid-Action f g)
+  eq-htpy-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} {f g : hom-orbit-action-Monoid x y} →
+    htpy-hom-orbit-action-Monoid f g → Id f g
+  eq-htpy-hom-orbit-action-Monoid {x} {y} {f} {g} =
+    map-inv-is-equiv (is-equiv-htpy-eq-hom-orbit-action-Monoid f g)
 
-  is-prop-htpy-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
-    is-prop (htpy-hom-orbit-Monoid-Action f g)
-  is-prop-htpy-hom-orbit-Monoid-Action f g =
+  is-prop-htpy-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f g : hom-orbit-action-Monoid x y) →
+    is-prop (htpy-hom-orbit-action-Monoid f g)
+  is-prop-htpy-hom-orbit-action-Monoid f g =
     is-set-type-Monoid M
-      ( element-hom-orbit-Monoid-Action f)
-      ( element-hom-orbit-Monoid-Action g)
+      ( element-hom-orbit-action-Monoid f)
+      ( element-hom-orbit-action-Monoid g)
 
-  is-set-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} →
-    is-set (hom-orbit-Monoid-Action x y)
-  is-set-hom-orbit-Monoid-Action {x} {y} f g =
+  is-set-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} →
+    is-set (hom-orbit-action-Monoid x y)
+  is-set-hom-orbit-action-Monoid {x} {y} f g =
     is-prop-equiv
-      ( extensionality-hom-orbit-Monoid-Action f g)
-      ( is-prop-htpy-hom-orbit-Monoid-Action f g)
+      ( extensionality-hom-orbit-action-Monoid f g)
+      ( is-prop-htpy-hom-orbit-action-Monoid f g)
 
   hom-orbit-monoid-action-Set :
-    (x y : type-Monoid-Action M X) → Set (l1 ⊔ l2)
-  pr1 (hom-orbit-monoid-action-Set x y) = hom-orbit-Monoid-Action x y
-  pr2 (hom-orbit-monoid-action-Set x y) = is-set-hom-orbit-Monoid-Action
+    (x y : type-action-Monoid M X) → Set (l1 ⊔ l2)
+  pr1 (hom-orbit-monoid-action-Set x y) = hom-orbit-action-Monoid x y
+  pr2 (hom-orbit-monoid-action-Set x y) = is-set-hom-orbit-action-Monoid
 
-  id-hom-orbit-Monoid-Action :
-    (x : type-Monoid-Action M X) → hom-orbit-Monoid-Action x x
-  pr1 (id-hom-orbit-Monoid-Action x) = unit-Monoid M
-  pr2 (id-hom-orbit-Monoid-Action x) = unit-law-mul-Monoid-Action M X x
+  id-hom-orbit-action-Monoid :
+    (x : type-action-Monoid M X) → hom-orbit-action-Monoid x x
+  pr1 (id-hom-orbit-action-Monoid x) = unit-Monoid M
+  pr2 (id-hom-orbit-action-Monoid x) = unit-law-mul-action-Monoid M X x
 
-  comp-hom-orbit-Monoid-Action :
-    {x y z : type-Monoid-Action M X} →
-    hom-orbit-Monoid-Action y z → hom-orbit-Monoid-Action x y →
-    hom-orbit-Monoid-Action x z
-  pr1 (comp-hom-orbit-Monoid-Action g f) =
+  comp-hom-orbit-action-Monoid :
+    {x y z : type-action-Monoid M X} →
+    hom-orbit-action-Monoid y z → hom-orbit-action-Monoid x y →
+    hom-orbit-action-Monoid x z
+  pr1 (comp-hom-orbit-action-Monoid g f) =
     mul-Monoid M
-      ( element-hom-orbit-Monoid-Action g)
-      ( element-hom-orbit-Monoid-Action f)
-  pr2 (comp-hom-orbit-Monoid-Action {x} g f) =
-    ( associative-mul-Monoid-Action M X
-      ( element-hom-orbit-Monoid-Action g)
-      ( element-hom-orbit-Monoid-Action f)
+      ( element-hom-orbit-action-Monoid g)
+      ( element-hom-orbit-action-Monoid f)
+  pr2 (comp-hom-orbit-action-Monoid {x} g f) =
+    ( associative-mul-action-Monoid M X
+      ( element-hom-orbit-action-Monoid g)
+      ( element-hom-orbit-action-Monoid f)
       ( x)) ∙
-    ( ( ap-mul-Monoid-Action M X (eq-hom-orbit-Monoid-Action f)) ∙
-      ( eq-hom-orbit-Monoid-Action g))
+    ( ap-mul-action-Monoid M X (eq-hom-orbit-action-Monoid f)) ∙
+    ( eq-hom-orbit-action-Monoid g)
 
-  associative-comp-hom-orbit-Monoid-Action :
-    {x y z w : type-Monoid-Action M X} (h : hom-orbit-Monoid-Action z w)
-    (g : hom-orbit-Monoid-Action y z) (f : hom-orbit-Monoid-Action x y) →
+  associative-comp-hom-orbit-action-Monoid :
+    {x y z w : type-action-Monoid M X} (h : hom-orbit-action-Monoid z w)
+    (g : hom-orbit-action-Monoid y z) (f : hom-orbit-action-Monoid x y) →
     Id
-      ( comp-hom-orbit-Monoid-Action (comp-hom-orbit-Monoid-Action h g) f)
-      ( comp-hom-orbit-Monoid-Action h (comp-hom-orbit-Monoid-Action g f))
-  associative-comp-hom-orbit-Monoid-Action h g f =
-    eq-htpy-hom-orbit-Monoid-Action
+      ( comp-hom-orbit-action-Monoid (comp-hom-orbit-action-Monoid h g) f)
+      ( comp-hom-orbit-action-Monoid h (comp-hom-orbit-action-Monoid g f))
+  associative-comp-hom-orbit-action-Monoid h g f =
+    eq-htpy-hom-orbit-action-Monoid
       ( associative-mul-Monoid M
-        ( element-hom-orbit-Monoid-Action h)
-        ( element-hom-orbit-Monoid-Action g)
-        ( element-hom-orbit-Monoid-Action f))
+        ( element-hom-orbit-action-Monoid h)
+        ( element-hom-orbit-action-Monoid g)
+        ( element-hom-orbit-action-Monoid f))
 
-  left-unit-law-comp-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    Id (comp-hom-orbit-Monoid-Action (id-hom-orbit-Monoid-Action y) f) f
-  left-unit-law-comp-hom-orbit-Monoid-Action f =
-    eq-htpy-hom-orbit-Monoid-Action
-      ( left-unit-law-mul-Monoid M (element-hom-orbit-Monoid-Action f))
+  left-unit-law-comp-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
+    Id (comp-hom-orbit-action-Monoid (id-hom-orbit-action-Monoid y) f) f
+  left-unit-law-comp-hom-orbit-action-Monoid f =
+    eq-htpy-hom-orbit-action-Monoid
+      ( left-unit-law-mul-Monoid M (element-hom-orbit-action-Monoid f))
 
-  right-unit-law-comp-hom-orbit-Monoid-Action :
-    {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    Id (comp-hom-orbit-Monoid-Action f (id-hom-orbit-Monoid-Action x)) f
-  right-unit-law-comp-hom-orbit-Monoid-Action f =
-    eq-htpy-hom-orbit-Monoid-Action
-      ( right-unit-law-mul-Monoid M (element-hom-orbit-Monoid-Action f))
+  right-unit-law-comp-hom-orbit-action-Monoid :
+    {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
+    Id (comp-hom-orbit-action-Monoid f (id-hom-orbit-action-Monoid x)) f
+  right-unit-law-comp-hom-orbit-action-Monoid f =
+    eq-htpy-hom-orbit-action-Monoid
+      ( right-unit-law-mul-Monoid M (element-hom-orbit-action-Monoid f))
 
-  orbit-monoid-action-Precategoryegory : Precategory l2 (l1 ⊔ l2)
-  pr1 orbit-monoid-action-Precategoryegory = type-Monoid-Action M X
-  pr1 (pr2 orbit-monoid-action-Precategoryegory) = hom-orbit-monoid-action-Set
-  pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
-    comp-hom-orbit-Monoid-Action
-  pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
-    associative-comp-hom-orbit-Monoid-Action
-  pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
-    id-hom-orbit-Monoid-Action
-  pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory)))) =
-    left-unit-law-comp-hom-orbit-Monoid-Action
-  pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory)))) =
-    right-unit-law-comp-hom-orbit-Monoid-Action
+  orbit-monoid-action-Precategory : Precategory l2 (l1 ⊔ l2)
+  pr1 orbit-monoid-action-Precategory = type-action-Monoid M X
+  pr1 (pr2 orbit-monoid-action-Precategory) = hom-orbit-monoid-action-Set
+  pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+    comp-hom-orbit-action-Monoid
+  pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+    associative-comp-hom-orbit-action-Monoid
+  pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+    id-hom-orbit-action-Monoid
+  pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
+    left-unit-law-comp-hom-orbit-action-Monoid
+  pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
+    right-unit-law-comp-hom-orbit-action-Monoid
 ```

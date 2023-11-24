@@ -242,7 +242,7 @@ abstract
       ( λ t → is-decidable (fiber (g ∘ f) x))
       ( λ u →
         is-decidable-equiv
-          ( equiv-compute-fiber-comp g f x)
+          ( compute-fiber-comp g f x)
           ( is-decidable-equiv
             ( left-unit-law-Σ-is-contr
               ( is-proof-irrelevant-is-prop

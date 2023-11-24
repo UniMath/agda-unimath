@@ -35,7 +35,7 @@ module _
   where
 
   preserves-sup-hom-Large-Poset :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l → l)
       ( large-poset-Large-Suplattice K)
       ( large-poset-Large-Suplattice L) →
@@ -56,21 +56,21 @@ module _
           ( x i))
 
   record
-    hom-set-Large-Suplattice : UUω
+    hom-Large-Suplattice : UUω
     where
     field
       hom-large-poset-hom-Large-Suplattice :
-        hom-set-Large-Poset
+        hom-Large-Poset
           ( λ l → l)
           ( large-poset-Large-Suplattice K)
           ( large-poset-Large-Suplattice L)
       preserves-sup-hom-Large-Suplattice :
         preserves-sup-hom-Large-Poset hom-large-poset-hom-Large-Suplattice
 
-  open hom-set-Large-Suplattice public
+  open hom-Large-Suplattice public
 
   module _
-    (f : hom-set-Large-Suplattice)
+    (f : hom-Large-Suplattice)
     where
 
     map-hom-Large-Suplattice :
