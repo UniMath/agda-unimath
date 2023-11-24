@@ -27,7 +27,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.retractions
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 ```

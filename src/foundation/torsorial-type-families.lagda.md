@@ -13,13 +13,13 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>

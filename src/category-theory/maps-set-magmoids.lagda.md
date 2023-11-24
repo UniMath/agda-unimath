@@ -7,24 +7,13 @@ module category-theory.maps-set-magmoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-set-magmoids
 open import category-theory.set-magmoids
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.commuting-pentagons-of-identifications
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 

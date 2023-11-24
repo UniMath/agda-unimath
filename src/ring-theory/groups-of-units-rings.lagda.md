@@ -9,7 +9,6 @@ module ring-theory.groups-of-units-rings where
 ```agda
 open import category-theory.functors-large-precategories
 
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels

@@ -12,8 +12,6 @@ open import commutative-algebra.homomorphisms-commutative-semirings
 
 open import finite-algebra.commutative-finite-rings
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions

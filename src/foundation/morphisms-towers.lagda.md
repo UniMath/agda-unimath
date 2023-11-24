@@ -20,7 +20,6 @@ open import foundation.structure-identity-principle
 open import foundation.towers
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies

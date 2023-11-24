@@ -7,7 +7,6 @@ module elementary-number-theory.decidable-total-order-standard-finite-types wher
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
@@ -17,8 +16,6 @@ open import foundation.universe-levels
 
 open import order-theory.decidable-total-orders
 open import order-theory.total-orders
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

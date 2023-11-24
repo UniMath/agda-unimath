@@ -9,7 +9,6 @@ module trees.universal-tree where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 

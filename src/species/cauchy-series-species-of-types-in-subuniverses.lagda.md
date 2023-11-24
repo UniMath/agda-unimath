@@ -10,11 +10,11 @@ module species.cauchy-series-species-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.global-subuniverses
+open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types

@@ -15,7 +15,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.raising-universe-levels
 open import foundation.transport-along-identifications
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
@@ -26,6 +25,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.univalence
 
 open import univalent-combinatorics.equality-standard-finite-types

@@ -25,8 +25,8 @@ open import order-theory.large-posets
 
 ## Idea
 
-A **subset of a semigroup** `G` is simply a [subtype](foundation.subtypes.md) of
-the underlying type of the [semigroup](group-theory.semigroups.md) `G`. The
+A **subset of a semigroup** `G` is a [subtype](foundation.subtypes.md) of the
+underlying type of the [semigroup](group-theory.semigroups.md) `G`. The
 **powerset** of a semigroup is the [large poset](order-theory.large-posets.md)
 of all subsets of `G`, i.e., it is the [powerset](foundation.powersets.md) of
 the underlying [set](foundation.sets.md) of `G`.

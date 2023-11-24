@@ -8,7 +8,6 @@ module univalent-combinatorics.ferrers-diagrams where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences

@@ -9,7 +9,6 @@ module group-theory.nontrivial-groups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.embeddings
@@ -25,7 +24,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.groups

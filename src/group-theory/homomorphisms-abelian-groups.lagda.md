@@ -9,7 +9,6 @@ module group-theory.homomorphisms-abelian-groups where
 ```agda
 open import category-theory.large-categories
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types

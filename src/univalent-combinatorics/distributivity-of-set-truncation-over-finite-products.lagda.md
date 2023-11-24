@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -24,12 +25,16 @@ open import foundation.functoriality-function-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-empty-type
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 

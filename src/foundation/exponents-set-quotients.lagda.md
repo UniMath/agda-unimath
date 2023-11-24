@@ -13,6 +13,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
+open import foundation.postcomposition-functions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets

@@ -9,7 +9,7 @@ module orthogonal-factorization-systems.local-families where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
+open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.universe-levels
 
