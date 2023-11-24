@@ -14,6 +14,7 @@ open import category-theory.precategories
 open import category-theory.pregroupoids
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
+open import category-theory.subterminal-precategories
 open import category-theory.terminal-category
 
 open import foundation.action-on-identifications-functions
@@ -44,7 +45,8 @@ hom-[sets](foundation-core.sets.md) are
 
 This construction demonstrates one essential aspect about precategories: While
 it displays `obj-Precategory` as a [retraction](foundation-core.retractions.md),
-up to weak categorical equivalence, every indiscrete precategory is subterminal.
+every indiscrete precategory is
+[subterminal](category-theory.subterminal-precategories.md).
 
 ## Definitions
 
@@ -217,6 +219,10 @@ module _
 
 ### If an indiscrete precategory is preunivalent then it is a strict category
 
+**Proof:** If an indiscrete precategory is preunivalent, that means every
+identity type of the objects embeds into the unit type, hence the objects form a
+set.
+
 ```agda
 module _
   {l : Level} (X : UU l)
@@ -242,19 +248,16 @@ is-section-indiscrete-Precategory :
 is-section-indiscrete-Precategory X = refl
 ```
 
-### The terminal projection functor is fully faithful
+### Indiscrete precategories are subterminal
 
 ```agda
 module _
   {l : Level} (X : UU l)
   where
 
-  is-fully-faithful-terminal-functor-indiscrete-Precategory :
-    is-fully-faithful-functor-Precategory
-      ( indiscrete-Precategory X)
-      ( terminal-Precategory)
-      ( terminal-functor-Precategory (indiscrete-Precategory X))
-  is-fully-faithful-terminal-functor-indiscrete-Precategory x y = is-equiv-id
+  is-subterminal-indiscrete-Precategory :
+    is-subterminal-Precategory (indiscrete-Precategory X)
+  is-subterminal-indiscrete-Precategory x y = is-equiv-id
 ```
 
 ## External links
