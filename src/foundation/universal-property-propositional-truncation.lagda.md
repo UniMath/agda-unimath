@@ -36,7 +36,7 @@ open import foundation-core.type-theoretic-principle-of-choice
 ## Idea
 
 A map `f : A → P` into a proposition `P` is said to satisfy the universal
-property of the propositional truncation of `A`, or is simply said to be a
+property of the propositional truncation of `A`, or is said to be a
 propositional truncation of `A`, if any map `g : A → Q` into a proposition `Q`
 extends uniquely along `f`.
 

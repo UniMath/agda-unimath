@@ -37,7 +37,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **subcategory** of a [category](category-theory.categories.md) `C` is simply a
+A **subcategory** of a [category](category-theory.categories.md) `C` is a
 [subprecategory](category-theory.subprecategories.md). It consists of a
 [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`, and a family
 of subtypes

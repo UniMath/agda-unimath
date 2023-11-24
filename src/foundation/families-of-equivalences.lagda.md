@@ -18,7 +18,7 @@ open import foundation-core.type-theoretic-principle-of-choice
 
 ## Idea
 
-A **family of equivalences** is simply a family
+A **family of equivalences** is a family
 
 ```text
   eᵢ : A i ≃ B i

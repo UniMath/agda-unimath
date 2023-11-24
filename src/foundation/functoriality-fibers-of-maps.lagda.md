@@ -301,8 +301,8 @@ identifications
   q : ap g p ∙ ((β a)⁻¹ ∙ refl) ＝ ((α a)⁻¹ ∙ refl) ∙ γ₁ (f a)
 ```
 
-The first identification is simply `γ₀ a`. To obtain the second identification,
-we first simplify using the right unit law. I.e., it suffices to construct an
+The first identification is `γ₀ a`. To obtain the second identification, we
+first simplify using the right unit law. I.e., it suffices to construct an
 identification
 
 ```text
