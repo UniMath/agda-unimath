@@ -9,6 +9,7 @@ module foundation.epimorphisms-with-respect-to-truncated-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.connected-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.function-extensionality
@@ -17,8 +18,10 @@ open import foundation.functoriality-truncation
 open import foundation.sections
 open import foundation.truncation-equivalences
 open import foundation.truncations
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -290,6 +293,51 @@ module _
         ( precomp (codiagonal-map f) (type-Truncated-Type X))
         ( is-equiv-precomp-is-truncation-equivalence k (codiagonal-map f) e X)
         ( is-equiv-map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
+
+  is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type :
+    is-truncation-equivalence k (codiagonal-map f) →
+    is-epimorphism-Truncated-Type k f
+  is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type e X =
+    is-emb-is-contr-fibers-values
+      ( precomp f (type-Truncated-Type X))
+      ( λ g →
+        is-contr-equiv
+          ( Σ ( B → (type-Truncated-Type X))
+              ( λ h → coherence-square-maps f f h g))
+          ( compute-fiber-precomp f (type-Truncated-Type X) g)
+          ( is-contr-is-equiv-pr1
+            ( is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map
+              ( e)
+              ( X))
+            ( g)))
+```
+
+### A map is a `k`-epimorphism if and only if its codiagonal is `k`-connected
+
+This strengthens the above result about the codiagonal being a `k`-equivalence.
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-epimorphism-is-connected-codiagonal-map-Truncated-Type :
+    is-connected-map k (codiagonal-map f) → is-epimorphism-Truncated-Type k f
+  is-epimorphism-is-connected-codiagonal-map-Truncated-Type c =
+    is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type k f
+      ( is-truncation-equivalence-is-connected-map (codiagonal-map f) c)
+
+  is-connected-codiagonal-map-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f → is-connected-map k (codiagonal-map f)
+  is-connected-codiagonal-map-is-epimorphism-Truncated-Type e =
+    is-connected-map-is-truncation-equivalence-section
+      ( codiagonal-map f)
+      ( k)
+      ( inl-pushout f f , compute-inl-codiagonal-map f)
+      ( is-truncation-equivalence-codiagonal-map-is-epimorphism-Truncated-Type
+        ( k)
+        ( f)
+        ( e))
 ```
 
 ## See also
