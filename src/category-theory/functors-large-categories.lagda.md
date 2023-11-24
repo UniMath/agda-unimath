@@ -19,7 +19,7 @@ open import foundation.universe-levels
 ## Idea
 
 A **functor** from a [large category](category-theory.large-categories.md) `C`
-to a large category `D` is just a
+to a large category `D` is a
 [functor](category-theory.functors-large-precategories.md) between the
 underlying [large precategories](category-theory.large-precategories.md) of `C`
 and `D`. In other words, functors of large categories consist of:
