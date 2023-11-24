@@ -202,8 +202,8 @@ module _
 
 ## External links
 
+- [normalizer](https://ncatlab.org/nlab/show/normalizer) at $n$Lab
 - [Centralizer and normalizer](https://en.wikipedia.org/wiki/Centralizer_and_normalizer)
   at Wikipedia
 - [Normalizer of a subgroup](https://groupprops.subwiki.org/wiki/Normalizer_of_a_subgroup)
   at Groupprops
-- [normalizer](https://ncatlab.org/nlab/show/normalizer) at $n$Lab

@@ -31,11 +31,14 @@ open import group-theory.transitive-group-actions
 
 ## Idea
 
-The **orbit category of a group** `(G)` is the
+The **orbit category of a group** `𝒪(G)` is the
 [full subcategory](category-theory.full-large-subcategories.md) of the
 [category of `G`-sets](group-theory.category-of-group-actions.md) consisting of
 orbits of `G`, i.e. [transitive](group-theory.transitive-group-actions.md)
-[`G`-sets](group-theory.group-actions.md).
+[`G`-sets](group-theory.group-actions.md). Equivalently, an orbit of `G` is a
+`G`-set that is
+[merely equivalent](group-theory.mere-equivalences-group-actions.md) to a
+quotient `G`-set `G/H` for some [subgroup](group-theory.subgroups.md) `H`.
 
 ## Definitions
 
