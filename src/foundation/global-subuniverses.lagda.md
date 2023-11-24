@@ -37,7 +37,7 @@ open import foundation-core.transport-along-identifications
 universe that are defined at every level, and are closed under
 [equivalences of types](foundation-core.equivalences.md). This does not follow
 from [univalence](foundation.univalence.md), as equivalence induction only holds
-for homogenous equivalences, i.e. equivalences in a single universe.
+for homogeneous equivalences, i.e. equivalences in a single universe.
 
 ## Definitions
 
