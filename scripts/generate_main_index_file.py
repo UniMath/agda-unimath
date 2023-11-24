@@ -15,7 +15,7 @@ STATUS_FLAG_DUPLICATE_TITLE = 4
 entry_template = '- [{title}]({mdfile})'
 
 
-def generate_namespace_entry_list(namespace):
+def generate_namespace_entry_list(root, namespace):
     status = 0
 
     try:
@@ -78,7 +78,7 @@ def generate_index(root, header):
     namespaces = sorted(set(utils.get_subdirectories_recursive(root)))
 
     for namespace in namespaces:
-        entry_list, s = generate_namespace_entry_list(namespace)
+        entry_list, s = generate_namespace_entry_list(root, namespace)
         entry_lists.append(entry_list)
         status |= s
 
