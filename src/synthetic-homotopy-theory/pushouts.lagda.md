@@ -228,7 +228,7 @@ Given a pushout square with a
    A ----> ∙    \
     \ inl   \   |
   m  \  cogap\  |
-      \       \ v
+      \       ∨ v
        \-----> X
 ```
 
@@ -352,7 +352,7 @@ We record the following auxiliary lemma which says that if we have types `T`,
    T ----------> G
    |             |
  u |             |
-   v          ⌜  v
+   v           ⌜ v
    F ----> fiber cogap x
 ```
 

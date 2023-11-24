@@ -93,7 +93,7 @@ hom-algebra-Hatcher-Acyclic-Type
                 ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
                   ( ap
                     ( power-nat-Ω 2 B)
-                    ( ( preserves-mul-map-Ω f a1 a2) ∙
+                    ( ( preserves-mul-map-Ω f) ∙
                       ( horizontal-concat-Id² u v))))
                 ( s2)))))
 ```

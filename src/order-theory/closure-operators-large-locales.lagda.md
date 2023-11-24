@@ -63,7 +63,7 @@ module _
     where
 
     hom-large-poset-closure-operator-Large-Locale :
-      hom-set-Large-Poset
+      hom-Large-Poset
         ( λ l → l)
         ( large-poset-Large-Locale L)
         ( large-poset-Large-Locale L)

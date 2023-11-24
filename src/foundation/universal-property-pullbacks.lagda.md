@@ -38,7 +38,7 @@ to a square
 
 ```text
 C -----> B
-|        |
+| ⌟      |
 |        |
 V        V
 A -----> X

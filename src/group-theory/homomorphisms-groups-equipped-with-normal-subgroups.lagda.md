@@ -16,6 +16,8 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
+open import group-theory.pullbacks-subgroups
+open import group-theory.subgroups
 ```
 
 </details>
@@ -55,8 +57,7 @@ module _
 
   reflects-normal-subgroup-hom-Group : hom-Group G H → UU (l1 ⊔ l3 ⊔ l4)
   reflects-normal-subgroup-hom-Group f =
-    (x : type-Group G) → is-in-Normal-Subgroup G N x →
-    is-in-Normal-Subgroup H M (map-hom-Group G H f x)
+    leq-Normal-Subgroup G N (pullback-Normal-Subgroup G H f M)
 
   reflecting-hom-Group : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   reflecting-hom-Group = Σ (hom-Group G H) reflects-normal-subgroup-hom-Group
@@ -84,14 +85,36 @@ module _
 
 ### The identity reflecting group homomorphism
 
+We define two variations of the identity reflecting group homomorphism. We will
+define the standard identity reflecting group homomorphism, but we will also we
+define a generalized version which takes as an argument an arbitrary element of
+
+```text
+  reflects-normal-subgroup-hom-Group G G N N (id-hom-Group G).
+```
+
+The purpose is that in functoriality proofs, the proof that the identity
+homomorphism is reflecting is not always the standard one.
+
 ```agda
 module _
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
   where
 
+  reflects-normal-subgroup-id-hom-Group :
+    reflects-normal-subgroup-hom-Group G G N N (id-hom-Group G)
+  reflects-normal-subgroup-id-hom-Group =
+    refl-leq-subtype (subset-Normal-Subgroup G N)
+
+  id-reflecting-hom-Group' :
+    (p : reflects-normal-subgroup-hom-Group G G N N (id-hom-Group G)) →
+    reflecting-hom-Group G G N N
+  pr1 (id-reflecting-hom-Group' p) = id-hom-Group G
+  pr2 (id-reflecting-hom-Group' p) = p
+
   id-reflecting-hom-Group : reflecting-hom-Group G G N N
-  pr1 id-reflecting-hom-Group = id-hom-Group G
-  pr2 id-reflecting-hom-Group = refl-leq-subtype (subset-Normal-Subgroup G N)
+  id-reflecting-hom-Group =
+    id-reflecting-hom-Group' reflects-normal-subgroup-id-hom-Group
 ```
 
 ### Composition of reflecting group homomorphisms
@@ -134,14 +157,22 @@ module _
         ( map-reflecting-hom-Group G H L M f))
       ( reflects-normal-subgroup-reflecting-hom-Group G H L M f)
 
+  comp-reflecting-hom-Group' :
+    (g : reflecting-hom-Group H K M N) (f : reflecting-hom-Group G H L M) →
+    (p :
+      reflects-normal-subgroup-hom-Group G K L N
+        ( hom-comp-reflecting-hom-Group g f)) →
+    reflecting-hom-Group G K L N
+  pr1 (comp-reflecting-hom-Group' g f p) = hom-comp-reflecting-hom-Group g f
+  pr2 (comp-reflecting-hom-Group' g f p) = p
+
   comp-reflecting-hom-Group :
     reflecting-hom-Group H K M N →
     reflecting-hom-Group G H L M →
     reflecting-hom-Group G K L N
-  pr1 (comp-reflecting-hom-Group g f) =
-    hom-comp-reflecting-hom-Group g f
-  pr2 (comp-reflecting-hom-Group g f) =
-    reflects-normal-subgroup-comp-reflecting-hom-Group g f
+  comp-reflecting-hom-Group g f =
+    comp-reflecting-hom-Group' g f
+      ( reflects-normal-subgroup-comp-reflecting-hom-Group g f)
 ```
 
 ### Homotopies of reflecting homomorphisms

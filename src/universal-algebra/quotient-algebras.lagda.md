@@ -53,7 +53,7 @@ module _
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
   set-quotient-Algebra =
-    quotient-Set ( eq-rel-congruence-Algebra Sg Th Alg R)
+    quotient-Set ( equivalence-relation-congruence-Algebra Sg Th Alg R)
 
   type-quotient-Algebra : UU (l3 ⊔ l4)
   type-quotient-Algebra = pr1 set-quotient-Algebra
@@ -63,15 +63,15 @@ module _
 
   compute-quotient-Algebra :
     equivalence-class
-      ( eq-rel-congruence-Algebra Sg Th Alg R) ≃
+      ( equivalence-relation-congruence-Algebra Sg Th Alg R) ≃
       ( type-quotient-Algebra)
   compute-quotient-Algebra =
     compute-set-quotient
-      ( eq-rel-congruence-Algebra Sg Th Alg R)
+      ( equivalence-relation-congruence-Algebra Sg Th Alg R)
 
   set-quotient-equivalence-class-Algebra :
     equivalence-class
-      ( eq-rel-congruence-Algebra Sg Th Alg R) →
+      ( equivalence-relation-congruence-Algebra Sg Th Alg R) →
     type-quotient-Algebra
   set-quotient-equivalence-class-Algebra =
     map-equiv compute-quotient-Algebra
@@ -79,7 +79,7 @@ module _
   equivalence-class-set-quotient-Algebra :
     type-quotient-Algebra →
     equivalence-class
-      ( eq-rel-congruence-Algebra Sg Th Alg R)
+      ( equivalence-relation-congruence-Algebra Sg Th Alg R)
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
@@ -97,23 +97,23 @@ module _
           ( vec-type-quotient-vec-type-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
-  relation-holds-all-vec-all-sim-Equivalence-Relation :
+  relation-holds-all-vec-all-sim-equivalence-relation :
     { n : ℕ}
     ( v v' : multivariable-input n ( λ _ → type-Algebra Sg Th Alg)) →
     ( type-Prop
-      ( prop-Equivalence-Relation
-        ( all-sim-Equivalence-Relation n
+      ( prop-equivalence-relation
+        ( all-sim-equivalence-relation n
           ( λ _ → type-Algebra Sg Th Alg)
-          ( λ _ → eq-rel-congruence-Algebra Sg Th Alg R)) v v')) →
+          ( λ _ → equivalence-relation-congruence-Algebra Sg Th Alg R)) v v')) →
     relation-holds-all-vec Sg Th Alg
-      ( eq-rel-congruence-Algebra Sg Th Alg R)
+      ( equivalence-relation-congruence-Algebra Sg Th Alg R)
       ( vector-multivariable-input n (type-Algebra Sg Th Alg) v)
       ( vector-multivariable-input n (type-Algebra Sg Th Alg) v')
-  relation-holds-all-vec-all-sim-Equivalence-Relation {zero-ℕ} v v' p =
+  relation-holds-all-vec-all-sim-equivalence-relation {zero-ℕ} v v' p =
     raise-star
-  relation-holds-all-vec-all-sim-Equivalence-Relation
+  relation-holds-all-vec-all-sim-equivalence-relation
     {succ-ℕ n} (x , v) (x' , v') (p , p') =
-    p , (relation-holds-all-vec-all-sim-Equivalence-Relation v v' p')
+    p , (relation-holds-all-vec-all-sim-equivalence-relation v v' p')
 
   is-model-set-quotient-Algebra :
     is-model-signature Sg set-quotient-Algebra
@@ -121,8 +121,8 @@ module _
     multivariable-map-set-quotient
       ( arity-operation-signature Sg op)
       ( λ _ → type-Algebra Sg Th Alg)
-      ( λ _ → eq-rel-congruence-Algebra Sg Th Alg R)
-      ( eq-rel-congruence-Algebra Sg Th Alg R)
+      ( λ _ → equivalence-relation-congruence-Algebra Sg Th Alg R)
+      ( equivalence-relation-congruence-Algebra Sg Th Alg R)
       ( pair
         ( λ v →
           is-model-set-Algebra Sg Th Alg op
@@ -140,7 +140,7 @@ module _
               ( arity-operation-signature Sg op)
               ( type-Algebra Sg Th Alg)
               ( v'))
-            (relation-holds-all-vec-all-sim-Equivalence-Relation v v' p)))
+            (relation-holds-all-vec-all-sim-equivalence-relation v v' p)))
       ( multivariable-input-vector
         ( arity-operation-signature Sg op)
         ( type-quotient-Algebra)

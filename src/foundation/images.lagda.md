@@ -49,6 +49,9 @@ module _
   subtype-im : subtype (l1 ⊔ l2) X
   subtype-im x = trunc-Prop (fiber f x)
 
+  is-in-subtype-im : X → UU (l1 ⊔ l2)
+  is-in-subtype-im = is-in-subtype subtype-im
+
   im : UU (l1 ⊔ l2)
   im = type-subtype subtype-im
 

@@ -11,6 +11,8 @@ open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
+open import order-theory.commuting-squares-of-galois-connections-large-posets public
+open import order-theory.commuting-squares-of-order-preserving-maps-large-posets public
 open import order-theory.coverings-locales public
 open import order-theory.decidable-posets public
 open import order-theory.decidable-preorders public
@@ -68,6 +70,7 @@ open import order-theory.locales public
 open import order-theory.locally-finite-posets public
 open import order-theory.lower-bounds-large-posets public
 open import order-theory.lower-bounds-posets public
+open import order-theory.lower-sets-large-posets public
 open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
@@ -87,9 +90,13 @@ open import order-theory.precategory-of-inhabited-finite-total-orders public
 open import order-theory.precategory-of-posets public
 open import order-theory.precategory-of-total-orders public
 open import order-theory.preorders public
+open import order-theory.principal-lower-sets-large-posets public
+open import order-theory.principal-upper-sets-large-posets public
 open import order-theory.reflective-galois-connections-large-posets public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
+open import order-theory.similarity-of-order-preserving-maps-large-posets public
+open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.suplattices public
@@ -100,4 +107,5 @@ open import order-theory.total-orders public
 open import order-theory.total-preorders public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
+open import order-theory.upper-sets-large-posets public
 ```

@@ -19,18 +19,20 @@ open import group-theory.groups
 
 ## Idea
 
-The orbit of an element `x` in a G-set `X` is the set of elements of the form
-`gx`.
+The [groupoid](category-theory.groupoids.md) of **orbits** of a
+[group action](group-theory.group-actions.md) consists of elements of `X`, and a
+morphism from `x` to `y` is given by an element `g` of the
+[group](group-theory.groups.md) `G` such that `gx ＝ y`.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
   where
 
-  hom-orbit-Abstract-Group-Action :
-    (x y : type-Abstract-Group-Action G X) → UU (l1 ⊔ l2)
-  hom-orbit-Abstract-Group-Action x y =
-    Σ (type-Group G) (λ g → Id (mul-Abstract-Group-Action G X g x) y)
+  hom-orbit-action-Group :
+    (x y : type-action-Group G X) → UU (l1 ⊔ l2)
+  hom-orbit-action-Group x y =
+    Σ (type-Group G) (λ g → mul-action-Group G X g x ＝ y)
 ```

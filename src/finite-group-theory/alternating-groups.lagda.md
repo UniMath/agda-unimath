@@ -12,7 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.sign-homomorphism
 
 open import group-theory.groups
-open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-groups
 open import group-theory.symmetric-groups
 
 open import univalent-combinatorics.finite-types

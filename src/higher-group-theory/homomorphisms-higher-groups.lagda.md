@@ -54,7 +54,7 @@ module _
   preserves-unit-map-hom-∞-Group = preserves-refl-map-Ω
 
   preserves-mul-map-hom-∞-Group :
-    (f : hom-∞-Group) (x y : type-∞-Group G) →
+    (f : hom-∞-Group) {x y : type-∞-Group G} →
     map-hom-∞-Group f (mul-∞-Group G x y) ＝
     mul-∞-Group H (map-hom-∞-Group f x) (map-hom-∞-Group f y)
   preserves-mul-map-hom-∞-Group = preserves-mul-map-Ω

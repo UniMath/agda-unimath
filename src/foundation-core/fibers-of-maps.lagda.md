@@ -346,10 +346,10 @@ module _
         ( is-section-inv-map-compute-fiber-comp)
         ( is-retraction-inv-map-compute-fiber-comp)
 
-  equiv-compute-fiber-comp :
+  compute-fiber-comp :
     fiber (g ∘ h) x ≃ Σ (fiber g x) (λ t → fiber h (pr1 t))
-  pr1 equiv-compute-fiber-comp = map-compute-fiber-comp
-  pr2 equiv-compute-fiber-comp = is-equiv-map-compute-fiber-comp
+  pr1 compute-fiber-comp = map-compute-fiber-comp
+  pr2 compute-fiber-comp = is-equiv-map-compute-fiber-comp
 
   abstract
     is-equiv-inv-map-compute-fiber-comp :
@@ -360,10 +360,10 @@ module _
           ( is-retraction-inv-map-compute-fiber-comp)
           ( is-section-inv-map-compute-fiber-comp)
 
-  inv-equiv-compute-fiber-comp :
+  inv-compute-fiber-comp :
     Σ (fiber g x) (λ t → fiber h (pr1 t)) ≃ fiber (g ∘ h) x
-  pr1 inv-equiv-compute-fiber-comp = inv-map-compute-fiber-comp
-  pr2 inv-equiv-compute-fiber-comp = is-equiv-inv-map-compute-fiber-comp
+  pr1 inv-compute-fiber-comp = inv-map-compute-fiber-comp
+  pr2 inv-compute-fiber-comp = is-equiv-inv-map-compute-fiber-comp
 ```
 
 ### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map

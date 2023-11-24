@@ -72,7 +72,7 @@ leq-cardinality-Prop :
   {l1 l2 : Level} → cardinal l1 → cardinal l2 → Prop (l1 ⊔ l2)
 leq-cardinality-Prop {l1} {l2} =
   map-universal-property-trunc-Set
-    ( hom-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+    ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
     ( leq-cardinality-Prop')
 
 leq-cardinality : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
@@ -92,7 +92,7 @@ compute-leq-cardinality {l1} {l2} X Y =
   equiv-eq-Prop
     ( ( htpy-eq
         ( triangle-universal-property-trunc-Set
-          ( hom-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+          ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
           ( leq-cardinality-Prop') X) (cardinality Y)) ∙
       ( compute-leq-cardinality-Prop' X Y))
 

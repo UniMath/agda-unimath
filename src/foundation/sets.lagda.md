@@ -153,19 +153,19 @@ abstract
     is-set B → is-set (A → B)
   is-set-function-type = is-trunc-function-type zero-𝕋
 
-type-hom-Set :
+hom-Set :
   {l1 l2 : Level} → Set l1 → Set l2 → UU (l1 ⊔ l2)
-type-hom-Set A B = type-Set A → type-Set B
+hom-Set A B = type-Set A → type-Set B
 
 is-set-hom-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2) →
-  is-set (type-hom-Set A B)
+  is-set (hom-Set A B)
 is-set-hom-Set A B = is-set-function-type (is-set-type-Set B)
 
-hom-Set :
+hom-set-Set :
   {l1 l2 : Level} → Set l1 → Set l2 → Set (l1 ⊔ l2)
-pr1 (hom-Set A B) = type-hom-Set A B
-pr2 (hom-Set A B) = is-set-hom-Set A B
+pr1 (hom-set-Set A B) = hom-Set A B
+pr2 (hom-set-Set A B) = is-set-hom-Set A B
 
 precomp-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : Set l3) →

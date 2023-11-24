@@ -20,7 +20,7 @@ open import group-theory.groups
 ## Idea
 
 The **principal group action** is the [action](group-theory.group-actions.md) of
-a [group](group-theory.groups.md) on itself by multiplication from the left
+a [group](group-theory.groups.md) on itself by multiplication from the left.
 
 ## Definition
 
@@ -29,9 +29,9 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  principal-Abstract-Group-Action : Abstract-Group-Action G l1
-  pr1 principal-Abstract-Group-Action = set-Group G
-  pr1 (pr2 principal-Abstract-Group-Action) g = equiv-mul-Group G g
-  pr2 (pr2 principal-Abstract-Group-Action) g h =
+  principal-action-Group : action-Group G l1
+  pr1 principal-action-Group = set-Group G
+  pr1 (pr2 principal-action-Group) g = equiv-mul-Group G g
+  pr2 (pr2 principal-action-Group) {g} {h} =
     eq-htpy-equiv (associative-mul-Group G g h)
 ```

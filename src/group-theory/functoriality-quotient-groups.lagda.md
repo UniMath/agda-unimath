@@ -109,20 +109,30 @@ module _
   where
 
   abstract
-    preserves-id-hom-quotient-Group :
-      hom-quotient-Group G G N N (id-reflecting-hom-Group G N) ＝
+    preserves-id-hom-quotient-Group' :
+      (p : reflects-normal-subgroup-hom-Group G G N N (id-hom-Group G)) →
+      hom-quotient-Group G G N N (id-reflecting-hom-Group' G N p) ＝
       id-hom-Group (quotient-Group G N)
-    preserves-id-hom-quotient-Group =
+    preserves-id-hom-quotient-Group' p =
       ap
         ( pr1)
         ( eq-is-contr'
           ( unique-mapping-property-quotient-Group G N
             ( quotient-Group G N)
             ( nullifying-quotient-hom-Group G N))
-          ( hom-quotient-Group G G N N (id-reflecting-hom-Group G N) ,
-            naturality-hom-quotient-Group G G N N (id-reflecting-hom-Group G N))
+          ( hom-quotient-Group G G N N (id-reflecting-hom-Group' G N p) ,
+            naturality-hom-quotient-Group G G N N
+              ( id-reflecting-hom-Group' G N p))
           ( id-hom-Group (quotient-Group G N) ,
             refl-htpy))
+
+  abstract
+    preserves-id-hom-quotient-Group :
+      hom-quotient-Group G G N N (id-reflecting-hom-Group G N) ＝
+      id-hom-Group (quotient-Group G N)
+    preserves-id-hom-quotient-Group =
+      preserves-id-hom-quotient-Group'
+        ( reflects-normal-subgroup-id-hom-Group G N)
 ```
 
 #### The functorial action preserves composition
@@ -137,17 +147,21 @@ module _
   where
 
   abstract
-    preserves-comp-hom-quotient-Group :
+    preserves-comp-hom-quotient-Group' :
       (g : reflecting-hom-Group H K M N)
-      (f : reflecting-hom-Group G H L M) →
-      hom-quotient-Group G K L N (comp-reflecting-hom-Group G H K L M N g f) ＝
+      (f : reflecting-hom-Group G H L M)
+      (p :
+        reflects-normal-subgroup-hom-Group G K L N
+          ( hom-comp-reflecting-hom-Group G H K L M N g f)) →
+      hom-quotient-Group G K L N
+        ( comp-reflecting-hom-Group' G H K L M N g f p) ＝
       comp-hom-Group
         ( quotient-Group G L)
         ( quotient-Group H M)
         ( quotient-Group K N)
         ( hom-quotient-Group H K M N g)
         ( hom-quotient-Group G H L M f)
-    preserves-comp-hom-quotient-Group g f =
+    preserves-comp-hom-quotient-Group' g f p =
       ap
         ( pr1)
         ( eq-is-contr'
@@ -158,11 +172,11 @@ module _
               ( L)
               ( N)
               ( nullifying-quotient-hom-Group K N)
-              ( comp-reflecting-hom-Group G H K L M N g f)))
+              ( comp-reflecting-hom-Group' G H K L M N g f p)))
           ( ( hom-quotient-Group G K L N
-              ( comp-reflecting-hom-Group G H K L M N g f)) ,
+              ( comp-reflecting-hom-Group' G H K L M N g f p)) ,
             ( naturality-hom-quotient-Group G K L N
-              ( comp-reflecting-hom-Group G H K L M N g f)))
+              ( comp-reflecting-hom-Group' G H K L M N g f p)))
           ( comp-hom-Group
             ( quotient-Group G L)
             ( quotient-Group H M)
@@ -179,6 +193,21 @@ module _
               ( map-hom-quotient-Group H K M N g)
               ( naturality-hom-quotient-Group G H L M f)
               ( naturality-hom-quotient-Group H K M N g))))
+
+  abstract
+    preserves-comp-hom-quotient-Group :
+      (g : reflecting-hom-Group H K M N)
+      (f : reflecting-hom-Group G H L M) →
+      hom-quotient-Group G K L N (comp-reflecting-hom-Group G H K L M N g f) ＝
+      comp-hom-Group
+        ( quotient-Group G L)
+        ( quotient-Group H M)
+        ( quotient-Group K N)
+        ( hom-quotient-Group H K M N g)
+        ( hom-quotient-Group G H L M f)
+    preserves-comp-hom-quotient-Group g f =
+      preserves-comp-hom-quotient-Group' g f
+        ( reflects-normal-subgroup-comp-reflecting-hom-Group G H K L M N g f)
 ```
 
 #### The quotient group functor
