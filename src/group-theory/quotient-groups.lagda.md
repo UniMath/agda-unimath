@@ -317,8 +317,7 @@ module _
           ( ap
             ( map-quotient-hom-Group G N)
             ( associative-mul-Group G x y z)) ∙
-          ( inv
-            ( compute-mul-quotient-Group x (mul-Group G y z))) ∙
+          ( inv (compute-mul-quotient-Group x (mul-Group G y z))) ∙
           ( ap
             ( mul-quotient-Group (map-quotient-hom-Group G N x))
             ( inv (compute-mul-quotient-Group y z))))
@@ -375,15 +374,11 @@ module _
   quotient-Group : Group (l1 ⊔ l2)
   pr1 quotient-Group = semigroup-quotient-Group
   pr1 (pr1 (pr2 quotient-Group)) = unit-quotient-Group
-  pr1 (pr2 (pr1 (pr2 quotient-Group))) =
-    left-unit-law-mul-quotient-Group
-  pr2 (pr2 (pr1 (pr2 quotient-Group))) =
-    right-unit-law-mul-quotient-Group
+  pr1 (pr2 (pr1 (pr2 quotient-Group))) = left-unit-law-mul-quotient-Group
+  pr2 (pr2 (pr1 (pr2 quotient-Group))) = right-unit-law-mul-quotient-Group
   pr1 (pr2 (pr2 quotient-Group)) = inv-quotient-Group
-  pr1 (pr2 (pr2 (pr2 quotient-Group))) =
-    left-inverse-law-mul-quotient-Group
-  pr2 (pr2 (pr2 (pr2 quotient-Group))) =
-    right-inverse-law-mul-quotient-Group
+  pr1 (pr2 (pr2 (pr2 quotient-Group))) = left-inverse-law-mul-quotient-Group
+  pr2 (pr2 (pr2 (pr2 quotient-Group))) = right-inverse-law-mul-quotient-Group
 ```
 
 #### The quotient homomorphism into the quotient group

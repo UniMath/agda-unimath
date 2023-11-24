@@ -32,8 +32,8 @@ The **stabilizer** of an element `x : X point` of a
 [connected component](foundation.connected-components.md) at the element
 `(point , x)` in the type of
 [orbits](group-theory.orbits-concrete-group-actions.md) of `X`. This type is a
-indeed concrete group of which the underlying type is the type of elements
-`g : G` such that `g x = x`.
+indeed [concrete group](group-theory.concrete-groups.md) of which the underlying
+type is the type of elements `g : G` such that `g x = x`.
 
 ## Definition
 
@@ -84,3 +84,13 @@ module _
   pr2 (pr2 (subgroup-stabilizer-action-Concrete-Group x)) =
     refl-mere-eq (shape-Concrete-Group G , x)
 ```
+
+## External links
+
+- [stabilizer group](https://ncatlab.org/nlab/show/stabilizer+group) at $n$Lab
+- [Fixed points and stabilizer subgroups](https://en.wikipedia.org/wiki/Group_action#Fixed_points_and_stabilizer_subgroups)
+  at Wikipedia
+- [Isotropy Group](https://mathworld.wolfram.com/IsotropyGroup.html) at Wolfram
+  Mathworld
+- [Isotropy group](https://encyclopediaofmath.org/wiki/Isotropy_group) at
+  Encyclopedia of Mathematics
