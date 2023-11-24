@@ -9,6 +9,7 @@ module foundation.connected-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-truncation
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -44,6 +45,13 @@ is-prop-is-connected k A = is-prop-type-Prop (is-connected-Prop k A)
 ```
 
 ## Properties
+
+### All types are `(-2)`-connected
+
+```agda
+is-neg-two-connected : {l : Level} (A : UU l) → is-connected neg-two-𝕋 A
+is-neg-two-connected A = is-trunc-type-trunc
+```
 
 ### A type `A` is `k`-connected if and only if the map `B → (A → B)` is an equivalence for every `k`-truncated type `B`
 
@@ -108,4 +116,49 @@ module _
                   ( unit-trunc x))
                 ( λ where refl → refl)
                 ( center (K a x)))))
+```
+
+### Contractible types are `k`-connected for any `k`
+
+```agda
+module _
+  (k : 𝕋) {l : Level} {A : UU l}
+  where
+
+  is-connected-is-contr : is-contr A → is-connected k A
+  is-connected-is-contr c =
+    is-contr-is-equiv' A unit-trunc (is-equiv-unit-trunc-is-contr k A c) c
+```
+
+### Being connected is invariant under equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-is-equiv :
+    (f : A → B) → is-equiv f → is-connected k B → is-connected k A
+  is-connected-is-equiv f e =
+    is-contr-is-equiv
+      ( type-trunc k B)
+      ( map-trunc k f)
+      ( is-equiv-map-equiv-trunc k (f , e))
+
+  is-connected-equiv :
+    A ≃ B → is-connected k B → is-connected k A
+  is-connected-equiv f =
+    is-connected-is-equiv (map-equiv f) (is-equiv-map-equiv f)
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-equiv' :
+    A ≃ B → is-connected k A → is-connected k B
+  is-connected-equiv' f = is-connected-equiv (inv-equiv f)
+
+  is-connected-is-equiv' :
+    (f : A → B) → is-equiv f → is-connected k A → is-connected k B
+  is-connected-is-equiv' f e = is-connected-equiv' (f , e)
 ```
