@@ -4,7 +4,7 @@
 # files, and if these options are pervasive (i.e. they need to be enabled in all
 # modules that include the modules that have them enabled), then they need to be
 # added to the everything file as well.
-everythingOpts := --guardedness
+everythingOpts := --guardedness  --cohesion --flat-split
 # use "$ export AGDAVERBOSE=-v20" if you want to see all
 AGDAVERBOSE ?= -v1
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)

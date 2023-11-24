@@ -147,6 +147,9 @@ abstract
 
 ### Hedberg's theorem
 
+**Hedberg's theorem** asserts that types with decidable equality are
+[sets](foundation-core.sets.md).
+
 ```agda
 module _
   {l : Level} {A : UU l}

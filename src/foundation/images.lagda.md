@@ -8,6 +8,7 @@ module foundation.images where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
 open import foundation.slice
@@ -60,7 +61,7 @@ module _
 
   map-unit-im : A → im
   pr1 (map-unit-im a) = f a
-  pr2 (map-unit-im a) = unit-trunc-Prop (pair a refl)
+  pr2 (map-unit-im a) = unit-trunc-Prop (a , refl)
 
   triangle-unit-im : coherence-triangle-maps f inclusion-im map-unit-im
   triangle-unit-im a = refl
@@ -121,8 +122,7 @@ abstract
   is-emb-inclusion-im :
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
     is-emb (inclusion-im f)
-  is-emb-inclusion-im f =
-    is-emb-inclusion-subtype (λ x → trunc-Prop (fiber f x))
+  is-emb-inclusion-im f = is-emb-inclusion-subtype (trunc-Prop ∘ fiber f)
 
 emb-im :
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) → im f ↪ X
@@ -137,8 +137,7 @@ abstract
   is-injective-inclusion-im :
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
     is-injective (inclusion-im f)
-  is-injective-inclusion-im f =
-    is-injective-is-emb (is-emb-inclusion-im f)
+  is-injective-inclusion-im f = is-injective-is-emb (is-emb-inclusion-im f)
 ```
 
 ### The unit map of the image is surjective
@@ -148,15 +147,13 @@ abstract
   is-surjective-map-unit-im :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-surjective (map-unit-im f)
-  is-surjective-map-unit-im f (pair y z) =
+  is-surjective-map-unit-im f (y , z) =
     apply-universal-property-trunc-Prop z
-      ( trunc-Prop (fiber (map-unit-im f) (pair y z)))
+      ( trunc-Prop (fiber (map-unit-im f) (y , z)))
       ( α)
     where
-    α : fiber f y → type-Prop (trunc-Prop (fiber (map-unit-im f) (pair y z)))
-    α (pair x p) =
-      unit-trunc-Prop
-        ( pair x (eq-type-subtype (λ z → trunc-Prop (fiber f z)) p))
+    α : fiber f y → type-Prop (trunc-Prop (fiber (map-unit-im f) (y , z)))
+    α (x , p) = unit-trunc-Prop (x , eq-type-subtype (trunc-Prop ∘ fiber f) p)
 ```
 
 ### The image of a map into a truncated type is truncated
@@ -167,6 +164,12 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {X : UU l1} {A : UU l2} (f : A → X) →
     is-trunc (succ-𝕋 k) X → is-trunc (succ-𝕋 k) (im f)
   is-trunc-im k f = is-trunc-emb k (emb-im f)
+
+im-Truncated-Type :
+  {l1 l2 : Level} (k : 𝕋) (X : Truncated-Type l1 (succ-𝕋 k)) {A : UU l2}
+  (f : A → type-Truncated-Type X) → Truncated-Type (l1 ⊔ l2) (succ-𝕋 k)
+pr1 (im-Truncated-Type k X f) = im f
+pr2 (im-Truncated-Type k X f) = is-trunc-im k f (is-trunc-type-Truncated-Type X)
 ```
 
 ### The image of a map into a proposition is a proposition
@@ -177,6 +180,11 @@ abstract
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
     is-prop X → is-prop (im f)
   is-prop-im = is-trunc-im neg-two-𝕋
+
+im-Prop :
+    {l1 l2 : Level} (X : Prop l1) {A : UU l2}
+    (f : A → type-Prop X) → Prop (l1 ⊔ l2)
+im-Prop X f = im-Truncated-Type neg-two-𝕋 X f
 ```
 
 ### The image of a map into a set is a set
@@ -189,10 +197,9 @@ abstract
   is-set-im = is-trunc-im neg-one-𝕋
 
 im-Set :
-  {l1 l2 : Level} {A : UU l2} (X : Set l1) (f : A → type-Set X) →
-  Set (l1 ⊔ l2)
-pr1 (im-Set X f) = im f
-pr2 (im-Set X f) = is-set-im f (is-set-type-Set X)
+  {l1 l2 : Level} (X : Set l1) {A : UU l2}
+  (f : A → type-Set X) → Set (l1 ⊔ l2)
+im-Set X f = im-Truncated-Type (neg-one-𝕋) X f
 ```
 
 ### The image of a map into a 1-type is a 1-type
@@ -205,8 +212,7 @@ abstract
   is-1-type-im = is-trunc-im zero-𝕋
 
 im-1-Type :
-  {l1 l2 : Level} {A : UU l2} (X : 1-Type l1)
+  {l1 l2 : Level} (X : 1-Type l1) {A : UU l2}
   (f : A → type-1-Type X) → 1-Type (l1 ⊔ l2)
-pr1 (im-1-Type X f) = im f
-pr2 (im-1-Type X f) = is-1-type-im f (is-1-type-type-1-Type X)
+im-1-Type X f = im-Truncated-Type zero-𝕋 X f
 ```
