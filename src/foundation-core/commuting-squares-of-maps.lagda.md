@@ -8,6 +8,8 @@ module foundation-core.commuting-squares-of-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-identifications
 open import foundation.homotopies
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -215,28 +217,47 @@ module _
     right-unit ∙ ap-id (α a)
 ```
 
-### Commutativity of horizontal and vertical pasting
+### Naturality of commuting squares of maps with respect to identifications
 
 ```agda
-[iii] :
-  { l1 l2 l3 l4 l5 l6 l7 : Level} →
+module _
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  ( top : A → B) (left : A → C) (right : B → D) (bottom : C → D)
+  ( H : coherence-square-maps top left right bottom)
+  where
+
+  nat-coherence-square-maps :
+    { x y : A} (p : x ＝ y) →
+    coherence-square-identifications
+      ( ap bottom (ap left p))
+      ( H x)
+      ( H y)
+      ( ap right (ap top p))
+  nat-coherence-square-maps refl = right-unit
+
+module _
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  { X : UU l5} {Y : UU l6} {Z : UU l7} →
+  { X : UU l5} {Y : UU l6} {Z : UU l7}
   ( top : A → B) (left : A → C) (mid-top : B → D) (mid-left : C → D)
   ( mid-right : D → X) (mid-bottom : D → Y) (right : X → Z) (bottom : Y → Z)
   ( H : coherence-square-maps top left mid-top mid-left)
-  ( K : coherence-square-maps mid-right mid-bottom right bottom) →
-  ( ( K ·r mid-left ·r left) ∙h (right ·l mid-right ·l H)) ~
-  ( bottom ·l mid-bottom ·l H) ∙h (K ·r mid-top ·r top)
-[iii] top left mid-top mid-left mid-right mid-bottom right bottom H K =
-  ( ap-concat-htpy
-    ( K ·r mid-left ·r left)
-    ( associative-left-whisk-comp right mid-right H)) ∙h
-  ( htpy-swap-nat-right-htpy K H) ∙h
-  ( ap-concat-htpy'
-    ( K ·r mid-top ·r top)
-    ( inv-htpy (associative-left-whisk-comp bottom mid-bottom H)))
+  ( K : coherence-square-maps mid-right mid-bottom right bottom)
+  where
 
+  swap-nat-coherence-square-maps :
+    coherence-square-homotopies
+      ( bottom ·l mid-bottom ·l H)
+      ( K ·r mid-left ·r left)
+      ( K ·r mid-top ·r top)
+      ( right ·l mid-right ·l H)
+  swap-nat-coherence-square-maps x =
+    nat-coherence-square-maps mid-right mid-bottom right bottom K (H x)
+```
+
+### Commutativity of horizontal and vertical pasting
+
+```agda
 module _
   { l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
@@ -321,7 +342,7 @@ module _
         ( bottom-right ·l (sq-left-bottom ·r left-top))
         ( right-bottom ·l (sq-right-top ·r top-left))
         ( inv-htpy
-          ( [iii]
+          ( swap-nat-coherence-square-maps
             ( top-left)
             ( left-top)
             ( mid-top)
