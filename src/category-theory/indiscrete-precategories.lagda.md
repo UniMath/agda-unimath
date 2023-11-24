@@ -112,7 +112,8 @@ module _
     {x y : obj-indiscrete-Precategory X} →
     (f : hom-indiscrete-Precategory X x y) →
     comp-hom-indiscrete-Precategory {x} {y} {y}
-      ( id-hom-indiscrete-Precategory {y}) (f) ＝
+      ( id-hom-indiscrete-Precategory {y})
+      ( f) ＝
     f
   left-unit-law-comp-hom-indiscrete-Precategory f = refl
 
