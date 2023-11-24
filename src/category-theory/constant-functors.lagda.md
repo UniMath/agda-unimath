@@ -26,9 +26,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **constant functor** is a
-[functor](category-theory.functors-categories.lagda.md) `F : C → D` that is
-constant at an object `d ∈ D` and the identity morphism at that object.
+A **constant functor** is a [functor](category-theory.functors-categories.md)
+`F : C → D` that is constant at an object `d ∈ D` and the identity morphism at
+that object.
 
 ## Definition
 
