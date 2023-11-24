@@ -151,21 +151,44 @@ module _
   is-section-map-inv-type-duality B =
     eq-equiv-fam
       ( λ a →
-        ( equiv-fiber-pr1 B a) ∘e
-        ( right-unit-law-Σ-is-contr
-          ( λ b →
-            is-contr-map-is-equiv
-              ( is-equiv-map-inv-equiv
-                ( equiv-is-small (is-small-Σ H (λ a → is-small' {l} {B a}))))
-              ( pr1 b))) ∘e
-        ( equiv-compute-fiber-comp pr1 _ a) ∘e
-        ( equiv-tot
-          ( λ x →
-            inv-equiv
-              ( equiv-is-small
-                ( is-locally-small-is-small H
-                  ( pr2 (map-inv-type-duality B) x)
-                  ( a))))))
+        equivalence-reasoning
+          map-type-duality
+            ( is-locally-small-is-small H)
+            ( map-inv-type-duality B)
+            ( a)
+          ≃ fiber
+            ( ( pr1 {B = B}) ∘
+              ( map-inv-equiv
+                ( equiv-is-small
+                  ( is-small-Σ H (λ a → is-small'))))) a
+            by
+            equiv-tot
+              ( λ x →
+                inv-equiv
+                  ( equiv-is-small
+                    ( is-locally-small-is-small H
+                      ( pr2 (map-inv-type-duality B) x)
+                      ( a))))
+          ≃ Σ ( fiber (pr1 {B = B}) a)
+              ( λ b →
+                fiber
+                  ( map-inv-equiv
+                    ( equiv-is-small
+                      ( is-small-Σ H (λ a → is-small' {l} {B a}))))
+                  ( pr1 b))
+            by compute-fiber-comp pr1 _ a
+          ≃ fiber (pr1 {B = B}) a
+            by
+            right-unit-law-Σ-is-contr
+              ( λ b →
+                is-contr-map-is-equiv
+                  ( is-equiv-map-inv-equiv
+                    ( equiv-is-small
+                      ( is-small-Σ H (λ a → is-small' {l} {B a}))))
+                  ( pr1 b))
+          ≃ B a
+            by
+            equiv-fiber-pr1 B a)
 
   is-retraction-map-inv-type-duality :
     map-inv-type-duality ∘ map-type-duality (is-locally-small-is-small H) ~ id

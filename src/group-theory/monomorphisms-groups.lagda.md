@@ -35,15 +35,15 @@ module _
   (H : Group l2) (f : hom-Group G H)
   where
 
-  is-mono-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-mono-Group-Prop =
+  is-mono-prop-hom-Group : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-mono-prop-hom-Group =
     is-mono-prop-Large-Precategory Group-Large-Precategory l3 G H f
 
-  is-mono-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-mono-Group = type-Prop is-mono-Group-Prop
+  is-mono-hom-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  is-mono-hom-Group = type-Prop is-mono-prop-hom-Group
 
-  is-prop-is-mono-Group : is-prop is-mono-Group
-  is-prop-is-mono-Group = is-prop-type-Prop is-mono-Group-Prop
+  is-prop-is-mono-hom-Group : is-prop is-mono-hom-Group
+  is-prop-is-mono-hom-Group = is-prop-type-Prop is-mono-prop-hom-Group
 ```
 
 ## Properties
@@ -56,7 +56,7 @@ module _
   (H : Group l2) (f : iso-Group G H)
   where
 
-  is-mono-iso-Group : is-mono-Group l3 G H (hom-iso-Group G H f)
+  is-mono-iso-Group : is-mono-hom-Group l3 G H (hom-iso-Group G H f)
   is-mono-iso-Group =
     is-mono-iso-Large-Precategory Group-Large-Precategory l3 G H f
 ```

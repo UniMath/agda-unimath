@@ -78,7 +78,7 @@ module _
         ( f)
 
     preserves-addition-hom-Commutative-Semiring :
-      (x y : type-Commutative-Semiring A) →
+      {x y : type-Commutative-Semiring A} →
       map-hom-Commutative-Semiring (add-Commutative-Semiring A x y) ＝
       add-Commutative-Semiring B
         ( map-hom-Commutative-Semiring x)
@@ -99,7 +99,7 @@ module _
         ( f)
 
     preserves-mul-hom-Commutative-Semiring :
-      (x y : type-Commutative-Semiring A) →
+      {x y : type-Commutative-Semiring A} →
       map-hom-Commutative-Semiring (mul-Commutative-Semiring A x y) ＝
       mul-Commutative-Semiring B
         ( map-hom-Commutative-Semiring x)
@@ -157,7 +157,7 @@ module _
       ( semiring-Commutative-Semiring A)
 
   preserves-mul-id-hom-Commutative-Semiring :
-    (x y : type-Commutative-Semiring A) →
+    {x y : type-Commutative-Semiring A} →
     mul-Commutative-Semiring A x y ＝ mul-Commutative-Semiring A x y
   preserves-mul-id-hom-Commutative-Semiring =
     preserves-mul-id-hom-Semiring (semiring-Commutative-Semiring A)
@@ -219,7 +219,7 @@ module _
       ( f)
 
   preserves-mul-comp-hom-Commutative-Semiring :
-    (x y : type-Commutative-Semiring A) →
+    {x y : type-Commutative-Semiring A} →
     map-comp-hom-Commutative-Semiring (mul-Commutative-Semiring A x y) ＝
     mul-Commutative-Semiring C
       ( map-comp-hom-Commutative-Semiring x)

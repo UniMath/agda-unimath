@@ -82,14 +82,14 @@ module _
 
   hom-element-Group : hom-Group ℤ-Group G
   pr1 hom-element-Group = map-hom-element-Group
-  pr2 hom-element-Group = preserves-mul-map-hom-element-Group
+  pr2 hom-element-Group {x} {y} = preserves-mul-map-hom-element-Group x y
 
   htpy-hom-element-Group :
     (h : hom-Group ℤ-Group G) → map-hom-Group ℤ-Group G h one-ℤ ＝ g →
     htpy-hom-Group ℤ-Group G hom-element-Group h
   htpy-hom-element-Group h p =
     htpy-map-ℤ-Pointed-Type-With-Aut
-      ( pair (pointed-type-Group G) (equiv-mul-Group G g))
+      ( pointed-type-Group G , equiv-mul-Group G g)
       ( pair
         ( map-hom-Group ℤ-Group G h)
         ( pair
@@ -98,8 +98,8 @@ module _
             ( ap
               ( map-hom-Group ℤ-Group G h)
               ( is-left-add-one-succ-ℤ x)) ∙
-            ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
-              ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
+            ( preserves-mul-hom-Group ℤ-Group G h) ∙
+            ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p))))
 
   is-torsorial-hom-element-Group :
     is-torsorial (λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g)
@@ -107,7 +107,7 @@ module _
     hom-element-Group
   pr2 (pr1 is-torsorial-hom-element-Group) =
     right-unit-law-mul-Group G g
-  pr2 is-torsorial-hom-element-Group (pair h p) =
+  pr2 is-torsorial-hom-element-Group (h , p) =
     eq-type-subtype
       ( λ f → Id-Prop (set-Group G) (map-hom-Group ℤ-Group G f one-ℤ) g)
       ( eq-htpy-hom-Group ℤ-Group G

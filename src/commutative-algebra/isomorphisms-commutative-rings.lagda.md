@@ -172,7 +172,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-add-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring A) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring A} →
     map-iso-Commutative-Ring f (add-Commutative-Ring A x y) ＝
     add-Commutative-Ring B
       ( map-iso-Commutative-Ring f x)
@@ -183,7 +183,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-neg-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x : type-Commutative-Ring A) →
+    (f : iso-Commutative-Ring) {x : type-Commutative-Ring A} →
     map-iso-Commutative-Ring f (neg-Commutative-Ring A x) ＝
     neg-Commutative-Ring B (map-iso-Commutative-Ring f x)
   preserves-neg-iso-Commutative-Ring =
@@ -192,7 +192,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-mul-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring A) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring A} →
     map-iso-Commutative-Ring f (mul-Commutative-Ring A x y) ＝
     mul-Commutative-Ring B
       ( map-iso-Commutative-Ring f x)
@@ -243,7 +243,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-add-inv-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring B) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring B} →
     map-inv-iso-Commutative-Ring f (add-Commutative-Ring B x y) ＝
     add-Commutative-Ring A
       ( map-inv-iso-Commutative-Ring f x)
@@ -254,7 +254,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-neg-inv-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x : type-Commutative-Ring B) →
+    (f : iso-Commutative-Ring) {x : type-Commutative-Ring B} →
     map-inv-iso-Commutative-Ring f (neg-Commutative-Ring B x) ＝
     neg-Commutative-Ring A (map-inv-iso-Commutative-Ring f x)
   preserves-neg-inv-iso-Commutative-Ring =
@@ -263,7 +263,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-mul-inv-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring B) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring B} →
     map-inv-iso-Commutative-Ring f (mul-Commutative-Ring B x y) ＝
     mul-Commutative-Ring A
       ( map-inv-iso-Commutative-Ring f x)

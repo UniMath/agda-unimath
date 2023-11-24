@@ -81,7 +81,7 @@ module _
       ( ∞-group-Concrete-Group H)
 
   preserves-mul-map-hom-Concrete-Group :
-    (f : hom-Concrete-Group) (x y : type-Concrete-Group G) →
+    (f : hom-Concrete-Group) {x y : type-Concrete-Group G} →
     Id
       ( map-hom-Concrete-Group f (mul-Concrete-Group G x y))
       ( mul-Concrete-Group H
