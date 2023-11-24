@@ -16,22 +16,15 @@ open import foundation-core.function-types
 
 ## Idea
 
-Given a function `f : A → B` and a type family `X` over `B`, the
-**precomposition function**
-
-```text
-  - ∘ f : ((y : B) → X b) → ((x : A) → X (f x))
-```
-
-is defined by `λ h x → h (f x)`. The precomposition function takes a simpler
-form without dependent types: Given a type `X` the precomposition function by
+Given a function `f : A → B` and a type `X`, the **precomposition function** by
 `f`
 
 ```text
   - ∘ f : (B → X) → (A → X)
 ```
 
-is given by `λ h x → h (f x)`.
+is defined by by `λ h x → h (f x)`.
+
 
 ## Definitions
 
