@@ -450,8 +450,8 @@ module _
       ( is-normal-Normal-Subgroup G N y
         ( inv-Group G (left-div-Group G x y))
         ( is-closed-under-inverses-Normal-Subgroup G N H))
-      ( ( ap (conjugation-Group G y) (inv-left-div-Group G x y) ∙
-        ( conjugation-left-div-Group G y x)))
+      ( ( ap (conjugation-Group G y) (inv-left-div-Group G x y)) ∙
+        ( conjugation-left-div-Group G y x))
 
   sim-left-sim-congruence-Normal-Subgroup :
     (x y : type-Group G) →
@@ -611,17 +611,14 @@ module _
 has-same-elements-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G) →
   has-same-elements-Normal-Subgroup G
-    ( normal-subgroup-congruence-Group G
-      ( congruence-Normal-Subgroup G N))
+    ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
     ( N)
 pr1 (has-same-elements-normal-subgroup-congruence-Group G N x) H =
   is-closed-under-eq-Normal-Subgroup G N H
-    ( ( ap (mul-Group' G x) (inv-unit-Group G)) ∙
-      ( left-unit-law-mul-Group G x))
+    ( ap (mul-Group' G x) (inv-unit-Group G) ∙ left-unit-law-mul-Group G x)
 pr2 (has-same-elements-normal-subgroup-congruence-Group G N x) H =
   is-closed-under-eq-Normal-Subgroup' G N H
-    ( ( ap (mul-Group' G x) (inv-unit-Group G)) ∙
-      ( left-unit-law-mul-Group G x))
+    ( ap (mul-Group' G x) (inv-unit-Group G) ∙ left-unit-law-mul-Group G x)
 
 is-retraction-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G) →
@@ -630,8 +627,7 @@ is-retraction-normal-subgroup-congruence-Group :
   ( N)
 is-retraction-normal-subgroup-congruence-Group G N =
   eq-has-same-elements-Normal-Subgroup G
-    ( normal-subgroup-congruence-Group G
-      ( congruence-Normal-Subgroup G N))
+    ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
     ( N)
     ( has-same-elements-normal-subgroup-congruence-Group G N)
 ```
@@ -667,12 +663,11 @@ is-section-normal-subgroup-congruence-Group :
     ( normal-subgroup-congruence-Group G R)) ＝
   ( R)
 is-section-normal-subgroup-congruence-Group G R =
-  equivalence-relationate-same-elements-congruence-Group G
+  eq-relate-same-elements-congruence-Group G
     ( congruence-Normal-Subgroup G
       ( normal-subgroup-congruence-Group G R))
     ( R)
-    ( relate-same-elements-congruence-normal-subgroup-congruence-Group
-      G R)
+    ( relate-same-elements-congruence-normal-subgroup-congruence-Group G R)
 ```
 
 #### The equivalence of normal subgroups and congruence relations

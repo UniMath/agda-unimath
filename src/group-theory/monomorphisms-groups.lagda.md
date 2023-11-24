@@ -22,10 +22,11 @@ open import group-theory.precategory-of-groups
 
 ## Idea
 
-A group homomorphism `f : x → y` is a monomorphism if whenever we have two group
-homomorphisms `g h : w → x` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The
-way to state this in Homotopy Type Theory is to say that postcomposition by `f`
-is an embedding.
+A [group homomorphism](group-theory.homomorphisms-groups.md) `f : x → y` is a
+**monomorphism** if whenever we have two group homomorphisms `g h : w → x` such
+that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state this in Homotopy
+Type Theory is to say that postcomposition by `f` is an
+[embedding](foundation-core.embeddings.md).
 
 ## Definition
 

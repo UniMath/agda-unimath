@@ -257,9 +257,9 @@ extensionality-congruence-Ring :
 extensionality-congruence-Ring R =
   extensionality-congruence-Semiring (semiring-Ring R)
 
-equivalence-relationate-same-elements-congruence-Ring :
+eq-relate-same-elements-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) (S T : congruence-Ring l2 R) →
   relate-same-elements-congruence-Ring R S T → S ＝ T
-equivalence-relationate-same-elements-congruence-Ring R =
-  equivalence-relationate-same-elements-congruence-Semiring (semiring-Ring R)
+eq-relate-same-elements-congruence-Ring R =
+  eq-relate-same-elements-congruence-Semiring (semiring-Ring R)
 ```

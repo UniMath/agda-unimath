@@ -291,7 +291,7 @@ module _
   is-unfixed-replete-subprecategory-is-category-Subprecategory {x} =
     ind-iso-Category
       ( C , is-category-C)
-      ( λ B e → is-in-iso-Subprecategory C P e)
+      ( λ B → is-in-iso-Subprecategory C P)
       ( is-in-iso-id-Subprecategory C P x)
 
   is-replete-subprecategory-is-category-Subprecategory :
