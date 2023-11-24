@@ -149,12 +149,13 @@ module _
         ( F)
         ( (λ where ()) , (λ where {()}))
 
-  is-contr-functor-initial-Precategory :
-    is-contr (functor-Precategory initial-Precategory C)
-  pr1 is-contr-functor-initial-Precategory =
-    initial-functor-Precategory
-  pr2 is-contr-functor-initial-Precategory =
-    uniqueness-initial-functor-Precategory
+  abstract
+    is-contr-functor-initial-Precategory :
+      is-contr (functor-Precategory initial-Precategory C)
+    pr1 is-contr-functor-initial-Precategory =
+      initial-functor-Precategory
+    pr2 is-contr-functor-initial-Precategory =
+      uniqueness-initial-functor-Precategory
 ```
 
 ## See also
