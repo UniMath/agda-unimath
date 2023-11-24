@@ -137,16 +137,17 @@ module _
   pr1 (pr2 (pr2 initial-functor-Precategory)) {()}
   pr2 (pr2 (pr2 initial-functor-Precategory)) ()
 
-  uniqueness-initial-functor-Precategory :
-    (F : functor-Precategory initial-Precategory C) →
-    initial-functor-Precategory ＝ F
-  uniqueness-initial-functor-Precategory F =
-    eq-htpy-functor-Precategory
-      ( initial-Precategory)
-      ( C)
-      ( initial-functor-Precategory)
-      ( F)
-      ( (λ where ()) , (λ where {()}))
+  abstract
+    uniqueness-initial-functor-Precategory :
+      (F : functor-Precategory initial-Precategory C) →
+      initial-functor-Precategory ＝ F
+    uniqueness-initial-functor-Precategory F =
+      eq-htpy-functor-Precategory
+        ( initial-Precategory)
+        ( C)
+        ( initial-functor-Precategory)
+        ( F)
+        ( (λ where ()) , (λ where {()}))
 
   is-contr-functor-initial-Precategory :
     is-contr (functor-Precategory initial-Precategory C)
