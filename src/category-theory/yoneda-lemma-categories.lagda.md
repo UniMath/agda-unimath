@@ -99,6 +99,28 @@ The inverse to the Yoneda map:
     equiv-lemma-yoneda-Precategory (precategory-Category C) c F
 ```
 
+## Corollaries
+
+### The Yoneda lemma for representable functors
+
+An important special-case of the Yoneda lemma is when `F` is itself a
+representable functor `F = Hom(-, d)`.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2) (c d : obj-Category C)
+  where
+
+  equiv-lemma-yoneda-representable-Category :
+    hom-copresheaf-Large-Category
+      ( precategory-Category C)
+      ( representable-functor-Category C c)
+      ( representable-functor-Category C d) ≃
+    hom-Category C d c
+  equiv-lemma-yoneda-representable-Category =
+    equiv-lemma-yoneda-Category C c (representable-functor-Category C d)
+```
+
 ## See also
 
 - [Presheaf categories](category-theory.presheaf-categories.md)
