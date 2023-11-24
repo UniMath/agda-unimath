@@ -59,9 +59,9 @@ Below is a summary of the tasks this tool performs:
   multiple of two. If inconsistencies are found, it provides an error report
   indicating the location of the issues.
 
-- **Fix simply wrappable long lines**: Scans for any lines exceeding the
-  80-character limit that can be resolved by inserting line breaks. It inserts
-  line breaks at the beginning of any definition, but not in the middle of a
+- **Wrap long lines**: Scans for any lines exceeding the 80-character limit that
+  can be resolved by simple rules for inserting line breaks. It inserts line
+  breaks at the beginning of any definition, but not in the middle of a
   definition.
 
 - **Maximum line length**: Detects any violations of the 80-character line limit
