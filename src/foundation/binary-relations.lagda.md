@@ -210,10 +210,10 @@ module _
   pr2 (extensionality-Relation-Prop S) =
     is-equiv-relates-same-elements-eq-Relation-Prop S
 
-  equivalence-relationates-same-elements-Relation-Prop :
+  eq-relates-same-elements-Relation-Prop :
     (S : Relation-Prop l2 A) →
     relates-same-elements-Relation-Prop R S → (R ＝ S)
-  equivalence-relationates-same-elements-Relation-Prop S =
+  eq-relates-same-elements-Relation-Prop S =
     map-inv-equiv (extensionality-Relation-Prop S)
 ```
 

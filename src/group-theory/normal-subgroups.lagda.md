@@ -663,7 +663,7 @@ is-section-normal-subgroup-congruence-Group :
     ( normal-subgroup-congruence-Group G R)) ＝
   ( R)
 is-section-normal-subgroup-congruence-Group G R =
-  equivalence-relationate-same-elements-congruence-Group G
+  eq-relate-same-elements-congruence-Group G
     ( congruence-Normal-Subgroup G
       ( normal-subgroup-congruence-Group G R))
     ( R)

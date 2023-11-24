@@ -614,7 +614,7 @@ is-retraction-saturated-congruence-Normal-Commutative-Submonoid :
     ( normal-submonoid-saturated-congruence-Commutative-Monoid M R)) ＝
   ( R)
 is-retraction-saturated-congruence-Normal-Commutative-Submonoid l2 M R =
-  equivalence-relationate-same-elements-saturated-congruence-Commutative-Monoid
+  eq-relate-same-elements-saturated-congruence-Commutative-Monoid
     ( M)
     ( saturated-congruence-Normal-Commutative-Submonoid M
       ( normal-submonoid-saturated-congruence-Commutative-Monoid M R))
