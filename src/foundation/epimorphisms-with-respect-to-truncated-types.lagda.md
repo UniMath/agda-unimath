@@ -17,8 +17,10 @@ open import foundation.functoriality-truncation
 open import foundation.sections
 open import foundation.truncation-equivalences
 open import foundation.truncations
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -290,6 +292,23 @@ module _
         ( precomp (codiagonal-map f) (type-Truncated-Type X))
         ( is-equiv-precomp-is-truncation-equivalence k (codiagonal-map f) e X)
         ( is-equiv-map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
+
+  is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type :
+    is-truncation-equivalence k (codiagonal-map f) →
+    is-epimorphism-Truncated-Type k f
+  is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type e X =
+    is-emb-is-contr-fibers-values
+      ( precomp f (type-Truncated-Type X))
+      ( λ g →
+        is-contr-equiv
+          ( Σ ( B → (type-Truncated-Type X))
+              ( λ h → coherence-square-maps f f h g))
+          ( compute-fiber-precomp f (type-Truncated-Type X) g)
+          ( is-contr-is-equiv-pr1
+            ( is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map
+              ( e)
+              ( X))
+            ( g)))
 ```
 
 ## See also
