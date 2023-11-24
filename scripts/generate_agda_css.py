@@ -69,8 +69,7 @@ def dump_block_for_themes(theme, classes, contents, outfile, is_selector_class=T
     for theme in themes:
         for agda_class in classes:
             print(
-                f'.{theme} pre.Agda {is_selector_class *
-                                     '.'}{agda_class} {{\n{contents}}}\n',
+                f'.{theme} pre.Agda {is_selector_class * "."}{agda_class} {{\n{contents}}}\n',
                 file=outfile
             )
         pass

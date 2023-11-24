@@ -79,7 +79,7 @@ def slugify_markdown(md):
 def sup_link_reference(href, content, brackets=True, new_tab=False):
     # f-strings can't contain backslashes, so we can't escape the quotes
     link_target = new_tab * ' target="_blank"'
-    return f'<sup>{brackets * '['}<a href="{href}"{link_target}>{content}</a>{brackets * ']'}</sup>'
+    return f'<sup>{brackets * "["}<a href="{href}"{link_target}>{content}</a>{brackets * "]"}</sup>'
 
 
 def sub_match_for_concept(m, mut_index, config, path, initial_content):
@@ -131,7 +131,7 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
     if wikidata_label is not None:
         index_entry['__wikidata_label'] = wikidata_label
     mut_index.append(index_entry)
-    return f'{anchor}<b>{text}</b>{''.join(reversed(references))}'
+    return f'{anchor}<b>{text}</b>{"".join(reversed(references))}'
 
 
 def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
