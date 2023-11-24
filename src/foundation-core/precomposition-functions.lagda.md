@@ -23,8 +23,7 @@ Given a function `f : A → B` and a type `X`, the **precomposition function** b
   - ∘ f : (B → X) → (A → X)
 ```
 
-is defined by by `λ h x → h (f x)`.
-
+is defined by `λ h x → h (f x)`.
 
 ## Definitions
 
