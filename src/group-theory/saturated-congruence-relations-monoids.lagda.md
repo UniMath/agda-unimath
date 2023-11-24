@@ -209,10 +209,10 @@ pr1 (extensionality-saturated-congruence-Monoid M R S) =
 pr2 (extensionality-saturated-congruence-Monoid M R S) =
   is-equiv-relate-same-elements-eq-saturated-congruence-Monoid M R S
 
-equivalence-relationate-same-elements-saturated-congruence-Monoid :
+eq-relate-same-elements-saturated-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R S : saturated-congruence-Monoid l2 M) →
   relate-same-elements-saturated-congruence-Monoid M R S → R ＝ S
-equivalence-relationate-same-elements-saturated-congruence-Monoid M R S =
+eq-relate-same-elements-saturated-congruence-Monoid M R S =
   map-inv-equiv (extensionality-saturated-congruence-Monoid M R S)
 ```
 

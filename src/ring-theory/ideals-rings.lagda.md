@@ -532,7 +532,7 @@ module _
   is-section-ideal-congruence-Ring :
     congruence-ideal-Ring R (ideal-congruence-Ring R S) ＝ S
   is-section-ideal-congruence-Ring =
-    equivalence-relationate-same-elements-congruence-Ring R
+    eq-relate-same-elements-congruence-Ring R
       ( congruence-ideal-Ring R (ideal-congruence-Ring R S))
       ( S)
       ( relate-same-elements-congruence-ideal-congruence-Ring)

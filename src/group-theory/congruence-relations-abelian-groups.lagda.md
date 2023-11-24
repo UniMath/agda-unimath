@@ -203,9 +203,9 @@ extensionality-congruence-Ab :
 extensionality-congruence-Ab A =
   extensionality-congruence-Group (group-Ab A)
 
-equivalence-relationate-same-elements-congruence-Ab :
+eq-relate-same-elements-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) (R S : congruence-Ab l2 A) →
   relate-same-elements-congruence-Ab A R S → R ＝ S
-equivalence-relationate-same-elements-congruence-Ab A =
-  equivalence-relationate-same-elements-congruence-Group (group-Ab A)
+eq-relate-same-elements-congruence-Ab A =
+  eq-relate-same-elements-congruence-Group (group-Ab A)
 ```

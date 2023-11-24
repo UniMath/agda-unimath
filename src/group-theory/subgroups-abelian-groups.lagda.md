@@ -647,7 +647,7 @@ module _
   is-section-subgroup-congruence-Ab :
     congruence-Subgroup-Ab A (subgroup-congruence-Ab A R) ＝ R
   is-section-subgroup-congruence-Ab =
-    equivalence-relationate-same-elements-congruence-Ab A
+    eq-relate-same-elements-congruence-Ab A
       ( congruence-Subgroup-Ab A (subgroup-congruence-Ab A R))
       ( R)
       ( relate-same-elements-congruence-subgroup-congruence-Ab)

@@ -233,9 +233,7 @@ module _
   abstract
     extensionality-Group' : (H : Group l) → Id G H ≃ iso-Group G H
     extensionality-Group' H =
-      ( extensionality-Semigroup
-        ( semigroup-Group G)
-        ( semigroup-Group H)) ∘e
+      ( extensionality-Semigroup (semigroup-Group G) (semigroup-Group H)) ∘e
       ( equiv-ap-inclusion-subtype is-group-prop-Semigroup {s = G} {t = H})
 
   abstract
@@ -254,8 +252,7 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
   where
 
-  comp-iso-Group :
-    iso-Group H K → iso-Group G H → iso-Group G K
+  comp-iso-Group : iso-Group H K → iso-Group G H → iso-Group G K
   comp-iso-Group =
     comp-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H} {Z = K}
 ```
