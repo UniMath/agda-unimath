@@ -65,39 +65,6 @@ module _
 
   is-mono-iso-Large-Precategory :
     is-mono-Large-Precategory C l3 X Y (hom-iso-Large-Precategory C f)
-  is-mono-iso-Large-Precategory Z g h =
-    is-equiv-is-invertible
-      ( λ P →
-        ( inv
-          ( left-unit-law-comp-hom-Large-Precategory C g)) ∙
-          ( ( ap
-            ( λ h' → comp-hom-Large-Precategory C h' g)
-            ( inv (is-retraction-hom-inv-iso-Large-Precategory C f))) ∙
-            ( ( associative-comp-hom-Large-Precategory C
-              ( hom-inv-iso-Large-Precategory C f)
-              ( hom-iso-Large-Precategory C f)
-              ( g)) ∙
-              ( ( ap
-                ( comp-hom-Large-Precategory C
-                  ( hom-inv-iso-Large-Precategory C f))
-                ( P)) ∙
-                ( ( inv
-                  ( associative-comp-hom-Large-Precategory C
-                    ( hom-inv-iso-Large-Precategory C f)
-                    ( hom-iso-Large-Precategory C f)
-                    ( h))) ∙
-                  ( ( ap
-                    ( λ h' → comp-hom-Large-Precategory C h' h)
-                    ( is-retraction-hom-inv-iso-Large-Precategory C f)) ∙
-                    ( left-unit-law-comp-hom-Large-Precategory C h)))))))
-      ( λ p →
-        eq-is-prop
-          ( is-set-hom-Large-Precategory C Z Y
-            ( comp-hom-Large-Precategory C
-              ( hom-iso-Large-Precategory C f)
-              ( g))
-            ( comp-hom-Large-Precategory C
-              ( hom-iso-Large-Precategory C f)
-              ( h))))
-      ( λ p → eq-is-prop (is-set-hom-Large-Precategory C Z X g h))
+  is-mono-iso-Large-Precategory Z =
+    is-emb-is-equiv (is-equiv-postcomp-hom-iso-Large-Precategory C f Z)
 ```

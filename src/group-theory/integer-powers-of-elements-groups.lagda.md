@@ -171,7 +171,7 @@ module _
     right-unit-law-mul-Group G (inv-Group G g)
   integer-power-in-neg-Group (succ-ℕ n) g =
     ( ap (mul-Group G (inv-Group G g)) (integer-power-in-neg-Group n g)) ∙
-    ( inv (distributive-inv-mul-Group G (power-Group G (succ-ℕ n) g) g)) ∙
+    ( inv (distributive-inv-mul-Group G)) ∙
     ( ap (inv-Group G) (power-succ-Group G (succ-ℕ n) g))
 ```
 
@@ -592,24 +592,22 @@ module _
     map-hom-Group G H f (integer-power-Group G k x) ＝
     integer-power-Group H k (map-hom-Group G H f x)
   preserves-integer-powers-hom-Group (inl zero-ℕ) x =
-    ( preserves-mul-hom-Group G H f (inv-Group G x) (unit-Group G)) ∙
+    ( preserves-mul-hom-Group G H f) ∙
     ( ap-mul-Group H
-      ( preserves-inv-hom-Group G H f x)
+      ( preserves-inv-hom-Group G H f)
       ( preserves-unit-hom-Group G H f))
   preserves-integer-powers-hom-Group (inl (succ-ℕ k)) x =
-    ( preserves-mul-hom-Group G H f
-      ( inv-Group G x)
-      ( integer-power-Group G (inl k) x)) ∙
+    ( preserves-mul-hom-Group G H f) ∙
     ( ap-mul-Group H
-      ( preserves-inv-hom-Group G H f x)
+      ( preserves-inv-hom-Group G H f)
       ( preserves-integer-powers-hom-Group (inl k) x))
   preserves-integer-powers-hom-Group (inr (inl _)) x =
     preserves-unit-hom-Group G H f
   preserves-integer-powers-hom-Group (inr (inr zero-ℕ)) x =
-    ( preserves-mul-hom-Group G H f x (unit-Group G)) ∙
+    ( preserves-mul-hom-Group G H f) ∙
     ( ap (mul-Group H (map-hom-Group G H f x)) (preserves-unit-hom-Group G H f))
   preserves-integer-powers-hom-Group (inr (inr (succ-ℕ k))) x =
-    ( preserves-mul-hom-Group G H f x (integer-power-Group G (inr (inr k)) x)) ∙
+    ( preserves-mul-hom-Group G H f) ∙
     ( ap
       ( mul-Group H (map-hom-Group G H f x))
       ( preserves-integer-powers-hom-Group (inr (inr k)) x))

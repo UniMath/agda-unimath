@@ -53,8 +53,8 @@ module _
   pr2 pointed-map-Ω = preserves-refl-map-Ω
 
   preserves-mul-map-Ω :
-    (x y : type-Ω A) → map-Ω (mul-Ω A x y) ＝ mul-Ω B (map-Ω x) (map-Ω y)
-  preserves-mul-map-Ω x y =
+    {x y : type-Ω A} → map-Ω (mul-Ω A x y) ＝ mul-Ω B (map-Ω x) (map-Ω y)
+  preserves-mul-map-Ω {x} {y} =
     ( ap
       ( tr-type-Ω (preserves-point-pointed-map f))
       ( ap-concat (map-pointed-map f) x y)) ∙

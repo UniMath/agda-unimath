@@ -91,7 +91,7 @@ module _
         ( poset-Meet-Semilattice B)
         ( map-hom-Meet-Semilattice)
     preserves-order-hom-Meet-Semilattice x y H =
-      ( inv (preserves-meet-hom-Meet-Semilattice x y)) ∙
+      ( inv preserves-meet-hom-Meet-Semilattice) ∙
       ( ap map-hom-Meet-Semilattice H)
 
     hom-poset-hom-Meet-Semilattice :

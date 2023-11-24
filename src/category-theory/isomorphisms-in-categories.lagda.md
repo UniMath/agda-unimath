@@ -477,6 +477,45 @@ module _
   is-iso-is-equiv-precomp-hom-Category : is-iso-Category C f
   is-iso-is-equiv-precomp-hom-Category =
     is-iso-is-equiv-precomp-hom-Precategory (precategory-Category C) H
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
+  (is-iso-f : is-iso-Category C f)
+  (z : obj-Category C)
+  where
+
+  map-inv-precomp-hom-is-iso-Category : hom-Category C x z → hom-Category C y z
+  map-inv-precomp-hom-is-iso-Category =
+    precomp-hom-Category C (hom-inv-is-iso-Category C is-iso-f) z
+
+  is-equiv-precomp-hom-is-iso-Category : is-equiv (precomp-hom-Category C f z)
+  is-equiv-precomp-hom-is-iso-Category =
+    is-equiv-precomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+  equiv-precomp-hom-is-iso-Category : hom-Category C y z ≃ hom-Category C x z
+  equiv-precomp-hom-is-iso-Category =
+    equiv-precomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  (f : iso-Category C x y)
+  (z : obj-Category C)
+  where
+
+  is-equiv-precomp-hom-iso-Category :
+    is-equiv (precomp-hom-Category C (hom-iso-Category C f) z)
+  is-equiv-precomp-hom-iso-Category =
+    is-equiv-precomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
+
+  equiv-precomp-hom-iso-Category :
+    hom-Category C y z ≃ hom-Category C x z
+  equiv-precomp-hom-iso-Category =
+    equiv-precomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
 ```
 
 ### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence
@@ -531,8 +570,8 @@ module _
       ( precategory-Category C) H
 
   is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Category :
-    ( comp-hom-Category C
-      ( hom-inv-is-iso-is-equiv-postcomp-hom-Category))
+    comp-hom-Category C
+      ( hom-inv-is-iso-is-equiv-postcomp-hom-Category)
       ( f) ＝
     ( id-hom-Category C)
   is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Category =
@@ -543,6 +582,44 @@ module _
   is-iso-is-equiv-postcomp-hom-Category =
     is-iso-is-equiv-postcomp-hom-Precategory
       ( precategory-Category C) H
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
+  (is-iso-f : is-iso-Category C f)
+  (z : obj-Category C)
+  where
+
+  map-inv-postcomp-hom-is-iso-Category : hom-Category C z y → hom-Category C z x
+  map-inv-postcomp-hom-is-iso-Category =
+    postcomp-hom-Category C (hom-inv-is-iso-Category C is-iso-f) z
+
+  is-equiv-postcomp-hom-is-iso-Category : is-equiv (postcomp-hom-Category C f z)
+  is-equiv-postcomp-hom-is-iso-Category =
+    is-equiv-postcomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+  equiv-postcomp-hom-is-iso-Category : hom-Category C z x ≃ hom-Category C z y
+  equiv-postcomp-hom-is-iso-Category =
+    equiv-postcomp-hom-is-iso-Precategory (precategory-Category C) is-iso-f z
+
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  (f : iso-Category C x y)
+  (z : obj-Category C)
+  where
+
+  is-equiv-postcomp-hom-iso-Category :
+    is-equiv (postcomp-hom-Category C (hom-iso-Category C f) z)
+  is-equiv-postcomp-hom-iso-Category =
+    is-equiv-postcomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
+
+  equiv-postcomp-hom-iso-Category : hom-Category C z x ≃ hom-Category C z y
+  equiv-postcomp-hom-iso-Category =
+    equiv-postcomp-hom-is-iso-Category C (is-iso-iso-Category C f) z
 ```
 
 ### When `hom x y` is a proposition, the type of isomorphisms from `x` to `y` is a proposition

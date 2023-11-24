@@ -56,5 +56,5 @@ module _
 
   trivial-hom-Group : hom-Group G H
   pr1 trivial-hom-Group x = unit-Group H
-  pr2 trivial-hom-Group x y = inv (left-unit-law-mul-Group H (unit-Group H))
+  pr2 trivial-hom-Group = inv (left-unit-law-mul-Group H (unit-Group H))
 ```

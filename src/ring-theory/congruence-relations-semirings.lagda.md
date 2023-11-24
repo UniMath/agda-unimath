@@ -46,7 +46,7 @@ module _
   is-congruence-Semiring S =
     is-congruence-Monoid
       ( multiplicative-monoid-Semiring R)
-      ( eq-rel-congruence-Monoid (additive-monoid-Semiring R) S)
+      ( equivalence-relation-congruence-Monoid (additive-monoid-Semiring R) S)
 
   is-prop-is-congruence-Semiring :
     {l2 : Level} (S : congruence-Monoid l2 (additive-monoid-Semiring R)) →
@@ -54,11 +54,11 @@ module _
   is-prop-is-congruence-Semiring S =
     is-prop-is-congruence-Monoid
       ( multiplicative-monoid-Semiring R)
-      ( eq-rel-congruence-Monoid (additive-monoid-Semiring R) S)
+      ( equivalence-relation-congruence-Monoid (additive-monoid-Semiring R) S)
 
-  is-congruence-eq-rel-Semiring :
-    {l2 : Level} (S : Equivalence-Relation l2 (type-Semiring R)) → UU (l1 ⊔ l2)
-  is-congruence-eq-rel-Semiring S =
+  is-congruence-equivalence-relation-Semiring :
+    {l2 : Level} (S : equivalence-relation l2 (type-Semiring R)) → UU (l1 ⊔ l2)
+  is-congruence-equivalence-relation-Semiring S =
     ( is-congruence-Monoid (additive-monoid-Semiring R) S) ×
     ( is-congruence-Monoid (multiplicative-monoid-Semiring R) S)
 
@@ -76,9 +76,10 @@ module _
     congruence-Monoid l2 (additive-monoid-Semiring R)
   congruence-additive-monoid-congruence-Semiring = pr1 S
 
-  eq-rel-congruence-Semiring : Equivalence-Relation l2 (type-Semiring R)
-  eq-rel-congruence-Semiring =
-    eq-rel-congruence-Monoid
+  equivalence-relation-congruence-Semiring :
+    equivalence-relation l2 (type-Semiring R)
+  equivalence-relation-congruence-Semiring =
+    equivalence-relation-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
@@ -133,7 +134,7 @@ module _
   add-congruence-Semiring :
     is-congruence-Monoid
       ( additive-monoid-Semiring R)
-      ( eq-rel-congruence-Semiring)
+      ( equivalence-relation-congruence-Semiring)
   add-congruence-Semiring =
     mul-congruence-Monoid
       ( additive-monoid-Semiring R)
@@ -142,12 +143,12 @@ module _
   mul-congruence-Semiring :
     is-congruence-Monoid
       ( multiplicative-monoid-Semiring R)
-      ( eq-rel-congruence-Semiring)
+      ( equivalence-relation-congruence-Semiring)
   mul-congruence-Semiring = pr2 S
 
 construct-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) →
-  (S : Equivalence-Relation l2 (type-Semiring R)) →
+  (S : equivalence-relation l2 (type-Semiring R)) →
   is-congruence-Monoid (additive-monoid-Semiring R) S →
   is-congruence-Monoid (multiplicative-monoid-Semiring R) S →
   congruence-Semiring l2 R
@@ -165,16 +166,16 @@ relate-same-elements-congruence-Semiring :
   {l1 l2 l3 : Level} (R : Semiring l1) →
   congruence-Semiring l2 R → congruence-Semiring l3 R → UU (l1 ⊔ l2 ⊔ l3)
 relate-same-elements-congruence-Semiring R S T =
-  relate-same-elements-Equivalence-Relation
-    ( eq-rel-congruence-Semiring R S)
-    ( eq-rel-congruence-Semiring R T)
+  relate-same-elements-equivalence-relation
+    ( equivalence-relation-congruence-Semiring R S)
+    ( equivalence-relation-congruence-Semiring R T)
 
 refl-relate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S : congruence-Semiring l2 R) →
   relate-same-elements-congruence-Semiring R S S
 refl-relate-same-elements-congruence-Semiring R S =
-  refl-relate-same-elements-Equivalence-Relation
-    ( eq-rel-congruence-Semiring R S)
+  refl-relate-same-elements-equivalence-relation
+    ( equivalence-relation-congruence-Semiring R S)
 
 is-torsorial-relate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S : congruence-Semiring l2 R) →
@@ -211,9 +212,9 @@ pr1 (extensionality-congruence-Semiring R S T) =
 pr2 (extensionality-congruence-Semiring R S T) =
   is-equiv-relate-same-elements-eq-congruence-Semiring R S T
 
-eq-relate-same-elements-congruence-Semiring :
+equivalence-relationate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S T : congruence-Semiring l2 R) →
   relate-same-elements-congruence-Semiring R S T → S ＝ T
-eq-relate-same-elements-congruence-Semiring R S T =
+equivalence-relationate-same-elements-congruence-Semiring R S T =
   map-inv-equiv (extensionality-congruence-Semiring R S T)
 ```

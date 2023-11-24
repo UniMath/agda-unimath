@@ -48,14 +48,14 @@ subuniverse l1 l2 = subtype l2 (UU l1)
 
 is-subtype-subuniverse :
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : UU l1) →
-  is-prop (type-Prop (P X))
-is-subtype-subuniverse P X = is-prop-type-Prop (P X)
+  is-prop (is-in-subtype P X)
+is-subtype-subuniverse P X = is-prop-is-in-subtype P X
 
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2)
   where
 
-  type-subuniverse : UU ((lsuc l1) ⊔ l2)
+  type-subuniverse : UU (lsuc l1 ⊔ l2)
   type-subuniverse = type-subtype P
 
   is-in-subuniverse : UU l1 → UU l2
@@ -84,7 +84,7 @@ module _
 is-in-subuniverse-map :
   {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3) {A : UU l1} {B : UU l2} →
   (A → B) → UU (l2 ⊔ l3)
-is-in-subuniverse-map P f = (b : _) → is-in-subuniverse P (fiber f b)
+is-in-subuniverse-map P {A} {B} f = (b : B) → is-in-subuniverse P (fiber f b)
 ```
 
 ### The predicate of essentially being in a subuniverse
@@ -122,47 +122,22 @@ module _
     is-prop-is-essentially-in-subuniverse X
 ```
 
-### Global subuniverses
-
-```agda
-is-global-subuniverse :
-  (α : Level → Level) (P : (l : Level) → subuniverse l (α l)) →
-  (l1 l2 : Level) → UU (α l1 ⊔ α l2 ⊔ lsuc l1 ⊔ lsuc l2)
-is-global-subuniverse α P l1 l2 =
-  (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
-
-record global-subuniverse (α : Level → Level) : UUω where
-  field
-    subuniverse-global-subuniverse : (l : Level) → subuniverse l (α l)
-    is-global-global-subuniverse :
-      (l1 l2 : Level) →
-      is-global-subuniverse α subuniverse-global-subuniverse l1 l2
-
-open global-subuniverse public
-
-module _
-  (α : Level → Level) (P : global-subuniverse α)
-  where
-
-  is-in-global-subuniverse : {l : Level} → UU l → UU (α l)
-  is-in-global-subuniverse X =
-    is-in-subuniverse (subuniverse-global-subuniverse P _) X
-```
-
 ## Properties
 
 ### Subuniverses are closed under equivalences
 
 ```agda
-is-in-subuniverse-equiv :
-  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1} →
-  X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
-is-in-subuniverse-equiv P e = tr (is-in-subuniverse P) (eq-equiv _ _ e)
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1}
+  where
 
-is-in-subuniverse-equiv' :
-  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1} →
-  X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
-is-in-subuniverse-equiv' P e = tr (is-in-subuniverse P) (inv (eq-equiv _ _ e))
+  is-in-subuniverse-equiv :
+    X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
+  is-in-subuniverse-equiv e = tr (is-in-subuniverse P) (eq-equiv X Y e)
+
+  is-in-subuniverse-equiv' :
+    X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
+  is-in-subuniverse-equiv' e = tr (is-in-subuniverse P) (inv (eq-equiv X Y e))
 ```
 
 ### Characterization of the identity type of subuniverses
@@ -176,14 +151,14 @@ module _
   equiv-subuniverse X Y = (pr1 X) ≃ (pr1 Y)
 
   equiv-eq-subuniverse :
-    (s t : type-subuniverse P) → s ＝ t → equiv-subuniverse s t
-  equiv-eq-subuniverse (pair X p) .(pair X p) refl = id-equiv
+    (X Y : type-subuniverse P) → X ＝ Y → equiv-subuniverse X Y
+  equiv-eq-subuniverse X .X refl = id-equiv
 
   abstract
     is-torsorial-equiv-subuniverse :
-      (s : type-subuniverse P) →
-      is-torsorial (λ t → equiv-subuniverse s t)
-    is-torsorial-equiv-subuniverse (pair X p) =
+      (X : type-subuniverse P) →
+      is-torsorial (λ Y → equiv-subuniverse X Y)
+    is-torsorial-equiv-subuniverse (X , p) =
       is-torsorial-Eq-subtype
         ( is-torsorial-equiv X)
         ( is-subtype-subuniverse P)
@@ -192,9 +167,9 @@ module _
         ( p)
 
     is-torsorial-equiv-subuniverse' :
-      (s : type-subuniverse P) →
-      is-torsorial (λ t → equiv-subuniverse t s)
-    is-torsorial-equiv-subuniverse' (pair X p) =
+      (X : type-subuniverse P) →
+      is-torsorial (λ Y → equiv-subuniverse Y X)
+    is-torsorial-equiv-subuniverse' (X , p) =
       is-torsorial-Eq-subtype
         ( is-torsorial-equiv' X)
         ( is-subtype-subuniverse P)
@@ -204,25 +179,25 @@ module _
 
   abstract
     is-equiv-equiv-eq-subuniverse :
-      (s t : type-subuniverse P) → is-equiv (equiv-eq-subuniverse s t)
-    is-equiv-equiv-eq-subuniverse (pair X p) =
+      (X Y : type-subuniverse P) → is-equiv (equiv-eq-subuniverse X Y)
+    is-equiv-equiv-eq-subuniverse X =
       fundamental-theorem-id
-        ( is-torsorial-equiv-subuniverse (pair X p))
-        ( equiv-eq-subuniverse (pair X p))
+        ( is-torsorial-equiv-subuniverse X)
+        ( equiv-eq-subuniverse X)
 
   extensionality-subuniverse :
-    (s t : type-subuniverse P) → (s ＝ t) ≃ equiv-subuniverse s t
-  pr1 (extensionality-subuniverse s t) = equiv-eq-subuniverse s t
-  pr2 (extensionality-subuniverse s t) = is-equiv-equiv-eq-subuniverse s t
+    (X Y : type-subuniverse P) → (X ＝ Y) ≃ equiv-subuniverse X Y
+  pr1 (extensionality-subuniverse X Y) = equiv-eq-subuniverse X Y
+  pr2 (extensionality-subuniverse X Y) = is-equiv-equiv-eq-subuniverse X Y
 
   eq-equiv-subuniverse :
-    {s t : type-subuniverse P} → equiv-subuniverse s t → s ＝ t
-  eq-equiv-subuniverse {s} {t} =
-    map-inv-is-equiv (is-equiv-equiv-eq-subuniverse s t)
+    {X Y : type-subuniverse P} → equiv-subuniverse X Y → X ＝ Y
+  eq-equiv-subuniverse {X} {Y} =
+    map-inv-is-equiv (is-equiv-equiv-eq-subuniverse X Y)
 
   compute-eq-equiv-id-equiv-subuniverse :
-    {s : type-subuniverse P} →
-    eq-equiv-subuniverse {s} {s} (id-equiv {A = pr1 s}) ＝ refl
+    {X : type-subuniverse P} →
+    eq-equiv-subuniverse {X} {X} (id-equiv {A = pr1 X}) ＝ refl
   compute-eq-equiv-id-equiv-subuniverse =
     is-retraction-map-inv-equiv (extensionality-subuniverse _ _) refl
 ```

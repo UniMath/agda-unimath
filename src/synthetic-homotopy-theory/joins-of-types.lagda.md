@@ -374,6 +374,12 @@ module _
       ( up-join)
 ```
 
+## See also
+
+- [Joins of maps](synthetic-homotopy-theory.joins-of-maps.md)
+- [Pushout-products](synthetic-homotopy-theory.pushout-products.md)
+- [Dependent pushout-products](synthetic-homotopy-theory.dependent-pushout-products.md)
+
 ## References
 
 - Egbert Rijke, _The join construction_, 2017

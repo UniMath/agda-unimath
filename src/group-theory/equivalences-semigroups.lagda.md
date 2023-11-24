@@ -82,7 +82,7 @@ module _
   pr1 (pr1 (center-total-preserves-mul-id-Semigroup)) = mul-Semigroup G
   pr2 (pr1 (center-total-preserves-mul-id-Semigroup)) =
     associative-mul-Semigroup G
-  pr2 (center-total-preserves-mul-id-Semigroup) x y = refl
+  pr2 (center-total-preserves-mul-id-Semigroup) = refl
 
   contraction-total-preserves-mul-id-Semigroup :
     ( t : Σ ( has-associative-mul (type-Semigroup G))
@@ -90,7 +90,7 @@ module _
               preserves-mul-Semigroup G (pair (set-Semigroup G) μ) id)) →
     Id center-total-preserves-mul-id-Semigroup t
   contraction-total-preserves-mul-id-Semigroup
-    (pair (pair μ-G' associative-G') μ-id) =
+    ( (μ-G' , associative-G') , μ-id) =
     eq-type-subtype
       ( λ μ →
         preserves-mul-prop-Semigroup G (pair (set-Semigroup G) μ) id)
@@ -108,10 +108,12 @@ module _
                       Id-Prop
                         ( set-Semigroup G)
                         ( μ (μ x y) z) (μ x (μ y z))))))
-        ( eq-htpy (λ x → eq-htpy (λ y → μ-id x y))))
+        ( eq-htpy (λ x → eq-htpy (λ y → μ-id))))
 
   is-torsorial-preserves-mul-id-Semigroup :
-    is-torsorial (λ μ → preserves-mul (mul-Semigroup G) (pr1 μ) id)
+    is-torsorial
+      ( λ (μ : has-associative-mul (type-Semigroup G)) →
+        preserves-mul (mul-Semigroup G) (pr1 μ) id)
   pr1 is-torsorial-preserves-mul-id-Semigroup =
     center-total-preserves-mul-id-Semigroup
   pr2 is-torsorial-preserves-mul-id-Semigroup =

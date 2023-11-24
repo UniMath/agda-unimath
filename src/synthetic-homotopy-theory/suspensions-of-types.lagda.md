@@ -12,13 +12,17 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.constant-maps
 open import foundation.contractible-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -295,9 +299,7 @@ module _
         ( is-section-map-inv-dependent-up-suspension d))
 ```
 
-### Consequences of the dependent universal property
-
-#### Characterization of homotopies between functions with domain a suspension
+### Characterization of homotopies between functions with domain a suspension
 
 ```agda
 module _
@@ -307,16 +309,9 @@ module _
 
   htpy-function-out-of-suspension : UU (l1 ⊔ l2)
   htpy-function-out-of-suspension =
-    Σ ( f north-suspension ＝ g north-suspension)
-      ( λ p →
-        Σ ( f south-suspension ＝ g south-suspension)
-          ( λ q →
-            (x : X) →
-            coherence-square-identifications
-              ( p)
-              ( ap f (meridian-suspension x))
-              ( ap g (meridian-suspension x))
-              ( q)))
+    htpy-suspension-structure
+      ( ev-suspension (suspension-structure-suspension X) Y f)
+      ( ev-suspension (suspension-structure-suspension X) Y g)
 
   north-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension →
@@ -338,9 +333,12 @@ module _
       ( south-htpy-function-out-of-suspension h)
   meridian-htpy-function-out-of-suspension = pr2 ∘ pr2
 
-  equiv-htpy-function-out-of-suspension-htpy :
-    (f ~ g) ≃ htpy-function-out-of-suspension
-  equiv-htpy-function-out-of-suspension-htpy =
+  equiv-htpy-function-out-of-suspension-dependent-suspension-structure :
+    ( dependent-suspension-structure
+      ( eq-value f g)
+      ( suspension-structure-suspension X)) ≃
+    ( htpy-function-out-of-suspension)
+  equiv-htpy-function-out-of-suspension-dependent-suspension-structure =
     ( equiv-tot
       ( λ p →
         equiv-tot
@@ -355,7 +353,85 @@ module _
                       ( suspension-structure-suspension X)
                       ( x))
                     ( p)
-                    ( q)))))) ∘e
+                    ( q))))))
+
+  equiv-dependent-suspension-structure-htpy-function-out-of-suspension :
+    ( htpy-function-out-of-suspension) ≃
+    ( dependent-suspension-structure
+      ( eq-value f g)
+      ( suspension-structure-suspension X))
+  equiv-dependent-suspension-structure-htpy-function-out-of-suspension =
+    ( equiv-tot
+      ( λ p →
+        equiv-tot
+          ( λ q →
+            equiv-Π-equiv-family
+              ( λ x →
+                ( compute-dependent-identification-eq-value-function
+                  ( f)
+                  ( g)
+                  ( meridian-suspension-structure
+                    ( suspension-structure-suspension X)
+                    ( x))
+                  ( p)
+                  ( q))))))
+
+  compute-inv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure :
+    htpy-equiv
+      ( inv-equiv
+        ( equiv-htpy-function-out-of-suspension-dependent-suspension-structure))
+      ( equiv-dependent-suspension-structure-htpy-function-out-of-suspension)
+  compute-inv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure =
+    ( compute-inv-equiv-tot
+      ( λ p →
+        equiv-tot
+          ( λ q →
+            equiv-Π-equiv-family
+              ( λ x →
+                inv-equiv
+                  ( compute-dependent-identification-eq-value-function
+                    ( f)
+                    ( g)
+                    ( meridian-suspension-structure
+                      ( suspension-structure-suspension X)
+                      ( x))
+                    ( p)
+                    ( q)))))) ∙h
+    ( tot-htpy
+      ( λ p →
+        compute-inv-equiv-tot
+          ( λ q →
+            equiv-Π-equiv-family
+              ( λ x →
+                inv-equiv
+                  ( compute-dependent-identification-eq-value-function
+                    ( f)
+                    ( g)
+                    ( meridian-suspension-structure
+                      ( suspension-structure-suspension X)
+                      ( x))
+                    ( p)
+                    ( q)))))) ∙h
+    ( tot-htpy
+      ( λ p →
+        ( tot-htpy
+          ( λ q →
+            compute-inv-equiv-Π-equiv-family
+              ( λ x →
+                inv-equiv
+                  ( compute-dependent-identification-eq-value-function
+                    ( f)
+                    ( g)
+                    ( meridian-suspension-structure
+                      ( suspension-structure-suspension X)
+                      ( x))
+                    ( p)
+                    ( q)))))))
+
+  equiv-htpy-function-out-of-suspension-htpy :
+    (f ~ g) ≃ htpy-function-out-of-suspension
+  equiv-htpy-function-out-of-suspension-htpy =
+    ( equiv-htpy-function-out-of-suspension-dependent-suspension-structure) ∘e
     ( equiv-dependent-up-suspension (eq-value f g))
 
   htpy-function-out-of-suspension-htpy :
@@ -363,15 +439,59 @@ module _
   htpy-function-out-of-suspension-htpy =
     map-equiv (equiv-htpy-function-out-of-suspension-htpy)
 
-  htpy-htpy-function-out-of-suspension :
-    htpy-function-out-of-suspension → (f ~ g)
-  htpy-htpy-function-out-of-suspension =
-    map-inv-equiv (equiv-htpy-function-out-of-suspension-htpy)
-
   equiv-htpy-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension ≃ (f ~ g)
   equiv-htpy-htpy-function-out-of-suspension =
-    inv-equiv equiv-htpy-function-out-of-suspension-htpy
+    ( inv-equiv (equiv-dependent-up-suspension (eq-value f g))) ∘e
+    ( equiv-dependent-suspension-structure-htpy-function-out-of-suspension)
+
+  htpy-htpy-function-out-of-suspension :
+    htpy-function-out-of-suspension → (f ~ g)
+  htpy-htpy-function-out-of-suspension =
+    map-equiv equiv-htpy-htpy-function-out-of-suspension
+
+  compute-inv-equiv-htpy-function-out-of-suspension-htpy :
+    htpy-equiv
+      ( inv-equiv equiv-htpy-function-out-of-suspension-htpy)
+      ( equiv-htpy-htpy-function-out-of-suspension)
+  compute-inv-equiv-htpy-function-out-of-suspension-htpy c =
+    ( htpy-eq-equiv
+      ( distributive-inv-comp-equiv
+        ( equiv-dependent-up-suspension (eq-value f g))
+        ( equiv-htpy-function-out-of-suspension-dependent-suspension-structure))
+      ( c)) ∙
+    ( ap
+      ( map-inv-equiv (equiv-dependent-up-suspension (eq-value-function f g)))
+      ( compute-inv-equiv-htpy-function-out-of-suspension-dependent-suspension-structure
+        ( c)))
+
+  is-section-htpy-htpy-function-out-of-suspension :
+    ( ( htpy-function-out-of-suspension-htpy) ∘
+    ( htpy-htpy-function-out-of-suspension)) ~
+    ( id)
+  is-section-htpy-htpy-function-out-of-suspension c =
+    ( ap
+      ( htpy-function-out-of-suspension-htpy)
+      ( inv (compute-inv-equiv-htpy-function-out-of-suspension-htpy c))) ∙
+    ( is-section-map-inv-equiv (equiv-htpy-function-out-of-suspension-htpy) c)
+
+  equiv-htpy-function-out-of-suspension-htpy-north-suspension :
+    (c : htpy-function-out-of-suspension) →
+      ( htpy-htpy-function-out-of-suspension c north-suspension) ＝
+      ( north-htpy-function-out-of-suspension c)
+  equiv-htpy-function-out-of-suspension-htpy-north-suspension c =
+    north-htpy-in-htpy-suspension-structure
+      ( htpy-eq-htpy-suspension-structure
+        ( is-section-htpy-htpy-function-out-of-suspension c))
+
+  equiv-htpy-function-out-of-suspension-htpy-south-suspension :
+    (c : htpy-function-out-of-suspension) →
+      ( htpy-htpy-function-out-of-suspension c south-suspension) ＝
+      ( south-htpy-function-out-of-suspension c)
+  equiv-htpy-function-out-of-suspension-htpy-south-suspension c =
+    south-htpy-in-htpy-suspension-structure
+      ( htpy-eq-htpy-suspension-structure
+        ( is-section-htpy-htpy-function-out-of-suspension c))
 ```
 
 ### The suspension of a contractible type is contractible

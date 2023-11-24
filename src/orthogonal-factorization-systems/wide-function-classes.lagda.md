@@ -20,37 +20,74 @@ open import orthogonal-factorization-systems.function-classes
 
 ## Idea
 
-We say a [function class](orthogonal-factorization-systems.function-classes.md)
+We say a
+[(small) function class](orthogonal-factorization-systems.function-classes.md)
 is **wide** if it contains all [equivalences](foundation-core.equivalences.md)
-and is [composition](foundation.function-types.md) closed. This means it is
-morally a wide sub-∞-category of the ∞-category of types.
+and is composition closed. This means it is morally a wide sub-∞-category of the
+∞-category of types at a fixed universe level.
 
 ## Definition
 
-```agda
-is-wide-function-class :
-  {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
-is-wide-function-class c =
-  ( has-equivalences-function-class c) ×
-  ( is-closed-under-composition-function-class c)
+### The predicate on a small function class of being wide
 
+```agda
+module _
+  {l1 l2 : Level} (P : function-class l1 l1 l2)
+  where
+
+  is-wide-function-class : UU (lsuc l1 ⊔ l2)
+  is-wide-function-class =
+    ( has-equivalences-function-class P) ×
+    ( is-closed-under-composition-function-class P)
+
+  is-wide-function-class-Prop : Prop (lsuc l1 ⊔ l2)
+  is-wide-function-class-Prop =
+    prod-Prop
+      ( has-equivalences-function-class-Prop P)
+      ( is-closed-under-composition-function-class-Prop P)
+
+  is-prop-is-wide-function-class : is-prop is-wide-function-class
+  is-prop-is-wide-function-class = is-prop-type-Prop is-wide-function-class-Prop
+
+  has-equivalences-is-wide-function-class :
+    is-wide-function-class → has-equivalences-function-class P
+  has-equivalences-is-wide-function-class = pr1
+
+  is-closed-under-composition-is-wide-function-class :
+    is-wide-function-class → is-closed-under-composition-function-class P
+  is-closed-under-composition-is-wide-function-class = pr2
+```
+
+### The type of small wide function classes
+
+```agda
 wide-function-class : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 wide-function-class l1 l2 =
   Σ (function-class l1 l1 l2) (is-wide-function-class)
-```
 
-## Properties
+module _
+  {l1 l2 : Level} (P : wide-function-class l1 l2)
+  where
 
-```agda
-is-wide-function-class-Prop :
-  {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)
-is-wide-function-class-Prop c =
-  prod-Prop
-    ( has-equivalences-function-class-Prop c)
-    ( is-closed-under-composition-function-class-Prop c)
+  function-class-wide-function-class : function-class l1 l1 l2
+  function-class-wide-function-class = pr1 P
 
-is-prop-is-wide-function-class :
-  {l1 l2 : Level} (c : function-class l1 l1 l2) →
-  is-prop (is-wide-function-class c)
-is-prop-is-wide-function-class = is-prop-type-Prop ∘ is-wide-function-class-Prop
+  is-wide-wide-function-class :
+    is-wide-function-class function-class-wide-function-class
+  is-wide-wide-function-class = pr2 P
+
+  has-equivalences-wide-function-class :
+    has-equivalences-function-class function-class-wide-function-class
+  has-equivalences-wide-function-class =
+    has-equivalences-is-wide-function-class
+      ( function-class-wide-function-class)
+      ( is-wide-wide-function-class)
+
+  is-closed-under-composition-wide-function-class :
+    is-closed-under-composition-function-class
+      ( function-class-wide-function-class)
+  is-closed-under-composition-wide-function-class =
+    is-closed-under-composition-is-wide-function-class
+      ( function-class-wide-function-class)
+      ( is-wide-wide-function-class)
 ```

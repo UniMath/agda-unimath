@@ -30,81 +30,108 @@ open import group-theory.groups
 
 ## Idea
 
-A morphism of group actions from a G-set X to a G-set Y is a map from X to Y
-preserving the group action.
+A **morphism of group actions** from a [`G`-set](group-theory.group-actions.md)
+`X` to a `G`-set `Y` is a map from the underlying [set](foundation-core.sets.md)
+of `X` to the underlying set of `Y` **preserving the group action**. This means
+that for any element `g` of the [group](group-theory.groups.md) `G` the square
+
+```text
+          f
+      X -----> Y
+      |        |
+  μ g |        | μ g
+      V        V
+      X -----> Y
+          f
+```
+
+[commutes](foundation-core.commuting-squares-of-maps.md).
 
 ## Definitions
+
+### The predicate on maps between underlying types of group actions to preserve the group action
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3)
+  where
+
+  preserves-action-Group :
+    (type-action-Group G X → type-action-Group G Y) → UU (l1 ⊔ l2 ⊔ l3)
+  preserves-action-Group f =
+    (g : type-Group G) →
+    coherence-square-maps f (mul-action-Group G X g) (mul-action-Group G Y g) f
+```
 
 ### Morphisms of G-sets
 
 ```agda
 module _
   {l1 l2 l3 : Level} (G : Group l1)
-  (X : Abstract-Group-Action G l2)
-  (Y : Abstract-Group-Action G l3)
+  (X : action-Group G l2) (Y : action-Group G l3)
   where
 
-  hom-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
-  hom-Abstract-Group-Action =
-    Σ ( type-Set (pr1 X) → type-Set (pr1 Y))
-      ( λ f →
-        ( g : type-Group G) →
-        coherence-square-maps
-          ( f)
-          ( mul-Abstract-Group-Action G X g)
-          ( mul-Abstract-Group-Action G Y g)
-          ( f))
+  hom-action-Group : UU (l1 ⊔ l2 ⊔ l3)
+  hom-action-Group =
+    Σ ( type-action-Group G X → type-action-Group G Y)
+      ( preserves-action-Group G X Y)
 
-  map-hom-Abstract-Group-Action :
-    hom-Abstract-Group-Action → type-Set (pr1 X) → type-Set (pr1 Y)
-  map-hom-Abstract-Group-Action = pr1
+  map-hom-action-Group :
+    hom-action-Group → type-action-Group G X → type-action-Group G Y
+  map-hom-action-Group = pr1
 
-  coherence-square-hom-Abstract-Group-Action :
-    (f : hom-Abstract-Group-Action) (g : type-Group G) →
-    coherence-square-maps
-      ( map-hom-Abstract-Group-Action f)
-      ( mul-Abstract-Group-Action G X g)
-      ( mul-Abstract-Group-Action G Y g)
-      ( map-hom-Abstract-Group-Action f)
-  coherence-square-hom-Abstract-Group-Action = pr2
+  preserves-action-hom-action-Group :
+    (f : hom-action-Group) →
+    preserves-action-Group G X Y (map-hom-action-Group f)
+  preserves-action-hom-action-Group = pr2
 ```
 
 ### The identity morphism
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
   where
 
-  id-hom-Abstract-Group-Action : hom-Abstract-Group-Action G X X
-  pr1 id-hom-Abstract-Group-Action = id
-  pr2 id-hom-Abstract-Group-Action g = refl-htpy
+  id-hom-action-Group : hom-action-Group G X X
+  pr1 id-hom-action-Group = id
+  pr2 id-hom-action-Group g = refl-htpy
 ```
 
 ### Composition of morphisms
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
-  (Y : Abstract-Group-Action G l3) (Z : Abstract-Group-Action G l4)
+  {l1 l2 l3 l4 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3) (Z : action-Group G l4)
   where
 
-  comp-hom-Abstract-Group-Action :
-    hom-Abstract-Group-Action G Y Z →
-    hom-Abstract-Group-Action G X Y →
-    hom-Abstract-Group-Action G X Z
-  pr1 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
-  pr2 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
+  map-comp-hom-action-Group :
+    hom-action-Group G Y Z → hom-action-Group G X Y →
+    type-action-Group G X → type-action-Group G Z
+  map-comp-hom-action-Group g f =
+    map-hom-action-Group G Y Z g ∘ map-hom-action-Group G X Y f
+
+  preserves-action-comp-hom-action-Group :
+    (g : hom-action-Group G Y Z) (f : hom-action-Group G X Y) →
+    preserves-action-Group G X Z (map-comp-hom-action-Group g f)
+  preserves-action-comp-hom-action-Group g f x =
     pasting-horizontal-coherence-square-maps
-      ( f)
-      ( g)
-      ( mul-Abstract-Group-Action G X x)
-      ( mul-Abstract-Group-Action G Y x)
-      ( mul-Abstract-Group-Action G Z x)
-      ( f)
-      ( g)
-      ( H x)
-      ( K x)
+      ( map-hom-action-Group G X Y f)
+      ( map-hom-action-Group G Y Z g)
+      ( mul-action-Group G X x)
+      ( mul-action-Group G Y x)
+      ( mul-action-Group G Z x)
+      ( map-hom-action-Group G X Y f)
+      ( map-hom-action-Group G Y Z g)
+      ( preserves-action-hom-action-Group G X Y f x)
+      ( preserves-action-hom-action-Group G Y Z g x)
+
+  comp-hom-action-Group :
+    hom-action-Group G Y Z → hom-action-Group G X Y → hom-action-Group G X Z
+  pr1 (comp-hom-action-Group g f) = map-comp-hom-action-Group g f
+  pr2 (comp-hom-action-Group g f) = preserves-action-comp-hom-action-Group g f
 ```
 
 ## Properties
@@ -113,114 +140,108 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
-  (Y : Abstract-Group-Action G l3) (f : hom-Abstract-Group-Action G X Y)
+  {l1 l2 l3 : Level} (G : Group l1) (X : action-Group G l2)
+  (Y : action-Group G l3) (f : hom-action-Group G X Y)
   where
 
-  htpy-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) → UU (l2 ⊔ l3)
-  htpy-hom-Abstract-Group-Action g = pr1 f ~ pr1 g
+  htpy-hom-action-Group :
+    (g : hom-action-Group G X Y) → UU (l2 ⊔ l3)
+  htpy-hom-action-Group g =
+    map-hom-action-Group G X Y f ~ map-hom-action-Group G X Y g
 
-  refl-htpy-hom-Abstract-Group-Action : htpy-hom-Abstract-Group-Action f
-  refl-htpy-hom-Abstract-Group-Action = refl-htpy
+  refl-htpy-hom-action-Group : htpy-hom-action-Group f
+  refl-htpy-hom-action-Group = refl-htpy
 
-  htpy-eq-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
-    Id f g → htpy-hom-Abstract-Group-Action g
-  htpy-eq-hom-Abstract-Group-Action .f refl =
-    refl-htpy-hom-Abstract-Group-Action
+  htpy-eq-hom-action-Group :
+    (g : hom-action-Group G X Y) →
+    f ＝ g → htpy-hom-action-Group g
+  htpy-eq-hom-action-Group .f refl =
+    refl-htpy-hom-action-Group
 
-  is-torsorial-htpy-hom-Abstract-Group-Action :
-    is-torsorial htpy-hom-Abstract-Group-Action
-  is-torsorial-htpy-hom-Abstract-Group-Action =
+  is-torsorial-htpy-hom-action-Group :
+    is-torsorial htpy-hom-action-Group
+  is-torsorial-htpy-hom-action-Group =
     is-torsorial-Eq-subtype
-      ( is-torsorial-htpy (pr1 f))
+      ( is-torsorial-htpy (map-hom-action-Group G X Y f))
       ( λ g →
         is-prop-Π
           ( λ x →
             is-prop-Π
               ( λ y →
                 is-set-type-Set
-                  ( set-Abstract-Group-Action G Y)
-                  ( g (mul-Abstract-Group-Action G X x y))
-                  ( mul-Abstract-Group-Action G Y x (g y)))))
-      ( pr1 f)
+                  ( set-action-Group G Y)
+                  ( g (mul-action-Group G X x y))
+                  ( mul-action-Group G Y x (g y)))))
+      ( map-hom-action-Group G X Y f)
       ( refl-htpy)
-      ( pr2 f)
+      ( preserves-action-hom-action-Group G X Y f)
 
-  is-equiv-htpy-eq-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
-    is-equiv (htpy-eq-hom-Abstract-Group-Action g)
-  is-equiv-htpy-eq-hom-Abstract-Group-Action =
+  is-equiv-htpy-eq-hom-action-Group :
+    (g : hom-action-Group G X Y) → is-equiv (htpy-eq-hom-action-Group g)
+  is-equiv-htpy-eq-hom-action-Group =
     fundamental-theorem-id
-      is-torsorial-htpy-hom-Abstract-Group-Action
-      htpy-eq-hom-Abstract-Group-Action
+      is-torsorial-htpy-hom-action-Group
+      htpy-eq-hom-action-Group
 
-  extensionality-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
-    Id f g ≃ htpy-hom-Abstract-Group-Action g
-  pr1 (extensionality-hom-Abstract-Group-Action g) =
-    htpy-eq-hom-Abstract-Group-Action g
-  pr2 (extensionality-hom-Abstract-Group-Action g) =
-    is-equiv-htpy-eq-hom-Abstract-Group-Action g
+  extensionality-hom-action-Group :
+    (g : hom-action-Group G X Y) → (f ＝ g) ≃ htpy-hom-action-Group g
+  pr1 (extensionality-hom-action-Group g) =
+    htpy-eq-hom-action-Group g
+  pr2 (extensionality-hom-action-Group g) =
+    is-equiv-htpy-eq-hom-action-Group g
 
-  eq-htpy-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
-    htpy-hom-Abstract-Group-Action g → Id f g
-  eq-htpy-hom-Abstract-Group-Action g =
-    map-inv-is-equiv (is-equiv-htpy-eq-hom-Abstract-Group-Action g)
+  eq-htpy-hom-action-Group :
+    (g : hom-action-Group G X Y) → htpy-hom-action-Group g → f ＝ g
+  eq-htpy-hom-action-Group g =
+    map-inv-is-equiv (is-equiv-htpy-eq-hom-action-Group g)
 ```
 
 ### The type of morphisms of group actions is a set
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
-  (Y : Abstract-Group-Action G l3)
+  {l1 l2 l3 : Level} (G : Group l1) (X : action-Group G l2)
+  (Y : action-Group G l3)
   where
 
-  is-set-hom-Abstract-Group-Action :
-    is-set (hom-Abstract-Group-Action G X Y)
-  is-set-hom-Abstract-Group-Action f g =
+  is-set-hom-action-Group :
+    is-set (hom-action-Group G X Y)
+  is-set-hom-action-Group f g =
     is-prop-equiv
-      ( extensionality-hom-Abstract-Group-Action G X Y f g)
+      ( extensionality-hom-action-Group G X Y f g)
       ( is-prop-Π
         ( λ x →
-          is-set-type-Abstract-Group-Action G Y
-            ( map-hom-Abstract-Group-Action G X Y f x)
-            ( map-hom-Abstract-Group-Action G X Y g x)))
+          is-set-type-action-Group G Y
+            ( map-hom-action-Group G X Y f x)
+            ( map-hom-action-Group G X Y g x)))
 
-  hom-set-Abstract-Group-Action : Set (l1 ⊔ l2 ⊔ l3)
-  pr1 hom-set-Abstract-Group-Action = hom-Abstract-Group-Action G X Y
-  pr2 hom-set-Abstract-Group-Action = is-set-hom-Abstract-Group-Action
+  hom-set-action-Group : Set (l1 ⊔ l2 ⊔ l3)
+  pr1 hom-set-action-Group = hom-action-Group G X Y
+  pr2 hom-set-action-Group = is-set-hom-action-Group
 ```
 
 ### Composition is associative
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (G : Group l1) (X1 : Abstract-Group-Action G l2)
-  (X2 : Abstract-Group-Action G l3) (X3 : Abstract-Group-Action G l4)
-  (X4 : Abstract-Group-Action G l5)
+  {l1 l2 l3 l4 l5 : Level} (G : Group l1) (X1 : action-Group G l2)
+  (X2 : action-Group G l3) (X3 : action-Group G l4)
+  (X4 : action-Group G l5)
   where
 
-  associative-comp-hom-Abstract-Group-Action :
-    (h : hom-Abstract-Group-Action G X3 X4)
-    (g : hom-Abstract-Group-Action G X2 X3)
-    (f : hom-Abstract-Group-Action G X1 X2) →
-    Id
-      ( comp-hom-Abstract-Group-Action G X1 X2 X4
-        ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
+  associative-comp-hom-action-Group :
+    (h : hom-action-Group G X3 X4)
+    (g : hom-action-Group G X2 X3)
+    (f : hom-action-Group G X1 X2) →
+    comp-hom-action-Group G X1 X2 X4 (comp-hom-action-Group G X2 X3 X4 h g) f ＝
+    comp-hom-action-Group G X1 X3 X4 h (comp-hom-action-Group G X1 X2 X3 g f)
+  associative-comp-hom-action-Group h g f =
+    eq-htpy-hom-action-Group G X1 X4
+      ( comp-hom-action-Group G X1 X2 X4
+        ( comp-hom-action-Group G X2 X3 X4 h g)
         ( f))
-      ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
-        ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
-  associative-comp-hom-Abstract-Group-Action h g f =
-    eq-htpy-hom-Abstract-Group-Action G X1 X4
-      ( comp-hom-Abstract-Group-Action G X1 X2 X4
-        ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
-        ( f))
-      ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
-        ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
+      ( comp-hom-action-Group G X1 X3 X4 h
+        ( comp-hom-action-Group G X1 X2 X3 g f))
       ( refl-htpy)
 ```
 
@@ -228,35 +249,25 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
-  (Y : Abstract-Group-Action G l3)
+  {l1 l2 l3 : Level} (G : Group l1) (X : action-Group G l2)
+  (Y : action-Group G l3)
   where
 
-  left-unit-law-comp-hom-Abstract-Group-Action :
-    (f : hom-Abstract-Group-Action G X Y) →
-    Id
-      ( comp-hom-Abstract-Group-Action G X Y Y
-        ( id-hom-Abstract-Group-Action G Y)
-        ( f))
-      ( f)
-  left-unit-law-comp-hom-Abstract-Group-Action f =
-    eq-htpy-hom-Abstract-Group-Action G X Y
-      ( comp-hom-Abstract-Group-Action G X Y Y
-        ( id-hom-Abstract-Group-Action G Y)
-        ( f))
+  left-unit-law-comp-hom-action-Group :
+    (f : hom-action-Group G X Y) →
+    comp-hom-action-Group G X Y Y (id-hom-action-Group G Y) f ＝ f
+  left-unit-law-comp-hom-action-Group f =
+    eq-htpy-hom-action-Group G X Y
+      ( comp-hom-action-Group G X Y Y (id-hom-action-Group G Y) f)
       ( f)
       ( refl-htpy)
 
-  right-unit-law-comp-hom-Abstract-Group-Action :
-    (f : hom-Abstract-Group-Action G X Y) →
-    Id
-      ( comp-hom-Abstract-Group-Action G X X Y f
-        ( id-hom-Abstract-Group-Action G X))
-      ( f)
-  right-unit-law-comp-hom-Abstract-Group-Action f =
-    eq-htpy-hom-Abstract-Group-Action G X Y
-      ( comp-hom-Abstract-Group-Action G X X Y f
-        ( id-hom-Abstract-Group-Action G X))
+  right-unit-law-comp-hom-action-Group :
+    (f : hom-action-Group G X Y) →
+    comp-hom-action-Group G X X Y f (id-hom-action-Group G X) ＝ f
+  right-unit-law-comp-hom-action-Group f =
+    eq-htpy-hom-action-Group G X Y
+      ( comp-hom-action-Group G X X Y f (id-hom-action-Group G X))
       ( f)
       ( refl-htpy)
 ```

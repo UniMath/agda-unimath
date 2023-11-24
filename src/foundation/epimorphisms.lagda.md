@@ -69,11 +69,13 @@ module _
 If the map `f : A → B` is epi, then the commutative square
 
 ```text
-      f
-    A → B
-  f ↓   ↓ id
-    B → B
-      id
+        f
+    A -----> B
+    |        |
+  f |        | id
+    V      ⌜ V
+    B -----> B
+        id
 ```
 
 is a pushout square.
@@ -83,12 +85,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
-  diagonal-into-fibers-precomp :
-    (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
-  diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
-
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism :
-    is-epimorphism f → is-equiv diagonal-into-fibers-precomp
+    is-epimorphism f → is-equiv (diagonal-into-fibers-precomp f X)
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism e =
     is-equiv-map-section-family
       ( λ g → (g , refl))

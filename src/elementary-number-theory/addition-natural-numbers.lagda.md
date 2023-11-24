@@ -32,11 +32,11 @@ add-ℕ : ℕ → ℕ → ℕ
 add-ℕ x 0 = x
 add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 
-add-ℕ' : ℕ → ℕ → ℕ
-add-ℕ' m n = add-ℕ n m
-
 infixl 35 _+ℕ_
 _+ℕ_ = add-ℕ
+
+add-ℕ' : ℕ → ℕ → ℕ
+add-ℕ' m n = add-ℕ n m
 
 ap-add-ℕ :
   {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → m +ℕ n ＝ m' +ℕ n'

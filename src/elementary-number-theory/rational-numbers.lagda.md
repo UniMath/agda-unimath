@@ -129,7 +129,7 @@ in-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
 
 ```agda
 reflecting-map-sim-fraction :
-  reflecting-map-Equivalence-Relation eq-rel-sim-fraction-ℤ ℚ
+  reflecting-map-equivalence-relation equivalence-relation-sim-fraction-ℤ ℚ
 pr1 reflecting-map-sim-fraction = in-fraction-ℤ
 pr2 reflecting-map-sim-fraction {x} {y} H = eq-ℚ-sim-fractions-ℤ x y H
 ```

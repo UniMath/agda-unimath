@@ -85,18 +85,18 @@ module _
   scalar-mul-vec-Ring-endomorphism :
     (n : ℕ) (r : type-Ring R) → hom-Ab (vec-Ring-Ab R n) (vec-Ring-Ab R n)
   pr1 (scalar-mul-vec-Ring-endomorphism n r) = scalar-mul-vec-Ring r
-  pr2 (scalar-mul-vec-Ring-endomorphism n r) =
-    left-distributive-scalar-mul-add-vec-Ring r
+  pr2 (scalar-mul-vec-Ring-endomorphism n r) {x} {y} =
+    left-distributive-scalar-mul-add-vec-Ring r x y
 
   scalar-mul-hom-Ring :
     (n : ℕ) → hom-Ring R (endomorphism-ring-Ab (vec-Ring-Ab R n))
   pr1 (pr1 (scalar-mul-hom-Ring n)) = scalar-mul-vec-Ring-endomorphism n
-  pr2 (pr1 (scalar-mul-hom-Ring n)) k1 k2 =
+  pr2 (pr1 (scalar-mul-hom-Ring n)) {k1} {k2} =
     eq-htpy-hom-Ab
       ( vec-Ring-Ab R n)
       ( vec-Ring-Ab R n)
       ( right-distributive-scalar-mul-add-vec-Ring k1 k2)
-  pr1 (pr2 (scalar-mul-hom-Ring n)) k1 k2 =
+  pr1 (pr2 (scalar-mul-hom-Ring n)) {k1} {k2} =
     eq-htpy-hom-Ab
       ( vec-Ring-Ab R n)
       ( vec-Ring-Ab R n)

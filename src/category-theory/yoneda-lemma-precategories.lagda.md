@@ -24,9 +24,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -156,6 +153,27 @@ The inverse is an inverse:
     section-copresheaf-Category C F c
   pr1 equiv-lemma-yoneda-Precategory = map-yoneda-Precategory
   pr2 equiv-lemma-yoneda-Precategory = lemma-yoneda-Precategory
+```
+
+## Corollaries
+
+### The Yoneda lemma for representable functors
+
+An important special-case of the Yoneda lemma is when `F` is itself a
+representable functor `F = Hom(-, d)`.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (c d : obj-Precategory C)
+  where
+
+  equiv-lemma-yoneda-representable-Precategory :
+    hom-copresheaf-Large-Category C
+      ( representable-functor-Precategory C c)
+      ( representable-functor-Precategory C d) ≃
+    hom-Precategory C d c
+  equiv-lemma-yoneda-representable-Precategory =
+    equiv-lemma-yoneda-Precategory C c (representable-functor-Precategory C d)
 ```
 
 ## See also

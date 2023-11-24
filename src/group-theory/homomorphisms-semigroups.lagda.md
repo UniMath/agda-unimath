@@ -40,7 +40,10 @@ module _
   where
 
   preserves-mul : (μA : A → A → A) (μB : B → B → B) → (A → B) → UU (l1 ⊔ l2)
-  preserves-mul μA μB f = (x y : A) → Id (f (μA x y)) (μB (f x) (f y))
+  preserves-mul μA μB f = {x y : A} → f (μA x y) ＝ μB (f x) (f y)
+
+  preserves-mul' : (μA : A → A → A) (μB : B → B → B) → (A → B) → UU (l1 ⊔ l2)
+  preserves-mul' μA μB f = (x y : A) → f (μA x y) ＝ μB (f x) (f y)
 
 module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
@@ -49,10 +52,10 @@ module _
   preserves-mul-prop-Semigroup :
     (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
   preserves-mul-prop-Semigroup f =
-    Π-Prop
+    Π-Prop'
       ( type-Semigroup G)
       ( λ x →
-        Π-Prop
+        Π-Prop'
           ( type-Semigroup G)
           ( λ y →
             Id-Prop
@@ -63,10 +66,10 @@ module _
   preserves-mul-prop-Semigroup' :
     (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
   preserves-mul-prop-Semigroup' f =
-    Π-Prop
+    Π-Prop'
       ( type-Semigroup G)
       ( λ x →
-        Π-Prop
+        Π-Prop'
           ( type-Semigroup G)
           ( λ y →
             Id-Prop
@@ -163,7 +166,7 @@ module _
 
 preserves-mul-id-Semigroup :
   {l : Level} (G : Semigroup l) → preserves-mul-Semigroup G G id
-preserves-mul-id-Semigroup G x y = refl
+preserves-mul-id-Semigroup G = refl
 ```
 
 ### The identity homomorphism of semigroups
@@ -190,13 +193,11 @@ module _
 
   preserves-mul-comp-hom-Semigroup :
     preserves-mul-Semigroup G K map-comp-hom-Semigroup
-  preserves-mul-comp-hom-Semigroup x y =
+  preserves-mul-comp-hom-Semigroup =
     ( ap
       ( map-hom-Semigroup H K g)
-      ( preserves-mul-hom-Semigroup G H f x y)) ∙
-    ( preserves-mul-hom-Semigroup H K g
-      ( map-hom-Semigroup G H f x)
-      ( map-hom-Semigroup G H f y))
+      ( preserves-mul-hom-Semigroup G H f)) ∙
+    ( preserves-mul-hom-Semigroup H K g)
 
   comp-hom-Semigroup : hom-Semigroup G K
   pr1 comp-hom-Semigroup = map-comp-hom-Semigroup

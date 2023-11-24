@@ -182,15 +182,17 @@ module _
     inclusion-group-of-units-Ring (ring-Commutative-Ring A)
 
   preserves-mul-inclusion-group-of-units-Commutative-Ring :
-    (x y : type-group-of-units-Commutative-Ring) →
+    {x y : type-group-of-units-Commutative-Ring} →
     inclusion-group-of-units-Commutative-Ring
       ( mul-group-of-units-Commutative-Ring x y) ＝
     mul-Commutative-Ring A
       ( inclusion-group-of-units-Commutative-Ring x)
       ( inclusion-group-of-units-Commutative-Ring y)
-  preserves-mul-inclusion-group-of-units-Commutative-Ring =
+  preserves-mul-inclusion-group-of-units-Commutative-Ring {x} {y} =
     preserves-mul-inclusion-group-of-units-Ring
       ( ring-Commutative-Ring A)
+      { x}
+      { y}
 
   hom-inclusion-group-of-units-Commutative-Ring :
     hom-Monoid monoid-group-of-units-Commutative-Ring
@@ -221,7 +223,7 @@ module _
       ( f)
 
   preserves-mul-hom-group-of-units-hom-Commutative-Ring :
-    (x y : type-group-of-units-Commutative-Ring A) →
+    {x y : type-group-of-units-Commutative-Ring A} →
     map-group-of-units-hom-Commutative-Ring
       ( mul-group-of-units-Commutative-Ring A x y) ＝
     mul-group-of-units-Commutative-Ring B
@@ -254,7 +256,7 @@ module _
       ( f)
 
   preserves-inv-hom-group-of-units-hom-Commutative-Ring :
-    (x : type-group-of-units-Commutative-Ring A) →
+    {x : type-group-of-units-Commutative-Ring A} →
     map-group-of-units-hom-Commutative-Ring
       ( inv-group-of-units-Commutative-Ring A x) ＝
     inv-group-of-units-Commutative-Ring B
