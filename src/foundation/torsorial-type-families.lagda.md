@@ -68,7 +68,7 @@ module _
 
 ## Properties
 
-#### `fib Id B ≃ is-torsorial B` for any type family `B` over `A`
+### `fiber Id B ≃ is-torsorial B` for any type family `B` over `A`
 
 In other words, a type family `B` over `A` is in the
 [image](foundation.images.md) of `Id : A → (A → 𝒰)` if and only if `B` is
@@ -84,29 +84,29 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  is-torsorial-fib-Id :
+  is-torsorial-fiber-Id :
     {a : A} → ((x : A) → (a ＝ x) ≃ B x) → is-torsorial B
-  is-torsorial-fib-Id H =
+  is-torsorial-fiber-Id H =
     fundamental-theorem-id'
       ( λ x → map-equiv (H x))
       ( λ x → is-equiv-map-equiv (H x))
 
-  fib-Id-is-torsorial :
+  fiber-Id-is-torsorial :
     is-torsorial B → Σ A (λ a → (x : A) → (a ＝ x) ≃ B x)
-  pr1 (fib-Id-is-torsorial ((a , b) , H)) = a
-  pr2 (fib-Id-is-torsorial ((a , b) , H)) =
+  pr1 (fiber-Id-is-torsorial ((a , b) , H)) = a
+  pr2 (fiber-Id-is-torsorial ((a , b) , H)) =
     map-inv-distributive-Π-Σ (f , fundamental-theorem-id ((a , b) , H) f)
     where
     f : (x : A) → (a ＝ x) → B x
     f x refl = b
 
-  compute-fib-Id :
+  compute-fiber-Id :
     (Σ A (λ a → (x : A) → (a ＝ x) ≃ B x)) ≃ is-torsorial B
-  compute-fib-Id =
+  compute-fiber-Id =
     equiv-iff
       ( Σ A (λ a → (x : A) → (a ＝ x) ≃ B x) ,
         is-prop-total-family-of-equivalences-Id)
       ( is-contr-Prop (Σ A B))
-      ( λ u → is-torsorial-fib-Id (pr2 u))
-      ( fib-Id-is-torsorial)
+      ( λ u → is-torsorial-fiber-Id (pr2 u))
+      ( fiber-Id-is-torsorial)
 ```

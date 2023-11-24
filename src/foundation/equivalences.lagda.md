@@ -557,6 +557,12 @@ module _
             ( ap
               ( λ g → map-equiv (f ∘e (g ∘e (inv-equiv f))) x)
               ( inv (right-inverse-law-equiv e)))))
+
+  distributive-map-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
+    map-inv-equiv (f ∘e e) ＝ map-inv-equiv e ∘ map-inv-equiv f
+  distributive-map-inv-comp-equiv e f =
+    ap map-equiv (distributive-inv-comp-equiv e f)
 ```
 
 ### Postcomposition of equivalences by an equivalence is an equivalence
