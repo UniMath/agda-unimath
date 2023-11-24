@@ -72,23 +72,24 @@ prepend-telescope :
 prepend-telescope A B = cons-telescope {X = A} (λ x → B {x})
 ```
 
-### Small telescopes
+### Telescopes at a universe level
 
 One issue with the previous definition of telescopes is that it is impossible to
 extract any type information from it. At the expense of giving up full universe
-polymorphism, we can define a notion of **small telescopes** with respect to a
-universe that admits such projections.
+polymorphism, we can define a notion of **telescopes at a universe level** that
+admits such projections. This definition is also compatible with the
+`--level-universe` restriction.
 
 ```agda
-data small-telescope (l : Level) : ℕ → UU (lsuc l)
+data telescope-Level (l : Level) : ℕ → UU (lsuc l)
   where
-  base-small-telescope :
-    UU l → small-telescope l 0
-  cons-small-telescope :
+  base-telescope-Level :
+    UU l → telescope-Level l 0
+  cons-telescope-Level :
     {n : ℕ} {X : UU l} →
-    (X → small-telescope l n) → small-telescope l (succ-ℕ n)
+    (X → telescope-Level l n) → telescope-Level l (succ-ℕ n)
 
-open small-telescope public
+open telescope-Level public
 ```
 
 ### Transformations on telescopes
