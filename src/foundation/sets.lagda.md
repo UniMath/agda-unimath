@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.1-types
@@ -23,7 +24,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.truncation-levels
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -152,19 +153,19 @@ abstract
     is-set B → is-set (A → B)
   is-set-function-type = is-trunc-function-type zero-𝕋
 
-type-hom-Set :
+hom-Set :
   {l1 l2 : Level} → Set l1 → Set l2 → UU (l1 ⊔ l2)
-type-hom-Set A B = type-Set A → type-Set B
+hom-Set A B = type-Set A → type-Set B
 
 is-set-hom-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2) →
-  is-set (type-hom-Set A B)
+  is-set (hom-Set A B)
 is-set-hom-Set A B = is-set-function-type (is-set-type-Set B)
 
-hom-Set :
+hom-set-Set :
   {l1 l2 : Level} → Set l1 → Set l2 → Set (l1 ⊔ l2)
-pr1 (hom-Set A B) = type-hom-Set A B
-pr2 (hom-Set A B) = is-set-hom-Set A B
+pr1 (hom-set-Set A B) = hom-Set A B
+pr2 (hom-set-Set A B) = is-set-hom-Set A B
 
 precomp-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : Set l3) →
@@ -205,9 +206,9 @@ module _
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
 
   abstract
-    is-contr-total-equiv-Set : is-contr (Σ (Set l) (type-equiv-Set X))
-    is-contr-total-equiv-Set =
-      is-contr-total-equiv-subuniverse is-set-Prop X
+    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → type-equiv-Set X Y)
+    is-torsorial-equiv-Set =
+      is-torsorial-equiv-subuniverse is-set-Prop X
 
   abstract
     is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)
@@ -240,9 +241,25 @@ abstract
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} where
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
   is-emb-is-prop-is-set : is-prop A → is-set B → {f : A → B} → is-emb f
   is-emb-is-prop-is-set is-prop-A is-set-B {f} =
     is-emb-is-prop-map (λ b → is-prop-Σ is-prop-A (λ a → is-set-B (f a) b))
+```
+
+### Sets are `k+2`-truncated for any `k`
+
+```agda
+is-trunc-is-set :
+  {l : Level} (k : 𝕋) {A : UU l} → is-set A → is-trunc (succ-𝕋 (succ-𝕋 k)) A
+is-trunc-is-set neg-two-𝕋 is-set-A = is-set-A
+is-trunc-is-set (succ-𝕋 k) is-set-A =
+  is-trunc-succ-is-trunc (succ-𝕋 (succ-𝕋 k)) (is-trunc-is-set k is-set-A)
+
+set-Truncated-Type :
+  {l : Level} (k : 𝕋) → Set l → Truncated-Type l (succ-𝕋 (succ-𝕋 k))
+pr1 (set-Truncated-Type k A) = type-Set A
+pr2 (set-Truncated-Type k A) = is-trunc-is-set k (is-set-type-Set A)
 ```

@@ -141,8 +141,8 @@ module _
   is-prop-is-unit-Group-𝔽 : (x : type-Group-𝔽) → is-prop (is-unit-Group-𝔽 x)
   is-prop-is-unit-Group-𝔽 = is-prop-is-unit-Group group-Group-𝔽
 
-  is-unit-finite-group-Prop : type-Group-𝔽 → Prop l
-  is-unit-finite-group-Prop = is-unit-group-Prop group-Group-𝔽
+  is-unit-prop-Group-𝔽 : type-Group-𝔽 → Prop l
+  is-unit-prop-Group-𝔽 = is-unit-prop-Group group-Group-𝔽
 
   left-unit-law-mul-Group-𝔽 :
     (x : type-Group-𝔽) → Id (mul-Group-𝔽 unit-Group-𝔽 x) x

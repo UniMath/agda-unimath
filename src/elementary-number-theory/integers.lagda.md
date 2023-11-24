@@ -7,6 +7,7 @@ module elementary-number-theory.integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -43,6 +44,8 @@ negative whole numbers.
 ```agda
 ℤ : UU lzero
 ℤ = ℕ + (unit + ℕ)
+
+{-# BUILTIN INTEGER ℤ #-}
 ```
 
 ### Inclusion of the negative integers

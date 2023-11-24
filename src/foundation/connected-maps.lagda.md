@@ -29,6 +29,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 ```
 
@@ -85,12 +86,11 @@ module _
   refl-htpy-connected-map : (f : connected-map k A B) → htpy-connected-map f f
   refl-htpy-connected-map f = refl-htpy
 
-  is-contr-total-htpy-connected-map :
-    (f : connected-map k A B) →
-    is-contr (Σ (connected-map k A B) (htpy-connected-map f))
-  is-contr-total-htpy-connected-map f =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (map-connected-map f))
+  is-torsorial-htpy-connected-map :
+    (f : connected-map k A B) → is-torsorial (htpy-connected-map f)
+  is-torsorial-htpy-connected-map f =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-connected-map f))
       ( is-prop-is-connected-map k)
       ( map-connected-map f)
       ( refl-htpy-connected-map f)
@@ -104,7 +104,7 @@ module _
     (f g : connected-map k A B) → is-equiv (htpy-eq-connected-map f g)
   is-equiv-htpy-eq-connected-map f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-connected-map f)
+      ( is-torsorial-htpy-connected-map f)
       ( htpy-eq-connected-map f)
 
   extensionality-connected-map :
@@ -187,6 +187,25 @@ module _
 
 ## Properties
 
+### All maps are `(-2)`-connected
+
+```agda
+is-neg-two-connected-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-connected-map neg-two-𝕋 f
+is-neg-two-connected-map f b = is-neg-two-connected (fiber f b)
+```
+
+### Equivalences are `k`-connected for any `k`
+
+```agda
+is-connected-map-is-equiv :
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-equiv f → is-connected-map k f
+is-connected-map-is-equiv {k = k} f e b =
+  is-connected-is-contr k ( is-contr-map-is-equiv e b)
+```
+
 ### Dependent universal property for connected maps
 
 ```agda
@@ -254,14 +273,14 @@ module _
   pr1 id-equiv-Connected-Map = id-equiv
   pr2 id-equiv-Connected-Map = refl-htpy
 
-  is-contr-total-equiv-Connected-Map :
-    is-contr (Σ (Connected-Map l2 k A) (equiv-Connected-Map f))
-  is-contr-total-equiv-Connected-Map =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Connected-Map :
+    is-torsorial (equiv-Connected-Map f)
+  is-torsorial-equiv-Connected-Map =
+    is-torsorial-Eq-structure
       ( λ Y g e → (map-equiv e ∘ map-Connected-Map f) ~ map-connected-map g)
-      ( is-contr-total-equiv (type-Connected-Map f))
+      ( is-torsorial-equiv (type-Connected-Map f))
       ( pair (type-Connected-Map f) id-equiv)
-      ( is-contr-total-htpy-connected-map (connected-map-Connected-Map f))
+      ( is-torsorial-htpy-connected-map (connected-map-Connected-Map f))
 
   equiv-eq-Connected-Map :
     (g : Connected-Map l2 k A) → (f ＝ g) → equiv-Connected-Map f g
@@ -271,7 +290,7 @@ module _
     (g : Connected-Map l2 k A) → is-equiv (equiv-eq-Connected-Map g)
   is-equiv-equiv-eq-Connected-Map =
     fundamental-theorem-id
-      is-contr-total-equiv-Connected-Map
+      is-torsorial-equiv-Connected-Map
       equiv-eq-Connected-Map
 
   extensionality-Connected-Map :
@@ -308,19 +327,17 @@ module _
   pr1 id-equiv-Connected-Map-Into-Truncated-Type = id-equiv
   pr2 id-equiv-Connected-Map-Into-Truncated-Type = refl-htpy
 
-  is-contr-total-equiv-Connected-Map-Into-Truncated-Type :
-    is-contr
-      ( Σ ( Connected-Map-Into-Truncated-Type l2 k l A)
-          ( equiv-Connected-Map-Into-Truncated-Type f))
-  is-contr-total-equiv-Connected-Map-Into-Truncated-Type =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Connected-Map-Into-Truncated-Type :
+    is-torsorial (equiv-Connected-Map-Into-Truncated-Type f)
+  is-torsorial-equiv-Connected-Map-Into-Truncated-Type =
+    is-torsorial-Eq-structure
       ( λ Y g e →
         ( map-equiv e ∘ map-Connected-Map-Into-Truncated-Type f) ~
         ( map-connected-map g))
-      ( is-contr-total-equiv-Truncated-Type
+      ( is-torsorial-equiv-Truncated-Type
         ( truncated-type-Connected-Map-Into-Truncated-Type f))
       ( pair (truncated-type-Connected-Map-Into-Truncated-Type f) id-equiv)
-      ( is-contr-total-htpy-connected-map
+      ( is-torsorial-htpy-connected-map
         ( connected-map-Connected-Map-Into-Truncated-Type f))
 
   equiv-eq-Connected-Map-Into-Truncated-Type :
@@ -334,7 +351,7 @@ module _
     is-equiv (equiv-eq-Connected-Map-Into-Truncated-Type g)
   is-equiv-equiv-eq-Connected-Map-Into-Truncated-Type =
     fundamental-theorem-id
-      is-contr-total-equiv-Connected-Map-Into-Truncated-Type
+      is-torsorial-equiv-Connected-Map-Into-Truncated-Type
       equiv-eq-Connected-Map-Into-Truncated-Type
 
   extensionality-Connected-Map-Into-Truncated-Type :

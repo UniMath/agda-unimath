@@ -14,6 +14,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 
 open import order-theory.large-locales
+open import order-theory.large-posets
 ```
 
 </details>
@@ -21,9 +22,11 @@ open import order-theory.large-locales
 ## Idea
 
 A **subset** of a [group](group-theory.groups.md) `G` is a
-[subtype](foundation.subtypes.md) of the underlying type of `G`.
+[subtype](foundation.subtypes.md) of the underlying type of `G`. The
+[large poset](order-theory.large-posets.md) of all subsets of `G` is called the
+**powerset** of `G`.
 
-## Definition
+## Definitions
 
 ### The large locale of subsets of a group
 
@@ -33,8 +36,21 @@ module _
   where
 
   powerset-large-locale-Group :
-    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3)) lzero
+    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) lzero
   powerset-large-locale-Group = powerset-Large-Locale (type-Group G)
+```
+
+### The large poset of subsets of a group
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  powerset-large-poset-Group :
+    Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  powerset-large-poset-Group =
+    large-poset-Large-Locale (powerset-large-locale-Group G)
 ```
 
 ### Subsets of groups

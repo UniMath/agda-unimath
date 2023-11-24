@@ -60,21 +60,24 @@ module _
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 
-  eq-pair-Σ-eq-pr1 :
+  eq-pair-eq-pr1 :
     {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
-  eq-pair-Σ-eq-pr1 refl = refl
+  eq-pair-eq-pr1 refl = refl
 
-  eq-pair-Σ-eq-pr1' :
+  eq-pair-eq-pr1' :
     {x y : A} {t : B y} (p : x ＝ y) → (x , tr B (inv p) t) ＝ (y , t)
-  eq-pair-Σ-eq-pr1' refl = refl
+  eq-pair-eq-pr1' refl = refl
 
-  eq-pair-Σ-eq-pr2 :
+  eq-pair-eq-pr2 :
     {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
-  eq-pair-Σ-eq-pr2 {x} = ap {B = Σ A B} (pair x)
+  eq-pair-eq-pr2 {x} = ap {B = Σ A B} (pair x)
+
+  ap-pr1-eq-pair-eq-pr2 :
+    {x : A} {s t : B x} (p : s ＝ t) → ap pr1 (eq-pair-eq-pr2 p) ＝ refl
+  ap-pr1-eq-pair-eq-pr2 refl = refl
 
   is-retraction-pair-eq-Σ :
-    (s t : Σ A B) →
-    ((pair-eq-Σ {s} {t}) ∘ (eq-pair-Σ' {s} {t})) ~ id {A = Eq-Σ s t}
+    (s t : Σ A B) → pair-eq-Σ {s} {t} ∘ eq-pair-Σ' {s} {t} ~ id {A = Eq-Σ s t}
   is-retraction-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
 
   is-section-pair-eq-Σ :
@@ -90,7 +93,8 @@ module _
         ( is-retraction-pair-eq-Σ s t)
 
   equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ (s ＝ t)
-  equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
+  pr1 (equiv-eq-pair-Σ s t) = eq-pair-Σ'
+  pr2 (equiv-eq-pair-Σ s t) = is-equiv-eq-pair-Σ s t
 
   abstract
     is-equiv-pair-eq-Σ : (s t : Σ A B) → is-equiv (pair-eq-Σ {s} {t})
@@ -101,10 +105,19 @@ module _
         ( is-section-pair-eq-Σ s t)
 
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
-  equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)
+  pr1 (equiv-pair-eq-Σ s t) = pair-eq-Σ
+  pr2 (equiv-pair-eq-Σ s t) = is-equiv-pair-eq-Σ s t
 
   η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
-  η-pair t = eq-pair-Σ refl refl
+  η-pair t = refl
+
+  eq-base-eq-pair-Σ : {s t : Σ A B} → (s ＝ t) → (pr1 s ＝ pr1 t)
+  eq-base-eq-pair-Σ p = pr1 (pair-eq-Σ p)
+
+  dependent-eq-family-eq-pair-Σ :
+    {s t : Σ A B} → (p : s ＝ t) →
+    dependent-identification B (eq-base-eq-pair-Σ p) (pr2 s) (pr2 t)
+  dependent-eq-family-eq-pair-Σ p = pr2 (pair-eq-Σ p)
 ```
 
 ### Lifting equality to the total space

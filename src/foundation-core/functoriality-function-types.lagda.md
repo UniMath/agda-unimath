@@ -13,6 +13,7 @@ open import foundation.function-extensionality
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -290,7 +291,8 @@ is-equiv-is-equiv-precomp-Prop :
   ({l : Level} (R : Prop l) → is-equiv (precomp f (type-Prop R))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Prop P Q f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-prop) P Q f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse
+    ( λ l → l) (λ l → is-prop) P Q f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2)
@@ -298,7 +300,8 @@ is-equiv-is-equiv-precomp-Set :
   ({l : Level} (C : Set l) → is-equiv (precomp f (type-Set C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Set A B f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-set) A B f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse
+    ( λ l → l) (λ l → is-set) A B f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋)
@@ -307,8 +310,35 @@ is-equiv-is-equiv-precomp-Truncated-Type :
   ({l : Level} (C : Truncated-Type l k) → is-equiv (precomp f (pr1 C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Truncated-Type k A B f H =
-    is-equiv-is-equiv-precomp-subuniverse id (λ l → is-trunc k) A B f
+    is-equiv-is-equiv-precomp-subuniverse (λ l → l) (λ l → is-trunc k) A B f
       ( λ l → H {l})
+```
+
+### Any commuting triangle of maps induces a commuting triangle of function spaces
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  ( left : A → X) (right : B → X) (top : A → B)
+  where
+
+  precomp-coherence-triangle-maps :
+    coherence-triangle-maps left right top →
+    ( W : UU l4) →
+    coherence-triangle-maps
+      ( precomp left W)
+      ( precomp top W)
+      ( precomp right W)
+  precomp-coherence-triangle-maps H W = htpy-precomp H W
+
+  precomp-coherence-triangle-maps' :
+    coherence-triangle-maps' left right top →
+    ( W : UU l4) →
+    coherence-triangle-maps'
+      ( precomp left W)
+      ( precomp top W)
+      ( precomp right W)
+  precomp-coherence-triangle-maps' H W = htpy-precomp H W
 ```
 
 ## See also

@@ -91,7 +91,7 @@ module _
                 ( ( inv-equiv universal-property-product) ∘e
                   ( equiv-prod id-equiv equiv-ev-pair))) ∘e
               ( left-unit-law-Σ-is-contr
-                ( is-contr-total-equiv' (Σ U V))
+                ( is-torsorial-equiv' (Σ U V))
                 ( Σ U V , id-equiv))))))) ∘e
       ( reassociate)
 ```

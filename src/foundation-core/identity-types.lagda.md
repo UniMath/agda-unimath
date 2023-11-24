@@ -59,7 +59,7 @@ module _
   where
 
   data Id (x : A) : A → UU l where
-    refl : Id x x
+    instance refl : Id x x
 
   infix 6 _＝_
   _＝_ : A → A → UU l
@@ -132,39 +132,54 @@ module _
     ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r))
   assoc refl q r = refl
 
-  left-unit : {x y : A} {p : x ＝ y} → (refl ∙ p) ＝ p
+  left-unit : {x y : A} {p : x ＝ y} → refl ∙ p ＝ p
   left-unit = refl
 
-  right-unit : {x y : A} {p : x ＝ y} → (p ∙ refl) ＝ p
+  right-unit : {x y : A} {p : x ＝ y} → p ∙ refl ＝ p
   right-unit {p = refl} = refl
 
-  left-inv : {x y : A} (p : x ＝ y) → ((inv p) ∙ p) ＝ refl
+  left-inv : {x y : A} (p : x ＝ y) → inv p ∙ p ＝ refl
   left-inv refl = refl
 
-  right-inv : {x y : A} (p : x ＝ y) → (p ∙ (inv p)) ＝ refl
+  right-inv : {x y : A} (p : x ＝ y) → p ∙ (inv p) ＝ refl
   right-inv refl = refl
 
-  inv-inv : {x y : A} (p : x ＝ y) → (inv (inv p)) ＝ p
+  inv-inv : {x y : A} (p : x ＝ y) → inv (inv p) ＝ p
   inv-inv refl = refl
 
   distributive-inv-concat :
     {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) →
-    (inv (p ∙ q)) ＝ ((inv q) ∙ (inv p))
+    inv (p ∙ q) ＝ inv q ∙ inv p
   distributive-inv-concat refl refl = refl
 ```
 
 ### Transposing inverses
 
 ```agda
-left-transpose-eq-concat :
-  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z)
-  (r : x ＝ z) → ((p ∙ q) ＝ r) → q ＝ ((inv p) ∙ r)
-left-transpose-eq-concat refl q r s = s
+module _
+  {l : Level} {A : UU l}
+  where
 
-right-transpose-eq-concat :
-  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z)
-  (r : x ＝ z) → ((p ∙ q) ＝ r) → p ＝ (r ∙ (inv q))
-right-transpose-eq-concat p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
+  left-transpose-eq-concat :
+    {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) (r : x ＝ z) →
+    p ∙ q ＝ r → q ＝ inv p ∙ r
+  left-transpose-eq-concat refl q r s = s
+
+  right-transpose-eq-concat :
+    {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) (r : x ＝ z) →
+    p ∙ q ＝ r → p ＝ r ∙ inv q
+  right-transpose-eq-concat p refl r s = (inv right-unit ∙ s) ∙ inv right-unit
+
+  double-transpose-eq-concat :
+    {x y u v : A} (r : x ＝ u) (p : x ＝ y) (s : u ＝ v) (q : y ＝ v) →
+    p ∙ q ＝ r ∙ s → (inv r) ∙ p ＝ s ∙ (inv q)
+  double-transpose-eq-concat refl p s refl α =
+    (inv right-unit ∙ α) ∙ inv right-unit
+
+  double-transpose-eq-concat' :
+    {x y u v : A} (r : x ＝ u) (p : x ＝ y) (s : u ＝ v) (q : y ＝ v) →
+    p ∙ q ＝ r ∙ s → q ∙ inv s ＝ inv p ∙ r
+  double-transpose-eq-concat' r refl refl q α = right-unit ∙ (α ∙ right-unit)
 ```
 
 The fact that `left-transpose-eq-concat` and `right-transpose-eq-concat` are

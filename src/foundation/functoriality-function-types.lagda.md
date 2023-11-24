@@ -11,19 +11,26 @@ open import foundation-core.functoriality-function-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
+
+open import synthetic-homotopy-theory.cocones-under-spans
 ```
 
 </details>
@@ -85,6 +92,31 @@ module _
   equiv-htpy-postcomp-htpy e f g =
     equiv-Π-equiv-family
       ( λ a → equiv-ap e (f a) (g a))
+```
+
+### The fibers of `precomp`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
+  where
+
+  compute-fiber-precomp :
+    (g : B → X) →
+    fiber (precomp f X) (g ∘ f) ≃
+    Σ (B → X) (λ h → coherence-square-maps f f h g)
+  compute-fiber-precomp g =
+    equiv-tot ( λ h → equiv-funext) ∘e
+    equiv-fiber (precomp f X) (g ∘ f)
+
+  compute-total-fiber-precomp :
+    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
+  compute-total-fiber-precomp =
+    equiv-tot compute-fiber-precomp
+
+  diagonal-into-fibers-precomp :
+    (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
+  diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
 ```
 
 ### A map is truncated iff postcomposition by it is truncated

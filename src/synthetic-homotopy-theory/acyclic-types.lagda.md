@@ -8,9 +8,12 @@ module synthetic-homotopy-theory.acyclic-types where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.equivalences
 open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.functoriality-suspensions
 open import synthetic-homotopy-theory.suspensions-of-types
 ```
 
@@ -18,7 +21,9 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 ## Idea
 
-A type `A` is said to be **acyclic** if its suspension is contractible.
+A type `A` is said to be **acyclic** if its
+[suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
+[contractible](foundation.contractible-types.md).
 
 ## Definition
 
@@ -31,6 +36,35 @@ is-acyclic A = type-Prop (is-acyclic-Prop A)
 
 is-prop-is-acyclic : {l : Level} (A : UU l) → is-prop (is-acyclic A)
 is-prop-is-acyclic A = is-prop-type-Prop (is-acyclic-Prop A)
+```
+
+## Properties
+
+### Being acyclic is invariant under equivalence
+
+```agda
+is-acyclic-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-acyclic B → is-acyclic A
+is-acyclic-equiv {B = B} e ac =
+  is-contr-equiv (suspension B) (equiv-suspension e) ac
+
+is-acyclic-equiv' :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-acyclic A → is-acyclic B
+is-acyclic-equiv' e = is-acyclic-equiv (inv-equiv e)
+```
+
+### Acyclic types are closed under retracts
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-acyclic-retract-of : A retract-of B → is-acyclic B → is-acyclic A
+  is-acyclic-retract-of R ac =
+    is-contr-retract-of (suspension B) (retract-of-suspension-retract-of R) ac
 ```
 
 ## See also

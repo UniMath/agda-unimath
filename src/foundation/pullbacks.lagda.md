@@ -21,7 +21,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -33,6 +32,8 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
+open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -98,8 +99,8 @@ triangle-map-standard-pullback-exponent :
       ( exponent-cone T f g c)))
 triangle-map-standard-pullback-exponent
   {A = A} {B} T f g c h =
-  eq-pair-Σ-eq-pr2
-    ( eq-pair-Σ-eq-pr2
+  eq-pair-eq-pr2
+    ( eq-pair-eq-pr2
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
 
 abstract
@@ -112,7 +113,7 @@ abstract
       ( postcomp T g)
       ( exponent-cone T f g c)
   is-pullback-exponent-is-pullback f g c is-pb-c T =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( cone-map f g c)
       ( map-standard-pullback-exponent f g T)
       ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
@@ -131,7 +132,7 @@ abstract
     is-pullback f g c
   is-pullback-is-pullback-exponent f g c is-pb-exp =
     is-pullback-universal-property-pullback f g c
-      ( λ T → is-equiv-comp-htpy
+      ( λ T → is-equiv-left-map-triangle
         ( cone-map f g c)
         ( map-standard-pullback-exponent f g T)
         ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
@@ -185,7 +186,7 @@ cone-Id' :
   cone (const unit (A × A) t) (diagonal A) (pr1 t ＝ pr2 t)
 pr1 (cone-Id' {A = A} (x , y)) = const (x ＝ y) unit star
 pr1 (pr2 (cone-Id' {A = A} (x , y))) = const (x ＝ y) A x
-pr2 (pr2 (cone-Id' {A = A} (x , y))) p = eq-pair-Σ-eq-pr2 (inv p)
+pr2 (pr2 (cone-Id' {A = A} (x , y))) p = eq-pair-eq-pr2 (inv p)
 
 inv-gap-cone-Id' :
   {l : Level} {A : UU l} (t : A × A) →
@@ -285,7 +286,7 @@ module _
       (Hc : htpy-parallel-cone Hf Hg c c') →
       is-pullback f' g' c' → is-pullback f g c
     is-pullback-htpy {c = p , q , H} (p' , q' , H') (Hp , Hq , HH) is-pb-c' =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( gap f g (p , q , H))
         ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' (p' , q' , H'))
@@ -300,7 +301,7 @@ module _
       (Hc : htpy-parallel-cone Hf Hg c c') →
       is-pullback f g c → is-pullback f' g' c'
     is-pullback-htpy' (p , q , H) {p' , q' , H'} (Hp , Hq , HH) is-pb-c =
-      is-equiv-right-factor-htpy
+      is-equiv-top-map-triangle
         ( gap f g (p , q , H))
         ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' (p' , q' , H'))
@@ -366,40 +367,39 @@ abstract
             ( (f ·l K) ∙h refl-htpy ∙h H'))))
 
 abstract
-  is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy :
+  is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) →
     (c : cone f g C) →
-    is-contr
-      ( Σ (cone f g C) (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c))
-  is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy {C = C} f g c =
+    is-torsorial (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c)
+  is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy {C = C} f g c =
     is-contr-is-equiv'
       ( Σ (cone f g C) (htpy-cone f g c))
       ( tot (htpy-parallel-cone-refl-htpy-htpy-cone f g c))
       ( is-equiv-tot-is-fiberwise-equiv
         ( is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone f g c))
-      ( is-contr-total-htpy-cone f g c)
+      ( is-torsorial-htpy-cone f g c)
 
 abstract
-  is-contr-total-htpy-parallel-cone-refl-htpy :
+  is-torsorial-htpy-parallel-cone-refl-htpy :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
-    is-contr (Σ (cone f g' C) (htpy-parallel-cone (refl-htpy' f) Hg c))
-  is-contr-total-htpy-parallel-cone-refl-htpy {C = C} f {g} =
+    is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg c)
+  is-torsorial-htpy-parallel-cone-refl-htpy {C = C} f {g} =
     ind-htpy g
       ( λ g'' Hg' →
-        ( c : cone f g C) →
-        is-contr (Σ (cone f g'' C) (htpy-parallel-cone (refl-htpy' f) Hg' c)))
-      ( is-contr-total-htpy-parallel-cone-refl-htpy-refl-htpy f g)
+        (c : cone f g C) →
+        is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg' c))
+      ( is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy f g)
 
 abstract
-  is-contr-total-htpy-parallel-cone :
+  is-torsorial-htpy-parallel-cone :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
-    is-contr (Σ (cone f' g' C) (htpy-parallel-cone Hf Hg c))
-  is-contr-total-htpy-parallel-cone
+    is-torsorial (htpy-parallel-cone Hf Hg c)
+  is-torsorial-htpy-parallel-cone
     {A = A} {B} {X} {C} {f} {f'} Hf {g} {g'} Hg =
     ind-htpy
       { A = A}
@@ -407,7 +407,7 @@ abstract
       ( f)
       ( λ f'' Hf' → (g g' : B → X) (Hg : g ~ g') (c : cone f g C) →
         is-contr (Σ (cone f'' g' C) (htpy-parallel-cone Hf' Hg c)))
-      ( λ g g' Hg → is-contr-total-htpy-parallel-cone-refl-htpy f Hg)
+      ( λ g g' Hg → is-torsorial-htpy-parallel-cone-refl-htpy f Hg)
       Hf g g' Hg
 
 tr-tr-refl-htpy-cone :
@@ -442,13 +442,13 @@ htpy-eq-square-refl-htpy f g c c' =
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
     ( htpy-eq-square f g c c')
 
-comp-htpy-eq-square-refl-htpy :
+left-map-triangle-eq-square-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c c' : cone f g C) →
   ( htpy-eq-square-refl-htpy f g c c' ∘
     concat (tr-tr-refl-htpy-cone f g c) c') ~
   ( htpy-eq-square f g c c')
-comp-htpy-eq-square-refl-htpy f g c c' =
+left-map-triangle-eq-square-refl-htpy f g c c' =
   is-section-map-inv-is-equiv-precomp-Π-is-equiv
     ( is-equiv-concat (tr-tr-refl-htpy-cone f g c) c')
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
@@ -477,13 +477,13 @@ abstract
         htpy-parallel-cone refl-htpy Hg' c c')
       ( htpy-eq-square-refl-htpy f g)
 
-  comp-htpy-parallel-cone-eq' :
+  left-map-triangle-parallel-cone-eq' :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c c' : cone f g C) →
     ( ( htpy-parallel-cone-eq' f refl-htpy c c') ∘
       ( concat (tr-tr-refl-htpy-cone f g c) c')) ~
     ( htpy-eq-square f g c c')
-  comp-htpy-parallel-cone-eq' {A = A} {B} {X} {C} f g c c' =
+  left-map-triangle-parallel-cone-eq' {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
       ( htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy g
         ( λ g'' Hg' →
@@ -494,7 +494,7 @@ abstract
           htpy-parallel-cone refl-htpy Hg' c c')
       ( htpy-eq-square-refl-htpy f g)) c) c'))
       ( concat (tr-tr-refl-htpy-cone f g c) c') ∙h
-    ( comp-htpy-eq-square-refl-htpy f g c c')
+    ( left-map-triangle-eq-square-refl-htpy f g c c')
 
 abstract
   htpy-parallel-cone-eq :
@@ -517,13 +517,13 @@ abstract
     ( λ g g' → htpy-parallel-cone-eq' f {g = g} {g' = g'})
     Hf g g' Hg c c' p
 
-  comp-htpy-parallel-cone-eq :
+  left-map-triangle-parallel-cone-eq :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c c' : cone f g C) →
     ( ( htpy-parallel-cone-eq refl-htpy refl-htpy c c') ∘
       ( concat (tr-tr-refl-htpy-cone f g c) c')) ~
     ( htpy-eq-square f g c c')
-  comp-htpy-parallel-cone-eq {A = A} {B} {X} {C} f g c c' =
+  left-map-triangle-parallel-cone-eq {A = A} {B} {X} {C} f g c c' =
     htpy-right-whisk
       ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy f
         ( λ f'' Hf' →
@@ -538,7 +538,7 @@ abstract
         ( λ g g' → htpy-parallel-cone-eq' f {g = g} {g' = g'})) g) g)
         refl-htpy) c) c'))
       ( concat (tr-tr-refl-htpy-cone f g c) c') ∙h
-      ( comp-htpy-parallel-cone-eq' f g c c')
+      ( left-map-triangle-parallel-cone-eq' f g c c')
 
 abstract
   is-fiberwise-equiv-htpy-parallel-cone-eq :
@@ -558,13 +558,13 @@ abstract
             ( c : cone f g C) (c' : cone f g' C) →
               is-equiv (htpy-parallel-cone-eq refl-htpy Hg c c'))
           ( λ c c' →
-            is-equiv-left-factor-htpy
+            is-equiv-right-map-triangle
               ( htpy-eq-square f g c c')
               ( htpy-parallel-cone-eq refl-htpy refl-htpy c c')
               ( concat (tr-tr-refl-htpy-cone f g c) c')
-              ( inv-htpy (comp-htpy-parallel-cone-eq f g c c'))
+              ( inv-htpy (left-map-triangle-parallel-cone-eq f g c c'))
               ( fundamental-theorem-id
-                ( is-contr-total-htpy-parallel-cone
+                ( is-torsorial-htpy-parallel-cone
                   ( refl-htpy' f)
                   ( refl-htpy' g)
                   ( c))
@@ -684,7 +684,7 @@ abstract
     ((i : I) → is-pullback (f i) (g i) (c i)) →
     is-pullback (map-Π f) (map-Π g) (cone-Π f g c)
   is-pullback-cone-Π f g c is-pb-c =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( map-Π (λ i → gap (f i) (g i) (c i)))
       ( map-standard-pullback-Π f g)
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))
@@ -1052,11 +1052,11 @@ is-pullback-cone-ap f g (p , q , H) is-pb-c c1 c2 =
           ( p , q , H)
           ( cone-ap' f g (p , q , H) c1))
         ( is-equiv-is-contr _
-          ( is-contr-total-path (q c1))
-          ( is-contr-total-path (f (p c1))))
+          ( is-torsorial-path (q c1))
+          ( is-torsorial-path (f (p c1))))
         ( is-equiv-is-contr _
-          ( is-contr-total-path c1)
-          ( is-contr-total-path (p c1))))
+          ( is-torsorial-path c1)
+          ( is-torsorial-path (p c1))))
       ( c2))
 ```
 

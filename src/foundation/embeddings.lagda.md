@@ -14,6 +14,7 @@ open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -21,6 +22,8 @@ open import foundation.truncated-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -42,25 +45,25 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-prop-is-emb : (f : A → B) → is-prop (is-emb f)
-  is-prop-is-emb f =
+  is-property-is-emb : (f : A → B) → is-prop (is-emb f)
+  is-property-is-emb f =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv (ap f)))
 
   is-emb-Prop : (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-emb-Prop f) = is-emb f
-  pr2 (is-emb-Prop f) = is-prop-is-emb f
+  pr2 (is-emb-Prop f) = is-property-is-emb f
 ```
 
 ### Embeddings are closed under homotopies
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
-    is-emb-htpy : is-emb g → is-emb f
-    is-emb-htpy is-emb-g x y =
+    is-emb-htpy : {f g : A → B} (H : f ~ g) → is-emb g → is-emb f
+    is-emb-htpy {f} {g} H is-emb-g x y =
       is-equiv-top-is-equiv-left-square
         ( ap g)
         ( concat' (f x) (H y))
@@ -71,14 +74,19 @@ module _
         ( is-emb-g x y)
         ( is-equiv-concat' (f x) (H y))
 
+  is-emb-htpy-emb : {f : A → B} (e : A ↪ B) → f ~ map-emb e → is-emb f
+  is-emb-htpy-emb e H = is-emb-htpy H (is-emb-map-emb e)
+
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
-    is-emb-htpy' : is-emb f → is-emb g
-    is-emb-htpy' is-emb-f =
-      is-emb-htpy (inv-htpy H) is-emb-f
+    is-emb-htpy' : {f g : A → B} (H : f ~ g) → is-emb f → is-emb g
+    is-emb-htpy' H is-emb-f = is-emb-htpy (inv-htpy H) is-emb-f
+
+  is-emb-htpy-emb' : (e : A ↪ B) {g : A → B} → map-emb e ~ g → is-emb g
+  is-emb-htpy-emb' e H = is-emb-htpy' H (is-emb-map-emb e)
 ```
 
 ### Any map between propositions is an embedding
@@ -101,20 +109,25 @@ module _
   is-emb-comp :
     (g : B → C) (h : A → B) → is-emb g → is-emb h → is-emb (g ∘ h)
   is-emb-comp g h is-emb-g is-emb-h x y =
-    is-equiv-comp-htpy (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
+    is-equiv-left-map-triangle
+      ( ap (g ∘ h))
+      ( ap g)
+      ( ap h)
+      ( ap-comp g h)
       ( is-emb-h x y)
       ( is-emb-g (h x) (h y))
 
   abstract
-    is-emb-comp-htpy :
-      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
-      is-emb h → is-emb f
-    is-emb-comp-htpy f g h H is-emb-g is-emb-h =
+    is-emb-left-map-triangle :
+      (f : A → C) (g : B → C) (h : A → B) (H : coherence-triangle-maps f g h) →
+      is-emb g → is-emb h → is-emb f
+    is-emb-left-map-triangle f g h H is-emb-g is-emb-h =
       is-emb-htpy H (is-emb-comp g h is-emb-g is-emb-h)
 
   comp-emb :
     (B ↪ C) → (A ↪ B) → (A ↪ C)
-  comp-emb (pair g H) (pair f K) = pair (g ∘ f) (is-emb-comp g f H K)
+  pr1 (comp-emb (g , H) (f , K)) = g ∘ f
+  pr2 (comp-emb (g , H) (f , K)) = is-emb-comp g f H K
 ```
 
 ### The right factor of a composed embedding is an embedding
@@ -128,7 +141,7 @@ module _
     (g : B → C) (h : A → B) →
     is-emb g → is-emb (g ∘ h) → is-emb h
   is-emb-right-factor g h is-emb-g is-emb-gh x y =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( ap (g ∘ h))
       ( ap g)
       ( ap h)
@@ -137,11 +150,11 @@ module _
       ( is-emb-gh x y)
 
   abstract
-    is-emb-right-factor-htpy :
-      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) →
+    is-emb-top-map-triangle :
+      (f : A → C) (g : B → C) (h : A → B) (H : coherence-triangle-maps f g h) →
       is-emb g → is-emb f → is-emb h
-    is-emb-right-factor-htpy f g h H is-emb-g is-emb-f x y =
-      is-equiv-right-factor-htpy
+    is-emb-top-map-triangle f g h H is-emb-g is-emb-f x y =
+      is-equiv-top-map-triangle
         ( ap (g ∘ h))
         ( ap g)
         ( ap h)
@@ -151,10 +164,10 @@ module _
 
   abstract
     is-emb-triangle-is-equiv :
-      (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
+      (f : A → C) (g : B → C) (e : A → B) (H : coherence-triangle-maps f g e) →
       is-equiv e → is-emb g → is-emb f
     is-emb-triangle-is-equiv f g e H is-equiv-e is-emb-g =
-      is-emb-comp-htpy f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
+      is-emb-left-map-triangle f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -162,7 +175,7 @@ module _
 
   abstract
     is-emb-triangle-is-equiv' :
-      (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
+      (f : A → C) (g : B → C) (e : A → B) (H : coherence-triangle-maps f g e) →
       is-equiv e → is-emb f → is-emb g
     is-emb-triangle-is-equiv' f g e H is-equiv-e is-emb-f =
       is-emb-triangle-is-equiv g f
@@ -187,9 +200,9 @@ module _
   is-emb-tot H =
     is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
 
-  tot-emb : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
-  pr1 (tot-emb f) = tot (λ x → map-emb (f x))
-  pr2 (tot-emb f) = is-emb-tot (λ x → is-emb-map-emb (f x))
+  emb-tot : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
+  pr1 (emb-tot f) = tot (λ x → map-emb (f x))
+  pr2 (emb-tot f) = is-emb-tot (λ x → is-emb-map-emb (f x))
 ```
 
 ### The functoriality of dependent pair types preserves embeddings
@@ -350,4 +363,40 @@ module _
       ( is-equiv-map-inv-is-equiv K)
       ( is-equiv-map-inv-is-equiv L)
       ( M)
+```
+
+### A map is an embedding if and only if it has contractible fibers at values
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-emb-is-contr-fibers-values' :
+    ((a : A) → is-contr (fiber' f (f a))) → is-emb f
+  is-emb-is-contr-fibers-values' c a =
+    fundamental-theorem-id (c a) (λ x → ap f {a} {x})
+
+  is-emb-is-contr-fibers-values :
+    ((a : A) → is-contr (fiber f (f a))) → is-emb f
+  is-emb-is-contr-fibers-values c =
+    is-emb-is-contr-fibers-values'
+      ( λ a →
+        is-contr-equiv'
+          ( fiber f (f a))
+          ( equiv-fiber f (f a))
+          ( c a))
+
+  is-contr-fibers-values-is-emb' :
+    is-emb f → ((a : A) → is-contr (fiber' f (f a)))
+  is-contr-fibers-values-is-emb' e a =
+    fundamental-theorem-id' (λ x → ap f {a} {x}) (e a)
+
+  is-contr-fibers-values-is-emb :
+    is-emb f → ((a : A) → is-contr (fiber f (f a)))
+  is-contr-fibers-values-is-emb e a =
+    is-contr-equiv
+      ( fiber' f (f a))
+      ( equiv-fiber f (f a))
+      ( is-contr-fibers-values-is-emb' e a)
 ```

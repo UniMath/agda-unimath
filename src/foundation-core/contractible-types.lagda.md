@@ -11,6 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.implicit-function-types
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -64,8 +66,16 @@ abstract
 
 ### The total space of the identity type based at a point is contractible
 
-We prove two cases of this fact: the first keeping the left-hand side fixed, and
-the second keeping the right-hand side fixed.
+Type families of which the total space is contractible are also called
+[torsorial](foundation-core.torsorial-type-families.md). This terminology
+originates from higher group theory, where a
+[higher group action](higher-group-theory.higher-group-actions.md) is torsorial
+if its type of [orbits](higher-group-theory.orbits-higher-group-actions.md),
+i.e., its total space, is contractible.
+
+We prove two variants of the claim that the total space of the identity type is
+contractible: the first version keeps the left-hand side fixed, and the second
+version keeps the right-hand side fixed.
 
 ```agda
 module _
@@ -73,16 +83,16 @@ module _
   where
 
   abstract
-    is-contr-total-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
-    pr1 (pr1 (is-contr-total-path a)) = a
-    pr2 (pr1 (is-contr-total-path a)) = refl
-    pr2 (is-contr-total-path a) (pair .a refl) = refl
+    is-torsorial-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
+    pr1 (pr1 (is-torsorial-path a)) = a
+    pr2 (pr1 (is-torsorial-path a)) = refl
+    pr2 (is-torsorial-path a) (pair .a refl) = refl
 
   abstract
-    is-contr-total-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
-    pr1 (pr1 (is-contr-total-path' a)) = a
-    pr2 (pr1 (is-contr-total-path' a)) = refl
-    pr2 (is-contr-total-path' a) (pair .a refl) = refl
+    is-torsorial-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
+    pr1 (pr1 (is-torsorial-path' a)) = a
+    pr2 (pr1 (is-torsorial-path' a)) = refl
+    pr2 (is-torsorial-path' a) (pair .a refl) = refl
 ```
 
 ## Properties
@@ -275,6 +285,13 @@ abstract
     map-inv-is-equiv
       ( funext (λ x → center (H x)) f)
       ( λ x → contraction (H x) (f x))
+
+abstract
+  is-contr-implicit-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-contr (B x)) → is-contr ({x : A} → B x)
+  is-contr-implicit-Π H =
+    is-contr-equiv _ equiv-explicit-implicit-Π (is-contr-Π H)
 ```
 
 ### The type of functions into a contractible type is contractible

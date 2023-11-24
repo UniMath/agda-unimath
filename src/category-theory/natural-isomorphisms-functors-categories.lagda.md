@@ -195,7 +195,7 @@ module _
       ( hom-family-natural-transformation-Category C D F G
         ( natural-transformation-natural-isomorphism-Category))
   coherence-square-natural-isomorphism-Category =
-    coherence-square-natural-transformation-Category C D F G
+    naturality-natural-transformation-Category C D F G
       ( natural-transformation-natural-isomorphism-Category)
 
   is-natural-isomorphism-natural-isomorphism-Category :
@@ -266,7 +266,7 @@ module _
       ( precategory-Category D)
 ```
 
-### Equalities give rise to natural isomorphisms
+### Equalities induce natural isomorphisms
 
 An equality between functors `F` and `G` gives rise to a natural isomorphism
 between them. This is because, by the J-rule, it is enough to construct a

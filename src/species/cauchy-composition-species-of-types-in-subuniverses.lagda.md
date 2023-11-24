@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
@@ -58,7 +59,7 @@ coefficients of the composite of the Cauchy series of `S` and `T`.
 module _
   {l1 l2 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   where
 
   type-cauchy-composition-species-subuniverse :
@@ -83,13 +84,13 @@ module _
     ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
     ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     ( X : type-subuniverse P) →
-    is-in-global-subuniverse id Q
+    is-in-global-subuniverse Q
       ( type-cauchy-composition-species-subuniverse S T X)
 
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C2 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -112,7 +113,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C2 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -185,7 +186,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   ( C3 : is-in-subuniverse P (raise-unit l1))
   ( C4 :
     is-closed-under-is-contr-subuniverses P
@@ -249,7 +250,7 @@ module _
 module _
   { l1 l2 l3 : Level}
   ( P : subuniverse l1 l2)
-  ( Q : global-subuniverse id)
+  ( Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   ( C2 : is-closed-under-Σ-subuniverse P)
   ( C3 : is-in-subuniverse P (raise-unit l1))
@@ -366,7 +367,7 @@ module _
 module _
   { l1 l2 l3 l4 l5 : Level}
   ( P : subuniverse l1 l2)
-  ( Q : global-subuniverse id)
+  ( Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   ( C2 : is-closed-under-Σ-subuniverse P)
   ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))

@@ -20,6 +20,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.symmetric-identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import structured-types.constant-maps-pointed-types
@@ -119,15 +120,15 @@ module _
       ( right-unit)) ∙
     ( inv (ap-id (pr2 coh-μ x)))
 
-  is-contr-total-htpy-h-space-Involutive-Type :
+  is-torsorial-htpy-h-space-Involutive-Type :
     ( μ : h-space-Involutive-Type A X) →
-    is-contr (Σ (h-space-Involutive-Type A X) (htpy-h-space-Involutive-Type μ))
-  is-contr-total-htpy-h-space-Involutive-Type (μ , ν , ρ) =
-    is-contr-total-Eq-structure
+    is-torsorial (htpy-h-space-Involutive-Type μ)
+  is-torsorial-htpy-h-space-Involutive-Type (μ , ν , ρ) =
+    is-torsorial-Eq-structure
       ( λ μ' νρ' H → _)
-      ( is-contr-total-htpy μ)
+      ( is-torsorial-htpy μ)
       ( μ , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ ν' ρ' H →
           Eq-symmetric-Id
             ( ( X) , (λ x → ν' (const-Pointed-Type _ A) x refl))
@@ -141,12 +142,12 @@ module _
               ( id-equiv)
               ( X , (λ x → ν' (const-Pointed-Type _ A) x refl))
               ( ρ')))
-        ( is-contr-total-Eq-Π
+        ( is-torsorial-Eq-Π
           ( λ f ν' → (x : type-2-Element-Type X) → ν f x ~ ν' x)
           ( λ f →
-            is-contr-total-Eq-Π
+            is-torsorial-Eq-Π
               ( λ x ν' → ν f x ~ ν')
-              ( λ x → is-contr-total-htpy (ν f x))))
+              ( λ x → is-torsorial-htpy (ν f x))))
         ( ν , (λ f x p → refl))
         ( is-contr-equiv
           ( Σ ( symmetric-Id
@@ -165,7 +166,7 @@ module _
                 ( id-equiv-symmetric-Id
                   ( X , (λ x → ν (const-Pointed-Type _ A) x refl))
                   ( α))))
-          ( is-contr-total-Eq-symmetric-Id
+          ( is-torsorial-Eq-symmetric-Id
             ( X , (λ x → ν (const-Pointed-Type _ A) x refl))
             ( ρ))))
 
@@ -180,7 +181,7 @@ module _
     is-equiv (htpy-eq-h-space-Involutive-Type μ μ')
   is-equiv-htpy-eq-h-space-Involutive-Type μ =
     fundamental-theorem-id
-      ( is-contr-total-htpy-h-space-Involutive-Type μ)
+      ( is-torsorial-htpy-h-space-Involutive-Type μ)
       ( htpy-eq-h-space-Involutive-Type μ)
 
   extensionality-h-space-Involutive-Type :

@@ -24,6 +24,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -95,12 +96,12 @@ equiv-eq-component-UU-Level {X = X} refl =
   id-equiv-component-UU-Level X
 
 abstract
-  is-contr-total-equiv-component-UU-Level :
+  is-torsorial-equiv-component-UU-Level :
     {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
-    is-contr (Σ (component-UU-Level l1 A) (equiv-component-UU-Level X))
-  is-contr-total-equiv-component-UU-Level X =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv (type-component-UU-Level X))
+    is-torsorial (equiv-component-UU-Level X)
+  is-torsorial-equiv-component-UU-Level X =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv (type-component-UU-Level X))
       ( λ Y → is-prop-mere-equiv _ Y)
       ( type-component-UU-Level X)
       ( id-equiv)
@@ -112,7 +113,7 @@ abstract
     is-equiv (equiv-eq-component-UU-Level {X = X} {Y})
   is-equiv-equiv-eq-component-UU-Level X =
     fundamental-theorem-id
-      ( is-contr-total-equiv-component-UU-Level X)
+      ( is-torsorial-equiv-component-UU-Level X)
       ( λ Y → equiv-eq-component-UU-Level {X = X} {Y})
 
 eq-equiv-component-UU-Level :
@@ -135,11 +136,11 @@ equiv-eq-component-UU :
 equiv-eq-component-UU p = equiv-eq-component-UU-Level p
 
 abstract
-  is-contr-total-equiv-component-UU :
+  is-torsorial-equiv-component-UU :
     {l1 : Level} {A : UU l1} (X : component-UU A) →
-    is-contr (Σ (component-UU A) (equiv-component-UU X))
-  is-contr-total-equiv-component-UU X =
-    is-contr-total-equiv-component-UU-Level X
+    is-torsorial (equiv-component-UU X)
+  is-torsorial-equiv-component-UU X =
+    is-torsorial-equiv-component-UU-Level X
 
 abstract
   is-equiv-equiv-eq-component-UU :
@@ -179,7 +180,7 @@ abstract
     is-contr-component-UU-Level-empty lzero
 ```
 
-### The connected components of universes are 0 connected
+### The connected components of universes are `0`-connected
 
 ```agda
 abstract

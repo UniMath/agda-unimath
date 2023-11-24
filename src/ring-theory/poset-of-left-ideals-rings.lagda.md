@@ -161,8 +161,8 @@ module _
   preserves-order-subset-left-ideal-Ring I J H = H
 
   subset-left-ideal-hom-large-poset-Ring :
-    hom-set-Large-Poset
-      ( id)
+    hom-Large-Poset
+      ( λ l → l)
       ( left-ideal-Ring-Large-Poset R)
       ( powerset-Large-Poset (type-Ring R))
   map-hom-Large-Preorder subset-left-ideal-hom-large-poset-Ring =

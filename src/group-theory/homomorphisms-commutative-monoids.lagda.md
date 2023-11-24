@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -151,12 +152,10 @@ module _
   (f : hom-Commutative-Monoid M N)
   where
 
-  is-contr-total-htpy-hom-Commutative-Monoid :
-    is-contr
-      ( Σ ( hom-Commutative-Monoid M N)
-          ( htpy-hom-Commutative-Monoid M N f))
-  is-contr-total-htpy-hom-Commutative-Monoid =
-    is-contr-total-htpy-hom-Monoid
+  is-torsorial-htpy-hom-Commutative-Monoid :
+    is-torsorial (htpy-hom-Commutative-Monoid M N f)
+  is-torsorial-htpy-hom-Commutative-Monoid =
+    is-torsorial-htpy-hom-Monoid
       ( monoid-Commutative-Monoid M)
       ( monoid-Commutative-Monoid N)
       ( f)

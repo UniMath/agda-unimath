@@ -92,10 +92,10 @@ module _
     is-0-map g → is-0-map h → is-0-map (g ∘ h)
   is-0-map-comp = is-trunc-map-comp zero-𝕋
 
-  is-0-map-comp-htpy :
+  is-0-map-left-map-triangle :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-0-map g → is-0-map h → is-0-map f
-  is-0-map-comp-htpy = is-trunc-map-comp-htpy zero-𝕋
+  is-0-map-left-map-triangle = is-trunc-map-left-map-triangle zero-𝕋
 ```
 
 ### If a composite is a 0-map, then so is its right factor
@@ -110,10 +110,10 @@ module _
     is-0-map g → is-0-map (g ∘ h) → is-0-map h
   is-0-map-right-factor = is-trunc-map-right-factor zero-𝕋
 
-  is-0-map-right-factor-htpy :
+  is-0-map-top-map-triangle :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-0-map g → is-0-map f → is-0-map h
-  is-0-map-right-factor-htpy = is-trunc-map-right-factor-htpy zero-𝕋
+  is-0-map-top-map-triangle = is-trunc-map-top-map-triangle zero-𝕋
 ```
 
 ### A family of `0`-maps induces a `0`-map on total spaces

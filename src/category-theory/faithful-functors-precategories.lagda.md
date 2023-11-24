@@ -9,14 +9,14 @@ module category-theory.faithful-functors-precategories where
 ```agda
 open import category-theory.faithful-maps-precategories
 open import category-theory.functors-precategories
-open import category-theory.maps-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.injective-maps
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 A [functor](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is **faithful** if
-its an [embedding](foundation-core.embeddings.md) on hom-sets.
+it's an [embedding](foundation-core.embeddings.md) on hom-sets.
 
 Note that embeddings on [sets](foundation-core.sets.md) happen to coincide with
 [injections](foundation.injective-maps.md). However, we define faithful functors
@@ -58,7 +58,44 @@ module _
     is-faithful-prop-map-Precategory C D (map-functor-Precategory C D F)
 ```
 
-### The predicate of being faithful on functors between precategories
+### The type of faithful functors between two precategories
+
+```agda
+faithful-functor-Precategory :
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+faithful-functor-Precategory C D =
+  Σ (functor-Precategory C D) (is-faithful-functor-Precategory C D)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : faithful-functor-Precategory C D)
+  where
+
+  functor-faithful-functor-Precategory : functor-Precategory C D
+  functor-faithful-functor-Precategory = pr1 F
+
+  is-faithful-faithful-functor-Precategory :
+    is-faithful-functor-Precategory C D functor-faithful-functor-Precategory
+  is-faithful-faithful-functor-Precategory = pr2 F
+
+  obj-faithful-functor-Precategory : obj-Precategory C → obj-Precategory D
+  obj-faithful-functor-Precategory =
+    obj-functor-Precategory C D functor-faithful-functor-Precategory
+
+  hom-faithful-functor-Precategory :
+    {x y : obj-Precategory C} →
+    hom-Precategory C x y →
+    hom-Precategory D
+      ( obj-faithful-functor-Precategory x)
+      ( obj-faithful-functor-Precategory y)
+  hom-faithful-functor-Precategory =
+    hom-functor-Precategory C D functor-faithful-functor-Precategory
+```
+
+### The predicate of being injective on hom-sets on functors between precategories
 
 ```agda
 module _
@@ -135,4 +172,26 @@ module _
   equiv-is-faithful-is-injective-hom-functor-Precategory =
     equiv-is-faithful-is-injective-hom-map-Precategory C D
       ( map-functor-Precategory C D F)
+```
+
+### Faithful functors are faithful on isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  (is-faithful-F : is-faithful-functor-Precategory C D F)
+  where
+
+  is-faithful-on-isos-is-faithful-functor-Precategory :
+    (x y : obj-Precategory C) →
+    is-emb (preserves-iso-functor-Precategory C D F {x} {y})
+  is-faithful-on-isos-is-faithful-functor-Precategory x y =
+    is-emb-right-factor _ _
+      ( is-emb-inclusion-subtype (is-iso-prop-Precategory D))
+      ( is-emb-comp _ _
+        ( is-faithful-F x y)
+        ( is-emb-inclusion-subtype (is-iso-prop-Precategory C)))
 ```

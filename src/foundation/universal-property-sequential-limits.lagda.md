@@ -115,7 +115,7 @@ module _
       up up' =
       is-equiv-is-equiv-postcomp h
         ( λ D →
-          is-equiv-right-factor-htpy
+          is-equiv-top-map-triangle
             ( cone-map-tower A c')
             ( cone-map-tower A c)
             ( postcomp D h)
@@ -130,7 +130,7 @@ module _
       ({l : Level} → universal-property-sequential-limit l A c')
     universal-property-sequential-limit-universal-property-sequential-limit-is-equiv
       is-equiv-h up D =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( cone-map-tower A c')
         ( cone-map-tower A c)
         ( postcomp D h)
@@ -145,7 +145,7 @@ module _
       ({l : Level} → universal-property-sequential-limit l A c)
     universal-property-sequential-limit-is-equiv-universal-property-sequential-limit
       up' is-equiv-h D =
-      is-equiv-left-factor-htpy
+      is-equiv-right-map-triangle
         ( cone-map-tower A c')
         ( cone-map-tower A c)
         ( postcomp D h)
@@ -225,7 +225,7 @@ module _
         ( Σ (Y ≃ X)
             ( λ e → htpy-cone-tower A (cone-map-tower A c (map-equiv e)) c'))
     uniquely-unique-sequential-limit c' c up-c' up-c =
-      is-contr-total-Eq-subtype
+      is-torsorial-Eq-subtype
         ( uniqueness-universal-property-sequential-limit A c up-c Y c')
         ( is-property-is-equiv)
         ( map-universal-property-sequential-limit A c up-c c')
@@ -249,4 +249,4 @@ concept.
 ## See also
 
 - For sequential colimits, see
-  [`synthetic-homotopy-theory.27-sequences`](synthetic-homotopy-theory.27-sequences.md)
+  [`synthetic-homotopy-theory.universal-property-sequential-colimits`](synthetic-homotopy-theory.universal-property-sequential-colimits.md)

@@ -156,7 +156,7 @@ module _
       ( add-left-module-Ring
         ( mul-left-module-Ring r x)
         ( mul-left-module-Ring r y))
-  left-distributive-mul-add-left-module-Ring r =
+  left-distributive-mul-add-left-module-Ring r x y =
     preserves-add-hom-Ab
       ( ab-left-module-Ring)
       ( ab-left-module-Ring)
@@ -193,9 +193,7 @@ module _
           ( s)))
       ( preserves-add-hom-Ring R
         ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( r)
-        ( s))
+        ( mul-hom-left-module-Ring))
 
   associative-mul-left-module-Ring :
     (r s : type-Ring R) (x : type-left-module-Ring) →
@@ -224,9 +222,7 @@ module _
           ( s)))
       ( preserves-mul-hom-Ring R
         ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( r)
-        ( s))
+        ( mul-hom-left-module-Ring))
 
   left-zero-law-mul-left-module-Ring :
     (x : type-left-module-Ring) →
@@ -278,15 +274,14 @@ module _
           ( r)))
       ( preserves-neg-hom-Ring R
         ( endomorphism-ring-ab-left-module-Ring)
-        ( mul-hom-left-module-Ring)
-        ( r))
+        ( mul-hom-left-module-Ring))
 
   right-negative-law-mul-left-module-Ring :
     (r : type-Ring R) (x : type-left-module-Ring) →
     Id
       ( mul-left-module-Ring r (neg-left-module-Ring x))
       ( neg-left-module-Ring (mul-left-module-Ring r x))
-  right-negative-law-mul-left-module-Ring r =
+  right-negative-law-mul-left-module-Ring r x =
     preserves-negatives-hom-Ab
       ( ab-left-module-Ring)
       ( ab-left-module-Ring)
@@ -405,7 +400,7 @@ module _
       ( add-right-module-Ring
         ( mul-right-module-Ring r x)
         ( mul-right-module-Ring r y))
-  left-distributive-mul-add-right-module-Ring r =
+  left-distributive-mul-add-right-module-Ring r x y =
     preserves-add-hom-Ab
       ( ab-right-module-Ring)
       ( ab-right-module-Ring)
@@ -442,9 +437,7 @@ module _
           ( s)))
       ( preserves-add-hom-Ring R
         ( op-Ring endomorphism-ring-ab-right-module-Ring)
-        ( mul-hom-right-module-Ring)
-        ( r)
-        ( s))
+        ( mul-hom-right-module-Ring))
 
   associative-mul-right-module-Ring :
     (r s : type-Ring R) (x : type-right-module-Ring) →
@@ -473,9 +466,7 @@ module _
           ( r)))
       ( preserves-mul-hom-Ring R
         ( op-Ring endomorphism-ring-ab-right-module-Ring)
-        ( mul-hom-right-module-Ring)
-        ( r)
-        ( s))
+        ( mul-hom-right-module-Ring))
 
   left-zero-law-mul-right-module-Ring :
     (x : type-right-module-Ring) →
@@ -527,15 +518,14 @@ module _
           ( r)))
       ( preserves-neg-hom-Ring R
         ( op-Ring endomorphism-ring-ab-right-module-Ring)
-        ( mul-hom-right-module-Ring)
-        ( r))
+        ( mul-hom-right-module-Ring))
 
   right-negative-law-mul-right-module-Ring :
     (r : type-Ring R) (x : type-right-module-Ring) →
     Id
       ( mul-right-module-Ring r (neg-right-module-Ring x))
       ( neg-right-module-Ring (mul-right-module-Ring r x))
-  right-negative-law-mul-right-module-Ring r =
+  right-negative-law-mul-right-module-Ring r x =
     preserves-negatives-hom-Ab
       ( ab-right-module-Ring)
       ( ab-right-module-Ring)

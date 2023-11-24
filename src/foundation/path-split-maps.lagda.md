@@ -9,11 +9,12 @@ open import foundation-core.path-split-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.propositions
 ```
 
@@ -36,11 +37,11 @@ module _
           ( is-contr-prod
             ( is-contr-section-is-equiv
               ( is-equiv-is-path-split f is-path-split-f))
-            ( is-contr-Π
-              ( λ x → is-contr-Π
-                ( λ y → is-contr-section-is-equiv
+            ( is-contr-iterated-Π 2
+              ( λ x y →
+                is-contr-section-is-equiv
                   ( is-emb-is-equiv
-                    ( is-equiv-is-path-split f is-path-split-f) x y))))))
+                    ( is-equiv-is-path-split f is-path-split-f) x y)))))
 
   abstract
     is-equiv-is-path-split-is-equiv :
@@ -83,8 +84,7 @@ module _
 
 1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
    of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729),
-   [DOI:10.48550](https://doi.org/10.48550/arXiv.1308.0729))
+   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
 2. Mike Shulman, _Universal properties without function extensionality_
    (November 2014)
    ([HoTT Blog](https://homotopytypetheory.org/2014/11/02/universal-properties-without-function-extensionality/))

@@ -80,12 +80,12 @@ abstract
 ### Mere equality is an equivalence relation
 
 ```agda
-mere-eq-Equivalence-Relation :
-  {l1 : Level} (A : UU l1) → Equivalence-Relation l1 A
-pr1 (mere-eq-Equivalence-Relation A) = mere-eq-Prop
-pr1 (pr2 (mere-eq-Equivalence-Relation A)) = refl-mere-eq
-pr1 (pr2 (pr2 (mere-eq-Equivalence-Relation A))) = symmetric-mere-eq
-pr2 (pr2 (pr2 (mere-eq-Equivalence-Relation A))) = transitive-mere-eq
+mere-eq-equivalence-relation :
+  {l1 : Level} (A : UU l1) → equivalence-relation l1 A
+pr1 (mere-eq-equivalence-relation A) = mere-eq-Prop
+pr1 (pr2 (mere-eq-equivalence-relation A)) = refl-mere-eq
+pr1 (pr2 (pr2 (mere-eq-equivalence-relation A))) = symmetric-mere-eq
+pr2 (pr2 (pr2 (mere-eq-equivalence-relation A))) = transitive-mere-eq
 ```
 
 ### Any map into a set reflects mere equality
@@ -96,15 +96,15 @@ module _
   where
 
   reflects-mere-eq :
-    reflects-Equivalence-Relation (mere-eq-Equivalence-Relation A) f
+    reflects-equivalence-relation (mere-eq-equivalence-relation A) f
   reflects-mere-eq {x} {y} r =
     apply-universal-property-trunc-Prop r
       ( Id-Prop X (f x) (f y))
       ( ap f)
 
   reflecting-map-mere-eq :
-    reflecting-map-Equivalence-Relation
-      ( mere-eq-Equivalence-Relation A)
+    reflecting-map-equivalence-relation
+      ( mere-eq-equivalence-relation A)
       ( type-Set X)
   pr1 reflecting-map-mere-eq = f
   pr2 reflecting-map-mere-eq = reflects-mere-eq

@@ -30,8 +30,9 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-The `n`-th power of a loop `ω` in a type `A` is defined by iterated
-concatenation of `ω` with itself.
+The **`n`-th power of a [loop](synthetic-homotopy-theory.loop-spaces.md)** `ω`
+in a type `A` is defined by [iterated](foundation.iterating-functions.md)
+[concatenation](foundation.identity-types.md) of `ω` with itself.
 
 ## Definitions
 
@@ -128,7 +129,7 @@ map-power-nat-Ω :
   map-Ω f (power-nat-Ω n A ω) ＝ power-nat-Ω n B (map-Ω f ω)
 map-power-nat-Ω zero-ℕ {A} {B} f ω = preserves-refl-map-Ω f
 map-power-nat-Ω (succ-ℕ n) {A} {B} f ω =
-  ( preserves-mul-map-Ω f (power-nat-Ω n A ω) ω) ∙
+  ( preserves-mul-map-Ω f) ∙
   ( ap
     ( concat' (point-Pointed-Type B) (map-Ω f ω))
     ( map-power-nat-Ω n f ω))

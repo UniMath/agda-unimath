@@ -23,6 +23,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.univalence
@@ -153,36 +154,35 @@ module _
   bonding-ethane c e = v
 
   abstract
-    is-contr-standard-edge-ethane :
-      (c : vertex-ethane) →
-      is-contr (Σ (vertex-ethane) (λ c' → standard-edge-ethane c c'))
-    pr1 (pr1 (is-contr-standard-edge-ethane (inl (inr _)))) = one-Fin 1
-    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr _))))) =
+    is-torsorial-standard-edge-ethane :
+      (c : vertex-ethane) → is-torsorial (λ c' → standard-edge-ethane c c')
+    pr1 (pr1 (is-torsorial-standard-edge-ethane (inl (inr _)))) = one-Fin 1
+    pr1 (pr2 (pr1 (is-torsorial-standard-edge-ethane (inl (inr _))))) =
       unit-trunc-Prop (zero-Fin 1 , refl)
-    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr _))))) =
+    pr2 (pr2 (pr1 (is-torsorial-standard-edge-ethane (inl (inr _))))) =
       unit-trunc-Prop (one-Fin 1 , refl)
-    pr2 (is-contr-standard-edge-ethane (inl (inr _))) (inl (inr _) , P) =
+    pr2 (is-torsorial-standard-edge-ethane (inl (inr _))) (inl (inr _) , P) =
       ex-falso
         ( apply-universal-property-trunc-Prop (pr2 P) empty-Prop
           ( λ where
             ( inl (inr _) , is-one) → neq-inl-inr is-one
             ( inr _ , is-one) → neq-inl-inr is-one))
-    pr2 (is-contr-standard-edge-ethane (inl (inr _))) (inr _ , P) =
+    pr2 (is-torsorial-standard-edge-ethane (inl (inr _))) (inr _ , P) =
       eq-pair-Σ refl
         ( eq-is-prop
           ( is-prop-edge-ethane
             ( standard-unordered-pair (inl (inr _)) (inr _))))
-    pr1 (pr1 (is-contr-standard-edge-ethane (inr _))) = zero-Fin 1
-    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inr _)))) =
+    pr1 (pr1 (is-torsorial-standard-edge-ethane (inr _))) = zero-Fin 1
+    pr1 (pr2 (pr1 (is-torsorial-standard-edge-ethane (inr _)))) =
       unit-trunc-Prop (one-Fin 1 , refl)
-    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inr _)))) =
+    pr2 (pr2 (pr1 (is-torsorial-standard-edge-ethane (inr _)))) =
       unit-trunc-Prop (zero-Fin 1 , refl)
-    pr2 (is-contr-standard-edge-ethane (inr _)) (inl (inr _) , P) =
+    pr2 (is-torsorial-standard-edge-ethane (inr _)) (inl (inr _) , P) =
       eq-pair-Σ refl
         ( eq-is-prop
           ( is-prop-edge-ethane
             ( standard-unordered-pair (inr star) (inl (inr star)))))
-    pr2 (is-contr-standard-edge-ethane (inr _)) (inr _ , P) =
+    pr2 (is-torsorial-standard-edge-ethane (inr _)) (inr _ , P) =
       ex-falso
         ( apply-universal-property-trunc-Prop (pr1 P) empty-Prop
           ( λ where
@@ -194,7 +194,7 @@ module _
     is-emb-bonding-ethane c =
       is-emb-is-injective
         ( is-set-type-UU-Fin 4 (pr1 t))
-        ( is-injective-is-contr (λ e → v) (is-contr-standard-edge-ethane c))
+        ( is-injective-is-contr (λ e → v) (is-torsorial-standard-edge-ethane c))
 
   emb-bonding-ethane :
     (c : vertex-ethane) →

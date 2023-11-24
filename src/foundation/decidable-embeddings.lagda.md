@@ -37,6 +37,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -221,7 +222,7 @@ abstract
     is-prop-is-inhabited
       ( λ H →
         is-prop-prod
-          ( is-prop-is-emb f)
+          ( is-property-is-emb f)
           ( is-prop-Π
             ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
 ```
@@ -241,7 +242,7 @@ abstract
       ( λ t → is-decidable (fiber (g ∘ f) x))
       ( λ u →
         is-decidable-equiv
-          ( equiv-compute-fiber-comp g f x)
+          ( compute-fiber-comp g f x)
           ( is-decidable-equiv
             ( left-unit-law-Σ-is-contr
               ( is-proof-irrelevant-is-prop
@@ -284,12 +285,12 @@ htpy-eq-decidable-emb :
 htpy-eq-decidable-emb f .f refl = refl-htpy-decidable-emb f
 
 abstract
-  is-contr-total-htpy-decidable-emb :
+  is-torsorial-htpy-decidable-emb :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ᵈ B) →
-    is-contr (Σ (A ↪ᵈ B) (htpy-decidable-emb f))
-  is-contr-total-htpy-decidable-emb f =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (map-decidable-emb f))
+    is-torsorial (htpy-decidable-emb f)
+  is-torsorial-htpy-decidable-emb f =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-decidable-emb f))
       ( is-prop-is-decidable-emb)
       ( map-decidable-emb f)
       ( refl-htpy)
@@ -301,7 +302,7 @@ abstract
     is-equiv (htpy-eq-decidable-emb f g)
   is-equiv-htpy-eq-decidable-emb f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-decidable-emb f)
+      ( is-torsorial-htpy-decidable-emb f)
       ( htpy-eq-decidable-emb f)
 
 eq-htpy-decidable-emb :

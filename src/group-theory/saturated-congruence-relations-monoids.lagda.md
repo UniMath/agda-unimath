@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-monoids
@@ -39,8 +40,8 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M)
   where
 
-  is-saturated-congruence-monoid-Prop : Prop (l1 ⊔ l2)
-  is-saturated-congruence-monoid-Prop =
+  is-saturated-prop-congruence-Monoid : Prop (l1 ⊔ l2)
+  is-saturated-prop-congruence-Monoid =
     Π-Prop
       ( type-Monoid M)
       ( λ x →
@@ -58,12 +59,12 @@ module _
               ( prop-congruence-Monoid M R x y)))
 
   is-saturated-congruence-Monoid : UU (l1 ⊔ l2)
-  is-saturated-congruence-Monoid = type-Prop is-saturated-congruence-monoid-Prop
+  is-saturated-congruence-Monoid = type-Prop is-saturated-prop-congruence-Monoid
 
   is-prop-is-saturated-congruence-Monoid :
     is-prop is-saturated-congruence-Monoid
   is-prop-is-saturated-congruence-Monoid =
-    is-prop-type-Prop is-saturated-congruence-monoid-Prop
+    is-prop-type-Prop is-saturated-prop-congruence-Monoid
 
 saturated-congruence-Monoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) → UU (l1 ⊔ lsuc l2)
@@ -82,9 +83,11 @@ module _
     is-saturated-congruence-Monoid M congruence-saturated-congruence-Monoid
   is-saturated-saturated-congruence-Monoid = pr2 R
 
-  eq-rel-saturated-congruence-Monoid : Equivalence-Relation l2 (type-Monoid M)
-  eq-rel-saturated-congruence-Monoid =
-    eq-rel-congruence-Monoid M congruence-saturated-congruence-Monoid
+  equivalence-relation-saturated-congruence-Monoid :
+    equivalence-relation l2 (type-Monoid M)
+  equivalence-relation-saturated-congruence-Monoid =
+    equivalence-relation-congruence-Monoid M
+      ( congruence-saturated-congruence-Monoid)
 
   prop-saturated-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
   prop-saturated-congruence-Monoid =
@@ -145,7 +148,7 @@ module _
     transitive-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   mul-saturated-congruence-Monoid :
-    is-congruence-Monoid M eq-rel-saturated-congruence-Monoid
+    is-congruence-Monoid M equivalence-relation-saturated-congruence-Monoid
   mul-saturated-congruence-Monoid =
     mul-congruence-Monoid M congruence-saturated-congruence-Monoid
 ```
@@ -171,14 +174,12 @@ refl-relate-same-elements-saturated-congruence-Monoid M R =
   refl-relate-same-elements-congruence-Monoid M
     ( congruence-saturated-congruence-Monoid M R)
 
-is-contr-total-relate-same-elements-saturated-congruence-Monoid :
+is-torsorial-relate-same-elements-saturated-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R : saturated-congruence-Monoid l2 M) →
-  is-contr
-    ( Σ ( saturated-congruence-Monoid l2 M)
-        ( relate-same-elements-saturated-congruence-Monoid M R))
-is-contr-total-relate-same-elements-saturated-congruence-Monoid M R =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-relate-same-elements-congruence-Monoid M
+  is-torsorial (relate-same-elements-saturated-congruence-Monoid M R)
+is-torsorial-relate-same-elements-saturated-congruence-Monoid M R =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-relate-same-elements-congruence-Monoid M
       ( congruence-saturated-congruence-Monoid M R))
     ( is-prop-is-saturated-congruence-Monoid M)
     ( congruence-saturated-congruence-Monoid M R)
@@ -197,7 +198,7 @@ is-equiv-relate-same-elements-eq-saturated-congruence-Monoid :
   is-equiv (relate-same-elements-eq-saturated-congruence-Monoid M R S)
 is-equiv-relate-same-elements-eq-saturated-congruence-Monoid M R =
   fundamental-theorem-id
-    ( is-contr-total-relate-same-elements-saturated-congruence-Monoid M R)
+    ( is-torsorial-relate-same-elements-saturated-congruence-Monoid M R)
     ( relate-same-elements-eq-saturated-congruence-Monoid M R)
 
 extensionality-saturated-congruence-Monoid :
@@ -208,10 +209,10 @@ pr1 (extensionality-saturated-congruence-Monoid M R S) =
 pr2 (extensionality-saturated-congruence-Monoid M R S) =
   is-equiv-relate-same-elements-eq-saturated-congruence-Monoid M R S
 
-eq-relate-same-elements-saturated-congruence-Monoid :
+equivalence-relationate-same-elements-saturated-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R S : saturated-congruence-Monoid l2 M) →
   relate-same-elements-saturated-congruence-Monoid M R S → R ＝ S
-eq-relate-same-elements-saturated-congruence-Monoid M R S =
+equivalence-relationate-same-elements-saturated-congruence-Monoid M R S =
   map-inv-equiv (extensionality-saturated-congruence-Monoid M R S)
 ```
 

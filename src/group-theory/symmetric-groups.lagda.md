@@ -87,22 +87,22 @@ module _
   hom-symmetric-group-equiv-Set :
     hom-Group (symmetric-Group X) (symmetric-Group Y)
   pr1 hom-symmetric-group-equiv-Set f = e ∘e (f ∘e inv-equiv e)
-  pr2 hom-symmetric-group-equiv-Set f g =
+  pr2 hom-symmetric-group-equiv-Set {f} {g} =
     ( eq-equiv-eq-map-equiv refl) ∙
-      ( ( ap
-        ( λ h → e ∘e (( f ∘e (h ∘e g)) ∘e inv-equiv e))
-        ( inv (left-inverse-law-equiv e))) ∙
-        ( eq-equiv-eq-map-equiv refl))
+    ( ap
+      ( λ h → e ∘e (( f ∘e (h ∘e g)) ∘e inv-equiv e))
+      ( inv (left-inverse-law-equiv e))) ∙
+    ( eq-equiv-eq-map-equiv refl)
 
   hom-inv-symmetric-group-equiv-Set :
     hom-Group (symmetric-Group Y) (symmetric-Group X)
   pr1 hom-inv-symmetric-group-equiv-Set f = inv-equiv e ∘e (f ∘e e)
-  pr2 hom-inv-symmetric-group-equiv-Set f g =
+  pr2 hom-inv-symmetric-group-equiv-Set {f} {g} =
     ( eq-equiv-eq-map-equiv refl) ∙
-      ( ( ap
-        ( λ h → inv-equiv e ∘e (( f ∘e (h ∘e g)) ∘e e))
-        ( inv (right-inverse-law-equiv e))) ∙
-        ( eq-equiv-eq-map-equiv refl))
+    ( ap
+      ( λ h → inv-equiv e ∘e (( f ∘e (h ∘e g)) ∘e e))
+      ( inv (right-inverse-law-equiv e))) ∙
+    ( eq-equiv-eq-map-equiv refl)
 
   is-section-hom-inv-symmetric-group-equiv-Set :
     Id
@@ -118,8 +118,8 @@ module _
       ( eq-htpy
         ( λ f →
           ( eq-equiv-eq-map-equiv refl) ∙
-            ( ( ap (λ h → h ∘e (f ∘e h)) (right-inverse-law-equiv e)) ∙
-              ( eq-equiv-eq-map-equiv refl))))
+          ( ap (λ h → h ∘e (f ∘e h)) (right-inverse-law-equiv e)) ∙
+          ( eq-equiv-eq-map-equiv refl)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (symmetric-Group Y))
@@ -140,8 +140,8 @@ module _
       ( eq-htpy
         ( λ f →
           ( eq-equiv-eq-map-equiv refl) ∙
-            ( ( ap (λ h → h ∘e (f ∘e h)) (left-inverse-law-equiv e)) ∙
-              ( eq-equiv-eq-map-equiv refl))))
+          ( ap (λ h → h ∘e (f ∘e h)) (left-inverse-law-equiv e)) ∙
+          ( eq-equiv-eq-map-equiv refl)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (symmetric-Group X))
@@ -149,7 +149,7 @@ module _
           ( id)))
 
   iso-symmetric-group-equiv-Set :
-    type-iso-Group (symmetric-Group X) (symmetric-Group Y)
+    iso-Group (symmetric-Group X) (symmetric-Group Y)
   pr1 iso-symmetric-group-equiv-Set = hom-symmetric-group-equiv-Set
   pr1 (pr2 iso-symmetric-group-equiv-Set) = hom-inv-symmetric-group-equiv-Set
   pr1 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
@@ -181,44 +181,46 @@ module _
 
   preserves-mul-compute-symmetric-Concrete-Group :
     preserves-mul-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
       ( map-compute-symmetric-Concrete-Group)
-  preserves-mul-compute-symmetric-Concrete-Group =
+  preserves-mul-compute-symmetric-Concrete-Group {x} {y} =
     preserves-mul-equiv-eq-classifying-type-symmetric-Concrete-Group A
       ( shape-symmetric-Concrete-Group A)
       ( shape-symmetric-Concrete-Group A)
       ( shape-symmetric-Concrete-Group A)
+      ( x)
+      ( y)
 
   equiv-group-compute-symmetric-Concrete-Group :
     equiv-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   pr1 equiv-group-compute-symmetric-Concrete-Group =
     equiv-compute-symmetric-Concrete-Group
-  pr2 equiv-group-compute-symmetric-Concrete-Group =
-    preserves-mul-compute-symmetric-Concrete-Group
+  pr2 equiv-group-compute-symmetric-Concrete-Group {x} {y} =
+    preserves-mul-compute-symmetric-Concrete-Group {x} {y}
 
   compute-symmetric-Concrete-Group' :
-    type-iso-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+    iso-Group
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   compute-symmetric-Concrete-Group' =
     iso-equiv-Group
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
       ( equiv-group-compute-symmetric-Concrete-Group)
 
   compute-symmetric-Concrete-Group :
-    type-iso-Group
-      ( abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+    iso-Group
+      ( group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   compute-symmetric-Concrete-Group =
     comp-iso-Group
-      ( abstract-group-Concrete-Group (symmetric-Concrete-Group A))
-      ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
+      ( group-Concrete-Group (symmetric-Concrete-Group A))
+      ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
       ( compute-symmetric-Concrete-Group')
       ( iso-inv-Group
-        ( abstract-group-Concrete-Group (symmetric-Concrete-Group A)))
+        ( group-Concrete-Group (symmetric-Concrete-Group A)))
 ```

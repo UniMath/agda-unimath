@@ -17,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
@@ -44,7 +45,7 @@ preserves-mul-hom-Ab :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) →
   hom-Ab (ab-Ring R) (ab-Ring S) → UU (l1 ⊔ l2)
 preserves-mul-hom-Ab R S f =
-  (x y : type-Ring R) →
+  {x y : type-Ring R} →
   map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y) ＝
   mul-Ring S
     ( map-hom-Ab (ab-Ring R) (ab-Ring S) f x)
@@ -55,9 +56,9 @@ is-prop-preserves-mul-hom-Ab :
   ( f : hom-Ab (ab-Ring R) (ab-Ring S)) →
   is-prop (preserves-mul-hom-Ab R S f)
 is-prop-preserves-mul-hom-Ab R S f =
-  is-prop-Π
+  is-prop-Π'
     ( λ x →
-      is-prop-Π
+      is-prop-Π'
         ( λ y →
           is-set-type-Ring S
             ( map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y))
@@ -95,7 +96,7 @@ module _
   is-ring-homomorphism-hom-Ab-Prop :
     hom-Ab (ab-Ring R) (ab-Ring S) → Prop (l1 ⊔ l2)
   is-ring-homomorphism-hom-Ab-Prop f =
-    is-homomorphism-semiring-hom-Commutative-Monoid-Prop
+    is-homomorphism-semiring-prop-hom-Commutative-Monoid
       ( semiring-Ring R)
       ( semiring-Ring S)
       ( hom-commutative-monoid-hom-Ab (ab-Ring R) (ab-Ring S) f)
@@ -199,7 +200,7 @@ module _
   where
 
   preserves-mul-id-hom-Ring : preserves-mul-hom-Ab R R (id-hom-Ab (ab-Ring R))
-  preserves-mul-id-hom-Ring x y = refl
+  preserves-mul-id-hom-Ring = refl
 
   preserves-unit-id-hom-Ring : preserves-unit-hom-Ab R R (id-hom-Ab (ab-Ring R))
   preserves-unit-id-hom-Ring = refl
@@ -306,11 +307,11 @@ module _
     (g : hom-Ring R S) → (f ＝ g) → htpy-hom-Ring R S f g
   htpy-eq-hom-Ring .f refl = refl-htpy-hom-Ring R S f
 
-  is-contr-total-htpy-hom-Ring :
-    is-contr (Σ (hom-Ring R S) (htpy-hom-Ring R S f))
-  is-contr-total-htpy-hom-Ring =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy-hom-Ab
+  is-torsorial-htpy-hom-Ring :
+    is-torsorial (htpy-hom-Ring R S f)
+  is-torsorial-htpy-hom-Ring =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy-hom-Ab
         ( ab-Ring R)
         ( ab-Ring S)
         ( hom-ab-hom-Ring R S f))
@@ -323,7 +324,7 @@ module _
     (g : hom-Ring R S) → is-equiv (htpy-eq-hom-Ring g)
   is-equiv-htpy-eq-hom-Ring =
     fundamental-theorem-id
-      is-contr-total-htpy-hom-Ring
+      is-torsorial-htpy-hom-Ring
       htpy-eq-hom-Ring
 
   extensionality-hom-Ring :

@@ -23,6 +23,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
@@ -98,40 +99,39 @@ module hom-Fam-pushout
   htpy-hom-Fam-pushout-eq h .h refl =
     reflexive-htpy-hom-Fam-pushout h
 
-  is-contr-total-htpy-hom-Fam-pushout :
-    ( h : hom-Fam-pushout) →
-    is-contr (Σ (hom-Fam-pushout) (htpy-hom-Fam-pushout h))
-  is-contr-total-htpy-hom-Fam-pushout h =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-hom-Fam-pushout :
+    ( h : hom-Fam-pushout) → is-torsorial (htpy-hom-Fam-pushout h)
+  is-torsorial-htpy-hom-Fam-pushout h =
+    is-torsorial-Eq-structure
       ( λ kA kB-ke (HA : (x : A) → (pr1 h x) ~ (kA x)) →
           Σ ( (y : B) → (pr1 (pr2 h) y) ~ (pr1 kB-ke y)) (λ HB →
             ( s : S) →
               ( ((HB (g s)) ·r (map-equiv (PS s))) ∙h (pr2 kB-ke s)) ~
               ( (pr2 (pr2 h) s) ∙h ((map-equiv (QS s)) ·l (HA (f s))))))
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ x τ → (pr1 h x) ~ τ)
-        ( λ x → is-contr-total-htpy (pr1 h x)))
+        ( λ x → is-torsorial-htpy (pr1 h x)))
       ( pair (pr1 h) (λ x → refl-htpy))
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ kB ke (HB : (y : B) → (pr1 (pr2 h) y) ~ kB y) →
           (s : S) →
             ( ((HB (g s)) ·r (map-equiv (PS s))) ∙h (ke s)) ~
             ( (pr2 (pr2 h) s) ∙h ((map-equiv (QS s)) ·l refl-htpy)))
-        ( is-contr-total-Eq-Π
+        ( is-torsorial-Eq-Π
           ( λ y τ → (pr1 (pr2 h) y) ~ τ)
-          ( λ y → is-contr-total-htpy (pr1 (pr2 h) y)))
+          ( λ y → is-torsorial-htpy (pr1 (pr2 h) y)))
         ( pair (pr1 (pr2 h)) (λ y → refl-htpy))
-        ( is-contr-total-Eq-Π
+        ( is-torsorial-Eq-Π
           ( λ (s : S) he →
             (he ~ (pr2 (pr2 h) s ∙h (map-equiv (QS s) ·l refl-htpy))))
-          ( λ s → is-contr-total-htpy'
+          ( λ s → is-torsorial-htpy'
             ((pr2 (pr2 h) s) ∙h ((map-equiv (QS s)) ·l refl-htpy)))))
 
   is-equiv-htpy-hom-Fam-pushout-eq :
     ( h k : hom-Fam-pushout) → is-equiv (htpy-hom-Fam-pushout-eq h k)
   is-equiv-htpy-hom-Fam-pushout-eq h =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-Fam-pushout h)
+      ( is-torsorial-htpy-hom-Fam-pushout h)
       ( htpy-hom-Fam-pushout-eq h)
 
   eq-htpy-hom-Fam-pushout :
@@ -262,7 +262,7 @@ is-equiv-hom-Fam-pushout-map :
   ( P : X → UU l5) (Q : X → UU l6) →
   is-equiv (hom-Fam-pushout-map c P Q)
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
-  is-equiv-comp-htpy
+  is-equiv-left-map-triangle
     ( hom-Fam-pushout-map c P Q)
     ( hom-Fam-pushout-dependent-cocone c P Q)
     ( dependent-cocone-map f g c (λ x → P x → Q x))
@@ -327,7 +327,7 @@ is-universal-id-Fam-pushout' :
       ( desc-fam c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
-  is-equiv-left-factor-htpy
+  is-equiv-right-map-triangle
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
     ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))

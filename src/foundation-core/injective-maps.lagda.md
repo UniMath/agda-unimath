@@ -27,13 +27,14 @@ open import foundation-core.sets
 
 ## Idea
 
-A map `f : A → B` is injective if `f x ＝ f y` implies `x ＝ y`.
+A map `f : A → B` is **injective** if `f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 
 The notion of injective map is, however, not homotopically coherent. It is fine
-to use injectivity for maps between sets, but for maps between general types it
-is recommended to use the notion of embedding.
+to use injectivity for maps between [sets](foundation-core.sets.md), but for
+maps between general types it is recommended to use the notion of
+[embedding](foundation-core.embeddings.md).
 
 ## Definition
 
@@ -72,10 +73,10 @@ module _
     is-injective (g ∘ h) → is-injective h
   is-injective-right-factor g h is-inj-gh p = is-inj-gh (ap g p)
 
-  is-injective-right-factor-htpy :
+  is-injective-top-map-triangle :
     (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) →
     is-injective f → is-injective h
-  is-injective-right-factor-htpy f g h H is-inj-f {x} {x'} p =
+  is-injective-top-map-triangle f g h H is-inj-f {x} {x'} p =
     is-inj-f {x} {x'} ((H x) ∙ ((ap g p) ∙ (inv (H x'))))
 ```
 
@@ -91,10 +92,10 @@ module _
     is-injective h → is-injective g → is-injective (g ∘ h)
   is-injective-comp is-inj-h is-inj-g = is-inj-h ∘ is-inj-g
 
-  is-injective-comp-htpy :
+  is-injective-left-map-triangle :
     (f : A → C) (g : B → C) (h : A → B) → f ~ (g ∘ h) →
     is-injective h → is-injective g → is-injective f
-  is-injective-comp-htpy f g h H is-inj-h is-inj-g {x} {x'} p =
+  is-injective-left-map-triangle f g h H is-inj-h is-inj-g {x} {x'} p =
     is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
 ```
 

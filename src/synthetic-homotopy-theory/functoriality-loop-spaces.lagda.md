@@ -28,9 +28,9 @@ open import synthetic-homotopy-theory.loop-spaces
 ## Idea
 
 Any [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` induces a
-pointed map `pointed-map-Ω f : Ω A →∗ Ω B`. Furthermore, this operation respects
-the groupoidal operations on
-[loop spaces](synthetic-homotopy-theory.loop-spaces.md).
+pointed map `pointed-map-Ω f : Ω A →∗ Ω B`` on
+[loop spaces](synthetic-homotopy-theory.loop-spaces.md). Furthermore, this
+operation respects the groupoidal operations on loop spaces.
 
 ## Definition
 
@@ -53,8 +53,8 @@ module _
   pr2 pointed-map-Ω = preserves-refl-map-Ω
 
   preserves-mul-map-Ω :
-    (x y : type-Ω A) → map-Ω (mul-Ω A x y) ＝ mul-Ω B (map-Ω x) (map-Ω y)
-  preserves-mul-map-Ω x y =
+    {x y : type-Ω A} → map-Ω (mul-Ω A x y) ＝ mul-Ω B (map-Ω x) (map-Ω y)
+  preserves-mul-map-Ω {x} {y} =
     ( ap
       ( tr-type-Ω (preserves-point-pointed-map f))
       ( ap-concat (map-pointed-map f) x y)) ∙

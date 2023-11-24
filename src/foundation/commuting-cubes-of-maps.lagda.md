@@ -35,7 +35,7 @@ that the cube is presented as a lattice
         /   |   \
        B'   A    C'
        |\ /   \ /|
-       | \     ‌/ |
+       | \     / |
        |/ \   / \|
        B    D'   C'
         \   |   /
@@ -453,7 +453,7 @@ module _
           ( W)
         by
         inv-htpy
-          ( distributive-precomp-coherence-square-comp-htpy-coherence-triangle-maps
+          ( distributive-precomp-coherence-square-left-map-triangle-coherence-triangle-maps
             ( W)
             ( hA)
             ( h' ∘ f')
@@ -498,7 +498,7 @@ module _
         ( ( precomp-front-right-inv-whisk-g') ∙h
           ( precomp-k-whisk-back-right-inv))
         by
-        distributive-precomp-coherence-square-comp-htpy-coherence-triangle-maps'
+        distributive-precomp-coherence-square-left-map-triangle-coherence-triangle-maps'
           ( W)
           ( hA)
           ( h' ∘ f')

@@ -21,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -109,23 +110,23 @@ module _
   htpy-eq-cospan : (c d : cospan l A B) → c ＝ d → htpy-cospan c d
   htpy-eq-cospan c .c refl = refl-htpy-cospan c
 
-  is-contr-total-htpy-cospan :
-    (c : cospan l A B) → is-contr (Σ (cospan l A B) (htpy-cospan c))
-  is-contr-total-htpy-cospan c =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-cospan :
+    (c : cospan l A B) → is-torsorial (htpy-cospan c)
+  is-torsorial-htpy-cospan c =
+    is-torsorial-Eq-structure
       ( λ X d e → coherence-hom-codomain-cospan c (X , d) (map-equiv e))
-      ( is-contr-total-equiv (pr1 c))
+      ( is-torsorial-equiv (pr1 c))
       ( codomain-cospan c , id-equiv)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ x f a → coherence-triangle-maps f id (right-map-cospan c))
-        ( is-contr-total-htpy' (left-map-cospan c))
+        ( is-torsorial-htpy' (left-map-cospan c))
         ( left-map-cospan c , refl-htpy)
-        (is-contr-total-htpy' (right-map-cospan c)))
+        (is-torsorial-htpy' (right-map-cospan c)))
 
   is-equiv-htpy-eq-cospan :
     (c d : cospan l A B) → is-equiv (htpy-eq-cospan c d)
   is-equiv-htpy-eq-cospan c =
-    fundamental-theorem-id (is-contr-total-htpy-cospan c) (htpy-eq-cospan c)
+    fundamental-theorem-id (is-torsorial-htpy-cospan c) (htpy-eq-cospan c)
 
   extensionality-cospan :
     (c d : cospan l A B) → (c ＝ d) ≃ (htpy-cospan c d)

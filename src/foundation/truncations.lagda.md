@@ -8,6 +8,7 @@ module foundation.truncations where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
@@ -18,7 +19,6 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -26,6 +26,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
 open import foundation-core.whiskering-homotopies
@@ -354,6 +355,18 @@ module _
   pr2 equiv-unit-trunc = is-equiv-unit-trunc
 ```
 
+### A contractible type is equivalent to its `k`-truncation
+
+```agda
+module _
+  {l : Level} (k : 𝕋) (A : UU l)
+  where
+
+  is-equiv-unit-trunc-is-contr : is-contr A → is-equiv unit-trunc
+  is-equiv-unit-trunc-is-contr c =
+    is-equiv-unit-trunc (A , is-trunc-is-contr k c)
+```
+
 ### Truncation is idempotent
 
 ```agda
@@ -392,10 +405,10 @@ module _
     map-compute-Eq-trunc a (unit-trunc refl) ＝ refl-Eq-trunc
   refl-compute-Eq-trunc = refl
 
-  is-contr-total-Eq-trunc : is-contr (Σ (type-trunc (succ-𝕋 k) A) Eq-trunc)
-  pr1 (pr1 is-contr-total-Eq-trunc) = unit-trunc a
-  pr2 (pr1 is-contr-total-Eq-trunc) = refl-Eq-trunc
-  pr2 is-contr-total-Eq-trunc =
+  is-torsorial-Eq-trunc : is-torsorial Eq-trunc
+  pr1 (pr1 is-torsorial-Eq-trunc) = unit-trunc a
+  pr2 (pr1 is-torsorial-Eq-trunc) = refl-Eq-trunc
+  pr2 is-torsorial-Eq-trunc =
     function-dependent-universal-property-total-truncated-fam-trunc
       ( λ y → trunc k (a ＝ y))
       ( Id-Truncated-Type
@@ -433,7 +446,7 @@ module _
     (x : type-trunc (succ-𝕋 k) A) → is-equiv (Eq-eq-trunc x)
   is-equiv-Eq-eq-trunc =
     fundamental-theorem-id
-      ( is-contr-total-Eq-trunc)
+      ( is-torsorial-Eq-trunc)
       ( Eq-eq-trunc)
 
   extensionality-trunc :

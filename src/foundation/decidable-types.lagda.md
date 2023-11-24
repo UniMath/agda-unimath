@@ -15,6 +15,7 @@ open import foundation.hilberts-epsilon-operators
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.retracts-of-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -30,11 +31,14 @@ open import foundation-core.retractions
 
 ## Idea
 
-A type is said to be decidable if we can either construct an element, or we can
-prove that it is empty. In other words, we interpret decidability via the
-Curry-Howard interpretation of logic into type theory. A related concept is that
-a type is either inhabited or empty, where inhabitedness of a type is expressed
-using the propositional truncation.
+A type is said to be **decidable** if we can either construct an element, or we
+can prove that it is [empty](foundation-core.empty-types.md). In other words, we
+interpret decidability via the
+[Curry-Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logic into type theory. A related concept is that a type is either
+[inhabited](foundation.inhabited-types.md) or empty, where inhabitedness of a
+type is expressed using the
+[propositional truncation](foundation.propositional-truncations.md).
 
 ## Definition
 

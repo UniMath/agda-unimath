@@ -263,8 +263,8 @@ module _
 
   preserves-add-inclusion-Subgroup-Ab :
     preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
-  preserves-add-inclusion-Subgroup-Ab =
-    preserves-mul-inclusion-Subgroup (group-Ab A) B
+  preserves-add-inclusion-Subgroup-Ab {x} {y} =
+    preserves-mul-inclusion-Subgroup (group-Ab A) B {x} {y}
 
   preserves-zero-inclusion-Subgroup-Ab :
     preserves-zero-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
@@ -276,8 +276,8 @@ module _
       ( ab-Subgroup-Ab A B)
       ( A)
       ( map-inclusion-Subgroup-Ab A B)
-  preserves-negatives-inclusion-Subgroup-Ab =
-    preserves-inverses-inclusion-Subgroup (group-Ab A) B
+  preserves-negatives-inclusion-Subgroup-Ab {x} =
+    preserves-inverses-inclusion-Subgroup (group-Ab A) B {x}
 
   hom-inclusion-Subgroup-Ab : hom-Ab (ab-Subgroup-Ab A B) A
   hom-inclusion-Subgroup-Ab = hom-inclusion-Subgroup (group-Ab A) B
@@ -460,10 +460,10 @@ module _
 #### The left equivalence relation obtained from a subgroup
 
 ```agda
-  left-eq-rel-congruence-Subgroup-Ab :
-    Equivalence-Relation l2 (type-Ab A)
-  left-eq-rel-congruence-Subgroup-Ab =
-    left-eq-rel-congruence-Normal-Subgroup
+  left-equivalence-relation-congruence-Subgroup-Ab :
+    equivalence-relation l2 (type-Ab A)
+  left-equivalence-relation-congruence-Subgroup-Ab =
+    left-equivalence-relation-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
@@ -521,16 +521,17 @@ module _
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  eq-rel-congruence-Subgroup-Ab : Equivalence-Relation l2 (type-Ab A)
-  eq-rel-congruence-Subgroup-Ab =
-    eq-rel-congruence-Normal-Subgroup
+  equivalence-relation-congruence-Subgroup-Ab :
+    equivalence-relation l2 (type-Ab A)
+  equivalence-relation-congruence-Subgroup-Ab =
+    equivalence-relation-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
   relate-same-elements-left-sim-congruence-Subgroup-Ab :
-    relate-same-elements-Equivalence-Relation
-      ( eq-rel-congruence-Subgroup-Ab)
-      ( left-eq-rel-congruence-Subgroup-Ab)
+    relate-same-elements-equivalence-relation
+      ( equivalence-relation-congruence-Subgroup-Ab)
+      ( left-equivalence-relation-congruence-Subgroup-Ab)
   relate-same-elements-left-sim-congruence-Subgroup-Ab =
     relate-same-elements-left-sim-congruence-Normal-Subgroup
       ( group-Ab A)
@@ -539,7 +540,7 @@ module _
   add-congruence-Subgroup-Ab :
     is-congruence-Group
       ( group-Ab A)
-      ( eq-rel-congruence-Subgroup-Ab)
+      ( equivalence-relation-congruence-Subgroup-Ab)
   add-congruence-Subgroup-Ab =
     mul-congruence-Normal-Subgroup
       ( group-Ab A)
@@ -646,7 +647,7 @@ module _
   is-section-subgroup-congruence-Ab :
     congruence-Subgroup-Ab A (subgroup-congruence-Ab A R) ＝ R
   is-section-subgroup-congruence-Ab =
-    eq-relate-same-elements-congruence-Ab A
+    equivalence-relationate-same-elements-congruence-Ab A
       ( congruence-Subgroup-Ab A (subgroup-congruence-Ab A R))
       ( R)
       ( relate-same-elements-congruence-subgroup-congruence-Ab)

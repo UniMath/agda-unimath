@@ -51,4 +51,4 @@ is-geometric-realization-reflecting-map-Undirected-Graph l G f =
 ## External links
 
 - [Geometric realization](https://ncatlab.org/nlab/show/geometric+realization)
-  at nlab
+  at $n$Lab

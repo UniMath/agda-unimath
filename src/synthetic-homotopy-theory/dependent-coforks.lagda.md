@@ -25,6 +25,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -75,10 +76,10 @@ module _
     Σ ( (b : B) → P (map-cofork f g e b))
       ( λ k →
         ( a : A) →
-          dependent-identification P
-            ( coherence-cofork f g e a)
-            ( k (f a))
-            ( k (g a)))
+        dependent-identification P
+          ( coherence-cofork f g e a)
+          ( k (f a))
+          ( k (g a)))
 
 module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
@@ -173,32 +174,23 @@ module _
   htpy-dependent-cofork-eq k .k refl = reflexive-htpy-dependent-cofork k
 
   abstract
-    is-contr-total-htpy-dependent-cofork :
+    is-torsorial-htpy-dependent-cofork :
       ( k : dependent-cofork f g e P) →
-      is-contr (Σ (dependent-cofork f g e P) (htpy-dependent-cofork f g P k))
-    is-contr-total-htpy-dependent-cofork k =
-      is-contr-total-Eq-structure
+      is-torsorial (htpy-dependent-cofork f g P k)
+    is-torsorial-htpy-dependent-cofork k =
+      is-torsorial-Eq-structure
         ( ev-pair (coherence-htpy-dependent-cofork f g P k))
-        ( is-contr-total-htpy (map-dependent-cofork f g P k))
+        ( is-torsorial-htpy (map-dependent-cofork f g P k))
         ( map-dependent-cofork f g P k , refl-htpy)
-        ( is-contr-is-equiv'
-          ( Σ ( (a : A) →
-                dependent-identification P
-                  ( coherence-cofork f g e a)
-                  ( map-dependent-cofork f g P k (f a))
-                  ( map-dependent-cofork f g P k (g a)))
-              ( λ K → coherence-dependent-cofork f g P k ~ K))
-          ( tot (λ K M → right-unit-htpy ∙h M))
-          ( is-equiv-tot-is-fiberwise-equiv
-            ( is-equiv-concat-htpy right-unit-htpy))
-          ( is-contr-total-htpy (coherence-dependent-cofork f g P k)))
+        ( is-torsorial-htpy
+          ( coherence-dependent-cofork f g P k ∙h refl-htpy))
 
     is-equiv-htpy-dependent-cofork-eq :
       ( k k' : dependent-cofork f g e P) →
       is-equiv (htpy-dependent-cofork-eq k k')
     is-equiv-htpy-dependent-cofork-eq k =
       fundamental-theorem-id
-        ( is-contr-total-htpy-dependent-cofork k)
+        ( is-torsorial-htpy-dependent-cofork k)
         ( htpy-dependent-cofork-eq k)
 
   eq-htpy-dependent-cofork :

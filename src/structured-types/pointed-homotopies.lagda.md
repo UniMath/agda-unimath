@@ -79,6 +79,8 @@ _~∗_ :
   pointed-Π A B → pointed-Π A B → UU (l1 ⊔ l2)
 _~∗_ {A = A} {B} = htpy-pointed-Π
 
+infix 6 _~∗_
+
 htpy-pointed-htpy :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
   (f g : pointed-Π A B) → f ~∗ g →

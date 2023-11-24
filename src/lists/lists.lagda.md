@@ -24,6 +24,7 @@ open import foundation.maybe
 open import foundation.negation
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
@@ -212,14 +213,14 @@ equiv-Eq-list :
 equiv-Eq-list l l' =
   pair (Eq-eq-list l l') (is-equiv-Eq-eq-list l l')
 
-is-contr-total-Eq-list :
+is-torsorial-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
-  is-contr (Σ (list A) (Eq-list l))
-is-contr-total-Eq-list {A = A} l =
+  is-torsorial (Eq-list l)
+is-torsorial-Eq-list {A = A} l =
   is-contr-equiv'
     ( Σ (list A) (Id l))
     ( equiv-tot (equiv-Eq-list l))
-    ( is-contr-total-path l)
+    ( is-torsorial-path l)
 
 is-trunc-Eq-list :
   (k : 𝕋) {l : Level} {A : UU l} → is-trunc (succ-𝕋 (succ-𝕋 k)) A →

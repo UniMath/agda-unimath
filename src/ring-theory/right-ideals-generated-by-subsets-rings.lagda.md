@@ -182,7 +182,7 @@ module _
 
   is-closed-under-addition-right-ideal-subset-Ring :
     is-closed-under-addition-subset-Ring R subset-right-ideal-subset-Ring
-  is-closed-under-addition-right-ideal-subset-Ring x y H K =
+  is-closed-under-addition-right-ideal-subset-Ring {x} {y} H K =
     apply-universal-property-trunc-Prop H
       ( subset-right-ideal-subset-Ring (add-Ring R x y))
       ( λ H' →
@@ -218,7 +218,7 @@ module _
 
   is-closed-under-negatives-right-ideal-subset-Ring :
     is-closed-under-negatives-subset-Ring R subset-right-ideal-subset-Ring
-  is-closed-under-negatives-right-ideal-subset-Ring x H =
+  is-closed-under-negatives-right-ideal-subset-Ring {x} H =
     tr
       ( type-Prop ∘ subset-right-ideal-subset-Ring)
       ( mul-neg-one-Ring' R x)
@@ -256,8 +256,6 @@ module _
   contains-right-formal-combinations-right-ideal-subset-Ring I H
     ( cons (pair (pair s K) r) c) =
     is-closed-under-addition-right-ideal-Ring R I
-      ( mul-Ring R s r)
-      ( ev-right-formal-combination-subset-Ring c)
       ( is-closed-under-right-multiplication-right-ideal-Ring R I s r (H s K))
       ( contains-right-formal-combinations-right-ideal-subset-Ring I H c)
 
@@ -307,7 +305,7 @@ module _
         ( H))
 
   right-ideal-subset-hom-large-poset-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Ring A))
       ( right-ideal-Ring-Large-Poset A)
@@ -339,7 +337,7 @@ module _
 
   right-ideal-subset-galois-connection-Ring :
     galois-connection-Large-Poset
-      ( _⊔_ l1) id
+      ( l1 ⊔_) (λ l → l)
       ( powerset-Large-Poset (type-Ring A))
       ( right-ideal-Ring-Large-Poset A)
   lower-adjoint-galois-connection-Large-Poset
@@ -518,7 +516,7 @@ module _
     contains-zero-right-ideal-Ring R I
   cases-forward-inclusion-idempotent-right-ideal-subset-Ring
     ( cons ((x , u) , y) l) =
-    is-closed-under-addition-right-ideal-Ring R I _ _
+    is-closed-under-addition-right-ideal-Ring R I
       ( is-closed-under-right-multiplication-right-ideal-Ring R I x y u)
       ( cases-forward-inclusion-idempotent-right-ideal-subset-Ring l)
 

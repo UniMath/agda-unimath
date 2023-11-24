@@ -30,8 +30,8 @@ open import order-theory.top-elements-large-posets
 
 ## Idea
 
-The types of propositions `Prop l` combined form a
-[large locale](order-theory.large-locales.md).
+The types of [propositions](foundation-core.propositions.md) `Prop l` combined
+form a [large locale](order-theory.large-locales.md).
 
 ## Definitions
 

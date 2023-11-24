@@ -16,6 +16,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -39,8 +40,17 @@ equiv-eq refl = id-equiv
 map-eq : {l : Level} {A : UU l} {B : UU l} → A ＝ B → A → B
 map-eq = map-equiv ∘ equiv-eq
 
-UNIVALENCE : {l : Level} (A B : UU l) → UU (lsuc l)
-UNIVALENCE A B = is-equiv (equiv-eq {A = A} {B = B})
+instance-univalence : {l : Level} (A B : UU l) → UU (lsuc l)
+instance-univalence A B = is-equiv (equiv-eq {A = A} {B = B})
+
+based-univalence-axiom : {l : Level} (A : UU l) → UU (lsuc l)
+based-univalence-axiom {l} A = (B : UU l) → instance-univalence A B
+
+univalence-axiom-Level : (l : Level) → UU (lsuc l)
+univalence-axiom-Level l = (A B : UU l) → instance-univalence A B
+
+univalence-axiom : UUω
+univalence-axiom = {l : Level} → univalence-axiom-Level l
 ```
 
 ## Properties
@@ -49,10 +59,10 @@ UNIVALENCE A B = is-equiv (equiv-eq {A = A} {B = B})
 
 ```agda
 abstract
-  is-contr-total-equiv-UNIVALENCE :
+  is-torsorial-equiv-based-univalence :
     {l : Level} (A : UU l) →
-    ((B : UU l) → UNIVALENCE A B) → is-contr (Σ (UU l) (λ X → A ≃ X))
-  is-contr-total-equiv-UNIVALENCE A UA =
+    based-univalence-axiom A → is-torsorial (λ (B : UU l) → A ≃ B)
+  is-torsorial-equiv-based-univalence A UA =
     fundamental-theorem-id' (λ B → equiv-eq) UA
 ```
 
@@ -60,10 +70,10 @@ abstract
 
 ```agda
 abstract
-  UNIVALENCE-is-contr-total-equiv :
+  based-univalence-is-torsorial-equiv :
     {l : Level} (A : UU l) →
-    is-contr (Σ (UU l) (λ X → A ≃ X)) → (B : UU l) → UNIVALENCE A B
-  UNIVALENCE-is-contr-total-equiv A c =
+    is-torsorial (λ (B : UU l) → A ≃ B) → based-univalence-axiom A
+  based-univalence-is-torsorial-equiv A c =
     fundamental-theorem-id c (λ B → equiv-eq)
 ```
 

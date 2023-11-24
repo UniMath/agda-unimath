@@ -36,6 +36,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -161,11 +162,11 @@ module _
         ( Eq-isolated-element-Prop d)
         ( cases-contraction-total-Eq-isolated-element d x (d x) e)
 
-    is-contr-total-Eq-isolated-element :
-      (d : is-isolated a) → is-contr (Σ A (Eq-isolated-element d))
-    pr1 (is-contr-total-Eq-isolated-element d) =
+    is-torsorial-Eq-isolated-element :
+      (d : is-isolated a) → is-torsorial (Eq-isolated-element d)
+    pr1 (is-torsorial-Eq-isolated-element d) =
       center-total-Eq-isolated-element d
-    pr2 (is-contr-total-Eq-isolated-element d) =
+    pr2 (is-torsorial-Eq-isolated-element d) =
       contraction-total-Eq-isolated-element d
 
   abstract
@@ -173,7 +174,7 @@ module _
       (d : is-isolated a) (x : A) → is-equiv (Eq-eq-isolated-element d {x})
     is-equiv-Eq-eq-isolated-element d =
       fundamental-theorem-id
-        ( is-contr-total-Eq-isolated-element d)
+        ( is-torsorial-Eq-isolated-element d)
         ( λ x → Eq-eq-isolated-element d {x})
 
   abstract

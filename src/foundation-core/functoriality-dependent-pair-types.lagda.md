@@ -314,7 +314,7 @@ module _
 
 equiv-Σ-equiv-base :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3) (e : A ≃ B) →
-  Σ A (C ∘ (map-equiv e)) ≃ Σ B C
+  Σ A (C ∘ map-equiv e) ≃ Σ B C
 pr1 (equiv-Σ-equiv-base C (pair f is-equiv-f)) = map-Σ-map-base f C
 pr2 (equiv-Σ-equiv-base C (pair f is-equiv-f)) =
   is-equiv-map-Σ-map-base f C is-equiv-f
@@ -330,10 +330,10 @@ module _
 
   abstract
     is-equiv-map-Σ :
-      (f : A → B) (g : (x : A) → C x → D (f x)) →
+      {f : A → B} {g : (x : A) → C x → D (f x)} →
       is-equiv f → is-fiberwise-equiv g → is-equiv (map-Σ D f g)
-    is-equiv-map-Σ f g is-equiv-f is-fiberwise-equiv-g =
-      is-equiv-comp-htpy
+    is-equiv-map-Σ {f} {g} is-equiv-f is-fiberwise-equiv-g =
+      is-equiv-left-map-triangle
         ( map-Σ D f g)
         ( map-Σ-map-base f D)
         ( tot g)
@@ -346,8 +346,6 @@ module _
   pr1 (equiv-Σ e g) = map-Σ D (map-equiv e) (λ x → map-equiv (g x))
   pr2 (equiv-Σ e g) =
     is-equiv-map-Σ
-      ( map-equiv e)
-      ( λ x → map-equiv (g x))
       ( is-equiv-map-equiv e)
       ( λ x → is-equiv-map-equiv (g x))
 
@@ -357,7 +355,7 @@ module _
       is-equiv f → is-equiv (map-Σ D f g) → is-fiberwise-equiv g
     is-fiberwise-equiv-is-equiv-map-Σ f g H K =
       is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-right-factor-htpy
+        ( is-equiv-top-map-triangle
           ( map-Σ D f g)
           ( map-Σ-map-base f D)
           ( tot g)

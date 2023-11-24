@@ -284,7 +284,7 @@ the `agda-unimath` library:
   need to sort them by hand.
 
 - The library doesn't use
-  [variables](https://agda.readthedocs.io/en/v2.6.3/language/generalization-of-declared-variables.html)
+  [variables](https://agda.readthedocs.io/en/latest/language/generalization-of-declared-variables.html)
   at the moment. All variables are declared either as parameters of an anonymous
   module or in the type specification of a construction.
 
@@ -447,6 +447,16 @@ the story. Here's how we handle indentation and line breaks in the
   operators.
 
 ## Coding practices we tend to avoid
+
+- Agda permits us to make quick definitions without specifying their types, but
+  we avoid making such untyped definitions. While the type of the entry might be
+  clear to you when you are writing the code, it puts a burden on the reader if
+  you omit them. It is also hugely beneficial if you can see the specification
+  of a certain entry by jumping to its definition. Furthermore, omitting
+  specifications of entries might make maintainance a bit more difficult,
+  because some name changes might still result in valid definitions, but with an
+  unintended specifications. Catching such mistakes becomes a bit harder when
+  you leave your entries untyped.
 
 - Using Unicode characters in names is entirely permissible, but we recommend
   restraint to maintain readability. Just a few well-placed symbols can often

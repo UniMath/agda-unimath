@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.sigma-closed-subuniverses
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
@@ -58,7 +59,7 @@ module _
 module _
   {l1 l2 l3 l5 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (X : UU l5)
@@ -81,7 +82,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)

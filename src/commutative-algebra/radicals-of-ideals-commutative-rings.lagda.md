@@ -106,7 +106,7 @@ module _
   is-closed-under-addition-radical-of-ideal-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
-  is-closed-under-addition-radical-of-ideal-Commutative-Ring x y H K =
+  is-closed-under-addition-radical-of-ideal-Commutative-Ring {x} {y} H K =
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (add-Commutative-Ring A x y))
       ( λ (n , p) →
@@ -117,7 +117,7 @@ module _
             intro-∃
               ( n +ℕ m)
               ( is-closed-under-eq-ideal-Commutative-Ring' A I
-                ( is-closed-under-addition-ideal-Commutative-Ring A I _ _
+                ( is-closed-under-addition-ideal-Commutative-Ring A I
                   ( is-closed-under-right-multiplication-ideal-Commutative-Ring
                     ( A)
                     ( I)
@@ -135,7 +135,7 @@ module _
   is-closed-under-negatives-radical-of-ideal-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
-  is-closed-under-negatives-radical-of-ideal-Commutative-Ring x H =
+  is-closed-under-negatives-radical-of-ideal-Commutative-Ring {x} H =
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (neg-Commutative-Ring A x))
       ( λ (n , p) →
@@ -238,7 +238,8 @@ module _
         ( H))
 
   radical-of-ideal-hom-large-poset-Commutative-Ring :
-    hom-set-Large-Poset id
+    hom-Large-Poset
+      ( λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
   map-hom-Large-Preorder
@@ -276,7 +277,7 @@ module _
     is-radical-of-ideal-radical-of-ideal-Commutative-Ring A I J
 
   radical-of-ideal-galois-connection-Commutative-Ring :
-    galois-connection-Large-Poset id id
+    galois-connection-Large-Poset (λ l → l) (λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
   lower-adjoint-galois-connection-Large-Poset

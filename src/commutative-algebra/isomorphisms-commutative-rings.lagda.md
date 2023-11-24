@@ -23,6 +23,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.isomorphisms-abelian-groups
@@ -171,7 +172,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-add-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring A) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring A} →
     map-iso-Commutative-Ring f (add-Commutative-Ring A x y) ＝
     add-Commutative-Ring B
       ( map-iso-Commutative-Ring f x)
@@ -182,7 +183,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-neg-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x : type-Commutative-Ring A) →
+    (f : iso-Commutative-Ring) {x : type-Commutative-Ring A} →
     map-iso-Commutative-Ring f (neg-Commutative-Ring A x) ＝
     neg-Commutative-Ring B (map-iso-Commutative-Ring f x)
   preserves-neg-iso-Commutative-Ring =
@@ -191,7 +192,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-mul-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring A) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring A} →
     map-iso-Commutative-Ring f (mul-Commutative-Ring A x y) ＝
     mul-Commutative-Ring B
       ( map-iso-Commutative-Ring f x)
@@ -242,7 +243,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-add-inv-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring B) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring B} →
     map-inv-iso-Commutative-Ring f (add-Commutative-Ring B x y) ＝
     add-Commutative-Ring A
       ( map-inv-iso-Commutative-Ring f x)
@@ -253,7 +254,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-neg-inv-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x : type-Commutative-Ring B) →
+    (f : iso-Commutative-Ring) {x : type-Commutative-Ring B} →
     map-inv-iso-Commutative-Ring f (neg-Commutative-Ring B x) ＝
     neg-Commutative-Ring A (map-inv-iso-Commutative-Ring f x)
   preserves-neg-inv-iso-Commutative-Ring =
@@ -262,7 +263,7 @@ module _
       ( ring-Commutative-Ring B)
 
   preserves-mul-inv-iso-Commutative-Ring :
-    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring B) →
+    (f : iso-Commutative-Ring) {x y : type-Commutative-Ring B} →
     map-inv-iso-Commutative-Ring f (mul-Commutative-Ring B x y) ＝
     mul-Commutative-Ring A
       ( map-inv-iso-Commutative-Ring f x)
@@ -353,7 +354,7 @@ module _
 
   iso-ab-iso-ab-Commutative-Ring :
     iso-ab-Commutative-Ring →
-    type-iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
+    iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
   iso-ab-iso-ab-Commutative-Ring =
     iso-ab-iso-ab-Ring
       ( ring-Commutative-Ring A)
@@ -376,7 +377,7 @@ module _
 
   iso-ab-iso-Commutative-Ring :
     iso-Commutative-Ring A B →
-    type-iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
+    iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
   iso-ab-iso-Commutative-Ring =
     iso-ab-iso-Ring
       ( ring-Commutative-Ring A)
@@ -398,11 +399,11 @@ module _
   where
 
   abstract
-    is-contr-total-iso-Commutative-Ring :
-      is-contr (Σ (Commutative-Ring l) (iso-Commutative-Ring A))
-    is-contr-total-iso-Commutative-Ring =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Ring (ring-Commutative-Ring A))
+    is-torsorial-iso-Commutative-Ring :
+      is-torsorial (λ (B : Commutative-Ring l) → iso-Commutative-Ring A B)
+    is-torsorial-iso-Commutative-Ring =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Ring (ring-Commutative-Ring A))
         ( is-prop-is-commutative-Ring)
         ( ring-Commutative-Ring A)
         ( id-iso-Ring (ring-Commutative-Ring A))
@@ -412,7 +413,7 @@ module _
     (B : Commutative-Ring l) → is-equiv (iso-eq-Commutative-Ring A B)
   is-equiv-iso-eq-Commutative-Ring =
     fundamental-theorem-id
-      ( is-contr-total-iso-Commutative-Ring)
+      ( is-torsorial-iso-Commutative-Ring)
       ( iso-eq-Commutative-Ring A)
 
   extensionality-Commutative-Ring :

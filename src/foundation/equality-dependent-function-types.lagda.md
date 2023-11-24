@@ -9,14 +9,15 @@ module foundation.equality-dependent-function-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.implicit-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -30,28 +31,27 @@ characterize the identity types of `(x : A) → B x`.
 ### Contractibility
 
 ```agda
-is-contr-total-Eq-Π :
-  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
-  ( is-contr-total-C : (x : A) → is-contr (Σ (B x) (C x))) →
-  is-contr (Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
-is-contr-total-Eq-Π {A = A} {B} C is-contr-total-C =
-  is-contr-equiv'
-    ( (x : A) → Σ (B x) (C x))
-    ( distributive-Π-Σ)
-    ( is-contr-Π is-contr-total-C)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  (is-torsorial-C : (x : A) → is-torsorial (C x))
+  where
 
-is-contr-total-Eq-implicit-Π :
-  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
-  ( is-contr-total-C : (x : A) → is-contr (Σ (B x) (C x))) →
-  is-contr (Σ ({x : A} → B x) (λ g → {x : A} → C x (g {x})))
-is-contr-total-Eq-implicit-Π {A = A} {B} C is-contr-total-C =
-  is-contr-equiv
-    ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
-    ( equiv-Σ
-      ( λ g → (x : A) → C x (g x))
-      ( equiv-explicit-implicit-Π)
-      ( λ _ → equiv-explicit-implicit-Π))
-    ( is-contr-total-Eq-Π C is-contr-total-C)
+  is-torsorial-Eq-Π : is-torsorial (λ g → (x : A) → C x (g x))
+  is-torsorial-Eq-Π =
+    is-contr-equiv'
+      ( (x : A) → Σ (B x) (C x))
+      ( distributive-Π-Σ)
+      ( is-contr-Π is-torsorial-C)
+
+  is-torsorial-Eq-implicit-Π : is-torsorial (λ g → {x : A} → C x (g {x}))
+  is-torsorial-Eq-implicit-Π =
+    is-contr-equiv
+      ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
+      ( equiv-Σ
+        ( λ g → (x : A) → C x (g x))
+        ( equiv-explicit-implicit-Π)
+        ( λ _ → equiv-explicit-implicit-Π))
+      ( is-torsorial-Eq-Π)
 ```
 
 ### Extensionality
@@ -74,7 +74,7 @@ module _
       (g : (x : A) → B x) → is-equiv (map-extensionality-Π e g)
     is-equiv-map-extensionality-Π e =
       fundamental-theorem-id
-        ( is-contr-total-Eq-Π Eq-B
+        ( is-torsorial-Eq-Π Eq-B
           ( λ x →
             fundamental-theorem-id'
               ( λ y → map-equiv (e x y))

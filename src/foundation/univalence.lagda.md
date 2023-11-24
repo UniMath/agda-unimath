@@ -22,6 +22,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -39,7 +40,8 @@ In this file we postulate the univalence axiom. Its statement is defined in
 ## Postulate
 
 ```agda
-postulate univalence : {l : Level} (A B : UU l) → UNIVALENCE A B
+postulate
+  univalence : univalence-axiom
 ```
 
 ## Properties
@@ -81,20 +83,32 @@ module _
     pr2 (equiv-eq-equiv A B) = is-equiv-eq-equiv A B
 ```
 
+### The total space of all equivalences out of a type or into a type is contractible
+
+Type families of which the [total space](foundation.dependent-pair-types.md) is
+[contractible](foundation-core.contractible-types.md) are also called
+[torsorial](foundation-core.torsorial-type-families.md). This terminology
+originates from higher group theory, where a
+[higher group action](higher-group-theory.higher-group-actions.md) is torsorial
+if its type of [orbits](higher-group-theory.orbits-higher-group-actions.md),
+i.e., its total space, is contractible. Our claim that the total space of all
+equivalences out of a type `A` is contractible can therefore be stated more
+succinctly as the claim that the family of equivalences out of `A` is torsorial.
+
 ```agda
   abstract
-    is-contr-total-equiv :
-      (A : UU l) → is-contr (Σ (UU l) (λ X → A ≃ X))
-    is-contr-total-equiv A =
-      is-contr-total-equiv-UNIVALENCE A (univalence A)
+    is-torsorial-equiv :
+      (A : UU l) → is-torsorial (λ (X : UU l) → A ≃ X)
+    is-torsorial-equiv A =
+      is-torsorial-equiv-based-univalence A (univalence A)
 
-    is-contr-total-equiv' :
-      (A : UU l) → is-contr (Σ (UU l) (λ X → X ≃ A))
-    is-contr-total-equiv' A =
+    is-torsorial-equiv' :
+      (A : UU l) → is-torsorial (λ (X : UU l) → X ≃ A)
+    is-torsorial-equiv' A =
       is-contr-equiv'
         ( Σ (UU l) (λ X → X ＝ A))
         ( equiv-tot (λ X → equiv-univalence))
-        ( is-contr-total-path' A)
+        ( is-torsorial-path' A)
 ```
 
 ### Univalence for type families
@@ -114,20 +128,20 @@ equiv-eq-fam :
 equiv-eq-fam B .B refl = id-equiv-fam B
 
 abstract
-  is-contr-total-equiv-fam :
+  is-torsorial-equiv-fam :
     {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
-    is-contr (Σ (A → UU l2) (equiv-fam B))
-  is-contr-total-equiv-fam B =
-    is-contr-total-Eq-Π
+    is-torsorial (λ (C : A → UU l2) → equiv-fam B C)
+  is-torsorial-equiv-fam B =
+    is-torsorial-Eq-Π
       ( λ x X → (B x) ≃ X)
-      ( λ x → is-contr-total-equiv (B x))
+      ( λ x → is-torsorial-equiv (B x))
 
 abstract
   is-equiv-equiv-eq-fam :
     {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
   is-equiv-equiv-eq-fam B =
     fundamental-theorem-id
-      ( is-contr-total-equiv-fam B)
+      ( is-torsorial-equiv-fam B)
       ( equiv-eq-fam B)
 
 extensionality-fam :
@@ -183,8 +197,8 @@ commutativity-inv-eq-equiv A B f =
     ( equiv-univalence)
     ( ( inv (commutativity-inv-equiv-eq A B (eq-equiv A B f))) ∙
       ( ( ap
-        ( λ e → (inv-equiv (map-equiv e f)))
-        ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( λ e → (inv-equiv (map-equiv e f)))
+          ( right-inverse-law-equiv equiv-univalence)) ∙
         ( ap
           ( λ e → map-equiv e (inv-equiv f))
           ( inv (right-inverse-law-equiv equiv-univalence)))))

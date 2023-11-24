@@ -23,25 +23,25 @@ open import group-theory.equivalences-concrete-group-actions
 ## Definition
 
 ```agda
-mere-equiv-action-Concrete-Group-Prop :
+mere-equiv-prop-action-Concrete-Group :
   {l1 l2 l3 : Level} (G : Concrete-Group l1) →
   action-Concrete-Group l2 G → action-Concrete-Group l3 G →
   Prop (l1 ⊔ l2 ⊔ l3)
-mere-equiv-action-Concrete-Group-Prop G X Y =
+mere-equiv-prop-action-Concrete-Group G X Y =
   trunc-Prop (equiv-action-Concrete-Group G X Y)
 
 mere-equiv-action-Concrete-Group :
   {l1 l2 l3 : Level} (G : Concrete-Group l1) →
   action-Concrete-Group l2 G → action-Concrete-Group l3 G → UU (l1 ⊔ l2 ⊔ l3)
 mere-equiv-action-Concrete-Group G X Y =
-  type-Prop (mere-equiv-action-Concrete-Group-Prop G X Y)
+  type-Prop (mere-equiv-prop-action-Concrete-Group G X Y)
 
 is-prop-mere-equiv-action-Concrete-Group :
   {l1 l2 l3 : Level} (G : Concrete-Group l1)
   (X : action-Concrete-Group l2 G) (Y : action-Concrete-Group l3 G) →
   is-prop (mere-equiv-action-Concrete-Group G X Y)
 is-prop-mere-equiv-action-Concrete-Group G X Y =
-  is-prop-type-Prop (mere-equiv-action-Concrete-Group-Prop G X Y)
+  is-prop-type-Prop (mere-equiv-prop-action-Concrete-Group G X Y)
 
 refl-mere-equiv-action-Concrete-Group :
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G) →

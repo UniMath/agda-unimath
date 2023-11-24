@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.implicit-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
@@ -25,6 +26,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.path-split-maps
 open import foundation-core.transport-along-identifications
 ```
@@ -32,40 +34,6 @@ open import foundation-core.transport-along-identifications
 </details>
 
 ## Properties
-
-### Dependent function types taking implicit arguments are equivalent to dependent function types taking explicit arguments
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  implicit-explicit-Π : ((x : A) → B x) → {x : A} → B x
-  implicit-explicit-Π f {x} = f x
-
-  explicit-implicit-Π : ({x : A} → B x) → (x : A) → B x
-  explicit-implicit-Π f x = f {x}
-
-  is-equiv-implicit-explicit-Π : is-equiv implicit-explicit-Π
-  pr1 (pr1 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
-  pr2 (pr1 is-equiv-implicit-explicit-Π) = refl-htpy
-  pr1 (pr2 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
-  pr2 (pr2 is-equiv-implicit-explicit-Π) = refl-htpy
-
-  is-equiv-explicit-implicit-Π : is-equiv explicit-implicit-Π
-  pr1 (pr1 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
-  pr2 (pr1 is-equiv-explicit-implicit-Π) = refl-htpy
-  pr1 (pr2 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
-  pr2 (pr2 is-equiv-explicit-implicit-Π) = refl-htpy
-
-  equiv-implicit-explicit-Π : ((x : A) → B x) ≃ ({x : A} → B x)
-  pr1 equiv-implicit-explicit-Π = implicit-explicit-Π
-  pr2 equiv-implicit-explicit-Π = is-equiv-implicit-explicit-Π
-
-  equiv-explicit-implicit-Π : ({x : A} → B x) ≃ ((x : A) → B x)
-  pr1 equiv-explicit-implicit-Π = explicit-implicit-Π
-  pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
-```
 
 ### The operation `map-Π` preserves homotopies
 
@@ -138,6 +106,24 @@ pr2 (equiv-Π-equiv-family e) =
     ( λ i → is-equiv-map-equiv (e i))
 ```
 
+##### Computing the inverse of `equiv-Π-equiv-family`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  compute-inv-equiv-Π-equiv-family :
+    (e : (x : A) → B x ≃ C x) →
+    ( map-inv-equiv (equiv-Π-equiv-family e)) ~
+    ( map-equiv (equiv-Π-equiv-family λ x → (inv-equiv (e x))))
+  compute-inv-equiv-Π-equiv-family e f =
+    is-injective-map-equiv
+      ( equiv-Π-equiv-family e)
+      ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
+        ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
+```
+
 We also record a version for dependent function types with implicit arguments.
 
 ```agda
@@ -184,7 +170,7 @@ abstract
     is-coherently-invertible f →
     (C : B → UU l3) → is-equiv (precomp-Π f C)
   is-equiv-precomp-Π-is-coherently-invertible f
-    ( pair g (pair is-section-g (pair is-retraction-g coh))) C =
+    ( g , is-section-g , is-retraction-g , coh) C =
     is-equiv-is-invertible
       (λ s y → tr C (is-section-g y) (s (g y)))
       ( λ s → eq-htpy (λ x →

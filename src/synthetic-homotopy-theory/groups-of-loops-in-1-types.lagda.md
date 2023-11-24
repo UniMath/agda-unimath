@@ -23,6 +23,14 @@ open import synthetic-homotopy-theory.loop-spaces
 
 </details>
 
+## Idea
+
+The [loop space](synthetic-homotopy-theory.loop-spaces.md) of any
+[pointed](structured-types.pointed-types.md) [1-type](foundation.1-types.md) is
+a [group](group-theory.groups.md).
+
+## Definitions
+
 ```agda
 module _
   {l : Level} (A : Pointed-Type l)

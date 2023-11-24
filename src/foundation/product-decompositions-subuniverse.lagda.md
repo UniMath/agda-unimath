@@ -256,7 +256,7 @@ module _
               ( commutative-prod)
               ( inclusion-subuniverse P X)) ∘e
             ( ( left-unit-law-Σ-is-contr
-                ( is-contr-total-equiv-subuniverse'
+                ( is-torsorial-equiv-subuniverse'
                   ( P)
                   ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                       inclusion-subuniverse P (pr2 (pr2 x))) ,
@@ -330,7 +330,7 @@ module _
     ( ( equiv-tot
         ( λ x →
           left-unit-law-Σ-is-contr
-            ( is-contr-total-equiv-subuniverse'
+            ( is-torsorial-equiv-subuniverse'
               ( P)
               ( ( inclusion-subuniverse P (pr1 (pr2 x)) ×
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
