@@ -15,6 +15,8 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.multivariable-sections
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.retractions
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
