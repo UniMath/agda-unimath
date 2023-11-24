@@ -9,6 +9,7 @@ module foundation.epimorphisms-with-respect-to-truncated-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.connected-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.function-extensionality
@@ -309,6 +310,34 @@ module _
               ( e)
               ( X))
             ( g)))
+```
+
+### A map is a `k`-epimorphism if and only if its codiagonal is `k`-connected
+
+This strengthens the above result about the codiagonal being a `k`-equivalence.
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-epimorphism-is-connected-codiagonal-map-Truncated-Type :
+    is-connected-map k (codiagonal-map f) → is-epimorphism-Truncated-Type k f
+  is-epimorphism-is-connected-codiagonal-map-Truncated-Type c =
+    is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type k f
+      ( is-truncation-equivalence-is-connected-map (codiagonal-map f) c)
+
+  is-connected-codiagonal-map-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f → is-connected-map k (codiagonal-map f)
+  is-connected-codiagonal-map-is-epimorphism-Truncated-Type e =
+    is-connected-map-is-truncation-equivalence-section
+      ( codiagonal-map f)
+      ( k)
+      ( inl-pushout f f , compute-inl-codiagonal-map f)
+      ( is-truncation-equivalence-codiagonal-map-is-epimorphism-Truncated-Type
+        ( k)
+        ( f)
+        ( e))
 ```
 
 ## See also
