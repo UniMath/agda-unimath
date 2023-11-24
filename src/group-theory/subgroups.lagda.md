@@ -18,6 +18,7 @@ open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
@@ -119,8 +120,7 @@ module _
 ### The type of all subgroups of a group
 
 ```agda
-Subgroup :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
+Subgroup : (l : Level) {l1 : Level} (G : Group l1) → UU (lsuc l ⊔ l1)
 Subgroup l G = type-subtype (is-subgroup-prop-subset-Group {l2 = l} G)
 
 module _
@@ -718,4 +718,21 @@ module _
   pr1 (pr2 subgroup-Prop) = contains-unit-subgroup-Prop
   pr1 (pr2 (pr2 subgroup-Prop)) = is-closed-under-multiplication-subgroup-Prop
   pr2 (pr2 (pr2 subgroup-Prop)) = is-closed-under-inverses-subgroup-Prop
+
+  group-subgroup-Prop : Group (l1 ⊔ l2)
+  group-subgroup-Prop = group-Subgroup G subgroup-Prop
 ```
+
+## See also
+
+- [Monomorphisms in the category of groups](group-theory.monomorphisms-groups.md)
+- [Normal subgroups](group-theory.normal-subgroups.md)
+- [Submonoids](group-theory.submonoids.md)
+
+## External links
+
+- [Subgroups](https://1lab.dev/Algebra.Group.Subgroup.html) at 1lab
+- [subgroup](https://ncatlab.org/nlab/show/subgroup) at $n$Lab
+- [Subgroup](https://en.wikipedia.org/wiki/Subgroup) at Wikipedia
+- [Subgroup](https://mathworld.wolfram.com/Subgroup.html) at Wolfram MathWorld
+- [subgroup](https://www.wikidata.org/wiki/Q466109) at Wikidata

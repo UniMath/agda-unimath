@@ -11,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -97,37 +98,24 @@ module _
   (hom-set : A → A → Set l2)
   (comp-hom : composition-operation-binary-family-Set hom-set)
   where
-
-  is-associative-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
-  is-associative-prop-composition-operation-binary-family-Set =
-    Π-Prop' A
-    ( λ x →
-      Π-Prop' A
-      ( λ y →
-        Π-Prop' A
-        ( λ z →
-          Π-Prop' A
-          ( λ w →
-            Π-Prop
-            ( type-Set (hom-set z w))
-            ( λ h →
-              Π-Prop
-              ( type-Set (hom-set y z))
-              ( λ g →
-                Π-Prop
-                ( type-Set (hom-set x y))
-                ( λ f →
-                  Id-Prop
-                    ( hom-set x w)
-                    ( comp-hom (comp-hom h g) f)
-                    ( comp-hom h (comp-hom g f)))))))))
-
   is-prop-is-associative-composition-operation-binary-family-Set :
     is-prop
       ( is-associative-composition-operation-binary-family-Set hom-set comp-hom)
   is-prop-is-associative-composition-operation-binary-family-Set =
-    is-prop-type-Prop
-      is-associative-prop-composition-operation-binary-family-Set
+    is-prop-iterated-implicit-Π 4
+      ( λ x y z w →
+        is-prop-iterated-Π 3
+          ( λ h g f →
+            is-set-type-Set
+              ( hom-set x w)
+              ( comp-hom (comp-hom h g) f)
+              ( comp-hom h (comp-hom g f))))
+
+  is-associative-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
+  pr1 is-associative-prop-composition-operation-binary-family-Set =
+    is-associative-composition-operation-binary-family-Set hom-set comp-hom
+  pr2 is-associative-prop-composition-operation-binary-family-Set =
+    is-prop-is-associative-composition-operation-binary-family-Set
 ```
 
 ### Being unital is a property of composition operations in binary families of sets

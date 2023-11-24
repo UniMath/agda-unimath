@@ -105,9 +105,12 @@ module _
   abstract
     fundamental-theorem-id-is-identity-system :
       is-identity-system B a b →
-      (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
-    fundamental-theorem-id-is-identity-system H f =
-      fundamental-theorem-id
-        ( is-torsorial-is-identity-system H)
-        ( f)
+      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
+    fundamental-theorem-id-is-identity-system H =
+      fundamental-theorem-id (is-torsorial-is-identity-system H)
 ```
+
+## External links
+
+- [Identity systems](https://1lab.dev/1Lab.Path.IdentitySystem.html) at 1lab
+- [identity system](https://ncatlab.org/nlab/show/identity+system) at $n$Lab
