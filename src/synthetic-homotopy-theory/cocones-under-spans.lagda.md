@@ -8,23 +8,23 @@ module synthetic-homotopy-theory.cocones-under-spans where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
-open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
 
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.contractible-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

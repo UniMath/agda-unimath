@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
-open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.precomposition-functions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

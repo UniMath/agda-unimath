@@ -10,7 +10,6 @@ module species.products-cauchy-series-species-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.global-subuniverses
 open import foundation.subuniverses

@@ -7,14 +7,12 @@ module synthetic-homotopy-theory.codiagonals-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -23,7 +21,6 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.universal-property-pushouts
-open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
 </details>

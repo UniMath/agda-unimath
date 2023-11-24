@@ -10,7 +10,6 @@ module synthetic-homotopy-theory.double-loop-spaces where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
 

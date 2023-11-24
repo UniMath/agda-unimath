@@ -22,8 +22,8 @@ open import synthetic-homotopy-theory.free-loops
 ## Idea
 
 [Descent data for the circle](synthetic-homotopy-theory.descent-circle.md) for a
-[constant type family](foundation.constant-type-families.md) is simply the type
-it evaluates to, together with the identity.
+[constant type family](foundation.constant-type-families.md) is the type it
+evaluates to, together with the identity.
 
 ## Definitions
 

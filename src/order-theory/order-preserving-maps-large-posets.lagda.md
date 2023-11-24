@@ -141,8 +141,7 @@ module _
 
 Given two order preserving maps `f g : hom-Large-Poset γ P Q` with the same
 universe level reindexing `γ`, a **homotopy of order preserving maps** from `f`
-to `g` is simply a pointwise identification of the underlying maps of `f` and
-`g`.
+to `g` is a pointwise identification of the underlying maps of `f` and `g`.
 
 ```agda
 module _

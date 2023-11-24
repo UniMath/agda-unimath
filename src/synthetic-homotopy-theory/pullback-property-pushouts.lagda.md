@@ -11,6 +11,7 @@ open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.universe-levels
 

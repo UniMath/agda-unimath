@@ -10,8 +10,6 @@ module category-theory.maps-categories where
 open import category-theory.categories
 open import category-theory.maps-precategories
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types

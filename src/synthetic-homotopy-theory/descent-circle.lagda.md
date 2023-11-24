@@ -13,26 +13,18 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import structured-types.equivalences-types-equipped-with-automorphisms
-open import structured-types.morphisms-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-automorphisms
 
 open import synthetic-homotopy-theory.free-loops

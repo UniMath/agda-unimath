@@ -11,11 +11,13 @@ open import foundation-core.whiskering-homotopies public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-functions
 ```
 
 </details>
@@ -85,8 +87,7 @@ module _
   where
 
   compute-eq-htpy-htpy-eq-left-whisk :
-    ( p : f ＝ g) →
-    eq-htpy ( h ·l (htpy-eq p)) ＝ ap (postcomp A h) p
+    ( p : f ＝ g) → eq-htpy (h ·l (htpy-eq p)) ＝ ap (postcomp A h) p
   compute-eq-htpy-htpy-eq-left-whisk refl =
     eq-htpy-refl-htpy (h ∘ f)
 

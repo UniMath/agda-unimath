@@ -11,8 +11,6 @@ open import category-theory.functors-large-categories
 open import category-theory.large-categories
 open import category-theory.natural-transformations-functors-large-precategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.identity-types
 open import foundation.universe-levels
 ```
 

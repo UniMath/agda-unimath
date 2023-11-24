@@ -13,12 +13,14 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
+open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-function-types
@@ -33,6 +35,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families

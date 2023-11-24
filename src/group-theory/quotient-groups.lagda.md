@@ -16,20 +16,15 @@ open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-quotients
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
-open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 

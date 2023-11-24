@@ -9,10 +9,8 @@ module synthetic-homotopy-theory.dependent-coforks where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.codiagonal-maps-of-types
 open import foundation.commuting-triangles-of-maps
 open import foundation.constant-type-families
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
@@ -28,7 +26,6 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-spans

@@ -10,13 +10,13 @@ module foundation.universal-property-unit-type where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
+open import foundation-core.precomposition-functions
 ```
 
 </details>
@@ -73,16 +73,17 @@ abstract
 abstract
   is-equiv-point-universal-property-unit :
     {l1 : Level} (X : UU l1) (x : X) →
-    ((l2 : Level) (Y : UU l2) → is-equiv (λ (f : X → Y) → f x)) →
+    ({l2 : Level} (Y : UU l2) → is-equiv (λ (f : X → Y) → f x)) →
     is-equiv (point x)
   is-equiv-point-universal-property-unit X x H =
     is-equiv-is-equiv-precomp
       ( point x)
-      ( λ l Y → is-equiv-right-factor
-        ( ev-star' Y)
-        ( precomp (point x) Y)
-        ( universal-property-unit Y)
-        ( H _ Y))
+      ( λ Y →
+        is-equiv-right-factor
+          ( ev-star' Y)
+          ( precomp (point x) Y)
+          ( universal-property-unit Y)
+          ( H Y))
 
 abstract
   universal-property-unit-is-equiv-point :

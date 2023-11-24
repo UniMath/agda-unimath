@@ -14,7 +14,6 @@ open import category-theory.large-precategories
 
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.sets

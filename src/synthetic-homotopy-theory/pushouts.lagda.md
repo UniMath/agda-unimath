@@ -163,8 +163,7 @@ module _
     ( f)
     ( g)
     ( cocone-pushout f g)
-    ( λ l → up-pushout f g)
-    ( l4)
+    ( up-pushout f g)
 ```
 
 ### Computation with the cogap map

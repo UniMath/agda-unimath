@@ -22,6 +22,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.precomposition-functions
 open import foundation-core.sets
 open import foundation-core.whiskering-homotopies
 ```

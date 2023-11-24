@@ -17,19 +17,21 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.identity-types
+open import foundation.precomposition-functions-into-subuniverses
 open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.surjective-maps
 open import foundation.truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-truncation
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
+open import foundation-core.precomposition-functions
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
