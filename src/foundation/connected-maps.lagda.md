@@ -187,6 +187,25 @@ module _
 
 ## Properties
 
+### All maps are `(-2)`-connected
+
+```agda
+is-neg-two-connected-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-connected-map neg-two-𝕋 f
+is-neg-two-connected-map f b = is-neg-two-connected (fiber f b)
+```
+
+### Equivalences are `k`-connected for any `k`
+
+```agda
+is-connected-map-is-equiv :
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-equiv f → is-connected-map k f
+is-connected-map-is-equiv {k = k} f e b =
+  is-connected-is-contr k ( is-contr-map-is-equiv e b)
+```
+
 ### Dependent universal property for connected maps
 
 ```agda
