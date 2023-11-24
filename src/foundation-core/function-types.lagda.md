@@ -74,7 +74,7 @@ map-Π' α f = map-Π (f ∘ α)
 
 ## See also
 
-- [Postcomposition](foundation.postcomposition.md)
+- [Postcomposition](foundation.postcomposition-functions.md)
 - [Precomposition](foundation.precomposition-functions.md)
 
 ### Table of files about function types, composition, and equivalences

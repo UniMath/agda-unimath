@@ -19,7 +19,7 @@
 | Functoriality of function types (foundation-core)           | [`foundation-core.functoriality-function-types`](foundation-core.functoriality-function-types.md)                     |
 | Implicit function types                                     | [`foundation.implicit-function-types`](foundation.implicit-function-types.md)                                         |
 | Iterating functions                                         | [`foundation.iterating-functions`](foundation.iterating-functions.md)                                                 |
-| Postcomposition                                             | [`foundation.postcomposition`](foundation.postcomposition.md)                                                         |
+| Postcomposition                                             | [`foundation.postcomposition`](foundation.postcomposition-functions.md)                                               |
 | Precomposition of dependent functions                       | [`foundation.precomposition-dependent-functions`](foundation.precomposition-dependent-functions.md)                   |
 | Precomposition of dependent functions (foundation-core)     | [`foundation-core.precomposition-dependent-functions`](foundation-core.precomposition-dependent-functions.md)         |
 | Precomposition of functions                                 | [`foundation.precomposition-functions`](foundation.precomposition-functions.md)                                       |
