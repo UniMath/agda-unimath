@@ -343,7 +343,7 @@ we can compose both vertically and horizontally to get the following cocone:
    A' ---> X
 ```
 
-Notice that the triple (i,j,k) is really a morphism of spans. So the resulting
+Notice that the triple `(i,j,k)` is really a morphism of spans. So the resulting
 cocone arises as a composition of the original cocone with this morphism of
 spans.
 
@@ -364,4 +364,18 @@ comp-cocone-hom-span f g f' g' i j k c coh-l coh-r =
     ( f')
     ( (g ∘ k , j , coh-r))
     ( cocone-comp-horizontal f' k g (i , f , coh-l) c)
+```
+
+### The diagonal cocone on a span of identical maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
+  where
+
+  diagonal-into-cocone :
+    (B → X) → cocone f f X
+  pr1 (diagonal-into-cocone g) = g
+  pr1 (pr2 (diagonal-into-cocone g)) = g
+  pr2 (pr2 (diagonal-into-cocone g)) = refl-htpy
 ```

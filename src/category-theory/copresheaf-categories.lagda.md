@@ -16,6 +16,7 @@ open import category-theory.precategories
 open import category-theory.precategory-of-functors-from-small-to-large-precategories
 
 open import foundation.category-of-sets
+open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -65,34 +66,93 @@ module _
     copresheaf-Large-Precategory
   is-large-category-Large-Category copresheaf-Large-Category =
     is-large-category-copresheaf-Large-Category
-```
 
-We record the components of the large category of copresheaves on a precategory.
-
-```agda
+  obj-copresheaf-Large-Category : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
   obj-copresheaf-Large-Category =
     obj-Large-Precategory copresheaf-Large-Precategory
 
+  hom-set-copresheaf-Large-Category :
+    {l3 l4 : Level}
+    (X : obj-copresheaf-Large-Category l3)
+    (Y : obj-copresheaf-Large-Category l4) → Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-set-copresheaf-Large-Category =
     hom-set-Large-Precategory copresheaf-Large-Precategory
 
+  hom-copresheaf-Large-Category :
+    {l3 l4 : Level}
+    (X : obj-copresheaf-Large-Category l3)
+    (Y : obj-copresheaf-Large-Category l4) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-copresheaf-Large-Category =
     hom-Large-Precategory copresheaf-Large-Precategory
 
-  comp-hom-copresheaf-Large-Category =
-    comp-hom-Large-Precategory copresheaf-Large-Precategory
+  comp-hom-copresheaf-Large-Category :
+    {l3 l4 l5 : Level}
+    (X : obj-copresheaf-Large-Category l3)
+    (Y : obj-copresheaf-Large-Category l4)
+    (Z : obj-copresheaf-Large-Category l5) →
+    hom-copresheaf-Large-Category Y Z → hom-copresheaf-Large-Category X Y →
+    hom-copresheaf-Large-Category X Z
+  comp-hom-copresheaf-Large-Category X Y Z =
+    comp-hom-Large-Precategory copresheaf-Large-Precategory {X = X} {Y} {Z}
 
-  id-hom-copresheaf-Large-Category =
-    id-hom-Large-Precategory copresheaf-Large-Precategory
+  id-hom-copresheaf-Large-Category :
+    {l3 : Level} (X : obj-copresheaf-Large-Category l3) →
+    hom-copresheaf-Large-Category X X
+  id-hom-copresheaf-Large-Category X =
+    id-hom-Large-Precategory copresheaf-Large-Precategory {X = X}
 
-  associative-comp-hom-copresheaf-Large-Category =
-    associative-comp-hom-Large-Precategory copresheaf-Large-Precategory
+  associative-comp-hom-copresheaf-Large-Category :
+    {l3 l4 l5 l6 : Level}
+    (X : obj-copresheaf-Large-Category l3)
+    (Y : obj-copresheaf-Large-Category l4)
+    (Z : obj-copresheaf-Large-Category l5)
+    (W : obj-copresheaf-Large-Category l6)
+    (h : hom-copresheaf-Large-Category Z W)
+    (g : hom-copresheaf-Large-Category Y Z)
+    (f : hom-copresheaf-Large-Category X Y) →
+    comp-hom-copresheaf-Large-Category X Y W
+      ( comp-hom-copresheaf-Large-Category Y Z W h g)
+      ( f) ＝
+    comp-hom-copresheaf-Large-Category X Z W
+      ( h)
+      ( comp-hom-copresheaf-Large-Category X Y Z g f)
+  associative-comp-hom-copresheaf-Large-Category X Y Z W =
+    associative-comp-hom-Large-Precategory
+      ( copresheaf-Large-Precategory)
+      { X = X}
+      { Y}
+      { Z}
+      { W}
 
-  left-unit-law-comp-hom-copresheaf-Large-Category =
-    left-unit-law-comp-hom-Large-Precategory copresheaf-Large-Precategory
+  left-unit-law-comp-hom-copresheaf-Large-Category :
+    {l3 l4 : Level}
+    (X : obj-copresheaf-Large-Category l3)
+    (Y : obj-copresheaf-Large-Category l4)
+    (f : hom-copresheaf-Large-Category X Y) →
+    comp-hom-copresheaf-Large-Category X Y Y
+      ( id-hom-copresheaf-Large-Category Y)
+      ( f) ＝
+    f
+  left-unit-law-comp-hom-copresheaf-Large-Category X Y =
+    left-unit-law-comp-hom-Large-Precategory
+      ( copresheaf-Large-Precategory)
+      { X = X}
+      { Y}
 
-  right-unit-law-comp-hom-copresheaf-Large-Category =
-    right-unit-law-comp-hom-Large-Precategory copresheaf-Large-Precategory
+  right-unit-law-comp-hom-copresheaf-Large-Category :
+    {l3 l4 : Level}
+    (X : obj-copresheaf-Large-Category l3)
+    (Y : obj-copresheaf-Large-Category l4)
+    (f : hom-copresheaf-Large-Category X Y) →
+    comp-hom-copresheaf-Large-Category X X Y
+      ( f)
+      ( id-hom-copresheaf-Large-Category X) ＝
+    f
+  right-unit-law-comp-hom-copresheaf-Large-Category X Y =
+    right-unit-law-comp-hom-Large-Precategory
+      ( copresheaf-Large-Precategory)
+      { X = X}
+      { Y}
 ```
 
 ### The category of small copresheaves on a precategory
