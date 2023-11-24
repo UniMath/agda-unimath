@@ -49,7 +49,7 @@ adjoint** to `F`, and write this as `F ⊣ G`.
 
 **Note:** The direction of the equivalence `ϕ X Y` is chosen in such a way that
 it often coincides with the direction of the natural map. For example, in the
-[abelianization adjunction](group-theory.abelianization.md), the natural
+[abelianization adjunction](group-theory.abelianization-groups), the natural
 candidate for an equivalence is given by precomposition
 
 ```text
