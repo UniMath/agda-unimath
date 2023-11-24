@@ -469,7 +469,7 @@ module _
   is-connected-map-right-factor-is-succ-connected-map-right-factor cf c =
     is-succ-connected-is-connected-map-is-succ-connected
       ( pr1)
-      ( is-connected-equiv' (equiv-compute-fiber-comp g f c) (cgf c))
+      ( is-connected-equiv' (compute-fiber-comp g f c) (cgf c))
       ( λ p →
         is-connected-equiv
           ( equiv-fiber-pr1 (fiber f ∘ pr1) p)
