@@ -594,10 +594,13 @@ module _
         ( p))
 
   right-equivalence-relation-Subgroup : equivalence-relation l2 (type-Group G)
-  pr1 right-equivalence-relation-Subgroup = prop-right-equivalence-relation-Subgroup
+  pr1 right-equivalence-relation-Subgroup =
+    prop-right-equivalence-relation-Subgroup
   pr1 (pr2 right-equivalence-relation-Subgroup) = refl-right-sim-Subgroup
-  pr1 (pr2 (pr2 right-equivalence-relation-Subgroup)) = symmetric-right-sim-Subgroup
-  pr2 (pr2 (pr2 right-equivalence-relation-Subgroup)) = transitive-right-sim-Subgroup
+  pr1 (pr2 (pr2 right-equivalence-relation-Subgroup)) =
+    symmetric-right-sim-Subgroup
+  pr2 (pr2 (pr2 right-equivalence-relation-Subgroup)) =
+    transitive-right-sim-Subgroup
 ```
 
 #### The equivalence relation where `x ~ y` if and only if `xy⁻¹ ∈ H`
@@ -642,10 +645,13 @@ module _
       ( is-closed-under-multiplication-Subgroup G H q p)
 
   left-equivalence-relation-Subgroup : equivalence-relation l2 (type-Group G)
-  pr1 left-equivalence-relation-Subgroup = prop-left-equivalence-relation-Subgroup
+  pr1 left-equivalence-relation-Subgroup =
+    prop-left-equivalence-relation-Subgroup
   pr1 (pr2 left-equivalence-relation-Subgroup) = refl-left-sim-Subgroup
-  pr1 (pr2 (pr2 left-equivalence-relation-Subgroup)) = symmetric-left-sim-Subgroup
-  pr2 (pr2 (pr2 left-equivalence-relation-Subgroup)) = transitive-left-sim-Subgroup
+  pr1 (pr2 (pr2 left-equivalence-relation-Subgroup)) =
+    symmetric-left-sim-Subgroup
+  pr2 (pr2 (pr2 left-equivalence-relation-Subgroup)) =
+    transitive-left-sim-Subgroup
 ```
 
 ### Any proposition `P` induces a subgroup of any group `G`

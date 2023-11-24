@@ -111,7 +111,7 @@ module _
     transitive-leq-Large-Poset P z y x K
 ```
 
-### For two elements `x` and `y` of a large poset the same universe level, if the principal lower sets `↓{x}` and `↓{y}` have the same elements, then `x` and `y` are equal
+### For two elements `x` and `y` of a large poset of the same universe level, if the principal lower sets `↓{x}` and `↓{y}` have the same elements, then `x` and `y` are equal
 
 ```agda
 module _

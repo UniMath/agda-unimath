@@ -413,7 +413,8 @@ module _
   transitive-right-sim-Subgroup-𝔽 =
     transitive-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  right-equivalence-relation-Subgroup-𝔽 : equivalence-relation l2 (type-Group-𝔽 G)
+  right-equivalence-relation-Subgroup-𝔽 :
+    equivalence-relation l2 (type-Group-𝔽 G)
   right-equivalence-relation-Subgroup-𝔽 =
     right-equivalence-relation-Decidable-Subgroup (group-Group-𝔽 G) H
 ```
@@ -449,7 +450,8 @@ module _
   transitive-left-sim-Subgroup-𝔽 =
     transitive-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  left-equivalence-relation-Subgroup-𝔽 : equivalence-relation l2 (type-Group-𝔽 G)
+  left-equivalence-relation-Subgroup-𝔽 :
+    equivalence-relation l2 (type-Group-𝔽 G)
   left-equivalence-relation-Subgroup-𝔽 =
     left-equivalence-relation-Decidable-Subgroup (group-Group-𝔽 G) H
 ```

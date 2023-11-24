@@ -46,13 +46,13 @@ open import group-theory.semigroups
 ## Idea
 
 Given a [normal subgroup](group-theory.normal-subgroups.md) `N` of `G`, the
-**quotient group** `G/N` is a
-[group](group-theory.groups.md)`equipped with a [group homomorphism](group-theory.homomorphisms-groups.md)`q
-: G → G/N`such that`N ⊆ ker
-q`, and such that `q` satisfies the **universal property of the quotient group**, which asserts that any group homomorphism`f
-: G → H`such that`N ⊆ ker f`extends uniquely along`q`to a group homomorphism`G/N
-→ H`. In other words, the universal property of the quotient group `G/N` asserts
-that the map
+**quotient group** `G/N` is a [group](group-theory.groups.md) equipped with a
+[group homomorphism](group-theory.homomorphisms-groups.md) `q : G → G/N` such
+that `N ⊆ ker q`, and such that `q` satisfies the **universal property of the
+quotient group**, which asserts that any group homomorphism `f : G → H` such
+that `N ⊆ ker f` extends uniquely along `q` to a group homomorphism `G/N → H`.
+In other words, the universal property of the quotient group `G/N` asserts that
+the map
 
 ```text
   hom-Group G/N H → nullifying-hom-Group G H N
@@ -133,14 +133,16 @@ module _
   is-surjective-map-quotient-hom-Group :
     is-surjective map-quotient-hom-Group
   is-surjective-map-quotient-hom-Group =
-    is-surjective-quotient-map (equivalence-relation-congruence-Normal-Subgroup G N)
+    is-surjective-quotient-map
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
 
   is-effective-map-quotient-hom-Group :
     is-effective
       ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( map-quotient-hom-Group)
   is-effective-map-quotient-hom-Group =
-    is-effective-quotient-map (equivalence-relation-congruence-Normal-Subgroup G N)
+    is-effective-quotient-map
+      ( equivalence-relation-congruence-Normal-Subgroup G N)
 
   abstract
     apply-effectiveness-map-quotient-hom-Group :

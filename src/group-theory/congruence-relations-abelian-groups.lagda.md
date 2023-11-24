@@ -45,7 +45,8 @@ module _
   where
 
   equivalence-relation-congruence-Ab : equivalence-relation l2 (type-Ab A)
-  equivalence-relation-congruence-Ab = equivalence-relation-congruence-Group (group-Ab A) R
+  equivalence-relation-congruence-Ab =
+    equivalence-relation-congruence-Group (group-Ab A) R
 
   prop-congruence-Ab : Relation-Prop l2 (type-Ab A)
   prop-congruence-Ab = prop-congruence-Group (group-Ab A) R

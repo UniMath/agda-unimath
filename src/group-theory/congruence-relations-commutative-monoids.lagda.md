@@ -124,7 +124,8 @@ module _
     transitive-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   mul-congruence-Commutative-Monoid :
-    is-congruence-Commutative-Monoid M equivalence-relation-congruence-Commutative-Monoid
+    is-congruence-Commutative-Monoid M
+      equivalence-relation-congruence-Commutative-Monoid
   mul-congruence-Commutative-Monoid =
     mul-congruence-Monoid (monoid-Commutative-Monoid M) R
 ```
@@ -183,5 +184,6 @@ equivalence-relationate-same-elements-congruence-Commutative-Monoid :
   (R S : congruence-Commutative-Monoid l2 M) →
   relate-same-elements-congruence-Commutative-Monoid M R S → R ＝ S
 equivalence-relationate-same-elements-congruence-Commutative-Monoid M =
-  equivalence-relationate-same-elements-congruence-Monoid (monoid-Commutative-Monoid M)
+  equivalence-relationate-same-elements-congruence-Monoid
+    ( monoid-Commutative-Monoid M)
 ```

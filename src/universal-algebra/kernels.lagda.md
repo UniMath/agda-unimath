@@ -82,7 +82,8 @@ module _
     map-hom-Algebra-lemma :
       ( n : ℕ) →
       ( v v' : vec (type-Algebra Sg Th Alg1) n) →
-      ( relation-holds-all-vec Sg Th Alg1 equivalence-relation-kernel-hom-Algebra v v') →
+      ( relation-holds-all-vec Sg Th Alg1
+        equivalence-relation-kernel-hom-Algebra v v') →
       (map-vec f v) ＝ (map-vec f v')
     map-hom-Algebra-lemma zero-ℕ empty-vec empty-vec p = refl
     map-hom-Algebra-lemma (succ-ℕ n) (x ∷ v) (x' ∷ v') (p , p') =

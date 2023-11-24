@@ -54,10 +54,12 @@ module _
   equivalence-relation-congruence-Group = pr1 R
 
   prop-congruence-Group : Relation-Prop l2 (type-Group G)
-  prop-congruence-Group = prop-equivalence-relation equivalence-relation-congruence-Group
+  prop-congruence-Group =
+    prop-equivalence-relation equivalence-relation-congruence-Group
 
   sim-congruence-Group : (x y : type-Group G) → UU l2
-  sim-congruence-Group = sim-equivalence-relation equivalence-relation-congruence-Group
+  sim-congruence-Group =
+    sim-equivalence-relation equivalence-relation-congruence-Group
 
   is-prop-sim-congruence-Group :
     (x y : type-Group G) → is-prop (sim-congruence-Group x y)
@@ -81,7 +83,8 @@ module _
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
 
   refl-congruence-Group : is-reflexive sim-congruence-Group
-  refl-congruence-Group = refl-equivalence-relation equivalence-relation-congruence-Group
+  refl-congruence-Group =
+    refl-equivalence-relation equivalence-relation-congruence-Group
 
   symmetric-congruence-Group : is-symmetric sim-congruence-Group
   symmetric-congruence-Group =

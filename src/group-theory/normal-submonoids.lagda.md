@@ -267,7 +267,8 @@ module _
 
   equivalence-relation-congruence-Normal-Submonoid :
     equivalence-relation (l1 ⊔ l2) (type-Monoid M)
-  pr1 equivalence-relation-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
+  pr1 equivalence-relation-congruence-Normal-Submonoid =
+    rel-congruence-Normal-Submonoid
   pr1 (pr2 equivalence-relation-congruence-Normal-Submonoid) =
     refl-congruence-Normal-Submonoid
   pr1 (pr2 (pr2 equivalence-relation-congruence-Normal-Submonoid)) =
@@ -303,7 +304,8 @@ module _
         ( ap (mul-Monoid' M v) (associative-mul-Monoid M u x y)))
 
   congruence-Normal-Submonoid : congruence-Monoid (l1 ⊔ l2) M
-  pr1 congruence-Normal-Submonoid = equivalence-relation-congruence-Normal-Submonoid
+  pr1 congruence-Normal-Submonoid =
+    equivalence-relation-congruence-Normal-Submonoid
   pr2 congruence-Normal-Submonoid = is-congruence-congruence-Normal-Submonoid
 ```
 

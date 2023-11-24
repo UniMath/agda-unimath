@@ -484,7 +484,8 @@ module _
   transitive-congruence-Normal-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  equivalence-relation-congruence-Normal-Subgroup : equivalence-relation l2 (type-Group G)
+  equivalence-relation-congruence-Normal-Subgroup :
+    equivalence-relation l2 (type-Group G)
   equivalence-relation-congruence-Normal-Subgroup =
     right-equivalence-relation-Subgroup G (subgroup-Normal-Subgroup G N)
 
@@ -519,7 +520,8 @@ module _
           ( y')))
 
   congruence-Normal-Subgroup : congruence-Group l2 G
-  pr1 congruence-Normal-Subgroup = equivalence-relation-congruence-Normal-Subgroup
+  pr1 congruence-Normal-Subgroup =
+    equivalence-relation-congruence-Normal-Subgroup
   pr2 congruence-Normal-Subgroup =
     mul-congruence-Normal-Subgroup
 

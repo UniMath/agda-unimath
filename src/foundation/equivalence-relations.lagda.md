@@ -242,7 +242,8 @@ module _
 
   inhabited-subtype-equivalence-relation-partition :
     (a : A) → inhabited-subtype (l1 ⊔ l2) A
-  pr1 (inhabited-subtype-equivalence-relation-partition a) = prop-equivalence-relation-partition a
+  pr1 (inhabited-subtype-equivalence-relation-partition a) =
+    prop-equivalence-relation-partition a
   pr2 (inhabited-subtype-equivalence-relation-partition a) =
     is-inhabited-subtype-prop-equivalence-relation-partition a
 
@@ -267,7 +268,8 @@ module _
       ( equivalence-relation-partition (partition-equivalence-relation R))
       ( R)
   pr1
-    ( relate-same-elements-equivalence-relation-partition-equivalence-relation x y)
+    ( relate-same-elements-equivalence-relation-partition-equivalence-relation
+      x y)
     ( C , p , q) =
     apply-universal-property-trunc-Prop
       ( is-block-inhabited-subtype-block-partition
@@ -279,7 +281,11 @@ module _
           x _ y
           ( forward-implication (K y) q)
           ( symmetric-equivalence-relation R _ x (forward-implication (K x) p)))
-  pr1 (pr2 (relate-same-elements-equivalence-relation-partition-equivalence-relation x y) r) =
+  pr1
+    ( pr2
+      ( relate-same-elements-equivalence-relation-partition-equivalence-relation
+        x y)
+      ( r)) =
     make-block-partition
       ( partition-equivalence-relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
@@ -287,7 +293,9 @@ module _
   pr1
     ( pr2
       ( pr2
-        ( relate-same-elements-equivalence-relation-partition-equivalence-relation x y) r)) =
+        ( relate-same-elements-equivalence-relation-partition-equivalence-relation
+          x y)
+        ( r))) =
     make-is-in-block-partition
       ( partition-equivalence-relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
@@ -297,7 +305,9 @@ module _
   pr2
     ( pr2
       ( pr2
-        ( relate-same-elements-equivalence-relation-partition-equivalence-relation x y) r)) =
+        ( relate-same-elements-equivalence-relation-partition-equivalence-relation
+          x y)
+        ( r))) =
     make-is-in-block-partition
       ( partition-equivalence-relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
@@ -312,7 +322,8 @@ is-section-equivalence-relation-partition-equivalence-relation R =
   equivalence-relationate-same-elements-equivalence-relation
     ( equivalence-relation-partition (partition-equivalence-relation R))
     ( R)
-    ( relate-same-elements-equivalence-relation-partition-equivalence-relation R)
+    ( relate-same-elements-equivalence-relation-partition-equivalence-relation
+      R)
 ```
 
 #### The partition obtained from the equivalence relation induced by a partition is the partition itself
@@ -324,7 +335,9 @@ module _
 
   is-block-is-equivalence-class-equivalence-relation-partition :
     (Q : inhabited-subtype l1 A) →
-    is-equivalence-class (equivalence-relation-partition P) (subtype-inhabited-subtype Q) →
+    is-equivalence-class
+      ( equivalence-relation-partition P)
+      ( subtype-inhabited-subtype Q) →
     is-block-partition P Q
   is-block-is-equivalence-class-equivalence-relation-partition Q H =
     apply-universal-property-trunc-Prop H
@@ -358,7 +371,9 @@ module _
   is-equivalence-class-is-block-partition :
     (Q : inhabited-subtype l1 A) →
     is-block-partition P Q →
-    is-equivalence-class (equivalence-relation-partition P) (subtype-inhabited-subtype Q)
+    is-equivalence-class
+      ( equivalence-relation-partition P)
+      ( subtype-inhabited-subtype Q)
   is-equivalence-class-is-block-partition Q H =
     apply-universal-property-trunc-Prop
       ( is-inhabited-subtype-inhabited-subtype Q)
@@ -394,7 +409,8 @@ module _
 
   has-same-elements-partition-equivalence-relation-partition :
     has-same-elements-subtype
-      ( subtype-partition (partition-equivalence-relation (equivalence-relation-partition P)))
+      ( subtype-partition
+        ( partition-equivalence-relation (equivalence-relation-partition P)))
       ( subtype-partition P)
   pr1 (has-same-elements-partition-equivalence-relation-partition Q) H =
     is-block-is-equivalence-class-equivalence-relation-partition Q H
@@ -415,7 +431,8 @@ is-retraction-equivalence-relation-partition-equivalence-relation P =
 
 ```agda
 is-equiv-equivalence-relation-partition :
-  {l : Level} {A : UU l} → is-equiv (equivalence-relation-partition {l} {l} {l} {A})
+  {l : Level} {A : UU l} →
+  is-equiv (equivalence-relation-partition {l} {l} {l} {A})
 is-equiv-equivalence-relation-partition =
   is-equiv-is-invertible
     partition-equivalence-relation
@@ -425,7 +442,8 @@ is-equiv-equivalence-relation-partition =
 equiv-equivalence-relation-partition :
   {l : Level} {A : UU l} → partition l l A ≃ equivalence-relation l A
 pr1 equiv-equivalence-relation-partition = equivalence-relation-partition
-pr2 equiv-equivalence-relation-partition = is-equiv-equivalence-relation-partition
+pr2 equiv-equivalence-relation-partition =
+  is-equiv-equivalence-relation-partition
 ```
 
 ### Equivalence relations are equivalent to set-indexed Σ-decompositions
@@ -483,8 +501,10 @@ module _
   equivalence-relation-map-into-set : equivalence-relation l2 A
   pr1 equivalence-relation-map-into-set = rel-map-into-set
   pr1 (pr2 equivalence-relation-map-into-set) x = refl-sim-map-into-set x
-  pr1 (pr2 (pr2 equivalence-relation-map-into-set)) x y = symmetric-sim-map-into-set x y
-  pr2 (pr2 (pr2 equivalence-relation-map-into-set)) x y z = transitive-sim-map-into-set x y z
+  pr1 (pr2 (pr2 equivalence-relation-map-into-set)) x y =
+    symmetric-sim-map-into-set x y
+  pr2 (pr2 (pr2 equivalence-relation-map-into-set)) x y z =
+    transitive-sim-map-into-set x y z
 
   is-effective-map-into-set :
     is-effective equivalence-relation-map-into-set f
@@ -500,7 +520,9 @@ equivalence-relation-Surjection-Into-Set f =
 
 is-effective-map-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set l2 A) →
-  is-effective (equivalence-relation-Surjection-Into-Set f) (map-Surjection-Into-Set f)
+  is-effective
+    ( equivalence-relation-Surjection-Into-Set f)
+    ( map-Surjection-Into-Set f)
 is-effective-map-Surjection-Into-Set f =
   is-effective-map-into-set
     ( set-Surjection-Into-Set f)
@@ -516,19 +538,25 @@ module _
 
   relate-same-elements-equivalence-relation-surjection-into-set-equivalence-relation :
     relate-same-elements-equivalence-relation
-      ( equivalence-relation-Surjection-Into-Set (surjection-into-set-equivalence-relation R))
+      ( equivalence-relation-Surjection-Into-Set
+        ( surjection-into-set-equivalence-relation R))
       ( R)
-  relate-same-elements-equivalence-relation-surjection-into-set-equivalence-relation x y =
+  relate-same-elements-equivalence-relation-surjection-into-set-equivalence-relation
+    x y =
     iff-equiv (is-effective-quotient-map R x y)
 
 is-retraction-equivalence-relation-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation (l1 ⊔ l2) A) →
-  equivalence-relation-Surjection-Into-Set (surjection-into-set-equivalence-relation R) ＝ R
+  equivalence-relation-Surjection-Into-Set
+    ( surjection-into-set-equivalence-relation R) ＝
+  R
 is-retraction-equivalence-relation-Surjection-Into-Set R =
   equivalence-relationate-same-elements-equivalence-relation
-    ( equivalence-relation-Surjection-Into-Set (surjection-into-set-equivalence-relation R))
+    ( equivalence-relation-Surjection-Into-Set
+      ( surjection-into-set-equivalence-relation R))
     ( R)
-    ( relate-same-elements-equivalence-relation-surjection-into-set-equivalence-relation R)
+    ( relate-same-elements-equivalence-relation-surjection-into-set-equivalence-relation
+      R)
 ```
 
 #### The surjection into a set obtained from the equivalence relation induced by a surjection into a set is the original surjection into a set
@@ -537,15 +565,18 @@ is-retraction-equivalence-relation-Surjection-Into-Set R =
 equiv-surjection-into-set-equivalence-relation-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set l2 A) →
   equiv-Surjection-Into-Set
-    ( surjection-into-set-equivalence-relation (equivalence-relation-Surjection-Into-Set f))
+    ( surjection-into-set-equivalence-relation
+      ( equivalence-relation-Surjection-Into-Set f))
     ( f)
 equiv-surjection-into-set-equivalence-relation-Surjection-Into-Set f =
   center
     ( uniqueness-set-quotient
       ( equivalence-relation-Surjection-Into-Set f)
       ( quotient-Set (equivalence-relation-Surjection-Into-Set f))
-      ( reflecting-map-quotient-map (equivalence-relation-Surjection-Into-Set f))
-      ( is-set-quotient-set-quotient (equivalence-relation-Surjection-Into-Set f))
+      ( reflecting-map-quotient-map
+        ( equivalence-relation-Surjection-Into-Set f))
+      ( is-set-quotient-set-quotient
+        ( equivalence-relation-Surjection-Into-Set f))
       ( set-Surjection-Into-Set f)
       ( pair
         ( map-Surjection-Into-Set f)
@@ -560,10 +591,13 @@ equiv-surjection-into-set-equivalence-relation-Surjection-Into-Set f =
 
 is-section-equivalence-relation-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set (l1 ⊔ l2) A) →
-  surjection-into-set-equivalence-relation (equivalence-relation-Surjection-Into-Set f) ＝ f
+  surjection-into-set-equivalence-relation
+    ( equivalence-relation-Surjection-Into-Set f) ＝
+  f
 is-section-equivalence-relation-Surjection-Into-Set f =
   eq-equiv-Surjection-Into-Set
-    ( surjection-into-set-equivalence-relation (equivalence-relation-Surjection-Into-Set f))
+    ( surjection-into-set-equivalence-relation
+      ( equivalence-relation-Surjection-Into-Set f))
     ( f)
     ( equiv-surjection-into-set-equivalence-relation-Surjection-Into-Set f)
 ```

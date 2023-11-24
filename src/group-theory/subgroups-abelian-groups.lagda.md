@@ -521,7 +521,8 @@ module _
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  equivalence-relation-congruence-Subgroup-Ab : equivalence-relation l2 (type-Ab A)
+  equivalence-relation-congruence-Subgroup-Ab :
+    equivalence-relation l2 (type-Ab A)
   equivalence-relation-congruence-Subgroup-Ab =
     equivalence-relation-congruence-Normal-Subgroup
       ( group-Ab A)

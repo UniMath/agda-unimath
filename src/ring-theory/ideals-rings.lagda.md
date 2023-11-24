@@ -307,7 +307,8 @@ module _
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I)
 
-  equivalence-relation-congruence-ideal-Ring : equivalence-relation l2 (type-Ring R)
+  equivalence-relation-congruence-ideal-Ring :
+    equivalence-relation l2 (type-Ring R)
   equivalence-relation-congruence-ideal-Ring =
     equivalence-relation-congruence-Subgroup-Ab
       ( ab-Ring R)

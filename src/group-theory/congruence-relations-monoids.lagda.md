@@ -57,14 +57,17 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M)
   where
 
-  equivalence-relation-congruence-Monoid : equivalence-relation l2 (type-Monoid M)
+  equivalence-relation-congruence-Monoid :
+    equivalence-relation l2 (type-Monoid M)
   equivalence-relation-congruence-Monoid = pr1 R
 
   prop-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
-  prop-congruence-Monoid = prop-equivalence-relation equivalence-relation-congruence-Monoid
+  prop-congruence-Monoid =
+    prop-equivalence-relation equivalence-relation-congruence-Monoid
 
   sim-congruence-Monoid : (x y : type-Monoid M) → UU l2
-  sim-congruence-Monoid = sim-equivalence-relation equivalence-relation-congruence-Monoid
+  sim-congruence-Monoid =
+    sim-equivalence-relation equivalence-relation-congruence-Monoid
 
   is-prop-sim-congruence-Monoid :
     (x y : type-Monoid M) → is-prop (sim-congruence-Monoid x y)
@@ -87,7 +90,8 @@ module _
   concatenate-eq-sim-eq-congruence-Monoid refl H refl = H
 
   refl-congruence-Monoid : is-reflexive sim-congruence-Monoid
-  refl-congruence-Monoid = refl-equivalence-relation equivalence-relation-congruence-Monoid
+  refl-congruence-Monoid =
+    refl-equivalence-relation equivalence-relation-congruence-Monoid
 
   symmetric-congruence-Monoid : is-symmetric sim-congruence-Monoid
   symmetric-congruence-Monoid =
@@ -154,5 +158,6 @@ equivalence-relationate-same-elements-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R S : congruence-Monoid l2 M) →
   relate-same-elements-congruence-Monoid M R S → R ＝ S
 equivalence-relationate-same-elements-congruence-Monoid M =
-  equivalence-relationate-same-elements-congruence-Semigroup (semigroup-Monoid M)
+  equivalence-relationate-same-elements-congruence-Semigroup
+    ( semigroup-Monoid M)
 ```

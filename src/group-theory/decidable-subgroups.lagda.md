@@ -393,7 +393,8 @@ module _
   transitive-right-sim-Decidable-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  right-equivalence-relation-Decidable-Subgroup : equivalence-relation l2 (type-Group G)
+  right-equivalence-relation-Decidable-Subgroup :
+    equivalence-relation l2 (type-Group G)
   right-equivalence-relation-Decidable-Subgroup =
     right-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```
@@ -414,7 +415,8 @@ module _
   is-prop-left-sim-Decidable-Subgroup =
     is-prop-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  prop-left-equivalence-relation-Decidable-Subgroup : (x y : type-Group G) → Prop l2
+  prop-left-equivalence-relation-Decidable-Subgroup :
+    (x y : type-Group G) → Prop l2
   prop-left-equivalence-relation-Decidable-Subgroup =
     prop-left-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 
@@ -433,7 +435,8 @@ module _
   transitive-left-sim-Decidable-Subgroup =
     transitive-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  left-equivalence-relation-Decidable-Subgroup : equivalence-relation l2 (type-Group G)
+  left-equivalence-relation-Decidable-Subgroup :
+    equivalence-relation l2 (type-Group G)
   left-equivalence-relation-Decidable-Subgroup =
     left-equivalence-relation-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```

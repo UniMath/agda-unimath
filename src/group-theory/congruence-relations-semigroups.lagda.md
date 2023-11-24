@@ -79,7 +79,8 @@ module _
   {l1 l2 : Level} (G : Semigroup l1) (R : congruence-Semigroup l2 G)
   where
 
-  equivalence-relation-congruence-Semigroup : equivalence-relation l2 (type-Semigroup G)
+  equivalence-relation-congruence-Semigroup :
+    equivalence-relation l2 (type-Semigroup G)
   equivalence-relation-congruence-Semigroup = pr1 R
 
   prop-congruence-Semigroup : Relation-Prop l2 (type-Semigroup G)
@@ -107,7 +108,8 @@ module _
     (x y : type-Semigroup G) →
     sim-congruence-Semigroup x y ≃ sim-congruence-Semigroup y x
   equiv-symmetric-congruence-Semigroup x y =
-    equiv-symmetric-equivalence-relation equivalence-relation-congruence-Semigroup
+    equiv-symmetric-equivalence-relation
+      ( equivalence-relation-congruence-Semigroup)
 
   transitive-congruence-Semigroup : is-transitive sim-congruence-Semigroup
   transitive-congruence-Semigroup =

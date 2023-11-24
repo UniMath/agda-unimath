@@ -76,7 +76,8 @@ module _
     congruence-Monoid l2 (additive-monoid-Semiring R)
   congruence-additive-monoid-congruence-Semiring = pr1 S
 
-  equivalence-relation-congruence-Semiring : equivalence-relation l2 (type-Semiring R)
+  equivalence-relation-congruence-Semiring :
+    equivalence-relation l2 (type-Semiring R)
   equivalence-relation-congruence-Semiring =
     equivalence-relation-congruence-Monoid
       ( additive-monoid-Semiring R)

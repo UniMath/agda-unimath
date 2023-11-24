@@ -241,7 +241,8 @@ equivalence-relationate-same-elements-saturated-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R S : saturated-congruence-Commutative-Monoid l2 M) →
   relate-same-elements-saturated-congruence-Commutative-Monoid M R S → R ＝ S
-equivalence-relationate-same-elements-saturated-congruence-Commutative-Monoid M R S =
+equivalence-relationate-same-elements-saturated-congruence-Commutative-Monoid
+  M R S =
   map-inv-equiv (extensionality-saturated-congruence-Commutative-Monoid M R S)
 ```
 

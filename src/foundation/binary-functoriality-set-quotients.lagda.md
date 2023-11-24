@@ -196,14 +196,16 @@ module _
 
   hom-binary-hom-equivalence-relation :
     binary-hom-equivalence-relation R S T →
-    hom-equivalence-relation R (equivalence-relation-hom-equivalence-relation S T)
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T)
   pr1 (hom-binary-hom-equivalence-relation f) =
     map-hom-binary-hom-equivalence-relation f
   pr2 (hom-binary-hom-equivalence-relation f) =
     preserves-sim-hom-binary-hom-equivalence-relation f
 
   map-binary-hom-hom-equivalence-relation :
-    hom-equivalence-relation R (equivalence-relation-hom-equivalence-relation S T) →
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T) →
     A → B → C
   map-binary-hom-hom-equivalence-relation f x =
     map-hom-equivalence-relation S T
@@ -213,7 +215,9 @@ module _
         ( x))
 
   preserves-sim-binary-hom-hom-equivalence-relation :
-    (f : hom-equivalence-relation R (equivalence-relation-hom-equivalence-relation S T)) →
+    (f :
+      hom-equivalence-relation R
+        ( equivalence-relation-hom-equivalence-relation S T)) →
     preserves-sim-binary-map-equivalence-relation R S T
       ( map-binary-hom-hom-equivalence-relation f)
   preserves-sim-binary-hom-hom-equivalence-relation f {x} {x'} {y} {y'} r s =
@@ -234,7 +238,8 @@ module _
           R (equivalence-relation-hom-equivalence-relation S T) f r y)
 
   binary-hom-hom-equivalence-relation :
-    hom-equivalence-relation R (equivalence-relation-hom-equivalence-relation S T) →
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T) →
     binary-hom-equivalence-relation R S T
   pr1 (binary-hom-hom-equivalence-relation f) =
     map-binary-hom-hom-equivalence-relation f
@@ -283,7 +288,8 @@ module _
 
   equiv-hom-binary-hom-equivalence-relation :
     binary-hom-equivalence-relation R S T ≃
-    hom-equivalence-relation R (equivalence-relation-hom-equivalence-relation S T)
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T)
   pr1 equiv-hom-binary-hom-equivalence-relation =
     hom-binary-hom-equivalence-relation
   pr2 equiv-hom-binary-hom-equivalence-relation =
