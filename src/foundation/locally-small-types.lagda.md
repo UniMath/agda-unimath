@@ -31,17 +31,40 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be locally small if its identity types are small.
+A type is said to be **locally small** with respect to a universe `UU l` if its
+[identity types](foundation-core.identity-types.md) are
+[small](foundation-core.small-types.md) with respect to that universe.
 
 ## Definition
+
+### Locally small types
 
 ```agda
 is-locally-small :
   (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 is-locally-small l A = (x y : A) → is-small l (x ＝ y)
+
+module _
+  {l l1 : Level} {A : UU l1} (H : is-locally-small l A) (x y : A)
+  where
+
+  type-is-locally-small : UU l
+  type-is-locally-small = pr1 (H x y)
+
+  equiv-is-locally-small : (x ＝ y) ≃ type-is-locally-small
+  equiv-is-locally-small = pr2 (H x y)
+
+  inv-equiv-is-locally-small : type-is-locally-small ≃ (x ＝ y)
+  inv-equiv-is-locally-small = inv-equiv equiv-is-locally-small
+
+  map-equiv-is-locally-small : (x ＝ y) → type-is-locally-small
+  map-equiv-is-locally-small = map-equiv equiv-is-locally-small
+
+  map-inv-equiv-is-locally-small : type-is-locally-small → (x ＝ y)
+  map-inv-equiv-is-locally-small = map-inv-equiv equiv-is-locally-small
 ```
 
-### The type of locally small types
+### The subuniverse of `UU l1`-locally small types in `UU l2`
 
 ```agda
 Locally-Small-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -57,6 +80,17 @@ module _
   is-locally-small-type-Locally-Small-Type :
     is-locally-small l1 type-Locally-Small-Type
   is-locally-small-type-Locally-Small-Type = pr2 A
+
+  small-identity-type-Locally-Small-Type :
+    (x y : type-Locally-Small-Type) → UU l1
+  small-identity-type-Locally-Small-Type =
+    type-is-locally-small is-locally-small-type-Locally-Small-Type
+
+  equiv-is-locally-small-type-Locally-Small-Type :
+    (x y : type-Locally-Small-Type) →
+    (x ＝ y) ≃ small-identity-type-Locally-Small-Type x y
+  equiv-is-locally-small-type-Locally-Small-Type =
+    equiv-is-locally-small is-locally-small-type-Locally-Small-Type
 ```
 
 ## Properties
