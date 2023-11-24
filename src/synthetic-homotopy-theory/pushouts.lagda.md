@@ -102,7 +102,7 @@ postulate
 postulate
   glue-pushout :
     {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) → ((inl-pushout f g) ∘ f) ~ ((inr-pushout f g) ∘ g)
+    (f : S → A) (g : S → B) → inl-pushout f g ∘ f ~ inr-pushout f g ∘ g
 
 cocone-pushout :
   {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}

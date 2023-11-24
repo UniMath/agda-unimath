@@ -33,8 +33,8 @@ open import foundation-core.propositions
 
 ## Idea
 
-A type is said to be small with respect to a universe `UU l` if it is equivalent
-to a type in `UU l`.
+A type is said to be **small** with respect to a universe `UU l` if it is
+[equivalent](foundation-core.equivalences.md) to a type in `UU l`.
 
 ## Definitions
 
@@ -45,48 +45,49 @@ is-small :
   (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 is-small l A = Σ (UU l) (λ X → A ≃ X)
 
-type-is-small :
-  {l l1 : Level} {A : UU l1} → is-small l A → UU l
-type-is-small = pr1
+module _
+  {l l1 : Level} {A : UU l1} (H : is-small l A)
+  where
 
-equiv-is-small :
-  {l l1 : Level} {A : UU l1} (H : is-small l A) → A ≃ type-is-small H
-equiv-is-small = pr2
+  type-is-small : UU l
+  type-is-small = pr1 H
 
-inv-equiv-is-small :
-  {l l1 : Level} {A : UU l1} (H : is-small l A) → type-is-small H ≃ A
-inv-equiv-is-small H = inv-equiv (equiv-is-small H)
+  equiv-is-small : A ≃ type-is-small
+  equiv-is-small = pr2 H
 
-map-equiv-is-small :
-  {l l1 : Level} {A : UU l1} (H : is-small l A) → A → type-is-small H
-map-equiv-is-small H = map-equiv (equiv-is-small H)
+  inv-equiv-is-small : type-is-small ≃ A
+  inv-equiv-is-small = inv-equiv equiv-is-small
 
-map-inv-equiv-is-small :
-  {l l1 : Level} {A : UU l1} (H : is-small l A) → type-is-small H → A
-map-inv-equiv-is-small H = map-inv-equiv (equiv-is-small H)
+  map-equiv-is-small : A → type-is-small
+  map-equiv-is-small = map-equiv equiv-is-small
+
+  map-inv-equiv-is-small : type-is-small → A
+  map-inv-equiv-is-small = map-inv-equiv equiv-is-small
 ```
 
-### The universe of `UU l1`-small types in a universe `UU l2`
+### The subuniverse of `UU l1`-small types in `UU l2`
 
 ```agda
 Small-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Small-Type l1 l2 = Σ (UU l2) (is-small l1)
 
 module _
-  {l1 l2 : Level} (X : Small-Type l1 l2)
+  {l1 l2 : Level} (A : Small-Type l1 l2)
   where
 
   type-Small-Type : UU l2
-  type-Small-Type = pr1 X
+  type-Small-Type = pr1 A
 
   is-small-type-Small-Type : is-small l1 type-Small-Type
-  is-small-type-Small-Type = pr2 X
+  is-small-type-Small-Type = pr2 A
 
   small-type-Small-Type : UU l1
   small-type-Small-Type = type-is-small is-small-type-Small-Type
 
-  equiv-is-small-type-Small-Type : type-Small-Type ≃ small-type-Small-Type
-  equiv-is-small-type-Small-Type = equiv-is-small is-small-type-Small-Type
+  equiv-is-small-type-Small-Type :
+    type-Small-Type ≃ small-type-Small-Type
+  equiv-is-small-type-Small-Type =
+    equiv-is-small is-small-type-Small-Type
 ```
 
 ## Properties
@@ -148,8 +149,8 @@ is-small-lsuc {l} X = is-small-lmax (lsuc l) X
 is-small-equiv :
   {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
   A ≃ B → is-small l3 B → is-small l3 A
-pr1 (is-small-equiv B e (pair X h)) = X
-pr2 (is-small-equiv B e (pair X h)) = h ∘e e
+pr1 (is-small-equiv B e (X , h)) = X
+pr2 (is-small-equiv B e (X , h)) = h ∘e e
 
 is-small-equiv' :
   {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
@@ -194,9 +195,9 @@ pr2 (is-small-is-contr l H) = equiv-is-contr H is-contr-raise-unit
 is-small-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
   is-small l3 A → ((x : A) → is-small l4 (B x)) → is-small (l3 ⊔ l4) (Σ A B)
-pr1 (is-small-Σ {B = B} (pair X e) H) =
+pr1 (is-small-Σ {B = B} (X , e) H) =
   Σ X (λ x → pr1 (H (map-inv-equiv e x)))
-pr2 (is-small-Σ {B = B} (pair X e) H) =
+pr2 (is-small-Σ {B = B} (X , e) H) =
   equiv-Σ
     ( λ x → pr1 (H (map-inv-equiv e x)))
     ( e)
@@ -237,9 +238,9 @@ is-small-Π :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
   is-small l3 A → ((x : A) → is-small l4 (B x)) →
   is-small (l3 ⊔ l4) ((x : A) → B x)
-pr1 (is-small-Π {B = B} (pair X e) H) =
+pr1 (is-small-Π {B = B} (X , e) H) =
   (x : X) → pr1 (H (map-inv-equiv e x))
-pr2 (is-small-Π {B = B} (pair X e) H) =
+pr2 (is-small-Π {B = B} (X , e) H) =
   equiv-Π
     ( λ (x : X) → pr1 (H (map-inv-equiv e x)))
     ( e)

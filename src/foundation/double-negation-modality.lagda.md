@@ -28,6 +28,8 @@ The [double negation](foundation.double-negation.md) operation `¬¬` is a
 
 ## Definition
 
+### The double negation modality
+
 ```agda
 operator-double-negation-modality :
   (l : Level) → operator-modality l l
@@ -46,7 +48,7 @@ unit-double-negation-modality = intro-double-negation
 is-uniquely-eliminating-modality-double-negation-modality :
   {l : Level} →
   is-uniquely-eliminating-modality (unit-double-negation-modality {l})
-is-uniquely-eliminating-modality-double-negation-modality {l} A P =
+is-uniquely-eliminating-modality-double-negation-modality {l} {A} P =
   is-local-dependent-type-is-prop
     ( unit-double-negation-modality)
     ( operator-double-negation-modality l ∘ P)

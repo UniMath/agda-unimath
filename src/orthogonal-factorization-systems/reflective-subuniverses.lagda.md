@@ -7,15 +7,23 @@ module orthogonal-factorization-systems.reflective-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.localizations-subuniverses
+open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.modal-subuniverse-induction
 ```
 
 </details>
@@ -36,39 +44,39 @@ precisely the types in the reflective subuniverse.
 
 ```agda
 is-reflective-subuniverse :
-  {l lP : Level} (P : UU l → Prop lP) → UU (lsuc l ⊔ lP)
-is-reflective-subuniverse {l} P =
-  Σ ( operator-modality l l)
+  {l1 l2 : Level} (P : UU l1 → Prop l2) → UU (lsuc l1 ⊔ l2)
+is-reflective-subuniverse {l1} P =
+  Σ ( operator-modality l1 l1)
     ( λ ○ →
       Σ ( unit-modality ○)
         ( λ unit-○ →
-          ( (X : UU l) → is-in-subuniverse P (○ X)) ×
-          ( (X Y : UU l) → is-in-subuniverse P X → is-local (unit-○ {Y}) X)))
+          ( (X : UU l1) → is-in-subuniverse P (○ X)) ×
+          ( (X Y : UU l1) → is-in-subuniverse P X → is-local (unit-○ {Y}) X)))
 ```
 
 ```agda
 module _
-  {l lP : Level} (P : subuniverse l lP)
+  {l1 l2 : Level} (P : subuniverse l1 l2)
   (is-reflective-P : is-reflective-subuniverse P)
   where
 
-  operator-modality-is-reflective-subuniverse : operator-modality l l
-  operator-modality-is-reflective-subuniverse = pr1 is-reflective-P
+  operator-is-reflective-subuniverse : operator-modality l1 l1
+  operator-is-reflective-subuniverse = pr1 is-reflective-P
 
-  unit-modality-is-reflective-subuniverse :
-    unit-modality (operator-modality-is-reflective-subuniverse)
-  unit-modality-is-reflective-subuniverse = pr1 (pr2 is-reflective-P)
+  unit-is-reflective-subuniverse :
+    unit-modality (operator-is-reflective-subuniverse)
+  unit-is-reflective-subuniverse = pr1 (pr2 is-reflective-P)
 
-  is-in-subuniverse-image-operator-modality-is-reflective-subuniverse :
-    (X : UU l) →
-    is-in-subuniverse P (operator-modality-is-reflective-subuniverse X)
-  is-in-subuniverse-image-operator-modality-is-reflective-subuniverse =
+  is-in-subuniverse-operator-type-is-reflective-subuniverse :
+    (X : UU l1) →
+    is-in-subuniverse P (operator-is-reflective-subuniverse X)
+  is-in-subuniverse-operator-type-is-reflective-subuniverse =
     pr1 (pr2 (pr2 is-reflective-P))
 
   is-local-is-in-subuniverse-is-reflective-subuniverse :
-    (X Y : UU l) →
+    (X Y : UU l1) →
     is-in-subuniverse P X →
-    is-local (unit-modality-is-reflective-subuniverse {Y}) X
+    is-local (unit-is-reflective-subuniverse {Y}) X
   is-local-is-in-subuniverse-is-reflective-subuniverse =
     pr2 (pr2 (pr2 is-reflective-P))
 ```
@@ -76,25 +84,25 @@ module _
 ### The type of reflective subuniverses
 
 ```agda
-reflective-subuniverse : (l lP : Level) → UU (lsuc l ⊔ lsuc lP)
-reflective-subuniverse l lP =
-  Σ (UU l → Prop lP) (is-reflective-subuniverse)
+reflective-subuniverse : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+reflective-subuniverse l1 l2 =
+  Σ (UU l1 → Prop l2) (is-reflective-subuniverse)
 ```
 
 ```agda
 module _
-  {l lP : Level} (P : reflective-subuniverse l lP)
+  {l1 l2 : Level} (P : reflective-subuniverse l1 l2)
   where
 
-  subuniverse-reflective-subuniverse : subuniverse l lP
+  subuniverse-reflective-subuniverse : subuniverse l1 l2
   subuniverse-reflective-subuniverse = pr1 P
 
-  is-in-reflective-subuniverse : UU l → UU lP
+  is-in-reflective-subuniverse : UU l1 → UU l2
   is-in-reflective-subuniverse =
     is-in-subuniverse subuniverse-reflective-subuniverse
 
   inclusion-reflective-subuniverse :
-    type-subuniverse (subuniverse-reflective-subuniverse) → UU l
+    type-subuniverse (subuniverse-reflective-subuniverse) → UU l1
   inclusion-reflective-subuniverse =
     inclusion-subuniverse subuniverse-reflective-subuniverse
 
@@ -102,33 +110,33 @@ module _
     is-reflective-subuniverse (subuniverse-reflective-subuniverse)
   is-reflective-subuniverse-reflective-subuniverse = pr2 P
 
-  operator-modality-reflective-subuniverse : operator-modality l l
-  operator-modality-reflective-subuniverse =
-    operator-modality-is-reflective-subuniverse
+  operator-reflective-subuniverse : operator-modality l1 l1
+  operator-reflective-subuniverse =
+    operator-is-reflective-subuniverse
       ( subuniverse-reflective-subuniverse)
       ( is-reflective-subuniverse-reflective-subuniverse)
 
-  unit-modality-reflective-subuniverse :
-    unit-modality (operator-modality-reflective-subuniverse)
-  unit-modality-reflective-subuniverse =
-    unit-modality-is-reflective-subuniverse
+  unit-reflective-subuniverse :
+    unit-modality (operator-reflective-subuniverse)
+  unit-reflective-subuniverse =
+    unit-is-reflective-subuniverse
       ( subuniverse-reflective-subuniverse)
       ( is-reflective-subuniverse-reflective-subuniverse)
 
-  is-in-subuniverse-image-operator-modality-reflective-subuniverse :
-    ( X : UU l) →
+  is-in-subuniverse-operator-type-reflective-subuniverse :
+    ( X : UU l1) →
     is-in-subuniverse
       ( subuniverse-reflective-subuniverse)
-      ( operator-modality-reflective-subuniverse X)
-  is-in-subuniverse-image-operator-modality-reflective-subuniverse =
-    is-in-subuniverse-image-operator-modality-is-reflective-subuniverse
+      ( operator-reflective-subuniverse X)
+  is-in-subuniverse-operator-type-reflective-subuniverse =
+    is-in-subuniverse-operator-type-is-reflective-subuniverse
       ( subuniverse-reflective-subuniverse)
       ( is-reflective-subuniverse-reflective-subuniverse)
 
   is-local-is-in-subuniverse-reflective-subuniverse :
-    ( X Y : UU l) →
+    ( X Y : UU l1) →
     is-in-subuniverse subuniverse-reflective-subuniverse X →
-    is-local (unit-modality-reflective-subuniverse {Y}) X
+    is-local (unit-reflective-subuniverse {Y}) X
   is-local-is-in-subuniverse-reflective-subuniverse =
     is-local-is-in-subuniverse-is-reflective-subuniverse
       ( subuniverse-reflective-subuniverse)
@@ -141,27 +149,27 @@ module _
 
 ```agda
 module _
-  {l lP : Level} (P : subuniverse l lP)
+  {l1 l2 : Level} (P : subuniverse l1 l2)
   (is-reflective-P : is-reflective-subuniverse P)
   where
 
   has-all-localizations-is-reflective-subuniverse :
-    (A : UU l) → subuniverse-localization P A
+    (A : UU l1) → subuniverse-localization P A
   pr1 (has-all-localizations-is-reflective-subuniverse A) =
-    operator-modality-is-reflective-subuniverse P is-reflective-P A
+    operator-is-reflective-subuniverse P is-reflective-P A
   pr1 (pr2 (has-all-localizations-is-reflective-subuniverse A)) =
-    is-in-subuniverse-image-operator-modality-is-reflective-subuniverse
+    is-in-subuniverse-operator-type-is-reflective-subuniverse
       P is-reflective-P A
   pr1 (pr2 (pr2 (has-all-localizations-is-reflective-subuniverse A))) =
-    unit-modality-is-reflective-subuniverse P is-reflective-P
+    unit-is-reflective-subuniverse P is-reflective-P
   pr2 (pr2 (pr2 (has-all-localizations-is-reflective-subuniverse A)))
     X is-in-subuniverse-X =
       is-local-is-in-subuniverse-is-reflective-subuniverse
         P is-reflective-P X A is-in-subuniverse-X
 
 module _
-  {l lP : Level} (P : subuniverse l lP)
-  (L : (A : UU l) → subuniverse-localization P A)
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  (L : (A : UU l1) → subuniverse-localization P A)
   where
 
   is-reflective-has-all-localizations-subuniverse :
@@ -176,6 +184,53 @@ module _
     A B is-in-subuniverse-A =
       is-local-at-unit-is-in-subuniverse-subuniverse-localization
         P (L B) A is-in-subuniverse-A
+```
+
+## Recursion for reflective subuniverses
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  (is-reflective-P : is-reflective-subuniverse P)
+  where
+
+  rec-modality-is-reflective-subuniverse :
+    rec-modality (unit-is-reflective-subuniverse P is-reflective-P)
+  rec-modality-is-reflective-subuniverse {X} {Y} =
+    map-inv-is-equiv
+      ( is-local-is-in-subuniverse-is-reflective-subuniverse
+        ( P)
+        ( is-reflective-P)
+        ( operator-is-reflective-subuniverse P is-reflective-P Y)
+        ( X)
+        ( is-in-subuniverse-operator-type-is-reflective-subuniverse
+          ( P)
+          ( is-reflective-P)
+          ( Y)))
+
+  map-is-reflective-subuniverse :
+    {X Y : UU l1} → (X → Y) →
+    operator-is-reflective-subuniverse P is-reflective-P X →
+    operator-is-reflective-subuniverse P is-reflective-P Y
+  map-is-reflective-subuniverse =
+    ap-map-rec-modality
+      ( unit-is-reflective-subuniverse P is-reflective-P)
+      ( rec-modality-is-reflective-subuniverse)
+
+  strong-rec-subuniverse-is-reflective-subuniverse :
+    strong-rec-subuniverse-modality
+      ( unit-is-reflective-subuniverse P is-reflective-P)
+  strong-rec-subuniverse-is-reflective-subuniverse =
+    strong-rec-subuniverse-rec-modality
+      ( unit-is-reflective-subuniverse P is-reflective-P)
+      ( rec-modality-is-reflective-subuniverse)
+
+  rec-subuniverse-is-reflective-subuniverse :
+    rec-subuniverse-modality (unit-is-reflective-subuniverse P is-reflective-P)
+  rec-subuniverse-is-reflective-subuniverse =
+    rec-subuniverse-rec-modality
+      ( unit-is-reflective-subuniverse P is-reflective-P)
+      ( rec-modality-is-reflective-subuniverse)
 ```
 
 ## See also

@@ -84,12 +84,12 @@ module _
 
   statement-coherence-htpy-cocone :
     (c c' : cocone f g X) →
-    (K : (horizontal-map-cocone f g c) ~ (horizontal-map-cocone f g c'))
-    (L : (vertical-map-cocone f g c) ~ (vertical-map-cocone f g c')) →
+    (K : horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
+    (L : vertical-map-cocone f g c ~ vertical-map-cocone f g c') →
     UU (l1 ⊔ l4)
   statement-coherence-htpy-cocone c c' K L =
-    ((coherence-square-cocone f g c) ∙h (L ·r g)) ~
-    ((K ·r f) ∙h (coherence-square-cocone f g c'))
+    (coherence-square-cocone f g c ∙h (L ·r g)) ~
+    ((K ·r f) ∙h coherence-square-cocone f g c')
 
   htpy-cocone : (c c' : cocone f g X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-cocone c c' =
@@ -131,7 +131,7 @@ module _
   is-torsorial-htpy-cocone c =
     is-torsorial-Eq-structure
       ( λ i' jH' K →
-        Σ ( vertical-map-cocone f g c ~ (pr1 jH'))
+        Σ ( vertical-map-cocone f g c ~ pr1 jH')
           ( statement-coherence-htpy-cocone c (i' , jH') K))
       ( is-torsorial-htpy (horizontal-map-cocone f g c))
       ( horizontal-map-cocone f g c , refl-htpy)
@@ -143,8 +143,7 @@ module _
         ( is-torsorial-htpy (vertical-map-cocone f g c))
         ( vertical-map-cocone f g c , refl-htpy)
         ( is-contr-is-equiv'
-          ( Σ ( ( horizontal-map-cocone f g c ∘ f) ~
-                ( vertical-map-cocone f g c ∘ g))
+          ( Σ ( horizontal-map-cocone f g c ∘ f ~ vertical-map-cocone f g c ∘ g)
               ( λ H' → coherence-square-cocone f g c ~ H'))
           ( tot (λ H' M → right-unit-htpy ∙h M))
           ( is-equiv-tot-is-fiberwise-equiv (λ H' → is-equiv-concat-htpy _ _))
@@ -167,7 +166,7 @@ module _
   eq-htpy-cocone c c' = map-inv-is-equiv (is-equiv-htpy-eq-cocone c c')
 ```
 
-### Postcomposing cocones
+### Postcomposing cocones under spans with maps
 
 ```agda
 cocone-map :
@@ -183,16 +182,16 @@ cocone-map-id :
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   Id (cocone-map f g c id) c
 cocone-map-id f g c =
-  eq-pair-Σ refl
-    ( eq-pair-Σ refl (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
+  eq-pair-eq-pr2
+    ( eq-pair-eq-pr2 (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
 
 cocone-map-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
   {Y : UU l5} (h : X → Y) {Z : UU l6} (k : Y → Z) →
-  Id (cocone-map f g c (k ∘ h)) (cocone-map f g (cocone-map f g c h) k)
+  cocone-map f g c (k ∘ h) ＝ cocone-map f g (cocone-map f g c h) k
 cocone-map-comp f g (i , j , H) h k =
-  eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (ap-comp k h ∘ H)))
+  eq-pair-eq-pr2 (eq-pair-eq-pr2 (eq-htpy (ap-comp k h ∘ H)))
 ```
 
 ### Horizontal composition of cocones

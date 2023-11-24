@@ -32,7 +32,12 @@ A **uniquely eliminating modality** is a _higher mode of logic_ defined in terms
 of a monadic
 [modal operator](orthogonal-factorization-systems.modal-operators.md) `○`
 satisfying a certain [locality](orthogonal-factorization-systems.local-types.md)
-condition.
+condition. Namely, that dependent precomposition by the modal unit `unit-○` is
+an equivalence for type families over types in the image of the operator:
+
+```text
+  - ∘ unit-○ : Π (x : ○ X) (○ (P x)) ≃ Π (x : X) (○ (P (unit-○ x)))
+```
 
 ## Definition
 
@@ -41,7 +46,7 @@ is-uniquely-eliminating-modality :
   {l1 l2 : Level} {○ : operator-modality l1 l2} →
   unit-modality ○ → UU (lsuc l1 ⊔ l2)
 is-uniquely-eliminating-modality {l1} {l2} {○} unit-○ =
-  (X : UU l1) (P : ○ X → UU l1) → is-local-dependent-type (unit-○) (○ ∘ P)
+  {X : UU l1} (P : ○ X → UU l1) → is-local-dependent-type (unit-○) (○ ∘ P)
 
 uniquely-eliminating-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 uniquely-eliminating-modality l1 l2 =
@@ -60,16 +65,16 @@ module _
   where
 
   ind-modality-is-uniquely-eliminating-modality :
-    (X : UU l1) (P : ○ X → UU l1) →
+    {X : UU l1} (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) → (x' : ○ X) → ○ (P x')
-  ind-modality-is-uniquely-eliminating-modality X P =
-    map-inv-is-equiv (is-uem-○ X P)
+  ind-modality-is-uniquely-eliminating-modality P =
+    map-inv-is-equiv (is-uem-○ P)
 
   compute-ind-modality-is-uniquely-eliminating-modality :
-    (X : UU l1) (P : ○ X → UU l1) (f : (x : X) → ○ (P (unit-○ x))) →
-    (pr1 (pr1 (is-uem-○ X P)) f ∘ unit-○) ~ f
-  compute-ind-modality-is-uniquely-eliminating-modality X P =
-    htpy-eq ∘ pr2 (pr1 (is-uem-○ X P))
+    {X : UU l1} (P : ○ X → UU l1) (f : (x : X) → ○ (P (unit-○ x))) →
+    (pr1 (pr1 (is-uem-○ P)) f ∘ unit-○) ~ f
+  compute-ind-modality-is-uniquely-eliminating-modality P =
+    htpy-eq ∘ pr2 (pr1 (is-uem-○ P))
 
 module _
   {l1 l2 : Level}
@@ -99,7 +104,7 @@ module _
   is-prop-is-uniquely-eliminating-modality :
     is-prop (is-uniquely-eliminating-modality unit-○)
   is-prop-is-uniquely-eliminating-modality =
-    is-prop-Π
+    is-prop-Π'
       ( λ X →
         is-prop-Π
           ( λ P → is-property-is-local-dependent-type unit-○ (○ ∘ P)))
@@ -122,14 +127,13 @@ module _
 
   map-inv-unit-uniquely-eliminating-modality : ○ (○ X) → ○ X
   map-inv-unit-uniquely-eliminating-modality =
-    ind-modality-is-uniquely-eliminating-modality is-uem-○ (○ X) (λ _ → X) id
+    ind-modality-is-uniquely-eliminating-modality is-uem-○ (λ _ → X) id
 
   is-section-unit-uniquely-eliminating-modality :
     (map-inv-unit-uniquely-eliminating-modality ∘ unit-○) ~ id
   is-section-unit-uniquely-eliminating-modality =
     compute-ind-modality-is-uniquely-eliminating-modality
       ( is-uem-○)
-      ( ○ X)
       ( λ _ → X)
       ( id)
 
@@ -139,7 +143,7 @@ module _
     htpy-eq
       ( ap pr1
         ( eq-is-contr'
-          ( is-contr-map-is-equiv (is-uem-○ (○ X) (λ _ → ○ X)) unit-○)
+          ( is-contr-map-is-equiv (is-uem-○ (λ _ → ○ X)) unit-○)
           ( unit-○ ∘ map-inv-unit-uniquely-eliminating-modality ,
             eq-htpy
               ( ap unit-○ ∘ (is-section-unit-uniquely-eliminating-modality)))
