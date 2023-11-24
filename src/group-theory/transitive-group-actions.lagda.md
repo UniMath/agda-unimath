@@ -34,7 +34,7 @@ are in the same [orbit](group-theory.orbits-group-actions.md).
 
 ## Definitions
 
-### The predicate of being transitive on `G`-sets
+### The predicate of being a transitive `G`-sets
 
 ```agda
 module _
