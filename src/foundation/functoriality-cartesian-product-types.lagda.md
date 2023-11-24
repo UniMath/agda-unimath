@@ -12,6 +12,7 @@ open import foundation.equality-cartesian-product-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -25,26 +26,63 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Any two maps `f : A → B` and `g : C → D` induce a map
-`map-prod : A × B → C × D`.
+The **functorial action** of the
+[cartesian product](foundation-core.cartesian-product-types.md) takes two maps
+`f : A → B` and `g : C → D` and returns a map
 
-## Definition
+```text
+  f × g : A × B → C × D`
+```
+
+between the cartesian product types. This functorial action is _bifunctorial_ in
+the sense that for any two maps `f : A → B` and `g : C → D` the diagram
+
+```text
+          f×1
+    A × C ---> B × C
+      |   \      |
+  1×g |    \f×g  | 1×g
+      |     \    |
+      V      >   V
+    A × D ---> B × D
+          f×1
+```
+
+commutes.
+
+## Definitions
+
+### The functorial action of cartesian product types
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → C) (g : B → D)
+  (f : A → B) (g : C → D)
   where
 
-  map-prod : A × B → C × D
+  map-prod : (A × C) → (B × D)
+
   pr1 (map-prod t) = f (pr1 t)
   pr2 (map-prod t) = g (pr2 t)
 
   map-prod-pr1 : pr1 ∘ map-prod ~ f ∘ pr1
-  map-prod-pr1 (a , b) = refl
+  map-prod-pr1 (a , c) = refl
 
   map-prod-pr2 : pr2 ∘ map-prod ~ g ∘ pr2
-  map-prod-pr2 (a , b) = refl
+  map-prod-pr2 (a , c) = refl
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D)
+  where
+
+  coherence-square-map-prod :
+    coherence-square-maps
+      ( map-prod f id)
+      ( map-prod id g)
+      ( map-prod id g)
+      ( map-prod f id)
+  coherence-square-map-prod t = refl
 ```
 
 ## Properties

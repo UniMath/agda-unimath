@@ -31,36 +31,45 @@ open import orthogonal-factorization-systems.lifting-squares
 
 ## Idea
 
-Given a pair of maps `f : A → B` and `g : X → Y`, there is a
-[commuting square](foundation-core.commuting-squares-of-maps.md)
+The **pullback-hom** or **pullback-power** of two maps `f : A → B` and
+`g : X → Y`, is the [gap map](foundation.pullbacks.md) of the
+[commuting square](foundation-core.commuting-squares-of-maps.md):
 
 ```text
-          - ∘ f
-    B → X ----> A → X
-      |           |
-g ∘ - |           | g ∘ -
-      V           V
-    B → Y ----> A → Y.
-          - ∘ f
+             - ∘ f
+      B → X -------> A → X
+        |              |
+  g ∘ - |              | g ∘ -
+        V              V
+      B → Y -------> A → Y.
+             - ∘ f
 ```
 
-The **pullback-hom** of `f` and `g`, `f ⋔ g`, is the comparison map from `B → X`
-to the [pullback](foundation.pullbacks.md) of the
-[cospan](foundation.cospans.md):
+The pullback of `- ∘ f` and `g ∘ -` can be understood as the type of
+[morphisms of arrows](foundation.morphisms-arrows.md) from `f` to `g`, while the
+domain of the pullback-hom is the type `B → X` of diagonal fillers for morphisms
+of arrows from `f` to `g`. The pullback-hom is therefore closely related to
+[lifting conditions](orthogonal-factorization-systems.mere-lifting-properties.md)
+and
+[orthogonality conditions](orthogonal-factorization-systems.orthogonal-maps.md):
+The pullback-hom of `f` and `g` is an
+[equivalence](foundation-core.equivalences.md) if and only if `f` is left
+orthogonal to `g`, while the pullback-hom of `f` and `g` is
+[surjective](foundation.surjective-maps.md) if and only if `f` satisfies the
+left lifting property to `g`.
+
+There are two common ways to denote the pullback-hom: Some authors use `f ⋔ g`,
+while other authors use `⟨f , g⟩`. Both notations can be used, depending on what
+perspective of the pullback-hom is emphasized. The pitchfork-notation `f ⋔ g` is
+used more often in settings where a lifting property of `f` and `g` is
+emphasized, while the hom-notation `⟨f , g⟩` is used when the pullback-hom is
+thought of in terms of hom-sets. The latter notation is useful for instance, if
+one wants to emphasize an adjoint relation between the pullback-hom and the
+pushout-product:
 
 ```text
-      ∙ ------> A → X
-      |  ⌟        |
-      |           | g ∘ -
-      V           V
-    B → Y ----> A → Y.
-          - ∘ f
+  ⟨f □ g , h⟩ ＝ ⟨f , ⟨g , h⟩⟩.
 ```
-
-This pullback type can be understood as the type of
-[fibered maps](foundation.fibered-maps.md) from `f` to `g`, i.e.
-[commuting squares](foundation-core.commuting-squares-of-maps.md) where the
-vertical maps are `f` and `g`.
 
 ## Definitions
 
@@ -222,3 +231,17 @@ module _
 The following table lists files that are about pullbacks as a general concept.
 
 {{#include tables/pullbacks.md}}
+
+## External links
+
+- [Pullback-power](https://ncatlab.org/nlab/show/pullback+power) at the $n$Lab
+
+A wikidata identifier for this concept is unavailable.
+
+## References
+
+- Emily Riehl and Dominic Verity. _Elements of `∞`-category theory_. Cambridge
+  Studies in Advanced Mathematics 194. Cambridge University Press,
+  Cambridge, 2022.
+  [doi:10.1017/9781108936880](https://doi.org/10.1017/9781108936880). ISBN:
+  978-1-108-83798-9.
