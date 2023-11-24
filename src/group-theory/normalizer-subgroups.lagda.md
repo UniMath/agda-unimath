@@ -35,7 +35,7 @@ consists of all elements `g : G` such that `h ∈ H ⇔ (gh)g⁻¹ ∈ H` for al
 `h ∈ G`. In other words, the normalizer subgroup consists of all elements `g`
 such that `(gH)g⁻¹ ＝ H`.
 
-The weaker condition that `gHg⁻¹ ⊆ H` is
+The weaker condition that `(gH)g⁻¹ ⊆ H` is
 [not sufficient](https://math.stackexchange.com/q/107862) in the case of
 infinite groups. In this case, the group elements satisfying this weaker
 condition may not be closed under inverses.
