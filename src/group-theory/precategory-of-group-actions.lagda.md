@@ -30,7 +30,7 @@ between them.
 
 ## Definitions
 
-### The large precategory of G-sets
+### The large precategory of `G`-sets
 
 ```agda
 module _
@@ -62,7 +62,7 @@ module _
     right-unit-law-comp-hom-action-Group G X Y
 ```
 
-### The small precategory of G-sets
+### The small precategory of `G`-sets
 
 ```agda
 module _
@@ -71,22 +71,6 @@ module _
 
   action-Group-Precategory :
     (l2 : Level) → Precategory (l1 ⊔ lsuc l2) (l1 ⊔ l2)
-  pr1 (action-Group-Precategory l2) = action-Group G l2
-  pr1 (pr2 (action-Group-Precategory l2)) =
-    hom-set-action-Group G
-  pr1 (pr1 (pr2 (pr2 (action-Group-Precategory l2)))) {X} {Y} {Z} =
-    comp-hom-action-Group G X Y Z
-  pr1
-    ( pr2 (pr1 (pr2 (pr2 (action-Group-Precategory l2)))) {X} {Y} {Z} {W} h g f) =
-    associative-comp-hom-action-Group G X Y Z W h g f
-  pr2
-    ( pr2
-      ( pr1 (pr2 (pr2 (action-Group-Precategory l2)))) {X} {Y} {Z} {W} h g f) =
-    inv (associative-comp-hom-action-Group G X Y Z W h g f)
-  pr1 (pr2 (pr2 (pr2 (action-Group-Precategory l2)))) =
-    id-hom-action-Group G
-  pr1 (pr2 (pr2 (pr2 (pr2 (action-Group-Precategory l2))))) {X} {Y} =
-    left-unit-law-comp-hom-action-Group G X Y
-  pr2 (pr2 (pr2 (pr2 (pr2 (action-Group-Precategory l2))))) {X} {Y} =
-    right-unit-law-comp-hom-action-Group G X Y
+  action-Group-Precategory =
+    precategory-Large-Precategory (action-Group-Large-Precategory G)
 ```

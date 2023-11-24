@@ -33,12 +33,12 @@ module _
 
   map-Cayleys-theorem :
     type-Group G → type-Group (symmetric-Group (set-Group G))
-  map-Cayleys-theorem x = equiv-mul-Group G x
+  map-Cayleys-theorem = equiv-mul-Group G
 
   preserves-mul-map-Cayleys-theorem :
     preserves-mul-Group G (symmetric-Group (set-Group G)) map-Cayleys-theorem
   preserves-mul-map-Cayleys-theorem {x} {y} =
-    eq-htpy-equiv (λ z → associative-mul-Group G x y z)
+    eq-htpy-equiv (associative-mul-Group G x y)
 
   hom-Cayleys-theorem : hom-Group G (symmetric-Group (set-Group G))
   pr1 hom-Cayleys-theorem = map-Cayleys-theorem

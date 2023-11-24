@@ -39,7 +39,9 @@ A [morphism of `G`-sets](group-theory.group-actions.md) is said to be an
 **equivalence** if its underlying map is an
 [equivalence](foundation-core.equivalences.md).
 
-## Definition
+## Definitions
+
+### The predicate of being an equivalence of group actions
 
 ```agda
 module _
@@ -49,6 +51,15 @@ module _
 
   is-equiv-hom-action-Group : hom-action-Group G X Y → UU (l2 ⊔ l3)
   is-equiv-hom-action-Group f = is-equiv (map-hom-action-Group G X Y f)
+```
+
+### The type of equivalences of group actions
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3)
+  where
 
   equiv-action-Group : UU (l1 ⊔ l2 ⊔ l3)
   equiv-action-Group =
@@ -91,15 +102,27 @@ module _
 
   is-equiv-hom-equiv-action-Group :
     (e : equiv-action-Group) →
-    is-equiv-hom-action-Group (hom-equiv-action-Group e)
+    is-equiv-hom-action-Group G X Y (hom-equiv-action-Group e)
   is-equiv-hom-equiv-action-Group =
     is-equiv-map-equiv-action-Group
+
+  equiv-is-equiv-hom-action-Group :
+    (f : hom-action-Group G X Y) → is-equiv-hom-action-Group G X Y f →
+    equiv-action-Group
+  pr1 (pr1 (equiv-is-equiv-hom-action-Group f is-equiv-f)) =
+    map-hom-action-Group G X Y f
+  pr2 (pr1 (equiv-is-equiv-hom-action-Group f is-equiv-f)) = is-equiv-f
+  pr2 (equiv-is-equiv-hom-action-Group f is-equiv-f) =
+    preserves-action-hom-action-Group G X Y f
 ```
+
+### Equality of equivalences of group actions
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (G : Group l1) (X : action-Group G l2)
-  (Y : action-Group G l3) (e : equiv-action-Group G X Y)
+  {l1 l2 l3 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3)
+  (e : equiv-action-Group G X Y)
   where
 
   htpy-equiv-action-Group : (f : equiv-action-Group G X Y) → UU (l2 ⊔ l3)
@@ -113,7 +136,7 @@ module _
     refl-htpy-hom-action-Group G X Y (hom-equiv-action-Group G X Y e)
 
   htpy-eq-equiv-action-Group :
-    (f : equiv-action-Group G X Y) → Id e f → htpy-equiv-action-Group f
+    (f : equiv-action-Group G X Y) → e ＝ f → htpy-equiv-action-Group f
   htpy-eq-equiv-action-Group .e refl = refl-htpy-equiv-action-Group
 
   is-torsorial-htpy-equiv-action-Group : is-torsorial htpy-equiv-action-Group
@@ -147,26 +170,35 @@ module _
       htpy-eq-equiv-action-Group
 
   extensionality-equiv-action-Group :
-    (f : equiv-action-Group G X Y) → Id e f ≃ htpy-equiv-action-Group f
+    (f : equiv-action-Group G X Y) → (e ＝ f) ≃ htpy-equiv-action-Group f
   pr1 (extensionality-equiv-action-Group f) =
     htpy-eq-equiv-action-Group f
   pr2 (extensionality-equiv-action-Group f) =
     is-equiv-htpy-eq-equiv-action-Group f
 
   eq-htpy-equiv-action-Group :
-    (f : equiv-action-Group G X Y) → htpy-equiv-action-Group f → Id e f
+    (f : equiv-action-Group G X Y) → htpy-equiv-action-Group f → e ＝ f
   eq-htpy-equiv-action-Group f =
     map-inv-is-equiv (is-equiv-htpy-eq-equiv-action-Group f)
+```
 
+### The inverse equivalence of group actions
+
+```agda
 module _
   {l1 l2 l3 : Level} (G : Group l1)
   (X : action-Group G l2) (Y : action-Group G l3)
   where
 
-  inv-equiv-action-Group :
-    equiv-action-Group G X Y → equiv-action-Group G Y X
-  pr1 (inv-equiv-action-Group (e , H)) = inv-equiv e
-  pr2 (inv-equiv-action-Group (e , H)) g =
+  map-inv-equiv-action-Group :
+    equiv-action-Group G X Y → type-action-Group G Y → type-action-Group G X
+  map-inv-equiv-action-Group e =
+    map-inv-equiv (equiv-equiv-action-Group G X Y e)
+
+  preserves-action-map-inv-equiv-action-Group :
+    (e : equiv-action-Group G X Y) →
+    preserves-action-Group G Y X (map-inv-equiv-action-Group e)
+  preserves-action-map-inv-equiv-action-Group (e , H) g =
     coherence-square-inv-horizontal
       ( e)
       ( mul-action-Group G X g)
@@ -174,6 +206,43 @@ module _
       ( e)
       ( H g)
 
+  inv-equiv-action-Group :
+    equiv-action-Group G X Y → equiv-action-Group G Y X
+  pr1 (inv-equiv-action-Group (e , H)) = inv-equiv e
+  pr2 (inv-equiv-action-Group e) =
+    preserves-action-map-inv-equiv-action-Group e
+
+  hom-inv-equiv-action-Group :
+    equiv-action-Group G X Y → hom-action-Group G Y X
+  hom-inv-equiv-action-Group e =
+    hom-equiv-action-Group G Y X (inv-equiv-action-Group e)
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1)
+  (X : action-Group G l2) (Y : action-Group G l3)
+  (f : hom-action-Group G X Y) (is-equiv-f : is-equiv-hom-action-Group G X Y f)
+  where
+
+  map-inv-is-equiv-hom-action-Group :
+    type-action-Group G Y → type-action-Group G X
+  map-inv-is-equiv-hom-action-Group =
+    map-inv-is-equiv is-equiv-f
+
+  preserves-action-map-inv-is-equiv-hom-action-Group :
+    preserves-action-Group G Y X (map-inv-is-equiv-hom-action-Group)
+  preserves-action-map-inv-is-equiv-hom-action-Group =
+    preserves-action-map-inv-equiv-action-Group G X Y
+      ( equiv-is-equiv-hom-action-Group G X Y f is-equiv-f)
+
+  hom-inv-is-equiv-hom-action-Group : hom-action-Group G Y X
+  hom-inv-is-equiv-hom-action-Group =
+    hom-inv-equiv-action-Group G X Y
+      ( equiv-is-equiv-hom-action-Group G X Y f is-equiv-f)
+```
+
+### The composite of equivalences of group actions
+
+```agda
 module _
   {l1 l2 l3 l4 : Level} (G : Group l1)
   (X : action-Group G l2) (Y : action-Group G l3) (Z : action-Group G l4)
@@ -194,7 +263,11 @@ module _
       ( map-equiv f)
       ( H g)
       ( K g)
+```
 
+### The identity equivalence on group actions
+
+```agda
 module _
   {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
   where
@@ -202,10 +275,20 @@ module _
   id-equiv-action-Group : equiv-action-Group G X X
   pr1 id-equiv-action-Group = id-equiv
   pr2 id-equiv-action-Group g = refl-htpy
+```
+
+## Properties
+
+### Equivalences of group actions characterize equality of group actions
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
+  where
 
   equiv-eq-action-Group :
-    (Y : action-Group G l2) → Id X Y → equiv-action-Group G X Y
-  equiv-eq-action-Group .X refl = id-equiv-action-Group
+    (Y : action-Group G l2) → X ＝ Y → equiv-action-Group G X Y
+  equiv-eq-action-Group .X refl = id-equiv-action-Group G X
 
   abstract
     is-torsorial-equiv-action-Group :
@@ -253,7 +336,11 @@ module _
     equiv-eq-action-Group Y
   pr2 (extensionality-action-Group Y) =
     is-equiv-equiv-eq-action-Group Y
+```
 
+### Composition of equivalences of group actions is associative
+
+```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (G : Group l1)
   (X1 : action-Group G l2) (X2 : action-Group G l3)
@@ -277,7 +364,11 @@ module _
       ( comp-equiv-action-Group G X1 X3 X4 h
         ( comp-equiv-action-Group G X1 X2 X3 g f))
       ( refl-htpy)
+```
 
+### The identity equivalence on group actions is a unit of composition
+
+```agda
 module _
   {l1 l2 l3 : Level} (G : Group l1)
   (X : action-Group G l2) (Y : action-Group G l3)
@@ -321,3 +412,7 @@ module _
       ( id-equiv-action-Group G Y)
       ( is-section-map-inv-equiv (pr1 f))
 ```
+
+## See also
+
+- [Isomorphisms of group actions](group-theory.isomorphisms-group-actions.md)

@@ -16,6 +16,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -55,16 +56,28 @@ that for any element `g` of the [group](group-theory.groups.md) `G` the square
 module _
   {l1 l2 l3 : Level} (G : Group l1)
   (X : action-Group G l2) (Y : action-Group G l3)
+  (f : type-action-Group G X → type-action-Group G Y)
   where
 
-  preserves-action-Group :
-    (type-action-Group G X → type-action-Group G Y) → UU (l1 ⊔ l2 ⊔ l3)
-  preserves-action-Group f =
+  preserves-action-Group : UU (l1 ⊔ l2 ⊔ l3)
+  preserves-action-Group =
     (g : type-Group G) →
     coherence-square-maps f (mul-action-Group G X g) (mul-action-Group G Y g) f
+
+  is-prop-preserves-action-Group : is-prop preserves-action-Group
+  is-prop-preserves-action-Group =
+    is-prop-iterated-Π 2
+      ( λ g x →
+        is-set-type-action-Group G Y
+          ( f (mul-action-Group G X g x))
+          ( mul-action-Group G Y g (f x)))
+
+  preserves-action-prop-Group : Prop (l1 ⊔ l2 ⊔ l3)
+  pr1 preserves-action-prop-Group = preserves-action-Group
+  pr2 preserves-action-prop-Group = is-prop-preserves-action-Group
 ```
 
-### Morphisms of G-sets
+### Morphisms of `G`-sets
 
 ```agda
 module _
