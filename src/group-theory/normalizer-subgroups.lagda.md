@@ -31,9 +31,9 @@ Consider a [subgroup](group-theory.subgroups.md) `H` of a
 [group](group-theory.groups.md) `G`. The **normalizer subgroup** `Nᴳ(H)` of `G`
 is the largest subgroup of `G` of which `H` is a
 [normal subgroup](group-theory.normal-subgroups.md). The normalizer subgroup
-consists of all elements `g : G` such that `h ∈ H ⇔ ghg⁻¹ ∈ H` for all `g ∈ G`.
-In other words, the normalizer subgroup consists of all elements `g` such that
-`gHg⁻¹ ＝ H`.
+consists of all elements `g : G` such that `h ∈ H ⇔ (gh)g⁻¹ ∈ H` for all
+`h ∈ G`. In other words, the normalizer subgroup consists of all elements `g`
+such that `(gH)g⁻¹ ＝ H`.
 
 The weaker condition that `gHg⁻¹ ⊆ H` is
 [not sufficient](https://math.stackexchange.com/q/107862) in the case of
