@@ -190,7 +190,7 @@ property of the set quotient as the unique maps equipped with identifications
 ```text
   (qx)(qy) ＝ q(xy)
          1 ＝ q1
-    (qx)⁻¹ =  q(x⁻¹)
+    (qx)⁻¹ ＝ q(x⁻¹)
 ```
 
 The group laws follow by the induction principle for set quotients.
