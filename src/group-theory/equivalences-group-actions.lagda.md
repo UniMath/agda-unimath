@@ -41,7 +41,7 @@ A [morphism of `G`-sets](group-theory.group-actions.md) is said to be an
 
 ## Definitions
 
-### The predicate of being an equivalence of group actions on morphisms
+### The predicate of being an equivalence of group actions
 
 ```agda
 module _
