@@ -73,7 +73,7 @@ pushout-product:
 
 ## Definitions
 
-### The standard pullback of the pullback-hom cospan
+### The codomain of the pullback-hom
 
 ```agda
 type-standard-pullback-hom :
