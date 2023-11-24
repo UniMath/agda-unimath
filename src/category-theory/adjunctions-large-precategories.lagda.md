@@ -37,7 +37,7 @@ Let `C` and `D` be two
                        ϕ X₁ Y₁
         hom (F X₁) Y₁ --------> hom X₁ (G Y₁)
               |                       |
-  g ∘ _ ∘ F f |                       | G g ∘ _ ∘ f
+  g ∘ - ∘ F f |                       | G g ∘ - ∘ f
               |                       |
               v                       v
         hom (F X₂) Y₂ --------> hom X₂ (G Y₂)

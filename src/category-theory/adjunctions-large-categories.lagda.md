@@ -36,7 +36,7 @@ Two [functors](category-theory.functors-large-categories.md) `F : C → D` and
                        ϕ X₁ Y₁
         hom (F X₁) Y₁ --------> hom X₁ (G Y₁)
               |                       |
-  g ∘ _ ∘ F f |                       | G g ∘ _ ∘ f
+  g ∘ - ∘ F f |                       | G g ∘ - ∘ f
               |                       |
               v                       v
         hom (F X₂) Y₂ --------> hom X₂ (G Y₂)
