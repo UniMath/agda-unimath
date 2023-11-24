@@ -17,6 +17,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -90,17 +91,17 @@ module _
   pr2 hom-symmetric-group-equiv-Set {f} {g} =
     ( eq-equiv-eq-map-equiv refl) ∙
     ( ap
-      ( λ h → e ∘e (( f ∘e (h ∘e g)) ∘e inv-equiv e))
+      ( λ h → e ∘e f ∘e h ∘e g ∘e inv-equiv e)
       ( inv (left-inverse-law-equiv e))) ∙
     ( eq-equiv-eq-map-equiv refl)
 
   hom-inv-symmetric-group-equiv-Set :
     hom-Group (symmetric-Group Y) (symmetric-Group X)
-  pr1 hom-inv-symmetric-group-equiv-Set f = inv-equiv e ∘e (f ∘e e)
+  pr1 hom-inv-symmetric-group-equiv-Set f = inv-equiv e ∘e f ∘e e
   pr2 hom-inv-symmetric-group-equiv-Set {f} {g} =
     ( eq-equiv-eq-map-equiv refl) ∙
     ( ap
-      ( λ h → inv-equiv e ∘e (( f ∘e (h ∘e g)) ∘e e))
+      ( λ h → inv-equiv e ∘e f ∘e h ∘e g ∘e e)
       ( inv (right-inverse-law-equiv e))) ∙
     ( eq-equiv-eq-map-equiv refl)
 
@@ -114,17 +115,15 @@ module _
         ( hom-inv-symmetric-group-equiv-Set))
       ( id-hom-Group (symmetric-Group Y))
   is-section-hom-inv-symmetric-group-equiv-Set =
-    eq-pair-Σ
+    eq-type-subtype
+      ( preserves-mul-prop-Semigroup
+        ( semigroup-Group (symmetric-Group Y))
+        ( semigroup-Group (symmetric-Group Y)))
       ( eq-htpy
         ( λ f →
           ( eq-equiv-eq-map-equiv refl) ∙
-          ( ap (λ h → h ∘e (f ∘e h)) (right-inverse-law-equiv e)) ∙
+          ( ap (λ h → h ∘e f ∘e h) (right-inverse-law-equiv e)) ∙
           ( eq-equiv-eq-map-equiv refl)))
-      ( eq-is-prop
-        ( is-prop-preserves-mul-Semigroup
-          ( semigroup-Group (symmetric-Group Y))
-          ( semigroup-Group (symmetric-Group Y))
-          ( id)))
 
   is-retraction-hom-inv-symmetric-group-equiv-Set :
     Id
@@ -136,17 +135,15 @@ module _
         ( hom-symmetric-group-equiv-Set))
       ( id-hom-Group (symmetric-Group X))
   is-retraction-hom-inv-symmetric-group-equiv-Set =
-    eq-pair-Σ
+    eq-type-subtype
+      ( preserves-mul-prop-Semigroup
+        ( semigroup-Group (symmetric-Group X))
+        ( semigroup-Group (symmetric-Group X)))
       ( eq-htpy
         ( λ f →
           ( eq-equiv-eq-map-equiv refl) ∙
-          ( ap (λ h → h ∘e (f ∘e h)) (left-inverse-law-equiv e)) ∙
+          ( ap (λ h → h ∘e f ∘e h) (left-inverse-law-equiv e)) ∙
           ( eq-equiv-eq-map-equiv refl)))
-      ( eq-is-prop
-        ( is-prop-preserves-mul-Semigroup
-          ( semigroup-Group (symmetric-Group X))
-          ( semigroup-Group (symmetric-Group X))
-          ( id)))
 
   iso-symmetric-group-equiv-Set :
     iso-Group (symmetric-Group X) (symmetric-Group Y)
@@ -221,6 +218,5 @@ module _
       ( op-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
       ( compute-symmetric-Concrete-Group')
-      ( iso-inv-Group
-        ( group-Concrete-Group (symmetric-Concrete-Group A)))
+      ( iso-inv-Group (group-Concrete-Group (symmetric-Concrete-Group A)))
 ```

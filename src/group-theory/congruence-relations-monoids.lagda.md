@@ -154,10 +154,10 @@ extensionality-congruence-Monoid :
 extensionality-congruence-Monoid M =
   extensionality-congruence-Semigroup (semigroup-Monoid M)
 
-equivalence-relationate-same-elements-congruence-Monoid :
+eq-relate-same-elements-congruence-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (R S : congruence-Monoid l2 M) →
   relate-same-elements-congruence-Monoid M R S → R ＝ S
-equivalence-relationate-same-elements-congruence-Monoid M =
-  equivalence-relationate-same-elements-congruence-Semigroup
+eq-relate-same-elements-congruence-Monoid M =
+  eq-relate-same-elements-congruence-Semigroup
     ( semigroup-Monoid M)
 ```

@@ -79,6 +79,10 @@ module _
     (x : type-subtype) → is-in-subtype (inclusion-subtype x)
   is-in-subtype-inclusion-subtype = pr2
 
+  eq-is-in-subtype :
+    {x : A} {p q : is-in-subtype x} → p ＝ q
+  eq-is-in-subtype {x} = eq-is-prop (is-prop-is-in-subtype x)
+
   is-closed-under-eq-subtype :
     {x y : A} → is-in-subtype x → (x ＝ y) → is-in-subtype y
   is-closed-under-eq-subtype p refl = p

@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.law-of-excluded-middle
 open import foundation.mere-embeddings
 open import foundation.mere-equivalences
@@ -27,11 +28,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-The cardinality of a set is its isomorphism class. We take isomorphism classes
-of sets by set truncating the universe of sets of any given universe level. Note
-that this definition takes advantage of the univalence axiom: By the univalence
-axiom isomorphic sets are equal, and will be mapped to the same element in the
-set truncation of the universe of all sets.
+The **cardinality** of a [set](foundation-core.sets.md) is its
+[isomorphism](category-theory.isomorphisms-in-categories.md) class. We take
+isomorphism classes of sets by [set truncating](foundation.set-truncations.md)
+the universe of sets of any given
+[universe level](foundation.universe-levels.md). Note that this definition takes
+advantage of the [univalence axiom](foundation.univalence.md): By the univalence
+axiom [isomorphic sets](foundation.isomorphisms-of-sets.md) are
+[equal](foundation-core.identity-types.md), and will be mapped to the same
+element in the set truncation of the universe of all sets.
 
 ## Definition
 
@@ -60,9 +65,8 @@ leq-cardinality-Prop' {l1} {l2} X =
 
 compute-leq-cardinality-Prop' :
   {l1 l2 : Level} (X : Set l1) (Y : Set l2) →
-  Id
-    ( leq-cardinality-Prop' X (cardinality Y))
-    ( mere-emb-Prop (type-Set X) (type-Set Y))
+  ( leq-cardinality-Prop' X (cardinality Y)) ＝
+  ( mere-emb-Prop (type-Set X) (type-Set Y))
 compute-leq-cardinality-Prop' {l1} {l2} X =
   triangle-universal-property-trunc-Set
     ( Prop-Set (l1 ⊔ l2))
@@ -75,7 +79,8 @@ leq-cardinality-Prop {l1} {l2} =
     ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
     ( leq-cardinality-Prop')
 
-leq-cardinality : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
+leq-cardinality :
+  {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
 leq-cardinality X Y = type-Prop (leq-cardinality-Prop X Y)
 
 is-prop-leq-cardinality :
@@ -108,7 +113,7 @@ inv-unit-leq-cardinality :
   mere-emb (type-Set X) (type-Set Y)
 inv-unit-leq-cardinality X Y = pr1 (compute-leq-cardinality X Y)
 
-refl-leq-cardinality : {l : Level} → is-reflexive (leq-cardinality {l})
+refl-leq-cardinality : is-reflexive-Large-Relation cardinal leq-cardinality
 refl-leq-cardinality {l} =
   apply-dependent-universal-property-trunc-Set'
     ( λ X → set-Prop (leq-cardinality-Prop X X))
@@ -124,38 +129,38 @@ transitive-leq-cardinality :
   leq-cardinality X Z
 transitive-leq-cardinality X Y Z =
   apply-dependent-universal-property-trunc-Set'
-  (λ u →
+  ( λ u →
     set-Prop
-      (function-Prop
-        (leq-cardinality u Y)
-        (function-Prop (leq-cardinality Y Z)
-          (leq-cardinality-Prop u Z))))
-  (λ a →
+      ( function-Prop
+        ( leq-cardinality u Y)
+        ( function-Prop (leq-cardinality Y Z)
+          ( leq-cardinality-Prop u Z))))
+  ( λ a →
     apply-dependent-universal-property-trunc-Set'
-    (λ v →
+    ( λ v →
       set-Prop
         (function-Prop
           (leq-cardinality (cardinality a) v)
           (function-Prop (leq-cardinality v Z)
             (leq-cardinality-Prop (cardinality a) Z))))
-    (λ b →
+    ( λ b →
       apply-dependent-universal-property-trunc-Set'
-      (λ w →
+      ( λ w →
         set-Prop
           (function-Prop
             (leq-cardinality (cardinality a) (cardinality b))
             (function-Prop (leq-cardinality (cardinality b) w)
               (leq-cardinality-Prop (cardinality a) w))))
-      (λ c a<b b<c →
+      ( λ c a<b b<c →
         unit-leq-cardinality
-          a
-          c
-          (transitive-mere-emb
-            (inv-unit-leq-cardinality b c b<c)
-            (inv-unit-leq-cardinality a b a<b)))
-      Z)
-    Y)
-  X
+          ( a)
+          ( c)
+          ( transitive-mere-emb
+            ( inv-unit-leq-cardinality b c b<c)
+            ( inv-unit-leq-cardinality a b a<b)))
+      ( Z))
+    ( Y))
+  ( X)
 ```
 
 ## Properties
@@ -182,7 +187,7 @@ antisymmetric-leq-cardinality :
   leq-cardinality X Y → leq-cardinality Y X → X ＝ Y
 antisymmetric-leq-cardinality {l1} X Y lem =
   apply-dependent-universal-property-trunc-Set'
-  (λ u →
+  ( λ u →
     set-Prop
       ( function-Prop
         ( leq-cardinality u Y)

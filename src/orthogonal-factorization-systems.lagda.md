@@ -19,6 +19,7 @@ open import orthogonal-factorization-systems.factorizations-of-maps public
 open import orthogonal-factorization-systems.factorizations-of-maps-function-classes public
 open import orthogonal-factorization-systems.factorizations-of-maps-global-function-classes public
 open import orthogonal-factorization-systems.function-classes public
+open import orthogonal-factorization-systems.functoriality-higher-modalities public
 open import orthogonal-factorization-systems.functoriality-pullback-hom public
 open import orthogonal-factorization-systems.global-function-classes public
 open import orthogonal-factorization-systems.higher-modalities public
@@ -33,7 +34,9 @@ open import orthogonal-factorization-systems.localizations-maps public
 open import orthogonal-factorization-systems.localizations-subuniverses public
 open import orthogonal-factorization-systems.locally-small-modal-operators public
 open import orthogonal-factorization-systems.mere-lifting-properties public
+open import orthogonal-factorization-systems.modal-induction public
 open import orthogonal-factorization-systems.modal-operators public
+open import orthogonal-factorization-systems.modal-subuniverse-induction public
 open import orthogonal-factorization-systems.null-types public
 open import orthogonal-factorization-systems.open-modalities public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public

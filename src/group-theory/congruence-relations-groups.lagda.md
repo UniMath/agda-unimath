@@ -260,9 +260,9 @@ extensionality-congruence-Group :
 extensionality-congruence-Group G =
   extensionality-congruence-Semigroup (semigroup-Group G)
 
-equivalence-relationate-same-elements-congruence-Group :
+eq-relate-same-elements-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
   relate-same-elements-congruence-Group G R S → R ＝ S
-equivalence-relationate-same-elements-congruence-Group G =
-  equivalence-relationate-same-elements-congruence-Semigroup (semigroup-Group G)
+eq-relate-same-elements-congruence-Group G =
+  eq-relate-same-elements-congruence-Semigroup (semigroup-Group G)
 ```
