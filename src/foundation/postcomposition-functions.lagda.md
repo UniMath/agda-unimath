@@ -1,7 +1,7 @@
 # Postcomposition
 
 ```agda
-module foundation.postcomposition where
+module foundation.postcomposition-functions where
 ```
 
 <details><summary>Imports</summary>

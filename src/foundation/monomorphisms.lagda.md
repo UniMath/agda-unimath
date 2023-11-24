@@ -11,7 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functoriality-function-types
-open import foundation.postcomposition
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

@@ -20,7 +20,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
-open import foundation.postcomposition
+open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-function-types

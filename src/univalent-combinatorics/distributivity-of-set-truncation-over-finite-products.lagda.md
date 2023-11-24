@@ -25,7 +25,7 @@ open import foundation.functoriality-function-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.postcomposition
+open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositional-truncations

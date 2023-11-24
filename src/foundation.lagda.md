@@ -224,7 +224,7 @@ open import foundation.perfect-images public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
-open import foundation.postcomposition public
+open import foundation.postcomposition-functions public
 open import foundation.powersets public
 open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public

@@ -11,7 +11,7 @@ open import foundation-core.whiskering-homotopies public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
-open import foundation.postcomposition
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.function-types

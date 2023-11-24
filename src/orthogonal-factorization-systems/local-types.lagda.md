@@ -18,7 +18,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
-open import foundation.postcomposition
+open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions

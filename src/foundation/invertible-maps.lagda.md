@@ -24,7 +24,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.postcomposition
+open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections

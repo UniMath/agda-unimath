@@ -32,7 +32,7 @@ open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equivalences
 open import foundation.negation
-open import foundation.postcomposition
+open import foundation.postcomposition-functions
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
