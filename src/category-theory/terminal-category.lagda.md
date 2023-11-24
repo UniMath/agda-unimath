@@ -174,7 +174,7 @@ pr1 terminal-Gaunt-Category = terminal-Category
 pr2 terminal-Gaunt-Category = is-gaunt-terminal-Category
 ```
 
-### Points in a categories
+### Points in categories
 
 Using the terminal category as the representing category of objects, we can
 define, given an object in a category `x ∈ C`, the _point_ at `x` as the
@@ -182,19 +182,15 @@ define, given an object in a category `x ∈ C`, the _point_ at `x` as the
 category to `C` at `x`.
 
 ```agda
-module _
-  {l1 l2 : Level} (C : Precategory l1 l2) (x : obj-Precategory C)
-  where
+point-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) (x : obj-Precategory C) →
+  functor-Precategory terminal-Precategory C
+point-Precategory = constant-functor-Precategory terminal-Precategory
 
-  point-Precategory : functor-Precategory terminal-Precategory C
-  point-Precategory = constant-functor-Precategory terminal-Precategory C x
-
-module _
-  {l1 l2 : Level} (C : Category l1 l2) (x : obj-Category C)
-  where
-
-  point-Category : functor-Category terminal-Category C
-  point-Category = point-Precategory (precategory-Category C) x
+point-Category :
+  {l1 l2 : Level} (C : Category l1 l2) (x : obj-Category C) →
+  functor-Category terminal-Category C
+point-Category C = point-Precategory (precategory-Category C)
 ```
 
 ## Properties
