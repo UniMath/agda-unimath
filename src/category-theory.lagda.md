@@ -72,6 +72,8 @@ open import category-theory.functors-set-magmoids public
 open import category-theory.gaunt-categories public
 open import category-theory.groupoids public
 open import category-theory.homotopies-natural-transformations-large-precategories public
+open import category-theory.indiscrete-precategories public
+open import category-theory.initial-category public
 open import category-theory.initial-objects-large-categories public
 open import category-theory.initial-objects-large-precategories public
 open import category-theory.initial-objects-precategories public
@@ -143,6 +145,7 @@ open import category-theory.strict-categories public
 open import category-theory.structure-equivalences-set-magmoids public
 open import category-theory.subcategories public
 open import category-theory.subprecategories public
+open import category-theory.terminal-category public
 open import category-theory.terminal-objects-precategories public
 open import category-theory.wide-subcategories public
 open import category-theory.wide-subprecategories public
