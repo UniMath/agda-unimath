@@ -17,8 +17,7 @@ def parse_contributors_file(path=CONTRIBUTORS_FILE):
 
 def print_skipping_contributor_warning(contributor):
     print('Warning: not attributing changes to', contributor,
-          f'. If you want your work to be attributed to you, add yourself to {
-              CONTRIBUTORS_FILE}',
+          f'. If you want your work to be attributed to you, add yourself to {CONTRIBUTORS_FILE}',
           file=sys.stderr)
 
 

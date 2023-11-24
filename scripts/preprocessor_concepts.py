@@ -165,8 +165,7 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
             chapter['content'] = chapter['content'][:insert_at] + \
                 formatted_references + chapter['content'][insert_at:]
         else:
-            chapter['content'] += f'\n## External links\n\n{
-                formatted_references}'
+            chapter['content'] += f'\n## External links\n\n{formatted_references}'
     tag_concepts_sections_rec_mut(chapter['sub_items'], config, mut_index)
 
 

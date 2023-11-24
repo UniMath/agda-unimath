@@ -89,8 +89,7 @@ def get_author_element_for_file(filename, include_contributors, contributors):
             author['displayName']
             for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
         ]
-        attribution_text = f'<p><i>Content created by {
-            format_multiple_authors_attribution(author_names)}.</i></p>'
+        attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',
@@ -131,12 +130,10 @@ def get_author_element_for_file(filename, include_contributors, contributors):
         formatted_authors = format_multiple_authors_attribution([
             contributors[author_index]['displayName'] for author_index in author_indices
         ])
-        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={
-            github_page_for_commit(sha)}>{message}.</a></i>\n'
+        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
 
     return (
-        f'{attribution_text}<p><i>{nobreak_span("Created on " + created_date)}.</i><br><i>{
-            nobreak_span("Last modified on " + modified_date)}.</i></p>',
+        f'{attribution_text}<p><i>{nobreak_span("Created on " + created_date)}.</i><br><i>{nobreak_span("Last modified on " + modified_date)}.</i></p>',
         recent_changes
     )
 
