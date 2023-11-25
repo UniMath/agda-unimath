@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.identity-types
@@ -20,7 +21,6 @@ open import foundation.truncations
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.fibers-of-maps
 open import foundation-core.truncation-levels
 ```
 
@@ -73,18 +73,17 @@ module _
   extensionality-trunc-im x y =
     ( equiv-tot
       ( λ q →
-        equiv-trunc
-          k
-          (equiv-tot
-            (λ p → equiv-concat (inv right-unit) q) ∘e
-            equiv-Eq-eq-fiber f (f y)) ∘e
-        ( inv-equiv (effectiveness-trunc k (x , q) (y , refl)) ∘e
-          ( equiv-concat
-              (ap unit-trunc (inv (tr-fiber f q refl)))
-              (unit-trunc (y , refl)) ∘e
-            equiv-concat
-              (preserves-tr (λ _ → unit-trunc) q (x , refl))
-              (unit-trunc (y , refl)))))) ∘e
+        ( equiv-trunc k
+          ( ( equiv-tot
+              ( λ p → equiv-concat (inv right-unit) q)) ∘e
+            ( equiv-Eq-eq-fiber f (f y)))) ∘e
+        ( inv-equiv (effectiveness-trunc k (x , q) (y , refl))) ∘e
+        ( equiv-concat
+          ( ap unit-trunc (compute-tr-fiber f q (x , refl)))
+          ( unit-trunc (y , refl))) ∘e
+        ( equiv-concat
+          ( preserves-tr (λ _ → unit-trunc) q (x , refl))
+          ( unit-trunc (y , refl))))) ∘e
     ( equiv-pair-eq-Σ
       ( unit-trunc-im (succ-𝕋 k) f x)
       ( unit-trunc-im (succ-𝕋 k) f y))
