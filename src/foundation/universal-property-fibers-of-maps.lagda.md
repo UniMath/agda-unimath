@@ -58,17 +58,6 @@ out universal property. This lets us characterize the sections
 `(a : A) → B (f a)`. And, in the case that `f` was defined using the mapping out
 property of `A`, we may obtain an even nicer characterization.
 
-For example, if we take `A` to be `unit` and the map `f : unit → B` to be
-defined by a point `b₀ : B` and the universal property of `unit`, we have
-
-```text
-((b : B) → fiber f b → P b) ≃ ((t : unit) → P (f t)) ≃ ((t : unit) → P b₀) ≃ P b₀
-```
-
-which essentialy tells us `fiber f : B → UU` has the same universal property as
-`Id b₀ : B → UU`.
-
-
 ## Definition
 
 ```agda
