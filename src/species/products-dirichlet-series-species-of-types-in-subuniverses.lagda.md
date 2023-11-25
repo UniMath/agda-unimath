@@ -11,12 +11,12 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.global-subuniverses
 open import foundation.homotopies
+open import foundation.postcomposition-functions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-cartesian-product-types

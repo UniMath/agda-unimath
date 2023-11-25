@@ -15,6 +15,7 @@ open import foundation.embeddings
 open import foundation.function-extensionality
 open import foundation.functoriality-function-types
 open import foundation.functoriality-truncation
+open import foundation.precomposition-functions
 open import foundation.sections
 open import foundation.truncation-equivalences
 open import foundation.truncations

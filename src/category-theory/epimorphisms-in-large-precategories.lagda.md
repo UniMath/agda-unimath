@@ -10,10 +10,8 @@ module category-theory.epimorphisms-in-large-precategories where
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```

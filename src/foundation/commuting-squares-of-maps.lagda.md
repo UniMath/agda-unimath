@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 

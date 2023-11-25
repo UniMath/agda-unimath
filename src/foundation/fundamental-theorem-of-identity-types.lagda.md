@@ -8,6 +8,7 @@ module foundation.fundamental-theorem-of-identity-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.families-of-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

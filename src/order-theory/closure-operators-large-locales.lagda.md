@@ -36,8 +36,8 @@ open import order-theory.order-preserving-maps-large-posets
 ## Idea
 
 A **closure operator** on a [large locale](order-theory.large-locales.md) `L` is
-simply a [closure operator](order-theory.closure-operators-large-posets.md) on
-the underlying [large poset](order-theory.large-posets.md) of `L`.
+a [closure operator](order-theory.closure-operators-large-posets.md) on the
+underlying [large poset](order-theory.large-posets.md) of `L`.
 
 We show that if the closed elements are closed under meets, then the closed
 elements form a large locale. Note that the condition that the closed elements

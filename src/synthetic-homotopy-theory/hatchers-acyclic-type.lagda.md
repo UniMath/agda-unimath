@@ -28,7 +28,6 @@ open import foundation.universe-levels
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.eckmann-hilton-argument
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces

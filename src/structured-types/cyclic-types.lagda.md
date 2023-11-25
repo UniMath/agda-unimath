@@ -7,14 +7,8 @@ module structured-types.cyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integers
-
 open import foundation.automorphisms
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.propositional-truncations
 open import foundation.propositions

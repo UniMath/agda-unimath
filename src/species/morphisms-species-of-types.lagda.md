@@ -7,8 +7,6 @@ module species.morphisms-species-of-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-types

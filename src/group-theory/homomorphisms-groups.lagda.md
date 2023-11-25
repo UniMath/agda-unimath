@@ -9,7 +9,6 @@ module group-theory.homomorphisms-groups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
