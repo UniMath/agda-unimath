@@ -17,8 +17,10 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.negation
 open import foundation-core.torsorial-type-families
 ```
 
@@ -83,8 +85,17 @@ module _
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
 
+  is-irreflexive : UU (l1 ⊔ l2)
+  is-irreflexive = (x : A) → ¬ (R x x)
+
+  is-asymmetric : UU (l1 ⊔ l2)
+  is-asymmetric = (x y : A) → R x y → ¬ (R y x)
+
   is-antisymmetric : UU (l1 ⊔ l2)
   is-antisymmetric = (x y : A) → R x y → R y x → x ＝ y
+
+  is-irreflexive-is-asymmetric : is-asymmetric → is-irreflexive
+  is-irreflexive-is-asymmetric H x xRx = H x x xRx xRx
 
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)

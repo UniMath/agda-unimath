@@ -108,4 +108,5 @@ open import order-theory.total-preorders public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
+open import order-theory.well-founded-orders public
 ```

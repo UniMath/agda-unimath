@@ -11,6 +11,7 @@ open import foundation-core.propositional-maps public
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.truncated-maps
 open import foundation.universe-levels
@@ -61,4 +62,16 @@ module _
       ( is-prop-map-Prop f)
       ( is-prop-map-is-emb)
       ( is-emb-is-prop-map)
+```
+
+### Propositional maps are preserved under composition
+
+```agda
+comp-prop-map :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {X : UU l3} (g : prop-map B X) (h : prop-map A B) →
+  prop-map A X
+pr1 (comp-prop-map g h) = pr1 g ∘ pr1 h
+pr2 (comp-prop-map g h) =
+  is-prop-map-comp (pr1 g) (pr1 h) (pr2 g) (pr2 h)
 ```

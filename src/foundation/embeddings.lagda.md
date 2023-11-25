@@ -18,6 +18,7 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.truncated-maps
 open import foundation.universe-levels
 
@@ -399,4 +400,38 @@ module _
       ( fiber' f (f a))
       ( equiv-fiber f (f a))
       ( is-contr-fibers-values-is-emb' e a)
+```
+
+### Equivalence on total spaces induced by embedding on the base types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} (f : A ↪ B)
+  (H : ((b , c) : Σ B C) → fiber (map-emb f) b)
+  where
+
+  inv-map-Σ-emb-base : Σ B C → Σ A (C ∘ map-emb f)
+  inv-map-Σ-emb-base (b , c) = (pr1 (H (b , c)) , inv-tr C (pr2 (H (b , c))) c)
+
+  issec-inv-map-Σ-emb-base :
+    ( map-Σ-map-base (map-emb f) C ∘ inv-map-Σ-emb-base) ~ id
+  issec-inv-map-Σ-emb-base (b , c) =
+    ap
+      (λ s → (pr1 s , inv-tr C (pr2 s) c))
+      (eq-is-contr (is-torsorial-path' b))
+
+  isretr-inv-map-Σ-emb-base :
+    ( inv-map-Σ-emb-base ∘ map-Σ-map-base (map-emb f) C) ~ id
+  isretr-inv-map-Σ-emb-base (a , c) =
+    ap
+      (λ s → (pr1 s , inv-tr C (pr2 s) c))
+      (eq-is-prop (is-prop-map-is-emb (pr2 f) (map-emb f a)))
+
+  equiv-Σ-emb-base : Σ A (C ∘ map-emb f) ≃ Σ B C
+  pr1 equiv-Σ-emb-base = map-Σ-map-base (map-emb f) C
+  pr2 equiv-Σ-emb-base =
+    is-equiv-is-invertible
+      inv-map-Σ-emb-base
+      issec-inv-map-Σ-emb-base
+      isretr-inv-map-Σ-emb-base
 ```
