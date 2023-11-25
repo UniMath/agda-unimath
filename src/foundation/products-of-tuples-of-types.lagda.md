@@ -19,7 +19,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The product of an `n`-tuple of types is just the dependent product.
+The product of an `n`-tuple of types is their dependent product.
 
 ## Definition
 

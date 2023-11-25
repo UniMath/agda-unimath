@@ -143,46 +143,46 @@ transitive-sim-fraction-ℤ x y z s r =
         ( numerator-fraction-ℤ x)
         ( denominator-fraction-ℤ z)
         ( denominator-fraction-ℤ y)) ∙
-      ( ( ap
-          ( (numerator-fraction-ℤ x) *ℤ_)
-          ( commutative-mul-ℤ
-            ( denominator-fraction-ℤ z)
-            ( denominator-fraction-ℤ y))) ∙
-        ( ( inv
-            ( associative-mul-ℤ
-              ( numerator-fraction-ℤ x)
-              ( denominator-fraction-ℤ y)
-              ( denominator-fraction-ℤ z))) ∙
-          ( ( ap ( _*ℤ (denominator-fraction-ℤ z)) r) ∙
-            ( ( associative-mul-ℤ
-                ( numerator-fraction-ℤ y)
-                ( denominator-fraction-ℤ x)
-                ( denominator-fraction-ℤ z)) ∙
-              ( ( ap
-                  ( (numerator-fraction-ℤ y) *ℤ_)
-                  ( commutative-mul-ℤ
-                    ( denominator-fraction-ℤ x)
-                    ( denominator-fraction-ℤ z))) ∙
-                ( ( inv
-                    ( associative-mul-ℤ
-                      ( numerator-fraction-ℤ y)
-                      ( denominator-fraction-ℤ z)
-                      ( denominator-fraction-ℤ x))) ∙
-                  ( ( ap (_*ℤ (denominator-fraction-ℤ x)) s) ∙
-                    ( ( associative-mul-ℤ
-                        ( numerator-fraction-ℤ z)
-                        ( denominator-fraction-ℤ y)
-                        ( denominator-fraction-ℤ x)) ∙
-                      ( ( ap
-                          ( (numerator-fraction-ℤ z) *ℤ_)
-                          ( commutative-mul-ℤ
-                            ( denominator-fraction-ℤ y)
-                            ( denominator-fraction-ℤ x))) ∙
-                        ( inv
-                          ( associative-mul-ℤ
-                            ( numerator-fraction-ℤ z)
-                            ( denominator-fraction-ℤ x)
-                            ( denominator-fraction-ℤ y)))))))))))))
+      ( ap
+        ( (numerator-fraction-ℤ x) *ℤ_)
+        ( commutative-mul-ℤ
+          ( denominator-fraction-ℤ z)
+          ( denominator-fraction-ℤ y))) ∙
+      ( inv
+        ( associative-mul-ℤ
+          ( numerator-fraction-ℤ x)
+          ( denominator-fraction-ℤ y)
+          ( denominator-fraction-ℤ z))) ∙
+      ( ap ( _*ℤ (denominator-fraction-ℤ z)) r) ∙
+      ( associative-mul-ℤ
+        ( numerator-fraction-ℤ y)
+        ( denominator-fraction-ℤ x)
+        ( denominator-fraction-ℤ z)) ∙
+      ( ap
+        ( (numerator-fraction-ℤ y) *ℤ_)
+        ( commutative-mul-ℤ
+          ( denominator-fraction-ℤ x)
+          ( denominator-fraction-ℤ z))) ∙
+      ( inv
+        ( associative-mul-ℤ
+          ( numerator-fraction-ℤ y)
+          ( denominator-fraction-ℤ z)
+          ( denominator-fraction-ℤ x))) ∙
+      ( ap (_*ℤ (denominator-fraction-ℤ x)) s) ∙
+      ( associative-mul-ℤ
+        ( numerator-fraction-ℤ z)
+        ( denominator-fraction-ℤ y)
+        ( denominator-fraction-ℤ x)) ∙
+      ( ap
+        ( (numerator-fraction-ℤ z) *ℤ_)
+        ( commutative-mul-ℤ
+          ( denominator-fraction-ℤ y)
+          ( denominator-fraction-ℤ x))) ∙
+      ( inv
+        ( associative-mul-ℤ
+          ( numerator-fraction-ℤ z)
+          ( denominator-fraction-ℤ x)
+          ( denominator-fraction-ℤ y))))
 
 equivalence-relation-sim-fraction-ℤ : equivalence-relation lzero fraction-ℤ
 pr1 equivalence-relation-sim-fraction-ℤ = sim-fraction-ℤ-Prop

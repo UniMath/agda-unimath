@@ -30,6 +30,9 @@ makes use of several postulates.
    [`synthetic-homotopy-theory.pushouts`](synthetic-homotopy-theory.pushouts.md)
 10. Various **Agda built-in types** are postulated in
     [`primitives`](primitives.md) and in [`reflection`](reflection.md).
+11. The **flat modality** and accompanying modalities, with propositional
+    computation rules, are postulated in
+    [`modal-type-theory`](modal-type-theory.md).
 
 Note that there is some redundancy in the postulates we assume. For example, the
 [univalence axiom implies function extensionality](foundation.univalence-implies-function-extensionality.md),

@@ -10,6 +10,7 @@ module foundation.descent-coproduct-types where
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
+open import foundation.families-of-equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels

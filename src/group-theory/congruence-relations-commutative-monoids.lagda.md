@@ -8,8 +8,6 @@ module group-theory.congruence-relations-commutative-monoids where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
@@ -179,11 +177,11 @@ extensionality-congruence-Commutative-Monoid :
 extensionality-congruence-Commutative-Monoid M =
   extensionality-congruence-Monoid (monoid-Commutative-Monoid M)
 
-equivalence-relationate-same-elements-congruence-Commutative-Monoid :
+eq-relate-same-elements-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R S : congruence-Commutative-Monoid l2 M) →
   relate-same-elements-congruence-Commutative-Monoid M R S → R ＝ S
-equivalence-relationate-same-elements-congruence-Commutative-Monoid M =
-  equivalence-relationate-same-elements-congruence-Monoid
+eq-relate-same-elements-congruence-Commutative-Monoid M =
+  eq-relate-same-elements-congruence-Monoid
     ( monoid-Commutative-Monoid M)
 ```

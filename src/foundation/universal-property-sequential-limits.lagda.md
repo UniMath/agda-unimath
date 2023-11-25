@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-towers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.postcomposition-functions
 open import foundation.subtype-identity-principle
 open import foundation.towers
 open import foundation.universe-levels

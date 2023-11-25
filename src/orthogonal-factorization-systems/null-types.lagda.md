@@ -9,7 +9,7 @@ module orthogonal-factorization-systems.null-types where
 ```agda
 open import foundation.constant-maps
 open import foundation.equivalences
-open import foundation.function-types
+open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type

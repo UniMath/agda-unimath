@@ -9,10 +9,7 @@ module synthetic-homotopy-theory.eckmann-hilton-argument where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
@@ -22,7 +19,6 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
-open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.triple-loop-spaces
 ```

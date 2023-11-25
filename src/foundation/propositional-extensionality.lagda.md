@@ -13,6 +13,7 @@ open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.postcomposition-functions
 open import foundation.raising-universe-levels
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications

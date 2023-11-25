@@ -134,25 +134,6 @@ module _
     is-retraction-map-retraction map-equiv retraction-map-equiv
 ```
 
-### Families of equivalences
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1}
-  where
-
-  is-fiberwise-equiv :
-    {B : A → UU l2} {C : A → UU l3}
-    (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
-  is-fiberwise-equiv f = (x : A) → is-equiv (f x)
-
-  fiberwise-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  fiberwise-equiv B C = Σ ((x : A) → B x → C x) is-fiberwise-equiv
-
-  fam-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  fam-equiv B C = (x : A) → B x ≃ C x
-```
-
 ### The identity equivalence
 
 ```agda
@@ -758,3 +739,7 @@ syntax step-equivalence-reasoning e Z f = e ≃ Z by f
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

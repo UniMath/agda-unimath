@@ -1,6 +1,8 @@
 # The universal property of pushouts
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module synthetic-homotopy-theory.universal-property-pushouts where
 ```
 
@@ -20,12 +22,13 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -183,7 +186,7 @@ module _
     is-equiv h
   is-equiv-up-pushout-up-pushout up-c up-d =
     is-equiv-is-equiv-precomp h
-      ( λ l Z →
+      ( λ Z →
         is-equiv-top-map-triangle
           ( cocone-map f g d)
           ( cocone-map f g c)
@@ -264,18 +267,18 @@ triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
         ( inv (is-section-eq-htpy (h ·l coherence-square-cocone f g c))))
 
 pullback-property-pushout-universal-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2}
+  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2}
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   universal-property-pushout l f g c → pullback-property-pushout l f g c
-pullback-property-pushout-universal-property-pushout l f g c up-c Y =
+pullback-property-pushout-universal-property-pushout f g c up-c Y =
   is-equiv-top-map-triangle
     ( cocone-map f g c)
     ( tot (λ i' → tot (λ j' → htpy-eq)))
     ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y))
     ( triangle-pullback-property-pushout-universal-property-pushout f g c Y)
     ( is-equiv-tot-is-fiberwise-equiv
-      ( λ i' → is-equiv-tot-is-fiberwise-equiv
-        ( λ j' → funext (i' ∘ f) (j' ∘ g))))
+      ( λ i' →
+        is-equiv-tot-is-fiberwise-equiv (λ j' → funext (i' ∘ f) (j' ∘ g))))
     ( up-c Y)
 
 universal-property-pushout-pullback-property-pushout :
@@ -290,8 +293,8 @@ universal-property-pushout-pullback-property-pushout l f g c pb-c Y =
     ( triangle-pullback-property-pushout-universal-property-pushout f g c Y)
     ( pb-c Y)
     ( is-equiv-tot-is-fiberwise-equiv
-      ( λ i' → is-equiv-tot-is-fiberwise-equiv
-        ( λ j' → funext (i' ∘ f) (j' ∘ g))))
+      ( λ i' →
+        is-equiv-tot-is-fiberwise-equiv (λ j' → funext (i' ∘ f) (j' ∘ g))))
 ```
 
 ### If the vertical map of a span is an equivalence, then the vertical map of a cocone on it is an equivalence if and only if the cocone is a pushout
@@ -304,14 +307,16 @@ is-equiv-universal-property-pushout :
   ({l : Level} → universal-property-pushout l f g c) → is-equiv (pr1 (pr2 c))
 is-equiv-universal-property-pushout f g (i , j , H) is-equiv-f up-c =
   is-equiv-is-equiv-precomp j
-    ( λ l T →
+    ( λ T →
       is-equiv-is-pullback'
         ( _∘ f)
         ( _∘ g)
         ( cone-pullback-property-pushout f g (i , j , H) T)
         ( is-equiv-precomp-is-equiv f is-equiv-f T)
-        ( pullback-property-pushout-universal-property-pushout
-          l f g (i , j , H) up-c T))
+        ( pullback-property-pushout-universal-property-pushout f g
+          ( i , j , H)
+          ( up-c)
+          ( T)))
 
 equiv-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
@@ -337,12 +342,13 @@ universal-property-pushout-is-equiv
   f g (i , j , H) is-equiv-f is-equiv-j {l} =
   let c = (i , j , H) in
   universal-property-pushout-pullback-property-pushout l f g c
-    ( λ T → is-pullback-is-equiv'
-      ( _∘ f)
-      ( _∘ g)
-      ( cone-pullback-property-pushout f g c T)
-      ( is-equiv-precomp-is-equiv f is-equiv-f T)
-      ( is-equiv-precomp-is-equiv j is-equiv-j T))
+    ( λ T →
+      is-pullback-is-equiv'
+        ( _∘ f)
+        ( _∘ g)
+        ( cone-pullback-property-pushout f g c T)
+        ( is-equiv-precomp-is-equiv f is-equiv-f T)
+        ( is-equiv-precomp-is-equiv j is-equiv-j T))
 ```
 
 ### If the horizontal map of a span is an equivalence, then the horizontal map of a cocone on it is an equivalence if and only if the cocone is a pushout
@@ -357,14 +363,13 @@ is-equiv-universal-property-pushout' :
 is-equiv-universal-property-pushout' f g c is-equiv-g up-c =
   is-equiv-is-equiv-precomp
     ( horizontal-map-cocone f g c)
-    ( λ l T →
+    ( λ T →
       is-equiv-is-pullback
         ( precomp f T)
         ( precomp g T)
         ( cone-pullback-property-pushout f g c T)
         ( is-equiv-precomp-is-equiv g is-equiv-g T)
-        ( pullback-property-pushout-universal-property-pushout
-          l f g c up-c T))
+        ( pullback-property-pushout-universal-property-pushout f g c up-c T))
 
 equiv-universal-property-pushout' :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
@@ -388,12 +393,13 @@ universal-property-pushout-is-equiv' :
 universal-property-pushout-is-equiv' f g (i , j , H) is-equiv-g is-equiv-i {l} =
   let c = (i , j , H) in
   universal-property-pushout-pullback-property-pushout l f g c
-    ( λ T → is-pullback-is-equiv
-      ( precomp f T)
-      ( precomp g T)
-      ( cone-pullback-property-pushout f g c T)
-      ( is-equiv-precomp-is-equiv g is-equiv-g T)
-      ( is-equiv-precomp-is-equiv i is-equiv-i T))
+    ( λ T →
+      is-pullback-is-equiv
+        ( precomp f T)
+        ( precomp g T)
+        ( cone-pullback-property-pushout f g c T)
+        ( is-equiv-precomp-is-equiv g is-equiv-g T)
+        ( is-equiv-precomp-is-equiv i is-equiv-i T))
 ```
 
 ### The pushout pasting lemmas
@@ -474,10 +480,10 @@ module _
             ( precomp k W)
             ( cone-pullback-property-pushout f g c W)
             ( cone-pullback-property-pushout (vertical-map-cocone f g c) k d W)
-            ( pullback-property-pushout-universal-property-pushout l f g c
+            ( pullback-property-pushout-universal-property-pushout f g c
               ( up-c)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout l
+            ( pullback-property-pushout-universal-property-pushout
               ( vertical-map-cocone f g c)
               ( k)
               ( d)
@@ -507,7 +513,7 @@ module _
           ( precomp k W)
           ( cone-pullback-property-pushout f g c W)
           ( cone-pullback-property-pushout (vertical-map-cocone f g c) k d W)
-          ( pullback-property-pushout-universal-property-pushout l f g c
+          ( pullback-property-pushout-universal-property-pushout f g c
             ( up-c)
             ( W))
           ( tr
@@ -543,7 +549,7 @@ module _
                   ( horizontal-map-cocone (vertical-map-cocone f g c) k d)
                   ( coherence-square-cocone f g c)
                   ( coherence-square-cocone (vertical-map-cocone f g c) k d))))
-            ( pullback-property-pushout-universal-property-pushout l f
+            ( pullback-property-pushout-universal-property-pushout f
               ( k ∘ g)
               ( cocone-comp-horizontal f g k c d)
               ( up-r)
@@ -686,10 +692,10 @@ module _
               ( horizontal-map-cocone f g c)
               ( d)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout l f g c
+            ( pullback-property-pushout-universal-property-pushout f g c
               ( up-c)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout l k
+            ( pullback-property-pushout-universal-property-pushout k
               ( horizontal-map-cocone f g c)
               ( d)
               ( up-d)
@@ -713,7 +719,7 @@ module _
           ( precomp g W)
           ( cone-pullback-property-pushout f g c W)
           ( cone-pullback-property-pushout k (horizontal-map-cocone f g c) d W)
-          ( pullback-property-pushout-universal-property-pushout l f g c up-c W)
+          ( pullback-property-pushout-universal-property-pushout f g c up-c W)
           ( tr
             ( is-pullback (precomp (k ∘ f) W) (precomp g W))
             ( eq-htpy-cone
@@ -752,7 +758,7 @@ module _
                   ( coherence-square-cocone k
                     ( horizontal-map-cocone f g c)
                     ( d)))))
-            ( pullback-property-pushout-universal-property-pushout l (k ∘ f) g
+            ( pullback-property-pushout-universal-property-pushout (k ∘ f) g
               ( cocone-comp-vertical f g k c d)
               ( up-r)
               ( W))))
@@ -961,7 +967,7 @@ module _
           ( is-equiv-precomp-is-equiv hB is-equiv-hB W)
           ( is-equiv-precomp-is-equiv hC is-equiv-hC W)
           ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
-          ( pullback-property-pushout-universal-property-pushout l f g
+          ( pullback-property-pushout-universal-property-pushout f g
             ( h , k , bottom)
             ( up-bottom)
             ( W)))
@@ -1009,7 +1015,7 @@ module _
           ( is-equiv-precomp-is-equiv hB is-equiv-hB W)
           ( is-equiv-precomp-is-equiv hC is-equiv-hC W)
           ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
-          ( pullback-property-pushout-universal-property-pushout l f' g'
+          ( pullback-property-pushout-universal-property-pushout f' g'
             ( h' , k' , top)
             ( up-top)
             ( W)))
