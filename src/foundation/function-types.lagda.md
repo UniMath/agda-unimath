@@ -161,7 +161,6 @@ module _
   dependent-comp g f a b = g a (f a b)
 ```
 
-
 ## See also
 
 ### Table of files about function types, composition, and equivalences
