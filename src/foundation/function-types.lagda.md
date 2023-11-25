@@ -1,4 +1,4 @@
- # Function types
+# Function types
 
 ```agda
 module foundation.function-types where
@@ -147,6 +147,20 @@ module _
             ( λ k l s → inv-equiv (equiv-funext)))) ∙
         ( eq-htpy-refl-htpy (h (i s))))
 ```
+
+### Composing families of functions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {D : A → UU l4}
+  where
+
+  dependent-comp :
+    ((a : A) → C a → D a) → ((a : A) → B a → C a) → (a : A) → B a → D a
+  dependent-comp g f a b = g a (f a b)
+```
+
 
 ## See also
 

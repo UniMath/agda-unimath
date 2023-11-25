@@ -40,7 +40,6 @@ module _
   is-fiberwise-equiv f = (x : A) → is-equiv (f x)
 ```
 
-
 ### Fiberwise equivalences
 
 ```agda
@@ -50,7 +49,7 @@ module _
 
   fiberwise-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   fiberwise-equiv B C = Σ ((x : A) → B x → C x) is-fiberwise-equiv
-  
+
   fiberwise-map-fiberwise-equiv :
     {B : A → UU l2} {C : A → UU l3} →
     fiberwise-equiv B C → (a : A) → B a → C a

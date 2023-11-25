@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
+open import foundation.families-of-equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
