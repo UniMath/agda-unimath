@@ -59,7 +59,7 @@ is-closed-under-addition-nilradical-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) →
   is-closed-under-addition-subset-Commutative-Ring A
     ( subset-nilradical-Commutative-Ring A)
-is-closed-under-addition-nilradical-Commutative-Ring A x y =
+is-closed-under-addition-nilradical-Commutative-Ring A {x} {y} =
   is-nilpotent-add-Ring
     ( ring-Commutative-Ring A)
     ( x)

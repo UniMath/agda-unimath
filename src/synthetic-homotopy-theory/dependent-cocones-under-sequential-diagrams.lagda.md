@@ -17,14 +17,12 @@ open import foundation.constant-type-families
 open import foundation.dependent-homotopies
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families

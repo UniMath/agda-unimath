@@ -24,6 +24,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
@@ -33,7 +34,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -284,7 +284,7 @@ abstract
   is-equiv-is-invertible-id-htpy-id-id :
     {l : Level} (A : UU l) → is-equiv (is-invertible-id-htpy-id-id A)
   is-equiv-is-invertible-id-htpy-id-id A =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( is-invertible-id-htpy-id-id A)
       ( map-associative-Σ
         ( A → A)
@@ -373,7 +373,7 @@ module _
             ( map-section-is-equiv (is-equiv-map-equiv f) ∘ map-equiv f)
             ( id))) ∘e
         ( equiv-concat-htpy
-          ( is-retraction-map-equiv f ·r map-equiv f)
+          ( is-section-map-section-map-equiv f ·r map-equiv f)
           ( map-equiv f)))) ∘e
     ( equiv-tot (λ f → extensionality-equiv f f))
 ```

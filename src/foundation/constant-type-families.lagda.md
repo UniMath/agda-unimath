@@ -24,8 +24,8 @@ open import foundation-core.identity-types
 A type family `B` over `A` is said to be **constant**, if there is a type `X`
 equipped with a family of equivalences `X ≃ B a` indexed by `a : A`.
 
-The **standard constant type family** over `A` with fiber `B` is simply the
-constant map `const A 𝒰 B : A → 𝒰`, where `𝒰` is a universe containing `B`.
+The **standard constant type family** over `A` with fiber `B` is the constant
+map `const A 𝒰 B : A → 𝒰`, where `𝒰` is a universe containing `B`.
 
 ## Definitions
 

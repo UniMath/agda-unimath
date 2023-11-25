@@ -33,6 +33,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
@@ -409,10 +410,10 @@ module _
   where
 
   abstract
-    is-surjective-comp-htpy :
+    is-surjective-left-map-triangle :
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-surjective g → is-surjective h → is-surjective f
-    is-surjective-comp-htpy f g h H is-surj-g is-surj-h x =
+    is-surjective-left-map-triangle f g h H is-surj-g is-surj-h x =
       apply-universal-property-trunc-Prop
         ( is-surj-g x)
         ( trunc-Prop (fiber f x))
@@ -427,7 +428,7 @@ module _
     {g : B → X} {h : A → B} →
     is-surjective g → is-surjective h → is-surjective (g ∘ h)
   is-surjective-comp {g} {h} =
-    is-surjective-comp-htpy (g ∘ h) g h refl-htpy
+    is-surjective-left-map-triangle (g ∘ h) g h refl-htpy
 ```
 
 ### Functoriality of products preserves being surjective
@@ -477,10 +478,10 @@ module _
   where
 
   abstract
-    is-surjective-left-factor-htpy :
+    is-surjective-right-map-triangle :
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-surjective f → is-surjective g
-    is-surjective-left-factor-htpy f g h H is-surj-f x =
+    is-surjective-right-map-triangle f g h H is-surj-f x =
       apply-universal-property-trunc-Prop
         ( is-surj-f x)
         ( trunc-Prop (fiber g x))
@@ -489,7 +490,7 @@ module _
   is-surjective-left-factor :
     {g : B → X} (h : A → B) → is-surjective (g ∘ h) → is-surjective g
   is-surjective-left-factor {g} h =
-    is-surjective-left-factor-htpy (g ∘ h) g h refl-htpy
+    is-surjective-right-map-triangle (g ∘ h) g h refl-htpy
 ```
 
 ### Surjective maps are `-1`-connected

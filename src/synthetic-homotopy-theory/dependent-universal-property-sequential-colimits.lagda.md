@@ -12,9 +12,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
@@ -145,7 +143,7 @@ module _
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( P) =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( dependent-cocone-map-sequential-diagram A c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork A c P)
       ( dependent-cofork-map
@@ -167,7 +165,7 @@ module _
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
     ( dup-sequential-colimit)
     ( P) =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( dependent-cocone-map-sequential-diagram A c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork A c P)
       ( dependent-cofork-map
@@ -193,7 +191,7 @@ module _
   universal-property-dependent-universal-property-sequential-colimit
     ( dup-sequential-colimit)
     ( Y) =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( cocone-map-sequential-diagram A c)
       ( map-compute-dependent-cocone-sequential-diagram-constant-family A c Y)
       ( dependent-cocone-map-sequential-diagram A c (λ _ → Y))

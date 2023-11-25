@@ -41,7 +41,7 @@ universe level, and there is a
 ```agda
 Set-Large-Precategory : Large-Precategory lsuc (_⊔_)
 obj-Large-Precategory Set-Large-Precategory = Set
-hom-set-Large-Precategory Set-Large-Precategory = hom-Set
+hom-set-Large-Precategory Set-Large-Precategory = hom-set-Set
 comp-hom-Large-Precategory Set-Large-Precategory g f = g ∘ f
 id-hom-Large-Precategory Set-Large-Precategory = id
 associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
@@ -111,6 +111,6 @@ homotopy precategory of types.
 
 ## External links
 
-- [Set](https://ncatlab.org/nlab/show/Set) at nlab
+- [Set](https://ncatlab.org/nlab/show/Set) at $n$Lab
 - [Category of sets](https://en.wikipedia.org/wiki/Category_of_sets) at
   Wikipedia

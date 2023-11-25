@@ -51,7 +51,7 @@ pr2 (complete-bipartite-Undirected-Graph-𝔽 X Y) p =
 
 - [Complete bipartite graph](https://d3gt.com/unit.html?complete-bipartite) at
   D3 Graph Theory
-- [Bipartite graphs](https://ncatlab.org/nlab/show/bipartite+graph) at nlab
+- [Bipartite graphs](https://ncatlab.org/nlab/show/bipartite+graph) at $n$Lab
 - [Complete bipartite graph](https://www.wikidata.org/entity/Q913598) at
   Wikidata
 - [Complete bipartite graph](https://en.wikipedia.org/wiki/Complete_bipartite_graph)

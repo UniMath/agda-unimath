@@ -12,16 +12,13 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
@@ -120,10 +117,10 @@ module _
   coherence-htpy-cocone-sequential-diagram c c' K =
     ( n : ℕ) →
     coherence-square-homotopies
-      ( coherence-triangle-cocone-sequential-diagram A c n)
-      ( K (succ-ℕ n) ·r map-sequential-diagram A n)
       ( K n)
+      ( coherence-triangle-cocone-sequential-diagram A c n)
       ( coherence-triangle-cocone-sequential-diagram A c' n)
+      ( K (succ-ℕ n) ·r map-sequential-diagram A n)
 
   htpy-cocone-sequential-diagram :
     ( c c' : cocone-sequential-diagram A X) → UU (l1 ⊔ l2)

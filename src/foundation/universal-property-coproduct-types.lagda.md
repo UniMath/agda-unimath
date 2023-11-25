@@ -10,14 +10,15 @@ module foundation.universal-property-coproduct-types where
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.identity-types
+open import foundation-core.precomposition-functions
 ```
 
 </details>
@@ -67,17 +68,18 @@ module _
   abstract
     uniqueness-coprod :
       {l3 : Level} {Y : UU l3} (i : A → Y) (j : B → Y) →
-      ((l : Level) (X : UU l) →
+      ( {l : Level} (X : UU l) →
         is-equiv (λ (s : Y → X) → pair' (s ∘ i) (s ∘ j))) →
       is-equiv (ind-coprod (λ t → Y) i j)
     uniqueness-coprod {Y = Y} i j H =
       is-equiv-is-equiv-precomp
         ( ind-coprod _ i j)
-        ( λ l X → is-equiv-right-factor
-          ( ev-inl-inr (λ t → X))
-          ( precomp (ind-coprod (λ t → Y) i j) X)
-          ( universal-property-coprod X)
-          ( H _ X))
+        ( λ X →
+          is-equiv-right-factor
+            ( ev-inl-inr (λ t → X))
+            ( precomp (ind-coprod (λ t → Y) i j) X)
+            ( universal-property-coprod X)
+            ( H X))
 
   abstract
     universal-property-coprod-is-equiv-ind-coprod :

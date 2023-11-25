@@ -32,11 +32,11 @@ module _
   where
 
   subtype-center-Semigroup : type-Semigroup G → Prop l
-  subtype-center-Semigroup = is-central-element-semigroup-Prop G
+  subtype-center-Semigroup = is-central-element-prop-Semigroup G
 
   center-Semigroup : Subsemigroup l G
   pr1 center-Semigroup = subtype-center-Semigroup
-  pr2 center-Semigroup = is-central-element-mul-Semigroup G
+  pr2 center-Semigroup {x} {y} = is-central-element-mul-Semigroup G x y
 
   semigroup-center-Semigroup : Semigroup l
   semigroup-center-Semigroup = semigroup-Subsemigroup G center-Semigroup
@@ -62,13 +62,13 @@ module _
     inclusion-Subsemigroup G center-Semigroup
 
   preserves-mul-inclusion-center-Semigroup :
-    (x y : type-center-Semigroup) →
+    {x y : type-center-Semigroup} →
     inclusion-center-Semigroup (mul-center-Semigroup x y) ＝
     mul-Semigroup G
       ( inclusion-center-Semigroup x)
       ( inclusion-center-Semigroup y)
-  preserves-mul-inclusion-center-Semigroup =
-    preserves-mul-inclusion-Subsemigroup G center-Semigroup
+  preserves-mul-inclusion-center-Semigroup {x} {y} =
+    preserves-mul-inclusion-Subsemigroup G center-Semigroup {x} {y}
 
   hom-inclusion-center-Semigroup :
     hom-Semigroup semigroup-center-Semigroup G

@@ -12,9 +12,9 @@ open import foundation-core.propositions public
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
-open import foundation-core.retractions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

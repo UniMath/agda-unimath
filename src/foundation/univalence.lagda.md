@@ -197,8 +197,8 @@ commutativity-inv-eq-equiv A B f =
     ( equiv-univalence)
     ( ( inv (commutativity-inv-equiv-eq A B (eq-equiv A B f))) ∙
       ( ( ap
-        ( λ e → (inv-equiv (map-equiv e f)))
-        ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( λ e → (inv-equiv (map-equiv e f)))
+          ( right-inverse-law-equiv equiv-univalence)) ∙
         ( ap
           ( λ e → map-equiv e (inv-equiv f))
           ( inv (right-inverse-law-equiv equiv-univalence)))))

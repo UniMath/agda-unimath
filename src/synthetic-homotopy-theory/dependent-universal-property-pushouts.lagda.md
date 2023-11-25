@@ -196,7 +196,7 @@ module _
     dependent-universal-property-pushout s c →
     dependent-pullback-property-pushout s c
   dependent-pullback-property-dependent-universal-property-pushout I P =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( dependent-cocone-span-map s c P)
       ( tot (λ h → tot (λ h' → htpy-eq)))
       ( gap
@@ -228,7 +228,7 @@ module _
     dependent-pullback-property-pushout s c →
     dependent-universal-property-pushout s c
   dependent-universal-property-dependent-pullback-property-pushout H P =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( dependent-cocone-span-map s c P)
       ( tot (λ h → tot (λ h' → htpy-eq)))
       ( gap

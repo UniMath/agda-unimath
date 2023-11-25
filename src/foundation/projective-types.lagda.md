@@ -10,6 +10,7 @@ module foundation.projective-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-maps
+open import foundation.postcomposition-functions
 open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels

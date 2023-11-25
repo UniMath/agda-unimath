@@ -9,11 +9,8 @@ module category-theory.yoneda-lemma-precategories where
 ```agda
 open import category-theory.copresheaf-categories
 open import category-theory.functors-from-small-to-large-precategories
-open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories
-open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
-open import category-theory.presheaf-categories
 open import category-theory.representable-functors-precategories
 
 open import foundation.action-on-identifications-functions
@@ -24,9 +21,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -158,6 +152,27 @@ The inverse is an inverse:
   pr2 equiv-lemma-yoneda-Precategory = lemma-yoneda-Precategory
 ```
 
+## Corollaries
+
+### The Yoneda lemma for representable functors
+
+An important special-case of the Yoneda lemma is when `F` is itself a
+representable functor `F = Hom(-, d)`.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (c d : obj-Precategory C)
+  where
+
+  equiv-lemma-yoneda-representable-Precategory :
+    hom-copresheaf-Large-Category C
+      ( representable-functor-Precategory C c)
+      ( representable-functor-Precategory C d) ≃
+    hom-Precategory C d c
+  equiv-lemma-yoneda-representable-Precategory =
+    equiv-lemma-yoneda-Precategory C c (representable-functor-Precategory C d)
+```
+
 ## See also
 
 - [Presheaf categories](category-theory.presheaf-categories.md)
@@ -166,7 +181,7 @@ The inverse is an inverse:
 
 - [The Yoneda embedding](https://1lab.dev/Cat.Functor.Hom.html#the-yoneda-embedding)
   at 1lab
-- [Yoneda lemma](https://ncatlab.org/nlab/show/Yoneda+lemma) at nlab
+- [Yoneda lemma](https://ncatlab.org/nlab/show/Yoneda+lemma) at $n$Lab
 - [The Yoneda lemma](https://www.math3ma.com/blog/the-yoneda-lemma) at Math3ma
 - [Yoneda lemma](https://en.wikipedia.org/wiki/Yoneda_lemma) at Wikipedia
 - [Yoneda lemma](https://www.wikidata.org/wiki/Q320577) at Wikidata

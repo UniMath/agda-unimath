@@ -14,7 +14,6 @@ open import category-theory.isomorphisms-in-subprecategories
 open import category-theory.precategories
 open import category-theory.subprecategories
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
@@ -22,7 +21,6 @@ open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subsingleton-induction
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -291,7 +289,7 @@ module _
   is-unfixed-replete-subprecategory-is-category-Subprecategory {x} =
     ind-iso-Category
       ( C , is-category-C)
-      ( λ B e → is-in-iso-Subprecategory C P e)
+      ( λ B → is-in-iso-Subprecategory C P)
       ( is-in-iso-id-Subprecategory C P x)
 
   is-replete-subprecategory-is-category-Subprecategory :
@@ -325,7 +323,7 @@ This remains to be formalized.
 ## External links
 
 - [replete subcategory](https://ncatlab.org/nlab/show/replete+replete-subprecategory)
-  at nlab
+  at $n$Lab
 - [Isomorphism-closed subcategory](https://en.wikipedia.org/wiki/Isomorphism-closed_subcategory)
   at Wikipedia
 - [isomorphism-closed subcategory](https://www.wikidata.org/wiki/Q6086096) at

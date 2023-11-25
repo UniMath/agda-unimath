@@ -18,6 +18,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
@@ -29,7 +30,6 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-truncation
 open import foundation.homotopies
@@ -629,7 +629,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                   ( λ ω → is-finite-is-decidable-Prop (P ω) (d ω))))
             where
             ℙ : is-contr
-                ( Σ ( type-hom-Set (trunc-Set (Id a a)) (Prop-Set _))
+                ( Σ ( hom-Set (trunc-Set (Id a a)) (Prop-Set _))
                     ( λ h →
                       ( λ a₁ → h (unit-trunc-Set a₁)) ~
                       ( λ ω₁ → trunc-Prop (Id (tr B ω₁ y) y'))))
@@ -664,7 +664,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                       λ (u , v) →
                       apply-dependent-universal-property-trunc-Set'
                         ( λ u' →
-                          hom-Set
+                          hom-set-Set
                             ( set-Prop (P u'))
                             ( set-Prop
                               ( mere-eq-Prop (a , y) (a , y'))))
@@ -874,7 +874,7 @@ abstract
           ( is-surjective-map-unit-im (f ∘ inl))
       is-emb-i : is-emb i
       is-emb-i =
-        is-emb-right-factor-htpy
+        is-emb-top-map-triangle
           ( (unit-trunc-Set ∘ f) ∘ inl)
           ( inclusion-trunc-im-Set (f ∘ inl))
           ( i)

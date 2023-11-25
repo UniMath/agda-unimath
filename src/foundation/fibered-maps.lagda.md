@@ -51,10 +51,10 @@ Consider a diagram of the form
        i
 ```
 
-A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the square
-`(i ∘ f) ~ (g ∘ h)` commutes.
+A **fibered map** from `f` to `g` over `i` is a map `h : A → B` such that the
+square `i ∘ f ~ g ∘ h` [commutes](foundation-core.commuting-squares-of-maps.md).
 
-## Definition
+## Definitions
 
 ```agda
 module _
@@ -250,17 +250,17 @@ module _
 
   is-section-map-over-fiberwise-map-over-eq-htpy :
     (α : fiberwise-map-over f g i) (x : X) →
-    (fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x) ~ (α x)
+    fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x ~ α x
   is-section-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
     eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
 
   is-section-map-over-fiberwise-map-over :
-    (fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over) ~ id
+    fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over ~ id
   is-section-map-over-fiberwise-map-over α =
     eq-htpy (eq-htpy ∘ is-section-map-over-fiberwise-map-over-eq-htpy α)
 
   is-retraction-map-over-fiberwise-map-over :
-    (map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over) ~ id
+    map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over ~ id
   is-retraction-map-over-fiberwise-map-over (pair h H) =
     eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
 
@@ -466,7 +466,7 @@ module _
           ( universal-property-empty-is-empty A is-empty-A B)
           ( ex-falso ∘ is-empty-A)
           ( dependent-universal-property-empty-is-empty A is-empty-A
-            ( λ z → (i ∘ f) z ＝ (g ∘ (ex-falso ∘ is-empty-A)) z)))
+            ( eq-value (i ∘ f) (g ∘ ex-falso ∘ is-empty-A))))
 
   compute-fibered-map-is-empty : (X → Y) ≃ (fibered-map f g)
   compute-fibered-map-is-empty = inv-equiv inv-compute-fibered-map-is-empty
@@ -506,8 +506,7 @@ module _
       ( λ j →
         is-contr-Π
           ( λ x →
-            is-prop-is-contr
-              is-contr-Y (((λ _ → center is-contr-Y) ∘ f) x) ((g ∘ j) x)))) ∘e
+            is-prop-is-contr is-contr-Y (center is-contr-Y) (g (j x))))) ∘e
     ( left-unit-law-Σ-is-contr
       ( is-contr-function-type is-contr-Y)
       ( λ _ → center is-contr-Y))

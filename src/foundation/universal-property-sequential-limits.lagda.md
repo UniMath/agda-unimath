@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-towers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.postcomposition-functions
 open import foundation.subtype-identity-principle
 open import foundation.towers
 open import foundation.universe-levels
@@ -115,7 +116,7 @@ module _
       up up' =
       is-equiv-is-equiv-postcomp h
         ( λ D →
-          is-equiv-right-factor-htpy
+          is-equiv-top-map-triangle
             ( cone-map-tower A c')
             ( cone-map-tower A c)
             ( postcomp D h)
@@ -130,7 +131,7 @@ module _
       ({l : Level} → universal-property-sequential-limit l A c')
     universal-property-sequential-limit-universal-property-sequential-limit-is-equiv
       is-equiv-h up D =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( cone-map-tower A c')
         ( cone-map-tower A c)
         ( postcomp D h)
@@ -145,7 +146,7 @@ module _
       ({l : Level} → universal-property-sequential-limit l A c)
     universal-property-sequential-limit-is-equiv-universal-property-sequential-limit
       up' is-equiv-h D =
-      is-equiv-left-factor-htpy
+      is-equiv-right-map-triangle
         ( cone-map-tower A c')
         ( cone-map-tower A c)
         ( postcomp D h)

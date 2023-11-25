@@ -52,6 +52,7 @@ open import foundation.commuting-squares-of-homotopies public
 open import foundation.commuting-squares-of-identifications public
 open import foundation.commuting-squares-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
+open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
@@ -91,6 +92,7 @@ open import foundation.dependent-pair-types public
 open import foundation.dependent-sequences public
 open import foundation.dependent-telescopes public
 open import foundation.dependent-towers public
+open import foundation.dependent-universal-property-equivalences public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
@@ -130,6 +132,7 @@ open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
 open import foundation.faithful-maps public
+open import foundation.families-of-equivalences public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
@@ -153,6 +156,7 @@ open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
+open import foundation.global-subuniverses public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.homotopy-induction public
@@ -197,10 +201,12 @@ open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-spans public
 open import foundation.morphisms-towers public
+open import foundation.morphisms-twisted-arrows public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
@@ -208,6 +214,7 @@ open import foundation.multivariable-functoriality-set-quotients public
 open import foundation.multivariable-homotopies public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
+open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
@@ -220,7 +227,11 @@ open import foundation.perfect-images public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
+open import foundation.postcomposition-functions public
 open import foundation.powersets public
+open import foundation.precomposition-dependent-functions public
+open import foundation.precomposition-functions public
+open import foundation.precomposition-functions-into-subuniverses public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
@@ -241,6 +252,7 @@ open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullback-squares public
 open import foundation.pullbacks public
+open import foundation.pullbacks-subtypes public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
@@ -250,6 +262,8 @@ open import foundation.repetitions-of-values public
 open import foundation.repetitions-sequences public
 open import foundation.replacement public
 open import foundation.retractions public
+open import foundation.retracts-of-maps public
+open import foundation.retracts-of-types public
 open import foundation.russells-paradox public
 open import foundation.sections public
 open import foundation.separated-types public
@@ -334,6 +348,7 @@ open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
+open import foundation.universal-property-equivalences public
 open import foundation.universal-property-fiber-products public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public

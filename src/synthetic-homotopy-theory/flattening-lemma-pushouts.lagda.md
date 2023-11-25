@@ -45,7 +45,7 @@ given a pushout square
   S -----> B
   |        |
  f|        |j
-  V        V
+  V      ⌜ V
   A -----> X
       i
 ```
@@ -57,7 +57,7 @@ commuting square
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
            |                                                 |
            |                                                 |
-           V                                                 V
+           V                                               ⌜ V
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 
@@ -284,7 +284,7 @@ module _
         ( map-equiv equiv-ev-pair³)
         ( cocone-map-flattening-pushout Y ∘ ind-Σ)
         ( is-equiv-map-equiv equiv-ev-pair³)
-        ( is-equiv-right-factor-htpy
+        ( is-equiv-top-map-triangle
           ( dependent-cocone-map f g c (λ x → P x → Y))
           ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
           ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)

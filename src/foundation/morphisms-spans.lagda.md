@@ -7,12 +7,13 @@ module foundation.morphisms-spans where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.spans
 open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
 ```
 
 </details>

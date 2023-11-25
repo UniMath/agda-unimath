@@ -13,7 +13,6 @@ open import commutative-algebra.subsets-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -140,7 +139,7 @@ module _
     is-in-ideal-Commutative-Ring x →
     is-in-ideal-Commutative-Ring (neg-Commutative-Ring R x)
   is-closed-under-negatives-ideal-Commutative-Ring =
-    pr2 (pr2 is-additive-subgroup-ideal-Commutative-Ring) _
+    pr2 (pr2 is-additive-subgroup-ideal-Commutative-Ring)
 
   is-closed-under-left-multiplication-ideal-Commutative-Ring :
     is-closed-under-left-multiplication-subset-Commutative-Ring R

@@ -14,7 +14,6 @@ open import elementary-number-theory.standard-cyclic-groups
 open import finite-group-theory.finite-groups
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types

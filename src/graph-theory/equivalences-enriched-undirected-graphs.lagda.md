@@ -7,7 +7,6 @@ module graph-theory.equivalences-enriched-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
@@ -304,4 +303,4 @@ module _
   Wikipedia
 - [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
   Wolfram Mathworld
-- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at $n$Lab

@@ -71,20 +71,20 @@ module _
 
   is-closed-under-addition-full-ideal-Ring :
     is-closed-under-addition-subset-Ring R subset-full-ideal-Ring
-  is-closed-under-addition-full-ideal-Ring x y H K = raise-star
+  is-closed-under-addition-full-ideal-Ring H K = raise-star
 
   is-closed-under-negatives-full-ideal-Ring :
     is-closed-under-negatives-subset-Ring R subset-full-ideal-Ring
-  is-closed-under-negatives-full-ideal-Ring x H = raise-star
+  is-closed-under-negatives-full-ideal-Ring H = raise-star
 
   is-additive-subgroup-full-ideal-Ring :
     is-additive-subgroup-subset-Ring R subset-full-ideal-Ring
   pr1 is-additive-subgroup-full-ideal-Ring =
     contains-zero-full-ideal-Ring
-  pr1 (pr2 is-additive-subgroup-full-ideal-Ring) =
-    is-closed-under-addition-full-ideal-Ring
-  pr2 (pr2 is-additive-subgroup-full-ideal-Ring) =
-    is-closed-under-negatives-full-ideal-Ring
+  pr1 (pr2 is-additive-subgroup-full-ideal-Ring) {x} {y} =
+    is-closed-under-addition-full-ideal-Ring {x} {y}
+  pr2 (pr2 is-additive-subgroup-full-ideal-Ring) {x} =
+    is-closed-under-negatives-full-ideal-Ring {x}
 
   is-closed-under-left-multiplication-full-ideal-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-full-ideal-Ring

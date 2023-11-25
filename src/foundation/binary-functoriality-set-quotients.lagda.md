@@ -54,14 +54,14 @@ all `x : A` and `y : B`.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} (R : Equivalence-Relation l2 A)
-  {B : UU l3} (S : Equivalence-Relation l4 B)
-  {C : UU l5} (T : Equivalence-Relation l6 C)
+  {A : UU l1} (R : equivalence-relation l2 A)
+  {B : UU l3} (S : equivalence-relation l4 B)
+  {C : UU l5} (T : equivalence-relation l6 C)
   where
 
-  preserves-sim-binary-map-Equivalence-Relation-Prop :
+  preserves-sim-prop-binary-map-equivalence-relation :
     (A → B → C) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l6)
-  preserves-sim-binary-map-Equivalence-Relation-Prop f =
+  preserves-sim-prop-binary-map-equivalence-relation f =
     Π-Prop' A
       ( λ x →
         Π-Prop' A
@@ -71,223 +71,229 @@ module _
                 Π-Prop' B
                   ( λ y' →
                     function-Prop
-                      ( sim-Equivalence-Relation R x x')
+                      ( sim-equivalence-relation R x x')
                       ( function-Prop
-                        ( sim-Equivalence-Relation S y y')
-                        ( prop-Equivalence-Relation T (f x y) (f x' y')))))))
+                        ( sim-equivalence-relation S y y')
+                        ( prop-equivalence-relation T (f x y) (f x' y')))))))
 
-  preserves-sim-binary-map-Equivalence-Relation :
+  preserves-sim-binary-map-equivalence-relation :
     (A → B → C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l6)
-  preserves-sim-binary-map-Equivalence-Relation f =
-    type-Prop (preserves-sim-binary-map-Equivalence-Relation-Prop f)
+  preserves-sim-binary-map-equivalence-relation f =
+    type-Prop (preserves-sim-prop-binary-map-equivalence-relation f)
 
-  is-prop-preserves-sim-binary-map-Equivalence-Relation :
-    (f : A → B → C) → is-prop (preserves-sim-binary-map-Equivalence-Relation f)
-  is-prop-preserves-sim-binary-map-Equivalence-Relation f =
-    is-prop-type-Prop (preserves-sim-binary-map-Equivalence-Relation-Prop f)
+  is-prop-preserves-sim-binary-map-equivalence-relation :
+    (f : A → B → C) → is-prop (preserves-sim-binary-map-equivalence-relation f)
+  is-prop-preserves-sim-binary-map-equivalence-relation f =
+    is-prop-type-Prop (preserves-sim-prop-binary-map-equivalence-relation f)
 
-  binary-hom-Equivalence-Relation : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
-  binary-hom-Equivalence-Relation =
-    type-subtype preserves-sim-binary-map-Equivalence-Relation-Prop
+  binary-hom-equivalence-relation : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  binary-hom-equivalence-relation =
+    type-subtype preserves-sim-prop-binary-map-equivalence-relation
 
-  map-binary-hom-Equivalence-Relation :
-    (f : binary-hom-Equivalence-Relation) → A → B → C
-  map-binary-hom-Equivalence-Relation = pr1
+  map-binary-hom-equivalence-relation :
+    (f : binary-hom-equivalence-relation) → A → B → C
+  map-binary-hom-equivalence-relation = pr1
 
-  preserves-sim-binary-hom-Equivalence-Relation :
-    (f : binary-hom-Equivalence-Relation) →
-    preserves-sim-binary-map-Equivalence-Relation
-      ( map-binary-hom-Equivalence-Relation f)
-  preserves-sim-binary-hom-Equivalence-Relation = pr2
+  preserves-sim-binary-hom-equivalence-relation :
+    (f : binary-hom-equivalence-relation) →
+    preserves-sim-binary-map-equivalence-relation
+      ( map-binary-hom-equivalence-relation f)
+  preserves-sim-binary-hom-equivalence-relation = pr2
 ```
 
 ## Properties
 
-### Characterization of equality of `binary-hom-Equivalence-Relation`
+### Characterization of equality of `binary-hom-equivalence-relation`
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} (R : Equivalence-Relation l2 A)
-  {B : UU l3} (S : Equivalence-Relation l4 B)
-  {C : UU l5} (T : Equivalence-Relation l6 C)
+  {A : UU l1} (R : equivalence-relation l2 A)
+  {B : UU l3} (S : equivalence-relation l4 B)
+  {C : UU l5} (T : equivalence-relation l6 C)
   where
 
-  binary-htpy-hom-Equivalence-Relation :
-    (f g : binary-hom-Equivalence-Relation R S T) → UU (l1 ⊔ l3 ⊔ l5)
-  binary-htpy-hom-Equivalence-Relation f g =
+  binary-htpy-hom-equivalence-relation :
+    (f g : binary-hom-equivalence-relation R S T) → UU (l1 ⊔ l3 ⊔ l5)
+  binary-htpy-hom-equivalence-relation f g =
     binary-htpy
-      ( map-binary-hom-Equivalence-Relation R S T f)
-      ( map-binary-hom-Equivalence-Relation R S T g)
+      ( map-binary-hom-equivalence-relation R S T f)
+      ( map-binary-hom-equivalence-relation R S T g)
 
-  refl-binary-htpy-hom-Equivalence-Relation :
-    (f : binary-hom-Equivalence-Relation R S T) →
-    binary-htpy-hom-Equivalence-Relation f f
-  refl-binary-htpy-hom-Equivalence-Relation f =
-    refl-binary-htpy (map-binary-hom-Equivalence-Relation R S T f)
+  refl-binary-htpy-hom-equivalence-relation :
+    (f : binary-hom-equivalence-relation R S T) →
+    binary-htpy-hom-equivalence-relation f f
+  refl-binary-htpy-hom-equivalence-relation f =
+    refl-binary-htpy (map-binary-hom-equivalence-relation R S T f)
 
-  binary-htpy-eq-hom-Equivalence-Relation :
-    (f g : binary-hom-Equivalence-Relation R S T) →
-    (f ＝ g) → binary-htpy-hom-Equivalence-Relation f g
-  binary-htpy-eq-hom-Equivalence-Relation f .f refl =
-    refl-binary-htpy-hom-Equivalence-Relation f
+  binary-htpy-eq-hom-equivalence-relation :
+    (f g : binary-hom-equivalence-relation R S T) →
+    (f ＝ g) → binary-htpy-hom-equivalence-relation f g
+  binary-htpy-eq-hom-equivalence-relation f .f refl =
+    refl-binary-htpy-hom-equivalence-relation f
 
-  is-torsorial-binary-htpy-hom-Equivalence-Relation :
-    (f : binary-hom-Equivalence-Relation R S T) →
-    is-torsorial (binary-htpy-hom-Equivalence-Relation f)
-  is-torsorial-binary-htpy-hom-Equivalence-Relation f =
+  is-torsorial-binary-htpy-hom-equivalence-relation :
+    (f : binary-hom-equivalence-relation R S T) →
+    is-torsorial (binary-htpy-hom-equivalence-relation f)
+  is-torsorial-binary-htpy-hom-equivalence-relation f =
     is-torsorial-Eq-subtype
       ( is-torsorial-binary-htpy
-        ( map-binary-hom-Equivalence-Relation R S T f))
-      ( is-prop-preserves-sim-binary-map-Equivalence-Relation R S T)
-      ( map-binary-hom-Equivalence-Relation R S T f)
-      ( refl-binary-htpy-hom-Equivalence-Relation f)
-      ( preserves-sim-binary-hom-Equivalence-Relation R S T f)
+        ( map-binary-hom-equivalence-relation R S T f))
+      ( is-prop-preserves-sim-binary-map-equivalence-relation R S T)
+      ( map-binary-hom-equivalence-relation R S T f)
+      ( refl-binary-htpy-hom-equivalence-relation f)
+      ( preserves-sim-binary-hom-equivalence-relation R S T f)
 
-  is-equiv-binary-htpy-eq-hom-Equivalence-Relation :
-    (f g : binary-hom-Equivalence-Relation R S T) →
-    is-equiv (binary-htpy-eq-hom-Equivalence-Relation f g)
-  is-equiv-binary-htpy-eq-hom-Equivalence-Relation f =
+  is-equiv-binary-htpy-eq-hom-equivalence-relation :
+    (f g : binary-hom-equivalence-relation R S T) →
+    is-equiv (binary-htpy-eq-hom-equivalence-relation f g)
+  is-equiv-binary-htpy-eq-hom-equivalence-relation f =
     fundamental-theorem-id
-      ( is-torsorial-binary-htpy-hom-Equivalence-Relation f)
-      ( binary-htpy-eq-hom-Equivalence-Relation f)
+      ( is-torsorial-binary-htpy-hom-equivalence-relation f)
+      ( binary-htpy-eq-hom-equivalence-relation f)
 
-  extensionality-binary-hom-Equivalence-Relation :
-    (f g : binary-hom-Equivalence-Relation R S T) →
-    (f ＝ g) ≃ binary-htpy-hom-Equivalence-Relation f g
-  pr1 (extensionality-binary-hom-Equivalence-Relation f g) =
-    binary-htpy-eq-hom-Equivalence-Relation f g
-  pr2 (extensionality-binary-hom-Equivalence-Relation f g) =
-    is-equiv-binary-htpy-eq-hom-Equivalence-Relation f g
+  extensionality-binary-hom-equivalence-relation :
+    (f g : binary-hom-equivalence-relation R S T) →
+    (f ＝ g) ≃ binary-htpy-hom-equivalence-relation f g
+  pr1 (extensionality-binary-hom-equivalence-relation f g) =
+    binary-htpy-eq-hom-equivalence-relation f g
+  pr2 (extensionality-binary-hom-equivalence-relation f g) =
+    is-equiv-binary-htpy-eq-hom-equivalence-relation f g
 
-  eq-binary-htpy-hom-Equivalence-Relation :
-    (f g : binary-hom-Equivalence-Relation R S T) →
-    binary-htpy-hom-Equivalence-Relation f g → f ＝ g
-  eq-binary-htpy-hom-Equivalence-Relation f g =
-    map-inv-equiv (extensionality-binary-hom-Equivalence-Relation f g)
+  eq-binary-htpy-hom-equivalence-relation :
+    (f g : binary-hom-equivalence-relation R S T) →
+    binary-htpy-hom-equivalence-relation f g → f ＝ g
+  eq-binary-htpy-hom-equivalence-relation f g =
+    map-inv-equiv (extensionality-binary-hom-equivalence-relation f g)
 ```
 
-### The type `binary-hom-Equivalence-Relation R S T` is equivalent to the type `hom-Equivalence-Relation R (eq-rel-hom-Equivalence-Relation S T)`
+### The type `binary-hom-equivalence-relation R S T` is equivalent to the type `hom-equivalence-relation R (equivalence-relation-hom-equivalence-relation S T)`
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} (R : Equivalence-Relation l2 A)
-  {B : UU l3} (S : Equivalence-Relation l4 B)
-  {C : UU l5} (T : Equivalence-Relation l6 C)
+  {A : UU l1} (R : equivalence-relation l2 A)
+  {B : UU l3} (S : equivalence-relation l4 B)
+  {C : UU l5} (T : equivalence-relation l6 C)
   where
 
-  map-hom-binary-hom-Equivalence-Relation :
-    binary-hom-Equivalence-Relation R S T → A → hom-Equivalence-Relation S T
-  pr1 (map-hom-binary-hom-Equivalence-Relation f a) =
-    map-binary-hom-Equivalence-Relation R S T f a
-  pr2 (map-hom-binary-hom-Equivalence-Relation f a) {x} {y} =
-    preserves-sim-binary-hom-Equivalence-Relation R S T f
-      ( refl-Equivalence-Relation R a)
+  map-hom-binary-hom-equivalence-relation :
+    binary-hom-equivalence-relation R S T → A → hom-equivalence-relation S T
+  pr1 (map-hom-binary-hom-equivalence-relation f a) =
+    map-binary-hom-equivalence-relation R S T f a
+  pr2 (map-hom-binary-hom-equivalence-relation f a) {x} {y} =
+    preserves-sim-binary-hom-equivalence-relation R S T f
+      ( refl-equivalence-relation R a)
 
-  preserves-sim-hom-binary-hom-Equivalence-Relation :
-    (f : binary-hom-Equivalence-Relation R S T) →
-    preserves-sim-Equivalence-Relation R
-      ( eq-rel-hom-Equivalence-Relation S T)
-      ( map-hom-binary-hom-Equivalence-Relation f)
-  preserves-sim-hom-binary-hom-Equivalence-Relation f r b =
-    preserves-sim-binary-hom-Equivalence-Relation R S T f r
-      ( refl-Equivalence-Relation S b)
+  preserves-sim-hom-binary-hom-equivalence-relation :
+    (f : binary-hom-equivalence-relation R S T) →
+    preserves-sim-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T)
+      ( map-hom-binary-hom-equivalence-relation f)
+  preserves-sim-hom-binary-hom-equivalence-relation f r b =
+    preserves-sim-binary-hom-equivalence-relation R S T f r
+      ( refl-equivalence-relation S b)
 
-  hom-binary-hom-Equivalence-Relation :
-    binary-hom-Equivalence-Relation R S T →
-    hom-Equivalence-Relation R (eq-rel-hom-Equivalence-Relation S T)
-  pr1 (hom-binary-hom-Equivalence-Relation f) =
-    map-hom-binary-hom-Equivalence-Relation f
-  pr2 (hom-binary-hom-Equivalence-Relation f) =
-    preserves-sim-hom-binary-hom-Equivalence-Relation f
+  hom-binary-hom-equivalence-relation :
+    binary-hom-equivalence-relation R S T →
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T)
+  pr1 (hom-binary-hom-equivalence-relation f) =
+    map-hom-binary-hom-equivalence-relation f
+  pr2 (hom-binary-hom-equivalence-relation f) =
+    preserves-sim-hom-binary-hom-equivalence-relation f
 
-  map-binary-hom-hom-Equivalence-Relation :
-    hom-Equivalence-Relation R (eq-rel-hom-Equivalence-Relation S T) →
+  map-binary-hom-hom-equivalence-relation :
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T) →
     A → B → C
-  map-binary-hom-hom-Equivalence-Relation f x =
-    map-hom-Equivalence-Relation S T
-      ( map-hom-Equivalence-Relation R
-        ( eq-rel-hom-Equivalence-Relation S T)
+  map-binary-hom-hom-equivalence-relation f x =
+    map-hom-equivalence-relation S T
+      ( map-hom-equivalence-relation R
+        ( equivalence-relation-hom-equivalence-relation S T)
         ( f)
         ( x))
 
-  preserves-sim-binary-hom-hom-Equivalence-Relation :
-    (f : hom-Equivalence-Relation R (eq-rel-hom-Equivalence-Relation S T)) →
-    preserves-sim-binary-map-Equivalence-Relation R S T
-      ( map-binary-hom-hom-Equivalence-Relation f)
-  preserves-sim-binary-hom-hom-Equivalence-Relation f {x} {x'} {y} {y'} r s =
-    transitive-Equivalence-Relation T
+  preserves-sim-binary-hom-hom-equivalence-relation :
+    (f :
+      hom-equivalence-relation R
+        ( equivalence-relation-hom-equivalence-relation S T)) →
+    preserves-sim-binary-map-equivalence-relation R S T
+      ( map-binary-hom-hom-equivalence-relation f)
+  preserves-sim-binary-hom-hom-equivalence-relation f {x} {x'} {y} {y'} r s =
+    transitive-equivalence-relation T
       ( pr1
-        ( map-hom-Equivalence-Relation
-            R (eq-rel-hom-Equivalence-Relation S T) f x)
+        ( map-hom-equivalence-relation
+            R (equivalence-relation-hom-equivalence-relation S T) f x)
         ( y))
       ( pr1
-        ( map-hom-Equivalence-Relation
-            R (eq-rel-hom-Equivalence-Relation S T) f x') y)
-      ( map-hom-Equivalence-Relation S T (pr1 f x') y')
-      ( preserves-sim-hom-Equivalence-Relation S T
-        ( map-hom-Equivalence-Relation
-            R (eq-rel-hom-Equivalence-Relation S T) f x')
+        ( map-hom-equivalence-relation
+            R (equivalence-relation-hom-equivalence-relation S T) f x') y)
+      ( map-hom-equivalence-relation S T (pr1 f x') y')
+      ( preserves-sim-hom-equivalence-relation S T
+        ( map-hom-equivalence-relation
+            R (equivalence-relation-hom-equivalence-relation S T) f x')
         ( s))
-      ( preserves-sim-hom-Equivalence-Relation
-          R (eq-rel-hom-Equivalence-Relation S T) f r y)
+      ( preserves-sim-hom-equivalence-relation
+          R (equivalence-relation-hom-equivalence-relation S T) f r y)
 
-  binary-hom-hom-Equivalence-Relation :
-    hom-Equivalence-Relation R (eq-rel-hom-Equivalence-Relation S T) →
-    binary-hom-Equivalence-Relation R S T
-  pr1 (binary-hom-hom-Equivalence-Relation f) =
-    map-binary-hom-hom-Equivalence-Relation f
-  pr2 (binary-hom-hom-Equivalence-Relation f) =
-    preserves-sim-binary-hom-hom-Equivalence-Relation f
+  binary-hom-hom-equivalence-relation :
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T) →
+    binary-hom-equivalence-relation R S T
+  pr1 (binary-hom-hom-equivalence-relation f) =
+    map-binary-hom-hom-equivalence-relation f
+  pr2 (binary-hom-hom-equivalence-relation f) =
+    preserves-sim-binary-hom-hom-equivalence-relation f
 
-  is-section-binary-hom-hom-Equivalence-Relation :
-    ( hom-binary-hom-Equivalence-Relation ∘
-      binary-hom-hom-Equivalence-Relation) ~
+  is-section-binary-hom-hom-equivalence-relation :
+    ( hom-binary-hom-equivalence-relation ∘
+      binary-hom-hom-equivalence-relation) ~
     id
-  is-section-binary-hom-hom-Equivalence-Relation f =
-    eq-htpy-hom-Equivalence-Relation R
-      ( eq-rel-hom-Equivalence-Relation S T)
-      ( hom-binary-hom-Equivalence-Relation
-        ( binary-hom-hom-Equivalence-Relation f))
+  is-section-binary-hom-hom-equivalence-relation f =
+    eq-htpy-hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T)
+      ( hom-binary-hom-equivalence-relation
+        ( binary-hom-hom-equivalence-relation f))
       ( f)
       ( λ x →
-        eq-htpy-hom-Equivalence-Relation S T
-          ( map-hom-Equivalence-Relation R
-            ( eq-rel-hom-Equivalence-Relation S T)
-            ( hom-binary-hom-Equivalence-Relation
-              ( binary-hom-hom-Equivalence-Relation f))
+        eq-htpy-hom-equivalence-relation S T
+          ( map-hom-equivalence-relation R
+            ( equivalence-relation-hom-equivalence-relation S T)
+            ( hom-binary-hom-equivalence-relation
+              ( binary-hom-hom-equivalence-relation f))
             ( x))
-          ( map-hom-Equivalence-Relation
-              R (eq-rel-hom-Equivalence-Relation S T) f x)
+          ( map-hom-equivalence-relation
+              R (equivalence-relation-hom-equivalence-relation S T) f x)
           ( refl-htpy))
 
-  is-retraction-binary-hom-hom-Equivalence-Relation :
-    ( binary-hom-hom-Equivalence-Relation ∘
-      hom-binary-hom-Equivalence-Relation) ~
+  is-retraction-binary-hom-hom-equivalence-relation :
+    ( binary-hom-hom-equivalence-relation ∘
+      hom-binary-hom-equivalence-relation) ~
     id
-  is-retraction-binary-hom-hom-Equivalence-Relation f =
-    eq-binary-htpy-hom-Equivalence-Relation R S T
-      ( binary-hom-hom-Equivalence-Relation
-        ( hom-binary-hom-Equivalence-Relation f))
+  is-retraction-binary-hom-hom-equivalence-relation f =
+    eq-binary-htpy-hom-equivalence-relation R S T
+      ( binary-hom-hom-equivalence-relation
+        ( hom-binary-hom-equivalence-relation f))
       ( f)
-      ( refl-binary-htpy (map-binary-hom-Equivalence-Relation R S T f))
+      ( refl-binary-htpy (map-binary-hom-equivalence-relation R S T f))
 
-  is-equiv-hom-binary-hom-Equivalence-Relation :
-    is-equiv hom-binary-hom-Equivalence-Relation
-  is-equiv-hom-binary-hom-Equivalence-Relation =
+  is-equiv-hom-binary-hom-equivalence-relation :
+    is-equiv hom-binary-hom-equivalence-relation
+  is-equiv-hom-binary-hom-equivalence-relation =
     is-equiv-is-invertible
-      binary-hom-hom-Equivalence-Relation
-      is-section-binary-hom-hom-Equivalence-Relation
-      is-retraction-binary-hom-hom-Equivalence-Relation
+      binary-hom-hom-equivalence-relation
+      is-section-binary-hom-hom-equivalence-relation
+      is-retraction-binary-hom-hom-equivalence-relation
 
-  equiv-hom-binary-hom-Equivalence-Relation :
-    binary-hom-Equivalence-Relation R S T ≃
-    hom-Equivalence-Relation R (eq-rel-hom-Equivalence-Relation S T)
-  pr1 equiv-hom-binary-hom-Equivalence-Relation =
-    hom-binary-hom-Equivalence-Relation
-  pr2 equiv-hom-binary-hom-Equivalence-Relation =
-    is-equiv-hom-binary-hom-Equivalence-Relation
+  equiv-hom-binary-hom-equivalence-relation :
+    binary-hom-equivalence-relation R S T ≃
+    hom-equivalence-relation R
+      ( equivalence-relation-hom-equivalence-relation S T)
+  pr1 equiv-hom-binary-hom-equivalence-relation =
+    hom-binary-hom-equivalence-relation
+  pr2 equiv-hom-binary-hom-equivalence-relation =
+    is-equiv-hom-binary-hom-equivalence-relation
 ```
 
 ### Binary functoriality of types that satisfy the universal property of set quotients
@@ -295,79 +301,79 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
-  {A : UU l1} (R : Equivalence-Relation l2 A)
-  (QR : Set l3) (qR : reflecting-map-Equivalence-Relation R (type-Set QR))
-  {B : UU l4} (S : Equivalence-Relation l5 B)
-  (QS : Set l6) (qS : reflecting-map-Equivalence-Relation S (type-Set QS))
-  {C : UU l7} (T : Equivalence-Relation l8 C)
-  (QT : Set l9) (qT : reflecting-map-Equivalence-Relation T (type-Set QT))
+  {A : UU l1} (R : equivalence-relation l2 A)
+  (QR : Set l3) (qR : reflecting-map-equivalence-relation R (type-Set QR))
+  {B : UU l4} (S : equivalence-relation l5 B)
+  (QS : Set l6) (qS : reflecting-map-equivalence-relation S (type-Set QS))
+  {C : UU l7} (T : equivalence-relation l8 C)
+  (QT : Set l9) (qT : reflecting-map-equivalence-relation T (type-Set QT))
   (UqR : {l : Level} → is-set-quotient l R QR qR)
   (UqS : {l : Level} → is-set-quotient l S QS qS)
   (UqT : {l : Level} → is-set-quotient l T QT qT)
-  (f : binary-hom-Equivalence-Relation R S T)
+  (f : binary-hom-equivalence-relation R S T)
   where
 
   private
     p :
       (x : A) (y : B) →
-      map-reflecting-map-Equivalence-Relation T qT
-        ( map-binary-hom-Equivalence-Relation R S T f x y) ＝
-      inclusion-is-set-quotient-hom-Equivalence-Relation S QS qS UqS T QT qT UqT
-        ( quotient-hom-Equivalence-Relation-Set S T)
-        ( reflecting-map-quotient-map-hom-Equivalence-Relation S T)
-        ( is-set-quotient-set-quotient-hom-Equivalence-Relation S T)
-        ( quotient-map-hom-Equivalence-Relation S T
-          ( map-hom-binary-hom-Equivalence-Relation R S T f x))
-        ( map-reflecting-map-Equivalence-Relation S qS y)
+      map-reflecting-map-equivalence-relation T qT
+        ( map-binary-hom-equivalence-relation R S T f x y) ＝
+      inclusion-is-set-quotient-hom-equivalence-relation S QS qS UqS T QT qT UqT
+        ( quotient-hom-equivalence-relation-Set S T)
+        ( reflecting-map-quotient-map-hom-equivalence-relation S T)
+        ( is-set-quotient-set-quotient-hom-equivalence-relation S T)
+        ( quotient-map-hom-equivalence-relation S T
+          ( map-hom-binary-hom-equivalence-relation R S T f x))
+        ( map-reflecting-map-equivalence-relation S qS y)
     p x y =
       ( inv
         ( coherence-square-map-is-set-quotient S QS qS T QT qT UqS UqT
-          ( map-hom-binary-hom-Equivalence-Relation R S T f x)
+          ( map-hom-binary-hom-equivalence-relation R S T f x)
           ( y))) ∙
       ( inv
         ( htpy-eq
-          ( triangle-inclusion-is-set-quotient-hom-Equivalence-Relation
+          ( triangle-inclusion-is-set-quotient-hom-equivalence-relation
             S QS qS UqS T QT qT UqT
-            ( quotient-hom-Equivalence-Relation-Set S T)
-            ( reflecting-map-quotient-map-hom-Equivalence-Relation S T)
-            ( is-set-quotient-set-quotient-hom-Equivalence-Relation S T)
-            ( map-hom-binary-hom-Equivalence-Relation R S T f x))
-          ( map-reflecting-map-Equivalence-Relation S qS y)))
+            ( quotient-hom-equivalence-relation-Set S T)
+            ( reflecting-map-quotient-map-hom-equivalence-relation S T)
+            ( is-set-quotient-set-quotient-hom-equivalence-relation S T)
+            ( map-hom-binary-hom-equivalence-relation R S T f x))
+          ( map-reflecting-map-equivalence-relation S qS y)))
 
   unique-binary-map-is-set-quotient :
     is-contr
       ( Σ ( type-Set QR → type-Set QS → type-Set QT)
           ( λ h →
             (x : A) (y : B) →
-            ( h ( map-reflecting-map-Equivalence-Relation R qR x)
-                ( map-reflecting-map-Equivalence-Relation S qS y)) ＝
-            ( map-reflecting-map-Equivalence-Relation T qT
-              ( map-binary-hom-Equivalence-Relation R S T f x y))))
+            ( h ( map-reflecting-map-equivalence-relation R qR x)
+                ( map-reflecting-map-equivalence-relation S qS y)) ＝
+            ( map-reflecting-map-equivalence-relation T qT
+              ( map-binary-hom-equivalence-relation R S T f x y))))
   unique-binary-map-is-set-quotient =
     is-contr-equiv
-      ( Σ ( type-Set QR → set-quotient-hom-Equivalence-Relation S T)
+      ( Σ ( type-Set QR → set-quotient-hom-equivalence-relation S T)
           ( λ h →
             ( x : A) →
-            ( h (map-reflecting-map-Equivalence-Relation R qR x)) ＝
-            ( quotient-map-hom-Equivalence-Relation S T
-              ( map-hom-binary-hom-Equivalence-Relation R S T f x))))
+            ( h (map-reflecting-map-equivalence-relation R qR x)) ＝
+            ( quotient-map-hom-equivalence-relation S T
+              ( map-hom-binary-hom-equivalence-relation R S T f x))))
       ( equiv-tot
         ( λ h →
           ( equiv-inv-htpy
-            ( ( quotient-map-hom-Equivalence-Relation S T) ∘
-              ( map-hom-binary-hom-Equivalence-Relation R S T f))
-            ( h ∘ map-reflecting-map-Equivalence-Relation R qR))) ∘e
+            ( ( quotient-map-hom-equivalence-relation S T) ∘
+              ( map-hom-binary-hom-equivalence-relation R S T f))
+            ( h ∘ map-reflecting-map-equivalence-relation R qR))) ∘e
         ( ( inv-equiv
             ( equiv-postcomp-extension-surjection
-              ( map-reflecting-map-Equivalence-Relation R qR ,
+              ( map-reflecting-map-equivalence-relation R qR ,
                 is-surjective-is-set-quotient R QR qR UqR)
-              ( ( quotient-map-hom-Equivalence-Relation S T) ∘
-                ( map-hom-binary-hom-Equivalence-Relation R S T f))
-              ( emb-inclusion-is-set-quotient-hom-Equivalence-Relation
+              ( ( quotient-map-hom-equivalence-relation S T) ∘
+                ( map-hom-binary-hom-equivalence-relation R S T f))
+              ( emb-inclusion-is-set-quotient-hom-equivalence-relation
                 S QS qS UqS T QT qT UqT
-                ( quotient-hom-Equivalence-Relation-Set S T)
-                ( reflecting-map-quotient-map-hom-Equivalence-Relation S T)
-                ( is-set-quotient-set-quotient-hom-Equivalence-Relation
+                ( quotient-hom-equivalence-relation-Set S T)
+                ( reflecting-map-quotient-map-hom-equivalence-relation S T)
+                ( is-set-quotient-set-quotient-hom-equivalence-relation
                     S T)))) ∘e
           ( equiv-tot
             ( λ h →
@@ -376,51 +382,51 @@ module _
                   ( inv-equiv equiv-funext) ∘e
                   ( inv-equiv
                     ( equiv-dependent-universal-property-surj-is-surjective
-                      ( map-reflecting-map-Equivalence-Relation S qS)
+                      ( map-reflecting-map-equivalence-relation S qS)
                       ( is-surjective-is-set-quotient S QS qS UqS)
                       ( λ u →
                         Id-Prop QT
-                        ( inclusion-is-set-quotient-hom-Equivalence-Relation
+                        ( inclusion-is-set-quotient-hom-equivalence-relation
                           S QS qS UqS T QT qT UqT
-                          ( quotient-hom-Equivalence-Relation-Set S T)
-                          ( reflecting-map-quotient-map-hom-Equivalence-Relation
+                          ( quotient-hom-equivalence-relation-Set S T)
+                          ( reflecting-map-quotient-map-hom-equivalence-relation
                               S T)
-                          ( is-set-quotient-set-quotient-hom-Equivalence-Relation
+                          ( is-set-quotient-set-quotient-hom-equivalence-relation
                               S T)
-                          ( quotient-map-hom-Equivalence-Relation S T
-                            ( map-hom-binary-hom-Equivalence-Relation
+                          ( quotient-map-hom-equivalence-relation S T
+                            ( map-hom-binary-hom-equivalence-relation
                                 R S T f x))
                           ( u))
                         ( h
-                          ( map-reflecting-map-Equivalence-Relation R qR x)
+                          ( map-reflecting-map-equivalence-relation R qR x)
                           ( u)))) ∘e
                     ( equiv-Π-equiv-family
                       ( λ y →
                         ( equiv-inv _ _) ∘e
                         ( equiv-concat'
                           ( h
-                            ( map-reflecting-map-Equivalence-Relation R qR x)
-                            ( map-reflecting-map-Equivalence-Relation S qS y))
+                            ( map-reflecting-map-equivalence-relation R qR x)
+                            ( map-reflecting-map-equivalence-relation S qS y))
                           ( p x y))))))))))
       ( unique-map-is-set-quotient R QR qR
-        ( eq-rel-hom-Equivalence-Relation S T)
-        ( quotient-hom-Equivalence-Relation-Set S T)
-        ( reflecting-map-quotient-map-hom-Equivalence-Relation S T)
+        ( equivalence-relation-hom-equivalence-relation S T)
+        ( quotient-hom-equivalence-relation-Set S T)
+        ( reflecting-map-quotient-map-hom-equivalence-relation S T)
         ( UqR)
-        ( is-set-quotient-set-quotient-hom-Equivalence-Relation S T)
-        ( hom-binary-hom-Equivalence-Relation R S T f))
+        ( is-set-quotient-set-quotient-hom-equivalence-relation S T)
+        ( hom-binary-hom-equivalence-relation R S T f))
 
-  binary-map-is-set-quotient : type-hom-Set QR (hom-Set QS QT)
+  binary-map-is-set-quotient : hom-Set QR (hom-set-Set QS QT)
   binary-map-is-set-quotient =
     pr1 (center unique-binary-map-is-set-quotient)
 
   compute-binary-map-is-set-quotient :
     (x : A) (y : B) →
     binary-map-is-set-quotient
-      ( map-reflecting-map-Equivalence-Relation R qR x)
-      ( map-reflecting-map-Equivalence-Relation S qS y) ＝
-    map-reflecting-map-Equivalence-Relation
-      T qT (map-binary-hom-Equivalence-Relation R S T f x y)
+      ( map-reflecting-map-equivalence-relation R qR x)
+      ( map-reflecting-map-equivalence-relation S qS y) ＝
+    map-reflecting-map-equivalence-relation
+      T qT (map-binary-hom-equivalence-relation R S T f x y)
   compute-binary-map-is-set-quotient =
     pr2 (center unique-binary-map-is-set-quotient)
 ```
@@ -430,10 +436,10 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} (R : Equivalence-Relation l2 A)
-  {B : UU l3} (S : Equivalence-Relation l4 B)
-  {C : UU l5} (T : Equivalence-Relation l6 C)
-  (f : binary-hom-Equivalence-Relation R S T)
+  {A : UU l1} (R : equivalence-relation l2 A)
+  {B : UU l3} (S : equivalence-relation l4 B)
+  {C : UU l5} (T : equivalence-relation l6 C)
+  (f : binary-hom-equivalence-relation R S T)
   where
 
   unique-binary-map-set-quotient :
@@ -443,7 +449,7 @@ module _
             (x : A) (y : B) →
             ( h (quotient-map R x) (quotient-map S y)) ＝
             ( quotient-map T
-              ( map-binary-hom-Equivalence-Relation R S T f x y))))
+              ( map-binary-hom-equivalence-relation R S T f x y))))
   unique-binary-map-set-quotient =
     unique-binary-map-is-set-quotient
       ( R)
@@ -467,7 +473,7 @@ module _
   compute-binary-map-set-quotient :
     (x : A) (y : B) →
     ( binary-map-set-quotient (quotient-map R x) (quotient-map S y)) ＝
-    ( quotient-map T (map-binary-hom-Equivalence-Relation R S T f x y))
+    ( quotient-map T (map-binary-hom-equivalence-relation R S T f x y))
   compute-binary-map-set-quotient =
     pr2 (center unique-binary-map-set-quotient)
 ```

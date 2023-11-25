@@ -186,7 +186,7 @@ module _
 
   is-closed-under-addition-left-ideal-subset-Ring :
     is-closed-under-addition-subset-Ring R subset-left-ideal-subset-Ring
-  is-closed-under-addition-left-ideal-subset-Ring x y H K =
+  is-closed-under-addition-left-ideal-subset-Ring {x} {y} H K =
     apply-universal-property-trunc-Prop H
       ( subset-left-ideal-subset-Ring (add-Ring R x y))
       ( λ H' →
@@ -221,7 +221,7 @@ module _
 
   is-closed-under-negatives-left-ideal-subset-Ring :
     is-closed-under-negatives-subset-Ring R subset-left-ideal-subset-Ring
-  is-closed-under-negatives-left-ideal-subset-Ring x H =
+  is-closed-under-negatives-left-ideal-subset-Ring {x} H =
     tr
       ( type-Prop ∘ subset-left-ideal-subset-Ring)
       ( mul-neg-one-Ring R x)
@@ -258,8 +258,6 @@ module _
   contains-left-formal-combinations-left-ideal-subset-Ring I H
     ( cons (pair r (pair s K)) c) =
     is-closed-under-addition-left-ideal-Ring R I
-      ( mul-Ring R r s)
-      ( ev-left-formal-combination-subset-Ring c)
       ( is-closed-under-left-multiplication-left-ideal-Ring R I r s (H s K))
       ( contains-left-formal-combinations-left-ideal-subset-Ring I H c)
 
@@ -309,7 +307,7 @@ module _
         ( H))
 
   left-ideal-subset-hom-large-poset-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Ring A))
       ( left-ideal-Ring-Large-Poset A)
@@ -518,7 +516,7 @@ module _
     contains-zero-left-ideal-Ring R I
   cases-forward-inclusion-idempotent-left-ideal-subset-Ring
     ( cons (x , y , u) l) =
-    is-closed-under-addition-left-ideal-Ring R I _ _
+    is-closed-under-addition-left-ideal-Ring R I
       ( is-closed-under-left-multiplication-left-ideal-Ring R I x y u)
       ( cases-forward-inclusion-idempotent-left-ideal-subset-Ring l)
 

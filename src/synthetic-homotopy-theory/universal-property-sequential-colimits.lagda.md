@@ -14,13 +14,12 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
+open import foundation.precomposition-functions
 open import foundation.subtype-identity-principle
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
@@ -157,7 +156,7 @@ module _
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
     ( Y) =
-    is-equiv-comp-htpy
+    is-equiv-left-map-triangle
       ( cocone-map-sequential-diagram A c)
       ( cocone-sequential-diagram-cofork A)
       ( cofork-map
@@ -179,7 +178,7 @@ module _
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =
-    is-equiv-right-factor-htpy
+    is-equiv-top-map-triangle
       ( cocone-map-sequential-diagram A c)
       ( cocone-sequential-diagram-cofork A)
       ( cofork-map
@@ -241,8 +240,8 @@ module _
       ( up-sequential-colimit)
       ( up-sequential-colimit') =
       is-equiv-is-equiv-precomp h
-        ( λ l Z →
-          is-equiv-right-factor-htpy
+        ( λ Z →
+          is-equiv-top-map-triangle
             ( cocone-map-sequential-diagram A c')
             ( cocone-map-sequential-diagram A c)
             ( precomp h Z)
@@ -258,7 +257,7 @@ module _
       ( up-sequential-colimit)
       ( is-equiv-h)
       ( Z) =
-      is-equiv-comp-htpy
+      is-equiv-left-map-triangle
         ( cocone-map-sequential-diagram A c')
         ( cocone-map-sequential-diagram A c)
         ( precomp h Z)
@@ -274,7 +273,7 @@ module _
       ( is-equiv-h)
       ( up-sequential-colimit)
       ( Z) =
-      is-equiv-left-factor-htpy
+      is-equiv-right-map-triangle
         ( cocone-map-sequential-diagram A c')
         ( cocone-map-sequential-diagram A c)
         ( precomp h Z)

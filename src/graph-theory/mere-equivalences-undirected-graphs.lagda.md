@@ -65,4 +65,4 @@ module _
   Wikipedia
 - [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
   Wolfram Mathworld
-- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at $n$Lab

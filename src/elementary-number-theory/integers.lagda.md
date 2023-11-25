@@ -44,6 +44,8 @@ negative whole numbers.
 ```agda
 ℤ : UU lzero
 ℤ = ℕ + (unit + ℕ)
+
+{-# BUILTIN INTEGER ℤ #-}
 ```
 
 ### Inclusion of the negative integers

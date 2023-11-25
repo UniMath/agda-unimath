@@ -63,6 +63,35 @@ data
 open telescope public
 ```
 
+A very slight reformulation of `cons-telescope` for convenience:
+
+```agda
+prepend-telescope :
+  {l1 l2 : Level} {n : ℕ} →
+  (A : UU l1) → ({x : A} → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
+prepend-telescope A B = cons-telescope {X = A} (λ x → B {x})
+```
+
+### Telescopes at a universe level
+
+One issue with the previous definition of telescopes is that it is impossible to
+extract any type information from it. At the expense of giving up full universe
+polymorphism, we can define a notion of **telescopes at a universe level** that
+admits such projections. This definition is also compatible with the
+`--level-universe` restriction.
+
+```agda
+data telescope-Level (l : Level) : ℕ → UU (lsuc l)
+  where
+  base-telescope-Level :
+    UU l → telescope-Level l 0
+  cons-telescope-Level :
+    {n : ℕ} {X : UU l} →
+    (X → telescope-Level l n) → telescope-Level l (succ-ℕ n)
+
+open telescope-Level public
+```
+
 ### Transformations on telescopes
 
 Given an operation on universes, we can apply it at the base of the telescope.
@@ -84,11 +113,6 @@ These are a special kind of implicit argument in Agda that are resolved by the
 instance resolution algorithm. We register building blocks for this algorithm to
 use below, i.e. _instances_. Then Agda will attempt to use those to construct
 telescopes of the appropriate kind when asked to.
-
-In the case of telescopes, this has the unfortunate disadvantage that we can
-only define instances for fixed length telescopes. We have defined instances of
-telescopes up to length 18, so although Agda cannot infer a telescope of a
-general length using this approach, it can infer them up to this given length.
 
 In the case of telescopes, this has the unfortunate disadvantage that we can
 only define instances for fixed length telescopes. We have defined instances of

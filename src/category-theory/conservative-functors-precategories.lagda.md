@@ -113,6 +113,6 @@ module _
 - [Conservative Functors](https://1lab.dev/Cat.Functor.Conservative.html) at
   1lab
 - [conservative functor](https://ncatlab.org/nlab/show/conservative+functor) at
-  nlab
+  $n$Lab
 - [Conservative functor](https://en.wikipedia.org/wiki/Conservative_functor) at
   Wikipedia

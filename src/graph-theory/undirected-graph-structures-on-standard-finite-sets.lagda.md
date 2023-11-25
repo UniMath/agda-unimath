@@ -27,7 +27,7 @@ Undirected-Graph-Fin = Σ ℕ (λ V → unordered-pair (Fin V) → ℕ)
 
 ## External links
 
-- [Graph](https://ncatlab.org/nlab/show/graph) at nlab
+- [Graph](https://ncatlab.org/nlab/show/graph) at $n$Lab
 - [Graph](https://www.wikidata.org/entity/Q141488) on Wikidata
 - [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
   at Wikipedia

@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
@@ -39,8 +40,8 @@ to [identifications](foundation-core.identity-types.md).
 multivariable-htpy :
   {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-Π A) → UU l
 multivariable-htpy {{base-telescope A}} f g = f ＝ g
-multivariable-htpy {{cons-telescope A}} f g =
-  (x : _) → multivariable-htpy {{A x}} (f x) (g x)
+multivariable-htpy {{cons-telescope {X = X} A}} f g =
+  (x : X) → multivariable-htpy {{A x}} (f x) (g x)
 ```
 
 ### Multivariable homotopies between implicit functions
@@ -83,6 +84,12 @@ equiv-iterated-funext :
 equiv-iterated-funext .0 {{base-telescope A}} = id-equiv
 equiv-iterated-funext ._ {{cons-telescope A}} =
   equiv-Π-equiv-family (λ x → equiv-iterated-funext _ {{A x}}) ∘e equiv-funext
+
+equiv-eq-multivariable-htpy :
+  {l : Level} (n : ℕ) {{A : telescope l n}}
+  {f g : iterated-Π A} → multivariable-htpy {{A}} f g ≃ (f ＝ g)
+equiv-eq-multivariable-htpy n {{A}} {f} {g} =
+  inv-equiv (equiv-iterated-funext n {{A}} {f} {g})
 ```
 
 ### Iterated function extensionality for implicit functions

@@ -10,10 +10,8 @@ module category-theory.epimorphisms-in-large-precategories where
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -65,40 +63,6 @@ module _
 
   is-epi-iso-Large-Precategory :
     is-epi-Large-Precategory C l3 X Y (hom-iso-Large-Precategory C f)
-  is-epi-iso-Large-Precategory Z g h =
-    is-equiv-is-invertible
-      ( λ P →
-        ( inv
-          ( right-unit-law-comp-hom-Large-Precategory C g)) ∙
-          ( ( ap
-            ( λ h' → comp-hom-Large-Precategory C g h')
-            ( inv (is-section-hom-inv-iso-Large-Precategory C f))) ∙
-            ( ( inv
-              ( associative-comp-hom-Large-Precategory C
-                ( g)
-                ( hom-iso-Large-Precategory C f)
-                ( hom-inv-iso-Large-Precategory C f))) ∙
-              ( ( ap
-                ( λ h' →
-                  comp-hom-Large-Precategory
-                    ( C)
-                    ( h')
-                    ( hom-inv-iso-Large-Precategory C f))
-                ( P)) ∙
-                ( ( associative-comp-hom-Large-Precategory C
-                  ( h)
-                  ( hom-iso-Large-Precategory C f)
-                  ( hom-inv-iso-Large-Precategory C f)) ∙
-                  ( ( ap
-                    ( comp-hom-Large-Precategory C h)
-                    ( is-section-hom-inv-iso-Large-Precategory C f)) ∙
-                    ( right-unit-law-comp-hom-Large-Precategory C h)))))))
-      ( λ p →
-        eq-is-prop
-          ( is-set-hom-Large-Precategory C X Z
-            ( comp-hom-Large-Precategory C g
-              ( hom-iso-Large-Precategory C f))
-            ( comp-hom-Large-Precategory C h
-              ( hom-iso-Large-Precategory C f))))
-      ( λ p → eq-is-prop (is-set-hom-Large-Precategory C Y Z g h))
+  is-epi-iso-Large-Precategory Z =
+    is-emb-is-equiv (is-equiv-precomp-hom-iso-Large-Precategory C f Z)
 ```

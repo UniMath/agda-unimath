@@ -8,7 +8,6 @@ module group-theory.saturated-congruence-relations-monoids where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -40,8 +39,8 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M)
   where
 
-  is-saturated-congruence-monoid-Prop : Prop (l1 ⊔ l2)
-  is-saturated-congruence-monoid-Prop =
+  is-saturated-prop-congruence-Monoid : Prop (l1 ⊔ l2)
+  is-saturated-prop-congruence-Monoid =
     Π-Prop
       ( type-Monoid M)
       ( λ x →
@@ -59,12 +58,12 @@ module _
               ( prop-congruence-Monoid M R x y)))
 
   is-saturated-congruence-Monoid : UU (l1 ⊔ l2)
-  is-saturated-congruence-Monoid = type-Prop is-saturated-congruence-monoid-Prop
+  is-saturated-congruence-Monoid = type-Prop is-saturated-prop-congruence-Monoid
 
   is-prop-is-saturated-congruence-Monoid :
     is-prop is-saturated-congruence-Monoid
   is-prop-is-saturated-congruence-Monoid =
-    is-prop-type-Prop is-saturated-congruence-monoid-Prop
+    is-prop-type-Prop is-saturated-prop-congruence-Monoid
 
 saturated-congruence-Monoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) → UU (l1 ⊔ lsuc l2)
@@ -83,9 +82,11 @@ module _
     is-saturated-congruence-Monoid M congruence-saturated-congruence-Monoid
   is-saturated-saturated-congruence-Monoid = pr2 R
 
-  eq-rel-saturated-congruence-Monoid : Equivalence-Relation l2 (type-Monoid M)
-  eq-rel-saturated-congruence-Monoid =
-    eq-rel-congruence-Monoid M congruence-saturated-congruence-Monoid
+  equivalence-relation-saturated-congruence-Monoid :
+    equivalence-relation l2 (type-Monoid M)
+  equivalence-relation-saturated-congruence-Monoid =
+    equivalence-relation-congruence-Monoid M
+      ( congruence-saturated-congruence-Monoid)
 
   prop-saturated-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
   prop-saturated-congruence-Monoid =
@@ -146,7 +147,7 @@ module _
     transitive-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   mul-saturated-congruence-Monoid :
-    is-congruence-Monoid M eq-rel-saturated-congruence-Monoid
+    is-congruence-Monoid M equivalence-relation-saturated-congruence-Monoid
   mul-saturated-congruence-Monoid =
     mul-congruence-Monoid M congruence-saturated-congruence-Monoid
 ```

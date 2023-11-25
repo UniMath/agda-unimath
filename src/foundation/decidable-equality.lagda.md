@@ -13,6 +13,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.negation
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -26,7 +27,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.retractions
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 ```
@@ -145,6 +145,9 @@ abstract
 ```
 
 ### Hedberg's theorem
+
+**Hedberg's theorem** asserts that types with decidable equality are
+[sets](foundation-core.sets.md).
 
 ```agda
 module _

@@ -61,7 +61,7 @@ is-finite-is-unital-Semigroup {l} n X =
     ( is-finite-Prop _)
     ( λ e →
       is-finite-is-decidable-Prop
-        ( is-unital-Semigroup-Prop (pr1 X))
+        ( is-unital-prop-Semigroup (pr1 X))
         ( is-decidable-Σ-count
           ( pair n e)
           ( λ u →

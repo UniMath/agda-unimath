@@ -19,7 +19,6 @@ open import category-theory.rigid-objects-categories
 open import category-theory.strict-categories
 
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -356,4 +355,4 @@ module _
 
 - [Gaunt (pre)categories](https://1lab.dev/Cat.Gaunt.html) at 1lab
 - [gaunt category](https://ncatlab.org/nlab/show/gaunt+category#in_type_theory)
-  at nlab
+  at $n$Lab
