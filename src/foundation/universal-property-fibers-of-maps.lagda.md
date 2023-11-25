@@ -52,10 +52,9 @@ maps from `fiber f` to `P` and sections of `P ∘ f`:
 ((b : B) → fiber f b → P b) ≃ ((a : A) → P (f a))
 ```
 
-This universal property is especially useful when `A` or `B` enjoy mapping
-out universal properties. This lets us characterize the sections
-`(a : A) → P (f a)` in terms of the mapping ot properties of `A` and
-the descent data of `B`.
+This universal property is especially useful when `A` or `B` enjoy mapping out
+universal properties. This lets us characterize the sections `(a : A) → P (f a)`
+in terms of the mapping ot properties of `A` and the descent data of `B`.
 
 ## Definition
 
