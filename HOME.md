@@ -17,7 +17,7 @@ potential to be useful, and informative resources for both working and learning
 mathematicians. Our library is designed to work towards this goal, and we
 welcome contributions to the library within any topic in mathematics.
 
-The `agda-unimath` library is compatible with Agda 2.6.3 and can be compiled by
+The `agda-unimath` library is compatible with Agda 2.6.4 and can be compiled by
 running `make check` from the root directory of the repository. Learn more about
 using the library locally in our [installation guide](HOWTO-INSTALL.md).
 
