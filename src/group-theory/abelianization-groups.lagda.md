@@ -404,7 +404,7 @@ is-adjoint-pair-abelianization-forgetful-functor-Ab :
     ( forgetful-functor-Ab)
 equiv-is-adjoint-pair-Large-Precategory
   is-adjoint-pair-abelianization-forgetful-functor-Ab G A =
-  inv-equiv (equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A)
+  equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A
 naturality-equiv-is-adjoint-pair-Large-Precategory
   is-adjoint-pair-abelianization-forgetful-functor-Ab
   { X1 = G}
@@ -413,23 +413,8 @@ naturality-equiv-is-adjoint-pair-Large-Precategory
   { Y2 = B}
   ( f)
   ( g) =
-  coherence-square-inv-horizontal
-    ( equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab G A)
-    ( λ h →
-      comp-hom-Ab
-        ( abelianization-Group H)
-        ( abelianization-Group G)
-        ( B)
-        ( comp-hom-Ab (abelianization-Group G) A B g h)
-        ( abelianization-hom-Group H G f))
-    ( λ h →
-      comp-hom-Group H G
-        ( group-Ab B)
-        ( comp-hom-Group G (group-Ab A) (group-Ab B) g h)
-        ( f))
-    ( equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab H B)
-    ( naturality-equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab
-      H G f A B g)
+  naturality-equiv-is-adjoint-pair-abelianization-forgetful-functor-Ab H G f
+    A B g
 
 abelianization-adjunction-Group :
   Adjunction-Large-Category
@@ -453,8 +438,8 @@ is-adjoint-pair-Adjunction-Large-Precategory
 - [Abelianization](https://groupprops.subwiki.org/wiki/Abelianization) at
   Groupprops
 - [Abelianization](https://ncatlab.org/nlab/show/abelianization) at $n$lab
+- [Abelianization](https://www.wikidata.org/wiki/Q318598) at Wikidata
 - [Abelianization](https://en.wikipedia.org/wiki/Commutator_subgroup#Abelianization)
   at Wikipedia
 - [Abelianization](https://mathworld.wolfram.com/Abelianization.html) at Wolfram
   Mathworld
-- [abelianization](https://www.wikidata.org/wiki/Q318598) at Wikidata
