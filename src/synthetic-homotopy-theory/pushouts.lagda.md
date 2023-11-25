@@ -102,7 +102,7 @@ postulate
 postulate
   glue-pushout :
     {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) → ((inl-pushout f g) ∘ f) ~ ((inr-pushout f g) ∘ g)
+    (f : S → A) (g : S → B) → inl-pushout f g ∘ f ~ inr-pushout f g ∘ g
 
 cocone-pushout :
   {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -163,8 +163,7 @@ module _
     ( f)
     ( g)
     ( cocone-pushout f g)
-    ( λ l → up-pushout f g)
-    ( l4)
+    ( up-pushout f g)
 ```
 
 ### Computation with the cogap map
@@ -229,7 +228,7 @@ Given a pushout square with a
    A ----> ∙    \
     \ inl   \   |
   m  \  cogap\  |
-      \       \ v
+      \       ∨ v
        \-----> X
 ```
 
@@ -353,7 +352,7 @@ We record the following auxiliary lemma which says that if we have types `T`,
    T ----------> G
    |             |
  u |             |
-   v          ⌜  v
+   v           ⌜ v
    F ----> fiber cogap x
 ```
 

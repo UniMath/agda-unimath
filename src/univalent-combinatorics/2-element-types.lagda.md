@@ -9,7 +9,6 @@ module univalent-combinatorics.2-element-types where
 ```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
@@ -301,7 +300,7 @@ module _
               ( ev-zero-equiv-Fin-two-ℕ)
               ( is-equiv-ev-zero-aut-Fin-two-ℕ)
               ( is-equiv-map-equiv α))
-            ( is-equiv-postcomp-equiv-equiv α (Fin 2)))
+            ( is-equiv-postcomp-equiv-equiv α))
 
   equiv-ev-zero-equiv-Fin-two-ℕ :
     (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X

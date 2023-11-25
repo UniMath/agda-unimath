@@ -10,8 +10,8 @@ module species.exponentials-cauchy-series-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.sigma-closed-subuniverses
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types

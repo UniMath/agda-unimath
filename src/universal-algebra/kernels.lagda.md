@@ -54,17 +54,17 @@ module _
   pr2 (rel-prop-kernel-hom-Algebra x y) =
     is-set-Algebra Sg Th Alg2 _ _
 
-  eq-rel-kernel-hom-Algebra :
-    Equivalence-Relation l4 (type-Algebra Sg Th Alg1)
-  pr1 eq-rel-kernel-hom-Algebra =
+  equivalence-relation-kernel-hom-Algebra :
+    equivalence-relation l4 (type-Algebra Sg Th Alg1)
+  pr1 equivalence-relation-kernel-hom-Algebra =
     rel-prop-kernel-hom-Algebra
-  pr1 (pr2 eq-rel-kernel-hom-Algebra) _ = refl
-  pr1 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) _ _ = inv
-  pr2 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) _ _ _ f g = g ∙ f
+  pr1 (pr2 equivalence-relation-kernel-hom-Algebra) _ = refl
+  pr1 (pr2 (pr2 equivalence-relation-kernel-hom-Algebra)) _ _ = inv
+  pr2 (pr2 (pr2 equivalence-relation-kernel-hom-Algebra)) _ _ _ f g = g ∙ f
 
   kernel-hom-Algebra :
     congruence-Algebra Sg Th Alg1 l4
-  pr1 kernel-hom-Algebra = eq-rel-kernel-hom-Algebra
+  pr1 kernel-hom-Algebra = equivalence-relation-kernel-hom-Algebra
   pr2 kernel-hom-Algebra op v v' p =
     equational-reasoning
       f (is-model-set-Algebra Sg Th Alg1 op v)
@@ -82,7 +82,8 @@ module _
     map-hom-Algebra-lemma :
       ( n : ℕ) →
       ( v v' : vec (type-Algebra Sg Th Alg1) n) →
-      ( relation-holds-all-vec Sg Th Alg1 eq-rel-kernel-hom-Algebra v v') →
+      ( relation-holds-all-vec Sg Th Alg1
+        equivalence-relation-kernel-hom-Algebra v v') →
       (map-vec f v) ＝ (map-vec f v')
     map-hom-Algebra-lemma zero-ℕ empty-vec empty-vec p = refl
     map-hom-Algebra-lemma (succ-ℕ n) (x ∷ v) (x' ∷ v') (p , p') =

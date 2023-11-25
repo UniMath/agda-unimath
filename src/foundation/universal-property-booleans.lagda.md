@@ -11,7 +11,6 @@ open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

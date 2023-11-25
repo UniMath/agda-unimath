@@ -10,6 +10,7 @@ module foundation.epimorphisms where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functoriality-function-types
+open import foundation.precomposition-functions
 open import foundation.propositional-maps
 open import foundation.sections
 open import foundation.universe-levels
@@ -19,7 +20,6 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
@@ -69,11 +69,13 @@ module _
 If the map `f : A → B` is epi, then the commutative square
 
 ```text
-      f
-    A → B
-  f ↓   ↓ id
-    B → B
-      id
+        f
+    A -----> B
+    |        |
+  f |        | id
+    V      ⌜ V
+    B -----> B
+        id
 ```
 
 is a pushout square.

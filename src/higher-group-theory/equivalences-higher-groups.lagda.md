@@ -8,7 +8,6 @@ module higher-group-theory.equivalences-higher-groups where
 
 ```agda
 open import foundation.0-connected-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types

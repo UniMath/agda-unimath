@@ -9,6 +9,7 @@ module foundation.identity-systems where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.families-of-equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
@@ -105,9 +106,12 @@ module _
   abstract
     fundamental-theorem-id-is-identity-system :
       is-identity-system B a b →
-      (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
-    fundamental-theorem-id-is-identity-system H f =
-      fundamental-theorem-id
-        ( is-torsorial-is-identity-system H)
-        ( f)
+      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
+    fundamental-theorem-id-is-identity-system H =
+      fundamental-theorem-id (is-torsorial-is-identity-system H)
 ```
+
+## External links
+
+- [Identity systems](https://1lab.dev/1Lab.Path.IdentitySystem.html) at 1lab
+- [identity system](https://ncatlab.org/nlab/show/identity+system) at $n$Lab

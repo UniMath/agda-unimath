@@ -7,7 +7,6 @@ module order-theory.order-preserving-maps-preorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types

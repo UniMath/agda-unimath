@@ -22,7 +22,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **set-magmoid** is simply the [structure](foundation.structure.md) of a
+A **set-magmoid** is the [structure](foundation.structure.md) of a
 [composition operation on a binary family of sets](category-theory.composition-operations-on-binary-families-of-sets.md),
 and are in one sense the "oidification" of [magmas](structured-types.magmas.md)
 in [sets](foundation-core.sets.md). We call elements of the indexing type

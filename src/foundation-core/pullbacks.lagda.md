@@ -11,12 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.families-of-equivalences
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -27,6 +27,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.universal-property-pullbacks
 ```
 

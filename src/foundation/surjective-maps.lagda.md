@@ -33,6 +33,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections

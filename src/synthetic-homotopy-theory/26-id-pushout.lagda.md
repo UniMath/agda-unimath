@@ -10,8 +10,8 @@ module synthetic-homotopy-theory.26-id-pushout where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -22,6 +22,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.precomposition-dependent-functions
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -258,7 +259,7 @@ triangle-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q h =
 is-equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l : Level) → universal-property-pushout l f g c)
+  ( up-X : {l : Level} → universal-property-pushout l f g c)
   ( P : X → UU l5) (Q : X → UU l6) →
   is-equiv (hom-Fam-pushout-map c P Q)
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
@@ -268,13 +269,13 @@ is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
     ( dependent-cocone-map f g c (λ x → P x → Q x))
     ( triangle-hom-Fam-pushout-dependent-cocone c P Q)
     ( dependent-universal-property-universal-property-pushout
-      f g c up-X (l5 ⊔ l6) (λ x → P x → Q x))
+      f g c up-X (λ x → P x → Q x))
     ( is-equiv-hom-Fam-pushout-dependent-cocone c P Q)
 
 equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l : Level) → universal-property-pushout l f g c)
+  ( up-X : {l : Level} → universal-property-pushout l f g c)
   ( P : X → UU l5) (Q : X → UU l6) →
   ( (x : X) → P x → Q x) ≃
   hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
@@ -319,7 +320,7 @@ triangle-is-universal-id-Fam-pushout' c a Q = refl-htpy
 is-universal-id-Fam-pushout' :
   { l l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
-  ( up-X : (l' : Level) → universal-property-pushout l' f g c) (a : A) →
+  ( up-X : {l' : Level} → universal-property-pushout l' f g c) (a : A) →
   ( Q : (x : X) → UU l) →
   is-equiv
     ( ev-point-hom-Fam-pushout
@@ -339,16 +340,16 @@ is-universal-id-Fam-pushout' c up-X a Q =
     ( is-equiv-hom-Fam-pushout-map c up-X (Id (pr1 c a)) Q)
 
 is-universal-id-Fam-pushout :
-  { l1 l2 l3 l4 : Level} (l : Level)
+  { l1 l2 l3 l4 l : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
-  ( up-X : (l' : Level) → universal-property-pushout l' f g c) (a : A) →
+  ( up-X : {l' : Level} → universal-property-pushout l' f g c) (a : A) →
   is-universal-Fam-pushout l (desc-fam c (Id (pr1 c a))) a refl
-is-universal-id-Fam-pushout l {S = S} {A} {B} {X} {f} {g} c up-X a Q =
+is-universal-id-Fam-pushout {S = S} {A} {B} {X} {f} {g} c up-X a Q =
   map-inv-equiv
     ( equiv-precomp-Π
       ( equiv-desc-fam c up-X)
-      ( λ (Q : Fam-pushout l f g) →
+      ( λ (Q : Fam-pushout _ f g) →
         is-equiv (ev-point-hom-Fam-pushout
           ( desc-fam c (Id (pr1 c a))) Q refl)))
     ( is-universal-id-Fam-pushout' c up-X a)

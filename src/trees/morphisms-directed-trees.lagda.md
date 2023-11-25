@@ -32,8 +32,8 @@ open import trees.directed-trees
 
 ## Idea
 
-A **morphism of directed trees** from `S` to `T` is simply a morphism between
-their underlying directed graphs.
+A **morphism of directed trees** from `S` to `T` is a morphism between their
+underlying directed graphs.
 
 ## Definitions
 

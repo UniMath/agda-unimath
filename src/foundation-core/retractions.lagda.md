@@ -68,10 +68,10 @@ i.e., that the concatenation
   x ========= r (i x) =============== r (i y) ===== y
 ```
 
-is identical to `p : x ＝ y` for all `p : x ＝ y`, we simply proceed by
-identification elimination. Then it suffices to show that `(H x)⁻¹ ∙ (H x)` is
-identical to `refl`, which is indeed the case by the left inverse law of
-concatenation of identifications.
+is identical to `p : x ＝ y` for all `p : x ＝ y`, we proceed by identification
+elimination. Then it suffices to show that `(H x)⁻¹ ∙ (H x)` is identical to
+`refl`, which is indeed the case by the left inverse law of concatenation of
+identifications.
 
 ```agda
 module _

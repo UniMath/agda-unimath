@@ -10,19 +10,13 @@ module synthetic-homotopy-theory.smash-products-of-pointed-types where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import structured-types.pointed-cartesian-product-types
-open import structured-types.pointed-families-of-types
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types

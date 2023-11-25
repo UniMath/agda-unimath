@@ -96,7 +96,7 @@ module _
   map-iso-Monoid f = map-hom-Monoid M N (hom-iso-Monoid f)
 
   preserves-mul-iso-Monoid :
-    (f : iso-Monoid) (x y : type-Monoid M) →
+    (f : iso-Monoid) {x y : type-Monoid M} →
     map-iso-Monoid f (mul-Monoid M x y) ＝
     mul-Monoid N (map-iso-Monoid f x) (map-iso-Monoid f y)
   preserves-mul-iso-Monoid f =
@@ -119,7 +119,7 @@ module _
     map-hom-Monoid N M (hom-inv-iso-Monoid f)
 
   preserves-mul-inv-iso-Monoid :
-    (f : iso-Monoid) (x y : type-Monoid N) →
+    (f : iso-Monoid) {x y : type-Monoid N} →
     map-inv-iso-Monoid f (mul-Monoid N x y) ＝
     mul-Monoid M (map-inv-iso-Monoid f x) (map-inv-iso-Monoid f y)
   preserves-mul-inv-iso-Monoid f =

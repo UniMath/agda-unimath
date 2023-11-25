@@ -154,10 +154,10 @@ module _
   {l : Level} (X : Set l)
   where
 
-  iterative-Monoid-Action : Monoid-Action l ℕ*-Monoid
-  pr1 iterative-Monoid-Action = endo-Set X
-  pr1 (pr1 (pr2 iterative-Monoid-Action)) k f = iterate k f
-  pr2 (pr1 (pr2 iterative-Monoid-Action)) k l =
+  iterative-action-Monoid : action-Monoid l ℕ*-Monoid
+  pr1 iterative-action-Monoid = endo-Set X
+  pr1 (pr1 (pr2 iterative-action-Monoid)) k f = iterate k f
+  pr2 (pr1 (pr2 iterative-action-Monoid)) {k} {l} =
     eq-htpy (λ f → eq-htpy (λ x → iterate-mul-ℕ k l f x))
-  pr2 (pr2 iterative-Monoid-Action) = refl
+  pr2 (pr2 iterative-action-Monoid) = refl
 ```

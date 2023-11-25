@@ -11,20 +11,23 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-function-types
 open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.propositions
-open import foundation.retractions
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 ```
 
@@ -118,7 +121,7 @@ module _
   where
 
   is-equiv-is-local :
-    ((l : Level) (A : UU l) → is-local f A) → is-equiv f
+    ({l : Level} (A : UU l) → is-local f A) → is-equiv f
   is-equiv-is-local = is-equiv-is-equiv-precomp f
 ```
 
@@ -128,12 +131,6 @@ module _
 module _
   {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
   where
-
-  retraction-section-precomp-domain : section (precomp f Y) → retraction f
-  pr1 (retraction-section-precomp-domain section-precomp-Y) =
-    pr1 section-precomp-Y id
-  pr2 (retraction-section-precomp-domain section-precomp-Y) =
-    htpy-eq (pr2 section-precomp-Y id)
 
   section-is-local-domains' : section (precomp f Y) → is-local f X → section f
   pr1 (section-is-local-domains' section-precomp-Y is-local-X) =
@@ -151,7 +148,7 @@ module _
   pr1 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
     section-is-local-domains' section-precomp-Y is-local-X
   pr2 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
-    retraction-section-precomp-domain section-precomp-Y
+    retraction-section-precomp-domain f section-precomp-Y
 
   is-equiv-is-local-domains : is-local f Y → is-local f X → is-equiv f
   is-equiv-is-local-domains is-local-Y =

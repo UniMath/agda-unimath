@@ -9,7 +9,6 @@ module group-theory.homomorphisms-abelian-groups where
 ```agda
 open import category-theory.large-categories
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -64,8 +63,8 @@ module _
   where
 
   preserves-negatives-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
-  preserves-negatives-Ab f =
-    (x : type-Ab A) → Id (f (neg-Ab A x)) (neg-Ab B (f x))
+  preserves-negatives-Ab =
+    preserves-inverses-Group (group-Ab A) (group-Ab B)
 ```
 
 ### Homomorphisms of abelian groups

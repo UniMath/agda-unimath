@@ -19,7 +19,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups
-open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-groups
 open import group-theory.normal-subgroups
 ```
 
@@ -94,38 +94,39 @@ module _
   reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group :
     (f : hom-Group G K) →
     nullifies-normal-subgroup-hom-Group G K f H →
-    reflects-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup G H)
+    reflects-equivalence-relation
+      ( equivalence-relation-congruence-Normal-Subgroup G H)
       ( map-hom-Group G K f)
   reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group f p α =
     ( inv (right-unit-law-mul-Group K _)) ∙
     ( inv-transpose-eq-mul-Group' K
-      ( ( inv (p (left-div-Group G _ _) α)) ∙
+      ( ( p (left-div-Group G _ _) α) ∙
         ( preserves-left-div-hom-Group G K f)))
 
   nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group :
     (f : hom-Group G K) →
-    reflects-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup G H)
+    reflects-equivalence-relation
+      ( equivalence-relation-congruence-Normal-Subgroup G H)
       ( map-hom-Group G K f) →
     nullifies-normal-subgroup-hom-Group G K f H
   nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group f p x q =
-    ( p ( is-closed-under-multiplication-Normal-Subgroup G H _ _
-          ( is-closed-under-inverses-Normal-Subgroup G H x q)
-          ( contains-unit-Normal-Subgroup G H))) ∙
-    ( preserves-unit-hom-Group G K f)
+    ( inv (preserves-unit-hom-Group G K f)) ∙
+    ( p ( is-closed-under-multiplication-Normal-Subgroup G H
+          ( is-closed-under-inverses-Normal-Subgroup G H
+            ( contains-unit-Normal-Subgroup G H))
+          ( q)))
 
   compute-nullifying-hom-Group :
-    Σ ( reflecting-map-Equivalence-Relation
-        ( eq-rel-congruence-Normal-Subgroup G H)
+    Σ ( reflecting-map-equivalence-relation
+        ( equivalence-relation-congruence-Normal-Subgroup G H)
         ( type-Group K))
       ( λ f → preserves-mul-Group G K (pr1 f)) ≃
     nullifying-hom-Group G K H
   compute-nullifying-hom-Group =
     ( equiv-type-subtype
       ( λ f →
-        is-prop-reflects-Equivalence-Relation
-          ( eq-rel-congruence-Normal-Subgroup G H)
+        is-prop-reflects-equivalence-relation
+          ( equivalence-relation-congruence-Normal-Subgroup G H)
           ( set-Group K)
           ( pr1 f))
       ( λ f → is-prop-leq-Normal-Subgroup G H (kernel-hom-Group G K f))

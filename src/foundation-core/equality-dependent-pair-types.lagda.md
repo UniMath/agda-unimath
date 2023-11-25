@@ -93,7 +93,8 @@ module _
         ( is-retraction-pair-eq-Σ s t)
 
   equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ (s ＝ t)
-  equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
+  pr1 (equiv-eq-pair-Σ s t) = eq-pair-Σ'
+  pr2 (equiv-eq-pair-Σ s t) = is-equiv-eq-pair-Σ s t
 
   abstract
     is-equiv-pair-eq-Σ : (s t : Σ A B) → is-equiv (pair-eq-Σ {s} {t})
@@ -104,7 +105,8 @@ module _
         ( is-section-pair-eq-Σ s t)
 
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
-  equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)
+  pr1 (equiv-pair-eq-Σ s t) = pair-eq-Σ
+  pr2 (equiv-pair-eq-Σ s t) = is-equiv-pair-eq-Σ s t
 
   η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
   η-pair t = refl

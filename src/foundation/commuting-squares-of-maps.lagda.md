@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -32,12 +33,12 @@ open import foundation-core.identity-types
 Two commuting triangles
 
 ```text
-  A        A ---> X
-  | \       \  K  |
-  |   \   L   \   |
-  |  H  \       \ |
-  v      v        v
-  B ---> Y        Y
+   A         A --> X
+  | \         \    |
+  |  \ H  L  K \   |
+  |   \         \  |
+  v    v         v v
+  B --> Y         Y
 ```
 
 with a homotopic diagonal may be pasted into a commuting square
@@ -89,7 +90,7 @@ module _
     ap (_∙ K x) right-unit
 ```
 
-### Composing and inverting squares horizontally and vertically
+### Inverting squares horizontally and vertically
 
 If the horizontal/vertical maps in a commuting square are both equivalences,
 then the square remains commuting if we invert those equivalences.

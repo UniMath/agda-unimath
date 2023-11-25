@@ -9,13 +9,13 @@ module foundation.universal-property-empty-type where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 ```
 
 </details>
@@ -76,14 +76,16 @@ abstract
 
 abstract
   uniqueness-empty :
-    {l : Level} (Y : UU l) → ((l' : Level) (X : UU l') →
-    is-contr (Y → X)) → is-equiv (ind-empty {P = λ t → Y})
+    {l : Level} (Y : UU l) →
+    ({l' : Level} (X : UU l') → is-contr (Y → X)) →
+    is-equiv (ind-empty {P = λ t → Y})
   uniqueness-empty Y H =
     is-equiv-is-equiv-precomp ind-empty
-      ( λ l X → is-equiv-is-contr
-        ( λ g → g ∘ ind-empty)
-        ( H _ X)
-        ( universal-property-empty' X))
+      ( λ X →
+        is-equiv-is-contr
+          ( λ g → g ∘ ind-empty)
+          ( H X)
+          ( universal-property-empty' X))
 
 abstract
   universal-property-empty-is-equiv-ind-empty :

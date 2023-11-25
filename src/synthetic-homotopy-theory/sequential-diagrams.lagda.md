@@ -9,7 +9,6 @@ module synthetic-homotopy-theory.sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```

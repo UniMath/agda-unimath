@@ -59,7 +59,7 @@ module _
       ( group-Concrete-Group (UU-Fin-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
   pr1 hom-loop-group-fin-UU-Fin-Group p = pr1 (pair-eq-Σ p)
-  pr2 hom-loop-group-fin-UU-Fin-Group p q =
+  pr2 hom-loop-group-fin-UU-Fin-Group {p} {q} =
     pr1-interchange-concat-pair-eq-Σ p q
 
   hom-inv-loop-group-fin-UU-Fin-Group :
@@ -68,7 +68,7 @@ module _
       ( group-Concrete-Group (UU-Fin-Group l n))
   pr1 hom-inv-loop-group-fin-UU-Fin-Group p =
     eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)
-  pr2 hom-inv-loop-group-fin-UU-Fin-Group p q =
+  pr2 hom-inv-loop-group-fin-UU-Fin-Group {p} {q} =
     ( ap
       ( λ r → eq-pair-Σ (p ∙ q) r)
       ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
