@@ -46,16 +46,16 @@ We can uniquely characterize the family of fibers `fiber f : B → UU` as the
 initial type family equipped with such a section. Explicitly, `fiber f : B → UU`
 is initial amoung type families `P : B → UU` equipped with sections
 `(a : A) → P (f a)`. This can be packaged into an equivalence between fiberwise
-maps from `fiber f` to `P` and sections of `B ∘ f`:
+maps from `fiber f` to `P` and sections of `P ∘ f`:
 
 ```text
 ((b : B) → fiber f b → P b) ≃ ((a : A) → P (f a))
 ```
 
-This universal property is especially useful when `A` itself enjoys a mapping
-out universal property. This lets us characterize the sections
-`(a : A) → B (f a)`. And, in the case that `f` was defined using the mapping out
-property of `A`, we may obtain an even nicer characterization.
+This universal property is especially useful when `A` or `B` enjoy mapping
+out universal properties. This lets us characterize the sections
+`(a : A) → P (f a)` in terms of the mapping ot properties of `A` and
+the descent data of `B`.
 
 ## Definition
 
