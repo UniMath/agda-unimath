@@ -12,10 +12,15 @@ open import foundation-core.fibers-of-maps public
 open import foundation.cones-over-cospans
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-fibers-of-maps
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
@@ -106,6 +111,40 @@ module _
   inv-equiv-total-fiber-terminal-map =
     inv-equiv equiv-total-fiber-terminal-map
 ```
+
+### The family of fibers has the universal property of fibers of maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  section-family-of-fibers :
+    (a : A) → fiber f (f a)
+  pr1 (section-family-of-fibers a) = a
+  pr2 (section-family-of-fibers a) = refl
+
+  equiv-up-family-of-fibers :
+    {l : Level} → (P : B → UU l) →
+    ((b : B) → fiber f b → P b) ≃ ((a : A) → P (f a))
+  equiv-up-family-of-fibers P =
+    equivalence-reasoning
+      ( (b : B) → fiber f b → P b)
+      ≃ ((w : Σ B (λ b → fiber f b)) → P (pr1 w))
+        by equiv-ind-Σ
+      ≃ ((a : A) → P (f a))
+        by
+          equiv-precomp-Π
+            ( inv-equiv-total-fiber f)
+            ( λ w → P (pr1 w))
+
+  up-family-of-fibers :
+    {l : Level} →
+    universal-property-fiber l f (fiber f) (section-family-of-fibers)
+  up-family-of-fibers P =
+    is-equiv-map-equiv (equiv-up-family-of-fibers P) 
+```
+
 
 ## Table of files about fibers of maps
 
