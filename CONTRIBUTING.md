@@ -7,8 +7,10 @@ through their usage and help ensure your contributions meet our standards.
 
 The `make pre-commit` tool checks library conventions and performs basic tasks.
 Before you run it, ensure that your files are properly tracked by git by staging
-any relevant file additions or deletions. Installation instructions for the
-`make pre-commit` tool can be found [here](HOWTO-INSTALL.md#after-the-setup).
+any relevant file additions or deletions (respectively
+`git add <path-to-new-file>` and `git add <path-to-deleted-file>`). Our
+installation instructions for the `make pre-commit` tool can be found
+[here](HOWTO-INSTALL.md#contributor-setup).
 
 The `make pre-commit` tool can generate errors during the first run while
 correcting some of them automatically. If all goes well, the second run should
