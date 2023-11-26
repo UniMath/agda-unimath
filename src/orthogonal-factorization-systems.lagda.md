@@ -11,7 +11,6 @@ module orthogonal-factorization-systems where
 
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
-open import orthogonal-factorization-systems.compact-types public
 open import orthogonal-factorization-systems.extensions-of-maps public
 open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorization-operations-function-classes public

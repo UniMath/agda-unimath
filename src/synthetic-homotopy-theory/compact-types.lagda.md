@@ -1,7 +1,7 @@
 # Compact types
 
 ```agda
-module orthogonal-factorization-systems.compact-types where
+module synthetic-homotopy-theory.compact-types where
 ```
 
 <details><summary>Imports</summary>
@@ -9,10 +9,6 @@ module orthogonal-factorization-systems.compact-types where
 ```agda
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import orthogonal-factorization-systems.factorization-operations-function-classes
-open import orthogonal-factorization-systems.factorizations-of-maps-global-function-classes
-open import orthogonal-factorization-systems.global-function-classes
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -26,11 +22,12 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 A **(sequentially) compact type** is a type `X` such that exponentiating with
 `X` commutes with
 [sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
-for every [cotower](synthetic-homotopy-theory.sequential-diagrams.md) `Aₙ`:
 
 ```text
   (colimₙ (X → Aₙ)) ≃ (X → colimₙ Aₙ.)
 ```
+
+for every [cotower](synthetic-homotopy-theory.sequential-diagrams.md) `Aₙ`.
 
 ## Definitions
 
