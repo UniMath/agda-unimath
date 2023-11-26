@@ -170,7 +170,7 @@ module _
 
 ## Properties
 
-### The opposite preunivalent category construction is an involution on the type of preunivalent categories
+### The opposite construction is an involution on the type of preunivalent categories
 
 ```agda
 is-involution-opposite-Preunivalent-Category :
@@ -197,3 +197,11 @@ equiv-opposite-Preunivalent-Category :
 equiv-opposite-Preunivalent-Category l1 l2 =
   equiv-involution (involution-opposite-Preunivalent-Category l1 l2)
 ```
+
+## External links
+
+- [Precategories - opposites](https://1lab.dev/Cat.Base.html#opposites) at 1lab
+- [opposite category](https://ncatlab.org/nlab/show/opposite+category) at $n$Lab
+- [Opposite category](https://en.wikipedia.org/wiki/Opposite_category) at
+  Wikipedia
+- [opposite category](https://www.wikidata.org/wiki/Q7098616) at Wikidata

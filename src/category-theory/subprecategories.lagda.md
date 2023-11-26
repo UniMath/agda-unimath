@@ -453,9 +453,13 @@ module _
     associative-composition-operation-binary-family-Set hom-set-Subprecategory
   pr1 associative-composition-operation-Subprecategory {x} {y} {z} =
     comp-hom-Subprecategory {x} {y} {z}
-  pr1 (pr2 associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
+  pr1
+    ( pr2
+      associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
     associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f
-  pr2 (pr2 associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
+  pr2
+    ( pr2
+      associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
     inv-associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f
 
   is-unital-composition-operation-Subprecategory :

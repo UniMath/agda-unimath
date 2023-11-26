@@ -143,7 +143,8 @@ module _
     ( comp-hom-Large-Category h (comp-hom-Large-Category g f)) ＝
     ( comp-hom-Large-Category (comp-hom-Large-Category h g) f)
   inv-associative-comp-hom-Large-Category =
-    inv-associative-comp-hom-Large-Precategory (large-precategory-Large-Category C)
+    inv-associative-comp-hom-Large-Precategory
+      ( large-precategory-Large-Category C)
 
   left-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}

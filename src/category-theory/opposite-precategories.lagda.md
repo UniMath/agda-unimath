@@ -118,7 +118,7 @@ module _
 
 ## Properties
 
-### The opposite precategory construction is an involution on the type of precategories
+### The opposite construction is a definitional involution on the type of precategories
 
 ```agda
 is-involution-opposite-Precategory :

@@ -55,13 +55,8 @@ abstract
     {l1 l2 : Level} (C : Precategory l1 l2) →
     is-category-Precategory (opposite-Precategory C) →
     is-category-Precategory C
-  is-category-is-category-opposite-Precategory C is-category-op-C =
-    tr
-      ( is-category-Precategory)
-      ( is-involution-opposite-Precategory C)
-      ( is-category-opposite-is-category-Precategory
-        ( opposite-Precategory C)
-        ( is-category-op-C))
+  is-category-is-category-opposite-Precategory C =
+    is-category-opposite-is-category-Precategory (opposite-Precategory C)
 ```
 
 ## Definitions
@@ -142,7 +137,7 @@ module _
 
 ## Properties
 
-### The opposite category construction is an involution on the type of categories
+### The opposite construction is an involution on the type of categories
 
 ```agda
 is-involution-opposite-Category :
@@ -167,3 +162,11 @@ equiv-opposite-Category :
 equiv-opposite-Category l1 l2 =
   equiv-involution (involution-opposite-Category l1 l2)
 ```
+
+## External links
+
+- [Precategories - opposites](https://1lab.dev/Cat.Base.html#opposites) at 1lab
+- [opposite category](https://ncatlab.org/nlab/show/opposite+category) at $n$Lab
+- [Opposite category](https://en.wikipedia.org/wiki/Opposite_category) at
+  Wikipedia
+- [opposite category](https://www.wikidata.org/wiki/Q7098616) at Wikidata
