@@ -80,15 +80,23 @@ refl-htpy-hom-species-𝔽 F G f X = refl-htpy
 ### Associativity of composition of homomorphisms of finite species
 
 ```agda
-associative-comp-hom-species-𝔽 :
-  {l1 l2 l3 l4 l5 : Level} (F : species-𝔽 l1 l2)
-  (G : species-𝔽 l1 l3) (H : species-𝔽 l1 l4) (K : species-𝔽 l1 l5)
-  (h : hom-species-𝔽 H K)
-  (g : hom-species-𝔽 G H) (f : hom-species-𝔽 F G) →
-  Id
-    ( comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f)
-    ( comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f))
-associative-comp-hom-species-𝔽 F G H K h g f = refl
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3)
+  (H : species-𝔽 l1 l4) (K : species-𝔽 l1 l5)
+  where
+
+  associative-comp-hom-species-𝔽 :
+    (h : hom-species-𝔽 H K) (g : hom-species-𝔽 G H) (f : hom-species-𝔽 F G) →
+    comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f ＝
+    comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f)
+  associative-comp-hom-species-𝔽 h g f = refl
+
+  inv-associative-comp-hom-species-𝔽 :
+    (h : hom-species-𝔽 H K) (g : hom-species-𝔽 G H) (f : hom-species-𝔽 F G) →
+    comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f) ＝
+    comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f
+  inv-associative-comp-hom-species-𝔽 h g f = refl
 ```
 
 ### The unit laws for composition of homomorphisms of finite species

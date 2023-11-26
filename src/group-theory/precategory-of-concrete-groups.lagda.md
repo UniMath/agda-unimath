@@ -39,6 +39,10 @@ associative-comp-hom-Large-Precategory
   Concrete-Group-Large-Precategory {X = G} {Y = H} {Z = K} {W = L} h g f =
   eq-htpy-hom-Concrete-Group G L _ _
     ( associative-comp-hom-Concrete-Group G H K L h g f)
+inv-associative-comp-hom-Large-Precategory
+  Concrete-Group-Large-Precategory {X = G} {Y = H} {Z = K} {W = L} h g f =
+  eq-htpy-hom-Concrete-Group G L _ _
+    ( inv-associative-comp-hom-Concrete-Group G H K L h g f)
 left-unit-law-comp-hom-Large-Precategory
   Concrete-Group-Large-Precategory {X = G} {Y = H} f =
   eq-htpy-hom-Concrete-Group G H _ _
