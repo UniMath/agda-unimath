@@ -103,12 +103,29 @@ module _
     (h : hom-opposite-Preunivalent-Category z w)
     (g : hom-opposite-Preunivalent-Category y z)
     (f : hom-opposite-Preunivalent-Category x y) →
-    ( comp-hom-opposite-Preunivalent-Category
-      ( comp-hom-opposite-Preunivalent-Category h g) (f)) ＝
-    ( comp-hom-opposite-Preunivalent-Category
-      ( h) (comp-hom-opposite-Preunivalent-Category g f))
+    comp-hom-opposite-Preunivalent-Category
+      ( comp-hom-opposite-Preunivalent-Category h g)
+      ( f) ＝
+    comp-hom-opposite-Preunivalent-Category
+      ( h)
+      ( comp-hom-opposite-Preunivalent-Category g f)
   associative-comp-hom-opposite-Preunivalent-Category =
     associative-comp-hom-opposite-Precategory
+      ( precategory-Preunivalent-Category C)
+
+  inv-associative-comp-hom-opposite-Preunivalent-Category :
+    {x y z w : obj-opposite-Preunivalent-Category}
+    (h : hom-opposite-Preunivalent-Category z w)
+    (g : hom-opposite-Preunivalent-Category y z)
+    (f : hom-opposite-Preunivalent-Category x y) →
+    comp-hom-opposite-Preunivalent-Category
+      ( h)
+      ( comp-hom-opposite-Preunivalent-Category g f) ＝
+    comp-hom-opposite-Preunivalent-Category
+      ( comp-hom-opposite-Preunivalent-Category h g)
+      ( f)
+  inv-associative-comp-hom-opposite-Preunivalent-Category =
+    inv-associative-comp-hom-opposite-Precategory
       ( precategory-Preunivalent-Category C)
 
   id-hom-opposite-Preunivalent-Category :

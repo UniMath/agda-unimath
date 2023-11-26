@@ -57,12 +57,12 @@ module _
     (h : natural-transformation-map-Precategory C D H I)
     (g : natural-transformation-map-Precategory C D G H)
     (f : natural-transformation-map-Precategory C D F G) →
-    ( comp-natural-transformation-map-Precategory C D F G I
+    comp-natural-transformation-map-Precategory C D F G I
       ( comp-natural-transformation-map-Precategory C D G H I h g)
-      ( f)) ＝
-    ( comp-natural-transformation-map-Precategory C D F H I
+      ( f) ＝
+    comp-natural-transformation-map-Precategory C D F H I
       ( h)
-      ( comp-natural-transformation-map-Precategory C D F G H g f))
+      ( comp-natural-transformation-map-Precategory C D F G H g f)
   associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f =
     associative-comp-natural-transformation-map-Precategory
       C D F G H I f g h
@@ -72,12 +72,12 @@ module _
     (h : natural-transformation-map-Precategory C D H I)
     (g : natural-transformation-map-Precategory C D G H)
     (f : natural-transformation-map-Precategory C D F G) →
-    ( comp-natural-transformation-map-Precategory C D F H I
+    comp-natural-transformation-map-Precategory C D F H I
       ( h)
-      ( comp-natural-transformation-map-Precategory C D F G H g f)) ＝
-    ( comp-natural-transformation-map-Precategory C D F G I
+      ( comp-natural-transformation-map-Precategory C D F G H g f) ＝
+    comp-natural-transformation-map-Precategory C D F G I
       ( comp-natural-transformation-map-Precategory C D G H I h g)
-      ( f))
+      ( f)
   inv-associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f =
     inv-associative-comp-natural-transformation-map-Precategory
       C D F G H I f g h

@@ -186,3 +186,11 @@ module _
   pr2 compute-iso-opposite-Precategory =
     is-equiv-map-compute-iso-opposite-Precategory
 ```
+
+## External links
+
+- [Precategories - opposites](https://1lab.dev/Cat.Base.html#opposites) at 1lab
+- [opposite category](https://ncatlab.org/nlab/show/opposite+category) at $n$Lab
+- [Opposite category](https://en.wikipedia.org/wiki/Opposite_category) at
+  Wikipedia
+- [opposite category](https://www.wikidata.org/wiki/Q7098616) at Wikidata

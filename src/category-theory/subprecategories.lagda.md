@@ -382,10 +382,12 @@ module _
     (h : hom-Subprecategory C P z w)
     (g : hom-Subprecategory C P y z)
     (f : hom-Subprecategory C P x y) →
-    ( comp-hom-Subprecategory {x} {y} {w}
-      ( comp-hom-Subprecategory {y} {z} {w} h g) f) ＝
-    ( comp-hom-Subprecategory {x} {z} {w} h
-      ( comp-hom-Subprecategory {x} {y} {z} g f))
+    comp-hom-Subprecategory {x} {y} {w}
+      ( comp-hom-Subprecategory {y} {z} {w} h g)
+      ( f) ＝
+    comp-hom-Subprecategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Subprecategory {x} {y} {z} g f)
   associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f =
     eq-type-subtype
       ( subtype-hom-Subprecategory C P
@@ -407,7 +409,6 @@ module _
       ( comp-hom-Subprecategory {x} {y} {z} g f)) ＝
     ( comp-hom-Subprecategory {x} {y} {w}
       ( comp-hom-Subprecategory {y} {z} {w} h g) f)
-
   inv-associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f =
     eq-type-subtype
       ( subtype-hom-Subprecategory C P

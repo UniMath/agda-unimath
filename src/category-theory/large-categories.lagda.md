@@ -145,7 +145,6 @@ module _
   inv-associative-comp-hom-Large-Category =
     inv-associative-comp-hom-Large-Precategory (large-precategory-Large-Category C)
 
-
   left-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}
     {X : obj-Large-Category l1}

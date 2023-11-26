@@ -68,10 +68,20 @@ module _
     (h : hom-function-Category z w)
     (g : hom-function-Category y z)
     (f : hom-function-Category x y) →
-    ( comp-hom-function-Category (comp-hom-function-Category h g) f) ＝
-    ( comp-hom-function-Category h (comp-hom-function-Category g f))
+    comp-hom-function-Category (comp-hom-function-Category h g) f ＝
+    comp-hom-function-Category h (comp-hom-function-Category g f)
   associative-comp-hom-function-Category =
     associative-comp-hom-Category function-Category
+
+  inv-associative-comp-hom-function-Category :
+    {x y z w : obj-function-Category}
+    (h : hom-function-Category z w)
+    (g : hom-function-Category y z)
+    (f : hom-function-Category x y) →
+    comp-hom-function-Category h (comp-hom-function-Category g f) ＝
+    comp-hom-function-Category (comp-hom-function-Category h g) f
+  inv-associative-comp-hom-function-Category =
+    inv-associative-comp-hom-Category function-Category
 
   associative-composition-operation-function-Category :
     associative-composition-operation-binary-family-Set

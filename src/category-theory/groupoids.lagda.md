@@ -81,12 +81,20 @@ module _
   comp-hom-Groupoid = comp-hom-Category category-Groupoid
 
   associative-comp-hom-Groupoid :
-    {x y z w : obj-Groupoid} (h : hom-Groupoid z w)
-    (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
-    ( comp-hom-Groupoid (comp-hom-Groupoid h g) f) ＝
-    ( comp-hom-Groupoid h (comp-hom-Groupoid g f))
+    {x y z w : obj-Groupoid}
+    (h : hom-Groupoid z w) (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
+    comp-hom-Groupoid (comp-hom-Groupoid h g) f ＝
+    comp-hom-Groupoid h (comp-hom-Groupoid g f)
   associative-comp-hom-Groupoid =
     associative-comp-hom-Category category-Groupoid
+
+  inv-associative-comp-hom-Groupoid :
+    {x y z w : obj-Groupoid}
+    (h : hom-Groupoid z w) (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
+    comp-hom-Groupoid h (comp-hom-Groupoid g f) ＝
+    comp-hom-Groupoid (comp-hom-Groupoid h g) f
+  inv-associative-comp-hom-Groupoid =
+    inv-associative-comp-hom-Category category-Groupoid
 
   left-unit-law-comp-hom-Groupoid :
     {x y : obj-Groupoid} (f : hom-Groupoid x y) →

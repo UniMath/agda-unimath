@@ -7,8 +7,8 @@ module group-theory.orbits-monoid-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
 open import category-theory.composition-operations-on-binary-families-of-sets
+open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -155,9 +155,8 @@ module _
   associative-comp-hom-orbit-action-Monoid :
     {x y z w : type-action-Monoid M X} (h : hom-orbit-action-Monoid z w)
     (g : hom-orbit-action-Monoid y z) (f : hom-orbit-action-Monoid x y) →
-    Id
-      ( comp-hom-orbit-action-Monoid (comp-hom-orbit-action-Monoid h g) f)
-      ( comp-hom-orbit-action-Monoid h (comp-hom-orbit-action-Monoid g f))
+    comp-hom-orbit-action-Monoid (comp-hom-orbit-action-Monoid h g) f ＝
+    comp-hom-orbit-action-Monoid h (comp-hom-orbit-action-Monoid g f)
   associative-comp-hom-orbit-action-Monoid h g f =
     eq-htpy-hom-orbit-action-Monoid
       ( associative-mul-Monoid M

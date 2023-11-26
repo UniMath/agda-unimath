@@ -209,7 +209,6 @@ module _
       ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
       ( refl-htpy)
 
-
   inv-associative-comp-hom-Preorder :
     comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f) ＝
     comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f

@@ -235,7 +235,6 @@ module _
       ( comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f))
       ( refl-htpy)
 
-
   inv-associative-comp-hom-Monoid :
     (h : hom-Monoid M N) (g : hom-Monoid L M) (f : hom-Monoid K L) →
     comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f) ＝

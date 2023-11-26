@@ -87,10 +87,22 @@ module _
     (h : hom-Nonunital-Precategory z w)
     (g : hom-Nonunital-Precategory y z)
     (f : hom-Nonunital-Precategory x y) →
-    ( comp-hom-Nonunital-Precategory (comp-hom-Nonunital-Precategory h g) f) ＝
-    ( comp-hom-Nonunital-Precategory h (comp-hom-Nonunital-Precategory g f))
+    comp-hom-Nonunital-Precategory (comp-hom-Nonunital-Precategory h g) f ＝
+    comp-hom-Nonunital-Precategory h (comp-hom-Nonunital-Precategory g f)
   associative-comp-hom-Nonunital-Precategory =
     witness-associative-composition-operation-binary-family-Set
+      ( hom-set-Nonunital-Precategory)
+      ( associative-composition-operation-Nonunital-Precategory)
+
+  inv-associative-comp-hom-Nonunital-Precategory :
+    {x y z w : obj-Nonunital-Precategory}
+    (h : hom-Nonunital-Precategory z w)
+    (g : hom-Nonunital-Precategory y z)
+    (f : hom-Nonunital-Precategory x y) →
+    comp-hom-Nonunital-Precategory h (comp-hom-Nonunital-Precategory g f) ＝
+    comp-hom-Nonunital-Precategory (comp-hom-Nonunital-Precategory h g) f
+  inv-associative-comp-hom-Nonunital-Precategory =
+    inv-witness-associative-composition-operation-binary-family-Set
       ( hom-set-Nonunital-Precategory)
       ( associative-composition-operation-Nonunital-Precategory)
 ```

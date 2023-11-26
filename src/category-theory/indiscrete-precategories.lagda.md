@@ -98,7 +98,6 @@ module _
       ( comp-hom-indiscrete-Precategory {x} {y} {z} g f)
   associative-comp-hom-indiscrete-Precategory h g f = refl
 
-
   inv-associative-comp-hom-indiscrete-Precategory :
     {x y z w : obj-indiscrete-Precategory X} →
     (h : hom-indiscrete-Precategory X z w)
