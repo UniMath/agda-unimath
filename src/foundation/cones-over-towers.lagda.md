@@ -139,7 +139,7 @@ module _
   pr2 (cone-map-tower c f) n x = coherence-cone-tower A c n (f x)
 ```
 
-### Postcomposition cocones over postcomposition towers
+### Postcomposition cones over postcomposition towers
 
 ```agda
 module _
