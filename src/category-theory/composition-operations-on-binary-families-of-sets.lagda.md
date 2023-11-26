@@ -53,10 +53,10 @@ module _
 ### Associative composition operations in binary families of sets
 
 We give a slightly non-standard definition of associativity, requiring an
-associativity witness in each direction. This is of course redundant, as `inv`
+associativity witness in each direction. This is of course redundant as `inv`
 is a [fibered involution](foundation.fibered-involutions.md) on
 [identity types](foundation-core.identity-types.md). However, by recording both
-directions, we maintain a definitional double inverse law which is practical in
+directions we maintain a definitional double inverse law which is practical in
 defining the [opposite category](category-theory.opposite-categories.md).
 
 ```agda
