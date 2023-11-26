@@ -107,7 +107,7 @@ website, reporting any broken internal links that may prevent the website build
 from completing.
 
 Installation instructions for the `make website` tool can be found
-[here](HOWTO-INSTALL.md#after-the-setup).
+[here](HOWTO-INSTALL.md#contributor-setup).
 
 ## Adding yourself as a contributor {#add-contributor}
 
