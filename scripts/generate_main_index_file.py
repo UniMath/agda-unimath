@@ -62,8 +62,7 @@ def generate_namespace_entry_list(root_path, namespace):
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in module_titles_and_mdfiles)
 
-    namespace_title = utils.get_lagda_md_file_title(
-        str(namespace_path) + '.lagda.md')
+    namespace_title = utils.get_lagda_md_file_title(str(namespace_path.with_suffix('.lagda.md')))
     namespace_entry = entry_template.format(
         title=namespace_title, mdfile=namespace + '.md')
 
