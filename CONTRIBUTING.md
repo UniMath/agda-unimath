@@ -6,11 +6,13 @@ through their usage and help ensure your contributions meet our standards.
 ## The `make pre-commit` tool
 
 The `make pre-commit` tool checks library conventions and performs basic tasks.
-Before you run it, ensure that your files are properly tracked by git by staging
-any relevant file additions or deletions (respectively
-`git add <path-to-new-file>` and `git add <path-to-deleted-file>`). Our
-installation instructions for the `make pre-commit` tool can be found
+Our installation instructions for the `make pre-commit` tool can be found
 [here](HOWTO-INSTALL.md#contributor-setup).
+
+Before you run the tool, ensure that your files are properly tracked by git by
+staging any relevant file additions or deletions. This is what the commands
+`git add <path-to-new-file>` and `git add <path-to-deleted-file>` do
+respectively.
 
 The `make pre-commit` tool can generate errors during the first run while
 correcting some of them automatically. If all goes well, the second run should
@@ -81,10 +83,10 @@ Below is a summary of the tasks this tool performs:
   manual maintenance is required for this file.
 
 **Note**: The previous two hooks only detect tracked files. This means that if
-you add or delete files, they must be staged for these hooks to take them
-properly into consideration. This gives you finer control over your commits. For
-instance, if a file is not ready to be committed, you can still use our
-pre-commit tool and simply not stage that file.
+you add or delete files, they must be staged for these hooks to take these
+changes into consideration. This gives you finer control over your commits. For
+instance, if a file is not ready to be committed, you can still use the
+pre-commit tool and just not stage that file.
 
 <!--
 - **Python scripts formatting**: Performs `autopep8` formatting on Python
