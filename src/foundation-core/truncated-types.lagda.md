@@ -86,15 +86,7 @@ pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
 ```
 
-### A (-1)-truncated type is `k+1`-truncated
-
-```agda
-is-trunc-is-neg-one-trunc :
-  (k : 𝕋) {l : Level} {A : UU l} → is-trunc neg-one-𝕋 A → is-trunc (succ-𝕋 k) A
-is-trunc-is-neg-one-trunc neg-two-𝕋 H = H
-is-trunc-is-neg-one-trunc (succ-𝕋 k) H =
-  is-trunc-succ-is-trunc (succ-𝕋 k) (is-trunc-is-neg-one-trunc k H)
-```
+The corollary that any `-1`-truncated type, i.e., any propoosition, is `k+1`-truncated for any truncation level `k` is recorded in [Propositions](foundation.propositions.md) as `is-trunc-is-prop`.
 
 ### The identity type of a `k`-truncated type is `k`-truncated
 

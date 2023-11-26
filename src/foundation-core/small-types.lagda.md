@@ -161,7 +161,7 @@ equiv-is-small-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
   A ≃ B → is-small l3 A ≃ is-small l3 B
 equiv-is-small-equiv e =
-  equiv-tot (λ X → equiv-precomp-equiv (inv-equiv e) X)
+  equiv-tot (equiv-precomp-equiv (inv-equiv e))
 ```
 
 ### The universe of `UU l1`-small types in `UU l2` is equivalent to the universe of `UU l2`-small types in `UU l1`
