@@ -10,28 +10,16 @@ module category-theory.structure-equivalences-set-magmoids where
 open import category-theory.functors-set-magmoids
 open import category-theory.set-magmoids
 
-open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
-open import foundation.sets
-open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universe-levels
 ```
 

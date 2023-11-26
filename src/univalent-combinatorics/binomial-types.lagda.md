@@ -32,6 +32,7 @@ open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equivalences
 open import foundation.negation
+open import foundation.postcomposition-functions
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -43,6 +44,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 

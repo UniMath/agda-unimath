@@ -7,15 +7,11 @@ module order-theory.inhabited-finite-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.finite-posets
-open import order-theory.finite-preorders
 open import order-theory.finite-total-orders
 open import order-theory.posets
 open import order-theory.total-orders

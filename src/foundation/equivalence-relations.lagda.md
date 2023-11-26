@@ -100,10 +100,10 @@ module _
   pr2 (extensionality-equivalence-relation S) =
     is-equiv-relate-same-elements-eq-equivalence-relation S
 
-  equivalence-relationate-same-elements-equivalence-relation :
+  eq-relate-same-elements-equivalence-relation :
     (S : equivalence-relation l2 A) →
     relate-same-elements-equivalence-relation R S → (R ＝ S)
-  equivalence-relationate-same-elements-equivalence-relation S =
+  eq-relate-same-elements-equivalence-relation S =
     map-inv-equiv (extensionality-equivalence-relation S)
 ```
 
@@ -319,7 +319,7 @@ is-section-equivalence-relation-partition-equivalence-relation :
   {l : Level} {A : UU l} (R : equivalence-relation l A) →
   equivalence-relation-partition (partition-equivalence-relation R) ＝ R
 is-section-equivalence-relation-partition-equivalence-relation R =
-  equivalence-relationate-same-elements-equivalence-relation
+  eq-relate-same-elements-equivalence-relation
     ( equivalence-relation-partition (partition-equivalence-relation R))
     ( R)
     ( relate-same-elements-equivalence-relation-partition-equivalence-relation
@@ -551,7 +551,7 @@ is-retraction-equivalence-relation-Surjection-Into-Set :
     ( surjection-into-set-equivalence-relation R) ＝
   R
 is-retraction-equivalence-relation-Surjection-Into-Set R =
-  equivalence-relationate-same-elements-equivalence-relation
+  eq-relate-same-elements-equivalence-relation
     ( equivalence-relation-Surjection-Into-Set
       ( surjection-into-set-equivalence-relation R))
     ( R)

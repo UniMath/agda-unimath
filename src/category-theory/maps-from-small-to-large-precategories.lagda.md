@@ -11,8 +11,6 @@ open import category-theory.large-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.torsorial-type-families

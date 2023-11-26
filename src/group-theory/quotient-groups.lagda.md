@@ -16,20 +16,15 @@ open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-quotients
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
-open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
@@ -317,8 +312,7 @@ module _
           ( ap
             ( map-quotient-hom-Group G N)
             ( associative-mul-Group G x y z)) ∙
-          ( inv
-            ( compute-mul-quotient-Group x (mul-Group G y z))) ∙
+          ( inv (compute-mul-quotient-Group x (mul-Group G y z))) ∙
           ( ap
             ( mul-quotient-Group (map-quotient-hom-Group G N x))
             ( inv (compute-mul-quotient-Group y z))))
@@ -375,15 +369,11 @@ module _
   quotient-Group : Group (l1 ⊔ l2)
   pr1 quotient-Group = semigroup-quotient-Group
   pr1 (pr1 (pr2 quotient-Group)) = unit-quotient-Group
-  pr1 (pr2 (pr1 (pr2 quotient-Group))) =
-    left-unit-law-mul-quotient-Group
-  pr2 (pr2 (pr1 (pr2 quotient-Group))) =
-    right-unit-law-mul-quotient-Group
+  pr1 (pr2 (pr1 (pr2 quotient-Group))) = left-unit-law-mul-quotient-Group
+  pr2 (pr2 (pr1 (pr2 quotient-Group))) = right-unit-law-mul-quotient-Group
   pr1 (pr2 (pr2 quotient-Group)) = inv-quotient-Group
-  pr1 (pr2 (pr2 (pr2 quotient-Group))) =
-    left-inverse-law-mul-quotient-Group
-  pr2 (pr2 (pr2 (pr2 quotient-Group))) =
-    right-inverse-law-mul-quotient-Group
+  pr1 (pr2 (pr2 (pr2 quotient-Group))) = left-inverse-law-mul-quotient-Group
+  pr2 (pr2 (pr2 (pr2 quotient-Group))) = right-inverse-law-mul-quotient-Group
 ```
 
 #### The quotient homomorphism into the quotient group

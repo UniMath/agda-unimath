@@ -8,7 +8,6 @@ module structured-types.commuting-squares-of-pointed-maps where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.function-types
 open import foundation.universe-levels
 
 open import structured-types.pointed-homotopies

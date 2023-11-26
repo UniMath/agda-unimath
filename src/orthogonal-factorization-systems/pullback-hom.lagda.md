@@ -18,6 +18,8 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks
@@ -85,7 +87,10 @@ type-standard-pullback-hom {A = A} {Y = Y} f g =
   standard-pullback (precomp f Y) (postcomp A g)
 ```
 
-#### The canonical pullback-hom type is equivalent to the type of fibered maps
+#### The standard pullback-hom type is equivalent to the type of fibered maps
+
+**Proof:** The equivalence is a single application of
+[function extensionality](foundation.function-extensionality.md).
 
 ```agda
 module _
@@ -165,7 +170,17 @@ fibered maps.
 
 The pullback-hom `f ⋔ g` is the map `(B → X) → fibered-map f g`, that takes a
 diagonal map `j` from the codomain of `f` to the domain of `g` to the fibered
-map `(g ∘ j , j ∘ f , refl-htpy)`.
+map
+
+```text
+        j ∘ f
+    A --------> X
+    |           |
+  f | refl-htpy | g
+    v           v
+    B --------> Y.
+        g ∘ j
+```
 
 ```agda
 module _

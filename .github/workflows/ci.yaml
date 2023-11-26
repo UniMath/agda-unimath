@@ -37,14 +37,14 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest]
-        agda: ['2.6.3']
+        agda: ['2.6.4']
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
         with:
           path: master
       - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.0.0
+        uses: wenkokke/setup-agda@v2.1.0
         with:
           agda-version: ${{ matrix.agda }}
 

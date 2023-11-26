@@ -8,10 +8,10 @@ module foundation.dependent-epimorphisms where
 
 ```agda
 open import foundation.epimorphisms
-open import foundation.function-types
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
+open import foundation-core.precomposition-dependent-functions
 ```
 
 </details>

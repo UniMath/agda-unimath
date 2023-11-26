@@ -8,8 +8,6 @@ module structured-types.morphisms-types-equipped-with-automorphisms where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.torsorial-type-families

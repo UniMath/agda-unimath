@@ -29,7 +29,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type

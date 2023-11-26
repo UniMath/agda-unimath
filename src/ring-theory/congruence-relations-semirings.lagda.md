@@ -9,7 +9,6 @@ module ring-theory.congruence-relations-semirings where
 ```agda
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -212,9 +211,9 @@ pr1 (extensionality-congruence-Semiring R S T) =
 pr2 (extensionality-congruence-Semiring R S T) =
   is-equiv-relate-same-elements-eq-congruence-Semiring R S T
 
-equivalence-relationate-same-elements-congruence-Semiring :
+eq-relate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S T : congruence-Semiring l2 R) →
   relate-same-elements-congruence-Semiring R S T → S ＝ T
-equivalence-relationate-same-elements-congruence-Semiring R S T =
+eq-relate-same-elements-congruence-Semiring R S T =
   map-inv-equiv (extensionality-congruence-Semiring R S T)
 ```

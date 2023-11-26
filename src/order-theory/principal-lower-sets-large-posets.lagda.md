@@ -31,8 +31,8 @@ Two elements `x` and `y` in a large poset `P` are
 [similar](order-theory.similarity-of-elements-large-posets.md) if and only if
 they have the same principal lower sets, and if `x` and `y` are of the same
 [universe level](foundation.universe-levels.md), then `x` and `y` are equal if
-and only if they have the same principal lower sets. To see this, simply note
-that if `↓{x} = ↓{y}`, then we have the implications `(x ≤ x) → (x ≤ y)` and
+and only if they have the same principal lower sets. To see this, note that if
+`↓{x} = ↓{y}`, then we have the implications `(x ≤ x) → (x ≤ y)` and
 `(y ≤ y) → (y ≤ x)`.
 
 ## Definitions

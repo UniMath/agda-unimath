@@ -11,10 +11,11 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
+open import foundation.precomposition-functions-into-subuniverses
 open import foundation.subtype-identity-principle
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -22,10 +23,12 @@ open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
+open import foundation-core.precomposition-functions
 open import foundation-core.propositions
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -33,7 +36,7 @@ open import foundation-core.propositions
 ## Idea
 
 A map `f : A → P` into a proposition `P` is said to satisfy the universal
-property of the propositional truncation of `A`, or is simply said to be a
+property of the propositional truncation of `A`, or is said to be a
 propositional truncation of `A`, if any map `g : A → Q` into a proposition `Q`
 extends uniquely along `f`.
 

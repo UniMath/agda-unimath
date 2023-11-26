@@ -7,22 +7,14 @@ module structured-types.equivalences-types-equipped-with-automorphisms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 

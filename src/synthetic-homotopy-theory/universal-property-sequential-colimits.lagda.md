@@ -14,13 +14,12 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
+open import foundation.precomposition-functions
 open import foundation.subtype-identity-principle
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
@@ -241,7 +240,7 @@ module _
       ( up-sequential-colimit)
       ( up-sequential-colimit') =
       is-equiv-is-equiv-precomp h
-        ( λ l Z →
+        ( λ Z →
           is-equiv-top-map-triangle
             ( cocone-map-sequential-diagram A c')
             ( cocone-map-sequential-diagram A c)

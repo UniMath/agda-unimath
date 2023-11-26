@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -532,7 +531,7 @@ module _
   is-section-ideal-congruence-Ring :
     congruence-ideal-Ring R (ideal-congruence-Ring R S) ＝ S
   is-section-ideal-congruence-Ring =
-    equivalence-relationate-same-elements-congruence-Ring R
+    eq-relate-same-elements-congruence-Ring R
       ( congruence-ideal-Ring R (ideal-congruence-Ring R S))
       ( S)
       ( relate-same-elements-congruence-ideal-congruence-Ring)
