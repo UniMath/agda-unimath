@@ -19,12 +19,12 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 
 ## Idea
 
-A **(sequentially) compact type** is a type `X` such that exponentiating with
-`X` commutes with
+A **(sequentially) compact type** is a type `X` such that exponentiating by `X`
+commutes with
 [sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
 
 ```text
-  (colimₙ (X → Aₙ)) ≃ (X → colimₙ Aₙ.)
+  (colimₙ (X → Aₙ)) ≃ (X → colimₙ Aₙ)
 ```
 
 for every [cotower](synthetic-homotopy-theory.sequential-diagrams.md) `Aₙ`.
