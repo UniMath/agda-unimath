@@ -47,7 +47,7 @@ if __name__ == '__main__':
     try:
         git_tracked_files = set(utils.get_git_tracked_files())
     except subprocess.CalledProcessError:
-        print('Failed to get Git-tracked files', file=sys.stderr)
+        utils.eprint('Failed to get Git-tracked files')
         sys.exit(STATUS_FLAG_GIT_ERROR)
 
     for namespace in utils.get_subdirectories_recursive(root):
@@ -64,8 +64,8 @@ if __name__ == '__main__':
 
         title_index = contents.find('# ')
         if title_index > 0:
-            print(
-                f'Warning! Namespace file {namespace_filename} should start with a top-level title.', file=sys.stderr)
+            utils.eprint(
+                f'Warning! Namespace file {namespace_filename} should start with a top-level title.')
             status |= MISPLACED_TITLE_FLAG
         elif title_index == -1:  # Missing title, generate it
             contents = generate_title(namespace) + contents
@@ -86,8 +86,8 @@ if __name__ == '__main__':
             if agda_block_end == -1:
                 # An agda block is opened but not closed.
                 # This is an error, but we can fix it
-                print(
-                    f'WARNING! agda-block was opened but not closed in {namespace_filename}.', file=sys.stderr)
+                utils.eprint(
+                    f'WARNING! agda block was opened but not closed in {namespace_filename}.')
                 contents = contents[:agda_block_start] + generated_block
             else:
                 agda_block_end += len('\n```\n')

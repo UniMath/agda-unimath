@@ -21,28 +21,28 @@ def generate_namespace_entry_list(root, namespace):
     try:
         git_tracked_files = utils.get_git_tracked_files()
     except subprocess.CalledProcessError:
-        print('Failed to get Git-tracked files', file=sys.stderr)
+        utils.eprint('Failed to get Git-tracked files')
         sys.exit(STATUS_FLAG_GIT_ERROR)
 
     root_path = pathlib.Path(root)
     namespace_path = root_path.joinpath(namespace)
 
     # Filter out the relevant files in the given namespace
-    relevant_files = (
+    relevant_files = tuple(
         f for f in git_tracked_files if namespace_path in f.parents)
 
-    lagda_file_paths = (f for f in relevant_files if utils.is_agda_file(f))
-    modules = (p.name for p in lagda_file_paths)
-    module_titles = (utils.get_lagda_md_file_title(f)
+    lagda_file_paths = tuple(f for f in relevant_files if utils.is_agda_file(f))
+    modules = tuple(p.name for p in lagda_file_paths)
+    module_titles = tuple(utils.get_lagda_md_file_title(f)
                      for f in lagda_file_paths)
-    module_mdfiles = (utils.get_module_mdfile(namespace, m) for m in modules)
+    module_mdfiles = tuple(utils.get_module_mdfile(namespace, m) for m in modules)
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):
         if title is None:
             status |= STATUS_FLAG_NO_TITLE
-            print(
-                f'WARNING! {namespace}.{module} no title was found', file=sys.stderr)
+            utils.eprint(
+                f'WARNING! {namespace}.{module} no title was found')
 
     # Check duplicate titles
     equal_titles = utils.get_equivalence_classes(
@@ -52,10 +52,10 @@ def generate_namespace_entry_list(root, namespace):
 
     if (len(equal_titles) > 0):
         status |= STATUS_FLAG_DUPLICATE_TITLE
-        print(f'WARNING! Duplicate titles in {namespace}:', file=sys.stderr)
+        utils.eprint(f'WARNING! Duplicate titles in {namespace}:')
         for ec in equal_titles:
-            print(
-                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}", file=sys.stderr)
+            utils.eprint(
+                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}")
 
     module_titles_and_mdfiles = sorted(
         zip(module_titles, module_mdfiles), key=lambda tm: (tm[1].split('.')))
