@@ -47,16 +47,27 @@ module _
   family-sequential-diagram = pr1 A
 
   map-sequential-diagram :
-    ( n : ℕ) →
-    family-sequential-diagram n → family-sequential-diagram (succ-ℕ n)
+    (n : ℕ) → family-sequential-diagram n → family-sequential-diagram (succ-ℕ n)
   map-sequential-diagram = pr2 A
 ```
 
 ## Properties
 
-The [identity type](foundation.identity-types.md) of sequential colimits is
+The [identity type](foundation.identity-types.md) of sequential diagrams is
 characterized in the file about
 [equivalences of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md).
+
+### Postcomposition sequential diagrams
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (A : sequential-diagram l2)
+  where
+
+  postcomp-sequential-diagram : sequential-diagram (l1 ⊔ l2)
+  pr1 postcomp-sequential-diagram n = X → family-sequential-diagram A n
+  pr2 postcomp-sequential-diagram n g x = map-sequential-diagram A n (g x)
+```
 
 ## References
 

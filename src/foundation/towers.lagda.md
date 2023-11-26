@@ -83,6 +83,18 @@ iterated-left-shift-tower : {l : Level} (n : ℕ) → tower l → tower l
 iterated-left-shift-tower n = iterate n left-shift-tower
 ```
 
+### Postcomposition towers
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (A : tower l2)
+  where
+
+  postcomp-tower : tower (l1 ⊔ l2)
+  pr1 postcomp-tower n = X → type-tower A n
+  pr2 postcomp-tower n g x = map-tower A n (g x)
+```
+
 ## Table of files about sequential limits
 
 The following table lists files that are about sequential limits as a general

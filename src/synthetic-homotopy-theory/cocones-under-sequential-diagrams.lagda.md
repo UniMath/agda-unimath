@@ -172,6 +172,22 @@ module _
     f ·l (coherence-triangle-cocone-sequential-diagram A c n)
 ```
 
+### Postcomposition cocones under postcomposition sequential diagrams
+
+```agda
+module _
+  { l1 l2 l3 : Level} (X : UU l1) (A : sequential-diagram l2) {Y : UU l3}
+  ( c : cocone-sequential-diagram A Y)
+  where
+
+  cocone-postcomp-sequential-diagram :
+    cocone-sequential-diagram (postcomp-sequential-diagram X A) (X → Y)
+  pr1 cocone-postcomp-sequential-diagram n g x =
+    map-cocone-sequential-diagram A c n (g x)
+  pr2 cocone-postcomp-sequential-diagram n g =
+    eq-htpy (λ x → coherence-triangle-cocone-sequential-diagram A c n (g x))
+```
+
 ## Properties
 
 ### Characterization of identity types of cocones under sequential diagrams
