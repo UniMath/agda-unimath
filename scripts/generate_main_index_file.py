@@ -15,7 +15,7 @@ STATUS_FLAG_DUPLICATE_TITLE = 4
 entry_template = '- [{title}]({mdfile})'
 
 
-def generate_namespace_entry_list(root, namespace):
+def generate_namespace_entry_list(root_path, namespace):
     status = 0
 
     try:
@@ -24,7 +24,6 @@ def generate_namespace_entry_list(root, namespace):
         utils.eprint('Failed to get Git-tracked files')
         sys.exit(STATUS_FLAG_GIT_ERROR)
 
-    root_path = pathlib.Path(root)
     namespace_path = root_path.joinpath(namespace)
 
     # Filter out the relevant files in the given namespace
@@ -64,7 +63,7 @@ def generate_namespace_entry_list(root, namespace):
                   for t, md in module_titles_and_mdfiles)
 
     namespace_title = utils.get_lagda_md_file_title(
-        os.path.join(root, namespace) + '.lagda.md')
+        str(namespace_path) + '.lagda.md')
     namespace_entry = entry_template.format(
         title=namespace_title, mdfile=namespace + '.md')
 
@@ -72,13 +71,13 @@ def generate_namespace_entry_list(root, namespace):
     return namespace_entry_list, status
 
 
-def generate_index(root, header):
+def generate_index(root_path, header):
     status = 0
     entry_lists = []
-    namespaces = sorted(set(utils.get_subdirectories_recursive(root)))
+    namespaces = sorted(set(utils.get_subdirectories_recursive(root_path)))
 
     for namespace in namespaces:
-        entry_list, s = generate_namespace_entry_list(root, namespace)
+        entry_list, s = generate_namespace_entry_list(root_path, namespace)
         entry_lists.append(entry_list)
         status |= s
 
@@ -125,7 +124,9 @@ if __name__ == '__main__':
     summary_path = 'SUMMARY.md'
     index_header = '# The agda-unimath library'
 
-    index_content, status = generate_index(root, index_header)
+    root_path = pathlib.Path(root)
+
+    index_content, status = generate_index(root_path, index_header)
     if status == 0:
         summary_contents = summary_template.format(module_index=index_content)
         with open(summary_path, 'w') as summary_file:
