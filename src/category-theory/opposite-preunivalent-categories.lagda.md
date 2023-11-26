@@ -58,13 +58,9 @@ abstract
     {l1 l2 : Level} (C : Precategory l1 l2) →
     is-preunivalent-Precategory (opposite-Precategory C) →
     is-preunivalent-Precategory C
-  is-preunivalent-is-preunivalent-opposite-Precategory C is-preunivalent-op-C =
-    tr
-      ( is-preunivalent-Precategory)
-      ( is-involution-opposite-Precategory C)
-      ( is-preunivalent-opposite-is-preunivalent-Precategory
-        ( opposite-Precategory C)
-        ( is-preunivalent-op-C))
+  is-preunivalent-is-preunivalent-opposite-Precategory C =
+    is-preunivalent-opposite-is-preunivalent-Precategory
+      ( opposite-Precategory C)
 ```
 
 ## Definitions
