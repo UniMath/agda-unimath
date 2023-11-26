@@ -12,18 +12,20 @@ open import foundation-core.commuting-squares-of-maps public
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-prisms-of-maps
+open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-identifications
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.path-algebra
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
+open import foundation-core.commuting-prisms-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
 
@@ -309,6 +311,150 @@ module _
       ( sq-bottom ·r mid-left ·r top-left)
       ( bottom-right ·l (sq-mid ·r top-left))
       ( ( bottom-right ∘ mid-right) ·l sq-top))
+```
+
+### Naturality of commuting squares of maps with respect to identifications
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  ( top : A → B) (left : A → C) (right : B → D) (bottom : C → D)
+  ( H : coherence-square-maps top left right bottom)
+  where
+
+  nat-coherence-square-maps :
+    { x y : A} (p : x ＝ y) →
+    coherence-square-identifications
+      ( ap bottom (ap left p))
+      ( H x)
+      ( H y)
+      ( ap right (ap top p))
+  nat-coherence-square-maps refl = right-unit
+
+module _
+  { l1 l2 l3 l4 l5 l6 l7 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  { X : UU l5} {Y : UU l6} {Z : UU l7}
+  ( top : A → B) (left : A → C) (mid-top : B → D) (mid-left : C → D)
+  ( mid-right : D → X) (mid-bottom : D → Y) (right : X → Z) (bottom : Y → Z)
+  ( H : coherence-square-maps top left mid-top mid-left)
+  ( K : coherence-square-maps mid-right mid-bottom right bottom)
+  where
+
+  swap-nat-coherence-square-maps :
+    coherence-square-homotopies
+      ( bottom ·l mid-bottom ·l H)
+      ( K ·r mid-left ·r left)
+      ( K ·r mid-top ·r top)
+      ( right ·l mid-right ·l H)
+  swap-nat-coherence-square-maps x =
+    nat-coherence-square-maps mid-right mid-bottom right bottom K (H x)
+```
+
+### Commutativity of horizontal and vertical pasting
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  { M : UU l7} {N : UU l8} {O : UU l9}
+  ( top-left : A → B) (top-right : B → C)
+  ( left-top : A → X) (mid-top : B → Y) (right-top : C → Z)
+  ( mid-left : X → Y) (mid-right : Y → Z)
+  ( left-bottom : X → M) (mid-bottom : Y → N) (right-bottom : Z → O)
+  ( bottom-left : M → N) (bottom-right : N → O)
+  ( sq-left-top : coherence-square-maps top-left left-top mid-top mid-left)
+  ( sq-right-top : coherence-square-maps top-right mid-top right-top mid-right)
+  ( sq-left-bottom :
+      coherence-square-maps mid-left left-bottom mid-bottom bottom-left)
+  ( sq-right-bottom :
+      coherence-square-maps mid-right mid-bottom right-bottom bottom-right)
+  where
+
+  commutative-pasting-vertical-pasting-horizontal-coherence-square-maps :
+    ( pasting-horizontal-coherence-square-maps
+      ( top-left)
+      ( top-right)
+      ( left-bottom ∘ left-top)
+      ( mid-bottom ∘ mid-top)
+      ( right-bottom ∘ right-top)
+      ( bottom-left)
+      ( bottom-right)
+      ( pasting-vertical-coherence-square-maps
+        ( top-left)
+        ( left-top)
+        ( mid-top)
+        ( mid-left)
+        ( left-bottom)
+        ( mid-bottom)
+        ( bottom-left)
+        ( sq-left-top)
+        ( sq-left-bottom))
+      ( pasting-vertical-coherence-square-maps
+        ( top-right)
+        ( mid-top)
+        ( right-top)
+        ( mid-right)
+        ( mid-bottom)
+        ( right-bottom)
+        ( bottom-right)
+        ( sq-right-top)
+        ( sq-right-bottom))) ~
+    ( pasting-vertical-coherence-square-maps
+      ( top-right ∘ top-left)
+      ( left-top)
+      ( right-top)
+      ( mid-right ∘ mid-left)
+      ( left-bottom)
+      ( right-bottom)
+      ( bottom-right ∘ bottom-left)
+      ( pasting-horizontal-coherence-square-maps
+        ( top-left)
+        ( top-right)
+        ( left-top)
+        ( mid-top)
+        ( right-top)
+        ( mid-left)
+        ( mid-right)
+        ( sq-left-top)
+        ( sq-right-top))
+      ( pasting-horizontal-coherence-square-maps
+        ( mid-left)
+        ( mid-right)
+        ( left-bottom)
+        ( mid-bottom)
+        ( right-bottom)
+        ( bottom-left)
+        ( bottom-right)
+        ( sq-left-bottom)
+        ( sq-right-bottom)))
+  commutative-pasting-vertical-pasting-horizontal-coherence-square-maps =
+    ( ap-concat-htpy' _
+      ( distributive-left-whisk-concat-htpy
+        ( bottom-right)
+        ( sq-left-bottom ·r left-top)
+        ( mid-bottom ·l sq-left-top)) ∙h
+      ( both-whisk-square-htpy
+        ( bottom-right ·l (sq-left-bottom ·r left-top))
+        ( right-bottom ·l (sq-right-top ·r top-left))
+        ( inv-htpy
+          ( swap-nat-coherence-square-maps
+            ( top-left)
+            ( left-top)
+            ( mid-top)
+            ( mid-left)
+            ( mid-right)
+            ( mid-bottom)
+            ( right-bottom)
+            ( bottom-right)
+            ( sq-left-top)
+            ( sq-right-bottom))))) ∙h
+      ( ap-concat-htpy _
+        ( inv-htpy
+          ( distributive-left-whisk-concat-htpy
+            ( right-bottom)
+            ( mid-right ·l sq-left-top)
+            ( sq-right-top ·r top-left))))
 ```
 
 ### Distributivity of pasting squares and transposing by precomposition
