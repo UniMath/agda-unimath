@@ -7,8 +7,8 @@ module order-theory.well-founded-orders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
@@ -19,7 +19,8 @@ open import order-theory.well-founded-relations
 
 ## Idea
 
-A **well-founded order** is a [transitive](foundation.binary-relations.md) [well-founded relation](order-theory.well-founded-relations.md).
+A **well-founded order** is a [transitive](foundation.binary-relations.md)
+[well-founded relation](order-theory.well-founded-relations.md).
 
 ## Definitions
 

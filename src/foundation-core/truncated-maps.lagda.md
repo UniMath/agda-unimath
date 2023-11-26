@@ -86,7 +86,7 @@ is-trunc-map-is-contr-map (succ-𝕋 k) H =
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
   where
-  
+
   is-trunc-map-is-equiv :
     {f : A → B} → is-equiv f → is-trunc-map k f
   is-trunc-map-is-equiv H =

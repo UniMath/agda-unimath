@@ -82,8 +82,8 @@ is-connected-is-equiv-diagonal {k = k} {A = A} H =
       function-dependent-universal-property-trunc
         ( Id-Truncated-Type' (trunc k A) x))
     ( tot
-      (λ _ → htpy-eq)
-      (center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
+      ( λ _ → htpy-eq)
+      ( center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
 ```
 
 ### A contractible type is `k`-connected for any `k`
@@ -107,10 +107,10 @@ is-connected-is-connected-succ-𝕋 :
   is-connected (succ-𝕋 k) A → is-connected k A
 is-connected-is-connected-succ-𝕋 k H =
   is-connected-is-equiv-diagonal
-    λ B →
+    ( λ B →
       is-equiv-diagonal-is-connected
-        (truncated-type-succ-Truncated-Type k B)
-        H
+        ( truncated-type-succ-Truncated-Type k B)
+        ( H))
 ```
 
 ### The total space of a family of `k`-connected types over a `k`-connected type is `k`-connected

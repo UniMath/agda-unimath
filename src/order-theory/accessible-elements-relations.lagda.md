@@ -22,8 +22,11 @@ open import foundation-core.propositions
 
 ## Idea
 
-Given a type `X` with a [binary relation](foundation.binary-relations.md) `_<_ : X → X → Type` we say that `x : X`
-is **accessible** if `y` is accessible for all `y < x`. Note that the predicate of being an accessible element is a recursive condition. The accessibility predicate is therefore implemented as an inductive type with one constructor:
+Given a type `X` with a [binary relation](foundation.binary-relations.md)
+`_<_ : X → X → Type` we say that `x : X` is **accessible** if `y` is accessible
+for all `y < x`. Note that the predicate of being an accessible element is a
+recursive condition. The accessibility predicate is therefore implemented as an
+inductive type with one constructor:
 
 ```text
   access : ((y : X) → y < x → is-accessible y) → is-accessible x
@@ -37,7 +40,7 @@ is **accessible** if `y` is accessible for all `y < x`. Note that the predicate 
 module _
   {l1 l2} {X : UU l1} (_<_ : Relation l2 X)
   where
-  
+
   data is-accessible-element-Relation (x : X) : UU (l1 ⊔ l2)
     where
     access :
@@ -51,7 +54,7 @@ module _
 module _
   {l1 l2 : Level} {X : UU l1} (_<_ : Relation l2 X)
   where
-  
+
   accessible-element-Relation : UU (l1 ⊔ l2)
   accessible-element-Relation = Σ X (is-accessible-element-Relation _<_)
 ```
@@ -78,7 +81,7 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} (_<_ : Relation l2 X) (P : X → UU l3)
   where
-  
+
   ind-accessible-element-Relation :
     ( {x : X} → is-accessible-element-Relation _<_ x →
       ({y : X} → y < x → P y) → P x) →
@@ -89,19 +92,25 @@ module _
 
 ### Accessibility is a property
 
-**Proof:** Consider an element `x : X` of a type `X` equipped with a binary relation `_<_`. We prove by double induction that any two elements of `is-accessible-element-Relation _<_ x` are equal. It therefore suffices to prove that `access f ＝ access f'` for any two elements
+**Proof:** Consider an element `x : X` of a type `X` equipped with a binary
+relation `_<_`. We prove by double induction that any two elements of
+`is-accessible-element-Relation _<_ x` are equal. It therefore suffices to prove
+that `access f ＝ access f'` for any two elements
 
 ```text
   f f' : {y : X} → y < x → is-accessible-element-Relation _<_ y
 ```
 
-The induction hypotheses asserts that any two elements of type `is-accessible-element-Relation _<_ y` are equal for any `y < x`. The induction hypothesis therefore implies that any two elements in the type
+The induction hypotheses asserts that any two elements of type
+`is-accessible-element-Relation _<_ y` are equal for any `y < x`. The induction
+hypothesis therefore implies that any two elements in the type
 
 ```text
   {y : X} → y < x → is-accessible-element-Relation _<_ y
 ```
 
-are equal. Therefore it follows that `f ＝ f'`, and we conclude that `access f ＝ access f'`.
+are equal. Therefore it follows that `f ＝ f'`, and we conclude that
+`access f ＝ access f'`.
 
 ```agda
 module _ {l1 l2} {X : UU l1} (_<_ : Relation l2 X) where
@@ -138,7 +147,7 @@ module _ {l1 l2} {X : UU l1} (_<_ : Relation l2 X) where
 module _
   {l1 l2 : Level} {X : UU l1} (_<_ : Relation l2 X)
   where
-  
+
   is-asymmetric-is-accessible-element-Relation :
     {x : X} → is-accessible-element-Relation _<_ x →
     {y : X} → x < y → ¬ (y < x)

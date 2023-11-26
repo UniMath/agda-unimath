@@ -23,10 +23,19 @@ open import foundation-core.propositions
 
 ## Idea
 
-A map is said to be **propositional** if its [fibers](foundation-core.fibers-of-maps.md) are [propositions](foundation-core.propositions.md). This condition
-is the same as the condition of being a [`-1`-truncated map](foundation-core.truncated-maps.md), and it is [equivalent](foundation-core.equivalences.md) to being an [embedding](foundation-core.embeddings.md).
+A map is said to be **propositional** if its
+[fibers](foundation-core.fibers-of-maps.md) are
+[propositions](foundation-core.propositions.md). This condition is the same as
+the condition of being a
+[`-1`-truncated map](foundation-core.truncated-maps.md), and it is
+[equivalent](foundation-core.equivalences.md) to being an
+[embedding](foundation-core.embeddings.md).
 
-**Note:** Of the three equivalent conditions mentioned above, propositional maps, `-1`-truncated maps, and embeddings, the central notion of in the agda-unimath library is that of embedding. This means that most infrastructure is available for embeddings, and that it is easy to convert from any of the other two notions to the notion of embedding.
+**Note:** Of the three equivalent conditions mentioned above, propositional
+maps, `-1`-truncated maps, and embeddings, the central notion of in the
+agda-unimath library is that of embedding. This means that most infrastructure
+is available for embeddings, and that it is easy to convert from any of the
+other two notions to the notion of embedding.
 
 ## Definitions
 
