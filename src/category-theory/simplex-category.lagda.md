@@ -87,7 +87,10 @@ associative-composition-operation-simplex-Category :
 pr1 associative-composition-operation-simplex-Category {n} {m} {r} =
   comp-hom-simplex-Category {n} {m} {r}
 pr2 associative-composition-operation-simplex-Category {n} {m} {r} {s} =
-  associative-comp-hom-simplex-Category {n} {m} {r} {s}
+  is-associative-witness-associative-composition-operation-binary-family-Set
+    ( hom-set-simplex-Category)
+    ( comp-hom-simplex-Category)
+    ( associative-comp-hom-simplex-Category)
 
 id-hom-simplex-Category : (n : obj-simplex-Category) → hom-simplex-Category n n
 id-hom-simplex-Category n = id-hom-Poset (Fin-Poset (succ-ℕ n))

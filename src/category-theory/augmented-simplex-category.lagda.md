@@ -88,7 +88,12 @@ pr1 associative-composition-operation-augmented-simplex-Category {n} {m} {r} =
   comp-hom-augmented-simplex-Category {n} {m} {r}
 pr2
   associative-composition-operation-augmented-simplex-Category {n} {m} {r} {s} =
-  associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s}
+  is-associative-witness-associative-composition-operation-binary-family-Set
+    ( hom-set-augmented-simplex-Category)
+    ( λ {n} {m} {r} → comp-hom-augmented-simplex-Category {n} {m} {r})
+    ( λ {n} {m} {r} {s} →
+      associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s})
+    { n} {m} {r} {s}
 
 id-hom-augmented-simplex-Category :
   (n : obj-augmented-simplex-Category) → hom-augmented-simplex-Category n n

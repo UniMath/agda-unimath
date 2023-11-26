@@ -12,6 +12,7 @@ open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.identity-types
 
 open import group-theory.group-actions
 open import group-theory.groups
@@ -75,8 +76,13 @@ module _
     hom-set-action-Group G
   pr1 (pr1 (pr2 (pr2 (action-Group-Precategory l2)))) {X} {Y} {Z} =
     comp-hom-action-Group G X Y Z
-  pr2 (pr1 (pr2 (pr2 (action-Group-Precategory l2)))) {X} {Y} {Z} {W} =
-    associative-comp-hom-action-Group G X Y Z W
+  pr1
+    ( pr2 (pr1 (pr2 (pr2 (action-Group-Precategory l2)))) {X} {Y} {Z} {W} h g f) =
+    associative-comp-hom-action-Group G X Y Z W h g f
+  pr2
+    ( pr2
+      ( pr1 (pr2 (pr2 (action-Group-Precategory l2)))) {X} {Y} {Z} {W} h g f) =
+    inv (associative-comp-hom-action-Group G X Y Z W h g f)
   pr1 (pr2 (pr2 (pr2 (action-Group-Precategory l2)))) =
     id-hom-action-Group G
   pr1 (pr2 (pr2 (pr2 (pr2 (action-Group-Precategory l2))))) {X} {Y} =

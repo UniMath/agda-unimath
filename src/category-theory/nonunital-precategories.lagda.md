@@ -71,7 +71,9 @@ module _
     hom-Nonunital-Precategory x y →
     hom-Nonunital-Precategory x z
   comp-hom-Nonunital-Precategory =
-    pr1 associative-composition-operation-Nonunital-Precategory
+    comp-hom-associative-composition-operation-binary-family-Set
+      ( hom-set-Nonunital-Precategory)
+      ( associative-composition-operation-Nonunital-Precategory)
 
   comp-hom-Nonunital-Precategory' :
     {x y z : obj-Nonunital-Precategory} →
@@ -88,7 +90,9 @@ module _
     ( comp-hom-Nonunital-Precategory (comp-hom-Nonunital-Precategory h g) f) ＝
     ( comp-hom-Nonunital-Precategory h (comp-hom-Nonunital-Precategory g f))
   associative-comp-hom-Nonunital-Precategory =
-    pr2 associative-composition-operation-Nonunital-Precategory
+    witness-associative-composition-operation-binary-family-Set
+      ( hom-set-Nonunital-Precategory)
+      ( associative-composition-operation-Nonunital-Precategory)
 ```
 
 ### The underlying set-magmoid of a nonunital precategory

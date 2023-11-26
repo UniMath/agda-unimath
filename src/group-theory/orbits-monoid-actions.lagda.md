@@ -8,6 +8,7 @@ module group-theory.orbits-monoid-actions where
 
 ```agda
 open import category-theory.precategories
+open import category-theory.composition-operations-on-binary-families-of-sets
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -184,7 +185,10 @@ module _
   pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
     comp-hom-orbit-action-Monoid
   pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
-    associative-comp-hom-orbit-action-Monoid
+    is-associative-witness-associative-composition-operation-binary-family-Set
+      ( hom-orbit-monoid-action-Set)
+      ( comp-hom-orbit-action-Monoid)
+      ( associative-comp-hom-orbit-action-Monoid)
   pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory))) =
     id-hom-orbit-action-Monoid
   pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =

@@ -67,15 +67,37 @@ module _
     associative-comp-natural-transformation-map-Precategory
       C D F G H I f g h
 
+  inv-associative-comp-hom-map-precategory-Precategory :
+    {F G H I : map-Precategory C D}
+    (h : natural-transformation-map-Precategory C D H I)
+    (g : natural-transformation-map-Precategory C D G H)
+    (f : natural-transformation-map-Precategory C D F G) →
+    ( comp-natural-transformation-map-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-map-Precategory C D F G H g f)) ＝
+    ( comp-natural-transformation-map-Precategory C D F G I
+      ( comp-natural-transformation-map-Precategory C D G H I h g)
+      ( f))
+  inv-associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f =
+    inv-associative-comp-natural-transformation-map-Precategory
+      C D F G H I f g h
+
   associative-composition-operation-map-precategory-Precategory :
     associative-composition-operation-binary-family-Set
       ( natural-transformation-map-set-Precategory C D)
   pr1 associative-composition-operation-map-precategory-Precategory
     {F} {G} {H} =
     comp-hom-map-precategory-Precategory {F} {G} {H}
-  pr2 associative-composition-operation-map-precategory-Precategory
-    {F} {G} {H} {I} =
-    associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I}
+  pr1
+    ( pr2
+        associative-composition-operation-map-precategory-Precategory
+          { F} {G} {H} {I} h g f) =
+    associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f
+  pr2
+    ( pr2
+        associative-composition-operation-map-precategory-Precategory
+          { F} {G} {H} {I} h g f) =
+    inv-associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f
 
   id-hom-map-precategory-Precategory :
     (F : map-Precategory C D) → natural-transformation-map-Precategory C D F F

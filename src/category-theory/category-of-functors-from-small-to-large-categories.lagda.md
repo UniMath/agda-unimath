@@ -104,7 +104,7 @@ module _
           ( functor-large-precategory-Small-Large-Precategory C D)
           ( F)
           ( G))
-        ( is-category-functor-precategory-is-category-Precategory
+        ( {! is-category-functor-precategory-is-category-Precategory
           ( C)
           ( precategory-Large-Precategory D γ)
           ( is-category-is-large-category-Large-Precategory
@@ -112,7 +112,7 @@ module _
             ( is-large-category-D)
             ( γ))
           ( F)
-          ( G))
+          ( G)  !})
 ```
 
 ## Definition

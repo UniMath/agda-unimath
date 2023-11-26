@@ -147,8 +147,10 @@ module _
     hom-set-Large-Precategory C
   pr1 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
     comp-hom-Large-Precategory C
-  pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
-    associative-comp-hom-Large-Precategory C
+  pr1 (pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) h g f) =
+    associative-comp-hom-Large-Precategory C h g f
+  pr2 (pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) h g f) =
+    inv (associative-comp-hom-Large-Precategory C h g f)
   pr1 (pr2 (pr2 (pr2 (precategory-Large-Precategory l)))) x =
     id-hom-Large-Precategory C
   pr1 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =

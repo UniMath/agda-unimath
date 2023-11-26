@@ -62,7 +62,27 @@ module _
     ( comp-hom-opposite-Precategory (comp-hom-opposite-Precategory h g) f) ＝
     ( comp-hom-opposite-Precategory h (comp-hom-opposite-Precategory g f))
   associative-comp-hom-opposite-Precategory h g f =
-    inv (associative-comp-hom-Precategory C f g h)
+    inv-witness-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory C)
+      ( associative-composition-operation-Precategory C)
+      ( f)
+      ( g)
+      ( h)
+
+  inv-associative-comp-hom-opposite-Precategory :
+    {x y z w : obj-opposite-Precategory}
+    (h : hom-opposite-Precategory z w)
+    (g : hom-opposite-Precategory y z)
+    (f : hom-opposite-Precategory x y) →
+    ( comp-hom-opposite-Precategory h (comp-hom-opposite-Precategory g f)) ＝
+    ( comp-hom-opposite-Precategory (comp-hom-opposite-Precategory h g) f)
+  inv-associative-comp-hom-opposite-Precategory h g f =
+    witness-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory C)
+      ( associative-composition-operation-Precategory C)
+      ( f)
+      ( g)
+      ( h)
 
   id-hom-opposite-Precategory :
     {x : obj-opposite-Precategory} → hom-opposite-Precategory x x
@@ -85,8 +105,10 @@ module _
   pr1 opposite-Precategory = obj-opposite-Precategory
   pr1 (pr2 opposite-Precategory) = hom-set-opposite-Precategory
   pr1 (pr1 (pr2 (pr2 opposite-Precategory))) = comp-hom-opposite-Precategory
-  pr2 (pr1 (pr2 (pr2 opposite-Precategory))) =
-    associative-comp-hom-opposite-Precategory
+  pr1 (pr2 (pr1 (pr2 (pr2 opposite-Precategory))) h g f) =
+    associative-comp-hom-opposite-Precategory h g f
+  pr2 (pr2 (pr1 (pr2 (pr2 opposite-Precategory))) h g f) =
+    inv-associative-comp-hom-opposite-Precategory h g f
   pr1 (pr2 (pr2 (pr2 opposite-Precategory))) x = id-hom-opposite-Precategory {x}
   pr1 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) =
     left-unit-law-comp-hom-opposite-Precategory
@@ -101,19 +123,7 @@ module _
 ```agda
 is-involution-opposite-Precategory :
   {l1 l2 : Level} → is-involution (opposite-Precategory {l1} {l2})
-is-involution-opposite-Precategory C =
-  eq-pair-eq-pr2
-    ( eq-pair-eq-pr2
-      ( eq-pair-Σ
-        ( eq-pair-eq-pr2
-          ( eq-is-prop
-            ( is-prop-is-associative-composition-operation-binary-family-Set
-              ( hom-set-Precategory C)
-              ( comp-hom-Precategory C))))
-        ( eq-is-prop
-          ( is-prop-is-unital-composition-operation-binary-family-Set
-            ( hom-set-Precategory C)
-            ( comp-hom-Precategory C)))))
+is-involution-opposite-Precategory C = refl
 
 involution-opposite-Precategory :
   (l1 l2 : Level) → involution (Precategory l1 l2)
