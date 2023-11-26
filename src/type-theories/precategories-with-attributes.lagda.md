@@ -1,7 +1,7 @@
 # Precategories with attributes
 
 ```agda
-module category-theory.precategories-with-attributes where
+module type-theories.precategories-with-attributes where
 ```
 
 <details><summary>Imports</summary>
