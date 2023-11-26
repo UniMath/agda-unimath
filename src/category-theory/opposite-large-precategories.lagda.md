@@ -31,7 +31,7 @@ Let `C` be a [large precategory](category-theory.large-precategories.md), its
 
 ## Definition
 
-### The opposite precategory
+### The opposite large precategory
 
 ```agda
 module _
@@ -144,7 +144,7 @@ module _
 
 ## Properties
 
-### Computing the isomorphism sets of the opposite precategory
+### Computing the isomorphism sets of the opposite large precategory
 
 ```agda
 module _
