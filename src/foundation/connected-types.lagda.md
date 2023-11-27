@@ -13,6 +13,7 @@ open import foundation.functoriality-truncation
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.truncations
 open import foundation.universe-levels
 
@@ -161,4 +162,19 @@ module _
   is-connected-is-equiv' :
     (f : A → B) → is-equiv f → is-connected k A → is-connected k B
   is-connected-is-equiv' f e = is-connected-equiv' (f , e)
+```
+
+### Retracts of `k`-connected types are `k`-connected
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-retract-of :
+    A retract-of B →
+    is-connected k B →
+    is-connected k A
+  is-connected-retract-of R c =
+    is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R) c
 ```
