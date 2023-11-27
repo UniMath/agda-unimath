@@ -101,7 +101,7 @@ pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
   where
-  
+
   equiv-is-trunc-equiv : A ≃ B → is-trunc k A ≃ is-trunc k B
   equiv-is-trunc-equiv e =
     equiv-prop

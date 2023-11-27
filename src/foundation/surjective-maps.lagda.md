@@ -291,7 +291,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   dependent-universal-property-surj : UUω
   dependent-universal-property-surj =
     {l : Level} (P : B → Prop l) →
@@ -827,4 +827,7 @@ This remains to be shown.
 
 ## See also
 
-- In [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md) we show that a map is surjective if and only if it is an epimorphism with respect to sets.
+- In
+  [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
+  we show that a map is surjective if and only if it is an epimorphism with
+  respect to sets.

@@ -610,7 +610,7 @@ module _
   universal-property-set-quotient-is-surjective-and-effective :
     ( E :
       is-surjective-and-effective R
-        ( map-reflecting-map-equivalence-relation R q)) → 
+        ( map-reflecting-map-equivalence-relation R q)) →
     universal-property-set-quotient R B q
   universal-property-set-quotient-is-surjective-and-effective E =
     universal-property-set-quotient-is-set-quotient R B q
@@ -746,19 +746,25 @@ module _
 
 ### The type of extensions of maps into a set along a surjection is equivalent to the proposition that that map equalizes the values that the surjection equalizes
 
-Consider a surjective map `f : A ↠ B` and a map `g : A → C` into a set `C`. Recall from [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md) that the type
+Consider a surjective map `f : A ↠ B` and a map `g : A → C` into a set `C`.
+Recall from
+[Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
+that the type
 
 ```text
   Σ (B → C) (λ h → g ~ h ∘ f)
 ```
 
-of extensions of `g` along `f` is a proposition. This proposition is equivalent to the proposition
+of extensions of `g` along `f` is a proposition. This proposition is equivalent
+to the proposition
 
 ```text
   (a a' : A) → f a ＝ f a' → g a ＝ g a'.
 ```
 
-**Proof:** The tricky direction is to construct an extension of `g` along `f` whenever the above proposition holds. Note that we may compose `f` with the [set truncation](foundation.set-truncations.md) of `B`, this results in a map
+**Proof:** The tricky direction is to construct an extension of `g` along `f`
+whenever the above proposition holds. Note that we may compose `f` with the
+[set truncation](foundation.set-truncations.md) of `B`, this results in a map
 
 ```agda
 module _

@@ -211,8 +211,7 @@ module _
   where
 
   is-set-quotient-set-quotient :
-    {l : Level} →
-    is-set-quotient l R (quotient-Set R) (reflecting-map-quotient-map R)
+    is-set-quotient R (quotient-Set R) (reflecting-map-quotient-map R)
   is-set-quotient-set-quotient =
     is-set-quotient-is-surjective-and-effective R
       ( quotient-Set R)
@@ -405,7 +404,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   (B : Set l3) (f : reflecting-map-equivalence-relation R (type-Set B))
-  (Uf : {l : Level} → is-set-quotient l R B f)
+  (Uf : is-set-quotient R B f)
   where
 
   equiv-uniqueness-set-quotient-set-quotient :

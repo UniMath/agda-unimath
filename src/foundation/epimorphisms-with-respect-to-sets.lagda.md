@@ -106,13 +106,16 @@ abstract
 
 ### There is at most one extension of a map into a set along a surjection
 
-For any surjective map `f : A ↠ B` and any map `g : A → C` into a set `C`, the type of extensions
+For any surjective map `f : A ↠ B` and any map `g : A → C` into a set `C`, the
+type of extensions
 
 ```text
   Σ (B → C) (λ h → g ~ h ∘ f)
 ```
 
-of `g` along `f` is a proposition. In [The universal property of set quotients](foundation.universal-property-set-quotients.md) we will show that this proposition is equivalent to the proposition
+of `g` along `f` is a proposition. In
+[The universal property of set quotients](foundation.universal-property-set-quotients.md)
+we will show that this proposition is equivalent to the proposition
 
 ```text
   (a a' : A) → f a ＝ f a' → g a ＝ g a'.
