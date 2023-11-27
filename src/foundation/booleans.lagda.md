@@ -51,6 +51,30 @@ data bool : UU lzero where
 {-# BUILTIN FALSE false #-}
 ```
 
+### The induction principle of the booleans
+
+```agda
+module _
+  {l : Level} (P : bool → UU l)
+  where
+
+  ind-bool : P true → P false → (b : bool) → P b
+  ind-bool pt pf true = pt
+  ind-bool pt pf false = pf
+```
+
+### The `if_then_else` function
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  if_then_else_ : bool → A → A → A
+  if true then x else y = x
+  if false then x else y = y
+```
+
 ### Raising universe levels of the booleans
 
 ```agda

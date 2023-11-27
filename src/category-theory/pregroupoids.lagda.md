@@ -90,10 +90,18 @@ module _
   associative-comp-hom-Pregroupoid :
     {x y z w : obj-Pregroupoid} (h : hom-Pregroupoid z w)
     (g : hom-Pregroupoid y z) (f : hom-Pregroupoid x y) →
-    ( comp-hom-Pregroupoid (comp-hom-Pregroupoid h g) f) ＝
-    ( comp-hom-Pregroupoid h (comp-hom-Pregroupoid g f))
+    comp-hom-Pregroupoid (comp-hom-Pregroupoid h g) f ＝
+    comp-hom-Pregroupoid h (comp-hom-Pregroupoid g f)
   associative-comp-hom-Pregroupoid =
     associative-comp-hom-Precategory precategory-Pregroupoid
+
+  inv-associative-comp-hom-Pregroupoid :
+    {x y z w : obj-Pregroupoid} (h : hom-Pregroupoid z w)
+    (g : hom-Pregroupoid y z) (f : hom-Pregroupoid x y) →
+    comp-hom-Pregroupoid h (comp-hom-Pregroupoid g f) ＝
+    comp-hom-Pregroupoid (comp-hom-Pregroupoid h g) f
+  inv-associative-comp-hom-Pregroupoid =
+    inv-associative-comp-hom-Precategory precategory-Pregroupoid
 
   left-unit-law-comp-hom-Pregroupoid :
     {x y : obj-Pregroupoid} (f : hom-Pregroupoid x y) →

@@ -75,12 +75,23 @@ associative-comp-hom-terminal-Category :
   comp-hom-terminal-Category {x} h (comp-hom-terminal-Category {x} g f)
 associative-comp-hom-terminal-Category h g f = refl
 
+inv-associative-comp-hom-terminal-Category :
+  {x y z w : obj-terminal-Category} →
+  (h : hom-terminal-Category z w)
+  (g : hom-terminal-Category y z)
+  (f : hom-terminal-Category x y) →
+  comp-hom-terminal-Category {x} h (comp-hom-terminal-Category {x} g f) ＝
+  comp-hom-terminal-Category {x} (comp-hom-terminal-Category {y} h g) f
+inv-associative-comp-hom-terminal-Category h g f = refl
+
 associative-composition-operation-terminal-Category :
   associative-composition-operation-binary-family-Set hom-set-terminal-Category
 pr1 associative-composition-operation-terminal-Category =
   comp-hom-terminal-Category
-pr2 associative-composition-operation-terminal-Category =
-  associative-comp-hom-terminal-Category
+pr1 (pr2 associative-composition-operation-terminal-Category h g f) =
+  associative-comp-hom-terminal-Category h g f
+pr2 (pr2 associative-composition-operation-terminal-Category h g f) =
+  inv-associative-comp-hom-terminal-Category h g f
 
 id-hom-terminal-Category :
   {x : obj-terminal-Category} → hom-terminal-Category x x

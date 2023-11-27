@@ -114,7 +114,10 @@ module _
     hom-Precategory y z →
     hom-Precategory x y →
     hom-Precategory x z
-  comp-hom-Precategory = pr1 associative-composition-operation-Precategory
+  comp-hom-Precategory =
+    comp-hom-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
 
   comp-hom-Precategory' :
     {x y z : obj-Precategory} →
@@ -131,12 +134,26 @@ module _
     ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
   associative-comp-hom-Precategory =
-    pr2 associative-composition-operation-Precategory
+    witness-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
+
+  inv-associative-comp-hom-Precategory :
+    {x y z w : obj-Precategory}
+    (h : hom-Precategory z w)
+    (g : hom-Precategory y z)
+    (f : hom-Precategory x y) →
+    ( comp-hom-Precategory h (comp-hom-Precategory g f)) ＝
+    ( comp-hom-Precategory (comp-hom-Precategory h g) f)
+  inv-associative-comp-hom-Precategory =
+    inv-witness-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
 
   is-unital-composition-operation-Precategory :
     is-unital-composition-operation-binary-family-Set
-      hom-set-Precategory
-      comp-hom-Precategory
+      ( hom-set-Precategory)
+      ( comp-hom-Precategory)
   is-unital-composition-operation-Precategory = pr2 (pr2 (pr2 C))
 
   id-hom-Precategory : {x : obj-Precategory} → hom-Precategory x x
@@ -165,9 +182,8 @@ module _
   nonunital-precategory-Precategory : Nonunital-Precategory l1 l2
   pr1 nonunital-precategory-Precategory = obj-Precategory C
   pr1 (pr2 nonunital-precategory-Precategory) = hom-set-Precategory C
-  pr1 (pr2 (pr2 nonunital-precategory-Precategory)) = comp-hom-Precategory C
-  pr2 (pr2 (pr2 nonunital-precategory-Precategory)) =
-    associative-comp-hom-Precategory C
+  pr2 (pr2 nonunital-precategory-Precategory) =
+    associative-composition-operation-Precategory C
 ```
 
 ### The underlying set-magmoid of a precategory

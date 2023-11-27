@@ -44,6 +44,9 @@ id-hom-Large-Precategory
 associative-comp-hom-Large-Precategory
   Commutative-Ring-Large-Precategory {X = A} {B} {C} {D} =
   associative-comp-hom-Commutative-Ring A B C D
+inv-associative-comp-hom-Large-Precategory
+  Commutative-Ring-Large-Precategory {X = A} {B} {C} {D} =
+  inv-associative-comp-hom-Commutative-Ring A B C D
 left-unit-law-comp-hom-Large-Precategory
   Commutative-Ring-Large-Precategory {X = A} {B} =
   left-unit-law-comp-hom-Commutative-Ring A B

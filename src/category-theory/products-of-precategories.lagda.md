@@ -44,10 +44,14 @@ module _
     comp-hom-Precategory C f' f
   pr2 (pr1 (pr1 (pr2 (pr2 prod-Precategory))) (f' , g') (f , g)) =
     comp-hom-Precategory D g' g
-  pr2 (pr1 (pr2 (pr2 prod-Precategory))) (f'' , g'') (f' , g') (f , g) =
+  pr1 (pr2 (pr1 (pr2 (pr2 prod-Precategory))) (f'' , g'') (f' , g') (f , g)) =
     eq-pair
       ( associative-comp-hom-Precategory C f'' f' f)
       ( associative-comp-hom-Precategory D g'' g' g)
+  pr2 (pr2 (pr1 (pr2 (pr2 prod-Precategory))) (f'' , g'') (f' , g') (f , g)) =
+    eq-pair
+      ( inv-associative-comp-hom-Precategory C f'' f' f)
+      ( inv-associative-comp-hom-Precategory D g'' g' g)
   pr1 (pr1 (pr2 (pr2 (pr2 prod-Precategory))) (x , y)) =
     id-hom-Precategory C {x}
   pr2 (pr1 (pr2 (pr2 (pr2 prod-Precategory))) (x , y)) =

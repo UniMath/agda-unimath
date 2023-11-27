@@ -130,6 +130,26 @@ module _
       ( large-precategory-Large-Category C)
       ( P)
 
+  inv-associative-comp-hom-Full-Large-Subcategory :
+    {l1 l2 l3 l4 : Level}
+    (X : obj-Full-Large-Subcategory l1)
+    (Y : obj-Full-Large-Subcategory l2)
+    (Z : obj-Full-Large-Subcategory l3)
+    (W : obj-Full-Large-Subcategory l4)
+    (h : hom-Full-Large-Subcategory Z W)
+    (g : hom-Full-Large-Subcategory Y Z)
+    (f : hom-Full-Large-Subcategory X Y) →
+    comp-hom-Full-Large-Subcategory X Z W
+      ( h)
+      ( comp-hom-Full-Large-Subcategory X Y Z g f) ＝
+    comp-hom-Full-Large-Subcategory X Y W
+      ( comp-hom-Full-Large-Subcategory Y Z W h g)
+      ( f)
+  inv-associative-comp-hom-Full-Large-Subcategory =
+    inv-associative-comp-hom-Full-Large-Subprecategory
+      ( large-precategory-Large-Category C)
+      ( P)
+
   left-unit-law-comp-hom-Full-Large-Subcategory :
     {l1 l2 : Level}
     (X : obj-Full-Large-Subcategory l1)

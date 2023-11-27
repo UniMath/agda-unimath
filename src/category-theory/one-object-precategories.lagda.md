@@ -100,7 +100,10 @@ module _
   pr1 associative-composition-operation-one-object-precategory-Monoid =
     comp-hom-one-object-precategory-Monoid
   pr2 associative-composition-operation-one-object-precategory-Monoid =
-    associative-comp-hom-one-object-precategory-Monoid
+    is-associative-witness-associative-composition-operation-binary-family-Set
+      ( hom-set-one-object-precategory-Monoid)
+      ( comp-hom-one-object-precategory-Monoid)
+      ( associative-comp-hom-one-object-precategory-Monoid)
 
   id-hom-one-object-precategory-Monoid :
     (x : unit) → hom-one-object-precategory-Monoid x x

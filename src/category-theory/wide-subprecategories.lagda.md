@@ -330,14 +330,30 @@ module _
     (h : hom-Wide-Subprecategory C P z w)
     (g : hom-Wide-Subprecategory C P y z)
     (f : hom-Wide-Subprecategory C P x y) →
-    ( comp-hom-Wide-Subprecategory
-      ( comp-hom-Wide-Subprecategory h g) f) ＝
-    ( comp-hom-Wide-Subprecategory h
-      ( comp-hom-Wide-Subprecategory g f))
+    comp-hom-Wide-Subprecategory (comp-hom-Wide-Subprecategory h g) f ＝
+    comp-hom-Wide-Subprecategory h (comp-hom-Wide-Subprecategory g f)
   associative-comp-hom-Wide-Subprecategory {x} {y} {z} {w} h g f =
     eq-type-subtype
       ( subtype-hom-Wide-Subprecategory C P x w)
       ( associative-comp-hom-Precategory C
+        ( inclusion-hom-Wide-Subprecategory C P z w h)
+        ( inclusion-hom-Wide-Subprecategory C P y z g)
+        ( inclusion-hom-Wide-Subprecategory C P x y f))
+
+  inv-associative-comp-hom-Wide-Subprecategory :
+    {x y z w : obj-Wide-Subprecategory C P}
+    (h : hom-Wide-Subprecategory C P z w)
+    (g : hom-Wide-Subprecategory C P y z)
+    (f : hom-Wide-Subprecategory C P x y) →
+    ( comp-hom-Wide-Subprecategory h
+      ( comp-hom-Wide-Subprecategory g f)) ＝
+    ( comp-hom-Wide-Subprecategory
+      ( comp-hom-Wide-Subprecategory h g) f)
+
+  inv-associative-comp-hom-Wide-Subprecategory {x} {y} {z} {w} h g f =
+    eq-type-subtype
+      ( subtype-hom-Wide-Subprecategory C P x w)
+      ( inv-associative-comp-hom-Precategory C
         ( inclusion-hom-Wide-Subprecategory C P z w h)
         ( inclusion-hom-Wide-Subprecategory C P y z g)
         ( inclusion-hom-Wide-Subprecategory C P x y f))
@@ -367,8 +383,10 @@ module _
       ( hom-set-Wide-Subprecategory)
   pr1 associative-composition-operation-Wide-Subprecategory =
     comp-hom-Wide-Subprecategory
-  pr2 associative-composition-operation-Wide-Subprecategory =
-    associative-comp-hom-Wide-Subprecategory
+  pr1 (pr2 associative-composition-operation-Wide-Subprecategory h g f) =
+    associative-comp-hom-Wide-Subprecategory h g f
+  pr2 (pr2 associative-composition-operation-Wide-Subprecategory h g f) =
+    inv-associative-comp-hom-Wide-Subprecategory h g f
 
   is-unital-composition-operation-Wide-Subprecategory :
     is-unital-composition-operation-binary-family-Set

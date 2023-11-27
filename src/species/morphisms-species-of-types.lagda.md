@@ -101,15 +101,24 @@ eq-htpy-hom-species-types {f = f} {g = g} =
 ### Associativity of composition
 
 ```agda
-associative-comp-hom-species-types :
-  {l1 l2 l3 l4 l5 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {F : species-types l1 l2} {G : species-types l1 l3}
   {H : species-types l1 l4} {K : species-types l1 l5}
-  (h : hom-species-types H K) (g : hom-species-types G H)
-  (f : hom-species-types F G) →
-  Id
-    ( comp-hom-species-types (comp-hom-species-types h g) f)
-    ( comp-hom-species-types h (comp-hom-species-types g f))
-associative-comp-hom-species-types h g f = refl
+  (h : hom-species-types H K)
+  (g : hom-species-types G H)
+  (f : hom-species-types F G)
+  where
+
+  associative-comp-hom-species-types :
+    comp-hom-species-types (comp-hom-species-types h g) f ＝
+    comp-hom-species-types h (comp-hom-species-types g f)
+  associative-comp-hom-species-types = refl
+
+  inv-associative-comp-hom-species-types :
+    comp-hom-species-types h (comp-hom-species-types g f) ＝
+    comp-hom-species-types (comp-hom-species-types h g) f
+  inv-associative-comp-hom-species-types = refl
 ```
 
 ### Unit laws of composition
