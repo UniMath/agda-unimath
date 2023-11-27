@@ -21,14 +21,14 @@ open import foundation-core.truncation-levels
 ## Idea
 
 A **dependent `k`-epimorphism** is a map `f : A → B` such that the
-precomposition function
+[precomposition function](foundation.precomposition-dependent-functions.md)
 
 ```text
   - ∘ f : ((b : B) → C b) → ((a : A) → C (f a))
 ```
 
 is an [embedding](foundation-core.embeddings.md) for every family `C` of
-`k`-types over `B`.
+[`k`-types](foundation.truncated-types.md) over `B`.
 
 Clearly, every dependent `k`-epimorphism is a
 [`k`-epimorphism](foundation.epimorphisms-with-respect-to-truncated-types.md).
