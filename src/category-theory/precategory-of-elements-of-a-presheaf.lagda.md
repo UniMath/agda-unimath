@@ -129,7 +129,6 @@ module _
         ( comp-hom-precategory-of-elements-presheaf-Precategory h g)
         ( f))
       ( inv-associative-comp-hom-Precategory C (pr1 h) (pr1 g) (pr1 f))
-    
 
   id-hom-precategory-of-elements-presheaf-Precategory :
     {X : obj-precategory-of-elements-presheaf-Precategory} →
