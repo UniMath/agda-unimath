@@ -64,15 +64,15 @@ module _
   where
 
   map-inv-is-equiv-is-set-quotient-is-set-quotient :
-    ({l : Level} → is-set-quotient l R B f) →
-    ({l : Level} → is-set-quotient l R C g) →
+    is-set-quotient R B f →
+    is-set-quotient R C g →
     type-Set C → type-Set B
   map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     map-universal-property-set-quotient-is-set-quotient R C g Ug B f
 
   is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient :
-    ( Uf : {l : Level} → is-set-quotient l R B f) →
-    ( Ug : {l : Level} → is-set-quotient l R C g) →
+    ( Uf : is-set-quotient R B f) →
+    ( Ug : is-set-quotient R C g) →
     ( h ∘ map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug) ~ id
   is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     htpy-eq
@@ -97,8 +97,8 @@ module _
             ( inv (precomp-id-Set-Quotient R C g))))))
 
   is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient :
-    ( Uf : {l : Level} → is-set-quotient l R B f) →
-    ( Ug : {l : Level} → is-set-quotient l R C g) →
+    ( Uf : is-set-quotient R B f) →
+    ( Ug : is-set-quotient R C g) →
     ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug ∘ h) ~ id
   is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     htpy-eq
@@ -125,8 +125,8 @@ module _
             ( inv (precomp-id-Set-Quotient R B f))))))
 
   is-equiv-is-set-quotient-is-set-quotient :
-    ({l : Level} → is-set-quotient l R B f) →
-    ({l : Level} → is-set-quotient l R C g) →
+    is-set-quotient R B f →
+    is-set-quotient R C g →
     is-equiv h
   is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     is-equiv-is-invertible
@@ -135,8 +135,7 @@ module _
       ( is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
 
   is-set-quotient-is-set-quotient-is-equiv :
-    is-equiv h → ({l : Level} → is-set-quotient l R B f) →
-    {l : Level} → is-set-quotient l R C g
+    is-equiv h → is-set-quotient R B f → is-set-quotient R C g
   is-set-quotient-is-set-quotient-is-equiv E Uf {l} X =
     is-equiv-left-map-triangle
       ( precomp-Set-Quotient R C g X)
@@ -151,8 +150,7 @@ module _
       ( Uf X)
 
   is-set-quotient-is-equiv-is-set-quotient :
-    ({l : Level} → is-set-quotient l R C g) → is-equiv h →
-    {l : Level} → is-set-quotient l R B f
+    is-set-quotient R C g → is-equiv h → is-set-quotient R B f
   is-set-quotient-is-equiv-is-set-quotient Ug E {l} X =
     is-equiv-right-map-triangle
       ( precomp-Set-Quotient R C g X)
@@ -169,9 +167,9 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   (B : Set l3) (f : reflecting-map-equivalence-relation R (type-Set B))
-  (Uf : {l : Level} → is-set-quotient l R B f)
+  (Uf : is-set-quotient R B f)
   (C : Set l4) (g : reflecting-map-equivalence-relation R (type-Set C))
-  (Ug : {l : Level} → is-set-quotient l R C g)
+  (Ug : is-set-quotient R C g)
   where
 
   uniqueness-set-quotient :

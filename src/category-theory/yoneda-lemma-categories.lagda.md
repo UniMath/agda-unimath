@@ -52,13 +52,13 @@ equivalence.
 ```agda
 module _
   {l1 l2 l3 : Level} (C : Category l1 l2) (c : obj-Category C)
-  (F : obj-copresheaf-Large-Category (precategory-Category C) l3)
+  (F : copresheaf-Precategory (precategory-Category C) l3)
   where
 
   map-yoneda-Category :
-    hom-copresheaf-Large-Category
+    hom-copresheaf-Precategory
       ( precategory-Category C) (representable-functor-Category C c) F →
-    section-copresheaf-Category (precategory-Category C) F c
+    element-copresheaf-Precategory (precategory-Category C) F c
   map-yoneda-Category =
     map-yoneda-Precategory (precategory-Category C) c F
 ```
@@ -67,14 +67,14 @@ The inverse to the Yoneda map:
 
 ```agda
   hom-family-extension-yoneda-Category :
-    (u : section-copresheaf-Category (precategory-Category C) F c) →
+    (u : element-copresheaf-Precategory (precategory-Category C) F c) →
     hom-family-functor-Small-Large-Category
       C Set-Large-Category (representable-functor-Category C c) F
   hom-family-extension-yoneda-Category =
     hom-family-extension-yoneda-Precategory (precategory-Category C) c F
 
   naturality-extension-yoneda-Category :
-    (u : section-copresheaf-Category (precategory-Category C) F c) →
+    (u : element-copresheaf-Precategory (precategory-Category C) F c) →
     is-natural-transformation-Small-Large-Category
       C Set-Large-Category (representable-functor-Category C c) F
       ( hom-family-extension-yoneda-Category u)
@@ -82,8 +82,8 @@ The inverse to the Yoneda map:
     naturality-extension-yoneda-Precategory (precategory-Category C) c F
 
   extension-yoneda-Category :
-    section-copresheaf-Category (precategory-Category C) F c →
-    hom-copresheaf-Large-Category
+    element-copresheaf-Precategory (precategory-Category C) F c →
+    hom-copresheaf-Precategory
       ( precategory-Category C) (representable-functor-Category C c) F
   extension-yoneda-Category =
     extension-yoneda-Precategory (precategory-Category C) c F
@@ -92,9 +92,9 @@ The inverse to the Yoneda map:
   lemma-yoneda-Category = lemma-yoneda-Precategory (precategory-Category C) c F
 
   equiv-lemma-yoneda-Category :
-    hom-copresheaf-Large-Category
+    hom-copresheaf-Precategory
       ( precategory-Category C) (representable-functor-Category C c) F ≃
-    section-copresheaf-Category (precategory-Category C) F c
+    element-copresheaf-Precategory (precategory-Category C) F c
   equiv-lemma-yoneda-Category =
     equiv-lemma-yoneda-Precategory (precategory-Category C) c F
 ```
@@ -112,7 +112,7 @@ module _
   where
 
   equiv-lemma-yoneda-representable-Category :
-    hom-copresheaf-Large-Category
+    hom-copresheaf-Precategory
       ( precategory-Category C)
       ( representable-functor-Category C c)
       ( representable-functor-Category C d) ≃

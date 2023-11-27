@@ -175,8 +175,7 @@ module _
   where
 
   unique-map-is-set-quotient :
-    ({l : Level} → is-set-quotient l R QR f) →
-    ({l : Level} → is-set-quotient l S QS g) →
+    is-set-quotient R QR f → is-set-quotient S QS g →
     (h : hom-equivalence-relation R S) →
     is-contr
       ( Σ ( type-Set QR → type-Set QS)
@@ -194,16 +193,15 @@ module _
           ( preserves-sim-hom-equivalence-relation R S h r)))
 
   map-is-set-quotient :
-    ({l : Level} → is-set-quotient l R QR f) →
-    ({l : Level} → is-set-quotient l S QS g) →
+    is-set-quotient R QR f → is-set-quotient S QS g →
     (h : hom-equivalence-relation R S) →
     type-Set QR → type-Set QS
   map-is-set-quotient Uf Ug h =
     pr1 (center (unique-map-is-set-quotient Uf Ug h))
 
   coherence-square-map-is-set-quotient :
-    (Uf : {l : Level} → is-set-quotient l R QR f) →
-    (Ug : {l : Level} → is-set-quotient l S QS g) →
+    (Uf : is-set-quotient R QR f) →
+    (Ug : is-set-quotient S QS g) →
     (h : hom-equivalence-relation R S) →
     coherence-square-maps
       ( map-hom-equivalence-relation R S h)
@@ -367,8 +365,7 @@ module _
   where
 
   unique-equiv-is-set-quotient :
-    ({l : Level} → is-set-quotient l R QR f) →
-    ({l : Level} → is-set-quotient l S QS g) →
+    is-set-quotient R QR f → is-set-quotient S QS g →
     (h : equiv-equivalence-relation R S) →
     is-contr
       ( Σ ( type-Set QR ≃ type-Set QS)
@@ -402,15 +399,15 @@ module _
               ( map-equiv-equivalence-relation R S h y)))))
 
   equiv-is-set-quotient :
-    ({l : Level} → is-set-quotient l R QR f) →
-    ({l : Level} → is-set-quotient l S QS g) →
+    is-set-quotient R QR f →
+    is-set-quotient S QS g →
     (h : equiv-equivalence-relation R S) → type-Set QR ≃ type-Set QS
   equiv-is-set-quotient Uf Ug h =
     pr1 (center (unique-equiv-is-set-quotient Uf Ug h))
 
   coherence-square-equiv-is-set-quotient :
-    (Uf : {l : Level} → is-set-quotient l R QR f) →
-    (Ug : {l : Level} → is-set-quotient l S QS g) →
+    (Uf : is-set-quotient R QR f) →
+    (Ug : is-set-quotient S QS g) →
     (h : equiv-equivalence-relation R S) →
     coherence-square-maps (map-equiv-equivalence-relation R S h)
       ( map-reflecting-map-equivalence-relation R f)
@@ -430,7 +427,7 @@ module _
   where
 
   id-map-is-set-quotient :
-    (Uf : {l : Level} → is-set-quotient l R QR f) →
+    (Uf : is-set-quotient R QR f) →
     map-is-set-quotient R QR f R QR f Uf Uf (id-hom-equivalence-relation R) ~ id
   id-map-is-set-quotient Uf x =
     ap
@@ -445,7 +442,7 @@ module _
             R QR f R QR f Uf Uf (id-hom-equivalence-relation R)))
 
   id-equiv-is-set-quotient :
-    (Uf : {l : Level} → is-set-quotient l R QR f) →
+    (Uf : is-set-quotient R QR f) →
     htpy-equiv
       ( equiv-is-set-quotient R QR f R QR f Uf Uf
         ( id-equiv-equivalence-relation R))

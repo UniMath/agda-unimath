@@ -166,8 +166,7 @@ module _
       ( equivalence-relation-congruence-Normal-Subgroup G N)
 
   is-set-quotient-set-quotient-Group :
-    {l : Level} →
-    is-set-quotient l
+    is-set-quotient
       ( equivalence-relation-congruence-Normal-Subgroup G N)
       ( set-quotient-Group)
       ( reflecting-map-quotient-hom-Group)

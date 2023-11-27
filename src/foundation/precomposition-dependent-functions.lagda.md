@@ -40,16 +40,19 @@ This condition simplifies, for example, the proof that connected maps satisfy a
 dependent universal property.
 
 ```agda
-is-equiv-precomp-Π-fiber-condition :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3} →
-  ((b : B) → is-equiv (λ (c : C b) → const (fiber f b) (C b) c)) →
-  is-equiv (precomp-Π f C)
-is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
-  is-equiv-comp
-    ( map-reduce-Π-fiber f (λ b u → C b))
-    ( map-Π (λ b u t → u))
-    ( is-equiv-map-Π-is-fiberwise-equiv H)
-    ( is-equiv-map-reduce-Π-fiber f (λ b u → C b))
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3}
+  where
+
+  is-equiv-precomp-Π-fiber-condition :
+    ((b : B) → is-equiv (λ (c : C b) → const (fiber f b) (C b) c)) →
+    is-equiv (precomp-Π f C)
+  is-equiv-precomp-Π-fiber-condition H =
+    is-equiv-comp
+      ( map-reduce-Π-fiber f (λ b u → C b))
+      ( map-Π (λ b u t → u))
+      ( is-equiv-map-Π-is-fiberwise-equiv H)
+      ( is-equiv-map-reduce-Π-fiber f (λ b u → C b))
 ```
 
 ### Equivalences induce an equivalence from the type of homotopies between two dependent functions to the type of homotopies between their precomposites

@@ -66,18 +66,18 @@ module _
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 
-  hom-family-natural-transformation-Small-Large-Precategory :
+  hom-natural-transformation-Small-Large-Precategory :
     natural-transformation-Small-Large-Precategory →
     hom-family-functor-Small-Large-Precategory
-  hom-family-natural-transformation-Small-Large-Precategory =
-    hom-family-natural-transformation-map-Small-Large-Precategory C D
+  hom-natural-transformation-Small-Large-Precategory =
+    hom-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 
   naturality-natural-transformation-Small-Large-Precategory :
     (γ : natural-transformation-Small-Large-Precategory) →
     is-natural-transformation-Small-Large-Precategory
-      ( hom-family-natural-transformation-Small-Large-Precategory γ)
+      ( hom-natural-transformation-Small-Large-Precategory γ)
   naturality-natural-transformation-Small-Large-Precategory =
     naturality-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
@@ -160,17 +160,17 @@ module _
   where
 
   is-emb-hom-family-natural-transformation-Small-Large-Precategory :
-    is-emb (hom-family-natural-transformation-Small-Large-Precategory C D F G)
+    is-emb (hom-natural-transformation-Small-Large-Precategory C D F G)
   is-emb-hom-family-natural-transformation-Small-Large-Precategory =
-    is-emb-hom-family-natural-transformation-map-Small-Large-Precategory C D
+    is-emb-hom-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 
-  emb-hom-family-natural-transformation-Small-Large-Precategory :
+  emb-hom-natural-transformation-Small-Large-Precategory :
     natural-transformation-Small-Large-Precategory C D F G ↪
     hom-family-functor-Small-Large-Precategory C D F G
-  emb-hom-family-natural-transformation-Small-Large-Precategory =
-    emb-hom-family-natural-transformation-map-Small-Large-Precategory C D
+  emb-hom-natural-transformation-Small-Large-Precategory =
+    emb-hom-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 
@@ -191,20 +191,20 @@ module _
   extensionality-natural-transformation-Small-Large-Precategory :
     (a b : natural-transformation-Small-Large-Precategory C D F G) →
     ( a ＝ b) ≃
-    ( hom-family-natural-transformation-Small-Large-Precategory C D F G a ~
-      hom-family-natural-transformation-Small-Large-Precategory C D F G b)
+    ( hom-natural-transformation-Small-Large-Precategory C D F G a ~
+      hom-natural-transformation-Small-Large-Precategory C D F G b)
   extensionality-natural-transformation-Small-Large-Precategory =
     extensionality-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 
-  eq-htpy-hom-family-natural-transformation-Small-Large-Precategory :
+  eq-htpy-hom-natural-transformation-Small-Large-Precategory :
     (a b : natural-transformation-Small-Large-Precategory C D F G) →
-    ( hom-family-natural-transformation-Small-Large-Precategory C D F G a ~
-      hom-family-natural-transformation-Small-Large-Precategory C D F G b) →
+    ( hom-natural-transformation-Small-Large-Precategory C D F G a ~
+      hom-natural-transformation-Small-Large-Precategory C D F G b) →
     a ＝ b
-  eq-htpy-hom-family-natural-transformation-Small-Large-Precategory =
-    eq-htpy-hom-family-natural-transformation-map-Small-Large-Precategory C D
+  eq-htpy-hom-natural-transformation-Small-Large-Precategory =
+    eq-htpy-hom-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
 ```

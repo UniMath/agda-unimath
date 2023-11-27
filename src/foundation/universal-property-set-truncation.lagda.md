@@ -42,20 +42,18 @@ universal property of the set truncation of `A`** if any map `A → C` into a se
 
 ```agda
 is-set-truncation :
-  ( l : Level) {l1 l2 : Level} {A : UU l1} (B : Set l2) →
-  ( A → type-Set B) → UU (lsuc l ⊔ l1 ⊔ l2)
-is-set-truncation l B f =
-  (C : Set l) → is-equiv (precomp-Set f C)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) → (A → type-Set B) → UUω
+is-set-truncation B f =
+  {l : Level} (C : Set l) → is-equiv (precomp-Set f C)
 ```
 
 ### The universal property of set truncations
 
 ```agda
 universal-property-set-truncation :
-  ( l : Level) {l1 l2 : Level} {A : UU l1}
-  (B : Set l2) (f : A → type-Set B) → UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-set-truncation l {A = A} B f =
-  (C : Set l) (g : A → type-Set C) →
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) → UUω
+universal-property-set-truncation {A = A} B f =
+  {l : Level} (C : Set l) (g : A → type-Set C) →
   is-contr (Σ (hom-Set B C) (λ h → h ∘ f ~ g))
 ```
 
@@ -68,10 +66,9 @@ precomp-Π-Set :
 precomp-Π-Set f C h a = h (f a)
 
 dependent-universal-property-set-truncation :
-  {l1 l2 : Level} (l : Level) {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-  UU (l1 ⊔ l2 ⊔ lsuc l)
-dependent-universal-property-set-truncation l B f =
-  (X : type-Set B → Set l) → is-equiv (precomp-Π-Set f X)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) → UUω
+dependent-universal-property-set-truncation B f =
+  {l : Level} (X : type-Set B → Set l) → is-equiv (precomp-Π-Set f X)
 ```
 
 ## Properties
@@ -81,11 +78,10 @@ dependent-universal-property-set-truncation l B f =
 ```agda
 abstract
   is-set-truncation-universal-property :
-    (l : Level) {l1 l2 : Level} {A : UU l1}
-    (B : Set l2) (f : A → type-Set B) →
-    universal-property-set-truncation l B f →
-    is-set-truncation l B f
-  is-set-truncation-universal-property l B f up-f C =
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    universal-property-set-truncation B f →
+    is-set-truncation B f
+  is-set-truncation-universal-property B f up-f C =
     is-equiv-is-contr-map
       ( λ g → is-contr-equiv
         ( Σ (hom-Set B C) (λ h → h ∘ f ~ g))
@@ -98,10 +94,9 @@ abstract
 ```agda
 abstract
   universal-property-is-set-truncation :
-    (l : Level) {l1 l2 : Level} {A : UU l1} (B : Set l2)
-    (f : A → type-Set B) →
-    is-set-truncation l B f → universal-property-set-truncation l B f
-  universal-property-is-set-truncation l B f is-settr-f C g =
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    is-set-truncation B f → universal-property-set-truncation B f
+  universal-property-is-set-truncation B f is-settr-f C g =
     is-contr-equiv'
       ( Σ (hom-Set B C) (λ h → (h ∘ f) ＝ g))
       ( equiv-tot (λ h → equiv-funext))
@@ -109,18 +104,17 @@ abstract
 
 map-is-set-truncation :
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-  ({l : Level} → is-set-truncation l B f) →
-  (C : Set l3) (g : A → type-Set C) → hom-Set B C
+  is-set-truncation B f → (C : Set l3) (g : A → type-Set C) → hom-Set B C
 map-is-set-truncation B f is-settr-f C g =
-  pr1 (center (universal-property-is-set-truncation _ B f is-settr-f C g))
+  pr1 (center (universal-property-is-set-truncation B f is-settr-f C g))
 
 triangle-is-set-truncation :
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-  (is-settr-f : {l : Level} → is-set-truncation l B f) →
+  (is-settr-f : is-set-truncation B f) →
   (C : Set l3) (g : A → type-Set C) →
   map-is-set-truncation B f is-settr-f C g ∘ f ~ g
 triangle-is-set-truncation B f is-settr-f C g =
-  pr2 (center (universal-property-is-set-truncation _ B f is-settr-f C g))
+  pr2 (center (universal-property-is-set-truncation B f is-settr-f C g))
 ```
 
 ### The identity function on any set is a set truncation
@@ -128,7 +122,7 @@ triangle-is-set-truncation B f is-settr-f C g =
 ```agda
 abstract
   is-set-truncation-id :
-    {l1 l2 : Level} {A : UU l1} (H : is-set A) → is-set-truncation l2 (A , H) id
+    {l1 l2 : Level} {A : UU l1} (H : is-set A) → is-set-truncation (A , H) id
   is-set-truncation-id H B =
     is-equiv-precomp-is-equiv id is-equiv-id (type-Set B)
 ```
@@ -139,7 +133,7 @@ abstract
 abstract
   is-set-truncation-equiv :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (e : A ≃ type-Set B) →
-    {l : Level} → is-set-truncation l B (map-equiv e)
+    is-set-truncation B (map-equiv e)
   is-set-truncation-equiv B e C =
     is-equiv-precomp-is-equiv (map-equiv e) (is-equiv-map-equiv e) (type-Set C)
 ```
@@ -150,8 +144,8 @@ abstract
 abstract
   dependent-universal-property-is-set-truncation :
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-    ({l : Level} → is-set-truncation l B f) →
-    dependent-universal-property-set-truncation l3 B f
+    is-set-truncation B f →
+    dependent-universal-property-set-truncation B f
   dependent-universal-property-is-set-truncation {A = A} B f H X =
     is-fiberwise-equiv-is-equiv-map-Σ
       ( λ (h : A → type-Set B) → (a : A) → type-Set (X (h a)))
@@ -172,8 +166,8 @@ abstract
 abstract
   is-set-truncation-dependent-universal-property :
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-    ({l : Level} → dependent-universal-property-set-truncation l B f) →
-    is-set-truncation l3 B f
+    dependent-universal-property-set-truncation B f →
+    is-set-truncation B f
   is-set-truncation-dependent-universal-property B f H X =
     H (λ b → X)
 ```
@@ -183,13 +177,12 @@ abstract
 ```agda
 abstract
   is-set-truncation-is-set-quotient :
-    {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-    ( {l : Level} →
-      is-set-quotient l
-        ( mere-eq-equivalence-relation A)
-        ( B)
-        ( reflecting-map-mere-eq B f)) →
-    is-set-truncation l3 B f
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    is-set-quotient
+      ( mere-eq-equivalence-relation A)
+      ( B)
+      ( reflecting-map-mere-eq B f) →
+    is-set-truncation B f
   is-set-truncation-is-set-quotient {A = A} B f H X =
     is-equiv-comp
       ( pr1)
@@ -212,9 +205,9 @@ abstract
 ```agda
 abstract
   is-set-quotient-is-set-truncation :
-    {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
-    ( {l : Level} → is-set-truncation l B f) →
-    is-set-quotient l3
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    is-set-truncation B f →
+    is-set-quotient
       ( mere-eq-equivalence-relation A)
       ( B)
       ( reflecting-map-mere-eq B f)

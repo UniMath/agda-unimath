@@ -70,8 +70,7 @@ unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
 unit-trunc-Set = unit-trunc
 
 is-set-truncation-trunc-Set :
-  {l1 l2 : Level} (A : UU l1) →
-  is-set-truncation l2 (trunc-Set A) unit-trunc-Set
+  {l1 : Level} (A : UU l1) → is-set-truncation (trunc-Set A) unit-trunc-Set
 is-set-truncation-trunc-Set A = is-truncation-trunc
 ```
 
@@ -81,8 +80,8 @@ is-set-truncation-trunc-Set A = is-truncation-trunc
 
 ```agda
 dependent-universal-property-trunc-Set :
-  {l1 : Level} {A : UU l1} {l : Level} →
-  dependent-universal-property-set-truncation l (trunc-Set A) unit-trunc-Set
+  {l1 : Level} {A : UU l1} →
+  dependent-universal-property-set-truncation (trunc-Set A) unit-trunc-Set
 dependent-universal-property-trunc-Set = dependent-universal-property-trunc
 
 equiv-dependent-universal-property-trunc-Set :
@@ -122,10 +121,8 @@ module _
 
 ```agda
 universal-property-trunc-Set :
-  {l1 l2 : Level} (A : UU l1) →
-  universal-property-set-truncation l2
-    ( trunc-Set A)
-    ( unit-trunc-Set)
+  {l1 : Level} (A : UU l1) →
+  universal-property-set-truncation (trunc-Set A) (unit-trunc-Set)
 universal-property-trunc-Set A = universal-property-trunc zero-𝕋 A
 
 module _
@@ -172,8 +169,8 @@ reflecting-map-mere-eq-unit-trunc-Set A =
 
 abstract
   is-set-quotient-trunc-Set :
-    {l1 l2 : Level} (A : UU l1) →
-    is-set-quotient l2
+    {l1 : Level} (A : UU l1) →
+    is-set-quotient
       ( mere-eq-equivalence-relation A)
       ( trunc-Set A)
       ( reflecting-map-mere-eq-unit-trunc-Set A)
@@ -268,8 +265,7 @@ module _
   where
 
   abstract
-    is-equiv-is-set-truncation' :
-      ({l : Level} → is-set-truncation l B f) → is-equiv h
+    is-equiv-is-set-truncation' : is-set-truncation B f → is-equiv h
     is-equiv-is-set-truncation' Sf =
       is-equiv-is-set-truncation-is-set-truncation
         ( B)
@@ -282,7 +278,7 @@ module _
 
   abstract
     is-set-truncation-is-equiv' :
-      is-equiv h → ({l : Level} → is-set-truncation l B f)
+      is-equiv h → is-set-truncation B f
     is-set-truncation-is-equiv' Eh =
       is-set-truncation-is-equiv-is-set-truncation
         ( B)
@@ -299,8 +295,7 @@ module _
   where
 
   abstract
-    is-equiv-is-set-truncation :
-      ({l : Level} → is-set-truncation l B f) → is-equiv h
+    is-equiv-is-set-truncation : is-set-truncation B f → is-equiv h
     is-equiv-is-set-truncation Sf =
       is-equiv-is-set-truncation-is-set-truncation
         ( trunc-Set A)
@@ -313,7 +308,7 @@ module _
 
   abstract
     is-set-truncation-is-equiv :
-      is-equiv h → ({l : Level} → is-set-truncation l B f)
+      is-equiv h → is-set-truncation B f
     is-set-truncation-is-equiv Eh =
       is-set-truncation-is-set-truncation-is-equiv
         ( trunc-Set A)
@@ -359,7 +354,7 @@ abstract
 
 module _
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
-  (Sf : {l : Level} → is-set-truncation l B f)
+  (Sf : is-set-truncation B f)
   where
 
   abstract
@@ -384,7 +379,7 @@ module _
 
 module _
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
-  (Sf : {l : Level} → is-set-truncation l B f)
+  (Sf : is-set-truncation B f)
   where
 
   abstract
