@@ -177,19 +177,32 @@ module _
 ### Associativity of composition of group homomorphisms
 
 ```agda
-associative-comp-hom-Group :
+module _
   {l1 l2 l3 l4 : Level}
   (G : Group l1) (H : Group l2) (K : Group l3) (L : Group l4)
-  (h : hom-Group K L) (g : hom-Group H K) (f : hom-Group G H) →
-  Id
-    ( comp-hom-Group G H L (comp-hom-Group H K L h g) f)
-    ( comp-hom-Group G K L h (comp-hom-Group G H K g f))
-associative-comp-hom-Group G H K L =
-  associative-comp-hom-Semigroup
-    ( semigroup-Group G)
-    ( semigroup-Group H)
-    ( semigroup-Group K)
-    ( semigroup-Group L)
+  where
+
+  associative-comp-hom-Group :
+    (h : hom-Group K L) (g : hom-Group H K) (f : hom-Group G H) →
+    comp-hom-Group G H L (comp-hom-Group H K L h g) f ＝
+    comp-hom-Group G K L h (comp-hom-Group G H K g f)
+  associative-comp-hom-Group =
+    associative-comp-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( semigroup-Group K)
+      ( semigroup-Group L)
+
+  inv-associative-comp-hom-Group :
+    (h : hom-Group K L) (g : hom-Group H K) (f : hom-Group G H) →
+    comp-hom-Group G K L h (comp-hom-Group G H K g f) ＝
+    comp-hom-Group G H L (comp-hom-Group H K L h g) f
+  inv-associative-comp-hom-Group =
+    inv-associative-comp-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( semigroup-Group K)
+      ( semigroup-Group L)
 ```
 
 ### The left and right unit laws for composition of group homomorphisms

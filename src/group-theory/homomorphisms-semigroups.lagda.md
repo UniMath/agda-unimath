@@ -206,18 +206,21 @@ module _
 ### Associativity of composition of homomorphisms of semigroups
 
 ```agda
-associative-comp-hom-Semigroup :
-  { l1 l2 l3 l4 : Level} (G : Semigroup l1) (H : Semigroup l2)
-  ( K : Semigroup l3) (L : Semigroup l4) (h : hom-Semigroup K L) →
-  ( g : hom-Semigroup H K) (f : hom-Semigroup G H) →
-  Id
-    ( comp-hom-Semigroup G H L
-      ( comp-hom-Semigroup H K L h g) f)
-    ( comp-hom-Semigroup G K L h
-      ( comp-hom-Semigroup G H K g f))
-associative-comp-hom-Semigroup
-  G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
-  eq-htpy-hom-Semigroup G L refl-htpy
+module _
+  {l1 l2 l3 l4 : Level}
+  (G : Semigroup l1) (H : Semigroup l2) (K : Semigroup l3) (L : Semigroup l4)
+  (h : hom-Semigroup K L) (g : hom-Semigroup H K) (f : hom-Semigroup G H)
+  where
+
+  associative-comp-hom-Semigroup :
+    comp-hom-Semigroup G H L (comp-hom-Semigroup H K L h g) f ＝
+    comp-hom-Semigroup G K L h (comp-hom-Semigroup G H K g f)
+  associative-comp-hom-Semigroup = eq-htpy-hom-Semigroup G L refl-htpy
+
+  inv-associative-comp-hom-Semigroup :
+    comp-hom-Semigroup G K L h (comp-hom-Semigroup G H K g f) ＝
+    comp-hom-Semigroup G H L (comp-hom-Semigroup H K L h g) f
+  inv-associative-comp-hom-Semigroup = eq-htpy-hom-Semigroup G L refl-htpy
 ```
 
 ### The left and right unit laws for composition of homomorphisms of semigroups

@@ -106,15 +106,33 @@ module _
     comp-hom-presheaf-Large-Category X Y W
       ( comp-hom-presheaf-Large-Category Y Z W h g)
       ( f) ＝
-    comp-hom-presheaf-Large-Category X Z W h
+    comp-hom-presheaf-Large-Category X Z W
+      ( h)
       ( comp-hom-presheaf-Large-Category X Y Z g f)
   associative-comp-hom-presheaf-Large-Category X Y Z W =
     associative-comp-hom-Large-Precategory
       ( presheaf-Large-Precategory)
-      { X = X}
-      { Y}
-      { Z}
-      { W}
+      { X = X} {Y} {Z} {W}
+
+  inv-associative-comp-hom-presheaf-Large-Category :
+    {l3 l4 l5 l6 : Level}
+    (X : obj-presheaf-Large-Category l3)
+    (Y : obj-presheaf-Large-Category l4)
+    (Z : obj-presheaf-Large-Category l5)
+    (W : obj-presheaf-Large-Category l6)
+    (h : hom-presheaf-Large-Category Z W)
+    (g : hom-presheaf-Large-Category Y Z)
+    (f : hom-presheaf-Large-Category X Y) →
+    comp-hom-presheaf-Large-Category X Z W
+      ( h)
+      ( comp-hom-presheaf-Large-Category X Y Z g f) ＝
+    comp-hom-presheaf-Large-Category X Y W
+      ( comp-hom-presheaf-Large-Category Y Z W h g)
+      ( f)
+  inv-associative-comp-hom-presheaf-Large-Category X Y Z W =
+    inv-associative-comp-hom-Large-Precategory
+      ( presheaf-Large-Precategory)
+      { X = X} {Y} {Z} {W}
 
   left-unit-law-comp-hom-presheaf-Large-Category :
     {l3 l4 : Level}

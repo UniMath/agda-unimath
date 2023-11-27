@@ -81,12 +81,20 @@ module _
   comp-hom-Groupoid = comp-hom-Category category-Groupoid
 
   associative-comp-hom-Groupoid :
-    {x y z w : obj-Groupoid} (h : hom-Groupoid z w)
-    (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
-    ( comp-hom-Groupoid (comp-hom-Groupoid h g) f) ＝
-    ( comp-hom-Groupoid h (comp-hom-Groupoid g f))
+    {x y z w : obj-Groupoid}
+    (h : hom-Groupoid z w) (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
+    comp-hom-Groupoid (comp-hom-Groupoid h g) f ＝
+    comp-hom-Groupoid h (comp-hom-Groupoid g f)
   associative-comp-hom-Groupoid =
     associative-comp-hom-Category category-Groupoid
+
+  inv-associative-comp-hom-Groupoid :
+    {x y z w : obj-Groupoid}
+    (h : hom-Groupoid z w) (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
+    comp-hom-Groupoid h (comp-hom-Groupoid g f) ＝
+    comp-hom-Groupoid (comp-hom-Groupoid h g) f
+  inv-associative-comp-hom-Groupoid =
+    inv-associative-comp-hom-Category category-Groupoid
 
   left-unit-law-comp-hom-Groupoid :
     {x y : obj-Groupoid} (f : hom-Groupoid x y) →
@@ -125,7 +133,10 @@ module _
   pr1 precategory-Groupoid-1-Type = obj-groupoid-1-Type
   pr1 (pr2 precategory-Groupoid-1-Type) = Id-Set X
   pr1 (pr1 (pr2 (pr2 precategory-Groupoid-1-Type))) q p = p ∙ q
-  pr2 (pr1 (pr2 (pr2 precategory-Groupoid-1-Type))) r q p = inv (assoc p q r)
+  pr1 (pr2 (pr1 (pr2 (pr2 precategory-Groupoid-1-Type))) r q p) =
+    inv (assoc p q r)
+  pr2 (pr2 (pr1 (pr2 (pr2 precategory-Groupoid-1-Type))) r q p) =
+    assoc p q r
   pr1 (pr2 (pr2 (pr2 precategory-Groupoid-1-Type))) x = refl
   pr1 (pr2 (pr2 (pr2 (pr2 precategory-Groupoid-1-Type)))) p = right-unit
   pr2 (pr2 (pr2 (pr2 (pr2 precategory-Groupoid-1-Type)))) p = left-unit

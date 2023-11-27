@@ -44,6 +44,9 @@ id-hom-Large-Precategory
 associative-comp-hom-Large-Precategory
   Ring-Large-Precategory {X = R} {S} {T} {U} =
   associative-comp-hom-Ring R S T U
+inv-associative-comp-hom-Large-Precategory
+  Ring-Large-Precategory {X = R} {S} {T} {U} =
+  inv-associative-comp-hom-Ring R S T U
 left-unit-law-comp-hom-Large-Precategory
   Ring-Large-Precategory {X = R} {S} =
   left-unit-law-comp-hom-Ring R S

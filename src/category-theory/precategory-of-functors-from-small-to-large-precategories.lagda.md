@@ -59,15 +59,35 @@ module _
     (h : natural-transformation-Small-Large-Precategory C D H I)
     (g : natural-transformation-Small-Large-Precategory C D G H)
     (f : natural-transformation-Small-Large-Precategory C D F G) →
-    ( comp-natural-transformation-Small-Large-Precategory C D F G I
+    comp-natural-transformation-Small-Large-Precategory C D F G I
       ( comp-natural-transformation-Small-Large-Precategory C D G H I h g)
-      ( f)) ＝
-    ( comp-natural-transformation-Small-Large-Precategory C D F H I
+      ( f) ＝
+    comp-natural-transformation-Small-Large-Precategory C D F H I
       ( h)
-      ( comp-natural-transformation-Small-Large-Precategory C D F G H g f))
+      ( comp-natural-transformation-Small-Large-Precategory C D F G H g f)
   associative-comp-hom-functor-large-precategory-Small-Large-Precategory
     {F = F} {G} {H} {I} h g f =
     associative-comp-natural-transformation-Small-Large-Precategory
+      C D F G H I f g h
+
+  inv-associative-comp-hom-functor-large-precategory-Small-Large-Precategory :
+    {γF γG γH γI : Level}
+    {F : functor-Small-Large-Precategory C D γF}
+    {G : functor-Small-Large-Precategory C D γG}
+    {H : functor-Small-Large-Precategory C D γH}
+    {I : functor-Small-Large-Precategory C D γI}
+    (h : natural-transformation-Small-Large-Precategory C D H I)
+    (g : natural-transformation-Small-Large-Precategory C D G H)
+    (f : natural-transformation-Small-Large-Precategory C D F G) →
+    comp-natural-transformation-Small-Large-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-Small-Large-Precategory C D F G H g f) ＝
+    comp-natural-transformation-Small-Large-Precategory C D F G I
+      ( comp-natural-transformation-Small-Large-Precategory C D G H I h g)
+      ( f)
+  inv-associative-comp-hom-functor-large-precategory-Small-Large-Precategory
+    {F = F} {G} {H} {I} h g f =
+    inv-associative-comp-natural-transformation-Small-Large-Precategory
       C D F G H I f g h
 
   id-hom-functor-large-precategory-Small-Large-Precategory :
@@ -115,6 +135,10 @@ module _
   associative-comp-hom-Large-Precategory
     functor-large-precategory-Small-Large-Precategory {X = F} {G} {H} {I} =
     associative-comp-hom-functor-large-precategory-Small-Large-Precategory
+      { F = F} {G} {H} {I}
+  inv-associative-comp-hom-Large-Precategory
+    functor-large-precategory-Small-Large-Precategory {X = F} {G} {H} {I} =
+    inv-associative-comp-hom-functor-large-precategory-Small-Large-Precategory
       { F = F} {G} {H} {I}
   left-unit-law-comp-hom-Large-Precategory
     functor-large-precategory-Small-Large-Precategory {X = F} {G} =

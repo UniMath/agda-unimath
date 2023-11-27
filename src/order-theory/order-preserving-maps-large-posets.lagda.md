@@ -192,6 +192,20 @@ module _
       ( h)
       ( g)
       ( f)
+
+  inv-associative-comp-hom-Large-Poset :
+    htpy-hom-Large-Poset P S
+      ( comp-hom-Large-Poset P R S h (comp-hom-Large-Poset P Q R g f))
+      ( comp-hom-Large-Poset P Q S (comp-hom-Large-Poset Q R S h g) f)
+  inv-associative-comp-hom-Large-Poset =
+    inv-associative-comp-hom-Large-Preorder
+      ( large-preorder-Large-Poset P)
+      ( large-preorder-Large-Poset Q)
+      ( large-preorder-Large-Poset R)
+      ( large-preorder-Large-Poset S)
+      ( h)
+      ( g)
+      ( f)
 ```
 
 ### Composition of order preserving maps satisfies left and right unit laws

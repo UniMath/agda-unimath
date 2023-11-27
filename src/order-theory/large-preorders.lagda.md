@@ -145,6 +145,9 @@ module _
   associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
     {X = x} {W = w} h g f =
     eq-is-prop (is-prop-leq-Large-Preorder P x w)
+  inv-associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
+    {X = x} {W = w} h g f =
+    eq-is-prop (is-prop-leq-Large-Preorder P x w)
   left-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder
     {X = x} {y} f =
     eq-is-prop (is-prop-leq-Large-Preorder P x y)

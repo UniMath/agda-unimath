@@ -124,6 +124,29 @@ module _
       { Z}
       { W}
 
+  inv-associative-comp-hom-copresheaf-Large-Category :
+    {l3 l4 l5 l6 : Level}
+    (X : obj-copresheaf-Large-Category l3)
+    (Y : obj-copresheaf-Large-Category l4)
+    (Z : obj-copresheaf-Large-Category l5)
+    (W : obj-copresheaf-Large-Category l6)
+    (h : hom-copresheaf-Large-Category Z W)
+    (g : hom-copresheaf-Large-Category Y Z)
+    (f : hom-copresheaf-Large-Category X Y) →
+    comp-hom-copresheaf-Large-Category X Z W
+      ( h)
+      ( comp-hom-copresheaf-Large-Category X Y Z g f) ＝
+    comp-hom-copresheaf-Large-Category X Y W
+      ( comp-hom-copresheaf-Large-Category Y Z W h g)
+      ( f)
+  inv-associative-comp-hom-copresheaf-Large-Category X Y Z W =
+    inv-associative-comp-hom-Large-Precategory
+      ( copresheaf-Large-Precategory)
+      { X = X}
+      { Y}
+      { Z}
+      { W}
+
   left-unit-law-comp-hom-copresheaf-Large-Category :
     {l3 l4 : Level}
     (X : obj-copresheaf-Large-Category l3)

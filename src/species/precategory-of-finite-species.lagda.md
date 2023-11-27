@@ -37,6 +37,9 @@ id-hom-Large-Precategory (species-𝔽-Large-Precategory l1) {X = F} =
 associative-comp-hom-Large-Precategory
   ( species-𝔽-Large-Precategory l1) {X = F} {G} {H} {K} h g f =
   associative-comp-hom-species-𝔽 F G H K h g f
+inv-associative-comp-hom-Large-Precategory
+  ( species-𝔽-Large-Precategory l1) {X = F} {G} {H} {K} h g f =
+  inv-associative-comp-hom-species-𝔽 F G H K h g f
 left-unit-law-comp-hom-Large-Precategory
   ( species-𝔽-Large-Precategory l1) {X = F} {G} f =
   left-unit-law-comp-hom-species-𝔽 F G f
