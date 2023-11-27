@@ -69,6 +69,13 @@ module _
 
 ## See also
 
+- [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
+- [`k`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md)
+- [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
+- [Epimorphisms](foundation.epimorphisms.md)
+- [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
+- [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)
+
 ### Table of files related to cyclic types, groups, and rings
 
 {{#include tables/cyclic-types.md}}
