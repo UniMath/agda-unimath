@@ -7,10 +7,10 @@ module synthetic-homotopy-theory.truncated-acyclic-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.constant-maps
-open import foundation.connected-types
 open import foundation.connected-maps
-open import foundation.dependent-epimorphisms
+open import foundation.connected-types
+open import foundation.constant-maps
+open import foundation.dependent-epimorphisms-with-respect-to-truncated-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
@@ -23,16 +23,16 @@ open import foundation.homotopies
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
-open import foundation.truncation-levels
 open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.truncated-acyclic-types
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.truncated-acyclic-types
 ```
 
 </details>
@@ -40,8 +40,8 @@ open import synthetic-homotopy-theory.suspensions-of-types
 ## Idea
 
 A map `f : A → B` is said to be **`k`-acyclic** if its
-[fibers](foundation-core.fibers-of-maps.md) are [`k`-acyclic
-types](synthetic-homotopy-theory.truncated-acyclic-types.md).
+[fibers](foundation-core.fibers-of-maps.md) are
+[`k`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md).
 
 ## Definitions
 
@@ -159,69 +159,61 @@ module _
             ( e X)))
 ```
 
-### A map is acyclic if and only if it is an [dependent epimorphism](foundation.dependent-epimorphisms.md)
+### A map is `k`-acyclic if and only if it is an [dependent `k`-epimorphism](foundation.dependent-epimorphisms-with-respect-to-truncated-types.md)
 
-TODO
-
-The following diagram is a helpful illustration in the second proof:
-
-```text
-                        precomp f
-       (b : B) → C b ------------- > (a : A) → C (f a)
-             |                               ^
-             |                               |
- map-Π const |                               | ≃ [precomp with the equivalence
-             |                               |        A ≃ Σ B (fiber f)     ]
-             v               ind-Σ           |
- ((b : B) → fiber f b → C b) ----> (s : Σ B (fiber f)) → C (pr1 s)
-                              ≃
-                          [currying]
-```
-
-The left map is an embedding if f is an acyclic map, because const is an
-embedding in this case.
+The proof is similar to that of dependent epimorphisms and
+[acyclic-maps](synthetic-homotopy-theory.acyclic-maps.md).
 
 ```agda
-{-
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-acyclic-map-is-dependent-epimorphism :
-    is-dependent-epimorphism f → is-acyclic-map f
-  is-acyclic-map-is-dependent-epimorphism e =
-    is-acyclic-map-is-epimorphism f
-      ( is-epimorphism-is-dependent-epimorphism f e)
+  is-truncated-acyclic-map-is-dependent-epimorphism-Truncated-Type :
+    is-dependent-epimorphism-Truncated-Type k f → is-truncated-acyclic-map k f
+  is-truncated-acyclic-map-is-dependent-epimorphism-Truncated-Type e =
+    is-truncated-acyclic-map-is-epimorphism-Truncated-Type f
+      ( is-epimorphism-is-dependent-epimorphism-Truncated-Type f e)
 
-  is-dependent-epimorphism-is-acyclic-map :
-    is-acyclic-map f → is-dependent-epimorphism f
-  is-dependent-epimorphism-is-acyclic-map ac C =
+  is-dependent-epimorphism-is-truncated-acyclic-map-Truncated-Type :
+    is-truncated-acyclic-map k f → is-dependent-epimorphism-Truncated-Type k f
+  is-dependent-epimorphism-is-truncated-acyclic-map-Truncated-Type ac C =
     is-emb-comp
-      ( precomp-Π (map-inv-equiv-total-fiber f) (C ∘ pr1) ∘ ind-Σ)
-      ( map-Π (λ b → const (fiber f b) (C b)))
+      ( precomp-Π
+        ( map-inv-equiv-total-fiber f)
+        ( type-Truncated-Type ∘ C ∘ pr1) ∘ ind-Σ)
+      ( map-Π (λ b → const (fiber f b) (type-Truncated-Type (C b))))
       ( is-emb-comp
-        ( precomp-Π (map-inv-equiv-total-fiber f) (C ∘ pr1))
+        ( precomp-Π
+          ( map-inv-equiv-total-fiber f)
+          ( type-Truncated-Type ∘ C ∘ pr1))
         ( ind-Σ)
         ( is-emb-is-equiv
           ( is-equiv-precomp-Π-is-equiv
-            ( is-equiv-map-inv-equiv-total-fiber f) (C ∘ pr1)))
+            ( is-equiv-map-inv-equiv-total-fiber f)
+              (type-Truncated-Type ∘ C ∘ pr1)))
         ( is-emb-is-equiv is-equiv-ind-Σ))
-      ( is-emb-map-Π (λ b → is-emb-const-is-acyclic (fiber f b) (ac b) (C b)))
+      ( is-emb-map-Π
+        ( λ b →
+          is-emb-const-is-truncated-acyclic-Truncated-Type
+            ( fiber f b)
+            ( ac b)
+            ( C b)))
 ```
 
-In particular, every epimorphism is actually a dependent epimorphism.
+In particular, every `k`-epimorphism is actually a dependent `k`-epimorphism.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-dependent-epimorphism-is-epimorphism :
-    is-epimorphism f → is-dependent-epimorphism f
-  is-dependent-epimorphism-is-epimorphism e =
-    is-dependent-epimorphism-is-acyclic-map f
-      ( is-acyclic-map-is-epimorphism f e)
--}
+  is-dependent-epimorphism-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f →
+    is-dependent-epimorphism-Truncated-Type k f
+  is-dependent-epimorphism-is-epimorphism-Truncated-Type e =
+    is-dependent-epimorphism-is-truncated-acyclic-map-Truncated-Type f
+      ( is-truncated-acyclic-map-is-epimorphism-Truncated-Type f e)
 ```
 
 ### The class of `k`-acyclic maps is closed under composition and has the right cancellation property

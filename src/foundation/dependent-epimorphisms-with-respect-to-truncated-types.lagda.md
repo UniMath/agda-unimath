@@ -12,8 +12,8 @@ open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.precomposition-dependent-functions
-open import foundation-core.truncation-levels
 open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 ```
 
 </details>
@@ -31,8 +31,8 @@ is an [embedding](foundation-core.embeddings.md) for every family `C` of
 `k`-types over `B`.
 
 Clearly, every dependent `k`-epimorphism is a
-[`k`-epimorphism](foundation.epimorphisms-with-respect-to-truncated-types.md). The
-converse is also true, i.e., every `k`-epimorphism is a dependent
+[`k`-epimorphism](foundation.epimorphisms-with-respect-to-truncated-types.md).
+The converse is also true, i.e., every `k`-epimorphism is a dependent
 `k`-epimorphism. Therefore it follows that a map `f : A → B` is
 [`k`-acyclic](synthetic-homotopy-theory.truncated-acyclic-maps.md) if and only
 if it is a `k`-epimorphism, if and only if it is a dependent `k`-epimorphism.
@@ -68,8 +68,8 @@ module _
 ```
 
 The converse of the above, that every `k`-epimorphism is a dependent
-`k`-epimorphism, can be found in the file on [`k`-acyclic
-maps](synthetic-homotopy-theory.truncated-acyclic-maps.md).
+`k`-epimorphism, can be found in the file on
+[`k`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md).
 
 ## See also
 
