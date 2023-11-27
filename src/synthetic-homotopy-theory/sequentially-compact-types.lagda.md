@@ -1,7 +1,7 @@
-# Compact types
+# Sequentially compact types
 
 ```agda
-module synthetic-homotopy-theory.compact-types where
+module synthetic-homotopy-theory.sequentially-compact-types where
 ```
 
 <details><summary>Imports</summary>
@@ -19,27 +19,27 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 
 ## Idea
 
-A **(sequentially) compact type** is a type `X` such that exponentiating by `X`
+A **sequentially compact type** is a type `X` such that exponentiating by `X`
 commutes with
 [sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
 
 ```text
-  (colimₙ (X → Aₙ)) ≃ (X → colimₙ Aₙ)
+  colimₙ (X → Aₙ) ≃ (X → colimₙ Aₙ)
 ```
 
 for every [cotower](synthetic-homotopy-theory.sequential-diagrams.md) `Aₙ`.
 
 ## Definitions
 
-### The predicate of being a compact type
+### The predicate of being a sequentially compact type
 
 ```agda
 module _
   {l1 : Level} (X : UU l1)
   where
 
-  is-compact : UUω
-  is-compact =
+  is-sequentially-compact : UUω
+  is-sequentially-compact =
     {l2 l3 : Level} (A : sequential-diagram l2) {A∞ : UU l3}
     (c : cocone-sequential-diagram A A∞) →
     ((l : Level) → universal-property-sequential-colimit l A c) →

@@ -143,8 +143,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} (X : UU l1) (A : tower l2) {Y : UU l3}
-  ( c : cone-tower A Y)
+  {l1 l2 l3 : Level} (X : UU l1) (A : tower l2) {Y : UU l3} (c : cone-tower A Y)
   where
 
   cone-postcomp-tower :
