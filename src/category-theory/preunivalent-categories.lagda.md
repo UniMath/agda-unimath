@@ -120,6 +120,16 @@ module _
   associative-comp-hom-Preunivalent-Category =
     associative-comp-hom-Precategory precategory-Preunivalent-Category
 
+  inv-associative-comp-hom-Preunivalent-Category :
+    {x y z w : obj-Preunivalent-Category}
+    (h : hom-Preunivalent-Category z w)
+    (g : hom-Preunivalent-Category y z)
+    (f : hom-Preunivalent-Category x y) →
+    comp-hom-Preunivalent-Category h (comp-hom-Preunivalent-Category g f) ＝
+    comp-hom-Preunivalent-Category (comp-hom-Preunivalent-Category h g) f
+  inv-associative-comp-hom-Preunivalent-Category =
+    inv-associative-comp-hom-Precategory precategory-Preunivalent-Category
+
   associative-composition-operation-Preunivalent-Category :
     associative-composition-operation-binary-family-Set
       hom-set-Preunivalent-Category

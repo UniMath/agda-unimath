@@ -141,7 +141,9 @@ module _
   pr1 (pr2 precategory-Preorder) x y = set-Prop (leq-Preorder-Prop X x y)
   pr1 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} =
     is-transitive-leq-Preorder X x y z
-  pr2 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} {w} h g f =
+  pr1 (pr2 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} {w} h g f) =
+    eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x w))
+  pr2 (pr2 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} {w} h g f) =
     eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x w))
   pr1 (pr2 (pr2 (pr2 precategory-Preorder))) = refl-leq-Preorder X
   pr1 (pr2 (pr2 (pr2 (pr2 precategory-Preorder)))) {x} {y} f =

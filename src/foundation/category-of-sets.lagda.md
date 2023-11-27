@@ -45,6 +45,7 @@ hom-set-Large-Precategory Set-Large-Precategory = hom-set-Set
 comp-hom-Large-Precategory Set-Large-Precategory g f = g ∘ f
 id-hom-Large-Precategory Set-Large-Precategory = id
 associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
+inv-associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
 left-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
 right-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
 ```

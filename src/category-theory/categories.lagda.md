@@ -105,6 +105,16 @@ module _
   associative-comp-hom-Category =
     associative-comp-hom-Precategory precategory-Category
 
+  inv-associative-comp-hom-Category :
+    {x y z w : obj-Category}
+    (h : hom-Category z w)
+    (g : hom-Category y z)
+    (f : hom-Category x y) →
+    comp-hom-Category h (comp-hom-Category g f) ＝
+    comp-hom-Category (comp-hom-Category h g) f
+  inv-associative-comp-hom-Category =
+    inv-associative-comp-hom-Precategory precategory-Category
+
   associative-composition-operation-Category :
     associative-composition-operation-binary-family-Set hom-set-Category
   associative-composition-operation-Category =

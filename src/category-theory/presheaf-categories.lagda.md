@@ -209,6 +209,26 @@ module _
       { Z}
       { W}
 
+  inv-associative-comp-hom-presheaf-Precategory :
+    {l3 l4 l5 l6 : Level}
+    (X : presheaf-Precategory l3)
+    (Y : presheaf-Precategory l4)
+    (Z : presheaf-Precategory l5)
+    (W : presheaf-Precategory l6)
+    (h : hom-presheaf-Precategory Z W)
+    (g : hom-presheaf-Precategory Y Z)
+    (f : hom-presheaf-Precategory X Y) →
+    comp-hom-presheaf-Precategory X Z W
+      ( h)
+      ( comp-hom-presheaf-Precategory X Y Z g f) ＝
+    comp-hom-presheaf-Precategory X Y W
+      ( comp-hom-presheaf-Precategory Y Z W h g)
+      ( f)
+  inv-associative-comp-hom-presheaf-Precategory X Y Z W =
+    inv-associative-comp-hom-Large-Precategory
+      ( presheaf-large-precategory-Precategory)
+      { X = X} {Y} {Z} {W}
+
   left-unit-law-comp-hom-presheaf-Precategory :
     {l3 l4 : Level}
     (X : presheaf-Precategory l3)

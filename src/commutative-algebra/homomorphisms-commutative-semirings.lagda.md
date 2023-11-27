@@ -361,6 +361,23 @@ module _
       ( h)
       ( g)
       ( f)
+
+  inv-associative-comp-hom-Commutative-Semiring :
+    comp-hom-Commutative-Semiring A C D
+      ( h)
+      ( comp-hom-Commutative-Semiring A B C g f) ＝
+    comp-hom-Commutative-Semiring A B D
+      ( comp-hom-Commutative-Semiring B C D h g)
+      ( f)
+  inv-associative-comp-hom-Commutative-Semiring =
+    inv-associative-comp-hom-Semiring
+      ( semiring-Commutative-Semiring A)
+      ( semiring-Commutative-Semiring B)
+      ( semiring-Commutative-Semiring C)
+      ( semiring-Commutative-Semiring D)
+      ( h)
+      ( g)
+      ( f)
 ```
 
 ### Unit laws for composition of homomorphisms of commutative semirings

@@ -261,4 +261,24 @@ module _
       ( map-functor-Small-Large-Precategory C D G)
       ( map-functor-Small-Large-Precategory C D H)
       ( map-functor-Small-Large-Precategory C D I)
+
+  inv-associative-comp-natural-transformation-Small-Large-Precategory :
+    {γF γG γH γI : Level}
+    (F : functor-Small-Large-Precategory C D γF)
+    (G : functor-Small-Large-Precategory C D γG)
+    (H : functor-Small-Large-Precategory C D γH)
+    (I : functor-Small-Large-Precategory C D γI)
+    (a : natural-transformation-Small-Large-Precategory C D F G)
+    (b : natural-transformation-Small-Large-Precategory C D G H)
+    (c : natural-transformation-Small-Large-Precategory C D H I) →
+    comp-natural-transformation-Small-Large-Precategory C D F H I c
+      ( comp-natural-transformation-Small-Large-Precategory C D F G H b a) ＝
+    comp-natural-transformation-Small-Large-Precategory C D F G I
+      ( comp-natural-transformation-Small-Large-Precategory C D G H I c b) a
+  inv-associative-comp-natural-transformation-Small-Large-Precategory F G H I =
+    inv-associative-comp-natural-transformation-map-Small-Large-Precategory C D
+      ( map-functor-Small-Large-Precategory C D F)
+      ( map-functor-Small-Large-Precategory C D G)
+      ( map-functor-Small-Large-Precategory C D H)
+      ( map-functor-Small-Large-Precategory C D I)
 ```

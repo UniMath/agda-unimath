@@ -77,6 +77,22 @@ module _
     eq-htpy
       ( λ i → associative-comp-hom-Large-Precategory (C i) (h i) (g i) (f i))
 
+  inv-associative-comp-hom-Π-Large-Precategory :
+    {l2 l3 l4 l5 : Level}
+    {x : obj-Π-Large-Precategory l2}
+    {y : obj-Π-Large-Precategory l3}
+    {z : obj-Π-Large-Precategory l4}
+    {w : obj-Π-Large-Precategory l5} →
+    (h : hom-Π-Large-Precategory z w)
+    (g : hom-Π-Large-Precategory y z)
+    (f : hom-Π-Large-Precategory x y) →
+    ( comp-hom-Π-Large-Precategory h (comp-hom-Π-Large-Precategory g f)) ＝
+    ( comp-hom-Π-Large-Precategory (comp-hom-Π-Large-Precategory h g) f)
+  inv-associative-comp-hom-Π-Large-Precategory h g f =
+    eq-htpy
+      ( λ i →
+        inv-associative-comp-hom-Large-Precategory (C i) (h i) (g i) (f i))
+
   id-hom-Π-Large-Precategory :
     {l2 : Level} {x : obj-Π-Large-Precategory l2} → hom-Π-Large-Precategory x x
   id-hom-Π-Large-Precategory i = id-hom-Large-Precategory (C i)
@@ -101,26 +117,21 @@ module _
 
   Π-Large-Precategory :
     Large-Precategory (λ l2 → l1 ⊔ α l2) (λ l2 l3 → l1 ⊔ β l2 l3)
-  obj-Large-Precategory
-    Π-Large-Precategory =
+  obj-Large-Precategory Π-Large-Precategory =
     obj-Π-Large-Precategory
-  hom-set-Large-Precategory
-    Π-Large-Precategory =
+  hom-set-Large-Precategory Π-Large-Precategory =
     hom-set-Π-Large-Precategory
-  comp-hom-Large-Precategory
-    Π-Large-Precategory =
+  comp-hom-Large-Precategory Π-Large-Precategory =
     comp-hom-Π-Large-Precategory
-  id-hom-Large-Precategory
-    Π-Large-Precategory =
+  id-hom-Large-Precategory Π-Large-Precategory =
     id-hom-Π-Large-Precategory
-  associative-comp-hom-Large-Precategory
-    Π-Large-Precategory =
+  associative-comp-hom-Large-Precategory Π-Large-Precategory =
     associative-comp-hom-Π-Large-Precategory
-  left-unit-law-comp-hom-Large-Precategory
-    Π-Large-Precategory =
+  inv-associative-comp-hom-Large-Precategory Π-Large-Precategory =
+    inv-associative-comp-hom-Π-Large-Precategory
+  left-unit-law-comp-hom-Large-Precategory Π-Large-Precategory =
     left-unit-law-comp-hom-Π-Large-Precategory
-  right-unit-law-comp-hom-Large-Precategory
-    Π-Large-Precategory =
+  right-unit-law-comp-hom-Large-Precategory Π-Large-Precategory =
     right-unit-law-comp-hom-Π-Large-Precategory
 ```
 
