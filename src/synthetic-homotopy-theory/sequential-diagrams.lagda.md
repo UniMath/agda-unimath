@@ -59,6 +59,14 @@ characterized in the file about
 
 ### Postcomposition sequential diagrams
 
+Given a sequential diagram `A` and a type `X` there is a sequential diagram
+`X → A` defined by levelwise postcomposition.
+
+```text
+           (f₀ ∘ -)          (f₁ ∘ -)          (f₂ ∘ -)
+  (X → A₀) -------> (X → A₁) -------> (X → A₂) -------> (X → A₃) -------> ⋯
+```
+
 ```agda
 module _
   {l1 l2 : Level} (X : UU l1) (A : sequential-diagram l2)
