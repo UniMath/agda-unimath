@@ -18,8 +18,8 @@ open import foundation-core.precomposition-dependent-functions
 
 ## Idea
 
-A **dependent epimorphism** is a map `f : A → B` such that the precomposition
-function
+A **dependent epimorphism** is a map `f : A → B` such that the
+[precomposition function](foundation.precomposition-dependent-functions.md)
 
 ```text
   - ∘ f : ((b : B) → C b) → ((a : A) → C (f a))
