@@ -70,86 +70,59 @@ record
   field
     ty-presheaf : presheaf-Precategory ctx-category l3
 
+  ∫Ty : Precategory (l1 ⊔ l3) (l2 ⊔ l3)
+  ∫Ty = precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf
+
+  obj-∫Ty : UU (l1 ⊔ l3)
+  obj-∫Ty = obj-Precategory ∫Ty
+
+  hom-∫Ty : obj-∫Ty → obj-∫Ty → UU (l2 ⊔ l3)
+  hom-∫Ty = hom-Precategory ∫Ty
+
+  proj-∫Ty : functor-Precategory ∫Ty ctx-category
+  proj-∫Ty =
+    proj-functor-precategory-of-elements-presheaf-Precategory
+      ( ctx-category)
+      ( ty-presheaf)
+
   Ty : Ctx → UU l3
-  Ty Γ =
-    type-Set
-      ( obj-functor-Precategory
-        ( opposite-Precategory ctx-category)
-        ( Set-Precategory l3)
-        ( ty-presheaf)
-        ( Γ))
+  Ty = element-presheaf-Precategory ctx-category ty-presheaf
 
   _·_ : {Δ Γ : Ctx} (A : Ty Γ) (γ : Sub Δ Γ) → Ty Δ
-  A · γ =
-    hom-functor-Precategory
-      ( opposite-Precategory ctx-category)
-      ( Set-Precategory l3)
-      ( ty-presheaf)
-      ( γ)
-      ( A)
+  A · γ = action-presheaf-Precategory ctx-category ty-presheaf γ A
 
   preserves-comp-Ty :
     {Δ Δ' Γ : Ctx} (A : Ty Γ) (γ : Sub Δ' Γ) (δ : Sub Δ Δ') →
     A · comp-hom-Precategory ctx-category γ δ ＝ (A · γ) · δ
   preserves-comp-Ty A γ δ =
-    htpy-eq
-      ( preserves-comp-functor-Precategory
-        ( opposite-Precategory ctx-category)
-        ( Set-Precategory l3)
-        ( ty-presheaf)
-        ( δ)
-        ( γ))
-      ( A)
+    preserves-comp-action-presheaf-Precategory ctx-category ty-presheaf γ δ A
 
   preserves-id-Ty :
     {Γ : Ctx} (A : Ty Γ) → A · id-hom-Precategory ctx-category ＝ A
   preserves-id-Ty {Γ} =
-    htpy-eq
-      ( preserves-id-functor-Precategory
-        ( opposite-Precategory ctx-category)
-        ( Set-Precategory l3)
-        ( ty-presheaf)
-        ( Γ))
+    preserves-id-action-presheaf-Precategory ctx-category ty-presheaf
 
   field
-    tm-presheaf :
-      presheaf-Precategory (precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf) l4
+    tm-presheaf : presheaf-Precategory ∫Ty l4
 
   Tm : (Γ : Ctx) (A : Ty Γ) → UU l4
-  Tm Γ A = pr1 (pr1 tm-presheaf (Γ , A))
+  Tm Γ A = element-presheaf-Precategory ∫Ty tm-presheaf (Γ , A)
 
   _[_] :
     {Δ Γ : Ctx} {A : Ty Γ} (M : Tm Γ A) (γ : Sub Δ Γ) → Tm Δ (A · γ)
   _[_] {Δ} {Γ} {A} M γ =
-    hom-functor-Precategory
-      ( opposite-Precategory
-        ( precategory-of-elements-presheaf-Precategory
-          ( ctx-category)
-          ( ty-presheaf)))
-      ( Set-Precategory l4)
-      ( tm-presheaf)
-      ( γ , refl)
-      ( M)
+    action-presheaf-Precategory ∫Ty tm-presheaf (γ , refl) M
 
   field
-    ext-functor :
-      functor-Precategory
-        ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
-        ( ctx-category)
+    ext-functor : functor-Precategory ∫Ty ctx-category
 
   ext : (Γ : Ctx) (A : Ty Γ) → Ctx
-  ext Γ A =
-    obj-functor-Precategory
-      ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
-      ( ctx-category)
-      ( ext-functor)
-      ( Γ , A)
+  ext Γ A = obj-functor-Precategory ∫Ty ctx-category ext-functor (Γ , A)
 
   field
     ext-iso :
       (Δ Γ : Ctx) (A : Ty Γ) →
-      hom-Precategory ctx-category Δ (ext Γ A) ≃
-      Σ (hom-Precategory ctx-category Δ Γ) (λ γ → Tm Δ (A · γ))
+      Sub Δ (ext Γ A) ≃ Σ (Sub Δ Γ) (λ γ → Tm Δ (A · γ))
 
   ext-sub :
     {Δ Γ : Ctx} (A : Ty Γ) (γ : Sub Δ Γ) → Tm Δ (A · γ) → Sub Δ (ext Γ A)

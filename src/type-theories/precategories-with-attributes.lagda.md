@@ -7,6 +7,7 @@ module type-theories.precategories-with-attributes where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.commuting-squares-of-morphisms-in-precategories
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.opposite-precategories
@@ -72,6 +73,21 @@ record
   Ty : Ctx → UU l3
   Ty Γ = element-presheaf-Precategory ctx-category ty-presheaf Γ
 
+  ∫Ty : Precategory (l1 ⊔ l3) (l2 ⊔ l3)
+  ∫Ty = precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf
+
+  obj-∫Ty : UU (l1 ⊔ l3)
+  obj-∫Ty = obj-Precategory ∫Ty
+
+  hom-∫Ty : obj-∫Ty → obj-∫Ty → UU (l2 ⊔ l3)
+  hom-∫Ty = hom-Precategory ∫Ty
+
+  proj-∫Ty : functor-Precategory ∫Ty ctx-category
+  proj-∫Ty =
+    proj-functor-precategory-of-elements-presheaf-Precategory
+      ( ctx-category)
+      ( ty-presheaf)
+
   _·_ : {Δ Γ : Ctx} (A : Ty Γ) (γ : Sub Δ Γ) → Ty Δ
   A · γ = action-presheaf-Precategory ctx-category ty-presheaf γ A
 
@@ -87,67 +103,45 @@ record
     preserves-id-action-presheaf-Precategory ctx-category ty-presheaf
 
   field
-    ext-functor :
-      functor-Precategory
-        ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
-        ( ctx-category)
+    ext-functor : functor-Precategory ∫Ty ctx-category
 
   ext : (Γ : Ctx) (A : Ty Γ) → Ctx
-  ext Γ A =
-    obj-functor-Precategory
-      ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
-      ( ctx-category)
-      ( ext-functor)
-      ( Γ , A)
+  ext Γ A = obj-functor-Precategory ∫Ty ctx-category ext-functor (Γ , A)
 
-  ⟨_,_⟩ :
-    {Γ Δ : Ctx} (σ : Sub Γ Δ) (A : Ty Δ) → Sub (ext Γ (A · σ)) (ext Δ A)
-  ⟨ σ , A ⟩ =
-    hom-functor-Precategory
-      ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
-      ( ctx-category)
-      ( ext-functor)
-      ( σ , refl)
+  ⟨_,_⟩ : {Γ Δ : Ctx} (σ : Sub Γ Δ) (A : Ty Δ) → Sub (ext Γ (A · σ)) (ext Δ A)
+  ⟨ σ , A ⟩ = hom-functor-Precategory ∫Ty ctx-category ext-functor (σ , refl)
 
   field
     p-natural-transformation :
-      natural-transformation-Precategory
-        ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
-        ( ctx-category)
-        ( ext-functor)
-        ( proj-functor-precategory-of-elements-presheaf-Precategory
-          ( ctx-category)
-          ( ty-presheaf))
+      natural-transformation-Precategory ∫Ty ctx-category ext-functor proj-∫Ty
 
   p : (Γ : Ctx) (A : Ty Γ) → Sub (ext Γ A) Γ
   p Γ A = pr1 p-natural-transformation (Γ , A)
 
+  naturality-p :
+    {x y : obj-∫Ty} (f : hom-∫Ty x y) →
+    coherence-square-hom-Precategory
+      ( ctx-category)
+      ( hom-functor-Precategory ∫Ty ctx-category ext-functor f)
+      ( p (pr1 x) (pr2 x))
+      ( p (pr1 y) (pr2 y))
+      ( hom-functor-Precategory ∫Ty ctx-category proj-∫Ty f)
+  naturality-p =
+    naturality-natural-transformation-Precategory
+      ( precategory-of-elements-presheaf-Precategory
+        ( ctx-category)
+        ( ty-presheaf))
+      ( ctx-category)
+      ( ext-functor)
+      ( proj-functor-precategory-of-elements-presheaf-Precategory
+        ( ctx-category)
+          ( ty-presheaf))
+      ( p-natural-transformation)
+
   field
     is-pullback-p :
-      (x y :
-        obj-Precategory
-          ( precategory-of-elements-presheaf-Precategory
-            ( ctx-category)
-            ( ty-presheaf))) →
-      (f :
-        hom-Precategory
-          ( precategory-of-elements-presheaf-Precategory
-            ( ctx-category)
-            ( ty-presheaf))
-          ( x)
-          ( y)) →
-      is-pullback-Precategory ctx-category _ _ _ _ _ _ _ _
-        ( naturality-natural-transformation-Precategory
-          ( precategory-of-elements-presheaf-Precategory
-            ( ctx-category)
-            ( ty-presheaf))
-          ( ctx-category)
-          ( ext-functor)
-          ( proj-functor-precategory-of-elements-presheaf-Precategory
-            ( ctx-category)
-            ( ty-presheaf))
-          ( p-natural-transformation)
-          ( f))
+      (x y : obj-∫Ty) (f : hom-∫Ty x y) →
+      is-pullback-Precategory ctx-category _ _ _ _ _ _ _ _ (naturality-p f)
 ```
 
 The terms are defined as sections to `ext`.
