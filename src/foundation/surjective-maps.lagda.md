@@ -288,63 +288,85 @@ module _
 ### The dependent universal property of surjective maps
 
 ```agda
-dependent-universal-property-surj :
-  (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  UU ((lsuc l) ⊔ l1 ⊔ l2)
-dependent-universal-property-surj l {B = B} f =
-  (P : B → Prop l) →
-  is-equiv (λ (h : (b : B) → type-Prop (P b)) x → h (f x))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+  
+  dependent-universal-property-surj : UUω
+  dependent-universal-property-surj =
+    {l : Level} (P : B → Prop l) →
+    is-equiv (λ (h : (b : B) → type-Prop (P b)) x → h (f x))
 
-abstract
-  is-surjective-dependent-universal-property-surj :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    ({l : Level} → dependent-universal-property-surj l f) →
-    is-surjective f
-  is-surjective-dependent-universal-property-surj f dup-surj-f =
-    map-inv-is-equiv
-      ( dup-surj-f (λ b → trunc-Prop (fiber f b)))
-      ( λ x → unit-trunc-Prop (x , refl))
+  abstract
+    is-surjective-dependent-universal-property-surj :
+      dependent-universal-property-surj → is-surjective f
+    is-surjective-dependent-universal-property-surj dup-surj-f =
+      map-inv-is-equiv
+        ( dup-surj-f (λ b → trunc-Prop (fiber f b)))
+        ( λ x → unit-trunc-Prop (x , refl))
 
-abstract
-  square-dependent-universal-property-surj :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    (P : B → Prop l3) →
-    ( λ (h : (y : B) → type-Prop (P y)) x → h (f x)) ~
-    ( ( λ h x → h (f x) (x , refl)) ∘
-      ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
-        ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))))
-  square-dependent-universal-property-surj f P = refl-htpy
-
-  dependent-universal-property-surj-is-surjective :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-surjective f →
-    ({l : Level} → dependent-universal-property-surj l f)
-  dependent-universal-property-surj-is-surjective f is-surj-f P =
-    is-equiv-comp
-      ( λ h x → h (f x) (x , refl))
-      ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
+  abstract
+    square-dependent-universal-property-surj :
+      {l3 : Level} (P : B → Prop l3) →
+      ( λ (h : (y : B) → type-Prop (P y)) x → h (f x)) ~
+      ( ( λ h x → h (f x) (x , refl)) ∘
+        ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
         ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y)))
-      ( is-equiv-comp
-        ( λ h y → (h y) ∘ unit-trunc-Prop)
-        ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
-        ( is-equiv-map-Π-is-fiberwise-equiv
-          ( λ y →
-            is-equiv-diagonal-is-contr
-              ( is-proof-irrelevant-is-prop
-                ( is-prop-type-trunc-Prop)
-                ( is-surj-f y))
-              ( type-Prop (P y))))
-        ( is-equiv-map-Π-is-fiberwise-equiv
-          ( λ b → is-propositional-truncation-trunc-Prop (fiber f b) (P b))))
-      ( is-equiv-map-reduce-Π-fiber f ( λ y z → type-Prop (P y)))
+    square-dependent-universal-property-surj P = refl-htpy
 
-equiv-dependent-universal-property-surj-is-surjective :
-  {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-surjective f → (C : B → Prop l) →
-  ((b : B) → type-Prop (C b)) ≃ ((a : A) → type-Prop (C (f a)))
-pr1 (equiv-dependent-universal-property-surj-is-surjective f H C) h x = h (f x)
-pr2 (equiv-dependent-universal-property-surj-is-surjective f H C) =
-  dependent-universal-property-surj-is-surjective f H C
+  abstract
+    dependent-universal-property-surj-is-surjective :
+      is-surjective f → dependent-universal-property-surj
+    dependent-universal-property-surj-is-surjective is-surj-f P =
+      is-equiv-comp
+        ( λ h x → h (f x) (x , refl))
+        ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
+          ( λ h y →
+            const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y)))
+        ( is-equiv-comp
+          ( λ h y → (h y) ∘ unit-trunc-Prop)
+          ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
+          ( is-equiv-map-Π-is-fiberwise-equiv
+            ( λ y →
+              is-equiv-diagonal-is-contr
+                ( is-proof-irrelevant-is-prop
+                  ( is-prop-type-trunc-Prop)
+                  ( is-surj-f y))
+                ( type-Prop (P y))))
+          ( is-equiv-map-Π-is-fiberwise-equiv
+            ( λ b → is-propositional-truncation-trunc-Prop (fiber f b) (P b))))
+        ( is-equiv-map-reduce-Π-fiber f ( λ y z → type-Prop (P y)))
+
+  equiv-dependent-universal-property-surj-is-surjective :
+    is-surjective f →
+    {l : Level} (C : B → Prop l) →
+    ((b : B) → type-Prop (C b)) ≃ ((a : A) → type-Prop (C (f a)))
+  pr1 (equiv-dependent-universal-property-surj-is-surjective H C) h x =
+    h (f x)
+  pr2 (equiv-dependent-universal-property-surj-is-surjective H C) =
+    dependent-universal-property-surj-is-surjective H C
+
+  apply-dependent-universal-property-surj-is-surjective :
+    is-surjective f →
+    {l : Level} (C : B → Prop l) →
+    ((a : A) → type-Prop (C (f a))) → ((y : B) → type-Prop (C y))
+  apply-dependent-universal-property-surj-is-surjective H C =
+    map-inv-equiv (equiv-dependent-universal-property-surj-is-surjective H C)
+
+  apply-twice-dependent-universal-property-surj-is-surjective :
+    is-surjective f →
+    {l : Level} (C : B → B → Prop l) →
+    ((x y : A) → type-Prop (C (f x) (f y))) → ((s t : B) → type-Prop (C s t))
+  apply-twice-dependent-universal-property-surj-is-surjective H C G s =
+    apply-dependent-universal-property-surj-is-surjective
+      ( H)
+      ( λ b → C s b)
+      ( λ y →
+        apply-dependent-universal-property-surj-is-surjective
+          ( H)
+          ( λ b → C b (f y))
+          ( λ x → G x y)
+          ( s))
 
 equiv-dependent-universal-property-surjection :
   {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B) →
@@ -355,13 +377,6 @@ equiv-dependent-universal-property-surjection f =
     ( map-surjection f)
     ( is-surjective-map-surjection f)
 
-apply-dependent-universal-property-surj-is-surjective :
-  {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-surjective f → (C : B → Prop l) →
-  ((a : A) → type-Prop (C (f a))) → ((y : B) → type-Prop (C y))
-apply-dependent-universal-property-surj-is-surjective f H C =
-  map-inv-equiv (equiv-dependent-universal-property-surj-is-surjective f H C)
-
 apply-dependent-universal-property-surjection :
   {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B) →
   (C : B → Prop l) →
@@ -370,23 +385,6 @@ apply-dependent-universal-property-surjection f =
   apply-dependent-universal-property-surj-is-surjective
     ( map-surjection f)
     ( is-surjective-map-surjection f)
-
-apply-twice-dependent-universal-property-surj-is-surjective :
-  {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-surjective f → (C : B → B → Prop l) →
-  ((x y : A) → type-Prop (C (f x) (f y))) → ((s t : B) → type-Prop (C s t))
-apply-twice-dependent-universal-property-surj-is-surjective f H C G s =
-  apply-dependent-universal-property-surj-is-surjective
-    ( f)
-    ( H)
-    ( λ b → C s b)
-    ( λ y →
-      apply-dependent-universal-property-surj-is-surjective
-        ( f)
-        ( H)
-        ( λ b → C b (f y))
-        ( λ x → G x y)
-        ( s))
 ```
 
 ### A map into a proposition is a propositional truncation if and only if it is surjective
@@ -822,97 +820,11 @@ module _
       ( is-emb-map-emb g)
 ```
 
-### Maps from the domain of a surjection into a set
-
-```agda
-module _ {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
-  (C : Set l3) (g : A → type-Set C) where
-
-  is-prop-surj-comm-map-into-set :
-    is-prop (Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)))
-  is-prop-surj-comm-map-into-set =
-    is-prop-all-elements-equal
-      (λ (h , q) (h' , q') →
-        eq-type-subtype
-          ( λ h'' → Π-Prop A (λ a → Id-Prop C (g a) (h'' (map-surjection f a))))
-          ( eq-htpy
-            ( apply-dependent-universal-property-surjection
-                ( f)
-                ( λ b → Id-Prop C (h b) (h' b))
-                ( λ a → inv (q a) ∙ q' a))))
-
-  map-universal-property-surj-into-set :
-    Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)) →
-    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a')
-  map-universal-property-surj-into-set (h , q) a a' p =
-    q a ∙ (ap h p ∙ inv (q a'))
-
-  inv-universal-property-surj-into-set :
-    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
-    Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
-  inv-universal-property-surj-into-set H =
-    map-equiv
-      ( e)
-      (apply-dependent-universal-property-surjection
-        ( f)
-        ( λ b → P b , is-prop-P b)
-        ( λ a → (g a , λ (a' , p') → H a' a p')))
-    where
-      P : B → UU (l1 ⊔ l2 ⊔ l3)
-      P b =
-        Σ (type-Set C) (λ c → (s : fiber (map-surjection f) b) → g (pr1 s) ＝ c)
-
-      e : ((b : B) → P b) ≃
-          Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f))
-      e =
-        (equiv-tot
-          (λ h →
-            equiv-precomp-Π (inv-equiv-total-fiber (map-surjection f)) _)) ∘e
-        (equiv-tot (λ h → inv-equiv equiv-ev-pair) ∘e
-        (distributive-Π-Σ))
-
-      is-prop-P : (b : B) → is-prop (P b)
-      is-prop-P b =
-        is-prop-all-elements-equal
-          ( λ (pair c q) (pair c' q') →
-            eq-type-subtype
-              ( λ c'' →
-                Π-Prop
-                  (fiber (map-surjection f) b)
-                  (λ s → Id-Prop C (g (pr1 s)) c''))
-              ( map-universal-property-trunc-Prop
-                ( Id-Prop C c c')
-                ( λ s → inv (q s) ∙ q' s)
-                ( is-surjective-map-surjection f b)))
-
-  equiv-universal-property-surj-into-set :
-    Σ (B → type-Set C) (λ h → g ~ (h ∘ map-surjection f)) ≃
-    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a')
-  pr1 equiv-universal-property-surj-into-set =
-    map-universal-property-surj-into-set
-  pr2 equiv-universal-property-surj-into-set =
-    is-equiv-is-prop
-      ( is-prop-surj-comm-map-into-set)
-      ( is-prop-Π
-        (λ a →
-          is-prop-Π
-            (λ a' → is-prop-function-type (is-set-type-Set C (g a) (g a')))))
-      ( inv-universal-property-surj-into-set)
-
-  function-inv-universal-property-surj-into-set :
-    ((a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
-    B → type-Set C
-  function-inv-universal-property-surj-into-set =
-    pr1 ∘ map-inv-equiv equiv-universal-property-surj-into-set
-
-  comm-inv-universal-property-surj-into-set :
-    (H : (a a' : A) → map-surjection f a ＝ map-surjection f a' → g a ＝ g a') →
-    g ~ (function-inv-universal-property-surj-into-set H ∘ map-surjection f)
-  comm-inv-universal-property-surj-into-set =
-    pr2 ∘ map-inv-equiv equiv-universal-property-surj-into-set
-```
-
 ### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`
 
 This remains to be shown.
 [#735](https://github.com/UniMath/agda-unimath/issues/735)
+
+## See also
+
+- In [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md) we show that a map is surjective if and only if it is an epimorphism with respect to sets.
