@@ -392,14 +392,17 @@ module _
         ( trivial-hom-Group G H)
         ( is-injective-is-emb
           ( U H)
-          ( is-in-kernel-quotient-hom-is-in-Normal-Subgroup G N
-            ( contains-element-image-hom-element-Group G g)))
+          ( inv
+            ( is-in-kernel-quotient-hom-is-in-Normal-Subgroup G N
+              ( contains-element-image-hom-element-Group G g))))
 
   is-surjective-hom-element-is-emb-ev-element-hom-Group :
     is-surjective-hom-element-Group G g
   is-surjective-hom-element-is-emb-ev-element-hom-Group x =
     is-in-normal-subgroup-is-in-kernel-quotient-hom-Group G N
-      ( is-trivial-quotient-hom-image-hom-element-is-emb-ev-element-hom-Group x)
+      ( inv
+        ( is-trivial-quotient-hom-image-hom-element-is-emb-ev-element-hom-Group
+          x))
 ```
 
 #### A group element `g : G` is generating if and only if for every group `H` the evaluation map `hom(G,H) → H` at `g` is an embedding

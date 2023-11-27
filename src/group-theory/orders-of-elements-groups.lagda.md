@@ -14,7 +14,7 @@ open import foundation.universe-levels
 
 open import group-theory.free-groups-with-one-generator
 open import group-theory.groups
-open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups

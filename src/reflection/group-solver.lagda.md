@@ -346,7 +346,7 @@ module _ {n : ℕ} where
     useGroupEqualityElem env xinv-unit-GE = inv-unit-Group G
     useGroupEqualityElem env (xinv-inv-GE x) = inv-inv-Group G (unQuoteGS x env)
     useGroupEqualityElem env (xdistr-inv-mul-GE x y) =
-      distributive-inv-mul-Group G (unQuoteGS x env) (unQuoteGS y env)
+      distributive-inv-mul-Group G
 
     useGroupEquality :
       {x y : GroupSyntax n} (env : Env n (type-Group G)) →

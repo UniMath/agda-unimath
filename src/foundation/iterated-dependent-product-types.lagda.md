@@ -55,12 +55,13 @@ of universe level `l₀ ⊔ l₁ ⊔ l₂ ⊔ l₃`.
 iterated-Π :
   {l : Level} {n : ℕ} → telescope l n → UU l
 iterated-Π (base-telescope A) = A
-iterated-Π (cons-telescope A) = (x : _) → iterated-Π (A x)
+iterated-Π (cons-telescope {X = X} A) = (x : X) → iterated-Π (A x)
 
 iterated-implicit-Π :
   {l : Level} {n : ℕ} → telescope l n → UU l
 iterated-implicit-Π (base-telescope A) = A
-iterated-implicit-Π (cons-telescope A) = {x : _} → iterated-implicit-Π (A x)
+iterated-implicit-Π (cons-telescope {X = X} A) =
+  {x : X} → iterated-implicit-Π (A x)
 ```
 
 ### Iterated sections of type families

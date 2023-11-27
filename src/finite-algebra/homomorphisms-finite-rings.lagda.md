@@ -9,8 +9,6 @@ module finite-algebra.homomorphisms-finite-rings where
 ```agda
 open import finite-algebra.finite-rings
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
@@ -373,14 +371,23 @@ module _
   where
 
   associative-comp-hom-Ring-𝔽 :
-    ( comp-hom-Ring-𝔽 A B D
-      ( comp-hom-Ring-𝔽 B C D h g)
-      ( f)) ＝
-    ( comp-hom-Ring-𝔽 A C D
-      ( h)
-      ( comp-hom-Ring-𝔽 A B C g f))
+    comp-hom-Ring-𝔽 A B D (comp-hom-Ring-𝔽 B C D h g) f ＝
+    comp-hom-Ring-𝔽 A C D h (comp-hom-Ring-𝔽 A B C g f)
   associative-comp-hom-Ring-𝔽 =
     associative-comp-hom-Ring
+      ( ring-Ring-𝔽 A)
+      ( ring-Ring-𝔽 B)
+      ( ring-Ring-𝔽 C)
+      ( ring-Ring-𝔽 D)
+      ( h)
+      ( g)
+      ( f)
+
+  inv-associative-comp-hom-Ring-𝔽 :
+    comp-hom-Ring-𝔽 A C D h (comp-hom-Ring-𝔽 A B C g f) ＝
+    comp-hom-Ring-𝔽 A B D (comp-hom-Ring-𝔽 B C D h g) f
+  inv-associative-comp-hom-Ring-𝔽 =
+    inv-associative-comp-hom-Ring
       ( ring-Ring-𝔽 A)
       ( ring-Ring-𝔽 B)
       ( ring-Ring-𝔽 C)

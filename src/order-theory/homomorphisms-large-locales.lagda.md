@@ -30,11 +30,11 @@ module _
   (K : Large-Locale αK βK γ) (L : Large-Locale αL βL γ)
   where
 
-  hom-set-Large-Locale : UUω
-  hom-set-Large-Locale = hom-set-Large-Frame L K
+  hom-Large-Locale : UUω
+  hom-Large-Locale = hom-Large-Frame L K
 
   module _
-    (f : hom-set-Large-Locale)
+    (f : hom-Large-Locale)
     where
 
     map-hom-Large-Locale :

@@ -46,7 +46,7 @@ module _
   is-additive-submonoid-Semiring :
     {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
   is-additive-submonoid-Semiring =
-    is-submonoid-Monoid (additive-monoid-Semiring R)
+    is-submonoid-subset-Monoid (additive-monoid-Semiring R)
 ```
 
 ### Left ideals

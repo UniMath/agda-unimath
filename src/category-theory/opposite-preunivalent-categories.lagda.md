@@ -58,13 +58,9 @@ abstract
     {l1 l2 : Level} (C : Precategory l1 l2) →
     is-preunivalent-Precategory (opposite-Precategory C) →
     is-preunivalent-Precategory C
-  is-preunivalent-is-preunivalent-opposite-Precategory C is-preunivalent-op-C =
-    tr
-      ( is-preunivalent-Precategory)
-      ( is-involution-opposite-Precategory C)
-      ( is-preunivalent-opposite-is-preunivalent-Precategory
-        ( opposite-Precategory C)
-        ( is-preunivalent-op-C))
+  is-preunivalent-is-preunivalent-opposite-Precategory C =
+    is-preunivalent-opposite-is-preunivalent-Precategory
+      ( opposite-Precategory C)
 ```
 
 ## Definitions
@@ -103,12 +99,29 @@ module _
     (h : hom-opposite-Preunivalent-Category z w)
     (g : hom-opposite-Preunivalent-Category y z)
     (f : hom-opposite-Preunivalent-Category x y) →
-    ( comp-hom-opposite-Preunivalent-Category
-      ( comp-hom-opposite-Preunivalent-Category h g) (f)) ＝
-    ( comp-hom-opposite-Preunivalent-Category
-      ( h) (comp-hom-opposite-Preunivalent-Category g f))
+    comp-hom-opposite-Preunivalent-Category
+      ( comp-hom-opposite-Preunivalent-Category h g)
+      ( f) ＝
+    comp-hom-opposite-Preunivalent-Category
+      ( h)
+      ( comp-hom-opposite-Preunivalent-Category g f)
   associative-comp-hom-opposite-Preunivalent-Category =
     associative-comp-hom-opposite-Precategory
+      ( precategory-Preunivalent-Category C)
+
+  inv-associative-comp-hom-opposite-Preunivalent-Category :
+    {x y z w : obj-opposite-Preunivalent-Category}
+    (h : hom-opposite-Preunivalent-Category z w)
+    (g : hom-opposite-Preunivalent-Category y z)
+    (f : hom-opposite-Preunivalent-Category x y) →
+    comp-hom-opposite-Preunivalent-Category
+      ( h)
+      ( comp-hom-opposite-Preunivalent-Category g f) ＝
+    comp-hom-opposite-Preunivalent-Category
+      ( comp-hom-opposite-Preunivalent-Category h g)
+      ( f)
+  inv-associative-comp-hom-opposite-Preunivalent-Category =
+    inv-associative-comp-hom-opposite-Precategory
       ( precategory-Preunivalent-Category C)
 
   id-hom-opposite-Preunivalent-Category :
@@ -153,7 +166,7 @@ module _
 
 ## Properties
 
-### The opposite preunivalent category construction is an involution on the type of preunivalent categories
+### The opposite construction is an involution on the type of preunivalent categories
 
 ```agda
 is-involution-opposite-Preunivalent-Category :
@@ -180,3 +193,11 @@ equiv-opposite-Preunivalent-Category :
 equiv-opposite-Preunivalent-Category l1 l2 =
   equiv-involution (involution-opposite-Preunivalent-Category l1 l2)
 ```
+
+## External links
+
+- [Precategories - opposites](https://1lab.dev/Cat.Base.html#opposites) at 1lab
+- [opposite category](https://ncatlab.org/nlab/show/opposite+category) at $n$Lab
+- [Opposite category](https://en.wikipedia.org/wiki/Opposite_category) at
+  Wikipedia
+- [opposite category](https://www.wikidata.org/wiki/Q7098616) at Wikidata

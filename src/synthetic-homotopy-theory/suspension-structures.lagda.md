@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.suspension-structures where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -19,6 +20,7 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -184,6 +186,29 @@ module _
             ( meridian-suspension-structure c x ∙ q) ＝
             ( p ∙ meridian-suspension-structure c' x)))
 
+  north-htpy-suspension-structure :
+    {c c' : suspension-structure X Z} →
+    htpy-suspension-structure c c' →
+    north-suspension-structure c ＝ north-suspension-structure c'
+  north-htpy-suspension-structure = pr1
+
+  south-htpy-suspension-structure :
+    {c c' : suspension-structure X Z} →
+    htpy-suspension-structure c c' →
+    south-suspension-structure c ＝ south-suspension-structure c'
+  south-htpy-suspension-structure = pr1 ∘ pr2
+
+  meridian-htpy-suspension-structure :
+    {c c' : suspension-structure X Z} →
+    (h : htpy-suspension-structure c c') →
+    ( x : X) →
+    coherence-square-identifications
+      ( north-htpy-suspension-structure h)
+      ( meridian-suspension-structure c x)
+      ( meridian-suspension-structure c' x)
+      ( south-htpy-suspension-structure h)
+  meridian-htpy-suspension-structure = pr2 ∘ pr2
+
   extensionality-suspension-structure :
     (c c' : suspension-structure X Z) →
     (c ＝ c') ≃ (htpy-suspension-structure c c')
@@ -225,6 +250,15 @@ module _
   is-refl-refl-htpy-suspension-structure :
     refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
   is-refl-refl-htpy-suspension-structure = refl
+
+  extensionality-suspension-structure-refl-htpy-suspension-structure :
+    eq-htpy-suspension-structure refl-htpy-suspension-structure ＝ refl
+  extensionality-suspension-structure-refl-htpy-suspension-structure =
+    is-injective-map-equiv
+      ( extensionality-suspension-structure c c)
+      ( is-section-map-inv-equiv
+        ( extensionality-suspension-structure c c)
+        ( refl-htpy-suspension-structure))
 
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c : suspension-structure X Z}
@@ -284,4 +318,115 @@ module _
         ( is-retraction-map-inv-equiv
           ( extensionality-suspension-structure c c)
           ( refl)))
+```
+
+### Characterization of equalities in `htpy-suspension-structure`
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2}
+  {c c' : suspension-structure X Z}
+  where
+
+  htpy-in-htpy-suspension-structure :
+    htpy-suspension-structure c c' →
+    htpy-suspension-structure c c' → UU (l1 ⊔ l2)
+  htpy-in-htpy-suspension-structure (n , s , h) (n' , s' , h') =
+    Σ ( n ＝ n')
+      ( λ p →
+        Σ ( s ＝ s')
+          ( λ q →
+            (x : X) →
+            coherence-square-identifications
+              ( h x)
+              ( identification-left-whisk
+                ( meridian-suspension-structure c x)
+                ( q))
+              ( identification-right-whisk
+                ( p)
+                ( meridian-suspension-structure c' x))
+              ( h' x)))
+
+  extensionality-htpy-suspension-structure :
+    (h h' : htpy-suspension-structure c c') →
+      (h ＝ h') ≃ htpy-in-htpy-suspension-structure h h'
+  extensionality-htpy-suspension-structure (n , s , h) =
+    extensionality-Σ
+      ( λ y p →
+        Σ ( s ＝ pr1 y)
+          ( λ q →
+            (x : X) →
+            coherence-square-identifications
+              ( h x)
+              ( identification-left-whisk
+                ( meridian-suspension-structure c x)
+                ( q))
+              ( identification-right-whisk
+                ( p)
+                ( meridian-suspension-structure c' x))
+              ( pr2 y x)))
+      ( refl)
+      ( refl , inv-htpy right-unit-htpy)
+      ( λ n' → id-equiv)
+      ( extensionality-Σ
+        ( λ h' q →
+          (x : X) →
+          coherence-square-identifications
+            ( h x)
+            ( identification-left-whisk (meridian-suspension-structure c x) q)
+            ( identification-right-whisk
+              ( refl)
+              ( meridian-suspension-structure c' x))
+            ( h' x))
+        ( refl)
+        ( inv-htpy right-unit-htpy)
+        ( λ q → id-equiv)
+        ( λ h' →
+          ( inv-equiv (equiv-concat-htpy' h' (right-unit-htpy))) ∘e
+          ( equiv-inv-htpy h h') ∘e
+          ( equiv-funext {f = h} {g = h'})))
+
+  north-htpy-in-htpy-suspension-structure :
+    {h h' : htpy-suspension-structure c c'} →
+    htpy-in-htpy-suspension-structure h h' →
+    ( north-htpy-suspension-structure h) ＝
+    ( north-htpy-suspension-structure h')
+  north-htpy-in-htpy-suspension-structure = pr1
+
+  south-htpy-in-htpy-suspension-structure :
+    {h h' : htpy-suspension-structure c c'} →
+    htpy-in-htpy-suspension-structure h h' →
+    ( south-htpy-suspension-structure h) ＝
+    ( south-htpy-suspension-structure h')
+  south-htpy-in-htpy-suspension-structure = pr1 ∘ pr2
+
+  meridian-htpy-in-htpy-suspension-structure :
+    {h h' : htpy-suspension-structure c c'} →
+    (H : htpy-in-htpy-suspension-structure h h') →
+    (x : X) →
+      coherence-square-identifications
+        ( meridian-htpy-suspension-structure h x)
+        ( identification-left-whisk
+          ( meridian-suspension-structure c x)
+          ( south-htpy-in-htpy-suspension-structure H))
+        ( identification-right-whisk
+          ( north-htpy-in-htpy-suspension-structure H)
+          ( meridian-suspension-structure c' x))
+        ( meridian-htpy-suspension-structure h' x)
+  meridian-htpy-in-htpy-suspension-structure = pr2 ∘ pr2
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2}
+  {c c' : suspension-structure X Z} {h h' : htpy-suspension-structure c c'}
+  where
+
+  htpy-eq-htpy-suspension-structure :
+    h ＝ h' → htpy-in-htpy-suspension-structure h h'
+  htpy-eq-htpy-suspension-structure =
+    map-equiv (extensionality-htpy-suspension-structure h h')
+
+  eq-htpy-in-htpy-suspension-structure :
+    htpy-in-htpy-suspension-structure h h' → h ＝ h'
+  eq-htpy-in-htpy-suspension-structure =
+    map-inv-equiv (extensionality-htpy-suspension-structure h h')
 ```

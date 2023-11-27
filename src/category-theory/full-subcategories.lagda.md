@@ -119,12 +119,29 @@ module _
     (h : hom-Full-Subcategory z w)
     (g : hom-Full-Subcategory y z)
     (f : hom-Full-Subcategory x y) →
-    ( comp-hom-Full-Subcategory {x} {y} {w}
-      ( comp-hom-Full-Subcategory {y} {z} {w} h g) f) ＝
-    ( comp-hom-Full-Subcategory {x} {z} {w} h
-      ( comp-hom-Full-Subcategory {x} {y} {z} g f))
+    comp-hom-Full-Subcategory {x} {y} {w}
+      ( comp-hom-Full-Subcategory {y} {z} {w} h g)
+      ( f) ＝
+    comp-hom-Full-Subcategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Full-Subcategory {x} {y} {z} g f)
   associative-comp-hom-Full-Subcategory {x} {y} {z} {w} =
     associative-comp-hom-Full-Subprecategory
+      ( precategory-Category C) P {x} {y} {z} {w}
+
+  inv-associative-comp-hom-Full-Subcategory :
+    {x y z w : obj-Full-Subcategory C P}
+    (h : hom-Full-Subcategory z w)
+    (g : hom-Full-Subcategory y z)
+    (f : hom-Full-Subcategory x y) →
+    comp-hom-Full-Subcategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Full-Subcategory {x} {y} {z} g f) ＝
+    comp-hom-Full-Subcategory {x} {y} {w}
+      ( comp-hom-Full-Subcategory {y} {z} {w} h g)
+      ( f)
+  inv-associative-comp-hom-Full-Subcategory {x} {y} {z} {w} =
+    inv-associative-comp-hom-Full-Subprecategory
       ( precategory-Category C) P {x} {y} {z} {w}
 
   left-unit-law-comp-hom-Full-Subcategory :

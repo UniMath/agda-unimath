@@ -134,7 +134,7 @@ module _
   preserves-unit-map-elim-list-Wild-Monoid = refl
 
   preserves-mul-map-elim-list-Wild-Monoid :
-    preserves-mul
+    preserves-mul'
       ( concat-list)
       ( mul-Wild-Monoid M)
       ( map-elim-list-Wild-Monoid)
@@ -158,7 +158,7 @@ module _
       ( left-unit-law-mul-Wild-Monoid M)
       ( map-elim-list-Wild-Monoid)
       ( preserves-unit-map-elim-list-Wild-Monoid)
-      ( preserves-mul-map-elim-list-Wild-Monoid)
+      ( λ {x} {y} → preserves-mul-map-elim-list-Wild-Monoid x y)
   preserves-left-unit-law-map-elim-list-Wild-Monoid x =
     inv
       ( left-inv
@@ -173,7 +173,7 @@ module _
       ( right-unit-law-mul-Wild-Monoid M)
       ( map-elim-list-Wild-Monoid)
       ( preserves-unit-map-elim-list-Wild-Monoid)
-      ( preserves-mul-map-elim-list-Wild-Monoid)
+      ( λ {x} {y} → preserves-mul-map-elim-list-Wild-Monoid x y)
   preserves-right-unit-law-map-elim-list-Wild-Monoid nil =
     ( inv (left-inv (left-unit-law-mul-Wild-Monoid M (unit-Wild-Monoid M)))) ∙
     ( ap
@@ -267,7 +267,7 @@ preserves-coh-unit-laws-map-elim-list-Wild-Monoid :
     ( list-H-Space X)
     ( h-space-Wild-Monoid M)
     ( pair (map-elim-list-Wild-Monoid M f) refl)
-    ( preserves-mul-map-elim-list-Wild-Monoid M f)
+    ( λ {x} {y} → preserves-mul-map-elim-list-Wild-Monoid M f x y)
     ( preserves-left-unit-law-map-elim-list-Wild-Monoid M f)
     ( preserves-right-unit-law-map-elim-list-Wild-Monoid M f)
 preserves-coh-unit-laws-map-elim-list-Wild-Monoid
@@ -281,7 +281,7 @@ elim-list-Wild-Monoid M f =
   pair
     ( pair (map-elim-list-Wild-Monoid M f) refl)
     ( pair
-      ( preserves-mul-map-elim-list-Wild-Monoid M f)
+      ( λ {x} {y} → preserves-mul-map-elim-list-Wild-Monoid M f x y)
       ( pair (preserves-left-unit-law-map-elim-list-Wild-Monoid M f)
         ( pair
           ( preserves-right-unit-law-map-elim-list-Wild-Monoid M f)
@@ -290,43 +290,46 @@ elim-list-Wild-Monoid M f =
 
 ### Contractibility of the type `hom (list X) M` of morphisms of wild monoids
 
-```agda
--- htpy-elim-list-Wild-Monoid :
---   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
---   (g h : hom-Wild-Monoid (list-Wild-Monoid X) M)
---   ( H : ( map-hom-Wild-Monoid (list-Wild-Monoid X) M g ∘ unit-list) ~
---         ( map-hom-Wild-Monoid (list-Wild-Monoid X) M h ∘ unit-list)) →
---   htpy-hom-Wild-Monoid (list-Wild-Monoid X) M g h
--- htpy-elim-list-Wild-Monoid {X = X} M g h H =
---   pair (pair α β) γ
---   where
---   α : pr1 (pr1 g) ~ pr1 (pr1 h)
---   α nil =
---     ( preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M g) ∙
---     ( inv (preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M h))
---   α (cons x l) =
---     ( preserves-mul-map-hom-Wild-Monoid
---       ( list-Wild-Monoid X)
---       ( M)
---       ( g)
---       ( unit-list x)
---       ( l)) ∙
---     ( ( ap-mul-Wild-Monoid M (H x) (α l)) ∙
---       ( inv
---         ( preserves-mul-map-hom-Wild-Monoid
---           ( list-Wild-Monoid X)
---           ( M)
---           ( h)
---           ( unit-list x)
---           ( l))))
---   β : (x y : pr1 (pr1 (list-Wild-Monoid X))) →
---       Id ( pr2 (pr1 g) x y ∙ ap-mul-Wild-Monoid M (α x) (α y))
---          ( α (concat-list x y) ∙ pr2 (pr1 h) x y)
---   β nil y = {!!}
---   β (cons x x₁) y = {!!}
---   γ : Id (pr2 g) (α nil ∙ pr2 h)
---   γ =
---     ( inv right-unit) ∙
---     ( ( ap (concat (pr2 g) (pr1 (pr2 M))) (inv (left-inv (pr2 h)))) ∙
---       ( inv (assoc (pr2 g) (inv (pr2 h)) (pr2 h))))
+This remains to be formalized. The following block contains some abandoned old
+code towards this goal:
+
+```text
+htpy-elim-list-Wild-Monoid :
+  {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
+  (g h : hom-Wild-Monoid (list-Wild-Monoid X) M)
+  ( H : ( map-hom-Wild-Monoid (list-Wild-Monoid X) M g ∘ unit-list) ~
+        ( map-hom-Wild-Monoid (list-Wild-Monoid X) M h ∘ unit-list)) →
+  htpy-hom-Wild-Monoid (list-Wild-Monoid X) M g h
+htpy-elim-list-Wild-Monoid {X = X} M g h H =
+  pair (pair α β) γ
+  where
+  α : pr1 (pr1 g) ~ pr1 (pr1 h)
+  α nil =
+    ( preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M g) ∙
+    ( inv (preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M h))
+  α (cons x l) =
+    ( preserves-mul-map-hom-Wild-Monoid
+      ( list-Wild-Monoid X)
+      ( M)
+      ( g)
+      ( unit-list x)
+      ( l)) ∙
+    ( ( ap-mul-Wild-Monoid M (H x) (α l)) ∙
+      ( inv
+        ( preserves-mul-map-hom-Wild-Monoid
+          ( list-Wild-Monoid X)
+          ( M)
+          ( h)
+          ( unit-list x)
+          ( l))))
+  β : (x y : pr1 (pr1 (list-Wild-Monoid X))) →
+      Id ( pr2 (pr1 g) x y ∙ ap-mul-Wild-Monoid M (α x) (α y))
+         ( α (concat-list x y) ∙ pr2 (pr1 h) x y)
+  β nil y = {!!}
+  β (cons x x₁) y = {!!}
+  γ : Id (pr2 g) (α nil ∙ pr2 h)
+  γ =
+    ( inv right-unit) ∙
+    ( ( ap (concat (pr2 g) (pr1 (pr2 M))) (inv (left-inv (pr2 h)))) ∙
+      ( inv (assoc (pr2 g) (inv (pr2 h)) (pr2 h))))
 ```

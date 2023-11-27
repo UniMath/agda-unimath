@@ -42,7 +42,7 @@ unit-id-modality = id
 ```agda
 is-uniquely-eliminating-modality-id-modality :
   {l : Level} → is-uniquely-eliminating-modality (unit-id-modality {l})
-is-uniquely-eliminating-modality-id-modality {l} _ P =
+is-uniquely-eliminating-modality-id-modality {l} P =
   is-local-dependent-type-is-equiv
     ( unit-id-modality)
     ( is-equiv-id)

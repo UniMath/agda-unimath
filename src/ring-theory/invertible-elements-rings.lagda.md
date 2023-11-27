@@ -7,9 +7,7 @@ module ring-theory.invertible-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -161,7 +159,7 @@ module _
 
   is-invertible-element-prop-Ring : type-Ring R → Prop l
   is-invertible-element-prop-Ring =
-    is-invertible-element-monoid-Prop
+    is-invertible-element-prop-Monoid
       ( multiplicative-monoid-Ring R)
 ```
 

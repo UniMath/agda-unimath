@@ -22,8 +22,8 @@ open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
-open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.precomposition-functions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -50,6 +50,13 @@ is-prop-is-connected k A = is-prop-type-Prop (is-connected-Prop k A)
 
 ## Properties
 
+### All types are `(-2)`-connected
+
+```agda
+is-neg-two-connected : {l : Level} (A : UU l) → is-connected neg-two-𝕋 A
+is-neg-two-connected A = is-trunc-type-trunc
+```
+
 ### A type `A` is `k`-connected if and only if the map `B → (A → B)` is an equivalence for every `k`-truncated type `B`
 
 ```agda
@@ -75,19 +82,21 @@ is-connected-is-equiv-diagonal {k = k} {A = A} H =
       function-dependent-universal-property-trunc
         ( Id-Truncated-Type' (trunc k A) x))
     ( tot
-      (λ _ → htpy-eq)
-      (center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
+      ( λ _ → htpy-eq)
+      ( center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
 ```
 
 ### A contractible type is `k`-connected for any `k`
 
 ```agda
-is-connected-is-contr :
-  {l1 : Level} (k : 𝕋) {A : UU l1} →
-  is-contr A → is-connected k A
-is-connected-is-contr k H =
-  is-connected-is-equiv-diagonal
-    λ B → is-equiv-diagonal-is-contr H (type-Truncated-Type B)
+module _
+  {l1 : Level} (k : 𝕋) {A : UU l1}
+  where
+
+  is-connected-is-contr : is-contr A → is-connected k A
+  is-connected-is-contr H =
+    is-connected-is-equiv-diagonal
+      ( λ B → is-equiv-diagonal-is-contr H (type-Truncated-Type B))
 ```
 
 ### A type that is `(k+1)`-connected is `k`-connected
@@ -98,19 +107,10 @@ is-connected-is-connected-succ-𝕋 :
   is-connected (succ-𝕋 k) A → is-connected k A
 is-connected-is-connected-succ-𝕋 k H =
   is-connected-is-equiv-diagonal
-    λ B →
+    ( λ B →
       is-equiv-diagonal-is-connected
-        (truncated-type-succ-Truncated-Type k B)
-        H
-```
-
-### Any type that is equivalent to a `k`-connected type is `k`-connected
-
-```agda
-is-connected-equiv :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
-  A ≃ B → is-connected k B → is-connected k A
-is-connected-equiv k e H = is-contr-equiv _ (equiv-trunc k e) H
+        ( truncated-type-succ-Truncated-Type k B)
+        ( H))
 ```
 
 ### The total space of a family of `k`-connected types over a `k`-connected type is `k`-connected
@@ -172,4 +172,37 @@ module _
                   ( unit-trunc x))
                 ( λ where refl → refl)
                 ( center (K a x)))))
+```
+
+### Being connected is invariant under equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-is-equiv :
+    (f : A → B) → is-equiv f → is-connected k B → is-connected k A
+  is-connected-is-equiv f e =
+    is-contr-is-equiv
+      ( type-trunc k B)
+      ( map-trunc k f)
+      ( is-equiv-map-equiv-trunc k (f , e))
+
+  is-connected-equiv :
+    A ≃ B → is-connected k B → is-connected k A
+  is-connected-equiv f =
+    is-connected-is-equiv (map-equiv f) (is-equiv-map-equiv f)
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  is-connected-equiv' :
+    A ≃ B → is-connected k A → is-connected k B
+  is-connected-equiv' f = is-connected-equiv (inv-equiv f)
+
+  is-connected-is-equiv' :
+    (f : A → B) → is-equiv f → is-connected k A → is-connected k B
+  is-connected-is-equiv' f e = is-connected-equiv' (f , e)
 ```

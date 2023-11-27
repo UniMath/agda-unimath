@@ -9,7 +9,6 @@ module ring-theory.groups-of-units-rings where
 ```agda
 open import category-theory.functors-large-precategories
 
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -135,13 +134,13 @@ module _
     inclusion-core-Monoid (multiplicative-monoid-Ring R)
 
   preserves-mul-inclusion-group-of-units-Ring :
-    (x y : type-group-of-units-Ring) →
+    {x y : type-group-of-units-Ring} →
     inclusion-group-of-units-Ring (mul-group-of-units-Ring x y) ＝
     mul-Ring R
       ( inclusion-group-of-units-Ring x)
       ( inclusion-group-of-units-Ring y)
-  preserves-mul-inclusion-group-of-units-Ring =
-    preserves-mul-inclusion-core-Monoid (multiplicative-monoid-Ring R)
+  preserves-mul-inclusion-group-of-units-Ring {x} {y} =
+    preserves-mul-inclusion-core-Monoid (multiplicative-monoid-Ring R) {x} {y}
 
   hom-inclusion-group-of-units-Ring :
     hom-Monoid monoid-group-of-units-Ring (multiplicative-monoid-Ring R)
@@ -169,7 +168,7 @@ module _
       ( hom-multiplicative-monoid-hom-Ring R S f)
 
   preserves-mul-hom-group-of-units-hom-Ring :
-    (x y : type-group-of-units-Ring R) →
+    {x y : type-group-of-units-Ring R} →
     map-group-of-units-hom-Ring (mul-group-of-units-Ring R x y) ＝
     mul-group-of-units-Ring S
       ( map-group-of-units-hom-Ring x)
@@ -198,7 +197,7 @@ module _
       ( hom-multiplicative-monoid-hom-Ring R S f)
 
   preserves-inv-hom-group-of-units-hom-Ring :
-    (x : type-group-of-units-Ring R) →
+    {x : type-group-of-units-Ring R} →
     map-group-of-units-hom-Ring (inv-group-of-units-Ring R x) ＝
     inv-group-of-units-Ring S (map-group-of-units-hom-Ring x)
   preserves-inv-hom-group-of-units-hom-Ring =

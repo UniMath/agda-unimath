@@ -10,6 +10,7 @@ module foundation.fibered-equivalences where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.families-of-equivalences
 open import foundation.fibered-maps
 open import foundation.pullbacks
 open import foundation.slice
@@ -59,7 +60,7 @@ module _
 
   fiberwise-equiv-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   fiberwise-equiv-over i =
-    Σ (fiberwise-map-over f g i) (is-fiberwise-equiv)
+    Σ (fiberwise-map-over f g i) is-fiberwise-equiv
 
   fam-equiv-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   fam-equiv-over i = (x : X) → (fiber f x) ≃ (fiber g (i x))

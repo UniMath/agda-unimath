@@ -9,7 +9,6 @@ module ring-theory.poset-of-right-ideals-rings where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.powersets
 open import foundation.propositions
@@ -162,7 +161,7 @@ module _
   preserves-order-subset-right-ideal-Ring I J H = H
 
   subset-right-ideal-hom-large-poset-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l → l)
       ( right-ideal-Ring-Large-Poset R)
       ( powerset-Large-Poset (type-Ring R))

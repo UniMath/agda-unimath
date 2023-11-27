@@ -197,8 +197,9 @@ dependent-pullback-property-dependent-universal-property-pushout
       ( cone-dependent-pullback-property-pushout f g c P))
     ( triangle-dependent-pullback-property-pushout f g c P)
     ( is-equiv-tot-is-fiberwise-equiv
-      ( λ h → is-equiv-tot-is-fiberwise-equiv
-        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
+      ( λ h →
+        is-equiv-tot-is-fiberwise-equiv
+          ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
     ( I l P)
 ```
 
@@ -208,10 +209,10 @@ dependent-pullback-property-dependent-universal-property-pushout
 dependent-universal-property-dependent-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ((l : Level) → dependent-pullback-property-pushout l f g c) →
-  ((l : Level) → dependent-universal-property-pushout l f g c)
+  ({l : Level} → dependent-pullback-property-pushout l f g c) →
+  ({l : Level} → dependent-universal-property-pushout l f g c)
 dependent-universal-property-dependent-pullback-property-pushout
-  f g (pair i (pair j H)) dpullback-c l P =
+  f g (pair i (pair j H)) dpullback-c P =
   let c = (pair i (pair j H)) in
   is-equiv-left-map-triangle
     ( dependent-cocone-map f g c P)
@@ -221,8 +222,9 @@ dependent-universal-property-dependent-pullback-property-pushout
       ( _∘ g)
       ( cone-dependent-pullback-property-pushout f g c P))
     ( triangle-dependent-pullback-property-pushout f g c P)
-    ( dpullback-c l P)
+    ( dpullback-c P)
     ( is-equiv-tot-is-fiberwise-equiv
-      ( λ h → is-equiv-tot-is-fiberwise-equiv
-        ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
+      ( λ h →
+        is-equiv-tot-is-fiberwise-equiv
+          ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
 ```

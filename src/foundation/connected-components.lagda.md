@@ -9,12 +9,14 @@ module foundation.connected-components where
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
@@ -30,7 +32,26 @@ open import structured-types.pointed-types
 The **connected component** of a type `A` at an element `a : A` is the type of
 all `x : A` that are [merely equal](foundation.mere-equality.md) to `a`.
 
-## Definition
+The [subtype](foundation-core.subtypes.md) of elements merely equal to `a` is
+also the least subtype of `A` containing `a`. In other words, if a subtype
+satisfies the universal property of being the least subtype of `A` containing
+`a`, then its underlying type is the connected component of `A` at `a`.
+
+## Definitions
+
+### The predicate of being the least subtype containing a given element
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (x : X) (P : subtype l2 X)
+  where
+
+  is-least-subtype-containing-element : UUω
+  is-least-subtype-containing-element =
+    {l : Level} (Q : subtype l X) → (P ⊆ Q) ↔ is-in-subtype Q x
+```
+
+### Connected components of types
 
 ```agda
 module _
@@ -71,11 +92,11 @@ abstract
     is-0-connected (connected-component A a)
   is-0-connected-connected-component A a =
     is-0-connected-mere-eq
-      ( pair a (unit-trunc-Prop refl))
-      ( λ (pair x p) →
+      ( a , unit-trunc-Prop refl)
+      ( λ (x , p) →
         apply-universal-property-trunc-Prop
           ( p)
-          ( trunc-Prop (pair a (unit-trunc-Prop refl) ＝ pair x p))
+          ( trunc-Prop ((a , unit-trunc-Prop refl) ＝ (x , p)))
           ( λ p' →
             unit-trunc-Prop
               ( eq-pair-Σ

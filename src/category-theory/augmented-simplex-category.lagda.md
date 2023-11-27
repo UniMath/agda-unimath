@@ -68,14 +68,32 @@ associative-comp-hom-augmented-simplex-Category :
   (h : hom-augmented-simplex-Category r s)
   (g : hom-augmented-simplex-Category m r)
   (f : hom-augmented-simplex-Category n m) →
-  ( comp-hom-augmented-simplex-Category {n} {m} {s}
+  comp-hom-augmented-simplex-Category {n} {m} {s}
     ( comp-hom-augmented-simplex-Category {m} {r} {s} h g)
-    ( f)) ＝
-  ( comp-hom-augmented-simplex-Category {n} {r} {s}
+    ( f) ＝
+  comp-hom-augmented-simplex-Category {n} {r} {s}
     ( h)
-    ( comp-hom-augmented-simplex-Category {n} {m} {r} g f))
+    ( comp-hom-augmented-simplex-Category {n} {m} {r} g f)
 associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} =
   associative-comp-hom-Poset
+    ( Fin-Poset n)
+    ( Fin-Poset m)
+    ( Fin-Poset r)
+    ( Fin-Poset s)
+
+inv-associative-comp-hom-augmented-simplex-Category :
+  {n m r s : obj-augmented-simplex-Category}
+  (h : hom-augmented-simplex-Category r s)
+  (g : hom-augmented-simplex-Category m r)
+  (f : hom-augmented-simplex-Category n m) →
+  comp-hom-augmented-simplex-Category {n} {r} {s}
+    ( h)
+    ( comp-hom-augmented-simplex-Category {n} {m} {r} g f) ＝
+  comp-hom-augmented-simplex-Category {n} {m} {s}
+    ( comp-hom-augmented-simplex-Category {m} {r} {s} h g)
+    ( f)
+inv-associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} =
+  inv-associative-comp-hom-Poset
     ( Fin-Poset n)
     ( Fin-Poset m)
     ( Fin-Poset r)
@@ -86,9 +104,16 @@ associative-composition-operation-augmented-simplex-Category :
     hom-set-augmented-simplex-Category
 pr1 associative-composition-operation-augmented-simplex-Category {n} {m} {r} =
   comp-hom-augmented-simplex-Category {n} {m} {r}
+pr1
+  ( pr2
+      associative-composition-operation-augmented-simplex-Category
+        { n} {m} {r} {s} h g f) =
+  associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} h g f
 pr2
-  associative-composition-operation-augmented-simplex-Category {n} {m} {r} {s} =
-  associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s}
+  ( pr2
+      associative-composition-operation-augmented-simplex-Category
+        { n} {m} {r} {s} h g f) =
+  inv-associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} h g f
 
 id-hom-augmented-simplex-Category :
   (n : obj-augmented-simplex-Category) → hom-augmented-simplex-Category n n

@@ -32,7 +32,7 @@ module _
 
   is-central-element-semiring-Prop : type-Semiring R → Prop l
   is-central-element-semiring-Prop =
-    is-central-element-monoid-Prop
+    is-central-element-prop-Monoid
       ( multiplicative-monoid-Semiring R)
 
   is-central-element-Semiring : type-Semiring R → UU l

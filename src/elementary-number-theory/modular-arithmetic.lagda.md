@@ -39,8 +39,6 @@ open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.homotopies
-
 open import structured-types.types-equipped-with-endomorphisms
 
 open import univalent-combinatorics.equality-standard-finite-types

@@ -10,6 +10,7 @@ module foundation-core.universal-property-pullbacks where
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

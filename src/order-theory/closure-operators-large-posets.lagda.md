@@ -7,7 +7,6 @@ module order-theory.closure-operators-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
@@ -47,7 +46,7 @@ module _
     where
     field
       hom-closure-operator-Large-Poset :
-        hom-set-Large-Poset (λ l → l) P P
+        hom-Large-Poset (λ l → l) P P
       is-inflationary-closure-operator-Large-Poset :
         {l1 : Level} (x : type-Large-Poset P l1) →
         leq-Large-Poset P x

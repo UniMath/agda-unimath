@@ -20,7 +20,6 @@ open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets

@@ -9,11 +9,8 @@ module category-theory.yoneda-lemma-precategories where
 ```agda
 open import category-theory.copresheaf-categories
 open import category-theory.functors-from-small-to-large-precategories
-open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories
-open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
-open import category-theory.presheaf-categories
 open import category-theory.representable-functors-precategories
 
 open import foundation.action-on-identifications-functions
@@ -24,9 +21,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -65,14 +59,14 @@ equivalence.
 ```agda
 module _
   {l1 l2 l3 : Level} (C : Precategory l1 l2) (c : obj-Precategory C)
-  (F : obj-copresheaf-Large-Category C l3)
+  (F : copresheaf-Precategory C l3)
   where
 
   map-yoneda-Precategory :
-    hom-copresheaf-Large-Category C (representable-functor-Precategory C c) F →
-    section-copresheaf-Category C F c
+    hom-copresheaf-Precategory C (representable-functor-Precategory C c) F →
+    element-copresheaf-Precategory C F c
   map-yoneda-Precategory σ =
-    hom-family-natural-transformation-Small-Large-Precategory
+    hom-natural-transformation-Small-Large-Precategory
       ( C)
       ( Set-Large-Precategory)
       ( representable-functor-Precategory C c)
@@ -86,14 +80,14 @@ The inverse to the Yoneda map:
 
 ```agda
   hom-family-extension-yoneda-Precategory :
-    (u : section-copresheaf-Category C F c) →
+    (u : element-copresheaf-Precategory C F c) →
     hom-family-functor-Small-Large-Precategory
       C Set-Large-Precategory (representable-functor-Precategory C c) F
   hom-family-extension-yoneda-Precategory u x f =
     hom-functor-Small-Large-Precategory C Set-Large-Precategory F f u
 
   naturality-extension-yoneda-Precategory :
-    (u : section-copresheaf-Category C F c) →
+    (u : element-copresheaf-Precategory C F c) →
     is-natural-transformation-Small-Large-Precategory
       C Set-Large-Precategory (representable-functor-Precategory C c) F
       ( hom-family-extension-yoneda-Precategory u)
@@ -107,8 +101,8 @@ The inverse to the Yoneda map:
           ( u))
 
   extension-yoneda-Precategory :
-    section-copresheaf-Category C F c →
-    hom-copresheaf-Large-Category C (representable-functor-Precategory C c) F
+    element-copresheaf-Precategory C F c →
+    hom-copresheaf-Precategory C (representable-functor-Precategory C c) F
   pr1 (extension-yoneda-Precategory u) =
     hom-family-extension-yoneda-Precategory u
   pr2 (extension-yoneda-Precategory u) =
@@ -152,10 +146,31 @@ The inverse is an inverse:
       ( is-retraction-extension-yoneda-Precategory)
 
   equiv-lemma-yoneda-Precategory :
-    hom-copresheaf-Large-Category C (representable-functor-Precategory C c) F ≃
-    section-copresheaf-Category C F c
+    hom-copresheaf-Precategory C (representable-functor-Precategory C c) F ≃
+    element-copresheaf-Precategory C F c
   pr1 equiv-lemma-yoneda-Precategory = map-yoneda-Precategory
   pr2 equiv-lemma-yoneda-Precategory = lemma-yoneda-Precategory
+```
+
+## Corollaries
+
+### The Yoneda lemma for representable functors
+
+An important special-case of the Yoneda lemma is when `F` is itself a
+representable functor `F = Hom(-, d)`.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (c d : obj-Precategory C)
+  where
+
+  equiv-lemma-yoneda-representable-Precategory :
+    hom-copresheaf-Precategory C
+      ( representable-functor-Precategory C c)
+      ( representable-functor-Precategory C d) ≃
+    hom-Precategory C d c
+  equiv-lemma-yoneda-representable-Precategory =
+    equiv-lemma-yoneda-Precategory C c (representable-functor-Precategory C d)
 ```
 
 ## See also

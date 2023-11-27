@@ -43,6 +43,9 @@ id-hom-Large-Precategory
 associative-comp-hom-Large-Precategory
   Monoid-Large-Precategory {X = K} {L} {M} {N} =
   associative-comp-hom-Monoid K L M N
+inv-associative-comp-hom-Large-Precategory
+  Monoid-Large-Precategory {X = K} {L} {M} {N} =
+  inv-associative-comp-hom-Monoid K L M N
 left-unit-law-comp-hom-Large-Precategory
   Monoid-Large-Precategory {X = M} {N} =
   left-unit-law-comp-hom-Monoid M N

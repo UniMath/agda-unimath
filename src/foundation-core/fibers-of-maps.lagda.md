@@ -346,10 +346,10 @@ module _
         ( is-section-inv-map-compute-fiber-comp)
         ( is-retraction-inv-map-compute-fiber-comp)
 
-  equiv-compute-fiber-comp :
+  compute-fiber-comp :
     fiber (g ∘ h) x ≃ Σ (fiber g x) (λ t → fiber h (pr1 t))
-  pr1 equiv-compute-fiber-comp = map-compute-fiber-comp
-  pr2 equiv-compute-fiber-comp = is-equiv-map-compute-fiber-comp
+  pr1 compute-fiber-comp = map-compute-fiber-comp
+  pr2 compute-fiber-comp = is-equiv-map-compute-fiber-comp
 
   abstract
     is-equiv-inv-map-compute-fiber-comp :
@@ -360,10 +360,10 @@ module _
           ( is-retraction-inv-map-compute-fiber-comp)
           ( is-section-inv-map-compute-fiber-comp)
 
-  inv-equiv-compute-fiber-comp :
+  inv-compute-fiber-comp :
     Σ (fiber g x) (λ t → fiber h (pr1 t)) ≃ fiber (g ∘ h) x
-  pr1 inv-equiv-compute-fiber-comp = inv-map-compute-fiber-comp
-  pr2 inv-equiv-compute-fiber-comp = is-equiv-inv-map-compute-fiber-comp
+  pr1 inv-compute-fiber-comp = inv-map-compute-fiber-comp
+  pr2 inv-compute-fiber-comp = is-equiv-inv-map-compute-fiber-comp
 ```
 
 ### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map
@@ -412,16 +412,6 @@ reduce-Π-fiber :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   (C : B → UU l3) → ((y : B) → fiber f y → C y) ≃ ((x : A) → C (f x))
 reduce-Π-fiber f C = reduce-Π-fiber' f (λ y z → C y)
-```
-
-### Transport in fibers
-
-```agda
-tr-fiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  {x : A} {y y' : B} (p : y ＝ y') (q : f x ＝ y) →
-  tr (fiber f) p (x , q) ＝ (x , q ∙ p)
-tr-fiber f {x = x} refl q = ap (λ r → (x , r)) (inv right-unit)
 ```
 
 ## Table of files about fibers of maps

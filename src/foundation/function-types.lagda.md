@@ -147,3 +147,9 @@ module _
             ( λ k l s → inv-equiv (equiv-funext)))) ∙
         ( eq-htpy-refl-htpy (h (i s))))
 ```
+
+## See also
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

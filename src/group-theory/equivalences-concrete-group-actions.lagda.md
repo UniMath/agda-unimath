@@ -8,7 +8,6 @@ module group-theory.equivalences-concrete-group-actions where
 
 ```agda
 open import foundation.1-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
@@ -145,11 +144,11 @@ module _
       ( hom-equiv-action-Concrete-Group G X Y e)
       ( hom-equiv-action-Concrete-Group G X Y f)
 
-  htpy-equiv-action-Concrete-Group-Prop :
+  htpy-prop-equiv-action-Concrete-Group :
     (e f : equiv-action-Concrete-Group G X Y) → Prop (l2 ⊔ l3)
-  pr1 (htpy-equiv-action-Concrete-Group-Prop e f) =
+  pr1 (htpy-prop-equiv-action-Concrete-Group e f) =
     htpy-equiv-action-Concrete-Group G X Y e f
-  pr2 (htpy-equiv-action-Concrete-Group-Prop e f) =
+  pr2 (htpy-prop-equiv-action-Concrete-Group e f) =
     is-prop-htpy-equiv-action-Concrete-Group e f
 
   is-set-equiv-action-Concrete-Group :

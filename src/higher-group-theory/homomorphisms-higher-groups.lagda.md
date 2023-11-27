@@ -54,7 +54,7 @@ module _
   preserves-unit-map-hom-∞-Group = preserves-refl-map-Ω
 
   preserves-mul-map-hom-∞-Group :
-    (f : hom-∞-Group) (x y : type-∞-Group G) →
+    (f : hom-∞-Group) {x y : type-∞-Group G} →
     map-hom-∞-Group f (mul-∞-Group G x y) ＝
     mul-∞-Group H (map-hom-∞-Group f x) (map-hom-∞-Group f y)
   preserves-mul-map-hom-∞-Group = preserves-mul-map-Ω
@@ -116,6 +116,12 @@ module _
       ( comp-hom-∞-Group G K L h (comp-hom-∞-Group G H K g f))
   associative-comp-hom-∞-Group = associative-comp-pointed-map
 
+  inv-associative-comp-hom-∞-Group :
+    (h : hom-∞-Group K L) (g : hom-∞-Group H K) (f : hom-∞-Group G H) →
+    htpy-hom-∞-Group G L
+      ( comp-hom-∞-Group G K L h (comp-hom-∞-Group G H K g f))
+      ( comp-hom-∞-Group G H L (comp-hom-∞-Group H K L h g) f)
+  inv-associative-comp-hom-∞-Group = inv-associative-comp-pointed-map
 module _
   {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2)
   where

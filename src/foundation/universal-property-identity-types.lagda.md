@@ -9,6 +9,7 @@ module foundation.universal-property-identity-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.full-subtypes
@@ -17,7 +18,6 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.preunivalence
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -28,6 +28,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>

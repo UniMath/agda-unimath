@@ -12,11 +12,9 @@ open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.mere-equality
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -26,7 +24,6 @@ open import foundation.universe-levels
 
 open import higher-group-theory.transitive-higher-group-actions
 
-open import structured-types.cyclic-types
 open import structured-types.sets-equipped-with-automorphisms
 
 open import synthetic-homotopy-theory.circle

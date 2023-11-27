@@ -203,13 +203,10 @@ module _
       ( f)
       ( g)
       ( e)
-      ( λ {l : Level} →
-        dependent-universal-property-universal-property-pushout
+      ( dependent-universal-property-universal-property-pushout
           ( vertical-map-span-cocone-cofork f g)
           ( horizontal-map-span-cocone-cofork f g)
           ( cocone-codiagonal-cofork f g e)
-          ( λ l →
-            universal-property-pushout-universal-property-coequalizer f g e
-              ( up-coequalizer))
-          ( l))
+          ( universal-property-pushout-universal-property-coequalizer f g e
+            ( up-coequalizer)))
 ```

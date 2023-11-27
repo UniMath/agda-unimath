@@ -70,6 +70,18 @@ record
       ( comp-hom-Large-Precategory (comp-hom-Large-Precategory h g) f) ＝
       ( comp-hom-Large-Precategory h (comp-hom-Large-Precategory g f))
 
+    inv-associative-comp-hom-Large-Precategory :
+      {l1 l2 l3 l4 : Level}
+      {X : obj-Large-Precategory l1}
+      {Y : obj-Large-Precategory l2}
+      {Z : obj-Large-Precategory l3}
+      {W : obj-Large-Precategory l4} →
+      (h : type-Set (hom-set-Large-Precategory Z W))
+      (g : type-Set (hom-set-Large-Precategory Y Z))
+      (f : type-Set (hom-set-Large-Precategory X Y)) →
+      ( comp-hom-Large-Precategory h (comp-hom-Large-Precategory g f)) ＝
+      ( comp-hom-Large-Precategory (comp-hom-Large-Precategory h g) f)
+
     left-unit-law-comp-hom-Large-Precategory :
       {l1 l2 : Level}
       {X : obj-Large-Precategory l1}
@@ -147,8 +159,10 @@ module _
     hom-set-Large-Precategory C
   pr1 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
     comp-hom-Large-Precategory C
-  pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
-    associative-comp-hom-Large-Precategory C
+  pr1 (pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) h g f) =
+    associative-comp-hom-Large-Precategory C h g f
+  pr2 (pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) h g f) =
+    inv-associative-comp-hom-Large-Precategory C h g f
   pr1 (pr2 (pr2 (pr2 (precategory-Large-Precategory l)))) x =
     id-hom-Large-Precategory C
   pr1 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =

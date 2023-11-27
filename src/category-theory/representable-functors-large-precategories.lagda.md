@@ -14,7 +14,6 @@ open import category-theory.natural-transformations-functors-large-precategories
 open import foundation.category-of-sets
 open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -55,7 +54,7 @@ module _
     {l2 l3 : Level}
     {X : obj-Large-Precategory C l2} {Y : obj-Large-Precategory C l3} →
     hom-Large-Precategory C X Y →
-    type-hom-Set
+    hom-Set
       ( obj-representable-functor-Large-Precategory X)
       ( obj-representable-functor-Large-Precategory Y)
   hom-representable-functor-Large-Precategory =

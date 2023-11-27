@@ -31,14 +31,16 @@ module _
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
   where
 
-  is-equiv-ev-pair : is-equiv (ev-pair {C = C})
-  pr1 (pr1 is-equiv-ev-pair) = ind-Σ
-  pr2 (pr1 is-equiv-ev-pair) = refl-htpy
-  pr1 (pr2 is-equiv-ev-pair) = ind-Σ
-  pr2 (pr2 is-equiv-ev-pair) f = eq-htpy (ind-Σ (λ x y → refl))
+  abstract
+    is-equiv-ev-pair : is-equiv (ev-pair {C = C})
+    pr1 (pr1 is-equiv-ev-pair) = ind-Σ
+    pr2 (pr1 is-equiv-ev-pair) = refl-htpy
+    pr1 (pr2 is-equiv-ev-pair) = ind-Σ
+    pr2 (pr2 is-equiv-ev-pair) f = eq-htpy (ind-Σ (λ x y → refl))
 
-  is-equiv-ind-Σ : is-equiv (ind-Σ {C = C})
-  is-equiv-ind-Σ = is-equiv-is-section is-equiv-ev-pair refl-htpy
+  abstract
+    is-equiv-ind-Σ : is-equiv (ind-Σ {C = C})
+    is-equiv-ind-Σ = is-equiv-is-section is-equiv-ev-pair refl-htpy
 
   equiv-ev-pair : ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (pair a b))
   pr1 equiv-ev-pair = ev-pair

@@ -134,9 +134,9 @@ abstract
   is-prop-is-unital-Semigroup G =
     is-prop-all-elements-equal (all-elements-equal-is-unital-Semigroup G)
 
-is-unital-Semigroup-Prop : {l : Level} (G : Semigroup l) → Prop l
-pr1 (is-unital-Semigroup-Prop G) = is-unital-Semigroup G
-pr2 (is-unital-Semigroup-Prop G) = is-prop-is-unital-Semigroup G
+is-unital-prop-Semigroup : {l : Level} (G : Semigroup l) → Prop l
+pr1 (is-unital-prop-Semigroup G) = is-unital-Semigroup G
+pr2 (is-unital-prop-Semigroup G) = is-prop-is-unital-Semigroup G
 ```
 
 ### Monoids are H-spaces

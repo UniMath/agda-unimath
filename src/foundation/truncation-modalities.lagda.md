@@ -44,6 +44,6 @@ unit-trunc-modality = unit-trunc
 is-uniquely-eliminating-modality-trunc-modality :
   {l : Level} {k : 𝕋} →
   is-uniquely-eliminating-modality (unit-trunc-modality {l} {k})
-is-uniquely-eliminating-modality-trunc-modality {k = k} A P =
+is-uniquely-eliminating-modality-trunc-modality {k = k} P =
   dependent-universal-property-trunc (trunc k ∘ P)
 ```

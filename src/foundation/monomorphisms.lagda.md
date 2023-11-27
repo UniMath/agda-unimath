@@ -13,6 +13,7 @@ open import foundation.embeddings
 open import foundation.function-extensionality
 open import foundation.functoriality-function-types
 open import foundation.homotopies
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 

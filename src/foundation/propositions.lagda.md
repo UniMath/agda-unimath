@@ -16,7 +16,6 @@ open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.retractions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

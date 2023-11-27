@@ -9,7 +9,6 @@ module trees.multiset-indexed-dependent-products-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.empty-types
 open import foundation.universe-levels
 
 open import trees.multisets

@@ -153,8 +153,8 @@ module _
   pr2 (is-decidable-prop-is-unit-Group-𝔽 x) =
     is-decidable-is-unit-Group-𝔽 x
 
-  is-unit-finite-group-Prop : type-Group-𝔽 → Prop l
-  is-unit-finite-group-Prop = is-unit-group-Prop group-Group-𝔽
+  is-unit-prop-Group-𝔽 : type-Group-𝔽 → Prop l
+  is-unit-prop-Group-𝔽 = is-unit-prop-Group group-Group-𝔽
 
   is-unit-finite-group-Decidable-Prop : type-Group-𝔽 → Decidable-Prop l
   pr1 (is-unit-finite-group-Decidable-Prop x) =
@@ -273,7 +273,7 @@ module _
     transpose-eq-mul-Group' group-Group-𝔽
 
   distributive-inv-mul-Group-𝔽 :
-    (x y : type-Group-𝔽) →
+    {x y : type-Group-𝔽} →
     ( inv-Group-𝔽 (mul-Group-𝔽 x y)) ＝
     ( mul-Group-𝔽 (inv-Group-𝔽 y) (inv-Group-𝔽 x))
   distributive-inv-mul-Group-𝔽 =
@@ -305,7 +305,7 @@ is-finite-is-group {l} n G =
     ( is-finite-Prop _)
     ( λ e →
       is-finite-is-decidable-Prop
-        ( is-group-Prop (pr1 G))
+        ( is-group-prop-Semigroup (pr1 G))
         ( is-decidable-Σ-count
           ( count-Σ
             ( pair n e)

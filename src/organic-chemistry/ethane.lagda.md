@@ -11,7 +11,6 @@ open import elementary-number-theory.inequality-natural-numbers
 
 open import finite-group-theory.tetrahedra-in-3-space
 
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types

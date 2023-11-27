@@ -27,7 +27,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications

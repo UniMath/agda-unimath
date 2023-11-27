@@ -57,14 +57,30 @@ module _
     (h : natural-transformation-Precategory C D H I)
     (g : natural-transformation-Precategory C D G H)
     (f : natural-transformation-Precategory C D F G) →
-    ( comp-natural-transformation-Precategory C D F G I
+    comp-natural-transformation-Precategory C D F G I
       ( comp-natural-transformation-Precategory C D G H I h g)
-      ( f)) ＝
-    ( comp-natural-transformation-Precategory C D F H I
+      ( f) ＝
+    comp-natural-transformation-Precategory C D F H I
       ( h)
-      ( comp-natural-transformation-Precategory C D F G H g f))
+      ( comp-natural-transformation-Precategory C D F G H g f)
   associative-comp-hom-functor-precategory-Precategory {F} {G} {H} {I} h g f =
     associative-comp-natural-transformation-Precategory
+      C D F G H I f g h
+
+  inv-associative-comp-hom-functor-precategory-Precategory :
+    {F G H I : functor-Precategory C D}
+    (h : natural-transformation-Precategory C D H I)
+    (g : natural-transformation-Precategory C D G H)
+    (f : natural-transformation-Precategory C D F G) →
+    comp-natural-transformation-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-Precategory C D F G H g f) ＝
+    comp-natural-transformation-Precategory C D F G I
+      ( comp-natural-transformation-Precategory C D G H I h g)
+      ( f)
+  inv-associative-comp-hom-functor-precategory-Precategory
+    { F} {G} {H} {I} h g f =
+    inv-associative-comp-natural-transformation-Precategory
       C D F G H I f g h
 
   associative-composition-operation-functor-precategory-Precategory :
@@ -73,9 +89,17 @@ module _
   pr1 associative-composition-operation-functor-precategory-Precategory
     {F} {G} {H} =
     comp-hom-functor-precategory-Precategory {F} {G} {H}
-  pr2 associative-composition-operation-functor-precategory-Precategory
-    {F} {G} {H} {I} =
-    associative-comp-hom-functor-precategory-Precategory {F} {G} {H} {I}
+  pr1
+    ( pr2
+        associative-composition-operation-functor-precategory-Precategory
+          { F} {G} {H} {I} h g f) =
+    associative-comp-hom-functor-precategory-Precategory {F} {G} {H} {I} h g f
+  pr2
+    ( pr2
+        associative-composition-operation-functor-precategory-Precategory
+          { F} {G} {H} {I} h g f) =
+    inv-associative-comp-hom-functor-precategory-Precategory
+      { F} {G} {H} {I} h g f
 
   id-hom-functor-precategory-Precategory :
     (F : functor-Precategory C D) → natural-transformation-Precategory C D F F

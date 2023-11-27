@@ -16,7 +16,6 @@ open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
 
@@ -39,7 +38,7 @@ to a square
 
 ```text
 C -----> B
-|        |
+| ⌟      |
 |        |
 V        V
 A -----> X

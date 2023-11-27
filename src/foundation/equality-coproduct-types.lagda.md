@@ -22,7 +22,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.negation
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types

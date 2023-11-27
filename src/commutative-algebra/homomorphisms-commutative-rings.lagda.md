@@ -11,8 +11,6 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-semirings
 open import commutative-algebra.invertible-elements-commutative-rings
 
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
@@ -388,14 +386,23 @@ module _
   where
 
   associative-comp-hom-Commutative-Ring :
-    ( comp-hom-Commutative-Ring A B D
-      ( comp-hom-Commutative-Ring B C D h g)
-      ( f)) ＝
-    ( comp-hom-Commutative-Ring A C D
-      ( h)
-      ( comp-hom-Commutative-Ring A B C g f))
+    comp-hom-Commutative-Ring A B D (comp-hom-Commutative-Ring B C D h g) f ＝
+    comp-hom-Commutative-Ring A C D h (comp-hom-Commutative-Ring A B C g f)
   associative-comp-hom-Commutative-Ring =
     associative-comp-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+      ( ring-Commutative-Ring C)
+      ( ring-Commutative-Ring D)
+      ( h)
+      ( g)
+      ( f)
+
+  inv-associative-comp-hom-Commutative-Ring :
+    comp-hom-Commutative-Ring A C D h (comp-hom-Commutative-Ring A B C g f) ＝
+    comp-hom-Commutative-Ring A B D (comp-hom-Commutative-Ring B C D h g) f
+  inv-associative-comp-hom-Commutative-Ring =
+    inv-associative-comp-hom-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
       ( ring-Commutative-Ring C)

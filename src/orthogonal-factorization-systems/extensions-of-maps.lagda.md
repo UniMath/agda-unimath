@@ -24,6 +24,8 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.monomorphisms
+open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle

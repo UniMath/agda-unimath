@@ -70,18 +70,18 @@ module _
 ### The condition that a subset contains the unit
 
 ```agda
-  contains-unit-subset-monoid-Prop : Prop l2
-  contains-unit-subset-monoid-Prop = P (unit-Monoid M)
+  contains-unit-prop-subset-Monoid : Prop l2
+  contains-unit-prop-subset-Monoid = P (unit-Monoid M)
 
   contains-unit-subset-Monoid : UU l2
-  contains-unit-subset-Monoid = type-Prop contains-unit-subset-monoid-Prop
+  contains-unit-subset-Monoid = type-Prop contains-unit-prop-subset-Monoid
 ```
 
 ### The condition that a subset is closed under multiplication
 
 ```agda
-  is-closed-under-multiplication-subset-monoid-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-multiplication-subset-monoid-Prop =
+  is-closed-under-multiplication-prop-subset-Monoid : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-subset-Monoid =
     Π-Prop
       ( type-Monoid M)
       ( λ x →
@@ -91,5 +91,5 @@ module _
 
   is-closed-under-multiplication-subset-Monoid : UU (l1 ⊔ l2)
   is-closed-under-multiplication-subset-Monoid =
-    type-Prop is-closed-under-multiplication-subset-monoid-Prop
+    type-Prop is-closed-under-multiplication-prop-subset-Monoid
 ```
