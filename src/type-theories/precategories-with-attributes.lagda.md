@@ -12,6 +12,7 @@ open import category-theory.natural-transformations-functors-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-elements-of-a-presheaf
+open import category-theory.presheaf-categories
 open import category-theory.pullbacks-in-precategories
 
 open import foundation.action-on-identifications-functions
@@ -50,145 +51,176 @@ This is a reformulation of Definition 1, slide 24 of
 <https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf>
 
 ```agda
-record Precategory-With-Attributes {l1 l2 : Level}
-  (C : Precategory l1 l2) (l3 : Level) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
-  field
-    Ty-F : functor-Precategory (opposite-Precategory C) (Set-Precategory l3)
-    ext : functor-Precategory (element-Precategory C Ty-F) C
-    p : natural-transformation-Precategory
-          (element-Precategory C Ty-F)
-          C
-          ext
-          (proj₁-functor-element-Precategory C Ty-F)
-    is-pullback-p :
-      (x y : obj-Precategory (element-Precategory C Ty-F)) →
-      (f : hom-Precategory (element-Precategory C Ty-F) x y) →
-      is-pullback-Precategory C _ _ _ _ _ _ _ _
-        (naturality-natural-transformation-Precategory
-          (element-Precategory C Ty-F)
-          C
-          ext
-          (proj₁-functor-element-Precategory C Ty-F) p f)
+record
+  Precategory-With-Attributes
+    (l1 l2 l3 : Level) :
+    UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  where
 
-  -- Notation
+  field
+    ctx-category : Precategory l1 l2
+
   Ctx : UU l1
-  Ctx = obj-Precategory C
+  Ctx = obj-Precategory ctx-category
 
   Sub : Ctx → Ctx → UU l2
-  Sub = hom-Precategory C
+  Sub = hom-Precategory ctx-category
+
+  field
+    ty-presheaf : presheaf-Precategory ctx-category l3
 
   Ty : Ctx → UU l3
-  Ty Γ = pr1 (pr1 Ty-F Γ)
+  Ty Γ = element-presheaf-Precategory ctx-category ty-presheaf Γ
 
-  _⋆_ : (Γ : Ctx) →
-      (A : type-Set
-            (obj-functor-Precategory
-              (opposite-Precategory C)
-              (Set-Precategory l3) Ty-F Γ)) →
-      Ctx
-  Γ ⋆ A = pr1 ext (Γ , A)
+  _·_ : {Δ Γ : Ctx} (A : Ty Γ) (γ : Sub Δ Γ) → Ty Δ
+  A · γ = action-presheaf-Precategory ctx-category ty-presheaf γ A
 
-  _·_ : {Γ Δ : Ctx} →
-      (A : Ty Δ) →
-      (σ : Sub Γ Δ) →
-      Ty Γ
-  A · σ = pr1 (pr2 Ty-F) σ A
+  preserves-comp-Ty :
+    {Δ Δ' Γ : Ctx} (A : Ty Γ) (γ : Sub Δ' Γ) (δ : Sub Δ Δ') →
+    A · comp-hom-Precategory ctx-category γ δ ＝ (A · γ) · δ
+  preserves-comp-Ty A γ δ =
+    preserves-comp-action-presheaf-Precategory ctx-category ty-presheaf γ δ A
 
-  ⟨_,_⟩ : {Γ Δ : Ctx} (σ : Sub Γ Δ) (A : Ty Δ) →
-        Sub (Γ ⋆ (A · σ)) (Δ ⋆ A)
-  ⟨ σ , A ⟩ = pr1 (pr2 ext) (σ , refl)
+  preserves-id-Ty :
+    {Γ : Ctx} (A : Ty Γ) → A · id-hom-Precategory ctx-category ＝ A
+  preserves-id-Ty {Γ} =
+    preserves-id-action-presheaf-Precategory ctx-category ty-presheaf
+
+  field
+    ext-functor :
+      functor-Precategory
+        ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
+        ( ctx-category)
+
+  ext : (Γ : Ctx) (A : Ty Γ) → Ctx
+  ext Γ A =
+    obj-functor-Precategory
+      ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
+      ( ctx-category)
+      ( ext-functor)
+      ( Γ , A)
+
+  ⟨_,_⟩ :
+    {Γ Δ : Ctx} (σ : Sub Γ Δ) (A : Ty Δ) → Sub (ext Γ (A · σ)) (ext Δ A)
+  ⟨ σ , A ⟩ =
+    hom-functor-Precategory
+      ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
+      ( ctx-category)
+      ( ext-functor)
+      ( σ , refl)
+
+  field
+    p-natural-transformation :
+      natural-transformation-Precategory
+        ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
+        ( ctx-category)
+        ( ext-functor)
+        ( proj-functor-precategory-of-elements-presheaf-Precategory
+          ( ctx-category)
+          ( ty-presheaf))
+
+  p : (Γ : Ctx) (A : Ty Γ) → Sub (ext Γ A) Γ
+  p Γ A = pr1 p-natural-transformation (Γ , A)
+
+  field
+    is-pullback-p :
+      (x y :
+        obj-Precategory
+          ( precategory-of-elements-presheaf-Precategory
+            ( ctx-category)
+            ( ty-presheaf))) →
+      (f :
+        hom-Precategory
+          ( precategory-of-elements-presheaf-Precategory
+            ( ctx-category)
+            ( ty-presheaf))
+          ( x)
+          ( y)) →
+      is-pullback-Precategory ctx-category _ _ _ _ _ _ _ _
+        ( naturality-natural-transformation-Precategory
+          ( precategory-of-elements-presheaf-Precategory
+            ( ctx-category)
+            ( ty-presheaf))
+          ( ctx-category)
+          ( ext-functor)
+          ( proj-functor-precategory-of-elements-presheaf-Precategory
+            ( ctx-category)
+            ( ty-presheaf))
+          ( p-natural-transformation)
+          ( f))
 ```
 
 The terms are defined as sections to `ext`.
 
 ```agda
-  module _ (Γ : Ctx)
-    (A : type-Set
-          (obj-functor-Precategory
-            (opposite-Precategory C)
-            (Set-Precategory l3) Ty-F Γ))
+  module _
+    (Γ : Ctx) (A : Ty Γ)
     where
 
     Tm : UU l2
-    Tm = Σ (Sub Γ (Γ ⋆ A)) λ t →
-            comp-hom-Precategory C (pr1 p (Γ , A)) t ＝ id-hom-Precategory C
+    Tm =
+      Σ ( Sub Γ (ext Γ A))
+        ( λ t →
+          comp-hom-Precategory ctx-category (p Γ A) t ＝
+          id-hom-Precategory ctx-category)
 
     is-set-Tm : is-set Tm
     is-set-Tm =
       is-set-type-subtype
-        (λ t →
+        ( λ t →
           Id-Prop
-            (hom-set-Precategory C Γ Γ)
-            (comp-hom-Precategory C (pr1 p (Γ , A)) t)
-            (id-hom-Precategory C))
-        (is-set-hom-Precategory C Γ (Γ ⋆ A))
+            ( hom-set-Precategory ctx-category Γ Γ)
+            ( comp-hom-Precategory ctx-category (p Γ A) t)
+            ( id-hom-Precategory ctx-category))
+        ( is-set-hom-Precategory ctx-category Γ (ext Γ A))
 
     Tm-Set : Set l2
     pr1 Tm-Set = Tm
     pr2 Tm-Set = is-set-Tm
 
-  _[_] : {Γ Δ : Ctx} →
-    {A : Ty Δ} →
-    (t : Tm Δ A) →
-    (σ : Sub Γ Δ) →
-    Tm Γ (A · σ)
-  _[_] {Γ} {Δ} {A} (s , eq) σ = (pr1 gap-map , pr1 (pr2 gap-map))
+  _[_] :
+    {Γ Δ : Ctx} {A : Ty Δ} (t : Tm Δ A) (σ : Sub Γ Δ) → Tm Γ (A · σ)
+  _[_] {Γ} {Δ} {A} (s , eq) σ =
+    ( pr1 gap-map , pr1 (pr2 gap-map))
     where
-    sq : comp-hom-Precategory C σ (id-hom-Precategory C) ＝
-      comp-hom-Precategory C (pr1 p (Δ , A)) (comp-hom-Precategory C s σ)
+    sq :
+      comp-hom-Precategory ctx-category σ (id-hom-Precategory ctx-category) ＝
+      comp-hom-Precategory ctx-category
+        ( p Δ A)
+        ( comp-hom-Precategory ctx-category s σ)
     sq =
       equational-reasoning
-        comp-hom-Precategory C σ (id-hom-Precategory C)
-          ＝ σ by right-unit-law-comp-hom-Precategory C σ
+        comp-hom-Precategory ctx-category σ (id-hom-Precategory ctx-category)
+          ＝ σ by right-unit-law-comp-hom-Precategory ctx-category σ
           ＝ comp-hom-Precategory
-              C
-              (id-hom-Precategory C)
-              σ by inv (left-unit-law-comp-hom-Precategory C σ)
-          ＝ comp-hom-Precategory C
-              (comp-hom-Precategory C (pr1 p (Δ , A)) s)
-              σ by ap (λ k → comp-hom-Precategory C k σ) (inv eq)
-          ＝ comp-hom-Precategory C
-              (pr1 p (Δ , A))
-              (comp-hom-Precategory C s σ)
-              by associative-comp-hom-Precategory C _ _ _
+              ctx-category
+              (id-hom-Precategory ctx-category)
+              σ by inv (left-unit-law-comp-hom-Precategory ctx-category σ)
+          ＝ comp-hom-Precategory ctx-category
+              (comp-hom-Precategory ctx-category (p Δ A) s)
+              σ by ap (λ k → comp-hom-Precategory ctx-category k σ) (inv eq)
+          ＝ comp-hom-Precategory ctx-category
+              (p Δ A)
+              (comp-hom-Precategory ctx-category s σ)
+              by associative-comp-hom-Precategory ctx-category _ _ _
 
-    gap-map : Σ (Sub Γ (Γ ⋆ (A · σ))) λ g →
-            (comp-hom-Precategory C (pr1 p (Γ , (A · σ))) g ＝
-              id-hom-Precategory C) ×
-            (comp-hom-Precategory C (pr1 (pr2 ext) (σ , refl)) g ＝
-              comp-hom-Precategory C s σ)
+    gap-map :
+      Σ ( Sub Γ (ext Γ (A · σ)))
+        ( λ g →
+          ( comp-hom-Precategory ctx-category (p Γ (A · σ)) g ＝
+            id-hom-Precategory ctx-category) ×
+          ( ( comp-hom-Precategory ctx-category
+              ( pr1 (pr2 ext-functor) (σ , refl))
+              ( g)) ＝
+            ( comp-hom-Precategory ctx-category s σ)))
     gap-map =
       pr1
-        (is-pullback-p (Γ , (A · σ)) (Δ , A) (σ , refl) Γ (id-hom-Precategory C)
-          (comp-hom-Precategory C s σ) sq)
-```
-
-### Π-types in a precategory with attributes
-
-```agda
-record Π-structure-Precategory-With-Attributes {l1 l2}
-  (C : Precategory l1 l2) (l3 : Level)
-  (cwa : Precategory-With-Attributes C l3) : UU (l1 ⊔ l2 ⊔ lsuc l3) where
-  open Precategory-With-Attributes cwa
-
-  field
-    Π : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) → Ty Γ
-    Π-iso : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) →
-          Tm Γ (Π A B) ≃ Tm (Γ ⋆ A) B
-
-  app : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) →
-      Tm Γ (Π A B) → Tm (Γ ⋆ A) B
-  app A B = map-equiv (Π-iso A B)
-
-  lam : {Γ : Ctx} (A : Ty Γ) (B : Ty (Γ ⋆ A)) →
-      Tm (Γ ⋆ A) B → Tm Γ (Π A B)
-  lam A B = map-inv-equiv (Π-iso A B)
-
-  field
-    Π-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ) →
-              ((Π A B) · σ) ＝ Π (A · σ) (B · ⟨ σ , A ⟩)
-    Π-iso-sub-law : {Γ Δ : Ctx} (A : Ty Δ) (B : Ty (Δ ⋆ A)) (σ : Sub Γ Δ) →
-      (t : Tm Δ (Π A B)) →
-      app (A · σ) (B · ⟨ σ , A ⟩) (tr (Tm Γ) (Π-sub-law A B σ) (t [ σ ])) ＝
-      (app A B t [ ⟨ σ , A ⟩ ])
+        ( is-pullback-p
+          ( Γ , (A · σ))
+          ( Δ , A)
+          ( σ , refl)
+          ( Γ)
+          ( id-hom-Precategory ctx-category)
+          ( comp-hom-Precategory ctx-category s σ)
+          ( sq))
 ```

@@ -39,6 +39,14 @@ module _
   (D : Large-Precategory α β)
   where
 
+  hom-functor-large-precategory-Small-Large-Precategory :
+    {γF γG : Level}
+    (F : functor-Small-Large-Precategory C D γF)
+    (G : functor-Small-Large-Precategory C D γG) →
+    UU (l1 ⊔ l2 ⊔ β γF γG)
+  hom-functor-large-precategory-Small-Large-Precategory =
+    natural-transformation-Small-Large-Precategory C D
+
   comp-hom-functor-large-precategory-Small-Large-Precategory :
     {γF γG γH : Level}
     {F : functor-Small-Large-Precategory C D γF}

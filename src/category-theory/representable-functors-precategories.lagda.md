@@ -141,7 +141,7 @@ module _
   map-representable-functor-copresheaf-Precategory :
     map-Precategory
       ( opposite-Precategory C)
-      ( copresheaf-Precategory C l2)
+      ( copresheaf-precategory-Precategory C l2)
   pr1 map-representable-functor-copresheaf-Precategory =
     representable-functor-Precategory C
   pr2 map-representable-functor-copresheaf-Precategory =

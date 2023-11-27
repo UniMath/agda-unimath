@@ -12,6 +12,7 @@ open import category-theory.natural-transformations-functors-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-elements-of-a-presheaf
+open import category-theory.presheaf-categories
 open import category-theory.pullbacks-in-precategories
 
 open import foundation.cartesian-product-types
@@ -53,8 +54,8 @@ A **precategory with families** consists of:
 ```agda
 record
   Precategory-With-Families
-    (l1 l2 l3 : Level) :
-    UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+    (l1 l2 l3 l4 : Level) :
+    UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4)
   where
 
   field
@@ -67,10 +68,7 @@ record
   Sub = hom-Precategory ctx-category
 
   field
-    ty-functor :
-      functor-Precategory
-        ( opposite-Precategory ctx-category)
-        ( Set-Precategory l3)
+    ty-presheaf : presheaf-Precategory ctx-category l3
 
   Ty : Ctx → UU l3
   Ty Γ =
@@ -78,7 +76,7 @@ record
       ( obj-functor-Precategory
         ( opposite-Precategory ctx-category)
         ( Set-Precategory l3)
-        ( ty-functor)
+        ( ty-presheaf)
         ( Γ))
 
   _·_ : {Δ Γ : Ctx} (A : Ty Γ) (γ : Sub Δ Γ) → Ty Δ
@@ -86,19 +84,19 @@ record
     hom-functor-Precategory
       ( opposite-Precategory ctx-category)
       ( Set-Precategory l3)
-      ( ty-functor)
+      ( ty-presheaf)
       ( γ)
       ( A)
 
-  preserves-composition-Ty :
+  preserves-comp-Ty :
     {Δ Δ' Γ : Ctx} (A : Ty Γ) (γ : Sub Δ' Γ) (δ : Sub Δ Δ') →
     A · comp-hom-Precategory ctx-category γ δ ＝ (A · γ) · δ
-  preserves-composition-Ty A γ δ =
+  preserves-comp-Ty A γ δ =
     htpy-eq
       ( preserves-comp-functor-Precategory
         ( opposite-Precategory ctx-category)
         ( Set-Precategory l3)
-        ( ty-functor)
+        ( ty-presheaf)
         ( δ)
         ( γ))
       ( A)
@@ -110,38 +108,39 @@ record
       ( preserves-id-functor-Precategory
         ( opposite-Precategory ctx-category)
         ( Set-Precategory l3)
-        ( ty-functor)
+        ( ty-presheaf)
         ( Γ))
 
   field
-    tm-functor :
-      functor-Precategory
-        ( opposite-Precategory (element-Precategory ctx-category ty-functor))
-        ( Set-Precategory l3)
+    tm-presheaf :
+      presheaf-Precategory (precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf) l4
 
-  Tm : (Γ : Ctx) (A : Ty Γ) → UU l3
-  Tm Γ A = pr1 (pr1 tm-functor (Γ , A))
+  Tm : (Γ : Ctx) (A : Ty Γ) → UU l4
+  Tm Γ A = pr1 (pr1 tm-presheaf (Γ , A))
 
   _[_] :
     {Δ Γ : Ctx} {A : Ty Γ} (M : Tm Γ A) (γ : Sub Δ Γ) → Tm Δ (A · γ)
   _[_] {Δ} {Γ} {A} M γ =
     hom-functor-Precategory
-      ( opposite-Precategory (element-Precategory ctx-category ty-functor))
-      ( Set-Precategory l3)
-      ( tm-functor)
+      ( opposite-Precategory
+        ( precategory-of-elements-presheaf-Precategory
+          ( ctx-category)
+          ( ty-presheaf)))
+      ( Set-Precategory l4)
+      ( tm-presheaf)
       ( γ , refl)
       ( M)
 
   field
     ext-functor :
       functor-Precategory
-        ( element-Precategory ctx-category ty-functor)
+        ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
         ( ctx-category)
 
   ext : (Γ : Ctx) (A : Ty Γ) → Ctx
   ext Γ A =
     obj-functor-Precategory
-      ( element-Precategory ctx-category ty-functor)
+      ( precategory-of-elements-presheaf-Precategory ctx-category ty-presheaf)
       ( ctx-category)
       ( ext-functor)
       ( Γ , A)
@@ -172,6 +171,6 @@ record
       ( comp-hom-Precategory ctx-category γ (wk (A · γ)))
       ( tr
         ( Tm (ext Δ (A · γ)))
-        ( inv (preserves-composition-Ty A γ (wk (A · γ))))
+        ( inv (preserves-comp-Ty A γ (wk (A · γ))))
         ( q (A · γ)))
 ```
