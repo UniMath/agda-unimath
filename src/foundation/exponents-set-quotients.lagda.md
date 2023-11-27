@@ -118,10 +118,9 @@ module _
       reflecting-map-equivalence-relation
         ( equivalence-relation-function-type)
         ( type-Set Q))
-    (Uq :
-      {l : Level} → is-set-quotient l equivalence-relation-function-type Q q)
+    (Uq : is-set-quotient equivalence-relation-function-type Q q)
     (QR : Set l5) (qR : reflecting-map-equivalence-relation R (type-Set QR))
-    (UqR : {l : Level} → is-set-quotient l R QR qR)
+    (UqR : is-set-quotient R QR qR)
     where
 
     unique-inclusion-is-set-quotient-equivalence-relation-function-type :
@@ -233,10 +232,10 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} (R : equivalence-relation l2 A)
   (QR : Set l3) (qR : reflecting-map-equivalence-relation R (type-Set QR))
-  (UqR : {l : Level} → is-set-quotient l R QR qR)
+  (UqR : is-set-quotient R QR qR)
   {B : UU l4} (S : equivalence-relation l5 B)
   (QS : Set l6) (qS : reflecting-map-equivalence-relation S (type-Set QS))
-  (UqS : {l : Level} → is-set-quotient l S QS qS)
+  (UqS : is-set-quotient S QS qS)
   where
 
   universal-map-is-set-quotient-hom-equivalence-relation :
@@ -326,11 +325,9 @@ module _
     reflecting-map-equivalence-relation
       ( equivalence-relation-function-type X R)
       ( type-Set Q))
-  (Uq :
-    {l : Level} →
-    is-set-quotient l (equivalence-relation-function-type X R) Q q)
+  (Uq : is-set-quotient (equivalence-relation-function-type X R) Q q)
   (QR : Set l5) (qR : reflecting-map-equivalence-relation R (type-Set QR))
-  (UqR : {l : Level} → is-set-quotient l R QR qR)
+  (UqR : is-set-quotient R QR qR)
   where
 
   is-emb-inclusion-is-set-quotient-equivalence-relation-function-type :
@@ -358,18 +355,17 @@ module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {A : UU l1} (R : equivalence-relation l2 A)
   (QR : Set l3) (qR : reflecting-map-equivalence-relation R (type-Set QR))
-  (UR : {l : Level} → is-set-quotient l R QR qR)
+  (UR : is-set-quotient R QR qR)
   {B : UU l4} (S : equivalence-relation l5 B)
   (QS : Set l6) (qS : reflecting-map-equivalence-relation S (type-Set QS))
-  (US : {l : Level} → is-set-quotient l S QS qS)
+  (US : is-set-quotient S QS qS)
   (QH : Set l7)
   (qH :
     reflecting-map-equivalence-relation
       ( equivalence-relation-hom-equivalence-relation R S)
       ( type-Set QH))
   (UH :
-    {l : Level} →
-    is-set-quotient l (equivalence-relation-hom-equivalence-relation R S) QH qH)
+    is-set-quotient (equivalence-relation-hom-equivalence-relation R S) QH qH)
   where
 
   unique-inclusion-is-set-quotient-hom-equivalence-relation :
@@ -471,8 +467,7 @@ module _
     quotient-map (equivalence-relation-hom-equivalence-relation R S)
 
   is-set-quotient-set-quotient-hom-equivalence-relation :
-    {l : Level} →
-    is-set-quotient l
+    is-set-quotient
       ( equivalence-relation-hom-equivalence-relation R S)
       ( quotient-hom-equivalence-relation-Set)
       ( reflecting-map-quotient-map-hom-equivalence-relation)

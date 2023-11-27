@@ -17,8 +17,11 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.negation
 open import foundation-core.torsorial-type-families
 ```
 
@@ -67,7 +70,10 @@ total-space-Relation-Prop {A = A} R =
   Σ (A × A) λ (a , a') → type-Relation-Prop R a a'
 ```
 
-## Specifications of properties of binary relations
+### The predicate of being a reflexive relation
+
+A relation `R` on a type `A` is said to be **reflexive** if it comes equipped
+with a function `(x : A) → R x x`.
 
 ```agda
 module _
@@ -76,16 +82,14 @@ module _
 
   is-reflexive : UU (l1 ⊔ l2)
   is-reflexive = (x : A) → R x x
+```
 
-  is-symmetric : UU (l1 ⊔ l2)
-  is-symmetric = (x y : A) → R x y → R y x
+### The predicate of being a reflexive relation valued in propositions
 
-  is-transitive : UU (l1 ⊔ l2)
-  is-transitive = (x y z : A) → R y z → R x y → R x z
+A relation `R` on a type `A` valued in propositions is said to be **reflexive**
+if its underlying relation is reflexive
 
-  is-antisymmetric : UU (l1 ⊔ l2)
-  is-antisymmetric = (x y : A) → R x y → R y x → x ＝ y
-
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
   where
@@ -96,6 +100,31 @@ module _
   is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
   is-prop-is-reflexive-Relation-Prop =
     is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
+```
+
+### The predicate of being a symmetric relation
+
+A relation `R` on a type `A` is said to be **symmetric** if it comes equipped
+with a function `(x y : A) → R x y → R y x`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-symmetric : UU (l1 ⊔ l2)
+  is-symmetric = (x y : A) → R x y → R y x
+```
+
+### The predicate of being a symmetric relation valued in propositions
+
+A relation `R` on a type `A` valued in propositions is said to be **symmetric**
+if its underlying relation is symmetric.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
 
   is-symmetric-Relation-Prop : UU (l1 ⊔ l2)
   is-symmetric-Relation-Prop = is-symmetric (type-Relation-Prop R)
@@ -104,6 +133,31 @@ module _
   is-prop-is-symmetric-Relation-Prop =
     is-prop-iterated-Π 3
       ( λ x y r → is-prop-type-Relation-Prop R y x)
+```
+
+### The predicate of being a transitive relation
+
+A relation `R` on a type `A` is said to be **transitive** if it comes equipped
+with a function `(x y z : A) → R y z → R x y → R x z`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-transitive : UU (l1 ⊔ l2)
+  is-transitive = (x y z : A) → R y z → R x y → R x z
+```
+
+### The predicate of being a transitive relation valued in propositions
+
+A relation `R` on a type `A` valued in propositions is said to be \*\*transitive
+if its underlying relation is transitive.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
 
   is-transitive-Relation-Prop : UU (l1 ⊔ l2)
   is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
@@ -114,6 +168,59 @@ module _
       ( λ x y z →
         is-prop-function-type
           ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))
+```
+
+### The predicate of being an irreflexive relation
+
+A relation `R` on a type `A` is said to be **irreflexive** if it comes equipped
+with a function `(x : A) → ¬ (R x y)`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-irreflexive : UU (l1 ⊔ l2)
+  is-irreflexive = (x : A) → ¬ (R x x)
+```
+
+### The predicate of being an asymmetric relation
+
+A relation `R` on a type `A` is said to be **asymmetric** if it comes equipped
+with a function `(x y : A) → R x y → ¬ (R y x)`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-asymmetric : UU (l1 ⊔ l2)
+  is-asymmetric = (x y : A) → R x y → ¬ (R y x)
+```
+
+### The predicate of being an antisymmetric relation
+
+A relation `R` on a type `A` is said to be **antisymmetric** if it comes
+equipped with a function `(x y : A) → R x y → R y x → x ＝ y`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-antisymmetric : UU (l1 ⊔ l2)
+  is-antisymmetric = (x y : A) → R x y → R y x → x ＝ y
+```
+
+### The predicate of being an antisymmetric relation valued in propositions
+
+A relation `R` on a type `A` valued in propositions is said to be
+**antisymmetric** if its underlying relation is antisymmetric.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
 
   is-antisymmetric-Relation-Prop : UU (l1 ⊔ l2)
   is-antisymmetric-Relation-Prop = is-antisymmetric (type-Relation-Prop R)
@@ -215,6 +322,28 @@ module _
     relates-same-elements-Relation-Prop R S → (R ＝ S)
   eq-relates-same-elements-Relation-Prop S =
     map-inv-equiv (extensionality-Relation-Prop S)
+```
+
+### Asymmetric relations are irreflexive
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-irreflexive-is-asymmetric : is-asymmetric R → is-irreflexive R
+  is-irreflexive-is-asymmetric H x r = H x x r r
+```
+
+### Asymmetric relations are antisymmetric
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-antisymmetric-is-asymmetric : is-asymmetric R → is-antisymmetric R
+  is-antisymmetric-is-asymmetric H x y r s = ex-falso (H x y r s)
 ```
 
 ## See also

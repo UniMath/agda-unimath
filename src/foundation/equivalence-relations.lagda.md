@@ -661,9 +661,7 @@ module _
   where
 
   is-set-quotient-id-Id-equivalence-relation :
-    {l' : Level} →
     is-set-quotient
-      ( l')
       ( Id-equivalence-relation A)
       ( A)
       ( id-reflecting-map-Id-equivalence-relation A)

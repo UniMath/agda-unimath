@@ -16,8 +16,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.truncated-maps
 open import foundation.universe-levels
 
@@ -25,11 +27,11 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
+open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.truncation-levels
 ```
@@ -243,6 +245,56 @@ module _
   pr1 (emb-Σ D f g) = map-Σ D (map-emb f) (λ x → map-emb (g x))
   pr2 (emb-Σ D f g) =
     is-emb-map-Σ D (is-emb-map-emb f) (λ x → is-emb-map-emb (g x))
+```
+
+### Equivalence on total spaces induced by embedding on the base types
+
+We saw above that given an embedding `f : A ↪ B` and a type family `C` over `B`
+we obtain an embedding
+
+```text
+  Σ A (C ∘ f) ↪ Σ B C.
+```
+
+This embedding can be upgraded to an equivalence if we furthermore know that the
+support of `C` is contained in the image of `f`. More precisely, if we are given
+a section `((b , c) : Σ B C) → fiber f b`, then it follows that
+
+```text
+  Σ A (C ∘ f) ≃ Σ B C.
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} (f : A ↪ B)
+  (H : ((b , c) : Σ B C) → fiber (map-emb f) b)
+  where
+
+  inv-map-Σ-emb-base : Σ B C → Σ A (C ∘ map-emb f)
+  pr1 (inv-map-Σ-emb-base u) = pr1 (H u)
+  pr2 (inv-map-Σ-emb-base u) = inv-tr C (pr2 (H u)) (pr2 u)
+
+  is-section-inv-map-Σ-emb-base :
+    is-section (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base
+  is-section-inv-map-Σ-emb-base (b , c) =
+    ap
+      ( λ s → (pr1 s , inv-tr C (pr2 s) c))
+      ( eq-is-contr (is-torsorial-path' b))
+
+  is-retraction-inv-map-Σ-emb-base :
+    is-retraction (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base
+  is-retraction-inv-map-Σ-emb-base (a , c) =
+    ap
+      ( λ s → (pr1 s , inv-tr C (pr2 s) c))
+      ( eq-is-prop (is-prop-map-is-emb (pr2 f) (map-emb f a)))
+
+  equiv-Σ-emb-base : Σ A (C ∘ map-emb f) ≃ Σ B C
+  pr1 equiv-Σ-emb-base = map-Σ-map-base (map-emb f) C
+  pr2 equiv-Σ-emb-base =
+    is-equiv-is-invertible
+      inv-map-Σ-emb-base
+      is-section-inv-map-Σ-emb-base
+      is-retraction-inv-map-Σ-emb-base
 ```
 
 ### The product of two embeddings is an embedding
