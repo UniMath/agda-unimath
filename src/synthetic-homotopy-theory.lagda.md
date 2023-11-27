@@ -74,6 +74,7 @@ open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.sequential-diagrams public
+open import synthetic-homotopy-theory.sequentially-compact-types public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.sphere-prespectrum public

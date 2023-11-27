@@ -15,6 +15,7 @@ open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -170,6 +171,22 @@ module _
     f ∘ map-cocone-sequential-diagram A c n
   pr2 (cocone-map-sequential-diagram f) n =
     f ·l (coherence-triangle-cocone-sequential-diagram A c n)
+```
+
+### Postcomposition cocones under postcomposition sequential diagrams
+
+```agda
+module _
+  { l1 l2 l3 : Level} (X : UU l1) (A : sequential-diagram l2) {Y : UU l3}
+  ( c : cocone-sequential-diagram A Y)
+  where
+
+  cocone-postcomp-sequential-diagram :
+    cocone-sequential-diagram (postcomp-sequential-diagram X A) (X → Y)
+  pr1 cocone-postcomp-sequential-diagram n g x =
+    map-cocone-sequential-diagram A c n (g x)
+  pr2 cocone-postcomp-sequential-diagram n g =
+    eq-htpy (λ x → coherence-triangle-cocone-sequential-diagram A c n (g x))
 ```
 
 ## Properties
