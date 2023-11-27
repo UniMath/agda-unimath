@@ -84,6 +84,7 @@ open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public
 open import synthetic-homotopy-theory.triple-loop-spaces public
+open import synthetic-homotopy-theory.truncated-acyclic-types public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.universal-property-circle public
 open import synthetic-homotopy-theory.universal-property-coequalizers public
