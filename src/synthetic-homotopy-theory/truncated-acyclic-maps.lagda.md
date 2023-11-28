@@ -24,8 +24,8 @@ open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.truncation-equivalences
+open import foundation.truncation-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
@@ -278,7 +278,6 @@ module _
         is-emb-is-equiv
           ( is-equiv-precomp-is-truncation-equivalence k f e C))
 ```
-
 
 ## See also
 
