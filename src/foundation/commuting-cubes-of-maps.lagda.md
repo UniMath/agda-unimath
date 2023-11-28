@@ -38,7 +38,7 @@ that the cube is presented as a lattice
        |\ /   \ /|
        | \     / |
        |/ \   / \|
-       B    D'   C'
+       B    D'   C
         \   |   /
          \  |  /
           \ | /
