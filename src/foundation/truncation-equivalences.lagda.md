@@ -492,7 +492,7 @@ module _
     is-neg-two-connected-map f
   is-connected-map-is-truncation-equivalence-section (succ-𝕋 k) (s , h) e =
     is-connected-map-right-factor-is-succ-connected-map-right-factor f s
-      ( is-connected-map-is-equiv (f ∘ s) (is-equiv-htpy id h is-equiv-id))
+      ( is-connected-map-is-equiv (is-equiv-htpy id h is-equiv-id))
       ( is-connected-map-is-succ-truncation-equivalence s
         ( is-truncation-equivalence-right-factor f s
           ( is-truncation-equivalence-is-equiv

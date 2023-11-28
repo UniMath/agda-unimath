@@ -52,6 +52,13 @@ module _
 
 ### Associative composition operations in binary families of sets
 
+We give a slightly non-standard definition of associativity, requiring an
+associativity witness in each direction. This is of course redundant as `inv` is
+a [fibered involution](foundation.fibered-involutions.md) on
+[identity types](foundation-core.identity-types.md). However, by recording both
+directions we maintain a definitional double inverse law which is practical in
+defining the [opposite category](category-theory.opposite-categories.md).
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (hom-set : A → A → Set l2)
@@ -64,12 +71,86 @@ module _
     (h : type-Set (hom-set z w))
     (g : type-Set (hom-set y z))
     (f : type-Set (hom-set x y)) →
-    comp-hom (comp-hom h g) f ＝ comp-hom h (comp-hom g f)
+    ( comp-hom (comp-hom h g) f ＝ comp-hom h (comp-hom g f)) ×
+    ( comp-hom h (comp-hom g f) ＝ comp-hom (comp-hom h g) f)
 
   associative-composition-operation-binary-family-Set : UU (l1 ⊔ l2)
   associative-composition-operation-binary-family-Set =
     Σ ( composition-operation-binary-family-Set hom-set)
       ( is-associative-composition-operation-binary-family-Set)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (hom-set : A → A → Set l2)
+  (H : associative-composition-operation-binary-family-Set hom-set)
+  where
+
+  comp-hom-associative-composition-operation-binary-family-Set :
+    composition-operation-binary-family-Set hom-set
+  comp-hom-associative-composition-operation-binary-family-Set = pr1 H
+
+  witness-associative-composition-operation-binary-family-Set :
+    {x y z w : A}
+    (h : type-Set (hom-set z w))
+    (g : type-Set (hom-set y z))
+    (f : type-Set (hom-set x y)) →
+    ( comp-hom-associative-composition-operation-binary-family-Set
+      ( comp-hom-associative-composition-operation-binary-family-Set h g) (f)) ＝
+    ( comp-hom-associative-composition-operation-binary-family-Set
+      ( h) (comp-hom-associative-composition-operation-binary-family-Set g f))
+  witness-associative-composition-operation-binary-family-Set h g f =
+    pr1 (pr2 H h g f)
+
+  inv-witness-associative-composition-operation-binary-family-Set :
+    {x y z w : A}
+    (h : type-Set (hom-set z w))
+    (g : type-Set (hom-set y z))
+    (f : type-Set (hom-set x y)) →
+    ( comp-hom-associative-composition-operation-binary-family-Set
+      ( h) (comp-hom-associative-composition-operation-binary-family-Set g f)) ＝
+    ( comp-hom-associative-composition-operation-binary-family-Set
+      ( comp-hom-associative-composition-operation-binary-family-Set h g) (f))
+  inv-witness-associative-composition-operation-binary-family-Set h g f =
+    pr2 (pr2 H h g f)
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  (hom-set : A → A → Set l2)
+  (comp-hom : composition-operation-binary-family-Set hom-set)
+  where
+
+  is-associative-witness-associative-composition-operation-binary-family-Set :
+    ( {x y z w : A}
+      (h : type-Set (hom-set z w))
+      (g : type-Set (hom-set y z))
+      (f : type-Set (hom-set x y)) →
+      comp-hom (comp-hom h g) f ＝ comp-hom h (comp-hom g f)) →
+    is-associative-composition-operation-binary-family-Set hom-set comp-hom
+  pr1
+    ( is-associative-witness-associative-composition-operation-binary-family-Set
+        H h g f) =
+    H h g f
+  pr2
+    ( is-associative-witness-associative-composition-operation-binary-family-Set
+        H h g f) =
+    inv (H h g f)
+
+  is-associative-inv-witness-associative-composition-operation-binary-family-Set :
+    ( {x y z w : A}
+      (h : type-Set (hom-set z w))
+      (g : type-Set (hom-set y z))
+      (f : type-Set (hom-set x y)) →
+      comp-hom h (comp-hom g f) ＝ comp-hom (comp-hom h g) f) →
+    is-associative-composition-operation-binary-family-Set hom-set comp-hom
+  pr1
+    ( is-associative-inv-witness-associative-composition-operation-binary-family-Set
+        H h g f) =
+    inv (H h g f)
+  pr2
+    ( is-associative-inv-witness-associative-composition-operation-binary-family-Set
+        H h g f) =
+    H h g f
 ```
 
 ### Unital composition operations in binary families of sets
@@ -106,10 +187,15 @@ module _
       ( λ x y z w →
         is-prop-iterated-Π 3
           ( λ h g f →
-            is-set-type-Set
-              ( hom-set x w)
-              ( comp-hom (comp-hom h g) f)
-              ( comp-hom h (comp-hom g f))))
+            is-prop-prod
+              ( is-set-type-Set
+                ( hom-set x w)
+                ( comp-hom (comp-hom h g) f)
+                ( comp-hom h (comp-hom g f)))
+              ( is-set-type-Set
+                ( hom-set x w)
+                ( comp-hom h (comp-hom g f))
+                ( comp-hom (comp-hom h g) f))))
 
   is-associative-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
   pr1 is-associative-prop-composition-operation-binary-family-Set =

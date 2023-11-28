@@ -10,6 +10,7 @@ module ring-theory.precategory-of-semirings where
 open import category-theory.large-precategories
 open import category-theory.precategories
 
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import ring-theory.homomorphisms-semirings
@@ -44,6 +45,9 @@ id-hom-Large-Precategory
 associative-comp-hom-Large-Precategory
   Semiring-Large-Precategory {X = R} {S} {T} {U} =
   associative-comp-hom-Semiring R S T U
+inv-associative-comp-hom-Large-Precategory
+  Semiring-Large-Precategory {X = R} {S} {T} {U} =
+  inv-associative-comp-hom-Semiring R S T U
 left-unit-law-comp-hom-Large-Precategory
   Semiring-Large-Precategory {X = R} {S} =
   left-unit-law-comp-hom-Semiring R S

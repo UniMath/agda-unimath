@@ -406,8 +406,7 @@ module _
 
   abstract
     is-set-truncation-im-map-trunc-Set :
-      {l : Level} →
-      is-set-truncation l
+      is-set-truncation
         ( im-Set (trunc-Set B) (map-trunc-Set f))
         ( unit-im-map-trunc-Set)
     is-set-truncation-im-map-trunc-Set =

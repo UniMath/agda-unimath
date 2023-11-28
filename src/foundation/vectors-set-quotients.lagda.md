@@ -457,14 +457,14 @@ abstract
         is-retraction-inv-precomp-f
 
 is-set-quotient-vector-set-quotient :
-  { l l1 l2 : Level}
+  { l1 l2 : Level}
   ( n : ℕ)
   ( A : functional-vec (UU l1) n)
   ( R : (i : Fin n) → equivalence-relation l2 (A i)) →
-  ( is-set-quotient l
+  is-set-quotient
     ( all-sim-equivalence-relation n A R)
     ( set-quotient-vector-Set n A R)
-    ( reflecting-map-quotient-vector-map n A R))
+    ( reflecting-map-quotient-vector-map n A R)
 pr1 (is-set-quotient-vector-set-quotient n A R X) =
   section-precomp-vector-set-quotient n A R X
 pr2 (is-set-quotient-vector-set-quotient n A R X) =

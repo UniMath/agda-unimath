@@ -38,7 +38,7 @@ module _
   {l1 l2 l3 : Level}
   {A : UU l1} (R : equivalence-relation l2 A)
   (QR : Set l3) (f : reflecting-map-equivalence-relation R (type-Set QR))
-  (Uf : {l : Level} → is-set-quotient l R QR f)
+  (Uf : is-set-quotient R QR f)
   (eA : type-Set QR ≃ Fin 2) (h : A → A)
   (H : {x y : A} →
     sim-equivalence-relation R x y ↔ sim-equivalence-relation R (h x) (h y))

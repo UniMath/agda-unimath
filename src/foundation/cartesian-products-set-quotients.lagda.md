@@ -166,11 +166,10 @@ module _
           ( qb)))
 
   is-set-quotient-prod-set-quotient :
-    { l : Level} →
-    ( is-set-quotient l
-      (prod-equivalence-relation R S)
-      prod-set-quotient-Set
-      reflecting-map-prod-quotient-map)
+    is-set-quotient
+      ( prod-equivalence-relation R S)
+      ( prod-set-quotient-Set)
+      ( reflecting-map-prod-quotient-map)
   pr1 (pr1 (is-set-quotient-prod-set-quotient X)) =
     inv-precomp-set-quotient-prod-set-quotient X
   pr2 (pr1 (is-set-quotient-prod-set-quotient X)) =

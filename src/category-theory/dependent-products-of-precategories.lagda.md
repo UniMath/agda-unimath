@@ -64,11 +64,23 @@ module _
   associative-comp-hom-Π-Precategory h g f =
     eq-htpy (λ i → associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
 
+  inv-associative-comp-hom-Π-Precategory :
+    {x y z w : obj-Π-Precategory}
+    (h : hom-Π-Precategory z w)
+    (g : hom-Π-Precategory y z)
+    (f : hom-Π-Precategory x y) →
+    ( comp-hom-Π-Precategory h (comp-hom-Π-Precategory g f)) ＝
+    ( comp-hom-Π-Precategory (comp-hom-Π-Precategory h g) f)
+  inv-associative-comp-hom-Π-Precategory h g f =
+    eq-htpy (λ i → inv-associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
+
   associative-composition-operation-Π-Precategory :
     associative-composition-operation-binary-family-Set hom-set-Π-Precategory
   pr1 associative-composition-operation-Π-Precategory = comp-hom-Π-Precategory
-  pr2 associative-composition-operation-Π-Precategory =
-    associative-comp-hom-Π-Precategory
+  pr1 (pr2 associative-composition-operation-Π-Precategory h g f) =
+    associative-comp-hom-Π-Precategory h g f
+  pr2 (pr2 associative-composition-operation-Π-Precategory h g f) =
+    inv-associative-comp-hom-Π-Precategory h g f
 
   id-hom-Π-Precategory : {x : obj-Π-Precategory} → hom-Π-Precategory x x
   id-hom-Π-Precategory i = id-hom-Precategory (C i)

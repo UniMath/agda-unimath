@@ -333,12 +333,28 @@ module _
     (h : hom-Subcategory C P z w)
     (g : hom-Subcategory C P y z)
     (f : hom-Subcategory C P x y) →
-    ( comp-hom-Subcategory {x} {y} {w}
-      ( comp-hom-Subcategory {y} {z} {w} h g) f) ＝
-    ( comp-hom-Subcategory {x} {z} {w} h
-      ( comp-hom-Subcategory {x} {y} {z} g f))
+    comp-hom-Subcategory {x} {y} {w}
+      ( comp-hom-Subcategory {y} {z} {w} h g)
+      ( f) ＝
+    comp-hom-Subcategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Subcategory {x} {y} {z} g f)
   associative-comp-hom-Subcategory =
     associative-comp-hom-Subprecategory (precategory-Category C) P
+
+  inv-associative-comp-hom-Subcategory :
+    {x y z w : obj-Subcategory C P}
+    (h : hom-Subcategory C P z w)
+    (g : hom-Subcategory C P y z)
+    (f : hom-Subcategory C P x y) →
+    comp-hom-Subcategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Subcategory {x} {y} {z} g f) ＝
+    comp-hom-Subcategory {x} {y} {w}
+      ( comp-hom-Subcategory {y} {z} {w} h g)
+      ( f)
+  inv-associative-comp-hom-Subcategory =
+    inv-associative-comp-hom-Subprecategory (precategory-Category C) P
 
   left-unit-law-comp-hom-Subcategory :
     {x y : obj-Subcategory C P}

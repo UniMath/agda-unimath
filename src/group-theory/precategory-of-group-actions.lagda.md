@@ -11,6 +11,7 @@ open import category-theory.large-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.group-actions
@@ -53,6 +54,9 @@ module _
   associative-comp-hom-Large-Precategory
     action-Group-Large-Precategory {X = X} {Y} {Z} {W} =
     associative-comp-hom-action-Group G X Y Z W
+  inv-associative-comp-hom-Large-Precategory
+    action-Group-Large-Precategory {X = X} {Y} {Z} {W} =
+    inv-associative-comp-hom-action-Group G X Y Z W
   left-unit-law-comp-hom-Large-Precategory
     action-Group-Large-Precategory {X = X} {Y} =
     left-unit-law-comp-hom-action-Group G X Y

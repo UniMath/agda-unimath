@@ -70,7 +70,7 @@ module _
 
   universal-property-fiber :
     (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) → UUω
-  universal-property-fiber l f F δ =
+  universal-property-fiber f F δ =
     {l : Level} (P : B → UU l) → is-equiv (ev-fiber f F δ P)
 ```
 
@@ -140,7 +140,7 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B) (F : B → UU l3)
-  (δ : (a : A) → F (f a)) (u : {l : Level} → universal-property-fiber l f F δ)
+  (δ : (a : A) → F (f a)) (u : universal-property-fiber f F δ)
   (P : B → UU l4) (γ : (a : A) → P (f a))
   where
 
@@ -172,9 +172,9 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B) (F : B → UU l3)
-  (δ : (a : A) → F (f a)) (u : {l : Level} → universal-property-fiber l f F δ)
+  (δ : (a : A) → F (f a)) (u : universal-property-fiber f F δ)
   (P : B → UU l4) (γ : (a : A) → P (f a))
-  (u' : {l : Level} → universal-property-fiber l f P γ)
+  (u' : universal-property-fiber f P γ)
   where
 
   dependent-comp-retraction-fiberwise-map-universal-property-fiber-universal-property-fiber :

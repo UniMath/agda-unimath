@@ -32,8 +32,7 @@ category is the categorification of the [poset](order-theory.posets.md) of the
 ### The category of connected set bundles over the circle
 
 ```agda
-connected-set-bundle-𝕊¹-Large-Category :
-  Large-Category (λ l → lzero ⊔ lsuc l) (λ l1 l2 → l1 ⊔ l2)
+connected-set-bundle-𝕊¹-Large-Category : Large-Category (lsuc) (_⊔_)
 connected-set-bundle-𝕊¹-Large-Category =
   large-category-Full-Large-Subcategory
     ( Family-Of-Sets-Large-Category 𝕊¹)

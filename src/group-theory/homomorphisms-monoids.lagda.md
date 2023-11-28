@@ -226,15 +226,23 @@ module _
   where
 
   associative-comp-hom-Monoid :
-    (h : hom-Monoid M N)
-    (g : hom-Monoid L M)
-    (f : hom-Monoid K L) →
+    (h : hom-Monoid M N) (g : hom-Monoid L M) (f : hom-Monoid K L) →
     comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f ＝
     comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f)
   associative-comp-hom-Monoid h g f =
     eq-htpy-hom-Monoid K N
       ( comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f)
       ( comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f))
+      ( refl-htpy)
+
+  inv-associative-comp-hom-Monoid :
+    (h : hom-Monoid M N) (g : hom-Monoid L M) (f : hom-Monoid K L) →
+    comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f) ＝
+    comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f
+  inv-associative-comp-hom-Monoid h g f =
+    eq-htpy-hom-Monoid K N
+      ( comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f))
+      ( comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f)
       ( refl-htpy)
 ```
 

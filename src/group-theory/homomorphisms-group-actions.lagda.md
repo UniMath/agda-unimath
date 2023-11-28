@@ -236,24 +236,38 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (G : Group l1) (X1 : action-Group G l2)
-  (X2 : action-Group G l3) (X3 : action-Group G l4)
-  (X4 : action-Group G l5)
+  {l1 l2 l3 l4 l5 : Level} (G : Group l1)
+  (X1 : action-Group G l2) (X2 : action-Group G l3)
+  (X3 : action-Group G l4) (X4 : action-Group G l5)
+  (h : hom-action-Group G X3 X4)
+  (g : hom-action-Group G X2 X3)
+  (f : hom-action-Group G X1 X2)
   where
 
   associative-comp-hom-action-Group :
-    (h : hom-action-Group G X3 X4)
-    (g : hom-action-Group G X2 X3)
-    (f : hom-action-Group G X1 X2) →
     comp-hom-action-Group G X1 X2 X4 (comp-hom-action-Group G X2 X3 X4 h g) f ＝
     comp-hom-action-Group G X1 X3 X4 h (comp-hom-action-Group G X1 X2 X3 g f)
-  associative-comp-hom-action-Group h g f =
+  associative-comp-hom-action-Group =
     eq-htpy-hom-action-Group G X1 X4
       ( comp-hom-action-Group G X1 X2 X4
         ( comp-hom-action-Group G X2 X3 X4 h g)
         ( f))
-      ( comp-hom-action-Group G X1 X3 X4 h
+      ( comp-hom-action-Group G X1 X3 X4
+        ( h)
         ( comp-hom-action-Group G X1 X2 X3 g f))
+      ( refl-htpy)
+
+  inv-associative-comp-hom-action-Group :
+    comp-hom-action-Group G X1 X3 X4 h (comp-hom-action-Group G X1 X2 X3 g f) ＝
+    comp-hom-action-Group G X1 X2 X4 (comp-hom-action-Group G X2 X3 X4 h g) f
+  inv-associative-comp-hom-action-Group =
+    eq-htpy-hom-action-Group G X1 X4
+      ( comp-hom-action-Group G X1 X3 X4
+        ( h)
+        ( comp-hom-action-Group G X1 X2 X3 g f))
+      ( comp-hom-action-Group G X1 X2 X4
+        ( comp-hom-action-Group G X2 X3 X4 h g)
+        ( f))
       ( refl-htpy)
 ```
 

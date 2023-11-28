@@ -123,12 +123,28 @@ module _
     (h : hom-Full-Subprecategory z w)
     (g : hom-Full-Subprecategory y z)
     (f : hom-Full-Subprecategory x y) →
-    ( comp-hom-Full-Subprecategory {x} {y} {w}
-      ( comp-hom-Full-Subprecategory {y} {z} {w} h g) f) ＝
-    ( comp-hom-Full-Subprecategory {x} {z} {w} h
-      ( comp-hom-Full-Subprecategory {x} {y} {z} g f))
+    comp-hom-Full-Subprecategory {x} {y} {w}
+      ( comp-hom-Full-Subprecategory {y} {z} {w} h g)
+      ( f) ＝
+    comp-hom-Full-Subprecategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Full-Subprecategory {x} {y} {z} g f)
   associative-comp-hom-Full-Subprecategory =
     associative-comp-hom-Precategory C
+
+  inv-associative-comp-hom-Full-Subprecategory :
+    {x y z w : obj-Full-Subprecategory C P}
+    (h : hom-Full-Subprecategory z w)
+    (g : hom-Full-Subprecategory y z)
+    (f : hom-Full-Subprecategory x y) →
+    comp-hom-Full-Subprecategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Full-Subprecategory {x} {y} {z} g f) ＝
+    comp-hom-Full-Subprecategory {x} {y} {w}
+      ( comp-hom-Full-Subprecategory {y} {z} {w} h g)
+      ( f)
+  inv-associative-comp-hom-Full-Subprecategory =
+    inv-associative-comp-hom-Precategory C
 
   left-unit-law-comp-hom-Full-Subprecategory :
     {x y : obj-Full-Subprecategory C P}
@@ -155,8 +171,16 @@ module _
       hom-set-Full-Subprecategory
   pr1 associative-composition-operation-Full-Subprecategory {x} {y} {z} =
     comp-hom-Full-Subprecategory {x} {y} {z}
-  pr2 associative-composition-operation-Full-Subprecategory {x} {y} {z} {w} =
-    associative-comp-hom-Full-Subprecategory {x} {y} {z} {w}
+  pr1
+    ( pr2
+        associative-composition-operation-Full-Subprecategory
+          { x} {y} {z} {w} h g f) =
+    associative-comp-hom-Full-Subprecategory {x} {y} {z} {w} h g f
+  pr2
+    ( pr2
+        associative-composition-operation-Full-Subprecategory
+          { x} {y} {z} {w} h g f) =
+    inv-associative-comp-hom-Full-Subprecategory {x} {y} {z} {w} h g f
 
   is-unital-composition-operation-Full-Subprecategory :
     is-unital-composition-operation-binary-family-Set

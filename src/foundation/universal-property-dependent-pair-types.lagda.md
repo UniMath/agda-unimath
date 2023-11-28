@@ -38,6 +38,7 @@ module _
     pr1 (pr2 is-equiv-ev-pair) = ind-Σ
     pr2 (pr2 is-equiv-ev-pair) f = eq-htpy (ind-Σ (λ x y → refl))
 
+  abstract
     is-equiv-ind-Σ : is-equiv (ind-Σ {C = C})
     is-equiv-ind-Σ = is-equiv-is-section is-equiv-ev-pair refl-htpy
 
