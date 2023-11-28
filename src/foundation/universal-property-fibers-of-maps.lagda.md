@@ -1,4 +1,4 @@
-# The Universal Property of Fibers of Maps
+# The universal property of fibers of maps
 
 ```agda
 module foundation.universal-property-fibers-of-maps where
@@ -69,10 +69,9 @@ module _
   ev-fiber f F δ P h a = h (f a) (δ a)
 
   universal-property-fiber :
-    (l : Level) (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) →
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
+    (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) → UUω
   universal-property-fiber l f F δ =
-    (P : B → UU l) → is-equiv (ev-fiber f F δ P)
+    {l : Level} (P : B → UU l) → is-equiv (ev-fiber f F δ P)
 ```
 
 ## Properties
