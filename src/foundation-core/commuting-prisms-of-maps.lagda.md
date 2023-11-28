@@ -51,6 +51,11 @@ module _
 
 ### Vertical commuting prisms of maps
 
+Because triangular prisms are less symmetric than, say, cubes, we have more than
+one natural formulations for where to draw the "seems" for the filler. We
+present two choices, and show that they are equivalent in
+[`foundation.commuting-prisms-of-maps`](foundation.commuting-prisms-of-maps.md).
+
 ```agda
 module _
   { l1 l2 l3 l1' l2' l3' : Level}
@@ -59,18 +64,34 @@ module _
   { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
   ( f' : A' → C') (g' : B' → C') (h' : A' → B')
   ( hA : A → A') (hB : B → B') (hC : C → C')
-  ( top : coherence-triangle-maps f g h)
-  ( front : coherence-square-maps f hA hC f')
-  ( right : coherence-square-maps g hB hC g')
-  ( left : coherence-square-maps h hA hB h')
-  ( bottom : coherence-triangle-maps f' g' h')
   where
 
-  vertical-coherence-prism-maps : UU (l1 ⊔ l3')
-  vertical-coherence-prism-maps =
-    ( ( bottom ·r hA) ∙h
-      ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g'
-        ( left)
-        ( right))) ~
-    ( front ∙h (hC ·l top))
+  module _
+    ( top : coherence-triangle-maps f g h)
+    ( front : coherence-square-maps f hA hC f')
+    ( right : coherence-square-maps g hB hC g')
+    ( left : coherence-square-maps h hA hB h')
+    ( bottom : coherence-triangle-maps f' g' h')
+    where
+
+    vertical-coherence-prism-maps : UU (l1 ⊔ l3')
+    vertical-coherence-prism-maps =
+      ( ( bottom ·r hA) ∙h
+        ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g'
+          ( left)
+          ( right))) ~
+      ( front ∙h (hC ·l top))
+
+  module _
+    ( top : coherence-triangle-maps f g h)
+    ( inv-front : coherence-square-maps hA f f' hC)
+    ( inv-right : coherence-square-maps hB g g' hC)
+    ( left : coherence-square-maps h hA hB h')
+    ( bottom : coherence-triangle-maps f' g' h')
+    where
+
+    vertical-coherence-prism-maps' : UU (l1 ⊔ l3')
+    vertical-coherence-prism-maps' =
+      ( inv-front ∙h ((bottom ·r hA) ∙h (g' ·l left))) ~
+      ( (hC ·l top) ∙h (inv-right ·r h))
 ```

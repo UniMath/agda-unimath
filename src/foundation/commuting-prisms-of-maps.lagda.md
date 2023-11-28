@@ -9,13 +9,16 @@ open import foundation-core.commuting-prisms-of-maps public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.whiskering-homotopies
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.homotopies
+open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.identity-types
+open import foundation-core.functoriality-dependent-function-types
 ```
 
 ```agda
@@ -112,44 +115,61 @@ module _
   { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
   ( f' : A' → C') (g' : B' → C') (h' : A' → B')
   ( hA : A → A') (hB : B → B') (hC : C → C')
+  ( top : coherence-triangle-maps f g h)
+  ( inv-front : coherence-square-maps hA f f' hC)
+  ( inv-right : coherence-square-maps hB g g' hC)
+  ( left : coherence-square-maps h hA hB h')
+  ( bottom : coherence-triangle-maps f' g' h')
   where
 
-  [v] :
-    ( top : coherence-triangle-maps f g h)
-    ( inv-front : coherence-square-maps hA f f' hC)
-    ( inv-right : coherence-square-maps hB g g' hC)
-    ( left : coherence-square-maps h hA hB h')
-    ( bottom : coherence-triangle-maps f' g' h') →
-    ( ( inv-front ∙h ((bottom ·r hA) ∙h (g' ·l left))) ~
-      ( (hC ·l top) ∙h (inv-right ·r h))) →
+  equiv-rotate-vertical-coherence-prism-maps :
+    vertical-coherence-prism-maps' f g h f' g' h' hA hB hC
+      ( top)
+      ( inv-front)
+      ( inv-right)
+      ( left)
+      ( bottom) ≃
     vertical-coherence-prism-maps f g h f' g' h' hA hB hC
       ( top)
       ( inv-htpy inv-front)
       ( inv-htpy inv-right)
       ( left)
       ( bottom)
-  [v] top inv-front inv-right left bottom α a =
-    ( inv
-      ( assoc
-        ( bottom (hA a))
-        ( ap g' (left a))
-        ( inv (inv-right (h a))))) ∙
-    ( inv
-      ( right-transpose-eq-concat
-        ( inv (inv-front a) ∙ ap hC (top a))
-        ( inv-right (h a))
-        ( _)
-        ( inv
-          ( ( left-transpose-eq-concat
-              ( inv-front a)
-              ( bottom (hA a) ∙ ap g' (left a))
-              ( _)
-              ( α a)) ∙
-            ( inv
-              ( assoc
-                ( inv (inv-front a))
-                ( ap hC (top a))
-                ( inv-right (h a))))))))
+  equiv-rotate-vertical-coherence-prism-maps =
+    equiv-Π-equiv-family
+      ( λ a →
+        ( equiv-concat-assoc
+          ( bottom (hA a))
+          ( ap g' (left a))
+          ( inv (inv-right (h a))) _) ∘e
+        ( equiv-right-transpose-eq-concat' _
+          ( inv (inv-front a) ∙ ap hC (top a))
+          ( inv-right (h a))) ∘e
+        ( inv-equiv
+          ( equiv-concat-assoc' _
+            ( inv (inv-front a))
+            ( ap hC (top a))
+            ( inv-right (h a)))) ∘e
+        ( equiv-left-transpose-eq-concat
+          ( inv-front a)
+          ( bottom (hA a) ∙ ap g' (left a))
+          ( _)))
+
+  rotate-vertical-coherence-prism-maps :
+    vertical-coherence-prism-maps' f g h f' g' h' hA hB hC
+      ( top)
+      ( inv-front)
+      ( inv-right)
+      ( left)
+      ( bottom) →
+    vertical-coherence-prism-maps f g h f' g' h' hA hB hC
+      ( top)
+      ( inv-htpy inv-front)
+      ( inv-htpy inv-right)
+      ( left)
+      ( bottom)
+  rotate-vertical-coherence-prism-maps =
+    map-equiv equiv-rotate-vertical-coherence-prism-maps
 ```
 
 ```agda
