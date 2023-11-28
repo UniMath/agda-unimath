@@ -10,6 +10,8 @@ module synthetic-homotopy-theory.suspensions-of-types where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
+open import foundation.connected-types
+open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
@@ -22,7 +24,11 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -510,4 +516,75 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
       ( is-equiv-is-contr terminal-map is-contr-X is-contr-unit)
       ( up-pushout terminal-map terminal-map))
     ( is-contr-unit)
+```
+
+### Suspensions increase connectedness
+
+More precisely, the suspension of a `k`-connected type is `(k+1)`-connected.
+
+For the proof we use that a type `A` is `n`-connected if and only if the
+constant map `B → (A → B)` is an equivalence for all `n`-types `B`.
+
+So for any `(k+1)`-type `Y`, we have the commutative diagram
+
+```text
+                      const
+     Y -------------------------------->  (suspension X → Y)
+     ^                                            |
+ pr1 | ≃                                        ≃ | ev-suspension
+     |                                ≃           v
+  Σ Y (λ y → (Σ Y (λ y' → y ＝ y'))) <-- suspension-structure Y
+                                         ≡ Σ Y (λ y → (Σ Y (λ y' → X → y ＝ y')))
+```
+
+where the bottom map is induced by the equivalence `(y ＝ y') → (X → (y ＝ y'))`
+given by the fact that `X` is `k`-connected and `y ＝ y'` is a `k`-type.
+
+Since the left, bottom and right maps are equivalences, so is the top map, as
+desired.
+
+```agda
+module _
+  {l : Level} {k : 𝕋} {X : UU l}
+  where
+
+  is-equiv-north-suspension-ev-suspension-is-connected-Truncated-Type :
+    is-connected k X →
+    {l' : Level} (Y : Truncated-Type l' (succ-𝕋 k)) →
+    is-equiv
+      ( ( north-suspension-structure) ∘
+        ( ev-suspension
+          ( suspension-structure-suspension X)
+          ( type-Truncated-Type Y)))
+  is-equiv-north-suspension-ev-suspension-is-connected-Truncated-Type c Y =
+    is-equiv-comp
+      ( north-suspension-structure)
+      ( ev-suspension
+        ( suspension-structure-suspension X)
+        ( type-Truncated-Type Y))
+      ( is-equiv-ev-suspension
+        ( suspension-structure-suspension X)
+        ( up-pushout terminal-map terminal-map) (type-Truncated-Type Y))
+      ( is-equiv-pr1-is-contr
+        ( λ y →
+          is-torsorial-fiber-Id
+            ( λ y' →
+              ( const X (y ＝ y') ,
+                is-equiv-diagonal-is-connected (Id-Truncated-Type Y y y') c))))
+
+  is-succ-connected-suspension-is-connected :
+    is-connected k X → is-connected (succ-𝕋 k) (suspension X)
+  is-succ-connected-suspension-is-connected c =
+    is-connected-is-equiv-diagonal
+      ( λ Y →
+        is-equiv-right-factor
+          ( ( north-suspension-structure) ∘
+            ( ev-suspension
+              ( suspension-structure-suspension X)
+              ( type-Truncated-Type Y)))
+          ( const (suspension X) (type-Truncated-Type Y))
+          ( is-equiv-north-suspension-ev-suspension-is-connected-Truncated-Type
+              ( c)
+              ( Y))
+          ( is-equiv-id))
 ```
