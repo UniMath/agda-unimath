@@ -22,7 +22,7 @@ open import graph-theory.undirected-graphs
 ## Idea
 
 A
-{{#concept "closed walk" Agda=closed-walk-Undirected-Graph WDID=Q245595 WD="Cycle"}}
+{{#concept "closed walk" Agda=closed-walk-Undirected-Graph Disambiguation="undirected graph" WDID=Q245595 WD="Cycle"}}
 of length `k : ℕ` in an [undirected graph](graph-theory.undirected-graphs.md)
 `G` is a [morphism](graph-theory.morphisms-undirected-graphs.md) of graphs from
 a [`k`-gon](graph-theory.polygons.md) into `G`.
