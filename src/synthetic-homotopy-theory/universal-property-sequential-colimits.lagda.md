@@ -58,13 +58,18 @@ diagram
 
 ```agda
 module _
-  { l1 l2 : Level} (l : Level) (A : sequential-diagram l1) {X : UU l2}
+  { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X)
   where
 
-  universal-property-sequential-colimit : UU (l1 ⊔ l2 ⊔ lsuc l)
-  universal-property-sequential-colimit =
+  universal-property-sequential-colimit-Level :
+    ( l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  universal-property-sequential-colimit-Level l =
     ( Y : UU l) → is-equiv (cocone-map-sequential-diagram A c {Y = Y})
+
+  universal-property-sequential-colimit : UUω
+  universal-property-sequential-colimit =
+    {l : Level} → universal-property-sequential-colimit-Level l
 ```
 
 ### The map induced by the universal property of sequential colimits
@@ -76,7 +81,7 @@ providing a cocone under the sequential diagram.
 module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X) {Y : UU l3}
-  ( up-sequential-colimit : universal-property-sequential-colimit l3 A c)
+  ( up-sequential-colimit : universal-property-sequential-colimit A c)
   where
 
   map-universal-property-sequential-colimit :
@@ -93,7 +98,7 @@ module _
 module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X) {Y : UU l3}
-  ( up-sequential-colimit : universal-property-sequential-colimit l3 A c)
+  ( up-sequential-colimit : universal-property-sequential-colimit A c)
   ( c' : cocone-sequential-diagram A Y)
   where
 
@@ -151,8 +156,7 @@ module _
         ( bottom-map-cofork-cocone-sequential-diagram A)
         ( top-map-cofork-cocone-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)) →
-    ( {l : Level} →
-      universal-property-sequential-colimit l A c)
+    universal-property-sequential-colimit A c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
     ( Y) =
@@ -168,8 +172,7 @@ module _
       ( is-equiv-cocone-sequential-diagram-cofork A)
 
   universal-property-coequalizer-universal-property-sequential-colimit :
-    ( {l : Level} →
-      universal-property-sequential-colimit l A c) →
+    universal-property-sequential-colimit A c →
     ( {l : Level} →
       universal-property-coequalizer l
         ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -233,8 +236,8 @@ module _
 
   abstract
     is-equiv-universal-property-sequential-colimit-universal-property-sequential-colimit :
-      ( {l : Level} → universal-property-sequential-colimit l A c) →
-      ( {l : Level} → universal-property-sequential-colimit l A c') →
+      universal-property-sequential-colimit A c →
+      universal-property-sequential-colimit A c' →
       is-equiv h
     is-equiv-universal-property-sequential-colimit-universal-property-sequential-colimit
       ( up-sequential-colimit)
@@ -250,9 +253,9 @@ module _
             ( up-sequential-colimit' Z))
 
     universal-property-sequential-colimit-is-equiv-universal-property-sequential-colomit :
-      ( {l : Level} → universal-property-sequential-colimit l A c) →
+      universal-property-sequential-colimit A c →
       is-equiv h →
-      ( {l : Level} → universal-property-sequential-colimit l A c')
+      universal-property-sequential-colimit A c'
     universal-property-sequential-colimit-is-equiv-universal-property-sequential-colomit
       ( up-sequential-colimit)
       ( is-equiv-h)
@@ -267,8 +270,8 @@ module _
 
     universal-property-sequential-colimit-universal-property-sequential-colimit-is-equiv :
       is-equiv h →
-      ( {l : Level} → universal-property-sequential-colimit l A c') →
-      ( {l : Level} → universal-property-sequential-colimit l A c)
+      universal-property-sequential-colimit A c' →
+      universal-property-sequential-colimit A c
     universal-property-sequential-colimit-universal-property-sequential-colimit-is-equiv
       ( is-equiv-h)
       ( up-sequential-colimit)
@@ -289,10 +292,8 @@ module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2} {Y : UU l3}
   ( c : cocone-sequential-diagram A X)
   ( c' : cocone-sequential-diagram A Y)
-  ( up-sequential-diagram :
-    {l : Level} → universal-property-sequential-colimit l A c)
-  ( up-sequential-diagram' :
-    {l : Level} → universal-property-sequential-colimit l A c')
+  ( up-sequential-diagram : universal-property-sequential-colimit A c)
+  ( up-sequential-diagram' : universal-property-sequential-colimit A c')
   where
 
   abstract

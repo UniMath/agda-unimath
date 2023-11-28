@@ -74,8 +74,7 @@ module _
           ( top-map-cofork-cocone-sequential-diagram A))
 
     dup-standard-sequential-colimit :
-      { l2 : Level} →
-      dependent-universal-property-sequential-colimit l2 A
+      dependent-universal-property-sequential-colimit A
         ( cocone-standard-sequential-colimit)
     dup-standard-sequential-colimit =
       dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
@@ -86,9 +85,7 @@ module _
           ( top-map-cofork-cocone-sequential-diagram A))
 
     up-standard-sequential-colimit :
-      { l2 : Level} →
-      universal-property-sequential-colimit l2 A
-        ( cocone-standard-sequential-colimit)
+      universal-property-sequential-colimit A cocone-standard-sequential-colimit
     up-standard-sequential-colimit =
       universal-property-dependent-universal-property-sequential-colimit A
         ( cocone-standard-sequential-colimit)
