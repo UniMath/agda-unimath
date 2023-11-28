@@ -26,7 +26,7 @@ open import univalent-combinatorics.function-types
 
 Consider a family of [finite types](univalent-combinatorics.finite-types.md) `Y`
 indexed by a finite type `X`. The
-{{#concept "complete multipartite graph" Agda=complete-multipartite-Undirected-Graph-𝔽 WD="Multipartite graph" WDID=Q1718082}}
+{{#concept "complete multipartite graph" Agda=complete-multipartite-Undirected-Graph-𝔽 WD="multipartite graph" WDID=Q1718082}}
 at `Y` is the [finite undirected graph](graph-theory.finite-graphs.md)
 consisting of:
 
