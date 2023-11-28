@@ -77,6 +77,19 @@ module _
       ( ac)
 ```
 
+### Every `k`-connected type is `(k+1)`-acyclic
+
+```agda
+module _
+  {l : Level} {k : 𝕋} {A : UU l}
+  where
+
+  is-succ-truncated-acyclic-is-connected :
+    is-connected k A → is-truncated-acyclic (succ-𝕋 k) A
+  is-succ-truncated-acyclic-is-connected =
+    is-succ-connected-suspension-is-connected
+```
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
