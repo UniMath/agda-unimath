@@ -13,6 +13,10 @@ open import foundation-core.whiskering-homotopies
 open import foundation.universe-levels
 ```
 
+## Definitions
+
+### Horizontal commuting prisms of maps
+
 ```agda
 module _
   { l1 l2 l3 l4 l5 l6 : Level}
@@ -45,32 +49,28 @@ module _
       ( right ·r top))
 ```
 
+### Vertical commuting prisms of maps
+
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( top-left : A → B) (top-right : B → C) (top-front : A → C)
-  ( front-left : A → X) (back : B → Y) (front-right : C → Z)
-  ( bottom-left : X → Y) (bottom-right : Y → Z) (bottom-front : X → Z)
-  ( top : coherence-triangle-maps top-front top-right top-left)
-  ( left : coherence-square-maps top-left front-left back bottom-left)
-  ( right : coherence-square-maps top-right back front-right bottom-right)
-  ( front : coherence-square-maps top-front front-left front-right bottom-front)
-  ( bottom : coherence-triangle-maps bottom-front bottom-right bottom-left)
+  { l1 l2 l3 l1' l2' l3' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  ( f : A → C) (g : B → C) (h : A → B)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  ( f' : A' → C') (g' : B' → C') (h' : A' → B')
+  ( hA : A → A') (hB : B → B') (hC : C → C')
+  ( top : coherence-triangle-maps f g h)
+  ( front : coherence-square-maps f hA hC f')
+  ( right : coherence-square-maps g hB hC g')
+  ( left : coherence-square-maps h hA hB h')
+  ( bottom : coherence-triangle-maps f' g' h')
   where
 
-  vertical-coherence-prism-maps : UU (l1 ⊔ l6)
+  vertical-coherence-prism-maps : UU (l1 ⊔ l3')
   vertical-coherence-prism-maps =
-    ( ( bottom ·r front-left) ∙h
-      ( pasting-horizontal-coherence-square-maps
-        ( top-left)
-        ( top-right)
-        ( front-left)
-        ( back)
-        ( front-right)
-        ( bottom-left)
-        ( bottom-right)
+    ( ( bottom ·r hA) ∙h
+      ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g'
         ( left)
         ( right))) ~
-    ( front ∙h (front-right ·l top))
+    ( front ∙h (hC ·l top))
 ```

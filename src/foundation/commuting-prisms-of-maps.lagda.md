@@ -20,226 +20,136 @@ open import foundation-core.identity-types
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  { M : UU l7} {N : UU l8} {O : UU l9}
-  ( top-left : A → B) (top-right : B → C) (top-front : A → C)
-  ( front-left-top : A → X) (back-top : B → Y) (front-right-top : C → Z)
-  ( mid-left : X → Y) (mid-right : Y → Z) (mid-front : X → Z)
-  ( front-left-bottom : X → M) (back-bottom : Y → N)
-  ( front-right-bottom : Z → O)
-  ( bottom-left : M → N) (bottom-right : N → O) (bottom-front : M → O)
-  ( top : coherence-triangle-maps top-front top-right top-left)
-  ( left-top : coherence-square-maps top-left front-left-top back-top mid-left)
-  ( right-top :
-      coherence-square-maps top-right back-top front-right-top mid-right)
-  ( front-top :
-      coherence-square-maps top-front front-left-top front-right-top mid-front)
-  ( mid : coherence-triangle-maps mid-front mid-right mid-left)
-  ( left-bottom :
-      coherence-square-maps mid-left front-left-bottom back-bottom bottom-left)
-  ( right-bottom :
-      coherence-square-maps
-        ( mid-right)
-        ( back-bottom)
-        ( front-right-bottom)
-        ( bottom-right))
-  ( front-bottom :
-      coherence-square-maps
-        ( mid-front)
-        ( front-left-bottom)
-        ( front-right-bottom)
-        ( bottom-front))
-  ( bottom : coherence-triangle-maps bottom-front bottom-right bottom-left)
+  { l1 l2 l3 l1' l2' l3' l1'' l2'' l3'' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  ( f : A → C) (g : B → C) (h : A → B)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  ( f' : A' → C') (g' : B' → C') (h' : A' → B')
+  ( hA : A → A') (hB : B → B') (hC : C → C')
+  { A'' : UU l1''} {B'' : UU l2''} {C'' : UU l3''}
+  ( f'' : A'' → C'') (g'' : B'' → C'') (h'' : A'' → B'')
+  ( hA' : A' → A'') (hB' : B' → B'') (hC' : C' → C'')
+  ( top : coherence-triangle-maps f g h)
+  ( front-top : coherence-square-maps f hA hC f')
+  ( right-top : coherence-square-maps g hB hC g')
+  ( left-top : coherence-square-maps h hA hB h')
+  ( mid : coherence-triangle-maps f' g' h')
+  ( front-bottom : coherence-square-maps f' hA' hC' f'')
+  ( right-bottom : coherence-square-maps g' hB' hC' g'')
+  ( left-bottom : coherence-square-maps h' hA' hB' h'')
+  ( bottom : coherence-triangle-maps f'' g'' h'')
   where
 
   pasting-vertical-coherence-prism-maps :
-    vertical-coherence-prism-maps
-      ( top-left)
-      ( top-right)
-      ( top-front)
-      ( front-left-top)
-      ( back-top)
-      ( front-right-top)
-      ( mid-left)
-      ( mid-right)
-      ( mid-front)
+    vertical-coherence-prism-maps f g h f' g' h' hA hB hC
       ( top)
-      ( left-top)
-      ( right-top)
       ( front-top)
+      ( right-top)
+      ( left-top)
       ( mid) →
-    vertical-coherence-prism-maps
-      ( mid-left)
-      ( mid-right)
-      ( mid-front)
-      ( front-left-bottom)
-      ( back-bottom)
-      ( front-right-bottom)
-      ( bottom-left)
-      ( bottom-right)
-      ( bottom-front)
+    vertical-coherence-prism-maps f' g' h' f'' g'' h'' hA' hB' hC'
       ( mid)
-      ( left-bottom)
-      ( right-bottom)
       ( front-bottom)
+      ( right-bottom)
+      ( left-bottom)
       ( bottom) →
-    vertical-coherence-prism-maps
-      ( top-left)
-      ( top-right)
-      ( top-front)
-      ( front-left-bottom ∘ front-left-top)
-      ( back-bottom ∘ back-top)
-      ( front-right-bottom ∘ front-right-top)
-      ( bottom-left)
-      ( bottom-right)
-      ( bottom-front)
+    vertical-coherence-prism-maps f g h f'' g'' h''
+      ( hA' ∘ hA)
+      ( hB' ∘ hB)
+      ( hC' ∘ hC)
       ( top)
-      ( pasting-vertical-coherence-square-maps
-        ( top-left)
-        ( front-left-top)
-        ( back-top)
-        ( mid-left)
-        ( front-left-bottom)
-        ( back-bottom)
-        ( bottom-left)
-        ( left-top)
-        ( left-bottom))
-      ( pasting-vertical-coherence-square-maps
-        ( top-right)
-        ( back-top)
-        ( front-right-top)
-        ( mid-right)
-        ( back-bottom)
-        ( front-right-bottom)
-        ( bottom-right)
-        ( right-top)
-        ( right-bottom))
-      ( pasting-vertical-coherence-square-maps
-        ( top-front)
-        ( front-left-top)
-        ( front-right-top)
-        ( mid-front)
-        ( front-left-bottom)
-        ( front-right-bottom)
-        ( bottom-front)
+      ( pasting-vertical-coherence-square-maps f hA hC f' hA' hC' f''
         ( front-top)
         ( front-bottom))
+      ( pasting-vertical-coherence-square-maps g hB hC g' hB' hC' g''
+        ( right-top)
+        ( right-bottom))
+      ( pasting-vertical-coherence-square-maps h hA hB h' hA' hB' h''
+        ( left-top)
+        ( left-bottom))
       ( bottom)
   pasting-vertical-coherence-prism-maps prism-top prism-bottom =
     ( ap-concat-htpy
-      ( bottom ·r front-left-bottom ·r front-left-top)
+      ( bottom ·r hA' ·r hA)
       ( commutative-pasting-vertical-pasting-horizontal-coherence-square-maps
-        ( top-left)
-        ( top-right)
-        ( front-left-top)
-        ( back-top)
-        ( front-right-top)
-        ( mid-left)
-        ( mid-right)
-        ( front-left-bottom)
-        ( back-bottom)
-        ( front-right-bottom)
-        ( bottom-left)
-        ( bottom-right)
+        h g hA hB hC h' g' hA' hB' hC' h'' g''
         ( left-top)
         ( right-top)
         ( left-bottom)
         ( right-bottom))) ∙h
     ( right-whisk-square-htpy
-      ( front-bottom ·r front-left-top)
-      ( bottom ·r front-left-bottom ·r front-left-top)
-      ( ( front-right-bottom) ·l
-        ( (mid-right ·l left-top) ∙h (right-top ·r top-left)))
-      ( prism-bottom ·r front-left-top)) ∙h
+      ( front-bottom ·r hA)
+      ( bottom ·r hA' ·r hA)
+      ( hC' ·l ((g' ·l left-top) ∙h (right-top ·r h)))
+      ( prism-bottom ·r hA)) ∙h
     ( ap-concat-htpy
-      ( front-bottom ·r front-left-top)
+      ( front-bottom ·r hA)
       ( ( inv-htpy
-          ( distributive-left-whisk-concat-htpy
-            ( front-right-bottom)
-            ( mid ·r front-left-top)
-            ( pasting-horizontal-coherence-square-maps
-              ( top-left)
-              ( top-right)
-              ( front-left-top)
-              ( back-top)
-              ( front-right-top)
-              ( mid-left)
-              ( mid-right)
+          ( distributive-left-whisk-concat-htpy hC'
+            ( mid ·r hA)
+            ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g'
               ( left-top)
               ( right-top)))) ∙h
-        ( ap-left-whisk-htpy front-right-bottom prism-top) ∙h
-        ( distributive-left-whisk-concat-htpy
-          ( front-right-bottom)
-          ( front-top)
-          ( front-right-top ·l top)) ∙h
-        ap-concat-htpy
-          ( front-right-bottom ·l front-top)
+        ( ap-left-whisk-htpy hC' prism-top) ∙h
+        ( distributive-left-whisk-concat-htpy hC' front-top (hC ·l top)) ∙h
+        ( ap-concat-htpy
+          ( hC' ·l front-top)
           ( associative-left-whisk-comp
-            ( front-right-bottom)
-            ( front-right-top)
-            ( top)))) ∙h
+            ( hC')
+            ( hC)
+            ( top))))) ∙h
     ( inv-htpy-assoc-htpy
-      ( front-bottom ·r front-left-top)
-      ( front-right-bottom ·l front-top)
-      ( ( front-right-bottom ∘ front-right-top) ·l top))
+      ( front-bottom ·r hA)
+      ( hC' ·l front-top)
+      ( ( hC' ∘ hC) ·l top))
 ```
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( top-left : A → B) (top-right : B → C) (top-front : A → C)
-  ( front-left : A → X) (back : B → Y) (front-right : C → Z)
-  ( bottom-left : X → Y) (bottom-right : Y → Z) (bottom-front : X → Z)
+  { l1 l2 l3 l1' l2' l3' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  ( f : A → C) (g : B → C) (h : A → B)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  ( f' : A' → C') (g' : B' → C') (h' : A' → B')
+  ( hA : A → A') (hB : B → B') (hC : C → C')
   where
 
   [v] :
-    ( top : coherence-triangle-maps top-front top-right top-left)
-    ( left : coherence-square-maps top-left front-left back bottom-left)
-    ( inv-right : coherence-square-maps back top-right bottom-right front-right)
-    ( inv-front :
-        coherence-square-maps front-left top-front bottom-front front-right)
-    ( bottom : coherence-triangle-maps bottom-front bottom-right bottom-left) →
-    ( ( inv-front ∙h ((bottom ·r front-left) ∙h (bottom-right ·l left))) ~
-      ( (front-right ·l top) ∙h (inv-right ·r top-left))) →
-    vertical-coherence-prism-maps
-      ( top-left)
-      ( top-right)
-      ( top-front)
-      ( front-left)
-      ( back)
-      ( front-right)
-      ( bottom-left)
-      ( bottom-right)
-      ( bottom-front)
+    ( top : coherence-triangle-maps f g h)
+    ( inv-front : coherence-square-maps hA f f' hC)
+    ( inv-right : coherence-square-maps hB g g' hC)
+    ( left : coherence-square-maps h hA hB h')
+    ( bottom : coherence-triangle-maps f' g' h') →
+    ( ( inv-front ∙h ((bottom ·r hA) ∙h (g' ·l left))) ~
+      ( (hC ·l top) ∙h (inv-right ·r h))) →
+    vertical-coherence-prism-maps f g h f' g' h' hA hB hC
       ( top)
-      ( left)
-      ( inv-htpy inv-right)
       ( inv-htpy inv-front)
+      ( inv-htpy inv-right)
+      ( left)
       ( bottom)
-  [v] top left inv-right inv-front bottom α a =
+  [v] top inv-front inv-right left bottom α a =
     ( inv
       ( assoc
-        ( bottom (front-left a))
-        ( ap bottom-right (left a))
-        ( inv (inv-right (top-left a))))) ∙
+        ( bottom (hA a))
+        ( ap g' (left a))
+        ( inv (inv-right (h a))))) ∙
     ( inv
       ( right-transpose-eq-concat
-        ( inv (inv-front a) ∙ ap front-right (top a))
-        ( inv-right (top-left a))
+        ( inv (inv-front a) ∙ ap hC (top a))
+        ( inv-right (h a))
         ( _)
         ( inv
           ( ( left-transpose-eq-concat
               ( inv-front a)
-              ( bottom (front-left a) ∙ ap bottom-right (left a))
+              ( bottom (hA a) ∙ ap g' (left a))
               ( _)
               ( α a)) ∙
             ( inv
               ( assoc
                 ( inv (inv-front a))
-                ( ap front-right (top a))
-                ( inv-right (top-left a))))))))
+                ( ap hC (top a))
+                ( inv-right (h a))))))))
 ```
 
 ```agda
