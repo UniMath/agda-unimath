@@ -34,8 +34,7 @@ consisting of:
 - The finite set of vertices is the
   [coproduct type](univalent-combinatorics.coproduct-types.md) `X + Y`.
 - Given an [unordered pair](foundation.unordered-pairs.md) `f : I → X + Y` of
-  vertices, the finite type of edges on the unordered pair `(I , f)` is given
-  by
+  vertices, the finite type of edges on the unordered pair `(I , f)` is given by
 
   ```text
     (Σ (x : X), fiber f (inl x))  × (Σ (y : Y), fiber f (inr y)).
