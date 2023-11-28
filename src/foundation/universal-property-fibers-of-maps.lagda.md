@@ -72,6 +72,17 @@ module _
     (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) → UUω
   universal-property-fiber f F δ =
     {l : Level} (P : B → UU l) → is-equiv (ev-fiber f F δ P)
+
+  dependent-ev-fiber :
+    (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) {l4 : Level}
+    (P : (b : B) → F b → UU l4) → ((b : B) (z : F b) → P b z) →
+    (a : A) → P (f a) (δ a)
+  dependent-ev-fiber f F δ P h a = h (f a) (δ a)
+
+  dependent-universal-property-fiber :
+    (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) → UUω
+  dependent-universal-property-fiber f F δ =
+    {l : Level} (P : (b : B) → F b → UU l) → is-equiv (dependent-ev-fiber f F δ P)
 ```
 
 ## Properties

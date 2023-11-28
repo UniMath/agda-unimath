@@ -143,7 +143,7 @@ module _
 
   up-family-of-fibers :
     {l : Level} →
-    universal-property-fiber l f (fiber f) (section-family-of-fibers)
+    universal-property-fiber f (fiber f) (section-family-of-fibers)
   up-family-of-fibers P =
     is-equiv-map-equiv (equiv-up-family-of-fibers P)
 ```
