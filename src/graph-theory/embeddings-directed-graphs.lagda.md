@@ -20,8 +20,9 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-An **embedding of directed graphs** is a
-[morphism](graph-theory.morphisms-directed-graphs.md) `f : G → H` of
+An
+{{#concept "embedding of directed graphs" Agda={emb-Directed-Graph,is-emb-hom-Directed-Graph}}}
+is a [morphism](graph-theory.morphisms-directed-graphs.md) `f : G → H` of
 [directed graphs](graph-theory.directed-graphs.md) which is an
 [embedding](foundation.embeddings.md) on vertices such that for each pair
 `(x , y)` of vertices in `G` the map

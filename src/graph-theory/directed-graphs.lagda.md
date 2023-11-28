@@ -7,6 +7,7 @@ module graph-theory.directed-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
@@ -18,34 +19,46 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **directed graph** consists of a type of vertices equipped with a binary, type
-valued relation of edges. Alternatively, one can define a directed graph to
-consist of a type `V` of **vertices**, a type `E` of **edges**, and a map
-`E → V × V` determining the **source** and **target** of each edge.
+A
+{{#concept "directed graph" Agda={Directed-Graph,Directed-Graph'} WD="Directed graph" WDID=Q1137726}}
+consists of a type of **vertices** equipped with a
+[binary, type valued relation](foundation.binary-relations.md) of **edges**.
+Alternatively, one can define a directed graph to consist of a type `V` of
+vertices, a type `E` of edges, and a
+[pair](foundation-core.cartesian-product-types.md) of maps `s t : E → V`
+determining the **source** and **target** of each edge.
 
 To see that these two definitions are
 [equivalent](foundation-core.equivalences.md), recall that
-[$\Sigma$-types](foundation.dependent-pair-types.md) preserve equivalences and a
-type family $A \to U$ is equivalent to $\sum_{(C : U)} C \to A$ by
+[`Σ`-types](foundation.dependent-pair-types.md) preserve equivalences and a type
+family `A → 𝒰` is equivalent to `Σ (C : 𝒰), (C → A)` by
 [type duality](foundation.type-duality.md). Using these two observations we make
 the following calculation:
 
-$$
-\begin{equation}
-\begin{split}
-\sum_{(V\,:\,\mathcal{U})} (V \to V \to \mathcal{U}) & \simeq \sum_{(V\,:\,\mathcal{U})}
- (V \times V \to \mathcal{U}) \\
- &\simeq \sum_{(V,E\,:\,\mathcal{U})} (E \to (V \times V)) \\
-&\simeq  \sum_{(V,E\,:\,\mathcal{U})} ((E \to V) \times (E \to V))
-\end{split}
-\end{equation}
-$$
+```text
+  Σ (V : 𝒰), (V → V → 𝒰)
+  ≃ Σ (V : 𝒰), (V × V → 𝒰)
+  ≃ Σ (V E : 𝒰), E → V × V
+  ≃ Σ (V E : 𝒰), (E → V) × (E → V)
+```
+
+**Remark.** Our definition of directed graph is as general as possible: The
+types of vertices and edges are allowed to be arbitrary types. In particular,
+they are allowed to be infinite and they are not required to be
+[sets](foundation-core.sets.md). Furthermore, we don't require the type of edges
+`E v v` from a vertex `v` to itself to be
+[empty](foundation-core.empty-types.md). Many concepts in graph theory, such as
+the concept of being a [directed tree](trees.directed-trees.md) are definable in
+this general setting. For more specific kinds of graphs, such as finite graphs,
+simple graphs, or connected graphs, we always fully disambiguate.
 
 ## Definition
 
+### Directed graphs (main definition)
+
 ```agda
 Directed-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Directed-Graph l1 l2 = Σ (UU l1) (λ V → V → V → UU l2)
+Directed-Graph l1 l2 = Σ (UU l1) (Relation l2)
 
 module _
   {l1 l2 : Level} (G : Directed-Graph l1 l2)
@@ -54,7 +67,7 @@ module _
   vertex-Directed-Graph : UU l1
   vertex-Directed-Graph = pr1 G
 
-  edge-Directed-Graph : (x y : vertex-Directed-Graph) → UU l2
+  edge-Directed-Graph : Relation l2 vertex-Directed-Graph
   edge-Directed-Graph = pr2 G
 
   total-edge-Directed-Graph : UU (l1 ⊔ l2)
@@ -88,7 +101,7 @@ module _
     Σ vertex-Directed-Graph (edge-Directed-Graph x)
 ```
 
-### Alternative definition
+### Directed graphs (alternative definition)
 
 ```agda
 module alternative where
@@ -112,6 +125,13 @@ module alternative where
     target-edge-Directed-Graph : edge-Directed-Graph' -> vertex-Directed-Graph'
     target-edge-Directed-Graph = pr2 (pr2 (pr2 G))
 ```
+
+## Properties
+
+### The two definitions of directed graphs are equivalent
+
+In the following code we construct functions back and forth. The fact that these
+functions are mutual inverses remains to be formalized.
 
 ```agda
 module equiv {l1 l2 : Level} where

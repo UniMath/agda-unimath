@@ -20,14 +20,17 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An **edge-coloured undirected graph** is an
-[undirected graph](graph-theory.undirected-graphs.md) equipped with a family of
-maps `E p → X` from the edges at
+An
+{{#concept "edge-coloured undirected graph" Agda=Edge-Coloured-Undirected-Graph WD="Graph coloring" WDID=Q504843}}
+is an [undirected graph](graph-theory.undirected-graphs.md) equipped with a
+family of maps `E p → X` from the edges at
 [unordered pairs](foundation.unordered-pairs.md) `p` into a type `C` of colours,
 such that the induced map `incident-Undirected-Graph G x → C` is
 [injective](foundation.injective-maps.md) for each vertex `x`.
 
-## Definition
+## Definitions
+
+### Edge-coloured undirected graphs
 
 ```agda
 module _
