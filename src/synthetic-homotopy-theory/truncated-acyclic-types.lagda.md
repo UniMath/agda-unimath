@@ -87,7 +87,7 @@ module _
   is-truncated-succ-acyclic-is-connected :
     is-connected k A → is-truncated-acyclic (succ-𝕋 k) A
   is-truncated-succ-acyclic-is-connected =
-    is-succ-connected-suspension-is-connected
+    is-connected-succ-suspension-is-connected
 ```
 
 ## See also
