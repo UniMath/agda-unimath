@@ -43,6 +43,12 @@ module _
   is-prop-is-truncated-acyclic = is-prop-type-Prop is-truncated-acyclic-Prop
 ```
 
+We use the name `is-truncated-acyclic` instead of `is-truncation-acyclic`,
+because the latter, in line with
+[`is-truncation-equivalence`](foundation.truncation-equivalences.md), might
+suggest that it is the truncation of a type that is acyclic which is not the
+notion we're interested in.
+
 ## Properties
 
 ### Being `k`-acyclic is invariant under equivalence
