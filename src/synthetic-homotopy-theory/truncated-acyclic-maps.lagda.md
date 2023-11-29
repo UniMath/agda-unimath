@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.truncated-acyclic-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
@@ -17,9 +18,11 @@ open import foundation.embeddings
 open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
@@ -158,6 +161,58 @@ module _
             ( is-equiv-map-inv-left-unit-law-function-type
               ( type-Truncated-Type X))
             ( e X)))
+```
+
+### A type is `k`-acyclic if and only if the constant map from any identity type of any `k`-type is an equivalence
+
+More precisely, `A` is `k`-acyclic if and only if for all `k`-types `X` and
+elements `x,y : X`, the map
+
+```text
+ const : (x ＝ y) → (A → x ＝ y)
+```
+
+is an equivalence.
+
+```agda
+module _
+  {l : Level} {k : 𝕋} (A : UU l)
+  where
+
+  is-equiv-const-Id-is-acyclic-Truncated-Type :
+    is-truncated-acyclic k A →
+    {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
+    is-equiv (const A (x ＝ y))
+  is-equiv-const-Id-is-acyclic-Truncated-Type ac {X = X} x y =
+    is-equiv-htpy
+      ( htpy-eq ∘ ap (const A (type-Truncated-Type X)) {x} {y})
+      ( htpy-ap-diagonal-htpy-eq-diagonal-Id A x y)
+      ( is-equiv-comp
+        ( htpy-eq)
+        ( ap (const A (type-Truncated-Type X)))
+        ( is-emb-const-is-truncated-acyclic-Truncated-Type A ac X x y)
+        ( funext
+          ( const A (type-Truncated-Type X) x)
+          ( const A (type-Truncated-Type X) y)))
+
+  is-truncated-acyclic-is-equiv-const-Id-Truncated-Type :
+    ( {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
+      is-equiv (const A (x ＝ y))) →
+    is-truncated-acyclic k A
+  is-truncated-acyclic-is-equiv-const-Id-Truncated-Type h =
+    is-truncated-acyclic-is-emb-const-Truncated-Type A
+      ( λ X →
+        ( λ x y →
+          is-equiv-right-factor
+            ( htpy-eq)
+            ( ap (const A (type-Truncated-Type X)))
+            ( funext
+              ( const A (type-Truncated-Type X) x)
+              ( const A (type-Truncated-Type X) y))
+            ( is-equiv-htpy
+              ( const A (x ＝ y))
+              ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
+              ( h {X = X} x y))))
 ```
 
 ### A map is `k`-acyclic if and only if it is an [dependent `k`-epimorphism](foundation.dependent-epimorphisms-with-respect-to-truncated-types.md)
