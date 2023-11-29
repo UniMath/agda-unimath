@@ -27,6 +27,7 @@ open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.truncated-types
+open import foundation.truncation-equivalences
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
@@ -302,6 +303,35 @@ module _
       ( is-epimorphism-left-factor-Truncated-Type k g f
         ( is-epimorphism-is-truncated-acyclic-map-Truncated-Type (g ∘ f) ac)
         ( is-epimorphism-is-truncated-acyclic-map-Truncated-Type f af))
+```
+
+### Every `k`-connected map is `(k+1)`-acyclic
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-truncated-succ-acyclic-map-is-connected-map :
+    is-connected-map k f → is-truncated-acyclic-map (succ-𝕋 k) f
+  is-truncated-succ-acyclic-map-is-connected-map c b =
+    is-truncated-succ-acyclic-is-connected (c b)
+```
+
+### Every `k`-equivalence is `k`-acyclic
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-truncated-acyclic-map-is-truncation-equivalence :
+    is-truncation-equivalence k f → is-truncated-acyclic-map k f
+  is-truncated-acyclic-map-is-truncation-equivalence e =
+    is-truncated-acyclic-map-is-epimorphism-Truncated-Type f
+      ( λ C →
+        is-emb-is-equiv
+          ( is-equiv-precomp-is-truncation-equivalence k f e C))
 ```
 
 ## See also
