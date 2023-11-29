@@ -572,9 +572,9 @@ module _
               ( const X (y ＝ y') ,
                 is-equiv-diagonal-is-connected (Id-Truncated-Type Y y y') c))))
 
-  is-succ-connected-suspension-is-connected :
+  is-connected-succ-suspension-is-connected :
     is-connected k X → is-connected (succ-𝕋 k) (suspension X)
-  is-succ-connected-suspension-is-connected c =
+  is-connected-succ-suspension-is-connected c =
     is-connected-is-equiv-diagonal
       ( λ Y →
         is-equiv-right-factor

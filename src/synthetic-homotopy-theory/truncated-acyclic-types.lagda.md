@@ -84,9 +84,9 @@ module _
   {l : Level} {k : 𝕋} {A : UU l}
   where
 
-  is-succ-truncated-acyclic-is-connected :
+  is-truncated-succ-acyclic-is-connected :
     is-connected k A → is-truncated-acyclic (succ-𝕋 k) A
-  is-succ-truncated-acyclic-is-connected =
+  is-truncated-succ-acyclic-is-connected =
     is-succ-connected-suspension-is-connected
 ```
 
