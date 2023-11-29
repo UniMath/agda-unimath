@@ -82,7 +82,8 @@ module _
   dependent-universal-property-fiber :
     (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) → UUω
   dependent-universal-property-fiber f F δ =
-    {l : Level} (P : (b : B) → F b → UU l) → is-equiv (dependent-ev-fiber f F δ P)
+    {l : Level} (P : (b : B) → F b → UU l) →
+    is-equiv (dependent-ev-fiber f F δ P)
 ```
 
 ## Properties
@@ -268,7 +269,7 @@ module _
   uniquely-unique-fiberwise-map-universal-property-fiber :
     is-contr
       ( Σ (fiberwise-equiv F P)
-        ( λ h → (ev-fiber f F δ P (fiberwise-map-fiberwise-equiv h)) ~ γ))
+        ( λ h → (ev-fiber f F δ P (map-fiberwise-equiv h)) ~ γ))
   uniquely-unique-fiberwise-map-universal-property-fiber =
     is-torsorial-Eq-subtype
       ( uniqueness-fiberwise-map-universal-property-fiber f F δ u P γ)
@@ -279,7 +280,7 @@ module _
 
   section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber :
     Σ (fiberwise-equiv F P)
-      ( λ h → (ev-fiber f F δ P (fiberwise-map-fiberwise-equiv h)) ~ γ)
+      ( λ h → (ev-fiber f F δ P (map-fiberwise-equiv h)) ~ γ)
   section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber =
     center uniquely-unique-fiberwise-map-universal-property-fiber
 
@@ -295,7 +296,7 @@ module _
       ( F)
       ( δ)
       ( P)
-      ( fiberwise-map-fiberwise-equiv
+      ( map-fiberwise-equiv
         ( fiberwise-equiv-unique-fiberwise-map-universal-property-fiber))) ~
     ( γ)
   preserves-section-fiberwise-equiv-unique-fiberwise-map-universal-property-fiber =
