@@ -156,8 +156,8 @@ module _
 
 ### A type is acyclic if and only if the constant map from any identity type is an equivalence
 
-More precisely, `A` is acyclic if and only if for all types `X and elements `x,y
-: X``, the map
+More precisely, `A` is acyclic if and only if for all types `X` and elements
+`x,y : X`, the map
 
 ```text
  const : (x ＝ y) → (A → x ＝ y)
