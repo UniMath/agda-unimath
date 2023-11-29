@@ -164,8 +164,8 @@ module _
 
 ### A type is `k`-acyclic if and only if the constant map from any identity type of any `k`-type is an equivalence
 
-More precisely, `A` is `k`-acyclic if and only if for all `k`-types
-`X and elements `x,y : X``, the map
+More precisely, `A` is `k`-acyclic if and only if for all `k`-types `X` and
+elements `x,y : X`, the map
 
 ```text
  const : (x ＝ y) → (A → x ＝ y)
