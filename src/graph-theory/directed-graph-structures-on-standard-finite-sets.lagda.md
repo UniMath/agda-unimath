@@ -17,11 +17,42 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-## Definition
+## Idea
+
+A {{#concept "directed graph structure" WD="Directed graph" WDID=Q1137726}} on a
+[standard finite set](univalent-combinatorics.standard-finite-types.md) `Fin n`
+is a [binary type-valued relation](foundation.binary-relations.md)
+
+```text
+  Fin n → Fin n → 𝒰.
+```
+
+## Definitions
+
+### Directed graph structures on standard finite sets
 
 ```agda
-Directed-Graph-Fin : UU lzero
-Directed-Graph-Fin = Σ ℕ (λ V → Fin V → Fin V → ℕ)
+structure-directed-graph-Fin : (l : Level) (n : ℕ) → UU (lsuc l)
+structure-directed-graph-Fin l n = Fin n → Fin n → UU l
+```
+
+### Directed graphs on standard finite sets
+
+```agda
+Directed-Graph-Fin : (l : Level) → UU (lsuc l)
+Directed-Graph-Fin l = Σ ℕ (structure-directed-graph-Fin l)
+```
+
+### Labeled finite directed graphs on standard finite sets
+
+A
+{{#concept "labeled finite directed graph" Agda=Labeled-Finite-Directed-Graph}}
+consists of a [natural number](elementary-number-theory.natural-numbers.md) `n`
+and a map `Fin n → Fin n → ℕ`.
+
+```agda
+Labeled-Finite-Directed-Graph : UU lzero
+Labeled-Finite-Directed-Graph = Σ ℕ (λ n → Fin n → Fin n → ℕ)
 ```
 
 ## External links
