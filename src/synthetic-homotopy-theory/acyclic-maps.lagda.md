@@ -170,10 +170,10 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-equivalence-const-Id-is-acyclic :
+  is-equiv-const-Id-is-acyclic :
     is-acyclic A →
     {l' : Level} {X : UU l'} (x y : X) → is-equiv (const A (x ＝ y))
-  is-equivalence-const-Id-is-acyclic ac {X = X} x y =
+  is-equiv-const-Id-is-acyclic ac {X = X} x y =
     is-equiv-htpy
       ( htpy-eq ∘ ap (const A X) {x} {y})
       ( htpy-ap-const-htpy-eq-const-Id A x y)
@@ -183,10 +183,10 @@ module _
         ( is-emb-const-is-acyclic A ac X x y)
         ( funext (const A X x) (const A X y)))
 
-  is-acyclic-is-equivalence-const-Id :
+  is-acyclic-is-equiv-const-Id :
     ({l' : Level} {X : UU l'} (x y : X) → is-equiv (const A (x ＝ y))) →
     is-acyclic A
-  is-acyclic-is-equivalence-const-Id h =
+  is-acyclic-is-equiv-const-Id h =
     is-acyclic-is-emb-const A
       ( λ X →
         ( λ x y →

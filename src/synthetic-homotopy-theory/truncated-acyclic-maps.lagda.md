@@ -178,11 +178,11 @@ module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
 
-  is-equivalence-const-Id-is-acyclic-Truncated-Type :
+  is-equiv-const-Id-is-acyclic-Truncated-Type :
     is-truncated-acyclic k A →
     {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
     is-equiv (const A (x ＝ y))
-  is-equivalence-const-Id-is-acyclic-Truncated-Type ac {X = X} x y =
+  is-equiv-const-Id-is-acyclic-Truncated-Type ac {X = X} x y =
     is-equiv-htpy
       ( htpy-eq ∘ ap (const A (type-Truncated-Type X)) {x} {y})
       ( htpy-ap-const-htpy-eq-const-Id A x y)
@@ -194,11 +194,11 @@ module _
           ( const A (type-Truncated-Type X) x)
           ( const A (type-Truncated-Type X) y)))
 
-  is-truncated-acyclic-is-equivalence-const-Id-Truncated-Type :
+  is-truncated-acyclic-is-equiv-const-Id-Truncated-Type :
     ( {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
       is-equiv (const A (x ＝ y))) →
     is-truncated-acyclic k A
-  is-truncated-acyclic-is-equivalence-const-Id-Truncated-Type h =
+  is-truncated-acyclic-is-equiv-const-Id-Truncated-Type h =
     is-truncated-acyclic-is-emb-const-Truncated-Type A
       ( λ X →
         ( λ x y →
