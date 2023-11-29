@@ -163,17 +163,17 @@ pr1 (const-injection A B a) = const A B
 pr2 (const-injection A B a) = is-injective-const A B a
 ```
 
-### The action on identifications of the constant map is another constant map
+### The action on identifications of a diagonal map is another diagonal map
 
 ```agda
-htpy-const-Id-ap-const-htpy-eq :
+htpy-diagonal-Id-ap-diagonal-htpy-eq :
   {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
   htpy-eq ∘ ap (const A B) {x} {y} ~ const A (x ＝ y)
-htpy-const-Id-ap-const-htpy-eq A x y refl = refl
+htpy-diagonal-Id-ap-diagonal-htpy-eq A x y refl = refl
 
-htpy-ap-const-htpy-eq-const-Id :
+htpy-ap-diagonal-htpy-eq-diagonal-Id :
   {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
   const A (x ＝ y) ~ htpy-eq ∘ ap (const A B) {x} {y}
-htpy-ap-const-htpy-eq-const-Id A x y =
-  inv-htpy (htpy-const-Id-ap-const-htpy-eq A x y)
+htpy-ap-diagonal-htpy-eq-diagonal-Id A x y =
+  inv-htpy (htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
 ```
