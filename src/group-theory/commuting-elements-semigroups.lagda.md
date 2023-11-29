@@ -88,16 +88,16 @@ module _
     x * (y * z) ＝ y * (x * z)
   left-swap-commute-Semigroup x y z H =
     ( inv (associative-mul-Semigroup G _ _ _)) ∙
-    ( ( ap (_* z) H) ∙
-      ( associative-mul-Semigroup G _ _ _))
+    ( ap (_* z) H) ∙
+    ( associative-mul-Semigroup G _ _ _)
 
   right-swap-commute-Semigroup :
     (x y z : type-Semigroup G) → commute-Semigroup G y z →
     (x * y) * z ＝ (x * z) * y
   right-swap-commute-Semigroup x y z H =
     ( associative-mul-Semigroup G _ _ _) ∙
-    ( ( ap (x *_) H) ∙
-      ( inv (associative-mul-Semigroup G _ _ _)))
+    ( ap (x *_) H) ∙
+    ( inv (associative-mul-Semigroup G _ _ _))
 ```
 
 ### If `x` commutes with `y` and with `z`, then `x` commutes with `yz`

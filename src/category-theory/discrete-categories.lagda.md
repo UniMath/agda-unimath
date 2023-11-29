@@ -32,7 +32,8 @@ module _
   pr1 (pr2 discrete-precategory-Set) x y =
     set-Prop (x ＝ y , is-set-type-Set X x y)
   pr1 (pr1 (pr2 (pr2 discrete-precategory-Set))) = concat' _
-  pr2 (pr1 (pr2 (pr2 discrete-precategory-Set))) refl refl refl = refl
+  pr1 (pr2 (pr1 (pr2 (pr2 discrete-precategory-Set))) refl refl refl) = refl
+  pr2 (pr2 (pr1 (pr2 (pr2 discrete-precategory-Set))) refl refl refl) = refl
   pr1 (pr2 (pr2 (pr2 discrete-precategory-Set))) x = refl
   pr1 (pr2 (pr2 (pr2 (pr2 discrete-precategory-Set)))) _ = right-unit
   pr2 (pr2 (pr2 (pr2 (pr2 discrete-precategory-Set)))) _ = left-unit

@@ -9,7 +9,6 @@ module ring-theory.poset-of-left-ideals-rings where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.powersets
 open import foundation.propositions
@@ -161,7 +160,7 @@ module _
   preserves-order-subset-left-ideal-Ring I J H = H
 
   subset-left-ideal-hom-large-poset-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l → l)
       ( left-ideal-Ring-Large-Poset R)
       ( powerset-Large-Poset (type-Ring R))

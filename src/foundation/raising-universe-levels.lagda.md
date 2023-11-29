@@ -9,12 +9,17 @@ module foundation.raising-universe-levels where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
+open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 ```
@@ -122,4 +127,29 @@ module _
   equiv-raise : raise l3 A ≃ raise l4 B
   pr1 equiv-raise = map-equiv-raise
   pr2 equiv-raise = is-equiv-map-equiv-raise
+```
+
+### Raising universe levels from `l1` to `l ⊔ l1` is an embedding from `UU l1` to `UU (l ⊔ l1)`
+
+```agda
+abstract
+  is-emb-raise : (l : Level) {l1 : Level} → is-emb (raise l {l1})
+  is-emb-raise l {l1} =
+    is-emb-is-prop-map
+      ( λ X →
+        is-prop-is-proof-irrelevant
+          ( λ (A , p) →
+            is-contr-equiv
+              ( Σ (UU l1) (λ A' → A' ≃ A))
+              ( equiv-tot
+                ( λ A' →
+                  ( equiv-postcomp-equiv (inv-equiv (compute-raise l A)) A') ∘e
+                  ( equiv-precomp-equiv (compute-raise l A') (raise l A)) ∘e
+                  ( equiv-univalence) ∘e
+                  ( equiv-concat' (raise l A') (inv p))))
+              ( is-torsorial-equiv' A)))
+
+emb-raise : (l : Level) {l1 : Level} → UU l1 ↪ UU (l1 ⊔ l)
+pr1 (emb-raise l) = raise l
+pr2 (emb-raise l) = is-emb-raise l
 ```

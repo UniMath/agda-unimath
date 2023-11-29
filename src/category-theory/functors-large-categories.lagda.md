@@ -10,8 +10,6 @@ module category-theory.functors-large-categories where
 open import category-theory.functors-large-precategories
 open import category-theory.large-categories
 
-open import foundation.action-on-identifications-functions
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -21,7 +19,7 @@ open import foundation.universe-levels
 ## Idea
 
 A **functor** from a [large category](category-theory.large-categories.md) `C`
-to a large category `D` is just a
+to a large category `D` is a
 [functor](category-theory.functors-large-precategories.md) between the
 underlying [large precategories](category-theory.large-precategories.md) of `C`
 and `D`. In other words, functors of large categories consist of:

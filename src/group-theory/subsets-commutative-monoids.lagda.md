@@ -81,9 +81,9 @@ module _
 ### The condition that a subset contains the unit
 
 ```agda
-  contains-unit-subset-commutative-monoid-Prop : Prop l2
-  contains-unit-subset-commutative-monoid-Prop =
-    contains-unit-subset-monoid-Prop (monoid-Commutative-Monoid M) P
+  contains-unit-prop-subset-Commutative-Monoid : Prop l2
+  contains-unit-prop-subset-Commutative-Monoid =
+    contains-unit-prop-subset-Monoid (monoid-Commutative-Monoid M) P
 
   contains-unit-subset-Commutative-Monoid : UU l2
   contains-unit-subset-Commutative-Monoid =
@@ -93,9 +93,9 @@ module _
 ### The condition that a subset is closed under multiplication
 
 ```agda
-  is-closed-under-multiplication-subset-commutative-monoid-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-multiplication-subset-commutative-monoid-Prop =
-    is-closed-under-multiplication-subset-monoid-Prop
+  is-closed-under-multiplication-prop-subset-Commutative-Monoid : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-subset-Commutative-Monoid =
+    is-closed-under-multiplication-prop-subset-Monoid
       ( monoid-Commutative-Monoid M)
       ( P)
 

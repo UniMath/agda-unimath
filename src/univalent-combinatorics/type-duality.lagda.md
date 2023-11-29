@@ -17,6 +17,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.inhabited-types
+open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.structure
 open import foundation.structured-type-duality

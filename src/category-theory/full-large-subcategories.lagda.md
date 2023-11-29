@@ -8,6 +8,7 @@ module category-theory.full-large-subcategories where
 
 ```agda
 open import category-theory.full-large-subprecategories
+open import category-theory.functors-large-categories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
@@ -129,6 +130,26 @@ module _
       ( large-precategory-Large-Category C)
       ( P)
 
+  inv-associative-comp-hom-Full-Large-Subcategory :
+    {l1 l2 l3 l4 : Level}
+    (X : obj-Full-Large-Subcategory l1)
+    (Y : obj-Full-Large-Subcategory l2)
+    (Z : obj-Full-Large-Subcategory l3)
+    (W : obj-Full-Large-Subcategory l4)
+    (h : hom-Full-Large-Subcategory Z W)
+    (g : hom-Full-Large-Subcategory Y Z)
+    (f : hom-Full-Large-Subcategory X Y) →
+    comp-hom-Full-Large-Subcategory X Z W
+      ( h)
+      ( comp-hom-Full-Large-Subcategory X Y Z g f) ＝
+    comp-hom-Full-Large-Subcategory X Y W
+      ( comp-hom-Full-Large-Subcategory Y Z W h g)
+      ( f)
+  inv-associative-comp-hom-Full-Large-Subcategory =
+    inv-associative-comp-hom-Full-Large-Subprecategory
+      ( large-precategory-Large-Category C)
+      ( P)
+
   left-unit-law-comp-hom-Full-Large-Subcategory :
     {l1 l2 : Level}
     (X : obj-Full-Large-Subcategory l1)
@@ -202,4 +223,24 @@ module _
   is-large-category-Large-Category
     large-category-Full-Large-Subcategory =
     is-large-category-Full-Large-Subcategory
+```
+
+### The forgetful functor from a full large subcategory to the ambient large category
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
+  (C : Large-Category α β)
+  (P : Full-Large-Subcategory γ C)
+  where
+
+  forgetful-functor-Full-Large-Subcategory :
+    functor-Large-Category
+      ( λ l → l)
+      ( large-category-Full-Large-Subcategory C P)
+      ( C)
+  forgetful-functor-Full-Large-Subcategory =
+    forgetful-functor-Full-Large-Subprecategory
+      ( large-precategory-Large-Category C)
+      ( P)
 ```

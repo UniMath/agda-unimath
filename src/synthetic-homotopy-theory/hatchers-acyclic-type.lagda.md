@@ -28,7 +28,6 @@ open import foundation.universe-levels
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.eckmann-hilton-argument
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
@@ -94,7 +93,7 @@ hom-algebra-Hatcher-Acyclic-Type
                 ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
                   ( ap
                     ( power-nat-Ω 2 B)
-                    ( ( preserves-mul-map-Ω f a1 a2) ∙
+                    ( ( preserves-mul-map-Ω f) ∙
                       ( horizontal-concat-Id² u v))))
                 ( s2)))))
 ```

@@ -129,7 +129,7 @@ map-power-nat-Ω :
   map-Ω f (power-nat-Ω n A ω) ＝ power-nat-Ω n B (map-Ω f ω)
 map-power-nat-Ω zero-ℕ {A} {B} f ω = preserves-refl-map-Ω f
 map-power-nat-Ω (succ-ℕ n) {A} {B} f ω =
-  ( preserves-mul-map-Ω f (power-nat-Ω n A ω) ω) ∙
+  ( preserves-mul-map-Ω f) ∙
   ( ap
     ( concat' (point-Pointed-Type B) (map-Ω f ω))
     ( map-power-nat-Ω n f ω))

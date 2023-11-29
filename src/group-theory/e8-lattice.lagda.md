@@ -27,5 +27,5 @@ The E₈ lattice itself is a subset of the following set.
 ```agda
 ambient-set-E8-lattice : Set lzero
 ambient-set-E8-lattice =
-  coprod-Set (hom-Set (Fin-Set 8) ℤ-Set) (hom-Set (Fin-Set 8) ℤ-Set)
+  coprod-Set (hom-set-Set (Fin-Set 8) ℤ-Set) (hom-set-Set (Fin-Set 8) ℤ-Set)
 ```

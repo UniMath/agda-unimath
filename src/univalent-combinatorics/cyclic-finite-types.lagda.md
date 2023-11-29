@@ -561,13 +561,13 @@ preserves-comp-Eq-equiv-Cyclic-Type k e f =
       ( zero-ℤ-Mod k)))
 
 preserves-concat-equiv-compute-Ω-Cyclic-Type :
-  (k : ℕ) (p q : type-Ω (Cyclic-Type-Pointed-Type k)) →
+  (k : ℕ) {p q : type-Ω (Cyclic-Type-Pointed-Type k)} →
   Id
     ( map-equiv (equiv-compute-Ω-Cyclic-Type k) (p ∙ q))
     ( add-ℤ-Mod k
       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) p)
       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) q))
-preserves-concat-equiv-compute-Ω-Cyclic-Type k p q =
+preserves-concat-equiv-compute-Ω-Cyclic-Type k {p} {q} =
   ( ap
     ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
     ( preserves-concat-equiv-eq-Cyclic-Type k
@@ -604,8 +604,8 @@ pr2 (concrete-group-Cyclic-Type k) = is-set-type-Ω-Cyclic-Type k
 equiv-Ω-Cyclic-Type-Group :
   (k : ℕ) → equiv-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
 pr1 (equiv-Ω-Cyclic-Type-Group k) = equiv-compute-Ω-Cyclic-Type k
-pr2 (equiv-Ω-Cyclic-Type-Group k) =
-  preserves-concat-equiv-compute-Ω-Cyclic-Type k
+pr2 (equiv-Ω-Cyclic-Type-Group k) {x} {y} =
+  preserves-concat-equiv-compute-Ω-Cyclic-Type k {x} {y}
 
 iso-Ω-Cyclic-Type-Group :
   (k : ℕ) → iso-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)

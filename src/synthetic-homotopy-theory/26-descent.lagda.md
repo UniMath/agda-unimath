@@ -24,11 +24,11 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
@@ -422,7 +422,7 @@ cone-family-dependent-pullback-property f g c P γ =
 is-pullback-cone-family-dependent-pullback-property :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →
-  ((l : Level) → pullback-property-pushout l f g c) →
+  ({l : Level} → pullback-property-pushout l f g c) →
   {l : Level} (P : X → UU l) (γ : X → X) →
   is-pullback
     ( ( tr (fam-lifts S P) (eq-htpy (γ ·l (pr2 (pr2 c))))) ∘
@@ -438,7 +438,7 @@ is-pullback-cone-family-dependent-pullback-property {S = S} {A} {B} {X}
     ( precompose-lifts P g)
     ( cone-pullback-property-pushout f g c X)
     ( cone-family-dependent-pullback-property f g c P)
-    ( pb-c _ X)
+    ( pb-c X)
     ( is-pullback-top-is-pullback-bottom-cube-is-equiv
       ( precomp i (Σ X P))
       ( precomp j (Σ X P))
@@ -463,16 +463,16 @@ is-pullback-cone-family-dependent-pullback-property {S = S} {A} {B} {X}
       ( is-equiv-map-inv-distributive-Π-Σ)
       ( is-equiv-map-inv-distributive-Π-Σ)
       ( is-equiv-map-inv-distributive-Π-Σ)
-      ( pb-c _ (Σ X P)))
+      ( pb-c (Σ X P)))
 
 dependent-pullback-property-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →
-  ((l : Level) → pullback-property-pushout l f g c) →
-  ((l : Level) → dependent-pullback-property-pushout l f g c)
+  ({l : Level} → pullback-property-pushout l f g c) →
+  ({l : Level} → dependent-pullback-property-pushout l f g c)
 dependent-pullback-property-pullback-property-pushout
   {S = S} {A} {B} {X}
-  f g (pair i (pair j H)) pullback-c l P =
+  f g (pair i (pair j H)) pullback-c P =
   let c = pair i (pair j H) in
   is-pullback-htpy'
     -- ( (tr (fam-lifts S P) (eq-htpy (id ·l H))) ∘ (precompose-lifts P f i))
@@ -495,13 +495,12 @@ We give some further useful implications.
 dependent-universal-property-universal-property-pushout :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X) →
-  ( (l : Level) → universal-property-pushout l f g c) →
-  ( (l : Level) → dependent-universal-property-pushout l f g c)
+  ( {l : Level} → universal-property-pushout l f g c) →
+  ( {l : Level} → dependent-universal-property-pushout l f g c)
 dependent-universal-property-universal-property-pushout f g c up-X =
   dependent-universal-property-dependent-pullback-property-pushout f g c
     ( dependent-pullback-property-pullback-property-pushout f g c
-      ( λ l → pullback-property-pushout-universal-property-pushout l f g c
-        ( up-X l)))
+      ( pullback-property-pushout-universal-property-pushout f g c up-X))
 ```
 
 ## Section 16.2 Families over pushouts
@@ -687,7 +686,7 @@ triangle-desc-fam {l = l} {S} {A} {B} {X} (pair i (pair j H)) P =
 is-equiv-desc-fam :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  ((l' : Level) → universal-property-pushout l' f g c) →
+  ({l' : Level} → universal-property-pushout l' f g c) →
   is-equiv (desc-fam {l = l} {f = f} {g} c)
 is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
   is-equiv-left-map-triangle
@@ -695,13 +694,13 @@ is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
     ( Fam-pushout-cocone-UU l)
     ( cocone-map f g c)
     ( triangle-desc-fam c)
-    ( up-c (lsuc l) (UU l))
+    ( up-c (UU l))
     ( is-equiv-Fam-pushout-cocone-UU l)
 
 equiv-desc-fam :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  ((l' : Level) → universal-property-pushout l' f g c) →
+  ({l' : Level} → universal-property-pushout l' f g c) →
   (X → UU l) ≃ Fam-pushout l f g
 equiv-desc-fam c up-c =
   pair
@@ -715,7 +714,7 @@ equiv-desc-fam c up-c =
 uniqueness-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →
-  ((l' : Level) → universal-property-pushout l' f g c) →
+  ({l' : Level} → universal-property-pushout l' f g c) →
   ( P : Fam-pushout l f g) →
   is-contr
     ( Σ (X → UU l) (λ Q →
@@ -731,7 +730,7 @@ uniqueness-Fam-pushout {l = l} f g c up-c P =
 fam-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  (up-X : (l' : Level) → universal-property-pushout l' f g c) →
+  (up-X : {l' : Level} → universal-property-pushout l' f g c) →
   Fam-pushout l f g → (X → UU l)
 fam-Fam-pushout {f = f} {g} c up-X P =
   pr1 (center (uniqueness-Fam-pushout f g c up-X P))
@@ -739,7 +738,7 @@ fam-Fam-pushout {f = f} {g} c up-X P =
 is-section-fam-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  (up-X : (l' : Level) → universal-property-pushout l' f g c) →
+  (up-X : {l' : Level} → universal-property-pushout l' f g c) →
   ((desc-fam {l = l} c) ∘ (fam-Fam-pushout c up-X)) ~ id
 is-section-fam-Fam-pushout {f = f} {g} c up-X P =
   inv
@@ -748,7 +747,7 @@ is-section-fam-Fam-pushout {f = f} {g} c up-X P =
 compute-left-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l' : Level) → universal-property-pushout l' f g c) →
+  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
   ( P : Fam-pushout l f g) →
   ( a : A) → (pr1 P a) ≃ (fam-Fam-pushout c up-X P (pr1 c a))
 compute-left-fam-Fam-pushout {f = f} {g} c up-X P =
@@ -757,7 +756,7 @@ compute-left-fam-Fam-pushout {f = f} {g} c up-X P =
 compute-right-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l' : Level) → universal-property-pushout l' f g c) →
+  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
   ( P : Fam-pushout l f g) →
   ( b : B) → (pr1 (pr2 P) b) ≃ (fam-Fam-pushout c up-X P (pr1 (pr2 c) b))
 compute-right-fam-Fam-pushout {f = f} {g} c up-X P =
@@ -766,7 +765,7 @@ compute-right-fam-Fam-pushout {f = f} {g} c up-X P =
 compute-path-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l' : Level) → universal-property-pushout l' f g c) →
+  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
   ( P : Fam-pushout l f g) →
   ( s : S) →
     ( ( map-equiv (compute-right-fam-Fam-pushout c up-X P (g s))) ∘

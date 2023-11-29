@@ -51,26 +51,28 @@ module _
   pr2 contains-unit-intersection-Subgroup = contains-unit-Subgroup G K
 
   is-closed-under-multiplication-intersection-Subgroup :
-    (x y : type-Group G) →
+    {x y : type-Group G} →
     is-in-intersection-Subgroup x →
     is-in-intersection-Subgroup y →
     is-in-intersection-Subgroup (mul-Group G x y)
   pr1
     ( is-closed-under-multiplication-intersection-Subgroup
-        x y (pH , pK) (qH , qK)) =
-    is-closed-under-multiplication-Subgroup G H x y pH qH
+      ( pH , pK)
+      ( qH , qK)) =
+    is-closed-under-multiplication-Subgroup G H pH qH
   pr2
     ( is-closed-under-multiplication-intersection-Subgroup
-        x y (pH , pK) (qH , qK)) =
-    is-closed-under-multiplication-Subgroup G K x y pK qK
+      ( pH , pK)
+      ( qH , qK)) =
+    is-closed-under-multiplication-Subgroup G K pK qK
 
   is-closed-under-inverses-intersection-Subgroup :
-    (x : type-Group G) →
+    {x : type-Group G} →
     is-in-intersection-Subgroup x → is-in-intersection-Subgroup (inv-Group G x)
-  pr1 (is-closed-under-inverses-intersection-Subgroup x (pH , pK)) =
-    is-closed-under-inverses-Subgroup G H x pH
-  pr2 (is-closed-under-inverses-intersection-Subgroup x (pH , pK)) =
-    is-closed-under-inverses-Subgroup G K x pK
+  pr1 (is-closed-under-inverses-intersection-Subgroup (pH , pK)) =
+    is-closed-under-inverses-Subgroup G H pH
+  pr2 (is-closed-under-inverses-intersection-Subgroup (pH , pK)) =
+    is-closed-under-inverses-Subgroup G K pK
 
   is-subgroup-intersection-Subgroup :
     is-subgroup-subset-Group G subset-intersection-Subgroup
@@ -109,15 +111,14 @@ module _
   is-closed-under-multiplication-intersection-family-of-subgroups-Group :
     is-closed-under-multiplication-subset-Group G
       subset-intersection-family-of-subgroups-Group
-  is-closed-under-multiplication-intersection-family-of-subgroups-Group
-    x y p q i =
-    is-closed-under-multiplication-Subgroup G (H i) x y (p i) (q i)
+  is-closed-under-multiplication-intersection-family-of-subgroups-Group p q i =
+    is-closed-under-multiplication-Subgroup G (H i) (p i) (q i)
 
   is-closed-under-inverses-intersection-family-of-subgroups-Group :
     is-closed-under-inverses-subset-Group G
       subset-intersection-family-of-subgroups-Group
-  is-closed-under-inverses-intersection-family-of-subgroups-Group x p i =
-    is-closed-under-inverses-Subgroup G (H i) x (p i)
+  is-closed-under-inverses-intersection-family-of-subgroups-Group p i =
+    is-closed-under-inverses-Subgroup G (H i) (p i)
 
   is-subgroup-intersection-family-of-subgroups-Group :
     is-subgroup-subset-Group G subset-intersection-family-of-subgroups-Group

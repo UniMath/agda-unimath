@@ -12,6 +12,7 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-epimorphisms
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.epimorphisms
 open import foundation.equivalences
@@ -19,6 +20,8 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type

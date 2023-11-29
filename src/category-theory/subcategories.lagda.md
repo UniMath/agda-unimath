@@ -25,7 +25,6 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -38,7 +37,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **subcategory** of a [category](category-theory.categories.md) `C` is simply a
+A **subcategory** of a [category](category-theory.categories.md) `C` is a
 [subprecategory](category-theory.subprecategories.md). It consists of a
 [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`, and a family
 of subtypes
@@ -334,12 +333,28 @@ module _
     (h : hom-Subcategory C P z w)
     (g : hom-Subcategory C P y z)
     (f : hom-Subcategory C P x y) →
-    ( comp-hom-Subcategory {x} {y} {w}
-      ( comp-hom-Subcategory {y} {z} {w} h g) f) ＝
-    ( comp-hom-Subcategory {x} {z} {w} h
-      ( comp-hom-Subcategory {x} {y} {z} g f))
+    comp-hom-Subcategory {x} {y} {w}
+      ( comp-hom-Subcategory {y} {z} {w} h g)
+      ( f) ＝
+    comp-hom-Subcategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Subcategory {x} {y} {z} g f)
   associative-comp-hom-Subcategory =
     associative-comp-hom-Subprecategory (precategory-Category C) P
+
+  inv-associative-comp-hom-Subcategory :
+    {x y z w : obj-Subcategory C P}
+    (h : hom-Subcategory C P z w)
+    (g : hom-Subcategory C P y z)
+    (f : hom-Subcategory C P x y) →
+    comp-hom-Subcategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Subcategory {x} {y} {z} g f) ＝
+    comp-hom-Subcategory {x} {y} {w}
+      ( comp-hom-Subcategory {y} {z} {w} h g)
+      ( f)
+  inv-associative-comp-hom-Subcategory =
+    inv-associative-comp-hom-Subprecategory (precategory-Category C) P
 
   left-unit-law-comp-hom-Subcategory :
     {x y : obj-Subcategory C P}

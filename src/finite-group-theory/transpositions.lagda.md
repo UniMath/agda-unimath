@@ -35,7 +35,6 @@ open import foundation.injective-maps
 open import foundation.involutions
 open import foundation.logical-equivalences
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions

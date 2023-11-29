@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
@@ -19,7 +20,6 @@ open import foundation.towers
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -137,6 +137,19 @@ module _
   cone-map-tower : cone-tower A X → (Y → X) → cone-tower A Y
   pr1 (cone-map-tower c f) n x = map-cone-tower A c n (f x)
   pr2 (cone-map-tower c f) n x = coherence-cone-tower A c n (f x)
+```
+
+### Postcomposition cones over postcomposition towers
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : UU l1) (A : tower l2) {Y : UU l3} (c : cone-tower A Y)
+  where
+
+  cone-postcomp-tower :
+    cone-tower (postcomp-tower X A) (X → Y)
+  pr1 cone-postcomp-tower n g x = map-cone-tower A c n (g x)
+  pr2 cone-postcomp-tower n g = eq-htpy (λ x → coherence-cone-tower A c n (g x))
 ```
 
 ## Table of files about sequential limits

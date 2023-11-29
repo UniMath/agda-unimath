@@ -25,7 +25,7 @@ open import ring-theory.rings
 
 ## Idea
 
-A **homomorphism** of [cyclic rings](ring-theory.cyclic-rings.md) is simply a
+A **homomorphism** of [cyclic rings](ring-theory.cyclic-rings.md) is a
 [ring homomorphism](ring-theory.homomorphisms-rings.md) between their underlying
 [rings](ring-theory.rings.md).
 
@@ -200,6 +200,19 @@ module _
     comp-hom-Cyclic-Ring R T U h (comp-hom-Cyclic-Ring R S T g f)
   associative-comp-hom-Cyclic-Ring =
     associative-comp-hom-Ring
+      ( ring-Cyclic-Ring R)
+      ( ring-Cyclic-Ring S)
+      ( ring-Cyclic-Ring T)
+      ( ring-Cyclic-Ring U)
+
+  inv-associative-comp-hom-Cyclic-Ring :
+    (h : hom-Cyclic-Ring T U)
+    (g : hom-Cyclic-Ring S T)
+    (f : hom-Cyclic-Ring R S) →
+    comp-hom-Cyclic-Ring R T U h (comp-hom-Cyclic-Ring R S T g f) ＝
+    comp-hom-Cyclic-Ring R S U (comp-hom-Cyclic-Ring S T U h g) f
+  inv-associative-comp-hom-Cyclic-Ring =
+    inv-associative-comp-hom-Ring
       ( ring-Cyclic-Ring R)
       ( ring-Cyclic-Ring S)
       ( ring-Cyclic-Ring T)

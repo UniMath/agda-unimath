@@ -24,7 +24,10 @@ open import group-theory.subsets-groups
 
 ## Idea
 
-The full subset of a group is a normal subgroup.
+The **full subgroup** of a [group](group-theory.groups.md) `G` is the
+[subgroup](group-theory.subgroups.md) consisting of all elements of the group
+`G`. In other words, the full subgroup is the subgroup whose underlying subset
+is the [full subset](foundation.full-subtypes.md) of the group.
 
 ## Definition
 
@@ -64,21 +67,24 @@ contains-unit-full-Subgroup G = is-in-full-subtype (unit-Group G)
 is-closed-under-multiplication-full-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
   is-closed-under-multiplication-subset-Group G (subset-full-Subgroup l2 G)
-is-closed-under-multiplication-full-Subgroup G x y _ _ =
+is-closed-under-multiplication-full-Subgroup G {x} {y} _ _ =
   is-in-full-subtype (mul-Group G x y)
 
 is-closed-under-inverses-full-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
   is-closed-under-inverses-subset-Group G (subset-full-Subgroup l2 G)
-is-closed-under-inverses-full-Subgroup G x _ =
+is-closed-under-inverses-full-Subgroup G {x} _ =
   is-in-full-subtype (inv-Group G x)
 
 full-Subgroup : {l1 : Level} (l2 : Level) (G : Group l1) → Subgroup l2 G
-pr1 (full-Subgroup l2 G) = subset-full-Subgroup l2 G
-pr1 (pr2 (full-Subgroup l2 G)) = contains-unit-full-Subgroup G
-pr1 (pr2 (pr2 (full-Subgroup l2 G))) =
-  is-closed-under-multiplication-full-Subgroup G
-pr2 (pr2 (pr2 (full-Subgroup l2 G))) = is-closed-under-inverses-full-Subgroup G
+pr1 (full-Subgroup l2 G) =
+  subset-full-Subgroup l2 G
+pr1 (pr2 (full-Subgroup l2 G)) =
+  contains-unit-full-Subgroup G
+pr1 (pr2 (pr2 (full-Subgroup l2 G))) {x} {y} =
+  is-closed-under-multiplication-full-Subgroup G {x} {y}
+pr2 (pr2 (pr2 (full-Subgroup l2 G))) {x} =
+  is-closed-under-inverses-full-Subgroup G {x}
 
 module _
   {l1 l2 : Level} (G : Group l1)
@@ -103,13 +109,14 @@ module _
 
   preserves-mul-inclusion-full-Subgroup :
     preserves-mul-Group group-full-Subgroup G inclusion-full-Subgroup
-  preserves-mul-inclusion-full-Subgroup =
-    preserves-mul-inclusion-Subgroup G (full-Subgroup l2 G)
+  preserves-mul-inclusion-full-Subgroup {x} {y} =
+    preserves-mul-inclusion-Subgroup G (full-Subgroup l2 G) {x} {y}
 
   equiv-group-inclusion-full-Subgroup : equiv-Group group-full-Subgroup G
-  pr1 equiv-group-inclusion-full-Subgroup = equiv-inclusion-full-Subgroup
-  pr2 equiv-group-inclusion-full-Subgroup =
-    preserves-mul-inclusion-full-Subgroup
+  pr1 equiv-group-inclusion-full-Subgroup =
+    equiv-inclusion-full-Subgroup
+  pr2 equiv-group-inclusion-full-Subgroup {x} {y} =
+    preserves-mul-inclusion-full-Subgroup {x} {y}
 
   iso-full-Subgroup : iso-Group group-full-Subgroup G
   iso-full-Subgroup =

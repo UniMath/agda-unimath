@@ -9,6 +9,7 @@ module foundation.equality-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.families-of-equivalences
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

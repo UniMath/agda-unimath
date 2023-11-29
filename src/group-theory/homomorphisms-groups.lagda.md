@@ -9,7 +9,6 @@ module group-theory.homomorphisms-groups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -178,19 +177,32 @@ module _
 ### Associativity of composition of group homomorphisms
 
 ```agda
-associative-comp-hom-Group :
+module _
   {l1 l2 l3 l4 : Level}
   (G : Group l1) (H : Group l2) (K : Group l3) (L : Group l4)
-  (h : hom-Group K L) (g : hom-Group H K) (f : hom-Group G H) →
-  Id
-    ( comp-hom-Group G H L (comp-hom-Group H K L h g) f)
-    ( comp-hom-Group G K L h (comp-hom-Group G H K g f))
-associative-comp-hom-Group G H K L =
-  associative-comp-hom-Semigroup
-    ( semigroup-Group G)
-    ( semigroup-Group H)
-    ( semigroup-Group K)
-    ( semigroup-Group L)
+  where
+
+  associative-comp-hom-Group :
+    (h : hom-Group K L) (g : hom-Group H K) (f : hom-Group G H) →
+    comp-hom-Group G H L (comp-hom-Group H K L h g) f ＝
+    comp-hom-Group G K L h (comp-hom-Group G H K g f)
+  associative-comp-hom-Group =
+    associative-comp-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( semigroup-Group K)
+      ( semigroup-Group L)
+
+  inv-associative-comp-hom-Group :
+    (h : hom-Group K L) (g : hom-Group H K) (f : hom-Group G H) →
+    comp-hom-Group G K L h (comp-hom-Group G H K g f) ＝
+    comp-hom-Group G H L (comp-hom-Group H K L h g) f
+  inv-associative-comp-hom-Group =
+    inv-associative-comp-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( semigroup-Group K)
+      ( semigroup-Group L)
 ```
 
 ### The left and right unit laws for composition of group homomorphisms
@@ -228,29 +240,25 @@ module _
       ( f : hom-Group G H) → preserves-unit-Group (map-hom-Group G H f)
     preserves-unit-hom-Group f =
       ( inv (left-unit-law-mul-Group H (map-hom-Group G H f (unit-Group G)))) ∙
-      ( ( ap
-          ( λ x → mul-Group H x (map-hom-Group G H f (unit-Group G)))
-          ( inv
-            ( left-inverse-law-mul-Group H
-              ( map-hom-Group G H f (unit-Group G))))) ∙
-        ( ( associative-mul-Group H
+      ( ap
+        ( λ x → mul-Group H x (map-hom-Group G H f (unit-Group G)))
+        ( inv
+          ( left-inverse-law-mul-Group H
+            ( map-hom-Group G H f (unit-Group G))))) ∙
+      ( associative-mul-Group H
+        ( inv-Group H (map-hom-Group G H f (unit-Group G)))
+        ( map-hom-Group G H f (unit-Group G))
+        ( map-hom-Group G H f (unit-Group G))) ∙
+      ( ap
+        ( mul-Group H (inv-Group H (map-hom-Group G H f (unit-Group G))))
+        ( inv (preserves-mul-hom-Group G H f))) ∙
+      ( ap
+        ( λ x →
+          mul-Group H
             ( inv-Group H (map-hom-Group G H f (unit-Group G)))
-            ( map-hom-Group G H f (unit-Group G))
-            ( map-hom-Group G H f (unit-Group G))) ∙
-          ( ( ap
-              ( mul-Group H (inv-Group H (map-hom-Group G H f (unit-Group G))))
-              ( inv
-                ( preserves-mul-hom-Group G H f
-                  ( unit-Group G)
-                  ( unit-Group G)))) ∙
-            ( ( ap
-                ( λ x →
-                  mul-Group H
-                    ( inv-Group H (map-hom-Group G H f (unit-Group G)))
-                    ( map-hom-Group G H f x))
-                ( left-unit-law-mul-Group G (unit-Group G))) ∙
-              ( left-inverse-law-mul-Group H
-                ( map-hom-Group G H f (unit-Group G)))))))
+            ( map-hom-Group G H f x))
+        ( left-unit-law-mul-Group G (unit-Group G))) ∙
+      ( left-inverse-law-mul-Group H (map-hom-Group G H f (unit-Group G)))
 ```
 
 ### Group homomorphisms preserve inverses
@@ -263,37 +271,36 @@ module _
   preserves-inverses-Group :
     (type-Group G → type-Group H) → UU (l1 ⊔ l2)
   preserves-inverses-Group f =
-    (x : type-Group G) → Id (f (inv-Group G x)) (inv-Group H (f x))
+    {x : type-Group G} → Id (f (inv-Group G x)) (inv-Group H (f x))
 
   abstract
     preserves-inv-hom-Group :
       (f : hom-Group G H) → preserves-inverses-Group (map-hom-Group G H f)
-    preserves-inv-hom-Group f x =
+    preserves-inv-hom-Group f {x} =
       ( inv
         ( right-unit-law-mul-Group H (map-hom-Group G H f (inv-Group G x)))) ∙
-      ( ( ap
-          ( mul-Group H (map-hom-Group G H f (inv-Group G x)))
-          ( inv (right-inverse-law-mul-Group H (map-hom-Group G H f x)))) ∙
-        ( ( inv
-            ( associative-mul-Group H
-              ( map-hom-Group G H f (inv-Group G x))
-              ( map-hom-Group G H f x)
-              ( inv-Group H (map-hom-Group G H f x)))) ∙
-          ( ( inv
-              ( ap
-                ( λ y → mul-Group H y (inv-Group H (map-hom-Group G H f x)))
-                ( preserves-mul-hom-Group G H f (inv-Group G x) x))) ∙
-            ( ( ap
-                ( λ y →
-                  mul-Group H
-                    ( map-hom-Group G H f y)
-                    ( inv-Group H (map-hom-Group G H f x)))
-                ( left-inverse-law-mul-Group G x)) ∙
-              ( ( ap
-                  ( λ y → mul-Group H y (inv-Group H (map-hom-Group G H f x)))
-                  ( preserves-unit-hom-Group G H f)) ∙
-                ( left-unit-law-mul-Group H
-                  ( inv-Group H (map-hom-Group G H f x))))))))
+      ( ap
+        ( mul-Group H (map-hom-Group G H f (inv-Group G x)))
+        ( inv (right-inverse-law-mul-Group H (map-hom-Group G H f x)))) ∙
+      ( inv
+        ( associative-mul-Group H
+          ( map-hom-Group G H f (inv-Group G x))
+          ( map-hom-Group G H f x)
+          ( inv-Group H (map-hom-Group G H f x)))) ∙
+      ( inv
+        ( ap
+          ( λ y → mul-Group H y (inv-Group H (map-hom-Group G H f x)))
+          ( preserves-mul-hom-Group G H f))) ∙
+      ( ap
+        ( λ y →
+          mul-Group H
+            ( map-hom-Group G H f y)
+            ( inv-Group H (map-hom-Group G H f x)))
+        ( left-inverse-law-mul-Group G x)) ∙
+      ( ap
+        ( λ y → mul-Group H y (inv-Group H (map-hom-Group G H f x)))
+        ( preserves-unit-hom-Group G H f)) ∙
+      ( left-unit-law-mul-Group H (inv-Group H (map-hom-Group G H f x)))
 ```
 
 ### Group homomorphisms preserve all group structure
@@ -343,14 +350,14 @@ module _
     map-hom-Group G H f (left-div-Group G x y) ＝
     left-div-Group H (map-hom-Group G H f x) (map-hom-Group G H f y)
   preserves-left-div-hom-Group =
-    ( preserves-mul-hom-Group G H f _ _) ∙
-    ( ap (mul-Group' H _) (preserves-inv-hom-Group G H f _))
+    ( preserves-mul-hom-Group G H f) ∙
+    ( ap (mul-Group' H _) (preserves-inv-hom-Group G H f))
 
   preserves-right-div-hom-Group :
     {x y : type-Group G} →
     map-hom-Group G H f (right-div-Group G x y) ＝
     right-div-Group H (map-hom-Group G H f x) (map-hom-Group G H f y)
   preserves-right-div-hom-Group =
-    ( preserves-mul-hom-Group G H f _ _) ∙
-    ( ap (mul-Group H _) (preserves-inv-hom-Group G H f _))
+    ( preserves-mul-hom-Group G H f) ∙
+    ( ap (mul-Group H _) (preserves-inv-hom-Group G H f))
 ```

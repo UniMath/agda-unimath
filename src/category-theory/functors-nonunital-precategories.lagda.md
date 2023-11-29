@@ -10,20 +10,12 @@ module category-theory.functors-nonunital-precategories where
 open import category-theory.functors-set-magmoids
 open import category-theory.maps-set-magmoids
 open import category-theory.nonunital-precategories
-open import category-theory.set-magmoids
 
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
 

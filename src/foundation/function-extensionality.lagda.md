@@ -13,10 +13,13 @@ open import foundation.dependent-pair-types
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
+open import foundation-core.precomposition-functions
 ```
 
 </details>
@@ -159,14 +162,60 @@ module _
 
 ## Properties
 
-### Naturality of `htpy-eq`
+### Naturality of `htpy-eq` for dependent functions
+
+Consider a map `f : A → B` and two dependent functions `g h : (b : B) → C b`.
+Then the square
+
+```text
+                     ap (precomp-Π f C)
+       (g ＝ h) ---------------------------> (g ∘ f ＝ h ∘ f)
+          |                                         |
+  htpy-eq |                                         | htpy-eq
+          V                                         V
+       (g ~ h) ----------------------------> (g ∘ f ~ h ∘ f)
+                precomp-Π f (eq-value g h)
+```
+
+[commutes](foundation-core.commuting-squares-of-maps.md).
+
+```agda
+coherence-square-ap-precomp-Π :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
+  (g h : (b : B) → C b) →
+  coherence-square-maps
+    ( ap (precomp-Π f C) {g} {h})
+    ( htpy-eq)
+    ( htpy-eq)
+    ( precomp-Π f (eq-value g h))
+coherence-square-ap-precomp-Π f g .g refl = refl
+```
+
+### Naturality of `htpy-eq` for ordinary functions
+
+Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
+
+```text
+                     ap (precomp f C)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          V                                       V
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                precomp f (eq-value g h)
+```
+
+commutes.
 
 ```agda
 square-htpy-eq :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) →
-  ( g h : B → C) →
-  ( (λ (p : (y : B) → g y ＝ h y) (x : A) → p (f x)) ∘ htpy-eq) ~
-  ( htpy-eq ∘ (ap (precomp f C)))
+  (g h : B → C) →
+  coherence-square-maps
+    ( ap (precomp f C))
+    ( htpy-eq)
+    ( htpy-eq)
+    ( precomp-Π f (eq-value g h))
 square-htpy-eq f g .g refl = refl
 ```
 

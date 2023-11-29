@@ -11,7 +11,6 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-systems

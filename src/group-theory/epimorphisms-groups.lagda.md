@@ -42,15 +42,15 @@ module _
   (H : Group l2) (f : hom-Group G H)
   where
 
-  is-epi-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-epi-Group-Prop =
+  is-epi-prop-hom-Group : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-epi-prop-hom-Group =
     is-epi-prop-Large-Precategory Group-Large-Precategory l3 G H f
 
-  is-epi-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-epi-Group = type-Prop is-epi-Group-Prop
+  is-epi-hom-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  is-epi-hom-Group = type-Prop is-epi-prop-hom-Group
 
-  is-prop-is-epi-Group : is-prop is-epi-Group
-  is-prop-is-epi-Group = is-prop-type-Prop is-epi-Group-Prop
+  is-prop-is-epi-hom-Group : is-prop is-epi-hom-Group
+  is-prop-is-epi-hom-Group = is-prop-type-Prop is-epi-prop-hom-Group
 ```
 
 ## Properties
@@ -63,7 +63,7 @@ module _
   (H : Group l2) (f : iso-Group G H)
   where
 
-  is-epi-iso-Group : is-epi-Group l3 G H (hom-iso-Group G H f)
+  is-epi-iso-Group : is-epi-hom-Group l3 G H (hom-iso-Group G H f)
   is-epi-iso-Group =
     is-epi-iso-Large-Precategory Group-Large-Precategory l3 G H f
 ```

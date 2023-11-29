@@ -35,6 +35,8 @@ open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
 open import foundation-core.negation public
 open import foundation-core.path-split-maps public
+open import foundation-core.precomposition-dependent-functions public
+open import foundation-core.precomposition-functions public
 open import foundation-core.propositional-maps public
 open import foundation-core.propositions public
 open import foundation-core.pullbacks public
@@ -49,6 +51,7 @@ open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public
 open import foundation-core.truncated-types public
 open import foundation-core.truncation-levels public
+open import foundation-core.type-theoretic-principle-of-choice public
 open import foundation-core.univalence public
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.universal-property-truncation public

@@ -80,10 +80,20 @@ module _
     (h : hom-Π-Category z w)
     (g : hom-Π-Category y z)
     (f : hom-Π-Category x y) →
-    ( comp-hom-Π-Category (comp-hom-Π-Category h g) f) ＝
-    ( comp-hom-Π-Category h (comp-hom-Π-Category g f))
+    comp-hom-Π-Category (comp-hom-Π-Category h g) f ＝
+    comp-hom-Π-Category h (comp-hom-Π-Category g f)
   associative-comp-hom-Π-Category =
     associative-comp-hom-Category Π-Category
+
+  inv-associative-comp-hom-Π-Category :
+    {x y z w : obj-Π-Category}
+    (h : hom-Π-Category z w)
+    (g : hom-Π-Category y z)
+    (f : hom-Π-Category x y) →
+    comp-hom-Π-Category h (comp-hom-Π-Category g f) ＝
+    comp-hom-Π-Category (comp-hom-Π-Category h g) f
+  inv-associative-comp-hom-Π-Category =
+    inv-associative-comp-hom-Category Π-Category
 
   associative-composition-operation-Π-Category :
     associative-composition-operation-binary-family-Set hom-set-Π-Category

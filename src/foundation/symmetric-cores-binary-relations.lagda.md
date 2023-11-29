@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-function-types
 open import foundation.morphisms-binary-relations
+open import foundation.postcomposition-functions
 open import foundation.symmetric-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-function-types

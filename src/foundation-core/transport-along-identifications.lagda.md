@@ -10,6 +10,7 @@ module foundation-core.transport-along-identifications where
 open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.identity-types
 ```
 
@@ -120,4 +121,14 @@ tr-Id-right :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
   tr (a ＝_) q p ＝ (p ∙ q)
 tr-Id-right refl refl = refl
+```
+
+### Substitution law for transport
+
+```agda
+substitution-law-tr :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (B : A → UU l3) (f : X → A)
+  {x y : X} (p : x ＝ y) {x' : B (f x)} →
+  tr B (ap f p) x' ＝ tr (B ∘ f) p x'
+substitution-law-tr B f refl = refl
 ```

@@ -8,23 +8,23 @@ module synthetic-homotopy-theory.cocones-under-spans where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
-open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
 
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.contractible-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -84,12 +84,12 @@ module _
 
   statement-coherence-htpy-cocone :
     (c c' : cocone f g X) →
-    (K : (horizontal-map-cocone f g c) ~ (horizontal-map-cocone f g c'))
-    (L : (vertical-map-cocone f g c) ~ (vertical-map-cocone f g c')) →
+    (K : horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
+    (L : vertical-map-cocone f g c ~ vertical-map-cocone f g c') →
     UU (l1 ⊔ l4)
   statement-coherence-htpy-cocone c c' K L =
-    ((coherence-square-cocone f g c) ∙h (L ·r g)) ~
-    ((K ·r f) ∙h (coherence-square-cocone f g c'))
+    (coherence-square-cocone f g c ∙h (L ·r g)) ~
+    ((K ·r f) ∙h coherence-square-cocone f g c')
 
   htpy-cocone : (c c' : cocone f g X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-cocone c c' =
@@ -131,7 +131,7 @@ module _
   is-torsorial-htpy-cocone c =
     is-torsorial-Eq-structure
       ( λ i' jH' K →
-        Σ ( vertical-map-cocone f g c ~ (pr1 jH'))
+        Σ ( vertical-map-cocone f g c ~ pr1 jH')
           ( statement-coherence-htpy-cocone c (i' , jH') K))
       ( is-torsorial-htpy (horizontal-map-cocone f g c))
       ( horizontal-map-cocone f g c , refl-htpy)
@@ -143,8 +143,7 @@ module _
         ( is-torsorial-htpy (vertical-map-cocone f g c))
         ( vertical-map-cocone f g c , refl-htpy)
         ( is-contr-is-equiv'
-          ( Σ ( ( horizontal-map-cocone f g c ∘ f) ~
-                ( vertical-map-cocone f g c ∘ g))
+          ( Σ ( horizontal-map-cocone f g c ∘ f ~ vertical-map-cocone f g c ∘ g)
               ( λ H' → coherence-square-cocone f g c ~ H'))
           ( tot (λ H' M → right-unit-htpy ∙h M))
           ( is-equiv-tot-is-fiberwise-equiv (λ H' → is-equiv-concat-htpy _ _))
@@ -167,7 +166,7 @@ module _
   eq-htpy-cocone c c' = map-inv-is-equiv (is-equiv-htpy-eq-cocone c c')
 ```
 
-### Postcomposing cocones
+### Postcomposing cocones under spans with maps
 
 ```agda
 cocone-map :
@@ -183,16 +182,16 @@ cocone-map-id :
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   Id (cocone-map f g c id) c
 cocone-map-id f g c =
-  eq-pair-Σ refl
-    ( eq-pair-Σ refl (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
+  eq-pair-eq-pr2
+    ( eq-pair-eq-pr2 (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
 
 cocone-map-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
   {Y : UU l5} (h : X → Y) {Z : UU l6} (k : Y → Z) →
-  Id (cocone-map f g c (k ∘ h)) (cocone-map f g (cocone-map f g c h) k)
+  cocone-map f g c (k ∘ h) ＝ cocone-map f g (cocone-map f g c h) k
 cocone-map-comp f g (i , j , H) h k =
-  eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (ap-comp k h ∘ H)))
+  eq-pair-eq-pr2 (eq-pair-eq-pr2 (eq-htpy (ap-comp k h ∘ H)))
 ```
 
 ### Horizontal composition of cocones
@@ -343,7 +342,7 @@ we can compose both vertically and horizontally to get the following cocone:
    A' ---> X
 ```
 
-Notice that the triple (i,j,k) is really a morphism of spans. So the resulting
+Notice that the triple `(i,j,k)` is really a morphism of spans. So the resulting
 cocone arises as a composition of the original cocone with this morphism of
 spans.
 
@@ -364,4 +363,18 @@ comp-cocone-hom-span f g f' g' i j k c coh-l coh-r =
     ( f')
     ( (g ∘ k , j , coh-r))
     ( cocone-comp-horizontal f' k g (i , f , coh-l) c)
+```
+
+### The diagonal cocone on a span of identical maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
+  where
+
+  diagonal-into-cocone :
+    (B → X) → cocone f f X
+  pr1 (diagonal-into-cocone g) = g
+  pr1 (pr2 (diagonal-into-cocone g)) = g
+  pr2 (pr2 (diagonal-into-cocone g)) = refl-htpy
 ```

@@ -19,7 +19,6 @@ open import category-theory.rigid-objects-categories
 open import category-theory.strict-categories
 
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -164,6 +163,16 @@ module _
     comp-hom-Gaunt-Category h (comp-hom-Gaunt-Category g f)
   associative-comp-hom-Gaunt-Category =
     associative-comp-hom-Category category-Gaunt-Category
+
+  inv-associative-comp-hom-Gaunt-Category :
+    {x y z w : obj-Gaunt-Category}
+    (h : hom-Gaunt-Category z w)
+    (g : hom-Gaunt-Category y z)
+    (f : hom-Gaunt-Category x y) →
+    comp-hom-Gaunt-Category h (comp-hom-Gaunt-Category g f) ＝
+    comp-hom-Gaunt-Category (comp-hom-Gaunt-Category h g) f
+  inv-associative-comp-hom-Gaunt-Category =
+    inv-associative-comp-hom-Category category-Gaunt-Category
 
   associative-composition-operation-Gaunt-Category :
     associative-composition-operation-binary-family-Set

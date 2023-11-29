@@ -29,8 +29,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An embedding between standard finite types is simply an embedding
-`Fin k ↪ Fin l`.
+An embedding between standard finite types is an embedding `Fin k ↪ Fin l`.
 
 ## Definitions
 

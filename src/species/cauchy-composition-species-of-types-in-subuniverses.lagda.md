@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
@@ -83,7 +84,7 @@ module _
     ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
     ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     ( X : type-subuniverse P) →
-    is-in-global-subuniverse (λ l → l) Q
+    is-in-global-subuniverse Q
       ( type-cauchy-composition-species-subuniverse S T X)
 
 module _

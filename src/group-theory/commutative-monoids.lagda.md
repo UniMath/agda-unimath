@@ -115,10 +115,10 @@ module _
     mul-Commutative-Monoid (mul-Commutative-Monoid x z) y
   right-swap-mul-Commutative-Monoid x y z =
     ( associative-mul-Commutative-Monoid x y z) ∙
-    ( ( ap
-        ( mul-Commutative-Monoid x)
-        ( commutative-mul-Commutative-Monoid y z)) ∙
-      ( inv (associative-mul-Commutative-Monoid x z y)))
+    ( ap
+      ( mul-Commutative-Monoid x)
+      ( commutative-mul-Commutative-Monoid y z)) ∙
+    ( inv (associative-mul-Commutative-Monoid x z y))
 
   left-swap-mul-Commutative-Monoid :
     (x y z : type-Commutative-Monoid) →
@@ -126,10 +126,10 @@ module _
     mul-Commutative-Monoid y (mul-Commutative-Monoid x z)
   left-swap-mul-Commutative-Monoid x y z =
     ( inv (associative-mul-Commutative-Monoid x y z)) ∙
-    ( ( ap
-        ( mul-Commutative-Monoid' z)
-        ( commutative-mul-Commutative-Monoid x y)) ∙
-      ( associative-mul-Commutative-Monoid y x z))
+    ( ap
+      ( mul-Commutative-Monoid' z)
+      ( commutative-mul-Commutative-Monoid x y)) ∙
+    ( associative-mul-Commutative-Monoid y x z)
 ```
 
 ### The unit element of a commutative monoid
@@ -161,7 +161,7 @@ module _
   is-unit-Commutative-Monoid : type-Commutative-Monoid M → UU l
   is-unit-Commutative-Monoid x = Id x unit-Commutative-Monoid
 
-  is-unit-monoid-Prop : type-Commutative-Monoid M → Prop l
-  is-unit-monoid-Prop x =
+  is-unit-prop-Commutative-Monoid : type-Commutative-Monoid M → Prop l
+  is-unit-prop-Commutative-Monoid x =
     Id-Prop (set-Commutative-Monoid M) x unit-Commutative-Monoid
 ```
