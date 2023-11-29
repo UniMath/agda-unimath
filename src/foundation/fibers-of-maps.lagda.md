@@ -142,10 +142,40 @@ module _
             ( λ w → P (pr1 w))
 
   up-family-of-fibers :
-    {l : Level} →
     universal-property-fiber f (fiber f) (section-family-of-fibers)
   up-family-of-fibers P =
     is-equiv-map-equiv (equiv-up-family-of-fibers P)
+```
+
+### The family of fibers has the dependent universal property of fibers of maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  equiv-dependent-up-family-of-fibers :
+    {l : Level} (P : (b : B) → fiber f b → UU l) →
+    ( ( b : B) (z : fiber f b) → P b z) ≃
+    ( ( a : A) → P (f a) (section-family-of-fibers f a))
+  equiv-dependent-up-family-of-fibers P =
+    equivalence-reasoning
+      ( ( b : B) (z : fiber f b) → P b z)
+      ≃ ((w : Σ B (λ b → fiber f b)) → P (pr1 w) (pr2 w))
+        by equiv-ind-Σ
+      ≃ ((a : A) → P (f a) (section-family-of-fibers f a))
+        by
+          equiv-precomp-Π
+            ( inv-equiv-total-fiber f)
+            ( λ w → P (pr1 w) (pr2 w))
+
+  dependent-up-family-of-fibers :
+    dependent-universal-property-fiber
+      ( f)
+      ( fiber f)
+      ( section-family-of-fibers f)
+  dependent-up-family-of-fibers P =
+    is-equiv-map-equiv (equiv-dependent-up-family-of-fibers P)
 ```
 
 ### Transport in fibers
