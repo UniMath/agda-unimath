@@ -46,5 +46,5 @@ Note that this operation preserves
 [cartesian squares](foundation.pullback-squares.md). Furthermore, by a lemma of
 [David Wärn](https://ncatlab.org/nlab/show/David+Wärn) it also follows that this
 operation perserves
-[cocartesian squares](synthetic-homotopy-theory.cocartesian-squares.md) out of
-[embeddings](foundation.embeddings.md).
+[cocartesian morphisms of arrows](synthetic-homotopy-theory.cocartesian-morphisms-arrows.md)
+out of [embeddings](foundation.embeddings.md).
