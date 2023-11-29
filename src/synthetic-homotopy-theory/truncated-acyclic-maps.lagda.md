@@ -257,10 +257,10 @@ module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-succ-truncated-acyclic-map-is-connected-map :
+  is-truncated-succ-acyclic-map-is-connected-map :
     is-connected-map k f → is-truncated-acyclic-map (succ-𝕋 k) f
-  is-succ-truncated-acyclic-map-is-connected-map c b =
-    is-succ-truncated-acyclic-is-connected (c b)
+  is-truncated-succ-acyclic-map-is-connected-map c b =
+    is-truncated-succ-acyclic-is-connected (c b)
 ```
 
 ### Every `k`-equivalence is `k`-acyclic
