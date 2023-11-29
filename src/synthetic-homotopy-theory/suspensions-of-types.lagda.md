@@ -528,13 +528,13 @@ constant map `B → (A → B)` is an equivalence for all `n`-types `B`.
 So for any `(k+1)`-type `Y`, we have the commutative diagram
 
 ```text
-                      const
-     Y -------------------------------->  (suspension X → Y)
-     ^                                            |
- pr1 | ≃                                        ≃ | ev-suspension
-     |                                ≃           v
-  Σ Y (λ y → (Σ Y (λ y' → y ＝ y'))) <-- suspension-structure Y
-                                         ≡ Σ Y (λ y → (Σ Y (λ y' → X → y ＝ y')))
+                 const
+     Y ---------------------->  (suspension X → Y)
+     ^                                  |
+ pr1 | ≃                              ≃ | ev-suspension
+     |                      ≃           v
+  Σ (y y' : Y) , y ＝ y' <----- suspension-structure Y
+                                ≐ Σ Y (y y' : Y) , X → y ＝ y'
 ```
 
 where the bottom map is induced by the equivalence `(y ＝ y') → (X → (y ＝ y'))`
