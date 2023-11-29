@@ -534,7 +534,7 @@ So for any `(k+1)`-type `Y`, we have the commutative diagram
  pr1 | ≃                              ≃ | ev-suspension
      |                      ≃           v
   Σ (y y' : Y) , y ＝ y' <----- suspension-structure Y
-                                ≐ Σ Y (y y' : Y) , X → y ＝ y'
+                                ≐ Σ (y y' : Y) , X → y ＝ y'
 ```
 
 where the bottom map is induced by the equivalence `(y ＝ y') → (X → (y ＝ y'))`
