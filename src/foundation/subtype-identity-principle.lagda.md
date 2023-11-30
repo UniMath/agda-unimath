@@ -55,7 +55,7 @@ module _
         ( equiv-right-swap-Σ)
         ( is-contr-equiv
           ( P a)
-          ( left-unit-law-Σ-is-contr (is-torsorial-B) (a , b))
+          ( left-unit-law-Σ-is-contr is-torsorial-B (a , b))
           ( is-proof-irrelevant-is-prop (is-subtype-P a) p))
 ```
 
