@@ -10,6 +10,7 @@ module ring-theory.isomorphisms-rings where
 open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-homotopies
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -485,15 +486,9 @@ module _
             ( is-torsorial-Eq-subtype
               ( is-contr-equiv
                 ( Σ ( (x y : type-Ring R) → type-Ring R)
-                    ( λ g →
-                      (x y : type-Ring R) → mul-Ring R x y ＝ g x y))
-                ( equiv-tot
-                  ( λ m →
-                    equiv-Π-equiv-family (λ x → equiv-explicit-implicit-Π) ∘e
-                    equiv-explicit-implicit-Π))
-                ( is-torsorial-Eq-Π
-                  ( λ x m → (y : type-Ring R) → mul-Ring R x y ＝ m y)
-                  ( λ x → is-torsorial-htpy (mul-Ring R x))))
+                    ( λ g → (x y : type-Ring R) → mul-Ring R x y ＝ g x y))
+                ( equiv-tot (λ _ → equiv-explicit-implicit-iterated-Π 2))
+                ( is-torsorial-binary-htpy (mul-Ring R)))
               ( λ μ →
                 is-prop-iterated-Π 3
                   ( λ x y z → is-set-type-Ring R (μ (μ x y) z) (μ x (μ y z))))
