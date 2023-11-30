@@ -9,6 +9,9 @@ module synthetic-homotopy-theory.cocartesian-morphisms-arrows where
 ```agda
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
+
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.pushouts
 ```
 
 </details>
@@ -40,4 +43,8 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y) (h : hom-arrow f g)
   where
+
+  is-cocartesian-hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-cocartesian-hom-arrow =
+    is-pushout f (map-domain-hom-arrow f g h) (cocone-hom-arrow f g h)
 ```
