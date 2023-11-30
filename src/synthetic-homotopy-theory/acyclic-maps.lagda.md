@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-epimorphisms
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
@@ -21,19 +22,24 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-unit-type
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.acyclic-types
 open import synthetic-homotopy-theory.codiagonals-of-maps
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.pushouts
 ```
 
 </details>
@@ -287,6 +293,56 @@ module _
       ( is-epimorphism-left-factor g f
         ( is-epimorphism-is-acyclic-map (g ∘ f) ac)
         ( is-epimorphism-is-acyclic-map f af))
+```
+
+### Acyclic maps are closed under pushouts
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
+  where
+
+  equiv-cocone-postcomp-vertical-map-cocone :
+    is-acyclic-map f →
+    {l5 : Level} (X : UU l5) →
+    cocone f (vertical-map-cocone f g c ∘ g) X ≃ (C → X)
+  equiv-cocone-postcomp-vertical-map-cocone ac X =
+    equivalence-reasoning
+        cocone f (vertical-map-cocone f g c ∘ g) X
+      ≃ cocone f (horizontal-map-cocone f g c ∘ f) X
+        by
+          equiv-tot
+          ( λ u →
+            equiv-tot
+              ( λ v →
+                equiv-concat-htpy'
+                  ( u ∘ f)
+                  ( λ s → ap v (inv-htpy (coherence-square-cocone f g c) s))))
+      ≃ Σ ( A → X)
+          ( λ u →
+            Σ (C → X) (λ v → u ∘ f ＝ v ∘ horizontal-map-cocone f g c ∘ f))
+        by equiv-tot ( λ u → equiv-tot ( λ v → equiv-eq-htpy))
+      ≃ Σ (A → X) (λ u → Σ (C → X) (λ v → u ＝ v ∘ horizontal-map-cocone f g c))
+        by
+          equiv-tot
+          ( λ u →
+            equiv-tot
+              ( λ v →
+                inv-equiv-ap-is-emb (is-epimorphism-is-acyclic-map f ac X)))
+      ≃ Σ (C → X) (λ v → Σ (A → X) (λ u → u ＝ v ∘ horizontal-map-cocone f g c))
+        by
+          equiv-left-swap-Σ
+      ≃ (C → X)
+        by
+          equiv-pr1 (λ v → is-torsorial-path' (v ∘ horizontal-map-cocone f g c))
+
+  is-acyclic-map-vertical-map-cocone-is-pushout :
+    is-pushout f g c →
+    is-acyclic-map g →
+    is-acyclic-map (vertical-map-cocone f g c)
+  is-acyclic-map-vertical-map-cocone-is-pushout po is-ac-g =
+    {!!}
 ```
 
 ## See also
