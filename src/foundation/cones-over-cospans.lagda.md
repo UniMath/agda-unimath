@@ -73,12 +73,12 @@ module _
   coherence-square-cone = pr2 (pr2 c)
 
   hom-arrow-cone : hom-arrow vertical-map-cone g
-  pr1 hom-arrow-cone = horizontal-map-cone
-  pr1 (pr2 hom-arrow-cone) = f
-  pr2 (pr2 hom-arrow-cone) = coherence-square-cone
+  hom-arrow-cone .map-domain-hom-arrow = horizontal-map-cone
+  hom-arrow-cone .map-codomain-hom-arrow = f
+  hom-arrow-cone .coh-hom-arrow = coherence-square-cone
 
   hom-arrow-cone' : hom-arrow horizontal-map-cone f
-  hom-arrow-cone' = transpose-hom-arrow vertical-map-cone g hom-arrow-cone
+  hom-arrow-cone' = transpose-hom-arrow hom-arrow-cone
 ```
 
 ### Dependent cones over cospans

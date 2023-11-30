@@ -82,8 +82,8 @@ module _
 
   is-retraction-hom-arrow : UU (l1 ⊔ l2)
   is-retraction-hom-arrow =
-    htpy-hom-arrow f f
-      ( comp-hom-arrow f g f r i)
+    htpy-hom-arrow
+      ( comp-hom-arrow r i)
       ( id-hom-arrow)
 ```
 
@@ -130,13 +130,13 @@ module _
   where
 
   coherence-retract-map :
-    is-retraction (map-domain-hom-arrow f g i) (map-domain-hom-arrow g f r) →
+    is-retraction (map-domain-hom-arrow i) (map-domain-hom-arrow r) →
     is-retraction
-      ( map-codomain-hom-arrow f g i)
-      ( map-codomain-hom-arrow g f r) →
+      ( map-codomain-hom-arrow i)
+      ( map-codomain-hom-arrow r) →
     UU (l1 ⊔ l2)
   coherence-retract-map =
-    coherence-htpy-hom-arrow f f (comp-hom-arrow f g f r i) id-hom-arrow
+    coherence-htpy-hom-arrow (comp-hom-arrow r i) id-hom-arrow
 ```
 
 ### The binary relation `g f ↦ g retract-of-map f` asserting that `g` is a retract of the map `f`
@@ -162,11 +162,11 @@ module _
 
   map-domain-inclusion-retract-map : A → X
   map-domain-inclusion-retract-map =
-    map-domain-hom-arrow f g inclusion-retract-map
+    map-domain-hom-arrow inclusion-retract-map
 
   map-codomain-inclusion-retract-map : B → Y
   map-codomain-inclusion-retract-map =
-    map-codomain-hom-arrow f g inclusion-retract-map
+    map-codomain-hom-arrow inclusion-retract-map
 
   coh-inclusion-retract-map :
     coherence-square-maps
@@ -175,7 +175,7 @@ module _
       ( g)
       ( map-codomain-inclusion-retract-map)
   coh-inclusion-retract-map =
-    coh-hom-arrow f g inclusion-retract-map
+    coh-hom-arrow inclusion-retract-map
 
   retraction-retract-map : retraction-hom-arrow f g inclusion-retract-map
   retraction-retract-map = pr2 R
@@ -186,11 +186,11 @@ module _
 
   map-domain-hom-retraction-retract-map : X → A
   map-domain-hom-retraction-retract-map =
-    map-domain-hom-arrow g f hom-retraction-retract-map
+    map-domain-hom-arrow hom-retraction-retract-map
 
   map-codomain-hom-retraction-retract-map : Y → B
   map-codomain-hom-retraction-retract-map =
-    map-codomain-hom-arrow g f hom-retraction-retract-map
+    map-codomain-hom-arrow hom-retraction-retract-map
 
   coh-hom-retraction-retract-map :
     coherence-square-maps
@@ -199,7 +199,7 @@ module _
       ( f)
       ( map-codomain-hom-retraction-retract-map)
   coh-hom-retraction-retract-map =
-    coh-hom-arrow g f hom-retraction-retract-map
+    coh-hom-arrow hom-retraction-retract-map
 
   is-retraction-hom-retraction-retract-map :
     is-retraction-hom-arrow f g inclusion-retract-map hom-retraction-retract-map
@@ -213,8 +213,8 @@ module _
       ( map-domain-inclusion-retract-map)
       ( map-domain-hom-retraction-retract-map)
   is-retraction-map-domain-hom-retraction-retract-map =
-    htpy-domain-htpy-hom-arrow f f
-      ( comp-hom-arrow f g f hom-retraction-retract-map inclusion-retract-map)
+    htpy-domain-htpy-hom-arrow
+      ( comp-hom-arrow hom-retraction-retract-map inclusion-retract-map)
       ( id-hom-arrow)
       ( is-retraction-hom-retraction-retract-map)
 
@@ -232,8 +232,8 @@ module _
       ( map-codomain-inclusion-retract-map)
       ( map-codomain-hom-retraction-retract-map)
   is-retraction-map-codomain-hom-retraction-retract-map =
-    htpy-codomain-htpy-hom-arrow f f
-      ( comp-hom-arrow f g f hom-retraction-retract-map inclusion-retract-map)
+    htpy-codomain-htpy-hom-arrow
+      ( comp-hom-arrow hom-retraction-retract-map inclusion-retract-map)
       ( id-hom-arrow)
       ( is-retraction-hom-retraction-retract-map)
 
@@ -252,8 +252,8 @@ module _
       ( is-retraction-map-domain-hom-retraction-retract-map)
       ( is-retraction-map-codomain-hom-retraction-retract-map)
   coh-retract-map =
-    coh-htpy-hom-arrow f f
-      ( comp-hom-arrow f g f hom-retraction-retract-map inclusion-retract-map)
+    coh-htpy-hom-arrow
+      ( comp-hom-arrow hom-retraction-retract-map inclusion-retract-map)
       ( id-hom-arrow)
       ( is-retraction-hom-retraction-retract-map)
 ```
@@ -497,9 +497,6 @@ module _
       ( inclusion-fiber f {b})
   hom-retraction-retract-map-inclusion-fiber-retract-map =
     comp-hom-arrow
-      ( inclusion-fiber g)
-      ( inclusion-fiber f)
-      ( inclusion-fiber f)
       ( tr-hom-arrow-inclusion-fiber f
         ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
       ( hom-arrow-fiber g f
@@ -514,16 +511,8 @@ module _
       ( hom-retraction-retract-map-inclusion-fiber-retract-map)
   is-retraction-hom-retraction-retract-map-inclusion-fiber-retract-map =
     concat-htpy-hom-arrow
-      ( inclusion-fiber f)
-      ( inclusion-fiber f)
       ( comp-hom-arrow
-        ( inclusion-fiber f)
-        ( inclusion-fiber g)
-        ( inclusion-fiber f)
         ( comp-hom-arrow
-          ( inclusion-fiber g)
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
           ( tr-hom-arrow-inclusion-fiber f
             ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
           ( hom-arrow-fiber g f
@@ -531,25 +520,15 @@ module _
             ( map-codomain-inclusion-retract-map f g R b)))
         ( inclusion-retract-map-inclusion-fiber-retract-map))
       ( comp-hom-arrow
-        ( inclusion-fiber f)
-        ( inclusion-fiber f)
-        ( inclusion-fiber f)
         ( tr-hom-arrow-inclusion-fiber f
           ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
         ( comp-hom-arrow
-          ( inclusion-fiber f)
-          ( inclusion-fiber g)
-          ( inclusion-fiber f)
           ( hom-arrow-fiber g f
             ( hom-retraction-retract-map f g R)
             ( map-codomain-inclusion-retract-map f g R b))
           ( inclusion-retract-map-inclusion-fiber-retract-map)))
       ( id-hom-arrow)
       ( inv-assoc-comp-hom-arrow
-        ( inclusion-fiber f)
-        ( inclusion-fiber g)
-        ( inclusion-fiber f)
-        ( inclusion-fiber f)
         ( tr-hom-arrow-inclusion-fiber f
           ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
         ( hom-arrow-fiber g f
@@ -557,65 +536,43 @@ module _
           ( map-codomain-inclusion-retract-map f g R b))
         ( inclusion-retract-map-inclusion-fiber-retract-map))
       ( concat-htpy-hom-arrow
-        ( inclusion-fiber f)
-        ( inclusion-fiber f)
         ( comp-hom-arrow
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
           ( tr-hom-arrow-inclusion-fiber f
             ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
           ( comp-hom-arrow
-            ( inclusion-fiber f)
-            ( inclusion-fiber g)
-            ( inclusion-fiber f)
             ( hom-arrow-fiber g f
               ( hom-retraction-retract-map f g R)
               ( map-codomain-inclusion-retract-map f g R b))
             ( inclusion-retract-map-inclusion-fiber-retract-map)))
         ( comp-hom-arrow
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
           ( tr-hom-arrow-inclusion-fiber f
             ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
           ( hom-arrow-fiber f f
-            ( comp-hom-arrow f g f
+            ( comp-hom-arrow
               ( hom-retraction-retract-map f g R)
               ( inclusion-retract-map f g R))
             ( b)))
         ( id-hom-arrow)
         ( left-whisker-htpy-hom-arrow
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
           ( tr-hom-arrow-inclusion-fiber f
             ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
           ( comp-hom-arrow
-            ( inclusion-fiber f)
-            ( inclusion-fiber g)
-            ( inclusion-fiber f)
             ( hom-arrow-fiber g f
               ( hom-retraction-retract-map f g R)
               ( map-codomain-inclusion-retract-map f g R b))
             ( hom-arrow-fiber f g (inclusion-retract-map f g R) b))
           ( hom-arrow-fiber f f
-            ( comp-hom-arrow f g f
+            ( comp-hom-arrow
               ( hom-retraction-retract-map f g R)
               ( inclusion-retract-map f g R))
             ( b))
           ( inv-htpy-hom-arrow
-            ( inclusion-fiber f)
-            ( inclusion-fiber f)
             ( hom-arrow-fiber f f
-              ( comp-hom-arrow f g f
+              ( comp-hom-arrow
                 ( hom-retraction-retract-map f g R)
                 ( inclusion-retract-map f g R))
               ( b))
             ( comp-hom-arrow
-              ( inclusion-fiber f)
-              ( inclusion-fiber g)
-              ( inclusion-fiber f)
               ( hom-arrow-fiber g f
                 ( hom-retraction-retract-map f g R)
                 ( map-codomain-inclusion-retract-map f g R b))
@@ -625,23 +582,18 @@ module _
               ( inclusion-retract-map f g R)
               ( b))))
         ( concat-htpy-hom-arrow
-          ( inclusion-fiber f)
-          ( inclusion-fiber f)
           ( comp-hom-arrow
-            ( inclusion-fiber f)
-            ( inclusion-fiber f)
-            ( inclusion-fiber f)
             ( tr-hom-arrow-inclusion-fiber f
               ( is-retraction-map-codomain-hom-retraction-retract-map f g R b))
             ( hom-arrow-fiber f f
-              ( comp-hom-arrow f g f
+              ( comp-hom-arrow
                 ( hom-retraction-retract-map f g R)
                 ( inclusion-retract-map f g R))
               ( b)))
           ( hom-arrow-fiber f f id-hom-arrow b)
           ( id-hom-arrow)
           ( htpy-hom-arrow-fiber f f
-            ( comp-hom-arrow f g f
+            ( comp-hom-arrow
               ( hom-retraction-retract-map f g R)
               ( inclusion-retract-map f g R))
             ( id-hom-arrow)
