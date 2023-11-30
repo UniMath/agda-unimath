@@ -350,6 +350,7 @@ open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-equivalences public
 open import foundation.universal-property-fiber-products public
+open import foundation.universal-property-fibers-of-maps public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public
 open import foundation.universal-property-image public

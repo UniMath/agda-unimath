@@ -49,6 +49,17 @@ module _
 
   fiberwise-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   fiberwise-equiv B C = Σ ((x : A) → B x → C x) is-fiberwise-equiv
+
+  map-fiberwise-equiv :
+    {B : A → UU l2} {C : A → UU l3} →
+    fiberwise-equiv B C → (a : A) → B a → C a
+  map-fiberwise-equiv = pr1
+
+  is-fiberwise-equiv-fiberwise-equiv :
+    {B : A → UU l2} {C : A → UU l3} →
+    (e : fiberwise-equiv B C) →
+    is-fiberwise-equiv (map-fiberwise-equiv e)
+  is-fiberwise-equiv-fiberwise-equiv = pr2
 ```
 
 ### Families of equivalences
