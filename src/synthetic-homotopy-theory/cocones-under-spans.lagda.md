@@ -13,6 +13,7 @@ open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
+open import foundation.morphisms-arrows
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -377,4 +378,18 @@ module _
   pr1 (diagonal-into-cocone g) = g
   pr1 (pr2 (diagonal-into-cocone g)) = g
   pr2 (pr2 (diagonal-into-cocone g)) = refl-htpy
+```
+
+### Cocones obtained from morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
+  where
+
+  cocone-hom-arrow : cocone f (map-domain-hom-arrow f g h) Y
+  pr1 cocone-hom-arrow = map-codomain-hom-arrow f g h
+  pr1 (pr2 cocone-hom-arrow) = g
+  pr2 (pr2 cocone-hom-arrow) = coh-hom-arrow f g h
 ```

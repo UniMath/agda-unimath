@@ -9,6 +9,7 @@
 ```agda
 module orthogonal-factorization-systems where
 
+open import orthogonal-factorization-systems.cd-structures public
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
 open import orthogonal-factorization-systems.extensions-of-maps public
@@ -45,6 +46,7 @@ open import orthogonal-factorization-systems.pullback-hom public
 open import orthogonal-factorization-systems.raise-modalities public
 open import orthogonal-factorization-systems.reflective-modalities public
 open import orthogonal-factorization-systems.reflective-subuniverses public
+open import orthogonal-factorization-systems.regular-cd-structures public
 open import orthogonal-factorization-systems.separated-types public
 open import orthogonal-factorization-systems.sigma-closed-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-modalities public
