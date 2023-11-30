@@ -49,16 +49,13 @@ module _
       is-torsorial B → ((x : A) → is-prop (P x)) →
       (a : A) (b : B a) (p : P a) →
       is-torsorial (λ (t : Σ A P) → B (pr1 t))
-    is-torsorial-Eq-subtype {l3} {P}
-      is-contr-AB is-subtype-P a b p =
+    is-torsorial-Eq-subtype {P = P} is-torsorial-B is-subtype-P a b p =
       is-contr-equiv
         ( Σ (Σ A B) (P ∘ pr1))
         ( equiv-right-swap-Σ)
         ( is-contr-equiv
           ( P a)
-          ( left-unit-law-Σ-is-contr
-            ( is-contr-AB)
-            ( pair a b))
+          ( left-unit-law-Σ-is-contr is-torsorial-B (a , b))
           ( is-proof-irrelevant-is-prop (is-subtype-P a) p))
 ```
 
@@ -76,7 +73,7 @@ module _
   abstract
     subtype-identity-principle :
       {f : (x : A) → a ＝ x → Eq-A x}
-      (h : (z : (Σ A P)) → (pair a p) ＝ z → Eq-A (pr1 z)) →
+      (h : (z : (Σ A P)) → (a , p) ＝ z → Eq-A (pr1 z)) →
       ((x : A) → is-equiv (f x)) → (z : Σ A P) → is-equiv (h z)
     subtype-identity-principle {f} h H =
       fundamental-theorem-id
@@ -95,12 +92,12 @@ module _
 
   map-extensionality-type-subtype :
     (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
-    (z : Σ A (type-Prop ∘ P)) → (pair a p) ＝ z → Eq-A (pr1 z)
-  map-extensionality-type-subtype f .(pair a p) refl = refl-A
+    (z : Σ A (type-Prop ∘ P)) → (a , p) ＝ z → Eq-A (pr1 z)
+  map-extensionality-type-subtype f .(a , p) refl = refl-A
 
   extensionality-type-subtype :
     (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
-    (z : Σ A (type-Prop ∘ P)) → (pair a p ＝ z) ≃ Eq-A (pr1 z)
+    (z : Σ A (type-Prop ∘ P)) → ((a , p) ＝ z) ≃ Eq-A (pr1 z)
   pr1 (extensionality-type-subtype f z) = map-extensionality-type-subtype f z
   pr2 (extensionality-type-subtype f z) =
     subtype-identity-principle
