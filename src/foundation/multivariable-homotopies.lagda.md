@@ -109,7 +109,6 @@ equiv-multivariable-explicit-implicit-htpy-implicit ._ {{cons-telescope A}} =
     ( λ x → equiv-multivariable-explicit-implicit-htpy-implicit _ {{A x}})) ∘e
   ( equiv-explicit-implicit-Π)
 
-
 equiv-multivariable-implicit-explicit-htpy-implicit :
   {l : Level} (n : ℕ) {{A : telescope l n}} {f g : iterated-implicit-Π A} →
   ( multivariable-htpy-implicit {{A}} f g) ≃
