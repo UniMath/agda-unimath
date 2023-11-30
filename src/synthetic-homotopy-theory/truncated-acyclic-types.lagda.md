@@ -43,6 +43,12 @@ module _
   is-prop-is-truncated-acyclic = is-prop-type-Prop is-truncated-acyclic-Prop
 ```
 
+We use the name `is-truncated-acyclic` instead of `is-truncation-acyclic`,
+because the latter, in line with
+[`is-truncation-equivalence`](foundation.truncation-equivalences.md), might
+suggest that it is the truncation of a type that is acyclic which is not the
+notion we're interested in.
+
 ## Properties
 
 ### Being `k`-acyclic is invariant under equivalence
@@ -75,6 +81,19 @@ module _
     is-connected-retract-of
       ( retract-of-suspension-retract-of R)
       ( ac)
+```
+
+### Every `k`-connected type is `(k+1)`-acyclic
+
+```agda
+module _
+  {l : Level} {k : 𝕋} {A : UU l}
+  where
+
+  is-truncated-succ-acyclic-is-connected :
+    is-connected k A → is-truncated-acyclic (succ-𝕋 k) A
+  is-truncated-succ-acyclic-is-connected =
+    is-connected-succ-suspension-is-connected
 ```
 
 ## See also

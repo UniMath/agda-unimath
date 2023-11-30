@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.truncated-acyclic-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
@@ -17,13 +18,16 @@ open import foundation.embeddings
 open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.truncated-types
+open import foundation.truncation-equivalences
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
@@ -159,6 +163,58 @@ module _
             ( e X)))
 ```
 
+### A type is `k`-acyclic if and only if the constant map from any identity type of any `k`-type is an equivalence
+
+More precisely, `A` is `k`-acyclic if and only if for all `k`-types `X` and
+elements `x,y : X`, the map
+
+```text
+ const : (x ＝ y) → (A → x ＝ y)
+```
+
+is an equivalence.
+
+```agda
+module _
+  {l : Level} {k : 𝕋} (A : UU l)
+  where
+
+  is-equiv-const-Id-is-acyclic-Truncated-Type :
+    is-truncated-acyclic k A →
+    {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
+    is-equiv (const A (x ＝ y))
+  is-equiv-const-Id-is-acyclic-Truncated-Type ac {X = X} x y =
+    is-equiv-htpy
+      ( htpy-eq ∘ ap (const A (type-Truncated-Type X)) {x} {y})
+      ( htpy-ap-diagonal-htpy-eq-diagonal-Id A x y)
+      ( is-equiv-comp
+        ( htpy-eq)
+        ( ap (const A (type-Truncated-Type X)))
+        ( is-emb-const-is-truncated-acyclic-Truncated-Type A ac X x y)
+        ( funext
+          ( const A (type-Truncated-Type X) x)
+          ( const A (type-Truncated-Type X) y)))
+
+  is-truncated-acyclic-is-equiv-const-Id-Truncated-Type :
+    ( {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
+      is-equiv (const A (x ＝ y))) →
+    is-truncated-acyclic k A
+  is-truncated-acyclic-is-equiv-const-Id-Truncated-Type h =
+    is-truncated-acyclic-is-emb-const-Truncated-Type A
+      ( λ X →
+        ( λ x y →
+          is-equiv-right-factor
+            ( htpy-eq)
+            ( ap (const A (type-Truncated-Type X)))
+            ( funext
+              ( const A (type-Truncated-Type X) x)
+              ( const A (type-Truncated-Type X) y))
+            ( is-equiv-htpy
+              ( const A (x ＝ y))
+              ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
+              ( h {X = X} x y))))
+```
+
 ### A map is `k`-acyclic if and only if it is an [dependent `k`-epimorphism](foundation.dependent-epimorphisms-with-respect-to-truncated-types.md)
 
 The proof is similar to that of dependent epimorphisms and
@@ -247,6 +303,35 @@ module _
       ( is-epimorphism-left-factor-Truncated-Type k g f
         ( is-epimorphism-is-truncated-acyclic-map-Truncated-Type (g ∘ f) ac)
         ( is-epimorphism-is-truncated-acyclic-map-Truncated-Type f af))
+```
+
+### Every `k`-connected map is `(k+1)`-acyclic
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-truncated-succ-acyclic-map-is-connected-map :
+    is-connected-map k f → is-truncated-acyclic-map (succ-𝕋 k) f
+  is-truncated-succ-acyclic-map-is-connected-map c b =
+    is-truncated-succ-acyclic-is-connected (c b)
+```
+
+### Every `k`-equivalence is `k`-acyclic
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-truncated-acyclic-map-is-truncation-equivalence :
+    is-truncation-equivalence k f → is-truncated-acyclic-map k f
+  is-truncated-acyclic-map-is-truncation-equivalence e =
+    is-truncated-acyclic-map-is-epimorphism-Truncated-Type f
+      ( λ C →
+        is-emb-is-equiv
+          ( is-equiv-precomp-is-truncation-equivalence k f e C))
 ```
 
 ## See also
