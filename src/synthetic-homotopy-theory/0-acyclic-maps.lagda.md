@@ -72,7 +72,7 @@ module _
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
 - [Acyclic types](synthetic-homotopy-theory.acyclic-types.md)
-- [`1`-acyclic maps](synthetic-homotopy-theory.1-acyclic-maps.md)
+- [`0`-acyclic types](synthetic-homotopy-theory.0-acyclic-types.md)
 - [`k`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md)
 - [`k`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md)
 - [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
