@@ -91,7 +91,7 @@ is-contr-Σ-telescope (cons-telescope {X = X} A) =
 is-contr-iterated-Σ :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   is-contr-Σ-telescope A → is-contr (iterated-Σ A)
-is-contr-iterated-Σ ._ {{base-telescope A}} is-contr-A = is-contr-A
+is-contr-iterated-Σ .0 {{base-telescope A}} is-contr-A = is-contr-A
 is-contr-iterated-Σ ._ {{cons-telescope A}} (is-contr-X , x , H) =
   is-contr-Σ is-contr-X x (is-contr-iterated-Σ _ {{A x}} H)
 ```
@@ -107,7 +107,7 @@ is-contr-Σ-telescope' (cons-telescope {X = X} A) =
 is-contr-iterated-Σ' :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   is-contr-Σ-telescope' A → is-contr (iterated-Σ A)
-is-contr-iterated-Σ' ._ {{base-telescope A}} is-contr-A = is-contr-A
+is-contr-iterated-Σ' .0 {{base-telescope A}} is-contr-A = is-contr-A
 is-contr-iterated-Σ' ._ {{cons-telescope A}} (is-contr-X , H) =
   is-contr-Σ' is-contr-X (λ x → is-contr-iterated-Σ' _ {{A x}} (H x))
 ```
