@@ -70,7 +70,7 @@ module _
 
 ## Exernal links
 
-- [cd-structure](https://ncatlab.org/nlab/show/cd-structure) at the $n$lab
+- [cd-structure](https://ncatlab.org/nlab/show/cd-structure) at the $n$Lab
 
 ## References
 
