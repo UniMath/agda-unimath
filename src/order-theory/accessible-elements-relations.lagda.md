@@ -120,7 +120,7 @@ module _ {l1 l2} {X : UU l1} (_<_ : Relation l2 X) where
   all-elements-equal-is-accessible-element-Relation x (access f) (access f') =
     ap
       ( access)
-      ( eq-htpy-implicit
+      ( eq-implicit-htpy
         ( λ y →
           eq-htpy
             ( λ H →
