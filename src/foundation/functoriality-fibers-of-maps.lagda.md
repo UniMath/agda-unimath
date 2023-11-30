@@ -130,7 +130,8 @@ module _
   tr-hom-arrow-inclusion-fiber :
     {b b' : B} (p : b ＝ b') →
     hom-arrow (inclusion-fiber f {b}) (inclusion-fiber f {b'})
-  tr-hom-arrow-inclusion-fiber p .map-domain-hom-arrow = tot (λ a → concat' (f a) p)
+  tr-hom-arrow-inclusion-fiber p .map-domain-hom-arrow =
+    tot (λ a → concat' (f a) p)
   tr-hom-arrow-inclusion-fiber p .map-codomain-hom-arrow = id
   tr-hom-arrow-inclusion-fiber p .coh-hom-arrow = refl-htpy
 ```
