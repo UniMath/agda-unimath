@@ -17,8 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **cd-structure** on a [category](category-theory.categories.md) consists of a
-class `𝒟` of **distinguished squares**
+A _cd-structure_ on a [category](category-theory.categories.md) consists of a
+class `𝒟` of {{#concept "distinguished squares" Disambiguation="cd-structure"}}
 
 ```text
         i
@@ -30,8 +30,8 @@ class `𝒟` of **distinguished squares**
         j
 ```
 
-On this page we will consider **(internal) cd-structures**, i.e., cd-structure
-on types. In other words, a cd-structure is a family of
+On this page we will consider _internal_ cd-structures, i.e., cd-structure on
+types. In other words, a {{#concept "cd-structure"}} is a family of
 [subtypes](foundation-core.subtypes.md)
 
 ```text
@@ -71,3 +71,9 @@ module _
 ## Exernal links
 
 - [cd-structure](https://ncatlab.org/nlab/show/cd-structure) at the $n$lab
+
+## References
+
+- Vladimir Voevodsky. _Unstable motivic homotopy categories in Nisnevich and
+  cdh-topologies_. Journal of Pure and Applied Algebra 214 8. 2010.
+  [arXiv:0805.4576](https://arxiv.org/abs/0805.4576)

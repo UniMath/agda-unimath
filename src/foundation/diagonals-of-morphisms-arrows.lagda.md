@@ -14,7 +14,8 @@ module foundation.diagonals-of-morphisms-arrows where
 
 ## Idea
 
-The **diagonal** of a [morphism of arrows](foundation.morphisms-arrows.md)
+The {{#concept "diagonal" Disambiguation="morphism of arrows"}} of a
+[morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text
         i
