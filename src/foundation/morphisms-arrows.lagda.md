@@ -366,7 +366,7 @@ module _
       ( comp-hom-arrow γ β)
       ( htpy-domain-left-whisker-htpy-hom-arrow)
       ( htpy-codomain-left-whisker-htpy-hom-arrow)
-  coh-left-whisker-htpy-hom-arrow a =
+  coh-left-whisker-htpy-hom-arrow x =
     ( inv
       ( ap
         ( concat _ _)
