@@ -38,7 +38,22 @@ We characterize the
 [`1`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md) as the
 [`0`-connected types](foundation.0-connected-types.md).
 
-TODO references + writing on concrete groups
+In one direction, our proof relies on the following group-theoretic fact: the
+map of generators from a set `X` to the free group on `X` is injective. This is
+proved constructively in \[MRR88\] by Mines, Richman and Ruitenburg, and carried
+out in HoTT/UF and formalized in Agda in \[BCDE21\] by Bezem, Coquand, Dybjer
+and Escardó.
+
+Translated to [concrete groups](group-theory.concrete-groups.md) this means that
+for every set `X`, we have a pointed `1`-type `pt : BG` together with an
+injection `gen : X → pt ＝ pt`. (Actually, `BG` is `0`-connected as well, but we
+don't use this in our proof below.)
+
+A construction on the level of concrete groups can be found in the recent
+preprint \[Wär23\] by David Wärn.
+
+For the time being, we haven't formalized this group-theoretic fact; instead we
+label it as an explicit assumption of our proof.
 
 ## Definition
 
@@ -72,7 +87,8 @@ module _
 
 ### Every `1`-acyclic type is `0`-connected
 
-TODO references + writing
+As explained at the top "Idea" section, we turn the necessary group-theoretic
+fact into an explicit assumption of our proof.
 
 ```agda
 private
@@ -82,8 +98,8 @@ private
     field
       BG : Truncated-Type l (one-𝕋)
       pt : type-Truncated-Type BG
-      η : A → type-Ω (pair (type-Truncated-Type BG) pt)
-      is-injective-η : is-injective η
+      gen : A → type-Ω (pair (type-Truncated-Type BG) pt)
+      is-injective-gen : is-injective gen
 
   concrete-group-assumption : UUω
   concrete-group-assumption =
@@ -101,20 +117,20 @@ module _
     is-contr-is-inhabited-is-prop
       ( is-prop-all-elements-equal
         ( λ x y →
-          is-injective-η
+          is-injective-gen
             ( binary-tr
               ( Id)
               ( htpy-eq
                 ( is-section-map-inv-equiv
                   ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
                     is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
-                  ( η))
+                  ( gen))
                 ( x))
               ( htpy-eq
                 ( is-section-map-inv-equiv
                   ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
                     is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
-                  ( η))
+                  ( gen))
                 ( y))
               ( refl))))
       ( is-inhabited-is-0-acyclic
@@ -132,7 +148,16 @@ module _
 
 ## References
 
-TODO (use \[ and \])
+- \[BCDE21\]: Marc Bezem, Thierry Coquand, Peter Dybjer and Martín Escardó. Free
+  groups in HoTT/UF in Agda.
+  https://www.cs.bham.ac.uk/~mhe/TypeTopology/Groups.Free.html. 2021.
+
+- \[MRR88\]: Ray Mines, Fred Richman and Wim Ruitenburg. A Course in
+  Constructive Algebra. Universitext. Springer, 1988. doi:
+  10.1007/978-1-4419-8640-5.
+
+- \[Wär23\]: David Wärn. Path spaces of pushouts. Preprint.
+  https://dwarn.se/po-paths.pdf. 2023.
 
 ## See also
 
