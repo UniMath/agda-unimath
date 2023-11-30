@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.implicit-function-types
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.dependent-pair-types
@@ -52,11 +53,31 @@ multivariable-htpy {{cons-telescope {X = X} A}} f g =
 ### Multivariable homotopies between implicit functions
 
 ```agda
-multivariable-implicit-htpy :
+multivariable-htpy-implicit :
   {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-implicit-Π A) → UU l
+multivariable-htpy-implicit {{base-telescope A}} f g = f ＝ g
+multivariable-htpy-implicit {{cons-telescope {X = X} A}} f g =
+  (x : X) → multivariable-htpy-implicit {{A x}} (f {x}) (g {x})
+```
+
+### Multivariable implicit homotopies between functions
+
+```agda
+multivariable-implicit-htpy :
+  {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-Π A) → UU l
 multivariable-implicit-htpy {{base-telescope A}} f g = f ＝ g
 multivariable-implicit-htpy {{cons-telescope {X = X} A}} f g =
-  (x : X) → multivariable-implicit-htpy {{A x}} (f {x}) (g {x})
+  {x : X} → multivariable-implicit-htpy {{A x}} (f x) (g x)
+```
+
+### Multivariable implicit homotopies between implicit functions
+
+```agda
+multivariable-implicit-htpy-implicit :
+  {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-implicit-Π A) → UU l
+multivariable-implicit-htpy-implicit {{base-telescope A}} f g = f ＝ g
+multivariable-implicit-htpy-implicit {{cons-telescope {X = X} A}} f g =
+  {x : X} → multivariable-implicit-htpy-implicit {{A x}} (f {x}) (g {x})
 ```
 
 ### Iterated function extensionality
@@ -100,30 +121,30 @@ equiv-eq-multivariable-htpy n {{A}} {f} {g} =
 ### Iterated function extensionality for implicit functions
 
 ```agda
-refl-multivariable-implicit-htpy :
+refl-multivariable-htpy-implicit :
   {l : Level} (n : ℕ) {{A : telescope l n}} {f : iterated-implicit-Π A} →
-  multivariable-implicit-htpy {{A}} f f
-refl-multivariable-implicit-htpy .0 {{base-telescope A}} = refl
-refl-multivariable-implicit-htpy ._ {{cons-telescope A}} x =
-  refl-multivariable-implicit-htpy _ {{A x}}
+  multivariable-htpy-implicit {{A}} f f
+refl-multivariable-htpy-implicit .0 {{base-telescope A}} = refl
+refl-multivariable-htpy-implicit ._ {{cons-telescope A}} x =
+  refl-multivariable-htpy-implicit _ {{A x}}
 
 multivariable-htpy-eq-implicit :
   {l : Level} (n : ℕ) {{A : telescope l n}} {f g : iterated-implicit-Π A} →
-  Id {A = iterated-implicit-Π A} f g → multivariable-implicit-htpy {{A}} f g
+  Id {A = iterated-implicit-Π A} f g → multivariable-htpy-implicit {{A}} f g
 multivariable-htpy-eq-implicit .0 {{base-telescope A}} p = p
 multivariable-htpy-eq-implicit ._ {{cons-telescope A}} p x =
   multivariable-htpy-eq-implicit _ {{A x}} (htpy-eq-implicit p x)
 
-eq-multivariable-implicit-htpy :
+eq-multivariable-htpy-implicit :
   {l : Level} (n : ℕ) {{A : telescope l n}} {f g : iterated-implicit-Π A} →
-  multivariable-implicit-htpy {{A}} f g → Id {A = iterated-implicit-Π A} f g
-eq-multivariable-implicit-htpy .0 {{base-telescope A}} H = H
-eq-multivariable-implicit-htpy ._ {{cons-telescope A}} H =
-  eq-implicit-htpy (λ x → eq-multivariable-implicit-htpy _ {{A x}} (H x))
+  multivariable-htpy-implicit {{A}} f g → Id {A = iterated-implicit-Π A} f g
+eq-multivariable-htpy-implicit .0 {{base-telescope A}} H = H
+eq-multivariable-htpy-implicit ._ {{cons-telescope A}} H =
+  eq-htpy-implicit (λ x → eq-multivariable-htpy-implicit _ {{A x}} (H x))
 
 equiv-iterated-funext-implicit :
   {l : Level} (n : ℕ) {{A : telescope l n}} {f g : iterated-implicit-Π A} →
-  (Id {A = iterated-implicit-Π A} f g) ≃ multivariable-implicit-htpy {{A}} f g
+  (Id {A = iterated-implicit-Π A} f g) ≃ multivariable-htpy-implicit {{A}} f g
 equiv-iterated-funext-implicit .0 {{base-telescope A}} = id-equiv
 equiv-iterated-funext-implicit ._ {{cons-telescope A}} =
   ( equiv-Π-equiv-family (λ x → equiv-iterated-funext-implicit _ {{A x}})) ∘e
@@ -133,23 +154,40 @@ equiv-iterated-funext-implicit ._ {{cons-telescope A}} =
 ### Torsoriality of multivariable homotopies
 
 ```agda
-is-torsorial-multivariable-htpy :
-  {l : Level} (n : ℕ) {{A : telescope l n}} (f : iterated-Π A) →
-  is-torsorial (multivariable-htpy {{A}} f)
-is-torsorial-multivariable-htpy ._ {{base-telescope A}} = is-torsorial-path
-is-torsorial-multivariable-htpy ._ {{cons-telescope A}} f =
-  is-torsorial-Eq-Π
-    ( λ x → multivariable-htpy {{A x}} (f x))
-    ( λ x → is-torsorial-multivariable-htpy _ {{A x}} (f x))
+abstract
+  is-torsorial-multivariable-htpy :
+    {l : Level} (n : ℕ) {{A : telescope l n}} (f : iterated-Π A) →
+    is-torsorial (multivariable-htpy {{A}} f)
+  is-torsorial-multivariable-htpy ._ {{base-telescope A}} = is-torsorial-path
+  is-torsorial-multivariable-htpy ._ {{cons-telescope A}} f =
+    is-torsorial-Eq-Π
+      ( λ x → multivariable-htpy {{A x}} (f x))
+      ( λ x → is-torsorial-multivariable-htpy _ {{A x}} (f x))
 
-is-torsorial-multivariable-implicit-htpy :
-  {l : Level} (n : ℕ) {{A : telescope l n}} (f : iterated-implicit-Π A) →
-  is-torsorial (multivariable-implicit-htpy {{A}} f)
-is-torsorial-multivariable-implicit-htpy ._ {{A}} f =
-  is-contr-equiv'
-    ( Σ (iterated-implicit-Π (A)) (Id {A = iterated-implicit-Π A} f))
-    ( equiv-tot (λ x → equiv-iterated-funext-implicit _ {{A}}))
-    ( is-torsorial-path {A = iterated-implicit-Π A} f)
+abstract
+  is-torsorial-multivariable-htpy-implicit :
+    {l : Level} (n : ℕ) {{A : telescope l n}} (f : iterated-implicit-Π A) →
+    is-torsorial (multivariable-htpy-implicit {{A}} f)
+  is-torsorial-multivariable-htpy-implicit ._ {{A}} f =
+    is-contr-equiv'
+      ( Σ (iterated-implicit-Π A) (Id {A = iterated-implicit-Π A} f))
+      ( equiv-tot (λ _ → equiv-iterated-funext-implicit _ {{A}}))
+      ( is-torsorial-path {A = iterated-implicit-Π A} f)
+
+abstract
+  is-torsorial-multivariable-implicit-htpy :
+    {l : Level} (n : ℕ) {{A : telescope l n}} (f : iterated-Π A) →
+    is-torsorial (multivariable-implicit-htpy {{A}} f)
+  is-torsorial-multivariable-implicit-htpy .0 {{base-telescope A}} =
+    is-torsorial-path
+  is-torsorial-multivariable-implicit-htpy ._ {{cons-telescope {X = X} A}} f =
+    is-contr-equiv
+      ( Σ ( iterated-Π (cons-telescope A))
+          ( λ z → (x : X) → multivariable-implicit-htpy {{A x}} (f x) (z x)))
+      ( equiv-tot (λ _ → equiv-explicit-implicit-Π))
+      ( is-torsorial-Eq-Π
+        ( λ x → multivariable-implicit-htpy {{A x}} (f x))
+        ( λ x → is-torsorial-multivariable-implicit-htpy _ {{A x}} (f x)))
 ```
 
 ## See also

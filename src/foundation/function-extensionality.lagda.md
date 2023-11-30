@@ -155,9 +155,9 @@ module _
   funext-implicit : is-equiv htpy-eq-implicit
   funext-implicit = is-equiv-map-equiv equiv-funext-implicit
 
-  eq-implicit-htpy :
+  eq-htpy-implicit :
     ((x : A) → f {x} ＝ g {x}) → Id {A = {x : A} → B x} f g
-  eq-implicit-htpy = map-inv-equiv equiv-funext-implicit
+  eq-htpy-implicit = map-inv-equiv equiv-funext-implicit
 ```
 
 ## Properties
