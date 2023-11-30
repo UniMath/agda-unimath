@@ -10,8 +10,8 @@ module synthetic-homotopy-theory.0-acyclic-maps where
 open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.propositions
 open import foundation.surjective-maps
-open import foundation.universe-levels
 open import foundation.truncation-levels
+open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.truncated-acyclic-maps
 ```
@@ -21,8 +21,7 @@ open import synthetic-homotopy-theory.truncated-acyclic-maps
 ## Idea
 
 We characterize the
-[`0`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md)
-as the
+[`0`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md) as the
 [surjective maps](foundation.surjective-maps.md).
 
 ## Definition

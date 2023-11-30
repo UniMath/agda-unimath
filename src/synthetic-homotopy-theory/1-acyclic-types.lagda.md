@@ -13,20 +13,21 @@ open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.inhabited-types
-open import foundation.identity-types
 open import foundation.function-extensionality
-open import foundation.propositions
-open import foundation.sets
-open import foundation.set-truncations
-open import foundation.truncation-levels
-open import foundation.truncated-types
+open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.injective-maps
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.0-acyclic-types
 open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.truncated-acyclic-types
 open import synthetic-homotopy-theory.truncated-acyclic-maps
+open import synthetic-homotopy-theory.truncated-acyclic-types
 ```
 
 </details>
@@ -34,8 +35,7 @@ open import synthetic-homotopy-theory.truncated-acyclic-maps
 ## Idea
 
 We characterize the
-[`1`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md)
-as the
+[`1`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md) as the
 [`0`-connected types](foundation.0-connected-types.md).
 
 TODO references + writing on concrete groups
@@ -59,7 +59,7 @@ module _
 
 ## Properties
 
-### A type is `1`-acyclic if and only if it is `0`-connected
+### Every `0`-connected type is `1`-acyclic
 
 ```agda
 module _
@@ -69,6 +69,8 @@ module _
   is-1-acyclic-is-0-connected : is-0-connected A → is-1-acyclic A
   is-1-acyclic-is-0-connected = is-truncated-succ-acyclic-is-connected
 ```
+
+### Every `1`-acyclic type is `0`-connected
 
 TODO references + writing
 
@@ -95,6 +97,7 @@ module _
     {l : Level} (A : UU l) →
     is-set A → is-1-acyclic A → is-contr A
   is-contr-is-1-acyclic-is-set A s ac =
+    let open concrete-group-assumption' (cga A) in
     is-contr-is-inhabited-is-prop
       ( is-prop-all-elements-equal
         ( λ x y →
@@ -103,22 +106,19 @@ module _
               ( Id)
               ( htpy-eq
                 ( is-section-map-inv-equiv
-                  ( pair
-                    ( const A (type-Ω (pair (type-Truncated-Type BG) pt)))
-                    ( is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt))
+                  ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
+                    is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
                   ( η))
-                  ( x))
+                ( x))
               ( htpy-eq
                 ( is-section-map-inv-equiv
-                  ( pair
-                    ( const A (type-Ω (pair (type-Truncated-Type BG) pt)))
-                    ( is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt))
-                ( η))
+                  ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
+                    is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
+                  ( η))
                 ( y))
               ( refl))))
-      ( {!!})
-    where
-      open concrete-group-assumption' (cga A)
+      ( is-inhabited-is-0-acyclic
+        ( is-truncated-acyclic-is-truncated-succ-acyclic ac))
 
   is-0-connected-is-1-acyclic :
     {l : Level} (A : UU l) →

@@ -5,6 +5,9 @@
 ```agda
 module synthetic-homotopy-theory where
 
+open import synthetic-homotopy-theory.0-acyclic-maps public
+open import synthetic-homotopy-theory.0-acyclic-types public
+open import synthetic-homotopy-theory.1-acyclic-types public
 open import synthetic-homotopy-theory.26-descent public
 open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.acyclic-maps public

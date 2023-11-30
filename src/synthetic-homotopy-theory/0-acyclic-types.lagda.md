@@ -9,17 +9,17 @@ module synthetic-homotopy-theory.0-acyclic-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.inhabited-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
-open import foundation.universe-levels
-open import foundation.unit-type
+open import foundation.propositions
 open import foundation.truncation-levels
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.0-acyclic-maps
-open import synthetic-homotopy-theory.truncated-acyclic-types
 open import synthetic-homotopy-theory.truncated-acyclic-maps
+open import synthetic-homotopy-theory.truncated-acyclic-types
 ```
 
 </details>
@@ -27,8 +27,7 @@ open import synthetic-homotopy-theory.truncated-acyclic-maps
 ## Idea
 
 We characterize the
-[`0`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md)
-as the
+[`0`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md) as the
 [inhabited types](foundation.inhabited-types.md).
 
 ## Definition
