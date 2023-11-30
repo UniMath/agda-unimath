@@ -96,6 +96,19 @@ module _
     is-connected-succ-suspension-is-connected
 ```
 
+### Every `(k+1)`-acyclic type is `k`-acyclic
+
+```agda
+module _
+  {l : Level} {k : 𝕋} {A : UU l}
+  where
+
+  is-truncated-acyclic-is-truncated-succ-acyclic :
+    is-truncated-acyclic (succ-𝕋 k) A → is-truncated-acyclic k A
+  is-truncated-acyclic-is-truncated-succ-acyclic =
+    is-connected-is-connected-succ-𝕋 k
+```
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
