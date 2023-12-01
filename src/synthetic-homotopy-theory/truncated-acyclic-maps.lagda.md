@@ -8,6 +8,8 @@ module synthetic-homotopy-theory.truncated-acyclic-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
+open import foundation.cones-over-cospans
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
@@ -21,16 +23,21 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.truncated-types
 open import foundation.truncation-equivalences
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
@@ -332,6 +339,111 @@ module _
       ( λ C →
         is-emb-is-equiv
           ( is-equiv-precomp-is-truncation-equivalence k f e C))
+```
+
+### `k`acyclic maps are closed under pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  is-truncated-acyclic-map-vertical-map-cone-is-pullback :
+    is-pullback f g c →
+    is-truncated-acyclic-map k g →
+    is-truncated-acyclic-map k (vertical-map-cone f g c)
+  is-truncated-acyclic-map-vertical-map-cone-is-pullback pb ac a =
+    is-truncated-acyclic-equiv
+      ( map-fiber-cone f g c a ,
+        is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
+      ( ac (f a))
+
+module _
+  {l1 l2 l3 l4 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  is-truncated-acyclic-map-horizontal-map-cone-is-pullback :
+    is-pullback f g c →
+    is-truncated-acyclic-map k f →
+    is-truncated-acyclic-map k (horizontal-map-cone f g c)
+  is-truncated-acyclic-map-horizontal-map-cone-is-pullback pb =
+    is-truncated-acyclic-map-vertical-map-cone-is-pullback g f
+      ( swap-cone f g c)
+      ( is-pullback-swap-cone f g c pb)
+```
+
+### `k`-acyclic types are closed under dependent pair types
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : A → UU l2)
+  where
+
+  is-truncated-acyclic-Σ :
+    is-truncated-acyclic k A →
+    ((a : A) → is-truncated-acyclic k (B a)) →
+    is-truncated-acyclic k (Σ A B)
+  is-truncated-acyclic-Σ ac-A ac-B =
+    is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
+      ( Σ A B)
+      ( is-truncated-acyclic-map-comp
+        ( terminal-map)
+        ( pr1)
+        ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)
+        ( λ a → is-truncated-acyclic-equiv (equiv-fiber-pr1 B a) (ac-B a)))
+```
+
+### `k`-acyclic types are closed under binary products
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : UU l2)
+  where
+
+  is-truncated-acyclic-prod :
+    is-truncated-acyclic k A →
+    is-truncated-acyclic k B →
+    is-truncated-acyclic k (A × B)
+  is-truncated-acyclic-prod ac-A ac-B =
+    is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
+      ( A × B)
+      ( is-truncated-acyclic-map-comp
+        ( terminal-map)
+        ( pr2)
+        ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic B ac-B)
+        ( is-truncated-acyclic-map-horizontal-map-cone-is-pullback
+          ( terminal-map)
+          ( terminal-map)
+          ( cone-prod A B)
+          ( is-pullback-prod A B)
+          ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)))
+```
+
+### Inhabited, locally `k`-acyclic types are `k`-acyclic
+
+```agda
+module _
+  {l : Level} {k : 𝕋} (A : UU l)
+  where
+
+  is-truncated-acyclic-inhabited-is-truncated-acyclic-Id :
+    is-inhabited A →
+    ((a b : A) → is-truncated-acyclic k (a ＝ b)) →
+    is-truncated-acyclic k A
+  is-truncated-acyclic-inhabited-is-truncated-acyclic-Id h l-ac =
+    apply-universal-property-trunc-Prop h
+      ( is-truncated-acyclic-Prop k A)
+      ( λ a →
+        is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
+          ( is-truncated-acyclic-map-left-factor
+            ( terminal-map)
+            ( point a)
+            ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic
+              ( unit)
+              ( is-truncated-acyclic-unit))
+            ( λ b → is-truncated-acyclic-equiv (fiber-const a b) (l-ac a b))))
 ```
 
 ## See also
