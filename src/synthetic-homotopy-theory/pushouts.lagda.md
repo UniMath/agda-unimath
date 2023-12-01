@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.pushouts where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -168,6 +169,19 @@ module _
         ( up-pushout f g)
         ( c))
       ( po)
+      ( up-pushout f g)
+
+  is-pushout-universal-property-pushout :
+    ({l : Level} → universal-property-pushout l f g c) → is-pushout f g c
+  is-pushout-universal-property-pushout =
+    is-equiv-up-pushout-up-pushout f g
+      ( cocone-pushout f g)
+      ( c)
+      ( cogap f g c)
+      ( htpy-cocone-map-universal-property-pushout f g
+        ( cocone-pushout f g)
+        ( up-pushout f g)
+        ( c))
       ( up-pushout f g)
 ```
 
@@ -424,4 +438,38 @@ fibers.
         ( is-equiv-map-equiv i)
         ( is-equiv-map-equiv j)
         ( is-equiv-map-equiv k)
+```
+
+### Swapping a pushout cocone yields another pushout cocone
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4) (c : cocone f g X)
+  where
+
+  universal-property-pushout-swap-cocone-universal-property-pushout :
+    {l : Level} → universal-property-pushout l f g c →
+    universal-property-pushout l g f (swap-cocone f g X c)
+  universal-property-pushout-swap-cocone-universal-property-pushout up Y =
+    is-equiv-equiv'
+      ( id-equiv)
+      ( equiv-swap-cocone f g Y)
+      ( λ h →
+        eq-htpy-cocone g f
+          ( swap-cocone f g Y (cocone-map f g c h))
+          ( cocone-map g f (swap-cocone f g X c) h)
+          ( ( refl-htpy) ,
+            ( refl-htpy) ,
+            ( λ s →
+              right-unit ∙ inv (ap-inv h (coherence-square-cocone f g c s)))))
+      ( up Y)
+
+  is-pushout-swap-cocone-is-pushout :
+    is-pushout f g c → is-pushout g f (swap-cocone f g X c)
+  is-pushout-swap-cocone-is-pushout po =
+    is-pushout-universal-property-pushout g f
+      ( swap-cocone f g X c)
+      ( universal-property-pushout-swap-cocone-universal-property-pushout
+        ( universal-property-pushout-is-pushout f g c po))
 ```
