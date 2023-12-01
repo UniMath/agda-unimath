@@ -34,8 +34,11 @@ open import synthetic-homotopy-theory.truncated-acyclic-types
 
 ## Idea
 
-We characterize the
-[`1`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md) as the
+A type is [`1`-acyclic](synthetic-homotopy-theory.truncated-acyclic-types.md) if
+its [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
+[`1`-connected](foundation.connected-types.md)
+
+We can characterize the `1`-acyclic types as the
 [`0`-connected types](foundation.0-connected-types.md).
 
 In one direction, our proof relies on the following group-theoretic fact: the
@@ -163,11 +166,5 @@ module _
 
 ## See also
 
-- [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
-- [Acyclic types](synthetic-homotopy-theory.acyclic-types.md)
-- [`k`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md)
 - [`k`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md)
-- [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
-- [Epimorphisms](foundation.epimorphisms.md)
-- [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
-- [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)
+- [Acyclic types](synthetic-homotopy-theory.acyclic-types.md)
