@@ -390,24 +390,24 @@ module _
       ( is-epimorphism-universal-property-pushout
         ( vertical-map-cocone f g c)
         ( universal-property-pushout-right-universal-property-pushout-rectangle
-            ( f)
-            ( g)
-            ( vertical-map-cocone f g c)
-            ( c)
-            ( cocone-codiagonal-map (vertical-map-cocone f g c))
-            ( universal-property-pushout-is-pushout f g c po)
-            ( λ X →
-              is-equiv-right-factor
-                ( map-equiv (equiv-cocone-postcomp-vertical-map-cocone ac X))
-                ( cocone-map f
-                  ( vertical-map-cocone f g c ∘ g)
-                  ( cocone-comp-horizontal f g
-                    ( vertical-map-cocone f g c)
-                    ( c)
-                    ( cocone-codiagonal-map (vertical-map-cocone f g c))))
-                ( is-equiv-map-equiv
-                  ( equiv-cocone-postcomp-vertical-map-cocone ac X))
-                ( is-equiv-id))))
+          ( f)
+          ( g)
+          ( vertical-map-cocone f g c)
+          ( c)
+          ( cocone-codiagonal-map (vertical-map-cocone f g c))
+          ( universal-property-pushout-is-pushout f g c po)
+          ( λ X →
+            is-equiv-right-factor
+              ( map-equiv (equiv-cocone-postcomp-vertical-map-cocone ac X))
+              ( cocone-map f
+                ( vertical-map-cocone f g c ∘ g)
+                ( cocone-comp-horizontal f g
+                  ( vertical-map-cocone f g c)
+                  ( c)
+                  ( cocone-codiagonal-map (vertical-map-cocone f g c))))
+              ( is-equiv-map-equiv
+                ( equiv-cocone-postcomp-vertical-map-cocone ac X))
+              ( is-equiv-id))))
 
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
