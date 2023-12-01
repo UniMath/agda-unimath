@@ -28,7 +28,7 @@ open import synthetic-homotopy-theory.truncated-acyclic-types
 
 A type is **`0`-acyclic** if its
 [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
-[`0`-connected](foundation.0-connected-types.md)
+[`0`-connected](foundation.0-connected-types.md).
 
 We can characterize the `0`-acyclic types as the
 [inhabited types](foundation.inhabited-types.md).
