@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
-open import foundation.commuting-squares-of-maps
 open import foundation.dependent-epimorphisms
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
@@ -29,17 +28,18 @@ open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.torsorial-type-families
-open import foundation.type-arithmetic-unit-type
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.acyclic-types
-open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
@@ -339,10 +339,32 @@ module _
 
   is-acyclic-map-vertical-map-cocone-is-pushout :
     is-pushout f g c →
-    is-acyclic-map g →
+    is-acyclic-map f →
     is-acyclic-map (vertical-map-cocone f g c)
-  is-acyclic-map-vertical-map-cocone-is-pushout po is-ac-g =
-    {!!}
+  is-acyclic-map-vertical-map-cocone-is-pushout po ac =
+    is-acyclic-map-is-epimorphism
+      ( vertical-map-cocone f g c)
+      ( is-epimorphism-universal-property-pushout
+        ( vertical-map-cocone f g c)
+        ( universal-property-pushout-right-universal-property-pushout-rectangle
+            ( f)
+            ( g)
+            ( vertical-map-cocone f g c)
+            ( c)
+            ( cocone-codiagonal-map (vertical-map-cocone f g c))
+            ( universal-property-pushout-is-pushout f g c po)
+            ( λ X →
+              is-equiv-right-factor
+                ( map-equiv (equiv-cocone-postcomp-vertical-map-cocone ac X))
+                ( cocone-map f
+                  ( vertical-map-cocone f g c ∘ g)
+                  ( cocone-comp-horizontal f g
+                    ( vertical-map-cocone f g c)
+                    ( c)
+                    ( cocone-codiagonal-map (vertical-map-cocone f g c))))
+                ( is-equiv-map-equiv
+                  ( equiv-cocone-postcomp-vertical-map-cocone ac X))
+                ( is-equiv-id))))
 ```
 
 ## See also
