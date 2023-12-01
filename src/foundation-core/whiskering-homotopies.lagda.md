@@ -90,6 +90,10 @@ module _
 
 ### Unit laws for whiskering homotopies
 
+The identity map is the identity element for whiskerings from the function side,
+and the reflexivity homotopy is the identity element for whiskerings from the
+homotopy side.
+
 ```agda
 module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2}
