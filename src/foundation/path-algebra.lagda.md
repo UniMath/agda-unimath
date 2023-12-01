@@ -309,25 +309,53 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l} {x y z u v : A}
+  (p : x ＝ y) (p' : x ＝ z) {q : y ＝ u} {q' : z ＝ u} (r : u ＝ v)
   where
 
   equiv-right-whisk-square-identification :
-    (p : x ＝ y) (p' : x ＝ z) {q : y ＝ u} {q' : z ＝ u} (r : u ＝ v) →
     ( coherence-square-identifications p p' q q') ≃
     ( coherence-square-identifications p p' (q ∙ r) (q' ∙ r))
-  equiv-right-whisk-square-identification p p' {q} {q'} r =
+  equiv-right-whisk-square-identification =
     ( equiv-concat-assoc' (p' ∙ (q' ∙ r)) p q r) ∘e
     ( equiv-concat-assoc p' q' r (p ∙ q ∙ r)) ∘e
     ( equiv-identification-right-whisk r)
 
+  right-whisk-square-identification :
+    coherence-square-identifications p p' q q' →
+    coherence-square-identifications p p' (q ∙ r) (q' ∙ r)
+  right-whisk-square-identification =
+    map-equiv equiv-right-whisk-square-identification
+
+  right-unwhisk-square-identifications :
+    coherence-square-identifications p p' (q ∙ r) (q' ∙ r) →
+    coherence-square-identifications p p' q q'
+  right-unwhisk-square-identifications =
+    map-inv-equiv equiv-right-whisk-square-identification
+
+module _
+  {l : Level} {A : UU l} {x y z u v : A}
+  (p : v ＝ x) {q : x ＝ y} {q' : x ＝ z} {r : y ＝ u} {r' : z ＝ u}
+  where
+
   equiv-left-whisk-square-identification :
-    (p : v ＝ x) {q : x ＝ y} {q' : x ＝ z} {r : y ＝ u} {r' : z ＝ u} →
     ( coherence-square-identifications q q' r r') ≃
     ( coherence-square-identifications (p ∙ q) (p ∙ q') r r')
-  equiv-left-whisk-square-identification p {q} {q'} {r} {r'} =
+  equiv-left-whisk-square-identification =
     ( inv-equiv (equiv-concat-assoc p q' r' (p ∙ q ∙ r))) ∘e
     ( inv-equiv (equiv-concat-assoc' (p ∙ (q' ∙ r')) p q r)) ∘e
     ( equiv-identification-left-whisk p)
+
+  left-whisk-square-identification :
+    coherence-square-identifications q q' r r' →
+    coherence-square-identifications (p ∙ q) (p ∙ q') r r'
+  left-whisk-square-identification =
+    map-equiv equiv-left-whisk-square-identification
+
+  left-unwhisk-square-identification :
+    coherence-square-identifications (p ∙ q) (p ∙ q') r r' →
+    coherence-square-identifications q q' r r'
+  left-unwhisk-square-identification =
+    map-inv-equiv equiv-left-whisk-square-identification
 
 module _
   {l : Level} {A : UU l} {x y z u v w : A}

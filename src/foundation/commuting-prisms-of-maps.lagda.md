@@ -171,23 +171,3 @@ module _
   rotate-vertical-coherence-prism-maps =
     map-equiv equiv-rotate-vertical-coherence-prism-maps
 ```
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( top-left : A → B) (top-right : B → C) (top-front : A → C)
-  ( front-left : A → X) (back : B → Y) (front-right : C → Z)
-  ( bottom-left : X → Y) (bottom-right : Y → Z) (bottom-front : X → Z)
-  ( top : coherence-triangle-maps top-front top-right top-left)
-  ( left : coherence-square-maps top-left front-left back bottom-left)
-  ( right : coherence-square-maps top-right back front-right bottom-right)
-  ( front : coherence-square-maps top-front front-left front-right bottom-front)
-  ( bottom : coherence-triangle-maps bottom-front bottom-right bottom-left)
-  where
-
-  -- equiv-coherence-prism-maps :
-  --   vertical-coherence-prism-maps top-left top-right top-front front-left back front-right bottom-left bottom-right bottom-front top left right front bottom ≃
-  --   horizontal-coherence-prism-maps front-left top-front top-left bottom-front bottom-left back top-right bottom-right front-right (inv-htpy left) (inv-htpy top) (inv-htpy bottom) (inv-htpy front) (inv-htpy right)
-  -- equiv-coherence-prism-maps = {!!}
-```
