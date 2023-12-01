@@ -45,7 +45,7 @@ out in HoTT/UF and formalized in Agda in \[BCDE21\] by Bezem, Coquand, Dybjer
 and Escardó.
 
 Translated to [concrete groups](group-theory.concrete-groups.md) this means that
-for every set `X`, we have a pointed `1`-type `pt : BG` together with an
+for every set `X`, we have a [pointed](structured-types.pointed-types.md) [`1`-type](foundation-core.1-types.md) `pt : BG` together with an
 injection `gen : X → pt ＝ pt`. (Actually, `BG` is `0`-connected as well, but we
 don't use this in our proof below.)
 
