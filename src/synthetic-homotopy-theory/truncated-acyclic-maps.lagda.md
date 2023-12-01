@@ -313,20 +313,20 @@ module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-truncated-succ-acyclic-map-is-connected-map :
+  is-truncated-acyclic-map-succ-is-connected-map :
     is-connected-map k f → is-truncated-acyclic-map (succ-𝕋 k) f
-  is-truncated-succ-acyclic-map-is-connected-map c b =
-    is-truncated-succ-acyclic-is-connected (c b)
+  is-truncated-acyclic-map-succ-is-connected-map c b =
+    is-truncated-acyclic-succ-is-connected (c b)
 ```
 
 In particular, the unit of the `k`-truncation is `(k+1)`-acyclic
 
 ```agda
-is-truncated-succ-acyclic-map-unit-trunc :
+is-truncated-acyclic-map-succ-unit-trunc :
   {l : Level} {k : 𝕋} (A : UU l) →
   is-truncated-acyclic-map (succ-𝕋 k) (unit-trunc {A = A})
-is-truncated-succ-acyclic-map-unit-trunc {k = k} A =
-  is-truncated-succ-acyclic-map-is-connected-map
+is-truncated-acyclic-map-succ-unit-trunc {k = k} A =
+  is-truncated-acyclic-map-succ-is-connected-map
     ( unit-trunc)
     ( is-connected-map-unit-trunc k)
 ```
@@ -349,7 +349,7 @@ module _
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic
           ( type-trunc k A)
           ( ac))
-        ( is-truncated-succ-acyclic-map-unit-trunc A))
+        ( is-truncated-acyclic-map-succ-unit-trunc A))
 
   is-truncated-succ-acyclic-type-trunc-is-truncated-succ-acyclic :
     is-truncated-acyclic (succ-𝕋 k) A →
@@ -361,7 +361,7 @@ module _
         ( terminal-map)
         ( unit-trunc)
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac)
-        ( is-truncated-succ-acyclic-map-unit-trunc A))
+        ( is-truncated-acyclic-map-succ-unit-trunc A))
 ```
 
 ### Every `k`-equivalence is `k`-acyclic
