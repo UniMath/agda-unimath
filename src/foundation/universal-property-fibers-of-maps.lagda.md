@@ -8,16 +8,18 @@ module foundation.universal-property-fibers-of-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-maps
-open import foundation.contractible-types
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.families-of-equivalences
+open import foundation.dependent-universal-property-equivalences
+open import foundation-core.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.subtype-identity-principle
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -30,20 +32,24 @@ open import foundation-core.identity-types
 
 Any map `f : A → B` induces a type family `fiber f : B → 𝒰` of
 [fibers](foundation-core.fibers-of-maps.md) of `f`. By
-[precomposing](foundation.precomposition-type-families.md) with `f`, we obtain the type family `(fiber f) ∘ f : A → 𝒰`, which always has a section given by
+[precomposing](foundation.precomposition-type-families.md) with `f`, we obtain
+the type family `(fiber f) ∘ f : A → 𝒰`, which always has a section given by
 
 ```text
   λ a → (a , refl) : (a : A) → fiber f (f a).
 ```
 
 We can uniquely characterize the family of fibers `fiber f : B → 𝒰` as the
-initial type family equipped with such a section. Explicitly, the {{#concept "universal property of the fiber" Disambiguation="of a map"}} `fiber f : B → 𝒰` of a map `f` is that the precomposition operation
+initial type family equipped with such a section. Explicitly, the
+{{#concept "universal property of the fiber" Disambiguation="of a map"}}
+`fiber f : B → 𝒰` of a map `f` is that the precomposition operation
 
 ```text
   ((b : B) → fiber f b → P b) → ((a : A) → P (f a))
 ```
 
-is an [equivalence](foundation-core.equivalences.md) for any type family `P : B → 𝒰`.
+is an [equivalence](foundation-core.equivalences.md) for any type family
+`P : B → 𝒰`.
 
 This universal property is especially useful when `A` or `B` enjoy mapping out
 universal properties. This lets us characterize the sections `(a : A) → P (f a)`
@@ -88,6 +94,117 @@ module _
 ```
 
 ## Properties
+
+### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : (y : B) (z : fiber f y) → UU l3)
+  where
+
+  map-reduce-Π-fiber :
+    ((y : B) (z : fiber f y) → C y z) → ((x : A) → C (f x) (x , refl))
+  map-reduce-Π-fiber h x = h (f x) (x , refl)
+
+  inv-map-reduce-Π-fiber :
+    ((x : A) → C (f x) (x , refl)) → ((y : B) (z : fiber f y) → C y z)
+  inv-map-reduce-Π-fiber h .(f x) (x , refl) = h x
+
+  is-section-inv-map-reduce-Π-fiber :
+    (map-reduce-Π-fiber ∘ inv-map-reduce-Π-fiber) ~ id
+  is-section-inv-map-reduce-Π-fiber h = refl
+
+  is-retraction-inv-map-reduce-Π-fiber' :
+    (h : (y : B) (z : fiber f y) → C y z) (y : B) →
+    (inv-map-reduce-Π-fiber (map-reduce-Π-fiber h) y) ~ (h y)
+  is-retraction-inv-map-reduce-Π-fiber' h .(f z) (z , refl) = refl
+
+  is-retraction-inv-map-reduce-Π-fiber :
+    (inv-map-reduce-Π-fiber ∘ map-reduce-Π-fiber) ~ id
+  is-retraction-inv-map-reduce-Π-fiber h =
+    eq-htpy (eq-htpy ∘ is-retraction-inv-map-reduce-Π-fiber' h)
+
+  is-equiv-map-reduce-Π-fiber : is-equiv map-reduce-Π-fiber
+  is-equiv-map-reduce-Π-fiber =
+    is-equiv-is-invertible
+      ( inv-map-reduce-Π-fiber)
+      ( is-section-inv-map-reduce-Π-fiber)
+      ( is-retraction-inv-map-reduce-Π-fiber)
+
+  reduce-Π-fiber' :
+    ((y : B) (z : fiber f y) → C y z) ≃ ((x : A) → C (f x) (x , refl))
+  pr1 reduce-Π-fiber' = map-reduce-Π-fiber
+  pr2 reduce-Π-fiber' = is-equiv-map-reduce-Π-fiber
+
+reduce-Π-fiber :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  (C : B → UU l3) → ((y : B) → fiber f y → C y) ≃ ((x : A) → C (f x))
+reduce-Π-fiber f C = reduce-Π-fiber' f (λ y z → C y)
+```
+
+### The family of fibers has the universal property of fibers of maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  section-family-of-fibers :
+    (a : A) → fiber f (f a)
+  pr1 (section-family-of-fibers a) = a
+  pr2 (section-family-of-fibers a) = refl
+
+  equiv-up-family-of-fibers :
+    {l : Level} → (P : B → UU l) →
+    ((b : B) → fiber f b → P b) ≃ ((a : A) → P (f a))
+  equiv-up-family-of-fibers P =
+    equivalence-reasoning
+      ( (b : B) → fiber f b → P b)
+      ≃ ((w : Σ B (λ b → fiber f b)) → P (pr1 w))
+        by equiv-ind-Σ
+      ≃ ((a : A) → P (f a))
+        by
+          equiv-precomp-Π
+            ( inv-equiv-total-fiber f)
+            ( λ w → P (pr1 w))
+
+  up-family-of-fibers :
+    universal-property-fiber f (fiber f) (section-family-of-fibers)
+  up-family-of-fibers P =
+    is-equiv-map-equiv (equiv-up-family-of-fibers P)
+```
+
+### The family of fibers has the dependent universal property of fibers of maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  equiv-dependent-up-family-of-fibers :
+    {l : Level} (P : (b : B) → fiber f b → UU l) →
+    ( ( b : B) (z : fiber f b) → P b z) ≃
+    ( ( a : A) → P (f a) (section-family-of-fibers f a))
+  equiv-dependent-up-family-of-fibers P =
+    equivalence-reasoning
+      ( ( b : B) (z : fiber f b) → P b z)
+      ≃ ((w : Σ B (λ b → fiber f b)) → P (pr1 w) (pr2 w))
+        by equiv-ind-Σ
+      ≃ ((a : A) → P (f a) (section-family-of-fibers f a))
+        by
+          equiv-precomp-Π
+            ( inv-equiv-total-fiber f)
+            ( λ w → P (pr1 w) (pr2 w))
+
+  dependent-up-family-of-fibers :
+    dependent-universal-property-fiber
+      ( f)
+      ( fiber f)
+      ( section-family-of-fibers f)
+  dependent-up-family-of-fibers P =
+    is-equiv-map-equiv (equiv-dependent-up-family-of-fibers P)
+```
 
 ### Fibers are uniquely unique
 

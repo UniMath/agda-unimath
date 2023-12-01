@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
 open import foundation.truncation-levels
+open import foundation.universal-property-fibers-of-maps
 open import foundation.universe-levels
 
 open import foundation-core.coherently-invertible-maps

@@ -13,11 +13,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
-open import foundation.families-of-equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
-open import foundation.truncated-maps
+open import foundation-core.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
@@ -25,6 +24,7 @@ open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -247,19 +247,6 @@ module _
   emb-map-equiv : (A ≃ B) ↪ (A → B)
   pr1 emb-map-equiv = map-equiv
   pr2 emb-map-equiv = is-emb-map-equiv
-```
-
-### Being a fiberwise equivalence is a proposition
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  where
-
-  is-property-is-fiberwise-equiv :
-    (f : (a : A) → B a → C a) → is-prop (is-fiberwise-equiv f)
-  is-property-is-fiberwise-equiv f =
-    is-prop-Π (λ a → is-property-is-equiv (f a))
 ```
 
 ### The 3-for-2 property of being an equivalence

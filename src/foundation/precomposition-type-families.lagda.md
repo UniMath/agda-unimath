@@ -16,13 +16,15 @@ open import foundation-core.function-types
 
 ## Idea
 
-Any map `f : A → B` induces a {{#concept "precomposition operation" Disambiguation="of type families"}}
+Any map `f : A → B` induces a
+{{#concept "precomposition operation" Disambiguation="of type families"}}
 
 ```text
   (B → 𝒰) → (A → 𝒰)
 ```
 
-given by [precomposing](precomposition-functions.md) any `Q : B → 𝒰` to `Q ∘ f : A → 𝒰`.
+given by [precomposing](precomposition-functions.md) any `Q : B → 𝒰` to
+`Q ∘ f : A → 𝒰`.
 
 ## Definitions
 
