@@ -7,8 +7,8 @@ module synthetic-homotopy-theory.truncated-acyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.connected-types
+open import foundation.contractible-types
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.retracts-of-types
