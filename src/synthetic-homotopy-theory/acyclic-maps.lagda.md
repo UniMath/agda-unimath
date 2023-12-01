@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.acyclic-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.cones-over-cospans
 open import foundation.constant-maps
 open import foundation.contractible-maps
@@ -26,14 +27,17 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.propositional-truncations
 open import foundation.pullbacks
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
@@ -401,6 +405,86 @@ module _
       ( map-fiber-cone f g c a ,
         is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
       ( ac (f a))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  is-acyclic-map-horizontal-map-cone-is-pullback :
+    is-pullback f g c →
+    is-acyclic-map f →
+    is-acyclic-map (horizontal-map-cone f g c)
+  is-acyclic-map-horizontal-map-cone-is-pullback pb =
+    is-acyclic-map-vertical-map-cone-is-pullback g f
+      ( swap-cone f g c)
+      ( is-pullback-swap-cone f g c pb)
+```
+
+### Acyclic types are closed under dependent pair types
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  is-acyclic-Σ :
+    is-acyclic A → ((a : A) → is-acyclic (B a)) → is-acyclic (Σ A B)
+  is-acyclic-Σ ac-A ac-B =
+    is-acyclic-is-acyclic-map-terminal-map
+      ( Σ A B)
+      ( is-acyclic-map-comp
+        ( terminal-map)
+        ( pr1)
+        ( is-acyclic-map-terminal-map-is-acyclic A ac-A)
+        ( λ a → is-acyclic-equiv (equiv-fiber-pr1 B a) (ac-B a)))
+```
+
+### Acyclic types are closed under binary products
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  is-acyclic-prod :
+    is-acyclic A → is-acyclic B → is-acyclic (A × B)
+  is-acyclic-prod ac-A ac-B =
+    is-acyclic-is-acyclic-map-terminal-map
+      ( A × B)
+      ( is-acyclic-map-comp
+        ( terminal-map)
+        ( pr2)
+        ( is-acyclic-map-terminal-map-is-acyclic B ac-B)
+        ( is-acyclic-map-horizontal-map-cone-is-pullback
+          ( terminal-map)
+          ( terminal-map)
+          ( cone-prod A B)
+          ( is-pullback-prod A B)
+          ( is-acyclic-map-terminal-map-is-acyclic A ac-A)))
+```
+
+### Inhabited, locally acyclic types are acyclic
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  is-acyclic-inhabited-is-acyclic-Id :
+    is-inhabited A →
+    ((a b : A) → is-acyclic (a ＝ b)) →
+    is-acyclic A
+  is-acyclic-inhabited-is-acyclic-Id h l-ac =
+    apply-universal-property-trunc-Prop h
+      ( is-acyclic-Prop A)
+      ( λ a →
+        is-acyclic-is-acyclic-map-terminal-map A
+          ( is-acyclic-map-left-factor
+            ( terminal-map)
+            ( point a)
+            ( is-acyclic-map-terminal-map-is-acyclic unit is-acyclic-unit)
+            ( λ b → is-acyclic-equiv (fiber-const a b) (l-ac a b))))
 ```
 
 ## See also
