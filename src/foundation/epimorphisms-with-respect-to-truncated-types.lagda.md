@@ -219,6 +219,16 @@ module _
       ( diagonal-into-cocone f (type-Truncated-Type X))
       ( is-equiv-id)
       ( is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e)
+
+  is-equiv-vertical-map-cocone-is-epimorphism-Truncated-Type :
+    is-epimorphism-Truncated-Type k f →
+    is-equiv (vertical-map-cocone {X = type-Truncated-Type X} f f)
+  is-equiv-vertical-map-cocone-is-epimorphism-Truncated-Type e =
+    is-equiv-left-factor
+      ( vertical-map-cocone f f)
+      ( diagonal-into-cocone f (type-Truncated-Type X))
+      ( is-equiv-id)
+      ( is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e)
 ```
 
 We now get the desired result, the codiagonal of `f` is a `k`-equivalence if `f`
@@ -294,6 +304,19 @@ module _
         ( precomp (codiagonal-map f) (type-Truncated-Type X))
         ( is-equiv-precomp-is-truncation-equivalence k (codiagonal-map f) e X)
         ( is-equiv-map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
+
+  is-equiv-vertical-map-cocone-is-truncation-equivalence-codiagonal-map :
+    is-truncation-equivalence k (codiagonal-map f) →
+    {l : Level} (X : Truncated-Type l k) →
+    is-equiv (vertical-map-cocone {X = type-Truncated-Type X} f f)
+  is-equiv-vertical-map-cocone-is-truncation-equivalence-codiagonal-map e X =
+    is-equiv-comp
+      ( horizontal-map-cocone f f)
+      {! tot!} -- ( horizontal-map-cocone f f)
+      {!!} {- ( is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map
+          ( e)
+          ( X)) -}
+      ( {!!})
 
   is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type :
     is-truncation-equivalence k (codiagonal-map f) →
