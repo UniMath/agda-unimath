@@ -34,8 +34,8 @@ open import synthetic-homotopy-theory.truncated-acyclic-types
 
 ## Idea
 
-A type is [`1`-acyclic](synthetic-homotopy-theory.truncated-acyclic-types.md) if
-its [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
+A type is **`1`-acyclic** if its
+[suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
 [`1`-connected](foundation.connected-types.md)
 
 We can characterize the `1`-acyclic types as the
@@ -166,5 +166,5 @@ module _
 
 ## See also
 
-- [`k`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md)
+- [`k`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-maps.md)
 - [Acyclic types](synthetic-homotopy-theory.acyclic-types.md)

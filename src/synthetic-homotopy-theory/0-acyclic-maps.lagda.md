@@ -20,8 +20,7 @@ open import synthetic-homotopy-theory.truncated-acyclic-maps
 
 ## Idea
 
-A [`0`-acyclic map](synthetic-homotopy-theory.truncated-acyclic-maps.md) is a
-map whose fibers are
+A **`0`-acyclic map** is a map whose fibers are
 [`0`-acyclic types](synthetic-homotopy-theory.0-acyclic-types.md), meaning that
 their [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
 [`0`-connected](foundation.0-connected-types.md).
