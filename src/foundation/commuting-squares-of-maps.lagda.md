@@ -1,7 +1,6 @@
 # Commuting squares of maps
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
 module foundation.commuting-squares-of-maps where
 
 open import foundation-core.commuting-squares-of-maps public
@@ -200,7 +199,83 @@ module _
   left-inverse-law-pasting-vertical-coherence-square-maps H a =
     ( right-unit) ∙
     ( inv
-      {!!})
+      ( ( ap
+          ( λ q →
+            ( q ∙ ap (map-inv-equiv right) (H a)) ∙
+            ( is-retraction-map-inv-equiv right (top a)))
+          ( triangle-eq-transpose-equiv-concat
+            ( right)
+            ( inv (H (map-inv-equiv left (map-equiv left a))))
+            ( ap bottom (is-section-map-inv-equiv left (map-equiv left a))))) ∙
+        ( assoc
+          ( ( map-eq-transpose-equiv
+              ( right)
+              ( inv (H (map-inv-equiv left (map-equiv left a)))) ∙
+            ( ap
+              ( map-inv-equiv right)
+              ( ap bottom (is-section-map-inv-equiv left (map-equiv left a))))))
+          ( ap (map-inv-equiv right) (H a))
+          ( is-retraction-map-inv-equiv right (top a))) ∙
+        ( left-whisk-square-identification
+          ( map-eq-transpose-equiv
+            ( right)
+            ( inv (H (map-inv-equiv left (map-equiv left a)))))
+          ( inv
+            ( coherence-square-identifications-comp-vertical
+              { p-left =
+                  ap
+                    ( map-inv-equiv right)
+                    ( H (map-inv-equiv left (map-equiv left a)))}
+              { p-top =
+                  ap
+                    ( map-inv-equiv right)
+                    ( ap
+                      ( bottom)
+                      ( is-section-map-inv-equiv left (map-equiv left a)))}
+              { q-bottom = ap top (is-retraction-map-inv-equiv left a)}
+              ( coherence-square-identifications-top-paste
+                ( ap
+                  ( map-inv-equiv right)
+                  ( H (map-inv-equiv left (map-equiv left a))))
+                ( _)
+                ( _)
+                ( _)
+                ( inv
+                  ( ap
+                    ( ap (map-inv-equiv right))
+                    ( ( ap (ap bottom) (coherence-map-inv-equiv left a)) ∙
+                      ( inv
+                        ( ap-comp
+                          ( bottom)
+                          ( map-equiv left)
+                          ( is-retraction-map-inv-equiv left a))))))
+                ( coherence-square-identifications-ap
+                  ( map-inv-equiv right)
+                  ( ap
+                    ( bottom ∘ map-equiv left)
+                    ( is-retraction-map-inv-equiv left a))
+                  ( H (map-inv-equiv left (map-equiv left a)))
+                  ( H a)
+                  ( ap
+                    ( map-equiv right ∘ top)
+                    ( is-retraction-map-inv-equiv left a))
+                  ( nat-htpy H (is-retraction-map-inv-equiv left a))))
+              ( coherence-square-identifications-top-paste _
+                ( ap top (is-retraction-map-inv-equiv left a))
+                ( _)
+                ( _)
+                ( ap-comp
+                  ( map-inv-equiv right)
+                  ( map-equiv right ∘ top)
+                  ( is-retraction-map-inv-equiv left a))
+                ( nat-htpy
+                  ( is-retraction-map-inv-equiv right ·r top)
+                  ( is-retraction-map-inv-equiv left a)))))) ∙
+        ( ap
+          ( _∙ ap top (is-retraction-map-inv-equiv left a))
+          ( triangle-eq-transpose-equiv-retr''
+            ( right)
+            ( H (map-inv-equiv left (map-equiv left a)))))))
 
   right-inverse-law-pasting-vertical-coherence-square-maps :
     ( H : coherence-square-maps top (map-equiv left) (map-equiv right) bottom) →

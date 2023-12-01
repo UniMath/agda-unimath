@@ -16,6 +16,7 @@ open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
@@ -76,6 +77,14 @@ module _
       ( map-equiv e x)
       ( inv (is-section-map-inv-equiv e y)))
 
+  eq-transpose-equiv' :
+    (x : A) (y : B) → (map-equiv e x ＝ y) ≃ (x ＝ map-inv-equiv e y)
+  eq-transpose-equiv' x y =
+    ( equiv-concat
+      ( inv (is-retraction-map-inv-equiv e x))
+      ( map-inv-equiv e y)) ∘e
+    ( equiv-ap (inv-equiv e) (map-equiv e x) y)
+
   map-eq-transpose-equiv :
     {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
   map-eq-transpose-equiv {x} {y} = map-equiv (eq-transpose-equiv x y)
@@ -101,6 +110,12 @@ module _
         ( is-section-map-inv-equiv e y)) ∙
       ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙
         ( right-unit)))
+
+  triangle-eq-transpose-equiv-concat :
+    {x : A} {y z : B} (p : map-equiv e x ＝ y) (q : y ＝ z) →
+    ( map-eq-transpose-equiv (p ∙ q)) ＝
+    ( map-eq-transpose-equiv p ∙ ap (map-inv-equiv e) q)
+  triangle-eq-transpose-equiv-concat refl refl = inv right-unit
 
   map-eq-transpose-equiv' :
     {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
@@ -138,6 +153,57 @@ module _
                           ( inv (is-section-map-inv-equiv e y))))))) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  htpy-map-eq-transpose-equiv :
+    {x : A} {y : B} →
+    map-eq-transpose-equiv e ~ map-equiv (eq-transpose-equiv' e x y)
+  htpy-map-eq-transpose-equiv {x} refl =
+    ( map-eq-transpose-equiv'
+      ( equiv-ap e x _)
+      ( ( ap inv (coherence-map-inv-equiv e x)) ∙
+        ( inv (ap-inv (map-equiv e) (is-retraction-map-inv-equiv e x))))) ∙
+    ( inv right-unit)
+
+  triangle-eq-transpose-equiv-retr :
+    {x : A} {y : B} (p : map-equiv e x ＝ y) →
+    ( is-retraction-map-inv-equiv e x ∙ map-eq-transpose-equiv e p) ＝
+    ( ap (map-inv-equiv e) p)
+  triangle-eq-transpose-equiv-retr {x} refl =
+    ( ap
+      ( is-retraction-map-inv-equiv e x ∙_)
+      ( htpy-map-eq-transpose-equiv refl)) ∙
+    ( is-retraction-left-concat-inv (is-retraction-map-inv-equiv e x) refl)
+
+  triangle-eq-transpose-equiv-retr' :
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    ( map-eq-transpose-equiv' e p ∙ inv (is-retraction-map-inv-equiv e x)) ＝
+    ( ap (map-inv-equiv e) p)
+  triangle-eq-transpose-equiv-retr' {x} refl =
+    ( inv
+      ( distributive-inv-concat
+        ( is-retraction-map-inv-equiv e x)
+        ( map-eq-transpose-equiv e refl))) ∙
+    ( ap inv (triangle-eq-transpose-equiv-retr refl))
+
+  triangle-eq-transpose-equiv-retr'' :
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    ( ( map-eq-transpose-equiv e (inv p)) ∙
+      ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x)) ＝
+    refl
+  triangle-eq-transpose-equiv-retr'' {x} p =
+    ap
+      ( map-eq-transpose-equiv e (inv p) ∙_)
+      ( ap
+        ( _∙ is-retraction-map-inv-equiv e x)
+        ( inv (triangle-eq-transpose-equiv-retr' p)) ∙
+        is-section-right-concat-inv
+          ( map-eq-transpose-equiv' e p)
+          ( is-retraction-map-inv-equiv e x)) ∙
+    ( right-inv (map-eq-transpose-equiv e (inv p)))
 ```
 
 ### Equivalences have a contractible type of sections
