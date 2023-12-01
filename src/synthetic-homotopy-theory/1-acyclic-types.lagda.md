@@ -39,7 +39,7 @@ We characterize the
 [`0`-connected types](foundation.0-connected-types.md).
 
 In one direction, our proof relies on the following group-theoretic fact: the
-map of generators from a set `X` to the free group on `X` is injective. This is
+map of [generators](group-theory.generating-elements-groups.md) from a [set](foundation-core.sets.md) `X` to the free group on `X` is [injective](foundation-core.injective-maps.md). This is
 proved constructively in \[MRR88\] by Mines, Richman and Ruitenburg, and carried
 out in HoTT/UF and formalized in Agda in \[BCDE21\] by Bezem, Coquand, Dybjer
 and Escardó.
