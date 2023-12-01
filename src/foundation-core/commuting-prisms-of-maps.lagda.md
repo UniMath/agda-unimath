@@ -19,34 +19,25 @@ open import foundation.universe-levels
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( top : A → X) (left-front : A → C) (left-back : A → B)
-  ( right-front : X → Z) (right-back : X → Y)
-  ( back-bottom : B → Y) (left-bottom : B → C) (right-bottom : Y → Z)
-  ( front-bottom : C → Z)
-  ( back : coherence-square-maps top left-back right-back back-bottom)
-  ( left : coherence-triangle-maps' left-front left-bottom left-back)
-  ( right : coherence-triangle-maps' right-front right-bottom right-back)
-  ( front : coherence-square-maps top left-front right-front front-bottom)
-  ( bottom :
-    coherence-square-maps back-bottom left-bottom right-bottom front-bottom)
+  { l1 l2 l3 l1' l2' l3' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  ( hA : A → A') (h : A → B) (h' : A' → B')
+  ( hB : B → B') (g : B → C) (g' : B' → C')
+  ( hC : C → C') (f : A → C) (f' : A' → C')
+  ( left : coherence-triangle-maps' f g h)
+  ( sq-top : coherence-square-maps hA h h' hB)
+  ( sq-bottom : coherence-square-maps hB g g' hC)
+  ( sq-front : coherence-square-maps hA f f' hC)
+  ( right : coherence-triangle-maps' f' g' h')
   where
 
-  horizontal-coherence-prism-maps : UU (l1 ⊔ l6)
+  horizontal-coherence-prism-maps : UU (l1 ⊔ l3')
   horizontal-coherence-prism-maps =
-    ( ( front-bottom ·l left) ∙h front) ~
-    ( ( pasting-vertical-coherence-square-maps
-        ( top)
-        ( left-back)
-        ( right-back)
-        ( back-bottom)
-        ( left-bottom)
-        ( right-bottom)
-        ( front-bottom)
-        ( back)
-        ( bottom)) ∙h
-      ( right ·r top))
+    ( ( hC ·l left) ∙h sq-front) ~
+    ( ( pasting-vertical-coherence-square-maps hA h h' hB g g' hC
+        ( sq-top)
+        ( sq-bottom)) ∙h
+      ( right ·r hA))
 ```
 
 ### Vertical commuting prisms of maps

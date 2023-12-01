@@ -183,19 +183,19 @@ module _
     ( H : coherence-square-maps top (map-equiv left) (map-equiv right) bottom) →
     horizontal-coherence-prism-maps
       ( top)
-      ( id)
       ( map-equiv left)
-      ( id)
       ( map-equiv right)
       ( bottom)
       ( map-inv-equiv left)
       ( map-inv-equiv right)
       ( top)
-      ( H)
+      ( id)
+      ( id)
       ( is-retraction-map-inv-equiv left)
-      ( is-retraction-map-inv-equiv right)
-      ( refl-htpy)
+      ( H)
       ( coherence-square-inv-vertical top left right bottom H)
+      ( refl-htpy)
+      ( is-retraction-map-inv-equiv right)
   left-inverse-law-pasting-vertical-coherence-square-maps H a =
     ( right-unit) ∙
     ( inv
@@ -281,19 +281,19 @@ module _
     ( H : coherence-square-maps top (map-equiv left) (map-equiv right) bottom) →
     horizontal-coherence-prism-maps
       ( bottom)
-      ( id)
       ( map-inv-equiv left)
-      ( id)
       ( map-inv-equiv right)
       ( top)
       ( map-equiv left)
       ( map-equiv right)
       ( bottom)
-      ( coherence-square-inv-vertical top left right bottom H)
+      ( id)
+      ( id)
       ( is-section-map-inv-equiv left)
-      ( is-section-map-inv-equiv right)
-      ( refl-htpy)
+      ( coherence-square-inv-vertical top left right bottom H)
       ( H)
+      ( refl-htpy)
+      ( is-section-map-inv-equiv right)
   right-inverse-law-pasting-vertical-coherence-square-maps H a =
     ( right-unit) ∙
     ( inv
