@@ -6,6 +6,8 @@ module foundation.commuting-prisms-of-maps where
 open import foundation-core.commuting-prisms-of-maps public
 ```
 
+<details><summary>Imports</summary>
+
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
@@ -20,6 +22,12 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 ```
+
+</details>
+
+## Definitions
+
+### Vertical pasting of vertical prisms of maps
 
 ```agda
 module _
@@ -106,6 +114,10 @@ module _
       ( hC' ·l front-top)
       ( ( hC' ∘ hC) ·l top))
 ```
+
+## Properties
+
+### The two definitions of vertical prisms are equivalent
 
 ```agda
 module _
