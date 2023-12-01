@@ -11,6 +11,7 @@ open import foundation-core.whiskering-homotopies public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-identifications
 open import foundation.function-extensionality
 open import foundation.path-algebra
 open import foundation.postcomposition-functions
@@ -177,4 +178,18 @@ module _
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M)) →
     ( coherence-square-homotopies K K' L L')
   both-unwhisk-square-htpy = map-inv-equiv equiv-both-whisk-square-htpy
+```
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  ( f : B → C) {g h h' k : A → B}
+  ( H : g ~ h) (H' : g ~ h') {K : h ~ k} {K' : h' ~ k}
+  where
+
+  ap-left-whisk-coherence-square-homotopies :
+    coherence-square-homotopies H H' K K' →
+    coherence-square-homotopies (f ·l H) (f ·l H') (f ·l K) (f ·l K')
+  ap-left-whisk-coherence-square-homotopies α a =
+    coherence-square-identifications-ap f (H a) (H' a) (K a) (K' a) (α a)
 ```

@@ -11,16 +11,16 @@ open import foundation-core.commuting-prisms-of-maps public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
-open import foundation.whiskering-homotopies
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.homotopies
 ```
 
 </details>
@@ -95,14 +95,10 @@ module _
       ( prism-bottom ·r hA)) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r hA)
-      ( ( inv-htpy
-          ( distributive-left-whisk-concat-htpy hC'
-            ( mid ·r hA)
-            ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g'
-              ( left-top)
-              ( right-top)))) ∙h
-        ( ap-left-whisk-htpy hC' prism-top) ∙h
-        ( distributive-left-whisk-concat-htpy hC' front-top (hC ·l top)) ∙h
+      ( ( ap-left-whisk-coherence-square-homotopies hC'
+          ( front-top)
+          ( mid ·r hA)
+          ( prism-top)) ∙h
         ( ap-concat-htpy
           ( hC' ·l front-top)
           ( associative-left-whisk-comp
