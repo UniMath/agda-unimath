@@ -30,8 +30,8 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
@@ -303,6 +303,42 @@ module _
 ```
 
 ### Acyclic maps are closed under pushouts
+
+We give an outline of the proof before formalizing it.
+
+Suppose we have a pushout square on the left in the diagram
+
+```text
+        g          j
+   S -------> B -------> C
+   |          |          |
+ f |          | j        | id
+   |          |          |
+   v       ⌜  v          v
+   A -------> C -------> C
+        i          id
+```
+
+Then `j` is acyclic if and only if the right square is a pushout, which by
+pushout pasting, is equivalent to the outer rectangle being a pushout. For an
+arbitrary type `X` and `f` acyclic, we note that the following composite
+computes to the identity:
+
+```text
+          cocone-map f (j ∘ g)
+ (C → X) ---------------------> cocone f (j ∘ g) X
+                             ̇= Σ (l : A → X) , Σ (r : C → X) , l ∘ f ~ r ∘ j ∘ g
+     (using the left square)
+                             ≃ Σ (l : A → X) , Σ (r : C → X) , l ∘ f ~ r ∘ i ∘ f
+   (since f is acyclic/epic)
+                             ≃ Σ (l : A → X) , Σ (r : C → X) , l ~ r ∘ i
+                             ≃ Σ (r : C → X) , Σ (l : A → X) , l ~ r ∘ i
+      (contracting at r ∘ i)
+                             ≃ (C → X)
+```
+
+Therefore, `cocone-map f (j ∘ g)` is an equivalence and the outer rectangle is
+indeed a pushout.
 
 ```agda
 module _
