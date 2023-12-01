@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.acyclic-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospans
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -22,11 +23,13 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
@@ -379,6 +382,25 @@ module _
     is-acyclic-map-vertical-map-cocone-is-pushout g f
       ( swap-cocone f g C c)
       ( is-pushout-swap-cocone-is-pushout f g C c po)
+```
+
+### Acyclic maps are closed under pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  is-acyclic-map-vertical-map-cone-is-pullback :
+    is-pullback f g c →
+    is-acyclic-map g →
+    is-acyclic-map (vertical-map-cone f g c)
+  is-acyclic-map-vertical-map-cone-is-pullback pb ac a =
+    is-acyclic-equiv
+      ( map-fiber-cone f g c a ,
+        is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
+      ( ac (f a))
 ```
 
 ## See also
