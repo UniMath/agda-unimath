@@ -43,16 +43,21 @@ pr1 (dependent-ev-suspension s B f) =
 pr1 (pr2 (dependent-ev-suspension s B f)) =
   f (south-suspension-structure s)
 pr2 (pr2 (dependent-ev-suspension s B f)) =
-  (apd f) ∘ (meridian-suspension-structure s)
+  apd f ∘ meridian-suspension-structure s
 
 module _
-  (l : Level) {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   (s : suspension-structure X Y)
   where
 
-  dependent-universal-property-suspension : UU (l1 ⊔ l2 ⊔ lsuc l)
-  dependent-universal-property-suspension =
+  dependent-universal-property-suspension-Level :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  dependent-universal-property-suspension-Level l =
     (B : Y → UU l) → is-equiv (dependent-ev-suspension s B)
+
+  dependent-universal-property-suspension : UUω
+  dependent-universal-property-suspension =
+    {l : Level} → dependent-universal-property-suspension-Level l
 ```
 
 #### Coherence between `dependent-ev-suspension` and `dependent-cocone-map`
@@ -66,12 +71,12 @@ module _
     (s : suspension-structure X Y) →
     (B : Y → UU l3) →
     ( ( map-equiv
-      ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
-    ( dependent-cocone-map
-      ( const X unit star)
-      ( const X unit star)
-      ( cocone-suspension-structure X Y s)
-      ( B))) ~
+        ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
+      ( dependent-cocone-map
+        ( const X unit star)
+        ( const X unit star)
+        ( cocone-suspension-structure X Y s)
+        ( B))) ~
     ( dependent-ev-suspension s B)
   triangle-dependent-ev-suspension s B = refl-htpy
 ```

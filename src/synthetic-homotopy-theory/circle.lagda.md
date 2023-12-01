@@ -433,7 +433,7 @@ pr2 (pr2 dependent-suspension-structure-sphere-1-circle-sphere-1) =
 sphere-1-circle-sphere-1 : section sphere-1-circle
 pr1 sphere-1-circle-sphere-1 = circle-sphere-1
 pr2 sphere-1-circle-sphere-1 =
-  map-inv-dependent-up-suspension
+  map-inv-dup-suspension
     ( λ x → (sphere-1-circle (circle-sphere-1 x)) ＝ x)
     ( dependent-suspension-structure-sphere-1-circle-sphere-1)
 ```

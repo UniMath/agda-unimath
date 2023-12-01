@@ -51,9 +51,9 @@ h : (x : X) → (f ∘ (const X unit star)) x ＝ (g ∘ (const X unit star)) x
 ```
 
 Using the
-[universal property of `unit`](foundation.universal-property-unit-type.md), we
-can characterize suspension cocones as equivalent to a selection of "north" and
-"south" poles
+[universal property of the unit type](foundation.universal-property-unit-type.md),
+we can characterize suspension cocones as equivalent to a selection of "north"
+and "south" poles
 
 ```text
 north , south : Y
@@ -74,7 +74,7 @@ We call this type of structure `suspension-structure`.
 ```agda
 suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-cocone X Y = cocone (const X unit star) (const X unit star) Y
+suspension-cocone X Y = cocone (terminal-map {A = X}) (terminal-map {A = X}) Y
 ```
 
 ### Suspension structures on a type
@@ -154,13 +154,9 @@ is-equiv-map-inv-equiv-suspension-structure-suspension-cocone X Z =
 
 htpy-comparison-suspension-cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-    ( map-inv-equiv-suspension-structure-suspension-cocone X Z)
-  ~
-    ( cocone-suspension-structure X Z)
-htpy-comparison-suspension-cocone-suspension-structure
-  ( X)
-  ( Z)
-  ( s) =
+  ( map-inv-equiv-suspension-structure-suspension-cocone X Z) ~
+  ( cocone-suspension-structure X Z)
+htpy-comparison-suspension-cocone-suspension-structure X Z s =
   is-injective-map-equiv
     ( equiv-suspension-structure-suspension-cocone X Z)
     ( is-section-map-inv-equiv
@@ -178,9 +174,9 @@ module _
   htpy-suspension-structure :
     (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
   htpy-suspension-structure c c' =
-    Σ ( (north-suspension-structure c) ＝ (north-suspension-structure c'))
+    Σ ( north-suspension-structure c ＝ north-suspension-structure c')
       ( λ p →
-        Σ ( ( south-suspension-structure c) ＝ ( south-suspension-structure c'))
+        Σ ( south-suspension-structure c ＝ south-suspension-structure c')
           ( λ q →
             ( x : X) →
             ( meridian-suspension-structure c x ∙ q) ＝
@@ -267,9 +263,7 @@ module _
   ind-htpy-suspension-structure :
     { l : Level}
     ( P :
-      ( c' : suspension-structure X Z) →
-      ( htpy-suspension-structure c c') →
-      UU l) →
+      (c' : suspension-structure X Z) → htpy-suspension-structure c c' → UU l) →
     ( P c refl-htpy-suspension-structure) →
     ( c' : suspension-structure X Z)
     ( H : htpy-suspension-structure c c') →
@@ -300,11 +294,11 @@ module _
   ap-pr1-eq-htpy-suspension-structure =
     ind-htpy-suspension-structure
       ( λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
-      ( (ap
+      ( ap
         ( ap pr1)
         ( is-retraction-map-inv-equiv
           ( extensionality-suspension-structure c c)
-          ( refl))))
+          ( refl)))
 
   ap-pr1∘pr2-eq-htpy-suspension-structure :
     (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
