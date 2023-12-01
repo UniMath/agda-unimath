@@ -23,6 +23,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.implicit-function-types
 open import foundation.iterated-dependent-product-types
+open import foundation.multivariable-homotopies
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
@@ -483,17 +484,7 @@ module _
           ( is-torsorial-Eq-structure
             ( λ μ H pres-mul → one-Ring R ＝ pr1 (pr1 H))
             ( is-torsorial-Eq-subtype
-              ( is-contr-equiv
-                ( Σ ( (x y : type-Ring R) → type-Ring R)
-                    ( λ g →
-                      (x y : type-Ring R) → mul-Ring R x y ＝ g x y))
-                ( equiv-tot
-                  ( λ m →
-                    equiv-Π-equiv-family (λ x → equiv-explicit-implicit-Π) ∘e
-                    equiv-explicit-implicit-Π))
-                ( is-torsorial-Eq-Π
-                  ( λ x m → (y : type-Ring R) → mul-Ring R x y ＝ m y)
-                  ( λ x → is-torsorial-htpy (mul-Ring R x))))
+              ( is-torsorial-multivariable-implicit-htpy 2 (mul-Ring R))
               ( λ μ →
                 is-prop-iterated-Π 3
                   ( λ x y z → is-set-type-Ring R (μ (μ x y) z) (μ x (μ y z))))
