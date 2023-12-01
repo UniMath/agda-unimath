@@ -87,7 +87,7 @@ module _
   where
 
   is-1-acyclic-is-0-connected : is-0-connected A → is-1-acyclic A
-  is-1-acyclic-is-0-connected = is-truncated-succ-acyclic-is-connected
+  is-1-acyclic-is-0-connected = is-truncated-acyclic-succ-is-connected
 ```
 
 ### Every `1`-acyclic type is `0`-connected
@@ -139,7 +139,7 @@ module _
                 ( y))
               ( refl))))
       ( is-inhabited-is-0-acyclic
-        ( is-truncated-acyclic-is-truncated-succ-acyclic ac))
+        ( is-truncated-acyclic-is-truncated-acyclic-succ ac))
 
   is-0-connected-is-1-acyclic :
     {l : Level} (A : UU l) →
