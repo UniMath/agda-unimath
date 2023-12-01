@@ -39,15 +39,17 @@ We characterize the
 [`0`-connected types](foundation.0-connected-types.md).
 
 In one direction, our proof relies on the following group-theoretic fact: the
-map of [generators](group-theory.generating-elements-groups.md) from a [set](foundation-core.sets.md) `X` to the free group on `X` is [injective](foundation-core.injective-maps.md). This is
-proved constructively in \[MRR88\] by Mines, Richman and Ruitenburg, and carried
-out in HoTT/UF and formalized in Agda in \[BCDE21\] by Bezem, Coquand, Dybjer
-and Escardó.
+map of [generators](group-theory.generating-elements-groups.md) from a
+[set](foundation-core.sets.md) `X` to the free group on `X` is
+[injective](foundation-core.injective-maps.md). This is proved constructively in
+\[MRR88\] by Mines, Richman and Ruitenburg, and carried out in HoTT/UF and
+formalized in Agda in \[BCDE21\] by Bezem, Coquand, Dybjer and Escardó.
 
 Translated to [concrete groups](group-theory.concrete-groups.md) this means that
-for every set `X`, we have a [pointed](structured-types.pointed-types.md) [`1`-type](foundation-core.1-types.md) `pt : BG` together with an
-injection `gen : X → pt ＝ pt`. (Actually, `BG` is `0`-connected as well, but we
-don't use this in our proof below.)
+for every set `X`, we have a [pointed](structured-types.pointed-types.md)
+[`1`-type](foundation-core.1-types.md) `pt : BG` together with an injection
+`gen : X → pt ＝ pt`. (Actually, `BG` is `0`-connected as well, but we don't use
+this in our proof below.)
 
 A construction on the level of concrete groups can be found in the recent
 preprint \[Wär23\] by David Wärn.
