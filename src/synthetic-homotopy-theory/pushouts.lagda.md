@@ -148,6 +148,29 @@ is-pushout f g c = is-equiv (cogap f g c)
 
 ## Properties
 
+### Pushout cocones satisfy the universal property of the pushout
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  ( f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  universal-property-pushout-is-pushout :
+    is-pushout f g c → {l : Level} → universal-property-pushout l f g c
+  universal-property-pushout-is-pushout po =
+    up-pushout-up-pushout-is-equiv f g
+      ( cocone-pushout f g)
+      ( c)
+      ( cogap f g c)
+      ( htpy-cocone-map-universal-property-pushout f g
+        ( cocone-pushout f g)
+        ( up-pushout f g)
+        ( c))
+      ( po)
+      ( up-pushout f g)
+```
+
 ### The pushout of a span has the dependent universal property
 
 ```agda
