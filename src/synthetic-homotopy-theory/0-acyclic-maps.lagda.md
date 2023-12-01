@@ -20,8 +20,13 @@ open import synthetic-homotopy-theory.truncated-acyclic-maps
 
 ## Idea
 
-We characterize the
-[`0`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md) as the
+A [`0`-acyclic map](synthetic-homotopy-theory.truncated-acyclic-maps.md) is a
+map whose fibers are
+[`0`-acyclic types](synthetic-homotopy-theory.0-acyclic-types.md), meaning that
+their [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
+[`0`-connected](foundation.0-connected-types.md).
+
+We characterize the `0`-acyclic maps as the
 [surjective maps](foundation.surjective-maps.md).
 
 ## Definition
@@ -70,11 +75,5 @@ module _
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
-- [Acyclic types](synthetic-homotopy-theory.acyclic-types.md)
-- [`0`-acyclic types](synthetic-homotopy-theory.0-acyclic-types.md)
-- [`k`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md)
 - [`k`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md)
-- [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
-- [Epimorphisms](foundation.epimorphisms.md)
-- [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
 - [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)
