@@ -365,6 +365,20 @@ module _
                 ( is-equiv-map-equiv
                   ( equiv-cocone-postcomp-vertical-map-cocone ac X))
                 ( is-equiv-id))))
+
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
+  where
+
+  is-acyclic-map-horizontal-map-cocone-is-pushout :
+    is-pushout f g c →
+    is-acyclic-map g →
+    is-acyclic-map (horizontal-map-cocone f g c)
+  is-acyclic-map-horizontal-map-cocone-is-pushout po =
+    is-acyclic-map-vertical-map-cocone-is-pushout g f
+      ( swap-cocone f g C c)
+      ( is-pushout-swap-cocone-is-pushout f g C c po)
 ```
 
 ## See also
