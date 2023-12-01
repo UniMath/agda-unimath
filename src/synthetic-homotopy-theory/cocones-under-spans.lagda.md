@@ -378,3 +378,51 @@ module _
   pr1 (pr2 (diagonal-into-cocone g)) = g
   pr2 (pr2 (diagonal-into-cocone g)) = refl-htpy
 ```
+
+### The swapping function on cocones over spans
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4)
+  where
+
+  swap-cocone : cocone f g X → cocone g f X
+  pr1 (swap-cocone c) = vertical-map-cocone f g c
+  pr1 (pr2 (swap-cocone c)) = horizontal-map-cocone f g c
+  pr2 (pr2 (swap-cocone c)) = inv-htpy (coherence-square-cocone f g c)
+
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4)
+  where
+
+  is-involution-swap-cocone : swap-cocone g f X ∘ swap-cocone f g X ~ id
+  is-involution-swap-cocone c =
+    eq-htpy-cocone f g
+      ( swap-cocone g f X (swap-cocone f g X c))
+      ( c)
+      ( ( refl-htpy) ,
+        ( refl-htpy) ,
+        ( λ s →
+          concat
+            ( right-unit)
+            ( coherence-square-cocone f g c s)
+            ( inv-inv (coherence-square-cocone f g c s))))
+
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4)
+  where
+
+  is-equiv-swap-cocone : is-equiv (swap-cocone f g X)
+  is-equiv-swap-cocone =
+    is-equiv-is-invertible
+      ( swap-cocone g f X)
+      ( is-involution-swap-cocone g f X)
+      ( is-involution-swap-cocone f g X)
+
+  equiv-swap-cocone : cocone f g X ≃ cocone g f X
+  pr1 equiv-swap-cocone = swap-cocone f g X
+  pr2 equiv-swap-cocone = is-equiv-swap-cocone
+```
