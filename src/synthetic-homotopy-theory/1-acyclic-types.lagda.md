@@ -36,7 +36,7 @@ open import synthetic-homotopy-theory.truncated-acyclic-types
 
 A type is **`1`-acyclic** if its
 [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
-[`1`-connected](foundation.connected-types.md)
+[`1`-connected](foundation.connected-types.md).
 
 We can characterize the `1`-acyclic types as the
 [`0`-connected types](foundation.0-connected-types.md).
