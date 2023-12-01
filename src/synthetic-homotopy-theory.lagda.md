@@ -15,6 +15,7 @@ open import synthetic-homotopy-theory.acyclic-types public
 open import synthetic-homotopy-theory.category-of-connected-set-bundles-circle public
 open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
+open import synthetic-homotopy-theory.cocartesian-morphisms-arrows public
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
