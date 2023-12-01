@@ -166,16 +166,17 @@ precomp-coherence-square-maps top left right bottom H X =
 
 ## Properties
 
-### Taking inversions of squares is an inverse operation
+### Taking vertical inversions of squares is an inverse operation
 
-In other words, vertical (horizontal) composition of a square with the square
-obtained by inverting the vertical (horizontal) maps fits into a
-[prism](foundation.commuting-prisms-of-maps.md) with the reflexivity square.
+Vertical composition of a square with the square obtained by inverting the
+vertical maps fits into a [prism](foundation.commuting-prisms-of-maps.md) with
+the reflexivity square.
+
+The analogous result for horizontal composition remains to be formalized.
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level}
-  { A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   ( top : A → X) (left : A ≃ B) (right : X ≃ Y) (bottom : B → Y)
   where
 
@@ -210,10 +211,10 @@ module _
         ( assoc
           ( ( map-eq-transpose-equiv
               ( right)
-              ( inv (H (map-inv-equiv left (map-equiv left a)))) ∙
+              ( inv (H (map-inv-equiv left (map-equiv left a))))) ∙
             ( ap
               ( map-inv-equiv right)
-              ( ap bottom (is-section-map-inv-equiv left (map-equiv left a))))))
+              ( ap bottom (is-section-map-inv-equiv left (map-equiv left a)))))
           ( ap (map-inv-equiv right) (H a))
           ( is-retraction-map-inv-equiv right (top a))) ∙
         ( left-whisk-square-identification
@@ -390,6 +391,19 @@ module _
 
 ### Naturality of commuting squares of maps with respect to identifications
 
+Similarly to the naturality square of homotopies and identifications, we have
+a naturality square of coherence squares of maps and identifications:
+
+```text
+           ap f (ap g p)
+  f (g x) =============== f (g y)
+     ‖                       ‖
+ H x ‖                       ‖ H y
+     ‖                       ‖
+  h (k x) =============== h (k y)
+           ap h (ap k p)           .
+```
+
 ```agda
 module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
@@ -405,7 +419,26 @@ module _
       ( H y)
       ( ap right (ap top p))
   nat-coherence-square-maps refl = right-unit
+```
 
+As a corollary, whenever we have two coherence squares touching at a vertex:
+
+```text
+  A -----> B
+  |        |
+  |  H ⇗  |
+  V        V
+  C -----> D -----> X
+           |        |
+           |  K ⇗  |
+           V        V
+           Y -----> Z ,
+```
+
+there is a homotopy between first applying `H`, then `K`, and first applying
+`K`, then `H`.
+
+```agda
 module _
   { l1 l2 l3 l4 l5 l6 l7 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
@@ -427,6 +460,34 @@ module _
 ```
 
 ### Commutativity of horizontal and vertical pasting
+
+Given a square of commuting squares, like so:
+
+```text
+  A -----> B -----> C
+  |        |        |
+  |   ⇗   |   ⇗   |
+  V        V        V
+  X -----> Y -----> Z
+  |        |        |
+  |   ⇗   |   ⇗   |
+  V        V        V
+  M -----> N -----> O ,
+```
+
+we have two choices for obtaining the outer commuting square --- either by first
+vertically composing the smaller squares, and then horizontally composing the
+newly created rectangles, or by first horizontally composing the squares, and
+then vertically composing the rectangles.
+
+The following lemma states that the big squares obtained by these two
+compositions are again homotopic. Diagramatically, we have
+
+```text
+ H | K   H | K
+ ----- ~ --|--
+ L | T   L | T .
+```
 
 ```agda
 module _
