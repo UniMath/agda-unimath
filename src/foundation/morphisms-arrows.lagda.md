@@ -11,6 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
@@ -69,6 +71,41 @@ record hom-arrow
         ( map-codomain-hom-arrow)
 
 open hom-arrow public
+```
+
+### Morphisms of arrows as a Σ-type
+
+```agda
+hom-arrow-Σ :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+hom-arrow-Σ {A = A} {B} {X} {Y} f g =
+  Σ (A → X) (λ i →  Σ (B → Y) (coherence-square-maps i f g))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  map-hom-arrow-Σ : hom-arrow-Σ f g → hom-arrow f g
+  map-domain-hom-arrow (map-hom-arrow-Σ (j , i , H)) = j
+  map-codomain-hom-arrow (map-hom-arrow-Σ (j , i , H)) = i
+  coh-hom-arrow (map-hom-arrow-Σ (j , i , H)) = H
+
+  map-Σ-hom-arrow : hom-arrow f g → hom-arrow-Σ f g
+  pr1 (map-Σ-hom-arrow α) = map-domain-hom-arrow α
+  pr1 (pr2 (map-Σ-hom-arrow α)) = map-codomain-hom-arrow α
+  pr2 (pr2 (map-Σ-hom-arrow α)) = coh-hom-arrow α
+
+  is-equiv-hom-arrow-Σ : is-equiv map-hom-arrow-Σ
+  pr1 (pr1 is-equiv-hom-arrow-Σ) = map-Σ-hom-arrow
+  pr2 (pr1 is-equiv-hom-arrow-Σ) = refl-htpy
+  pr1 (pr2 is-equiv-hom-arrow-Σ) = map-Σ-hom-arrow
+  pr2 (pr2 is-equiv-hom-arrow-Σ) = refl-htpy
+
+  equiv-hom-arrow-Σ : hom-arrow-Σ f g ≃ hom-arrow f g
+  pr1 equiv-hom-arrow-Σ = map-hom-arrow-Σ
+  pr2 equiv-hom-arrow-Σ = is-equiv-hom-arrow-Σ
 ```
 
 ### Transposing morphisms of arrows
@@ -225,34 +262,37 @@ module _
   pr1 (pr2 refl-htpy-hom-arrow) = refl-htpy
   pr2 (pr2 refl-htpy-hom-arrow) = right-unit-htpy
 
-  -- is-torsorial-htpy-hom-arrow : is-torsorial htpy-hom-arrow
-  -- is-torsorial-htpy-hom-arrow =
-    -- is-torsorial-Eq-structure
-    --   ( λ i jH I → Σ _ _)
-    --   ( is-torsorial-htpy (map-domain-hom-arrow α))
-    --   ( map-domain-hom-arrow α , refl-htpy)
-    --   ( is-torsorial-Eq-structure
-    --     ( λ j H J → _)
-    --     ( is-torsorial-htpy (map-codomain-hom-arrow α))
-    --     ( map-codomain-hom-arrow α , refl-htpy)
-    --     ( is-torsorial-htpy (coh-hom-arrow α ∙h refl-htpy)))
+  is-torsorial-htpy-hom-arrow : is-torsorial htpy-hom-arrow
+  is-torsorial-htpy-hom-arrow =
+    is-contr-equiv
+      {!   !}
+      {!  equiv-tot ? !}
+      ( is-torsorial-Eq-structure
+        ( λ i jH I → Σ _ _)
+        ( is-torsorial-htpy (map-domain-hom-arrow α))
+        ( map-domain-hom-arrow α , refl-htpy)
+        ( is-torsorial-Eq-structure
+          ( λ j H J → _)
+          ( is-torsorial-htpy (map-codomain-hom-arrow α))
+          ( map-codomain-hom-arrow α , refl-htpy)
+          ( is-torsorial-htpy (coh-hom-arrow α ∙h refl-htpy))))
 
-  -- htpy-eq-hom-arrow : (β : hom-arrow f g) → (α ＝ β) → htpy-hom-arrow β
-  -- htpy-eq-hom-arrow β refl = refl-htpy-hom-arrow
+  htpy-eq-hom-arrow : (β : hom-arrow f g) → (α ＝ β) → htpy-hom-arrow β
+  htpy-eq-hom-arrow β refl = refl-htpy-hom-arrow
 
-  -- is-equiv-htpy-eq-hom-arrow :
-  --   (β : hom-arrow f g) → is-equiv (htpy-eq-hom-arrow β)
-  -- is-equiv-htpy-eq-hom-arrow =
-  --   fundamental-theorem-id is-torsorial-htpy-hom-arrow htpy-eq-hom-arrow
+  is-equiv-htpy-eq-hom-arrow :
+    (β : hom-arrow f g) → is-equiv (htpy-eq-hom-arrow β)
+  is-equiv-htpy-eq-hom-arrow =
+    fundamental-theorem-id is-torsorial-htpy-hom-arrow htpy-eq-hom-arrow
 
-  -- extensionality-hom-arrow :
-  --   (β : hom-arrow f g) → (α ＝ β) ≃ htpy-hom-arrow β
-  -- pr1 (extensionality-hom-arrow β) = htpy-eq-hom-arrow β
-  -- pr2 (extensionality-hom-arrow β) = is-equiv-htpy-eq-hom-arrow β
+  extensionality-hom-arrow :
+    (β : hom-arrow f g) → (α ＝ β) ≃ htpy-hom-arrow β
+  pr1 (extensionality-hom-arrow β) = htpy-eq-hom-arrow β
+  pr2 (extensionality-hom-arrow β) = is-equiv-htpy-eq-hom-arrow β
 
-  -- eq-htpy-hom-arrow :
-  --   (β : hom-arrow f g) → htpy-hom-arrow β → α ＝ β
-  -- eq-htpy-hom-arrow β = map-inv-equiv (extensionality-hom-arrow β)
+  eq-htpy-hom-arrow :
+    (β : hom-arrow f g) → htpy-hom-arrow β → α ＝ β
+  eq-htpy-hom-arrow β = map-inv-equiv (extensionality-hom-arrow β)
 ```
 
 ### Concatenation of homotopies of morphisms of arrows
