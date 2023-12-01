@@ -26,8 +26,11 @@ open import synthetic-homotopy-theory.truncated-acyclic-types
 
 ## Idea
 
-We characterize the
-[`0`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md) as the
+A type is [`0`-acyclic](synthetic-homotopy-theory.truncated-acyclic-types.md) if
+its [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
+[`0`-connected](foundation.0-connected-types.md)
+
+We can characterize the `0`-acyclic types as the
 [inhabited types](foundation.inhabited-types.md).
 
 ## Definition
@@ -80,12 +83,5 @@ module _
 
 ## See also
 
-- [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
-- [Acyclic types](synthetic-homotopy-theory.acyclic-types.md)
 - [`0`-acyclic maps](synthetic-homotopy-theory.0-acyclic-maps.md)
-- [`k`-acyclic types](synthetic-homotopy-theory.truncated-acyclic-types.md)
-- [`k`-acyclic maps](synthetic-homotopy-theory.truncated-acyclic-maps.md)
-- [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
-- [Epimorphisms](foundation.epimorphisms.md)
-- [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
-- [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)
+- [Acyclic types](synthetic-homotopy-theory.acyclic-types.md)

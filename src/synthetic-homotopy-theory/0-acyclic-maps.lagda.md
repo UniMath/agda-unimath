@@ -26,7 +26,7 @@ map whose fibers are
 their [suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
 [`0`-connected](foundation.0-connected-types.md).
 
-We characterize the `0`-acyclic maps as the
+We can characterize the `0`-acyclic maps as the
 [surjective maps](foundation.surjective-maps.md).
 
 ## Definition
