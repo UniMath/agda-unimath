@@ -7,11 +7,13 @@ module synthetic-homotopy-theory.truncated-acyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.connected-types
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.truncation-levels
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.functoriality-suspensions
@@ -94,6 +96,18 @@ module _
     is-connected k A → is-truncated-acyclic (succ-𝕋 k) A
   is-truncated-succ-acyclic-is-connected =
     is-connected-succ-suspension-is-connected
+```
+
+### Contractible types are `k`-acyclic for any `k`
+
+```agda
+is-truncated-acyclic-is-contr :
+  {l : Level} {k : 𝕋} (A : UU l) → is-contr A → is-truncated-acyclic k A
+is-truncated-acyclic-is-contr {k = k} A c =
+  is-connected-is-contr k (is-contr-suspension-is-contr c)
+
+is-truncated-acyclic-unit : {k : 𝕋} → is-truncated-acyclic k unit
+is-truncated-acyclic-unit = is-truncated-acyclic-is-contr unit is-contr-unit
 ```
 
 ## See also
