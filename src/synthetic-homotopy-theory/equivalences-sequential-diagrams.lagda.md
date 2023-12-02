@@ -202,3 +202,46 @@ eq-equiv-sequential-diagram :
 eq-equiv-sequential-diagram A B =
   map-inv-equiv (extensionality-sequential-diagram A B)
 ```
+
+### Inverses of equivalences are inverses with respect to composition of morphisms of sequential diagrams
+
+```agda
+module _
+  { l1 l2 : Level} {A : sequential-diagram l1} (B : sequential-diagram l2)
+  ( e : equiv-sequential-diagram A B)
+  where
+
+  is-section-inv-equiv-sequential-diagram :
+    htpy-hom-sequential-diagram B
+      ( comp-hom-sequential-diagram B A B
+        ( hom-equiv-sequential-diagram B e)
+        ( hom-inv-equiv-sequential-diagram B e))
+      ( id-hom-sequential-diagram B)
+  pr1 is-section-inv-equiv-sequential-diagram n =
+    is-section-map-inv-equiv (equiv-equiv-sequential-diagram B e n)
+  pr2 is-section-inv-equiv-sequential-diagram n =
+    inv-htpy
+      ( right-inverse-law-pasting-vertical-coherence-square-maps
+        ( map-sequential-diagram A n)
+        ( equiv-equiv-sequential-diagram B e n)
+        ( equiv-equiv-sequential-diagram B e (succ-ℕ n))
+        ( map-sequential-diagram B n)
+        ( naturality-equiv-sequential-diagram B e n))
+
+  is-retraction-inv-equiv-sequential-diagram :
+    htpy-hom-sequential-diagram A
+      ( comp-hom-sequential-diagram A B A
+        ( hom-inv-equiv-sequential-diagram B e)
+        ( hom-equiv-sequential-diagram B e))
+      ( id-hom-sequential-diagram A)
+  pr1 is-retraction-inv-equiv-sequential-diagram n =
+    is-retraction-map-inv-equiv (equiv-equiv-sequential-diagram B e n)
+  pr2 is-retraction-inv-equiv-sequential-diagram n =
+    inv-htpy
+      ( left-inverse-law-pasting-vertical-coherence-square-maps
+        ( map-sequential-diagram A n)
+        ( equiv-equiv-sequential-diagram B e n)
+        ( equiv-equiv-sequential-diagram B e (succ-ℕ n))
+        ( map-sequential-diagram B n)
+        ( naturality-equiv-sequential-diagram B e n))
+```
