@@ -10,7 +10,6 @@ module synthetic-homotopy-theory.sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.universe-levels
 ```
 
@@ -59,7 +58,7 @@ module _
 
   constant-sequential-diagram : sequential-diagram l
   pr1 constant-sequential-diagram _ = X
-  pr2 constant-sequential-diagram _ = id
+  pr2 constant-sequential-diagram _ x = x
 ```
 
 ## Properties
