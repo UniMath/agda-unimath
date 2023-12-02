@@ -159,7 +159,7 @@ module _
             ( λ B →
               ( equiv-prod
                 ( id-equiv)
-                ( up-product ∘e equiv-postcomp X (C2 A B))) ∘e
+                ( equiv-up-product ∘e equiv-postcomp X (C2 A B))) ∘e
               left-unit-law-Σ-is-contr
                 ( is-torsorial-equiv-subuniverse'
                   ( P)

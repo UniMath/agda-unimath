@@ -44,13 +44,18 @@ pr2 (map-up-product f) x = pr2 (f x)
 
 up-product :
   {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3} →
-  ((x : X) → A x × B x) ≃ (((x : X) → A x) × ((x : X) → B x))
-pr1 up-product = map-up-product
-pr2 up-product =
+  is-equiv (map-up-product {A = A} {B})
+up-product =
   is-equiv-is-invertible
     ( λ (f , g) → (λ x → (f x , g x)))
     ( refl-htpy)
     ( refl-htpy)
+
+equiv-up-product :
+  {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3} →
+  ((x : X) → A x × B x) ≃ (((x : X) → A x) × ((x : X) → B x))
+pr1 equiv-up-product = map-up-product
+pr2 equiv-up-product = up-product
 ```
 
 We construct the cone for two maps into the unit type.
