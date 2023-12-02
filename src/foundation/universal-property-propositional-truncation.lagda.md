@@ -81,7 +81,6 @@ module _
   universal-property-propositional-truncation : UUω
   universal-property-propositional-truncation =
     {l : Level} → universal-property-propositional-truncation-Level l
-
 ```
 
 ### Extension property of the propositional truncation

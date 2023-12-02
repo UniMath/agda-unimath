@@ -46,33 +46,46 @@ precomp-Trunc :
   (B → type-Truncated-Type C) → (A → type-Truncated-Type C)
 precomp-Trunc f C = precomp f (type-Truncated-Type C)
 
-is-truncation :
-  (l : Level) {l1 l2 : Level} {k : 𝕋} {A : UU l1}
-  (B : Truncated-Type l2 k) → (A → type-Truncated-Type B) →
-  UU (l1 ⊔ l2 ⊔ lsuc l)
-is-truncation l {k = k} B f =
-  (C : Truncated-Type l k) → is-equiv (precomp-Trunc f C)
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  where
 
-equiv-is-truncation :
-  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k)
-  (f : A → type-Truncated-Type B)
-  (H : {l : Level} → is-truncation l B f) →
-  (C : Truncated-Type l3 k) →
-  (type-Truncated-Type B → type-Truncated-Type C) ≃ (A → type-Truncated-Type C)
-pr1 (equiv-is-truncation B f H C) = precomp-Trunc f C
-pr2 (equiv-is-truncation B f H C) = H C
+  is-truncation-Level :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  is-truncation-Level l =
+    (C : Truncated-Type l k) → is-equiv (precomp-Trunc f C)
+
+  is-truncation : UUω
+  is-truncation = {l : Level} → is-truncation-Level l
+
+  equiv-is-truncation :
+    {l3 : Level}
+    (H : is-truncation) →
+    (C : Truncated-Type l3 k) →
+    ( type-Truncated-Type B → type-Truncated-Type C) ≃
+    ( A → type-Truncated-Type C)
+  pr1 (equiv-is-truncation H C) = precomp-Trunc f C
+  pr2 (equiv-is-truncation H C) = H C
 ```
 
 ### The universal property of truncations
 
 ```agda
-universal-property-truncation :
-  (l : Level) {l1 l2 : Level} {k : 𝕋} {A : UU l1}
-  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B) →
-  UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-truncation l {k = k} {A} B f =
-  (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
-  is-contr (Σ (type-hom-Truncated-Type k B C) (λ h → (h ∘ f) ~ g))
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  where
+
+  universal-property-truncation-Level :
+    (l : Level) → UU (lsuc l ⊔ l1 ⊔ l2)
+  universal-property-truncation-Level l =
+    (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
+    is-contr (Σ (type-hom-Truncated-Type k B C) (λ h → h ∘ f ~ g))
+
+  universal-property-truncation : UUω
+  universal-property-truncation =
+    {l : Level} → universal-property-truncation-Level l
 ```
 
 ### The dependent universal property of truncations
@@ -85,12 +98,20 @@ precomp-Π-Truncated-Type :
   ((a : A) → type-Truncated-Type (C (f a)))
 precomp-Π-Truncated-Type f C h a = h (f a)
 
-dependent-universal-property-truncation :
-  {l1 l2 : Level} (l : Level) {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k)
-  (f : A → type-Truncated-Type B) → UU (l1 ⊔ l2 ⊔ lsuc l)
-dependent-universal-property-truncation l {k} B f =
-  (X : type-Truncated-Type B → Truncated-Type l k) →
-  is-equiv (precomp-Π-Truncated-Type f X)
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  where
+
+  dependent-universal-property-truncation-Level :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  dependent-universal-property-truncation-Level l =
+    (X : type-Truncated-Type B → Truncated-Type l k) →
+    is-equiv (precomp-Π-Truncated-Type f X)
+
+  dependent-universal-property-truncation : UUω
+  dependent-universal-property-truncation =
+    {l : Level} → dependent-universal-property-truncation-Level l
 ```
 
 ## Properties
@@ -101,7 +122,7 @@ dependent-universal-property-truncation l {k} B f =
 abstract
   is-truncation-id :
     {l1 : Level} {k : 𝕋} {A : UU l1} (H : is-trunc k A) →
-    {l : Level} → is-truncation l (A , H) id
+    is-truncation (A , H) id
   is-truncation-id H B =
     is-equiv-precomp-is-equiv id is-equiv-id (type-Truncated-Type B)
 
@@ -109,7 +130,7 @@ abstract
   is-truncation-equiv :
     {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k)
     (e : A ≃ type-Truncated-Type B) →
-    {l : Level} → is-truncation l B (map-equiv e)
+    is-truncation B (map-equiv e)
   is-truncation-equiv B e C =
     is-equiv-precomp-is-equiv
       ( map-equiv e)
@@ -127,8 +148,8 @@ module _
 
   abstract
     is-truncation-universal-property-truncation :
-      ({l : Level} → universal-property-truncation l B f) →
-      ({l : Level} → is-truncation l B f)
+      universal-property-truncation B f →
+      is-truncation B f
     is-truncation-universal-property-truncation H C =
       is-equiv-is-contr-map
         ( λ g →
@@ -139,8 +160,7 @@ module _
 
   abstract
     universal-property-truncation-is-truncation :
-      ({l : Level} → is-truncation l B f) →
-      ({l : Level} → universal-property-truncation l B f)
+      is-truncation B f → universal-property-truncation B f
     universal-property-truncation-is-truncation H C g =
       is-contr-equiv'
         ( Σ (type-hom-Truncated-Type k B C) (λ h → (h ∘ f) ＝ g))
@@ -148,14 +168,14 @@ module _
         ( is-contr-map-is-equiv (H C) g)
 
   map-is-truncation :
-    ({l : Level} → is-truncation l B f) →
+    (is-truncation B f) →
     ({l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
     type-hom-Truncated-Type k B C)
   map-is-truncation H C g =
     pr1 (center (universal-property-truncation-is-truncation H C g))
 
   triangle-is-truncation :
-    (H : {l : Level} → is-truncation l B f) →
+    (H : is-truncation B f) →
     {l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
     (map-is-truncation H C g ∘ f) ~ g
   triangle-is-truncation H C g =
@@ -172,8 +192,8 @@ module _
 
   abstract
     dependent-universal-property-truncation-is-truncation :
-      ({l : Level} → is-truncation l B f) →
-      {l : Level} → dependent-universal-property-truncation l B f
+      (is-truncation B f) →
+      dependent-universal-property-truncation B f
     dependent-universal-property-truncation-is-truncation H X =
       is-fiberwise-equiv-is-equiv-map-Σ
         ( λ (h : A → type-Truncated-Type B) →
@@ -191,13 +211,13 @@ module _
 
   abstract
     is-truncation-dependent-universal-property-truncation :
-      ({l : Level} → dependent-universal-property-truncation l B f) →
-      {l : Level} → is-truncation l B f
+      (dependent-universal-property-truncation B f) →
+      is-truncation B f
     is-truncation-dependent-universal-property-truncation H X =
       H (λ b → X)
 
   section-is-truncation :
-    ({l : Level} → is-truncation l B f) →
+    (is-truncation B f) →
     {l3 : Level} (C : Truncated-Type l3 k)
     (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
     f ~ (g ∘ h) → section g

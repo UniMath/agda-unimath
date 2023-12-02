@@ -34,8 +34,8 @@ module _
 
   abstract
     is-equiv-is-truncation-is-truncation :
-      ({l : Level} → is-truncation l B f) →
-      ({l : Level} → is-truncation l C g) →
+      is-truncation B f →
+      is-truncation C g →
       is-equiv h
     is-equiv-is-truncation-is-truncation K L =
       is-equiv-is-invertible

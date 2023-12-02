@@ -192,8 +192,7 @@ module _
 pullback-stable-function-class :
   (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 pullback-stable-function-class l1 l2 l3 =
-  Σ ( function-class l1 l2 l3)
-    ( is-pullback-stable-function-class)
+  Σ ( function-class l1 l2 l3) (is-pullback-stable-function-class)
 ```
 
 ## Properties
