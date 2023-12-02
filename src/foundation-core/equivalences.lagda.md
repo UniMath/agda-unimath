@@ -458,7 +458,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  opaque
+  abstract
     is-equiv-htpy :
       {f : A → B} (g : A → B) → f ~ g → is-equiv g → is-equiv f
     pr1 (pr1 (is-equiv-htpy g G ((h , H) , (k , K)))) = h
