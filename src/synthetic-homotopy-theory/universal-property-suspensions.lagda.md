@@ -49,7 +49,7 @@ module _
     {l3 : Level} (Z : UU l3) → (Y → Z) → suspension-structure X Z
   pr1 (ev-suspension Z h) = h (north-suspension-structure s)
   pr1 (pr2 (ev-suspension Z h)) = h (south-suspension-structure s)
-  pr2 (pr2 (ev-suspension Z h)) = h ·l (meridian-suspension-structure s)
+  pr2 (pr2 (ev-suspension Z h)) = h ·l meridian-suspension-structure s
 
   universal-property-suspension : UUω
   universal-property-suspension =
@@ -66,7 +66,7 @@ universal-property-pushout-suspension l X Y s =
   universal-property-pushout l
     ( const X unit star)
     ( const X unit star)
-    ( cocone-suspension-structure X Y s)
+    ( suspension-cocone-suspension-structure s)
 ```
 
 ## Properties
@@ -76,13 +76,13 @@ triangle-ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (s : suspension-structure X Y) →
   (Z : UU l3) →
-  ( ( map-equiv-suspension-structure-suspension-cocone X Z) ∘
+  ( ( suspension-structure-suspension-cocone) ∘
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
-      ( cocone-suspension-structure X Y s))) ~
+      ( suspension-cocone-suspension-structure s))) ~
   ( ev-suspension s Z)
-triangle-ev-suspension (pair N (pair S merid)) Z h = refl
+triangle-ev-suspension (N , S , merid) Z h = refl
 
 is-equiv-ev-suspension :
   { l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
@@ -92,12 +92,12 @@ is-equiv-ev-suspension :
 is-equiv-ev-suspension {X = X} s up-Y Z =
   is-equiv-left-map-triangle
     ( ev-suspension s Z)
-    ( map-equiv-suspension-structure-suspension-cocone X Z)
+    ( suspension-structure-suspension-cocone)
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
-      ( cocone-suspension-structure X _ s))
+      ( suspension-cocone-suspension-structure s))
     ( inv-htpy (triangle-ev-suspension s Z))
     ( up-Y Z)
-    ( is-equiv-map-equiv-suspension-structure-suspension-cocone X Z)
+    ( is-equiv-suspension-structure-suspension-cocone)
 ```

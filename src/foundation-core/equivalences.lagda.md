@@ -458,7 +458,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  abstract
+  opaque
     is-equiv-htpy :
       {f : A → B} (g : A → B) → f ~ g → is-equiv g → is-equiv f
     pr1 (pr1 (is-equiv-htpy g G ((h , H) , (k , K)))) = h
@@ -479,7 +479,7 @@ module _
 
   htpy-map-inv-is-equiv :
     {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
-    (map-inv-is-equiv H) ~ (map-inv-is-equiv K)
+    map-inv-is-equiv H ~ map-inv-is-equiv K
   htpy-map-inv-is-equiv G H K b =
     ( inv
       ( is-retraction-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙

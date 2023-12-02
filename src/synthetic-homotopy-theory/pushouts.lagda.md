@@ -16,6 +16,8 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.26-descent
@@ -130,11 +132,21 @@ pr2 (equiv-up-pushout f g X) = up-pushout f g X
 ### The cogap map
 
 ```agda
-cogap :
-  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) →
-  { X : UU l4} → cocone f g X → pushout f g → X
-cogap f g {X} = map-inv-equiv (equiv-up-pushout f g X)
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) { X : UU l4}
+  where
+
+  cogap : cocone f g X → pushout f g → X
+  cogap = map-inv-equiv (equiv-up-pushout f g X)
+
+  is-section-cogap : is-section (cocone-map f g (cocone-pushout f g)) cogap
+  is-section-cogap = is-section-map-inv-equiv (equiv-up-pushout f g X)
+
+  is-retraction-cogap :
+    is-retraction (cocone-map f g (cocone-pushout f g)) cogap
+  is-retraction-cogap =
+    is-retraction-map-inv-equiv (equiv-up-pushout f g X)
 ```
 
 ### The predicate of being a pushout cocone

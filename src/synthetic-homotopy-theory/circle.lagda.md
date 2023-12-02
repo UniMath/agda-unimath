@@ -268,7 +268,7 @@ circle-sphere-1 =
 circle-sphere-1-north-sphere-1-eq-base-𝕊¹ :
   Id (circle-sphere-1 (north-sphere 1)) base-𝕊¹
 circle-sphere-1-north-sphere-1-eq-base-𝕊¹ =
-  up-suspension-north-suspension
+  compute-north-cogap-suspension-structure-suspension
     ( sphere 0)
     ( 𝕊¹)
     ( suspension-structure-sphere-0-𝕊¹)
@@ -276,7 +276,7 @@ circle-sphere-1-north-sphere-1-eq-base-𝕊¹ =
 circle-sphere-1-south-sphere-1-eq-base-𝕊¹ :
   Id (circle-sphere-1 (south-sphere 1)) base-𝕊¹
 circle-sphere-1-south-sphere-1-eq-base-𝕊¹ =
-  up-suspension-south-suspension
+  compute-south-cogap-suspension-structure-suspension
     ( sphere 0)
     ( 𝕊¹)
     ( suspension-structure-sphere-0-𝕊¹)
@@ -303,7 +303,7 @@ sphere-1-circle-sphere-1-south-sphere-1 =
   ( ap sphere-1-circle circle-sphere-1-south-sphere-1-eq-base-𝕊¹) ∙
   ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
 
-apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 :
+apply-compute-meridian-cogap-suspension-structure-suspension-sphere-1-circle-sphere-1 :
   ( n : Fin 2) →
   coherence-square-identifications
     ( ap
@@ -313,7 +313,8 @@ apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 :
     ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
     ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
     ( sphere-1-circle-sphere-1-south-sphere-1)
-apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
+apply-compute-meridian-cogap-suspension-structure-suspension-sphere-1-circle-sphere-1
+  n =
   ( inv
     ( assoc
       ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
@@ -330,7 +331,7 @@ apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
     ( λ x →
       ( ap sphere-1-circle x) ∙
       ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1))
-    ( up-suspension-meridian-suspension
+    ( compute-meridian-cogap-suspension-structure-suspension
       ( sphere 0)
       ( 𝕊¹)
       ( suspension-structure-sphere-0-𝕊¹)
@@ -379,7 +380,7 @@ map-sphere-1-circle-sphere-1-meridian (inl (inr n)) =
     ( meridian-sphere 0 (inl (inr n)))
     ( sphere-1-circle-sphere-1-north-sphere-1)
     ( sphere-1-circle-sphere-1-south-sphere-1)
-    ( ( apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1
+    ( ( apply-compute-meridian-cogap-suspension-structure-suspension-sphere-1-circle-sphere-1
         ( inl (inr n))) ∙
       ( identification-right-whisk
         ( ap-concat
@@ -406,7 +407,7 @@ map-sphere-1-circle-sphere-1-meridian (inr n) =
     ( meridian-sphere 0 (inr n))
     ( sphere-1-circle-sphere-1-north-sphere-1)
     ( sphere-1-circle-sphere-1-south-sphere-1)
-    ( ( apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1
+    ( ( apply-compute-meridian-cogap-suspension-structure-suspension-sphere-1-circle-sphere-1
         ( inr n)) ∙
       ( ap
         ( λ x →
@@ -470,7 +471,7 @@ apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle =
   ( identification-left-whisk
     ( inv (ap circle-sphere-1 (meridian-suspension (one-Fin 1))))
     ( inv
-      ( up-suspension-meridian-suspension
+      ( compute-meridian-cogap-suspension-structure-suspension
         (sphere 0) 𝕊¹ suspension-structure-sphere-0-𝕊¹ (one-Fin 1)))) ∙
   ( inv
     ( assoc
@@ -501,7 +502,7 @@ apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle =
   ( identification-left-whisk
     ( ap circle-sphere-1 (meridian-suspension (zero-Fin 1)))
     ( apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle)) ∙
-  ( up-suspension-meridian-suspension
+  ( compute-meridian-cogap-suspension-structure-suspension
     ( sphere 0)
     ( 𝕊¹)
     ( suspension-structure-sphere-0-𝕊¹)

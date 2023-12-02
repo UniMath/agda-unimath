@@ -94,7 +94,7 @@ module _
   pr1 pointed-map-counit-suspension-loop-adjunction =
     map-counit-suspension-loop-adjunction
   pr2 pointed-map-counit-suspension-loop-adjunction =
-    up-suspension-north-suspension
+    compute-north-cogap-suspension-structure-suspension
       ( type-Ω X)
       ( type-Pointed-Type X)
       ( point-Pointed-Type X , point-Pointed-Type X , id)
@@ -127,7 +127,7 @@ module _
         ( Y)
         ( map-pointed-map f∗))
   pr2 (inv-transpose-suspension-loop-adjunction f∗) =
-    up-suspension-north-suspension
+    compute-north-cogap-suspension-structure-suspension
       ( type-Pointed-Type X)
       ( type-Pointed-Type Y)
       ( suspension-structure-map-into-Ω

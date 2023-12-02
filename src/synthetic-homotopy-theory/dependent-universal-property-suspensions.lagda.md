@@ -70,7 +70,7 @@ module _
       ( dependent-cocone-map
         ( const X unit star)
         ( const X unit star)
-        ( cocone-suspension-structure X Y s)
+        ( suspension-cocone-suspension-structure s)
         ( B))) ~
     ( dependent-ev-suspension s B)
   triangle-dependent-ev-suspension s B = refl-htpy
