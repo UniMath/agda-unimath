@@ -48,8 +48,12 @@ ind-unit p star = p
 ### The terminal map out of a type
 
 ```agda
-terminal-map : {l : Level} {A : UU l} → A → unit
-terminal-map {A = A} = const A unit star
+module _
+  {l : Level} {A : UU l}
+  where
+
+  terminal-map : A → unit
+  terminal-map = const A unit star
 ```
 
 ### Points as maps out of the unit type
