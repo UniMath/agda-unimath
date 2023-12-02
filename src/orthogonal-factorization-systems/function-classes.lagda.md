@@ -165,17 +165,17 @@ module _
   {l1 l2 l3 : Level} (P : function-class l1 l2 l3)
   where
 
-  is-pullback-stable-function-class-Level :
-    (l : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
-  is-pullback-stable-function-class-Level l =
+  is-pullback-stable-function-class :
+    UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)
+  is-pullback-stable-function-class =
     {A : UU l1} {B C : UU l2} (f : A → C) (g : B → C)
-    (p : Σ (UU l1) (pullback-cone l f g)) →
+    (p : Σ (UU l1) (pullback-cone f g)) →
     is-in-function-class P f →
     is-in-function-class P (horizontal-map-pullback-cone f g (pr2 p))
 
   is-prop-is-pullback-stable-function-class :
-    (l : Level) → is-prop (is-pullback-stable-function-class-Level l)
-  is-prop-is-pullback-stable-function-class l =
+    is-prop (is-pullback-stable-function-class)
+  is-prop-is-pullback-stable-function-class =
     is-prop-iterated-implicit-Π 3
     ( λ A B C →
       is-prop-iterated-Π 4
@@ -183,18 +183,17 @@ module _
           is-prop-is-in-function-class P
             ( horizontal-map-pullback-cone f g (pr2 p))))
 
-  is-pullback-stable-function-class-Prop :
-    (l : Level) → Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
-  pr1 (is-pullback-stable-function-class-Prop l) =
-    is-pullback-stable-function-class-Level l
-  pr2 (is-pullback-stable-function-class-Prop l) =
-    is-prop-is-pullback-stable-function-class l
+  is-pullback-stable-function-class-Prop : Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3)
+  pr1 is-pullback-stable-function-class-Prop =
+    is-pullback-stable-function-class
+  pr2 is-pullback-stable-function-class-Prop =
+    is-prop-is-pullback-stable-function-class
 
 pullback-stable-function-class :
-  (l1 l2 l3 l4 : Level) → UU (lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4))
-pullback-stable-function-class l1 l2 l3 l4 =
+  (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+pullback-stable-function-class l1 l2 l3 =
   Σ ( function-class l1 l2 l3)
-    ( λ P → is-pullback-stable-function-class-Level P l4)
+    ( is-pullback-stable-function-class)
 ```
 
 ## Properties

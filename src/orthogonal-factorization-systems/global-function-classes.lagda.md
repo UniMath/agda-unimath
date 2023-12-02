@@ -190,18 +190,18 @@ module _
   where
 
   is-pullback-stable-global-function-class-Level :
-    (l1 l2 l3 l4 l5 : Level) →
-    UU (β l1 l3 ⊔ β l4 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-  is-pullback-stable-global-function-class-Level l1 l2 l3 l4 l5 =
+    (l1 l2 l3 l4 : Level) →
+    UU (β l1 l3 ⊔ β l4 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4)
+  is-pullback-stable-global-function-class-Level l1 l2 l3 l4 =
     {A : UU l1} {B : UU l2} {C : UU l3} (f : A → C) (g : B → C)
-    (c : Σ (UU l4) (pullback-cone l5 f g)) →
+    (c : Σ (UU l4) (pullback-cone f g)) →
     is-in-global-function-class P f →
     is-in-global-function-class P (horizontal-map-pullback-cone f g (pr2 c))
 
   is-pullback-stable-global-function-class : UUω
   is-pullback-stable-global-function-class =
-    {l1 l2 l3 l4 l5 : Level} →
-    is-pullback-stable-global-function-class-Level l1 l2 l3 l4 l5
+    {l1 l2 l3 l4 : Level} →
+    is-pullback-stable-global-function-class-Level l1 l2 l3 l4
 ```
 
 ## Properties
