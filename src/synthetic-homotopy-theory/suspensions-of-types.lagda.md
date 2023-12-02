@@ -111,8 +111,8 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (s : suspension-structure X Y)
   where
 
-  cogap-suspension-structure-suspension : suspension X → Y
-  cogap-suspension-structure-suspension =
+  cogap-suspension-structure : suspension X → Y
+  cogap-suspension-structure =
     cogap-suspension (suspension-cocone-suspension-structure s)
 ```
 
@@ -129,7 +129,7 @@ large proposition.
 is-suspension :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   suspension-structure X Y → UU (l1 ⊔ l2)
-is-suspension s = is-equiv (cogap-suspension-structure-suspension s)
+is-suspension s = is-equiv (cogap-suspension-structure s)
 ```
 
 ## Properties
@@ -141,33 +141,34 @@ module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
   where
 
-  is-section-cogap-suspension-structure-suspension :
+  is-section-cogap-suspension-structure :
     is-section
       ( ev-suspension (suspension-structure-suspension X) Z)
-      ( cogap-suspension-structure-suspension)
-  is-section-cogap-suspension-structure-suspension =
+      ( cogap-suspension-structure)
+  is-section-cogap-suspension-structure =
     ( suspension-structure-suspension-cocone) ·l
     ( ( is-section-cogap terminal-map terminal-map) ·r
       ( suspension-cocone-suspension-structure))
 
-  is-retraction-cogap-suspension-structure-suspension :
+  is-retraction-cogap-suspension-structure :
     is-retraction
       ( ev-suspension (suspension-structure-suspension X) Z)
-      ( cogap-suspension-structure-suspension)
-  is-retraction-cogap-suspension-structure-suspension =
+      ( cogap-suspension-structure)
+  is-retraction-cogap-suspension-structure =
     ( is-retraction-cogap terminal-map terminal-map)
+
+up-suspension :
+  {l1 : Level} {X : UU l1} →
+  universal-property-suspension (suspension-structure-suspension X)
+up-suspension Z =
+  is-equiv-is-invertible
+    ( cogap-suspension-structure)
+    ( is-section-cogap-suspension-structure)
+    ( is-retraction-cogap-suspension-structure)
 
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
   where
-
-  up-suspension :
-    universal-property-suspension (suspension-structure-suspension X)
-  up-suspension Z =
-    is-equiv-is-invertible
-      ( cogap-suspension-structure-suspension)
-      ( is-section-cogap-suspension-structure-suspension)
-      ( is-retraction-cogap-suspension-structure-suspension)
 
   equiv-up-suspension :
     (suspension X → Z) ≃ (suspension-structure X Z)
@@ -175,48 +176,48 @@ module _
     ev-suspension (suspension-structure-suspension X) Z
   pr2 equiv-up-suspension = up-suspension Z
 
-  compute-north-cogap-suspension-structure-suspension :
+  compute-north-cogap-suspension-structure :
     (c : suspension-structure X Z) →
-    ( cogap-suspension-structure-suspension c north-suspension) ＝
+    ( cogap-suspension-structure c north-suspension) ＝
     ( north-suspension-structure c)
-  compute-north-cogap-suspension-structure-suspension c =
+  compute-north-cogap-suspension-structure c =
     pr1
       ( htpy-eq-suspension-structure
-        ( is-section-cogap-suspension-structure-suspension c))
+        ( is-section-cogap-suspension-structure c))
 
-  compute-south-cogap-suspension-structure-suspension :
+  compute-south-cogap-suspension-structure :
     (c : suspension-structure X Z) →
-    ( cogap-suspension-structure-suspension c south-suspension) ＝
+    ( cogap-suspension-structure c south-suspension) ＝
     ( south-suspension-structure c)
-  compute-south-cogap-suspension-structure-suspension c =
+  compute-south-cogap-suspension-structure c =
     pr1
       ( pr2
         ( htpy-eq-suspension-structure
-          ( is-section-cogap-suspension-structure-suspension c)))
+          ( is-section-cogap-suspension-structure c)))
 
-  compute-meridian-cogap-suspension-structure-suspension :
+  compute-meridian-cogap-suspension-structure :
     (c : suspension-structure X Z) (x : X) →
-    ( ( ap (cogap-suspension-structure-suspension c) (meridian-suspension x)) ∙
-      ( compute-south-cogap-suspension-structure-suspension c)) ＝
-    ( ( compute-north-cogap-suspension-structure-suspension c) ∙
+    ( ( ap (cogap-suspension-structure c) (meridian-suspension x)) ∙
+      ( compute-south-cogap-suspension-structure c)) ＝
+    ( ( compute-north-cogap-suspension-structure c) ∙
       ( meridian-suspension-structure c x))
-  compute-meridian-cogap-suspension-structure-suspension c =
+  compute-meridian-cogap-suspension-structure c =
     pr2
       ( pr2
         ( htpy-eq-suspension-structure
-          ( is-section-cogap-suspension-structure-suspension c)))
+          ( is-section-cogap-suspension-structure c)))
 
   ev-suspension-up-suspension :
     (c : suspension-structure X Z) →
     ( ev-suspension
       ( suspension-structure-suspension X)
       ( Z)
-      ( cogap-suspension-structure-suspension c)) ＝ c
+      ( cogap-suspension-structure c)) ＝ c
   ev-suspension-up-suspension c =
     eq-htpy-suspension-structure
-      ( ( compute-north-cogap-suspension-structure-suspension c) ,
-        ( compute-south-cogap-suspension-structure-suspension c) ,
-        ( compute-meridian-cogap-suspension-structure-suspension c))
+      ( ( compute-north-cogap-suspension-structure c) ,
+        ( compute-south-cogap-suspension-structure c) ,
+        ( compute-meridian-cogap-suspension-structure c))
 ```
 
 ### The suspension of `X` has the dependent universal property of suspensions
