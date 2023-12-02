@@ -9,16 +9,19 @@ module synthetic-homotopy-theory.sequential-colimits where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.homotopies
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coequalizers
+open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-sequential-colimits
@@ -107,7 +110,54 @@ module _
       ( cocone-standard-sequential-colimit)
 ```
 
+### Corollaries of the universal property of sequential colimits
+
+```agda
+module _
+  { l : Level} (A : sequential-diagram l)
+  where
+
+  equiv-up-standard-sequential-colimit :
+    { l : Level} {X : UU l} →
+    (standard-sequential-colimit A → X) ≃ (cocone-sequential-diagram A X)
+  pr1 equiv-up-standard-sequential-colimit =
+    cocone-map-sequential-diagram A (cocone-standard-sequential-colimit A)
+  pr2 (equiv-up-standard-sequential-colimit) =
+    up-standard-sequential-colimit A _
+
+  cogap-standard-sequential-colimit :
+    { l : Level} {X : UU l} →
+    cocone-sequential-diagram A X → standard-sequential-colimit A → X
+  cogap-standard-sequential-colimit =
+    map-inv-equiv equiv-up-standard-sequential-colimit
+
+  equiv-dup-standard-sequential-colimit :
+    { l : Level} {P : standard-sequential-colimit A → UU l} →
+    ( (x : standard-sequential-colimit A) → P x) ≃
+    ( dependent-cocone-sequential-diagram A
+      ( cocone-standard-sequential-colimit A)
+      ( P))
+  pr1 equiv-dup-standard-sequential-colimit =
+    dependent-cocone-map-sequential-diagram A
+      ( cocone-standard-sequential-colimit A)
+      ( _)
+  pr2 equiv-dup-standard-sequential-colimit =
+    dup-standard-sequential-colimit A _
+
+  dependent-cogap-standard-sequential-colimit :
+    { l : Level} {P : standard-sequential-colimit A → UU l} →
+    dependent-cocone-sequential-diagram A
+      ( cocone-standard-sequential-colimit A)
+      ( P) →
+    ( x : standard-sequential-colimit A) → P x
+  dependent-cogap-standard-sequential-colimit =
+    map-inv-equiv equiv-dup-standard-sequential-colimit
+```
+
 ### Homotopies between maps from the standard sequential colimit
+
+Maps from the standard sequential colimit induce cocones under the sequential
+diagrams, and a homotopy between the maps is exactly a homotopy of the cocones.
 
 ```agda
 module _
@@ -115,16 +165,42 @@ module _
   ( f g : standard-sequential-colimit A → X)
   where
 
-  htpy-standard-sequential-colimit : UU (l1 ⊔ l2)
-  htpy-standard-sequential-colimit =
-    Σ ( ( n : ℕ) →
-        f ∘ map-cocone-standard-sequential-colimit A n ~
-        g ∘ map-cocone-standard-sequential-colimit A n)
-      ( λ h →
-        ( n : ℕ) →
-        coherence-square-homotopies
-          ( h n)
-          ( f ·l coherence-triangle-cocone-standard-sequential-colimit A n)
-          ( g ·l coherence-triangle-cocone-standard-sequential-colimit A n)
-          ( h (succ-ℕ n) ·r map-sequential-diagram A n))
+  htpy-out-of-standard-sequential-colimit : UU (l1 ⊔ l2)
+  htpy-out-of-standard-sequential-colimit =
+    htpy-cocone-sequential-diagram A
+      ( cocone-map-sequential-diagram A
+        ( cocone-standard-sequential-colimit A)
+        ( f))
+      ( cocone-map-sequential-diagram A
+        ( cocone-standard-sequential-colimit A)
+        ( g))
+
+  equiv-htpy-htpy-out-of-standard-sequential-colimit :
+    htpy-out-of-standard-sequential-colimit ≃ (f ~ g)
+  equiv-htpy-htpy-out-of-standard-sequential-colimit =
+    ( inv-equiv (equiv-dup-standard-sequential-colimit A)) ∘e
+    ( equiv-tot
+      ( λ K →
+        equiv-Π-equiv-family
+          ( λ n →
+            equiv-Π-equiv-family
+              ( λ a →
+                compute-dependent-identification-eq-value-function f g
+                  ( coherence-triangle-cocone-standard-sequential-colimit A n a)
+                  ( K n a)
+                  ( K (succ-ℕ n) (map-sequential-diagram A n a))))))
+```
+
+We may then obtain a homotopy of maps from a homotopy of their induced cocones.
+
+```agda
+module _
+  { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
+  { f g : standard-sequential-colimit A → X}
+  ( H : htpy-out-of-standard-sequential-colimit A f g)
+  where
+
+  htpy-htpy-out-of-standard-sequential-colimit : f ~ g
+  htpy-htpy-out-of-standard-sequential-colimit =
+    map-equiv (equiv-htpy-htpy-out-of-standard-sequential-colimit A f g) H
 ```
