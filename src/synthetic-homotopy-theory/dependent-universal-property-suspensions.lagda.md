@@ -50,14 +50,9 @@ module _
   (s : suspension-structure X Y)
   where
 
-  dependent-universal-property-suspension-Level :
-    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  dependent-universal-property-suspension-Level l =
-    (B : Y → UU l) → is-equiv (dependent-ev-suspension s B)
-
   dependent-universal-property-suspension : UUω
   dependent-universal-property-suspension =
-    {l : Level} → dependent-universal-property-suspension-Level l
+    {l : Level} (B : Y → UU l) → is-equiv (dependent-ev-suspension s B)
 ```
 
 #### Coherence between `dependent-ev-suspension` and `dependent-cocone-map`

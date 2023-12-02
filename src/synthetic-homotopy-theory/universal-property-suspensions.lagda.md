@@ -51,13 +51,9 @@ module _
   pr1 (pr2 (ev-suspension Z h)) = h (south-suspension-structure s)
   pr2 (pr2 (ev-suspension Z h)) = h ·l (meridian-suspension-structure s)
 
-  universal-property-suspension-Level : (l : Level) → UU (lsuc l ⊔ l1 ⊔ l2)
-  universal-property-suspension-Level l =
-    (Z : UU l) → is-equiv (ev-suspension Z)
-
   universal-property-suspension : UUω
   universal-property-suspension =
-    {l : Level} → universal-property-suspension-Level l
+    {l : Level} (Z : UU l) → is-equiv (ev-suspension Z)
 ```
 
 ### The universal property of the suspension as a pushout
