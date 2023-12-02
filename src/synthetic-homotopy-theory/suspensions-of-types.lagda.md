@@ -160,8 +160,7 @@ module _
 
   map-inv-up-suspension :
     {l : Level} (Z : UU l) → suspension-structure X Z → suspension X → Z
-  map-inv-up-suspension Z =
-    map-inv-equiv (equiv-up-suspension Z)
+  map-inv-up-suspension Z = map-inv-equiv (equiv-up-suspension Z)
 
   is-section-map-inv-up-suspension :
     {l : Level} (Z : UU l) →
@@ -173,7 +172,7 @@ module _
   is-retraction-map-inv-up-suspension :
     {l : Level} (Z : UU l) →
     ( ( map-inv-up-suspension Z) ∘
-      ( ev-suspension ((suspension-structure-suspension X)) Z)) ~ id
+      ( ev-suspension (suspension-structure-suspension X) Z)) ~ id
   is-retraction-map-inv-up-suspension Z =
     is-retraction-map-inv-is-equiv (up-suspension Z)
 
