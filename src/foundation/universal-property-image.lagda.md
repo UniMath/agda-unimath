@@ -38,8 +38,8 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-The image of a map `f : A → X` is the least subtype of `X` containing all the
-values of `f`.
+The **image** of a map `f : A → X` is the least
+[subtype](foundation-core.subtypes.md) of `X` containing all the values of `f`.
 
 ## Definition
 
@@ -140,7 +140,7 @@ module _
     map-hom-slice (map-emb i) (map-emb j) hom-slice-universal-property-image
 
   triangle-hom-slice-universal-property-image :
-    (map-emb i) ~ (map-emb j ∘ map-hom-slice-universal-property-image)
+    map-emb i ~ map-emb j ∘ map-hom-slice-universal-property-image
   triangle-hom-slice-universal-property-image =
     triangle-hom-slice
       ( map-emb i)
@@ -215,11 +215,13 @@ module _
 abstract
   is-image-has-section :
     (l : Level) {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
-    section f → is-image f id-emb (pair f refl-htpy)
-  is-image-has-section l f (pair g H) =
+    section f → is-image f id-emb (f , refl-htpy)
+  is-image-has-section l f (g , H) =
     is-image-is-image'
-      f id-emb (pair f refl-htpy)
-      ( λ B m h → pair ((pr1 h) ∘ g) ( λ x → (inv (H x)) ∙ (pr2 h (g x))))
+      ( f)
+      ( id-emb)
+      ( f , refl-htpy)
+      ( λ B m h → ((pr1 h ∘ g) , (λ x → inv (H x) ∙ pr2 h (g x))))
 ```
 
 ### Any embedding is its own image inclusion
@@ -228,11 +230,9 @@ abstract
 abstract
   is-image-is-emb :
     (l : Level) {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
-    (H : is-emb f) → is-image f (pair f H) (pair id refl-htpy)
+    (H : is-emb f) → is-image f (f , H) (id , refl-htpy)
   is-image-is-emb l f H =
-    is-image-is-image'
-      f (pair f H) (pair id refl-htpy)
-      ( λ B m h → h)
+    is-image-is-image' f (f , H) (id , refl-htpy) (λ B m h → h)
 ```
 
 ### The image of `f` is the image of `f`
@@ -248,22 +248,21 @@ abstract
       { A = (fiber f x)}
       ( fiber-emb-Prop m x)
       ( λ t →
-        pair
-          ( map-hom-slice f (map-emb m) h (pr1 t))
+          ( map-hom-slice f (map-emb m) h (pr1 t)) ,
           ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙
             ( pr2 t)))
 
   map-is-image-im :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
     (m : B ↪ X) (h : hom-slice f (map-emb m)) → im f → B
-  map-is-image-im f m h (pair x t) =
+  map-is-image-im f m h (x , t) =
     pr1 (fiberwise-map-is-image-im f m h x t)
 
   triangle-is-image-im :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
     (m : B ↪ X) (h : hom-slice f (map-emb m)) →
-    inclusion-im f ~ ((map-emb m) ∘ (map-is-image-im f m h))
-  triangle-is-image-im f m h (pair x t) =
+    inclusion-im f ~ map-emb m ∘ map-is-image-im f m h
+  triangle-is-image-im f m h (x , t) =
     inv (pr2 (fiberwise-map-is-image-im f m h x t))
 
   is-image-im :
@@ -271,11 +270,10 @@ abstract
     is-image f (emb-im f) (unit-im f)
   is-image-im f {l} =
     is-image-is-image'
-      f (emb-im f) (unit-im f)
-      ( λ B m h →
-        pair
-          ( map-is-image-im f m h)
-          ( triangle-is-image-im f m h))
+      ( f)
+      ( emb-im f)
+      ( unit-im f)
+      ( λ B m h → (map-is-image-im f m h , triangle-is-image-im f m h))
 ```
 
 ### A factorization of a map through an embedding is the image factorization if and only if the right factor is surjective
@@ -302,16 +300,16 @@ abstract
           ( up-i
             ( Σ B ( λ b →
                     type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b)))
-            ( pair g is-emb-g))
-          ( pair (map-unit-im (pr1 q)) (pr2 q))
+            ( g , is-emb-g))
+          ( map-unit-im (pr1 q) , pr2 q)
     β : type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
     β = pr2 (pr1 α b)
     γ :
       fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
       type-Prop (trunc-Prop (fiber (pr1 q) b))
-    γ (pair a p) =
+    γ (a , p) =
       unit-trunc-Prop
-        ( pair a (p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b))))
+        ( a , p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b)))
 
 abstract
   is-image-is-surjective' :
@@ -322,19 +320,18 @@ abstract
   is-image-is-surjective' f i q H B' m =
     map-equiv
       ( ( equiv-hom-slice-fiberwise-hom (map-emb i) (map-emb m)) ∘e
-        ( ( inv-equiv (reduce-Π-fiber (map-emb i) (fiber (map-emb m)))) ∘e
-          ( inv-equiv
-            ( equiv-dependent-universal-property-surj-is-surjective
-              ( pr1 q)
-              ( H)
-              ( λ b →
-                pair
-                  ( fiber (map-emb m) (pr1 i b))
-                  ( is-prop-map-emb m (pr1 i b)))) ∘e
-            ( ( equiv-Π-equiv-family
-                ( λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
-              ( ( reduce-Π-fiber f (fiber (map-emb m))) ∘e
-                ( equiv-fiberwise-hom-hom-slice f (map-emb m)))))))
+        ( inv-equiv (reduce-Π-fiber (map-emb i) (fiber (map-emb m)))) ∘e
+        ( inv-equiv
+          ( equiv-dependent-universal-property-surj-is-surjective
+            ( pr1 q)
+            ( H)
+            ( λ b →
+              ( fiber (map-emb m) (pr1 i b)) ,
+              ( is-prop-map-emb m (pr1 i b))))) ∘e
+        ( equiv-Π-equiv-family
+          ( λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
+        ( reduce-Π-fiber f (fiber (map-emb m))) ∘e
+        ( equiv-fiberwise-hom-hom-slice f (map-emb m)))
 
 abstract
   is-image-is-surjective :
@@ -342,7 +339,6 @@ abstract
     (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i)) →
     is-surjective (map-hom-slice f (map-emb i) q) →
     is-image f i q
-  is-image-is-surjective f i q H {l} =
-    is-image-is-image' f i q
-      ( is-image-is-surjective' f i q H)
+  is-image-is-surjective f i q H =
+    is-image-is-image' f i q (is-image-is-surjective' f i q H)
 ```
