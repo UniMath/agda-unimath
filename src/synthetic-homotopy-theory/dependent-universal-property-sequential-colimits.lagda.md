@@ -50,14 +50,10 @@ module _
   ( c : cocone-sequential-diagram A X)
   where
 
-  dependent-universal-property-sequential-colimit-Level :
-    ( l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  dependent-universal-property-sequential-colimit-Level l =
-    ( P : X → UU l) → is-equiv (dependent-cocone-map-sequential-diagram A c P)
-
   dependent-universal-property-sequential-colimit : UUω
   dependent-universal-property-sequential-colimit =
-    { l : Level} → dependent-universal-property-sequential-colimit-Level l
+    { l : Level} → (P : X → UU l) →
+    is-equiv (dependent-cocone-map-sequential-diagram A c P)
 ```
 
 ### The map induced by the dependent universal property of sequential colimits
