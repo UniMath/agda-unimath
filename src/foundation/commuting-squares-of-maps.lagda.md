@@ -106,7 +106,8 @@ coherence-square-inv-horizontal :
   coherence-square-maps (map-equiv top) left right (map-equiv bottom) →
   coherence-square-maps (map-inv-equiv top) right left (map-inv-equiv bottom)
 coherence-square-inv-horizontal top left right bottom H b =
-  map-eq-transpose-equiv' bottom
+  map-eq-transpose-equiv-inv
+    ( bottom)
     ( ( ap right (inv (is-section-map-inv-equiv top b))) ∙
       ( inv (H (map-inv-equiv top b))))
 
@@ -116,7 +117,8 @@ coherence-square-inv-vertical :
   coherence-square-maps top (map-equiv left) (map-equiv right) bottom →
   coherence-square-maps bottom (map-inv-equiv left) (map-inv-equiv right) top
 coherence-square-inv-vertical top left right bottom H x =
-  map-eq-transpose-equiv right
+  map-eq-transpose-equiv
+    ( right)
     ( ( inv (H (map-inv-equiv left x))) ∙
       ( ap bottom (is-section-map-inv-equiv left x)))
 
@@ -274,7 +276,7 @@ module _
                   ( is-retraction-map-inv-equiv left a)))))) ∙
         ( ap
           ( _∙ ap top (is-retraction-map-inv-equiv left a))
-          ( triangle-eq-transpose-equiv-retr''
+          ( right-inverse-eq-transpose-equiv
             ( right)
             ( H (map-inv-equiv left (map-equiv left a)))))))
 
@@ -391,8 +393,8 @@ module _
 
 ### Naturality of commuting squares of maps with respect to identifications
 
-Similarly to the naturality square of homotopies and identifications, we have
-a naturality square of coherence squares of maps and identifications:
+Similarly to the naturality square of homotopies and identifications, we have a
+naturality square of coherence squares of maps and identifications:
 
 ```text
            ap f (ap g p)

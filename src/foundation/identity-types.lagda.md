@@ -239,6 +239,12 @@ module _
   equiv-left-transpose-eq-concat' p q r =
     equiv-inv _ _ ∘e equiv-left-transpose-eq-concat q r p ∘e equiv-inv _ _
 
+  left-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) → (inv q ∙ p ＝ r)
+  left-transpose-eq-concat' p q r =
+    map-equiv (equiv-left-transpose-eq-concat' p q r)
+
   abstract
     is-equiv-right-transpose-eq-concat :
       (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
@@ -262,6 +268,12 @@ module _
     (p ＝ q ∙ r) ≃ (p ∙ inv r ＝ q)
   equiv-right-transpose-eq-concat' p q r =
     equiv-inv _ _ ∘e equiv-right-transpose-eq-concat q r p ∘e equiv-inv _ _
+
+  right-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) → (p ∙ inv r ＝ q)
+  right-transpose-eq-concat' p q r =
+    map-equiv (equiv-right-transpose-eq-concat' p q r)
 ```
 
 ### Computation of fibers of families of maps out of the identity type
