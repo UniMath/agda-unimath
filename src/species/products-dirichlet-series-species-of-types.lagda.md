@@ -110,8 +110,7 @@ module _
             ( λ B →
               ( equiv-prod
                 ( id-equiv)
-                ( universal-property-product ∘e
-                  equiv-postcomp X (C1 A B))) ∘e
+                ( up-product ∘e equiv-postcomp X (C1 A B))) ∘e
               ( left-unit-law-Σ-is-contr
                 ( is-torsorial-equiv' (A × B))
                 ( A × B , id-equiv))))) ∘e
