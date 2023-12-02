@@ -90,10 +90,23 @@ module _
   {l : Level} {k : 𝕋} {A : UU l}
   where
 
-  is-truncated-succ-acyclic-is-connected :
+  is-truncated-acyclic-succ-is-connected :
     is-connected k A → is-truncated-acyclic (succ-𝕋 k) A
-  is-truncated-succ-acyclic-is-connected =
+  is-truncated-acyclic-succ-is-connected =
     is-connected-succ-suspension-is-connected
+```
+
+### Every `(k+1)`-acyclic type is `k`-acyclic
+
+```agda
+module _
+  {l : Level} {k : 𝕋} {A : UU l}
+  where
+
+  is-truncated-acyclic-is-truncated-acyclic-succ :
+    is-truncated-acyclic (succ-𝕋 k) A → is-truncated-acyclic k A
+  is-truncated-acyclic-is-truncated-acyclic-succ =
+    is-connected-is-connected-succ-𝕋 k
 ```
 
 ## See also

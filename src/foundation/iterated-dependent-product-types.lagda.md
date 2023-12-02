@@ -116,7 +116,7 @@ section-iterated-Π-section-Π-section-codomain :
     ((x : A) → P (B x)) → P ((x : A) → B x)) →
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π P A → P (iterated-Π A)
-section-iterated-Π-section-Π-section-codomain P f ._ {{base-telescope A}} H =
+section-iterated-Π-section-Π-section-codomain P f .0 {{base-telescope A}} H =
   H
 section-iterated-Π-section-Π-section-codomain P f ._ {{cons-telescope A}} H =
   f (λ x → section-iterated-Π-section-Π-section-codomain P f _ {{A x}} (H x))
@@ -128,7 +128,7 @@ section-iterated-implicit-Π-section-Π-section-codomain :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π P A → P (iterated-implicit-Π A)
 section-iterated-implicit-Π-section-Π-section-codomain
-  P f ._ {{base-telescope A}} H =
+  P f .0 {{base-telescope A}} H =
   H
 section-iterated-implicit-Π-section-Π-section-codomain
   P f ._ {{cons-telescope A}} H =
