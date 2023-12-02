@@ -28,10 +28,11 @@ open import foundation-core.universal-property-pullbacks
 
 ## Idea
 
-The fiberwise product of two families `P` and `Q` over a type `X` is the family
-of types `(P x) × (Q x)` over `X`. Similarly, the fiber product of two maps
-`f :A → X` and `g : B → X` is the type `Σ X (λ x → fiber f x × fiber g x)`,
-which fits in a pullback diagram on `f` and `g`.
+The **fiberwise product** of two families `P` and `Q` over a type `X` is the
+family of types `(P x) × (Q x)` over `X`. Similarly, the fiber product of two
+maps `f : A → X` and `g : B → X` is the type
+`Σ X (λ x → fiber f x × fiber g x)`, which fits in a
+[pullback](foundation-core.pullbacks.md) diagram on `f` and `g`.
 
 ```agda
 module _
@@ -40,8 +41,8 @@ module _
 
   cone-fiberwise-prod :
     cone (pr1 {B = P}) (pr1 {B = Q}) (Σ X (λ x → (P x) × (Q x)))
-  pr1 cone-fiberwise-prod = tot (λ x → pr1)
-  pr1 (pr2 cone-fiberwise-prod) = tot (λ x → pr2)
+  pr1 cone-fiberwise-prod = tot (λ _ → pr1)
+  pr1 (pr2 cone-fiberwise-prod) = tot (λ _ → pr2)
   pr2 (pr2 cone-fiberwise-prod) = refl-htpy
 ```
 
@@ -63,8 +64,7 @@ map.
   abstract
     is-section-inv-gap-fiberwise-prod :
       (gap-fiberwise-prod ∘ inv-gap-fiberwise-prod) ~ id
-    is-section-inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)) =
-      eq-pair-Σ refl (eq-pair-Σ refl refl)
+    is-section-inv-gap-fiberwise-prod ((x , p) , (.x , q) , refl) = refl
 
   abstract
     is-retraction-inv-gap-fiberwise-prod :
@@ -124,7 +124,7 @@ module _
     is-retraction-inv-gap-total-prod-fibers :
       (inv-gap-total-prod-fibers ∘ gap-total-prod-fibers) ~ id
     is-retraction-inv-gap-total-prod-fibers (.(g b) , (a , p) , (b , refl)) =
-      eq-pair-Σ refl (eq-pair (eq-pair-Σ refl right-unit) refl)
+      eq-pair-eq-pr2 (eq-pair (eq-pair-eq-pr2 right-unit) refl)
 
   abstract
     is-pullback-total-prod-fibers :
@@ -135,3 +135,9 @@ module _
         is-section-inv-gap-total-prod-fibers
         is-retraction-inv-gap-total-prod-fibers
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}
