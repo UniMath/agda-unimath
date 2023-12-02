@@ -229,8 +229,7 @@ module _
   is-section-gap-tower x = refl
 
   universal-property-standard-sequential-limit :
-    {l : Level} →
-    universal-property-sequential-limit l A (cone-standard-sequential-limit A)
+    universal-property-sequential-limit A (cone-standard-sequential-limit A)
   pr1 (pr1 (universal-property-standard-sequential-limit X)) = gap-tower A
   pr2 (pr1 (universal-property-standard-sequential-limit X)) =
     is-section-gap-tower
@@ -264,7 +263,7 @@ module _
 
   is-sequential-limit-universal-property-sequential-limit :
     (c : cone-tower A X) →
-    ({l : Level} → universal-property-sequential-limit l A c) →
+    universal-property-sequential-limit A c →
     is-sequential-limit A c
   is-sequential-limit-universal-property-sequential-limit c =
     is-equiv-universal-property-sequential-limit-universal-property-sequential-limit
@@ -276,7 +275,7 @@ module _
 
   universal-property-is-sequential-limit :
     (c : cone-tower A X) → is-sequential-limit A c →
-    {l : Level} → universal-property-sequential-limit l A c
+    universal-property-sequential-limit A c
   universal-property-is-sequential-limit c is-lim-c =
     universal-property-sequential-limit-universal-property-sequential-limit-is-equiv
       ( cone-standard-sequential-limit A)

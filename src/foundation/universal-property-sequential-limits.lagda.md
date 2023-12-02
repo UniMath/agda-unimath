@@ -56,26 +56,30 @@ that cone as a composite of `g` with the cone of `limₙ Aₙ` over `A`.
 
 ```agda
 module _
-  {l1 l2 : Level} (l : Level) (A : tower l1) {X : UU l2}
+  {l1 l2 : Level} (A : tower l1) {X : UU l2} (c : cone-tower A X)
   where
 
-  universal-property-sequential-limit :
-    (c : cone-tower A X) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  universal-property-sequential-limit c =
+  universal-property-sequential-limit-Level :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  universal-property-sequential-limit-Level l =
     (Y : UU l) → is-equiv (cone-map-tower A {Y = Y} c)
+
+  universal-property-sequential-limit : UUω
+  universal-property-sequential-limit =
+    {l : Level} → universal-property-sequential-limit-Level l
 
 module _
   {l1 l2 l3 : Level} (A : tower l1) {X : UU l2} (c : cone-tower A X)
   where
 
   map-universal-property-sequential-limit :
-    ({l : Level} → universal-property-sequential-limit l A c) →
+    universal-property-sequential-limit A c →
     {Y : UU l3} (c' : cone-tower A Y) → Y → X
   map-universal-property-sequential-limit up-c {Y} c' =
     map-inv-is-equiv (up-c Y) c'
 
   compute-map-universal-property-sequential-limit :
-    (up-c : {l : Level} → universal-property-sequential-limit l A c) →
+    (up-c : universal-property-sequential-limit A c) →
     {Y : UU l3} (c' : cone-tower A Y) →
     cone-map-tower A c (map-universal-property-sequential-limit up-c c') ＝ c'
   compute-map-universal-property-sequential-limit up-c {Y} c' =
@@ -109,8 +113,8 @@ module _
 
   abstract
     is-equiv-universal-property-sequential-limit-universal-property-sequential-limit :
-      ({l : Level} → universal-property-sequential-limit l A c) →
-      ({l : Level} → universal-property-sequential-limit l A c') →
+      universal-property-sequential-limit A c →
+      universal-property-sequential-limit A c' →
       is-equiv h
     is-equiv-universal-property-sequential-limit-universal-property-sequential-limit
       up up' =
@@ -127,8 +131,8 @@ module _
   abstract
     universal-property-sequential-limit-universal-property-sequential-limit-is-equiv :
       is-equiv h →
-      ({l : Level} → universal-property-sequential-limit l A c) →
-      ({l : Level} → universal-property-sequential-limit l A c')
+      universal-property-sequential-limit A c →
+      universal-property-sequential-limit A c'
     universal-property-sequential-limit-universal-property-sequential-limit-is-equiv
       is-equiv-h up D =
       is-equiv-left-map-triangle
@@ -141,9 +145,9 @@ module _
 
   abstract
     universal-property-sequential-limit-is-equiv-universal-property-sequential-limit :
-      ({l : Level} → universal-property-sequential-limit l A c') →
+      universal-property-sequential-limit A c' →
       is-equiv h →
-      ({l : Level} → universal-property-sequential-limit l A c)
+      universal-property-sequential-limit A c
     universal-property-sequential-limit-is-equiv-universal-property-sequential-limit
       up' is-equiv-h D =
       is-equiv-right-map-triangle
@@ -164,7 +168,7 @@ module _
 
   abstract
     uniqueness-universal-property-sequential-limit :
-      ({l : Level} → universal-property-sequential-limit l A c) →
+      universal-property-sequential-limit A c →
       {l3 : Level} (Y : UU l3) (c' : cone-tower A Y) →
       is-contr (Σ (Y → X) (λ h → htpy-cone-tower A (cone-map-tower A c h) c'))
     uniqueness-universal-property-sequential-limit up Y c' =
@@ -184,7 +188,7 @@ module _
 
   abstract
     is-prop-universal-property-sequential-limit :
-      is-prop (universal-property-sequential-limit l3 A c)
+      is-prop (universal-property-sequential-limit-Level A c l3)
     is-prop-universal-property-sequential-limit =
       is-prop-Π (λ Y → is-property-is-equiv (cone-map-tower A c))
 ```
@@ -198,7 +202,7 @@ module _
 
   htpy-cone-map-universal-property-sequential-limit :
     (c : cone-tower A X)
-    (up : {l : Level} → universal-property-sequential-limit l A c) →
+    (up : universal-property-sequential-limit A c) →
     {l3 : Level} {Y : UU l3} (c' : cone-tower A Y) →
     htpy-cone-tower A
       ( cone-map-tower A c (map-universal-property-sequential-limit A c up c'))
@@ -220,8 +224,8 @@ module _
   abstract
     uniquely-unique-sequential-limit :
       ( c' : cone-tower A Y) (c : cone-tower A X) →
-      ( up-c' : {l : Level} → universal-property-sequential-limit l A c') →
-      ( up-c : {l : Level} → universal-property-sequential-limit l A c) →
+      ( up-c' : universal-property-sequential-limit A c') →
+      ( up-c : universal-property-sequential-limit A c) →
       is-contr
         ( Σ (Y ≃ X)
             ( λ e → htpy-cone-tower A (cone-map-tower A c (map-equiv e)) c'))
