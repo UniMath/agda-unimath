@@ -31,14 +31,18 @@ open import foundation-core.identity-types
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (l : Level) {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) {C : UU l4}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
   where
 
-  universal-property-pullback :
-    (c : cone f g C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-  universal-property-pullback c =
+  universal-property-pullback-Level :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+  universal-property-pullback-Level l =
     (C' : UU l) → is-equiv (cone-map f g c {C'})
+
+  universal-property-pullback : UUω
+  universal-property-pullback =
+    {l : Level} → universal-property-pullback-Level l
 
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -46,13 +50,13 @@ module _
   where
 
   map-universal-property-pullback :
-    ({l : Level} → universal-property-pullback l f g c) →
+    universal-property-pullback f g c →
     {C' : UU l5} (c' : cone f g C') → C' → C
   map-universal-property-pullback up-c {C'} c' =
     map-inv-is-equiv (up-c C') c'
 
   compute-map-universal-property-pullback :
-    (up-c : {l : Level} → universal-property-pullback l f g c) →
+    (up-c : universal-property-pullback f g c) →
     {C' : UU l5} (c' : cone f g C') →
     cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
   compute-map-universal-property-pullback up-c {C'} c' =
@@ -86,8 +90,8 @@ module _
 
   abstract
     is-equiv-up-pullback-up-pullback :
-      ({l : Level} → universal-property-pullback l f g c) →
-      ({l : Level} → universal-property-pullback l f g c') →
+      universal-property-pullback f g c →
+      universal-property-pullback f g c' →
       is-equiv h
     is-equiv-up-pullback-up-pullback up up' =
       is-equiv-is-equiv-postcomp h
@@ -103,8 +107,8 @@ module _
   abstract
     up-pullback-up-pullback-is-equiv :
       is-equiv h →
-      ({l : Level} → universal-property-pullback l f g c) →
-      ({l : Level} → universal-property-pullback l f g c')
+      universal-property-pullback f g c →
+      universal-property-pullback f g c'
     up-pullback-up-pullback-is-equiv is-equiv-h up D =
       is-equiv-left-map-triangle
         ( cone-map f g c')
@@ -116,9 +120,9 @@ module _
 
   abstract
     up-pullback-is-equiv-up-pullback :
-      ({l : Level} → universal-property-pullback l f g c') →
+      universal-property-pullback f g c' →
       is-equiv h →
-      ({l : Level} → universal-property-pullback l f g c)
+      universal-property-pullback f g c
     up-pullback-is-equiv-up-pullback up' is-equiv-h D =
       is-equiv-right-map-triangle
         ( cone-map f g c')
@@ -139,7 +143,7 @@ module _
 
   abstract
     uniqueness-universal-property-pullback :
-      ({l : Level} → universal-property-pullback l f g c) →
+      universal-property-pullback f g c →
       {l5 : Level} (C' : UU l5) (c' : cone f g C') →
       is-contr (Σ (C' → C) (λ h → htpy-cone f g (cone-map f g c h) c'))
     uniqueness-universal-property-pullback up C' c' =

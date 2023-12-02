@@ -100,8 +100,7 @@ We conclude that cartesian products satisfy the universal property of pullbacks.
 ```agda
   abstract
     universal-property-pullback-prod :
-      {l : Level} →
-      universal-property-pullback l
+      universal-property-pullback
         ( const A unit star)
         ( const B unit star)
         ( cone-prod)

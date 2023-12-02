@@ -82,8 +82,7 @@ map.
 
   abstract
     universal-property-pullback-fiberwise-prod :
-      {l : Level} →
-      universal-property-pullback l
+      universal-property-pullback
         ( pr1 {B = P})
         ( pr1 {B = Q})
         ( cone-fiberwise-prod)

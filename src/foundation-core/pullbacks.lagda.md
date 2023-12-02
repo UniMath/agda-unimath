@@ -171,8 +171,7 @@ module _
 
   abstract
     universal-property-pullback-standard-pullback :
-      {l : Level} →
-      universal-property-pullback l f g (cone-standard-pullback f g)
+      universal-property-pullback f g (cone-standard-pullback f g)
     universal-property-pullback-standard-pullback C =
       is-equiv-comp
         ( tot (λ p → map-distributive-Π-Σ))
@@ -208,8 +207,7 @@ module _
 
   abstract
     is-pullback-universal-property-pullback :
-      (c : cone f g C) →
-      ({l : Level} → universal-property-pullback l f g c) → is-pullback f g c
+      (c : cone f g C) → universal-property-pullback f g c → is-pullback f g c
     is-pullback-universal-property-pullback c =
       is-equiv-up-pullback-up-pullback
         ( cone-standard-pullback f g)
@@ -221,7 +219,7 @@ module _
   abstract
     universal-property-pullback-is-pullback :
       (c : cone f g C) → is-pullback f g c →
-      {l : Level} → universal-property-pullback l f g c
+      universal-property-pullback f g c
     universal-property-pullback-is-pullback c is-pullback-c =
       up-pullback-up-pullback-is-equiv
         ( cone-standard-pullback f g)
@@ -652,8 +650,8 @@ module _
 
   abstract
     universal-property-pullback-is-fiberwise-equiv :
-      is-fiberwise-equiv g → {l : Level} →
-      universal-property-pullback l f pr1 cone-map-Σ
+      is-fiberwise-equiv g →
+      universal-property-pullback f pr1 cone-map-Σ
     universal-property-pullback-is-fiberwise-equiv is-equiv-g =
       universal-property-pullback-is-pullback f pr1 cone-map-Σ
         ( is-pullback-is-fiberwise-equiv is-equiv-g)
@@ -671,7 +669,7 @@ module _
 
   abstract
     is-fiberwise-equiv-universal-property-pullback :
-      ( {l : Level} → universal-property-pullback l f pr1 cone-map-Σ) →
+      ( universal-property-pullback f pr1 cone-map-Σ) →
       is-fiberwise-equiv g
     is-fiberwise-equiv-universal-property-pullback up =
       is-fiberwise-equiv-is-pullback
