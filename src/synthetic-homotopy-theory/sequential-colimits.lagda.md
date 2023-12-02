@@ -57,47 +57,51 @@ to sequential colimits. Since all coequalizers exist, we conclude that all
 sequential colimits exist.
 
 ```agda
+abstract
+  standard-sequential-colimit : {l : Level} (A : sequential-diagram l) → UU l
+  standard-sequential-colimit A =
+    canonical-coequalizer
+      ( bottom-map-cofork-cocone-sequential-diagram A)
+      ( top-map-cofork-cocone-sequential-diagram A)
+
+  cocone-standard-sequential-colimit :
+    { l : Level} (A : sequential-diagram l) →
+    cocone-sequential-diagram A (standard-sequential-colimit A)
+  cocone-standard-sequential-colimit A =
+    cocone-sequential-diagram-cofork A
+      ( cofork-canonical-coequalizer
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A))
+
+  dup-standard-sequential-colimit :
+    { l : Level} {A : sequential-diagram l} →
+    dependent-universal-property-sequential-colimit A
+      ( cocone-standard-sequential-colimit A)
+  dup-standard-sequential-colimit {A = A} =
+    dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
+      ( A)
+      ( cocone-standard-sequential-colimit A)
+      ( dup-canonical-coequalizer
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A))
+
+  up-standard-sequential-colimit :
+    { l : Level} {A : sequential-diagram l} →
+    universal-property-sequential-colimit A
+      (cocone-standard-sequential-colimit A)
+  up-standard-sequential-colimit {A = A} =
+    universal-property-dependent-universal-property-sequential-colimit A
+      ( cocone-standard-sequential-colimit A)
+      ( dup-standard-sequential-colimit)
+
 module _
-  { l : Level} (A : sequential-diagram l)
+  { l : Level} {A : sequential-diagram l}
   where
 
-  abstract
-    standard-sequential-colimit : UU l
-    standard-sequential-colimit =
-      canonical-coequalizer
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
-
-    cocone-standard-sequential-colimit :
-      cocone-sequential-diagram A standard-sequential-colimit
-    cocone-standard-sequential-colimit =
-      cocone-sequential-diagram-cofork A
-        ( cofork-canonical-coequalizer
-          ( bottom-map-cofork-cocone-sequential-diagram A)
-          ( top-map-cofork-cocone-sequential-diagram A))
-
-    dup-standard-sequential-colimit :
-      dependent-universal-property-sequential-colimit A
-        ( cocone-standard-sequential-colimit)
-    dup-standard-sequential-colimit =
-      dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
-        ( A)
-        ( cocone-standard-sequential-colimit)
-        ( dup-canonical-coequalizer
-          ( bottom-map-cofork-cocone-sequential-diagram A)
-          ( top-map-cofork-cocone-sequential-diagram A))
-
-    up-standard-sequential-colimit :
-      universal-property-sequential-colimit A cocone-standard-sequential-colimit
-    up-standard-sequential-colimit =
-      universal-property-dependent-universal-property-sequential-colimit A
-        ( cocone-standard-sequential-colimit)
-        ( dup-standard-sequential-colimit)
-
   map-cocone-standard-sequential-colimit :
-    ( n : ℕ) → family-sequential-diagram A n → standard-sequential-colimit
+    ( n : ℕ) → family-sequential-diagram A n → standard-sequential-colimit A
   map-cocone-standard-sequential-colimit =
-    map-cocone-sequential-diagram A cocone-standard-sequential-colimit
+    map-cocone-sequential-diagram A (cocone-standard-sequential-colimit A)
 
   coherence-triangle-cocone-standard-sequential-colimit :
     ( n : ℕ) →
@@ -107,14 +111,14 @@ module _
       ( map-sequential-diagram A n)
   coherence-triangle-cocone-standard-sequential-colimit =
     coherence-triangle-cocone-sequential-diagram A
-      ( cocone-standard-sequential-colimit)
+      ( cocone-standard-sequential-colimit A)
 ```
 
 ### Corollaries of the universal property of sequential colimits
 
 ```agda
 module _
-  { l : Level} (A : sequential-diagram l)
+  { l : Level} {A : sequential-diagram l}
   where
 
   equiv-up-standard-sequential-colimit :
@@ -123,7 +127,7 @@ module _
   pr1 equiv-up-standard-sequential-colimit =
     cocone-map-sequential-diagram A (cocone-standard-sequential-colimit A)
   pr2 (equiv-up-standard-sequential-colimit) =
-    up-standard-sequential-colimit A _
+    up-standard-sequential-colimit _
 
   cogap-standard-sequential-colimit :
     { l : Level} {X : UU l} →
@@ -142,7 +146,7 @@ module _
       ( cocone-standard-sequential-colimit A)
       ( _)
   pr2 equiv-dup-standard-sequential-colimit =
-    dup-standard-sequential-colimit A _
+    dup-standard-sequential-colimit _
 
   dependent-cogap-standard-sequential-colimit :
     { l : Level} {P : standard-sequential-colimit A → UU l} →
@@ -178,7 +182,7 @@ module _
   equiv-htpy-htpy-out-of-standard-sequential-colimit :
     htpy-out-of-standard-sequential-colimit ≃ (f ~ g)
   equiv-htpy-htpy-out-of-standard-sequential-colimit =
-    ( inv-equiv (equiv-dup-standard-sequential-colimit A)) ∘e
+    ( inv-equiv equiv-dup-standard-sequential-colimit) ∘e
     ( equiv-tot
       ( λ K →
         equiv-Π-equiv-family
@@ -186,7 +190,7 @@ module _
             equiv-Π-equiv-family
               ( λ a →
                 compute-dependent-identification-eq-value-function f g
-                  ( coherence-triangle-cocone-standard-sequential-colimit A n a)
+                  ( coherence-triangle-cocone-standard-sequential-colimit n a)
                   ( K n a)
                   ( K (succ-ℕ n) (map-sequential-diagram A n a))))))
 ```
