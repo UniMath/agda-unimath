@@ -13,6 +13,8 @@ open import foundation.booleans
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import lists.lists
+
 open import primitives.strings
 ```
 
@@ -36,4 +38,14 @@ primitive
   primShowMeta : Meta → String
   primMetaToNat : Meta → ℕ
   primMetaToNatInjective : ∀ a b → primMetaToNat a ＝ primMetaToNat b → a ＝ b
+
+data Blocker : UU lzero where
+  blocker-any  : list Blocker → Blocker
+  blocker-all  : list Blocker → Blocker
+  blocker-meta : Meta → Blocker
+
+{-# BUILTIN AGDABLOCKER     Blocker #-}
+{-# BUILTIN AGDABLOCKERANY  blocker-any #-}
+{-# BUILTIN AGDABLOCKERALL  blocker-all #-}
+{-# BUILTIN AGDABLOCKERMETA blocker-meta #-}
 ```
