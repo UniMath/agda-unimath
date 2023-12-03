@@ -294,14 +294,12 @@ module _
   equiv-concat-assoc :
     (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : x ＝ u) →
     ((p ∙ q) ∙ r ＝ s) ≃ (p ∙ (q ∙ r) ＝ s)
-  pr1 (equiv-concat-assoc p q r s) = concat (inv (assoc p q r)) s
-  pr2 (equiv-concat-assoc p q r s) = is-equiv-concat (inv (assoc p q r)) s
+  equiv-concat-assoc p q r = equiv-concat (inv (assoc p q r))
 
   equiv-concat-assoc' :
     (s : x ＝ u) (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) →
     (s ＝ (p ∙ q) ∙ r) ≃ (s ＝ p ∙ (q ∙ r))
-  pr1 (equiv-concat-assoc' s p q r) = concat' s (assoc p q r)
-  pr2 (equiv-concat-assoc' s p q r) = is-equiv-concat' s (assoc p q r)
+  equiv-concat-assoc' s p q r = equiv-concat' s (assoc p q r)
 ```
 
 ### Whiskering of squares of identifications
