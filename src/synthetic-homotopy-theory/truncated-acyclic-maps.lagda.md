@@ -13,6 +13,7 @@ open import foundation.cones-over-cospans
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
+open import foundation.contractible-types
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
@@ -23,6 +24,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
@@ -36,12 +38,14 @@ open import foundation.truncated-types
 open import foundation.truncation-equivalences
 open import foundation.truncation-levels
 open import foundation.truncations
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.truncated-acyclic-types
@@ -490,6 +494,63 @@ module _
               ( unit)
               ( is-truncated-acyclic-unit))
             ( λ b → is-truncated-acyclic-equiv (fiber-const a b) (l-ac a b))))
+```
+
+### Acyclic maps are closed under pushouts
+
+TODO: Outline proof
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {k : 𝕋} {S : UU l1} {A : UU l2} {B : UU l3}
+  {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
+  where
+
+  equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type :
+    is-truncated-acyclic-map k f →
+    {l5 : Level} (X : Truncated-Type l5 k) →
+    cocone f (vertical-map-cocone f g c ∘ g) (type-Truncated-Type X) ≃
+    (C → type-Truncated-Type X)
+  equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type ac X =
+    equivalence-reasoning
+        cocone f (vertical-map-cocone f g c ∘ g) (type-Truncated-Type X)
+      ≃ cocone f (horizontal-map-cocone f g c ∘ f) (type-Truncated-Type X)
+        by
+          equiv-tot
+          ( λ u →
+            equiv-tot
+              ( λ v →
+                equiv-concat-htpy'
+                  ( u ∘ f)
+                  ( λ s → ap v (inv-htpy (coherence-square-cocone f g c) s))))
+      ≃ Σ ( A → type-Truncated-Type X)
+          ( λ u →
+            Σ ( C → type-Truncated-Type X)
+              ( λ v → u ∘ f ＝ v ∘ horizontal-map-cocone f g c ∘ f))
+        by equiv-tot ( λ u → equiv-tot ( λ v → equiv-eq-htpy))
+      ≃ Σ ( A → type-Truncated-Type X)
+          ( λ u →
+            Σ ( C → type-Truncated-Type X)
+              ( λ v → u ＝ v ∘ horizontal-map-cocone f g c))
+        by
+          equiv-tot
+          ( λ u →
+            equiv-tot
+              ( λ v →
+                inv-equiv-ap-is-emb
+                  ( is-epimorphism-is-truncated-acyclic-map-Truncated-Type
+                    ( f)
+                    ( ac)
+                    ( X))))
+      ≃ Σ ( C → type-Truncated-Type X)
+          ( λ v →
+            Σ ( A → type-Truncated-Type X)
+              ( λ u → u ＝ v ∘ horizontal-map-cocone f g c))
+        by
+          equiv-left-swap-Σ
+      ≃ (C → type-Truncated-Type X)
+        by
+          equiv-pr1 (λ v → is-torsorial-path' (v ∘ horizontal-map-cocone f g c))
 ```
 
 ## See also
