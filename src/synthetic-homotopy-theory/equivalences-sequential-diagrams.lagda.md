@@ -57,6 +57,11 @@ module _
 
 ### Components of equivalences of sequential diagrams
 
+_Implementation note:_ As mentioned in
+[`morphisms-sequential-diagrams`](synthetic-homotopy-theory.morphisms-sequential-diagrams.md),
+Agda can't infer both the domain and the codomain when we use accessors for the
+equivalences, and the codomain needs to be provided explicitly.
+
 ```agda
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} (B : sequential-diagram l2)

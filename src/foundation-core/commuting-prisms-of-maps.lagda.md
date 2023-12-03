@@ -40,7 +40,7 @@ Consider an arrangment of maps composable into a diagram as follows:
 and [homotopies](foundation-core.homotopies.md) filling its faces. Then a
 {{#concept "horizontal commuting prism of maps" Agda=horizontal-coherence-prism-maps}}
 is a homotopy filling the shape. In other words, we may choose two homotopies
-from the composition `hC ∘ g ∘ h` to `f' ∘ hA`, namely 1) following the left
+from the composition `hC ∘ g ∘ h` to `f' ∘ hA`, namely following 1) the left
 [triangle](foundation-core.commuting-triangles-of-maps.md) and then the front
 [square](foundation-core.commuting-squares-of-maps.md), or 2) the two back
 squares and then the right triangle; the prism is then a homotopy between these
@@ -72,8 +72,8 @@ Then, given homotopies for the faces, we call a homotopy filling this shape a
 This rotation of a prism may be viewed as a homotopy between two triangles with
 different but related sides.
 
-It remains to be formalized that the type of vertical prisms is equivalent to
-the type of horizontal prisms.
+It remains to be formalized that the type of vertical prisms is
+[equivalent](foundation-core.equivalences.md) to the type of horizontal prisms.
 
 ## Definitions
 
@@ -105,7 +105,7 @@ module _
 ### Vertical commuting prisms of maps
 
 Because triangular prisms are less symmetric than, say, cubes, we have more than
-one natural formulations for where to draw the "seems" for the filler. Here, we
+one natural formulation for where to draw the "seams" for the filler. Here, we
 present two choices, and show that they are equivalent in
 [`foundation.commuting-prisms-of-maps`](foundation.commuting-prisms-of-maps.md).
 

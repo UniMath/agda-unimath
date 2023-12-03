@@ -34,7 +34,7 @@ open import foundation-core.identity-types
 
 ### Pasting commuting triangles into commuting squares along homotopic diagonals
 
-Two commuting triangles
+Two [commuting triangles](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
    A         A --> X
@@ -45,7 +45,8 @@ Two commuting triangles
   B --> Y         Y
 ```
 
-with a homotopic diagonal may be pasted into a commuting square
+with a [homotopic](foundation-core.homotopies.md) diagonal may be pasted into a
+commuting square
 
 ```text
   A -----> X
@@ -96,7 +97,8 @@ module _
 
 ### Inverting squares horizontally and vertically
 
-If the horizontal/vertical maps in a commuting square are both equivalences,
+If the horizontal/vertical maps in a commuting square are both
+[equivalences](foundation-core.equivalences.md),
 then the square remains commuting if we invert those equivalences.
 
 ```agda
@@ -393,8 +395,9 @@ module _
 
 ### Naturality of commuting squares of maps with respect to identifications
 
-Similarly to the naturality square of homotopies and identifications, we have a
-naturality square of coherence squares of maps and identifications:
+Similarly to the naturality square of homotopies and
+[identifications](foundation-core.identity-types.md), we have a naturality
+square of coherence squares of maps and identifications:
 
 ```text
            ap f (ap g p)
@@ -598,8 +601,9 @@ module _
 ### Distributivity of pasting squares and transposing by precomposition
 
 Given two commuting squares which can be composed horizontally (vertically), we
-know that composing them and then transposing them by precomposition gives the
-same homotopies as first transposing the squares and then composing them.
+know that composing them and then transposing them by precomposition gives a
+homotopy that is homotopic to first transposing the squares and then composing
+them.
 
 ```text
       tl       tr                tr ∘ tl

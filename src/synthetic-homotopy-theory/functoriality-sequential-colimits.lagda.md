@@ -35,11 +35,14 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 
 ## Idea
 
-A
+Taking a [sequential colimit](synthetic-homotopy-theory.sequential-colimits.md)
+of a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
+is a functorial action `(A, a) ↦ A∞`. In particular, a
 [morphism of sequential diagrams](synthetic-homotopy-theory.morphisms-sequential-diagrams.md)
 `f : (A, a) → (B, b)` induces a map `f∞ : A∞ → B∞` between the
 [standard sequential colimits](synthetic-homotopy-theory.sequential-colimits.md)
-of the diagrams.
+of the diagrams, and this action preserves the identity morphism and morphism
+composition.
 
 Furthermore, an
 [equivalence of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md)
@@ -75,10 +78,12 @@ The induced map
         b₀      b₁      b₂
 ```
 
-then induces a cocone under `(A, a)` with codomain `B∞`, which is homotopic to
-the standard cocone under `(B, b)` precomposed by `f`.
+then induces a
+[cocone](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md) under
+`(A, a)` with codomain `B∞`, which is homotopic to the standard cocone under
+`(B, b)` precomposed by `f`.
 
-This homotopy provides
+This homotopy of cocones provides
 [vertical commuting prisms of maps](foundation.commuting-prisms-of-maps.md),
 
 ```text
@@ -96,9 +101,10 @@ This homotopy provides
     Bₙ ---------> B∞ ,
 ```
 
-where the triangles are coherences of the cocones of the standard sequential
-colimits, the back left square is coherence of `f`, and the front and back right
-squares are provided by uniqueness of `f∞`.
+where the [triangles](foundation-core.commuting-triangles-of-maps.md) are
+coherences of the cocones of the standard sequential colimits, the back left
+[square](foundation-core.commuting-triangles-of-maps.md) is coherence of `f`,
+and the front and back right squares are provided by uniqueness of `f∞`.
 
 ```agda
 module _
@@ -211,6 +217,8 @@ module _
 
 ### The identity morphism induces the identity map
 
+We have `id∞ ~ id : A∞ → A∞`.
+
 ```agda
 module _
   { l1 : Level} {A : sequential-diagram l1}
@@ -242,7 +250,9 @@ module _
       ( htpy-preserves-id-map-hom-standard-sequential-colimit)
 ```
 
-### Composition of morphisms of sequential diagrams induces a composition of maps between sequential colimits
+### Forming sequential colimits preserves composition of morphisms of sequential diagrams
+
+We have `(f ∘ g)∞ ~ (f∞ ∘ g∞) : A∞ → C∞`.
 
 ```agda
 module _
@@ -361,8 +371,9 @@ module _
 
 ### An equivalence of sequential diagrams induces an equivalence of cocones
 
-Additionally, the inverse of the induced equivalence is the map induced by the
-inverse equivalence of sequential diagrams, i.e. `(e∞)⁻¹ ≐ (e⁻¹)∞`.
+Additionally, the underlying map of the inverse equivalence if definitionally
+equal to the map induced by the inverse of the equivalence of sequential
+diagrams, i.e. `(e∞)⁻¹ = (e⁻¹)∞`.
 
 ```agda
 module _

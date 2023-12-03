@@ -62,25 +62,28 @@ module _
 
 The fact that equivalences are embeddings has many important consequences, we
 will use some of these consequences in order to derive basic properties of
-embeddings.
+equivalences.
 
 We have two ways of showing that an application of an equivalence may be
-transposed to the other side of a path, i.e. that the type `e x ＝ y` is
-equivalent to the type `x ＝ e⁻¹ y` — one uses the fact that `e⁻¹` is a
-section of `e`, from which it follows that
+transposed to the other side of an
+[identification](foundation-core.identity-types.md), i.e. that the type
+`e x ＝ y` is equivalent to the type `x ＝ e⁻¹ y` — one uses the fact that `e⁻¹`
+is a [section](foundation-core.sections.md) of `e`, from which it follows that
 
 ```text
  (e x ＝ y) ≃ (e x ＝ e e⁻¹ y) ≃ (x ＝ e⁻¹ y) ,
 ```
 
-and the other using the fact that `e⁻¹` is a retraction of `e`, resulting in the
+and the other using the fact that `e⁻¹` is a
+[retraction](foundation-core.retractions.md) of `e`, resulting in the
 equivalence
 
 ```text
- ( e x ＝ y) ≃ ( e⁻¹ e x ＝ e⁻¹ y) ≃ (x ＝ e⁻¹ y) .
+ (e x ＝ y) ≃ (e⁻¹ e x ＝ e⁻¹ y) ≃ (x ＝ e⁻¹ y) .
 ```
 
-These two equivalences are homotopic, as is shown below.
+These two equivalences are [homotopic](foundation-core.homotopies.md), as is
+shown below.
 
 ```agda
 module _
@@ -116,8 +119,8 @@ module _
   map-eq-transpose-equiv' {x} {y} = map-equiv (eq-transpose-equiv' x y)
 ```
 
-It is sometimes useful to consider paths `y ＝ e x` instead of `e x ＝ y`, so we
-include an inverted equivalence for that as well.
+It is sometimes useful to consider identifications `y ＝ e x` instead of
+`e x ＝ y`, so we include an inverted equivalence for that as well.
 
 ```agda
   eq-transpose-equiv-inv :
@@ -168,7 +171,9 @@ left factor.
   triangle-eq-transpose-equiv-concat refl refl = inv right-unit
 ```
 
-Transposed paths fit in commuting triangles with the original paths.
+Transposed identifications fit in
+[commuting triangles](foundation.commuting-triangles-of-identifications.md) with
+the original identifications.
 
 ```agda
   triangle-eq-transpose-equiv :

@@ -111,8 +111,8 @@ module _
 A
 [commuting square of homotopies](foundation.commuting-squares-of-homotopies.md)
 may be whiskered by a homotopy `L` on the left or right, which results in a
-commuting square of homotopies with `L` appended or prepended to the two paths
-aong the square.
+commuting square of homotopies with `L` appended or prepended to the two ways of
+going around the square.
 
 Diagramatically, we may turn the pasting diagram
 
