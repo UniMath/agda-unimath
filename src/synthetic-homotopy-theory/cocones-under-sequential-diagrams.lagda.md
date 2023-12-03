@@ -101,7 +101,7 @@ filling the "pinched cylinder" with the faces `Kₙ`, `Hₙ`, `Lₙ` and `Kₙ�
 
 The coherence datum may be better understood by viewing a cocone as a
 [morphism](synthetic-homotopy-theory.morphisms-sequential-diagrams.md) from
-`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)` --- the two types are
+`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)` — the two types are
 definitionally equal. Then a homotopy of cocones is a regular homotopy of
 morphisms of sequential diagrams.
 

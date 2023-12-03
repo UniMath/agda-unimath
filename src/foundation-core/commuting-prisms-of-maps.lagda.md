@@ -45,7 +45,7 @@ from the composition `hC ∘ g ∘ h` to `f' ∘ hA`, namely 1) following the le
 [square](foundation-core.commuting-squares-of-maps.md), or 2) the two back
 squares and then the right triangle; the prism is then a homotopy between these
 two homotopies. In this way, a commuting prism may be viewed as a homotopy
-between a pasting of squares and their composite --- that is the motivation for
+between a pasting of squares and their composite — that is the motivation for
 having the triangles go the unconventional way, from the composition to the
 composite.
 
