@@ -66,7 +66,7 @@ embeddings.
 
 We have two ways of showing that an application of an equivalence may be
 transposed to the other side of a path, i.e. that the type `e x ＝ y` is
-equivalent to the type `x ＝ e⁻¹ y` --- one uses the fact that `e⁻¹` is a
+equivalent to the type `x ＝ e⁻¹ y` — one uses the fact that `e⁻¹` is a
 section of `e`, from which it follows that
 
 ```text

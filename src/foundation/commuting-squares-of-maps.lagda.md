@@ -477,7 +477,7 @@ Given a square of commuting squares, like so:
   M -----> N -----> O ,
 ```
 
-we have two choices for obtaining the outer commuting square --- either by first
+we have two choices for obtaining the outer commuting square — either by first
 vertically composing the smaller squares, and then horizontally composing the
 newly created rectangles, or by first horizontally composing the squares, and
 then vertically composing the rectangles.
