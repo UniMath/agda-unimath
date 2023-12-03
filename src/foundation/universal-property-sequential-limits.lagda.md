@@ -59,14 +59,9 @@ module _
   {l1 l2 : Level} (A : tower l1) {X : UU l2} (c : cone-tower A X)
   where
 
-  universal-property-sequential-limit-Level :
-    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  universal-property-sequential-limit-Level l =
-    (Y : UU l) → is-equiv (cone-map-tower A {Y = Y} c)
-
   universal-property-sequential-limit : UUω
   universal-property-sequential-limit =
-    {l : Level} → universal-property-sequential-limit-Level l
+    {l : Level} (Y : UU l) → is-equiv (cone-map-tower A {Y = Y} c)
 
 module _
   {l1 l2 l3 : Level} (A : tower l1) {X : UU l2} (c : cone-tower A X)
@@ -177,20 +172,6 @@ module _
         ( equiv-tot
           ( λ h → extensionality-cone-tower A (cone-map-tower A c h) c'))
         ( is-contr-map-is-equiv (up Y) c')
-```
-
-### The universal property of sequential limits at a universe level is a property
-
-```agda
-module _
-  {l1 l2 l3 : Level} (A : tower l1) {X : UU l2} (c : cone-tower A X)
-  where
-
-  abstract
-    is-prop-universal-property-sequential-limit :
-      is-prop (universal-property-sequential-limit-Level A c l3)
-    is-prop-universal-property-sequential-limit =
-      is-prop-Π (λ Y → is-property-is-equiv (cone-map-tower A c))
 ```
 
 ### The homotopy of cones obtained from the universal property of sequential limits

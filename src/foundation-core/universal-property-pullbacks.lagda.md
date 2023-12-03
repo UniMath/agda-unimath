@@ -35,14 +35,9 @@ module _
   (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
   where
 
-  universal-property-pullback-Level :
-    (l : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-  universal-property-pullback-Level l =
-    (C' : UU l) → is-equiv (cone-map f g c {C'})
-
   universal-property-pullback : UUω
   universal-property-pullback =
-    {l : Level} → universal-property-pullback-Level l
+    {l : Level} (C' : UU l) → is-equiv (cone-map f g c {C'})
 
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3}

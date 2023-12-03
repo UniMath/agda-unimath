@@ -51,13 +51,9 @@ module _
   (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
   where
 
-  is-truncation-Level :
-    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  is-truncation-Level l =
-    (C : Truncated-Type l k) → is-equiv (precomp-Trunc f C)
-
   is-truncation : UUω
-  is-truncation = {l : Level} → is-truncation-Level l
+  is-truncation =
+    {l : Level} (C : Truncated-Type l k) → is-equiv (precomp-Trunc f C)
 
   equiv-is-truncation :
     {l3 : Level}
@@ -77,15 +73,10 @@ module _
   (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
   where
 
-  universal-property-truncation-Level :
-    (l : Level) → UU (lsuc l ⊔ l1 ⊔ l2)
-  universal-property-truncation-Level l =
-    (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
-    is-contr (Σ (type-hom-Truncated-Type k B C) (λ h → h ∘ f ~ g))
-
   universal-property-truncation : UUω
   universal-property-truncation =
-    {l : Level} → universal-property-truncation-Level l
+    {l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
+    is-contr (Σ (type-hom-Truncated-Type k B C) (λ h → h ∘ f ~ g))
 ```
 
 ### The dependent universal property of truncations
@@ -103,15 +94,10 @@ module _
   (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
   where
 
-  dependent-universal-property-truncation-Level :
-    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  dependent-universal-property-truncation-Level l =
-    (X : type-Truncated-Type B → Truncated-Type l k) →
-    is-equiv (precomp-Π-Truncated-Type f X)
-
   dependent-universal-property-truncation : UUω
   dependent-universal-property-truncation =
-    {l : Level} → dependent-universal-property-truncation-Level l
+    {l : Level} (X : type-Truncated-Type B → Truncated-Type l k) →
+    is-equiv (precomp-Π-Truncated-Type f X)
 ```
 
 ## Properties

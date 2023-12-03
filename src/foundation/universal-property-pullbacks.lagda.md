@@ -46,21 +46,6 @@ A -----> X
 
 ## Properties
 
-### The universal property of pullbacks at a universe level is a property
-
-```agda
-module _
-  {l1 l2 l3 l4 l : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
-  where
-
-  abstract
-    is-prop-universal-property-pullback-Level :
-      is-prop (universal-property-pullback-Level f g c l)
-    is-prop-universal-property-pullback-Level =
-      is-prop-Π (λ _ → is-property-is-equiv (cone-map f g c))
-```
-
 ### The homotopy of cones obtained from the universal property of pullbacks
 
 ```agda

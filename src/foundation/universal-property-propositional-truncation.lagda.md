@@ -54,14 +54,9 @@ module _
     type-hom-Prop P Q → A → type-Prop Q
   precomp-Prop Q g = g ∘ f
 
-  is-propositional-truncation-Level :
-    ( l : Level) → UU (lsuc l ⊔ l1 ⊔ l2)
-  is-propositional-truncation-Level l =
-    (Q : Prop l) → is-equiv (precomp-Prop Q)
-
   is-propositional-truncation : UUω
   is-propositional-truncation =
-    {l : Level} → is-propositional-truncation-Level l
+    {l : Level} (Q : Prop l) → is-equiv (precomp-Prop Q)
 ```
 
 ### The universal property of the propositional truncation
@@ -72,15 +67,10 @@ module _
   (P : Prop l2) (f : A → type-Prop P)
   where
 
-  universal-property-propositional-truncation-Level :
-    (l : Level) → UU (lsuc l ⊔ l1 ⊔ l2)
-  universal-property-propositional-truncation-Level l =
-    (Q : Prop l) (g : A → type-Prop Q) →
-    is-contr (Σ (type-hom-Prop P Q) (λ h → h ∘ f ~ g))
-
   universal-property-propositional-truncation : UUω
   universal-property-propositional-truncation =
-    {l : Level} → universal-property-propositional-truncation-Level l
+    {l : Level} (Q : Prop l) (g : A → type-Prop Q) →
+    is-contr (Σ (type-hom-Prop P Q) (λ h → h ∘ f ~ g))
 ```
 
 ### Extension property of the propositional truncation
@@ -94,14 +84,9 @@ module _
   (P : Prop l2) (f : A → type-Prop P)
   where
 
-  extension-property-propositional-truncation-Level :
-    (l : Level) → UU (lsuc l ⊔ l1 ⊔ l2)
-  extension-property-propositional-truncation-Level l =
-    (Q : Prop l) → (A → type-Prop Q) → type-hom-Prop P Q
-
   extension-property-propositional-truncation : UUω
   extension-property-propositional-truncation =
-    {l : Level} → extension-property-propositional-truncation-Level l
+    {l : Level} (Q : Prop l) → (A → type-Prop Q) → type-hom-Prop P Q
 ```
 
 ### The dependent universal property of the propositional truncation
@@ -112,14 +97,10 @@ module _
   (P : Prop l2) (f : A → type-Prop P)
   where
 
-  dependent-universal-property-propositional-truncation-Level :
-    (l : Level) → UU (lsuc l ⊔ l1 ⊔ l2)
-  dependent-universal-property-propositional-truncation-Level l =
-    ( Q : type-Prop P → Prop l) → is-equiv (precomp-Π f (type-Prop ∘ Q))
-
   dependent-universal-property-propositional-truncation : UUω
   dependent-universal-property-propositional-truncation =
-    {l : Level} → dependent-universal-property-propositional-truncation-Level l
+    {l : Level} → (Q : type-Prop P → Prop l) →
+    is-equiv (precomp-Π f (type-Prop ∘ Q))
 ```
 
 ## Properties
