@@ -36,8 +36,8 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ## Idea
 
 Taking a [sequential colimit](synthetic-homotopy-theory.sequential-colimits.md)
-of a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
-is a functorial action `(A, a) ↦ A∞`. In particular, a
+of a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md) is a
+functorial action `(A, a) ↦ A∞`. In particular, a
 [morphism of sequential diagrams](synthetic-homotopy-theory.morphisms-sequential-diagrams.md)
 `f : (A, a) → (B, b)` induces a map `f∞ : A∞ → B∞` between the
 [standard sequential colimits](synthetic-homotopy-theory.sequential-colimits.md)
