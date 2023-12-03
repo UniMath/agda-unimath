@@ -98,8 +98,8 @@ module _
 ### Inverting squares horizontally and vertically
 
 If the horizontal/vertical maps in a commuting square are both
-[equivalences](foundation-core.equivalences.md),
-then the square remains commuting if we invert those equivalences.
+[equivalences](foundation-core.equivalences.md), then the square remains
+commuting if we invert those equivalences.
 
 ```agda
 coherence-square-inv-horizontal :
