@@ -60,10 +60,6 @@ module _
 
 ### Transposing equalities along equivalences
 
-The fact that equivalences are embeddings has many important consequences, we
-will use some of these consequences in order to derive basic properties of
-equivalences.
-
 We have two ways of showing that an application of an equivalence may be
 transposed to the other side of an
 [identification](foundation-core.identity-types.md), i.e. that the type
