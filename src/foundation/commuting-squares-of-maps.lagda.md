@@ -428,11 +428,11 @@ As a corollary, whenever we have two coherence squares touching at a vertex:
 ```text
   A -----> B
   |        |
-  |  H ⇗  |
+  |   H ⇗  |
   V        V
   C -----> D -----> X
            |        |
-           |  K ⇗  |
+           |   K ⇗  |
            V        V
            Y -----> Z ,
 ```
@@ -468,11 +468,11 @@ Given a square of commuting squares, like so:
 ```text
   A -----> B -----> C
   |        |        |
-  |   ⇗   |   ⇗   |
+  |    ⇗   |    ⇗   |
   V        V        V
   X -----> Y -----> Z
   |        |        |
-  |   ⇗   |   ⇗   |
+  |    ⇗   |    ⇗   |
   V        V        V
   M -----> N -----> O ,
 ```

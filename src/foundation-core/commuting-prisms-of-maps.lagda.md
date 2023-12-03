@@ -25,13 +25,13 @@ Consider an arrangment of maps composable into a diagram as follows:
          hA
    A ---------> A'
    |\           |\
-   | \ h   ⇗   | \ h'
+   | \ h   ⇗    | \ h'
    |  \      f' |  \
    |   V        |   V
  f | ⇐ B ------ | -> B'
    |   /   hB   | ⇐ /
    |  / g       |  / g'
-   | /     ⇗   | /
+   | /     ⇗    | /
    VV           VV
    C ---------> C' ,
          hC
@@ -58,13 +58,13 @@ We may also arrange the maps into a more vertical shape, like so:
      /  f | ⇑   V
     A ---------> C
     |     | hB   |
-    | ⇗  V   ⇗  |
+    | ⇗   V   ⇗  |
  hA |     B'     | hC
     | h' ^  \ g' |
     |  /  ⇑   \  |
-    |/          V|
+    V/          VV
     A' --------> C' .
-        f'
+          f'
 ```
 
 Then, given homotopies for the faces, we call a homotopy filling this shape a
