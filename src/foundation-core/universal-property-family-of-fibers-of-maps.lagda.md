@@ -215,7 +215,8 @@ module _
 
 ### The inverse equivalence of the universal property of the family of fibers of a map
 
-The inverse of the equivalence `equiv-universal-property-family-of-fibers` has a reasonably nice definition, so we also record it here.
+The inverse of the equivalence `equiv-universal-property-family-of-fibers` has a
+reasonably nice definition, so we also record it here.
 
 ```agda
 module _
