@@ -312,11 +312,11 @@ module _
   is-equiv-vertical-map-cocone-is-truncation-equivalence-codiagonal-map e X =
     is-equiv-comp
       ( horizontal-map-cocone f f)
-      {! tot!} -- ( horizontal-map-cocone f f)
-      {!!} {- ( is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map
+      ( swap-cocone f f (type-Truncated-Type X))
+      (is-equiv-swap-cocone f f (type-Truncated-Type X))
+      ( is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map
           ( e)
-          ( X)) -}
-      ( {!!})
+          ( X))
 
   is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type :
     is-truncation-equivalence k (codiagonal-map f) →
