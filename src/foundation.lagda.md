@@ -131,6 +131,7 @@ open import foundation.equivalences-towers public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
+open import foundation.extensions-families-of-elements public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
@@ -194,6 +195,7 @@ open import foundation.large-locale-of-subtypes public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
+open import foundation.lifts-families-of-elements public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public

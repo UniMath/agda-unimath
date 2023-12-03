@@ -11,9 +11,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
+open import foundation.extensions-families-of-elements
 open import foundation.families-of-equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.lifts-families-of-elements
 open import foundation.subtype-identity-principle
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
@@ -76,26 +78,29 @@ described above, while the universal property of the fiber `fiber f b` of a map
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {f : A → B} (F : B → UU l3)
-  (δ : (a : A) → F (f a)) (P : B → UU l4) (γ : (a : A) → P (f a))
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  (F : B → UU l3) (δ : lift-family-of-elements f F)
+  (G : B → UU l4) (γ : lift-family-of-elements f G)
   where
 
   section-preserving-fiberwise-map-fiber : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   section-preserving-fiberwise-map-fiber =
-    Σ ((b : B) → F b → P b) (λ h → ev-lift f F δ h ~ γ)
+    Σ ((b : B) → F b → G b) (λ h → ev-lift-family-of-elements' f F δ h ~ γ)
+```
 
+```text
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {f : A → B} {F : B → UU l3}
-  {δ : (a : A) → F (f a)} {P : B → UU l4} {γ : (a : A) → P (f a)}
+  {δ : (a : A) → F (f a)} {G : B → UU l4} {γ : (a : A) → G (f a)}
   where
 
   fiberwise-map-section-preserving-fiberwise-map-fiber :
-    section-preserving-fiberwise-map-fiber F δ P γ → (b : B) → F b → P b
+    section-preserving-fiberwise-map-fiber F δ G γ → (b : B) → F b → G b
   fiberwise-map-section-preserving-fiberwise-map-fiber = pr1
 
   preserves-section-section-preserving-fiberwise-map-fiber :
-    (w : section-preserving-fiberwise-map-fiber F δ P γ) →
-    ev-lift f F δ (fiberwise-map-section-preserving-fiberwise-map-fiber w) ~ γ
+    (w : section-preserving-fiberwise-map-fiber F δ G γ) →
+    ev-lift-family-of-elements f F δ (fiberwise-map-section-preserving-fiberwise-map-fiber w) ~ γ
   preserves-section-section-preserving-fiberwise-map-fiber = pr2
 
 module _
@@ -110,13 +115,13 @@ module _
 
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {f : A → B} {F : B → UU l3}
-  {δ : (a : A) → F (f a)} {P : B → UU l4} {γ : (a : A) → P (f a)}
+  {δ : (a : A) → F (f a)} {G : B → UU l4} {γ : (a : A) → G (f a)}
   {Q : B → UU l5} {η : (a : A) → Q (f a)}
   where
 
   dependent-comp-section-preserving-fiberwise-map-fiber :
-    ( section-preserving-fiberwise-map-fiber P γ Q η) →
-    ( section-preserving-fiberwise-map-fiber F δ P γ) →
+    ( section-preserving-fiberwise-map-fiber G γ Q η) →
+    ( section-preserving-fiberwise-map-fiber F δ G γ) →
     ( section-preserving-fiberwise-map-fiber F δ Q η)
   pr1 (dependent-comp-section-preserving-fiberwise-map-fiber g h) =
     dependent-comp
@@ -131,31 +136,31 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B) (F : B → UU l3)
   (δ : (a : A) → F (f a)) (u : universal-property-family-of-fibers f F δ)
-  (P : B → UU l4) (γ : (a : A) → P (f a))
+  (G : B → UU l4) (γ : (a : A) → G (f a))
   where
 
   uniqueness-fiberwise-map-universal-property-family-of-fibers :
-    is-contr (section-preserving-fiberwise-map-fiber F δ P γ)
+    is-contr (section-preserving-fiberwise-map-fiber F δ G γ)
   uniqueness-fiberwise-map-universal-property-family-of-fibers =
     is-contr-equiv
-      ( fiber (ev-lift f F δ) γ)
+      ( fiber (ev-lift-family-of-elements f F δ) γ)
       ( equiv-tot
         ( λ h → equiv-eq-htpy))
-      ( is-contr-map-is-equiv (u P) γ)
+      ( is-contr-map-is-equiv (u G) γ)
 
   section-preserving-fiberwise-map-universal-property-family-of-fibers :
-    section-preserving-fiberwise-map-fiber F δ P γ
+    section-preserving-fiberwise-map-fiber F δ G γ
   section-preserving-fiberwise-map-universal-property-family-of-fibers =
     ( center uniqueness-fiberwise-map-universal-property-family-of-fibers)
 
   fiberwise-map-universal-property-family-of-fibers :
-    (b : B) → F b → P b
+    (b : B) → F b → G b
   fiberwise-map-universal-property-family-of-fibers =
     fiberwise-map-section-preserving-fiberwise-map-fiber
       section-preserving-fiberwise-map-universal-property-family-of-fibers
 
   preserves-section-fiberwise-map-universal-property-family-of-fibers :
-    (ev-lift f F δ fiberwise-map-universal-property-family-of-fibers) ~ γ
+    (ev-lift-family-of-elements f F δ fiberwise-map-universal-property-family-of-fibers) ~ γ
   preserves-section-fiberwise-map-universal-property-family-of-fibers =
     preserves-section-section-preserving-fiberwise-map-fiber
       section-preserving-fiberwise-map-universal-property-family-of-fibers
@@ -163,20 +168,20 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B) (F : B → UU l3)
   (δ : (a : A) → F (f a)) (u : universal-property-family-of-fibers f F δ)
-  (P : B → UU l4) (γ : (a : A) → P (f a))
-  (u' : universal-property-family-of-fibers f P γ)
+  (G : B → UU l4) (γ : (a : A) → G (f a))
+  (u' : universal-property-family-of-fibers f G γ)
   where
 
   dependent-comp-retraction-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers :
     ( dependent-comp-section-preserving-fiberwise-map-fiber
       ( section-preserving-fiberwise-map-universal-property-family-of-fibers
-        f P γ u' F δ)
+        f G γ u' F δ)
       ( section-preserving-fiberwise-map-universal-property-family-of-fibers
         ( f)
         ( F)
         ( δ)
         ( u)
-        ( P)
+        ( G)
         ( γ))) ＝
     ( id-section-preserving-fiberwise-map-fiber)
   dependent-comp-retraction-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers =
@@ -187,10 +192,10 @@ module _
   dependent-comp-section-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers :
     ( dependent-comp-section-preserving-fiberwise-map-fiber
       ( section-preserving-fiberwise-map-universal-property-family-of-fibers
-        f F δ u P γ))
+        f F δ u G γ))
       ( section-preserving-fiberwise-map-universal-property-family-of-fibers
         ( f)
-        ( P)
+        ( G)
         ( γ)
         ( u')
         ( F)
@@ -199,12 +204,12 @@ module _
   dependent-comp-section-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers =
     eq-is-contr
       ( uniqueness-fiberwise-map-universal-property-family-of-fibers
-        f P γ u' P γ)
+        f G γ u' G γ)
 
   is-fiberwise-retraction-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers :
     (b : B) →
-    ( ( fiberwise-map-universal-property-family-of-fibers f P γ u' F δ b) ∘
-    ( fiberwise-map-universal-property-family-of-fibers f F δ u P γ b)) ~
+    ( ( fiberwise-map-universal-property-family-of-fibers f G γ u' F δ b) ∘
+    ( fiberwise-map-universal-property-family-of-fibers f F δ u G γ b)) ~
     ( id)
   is-fiberwise-retraction-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers
     b =
@@ -217,8 +222,8 @@ module _
 
   is-fiberwise-section-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers :
     (b : B) →
-    ( ( fiberwise-map-universal-property-family-of-fibers f F δ u P γ b) ∘
-    ( fiberwise-map-universal-property-family-of-fibers f P γ u' F δ b)) ~
+    ( ( fiberwise-map-universal-property-family-of-fibers f F δ u G γ b) ∘
+    ( fiberwise-map-universal-property-family-of-fibers f G γ u' F δ b)) ~
     ( id)
   is-fiberwise-section-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers
     b =
@@ -231,14 +236,14 @@ module _
 
   is-fiberwise-equiv-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers :
     is-fiberwise-equiv
-      ( fiberwise-map-universal-property-family-of-fibers f F δ u P γ)
+      ( fiberwise-map-universal-property-family-of-fibers f F δ u G γ)
   is-fiberwise-equiv-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers
     b =
     is-equiv-is-invertible
       ( fiberwise-map-section-preserving-fiberwise-map-fiber
         ( section-preserving-fiberwise-map-universal-property-family-of-fibers
           ( f)
-          ( P)
+          ( G)
           ( γ)
           ( u')
           ( F)
@@ -251,32 +256,32 @@ module _
 
   uniquely-unique-fiberwise-map-universal-property-family-of-fibers :
     is-contr
-      ( Σ (fiberwise-equiv F P)
-        ( λ h → (ev-lift f F δ (map-fiberwise-equiv h)) ~ γ))
+      ( Σ (fiberwise-equiv F G)
+        ( λ h → (ev-lift-family-of-elements f F δ (map-fiberwise-equiv h)) ~ γ))
   uniquely-unique-fiberwise-map-universal-property-family-of-fibers =
     is-torsorial-Eq-subtype
       ( uniqueness-fiberwise-map-universal-property-family-of-fibers
-        f F δ u P γ)
+        f F δ u G γ)
       ( is-property-is-fiberwise-equiv)
-      ( fiberwise-map-universal-property-family-of-fibers f F δ u P γ)
+      ( fiberwise-map-universal-property-family-of-fibers f F δ u G γ)
       ( preserves-section-fiberwise-map-universal-property-family-of-fibers
-        f F δ u P γ)
+        f F δ u G γ)
       ( is-fiberwise-equiv-fiberwise-map-universal-property-family-of-fibers-universal-property-family-of-fibers)
 
   section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-family-of-fibers :
-    Σ (fiberwise-equiv F P)
-      ( λ h → (ev-lift f F δ (map-fiberwise-equiv h)) ~ γ)
+    Σ (fiberwise-equiv F G)
+      ( λ h → (ev-lift-family-of-elements f F δ (map-fiberwise-equiv h)) ~ γ)
   section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-family-of-fibers =
     center uniquely-unique-fiberwise-map-universal-property-family-of-fibers
 
   fiberwise-equiv-unique-fiberwise-map-universal-property-family-of-fibers :
-    fiberwise-equiv F P
+    fiberwise-equiv F G
   fiberwise-equiv-unique-fiberwise-map-universal-property-family-of-fibers =
     pr1
       ( section-preserving-fiberwise-equiv-unique-fiberwise-map-universal-property-family-of-fibers)
 
   preserves-section-fiberwise-equiv-unique-fiberwise-map-universal-property-family-of-fibers :
-    (ev-lift
+    (ev-lift-family-of-elements
       ( f)
       ( F)
       ( δ)

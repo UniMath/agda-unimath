@@ -8,7 +8,9 @@ module foundation-core.universal-property-family-of-fibers-of-maps where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.extensions-families-of-elements
 open import foundation.function-extensionality
+open import foundation.lifts-families-of-elements
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
@@ -19,6 +21,8 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-dependent-functions
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -45,7 +49,8 @@ initial type family equipped with such a section. Explicitly, the
 
 is an [equivalence](foundation-core.equivalences.md) for any type family
 `P : B → 𝒰`. Note that for any type family `P` over `B` and any map `f : A → B`,
-the type of _lifts_ of `f` to `P` is precisely the type of sections
+the type of [lifts](foundation.lifts-of-families-of-elements.md) of `f` to `P`
+is precisely the type of sections
 
 ```text
   (a : A) → P (f a).
@@ -77,18 +82,18 @@ defined to be the evaluation map
 
 for any type family `F : B → 𝒰` equipped with a lift `δ : (a : A) → F (f a)`.
 This map takes a dependent function `h` and evaluates it at the values of the
-lift `δ`. Hence we call it `ev-lift`.
+lift `δ`.
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (F : B → UU l3) (δ : (a : A) → F (f a))
+  (F : B → UU l3) (δ : lift-family-of-elements f F)
   where
 
-  ev-lift :
+  ev-lift-family-of-elements' :
     {l4 : Level} {P : (b : B) → F b → UU l4} →
-    ((b : B) (z : F b) → P b z) → (a : A) → P (f a) (δ a)
-  ev-lift h a = h (f a) (δ a)
+    ((b : B) (z : F b) → P b z) → dependent-lift-family-of-elements δ (P ∘ f)
+  ev-lift-family-of-elements' h a = h (f a) (δ a)
 ```
 
 ### The universal property of the fibers of a map
@@ -99,18 +104,20 @@ module _
   where
 
   universal-property-family-of-fibers :
-    (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) → UUω
+    (f : A → B) (F : B → UU l3) (δ : lift-family-of-elements f F) → UUω
   universal-property-family-of-fibers f F δ =
-    {l : Level} (P : B → UU l) → is-equiv (ev-lift f F δ {l} {λ b _ → P b})
+    {l : Level} (P : B → UU l) →
+    is-equiv (ev-lift-family-of-elements' f F δ {l} {λ b _ → P b})
 ```
 
 ### The dependent universal property of the fibers of a map
 
 ```agda
   dependent-universal-property-family-of-fibers :
-    (f : A → B) (F : B → UU l3) (δ : (a : A) → F (f a)) → UUω
+    (f : A → B) (F : B → UU l3) (δ : lift-family-of-elements f F) → UUω
   dependent-universal-property-family-of-fibers f F δ =
-    {l : Level} (P : (b : B) → F b → UU l) → is-equiv (ev-lift f F δ {l} {P})
+    {l : Level} (P : (b : B) → F b → UU l) →
+    is-equiv (ev-lift-family-of-elements' f F δ {l} {P})
 ```
 
 ### The lift of any map to its family of fibers
@@ -120,9 +127,9 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  lift-family-of-fibers : (a : A) → fiber f (f a)
-  pr1 (lift-family-of-fibers a) = a
-  pr2 (lift-family-of-fibers a) = refl
+  lift-family-of-elements-fiber : lift-family-of-elements f (fiber f)
+  pr1 (lift-family-of-elements-fiber a) = a
+  pr2 (lift-family-of-elements-fiber a) = refl
 ```
 
 ## Properties
@@ -138,58 +145,68 @@ module _
     {l3 : Level} (C : (y : B) (z : fiber f y) → UU l3)
     where
 
-    ev-lift-family-of-fibers :
+    ev-lift-family-of-elements-fiber :
       ((y : B) (z : fiber f y) → C y z) → ((x : A) → C (f x) (x , refl))
-    ev-lift-family-of-fibers = ev-lift f (fiber f) (lift-family-of-fibers f)
+    ev-lift-family-of-elements-fiber =
+      ev-lift-family-of-elements' f (fiber f) (lift-family-of-elements-fiber f)
 
-    inv-ev-lift-family-of-fibers :
+    extend-lift-family-of-elements-fiber :
       ((x : A) → C (f x) (x , refl)) → ((y : B) (z : fiber f y) → C y z)
-    inv-ev-lift-family-of-fibers h .(f x) (x , refl) = h x
+    extend-lift-family-of-elements-fiber h .(f x) (x , refl) = h x
 
-    is-section-inv-ev-lift-family-of-fibers :
-      (ev-lift-family-of-fibers ∘ inv-ev-lift-family-of-fibers) ~ id
-    is-section-inv-ev-lift-family-of-fibers h = refl
+    is-section-extend-lift-family-of-elements-fiber :
+      is-section
+        ( ev-lift-family-of-elements-fiber)
+        ( extend-lift-family-of-elements-fiber)
+    is-section-extend-lift-family-of-elements-fiber h = refl
 
-    is-retraction-inv-ev-lift-family-of-fibers' :
+    is-retraction-extend-lift-family-of-elements-fiber' :
       (h : (y : B) (z : fiber f y) → C y z) (y : B) →
-      (inv-ev-lift-family-of-fibers (ev-lift-family-of-fibers h) y) ~ (h y)
-    is-retraction-inv-ev-lift-family-of-fibers' h .(f z) (z , refl) = refl
+      extend-lift-family-of-elements-fiber
+        ( ev-lift-family-of-elements-fiber h)
+        ( y) ~
+      h y
+    is-retraction-extend-lift-family-of-elements-fiber' h .(f z) (z , refl) =
+      refl
 
-    is-retraction-inv-ev-lift-family-of-fibers :
-      (inv-ev-lift-family-of-fibers ∘ ev-lift-family-of-fibers) ~ id
-    is-retraction-inv-ev-lift-family-of-fibers h =
-      eq-htpy (eq-htpy ∘ is-retraction-inv-ev-lift-family-of-fibers' h)
+    is-retraction-extend-lift-family-of-elements-fiber :
+      is-retraction
+        ( ev-lift-family-of-elements-fiber)
+        ( extend-lift-family-of-elements-fiber)
+    is-retraction-extend-lift-family-of-elements-fiber h =
+      eq-htpy (eq-htpy ∘ is-retraction-extend-lift-family-of-elements-fiber' h)
 
-    is-equiv-inv-ev-lift-family-of-fibers :
-      is-equiv inv-ev-lift-family-of-fibers
-    is-equiv-inv-ev-lift-family-of-fibers =
+    is-equiv-extend-lift-family-of-elements-fiber :
+      is-equiv extend-lift-family-of-elements-fiber
+    is-equiv-extend-lift-family-of-elements-fiber =
       is-equiv-is-invertible
-        ( ev-lift-family-of-fibers)
-        ( is-retraction-inv-ev-lift-family-of-fibers)
-        ( is-section-inv-ev-lift-family-of-fibers)
+        ( ev-lift-family-of-elements-fiber)
+        ( is-retraction-extend-lift-family-of-elements-fiber)
+        ( is-section-extend-lift-family-of-elements-fiber)
 
     inv-equiv-dependent-universal-property-family-of-fibers :
       ((x : A) → C (f x) (x , refl)) ≃ ((y : B) (z : fiber f y) → C y z)
     pr1 inv-equiv-dependent-universal-property-family-of-fibers =
-      inv-ev-lift-family-of-fibers
+      extend-lift-family-of-elements-fiber
     pr2 inv-equiv-dependent-universal-property-family-of-fibers =
-      is-equiv-inv-ev-lift-family-of-fibers
+      is-equiv-extend-lift-family-of-elements-fiber
 
   dependent-universal-property-family-of-fibers-fiber :
     dependent-universal-property-family-of-fibers f
       ( fiber f)
-      ( lift-family-of-fibers f)
+      ( lift-family-of-elements-fiber f)
   dependent-universal-property-family-of-fibers-fiber C =
     is-equiv-is-invertible
-      ( inv-ev-lift-family-of-fibers C)
-      ( is-section-inv-ev-lift-family-of-fibers C)
-      ( is-retraction-inv-ev-lift-family-of-fibers C)
+      ( extend-lift-family-of-elements-fiber C)
+      ( is-section-extend-lift-family-of-elements-fiber C)
+      ( is-retraction-extend-lift-family-of-elements-fiber C)
 
   equiv-dependent-universal-property-family-of-fibers :
     {l3 : Level} (C : (y : B) (z : fiber f y) → UU l3) →
-    ((y : B) (z : fiber f y) → C y z) ≃ ((x : A) → C (f x) (x , refl))
+    ((y : B) (z : fiber f y) → C y z) ≃
+    ((x : A) → C (f x) (x , refl))
   pr1 (equiv-dependent-universal-property-family-of-fibers C) =
-    ev-lift-family-of-fibers C
+    ev-lift-family-of-elements-fiber C
   pr2 (equiv-dependent-universal-property-family-of-fibers C) =
     dependent-universal-property-family-of-fibers-fiber C
 ```
@@ -202,13 +219,15 @@ module _
   where
 
   universal-property-family-of-fibers-fiber :
-    universal-property-family-of-fibers f (fiber f) (lift-family-of-fibers f)
+    universal-property-family-of-fibers f
+      ( fiber f)
+      ( lift-family-of-elements-fiber f)
   universal-property-family-of-fibers-fiber C =
     dependent-universal-property-family-of-fibers-fiber f (λ y _ → C y)
 
   equiv-universal-property-family-of-fibers :
     {l3 : Level} (C : B → UU l3) →
-    ((y : B) → fiber f y → C y) ≃ ((x : A) → C (f x))
+    ((y : B) → fiber f y → C y) ≃ lift-family-of-elements f C
   equiv-universal-property-family-of-fibers C =
     equiv-dependent-universal-property-family-of-fibers f (λ y _ → C y)
 ```
@@ -224,7 +243,7 @@ module _
   where
 
   inv-equiv-universal-property-family-of-fibers :
-    ((x : A) → C (f x)) ≃ ((y : B) → fiber f y → C y)
+    (lift-family-of-elements f C) ≃ ((y : B) → fiber f y → C y)
   inv-equiv-universal-property-family-of-fibers =
     inv-equiv-dependent-universal-property-family-of-fibers f (λ y _ → C y)
 ```
@@ -245,7 +264,7 @@ module _
     is-equiv (precomp-Π f C)
   is-equiv-precomp-Π-fiber-condition {l3} {C} H =
     is-equiv-comp
-      ( ev-lift-family-of-fibers f (λ b _ → C b))
+      ( ev-lift-family-of-elements-fiber f (λ b _ → C b))
       ( map-Π (λ b u _ → u))
       ( is-equiv-map-Π-is-fiberwise-equiv H)
       ( universal-property-family-of-fibers-fiber f C)

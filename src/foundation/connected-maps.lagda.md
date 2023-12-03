@@ -393,7 +393,7 @@ module _
       ( λ b →
         function-dependent-universal-property-trunc
           ( Id-Truncated-Type' (trunc k (fiber f b)) _))
-      ( inv-ev-lift-family-of-fibers f
+      ( extend-lift-family-of-elements-fiber f
         ( λ b u → _ ＝ unit-trunc u)
         ( compute-center-is-connected-map-dependent-universal-property-connected-map))
 
