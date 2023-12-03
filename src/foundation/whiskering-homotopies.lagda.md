@@ -120,7 +120,7 @@ Diagramatically, we may turn the pasting diagram
         H
     f ~~~~~ g
     ︴      ︴
- H' ︴ ⇗   ︴ K
+ H' ︴  ⇗   ︴ K
     ︴      ︴
    g' ~~~~~ h ~~~~~ k
        K'       L
@@ -132,7 +132,7 @@ into a commmuting square
         H
     f ~~~~~ g
     ︴      ︴
- H' ︴ ⇗   ︴K ∙h L
+ H' ︴  ⇗   ︴K ∙h L
     ︴      ︴
    g' ~~~~~ k
      K' ∙h L   ,
@@ -220,7 +220,7 @@ Given a square of homotopies
         H
     g ~~~~~ h
     ︴      ︴
- H' ︴ ⇗   ︴ K
+ H' ︴  ⇗   ︴ K
     ︴      ︴
    h' ~~~~~ k
        K'
@@ -233,7 +233,7 @@ homotopies
            f ·l H
          fg ~~~~~ fh
          ︴        ︴
- f ·l H' ︴  ⇗    ︴f ·l K
+ f ·l H' ︴   ⇗    ︴f ·l K
          ︴        ︴
         fh' ~~~~~ fk
            f ·l K' ,

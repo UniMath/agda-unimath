@@ -83,17 +83,17 @@ This homotopy provides
 
 ```text
           Aₙ₊₁
-         ^| \
-       /  |   \
-     /    |fₙ₊₁ V
+         ^ | \
+       /   |   \
+     /     |fₙ₊₁ V
     Aₙ ---------> A∞
-    |     |      |
-    |     V      |
- fₙ |     Bₙ₊₁   | f∞
-    |    ^  \    |
-    |  /      \  |
-    |/          V|
-    Bₙ --------> B∞ ,
+    |      |      |
+    |      V      |
+ fₙ |     Bₙ₊₁    | f∞
+    |    ^   \    |
+    |  /       \  |
+    V/           VV
+    Bₙ ---------> B∞ ,
 ```
 
 where the triangles are coherences of the cocones of the standard sequential
