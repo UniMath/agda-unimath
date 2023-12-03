@@ -48,6 +48,9 @@ Furthermore, an
 [equivalence of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md)
 `e : (A, a) ≃ (B, b)` induces an equivalence `e∞ : A∞ ≃ B∞`.
 
+The development in this file is a formalization of Lemma 3.5 in Sequential
+Colimits in Homotopy Type Theory.
+
 ## Properties
 
 ### A morphism of sequential diagrams induces a map of cocones
@@ -435,3 +438,11 @@ module _
   pr2 equiv-equiv-standard-sequential-colimit =
     is-equiv-map-hom-standard-sequential-colimit
 ```
+
+## References
+
+1. Kristina Sojakova, Floris van Doorn, and Egbert Rijke. 2020. Sequential
+   Colimits in Homotopy Type Theory. In Proceedings of the 35th Annual ACM/IEEE
+   Symposium on Logic in Computer Science (LICS '20). Association for Computing
+   Machinery, New York, NY, USA, 845–858,
+   [DOI:10.1145](https://doi.org/10.1145/3373718.3394801)
