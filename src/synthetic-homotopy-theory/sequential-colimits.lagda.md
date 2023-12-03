@@ -32,17 +32,20 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ## Idea
 
 Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
-`(A, a)`, we can construct its **standard sequential colimit**, which is a
+`(A, a)`, we can construct its **standard sequential colimit** `A∞`, which is a
 [cocone under it](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md)
 satisfying the
 [universal property of sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md).
 
-In other words, the sequential colimit `A∞` universally completes the diagram
+In other words, the sequential colimit universally completes the diagram
 
 ```text
      a₀      a₁      a₂
- A₀ ---> A₁ ---> A₂ ---> ⋯ ---> A∞
+ A₀ ---> A₁ ---> A₂ ---> ⋯ ---> A∞ .
 ```
+
+We often abuse notation and write `A∞` for just the codomain of the universal
+cocone. You may also see the colimit written as `colimₙ Aₙ`.
 
 ## Properties
 
@@ -161,7 +164,8 @@ module _
 ### Homotopies between maps from the standard sequential colimit
 
 Maps from the standard sequential colimit induce cocones under the sequential
-diagrams, and a homotopy between the maps is exactly a homotopy of the cocones.
+diagrams, and a [homotopy](foundation-core.homotopies.md) between the maps is
+exactly a homotopy of the cocones.
 
 ```agda
 module _
