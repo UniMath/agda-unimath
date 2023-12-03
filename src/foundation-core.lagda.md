@@ -24,6 +24,7 @@ open import foundation-core.endomorphisms public
 open import foundation-core.equality-dependent-pair-types public
 open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
+open import foundation-core.families-of-equivalences public
 open import foundation-core.fibers-of-maps public
 open import foundation-core.function-types public
 open import foundation-core.functoriality-dependent-function-types public
@@ -53,6 +54,7 @@ open import foundation-core.truncated-types public
 open import foundation-core.truncation-levels public
 open import foundation-core.type-theoretic-principle-of-choice public
 open import foundation-core.univalence public
+open import foundation-core.universal-property-family-of-fibers-of-maps public
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.universal-property-truncation public
 open import foundation-core.whiskering-homotopies public

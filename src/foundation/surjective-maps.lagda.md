@@ -49,6 +49,7 @@ open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
+open import foundation-core.universal-property-family-of-fibers-of-maps
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
@@ -335,7 +336,7 @@ module _
                 ( type-Prop (P y))))
           ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ b → is-propositional-truncation-trunc-Prop (fiber f b) (P b))))
-        ( is-equiv-map-reduce-Π-fiber f ( λ y z → type-Prop (P y)))
+        ( universal-property-family-of-fibers-fiber f (is-in-subtype P))
 
   equiv-dependent-universal-property-surj-is-surjective :
     is-surjective f →

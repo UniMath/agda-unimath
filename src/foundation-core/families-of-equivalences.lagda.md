@@ -101,4 +101,3 @@ equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
   [Functoriality of dependent pair types](foundation-core.functoriality-dependent-pair-types.md)
   we show that a family of maps is a fiberwise equivalence if and only if it
   induces an equivalence on [total spaces](foundation.dependent-pair-types.md).
-

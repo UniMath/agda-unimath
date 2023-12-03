@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.families-of-equivalences where
+
+open import foundation-core.families-of-equivalences public
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +12,6 @@ module foundation.families-of-equivalences where
 open import foundation.equivalences
 open import foundation.universe-levels
 
-open import foundation-core.families-of-equivalences
 open import foundation-core.propositions
 ```
 

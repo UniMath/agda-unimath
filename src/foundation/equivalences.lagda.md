@@ -16,7 +16,7 @@ open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
-open import foundation-core.truncated-maps
+open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 

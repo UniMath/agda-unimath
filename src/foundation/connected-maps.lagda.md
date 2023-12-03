@@ -35,6 +35,7 @@ open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
+open import foundation-core.universal-property-family-of-fibers-of-maps
 ```
 
 </details>
@@ -392,7 +393,7 @@ module _
       ( λ b →
         function-dependent-universal-property-trunc
           ( Id-Truncated-Type' (trunc k (fiber f b)) _))
-      ( inv-map-reduce-Π-fiber f
+      ( inv-ev-lift-family-of-fibers f
         ( λ b u → _ ＝ unit-trunc u)
         ( compute-center-is-connected-map-dependent-universal-property-connected-map))
 

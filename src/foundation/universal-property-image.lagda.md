@@ -31,6 +31,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.subtypes
+open import foundation-core.universal-property-family-of-fibers-of-maps
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -322,7 +323,9 @@ abstract
   is-image-is-surjective' f i q H B' m =
     map-equiv
       ( ( equiv-hom-slice-fiberwise-hom (map-emb i) (map-emb m)) ∘e
-        ( ( inv-equiv (reduce-Π-fiber (map-emb i) (fiber (map-emb m)))) ∘e
+        ( ( inv-equiv-universal-property-family-of-fibers
+            ( map-emb i)
+            ( fiber (map-emb m))) ∘e
           ( inv-equiv
             ( equiv-dependent-universal-property-surj-is-surjective
               ( pr1 q)
@@ -333,7 +336,8 @@ abstract
                   ( is-prop-map-emb m (pr1 i b)))) ∘e
             ( ( equiv-Π-equiv-family
                 ( λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
-              ( ( reduce-Π-fiber f (fiber (map-emb m))) ∘e
+              ( ( equiv-universal-property-family-of-fibers f
+                  ( fiber (map-emb m))) ∘e
                 ( equiv-fiberwise-hom-hom-slice f (map-emb m)))))))
 
 abstract
