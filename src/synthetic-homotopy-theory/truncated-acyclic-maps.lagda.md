@@ -50,6 +50,7 @@ open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.truncated-acyclic-types
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
@@ -560,9 +561,63 @@ module _
   is-truncated-acyclic-map-vertical-map-cocone-is-pushout po ac =
     is-truncated-acyclic-map-is-epimorphism-Truncated-Type
       ( vertical-map-cocone f g c)
-      ( is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type k
+      ( is-epimorphism-is-equiv-vertical-map-cocone-Truncated-Type k
         ( vertical-map-cocone f g c)
-        ( {!!}))
+        ( λ X →
+          is-equiv-bottom-is-equiv-top-square
+            ( cocone-map
+              ( vertical-map-cocone f g c)
+              ( vertical-map-cocone f g c)
+              ( cocone-pushout
+                ( vertical-map-cocone f g c)
+                ( vertical-map-cocone f g c)))
+            ( map-equiv
+              ( equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type ac X))
+            ( cocone-map f
+              ( vertical-map-cocone f g c ∘ g)
+              ( cocone-comp-horizontal f g
+                ( vertical-map-cocone f g c)
+                ( c)
+                ( cocone-pushout
+                  ( vertical-map-cocone f g c)
+                  ( vertical-map-cocone f g c))))
+            ( vertical-map-cocone
+              ( vertical-map-cocone f g c)
+              ( vertical-map-cocone f g c))
+            ( refl-htpy)
+            ( up-pushout
+              ( vertical-map-cocone f g c)
+              ( vertical-map-cocone f g c)
+              ( type-Truncated-Type X))
+            ( is-equiv-map-equiv
+              ( equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type ac X))
+            ( universal-property-pushout-rectangle-universal-property-pushout-right
+              ( f)
+              ( g)
+              ( vertical-map-cocone f g c)
+              ( c)
+              ( cocone-pushout
+                ( vertical-map-cocone f g c)
+                ( vertical-map-cocone f g c))
+              ( universal-property-pushout-is-pushout f g c po)
+              ( up-pushout
+                ( vertical-map-cocone f g c)
+                ( vertical-map-cocone f g c))
+              ( type-Truncated-Type X))))
+
+module _
+  {l1 l2 l3 l4 : Level} {k : 𝕋} {S : UU l1} {A : UU l2} {B : UU l3}
+  {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
+  where
+
+  is-truncated-acyclic-map-horizontal-map-cocone-is-pushout :
+    is-pushout f g c →
+    is-truncated-acyclic-map k g →
+    is-truncated-acyclic-map k (horizontal-map-cocone f g c)
+  is-truncated-acyclic-map-horizontal-map-cocone-is-pushout po =
+    is-truncated-acyclic-map-vertical-map-cocone-is-pushout g f
+      ( swap-cocone f g C c)
+      ( is-pushout-swap-cocone-is-pushout f g C c po)
 ```
 
 ## See also
