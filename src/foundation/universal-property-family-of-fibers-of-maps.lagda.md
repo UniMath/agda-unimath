@@ -55,10 +55,10 @@ initial type family equipped with such a section. Explicitly, the
 ```
 
 is an [equivalence](foundation-core.equivalences.md) for any type family
-`X : B → 𝒰`. Note that for any type family `P` over `B` and any map `f : A → B`,
+`X : B → 𝒰`. Note that for any type family `X` over `B` and any map `f : A → B`,
 the type of
 [lifts](orthogonal-factorization-systems.lifts-families-of-elements.md) of `f`
-to `P` is precisely the type of sections
+to `X` is precisely the type of sections
 
 ```text
   (a : A) → X (f a).
@@ -82,7 +82,7 @@ described above, while the universal property of the fiber `fiber f b` of a map
 ### The dependent universal property of the fibers of a map
 
 Consider a map `f : A → B` and a type family `F : B → 𝒰` equipped with a lift
-`δ : (a : A) → F (f f)` of `f` to `F`. Then there is an evaluation map
+`δ : (a : A) → F (f a)` of `f` to `F`. Then there is an evaluation map
 
 ```text
   ((b : B) (z : F b) → X b z) → ((a : A) → X (f a) (δ a))
