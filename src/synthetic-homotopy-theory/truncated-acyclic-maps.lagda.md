@@ -47,6 +47,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.codiagonals-of-maps
+open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.truncated-acyclic-types
 ```
@@ -551,6 +552,17 @@ module _
       ≃ (C → type-Truncated-Type X)
         by
           equiv-pr1 (λ v → is-torsorial-path' (v ∘ horizontal-map-cocone f g c))
+
+  is-truncated-acyclic-map-vertical-map-cocone-is-pushout :
+    is-pushout f g c →
+    is-truncated-acyclic-map k f →
+    is-truncated-acyclic-map k (vertical-map-cocone f g c)
+  is-truncated-acyclic-map-vertical-map-cocone-is-pushout po ac =
+    is-truncated-acyclic-map-is-epimorphism-Truncated-Type
+      ( vertical-map-cocone f g c)
+      ( is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type k
+        ( vertical-map-cocone f g c)
+        ( {!!}))
 ```
 
 ## See also
