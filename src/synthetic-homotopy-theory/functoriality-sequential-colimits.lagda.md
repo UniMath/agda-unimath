@@ -16,6 +16,8 @@ open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -26,6 +28,7 @@ open import foundation-core.whiskering-homotopies
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
+open import synthetic-homotopy-theory.retracts-of-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-colimits
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-sequential-colimits
@@ -440,6 +443,61 @@ module _
     map-hom-standard-sequential-colimit B (hom-equiv-sequential-diagram B e)
   pr2 equiv-equiv-standard-sequential-colimit =
     is-equiv-map-hom-standard-sequential-colimit
+```
+
+### A retract of sequential diagrams induces a retract of cocones
+
+Additionally, the underlying map of the retraction is definitionally equal to
+the map induced by the retraction of sequential diagrams.
+
+```agda
+module _
+  { l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
+  ( R : A retract-of-sequential-diagram B)
+  where
+
+  map-inclusion-retract-standard-sequential-colimit :
+    standard-sequential-colimit A → standard-sequential-colimit B
+  map-inclusion-retract-standard-sequential-colimit =
+    map-hom-standard-sequential-colimit B
+      ( inclusion-retract-sequential-diagram A B R)
+
+  map-hom-retraction-retract-standard-sequential-colimit :
+    standard-sequential-colimit B → standard-sequential-colimit A
+  map-hom-retraction-retract-standard-sequential-colimit =
+    map-hom-standard-sequential-colimit A
+      ( hom-retraction-retract-sequential-diagram A B R)
+
+  abstract
+    is-retraction-map-hom-retraction-retract-standard-sequential-colimit :
+      is-retraction
+        ( map-inclusion-retract-standard-sequential-colimit)
+        ( map-hom-retraction-retract-standard-sequential-colimit)
+    is-retraction-map-hom-retraction-retract-standard-sequential-colimit =
+      ( inv-htpy
+        ( preserves-comp-map-hom-standard-sequential-colimit
+          ( hom-retraction-retract-sequential-diagram A B R)
+          ( inclusion-retract-sequential-diagram A B R))) ∙h
+      ( htpy-map-hom-standard-sequential-colimit-htpy-hom-sequential-diagram
+        ( is-retraction-hom-retraction-retract-sequential-diagram A B R)) ∙h
+      ( preserves-id-map-hom-standard-sequential-colimit)
+
+  retraction-retract-standard-sequential-colimit :
+    retraction
+      ( map-hom-standard-sequential-colimit B
+        ( inclusion-retract-sequential-diagram A B R))
+  pr1 retraction-retract-standard-sequential-colimit =
+    map-hom-retraction-retract-standard-sequential-colimit
+  pr2 retraction-retract-standard-sequential-colimit =
+    is-retraction-map-hom-retraction-retract-standard-sequential-colimit
+
+  retract-retract-standard-sequential-colimit :
+    (standard-sequential-colimit A) retract-of (standard-sequential-colimit B)
+  pr1 retract-retract-standard-sequential-colimit =
+    map-hom-standard-sequential-colimit B
+      ( inclusion-retract-sequential-diagram A B R)
+  pr2 retract-retract-standard-sequential-colimit =
+    retraction-retract-standard-sequential-colimit
 ```
 
 ## References
