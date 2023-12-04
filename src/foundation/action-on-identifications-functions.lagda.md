@@ -52,6 +52,12 @@ ap-comp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
   (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
 ap-comp g f refl = refl
+
+ap-comp-assoc :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (h : C → D) (g : B → C) (f : A → B) {x y : A} (p : x ＝ y) →
+  ap (h ∘ g) (ap f p) ＝ ap h (ap (g ∘ f) p)
+ap-comp-assoc h g f refl = refl
 ```
 
 ### The action on identifications of any map preserves `refl`

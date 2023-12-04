@@ -90,7 +90,7 @@ htpy-map-ℤ-Pointed-Type-With-Aut :
   map-ℤ-Pointed-Type-With-Aut X ~
   map-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X h
 htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
-  map-eq-transpose-equiv'
+  map-eq-transpose-equiv-inv
     ( aut-Pointed-Type-With-Aut X)
     ( ( inv
         ( preserves-point-map-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut
@@ -98,7 +98,7 @@ htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
       ( preserves-aut-map-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut
         X h neg-one-ℤ))
 htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k)) =
-  map-eq-transpose-equiv'
+  map-eq-transpose-equiv-inv
     ( aut-Pointed-Type-With-Aut X)
     ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl k)) ∙
       ( preserves-aut-map-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut
@@ -157,7 +157,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
       ( ap
         ( map-equiv (aut-Pointed-Type-With-Aut X))
         ( htpy-map-ℤ-Pointed-Type-With-Aut X h neg-one-ℤ))
-      ( triangle-eq-transpose-equiv'
+      ( triangle-eq-transpose-equiv-inv
         ( aut-Pointed-Type-With-Aut X)
         ( ( inv
             ( preserves-point-map-hom-Pointed-Type-With-Aut
@@ -176,7 +176,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k)) =
       ( ap
         ( map-equiv (aut-Pointed-Type-With-Aut X))
         ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k))))
-      ( triangle-eq-transpose-equiv'
+      ( triangle-eq-transpose-equiv-inv
         ( aut-Pointed-Type-With-Aut X)
         ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl k)) ∙
           ( preserves-aut-map-hom-Pointed-Type-With-Aut

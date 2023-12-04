@@ -74,11 +74,7 @@ is-retraction-retraction-left-map-triangle f g h H (l , L) (k , K) =
         ( inv-htpy ((k ∘ l) ·l H))
         ( (k ∘ l) ·l H)
         ( (k ·l (L ·r h)) ∙h K)) ∙h
-      ( ap-concat-htpy'
-        ( (inv-htpy ((k ∘ l) ·l H)) ∙h ((k ∘ l) ·l H))
-        ( refl-htpy)
-        ( (k ·l (L ·r h)) ∙h K)
-        ( left-inv-htpy ((k ∘ l) ·l H))))
+      ( ap-concat-htpy' ((k ·l (L ·r h)) ∙h K) (left-inv-htpy ((k ∘ l) ·l H))))
 
 retraction-right-factor-retract-of-retraction-left-factor :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}

@@ -77,6 +77,12 @@ module _
 
 ### Components of morphisms of sequential diagrams
 
+_Implementation note:_ Ideally we would have both the domain and codomain of a
+morphism of sequential diagrams inferred by Agda. Unfortunately that's not the
+case with the current implementation, and the codomain needs to be provided
+explicitly. This arises also in
+[equivalences of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md).
+
 ```agda
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} (B : sequential-diagram l2)
