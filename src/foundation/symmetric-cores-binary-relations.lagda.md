@@ -1,8 +1,6 @@
 # Symmetric cores of binary relations
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.symmetric-cores-binary-relations where
 ```
 

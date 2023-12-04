@@ -111,11 +111,7 @@ is-retraction-section-left-map-triangle f g h H (k , K) (l , L) =
         ( inv-htpy (H ·r (k ∘ l)))
         ( H ·r (k ∘ l))
         ( (g ·l (K ·r l)) ∙h L)) ∙h
-      ( ap-concat-htpy'
-        ( (inv-htpy (H ·r (k ∘ l))) ∙h (H ·r (k ∘ l)))
-        ( refl-htpy)
-        ( (g ·l (K ·r l)) ∙h L)
-        ( left-inv-htpy (H ·r (k ∘ l)))))
+      ( ap-concat-htpy' ((g ·l (K ·r l)) ∙h L) (left-inv-htpy (H ·r (k ∘ l)))))
 
 section-left-factor-retract-of-section-composition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}

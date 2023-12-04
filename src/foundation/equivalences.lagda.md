@@ -16,6 +16,7 @@ open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
@@ -59,9 +60,26 @@ module _
 
 ### Transposing equalities along equivalences
 
-The fact that equivalences are embeddings has many important consequences, we
-will use some of these consequences in order to derive basic properties of
-embeddings.
+We have two ways of showing that an application of an equivalence may be
+transposed to the other side of an
+[identification](foundation-core.identity-types.md), i.e. that the type
+`e x ＝ y` is equivalent to the type `x ＝ e⁻¹ y` — one uses the fact that `e⁻¹`
+is a [section](foundation-core.sections.md) of `e`, from which it follows that
+
+```text
+ (e x ＝ y) ≃ (e x ＝ e e⁻¹ y) ≃ (x ＝ e⁻¹ y) ,
+```
+
+and the other using the fact that `e⁻¹` is a
+[retraction](foundation-core.retractions.md) of `e`, resulting in the
+equivalence
+
+```text
+ (e x ＝ y) ≃ (e⁻¹ e x ＝ e⁻¹ y) ≃ (x ＝ e⁻¹ y) .
+```
+
+These two equivalences are [homotopic](foundation-core.homotopies.md), as is
+shown below.
 
 ```agda
 module _
@@ -84,9 +102,79 @@ module _
     {x : A} {y : B} → x ＝ map-inv-equiv e y → map-equiv e x ＝ y
   inv-map-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
 
+  eq-transpose-equiv' :
+    (x : A) (y : B) → (map-equiv e x ＝ y) ≃ (x ＝ map-inv-equiv e y)
+  eq-transpose-equiv' x y =
+    ( equiv-concat
+      ( inv (is-retraction-map-inv-equiv e x))
+      ( map-inv-equiv e y)) ∘e
+    ( equiv-ap (inv-equiv e) (map-equiv e x) y)
+
+  map-eq-transpose-equiv' :
+    {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
+  map-eq-transpose-equiv' {x} {y} = map-equiv (eq-transpose-equiv' x y)
+```
+
+It is sometimes useful to consider identifications `y ＝ e x` instead of
+`e x ＝ y`, so we include an inverted equivalence for that as well.
+
+```agda
+  eq-transpose-equiv-inv :
+    (x : A) (y : B) → (y ＝ map-equiv e x) ≃ (map-inv-equiv e y ＝ x)
+  eq-transpose-equiv-inv x y =
+    ( equiv-inv x (map-inv-equiv e y)) ∘e
+    ( eq-transpose-equiv x y) ∘e
+    ( equiv-inv y (map-equiv e x))
+
+  map-eq-transpose-equiv-inv :
+    {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
+  map-eq-transpose-equiv-inv {a} {b} = map-equiv (eq-transpose-equiv-inv a b)
+
+  inv-map-eq-transpose-equiv-inv :
+    {a : A} {b : B} → map-inv-equiv e b ＝ a → b ＝ map-equiv e a
+  inv-map-eq-transpose-equiv-inv {a} {b} =
+    map-inv-equiv (eq-transpose-equiv-inv a b)
+```
+
+#### Computation rules for transposing equivalences
+
+We begin by showing that the two equivalences stated above are homotopic.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  htpy-map-eq-transpose-equiv :
+    {x : A} {y : B} →
+    map-eq-transpose-equiv e {x} {y} ~ map-eq-transpose-equiv' e
+  htpy-map-eq-transpose-equiv {x} refl =
+    ( map-eq-transpose-equiv-inv
+      ( equiv-ap e x _)
+      ( ( ap inv (coherence-map-inv-equiv e x)) ∙
+        ( inv (ap-inv (map-equiv e) (is-retraction-map-inv-equiv e x))))) ∙
+    ( inv right-unit)
+```
+
+Transposing a composition of paths fits into a triangle with a transpose of the
+left factor.
+
+```agda
+  triangle-eq-transpose-equiv-concat :
+    {x : A} {y z : B} (p : map-equiv e x ＝ y) (q : y ＝ z) →
+    ( map-eq-transpose-equiv e (p ∙ q)) ＝
+    ( map-eq-transpose-equiv e p ∙ ap (map-inv-equiv e) q)
+  triangle-eq-transpose-equiv-concat refl refl = inv right-unit
+```
+
+Transposed identifications fit in
+[commuting triangles](foundation.commuting-triangles-of-identifications.md) with
+the original identifications.
+
+```agda
   triangle-eq-transpose-equiv :
     {x : A} {y : B} (p : map-equiv e x ＝ y) →
-    ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
+    ( ( ap (map-equiv e) (map-eq-transpose-equiv e p)) ∙
       ( is-section-map-inv-equiv e y)) ＝
     ( p)
   triangle-eq-transpose-equiv {x} {y} p =
@@ -102,29 +190,20 @@ module _
       ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙
         ( right-unit)))
 
-  map-eq-transpose-equiv' :
-    {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
-  map-eq-transpose-equiv' p = inv (map-eq-transpose-equiv (inv p))
-
-  inv-map-eq-transpose-equiv' :
-    {a : A} {b : B} → map-inv-equiv e b ＝ a → b ＝ map-equiv e a
-  inv-map-eq-transpose-equiv' p =
-    inv (inv-map-eq-transpose-equiv (inv p))
-
-  triangle-eq-transpose-equiv' :
+  triangle-eq-transpose-equiv-inv :
     {x : A} {y : B} (p : y ＝ map-equiv e x) →
     ( (is-section-map-inv-equiv e y) ∙ p) ＝
-    ( ap (map-equiv e) (map-eq-transpose-equiv' p))
-  triangle-eq-transpose-equiv' {x} {y} p =
+    ( ap (map-equiv e) (map-eq-transpose-equiv-inv e p))
+  triangle-eq-transpose-equiv-inv {x} {y} p =
     map-inv-equiv
       ( equiv-ap
         ( equiv-inv (map-equiv e (map-inv-equiv e y)) (map-equiv e x))
         ( (is-section-map-inv-equiv e y) ∙ p)
-        ( ap (map-equiv e) (map-eq-transpose-equiv' p)))
+        ( ap (map-equiv e) (map-eq-transpose-equiv-inv e p)))
       ( ( distributive-inv-concat (is-section-map-inv-equiv e y) p) ∙
         ( ( inv
             ( right-transpose-eq-concat
-              ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
+              ( ap (map-equiv e) (inv (map-eq-transpose-equiv-inv e p)))
               ( is-section-map-inv-equiv e y)
               ( inv p)
               ( ( ap
@@ -137,7 +216,43 @@ module _
                         ( ( inv p) ∙
                           ( inv (is-section-map-inv-equiv e y))))))) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
-          ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
+          ( ap-inv (map-equiv e) (map-eq-transpose-equiv-inv e p))))
+
+  triangle-eq-transpose-equiv' :
+    {x : A} {y : B} (p : map-equiv e x ＝ y) →
+    ( is-retraction-map-inv-equiv e x ∙ map-eq-transpose-equiv e p) ＝
+    ( ap (map-inv-equiv e) p)
+  triangle-eq-transpose-equiv' {x} refl =
+    ( ap
+      ( is-retraction-map-inv-equiv e x ∙_)
+      ( htpy-map-eq-transpose-equiv refl)) ∙
+    ( is-retraction-left-concat-inv (is-retraction-map-inv-equiv e x) refl)
+
+  triangle-eq-transpose-equiv-inv' :
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    ( map-eq-transpose-equiv-inv e p) ＝
+    ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x)
+  triangle-eq-transpose-equiv-inv' {x} refl =
+    inv
+      ( right-transpose-eq-concat
+        ( is-retraction-map-inv-equiv e x)
+        ( map-eq-transpose-equiv e refl)
+        ( refl)
+        ( triangle-eq-transpose-equiv' refl))
+
+  right-inverse-eq-transpose-equiv :
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    ( ( map-eq-transpose-equiv e (inv p)) ∙
+      ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x)) ＝
+    ( refl)
+  right-inverse-eq-transpose-equiv {x} p =
+    inv
+      ( map-inv-equiv
+        ( equiv-left-transpose-eq-concat'
+          ( refl)
+          ( map-eq-transpose-equiv e (inv p))
+          ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x))
+        ( right-unit ∙ triangle-eq-transpose-equiv-inv' p))
 ```
 
 ### Equivalences have a contractible type of sections
@@ -551,7 +666,7 @@ module _
   distributive-inv-comp-equiv e f =
     eq-htpy-equiv
       ( λ x →
-        map-eq-transpose-equiv'
+        map-eq-transpose-equiv-inv
           ( f ∘e e)
           ( ( ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv f))) ∙
             ( ap

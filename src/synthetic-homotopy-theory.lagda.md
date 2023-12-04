@@ -50,6 +50,7 @@ open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
+open import synthetic-homotopy-theory.functoriality-sequential-colimits public
 open import synthetic-homotopy-theory.functoriality-suspensions public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.hatchers-acyclic-type public
@@ -77,6 +78,7 @@ open import synthetic-homotopy-theory.pushout-products public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.sections-descent-circle public
+open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
 open import synthetic-homotopy-theory.sequentially-compact-types public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public

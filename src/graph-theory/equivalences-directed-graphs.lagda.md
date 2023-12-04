@@ -492,7 +492,7 @@ module _
       ( edge-Directed-Graph G)
       ( vertex-is-retraction-inv-equiv-Directed-Graph x)
       ( vertex-is-retraction-inv-equiv-Directed-Graph y)
-      ( map-eq-transpose-equiv'
+      ( map-eq-transpose-equiv-inv
         ( equiv-edge-equiv-Directed-Graph G H f
           ( vertex-inv-equiv-Directed-Graph
             ( vertex-equiv-Directed-Graph G H f x))
