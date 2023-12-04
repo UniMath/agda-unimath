@@ -304,7 +304,7 @@ module _
 
 ### Acyclic maps are closed under pushouts
 
-We give an outline of the proof before formalizing it.
+**Proof:**
 
 Suppose we have a pushout square on the left in the diagram
 
