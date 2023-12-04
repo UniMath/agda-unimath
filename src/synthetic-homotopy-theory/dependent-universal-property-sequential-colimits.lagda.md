@@ -7,23 +7,6 @@ module synthetic-homotopy-theory.dependent-universal-property-sequential-colimit
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.precomposition-dependent-functions
-open import foundation.function-types
-open import foundation.equivalences
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.functoriality-dependent-pair-types
-open import foundation.universe-levels
-
-open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-coforks
-open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
-open import synthetic-homotopy-theory.sequential-diagrams
-open import synthetic-homotopy-theory.universal-property-sequential-colimits
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
@@ -31,9 +14,11 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.subtype-identity-principle
 open import foundation.universal-property-equivalences
@@ -41,8 +26,12 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.dependent-coforks
+open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-coequalizers
+open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ```
 
 </details>
