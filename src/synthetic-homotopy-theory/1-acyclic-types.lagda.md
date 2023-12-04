@@ -148,7 +148,7 @@ module _
     is-contr-is-1-acyclic-is-set
       ( type-trunc-Set A)
       ( is-set-type-trunc-Set)
-      ( is-truncated-succ-acyclic-type-trunc-is-truncated-succ-acyclic A ac)
+      ( is-truncated-acyclic-succ-type-trunc-is-truncated-acyclic-succ A ac)
 ```
 
 ## References
