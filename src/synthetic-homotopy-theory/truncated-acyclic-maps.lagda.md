@@ -516,7 +516,7 @@ We consider the pushout squares
 We assume that `f` is `k`-acyclic and we want to prove that `j` is too. For
 this, it suffices to show that for any `k`-type `X`, the second projection
 `cocone j j X → (C → X)` is an equivalence, as shown in the file on
-[epimorphisms with respect to truncated types](synthetic-homotopy-theory.epimorphisms-with-respect-to-truncated-types.md).
+[epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md).
 
 For this, we use the following commutative diagram
 
