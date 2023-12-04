@@ -255,8 +255,6 @@ coherence-triangle-precompose-lifts-refl-htpy P f h =
   ( ( ( inv-htpy-right-unit-htpy) ∙h
       ( ap-concat-htpy
         ( λ h' → tr-eq-htpy-fam-lifts-refl-htpy P h f (λ a → h' (f a)))
-        ( refl-htpy)
-        ( triangle-precompose-lifts' P refl-htpy h)
         ( inv-htpy (compute-triangle-precompose-lifts' P f h)))) ∙h
     ( htpy-eq
       ( ap
@@ -380,15 +378,11 @@ coherence-inv-htpy-distributive-Π-Σ-refl-htpy :
 coherence-inv-htpy-distributive-Π-Σ-refl-htpy {X = X} P f =
   ( ap-concat-htpy
     ( coherence-square-map-inv-distributive-Π-Σ P f)
-    ( map-inv-distributive-Π-Σ ·l ( htpy-precompose-total-lifts P refl-htpy))
-    ( refl-htpy)
     ( λ h →
       ap
         ( ap map-inv-distributive-Π-Σ)
         ( compute-htpy-precompose-total-lifts P f h))) ∙h
   ( ap-concat-htpy'
-    ( refl-htpy)
-    ( ( htpy-precomp refl-htpy (Σ X P)) ·r map-inv-distributive-Π-Σ)
     ( refl-htpy)
     ( inv-htpy
       ( λ h →

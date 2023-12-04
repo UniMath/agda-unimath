@@ -281,13 +281,13 @@ module _
   where
 
   ap-concat-htpy :
-    (H : f ~ g) (K K' : g ~ h) → K ~ K' → (H ∙h K) ~ (H ∙h K')
-  ap-concat-htpy H K K' L x = ap (concat (H x) (h x)) (L x)
+    (H : f ~ g) {K K' : g ~ h} → K ~ K' → (H ∙h K) ~ (H ∙h K')
+  ap-concat-htpy H L x = ap (concat (H x) (h x)) (L x)
 
   ap-concat-htpy' :
-    (H H' : f ~ g) (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
-  ap-concat-htpy' H H' K L x =
-    ap (concat' _ (K x)) (L x)
+    {H H' : f ~ g} (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
+  ap-concat-htpy' K L x =
+    ap (concat' (f x) (K x)) (L x)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
