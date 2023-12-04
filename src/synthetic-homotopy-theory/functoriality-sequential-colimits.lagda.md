@@ -20,10 +20,13 @@ open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.whiskering-homotopies
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams
@@ -380,7 +383,7 @@ module _
 
 ### An equivalence of sequential diagrams induces an equivalence of cocones
 
-Additionally, the underlying map of the inverse equivalence if definitionally
+Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
 diagrams, i.e. `(e∞)⁻¹ = (e⁻¹)∞`.
 
