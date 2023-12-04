@@ -500,9 +500,7 @@ module _
 
 ### Acyclic maps are closed under pushouts
 
-**Proof:**
-
-We consider the pushout squares
+**Proof:** We consider the pushout squares
 
 ```text
         g          j
