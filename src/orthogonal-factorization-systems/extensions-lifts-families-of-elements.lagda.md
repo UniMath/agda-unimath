@@ -307,5 +307,5 @@ module _
 
 ## See also
 
-- [Extensions of double families of elements](orthogonal-factorization-systems.extensions-double-families-of-elements.md)
+- [Extensions of double families of elements](orthogonal-factorization-systems.extensions-double-lifts-families-of-elements.md)
 - [Extensions of maps](orthogonal-factorization-systems.extensions-of-maps.md)
