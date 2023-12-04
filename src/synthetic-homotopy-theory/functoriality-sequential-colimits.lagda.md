@@ -376,7 +376,7 @@ module _
 
 ### An equivalence of sequential diagrams induces an equivalence of cocones
 
-Additionally, the underlying map of the inverse equivalence if definitionally
+Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
 diagrams, i.e. `(e∞)⁻¹ = (e⁻¹)∞`.
 
