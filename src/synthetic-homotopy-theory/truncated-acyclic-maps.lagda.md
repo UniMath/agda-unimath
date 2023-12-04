@@ -500,7 +500,59 @@ module _
 
 ### Acyclic maps are closed under pushouts
 
-TODO: Outline proof
+We consider the pushout squares
+
+```text
+        g          j
+   S -------> B -------> C
+   |          |          |
+ f |          | j        | inr
+   |          |          |
+   v       ⌜  v       ⌜  v
+   A -------> C -------> ∙
+        i          inl
+```
+
+We assume that `f` is `k`-acyclic and we want to prove that `j` is too. For
+this, it suffices to show that for any `k`-type `X`, the second projection
+`cocone j j X → (C → X)` is an equivalence, as shown in the file on
+[epimorphisms with respect to truncated types](synthetic-homotopy-theory.epimorphisms-with-respect-to-truncated-types.md).
+
+For this, we use the following commutative diagram
+
+```text
+                      ≃
+   (∙ → X) ------------------------> cocone f (j ∘ g) X
+      |      (by pushout pasting)            |
+      |                                      |
+    ≃ | (universal                           | vertical-map-cocone
+      |  property)                           | (second projection)
+      v                                      v
+ cocone j j X --------------------------> (C → X)
+                 vertical-map-cocone
+                 (second projection)
+```
+
+where we first show the right map to be an equivalence using that `f` is
+`k`-acyclic.
+
+As for [acyclic maps](synthetic-homotopy-theory.acyclic-maps.md), we use the
+following equivalences for that purpose:
+
+```text
+          cocone-map f (j ∘ g)
+ (C → X) -----------------------> cocone f (j ∘ g) X
+                               ̇= Σ (l : A → X) ,
+                                 Σ (r : C → X) , l ∘ f ~ r ∘ j ∘ g
+       (using the left square)
+                               ≃ Σ (l : A → X) ,
+                                 Σ (r : C → X) , l ∘ f ~ r ∘ i ∘ f
+ (since f is `k`-acyclic/epic)
+                               ≃ Σ (l : A → X) , Σ (r : C → X) , l ~ r ∘ i
+                               ≃ Σ (r : C → X) , Σ (l : A → X) , l ~ r ∘ i
+        (contracting at r ∘ i)
+                               ≃ (C → X)
+```
 
 ```agda
 module _
