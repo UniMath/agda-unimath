@@ -120,11 +120,11 @@ module _
 
 ```agda
 module _
-  { l : Level} {A : sequential-diagram l}
+  { l1 l2 : Level} {A : sequential-diagram l1}
   where
 
   equiv-up-standard-sequential-colimit :
-    { l : Level} {X : UU l} →
+    { X : UU l2} →
     (standard-sequential-colimit A → X) ≃ (cocone-sequential-diagram A X)
   pr1 equiv-up-standard-sequential-colimit =
     cocone-map-sequential-diagram A (cocone-standard-sequential-colimit A)
@@ -132,13 +132,13 @@ module _
     up-standard-sequential-colimit _
 
   cogap-standard-sequential-colimit :
-    { l : Level} {X : UU l} →
+    { X : UU l2} →
     cocone-sequential-diagram A X → standard-sequential-colimit A → X
   cogap-standard-sequential-colimit =
     map-inv-equiv equiv-up-standard-sequential-colimit
 
   equiv-dup-standard-sequential-colimit :
-    { l : Level} {P : standard-sequential-colimit A → UU l} →
+    { P : standard-sequential-colimit A → UU l2} →
     ( (x : standard-sequential-colimit A) → P x) ≃
     ( dependent-cocone-sequential-diagram A
       ( cocone-standard-sequential-colimit A)
@@ -151,7 +151,7 @@ module _
     dup-standard-sequential-colimit _
 
   dependent-cogap-standard-sequential-colimit :
-    { l : Level} {P : standard-sequential-colimit A → UU l} →
+    { P : standard-sequential-colimit A → UU l2} →
     dependent-cocone-sequential-diagram A
       ( cocone-standard-sequential-colimit A)
       ( P) →
