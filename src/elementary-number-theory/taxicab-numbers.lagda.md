@@ -17,7 +17,6 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -31,15 +30,7 @@ The `n`-th {{#concept "taxicab number"}} `taxicab n` is the smallest
 [natural number](elementary-number-theory.natural-numbers.md) `x` such that `x`
 is a [sum](elementary-number-theory.addition-natural-numbers.md) of two
 [cubes](elementary-number-theory.cubes-natural-numbers.md) in `n`
-[distinct](foundation.negated-equality.md) ways. That is, a number `x` is the
-`n`-th taxicab number if the
-[logical equivalence](foundation.logical-equivalences.md)
-
-```text
-  (|{a b : ℕ | 1 ≤ a, 1 ≤ b, a ≤ b, a³ + b³ ＝ y}| ＝ n) ↔ (x ≤ y)
-```
-
-holds for every natural number `y`.
+[distinct](foundation.negated-equality.md) ways.
 
 **Note:** The definition of taxicab numbers only considers sums of
 [positive integers](elementary-number-theory.nonzero-natural-numbers.md). Note
@@ -97,7 +88,8 @@ is-sum-of-cubes-in-number-of-distinct-ways-ℕ n x =
 ```agda
 is-taxicab-number-ℕ : ℕ → ℕ → UU lzero
 is-taxicab-number-ℕ n x =
-  (y : ℕ) → is-sum-of-cubes-in-number-of-distinct-ways-ℕ n y ↔ leq-ℕ x y
+  is-sum-of-cubes-in-number-of-distinct-ways-ℕ n x ×
+  ((y : ℕ) → is-sum-of-cubes-in-number-of-distinct-ways-ℕ n y → leq-ℕ x y)
 ```
 
 ## See also
