@@ -22,19 +22,19 @@ open import foundation-core.whiskering-homotopies
 Consider an arrangment of maps composable into a diagram as follows:
 
 ```text
-         hA
-   A ---------> A'
-   |\           |\
-   | \ h   ⇗    | \ h'
-   |  \      f' |  \
-   |   V        |   V
- f | ⇐ B ------ | -> B'
-   |   /   hB   | ⇐ /
-   |  / g       |  / g'
-   | /     ⇗    | /
-   VV           VV
-   C ---------> C' ,
-         hC
+          hA
+    A ---------> A'
+    |\           |\
+    | \ h   ⇗    | \ h'
+    |  \      f' |  \
+    |   V        |   V
+  f | ⇐ B ------ | -> B'
+    |   /   hB   | ⇐ /
+    |  / g       |  / g'
+    | /     ⇗    | /
+    VV           VV
+    C ---------> C' ,
+          hC
 ```
 
 and [homotopies](foundation-core.homotopies.md) filling its faces. Then a
@@ -82,7 +82,8 @@ It remains to be formalized that the type of vertical prisms is
 ```agda
 module _
   { l1 l2 l3 l1' l2' l3' : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
   ( hA : A → A') (h : A → B) (h' : A' → B')
   ( hB : B → B') (g : B → C) (g' : B' → C')
   ( hC : C → C') (f : A → C) (f' : A' → C')
@@ -147,4 +148,18 @@ module _
     vertical-coherence-prism-maps' =
       ( inv-front ∙h ((bottom ·r hA) ∙h (g' ·l left))) ~
       ( (hC ·l top) ∙h (inv-right ·r h))
+
+
+  module _
+    ( top : coherence-triangle-maps f g h)
+    ( inv-front : coherence-square-maps hA f f' hC)
+    ( inv-right : coherence-square-maps hB g g' hC)
+    ( inv-left : coherence-square-maps hA h h' hB)
+    ( bottom : coherence-triangle-maps f' g' h')
+    where
+
+    vertical-coherence-prism-maps'' : UU (l1 ⊔ l3')
+    vertical-coherence-prism-maps'' =
+      ( inv-front ∙h (bottom ·r hA)) ~
+      ( hC ·l top) ∙h ((inv-right ·r h) ∙h (g' ·l inv-left))
 ```

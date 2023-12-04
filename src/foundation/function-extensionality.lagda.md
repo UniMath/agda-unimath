@@ -248,7 +248,7 @@ module _
   where
 
   eq-htpy-concat-htpy :
-    (H : f ~ g) (K : g ~ h) → eq-htpy (H ∙h K) ＝ ((eq-htpy H) ∙ (eq-htpy K))
+    (H : f ~ g) (K : g ~ h) → eq-htpy (H ∙h K) ＝ (eq-htpy H ∙ eq-htpy K)
   eq-htpy-concat-htpy H K =
     equational-reasoning
       eq-htpy (H ∙h K)

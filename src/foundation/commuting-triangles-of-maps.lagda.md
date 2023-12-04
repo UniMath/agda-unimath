@@ -13,6 +13,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.function-extensionality
+open import foundation.precomposition-functions
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -70,4 +73,25 @@ module _
     coherence-triangle-maps right left (map-inv-equiv e)
   coherence-triangle-maps-inv-top =
     map-equiv equiv-coherence-triangle-maps-inv-top
+```
+
+### Any commuting triange of maps induces commuting triangles of function types
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (left : A → X) (right : B → X) (top : A → B)
+  (H : coherence-triangle-maps left right top) (S : UU l4)
+  where
+
+  precomp-coherence-triangle-maps :
+    coherence-triangle-maps (precomp left S) (precomp top S) (precomp right S)
+  precomp-coherence-triangle-maps = htpy-precomp H S
+
+  postcomp-coherence-triangle-maps :
+    coherence-triangle-maps
+      ( postcomp S left)
+      ( postcomp S right)
+      ( postcomp S top)
+  postcomp-coherence-triangle-maps = htpy-postcomp S H
 ```

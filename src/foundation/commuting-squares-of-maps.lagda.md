@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.path-algebra
 open import foundation.precomposition-functions
+open import foundation.precomposition-dependent-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -164,8 +165,7 @@ precomp-coherence-square-maps :
     ( precomp bottom X)
     ( precomp top X)
     ( precomp left X)
-precomp-coherence-square-maps top left right bottom H X =
-  htpy-precomp H X
+precomp-coherence-square-maps top left right bottom = htpy-precomp
 ```
 
 ## Properties
@@ -1003,4 +1003,38 @@ module _
     ( K)
     ( h) =
     compute-concat-htpy-precomp H K W h
+```
+
+### Naturality of `eq-htpy` for ordinary functions
+
+Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
+
+```text
+                     ap (precomp f C)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          ^                                       ^
+  eq-htpy |                                       | eq-htpy
+          |                                       |
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                precomp f (eq-value g h)
+```
+
+commutes.
+
+```agda
+square-eq-htpy :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → B) (g h : B → C) →
+  coherence-square-maps
+    ( precomp-Π f (eq-value g h))
+    ( eq-htpy)
+    ( eq-htpy)
+    ( ap (precomp f C))
+square-eq-htpy {C = C} f g h =
+  coherence-square-inv-vertical
+    ( ap (precomp f C))
+    ( equiv-funext)
+    ( equiv-funext)
+    ( precomp-Π f (eq-value g h))
+    ( square-htpy-eq f g h)
 ```
