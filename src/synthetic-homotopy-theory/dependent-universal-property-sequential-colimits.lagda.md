@@ -46,13 +46,14 @@ is an [equivalence](foundation.equivalences.md).
 
 ```agda
 module _
-  { l1 l2 : Level} (l : Level) (A : sequential-diagram l1) {X : UU l2}
+  { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X)
   where
 
-  dependent-universal-property-sequential-colimit : UU (l1 ⊔ l2 ⊔ lsuc l)
+  dependent-universal-property-sequential-colimit : UUω
   dependent-universal-property-sequential-colimit =
-    ( P : X → UU l) → is-equiv (dependent-cocone-map-sequential-diagram A c P)
+    { l : Level} → (P : X → UU l) →
+    is-equiv (dependent-cocone-map-sequential-diagram A c P)
 ```
 
 ### The map induced by the dependent universal property of sequential colimits
@@ -62,7 +63,7 @@ module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X) {P : X → UU l3}
   ( dup-sequential-colimit :
-    dependent-universal-property-sequential-colimit l3 A c)
+    dependent-universal-property-sequential-colimit A c)
   where
 
   map-dependent-universal-property-sequential-colimit :
@@ -81,7 +82,7 @@ module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X) {P : X → UU l3}
   ( dup-sequential-colimit :
-    dependent-universal-property-sequential-colimit l3 A c)
+    dependent-universal-property-sequential-colimit A c)
   ( d : dependent-cocone-sequential-diagram A c P)
   where
 
@@ -138,8 +139,7 @@ module _
         ( bottom-map-cofork-cocone-sequential-diagram A)
         ( top-map-cofork-cocone-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)) →
-    ( {l : Level} →
-      dependent-universal-property-sequential-colimit l A c)
+    dependent-universal-property-sequential-colimit A c
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( P) =
@@ -155,8 +155,7 @@ module _
       ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork A c P)
 
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit :
-    ( {l : Level} →
-      dependent-universal-property-sequential-colimit l A c) →
+    dependent-universal-property-sequential-colimit A c →
     ( {l : Level} →
       dependent-universal-property-coequalizer l
         ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -186,8 +185,8 @@ module _
   where
 
   universal-property-dependent-universal-property-sequential-colimit :
-    ( {l : Level} → dependent-universal-property-sequential-colimit l A c) →
-    ( {l : Level} → universal-property-sequential-colimit l A c)
+    dependent-universal-property-sequential-colimit A c →
+    universal-property-sequential-colimit A c
   universal-property-dependent-universal-property-sequential-colimit
     ( dup-sequential-colimit)
     ( Y) =
@@ -202,8 +201,8 @@ module _
         ( compute-dependent-cocone-sequential-diagram-constant-family A c Y))
 
   dependent-universal-property-universal-property-sequential-colimit :
-    ( {l : Level} → universal-property-sequential-colimit l A c) →
-    ( {l : Level} → dependent-universal-property-sequential-colimit l A c)
+    universal-property-sequential-colimit A c →
+    dependent-universal-property-sequential-colimit A c
   dependent-universal-property-universal-property-sequential-colimit
     ( up-sequential-diagram) =
     dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer

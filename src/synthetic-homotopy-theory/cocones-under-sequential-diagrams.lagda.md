@@ -101,8 +101,9 @@ filling the "pinched cylinder" with the faces `Kₙ`, `Hₙ`, `Lₙ` and `Kₙ�
 
 The coherence datum may be better understood by viewing a cocone as a
 [morphism](synthetic-homotopy-theory.morphisms-sequential-diagrams.md) from
-`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)`. Then a homotopy of cocones is
-a regular homotopy of morphisms of sequential diagrams.
+`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)` — the two types are
+definitionally equal. Then a homotopy of cocones is a regular homotopy of
+morphisms of sequential diagrams.
 
 ```agda
 module _
@@ -137,7 +138,7 @@ module _
 ```agda
 module _
   { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
-  ( c c' : cocone-sequential-diagram A X)
+  { c c' : cocone-sequential-diagram A X}
   ( H : htpy-cocone-sequential-diagram A c c')
   where
 
