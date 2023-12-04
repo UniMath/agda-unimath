@@ -1,7 +1,7 @@
 # Lifts of families of elements
 
 ```agda
-module foundation.lifts-families-of-elements where
+module orthogonal-factorization-systems.lifts-families-of-elements where
 ```
 
 <details><summary>Imports</summary>
@@ -87,64 +87,7 @@ module _
     dependent-lift-binary-family-of-elements a (λ _ → C)
 ```
 
-### Dependent double lifts of families of elements
+## See also
 
-Given a lift `b` of `a : (i : I) → A i` to a type family
-`B : (i : I) → A i → 𝒰`, a
-{{#concept "dependent double lift" Disambiguation="families of elements"}} of
-`a` and `b` to a type family
-
-```text
-  C : (i : I) (x : A i) → B i x → 𝒰
-```
-
-is a family of elements
-
-```text
-  (i : I) → C i (a i) (b i).
-```
-
-Note that this is the type of double lifts in the sense that it simultaneously
-lifts `a` and `b` to the type family `C`.
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {a : (i : I) → A i}
-  {B : (i : I) → A i → UU l3} (b : dependent-lift-family-of-elements a B)
-  (C : (i : I) (x : A i) → B i x → UU l4)
-  where
-
-  dependent-double-lift-family-of-elements : UU (l1 ⊔ l4)
-  dependent-double-lift-family-of-elements =
-    dependent-lift-family-of-elements b (λ i → C i (a i))
-```
-
-### Double lifts of families of elements
-
-Given a lift `b` of `a : I → A` to a type family `B : A → 𝒰`, a
-{{#concept "double lift" Disambiguation="families of elements"}} of `a` and `b`
-to a type family
-
-```text
-  C : (x : A) → B x → 𝒰
-```
-
-is a family of elements
-
-```text
-  (i : I) → C (a i) (b i).
-```
-
-Note that this is the type of double lifts in the sense that it simultaneously
-lifts `a` and `b` to the type family `C`.
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : UU l2} {a : I → A}
-  {B : A → UU l3} (b : lift-family-of-elements a B) (C : (x : A) → B x → UU l4)
-  where
-
-  double-lift-family-of-elements : UU (l1 ⊔ l4)
-  double-lift-family-of-elements =
-    dependent-lift-family-of-elements b (λ i → C (a i))
-```
+- [Double lifts of families of elements](orthogonal-factorization-systems.double-lifts-families-of-elements.md)
+- [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)

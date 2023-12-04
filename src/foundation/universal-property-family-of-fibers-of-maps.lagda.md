@@ -9,10 +9,8 @@ module foundation.universal-property-family-of-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.extensions-families-of-elements
 open import foundation.families-of-equivalences
 open import foundation.function-extensionality
-open import foundation.lifts-families-of-elements
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
@@ -29,6 +27,9 @@ open import foundation-core.identity-types
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.retractions
 open import foundation-core.sections
+
+open import orthogonal-factorization-systems.extensions-double-lifts-families-of-elements
+open import orthogonal-factorization-systems.lifts-families-of-elements
 ```
 
 </details>
@@ -55,8 +56,9 @@ initial type family equipped with such a section. Explicitly, the
 
 is an [equivalence](foundation-core.equivalences.md) for any type family
 `X : B → 𝒰`. Note that for any type family `P` over `B` and any map `f : A → B`,
-the type of [lifts](foundation.lifts-families-of-elements.md) of `f` to `P` is
-precisely the type of sections
+the type of
+[lifts](orthogonal-factorization-systems.lifts-families-of-elements.md) of `f`
+to `P` is precisely the type of sections
 
 ```text
   (a : A) → X (f a).
