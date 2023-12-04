@@ -32,6 +32,7 @@ open import foundation.truncated-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
@@ -49,7 +50,6 @@ open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
-open import foundation-core.universal-property-family-of-fibers-of-maps
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```

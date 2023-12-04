@@ -89,62 +89,62 @@ module _
 
 ### Dependent double lifts of families of elements
 
-Given a lift `a` of `h : (i : I) → J i` to a type family
-`A : (i : I) → J i → 𝒰`, a
+Given a lift `b` of `a : (i : I) → A i` to a type family
+`B : (i : I) → A i → 𝒰`, a
 {{#concept "dependent double lift" Disambiguation="families of elements"}} of
-`h` and `a` to a type family
+`a` and `b` to a type family
 
 ```text
-  B : (i : I) (j : J i) → A i j → 𝒰
+  C : (i : I) (x : A i) → B i x → 𝒰
 ```
 
 is a family of elements
 
 ```text
-  (i : I) → B i (h i) (a i).
+  (i : I) → C i (a i) (b i).
 ```
 
 Note that this is the type of double lifts in the sense that it simultaneously
-lifts `h` and `a` to the type family `B`.
+lifts `a` and `b` to the type family `C`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} {J : I → UU l2} {h : (i : I) → J i}
-  (A : (i : I) → J i → UU l3) (a : dependent-lift-family-of-elements h A)
-  (B : (i : I) (j : J i) → A i j → UU l4)
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {a : (i : I) → A i}
+  {B : (i : I) → A i → UU l3} (b : dependent-lift-family-of-elements a B)
+  (C : (i : I) (x : A i) → B i x → UU l4)
   where
 
   dependent-double-lift-family-of-elements : UU (l1 ⊔ l4)
   dependent-double-lift-family-of-elements =
-    dependent-lift-family-of-elements a (λ i → B i (h i))
+    dependent-lift-family-of-elements b (λ i → C i (a i))
 ```
 
 ### Double lifts of families of elements
 
-Given a lift `a` of `h : I → J` to a type family `A : J → 𝒰`, a
-{{#concept "double lift" Disambiguation="families of elements"}} of `h` and `a`
+Given a lift `b` of `a : I → A` to a type family `B : A → 𝒰`, a
+{{#concept "double lift" Disambiguation="families of elements"}} of `a` and `b`
 to a type family
 
 ```text
-  B : (j : J) → A j → 𝒰
+  C : (x : A) → B x → 𝒰
 ```
 
 is a family of elements
 
 ```text
-  (i : I) → B (h i) (a i).
+  (i : I) → C (a i) (b i).
 ```
 
 Note that this is the type of double lifts in the sense that it simultaneously
-lifts `h` and `a` to the type family `B`.
+lifts `a` and `b` to the type family `C`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} {J : UU l2} {h : I → J}
-  (A : J → UU l3) (a : lift-family-of-elements h A) (B : (j : J) → A j → UU l4)
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : UU l2} {a : I → A}
+  {B : A → UU l3} (b : lift-family-of-elements a B) (C : (x : A) → B x → UU l4)
   where
 
   double-lift-family-of-elements : UU (l1 ⊔ l4)
   double-lift-family-of-elements =
-    dependent-lift-family-of-elements a (λ i → B (h i))
+    dependent-lift-family-of-elements b (λ i → C (a i))
 ```

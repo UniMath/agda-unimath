@@ -54,7 +54,6 @@ open import foundation-core.truncated-types public
 open import foundation-core.truncation-levels public
 open import foundation-core.type-theoretic-principle-of-choice public
 open import foundation-core.univalence public
-open import foundation-core.universal-property-family-of-fibers-of-maps public
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.universal-property-truncation public
 open import foundation-core.whiskering-homotopies public
