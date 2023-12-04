@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
