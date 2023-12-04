@@ -189,7 +189,7 @@ module _
       ( up-sequential-colimit Y)
 ```
 
-### 3-for-2 property of sequential colimits
+### The 3-for-2 property of the universal property of sequential colimits
 
 Given two cocones under a sequential diagram, one of which has the universal
 property of sequential colimits, and a map between their vertices, we prove that
