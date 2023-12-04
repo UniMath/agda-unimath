@@ -23,6 +23,19 @@ open import foundation.negated-equality
 
 </details>
 
+## Idea
+
+The {{#concept "multiplication" Disambiguation="natural numbers"}} operation on
+the [natural numbers](elementary-number-theory.natural-numbers.md) is defined by
+[iteratively](foundation.iterating-functions.md) applying
+[addition](foundation.elementary-number-theory.addition-natural-numbers.md) of a
+number to itself. More preciesly the number `m * n` is defined by adding the
+number `n` to itself `m` times:
+
+```text
+  m * n = n + ⋯ + n    (n added to itself m times).
+```
+
 ## Definition
 
 ### Multiplication
@@ -239,3 +252,8 @@ neq-mul-ℕ m n p =
       ( ( right-successor-law-mul-ℕ (succ-ℕ m) (succ-ℕ n)) ∙
         ( ap ((succ-ℕ m) +ℕ_) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
 ```
+
+## See also
+
+- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
+- [Cubes of natural numbers](elementary-number-theory.cubes-natural-numbers.md)

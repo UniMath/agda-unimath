@@ -52,3 +52,7 @@ is-cube-ℕ = fiber cube-ℕ
 cubic-root-ℕ : (n : ℕ) → is-cube-ℕ n → ℕ
 cubic-root-ℕ n = pr1
 ```
+
+## See also
+
+- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)

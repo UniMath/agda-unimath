@@ -172,3 +172,7 @@ is-decidable-is-square-ℕ n =
     ( λ x → has-decidable-equality-ℕ n (square-ℕ x))
     ( is-decidable-big-root n)
 ```
+
+## See also
+
+- [Cubes of natural numbers](elementary-number-theory.cubes-natural-numbers.md)
