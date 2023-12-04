@@ -14,7 +14,8 @@ open import foundation.homotopies
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.equivalences
+open import foundation.equivalences
+open import foundation-core.propositions
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -129,8 +130,8 @@ module _
     (standard-sequential-colimit A → X) ≃ (cocone-sequential-diagram A X)
   pr1 equiv-up-standard-sequential-colimit =
     cocone-map-sequential-diagram A (cocone-standard-sequential-colimit A)
-  pr2 (equiv-up-standard-sequential-colimit) =
-    up-standard-sequential-colimit _
+  pr2 (equiv-up-standard-sequential-colimit {X = X}) =
+    up-standard-sequential-colimit X
 
   cogap-standard-sequential-colimit :
     { l : Level} {X : UU l} →
@@ -159,6 +160,33 @@ module _
     ( x : standard-sequential-colimit A) → P x
   dependent-cogap-standard-sequential-colimit =
     map-inv-equiv equiv-dup-standard-sequential-colimit
+```
+
+### The small predicate of being a sequential colimit cocone
+
+The [proposition](foundation-core.propositions.md) `is-sequential-colimit` is
+the assertion that the cogap map is an
+[equivalence](foundation-core.equivalences.md). Note that this proposition is
+[small](foundation-core.small-types.md), whereas
+[the universal property](foundation-core.universal-property-sequential-colimits.md)
+is a large proposition.
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
+  (c : cocone-sequential-diagram A X)
+  where
+
+  is-sequential-colimit : UU (l1 ⊔ l2)
+  is-sequential-colimit = is-equiv (cogap-standard-sequential-colimit c)
+
+  is-prop-is-sequential-colimit : is-prop is-sequential-colimit
+  is-prop-is-sequential-colimit =
+    is-property-is-equiv (cogap-standard-sequential-colimit c)
+
+  is-sequential-colimit-Prop : Prop (l1 ⊔ l2)
+  pr1 is-sequential-colimit-Prop = is-sequential-colimit
+  pr2 is-sequential-colimit-Prop = is-prop-is-sequential-colimit
 ```
 
 ### Homotopies between maps from the standard sequential colimit
@@ -211,4 +239,27 @@ module _
   htpy-htpy-out-of-standard-sequential-colimit : f ~ g
   htpy-htpy-out-of-standard-sequential-colimit =
     map-equiv (equiv-htpy-htpy-out-of-standard-sequential-colimit A f g) H
+```
+
+### Thing thang
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
+  (c : cocone-sequential-diagram A X)
+  where
+
+  universal-property-is-sequential-colimit :
+    is-sequential-colimit c → universal-property-sequential-colimit A c
+  universal-property-is-sequential-colimit =
+    universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit
+      ( A)
+      ( cocone-standard-sequential-colimit A)
+      ( c)
+      ( cogap-standard-sequential-colimit c)
+      ( htpy-cocone-universal-property-sequential-colimit A
+        ( cocone-standard-sequential-colimit A)
+        ( up-standard-sequential-colimit)
+        ( c))
+      ( up-standard-sequential-colimit)
 ```

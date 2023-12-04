@@ -248,11 +248,11 @@ module _
             ( up-sequential-colimit Z)
             ( up-sequential-colimit' Z))
 
-    universal-property-sequential-colimit-is-equiv-universal-property-sequential-colomit :
+    universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit :
       universal-property-sequential-colimit A c →
       is-equiv h →
       universal-property-sequential-colimit A c'
-    universal-property-sequential-colimit-is-equiv-universal-property-sequential-colomit
+    universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit
       ( up-sequential-colimit)
       ( is-equiv-h)
       ( Z) =
