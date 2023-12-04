@@ -99,6 +99,7 @@ open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
+open import foundation.diagonals-of-morphisms-arrows public
 open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
@@ -231,6 +232,7 @@ open import foundation.powersets public
 open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
 open import foundation.precomposition-functions-into-subuniverses public
+open import foundation.precomposition-type-families public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
@@ -348,8 +350,8 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-equivalences public
+open import foundation.universal-property-family-of-fibers-of-maps public
 open import foundation.universal-property-fiber-products public
-open import foundation.universal-property-fibers-of-maps public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public
 open import foundation.universal-property-image public

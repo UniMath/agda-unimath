@@ -9,12 +9,12 @@ module foundation.identity-systems where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.families-of-equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.identity-types
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families

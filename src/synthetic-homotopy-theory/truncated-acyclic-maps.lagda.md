@@ -29,6 +29,7 @@ open import foundation.propositions
 open import foundation.truncated-types
 open import foundation.truncation-equivalences
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
@@ -181,9 +182,9 @@ module _
 
   is-equiv-const-Id-is-acyclic-Truncated-Type :
     is-truncated-acyclic k A →
-    {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
+    {l' : Level} (X : Truncated-Type l' k) (x y : type-Truncated-Type X) →
     is-equiv (const A (x ＝ y))
-  is-equiv-const-Id-is-acyclic-Truncated-Type ac {X = X} x y =
+  is-equiv-const-Id-is-acyclic-Truncated-Type ac X x y =
     is-equiv-htpy
       ( htpy-eq ∘ ap (const A (type-Truncated-Type X)) {x} {y})
       ( htpy-ap-diagonal-htpy-eq-diagonal-Id A x y)
@@ -196,7 +197,7 @@ module _
           ( const A (type-Truncated-Type X) y)))
 
   is-truncated-acyclic-is-equiv-const-Id-Truncated-Type :
-    ( {l' : Level} {X : Truncated-Type l' k} (x y : type-Truncated-Type X) →
+    ( {l' : Level} (X : Truncated-Type l' k) (x y : type-Truncated-Type X) →
       is-equiv (const A (x ＝ y))) →
     is-truncated-acyclic k A
   is-truncated-acyclic-is-equiv-const-Id-Truncated-Type h =
@@ -212,7 +213,7 @@ module _
             ( is-equiv-htpy
               ( const A (x ＝ y))
               ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
-              ( h {X = X} x y))))
+              ( h X x y))))
 ```
 
 ### A map is `k`-acyclic if and only if it is an [dependent `k`-epimorphism](foundation.dependent-epimorphisms-with-respect-to-truncated-types.md)
@@ -312,10 +313,55 @@ module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-truncated-succ-acyclic-map-is-connected-map :
+  is-truncated-acyclic-map-succ-is-connected-map :
     is-connected-map k f → is-truncated-acyclic-map (succ-𝕋 k) f
-  is-truncated-succ-acyclic-map-is-connected-map c b =
-    is-truncated-succ-acyclic-is-connected (c b)
+  is-truncated-acyclic-map-succ-is-connected-map c b =
+    is-truncated-acyclic-succ-is-connected (c b)
+```
+
+In particular, the unit of the `k`-truncation is `(k+1)`-acyclic
+
+```agda
+is-truncated-acyclic-map-succ-unit-trunc :
+  {l : Level} {k : 𝕋} (A : UU l) →
+  is-truncated-acyclic-map (succ-𝕋 k) (unit-trunc {A = A})
+is-truncated-acyclic-map-succ-unit-trunc {k = k} A =
+  is-truncated-acyclic-map-succ-is-connected-map
+    ( unit-trunc)
+    ( is-connected-map-unit-trunc k)
+```
+
+### A type is `(k+1)`-acyclic if and only if its `k`-truncation is
+
+```agda
+module _
+  {l : Level} {k : 𝕋} (A : UU l)
+  where
+
+  is-truncated-succ-acyclic-is-truncated-succ-acyclic-type-trunc :
+    is-truncated-acyclic (succ-𝕋 k) (type-trunc k A) →
+    is-truncated-acyclic (succ-𝕋 k) A
+  is-truncated-succ-acyclic-is-truncated-succ-acyclic-type-trunc ac =
+    is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
+      ( is-truncated-acyclic-map-comp
+        ( terminal-map)
+        ( unit-trunc)
+        ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic
+          ( type-trunc k A)
+          ( ac))
+        ( is-truncated-acyclic-map-succ-unit-trunc A))
+
+  is-truncated-succ-acyclic-type-trunc-is-truncated-succ-acyclic :
+    is-truncated-acyclic (succ-𝕋 k) A →
+    is-truncated-acyclic (succ-𝕋 k) (type-trunc k A)
+  is-truncated-succ-acyclic-type-trunc-is-truncated-succ-acyclic ac =
+    is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
+      ( type-trunc k A)
+      ( is-truncated-acyclic-map-left-factor
+        ( terminal-map)
+        ( unit-trunc)
+        ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac)
+        ( is-truncated-acyclic-map-succ-unit-trunc A))
 ```
 
 ### Every `k`-equivalence is `k`-acyclic

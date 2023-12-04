@@ -75,7 +75,7 @@ postulate
   defineFun : Name → list Clause → TC unit
   getType : Name → TC Term
   getDefinition : Name → TC Definition
-  blockOnMeta : ∀ {a} {A : UU a} → Meta → TC A
+  blockTC : ∀ {a} {A : UU a} → Blocker → TC A
   commitTC : TC unit
   isMacro : Name → TC bool
 
@@ -152,18 +152,19 @@ postulate
 {-# BUILTIN AGDATCMDEFINEFUN defineFun #-}
 {-# BUILTIN AGDATCMGETTYPE getType #-}
 {-# BUILTIN AGDATCMGETDEFINITION getDefinition #-}
+{-# BUILTIN AGDATCMBLOCK blockTC #-}
 {-# BUILTIN AGDATCMCOMMIT commitTC #-}
 {-# BUILTIN AGDATCMISMACRO isMacro #-}
 {-# BUILTIN AGDATCMWITHNORMALISATION withNormalisation #-}
 {-# BUILTIN AGDATCMFORMATERRORPARTS formatErrorParts #-}
 {-# BUILTIN AGDATCMDEBUGPRINT debugPrint #-}
--- {-# BUILTIN AGDATCMWITHRECONSTRUCTED withReconstructed #-}
--- {-# BUILTIN AGDATCMWITHEXPANDLAST withExpandLast #-}
--- {-# BUILTIN AGDATCMWITHREDUCEDEFS withReduceDefs #-}
--- {-# BUILTIN AGDATCMASKNORMALISATION askNormalisation #-}
--- {-# BUILTIN AGDATCMASKRECONSTRUCTED askReconstructed #-}
--- {-# BUILTIN AGDATCMASKEXPANDLAST askExpandLast #-}
--- {-# BUILTIN AGDATCMASKREDUCEDEFS askReduceDefs #-}
+{-# BUILTIN AGDATCMWITHRECONSTRUCTED withReconstructed #-}
+{-# BUILTIN AGDATCMWITHEXPANDLAST withExpandLast #-}
+{-# BUILTIN AGDATCMWITHREDUCEDEFS withReduceDefs #-}
+{-# BUILTIN AGDATCMASKNORMALISATION askNormalisation #-}
+{-# BUILTIN AGDATCMASKRECONSTRUCTED askReconstructed #-}
+{-# BUILTIN AGDATCMASKEXPANDLAST askExpandLast #-}
+{-# BUILTIN AGDATCMASKREDUCEDEFS askReduceDefs #-}
 {-# BUILTIN AGDATCMNOCONSTRAINTS noConstraints #-}
 {-# BUILTIN AGDATCMRUNSPECULATIVE runSpeculative #-}
 {-# BUILTIN AGDATCMGETINSTANCES getInstances #-}

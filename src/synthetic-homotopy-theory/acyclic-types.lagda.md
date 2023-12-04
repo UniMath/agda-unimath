@@ -11,6 +11,7 @@ open import foundation.contractible-types
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.retracts-of-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.functoriality-suspensions
@@ -65,6 +66,16 @@ module _
   is-acyclic-retract-of : A retract-of B → is-acyclic B → is-acyclic A
   is-acyclic-retract-of R ac =
     is-contr-retract-of (suspension B) (retract-of-suspension-retract-of R) ac
+```
+
+### Contractible types are acyclic
+
+```agda
+is-acyclic-is-contr : {l : Level} (A : UU l) → is-contr A → is-acyclic A
+is-acyclic-is-contr A = is-contr-suspension-is-contr
+
+is-acyclic-unit : is-acyclic unit
+is-acyclic-unit = is-acyclic-is-contr unit is-contr-unit
 ```
 
 ## See also

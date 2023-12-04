@@ -22,6 +22,7 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -392,7 +393,7 @@ module _
       ( λ b →
         function-dependent-universal-property-trunc
           ( Id-Truncated-Type' (trunc k (fiber f b)) _))
-      ( inv-map-reduce-Π-fiber f
+      ( extend-lift-family-of-elements-fiber f
         ( λ b u → _ ＝ unit-trunc u)
         ( compute-center-is-connected-map-dependent-universal-property-connected-map))
 
