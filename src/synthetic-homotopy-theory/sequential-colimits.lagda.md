@@ -168,7 +168,7 @@ The [proposition](foundation-core.propositions.md) `is-sequential-colimit` is
 the assertion that the cogap map is an
 [equivalence](foundation-core.equivalences.md). Note that this proposition is
 [small](foundation-core.small-types.md), whereas
-[the universal property](foundation-core.universal-property-sequential-colimits.md)
+[the universal property](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
 is a large proposition.
 
 ```agda
