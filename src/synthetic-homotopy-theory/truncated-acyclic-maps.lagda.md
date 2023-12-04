@@ -351,10 +351,10 @@ module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
 
-  is-truncated-succ-acyclic-is-truncated-succ-acyclic-type-trunc :
+  is-truncated-acyclic-succ-is-truncated-acyclic-succ-type-trunc :
     is-truncated-acyclic (succ-𝕋 k) (type-trunc k A) →
     is-truncated-acyclic (succ-𝕋 k) A
-  is-truncated-succ-acyclic-is-truncated-succ-acyclic-type-trunc ac =
+  is-truncated-acyclic-succ-is-truncated-acyclic-succ-type-trunc ac =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
       ( is-truncated-acyclic-map-comp
         ( terminal-map)
@@ -364,10 +364,10 @@ module _
           ( ac))
         ( is-truncated-acyclic-map-succ-unit-trunc A))
 
-  is-truncated-succ-acyclic-type-trunc-is-truncated-succ-acyclic :
+  is-truncated-acyclic-succ-type-trunc-is-truncated-acyclic-succ :
     is-truncated-acyclic (succ-𝕋 k) A →
     is-truncated-acyclic (succ-𝕋 k) (type-trunc k A)
-  is-truncated-succ-acyclic-type-trunc-is-truncated-succ-acyclic ac =
+  is-truncated-acyclic-succ-type-trunc-is-truncated-acyclic-succ ac =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
       ( type-trunc k A)
       ( is-truncated-acyclic-map-left-factor

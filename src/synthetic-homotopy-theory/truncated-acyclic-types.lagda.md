@@ -110,6 +110,19 @@ is-truncated-acyclic-unit : {k : 𝕋} → is-truncated-acyclic k unit
 is-truncated-acyclic-unit = is-truncated-acyclic-is-contr unit is-contr-unit
 ```
 
+### Every (k+1)-acyclic type is k-acyclic
+
+```agda
+module _
+  {l : Level} {k : 𝕋} {A : UU l}
+  where
+
+  is-truncated-acyclic-is-truncated-acyclic-succ :
+    is-truncated-acyclic (succ-𝕋 k) A → is-truncated-acyclic k A
+  is-truncated-acyclic-is-truncated-acyclic-succ =
+    is-connected-is-connected-succ-𝕋 k
+```
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
