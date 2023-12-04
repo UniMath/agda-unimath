@@ -14,9 +14,6 @@ open import foundation.commuting-prisms-of-maps
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.universe-levels
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
