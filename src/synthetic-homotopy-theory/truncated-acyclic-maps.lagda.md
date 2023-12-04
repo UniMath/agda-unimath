@@ -393,7 +393,7 @@ module _
           ( is-equiv-precomp-is-truncation-equivalence k f e C))
 ```
 
-### `k`acyclic maps are closed under pullbacks
+### `k`-acyclic maps are closed under pullbacks
 
 ```agda
 module _
@@ -507,7 +507,6 @@ We consider the pushout squares
    S -------> B -------> C
    |          |          |
  f |          | j        | inr
-   |          |          |
    v       ⌜  v       ⌜  v
    A -------> C -------> ∙
         i          inl

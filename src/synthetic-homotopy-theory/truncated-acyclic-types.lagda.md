@@ -110,7 +110,7 @@ is-truncated-acyclic-unit : {k : 𝕋} → is-truncated-acyclic k unit
 is-truncated-acyclic-unit = is-truncated-acyclic-is-contr unit is-contr-unit
 ```
 
-### Every (k+1)-acyclic type is k-acyclic
+### Every `(k+1)`-acyclic type is `k`-acyclic
 
 ```agda
 module _
