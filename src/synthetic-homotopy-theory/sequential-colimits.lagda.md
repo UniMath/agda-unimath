@@ -264,7 +264,8 @@ module _
       ( up-standard-sequential-colimit)
 
   dependent-universal-property-is-sequential-colimit :
-    is-sequential-colimit c → dependent-universal-property-sequential-colimit A c
+    is-sequential-colimit c →
+    dependent-universal-property-sequential-colimit A c
   dependent-universal-property-is-sequential-colimit =
     dependent-universal-property-sequential-colimit-is-equiv-dependent-universal-property-sequential-colimit
       ( A)
@@ -292,7 +293,8 @@ module _
       ( up-standard-sequential-colimit)
 
   is-sequential-colimit-dependent-universal-property :
-    dependent-universal-property-sequential-colimit A c → is-sequential-colimit c
+    dependent-universal-property-sequential-colimit A c →
+    is-sequential-colimit c
   is-sequential-colimit-dependent-universal-property =
     is-equiv-dependent-universal-property-sequential-colimit-dependent-universal-property-sequential-colimit
       ( A)
