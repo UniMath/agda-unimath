@@ -9,9 +9,6 @@ module synthetic-homotopy-theory.sequential-colimits where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.homotopies
-open import foundation.universe-levels
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
