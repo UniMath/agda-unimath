@@ -1,4 +1,4 @@
-# The universal property of family of fibers of maps
+# The universal property of the family of fibers of maps
 
 ```agda
 module foundation.universal-property-family-of-fibers-of-maps where
@@ -79,7 +79,7 @@ described above, while the universal property of the fiber `fiber f b` of a map
 
 ## Definitions
 
-### The dependent universal property of the fibers of a map
+### The dependent universal property of the family of fibers of a map
 
 Consider a map `f : A → B` and a type family `F : B → 𝒰` equipped with a lift
 `δ : (a : A) → F (f a)` of `f` to `F`. Then there is an evaluation map
@@ -89,8 +89,8 @@ Consider a map `f : A → B` and a type family `F : B → 𝒰` equipped with a 
 ```
 
 for any binary type family `X : (b : B) → F b → 𝒰`. This evaluation map takes a
-binary family of elements of `X` to a double lift over `f` and `δ`. The
-dependent universal property of the family of fibers of `f` asserts that this
+binary family of elements of `X` to a [double lift](orthogonal-factorization-systems.double-lifts-families-of-elements.md) of `f` and `δ`. The
+{{#concept "dependent universal property of the family of fibers of a map"}} `f` asserts that this
 evaluation map is an equivalence.
 
 ```agda
@@ -105,17 +105,17 @@ module _
     is-equiv (ev-double-lift-family-of-elements {B = F} δ {X})
 ```
 
-### The universal property of the fibers of a map
+### The universal property of the family of fibers of a map
 
 Consider a map `f : A → B` and a type family `F : B → 𝒰` equipped with a lift
-`δ : (a : A) → F (f f)` of `f` to `F`. Then there is an evaluation map
+`δ : (a : A) → F (f a)` of `f` to `F`. Then there is an evaluation map
 
 ```text
   ((b : B) → F b → X b) → ((a : A) → X (f a))
 ```
 
 for any binary type family `X : B → 𝒰`. This evaluation map takes a binary
-family of elements of `X` to a lift of `f`. The universal property of the family
+family of elements of `X` to a double lift of `f` and `δ`. The universal property of the family
 of fibers of `f` asserts that this evaluation map is an equivalence.
 
 ```agda
@@ -221,7 +221,7 @@ module _
     dependent-universal-property-family-of-fibers-fiber C
 ```
 
-### The family of fibers of a map satisfies the dependent universal property of the family of fibers of a map
+### The family of fibers of a map satisfies the universal property of the family of fibers of a map
 
 ```agda
 module _
@@ -300,7 +300,7 @@ module _
       extension-universal-property-family-of-fibers
 ```
 
-### Fibers are uniquely unique
+### The family of fibers of a map is uniquely unique
 
 ```agda
 module _
