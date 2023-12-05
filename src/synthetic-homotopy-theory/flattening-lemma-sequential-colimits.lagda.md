@@ -21,9 +21,10 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers
+open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-coequalizers
 open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ```
@@ -126,57 +127,63 @@ module _
       universal-property-sequential-colimit-universal-property-coequalizer
         ( sequential-diagram-flattening-lemma c P)
         ( cocone-sequential-diagram-flattening-lemma c P)
-        ( universal-property-coequalizer-top-universal-property-coequalizer-bottom-is-equiv
-          ( bottom-map-cofork-cocone-sequential-diagram
-            ( sequential-diagram-flattening-lemma c P))
-          ( top-map-cofork-cocone-sequential-diagram
-            ( sequential-diagram-flattening-lemma c P))
-          ( cofork-cocone-sequential-diagram
-            ( sequential-diagram-flattening-lemma c P)
-            ( cocone-sequential-diagram-flattening-lemma c P))
-          ( bottom-map-cofork-flattening-lemma-coequalizer
-            ( bottom-map-cofork-cocone-sequential-diagram A)
-            ( top-map-cofork-cocone-sequential-diagram A)
-            ( P)
-            ( cofork-cocone-sequential-diagram A c))
-          ( top-map-cofork-flattening-lemma-coequalizer
-            ( bottom-map-cofork-cocone-sequential-diagram A)
-            ( top-map-cofork-cocone-sequential-diagram A)
-            ( P)
-            ( cofork-cocone-sequential-diagram A c))
-          ( cofork-flattening-lemma-coequalizer
-            ( bottom-map-cofork-cocone-sequential-diagram A)
-            ( top-map-cofork-cocone-sequential-diagram A)
-            ( P)
-            ( cofork-cocone-sequential-diagram A c))
-          ( map-inv-associative-Σ ℕ
-            ( family-sequential-diagram A)
-            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
-          ( map-inv-associative-Σ ℕ
-            ( family-sequential-diagram A)
-            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
-          ( id)
-          ( refl-htpy)
-          ( refl-htpy)
-          ( refl-htpy)
-          ( λ (n , a , p) →
-            ap-id _ ∙ inv right-unit)
-          ( is-equiv-map-equiv
-            ( inv-associative-Σ ℕ
+        ( universal-property-coequalizer-top-universal-property-coequalizer-bottom-hom-arrow-is-equiv
+            ( map-inv-associative-Σ ℕ
               ( family-sequential-diagram A)
-              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
-          ( is-equiv-map-equiv
-            ( inv-associative-Σ ℕ
+              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+            ( map-inv-associative-Σ ℕ
               ( family-sequential-diagram A)
-              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
-          ( is-equiv-id)
-          ( flattening-lemma-coequalizer
-            ( bottom-map-cofork-cocone-sequential-diagram A)
-            ( top-map-cofork-cocone-sequential-diagram A)
-            ( P)
-            ( cofork-cocone-sequential-diagram A c)
-            ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
-              ( A)
-              ( c)
-              ( dup-c))))
+              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+            ( id)
+            ( ( bottom-map-cofork-cocone-sequential-diagram
+                ( sequential-diagram-flattening-lemma c P)) ,
+              ( bottom-map-cofork-flattening-lemma-coequalizer
+                ( bottom-map-cofork-cocone-sequential-diagram A)
+                ( top-map-cofork-cocone-sequential-diagram A)
+                ( P)
+                ( cofork-cocone-sequential-diagram A c)) ,
+              ( refl-htpy))
+            ( ( top-map-cofork-cocone-sequential-diagram
+                ( sequential-diagram-flattening-lemma c P)) ,
+              ( top-map-cofork-flattening-lemma-coequalizer
+                ( bottom-map-cofork-cocone-sequential-diagram A)
+                ( top-map-cofork-cocone-sequential-diagram A)
+                ( P)
+                ( cofork-cocone-sequential-diagram A c)) ,
+              ( refl-htpy))
+            ( ( map-cofork _ _
+                ( cofork-cocone-sequential-diagram
+                  ( sequential-diagram-flattening-lemma c P)
+                  ( cocone-sequential-diagram-flattening-lemma c P))) ,
+              ( map-cofork _ _
+                ( cofork-flattening-lemma-coequalizer _ _ P
+                  ( cofork-cocone-sequential-diagram A c))) ,
+              ( refl-htpy))
+            ( ind-Σ
+              ( coherence-triangle-cocone-sequential-diagram
+                ( sequential-diagram-flattening-lemma c P)
+                ( cocone-sequential-diagram-flattening-lemma c P)) ,
+              ( coherence-cofork _ _
+                ( cofork-flattening-lemma-coequalizer _ _ P
+                  ( cofork-cocone-sequential-diagram A c))) ,
+              ( λ (n , a , p) →
+                ap-id _ ∙ inv right-unit))
+            ( is-equiv-map-equiv
+              ( inv-associative-Σ ℕ
+                ( family-sequential-diagram A)
+                ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
+            ( is-equiv-map-equiv
+              ( inv-associative-Σ ℕ
+                ( family-sequential-diagram A)
+                ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
+            ( is-equiv-id)
+            ( flattening-lemma-coequalizer
+              ( bottom-map-cofork-cocone-sequential-diagram A)
+              ( top-map-cofork-cocone-sequential-diagram A)
+              ( P)
+              ( cofork-cocone-sequential-diagram A c)
+              ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
+                ( A)
+                ( c)
+                ( dup-c))))
 ```
