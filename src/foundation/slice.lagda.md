@@ -10,8 +10,6 @@ module foundation.slice where
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.families-of-equivalences
-open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
@@ -22,7 +20,9 @@ open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types

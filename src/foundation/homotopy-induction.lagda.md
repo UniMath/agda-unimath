@@ -8,20 +8,21 @@ module foundation.homotopy-induction where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-systems
-open import foundation.singleton-induction
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.universal-property-identity-systems
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.singleton-induction
 open import foundation-core.torsorial-type-families
 ```
 
@@ -163,36 +164,10 @@ module _
 
   is-equiv-ev-refl-htpy : is-equiv (ev-refl-htpy C)
   is-equiv-ev-refl-htpy =
-    is-equiv-left-factor
-      ( ev-refl-identity-system refl-htpy)
-      ( ev-pair)
-      ( is-equiv-is-invertible
-        ( ind-singleton
-          ( f , refl-htpy)
-          ( is-torsorial-htpy f)
-          ( λ (u , v) → C u v))
-        ( compute-ind-singleton
-          ( f , refl-htpy)
-          ( is-torsorial-htpy f)
-          ( λ (u , v) → C u v))
-        ( λ g →
-          eq-htpy
-            ( ind-singleton
-              ( f , refl-htpy)
-              ( is-torsorial-htpy f)
-              ( λ x →
-                ( ind-singleton
-                  ( f , refl-htpy)
-                  ( is-torsorial-htpy f)
-                  ( λ (u , v) → C u v)
-                  ( g (f , refl-htpy)) x) ＝
-                ( g x))
-              ( compute-ind-singleton
-                ( f , refl-htpy)
-                ( is-torsorial-htpy f)
-                ( λ (u , v) → C u v)
-                ( g (f , refl-htpy))))))
-      ( is-equiv-ev-pair)
+    dependent-universal-property-identity-system-is-torsorial
+      ( refl-htpy)
+      (is-torsorial-htpy f)
+      ( C)
 
   is-contr-map-ev-refl-htpy : is-contr-map (ev-refl-htpy C)
   is-contr-map-ev-refl-htpy = is-contr-map-is-equiv is-equiv-ev-refl-htpy

@@ -13,18 +13,17 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalence-extensionality
-open import foundation.families-of-equivalences
-open import foundation.function-extensionality
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

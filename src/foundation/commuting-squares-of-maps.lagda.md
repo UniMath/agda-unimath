@@ -14,7 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation-core.function-extensionality
 open import foundation.path-algebra
 open import foundation.precomposition-functions
 open import foundation.universe-levels
