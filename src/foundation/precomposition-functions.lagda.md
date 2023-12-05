@@ -11,10 +11,8 @@ open import foundation-core.precomposition-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.function-extensionality
+open import foundation-core.function-extensionality
 open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions-into-subuniverses
 open import foundation.sections
 open import foundation.universe-levels
 

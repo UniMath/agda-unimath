@@ -15,7 +15,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-products-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations
 open import foundation.raising-universe-levels
@@ -31,6 +30,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

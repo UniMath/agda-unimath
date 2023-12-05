@@ -11,14 +11,12 @@ open import foundation-core.functoriality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
-open import foundation.contractible-maps
 open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.contractible-maps
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -29,8 +27,10 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.pullbacks
+open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 ```
 
 </details>

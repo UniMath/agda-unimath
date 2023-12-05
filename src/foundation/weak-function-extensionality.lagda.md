@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
@@ -20,6 +19,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions

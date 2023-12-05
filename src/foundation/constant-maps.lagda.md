@@ -13,7 +13,6 @@ open import foundation.0-maps
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
-open import foundation.function-extensionality
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -23,6 +22,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
