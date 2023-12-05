@@ -51,6 +51,16 @@ module _
   map-sequential-diagram = pr2 A
 ```
 
+```agda
+module _
+  { l : Level} (X : UU l)
+  where
+
+  constant-sequential-diagram : sequential-diagram l
+  pr1 constant-sequential-diagram _ = X
+  pr2 constant-sequential-diagram _ x = x
+```
+
 ## Properties
 
 The [identity type](foundation.identity-types.md) of sequential diagrams is
