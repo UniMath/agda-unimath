@@ -6,5 +6,4 @@
 | Functoriality of fibers of maps                                          | [`foundation.functoriality-fibers-of-maps`](foundation.functoriality-fibers-of-maps.md)                               |
 | Fibers of pointed maps                                                   | [`structured-types.fibers-of-pointed-maps`](structured-types.fibers-of-pointed-maps.md)                               |
 | Fibers of maps of finite types                                           | [`univalent-combinatorics.fibers-of-maps`](univalent-combinatorics.fibers-of-maps.md)                                 |
-| The universal property of the family of fibers of maps (foundation-core) | [`foundation.universal-property-family-of-fibers-of-maps`](foundation.universal-property-family-of-fibers-of-maps.md) |
 | The universal property of the family of fibers of maps                   | [`foundation.universal-property-family-of-fibers-of-maps`](foundation.universal-property-family-of-fibers-of-maps.md) |
