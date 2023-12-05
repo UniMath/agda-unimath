@@ -377,7 +377,7 @@ module _
       htpy-preserves-comp-map-hom-standard-sequential-colimit
 ```
 
-### An equivalence of sequential diagrams induces an equivalence of cocones
+### An equivalence of sequential diagrams induces an equivalence of colimits
 
 Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
@@ -444,7 +444,7 @@ module _
     is-equiv-map-hom-standard-sequential-colimit
 ```
 
-### A retract of sequential diagrams induces a retract of cocones
+### A retract of sequential diagrams induces a retract of colimits
 
 Additionally, the underlying map of the retraction is definitionally equal to
 the map induced by the retraction of sequential diagrams.
