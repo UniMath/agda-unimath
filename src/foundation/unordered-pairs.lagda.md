@@ -21,6 +21,7 @@ open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-function-types
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
