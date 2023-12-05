@@ -72,7 +72,7 @@ module _
     comp-hom-sequential-diagram A B (constant-sequential-diagram X) c f
 ```
 
-### A morphism of sequential diagrams induces a map of sequential colimits
+### A morphism of sequential diagrams induces a map of standard sequential colimits
 
 The induced map
 
@@ -205,7 +205,7 @@ module _
       ( inv-htpy (coherence-htpy-cocone-map-hom-standard-sequential-colimit n))
 ```
 
-### Homotopies between morphisms of sequential diagrams induce homotopies of maps of sequential colimits
+### Homotopies between morphisms of sequential diagrams induce homotopies of maps of standard colimits
 
 ```agda
 module _
@@ -258,7 +258,7 @@ module _
       ( htpy-preserves-id-map-hom-standard-sequential-colimit)
 ```
 
-### Forming sequential colimits preserves composition of morphisms of sequential diagrams
+### Forming standard sequential colimits preserves composition of morphisms of sequential diagrams
 
 We have `(f ∘ g)∞ ~ (f∞ ∘ g∞) : A∞ → C∞`.
 
@@ -377,7 +377,7 @@ module _
       htpy-preserves-comp-map-hom-standard-sequential-colimit
 ```
 
-### An equivalence of sequential diagrams induces an equivalence of colimits
+### An equivalence of sequential diagrams induces an equivalence of standard sequential colimits
 
 Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
@@ -444,7 +444,7 @@ module _
     is-equiv-map-hom-standard-sequential-colimit
 ```
 
-### A retract of sequential diagrams induces a retract of colimits
+### A retract of sequential diagrams induces a retract of standard sequential colimits
 
 Additionally, the underlying map of the retraction is definitionally equal to
 the map induced by the retraction of sequential diagrams.
