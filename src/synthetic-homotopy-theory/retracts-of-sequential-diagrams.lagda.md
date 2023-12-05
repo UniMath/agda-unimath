@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 ## Idea
 
-A **retract of sequential diagrams** `A` of `B` is a
+A {{#concept "retract" Disambiguation="sequential diagram"}} of sequential diagrams `A` of `B` is a
 [morphism of sequential diagrams](synthetic-homotopy-theory.morphisms-sequential-diagrams.md)
 `B → A` that is a retraction.
 
