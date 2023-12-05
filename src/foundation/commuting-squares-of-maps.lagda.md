@@ -14,7 +14,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.equivalences
-open import foundation-core.function-extensionality
 open import foundation.path-algebra
 open import foundation.precomposition-functions
 open import foundation.universe-levels
@@ -22,6 +21,7 @@ open import foundation.whiskering-homotopies
 
 open import foundation-core.commuting-prisms-of-maps
 open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
