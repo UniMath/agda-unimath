@@ -19,6 +19,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 

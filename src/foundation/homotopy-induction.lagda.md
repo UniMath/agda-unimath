@@ -166,7 +166,7 @@ module _
   is-equiv-ev-refl-htpy =
     dependent-universal-property-identity-system-is-torsorial
       ( refl-htpy)
-      (is-torsorial-htpy f)
+      ( is-torsorial-htpy f)
       ( C)
 
   is-contr-map-ev-refl-htpy : is-contr-map (ev-refl-htpy C)

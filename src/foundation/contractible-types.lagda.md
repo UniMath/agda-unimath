@@ -165,6 +165,10 @@ module _
 ### The diagonal of contractible types
 
 ```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
   abstract
     is-equiv-self-diagonal-is-equiv-diagonal :
       ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) →
