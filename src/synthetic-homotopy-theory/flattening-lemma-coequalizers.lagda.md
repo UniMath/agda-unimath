@@ -31,7 +31,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The **flattening lemma** for
+The {{#concept "flattening lemma" Disambiguation="coequalizers"}} for
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) states that
 coequalizers commute with
 [dependent pair types](foundation.dependent-pair-types.md). More precisely,
