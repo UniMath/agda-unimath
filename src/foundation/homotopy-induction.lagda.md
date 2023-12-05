@@ -10,8 +10,8 @@ module foundation.homotopy-induction where
 open import foundation.dependent-pair-types
 open import foundation.identity-systems
 open import foundation.universal-property-dependent-pair-types
-open import foundation.universe-levels
 open import foundation.universal-property-identity-systems
+open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
