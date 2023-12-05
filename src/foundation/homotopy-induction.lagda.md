@@ -10,9 +10,15 @@ module foundation.homotopy-induction where
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-systems
+open import foundation.singleton-induction
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -28,13 +34,30 @@ The principle of **homotopy induction** asserts that homotopies form an
 
 ## Statement
 
-```agda
-ev-refl-htpy :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
-  ((g : (x : A) → B x) (H : f ~ g) → C g H) → C f refl-htpy
-ev-refl-htpy f C φ = φ f refl-htpy
+### Evaluation at the reflexivity homotopy
 
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {f : (x : A) → B x}
+  where
+
+  ev-refl-htpy :
+    (C : (g : (x : A) → B x) → f ~ g → UU l3) →
+    ((g : (x : A) → B x) (H : f ~ g) → C g H) → C f refl-htpy
+  ev-refl-htpy C φ = φ f refl-htpy
+
+  triangle-ev-refl-htpy :
+    (C : (Σ ((x : A) → B x) (f ~_)) → UU l3) →
+    coherence-triangle-maps
+      ( ev-point (f , refl-htpy))
+      ( ev-refl-htpy (λ g H → C (g , H)))
+      ( ev-pair)
+  triangle-ev-refl-htpy C F = refl
+```
+
+### The homotopy induction principle
+
+```agda
 induction-principle-homotopies :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) → UUω
@@ -128,6 +151,51 @@ module _
       (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
     compute-ind-htpy f C = pr2 (induction-principle-htpy f C)
+```
+
+### The evaluation map `ev-refl-htpy` is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {f : (x : A) → B x}
+  (C : (g : (x : A) → B x) → f ~ g → UU l3)
+  where
+
+  is-equiv-ev-refl-htpy : is-equiv (ev-refl-htpy C)
+  is-equiv-ev-refl-htpy =
+    is-equiv-left-factor
+      ( ev-refl-identity-system refl-htpy)
+      ( ev-pair)
+      ( is-equiv-is-invertible
+        ( ind-singleton
+          ( f , refl-htpy)
+          ( is-torsorial-htpy f)
+          ( λ (u , v) → C u v))
+        ( compute-ind-singleton
+          ( f , refl-htpy)
+          ( is-torsorial-htpy f)
+          ( λ (u , v) → C u v))
+        ( λ g →
+          eq-htpy
+            ( ind-singleton
+              ( f , refl-htpy)
+              ( is-torsorial-htpy f)
+              ( λ x →
+                ( ind-singleton
+                  ( f , refl-htpy)
+                  ( is-torsorial-htpy f)
+                  ( λ (u , v) → C u v)
+                  ( g (f , refl-htpy)) x) ＝
+                ( g x))
+              ( compute-ind-singleton
+                ( f , refl-htpy)
+                ( is-torsorial-htpy f)
+                ( λ (u , v) → C u v)
+                ( g (f , refl-htpy))))))
+      ( is-equiv-ev-pair)
+
+  is-contr-map-ev-refl-htpy : is-contr-map (ev-refl-htpy C)
+  is-contr-map-ev-refl-htpy = is-contr-map-is-equiv is-equiv-ev-refl-htpy
 ```
 
 ## See also
