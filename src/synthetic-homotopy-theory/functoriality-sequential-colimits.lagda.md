@@ -205,7 +205,7 @@ module _
       ( inv-htpy (coherence-htpy-cocone-map-hom-standard-sequential-colimit n))
 ```
 
-### Homotopies between morphisms of sequential diagrams induce homotopies of maps of standard colimits
+### Homotopies between morphisms of sequential diagrams induce homotopies of maps of standard sequential colimits
 
 ```agda
 module _
