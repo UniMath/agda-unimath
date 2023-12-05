@@ -89,9 +89,11 @@ Consider a map `f : A → B` and a type family `F : B → 𝒰` equipped with a 
 ```
 
 for any binary type family `X : (b : B) → F b → 𝒰`. This evaluation map takes a
-binary family of elements of `X` to a [double lift](orthogonal-factorization-systems.double-lifts-families-of-elements.md) of `f` and `δ`. The
-{{#concept "dependent universal property of the family of fibers of a map"}} `f` asserts that this
-evaluation map is an equivalence.
+binary family of elements of `X` to a
+[double lift](orthogonal-factorization-systems.double-lifts-families-of-elements.md)
+of `f` and `δ`. The
+{{#concept "dependent universal property of the family of fibers of a map"}} `f`
+asserts that this evaluation map is an equivalence.
 
 ```agda
 module _
@@ -115,8 +117,9 @@ Consider a map `f : A → B` and a type family `F : B → 𝒰` equipped with a 
 ```
 
 for any binary type family `X : B → 𝒰`. This evaluation map takes a binary
-family of elements of `X` to a double lift of `f` and `δ`. The universal property of the family
-of fibers of `f` asserts that this evaluation map is an equivalence.
+family of elements of `X` to a double lift of `f` and `δ`. The universal
+property of the family of fibers of `f` asserts that this evaluation map is an
+equivalence.
 
 ```agda
 module _
