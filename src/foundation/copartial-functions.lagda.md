@@ -21,7 +21,7 @@ type of [copartial elements](foundation.copartial-elements.md) of `B`. I.e., a
 copartial function is a map
 
 ```text
-  A → Σ (Q : Prop), A * Q
+  A → Σ (Q : Prop), B * Q
 ```
 
 where `- * Q` is the
