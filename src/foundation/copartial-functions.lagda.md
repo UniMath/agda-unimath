@@ -28,7 +28,7 @@ where `- * Q` is the
 [closed modality](orthogonal-factorization-systems.closed-modalities.md).
 
 A value of a copartial function `f` at `a : A` is said to be
-{{#concept "prohibited" Disambiguation="copartial function"}} if the copartial
+{{#concept "prohibited" Disambiguation="copartial function" Agda=is-prohibited-copartial-function}} if the copartial
 element `f a` of `B` is prohibited.
 
 **Note:** The topic of copartial functions is not known in the literature, and
