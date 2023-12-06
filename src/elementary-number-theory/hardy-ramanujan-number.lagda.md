@@ -20,11 +20,12 @@ open import foundation.unit-type
 
 ## Idea
 
-The {{#concept "Hardy-Ramanujan number"}} is the number `1729`. This number is
-the second [taxicab number](elementary-number-theory.taxicab-numbers.md), i.e.,
-it is the least natural number that can be written as a sum of cubes of positive
-natural numbers in exactly two distinct ways. Specifically, we have the
-identifications
+The
+{{#concept "Hardy-Ramanujan number" Agda=Hardy-Ramanujan-ℕ WD="1729" WDID=Q825176}}
+is the number `1729`. This number is the second
+[taxicab number](elementary-number-theory.taxicab-numbers.md), i.e., it is the
+least natural number that can be written as a sum of cubes of positive natural
+numbers in exactly two distinct ways. Specifically, we have the identifications
 
 ```text
   1³ + 12³ ＝ 1729    and    9³ + 10³ ＝ 1729.
@@ -66,3 +67,7 @@ pr1 (pr2 (pr2 second-sum-of-cubes-decomposition-Hardy-Ramanujan-ℕ)) =
 pr2 (pr2 (pr2 second-sum-of-cubes-decomposition-Hardy-Ramanujan-ℕ)) =
   refl
 ```
+
+## External links
+
+- [1729 (number)](<https://en.wikipedia.org/wiki/1729_(number)>) at Wikipedia

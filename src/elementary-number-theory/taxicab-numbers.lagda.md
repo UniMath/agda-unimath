@@ -26,7 +26,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The `n`-th {{#concept "taxicab number"}} `taxicab n` is the smallest
+The `n`-th
+{{#concept "taxicab number" Agda=is-taxicab-number-ℕ WD="taxicab number" WDID=Q1462591}}
+`taxicab n` is the smallest
 [natural number](elementary-number-theory.natural-numbers.md) `x` such that `x`
 is a [sum](elementary-number-theory.addition-natural-numbers.md) of two
 [cubes](elementary-number-theory.cubes-natural-numbers.md) in `n`
@@ -95,3 +97,8 @@ is-taxicab-number-ℕ n x =
 ## See also
 
 - [The Hardy-Ramanujan number](elementary-number-theory.hardy-ramanujan-number.md)
+
+## External links
+
+- [Taxicab numbers](https://en.wikipedia.org/wiki/Taxicab_number) at Wikipedia
+- [Taxicab nubmers](https://oeis.org/A011541) at the OEIS.
