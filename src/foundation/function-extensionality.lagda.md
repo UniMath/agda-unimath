@@ -29,7 +29,7 @@ open import foundation-core.precomposition-functions
 
 ## Idea
 
-The **function extensionality axiom** asserts that
+The {{#concept "function extensionality axiom"}} asserts that
 [identifications](foundation-core.identity-types.md) of (dependent) functions
 are [equivalently](foundation-core.equivalences.md) described as pointwise
 equalities between them. In other words, a function is completely determined by
