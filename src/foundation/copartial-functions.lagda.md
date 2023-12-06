@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "copartial function"}} from `A` to `B` is a map from `A` into the
+A {{#concept "copartial function" Agda=copartial-function}} from `A` to `B` is a map from `A` into the
 type of [copartial elements](foundation.copartial-elements.md) of `B`. I.e., a
 copartial function is a map
 
