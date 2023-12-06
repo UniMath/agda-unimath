@@ -10,7 +10,6 @@ open import foundation-core.commuting-triangles-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation-core.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -19,6 +18,7 @@ open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 ```
 

@@ -12,8 +12,8 @@ open import foundation-core.commuting-squares-of-maps public
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-triangles-of-maps
 open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-triangles-of-maps
 open import foundation.equivalences
 open import foundation.path-algebra
 open import foundation.precomposition-dependent-functions
@@ -22,7 +22,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import foundation-core.commuting-prisms-of-maps
-open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
