@@ -55,7 +55,7 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( htpy-eq)
         ( htpy-eq)
         ( precomp-Π f (eq-value g h))
-        ( coherence-square-ap-precomp-Π f g h)
+        ( coherence-square-htpy-eq-ap-precomp-Π f g h)
         ( funext g h)
         ( funext (g ∘ f) (h ∘ f))
         ( H g h))

@@ -180,7 +180,7 @@ Then the square
 [commutes](foundation-core.commuting-squares-of-maps.md).
 
 ```agda
-coherence-square-ap-precomp-Π :
+coherence-square-htpy-eq-ap-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
   (g h : (b : B) → C b) →
   coherence-square-maps
@@ -188,7 +188,7 @@ coherence-square-ap-precomp-Π :
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-coherence-square-ap-precomp-Π f g .g refl = refl
+coherence-square-htpy-eq-ap-precomp-Π f g .g refl = refl
 ```
 
 ### Naturality of `htpy-eq` for ordinary functions
@@ -208,7 +208,7 @@ Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
 commutes.
 
 ```agda
-square-htpy-eq :
+coherence-square-htpy-eq-ap-precomp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) →
   (g h : B → C) →
   coherence-square-maps
@@ -216,7 +216,7 @@ square-htpy-eq :
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-square-htpy-eq f g .g refl = refl
+coherence-square-htpy-eq-ap-precomp f g .g refl = refl
 ```
 
 ### Computing the action on paths of an evaluation map
@@ -226,6 +226,20 @@ ap-ev :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (a : A) → {f g : A → B} →
   (p : f ＝ g) → (ap (λ h → h a) p) ＝ htpy-eq p a
 ap-ev a refl = refl
+```
+
+### `htpy-eq` preserves inverses
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  compute-htpy-eq-inv : inv-htpy {f = f} {g} ∘ htpy-eq ~ htpy-eq ∘ inv
+  compute-htpy-eq-inv refl = refl
+
+  compute-inv-htpy-htpy-eq : htpy-eq ∘ inv ~ inv-htpy {f = f} {g} ∘ htpy-eq
+  compute-inv-htpy-htpy-eq = inv-htpy compute-htpy-eq-inv
 ```
 
 ### `htpy-eq` preserves concatenation of identifications
@@ -240,17 +254,6 @@ module _
   htpy-eq-concat refl refl = refl
 ```
 
-### `htpy-eq` preserves inverses
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  where
-
-  htpy-eq-inv : (p : f ＝ g) → inv-htpy (htpy-eq p) ＝ htpy-eq (inv p)
-  htpy-eq-inv refl = refl
-```
-
 ### `eq-htpy` preserves concatenation of homotopies
 
 ```agda
@@ -259,21 +262,14 @@ module _
   where
 
   eq-htpy-concat-htpy :
-    (H : f ~ g) (K : g ~ h) → eq-htpy (H ∙h K) ＝ ((eq-htpy H) ∙ (eq-htpy K))
+    (H : f ~ g) (K : g ~ h) → eq-htpy (H ∙h K) ＝ (eq-htpy H ∙ eq-htpy K)
   eq-htpy-concat-htpy H K =
-    equational-reasoning
-      eq-htpy (H ∙h K)
-      ＝ eq-htpy (htpy-eq (eq-htpy H) ∙h htpy-eq (eq-htpy K))
-        by
-        inv
-          ( ap eq-htpy
-            ( ap-binary _∙h_ (is-section-eq-htpy H) (is-section-eq-htpy K)))
-      ＝ eq-htpy (htpy-eq (eq-htpy H ∙ eq-htpy K))
-        by
-        ap eq-htpy (inv (htpy-eq-concat (eq-htpy H) (eq-htpy K)))
-      ＝ eq-htpy H ∙ eq-htpy K
-        by
-        is-retraction-eq-htpy (eq-htpy H ∙ eq-htpy K)
+      ( inv
+        ( ap
+          ( eq-htpy)
+          ( htpy-eq-concat (eq-htpy H) (eq-htpy K) ∙
+            ap-binary (_∙h_) (is-section-eq-htpy H) (is-section-eq-htpy K)))) ∙
+      ( is-retraction-eq-htpy (eq-htpy H ∙ eq-htpy K))
 ```
 
 ## See also
