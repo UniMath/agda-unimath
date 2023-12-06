@@ -139,7 +139,7 @@ module _
     coherence-htpy-hom-arrow f f (comp-hom-arrow f g f r i) id-hom-arrow
 ```
 
-### The binary relation `g f ↦ g retract-of-map f` asserting that `g` is a retract of the map `f`
+### The binary relation `f g ↦ f retract-of-map g` asserting that `f` is a retract of the map `g`
 
 ```agda
 module _
