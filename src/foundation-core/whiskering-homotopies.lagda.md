@@ -63,7 +63,7 @@ module _
     {f g : (x : A) → B x} → f ~ g → h ∘ f ~ h ∘ g
   htpy-left-whisk h H x = ap h (H x)
 
-  infixr 16 _·l_
+  infixr 17 _·l_
   _·l_ = htpy-left-whisk
 ```
 
@@ -80,7 +80,7 @@ module _
     (f : (x : A) → B x) → g ∘ f ~ h ∘ f
   htpy-right-whisk H f x = H (f x)
 
-  infixl 15 _·r_
+  infixl 16 _·r_
   _·r_ = htpy-right-whisk
 ```
 
