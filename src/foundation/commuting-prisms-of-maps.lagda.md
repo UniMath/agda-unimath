@@ -14,17 +14,17 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.path-algebra
-open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
+open import foundation-core.precomposition-functions
 ```
 
 </details>
@@ -237,13 +237,11 @@ module _
           ( ( distributive-left-whisk-concat-htpy i
               ( bottom ·r hA)
               ( (g' ·l left) ∙h (right ·r h))) ∙h
-            ( λ x →
-              ap --TODO simplify
-                ( (i ·l (bottom ·r hA)) x ∙_)
-                ( distributive-left-whisk-concat-htpy i
-                  ( g' ·l left)
-                  ( right ·r h)
-                  ( x))))))) ∙
+            ( ap-concat-htpy
+              ( i ·l (bottom ·r hA))
+              ( distributive-left-whisk-concat-htpy i
+                ( g' ·l left)
+                ( right ·r h))))))) ∙
     ( eq-htpy-concat-htpy
       ( (i ·l bottom) ·r hA)
       ( (i ·l g' ·l left) ∙h ((i ·l right) ·r h))) ∙
