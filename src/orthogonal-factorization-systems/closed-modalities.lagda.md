@@ -38,11 +38,11 @@ call these the **closed modalities**.
 
 ```agda
 operator-closed-modality :
-  (l : Level) {lQ : Level} (Q : Prop lQ) → operator-modality l (l ⊔ lQ)
-operator-closed-modality l Q A = A * type-Prop Q
+  {l lQ : Level} (Q : Prop lQ) → operator-modality l (l ⊔ lQ)
+operator-closed-modality Q A = A * type-Prop Q
 
 unit-closed-modality :
-  {l lQ : Level} (Q : Prop lQ) → unit-modality (operator-closed-modality l Q)
+  {l lQ : Level} (Q : Prop lQ) → unit-modality (operator-closed-modality {l} Q)
 unit-closed-modality Q = inl-join
 
 is-closed-modal :
@@ -63,7 +63,7 @@ module _
   is-reflective-subuniverse-closed-modality :
     is-reflective-subuniverse {l ⊔ lQ} (is-closed-modal Q)
   pr1 is-reflective-subuniverse-closed-modality =
-    operator-closed-modality (l ⊔ lQ) Q
+    operator-closed-modality {l ⊔ lQ} Q
   pr1 (pr2 is-reflective-subuniverse-closed-modality) =
     unit-closed-modality Q
   pr1 (pr2 (pr2 is-reflective-subuniverse-closed-modality)) A q =
