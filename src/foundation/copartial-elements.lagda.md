@@ -20,7 +20,7 @@ open import orthogonal-factorization-systems.closed-modalities
 
 ## Idea
 
-A {{#concept "copartial element"}} of a type `A` is an element of type
+A {{#concept "copartial element" Agda=copartial-element}} of a type `A` is an element of type
 
 ```text
   Σ (Q : Prop), A * Q
