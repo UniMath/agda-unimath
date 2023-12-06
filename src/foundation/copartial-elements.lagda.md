@@ -29,7 +29,7 @@ A {{#concept "copartial element"}} of a type `A` is an element of type
 where the type `P * A` is the
 [join](synthetic-homotopy-theory.joins-of-types.md) of `P` and `A`. We say that
 a copartial element `(P , u)` is
-{{#concept "prohibited" Disambiguation="copartial element"}} if the proposition
+{{#concept "prohibited" Disambiguation="copartial element" Agda=is-prohibited-copartial-element}} if the [proposition](foundation-core.propositions.md)
 `P` holds.
 
 In order to compare copartial elements with
