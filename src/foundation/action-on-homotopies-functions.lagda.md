@@ -28,7 +28,9 @@ Applying the
 [action on identifications](foundation.action-on-identifications-functions.md)
 to [identifications](foundation-core.identity-types.md) arising from the
 [function extensionality axiom](foundation.function-extensionality.md) gives us
-the **action on homotopies**. For arbitrary functions of type
+the
+{{#concept "action on homotopies" Disambiguation="of functions" Agda=action-htpy-function}}.
+For arbitrary functions of type
 
 ```text
   F : ((x : A) → B x) → C
@@ -74,7 +76,7 @@ module _
 
 ## Properties
 
-### The action on equivalences of a constant map is constant
+### The action on homotopies of a constant map is constant
 
 ```agda
 module _
@@ -89,7 +91,7 @@ module _
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
-### The action on equivalences of any map preserves composition of equivalences
+### The action on homotopies preserves concatenation
 
 ```agda
 module _
@@ -107,7 +109,7 @@ module _
     ap (ap F) (eq-htpy-concat-htpy H H') ∙ ap-concat F (eq-htpy H) (eq-htpy H')
 ```
 
-### The action on equivalences of any map preserves inverses
+### The action on homotopies preserves inverses
 
 ```agda
 compute-action-htpy-function-inv-htpy :

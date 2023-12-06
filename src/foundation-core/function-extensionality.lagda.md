@@ -26,11 +26,12 @@ open import foundation-core.precomposition-functions
 
 ## Idea
 
-The **function extensionality axiom** asserts that
-[identifications](foundation-core.identity-types.md) of (dependent) functions
-are [equivalently](foundation-core.equivalences.md) described as pointwise
-equalities between them. In other words, a function is completely determined by
-its values.
+The
+{{#concept "function extensionality axiom" Agda=function-extensionality Agda=funext}}
+asserts that [identifications](foundation-core.identity-types.md) of (dependent)
+functions are [equivalently](foundation-core.equivalences.md) described as
+pointwise equalities between them. In other words, a function is completely
+determined by its values.
 
 ## Definitions
 
@@ -264,11 +265,10 @@ module _
   eq-htpy-concat-htpy :
     (H : f ~ g) (K : g ~ h) → eq-htpy (H ∙h K) ＝ (eq-htpy H ∙ eq-htpy K)
   eq-htpy-concat-htpy H K =
-      ( inv
-        ( ap
-          ( eq-htpy)
-          ( htpy-eq-concat (eq-htpy H) (eq-htpy K) ∙
-            ap-binary (_∙h_) (is-section-eq-htpy H) (is-section-eq-htpy K)))) ∙
+      ( ap
+        ( eq-htpy)
+        ( inv (ap-binary _∙h_ (is-section-eq-htpy H) (is-section-eq-htpy K)) ∙
+          inv (htpy-eq-concat (eq-htpy H) (eq-htpy K)))) ∙
       ( is-retraction-eq-htpy (eq-htpy H ∙ eq-htpy K))
 ```
 
