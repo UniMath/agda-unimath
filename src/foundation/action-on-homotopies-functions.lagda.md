@@ -112,10 +112,16 @@ module _
 ### The action on homotopies preserves inverses
 
 ```agda
-compute-action-htpy-function-inv-htpy :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3}
-  (F : ((x : A) → B x) → C) {f g : (x : A) → B x} (H : f ~ g) →
-  action-htpy-function F (inv-htpy H) ＝ inv (action-htpy-function F H)
-compute-action-htpy-function-inv-htpy F H =
-  ap (ap F) (compute-inv-eq-htpy H) ∙ ap-inv F (eq-htpy H)
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3}
+  (F : ((x : A) → B x) → C)
+  {f g : (x : A) → B x}
+  where
+
+  compute-action-htpy-function-inv-htpy :
+    (H : f ~ g) →
+    action-htpy-function F (inv-htpy H) ＝ inv (action-htpy-function F H)
+  compute-action-htpy-function-inv-htpy H =
+    ap (ap F) (compute-inv-eq-htpy H) ∙ ap-inv F (eq-htpy H)
 ```

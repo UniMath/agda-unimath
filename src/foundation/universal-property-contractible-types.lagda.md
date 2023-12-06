@@ -1,4 +1,4 @@
-# Universal property contractible types
+# Universal property of contractible types
 
 ```agda
 module foundation.universal-property-contractible-types where
