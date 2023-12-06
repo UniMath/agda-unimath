@@ -19,7 +19,7 @@ open import foundation.universe-levels
 A [partial element](foundation.partial-elements.md) `a` of `A` is said to be
 {{#concept "total" Disambiguation="partial element"}} if it is defined. The type
 of total partial elements of `A` is
-[equivalent](foundation-core.equivalences.md) to the type `A`
+[equivalent](foundation-core.equivalences.md) to the type `A`.
 
 ## Definitions
 
