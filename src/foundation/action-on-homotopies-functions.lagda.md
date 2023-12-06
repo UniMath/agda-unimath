@@ -115,6 +115,5 @@ compute-action-htpy-function-inv-htpy :
   (F : ((x : A) → B x) → C) {f g : (x : A) → B x} (H : f ~ g) →
   action-htpy-function F (inv-htpy H) ＝ inv (action-htpy-function F H)
 compute-action-htpy-function-inv-htpy F H =
-  ( ap (ap F) (inv (eq-htpy-inv H))) ∙
-  ( ap-inv F (eq-htpy H))
+  ap (ap F) (compute-inv-eq-htpy H) ∙ ap-inv F (eq-htpy H)
 ```

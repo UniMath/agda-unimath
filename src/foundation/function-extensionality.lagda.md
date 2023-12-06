@@ -47,7 +47,7 @@ Then the square
        (g ＝ h) ---------------------------> (g ∘ f ＝ h ∘ f)
           ^                                         ^
   eq-htpy |                                         | eq-htpy
-          V                                         |
+          |                                         |
        (g ~ h) ----------------------------> (g ∘ f ~ h ∘ f)
                 precomp-Π f (eq-value g h)
 ```
@@ -55,8 +55,7 @@ Then the square
 [commutes](foundation-core.commuting-squares-of-maps.md).
 
 ```agda
--- TODO: rename
-coherence-square-ap-precomp-Π' :
+coherence-square-eq-htpy-ap-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
   (g h : (b : B) → C b) →
   coherence-square-maps
@@ -64,13 +63,13 @@ coherence-square-ap-precomp-Π' :
     ( eq-htpy)
     ( eq-htpy)
     ( ap (precomp-Π f C) {g} {h})
-coherence-square-ap-precomp-Π' f {C = C} g h =
+coherence-square-eq-htpy-ap-precomp-Π f {C = C} g h =
   coherence-square-inv-vertical
     ( ap (precomp-Π f C))
     ( equiv-funext)
     ( equiv-funext)
     ( precomp-Π f (eq-value g h))
-    ( coherence-square-ap-precomp-Π f g h)
+    ( coherence-square-htpy-eq-ap-precomp-Π f g h)
 ```
 
 ### Naturality of `eq-htpy` for ordinary functions
@@ -90,7 +89,7 @@ Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
 commutes.
 
 ```agda
-square-eq-htpy :
+coherence-square-eq-htpy-ap-precomp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : A → B) (g h : B → C) →
   coherence-square-maps
@@ -98,28 +97,35 @@ square-eq-htpy :
     ( eq-htpy)
     ( eq-htpy)
     ( ap (precomp f C))
-square-eq-htpy {C = C} f g h =
+coherence-square-eq-htpy-ap-precomp {C = C} f g h =
   coherence-square-inv-vertical
     ( ap (precomp f C))
     ( equiv-funext)
     ( equiv-funext)
     ( precomp-Π f (eq-value g h))
-    ( square-htpy-eq f g h)
+    ( coherence-square-htpy-eq-ap-precomp f g h)
 ```
 
 ### `eq-htpy` preserves inverses
 
 ```agda
-eq-htpy-inv :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
-  coherence-square-maps (inv-htpy {f = f} {g}) eq-htpy eq-htpy inv
-eq-htpy-inv =
-  coherence-square-inv-vertical
-    ( inv)
-    ( equiv-funext)
-    ( equiv-funext)
-    ( inv-htpy)
-    ( htpy-eq-inv)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  compute-eq-htpy-inv-htpy :
+    inv ∘ eq-htpy ~ eq-htpy ∘ inv-htpy {f = f} {g}
+  compute-eq-htpy-inv-htpy =
+    coherence-square-inv-vertical
+      ( inv)
+      ( equiv-funext)
+      ( equiv-funext)
+      ( inv-htpy)
+      ( compute-htpy-eq-inv)
+
+  compute-inv-eq-htpy :
+    eq-htpy ∘ inv-htpy {f = f} {g} ~ inv ∘ eq-htpy
+  compute-inv-eq-htpy = inv-htpy compute-eq-htpy-inv-htpy
 ```
 
 ## See also
