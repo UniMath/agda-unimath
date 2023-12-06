@@ -51,38 +51,51 @@ font. For more details, see [How to install](HOWTO-INSTALL.md).
 
 ## Definitions
 
-### Whiskering of homotopies
+### Left whiskering of homotopies
 
 ```agda
-htpy-left-whisk :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (h : B → C) {f g : A → B} → f ~ g → (h ∘ f) ~ (h ∘ g)
-htpy-left-whisk h H x = ap h (H x)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
 
-infixr 15 _·l_
-_·l_ = htpy-left-whisk
+  htpy-left-whisk :
+    (h : {x : A} → B x → C x)
+    {f g : (x : A) → B x} → f ~ g → h ∘ f ~ h ∘ g
+  htpy-left-whisk h H x = ap h (H x)
 
-htpy-right-whisk :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
-  {g h : (y : B) → C y} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
-htpy-right-whisk H f x = H (f x)
+  infixr 15 _·l_
+  _·l_ = htpy-left-whisk
+```
 
-infixl 15 _·r_
-_·r_ = htpy-right-whisk
+### Right whiskering of homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
+
+  htpy-right-whisk :
+    {g h : {x : A} (y : B x) → C x y}
+    (H : {x : A} → g {x} ~ h {x})
+    (f : (x : A) → B x) → g ∘ f ~ h ∘ f
+  htpy-right-whisk H f x = H (f x)
+
+  infixl 15 _·r_
+  _·r_ = htpy-right-whisk
 ```
 
 ### Horizontal composition of homotopies
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {f f' : A → B} {g g' : B → C}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f f' : (x : A) → B x} {g g' : {x : A} → B x → C x}
   where
 
-  htpy-comp-horizontal : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-comp-horizontal : f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
   htpy-comp-horizontal F G = (g ·l F) ∙h (G ·r f')
 
-  htpy-comp-horizontal' : (f ~ f') → (g ~ g') → (g ∘ f) ~ (g' ∘ f')
+  htpy-comp-horizontal' : f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
   htpy-comp-horizontal' F G = (G ·r f) ∙h (g' ·l F)
 ```
 
@@ -96,23 +109,37 @@ homotopy side.
 
 ```agda
 module _
-  { l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  left-unit-law-left-whisk-htpy : {f f' : A → B} → (H : f ~ f') → id ·l H ~ H
+  left-unit-law-left-whisk-htpy :
+    {f f' : (x : A) → B x} → (H : f ~ f') → id ·l H ~ H
   left-unit-law-left-whisk-htpy H x = ap-id (H x)
 
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
   right-unit-law-left-whisk-htpy :
-    { l3 : Level} {C : UU l3} {f : A → B} (g : B → C) →
+    {f : (x : A) → B x} (g : {x : A} → B x → C x) →
     g ·l refl-htpy {f = f} ~ refl-htpy
   right-unit-law-left-whisk-htpy g = refl-htpy
 
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
+
   left-unit-law-right-whisk-htpy :
-    {l3 : Level} {C : UU l3} {g : B → C} (f : A → B) →
+    {g : {x : A} (y : B x) → C x y} (f : (x : A) → B x) →
     refl-htpy {f = g} ·r f ~ refl-htpy
   left-unit-law-right-whisk-htpy f = refl-htpy
 
-  right-unit-law-right-whisk-htpy : {f f' : A → B} → (H : f ~ f') → H ·r id ~ H
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  right-unit-law-right-whisk-htpy :
+    {f f' : (x : A) → B x} → (H : f ~ f') → H ·r id ~ H
   right-unit-law-right-whisk-htpy H = refl-htpy
 ```
 
@@ -120,71 +147,79 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f f' : (x : A) → B x} (g : {x : A} → B x → C x) (H : f ~ f')
   where
 
-  left-whisk-inv-htpy :
-    {f f' : A → B} (g : B → C) (H : f ~ f') →
-    (g ·l (inv-htpy H)) ~ inv-htpy (g ·l H)
-  left-whisk-inv-htpy g H x = ap-inv g (H x)
+  left-whisk-inv-htpy : g ·l (inv-htpy H) ~ inv-htpy (g ·l H)
+  left-whisk-inv-htpy x = ap-inv g (H x)
 
-  inv-htpy-left-whisk-inv-htpy :
-    {f f' : A → B} (g : B → C) (H : f ~ f') →
-    inv-htpy (g ·l H) ~ (g ·l (inv-htpy H))
-  inv-htpy-left-whisk-inv-htpy g H =
-    inv-htpy (left-whisk-inv-htpy g H)
+  inv-htpy-left-whisk-inv-htpy : inv-htpy (g ·l H) ~ g ·l (inv-htpy H)
+  inv-htpy-left-whisk-inv-htpy = inv-htpy left-whisk-inv-htpy
 
-  right-whisk-inv-htpy :
-    {g g' : B → C} (H : g ~ g') (f : A → B) →
-    ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
-  right-whisk-inv-htpy H f = refl-htpy
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  {g g' : {x : A} (y : B x) → C x y} (H : {x : A} → g {x} ~ g' {x})
+  (f : (x : A) → B x)
+  where
 
-  inv-htpy-right-whisk-inv-htpy :
-    {g g' : B → C} (H : g ~ g') (f : A → B) →
-    ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
-  inv-htpy-right-whisk-inv-htpy H f =
-    inv-htpy (right-whisk-inv-htpy H f)
+  right-whisk-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
+  right-whisk-inv-htpy = refl-htpy
+
+  inv-htpy-right-whisk-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
+  inv-htpy-right-whisk-inv-htpy = inv-htpy right-whisk-inv-htpy
 ```
 
 ### Distributivity of whiskering over composition of homotopies
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
   distributive-left-whisk-concat-htpy :
-    { f g h : A → B} (k : B → C) →
+    { f g h : (x : A) → B x} (k : {x : A} → B x → C x) →
     ( H : f ~ g) (K : g ~ h) →
-    ( k ·l (H ∙h K)) ~ ((k ·l H) ∙h (k ·l K))
+    k ·l (H ∙h K) ~ (k ·l H) ∙h (k ·l K)
   distributive-left-whisk-concat-htpy k H K a =
     ap-concat k (H a) (K a)
 
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  ( k : (x : A) → B x) {f g h : {x : A} (y : B x) → C x y}
+  ( H : {x : A} → f {x} ~ g {x}) (K : {x : A} → g {x} ~ h {x})
+  where
+
   distributive-right-whisk-concat-htpy :
-    ( k : A → B) {f g h : B → C} →
-    ( H : f ~ g) (K : g ~ h) →
-    ( (H ∙h K) ·r k) ~ ((H ·r k) ∙h (K ·r k))
-  distributive-right-whisk-concat-htpy k H K = refl-htpy
+    (H ∙h K) ·r k ~ (H ·r k) ∙h (K ·r k)
+  distributive-right-whisk-concat-htpy = refl-htpy
 ```
 
 ### Associativity of whiskering and function composition
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : A → UU l2} {C : A → UU l3} {D : A → UU l4}
   where
 
   associative-left-whisk-comp :
-    ( k : C → D) (h : B → C) {f g : A → B} →
+    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
     ( H : f ~ g) →
-    ( k ·l (h ·l H)) ~ ((k ∘ h) ·l H)
+    k ·l (h ·l H) ~ (k ∘ h) ·l H
   associative-left-whisk-comp k h H x = inv (ap-comp k h (H x))
 
-  associative-right-whisk-comp :
-    { f g : C → D} (h : B → C) (k : A → B) →
-    ( H : f ~ g) →
-    ( (H ·r h) ·r k) ~ (H ·r (h ∘ k))
-  associative-right-whisk-comp h k H = refl-htpy
+module _
+  { l1 l2 l3 l4 : Level}
+  { A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  { D : (x : A) (y : B x) (z : C x y) → UU l4}
+  { f g : {x : A} {y : B x} (z : C x y) → D x y z}
+  ( h : {x : A} (y : B x) → C x y) (k : (x : A) → B x)
+  ( H : {x : A} {y : B x} → f {x} {y} ~ g {x} {y})
+  where
+
+  associative-right-whisk-comp : (H ·r h) ·r k ~ H ·r (h ∘ k)
+  associative-right-whisk-comp = refl-htpy
 ```
 
 ### A coherence for homotopies to the identity function
@@ -194,10 +229,10 @@ module _
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
   where
 
-  coh-htpy-id : (H ·r f) ~ (f ·l H)
+  coh-htpy-id : H ·r f ~ f ·l H
   coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))
 
-  inv-htpy-coh-htpy-id : (f ·l H) ~ (H ·r f)
+  inv-htpy-coh-htpy-id : f ·l H ~ H ·r f
   inv-htpy-coh-htpy-id = inv-htpy coh-htpy-id
 ```
 
@@ -205,15 +240,38 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  { f g : A → B}
+  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  { f g : (x : A) → B x}
   where
 
   ap-left-whisk-htpy :
-    ( h : B → C) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
+    (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
   ap-left-whisk-htpy h α x = ap (ap h) (α x)
 
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
+  where
+
   ap-right-whisk-htpy :
-    { H H' : f ~ g} (α : H ~ H') (h : C → A) → H ·r h ~ H' ·r h
+    (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
   ap-right-whisk-htpy α h = α ·r h
+```
+
+### Whiskering from both sides
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : A → UU l2}
+  {C : {x : A} → B x → UU l3} {D : {x : A} → B x → UU l4}
+  { f g : {x : A} (y : B x) → C y}
+  where
+
+  coherence-left-right-whish-htpy :
+    (h : {x : A} {y : B x} → C y → D y)
+    (H : {x : A} → f {x} ~ g {x})
+    (h' : (x : A) → B x) →
+    h ·l (H ·r h') ~ (h ·l H) ·r h'
+  coherence-left-right-whish-htpy h H h' = refl-htpy
 ```
