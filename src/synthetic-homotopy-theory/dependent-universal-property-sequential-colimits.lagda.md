@@ -7,19 +7,30 @@ module synthetic-homotopy-theory.dependent-universal-property-sequential-colimit
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
+open import foundation.subtype-identity-principle
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-coforks
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
 open import synthetic-homotopy-theory.sequential-diagrams
+open import synthetic-homotopy-theory.universal-property-coequalizers
 open import synthetic-homotopy-theory.universal-property-sequential-colimits
 ```
 
@@ -62,7 +73,7 @@ module _
 module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X) {P : X → UU l3}
-  ( dup-sequential-colimit :
+  ( dup-c :
     dependent-universal-property-sequential-colimit A c)
   where
 
@@ -70,7 +81,7 @@ module _
     dependent-cocone-sequential-diagram A c P →
     ( x : X) → P x
   map-dependent-universal-property-sequential-colimit =
-    map-inv-is-equiv (dup-sequential-colimit P)
+    map-inv-is-equiv (dup-c P)
 ```
 
 ## Properties
@@ -81,7 +92,7 @@ module _
 module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( c : cocone-sequential-diagram A X) {P : X → UU l3}
-  ( dup-sequential-colimit :
+  ( dup-c :
     dependent-universal-property-sequential-colimit A c)
   ( d : dependent-cocone-sequential-diagram A c P)
   where
@@ -90,17 +101,17 @@ module _
     htpy-dependent-cocone-sequential-diagram A P
       ( dependent-cocone-map-sequential-diagram A c P
         ( map-dependent-universal-property-sequential-colimit A c
-          ( dup-sequential-colimit)
+          ( dup-c)
           ( d)))
       ( d)
   htpy-dependent-cocone-dependent-universal-property-sequential-colimit =
     htpy-eq-dependent-cocone-sequential-diagram A P
       ( dependent-cocone-map-sequential-diagram A c P
         ( map-dependent-universal-property-sequential-colimit A c
-          ( dup-sequential-colimit)
+          ( dup-c)
           ( d)))
       ( d)
-      ( is-section-map-inv-is-equiv (dup-sequential-colimit P) d)
+      ( is-section-map-inv-is-equiv (dup-c P) d)
 
   abstract
     uniqueness-dependent-universal-property-sequential-colimit :
@@ -118,7 +129,7 @@ module _
             extensionality-dependent-cocone-sequential-diagram A P
               ( dependent-cocone-map-sequential-diagram A c P h)
               ( d)))
-        ( is-contr-map-is-equiv (dup-sequential-colimit P) d)
+        ( is-contr-map-is-equiv (dup-c P) d)
 ```
 
 ### Correspondence between dependent universal properties of sequential colimits and coequalizers
@@ -162,7 +173,7 @@ module _
         ( top-map-cofork-cocone-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
-    ( dup-sequential-colimit)
+    ( dup-c)
     ( P) =
     is-equiv-top-map-triangle
       ( dependent-cocone-map-sequential-diagram A c P)
@@ -173,7 +184,7 @@ module _
         ( cofork-cocone-sequential-diagram A c))
       ( triangle-dependent-cocone-sequential-diagram-dependent-cofork A c P)
       ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork A c P)
-      ( dup-sequential-colimit P)
+      ( dup-c P)
 ```
 
 ### The non-dependent and dependent universal properties of sequential colimits are logically equivalent
@@ -188,7 +199,7 @@ module _
     dependent-universal-property-sequential-colimit A c →
     universal-property-sequential-colimit A c
   universal-property-dependent-universal-property-sequential-colimit
-    ( dup-sequential-colimit)
+    ( dup-c)
     ( Y) =
     is-equiv-left-map-triangle
       ( cocone-map-sequential-diagram A c)
@@ -196,7 +207,7 @@ module _
       ( dependent-cocone-map-sequential-diagram A c (λ _ → Y))
       ( triangle-compute-dependent-cocone-sequential-diagram-constant-family A c
         ( Y))
-      ( dup-sequential-colimit (λ _ → Y))
+      ( dup-c (λ _ → Y))
       ( is-equiv-map-equiv
         ( compute-dependent-cocone-sequential-diagram-constant-family A c Y))
 
@@ -216,4 +227,76 @@ module _
           ( A)
           ( c)
           ( up-sequential-diagram)))
+```
+
+### The 3-for-2 property of the dependent universal property of sequential colimits
+
+Given two cocones under a sequential diagram, one of which has the dependent
+universal property of sequential colimits, and a map between their vertices, we
+prove that the other has the dependent universal property if and only if the map
+is an [equivalence](foundation.equivalences.md).
+
+```agda
+module _
+  { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2} {Y : UU l3}
+  ( c : cocone-sequential-diagram A X)
+  ( c' : cocone-sequential-diagram A Y)
+  ( h : X → Y)
+  ( H :
+    htpy-cocone-sequential-diagram A (cocone-map-sequential-diagram A c h) c')
+  where
+
+  abstract
+    is-equiv-dependent-universal-property-sequential-colimit-dependent-universal-property-sequential-colimit :
+      dependent-universal-property-sequential-colimit A c →
+      dependent-universal-property-sequential-colimit A c' →
+      is-equiv h
+    is-equiv-dependent-universal-property-sequential-colimit-dependent-universal-property-sequential-colimit
+      ( dup-c)
+      ( dup-c') =
+        is-equiv-universal-property-sequential-colimit-universal-property-sequential-colimit
+          ( A)
+          ( c)
+          ( c')
+          ( h)
+          ( H)
+          ( universal-property-dependent-universal-property-sequential-colimit
+            ( A) c dup-c)
+          ( universal-property-dependent-universal-property-sequential-colimit
+            ( A) c' dup-c')
+
+    dependent-universal-property-sequential-colimit-is-equiv-dependent-universal-property-sequential-colimit :
+      dependent-universal-property-sequential-colimit A c →
+      is-equiv h →
+      dependent-universal-property-sequential-colimit A c'
+    dependent-universal-property-sequential-colimit-is-equiv-dependent-universal-property-sequential-colimit
+      ( dup-c) (is-equiv-h) =
+      dependent-universal-property-universal-property-sequential-colimit A c'
+        ( universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit
+          ( A)
+          ( c)
+          ( c')
+          ( h)
+          ( H)
+          ( universal-property-dependent-universal-property-sequential-colimit
+            ( A) c dup-c)
+          ( is-equiv-h))
+
+    dependent-universal-property-sequential-colimit-dependent-universal-property-sequential-colimit-is-equiv :
+      is-equiv h →
+      dependent-universal-property-sequential-colimit A c' →
+      dependent-universal-property-sequential-colimit A c
+    dependent-universal-property-sequential-colimit-dependent-universal-property-sequential-colimit-is-equiv
+      ( is-equiv-h)
+      ( dup-c') =
+      dependent-universal-property-universal-property-sequential-colimit A c
+        ( universal-property-sequential-colimit-universal-property-sequential-colimit-is-equiv
+          ( A)
+          ( c)
+          ( c')
+          ( h)
+          ( H)
+          ( is-equiv-h)
+          ( universal-property-dependent-universal-property-sequential-colimit
+            ( A) c' dup-c'))
 ```
