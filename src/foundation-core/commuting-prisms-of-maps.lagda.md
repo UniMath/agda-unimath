@@ -149,7 +149,6 @@ module _
       ( inv-front ∙h ((bottom ·r hA) ∙h (g' ·l left))) ~
       ( (hC ·l top) ∙h (inv-right ·r h))
 
-
   module _
     ( top : coherence-triangle-maps f g h)
     ( inv-front : coherence-square-maps hA f f' hC)

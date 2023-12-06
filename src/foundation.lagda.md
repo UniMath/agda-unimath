@@ -233,6 +233,7 @@ open import foundation.powersets public
 open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
 open import foundation.precomposition-functions-into-subuniverses public
+open import foundation.precomposition-type-families public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
@@ -350,6 +351,7 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-equivalences public
+open import foundation.universal-property-family-of-fibers-of-maps public
 open import foundation.universal-property-fiber-products public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public

@@ -14,18 +14,20 @@ open import foundation.commuting-prisms-of-maps
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
-
-open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.whiskering-homotopies
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
+open import synthetic-homotopy-theory.retracts-of-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-colimits
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-sequential-colimits
@@ -70,7 +72,7 @@ module _
     comp-hom-sequential-diagram A B (constant-sequential-diagram X) c f
 ```
 
-### A morphism of sequential diagrams induces a map of sequential colimits
+### A morphism of sequential diagrams induces a map of standard sequential colimits
 
 The induced map
 
@@ -203,7 +205,7 @@ module _
       ( inv-htpy (coherence-htpy-cocone-map-hom-standard-sequential-colimit n))
 ```
 
-### Homotopies between morphisms of sequential diagrams induce homotopies of maps of sequential colimits
+### Homotopies between morphisms of sequential diagrams induce homotopies of maps of standard sequential colimits
 
 ```agda
 module _
@@ -256,7 +258,7 @@ module _
       ( htpy-preserves-id-map-hom-standard-sequential-colimit)
 ```
 
-### Forming sequential colimits preserves composition of morphisms of sequential diagrams
+### Forming standard sequential colimits preserves composition of morphisms of sequential diagrams
 
 We have `(f ∘ g)∞ ~ (f∞ ∘ g∞) : A∞ → C∞`.
 
@@ -375,9 +377,9 @@ module _
       htpy-preserves-comp-map-hom-standard-sequential-colimit
 ```
 
-### An equivalence of sequential diagrams induces an equivalence of cocones
+### An equivalence of sequential diagrams induces an equivalence of standard sequential colimits
 
-Additionally, the underlying map of the inverse equivalence if definitionally
+Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
 diagrams, i.e. `(e∞)⁻¹ = (e⁻¹)∞`.
 
@@ -440,6 +442,61 @@ module _
     map-hom-standard-sequential-colimit B (hom-equiv-sequential-diagram B e)
   pr2 equiv-equiv-standard-sequential-colimit =
     is-equiv-map-hom-standard-sequential-colimit
+```
+
+### A retract of sequential diagrams induces a retract of standard sequential colimits
+
+Additionally, the underlying map of the retraction is definitionally equal to
+the map induced by the retraction of sequential diagrams.
+
+```agda
+module _
+  { l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
+  ( R : A retract-of-sequential-diagram B)
+  where
+
+  map-inclusion-retract-standard-sequential-colimit :
+    standard-sequential-colimit A → standard-sequential-colimit B
+  map-inclusion-retract-standard-sequential-colimit =
+    map-hom-standard-sequential-colimit B
+      ( inclusion-retract-sequential-diagram A B R)
+
+  map-hom-retraction-retract-standard-sequential-colimit :
+    standard-sequential-colimit B → standard-sequential-colimit A
+  map-hom-retraction-retract-standard-sequential-colimit =
+    map-hom-standard-sequential-colimit A
+      ( hom-retraction-retract-sequential-diagram A B R)
+
+  abstract
+    is-retraction-map-hom-retraction-retract-standard-sequential-colimit :
+      is-retraction
+        ( map-inclusion-retract-standard-sequential-colimit)
+        ( map-hom-retraction-retract-standard-sequential-colimit)
+    is-retraction-map-hom-retraction-retract-standard-sequential-colimit =
+      ( inv-htpy
+        ( preserves-comp-map-hom-standard-sequential-colimit
+          ( hom-retraction-retract-sequential-diagram A B R)
+          ( inclusion-retract-sequential-diagram A B R))) ∙h
+      ( htpy-map-hom-standard-sequential-colimit-htpy-hom-sequential-diagram
+        ( is-retraction-hom-retraction-retract-sequential-diagram A B R)) ∙h
+      ( preserves-id-map-hom-standard-sequential-colimit)
+
+  retraction-retract-standard-sequential-colimit :
+    retraction
+      ( map-hom-standard-sequential-colimit B
+        ( inclusion-retract-sequential-diagram A B R))
+  pr1 retraction-retract-standard-sequential-colimit =
+    map-hom-retraction-retract-standard-sequential-colimit
+  pr2 retraction-retract-standard-sequential-colimit =
+    is-retraction-map-hom-retraction-retract-standard-sequential-colimit
+
+  retract-retract-standard-sequential-colimit :
+    (standard-sequential-colimit A) retract-of (standard-sequential-colimit B)
+  pr1 retract-retract-standard-sequential-colimit =
+    map-hom-standard-sequential-colimit B
+      ( inclusion-retract-sequential-diagram A B R)
+  pr2 retract-retract-standard-sequential-colimit =
+    retraction-retract-standard-sequential-colimit
 ```
 
 ## References
