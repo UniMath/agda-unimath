@@ -206,7 +206,7 @@ module _
   (S : UU l)
   where
 
-  precomp-vertical-coherence-prism-maps :
+  precomp-vertical-coherence-prism-maps'' :
     vertical-coherence-prism-maps''
       ( precomp f' S)
       ( precomp h' S)
@@ -222,7 +222,7 @@ module _
       ( precomp-coherence-square-maps h hA hB h' left S)
       ( precomp-coherence-square-maps g hB hC g' right S)
       ( precomp-coherence-triangle-maps f g h top S)
-  precomp-vertical-coherence-prism-maps i =
+  precomp-vertical-coherence-prism-maps'' i =
     ( inv (eq-htpy-concat-htpy (i ·l front) ((i ∘ hC) ·l top))) ∙
     ( ap
       ( eq-htpy)
