@@ -19,7 +19,7 @@ open import foundation.universe-levels
 ## Idea
 
 A {{#concept "partial sequence"}} of elements of a type `A` is a
-[partial function](foundation.partial-functions.md) from `ℕ` → `A`. In other
+[partial function](foundation.partial-functions.md) from `ℕ` to `A`. In other
 words, a partial sequence is a map
 
 ```text
