@@ -32,6 +32,7 @@ open import foundation.truncated-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
@@ -335,7 +336,7 @@ module _
                 ( type-Prop (P y))))
           ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ b → is-propositional-truncation-trunc-Prop (fiber f b) (P b))))
-        ( is-equiv-map-reduce-Π-fiber f ( λ y z → type-Prop (P y)))
+        ( universal-property-family-of-fibers-fiber f (is-in-subtype P))
 
   equiv-dependent-universal-property-surj-is-surjective :
     is-surjective f →

@@ -366,54 +366,6 @@ module _
   pr2 inv-compute-fiber-comp = is-equiv-inv-map-compute-fiber-comp
 ```
 
-### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fiber f y) → UU l3)
-  where
-
-  map-reduce-Π-fiber :
-    ((y : B) (z : fiber f y) → C y z) → ((x : A) → C (f x) (x , refl))
-  map-reduce-Π-fiber h x = h (f x) (x , refl)
-
-  inv-map-reduce-Π-fiber :
-    ((x : A) → C (f x) (x , refl)) → ((y : B) (z : fiber f y) → C y z)
-  inv-map-reduce-Π-fiber h .(f x) (x , refl) = h x
-
-  is-section-inv-map-reduce-Π-fiber :
-    (map-reduce-Π-fiber ∘ inv-map-reduce-Π-fiber) ~ id
-  is-section-inv-map-reduce-Π-fiber h = refl
-
-  is-retraction-inv-map-reduce-Π-fiber' :
-    (h : (y : B) (z : fiber f y) → C y z) (y : B) →
-    (inv-map-reduce-Π-fiber (map-reduce-Π-fiber h) y) ~ (h y)
-  is-retraction-inv-map-reduce-Π-fiber' h .(f z) (z , refl) = refl
-
-  is-retraction-inv-map-reduce-Π-fiber :
-    (inv-map-reduce-Π-fiber ∘ map-reduce-Π-fiber) ~ id
-  is-retraction-inv-map-reduce-Π-fiber h =
-    eq-htpy (eq-htpy ∘ is-retraction-inv-map-reduce-Π-fiber' h)
-
-  is-equiv-map-reduce-Π-fiber : is-equiv map-reduce-Π-fiber
-  is-equiv-map-reduce-Π-fiber =
-    is-equiv-is-invertible
-      ( inv-map-reduce-Π-fiber)
-      ( is-section-inv-map-reduce-Π-fiber)
-      ( is-retraction-inv-map-reduce-Π-fiber)
-
-  reduce-Π-fiber' :
-    ((y : B) (z : fiber f y) → C y z) ≃ ((x : A) → C (f x) (x , refl))
-  pr1 reduce-Π-fiber' = map-reduce-Π-fiber
-  pr2 reduce-Π-fiber' = is-equiv-map-reduce-Π-fiber
-
-reduce-Π-fiber :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  (C : B → UU l3) → ((y : B) → fiber f y → C y) ≃ ((x : A) → C (f x))
-reduce-Π-fiber f C = reduce-Π-fiber' f (λ y z → C y)
-```
-
 ## Table of files about fibers of maps
 
 The following table lists files that are about fibers of maps as a general
