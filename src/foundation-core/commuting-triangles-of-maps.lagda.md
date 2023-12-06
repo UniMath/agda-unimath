@@ -8,6 +8,7 @@ module foundation-core.commuting-triangles-of-maps where
 
 ```agda
 open import foundation.universe-levels
+open import foundation-core.precomposition-functions
 
 open import foundation-core.function-types
 open import foundation-core.homotopies

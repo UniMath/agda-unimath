@@ -9,19 +9,18 @@ open import foundation-core.commuting-prisms-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
-open import foundation.identity-types
 open import foundation.dependent-pair-types
-open import foundation.action-on-identifications-binary-functions
 open import foundation.function-extensionality
+open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
-open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
@@ -230,7 +229,9 @@ module _
       ( ( ap
           ( (i ·l front) ∙h_)
           ( eq-htpy (inv-htpy (associative-left-whisk-comp i hC top)))) ∙
-        ( inv (eq-htpy (distributive-left-whisk-concat-htpy i front (hC ·l top)))) ∙
+        ( inv
+          ( eq-htpy
+            ( distributive-left-whisk-concat-htpy i front (hC ·l top)))) ∙
         ( ap (i ·l_) (eq-htpy (inv-htpy H))) ∙
         ( eq-htpy
           ( ( distributive-left-whisk-concat-htpy i

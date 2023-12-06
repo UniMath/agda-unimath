@@ -10,12 +10,12 @@ open import foundation-core.commuting-triangles-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation-core.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.function-extensionality
-open import foundation.precomposition-functions
 open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -75,23 +75,56 @@ module _
     map-equiv equiv-coherence-triangle-maps-inv-top
 ```
 
-### Any commuting triange of maps induces commuting triangles of function types
+### Any commuting triangle of maps induces a commuting triangle of function spaces via precomposition
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (left : A → X) (right : B → X) (top : A → B)
-  (H : coherence-triangle-maps left right top) (S : UU l4)
+  { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  ( left : A → X) (right : B → X) (top : A → B)
   where
 
   precomp-coherence-triangle-maps :
-    coherence-triangle-maps (precomp left S) (precomp top S) (precomp right S)
-  precomp-coherence-triangle-maps = htpy-precomp H S
+    coherence-triangle-maps left right top →
+    ( W : UU l4) →
+    coherence-triangle-maps
+      ( precomp left W)
+      ( precomp top W)
+      ( precomp right W)
+  precomp-coherence-triangle-maps H W = htpy-precomp H W
+
+  precomp-coherence-triangle-maps' :
+    coherence-triangle-maps' left right top →
+    ( W : UU l4) →
+    coherence-triangle-maps'
+      ( precomp left W)
+      ( precomp top W)
+      ( precomp right W)
+  precomp-coherence-triangle-maps' H W = htpy-precomp H W
+```
+
+### Any commuting triangle of maps induces a commuting triangle of function spaces via postcomposition
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  ( left : A → X) (right : B → X) (top : A → B)
+  where
 
   postcomp-coherence-triangle-maps :
+    (S : UU l4) →
+    coherence-triangle-maps left right top →
     coherence-triangle-maps
       ( postcomp S left)
       ( postcomp S right)
       ( postcomp S top)
-  postcomp-coherence-triangle-maps = htpy-postcomp S H
+  postcomp-coherence-triangle-maps S = htpy-postcomp S
+
+  postcomp-coherence-triangle-maps' :
+    (S : UU l4) →
+    coherence-triangle-maps' left right top →
+    coherence-triangle-maps'
+      ( postcomp S left)
+      ( postcomp S right)
+      ( postcomp S top)
+  postcomp-coherence-triangle-maps' S = htpy-postcomp S
 ```
