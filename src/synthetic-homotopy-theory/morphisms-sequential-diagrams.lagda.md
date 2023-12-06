@@ -174,13 +174,13 @@ module _
   ( f g : hom-sequential-diagram A B)
   where
 
-  coherence-htpy-sequential-diagram :
+  coherence-htpy-hom-sequential-diagram :
     ( H :
       ( n : ℕ) →
       ( map-hom-sequential-diagram B f n) ~
       ( map-hom-sequential-diagram B g n)) →
     UU (l1 ⊔ l2)
-  coherence-htpy-sequential-diagram H =
+  coherence-htpy-hom-sequential-diagram H =
     ( n : ℕ) →
     coherence-square-homotopies
       ( map-sequential-diagram B n ·l H n)
@@ -193,7 +193,7 @@ module _
     Σ ( ( n : ℕ) →
         ( map-hom-sequential-diagram B f n) ~
         ( map-hom-sequential-diagram B g n))
-      ( coherence-htpy-sequential-diagram)
+      ( coherence-htpy-hom-sequential-diagram)
 ```
 
 ### Components of homotopies between morphisms of sequential diagrams
@@ -212,7 +212,7 @@ module _
   htpy-htpy-hom-sequential-diagram = pr1 H
 
   coherence-htpy-htpy-hom-sequential-diagram :
-    coherence-htpy-sequential-diagram B f g htpy-htpy-hom-sequential-diagram
+    coherence-htpy-hom-sequential-diagram B f g htpy-htpy-hom-sequential-diagram
   coherence-htpy-htpy-hom-sequential-diagram = pr2 H
 ```
 
@@ -244,7 +244,7 @@ module _
       is-torsorial (htpy-hom-sequential-diagram B f)
     is-torsorial-htpy-sequential-diagram f =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-sequential-diagram B f))
+        ( ev-pair (coherence-htpy-hom-sequential-diagram B f))
         ( is-torsorial-binary-htpy (map-hom-sequential-diagram B f))
         ( map-hom-sequential-diagram B f , ev-pair refl-htpy)
         ( is-torsorial-Eq-Π _
