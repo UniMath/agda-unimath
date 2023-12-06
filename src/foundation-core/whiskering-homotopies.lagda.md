@@ -258,7 +258,7 @@ module _
   ap-right-whisk-htpy α h = α ·r h
 ```
 
-### Whiskering from both sides
+### Left and right whiskering commute definitionally
 
 ```agda
 module _
