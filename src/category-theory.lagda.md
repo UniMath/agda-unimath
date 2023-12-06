@@ -115,9 +115,11 @@ open import category-theory.natural-transformations-maps-precategories public
 open import category-theory.nonunital-precategories public
 open import category-theory.one-object-precategories public
 open import category-theory.opposite-categories public
+open import category-theory.opposite-large-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.opposite-preunivalent-categories public
 open import category-theory.precategories public
+open import category-theory.precategory-of-elements-of-a-presheaf public
 open import category-theory.precategory-of-functors public
 open import category-theory.precategory-of-functors-from-small-to-large-precategories public
 open import category-theory.precategory-of-maps-from-small-to-large-precategories public

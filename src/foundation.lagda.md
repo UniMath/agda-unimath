@@ -48,6 +48,7 @@ open import foundation.commuting-3-simplices-of-maps public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
 open import foundation.commuting-pentagons-of-identifications public
+open import foundation.commuting-prisms-of-maps public
 open import foundation.commuting-squares-of-homotopies public
 open import foundation.commuting-squares-of-identifications public
 open import foundation.commuting-squares-of-maps public
@@ -86,6 +87,7 @@ open import foundation.decidable-types public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
+open import foundation.dependent-epimorphisms-with-respect-to-truncated-types public
 open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
@@ -99,6 +101,7 @@ open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
+open import foundation.diagonals-of-morphisms-arrows public
 open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
@@ -133,6 +136,7 @@ open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
+open import foundation.families-of-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
@@ -232,6 +236,7 @@ open import foundation.powersets public
 open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
 open import foundation.precomposition-functions-into-subuniverses public
+open import foundation.precomposition-type-families public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
@@ -349,6 +354,7 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-equivalences public
+open import foundation.universal-property-family-of-fibers-of-maps public
 open import foundation.universal-property-fiber-products public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public

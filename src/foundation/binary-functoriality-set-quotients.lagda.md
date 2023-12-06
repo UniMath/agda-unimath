@@ -307,9 +307,9 @@ module _
   (QS : Set l6) (qS : reflecting-map-equivalence-relation S (type-Set QS))
   {C : UU l7} (T : equivalence-relation l8 C)
   (QT : Set l9) (qT : reflecting-map-equivalence-relation T (type-Set QT))
-  (UqR : {l : Level} → is-set-quotient l R QR qR)
-  (UqS : {l : Level} → is-set-quotient l S QS qS)
-  (UqT : {l : Level} → is-set-quotient l T QT qT)
+  (UqR : is-set-quotient R QR qR)
+  (UqS : is-set-quotient S QS qS)
+  (UqT : is-set-quotient T QT qT)
   (f : binary-hom-equivalence-relation R S T)
   where
 

@@ -7,6 +7,7 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
@@ -16,7 +17,6 @@ open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -208,6 +208,18 @@ is-inhabited-is-contr :
   {l1 : Level} {A : UU l1} → is-contr A → is-inhabited A
 is-inhabited-is-contr p =
   unit-trunc-Prop (center p)
+```
+
+### Inhabited propositions are contractible
+
+```agda
+is-contr-is-inhabited-is-prop :
+  {l1 : Level} {A : UU l1} → is-prop A → is-inhabited A → is-contr A
+is-contr-is-inhabited-is-prop {A = A} p h =
+  apply-universal-property-trunc-Prop
+    ( h)
+    ( is-contr-Prop A)
+    ( λ a → a , eq-is-prop' p a)
 ```
 
 ## See also

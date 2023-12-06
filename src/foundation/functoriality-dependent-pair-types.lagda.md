@@ -11,8 +11,10 @@ open import foundation-core.functoriality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
+open import foundation.contractible-maps
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications
+open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -20,16 +22,119 @@ open import foundation-core.commuting-squares-of-maps
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
 open import foundation-core.pullbacks
+open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
 ```
 
 </details>
 
 ## Properties
+
+### The map on total spaces induced by a family of truncated maps is truncated
+
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x}
+  where
+
+  abstract
+    is-trunc-map-tot : ((x : A) → is-trunc-map k (f x)) → is-trunc-map k (tot f)
+    is-trunc-map-tot H y =
+      is-trunc-equiv k
+        ( fiber (f (pr1 y)) (pr2 y))
+        ( compute-fiber-tot f y)
+        ( H (pr1 y) (pr2 y))
+
+  abstract
+    is-trunc-map-is-trunc-map-tot :
+      is-trunc-map k (tot f) → ((x : A) → is-trunc-map k (f x))
+    is-trunc-map-is-trunc-map-tot is-trunc-tot-f x z =
+      is-trunc-equiv k
+        ( fiber (tot f) (pair x z))
+        ( inv-compute-fiber-tot f (pair x z))
+        ( is-trunc-tot-f (pair x z))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x}
+  where
+
+  abstract
+    is-contr-map-tot :
+      ((x : A) → is-contr-map (f x)) → is-contr-map (tot f)
+    is-contr-map-tot =
+      is-trunc-map-tot neg-two-𝕋
+
+  abstract
+    is-prop-map-tot : ((x : A) → is-prop-map (f x)) → is-prop-map (tot f)
+    is-prop-map-tot = is-trunc-map-tot neg-one-𝕋
+```
+
+### The functoriality of dependent pair types preserves truncatedness
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-trunc-map-map-Σ-map-base :
+      (k : 𝕋) {f : A → B} (C : B → UU l3) →
+      is-trunc-map k f → is-trunc-map k (map-Σ-map-base f C)
+    is-trunc-map-map-Σ-map-base k {f} C H y =
+      is-trunc-equiv' k
+        ( fiber f (pr1 y))
+        ( equiv-fiber-map-Σ-map-base-fiber f C y)
+        ( H (pr1 y))
+
+  abstract
+    is-prop-map-map-Σ-map-base :
+      {f : A → B} (C : B → UU l3) →
+      is-prop-map f → is-prop-map (map-Σ-map-base f C)
+    is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  where
+
+  abstract
+    is-trunc-map-map-Σ :
+      (k : 𝕋) (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
+      is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
+      is-trunc-map k (map-Σ D f g)
+    is-trunc-map-map-Σ k D {f} {g} H K =
+      is-trunc-map-left-map-triangle k
+        ( map-Σ D f g)
+        ( map-Σ-map-base f D)
+        ( tot g)
+        ( triangle-map-Σ D f g)
+        ( is-trunc-map-map-Σ-map-base k D H)
+        ( is-trunc-map-tot k K)
+
+  module _
+    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
+    where
+
+    abstract
+      is-contr-map-map-Σ :
+        is-contr-map f → ((x : A) → is-contr-map (g x)) →
+        is-contr-map (map-Σ D f g)
+      is-contr-map-map-Σ = is-trunc-map-map-Σ neg-two-𝕋 D
+
+    abstract
+      is-prop-map-map-Σ :
+        is-prop-map f → ((x : A) → is-prop-map (g x)) →
+        is-prop-map (map-Σ D f g)
+      is-prop-map-map-Σ = is-trunc-map-map-Σ neg-one-𝕋 D
+```
 
 ### A family of squares over a pullback squares is a family of pullback squares if and only if the induced square of total spaces is a pullback square
 

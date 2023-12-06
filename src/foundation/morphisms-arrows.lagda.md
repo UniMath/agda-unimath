@@ -13,6 +13,7 @@ open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
+open import foundation.spans
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -29,8 +30,8 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **morphism of arrows** from a function `f : A → B` to a function `g : X → Y`
-is a triple `(i , j , H)` consisting of maps `i : A → X` and `j : B → Y` and a
+A {{#concept "morphism of arrows" Disambiguation="functions between types"}} from a function `f : A → B` to a function `g : X → Y`
+is a [triple](foundation.dependent-pair-types.md) `(i , j , H)` consisting of maps `i : A → X` and `j : B → Y` and a
 [homotopy](foundation-core.homotopies.md) `H : j ∘ f ~ g ∘ i` witnessing that
 the square
 
@@ -78,6 +79,30 @@ module _
 
 ### Transposing morphisms of arrows
 
+The {{#concept "transposition" Disambiguation="morphism of arrows"}} of a morphism of arrows
+
+```text
+        i
+    A -----> X
+    |        |
+  f |        | g
+    V        V
+    B -----> Y
+        j
+```
+
+is the morphism of arrows
+
+```text
+        f
+    A -----> B
+    |        |
+  i |        | j
+    V        V
+    X -----> Y.
+        g
+```
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -92,6 +117,20 @@ module _
 ```
 
 ### The identity morphism of arrows
+
+The identity morphism of arrows is defined as
+
+```text
+        id
+    A -----> A
+    |        |
+  f |        | f
+    V        V
+    B -----> B
+        id
+```
+
+where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
 
 ```agda
 module _
@@ -119,7 +158,17 @@ Consider a commuting diagram of the form
 ```
 
 Then the outer rectangle commutes by horizontal pasting of commuting squares of
-maps.
+maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of `β : g → h` with `α : f → g` is therefore defined to be
+
+```text
+        β₀ ∘ α₀       
+    A ----------> U
+    |             |
+  f |    α □ β    | h
+    V             V
+    B ----------> V.
+        β₁ ∘ α₁       
+```
 
 ```agda
 module _
@@ -165,7 +214,7 @@ module _
 
 ### Homotopies of morphsims of arrows
 
-A **homotopy of morphisms of arrows** from `(i , j , H)` to `(i' , j' , H')` is
+A {{#concept "homotopy of morphisms of arrows"}} from `(i , j , H)` to `(i' , j' , H')` is
 a triple `(I , J , K)` consisting of homotopies `I : i ~ i'` and `J : j ~ j'`
 and a homotopy `K` witnessing that the
 [square of homotopies](foundation.commuting-squares-of-homotopies.md)
@@ -560,6 +609,44 @@ module _
   pr1 right-unit-law-comp-hom-arrow = refl-htpy
   pr1 (pr2 right-unit-law-comp-hom-arrow) = refl-htpy
   pr2 (pr2 right-unit-law-comp-hom-arrow) = right-unit-htpy
+```
+
+### The span obtained from a morphism of arrows
+
+Given maps `f : A → B` and `g : X → Y` and a morphism of arrows `α : f → g`, the span associated to `α` is the span
+
+```text
+       f       α₀
+  B <----- A -----> X.
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  domain-span-hom-arrow : UU l2
+  domain-span-hom-arrow = B
+
+  codomain-span-hom-arrow : UU l3
+  codomain-span-hom-arrow = X
+
+  spanning-type-hom-arrow : UU l1
+  spanning-type-hom-arrow = A
+
+  left-map-span-hom-arrow : spanning-type-hom-arrow → domain-span-hom-arrow
+  left-map-span-hom-arrow = f
+
+  right-map-span-hom-arrow : spanning-type-hom-arrow → codomain-span-hom-arrow
+  right-map-span-hom-arrow = map-domain-hom-arrow f g α
+
+  span-hom-arrow : span l2 l3 l1
+  pr1 span-hom-arrow = domain-span-hom-arrow
+  pr1 (pr2 span-hom-arrow) = codomain-span-hom-arrow
+  pr1 (pr2 (pr2 span-hom-arrow)) = spanning-type-hom-arrow
+  pr1 (pr2 (pr2 (pr2 span-hom-arrow))) = left-map-span-hom-arrow
+  pr2 (pr2 (pr2 (pr2 span-hom-arrow))) = right-map-span-hom-arrow
 ```
 
 ## See also

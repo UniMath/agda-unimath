@@ -10,6 +10,7 @@ open import foundation-core.constant-maps public
 
 ```agda
 open import foundation.0-maps
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.function-extensionality
@@ -23,6 +24,7 @@ open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
@@ -159,4 +161,19 @@ const-injection :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → injection B (A → B)
 pr1 (const-injection A B a) = const A B
 pr2 (const-injection A B a) = is-injective-const A B a
+```
+
+### The action on identifications of a diagonal map is another diagonal map
+
+```agda
+htpy-diagonal-Id-ap-diagonal-htpy-eq :
+  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
+  htpy-eq ∘ ap (const A B) {x} {y} ~ const A (x ＝ y)
+htpy-diagonal-Id-ap-diagonal-htpy-eq A x y refl = refl
+
+htpy-ap-diagonal-htpy-eq-diagonal-Id :
+  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
+  const A (x ＝ y) ~ htpy-eq ∘ ap (const A B) {x} {y}
+htpy-ap-diagonal-htpy-eq-diagonal-Id A x y =
+  inv-htpy (htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
 ```

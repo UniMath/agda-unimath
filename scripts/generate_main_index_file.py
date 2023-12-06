@@ -6,32 +6,42 @@ import os
 import sys
 import utils
 import pathlib
+import subprocess
 
-STATUS_FLAG_NO_TITLE = 1
-STATUS_FLAG_DUPLICATE_TITLE = 2
+STATUS_FLAG_GIT_ERROR = 1
+STATUS_FLAG_NO_TITLE = 2
+STATUS_FLAG_DUPLICATE_TITLE = 4
 
 entry_template = '- [{title}]({mdfile})'
 
 
-def generate_namespace_entry_list(namespace):
+def generate_namespace_entry_list(root_path, namespace):
     status = 0
 
-    file_names = sorted(os.listdir(os.path.join(root, namespace)))
-    file_paths = map(lambda m: pathlib.Path(
-        os.path.join(root, namespace, m)), file_names)
-    lagda_file_paths = tuple(filter(utils.is_agda_file, file_paths))
-    modules = tuple(map(lambda p: p.name, lagda_file_paths))
-    module_titles = tuple(map(utils.get_lagda_md_file_title, lagda_file_paths))
+    try:
+        git_tracked_files = utils.get_git_tracked_files()
+    except subprocess.CalledProcessError:
+        utils.eprint('Failed to get Git-tracked files')
+        sys.exit(STATUS_FLAG_GIT_ERROR)
 
-    module_mdfiles = tuple(
-        map(lambda m: utils.get_module_mdfile(namespace, m), modules))
+    namespace_path = root_path.joinpath(namespace)
+
+    # Filter out the relevant files in the given namespace
+    relevant_files = tuple(
+        f for f in git_tracked_files if namespace_path in f.parents)
+
+    lagda_file_paths = tuple(f for f in relevant_files if utils.is_agda_file(f))
+    modules = tuple(p.name for p in lagda_file_paths)
+    module_titles = tuple(utils.get_lagda_md_file_title(f)
+                     for f in lagda_file_paths)
+    module_mdfiles = tuple(utils.get_module_mdfile(namespace, m) for m in modules)
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):
         if title is None:
             status |= STATUS_FLAG_NO_TITLE
-            print(
-                f'WARNING! {namespace}.{module} no title was found', file=sys.stderr)
+            utils.eprint(
+                f'WARNING! {namespace}.{module} no title was found')
 
     # Check duplicate titles
     equal_titles = utils.get_equivalence_classes(
@@ -41,10 +51,10 @@ def generate_namespace_entry_list(namespace):
 
     if (len(equal_titles) > 0):
         status |= STATUS_FLAG_DUPLICATE_TITLE
-        print(f'WARNING! Duplicate titles in {namespace}:', file=sys.stderr)
+        utils.eprint(f'WARNING! Duplicate titles in {namespace}:')
         for ec in equal_titles:
-            print(
-                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}", file=sys.stderr)
+            utils.eprint(
+                f"  Title '{ec[0][0]}': {', '.join(m[1][:m[1].rfind('.lagda.md')] for m in ec)}")
 
     module_titles_and_mdfiles = sorted(
         zip(module_titles, module_mdfiles), key=lambda tm: (tm[1].split('.')))
@@ -52,8 +62,7 @@ def generate_namespace_entry_list(namespace):
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in module_titles_and_mdfiles)
 
-    namespace_title = utils.get_lagda_md_file_title(
-        os.path.join(root, namespace) + '.lagda.md')
+    namespace_title = utils.get_lagda_md_file_title(str(namespace_path.with_suffix('.lagda.md')))
     namespace_entry = entry_template.format(
         title=namespace_title, mdfile=namespace + '.md')
 
@@ -61,15 +70,13 @@ def generate_namespace_entry_list(namespace):
     return namespace_entry_list, status
 
 
-def generate_index(root, header):
+def generate_index(root_path, header):
     status = 0
     entry_lists = []
-    namespaces = sorted(set(utils.get_subdirectories_recursive(root)))
+    namespaces = sorted(set(utils.get_subdirectories_recursive(root_path)))
 
     for namespace in namespaces:
-        if namespace == 'temp' or 'MAlonzo' in namespace:
-            continue
-        entry_list, s = generate_namespace_entry_list(namespace)
+        entry_list, s = generate_namespace_entry_list(root_path, namespace)
         entry_lists.append(entry_list)
         status |= s
 
@@ -116,7 +123,9 @@ if __name__ == '__main__':
     summary_path = 'SUMMARY.md'
     index_header = '# The agda-unimath library'
 
-    index_content, status = generate_index(root, index_header)
+    root_path = pathlib.Path(root)
+
+    index_content, status = generate_index(root_path, index_header)
     if status == 0:
         summary_contents = summary_template.format(module_index=index_content)
         with open(summary_path, 'w') as summary_file:

@@ -181,8 +181,7 @@ module _
       ( equivalence-relation-congruence-Subgroup-Ab A H)
 
   is-set-quotient-set-quotient-Ab :
-    {l : Level} →
-    is-set-quotient l
+    is-set-quotient
       ( equivalence-relation-congruence-Subgroup-Ab A H)
       ( set-quotient-Ab)
       ( reflecting-map-quotient-hom-Ab)

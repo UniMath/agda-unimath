@@ -19,22 +19,22 @@ open import foundation-core.function-types
 
 ## Idea
 
-A **(binary) span** is a pair of functions with a common domain, i.e., it is a
+A {{#concept "binary span"}} is a [pair](foundation.dependent-pair-types.md) of functions with a common domain, i.e., it is a
 diagram of the form
 
 ```text
   A <----- S -----> B.
 ```
 
-More precisely, a **binary span from `A` to `B`** consists of a type `S` and two
+More precisely, a {{#concept "binary span with fixed domain and codomain"}} from `A` to `B` consists of a type `S` and two
 maps `f : S → A` and `g : S → B`. In this case, the types `A` and `B` are also
-referred to as the **domain** and **codomain** of the span, respectively, and
-the type `S` is referred to as the **spanning type** of the span.
+referred to as the {{#concept "domain" Disambiguation="binary span"}} and {{#concept "codomain" Disambiguation="binary span"}} of the span, respectively, and
+the type `S` is referred to as the {{#concept "spanning type" Disambiguation="binary span"}} of the span.
 
-We also consider the notion of **total (binary) span**, which consists of two
-types `A` and `B` and a binary span from `A` to `B`.
+We also consider the notion of {{#concept "binary span"}}, which consists of two
+types `A` and `B` and a binary span with fixed domain and codomain from `A` to `B`.
 
-More generally, given a family of types `A i` indexed by `i : I`, a **span** on
+More generally, given a family of types `A i` indexed by `i : I`, a {{#concept "span"}} on
 `A` consists of a type `S` and a family of maps `f i : S → A i` indexed by
 `i : I`.
 

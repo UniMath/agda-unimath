@@ -5,6 +5,7 @@
 ```agda
 module order-theory where
 
+open import order-theory.accessible-elements-relations public
 open import order-theory.bottom-elements-posets public
 open import order-theory.bottom-elements-preorders public
 open import order-theory.chains-posets public
@@ -108,4 +109,6 @@ open import order-theory.total-preorders public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
+open import order-theory.well-founded-orders public
+open import order-theory.well-founded-relations public
 ```

@@ -192,7 +192,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 l8 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (P : Preorder l1 l2) (Q : Preorder l3 l4)
   (R : Preorder l5 l6) (S : Preorder l7 l8)
   (h : hom-Preorder R S)
   (g : hom-Preorder Q R)
@@ -200,12 +201,20 @@ module _
   where
 
   associative-comp-hom-Preorder :
-    Id
-      ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
-      ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
+    comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f ＝
+    comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f)
   associative-comp-hom-Preorder =
     eq-htpy-hom-Preorder P S
       ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
       ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
+      ( refl-htpy)
+
+  inv-associative-comp-hom-Preorder :
+    comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f) ＝
+    comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f
+  inv-associative-comp-hom-Preorder =
+    eq-htpy-hom-Preorder P S
+      ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
+      ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
       ( refl-htpy)
 ```

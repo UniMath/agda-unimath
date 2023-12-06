@@ -9,6 +9,7 @@ open import foundation-core.fibers-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -22,7 +23,9 @@ open import foundation-core.constant-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.pullbacks
+open import foundation-core.transport-along-identifications
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -105,6 +108,19 @@ module _
     A ≃ Σ unit (fiber (terminal-map {A = A}))
   inv-equiv-total-fiber-terminal-map =
     inv-equiv equiv-total-fiber-terminal-map
+```
+
+### Transport in fibers
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  compute-tr-fiber :
+    {y y' : B} (p : y ＝ y') (u : fiber f y) →
+    tot (λ x → concat' _ p) u ＝ tr (fiber f) p u
+  compute-tr-fiber refl u = ap (pair _) right-unit
 ```
 
 ## Table of files about fibers of maps

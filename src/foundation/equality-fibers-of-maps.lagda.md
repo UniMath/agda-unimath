@@ -9,13 +9,13 @@ module foundation.equality-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.families-of-equivalences
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types

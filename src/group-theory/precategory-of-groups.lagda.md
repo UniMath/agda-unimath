@@ -31,6 +31,9 @@ instance
   associative-comp-hom-Large-Precategory
     Group-Large-Precategory {X = G} {H} {K} {L} =
     associative-comp-hom-Group G H K L
+  inv-associative-comp-hom-Large-Precategory
+    Group-Large-Precategory {X = G} {H} {K} {L} =
+    inv-associative-comp-hom-Group G H K L
   left-unit-law-comp-hom-Large-Precategory
     Group-Large-Precategory {X = G} {H} =
     left-unit-law-comp-hom-Group G H

@@ -12,6 +12,7 @@ open import foundation-core.truncated-types public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.truncation-levels
 open import foundation.univalence
@@ -92,4 +93,20 @@ truncated-type-iterated-succ-Truncated-Type :
 pr1 (truncated-type-iterated-succ-Truncated-Type k r A) = type-Truncated-Type A
 pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
   is-trunc-iterated-succ-is-trunc k r (is-trunc-type-Truncated-Type A)
+```
+
+### Two equivalent types are equivalently `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  equiv-is-trunc-equiv : A ≃ B → is-trunc k A ≃ is-trunc k B
+  equiv-is-trunc-equiv e =
+    equiv-prop
+      ( is-prop-is-trunc k A)
+      ( is-prop-is-trunc k B)
+      ( is-trunc-equiv' k A e)
+      ( is-trunc-equiv k B e)
 ```

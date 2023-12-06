@@ -88,6 +88,34 @@ module _
 
 ## Properties
 
+### Unit laws for whiskering homotopies
+
+The identity map is the identity element for whiskerings from the function side,
+and the reflexivity homotopy is the identity element for whiskerings from the
+homotopy side.
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  left-unit-law-left-whisk-htpy : {f f' : A → B} → (H : f ~ f') → id ·l H ~ H
+  left-unit-law-left-whisk-htpy H x = ap-id (H x)
+
+  right-unit-law-left-whisk-htpy :
+    { l3 : Level} {C : UU l3} {f : A → B} (g : B → C) →
+    g ·l refl-htpy {f = f} ~ refl-htpy
+  right-unit-law-left-whisk-htpy g = refl-htpy
+
+  left-unit-law-right-whisk-htpy :
+    {l3 : Level} {C : UU l3} {g : B → C} (f : A → B) →
+    refl-htpy {f = g} ·r f ~ refl-htpy
+  left-unit-law-right-whisk-htpy f = refl-htpy
+
+  right-unit-law-right-whisk-htpy : {f f' : A → B} → (H : f ~ f') → H ·r id ~ H
+  right-unit-law-right-whisk-htpy H = refl-htpy
+```
+
 ### Laws for whiskering an inverted homotopy
 
 ```agda
@@ -171,4 +199,21 @@ module _
 
   inv-htpy-coh-htpy-id : (f ·l H) ~ (H ·r f)
   inv-htpy-coh-htpy-id = inv-htpy coh-htpy-id
+```
+
+### Whiskering whiskerings
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  { f g : A → B}
+  where
+
+  ap-left-whisk-htpy :
+    ( h : B → C) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
+  ap-left-whisk-htpy h α x = ap (ap h) (α x)
+
+  ap-right-whisk-htpy :
+    { H H' : f ~ g} (α : H ~ H') (h : C → A) → H ·r h ~ H' ·r h
+  ap-right-whisk-htpy α h = α ·r h
 ```

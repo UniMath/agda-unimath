@@ -382,10 +382,12 @@ module _
     (h : hom-Subprecategory C P z w)
     (g : hom-Subprecategory C P y z)
     (f : hom-Subprecategory C P x y) →
-    ( comp-hom-Subprecategory {x} {y} {w}
-      ( comp-hom-Subprecategory {y} {z} {w} h g) f) ＝
-    ( comp-hom-Subprecategory {x} {z} {w} h
-      ( comp-hom-Subprecategory {x} {y} {z} g f))
+    comp-hom-Subprecategory {x} {y} {w}
+      ( comp-hom-Subprecategory {y} {z} {w} h g)
+      ( f) ＝
+    comp-hom-Subprecategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Subprecategory {x} {y} {z} g f)
   associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f =
     eq-type-subtype
       ( subtype-hom-Subprecategory C P
@@ -394,6 +396,27 @@ module _
         ( is-in-obj-inclusion-obj-Subprecategory C P x)
         ( is-in-obj-inclusion-obj-Subprecategory C P w))
       ( associative-comp-hom-Precategory C
+        ( inclusion-hom-Subprecategory C P z w h)
+        ( inclusion-hom-Subprecategory C P y z g)
+        ( inclusion-hom-Subprecategory C P x y f))
+
+  inv-associative-comp-hom-Subprecategory :
+    {x y z w : obj-Subprecategory C P}
+    (h : hom-Subprecategory C P z w)
+    (g : hom-Subprecategory C P y z)
+    (f : hom-Subprecategory C P x y) →
+    ( comp-hom-Subprecategory {x} {z} {w} h
+      ( comp-hom-Subprecategory {x} {y} {z} g f)) ＝
+    ( comp-hom-Subprecategory {x} {y} {w}
+      ( comp-hom-Subprecategory {y} {z} {w} h g) f)
+  inv-associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f =
+    eq-type-subtype
+      ( subtype-hom-Subprecategory C P
+        ( inclusion-obj-Subprecategory C P x)
+        ( inclusion-obj-Subprecategory C P w)
+        ( is-in-obj-inclusion-obj-Subprecategory C P x)
+        ( is-in-obj-inclusion-obj-Subprecategory C P w))
+      ( inv-associative-comp-hom-Precategory C
         ( inclusion-hom-Subprecategory C P z w h)
         ( inclusion-hom-Subprecategory C P y z g)
         ( inclusion-hom-Subprecategory C P x y f))
@@ -430,8 +453,14 @@ module _
     associative-composition-operation-binary-family-Set hom-set-Subprecategory
   pr1 associative-composition-operation-Subprecategory {x} {y} {z} =
     comp-hom-Subprecategory {x} {y} {z}
-  pr2 associative-composition-operation-Subprecategory {x} {y} {z} {w} =
-    associative-comp-hom-Subprecategory {x} {y} {z} {w}
+  pr1
+    ( pr2
+      associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
+    associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f
+  pr2
+    ( pr2
+      associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
+    inv-associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f
 
   is-unital-composition-operation-Subprecategory :
     is-unital-composition-operation-binary-family-Set

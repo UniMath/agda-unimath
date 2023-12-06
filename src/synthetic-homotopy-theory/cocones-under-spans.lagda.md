@@ -14,6 +14,7 @@ open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
+open import foundation.morphisms-arrows
 open import foundation.morphisms-spans
 open import foundation.spans
 open import foundation.structure-identity-principle
@@ -477,4 +478,66 @@ module _
   pr1 (diagonal-into-cocone-span g) = g
   pr1 (pr2 (diagonal-into-cocone-span g)) = g
   pr2 (pr2 (diagonal-into-cocone-span g)) = refl-htpy
+```
+
+### Cocones obtained from morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
+  where
+
+  cocone-hom-arrow : cocone-span f (map-domain-hom-arrow f g h) Y
+  pr1 cocone-hom-arrow = map-codomain-hom-arrow f g h
+  pr1 (pr2 cocone-hom-arrow) = g
+  pr2 (pr2 cocone-hom-arrow) = coh-hom-arrow f g h
+```
+
+### The swapping function on cocones over spans
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4)
+  where
+
+  swap-cocone-span : cocone-span f g X → cocone-span g f X
+  pr1 (swap-cocone-span c) = vertical-map-cocone-span f g c
+  pr1 (pr2 (swap-cocone-span c)) = horizontal-map-cocone-span f g c
+  pr2 (pr2 (swap-cocone-span c)) = inv-htpy (coherence-square-cocone-span f g c)
+
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4)
+  where
+
+  is-involution-swap-cocone-span : swap-cocone-span g f X ∘ swap-cocone-span f g X ~ id
+  is-involution-swap-cocone-span c =
+    eq-htpy-cocone-span f g
+      ( swap-cocone-span g f X (swap-cocone-span f g X c))
+      ( c)
+      ( ( refl-htpy) ,
+        ( refl-htpy) ,
+        ( λ s →
+          concat
+            ( right-unit)
+            ( coherence-square-cocone-span f g c s)
+            ( inv-inv (coherence-square-cocone-span f g c s))))
+
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4)
+  where
+
+  is-equiv-swap-cocone-span : is-equiv (swap-cocone-span f g X)
+  is-equiv-swap-cocone-span =
+    is-equiv-is-invertible
+      ( swap-cocone-span g f X)
+      ( is-involution-swap-cocone-span g f X)
+      ( is-involution-swap-cocone-span f g X)
+
+  equiv-swap-cocone-span : cocone-span f g X ≃ cocone-span g f X
+  pr1 equiv-swap-cocone-span = swap-cocone-span f g X
+  pr2 equiv-swap-cocone-span = is-equiv-swap-cocone-span
 ```

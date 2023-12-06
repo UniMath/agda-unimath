@@ -18,11 +18,9 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.coherently-invertible-maps
-open import foundation-core.constant-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.path-split-maps
@@ -33,24 +31,6 @@ open import foundation-core.truncated-maps
 </details>
 
 ## Properties
-
-### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fiber f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
-
-This condition simplifies, for example, the proof that connected maps satisfy a
-dependent universal property.
-
-```agda
-is-equiv-precomp-Π-fiber-condition :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3} →
-  ((b : B) → is-equiv (λ (c : C b) → const (fiber f b) (C b) c)) →
-  is-equiv (precomp-Π f C)
-is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
-  is-equiv-comp
-    ( map-reduce-Π-fiber f (λ b u → C b))
-    ( map-Π (λ b u t → u))
-    ( is-equiv-map-Π-is-fiberwise-equiv H)
-    ( is-equiv-map-reduce-Π-fiber f (λ b u → C b))
-```
 
 ### Equivalences induce an equivalence from the type of homotopies between two dependent functions to the type of homotopies between their precomposites
 

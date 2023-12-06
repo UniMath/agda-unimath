@@ -8,6 +8,7 @@ module foundation-core where
 open import foundation-core.1-types public
 open import foundation-core.cartesian-product-types public
 open import foundation-core.coherently-invertible-maps public
+open import foundation-core.commuting-prisms-of-maps public
 open import foundation-core.commuting-squares-of-maps public
 open import foundation-core.commuting-triangles-of-maps public
 open import foundation-core.constant-maps public
@@ -24,6 +25,7 @@ open import foundation-core.endomorphisms public
 open import foundation-core.equality-dependent-pair-types public
 open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
+open import foundation-core.families-of-equivalences public
 open import foundation-core.fibers-of-maps public
 open import foundation-core.function-types public
 open import foundation-core.functoriality-dependent-function-types public

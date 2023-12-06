@@ -127,6 +127,24 @@ module _
   associative-comp-hom-Full-Large-Subprecategory X Y Z W =
     associative-comp-hom-Large-Precategory C
 
+  inv-associative-comp-hom-Full-Large-Subprecategory :
+    {l1 l2 l3 l4 : Level}
+    (X : obj-Full-Large-Subprecategory l1)
+    (Y : obj-Full-Large-Subprecategory l2)
+    (Z : obj-Full-Large-Subprecategory l3)
+    (W : obj-Full-Large-Subprecategory l4)
+    (h : hom-Full-Large-Subprecategory Z W)
+    (g : hom-Full-Large-Subprecategory Y Z)
+    (f : hom-Full-Large-Subprecategory X Y) →
+    comp-hom-Full-Large-Subprecategory X Z W
+      ( h)
+      ( comp-hom-Full-Large-Subprecategory X Y Z g f) ＝
+    comp-hom-Full-Large-Subprecategory X Y W
+      ( comp-hom-Full-Large-Subprecategory Y Z W h g)
+      ( f)
+  inv-associative-comp-hom-Full-Large-Subprecategory X Y Z W =
+    inv-associative-comp-hom-Large-Precategory C
+
   left-unit-law-comp-hom-Full-Large-Subprecategory :
     {l1 l2 : Level}
     (X : obj-Full-Large-Subprecategory l1)
@@ -170,6 +188,10 @@ module _
     large-precategory-Full-Large-Subprecategory
     {l1} {l2} {l3} {l4} {X} {Y} {Z} {W} =
     associative-comp-hom-Full-Large-Subprecategory X Y Z W
+  inv-associative-comp-hom-Large-Precategory
+    large-precategory-Full-Large-Subprecategory
+    {l1} {l2} {l3} {l4} {X} {Y} {Z} {W} =
+    inv-associative-comp-hom-Full-Large-Subprecategory X Y Z W
   left-unit-law-comp-hom-Large-Precategory
     large-precategory-Full-Large-Subprecategory {l1} {l2} {X} {Y} =
     left-unit-law-comp-hom-Full-Large-Subprecategory X Y

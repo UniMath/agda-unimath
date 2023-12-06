@@ -79,14 +79,32 @@ module _
     (h : hom-Large-Function-Precategory z w)
     (g : hom-Large-Function-Precategory y z)
     (f : hom-Large-Function-Precategory x y) →
-    ( comp-hom-Large-Function-Precategory
+    comp-hom-Large-Function-Precategory
       ( comp-hom-Large-Function-Precategory h g)
-      ( f)) ＝
-    ( comp-hom-Large-Function-Precategory
+      ( f) ＝
+    comp-hom-Large-Function-Precategory
       ( h)
-      ( comp-hom-Large-Function-Precategory g f))
+      ( comp-hom-Large-Function-Precategory g f)
   associative-comp-hom-Large-Function-Precategory =
     associative-comp-hom-Π-Large-Precategory I (λ _ → C)
+
+  inv-associative-comp-hom-Large-Function-Precategory :
+    {l2 l3 l4 l5 : Level}
+    {x : obj-Large-Function-Precategory l2}
+    {y : obj-Large-Function-Precategory l3}
+    {z : obj-Large-Function-Precategory l4}
+    {w : obj-Large-Function-Precategory l5} →
+    (h : hom-Large-Function-Precategory z w)
+    (g : hom-Large-Function-Precategory y z)
+    (f : hom-Large-Function-Precategory x y) →
+    comp-hom-Large-Function-Precategory
+      ( h)
+      ( comp-hom-Large-Function-Precategory g f) ＝
+    comp-hom-Large-Function-Precategory
+      ( comp-hom-Large-Function-Precategory h g)
+      ( f)
+  inv-associative-comp-hom-Large-Function-Precategory =
+    inv-associative-comp-hom-Π-Large-Precategory I (λ _ → C)
 
   id-hom-Large-Function-Precategory :
     {l2 : Level} {x : obj-Large-Function-Precategory l2} →

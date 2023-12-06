@@ -131,6 +131,21 @@ module _
   associative-comp-hom-Large-Category =
     associative-comp-hom-Large-Precategory (large-precategory-Large-Category C)
 
+  inv-associative-comp-hom-Large-Category :
+    {l1 l2 l3 l4 : Level}
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3}
+    {W : obj-Large-Category l4} →
+    (h : hom-Large-Category Z W)
+    (g : hom-Large-Category Y Z)
+    (f : hom-Large-Category X Y) →
+    ( comp-hom-Large-Category h (comp-hom-Large-Category g f)) ＝
+    ( comp-hom-Large-Category (comp-hom-Large-Category h g) f)
+  inv-associative-comp-hom-Large-Category =
+    inv-associative-comp-hom-Large-Precategory
+      ( large-precategory-Large-Category C)
+
   left-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}
     {X : obj-Large-Category l1}

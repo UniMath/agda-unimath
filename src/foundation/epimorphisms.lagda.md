@@ -203,6 +203,5 @@ module _
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
 - [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
-- [Epimorphisms](foundation.epimorphisms.md)
 - [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
 - [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)

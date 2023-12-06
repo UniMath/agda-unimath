@@ -5,6 +5,9 @@
 ```agda
 module synthetic-homotopy-theory where
 
+open import synthetic-homotopy-theory.0-acyclic-maps public
+open import synthetic-homotopy-theory.0-acyclic-types public
+open import synthetic-homotopy-theory.1-acyclic-types public
 open import synthetic-homotopy-theory.26-descent public
 open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.acyclic-maps public
@@ -12,6 +15,7 @@ open import synthetic-homotopy-theory.acyclic-types public
 open import synthetic-homotopy-theory.category-of-connected-set-bundles-circle public
 open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
+open import synthetic-homotopy-theory.cocartesian-morphisms-arrows public
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
@@ -46,6 +50,7 @@ open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
+open import synthetic-homotopy-theory.functoriality-sequential-colimits public
 open import synthetic-homotopy-theory.functoriality-suspensions public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.hatchers-acyclic-type public
@@ -73,7 +78,9 @@ open import synthetic-homotopy-theory.pushout-products public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.sections-descent-circle public
+open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
+open import synthetic-homotopy-theory.sequentially-compact-types public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.sphere-prespectrum public
@@ -84,6 +91,8 @@ open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public
 open import synthetic-homotopy-theory.triple-loop-spaces public
+open import synthetic-homotopy-theory.truncated-acyclic-maps public
+open import synthetic-homotopy-theory.truncated-acyclic-types public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.universal-property-circle public
 open import synthetic-homotopy-theory.universal-property-coequalizers public

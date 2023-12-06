@@ -101,6 +101,10 @@ module _
     pr1 (pr2 (is-equiv-terminal-map-is-contr H)) x = center H
     pr2 (pr2 (is-equiv-terminal-map-is-contr H)) = contraction H
 
+  equiv-unit-is-contr : is-contr A → A ≃ unit
+  pr1 (equiv-unit-is-contr H) = terminal-map
+  pr2 (equiv-unit-is-contr H) = is-equiv-terminal-map-is-contr H
+
   abstract
     is-contr-is-equiv-const : is-equiv (terminal-map {A = A}) → is-contr A
     pr1 (is-contr-is-equiv-const ((g , G) , (h , H))) = h star
