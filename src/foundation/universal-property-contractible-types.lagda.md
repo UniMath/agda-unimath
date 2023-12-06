@@ -25,7 +25,7 @@ open import foundation-core.singleton-induction
 ## Idea
 
 The
-{{#concept "dependent universal property" Disambiguation="of [contractible types](foundation-core.contractible-types.md)"}}
+{{#concept "dependent universal property of [contractible types](foundation-core.contractible-types.md)" Agda=dependent-universal-property-contr}}
 states that, given a point `a : A`, the evaluating map
 
 ```text
@@ -63,8 +63,7 @@ module _
   where
 
   universal-property-contr : UUω
-  universal-property-contr =
-    {l : Level} (X : UU l) → is-equiv (ev-point' a {X})
+  universal-property-contr = {l : Level} (X : UU l) → is-equiv (ev-point' a {X})
 ```
 
 ## Properties
