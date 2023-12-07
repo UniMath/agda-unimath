@@ -358,7 +358,7 @@ module _
       ( htpy-precomp front S)
       ( inv-htpy (compute-htpy-precomp-right-whisker hA inv-bottom S)))
 
-  precomp-vertical-coherence-inv-triangles-prism-maps :
+  precomp-vertical-coherence-prism-inv-triangles-maps :
     vertical-coherence-prism-inv-triangles-maps
       ( precomp f' S)
       ( precomp h' S)
@@ -374,7 +374,7 @@ module _
       ( inv-htpy (precomp-coherence-square-maps h hA hB h' left S))
       ( inv-htpy (precomp-coherence-square-maps g hB hC g' right S))
       ( precomp-coherence-triangle-maps' f g h inv-top S)
-  precomp-vertical-coherence-inv-triangles-prism-maps =
+  precomp-vertical-coherence-prism-inv-triangles-maps =
     vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps
       ( precomp f' S)
       ( precomp h' S)
