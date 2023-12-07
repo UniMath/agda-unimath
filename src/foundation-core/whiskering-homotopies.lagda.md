@@ -246,7 +246,7 @@ module _
 
   ap-left-whisk-htpy :
     (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
-  ap-left-whisk-htpy h α x = (ap h) ·l α
+  ap-left-whisk-htpy h α = (ap h) ·l α
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
