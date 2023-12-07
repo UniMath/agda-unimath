@@ -37,7 +37,7 @@
   "editor.inlineSuggest.enabled": true,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.snippetSuggestions": "top",
-  "editor.wordBasedSuggestions": false,
+  "editor.wordBasedSuggestions": "off",
   "javascript.suggest.names": false,
 
   // Autoformatting
