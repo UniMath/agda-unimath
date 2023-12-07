@@ -116,7 +116,6 @@ so it suffices to invoke the flattening lemma for coequalizers.
 **Proof:** The diagram we construct is
 
 ```text
-
                              --------->
   Σ ((n, a) : Σ ℕ A) P(iₙ a) ---------> Σ ((n, a) : Σ ℕ A) P(iₙ a) -----> Σ (x : X) P(x)
             |                                     |                            |

@@ -50,7 +50,7 @@ module _
   coherence-triangle-identifications' left right top = (top ∙ right) ＝ left
 ```
 
-### Properties
+## Properties
 
 ### Whiskering of triangles of identifications
 
