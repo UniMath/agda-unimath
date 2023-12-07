@@ -186,8 +186,8 @@ module _
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
-  ( k : (x : A) → B x) {f g h : {x : A} (y : B x) → C x y}
-  ( H : {x : A} → f {x} ~ g {x}) (K : {x : A} → g {x} ~ h {x})
+  (k : (x : A) → B x) {f g h : {x : A} (y : B x) → C x y}
+  (H : {x : A} → f {x} ~ g {x}) (K : {x : A} → g {x} ~ h {x})
   where
 
   distributive-right-whisk-concat-htpy :
@@ -240,8 +240,8 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  { f g : (x : A) → B x}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f g : (x : A) → B x}
   where
 
   ap-left-whisk-htpy :
@@ -262,16 +262,16 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level}
+  {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : A → UU l2}
   {C : {x : A} → B x → UU l3} {D : {x : A} → B x → UU l4}
-  { f g : {x : A} (y : B x) → C y}
+  {f g : {x : A} (y : B x) → C y}
   where
 
-  coherence-left-right-whish-htpy :
+  coherence-left-right-whisk-htpy :
     (h : {x : A} {y : B x} → C y → D y)
     (H : {x : A} → f {x} ~ g {x})
     (h' : (x : A) → B x) →
     h ·l (H ·r h') ~ (h ·l H) ·r h'
-  coherence-left-right-whish-htpy h H h' = refl-htpy
+  coherence-left-right-whisk-htpy h H h' = refl-htpy
 ```
