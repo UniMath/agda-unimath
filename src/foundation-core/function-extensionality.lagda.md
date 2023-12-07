@@ -30,8 +30,8 @@ The
 {{#concept "function extensionality axiom" Agda=function-extensionality Agda=funext}}
 asserts that [identifications](foundation-core.identity-types.md) of (dependent)
 functions are [equivalently](foundation-core.equivalences.md) described as
-pointwise equalities between them. In other words, a function is completely
-determined by its values.
+[homotopies](foundation-core.homotopies.md) between them. In other words, a
+function is completely determined by its values.
 
 ## Definitions
 
