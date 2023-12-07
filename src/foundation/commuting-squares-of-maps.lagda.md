@@ -17,6 +17,7 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.equivalences
 open import foundation.path-algebra
 open import foundation.precomposition-functions
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -151,7 +152,7 @@ coherence-square-inv-all top left right bottom H =
       ( H))
 ```
 
-### Any commuting square of maps induces a commuting square of function spaces
+### Any commuting square of maps induces a commuting square of function spaces via precomposition
 
 ```agda
 precomp-coherence-square-maps :
@@ -165,6 +166,48 @@ precomp-coherence-square-maps :
     ( precomp top X)
     ( precomp left X)
 precomp-coherence-square-maps top left right bottom = htpy-precomp
+
+precomp-coherence-square-maps' :
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D) →
+  coherence-square-maps' top left right bottom → (X : UU l5) →
+  coherence-square-maps'
+    ( precomp right X)
+    ( precomp bottom X)
+    ( precomp top X)
+    ( precomp left X)
+precomp-coherence-square-maps' top left right bottom = htpy-precomp
+```
+
+### Any commuting square of maps induces a commuting square of function spaces via postcomposition
+
+```agda
+postcomp-coherence-square-maps :
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  (X : UU l5) →
+  coherence-square-maps top left right bottom →
+  coherence-square-maps
+    ( postcomp X top)
+    ( postcomp X left)
+    ( postcomp X right)
+    ( postcomp X bottom)
+postcomp-coherence-square-maps top left right bottom X = htpy-postcomp X
+
+postcomp-coherence-square-maps' :
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D) →
+  (X : UU l5) →
+  coherence-square-maps' top left right bottom →
+  coherence-square-maps'
+    ( postcomp X top)
+    ( postcomp X left)
+    ( postcomp X right)
+    ( postcomp X bottom)
+postcomp-coherence-square-maps' top left right bottom X = htpy-postcomp X
 ```
 
 ## Properties
