@@ -263,7 +263,7 @@ module _
 We have the coherence
 
 ```text
-  (h ·l H) ·r h' ~ f ·l (H ·r g)
+  (h ·l H) ·r h' ~ h ·l (H ·r h')
 ```
 
 and, in fact, this equation holds definitionally.
