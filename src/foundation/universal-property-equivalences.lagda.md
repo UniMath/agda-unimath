@@ -105,3 +105,15 @@ module _
         ( f)
         ( λ C → H (pr1 C))
 ```
+
+#### If dependent precomposition by `f` is an equivalence, then `f` is an equivalence
+
+```agda
+abstract
+  is-equiv-is-equiv-precomp-Π :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    dependent-universal-property-equiv f →
+    is-equiv f
+  is-equiv-is-equiv-precomp-Π f H =
+    is-equiv-is-equiv-precomp f (is-equiv-precomp-is-equiv-precomp-Π f H)
+```

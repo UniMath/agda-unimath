@@ -28,18 +28,37 @@ open import foundation-core.transport-along-identifications
 
 </details>
 
+## Idea
+
+The {{#concept "square" Disambiguation="natural number"}} `n²` of a
+[natural number](elementary-number-theory.natural-numbers.md) `n` is the
+[product](elementary-number-theory.multiplication-natural-numbers.md)
+
+```text
+  n² := n * n
+```
+
+of `n` with itself.
+
 ## Definition
+
+### Squares of natural numbers
 
 ```agda
 square-ℕ : ℕ → ℕ
 square-ℕ n = mul-ℕ n n
+```
 
-cube-ℕ : ℕ → ℕ
-cube-ℕ n = (square-ℕ n) *ℕ n
+### The predicate of being a square of a natural number
 
+```agda
 is-square-ℕ : ℕ → UU lzero
 is-square-ℕ n = Σ ℕ (λ x → n ＝ square-ℕ x)
+```
 
+### The square root of a square natural number
+
+```agda
 square-root-ℕ : (n : ℕ) → is-square-ℕ n → ℕ
 square-root-ℕ _ (root , _) = root
 ```
@@ -153,3 +172,7 @@ is-decidable-is-square-ℕ n =
     ( λ x → has-decidable-equality-ℕ n (square-ℕ x))
     ( is-decidable-big-root n)
 ```
+
+## See also
+
+- [Cubes of natural numbers](elementary-number-theory.cubes-natural-numbers.md)
