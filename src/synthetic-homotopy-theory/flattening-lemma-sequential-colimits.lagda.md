@@ -113,6 +113,29 @@ coequalizers, which is recorded in
 [`synthetic-homotopy-theory.dependent-universal-property-sequential-colimits`](synthetic-homotopy-theory.dependent-universal-property-sequential-colimits.md),
 so it suffices to invoke the flattening lemma for coequalizers.
 
+**Proof:** The diagram we construct is
+
+```text
+
+                             --------->
+  Σ ((n, a) : Σ ℕ A) P(iₙ a) ---------> Σ ((n, a) : Σ ℕ A) P(iₙ a) -----> Σ (x : X) P(x)
+            |                                     |                            |
+    assoc-Σ | ≃                           assoc-Σ | ≃                       id | ≃
+            |                                     |                            |
+            V               ---------->           V                            V
+  Σ (n : ℕ, a : Aₙ) P(iₙ a) ----------> Σ (n : ℕ, a : Aₙ) P(iₙ a) ------> Σ (x : X) P(x) ,
+```
+
+where the top is the cofork obtained by coforkification of the cocone for the
+flattening lemma, and the bottom is the cofork obtained by flattening the
+coforkification of the original cocone.
+
+By assumption, the original cocone is a sequential colimit, which implies that
+its coforkification is a coequalizer. The flattening lemma for coequalizers
+implies that the bottom cofork is a coequalizer, which in turn implies that the
+top cofork is a coequalizer, hence the flattening of the original cocone is a
+sequential colimit.
+
 ```agda
 module _
   { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
