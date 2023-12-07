@@ -468,7 +468,7 @@ module _
   pr1 (precomp-hom-arrow S) = precomp (map-codomain-hom-arrow f g α) S
   pr1 (pr2 (precomp-hom-arrow S)) = precomp (map-domain-hom-arrow f g α) S
   pr2 (pr2 (precomp-hom-arrow S)) h =
-    eq-htpy (h ·l (inv-htpy (coh-hom-arrow f g α)))
+    inv (eq-htpy (h ·l coh-hom-arrow f g α))
 ```
 
 ### Morphisms of arrows give morphisms of postcomposition arrows

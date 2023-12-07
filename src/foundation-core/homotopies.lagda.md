@@ -289,6 +289,11 @@ module _
   ap-concat-htpy' K L x =
     ap (concat' (f x) (K x)) (L x)
 
+  ap-binary-concat-htpy :
+    {H H' : f ~ g} {K K' : g ~ h} → H ~ H' → K ~ K' → (H ∙h K) ~ (H' ∙h K')
+  ap-binary-concat-htpy {H} {H'} {K} {K'} HH KK =
+    ap-concat-htpy H KK ∙h ap-concat-htpy' K' HH
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   {H H' : f ~ g}
