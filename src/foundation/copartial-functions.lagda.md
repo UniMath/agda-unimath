@@ -52,11 +52,11 @@ domain of the pushout-product `B □ T` is the type of copartial elements of `B`
 functions can be defined by
 
 ```text
-                     Σ (Q : Prop), (Σ (P : Prop), C * P) * Q
+                     copartial-element (copartial-element C)
                             ∧                 |
-   map-copartial-element g /                  | μ
+   map-copartial-element g /                  | join-copartial-element
                           /                   V
-  A ----> Σ (Q : Prop), B * Q       Σ (Q : Prop), C * Q
+  A ----> copartial-element B       copartial-element C
       f
 ```
 
@@ -66,12 +66,13 @@ In this diagram, the map going up is defined by functoriality of the operation
   X ↦ Σ (Q : Prop), X * Q
 ```
 
-The map going down is defined by the pushout-product algebra structure of the
-map `T : 1 → Prop`. The main idea behind composition of copartial functions is
-that a composite of copartial function is erased on the union of the subtypes
-where each factor is erased. Indeed, if `f` is erased at `a` or
-`map-copartial-eleemnt g` is erased at the copartial element `f a` of `B`, then
-the composite of copartial functions `g ∘ f` should be erased at `a`.
+The map going down is defined by the join operation on copartial elements, i.e.,
+the pushout-product algebra structure of the map `T : 1 → Prop`. The main idea
+behind composition of copartial functions is that a composite of copartial
+function is erased on the union of the subtypes where each factor is erased.
+Indeed, if `f` is erased at `a` or `map-copartial-eleemnt g` is erased at the
+copartial element `f a` of `B`, then the composite of copartial functions
+`g ∘ f` should be erased at `a`.
 
 **Note:** The topic of copartial functions was not known to us in the
 literature, and our formalization on this topic should be considered

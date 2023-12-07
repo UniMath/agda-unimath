@@ -90,7 +90,7 @@ By this [morphism of arrows](foundation.morphisms-arrows.md) it follows that
 there is a morphism of arrows
 
 ```text
-  (A □ T) □ T → A □ T,
+  join-copartial-element : (A □ T) □ T → A □ T,
 ```
 
 i.e., that copartial copartial elements induce copartial elements. These
