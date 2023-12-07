@@ -172,7 +172,7 @@ the following diagram:
 equipped with [commuting squares](foundation.commuting-squares-of-maps.md) for
 the three small squares, and a coherence datum expressing that the right square
 coequalizes the left squares in the category of arrows, we have that the top
-cofork is a coequalizer if and only if the bottom square is a coequalizer.
+cofork is a coequalizer if and only if the bottom cofork is a coequalizer.
 
 ```agda
 module _
