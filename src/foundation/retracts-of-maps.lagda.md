@@ -737,8 +737,8 @@ module _
         ( precomp g S)
         ( precomp f S)
         ( hom-retraction-precomp-retract-map))
-  is-retraction-map-domain-precomp-retract-map h =
-    eq-htpy (h ·l is-retraction-map-codomain-hom-retraction-retract-map f g R)
+  is-retraction-map-domain-precomp-retract-map =
+    htpy-precomp (is-retraction-map-codomain-hom-retraction-retract-map f g R) S
 
   is-retraction-map-codomain-precomp-retract-map :
     is-retraction
@@ -750,8 +750,8 @@ module _
         ( precomp g S)
         ( precomp f S)
         ( hom-retraction-precomp-retract-map))
-  is-retraction-map-codomain-precomp-retract-map h =
-    eq-htpy (h ·l is-retraction-map-domain-hom-retraction-retract-map f g R)
+  is-retraction-map-codomain-precomp-retract-map =
+    htpy-precomp (is-retraction-map-domain-hom-retraction-retract-map f g R) S
 
   coh-retract-precomp-retract-map :
     coherence-retract-map
@@ -789,9 +789,9 @@ module _
   pr1 (pr2 retract-precomp-retract-map) =
     precomp-hom-arrow f g (inclusion-retract-map f g R) S
   pr1 (pr2 (pr2 retract-precomp-retract-map)) =
-    htpy-precomp (is-retraction-map-codomain-hom-retraction-retract-map f g R) S
+    is-retraction-map-domain-precomp-retract-map
   pr1 (pr2 (pr2 (pr2 retract-precomp-retract-map))) =
-    htpy-precomp (is-retraction-map-domain-hom-retraction-retract-map f g R) S
+    is-retraction-map-codomain-precomp-retract-map
   pr2 (pr2 (pr2 (pr2 retract-precomp-retract-map))) =
     coh-retract-precomp-retract-map
 ```

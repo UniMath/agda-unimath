@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.local-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -22,6 +23,8 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
@@ -236,6 +239,61 @@ is-contr-is-local A is-local-A =
       ( is-equiv-map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)))
       ( is-local-A))
     ( universal-property-empty' A)
+```
+
+### If `S` is `g`-local, and `f` is a retract of `g`, then `S` is also `f`-local
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R : f retract-of-map g) (S : UU l5)
+  where
+
+  is-local-retract-map-is-local : is-local g S → is-local f S
+  is-local-retract-map-is-local =
+    is-equiv-retract-map-is-equiv
+      ( precomp f S)
+      ( precomp g S)
+      ( retract-precomp-retract-map f g R S)
+```
+
+In fact, the higher coherence of the retract is not needed:
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R₀ : A retract-of X) (R₁ : B retract-of Y)
+  (i : coherence-square-maps' (inclusion-retract R₀) f g (inclusion-retract R₁))
+  (r :
+    coherence-square-maps'
+      ( map-retraction-retract R₀)
+      ( g)
+      ( f)
+      ( map-retraction-retract R₁))
+  (S : UU l5)
+  where
+
+  is-local-retract-map-is-local' : is-local g S → is-local f S
+  is-local-retract-map-is-local' =
+    is-equiv-retract-map-is-equiv'
+      ( precomp f S)
+      ( precomp g S)
+      ( retract-precomp R₁ S)
+      ( retract-precomp R₀ S)
+      ( precomp-coherence-square-maps
+        ( g)
+        ( map-retraction-retract R₀)
+        ( map-retraction-retract R₁)
+        ( f)
+        ( r)
+        ( S))
+      ( precomp-coherence-square-maps
+        ( f)
+        ( inclusion-retract R₀)
+        ( inclusion-retract R₁)
+        ( g)
+        ( i)
+        ( S))
 ```
 
 ## See also
