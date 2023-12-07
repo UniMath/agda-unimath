@@ -26,8 +26,7 @@ the type of partial elements of `X` is defined to be
   Σ (P : Prop), (P → X).
 ```
 
-We say
-that a partial element `(P, f)` is
+We say that a partial element `(P, f)` is
 {{#concept "defined" Disambiguation="partial element"}} if the proposition `P`
 holds.
 
