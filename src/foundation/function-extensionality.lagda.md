@@ -108,6 +108,18 @@ coherence-square-eq-htpy-ap-precomp {C = C} f g h =
 
 ### `eq-htpy` preserves inverses
 
+In other words, we have a commutative diagram
+
+```text
+                  inv
+       (f ＝ g) --------> (g ＝ f)
+          ^                  ^
+  eq-htpy |                  | eq-htpy
+          |                  |
+       (f ~ g) ---------> (g ~ f).
+                inv-htpy
+```
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
