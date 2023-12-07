@@ -24,6 +24,23 @@ that a partial element `(P, f)` is
 {{#concept "defined" Disambiguation="partial element"}} if the proposition `P`
 holds.
 
+Alternatively, the type of partial elements of `X` can be descibed as the
+codomain of the
+[composition](species.composition-cauchy-series-species-of-types.md)
+
+```text
+    1   ∅     ∅
+    |   |     |
+  T | ∘ |  =  |
+    V   V     V
+  Prop  X   P T X
+```
+
+of [polynomial-endofunctors.md](trees.polynomial-endofunctors.md). Indeed, the
+codomain of this composition operation of morphisms is the polynomial
+endofunctor `P T` of the map `T : 1 → Prop` evaluated at `X`, which is exactly
+the type of partial elements of `X`.
+
 ## Definitions
 
 ### Partial elements of a type
