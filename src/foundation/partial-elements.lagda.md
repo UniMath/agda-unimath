@@ -19,7 +19,14 @@ open import foundation-core.propositions
 ## Idea
 
 A {{#concept "partial element" Agda=partial-element}} of `X` consists of a
-[proposition](foundation-core.propositions.md) `P` and a map `P → X`. We say
+[proposition](foundation-core.propositions.md) `P` and a map `P → X`. That is,
+the type of partial elements of `X` is defined to be
+
+```text
+  Σ (P : Prop), (P → X).
+```
+
+We say
 that a partial element `(P, f)` is
 {{#concept "defined" Disambiguation="partial element"}} if the proposition `P`
 holds.
@@ -79,6 +86,6 @@ This remains to be shown.
 ## See also
 
 - [Copartial elements](foundation.copartial-elements.md)
-- [Partial function](foundation.partial-functions.md)
+- [Partial functions](foundation.partial-functions.md)
 - [Partial sequences](foundation.partial-sequences.md)
 - [Total partial functions](foundation.total-partial-functions.md)

@@ -97,8 +97,9 @@ i.e., that copartial copartial elements induce copartial elements. These
 considerations allow us to compose
 [copartial functions](foundation.copartial-functions.md).
 
-**Note:** The topic of copartial elements is not known in the literature, and
-our formalization on this topic should be considered experimental.
+**Note:** The topic of copartial functions was not known to us in the
+literature, and our formalization on this topic should be considered
+experimental.
 
 ## Definition
 

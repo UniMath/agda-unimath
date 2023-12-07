@@ -37,11 +37,11 @@ A copartial function is [equivalently](foundation-core.equivalences.md)
 described as a [morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text
-     A    B   1
-     |    |   |
-  id |  ⇒ | □ | T
-     V    V   V
-     A    1  Prop
+     A     B   1
+     |     |   |
+  id |  ⇒  | □ | T
+     V     V   V
+     A     1  Prop
 ```
 
 where `□` is the
@@ -153,3 +153,7 @@ module _
   copartial-function-function =
     copartial-dependent-function-dependent-function f
 ```
+
+## See also
+
+- [Partial functions](foundation.partial-functions.md)
