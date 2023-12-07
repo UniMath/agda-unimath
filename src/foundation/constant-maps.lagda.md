@@ -10,6 +10,7 @@ open import foundation-core.constant-maps public
 
 ```agda
 open import foundation.0-maps
+open import foundation.action-on-homotopies-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
@@ -38,6 +39,21 @@ open import foundation-core.truncation-levels
 </details>
 
 ## Properties
+
+### The action on homotopies of a constant map is constant
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3}
+  {f g : (x : A) → B x}
+  where
+
+  compute-action-htpy-function-const :
+    (c : C) (H : f ~ g) →
+    action-htpy-function (const ((x : A) → B x) C c) H ＝ refl
+  compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
+```
 
 ### A type is `k+1`-truncated if and only if all constant maps into it are `k`-truncated
 
