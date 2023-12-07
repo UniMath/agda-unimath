@@ -174,7 +174,6 @@ module _
   ( hA : A → A') (hB : B → B') (hC : C → C')
   where
 
-
   module _
     ( top : coherence-triangle-maps f g h)
     ( inv-front : coherence-square-maps hA f f' hC)

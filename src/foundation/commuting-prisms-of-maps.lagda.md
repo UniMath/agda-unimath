@@ -253,4 +253,38 @@ module _
       ( ap-binary (_∙_)
         ( ap eq-htpy (eq-htpy (associative-left-whisk-comp i g' left)))
         ( compute-eq-htpy-right-whisk h (i ·l right))))
+
+  precomp-vertical-coherence-prism-maps :
+    vertical-coherence-prism-maps
+      ( precomp f' S)
+      ( precomp h' S)
+      ( precomp g' S)
+      ( precomp f S)
+      ( precomp h S)
+      ( precomp g S)
+      ( precomp hC S)
+      ( precomp hB S)
+      ( precomp hA S)
+      ( precomp-coherence-triangle-maps f' g' h' bottom S)
+      ( inv-htpy (precomp-coherence-square-maps f hA hC f' front S))
+      ( inv-htpy (precomp-coherence-square-maps h hA hB h' left S))
+      ( inv-htpy (precomp-coherence-square-maps g hB hC g' right S))
+      ( precomp-coherence-triangle-maps f g h top S)
+  precomp-vertical-coherence-prism-maps =
+    vertical-coherence-prism-maps-vertical-coherence-prism-maps''
+      ( precomp f' S)
+      ( precomp h' S)
+      ( precomp g' S)
+      ( precomp f S)
+      ( precomp h S)
+      ( precomp g S)
+      ( precomp hC S)
+      ( precomp hB S)
+      ( precomp hA S)
+      ( precomp-coherence-triangle-maps f' g' h' bottom S)
+      ( precomp-coherence-square-maps f hA hC f' front S)
+      ( precomp-coherence-square-maps h hA hB h' left S)
+      ( precomp-coherence-square-maps g hB hC g' right S)
+      ( precomp-coherence-triangle-maps f g h top S)
+      ( precomp-vertical-coherence-prism-maps'')
 ```
