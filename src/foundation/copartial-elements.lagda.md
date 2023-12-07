@@ -39,14 +39,14 @@ following [pullback squares](foundation.pullback-squares.md)
 
 ```text
   A -----> Σ (Q : Prop), A * Q        1 -----> Σ (P : Prop), (P → A)
-  |                |                  |                |
+  | ⌟              |                  | ⌟              |
   |                |                  |                |
   V                V                  V                V
   1 -----------> Prop                 1 -----------> Prop
           F                                   F
 
   1 -----> Σ (Q : Prop), A * Q        A -----> Σ (P : Prop), (P → A)
-  |                |                  |                |
+  | ⌟              |                  | ⌟              |
   |                |                  |                |
   V                V                  V                V
   1 -----------> Prop                 1 -----------> Prop
