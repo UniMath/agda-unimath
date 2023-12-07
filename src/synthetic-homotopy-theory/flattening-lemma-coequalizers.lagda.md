@@ -171,26 +171,18 @@ module _
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( λ where
-            (inl a , t) → refl
-            (inr a , t) → refl)
-          ( λ where
-            (inl a , t) → refl
-            (inr a , t) → refl)
+          ( ind-Σ (ind-coprod _ (ev-pair refl-htpy) (ev-pair refl-htpy)))
+          ( ind-Σ (ind-coprod _ (ev-pair refl-htpy) (ev-pair refl-htpy)))
           ( refl-htpy)
           ( refl-htpy)
           ( coherence-square-cocone-cofork
             ( bottom-map-cofork-flattening-lemma-coequalizer f g P e)
             ( top-map-cofork-flattening-lemma-coequalizer f g P e)
             ( cofork-flattening-lemma-coequalizer f g P e))
-          ( λ where
-            (inl a , t) → refl
-            (inr a , t) →
-              ( ap-id
-                ( eq-pair-Σ
-                  ( coherence-cofork f g e a)
-                  ( refl))) ∙
-              ( inv right-unit))
+          ( ind-Σ
+            ( ind-coprod _
+              ( ev-pair refl-htpy)
+              ( ev-pair (λ t → ap-id _ ∙ inv right-unit))))
           ( is-equiv-map-equiv
             ( right-distributive-Σ-coprod A A
               ( ( P) ∘

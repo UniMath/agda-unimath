@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
@@ -228,18 +229,12 @@ module _
         ( hB)
         ( hC)
         ( coherence-square-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( λ where
-          (inl a) → refl
-          (inr a) → refl)
-        ( λ where
-          (inl a) → coh-hom-arrow hA hB f a
-          (inr a) → coh-hom-arrow hA hB g a)
+        ( ind-coprod _ refl-htpy refl-htpy)
+        ( ind-coprod _ (coh-hom-arrow hA hB f) (coh-hom-arrow hA hB g))
         ( coh-comp-hom-arrow hA hB hC c f)
         ( coh-hom-arrow hB hC c)
         ( coherence-square-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( λ where
-          (inl a) → right-unit
-          (inr a) → coh-htpy-hom-arrow hA hC _ _ H a)
+        ( ind-coprod _ (λ _ → right-unit) (coh-htpy-hom-arrow hA hC _ _ H))
         ( is-equiv-map-coprod is-equiv-hA is-equiv-hA)
         ( is-equiv-hA)
         ( is-equiv-hB)
@@ -277,18 +272,12 @@ module _
         ( hB)
         ( hC)
         ( coherence-square-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( λ where
-          (inl a) → refl
-          (inr a) → refl)
-        ( λ where
-          (inl a) → coh-hom-arrow hA hB f a
-          (inr a) → coh-hom-arrow hA hB g a)
+        ( ind-coprod _ refl-htpy refl-htpy)
+        ( ind-coprod _ (coh-hom-arrow hA hB f) (coh-hom-arrow hA hB g))
         ( coh-comp-hom-arrow hA hB hC c f)
         ( coh-hom-arrow hB hC c)
         ( coherence-square-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( λ where
-          (inl a) → right-unit
-          (inr a) → coh-htpy-hom-arrow hA hC _ _ H a)
+        ( ind-coprod _ (λ _ → right-unit) (coh-htpy-hom-arrow hA hC _ _ H))
         ( is-equiv-map-coprod is-equiv-hA is-equiv-hA)
         ( is-equiv-hA)
         ( is-equiv-hB)

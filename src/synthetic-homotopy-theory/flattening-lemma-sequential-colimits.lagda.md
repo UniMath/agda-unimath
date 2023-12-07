@@ -128,62 +128,56 @@ module _
         ( sequential-diagram-flattening-lemma c P)
         ( cocone-sequential-diagram-flattening-lemma c P)
         ( universal-property-coequalizer-top-universal-property-coequalizer-bottom-hom-arrow-is-equiv
-            ( map-inv-associative-Σ ℕ
-              ( family-sequential-diagram A)
-              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
-            ( map-inv-associative-Σ ℕ
-              ( family-sequential-diagram A)
-              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
-            ( id)
-            ( ( bottom-map-cofork-cocone-sequential-diagram
-                ( sequential-diagram-flattening-lemma c P)) ,
-              ( bottom-map-cofork-flattening-lemma-coequalizer
-                ( bottom-map-cofork-cocone-sequential-diagram A)
-                ( top-map-cofork-cocone-sequential-diagram A)
-                ( P)
-                ( cofork-cocone-sequential-diagram A c)) ,
-              ( refl-htpy))
-            ( ( top-map-cofork-cocone-sequential-diagram
-                ( sequential-diagram-flattening-lemma c P)) ,
-              ( top-map-cofork-flattening-lemma-coequalizer
-                ( bottom-map-cofork-cocone-sequential-diagram A)
-                ( top-map-cofork-cocone-sequential-diagram A)
-                ( P)
-                ( cofork-cocone-sequential-diagram A c)) ,
-              ( refl-htpy))
-            ( ( map-cofork _ _
-                ( cofork-cocone-sequential-diagram
-                  ( sequential-diagram-flattening-lemma c P)
-                  ( cocone-sequential-diagram-flattening-lemma c P))) ,
-              ( map-cofork _ _
-                ( cofork-flattening-lemma-coequalizer _ _ P
-                  ( cofork-cocone-sequential-diagram A c))) ,
-              ( refl-htpy))
-            ( ind-Σ
-              ( coherence-triangle-cocone-sequential-diagram
-                ( sequential-diagram-flattening-lemma c P)
-                ( cocone-sequential-diagram-flattening-lemma c P)) ,
-              ( coherence-cofork _ _
-                ( cofork-flattening-lemma-coequalizer _ _ P
-                  ( cofork-cocone-sequential-diagram A c))) ,
-              ( λ (n , a , p) →
-                ap-id _ ∙ inv right-unit))
-            ( is-equiv-map-equiv
-              ( inv-associative-Σ ℕ
-                ( family-sequential-diagram A)
-                ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
-            ( is-equiv-map-equiv
-              ( inv-associative-Σ ℕ
-                ( family-sequential-diagram A)
-                ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
-            ( is-equiv-id)
-            ( flattening-lemma-coequalizer
-              ( bottom-map-cofork-cocone-sequential-diagram A)
-              ( top-map-cofork-cocone-sequential-diagram A)
+          ( map-inv-associative-Σ ℕ
+            ( family-sequential-diagram A)
+            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+          ( map-inv-associative-Σ ℕ
+            ( family-sequential-diagram A)
+            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+          ( id)
+          ( ( bottom-map-cofork-cocone-sequential-diagram
+              ( sequential-diagram-flattening-lemma c P)) ,
+            ( bottom-map-cofork-flattening-lemma-coequalizer _ _
               ( P)
-              ( cofork-cocone-sequential-diagram A c)
-              ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
-                ( A)
-                ( c)
-                ( dup-c))))
+              ( cofork-cocone-sequential-diagram A c)) ,
+            ( refl-htpy))
+          ( ( top-map-cofork-cocone-sequential-diagram
+              ( sequential-diagram-flattening-lemma c P)) ,
+            ( top-map-cofork-flattening-lemma-coequalizer _ _
+              ( P)
+              ( cofork-cocone-sequential-diagram A c)) ,
+            ( refl-htpy))
+          ( ( map-cofork _ _
+              ( cofork-cocone-sequential-diagram
+                ( sequential-diagram-flattening-lemma c P)
+                ( cocone-sequential-diagram-flattening-lemma c P))) ,
+            ( map-cofork _ _
+              ( cofork-flattening-lemma-coequalizer _ _ P
+                ( cofork-cocone-sequential-diagram A c))) ,
+            ( refl-htpy))
+          ( ind-Σ
+            ( coherence-triangle-cocone-sequential-diagram
+              ( sequential-diagram-flattening-lemma c P)
+              ( cocone-sequential-diagram-flattening-lemma c P)) ,
+            ( coherence-cofork _ _
+              ( cofork-flattening-lemma-coequalizer _ _ P
+                ( cofork-cocone-sequential-diagram A c))) ,
+            ( ind-Σ (λ n → ind-Σ (λ a p → ap-id _ ∙ inv right-unit))))
+          ( is-equiv-map-equiv
+            ( inv-associative-Σ ℕ
+              ( family-sequential-diagram A)
+              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
+          ( is-equiv-map-inv-associative-Σ ℕ
+            ( family-sequential-diagram A)
+            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+          ( is-equiv-id)
+          ( flattening-lemma-coequalizer
+            ( bottom-map-cofork-cocone-sequential-diagram A)
+            ( top-map-cofork-cocone-sequential-diagram A)
+            ( P)
+            ( cofork-cocone-sequential-diagram A c)
+            ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
+              ( A)
+              ( c)
+              ( dup-c))))
 ```
