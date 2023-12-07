@@ -258,7 +258,15 @@ module _
   ap-right-whisk-htpy α h = α ·r h
 ```
 
-### Left and right whiskering commute definitionally
+### The left and right whiskering operations commute
+
+We have the coherence
+
+```text
+  (h ·l H) ·r h' ~ f ·l (H ·r g)
+```
+
+and, in fact, this equation holds definitionally.
 
 ```agda
 module _
@@ -272,6 +280,6 @@ module _
     (h : {x : A} {y : B x} → C y → D y)
     (H : {x : A} → f {x} ~ g {x})
     (h' : (x : A) → B x) →
-    h ·l (H ·r h') ~ (h ·l H) ·r h'
+    (h ·l H) ·r h' ~ h ·l (H ·r h')
   coherence-left-right-whisk-htpy h H h' = refl-htpy
 ```

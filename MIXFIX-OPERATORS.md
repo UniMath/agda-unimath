@@ -153,7 +153,7 @@ Below, we outline a list of general rules when assigning associativities.
   associated regardless. For instance, one should never write
 
   ```agda
-  assoc : p ∙ (q ∙ r) ＝ p ∙ q ∙ r
+  assoc : p ∙ q ∙ r ＝ p ∙ (q ∙ r)
   ```
 
 - **Unique well-typed associativity**. When an operator only has one well-typed
