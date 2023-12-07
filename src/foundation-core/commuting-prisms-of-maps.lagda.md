@@ -253,7 +253,8 @@ module _
 
     vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps :
       vertical-coherence-prism-inv-boundary-maps
-        f g h f' g' h' hA hB hC inv-top inv-front inv-right inv-left inv-bottom →
+        f g h f' g' h' hA hB hC
+        inv-top inv-front inv-right inv-left inv-bottom →
       vertical-coherence-prism-inv-triangles-maps
         f g h f' g' h' hA hB hC
         ( inv-top)

@@ -357,4 +357,38 @@ module _
     ( ap-concat-htpy'
       ( htpy-precomp front S)
       ( inv-htpy (compute-htpy-precomp-right-whisker hA inv-bottom S)))
+
+  precomp-vertical-coherence-inv-triangles-prism-maps :
+    vertical-coherence-prism-inv-triangles-maps
+      ( precomp f' S)
+      ( precomp h' S)
+      ( precomp g' S)
+      ( precomp f S)
+      ( precomp h S)
+      ( precomp g S)
+      ( precomp hC S)
+      ( precomp hB S)
+      ( precomp hA S)
+      ( precomp-coherence-triangle-maps' f' g' h' inv-bottom S)
+      ( inv-htpy (precomp-coherence-square-maps f hA hC f' front S))
+      ( inv-htpy (precomp-coherence-square-maps h hA hB h' left S))
+      ( inv-htpy (precomp-coherence-square-maps g hB hC g' right S))
+      ( precomp-coherence-triangle-maps' f g h inv-top S)
+  precomp-vertical-coherence-inv-triangles-prism-maps =
+    vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps
+      ( precomp f' S)
+      ( precomp h' S)
+      ( precomp g' S)
+      ( precomp f S)
+      ( precomp h S)
+      ( precomp g S)
+      ( precomp hC S)
+      ( precomp hB S)
+      ( precomp hA S)
+      ( precomp-coherence-triangle-maps' f' g' h' inv-bottom S)
+      ( precomp-coherence-square-maps f hA hC f' front S)
+      ( precomp-coherence-square-maps h hA hB h' left S)
+      ( precomp-coherence-square-maps g hB hC g' right S)
+      ( precomp-coherence-triangle-maps' f g h inv-top S)
+      ( precomp-vertical-inv-boundary-vertical-coherence-inv-triangles-prism-maps)
 ```
