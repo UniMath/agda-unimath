@@ -28,6 +28,22 @@ Given a partial function `f : A → B` and an element `a : A`, we say that `f` i
 {{#concept "defined" Disambiguation="partial function"}} at `a` if the partial
 element `f a` of `A` is defined.
 
+Partial functions can be described
+[equivalently](foundation-core.equivalences.md) as
+[morphisms of arrows](foundation.morphisms-arrows.md)
+
+```text
+  ∅     1   ∅
+  |     |   |
+  |  ⇒  | ∘ |
+  V     V   V
+  A   Prop  B
+```
+
+where the composition operation is
+[composition](species.composition-cauchy-series-species-of-types.md) of
+[polynomial endofunctors](trees.polynomial-endofunctors.md).
+
 ## Definitions
 
 ### Partial functions

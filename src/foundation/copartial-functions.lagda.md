@@ -26,13 +26,30 @@ function is a map
 ```
 
 where `- * Q` is the
-[closed modality](orthogonal-factorization-systems.closed-modalities.md).
+[closed modality](orthogonal-factorization-systems.closed-modalities.md), which
+is defined by the [join operation](synthetic-homotopy-theory.joins-of-types.md).
 
 A value of a copartial function `f` at `a : A` is said to be
 {{#concept "erased" Disambiguation="copartial function" Agda=is-erased-copartial-function}}
 if the copartial element `f a` of `B` is erased.
 
-{{#concept "Composition of copartial functions"}} can be defined by
+A copartial function is [equivalently](foundation-core.equivalences.md)
+described as a [morphism of arrows](foundation.morphisms-arrows.md)
+
+```text
+     A    B   1
+     |    |   |
+  id |  ⇒ | □ | T
+     V    V   V
+     A    1  Prop
+```
+
+where `□` is the
+[pushout-product](synthetic-homotopy-theory.pushout-products.md). Indeed, the
+domain of the pushout-product `B □ T` is the type of copartial elements of `B`.
+
+{{#concept "Composition" Disambiguation="copartial functions"}} of copartial
+functions can be defined by
 
 ```text
                      Σ (Q : Prop), (Σ (P : Prop), C * P) * Q
