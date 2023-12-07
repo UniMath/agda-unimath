@@ -242,4 +242,46 @@ module _
             ( bottom ·r hA)
             ( (hC ·l top) ∙h (inv-right ·r h ∙h (g' ·l inv-left)))
             ( H))))
+
+  module _
+    ( inv-top : coherence-triangle-maps' f g h)
+    ( inv-front : coherence-square-maps' f hA hC f')
+    ( inv-right : coherence-square-maps' g hB hC g')
+    ( inv-left : coherence-square-maps' h hA hB h')
+    ( inv-bottom : coherence-triangle-maps' f' g' h')
+    where
+
+    vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps :
+      vertical-coherence-prism-inv-boundary-maps
+        f g h f' g' h' hA hB hC inv-top inv-front inv-right inv-left inv-bottom →
+      vertical-coherence-prism-inv-triangles-maps
+        f g h f' g' h' hA hB hC
+        ( inv-top)
+        ( inv-htpy inv-front)
+        ( inv-htpy inv-right)
+        ( inv-htpy inv-left)
+        ( inv-bottom)
+    vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps
+      H =
+      ( ap-concat-htpy'
+        ( hC ·l inv-top)
+        ( ( ap-concat-htpy'
+            ( inv-htpy inv-right ·r h)
+            ( left-whisk-inv-htpy g' inv-left)) ∙h
+          ( inv-htpy-distributive-inv-concat-htpy
+            ( inv-right ·r h)
+            ( g' ·l inv-left)))) ∙h
+      ( right-transpose-htpy-concat
+        ( ( inv-htpy (inv-right ·r h ∙h (g' ·l inv-left))) ∙h (hC ·l inv-top))
+        ( inv-front)
+        ( inv-bottom ·r hA)
+        ( ( assoc-htpy
+            ( inv-htpy (inv-right ·r h ∙h (g' ·l inv-left)))
+            ( hC ·l inv-top)
+            ( inv-front)) ∙h
+          ( inv-htpy-left-transpose-htpy-concat
+            ( inv-right ·r h ∙h (g' ·l inv-left))
+            ( inv-bottom ·r hA)
+            ( (hC ·l inv-top) ∙h inv-front)
+            ( H))))
 ```
