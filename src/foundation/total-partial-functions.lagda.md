@@ -18,10 +18,11 @@ open import foundation.universe-levels
 ## Idea
 
 A [partial function](foundation.partial-functions.md) `f : A → B` is said to be
-{{#concept "total" Disambiguation="partial function" Agda=is-total-partial-function}} if the
-[partial element](foundation.partial-elements.md) `f a` of `B` is defined for
-every `a : A`. The type of total partial functions from `A` to `B` is [equivalent](foundation-core.equivalences.md)
-to the type of [functions](foundation-core.function-types.md) from `A` to `B`.
+{{#concept "total" Disambiguation="partial function" Agda=is-total-partial-function}}
+if the [partial element](foundation.partial-elements.md) `f a` of `B` is defined
+for every `a : A`. The type of total partial functions from `A` to `B` is
+[equivalent](foundation-core.equivalences.md) to the type of
+[functions](foundation-core.function-types.md) from `A` to `B`.
 
 ## Definitions
 

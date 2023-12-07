@@ -18,7 +18,7 @@ open import foundation-core.propositions
 
 ## Idea
 
-A {{#concept "partial element"}} of `X` consists of a
+A {{#concept "partial element" Agda=partial-element}} of `X` consists of a
 [proposition](foundation-core.propositions.md) `P` and a map `P → X`. We say
 that a partial element `(P, f)` is
 {{#concept "defined" Disambiguation="partial element"}} if the proposition `P`
@@ -63,5 +63,5 @@ This remains to be shown.
 
 - [Copartial elements](foundation.copartial-elements.md)
 - [Partial function](foundation.partial-functions.md)
-- [Partial sequences](elementary-number-theory.partial-sequences.md)
+- [Partial sequences](foundation.partial-sequences.md)
 - [Total partial functions](foundation.total-partial-functions.md)

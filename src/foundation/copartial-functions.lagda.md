@@ -16,9 +16,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "copartial function" Agda=copartial-function}} from `A` to `B` is a map from `A` into the
-type of [copartial elements](foundation.copartial-elements.md) of `B`. I.e., a
-copartial function is a map
+A {{#concept "copartial function" Agda=copartial-function}} from `A` to `B` is a
+map from `A` into the type of
+[copartial elements](foundation.copartial-elements.md) of `B`. I.e., a copartial
+function is a map
 
 ```text
   A → Σ (Q : Prop), B * Q
@@ -28,11 +29,36 @@ where `- * Q` is the
 [closed modality](orthogonal-factorization-systems.closed-modalities.md).
 
 A value of a copartial function `f` at `a : A` is said to be
-{{#concept "prohibited" Disambiguation="copartial function" Agda=is-prohibited-copartial-function}} if the copartial
-element `f a` of `B` is prohibited.
+{{#concept "erased" Disambiguation="copartial function" Agda=is-erased-copartial-function}}
+if the copartial element `f a` of `B` is erased.
 
-**Note:** The topic of copartial functions is not known in the literature, and
-our formalization on this topic should be considered experimental.
+{{#concept "Composition of copartial functions"}} can be defined by
+
+```text
+                     Σ (Q : Prop), (Σ (P : Prop), C * P) * Q
+                            ∧                 |
+   map-copartial-element g /                  | μ
+                          /                   V
+  A ----> Σ (Q : Prop), B * Q       Σ (Q : Prop), C * Q
+      f
+```
+
+In this diagram, the map going up is defined by functoriality of the operation
+
+```text
+  X ↦ Σ (Q : Prop), X * Q
+```
+
+The map going down is defined by the pushout-product algebra structure of the
+map `T : 1 → Prop`. The main idea behind composition of copartial functions is
+that a composite of copartial function is erased on the union of the subtypes
+where each factor is erased. Indeed, if `f` is erased at `a` or
+`map-copartial-eleemnt g` is erased at the copartial element `f a` of `B`, then
+the composite of copartial functions `g ∘ f` should be erased at `a`.
+
+**Note:** The topic of copartial functions was not known to us in the
+literature, and our formalization on this topic should be considered
+experimental.
 
 ## Definitions
 
@@ -44,7 +70,7 @@ copartial-function :
 copartial-function l3 A B = A → copartial-element l3 B
 ```
 
-### Prohibited values of copartial functions
+### Erased values of copartial functions
 
 ```agda
 module _
@@ -52,12 +78,12 @@ module _
   (a : A)
   where
 
-  is-prohibited-prop-copartial-function : Prop l3
-  is-prohibited-prop-copartial-function =
-    is-prohibited-prop-copartial-element (f a)
+  is-erased-prop-copartial-function : Prop l3
+  is-erased-prop-copartial-function =
+    is-erased-prop-copartial-element (f a)
 
-  is-prohibited-copartial-function : UU l3
-  is-prohibited-copartial-function = is-prohibited-copartial-element (f a)
+  is-erased-copartial-function : UU l3
+  is-erased-copartial-function = is-erased-copartial-element (f a)
 ```
 
 ### Copartial functions obtained from functions
