@@ -12,6 +12,7 @@ open import foundation.universe-levels
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -160,5 +161,58 @@ module _
     vertical-coherence-prism-maps'' : UU (l1 ⊔ l3')
     vertical-coherence-prism-maps'' =
       ( inv-front ∙h (bottom ·r hA)) ~
-      ( hC ·l top) ∙h ((inv-right ·r h) ∙h (g' ·l inv-left))
+      ( (hC ·l top) ∙h ((inv-right ·r h) ∙h (g' ·l inv-left)))
+```
+
+```agda
+module _
+  { l1 l2 l3 l1' l2' l3' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  ( f : A → C) (g : B → C) (h : A → B)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  ( f' : A' → C') (g' : B' → C') (h' : A' → B')
+  ( hA : A → A') (hB : B → B') (hC : C → C')
+  where
+
+
+  module _
+    ( top : coherence-triangle-maps f g h)
+    ( inv-front : coherence-square-maps hA f f' hC)
+    ( inv-right : coherence-square-maps hB g g' hC)
+    ( inv-left : coherence-square-maps hA h h' hB)
+    ( bottom : coherence-triangle-maps f' g' h')
+    where
+
+    vertical-coherence-prism-maps-vertical-coherence-prism-maps'' :
+      vertical-coherence-prism-maps''
+        f g h f' g' h' hA hB hC top inv-front inv-right inv-left bottom →
+      vertical-coherence-prism-maps
+        f g h f' g' h' hA hB hC
+        ( top)
+        ( inv-htpy inv-front)
+        ( inv-htpy inv-right)
+        ( inv-htpy inv-left)
+        ( bottom)
+    vertical-coherence-prism-maps-vertical-coherence-prism-maps'' H =
+      ( ap-concat-htpy
+        ( bottom ·r hA)
+        ( ( ap-concat-htpy'
+            ( inv-htpy inv-right ·r h)
+            ( left-whisk-inv-htpy g' inv-left)) ∙h
+          ( inv-htpy-distributive-inv-concat-htpy
+            ( inv-right ·r h)
+            ( g' ·l inv-left)))) ∙h
+      ( inv-htpy-right-transpose-htpy-concat
+        ( inv-htpy inv-front ∙h (hC ·l top))
+        ( inv-right ·r h ∙h (g' ·l inv-left))
+        ( bottom ·r hA)
+        ( ( assoc-htpy
+            ( inv-htpy inv-front)
+            ( hC ·l top)
+            ( inv-right ·r h ∙h (g' ·l inv-left))) ∙h
+          ( inv-htpy-left-transpose-htpy-concat
+            ( inv-front)
+            ( bottom ·r hA)
+            ( (hC ·l top) ∙h (inv-right ·r h ∙h (g' ·l inv-left)))
+            ( H))))
 ```

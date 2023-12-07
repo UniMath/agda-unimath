@@ -154,21 +154,21 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : (H ∙h K) ~ L)
+  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : H ∙h K ~ L)
   where
 
-  left-transpose-htpy-concat : K ~ ((inv-htpy H) ∙h L)
+  left-transpose-htpy-concat : K ~ inv-htpy H ∙h L
   left-transpose-htpy-concat x =
     left-transpose-eq-concat (H x) (K x) (L x) (M x)
 
-  inv-htpy-left-transpose-htpy-concat : ((inv-htpy H) ∙h L) ~ K
+  inv-htpy-left-transpose-htpy-concat : inv-htpy H ∙h L ~ K
   inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat
 
-  right-transpose-htpy-concat : H ~ (L ∙h (inv-htpy K))
+  right-transpose-htpy-concat : H ~ L ∙h inv-htpy K
   right-transpose-htpy-concat x =
     right-transpose-eq-concat (H x) (K x) (L x) (M x)
 
-  inv-htpy-right-transpose-htpy-concat : (L ∙h (inv-htpy K)) ~ H
+  inv-htpy-right-transpose-htpy-concat : L ∙h inv-htpy K ~ H
   inv-htpy-right-transpose-htpy-concat = inv-htpy right-transpose-htpy-concat
 ```
 
@@ -180,10 +180,10 @@ module _
   (H : f ~ g) (K : g ~ h) (L : h ~ k)
   where
 
-  assoc-htpy : ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
+  assoc-htpy : (H ∙h K) ∙h L ~ H ∙h (K ∙h L)
   assoc-htpy x = assoc (H x) (K x) (L x)
 
-  inv-htpy-assoc-htpy : (H ∙h (K ∙h L)) ~ ((H ∙h K) ∙h L)
+  inv-htpy-assoc-htpy : H ∙h (K ∙h L) ~ (H ∙h K) ∙h L
   inv-htpy-assoc-htpy = inv-htpy assoc-htpy
 ```
 
@@ -195,16 +195,16 @@ module _
   {f g : (x : A) → B x} {H : f ~ g}
   where
 
-  left-unit-htpy : (refl-htpy ∙h H) ~ H
+  left-unit-htpy : refl-htpy ∙h H ~ H
   left-unit-htpy x = left-unit
 
   inv-htpy-left-unit-htpy : H ~ (refl-htpy ∙h H)
   inv-htpy-left-unit-htpy = inv-htpy left-unit-htpy
 
-  right-unit-htpy : (H ∙h refl-htpy) ~ H
+  right-unit-htpy : H ∙h refl-htpy ~ H
   right-unit-htpy x = right-unit
 
-  inv-htpy-right-unit-htpy : H ~ (H ∙h refl-htpy)
+  inv-htpy-right-unit-htpy : H ~ H ∙h refl-htpy
   inv-htpy-right-unit-htpy = inv-htpy right-unit-htpy
 ```
 
@@ -219,13 +219,13 @@ module _
   left-inv-htpy : ((inv-htpy H) ∙h H) ~ refl-htpy
   left-inv-htpy = left-inv ∘ H
 
-  inv-htpy-left-inv-htpy : refl-htpy ~ ((inv-htpy H) ∙h H)
+  inv-htpy-left-inv-htpy : refl-htpy ~ inv-htpy H ∙h H
   inv-htpy-left-inv-htpy = inv-htpy left-inv-htpy
 
-  right-inv-htpy : (H ∙h (inv-htpy H)) ~ refl-htpy
+  right-inv-htpy : H ∙h inv-htpy H ~ refl-htpy
   right-inv-htpy = right-inv ∘ H
 
-  inv-htpy-right-inv-htpy : refl-htpy ~ (H ∙h (inv-htpy H))
+  inv-htpy-right-inv-htpy : refl-htpy ~ H ∙h inv-htpy H
   inv-htpy-right-inv-htpy = inv-htpy right-inv-htpy
 ```
 
@@ -238,11 +238,11 @@ module _
   where
 
   distributive-inv-concat-htpy :
-    (inv-htpy (H ∙h K)) ~ ((inv-htpy K) ∙h (inv-htpy H))
+    inv-htpy (H ∙h K) ~ inv-htpy K ∙h inv-htpy H
   distributive-inv-concat-htpy x = distributive-inv-concat (H x) (K x)
 
   inv-htpy-distributive-inv-concat-htpy :
-    ((inv-htpy K) ∙h (inv-htpy H)) ~ (inv-htpy (H ∙h K))
+    inv-htpy K ∙h inv-htpy H ~ inv-htpy (H ∙h K)
   inv-htpy-distributive-inv-concat-htpy =
     inv-htpy distributive-inv-concat-htpy
 ```
