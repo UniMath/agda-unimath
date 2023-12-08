@@ -38,7 +38,7 @@ More generally, given a family of types `A i` indexed by `i : I`, a {{#concept "
 `A` consists of a type `S` and a family of maps `f i : S → A i` indexed by
 `i : I`.
 
-## Definition
+## Definitions
 
 ### (Binary) spans with fixed domain and codomain
 
@@ -310,6 +310,22 @@ module _
     right-map-span-fixed-domain-codomain s
   pr2 (pr2 (opposite-span-fixed-domain-codomain s)) =
     left-map-span-fixed-domain-codomain s
+```
+
+### The opposite of a span
+
+```agda
+module _
+  {l1 l2 l3 : Level} (s : span l1 l2 l3)
+  where
+
+  opposite-span : span l2 l1 l3
+  pr1 opposite-span =
+    codomain-span s
+  pr1 (pr2 opposite-span) =
+    domain-span s
+  pr2 (pr2 opposite-span) =
+    opposite-span-fixed-domain-codomain (span-fixed-domain-codomain-span s)
 ```
 
 ### Permutations of spans of fixed families of types

@@ -35,7 +35,7 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
+A {{#concept "cocone" Agda=cocone-span Disambiguation="span"}} under a [span](foundation.spans.md) `A <-f- S -g-> B` with codomain
 `X` consists of two maps `i : A → X` and `j : B → X` equipped with a
 [homotopy](foundation.homotopies.md) witnessing that the square
 
@@ -51,7 +51,7 @@ A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
 
 [commutes](foundation.commuting-squares-of-maps.md).
 
-Equivalently, a cocone with codomain `X` under a span `s` given by
+[Equivalently](foundation-core.equivalences.md), a cocone with codomain `X` under a span `s` given by
 `A <-f- S -g-> B` can be described as a
 [morphism of spans](foundation.morphisms-spans.md) from `s` into the constant
 span at `X`. In other words, a cocone under `s` with codomain `X` is a commuting
@@ -65,6 +65,8 @@ diagram of the form
     V        V        V
     X ====== X ====== X.
 ```
+
+It is immediate from the definition of a cocone on a span that any commuting square of maps, or any [morphism of arrows](foundation.morphisms-arrows.md) can be presented equivalently as a cocone on a span.
 
 ## Definitions
 
@@ -83,24 +85,6 @@ module _
         Σ ( codomain-span s → X)
           ( λ j →
             coherence-square-maps (right-map-span s) (left-map-span s) j i))
-
-{-
-  statement-coherence-htpy-cocone :
-    (c c' : cocone f g X) →
-    (K : horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
-    (L : vertical-map-cocone f g c ~ vertical-map-cocone f g c') →
-    UU (l1 ⊔ l4)
-  statement-coherence-htpy-cocone c c' K L =
-    (coherence-square-cocone f g c ∙h (L ·r g)) ~
-    ((K ·r f) ∙h coherence-square-cocone f g c')
-
-  htpy-cocone : (c c' : cocone f g X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  htpy-cocone c c' =
-    Σ ( horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
-      ( λ K →
-        Σ ( vertical-map-cocone f g c ~ vertical-map-cocone f g c')
-          ( statement-coherence-htpy-cocone c c' K))
--}
 
   module _
     {X : UU l4} (c : cocone-span X)
@@ -132,7 +116,35 @@ module _
   cocone-span' X = hom-span s (constant-span X)
 ```
 
+### Cocones obtained from morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
+  where
+
+  cocone-hom-arrow : cocone-span (span-hom-arrow f g h) Y
+  pr1 cocone-hom-arrow = map-codomain-hom-arrow f g h
+  pr1 (pr2 cocone-hom-arrow) = g
+  pr2 (pr2 cocone-hom-arrow) = coh-hom-arrow f g h
+```
+
 ### Homotopies of cocones under spans
+
+Given two cocones `c` and `c'` on a span `s`, both with the same codomain `X`, we also introduce homotopies of cocones under spans. A {{#concept "homotopy of cocones under a span" Agda=htpy-cocone-span}} from `c := (i , j , H)` to `c' := (i' , j' , H')` under a span `A <-f- S -g-> B` consists of two homotopies `K : i ~ i'` and `L : j ~ j'` and a homotopy `M` witnessing that the square of homotopies
+
+```text
+         K · f
+  i ∘ f -------> i' ∘ f
+    |               |
+  H |      M        | H'
+    V               V
+  j ∘ g -------> j' ∘ g
+         L · g
+```
+
+[commutes](foundation.commuting-squares-homotopies.md).
 
 ```agda
 module _
@@ -141,15 +153,15 @@ module _
 
   statement-coherence-htpy-cocone-span :
     (c c' : cocone-span s X) →
-    (K : (horizontal-map-cocone-span s c) ~ (horizontal-map-cocone-span s c'))
-    (L : (vertical-map-cocone-span s c) ~ (vertical-map-cocone-span s c')) →
+    (K : horizontal-map-cocone-span s c ~ horizontal-map-cocone-span s c')
+    (L : vertical-map-cocone-span s c ~ vertical-map-cocone-span s c') →
     UU (l3 ⊔ l4)
   statement-coherence-htpy-cocone-span c c' K L =
     coherence-square-homotopies
-      ( K ·r (left-map-span s))
+      ( K ·r left-map-span s)
       ( coherence-square-cocone-span s c)
       ( coherence-square-cocone-span s c')
-      ( L ·r (right-map-span s))
+      ( L ·r right-map-span s)
 
   htpy-cocone-span : (c c' : cocone-span s X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-cocone-span c c' =
@@ -191,7 +203,7 @@ module _
   is-torsorial-htpy-cocone-span c =
     is-torsorial-Eq-structure
       ( λ i' jH' K →
-        Σ ( vertical-map-cocone-span s c ~ (pr1 jH'))
+        Σ ( vertical-map-cocone-span s c ~ pr1 jH')
           ( statement-coherence-htpy-cocone-span c (i' , jH') K))
       ( is-torsorial-htpy (horizontal-map-cocone-span s c))
       ( horizontal-map-cocone-span s c , refl-htpy)
@@ -203,8 +215,8 @@ module _
         ( is-torsorial-htpy (vertical-map-cocone-span s c))
         ( vertical-map-cocone-span s c , refl-htpy)
         ( is-contr-is-equiv'
-          ( Σ ( ( horizontal-map-cocone-span s c ∘ (left-map-span s)) ~
-                ( vertical-map-cocone-span s c ∘ (right-map-span s)))
+          ( Σ ( ( horizontal-map-cocone-span s c ∘ left-map-span s) ~
+                ( vertical-map-cocone-span s c ∘ right-map-span s))
               ( λ H' → coherence-square-cocone-span s c ~ H'))
           ( tot (λ H' M → right-unit-htpy ∙h M))
           ( is-equiv-tot-is-fiberwise-equiv (λ H' → is-equiv-concat-htpy _ _))
@@ -229,6 +241,32 @@ module _
 ```
 
 ### Postcomposing cocones under spans with maps
+
+Consider a span `A <-f- S -g-> B`. equipped with a cocone `c := (i , j , H)` as indicated in the diagram
+
+```text
+        g
+    S -----> B
+    |        |
+  f |   H    | j
+    V        V
+    A -----> X.
+        i
+```
+
+Then any map `h : X → Y` induces a cocone
+
+```text
+         g
+    S -------> B
+    |          |
+  f |  h · H   | h ∘ j
+    V          V
+    A -------> Y.
+       h ∘ i
+```
+
+This way of extending cocones by maps is used to express the [universal property of pushouts](synthetic-homotopy-theory.universal-property-pushouts.md).
 
 ```agda
 module _
@@ -264,6 +302,11 @@ module _
 
 ### Horizontal composition of cocones under spans
 
+Consider a span `s := A <-f- S -g-> B` and a moprhism `h : B → C`. Then we can
+**compose** any cocone `c := (i , j , H)` with codomain `X` under the span
+`s` **horizontally** with a cocone `d` under the span
+`X <-j- B -h-> C` as indicated in the diagram
+
 ```text
         g       h
     S ----> B ----> C
@@ -273,24 +316,32 @@ module _
     A ----> X ----> Y
 ```
 
+to obtain a cocone under the span `A <-f- S -h∘g-> C`.
+
 ```agda
 module _
   { l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span s → C)
+  (c : cocone-span s X)
+  (d : cocone-span (make-span (vertical-map-cocone-span s c) h) Y)
   where
 
-  horizontal-comp-cocone-span :
-    ( c : cocone-span s X) →
-    cocone-span (make-span (vertical-map-cocone-span s c) h) Y →
-    cocone-span (right-extend-span s h) Y
-  pr1 (horizontal-comp-cocone-span c d) =
-    ( horizontal-map-cocone-span
-      ( make-span (vertical-map-cocone-span s c) h)
-      ( d)) ∘
-    ( horizontal-map-cocone-span s c)
-  pr1 (pr2 (horizontal-comp-cocone-span c d)) =
+  horizontal-map-horizontal-comp-cocone-span : domain-span s → Y
+  horizontal-map-horizontal-comp-cocone-span =
+    horizontal-map-cocone-span (make-span (vertical-map-cocone-span s c) h) d ∘
+    horizontal-map-cocone-span s c
+
+  vertical-map-horizontal-comp-cocone-span : C → Y
+  vertical-map-horizontal-comp-cocone-span =
     vertical-map-cocone-span (make-span (vertical-map-cocone-span s c) h) d
-  pr2 (pr2 (horizontal-comp-cocone-span c d)) =
+
+  coherence-square-horizontal-comp-cocone-span :
+    coherence-square-maps
+      ( h ∘ right-map-span s)
+      ( left-map-span s)
+      ( vertical-map-horizontal-comp-cocone-span)
+      ( horizontal-map-horizontal-comp-cocone-span)
+  coherence-square-horizontal-comp-cocone-span =
     pasting-horizontal-coherence-square-maps
       ( right-map-span s)
       ( h)
@@ -305,6 +356,15 @@ module _
       ( coherence-square-cocone-span
         ( make-span (vertical-map-cocone-span s c) h)
         ( d))
+
+  horizontal-comp-cocone-span :
+    cocone-span (right-extend-span s h) Y
+  pr1 horizontal-comp-cocone-span =
+    horizontal-map-horizontal-comp-cocone-span
+  pr1 (pr2 horizontal-comp-cocone-span) =
+    vertical-map-horizontal-comp-cocone-span
+  pr2 (pr2 horizontal-comp-cocone-span) =
+    coherence-square-horizontal-comp-cocone-span
 ```
 
 A variation on the above:
@@ -319,7 +379,7 @@ A variation on the above:
         i
 ```
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span s → C)
@@ -336,6 +396,8 @@ module _
 
 ### Vertical composition of cocones under spans
 
+Consider a span `s := A <-f- S -g-> B` and a map `h : A → C`. Then we can **compose** a cocone `c := (i , j , H)` under `s` **vertically** with a cocone `d` under the span `C <-h- A -i-> X` as indicated in the diagram
+
 ```text
         g
     S -----> B
@@ -349,22 +411,32 @@ module _
     C -----> Y
 ```
 
+to obtain a cocone under the span `C <-h∘f- S -g-> B`.
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {C : UU l4} (h : domain-span s → C) {X : UU l5} {Y : UU l6}
+  (c : cocone-span s X)
+  (d : cocone-span (make-span h (horizontal-map-cocone-span s c)) Y)
   where
 
-  vertical-comp-cocone-span :
-    (c : cocone-span s X) →
-    cocone-span (make-span h (horizontal-map-cocone-span s c)) Y →
-    cocone-span (left-extend-span s h) Y
-  pr1 (vertical-comp-cocone-span c d) =
+  horizontal-map-vertical-comp-cocone-span : C → Y
+  horizontal-map-vertical-comp-cocone-span =
     horizontal-map-cocone-span (make-span h (horizontal-map-cocone-span s c)) d
-  pr1 (pr2 (vertical-comp-cocone-span c d)) =
+
+  vertical-map-vertical-comp-cocone-span : codomain-span s → Y
+  vertical-map-vertical-comp-cocone-span =
     vertical-map-cocone-span (make-span h (horizontal-map-cocone-span s c)) d ∘
     vertical-map-cocone-span s c
-  pr2 (pr2 (vertical-comp-cocone-span c d)) =
+
+  coherence-square-vertical-comp-cocone-span :
+    coherence-square-maps
+      ( right-map-span s)
+      ( h ∘ left-map-span s)
+      ( vertical-map-vertical-comp-cocone-span)
+      ( horizontal-map-vertical-comp-cocone-span)
+  coherence-square-vertical-comp-cocone-span =
     pasting-vertical-coherence-square-maps
       ( right-map-span s)
       ( left-map-span s)
@@ -381,6 +453,15 @@ module _
       ( coherence-square-cocone-span
         ( make-span h (horizontal-map-cocone-span s c))
         ( d))
+
+  vertical-comp-cocone-span :
+    cocone-span (left-extend-span s h) Y
+  pr1 vertical-comp-cocone-span =
+    horizontal-map-vertical-comp-cocone-span
+  pr1 (pr2 vertical-comp-cocone-span) =
+    vertical-map-vertical-comp-cocone-span
+  pr2 (pr2 vertical-comp-cocone-span) =
+    coherence-square-vertical-comp-cocone-span
 ```
 
 A variation on the above:
@@ -398,7 +479,7 @@ A variation on the above:
     C -----> Y
 ```
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {C : UU l4} {X : UU l5} {Y : UU l6} (h : domain-span s → C)
@@ -444,100 +525,132 @@ Notice that the triple `(i,j,k)` is really a morphism of spans. So the resulting
 cocone arises as a composition of the original cocone with this morphism of
 spans.
 
-Note: In the following definition we parenthesize the coherence explicitly,
+**Note:** In the following definition we parenthesize the coherence explicitly,
 because the parenthesization is relevant in future computations.
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   (s' : span l1 l2 l3) (s : span l4 l5 l6) (h : hom-span s' s)
-  {X : UU l7}
+  {X : UU l7} (c : cocone-span s X)
   where
 
-  comp-cocone-span-hom-span :
-    cocone-span s X → cocone-span s' X
-  pr1 (comp-cocone-span-hom-span c) =
+  horizontal-map-comp-cocone-span-hom-span : domain-span s' → X
+  horizontal-map-comp-cocone-span-hom-span =
     horizontal-map-cocone-span s c ∘ map-domain-hom-span s' s h
-  pr1 (pr2 (comp-cocone-span-hom-span c)) =
+
+  vertical-map-comp-cocone-span-hom-span : codomain-span s' → X
+  vertical-map-comp-cocone-span-hom-span =
     vertical-map-cocone-span s c ∘ map-codomain-hom-span s' s h
-  pr2 (pr2 (comp-cocone-span-hom-span c)) =
+
+  coherence-square-comp-span-hom-span :
+    coherence-square-maps
+      ( right-map-span s')
+      ( left-map-span s')
+      ( vertical-map-comp-cocone-span-hom-span)
+      ( horizontal-map-comp-cocone-span-hom-span)
+  coherence-square-comp-span-hom-span =
     ( ( horizontal-map-cocone-span s c ·l left-square-hom-span s' s h) ∙h
       ( coherence-square-cocone-span s c ·r spanning-map-hom-span s' s h)) ∙h
     ( inv-htpy (vertical-map-cocone-span s c ·l right-square-hom-span s' s h))
+
+  comp-cocone-span-hom-span : cocone-span s' X
+  pr1 comp-cocone-span-hom-span = horizontal-map-comp-cocone-span-hom-span
+  pr1 (pr2 comp-cocone-span-hom-span) = vertical-map-comp-cocone-span-hom-span
+  pr2 (pr2 comp-cocone-span-hom-span) = coherence-square-comp-span-hom-span
 ```
 
 ### The diagonal cocone on a span of identical maps
+
+Consider a span of the form
+
+```text
+       f       f
+  B <----- A -----> B.
+```
+
+Then any map `g : B → X` induces a {{#concept "diagonal cocone" Agda=diagonal-cocone-span Disambiguation="span"}}
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
-  diagonal-into-cocone-span :
-    (B → X) → cocone-span (make-span f f) X
-  pr1 (diagonal-into-cocone-span g) = g
-  pr1 (pr2 (diagonal-into-cocone-span g)) = g
-  pr2 (pr2 (diagonal-into-cocone-span g)) = refl-htpy
-```
-
-### Cocones obtained from morphisms of arrows
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (h : hom-arrow f g)
-  where
-
-  cocone-hom-arrow : cocone-span f (map-domain-hom-arrow f g h) Y
-  pr1 cocone-hom-arrow = map-codomain-hom-arrow f g h
-  pr1 (pr2 cocone-hom-arrow) = g
-  pr2 (pr2 cocone-hom-arrow) = coh-hom-arrow f g h
+  diagonal-cocone-span : (B → X) → cocone-span (make-span f f) X
+  pr1 (diagonal-cocone-span g) = g
+  pr1 (pr2 (diagonal-cocone-span g)) = g
+  pr2 (pr2 (diagonal-cocone-span g)) = refl-htpy
 ```
 
 ### The swapping function on cocones over spans
 
+Any cocone
+
+```text
+        g
+    S -----> B
+    |        |
+  f |        | j
+    V        V
+    A -----> X
+        i
+```
+
+induces a cocone
+
+```text
+        f
+    S -----> A
+    |        |
+  g |        | i
+    V        V
+    B -----> X.
+        j
+```
+
+This **swapping operation** on cocones is an
+[involution](foundation.involutions.md).
+
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) (X : UU l4)
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) (X : UU l4)
   where
 
-  swap-cocone-span : cocone-span f g X → cocone-span g f X
-  pr1 (swap-cocone-span c) = vertical-map-cocone-span f g c
-  pr1 (pr2 (swap-cocone-span c)) = horizontal-map-cocone-span f g c
-  pr2 (pr2 (swap-cocone-span c)) = inv-htpy (coherence-square-cocone-span f g c)
+  swap-cocone-span : cocone-span s X → cocone-span (opposite-span s) X
+  pr1 (swap-cocone-span c) = vertical-map-cocone-span s c
+  pr1 (pr2 (swap-cocone-span c)) = horizontal-map-cocone-span s c
+  pr2 (pr2 (swap-cocone-span c)) = inv-htpy (coherence-square-cocone-span s c)
 
 module _
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) (X : UU l4)
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) (X : UU l4)
   where
 
-  is-involution-swap-cocone-span : swap-cocone-span g f X ∘ swap-cocone-span f g X ~ id
+  is-involution-swap-cocone-span :
+    swap-cocone-span (opposite-span s) X ∘ swap-cocone-span s X ~ id
   is-involution-swap-cocone-span c =
-    eq-htpy-cocone-span f g
-      ( swap-cocone-span g f X (swap-cocone-span f g X c))
+    eq-htpy-cocone-span s
+      ( swap-cocone-span (opposite-span s) X (swap-cocone-span s X c))
       ( c)
       ( ( refl-htpy) ,
         ( refl-htpy) ,
-        ( λ s →
+        ( λ t →
           concat
             ( right-unit)
-            ( coherence-square-cocone-span f g c s)
-            ( inv-inv (coherence-square-cocone-span f g c s))))
+            ( coherence-square-cocone-span s c t)
+            ( inv-inv (coherence-square-cocone-span s c t))))
 
 module _
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) (X : UU l4)
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) (X : UU l4)
   where
 
-  is-equiv-swap-cocone-span : is-equiv (swap-cocone-span f g X)
+  is-equiv-swap-cocone-span : is-equiv (swap-cocone-span s X)
   is-equiv-swap-cocone-span =
     is-equiv-is-invertible
-      ( swap-cocone-span g f X)
-      ( is-involution-swap-cocone-span g f X)
-      ( is-involution-swap-cocone-span f g X)
+      ( swap-cocone-span (opposite-span s) X)
+      ( is-involution-swap-cocone-span (opposite-span s) X)
+      ( is-involution-swap-cocone-span s X)
 
-  equiv-swap-cocone-span : cocone-span f g X ≃ cocone-span g f X
-  pr1 equiv-swap-cocone-span = swap-cocone-span f g X
+  equiv-swap-cocone-span : cocone-span s X ≃ cocone-span (opposite-span s) X
+  pr1 equiv-swap-cocone-span = swap-cocone-span s X
   pr2 equiv-swap-cocone-span = is-equiv-swap-cocone-span
 ```
