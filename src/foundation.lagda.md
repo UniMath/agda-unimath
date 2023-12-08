@@ -69,6 +69,8 @@ open import foundation.constant-maps public
 open import foundation.constant-type-families public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
+open import foundation.copartial-elements public
+open import foundation.copartial-functions public
 open import foundation.coproduct-decompositions public
 open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
@@ -224,6 +226,8 @@ open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
+open import foundation.partial-functions public
+open import foundation.partial-sequences public
 open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
@@ -311,6 +315,8 @@ open import foundation.symmetric-operations public
 open import foundation.telescopes public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
+open import foundation.total-partial-elements public
+open import foundation.total-partial-functions public
 open import foundation.towers public
 open import foundation.transfinite-cocomposition-of-maps public
 open import foundation.transport-along-equivalences public
