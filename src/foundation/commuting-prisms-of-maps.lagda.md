@@ -15,8 +15,8 @@ open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.my-file-about-computing-htpy-precomp
+open import foundation.path-algebra
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies

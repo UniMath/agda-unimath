@@ -7,16 +7,16 @@ module foundation.my-file-about-computing-htpy-precomp where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
 open import foundation-core.whiskering-homotopies
-open import foundation.function-types
-open import foundation.action-on-identifications-functions
-open import foundation.precomposition-functions
-open import foundation.function-extensionality
 ```
 
 </details>
