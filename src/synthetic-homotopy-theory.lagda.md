@@ -77,6 +77,7 @@ open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushout-products public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
+open import synthetic-homotopy-theory.retracts-of-sequential-diagrams public
 open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
