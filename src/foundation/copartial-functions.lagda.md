@@ -70,7 +70,7 @@ The map going down is defined by the join operation on copartial elements, i.e.,
 the pushout-product algebra structure of the map `T : 1 → Prop`. The main idea
 behind composition of copartial functions is that a composite of copartial
 function is denied on the union of the subtypes where each factor is denied.
-Indeed, if `f` is denied at `a` or `map-copartial-eleemnt g` is denied at the
+Indeed, if `f` is denied at `a` or `map-copartial-element g` is denied at the
 copartial element `f a` of `B`, then the composite of copartial functions
 `g ∘ f` should be denied at `a`.
 
