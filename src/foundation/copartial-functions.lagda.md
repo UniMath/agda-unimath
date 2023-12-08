@@ -8,6 +8,7 @@ module foundation.copartial-functions where
 
 ```agda
 open import foundation.copartial-elements
+open import foundation.partial-functions
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -153,6 +154,34 @@ module _
   copartial-function-function : copartial-function lzero A B
   copartial-function-function =
     copartial-dependent-function-dependent-function f
+```
+
+## Properties
+
+### The underlying partial dependent function of a copartial dependent function
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  (f : copartial-dependent-function l3 A B)
+  where
+
+  partial-dependent-function-copartial-dependent-function :
+    partial-dependent-function l3 A B
+  partial-dependent-function-copartial-dependent-function a =
+    partial-element-copartial-element (f a)
+```
+
+### The underlying partial function of a copartial function
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : copartial-function l3 A B)
+  where
+
+  partial-function-copartial-function : partial-function l3 A B
+  partial-function-copartial-function a =
+    partial-element-copartial-element (f a)
 ```
 
 ## See also
