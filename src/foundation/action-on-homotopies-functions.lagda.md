@@ -10,13 +10,12 @@ module foundation.action-on-homotopies-functions where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
-open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
 

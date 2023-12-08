@@ -26,7 +26,6 @@ open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.precomposition-dependent-functions
 ```
 
 </details>
@@ -155,59 +154,59 @@ coherence-square-inv-all top left right bottom H =
 ### Any commuting square of maps induces a commuting square of function spaces via precomposition
 
 ```agda
-precomp-coherence-square-maps :
+module _
   {l1 l2 l3 l4 l5 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D) →
-  coherence-square-maps top left right bottom → (X : UU l5) →
-  coherence-square-maps
-    ( precomp right X)
-    ( precomp bottom X)
-    ( precomp top X)
-    ( precomp left X)
-precomp-coherence-square-maps top left right bottom = htpy-precomp
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  where
 
-precomp-coherence-square-maps' :
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D) →
-  coherence-square-maps' top left right bottom → (X : UU l5) →
-  coherence-square-maps'
-    ( precomp right X)
-    ( precomp bottom X)
-    ( precomp top X)
-    ( precomp left X)
-precomp-coherence-square-maps' top left right bottom = htpy-precomp
+  precomp-coherence-square-maps :
+    coherence-square-maps top left right bottom → (X : UU l5) →
+    coherence-square-maps
+      ( precomp right X)
+      ( precomp bottom X)
+      ( precomp top X)
+      ( precomp left X)
+  precomp-coherence-square-maps = htpy-precomp
+
+  precomp-coherence-square-maps' :
+    coherence-square-maps' top left right bottom → (X : UU l5) →
+    coherence-square-maps'
+      ( precomp right X)
+      ( precomp bottom X)
+      ( precomp top X)
+      ( precomp left X)
+  precomp-coherence-square-maps' = htpy-precomp
 ```
 
 ### Any commuting square of maps induces a commuting square of function spaces via postcomposition
 
 ```agda
-postcomp-coherence-square-maps :
+module _
   {l1 l2 l3 l4 l5 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
-  (X : UU l5) →
-  coherence-square-maps top left right bottom →
-  coherence-square-maps
-    ( postcomp X top)
-    ( postcomp X left)
-    ( postcomp X right)
-    ( postcomp X bottom)
-postcomp-coherence-square-maps top left right bottom X = htpy-postcomp X
+  where
 
-postcomp-coherence-square-maps' :
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D) →
-  (X : UU l5) →
-  coherence-square-maps' top left right bottom →
-  coherence-square-maps'
-    ( postcomp X top)
-    ( postcomp X left)
-    ( postcomp X right)
-    ( postcomp X bottom)
-postcomp-coherence-square-maps' top left right bottom X = htpy-postcomp X
+  postcomp-coherence-square-maps :
+    (X : UU l5) →
+    coherence-square-maps top left right bottom →
+    coherence-square-maps
+      ( postcomp X top)
+      ( postcomp X left)
+      ( postcomp X right)
+      ( postcomp X bottom)
+  postcomp-coherence-square-maps X = htpy-postcomp X
+
+  postcomp-coherence-square-maps' :
+    (X : UU l5) →
+    coherence-square-maps' top left right bottom →
+    coherence-square-maps'
+      ( postcomp X top)
+      ( postcomp X left)
+      ( postcomp X right)
+      ( postcomp X bottom)
+  postcomp-coherence-square-maps' X = htpy-postcomp X
 ```
 
 ## Properties
@@ -651,7 +650,7 @@ them.
       tl       tr                tr ∘ tl
   A -----> B -----> C         A --------> C
   |        |        |         |           |
-l |       m|        | r |->  l|          r|
+l |       m|        | r  ↦   l|          r|
   |   H    |   K    |         |   H | K   |
   v        v        v         v           v
   X -----> Y -----> Z         X --------> Z

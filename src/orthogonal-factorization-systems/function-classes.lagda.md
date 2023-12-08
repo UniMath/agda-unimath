@@ -18,7 +18,6 @@ open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.pullback-squares
 open import foundation.subtypes
-open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels

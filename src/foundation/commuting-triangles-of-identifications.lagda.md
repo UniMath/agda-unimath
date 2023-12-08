@@ -7,11 +7,8 @@ module foundation.commuting-triangles-of-identifications where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
-open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
 

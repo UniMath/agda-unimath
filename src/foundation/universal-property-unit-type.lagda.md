@@ -7,7 +7,6 @@ module foundation.universal-property-unit-type where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-contractible-types
@@ -15,6 +14,7 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.precomposition-functions

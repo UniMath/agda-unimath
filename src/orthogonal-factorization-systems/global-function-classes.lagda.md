@@ -7,19 +7,13 @@ module orthogonal-factorization-systems.global-function-classes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.pullback-squares
 open import foundation.subtypes
-open import foundation.transport-along-identifications
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.function-classes
