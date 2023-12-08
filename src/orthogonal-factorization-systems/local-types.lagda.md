@@ -241,7 +241,7 @@ is-contr-is-local A is-local-A =
     ( universal-property-empty' A)
 ```
 
-### If `S` is `g`-local, and `f` is a retract of `g`, then `S` is also `f`-local
+### If `S` is `g`-local, and `f` is a retract of `g` then `S` is `f`-local
 
 ```agda
 module _

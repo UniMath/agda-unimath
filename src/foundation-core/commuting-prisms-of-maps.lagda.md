@@ -189,7 +189,11 @@ module _
       ( (hC ·l inv-top) ∙h inv-front)
 ```
 
-## Translations
+## Translations between coherences of prisms of maps
+
+Our different formulations of commuting prisms of maps are of course all
+equivalent, although this remains to be formalized. Below, we record various
+translations between them.
 
 ```agda
 module _

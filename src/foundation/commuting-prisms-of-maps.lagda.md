@@ -183,6 +183,8 @@ module _
 
 ### Commuting prisms of maps induces commuting prisms on function types via precomposition
 
+We prove this for a few different formulations of commuting prisms of maps.
+
 ```agda
 module _
   { l1 l2 l3 l1' l2' l3' l : Level}

@@ -77,6 +77,20 @@ witnessing that the
 where `H₀` and `H₁` are the retracting homotopies of `r₀ ∘ i₀` and `r₁ ∘ i₁`
 respectively.
 
+This coherence arises from the implicit requirement that the total pasting of
+the retraction square should restrict the the reflixivity homotopy on the square
+
+```text
+    A ========= A
+    |           |
+  f | refl-htpy | f
+    v           v
+    B ========= B,
+```
+
+as we are asking for the morphisms to compose to the identity morphism of
+arrows.
+
 ## Definition
 
 ### The predicate of being a retraction of a morphism of arrows
@@ -144,28 +158,6 @@ module _
   coherence-retract-map : UU (l1 ⊔ l2)
   coherence-retract-map =
     coherence-htpy-hom-arrow f f (comp-hom-arrow f g f r i) id-hom-arrow H H'
-
-  coherence-prism-retract-map : UU (l1 ⊔ l2)
-  coherence-prism-retract-map =
-    vertical-coherence-prism-inv-triangles-maps
-      ( id)
-      ( map-domain-hom-arrow g f r)
-      ( map-domain-hom-arrow f g i)
-      ( id)
-      ( map-codomain-hom-arrow g f r)
-      ( map-codomain-hom-arrow f g i)
-      ( f)
-      ( g)
-      ( f)
-      ( H)
-      ( refl-htpy)
-      ( coh-hom-arrow g f r)
-      ( coh-hom-arrow f g i)
-      ( H')
-
-  eq-coherence-retract-map-coherence-prism-retract-map :
-    coherence-prism-retract-map ＝ coherence-retract-map
-  eq-coherence-retract-map-coherence-prism-retract-map = refl
 ```
 
 ### The binary relation `f g ↦ f retract-of-map g` asserting that `f` is a retract of the map `g`
@@ -410,7 +402,7 @@ module _
 
 ### Equivalences are closed under retracts of maps
 
-Note that the higher coherence of a retract of maps is not needed.
+We may observe that the higher coherence of a retract of maps is not needed.
 
 ```agda
 module _
