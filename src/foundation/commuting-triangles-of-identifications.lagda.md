@@ -54,6 +54,64 @@ module _
 
 ### Whiskering of triangles of identifications
 
+Given a commuting triangle of identifications
+
+```text
+       top
+    x ----- y
+     \     /
+ left \   / right
+       \ /
+        z     ,
+```
+
+we may consider three ways of attaching new identifications to it: prepending
+`p : u ＝ x` to the left, which gives us a commuting triangle
+
+```text
+         p ∙ top
+        u ----- y
+         \     /
+ p ∙ left \   / right
+           \ /
+            z     ,
+```
+
+or appending an identification `p : z ＝ u` to the right, which gives
+
+```text
+           top
+        u ----- y
+         \     /
+ left ∙ p \   / right ∙ p
+           \ /
+            z     ,
+```
+
+or splicing an identification `p : y ＝ u` and its inverse into the middle, to
+get
+
+```text
+     top ∙ p
+    u ----- y
+     \     /
+ left \   / p⁻¹ ∙ right
+       \ /
+        z     ,
+```
+
+which isn't formalized yet.
+
+Because concatenation of identifications is an equivalence, it follows that all
+of these transformations are equivalences.
+
+These lemmas are useful in proofs involving path algebra, because taking
+`equiv-right-whisk-triangle-identicications` as an example, it provides us with
+two maps: the forward direcation states `(p ＝ q ∙ r) → (p ∙ s ＝ q ∙ (r ∙ s))`,
+which allows one to append an identification without needing to reassociate on
+the right, and the backwards direction conversely allows one to concel out an
+identification in parantheses.
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z u : A}
