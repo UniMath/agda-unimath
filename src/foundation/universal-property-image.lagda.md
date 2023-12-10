@@ -39,9 +39,10 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-The {{#concept "image" Disambiguation="maps of types" Agda=is-image}} of a map
-`f : A → X` is the least [subtype](foundation-core.subtypes.md) of `X`
-containing all the values of `f`.
+The
+{{#concept "universal property of the image" Disambiguation="maps of types" Agda=is-image}}
+of a map `f : A → X` states that the [image](foundation.images.md) is the least
+[subtype](foundation-core.subtypes.md) of `X` containing all the values of `f`.
 
 ## Definition
 
@@ -250,9 +251,9 @@ abstract
       { A = (fiber f x)}
       ( fiber-emb-Prop m x)
       ( λ t →
-          ( map-hom-slice f (map-emb m) h (pr1 t)) ,
-          ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙
-            ( pr2 t)))
+        ( map-hom-slice f (map-emb m) h (pr1 t)) ,
+        ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙
+          ( pr2 t)))
 
   map-is-image-im :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
