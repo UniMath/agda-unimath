@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.null-types where
 
 ```agda
 open import foundation.constant-maps
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
@@ -40,6 +41,13 @@ module _
 
   is-null : UU (l1 ⊔ l2)
   is-null = is-equiv (const Y A)
+
+  is-prop-is-null : is-prop is-null
+  is-prop-is-null = is-property-is-equiv (const Y A)
+
+  is-null-Prop : Prop (l1 ⊔ l2)
+  pr1 is-null-Prop = is-null
+  pr2 is-null-Prop = is-prop-is-null
 ```
 
 ## Properties
