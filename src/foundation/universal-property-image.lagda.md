@@ -189,26 +189,25 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X)
-  where
+  where abstract
 
-  abstract
-    forward-implication-is-image-subtype-subtype-im :
-      {l : Level} (B : subtype l X) →
-      subtype-im f ⊆ B → (a : A) → is-in-subtype B (f a)
-    forward-implication-is-image-subtype-subtype-im B H a =
-      H (f a) (unit-trunc-Prop (a , refl))
+  forward-implication-is-image-subtype-subtype-im :
+    {l : Level} (B : subtype l X) →
+    subtype-im f ⊆ B → (a : A) → is-in-subtype B (f a)
+  forward-implication-is-image-subtype-subtype-im B H a =
+    H (f a) (unit-trunc-Prop (a , refl))
 
-    backward-implication-is-image-subtype-subtype-im :
-      {l : Level} (B : subtype l X) →
-      ((a : A) → is-in-subtype B (f a)) → subtype-im f ⊆ B
-    backward-implication-is-image-subtype-subtype-im B H x K =
-      apply-universal-property-trunc-Prop K (B x) (λ where (a , refl) → H a)
+  backward-implication-is-image-subtype-subtype-im :
+    {l : Level} (B : subtype l X) →
+    ((a : A) → is-in-subtype B (f a)) → subtype-im f ⊆ B
+  backward-implication-is-image-subtype-subtype-im B H x K =
+    apply-universal-property-trunc-Prop K (B x) (λ where (a , refl) → H a)
 
-    is-image-subtype-subtype-im : is-image-subtype f (subtype-im f)
-    pr1 (is-image-subtype-subtype-im B) =
-      forward-implication-is-image-subtype-subtype-im B
-    pr2 (is-image-subtype-subtype-im B) =
-      backward-implication-is-image-subtype-subtype-im B
+  is-image-subtype-subtype-im : is-image-subtype f (subtype-im f)
+  pr1 (is-image-subtype-subtype-im B) =
+    forward-implication-is-image-subtype-subtype-im B
+  pr2 (is-image-subtype-subtype-im B) =
+    backward-implication-is-image-subtype-subtype-im B
 ```
 
 ### The identity embedding is the image inclusion of any map that has a section
@@ -240,37 +239,37 @@ abstract
 ### The image of `f` is the image of `f`
 
 ```agda
-abstract
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X)
+  (m : B ↪ X) (h : hom-slice f (map-emb m))
+  where abstract
+
   fiberwise-map-is-image-im :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
-    (m : B ↪ X) (h : hom-slice f (map-emb m)) →
     (x : X) → type-trunc-Prop (fiber f x) → fiber (map-emb m) x
-  fiberwise-map-is-image-im f m h x =
+  fiberwise-map-is-image-im x =
     map-universal-property-trunc-Prop
       { A = fiber f x}
       ( fiber-emb-Prop m x)
       ( λ t →
         ( map-hom-slice f (map-emb m) h (pr1 t)) ,
-        ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙
-          ( pr2 t)))
+        ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙ ( pr2 t)))
 
-  map-is-image-im :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
-    (m : B ↪ X) (h : hom-slice f (map-emb m)) → im f → B
-  map-is-image-im f m h (x , t) =
-    pr1 (fiberwise-map-is-image-im f m h x t)
+  map-is-image-im : im f → B
+  map-is-image-im (x , t) = pr1 (fiberwise-map-is-image-im x t)
+
+  inv-triangle-is-image-im :
+    map-emb m ∘ map-is-image-im ~ inclusion-im f
+  inv-triangle-is-image-im (x , t) = pr2 (fiberwise-map-is-image-im x t)
 
   triangle-is-image-im :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
-    (m : B ↪ X) (h : hom-slice f (map-emb m)) →
-    inclusion-im f ~ map-emb m ∘ map-is-image-im f m h
-  triangle-is-image-im f m h (x , t) =
-    inv (pr2 (fiberwise-map-is-image-im f m h x t))
+    inclusion-im f ~ map-emb m ∘ map-is-image-im
+  triangle-is-image-im = inv-htpy inv-triangle-is-image-im
 
+abstract
   is-image-im :
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
     is-image f (emb-im f) (unit-im f)
-  is-image-im f {l} =
+  is-image-im f =
     is-image-is-image'
       ( f)
       ( emb-im f)
@@ -281,12 +280,14 @@ abstract
 ### A factorization of a map through an embedding is the image factorization if and only if the right factor is surjective
 
 ```agda
-abstract
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i))
+  where abstract
+
   is-surjective-is-image :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i)) →
     is-image f i q → is-surjective (map-hom-slice f (map-emb i) q)
-  is-surjective-is-image {A = A} {B} {X} f i q up-i b =
+  is-surjective-is-image up-i b =
     apply-universal-property-trunc-Prop β
       ( trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b))
       ( γ)
@@ -313,13 +314,10 @@ abstract
       unit-trunc-Prop
         ( a , p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b)))
 
-abstract
   is-image-is-surjective' :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i)) →
     is-surjective (map-hom-slice f (map-emb i) q) →
     is-image' f i q
-  is-image-is-surjective' f i q H B' m =
+  is-image-is-surjective' H B' m =
     map-equiv
       ( ( equiv-hom-slice-fiberwise-hom (map-emb i) (map-emb m)) ∘e
         ( inv-equiv
@@ -338,12 +336,9 @@ abstract
         ( equiv-universal-property-family-of-fibers f (fiber (map-emb m))) ∘e
         ( equiv-fiberwise-hom-hom-slice f (map-emb m)))
 
-abstract
   is-image-is-surjective :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i)) →
     is-surjective (map-hom-slice f (map-emb i) q) →
     is-image f i q
-  is-image-is-surjective f i q H =
-    is-image-is-image' f i q (is-image-is-surjective' f i q H)
+  is-image-is-surjective H =
+    is-image-is-image' f i q (is-image-is-surjective' H)
 ```
