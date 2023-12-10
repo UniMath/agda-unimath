@@ -53,11 +53,10 @@ module _
   where
 
   precomp-emb :
-    {l4 : Level} {C : UU l4} ( j : C ↪ X) →
+    {l4 : Level} {C : UU l4} (j : C ↪ X) →
     hom-slice (map-emb i) (map-emb j) → hom-slice f (map-emb j)
   pr1 (precomp-emb j r) =
-    ( map-hom-slice (map-emb i) (map-emb j) r) ∘
-    ( map-hom-slice f (map-emb i) q)
+    map-hom-slice (map-emb i) (map-emb j) r ∘ map-hom-slice f (map-emb i) q
   pr2 (precomp-emb j r) =
     ( triangle-hom-slice f (map-emb i) q) ∙h
     ( ( triangle-hom-slice (map-emb i) (map-emb j) r) ·r
@@ -248,7 +247,7 @@ abstract
     (x : X) → type-trunc-Prop (fiber f x) → fiber (map-emb m) x
   fiberwise-map-is-image-im f m h x =
     map-universal-property-trunc-Prop
-      { A = (fiber f x)}
+      { A = fiber f x}
       ( fiber-emb-Prop m x)
       ( λ t →
         ( map-hom-slice f (map-emb m) h (pr1 t)) ,
