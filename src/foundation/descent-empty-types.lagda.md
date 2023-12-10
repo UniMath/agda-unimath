@@ -25,7 +25,9 @@ module _
   where
 
   cone-empty : is-empty C → (C → B) → cone ex-falso g C
-  cone-empty p q = triple p q (λ c → ex-falso (p c))
+  pr1 (cone-empty p q) = p
+  pr1 (pr2 (cone-empty p q)) = q
+  pr2 (pr2 (cone-empty p q)) c = ex-falso (p c)
 
   abstract
     descent-empty : (c : cone ex-falso g C) → is-pullback ex-falso g c
