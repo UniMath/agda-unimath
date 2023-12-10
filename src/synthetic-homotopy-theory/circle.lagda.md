@@ -464,7 +464,8 @@ apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle =
     ( inv (ap circle-sphere-1 (meridian-suspension (one-Fin 1))))
     ( inv
       ( compute-meridian-cogap-suspension-structure
-          suspension-structure-sphere-0-𝕊¹ (one-Fin 1)))) ∙
+          ( suspension-structure-sphere-0-𝕊¹)
+          ( one-Fin 1)))) ∙
   ( inv
     ( assoc
       ( inv (ap circle-sphere-1 (meridian-suspension (one-Fin 1))))
