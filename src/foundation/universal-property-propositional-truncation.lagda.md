@@ -133,7 +133,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     (is-ptr-f : is-propositional-truncation P f) →
     (Q : Prop l3) (g : A → type-Prop Q) →
-    ((map-is-propositional-truncation P f is-ptr-f Q g) ∘ f) ~ g
+    map-is-propositional-truncation P f is-ptr-f Q g ∘ f ~ g
   htpy-is-propositional-truncation P f is-ptr-f Q g =
     pr2
       ( center
