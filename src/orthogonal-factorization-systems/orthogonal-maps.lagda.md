@@ -131,7 +131,7 @@ module _
     universal-property-pullback
       ( precomp f Y)
       ( postcomp A g)
-      ( postcomp B g , precomp f X , refl-htpy)
+      ( cone-pullback-hom' f g)
 ```
 
 ## Properties
@@ -180,13 +180,13 @@ module _
     universal-property-pullback-is-pullback
       ( precomp f Y)
       ( postcomp A g)
-      ( postcomp B g , precomp f X , refl-htpy)
+      ( cone-pullback-hom' f g)
       ( is-equiv-right-factor
         ( map-fibered-map-type-standard-pullback-hom f g)
         ( gap
           ( precomp f Y)
           ( postcomp A g)
-          ( postcomp B g , precomp f X , refl-htpy))
+          ( cone-pullback-hom' f g))
         ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
         ( G))
 
@@ -198,11 +198,151 @@ module _
       ( gap
         ( precomp f Y)
         ( postcomp A g)
-        ( postcomp B g , precomp f X , refl-htpy))
+        ( cone-pullback-hom' f g))
       ( is-pullback-universal-property-pullback
         ( precomp f Y)
         ( postcomp A g)
-        ( postcomp B g , precomp f X , refl-htpy)
+        ( cone-pullback-hom' f g)
         ( G))
       ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
+```
+
+### Right orthogonal maps are closed under composition and have the right cancellation property
+
+Given two composable maps `h` after `g`, if `g` is right orthogonal to `f` then
+`h` is right orthogonal to `f` if and only if `h ∘ g` is.
+
+**Proof:** By the universal property of orthogonal maps, the top square in the
+below diagram is a pullback precisely when `g` is right orthogonal to `f`:
+
+```text
+             - ∘ f
+      B → X -------> A → X
+        | ⌟            |
+  g ∘ - |              | g ∘ -
+        V              V
+      B → Y -------> A → Y
+        |              |
+  h ∘ - |              | h ∘ -
+        V              V
+      B → Z -------> A → Z.
+             - ∘ f
+```
+
+so the result is an instance of the vertical pasting property for pullbacks.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {Z : UU l5}
+  (f : A → B) (g : X → Y) (h : Y → Z)
+  where
+
+  up-orthogonal-right-comp :
+    universal-property-orthogonal-maps f h →
+    universal-property-orthogonal-maps f g →
+    universal-property-orthogonal-maps f (h ∘ g)
+  up-orthogonal-right-comp =
+    up-pullback-rectangle-up-pullback-top
+      ( precomp f Z)
+      ( postcomp A h)
+      ( postcomp A g)
+      ( cone-pullback-hom' f h)
+      ( cone-pullback-hom' f g)
+
+  is-orthogonal-right-comp :
+    is-orthogonal f h → is-orthogonal f g → is-orthogonal f (h ∘ g)
+  is-orthogonal-right-comp H G =
+    is-orthogonal-universal-property-orthogonal-maps f (h ∘ g)
+      ( up-orthogonal-right-comp
+        ( universal-property-orthogonal-maps-is-orthogonal f h H)
+        ( universal-property-orthogonal-maps-is-orthogonal f g G))
+
+  up-orthogonal-right-right-factor :
+    universal-property-orthogonal-maps f h →
+    universal-property-orthogonal-maps f (h ∘ g) →
+    universal-property-orthogonal-maps f g
+  up-orthogonal-right-right-factor =
+    up-pullback-top-up-pullback-rectangle
+      ( precomp f Z)
+      ( postcomp A h)
+      ( postcomp A g)
+      ( cone-pullback-hom' f h)
+      ( cone-pullback-hom' f g)
+
+  is-orthogonal-right-right-factor :
+    is-orthogonal f h → is-orthogonal f (h ∘ g) → is-orthogonal f g
+  is-orthogonal-right-right-factor H HG =
+    is-orthogonal-universal-property-orthogonal-maps f g
+      ( up-orthogonal-right-right-factor
+        ( universal-property-orthogonal-maps-is-orthogonal f h H)
+        ( universal-property-orthogonal-maps-is-orthogonal f (h ∘ g) HG))
+```
+
+### Left orthogonal maps are closed under composition and have the left cancellation property
+
+Given two composable maps `h` after `f`, if `f` is left orthogonal to `g` then
+`h` is left orthogonal to `g` if and only if `h ∘ f` is.
+
+**Proof:** By the universal property of orthogonal maps, the right square in the
+below diagram is a pullback precisely when `f` is left orthogonal to `g`:
+
+```text
+             - ∘ h          - ∘ f
+      C → X -------> B → X -------> A → X
+        |              | ⌟            |
+  g ∘ - |              |              | g ∘ -
+        V              V              V
+      C → Y -------> B → Y -------> A → Y
+             - ∘ h          - ∘ f
+```
+
+so the result is an instance of the horizontal pasting property for pullbacks.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {C : UU l5}
+  (f : A → B) (h : B → C) (g : X → Y)
+  where
+
+  up-orthogonal-left-comp :
+    universal-property-orthogonal-maps f g →
+    universal-property-orthogonal-maps h g →
+    universal-property-orthogonal-maps (h ∘ f) g
+  up-orthogonal-left-comp =
+    up-pullback-rectangle-up-pullback-left-square
+      ( precomp h Y)
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom' h g)
+
+  is-orthogonal-left-comp :
+    is-orthogonal f g → is-orthogonal h g → is-orthogonal (h ∘ f) g
+  is-orthogonal-left-comp F H =
+    is-orthogonal-universal-property-orthogonal-maps (h ∘ f) g
+      ( up-orthogonal-left-comp
+        ( universal-property-orthogonal-maps-is-orthogonal f g F)
+        ( universal-property-orthogonal-maps-is-orthogonal h g H))
+
+  up-orthogonal-left-left-factor :
+    universal-property-orthogonal-maps f g →
+    universal-property-orthogonal-maps (h ∘ f) g →
+    universal-property-orthogonal-maps h g
+  up-orthogonal-left-left-factor =
+    up-pullback-left-square-up-pullback-rectangle
+      ( precomp h Y)
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom' h g)
+
+  is-orthogonal-left-left-factor :
+    is-orthogonal f g → is-orthogonal (h ∘ f) g → is-orthogonal h g
+  is-orthogonal-left-left-factor F HF =
+    is-orthogonal-universal-property-orthogonal-maps h g
+      ( up-orthogonal-left-left-factor
+        ( universal-property-orthogonal-maps-is-orthogonal f g F)
+        ( universal-property-orthogonal-maps-is-orthogonal (h ∘ f) g HF))
 ```

@@ -155,8 +155,7 @@ fibered maps.
     is-equiv-map-equiv equiv-type-standard-pullback-hom-fibered-map
 
   universal-property-pullback-fibered-map :
-    universal-property-pullback
-      ( precomp f Y) (postcomp A g) (cone-pullback-hom)
+    universal-property-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom)
   universal-property-pullback-fibered-map =
     universal-property-pullback-is-pullback
       ( precomp f Y)
@@ -187,8 +186,13 @@ module _
   (f : A → B) (g : X → Y)
   where
 
+  cone-pullback-hom' : cone (precomp f Y) (postcomp A g) (B → X)
+  pr1 cone-pullback-hom' = postcomp B g
+  pr1 (pr2 cone-pullback-hom') = precomp f X
+  pr2 (pr2 cone-pullback-hom') = refl-htpy
+
   pullback-hom : (B → X) → fibered-map f g
-  pullback-hom = gap-pullback-hom f g (postcomp B g , precomp f X , refl-htpy)
+  pullback-hom = gap-pullback-hom f g cone-pullback-hom'
 
   infix 30 _⋔_
   _⋔_ = pullback-hom
