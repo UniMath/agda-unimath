@@ -16,10 +16,13 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -130,11 +133,21 @@ pr2 (equiv-up-pushout f g X) = up-pushout f g X
 ### The cogap map
 
 ```agda
-cogap :
-  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) →
-  { X : UU l4} → cocone f g X → pushout f g → X
-cogap f g {X} = map-inv-equiv (equiv-up-pushout f g X)
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) { X : UU l4}
+  where
+
+  cogap : cocone f g X → pushout f g → X
+  cogap = map-inv-equiv (equiv-up-pushout f g X)
+
+  is-section-cogap : is-section (cocone-map f g (cocone-pushout f g)) cogap
+  is-section-cogap = is-section-map-inv-equiv (equiv-up-pushout f g X)
+
+  is-retraction-cogap :
+    is-retraction (cocone-map f g (cocone-pushout f g)) cogap
+  is-retraction-cogap =
+    is-retraction-map-inv-equiv (equiv-up-pushout f g X)
 ```
 
 ### The predicate of being a pushout cocone
@@ -190,17 +203,25 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B)
   where
 
-  dependent-up-pushout :
-    (f : S → A) (g : S → B) →
+  dup-pushout :
     dependent-universal-property-pushout l4 f g (cocone-pushout f g)
-  dependent-up-pushout f g =
+  dup-pushout =
     dependent-universal-property-universal-property-pushout
     ( f)
     ( g)
     ( cocone-pushout f g)
     ( up-pushout f g)
+
+  equiv-dup-pushout :
+    (P : pushout f g → UU l4) →
+    ((x : pushout f g) → P x) ≃ dependent-cocone f g (cocone-pushout f g) P
+  pr1 (equiv-dup-pushout P) =
+    dependent-cocone-map f g (cocone-pushout f g) P
+  pr2 (equiv-dup-pushout P) =
+    dup-pushout P
 ```
 
 ### Computation with the cogap map
@@ -366,7 +387,7 @@ square commute (almost) trivially.
         ( f)
         ( g)
         ( cocone-pushout f g)
-        ( dependent-up-pushout f g))
+        ( dup-pushout f g))
       ( refl-htpy)
       ( λ _ →
         inv

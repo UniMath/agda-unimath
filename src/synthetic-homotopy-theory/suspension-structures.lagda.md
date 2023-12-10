@@ -51,9 +51,9 @@ h : (x : X) → (f ∘ (const X unit star)) x ＝ (g ∘ (const X unit star)) x
 ```
 
 Using the
-[universal property of `unit`](foundation.universal-property-unit-type.md), we
-can characterize suspension cocones as equivalent to a selection of "north" and
-"south" poles
+[universal property of the unit type](foundation.universal-property-unit-type.md),
+we can characterize suspension cocones as equivalent to a selection of "north"
+and "south" poles
 
 ```text
 north , south : Y
@@ -74,7 +74,7 @@ We call this type of structure `suspension-structure`.
 ```agda
 suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-cocone X Y = cocone (const X unit star) (const X unit star) Y
+suspension-cocone X Y = cocone (terminal-map {A = X}) (terminal-map {A = X}) Y
 ```
 
 ### Suspension structures on a type
@@ -108,64 +108,51 @@ module _
 ### Equivalence between suspension structures and suspension cocones
 
 ```agda
-cocone-suspension-structure :
-  {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
-  suspension-structure X Y → suspension-cocone X Y
-pr1 (cocone-suspension-structure X Y (N , S , merid)) = point N
-pr1 (pr2 (cocone-suspension-structure X Y (N , S , merid))) = point S
-pr2 (pr2 (cocone-suspension-structure X Y (N , S , merid))) = merid
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
 
-equiv-suspension-structure-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-cocone X Z ≃ suspension-structure X Z
-equiv-suspension-structure-suspension-cocone X Z =
-  equiv-Σ
-    ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
-    ( equiv-universal-property-unit Z)
-    ( λ z1 →
-      equiv-Σ
-        ( λ z2 → (x : X) → Id (z1 star) z2)
-        ( equiv-universal-property-unit Z)
-        ( λ z2 → id-equiv))
+  suspension-cocone-suspension-structure :
+    suspension-structure X Y → suspension-cocone X Y
+  pr1 (suspension-cocone-suspension-structure (N , S , merid)) = point N
+  pr1 (pr2 (suspension-cocone-suspension-structure (N , S , merid))) = point S
+  pr2 (pr2 (suspension-cocone-suspension-structure (N , S , merid))) = merid
 
-map-equiv-suspension-structure-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-cocone X Z → suspension-structure X Z
-map-equiv-suspension-structure-suspension-cocone X Z =
-  map-equiv (equiv-suspension-structure-suspension-cocone X Z)
+  suspension-structure-suspension-cocone :
+    suspension-cocone X Y → suspension-structure X Y
+  pr1 (suspension-structure-suspension-cocone (N , S , merid)) = N star
+  pr1 (pr2 (suspension-structure-suspension-cocone (N , S , merid))) = S star
+  pr2 (pr2 (suspension-structure-suspension-cocone (N , S , merid))) = merid
 
-is-equiv-map-equiv-suspension-structure-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  is-equiv (map-equiv-suspension-structure-suspension-cocone X Z)
-is-equiv-map-equiv-suspension-structure-suspension-cocone X Z =
-  is-equiv-map-equiv (equiv-suspension-structure-suspension-cocone X Z)
+  is-equiv-suspension-cocone-suspension-structure :
+    is-equiv suspension-cocone-suspension-structure
+  is-equiv-suspension-cocone-suspension-structure =
+    is-equiv-is-invertible
+      ( suspension-structure-suspension-cocone)
+      ( refl-htpy)
+      ( refl-htpy)
 
-map-inv-equiv-suspension-structure-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-structure X Z → suspension-cocone X Z
-map-inv-equiv-suspension-structure-suspension-cocone X Z =
-  map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z)
+  is-equiv-suspension-structure-suspension-cocone :
+    is-equiv suspension-structure-suspension-cocone
+  is-equiv-suspension-structure-suspension-cocone =
+    is-equiv-is-invertible
+      ( suspension-cocone-suspension-structure)
+      ( refl-htpy)
+      ( refl-htpy)
 
-is-equiv-map-inv-equiv-suspension-structure-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  is-equiv (map-inv-equiv-suspension-structure-suspension-cocone X Z)
-is-equiv-map-inv-equiv-suspension-structure-suspension-cocone X Z =
-  is-equiv-map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z)
+  equiv-suspension-structure-suspension-cocone :
+    suspension-structure X Y ≃ suspension-cocone X Y
+  pr1 equiv-suspension-structure-suspension-cocone =
+    suspension-cocone-suspension-structure
+  pr2 equiv-suspension-structure-suspension-cocone =
+    is-equiv-suspension-cocone-suspension-structure
 
-htpy-comparison-suspension-cocone-suspension-structure :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-    ( map-inv-equiv-suspension-structure-suspension-cocone X Z)
-  ~
-    ( cocone-suspension-structure X Z)
-htpy-comparison-suspension-cocone-suspension-structure
-  ( X)
-  ( Z)
-  ( s) =
-  is-injective-map-equiv
-    ( equiv-suspension-structure-suspension-cocone X Z)
-    ( is-section-map-inv-equiv
-      ( equiv-suspension-structure-suspension-cocone X Z)
-      ( s))
+  equiv-suspension-cocone-suspension-structure :
+    suspension-cocone X Y ≃ suspension-structure X Y
+  pr1 equiv-suspension-cocone-suspension-structure =
+    suspension-structure-suspension-cocone
+  pr2 equiv-suspension-cocone-suspension-structure =
+    is-equiv-suspension-structure-suspension-cocone
 ```
 
 #### Characterization of equalities in `suspension-structure`
@@ -178,9 +165,9 @@ module _
   htpy-suspension-structure :
     (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
   htpy-suspension-structure c c' =
-    Σ ( (north-suspension-structure c) ＝ (north-suspension-structure c'))
+    Σ ( north-suspension-structure c ＝ north-suspension-structure c')
       ( λ p →
-        Σ ( ( south-suspension-structure c) ＝ ( south-suspension-structure c'))
+        Σ ( south-suspension-structure c ＝ south-suspension-structure c')
           ( λ q →
             ( x : X) →
             ( meridian-suspension-structure c x ∙ q) ＝
@@ -267,9 +254,7 @@ module _
   ind-htpy-suspension-structure :
     { l : Level}
     ( P :
-      ( c' : suspension-structure X Z) →
-      ( htpy-suspension-structure c c') →
-      UU l) →
+      (c' : suspension-structure X Z) → htpy-suspension-structure c c' → UU l) →
     ( P c refl-htpy-suspension-structure) →
     ( c' : suspension-structure X Z)
     ( H : htpy-suspension-structure c c') →
@@ -300,11 +285,11 @@ module _
   ap-pr1-eq-htpy-suspension-structure =
     ind-htpy-suspension-structure
       ( λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
-      ( (ap
+      ( ap
         ( ap pr1)
         ( is-retraction-map-inv-equiv
           ( extensionality-suspension-structure c c)
-          ( refl))))
+          ( refl)))
 
   ap-pr1∘pr2-eq-htpy-suspension-structure :
     (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →

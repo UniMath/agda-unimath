@@ -202,7 +202,7 @@ pr2 equiv-pred-ℤ = is-equiv-pred-ℤ
 ```agda
 is-injective-succ-ℤ : is-injective succ-ℤ
 is-injective-succ-ℤ {x} {y} p =
-  inv (is-retraction-pred-ℤ x) ∙ (ap pred-ℤ p ∙ is-retraction-pred-ℤ y)
+  inv (is-retraction-pred-ℤ x) ∙ ap pred-ℤ p ∙ is-retraction-pred-ℤ y
 
 has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
 has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
@@ -309,7 +309,8 @@ is-set-is-positive-ℤ (inr (inl x)) = is-set-empty
 is-set-is-positive-ℤ (inr (inr x)) = is-set-unit
 
 is-positive-ℤ-Set : ℤ → Set lzero
-is-positive-ℤ-Set z = pair (is-positive-ℤ z) (is-set-is-positive-ℤ z)
+pr1 (is-positive-ℤ-Set z) = is-positive-ℤ z
+pr2 (is-positive-ℤ-Set z) = is-set-is-positive-ℤ z
 
 positive-ℤ : UU lzero
 positive-ℤ = Σ ℤ is-positive-ℤ
@@ -409,8 +410,8 @@ pr2 equiv-nonnegative-int-ℕ = is-equiv-nonnegative-int-ℕ
 is-injective-nonnegative-int-ℕ : is-injective nonnegative-int-ℕ
 is-injective-nonnegative-int-ℕ {x} {y} p =
   ( inv (is-retraction-nat-nonnegative-ℤ x)) ∙
-  ( ( ap nat-nonnegative-ℤ p) ∙
-    ( is-retraction-nat-nonnegative-ℤ y))
+  ( ap nat-nonnegative-ℤ p) ∙
+  ( is-retraction-nat-nonnegative-ℤ y)
 
 decide-is-nonnegative-ℤ :
   {x : ℤ} → (is-nonnegative-ℤ x) + (is-nonnegative-ℤ (neg-ℤ x))
@@ -431,17 +432,16 @@ succ-int-ℕ (succ-ℕ x) = refl
 
 ```agda
 is-injective-neg-ℤ : is-injective neg-ℤ
-is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ (ap neg-ℤ p ∙ neg-neg-ℤ y)
+is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
 
-is-zero-is-zero-neg-ℤ :
-  (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-zero-neg-ℤ : (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
 is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 ```
 
 ## See also
 
-1. We show in
-   [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.md)
-   that ℤ is the initial pointed type equipped with an automorphism.
-2. The group of integers is constructed in
-   [`elementary-number-theory.group-of-integers`](elementary-number-theory.group-of-integers.md).
+- We show in
+  [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.md)
+  that ℤ is the initial pointed type equipped with an automorphism.
+- The group of integers is constructed in
+  [`elementary-number-theory.group-of-integers`](elementary-number-theory.group-of-integers.md).

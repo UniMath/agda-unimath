@@ -88,7 +88,7 @@ module _
             ( λ V →
               ( equiv-prod
                 ( id-equiv)
-                ( ( inv-equiv universal-property-product) ∘e
+                ( ( inv-equiv equiv-up-product) ∘e
                   ( equiv-prod id-equiv equiv-ev-pair))) ∘e
               ( left-unit-law-Σ-is-contr
                 ( is-torsorial-equiv' (Σ U V))
