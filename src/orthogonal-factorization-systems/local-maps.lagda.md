@@ -11,7 +11,7 @@ open import foundation.fibers-of-maps
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-families
+open import orthogonal-factorization-systems.local-families-of-types
 ```
 
 </details>
