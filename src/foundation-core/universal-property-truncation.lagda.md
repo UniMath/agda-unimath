@@ -56,9 +56,7 @@ module _
     {l : Level} (C : Truncated-Type l k) → is-equiv (precomp-Trunc f C)
 
   equiv-is-truncation :
-    {l3 : Level}
-    (H : is-truncation) →
-    (C : Truncated-Type l3 k) →
+    {l3 : Level} (H : is-truncation) (C : Truncated-Type l3 k) →
     ( type-Truncated-Type B → type-Truncated-Type C) ≃
     ( A → type-Truncated-Type C)
   pr1 (equiv-is-truncation H C) = precomp-Trunc f C
@@ -154,15 +152,15 @@ module _
 
   map-is-truncation :
     is-truncation B f →
-    ({l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
-    type-hom-Truncated-Type k B C)
+    {l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
+    type-hom-Truncated-Type k B C
   map-is-truncation H C g =
     pr1 (center (universal-property-truncation-is-truncation H C g))
 
   triangle-is-truncation :
     (H : is-truncation B f) →
     {l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
-    (map-is-truncation H C g ∘ f) ~ g
+    map-is-truncation H C g ∘ f ~ g
   triangle-is-truncation H C g =
     pr2 (center (universal-property-truncation-is-truncation H C g))
 ```
@@ -197,18 +195,17 @@ module _
   abstract
     is-truncation-dependent-universal-property-truncation :
       dependent-universal-property-truncation B f → is-truncation B f
-    is-truncation-dependent-universal-property-truncation H X =
-      H (λ b → X)
+    is-truncation-dependent-universal-property-truncation H X = H (λ _ → X)
 
   section-is-truncation :
     is-truncation B f →
     {l3 : Level} (C : Truncated-Type l3 k)
     (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
-    f ~ (g ∘ h) → section g
+    f ~ g ∘ h → section g
   section-is-truncation H C h g K =
     map-distributive-Π-Σ
       ( map-inv-is-equiv
         ( dependent-universal-property-truncation-is-truncation H
           ( fiber-Truncated-Type C B g))
-        ( λ a → h a , inv (K a)))
+        ( λ a → (h a , inv (K a))))
 ```
