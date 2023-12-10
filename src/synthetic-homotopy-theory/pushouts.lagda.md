@@ -22,6 +22,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -202,17 +203,25 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B)
   where
 
-  dependent-up-pushout :
-    (f : S → A) (g : S → B) →
+  dup-pushout :
     dependent-universal-property-pushout l4 f g (cocone-pushout f g)
-  dependent-up-pushout f g =
+  dup-pushout =
     dependent-universal-property-universal-property-pushout
     ( f)
     ( g)
     ( cocone-pushout f g)
     ( up-pushout f g)
+
+  equiv-dup-pushout :
+    (P : pushout f g → UU l4) →
+    ((x : pushout f g) → P x) ≃ dependent-cocone f g (cocone-pushout f g) P
+  pr1 (equiv-dup-pushout P) =
+    dependent-cocone-map f g (cocone-pushout f g) P
+  pr2 (equiv-dup-pushout P) =
+    dup-pushout P
 ```
 
 ### Computation with the cogap map
@@ -378,7 +387,7 @@ square commute (almost) trivially.
         ( f)
         ( g)
         ( cocone-pushout f g)
-        ( dependent-up-pushout f g))
+        ( dup-pushout f g))
       ( refl-htpy)
       ( λ _ →
         inv

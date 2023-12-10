@@ -98,10 +98,10 @@ cocone-suspension :
 cocone-suspension X =
   cocone-pushout (terminal-map {A = X}) (terminal-map {A = X})
 
-cogap-suspension :
+cogap-suspension' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   cocone terminal-map terminal-map Y → pushout terminal-map terminal-map → Y
-cogap-suspension {X = X} = cogap (terminal-map {A = X}) (terminal-map {A = X})
+cogap-suspension' {X = X} = cogap (terminal-map {A = X}) (terminal-map {A = X})
 ```
 
 ### The cogap map of a suspension structure
@@ -111,9 +111,9 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (s : suspension-structure X Y)
   where
 
-  cogap-suspension-structure : suspension X → Y
-  cogap-suspension-structure =
-    cogap-suspension (suspension-cocone-suspension-structure s)
+  cogap-suspension : suspension X → Y
+  cogap-suspension =
+    cogap-suspension' (suspension-cocone-suspension-structure s)
 ```
 
 ### The property of being a suspension
@@ -129,7 +129,7 @@ large proposition.
 is-suspension :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   suspension-structure X Y → UU (l1 ⊔ l2)
-is-suspension s = is-equiv (cogap-suspension-structure s)
+is-suspension s = is-equiv (cogap-suspension s)
 ```
 
 ## Properties
@@ -141,20 +141,20 @@ module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
   where
 
-  is-section-cogap-suspension-structure :
+  is-section-cogap-suspension :
     is-section
       ( ev-suspension (suspension-structure-suspension X) Z)
-      ( cogap-suspension-structure)
-  is-section-cogap-suspension-structure =
+      ( cogap-suspension)
+  is-section-cogap-suspension =
     ( suspension-structure-suspension-cocone) ·l
-    ( ( is-section-cogap terminal-map terminal-map) ·r
-      ( suspension-cocone-suspension-structure))
+    ( is-section-cogap terminal-map terminal-map) ·r
+    ( suspension-cocone-suspension-structure)
 
-  is-retraction-cogap-suspension-structure :
+  is-retraction-cogap-suspension :
     is-retraction
       ( ev-suspension (suspension-structure-suspension X) Z)
-      ( cogap-suspension-structure)
-  is-retraction-cogap-suspension-structure =
+      ( cogap-suspension)
+  is-retraction-cogap-suspension =
     ( is-retraction-cogap terminal-map terminal-map)
 
 up-suspension :
@@ -162,9 +162,9 @@ up-suspension :
   universal-property-suspension (suspension-structure-suspension X)
 up-suspension Z =
   is-equiv-is-invertible
-    ( cogap-suspension-structure)
-    ( is-section-cogap-suspension-structure)
-    ( is-retraction-cogap-suspension-structure)
+    ( cogap-suspension)
+    ( is-section-cogap-suspension)
+    ( is-retraction-cogap-suspension)
 
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
@@ -176,48 +176,48 @@ module _
     ev-suspension (suspension-structure-suspension X) Z
   pr2 equiv-up-suspension = up-suspension Z
 
-  compute-north-cogap-suspension-structure :
+  compute-north-cogap-suspension :
     (c : suspension-structure X Z) →
-    ( cogap-suspension-structure c north-suspension) ＝
+    ( cogap-suspension c north-suspension) ＝
     ( north-suspension-structure c)
-  compute-north-cogap-suspension-structure c =
+  compute-north-cogap-suspension c =
     pr1
       ( htpy-eq-suspension-structure
-        ( is-section-cogap-suspension-structure c))
+        ( is-section-cogap-suspension c))
 
-  compute-south-cogap-suspension-structure :
+  compute-south-cogap-suspension :
     (c : suspension-structure X Z) →
-    ( cogap-suspension-structure c south-suspension) ＝
+    ( cogap-suspension c south-suspension) ＝
     ( south-suspension-structure c)
-  compute-south-cogap-suspension-structure c =
+  compute-south-cogap-suspension c =
     pr1
       ( pr2
         ( htpy-eq-suspension-structure
-          ( is-section-cogap-suspension-structure c)))
+          ( is-section-cogap-suspension c)))
 
-  compute-meridian-cogap-suspension-structure :
+  compute-meridian-cogap-suspension :
     (c : suspension-structure X Z) (x : X) →
-    ( ( ap (cogap-suspension-structure c) (meridian-suspension x)) ∙
-      ( compute-south-cogap-suspension-structure c)) ＝
-    ( ( compute-north-cogap-suspension-structure c) ∙
+    ( ( ap (cogap-suspension c) (meridian-suspension x)) ∙
+      ( compute-south-cogap-suspension c)) ＝
+    ( ( compute-north-cogap-suspension c) ∙
       ( meridian-suspension-structure c x))
-  compute-meridian-cogap-suspension-structure c =
+  compute-meridian-cogap-suspension c =
     pr2
       ( pr2
         ( htpy-eq-suspension-structure
-          ( is-section-cogap-suspension-structure c)))
+          ( is-section-cogap-suspension c)))
 
   ev-suspension-up-suspension :
     (c : suspension-structure X Z) →
     ( ev-suspension
       ( suspension-structure-suspension X)
       ( Z)
-      ( cogap-suspension-structure c)) ＝ c
+      ( cogap-suspension c)) ＝ c
   ev-suspension-up-suspension c =
     eq-htpy-suspension-structure
-      ( ( compute-north-cogap-suspension-structure c) ,
-        ( compute-south-cogap-suspension-structure c) ,
-        ( compute-meridian-cogap-suspension-structure c))
+      ( ( compute-north-cogap-suspension c) ,
+        ( compute-south-cogap-suspension c) ,
+        ( compute-meridian-cogap-suspension c))
 ```
 
 ### The suspension of `X` has the dependent universal property of suspensions
@@ -227,41 +227,16 @@ dup-suspension :
   {l1 : Level} {X : UU l1} →
   dependent-universal-property-suspension (suspension-structure-suspension X)
 dup-suspension {X = X} B =
-  is-equiv-htpy
-    ( map-equiv
-      ( equiv-dependent-suspension-structure-suspension-cocone
+  is-equiv-htpy-equiv'
+    ( ( equiv-dependent-suspension-structure-suspension-cocone
         ( suspension-structure-suspension X)
-        ( B)) ∘
-      ( dependent-cocone-map
-        ( terminal-map)
-        ( terminal-map)
-        ( suspension-cocone-suspension-structure
-          ( suspension-structure-suspension X))
-        ( B)))
-    ( inv-htpy
-      ( triangle-dependent-ev-suspension
-        ( suspension-structure-suspension X)
-        ( B)))
-    ( is-equiv-comp
-      ( map-equiv
-        ( equiv-dependent-suspension-structure-suspension-cocone
-          ( suspension-structure-suspension X)
-          ( B)))
-      ( dependent-cocone-map
-        ( terminal-map)
-        ( terminal-map)
-        ( suspension-cocone-suspension-structure
-          ( suspension-structure-suspension X))
-        ( B))
-      ( dependent-up-pushout terminal-map terminal-map B)
-      ( is-equiv-map-equiv
-        ( equiv-dependent-suspension-structure-suspension-cocone
-          ( suspension-structure-suspension X)
-          ( B))))
+        ( B)) ∘e
+      ( equiv-dup-pushout terminal-map terminal-map B))
+    ( triangle-dependent-ev-suspension (suspension-structure-suspension X) B)
 
 equiv-dup-suspension :
   {l1 l2 : Level} {X : UU l1} (B : suspension X → UU l2) →
-  (( x : suspension X) → B x) ≃
+  ( (x : suspension X) → B x) ≃
   ( dependent-suspension-structure B (suspension-structure-suspension X))
 pr1 (equiv-dup-suspension {X = X} B) =
   dependent-ev-suspension (suspension-structure-suspension X) B
@@ -271,21 +246,21 @@ module _
   {l1 l2 : Level} {X : UU l1} (B : suspension X → UU l2)
   where
 
-  map-inv-dup-suspension :
+  dependent-cogap-suspension :
     dependent-suspension-structure B (suspension-structure-suspension X) →
     (x : suspension X) → B x
-  map-inv-dup-suspension = map-inv-is-equiv (dup-suspension B)
+  dependent-cogap-suspension = map-inv-is-equiv (dup-suspension B)
 
-  is-section-map-inv-dup-suspension :
+  is-section-dependent-cogap-suspension :
     ( ( dependent-ev-suspension (suspension-structure-suspension X) B) ∘
-      ( map-inv-dup-suspension)) ~ id
-  is-section-map-inv-dup-suspension =
+      ( dependent-cogap-suspension)) ~ id
+  is-section-dependent-cogap-suspension =
     is-section-map-inv-is-equiv (dup-suspension B)
 
-  is-retraction-map-inv-dup-suspension :
-    ( ( map-inv-dup-suspension) ∘
+  is-retraction-dependent-cogap-suspension :
+    ( ( dependent-cogap-suspension) ∘
       ( dependent-ev-suspension (suspension-structure-suspension X) B)) ~ id
-  is-retraction-map-inv-dup-suspension =
+  is-retraction-dependent-cogap-suspension =
     is-retraction-map-inv-is-equiv (dup-suspension B)
 
   dup-suspension-north-suspension :
@@ -293,28 +268,28 @@ module _
       dependent-suspension-structure
         ( B)
         ( suspension-structure-suspension X)) →
-    ( map-inv-dup-suspension d north-suspension) ＝
+    ( dependent-cogap-suspension d north-suspension) ＝
     ( north-dependent-suspension-structure d)
   dup-suspension-north-suspension d =
     north-htpy-dependent-suspension-structure
       ( B)
       ( htpy-eq-dependent-suspension-structure
         ( B)
-        ( is-section-map-inv-dup-suspension d))
+        ( is-section-dependent-cogap-suspension d))
 
   dup-suspension-south-suspension :
     (d :
       dependent-suspension-structure
         ( B)
         ( suspension-structure-suspension X)) →
-    ( map-inv-dup-suspension d south-suspension) ＝
+    ( dependent-cogap-suspension d south-suspension) ＝
     ( south-dependent-suspension-structure d)
   dup-suspension-south-suspension d =
     south-htpy-dependent-suspension-structure
       ( B)
       ( htpy-eq-dependent-suspension-structure
         ( B)
-        ( is-section-map-inv-dup-suspension d))
+        ( is-section-dependent-cogap-suspension d))
 
   dup-suspension-meridian-suspension :
     (d :
@@ -327,7 +302,7 @@ module _
         ( tr B (meridian-suspension x))
         ( dup-suspension-north-suspension d))
       ( apd
-        ( map-inv-dup-suspension d)
+        ( dependent-cogap-suspension d)
         ( meridian-suspension x))
       ( meridian-dependent-suspension-structure d x)
       ( dup-suspension-south-suspension d)
@@ -336,7 +311,7 @@ module _
       ( B)
       ( htpy-eq-dependent-suspension-structure
         ( B)
-        ( is-section-map-inv-dup-suspension d))
+        ( is-section-dependent-cogap-suspension d))
 ```
 
 ### Characterization of homotopies between functions with domain a suspension

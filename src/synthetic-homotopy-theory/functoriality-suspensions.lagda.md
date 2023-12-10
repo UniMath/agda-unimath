@@ -50,17 +50,17 @@ module _
 
   map-suspension : suspension A → suspension B
   map-suspension =
-    cogap-suspension-structure map-suspension-structure
+    cogap-suspension map-suspension-structure
 
   compute-north-map-suspension :
     map-suspension (north-suspension) ＝ north-suspension
   compute-north-map-suspension =
-    compute-north-cogap-suspension-structure map-suspension-structure
+    compute-north-cogap-suspension map-suspension-structure
 
   compute-south-map-suspension :
     map-suspension (south-suspension) ＝ south-suspension
   compute-south-map-suspension =
-    compute-south-cogap-suspension-structure map-suspension-structure
+    compute-south-cogap-suspension map-suspension-structure
 
   compute-meridian-map-suspension :
     (a : A) →
@@ -70,7 +70,7 @@ module _
       ( meridian-suspension (f a))
       ( compute-south-map-suspension)
   compute-meridian-map-suspension =
-    compute-meridian-cogap-suspension-structure
+    compute-meridian-cogap-suspension
       ( map-suspension-structure)
 ```
 
