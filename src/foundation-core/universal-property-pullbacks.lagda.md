@@ -47,15 +47,15 @@ module _
   map-universal-property-pullback :
     universal-property-pullback f g c →
     {C' : UU l5} (c' : cone f g C') → C' → C
-  map-universal-property-pullback up-c {C'} c' =
-    map-inv-is-equiv (up-c C') c'
+  map-universal-property-pullback up-c {C'} =
+    map-inv-is-equiv (up-c C')
 
   compute-map-universal-property-pullback :
     (up-c : universal-property-pullback f g c) →
     {C' : UU l5} (c' : cone f g C') →
     cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
-  compute-map-universal-property-pullback up-c {C'} c' =
-    is-section-map-inv-is-equiv (up-c C') c'
+  compute-map-universal-property-pullback up-c {C'} =
+    is-section-map-inv-is-equiv (up-c C')
 ```
 
 ## Properties
@@ -79,8 +79,7 @@ module _
       ( eq-htpy-cone f g (cone-map f g c h) c' KLM)
 
   triangle-cone-cone :
-    {l6 : Level} (D : UU l6) →
-    cone-map f g c' ~ cone-map f g c ∘ postcomp D h
+    {l6 : Level} (D : UU l6) → cone-map f g c' ~ cone-map f g c ∘ postcomp D h
   triangle-cone-cone D k = inv (inv-triangle-cone-cone D k)
 
   abstract

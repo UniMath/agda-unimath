@@ -228,10 +228,10 @@ module _
   pr2 (pr1 (map-inv-fiber-pr1 b)) = b
   pr2 (map-inv-fiber-pr1 b) = refl
 
-  is-section-map-inv-fiber-pr1 : (map-inv-fiber-pr1 ∘ map-fiber-pr1) ~ id
+  is-section-map-inv-fiber-pr1 : map-inv-fiber-pr1 ∘ map-fiber-pr1 ~ id
   is-section-map-inv-fiber-pr1 ((.a , y) , refl) = refl
 
-  is-retraction-map-inv-fiber-pr1 : (map-fiber-pr1 ∘ map-inv-fiber-pr1) ~ id
+  is-retraction-map-inv-fiber-pr1 : map-fiber-pr1 ∘ map-inv-fiber-pr1 ~ id
   is-retraction-map-inv-fiber-pr1 b = refl
 
   abstract
@@ -266,10 +266,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  map-equiv-total-fiber : (Σ B (fiber f)) → A
+  map-equiv-total-fiber : Σ B (fiber f) → A
   map-equiv-total-fiber t = pr1 (pr2 t)
 
-  triangle-map-equiv-total-fiber : pr1 ~ (f ∘ map-equiv-total-fiber)
+  triangle-map-equiv-total-fiber : pr1 ~ f ∘ map-equiv-total-fiber
   triangle-map-equiv-total-fiber t = inv (pr2 (pr2 t))
 
   map-inv-equiv-total-fiber : A → Σ B (fiber f)
@@ -330,11 +330,11 @@ module _
   pr2 (inv-map-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
   is-section-inv-map-compute-fiber-comp :
-    (map-compute-fiber-comp ∘ inv-map-compute-fiber-comp) ~ id
+    map-compute-fiber-comp ∘ inv-map-compute-fiber-comp ~ id
   is-section-inv-map-compute-fiber-comp ((.(h a) , refl) , (a , refl)) = refl
 
   is-retraction-inv-map-compute-fiber-comp :
-    (inv-map-compute-fiber-comp ∘ map-compute-fiber-comp) ~ id
+    inv-map-compute-fiber-comp ∘ map-compute-fiber-comp ~ id
   is-retraction-inv-map-compute-fiber-comp (a , refl) = refl
 
   abstract
