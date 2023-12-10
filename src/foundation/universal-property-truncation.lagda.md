@@ -97,7 +97,7 @@ module _
   where
 
   is-surjective-is-truncation :
-    (is-truncation B f) → is-surjective f
+    is-truncation B f → is-surjective f
   is-surjective-is-truncation H =
     map-inv-is-equiv
       ( dependent-universal-property-truncation-is-truncation B f H

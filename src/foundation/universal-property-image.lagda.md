@@ -39,7 +39,7 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-The **image** of a map `f : A → X` is the least
+The {{#concept "image" Disambiguation="maps of types" Agda=is-image}} of a map `f : A → X` is the least
 [subtype](foundation-core.subtypes.md) of `X` containing all the values of `f`.
 
 ## Definition

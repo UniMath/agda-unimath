@@ -134,8 +134,7 @@ module _
 
   abstract
     is-truncation-universal-property-truncation :
-      universal-property-truncation B f →
-      is-truncation B f
+      universal-property-truncation B f → is-truncation B f
     is-truncation-universal-property-truncation H C =
       is-equiv-is-contr-map
         ( λ g →
@@ -154,7 +153,7 @@ module _
         ( is-contr-map-is-equiv (H C) g)
 
   map-is-truncation :
-    (is-truncation B f) →
+    is-truncation B f →
     ({l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
     type-hom-Truncated-Type k B C)
   map-is-truncation H C g =
@@ -178,7 +177,7 @@ module _
 
   abstract
     dependent-universal-property-truncation-is-truncation :
-      (is-truncation B f) →
+      is-truncation B f →
       dependent-universal-property-truncation B f
     dependent-universal-property-truncation-is-truncation H X =
       is-fiberwise-equiv-is-equiv-map-Σ
@@ -197,13 +196,12 @@ module _
 
   abstract
     is-truncation-dependent-universal-property-truncation :
-      (dependent-universal-property-truncation B f) →
-      is-truncation B f
+      dependent-universal-property-truncation B f → is-truncation B f
     is-truncation-dependent-universal-property-truncation H X =
       H (λ b → X)
 
   section-is-truncation :
-    (is-truncation B f) →
+    is-truncation B f →
     {l3 : Level} (C : Truncated-Type l3 k)
     (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
     f ~ (g ∘ h) → section g
