@@ -479,7 +479,7 @@ module _
 
   htpy-map-inv-is-equiv :
     {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
-    (map-inv-is-equiv H) ~ (map-inv-is-equiv K)
+    map-inv-is-equiv H ~ map-inv-is-equiv K
   htpy-map-inv-is-equiv G H K b =
     ( inv
       ( is-retraction-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
