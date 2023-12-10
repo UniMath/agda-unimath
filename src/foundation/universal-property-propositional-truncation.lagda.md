@@ -36,9 +36,11 @@ open import foundation-core.type-theoretic-principle-of-choice
 ## Idea
 
 A map `f : A → P` into a [proposition](foundation-core.propositions.md) `P` is
-said to satisfy the {{#concept "universal property of the propositional truncation" Agda=universal-property-propositional-truncation}} of
-`A`, or is said to be a {{#concept "propositional truncation" Agda=is-propositional-truncation}} of `A`, if any map
-`g : A → Q` into a proposition `Q` extends uniquely along `f`.
+said to satisfy the
+{{#concept "universal property of the propositional truncation" Agda=universal-property-propositional-truncation}}
+of `A`, or is said to be a
+{{#concept "propositional truncation" Agda=is-propositional-truncation}} of `A`,
+if any map `g : A → Q` into a proposition `Q` extends uniquely along `f`.
 
 ## Definition
 

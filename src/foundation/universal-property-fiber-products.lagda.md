@@ -28,9 +28,9 @@ open import foundation-core.universal-property-pullbacks
 
 ## Idea
 
-The {{#concept "fiberwise product" Disambiguation="types"}} of two families `P` and `Q` over a type `X` is the
-family of types `(P x) × (Q x)` over `X`. Similarly, the fiber product of two
-maps `f : A → X` and `g : B → X` is the type
+The {{#concept "fiberwise product" Disambiguation="types"}} of two families `P`
+and `Q` over a type `X` is the family of types `(P x) × (Q x)` over `X`.
+Similarly, the fiber product of two maps `f : A → X` and `g : B → X` is the type
 `Σ X (λ x → fiber f x × fiber g x)`, which fits in a
 [pullback](foundation-core.pullbacks.md) diagram on `f` and `g`.
 
