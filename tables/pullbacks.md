@@ -5,6 +5,7 @@
 | Cones over cospans                                    | [`foundation.cones-over-cospans`](foundation.cones-over-cospans.md)                                                             |
 | The universal property of pullbacks (foundation-core) | [`foundation-core.universal-property-pullbacks`](foundation-core.universal-property-pullbacks.md)                               |
 | The universal property of pullbacks (foundation)      | [`foundation.universal-property-pullbacks`](foundation.universal-property-pullbacks.md)                                         |
+| The universal property of fiber products              | [`foundation.universal-property-fiber-products`](foundation.universal-property-fiber-products.md)                               |
 | Pullbacks (foundation-core)                           | [`foundation-core.pullbacks`](foundation-core.pullbacks.md)                                                                     |
 | Pullbacks (foundation)                                | [`foundation.pullbacks`](foundation.pullbacks.md)                                                                               |
 | Functoriality of pullbacks                            | [`foundation.functoriality-pullbacks`](foundation.functoriality-pullbacks.md)                                                   |
