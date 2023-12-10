@@ -240,6 +240,44 @@ module _
   compute-fiber-pullback-hom = inv-equiv inv-compute-fiber-pullback-hom
 ```
 
+### Computing the pullback-hom of a composite
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {S : UU l5}
+  (f : A → B) (g : X → Y) (h : Y → S)
+  where
+
+  map-fibered-map-comp-right-fibered-map :
+    fibered-map f g → fibered-map f (h ∘ g)
+  pr1 (map-fibered-map-comp-right-fibered-map (j , i , H)) = h ∘ j
+  pr1 (pr2 (map-fibered-map-comp-right-fibered-map (j , i , H))) = i
+  pr2 (pr2 (map-fibered-map-comp-right-fibered-map (j , i , H))) = h ·l H
+
+  compute-pullback-hom-comp-right :
+    pullback-hom f (h ∘ g) ~
+    map-fibered-map-comp-right-fibered-map ∘ pullback-hom f g
+  compute-pullback-hom-comp-right = refl-htpy
+
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {S : UU l5}
+  (f : A → B) (g : X → Y) (h : S → A)
+  where
+
+  map-fibered-map-comp-left-fibered-map :
+    fibered-map f g → fibered-map (f ∘ h) g
+  pr1 (map-fibered-map-comp-left-fibered-map (j , i , H)) = j
+  pr1 (pr2 (map-fibered-map-comp-left-fibered-map (j , i , H))) = i ∘ h
+  pr2 (pr2 (map-fibered-map-comp-left-fibered-map (j , i , H))) = H ·r h
+
+  compute-pullback-hom-comp-left :
+    pullback-hom (f ∘ h) g ~
+    map-fibered-map-comp-left-fibered-map ∘ pullback-hom f g
+  compute-pullback-hom-comp-left = refl-htpy
+```
+
 ## Table of files about pullbacks
 
 The following table lists files that are about pullbacks as a general concept.
