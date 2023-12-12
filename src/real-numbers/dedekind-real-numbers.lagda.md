@@ -82,7 +82,7 @@ module _
                 ( λ r →
                   implication-Prop
                     ( le-ℚ-Prop q r)
-                    ( disj-Prop (L q) (U r)))))))
+                    ( disjunction-Prop (L q) (U r)))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop

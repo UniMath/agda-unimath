@@ -132,24 +132,24 @@ module _
             ( λ {P} {Q} α →
               eq-iff
                 ( λ p →
-                  map-left-unit-law-disj-is-empty-Prop
+                  map-left-unit-law-disjunction-is-empty-Prop
                     ( Id-Prop (set-Group G) _ _)
                     ( Q)
                     ( f)
                     ( forward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disj-Prop
+                      ( inr-disjunction-Prop
                         ( Id-Prop (set-Group G) _ _)
                         ( P)
                         ( p))))
                 ( λ q →
-                  map-left-unit-law-disj-is-empty-Prop
+                  map-left-unit-law-disjunction-is-empty-Prop
                     ( Id-Prop (set-Group G) _ _)
                     ( P)
                     ( f)
                     ( backward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disj-Prop
+                      ( inr-disjunction-Prop
                         ( Id-Prop (set-Group G) _ _)
                         ( Q)
                         ( q))))))

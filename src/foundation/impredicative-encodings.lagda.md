@@ -114,9 +114,9 @@ equiv-impredicative-conj-Prop P1 P2 =
 ### The impredicative encoding of disjunction
 
 ```agda
-impredicative-disj-Prop :
+impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
-impredicative-disj-Prop {l1} {l2} P1 P2 =
+impredicative-disjunction-Prop {l1} {l2} P1 P2 =
   Π-Prop
     ( Prop (l1 ⊔ l2))
     ( λ Q →
@@ -124,37 +124,39 @@ impredicative-disj-Prop {l1} {l2} P1 P2 =
         ( type-implication-Prop P1 Q)
         ( function-Prop (type-implication-Prop P2 Q) Q))
 
-type-impredicative-disj-Prop :
+type-impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
-type-impredicative-disj-Prop P1 P2 =
-  type-Prop (impredicative-disj-Prop P1 P2)
+type-impredicative-disjunction-Prop P1 P2 =
+  type-Prop (impredicative-disjunction-Prop P1 P2)
 
-map-impredicative-disj-Prop :
+map-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-disj-Prop P1 P2 → type-impredicative-disj-Prop P1 P2
-map-impredicative-disj-Prop {l1} {l2} P1 P2 =
+  type-disjunction-Prop P1 P2 → type-impredicative-disjunction-Prop P1 P2
+map-impredicative-disjunction-Prop {l1} {l2} P1 P2 =
   map-universal-property-trunc-Prop
-    ( impredicative-disj-Prop P1 P2)
+    ( impredicative-disjunction-Prop P1 P2)
     ( ind-coprod
-      ( λ x → type-impredicative-disj-Prop P1 P2)
+      ( λ x → type-impredicative-disjunction-Prop P1 P2)
       ( λ x Q f1 f2 → f1 x)
       ( λ y Q f1 f2 → f2 y))
 
-inv-map-impredicative-disj-Prop :
+inv-map-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-impredicative-disj-Prop P1 P2 → type-disj-Prop P1 P2
-inv-map-impredicative-disj-Prop P1 P2 H =
-  H (disj-Prop P1 P2) (inl-disj-Prop P1 P2) (inr-disj-Prop P1 P2)
+  type-impredicative-disjunction-Prop P1 P2 → type-disjunction-Prop P1 P2
+inv-map-impredicative-disjunction-Prop P1 P2 H =
+  H ( disjunction-Prop P1 P2)
+    ( inl-disjunction-Prop P1 P2)
+    ( inr-disjunction-Prop P1 P2)
 
-equiv-impredicative-disj-Prop :
+equiv-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-disj-Prop P1 P2 ≃ type-impredicative-disj-Prop P1 P2
-equiv-impredicative-disj-Prop P1 P2 =
+  type-disjunction-Prop P1 P2 ≃ type-impredicative-disjunction-Prop P1 P2
+equiv-impredicative-disjunction-Prop P1 P2 =
   equiv-iff
-    ( disj-Prop P1 P2)
-    ( impredicative-disj-Prop P1 P2)
-    ( map-impredicative-disj-Prop P1 P2)
-    ( inv-map-impredicative-disj-Prop P1 P2)
+    ( disjunction-Prop P1 P2)
+    ( impredicative-disjunction-Prop P1 P2)
+    ( map-impredicative-disjunction-Prop P1 P2)
+    ( inv-map-impredicative-disjunction-Prop P1 P2)
 ```
 
 ### The impredicative encoding of negation
