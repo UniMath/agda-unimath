@@ -65,7 +65,9 @@ module _
 
   is-function-class-factorization-Prop : Prop (lL ⊔ lR)
   is-function-class-factorization-Prop =
-    conj-Prop (L (left-map-factorization F)) (R (right-map-factorization F))
+    conjunction-Prop
+      ( L (left-map-factorization F))
+      ( R (right-map-factorization F))
 
   is-function-class-factorization : UU (lL ⊔ lR)
   is-function-class-factorization =

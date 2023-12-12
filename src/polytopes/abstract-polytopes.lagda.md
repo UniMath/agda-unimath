@@ -408,7 +408,7 @@ module _
       ( element-face-Prepolytope z)
   is-on-path-face-prepolytope-Prop
     ( cons-path-faces-Finitely-Graded-Poset {z = w} a p) z =
-    disj-Prop
+    disjunction-Prop
       ( is-on-path-face-prepolytope-Prop p z)
       ( Id-Prop
         ( set-Prepolytope)

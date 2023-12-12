@@ -55,7 +55,7 @@ module _
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive =
-    (a b c : A) → type-hom-Prop (R a b) (disj-Prop (R a c) (R b c))
+    (a b c : A) → type-hom-Prop (R a b) (disjunction-Prop (R a c) (R b c))
 
   is-apartness-relation : UU (l1 ⊔ l2)
   is-apartness-relation =
@@ -192,23 +192,23 @@ module _
       is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
     is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
       apply-universal-property-trunc-Prop H
-        ( disj-Prop
+        ( disjunction-Prop
           ( rel-apart-function-into-Type-With-Apartness X Y f h)
           ( rel-apart-function-into-Type-With-Apartness X Y g h))
         ( λ (x , a) →
           apply-universal-property-trunc-Prop
             ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
-            ( disj-Prop
+            ( disjunction-Prop
               ( rel-apart-function-into-Type-With-Apartness X Y f h)
               ( rel-apart-function-into-Type-With-Apartness X Y g h))
             ( λ where
               ( inl b) →
-                inl-disj-Prop
+                inl-disjunction-Prop
                   ( rel-apart-function-into-Type-With-Apartness X Y f h)
                   ( rel-apart-function-into-Type-With-Apartness X Y g h)
                   ( unit-trunc-Prop (x , b))
               ( inr b) →
-                inr-disj-Prop
+                inr-disjunction-Prop
                   ( rel-apart-function-into-Type-With-Apartness X Y f h)
                   ( rel-apart-function-into-Type-With-Apartness X Y g h)
                   ( unit-trunc-Prop (x , b))))
