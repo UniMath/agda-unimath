@@ -91,14 +91,14 @@ ev-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
   type-hom-Prop
     ( hom-Prop (disjunction-Prop P Q) R)
-    ( conj-Prop (hom-Prop P R) (hom-Prop Q R))
+    ( conjunction-Prop (hom-Prop P R) (hom-Prop Q R))
 pr1 (ev-disjunction-Prop P Q R h) = h ∘ (inl-disjunction-Prop P Q)
 pr2 (ev-disjunction-Prop P Q R h) = h ∘ (inr-disjunction-Prop P Q)
 
 elim-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
   type-hom-Prop
-    ( conj-Prop (hom-Prop P R) (hom-Prop Q R))
+    ( conjunction-Prop (hom-Prop P R) (hom-Prop Q R))
     ( hom-Prop (disjunction-Prop P Q) R)
 elim-disjunction-Prop P Q R (pair f g) =
   map-universal-property-trunc-Prop R (ind-coprod (λ t → type-Prop R) f g)
@@ -110,7 +110,7 @@ abstract
   is-equiv-ev-disjunction-Prop P Q R =
     is-equiv-is-prop
       ( is-prop-type-Prop (hom-Prop (disjunction-Prop P Q) R))
-      ( is-prop-type-Prop (conj-Prop (hom-Prop P R) (hom-Prop Q R)))
+      ( is-prop-type-Prop (conjunction-Prop (hom-Prop P R) (hom-Prop Q R)))
       ( elim-disjunction-Prop P Q R)
 ```
 
