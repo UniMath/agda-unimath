@@ -317,7 +317,7 @@ type-implication-Prop :
 type-implication-Prop P Q = type-hom-Prop P Q
 
 infixr 5 _⇒_
-_⇒_ = implication-Prop
+_⇒_ = type-implication-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition
