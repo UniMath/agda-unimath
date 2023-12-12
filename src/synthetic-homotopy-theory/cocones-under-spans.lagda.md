@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.cocones-under-spans where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.extensions-spans
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -320,7 +321,7 @@ to obtain a cocone under the span `A <-f- S -h∘g-> C`.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
+  {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
   {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span s → C)
   (c : cocone-span s X)
   (d : cocone-span (make-span (vertical-map-cocone-span s c) h) Y)
@@ -365,6 +366,39 @@ module _
     vertical-map-horizontal-comp-cocone-span
   pr2 (pr2 horizontal-comp-cocone-span) =
     coherence-square-horizontal-comp-cocone-span
+```
+
+### Horizontal composition of cocones under spans with morphisms of arrows
+
+Consider a span `s := A <-f- S -g-> B` and a [moprhism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` for some map `f : S' → A'`, as indicated in the diagram
+
+```text
+          h₀       g
+     S' -----> S -----> B
+     |         |        |
+  f' |       f |        | j
+     v         v        v
+     A' -----> A -----> X
+          h₁       i
+```
+
+Then we obtain a new cocone on the outer span `A' <- S' -> B`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
+  {S' : UU l4} {A' : UU l5} (f' : S' → A') {X : UU l6}
+  where
+
+  horizontal-comp-hom-arrow-cocone-span :
+    (h : hom-arrow f' (left-map-span s)) → cocone-span s X →
+    cocone-span (left-extend-hom-arrow-span s f' h) X
+  horizontal-comp-hom-arrow-cocone-span h c =
+    horizontal-comp-cocone-span
+      ( span-hom-arrow f' (left-map-span s) h)
+      ( right-map-span s)
+      ( cocone-hom-arrow f' (left-map-span s) h)
+      ( c)
 ```
 
 A variation on the above:
@@ -462,6 +496,44 @@ module _
     vertical-map-vertical-comp-cocone-span
   pr2 (pr2 vertical-comp-cocone-span) =
     coherence-square-vertical-comp-cocone-span
+```
+
+### Composing cocones with morphisms of arrows on the right
+
+Consider a span `s := A <-f- S -g-> B` and a map `g' : S' → B'`.
+Then we can **compose** a morphism of arrows `h : hom-arrow g' g` with a cocone `c := (i , j , H)` under `s`, as indicated in the diagram
+
+```text
+         g'
+     S' ----> B'
+     |        |
+  h₀ |        | h₁
+     v   g    v
+     S -----> B
+     |        |
+   f |        |
+     v        v
+     A -----> X
+```
+
+to obtain a cocone under the span `A <- S' -> B'`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
+  {S' : UU l4} {B' : UU l5} (g' : S' → B')
+  (h : hom-arrow g' (right-map-span s))
+  {X : UU l6} (c : cocone-span s X)
+  where
+
+  vertical-comp-hom-arrow-cocone-span :
+    cocone-span (right-extend-hom-arrow-span s g' h) X
+  vertical-comp-hom-arrow-cocone-span =
+    vertical-comp-cocone-span
+      ( span-hom-arrow {!!} {!!} {!!})
+      {!!}
+      {!!}
+      {!!}
 ```
 
 A variation on the above:

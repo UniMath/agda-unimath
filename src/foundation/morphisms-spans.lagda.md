@@ -8,6 +8,7 @@ module foundation.morphisms-spans where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.extensions-spans
 open import foundation.spans
 open import foundation.universe-levels
 

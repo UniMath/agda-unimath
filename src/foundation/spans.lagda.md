@@ -8,10 +8,10 @@ module foundation.spans where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 ```
 
@@ -34,10 +34,8 @@ the type `S` is referred to as the {{#concept "spanning type" Disambiguation="bi
 We also consider the notion of {{#concept "binary span"}}, which consists of two
 types `A` and `B` and a binary span with fixed domain and codomain from `A` to `B`.
 
-More generally, given a family of types `A i` indexed by `i : I`, a {{#concept "span"}} on
-`A` consists of a type `S` and a family of maps `f i : S → A i` indexed by
-`i : I`.
-
+In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we show that [binary relations](foundation.binary-relations.md) are equivalently described as spans of types.
+  
 ## Definitions
 
 ### (Binary) spans with fixed domain and codomain
@@ -138,160 +136,46 @@ module _
   pr2 (pr2 (constant-span X)) = id-span-fixed-domain-codomain
 ```
 
-### Spans of fixed families of types
+### The span obtained from a morphism of arrows
 
-```agda
-module _
-  {l1 l2 : Level} (l3 : Level) {I : UU l1} (A : I → UU l2)
-  where
+Given maps `f : A → B` and `g : X → Y` and a morphism of arrows `α : f → g`, the span associated to `α` is the span
 
-  span-fixed-family-of-types : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  span-fixed-family-of-types = Σ (UU l3) (λ S → (i : I) → S → A i)
-
-module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
-  (s : span-fixed-family-of-types l3 A)
-  where
-
-  spanning-type-span-fixed-family-of-types : UU l3
-  spanning-type-span-fixed-family-of-types = pr1 s
-
-  map-span-fixed-family-of-types :
-    (i : I) → spanning-type-span-fixed-family-of-types → A i
-  map-span-fixed-family-of-types = pr2 s
+```text
+       f       α₀
+  B <----- A -----> X.
 ```
 
-### Spans of families of types
-
-Note: We might have to rename the following definition of spans of families of
-types to _spans of families of types with fixed indexing type_.
-
-```agda
-span-family-of-types :
-  {l1 : Level} (l2 l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-span-family-of-types l2 l3 I =
-  Σ (I → UU l2) (λ A → span-fixed-family-of-types l3 A)
-
-module _
-  {l1 l2 l3 : Level} {I : UU l1} (s : span-family-of-types l2 l3 I)
-  where
-
-  family-span-family-of-types : I → UU l2
-  family-span-family-of-types = pr1 s
-
-  span-fixed-family-of-types-span-family-of-types :
-    span-fixed-family-of-types l3 family-span-family-of-types
-  span-fixed-family-of-types-span-family-of-types = pr2 s
-
-  spanning-type-span-family-of-types : UU l3
-  spanning-type-span-family-of-types =
-    spanning-type-span-fixed-family-of-types
-      ( span-fixed-family-of-types-span-family-of-types)
-
-  map-span-family-of-types :
-    (i : I) → spanning-type-span-family-of-types →
-    family-span-family-of-types i
-  map-span-family-of-types =
-    map-span-fixed-family-of-types
-      ( span-fixed-family-of-types-span-family-of-types)
-```
-
-### Extensions of spans with fixed domain and codomain
-
-#### Extensions on both sides
-
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} {A' : UU l2}
-  {B : UU l3} {B' : UU l4}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  extend-span-fixed-domain-codomain :
-    span-fixed-domain-codomain l5 A B → (A → A') → (B → B') →
-    span-fixed-domain-codomain l5 A' B'
-  pr1 (extend-span-fixed-domain-codomain s f g) =
-    spanning-type-span-fixed-domain-codomain s
-  pr1 (pr2 (extend-span-fixed-domain-codomain s f g)) =
-    f ∘ left-map-span-fixed-domain-codomain s
-  pr2 (pr2 (extend-span-fixed-domain-codomain s f g)) =
-    g ∘ right-map-span-fixed-domain-codomain s
-```
+  domain-span-hom-arrow : UU l2
+  domain-span-hom-arrow = B
 
-#### Extensions on the left
+  codomain-span-hom-arrow : UU l3
+  codomain-span-hom-arrow = X
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {A' : UU l2}
-  {B : UU l3}
-  where
+  spanning-type-hom-arrow : UU l1
+  spanning-type-hom-arrow = A
 
-  left-extend-span-fixed-domain-codomain :
-    span-fixed-domain-codomain l4 A B → (A → A') →
-    span-fixed-domain-codomain l4 A' B
-  left-extend-span-fixed-domain-codomain s f =
-    extend-span-fixed-domain-codomain s f id
-```
+  left-map-span-hom-arrow : spanning-type-hom-arrow → domain-span-hom-arrow
+  left-map-span-hom-arrow = f
 
-#### Extensions on the right
+  right-map-span-hom-arrow : spanning-type-hom-arrow → codomain-span-hom-arrow
+  right-map-span-hom-arrow = map-domain-hom-arrow f g α
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1}
-  {B : UU l3} {B' : UU l4}
-  where
+  span-fixed-domain-codomain-hom-arrow :
+    span-fixed-domain-codomain l1 B X
+  pr1 span-fixed-domain-codomain-hom-arrow = A
+  pr1 (pr2 span-fixed-domain-codomain-hom-arrow) = left-map-span-hom-arrow
+  pr2 (pr2 span-fixed-domain-codomain-hom-arrow) = right-map-span-hom-arrow
 
-  right-extend-span-fixed-domain-codomain :
-    span-fixed-domain-codomain l4 A B → (B → B') →
-    span-fixed-domain-codomain l4 A B'
-  right-extend-span-fixed-domain-codomain s g =
-    extend-span-fixed-domain-codomain s id g
-```
-
-### Extensions of spans
-
-#### Extensions on both sides
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  where
-
-  extend-span :
-    (s : span l1 l2 l3)
-    {A' : UU l4} (f : domain-span s → A')
-    {B' : UU l5} (g : codomain-span s → B') →
-    span l4 l5 l3
-  pr1 (extend-span s {A'} f {B'} g) = A'
-  pr1 (pr2 (extend-span s {A'} f {B'} g)) = B'
-  pr2 (pr2 (extend-span s {A'} f {B'} g)) =
-    extend-span-fixed-domain-codomain (span-fixed-domain-codomain-span s) f g
-```
-
-#### Etensions on the left
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  where
-
-  left-extend-span :
-    (s : span l1 l2 l3) {A' : UU l4} (f : domain-span s → A') → span l4 l2 l3
-  left-extend-span s f = extend-span s f id
-```
-
-#### Extensions on the right
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  where
-
-  right-extend-span :
-    (s : span l1 l2 l3) {B' : UU l4} (g : codomain-span s → B') → span l1 l4 l3
-  right-extend-span s g = extend-span s id g
+  span-hom-arrow : span l2 l3 l1
+  pr1 span-hom-arrow = domain-span-hom-arrow
+  pr1 (pr2 span-hom-arrow) = codomain-span-hom-arrow
+  pr2 (pr2 span-hom-arrow) = span-fixed-domain-codomain-hom-arrow
 ```
 
 ### The opposite of a span with fixed domain and codomain
@@ -328,28 +212,8 @@ module _
     opposite-span-fixed-domain-codomain (span-fixed-domain-codomain-span s)
 ```
 
-### Permutations of spans of fixed families of types
-
-Permutations of spans of fixed families of types are a generalization of the
-opposite of a binary span with fixed domain and codomain.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
-  where
-
-  permutation-span-fixed-family-of-types :
-    (e : I ≃ I) → span-fixed-family-of-types l3 A →
-    span-fixed-family-of-types l3 (A ∘ map-equiv e)
-  pr1 (permutation-span-fixed-family-of-types e s) =
-    spanning-type-span-fixed-family-of-types s
-  pr2 (permutation-span-fixed-family-of-types e s) i =
-    map-span-fixed-family-of-types s (map-equiv e i)
-```
-
 ## See also
 
-- The dual concept of spans is [cospans](foundation.cospans.md).
-- In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we
-  show that [binary relations](foundation.binary-relations.md) are equivalently
-  described as spans of types.
+- [Cospans](foundation.cospans.md)
+- [Extensions of spans](foundation.extensions-spans.md)
+- [Spans of families of types](foundation.spans-families-of-types.md)

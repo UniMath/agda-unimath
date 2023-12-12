@@ -13,7 +13,6 @@ open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
-open import foundation.spans
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -58,8 +57,11 @@ module _
   (f : A → B) (g : X → Y)
   where
 
+  coherence-hom-arrow : (A → X) → (B → Y) → UU (l1 ⊔ l4)
+  coherence-hom-arrow i = coherence-square-maps i f g
+
   hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-arrow = Σ (A → X) (λ i → Σ (B → Y) (coherence-square-maps i f g))
+  hom-arrow = Σ (A → X) (λ i → Σ (B → Y) (coherence-hom-arrow i))
 
   map-domain-hom-arrow : hom-arrow → A → X
   map-domain-hom-arrow = pr1
@@ -69,11 +71,7 @@ module _
 
   coh-hom-arrow :
     (h : hom-arrow) →
-    coherence-square-maps
-      ( map-domain-hom-arrow h)
-      ( f)
-      ( g)
-      ( map-codomain-hom-arrow h)
+    coherence-hom-arrow (map-domain-hom-arrow h) (map-codomain-hom-arrow h)
   coh-hom-arrow = pr2 ∘ pr2
 ```
 
@@ -109,11 +107,26 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
+  map-domain-transpose-hom-arrow : A → B
+  map-domain-transpose-hom-arrow = f
+
+  map-codomain-transpose-hom-arrow : X → Y
+  map-codomain-transpose-hom-arrow = g
+
+  coh-transpose-hom-arrow :
+    coherence-hom-arrow
+      ( map-domain-hom-arrow f g α)
+      ( map-codomain-hom-arrow f g α)
+      ( map-domain-transpose-hom-arrow)
+      ( map-codomain-transpose-hom-arrow)
+  coh-transpose-hom-arrow =
+    inv-htpy (coh-hom-arrow f g α)
+
   transpose-hom-arrow :
     hom-arrow (map-domain-hom-arrow f g α) (map-codomain-hom-arrow f g α)
-  pr1 transpose-hom-arrow = f
-  pr1 (pr2 transpose-hom-arrow) = g
-  pr2 (pr2 transpose-hom-arrow) = inv-htpy (coh-hom-arrow f g α)
+  pr1 transpose-hom-arrow = map-domain-transpose-hom-arrow
+  pr1 (pr2 transpose-hom-arrow) = map-codomain-transpose-hom-arrow
+  pr2 (pr2 transpose-hom-arrow) = coh-transpose-hom-arrow
 ```
 
 ### The identity morphism of arrows
@@ -186,10 +199,8 @@ module _
     map-codomain-hom-arrow g h b ∘ map-codomain-hom-arrow f g a
 
   coh-comp-hom-arrow :
-    coherence-square-maps
+    coherence-hom-arrow f h
       ( map-domain-comp-hom-arrow)
-      ( f)
-      ( h)
       ( map-codomain-comp-hom-arrow)
   coh-comp-hom-arrow =
     pasting-horizontal-coherence-square-maps
@@ -611,44 +622,7 @@ module _
   pr2 (pr2 right-unit-law-comp-hom-arrow) = right-unit-htpy
 ```
 
-### The span obtained from a morphism of arrows
-
-Given maps `f : A → B` and `g : X → Y` and a morphism of arrows `α : f → g`, the span associated to `α` is the span
-
-```text
-       f       α₀
-  B <----- A -----> X.
-```
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
-  where
-
-  domain-span-hom-arrow : UU l2
-  domain-span-hom-arrow = B
-
-  codomain-span-hom-arrow : UU l3
-  codomain-span-hom-arrow = X
-
-  spanning-type-hom-arrow : UU l1
-  spanning-type-hom-arrow = A
-
-  left-map-span-hom-arrow : spanning-type-hom-arrow → domain-span-hom-arrow
-  left-map-span-hom-arrow = f
-
-  right-map-span-hom-arrow : spanning-type-hom-arrow → codomain-span-hom-arrow
-  right-map-span-hom-arrow = map-domain-hom-arrow f g α
-
-  span-hom-arrow : span l2 l3 l1
-  pr1 span-hom-arrow = domain-span-hom-arrow
-  pr1 (pr2 span-hom-arrow) = codomain-span-hom-arrow
-  pr1 (pr2 (pr2 span-hom-arrow)) = spanning-type-hom-arrow
-  pr1 (pr2 (pr2 (pr2 span-hom-arrow))) = left-map-span-hom-arrow
-  pr2 (pr2 (pr2 (pr2 span-hom-arrow))) = right-map-span-hom-arrow
-```
-
 ## See also
 
+- [Equivalences of arrows](foundation.equivalences-arrows.md)
 - [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
