@@ -52,6 +52,9 @@ obtain a cocone
 
 which is again a sequential colimit.
 
+The result may be read as
+`colimₙ (Σ (a : Aₙ) P(iₙ a)) ≃ Σ (a : colimₙ Aₙ) P(a)`.
+
 ## Definitions
 
 ### The sequential diagram for the flattening lemma
@@ -116,21 +119,21 @@ so it suffices to invoke the flattening lemma for coequalizers.
 **Proof:** The diagram we construct is
 
 ```text
-                             --------->
-  Σ ((n, a) : Σ ℕ A) P(iₙ a) ---------> Σ ((n, a) : Σ ℕ A) P(iₙ a) -----> Σ (x : X) P(x)
-            |                                     |                            |
-    assoc-Σ | ≃                           assoc-Σ | ≃                       id | ≃
-            |                                     |                            |
-            V               ---------->           V                            V
-  Σ (n : ℕ, a : Aₙ) P(iₙ a) ----------> Σ (n : ℕ, a : Aₙ) P(iₙ a) ------> Σ (x : X) P(x) ,
+                               ------->
+  Σ (n : ℕ) Σ (a : Aₙ) P(iₙ a) -------> Σ (n : ℕ) Σ (a : Aₙ) P(iₙ a) ----> Σ (x : X) P(x)
+             |                                     |                            |
+ inv-assoc-Σ | ≃                       inv-assoc-Σ | ≃                       id | ≃
+             |                                     |                            |
+             V                --------->           V                            V
+   Σ ((n, a) : Σ ℕ A) P(iₙ a) ---------> Σ ((n, a) : Σ ℕ A) P(iₙ a) -----> Σ (x : X) P(x) ,
 ```
 
-where the top is the cofork obtained by coforkification of the cocone for the
-flattening lemma, and the bottom is the cofork obtained by flattening the
-coforkification of the original cocone.
+where the top is the cofork corresponding to the cocone for the flattening
+lemma, and the bottom is the cofork obtained by flattening the cofork
+corresponding to the given base cocone.
 
 By assumption, the original cocone is a sequential colimit, which implies that
-its coforkification is a coequalizer. The flattening lemma for coequalizers
+its corresponding cofork is a coequalizer. The flattening lemma for coequalizers
 implies that the bottom cofork is a coequalizer, which in turn implies that the
 top cofork is a coequalizer, hence the flattening of the original cocone is a
 sequential colimit.
