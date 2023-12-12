@@ -63,27 +63,28 @@ The type of double lifts plays a role in the
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {a : (i : I) → A i}
-  {B : (i : I) → A i → UU l3} (b : dependent-lift-family-of-elements a B)
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : (i : I) → A i → UU l3}
   (C : (i : I) (x : A i) → B i x → UU l4)
+  {a : (i : I) → A i} (b : dependent-lift-family-of-elements B a)
   where
 
   dependent-double-lift-family-of-elements : UU (l1 ⊔ l4)
   dependent-double-lift-family-of-elements =
-    dependent-lift-family-of-elements b (λ i → C i (a i))
+    dependent-lift-family-of-elements (λ i → C i (a i)) b
 ```
 
 ### Double lifts of families of elements
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : UU l2} {a : I → A}
-  {B : A → UU l3} (b : lift-family-of-elements a B) (C : (x : A) → B x → UU l4)
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : UU l2} {B : A → UU l3}
+  (C : (x : A) → B x → UU l4)
+  {a : I → A} (b : lift-family-of-elements B a)
   where
 
   double-lift-family-of-elements : UU (l1 ⊔ l4)
   double-lift-family-of-elements =
-    dependent-lift-family-of-elements b (λ i → C (a i))
+    dependent-lift-family-of-elements (λ i → C (a i)) b
 ```
 
 ## See also
