@@ -107,10 +107,10 @@ of these transformations are equivalences.
 
 These lemmas are useful in proofs involving path algebra, because taking
 `equiv-right-whisk-triangle-identicications` as an example, it provides us with
-two maps: the forward direcation states `(p ＝ q ∙ r) → (p ∙ s ＝ q ∙ (r ∙ s))`,
+two maps: the forward direction states `(p ＝ q ∙ r) → (p ∙ s ＝ q ∙ (r ∙ s))`,
 which allows one to append an identification without needing to reassociate on
-the right, and the backwards direction conversely allows one to concel out an
-identification in parantheses.
+the right, and the backwards direction conversely allows one to cancel out an
+identification in parentheses.
 
 ```agda
 module _

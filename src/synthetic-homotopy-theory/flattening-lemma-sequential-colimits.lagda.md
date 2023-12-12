@@ -35,7 +35,7 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 
 The {{#concept "flattening lemma" Disambiguation="sequential colimits"}} for
 [sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
-states that coequalizers commute with
+states that sequential colimits commute with
 [dependent pair types](foundation.dependent-pair-types.md). Specifically, given
 a [cocone](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md)
 
