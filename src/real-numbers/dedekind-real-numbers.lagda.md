@@ -45,7 +45,7 @@ satisfying the following four conditions
 3. _Disjointness_. `L` and `U` are disjoint subsets of `ℚ`.
 4. _Locatedness_. If `q < r` then `q ∈ L` or `r ∈ U`.
 
-The {{#concept "type of Dedekind real numbers" Agda=ℝ}} is the type of all
+The type of {{#concept "Dedekind real numbers" Agda=ℝ}} is the type of all
 Dedekind cuts. The Dedekind real numbers will be taken as the standard
 definition of the real numbers in the `agda-unimath` library.
 
