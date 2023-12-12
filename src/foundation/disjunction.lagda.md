@@ -34,15 +34,6 @@ holds or `Q` holds.
 disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 disjunction-Prop P Q = trunc-Prop (type-Prop P + type-Prop Q)
 
-infixr 10 _∨_
-_∨_ = disjunction-Prop
-```
-
-**Note**: The symbol used for the disjunction `_∨_` is the
-[logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
-not the [latin small letter v](https://codepoints.net/U+0076) `v`.
-
-```agda
 type-disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-disjunction-Prop P Q = type-Prop (disjunction-Prop P Q)
 
@@ -52,6 +43,15 @@ abstract
     is-prop (type-disjunction-Prop P Q)
   is-prop-type-disjunction-Prop P Q = is-prop-type-Prop (disjunction-Prop P Q)
 
+infixr 10 _∨_
+_∨_ = type-disjunction-Prop
+```
+
+**Note**: The symbol used for the disjunction `_∨_` is the
+[logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
+not the [latin small letter v](https://codepoints.net/U+0076) `v`.
+
+```agda
 disjunction-Decidable-Prop :
   {l1 l2 : Level} →
   Decidable-Prop l1 → Decidable-Prop l2 → Decidable-Prop (l1 ⊔ l2)

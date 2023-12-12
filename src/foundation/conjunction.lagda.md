@@ -30,14 +30,6 @@ and `Q` is the proposition that both `P` and `Q` hold.
 ```agda
 conjunction-Prop = prod-Prop
 
-infixr 15 _∧_
-_∧_ = conjunction-Prop
-```
-
-**Note**: The symbol used for the conjunction `_∧_` is the
-[logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
-
-```agda
 type-conjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-conjunction-Prop P Q = type-Prop (conjunction-Prop P Q)
 
@@ -47,6 +39,14 @@ abstract
     is-prop (type-conjunction-Prop P Q)
   is-prop-type-conjunction-Prop P Q = is-prop-type-Prop (conjunction-Prop P Q)
 
+infixr 15 _∧_
+_∧_ = type-conjunction-Prop
+```
+
+**Note**: The symbol used for the conjunction `_∧_` is the
+[logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
+
+```agda
 conjunction-Decidable-Prop :
   {l1 l2 : Level} → Decidable-Prop l1 → Decidable-Prop l2 →
   Decidable-Prop (l1 ⊔ l2)
