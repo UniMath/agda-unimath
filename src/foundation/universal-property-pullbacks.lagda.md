@@ -77,24 +77,25 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) {C : UU l4} {C' : UU l5}
-  where abstract
+  where
 
-  uniquely-unique-pullback :
-    ( c' : cone f g C') (c : cone f g C) →
-    ( up-c' : universal-property-pullback f g c') →
-    ( up-c : universal-property-pullback f g c) →
-    is-contr
-      ( Σ (C' ≃ C) (λ e → htpy-cone f g (cone-map f g c (map-equiv e)) c'))
-  uniquely-unique-pullback c' c up-c' up-c =
-    is-torsorial-Eq-subtype
-      ( uniqueness-universal-property-pullback f g c up-c C' c')
-      ( is-property-is-equiv)
-      ( map-universal-property-pullback f g c up-c c')
-      ( htpy-cone-map-universal-property-pullback f g c up-c c')
-      ( is-equiv-up-pullback-up-pullback c c'
+  abstract
+    uniquely-unique-pullback :
+      ( c' : cone f g C') (c : cone f g C) →
+      ( up-c' : universal-property-pullback f g c') →
+      ( up-c : universal-property-pullback f g c) →
+      is-contr
+        ( Σ (C' ≃ C) (λ e → htpy-cone f g (cone-map f g c (map-equiv e)) c'))
+    uniquely-unique-pullback c' c up-c' up-c =
+      is-torsorial-Eq-subtype
+        ( uniqueness-universal-property-pullback f g c up-c C' c')
+        ( is-property-is-equiv)
         ( map-universal-property-pullback f g c up-c c')
         ( htpy-cone-map-universal-property-pullback f g c up-c c')
-        up-c up-c')
+        ( is-equiv-up-pullback-up-pullback c c'
+          ( map-universal-property-pullback f g c up-c c')
+          ( htpy-cone-map-universal-property-pullback f g c up-c c')
+          up-c up-c')
 ```
 
 ### The horizontal pullback pasting property
@@ -104,35 +105,38 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (i : X → Y) (j : Y → Z) (h : C → Z)
-  where abstract
+  where
 
-  up-pullback-rectangle-up-pullback-left-square :
-    (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
-    universal-property-pullback j h c →
-    universal-property-pullback i (vertical-map-cone j h c) d →
-    universal-property-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d)
-  up-pullback-rectangle-up-pullback-left-square c d up-pb-c up-pb-d =
-    universal-property-pullback-is-pullback (j ∘ i) h
-      ( pasting-horizontal-cone i j h c d)
-      ( is-pullback-rectangle-is-pullback-left-square i j h c d
-        ( is-pullback-universal-property-pullback j h c up-pb-c)
-        ( is-pullback-universal-property-pullback i
-          ( vertical-map-cone j h c) d up-pb-d))
+  abstract
+    up-pullback-rectangle-up-pullback-left-square :
+      (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
+      universal-property-pullback j h c →
+      universal-property-pullback i (vertical-map-cone j h c) d →
+      universal-property-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d)
+    up-pullback-rectangle-up-pullback-left-square c d up-pb-c up-pb-d =
+      universal-property-pullback-is-pullback (j ∘ i) h
+        ( pasting-horizontal-cone i j h c d)
+        ( is-pullback-rectangle-is-pullback-left-square i j h c d
+          ( is-pullback-universal-property-pullback j h c up-pb-c)
+          ( is-pullback-universal-property-pullback i
+            ( vertical-map-cone j h c) d up-pb-d))
 
-  up-pullback-left-square-up-pullback-rectangle :
-    (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
-    universal-property-pullback j h c →
-    universal-property-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d) →
-    universal-property-pullback i (vertical-map-cone j h c) d
-  up-pullback-left-square-up-pullback-rectangle c d up-pb-c up-pb-rect =
-    universal-property-pullback-is-pullback
-      ( i)
-      ( vertical-map-cone j h c)
-      ( d)
-      ( is-pullback-left-square-is-pullback-rectangle i j h c d
-        ( is-pullback-universal-property-pullback j h c up-pb-c)
-        ( is-pullback-universal-property-pullback (j ∘ i) h
-          ( pasting-horizontal-cone i j h c d) up-pb-rect))
+  abstract
+    up-pullback-left-square-up-pullback-rectangle :
+      (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
+      universal-property-pullback j h c →
+      universal-property-pullback (j ∘ i) h
+        ( pasting-horizontal-cone i j h c d) →
+      universal-property-pullback i (vertical-map-cone j h c) d
+    up-pullback-left-square-up-pullback-rectangle c d up-pb-c up-pb-rect =
+      universal-property-pullback-is-pullback
+        ( i)
+        ( vertical-map-cone j h c)
+        ( d)
+        ( is-pullback-left-square-is-pullback-rectangle i j h c d
+          ( is-pullback-universal-property-pullback j h c up-pb-c)
+          ( is-pullback-universal-property-pullback (j ∘ i) h
+            ( pasting-horizontal-cone i j h c d) up-pb-rect))
 ```
 
 ### The vertical pullback pasting property
@@ -142,41 +146,43 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (f : C → Z) (g : Y → Z) (h : X → Y)
-  where abstract
+  where
 
-  up-pullback-top-up-pullback-rectangle :
-    (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
-    universal-property-pullback f g c →
-    universal-property-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
-    universal-property-pullback (horizontal-map-cone f g c) h d
-  up-pullback-top-up-pullback-rectangle c d up-pb-c up-pb-dc =
-    universal-property-pullback-is-pullback
-      ( horizontal-map-cone f g c)
-      ( h)
-      ( d)
-      ( is-pullback-top-is-pullback-rectangle f g h c d
-        ( is-pullback-universal-property-pullback f g c up-pb-c)
-        ( is-pullback-universal-property-pullback f (g ∘ h)
-          ( pasting-vertical-cone f g h c d)
-          ( up-pb-dc)))
+  abstract
+    up-pullback-top-up-pullback-rectangle :
+      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
+      universal-property-pullback f g c →
+      universal-property-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
+      universal-property-pullback (horizontal-map-cone f g c) h d
+    up-pullback-top-up-pullback-rectangle c d up-pb-c up-pb-dc =
+      universal-property-pullback-is-pullback
+        ( horizontal-map-cone f g c)
+        ( h)
+        ( d)
+        ( is-pullback-top-is-pullback-rectangle f g h c d
+          ( is-pullback-universal-property-pullback f g c up-pb-c)
+          ( is-pullback-universal-property-pullback f (g ∘ h)
+            ( pasting-vertical-cone f g h c d)
+            ( up-pb-dc)))
 
-  up-pullback-rectangle-up-pullback-top :
-    (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
-    universal-property-pullback f g c →
-    universal-property-pullback (horizontal-map-cone f g c) h d →
-    universal-property-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
-  up-pullback-rectangle-up-pullback-top c d up-pb-c up-pb-d =
-    universal-property-pullback-is-pullback
-      ( f)
-      ( g ∘ h)
-      ( pasting-vertical-cone f g h c d)
-      ( is-pullback-rectangle-is-pullback-top f g h c d
-        ( is-pullback-universal-property-pullback f g c up-pb-c)
-        ( is-pullback-universal-property-pullback
-          ( horizontal-map-cone f g c)
-          ( h)
-          ( d)
-          ( up-pb-d)))
+  abstract
+    up-pullback-rectangle-up-pullback-top :
+      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
+      universal-property-pullback f g c →
+      universal-property-pullback (horizontal-map-cone f g c) h d →
+      universal-property-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
+    up-pullback-rectangle-up-pullback-top c d up-pb-c up-pb-d =
+      universal-property-pullback-is-pullback
+        ( f)
+        ( g ∘ h)
+        ( pasting-vertical-cone f g h c d)
+        ( is-pullback-rectangle-is-pullback-top f g h c d
+          ( is-pullback-universal-property-pullback f g c up-pb-c)
+          ( is-pullback-universal-property-pullback
+            ( horizontal-map-cone f g c)
+            ( h)
+            ( d)
+            ( up-pb-d)))
 ```
 
 ### Pullbacks are closed under dependent products
@@ -219,12 +225,12 @@ module _
     universal-property-pullback
       ( map-prod f f')
       ( map-prod g g')
-      ( cone-prod f g f' g' c c')
+      ( prod-cone f g f' g' c c')
   up-pullback-prod H H' =
     universal-property-pullback-is-pullback
       ( map-prod f f')
       ( map-prod g g')
-      ( cone-prod f g f' g' c c')
+      ( prod-cone f g f' g' c c')
       ( is-pullback-prod-is-pullback-pair f g f' g' c c'
         ( is-pullback-universal-property-pullback f g c H)
         ( is-pullback-universal-property-pullback f' g' c' H'))
