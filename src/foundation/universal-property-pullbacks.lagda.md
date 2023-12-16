@@ -12,6 +12,9 @@ open import foundation-core.universal-property-pullbacks public
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.pullbacks
+open import foundation.functoriality-cartesian-product-types
+open import foundation.postcomposition-functions
 open import foundation.function-types
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
@@ -175,6 +178,81 @@ module _
           ( h)
           ( d)
           ( up-pb-d)))
+```
+
+### Pullbacks are closed under dependent products
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {I : UU l1}
+  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
+  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
+  {C : I → UU l5} (c : (i : I) → cone (f i) (g i) (C i))
+  where
+
+  up-pullback-Π :
+    ((i : I) → universal-property-pullback (f i) (g i) (c i)) →
+    universal-property-pullback (map-Π f) (map-Π g) (cone-Π f g c)
+  up-pullback-Π H =
+    universal-property-pullback-is-pullback
+      ( map-Π f)
+      ( map-Π g)
+      ( cone-Π f g c)
+      ( is-pullback-Π f g c
+        ( λ i →
+          is-pullback-universal-property-pullback (f i) (g i) (c i) (H i)))
+```
+
+### Pullbacks are closed under cartesian products
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
+  (f : A → X) (g : B → X) (c : cone f g C)
+  (f' : A' → X') (g' : B' → X') (c' : cone f' g' C')
+  where
+
+  up-pullback-prod :
+    universal-property-pullback f g c →
+    universal-property-pullback f' g' c' →
+    universal-property-pullback
+      ( map-prod f f')
+      ( map-prod g g')
+      ( cone-prod f g f' g' c c')
+  up-pullback-prod H H' =
+    universal-property-pullback-is-pullback
+      ( map-prod f f')
+      ( map-prod g g')
+      ( cone-prod f g f' g' c c')
+      ( is-pullback-prod-is-pullback-pair f g f' g' c c'
+        ( is-pullback-universal-property-pullback f g c H)
+        ( is-pullback-universal-property-pullback f' g' c' H'))
+```
+
+### Pullbacks are closed under postcomposition
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  up-pullback-postcomp :
+    universal-property-pullback f g c →
+    universal-property-pullback
+      ( postcomp T f)
+      ( postcomp T g)
+      ( postcomp-cone T f g c)
+  up-pullback-postcomp H =
+    universal-property-pullback-is-pullback
+      ( postcomp T f)
+      ( postcomp T g)
+      ( postcomp-cone T f g c)
+      ( is-pullback-postcomp-is-pullback f g c
+        ( is-pullback-universal-property-pullback f g c H)
+        ( T))
 ```
 
 ## Table of files about pullbacks

@@ -209,8 +209,8 @@ module _
 
 ### Right orthogonal maps are closed under composition and have the right cancellation property
 
-Given two composable maps `h` after `g`, if `g` is right orthogonal to `f` then
-`h` is right orthogonal to `f` if and only if `h ∘ g` is.
+Given two composable maps `h` after `g`, if `h` is right orthogonal to `f` then
+`g` is right orthogonal to `f` if and only if `h ∘ g` is.
 
 **Proof:** By the universal property of orthogonal maps, the top square in the
 below diagram is a pullback precisely when `g` is right orthogonal to `f`:
@@ -218,11 +218,11 @@ below diagram is a pullback precisely when `g` is right orthogonal to `f`:
 ```text
              - ∘ f
       B → X -------> A → X
-        | ⌟            |
+        |              |
   g ∘ - |              | g ∘ -
         V              V
       B → Y -------> A → Y
-        |              |
+        | ⌟            |
   h ∘ - |              | h ∘ -
         V              V
       B → Z -------> A → Z.

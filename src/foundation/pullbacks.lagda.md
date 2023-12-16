@@ -60,88 +60,78 @@ module _
   pr2 (is-pullback-Prop c) = is-property-is-pullback c
 ```
 
-### Exponents of pullbacks are pullbacks
+### Pullbacks are closed under postcomposition
 
 ```agda
-exponent-cone :
+postcomp-cone :
   {l1 l2 l3 l4 l5 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} (T : UU l5)
   (f : A → X) (g : B → X) (c : cone f g C) →
   cone (postcomp T f) (postcomp T g) (T → C)
-pr1 (exponent-cone T f g c) h = vertical-map-cone f g c ∘ h
-pr1 (pr2 (exponent-cone T f g c)) h = horizontal-map-cone f g c ∘ h
-pr2 (pr2 (exponent-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
+pr1 (postcomp-cone T f g c) h = vertical-map-cone f g c ∘ h
+pr1 (pr2 (postcomp-cone T f g c)) h = horizontal-map-cone f g c ∘ h
+pr2 (pr2 (postcomp-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
 
-map-standard-pullback-exponent :
+map-standard-pullback-postcomp :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-  (T : UU l4) →
-  standard-pullback (postcomp T f) (postcomp T g) →
-  cone f g T
-map-standard-pullback-exponent f g T =
-  tot (λ p → tot (λ q → htpy-eq))
+  (T : UU l4) → standard-pullback (postcomp T f) (postcomp T g) → cone f g T
+map-standard-pullback-postcomp f g T = tot (λ p → tot (λ q → htpy-eq))
 
 abstract
-  is-equiv-map-standard-pullback-exponent :
+  is-equiv-map-standard-pullback-postcomp :
     {l1 l2 l3 l4 : Level}
     {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-    (T : UU l4) → is-equiv (map-standard-pullback-exponent f g T)
-  is-equiv-map-standard-pullback-exponent f g T =
+    (T : UU l4) → is-equiv (map-standard-pullback-postcomp f g T)
+  is-equiv-map-standard-pullback-postcomp f g T =
     is-equiv-tot-is-fiberwise-equiv
-      ( λ p → is-equiv-tot-is-fiberwise-equiv
-        ( λ q → funext (f ∘ p) (g ∘ q)))
+      ( λ p → is-equiv-tot-is-fiberwise-equiv (λ q → funext (f ∘ p) (g ∘ q)))
 
-triangle-map-standard-pullback-exponent :
+triangle-map-standard-pullback-postcomp :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
   ( cone-map f g c {T}) ~
-  ( ( map-standard-pullback-exponent f g T) ∘
-    ( gap
-      ( postcomp T f)
-      ( postcomp T g)
-      ( exponent-cone T f g c)))
-triangle-map-standard-pullback-exponent
-  {A = A} {B} T f g c h =
+  ( ( map-standard-pullback-postcomp f g T) ∘
+    ( gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)))
+triangle-map-standard-pullback-postcomp T f g c h =
   eq-pair-eq-pr2
     ( eq-pair-eq-pr2
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
 
 abstract
-  is-pullback-exponent-is-pullback :
+  is-pullback-postcomp-is-pullback :
     {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
     (T : UU l5) →
     is-pullback
       ( postcomp T f)
       ( postcomp T g)
-      ( exponent-cone T f g c)
-  is-pullback-exponent-is-pullback f g c is-pb-c T =
+      ( postcomp-cone T f g c)
+  is-pullback-postcomp-is-pullback f g c is-pb-c T =
     is-equiv-top-map-triangle
       ( cone-map f g c)
-      ( map-standard-pullback-exponent f g T)
-      ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
-      ( triangle-map-standard-pullback-exponent T f g c)
-      ( is-equiv-map-standard-pullback-exponent f g T)
+      ( map-standard-pullback-postcomp f g T)
+      ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
+      ( triangle-map-standard-pullback-postcomp T f g c)
+      ( is-equiv-map-standard-pullback-postcomp f g T)
       ( universal-property-pullback-is-pullback f g c is-pb-c T)
 
 abstract
-  is-pullback-is-pullback-exponent :
+  is-pullback-is-pullback-postcomp :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) →
-    ((l5 : Level) (T : UU l5) → is-pullback
-      ( postcomp T f)
-      ( postcomp T g)
-      ( exponent-cone T f g c)) →
+    ( (l5 : Level) (T : UU l5) →
+      is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)) →
     is-pullback f g c
-  is-pullback-is-pullback-exponent f g c is-pb-exp =
+  is-pullback-is-pullback-postcomp f g c is-pb-postcomp =
     is-pullback-universal-property-pullback f g c
       ( λ T → is-equiv-left-map-triangle
         ( cone-map f g c)
-        ( map-standard-pullback-exponent f g T)
-        ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
-        ( triangle-map-standard-pullback-exponent T f g c)
-        ( is-pb-exp _ T)
-        ( is-equiv-map-standard-pullback-exponent f g T))
+        ( map-standard-pullback-postcomp f g T)
+        ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
+        ( triangle-map-standard-pullback-postcomp T f g c)
+        ( is-pb-postcomp _ T)
+        ( is-equiv-map-standard-pullback-postcomp f g T))
 ```
 
 ### Identity types can be presented as pullbacks
@@ -291,7 +281,7 @@ module _
         ( gap f g c)
         ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' c')
-        ( triangle-is-pullback-htpy {c} {c'} H)
+        ( triangle-is-pullback-htpy H)
         ( is-pb-c')
         ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
 
@@ -305,7 +295,7 @@ module _
         ( gap f g c)
         ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' c')
-        ( triangle-is-pullback-htpy {c} {c'} H)
+        ( triangle-is-pullback-htpy H)
         ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
 ```
 
@@ -393,8 +383,6 @@ module _
     is-torsorial-htpy-parallel-cone
       {f'} Hf {g'} Hg =
       ind-htpy
-        { A = A}
-        { B = λ t → X}
         ( f)
         ( λ f'' Hf' → (g' : B → X) (Hg : g ~ g') (c : cone f g C) →
           is-contr (Σ (cone f'' g' C) (htpy-parallel-cone Hf' Hg c)))
@@ -404,8 +392,8 @@ module _
   tr-tr-refl-htpy-cone :
     (c : cone f g C) →
     let
-      tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
-      tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy {f = g})) tr-c
+      tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c
+      tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy' g)) tr-c
     in
     tr-tr-c ＝ c
   tr-tr-refl-htpy-cone c =
@@ -421,8 +409,8 @@ module _
 
   htpy-eq-square-refl-htpy :
     (c c' : cone f g C) →
-    let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
-        tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy {f = g})) tr-c
+    let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c
+        tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy' g)) tr-c
     in
     tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
   htpy-eq-square-refl-htpy c c' =
@@ -446,7 +434,7 @@ module _
       {g' : B → X} (Hg : g ~ g') →
       (c : cone f g C) (c' : cone f g' C) →
       let
-        tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+        tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c
         tr-tr-c = tr (λ y → cone f y C) (eq-htpy Hg) tr-c
       in
       tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) Hg c c'
@@ -616,9 +604,9 @@ module _
       map-extensionality-standard-pullback
         ( map-Π f)
         ( map-Π g)
-        refl
-        refl
-        ( inv (right-unit ∙ (is-retraction-eq-htpy γ)))
+        ( refl)
+        ( refl)
+        ( inv (right-unit ∙ is-retraction-eq-htpy γ))
 
   abstract
     is-equiv-map-standard-pullback-Π :
@@ -655,10 +643,10 @@ module _
           ( htpy-eq (is-section-eq-htpy _) i ∙ inv right-unit))
 
   abstract
-    is-pullback-cone-Π :
+    is-pullback-Π :
       ((i : I) → is-pullback (f i) (g i) (c i)) →
       is-pullback (map-Π f) (map-Π g) cone-Π
-    is-pullback-cone-Π is-pb-c =
+    is-pullback-Π is-pb-c =
       is-equiv-top-map-triangle
         ( map-Π (λ i → gap (f i) (g i) (c i)))
         ( map-standard-pullback-Π f g)
