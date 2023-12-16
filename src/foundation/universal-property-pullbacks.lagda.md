@@ -69,7 +69,7 @@ module _
       ( compute-map-universal-property-pullback f g c up c')
 ```
 
-### Uniquely uniqueness of pullbacks
+### Unique uniqueness of pullbacks
 
 ```agda
 module _
