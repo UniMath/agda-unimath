@@ -7,11 +7,12 @@
 everythingOpts := --guardedness --cohesion --flat-split
 # use "$ export AGDAVERBOSE=-v20" if you want to see all
 AGDAVERBOSE ?= -v1
+AGDARTS := +RTS -M4.0G -RTS
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 
 AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
-AGDA ?= agda $(AGDAVERBOSE)
+AGDA ?= agda $(AGDAVERBOSE) $(AGDARTS)
 TIME ?= time
 
 METAFILES := \
