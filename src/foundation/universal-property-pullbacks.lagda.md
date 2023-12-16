@@ -12,16 +12,15 @@ open import foundation-core.universal-property-pullbacks public
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.pullbacks
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.postcomposition-functions
-open import foundation.function-types
+open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.propositions
-open import foundation-core.pullbacks
 ```
 
 </details>

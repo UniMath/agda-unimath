@@ -820,7 +820,10 @@ module _
         ( triple
           ( back-left)
           ( refl-htpy)
-          ( ( assoc-htpy (bottom ·r hA) (k ·l back-right) (front-right ·r g')) ∙h
+          ( ( assoc-htpy
+              ( bottom ·r hA)
+              ( k ·l back-right)
+              ( front-right ·r g')) ∙h
             ( inv-htpy c) ∙h
             ( assoc-htpy (h ·l back-left) (front-left ·r f') (hD ·l top)) ∙h
             ( ap-concat-htpy'

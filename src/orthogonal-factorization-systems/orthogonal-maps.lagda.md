@@ -41,9 +41,11 @@ The map `f : A → B` is said to be
 
 1. Their [pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is an
    equivalence.
+
 2. There is a unique
    [lifting operation](orthogonal-factorization-systems.lifting-operations.md)
    between `f` and `g`.
+
 3. The following is a [pullback square](foundation.pullback-squares.md):
    ```text
                 - ∘ f
@@ -103,7 +105,7 @@ module _
   is-left-orthogonal = is-orthogonal g f
 ```
 
-### The universal property of orthogonal maps
+### The small pullback condition of being orthogonal maps
 
 The maps `f` and `g` are orthogonal if and only if the square
 
@@ -118,6 +120,32 @@ The maps `f` and `g` are orthogonal if and only if the square
 ```
 
 is a pullback.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-orthogonal-pullback-condition =
+    is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom' f g)
+
+  is-orthogonal-pullback-condition-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-orthogonal-pullback-condition-Prop =
+    is-pullback-Prop (precomp f Y) (postcomp A g) (cone-pullback-hom' f g)
+
+  is-prop-is-orthogonal-pullback-condition :
+    is-prop is-orthogonal-pullback-condition
+  is-prop-is-orthogonal-pullback-condition =
+    is-property-is-pullback
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+```
+
+### The universal property of orthogonal maps
 
 ```agda
 module _
@@ -166,6 +194,32 @@ module _
           ( H h))
 ```
 
+### Being orthogonal means satisfying the pullback condition of being orthogonal maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-is-orthogonal :
+    is-orthogonal f g → is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-is-orthogonal =
+    is-equiv-right-factor
+      ( map-fibered-map-type-standard-pullback-hom f g)
+      ( gap (precomp f Y) (postcomp A g) (cone-pullback-hom' f g))
+      ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
+
+  is-orthogonal-is-orthogonal-pullback-condition :
+    is-orthogonal-pullback-condition f g → is-orthogonal f g
+  is-orthogonal-is-orthogonal-pullback-condition H =
+    is-equiv-comp
+      ( map-fibered-map-type-standard-pullback-hom f g)
+      ( gap (precomp f Y) (postcomp A g) (cone-pullback-hom' f g))
+      ( H)
+      ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
+```
+
 ### Being orthogonal means satisfying the universal property of being orthogonal
 
 ```agda
@@ -176,35 +230,22 @@ module _
 
   universal-property-orthogonal-maps-is-orthogonal :
     is-orthogonal f g → universal-property-orthogonal-maps f g
-  universal-property-orthogonal-maps-is-orthogonal G =
+  universal-property-orthogonal-maps-is-orthogonal H =
     universal-property-pullback-is-pullback
       ( precomp f Y)
       ( postcomp A g)
       ( cone-pullback-hom' f g)
-      ( is-equiv-right-factor
-        ( map-fibered-map-type-standard-pullback-hom f g)
-        ( gap
-          ( precomp f Y)
-          ( postcomp A g)
-          ( cone-pullback-hom' f g))
-        ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
-        ( G))
+      ( is-orthogonal-pullback-condition-is-orthogonal f g H)
 
   is-orthogonal-universal-property-orthogonal-maps :
     universal-property-orthogonal-maps f g → is-orthogonal f g
-  is-orthogonal-universal-property-orthogonal-maps G =
-    is-equiv-comp
-      ( map-fibered-map-type-standard-pullback-hom f g)
-      ( gap
-        ( precomp f Y)
-        ( postcomp A g)
-        ( cone-pullback-hom' f g))
+  is-orthogonal-universal-property-orthogonal-maps H =
+    is-orthogonal-is-orthogonal-pullback-condition f g
       ( is-pullback-universal-property-pullback
         ( precomp f Y)
         ( postcomp A g)
         ( cone-pullback-hom' f g)
-        ( G))
-      ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
+        ( H))
 ```
 
 ### Right orthogonal maps are closed under composition and have the right cancellation property
