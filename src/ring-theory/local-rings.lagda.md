@@ -39,7 +39,7 @@ is-local-prop-Ring R =
         ( λ b →
           function-Prop
             ( is-invertible-element-Ring R (add-Ring R a b))
-            ( disj-Prop
+            ( disjunction-Prop
               ( is-invertible-element-prop-Ring R a)
               ( is-invertible-element-prop-Ring R b))))
 
