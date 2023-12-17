@@ -7,11 +7,16 @@ module orthogonal-factorization-systems.local-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.constant-maps
+open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-families-of-types
+open import orthogonal-factorization-systems.local-types
 ```
 
 </details>
@@ -26,37 +31,38 @@ all its [fibers](foundation-core.fibers-of-maps.md) are. Likewise, a family
 
 ```agda
 module _
+  {l1 l2 l3 l4 : Level} {Y : UU l1} {X : UU l2} {A : UU l3} {B : UU l4}
+  (f : Y → X) (g : A → B)
   where
 
-  is-local-map :
-    {l1 l2 l3 l4 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
-    {A : UU l3} {B : UU l4} → (A → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-local-map f g = is-local-family f (fiber g)
+  is-local-map : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-local-map = is-local-family f (fiber g)
+
+  is-property-is-local-map : is-prop is-local-map
+  is-property-is-local-map = is-property-is-local-family f (fiber g)
+
+  is-local-map-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-local-map-Prop = is-local-family-Prop f (fiber g)
 ```
 
-## Properties
-
-### Being local is a property
+### A type `B` is `f`-local if and only if the terminal map `B → unit` is `f`-local
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} {B : UU l3}
+  (f : Y → X)
   where
 
-  is-property-is-local-map :
-    {l3 l4 : Level} {A : UU l3} {B : UU l4}
-    (g : A → B) → is-prop (is-local-map f g)
-  is-property-is-local-map g = is-property-is-local-family f (fiber g)
+  is-local-is-local-terminal-map :
+    is-local-map f (terminal-map {A = B}) → is-local f B
+  is-local-is-local-terminal-map H =
+    is-local-equiv f (inv-equiv-fiber-terminal-map star) (H star)
 
-  is-local-map-Prop :
-    {l3 l4 : Level} {A : UU l3} {B : UU l4}
-    (g : A → B) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-local-map-Prop g = is-local-family-Prop f (fiber g)
+  is-local-terminal-map-is-local :
+    is-local f B → is-local-map f (terminal-map {A = B})
+  is-local-terminal-map-is-local H u =
+    is-local-equiv f (equiv-fiber-terminal-map u) H
 ```
-
-### A type `B` is `f`-local if and only if the terminal projection `B → unit` is `f`-local
-
-This remains to be formalized.
 
 ### A map is `f`-local if and only if it is `f`-orthogonal
 

@@ -118,7 +118,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  {Y : UU l1} {X : UU l2} {l3 l4 : Level} {A : UU l3} {B : UU l4}
+  {Y : UU l1} {X : UU l2} {A : UU l3} {B : UU l4}
   (f : Y → X)
   where
 
@@ -129,6 +129,9 @@ module _
         ( precomp f B , is-local-B) ∘e
         ( equiv-postcomp X e))
       ( λ g → eq-htpy (λ y → inv (is-retraction-map-inv-equiv e (g (f y)))))
+
+  is-local-inv-equiv : B ≃ A → is-local f B → is-local f A
+  is-local-inv-equiv e = is-local-equiv (inv-equiv e)
 ```
 
 ### If every type is `f`-local, then `f` is an equivalence
