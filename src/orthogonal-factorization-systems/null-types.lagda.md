@@ -10,10 +10,12 @@ module orthogonal-factorization-systems.null-types where
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
@@ -83,4 +85,21 @@ module _
 
   equiv-is-null-is-local : is-local (λ y → star) A ≃ is-null Y A
   equiv-is-null-is-local = inv-equiv equiv-is-local-is-null
+```
+
+### A type is `f`-local if it is null at every fiber of `f`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  where
+
+  is-local-dependent-type-is-null-fiber :
+    (A : X → UU l3) →
+    ((x : X) → is-null (fiber f x) (A x)) → is-local-dependent-type f A
+  is-local-dependent-type-is-null-fiber A = is-equiv-precomp-Π-fiber-condition
+
+  is-local-is-null-fiber :
+    (A : UU l3) → ((x : X) → is-null (fiber f x) A) → is-local f A
+  is-local-is-null-fiber A = is-local-dependent-type-is-null-fiber (λ _ → A)
 ```
