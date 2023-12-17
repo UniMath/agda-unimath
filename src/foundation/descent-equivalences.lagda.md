@@ -53,22 +53,22 @@ module _
     is-pullback j h c
   descent-is-equiv i j h c d
     is-equiv-i is-equiv-k is-pb-rectangle =
-    is-pullback-is-fiberwise-equiv-map-fiber-cone j h c
+    is-pullback-is-fiberwise-equiv-map-fiber-vertical-cone j h c
       ( map-inv-is-equiv-precomp-Π-is-equiv
         ( is-equiv-i)
-        ( λ y → is-equiv (map-fiber-cone j h c y))
+        ( λ y → is-equiv (map-fiber-vertical-cone j h c y))
         ( λ x →
           is-equiv-right-map-triangle
-          ( map-fiber-cone (j ∘ i) h
+          ( map-fiber-vertical-cone (j ∘ i) h
             ( pasting-horizontal-cone i j h c d) x)
-          ( map-fiber-cone j h c (i x))
-          ( map-fiber-cone i (vertical-map-cone j h c) d x)
-          ( preserves-pasting-horizontal-map-fiber-cone i j h c d x)
-          ( is-fiberwise-equiv-map-fiber-cone-is-pullback (j ∘ i) h
+          ( map-fiber-vertical-cone j h c (i x))
+          ( map-fiber-vertical-cone i (vertical-map-cone j h c) d x)
+          ( preserves-pasting-horizontal-map-fiber-vertical-cone i j h c d x)
+          ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback (j ∘ i) h
             ( pasting-horizontal-cone i j h c d)
             ( is-pb-rectangle)
             ( x))
-          ( is-fiberwise-equiv-map-fiber-cone-is-pullback i
+          ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback i
             ( vertical-map-cone j h c)
             ( d)
             ( is-pullback-is-equiv' i

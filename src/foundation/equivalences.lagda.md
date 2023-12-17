@@ -763,9 +763,9 @@ module _
   abstract
     is-pullback-is-equiv : is-equiv g → is-equiv (pr1 c) → is-pullback f g c
     is-pullback-is-equiv is-equiv-g is-equiv-p =
-      is-pullback-is-fiberwise-equiv-map-fiber-cone f g c
+      is-pullback-is-fiberwise-equiv-map-fiber-vertical-cone f g c
         ( λ a → is-equiv-is-contr
-          ( map-fiber-cone f g c a)
+          ( map-fiber-vertical-cone f g c a)
           ( is-contr-map-is-equiv is-equiv-p a)
           ( is-contr-map-is-equiv is-equiv-g (f a)))
 

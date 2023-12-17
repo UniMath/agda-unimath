@@ -136,14 +136,15 @@ dependent-universal-property-pushout-induction-principle-pushout
     ( ind-induction-principle-pushout f g c (ind-c l) P)
     ( pr2 (ind-c l P))
     ( λ h →
-      eq-htpy (htpy-eq-dependent-cocone-map f g c
-        ( ind-c l)
-        ( ind-induction-principle-pushout f g c
+      eq-htpy
+        ( htpy-eq-dependent-cocone-map f g c
           ( ind-c l)
-          ( P)
-          ( dependent-cocone-map f g c P h))
-        ( h)
-        ( pr2 (ind-c l P) (dependent-cocone-map f g c P h))))
+          ( ind-induction-principle-pushout f g c
+            ( ind-c l)
+            ( P)
+            ( dependent-cocone-map f g c P h))
+          ( h)
+          ( pr2 (ind-c l P) (dependent-cocone-map f g c P h))))
 ```
 
 #### The dependent universal property of pushouts implies the induction principle of pushouts

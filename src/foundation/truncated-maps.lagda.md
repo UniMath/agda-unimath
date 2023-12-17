@@ -54,8 +54,8 @@ module _
     is-trunc-is-pullback pb is-trunc-g a =
       is-trunc-is-equiv k
         ( fiber g (f a))
-        ( map-fiber-cone f g c a)
-        ( is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
+        ( map-fiber-vertical-cone f g c a)
+        ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback f g c pb a)
         ( is-trunc-g (f a))
 
 abstract

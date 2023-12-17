@@ -111,8 +111,8 @@ module _
   (f : A → X) (g : B → X) (c : cone f g C) (a : A)
   where
 
-  map-fiber-cone : fiber (vertical-map-cone f g c) a → fiber g (f a)
-  map-fiber-cone =
+  map-fiber-vertical-cone : fiber (vertical-map-cone f g c) a → fiber g (f a)
+  map-fiber-vertical-cone =
     map-domain-hom-arrow-fiber
       ( vertical-map-cone f g c)
       ( g)
@@ -417,7 +417,7 @@ module _
   pr2 (pr2 htpy-hom-arrow-fiber) = coh-htpy-hom-arrow-fiber
 ```
 
-### Computing `map-fiber-cone` of a horizontal pasting of cones
+### Computing `map-fiber-vertical-cone` of a horizontal pasting of cones
 
 ```agda
 module _
@@ -426,12 +426,12 @@ module _
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
 
-  preserves-pasting-horizontal-map-fiber-cone :
+  preserves-pasting-horizontal-map-fiber-vertical-cone :
     (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) (x : X) →
-    ( map-fiber-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x) ~
-    ( map-fiber-cone j h c (i x) ∘
-      map-fiber-cone i (vertical-map-cone j h c) d x)
-  preserves-pasting-horizontal-map-fiber-cone c d =
+    ( map-fiber-vertical-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x) ~
+    ( map-fiber-vertical-cone j h c (i x) ∘
+      map-fiber-vertical-cone i (vertical-map-cone j h c) d x)
+  preserves-pasting-horizontal-map-fiber-vertical-cone c d =
     preserves-comp-map-fiber
       ( vertical-map-cone i (vertical-map-cone j h c) d)
       ( vertical-map-cone j h c)
@@ -440,7 +440,7 @@ module _
       ( hom-arrow-cone i (vertical-map-cone j h c) d)
 ```
 
-### Computing `map-fiber-cone` of a horizontal pasting of cones
+### Computing `map-fiber-vertical-cone` of a horizontal pasting of cones
 
 Note: There should be a definition of vertical composition of morphisms of
 arrows, and a proof that `hom-arrow-fiber` preserves vertical composition.
@@ -452,16 +452,16 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  preserves-pasting-vertical-map-fiber-cone :
+  preserves-pasting-vertical-map-fiber-vertical-cone :
     (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
-    ( ( map-fiber-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x) ∘
+    ( ( map-fiber-vertical-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x) ∘
       ( inv-map-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
     ( ( inv-map-compute-fiber-comp g h (f x)) ∘
       ( map-Σ
         ( λ t → fiber h (pr1 t))
-        ( map-fiber-cone f g c x)
-        ( λ t → map-fiber-cone (pr1 (pr2 c)) h d (pr1 t))))
-  preserves-pasting-vertical-map-fiber-cone
+        ( map-fiber-vertical-cone f g c x)
+        ( λ t → map-fiber-vertical-cone (pr1 (pr2 c)) h d (pr1 t))))
+  preserves-pasting-vertical-map-fiber-vertical-cone
     (p , q , H) (p' , q' , H') .(p (p' a))
     ((.(p' a) , refl) , (a , refl)) =
     eq-pair-eq-pr2
@@ -473,7 +473,7 @@ module _
         ( ap
           ( concat' (g (h (q' a)))
             ( pr2
-              ( map-fiber-cone f g
+              ( map-fiber-vertical-cone f g
                 ( p , q , H)
                 ( p (p' a))
                 ( p' a , refl))))
