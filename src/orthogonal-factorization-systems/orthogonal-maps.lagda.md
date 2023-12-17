@@ -63,7 +63,9 @@ to `g` and `g` is
 {{#concept "right orthogonal" Disambiguation="maps of types" Agda=is-right-orthogonal}}
 to `f`.
 
-## Definition
+## Definitions
+
+### The orthogonality predicate
 
 ```agda
 module _
@@ -77,12 +79,12 @@ module _
 
   _⊥_ = is-orthogonal
 
-  is-property-is-orthogonal : is-prop is-orthogonal
-  is-property-is-orthogonal = is-property-is-equiv (pullback-hom f g)
+  is-prop-is-orthogonal : is-prop is-orthogonal
+  is-prop-is-orthogonal = is-property-is-equiv (pullback-hom f g)
 
   is-orthogonal-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pr1 is-orthogonal-Prop = is-orthogonal
-  pr2 is-orthogonal-Prop = is-property-is-orthogonal
+  pr2 is-orthogonal-Prop = is-prop-is-orthogonal
 ```
 
 A term of `is-right-orthogonal f g` asserts that `g` is right orthogonal to `f`.
@@ -105,7 +107,7 @@ module _
   is-left-orthogonal = is-orthogonal g f
 ```
 
-### The small pullback condition of being orthogonal maps
+### The pullback condition for orthogonal maps
 
 The maps `f` and `g` are orthogonal if and only if the square
 
@@ -253,7 +255,7 @@ module _
 Given two composable maps `h` after `g`, if `h` is right orthogonal to `f` then
 `g` is right orthogonal to `f` if and only if `h ∘ g` is.
 
-**Proof:** By the universal property of orthogonal maps, the top square in the
+**Proof:** By the pullback condition of orthogonal maps, the top square in the
 below diagram is a pullback precisely when `g` is right orthogonal to `f`:
 
 ```text
@@ -279,6 +281,18 @@ module _
   (f : A → B) (g : X → Y) (h : Y → Z)
   where
 
+  is-orthogonal-pullback-condition-right-comp :
+    is-orthogonal-pullback-condition f h →
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f (h ∘ g)
+  is-orthogonal-pullback-condition-right-comp =
+    is-pullback-rectangle-is-pullback-top
+      ( precomp f Z)
+      ( postcomp A h)
+      ( postcomp A g)
+      ( cone-pullback-hom' f h)
+      ( cone-pullback-hom' f g)
+
   up-orthogonal-right-comp :
     universal-property-orthogonal-maps f h →
     universal-property-orthogonal-maps f g →
@@ -294,10 +308,22 @@ module _
   is-orthogonal-right-comp :
     is-orthogonal f h → is-orthogonal f g → is-orthogonal f (h ∘ g)
   is-orthogonal-right-comp H G =
-    is-orthogonal-universal-property-orthogonal-maps f (h ∘ g)
-      ( up-orthogonal-right-comp
-        ( universal-property-orthogonal-maps-is-orthogonal f h H)
-        ( universal-property-orthogonal-maps-is-orthogonal f g G))
+    is-orthogonal-is-orthogonal-pullback-condition f (h ∘ g)
+      ( is-orthogonal-pullback-condition-right-comp
+        ( is-orthogonal-pullback-condition-is-orthogonal f h H)
+        ( is-orthogonal-pullback-condition-is-orthogonal f g G))
+
+  is-orthogonal-pullback-condition-right-right-factor :
+    is-orthogonal-pullback-condition f h →
+    is-orthogonal-pullback-condition f (h ∘ g) →
+    is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-right-right-factor =
+    is-pullback-top-is-pullback-rectangle
+      ( precomp f Z)
+      ( postcomp A h)
+      ( postcomp A g)
+      ( cone-pullback-hom' f h)
+      ( cone-pullback-hom' f g)
 
   up-orthogonal-right-right-factor :
     universal-property-orthogonal-maps f h →
@@ -314,10 +340,10 @@ module _
   is-orthogonal-right-right-factor :
     is-orthogonal f h → is-orthogonal f (h ∘ g) → is-orthogonal f g
   is-orthogonal-right-right-factor H HG =
-    is-orthogonal-universal-property-orthogonal-maps f g
-      ( up-orthogonal-right-right-factor
-        ( universal-property-orthogonal-maps-is-orthogonal f h H)
-        ( universal-property-orthogonal-maps-is-orthogonal f (h ∘ g) HG))
+    is-orthogonal-is-orthogonal-pullback-condition f g
+      ( is-orthogonal-pullback-condition-right-right-factor
+        ( is-orthogonal-pullback-condition-is-orthogonal f h H)
+        ( is-orthogonal-pullback-condition-is-orthogonal f (h ∘ g) HG))
 ```
 
 ### Left orthogonal maps are closed under composition and have the left cancellation property
@@ -347,6 +373,18 @@ module _
   (f : A → B) (h : B → C) (g : X → Y)
   where
 
+  is-orthogonal-pullback-condition-left-comp :
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition h g →
+    is-orthogonal-pullback-condition (h ∘ f) g
+  is-orthogonal-pullback-condition-left-comp =
+    is-pullback-rectangle-is-pullback-left-square
+      ( precomp h Y)
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom' h g)
+
   up-orthogonal-left-comp :
     universal-property-orthogonal-maps f g →
     universal-property-orthogonal-maps h g →
@@ -362,10 +400,22 @@ module _
   is-orthogonal-left-comp :
     is-orthogonal f g → is-orthogonal h g → is-orthogonal (h ∘ f) g
   is-orthogonal-left-comp F H =
-    is-orthogonal-universal-property-orthogonal-maps (h ∘ f) g
-      ( up-orthogonal-left-comp
-        ( universal-property-orthogonal-maps-is-orthogonal f g F)
-        ( universal-property-orthogonal-maps-is-orthogonal h g H))
+    is-orthogonal-is-orthogonal-pullback-condition (h ∘ f) g
+      ( is-orthogonal-pullback-condition-left-comp
+        ( is-orthogonal-pullback-condition-is-orthogonal f g F)
+        ( is-orthogonal-pullback-condition-is-orthogonal h g H))
+
+  is-orthogonal-pullback-condition-left-left-factor :
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition (h ∘ f) g →
+    is-orthogonal-pullback-condition h g
+  is-orthogonal-pullback-condition-left-left-factor =
+    is-pullback-left-square-is-pullback-rectangle
+      ( precomp h Y)
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom' h g)
 
   up-orthogonal-left-left-factor :
     universal-property-orthogonal-maps f g →
@@ -382,8 +432,8 @@ module _
   is-orthogonal-left-left-factor :
     is-orthogonal f g → is-orthogonal (h ∘ f) g → is-orthogonal h g
   is-orthogonal-left-left-factor F HF =
-    is-orthogonal-universal-property-orthogonal-maps h g
-      ( up-orthogonal-left-left-factor
-        ( universal-property-orthogonal-maps-is-orthogonal f g F)
-        ( universal-property-orthogonal-maps-is-orthogonal (h ∘ f) g HF))
+    is-orthogonal-is-orthogonal-pullback-condition h g
+      ( is-orthogonal-pullback-condition-left-left-factor
+        ( is-orthogonal-pullback-condition-is-orthogonal f g F)
+        ( is-orthogonal-pullback-condition-is-orthogonal (h ∘ f) g HF))
 ```
