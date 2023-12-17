@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -22,6 +23,7 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
@@ -49,7 +51,7 @@ with `is-local-dependent-type` when it does.
 
 ## Definition
 
-### Local dependent types
+### Dependent local types
 
 ```agda
 module _
@@ -109,6 +111,24 @@ module _
     is-local f ((a : A) → B a)
   map-distributive-Π-is-local B =
     map-distributive-Π-is-local-dependent-type (λ a _ → B a)
+```
+
+### Local types are closed under equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {Y : UU l1} {X : UU l2} {l3 l4 : Level} {A : UU l3} {B : UU l4}
+  (f : Y → X)
+  where
+
+  is-local-equiv : A ≃ B → is-local f B → is-local f A
+  is-local-equiv e is-local-B =
+    is-equiv-htpy-equiv
+      ( ( equiv-postcomp Y (inv-equiv e)) ∘e
+        ( precomp f B , is-local-B) ∘e
+        ( equiv-postcomp X e))
+      ( λ g → eq-htpy (λ y → inv (is-retraction-map-inv-equiv e (g (f y)))))
 ```
 
 ### If every type is `f`-local, then `f` is an equivalence
