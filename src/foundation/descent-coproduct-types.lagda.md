@@ -137,7 +137,9 @@ module _
           ( triangle-descent-square-fiber-map-coprod-inl-fiber
             h k i f g f' g' H K a)
           ( is-equiv-fiber-map-coprod-inl-fiber h k a)
-          ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback (ind-coprod _ f g) i
+          ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
+            ( ind-coprod _ f g)
+            ( i)
             ( cone-descent-coprod ( h , f' , H) (k , g' , K))
             ( is-pb-dsq)
             ( inl a)))
@@ -159,7 +161,9 @@ module _
           ( triangle-descent-square-fiber-map-coprod-inr-fiber
             h k i f g f' g' H K b)
           ( is-equiv-fiber-map-coprod-inr-fiber h k b)
-          ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback (ind-coprod _ f g) i
+          ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
+            ( ind-coprod _ f g)
+            ( i)
             ( cone-descent-coprod (h , f' , H) (k , g' , K))
             ( is-pb-dsq)
             ( inr b)))

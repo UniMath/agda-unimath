@@ -741,7 +741,8 @@ module _
         ( pasting-horizontal-cone i j h c d)
         ( λ x →
           is-equiv-left-map-triangle
-            ( map-fiber-vertical-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x)
+            ( map-fiber-vertical-cone
+              ( j ∘ i) h (pasting-horizontal-cone i j h c d) x)
             ( map-fiber-vertical-cone j h c (i x))
             ( map-fiber-vertical-cone i (vertical-map-cone j h c) d x)
             ( preserves-pasting-horizontal-map-fiber-vertical-cone i j h c d x)
@@ -750,8 +751,8 @@ module _
               ( d)
               ( is-pb-d)
               ( x))
-            ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback j h c is-pb-c
-              ( i x)))
+            ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
+              ( j) h c is-pb-c (i x)))
 
   abstract
     is-pullback-left-square-is-pullback-rectangle :
@@ -765,11 +766,13 @@ module _
         ( d)
         ( λ x →
           is-equiv-top-map-triangle
-            ( map-fiber-vertical-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x)
+            ( map-fiber-vertical-cone
+              ( j ∘ i) h (pasting-horizontal-cone i j h c d) x)
             ( map-fiber-vertical-cone j h c (i x))
             ( map-fiber-vertical-cone i (vertical-map-cone j h c) d x)
             ( preserves-pasting-horizontal-map-fiber-vertical-cone i j h c d x)
-            ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback j h c is-pb-c (i x))
+            ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
+              ( j) h c is-pb-c (i x))
             ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
               ( j ∘ i)
               ( h)
@@ -802,9 +805,10 @@ module _
           is-fiberwise-equiv-is-equiv-map-Σ
             ( λ t → fiber h (pr1 t))
             ( map-fiber-vertical-cone f g c (vertical-map-cone f g c x))
-            ( λ t → map-fiber-vertical-cone (horizontal-map-cone f g c) h d (pr1 t))
-            ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback f g c is-pb-c
-              ( vertical-map-cone f g c x))
+            ( λ t →
+              map-fiber-vertical-cone (horizontal-map-cone f g c) h d (pr1 t))
+            ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
+              ( f) g c is-pb-c (vertical-map-cone f g c x))
             ( is-equiv-top-is-equiv-bottom-square
               ( inv-map-compute-fiber-comp
                 ( vertical-map-cone f g c)
@@ -814,7 +818,9 @@ module _
               ( map-Σ
                 ( λ t → fiber h (pr1 t))
                 ( map-fiber-vertical-cone f g c (vertical-map-cone f g c x))
-                ( λ t → map-fiber-vertical-cone (horizontal-map-cone f g c) h d (pr1 t)))
+                ( λ t →
+                  map-fiber-vertical-cone
+                    ( horizontal-map-cone f g c) h d (pr1 t)))
               ( map-fiber-vertical-cone f
                 ( g ∘ h)
                 ( pasting-vertical-cone f g h c d)
@@ -853,8 +859,11 @@ module _
             ( map-Σ
               ( λ t → fiber h (pr1 t))
               ( map-fiber-vertical-cone f g c x)
-              ( λ t → map-fiber-vertical-cone (horizontal-map-cone f g c) h d (pr1 t)))
-            ( map-fiber-vertical-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x)
+              ( λ t →
+                map-fiber-vertical-cone
+                  ( horizontal-map-cone f g c) h d (pr1 t)))
+            ( map-fiber-vertical-cone
+              ( f) (g ∘ h) (pasting-vertical-cone f g h c d) x)
             ( preserves-pasting-vertical-map-fiber-vertical-cone f g h c d x)
             ( is-equiv-inv-map-compute-fiber-comp
               ( vertical-map-cone f g c)
@@ -863,7 +872,8 @@ module _
             ( is-equiv-inv-map-compute-fiber-comp g h (f x))
             ( is-equiv-map-Σ
               ( λ t → fiber h (pr1 t))
-              ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback f g c is-pb-c x)
+              ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
+                ( f) g c is-pb-c x)
               ( λ t →
                 is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback
                   ( horizontal-map-cone f g c)
