@@ -16,9 +16,11 @@ open import foundation.function-extensionality
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions-into-subuniverses
 open import foundation.sections
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -106,25 +108,33 @@ module _
     equiv-htpy-precomp-htpy-Π f g e
 ```
 
-### The fibers of `precomp`
+### Computations with the fibers of `precomp`
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
+  compute-coherence-triangle-fiber-precomp' :
+    (g : A → X) →
+    fiber (precomp f X) g ≃ Σ (B → X) (λ h → coherence-triangle-maps' g h f)
+  compute-coherence-triangle-fiber-precomp' g = equiv-tot (λ _ → equiv-funext)
+
+  compute-coherence-triangle-fiber-precomp :
+    (g : A → X) →
+    fiber (precomp f X) g ≃ Σ (B → X) (λ h → coherence-triangle-maps g h f)
+  compute-coherence-triangle-fiber-precomp g =
+    equiv-tot (λ _ → equiv-funext) ∘e equiv-fiber (precomp f X) g
+
   compute-fiber-precomp :
     (g : B → X) →
     fiber (precomp f X) (g ∘ f) ≃
     Σ (B → X) (λ h → coherence-square-maps f f h g)
-  compute-fiber-precomp g =
-    equiv-tot ( λ h → equiv-funext) ∘e
-    equiv-fiber (precomp f X) (g ∘ f)
+  compute-fiber-precomp g = compute-coherence-triangle-fiber-precomp (g ∘ f)
 
   compute-total-fiber-precomp :
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
-  compute-total-fiber-precomp =
-    equiv-tot compute-fiber-precomp
+  compute-total-fiber-precomp = equiv-tot compute-fiber-precomp
 
   diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))

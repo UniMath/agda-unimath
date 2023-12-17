@@ -188,12 +188,12 @@ module _
   where
 
   map-equiv-fiber : fiber f y → fiber' f y
-  pr1 (map-equiv-fiber (x , refl)) = x
-  pr2 (map-equiv-fiber (x , refl)) = refl
+  pr1 (map-equiv-fiber (x , _)) = x
+  pr2 (map-equiv-fiber (x , p)) = inv p
 
   map-inv-equiv-fiber : fiber' f y → fiber f y
-  pr1 (map-inv-equiv-fiber (x , refl)) = x
-  pr2 (map-inv-equiv-fiber (x , refl)) = refl
+  pr1 (map-inv-equiv-fiber (x , _)) = x
+  pr2 (map-inv-equiv-fiber (x , p)) = inv p
 
   is-section-map-inv-equiv-fiber : map-equiv-fiber ∘ map-inv-equiv-fiber ~ id
   is-section-map-inv-equiv-fiber (x , refl) = refl

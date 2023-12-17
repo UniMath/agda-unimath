@@ -208,8 +208,7 @@ module _
       ( diagonal-into-fibers-precomp f (type-Truncated-Type X))
       ( is-equiv-diagonal-into-fibers-precomp-is-epimorphism-Truncated-Type e X)
       ( is-equiv-map-equiv
-        ( compute-total-fiber-precomp f
-          ( type-Truncated-Type X)))
+        ( compute-total-fiber-precomp f (type-Truncated-Type X)))
 
   is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type :
     is-epimorphism-Truncated-Type k f →

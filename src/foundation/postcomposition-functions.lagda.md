@@ -12,6 +12,8 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -64,15 +66,48 @@ compute-htpy-postcomp-refl-htpy :
 compute-htpy-postcomp-refl-htpy A f h = eq-htpy-refl-htpy (f ∘ h)
 ```
 
-### The fibers of `postcomp`
+### Computations with the fibers of `postcomp`
 
 ```agda
-compute-fiber-postcomp :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
-  (f : X → Y) (h : A → Y) →
-  ((x : A) → fiber f (h x)) ≃ fiber (postcomp A f) h
-compute-fiber-postcomp A f h =
-  equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3)
+  (f : X → Y)
+  where
+
+  inv-compute-Π-fiber-postcomp :
+    (h : A → Y) → fiber (postcomp A f) h ≃ ((x : A) → fiber f (h x))
+  inv-compute-Π-fiber-postcomp h =
+    inv-distributive-Π-Σ ∘e equiv-tot (λ _ → equiv-funext)
+
+  compute-Π-fiber-postcomp :
+    (h : A → Y) → ((x : A) → fiber f (h x)) ≃ fiber (postcomp A f) h
+  compute-Π-fiber-postcomp h =
+    equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
+
+  inv-compute-coherence-triangle-fiber-postcomp :
+    (h : A → Y) →
+    fiber (postcomp A f) h ≃ Σ (A → X) (coherence-triangle-maps h f)
+  inv-compute-coherence-triangle-fiber-postcomp h =
+    equiv-tot (λ _ → equiv-funext) ∘e equiv-fiber (postcomp A f) h
+
+  compute-coherence-triangle-fiber-postcomp :
+    (h : A → Y) →
+    Σ (A → X) (coherence-triangle-maps h f) ≃ fiber (postcomp A f) h
+  compute-coherence-triangle-fiber-postcomp h =
+    inv-equiv (inv-compute-coherence-triangle-fiber-postcomp h)
+
+  inv-compute-fiber-postcomp :
+    (h : A → X) →
+    fiber (postcomp A f) (f ∘ h) ≃
+    Σ (A → X) (λ g → coherence-square-maps g h f f)
+  inv-compute-fiber-postcomp h =
+    inv-compute-coherence-triangle-fiber-postcomp (f ∘ h)
+
+  compute-fiber-postcomp :
+    (h : A → X) →
+    Σ (A → X) (λ g → coherence-square-maps g h f f) ≃
+    fiber (postcomp A f) (f ∘ h)
+  compute-fiber-postcomp h = compute-coherence-triangle-fiber-postcomp (f ∘ h)
 ```
 
 ### Postcomposition and equivalences
