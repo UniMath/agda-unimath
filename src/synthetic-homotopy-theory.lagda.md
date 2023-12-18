@@ -48,6 +48,7 @@ open import synthetic-homotopy-theory.eckmann-hilton-argument public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
+open import synthetic-homotopy-theory.flattening-lemma-sequential-colimits public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.functoriality-sequential-colimits public

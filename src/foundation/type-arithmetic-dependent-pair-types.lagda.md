@@ -201,13 +201,17 @@ module _
   pr1 associative-Σ = map-associative-Σ
   pr2 associative-Σ = is-equiv-map-associative-Σ
 
+  abstract
+    is-equiv-map-inv-associative-Σ : is-equiv map-inv-associative-Σ
+    is-equiv-map-inv-associative-Σ =
+      is-equiv-is-invertible
+        map-associative-Σ
+        is-retraction-map-inv-associative-Σ
+        is-section-map-inv-associative-Σ
+
   inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (x , y))) ≃ Σ (Σ A B) C
   pr1 inv-associative-Σ = map-inv-associative-Σ
-  pr2 inv-associative-Σ =
-    is-equiv-is-invertible
-      map-associative-Σ
-      is-retraction-map-inv-associative-Σ
-      is-section-map-inv-associative-Σ
+  pr2 inv-associative-Σ = is-equiv-map-inv-associative-Σ
 ```
 
 ### Associativity, second formulation
