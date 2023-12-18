@@ -32,7 +32,7 @@ or `f n ＝ 0` for all odd `n`.
 LLPO : UU lzero
 LLPO =
   (f : ℕ → Fin 2) → is-prop (fiber f (one-Fin 1)) →
-  type-disj-Prop
+  type-disjunction-Prop
     ( Π-Prop ℕ
       ( λ n →
         function-Prop (is-even-ℕ n) (Id-Prop (Fin-Set 2) (f n) (zero-Fin 1))))

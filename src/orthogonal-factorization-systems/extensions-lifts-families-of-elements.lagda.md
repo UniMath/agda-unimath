@@ -67,20 +67,20 @@ defined by `b ↦ (λ i → b i (a i))`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} (a : (i : I) → A i)
-  {B : (i : I) → A i → UU l3}
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : (i : I) → A i → UU l3}
+  (a : (i : I) → A i)
   where
 
   ev-dependent-lift-family-of-elements :
-    ((i : I) (x : A i) → B i x) → dependent-lift-family-of-elements a B
+    ((i : I) (x : A i) → B i x) → dependent-lift-family-of-elements B a
   ev-dependent-lift-family-of-elements b i = b i (a i)
 
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : UU l2} (a : I → A) {B : A → UU l3}
+  {l1 l2 l3 : Level} {I : UU l1} {A : UU l2} {B : A → UU l3} (a : I → A)
   where
 
   ev-lift-family-of-elements :
-    ((x : A) → B x) → lift-family-of-elements a B
+    ((x : A) → B x) → lift-family-of-elements B a
   ev-lift-family-of-elements b i = b (a i)
 ```
 
@@ -88,8 +88,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} (a : (i : I) → A i)
-  (B : (i : I) → A i → UU l3) (b : dependent-lift-family-of-elements a B)
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} (B : (i : I) → A i → UU l3)
+  (a : (i : I) → A i) (b : dependent-lift-family-of-elements B a)
   where
 
   is-extension-dependent-lift-family-of-elements :
@@ -102,9 +102,9 @@ module _
     Σ ((i : I) (x : A i) → B i x) is-extension-dependent-lift-family-of-elements
 
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {a : (i : I) → A i}
-  {B : (i : I) → A i → UU l3} {b : dependent-lift-family-of-elements a B}
-  (f : extension-dependent-lift-family-of-elements a B b)
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : (i : I) → A i → UU l3}
+  {a : (i : I) → A i} {b : dependent-lift-family-of-elements B a}
+  (f : extension-dependent-lift-family-of-elements B a b)
   where
 
   family-of-elements-extension-dependent-lift-family-of-elements :
@@ -112,7 +112,7 @@ module _
   family-of-elements-extension-dependent-lift-family-of-elements = pr1 f
 
   is-extension-extension-dependent-lift-family-of-elements :
-    is-extension-dependent-lift-family-of-elements a B b
+    is-extension-dependent-lift-family-of-elements B a b
       ( family-of-elements-extension-dependent-lift-family-of-elements)
   is-extension-extension-dependent-lift-family-of-elements = pr2 f
 ```
@@ -121,8 +121,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : UU l2} (a : I → A)
-  (B : A → UU l3) (b : lift-family-of-elements a B)
+  {l1 l2 l3 : Level} {I : UU l1} {A : UU l2} (B : A → UU l3)
+  (a : I → A) (b : lift-family-of-elements B a)
   where
 
   is-extension-lift-family-of-elements : (f : (x : A) → B x) → UU (l1 ⊔ l3)
@@ -133,16 +133,16 @@ module _
     Σ ((x : A) → B x) is-extension-lift-family-of-elements
 
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : UU l2} {a : I → A}
-  {B : A → UU l3} {b : lift-family-of-elements a B}
-  (f : extension-lift-family-of-elements a B b)
+  {l1 l2 l3 : Level} {I : UU l1} {A : UU l2} {B : A → UU l3}
+  {a : I → A} {b : lift-family-of-elements B a}
+  (f : extension-lift-family-of-elements B a b)
   where
 
   family-of-elements-extension-lift-family-of-elements : (x : A) → B x
   family-of-elements-extension-lift-family-of-elements = pr1 f
 
   is-extension-extension-lift-family-of-elements :
-    is-extension-lift-family-of-elements a B b
+    is-extension-lift-family-of-elements B a b
       ( family-of-elements-extension-lift-family-of-elements)
   is-extension-extension-lift-family-of-elements = pr2 f
 ```
@@ -155,7 +155,7 @@ module _
   where
 
   id-extension-dependent-lift-family-of-elements :
-    extension-dependent-lift-family-of-elements a (λ i _ → A i) a
+    extension-dependent-lift-family-of-elements (λ i _ → A i) a a
   pr1 id-extension-dependent-lift-family-of-elements i = id
   pr2 id-extension-dependent-lift-family-of-elements = refl-htpy
 ```
@@ -168,7 +168,7 @@ module _
   where
 
   id-extension-lift-family-of-elements :
-    extension-lift-family-of-elements a (λ _ → A) a
+    extension-lift-family-of-elements (λ _ → A) a a
   pr1 id-extension-lift-family-of-elements = id
   pr2 id-extension-lift-family-of-elements = refl-htpy
 ```
@@ -213,11 +213,10 @@ extensions of `b` along `a` to obtain extensions of `c` along `a`.
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1}
-  {A : I → UU l2} {a : (i : I) → A i}
-  {B : I → UU l3} {b : (i : I) → B i}
-  {C : I → UU l4} {c : (i : I) → C i}
-  (g : extension-dependent-lift-family-of-elements b (λ i _ → C i) c)
-  (f : extension-dependent-lift-family-of-elements a (λ i _ → B i) b)
+  {A : I → UU l2} {B : I → UU l3} {C : I → UU l4}
+  {a : (i : I) → A i} {b : (i : I) → B i} {c : (i : I) → C i}
+  (g : extension-dependent-lift-family-of-elements (λ i _ → C i) b c)
+  (f : extension-dependent-lift-family-of-elements (λ i _ → B i) a b)
   where
 
   family-of-elements-comp-extension-dependent-lift-family-of-elements :
@@ -227,8 +226,9 @@ module _
     family-of-elements-extension-dependent-lift-family-of-elements f i
 
   is-extension-comp-extension-dependent-lift-family-of-elements :
-    is-extension-dependent-lift-family-of-elements a
+    is-extension-dependent-lift-family-of-elements
       ( λ i _ → C i)
+      ( a)
       ( c)
       ( family-of-elements-comp-extension-dependent-lift-family-of-elements)
   is-extension-comp-extension-dependent-lift-family-of-elements i =
@@ -238,7 +238,7 @@ module _
     ( is-extension-extension-dependent-lift-family-of-elements g i)
 
   comp-extension-dependent-lift-family-of-elements :
-    extension-dependent-lift-family-of-elements a (λ i _ → C i) c
+    extension-dependent-lift-family-of-elements (λ i _ → C i) a c
   pr1 comp-extension-dependent-lift-family-of-elements =
     family-of-elements-comp-extension-dependent-lift-family-of-elements
   pr2 comp-extension-dependent-lift-family-of-elements =
@@ -274,11 +274,10 @@ The composite `g ∘ f` is then an extension of `c` along `a.
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1}
-  {A : UU l2} {a : I → A}
-  {B : UU l3} {b : I → B}
-  {C : UU l4} {c : I → C}
-  (g : extension-lift-family-of-elements b (λ _ → C) c)
-  (f : extension-lift-family-of-elements a (λ _ → B) b)
+  {A : UU l2} {B : UU l3} {C : UU l4}
+  {a : I → A} {b : I → B} {c : I → C}
+  (g : extension-lift-family-of-elements (λ _ → C) b c)
+  (f : extension-lift-family-of-elements (λ _ → B) a b)
   where
 
   map-comp-extension-lift-family-of-elements : A → C
@@ -287,8 +286,9 @@ module _
     family-of-elements-extension-lift-family-of-elements f
 
   is-extension-comp-extension-lift-family-of-elements :
-    is-extension-lift-family-of-elements a
+    is-extension-lift-family-of-elements
       ( λ _ → C)
+      ( a)
       ( c)
       ( map-comp-extension-lift-family-of-elements)
   is-extension-comp-extension-lift-family-of-elements x =
@@ -298,7 +298,7 @@ module _
     ( is-extension-extension-lift-family-of-elements g x)
 
   comp-extension-lift-family-of-elements :
-    extension-lift-family-of-elements a (λ _ → C) c
+    extension-lift-family-of-elements (λ _ → C) a c
   pr1 comp-extension-lift-family-of-elements =
     map-comp-extension-lift-family-of-elements
   pr2 comp-extension-lift-family-of-elements =

@@ -394,8 +394,7 @@ apply-dependent-universal-property-surjection f =
 abstract
   is-surjective-is-propositional-truncation :
     {l1 l2 : Level} {A : UU l1} {P : Prop l2} (f : A → type-Prop P) →
-    ( {l : Level} →
-      dependent-universal-property-propositional-truncation l P f) →
+    dependent-universal-property-propositional-truncation P f →
     is-surjective f
   is-surjective-is-propositional-truncation f duppt-f =
     is-surjective-dependent-universal-property-surj f duppt-f
@@ -404,7 +403,7 @@ abstract
   is-propsitional-truncation-is-surjective :
     {l1 l2 : Level} {A : UU l1} {P : Prop l2} (f : A → type-Prop P) →
     is-surjective f →
-    {l : Level} → dependent-universal-property-propositional-truncation l P f
+    dependent-universal-property-propositional-truncation P f
   is-propsitional-truncation-is-surjective f is-surj-f =
     dependent-universal-property-surj-is-surjective f is-surj-f
 ```

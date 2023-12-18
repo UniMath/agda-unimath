@@ -153,7 +153,7 @@ module _
 
   dependent-cocone-dependent-suspension-structure :
     dependent-suspension-structure B c →
-    dependent-suspension-cocone B (cocone-suspension-structure X Y c)
+    dependent-suspension-cocone B (suspension-cocone-suspension-structure c)
   pr1 (dependent-cocone-dependent-suspension-structure d) t =
     north-dependent-suspension-structure d
   pr1 (pr2 (dependent-cocone-dependent-suspension-structure d)) t =
@@ -164,7 +164,7 @@ module _
   equiv-dependent-suspension-structure-suspension-cocone :
     ( dependent-suspension-cocone
       ( B)
-      ( cocone-suspension-structure X Y c)) ≃
+      ( suspension-cocone-suspension-structure c)) ≃
     ( dependent-suspension-structure B c)
   equiv-dependent-suspension-structure-suspension-cocone =
     ( equiv-Σ

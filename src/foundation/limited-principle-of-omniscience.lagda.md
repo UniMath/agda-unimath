@@ -32,7 +32,7 @@ we have `f n ＝ 0`.
 LPO : UU lzero
 LPO =
   (f : ℕ → Fin 2) →
-  type-disj-Prop
+  type-disjunction-Prop
     ( ∃-Prop ℕ (λ n → f n ＝ one-Fin 1))
     ( Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
 ```
