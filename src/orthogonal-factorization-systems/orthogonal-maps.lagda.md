@@ -450,7 +450,7 @@ right orthogonal to `f`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
+  {l1 l2 l3 l4 l5 : Level}
   {I : UU l1} {A : UU l2} {B : UU l3} {X : I → UU l4} {Y : I → UU l5}
   (f : A → B) (g : (i : I) → X i → Y i)
   where
