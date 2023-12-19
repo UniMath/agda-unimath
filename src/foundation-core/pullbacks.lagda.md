@@ -603,9 +603,9 @@ module _
   pr1 (prod-cone (p , q , H) (p' , q' , H')) = map-prod p p'
   pr1 (pr2 (prod-cone (p , q , H) (p' , q' , H'))) = map-prod q q'
   pr2 (pr2 (prod-cone (p , q , H) (p' , q' , H'))) =
-    ( inv-htpy (map-prod-comp p p' f f')) ∙h
+    ( inv-htpy (preserves-comp-map-prod p p' f f')) ∙h
     ( htpy-map-prod H H') ∙h
-    ( map-prod-comp q q' g g')
+    ( preserves-comp-map-prod q q' g g')
 
   triangle-map-prod-cone :
     (c : cone f g C) (c' : cone f' g' C') →
