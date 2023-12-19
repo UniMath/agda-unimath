@@ -86,7 +86,7 @@ module _
   where
 
   preserves-comp-map-coprod :
-    (map-coprod (f' ∘ f) (g' ∘ g)) ~ ((map-coprod f' g') ∘ (map-coprod f g))
+    map-coprod (f' ∘ f) (g' ∘ g) ~ map-coprod f' g' ∘ map-coprod f g
   preserves-comp-map-coprod (inl x) = refl
   preserves-comp-map-coprod (inr y) = refl
 ```
@@ -283,17 +283,6 @@ is-contr-fiber-map-coprod {A = A} {B} {C} {D} f g =
       ( is-torsorial-htpy' f)
       ( f , refl-htpy)
       ( is-torsorial-htpy' g))
-
-{-
-is-emb-map-coprod :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
-  is-emb (λ (fg : (A → B) × (C → D)) → map-coprod (pr1 fg) (pr2 fg))
-is-emb-map-coprod (f , g) =
-  fundamental-theorem-id (f , g)
-    ( refl)
-    {! is-contr-fiber-map-coprod f g!}
-    {!!}
--}
 ```
 
 ### For any equivalence `f : A + B ≃ A + B` and `g : B ≃ B` such that `f` and `g` coincide on `B`, we construct an `h : A ≃ A` such that `htpy-equiv (equiv-coprod h d) f`

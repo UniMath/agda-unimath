@@ -17,6 +17,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 ```
@@ -44,7 +45,7 @@ module _
     is-equiv-is-invertible
       ( λ p → ind-coprod P (pr1 p) (pr2 p))
       ( ind-Σ (λ f g → eq-pair refl refl))
-      ( λ s → eq-htpy (ind-coprod _ (λ x → refl) λ y → refl))
+      ( λ s → eq-htpy (ind-coprod _ refl-htpy refl-htpy))
 
   equiv-dependent-universal-property-coprod :
     {l3 : Level} (P : A + B → UU l3) →

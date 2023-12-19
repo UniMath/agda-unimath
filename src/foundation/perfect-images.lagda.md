@@ -196,14 +196,12 @@ module _
   where
 
   not-not-perfect-is-perfect :
-    (a : A) →
-    ¬ (is-not-perfect-image a) →
-    (is-perfect-image f g a)
+    (a : A) → ¬ (is-not-perfect-image a) → is-perfect-image f g a
   not-not-perfect-is-perfect a nρ a₀ n p =
-    ind-coprod _
-      (id)
-      (λ a₁ → ex-falso (nρ (pair a₀ (pair n (pair p a₁)))))
-      (lem (pair (fiber g a₀) (is-prop-map-is-emb is-emb-g a₀)))
+    rec-coprod
+      ( id)
+      ( λ a₁ → ex-falso (nρ (a₀ , n , p , a₁)))
+      ( lem (fiber g a₀ , is-prop-map-is-emb is-emb-g a₀))
 ```
 
 The following property states that if `g (b)` is not a perfect image, then `b`

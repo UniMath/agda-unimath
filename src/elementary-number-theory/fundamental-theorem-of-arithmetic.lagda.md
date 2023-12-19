@@ -748,8 +748,7 @@ is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H nil D y d p =
           ( 1)
           ( inv (is-decomposition-list-is-prime-decomposition-list-ℕ x nil D))))
 is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H (cons z l) D y d p =
-  ind-coprod
-    ( λ _ → y ∈-list (cons z l))
+  rec-coprod
     ( λ e → tr (λ w → w ∈-list (cons z l)) (inv e) (is-head z l))
     ( λ e →
       is-in-tail
