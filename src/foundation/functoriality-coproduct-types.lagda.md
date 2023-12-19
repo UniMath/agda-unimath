@@ -99,7 +99,7 @@ module _
   {f f' : A → A'} (H : f ~ f') {g g' : B → B'} (K : g ~ g')
   where
 
-  htpy-map-coprod : (map-coprod f g) ~ (map-coprod f' g')
+  htpy-map-coprod : map-coprod f g ~ map-coprod f' g'
   htpy-map-coprod (inl x) = ap inl (H x)
   htpy-map-coprod (inr y) = ap inr (K y)
 ```

@@ -12,11 +12,15 @@ open import foundation-core.pullbacks public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
 open import foundation.cones-over-cospans
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.descent-equivalences
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -24,6 +28,9 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.postcomposition-functions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -690,6 +697,107 @@ module _
         ( triangle-map-standard-pullback-Π)
         ( is-equiv-map-standard-pullback-Π f g)
         ( is-equiv-map-Π-is-fiberwise-equiv is-pb-c)
+```
+
+### Coproducts of pullbacks are pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l1' l2' l3' : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3}
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'}
+  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
+  where
+
+  map-coprod-cone-inl :
+    standard-pullback f g →
+    standard-pullback (map-coprod f f') (map-coprod g g')
+  pr1 (map-coprod-cone-inl (x , y , p)) = inl x
+  pr1 (pr2 (map-coprod-cone-inl (x , y , p))) = inl y
+  pr2 (pr2 (map-coprod-cone-inl (x , y , p))) = ap inl p
+
+  map-coprod-cone-inr :
+    standard-pullback f' g' →
+    standard-pullback (map-coprod f f') (map-coprod g g')
+  pr1 (map-coprod-cone-inr (x , y , p)) = inr x
+  pr1 (pr2 (map-coprod-cone-inr (x , y , p))) = inr y
+  pr2 (pr2 (map-coprod-cone-inr (x , y , p))) = ap inr p
+
+  map-coprod-cone :
+    standard-pullback f g + standard-pullback f' g' →
+    standard-pullback (map-coprod f f') (map-coprod g g')
+  map-coprod-cone (inl v) = map-coprod-cone-inl v
+  map-coprod-cone (inr u) = map-coprod-cone-inr u
+
+  map-inv-coprod-cone :
+    standard-pullback (map-coprod f f') (map-coprod g g') →
+    standard-pullback f g + standard-pullback f' g'
+  map-inv-coprod-cone (inl x , inl y , p) = inl (x , y , is-injective-inl p)
+  map-inv-coprod-cone (inr x , inr y , p) = inr (x , y , is-injective-inr p)
+
+  is-section-map-inv-coprod-cone :
+    is-section map-coprod-cone map-inv-coprod-cone
+  is-section-map-inv-coprod-cone (inl x , inl y , p) =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inl p))
+  is-section-map-inv-coprod-cone (inr x , inr y , p) =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inr p))
+
+  is-retraction-map-inv-coprod-cone :
+    is-retraction map-coprod-cone map-inv-coprod-cone
+  is-retraction-map-inv-coprod-cone (inl (x , y , p)) =
+    ap inl (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inl p)))
+  is-retraction-map-inv-coprod-cone (inr (x , y , p)) =
+    ap inr (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inr p)))
+
+  abstract
+    is-equiv-map-coprod-cone : is-equiv map-coprod-cone
+    is-equiv-map-coprod-cone =
+      is-equiv-is-invertible
+        map-inv-coprod-cone
+        is-section-map-inv-coprod-cone
+        is-retraction-map-inv-coprod-cone
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
+  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
+  where
+
+  coprod-cone :
+    cone f g C → cone f' g' C' →
+    cone (map-coprod f f') (map-coprod g g') (C + C')
+  pr1 (coprod-cone (p , q , H) (p' , q' , H')) = map-coprod p p'
+  pr1 (pr2 (coprod-cone (p , q , H) (p' , q' , H'))) = map-coprod q q'
+  pr2 (pr2 (coprod-cone (p , q , H) (p' , q' , H'))) =
+    ( inv-htpy (preserves-comp-map-coprod p f p' f')) ∙h
+    ( htpy-map-coprod H H') ∙h
+    ( preserves-comp-map-coprod q g q' g')
+
+  triangle-map-coprod-cone :
+    (c : cone f g C) (c' : cone f' g' C') →
+    gap (map-coprod f f') (map-coprod g g') (coprod-cone c c') ~
+    map-coprod-cone f g f' g' ∘ map-coprod (gap f g c) (gap f' g' c')
+  triangle-map-coprod-cone c c' (inl _) =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
+  triangle-map-coprod-cone c c' (inr _) =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
+
+  abstract
+    is-pullback-coprod-is-pullback-pair :
+      (c : cone f g C) (c' : cone f' g' C') →
+      is-pullback f g c → is-pullback f' g' c' →
+      is-pullback (map-coprod f f') (map-coprod g g') (coprod-cone c c')
+    is-pullback-coprod-is-pullback-pair c c' is-pb-c is-pb-c' =
+      is-equiv-left-map-triangle
+        ( gap (map-coprod f f') (map-coprod g g') (coprod-cone c c'))
+        ( map-coprod-cone f g f' g')
+        ( map-coprod (gap f g c) (gap f' g' c'))
+        ( triangle-map-coprod-cone c c')
+        ( is-equiv-map-coprod is-pb-c is-pb-c')
+        ( is-equiv-map-coprod-cone f g f' g')
 ```
 
 ```agda
