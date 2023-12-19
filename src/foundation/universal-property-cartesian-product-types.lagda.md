@@ -36,26 +36,38 @@ product
 ### The universal property of cartesian products as pullbacks
 
 ```agda
-map-up-product :
-  {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3} →
-  ((x : X) → A x × B x) → (((x : X) → A x) × ((x : X) → B x))
-pr1 (map-up-product f) x = pr1 (f x)
-pr2 (map-up-product f) x = pr2 (f x)
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3}
+  where
 
-up-product :
-  {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3} →
-  is-equiv (map-up-product {A = A} {B})
-up-product =
-  is-equiv-is-invertible
-    ( λ (f , g) → (λ x → (f x , g x)))
-    ( refl-htpy)
-    ( refl-htpy)
+  map-up-product :
+    ((x : X) → A x × B x) → (((x : X) → A x) × ((x : X) → B x))
+  pr1 (map-up-product f) x = pr1 (f x)
+  pr2 (map-up-product f) x = pr2 (f x)
 
-equiv-up-product :
-  {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3} →
-  ((x : X) → A x × B x) ≃ (((x : X) → A x) × ((x : X) → B x))
-pr1 equiv-up-product = map-up-product
-pr2 equiv-up-product = up-product
+  map-inv-up-product :
+    (((x : X) → A x) × ((x : X) → B x)) → (x : X) → A x × B x
+  pr1 (map-inv-up-product (f , g) x) = f x
+  pr2 (map-inv-up-product (f , g) x) = g x
+
+  up-product : is-equiv map-up-product
+  up-product =
+    is-equiv-is-invertible
+      ( map-inv-up-product)
+      ( refl-htpy)
+      ( refl-htpy)
+
+  is-equiv-map-inv-up-product : is-equiv map-inv-up-product
+  is-equiv-map-inv-up-product = is-equiv-map-inv-is-equiv up-product
+
+  equiv-up-product :
+    ((x : X) → A x × B x) ≃ (((x : X) → A x) × ((x : X) → B x))
+  pr1 equiv-up-product = map-up-product
+  pr2 equiv-up-product = up-product
+
+  inv-equiv-up-product :
+    (((x : X) → A x) × ((x : X) → B x)) ≃ ((x : X) → A x × B x)
+  inv-equiv-up-product = inv-equiv equiv-up-product
 ```
 
 We construct the cone for two maps into the unit type.

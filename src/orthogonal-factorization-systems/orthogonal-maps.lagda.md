@@ -28,6 +28,7 @@ open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-function-types
+open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -458,7 +459,7 @@ module _
   is-orthogonal-pullback-condition-right-Π :
     ((i : I) → is-orthogonal-pullback-condition f (g i)) →
     is-orthogonal-pullback-condition f (map-Π g)
-  is-orthogonal-pullback-condition-right-Π H =
+  is-orthogonal-pullback-condition-right-Π G =
     is-pullback-bottom-is-pullback-top-cube-is-equiv
       ( postcomp B (map-Π g))
       ( precomp f ((i : I) → X i))
@@ -488,14 +489,14 @@ module _
         ( λ i → precomp f (Y i))
         ( λ i → postcomp A (g i))
         ( λ i → cone-pullback-hom' f (g i))
-        ( H))
+        ( G))
 
   is-orthogonal-right-Π :
     ((i : I) → is-orthogonal f (g i)) → is-orthogonal f (map-Π g)
-  is-orthogonal-right-Π H =
+  is-orthogonal-right-Π G =
     is-orthogonal-is-orthogonal-pullback-condition f (map-Π g)
       ( is-orthogonal-pullback-condition-right-Π
-        ( λ i → is-orthogonal-pullback-condition-is-orthogonal f (g i) (H i)))
+        ( λ i → is-orthogonal-pullback-condition-is-orthogonal f (g i) (G i)))
 ```
 
 ### If `g` is right orthogonal to `f` then postcomposition by `g` is right orthogonal to `f`
@@ -510,11 +511,68 @@ module _
   is-orthogonal-pullback-condition-right-postcomp :
     is-orthogonal-pullback-condition f g →
     is-orthogonal-pullback-condition f (postcomp I g)
-  is-orthogonal-pullback-condition-right-postcomp H =
-    is-orthogonal-pullback-condition-right-Π f (λ _ → g) (λ _ → H)
+  is-orthogonal-pullback-condition-right-postcomp G =
+    is-orthogonal-pullback-condition-right-Π f (λ _ → g) (λ _ → G)
 
   is-orthogonal-right-postcomp :
     is-orthogonal f g → is-orthogonal f (postcomp I g)
-  is-orthogonal-right-postcomp H =
-    is-orthogonal-right-Π f (λ _ → g) (λ _ → H)
+  is-orthogonal-right-postcomp G =
+    is-orthogonal-right-Π f (λ _ → g) (λ _ → G)
+```
+
+### If `g` and `h` are right orthogonal to `f` then `map-prod g h` is right orthogonal to `f`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
+  (f : A → B) (g : X → Y) (h : X' → Y')
+  where
+
+  is-orthogonal-pullback-condition-right-prod :
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f h →
+    is-orthogonal-pullback-condition f (map-prod g h)
+  is-orthogonal-pullback-condition-right-prod G H =
+    is-pullback-bottom-is-pullback-top-cube-is-equiv
+      ( postcomp B (map-prod g h))
+      ( precomp f (X × X'))
+      ( precomp f (Y × Y'))
+      ( postcomp A (map-prod g h))
+      ( map-prod (postcomp B g) (postcomp B h))
+      ( map-prod (precomp f X) (precomp f X'))
+      ( map-prod (precomp f Y) (precomp f Y'))
+      ( map-prod (postcomp A g) (postcomp A h))
+      ( map-inv-up-product)
+      ( map-inv-up-product)
+      ( map-inv-up-product)
+      ( map-inv-up-product)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( is-equiv-map-inv-up-product)
+      ( is-equiv-map-inv-up-product)
+      ( is-equiv-map-inv-up-product)
+      ( is-equiv-map-inv-up-product)
+      ( is-pullback-prod-is-pullback-pair
+        ( precomp f Y)
+        ( postcomp A g)
+        ( precomp f Y')
+        ( postcomp A h)
+        ( cone-pullback-hom' f g)
+        ( cone-pullback-hom' f h)
+        ( G)
+        ( H))
+
+  is-orthogonal-right-prod :
+    is-orthogonal f g → is-orthogonal f h → is-orthogonal f (map-prod g h)
+  is-orthogonal-right-prod G H =
+    is-orthogonal-is-orthogonal-pullback-condition f (map-prod g h)
+      ( is-orthogonal-pullback-condition-right-prod
+        ( is-orthogonal-pullback-condition-is-orthogonal f g G)
+        ( is-orthogonal-pullback-condition-is-orthogonal f h H))
 ```
