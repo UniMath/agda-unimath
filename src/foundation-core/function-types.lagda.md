@@ -56,19 +56,15 @@ ev-point' a f = f a
 ```agda
 map-Π :
   {l1 l2 l3 : Level}
-  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (f : (i : I) → A i → B i) →
-  ((i : I) → A i) →
-  ((i : I) → B i)
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
+  ((i : I) → A i → B i) → ((i : I) → A i) → ((i : I) → B i)
 map-Π f h i = f i (h i)
 
 map-Π' :
   {l1 l2 l3 l4 : Level}
   {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   {J : UU l4} (α : J → I) →
-  ((i : I) → A i → B i) →
-  ((j : J) → A (α j)) →
-  ((j : J) → B (α j))
+  ((i : I) → A i → B i) → ((j : J) → A (α j)) → ((j : J) → B (α j))
 map-Π' α f = map-Π (f ∘ α)
 ```
 

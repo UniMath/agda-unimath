@@ -19,6 +19,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -32,6 +33,40 @@ open import foundation-core.universal-property-pullbacks
 ```
 
 </details>
+
+## Idea
+
+Given a [cospan of types](foundation.cospans.md)
+
+```text
+  f : A → X ← B : g,
+```
+
+we can form the
+{{#concept "standard pullback" Disambiguation="types" Agda=standard-pullback}}
+`A ×_X B` satisfying
+[the universal property of the pullback](foundation-core.universal-property-pullbacks.md)
+of the cospan, completing the diagram
+
+```text
+  A ×_X B ------> B
+     | ⌟          |
+     |            | g
+     |            |
+     v            v
+     A ---------> X.
+           f
+```
+
+The standard pullback consists of [pairs](foundation.dependent-pair-types.md)
+`a : A` and `b : B` such that `f a` and `g b` agree:
+
+```text
+  A ×_X B := Σ (a : A) (b : B), (f a ＝ g b).
+```
+
+Thus the standard [cone](foundation.cones-over-cospans.md) consists of the
+canonical projections.
 
 ## Definitions
 
@@ -56,8 +91,11 @@ module _
   horizontal-map-standard-pullback t = pr1 (pr2 t)
 
   coherence-square-standard-pullback :
-    ( f ∘ vertical-map-standard-pullback) ~
-    ( g ∘ horizontal-map-standard-pullback)
+    coherence-square-maps
+      horizontal-map-standard-pullback
+      vertical-map-standard-pullback
+      g
+      f
   coherence-square-standard-pullback t = pr2 (pr2 t)
 ```
 
@@ -76,8 +114,9 @@ module _
 
 ### The gap map into the standard pullback
 
-The **gap map** of a square is the map fron the vertex of the
-[cone](foundation.cones-over-cospans.md) into the standard pullback.
+The {{#concept "gap map" Disambiguation="standard pullback of types" Agda=gap}}
+of a [commuting square](foundation-core.commuting-squares-of-maps.md) is the map
+from the domain of the cone into the standard pullback.
 
 ```agda
 module _
@@ -91,7 +130,7 @@ module _
   pr2 (pr2 (gap c z)) = coherence-square-cone f g c z
 ```
 
-### The property of being a pullback
+### The small property of being a pullback
 
 The [proposition](foundation-core.propositions.md) `is-pullback` is the
 assertion that the gap map is an [equivalence](foundation-core.equivalences.md).
@@ -136,8 +175,7 @@ module _
     (t t' : standard-pullback f g) → (t ＝ t') ≃ Eq-standard-pullback t t'
   extensionality-standard-pullback (a , b , p) =
     extensionality-Σ
-      ( λ {a'} bp' α →
-        Σ (b ＝ pr1 bp') (λ β → ap f α ∙ pr2 bp' ＝ p ∙ ap g β))
+      ( λ bp' α → Σ (b ＝ pr1 bp') (λ β → ap f α ∙ pr2 bp' ＝ p ∙ ap g β))
       ( refl)
       ( refl , inv right-unit)
       ( λ x → id-equiv)
@@ -157,9 +195,7 @@ module _
       ( coherence-square-standard-pullback s ∙ ap g β)) →
     s ＝ t
   map-extensionality-standard-pullback {s} {t} α β γ =
-    map-inv-equiv
-      ( extensionality-standard-pullback s t)
-      ( α , β , γ)
+    map-inv-equiv (extensionality-standard-pullback s t) (α , β , γ)
 ```
 
 ### The standard pullback satisfies the universal property of pullbacks
@@ -177,8 +213,7 @@ module _
         ( tot (λ p → map-distributive-Π-Σ))
         ( mapping-into-Σ)
         ( is-equiv-mapping-into-Σ)
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ p → is-equiv-map-distributive-Π-Σ))
+        ( is-equiv-tot-is-fiberwise-equiv (λ p → is-equiv-map-distributive-Π-Σ))
 ```
 
 ### A cone is equal to the value of `cone-map` at its own gap map
@@ -262,20 +297,17 @@ module _
 
   inv-gap-cone-standard-pullback-Σ :
     standard-pullback f (pr1 {B = Q}) → standard-pullback-Σ
-  pr1 (inv-gap-cone-standard-pullback-Σ (x , (.(f x) , q) , refl)) = x
+  pr1 (inv-gap-cone-standard-pullback-Σ (x , _)) = x
   pr2 (inv-gap-cone-standard-pullback-Σ (x , (.(f x) , q) , refl)) = q
 
   abstract
     is-section-inv-gap-cone-standard-pullback-Σ :
-      gap f pr1 cone-standard-pullback-Σ ∘ inv-gap-cone-standard-pullback-Σ ~
-      id
-    is-section-inv-gap-cone-standard-pullback-Σ (x , (.(f x) , q) , refl) =
-      refl
+      gap f pr1 cone-standard-pullback-Σ ∘ inv-gap-cone-standard-pullback-Σ ~ id
+    is-section-inv-gap-cone-standard-pullback-Σ (x , (.(f x) , q) , refl) = refl
 
   abstract
     is-retraction-inv-gap-cone-standard-pullback-Σ :
-      ( inv-gap-cone-standard-pullback-Σ ∘
-        gap f pr1 cone-standard-pullback-Σ) ~ id
+      inv-gap-cone-standard-pullback-Σ ∘ gap f pr1 cone-standard-pullback-Σ ~ id
     is-retraction-inv-gap-cone-standard-pullback-Σ = refl-htpy
 
   abstract
@@ -291,9 +323,18 @@ module _
     standard-pullback-Σ ≃ standard-pullback f pr1
   pr1 compute-standard-pullback-Σ = gap f pr1 cone-standard-pullback-Σ
   pr2 compute-standard-pullback-Σ = is-pullback-cone-standard-pullback-Σ
+
+  universal-property-pullback-standard-pullback-Σ :
+    universal-property-pullback f pr1 cone-standard-pullback-Σ
+  universal-property-pullback-standard-pullback-Σ =
+    universal-property-pullback-is-pullback f pr1
+      ( cone-standard-pullback-Σ)
+      ( is-pullback-cone-standard-pullback-Σ)
 ```
 
 ### Pullbacks are symmetric
+
+The pullback of `f : A → X ← B : g` is also the pullback of `g : B → X ← A : f`.
 
 ```agda
 map-commutative-standard-pullback :
@@ -393,11 +434,11 @@ square
             | ⌟          |
   (f' , g') |            |
             v            v
-          A × B -----> X × X.
+          A × B -----> X × X,
                 f × g
 ```
 
-In fact, this folded square is a pullback if and only if the original one is.
+moreover, this folded square is a pullback if and only if the original one is.
 
 ```agda
 module _
@@ -623,10 +664,25 @@ module _
 
 ### A family of maps over a base map induces a pullback square if and only if it is a family of equivalences
 
+Given a map `f : A → B` with a family of maps over it
+`g : (x : A) → P x → Q (f x)`, then the square
+
+```text
+         Σg
+  Σ A P ----> Σ B Q
+    |           |
+    |           |
+    v           v
+    A --------> B
+          f
+```
+
+is a pullback is and only if `g` is a fiberwise equivalence.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {P : A → UU l3}
-  (Q : B → UU l4) (f : A → B) (g : (x : A) → (P x) → (Q (f x)))
+  (Q : B → UU l4) (f : A → B) (g : (x : A) → P x → Q (f x))
   where
 
   cone-map-Σ : cone f pr1 (Σ A P)
@@ -682,7 +738,7 @@ module _
 
   square-tot-map-fiber-vertical-cone :
     gap f g c ∘ map-equiv-total-fiber (pr1 c) ~
-    tot (λ a → tot (λ b → inv)) ∘ tot (map-fiber-vertical-cone f g c)
+    tot (λ _ → tot (λ _ → inv)) ∘ tot (map-fiber-vertical-cone f g c)
   square-tot-map-fiber-vertical-cone (.(vertical-map-cone f g c x) , x , refl) =
     eq-pair-eq-pr2
       ( eq-pair-eq-pr2
@@ -695,7 +751,7 @@ module _
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-top-is-equiv-bottom-square
           ( map-equiv-total-fiber (vertical-map-cone f g c))
-          ( tot (λ x → tot (λ y → inv)))
+          ( tot (λ _ → tot (λ _ → inv)))
           ( tot (map-fiber-vertical-cone f g c))
           ( gap f g c)
           ( square-tot-map-fiber-vertical-cone)
@@ -711,7 +767,7 @@ module _
     is-pullback-is-fiberwise-equiv-map-fiber-vertical-cone is-equiv-fsq =
       is-equiv-bottom-is-equiv-top-square
         ( map-equiv-total-fiber (vertical-map-cone f g c))
-        ( tot (λ x → tot (λ y → inv)))
+        ( tot (λ _ → tot (λ _ → inv)))
         ( tot (map-fiber-vertical-cone f g c))
         ( gap f g c)
         ( square-tot-map-fiber-vertical-cone)
@@ -723,6 +779,18 @@ module _
 ```
 
 ### The horizontal pullback pasting property
+
+Given a diagram as follows where the right-hand square is a pullback
+
+```text
+  ∙ -------> ∙ -------> ∙
+  |          | ⌟        |
+  |          |          |
+  v          v          v
+  ∙ -------> ∙ -------> ∙,
+```
+
+then the left-hand square is a pullback if and only if the composite square is.
 
 ```agda
 module _
@@ -782,6 +850,22 @@ module _
 ```
 
 ### The vertical pullback pasting property
+
+Given a diagram as follows where the lower square is a pullback
+
+```text
+  ∙ -------> ∙
+  |          |
+  |          |
+  v          v
+  ∙ -------> ∙
+  | ⌟        |
+  |          |
+  v          v
+  ∙ -------> ∙,
+```
+
+then the upper square is a pullback if and only if the composite square is.
 
 ```agda
 module _

@@ -100,6 +100,18 @@ module _
 
 ### The horizontal pullback pasting property
 
+Given a diagram as follows where the right-hand square is a pullback
+
+```text
+  ∙ -------> ∙ -------> ∙
+  |          | ⌟        |
+  |          |          |
+  v          v          v
+  ∙ -------> ∙ -------> ∙,
+```
+
+then the left-hand square is a pullback if and only if the composite square is.
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -140,6 +152,22 @@ module _
 ```
 
 ### The vertical pullback pasting property
+
+Given a diagram as follows where the lower square is a pullback
+
+```text
+  ∙ -------> ∙
+  |          |
+  |          |
+  v          v
+  ∙ -------> ∙
+  | ⌟        |
+  |          |
+  v          v
+  ∙ -------> ∙,
+```
+
+then the upper square is a pullback if and only if the composite square is.
 
 ```agda
 module _

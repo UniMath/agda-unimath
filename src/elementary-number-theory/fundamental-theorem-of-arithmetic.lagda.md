@@ -947,7 +947,7 @@ pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
 ```agda
 is-prime-list-concat-list-ℕ :
   (p q : list ℕ) → is-prime-list-ℕ p → is-prime-list-ℕ q →
-  is-prime-list-ℕ (concat-list p q)
+  is-prime-list-ℕ (concat-list p q)
 is-prime-list-concat-list-ℕ nil q Pp Pq = Pq
 is-prime-list-concat-list-ℕ (cons x p) q Pp Pq =
   pr1 Pp , is-prime-list-concat-list-ℕ p q (pr2 Pp) Pq

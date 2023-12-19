@@ -42,6 +42,40 @@ open import foundation-core.whiskering-homotopies
 
 </details>
 
+## Idea
+
+Given a [cospan of types](foundation.cospans.md)
+
+```text
+  f : A → X ← B : g,
+```
+
+we can form the
+{{#concept "standard pullback" Disambiguation="types" Agda=standard-pullback}}
+`A ×_X B` satisfying
+[the universal property of the pullback](foundation-core.universal-property-pullbacks.md)
+of the cospan, completing the diagram
+
+```text
+  A ×_X B ------> B
+     | ⌟          |
+     |            | g
+     |            |
+     v            v
+     A ---------> X.
+           f
+```
+
+The standard pullback consists of [pairs](foundation.dependent-pair-types.md)
+`a : A` and `b : B` such that `f a ＝ g b` agree
+
+```text
+  A ×_X B := Σ (a : A) (b : B), (f a ＝ g b),
+```
+
+thus the standard [cone](foundation.cones-over-cospans.md) consists of the
+canonical projections.
+
 ## Properties
 
 ### Being a pullback is a property
@@ -76,7 +110,7 @@ map-standard-pullback-postcomp :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   (T : UU l4) → standard-pullback (postcomp T f) (postcomp T g) → cone f g T
-map-standard-pullback-postcomp f g T = tot (λ p → tot (λ q → htpy-eq))
+map-standard-pullback-postcomp f g T = tot (λ _ → tot (λ _ → htpy-eq))
 
 abstract
   is-equiv-map-standard-pullback-postcomp :
@@ -90,9 +124,9 @@ abstract
 triangle-map-standard-pullback-postcomp :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
-  ( cone-map f g c {T}) ~
-  ( ( map-standard-pullback-postcomp f g T) ∘
-    ( gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)))
+  cone-map f g c {T} ~
+  map-standard-pullback-postcomp f g T ∘
+  gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
 triangle-map-standard-pullback-postcomp T f g c h =
   eq-pair-eq-pr2
     ( eq-pair-eq-pr2
@@ -103,10 +137,7 @@ abstract
     {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
     (T : UU l5) →
-    is-pullback
-      ( postcomp T f)
-      ( postcomp T g)
-      ( postcomp-cone T f g c)
+    is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
   is-pullback-postcomp-is-pullback f g c is-pb-c T =
     is-equiv-top-map-triangle
       ( cone-map f g c)
@@ -120,18 +151,19 @@ abstract
   is-pullback-is-pullback-postcomp :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) →
-    ( (l5 : Level) (T : UU l5) →
+    ( {l5 : Level} (T : UU l5) →
       is-pullback (postcomp T f) (postcomp T g) (postcomp-cone T f g c)) →
     is-pullback f g c
   is-pullback-is-pullback-postcomp f g c is-pb-postcomp =
     is-pullback-universal-property-pullback f g c
-      ( λ T → is-equiv-left-map-triangle
-        ( cone-map f g c)
-        ( map-standard-pullback-postcomp f g T)
-        ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
-        ( triangle-map-standard-pullback-postcomp T f g c)
-        ( is-pb-postcomp _ T)
-        ( is-equiv-map-standard-pullback-postcomp f g T))
+      ( λ T →
+        is-equiv-left-map-triangle
+          ( cone-map f g c)
+          ( map-standard-pullback-postcomp f g T)
+          ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
+          ( triangle-map-standard-pullback-postcomp T f g c)
+          ( is-pb-postcomp T)
+          ( is-equiv-map-standard-pullback-postcomp f g T))
 ```
 
 ### Identity types can be presented as pullbacks
@@ -327,10 +359,11 @@ module _
     htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
   htpy-parallel-cone-refl-htpy-htpy-cone (p , q , H) (p' , q' , H') =
     tot
-      ( λ K → tot
-        ( λ L M →
-          ( ap-concat-htpy H right-unit-htpy) ∙h
-          ( M ∙h ap-concat-htpy' H' inv-htpy-right-unit-htpy)))
+      ( λ K →
+        tot
+          ( λ L M →
+            ( ap-concat-htpy H right-unit-htpy) ∙h
+            ( M ∙h ap-concat-htpy' H' inv-htpy-right-unit-htpy)))
 
   abstract
     is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone :
@@ -348,7 +381,7 @@ module _
               ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
             ( is-equiv-concat-htpy'
               ( H ∙h (g ·l L))
-              ( λ x → ap (λ z → z ∙ H' x) (inv right-unit)))
+              ( λ x → ap (_∙ H' x) (inv right-unit)))
             ( is-equiv-concat-htpy
               ( λ x → ap (H x ∙_) right-unit)
               ( (f ·l K) ∙h refl-htpy ∙h H'))))
@@ -565,6 +598,9 @@ module _
 
 ### Dependent products of pullbacks are pullbacks
 
+Given a family of pullback squares, their dependent product is again a pullback
+square.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1}
@@ -636,8 +672,8 @@ module _
     eq-htpy
       ( λ i →
         map-extensionality-standard-pullback
-          (f i)
-          (g i)
+          ( f i)
+          ( g i)
           ( refl)
           ( refl)
           ( htpy-eq (is-section-eq-htpy _) i ∙ inv right-unit))
