@@ -114,7 +114,7 @@ module _
     map-distributive-Π-is-local-dependent-type (λ a _ → B a)
 ```
 
-### If `S` is `g`-local, and `f` is a retract of `g` then `S` is `f`-local
+### If `S` is `f`-local then `S` is local at every retract of `f`
 
 ```agda
 module _
