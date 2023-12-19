@@ -527,27 +527,27 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
-  (f : A → B) (g : X → Y) (h : X' → Y')
+  (f : A → B) (g : X → Y) (g' : X' → Y')
   where
 
   is-orthogonal-pullback-condition-right-prod :
     is-orthogonal-pullback-condition f g →
-    is-orthogonal-pullback-condition f h →
-    is-orthogonal-pullback-condition f (map-prod g h)
-  is-orthogonal-pullback-condition-right-prod G H =
-    is-pullback-bottom-is-pullback-top-cube-is-equiv
-      ( postcomp B (map-prod g h))
-      ( precomp f (X × X'))
-      ( precomp f (Y × Y'))
-      ( postcomp A (map-prod g h))
-      ( map-prod (postcomp B g) (postcomp B h))
+    is-orthogonal-pullback-condition f g' →
+    is-orthogonal-pullback-condition f (map-prod g g')
+  is-orthogonal-pullback-condition-right-prod G G' =
+    is-pullback-top-is-pullback-bottom-cube-is-equiv
+      ( map-prod (postcomp B g) (postcomp B g'))
       ( map-prod (precomp f X) (precomp f X'))
       ( map-prod (precomp f Y) (precomp f Y'))
-      ( map-prod (postcomp A g) (postcomp A h))
-      ( map-inv-up-product)
-      ( map-inv-up-product)
-      ( map-inv-up-product)
-      ( map-inv-up-product)
+      ( map-prod (postcomp A g) (postcomp A g'))
+      ( postcomp B (map-prod g g'))
+      ( precomp f (X × X'))
+      ( precomp f (Y × Y'))
+      ( postcomp A (map-prod g g'))
+      ( map-up-product)
+      ( map-up-product)
+      ( map-up-product)
+      ( map-up-product)
       ( refl-htpy)
       ( refl-htpy)
       ( refl-htpy)
@@ -555,27 +555,27 @@ module _
       ( refl-htpy)
       ( refl-htpy)
       ( refl-htpy)
-      ( is-equiv-map-inv-up-product)
-      ( is-equiv-map-inv-up-product)
-      ( is-equiv-map-inv-up-product)
-      ( is-equiv-map-inv-up-product)
+      ( up-product)
+      ( up-product)
+      ( up-product)
+      ( up-product)
       ( is-pullback-prod-is-pullback-pair
         ( precomp f Y)
         ( postcomp A g)
         ( precomp f Y')
-        ( postcomp A h)
+        ( postcomp A g')
         ( cone-pullback-hom' f g)
-        ( cone-pullback-hom' f h)
+        ( cone-pullback-hom' f g')
         ( G)
-        ( H))
+        ( G'))
 
   is-orthogonal-right-prod :
-    is-orthogonal f g → is-orthogonal f h → is-orthogonal f (map-prod g h)
-  is-orthogonal-right-prod G H =
-    is-orthogonal-is-orthogonal-pullback-condition f (map-prod g h)
+    is-orthogonal f g → is-orthogonal f g' → is-orthogonal f (map-prod g g')
+  is-orthogonal-right-prod G G' =
+    is-orthogonal-is-orthogonal-pullback-condition f (map-prod g g')
       ( is-orthogonal-pullback-condition-right-prod
         ( is-orthogonal-pullback-condition-is-orthogonal f g G)
-        ( is-orthogonal-pullback-condition-is-orthogonal f h H))
+        ( is-orthogonal-pullback-condition-is-orthogonal f g' G'))
 ```
 
 ### Left orthogonality is preserved by coproducts
