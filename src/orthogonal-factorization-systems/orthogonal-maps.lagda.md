@@ -29,6 +29,7 @@ open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-cartesian-product-types
+open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -575,4 +576,63 @@ module _
       ( is-orthogonal-pullback-condition-right-prod
         ( is-orthogonal-pullback-condition-is-orthogonal f g G)
         ( is-orthogonal-pullback-condition-is-orthogonal f h H))
+```
+
+### Left orthogonality is preserved by coproducts
+
+If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4} {X : UU l5} {Y : UU l6}
+  (f : A → B) (f' : A' → B') (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-left-coprod :
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f' g →
+    is-orthogonal-pullback-condition (map-coprod f f') g
+  is-orthogonal-pullback-condition-left-coprod F F' =
+    is-pullback-top-is-pullback-bottom-cube-is-equiv
+      ( map-prod (postcomp B g) (postcomp B' g))
+      ( map-prod (precomp f X) (precomp f' X))
+      ( map-prod (precomp f Y) (precomp f' Y))
+      ( map-prod (postcomp A g) (postcomp A' g))
+      ( postcomp (B + B') g)
+      ( precomp (map-coprod f f') X)
+      ( precomp (map-coprod f f') Y)
+      ( postcomp (A + A') g)
+      ( ev-inl-inr (λ _ → X))
+      ( ev-inl-inr (λ _ → Y))
+      ( ev-inl-inr (λ _ → X))
+      ( ev-inl-inr (λ _ → Y))
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( universal-property-coprod X)
+      ( universal-property-coprod Y)
+      ( universal-property-coprod X)
+      ( universal-property-coprod Y)
+      ( is-pullback-prod-is-pullback-pair
+        ( precomp f Y)
+        ( postcomp A g)
+        ( precomp f' Y)
+        ( postcomp A' g)
+        ( cone-pullback-hom' f g)
+        ( cone-pullback-hom' f' g)
+        ( F)
+        ( F'))
+
+  is-orthogonal-left-coprod :
+    is-orthogonal f g → is-orthogonal f' g → is-orthogonal (map-coprod f f') g
+  is-orthogonal-left-coprod F F' =
+    is-orthogonal-is-orthogonal-pullback-condition (map-coprod f f') g
+      ( is-orthogonal-pullback-condition-left-coprod
+        ( is-orthogonal-pullback-condition-is-orthogonal f g F)
+        ( is-orthogonal-pullback-condition-is-orthogonal f' g F'))
 ```

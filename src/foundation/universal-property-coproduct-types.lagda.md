@@ -37,7 +37,8 @@ module _
   ev-inl-inr :
     {l3 : Level} (P : A + B → UU l3) →
     ((t : A + B) → P t) → ((x : A) → P (inl x)) × ((y : B) → P (inr y))
-  ev-inl-inr P s = pair (λ x → s (inl x)) (λ y → s (inr y))
+  pr1 (ev-inl-inr P s) x = s (inl x)
+  pr2 (ev-inl-inr P s) y = s (inr y)
 
   dependent-universal-property-coprod :
     {l3 : Level} (P : A + B → UU l3) → is-equiv (ev-inl-inr P)
@@ -56,44 +57,42 @@ module _
 
   abstract
     universal-property-coprod :
-      {l3 : Level} (X : UU l3) →
-      is-equiv (ev-inl-inr (λ (t : A + B) → X))
-    universal-property-coprod X = dependent-universal-property-coprod (λ t → X)
+      {l3 : Level} (X : UU l3) → is-equiv (ev-inl-inr (λ _ → X))
+    universal-property-coprod X = dependent-universal-property-coprod (λ _ → X)
 
   equiv-universal-property-coprod :
-    {l3 : Level} (X : UU l3) →
-    (A + B → X) ≃ ((A → X) × (B → X))
+    {l3 : Level} (X : UU l3) → (A + B → X) ≃ ((A → X) × (B → X))
   equiv-universal-property-coprod X =
-    equiv-dependent-universal-property-coprod (λ t → X)
+    equiv-dependent-universal-property-coprod (λ _ → X)
 
   abstract
     uniqueness-coprod :
       {l3 : Level} {Y : UU l3} (i : A → Y) (j : B → Y) →
       ( {l : Level} (X : UU l) →
         is-equiv (λ (s : Y → X) → pair' (s ∘ i) (s ∘ j))) →
-      is-equiv (ind-coprod (λ t → Y) i j)
-    uniqueness-coprod {Y = Y} i j H =
+      is-equiv (rec-coprod i j)
+    uniqueness-coprod i j H =
       is-equiv-is-equiv-precomp
-        ( ind-coprod _ i j)
+        ( rec-coprod i j)
         ( λ X →
           is-equiv-right-factor
-            ( ev-inl-inr (λ t → X))
-            ( precomp (ind-coprod (λ t → Y) i j) X)
+            ( ev-inl-inr (λ _ → X))
+            ( precomp (rec-coprod i j) X)
             ( universal-property-coprod X)
             ( H X))
 
   abstract
-    universal-property-coprod-is-equiv-ind-coprod :
+    universal-property-coprod-is-equiv-rec-coprod :
       {l3 : Level} (X : UU l3) (i : A → X) (j : B → X) →
-      is-equiv (ind-coprod (λ t → X) i j) →
+      is-equiv (rec-coprod i j) →
       (l4 : Level) (Y : UU l4) →
         is-equiv (λ (s : X → Y) → pair' (s ∘ i) (s ∘ j))
-    universal-property-coprod-is-equiv-ind-coprod X i j H l Y =
+    universal-property-coprod-is-equiv-rec-coprod X i j H l Y =
       is-equiv-comp
-        ( ev-inl-inr (λ t → Y))
-        ( precomp (ind-coprod (λ t → X) i j) Y)
+        ( ev-inl-inr (λ _ → Y))
+        ( precomp (rec-coprod i j) Y)
         ( is-equiv-precomp-is-equiv
-          ( ind-coprod (λ t → X) i j)
+          ( rec-coprod i j)
           ( H)
           ( Y))
         ( universal-property-coprod Y)
