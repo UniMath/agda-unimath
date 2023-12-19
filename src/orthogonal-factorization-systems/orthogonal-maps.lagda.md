@@ -7,6 +7,7 @@ module orthogonal-factorization-systems.orthogonal-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-maps
@@ -16,16 +17,20 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import orthogonal-factorization-systems.lifting-squares
 open import orthogonal-factorization-systems.pullback-hom
@@ -436,4 +441,59 @@ module _
       ( is-orthogonal-pullback-condition-left-left-factor
         ( is-orthogonal-pullback-condition-is-orthogonal f g F)
         ( is-orthogonal-pullback-condition-is-orthogonal (h ∘ f) g HF))
+```
+
+### The dependent product of a family of maps that are right orthogonal to `f` is again right orthogonal to `f`
+
+In other words, if each `g i` is right orthogonal to `f`, then `map-Π g` is
+right orthogonal to `f`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {I : UU l1} {A : UU l2} {B : UU l3} {X : I → UU l4} {Y : I → UU l5}
+  (f : A → B) (g : (i : I) → X i → Y i)
+  where
+
+  is-orthogonal-pullback-condition-right-Π :
+    ((i : I) → is-orthogonal-pullback-condition f (g i)) →
+    is-orthogonal-pullback-condition f (map-Π g)
+  is-orthogonal-pullback-condition-right-Π H =
+    is-pullback-bottom-is-pullback-top-cube-is-equiv
+      ( postcomp B (map-Π g))
+      ( precomp f ((i : I) → X i))
+      ( precomp f ((i : I) → Y i))
+      ( postcomp A (map-Π g))
+      ( map-Π (λ i → postcomp B (g i)))
+      ( map-Π (λ i → precomp f (X i)))
+      ( map-Π (λ i → precomp f (Y i)))
+      ( map-Π (λ i → postcomp A (g i)))
+      ( swap-Π)
+      ( swap-Π)
+      ( swap-Π)
+      ( swap-Π)
+      ( λ _ → eq-htpy refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( ( ap swap-Π) ·l
+        ( eq-htpy-refl-htpy ∘ map-Π (λ i → precomp f (Y i) ∘ postcomp B (g i))))
+      ( is-equiv-swap-Π)
+      ( is-equiv-swap-Π)
+      ( is-equiv-swap-Π)
+      ( is-equiv-swap-Π)
+      ( is-pullback-Π
+        ( λ i → precomp f (Y i))
+        ( λ i → postcomp A (g i))
+        ( λ i → cone-pullback-hom' f (g i))
+        ( H))
+
+  is-orthogonal-right-Π :
+    ((i : I) → is-orthogonal f (g i)) → is-orthogonal f (map-Π g)
+  is-orthogonal-right-Π H =
+    is-orthogonal-is-orthogonal-pullback-condition f (map-Π g)
+      ( is-orthogonal-pullback-condition-right-Π
+        ( λ i → is-orthogonal-pullback-condition-is-orthogonal f (g i) (H i)))
 ```
