@@ -497,3 +497,24 @@ module _
       ( is-orthogonal-pullback-condition-right-Π
         ( λ i → is-orthogonal-pullback-condition-is-orthogonal f (g i) (H i)))
 ```
+
+### If `g` is right orthogonal to `f` then postcomposition by `g` is right orthogonal to `f`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} (I : UU l5)
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-right-postcomp :
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f (postcomp I g)
+  is-orthogonal-pullback-condition-right-postcomp H =
+    is-orthogonal-pullback-condition-right-Π f (λ _ → g) (λ _ → H)
+
+  is-orthogonal-right-postcomp :
+    is-orthogonal f g → is-orthogonal f (postcomp I g)
+  is-orthogonal-right-postcomp H =
+    is-orthogonal-right-Π f (λ _ → g) (λ _ → H)
+```
