@@ -25,12 +25,6 @@ concurrency:
   group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
   cancel-in-progress: true
 
-env:
-  AGDAHTMLFLAGS:
-    --only-scope-checking --html --html-highlight=code --html-dir=docs
-    --css=docs/Agda.css
-  AGDA: agda
-
 jobs:
   typecheck:
     runs-on: ${{ matrix.os }}
