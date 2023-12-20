@@ -62,6 +62,28 @@ module _
 
 ### 3-for-2 property of pullbacks
 
+Given two cones `c` and `c'` over a common cospan `f : A → X ← B : g`, and a map
+between them `h` such that the diagram
+
+```text
+              h
+          C ----> C'
+        /   \   /   \
+      /      / \      \
+    /   /          \    \
+   v v                 v v
+  A --------> X <-------- B
+        f           g
+```
+
+is coherent, then if two out of the three conditions
+
+- `c` is a pullback cone
+- `c'` is a pullback cone
+- `h` is an equivalence
+
+hold, then so does the third.
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
