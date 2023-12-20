@@ -309,7 +309,7 @@ is-equiv-universal-property-pushout :
 is-equiv-universal-property-pushout f g (i , j , H) is-equiv-f up-c =
   is-equiv-is-equiv-precomp j
     ( λ T →
-      is-equiv-is-pullback'
+      is-equiv-horizontal-map-is-pullback
         ( _∘ f)
         ( _∘ g)
         ( cone-pullback-property-pushout f g (i , j , H) T)
@@ -365,7 +365,7 @@ is-equiv-universal-property-pushout' f g c is-equiv-g up-c =
   is-equiv-is-equiv-precomp
     ( horizontal-map-cocone f g c)
     ( λ T →
-      is-equiv-is-pullback
+      is-equiv-vertical-map-is-pullback
         ( precomp f T)
         ( precomp g T)
         ( cone-pullback-property-pushout f g c T)
