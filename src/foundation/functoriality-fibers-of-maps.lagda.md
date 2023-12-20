@@ -453,14 +453,15 @@ module _
   where
 
   preserves-pasting-vertical-map-fiber-vertical-cone :
-    (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
+    (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) (x : C) →
     ( ( map-fiber-vertical-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x) ∘
       ( inv-map-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
     ( ( inv-map-compute-fiber-comp g h (f x)) ∘
       ( map-Σ
         ( λ t → fiber h (pr1 t))
         ( map-fiber-vertical-cone f g c x)
-        ( λ t → map-fiber-vertical-cone (pr1 (pr2 c)) h d (pr1 t))))
+        ( λ t →
+          map-fiber-vertical-cone (horizontal-map-cone f g c) h d (pr1 t))))
   preserves-pasting-vertical-map-fiber-vertical-cone
     (p , q , H) (p' , q' , H') .(p (p' a))
     ((.(p' a) , refl) , (a , refl)) =

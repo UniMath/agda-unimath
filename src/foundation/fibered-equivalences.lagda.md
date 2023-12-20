@@ -322,7 +322,7 @@ module _
     is-fibered-equiv-fibered-map f g ihH →
     is-pullback (pr1 ihH) g (cone-fibered-map f g ihH)
   is-pullback-is-fibered-equiv (is-equiv-i , is-equiv-h) =
-    is-pullback-is-equiv'
+    is-pullback-is-equiv-horizontal-maps
       (pr1 ihH) g (cone-fibered-map f g ihH) is-equiv-i is-equiv-h
 
   equiv-is-fibered-equiv-is-pullback :

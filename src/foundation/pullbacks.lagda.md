@@ -939,7 +939,7 @@ module _
           ( k)
           ( k' , hC , inv-htpy front-right)
           ( f' , g' , top)
-          ( is-pullback-is-equiv' hD k
+          ( is-pullback-is-equiv-horizontal-maps hD k
             ( k' , hC , inv-htpy front-right)
             ( is-equiv-hD)
             ( is-equiv-hC))
@@ -954,7 +954,7 @@ module _
     is-pullback-top-is-pullback-rectangle h hD k'
       ( hB , h' , front-left)
       ( f' , g' , top)
-      ( is-pullback-is-equiv h hD
+      ( is-pullback-is-equiv-vertical-maps h hD
         ( hB , h' , front-left)
         is-equiv-hD is-equiv-hB)
       ( is-pullback-htpy' refl-htpy front-right
@@ -977,7 +977,7 @@ module _
           ( f , g , bottom)
           ( hA , g' , back-right)
           ( is-pb-bottom)
-          ( is-pullback-is-equiv g hC
+          ( is-pullback-is-equiv-vertical-maps g hC
             ( hA , g' , back-right)
             is-equiv-hC is-equiv-hA)))
 ```
@@ -1107,7 +1107,7 @@ module _
         ( c)
         ( cone-ap' c1)
         ( is-pb-c)
-        ( is-pullback-is-equiv
+        ( is-pullback-is-equiv-vertical-maps
           ( map-Σ _ f (λ a α → ap f α))
           ( map-Σ _ g (λ b β → coherence-square-cone f g c c1 ∙ ap g β))
           ( tot-cone-cone-family

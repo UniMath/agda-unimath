@@ -71,7 +71,7 @@ module _
           ( is-fiberwise-equiv-map-fiber-vertical-cone-is-pullback i
             ( vertical-map-cone j h c)
             ( d)
-            ( is-pullback-is-equiv' i
+            ( is-pullback-is-equiv-horizontal-maps i
               ( vertical-map-cone j h c)
               ( d)
               ( is-equiv-i)

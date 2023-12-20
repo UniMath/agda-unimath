@@ -48,13 +48,7 @@ module _
   where
 
   pullback-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  pullback-square =
-    Σ ( A → C)
-      ( λ f →
-        Σ ( B → C)
-          ( λ g →
-            Σ ( cone f g X)
-              ( is-pullback f g)))
+  pullback-square = Σ (A → C) (λ f → Σ (B → C) (λ g → pullback-cone f g X))
 ```
 
 ### Components of a pullback cone

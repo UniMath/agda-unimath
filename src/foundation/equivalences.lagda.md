@@ -757,12 +757,13 @@ module _
     is-equiv-is-pullback : is-equiv g → is-pullback f g c → is-equiv (pr1 c)
     is-equiv-is-pullback is-equiv-g pb =
       is-equiv-is-contr-map
-        ( is-trunc-is-pullback neg-two-𝕋 f g c pb
+        ( is-trunc-vertical-map-is-pullback neg-two-𝕋 f g c pb
           ( is-contr-map-is-equiv is-equiv-g))
 
   abstract
-    is-pullback-is-equiv : is-equiv g → is-equiv (pr1 c) → is-pullback f g c
-    is-pullback-is-equiv is-equiv-g is-equiv-p =
+    is-pullback-is-equiv-vertical-maps :
+      is-equiv g → is-equiv (pr1 c) → is-pullback f g c
+    is-pullback-is-equiv-vertical-maps is-equiv-g is-equiv-p =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-cone f g c
         ( λ a → is-equiv-is-contr
           ( map-fiber-vertical-cone f g c a)
@@ -776,18 +777,18 @@ module _
 
   abstract
     is-equiv-is-pullback' :
-      is-equiv f → is-pullback f g c → is-equiv (pr1 (pr2 c))
+      is-equiv f → is-pullback f g c → is-equiv (horizontal-map-cone f g c)
     is-equiv-is-pullback' is-equiv-f pb =
       is-equiv-is-contr-map
-        ( is-trunc-is-pullback' neg-two-𝕋 f g c pb
+        ( is-trunc-horizontal-map-is-pullback neg-two-𝕋 f g c pb
           ( is-contr-map-is-equiv is-equiv-f))
 
   abstract
-    is-pullback-is-equiv' :
-      is-equiv f → is-equiv (pr1 (pr2 c)) → is-pullback f g c
-    is-pullback-is-equiv' is-equiv-f is-equiv-q =
+    is-pullback-is-equiv-horizontal-maps :
+      is-equiv f → is-equiv (horizontal-map-cone f g c) → is-pullback f g c
+    is-pullback-is-equiv-horizontal-maps is-equiv-f is-equiv-q =
       is-pullback-swap-cone' f g c
-        ( is-pullback-is-equiv g f
+        ( is-pullback-is-equiv-vertical-maps g f
           ( swap-cone f g c)
           is-equiv-f
           is-equiv-q)
