@@ -272,6 +272,15 @@ module _
       ( fam-htpy-parallel-cone c c')
 ```
 
+### The identity cone over the identity cospan
+
+```agda
+id-cone : {l : Level} (A : UU l) → cone (id {A = A}) (id {A = A}) A
+pr1 (id-cone A) = id
+pr1 (pr2 (id-cone A)) = id
+pr2 (pr2 (id-cone A)) = refl-htpy
+```
+
 ## Table of files about pullbacks
 
 The following table lists files that are about pullbacks as a general concept.
