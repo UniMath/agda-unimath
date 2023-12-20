@@ -402,14 +402,13 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) →
     is-pullback g f (swap-cone f g c) → is-pullback f g c
-  is-pullback-swap-cone' f g c is-pb-c' =
+  is-pullback-swap-cone' f g c =
     is-equiv-top-map-triangle
       ( gap g f (swap-cone f g c))
       ( map-commutative-standard-pullback f g)
       ( gap f g c)
       ( triangle-map-commutative-standard-pullback f g c)
       ( is-equiv-map-commutative-standard-pullback f g)
-      ( is-pb-c')
 ```
 
 ### Pullbacks can be "folded"
@@ -490,9 +489,7 @@ module _
             ( refl)
             ( ap pr2 α)) ∙
           ( ap
-            ( concat
-              ( eq-pair (ap pr1 α ∙ inv (ap pr2 α)) refl)
-              ( x , x))
+            ( concat (eq-pair (ap pr1 α ∙ inv (ap pr2 α)) refl) (x , x))
             ( inv (ap-diagonal (ap pr2 α)))))
 
   abstract
@@ -506,7 +503,7 @@ module _
           ( ap
             ( concat' (f a) refl)
             ( ( ap
-                ( λ t → t ∙ inv (ap pr2 (eq-pair p refl)))
+                ( _∙ inv (ap pr2 (eq-pair p refl)))
                 ( ap-pr1-eq-pair p refl)) ∙
               ( ap (λ t → p ∙ inv t) (ap-pr2-eq-pair p refl)) ∙
               ( right-unit)) ∙

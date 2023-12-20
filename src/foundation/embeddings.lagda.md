@@ -361,7 +361,8 @@ module _
       is-pullback f g c → is-emb g → is-emb (vertical-map-cone f g c)
     is-emb-vertical-map-cone-is-pullback pb is-emb-g =
       is-emb-is-prop-map
-        ( is-trunc-vertical-map-is-pullback neg-one-𝕋 f g c pb (is-prop-map-is-emb is-emb-g))
+        ( is-trunc-vertical-map-is-pullback neg-one-𝕋 f g c pb
+          ( is-prop-map-is-emb is-emb-g))
 
   abstract
     is-emb-horizontal-map-cone-is-pullback :

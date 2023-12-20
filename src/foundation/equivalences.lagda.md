@@ -754,8 +754,9 @@ module _
   where
 
   abstract
-    is-equiv-is-pullback : is-equiv g → is-pullback f g c → is-equiv (pr1 c)
-    is-equiv-is-pullback is-equiv-g pb =
+    is-equiv-vertical-map-is-pullback :
+      is-equiv g → is-pullback f g c → is-equiv (pr1 c)
+    is-equiv-vertical-map-is-pullback is-equiv-g pb =
       is-equiv-is-contr-map
         ( is-trunc-vertical-map-is-pullback neg-two-𝕋 f g c pb
           ( is-contr-map-is-equiv is-equiv-g))
@@ -765,10 +766,11 @@ module _
       is-equiv g → is-equiv (pr1 c) → is-pullback f g c
     is-pullback-is-equiv-vertical-maps is-equiv-g is-equiv-p =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-cone f g c
-        ( λ a → is-equiv-is-contr
-          ( map-fiber-vertical-cone f g c a)
-          ( is-contr-map-is-equiv is-equiv-p a)
-          ( is-contr-map-is-equiv is-equiv-g (f a)))
+        ( λ a →
+          is-equiv-is-contr
+            ( map-fiber-vertical-cone f g c a)
+            ( is-contr-map-is-equiv is-equiv-p a)
+            ( is-contr-map-is-equiv is-equiv-g (f a)))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -776,9 +778,9 @@ module _
   where
 
   abstract
-    is-equiv-is-pullback' :
+    is-equiv-horizontal-map-is-pullback :
       is-equiv f → is-pullback f g c → is-equiv (horizontal-map-cone f g c)
-    is-equiv-is-pullback' is-equiv-f pb =
+    is-equiv-horizontal-map-is-pullback is-equiv-f pb =
       is-equiv-is-contr-map
         ( is-trunc-horizontal-map-is-pullback neg-two-𝕋 f g c pb
           ( is-contr-map-is-equiv is-equiv-f))
