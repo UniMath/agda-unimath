@@ -450,7 +450,39 @@ module _
 
 ### The dependent product of a family of maps that are right orthogonal to `f` is again right orthogonal to `f`
 
-If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ map-Π g`.
+If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ (map-Π g)`.
+
+**Proof:** We need to show that the square
+
+```text
+                           (- ∘ f)
+           (B → Πᵢ Xᵢ) ---------------> (A → Πᵢ Xᵢ)
+                |                           |
+                |                           |
+  (map-Π g ∘ -) |                           | (map-Π g ∘ -)
+                |                           |
+                v                           v
+           (B → Πᵢ Yᵢ) ---------------> (A → Πᵢ Yᵢ)
+                           (- ∘ f)
+```
+
+is a pullback. By swapping the argumens at each vertex, this square is
+equivalent to
+
+```text
+                          (map-Π (- ∘ f))
+              (Πᵢ B → Xᵢ) ---------------> (Πᵢ A → Xᵢ)
+                   |                           |
+                   |                           |
+  (map-Π (gᵢ ∘ -)) |                           | (map-Π (gᵢ ∘ -))
+                   |                           |
+                   v                           v
+              (Πᵢ B → Yᵢ) ---------------> (Πᵢ A → Yᵢ)
+                          (map-Π (- ∘ f))
+```
+
+which is a pullback by assumption since pullbacks are preserved by dependent
+products.
 
 ```agda
 module _
@@ -504,23 +536,26 @@ module _
 
 ### Right orthogonality is preserved by postcomposition
 
-If `f ⊥ g` then `f ⊥ postcomp I g` for every type `I`.
+If `f ⊥ g` then `f ⊥ postcomp S g` for every type `S`.
+
+**Proof:** This is a special case of the previous result by taking `g` to be
+constant over `S`.
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} (I : UU l5)
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} (S : UU l5)
   (f : A → B) (g : X → Y)
   where
 
   is-orthogonal-pullback-condition-right-postcomp :
     is-orthogonal-pullback-condition f g →
-    is-orthogonal-pullback-condition f (postcomp I g)
+    is-orthogonal-pullback-condition f (postcomp S g)
   is-orthogonal-pullback-condition-right-postcomp G =
     is-orthogonal-pullback-condition-right-Π f (λ _ → g) (λ _ → G)
 
   is-orthogonal-right-postcomp :
-    is-orthogonal f g → is-orthogonal f (postcomp I g)
+    is-orthogonal f g → is-orthogonal f (postcomp S g)
   is-orthogonal-right-postcomp G =
     is-orthogonal-right-Π f (λ _ → g) (λ _ → G)
 ```
@@ -710,6 +745,9 @@ equivalent to
 
 which is a pullback by assumption and the fact that pullbacks are preserved
 under products.
+
+**Note:** This result can also be seen as a special case of the previous one by
+taking the indexing type to be the two-element type.
 
 ```agda
 module _
