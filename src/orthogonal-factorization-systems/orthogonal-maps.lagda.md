@@ -10,6 +10,7 @@ module orthogonal-factorization-systems.orthogonal-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -21,6 +22,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
@@ -30,6 +32,7 @@ open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -447,8 +450,7 @@ module _
 
 ### The dependent product of a family of maps that are right orthogonal to `f` is again right orthogonal to `f`
 
-In other words, if each `g i` is right orthogonal to `f`, then `map-Π g` is
-right orthogonal to `f`.
+If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ map-Π g`.
 
 ```agda
 module _
@@ -500,7 +502,9 @@ module _
         ( λ i → is-orthogonal-pullback-condition-is-orthogonal f (g i) (G i)))
 ```
 
-### If `g` is right orthogonal to `f` then postcomposition by `g` is right orthogonal to `f`
+### Right orthogonality is preserved by postcomposition
+
+If `f ⊥ g` then `f ⊥ postcomp I g` for every type `I`.
 
 ```agda
 module _
@@ -521,7 +525,9 @@ module _
     is-orthogonal-right-Π f (λ _ → g) (λ _ → G)
 ```
 
-### If `g` and `h` are right orthogonal to `f` then `map-prod g h` is right orthogonal to `f`
+### Right orthogonality is preserved by products
+
+If `f ⊥ g` and `f ⊥ g'`, then `f ⊥ (g × g')`.
 
 ```agda
 module _
@@ -578,9 +584,132 @@ module _
         ( is-orthogonal-pullback-condition-is-orthogonal f g' G'))
 ```
 
+### Left orthogonality is preserved by dependent sums
+
+If `fᵢ ⊥ g` for every `i`, then `(tot f) ⊥ g`.
+
+**Proof:** We need to show that the square
+
+```text
+                   (- ∘ (tot f))
+    ((Σ I B) → X) ---------------> ((Σ I A) → X)
+          |                               |
+          |                               |
+  (g ∘ -) |                               | (g ∘ -)
+          |                               |
+          v                               v
+    ((Σ I B) → Y) ---------------> ((Σ I A) → Y)
+                   (- ∘ (tot f))
+```
+
+is a pullback. However, by the universal property of dependent pair types this
+square is equivalent to
+
+```text
+                    Πᵢ (- ∘ fᵢ)
+        Πᵢ (Bᵢ → X) -----------> Πᵢ (Aᵢ → X)
+             |                        |
+             |                        |
+  Πᵢ (g ∘ -) |                        | Πᵢ (g ∘ -)
+             |                        |
+             v                        v
+        Πᵢ (Bᵢ → Y) -----------> Πᵢ (Aᵢ → Y),
+                    Πᵢ (- ∘ fᵢ)
+```
+
+which is a pullback by assumption and the fact that pullbacks are preserved
+under dependent products.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3} {X : UU l4} {Y : UU l5}
+  (f : (i : I) → A i → B i) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-left-Σ :
+    ((i : I) → is-orthogonal-pullback-condition (f i) g) →
+    is-orthogonal-pullback-condition (tot f) g
+  is-orthogonal-pullback-condition-left-Σ F =
+    is-pullback-top-is-pullback-bottom-cube-is-equiv
+      ( map-Π (λ i → postcomp (B i) g))
+      ( map-Π (λ i → precomp (f i) X))
+      ( map-Π (λ i → precomp (f i) Y))
+      ( map-Π (λ i → postcomp (A i) g))
+      ( postcomp (Σ I B) g)
+      ( precomp (tot f) X)
+      ( precomp (tot f) Y)
+      ( postcomp (Σ I A) g)
+      ( ev-pair)
+      ( ev-pair)
+      ( ev-pair)
+      ( ev-pair)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( λ _ → eq-htpy refl-htpy)
+      ( inv-htpy
+        ( ( right-unit-htpy) ∙h
+          ( ( eq-htpy-refl-htpy) ·r
+            ( ( map-Π (λ i → precomp (f i) Y)) ∘
+              ( map-Π (λ i → postcomp (B i) g)) ∘
+              ( ev-pair)))))
+      ( is-equiv-ev-pair)
+      ( is-equiv-ev-pair)
+      ( is-equiv-ev-pair)
+      ( is-equiv-ev-pair)
+      ( is-pullback-Π
+        ( λ i → precomp (f i) Y)
+        ( λ i → postcomp (A i) g)
+        ( λ i → cone-pullback-hom' (f i) g)
+        ( F))
+
+  is-orthogonal-left-Σ :
+    ((i : I) → is-orthogonal (f i) g) →
+    is-orthogonal (tot f) g
+  is-orthogonal-left-Σ F =
+    is-orthogonal-is-orthogonal-pullback-condition (tot f) g
+      ( is-orthogonal-pullback-condition-left-Σ
+        ( λ i → is-orthogonal-pullback-condition-is-orthogonal (f i) g (F i)))
+```
+
 ### Left orthogonality is preserved by coproducts
 
 If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
+
+**Proof:** We need to show that the square
+
+```text
+                    (- ∘ (f + f'))
+    ((B + B') → X) ---------------> ((A + A') → X)
+          |                               |
+          |                               |
+  (g ∘ -) |                               | (g ∘ -)
+          |                               |
+          v                               v
+    ((B + B') → Y) ---------------> ((A + A') → Y)
+                    (- ∘ (f + f'))
+```
+
+is a pullback. However, by the universal property of coproducts this square is
+equivalent to
+
+```text
+                            (- ∘ f) × (- ∘ f')
+            (B → X) × (B' → X) -----------> (A → X) × (A' → X)
+                    |                               |
+                    |                               |
+  (g ∘ -) × (g ∘ -) |                               | (g ∘ -) × (g ∘ -)
+                    |                               |
+                    v                               v
+            (B → Y) × (B' → Y) -----------> (A → Y) × (A' → Y),
+                            (- ∘ f) × (- ∘ f')
+```
+
+which is a pullback by assumption and the fact that pullbacks are preserved
+under products.
 
 ```agda
 module _
