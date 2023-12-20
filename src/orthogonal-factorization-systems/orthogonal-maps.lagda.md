@@ -260,7 +260,7 @@ module _
         ( H))
 ```
 
-### Right orthogonal maps are closed under composition and have the right cancellation property
+### Right orthogonal maps are closed under composition and have the left cancellation property
 
 Given two composable maps `h` after `g`, if `h` is right orthogonal to `f` then
 `g` is right orthogonal to `f` if and only if `h ∘ g` is.
@@ -356,7 +356,7 @@ module _
         ( is-orthogonal-pullback-condition-is-orthogonal f (h ∘ g) HG))
 ```
 
-### Left orthogonal maps are closed under composition and have the left cancellation property
+### Left orthogonal maps are closed under composition and have the right cancellation property
 
 Given two composable maps `h` after `f`, if `f` is left orthogonal to `g` then
 `h` is left orthogonal to `g` if and only if `h ∘ f` is.
@@ -448,7 +448,7 @@ module _
         ( is-orthogonal-pullback-condition-is-orthogonal (h ∘ f) g HF))
 ```
 
-### The dependent product of a family of maps that are right orthogonal to `f` is again right orthogonal to `f`
+### Right orthogonality is preserved by dependent products
 
 If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ (map-Π g)`.
 
