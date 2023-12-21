@@ -22,7 +22,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import foundation-core.commuting-prisms-of-maps
-open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
