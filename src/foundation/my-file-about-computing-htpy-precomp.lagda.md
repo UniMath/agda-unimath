@@ -10,8 +10,8 @@ module foundation.my-file-about-computing-htpy-precomp where
 open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.precomposition-functions
 open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
