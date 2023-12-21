@@ -16,7 +16,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
-  open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
