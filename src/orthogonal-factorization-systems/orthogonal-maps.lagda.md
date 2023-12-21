@@ -33,6 +33,7 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -295,6 +296,75 @@ module _
     is-orthogonal-pullback-condition f g'
   is-orthogonal-pullback-condition-htpy-right =
     is-orthogonal-pullback-condition-htpy refl-htpy
+```
+
+### Equivalences are orthogonal to every map
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-is-equiv-left :
+    is-equiv f → is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-is-equiv-left is-equiv-f =
+    is-pullback-is-equiv-horizontal-maps
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+      ( is-equiv-precomp-is-equiv f is-equiv-f Y)
+      ( is-equiv-precomp-is-equiv f is-equiv-f X)
+
+  is-orthogonal-is-equiv-left : is-equiv f → is-orthogonal f g
+  is-orthogonal-is-equiv-left is-equiv-f =
+    is-orthogonal-is-orthogonal-pullback-condition f g
+      ( is-orthogonal-pullback-condition-is-equiv-left is-equiv-f)
+
+  is-orthogonal-pullback-condition-is-equiv-right :
+    is-equiv g → is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-is-equiv-right is-equiv-g =
+    is-pullback-is-equiv-vertical-maps
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+      ( is-equiv-postcomp-is-equiv g is-equiv-g A)
+      ( is-equiv-postcomp-is-equiv g is-equiv-g B)
+
+  is-orthogonal-is-equiv-right : is-equiv g → is-orthogonal f g
+  is-orthogonal-is-equiv-right is-equiv-g =
+    is-orthogonal-is-orthogonal-pullback-condition f g
+      ( is-orthogonal-pullback-condition-is-equiv-right is-equiv-g)
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  is-orthogonal-pullback-condition-equiv-left :
+    (f : A ≃ B) (g : X → Y) → is-orthogonal-pullback-condition (map-equiv f) g
+  is-orthogonal-pullback-condition-equiv-left f g =
+    is-orthogonal-pullback-condition-is-equiv-left
+      ( map-equiv f)
+      ( g)
+      ( is-equiv-map-equiv f)
+
+  is-orthogonal-pullback-condition-equiv-right :
+    (f : A → B) (g : X ≃ Y) → is-orthogonal-pullback-condition f (map-equiv g)
+  is-orthogonal-pullback-condition-equiv-right f g =
+    is-orthogonal-pullback-condition-is-equiv-right
+      ( f)
+      ( map-equiv g)
+      ( is-equiv-map-equiv g)
+
+  is-orthogonal-equiv-left :
+    (f : A ≃ B) (g : X → Y) → is-orthogonal (map-equiv f) g
+  is-orthogonal-equiv-left f g =
+    is-orthogonal-is-equiv-left (map-equiv f) g (is-equiv-map-equiv f)
+
+  is-orthogonal-equiv-right :
+    (f : A → B) (g : X ≃ Y) → is-orthogonal f (map-equiv g)
+  is-orthogonal-equiv-right f g =
+    is-orthogonal-is-equiv-right f (map-equiv g) (is-equiv-map-equiv g)
 ```
 
 ### Right orthogonal maps are closed under composition and have the left cancellation property
