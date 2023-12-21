@@ -10,7 +10,6 @@ module foundation.logical-equivalences where
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
-open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -19,6 +18,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

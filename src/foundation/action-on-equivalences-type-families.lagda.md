@@ -49,11 +49,11 @@ determined by the identification `B id-equiv ＝ id-equiv`, and fits in a
                      B
 ```
 
-Note that in general -- in particular in our general constructions below -- we
-need the univalence axiom to construct the action on equivalences of a family of
-types. However, for many specific type families that are defined in terms of the
-basic type constructors, we can construct the action on equivalences directly
-without invoking the univalence axiom.
+**Note:** In general -- in particular in our general constructions below -- we
+need the [univalence axiom](foundation.univalence.md) to construct the action on
+equivalences of a family of types. However, for many specific type families that
+are defined in terms of the basic type constructors, we can construct the action
+on equivalences directly without invoking the univalence axiom.
 
 ## Definitions
 

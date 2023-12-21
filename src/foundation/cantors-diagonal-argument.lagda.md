@@ -8,7 +8,6 @@ module foundation.cantors-diagonal-argument where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -17,6 +16,7 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.propositions
 ```
 

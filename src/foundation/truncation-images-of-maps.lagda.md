@@ -10,17 +10,17 @@ module foundation.truncation-images-of-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.identity-types
-open import foundation.transport-along-identifications
-open import foundation.truncated-maps
 open import foundation.truncations
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.transport-along-identifications
+open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 ```
 

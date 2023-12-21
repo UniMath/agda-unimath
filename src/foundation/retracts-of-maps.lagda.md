@@ -7,18 +7,19 @@ module foundation.retracts-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.functoriality-fibers-of-maps
-open import foundation.homotopies
 open import foundation.morphisms-arrows
-open import foundation.retractions
 open import foundation.retracts-of-types
-open import foundation.sections
 open import foundation.universe-levels
+
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>

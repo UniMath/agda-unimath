@@ -11,20 +11,12 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.iterated-dependent-product-types
 open import foundation.multivariable-homotopies
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.sections
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
