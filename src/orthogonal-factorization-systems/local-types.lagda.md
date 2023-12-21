@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.families-of-equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -118,20 +119,36 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
+  {Y : UU l1} {X : UU l2} {A : X → UU l3} {B : X → UU l4}
+  (f : Y → X)
+  where
+
+  is-local-dependent-type-fam-equiv :
+    fam-equiv A B → is-local-dependent-type f B → is-local-dependent-type f A
+  is-local-dependent-type-fam-equiv e is-local-B =
+    is-equiv-htpy-equiv
+      ( ( equiv-Π-equiv-family (inv-equiv ∘ e ∘ f)) ∘e
+        ( precomp-Π f B , is-local-B) ∘e
+        ( equiv-Π-equiv-family e))
+      ( λ g →
+        eq-htpy (λ y → inv (is-retraction-map-inv-equiv (e (f y)) (g (f y)))))
+
+  is-local-dependent-type-inv-fam-equiv :
+    fam-equiv B A → is-local-dependent-type f B → is-local-dependent-type f A
+  is-local-dependent-type-inv-fam-equiv e =
+    is-local-dependent-type-fam-equiv (inv-equiv ∘ e)
+
+module _
+  {l1 l2 l3 l4 : Level}
   {Y : UU l1} {X : UU l2} {A : UU l3} {B : UU l4}
   (f : Y → X)
   where
 
   is-local-equiv : A ≃ B → is-local f B → is-local f A
-  is-local-equiv e is-local-B =
-    is-equiv-htpy-equiv
-      ( ( equiv-postcomp Y (inv-equiv e)) ∘e
-        ( precomp f B , is-local-B) ∘e
-        ( equiv-postcomp X e))
-      ( λ g → eq-htpy (λ y → inv (is-retraction-map-inv-equiv e (g (f y)))))
+  is-local-equiv e = is-local-dependent-type-fam-equiv f (λ _ → e)
 
   is-local-inv-equiv : B ≃ A → is-local f B → is-local f A
-  is-local-inv-equiv e = is-local-equiv (inv-equiv e)
+  is-local-inv-equiv e = is-local-dependent-type-inv-fam-equiv f (λ _ → e)
 ```
 
 ### If every type is `f`-local, then `f` is an equivalence

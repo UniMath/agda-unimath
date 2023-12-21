@@ -348,6 +348,11 @@ module _
       ( g)
       ( is-equiv-map-equiv f)
 
+  is-orthogonal-equiv-left :
+    (f : A ≃ B) (g : X → Y) → is-orthogonal (map-equiv f) g
+  is-orthogonal-equiv-left f g =
+    is-orthogonal-is-equiv-left (map-equiv f) g (is-equiv-map-equiv f)
+
   is-orthogonal-pullback-condition-equiv-right :
     (f : A → B) (g : X ≃ Y) → is-orthogonal-pullback-condition f (map-equiv g)
   is-orthogonal-pullback-condition-equiv-right f g =
@@ -355,11 +360,6 @@ module _
       ( f)
       ( map-equiv g)
       ( is-equiv-map-equiv g)
-
-  is-orthogonal-equiv-left :
-    (f : A ≃ B) (g : X → Y) → is-orthogonal (map-equiv f) g
-  is-orthogonal-equiv-left f g =
-    is-orthogonal-is-equiv-left (map-equiv f) g (is-equiv-map-equiv f)
 
   is-orthogonal-equiv-right :
     (f : A → B) (g : X ≃ Y) → is-orthogonal f (map-equiv g)
