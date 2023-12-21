@@ -530,10 +530,16 @@ module _
     cocone-span (right-extend-hom-arrow-span s g' h) X
   vertical-comp-hom-arrow-cocone-span =
     vertical-comp-cocone-span
-      ( span-hom-arrow {!!} {!!} {!!})
-      {!!}
-      {!!}
-      {!!}
+      ( span-hom-arrow
+        ( map-domain-hom-arrow g' (right-map-span s) h)
+        ( map-codomain-hom-arrow g' (right-map-span s) h)
+        ( transpose-hom-arrow g' (right-map-span s) h))
+      ( left-map-span s)
+      ( cocone-hom-arrow
+        ( map-domain-hom-arrow g' (right-map-span s) h)
+        ( map-codomain-hom-arrow g' (right-map-span s) h)
+        ( transpose-hom-arrow g' (right-map-span s) h))
+      ( c)
 ```
 
 A variation on the above:
