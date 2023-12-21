@@ -119,13 +119,13 @@ abstract
 ```agda
 abstract
   is-propositional-truncation-trunc-Prop :
-    {l1 l2 : Level} (A : UU l1) →
-    is-propositional-truncation l2 (trunc-Prop A) unit-trunc-Prop
+    {l : Level} (A : UU l) →
+    is-propositional-truncation (trunc-Prop A) unit-trunc-Prop
   is-propositional-truncation-trunc-Prop A =
     is-propositional-truncation-extension-property
       ( trunc-Prop A)
       ( unit-trunc-Prop)
-      ( λ {l} Q → ind-trunc-Prop (λ x → Q))
+      ( λ Q → ind-trunc-Prop (λ x → Q))
 ```
 
 ### The defined propositional truncations satisfy the universal property of propositional truncations
@@ -133,12 +133,12 @@ abstract
 ```agda
 abstract
   universal-property-trunc-Prop :
-    {l1 l2 : Level} (A : UU l1) →
-    universal-property-propositional-truncation l2
+    {l : Level} (A : UU l) →
+    universal-property-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
   universal-property-trunc-Prop A =
-    universal-property-is-propositional-truncation _
+    universal-property-is-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
       ( is-propositional-truncation-trunc-Prop A)
@@ -254,8 +254,8 @@ module _
 ```agda
 abstract
   dependent-universal-property-trunc-Prop :
-    {l1 : Level} {A : UU l1} {l : Level} →
-      dependent-universal-property-propositional-truncation l
+    {l : Level} {A : UU l} →
+      dependent-universal-property-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
   dependent-universal-property-trunc-Prop {A = A} =

@@ -155,14 +155,14 @@ module _
 
 - \[BCDE21\]: Marc Bezem, Thierry Coquand, Peter Dybjer and Martín Escardó. Free
   groups in HoTT/UF in Agda.
-  https://www.cs.bham.ac.uk/~mhe/TypeTopology/Groups.Free.html. 2021.
+  <https://www.cs.bham.ac.uk/~mhe/TypeTopology/Groups.Free.html>. 2021.
 
 - \[MRR88\]: Ray Mines, Fred Richman and Wim Ruitenburg. A Course in
-  Constructive Algebra. Universitext. Springer, 1988. doi:
-  10.1007/978-1-4419-8640-5.
+  Constructive Algebra. Universitext. Springer, 1988.
+  [doi:10.1007/978-1-4419-8640-5](https://doi.org/10.1007/978-1-4419-8640-5).
 
 - \[Wär23\]: David Wärn. Path spaces of pushouts. Preprint.
-  https://dwarn.se/po-paths.pdf. 2023.
+  <https://dwarn.se/po-paths.pdf>. 2023.
 
 ## See also
 

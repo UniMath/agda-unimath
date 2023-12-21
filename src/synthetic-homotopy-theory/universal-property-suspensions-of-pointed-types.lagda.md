@@ -86,7 +86,7 @@ module _
     suspension (type-Ω X) → type-Pointed-Type X
   map-counit-suspension-loop-adjunction =
     map-inv-is-equiv
-      ( up-suspension (type-Ω X) (type-Pointed-Type X))
+      ( up-suspension (type-Pointed-Type X))
       ( point-Pointed-Type X , point-Pointed-Type X , id)
 
   pointed-map-counit-suspension-loop-adjunction :
@@ -94,9 +94,7 @@ module _
   pr1 pointed-map-counit-suspension-loop-adjunction =
     map-counit-suspension-loop-adjunction
   pr2 pointed-map-counit-suspension-loop-adjunction =
-    up-suspension-north-suspension
-      ( type-Ω X)
-      ( type-Pointed-Type X)
+    compute-north-cogap-suspension
       ( point-Pointed-Type X , point-Pointed-Type X , id)
 ```
 
@@ -119,17 +117,13 @@ module _
   inv-transpose-suspension-loop-adjunction :
     (X →∗ Ω Y) → (suspension-Pointed-Type X →∗ Y)
   pr1 (inv-transpose-suspension-loop-adjunction f∗) =
-    map-inv-up-suspension
-      ( type-Pointed-Type X)
-      ( type-Pointed-Type Y)
+    cogap-suspension
       ( suspension-structure-map-into-Ω
         ( type-Pointed-Type X)
         ( Y)
         ( map-pointed-map f∗))
   pr2 (inv-transpose-suspension-loop-adjunction f∗) =
-    up-suspension-north-suspension
-      ( type-Pointed-Type X)
-      ( type-Pointed-Type Y)
+    compute-north-cogap-suspension
       ( suspension-structure-map-into-Ω
         ( type-Pointed-Type X)
         ( Y)
@@ -172,7 +166,7 @@ module _
     ( equiv-right-swap-Σ) ∘e
     ( equiv-Σ-equiv-base
       ( λ c → pr1 c ＝ point-Pointed-Type Y)
-      ( equiv-up-suspension (type-Pointed-Type X) (type-Pointed-Type Y)))
+      ( equiv-up-suspension))
 ```
 
 #### The equivalence in the suspension-loop space adjunction is pointed

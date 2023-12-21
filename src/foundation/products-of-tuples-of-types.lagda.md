@@ -38,13 +38,4 @@ pr-product-tuple-types :
   {l : Level} {n : ℕ} (A : tuple-types l n) (i : Fin n) →
   product-tuple-types n A → A i
 pr-product-tuple-types A i f = f i
-
-{-
-equiv-universal-property-product-tuple-types :
-  {l : Level} {n : ℕ} (A : tuple-types l (succ-ℕ n)) (i : Fin (succ-ℕ n)) →
-  ( product-tuple-types (succ-ℕ n) A) ≃
-  ( ( product-tuple-types n {!!}) × A i)
-equiv-universal-property-product-tuple-types A i =
-  {!!}
-  -}
 ```

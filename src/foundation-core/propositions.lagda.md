@@ -315,6 +315,9 @@ implication-Prop P Q = hom-Prop P Q
 type-implication-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-implication-Prop P Q = type-hom-Prop P Q
+
+infixr 5 _⇒_
+_⇒_ = type-implication-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition

@@ -34,7 +34,7 @@ instance-replacement l {A = A} {B} f =
 
 replacement-axiom-Level : (l l1 l2 : Level) → UU (lsuc l ⊔ lsuc l1 ⊔ lsuc l2)
 replacement-axiom-Level l l1 l2 =
-  {A : UU l1} {B : UU l2} → (f : A → B) → instance-replacement l f
+  {A : UU l1} {B : UU l2} (f : A → B) → instance-replacement l f
 
 replacement-axiom : UUω
 replacement-axiom = {l l1 l2 : Level} → replacement-axiom-Level l l1 l2

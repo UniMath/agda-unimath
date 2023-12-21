@@ -60,24 +60,27 @@ module _
 ### Logical equivalences between propositions
 
 ```agda
-infix 6 _⇔_
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
 
-_⇔_ :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-P ⇔ Q = type-Prop P ↔ type-Prop Q
+  type-iff-Prop : UU (l1 ⊔ l2)
+  type-iff-Prop = type-Prop P ↔ type-Prop Q
 
-is-prop-iff-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  is-prop (P ⇔ Q)
-is-prop-iff-Prop P Q =
-  is-prop-prod
-    ( is-prop-function-type (is-prop-type-Prop Q))
-    ( is-prop-function-type (is-prop-type-Prop P))
+  is-prop-iff-Prop : is-prop type-iff-Prop
+  is-prop-iff-Prop =
+    is-prop-prod
+      ( is-prop-function-type (is-prop-type-Prop Q))
+      ( is-prop-function-type (is-prop-type-Prop P))
 
-iff-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (iff-Prop P Q) = P ⇔ Q
-pr2 (iff-Prop P Q) = is-prop-iff-Prop P Q
+  iff-Prop : Prop (l1 ⊔ l2)
+  pr1 iff-Prop = type-iff-Prop
+  pr2 iff-Prop = is-prop-iff-Prop
+
+  infix 6 _⇔_
+
+  _⇔_ : UU (l1 ⊔ l2)
+  _⇔_ = type-iff-Prop
 ```
 
 ### Composition of logical equivalences

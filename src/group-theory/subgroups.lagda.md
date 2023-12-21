@@ -668,12 +668,15 @@ module _
 
   subset-subgroup-Prop : subset-Group (l1 ⊔ l2) G
   subset-subgroup-Prop x =
-    disj-Prop (Id-Prop (set-Group G) (unit-Group G) x) P
+    disjunction-Prop (Id-Prop (set-Group G) (unit-Group G) x) P
 
   contains-unit-subgroup-Prop :
     contains-unit-subset-Group G subset-subgroup-Prop
   contains-unit-subgroup-Prop =
-    inl-disj-Prop (Id-Prop (set-Group G) (unit-Group G) (unit-Group G)) P refl
+    inl-disjunction-Prop
+      ( Id-Prop (set-Group G) (unit-Group G) (unit-Group G))
+      ( P)
+      ( refl)
 
   is-closed-under-multiplication-subgroup-Prop' :
     (x y : type-Group G) →
@@ -693,7 +696,7 @@ module _
     is-closed-under-multiplication-subset-Group G subset-subgroup-Prop
   is-closed-under-multiplication-subgroup-Prop H K =
     apply-twice-universal-property-trunc-Prop H K
-      ( disj-Prop (Id-Prop (set-Group G) _ _) P)
+      ( disjunction-Prop (Id-Prop (set-Group G) _ _) P)
       ( λ H' K' →
         unit-trunc-Prop
           ( is-closed-under-multiplication-subgroup-Prop' _ _ H' K'))
@@ -710,7 +713,7 @@ module _
     is-closed-under-inverses-subset-Group G subset-subgroup-Prop
   is-closed-under-inverses-subgroup-Prop {x} H =
     apply-universal-property-trunc-Prop H
-      ( disj-Prop (Id-Prop (set-Group G) _ _) P)
+      ( disjunction-Prop (Id-Prop (set-Group G) _ _) P)
       ( unit-trunc-Prop ∘ is-closed-under-inverses-subgroup-Prop')
 
   subgroup-Prop : Subgroup (l1 ⊔ l2) G
