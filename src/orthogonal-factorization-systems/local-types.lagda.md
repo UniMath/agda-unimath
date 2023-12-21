@@ -19,6 +19,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
@@ -149,6 +150,20 @@ module _
 
   is-local-inv-equiv : B ≃ A → is-local f B → is-local f A
   is-local-inv-equiv e = is-local-dependent-type-inv-fam-equiv f (λ _ → e)
+```
+
+### Locality is preserved by homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} {A : UU l3} {f f' : Y → X}
+  where
+
+  is-local-htpy : (H : f ~ f') → is-local f' A → is-local f A
+  is-local-htpy H = is-equiv-htpy (precomp f' A) (htpy-precomp H A)
+
+  is-local-htpy' : (H : f ~ f') → is-local f A → is-local f' A
+  is-local-htpy' H = is-equiv-htpy' (precomp f A) (htpy-precomp H A)
 ```
 
 ### If every type is `f`-local, then `f` is an equivalence
