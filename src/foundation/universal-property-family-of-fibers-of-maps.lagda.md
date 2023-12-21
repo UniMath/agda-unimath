@@ -101,10 +101,10 @@ module _
   where
 
   dependent-universal-property-family-of-fibers :
-    {f : A → B} (F : B → UU l3) (δ : lift-family-of-elements f F) → UUω
+    {f : A → B} (F : B → UU l3) (δ : lift-family-of-elements F f) → UUω
   dependent-universal-property-family-of-fibers F δ =
     {l : Level} (X : (b : B) → F b → UU l) →
-    is-equiv (ev-double-lift-family-of-elements {B = F} δ {X})
+    is-equiv (ev-double-lift-family-of-elements {B = F} {X} δ)
 ```
 
 ### The universal property of the family of fibers of a map
@@ -127,10 +127,10 @@ module _
   where
 
   universal-property-family-of-fibers :
-    {f : A → B} (F : B → UU l3) (δ : lift-family-of-elements f F) → UUω
+    {f : A → B} (F : B → UU l3) (δ : lift-family-of-elements F f) → UUω
   universal-property-family-of-fibers F δ =
     {l : Level} (X : B → UU l) →
-    is-equiv (ev-double-lift-family-of-elements {B = F} δ {λ b _ → X b})
+    is-equiv (ev-double-lift-family-of-elements {B = F} {λ b _ → X b} δ)
 ```
 
 ### The lift of any map to its family of fibers
@@ -140,7 +140,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  lift-family-of-elements-fiber : lift-family-of-elements f (fiber f)
+  lift-family-of-elements-fiber : lift-family-of-elements (fiber f) f
   pr1 (lift-family-of-elements-fiber a) = a
   pr2 (lift-family-of-elements-fiber a) = refl
 ```
@@ -240,7 +240,7 @@ module _
 
   equiv-universal-property-family-of-fibers :
     {l3 : Level} (C : B → UU l3) →
-    ((y : B) → fiber f y → C y) ≃ lift-family-of-elements f C
+    ((y : B) → fiber f y → C y) ≃ lift-family-of-elements C f
   equiv-universal-property-family-of-fibers C =
     equiv-dependent-universal-property-family-of-fibers f (λ y _ → C y)
 ```
@@ -256,7 +256,7 @@ module _
   where
 
   inv-equiv-universal-property-family-of-fibers :
-    (lift-family-of-elements f C) ≃ ((y : B) → fiber f y → C y)
+    (lift-family-of-elements C f) ≃ ((y : B) → fiber f y → C y)
   inv-equiv-universal-property-family-of-fibers =
     inv-equiv-dependent-universal-property-family-of-fibers f (λ y _ → C y)
 ```
@@ -274,7 +274,7 @@ module _
   abstract
     uniqueness-extension-universal-property-family-of-fibers :
       is-contr
-        ( extension-double-lift-family-of-elements δ (λ y (_ : F y) → G y) γ)
+        ( extension-double-lift-family-of-elements (λ y (_ : F y) → G y) δ γ)
     uniqueness-extension-universal-property-family-of-fibers =
       is-contr-equiv
         ( fiber (ev-double-lift-family-of-elements δ) γ)
@@ -283,7 +283,7 @@ module _
 
   abstract
     extension-universal-property-family-of-fibers :
-      extension-double-lift-family-of-elements δ (λ y (_ : F y) → G y) γ
+      extension-double-lift-family-of-elements (λ y (_ : F y) → G y) δ γ
     extension-universal-property-family-of-fibers =
       center uniqueness-extension-universal-property-family-of-fibers
 
@@ -294,8 +294,9 @@ module _
       extension-universal-property-family-of-fibers
 
   is-extension-fiberwise-map-universal-property-family-of-fibers :
-    is-extension-double-lift-family-of-elements δ
+    is-extension-double-lift-family-of-elements
       ( λ y _ → G y)
+      ( δ)
       ( γ)
       ( fiberwise-map-universal-property-family-of-fibers)
   is-extension-fiberwise-map-universal-property-family-of-fibers =
@@ -392,8 +393,9 @@ module _
     pr1 extension-by-fiberwise-equiv-universal-property-family-of-fibers
 
   is-extension-fiberwise-equiv-universal-property-of-fibers :
-    is-extension-double-lift-family-of-elements δ
+    is-extension-double-lift-family-of-elements
       ( λ y _ → G y)
+      ( δ)
       ( γ)
       ( map-fiberwise-equiv
         ( fiberwise-equiv-universal-property-of-fibers))

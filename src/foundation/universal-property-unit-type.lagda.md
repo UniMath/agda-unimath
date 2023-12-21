@@ -64,6 +64,11 @@ equiv-universal-property-unit :
 pr1 (equiv-universal-property-unit Y) = ev-star' Y
 pr2 (equiv-universal-property-unit Y) = universal-property-unit Y
 
+inv-equiv-universal-property-unit :
+  {l : Level} (Y : UU l) → Y ≃ (unit → Y)
+inv-equiv-universal-property-unit Y =
+  inv-equiv (equiv-universal-property-unit Y)
+
 abstract
   is-equiv-point-is-contr :
     {l1 : Level} {X : UU l1} (x : X) →

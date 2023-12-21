@@ -55,7 +55,7 @@ module _
 
   abstract
     universal-property-pullback-cone-fiber :
-      {l : Level} → universal-property-pullback l f (const unit B b) cone-fiber
+      universal-property-pullback f (const unit B b) cone-fiber
     universal-property-pullback-cone-fiber =
       universal-property-pullback-is-pullback f
         ( const unit B b)

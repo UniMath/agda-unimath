@@ -57,8 +57,8 @@ postulate
 
 postulate
   is-truncation-trunc :
-    {l1 l2 : Level} {k : 𝕋} {A : UU l1} →
-    is-truncation l2 (trunc k A) unit-trunc
+    {l : Level} {k : 𝕋} {A : UU l} →
+    is-truncation (trunc k A) unit-trunc
 
 equiv-universal-property-trunc :
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : Truncated-Type l2 k) →
@@ -74,7 +74,7 @@ pr2 (equiv-universal-property-trunc A B) = is-truncation-trunc B
 ```agda
 universal-property-trunc :
   {l1 : Level} (k : 𝕋) (A : UU l1) →
-  {l2 : Level} → universal-property-truncation l2 (trunc k A) unit-trunc
+  universal-property-truncation (trunc k A) unit-trunc
 universal-property-trunc k A =
   universal-property-truncation-is-truncation
     ( trunc k A)
@@ -88,7 +88,7 @@ module _
   apply-universal-property-trunc :
     (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B) →
     Σ ( type-trunc k A → type-Truncated-Type B)
-      ( λ h → (h ∘ unit-trunc) ~ f)
+      ( λ h → h ∘ unit-trunc ~ f)
   apply-universal-property-trunc B f =
     center
       ( universal-property-truncation-is-truncation
@@ -106,7 +106,7 @@ module _
 
   triangle-universal-property-trunc :
     (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B) →
-    (map-universal-property-trunc B f ∘ unit-trunc) ~ f
+    map-universal-property-trunc B f ∘ unit-trunc ~ f
   triangle-universal-property-trunc B f =
     pr2 (apply-universal-property-trunc B f)
 ```
@@ -119,8 +119,7 @@ module _
   where
 
   dependent-universal-property-trunc :
-    {l : Level} →
-    dependent-universal-property-truncation l (trunc k A) unit-trunc
+    dependent-universal-property-truncation (trunc k A) unit-trunc
   dependent-universal-property-trunc =
     dependent-universal-property-truncation-is-truncation
       ( trunc k A)

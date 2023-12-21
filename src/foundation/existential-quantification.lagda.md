@@ -119,24 +119,26 @@ module _
   {l1 l2 l3 : Level} (P : Prop l1) {A : UU l2} (Q : A → Prop l3)
   where
 
-  iff-distributive-conj-exists-Prop :
-    (conj-Prop P (exists-Prop A Q)) ⇔ (exists-Prop A (λ a → conj-Prop P (Q a)))
-  pr1 iff-distributive-conj-exists-Prop (p , e) =
+  iff-distributive-conjunction-exists-Prop :
+    ( conjunction-Prop P (exists-Prop A Q)) ⇔
+    ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
+  pr1 iff-distributive-conjunction-exists-Prop (p , e) =
     elim-exists-Prop Q
-      ( exists-Prop A (λ a → conj-Prop P (Q a)))
+      ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
       ( λ x q → intro-∃ x (p , q))
       ( e)
-  pr2 iff-distributive-conj-exists-Prop =
+  pr2 iff-distributive-conjunction-exists-Prop =
     elim-exists-Prop
-      ( λ x → conj-Prop P (Q x))
-      ( conj-Prop P (exists-Prop A Q))
+      ( λ x → conjunction-Prop P (Q x))
+      ( conjunction-Prop P (exists-Prop A Q))
       ( λ x (p , q) → (p , intro-∃ x q))
 
-  distributive-conj-exists-Prop :
-    conj-Prop P (exists-Prop A Q) ＝ exists-Prop A (λ a → conj-Prop P (Q a))
-  distributive-conj-exists-Prop =
+  distributive-conjunction-exists-Prop :
+    conjunction-Prop P (exists-Prop A Q) ＝
+    exists-Prop A (λ a → conjunction-Prop P (Q a))
+  distributive-conjunction-exists-Prop =
     eq-iff'
-      ( conj-Prop P (exists-Prop A Q))
-      ( exists-Prop A (λ a → conj-Prop P (Q a)))
-      ( iff-distributive-conj-exists-Prop)
+      ( conjunction-Prop P (exists-Prop A Q))
+      ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
+      ( iff-distributive-conjunction-exists-Prop)
 ```
