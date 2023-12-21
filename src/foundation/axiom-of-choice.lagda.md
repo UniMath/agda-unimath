@@ -10,6 +10,7 @@ module foundation.axiom-of-choice where
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
+open import foundation.postcomposition-functions
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.sections
@@ -69,7 +70,7 @@ is-set-projective-AC-0 ac X A B f h =
     ( ( map-Σ
         ( λ g → ((map-surjection f) ∘ g) ＝ h)
         ( precomp h A)
-        ( λ s H → eq-htpy (H ·r h))) ∘
+        ( λ s H → htpy-postcomp X H h)) ∘
       ( section-is-split-surjective (map-surjection f)))
     ( ac B (fiber (map-surjection f)) (is-surjective-map-surjection f))
 

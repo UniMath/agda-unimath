@@ -16,6 +16,7 @@ open import foundation.commuting-squares-of-identifications
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.path-algebra
+open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -721,7 +722,7 @@ module _
           ( (h ∘ bottom-right) ·l H) ∙
           ap
             ( precomp top-left W)
-            ( eq-htpy (h ·l K))
+            ( htpy-precomp K W h)
         by
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
@@ -807,7 +808,7 @@ module _
           ( h ·l (right-bottom ·l H))
       ＝ ap
           ( precomp left-top W)
-          ( eq-htpy (h ·l K)) ∙
+          ( htpy-precomp K W h) ∙
         eq-htpy
           ( (h ∘ right-bottom) ·l H)
         by

@@ -266,7 +266,7 @@ We have the coherence
   (h ·l H) ·r h' ~ h ·l (H ·r h')
 ```
 
-and, in fact, this equation holds definitionally.
+definitionally.
 
 ```agda
 module _

@@ -58,7 +58,7 @@ module _
 htpy-postcomp :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
   {f g : X → Y} → (f ~ g) → postcomp A f ~ postcomp A g
-htpy-postcomp A H h = eq-htpy (H ∘ h)
+htpy-postcomp A H h = eq-htpy (H ·r h)
 
 compute-htpy-postcomp-refl-htpy :
   {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} {C : UU l3} (f : B → C) →
@@ -137,10 +137,9 @@ module _
         ( eq-is-contr
           ( is-contr-map-is-equiv (H X) f)
           { x =
-            pair
-              ( map-inv-is-equiv-is-equiv-postcomp ∘ f)
-              ( ap (λ u → u ∘ f) (is-section-map-inv-is-equiv (H Y) id))}
-          { y = pair id refl}))
+              ( map-inv-is-equiv-is-equiv-postcomp ∘ f) ,
+              ( ap (_∘ f) (is-section-map-inv-is-equiv (H Y) id))}
+          { y = id , refl}))
 
   abstract
     is-equiv-is-equiv-postcomp : is-equiv f
@@ -159,8 +158,7 @@ simplified to that universe.
 is-equiv-is-equiv-postcomp' :
   {l : Level} {X : UU l} {Y : UU l} (f : X → Y) →
   ((A : UU l) → is-equiv (postcomp A f)) → is-equiv f
-is-equiv-is-equiv-postcomp'
-  {l} {X} {Y} f is-equiv-postcomp-f =
+is-equiv-is-equiv-postcomp' {l} {X} {Y} f is-equiv-postcomp-f =
   let section-f = center (is-contr-map-is-equiv (is-equiv-postcomp-f Y) id)
   in
   is-equiv-is-invertible
@@ -171,8 +169,8 @@ is-equiv-is-equiv-postcomp'
         ( pr1)
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-equiv-postcomp-f X) f)
-          ( pair ((pr1 section-f) ∘ f) (ap (λ t → t ∘ f) (pr2 section-f)))
-          ( pair id refl))))
+          ( pr1 section-f ∘ f , ap (_∘ f) (pr2 section-f))
+          ( id , refl))))
 
 abstract
   is-equiv-postcomp-is-equiv :
@@ -208,6 +206,5 @@ module _
   equiv-htpy-postcomp-htpy :
     (e : B ≃ C) (f g : A → B) → (f ~ g) ≃ (map-equiv e ∘ f ~ map-equiv e ∘ g)
   equiv-htpy-postcomp-htpy e f g =
-    equiv-Π-equiv-family
-      ( λ a → equiv-ap e (f a) (g a))
+    equiv-Π-equiv-family (λ a → equiv-ap e (f a) (g a))
 ```
