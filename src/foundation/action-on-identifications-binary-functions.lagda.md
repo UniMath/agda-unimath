@@ -108,6 +108,6 @@ ap-binary-concat :
   (f : A → B → C) (p : a0 ＝ a1) (p' : a1 ＝ a2)
   (q : b0 ＝ b1) (q' : b1 ＝ b2) →
   (ap-binary f (p ∙ p') (q ∙ q')) ＝
-    ((ap-binary f p q) ∙ (ap-binary f p' q'))
+  ((ap-binary f p q) ∙ (ap-binary f p' q'))
 ap-binary-concat f refl refl refl refl = refl
 ```

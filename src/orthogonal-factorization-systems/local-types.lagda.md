@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.local-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -22,6 +23,8 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
@@ -49,44 +52,42 @@ with `is-local-dependent-type` when it does.
 
 ## Definition
 
+### Local dependent types
+
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} (f : Y → X) (A : X → UU l3)
   where
 
-  is-local-dependent-type : {l : Level} → (X → UU l) → UU (l1 ⊔ l2 ⊔ l)
-  is-local-dependent-type A = is-equiv (precomp-Π f A)
+  is-local-dependent-type : UU (l1 ⊔ l2 ⊔ l3)
+  is-local-dependent-type = is-equiv (precomp-Π f A)
 
-  is-local : {l : Level} → UU l → UU (l1 ⊔ l2 ⊔ l)
-  is-local A = is-local-dependent-type (λ _ → A)
+  is-property-is-local-dependent-type : is-prop is-local-dependent-type
+  is-property-is-local-dependent-type = is-property-is-equiv (precomp-Π f A)
+
+  is-local-dependent-type-Prop : Prop (l1 ⊔ l2 ⊔ l3)
+  pr1 is-local-dependent-type-Prop = is-local-dependent-type
+  pr2 is-local-dependent-type-Prop = is-property-is-local-dependent-type
+```
+
+### Local types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} (f : Y → X) (A : UU l3)
+  where
+
+  is-local : UU (l1 ⊔ l2 ⊔ l3)
+  is-local = is-local-dependent-type f (λ _ → A)
+
+  is-property-is-local : is-prop is-local
+  is-property-is-local = is-property-is-local-dependent-type f (λ _ → A)
+
+  is-local-Prop : Prop (l1 ⊔ l2 ⊔ l3)
+  is-local-Prop = is-local-dependent-type-Prop f (λ _ → A)
 ```
 
 ## Properties
-
-### Being local is a property
-
-```agda
-module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
-  where
-
-  is-property-is-local-dependent-type :
-    {l : Level} (A : X → UU l) → is-prop (is-local-dependent-type f A)
-  is-property-is-local-dependent-type A = is-property-is-equiv (precomp-Π f A)
-
-  is-local-dependent-type-Prop :
-    {l : Level} → (X → UU l) → Prop (l1 ⊔ l2 ⊔ l)
-  pr1 (is-local-dependent-type-Prop A) = is-local-dependent-type f A
-  pr2 (is-local-dependent-type-Prop A) = is-property-is-local-dependent-type A
-
-  is-property-is-local :
-    {l : Level} (A : UU l) → is-prop (is-local f A)
-  is-property-is-local A = is-property-is-local-dependent-type (λ _ → A)
-
-  is-local-Prop :
-    {l : Level} → UU l → Prop (l1 ⊔ l2 ⊔ l)
-  is-local-Prop A = is-local-dependent-type-Prop (λ _ → A)
-```
 
 ### Being local distributes over Π-types
 
@@ -102,8 +103,8 @@ module _
   map-distributive-Π-is-local-dependent-type B f-loc =
     is-equiv-map-equiv
       ( ( equiv-swap-Π) ∘e
-        ( ( equiv-Π-equiv-family (λ a → precomp-Π f (B a) , (f-loc a))) ∘e
-          ( equiv-swap-Π)))
+        ( equiv-Π-equiv-family (λ a → precomp-Π f (B a) , (f-loc a))) ∘e
+        ( equiv-swap-Π))
 
   map-distributive-Π-is-local :
     {l3 l4 : Level} {A : UU l3} (B : A → UU l4) →
@@ -113,6 +114,61 @@ module _
     map-distributive-Π-is-local-dependent-type (λ a _ → B a)
 ```
 
+### If `S` is `f`-local then `S` is local at every retract of `f`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R : f retract-of-map g) (S : UU l5)
+  where
+
+  is-local-retract-map-is-local : is-local g S → is-local f S
+  is-local-retract-map-is-local =
+    is-equiv-retract-map-is-equiv
+      ( precomp f S)
+      ( precomp g S)
+      ( retract-precomp-retract-map f g R S)
+```
+
+In fact, the higher coherence of the retract is not needed:
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R₀ : A retract-of X) (R₁ : B retract-of Y)
+  (i : coherence-square-maps' (inclusion-retract R₀) f g (inclusion-retract R₁))
+  (r :
+    coherence-square-maps'
+      ( map-retraction-retract R₀)
+      ( g)
+      ( f)
+      ( map-retraction-retract R₁))
+  (S : UU l5)
+  where
+
+  is-local-retract-map-is-local' : is-local g S → is-local f S
+  is-local-retract-map-is-local' =
+    is-equiv-retract-map-is-equiv'
+      ( precomp f S)
+      ( precomp g S)
+      ( retract-precomp R₁ S)
+      ( retract-precomp R₀ S)
+      ( precomp-coherence-square-maps
+        ( g)
+        ( map-retraction-retract R₀)
+        ( map-retraction-retract R₁)
+        ( f)
+        ( r)
+        ( S))
+      ( precomp-coherence-square-maps
+        ( f)
+        ( inclusion-retract R₀)
+        ( inclusion-retract R₁)
+        ( g)
+        ( i)
+        ( S))
+```
+
 ### If every type is `f`-local, then `f` is an equivalence
 
 ```agda
@@ -120,8 +176,7 @@ module _
   {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
   where
 
-  is-equiv-is-local :
-    ({l : Level} (A : UU l) → is-local f A) → is-equiv f
+  is-equiv-is-local : ({l : Level} (A : UU l) → is-local f A) → is-equiv f
   is-equiv-is-local = is-equiv-is-equiv-precomp f
 ```
 
@@ -169,8 +224,8 @@ module _
     is-local-dependent-type f A
   is-local-dependent-type-is-prop A is-prop-A =
     is-equiv-is-prop
-      (is-prop-Π is-prop-A)
-      (is-prop-Π (is-prop-A ∘ f))
+      ( is-prop-Π is-prop-A)
+      ( is-prop-Π (is-prop-A ∘ f))
 
   is-local-is-prop :
     {l : Level} (A : UU l) →

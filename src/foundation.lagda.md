@@ -219,6 +219,7 @@ open import foundation.multivariable-homotopies public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
 open import foundation.multivariable-sections public
+open import foundation.my-file-about-computing-htpy-precomp public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public

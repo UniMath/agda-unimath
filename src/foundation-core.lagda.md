@@ -31,7 +31,6 @@ open import foundation-core.function-extensionality public
 open import foundation-core.function-types public
 open import foundation-core.functoriality-dependent-function-types public
 open import foundation-core.functoriality-dependent-pair-types public
-open import foundation-core.functoriality-function-types public
 open import foundation-core.homotopies public
 open import foundation-core.identity-types public
 open import foundation-core.injective-maps public

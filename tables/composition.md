@@ -16,7 +16,6 @@
 | Functoriality of dependent function types                   | [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.md)           |
 | Functoriality of dependent function types (foundation-core) | [`foundation-core.functoriality-dependent-function-types`](foundation-core.functoriality-dependent-function-types.md) |
 | Functoriality of function types                             | [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md)                               |
-| Functoriality of function types (foundation-core)           | [`foundation-core.functoriality-function-types`](foundation-core.functoriality-function-types.md)                     |
 | Implicit function types                                     | [`foundation.implicit-function-types`](foundation.implicit-function-types.md)                                         |
 | Iterating functions                                         | [`foundation.iterating-functions`](foundation.iterating-functions.md)                                                 |
 | Postcomposition                                             | [`foundation.postcomposition`](foundation.postcomposition-functions.md)                                               |

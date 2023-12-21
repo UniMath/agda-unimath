@@ -13,8 +13,10 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-triangles-of-maps
 open import foundation.equivalences
 open import foundation.path-algebra
+open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -23,7 +25,6 @@ open import foundation-core.commuting-prisms-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-extensionality
 open import foundation-core.function-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
@@ -151,21 +152,62 @@ coherence-square-inv-all top left right bottom H =
       ( H))
 ```
 
-### Any commuting square of maps induces a commuting square of function spaces
+### Any commuting square of maps induces a commuting square of function spaces via precomposition
 
 ```agda
-precomp-coherence-square-maps :
+module _
   {l1 l2 l3 l4 l5 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D) →
-  coherence-square-maps top left right bottom → (X : UU l5) →
-  coherence-square-maps
-    ( precomp right X)
-    ( precomp bottom X)
-    ( precomp top X)
-    ( precomp left X)
-precomp-coherence-square-maps top left right bottom H X =
-  htpy-precomp H X
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  where
+
+  precomp-coherence-square-maps :
+    coherence-square-maps top left right bottom → (X : UU l5) →
+    coherence-square-maps
+      ( precomp right X)
+      ( precomp bottom X)
+      ( precomp top X)
+      ( precomp left X)
+  precomp-coherence-square-maps = htpy-precomp
+
+  precomp-coherence-square-maps' :
+    coherence-square-maps' top left right bottom → (X : UU l5) →
+    coherence-square-maps'
+      ( precomp right X)
+      ( precomp bottom X)
+      ( precomp top X)
+      ( precomp left X)
+  precomp-coherence-square-maps' = htpy-precomp
+```
+
+### Any commuting square of maps induces a commuting square of function spaces via postcomposition
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  where
+
+  postcomp-coherence-square-maps :
+    (X : UU l5) →
+    coherence-square-maps top left right bottom →
+    coherence-square-maps
+      ( postcomp X top)
+      ( postcomp X left)
+      ( postcomp X right)
+      ( postcomp X bottom)
+  postcomp-coherence-square-maps X = htpy-postcomp X
+
+  postcomp-coherence-square-maps' :
+    (X : UU l5) →
+    coherence-square-maps' top left right bottom →
+    coherence-square-maps'
+      ( postcomp X top)
+      ( postcomp X left)
+      ( postcomp X right)
+      ( postcomp X bottom)
+  postcomp-coherence-square-maps' X = htpy-postcomp X
 ```
 
 ## Properties
@@ -609,7 +651,7 @@ them.
       tl       tr                tr ∘ tl
   A -----> B -----> C         A --------> C
   |        |        |         |           |
-l |       m|        | r |->  l|          r|
+l |       m|        | r  ↦   l|          r|
   |   H    |   K    |         |   H | K   |
   v        v        v         v           v
   X -----> Y -----> Z         X --------> Z

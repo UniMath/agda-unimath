@@ -8,8 +8,9 @@ module foundation.partial-functions where
 
 ```agda
 open import foundation.partial-elements
-open import foundation.propositions
 open import foundation.universe-levels
+
+open import foundation-core.propositions
 ```
 
 </details>

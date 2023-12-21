@@ -7,17 +7,23 @@ module foundation.retracts-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-prisms-of-maps
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.morphisms-arrows
+open import foundation.precomposition-functions
 open import foundation.retracts-of-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
-open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -55,7 +61,7 @@ witnessing that the left and right
 coherence
 
 ```text
-                    r₀ ·r i₀
+                     r ·r i₀
        r₁ ∘ g ∘ i₀ ----------> f ∘ r₀ ∘ i₀
             |                      |
             |                      |
@@ -70,6 +76,20 @@ witnessing that the
 [square of homotopies](foundation.commuting-squares-of-homotopies.md) commutes,
 where `H₀` and `H₁` are the retracting homotopies of `r₀ ∘ i₀` and `r₁ ∘ i₁`
 respectively.
+
+This coherence arises from the implicit requirement that the total pasting of
+the retraction square should restrict the the reflixivity homotopy on the square
+
+```text
+    A ========= A
+    |           |
+  f | refl-htpy | f
+    v           v
+    B ========= B,
+```
+
+as we are asking for the morphisms to compose to the identity morphism of
+arrows.
 
 ## Definition
 
@@ -128,16 +148,16 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y) (i : hom-arrow f g) (r : hom-arrow g f)
-  where
-
-  coherence-retract-map :
-    is-retraction (map-domain-hom-arrow f g i) (map-domain-hom-arrow g f r) →
+  (H : is-retraction (map-domain-hom-arrow f g i) (map-domain-hom-arrow g f r))
+  (H' :
     is-retraction
       ( map-codomain-hom-arrow f g i)
-      ( map-codomain-hom-arrow g f r) →
-    UU (l1 ⊔ l2)
+      ( map-codomain-hom-arrow g f r))
+  where
+
+  coherence-retract-map : UU (l1 ⊔ l2)
   coherence-retract-map =
-    coherence-htpy-hom-arrow f f (comp-hom-arrow f g f r i) id-hom-arrow
+    coherence-htpy-hom-arrow f f (comp-hom-arrow f g f r i) id-hom-arrow H H'
 ```
 
 ### The binary relation `f g ↦ f retract-of-map g` asserting that `f` is a retract of the map `g`
@@ -326,7 +346,7 @@ module _
 In fact, we only need the following data to show this:
 
 ```text
-         i₀    H   r₀
+         i₀   H   r₀
     A ------> X ------> A
     |         |
   f |    i    | g
@@ -382,7 +402,7 @@ module _
 
 ### Equivalences are closed under retracts of maps
 
-Note that the higher coherence of a retract of maps is not needed.
+We may observe that the higher coherence of a retract of maps is not needed.
 
 ```agda
 module _
@@ -679,6 +699,91 @@ module _
       ( inclusion-fiber f)
       ( inclusion-fiber g)
       ( retract-map-inclusion-fiber-retract-map f g R b)
+```
+
+### If `f` is a retract of `g`, then `- ∘ f` is a retract of `- ∘ g`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R : f retract-of-map g) (S : UU l5)
+  where
+
+  inclusion-precomp-retract-map : hom-arrow (precomp f S) (precomp g S)
+  inclusion-precomp-retract-map =
+    precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+
+  hom-retraction-precomp-retract-map : hom-arrow (precomp g S) (precomp f S)
+  hom-retraction-precomp-retract-map =
+    precomp-hom-arrow f g (inclusion-retract-map f g R) S
+
+  is-retraction-map-domain-precomp-retract-map :
+    is-retraction
+      ( map-domain-hom-arrow
+        ( precomp f S)
+        ( precomp g S)
+        ( inclusion-precomp-retract-map))
+      ( map-domain-hom-arrow
+        ( precomp g S)
+        ( precomp f S)
+        ( hom-retraction-precomp-retract-map))
+  is-retraction-map-domain-precomp-retract-map =
+    htpy-precomp (is-retraction-map-codomain-hom-retraction-retract-map f g R) S
+
+  is-retraction-map-codomain-precomp-retract-map :
+    is-retraction
+      ( map-codomain-hom-arrow
+        ( precomp f S)
+        ( precomp g S)
+        ( inclusion-precomp-retract-map))
+      ( map-codomain-hom-arrow
+        ( precomp g S)
+        ( precomp f S)
+        ( hom-retraction-precomp-retract-map))
+  is-retraction-map-codomain-precomp-retract-map =
+    htpy-precomp (is-retraction-map-domain-hom-retraction-retract-map f g R) S
+
+  coh-retract-precomp-retract-map :
+    coherence-retract-map
+      ( precomp f S)
+      ( precomp g S)
+      ( inclusion-precomp-retract-map)
+      ( hom-retraction-precomp-retract-map)
+      ( is-retraction-map-domain-precomp-retract-map)
+      ( is-retraction-map-codomain-precomp-retract-map)
+  coh-retract-precomp-retract-map =
+    ( precomp-vertical-coherence-prism-inv-triangles-maps
+      ( id)
+      ( map-domain-hom-retraction-retract-map f g R)
+      ( map-domain-inclusion-retract-map f g R)
+      ( id)
+      ( map-codomain-hom-retraction-retract-map f g R)
+      ( map-codomain-inclusion-retract-map f g R)
+      ( f)
+      ( g)
+      ( f)
+      ( is-retraction-map-domain-hom-retraction-retract-map f g R)
+      ( refl-htpy)
+      ( coh-hom-retraction-retract-map f g R)
+      ( coh-inclusion-retract-map f g R)
+      ( is-retraction-map-codomain-hom-retraction-retract-map f g R)
+      ( coh-retract-map f g R)
+      ( S)) ∙h
+    ( ap-concat-htpy
+      ( is-retraction-map-codomain-precomp-retract-map ·r precomp f S)
+      ( λ x → ap inv (eq-htpy-refl-htpy (precomp f S x))))
+
+  retract-precomp-retract-map : (precomp f S) retract-of-map (precomp g S)
+  pr1 retract-precomp-retract-map =
+    precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+  pr1 (pr2 retract-precomp-retract-map) =
+    precomp-hom-arrow f g (inclusion-retract-map f g R) S
+  pr1 (pr2 (pr2 retract-precomp-retract-map)) =
+    is-retraction-map-domain-precomp-retract-map
+  pr1 (pr2 (pr2 (pr2 retract-precomp-retract-map))) =
+    is-retraction-map-codomain-precomp-retract-map
+  pr2 (pr2 (pr2 (pr2 retract-precomp-retract-map))) =
+    coh-retract-precomp-retract-map
 ```
 
 ## References
