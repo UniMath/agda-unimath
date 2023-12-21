@@ -30,8 +30,8 @@ The
 {{#concept "function extensionality axiom" Agda=function-extensionality Agda=funext}}
 asserts that [identifications](foundation-core.identity-types.md) of (dependent)
 functions are [equivalently](foundation-core.equivalences.md) described as
-pointwise equalities between them. In other words, a function is completely
-determined by its values.
+[homotopies](foundation-core.homotopies.md) between them. In other words, a
+function is completely determined by its values.
 
 ## Definitions
 
@@ -73,7 +73,7 @@ This property asserts that, _given_ a function `f`, the map
   htpy-eq : f ＝ g → f ~ g
 ```
 
-is an equivalence is an equivalence for any function `g` of the same type.
+is an equivalence for any function `g` of the same type.
 
 ```agda
 module _

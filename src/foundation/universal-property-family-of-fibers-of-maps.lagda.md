@@ -47,7 +47,7 @@ the type family `(fiber f) ∘ f : A → 𝒰`, which always has a section given
 
 We can uniquely characterize the family of fibers `fiber f : B → 𝒰` as the
 initial type family equipped with such a section. Explicitly, the
-{{#concept "universal property of the family of fibers" Disambiguation="of a map"}}
+{{#concept "universal property of the family of fibers" Disambiguation="maps"}}
 `fiber f : B → 𝒰` of a map `f` is that the precomposition operation
 
 ```text

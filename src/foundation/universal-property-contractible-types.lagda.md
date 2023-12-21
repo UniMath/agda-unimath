@@ -35,11 +35,18 @@ states that, given a point `a : A`, the evaluating map
 is an [equivalence](foundation-core.equivalences.md) for every type family
 `P : A → 𝒰`.
 
-That `ev-point` is a [section](foundation-core.sections.md) corresponds to that
-contractible types satisfy
-[singleton induction](foundation-core.singleton-induction.md), while the
-[retraction](foundation-core.retractions.md) corresponds to uniqueness of this
-induction principle.
+The condition that `ev-point` has a [section](foundation-core.sections.md)
+
+```text
+  P a → ((x : A) → P x)
+```
+
+is another way of phrasing that the type satisfies
+[singleton induction](foundation-core.singleton-induction.md). Furthermore, the
+condition that `ev-point` has a [retraction](foundation-core.retractions.md)
+asserts that all dependent functions `(x : A) → P x` are fully determined by
+their value at `a`, thus, in particular, that the section of `ev-point` is
+unique.
 
 ## Definitions
 
@@ -47,11 +54,11 @@ induction principle.
 
 ```agda
 module _
-  {l1 : Level} {A : UU l1}
+  {l1 : Level} {A : UU l1} (a : A)
   where
 
-  dependent-universal-property-contr : (a : A) → UUω
-  dependent-universal-property-contr a =
+  dependent-universal-property-contr : UUω
+  dependent-universal-property-contr =
     {l : Level} (P : A → UU l) → is-equiv (ev-point a {P})
 ```
 

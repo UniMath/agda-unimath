@@ -13,6 +13,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.universe-levels
 
+open import foundation.dependent-pair-types
+open import foundation.implicit-function-types
+open import foundation.injective-maps
+open import foundation.universe-levels
+
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -26,9 +32,9 @@ open import foundation-core.precomposition-functions
 
 The {{#concept "function extensionality axiom"}} asserts that
 [identifications](foundation-core.identity-types.md) of (dependent) functions
-are [equivalently](foundation-core.equivalences.md) described as pointwise
-equalities between them. In other words, a function is completely determined by
-its values.
+are [equivalently](foundation-core.equivalences.md) described as
+[homotopies](foundation-core.homotopies.md) between them. In other words, a
+function is completely determined by its values.
 
 ## Properties
 
@@ -102,6 +108,18 @@ coherence-square-eq-htpy-ap-precomp {C = C} f g h =
 ```
 
 ### `eq-htpy` preserves inverses
+
+In other words, we have a commutative diagram
+
+```text
+                  inv
+       (f ＝ g) --------> (g ＝ f)
+          ^                  ^
+  eq-htpy |                  | eq-htpy
+          |                  |
+       (f ~ g) ---------> (g ~ f).
+                inv-htpy
+```
 
 ```agda
 module _

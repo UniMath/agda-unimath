@@ -18,6 +18,7 @@ open import foundation.unordered-pairs
 
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-function-types
 
 open import univalent-combinatorics.standard-finite-types
 ```
