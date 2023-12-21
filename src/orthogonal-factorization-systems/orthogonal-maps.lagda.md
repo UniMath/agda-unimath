@@ -260,6 +260,43 @@ module _
         ( H))
 ```
 
+### Orthogonality is preserved by homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-htpy :
+    {f' : A → B} {g' : X → Y} → f ~ f' → g ~ g' →
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f' g'
+  is-orthogonal-pullback-condition-htpy F G =
+    is-pullback-htpy'
+      ( htpy-precomp F Y)
+      ( htpy-postcomp A G)
+      ( cone-pullback-hom' f g)
+      ( ( htpy-postcomp B G) ,
+        ( htpy-precomp F X) ,
+        ( ( commutative-htpy-postcomp-htpy-precomp F G) ∙h
+          ( inv-htpy-right-unit-htpy)))
+
+  is-orthogonal-pullback-condition-htpy-left :
+    {f' : A → B} → f ~ f' →
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f' g
+  is-orthogonal-pullback-condition-htpy-left F =
+    is-orthogonal-pullback-condition-htpy F refl-htpy
+
+  is-orthogonal-pullback-condition-htpy-right :
+    {g' : X → Y} → g ~ g' →
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f g'
+  is-orthogonal-pullback-condition-htpy-right =
+    is-orthogonal-pullback-condition-htpy refl-htpy
+```
+
 ### Right orthogonal maps are closed under composition and have the left cancellation property
 
 Given two composable maps `h` after `g`, if `h` is right orthogonal to `f` then
