@@ -73,7 +73,7 @@ This property asserts that, _given_ a function `f`, the map
   htpy-eq : f ＝ g → f ~ g
 ```
 
-is an equivalence is an equivalence for any function `g` of the same type.
+is an equivalence for any function `g` of the same type.
 
 ```agda
 module _
