@@ -11,8 +11,6 @@ open import foundation-core.function-extensionality public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
-open import foundation.universe-levels
-
 open import foundation.dependent-pair-types
 open import foundation.implicit-function-types
 open import foundation.injective-maps

@@ -24,17 +24,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import foundation-core.equivalences
-open import foundation.dependent-pair-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.morphisms-arrows
-open import foundation.retracts-of-types
-open import foundation.universe-levels
-
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
-open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
