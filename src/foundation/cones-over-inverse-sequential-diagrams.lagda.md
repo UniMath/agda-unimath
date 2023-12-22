@@ -59,10 +59,15 @@ module _
   cone-inverse-sequential-diagram X =
     Σ ( (n : ℕ) → X → type-inverse-sequential-diagram A n)
       ( λ f →
-        (n : ℕ) → coherence-triangle-maps (f n) (map-inverse-sequential-diagram A n) (f (succ-ℕ n)))
+        (n : ℕ) →
+        coherence-triangle-maps
+          ( f n)
+          ( map-inverse-sequential-diagram A n)
+          ( f (succ-ℕ n)))
 
   map-cone-inverse-sequential-diagram :
-    {l2 : Level} {X : UU l2} → cone-inverse-sequential-diagram X → (n : ℕ) → X → type-inverse-sequential-diagram A n
+    {l2 : Level} {X : UU l2} → cone-inverse-sequential-diagram X →
+    (n : ℕ) → X → type-inverse-sequential-diagram A n
   map-cone-inverse-sequential-diagram = pr1
 
   coherence-cone-inverse-sequential-diagram :
@@ -83,55 +88,71 @@ module _
 
   coherence-htpy-cone-inverse-sequential-diagram :
     (c c' : cone-inverse-sequential-diagram A X) →
-    ((n : ℕ) → map-cone-inverse-sequential-diagram A c n ~ map-cone-inverse-sequential-diagram A c' n) → UU (l1 ⊔ l2)
+    ( (n : ℕ) →
+      map-cone-inverse-sequential-diagram A c n ~
+      map-cone-inverse-sequential-diagram A c' n) →
+    UU (l1 ⊔ l2)
   coherence-htpy-cone-inverse-sequential-diagram c c' H =
     (n : ℕ) →
-    ( coherence-cone-inverse-sequential-diagram A c n ∙h (map-inverse-sequential-diagram A n ·l H (succ-ℕ n))) ~
+    ( coherence-cone-inverse-sequential-diagram A c n ∙h
+      map-inverse-sequential-diagram A n ·l H (succ-ℕ n)) ~
     ( H n ∙h coherence-cone-inverse-sequential-diagram A c' n)
 
   htpy-cone-inverse-sequential-diagram :
-    cone-inverse-sequential-diagram A X → cone-inverse-sequential-diagram A X → UU (l1 ⊔ l2)
+    cone-inverse-sequential-diagram A X →
+    cone-inverse-sequential-diagram A X →
+    UU (l1 ⊔ l2)
   htpy-cone-inverse-sequential-diagram c c' =
-    Σ ( (n : ℕ) → map-cone-inverse-sequential-diagram A c n ~ map-cone-inverse-sequential-diagram A c' n)
+    Σ ( (n : ℕ) →
+        map-cone-inverse-sequential-diagram A c n ~
+        map-cone-inverse-sequential-diagram A c' n)
       ( coherence-htpy-cone-inverse-sequential-diagram c c')
 
   refl-htpy-cone-inverse-sequential-diagram :
-    (c : cone-inverse-sequential-diagram A X) → htpy-cone-inverse-sequential-diagram c c
+    (c : cone-inverse-sequential-diagram A X) →
+    htpy-cone-inverse-sequential-diagram c c
   pr1 (refl-htpy-cone-inverse-sequential-diagram c) n = refl-htpy
   pr2 (refl-htpy-cone-inverse-sequential-diagram c) n = right-unit-htpy
 
   htpy-eq-cone-inverse-sequential-diagram :
-    (c c' : cone-inverse-sequential-diagram A X) → c ＝ c' → htpy-cone-inverse-sequential-diagram c c'
+    (c c' : cone-inverse-sequential-diagram A X) →
+    c ＝ c' → htpy-cone-inverse-sequential-diagram c c'
   htpy-eq-cone-inverse-sequential-diagram c .c refl =
     refl-htpy-cone-inverse-sequential-diagram c
 
   is-torsorial-htpy-cone-inverse-sequential-diagram :
-    (c : cone-inverse-sequential-diagram A X) → is-torsorial (htpy-cone-inverse-sequential-diagram c)
+    (c : cone-inverse-sequential-diagram A X) →
+    is-torsorial (htpy-cone-inverse-sequential-diagram c)
   is-torsorial-htpy-cone-inverse-sequential-diagram c =
     is-torsorial-Eq-structure
       ( λ x z → coherence-htpy-cone-inverse-sequential-diagram c (x , z))
       ( is-torsorial-binary-htpy (map-cone-inverse-sequential-diagram A c))
       ( map-cone-inverse-sequential-diagram A c , (λ n → refl-htpy))
       ( is-torsorial-Eq-Π
-        ( λ n → (coherence-cone-inverse-sequential-diagram A c n ∙h refl-htpy) ~_)
-        ( λ n → is-torsorial-htpy (coherence-cone-inverse-sequential-diagram A c n ∙h refl-htpy)))
+        ( λ n → coherence-cone-inverse-sequential-diagram A c n ∙h refl-htpy ~_)
+        ( λ n →
+          is-torsorial-htpy
+            ( coherence-cone-inverse-sequential-diagram A c n ∙h refl-htpy)))
 
   is-equiv-htpy-eq-cone-inverse-sequential-diagram :
-    (c c' : cone-inverse-sequential-diagram A X) → is-equiv (htpy-eq-cone-inverse-sequential-diagram c c')
+    (c c' : cone-inverse-sequential-diagram A X) →
+    is-equiv (htpy-eq-cone-inverse-sequential-diagram c c')
   is-equiv-htpy-eq-cone-inverse-sequential-diagram c =
     fundamental-theorem-id
       ( is-torsorial-htpy-cone-inverse-sequential-diagram c)
       ( htpy-eq-cone-inverse-sequential-diagram c)
 
   extensionality-cone-inverse-sequential-diagram :
-    (c c' : cone-inverse-sequential-diagram A X) → (c ＝ c') ≃ htpy-cone-inverse-sequential-diagram c c'
+    (c c' : cone-inverse-sequential-diagram A X) →
+    (c ＝ c') ≃ htpy-cone-inverse-sequential-diagram c c'
   pr1 (extensionality-cone-inverse-sequential-diagram c c') =
     htpy-eq-cone-inverse-sequential-diagram c c'
   pr2 (extensionality-cone-inverse-sequential-diagram c c') =
     is-equiv-htpy-eq-cone-inverse-sequential-diagram c c'
 
   eq-htpy-cone-inverse-sequential-diagram :
-    (c c' : cone-inverse-sequential-diagram A X) → htpy-cone-inverse-sequential-diagram c c' → c ＝ c'
+    (c c' : cone-inverse-sequential-diagram A X) →
+    htpy-cone-inverse-sequential-diagram c c' → c ＝ c'
   eq-htpy-cone-inverse-sequential-diagram c c' =
     map-inv-equiv (extensionality-cone-inverse-sequential-diagram c c')
 ```
@@ -144,7 +165,8 @@ module _
   where
 
   cone-map-inverse-sequential-diagram :
-    cone-inverse-sequential-diagram A X → (Y → X) → cone-inverse-sequential-diagram A Y
+    cone-inverse-sequential-diagram A X →
+    (Y → X) → cone-inverse-sequential-diagram A Y
   pr1 (cone-map-inverse-sequential-diagram c f) n x =
     map-cone-inverse-sequential-diagram A c n (f x)
   pr2 (cone-map-inverse-sequential-diagram c f) n x =
@@ -155,11 +177,14 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (X : UU l1) (A : inverse-sequential-diagram l2) {Y : UU l3} (c : cone-inverse-sequential-diagram A Y)
+  {l1 l2 l3 : Level} (X : UU l1) (A : inverse-sequential-diagram l2)
+  {Y : UU l3} (c : cone-inverse-sequential-diagram A Y)
   where
 
   cone-postcomp-inverse-sequential-diagram :
-    cone-inverse-sequential-diagram (postcomp-inverse-sequential-diagram X A) (X → Y)
+    cone-inverse-sequential-diagram
+      ( postcomp-inverse-sequential-diagram X A)
+      ( X → Y)
   pr1 cone-postcomp-inverse-sequential-diagram n g x =
     map-cone-inverse-sequential-diagram A c n (g x)
   pr2 cone-postcomp-inverse-sequential-diagram n g =

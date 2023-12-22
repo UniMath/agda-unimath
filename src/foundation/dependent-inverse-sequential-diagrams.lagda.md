@@ -48,23 +48,29 @@ sequence-map-dependent-inverse-sequential-diagram :
   {l1 l2 : Level} (A : inverse-sequential-diagram l1) →
   ((n : ℕ) → type-inverse-sequential-diagram A n → UU l2) → UU (l1 ⊔ l2)
 sequence-map-dependent-inverse-sequential-diagram A B =
-  (n : ℕ) (x : type-inverse-sequential-diagram A (succ-ℕ n)) → B (succ-ℕ n) x → B n (map-inverse-sequential-diagram A n x)
+  (n : ℕ) (x : type-inverse-sequential-diagram A (succ-ℕ n)) →
+  B (succ-ℕ n) x → B n (map-inverse-sequential-diagram A n x)
 
 dependent-inverse-sequential-diagram :
-  {l1 : Level} (l2 : Level) (A : inverse-sequential-diagram l1) → UU (l1 ⊔ lsuc l2)
+  {l1 : Level} (l2 : Level) (A : inverse-sequential-diagram l1) →
+  UU (l1 ⊔ lsuc l2)
 dependent-inverse-sequential-diagram l2 A =
-  Σ ((n : ℕ) → type-inverse-sequential-diagram A n → UU l2) (sequence-map-dependent-inverse-sequential-diagram A)
+  Σ ( (n : ℕ) → type-inverse-sequential-diagram A n → UU l2)
+    ( sequence-map-dependent-inverse-sequential-diagram A)
 
 family-dependent-inverse-sequential-diagram :
   {l1 l2 : Level} {A : inverse-sequential-diagram l1} →
-  dependent-inverse-sequential-diagram l2 A → ((n : ℕ) → type-inverse-sequential-diagram A n → UU l2)
+  dependent-inverse-sequential-diagram l2 A →
+  (n : ℕ) → type-inverse-sequential-diagram A n → UU l2
 family-dependent-inverse-sequential-diagram = pr1
 
 map-dependent-inverse-sequential-diagram :
-  {l1 l2 : Level} {A : inverse-sequential-diagram l1} (B : dependent-inverse-sequential-diagram l2 A) →
+  {l1 l2 : Level} {A : inverse-sequential-diagram l1}
+  (B : dependent-inverse-sequential-diagram l2 A) →
   (n : ℕ) (x : type-inverse-sequential-diagram A (succ-ℕ n)) →
   family-dependent-inverse-sequential-diagram B (succ-ℕ n) x →
-  family-dependent-inverse-sequential-diagram B n (map-inverse-sequential-diagram A n x)
+  family-dependent-inverse-sequential-diagram B n
+    ( map-inverse-sequential-diagram A n x)
 map-dependent-inverse-sequential-diagram = pr2
 ```
 
@@ -72,7 +78,9 @@ map-dependent-inverse-sequential-diagram = pr2
 
 ```agda
 const-dependent-inverse-sequential-diagram :
-    {l1 l2 : Level} (A : inverse-sequential-diagram l1) → inverse-sequential-diagram l2 → dependent-inverse-sequential-diagram l2 A
+    {l1 l2 : Level}
+    (A : inverse-sequential-diagram l1) → inverse-sequential-diagram l2 →
+    dependent-inverse-sequential-diagram l2 A
 pr1 (const-dependent-inverse-sequential-diagram A B) n _ =
   type-inverse-sequential-diagram B n
 pr2 (const-dependent-inverse-sequential-diagram A B) n _ =
@@ -99,28 +107,37 @@ commute for each `n : ℕ`.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : inverse-sequential-diagram l1) (B : dependent-inverse-sequential-diagram l2 A)
+  {l1 l2 : Level} (A : inverse-sequential-diagram l1)
+  (B : dependent-inverse-sequential-diagram l2 A)
   where
 
   naturality-section-dependent-inverse-sequential-diagram :
-    (h : (n : ℕ) (x : type-inverse-sequential-diagram A n) → family-dependent-inverse-sequential-diagram B n x)
+    (h :
+      (n : ℕ) (x : type-inverse-sequential-diagram A n) →
+      family-dependent-inverse-sequential-diagram B n x)
     (n : ℕ) → UU (l1 ⊔ l2)
   naturality-section-dependent-inverse-sequential-diagram h n =
-    h n ∘ map-inverse-sequential-diagram A n ~ map-dependent-inverse-sequential-diagram B n _ ∘ h (succ-ℕ n)
+    h n ∘ map-inverse-sequential-diagram A n ~
+    map-dependent-inverse-sequential-diagram B n _ ∘ h (succ-ℕ n)
 
   section-dependent-inverse-sequential-diagram : UU (l1 ⊔ l2)
   section-dependent-inverse-sequential-diagram =
-    Σ ( (n : ℕ) (x : type-inverse-sequential-diagram A n) → family-dependent-inverse-sequential-diagram B n x)
-      ( λ h → (n : ℕ) → naturality-section-dependent-inverse-sequential-diagram h n)
+    Σ ( (n : ℕ) (x : type-inverse-sequential-diagram A n) →
+        family-dependent-inverse-sequential-diagram B n x)
+      ( λ h → (n : ℕ) →
+        naturality-section-dependent-inverse-sequential-diagram h n)
 
   map-section-dependent-inverse-sequential-diagram :
     section-dependent-inverse-sequential-diagram →
-    (n : ℕ) (x : type-inverse-sequential-diagram A n) → family-dependent-inverse-sequential-diagram B n x
+    (n : ℕ) (x : type-inverse-sequential-diagram A n) →
+    family-dependent-inverse-sequential-diagram B n x
   map-section-dependent-inverse-sequential-diagram = pr1
 
   naturality-map-section-dependent-inverse-sequential-diagram :
     (f : section-dependent-inverse-sequential-diagram) (n : ℕ) →
-    naturality-section-dependent-inverse-sequential-diagram (map-section-dependent-inverse-sequential-diagram f) n
+    naturality-section-dependent-inverse-sequential-diagram
+      ( map-section-dependent-inverse-sequential-diagram f)
+      ( n)
   naturality-map-section-dependent-inverse-sequential-diagram = pr2
 ```
 
@@ -134,7 +151,9 @@ forgetting the first terms.
 ```agda
 right-shift-dependent-inverse-sequential-diagram :
   {l1 l2 : Level} {A : inverse-sequential-diagram l1} →
-  dependent-inverse-sequential-diagram l2 A → dependent-inverse-sequential-diagram l2 (right-shift-inverse-sequential-diagram A)
+  dependent-inverse-sequential-diagram l2 A →
+  dependent-inverse-sequential-diagram l2
+    ( right-shift-inverse-sequential-diagram A)
 pr1 (right-shift-dependent-inverse-sequential-diagram B) n =
   family-dependent-inverse-sequential-diagram B (succ-ℕ n)
 pr2 (right-shift-dependent-inverse-sequential-diagram B) n =
@@ -149,7 +168,9 @@ it with the [terminal type](foundation.unit-type.md) `unit`.
 ```agda
 left-shift-dependent-inverse-sequential-diagram :
     {l1 l2 : Level} {A : inverse-sequential-diagram l1} →
-  dependent-inverse-sequential-diagram l2 A → dependent-inverse-sequential-diagram l2 (left-shift-inverse-sequential-diagram A)
+  dependent-inverse-sequential-diagram l2 A →
+  dependent-inverse-sequential-diagram l2
+    ( left-shift-inverse-sequential-diagram A)
 pr1 (left-shift-dependent-inverse-sequential-diagram {l2 = l2} B) zero-ℕ x =
   raise-unit l2
 pr1 (left-shift-dependent-inverse-sequential-diagram B) (succ-ℕ n) =

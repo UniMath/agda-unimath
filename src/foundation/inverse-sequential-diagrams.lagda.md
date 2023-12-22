@@ -57,7 +57,9 @@ type-inverse-sequential-diagram :
 type-inverse-sequential-diagram = pr1
 
 map-inverse-sequential-diagram :
-  {l : Level} (A : inverse-sequential-diagram l) (n : ℕ) → type-inverse-sequential-diagram A (succ-ℕ n) → type-inverse-sequential-diagram A n
+  {l : Level} (A : inverse-sequential-diagram l) (n : ℕ) →
+  type-inverse-sequential-diagram A (succ-ℕ n) →
+  type-inverse-sequential-diagram A n
 map-inverse-sequential-diagram = pr2
 ```
 
@@ -77,7 +79,8 @@ pr2 (right-shift-inverse-sequential-diagram A) n =
   map-inverse-sequential-diagram A (succ-ℕ n)
 
 iterated-right-shift-inverse-sequential-diagram :
-  {l : Level} (n : ℕ) → inverse-sequential-diagram l → inverse-sequential-diagram l
+  {l : Level} (n : ℕ) →
+  inverse-sequential-diagram l → inverse-sequential-diagram l
 iterated-right-shift-inverse-sequential-diagram n =
   iterate n right-shift-inverse-sequential-diagram
 ```
@@ -98,7 +101,8 @@ pr2 (left-shift-inverse-sequential-diagram A) (succ-ℕ n) =
   map-inverse-sequential-diagram A n
 
 iterated-left-shift-inverse-sequential-diagram :
-  {l : Level} (n : ℕ) → inverse-sequential-diagram l → inverse-sequential-diagram l
+  {l : Level} (n : ℕ) →
+  inverse-sequential-diagram l → inverse-sequential-diagram l
 iterated-left-shift-inverse-sequential-diagram n =
   iterate n left-shift-inverse-sequential-diagram
 ```
