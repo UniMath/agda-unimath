@@ -1,4 +1,4 @@
-# Towers of types
+# Inverse sequential diagrams of types
 
 ```agda
 module foundation.inverse-sequential-diagrams where
@@ -19,9 +19,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **inverse sequential diagram of types** `A` is a
-[sequence](foundation.sequences.md) of types together with maps between every
-two consecutive types
+An
+{{#concept "inverse sequential diagram" Disambiguation="types" Agda=inverse-sequential-diagram}}
+of types `A` is a [sequence](foundation.sequences.md) of types together with
+maps between every two consecutive types
 
 ```text
   fₙ : Aₙ₊₁ → Aₙ
@@ -34,9 +35,14 @@ giving a sequential diagram of maps that extend infinitely to the left:
   ⋯ ---> A₃ ---> A₂ ---> A₁ ---> A₀.
 ```
 
+This is in contrast to the notion of
+[sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md), which
+extend infinitely to the right, hence is the formal dual to inverse sequential
+diagrams.
+
 ## Definitions
 
-### Towers of types
+### Inverse sequential diagrams of types
 
 ```agda
 sequence-map-inverse-sequential-diagram : {l : Level} → (ℕ → UU l) → UU l
