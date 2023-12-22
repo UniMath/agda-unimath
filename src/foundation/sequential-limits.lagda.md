@@ -36,7 +36,7 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-Given a
+Given an
 [inverse sequential diagram of types](foundation.inverse-sequential-diagrams.md)
 
 ```text
@@ -111,7 +111,7 @@ module _
 ### The gap map into the standard sequential limit
 
 The **gap map** of a
-[cone over a inverse sequential diagram](foundation.cones-over-inverse-sequential-diagrams.md)
+[cone over an inverse sequential diagram](foundation.cones-over-inverse-sequential-diagrams.md)
 is the map from the domain of the cone into the standard sequential limit.
 
 ```agda
@@ -257,7 +257,7 @@ module _
     is-retraction-gap-inverse-sequential-diagram
 ```
 
-### A cone over a inverse sequential diagram is equal to the value of `cone-map-inverse-sequential-diagram` at its own gap map
+### A cone over an inverse sequential diagram is equal to the value of `cone-map-inverse-sequential-diagram` at its own gap map
 
 ```agda
 module _

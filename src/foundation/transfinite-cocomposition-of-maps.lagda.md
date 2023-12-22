@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a [inverse sequential diagram](foundation.inverse-sequential-diagrams.md)
+Given an [inverse sequential diagram](foundation.inverse-sequential-diagrams.md)
 of maps, i.e. a certain infinite [sequence](foundation.dependent-sequences.md)
 of maps `fₙ`:
 
@@ -31,7 +31,7 @@ into `A₀`.
 
 ## Definitions
 
-### The transfinite cocomposition of a inverse sequential diagram of maps
+### The transfinite cocomposition of an inverse sequential diagram of maps
 
 ```agda
 module _

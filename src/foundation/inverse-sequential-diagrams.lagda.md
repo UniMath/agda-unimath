@@ -65,9 +65,9 @@ map-inverse-sequential-diagram = pr2
 
 ## Operations
 
-### Right shifting a inverse sequential diagram
+### Right shifting an inverse sequential diagram
 
-We can **right shift** a inverse sequential diagram of types by forgetting the
+We can **right shift** an inverse sequential diagram of types by forgetting the
 first terms.
 
 ```agda
@@ -85,9 +85,9 @@ iterated-right-shift-inverse-sequential-diagram n =
   iterate n right-shift-inverse-sequential-diagram
 ```
 
-### Left shifting a inverse sequential diagram
+### Left shifting an inverse sequential diagram
 
-We can **left shift** a inverse sequential diagram of types by padding it with
+We can **left shift** an inverse sequential diagram of types by padding it with
 the [terminal type](foundation.unit-type.md) `unit`.
 
 ```agda
@@ -109,7 +109,7 @@ iterated-left-shift-inverse-sequential-diagram n =
 
 ### Postcomposition inverse sequential diagrams
 
-Given a inverse sequential diagram `A` and a type `X` there is a inverse
+Given an inverse sequential diagram `A` and a type `X` there is an inverse
 sequential diagram `X → A` defined by levelwise postcomposition
 
 ```text

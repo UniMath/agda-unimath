@@ -31,7 +31,7 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **cone over a
+A **cone over an
 [inverse sequential diagram](foundation.inverse-sequential-diagrams.md) `A` with
 domain `X`** is a [sequence](foundation.dependent-sequences.md) of functions
 from `X` into the sequence of types of `A` such that the triangles

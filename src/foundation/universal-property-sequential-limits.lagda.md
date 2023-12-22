@@ -30,7 +30,7 @@ open import foundation-core.propositions
 
 ## Idea
 
-Given a
+Given an
 [inverse sequential diagram of types](foundation.inverse-sequential-diagrams.md)
 
 ```text
