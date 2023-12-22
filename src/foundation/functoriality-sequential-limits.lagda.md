@@ -10,11 +10,11 @@ module foundation.functoriality-sequential-limits where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-towers
+open import foundation.cones-over-inverse-sequential-diagrams
 open import foundation.dependent-pair-types
-open import foundation.morphisms-towers
+open import foundation.inverse-sequential-diagrams
+open import foundation.morphisms-inverse-sequential-diagrams
 open import foundation.sequential-limits
-open import foundation.towers
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -34,24 +34,29 @@ functorial.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : tower l1} {A' : tower l2}
+  {l1 l2 : Level}
+  {A : inverse-sequential-diagram l1} {A' : inverse-sequential-diagram l2}
   where
 
   map-hom-standard-sequential-limit :
-    hom-tower A' A → standard-sequential-limit A' → standard-sequential-limit A
+    hom-inverse-sequential-diagram A' A →
+    standard-sequential-limit A' →
+    standard-sequential-limit A
   pr1 (map-hom-standard-sequential-limit (f , F) (x , H)) n = f n (x n)
   pr2 (map-hom-standard-sequential-limit (f , F) (x , H)) n =
     ap (f n) (H n) ∙ F n (x (succ-ℕ n))
 
   map-hom-is-sequential-limit :
     {l4 l4' : Level} {C : UU l4} {C' : UU l4'} →
-    (c : cone-tower A C) (c' : cone-tower A' C') →
+    (c : cone-inverse-sequential-diagram A C)
+    (c' : cone-inverse-sequential-diagram A' C') →
     is-sequential-limit A c → is-sequential-limit A' c' →
-    hom-tower A' A → C' → C
+    hom-inverse-sequential-diagram A' A → C' → C
   map-hom-is-sequential-limit c c' is-lim-c is-lim-c' h x =
     map-inv-is-equiv
       ( is-lim-c)
-      ( map-hom-standard-sequential-limit h (gap-tower A' c' x))
+      ( map-hom-standard-sequential-limit h
+        ( gap-inverse-sequential-diagram A' c' x))
 ```
 
 ## Table of files about sequential limits

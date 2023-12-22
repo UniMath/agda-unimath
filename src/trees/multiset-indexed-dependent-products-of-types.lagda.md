@@ -19,12 +19,12 @@ open import trees.w-types
 
 ## Idea
 
-Consider a [multiset](trees.multisets.md) `M`. Then `M` can be seen as a tower
-of type families, via the inclusion from the type of all multisets, which are
-the well-founded trees, into the type of all trees.
+Consider a [multiset](trees.multisets.md) `M`. Then `M` can be seen as a inverse
+sequential diagram of type families, via the inclusion from the type of all
+multisets, which are the well-founded trees, into the type of all trees.
 
 This leads to the idea that we should be able to take the iterated dependent
-product of this tower of type families.
+product of this inverse sequential diagram of type families.
 
 ## Definitions
 

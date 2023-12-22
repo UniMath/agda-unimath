@@ -1,0 +1,127 @@
+# Towers of types
+
+```agda
+module foundation.inverse-sequential-diagrams where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.iterating-functions
+open import foundation.unit-type
+open import foundation.universe-levels
+```
+
+</details>
+
+## Idea
+
+A **inverse sequential diagram of types** `A` is a
+[sequence](foundation.sequences.md) of types together with maps between every
+two consecutive types
+
+```text
+  fₙ : Aₙ₊₁ → Aₙ
+```
+
+giving a sequential diagram of maps that extend infinitely to the left:
+
+```text
+     f₃      f₂      f₁      f₀
+  ⋯ ---> A₃ ---> A₂ ---> A₁ ---> A₀.
+```
+
+## Definitions
+
+### Towers of types
+
+```agda
+sequence-map-inverse-sequential-diagram : {l : Level} → (ℕ → UU l) → UU l
+sequence-map-inverse-sequential-diagram A = (n : ℕ) → A (succ-ℕ n) → A n
+
+inverse-sequential-diagram : (l : Level) → UU (lsuc l)
+inverse-sequential-diagram l =
+  Σ (ℕ → UU l) (sequence-map-inverse-sequential-diagram)
+
+type-inverse-sequential-diagram :
+  {l : Level} → inverse-sequential-diagram l → ℕ → UU l
+type-inverse-sequential-diagram = pr1
+
+map-inverse-sequential-diagram :
+  {l : Level} (A : inverse-sequential-diagram l) (n : ℕ) → type-inverse-sequential-diagram A (succ-ℕ n) → type-inverse-sequential-diagram A n
+map-inverse-sequential-diagram = pr2
+```
+
+## Operations
+
+### Right shifting a inverse sequential diagram
+
+We can **right shift** a inverse sequential diagram of types by forgetting the
+first terms.
+
+```agda
+right-shift-inverse-sequential-diagram :
+  {l : Level} → inverse-sequential-diagram l → inverse-sequential-diagram l
+pr1 (right-shift-inverse-sequential-diagram A) n =
+  type-inverse-sequential-diagram A (succ-ℕ n)
+pr2 (right-shift-inverse-sequential-diagram A) n =
+  map-inverse-sequential-diagram A (succ-ℕ n)
+
+iterated-right-shift-inverse-sequential-diagram :
+  {l : Level} (n : ℕ) → inverse-sequential-diagram l → inverse-sequential-diagram l
+iterated-right-shift-inverse-sequential-diagram n =
+  iterate n right-shift-inverse-sequential-diagram
+```
+
+### Left shifting a inverse sequential diagram
+
+We can **left shift** a inverse sequential diagram of types by padding it with
+the [terminal type](foundation.unit-type.md) `unit`.
+
+```agda
+left-shift-inverse-sequential-diagram :
+  {l : Level} → inverse-sequential-diagram l → inverse-sequential-diagram l
+pr1 (left-shift-inverse-sequential-diagram {l} A) zero-ℕ = raise-unit l
+pr1 (left-shift-inverse-sequential-diagram A) (succ-ℕ n) =
+  type-inverse-sequential-diagram A n
+pr2 (left-shift-inverse-sequential-diagram A) zero-ℕ = raise-terminal-map
+pr2 (left-shift-inverse-sequential-diagram A) (succ-ℕ n) =
+  map-inverse-sequential-diagram A n
+
+iterated-left-shift-inverse-sequential-diagram :
+  {l : Level} (n : ℕ) → inverse-sequential-diagram l → inverse-sequential-diagram l
+iterated-left-shift-inverse-sequential-diagram n =
+  iterate n left-shift-inverse-sequential-diagram
+```
+
+### Postcomposition inverse sequential diagrams
+
+Given a inverse sequential diagram `A` and a type `X` there is a inverse
+sequential diagram `X → A` defined by levelwise postcomposition
+
+```text
+                    (f₂ ∘ -)          (f₁ ∘ -)          (f₀ ∘ -)
+  ⋯ -----> (X → A₃) -------> (X → A₂) -------> (X → A₁) -------> (X → A₀).
+```
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (A : inverse-sequential-diagram l2)
+  where
+
+  postcomp-inverse-sequential-diagram : inverse-sequential-diagram (l1 ⊔ l2)
+  pr1 postcomp-inverse-sequential-diagram n =
+    X → type-inverse-sequential-diagram A n
+  pr2 postcomp-inverse-sequential-diagram n g x =
+    map-inverse-sequential-diagram A n (g x)
+```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

@@ -57,9 +57,7 @@ open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
-open import foundation.composite-maps-in-towers public
 open import foundation.cones-over-cospans public
-open import foundation.cones-over-towers public
 open import foundation.conjunction public
 open import foundation.connected-components public
 open import foundation.connected-components-universes public
@@ -95,7 +93,6 @@ open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-sequences public
 open import foundation.dependent-telescopes public
-open import foundation.dependent-towers public
 open import foundation.dependent-universal-property-equivalences public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
@@ -131,7 +128,6 @@ open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-maybe public
-open import foundation.equivalences-towers public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
@@ -209,7 +205,6 @@ open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
-open import foundation.morphisms-towers public
 open import foundation.morphisms-twisted-arrows public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
@@ -315,7 +310,6 @@ open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.total-partial-elements public
 open import foundation.total-partial-functions public
-open import foundation.towers public
 open import foundation.transfinite-cocomposition-of-maps public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
