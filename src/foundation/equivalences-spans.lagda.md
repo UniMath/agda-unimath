@@ -22,6 +22,7 @@ open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
+open import foundation-core.extensions-spans
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -32,13 +33,11 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-We consider four concepts of equivalences between spans, according to our
+We consider two concepts of equivalences between spans, according to the two
 different concepts of spans:
 
 - Equivalences of (binary) spans with fixed domain and codomain.
 - Equivalences of (binary) spans.
-- Equivalences of spans of a fixed family of types.
-- Equivalences of spans of families of types indexed by a fixed indexing type.
 
 ### Equivalences of binary spans with fixed domain and codomain
 
@@ -52,15 +51,15 @@ consists of an [equivalence](foundation-core.equivalences.md) `w : S ≃ T`
              S
            / | \
         f /  |  \ h
-         V   |   V
+         ∨   |   ∨
         A    |w   B
          ∧   |   ∧
         h \  |  / k
-           \ V /
+           \ ∨ /
              T
 ```
 
-[commutes](foundation.commuting-squares-of-maps.md).
+[commutes](foundation.commuting-triangles-of-maps.md).
 
 ### Equivalences of binary spans
 
@@ -79,13 +78,7 @@ and `w : S ≃ T` [equipped](foundation.structure.md) with two
          h       k
 ```
 
-commutes.
-
-### Equivalences of spans of families of types
-
-The notion of **equivalence of spans of (fixed) families of types** is the
-natural generalization of the notion of equivalences of (fixed) families of
-types.
+[commutes](foundation-core.commuting-squares-of-maps.md).
 
 ## Definitions
 

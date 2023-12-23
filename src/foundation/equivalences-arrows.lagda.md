@@ -7,13 +7,14 @@ module foundation.equivalences-arrows where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.morphisms-arrows
-open import foundation.propositions
 open import foundation.spans
 open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.propositions
 ```
 
 </details>
