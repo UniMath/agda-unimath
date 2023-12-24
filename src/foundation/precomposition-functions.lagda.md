@@ -28,8 +28,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.whiskering-homotopies
-
-open import synthetic-homotopy-theory.cocones-under-spans
 ```
 
 </details>
@@ -109,6 +107,20 @@ module _
 
 ### The fibers of `precomp`
 
+The fiber of `- ∘ f : (B → X) → (A → X)` at `g ∘ f : B → X` is equivalent to the type of maps `h : B → X` equipped with a homotopy witnessing that the square
+
+```text
+        f
+    A -----> B
+    |        |
+  f |        | h
+    V        V
+    B -----> X
+        g
+```
+
+commutes.
+
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
@@ -124,7 +136,8 @@ module _
 
   compute-total-fiber-precomp :
     Σ (B → X) (λ g →
-    fiber (precomp f X) (g ∘ f)) ≃ cocone-span (make-span f f) X
+    fiber (precomp f X) (g ∘ f)) ≃
+    Σ (B → X) (λ u → Σ (B → X) (λ v → u ∘ f ~ v ∘ f))
   compute-total-fiber-precomp =
     equiv-tot compute-fiber-precomp
 

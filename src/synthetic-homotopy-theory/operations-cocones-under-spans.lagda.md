@@ -67,7 +67,7 @@ This **swapping operation** on cocones is an
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) (X : UU l4)
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4}
   where
 
   swap-cocone-span : cocone-span s X → cocone-span (opposite-span s) X
@@ -80,10 +80,10 @@ module _
   where
 
   is-involution-swap-cocone-span :
-    swap-cocone-span (opposite-span s) X ∘ swap-cocone-span s X ~ id
+    swap-cocone-span (opposite-span s) {X} ∘ swap-cocone-span s {X} ~ id
   is-involution-swap-cocone-span c =
     eq-htpy-cocone-span s
-      ( swap-cocone-span (opposite-span s) X (swap-cocone-span s X c))
+      ( swap-cocone-span (opposite-span s) (swap-cocone-span s c))
       ( c)
       ( ( refl-htpy) ,
         ( refl-htpy) ,
@@ -97,15 +97,15 @@ module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) (X : UU l4)
   where
 
-  is-equiv-swap-cocone-span : is-equiv (swap-cocone-span s X)
+  is-equiv-swap-cocone-span : is-equiv (swap-cocone-span s {X})
   is-equiv-swap-cocone-span =
     is-equiv-is-invertible
-      ( swap-cocone-span (opposite-span s) X)
+      ( swap-cocone-span (opposite-span s))
       ( is-involution-swap-cocone-span (opposite-span s) X)
       ( is-involution-swap-cocone-span s X)
 
   equiv-swap-cocone-span : cocone-span s X ≃ cocone-span (opposite-span s) X
-  pr1 equiv-swap-cocone-span = swap-cocone-span s X
+  pr1 equiv-swap-cocone-span = swap-cocone-span s
   pr2 equiv-swap-cocone-span = is-equiv-swap-cocone-span
 ```
 
@@ -236,7 +236,7 @@ module _
     coherence-square-horizontal-comp-cocone-span
 ```
 
-### Horizontal composition of cocones under spans with morphisms of arrows
+### Cocones on spans extended on the left by morphisms and equivalences of arrows
 
 Consider a span `s := A <-f- S -g-> B`, a cocone on `s`, and a [moprhism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` for some map `f : S' → A'`, as indicated in the diagram
 
@@ -411,14 +411,13 @@ to obtain a cocone under the span `A <- S' -> B'`.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (s : span l1 l2 l3)
-  {S' : UU l4} {B' : UU l5} (g' : S' → B')
-  (h : hom-arrow g' (right-map-span s))
-  {X : UU l6} (c : cocone-span s X)
+  {S' : UU l4} {B' : UU l5} (g' : S' → B') {X : UU l6}
   where
 
-  vertical-comp-hom-arrow-cocone-span :
+  cocone-right-extend-hom-arrow-span :
+    (h : hom-arrow g' (right-map-span s)) → cocone-span s X →
     cocone-span (right-extend-hom-arrow-span s g' h) X
-  vertical-comp-hom-arrow-cocone-span =
+  cocone-right-extend-hom-arrow-span h c =
     vertical-comp-cocone-span
       ( span-hom-arrow
         ( map-domain-hom-arrow g' (right-map-span s) h)
@@ -430,6 +429,12 @@ module _
         ( map-codomain-hom-arrow g' (right-map-span s) h)
         ( transpose-hom-arrow g' (right-map-span s) h))
       ( c)
+
+  cocone-right-extend-equiv-arrow-span :
+    (e : equiv-arrow g' (right-map-span s)) → cocone-span s X →
+    cocone-span (right-extend-equiv-arrow-span s g' e) X
+  cocone-right-extend-equiv-arrow-span e =
+    cocone-right-extend-hom-arrow-span (hom-equiv-arrow g' (right-map-span s) e)
 ```
 
 A variation on the above:

@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.cocones-under-spans where
 open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.diagonal-spans
+open import foundation.equivalences-arrows
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
@@ -126,6 +127,18 @@ module _
   pr1 cocone-hom-arrow = map-codomain-hom-arrow f g h
   pr1 (pr2 cocone-hom-arrow) = g
   pr2 (pr2 cocone-hom-arrow) = coh-hom-arrow f g h
+```
+
+### Cocones obtained from equivalences of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (e : equiv-arrow f g)
+  where
+
+  cocone-equiv-arrow : cocone-span (span-equiv-arrow f g e) Y
+  cocone-equiv-arrow = cocone-hom-arrow f g (hom-equiv-arrow f g e)
 ```
 
 ### Homotopies of cocones under spans
