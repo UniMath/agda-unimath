@@ -58,17 +58,16 @@ universe has an
 
 ```agda
 module _
-  {l1 : Level} {A : UU l1}
+  {l1 l2 : Level} {A : UU l1}
   where
 
   ev-id-equiv :
-    {l : Level} (P : (B : UU l1) → (A ≃ B) → UU l) →
+    (P : (B : UU l1) → (A ≃ B) → UU l2) →
     ((B : UU l1) (e : A ≃ B) → P B e) → P A id-equiv
   ev-id-equiv P f = f A id-equiv
 
   triangle-ev-id-equiv :
-    {l : Level}
-    (P : (Σ (UU l1) (A ≃_)) → UU l) →
+    (P : (Σ (UU l1) (A ≃_)) → UU l2) →
     coherence-triangle-maps
       ( ev-point (A , id-equiv))
       ( ev-id-equiv (λ X e → P (X , e)))

@@ -9,7 +9,6 @@ module synthetic-homotopy-theory.cocones-under-spans where
 ```agda
 open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
-open import foundation.diagonal-spans
 open import foundation.equivalences-arrows
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -24,6 +23,7 @@ open import foundation.whiskering-homotopies
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types

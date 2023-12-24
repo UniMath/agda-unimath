@@ -10,13 +10,13 @@ module foundation.fibered-equivalences where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.families-of-equivalences
 open import foundation.fibered-maps
 open import foundation.pullbacks
 open import foundation.slice
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies

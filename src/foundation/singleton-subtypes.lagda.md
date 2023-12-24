@@ -7,21 +7,16 @@ module foundation.singleton-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.connected-components
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.images
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.sets
-open import foundation.singleton-induction
-open import foundation.subtype-identity-principle
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -30,6 +25,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.singleton-induction
 ```
 
 </details>

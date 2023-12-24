@@ -15,15 +15,10 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.full-subtypes
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
-open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.retractions
@@ -31,12 +26,16 @@ open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.function-extensionality
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+open import foundation-core.whiskering-homotopies
 
 open import synthetic-homotopy-theory.free-loops
 ```
