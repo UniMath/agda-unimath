@@ -152,7 +152,7 @@ module _
   is-prop-is-orthogonal-pullback-condition :
     is-prop is-orthogonal-pullback-condition
   is-prop-is-orthogonal-pullback-condition =
-    is-property-is-pullback
+    is-prop-is-pullback
       ( precomp f Y)
       ( postcomp A g)
       ( cone-pullback-hom' f g)

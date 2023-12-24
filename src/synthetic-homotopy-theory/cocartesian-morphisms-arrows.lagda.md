@@ -7,7 +7,9 @@ module synthetic-homotopy-theory.cocartesian-morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.morphisms-arrows
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -19,8 +21,8 @@ open import synthetic-homotopy-theory.pushouts
 ## Idea
 
 A [morphism of arrows](foundation.morphisms-arrows.md) `h : f → g` is said to be
-{{#concept "cocartesian" Disambiguation="morphism of arrows"}} if the
-[commuting square](foundation-core.commuting-squares-of-maps.md)
+{{#concept "cocartesian" Disambiguation="morphism of arrows" Agda=is-cocartesian-hom-arrow}}
+if the [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
         i
@@ -47,4 +49,29 @@ module _
   is-cocartesian-hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-cocartesian-hom-arrow =
     is-pushout f (map-domain-hom-arrow f g h) (cocone-hom-arrow f g h)
+
+  is-prop-is-cocartesian-hom-arrow : is-prop is-cocartesian-hom-arrow
+  is-prop-is-cocartesian-hom-arrow =
+    is-prop-is-pushout f (map-domain-hom-arrow f g h) (cocone-hom-arrow f g h)
+
+  is-cocartesian-hom-arrow-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pr1 is-cocartesian-hom-arrow-Prop = is-cocartesian-hom-arrow
+  pr2 is-cocartesian-hom-arrow-Prop = is-prop-is-cocartesian-hom-arrow
 ```
+
+### The type of cocartesian morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  cocartesian-hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  cocartesian-hom-arrow = Σ (hom-arrow f g) (is-cocartesian-hom-arrow f g)
+```
+
+## See also
+
+- [Cartesian morphisms of arrows](foundation.cartesian-morphisms-arrows.md) for
+  the dual.

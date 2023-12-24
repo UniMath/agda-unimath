@@ -35,6 +35,7 @@ open import foundation.binary-transport public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
+open import foundation.cartesian-morphisms-arrows public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
 open import foundation.category-of-families-of-sets public
