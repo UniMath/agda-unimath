@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.cocartesian-morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.morphisms-arrows
 open import foundation.propositions
@@ -14,6 +15,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
@@ -34,7 +36,7 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
         j
 ```
 
-is a [pushout square](synthetic-homotopy-theory.pushouts.md).
+is a [pushout](synthetic-homotopy-theory.pushouts.md) square.
 
 ## Definitions
 
@@ -69,6 +71,53 @@ module _
 
   cocartesian-hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   cocartesian-hom-arrow = Σ (hom-arrow f g) (is-cocartesian-hom-arrow f g)
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : cocartesian-hom-arrow f g)
+  where
+
+  hom-arrow-cocartesian-hom-arrow : hom-arrow f g
+  hom-arrow-cocartesian-hom-arrow = pr1 h
+
+  is-cocartesian-cocartesian-hom-arrow :
+    is-cocartesian-hom-arrow f g hom-arrow-cocartesian-hom-arrow
+  is-cocartesian-cocartesian-hom-arrow = pr2 h
+
+  map-domain-cocartesian-hom-arrow : A → X
+  map-domain-cocartesian-hom-arrow =
+    map-domain-hom-arrow f g hom-arrow-cocartesian-hom-arrow
+
+  map-codomain-cocartesian-hom-arrow : B → Y
+  map-codomain-cocartesian-hom-arrow =
+    map-codomain-hom-arrow f g hom-arrow-cocartesian-hom-arrow
+
+  coh-cocartesian-hom-arrow :
+    coherence-square-maps
+      ( map-domain-cocartesian-hom-arrow)
+      ( f)
+      ( g)
+      ( map-codomain-cocartesian-hom-arrow)
+  coh-cocartesian-hom-arrow =
+    coh-hom-arrow f g hom-arrow-cocartesian-hom-arrow
+
+  cocone-cocartesian-hom-arrow :
+    cocone f map-domain-cocartesian-hom-arrow Y
+  cocone-cocartesian-hom-arrow =
+    cocone-hom-arrow f g hom-arrow-cocartesian-hom-arrow
+
+  universal-property-cocartesian-hom-arrow :
+    {l : Level} →
+    universal-property-pushout l
+      ( f)
+      ( map-domain-cocartesian-hom-arrow)
+      ( cocone-cocartesian-hom-arrow)
+  universal-property-cocartesian-hom-arrow =
+    universal-property-pushout-is-pushout
+      ( f)
+      ( map-domain-cocartesian-hom-arrow)
+      ( cocone-cocartesian-hom-arrow)
+      ( is-cocartesian-cocartesian-hom-arrow)
 ```
 
 ## See also
