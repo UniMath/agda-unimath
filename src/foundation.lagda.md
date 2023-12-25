@@ -59,6 +59,7 @@ open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-towers public
+open import foundation.computations-higher-order-homotopies public
 open import foundation.cones-over-cospans public
 open import foundation.cones-over-towers public
 open import foundation.conjunction public

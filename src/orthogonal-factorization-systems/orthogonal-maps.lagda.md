@@ -8,8 +8,10 @@ module orthogonal-factorization-systems.orthogonal-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-morphisms-arrows
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
+open import foundation.computations-higher-order-homotopies
 open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types

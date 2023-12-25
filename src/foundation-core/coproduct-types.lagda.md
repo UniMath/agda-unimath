@@ -30,7 +30,7 @@ data _+_ {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)
   inr : B → A + B
 ```
 
-### Coproduct type induction
+### The induction principle for coproduct types
 
 ```agda
 ind-coprod :
@@ -41,7 +41,7 @@ ind-coprod C f g (inl x) = f x
 ind-coprod C f g (inr x) = g x
 ```
 
-### Coproduct type recursion
+### The recursion principle for coproduct types
 
 ```agda
 rec-coprod :
