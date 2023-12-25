@@ -9,23 +9,16 @@ open import foundation-core.precomposition-dependent-functions public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
-open import foundation.function-extensionality
-open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import foundation-core.coherently-invertible-maps
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.path-split-maps
-open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-maps
+open import foundation-core.truncation-levels
 ```
 
 </details>
@@ -62,7 +55,7 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( htpy-eq)
         ( htpy-eq)
         ( precomp-Π f (eq-value g h))
-        ( coherence-square-ap-precomp-Π f g h)
+        ( coherence-square-htpy-eq-ap-precomp-Π f g h)
         ( funext g h)
         ( funext (g ∘ f) (h ∘ f))
         ( H g h))

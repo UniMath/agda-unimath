@@ -11,10 +11,7 @@ open import foundation-core.precomposition-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.function-extensionality
 open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions-into-subuniverses
 open import foundation.sections
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
@@ -23,6 +20,7 @@ open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

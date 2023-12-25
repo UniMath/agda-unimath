@@ -10,6 +10,7 @@ module foundation.universal-property-unit-type where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 

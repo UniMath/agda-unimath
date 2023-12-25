@@ -12,12 +12,9 @@ open import foundation.coproduct-decompositions-subuniverse
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -29,11 +26,14 @@ open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
+open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.equality-standard-finite-types

@@ -13,18 +13,17 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.implicit-function-types
 open import foundation.iterated-dependent-product-types
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>

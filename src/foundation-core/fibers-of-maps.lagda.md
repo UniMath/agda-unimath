@@ -9,7 +9,6 @@ module foundation-core.fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
