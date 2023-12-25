@@ -30,6 +30,8 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.pullbacks
+open import foundation.sections
+open import foundation.spans
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -41,6 +43,7 @@ open import foundation.whiskering-homotopies
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
+open import synthetic-homotopy-theory.operations-cocones-under-spans
 open import synthetic-homotopy-theory.pullback-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -81,37 +84,41 @@ of those parts:
 
 ```agda
 pullback-property-dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  dependent-pullback-property-pushout l f g c →
-  pullback-property-pushout l f g c
+  {l1 l2 l3 l4 : Level} (l : Level) (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) →
+  dependent-pullback-property-pushout s c →
+  pullback-property-pushout s c
 pullback-property-dependent-pullback-property-pushout
-  l f g (pair i (pair j H)) dpb Y =
+  l s c dpb Y =
   is-pullback-htpy
     -- ( λ h s → tr (λ x → Y) (H s) (h (f s)))
-    ( λ h → eq-htpy (λ s → inv (tr-constant-type-family (H s) (h (f s)))))
+    ( λ h →
+      eq-htpy
+        ( λ x →
+          inv (tr-constant-type-family (coherence-square-cocone-span s c x) (h (left-map-span s x)))))
     -- ( _∘ g)
     ( refl-htpy)
     { c = pair
-      ( _∘ i)
-      ( pair (_∘ j) (λ h → eq-htpy (h ·l H)))}
-    ( cone-dependent-pullback-property-pushout
-      f g (pair i (pair j H)) (λ x → Y))
+      ( _∘ horizontal-map-cocone-span s c)
+      ( pair (_∘ vertical-map-cocone-span s c) (λ h → eq-htpy (h ·l coherence-square-cocone-span s c)))}
+    ( cone-dependent-pullback-property-pushout s c (λ x → Y))
     ( pair
       ( λ h → refl)
       ( pair
         ( λ h → refl)
         ( λ h → right-unit ∙
-          ( ( ap eq-htpy
-              ( eq-htpy (λ s →
-                left-transpose-eq-concat
-                  ( tr-constant-type-family (H s) (h (i (f s))))
-                  ( ap h (H s))
-                  ( apd h (H s))
-                  ( inv (apd-constant-type-family h (H s)))))) ∙
+          ( ( ap
+              ( eq-htpy)
+              ( eq-htpy
+                ( λ x →
+                  left-transpose-eq-concat
+                    ( tr-constant-type-family (coherence-square-cocone-span s c x) (h (horizontal-map-cocone-span s c (left-map-span s x))))
+                    ( ap h (coherence-square-cocone-span s c x))
+                    ( apd h (coherence-square-cocone-span s c x))
+                    ( inv (apd-constant-type-family h (coherence-square-cocone-span s c x)))))) ∙
             ( eq-htpy-concat-htpy
-              ( λ s → inv (tr-constant-type-family (H s) (h (i (f s)))))
-              ( λ s → apd h (H s)))))))
+              ( λ x → inv (tr-constant-type-family (coherence-square-cocone-span s c x) (h (horizontal-map-cocone-span s c (left-map-span s x)))))
+              ( λ x → apd h (coherence-square-cocone-span s c x)))))))
     ( dpb (λ x → Y))
 ```
 
@@ -397,88 +404,82 @@ abstract
       ( λ g H → COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P H)
       ( coherence-inv-htpy-distributive-Π-Σ-refl-htpy P f)
 
-cone-family-dependent-pullback-property :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  (f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l) →
-  cone-family
-    ( fam-lifts S P)
-    ( precompose-lifts P f)
-    ( precompose-lifts P g)
-    ( cone-pullback-property-pushout f g c X)
-    ( fam-lifts X P)
-cone-family-dependent-pullback-property f g c P γ =
-  pair
-    ( precompose-lifts P (pr1 c) γ)
-    ( pair
-      ( precompose-lifts P (pr1 (pr2 c)) γ)
-      ( triangle-precompose-lifts P (pr2 (pr2 c)) γ))
+module _
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
+  where
+  
+  cone-family-dependent-pullback-property :
+    {l : Level} (P : X → UU l) →
+    cone-family
+      ( fam-lifts (spanning-type-span s) P)
+      ( precompose-lifts P (left-map-span s))
+      ( precompose-lifts P (right-map-span s))
+      ( cone-pullback-property-pushout s c X)
+      ( fam-lifts X P)
+  cone-family-dependent-pullback-property P γ =
+    pair
+      ( precompose-lifts P (horizontal-map-cocone-span s c) γ)
+      ( pair
+        ( precompose-lifts P (vertical-map-cocone-span s c) γ)
+        ( triangle-precompose-lifts P (coherence-square-cocone-span s c) γ))
 
-is-pullback-cone-family-dependent-pullback-property :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  (f : S → A) (g : S → B) (c : cocone f g X) →
-  ({l : Level} → pullback-property-pushout l f g c) →
-  {l : Level} (P : X → UU l) (γ : X → X) →
-  is-pullback
-    ( ( tr (fam-lifts S P) (eq-htpy (γ ·l (pr2 (pr2 c))))) ∘
-      ( precompose-lifts P f (γ ∘ (pr1 c))))
-    ( precompose-lifts P g (γ ∘ (pr1 (pr2 c))))
-    ( cone-family-dependent-pullback-property f g c P γ)
-is-pullback-cone-family-dependent-pullback-property {S = S} {A} {B} {X}
-  f g (pair i (pair j H)) pb-c P =
-  let c = pair i (pair j H) in
-  is-pullback-family-is-pullback-tot
-    ( fam-lifts S P)
-    ( precompose-lifts P f)
-    ( precompose-lifts P g)
-    ( cone-pullback-property-pushout f g c X)
-    ( cone-family-dependent-pullback-property f g c P)
-    ( pb-c X)
-    ( is-pullback-top-is-pullback-bottom-cube-is-equiv
-      ( precomp i (Σ X P))
-      ( precomp j (Σ X P))
-      ( precomp f (Σ X P))
-      ( precomp g (Σ X P))
-      ( map-Σ (fam-lifts A P) (precomp i X) (precompose-lifts P i))
-      ( map-Σ (fam-lifts B P) (precomp j X) (precompose-lifts P j))
-      ( map-Σ (fam-lifts S P) (precomp f X) (precompose-lifts P f))
-      ( map-Σ (fam-lifts S P) (precomp g X) (precompose-lifts P g))
-      ( map-inv-distributive-Π-Σ)
-      ( map-inv-distributive-Π-Σ)
-      ( map-inv-distributive-Π-Σ)
-      ( map-inv-distributive-Π-Σ)
-      ( htpy-precompose-total-lifts P H)
-      ( refl-htpy)
-      ( refl-htpy)
-      ( refl-htpy)
-      ( refl-htpy)
-      ( htpy-precomp H (Σ X P))
-      ( coherence-inv-htpy-distributive-Π-Σ P H)
-      ( is-equiv-map-inv-distributive-Π-Σ)
-      ( is-equiv-map-inv-distributive-Π-Σ)
-      ( is-equiv-map-inv-distributive-Π-Σ)
-      ( is-equiv-map-inv-distributive-Π-Σ)
-      ( pb-c (Σ X P)))
+  is-pullback-cone-family-dependent-pullback-property :
+    pullback-property-pushout s c →
+    {l : Level} (P : X → UU l) (γ : X → X) →
+    is-pullback
+      ( ( tr (fam-lifts (spanning-type-span s) P) (eq-htpy (γ ·l (pr2 (pr2 c))))) ∘
+        ( precompose-lifts P (left-map-span s) (γ ∘ (pr1 c))))
+      ( precompose-lifts P (right-map-span s) (γ ∘ (pr1 (pr2 c))))
+      ( cone-family-dependent-pullback-property P γ)
+  is-pullback-cone-family-dependent-pullback-property pb-c P =
+    is-pullback-family-is-pullback-tot
+      ( fam-lifts (spanning-type-span s) P)
+      ( precompose-lifts P (left-map-span s))
+      ( precompose-lifts P (right-map-span s))
+      ( cone-pullback-property-pushout s c X)
+      ( cone-family-dependent-pullback-property P)
+      ( pb-c X)
+      ( is-pullback-top-is-pullback-bottom-cube-is-equiv
+        ( precomp (horizontal-map-cocone-span s c) (Σ X P))
+        ( precomp (vertical-map-cocone-span s c) (Σ X P))
+        ( precomp (left-map-span s) (Σ X P))
+        ( precomp (right-map-span s) (Σ X P))
+        ( map-Σ (fam-lifts (domain-span s) P) (precomp (horizontal-map-cocone-span s c) X) (precompose-lifts P (horizontal-map-cocone-span s c)))
+        ( map-Σ (fam-lifts (codomain-span s) P) (precomp (vertical-map-cocone-span s c) X) (precompose-lifts P (vertical-map-cocone-span s c)))
+        ( map-Σ (fam-lifts (spanning-type-span s) P) (precomp (left-map-span s) X) (precompose-lifts P (left-map-span s)))
+        ( map-Σ (fam-lifts (spanning-type-span s) P) (precomp (right-map-span s) X) (precompose-lifts P (right-map-span s)))
+        ( map-inv-distributive-Π-Σ)
+        ( map-inv-distributive-Π-Σ)
+        ( map-inv-distributive-Π-Σ)
+        ( map-inv-distributive-Π-Σ)
+        ( htpy-precompose-total-lifts P (coherence-square-cocone-span s c))
+        ( refl-htpy)
+        ( refl-htpy)
+        ( refl-htpy)
+        ( refl-htpy)
+        ( htpy-precomp (coherence-square-cocone-span s c) (Σ X P))
+        ( coherence-inv-htpy-distributive-Π-Σ P (coherence-square-cocone-span s c))
+        ( is-equiv-map-inv-distributive-Π-Σ)
+        ( is-equiv-map-inv-distributive-Π-Σ)
+        ( is-equiv-map-inv-distributive-Π-Σ)
+        ( is-equiv-map-inv-distributive-Π-Σ)
+        ( pb-c (Σ X P)))
 
-dependent-pullback-property-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  (f : S → A) (g : S → B) (c : cocone f g X) →
-  ({l : Level} → pullback-property-pushout l f g c) →
-  ({l : Level} → dependent-pullback-property-pushout l f g c)
-dependent-pullback-property-pullback-property-pushout
-  {S = S} {A} {B} {X}
-  f g (pair i (pair j H)) pullback-c P =
-  let c = pair i (pair j H) in
-  is-pullback-htpy'
-    -- ( (tr (fam-lifts S P) (eq-htpy (id ·l H))) ∘ (precompose-lifts P f i))
-    ( (tr-eq-htpy-fam-lifts P id H) ·r (precompose-lifts P f i))
-    -- ( precompose-lifts P g j)
-    ( refl-htpy)
-    ( cone-family-dependent-pullback-property f g c P id)
-    { c' = cone-dependent-pullback-property-pushout f g c P}
-    ( pair refl-htpy
+  dependent-pullback-property-pullback-property-pushout :
+    pullback-property-pushout s c →
+    dependent-pullback-property-pushout s c
+  dependent-pullback-property-pullback-property-pushout pullback-c P =
+    is-pullback-htpy'
+      -- ( (tr (fam-lifts S P) (eq-htpy (id ·l H))) ∘ (precompose-lifts P f i))
+      ( (tr-eq-htpy-fam-lifts P id (coherence-square-cocone-span s c)) ·r (precompose-lifts P (left-map-span s) (horizontal-map-cocone-span s c)))
+      -- ( precompose-lifts P g j)
+      ( refl-htpy)
+      ( cone-family-dependent-pullback-property P id)
+      { c' = cone-dependent-pullback-property-pushout s c P}
       ( pair refl-htpy
-        ( right-unit-htpy ∙h (coherence-triangle-precompose-lifts P H id))))
-    ( is-pullback-cone-family-dependent-pullback-property f g c pullback-c P id)
+        ( pair refl-htpy
+          ( right-unit-htpy ∙h (coherence-triangle-precompose-lifts P (coherence-square-cocone-span s c) id))))
+      ( is-pullback-cone-family-dependent-pullback-property pullback-c P id)
 ```
 
 This concludes the proof of Theorem 18.1.4.
@@ -486,15 +487,17 @@ This concludes the proof of Theorem 18.1.4.
 We give some further useful implications.
 
 ```agda
-dependent-universal-property-universal-property-pushout :
-  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  ( f : S → A) (g : S → B) (c : cocone f g X) →
-  ( {l : Level} → universal-property-pushout l f g c) →
-  ( {l : Level} → dependent-universal-property-pushout l f g c)
-dependent-universal-property-universal-property-pushout f g c up-X =
-  dependent-universal-property-dependent-pullback-property-pushout f g c
-    ( dependent-pullback-property-pullback-property-pushout f g c
-      ( pullback-property-pushout-universal-property-pushout f g c up-X))
+module _
+  {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
+  where
+
+  dependent-universal-property-universal-property-pushout :
+    universal-property-pushout s c →
+    dependent-universal-property-pushout s c
+  dependent-universal-property-universal-property-pushout up-X =
+    dependent-universal-property-dependent-pullback-property-pushout s c
+      ( dependent-pullback-property-pullback-property-pushout s c
+        ( pullback-property-pushout-universal-property-pushout s c up-X))
 ```
 
 ## Section 16.2 Families over pushouts
@@ -503,89 +506,89 @@ dependent-universal-property-universal-property-pushout f g c up-X =
 
 ```agda
 Fam-pushout :
-  {l1 l2 l3 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
-Fam-pushout l {S} {A} {B} f g =
-  Σ ( A → UU l)
-    ( λ PA → Σ (B → UU l)
-      ( λ PB → (s : S) → PA (f s) ≃ PB (g s)))
+  {l1 l2 l3 : Level} (l : Level) (s : span l1 l2 l3) →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
+Fam-pushout l s =
+  Σ ( domain-span s → UU l)
+    ( λ PA →
+      Σ ( codomain-span s → UU l)
+        ( λ PB →
+          (x : spanning-type-span s) →
+          PA (left-map-span s x) ≃ PB (right-map-span s x)))
 ```
 
 ### Characterizing the identity type of `Fam-pushout`
 
 ```agda
-coherence-equiv-Fam-pushout :
-  { l1 l2 l3 l l' : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  { f : S → A} {g : S → B}
-  ( P : Fam-pushout l f g) (Q : Fam-pushout l' f g) →
-  ( eA : (a : A) → (pr1 P a) ≃ (pr1 Q a))
-  ( eB : (b : B) → (pr1 (pr2 P) b) ≃ (pr1 (pr2 Q) b)) →
-  UU (l1 ⊔ l ⊔ l')
-coherence-equiv-Fam-pushout {S = S} {f = f} {g} P Q eA eB =
-  ( s : S) →
-    ( (map-equiv (eB (g s))) ∘ (map-equiv (pr2 (pr2 P) s))) ~
-    ( (map-equiv (pr2 (pr2 Q) s)) ∘ (map-equiv (eA (f s))))
+module _
+  {l1 l2 l3 : Level} (s : span l1 l2 l3)
+  where
+  
+  coherence-equiv-Fam-pushout :
+    {l l' : Level} (P : Fam-pushout l s) (Q : Fam-pushout l' s) →
+    ((a : domain-span s) → (pr1 P a) ≃ (pr1 Q a)) →
+    ((b : codomain-span s) → (pr1 (pr2 P) b) ≃ (pr1 (pr2 Q) b)) →
+    UU (l3 ⊔ l ⊔ l')
+  coherence-equiv-Fam-pushout P Q eA eB =
+    ( x : spanning-type-span s) →
+    ( (map-equiv (eB (right-map-span s x))) ∘ (map-equiv (pr2 (pr2 P) x))) ~
+    ( (map-equiv (pr2 (pr2 Q) x)) ∘ (map-equiv (eA (left-map-span s x))))
 
-equiv-Fam-pushout :
-  {l1 l2 l3 l l' : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  {f : S → A} {g : S → B} →
-  Fam-pushout l f g → Fam-pushout l' f g → UU (l1 ⊔ l2 ⊔ l3 ⊔ l ⊔ l')
-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P Q =
-  Σ ( (a : A) → (pr1 P a) ≃ (pr1 Q a)) ( λ eA →
-    Σ ( (b : B) → (pr1 (pr2 P) b) ≃ (pr1 (pr2 Q) b))
-      ( coherence-equiv-Fam-pushout P Q eA))
+  equiv-Fam-pushout :
+    {l l' : Level} →
+    Fam-pushout l s → Fam-pushout l' s → UU (l1 ⊔ l2 ⊔ l3 ⊔ l ⊔ l')
+  equiv-Fam-pushout P Q =
+    Σ ( (a : domain-span s) → (pr1 P a) ≃ (pr1 Q a))
+      ( λ eA →
+        Σ ( (b : codomain-span s) → (pr1 (pr2 P) b) ≃ (pr1 (pr2 Q) b))
+          ( coherence-equiv-Fam-pushout P Q eA))
 
-reflexive-equiv-Fam-pushout :
-  {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  {f : S → A} {g : S → B} (P : Fam-pushout l f g) →
-  equiv-Fam-pushout P P
-reflexive-equiv-Fam-pushout (pair PA (pair PB PS)) =
-  pair
-    ( λ a → id-equiv)
-    ( pair
-      ( λ b → id-equiv)
-      ( λ s → refl-htpy))
+  refl-equiv-Fam-pushout :
+    {l : Level} (P : Fam-pushout l s) → equiv-Fam-pushout P P
+  refl-equiv-Fam-pushout P =
+    pair
+      ( λ a → id-equiv)
+      ( pair
+        ( λ b → id-equiv)
+        ( λ s → refl-htpy))
 
-equiv-Fam-pushout-eq :
-  {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  {f : S → A} {g : S → B} {P Q : Fam-pushout l f g} →
-  Id P Q → equiv-Fam-pushout P Q
-equiv-Fam-pushout-eq {P = P} {.P} refl =
-  reflexive-equiv-Fam-pushout P
+  equiv-eq-Fam-pushout :
+    {l : Level} (P Q : Fam-pushout l s) → Id P Q → equiv-Fam-pushout P Q
+  equiv-eq-Fam-pushout P .P refl = refl-equiv-Fam-pushout P
 
-is-torsorial-equiv-Fam-pushout :
-  {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  {f : S → A} {g : S → B} (P : Fam-pushout l f g) →
-  is-torsorial (equiv-Fam-pushout P)
-is-torsorial-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P =
-  is-torsorial-Eq-structure
-    ( λ PA' t eA →
-      Σ ( (b : B) → (pr1 (pr2 P) b) ≃ (pr1 t b))
-        ( coherence-equiv-Fam-pushout P (pair PA' t) eA))
-    ( is-torsorial-Eq-Π
-      ( λ a X → (pr1 P a) ≃ X)
-      ( λ a → is-torsorial-equiv (pr1 P a)))
-    ( pair (pr1 P) (λ a → id-equiv))
-    ( is-torsorial-Eq-structure
-      ( λ PB' PS' eB →
-        coherence-equiv-Fam-pushout
-          P (pair (pr1 P) (pair PB' PS')) (λ a → id-equiv) eB)
+  is-torsorial-equiv-Fam-pushout :
+    {l : Level} (P : Fam-pushout l s) →
+    is-torsorial (equiv-Fam-pushout P)
+  is-torsorial-equiv-Fam-pushout P =
+    is-torsorial-Eq-structure
+      ( λ PA' t eA →
+        Σ ( (b : codomain-span s) → (pr1 (pr2 P) b) ≃ (pr1 t b))
+          ( coherence-equiv-Fam-pushout P (pair PA' t) eA))
       ( is-torsorial-Eq-Π
-        ( λ b Y → (pr1 (pr2 P) b) ≃ Y)
-        ( λ b → is-torsorial-equiv (pr1 (pr2 P) b)))
-      ( pair (pr1 (pr2 P)) (λ b → id-equiv))
-      ( is-torsorial-Eq-Π
-        ( λ s e → (map-equiv (pr2 (pr2 P) s)) ~ (map-equiv e))
-        ( λ s → is-torsorial-htpy-equiv (pr2 (pr2 P) s))))
+        ( λ a X → (pr1 P a) ≃ X)
+        ( λ a → is-torsorial-equiv (pr1 P a)))
+      ( pair (pr1 P) (λ a → id-equiv))
+      ( is-torsorial-Eq-structure
+        ( λ PB' PS' eB →
+          coherence-equiv-Fam-pushout P
+            ( pair (pr1 P) (pair PB' PS'))
+            ( λ a → id-equiv)
+            ( eB))
+        ( is-torsorial-Eq-Π
+          ( λ b Y → (pr1 (pr2 P) b) ≃ Y)
+          ( λ b → is-torsorial-equiv (pr1 (pr2 P) b)))
+        ( pair (pr1 (pr2 P)) (λ b → id-equiv))
+        ( is-torsorial-Eq-Π
+          ( λ x e → (map-equiv (pr2 (pr2 P) x)) ~ (map-equiv e))
+          ( λ x → is-torsorial-htpy-equiv (pr2 (pr2 P) x))))
 
-is-equiv-equiv-Fam-pushout-eq :
-  {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  {f : S → A} {g : S → B} (P Q : Fam-pushout l f g) →
-  is-equiv (equiv-Fam-pushout-eq {P = P} {Q})
-is-equiv-equiv-Fam-pushout-eq P =
-  fundamental-theorem-id
-    ( is-torsorial-equiv-Fam-pushout P)
-    ( λ Q → equiv-Fam-pushout-eq {P = P} {Q})
+  is-equiv-equiv-eq-Fam-pushout :
+    {l : Level} (P Q : Fam-pushout l s) →
+    is-equiv (equiv-eq-Fam-pushout P Q)
+  is-equiv-equiv-eq-Fam-pushout P =
+    fundamental-theorem-id
+      ( is-torsorial-equiv-Fam-pushout P)
+      ( equiv-eq-Fam-pushout P)
 
 equiv-equiv-Fam-pushout :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -593,31 +596,31 @@ equiv-equiv-Fam-pushout :
   Id P Q ≃ equiv-Fam-pushout P Q
 equiv-equiv-Fam-pushout P Q =
   pair
-    ( equiv-Fam-pushout-eq)
-    ( is-equiv-equiv-Fam-pushout-eq P Q)
+    ( equiv-eq-Fam-pushout)
+    ( is-equiv-equiv-eq-Fam-pushout P Q)
 
 eq-equiv-Fam-pushout :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {f : S → A} {g : S → B} {P Q : Fam-pushout l f g} →
   (equiv-Fam-pushout P Q) → Id P Q
 eq-equiv-Fam-pushout {P = P} {Q} =
-  map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
+  map-inv-is-equiv (is-equiv-equiv-eq-Fam-pushout P Q)
 
 is-section-eq-equiv-Fam-pushout :
   { l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} {P Q : Fam-pushout l f g} →
-  ( ( equiv-Fam-pushout-eq {P = P} {Q}) ∘
+  ( ( equiv-eq-Fam-pushout {P = P} {Q}) ∘
     ( eq-equiv-Fam-pushout {P = P} {Q})) ~ id
 is-section-eq-equiv-Fam-pushout {P = P} {Q} =
-  is-section-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
+  is-section-map-inv-is-equiv (is-equiv-equiv-eq-Fam-pushout P Q)
 
 is-retraction-eq-equiv-Fam-pushout :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {f : S → A} {g : S → B} {P Q : Fam-pushout l f g} →
   ( ( eq-equiv-Fam-pushout {P = P} {Q}) ∘
-    ( equiv-Fam-pushout-eq {P = P} {Q})) ~ id
+    ( equiv-eq-Fam-pushout {P = P} {Q})) ~ id
 is-retraction-eq-equiv-Fam-pushout {P = P} {Q} =
-  is-retraction-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
+  is-retraction-map-inv-is-equiv (is-equiv-equiv-eq-Fam-pushout P Q)
 ```
 
 This concludes the characterization of the identity type of `Fam-pushout`.
@@ -626,9 +629,9 @@ This concludes the characterization of the identity type of `Fam-pushout`.
 
 ```agda
 desc-fam :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  {f : S → A} {g : S → B} (c : cocone f g X) →
-  (P : X → UU l) → Fam-pushout l f g
+  {l1 l2 l3 l4 l : Level}
+  (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X) →
+  (P : X → UU l) → Fam-pushout l s
 desc-fam c P =
   pair
     ( P ∘ (pr1 c))
@@ -641,8 +644,8 @@ desc-fam c P =
 
 ```agda
 Fam-pushout-cocone-UU :
-  {l1 l2 l3 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  {f : S → A} {g : S → B} → cocone f g (UU l) → Fam-pushout l f g
+  {l1 l2 l3 : Level} (l : Level) (s : span l1 l2 l3) →
+  cocone-span s (UU l) → Fam-pushout l s
 Fam-pushout-cocone-UU l =
   tot (λ PA → (tot (λ PB H s → equiv-eq (H s))))
 
@@ -665,10 +668,10 @@ htpy-equiv-eq-ap-fam B {x} {.x} refl =
   refl-htpy-equiv id-equiv
 
 triangle-desc-fam :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  {f : S → A} {g : S → B} (c : cocone f g X) →
+  {l1 l2 l3 l4 l : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) →
   ( desc-fam {l = l} c) ~
-  ( ( Fam-pushout-cocone-UU l {f = f} {g}) ∘ ( cocone-map f g {Y = UU l} c))
+  ( Fam-pushout-cocone-UU l s ∘ ( cocone-span-map s {Y = UU l} c))
 triangle-desc-fam {l = l} {S} {A} {B} {X} (pair i (pair j H)) P =
   eq-equiv-Fam-pushout
     ( pair
@@ -678,24 +681,24 @@ triangle-desc-fam {l = l} {S} {A} {B} {X} (pair i (pair j H)) P =
         ( λ s → htpy-equiv-eq-ap-fam P (H s))))
 
 is-equiv-desc-fam :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  {f : S → A} {g : S → B} (c : cocone f g X) →
-  ({l' : Level} → universal-property-pushout l' f g c) →
-  is-equiv (desc-fam {l = l} {f = f} {g} c)
-is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
+  {l1 l2 l3 l4 l : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) →
+  universal-property-pushout s c →
+  is-equiv (desc-fam {l = l} s c)
+is-equiv-desc-fam {l = l} s c up-c =
   is-equiv-left-map-triangle
     ( desc-fam c)
     ( Fam-pushout-cocone-UU l)
-    ( cocone-map f g c)
+    ( cocone-span-map s c)
     ( triangle-desc-fam c)
     ( up-c (UU l))
     ( is-equiv-Fam-pushout-cocone-UU l)
 
 equiv-desc-fam :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  {f : S → A} {g : S → B} (c : cocone f g X) →
-  ({l' : Level} → universal-property-pushout l' f g c) →
-  (X → UU l) ≃ Fam-pushout l f g
+  {l1 l2 l3 l4 l : Level} (s : span l1 l2 l3)
+  {X : UU l4} (c : cocone-span s X) →
+  universal-property-pushout s c →
+  (X → UU l) ≃ Fam-pushout l s
 equiv-desc-fam c up-c =
   pair
     ( desc-fam c)
@@ -705,69 +708,53 @@ equiv-desc-fam c up-c =
 ### Corollary 18.2.4
 
 ```agda
-uniqueness-Fam-pushout :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  (f : S → A) (g : S → B) (c : cocone f g X) →
-  ({l' : Level} → universal-property-pushout l' f g c) →
-  ( P : Fam-pushout l f g) →
-  is-contr
-    ( Σ (X → UU l) (λ Q →
-      equiv-Fam-pushout P (desc-fam c Q)))
-uniqueness-Fam-pushout {l = l} f g c up-c P =
-  is-contr-equiv'
-    ( fiber (desc-fam c) P)
-    ( equiv-tot (λ Q →
-      ( equiv-equiv-Fam-pushout P (desc-fam c Q)) ∘e
-      ( equiv-inv (desc-fam c Q) P)))
-    ( is-contr-map-is-equiv (is-equiv-desc-fam c up-c) P)
+module _
+  {l1 l2 l3 l4 l : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
+  (U : universal-property-pushout s c)
+  where
+  
+  uniqueness-Fam-pushout :
+    (P : Fam-pushout l s) →
+    is-contr (Σ ( X → UU l) (λ Q → equiv-Fam-pushout P (desc-fam c Q)))
+  uniqueness-Fam-pushout P =
+    is-contr-equiv'
+      ( fiber (desc-fam c) P)
+      ( equiv-tot (λ Q →
+        ( equiv-equiv-Fam-pushout P (desc-fam c Q)) ∘e
+        ( equiv-inv (desc-fam c Q) P)))
+      ( is-contr-map-is-equiv (is-equiv-desc-fam c U) P)
 
-fam-Fam-pushout :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  {f : S → A} {g : S → B} (c : cocone f g X) →
-  (up-X : {l' : Level} → universal-property-pushout l' f g c) →
-  Fam-pushout l f g → (X → UU l)
-fam-Fam-pushout {f = f} {g} c up-X P =
-  pr1 (center (uniqueness-Fam-pushout f g c up-X P))
+  fam-Fam-pushout : Fam-pushout l s → (X → UU l)
+  fam-Fam-pushout P =
+    pr1 (center (uniqueness-Fam-pushout s c U P))
 
-is-section-fam-Fam-pushout :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  {f : S → A} {g : S → B} (c : cocone f g X) →
-  (up-X : {l' : Level} → universal-property-pushout l' f g c) →
-  ((desc-fam {l = l} c) ∘ (fam-Fam-pushout c up-X)) ~ id
-is-section-fam-Fam-pushout {f = f} {g} c up-X P =
-  inv
-    ( eq-equiv-Fam-pushout (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
+  is-section-fam-Fam-pushout :
+    is-section (desc-fam {l = l} c) (fam-Fam-pushout c U)
+  is-section-fam-Fam-pushout P =
+    inv
+      ( eq-equiv-Fam-pushout (pr2 (center (uniqueness-Fam-pushout s c U P))))
 
-compute-left-fam-Fam-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
-  ( P : Fam-pushout l f g) →
-  ( a : A) → (pr1 P a) ≃ (fam-Fam-pushout c up-X P (pr1 c a))
-compute-left-fam-Fam-pushout {f = f} {g} c up-X P =
-  pr1 (pr2 (center (uniqueness-Fam-pushout f g c up-X P)))
+  compute-left-fam-Fam-pushout :
+    (P : Fam-pushout l s) →
+    (a : domain-span s) → pr1 P a ≃ fam-Fam-pushout c U P (pr1 c a)
+  compute-left-fam-Fam-pushout P =
+    pr1 (pr2 (center (uniqueness-Fam-pushout s c U P)))
 
-compute-right-fam-Fam-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
-  ( P : Fam-pushout l f g) →
-  ( b : B) → (pr1 (pr2 P) b) ≃ (fam-Fam-pushout c up-X P (pr1 (pr2 c) b))
-compute-right-fam-Fam-pushout {f = f} {g} c up-X P =
-  pr1 (pr2 (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
+  compute-right-fam-Fam-pushout :
+    (P : Fam-pushout l s) (b : codomain-span s) →
+    pr1 (pr2 P) b ≃ fam-Fam-pushout c U P (pr1 (pr2 c) b)
+  compute-right-fam-Fam-pushout P =
+    pr1 (pr2 (pr2 (center (uniqueness-Fam-pushout s c U P))))
 
-compute-path-fam-Fam-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
-  ( P : Fam-pushout l f g) →
-  ( s : S) →
-    ( ( map-equiv (compute-right-fam-Fam-pushout c up-X P (g s))) ∘
-      ( map-equiv (pr2 (pr2 P) s))) ~
-    ( ( tr (fam-Fam-pushout c up-X P) (pr2 (pr2 c) s)) ∘
-      ( map-equiv (compute-left-fam-Fam-pushout c up-X P (f s))))
-compute-path-fam-Fam-pushout {f = f} {g} c up-X P =
-  pr2 (pr2 (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
+  compute-path-fam-Fam-pushout :
+    ( P : Fam-pushout l s) →
+    ( x : spanning-type-span s) →
+      ( ( map-equiv (compute-right-fam-Fam-pushout c U P (right-map-span s x))) ∘
+        ( map-equiv (pr2 (pr2 P) x))) ~
+      ( ( tr (fam-Fam-pushout c U P) (pr2 (pr2 c) x)) ∘
+        ( map-equiv (compute-left-fam-Fam-pushout c U P (left-map-span s x))))
+  compute-path-fam-Fam-pushout P =
+    pr2 (pr2 (pr2 (center (uniqueness-Fam-pushout s c U P))))
 ```
 
 ## Section 18.3 The Flattening lemma for pushouts

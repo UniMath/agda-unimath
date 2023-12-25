@@ -37,35 +37,37 @@ of pushouts is shown in
 ## Definition
 
 ```agda
-cone-dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
-  {X : UU l4} (c : cocone-span s X) (P : X → UU l5) →
-  cone
-    ( λ ( h : (a : domain-span s) → P (horizontal-map-cocone-span s c a))
-        ( x : spanning-type-span s) →
-        tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
-    ( λ ( h : (b : codomain-span s) → P (vertical-map-cocone-span s c b))
-        ( x : spanning-type-span s) →
-        h (right-map-span s x))
-    ( (x : X) → P x)
-pr1 (cone-dependent-pullback-property-pushout s c P) h a =
-  h (horizontal-map-cocone-span s c a)
-pr1 (pr2 (cone-dependent-pullback-property-pushout s c P)) h b =
-  h (vertical-map-cocone-span s c b)
-pr2 (pr2 (cone-dependent-pullback-property-pushout s c P)) h =
-  eq-htpy (λ x → apd h (coherence-square-cocone-span s c x))
-
-dependent-pullback-property-pushout :
+module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
-  {X : UU l4} (c : cocone-span s X) → UUω
-dependent-pullback-property-pushout s {X} c =
-  {l : Level} (P : X → UU l) →
-  is-pullback
-    ( λ ( h : (a : domain-span s) → P (horizontal-map-cocone-span s c a))
-        ( x : spanning-type-span s) →
-        tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
-    ( λ ( h : (b : codomain-span s) → P (vertical-map-cocone-span s c b))
-        ( x : spanning-type-span s) →
-        h (right-map-span s x))
-    ( cone-dependent-pullback-property-pushout s c P)
+  {X : UU l4} (c : cocone-span s X)
+  where
+  
+  cone-dependent-pullback-property-pushout :
+    {l5 : Level} (P : X → UU l5) →
+    cone
+      ( λ ( h : (a : domain-span s) → P (horizontal-map-cocone-span s c a))
+          ( x : spanning-type-span s) →
+          tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
+      ( λ ( h : (b : codomain-span s) → P (vertical-map-cocone-span s c b))
+          ( x : spanning-type-span s) →
+          h (right-map-span s x))
+      ( (x : X) → P x)
+  pr1 (cone-dependent-pullback-property-pushout P) h a =
+    h (horizontal-map-cocone-span s c a)
+  pr1 (pr2 (cone-dependent-pullback-property-pushout P)) h b =
+    h (vertical-map-cocone-span s c b)
+  pr2 (pr2 (cone-dependent-pullback-property-pushout P)) h =
+    eq-htpy (λ x → apd h (coherence-square-cocone-span s c x))
+
+  dependent-pullback-property-pushout : UUω
+  dependent-pullback-property-pushout =
+    {l : Level} (P : X → UU l) →
+    is-pullback
+      ( λ ( h : (a : domain-span s) → P (horizontal-map-cocone-span s c a))
+          ( x : spanning-type-span s) →
+          tr P (coherence-square-cocone-span s c x) (h (left-map-span s x)))
+      ( λ ( h : (b : codomain-span s) → P (vertical-map-cocone-span s c b))
+          ( x : spanning-type-span s) →
+          h (right-map-span s x))
+      ( cone-dependent-pullback-property-pushout P)
 ```
