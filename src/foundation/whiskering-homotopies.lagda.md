@@ -19,7 +19,6 @@ open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
