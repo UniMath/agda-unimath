@@ -41,6 +41,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.pullback-hom
 ```
 
@@ -369,10 +370,29 @@ module _
     is-orthogonal-is-equiv-right f (map-equiv g) (is-equiv-map-equiv g)
 ```
 
+### If the domain and codomain of `g` are `f`-local, then `g` is right orthogonal to `f`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-is-local :
+    is-local f X → is-local f Y → is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-is-local is-local-X is-local-Y =
+    is-pullback-is-equiv-horizontal-maps'
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+      ( is-local-Y)
+      ( is-local-X)
+```
+
 ### Right orthogonal maps are closed under composition and have the left cancellation property
 
-Given two composable maps `h` after `g`, if `h` is right orthogonal to `f` then
-`g` is right orthogonal to `f` if and only if `h ∘ g` is.
+Given two composable maps `h` after `g`, if `f ⊥ h`, then `f ⊥ g` if and only if
+`f ⊥ (h ∘ g)`.
 
 **Proof:** By the pullback condition of orthogonal maps, the top square in the
 below diagram is a pullback precisely when `g` is right orthogonal to `f`:
@@ -467,8 +487,8 @@ module _
 
 ### Left orthogonal maps are closed under composition and have the right cancellation property
 
-Given two composable maps `h` after `f`, if `f` is left orthogonal to `g` then
-`h` is left orthogonal to `g` if and only if `h ∘ f` is.
+Given two composable maps `h` after `f`, if `f ⊥ g`, then `h ⊥ g` if and only if
+`(h ∘ f) ⊥ g`.
 
 **Proof:** By the universal property of orthogonal maps, the right square in the
 below diagram is a pullback precisely when `f` is left orthogonal to `g`:
