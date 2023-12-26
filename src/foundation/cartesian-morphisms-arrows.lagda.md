@@ -10,9 +10,11 @@ module foundation.cartesian-morphisms-arrows where
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
 open import foundation.morphisms-arrows
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.unit-type
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 ```
@@ -116,6 +118,23 @@ module _
       ( g)
       ( cone-cartesian-hom-arrow)
       ( is-cartesian-cartesian-hom-arrow)
+```
+
+### Cartesian morphisms of arrows arising from fibers
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
+  where
+
+  fiber-cartesian-hom-arrow :
+    cartesian-hom-arrow (terminal-map {A = fiber f y}) f
+  pr1 fiber-cartesian-hom-arrow =
+    hom-arrow-cone (point y) f (swap-cone f (point y) (cone-fiber f y))
+  pr2 fiber-cartesian-hom-arrow =
+    is-pullback-swap-cone f (point y)
+      ( cone-fiber f y)
+      ( is-pullback-cone-fiber f y)
 ```
 
 ## See also

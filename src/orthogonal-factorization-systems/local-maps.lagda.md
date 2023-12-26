@@ -7,25 +7,29 @@ module orthogonal-factorization-systems.local-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-morphisms-arrows
 open import foundation.constant-maps
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-families-of-types
 open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.orthogonal-maps
 ```
 
 </details>
 
 ## Idea
 
-A map `g : A → B` is said to be **local at** `f : Y → X`, or **`f`-local**, if
-all its [fibers](foundation-core.fibers-of-maps.md) are. Likewise, a family
-`B : A → UU l` is local at `f` if each `B x` is.
+A map `g : A → B` is said to be
+{{#concept "local" Disambiguation="maps of types" Agda=is-local-map}} at
+`f : Y → X`, or {{#concept "`f`-local"}}, if all its
+[fibers](foundation-core.fibers-of-maps.md) are.
 
 ## Definition
 
@@ -66,7 +70,30 @@ module _
 
 ### A map is `f`-local if and only if it is `f`-orthogonal
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-local-map-is-orthogonal-pullback-condition :
+    is-orthogonal-pullback-condition f g → is-local-map f g
+  is-local-map-is-orthogonal-pullback-condition G y =
+    is-local-is-orthogonal-pullback-condition-terminal-map f
+      ( is-orthogonal-pullback-condition-right-base-change f g terminal-map
+        ( fiber-cartesian-hom-arrow g y)
+        ( G))
+
+  is-local-map-is-orthogonal : is-orthogonal f g → is-local-map f g
+  is-local-map-is-orthogonal G y =
+    is-local-is-orthogonal-terminal-map f
+      ( is-orthogonal-right-base-change f g terminal-map
+        ( fiber-cartesian-hom-arrow g y)
+        ( G))
+```
+
+the converse remains to be formalized.
 
 ## See also
 
