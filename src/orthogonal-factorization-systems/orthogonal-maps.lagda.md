@@ -16,7 +16,10 @@ open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.morphisms-arrows
+open import foundation.equivalences-arrows
 open import foundation.dependent-pair-types
+open import foundation.universal-property-unit-type
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
@@ -32,6 +35,7 @@ open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-function-types
+open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
@@ -954,9 +958,9 @@ module _
   (f : A → B) (g : X → Y) (g' : X' → Y') (α : cartesian-hom-arrow g' g)
   where
 
-  is-orthogonal-right-base-change :
+  is-orthogonal-pullback-condition-right-base-change :
     is-orthogonal-pullback-condition f g → is-orthogonal-pullback-condition f g'
-  is-orthogonal-right-base-change G =
+  is-orthogonal-pullback-condition-right-base-change G =
     is-pullback-back-right-is-pullback-back-left-cube
       ( refl-htpy)
       ( htpy-postcomp B (coh-cartesian-hom-arrow g' g α))
@@ -983,6 +987,66 @@ module _
         ( cone-cartesian-hom-arrow g' g α)
         ( is-cartesian-cartesian-hom-arrow g' g α)
         ( B))
+
+  is-orthogonal-right-base-change : is-orthogonal f g → is-orthogonal f g'
+  is-orthogonal-right-base-change G =
+    is-orthogonal-is-orthogonal-pullback-condition f g'
+      ( is-orthogonal-pullback-condition-right-base-change
+        ( is-orthogonal-pullback-condition-is-orthogonal f g G))
+```
+
+### A type is `f`-local if and only if the terminal map is `f`-orthogonal
+
+**Proof (forward direction):** If the terminal map is right orthogonal to `f`,
+that means we have a pullback square
+
+```text
+            - ∘ f
+      B → X -----> A → X
+        | ⌟          |
+  ! ∘ - |            | ! ∘ -
+        v            v
+      B → 1 -----> A → 1.
+            - ∘ f
+```
+
+which displays `precomp f X` as a pullback of an equivalence, hence it is itself
+an equivalence.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → B)
+  where
+
+  is-local-is-orthogonal-pullback-condition-terminal-map :
+    is-orthogonal-pullback-condition f terminal-map → is-local f X
+  is-local-is-orthogonal-pullback-condition-terminal-map =
+    is-equiv-horizontal-map-is-pullback
+      ( precomp f unit)
+      ( postcomp A terminal-map)
+      ( cone-pullback-hom' f terminal-map)
+      ( is-local-is-contr f unit is-contr-unit)
+
+  is-local-is-orthogonal-terminal-map :
+    is-orthogonal f terminal-map → is-local f X
+  is-local-is-orthogonal-terminal-map F =
+    is-local-is-orthogonal-pullback-condition-terminal-map
+      ( is-orthogonal-pullback-condition-is-orthogonal f terminal-map F)
+
+  is-orthogonal-pullback-condition-terminal-map-is-local :
+    is-local f X → is-orthogonal-pullback-condition f terminal-map
+  is-orthogonal-pullback-condition-terminal-map-is-local =
+    is-pullback-is-equiv-horizontal-maps
+      ( precomp f unit)
+      ( postcomp A terminal-map)
+      ( cone-pullback-hom' f terminal-map)
+      ( is-local-is-contr f unit is-contr-unit)
+
+  is-orthogonal-terminal-map-is-local :
+    is-local f X → is-orthogonal f terminal-map
+  is-orthogonal-terminal-map-is-local F =
+    is-orthogonal-is-orthogonal-pullback-condition f terminal-map
+      ( is-orthogonal-pullback-condition-terminal-map-is-local F)
 ```
 
 ## References
