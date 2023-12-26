@@ -132,6 +132,7 @@ open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
+open import foundation.equivalences-arrows public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences-towers public
 open import foundation.exclusive-disjunction public

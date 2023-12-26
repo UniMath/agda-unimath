@@ -97,22 +97,22 @@ module _
   {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
   where
 
-  map-distributive-Π-is-local-dependent-type :
+  distributive-Π-is-local-dependent-type :
     {l3 l4 : Level} {A : UU l3} (B : A → X → UU l4) →
     ((a : A) → is-local-dependent-type f (B a)) →
     is-local-dependent-type f (λ x → (a : A) → B a x)
-  map-distributive-Π-is-local-dependent-type B f-loc =
+  distributive-Π-is-local-dependent-type B f-loc =
     is-equiv-map-equiv
       ( ( equiv-swap-Π) ∘e
         ( equiv-Π-equiv-family (λ a → precomp-Π f (B a) , (f-loc a))) ∘e
         ( equiv-swap-Π))
 
-  map-distributive-Π-is-local :
+  distributive-Π-is-local :
     {l3 l4 : Level} {A : UU l3} (B : A → UU l4) →
     ((a : A) → is-local f (B a)) →
     is-local f ((a : A) → B a)
-  map-distributive-Π-is-local B =
-    map-distributive-Π-is-local-dependent-type (λ a _ → B a)
+  distributive-Π-is-local B =
+    distributive-Π-is-local-dependent-type (λ a _ → B a)
 ```
 
 ### Local types are closed under equivalences
@@ -250,7 +250,7 @@ module _
   is-local-is-equiv is-equiv-f = is-equiv-precomp-is-equiv f is-equiv-f
 ```
 
-### Families of contractible types are local at any map
+### Contractible types are local at any map
 
 ```agda
 module _

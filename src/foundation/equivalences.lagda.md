@@ -754,7 +754,7 @@ module _
 
   abstract
     is-equiv-vertical-map-is-pullback :
-      is-equiv g → is-pullback f g c → is-equiv (pr1 c)
+      is-equiv g → is-pullback f g c → is-equiv (vertical-map-cone f g c)
     is-equiv-vertical-map-is-pullback is-equiv-g pb =
       is-equiv-is-contr-map
         ( is-trunc-vertical-map-is-pullback neg-two-𝕋 f g c pb
@@ -762,7 +762,7 @@ module _
 
   abstract
     is-pullback-is-equiv-vertical-maps :
-      is-equiv g → is-equiv (pr1 c) → is-pullback f g c
+      is-equiv g → is-equiv (vertical-map-cone f g c) → is-pullback f g c
     is-pullback-is-equiv-vertical-maps is-equiv-g is-equiv-p =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-cone f g c
         ( λ a →
