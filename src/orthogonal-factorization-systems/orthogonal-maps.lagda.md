@@ -381,7 +381,7 @@ module _
   is-orthogonal-pullback-condition-is-local :
     is-local f X → is-local f Y → is-orthogonal-pullback-condition f g
   is-orthogonal-pullback-condition-is-local is-local-X is-local-Y =
-    is-pullback-is-equiv-horizontal-maps'
+    is-pullback-is-equiv-horizontal-maps
       ( precomp f Y)
       ( postcomp A g)
       ( cone-pullback-hom' f g)
@@ -931,6 +931,58 @@ module _
       ( is-orthogonal-pullback-condition-left-coprod
         ( is-orthogonal-pullback-condition-is-orthogonal f g F)
         ( is-orthogonal-pullback-condition-is-orthogonal f' g F'))
+```
+
+### Right orthogonality is preserved under base change
+
+Given a pullback square
+
+```text
+    X' -----> X
+    | ⌟       |
+  g'|         | g
+    v         v
+    Y' -----> Y,
+```
+
+if `f ⊥ g`, then `f ⊥ g'`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
+  (f : A → B) (g : X → Y) (g' : X' → Y') (α : cartesian-hom-arrow g' g)
+  where
+
+  is-orthogonal-right-base-change :
+    is-orthogonal-pullback-condition f g → is-orthogonal-pullback-condition f g'
+  is-orthogonal-right-base-change G =
+    is-pullback-back-right-is-pullback-back-left-cube
+      ( refl-htpy)
+      ( htpy-postcomp B (coh-cartesian-hom-arrow g' g α))
+      ( refl-htpy)
+      ( refl-htpy)
+      ( htpy-postcomp A (coh-cartesian-hom-arrow g' g α))
+      ( refl-htpy)
+      ( ( right-unit-htpy) ∙h
+        ( right-unit-htpy) ∙h
+        ( inv-htpy
+          ( commutative-precomp-htpy-postcomp
+            ( f)
+            ( coh-cartesian-hom-arrow g' g α))))
+      ( G)
+      ( is-pullback-postcomp-is-pullback
+        ( map-codomain-cartesian-hom-arrow g' g α)
+        ( g)
+        ( cone-cartesian-hom-arrow g' g α)
+        ( is-cartesian-cartesian-hom-arrow g' g α)
+        ( A))
+      ( is-pullback-postcomp-is-pullback
+        ( map-codomain-cartesian-hom-arrow g' g α)
+        ( g)
+        ( cone-cartesian-hom-arrow g' g α)
+        ( is-cartesian-cartesian-hom-arrow g' g α)
+        ( B))
 ```
 
 ## References
