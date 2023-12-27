@@ -10,6 +10,7 @@ module foundation.equivalences-arrows where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.morphisms-arrows
+open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
 
@@ -112,13 +113,13 @@ module _
     pr1 is-equiv-equiv-arrow = is-equiv-map-domain-equiv-arrow
     pr2 is-equiv-equiv-arrow = is-equiv-map-codomain-equiv-arrow
 
-    span-fixed-domain-codomain-equiv-arrow :
-      span-fixed-domain-codomain l1 B X
-    span-fixed-domain-codomain-equiv-arrow =
-      span-fixed-domain-codomain-hom-arrow f g hom-equiv-arrow
+    span-equiv-arrow :
+      span l1 B X
+    span-equiv-arrow =
+      span-hom-arrow f g hom-equiv-arrow
 
-    span-equiv-arrow : span l2 l3 l1
-    pr1 span-equiv-arrow = B
-    pr1 (pr2 span-equiv-arrow) = X
-    pr2 (pr2 span-equiv-arrow) = span-fixed-domain-codomain-equiv-arrow
+    span-diagram-equiv-arrow : span-diagram l2 l3 l1
+    pr1 span-diagram-equiv-arrow = B
+    pr1 (pr2 span-diagram-equiv-arrow) = X
+    pr2 (pr2 span-diagram-equiv-arrow) = span-equiv-arrow
 ```
