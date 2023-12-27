@@ -241,7 +241,7 @@ module _
   extensionality-suspension-structure-refl-htpy-suspension-structure :
     eq-htpy-suspension-structure refl-htpy-suspension-structure ＝ refl
   extensionality-suspension-structure-refl-htpy-suspension-structure =
-    is-injective-map-equiv
+    is-injective-equiv
       ( extensionality-suspension-structure c c)
       ( is-section-map-inv-equiv
         ( extensionality-suspension-structure c c)

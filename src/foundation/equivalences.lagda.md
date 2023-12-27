@@ -29,6 +29,7 @@ open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
@@ -53,9 +54,12 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
+  is-emb-equiv : (e : A ≃ B) → is-emb (map-equiv e)
+  is-emb-equiv e = is-emb-is-equiv (is-equiv-map-equiv e)
+
   emb-equiv : (A ≃ B) → (A ↪ B)
   pr1 (emb-equiv e) = map-equiv e
-  pr2 (emb-equiv e) = is-emb-is-equiv (is-equiv-map-equiv e)
+  pr2 (emb-equiv e) = is-emb-equiv e
 ```
 
 ### Transposing equalities along equivalences
@@ -357,6 +361,10 @@ module _
     is-emb-map-equiv :
       is-emb (map-equiv {A = A} {B = B})
     is-emb-map-equiv = is-emb-inclusion-subtype is-equiv-Prop
+
+  is-injective-map-equiv :
+    is-injective (map-equiv {A = A} {B = B})
+  is-injective-map-equiv = is-injective-is-emb is-emb-map-equiv
 
   emb-map-equiv : (A ≃ B) ↪ (A → B)
   pr1 emb-map-equiv = map-equiv

@@ -238,10 +238,26 @@ module _
     equiv-left-type-family-structure-type-family-pushout
   left-equiv-equiv-structure-type-family-pushout = pr1
 
+  map-left-equiv-equiv-structure-type-family-pushout :
+    equiv-structure-type-family-pushout →
+    (a : domain-span s) →
+    left-type-family-structure-type-family-pushout s P a →
+    left-type-family-structure-type-family-pushout s Q a
+  map-left-equiv-equiv-structure-type-family-pushout e a =
+    map-equiv (left-equiv-equiv-structure-type-family-pushout e a)
+
   right-equiv-equiv-structure-type-family-pushout :
     equiv-structure-type-family-pushout →
     equiv-right-type-family-structure-type-family-pushout
   right-equiv-equiv-structure-type-family-pushout = pr1 ∘ pr2
+
+  map-right-equiv-equiv-structure-type-family-pushout :
+    equiv-structure-type-family-pushout →
+    (b : codomain-span s) →
+    right-type-family-structure-type-family-pushout s P b →
+    right-type-family-structure-type-family-pushout s Q b
+  map-right-equiv-equiv-structure-type-family-pushout e b =
+    map-equiv (right-equiv-equiv-structure-type-family-pushout e b)
 
   coherence-equiv-structure-type-family-pushout :
     (e : equiv-structure-type-family-pushout) →

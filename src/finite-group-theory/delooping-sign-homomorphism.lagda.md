@@ -616,7 +616,7 @@ module _
               ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2))))
             ( this-third-thing n p)
             ( map-quotient-loop-Fin n p (this-third-thing n p)))
-          ( is-injective-map-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
+          ( is-injective-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
   cases-eq-map-quotient-aut-Fin n p (inr ND) (inl (inr star)) (inr star) q r =
     ( ap
       ( map-equiv (that-thing n))
@@ -652,7 +652,7 @@ module _
               ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2))))
             ( this-third-thing n p)
             ( map-quotient-loop-Fin n p (this-third-thing n p)))
-          ( is-injective-map-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
+          ( is-injective-equiv (inv-equiv (that-thing n)) (q ∙ inv r))))
 
   eq-map-quotient-aut-Fin :
     (n : ℕ) (p : type-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))) →

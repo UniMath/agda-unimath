@@ -166,7 +166,7 @@ compute-eq-equiv-comp-equiv :
   {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   eq-equiv A B f ∙ eq-equiv B C g ＝ eq-equiv A C (g ∘e f)
 compute-eq-equiv-comp-equiv A B C f g =
-  is-injective-map-equiv
+  is-injective-equiv
     ( equiv-univalence)
     ( ( inv ( compute-equiv-eq-concat (eq-equiv A B f) (eq-equiv B C g))) ∙
       ( ( ap
@@ -193,7 +193,7 @@ commutativity-inv-eq-equiv :
   {l : Level} (A B : UU l) (f : A ≃ B) →
   inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
 commutativity-inv-eq-equiv A B f =
-  is-injective-map-equiv
+  is-injective-equiv
     ( equiv-univalence)
     ( ( inv (commutativity-inv-equiv-eq A B (eq-equiv A B f))) ∙
       ( ( ap

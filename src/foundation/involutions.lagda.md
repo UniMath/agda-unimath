@@ -99,7 +99,7 @@ htpy-own-inverse-is-involution :
   {l : Level} {A : UU l} {f : Aut A} →
   is-involution-aut f → map-inv-equiv f ~ map-equiv f
 htpy-own-inverse-is-involution {f = f} is-involution-f x =
-  is-injective-map-equiv f
+  is-injective-equiv f
     ( htpy-eq-equiv (right-inverse-law-equiv f) x ∙
       inv (is-involution-f x))
 

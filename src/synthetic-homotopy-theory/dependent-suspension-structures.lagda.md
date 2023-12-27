@@ -200,7 +200,7 @@ module _
     dependent-cocone-dependent-suspension-structure
   htpy-map-inv-equiv-dependent-suspension-structure-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure
     ( d) =
-      is-injective-map-equiv
+      is-injective-equiv
         ( equiv-dependent-suspension-structure-suspension-cocone)
         ( is-section-map-inv-equiv
           ( equiv-dependent-suspension-structure-suspension-cocone)
