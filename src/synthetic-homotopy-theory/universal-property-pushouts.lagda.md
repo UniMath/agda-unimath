@@ -227,11 +227,11 @@ module _
           ( eq-htpy-cocone-span s (cocone-span-map s c h) c' H)))
 
   abstract
-    is-equiv-up-pushout-up-pushout :
+    is-equiv-universal-property-pushout-universal-property-pushout :
       universal-property-pushout s c →
       universal-property-pushout s c' →
       is-equiv h
-    is-equiv-up-pushout-up-pushout U V =
+    is-equiv-universal-property-pushout-universal-property-pushout U V =
       is-equiv-is-equiv-precomp h
         ( λ Z →
           is-equiv-top-map-triangle
@@ -243,11 +243,11 @@ module _
             ( V Z))
 
   abstract
-    up-pushout-up-pushout-is-equiv :
+    universal-property-pushout-universal-property-pushout-is-equiv :
       is-equiv h →
       universal-property-pushout s c →
       universal-property-pushout s c'
-    up-pushout-up-pushout-is-equiv K U Z =
+    universal-property-pushout-universal-property-pushout-is-equiv K U Z =
       is-equiv-left-map-triangle
         ( cocone-span-map s c')
         ( cocone-span-map s c)
@@ -257,11 +257,11 @@ module _
         ( U Z)
 
   abstract
-    up-pushout-is-equiv-up-pushout :
+    universal-property-pushout-is-equiv-universal-property-pushout :
       universal-property-pushout s c' →
       is-equiv h →
       universal-property-pushout s c
-    up-pushout-is-equiv-up-pushout U K Z =
+    universal-property-pushout-is-equiv-universal-property-pushout U K Z =
       is-equiv-right-map-triangle
         ( cocone-span-map s c')
         ( cocone-span-map s c)
@@ -317,7 +317,7 @@ abstract
       ( is-property-is-equiv)
       ( map-universal-property-pushout s c H d)
       ( htpy-cocone-span-universal-property-pushout s c H d)
-      ( is-equiv-up-pushout-up-pushout s c d
+      ( is-equiv-universal-property-pushout-universal-property-pushout s c d
         ( map-universal-property-pushout s c H d)
         ( htpy-cocone-span-universal-property-pushout s c H d)
         ( H)
@@ -483,7 +483,8 @@ equiv-horizontal-map-cocone-span-universal-property-pushout :
   (f : S → A) (e : S ≃ B) (c : cocone-span (make-span f (map-equiv e)) C) →
   universal-property-pushout (make-span f (map-equiv e)) c →
   A ≃ C
-pr1 (equiv-horizontal-map-cocone-span-universal-property-pushout f e c H) = pr1 c
+pr1 (equiv-horizontal-map-cocone-span-universal-property-pushout f e c H) =
+  pr1 c
 pr2 (equiv-horizontal-map-cocone-span-universal-property-pushout f e c H) =
   is-equiv-horizontal-map-cocone-span-universal-property-pushout
     ( make-span f (map-equiv e))
@@ -614,7 +615,7 @@ module _
       ( make-span (vertical-map-cocone-span s c) h)
       ( d)
   universal-property-pushout-right-square-universal-property-pushout-rectangle
-    ( up-r)
+    ( K)
     { l} =
     universal-property-pushout-pullback-property-pushout
       ( make-span (vertical-map-cocone-span s c) h)
@@ -673,7 +674,7 @@ module _
             ( pullback-property-pushout-universal-property-pushout
               ( right-extend-span s h)
               ( horizontal-comp-cocone-span s h c d)
-              ( up-r)
+              ( K)
               ( W))))
 ```
 
@@ -1048,12 +1049,10 @@ module _
   where
 
   universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv :
-    ( {l : Level} →
-      universal-property-pushout l f g (h , k , bottom)) →
-    ( {l : Level} →
-      universal-property-pushout l f' g' (h' , k' , top))
+    universal-property-pushout f g (h , k , bottom) →
+    universal-property-pushout f' g' (h' , k' , top))
   universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
-    ( up-bottom)
+    ( H)
     { l = l} =
     universal-property-pushout-pullback-property-pushout l f' g'
       ( h' , k' , top)
@@ -1092,16 +1091,14 @@ module _
           ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
           ( pullback-property-pushout-universal-property-pushout f g
             ( h , k , bottom)
-            ( up-bottom)
+            ( H)
             ( W)))
 
   universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv :
-    ( {l : Level} →
-      universal-property-pushout l f' g' (h' , k' , top)) →
-    ( {l : Level} →
-      universal-property-pushout l f g (h , k , bottom))
+    universal-property-pushout f' g' (h' , k' , top) →
+    universal-property-pushout f g (h , k , bottom))
   universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
-    ( up-top)
+    ( H)
     { l = l} =
     universal-property-pushout-pullback-property-pushout l f g
       ( h , k , bottom)
@@ -1140,6 +1137,6 @@ module _
           ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
           ( pullback-property-pushout-universal-property-pushout f' g'
             ( h' , k' , top)
-            ( up-top)
+            ( H)
             ( W)))
 ```
