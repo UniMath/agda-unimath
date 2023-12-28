@@ -212,13 +212,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 l : Level} (A : UU l1) (B : UU l2)
+  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2)
   where
 
   is-section-binary-relation-span :
     is-section
-      ( span-binary-relation {l3 = l1 ⊔ l2 ⊔ l} {A} {B})
-      ( binary-relation-span {l3 = l1 ⊔ l2 ⊔ l} {A} {B})
+      ( span-binary-relation {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})
+      ( binary-relation-span {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})
   is-section-binary-relation-span S =
     inv
       ( eq-equiv-span
@@ -228,8 +228,8 @@ module _
 
   is-retraction-binary-relation-span :
     is-retraction
-      ( span-binary-relation {l3 = l1 ⊔ l2 ⊔ l} {A} {B})
-      ( binary-relation-span {l3 = l1 ⊔ l2 ⊔ l} {A} {B})
+      ( span-binary-relation {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})
+      ( binary-relation-span {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})
   is-retraction-binary-relation-span R =
     inv
       ( eq-htpy
@@ -242,26 +242,27 @@ module _
                 ( equiv-binary-relation-span-binary-relation R a b))))
 
   is-equiv-span-binary-relation :
-    is-equiv (span-binary-relation {l3 = l1 ⊔ l2 ⊔ l} {A} {B})
+    is-equiv (span-binary-relation {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})
   is-equiv-span-binary-relation =
     is-equiv-is-invertible
       ( binary-relation-span)
       ( is-section-binary-relation-span)
       ( is-retraction-binary-relation-span)
 
-  binary-type-duality : (A → B → UU (l1 ⊔ l2 ⊔ l)) ≃ span (l1 ⊔ l2 ⊔ l) A B
+  binary-type-duality : (A → B → UU (l1 ⊔ l2 ⊔ l3)) ≃ span (l1 ⊔ l2 ⊔ l3) A B
   pr1 binary-type-duality = span-binary-relation
   pr2 binary-type-duality = is-equiv-span-binary-relation
 
   is-equiv-binary-relation-span :
-    is-equiv (binary-relation-span {l3 = l1 ⊔ l2 ⊔ l} {A} {B})
+    is-equiv (binary-relation-span {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})
   is-equiv-binary-relation-span =
     is-equiv-is-invertible
       ( span-binary-relation)
       ( is-retraction-binary-relation-span)
       ( is-section-binary-relation-span)
 
-  inv-binary-type-duality : span (l1 ⊔ l2 ⊔ l) A B ≃ (A → B → UU (l1 ⊔ l2 ⊔ l))
+  inv-binary-type-duality :
+    span (l1 ⊔ l2 ⊔ l3) A B ≃ (A → B → UU (l1 ⊔ l2 ⊔ l3))
   pr1 inv-binary-type-duality = binary-relation-span
   pr2 inv-binary-type-duality = is-equiv-binary-relation-span
 ```
