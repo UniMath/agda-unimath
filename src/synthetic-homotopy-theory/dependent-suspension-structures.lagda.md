@@ -25,7 +25,7 @@ open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.suspension-structures
 ```
 
@@ -38,8 +38,9 @@ This is the dependent analog of
 relation between
 [suspension structures](synthetic-homotopy-theory.suspension-structures.md) and
 dependent suspension structures mirrors the relation between
-[cocones under a span](synthetic-homotopy-theory.cocones-under-spans.md) and
-[dependent cocones under a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md).
+[cocones under a span](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
+and
+[dependent cocones under a span](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md).
 
 Fix a type `X` and consider a suspension cocone `(f , g , h)` with nadir `Y`.
 Given a type family `P : Y → UU`, a dependent suspension cocone on `P` over

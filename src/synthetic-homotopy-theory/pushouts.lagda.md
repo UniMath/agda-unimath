@@ -21,8 +21,8 @@ open import foundation.sections
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.26-descent
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -40,9 +40,9 @@ Consider a span `𝒮` of types
 ```
 
 A **pushout** of `𝒮` is an initial type `X` equipped with a
-[cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) of `𝒮` in
-`X`. In other words, a pushout `X` of `𝒮` comes equipped with a cocone structure
-`(i , j , H)` where
+[cocone structure](synthetic-homotopy-theory.cocones-under-span-diagrams.md) of
+`𝒮` in `X`. In other words, a pushout `X` of `𝒮` comes equipped with a cocone
+structure `(i , j , H)` where
 
 ```text
         g
@@ -275,7 +275,7 @@ as a pushout of fibers. This is an application of the
 [flattening lemma for pushouts](synthetic-homotopy-theory.flattening-lemma-pushouts.md).
 
 Given a pushout square with a
-[cocone](synthetic-homotopy-theory.cocones-under-spans.md)
+[cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
 
 ```text
        g

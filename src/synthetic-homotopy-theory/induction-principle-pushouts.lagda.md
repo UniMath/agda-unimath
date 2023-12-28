@@ -13,8 +13,8 @@ open import foundation.sections
 open import foundation.spans
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 ```
 
 </details>
@@ -22,10 +22,10 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans
 ## Idea
 
 The **induction principle of pushouts** asserts that for every
-[dependent cocone](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
+[dependent cocone](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
 of a type family `P` over a type `X` equipped with a
-[cocone](synthetic-homotopy-theory.cocones-under-spans.md) `c` there is a
-section of `P` corresponding to `c`. More precisely, it asserts that the map
+[cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c` there is
+a section of `P` corresponding to `c`. More precisely, it asserts that the map
 
 ```text
   dependent-cocone-span-map f g c P : ((x : X) → P x) → dependent-cocone-span f g c P

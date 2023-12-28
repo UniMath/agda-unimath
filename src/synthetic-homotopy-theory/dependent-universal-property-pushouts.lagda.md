@@ -25,8 +25,8 @@ open import foundation.spans
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
 ```
@@ -38,8 +38,9 @@ open import synthetic-homotopy-theory.induction-principle-pushouts
 The **dependent universal property of pushouts** asserts that every section of a
 type family over a [pushout](synthetic-homotopy-theory.pushouts.md) corresponds
 in a canonical way uniquely to a
-[dependent cocone](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
-over the [cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) on
+[dependent cocone](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
+over the
+[cocone structure](synthetic-homotopy-theory.cocones-under-span-diagrams.md) on
 the pushout.
 
 ## Definition
@@ -65,7 +66,7 @@ module _
   ( U : dependent-universal-property-pushout s c)
   ( P : X → UU l) (h : dependent-cocone-span s c P)
   where
-  
+
   abstract
     uniqueness-dependent-universal-property-pushout :
       is-contr

@@ -32,8 +32,8 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.torsorial-type-families
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.operations-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -53,7 +53,10 @@ Consider a [pushout square](synthetic-homotopy-theory.pushouts.md)
         i
 ```
 
-Then the [universal property of the pushout](synthetic-homotopy-theory.universal-property-pushouts.md) implies that the left map in the [triangle](foundation-core.commuting-triangles-of-maps.md)
+Then the
+[universal property of the pushout](synthetic-homotopy-theory.universal-property-pushouts.md)
+implies that the left map in the
+[triangle](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
            (X → 𝒰)
@@ -64,7 +67,11 @@ Then the [universal property of the pushout](synthetic-homotopy-theory.universal
               ≃
 ```
 
-is an [equivalence](foundation-core.equivalences.md). By the [univalence axiom](foundation.univalence.md) it follows that the bottom map is an equivalence. Therefore it follows that a type family over `X` is equivalently described as the {{#concept "structure of a type family over a pushout"}}, which consists of triples `(P , Q , e)` consisting of
+is an [equivalence](foundation-core.equivalences.md). By the
+[univalence axiom](foundation.univalence.md) it follows that the bottom map is
+an equivalence. Therefore it follows that a type family over `X` is equivalently
+described as the {{#concept "structure of a type family over a pushout"}}, which
+consists of triples `(P , Q , e)` consisting of
 
 ```text
   P : A → 𝒰
@@ -72,14 +79,17 @@ is an [equivalence](foundation-core.equivalences.md). By the [univalence axiom](
   e : Π (x : S) → P (f x) ≃ Q (g x).
 ```
 
-In other words, for any such triple `(P , Q , e)`, the type of families `Y : X → 𝒰` equipped with [families of equivalences](foundation.families-of-equivalences.md)
+In other words, for any such triple `(P , Q , e)`, the type of families
+`Y : X → 𝒰` equipped with
+[families of equivalences](foundation.families-of-equivalences.md)
 
 ```text
   u : (a : A) → P a ≃ Y (i a)
   v : (b : B) → Q b ≃ Y (j b)
 ```
 
-and a family of [homotopies](foundation-core.homotopies.md) witnessing that the square of equivalences
+and a family of [homotopies](foundation-core.homotopies.md) witnessing that the
+square of equivalences
 
 ```text
              u (f x)
@@ -91,19 +101,22 @@ and a family of [homotopies](foundation-core.homotopies.md) witnessing that the 
              v (g x)
 ```
 
-[commutes](foundation-core.commuting-squares-of-maps.md) for each `x : S` is [contractible](foundation-core.contractible-types.md).
+[commutes](foundation-core.commuting-squares-of-maps.md) for each `x : S` is
+[contractible](foundation-core.contractible-types.md).
 
 ## Definitions
 
 ### The structure of type families over pushouts
 
-**Note.** In the definition of structure of type families over pushouts we will assume that the families `A → 𝒰` and `B → 𝒰` are of the same [universe level](foundation.universe-levels.md).
+**Note.** In the definition of structure of type families over pushouts we will
+assume that the families `A → 𝒰` and `B → 𝒰` are of the same
+[universe level](foundation.universe-levels.md).
 
 ```agda
 module _
   {l1 l2 l3 : Level} (l : Level) (s : span l1 l2 l3)
   where
-  
+
   structure-type-family-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
   structure-type-family-pushout =
     Σ ( domain-span s → UU l)
@@ -146,7 +159,7 @@ module _
   (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
   (P : X → UU l5)
   where
-  
+
   structure-type-family-pushout-type-family :
     structure-type-family-pushout l5 s
   structure-type-family-pushout-type-family =
@@ -162,7 +175,8 @@ module _
 
 ### Equivalences of type family structures over pushouts
 
-Consider two structures `(PA , PB , Pe)` and (QA , QB , Qe)` of type families over a span
+Consider two structures `(PA , PB , Pe)` and (QA , QB , Qe)` of type families
+over a span
 
 ```text
         g
@@ -173,7 +187,8 @@ Consider two structures `(PA , PB , Pe)` and (QA , QB , Qe)` of type families ov
     A
 ```
 
-An {{#concept "equivalence of structures of type families over pushouts"}} consists of families of equivalences
+An {{#concept "equivalence of structures of type families over pushouts"}}
+consists of families of equivalences
 
 ```text
   u : (a : A) → PA a ≃ QA a
@@ -212,7 +227,7 @@ module _
     (b : codomain-span s) →
     right-type-family-structure-type-family-pushout s P b ≃
     right-type-family-structure-type-family-pushout s Q b
-  
+
   coherence-square-equiv-structure-type-family-pushout :
     equiv-left-type-family-structure-type-family-pushout →
     equiv-right-type-family-structure-type-family-pushout →
@@ -274,7 +289,7 @@ module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
   (P : structure-type-family-pushout l4 s)
   where
-  
+
   id-equiv-structure-type-family-pushout :
     equiv-structure-type-family-pushout s P P
   pr1 id-equiv-structure-type-family-pushout a = id-equiv
@@ -409,7 +424,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
   {X : UU l4} (c : cocone-span s X)
   where
-  
+
   triangle-structure-type-family-pushout-type-family :
     ( structure-type-family-pushout-type-family {l5 = l5} s c) ~
     ( structure-type-family-pushout-cocone-UU l5 s ∘ ( cocone-span-map s {Y = UU l5} c))
@@ -451,7 +466,7 @@ module _
   {l1 l2 l3 l4 l : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
   (U : universal-property-pushout s c)
   where
-  
+
   uniqueness-structure-type-family-pushout :
     (P : structure-type-family-pushout l s) →
     is-contr (Σ ( X → UU l) (λ Q → equiv-structure-type-family-pushout s P (structure-type-family-pushout-type-family s c Q)))

@@ -26,11 +26,11 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.26-descent
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.families-of-types-pushouts
-open import synthetic-homotopy-theory.operations-cocones-under-spans
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -260,9 +260,9 @@ module _
 
 ### Proof of the flattening lemma for pushouts
 
-The proof uses the theorem that maps from `Σ`-types are equivalent to
-dependent maps over the index type, for which we can invoke the dependent
-universal property of the indexing pushout.
+The proof uses the theorem that maps from `Σ`-types are equivalent to dependent
+maps over the index type, for which we can invoke the dependent universal
+property of the indexing pushout.
 
 ```agda
 module _

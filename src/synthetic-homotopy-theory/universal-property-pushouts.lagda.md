@@ -38,8 +38,8 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.operations-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pullback-property-pushouts
 ```
 
@@ -55,9 +55,9 @@ Consider a span `𝒮` of types
 ```
 
 and a type `X` equipped with a
-[cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) of `S` into
-`X`. The **universal property of the pushout** of `𝒮` asserts that `X` is the
-_initial_ type equipped with such cocone structure. In other words, the
+[cocone structure](synthetic-homotopy-theory.cocones-under-span-diagrams.md) of
+`S` into `X`. The **universal property of the pushout** of `𝒮` asserts that `X`
+is the _initial_ type equipped with such cocone structure. In other words, the
 universal property of the pushout of `𝒮` asserts that the following evaluation
 map is an equivalence:
 
@@ -183,13 +183,15 @@ The {{#concept "3-for-2 property of pushouts}} asserts that for any two cocones
 and a map `h : X → X'` equipped with a homotopy of cocones
 
 ```text
-  cocone-span-map s (i , j , H) h ~ (i' , j' , H'), 
+  cocone-span-map s (i , j , H) h ~ (i' , j' , H'),
 ```
 
 if any two of the following three conditions hold, then so does the third:
 
-1. The cocone `(i , j , H)` satisfies the universal property of the pushout of `s`
-2. The cocone `(i' , j' , H')` satisfies the universal property of the pushout of `s`
+1. The cocone `(i , j , H)` satisfies the universal property of the pushout of
+   `s`
+2. The cocone `(i' , j' , H')` satisfies the universal property of the pushout
+   of `s`
 3. The map `h : X → X'` is an equivalence.
 
 **Proof.** For any type `Y` there is a commuting triangle
@@ -203,7 +205,12 @@ if any two of the following three conditions hold, then so does the third:
             cocone s Y
 ```
 
-Thus we see that if both `(i , j , H)` and `(i' , j' , H')` satisfy the universal property of pushouts, then `- ∘ h` is an equivalence for every type `Y`, and this is equivalent to `h` being an equivalence. Conversely, if `h` is an equivalence, then the left map in the above triangle is an equivalence if and only if the right map is an equivalence, so it follows that `(i , j , H)` is universal if and only if `(i' , j' , H')` is an equivalence.
+Thus we see that if both `(i , j , H)` and `(i' , j' , H')` satisfy the
+universal property of pushouts, then `- ∘ h` is an equivalence for every type
+`Y`, and this is equivalent to `h` being an equivalence. Conversely, if `h` is
+an equivalence, then the left map in the above triangle is an equivalence if and
+only if the right map is an equivalence, so it follows that `(i , j , H)` is
+universal if and only if `(i' , j' , H')` is an equivalence.
 
 ```agda
 module _
@@ -285,7 +292,9 @@ Consider two cocones
         i                i'
 ```
 
-on the same span `s`, and assume that both `(i , j , H)` and (i' , j' , H')` satisfy the universal property of the pushout of `s`. Then the type of equivalences `e : X ≃ X'` equipped with a homotopy of cocones
+on the same span `s`, and assume that both `(i , j , H)` and (i' , j' ,
+H')`satisfy the universal property of the pushout of`s`. Then the type of equivalences `e
+: X ≃ X'` equipped with a homotopy of cocones
 
 ```text
   cocone-span-map s (i , j , H) (map-equiv e) ~ (i' , j' , H')
@@ -293,13 +302,15 @@ on the same span `s`, and assume that both `(i , j , H)` and (i' , j' , H')` sat
 
 is contractible.
 
-**Proof.** By the 3-for-2 property of pushouts it follows that every map `h : X → X'` equipped with a homotopy of cocones
+**Proof.** By the 3-for-2 property of pushouts it follows that every map
+`h : X → X'` equipped with a homotopy of cocones
 
 ```text
-  cocone-span-map s (i , j , H) h ~ (i' , j' , H'), 
+  cocone-span-map s (i , j , H) h ~ (i' , j' , H'),
 ```
 
-is an equivalence. Furthermore, the type of such maps is contractible by the universal property of pushouts. Hence the claim follows.
+is an equivalence. Furthermore, the type of such maps is contractible by the
+universal property of pushouts. Hence the claim follows.
 
 ```agda
 abstract
@@ -326,7 +337,8 @@ abstract
 
 ### The universal property of pushouts is equivalent to the pullback property of pushouts
 
-**Proof.** Consider a cocone `c` with codomain `X` on a span `A <- S -> B` and a type `Y`. Then there is a commuting triangle
+**Proof.** Consider a cocone `c` with codomain `X` on a span `A <- S -> B` and a
+type `Y`. Then there is a commuting triangle
 
 ```text
   (X → Y) -----> (A → Y) ×_(S → Y) (B → Y)
@@ -336,7 +348,9 @@ abstract
         cocone s Y
 ```
 
-in which the right map is an equivalence. Therefore it follows that the left map is an equivalence if and only if the top map is an equivalence, from which we conclude the theorem.
+in which the right map is an equivalence. Therefore it follows that the left map
+is an equivalence if and only if the top map is an equivalence, from which we
+conclude the theorem.
 
 ```agda
 module _
@@ -497,7 +511,8 @@ pr2 (equiv-horizontal-map-cocone-span-universal-property-pushout f e c H) =
 
 #### The horizontal pushout pasting lemma
 
-The {{#concept "horizontal pushout pasting lemma"}} asserts that if in the left square in the diagram
+The {{#concept "horizontal pushout pasting lemma"}} asserts that if in the left
+square in the diagram
 
 ```text
        g       h
@@ -522,8 +537,10 @@ square is a pushout.
      (C → Z) -------> (B → Z) -------> (S → Z)
 ```
 
-in which the right square is a pullback square. By the pasting lemma for pullbacks it follows that the left square is a pullback square if and only if the outer rectangle is a pullback square. The claim therefore follows by the pullback property of pushouts.
-
+in which the right square is a pullback square. By the pasting lemma for
+pullbacks it follows that the left square is a pullback square if and only if
+the outer rectangle is a pullback square. The claim therefore follows by the
+pullback property of pushouts.
 
 ```agda
 module _
@@ -939,7 +956,8 @@ module _
 
 ### Extending pushouts by equivalences of cocones
 
-Given a commutative diagram where `(i , j , k)` form an [equivalence of spans](foundation.equivalences-spans.md),
+Given a commutative diagram where `(i , j , k)` form an
+[equivalence of spans](foundation.equivalences-spans.md),
 
 ```text
          g'

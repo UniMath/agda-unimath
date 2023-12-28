@@ -26,7 +26,7 @@ open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
@@ -47,8 +47,8 @@ A **cofork** of a parallel pair `f, g : A → B` with vertext `X` is a map
 which looks like a fork if you flip the arrows, hence a cofork.
 
 Coforks are an analogue of
-[cocones under spans](synthetic-homotopy-theory.cocones-under-spans.md) for
-parallel pairs. The universal cofork of a pair is their
+[cocones under spans](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
+for parallel pairs. The universal cofork of a pair is their
 [coequalizer](synthetic-homotopy-theory.coequalizers.md).
 
 ## Definitions
@@ -210,7 +210,8 @@ module _
 ### Coforks are special cases of cocones under spans
 
 The type of coforks of parallel pairs is equivalent to the type of
-[cocones](synthetic-homotopy-theory.cocones-under-spans.md) under the span
+[cocones](synthetic-homotopy-theory.cocones-under-span-diagrams.md) under the
+span
 
 ```text
      ∇         [f,g]

@@ -1,7 +1,7 @@
 # Dependent cocones under spans
 
 ```agda
-module synthetic-homotopy-theory.dependent-cocones-under-spans where
+module synthetic-homotopy-theory.dependent-cocones-under-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -25,7 +25,7 @@ open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
@@ -33,9 +33,9 @@ open import synthetic-homotopy-theory.cocones-under-spans
 ## Idea
 
 Consider a span `𝒮 := (A <-- S --> B)` and a
-[cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) `c` of `𝒮`
-into a type `X`. Furthermore, consider a type family `P` over `X`. In this case
-we may consider _dependent_ cocone structures on `P` over `c`.
+[cocone structure](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c`
+of `𝒮` into a type `X`. Furthermore, consider a type family `P` over `X`. In
+this case we may consider _dependent_ cocone structures on `P` over `c`.
 
 A **dependent cocone** `d` over `(i , j , H)` on `P` consists of two dependent
 functions

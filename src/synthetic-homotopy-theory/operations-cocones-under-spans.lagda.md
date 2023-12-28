@@ -1,7 +1,7 @@
 # Operations on cocones under spans
 
 ```agda
-module synthetic-homotopy-theory.operations-cocones-under-spans where
+module synthetic-homotopy-theory.operations-cocones-under-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -25,14 +25,20 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
 
 ## Idea
 
-There are several ways of producing [cocones under spans](synthetic-homotopy-theory.cocones-under-spans.md) by combining cocones with other cocones, [morphisms of arrows](foundation.morphisms-arrows.md), [equivalences of arrows](foundation.equivalences-arrows.md), [morphisms of spans](foundation.morphisms-spans.md), [equivalences of spans](foundation.equivalences-spans.md), and so on.
+There are several ways of producing
+[cocones under spans](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
+by combining cocones with other cocones,
+[morphisms of arrows](foundation.morphisms-arrows.md),
+[equivalences of arrows](foundation.equivalences-arrows.md),
+[morphisms of spans](foundation.morphisms-spans.md),
+[equivalences of spans](foundation.equivalences-spans.md), and so on.
 
 ## Definitions
 
@@ -111,7 +117,8 @@ module _
 
 ### Postcomposing cocones under spans with maps
 
-Consider a span `A <-f- S -g-> B`. equipped with a cocone `c := (i , j , H)` as indicated in the diagram
+Consider a span `A <-f- S -g-> B`. equipped with a cocone `c := (i , j , H)` as
+indicated in the diagram
 
 ```text
         g
@@ -135,7 +142,8 @@ Then any map `h : X → Y` induces a cocone
        h ∘ i
 ```
 
-This way of extending cocones by maps is used to express the [universal property of pushouts](synthetic-homotopy-theory.universal-property-pushouts.md).
+This way of extending cocones by maps is used to express the
+[universal property of pushouts](synthetic-homotopy-theory.universal-property-pushouts.md).
 
 ```agda
 module _
@@ -172,9 +180,9 @@ module _
 ### Horizontal composition of cocones under spans
 
 Consider a span `s := A <-f- S -g-> B` and a moprhism `h : B → C`. Then we can
-**compose** any cocone `c := (i , j , H)` with codomain `X` under the span
-`s` **horizontally** with a cocone `d` under the span
-`X <-j- B -h-> C` as indicated in the diagram
+**compose** any cocone `c := (i , j , H)` with codomain `X` under the span `s`
+**horizontally** with a cocone `d` under the span `X <-j- B -h-> C` as indicated
+in the diagram
 
 ```text
         g       h
@@ -238,7 +246,9 @@ module _
 
 ### Cocones on spans extended on the left by morphisms and equivalences of arrows
 
-Consider a span `s := A <-f- S -g-> B`, a cocone on `s`, and a [moprhism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` for some map `f : S' → A'`, as indicated in the diagram
+Consider a span `s := A <-f- S -g-> B`, a cocone on `s`, and a
+[moprhism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` for
+some map `f : S' → A'`, as indicated in the diagram
 
 ```text
           h₀       g
@@ -276,11 +286,13 @@ module _
       ( hom-equiv-arrow f' (left-map-span s) e)
 ```
 
-Consider a span `s := A <-f- S -g-> B`, a cocone `(i , j , H)` on `s`, and a moprhism of arrows `h : hom-arrow j j'` for some map `j' : B' → X'`, as indicated in the diagram
+Consider a span `s := A <-f- S -g-> B`, a cocone `(i , j , H)` on `s`, and a
+moprhism of arrows `h : hom-arrow j j'` for some map `j' : B' → X'`, as
+indicated in the diagram
 
 ```text
         g        h₀
-    S -----> B -----> B' 
+    S -----> B -----> B'
     |        |        |
   f |      j |   h    | j'
     v        v        ∨
@@ -289,7 +301,6 @@ Consider a span `s := A <-f- S -g-> B`, a cocone `(i , j , H)` on `s`, and a mop
 ```
 
 Then we obtain a new cocone on the outer span `A <- S -> B'`.
-
 
 A variation on the above:
 
@@ -320,7 +331,9 @@ module _
 
 ### Vertical composition of cocones under spans
 
-Consider a span `s := A <-f- S -g-> B` and a map `h : A → C`. Then we can **compose** a cocone `c := (i , j , H)` under `s` **vertically** with a cocone `d` under the span `C <-h- A -i-> X` as indicated in the diagram
+Consider a span `s := A <-f- S -g-> B` and a map `h : A → C`. Then we can
+**compose** a cocone `c := (i , j , H)` under `s` **vertically** with a cocone
+`d` under the span `C <-h- A -i-> X` as indicated in the diagram
 
 ```text
         g
@@ -390,8 +403,9 @@ module _
 
 ### Composing cocones with morphisms of arrows on the right
 
-Consider a span `s := A <-f- S -g-> B` and a map `g' : S' → B'`.
-Then we can **compose** a morphism of arrows `h : hom-arrow g' g` with a cocone `c := (i , j , H)` under `s`, as indicated in the diagram
+Consider a span `s := A <-f- S -g-> B` and a map `g' : S' → B'`. Then we can
+**compose** a morphism of arrows `h : hom-arrow g' g` with a cocone
+`c := (i , j , H)` under `s`, as indicated in the diagram
 
 ```text
          g'

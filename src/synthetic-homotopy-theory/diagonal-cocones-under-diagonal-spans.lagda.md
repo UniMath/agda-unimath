@@ -12,14 +12,16 @@ open import foundation.diagonal-spans
 open import foundation.homotopies
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
 
 ## Idea
 
-Consider a map `f : A → B`. Then any map `g : B → X` induces a {{#concept "diagonal cocone" Agda=diagonal-cocone-span Disambiguation="span"}} on the [diagonal span](foundation.diagonal-spans.md)
+Consider a map `f : A → B`. Then any map `g : B → X` induces a
+{{#concept "diagonal cocone" Agda=diagonal-cocone-span Disambiguation="span"}}
+on the [diagonal span](foundation.diagonal-spans.md)
 
 ```text
        f       f

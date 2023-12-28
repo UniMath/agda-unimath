@@ -41,10 +41,10 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
-open import synthetic-homotopy-theory.operations-cocones-under-spans
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pullback-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -408,7 +408,7 @@ abstract
 module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3) {X : UU l4} (c : cocone-span s X)
   where
-  
+
   cone-family-dependent-pullback-property :
     {l : Level} (P : X → UU l) →
     cone-family

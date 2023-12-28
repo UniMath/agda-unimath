@@ -1,7 +1,7 @@
 # Cocones under spans
 
 ```agda
-module synthetic-homotopy-theory.cocones-under-spans where
+module synthetic-homotopy-theory.cocones-under-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -34,8 +34,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A {{#concept "cocone" Agda=cocone-span Disambiguation="span"}} under a [span](foundation.spans.md) `A <-f- S -g-> B` with codomain
-`X` consists of two maps `i : A → X` and `j : B → X` equipped with a
+A {{#concept "cocone" Agda=cocone-span Disambiguation="span"}} under a
+[span](foundation.spans.md) `A <-f- S -g-> B` with codomain `X` consists of two
+maps `i : A → X` and `j : B → X` equipped with a
 [homotopy](foundation.homotopies.md) witnessing that the square
 
 ```text
@@ -50,8 +51,8 @@ A {{#concept "cocone" Agda=cocone-span Disambiguation="span"}} under a [span](fo
 
 [commutes](foundation.commuting-squares-of-maps.md).
 
-[Equivalently](foundation-core.equivalences.md), a cocone with codomain `X` under a span `s` given by
-`A <-f- S -g-> B` can be described as a
+[Equivalently](foundation-core.equivalences.md), a cocone with codomain `X`
+under a span `s` given by `A <-f- S -g-> B` can be described as a
 [morphism of spans](foundation.morphisms-spans.md) from `s` into the constant
 span at `X`. In other words, a cocone under `s` with codomain `X` is a commuting
 diagram of the form
@@ -65,7 +66,9 @@ diagram of the form
     X ====== X ====== X.
 ```
 
-It is immediate from the definition of a cocone on a span that any commuting square of maps, or any [morphism of arrows](foundation.morphisms-arrows.md) can be presented equivalently as a cocone on a span.
+It is immediate from the definition of a cocone on a span that any commuting
+square of maps, or any [morphism of arrows](foundation.morphisms-arrows.md) can
+be presented equivalently as a cocone on a span.
 
 ## Definitions
 
@@ -143,7 +146,12 @@ module _
 
 ### Homotopies of cocones under spans
 
-Given two cocones `c` and `c'` on a span `s`, both with the same codomain `X`, we also introduce homotopies of cocones under spans. A {{#concept "homotopy of cocones under a span" Agda=htpy-cocone-span}} from `c := (i , j , H)` to `c' := (i' , j' , H')` under a span `A <-f- S -g-> B` consists of two homotopies `K : i ~ i'` and `L : j ~ j'` and a homotopy `M` witnessing that the square of homotopies
+Given two cocones `c` and `c'` on a span `s`, both with the same codomain `X`,
+we also introduce homotopies of cocones under spans. A
+{{#concept "homotopy of cocones under a span" Agda=htpy-cocone-span}} from
+`c := (i , j , H)` to `c' := (i' , j' , H')` under a span `A <-f- S -g-> B`
+consists of two homotopies `K : i ~ i'` and `L : j ~ j'` and a homotopy `M`
+witnessing that the square of homotopies
 
 ```text
          K · f
@@ -253,4 +261,10 @@ module _
 
 ## See also
 
-- In [Operations on cocones under spans](synthetic-homotopy-theory.operations-cocones-under-spans.md) we define several ways of constructing cocones under spans from given cocones under spans, [morphisms of arrows](foundation.morphisms-arrows.md), [equivalences of arrows](foundation.equivalences-arrows.md), [morphisms of spans](foundation.morphisms-spans.md), [equivalences of spans](foundation.equivalences-spans.md), and so on.
+- In
+  [Operations on cocones under spans](synthetic-homotopy-theory.operations-cocones-under-span-diagrams.md)
+  we define several ways of constructing cocones under spans from given cocones
+  under spans, [morphisms of arrows](foundation.morphisms-arrows.md),
+  [equivalences of arrows](foundation.equivalences-arrows.md),
+  [morphisms of spans](foundation.morphisms-spans.md),
+  [equivalences of spans](foundation.equivalences-spans.md), and so on.

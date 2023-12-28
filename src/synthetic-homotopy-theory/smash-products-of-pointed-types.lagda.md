@@ -22,7 +22,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.pointed-unit-type
 
-open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-span-diagrams-of-pointed-types
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.pushouts-of-pointed-types
 open import synthetic-homotopy-theory.wedges-of-pointed-types

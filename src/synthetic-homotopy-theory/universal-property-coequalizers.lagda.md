@@ -20,7 +20,7 @@ open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```

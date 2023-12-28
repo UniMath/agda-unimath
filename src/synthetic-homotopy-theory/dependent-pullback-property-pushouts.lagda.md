@@ -16,7 +16,7 @@ open import foundation.spans
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
@@ -41,7 +41,7 @@ module _
   {l1 l2 l3 l4 : Level} (s : span l1 l2 l3)
   {X : UU l4} (c : cocone-span s X)
   where
-  
+
   cone-dependent-pullback-property-pushout :
     {l5 : Level} (P : X → UU l5) →
     cone

@@ -10,7 +10,7 @@ module synthetic-homotopy-theory.cocartesian-morphisms-arrows where
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 ```
 
