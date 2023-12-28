@@ -49,8 +49,10 @@ module _
     {A' : UU l4} (f : domain-span-diagram s → A')
     {B' : UU l5} (g : codomain-span-diagram s → B') →
     span-diagram l4 l5 l3
-  pr1 (extend-span-diagram s {A'} f {B'} g) = A'
-  pr1 (pr2 (extend-span-diagram s {A'} f {B'} g)) = B'
+  pr1 (extend-span-diagram s {A'} f {B'} g) =
+    A'
+  pr1 (pr2 (extend-span-diagram s {A'} f {B'} g)) =
+    B'
   pr2 (pr2 (extend-span-diagram s {A'} f {B'} g)) =
     extend-span (span-span-diagram s) f g
 ```

@@ -7,22 +7,15 @@ module foundation.binary-type-duality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-spans
 open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.retractions
 open import foundation.sections
 open import foundation.spans
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-duality
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
-open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -34,11 +27,20 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Using the principles of [type duality](foundation.type-duality.md) and
-[type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md),
-we can show that the type of spans `A <-- S --> B` is
-[equivalent](foundation.equivalences.md) to the type of type-valued binary
-relations `A → B → 𝓤`.
+The principle of {{#concept "binary type duality"}} asserts that the type of
+[binary relations](foundation.binary-relations.md) `A → B → 𝒰` is [equivalent](foundation-core.equivalences.md) to the type of [binary spans](foundation.spans.md) from `A` to `B`. The binary type duality principle is a binary version of the [type duality](foundation.type-duality.md) principle, which asserts that type families over a type `A` are equivalently described as maps into `A`, and makes essential use of the [univalence axiom](foundation.univalence.md).
+
+The equivalence of binary type duality takes a binary relation `R : A → B → 𝒰` to the span
+
+```text
+  A <----- Σ (a : A), Σ (b : B), R a b -----> B.
+```
+
+and its inverse takes a span `A <-f- S -g-> B` to the binary relation
+
+```text
+  a b ↦ Σ (s : S), (f s ＝ a) × (g s ＝ b).
+```
 
 ## Definitions
 
