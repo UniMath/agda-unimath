@@ -105,57 +105,55 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (S : span l3 A B)
   where
 
-  map-equiv-spanning-type-is-section-binary-relation-span :
+  map-equiv-spanning-type-span-binary-relation-span :
     spanning-type-span S →
     spanning-type-span-binary-relation (binary-relation-span S)
-  map-equiv-spanning-type-is-section-binary-relation-span s =
+  map-equiv-spanning-type-span-binary-relation-span s =
     ( left-map-span S s , right-map-span S s , s , refl , refl)
 
-  map-inv-equiv-spanning-type-is-section-binary-relation-span :
+  map-inv-equiv-spanning-type-span-binary-relation-span :
     spanning-type-span-binary-relation (binary-relation-span S) →
     spanning-type-span S
-  map-inv-equiv-spanning-type-is-section-binary-relation-span (a , b , s , _) =
-    s
+  map-inv-equiv-spanning-type-span-binary-relation-span (a , b , s , _) = s
 
-  is-section-map-inv-equiv-spanning-type-is-section-binary-relation-span :
+  is-section-map-inv-equiv-spanning-type-span-binary-relation-span :
     is-section
-      ( map-equiv-spanning-type-is-section-binary-relation-span)
-      ( map-inv-equiv-spanning-type-is-section-binary-relation-span)
-  is-section-map-inv-equiv-spanning-type-is-section-binary-relation-span 
+      ( map-equiv-spanning-type-span-binary-relation-span)
+      ( map-inv-equiv-spanning-type-span-binary-relation-span)
+  is-section-map-inv-equiv-spanning-type-span-binary-relation-span 
     ( ._ , ._ , s , refl , refl) =
     refl
 
-  is-retraction-map-inv-equiv-spanning-type-is-section-binary-relation-span :
+  is-retraction-map-inv-equiv-spanning-type-span-binary-relation-span :
     is-retraction
-      ( map-equiv-spanning-type-is-section-binary-relation-span)
-      ( map-inv-equiv-spanning-type-is-section-binary-relation-span)
-  is-retraction-map-inv-equiv-spanning-type-is-section-binary-relation-span s =
-    refl
+      ( map-equiv-spanning-type-span-binary-relation-span)
+      ( map-inv-equiv-spanning-type-span-binary-relation-span)
+  is-retraction-map-inv-equiv-spanning-type-span-binary-relation-span s = refl
 
-  is-equiv-map-equiv-spanning-type-is-section-binary-relation-span :
+  is-equiv-map-equiv-spanning-type-span-binary-relation-span :
     is-equiv
-      ( map-equiv-spanning-type-is-section-binary-relation-span)
-  is-equiv-map-equiv-spanning-type-is-section-binary-relation-span =
+      ( map-equiv-spanning-type-span-binary-relation-span)
+  is-equiv-map-equiv-spanning-type-span-binary-relation-span =
     is-equiv-is-invertible
-      ( map-inv-equiv-spanning-type-is-section-binary-relation-span)
-      ( is-section-map-inv-equiv-spanning-type-is-section-binary-relation-span)
-      ( is-retraction-map-inv-equiv-spanning-type-is-section-binary-relation-span)
+      ( map-inv-equiv-spanning-type-span-binary-relation-span)
+      ( is-section-map-inv-equiv-spanning-type-span-binary-relation-span)
+      ( is-retraction-map-inv-equiv-spanning-type-span-binary-relation-span)
 
-  equiv-spanning-type-is-section-binary-relation-span :
+  equiv-spanning-type-span-binary-relation-span :
     spanning-type-span S ≃
     spanning-type-span-binary-relation (binary-relation-span S)    
-  pr1 equiv-spanning-type-is-section-binary-relation-span =
-    map-equiv-spanning-type-is-section-binary-relation-span
-  pr2 equiv-spanning-type-is-section-binary-relation-span =
-    is-equiv-map-equiv-spanning-type-is-section-binary-relation-span
+  pr1 equiv-spanning-type-span-binary-relation-span =
+    map-equiv-spanning-type-span-binary-relation-span
+  pr2 equiv-spanning-type-span-binary-relation-span =
+    is-equiv-map-equiv-spanning-type-span-binary-relation-span
 
-  equiv-is-section-binary-relation-span :
+  equiv-span-binary-relation-span :
     equiv-span S (span-binary-relation (binary-relation-span S))
-  pr1 equiv-is-section-binary-relation-span =
-    equiv-spanning-type-is-section-binary-relation-span
-  pr1 (pr2 equiv-is-section-binary-relation-span) =
+  pr1 equiv-span-binary-relation-span =
+    equiv-spanning-type-span-binary-relation-span
+  pr1 (pr2 equiv-span-binary-relation-span) =
     refl-htpy
-  pr2 (pr2 equiv-is-section-binary-relation-span) =
+  pr2 (pr2 equiv-span-binary-relation-span) =
     refl-htpy
 ```
 
@@ -226,7 +224,7 @@ module _
       ( eq-equiv-span
         ( S)
         ( span-binary-relation (binary-relation-span S))
-        ( equiv-is-section-binary-relation-span S))
+        ( equiv-span-binary-relation-span S))
 
   is-retraction-binary-relation-span :
     is-retraction
