@@ -232,7 +232,7 @@ module _
       ( is-equiv-map-codomain-equiv-arrow f g α)
 ```
 
-### Equivalence of arrows are cartesian
+### Equivalences of arrows are cartesian
 
 ```agda
 module _
