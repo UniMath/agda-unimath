@@ -88,9 +88,9 @@ module _
   ( hB : B → B') (g : B → C) (g' : B' → C')
   ( hC : C → C') (f : A → C) (f' : A' → C')
   ( left : coherence-triangle-maps' f g h)
-  ( sq-top : coherence-square-maps' h hA hB h')
-  ( sq-bottom : coherence-square-maps' g hB hC g')
-  ( sq-front : coherence-square-maps' f hA hC f')
+  ( sq-top : coherence-square-maps hA h h' hB)
+  ( sq-bottom : coherence-square-maps hB g g' hC)
+  ( sq-front : coherence-square-maps hA f f' hC)
   ( right : coherence-triangle-maps' f' g' h')
   where
 
@@ -214,10 +214,13 @@ module _
     where
 
     vertical-coherence-prism-maps-vertical-coherence-prism-inv-squares-maps :
-      vertical-coherence-prism-inv-squares-maps
-        f g h f' g' h' hA hB hC top inv-front inv-right inv-left bottom →
-      vertical-coherence-prism-maps
-        f g h f' g' h' hA hB hC
+      vertical-coherence-prism-inv-squares-maps f g h f' g' h' hA hB hC
+        ( top)
+        ( inv-front)
+        ( inv-right)
+        ( inv-left)
+        ( bottom) →
+      vertical-coherence-prism-maps f g h f' g' h' hA hB hC
         ( top)
         ( inv-htpy inv-front)
         ( inv-htpy inv-right)
@@ -255,11 +258,13 @@ module _
     where
 
     vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps :
-      vertical-coherence-prism-inv-boundary-maps
-        f g h f' g' h' hA hB hC
-        inv-top inv-front inv-right inv-left inv-bottom →
-      vertical-coherence-prism-inv-triangles-maps
-        f g h f' g' h' hA hB hC
+      vertical-coherence-prism-inv-boundary-maps f g h f' g' h' hA hB hC
+        ( inv-top)
+        ( inv-front)
+        ( inv-right)
+        ( inv-left)
+        ( inv-bottom) →
+      vertical-coherence-prism-inv-triangles-maps f g h f' g' h' hA hB hC
         ( inv-top)
         ( inv-htpy inv-front)
         ( inv-htpy inv-right)

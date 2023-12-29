@@ -205,7 +205,7 @@ module _
       ( right)
       ( left)
       ( bottom))
-  (S : UU l)
+  ( S : UU l)
   where
 
   precomp-vertical-coherence-prism-inv-squares-maps :
