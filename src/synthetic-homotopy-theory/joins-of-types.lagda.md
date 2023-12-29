@@ -317,66 +317,69 @@ module _
   {l1 l2 : Level} (A : Prop l1) (B : Prop l2)
   where
 
-  cocone-disj : cocone pr1 pr2 (type-disj-Prop A B)
-  pr1 cocone-disj = inl-disj-Prop A B
-  pr1 (pr2 cocone-disj) = inr-disj-Prop A B
-  pr2 (pr2 cocone-disj) (a , b) =
+  cocone-disjunction : cocone pr1 pr2 (type-disjunction-Prop A B)
+  pr1 cocone-disjunction = inl-disjunction-Prop A B
+  pr1 (pr2 cocone-disjunction) = inr-disjunction-Prop A B
+  pr2 (pr2 cocone-disjunction) (a , b) =
     eq-is-prop'
-      ( is-prop-type-disj-Prop A B)
-      ( inl-disj-Prop A B a)
-      ( inr-disj-Prop A B b)
+      ( is-prop-type-disjunction-Prop A B)
+      ( inl-disjunction-Prop A B a)
+      ( inr-disjunction-Prop A B b)
 
-  map-disj-join-Prop : type-join-Prop A B → type-disj-Prop A B
-  map-disj-join-Prop =
-    cogap-join (type-disj-Prop A B) cocone-disj
+  map-disjunction-join-Prop : type-join-Prop A B → type-disjunction-Prop A B
+  map-disjunction-join-Prop =
+    cogap-join (type-disjunction-Prop A B) cocone-disjunction
 
-  map-join-disj-Prop : type-disj-Prop A B → type-join-Prop A B
-  map-join-disj-Prop =
-    elim-disj-Prop A B
+  map-join-disjunction-Prop : type-disjunction-Prop A B → type-join-Prop A B
+  map-join-disjunction-Prop =
+    elim-disjunction-Prop A B
       ( join-Prop A B)
       ( inl-join-Prop A B , inr-join-Prop A B)
 
-  is-equiv-map-disj-join-Prop : is-equiv map-disj-join-Prop
-  is-equiv-map-disj-join-Prop =
+  is-equiv-map-disjunction-join-Prop : is-equiv map-disjunction-join-Prop
+  is-equiv-map-disjunction-join-Prop =
     is-equiv-is-prop
       ( is-prop-type-join-Prop A B)
-      ( is-prop-type-disj-Prop A B)
-      ( map-join-disj-Prop)
+      ( is-prop-type-disjunction-Prop A B)
+      ( map-join-disjunction-Prop)
 
-  equiv-disj-join-Prop : (type-join-Prop A B) ≃ (type-disj-Prop A B)
-  pr1 equiv-disj-join-Prop = map-disj-join-Prop
-  pr2 equiv-disj-join-Prop = is-equiv-map-disj-join-Prop
+  equiv-disjunction-join-Prop :
+    (type-join-Prop A B) ≃ (type-disjunction-Prop A B)
+  pr1 equiv-disjunction-join-Prop = map-disjunction-join-Prop
+  pr2 equiv-disjunction-join-Prop = is-equiv-map-disjunction-join-Prop
 
-  is-equiv-map-join-disj-Prop : is-equiv map-join-disj-Prop
-  is-equiv-map-join-disj-Prop =
+  is-equiv-map-join-disjunction-Prop : is-equiv map-join-disjunction-Prop
+  is-equiv-map-join-disjunction-Prop =
     is-equiv-is-prop
-      ( is-prop-type-disj-Prop A B)
+      ( is-prop-type-disjunction-Prop A B)
       ( is-prop-type-join-Prop A B)
-      ( map-disj-join-Prop)
+      ( map-disjunction-join-Prop)
 
-  equiv-join-disj-Prop : (type-disj-Prop A B) ≃ (type-join-Prop A B)
-  pr1 equiv-join-disj-Prop = map-join-disj-Prop
-  pr2 equiv-join-disj-Prop = is-equiv-map-join-disj-Prop
+  equiv-join-disjunction-Prop :
+    (type-disjunction-Prop A B) ≃ (type-join-Prop A B)
+  pr1 equiv-join-disjunction-Prop = map-join-disjunction-Prop
+  pr2 equiv-join-disjunction-Prop = is-equiv-map-join-disjunction-Prop
 
-  up-join-disj : {l : Level} → universal-property-pushout l pr1 pr2 cocone-disj
-  up-join-disj =
+  up-join-disjunction :
+    {l : Level} → universal-property-pushout l pr1 pr2 cocone-disjunction
+  up-join-disjunction =
     up-pushout-up-pushout-is-equiv
       ( pr1)
       ( pr2)
       ( cocone-join)
-      ( cocone-disj)
-      ( map-disj-join-Prop)
-      ( ( λ _ → eq-is-prop (is-prop-type-disj-Prop A B)) ,
-        ( λ _ → eq-is-prop (is-prop-type-disj-Prop A B)) ,
+      ( cocone-disjunction)
+      ( map-disjunction-join-Prop)
+      ( ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
+        ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
         ( λ (a , b) → eq-is-contr
-          ( is-prop-type-disj-Prop A B
+          ( is-prop-type-disjunction-Prop A B
             ( horizontal-map-cocone pr1 pr2
               ( cocone-map pr1 pr2
                 ( cocone-join)
-                ( map-disj-join-Prop))
+                ( map-disjunction-join-Prop))
               ( a))
-            ( vertical-map-cocone pr1 pr2 cocone-disj b))))
-      ( is-equiv-map-disj-join-Prop)
+            ( vertical-map-cocone pr1 pr2 cocone-disjunction b))))
+      ( is-equiv-map-disjunction-join-Prop)
       ( up-join)
 ```
 

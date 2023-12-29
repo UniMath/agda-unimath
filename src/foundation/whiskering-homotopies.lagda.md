@@ -12,12 +12,12 @@ open import foundation-core.whiskering-homotopies public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
-open import foundation.function-extensionality
 open import foundation.path-algebra
 open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies

@@ -10,9 +10,11 @@ module foundation.morphisms-arrows where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -163,7 +165,7 @@ module _
     coh-comp-hom-arrow
 ```
 
-### Homotopies of morphsims of arrows
+### Homotopies of morphisms of arrows
 
 A **homotopy of morphisms of arrows** from `(i , j , H)` to `(i' , j' , H')` is
 a triple `(I , J , K)` consisting of homotopies `I : i ~ i'` and `J : j ~ j'`
@@ -377,60 +379,36 @@ module _
       ( htpy-domain-left-whisker-htpy-hom-arrow)
       ( htpy-codomain-left-whisker-htpy-hom-arrow)
   coh-left-whisker-htpy-hom-arrow a =
-    ( inv
-      ( ap
-        ( concat _ _)
-        ( ap-comp h
-          ( map-domain-hom-arrow g h γ)
-          ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
-    ( assoc
+    ( left-whisk-triangle-identifications'
       ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
-      ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a))
-      ( ap
-        ( h ∘ map-domain-hom-arrow g h γ)
-        ( htpy-domain-htpy-hom-arrow f g α β H a))) ∙
-    ( ap
-      ( concat
-        ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
-        ( h _))
-      ( nat-htpy
-        ( coh-hom-arrow g h γ)
-        ( htpy-domain-htpy-hom-arrow f g α β H a))) ∙
-    ( inv
-      ( assoc
-        ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
-        ( ap
-          ( map-codomain-hom-arrow g h γ ∘ g)
-          ( htpy-domain-htpy-hom-arrow f g α β H a))
-        ( coh-hom-arrow g h γ (map-domain-hom-arrow f g β a)))) ∙
-    ( ap
-      ( concat' _ (coh-hom-arrow g h γ (map-domain-hom-arrow f g β a)))
       ( ( ap
-          ( concat
-            ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
-            ( _))
+          ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a) ∙_)
+          ( inv
+            ( ap-comp h
+              ( map-domain-hom-arrow g h γ)
+              ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
+        ( nat-htpy
+          ( coh-hom-arrow g h γ)
+          ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
+    ( right-whisk-square-identification
+      ( ap
+        ( map-codomain-hom-arrow g h γ)
+        ( htpy-codomain-htpy-hom-arrow f g α β H (f a)))
+      ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
+      ( coh-hom-arrow g h γ (map-domain-hom-arrow f g β a))
+      ( ( ap
+          ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a) ∙_)
           ( ap-comp
             ( map-codomain-hom-arrow g h γ)
             ( g)
             ( htpy-domain-htpy-hom-arrow f g α β H a))) ∙
-        ( ( inv
-            ( ap-concat
-              ( map-codomain-hom-arrow g h γ)
-              ( coh-hom-arrow f g α a)
-              ( ap g (htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
-          ( ap
-            ( ap (map-codomain-hom-arrow g h γ))
-            ( coh-htpy-hom-arrow f g α β H a)) ∙
-          ( ap-concat
-            ( map-codomain-hom-arrow g h γ)
-            ( htpy-codomain-htpy-hom-arrow f g α β H (f a))
-            ( coh-hom-arrow f g β a))))) ∙
-    ( assoc
-      ( ap
-        ( map-codomain-hom-arrow g h γ)
-        ( htpy-codomain-htpy-hom-arrow f g α β H (f a)))
-      ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g β a))
-      ( coh-hom-arrow g h γ (map-domain-hom-arrow f g β a)))
+        ( coherence-square-identifications-ap
+          ( map-codomain-hom-arrow g h γ)
+          ( htpy-codomain-htpy-hom-arrow f g α β H (f a))
+          ( coh-hom-arrow f g α a)
+          ( coh-hom-arrow f g β a)
+          ( ap g (htpy-domain-htpy-hom-arrow f g α β H a))
+          ( coh-htpy-hom-arrow f g α β H a))))
 
   left-whisker-htpy-hom-arrow :
     htpy-hom-arrow f h

@@ -10,6 +10,7 @@ module foundation.universal-property-unit-type where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.unit-type
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
@@ -62,6 +63,11 @@ equiv-universal-property-unit :
   {l : Level} (Y : UU l) → (unit → Y) ≃ Y
 pr1 (equiv-universal-property-unit Y) = ev-star' Y
 pr2 (equiv-universal-property-unit Y) = universal-property-unit Y
+
+inv-equiv-universal-property-unit :
+  {l : Level} (Y : UU l) → Y ≃ (unit → Y)
+inv-equiv-universal-property-unit Y =
+  inv-equiv (equiv-universal-property-unit Y)
 
 abstract
   is-equiv-point-is-contr :

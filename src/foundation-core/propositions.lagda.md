@@ -8,13 +8,13 @@ module foundation-core.propositions where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -315,6 +315,9 @@ implication-Prop P Q = hom-Prop P Q
 type-implication-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-implication-Prop P Q = type-hom-Prop P Q
+
+infixr 5 _⇒_
+_⇒_ = type-implication-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition

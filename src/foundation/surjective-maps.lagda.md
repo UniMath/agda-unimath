@@ -8,45 +8,39 @@ module foundation.surjective-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.monomorphisms
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.truncated-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
-open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.homotopies
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
+open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
@@ -394,8 +388,7 @@ apply-dependent-universal-property-surjection f =
 abstract
   is-surjective-is-propositional-truncation :
     {l1 l2 : Level} {A : UU l1} {P : Prop l2} (f : A → type-Prop P) →
-    ( {l : Level} →
-      dependent-universal-property-propositional-truncation l P f) →
+    dependent-universal-property-propositional-truncation P f →
     is-surjective f
   is-surjective-is-propositional-truncation f duppt-f =
     is-surjective-dependent-universal-property-surj f duppt-f
@@ -404,7 +397,7 @@ abstract
   is-propsitional-truncation-is-surjective :
     {l1 l2 : Level} {A : UU l1} {P : Prop l2} (f : A → type-Prop P) →
     is-surjective f →
-    {l : Level} → dependent-universal-property-propositional-truncation l P f
+    dependent-universal-property-propositional-truncation P f
   is-propsitional-truncation-is-surjective f is-surj-f =
     dependent-universal-property-surj-is-surjective f is-surj-f
 ```

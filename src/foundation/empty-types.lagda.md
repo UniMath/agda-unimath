@@ -13,7 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subuniverses
 open import foundation.univalence
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
+open import foundation-core.propositions
 ```
 
 </details>

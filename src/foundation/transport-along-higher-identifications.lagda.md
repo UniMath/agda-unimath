@@ -10,12 +10,12 @@ module foundation.transport-along-higher-identifications where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
 
+open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

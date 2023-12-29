@@ -11,14 +11,13 @@ open import foundation-core.functoriality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
-open import foundation.contractible-maps
 open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.contractible-maps
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -29,8 +28,10 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.pullbacks
+open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 ```
 
 </details>
@@ -373,6 +374,24 @@ module _
       ( map-Σ-map-base right S)
       ( map-Σ-map-base bottom S)
   coherence-square-maps-map-Σ-map-base H (a , p) = eq-pair-Σ (H a) refl
+```
+
+#### `map-Σ-map-base` preserves commuting triangles of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} (S : X → UU l4)
+  (left : A → X) (right : B → X) (top : A → B)
+  where
+
+  coherence-triangle-maps-map-Σ-map-base :
+    (H : coherence-triangle-maps left right top) →
+    coherence-triangle-maps
+      ( map-Σ-map-base left S)
+      ( map-Σ-map-base right S)
+      ( map-Σ (S ∘ right) top (λ a → tr S (H a)))
+  coherence-triangle-maps-map-Σ-map-base H (a , _) = eq-pair-Σ (H a) refl
 ```
 
 ### The action of `map-Σ-map-base` on identifications of the form `eq-pair-Σ` is given by the action on the base

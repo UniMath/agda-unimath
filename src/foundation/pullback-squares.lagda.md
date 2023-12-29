@@ -9,6 +9,7 @@ module foundation.pullback-squares where
 ```agda
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
+open import foundation.pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
@@ -30,38 +31,38 @@ satisfies the
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (l : Level) {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : A → C) (g : B → C) (X : UU l4)
   where
 
-  pullback-cone : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-  pullback-cone = Σ (cone f g X) (universal-property-pullback l f g)
+  pullback-cone : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pullback-cone = Σ (cone f g X) (is-pullback f g)
 ```
 
 ### Pullback squares
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (l : Level) (A : UU l1) (B : UU l2) (C : UU l3)
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
   (X : UU l4)
   where
 
-  pullback-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+  pullback-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pullback-square =
     Σ ( A → C)
       ( λ f →
         Σ ( B → C)
           ( λ g →
             Σ ( cone f g X)
-              ( universal-property-pullback l f g)))
+              ( is-pullback f g)))
 ```
 
 ### Components of a pullback cone
 
 ```agda
 module _
-  {l1 l2 l3 l4 l : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
-  (f : A → C) (g : B → C) (c : pullback-cone l f g X)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (f : A → C) (g : B → C) (c : pullback-cone f g X)
   where
 
   cone-pullback-cone : cone f g X
@@ -80,8 +81,15 @@ module _
       ( f)
   coherence-square-pullback-cone = coherence-square-cone f g cone-pullback-cone
 
-  universal-property-pullback-cone : universal-property-pullback l f g (pr1 c)
-  universal-property-pullback-cone = pr2 c
+  is-pullback-pullback-cone : is-pullback f g cone-pullback-cone
+  is-pullback-pullback-cone = pr2 c
+
+  universal-property-pullback-cone :
+    universal-property-pullback f g (pr1 c)
+  universal-property-pullback-cone =
+    universal-property-pullback-is-pullback f g
+      ( cone-pullback-cone)
+      ( is-pullback-pullback-cone)
 ```
 
 ## Table of files about pullbacks

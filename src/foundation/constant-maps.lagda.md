@@ -10,10 +10,10 @@ open import foundation-core.constant-maps public
 
 ```agda
 open import foundation.0-maps
+open import foundation.action-on-homotopies-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
-open import foundation.function-extensionality
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -23,6 +23,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -38,6 +39,21 @@ open import foundation-core.truncation-levels
 </details>
 
 ## Properties
+
+### The action on homotopies of a constant map is constant
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3}
+  {f g : (x : A) → B x}
+  where
+
+  compute-action-htpy-function-const :
+    (c : C) (H : f ~ g) →
+    action-htpy-function (const ((x : A) → B x) C c) H ＝ refl
+  compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
+```
 
 ### A type is `k+1`-truncated if and only if all constant maps into it are `k`-truncated
 

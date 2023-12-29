@@ -9,13 +9,13 @@ module foundation.universal-property-propositional-truncation-into-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -65,7 +65,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     is-weakly-constant-map f →
     all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b)))
-  all-elements-equal-image-is-weakly-constant-map B f H (pair x s) (pair y t) =
+  all-elements-equal-image-is-weakly-constant-map B f H (x , s) (y , t) =
     eq-type-subtype
       ( λ b → trunc-Prop (fiber f b))
       ( apply-universal-property-trunc-Prop s
@@ -73,7 +73,7 @@ abstract
         ( λ u →
           apply-universal-property-trunc-Prop t
             ( Id-Prop B x y)
-            ( λ v → inv (pr2 u) ∙ (H (pr1 u) (pr1 v) ∙ pr2 v))))
+            ( λ v → inv (pr2 u) ∙ H (pr1 u) (pr1 v) ∙ pr2 v)))
 
 abstract
   is-prop-image-is-weakly-constant-map :
@@ -103,34 +103,35 @@ map-universal-property-set-quotient-trunc-Prop B f H =
   ( pr1) ∘
   ( map-universal-property-trunc-Prop
     ( image-weakly-constant-map-Prop B f H)
-    ( λ a → pair (f a) (unit-trunc-Prop (pair a refl))))
+    ( λ a → (f a , unit-trunc-Prop (a , refl))))
 
 map-universal-property-set-quotient-trunc-Prop' :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) →
   Σ (A → type-Set B) is-weakly-constant-map → type-trunc-Prop A → type-Set B
-map-universal-property-set-quotient-trunc-Prop' B (pair f H) =
+map-universal-property-set-quotient-trunc-Prop' B (f , H) =
   map-universal-property-set-quotient-trunc-Prop B f H
 
 abstract
   htpy-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     (H : is-weakly-constant-map f) →
-    (map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop) ~ f
+    map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop ~ f
   htpy-universal-property-set-quotient-trunc-Prop B f H a =
-    ap ( pr1)
+    ap
+      ( pr1)
       ( eq-is-prop'
         ( is-prop-image-is-weakly-constant-map B f H)
         ( map-universal-property-trunc-Prop
           ( image-weakly-constant-map-Prop B f H)
-          ( λ x → pair (f x) (unit-trunc-Prop (pair x refl)))
+          ( λ x → (f x , unit-trunc-Prop (x , refl)))
           ( unit-trunc-Prop a))
-        ( pair (f a) (unit-trunc-Prop (pair a refl))))
+        ( f a , unit-trunc-Prop (a , refl)))
 
   is-section-map-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     ( ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B) ∘
       ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
-  is-section-map-universal-property-set-quotient-trunc-Prop B (pair f H) =
+  is-section-map-universal-property-set-quotient-trunc-Prop B (f , H) =
     eq-type-subtype
       ( is-weakly-constant-map-Prop B)
       ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
@@ -148,16 +149,14 @@ abstract
               ( precomp-universal-property-set-quotient-trunc-Prop B g)
               ( x))
             ( g x))
-        ( λ x →
-          htpy-universal-property-set-quotient-trunc-Prop B
-            ( g ∘ unit-trunc-Prop)
-            ( is-weakly-constant-map-precomp-unit-trunc-Prop g)
-            ( x)))
+        ( htpy-universal-property-set-quotient-trunc-Prop B
+          ( g ∘ unit-trunc-Prop)
+          ( is-weakly-constant-map-precomp-unit-trunc-Prop g)))
 
   universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     is-equiv (precomp-universal-property-set-quotient-trunc-Prop {A = A} B)
-  universal-property-set-quotient-trunc-Prop {A = A} B =
+  universal-property-set-quotient-trunc-Prop B =
     is-equiv-is-invertible
       ( map-universal-property-set-quotient-trunc-Prop' B)
       ( is-section-map-universal-property-set-quotient-trunc-Prop B)

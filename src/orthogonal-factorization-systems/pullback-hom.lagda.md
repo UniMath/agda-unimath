@@ -155,8 +155,7 @@ fibered maps.
     is-equiv-map-equiv equiv-type-standard-pullback-hom-fibered-map
 
   universal-property-pullback-fibered-map :
-    {l : Level} →
-    universal-property-pullback l
+    universal-property-pullback
       ( precomp f Y) (postcomp A g) (cone-pullback-hom)
   universal-property-pullback-fibered-map =
     universal-property-pullback-is-pullback

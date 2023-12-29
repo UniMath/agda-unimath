@@ -21,6 +21,7 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.univalent-type-families
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 

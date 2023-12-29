@@ -30,46 +30,43 @@ Since suspensions are just [pushouts](synthetic-homotopy-theory.pushouts.md),
 they retain the expected
 [universal property](synthetic-homotopy-theory.universal-property-pushouts.md),
 which states that the map `cocone-map` is a equivalence. We denote this
-universal property by `universal-property-suspension'`. But, due to the special
-nature of the span being pushed out, the suspension of a type enjoys an
+universal property by `universal-property-pushout-suspension`. But, due to the
+special nature of the span being pushed out, the suspension of a type enjoys an
 equivalent universal property, here denoted by `universal-property-suspension`.
 This universal property states that the map `ev-suspension` is an equivalence.
 
-## Definition
+## Definitions
+
+### The universal property of the suspension
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  (s : suspension-structure X Y)
+  where
+
+  ev-suspension :
+    {l3 : Level} (Z : UU l3) → (Y → Z) → suspension-structure X Z
+  pr1 (ev-suspension Z h) = h (north-suspension-structure s)
+  pr1 (pr2 (ev-suspension Z h)) = h (south-suspension-structure s)
+  pr2 (pr2 (ev-suspension Z h)) = h ·l meridian-suspension-structure s
+
+  universal-property-suspension : UUω
+  universal-property-suspension =
+    {l : Level} (Z : UU l) → is-equiv (ev-suspension Z)
+```
 
 ### The universal property of the suspension as a pushout
 
 ```agda
-universal-property-suspension' :
+universal-property-pushout-suspension :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2)
   (s : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-suspension' l X Y s =
+universal-property-pushout-suspension l X Y s =
   universal-property-pushout l
     ( const X unit star)
     ( const X unit star)
-    ( cocone-suspension-structure X Y s)
-
-is-suspension :
-  (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
-is-suspension l X Y =
-  Σ (suspension-structure X Y) (universal-property-suspension' l X Y)
-```
-
-### The universal property of the suspension reforum
-
-```agda
-ev-suspension :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
-  (s : suspension-structure X Y) →
-  (Z : UU l3) → (Y → Z) → suspension-structure X Z
-ev-suspension (pair N (pair S merid)) Z h =
-  pair (h N) (pair (h S) (h ·l merid))
-
-universal-property-suspension :
-  (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
-  suspension-structure X Y → UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-suspension l X Y s =
-  (Z : UU l) → is-equiv (ev-suspension s Z)
+    ( suspension-cocone-suspension-structure s)
 ```
 
 ## Properties
@@ -79,28 +76,28 @@ triangle-ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (s : suspension-structure X Y) →
   (Z : UU l3) →
-  ( ( map-equiv-suspension-structure-suspension-cocone X Z) ∘
+  ( ( suspension-structure-suspension-cocone) ∘
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
-      ( cocone-suspension-structure X Y s))) ~
+      ( suspension-cocone-suspension-structure s))) ~
   ( ev-suspension s Z)
-triangle-ev-suspension (pair N (pair S merid)) Z h = refl
+triangle-ev-suspension (N , S , merid) Z h = refl
 
 is-equiv-ev-suspension :
   { l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   ( s : suspension-structure X Y) →
-  ( up-Y : universal-property-suspension' l3 X Y s) →
+  ( up-Y : universal-property-pushout-suspension l3 X Y s) →
   ( Z : UU l3) → is-equiv (ev-suspension s Z)
 is-equiv-ev-suspension {X = X} s up-Y Z =
   is-equiv-left-map-triangle
     ( ev-suspension s Z)
-    ( map-equiv-suspension-structure-suspension-cocone X Z)
+    ( suspension-structure-suspension-cocone)
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
-      ( cocone-suspension-structure X _ s))
+      ( suspension-cocone-suspension-structure s))
     ( inv-htpy (triangle-ev-suspension s Z))
     ( up-Y Z)
-    ( is-equiv-map-equiv-suspension-structure-suspension-cocone X Z)
+    ( is-equiv-suspension-structure-suspension-cocone)
 ```
