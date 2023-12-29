@@ -72,19 +72,6 @@ module _
     right-map-span span-span-diagram
 ```
 
-### Constant span diagrams
-
-```agda
-module _
-  {l1 : Level}
-  where
-
-  constant-span-diagram : UU l1 → span-diagram l1 l1 l1
-  pr1 (constant-span-diagram X) = X
-  pr1 (pr2 (constant-span-diagram X)) = X
-  pr2 (pr2 (constant-span-diagram X)) = id-span
-```
-
 ### The span diagram obtained from a morphism of arrows
 
 Given maps `f : A → B` and `g : X → Y` and a morphism of arrows `α : f → g`, the span diagram associated to `α` is the span diagram
