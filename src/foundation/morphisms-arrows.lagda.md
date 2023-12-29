@@ -451,7 +451,7 @@ module _
 
 ### Morphisms of arrows give morphisms of postcomposition arrows
 
-A morphism of arrows `α : f → g` gives a morphism of precomposition arrows
+A morphism of arrows `α : f → g` gives a morphism of postcomposition arrows
 `α^(-) : f^(-) → g^(-)`.
 
 ```agda

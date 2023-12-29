@@ -10,6 +10,7 @@ module foundation.my-file-about-computing-htpy-precomp where
 open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
@@ -41,4 +42,16 @@ module _
     htpy-precomp H S ·r precomp h S ~ htpy-precomp (h ·l H) S
   compute-htpy-precomp-left-whisker h H S i =
     ap eq-htpy (eq-htpy (ap-comp i h ∘ H))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {f g h : A → B}
+  where
+
+  distributive-htpy-precomp-concat-htpy :
+    (H : f ~ g) (K : g ~ h) (S : UU l3) →
+    htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K S
+  distributive-htpy-precomp-concat-htpy H K S i =
+    ( ap eq-htpy (eq-htpy (distributive-left-whisk-concat-htpy i H K))) ∙
+    ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
 ```
