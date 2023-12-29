@@ -374,25 +374,6 @@ module _
     is-orthogonal-is-equiv-right f (map-equiv g) (is-equiv-map-equiv g)
 ```
 
-### If the domain and codomain of `g` are `f`-local, then `g` is right orthogonal to `f`
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  where
-
-  is-orthogonal-pullback-condition-is-local :
-    is-local f X → is-local f Y → is-orthogonal-pullback-condition f g
-  is-orthogonal-pullback-condition-is-local is-local-X is-local-Y =
-    is-pullback-is-equiv-horizontal-maps
-      ( precomp f Y)
-      ( postcomp A g)
-      ( cone-pullback-hom' f g)
-      ( is-local-Y)
-      ( is-local-X)
-```
-
 ### Right orthogonal maps are closed under composition and have the left cancellation property
 
 Given two composable maps `h` after `g`, if `f ⊥ h`, then `f ⊥ g` if and only if
@@ -1047,6 +1028,43 @@ module _
   is-orthogonal-terminal-map-is-local F =
     is-orthogonal-is-orthogonal-pullback-condition f terminal-map
       ( is-orthogonal-pullback-condition-terminal-map-is-local F)
+```
+
+### If the codomain of `g` is `f`-local, then `g` is `f`-orthogonal if and only if the domain of `g` is `f`-local
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-is-local-domain-is-local-codomain :
+    is-local f Y → is-local f X → is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-is-local-domain-is-local-codomain =
+    is-pullback-is-equiv-horizontal-maps
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom' f g)
+
+  is-orthogonal-is-local-domain-is-local-codomain :
+    is-local f Y → is-local f X → is-orthogonal f g
+  is-orthogonal-is-local-domain-is-local-codomain H K =
+    is-orthogonal-is-orthogonal-pullback-condition f g
+      ( is-orthogonal-pullback-condition-is-local-domain-is-local-codomain H K)
+
+  is-local-domain-is-orthogonal-pullback-condition-is-local-codomain :
+    is-local f Y → is-orthogonal-pullback-condition f g → is-local f X
+  is-local-domain-is-orthogonal-pullback-condition-is-local-codomain H G =
+    is-local-is-orthogonal-pullback-condition-terminal-map f
+      ( is-orthogonal-pullback-condition-right-comp f g terminal-map
+        ( is-orthogonal-pullback-condition-terminal-map-is-local f H)
+        ( G))
+
+  is-local-domain-is-orthogonal-is-local-codomain :
+    is-local f Y → is-orthogonal f g → is-local f X
+  is-local-domain-is-orthogonal-is-local-codomain H G =
+    is-local-domain-is-orthogonal-pullback-condition-is-local-codomain H
+      ( is-orthogonal-pullback-condition-is-orthogonal f g G)
 ```
 
 ## References
