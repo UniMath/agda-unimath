@@ -940,14 +940,16 @@ module _
       ( cocone-right-extend-equiv-arrow-span-diagram s g' e c)
   universal-property-pushout-top-extended-by-equivalences =
     universal-property-pushout-rectangle-universal-property-pushout-top
-      ( transposition-span-diagram (span-diagram-equiv-arrow g' (right-map-span-diagram s) e))
+      ( transposition-span-diagram
+        ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e))
       ( left-map-span-diagram s)
       ( transposition-cocone-span-diagram
         ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e)
         ( cocone-equiv-arrow g' (right-map-span-diagram s) e))
       ( c)
       ( universal-property-pushout-is-equiv
-        ( transposition-span-diagram (span-diagram-equiv-arrow g' (right-map-span-diagram s) e))
+        ( transposition-span-diagram
+          ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e))
         ( transposition-cocone-span-diagram
           ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e)
           ( cocone-equiv-arrow g' (right-map-span-diagram s) e))
@@ -985,12 +987,12 @@ the induced square is a pushout:
 
 This combines both special cases of the pushout pasting lemmas for equivalences.
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
-  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6) (h : hom-span-diagram s' s)
-  {X : UU l7} (c : cocone-span-diagram s X)
-  (H : universal-property-pushout s c)
+  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6)
+  (h : hom-span-diagram s' s)
+  {X : UU l7} (c : cocone-span-diagram s X) (H : universal-property-pushout s c)
   where
 
   universal-property-pushout-extension-by-equivalences :
@@ -1010,7 +1012,7 @@ module _
 >>>>>>> 0ea91d68392b1cabaad0e5b5a712cdfab687a4c1
 -}
 
-      ( right-map-span-diagram s ∘ span-diagramning-map-hom-span-diagram s' s h)
+      ( right-map-span-diagram s ∘ spanning-map-hom-span-diagram s' s h)
       ( id)
       ( map-codomain-hom-span-diagram s' s h)
       ( right-map-span-diagram s')
@@ -1027,7 +1029,9 @@ module _
       ( right-square-hom-span-diagram s' s h)
       ( is-equiv-id)
       ( je)
+```
 
+```text
   universal-property-pushout-extended-by-equivalences :
     is-equiv i → is-equiv j → is-equiv k →
     {l : Level} →

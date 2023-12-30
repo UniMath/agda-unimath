@@ -20,7 +20,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.spans
+open import foundation.span-diagrams
 open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
@@ -72,68 +72,68 @@ is again a pushout square.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
-  { X : UU l4} (c : cocone-span s X) (P : X → UU l5)
+  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
   where
 
-  spanning-type-span-flattening-pushout : UU (l3 ⊔ l5)
-  spanning-type-span-flattening-pushout =
-    Σ ( spanning-type-span s)
-      ( P ∘ horizontal-map-cocone-span s c ∘ left-map-span s)
+  spanning-type-flattening-pushout : UU (l3 ⊔ l5)
+  spanning-type-flattening-pushout =
+    Σ ( spanning-type-span-diagram s)
+      ( P ∘ horizontal-map-cocone-span-diagram s c ∘ left-map-span-diagram s)
 
-  domain-span-flattening-pushout : UU (l1 ⊔ l5)
-  domain-span-flattening-pushout =
-    Σ ( domain-span s) (P ∘ horizontal-map-cocone-span s c)
+  domain-flattening-pushout : UU (l1 ⊔ l5)
+  domain-flattening-pushout =
+    Σ ( domain-span-diagram s) (P ∘ horizontal-map-cocone-span-diagram s c)
 
-  codomain-span-flattening-pushout : UU (l2 ⊔ l5)
-  codomain-span-flattening-pushout =
-    Σ ( codomain-span s) (P ∘ vertical-map-cocone-span s c)
+  codomain-flattening-pushout : UU (l2 ⊔ l5)
+  codomain-flattening-pushout =
+    Σ ( codomain-span-diagram s) (P ∘ vertical-map-cocone-span-diagram s c)
 
-  left-map-span-flattening-pushout :
-    spanning-type-span-flattening-pushout → domain-span-flattening-pushout
-  left-map-span-flattening-pushout =
-    map-Σ-map-base (left-map-span s) (P ∘ horizontal-map-cocone-span s c)
+  left-map-flattening-pushout :
+    spanning-type-flattening-pushout → domain-flattening-pushout
+  left-map-flattening-pushout =
+    map-Σ-map-base (left-map-span-diagram s) (P ∘ horizontal-map-cocone-span-diagram s c)
 
-  right-map-span-flattening-pushout :
-    spanning-type-span-flattening-pushout → codomain-span-flattening-pushout
-  right-map-span-flattening-pushout =
+  right-map-flattening-pushout :
+    spanning-type-flattening-pushout → codomain-flattening-pushout
+  right-map-flattening-pushout =
     map-Σ
-      ( P ∘ vertical-map-cocone-span s c)
-      ( right-map-span s)
-      ( λ x → tr P (coherence-square-cocone-span s c x))
+      ( P ∘ vertical-map-cocone-span-diagram s c)
+      ( right-map-span-diagram s)
+      ( λ x → tr P (coherence-square-cocone-span-diagram s c x))
 
-  span-flattening-pushout : span (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
-  span-flattening-pushout =
-    make-span
-      ( left-map-span-flattening-pushout)
-      ( right-map-span-flattening-pushout)
+  flattening-pushout : span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
+  flattening-pushout =
+    make-span-diagram
+      ( left-map-flattening-pushout)
+      ( right-map-flattening-pushout)
 
   horizontal-map-cocone-flattening-pushout :
-    domain-span-flattening-pushout → Σ X P
+    domain-flattening-pushout → Σ X P
   horizontal-map-cocone-flattening-pushout =
-    map-Σ-map-base (horizontal-map-cocone-span s c) P
+    map-Σ-map-base (horizontal-map-cocone-span-diagram s c) P
 
   vertical-map-cocone-flattening-pushout :
-    codomain-span-flattening-pushout → Σ X P
+    codomain-flattening-pushout → Σ X P
   vertical-map-cocone-flattening-pushout =
-    map-Σ-map-base (vertical-map-cocone-span s c) P
+    map-Σ-map-base (vertical-map-cocone-span-diagram s c) P
 
   coherence-square-cocone-flattening-pushout :
     coherence-square-maps
-      ( right-map-span-flattening-pushout)
-      ( left-map-span-flattening-pushout)
+      ( right-map-flattening-pushout)
+      ( left-map-flattening-pushout)
       ( vertical-map-cocone-flattening-pushout)
       ( horizontal-map-cocone-flattening-pushout)
   coherence-square-cocone-flattening-pushout =
     coherence-square-maps-map-Σ-map-base P
-      ( right-map-span s)
-      ( left-map-span s)
-      ( vertical-map-cocone-span s c)
-      ( horizontal-map-cocone-span s c)
-      ( coherence-square-cocone-span s c)
+      ( right-map-span-diagram s)
+      ( left-map-span-diagram s)
+      ( vertical-map-cocone-span-diagram s c)
+      ( horizontal-map-cocone-span-diagram s c)
+      ( coherence-square-cocone-span-diagram s c)
 
   cocone-flattening-pushout :
-    cocone-span span-flattening-pushout (Σ X P)
+    cocone-span-diagram flattening-pushout (Σ X P)
   pr1 cocone-flattening-pushout =
     horizontal-map-cocone-flattening-pushout
   pr1 (pr2 cocone-flattening-pushout) =
@@ -144,7 +144,7 @@ module _
   statement-flattening-lemma-pushout : UUω
   statement-flattening-lemma-pushout =
     dependent-universal-property-pushout s c →
-    universal-property-pushout span-flattening-pushout cocone-flattening-pushout
+    universal-property-pushout flattening-pushout cocone-flattening-pushout
 ```
 
 ### The statement of the flattening lemma for pushouts, phrased using descent data
@@ -155,8 +155,8 @@ data for the pushout.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
-  { X : UU l4} (c : cocone-span s X)
+  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram s X)
   ( P : structure-type-family-pushout l5 s)
   ( Q : X → UU l5)
   ( e :
@@ -164,74 +164,74 @@ module _
       ( structure-type-family-pushout-type-family s c Q))
   where
 
-  spanning-type-span-flattening-descent-data-pushout : UU (l3 ⊔ l5)
-  spanning-type-span-flattening-descent-data-pushout =
-    Σ ( spanning-type-span s)
-      ( left-type-family-structure-type-family-pushout s P ∘ left-map-span s)
+  spanning-type-flattening-descent-data-pushout : UU (l3 ⊔ l5)
+  spanning-type-flattening-descent-data-pushout =
+    Σ ( spanning-type-span-diagram s)
+      ( left-type-family-structure-type-family-pushout s P ∘ left-map-span-diagram s)
 
-  domain-span-flattening-descent-data-pushout : UU (l1 ⊔ l5)
-  domain-span-flattening-descent-data-pushout =
-    Σ (domain-span s) (left-type-family-structure-type-family-pushout s P)
+  domain-flattening-descent-data-pushout : UU (l1 ⊔ l5)
+  domain-flattening-descent-data-pushout =
+    Σ (domain-span-diagram s) (left-type-family-structure-type-family-pushout s P)
 
-  codomain-span-flattening-descent-data-pushout : UU (l2 ⊔ l5)
-  codomain-span-flattening-descent-data-pushout =
-    Σ (codomain-span s) (right-type-family-structure-type-family-pushout s P)
+  codomain-flattening-descent-data-pushout : UU (l2 ⊔ l5)
+  codomain-flattening-descent-data-pushout =
+    Σ (codomain-span-diagram s) (right-type-family-structure-type-family-pushout s P)
 
-  left-map-span-flattening-descent-data-pushout :
-    spanning-type-span-flattening-descent-data-pushout →
-    domain-span-flattening-descent-data-pushout
-  left-map-span-flattening-descent-data-pushout =
+  left-map-flattening-descent-data-pushout :
+    spanning-type-flattening-descent-data-pushout →
+    domain-flattening-descent-data-pushout
+  left-map-flattening-descent-data-pushout =
     map-Σ-map-base
-      ( left-map-span s)
+      ( left-map-span-diagram s)
       ( left-type-family-structure-type-family-pushout s P)
 
-  right-map-span-flattening-descent-data-pushout :
-    spanning-type-span-flattening-descent-data-pushout →
-    codomain-span-flattening-descent-data-pushout
-  right-map-span-flattening-descent-data-pushout =
+  right-map-flattening-descent-data-pushout :
+    spanning-type-flattening-descent-data-pushout →
+    codomain-flattening-descent-data-pushout
+  right-map-flattening-descent-data-pushout =
     map-Σ
       ( right-type-family-structure-type-family-pushout s P)
-      ( right-map-span s)
+      ( right-map-span-diagram s)
       ( map-matching-equiv-structure-type-family-pushout s P)
 
-  span-flattening-descent-data-pushout : span (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
-  span-flattening-descent-data-pushout =
-    make-span
-      left-map-span-flattening-descent-data-pushout
-      right-map-span-flattening-descent-data-pushout
+  flattening-descent-data-pushout : span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
+  flattening-descent-data-pushout =
+    make-span-diagram
+      left-map-flattening-descent-data-pushout
+      right-map-flattening-descent-data-pushout
 
   horizontal-map-cocone-flattening-descent-data-pushout :
-    domain-span-flattening-descent-data-pushout → Σ X Q
+    domain-flattening-descent-data-pushout → Σ X Q
   horizontal-map-cocone-flattening-descent-data-pushout =
     map-Σ Q
-      ( horizontal-map-cocone-span s c)
+      ( horizontal-map-cocone-span-diagram s c)
       ( map-left-equiv-equiv-structure-type-family-pushout s P
         ( structure-type-family-pushout-type-family s c Q)
         ( e))
 
   vertical-map-cocone-flattening-descent-data-pushout :
-    codomain-span-flattening-descent-data-pushout → Σ X Q
+    codomain-flattening-descent-data-pushout → Σ X Q
   vertical-map-cocone-flattening-descent-data-pushout =
     map-Σ Q
-      ( vertical-map-cocone-span s c)
+      ( vertical-map-cocone-span-diagram s c)
       ( map-right-equiv-equiv-structure-type-family-pushout s P
         ( structure-type-family-pushout-type-family s c Q)
         ( e))
 
   coherence-square-cocone-flattening-descent-data-pushout :
     coherence-square-maps
-      ( right-map-span-flattening-descent-data-pushout)
-      ( left-map-span-flattening-descent-data-pushout)
+      ( right-map-flattening-descent-data-pushout)
+      ( left-map-flattening-descent-data-pushout)
       ( vertical-map-cocone-flattening-descent-data-pushout)
       ( horizontal-map-cocone-flattening-descent-data-pushout)
   coherence-square-cocone-flattening-descent-data-pushout =
     htpy-map-Σ Q
-      ( coherence-square-cocone-span s c)
+      ( coherence-square-cocone-span-diagram s c)
       ( λ x →
         map-left-equiv-equiv-structure-type-family-pushout s P
           ( structure-type-family-pushout-type-family s c Q)
           ( e)
-          ( left-map-span s x))
+          ( left-map-span-diagram s x))
       ( λ x →
         inv-htpy
           ( coherence-equiv-structure-type-family-pushout s P
@@ -240,7 +240,7 @@ module _
             ( x)))
 
   cocone-flattening-descent-data-pushout :
-    cocone-span (span-flattening-descent-data-pushout) (Σ X Q)
+    cocone-span-diagram (flattening-descent-data-pushout) (Σ X Q)
   pr1 cocone-flattening-descent-data-pushout =
     horizontal-map-cocone-flattening-descent-data-pushout
   pr1 (pr2 cocone-flattening-descent-data-pushout) =
@@ -252,7 +252,7 @@ module _
   statement-flattening-lemma-descent-data-pushout =
     dependent-universal-property-pushout s c →
     universal-property-pushout
-      ( span-flattening-descent-data-pushout)
+      ( flattening-descent-data-pushout)
       ( cocone-flattening-descent-data-pushout)
 ```
 
@@ -266,30 +266,30 @@ property of the indexing pushout.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
-  { X : UU l4} (c : cocone-span s X) (P : X → UU l5)
+  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
   where
 
-  cocone-span-map-flattening-pushout :
+  cocone-map-flattening-pushout :
     {l : Level} (Y : UU l) →
-    (Σ X P → Y) → cocone-span (span-flattening-pushout s c P) Y
-  cocone-span-map-flattening-pushout Y =
-    cocone-span-map
-      ( span-flattening-pushout s c P)
+    (Σ X P → Y) → cocone-span-diagram (flattening-pushout s c P) Y
+  cocone-map-flattening-pushout Y =
+    cocone-map-span-diagram
+      ( flattening-pushout s c P)
       ( cocone-flattening-pushout s c P)
 
   comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
-    Σ ( (a : domain-span s) → P (horizontal-map-cocone-span s c a) → Y)
+    Σ ( (a : domain-span-diagram s) → P (horizontal-map-cocone-span-diagram s c a) → Y)
       ( λ k →
-        Σ ( (b : codomain-span s) → P (vertical-map-cocone-span s c b) → Y)
+        Σ ( (b : codomain-span-diagram s) → P (vertical-map-cocone-span-diagram s c b) → Y)
           ( λ l →
-            ( x : spanning-type-span s)
-            ( t : P (horizontal-map-cocone-span s c (left-map-span s x))) →
-            ( k (left-map-span s x) t) ＝
-            ( l ( right-map-span s x)
-                ( tr P (coherence-square-cocone-span s c x) t)))) ≃
-    dependent-cocone-span s c (λ x → P x → Y)
+            ( x : spanning-type-span-diagram s)
+            ( t : P (horizontal-map-cocone-span-diagram s c (left-map-span-diagram s x))) →
+            ( k (left-map-span-diagram s x) t) ＝
+            ( l ( right-map-span-diagram s x)
+                ( tr P (coherence-square-cocone-span-diagram s c x) t)))) ≃
+    dependent-cocone-span-diagram s c (λ x → P x → Y)
   comparison-dependent-cocone-ind-Σ-cocone Y =
     equiv-tot
       ( λ k →
@@ -298,16 +298,16 @@ module _
             equiv-Π-equiv-family
               ( equiv-htpy-dependent-function-dependent-identification-function-type
                 ( Y)
-                ( coherence-square-cocone-span s c)
-                ( k ∘ left-map-span s)
-                ( l ∘ right-map-span s))))
+                ( coherence-square-cocone-span-diagram s c)
+                ( k ∘ left-map-span-diagram s)
+                ( l ∘ right-map-span-diagram s))))
 
   triangle-comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
     coherence-triangle-maps
-      ( dependent-cocone-span-map s c (λ x → P x → Y))
+      ( dependent-cocone-map-span-diagram s c (λ x → P x → Y))
       ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-      ( map-equiv equiv-ev-pair³ ∘ cocone-span-map-flattening-pushout Y ∘ ind-Σ)
+      ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)
   triangle-comparison-dependent-cocone-ind-Σ-cocone Y h =
     eq-pair-Σ
       ( refl)
@@ -317,23 +317,23 @@ module _
           ( inv-htpy
             ( compute-equiv-htpy-dependent-function-dependent-identification-function-type
               ( Y)
-              ( coherence-square-cocone-span s c)
+              ( coherence-square-cocone-span-diagram s c)
               ( h)))))
 
   flattening-lemma-pushout :
     statement-flattening-lemma-pushout s c P
   flattening-lemma-pushout dup-pushout Y =
     is-equiv-left-factor
-      ( cocone-span-map-flattening-pushout Y)
+      ( cocone-map-flattening-pushout Y)
       ( ind-Σ)
       ( is-equiv-right-factor
         ( map-equiv equiv-ev-pair³)
-        ( cocone-span-map-flattening-pushout Y ∘ ind-Σ)
+        ( cocone-map-flattening-pushout Y ∘ ind-Σ)
         ( is-equiv-map-equiv equiv-ev-pair³)
         ( is-equiv-top-map-triangle
-          ( dependent-cocone-span-map s c (λ x → P x → Y))
+          ( dependent-cocone-map-span-diagram s c (λ x → P x → Y))
           ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-          ( map-equiv equiv-ev-pair³ ∘ cocone-span-map-flattening-pushout Y ∘ ind-Σ)
+          ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)
           ( triangle-comparison-dependent-cocone-ind-Σ-cocone Y)
           ( is-equiv-map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
           ( dup-pushout (λ x → P x → Y))))
@@ -350,7 +350,7 @@ The bottom is a pushout by the above flattening lemma, which implies that the
 top is also a pushout.
 
 The other parts of the cube are defined naturally, and come from the following
-map of spans:
+map of span diagrams:
 
 ```text
   Σ (a : A) (PA a) <------- Σ (s : S) (PA (f s)) -----> Σ (b : B) (PB b)
@@ -365,8 +365,8 @@ descent data.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span l1 l2 l3)
-  { X : UU l4} (c : cocone-span s X)
+  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram s X)
   ( P : structure-type-family-pushout l5 s)
   ( Q : X → UU l5)
   ( e :
@@ -376,57 +376,57 @@ module _
 
   coherence-cube-flattening-lemma-descent-data-pushout :
     coherence-cube-maps
-      ( left-map-span-flattening-pushout s c Q)
-      ( right-map-span-flattening-pushout s c Q)
+      ( left-map-flattening-pushout s c Q)
+      ( right-map-flattening-pushout s c Q)
       ( horizontal-map-cocone-flattening-pushout s c Q)
       ( vertical-map-cocone-flattening-pushout s c Q)
-      ( left-map-span-flattening-descent-data-pushout s c P Q e)
-      ( right-map-span-flattening-descent-data-pushout s c P Q e)
+      ( left-map-flattening-descent-data-pushout s c P Q e)
+      ( right-map-flattening-descent-data-pushout s c P Q e)
       ( horizontal-map-cocone-flattening-descent-data-pushout s c P Q e)
       ( vertical-map-cocone-flattening-descent-data-pushout s c P Q e)
-      ( tot (λ x → map-equiv (pr1 e (left-map-span s x))))
+      ( tot (λ x → map-equiv (pr1 e (left-map-span-diagram s x))))
       ( tot (λ a → map-equiv (pr1 e a)))
       ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
       ( id)
       ( coherence-square-cocone-flattening-descent-data-pushout s c P Q e)
       ( refl-htpy)
       ( htpy-map-Σ
-        ( Q ∘ vertical-map-cocone-span s c)
+        ( Q ∘ vertical-map-cocone-span-diagram s c)
         ( refl-htpy)
         ( λ x →
-          ( tr Q (coherence-square-cocone-span s c x)) ∘
-          ( map-equiv (pr1 e (left-map-span s x))))
+          ( tr Q (coherence-square-cocone-span-diagram s c x)) ∘
+          ( map-equiv (pr1 e (left-map-span-diagram s x))))
         ( λ x → inv-htpy (pr2 (pr2 e) x)))
       ( refl-htpy)
       ( refl-htpy)
       ( coherence-square-cocone-flattening-pushout s c Q)
-  coherence-cube-flattening-lemma-descent-data-pushout (s , t) =
+  coherence-cube-flattening-lemma-descent-data-pushout (u , v) =
     ( ap-id
       ( coherence-square-cocone-flattening-descent-data-pushout s c P Q e
-        ( s , t))) ∙
+        ( u , v))) ∙
     ( triangle-eq-pair-Σ Q
-      ( coherence-square-cocone-span s c s)
-      ( inv (pr2 (pr2 e) s t))) ∙
+      ( coherence-square-cocone-span-diagram s c u)
+      ( inv (pr2 (pr2 e) u v))) ∙
     ( ap
-      ( eq-pair-Σ (coherence-square-cocone-span s c s) refl ∙_)
+      ( eq-pair-Σ (coherence-square-cocone-span-diagram s c u) refl ∙_)
       ( inv
         ( ( right-unit) ∙
           ( compute-ap-map-Σ-map-base-eq-pair-Σ
-            ( vertical-map-cocone-span s c)
+            ( vertical-map-cocone-span-diagram s c)
             ( Q)
             ( refl)
-            ( inv (pr2 (pr2 e) s t))))))
+            ( inv (pr2 (pr2 e) u v))))))
 
   flattening-lemma-descent-data-pushout :
     statement-flattening-lemma-descent-data-pushout s c P Q e
   flattening-lemma-descent-data-pushout dup-pushout =
     universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
-      ( left-map-span-flattening-pushout s c Q)
-      ( right-map-span-flattening-pushout s c Q)
+      ( left-map-flattening-pushout s c Q)
+      ( right-map-flattening-pushout s c Q)
       ( horizontal-map-cocone-flattening-pushout s c Q)
       ( vertical-map-cocone-flattening-pushout s c Q)
-      ( left-map-span-flattening-descent-data-pushout s c P Q e)
-      ( right-map-span-flattening-descent-data-pushout s c P Q e)
+      ( left-map-flattening-descent-data-pushout s c P Q e)
+      ( right-map-flattening-descent-data-pushout s c P Q e)
       ( horizontal-map-cocone-flattening-descent-data-pushout s c P Q e)
       ( vertical-map-cocone-flattening-descent-data-pushout s c P Q e)
       ( tot (λ x → map-equiv (pr1 e (f x))))
@@ -436,10 +436,10 @@ module _
       ( coherence-square-cocone-flattening-descent-data-pushout s c P Q e)
       ( refl-htpy)
       ( htpy-map-Σ
-        ( Q ∘ vertical-map-cocone-span s c)
+        ( Q ∘ vertical-map-cocone-span-diagram s c)
         ( refl-htpy)
         ( λ x →
-          tr Q (coherence-square-cocone-span s c x) ∘ (map-equiv (pr1 e (f x))))
+          tr Q (coherence-square-cocone-span-diagram s c x) ∘ (map-equiv (pr1 e (f x))))
         ( λ x → inv-htpy (pr2 (pr2 e) x)))
       ( refl-htpy)
       ( refl-htpy)
