@@ -23,8 +23,8 @@ open import foundation-core.equivalences
 The {{#concept "constant span diagram"}} at a type `X` is the [span diagram](foundation.span-diagrams.md)
 
 ```text
-      id     id
-  X <---- X ----> X.
+      id       id
+  X <----- X -----> X.
 ```
 
 Alternatively, a span diagram
