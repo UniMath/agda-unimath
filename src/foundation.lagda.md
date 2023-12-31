@@ -58,6 +58,7 @@ open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-towers public
+open import foundation.composition-algebra public
 open import foundation.cones-over-cospans public
 open import foundation.cones-over-towers public
 open import foundation.conjunction public
@@ -219,7 +220,6 @@ open import foundation.multivariable-homotopies public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
 open import foundation.multivariable-sections public
-open import foundation.my-file-about-computing-htpy-precomp public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
