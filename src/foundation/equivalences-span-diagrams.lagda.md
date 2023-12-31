@@ -9,6 +9,7 @@ module foundation.equivalences-span-diagrams where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
 open import foundation.extensions-spans
 open import foundation.fundamental-theorem-of-identity-types
@@ -174,6 +175,15 @@ module _
         ( span-span-diagram t)
         ( equiv-span-equiv-span-diagram)
 
+    equiv-left-arrow-equiv-span-diagram :
+      equiv-arrow (left-map-span-diagram s) (left-map-span-diagram t)
+    pr1 equiv-left-arrow-equiv-span-diagram =
+      spanning-equiv-equiv-span-diagram
+    pr1 (pr2 equiv-left-arrow-equiv-span-diagram) =
+      equiv-domain-equiv-span-diagram
+    pr2 (pr2 equiv-left-arrow-equiv-span-diagram) =
+      left-square-equiv-span-diagram
+
     right-square-equiv-span-diagram :
       coherence-square-maps
         ( spanning-map-equiv-span-diagram)
@@ -188,6 +198,15 @@ module _
           ( map-codomain-equiv-span-diagram))
         ( span-span-diagram t)
         ( equiv-span-equiv-span-diagram)
+
+    equiv-right-arrow-equiv-span-diagram :
+      equiv-arrow (right-map-span-diagram s) (right-map-span-diagram t)
+    pr1 equiv-right-arrow-equiv-span-diagram =
+      spanning-equiv-equiv-span-diagram
+    pr1 (pr2 equiv-right-arrow-equiv-span-diagram) =
+      equiv-codomain-equiv-span-diagram
+    pr2 (pr2 equiv-right-arrow-equiv-span-diagram) =
+      right-square-equiv-span-diagram
 
     hom-span-equiv-span-diagram :
       hom-span

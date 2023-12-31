@@ -933,12 +933,12 @@ module _
   { X : UU l4} ( c : cocone-span-diagram s X)
   where
 
-  universal-property-pushout-top-extended-by-equivalences :
+  universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram :
     universal-property-pushout s c →
     universal-property-pushout
       ( right-extend-equiv-arrow-span-diagram s g' e)
       ( cocone-right-extend-equiv-arrow-span-diagram s g' e c)
-  universal-property-pushout-top-extended-by-equivalences =
+  universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram =
     universal-property-pushout-rectangle-universal-property-pushout-top
       ( transposition-span-diagram
         ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e))
@@ -957,7 +957,36 @@ module _
         ( is-equiv-map-codomain-equiv-arrow g' (right-map-span-diagram s) e))
 ```
 
-### Extending pushouts by equivalences of cocones
+### Extending pushouts by cocartesian morphisms of span diagrams
+
+Given a commutative diagram
+
+```text
+         g'
+    S' -----> B'
+    | \        \
+  f'|  \k       \j
+    V   V    g ⌜ V
+    A'   S -----> B
+     \   |        |
+     i\ ⌜| f      |
+       V V        V
+         A -----> X
+```
+
+in which the left and top squares are pushout squares. Then the bottom right square is a pushout square if and only if the the outer rectangle
+
+```text
+   S' ---> B'
+   |       |
+   |       |
+   v     ⌜ v
+   A' ---> X.
+```
+
+is a pushout square. In other words, pushout squares extended by [cocartesian morphisms of span diagrams](synthetic-homotopy-theory.cocartesian-morphisms-span-diagrams.md) are again pushout squares.
+
+### Extending pushouts by equivalences of span diagrams
 
 Given a commutative diagram where `(i , j , k)` form an
 [equivalence of span diagrams](foundation.equivalences-span-diagrams.md),
@@ -985,29 +1014,73 @@ the induced square is a pushout:
    A' ---> X.
 ```
 
-This combines both special cases of the pushout pasting lemmas for equivalences.
+**Proof.** We combine both cases of the pushout pasting lemmas for equivalences. The horizontal pushout pasting lemma implies that the outer rectangle
+
+```text
+          ≃        g
+     S' -----> S -----> B
+     |         |        |
+  f' |       f |        | j
+     V         V        V
+     A' -----> A -----> X
+          ≃        i
+```
+
+is a pushout square. The vertical pushout pasting lemma then implies that the outer square
+
+```text
+               g'
+     S' --------------> B'
+     |                  |
+  id |                  | ≃
+     V    ≃        g    V
+     S' -----> S -----> B
+     |         |        |
+  f' |       f |        | j
+     V         V        V
+     A' -----> A -----> X
+          ≃        i
+```
+
+is a pushout square.
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6)
-  (h : hom-span-diagram s' s)
+  (e : equiv-span-diagram s' s)
   {X : UU l7} (c : cocone-span-diagram s X) (H : universal-property-pushout s c)
   where
 
+  universal-property-pushout-comp-cocone-equiv-span-diagram :
+    universal-property-pushout s' (comp-cocone-equiv-span-diagram s' s e c)
+  universal-property-pushout-comp-cocone-equiv-span-diagram =
+    universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram
+      ( make-span-diagram
+        ( left-map-span-diagram s')
+        ( right-map-span-diagram s ∘ spanning-map-equiv-span-diagram s' s e))
+      ( right-map-span-diagram s')
+      ( id-equiv ,
+        equiv-codomain-equiv-span-diagram s' s e ,
+        right-square-equiv-span-diagram s' s e)
+      {!!}
+      {!!}
+
+{-
   universal-property-pushout-extension-by-equivalences :
     {l : Level} → is-equiv-hom-span-diagram s' s h →
     Σ ( cocone-span-diagram s' X) (universal-property-pushout s')
   universal-property-pushout-extension-by-equivalences ie je ke =
-    universal-property-pushout-top-extended-by-equivalences
+    universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram
       ( left-map-span-diagram s')
+
 
 {-
 <<<<<<< HEAD
       ( g')
       ( comp-cocone-hom-span-diagram f g f' g' i j k c coh-l coh-r)
   universal-property-pushout-extended-by-equivalences ie je ke =
-    universal-property-pushout-top-extended-by-equivalences f'
+    universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram f'
 =======
 >>>>>>> 0ea91d68392b1cabaad0e5b5a712cdfab687a4c1
 -}
@@ -1029,6 +1102,8 @@ module _
       ( right-square-hom-span-diagram s' s h)
       ( is-equiv-id)
       ( je)
+
+-}
 ```
 
 ```text

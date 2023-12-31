@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.operations-cocones-under-span-diagrams where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences-arrows
+open import foundation.equivalences-span-diagrams
 open import foundation.extensions-span-diagrams
 open import foundation.function-extensionality
 open import foundation.morphisms-arrows
@@ -336,33 +337,6 @@ indicated in the diagram
 
 Then we obtain a new cocone on the outer span diagram `A <- S -> B'`.
 
-A variation on the above:
-
-```text
-        g       h
-    S ----> B ----> C
-    |       |       |
-  f |     j |       | k
-    v       v       v
-    A ----> X ----> Y
-        i
-```
-
-```text
-module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
-  {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span-diagram s → C)
-  (j : codomain-span-diagram s → X) (i : domain-span-diagram s → X)
-  where
-
-  horizontal-comp-cocone-span-diagram' :
-    cocone-span-diagram (make-span-diagram j h) Y →
-    coherence-square-maps (right-map-span-diagram s) (left-map-span-diagram s) j i →
-    cocone-span-diagram (right-extend-span-diagram s h) Y
-  horizontal-comp-cocone-span-diagram' c coh =
-    horizontal-comp-cocone-span-diagram s h (i , j , coh) c
-```
-
 ### Vertical composition of cocones under span diagrams
 
 Consider a span diagram `s := A <-f- S -g-> B` and a map `h : A → C`. Then we
@@ -493,36 +467,6 @@ module _
       ( hom-equiv-arrow g' (right-map-span-diagram s) e)
 ```
 
-A variation on the above:
-
-```text
-        g
-    S -----> B
-    |        |
-  f |        | j
-    v   i    v
-    A -----> X
-    |        |
-  h |        |
-    v        v
-    C -----> Y
-```
-
-```text
-module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
-  {C : UU l4} {X : UU l5} {Y : UU l6} (h : domain-span-diagram s → C)
-  (i : domain-span-diagram s → X) (j : codomain-span-diagram s → X)
-  where
-
-  vertical-comp-cocone-span-diagram' :
-    cocone-span-diagram (make-span-diagram h i) Y →
-    coherence-square-maps (right-map-span-diagram s) (left-map-span-diagram s) j i →
-    cocone-span-diagram (left-extend-span-diagram s h) Y
-  vertical-comp-cocone-span-diagram' c coh =
-    vertical-comp-cocone-span-diagram s h (i , j , coh) c
-```
-
 ### Composition of cocones and morphisms of span diagrams
 
 Given a commutative diagram of the form
@@ -560,7 +504,8 @@ because the parenthesization is relevant in future computations.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
-  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6) (h : hom-span-diagram s' s)
+  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6)
+  (h : hom-span-diagram s' s)
   {X : UU l7} (c : cocone-span-diagram s X)
   where
 
@@ -596,4 +541,15 @@ module _
     vertical-map-comp-cocone-hom-span-diagram
   pr2 (pr2 comp-cocone-hom-span-diagram) =
     coherence-square-comp-hom-span-diagram
+
+module _
+  {l1 l2 l3 l4 l5 l6 l7 : Level}
+  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6)
+  (e : equiv-span-diagram s' s)
+  {X : UU l7} (c : cocone-span-diagram s X)
+  where
+
+  comp-cocone-equiv-span-diagram : cocone-span-diagram s' X
+  comp-cocone-equiv-span-diagram =
+    comp-cocone-hom-span-diagram s' s (hom-equiv-span-diagram s' s e) c
 ```
