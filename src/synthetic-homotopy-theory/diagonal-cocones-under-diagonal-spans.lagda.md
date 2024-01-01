@@ -1,4 +1,4 @@
-# Diagonal cocones under diagonal spans
+# Diagonal cocones under diagonal span diagrams
 
 ```agda
 module synthetic-homotopy-theory.diagonal-cocones-under-diagonal-spans where

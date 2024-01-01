@@ -1,4 +1,4 @@
-# Operations on cocones under spans
+# Operations on cocones under span diagrams
 
 ```agda
 module synthetic-homotopy-theory.operations-cocones-under-span-diagrams where
