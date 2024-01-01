@@ -54,8 +54,10 @@ module _
 
   is-equiv-hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-equiv-hom-arrow =
-    is-equiv (map-domain-hom-arrow f g h) ×
-    is-equiv (map-codomain-hom-arrow f g h)
+    type-Prop is-equiv-prop-hom-arrow
+
+  is-prop-is-equiv-hom-arrow : is-prop is-equiv-hom-arrow
+  is-prop-is-equiv-hom-arrow = is-prop-type-Prop is-equiv-prop-hom-arrow
 ```
 
 ### Equivalences of arrows

@@ -9,12 +9,14 @@ module foundation.equivalences-span-diagrams where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
 open import foundation.extensions-spans
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.morphisms-span-diagrams
 open import foundation.morphisms-spans
+open import foundation.propositions
 open import foundation.span-diagrams
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
@@ -22,7 +24,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
@@ -57,15 +58,25 @@ and `w : S ≃ T` [equipped](foundation.structure.md) with two
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3) (t : span-diagram l4 l5 l6)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (s : span-diagram l1 l2 l3) (t : span-diagram l4 l5 l6)
+  (f : hom-span-diagram s t)
   where
 
-  is-equiv-hom-span-diagram :
-    (f : hom-span-diagram s t) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
-  is-equiv-hom-span-diagram f =
-    is-equiv (map-domain-hom-span-diagram s t f) ×
-    is-equiv (map-codomain-hom-span-diagram s t f) ×
-    is-equiv (spanning-map-hom-span-diagram s t f)
+  is-equiv-prop-hom-span-diagram : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  is-equiv-prop-hom-span-diagram =
+    prod-Prop
+      ( is-equiv-Prop (map-domain-hom-span-diagram s t f))
+      ( prod-Prop
+        ( is-equiv-Prop (map-codomain-hom-span-diagram s t f))
+        ( is-equiv-Prop (spanning-map-hom-span-diagram s t f)))
+
+  is-equiv-hom-span-diagram : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  is-equiv-hom-span-diagram = type-Prop is-equiv-prop-hom-span-diagram
+
+  is-prop-is-equiv-hom-span-diagram : is-prop is-equiv-hom-span-diagram
+  is-prop-is-equiv-hom-span-diagram =
+    is-prop-type-Prop is-equiv-prop-hom-span-diagram
 ```
 
 ### Equivalences of span diagrams
