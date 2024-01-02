@@ -69,9 +69,6 @@ Additionally, an
 [equivalence of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md)
 induces an [equivalence](foundation.equivalences.md) of their colimits.
 
-The development in this file is a generalization of Lemma 3.5 from Sequential
-Colimits in Homotopy Type Theory.
-
 ## Properties
 
 ### A morphism of sequential diagrams induces a map of cocones
