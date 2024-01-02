@@ -301,7 +301,7 @@ module _
     ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
       ( comp-hom-sequential-diagram A B C g f)
       ( n)) ∙h
-    pasting-vertical-coherence-square-maps
+    ( pasting-vertical-coherence-square-maps
       ( map-cocone-sequential-diagram c n)
       ( map-hom-sequential-diagram B f n)
       ( map-sequential-colimit-hom-sequential-diagram up-c c' f)
@@ -317,7 +317,7 @@ module _
         ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c'
           ( c'')
           ( g)
-          ( n)))
+          ( n))))
   pr2 htpy-preserves-comp-map-sequential-colimit-hom-sequential-diagram n =
     ( right-whisk-square-htpy
       ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
