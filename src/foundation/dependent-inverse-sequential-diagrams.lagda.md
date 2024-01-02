@@ -78,9 +78,9 @@ map-dependent-inverse-sequential-diagram = pr2
 
 ```agda
 const-dependent-inverse-sequential-diagram :
-    {l1 l2 : Level}
-    (A : inverse-sequential-diagram l1) → inverse-sequential-diagram l2 →
-    dependent-inverse-sequential-diagram l2 A
+  {l1 l2 : Level}
+  (A : inverse-sequential-diagram l1) → inverse-sequential-diagram l2 →
+  dependent-inverse-sequential-diagram l2 A
 pr1 (const-dependent-inverse-sequential-diagram A B) n _ =
   type-inverse-sequential-diagram B n
 pr2 (const-dependent-inverse-sequential-diagram A B) n _ =
@@ -94,13 +94,13 @@ is a choice of sections `hₙ` of each `Bₙ` that vary naturally over `A`, by w
 we mean that the diagrams
 
 ```text
-          gₙ
-    Bₙ₊₁ ---> Bₙ
-    ^         ^
-hₙ₊₁|         | hₙ
-    |         |
-    Aₙ₊₁ ---> Aₙ
-          fₙ
+            gₙ
+      Bₙ₊₁ ---> Bₙ
+      ^         ^
+  hₙ₊₁|         | hₙ
+      |         |
+      Aₙ₊₁ ---> Aₙ
+            fₙ
 ```
 
 commute for each `n : ℕ`.

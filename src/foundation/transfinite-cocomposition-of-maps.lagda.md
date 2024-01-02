@@ -16,9 +16,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given an [inverse sequential diagram](foundation.inverse-sequential-diagrams.md)
-of maps, i.e. a certain infinite [sequence](foundation.dependent-sequences.md)
-of maps `fₙ`:
+Given an
+[inverse sequential diagram of types](foundation.inverse-sequential-diagrams.md),
+i.e. a certain infinite [sequence](foundation.dependent-sequences.md) of maps
+`fₙ`:
 
 ```text
       ⋯        fₙ      ⋯      f₁      f₀

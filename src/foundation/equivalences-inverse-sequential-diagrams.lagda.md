@@ -30,8 +30,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An **equivalence of inverse sequential diagrams** `A ≃ B` is a commuting diagram
-of the form
+An
+{{#concept "equivalence of inverse sequential diagrams" Agda=equiv-inverse-sequential-diagram}}
+`A ≃ B` is a commuting diagram of the form
 
 ```text
   ⋯ ----> Aₙ₊₁ ----> Aₙ ----> ⋯ ----> A₁ ----> A₀

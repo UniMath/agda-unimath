@@ -264,15 +264,16 @@ module _
   {l1 l2 : Level} (A : inverse-sequential-diagram l1) {X : UU l2}
   where
 
-  htpy-cone-up-pullback-standard-sequential-limit :
+  htpy-cone-up-sequential-limit-standard-sequential-limit :
     (c : cone-inverse-sequential-diagram A X) →
     htpy-cone-inverse-sequential-diagram A
       ( cone-map-inverse-sequential-diagram A
         ( cone-standard-sequential-limit A)
         ( gap-inverse-sequential-diagram A c))
       ( c)
-  pr1 (htpy-cone-up-pullback-standard-sequential-limit c) n = refl-htpy
-  pr2 (htpy-cone-up-pullback-standard-sequential-limit c) n = right-unit-htpy
+  pr1 (htpy-cone-up-sequential-limit-standard-sequential-limit c) n = refl-htpy
+  pr2 (htpy-cone-up-sequential-limit-standard-sequential-limit c) n =
+    right-unit-htpy
 ```
 
 ### A cone satisfies the universal property of the limit if and only if the gap map is an equivalence
@@ -291,7 +292,7 @@ module _
       ( cone-standard-sequential-limit A)
       ( c)
       ( gap-inverse-sequential-diagram A c)
-      ( htpy-cone-up-pullback-standard-sequential-limit A c)
+      ( htpy-cone-up-sequential-limit-standard-sequential-limit A c)
       ( universal-property-standard-sequential-limit A)
 
   universal-property-is-sequential-limit :
@@ -303,7 +304,7 @@ module _
       ( cone-standard-sequential-limit A)
       ( c)
       ( gap-inverse-sequential-diagram A c)
-      ( htpy-cone-up-pullback-standard-sequential-limit A c)
+      ( htpy-cone-up-sequential-limit-standard-sequential-limit A c)
       ( is-lim-c)
       ( universal-property-standard-sequential-limit A)
 ```

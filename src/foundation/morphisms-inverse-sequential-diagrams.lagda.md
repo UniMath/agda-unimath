@@ -45,7 +45,7 @@ the form
 
 ## Definitions
 
-### Morphisms of inverse sequential diagrams
+### Morphisms of inverse sequential diagrams of types
 
 ```agda
 naturality-hom-inverse-sequential-diagram :
@@ -84,17 +84,16 @@ module _
       ( const-dependent-inverse-sequential-diagram A B)
 
   naturality-map-hom-inverse-sequential-diagram :
-    (f :
-      hom-inverse-sequential-diagram A B) (n : ℕ) →
-      naturality-hom-inverse-sequential-diagram A B
-        ( map-hom-inverse-sequential-diagram f)
-        ( n)
+    (f : hom-inverse-sequential-diagram A B) (n : ℕ) →
+    naturality-hom-inverse-sequential-diagram A B
+      ( map-hom-inverse-sequential-diagram f)
+      ( n)
   naturality-map-hom-inverse-sequential-diagram =
     naturality-map-section-dependent-inverse-sequential-diagram A
       ( const-dependent-inverse-sequential-diagram A B)
 ```
 
-### Identity map on inverse sequential diagrams
+### Identity morphism on inverse sequential diagrams of types
 
 ```agda
 id-hom-inverse-sequential-diagram :
@@ -104,7 +103,7 @@ pr1 (id-hom-inverse-sequential-diagram A) n = id
 pr2 (id-hom-inverse-sequential-diagram A) n = refl-htpy
 ```
 
-### Composition of map of inverse sequential diagrams
+### Composition of morphisms of inverse sequential diagrams of types
 
 ```agda
 map-comp-hom-inverse-sequential-diagram :
@@ -144,7 +143,7 @@ pr2 (comp-hom-inverse-sequential-diagram A B C g f) =
 
 ## Properties
 
-### Characterization of equality of maps of inverse sequential diagrams
+### Characterization of equality of morphisms of inverse sequential diagrams of types
 
 ```agda
 module _
