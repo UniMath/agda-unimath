@@ -31,7 +31,7 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A {{#concept "morphism of arrows" Disambiguation="functions between types"}} from a function `f : A → B` to a function `g : X → Y`
+A {{#concept "morphism of arrows"}} from a function `f : A → B` to a function `g : X → Y`
 is a [triple](foundation.dependent-pair-types.md) `(i , j , H)` consisting of maps `i : A → X` and `j : B → Y` and a
 [homotopy](foundation-core.homotopies.md) `H : j ∘ f ~ g ∘ i` witnessing that
 the square
