@@ -63,7 +63,15 @@ composition of morphisms is taken to composition of functions,
 
 A corollary of these facts is that taking the
 [standard sequential colimit](synthetic-homotopy-theory.sequential-colimits.md)
-is a functorial action `(A, a) ↦ A∞`.
+is a functorial action
+
+```text
+  (A, a)    A∞
+    |       |
+  f |   ↦   | f∞
+    V       V
+  (B, b)    B∞  .
+```
 
 Additionally, an
 [equivalence of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md)
@@ -535,7 +543,12 @@ module _
     is-equiv-map-equiv-sequential-colimit-equiv-sequential-diagram
 ```
 
-### A morphism of sequential diagrams induces a map of standard sequential colimits
+### Functoriality of taking the standard sequential colimit
+
+All of the above specializes to the case where `X` is the standard sequential
+colimit `A∞` and `Y` is the standard sequential colimit `B∞`.
+
+#### A morphism of sequential diagrams induces a map of standard sequential colimits
 
 ```agda
 module _
@@ -620,7 +633,7 @@ module _
       ( f)
 ```
 
-### Homotopies between morphisms of sequential diagrams induce homotopies of maps of standard sequential colimits
+#### Homotopies between morphisms of sequential diagrams induce homotopies of maps of standard sequential colimits
 
 ```agda
 module _
@@ -638,7 +651,7 @@ module _
       ( H)
 ```
 
-### The identity morphism induces the identity map
+#### The identity morphism induces the identity map on the standard sequential colimit
 
 We have `id∞ ~ id : A∞ → A∞`.
 
@@ -656,7 +669,7 @@ module _
       ( up-standard-sequential-colimit)
 ```
 
-### Forming standard sequential colimits preserves composition of morphisms of sequential diagrams
+#### Forming standard sequential colimits preserves composition of morphisms of sequential diagrams
 
 We have `(f ∘ g)∞ ~ (f∞ ∘ g∞) : A∞ → C∞`.
 
@@ -681,7 +694,7 @@ module _
       ( f)
 ```
 
-### An equivalence of sequential diagrams induces an equivalence of standard sequential colimits
+#### An equivalence of sequential diagrams induces an equivalence of standard sequential colimits
 
 Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
@@ -718,7 +731,7 @@ module _
       ( e)
 ```
 
-### A retract of sequential diagrams induces a retract of standard sequential colimits
+#### A retract of sequential diagrams induces a retract of standard sequential colimits
 
 Additionally, the underlying map of the retraction is definitionally equal to
 the map induced by the retraction of sequential diagrams.
