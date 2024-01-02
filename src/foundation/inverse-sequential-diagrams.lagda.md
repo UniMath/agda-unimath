@@ -52,14 +52,14 @@ inverse-sequential-diagram : (l : Level) → UU (lsuc l)
 inverse-sequential-diagram l =
   Σ (ℕ → UU l) (sequence-map-inverse-sequential-diagram)
 
-type-inverse-sequential-diagram :
+family-inverse-sequential-diagram :
   {l : Level} → inverse-sequential-diagram l → ℕ → UU l
-type-inverse-sequential-diagram = pr1
+family-inverse-sequential-diagram = pr1
 
 map-inverse-sequential-diagram :
   {l : Level} (A : inverse-sequential-diagram l) (n : ℕ) →
-  type-inverse-sequential-diagram A (succ-ℕ n) →
-  type-inverse-sequential-diagram A n
+  family-inverse-sequential-diagram A (succ-ℕ n) →
+  family-inverse-sequential-diagram A n
 map-inverse-sequential-diagram = pr2
 ```
 
@@ -74,7 +74,7 @@ first terms.
 right-shift-inverse-sequential-diagram :
   {l : Level} → inverse-sequential-diagram l → inverse-sequential-diagram l
 pr1 (right-shift-inverse-sequential-diagram A) n =
-  type-inverse-sequential-diagram A (succ-ℕ n)
+  family-inverse-sequential-diagram A (succ-ℕ n)
 pr2 (right-shift-inverse-sequential-diagram A) n =
   map-inverse-sequential-diagram A (succ-ℕ n)
 
@@ -95,7 +95,7 @@ left-shift-inverse-sequential-diagram :
   {l : Level} → inverse-sequential-diagram l → inverse-sequential-diagram l
 pr1 (left-shift-inverse-sequential-diagram {l} A) zero-ℕ = raise-unit l
 pr1 (left-shift-inverse-sequential-diagram A) (succ-ℕ n) =
-  type-inverse-sequential-diagram A n
+  family-inverse-sequential-diagram A n
 pr2 (left-shift-inverse-sequential-diagram A) zero-ℕ = raise-terminal-map
 pr2 (left-shift-inverse-sequential-diagram A) (succ-ℕ n) =
   map-inverse-sequential-diagram A n
@@ -124,7 +124,7 @@ module _
 
   postcomp-inverse-sequential-diagram : inverse-sequential-diagram (l1 ⊔ l2)
   pr1 postcomp-inverse-sequential-diagram n =
-    X → type-inverse-sequential-diagram A n
+    X → family-inverse-sequential-diagram A n
   pr2 postcomp-inverse-sequential-diagram n g x =
     map-inverse-sequential-diagram A n (g x)
 ```

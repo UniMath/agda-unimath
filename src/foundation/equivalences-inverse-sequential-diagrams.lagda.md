@@ -54,7 +54,7 @@ equiv-inverse-sequential-diagram :
   UU (l1 ⊔ l2)
 equiv-inverse-sequential-diagram A B =
   Σ ( (n : ℕ) →
-      type-inverse-sequential-diagram A n ≃ type-inverse-sequential-diagram B n)
+      family-inverse-sequential-diagram A n ≃ family-inverse-sequential-diagram B n)
     ( λ e →
       (n : ℕ) → naturality-hom-inverse-sequential-diagram A B (map-equiv ∘ e) n)
 
@@ -91,9 +91,9 @@ is-torsorial-equiv-inverse-sequential-diagram :
 is-torsorial-equiv-inverse-sequential-diagram A =
   is-torsorial-Eq-structure _
     ( is-torsorial-Eq-Π
-      ( λ n → type-inverse-sequential-diagram A n ≃_)
-      ( λ n → is-torsorial-equiv (type-inverse-sequential-diagram A n)))
-    ( type-inverse-sequential-diagram A , λ n → id-equiv)
+      ( λ n → family-inverse-sequential-diagram A n ≃_)
+      ( λ n → is-torsorial-equiv (family-inverse-sequential-diagram A n)))
+    ( family-inverse-sequential-diagram A , λ n → id-equiv)
     ( is-torsorial-Eq-Π _
       ( λ n → is-torsorial-htpy (map-inverse-sequential-diagram A n)))
 

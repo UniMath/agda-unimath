@@ -40,7 +40,7 @@ module _
   where
 
   transfinite-cocomp :
-    standard-sequential-limit f → type-inverse-sequential-diagram f 0
+    standard-sequential-limit f → family-inverse-sequential-diagram f 0
   transfinite-cocomp x = sequence-standard-sequential-limit f x 0
 ```
 

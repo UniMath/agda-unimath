@@ -32,8 +32,8 @@ can extract the **composite map from `Aₙ₊ᵣ` to `Aₙ`**.
 ```agda
 comp-map-inverse-sequential-diagram :
   {l : Level} (A : inverse-sequential-diagram l) (n r : ℕ) →
-  type-inverse-sequential-diagram A (n +ℕ r) →
-  type-inverse-sequential-diagram A n
+  family-inverse-sequential-diagram A (n +ℕ r) →
+  family-inverse-sequential-diagram A n
 comp-map-inverse-sequential-diagram A n zero-ℕ = id
 comp-map-inverse-sequential-diagram A n (succ-ℕ r) =
   comp-map-inverse-sequential-diagram A n r ∘
@@ -46,7 +46,7 @@ comp-map-inverse-sequential-diagram A n (succ-ℕ r) =
 comp-map-dependent-inverse-sequential-diagram :
   {l1 l2 : Level} {A : inverse-sequential-diagram l1}
   (B : dependent-inverse-sequential-diagram l2 A)
-  (n r : ℕ) (x : type-inverse-sequential-diagram A (n +ℕ r)) →
+  (n r : ℕ) (x : family-inverse-sequential-diagram A (n +ℕ r)) →
   family-dependent-inverse-sequential-diagram B (n +ℕ r) x →
   family-dependent-inverse-sequential-diagram B n
     ( comp-map-inverse-sequential-diagram A n r x)

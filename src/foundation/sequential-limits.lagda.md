@@ -74,7 +74,7 @@ module _
 
   standard-sequential-limit : UU l
   standard-sequential-limit =
-    Σ ( (n : ℕ) → type-inverse-sequential-diagram A n)
+    Σ ( (n : ℕ) → family-inverse-sequential-diagram A n)
       ( λ a → (n : ℕ) → a n ＝ map-inverse-sequential-diagram A n (a (succ-ℕ n)))
 
 module _
@@ -82,7 +82,7 @@ module _
   where
 
   sequence-standard-sequential-limit :
-    standard-sequential-limit A → (n : ℕ) → type-inverse-sequential-diagram A n
+    standard-sequential-limit A → (n : ℕ) → family-inverse-sequential-diagram A n
   sequence-standard-sequential-limit = pr1
 
   coherence-standard-sequential-limit :

@@ -54,8 +54,8 @@ naturality-hom-inverse-sequential-diagram :
   (B : inverse-sequential-diagram l2)
   (h :
     (n : ℕ) →
-    type-inverse-sequential-diagram A n →
-    type-inverse-sequential-diagram B n)
+    family-inverse-sequential-diagram A n →
+    family-inverse-sequential-diagram B n)
   (n : ℕ) → UU (l1 ⊔ l2)
 naturality-hom-inverse-sequential-diagram A B =
   naturality-section-dependent-inverse-sequential-diagram A
@@ -78,7 +78,7 @@ module _
 
   map-hom-inverse-sequential-diagram :
     hom-inverse-sequential-diagram A B → (n : ℕ) →
-    type-inverse-sequential-diagram A n → type-inverse-sequential-diagram B n
+    family-inverse-sequential-diagram A n → family-inverse-sequential-diagram B n
   map-hom-inverse-sequential-diagram =
     map-section-dependent-inverse-sequential-diagram A
       ( const-dependent-inverse-sequential-diagram A B)
@@ -110,7 +110,7 @@ map-comp-hom-inverse-sequential-diagram :
   {l : Level} (A B C : inverse-sequential-diagram l) →
   hom-inverse-sequential-diagram B C → hom-inverse-sequential-diagram A B →
   (n : ℕ) →
-  type-inverse-sequential-diagram A n → type-inverse-sequential-diagram C n
+  family-inverse-sequential-diagram A n → family-inverse-sequential-diagram C n
 map-comp-hom-inverse-sequential-diagram A B C g f n =
   map-hom-inverse-sequential-diagram B C g n ∘
   map-hom-inverse-sequential-diagram A B f n

@@ -46,28 +46,28 @@ a dependent sequential diagram of maps that extend infinitely to the left:
 ```agda
 sequence-map-dependent-inverse-sequential-diagram :
   {l1 l2 : Level} (A : inverse-sequential-diagram l1) →
-  ((n : ℕ) → type-inverse-sequential-diagram A n → UU l2) → UU (l1 ⊔ l2)
+  ((n : ℕ) → family-inverse-sequential-diagram A n → UU l2) → UU (l1 ⊔ l2)
 sequence-map-dependent-inverse-sequential-diagram A B =
-  (n : ℕ) (x : type-inverse-sequential-diagram A (succ-ℕ n)) →
+  (n : ℕ) (x : family-inverse-sequential-diagram A (succ-ℕ n)) →
   B (succ-ℕ n) x → B n (map-inverse-sequential-diagram A n x)
 
 dependent-inverse-sequential-diagram :
   {l1 : Level} (l2 : Level) (A : inverse-sequential-diagram l1) →
   UU (l1 ⊔ lsuc l2)
 dependent-inverse-sequential-diagram l2 A =
-  Σ ( (n : ℕ) → type-inverse-sequential-diagram A n → UU l2)
+  Σ ( (n : ℕ) → family-inverse-sequential-diagram A n → UU l2)
     ( sequence-map-dependent-inverse-sequential-diagram A)
 
 family-dependent-inverse-sequential-diagram :
   {l1 l2 : Level} {A : inverse-sequential-diagram l1} →
   dependent-inverse-sequential-diagram l2 A →
-  (n : ℕ) → type-inverse-sequential-diagram A n → UU l2
+  (n : ℕ) → family-inverse-sequential-diagram A n → UU l2
 family-dependent-inverse-sequential-diagram = pr1
 
 map-dependent-inverse-sequential-diagram :
   {l1 l2 : Level} {A : inverse-sequential-diagram l1}
   (B : dependent-inverse-sequential-diagram l2 A) →
-  (n : ℕ) (x : type-inverse-sequential-diagram A (succ-ℕ n)) →
+  (n : ℕ) (x : family-inverse-sequential-diagram A (succ-ℕ n)) →
   family-dependent-inverse-sequential-diagram B (succ-ℕ n) x →
   family-dependent-inverse-sequential-diagram B n
     ( map-inverse-sequential-diagram A n x)
@@ -82,7 +82,7 @@ const-dependent-inverse-sequential-diagram :
   (A : inverse-sequential-diagram l1) → inverse-sequential-diagram l2 →
   dependent-inverse-sequential-diagram l2 A
 pr1 (const-dependent-inverse-sequential-diagram A B) n _ =
-  type-inverse-sequential-diagram B n
+  family-inverse-sequential-diagram B n
 pr2 (const-dependent-inverse-sequential-diagram A B) n _ =
   map-inverse-sequential-diagram B n
 ```
@@ -113,7 +113,7 @@ module _
 
   naturality-section-dependent-inverse-sequential-diagram :
     (h :
-      (n : ℕ) (x : type-inverse-sequential-diagram A n) →
+      (n : ℕ) (x : family-inverse-sequential-diagram A n) →
       family-dependent-inverse-sequential-diagram B n x)
     (n : ℕ) → UU (l1 ⊔ l2)
   naturality-section-dependent-inverse-sequential-diagram h n =
@@ -122,14 +122,14 @@ module _
 
   section-dependent-inverse-sequential-diagram : UU (l1 ⊔ l2)
   section-dependent-inverse-sequential-diagram =
-    Σ ( (n : ℕ) (x : type-inverse-sequential-diagram A n) →
+    Σ ( (n : ℕ) (x : family-inverse-sequential-diagram A n) →
         family-dependent-inverse-sequential-diagram B n x)
       ( λ h → (n : ℕ) →
         naturality-section-dependent-inverse-sequential-diagram h n)
 
   map-section-dependent-inverse-sequential-diagram :
     section-dependent-inverse-sequential-diagram →
-    (n : ℕ) (x : type-inverse-sequential-diagram A n) →
+    (n : ℕ) (x : family-inverse-sequential-diagram A n) →
     family-dependent-inverse-sequential-diagram B n x
   map-section-dependent-inverse-sequential-diagram = pr1
 

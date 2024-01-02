@@ -57,7 +57,7 @@ module _
 
   cone-inverse-sequential-diagram : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
   cone-inverse-sequential-diagram X =
-    Σ ( (n : ℕ) → X → type-inverse-sequential-diagram A n)
+    Σ ( (n : ℕ) → X → family-inverse-sequential-diagram A n)
       ( λ f →
         (n : ℕ) →
         coherence-triangle-maps
@@ -67,7 +67,7 @@ module _
 
   map-cone-inverse-sequential-diagram :
     {l2 : Level} {X : UU l2} → cone-inverse-sequential-diagram X →
-    (n : ℕ) → X → type-inverse-sequential-diagram A n
+    (n : ℕ) → X → family-inverse-sequential-diagram A n
   map-cone-inverse-sequential-diagram = pr1
 
   coherence-cone-inverse-sequential-diagram :
