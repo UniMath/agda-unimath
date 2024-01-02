@@ -76,7 +76,7 @@ module _
   htpy-functional-vec :
     (n : ℕ) {f g : A → B} → (f ~ g) →
     map-functional-vec n f ~ map-functional-vec n g
-  htpy-functional-vec n H v = htpy-postcomp (Fin n) H v
+  htpy-functional-vec n = htpy-postcomp (Fin n)
 ```
 
 ### Binary functoriality of the type of functional vectors

@@ -543,3 +543,5 @@ module _
 ## See also
 
 - [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
+- [Fibered maps](foundation.fibered-maps.md) for the same concept under a
+  different name.

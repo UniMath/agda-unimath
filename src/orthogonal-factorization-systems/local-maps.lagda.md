@@ -28,8 +28,10 @@ open import orthogonal-factorization-systems.orthogonal-maps
 
 A map `g : A → B` is said to be
 {{#concept "local" Disambiguation="maps of types" Agda=is-local-map}} at
-`f : Y → X`, or {{#concept "`f`-local"}}, if all its
-[fibers](foundation-core.fibers-of-maps.md) are.
+`f : Y → X`, or
+{{#concept "`f`-local" Disambiguation="maps of types" Agda=is-local-map}}, if
+all its [fibers](foundation-core.fibers-of-maps.md) are
+[`f`-local types](orthogonal-factorization-systems.local-types.md).
 
 ## Definition
 

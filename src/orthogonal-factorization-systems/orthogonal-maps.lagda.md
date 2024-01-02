@@ -60,11 +60,12 @@ The map `f : A → B` is said to be
 1. Their [pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is an
    equivalence.
 
-2. There is a unique
+2. There is a [unique](foundation-core.contractible-types.md)
    [lifting operation](orthogonal-factorization-systems.lifting-operations.md)
    between `f` and `g`.
 
 3. The following is a [pullback square](foundation.pullback-squares.md):
+
    ```text
                 - ∘ f
          B → X -------> A → X
@@ -75,11 +76,15 @@ The map `f : A → B` is said to be
                 - ∘ f
    ```
 
+4. The [fibers](foundation-core.fibers-of-maps.md) of `g` are
+   [`f`-local](orthogonal-factorization-systems.local-types.md), i.e., `g` is an
+   [`f`-local map](orthogonal-factorization-systems.local-maps-md).
+
 If `f` is orthogonal to `g`, we say that `f` is
 {{#concept "left orthogonal" Disambiguation="maps of types" Agda=is-left-orthogonal}}
-to `g` and `g` is
+to `g`, and `g` is
 {{#concept "right orthogonal" Disambiguation="maps of types" Agda=is-right-orthogonal}}
-to `f`.
+to `f`, and may write `f ⊥ g`.
 
 ## Definitions
 
@@ -159,13 +164,14 @@ module _
   is-prop-is-orthogonal-pullback-condition :
     is-prop is-orthogonal-pullback-condition
   is-prop-is-orthogonal-pullback-condition =
-    is-prop-is-pullback
-      ( precomp f Y)
-      ( postcomp A g)
-      ( cone-pullback-hom' f g)
+    is-prop-is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom' f g)
 ```
 
 ### The universal property of orthogonal maps
+
+The universal property of orthogonal maps is the universal property associated
+to the pullback condition, which, as opposed to the pullback condition itself,
+is a large proposition.
 
 ```agda
 module _
@@ -580,7 +586,7 @@ If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ (map-Π g)`.
                            (- ∘ f)
 ```
 
-is a pullback. By swapping the argumens at each vertex, this square is
+is a pullback. By swapping the arguments at each vertex, this square is
 equivalent to
 
 ```text
@@ -860,8 +866,8 @@ equivalent to
 which is a pullback by assumption and the fact that pullbacks are preserved
 under products.
 
-**Note:** This result can also be seen as a special case of the previous one by
-taking the indexing type to be the two-element type.
+**Note:** This result can also be obtained as a special case of the previous one
+by taking the indexing type to be the two-element type.
 
 ```agda
 module _

@@ -254,7 +254,3 @@ module _
   pr1 cartesian-hom-arrow-equiv-arrow = hom-arrow-equiv-arrow f g α
   pr2 cartesian-hom-arrow-equiv-arrow = is-cartesian-equiv-arrow
 ```
-
-## See also
-
-- [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
