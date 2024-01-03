@@ -145,7 +145,7 @@ module _
 
 ### The span diagram obtained from a morphism of arrows
 
-Given maps `f : A → B` and `g : X → Y` and a morphism of arrows `α : f → g`, the span diagram associated to `α` is the span diagram
+Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of arrows `α : f → g`, the span diagram associated to `α` is the span diagram
 
 ```text
        f       α₀
@@ -182,9 +182,12 @@ module _
   pr2 (pr2 span-hom-arrow) = right-map-span-diagram-Pointed-Type-hom-arrow
 
   span-diagram-Pointed-Type-hom-arrow : span-diagram-Pointed-Type l2 l3 l1
-  pr1 span-diagram-Pointed-Type-hom-arrow = domain-span-diagram-Pointed-Type-hom-arrow
-  pr1 (pr2 span-diagram-Pointed-Type-hom-arrow) = codomain-span-diagram-Pointed-Type-hom-arrow
-  pr2 (pr2 span-diagram-Pointed-Type-hom-arrow) = span-hom-arrow
+  pr1 span-diagram-Pointed-Type-hom-arrow =
+    domain-span-diagram-Pointed-Type-hom-arrow
+  pr1 (pr2 span-diagram-Pointed-Type-hom-arrow) =
+    codomain-span-diagram-Pointed-Type-hom-arrow
+  pr2 (pr2 span-diagram-Pointed-Type-hom-arrow) =
+    span-hom-arrow
 ```
 
 ## See also

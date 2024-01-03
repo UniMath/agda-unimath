@@ -33,7 +33,9 @@ function of the pointed family of pointwise identifications. Since pointed
 homotopies are defined for pointed dependent functions, a pointed homotopy
 between pointed homotopies is just an instance of a pointed homotopy.
 
-## Definition
+## Definitions
+
+### Pointed homotopies
 
 ```agda
 module _
@@ -41,8 +43,8 @@ module _
   (f : pointed-Π A B)
   where
 
-  htpy-pointed-Π : pointed-Π A B → UU (l1 ⊔ l2)
-  htpy-pointed-Π g =
+  pointed-htpy : pointed-Π A B → UU (l1 ⊔ l2)
+  pointed-htpy g =
     pointed-Π A
       ( pair
         ( λ x →
@@ -52,14 +54,48 @@ module _
         ( ( preserves-point-function-pointed-Π f) ∙
           ( inv (preserves-point-function-pointed-Π g))))
 
-  extensionality-pointed-Π : (g : pointed-Π A B) → Id f g ≃ htpy-pointed-Π g
+  _~∗_ : pointed-Π A B → UU (l1 ⊔ l2)
+  _~∗_ = pointed-htpy
+  
+  infix 6 _~∗_
+
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  (f g : pointed-Π A B) (H : f ~∗ g)
+  where
+
+  htpy-pointed-htpy :
+    function-pointed-Π f ~ function-pointed-Π g
+  htpy-pointed-htpy = pr1 H
+
+  triangle-pointed-htpy :
+    htpy-pointed-htpy (point-Pointed-Type A) ＝
+    ( preserves-point-function-pointed-Π f) ∙
+    ( inv (preserves-point-function-pointed-Π g))
+  triangle-pointed-htpy = pr2 H
+```
+
+## Properties
+
+### Extensionality of pointed dependent function types
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  (f : pointed-Π A B)
+  where
+
+  refl-pointed-htpy : f ~∗ f
+  pr1 refl-pointed-htpy = refl-htpy
+  pr2 refl-pointed-htpy = inv (right-inv (preserves-point-function-pointed-Π f))
+
+  extensionality-pointed-Π : (g : pointed-Π A B) → Id f g ≃ pointed-htpy f g
   extensionality-pointed-Π =
     extensionality-Σ
       ( λ {g} q H →
-          Id
-            ( H (point-Pointed-Type A))
-            ( preserves-point-function-pointed-Π f ∙
-              inv (preserves-point-function-pointed-Π (g , q))))
+        H (point-Pointed-Type A) ＝
+        preserves-point-function-pointed-Π f ∙
+        inv (preserves-point-function-pointed-Π (g , q)))
       ( refl-htpy)
       ( inv (right-inv (preserves-point-function-pointed-Π f)))
       ( λ g → equiv-funext)
@@ -70,33 +106,10 @@ module _
           ( preserves-point-function-pointed-Π f)) ∘e
         ( equiv-inv (preserves-point-function-pointed-Π f) p))
 
-  eq-htpy-pointed-Π :
-    (g : pointed-Π A B) → (htpy-pointed-Π g) → Id f g
-  eq-htpy-pointed-Π g = map-inv-equiv (extensionality-pointed-Π g)
-
-_~∗_ :
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
-  pointed-Π A B → pointed-Π A B → UU (l1 ⊔ l2)
-_~∗_ {A = A} {B} = htpy-pointed-Π
-
-infix 6 _~∗_
-
-htpy-pointed-htpy :
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
-  (f g : pointed-Π A B) → f ~∗ g →
-  function-pointed-Π f ~ function-pointed-Π g
-htpy-pointed-htpy f g = pr1
-
-triangle-pointed-htpy :
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
-  (f g : pointed-Π A B) (H : f ~∗ g) →
-  ( htpy-pointed-htpy f g H (point-Pointed-Type A)) ＝
-  ( ( preserves-point-function-pointed-Π f) ∙
-    ( inv (preserves-point-function-pointed-Π g)))
-triangle-pointed-htpy f g = pr2
+  eq-pointed-htpy :
+    (g : pointed-Π A B) → pointed-htpy f g → Id f g
+  eq-pointed-htpy g = map-inv-equiv (extensionality-pointed-Π g)
 ```
-
-## Properties
 
 ### Pointed homotopies are equivalent to identifications of pointed maps
 
@@ -105,12 +118,8 @@ module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
-  refl-htpy-pointed-map : f ~∗ f
-  pr1 refl-htpy-pointed-map = refl-htpy
-  pr2 refl-htpy-pointed-map = inv (right-inv (preserves-point-pointed-map f))
-
   htpy-pointed-map : (g : A →∗ B) → UU (l1 ⊔ l2)
-  htpy-pointed-map = htpy-pointed-Π f
+  htpy-pointed-map = pointed-htpy f
 
   extensionality-pointed-map : (g : A →∗ B) → Id f g ≃ (htpy-pointed-map g)
   extensionality-pointed-map = extensionality-pointed-Π f
@@ -173,17 +182,17 @@ module _
     pair refl-htpy refl
 ```
 
-### The groupoid laws for pointed homotopies
+### Concatenation of pointed homotopies
 
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
   where
 
-  concat-htpy-pointed-Π :
+  concat-pointed-htpy :
     (f g h : pointed-Π A B) →
-    htpy-pointed-Π f g → htpy-pointed-Π g h → htpy-pointed-Π f h
-  concat-htpy-pointed-Π f g h G H =
+    pointed-htpy f g → pointed-htpy g h → pointed-htpy f h
+  concat-pointed-htpy f g h G H =
     pair
       ( pr1 G ∙h pr1 H)
       ( ( ap-binary (λ p q → p ∙ q) (pr2 G) (pr2 H)) ∙
@@ -194,10 +203,18 @@ module _
               ( ap
                 ( concat' (point-Pointed-Fam A B) (inv (pr2 h)))
                 ( left-inv (pr2 g)))))))
+```
 
-  inv-htpy-pointed-Π :
-    (f g : pointed-Π A B) → htpy-pointed-Π f g → htpy-pointed-Π g f
-  inv-htpy-pointed-Π f g H =
+### Inverses of pointed homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  where
+
+  inv-pointed-htpy :
+    (f g : pointed-Π A B) → pointed-htpy f g → pointed-htpy g f
+  inv-pointed-htpy f g H =
     pair
       ( inv-htpy (pr1 H))
       ( ( ap inv (pr2 H)) ∙
@@ -207,13 +224,4 @@ module _
               ( function-pointed-Π g (point-Pointed-Type A))
               ( inv (pr2 f)))
             ( inv-inv (pr2 g)))))
-
-module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  where
-
-  concat-htpy-pointed-map :
-    (f g h : A →∗ B) → htpy-pointed-map f g → htpy-pointed-map g h →
-    htpy-pointed-map f h
-  concat-htpy-pointed-map = concat-htpy-pointed-Π
 ```

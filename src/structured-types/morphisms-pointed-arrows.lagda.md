@@ -173,50 +173,56 @@ module _
       ( pointed-map-domain-transpose-hom-pointed-arrow)
       ( pointed-map-codomain-transpose-hom-pointed-arrow)
   coh-transpose-hom-pointed-arrow =
-    {!inv-pointed-htpy!}
+    inv-pointed-htpy
+      ( ( pointed-map-codomain-hom-pointed-arrow f g α) ∘∗
+        ( pointed-map-domain-transpose-hom-pointed-arrow))
+      ( ( pointed-map-codomain-transpose-hom-pointed-arrow) ∘∗
+        ( pointed-map-domain-hom-pointed-arrow f g α))
+      ( coh-hom-pointed-arrow f g α)
 
---   coh-transpose-hom-pointed-arrow :
---     coherence-hom-pointed-arrow
---       ( map-domain-hom-pointed-arrow f g α)
---       ( map-codomain-hom-pointed-arrow f g α)
---       ( map-domain-transpose-hom-pointed-arrow)
---       ( map-codomain-transpose-hom-pointed-arrow)
---   coh-transpose-hom-pointed-arrow =
---     inv-htpy (coh-hom-pointed-arrow f g α)
+  transpose-hom-pointed-arrow :
+    hom-pointed-arrow
+      ( pointed-map-domain-hom-pointed-arrow f g α)
+      ( pointed-map-codomain-hom-pointed-arrow f g α)
+  pr1 transpose-hom-pointed-arrow =
+    pointed-map-domain-transpose-hom-pointed-arrow
+  pr1 (pr2 transpose-hom-pointed-arrow) =
+    pointed-map-codomain-transpose-hom-pointed-arrow
+  pr2 (pr2 transpose-hom-pointed-arrow) = coh-transpose-hom-pointed-arrow
+```
 
---   transpose-hom-pointed-arrow :
---     hom-pointed-arrow (map-domain-hom-pointed-arrow f g α) (map-codomain-hom-pointed-arrow f g α)
---   pr1 transpose-hom-pointed-arrow = map-domain-transpose-hom-pointed-arrow
---   pr1 (pr2 transpose-hom-pointed-arrow) = map-codomain-transpose-hom-pointed-arrow
---   pr2 (pr2 transpose-hom-pointed-arrow) = coh-transpose-hom-pointed-arrow
--- ```
+### The identity morphism of pointed-arrows
 
--- ### The identity morphism of pointed-arrows
+The identity morphism of pointed-arrows is defined as
 
--- The identity morphism of pointed-arrows is defined as
+```text
+        id
+    A -----> A
+    |        |
+  f |        | f
+    V        V
+    B -----> B
+        id
+```
 
--- ```text
---         id
---     A -----> A
---     |        |
---   f |        | f
---     V        V
---     B -----> B
---         id
--- ```
+where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
 
--- where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} {f : A →∗ B}
+  where
 
--- ```agda
--- module _
---   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} {f : A → B}
---   where
-
---   id-hom-pointed-arrow : hom-pointed-arrow f f
---   pr1 id-hom-pointed-arrow = id
---   pr1 (pr2 id-hom-pointed-arrow) = id
---   pr2 (pr2 id-hom-pointed-arrow) = refl-htpy
--- ```
+  id-hom-pointed-arrow : hom-pointed-arrow f f
+  pr1 id-hom-pointed-arrow = id-pointed-map
+  pr1 (pr2 id-hom-pointed-arrow) = id-pointed-map
+  pr2 (pr2 id-hom-pointed-arrow) =
+    concat-pointed-htpy
+      ( id-pointed-map ∘∗ f)
+      ( f)
+      ( f ∘∗ id-pointed-map)
+      {!!}
+      {!!}
+```
 
 -- ### Composition of morphisms of pointed-arrows
 
