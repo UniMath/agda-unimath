@@ -35,7 +35,7 @@ Given a homotopy of maps `H : f ~ g`
 
 ## Properties
 
-### Precomposition distributes over concatenations and whiskerings of homotopies contravariantly
+### Precomposition distributes over concatenations and whiskerings of homotopies
 
 ```agda
 module _
@@ -68,9 +68,9 @@ module _
     ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
 ```
 
-### Postcomposition distributes over whiskerings and concatenations of homotopies covariantly
+### Postcomposition distributes over whiskerings and concatenations of homotopies
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {f g : A → B}
@@ -79,12 +79,13 @@ module _
   distributive-htpy-postcomp-right-whisker :
     (h : C → A) (H : f ~ g) (S : UU l4) →
     htpy-postcomp S H ·r postcomp S h ~ htpy-postcomp S (H ·r h)
-  distributive-htpy-postcomp-right-whisker h H S i = {!   !}
+  distributive-htpy-postcomp-right-whisker h H S = refl-htpy
 
   distributive-htpy-postcomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →
     postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
-  distributive-htpy-postcomp-left-whisker h H S i = ?
+  distributive-htpy-postcomp-left-whisker h H S i =
+    coherence-square-eq-htpy-ap-postcomp h (f ∘ i) (g ∘ i) (H ·r i)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
@@ -94,7 +95,9 @@ module _
   distributive-htpy-postcomp-concat-htpy :
     (H : f ~ g) (K : g ~ h) (S : UU l3) →
     htpy-postcomp S (H ∙h K) ~ htpy-postcomp S H ∙h htpy-postcomp S K
-  distributive-htpy-postcomp-concat-htpy H K S i = ?
+  distributive-htpy-postcomp-concat-htpy H K S i =
+    ( ap eq-htpy (eq-htpy (distributive-right-whisk-concat-htpy i H K))) ∙
+    ( eq-htpy-concat-htpy (H ·r i) (K ·r i))
 ```
 
 ### The actions of precomposition and postcomposition on homotopies commute
