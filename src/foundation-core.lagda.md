@@ -37,6 +37,7 @@ open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
 open import foundation-core.negation public
 open import foundation-core.path-split-maps public
+open import foundation-core.postcomposition-functions public
 open import foundation-core.precomposition-dependent-functions public
 open import foundation-core.precomposition-functions public
 open import foundation-core.propositional-maps public

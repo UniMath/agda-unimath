@@ -14,6 +14,8 @@ open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.implicit-function-types
 open import foundation.injective-maps
+open import foundation.postcomposition-dependent-functions
+open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -22,6 +24,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -69,6 +72,49 @@ coherence-square-eq-htpy-ap-precomp-Π f {C = C} g h =
     ( equiv-funext)
     ( precomp-Π f (eq-value g h))
     ( coherence-square-htpy-eq-ap-precomp-Π f g h)
+```
+
+Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
+
+```text
+                     ap (postcomp A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          ^                                       ^
+  eq-htpy |                                       | eq-htpy
+          |                                       |
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+commutes.
+
+```agda
+coherence-square-eq-htpy-ap-postcomp-Π :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (f : {x : A} → B x → C x) (g h : (x : A) → B x) →
+  coherence-square-maps
+    ( f ·l_)
+    ( eq-htpy)
+    ( eq-htpy)
+    ( ap (postcomp-Π A f) {x = g} {y = h})
+coherence-square-eq-htpy-ap-postcomp-Π {A = A} f g h =
+    coherence-square-inv-vertical
+    ( ap (postcomp-Π A f) {x = g} {y = h})
+    ( equiv-funext)
+    ( equiv-funext)
+    ( f ·l_)
+    ( coherence-square-htpy-eq-ap-postcomp-Π f g h)
+
+coherence-square-eq-htpy-ap-postcomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
+  (g h : A → B) →
+  coherence-square-maps
+    ( f ·l_)
+    ( eq-htpy)
+    ( eq-htpy)
+    ( ap (postcomp A f) {x = g} {y = h})
+coherence-square-eq-htpy-ap-postcomp f =
+  coherence-square-eq-htpy-ap-postcomp-Π f
 ```
 
 ### Naturality of `eq-htpy` for ordinary functions
