@@ -29,8 +29,20 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A pointed homotopy between pointed dependent functions is a pointed dependent
-function of the pointed family of pointwise identifications. Since pointed
+A {{#concept "pointed homotopy"}} between [pointed dependent functions](structured-types.pointed-dependent-functions.md) is a pointed dependent
+function of the [pointed family](structured-types.pointed-families-of-types.md) of [pointwise identifications](foundation-core.homotopies.md). More explicitly, a pointed homotopy `f ~∗ g` consists of a homotopy `H : f ~ g` between the underlying dependent functions, and an [identification](foundation-core.identity-types.md) witnessing that the triangle of identifications
+
+```text
+                f * ----> g *
+                   \     /
+  preserves-point f \   / preserves-point g
+                     V V
+                      *
+```
+
+[commutes](foundation.commuting-triangles-of-identifications.md).
+
+Note that since pointed
 homotopies are defined for pointed dependent functions, a pointed homotopy
 between pointed homotopies is just an instance of a pointed homotopy.
 
@@ -273,6 +285,14 @@ module _
 
 ### The left unit law for composition of pointed maps
 
+**Lemma.** For any pointed map `f : A →∗ B` there is a pointed homotopy `id ∘∗ f ~∗ f`.
+
+**Proof.** The underlying homotopy of the asserted pointed homotopy is `refl-htpy`. Then we need to show that the triangle
+
+```text
+
+```
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
@@ -300,6 +320,18 @@ module _
     htpy-pointed-map (comp-pointed-map id-pointed-map f) f
   pr1 left-unit-law-comp-pointed-map = htpy-left-unit-law-comp-pointed-map
   pr2 left-unit-law-comp-pointed-map = coh-left-unit-law-comp-pointed-map
+
+  htpy-inv-left-unit-law-comp-pointed-map :
+    map-pointed-map f ~ map-pointed-map f
+  htpy-inv-left-unit-law-comp-pointed-map = refl-htpy
+
+  coh-inv-left-unit-law-comp-pointed-map :
+    coherence-triangle-pointed-htpy
+      ( f)
+      ( comp-pointed-map id-pointed-map f)
+      ( htpy-inv-left-unit-law-comp-pointed-map)
+  coh-inv-left-unit-law-comp-pointed-map =
+    {!!}
 ```
 
 ### The right unit law for composition of pointed maps

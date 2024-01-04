@@ -220,7 +220,7 @@ module _
       ( id-pointed-map ∘∗ f)
       ( f)
       ( f ∘∗ id-pointed-map)
-      {!!}
+      ( left-unit-law-comp-pointed-map f)
       {!!}
 ```
 
