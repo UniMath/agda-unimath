@@ -11,6 +11,7 @@ open import foundation-core.functoriality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
+open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -37,6 +38,53 @@ open import foundation-core.truncation-levels
 </details>
 
 ## Properties
+
+### TODO
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  (D : B → UU l4)
+  where
+
+  abstract
+    htpy-htpy-map-Σ :
+      {f f' : A → B} {H H' : f ~ f'} →
+      {g : (a : A) → C a → D (f a)} {g' : (a : A) → C a → D (f' a)} →
+      {K : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H a) (g a) (g' a)} →
+      {K' : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H' a) (g a) (g' a)} →
+      (α : H ~ H') →
+      (β :
+        (a : A) (c : C a) →
+        K a c ＝ ap (λ p → tr D p (g a c)) (α a) ∙ K' a c) →
+      htpy-map-Σ D H g K ~ htpy-map-Σ D H' g K'
+    htpy-htpy-map-Σ {g = g} {g'} {K} {K'} α β (a , c) =
+      ap
+        ( eq-pair-Σ')
+        ( eq-pair-Σ
+          ( α a)
+          ( map-compute-dependent-identification-eq-value-function
+            ( λ p → tr D p (g a c))
+            ( λ _ → g' a c)
+            ( α a)
+            ( K a c)
+            ( K' a c)
+            ( inv
+              ( ( ap
+                  ( K a c ∙_)
+                  ( ap-const (g' a c) (α a))) ∙
+                ( right-unit) ∙
+                ( β a c)))))
+
+    htpy-htpy-map-Σ-refl-htpy :
+      {f : A → B} {H : f ~ f} →
+      {g : (x : A) → C x → D (f x)} {K : (a : A) → tr D (H a) ∘ g a ~ g a} →
+      (α : H ~ refl-htpy) →
+      (β : (a : A) (c : C a) → K a c ＝ ap (λ p → tr D p (g a c)) (α a)) →
+      htpy-map-Σ D H g K ~ refl-htpy
+    htpy-htpy-map-Σ-refl-htpy α β =
+      htpy-htpy-map-Σ α (λ a c → β a c ∙ inv right-unit)
+```
 
 ### The map on total spaces induced by a family of truncated maps is truncated
 
