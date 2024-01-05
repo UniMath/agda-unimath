@@ -47,6 +47,10 @@ elements `a` is a family of elements
   (i : I) → B (a i).
 ```
 
+A family of elements equipped with a dependent lift is a
+{{#concept "dependent lifted family of elements"}}, and analogously a family of
+elements equipped with a lift is a {{#concept "lifted family of elements"}}.
+
 To see how these families relate to
 [lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md), consider the
 lifting diagram
@@ -104,29 +108,29 @@ module _
   lift-family-of-elements = dependent-lift-family-of-elements (λ _ → B) a
 ```
 
-### Total space of dependent lifts of families of elements
+### Dependent lifted families of elements
 
 ```agda
 module _
   {l1 l2 l3 : Level} {I : UU l1} (A : I → UU l2) (B : (i : I) → A i → UU l3)
   where
 
-  total-dependent-lift-family-of-elements : UU (l1 ⊔ l2 ⊔ l3)
-  total-dependent-lift-family-of-elements =
+  dependent-lifted-family-of-elements : UU (l1 ⊔ l2 ⊔ l3)
+  dependent-lifted-family-of-elements =
     Σ ( (i : I) → A i)
       ( dependent-lift-family-of-elements B)
 ```
 
-### Total space of lifts of families of elements
+### Lifted families of elements
 
 ```agda
 module _
   {l1 l2 l3 : Level} (I : UU l1) {A : UU l2} (B : A → UU l3)
   where
 
-  total-lift-family-of-elements : UU (l1 ⊔ l2 ⊔ l3)
-  total-lift-family-of-elements =
-    total-dependent-lift-family-of-elements (λ (_ : I) → A) (λ _ → B)
+  lifted-family-of-elements : UU (l1 ⊔ l2 ⊔ l3)
+  lifted-family-of-elements =
+    dependent-lifted-family-of-elements (λ (_ : I) → A) (λ _ → B)
 ```
 
 ### Dependent lifts of binary families of elements

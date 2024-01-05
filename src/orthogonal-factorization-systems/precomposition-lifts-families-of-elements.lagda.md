@@ -54,9 +54,9 @@ module _
   (f : I → J)
   where
 
-  precomp-total-lift-family-of-elements :
-    total-lift-family-of-elements J B → total-lift-family-of-elements I B
-  precomp-total-lift-family-of-elements =
+  precomp-lifted-family-of-elements :
+    lifted-family-of-elements J B → lifted-family-of-elements I B
+  precomp-lifted-family-of-elements =
     map-Σ
       ( lift-family-of-elements B)
       ( precomp f A)
@@ -165,7 +165,7 @@ module _
 
   coherence-square-precomp-map-inv-distributive-Π-Σ :
     coherence-square-maps
-      ( precomp-total-lift-family-of-elements B f)
+      ( precomp-lifted-family-of-elements B f)
       ( map-inv-distributive-Π-Σ)
       ( map-inv-distributive-Π-Σ)
       ( precomp f (Σ A B))
@@ -180,11 +180,11 @@ module _
   {f : J → I}
   where
 
-  htpy-precomp-total-lift-family-of-elements-htpy :
+  htpy-precomp-lifted-family-of-elements-htpy :
     {g : J → I} (H : f ~ g) →
-    ( precomp-total-lift-family-of-elements B f) ~
-    ( precomp-total-lift-family-of-elements B g)
-  htpy-precomp-total-lift-family-of-elements-htpy H =
+    ( precomp-lifted-family-of-elements B f) ~
+    ( precomp-lifted-family-of-elements B g)
+  htpy-precomp-lifted-family-of-elements-htpy H =
     htpy-map-Σ
       ( lift-family-of-elements B)
       ( htpy-precomp H A)
@@ -192,10 +192,10 @@ module _
       ( λ a → triangle-precompose-lift-family-of-elements-htpy B a H)
 
   abstract
-    compute-htpy-precomp-total-lift-family-of-elements-htpy :
-      htpy-precomp-total-lift-family-of-elements-htpy refl-htpy ~
+    compute-htpy-precomp-lifted-family-of-elements-htpy :
+      htpy-precomp-lifted-family-of-elements-htpy refl-htpy ~
       refl-htpy
-    compute-htpy-precomp-total-lift-family-of-elements-htpy =
+    compute-htpy-precomp-lifted-family-of-elements-htpy =
       htpy-htpy-map-Σ-refl-htpy
         ( lift-family-of-elements B)
         ( compute-htpy-precomp-refl-htpy f A)
@@ -221,13 +221,13 @@ module _
       ( coherence-square-precomp-map-inv-distributive-Π-Σ B f)
       ( coherence-square-precomp-map-inv-distributive-Π-Σ B g)
       ( ( map-inv-distributive-Π-Σ) ·l
-        ( htpy-precomp-total-lift-family-of-elements-htpy B H))
+        ( htpy-precomp-lifted-family-of-elements-htpy B H))
 
   coherence-blabla-refl-htpy : statement-coherence-blabla refl-htpy
   coherence-blabla-refl-htpy =
     ( ap-left-whisk-htpy
       ( map-inv-distributive-Π-Σ)
-      ( compute-htpy-precomp-total-lift-family-of-elements-htpy B)) ∙h
+      ( compute-htpy-precomp-lifted-family-of-elements-htpy B)) ∙h
     ( inv-htpy
       ( λ h →
         compute-htpy-precomp-refl-htpy f
