@@ -38,7 +38,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The **flattening lemma** for [pushouts](synthetic-homotopy-theory.pushouts.md)
+The {{#concept "flattening lemma" Disambiguation="pushouts"}} for [pushouts](synthetic-homotopy-theory.pushouts.md)
 states that pushouts commute with
 [dependent pair types](foundation.dependent-pair-types.md). More precisely,
 given a pushout square
@@ -53,8 +53,8 @@ given a pushout square
       i
 ```
 
-with homotopy `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
-commuting square
+with [homotopy](foundation-core.homotopies.md) `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
@@ -79,72 +79,76 @@ module _
   spanning-type-flattening-pushout : UU (l3 ⊔ l5)
   spanning-type-flattening-pushout =
     Σ ( spanning-type-span-diagram s)
-      ( P ∘ horizontal-map-cocone-span-diagram s c ∘ left-map-span-diagram s)
+      ( P ∘ left-map-cocone-span-diagram s c ∘ left-map-span-diagram s)
 
   domain-flattening-pushout : UU (l1 ⊔ l5)
   domain-flattening-pushout =
-    Σ ( domain-span-diagram s) (P ∘ horizontal-map-cocone-span-diagram s c)
+    Σ ( domain-span-diagram s) (P ∘ left-map-cocone-span-diagram s c)
 
   codomain-flattening-pushout : UU (l2 ⊔ l5)
   codomain-flattening-pushout =
-    Σ ( codomain-span-diagram s) (P ∘ vertical-map-cocone-span-diagram s c)
+    Σ ( codomain-span-diagram s) (P ∘ right-map-cocone-span-diagram s c)
 
   left-map-flattening-pushout :
     spanning-type-flattening-pushout → domain-flattening-pushout
   left-map-flattening-pushout =
-    map-Σ-map-base (left-map-span-diagram s) (P ∘ horizontal-map-cocone-span-diagram s c)
+    map-Σ-map-base
+      ( left-map-span-diagram s)
+      ( P ∘ left-map-cocone-span-diagram s c)
 
   right-map-flattening-pushout :
     spanning-type-flattening-pushout → codomain-flattening-pushout
   right-map-flattening-pushout =
     map-Σ
-      ( P ∘ vertical-map-cocone-span-diagram s c)
+      ( P ∘ right-map-cocone-span-diagram s c)
       ( right-map-span-diagram s)
       ( λ x → tr P (coherence-square-cocone-span-diagram s c x))
 
-  flattening-pushout : span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
-  flattening-pushout =
+  span-diagram-flattening-pushout : span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
+  span-diagram-flattening-pushout =
     make-span-diagram
       ( left-map-flattening-pushout)
       ( right-map-flattening-pushout)
 
-  horizontal-map-cocone-flattening-pushout :
+  left-map-cocone-flattening-pushout :
     domain-flattening-pushout → Σ X P
-  horizontal-map-cocone-flattening-pushout =
-    map-Σ-map-base (horizontal-map-cocone-span-diagram s c) P
+  left-map-cocone-flattening-pushout =
+    map-Σ-map-base (left-map-cocone-span-diagram s c) P
 
-  vertical-map-cocone-flattening-pushout :
+  right-map-cocone-flattening-pushout :
     codomain-flattening-pushout → Σ X P
-  vertical-map-cocone-flattening-pushout =
-    map-Σ-map-base (vertical-map-cocone-span-diagram s c) P
+  right-map-cocone-flattening-pushout =
+    map-Σ-map-base (right-map-cocone-span-diagram s c) P
 
   coherence-square-cocone-flattening-pushout :
     coherence-square-maps
       ( right-map-flattening-pushout)
       ( left-map-flattening-pushout)
-      ( vertical-map-cocone-flattening-pushout)
-      ( horizontal-map-cocone-flattening-pushout)
+      ( right-map-cocone-flattening-pushout)
+      ( left-map-cocone-flattening-pushout)
   coherence-square-cocone-flattening-pushout =
     coherence-square-maps-map-Σ-map-base P
       ( right-map-span-diagram s)
       ( left-map-span-diagram s)
-      ( vertical-map-cocone-span-diagram s c)
-      ( horizontal-map-cocone-span-diagram s c)
+      ( right-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram s c)
       ( coherence-square-cocone-span-diagram s c)
 
   cocone-flattening-pushout :
-    cocone-span-diagram flattening-pushout (Σ X P)
+    cocone-span-diagram span-diagram-flattening-pushout (Σ X P)
   pr1 cocone-flattening-pushout =
-    horizontal-map-cocone-flattening-pushout
+    left-map-cocone-flattening-pushout
   pr1 (pr2 cocone-flattening-pushout) =
-    vertical-map-cocone-flattening-pushout
+    right-map-cocone-flattening-pushout
   pr2 (pr2 cocone-flattening-pushout) =
     coherence-square-cocone-flattening-pushout
 
   statement-flattening-lemma-pushout : UUω
   statement-flattening-lemma-pushout =
     dependent-universal-property-pushout s c →
-    universal-property-pushout flattening-pushout cocone-flattening-pushout
+    universal-property-pushout
+      ( span-diagram-flattening-pushout)
+      ( cocone-flattening-pushout)
 ```
 
 ### The statement of the flattening lemma for pushouts, phrased using descent data
@@ -164,67 +168,71 @@ module _
       ( structure-type-family-pushout-type-family s c Q))
   where
 
-  spanning-type-flattening-descent-data-pushout : UU (l3 ⊔ l5)
-  spanning-type-flattening-descent-data-pushout =
+  spanning-type-flattening-structure-type-family-pushout : UU (l3 ⊔ l5)
+  spanning-type-flattening-structure-type-family-pushout =
     Σ ( spanning-type-span-diagram s)
-      ( left-type-family-structure-type-family-pushout s P ∘ left-map-span-diagram s)
+      ( ( left-type-family-structure-type-family-pushout s P) ∘
+        ( left-map-span-diagram s))
 
-  domain-flattening-descent-data-pushout : UU (l1 ⊔ l5)
-  domain-flattening-descent-data-pushout =
-    Σ (domain-span-diagram s) (left-type-family-structure-type-family-pushout s P)
+  domain-flattening-structure-type-family-pushout : UU (l1 ⊔ l5)
+  domain-flattening-structure-type-family-pushout =
+    Σ ( domain-span-diagram s)
+      ( left-type-family-structure-type-family-pushout s P)
 
-  codomain-flattening-descent-data-pushout : UU (l2 ⊔ l5)
-  codomain-flattening-descent-data-pushout =
-    Σ (codomain-span-diagram s) (right-type-family-structure-type-family-pushout s P)
+  codomain-flattening-structure-type-family-pushout : UU (l2 ⊔ l5)
+  codomain-flattening-structure-type-family-pushout =
+    Σ ( codomain-span-diagram s)
+      ( right-type-family-structure-type-family-pushout s P)
 
-  left-map-flattening-descent-data-pushout :
-    spanning-type-flattening-descent-data-pushout →
-    domain-flattening-descent-data-pushout
-  left-map-flattening-descent-data-pushout =
+  left-map-flattening-structure-type-family-pushout :
+    spanning-type-flattening-structure-type-family-pushout →
+    domain-flattening-structure-type-family-pushout
+  left-map-flattening-structure-type-family-pushout =
     map-Σ-map-base
       ( left-map-span-diagram s)
       ( left-type-family-structure-type-family-pushout s P)
 
-  right-map-flattening-descent-data-pushout :
-    spanning-type-flattening-descent-data-pushout →
-    codomain-flattening-descent-data-pushout
-  right-map-flattening-descent-data-pushout =
+  right-map-flattening-structure-type-family-pushout :
+    spanning-type-flattening-structure-type-family-pushout →
+    codomain-flattening-structure-type-family-pushout
+  right-map-flattening-structure-type-family-pushout =
     map-Σ
       ( right-type-family-structure-type-family-pushout s P)
       ( right-map-span-diagram s)
       ( map-matching-equiv-structure-type-family-pushout s P)
 
-  flattening-descent-data-pushout : span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
-  flattening-descent-data-pushout =
+  span-diagram-flattening-structure-type-family-pushout :
+    span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
+  span-diagram-flattening-structure-type-family-pushout =
     make-span-diagram
-      left-map-flattening-descent-data-pushout
-      right-map-flattening-descent-data-pushout
+      left-map-flattening-structure-type-family-pushout
+      right-map-flattening-structure-type-family-pushout
 
-  horizontal-map-cocone-flattening-descent-data-pushout :
-    domain-flattening-descent-data-pushout → Σ X Q
-  horizontal-map-cocone-flattening-descent-data-pushout =
+  left-map-cocone-flattening-structure-type-family-pushout :
+    domain-flattening-structure-type-family-pushout → Σ X Q
+  left-map-cocone-flattening-structure-type-family-pushout =
     map-Σ Q
-      ( horizontal-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram s c)
       ( map-left-equiv-equiv-structure-type-family-pushout s P
         ( structure-type-family-pushout-type-family s c Q)
         ( e))
 
-  vertical-map-cocone-flattening-descent-data-pushout :
-    codomain-flattening-descent-data-pushout → Σ X Q
-  vertical-map-cocone-flattening-descent-data-pushout =
+  right-map-cocone-flattening-structure-type-family-pushout :
+    codomain-flattening-structure-type-family-pushout → Σ X Q
+  right-map-cocone-flattening-structure-type-family-pushout =
     map-Σ Q
-      ( vertical-map-cocone-span-diagram s c)
+      ( right-map-cocone-span-diagram s c)
       ( map-right-equiv-equiv-structure-type-family-pushout s P
         ( structure-type-family-pushout-type-family s c Q)
         ( e))
 
-  coherence-square-cocone-flattening-descent-data-pushout :
+  coherence-square-cocone-flattening-structure-type-family-pushout :
     coherence-square-maps
-      ( right-map-flattening-descent-data-pushout)
-      ( left-map-flattening-descent-data-pushout)
-      ( vertical-map-cocone-flattening-descent-data-pushout)
-      ( horizontal-map-cocone-flattening-descent-data-pushout)
-  coherence-square-cocone-flattening-descent-data-pushout =
+      ( right-map-flattening-structure-type-family-pushout)
+      ( left-map-flattening-structure-type-family-pushout)
+      ( right-map-cocone-flattening-structure-type-family-pushout)
+      ( left-map-cocone-flattening-structure-type-family-pushout)
+  coherence-square-cocone-flattening-structure-type-family-pushout =
     htpy-map-Σ Q
       ( coherence-square-cocone-span-diagram s c)
       ( λ x →
@@ -239,21 +247,23 @@ module _
             ( e)
             ( x)))
 
-  cocone-flattening-descent-data-pushout :
-    cocone-span-diagram (flattening-descent-data-pushout) (Σ X Q)
-  pr1 cocone-flattening-descent-data-pushout =
-    horizontal-map-cocone-flattening-descent-data-pushout
-  pr1 (pr2 cocone-flattening-descent-data-pushout) =
-    vertical-map-cocone-flattening-descent-data-pushout
-  pr2 (pr2 cocone-flattening-descent-data-pushout) =
-    coherence-square-cocone-flattening-descent-data-pushout
+  cocone-flattening-structure-type-family-pushout :
+    cocone-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout)
+      ( Σ X Q)
+  pr1 cocone-flattening-structure-type-family-pushout =
+    left-map-cocone-flattening-structure-type-family-pushout
+  pr1 (pr2 cocone-flattening-structure-type-family-pushout) =
+    right-map-cocone-flattening-structure-type-family-pushout
+  pr2 (pr2 cocone-flattening-structure-type-family-pushout) =
+    coherence-square-cocone-flattening-structure-type-family-pushout
 
-  statement-flattening-lemma-descent-data-pushout : UUω
-  statement-flattening-lemma-descent-data-pushout =
+  statement-flattening-lemma-structure-type-family-pushout : UUω
+  statement-flattening-lemma-structure-type-family-pushout =
     dependent-universal-property-pushout s c →
     universal-property-pushout
-      ( flattening-descent-data-pushout)
-      ( cocone-flattening-descent-data-pushout)
+      ( span-diagram-flattening-structure-type-family-pushout)
+      ( cocone-flattening-structure-type-family-pushout)
 ```
 
 ## Properties
@@ -272,20 +282,24 @@ module _
 
   cocone-map-flattening-pushout :
     {l : Level} (Y : UU l) →
-    (Σ X P → Y) → cocone-span-diagram (flattening-pushout s c P) Y
+    (Σ X P → Y) → cocone-span-diagram (span-diagram-flattening-pushout s c P) Y
   cocone-map-flattening-pushout Y =
     cocone-map-span-diagram
-      ( flattening-pushout s c P)
+      ( span-diagram-flattening-pushout s c P)
       ( cocone-flattening-pushout s c P)
 
   comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
-    Σ ( (a : domain-span-diagram s) → P (horizontal-map-cocone-span-diagram s c a) → Y)
+    Σ ( (a : domain-span-diagram s) →
+        P (left-map-cocone-span-diagram s c a) → Y)
       ( λ k →
-        Σ ( (b : codomain-span-diagram s) → P (vertical-map-cocone-span-diagram s c b) → Y)
+        Σ ( (b : codomain-span-diagram s) →
+            P (right-map-cocone-span-diagram s c b) → Y)
           ( λ l →
             ( x : spanning-type-span-diagram s)
-            ( t : P (horizontal-map-cocone-span-diagram s c (left-map-span-diagram s x))) →
+            ( t :
+              P (left-map-cocone-span-diagram s c
+                ( left-map-span-diagram s x))) →
             ( k (left-map-span-diagram s x) t) ＝
             ( l ( right-map-span-diagram s x)
                 ( tr P (coherence-square-cocone-span-diagram s c x) t)))) ≃
@@ -344,7 +358,7 @@ module _
 
 The proof is carried out by constructing a commuting cube, which has
 equivalences for vertical maps, the `cocone-flattening-pushout` square for the
-bottom, and the `cocone-flattening-descent-data-pushout` square for the top.
+bottom, and the `cocone-flattening-structure-type-family-pushout` square for the top.
 
 The bottom is a pushout by the above flattening lemma, which implies that the
 top is also a pushout.
@@ -378,20 +392,20 @@ module _
     coherence-cube-maps
       ( left-map-flattening-pushout s c Q)
       ( right-map-flattening-pushout s c Q)
-      ( horizontal-map-cocone-flattening-pushout s c Q)
-      ( vertical-map-cocone-flattening-pushout s c Q)
-      ( left-map-flattening-descent-data-pushout s c P Q e)
-      ( right-map-flattening-descent-data-pushout s c P Q e)
-      ( horizontal-map-cocone-flattening-descent-data-pushout s c P Q e)
-      ( vertical-map-cocone-flattening-descent-data-pushout s c P Q e)
+      ( left-map-cocone-flattening-pushout s c Q)
+      ( right-map-cocone-flattening-pushout s c Q)
+      ( left-map-flattening-structure-type-family-pushout s c P Q e)
+      ( right-map-flattening-structure-type-family-pushout s c P Q e)
+      ( left-map-cocone-flattening-structure-type-family-pushout s c P Q e)
+      ( right-map-cocone-flattening-structure-type-family-pushout s c P Q e)
       ( tot (λ x → map-equiv (pr1 e (left-map-span-diagram s x))))
       ( tot (λ a → map-equiv (pr1 e a)))
       ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
       ( id)
-      ( coherence-square-cocone-flattening-descent-data-pushout s c P Q e)
+      ( coherence-square-cocone-flattening-structure-type-family-pushout s c P Q e)
       ( refl-htpy)
       ( htpy-map-Σ
-        ( Q ∘ vertical-map-cocone-span-diagram s c)
+        ( Q ∘ right-map-cocone-span-diagram s c)
         ( refl-htpy)
         ( λ x →
           ( tr Q (coherence-square-cocone-span-diagram s c x)) ∘
@@ -402,7 +416,7 @@ module _
       ( coherence-square-cocone-flattening-pushout s c Q)
   coherence-cube-flattening-lemma-descent-data-pushout (u , v) =
     ( ap-id
-      ( coherence-square-cocone-flattening-descent-data-pushout s c P Q e
+      ( coherence-square-cocone-flattening-structure-type-family-pushout s c P Q e
         ( u , v))) ∙
     ( triangle-eq-pair-Σ Q
       ( coherence-square-cocone-span-diagram s c u)
@@ -412,31 +426,40 @@ module _
       ( inv
         ( ( right-unit) ∙
           ( compute-ap-map-Σ-map-base-eq-pair-Σ
-            ( vertical-map-cocone-span-diagram s c)
+            ( right-map-cocone-span-diagram s c)
             ( Q)
             ( refl)
             ( inv (pr2 (pr2 e) u v))))))
 
   flattening-lemma-descent-data-pushout :
-    statement-flattening-lemma-descent-data-pushout s c P Q e
+    statement-flattening-lemma-structure-type-family-pushout s c P Q e
   flattening-lemma-descent-data-pushout dup-pushout =
+    universal-property-pushout-equiv-cocone-equiv-span-diagram
+      {! span-diagram-flattening-pushout s c Q!}
+      {!!}
+      {!!}
+      {!!}
+      {!!}
+      {!!}
+      {!!}
+  {-
     universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
       ( left-map-flattening-pushout s c Q)
       ( right-map-flattening-pushout s c Q)
-      ( horizontal-map-cocone-flattening-pushout s c Q)
-      ( vertical-map-cocone-flattening-pushout s c Q)
-      ( left-map-flattening-descent-data-pushout s c P Q e)
-      ( right-map-flattening-descent-data-pushout s c P Q e)
-      ( horizontal-map-cocone-flattening-descent-data-pushout s c P Q e)
-      ( vertical-map-cocone-flattening-descent-data-pushout s c P Q e)
+      ( left-map-cocone-flattening-pushout s c Q)
+      ( right-map-cocone-flattening-pushout s c Q)
+      ( left-map-flattening-structure-type-family-pushout s c P Q e)
+      ( right-map-flattening-structure-type-family-pushout s c P Q e)
+      ( left-map-cocone-flattening-structure-type-family-pushout s c P Q e)
+      ( right-map-cocone-flattening-structure-type-family-pushout s c P Q e)
       ( tot (λ x → map-equiv (pr1 e (f x))))
       ( tot (λ a → map-equiv (pr1 e a)))
       ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
       ( id)
-      ( coherence-square-cocone-flattening-descent-data-pushout s c P Q e)
+      ( coherence-square-cocone-flattening-structure-type-family-pushout s c P Q e)
       ( refl-htpy)
       ( htpy-map-Σ
-        ( Q ∘ vertical-map-cocone-span-diagram s c)
+        ( Q ∘ right-map-cocone-span-diagram s c)
         ( refl-htpy)
         ( λ x →
           tr Q (coherence-square-cocone-span-diagram s c x) ∘ (map-equiv (pr1 e (f x))))
@@ -453,4 +476,5 @@ module _
         ( λ b → is-equiv-map-equiv (pr1 (pr2 e) b)))
       ( is-equiv-id)
       ( flattening-lemma-pushout s c Q dup-pushout)
+      -}
 ```

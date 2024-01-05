@@ -83,9 +83,9 @@ module _
     cocone-span-diagram s X →
     cocone-span-diagram (transposition-span-diagram s) X
   pr1 (transposition-cocone-span-diagram c) =
-    vertical-map-cocone-span-diagram s c
+    right-map-cocone-span-diagram s c
   pr1 (pr2 (transposition-cocone-span-diagram c)) =
-    horizontal-map-cocone-span-diagram s c
+    left-map-cocone-span-diagram s c
   pr2 (pr2 (transposition-cocone-span-diagram c)) =
     inv-htpy (coherence-square-cocone-span-diagram s c)
 
@@ -172,9 +172,9 @@ module _
   cocone-map-span-diagram :
     cocone-span-diagram s X → (X → Y) → cocone-span-diagram s Y
   pr1 (cocone-map-span-diagram c h) =
-    h ∘ horizontal-map-cocone-span-diagram s c
+    h ∘ left-map-cocone-span-diagram s c
   pr1 (pr2 (cocone-map-span-diagram c h)) =
-    h ∘ vertical-map-cocone-span-diagram s c
+    h ∘ right-map-cocone-span-diagram s c
   pr2 (pr2 (cocone-map-span-diagram c h)) =
     h ·l coherence-square-cocone-span-diagram s c
 
@@ -206,7 +206,7 @@ module _
 
 Consider a span diagram `s := A <-f- S -g-> B` and a moprhism `h : B → C`. Then
 we can **compose** any cocone `c := (i , j , H)` with codomain `X` under the
-span diagram `s` **horizontally** with a cocone `d` under the span diagram
+span diagram `s` **leftly** with a cocone `d` under the span diagram
 `X <-j- B -h-> C` as indicated in the diagram
 
 ```text
@@ -227,54 +227,54 @@ module _
   (c : cocone-span-diagram s X)
   (d :
     cocone-span-diagram
-      ( make-span-diagram (vertical-map-cocone-span-diagram s c) h)
+      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
       ( Y))
   where
 
-  horizontal-map-horizontal-comp-cocone-span-diagram :
+  left-map-horizontal-comp-cocone-span-diagram :
     domain-span-diagram s → Y
-  horizontal-map-horizontal-comp-cocone-span-diagram =
-    horizontal-map-cocone-span-diagram
-      ( make-span-diagram (vertical-map-cocone-span-diagram s c) h)
+  left-map-horizontal-comp-cocone-span-diagram =
+    left-map-cocone-span-diagram
+      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
       ( d) ∘
-    horizontal-map-cocone-span-diagram s c
+    left-map-cocone-span-diagram s c
 
-  vertical-map-horizontal-comp-cocone-span-diagram : C → Y
-  vertical-map-horizontal-comp-cocone-span-diagram =
-    vertical-map-cocone-span-diagram
-      ( make-span-diagram (vertical-map-cocone-span-diagram s c) h)
+  right-map-horizontal-comp-cocone-span-diagram : C → Y
+  right-map-horizontal-comp-cocone-span-diagram =
+    right-map-cocone-span-diagram
+      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
       ( d)
 
   coherence-square-horizontal-comp-cocone-span-diagram :
     coherence-square-maps
       ( h ∘ right-map-span-diagram s)
       ( left-map-span-diagram s)
-      ( vertical-map-horizontal-comp-cocone-span-diagram)
-      ( horizontal-map-horizontal-comp-cocone-span-diagram)
+      ( right-map-horizontal-comp-cocone-span-diagram)
+      ( left-map-horizontal-comp-cocone-span-diagram)
   coherence-square-horizontal-comp-cocone-span-diagram =
     pasting-horizontal-coherence-square-maps
       ( right-map-span-diagram s)
       ( h)
       ( left-map-span-diagram s)
-      ( vertical-map-cocone-span-diagram s c)
-      ( vertical-map-cocone-span-diagram
-        ( make-span-diagram (vertical-map-cocone-span-diagram s c) h)
+      ( right-map-cocone-span-diagram s c)
+      ( right-map-cocone-span-diagram
+        ( make-span-diagram (right-map-cocone-span-diagram s c) h)
         ( d))
-      ( horizontal-map-cocone-span-diagram s c)
-      ( horizontal-map-cocone-span-diagram
-        ( make-span-diagram (vertical-map-cocone-span-diagram s c) h)
+      ( left-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram
+        ( make-span-diagram (right-map-cocone-span-diagram s c) h)
         ( d))
       ( coherence-square-cocone-span-diagram s c)
       ( coherence-square-cocone-span-diagram
-        ( make-span-diagram (vertical-map-cocone-span-diagram s c) h)
+        ( make-span-diagram (right-map-cocone-span-diagram s c) h)
         ( d))
 
   horizontal-comp-cocone-span-diagram :
     cocone-span-diagram (right-extend-span-diagram s h) Y
   pr1 horizontal-comp-cocone-span-diagram =
-    horizontal-map-horizontal-comp-cocone-span-diagram
+    left-map-horizontal-comp-cocone-span-diagram
   pr1 (pr2 horizontal-comp-cocone-span-diagram) =
-    vertical-map-horizontal-comp-cocone-span-diagram
+    right-map-horizontal-comp-cocone-span-diagram
   pr2 (pr2 horizontal-comp-cocone-span-diagram) =
     coherence-square-horizontal-comp-cocone-span-diagram
 ```
@@ -340,7 +340,7 @@ Then we obtain a new cocone on the outer span diagram `A <- S -> B'`.
 ### Vertical composition of cocones under span diagrams
 
 Consider a span diagram `s := A <-f- S -g-> B` and a map `h : A → C`. Then we
-can **compose** a cocone `c := (i , j , H)` under `s` **vertically** with a
+can **compose** a cocone `c := (i , j , H)` under `s` **rightly** with a
 cocone `d` under the span diagram `C <-h- A -i-> X` as indicated in the diagram
 
 ```text
@@ -365,53 +365,53 @@ module _
   (c : cocone-span-diagram s X)
   (d :
     cocone-span-diagram
-      ( make-span-diagram h (horizontal-map-cocone-span-diagram s c))
+      ( make-span-diagram h (left-map-cocone-span-diagram s c))
       ( Y))
   where
 
-  horizontal-map-vertical-comp-cocone-span-diagram : C → Y
-  horizontal-map-vertical-comp-cocone-span-diagram =
-    horizontal-map-cocone-span-diagram
-      ( make-span-diagram h (horizontal-map-cocone-span-diagram s c))
+  left-map-vertical-comp-cocone-span-diagram : C → Y
+  left-map-vertical-comp-cocone-span-diagram =
+    left-map-cocone-span-diagram
+      ( make-span-diagram h (left-map-cocone-span-diagram s c))
       ( d)
 
-  vertical-map-vertical-comp-cocone-span-diagram : codomain-span-diagram s → Y
-  vertical-map-vertical-comp-cocone-span-diagram =
-    vertical-map-cocone-span-diagram
-      ( make-span-diagram h (horizontal-map-cocone-span-diagram s c))
+  right-map-vertical-comp-cocone-span-diagram : codomain-span-diagram s → Y
+  right-map-vertical-comp-cocone-span-diagram =
+    right-map-cocone-span-diagram
+      ( make-span-diagram h (left-map-cocone-span-diagram s c))
       ( d) ∘
-    vertical-map-cocone-span-diagram s c
+    right-map-cocone-span-diagram s c
 
   coherence-square-vertical-comp-cocone-span-diagram :
     coherence-square-maps
       ( right-map-span-diagram s)
       ( h ∘ left-map-span-diagram s)
-      ( vertical-map-vertical-comp-cocone-span-diagram)
-      ( horizontal-map-vertical-comp-cocone-span-diagram)
+      ( right-map-vertical-comp-cocone-span-diagram)
+      ( left-map-vertical-comp-cocone-span-diagram)
   coherence-square-vertical-comp-cocone-span-diagram =
     pasting-vertical-coherence-square-maps
       ( right-map-span-diagram s)
       ( left-map-span-diagram s)
-      ( vertical-map-cocone-span-diagram s c)
-      ( horizontal-map-cocone-span-diagram s c)
+      ( right-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram s c)
       ( h)
-      ( vertical-map-cocone-span-diagram
-        ( make-span-diagram h (horizontal-map-cocone-span-diagram s c))
+      ( right-map-cocone-span-diagram
+        ( make-span-diagram h (left-map-cocone-span-diagram s c))
         ( d))
-      ( horizontal-map-cocone-span-diagram
-        ( make-span-diagram h (horizontal-map-cocone-span-diagram s c))
+      ( left-map-cocone-span-diagram
+        ( make-span-diagram h (left-map-cocone-span-diagram s c))
         ( d))
       ( coherence-square-cocone-span-diagram s c)
       ( coherence-square-cocone-span-diagram
-        ( make-span-diagram h (horizontal-map-cocone-span-diagram s c))
+        ( make-span-diagram h (left-map-cocone-span-diagram s c))
         ( d))
 
   vertical-comp-cocone-span-diagram :
     cocone-span-diagram (left-extend-span-diagram s h) Y
   pr1 vertical-comp-cocone-span-diagram =
-    horizontal-map-vertical-comp-cocone-span-diagram
+    left-map-vertical-comp-cocone-span-diagram
   pr1 (pr2 vertical-comp-cocone-span-diagram) =
-    vertical-map-vertical-comp-cocone-span-diagram
+    right-map-vertical-comp-cocone-span-diagram
   pr2 (pr2 vertical-comp-cocone-span-diagram) =
     coherence-square-vertical-comp-cocone-span-diagram
 ```

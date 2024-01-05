@@ -140,24 +140,24 @@ module _
     ind-induction-principle-pushout s c H
       ( λ x → Id (h x) (h' x))
       ( pair
-        ( horizontal-htpy-eq-dependent-cocone-span-diagram s c P
+        ( left-htpy-eq-dependent-cocone-span-diagram s c P
           ( dependent-cocone-map-span-diagram s c P h)
           ( dependent-cocone-map-span-diagram s c P h')
           ( p))
         ( pair
-          ( vertical-htpy-eq-dependent-cocone-span-diagram s c P
+          ( right-htpy-eq-dependent-cocone-span-diagram s c P
             ( dependent-cocone-map-span-diagram s c P h)
             ( dependent-cocone-map-span-diagram s c P h')
             ( p))
           ( λ x →
             map-compute-dependent-identification-eq-value h h'
               ( coherence-square-cocone-span-diagram s c x)
-              ( horizontal-htpy-eq-dependent-cocone-span-diagram s c P
+              ( left-htpy-eq-dependent-cocone-span-diagram s c P
                 ( dependent-cocone-map-span-diagram s c P h)
                 ( dependent-cocone-map-span-diagram s c P h')
                 ( p)
                 ( left-map-span-diagram s x))
-              ( vertical-htpy-eq-dependent-cocone-span-diagram s c P
+              ( right-htpy-eq-dependent-cocone-span-diagram s c P
                 ( dependent-cocone-map-span-diagram s c P h)
                 ( dependent-cocone-map-span-diagram s c P h')
                 ( p)
@@ -214,14 +214,14 @@ module _
       ( gap
         ( λ ( h :
               ( a : domain-span-diagram s) →
-              P (horizontal-map-cocone-span-diagram s c a))
+              P (left-map-cocone-span-diagram s c a))
             ( x : spanning-type-span-diagram s) →
           tr P
             ( coherence-square-cocone-span-diagram s c x)
             ( h (left-map-span-diagram s x)))
         ( λ ( h :
               ( b : codomain-span-diagram s) →
-              P (vertical-map-cocone-span-diagram s c b))
+              P (right-map-cocone-span-diagram s c b))
             ( x : spanning-type-span-diagram s) →
           h (right-map-span-diagram s x))
         ( cone-dependent-pullback-property-pushout s c P))

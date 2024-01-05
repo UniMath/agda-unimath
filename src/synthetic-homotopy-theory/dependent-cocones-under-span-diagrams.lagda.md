@@ -66,40 +66,47 @@ module _
   {X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
   where
 
+  left-family-of-elements-dependent-cocone-span-diagram : UU (l1 ⊔ l5)
+  left-family-of-elements-dependent-cocone-span-diagram =
+    (a : domain-span-diagram s) → P (left-map-cocone-span-diagram s c a)
+
+  right-family-of-elements-dependent-cocone-span-diagram : UU (l2 ⊔ l5)
+  right-family-of-elements-dependent-cocone-span-diagram =
+    (b : codomain-span-diagram s) → P (right-map-cocone-span-diagram s c b)
+
+  dependent-homotopy-dependent-cocone-span-diagram :
+    left-family-of-elements-dependent-cocone-span-diagram →
+    right-family-of-elements-dependent-cocone-span-diagram → UU (l3 ⊔ l5)
+  dependent-homotopy-dependent-cocone-span-diagram hA hB =
+    dependent-homotopy
+      ( λ _ → P)
+      ( coherence-square-cocone-span-diagram s c)
+      ( hA ∘ left-map-span-diagram s)
+      ( hB ∘ right-map-span-diagram s)
+  
   dependent-cocone-span-diagram : UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
   dependent-cocone-span-diagram =
-    Σ ( (a : domain-span-diagram s) →
-        P (horizontal-map-cocone-span-diagram s c a))
+    Σ ( left-family-of-elements-dependent-cocone-span-diagram)
       ( λ hA →
-        Σ ( (b : codomain-span-diagram s) →
-            P (vertical-map-cocone-span-diagram s c b))
-          ( λ hB →
-            dependent-homotopy
-              ( λ _ → P)
-              ( coherence-square-cocone-span-diagram s c)
-              ( hA ∘ left-map-span-diagram s)
-              ( hB ∘ right-map-span-diagram s)))
+        Σ ( right-family-of-elements-dependent-cocone-span-diagram)
+          ( dependent-homotopy-dependent-cocone-span-diagram hA))
 
   module _
     (d : dependent-cocone-span-diagram)
     where
 
-    horizontal-map-dependent-cocone-span-diagram :
-      (a : domain-span-diagram s) → P (horizontal-map-cocone-span-diagram s c a)
-    horizontal-map-dependent-cocone-span-diagram = pr1 d
+    left-map-dependent-cocone-span-diagram :
+      left-family-of-elements-dependent-cocone-span-diagram
+    left-map-dependent-cocone-span-diagram = pr1 d
 
-    vertical-map-dependent-cocone-span-diagram :
-      (b : codomain-span-diagram s) → P (vertical-map-cocone-span-diagram s c b)
-    vertical-map-dependent-cocone-span-diagram = pr1 (pr2 d)
+    right-map-dependent-cocone-span-diagram :
+      right-family-of-elements-dependent-cocone-span-diagram
+    right-map-dependent-cocone-span-diagram = pr1 (pr2 d)
 
     coherence-square-dependent-cocone-span-diagram :
-      dependent-homotopy
-        ( λ _ → P)
-        ( coherence-square-cocone-span-diagram s c)
-        ( horizontal-map-dependent-cocone-span-diagram ∘
-          left-map-span-diagram s)
-        ( vertical-map-dependent-cocone-span-diagram ∘
-          right-map-span-diagram s)
+      dependent-homotopy-dependent-cocone-span-diagram
+        ( left-map-dependent-cocone-span-diagram)
+        ( right-map-dependent-cocone-span-diagram)
     coherence-square-dependent-cocone-span-diagram = pr2 (pr2 d)
 ```
 
@@ -114,9 +121,9 @@ module _
   dependent-cocone-map-span-diagram :
     ((x : X) → P x) → dependent-cocone-span-diagram s c P
   pr1 (dependent-cocone-map-span-diagram h) a =
-    h (horizontal-map-cocone-span-diagram s c a)
+    h (left-map-cocone-span-diagram s c a)
   pr1 (pr2 (dependent-cocone-map-span-diagram h)) b =
-    h (vertical-map-cocone-span-diagram s c b)
+    h (right-map-cocone-span-diagram s c b)
   pr2 (pr2 (dependent-cocone-map-span-diagram h)) x =
     apd h (coherence-square-cocone-span-diagram s c x)
 ```
@@ -135,11 +142,11 @@ module _
   coherence-htpy-dependent-cocone-span-diagram :
     ( d' : dependent-cocone-span-diagram s c P)
     ( K :
-      horizontal-map-dependent-cocone-span-diagram s c P d ~
-      horizontal-map-dependent-cocone-span-diagram s c P d')
+      left-map-dependent-cocone-span-diagram s c P d ~
+      left-map-dependent-cocone-span-diagram s c P d')
     ( L :
-      vertical-map-dependent-cocone-span-diagram s c P d ~
-      vertical-map-dependent-cocone-span-diagram s c P d') →
+      right-map-dependent-cocone-span-diagram s c P d ~
+      right-map-dependent-cocone-span-diagram s c P d') →
     UU (l3 ⊔ l5)
   coherence-htpy-dependent-cocone-span-diagram d' K L =
     ( x : spanning-type-span-diagram s) →
@@ -153,11 +160,11 @@ module _
   htpy-dependent-cocone-span-diagram :
     (d' : dependent-cocone-span-diagram s c P) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
   htpy-dependent-cocone-span-diagram d' =
-    Σ ( horizontal-map-dependent-cocone-span-diagram s c P d ~
-        horizontal-map-dependent-cocone-span-diagram s c P d')
+    Σ ( left-map-dependent-cocone-span-diagram s c P d ~
+        left-map-dependent-cocone-span-diagram s c P d')
       ( λ K →
-        Σ ( vertical-map-dependent-cocone-span-diagram s c P d ~
-            vertical-map-dependent-cocone-span-diagram s c P d')
+        Σ ( right-map-dependent-cocone-span-diagram s c P d ~
+            right-map-dependent-cocone-span-diagram s c P d')
           ( coherence-htpy-dependent-cocone-span-diagram d' K))
 
   refl-htpy-dependent-cocone-span-diagram :
@@ -177,22 +184,22 @@ module _
     (p : d ＝ d')
     where
 
-    horizontal-htpy-eq-dependent-cocone-span-diagram :
-      horizontal-map-dependent-cocone-span-diagram s c P d ~
-      horizontal-map-dependent-cocone-span-diagram s c P d'
-    horizontal-htpy-eq-dependent-cocone-span-diagram =
+    left-htpy-eq-dependent-cocone-span-diagram :
+      left-map-dependent-cocone-span-diagram s c P d ~
+      left-map-dependent-cocone-span-diagram s c P d'
+    left-htpy-eq-dependent-cocone-span-diagram =
       pr1 (htpy-eq-dependent-cocone-span-diagram d' p)
 
-    vertical-htpy-eq-dependent-cocone-span-diagram :
-      vertical-map-dependent-cocone-span-diagram s c P d ~
-      vertical-map-dependent-cocone-span-diagram s c P d'
-    vertical-htpy-eq-dependent-cocone-span-diagram =
+    right-htpy-eq-dependent-cocone-span-diagram :
+      right-map-dependent-cocone-span-diagram s c P d ~
+      right-map-dependent-cocone-span-diagram s c P d'
+    right-htpy-eq-dependent-cocone-span-diagram =
       pr1 (pr2 (htpy-eq-dependent-cocone-span-diagram d' p))
 
     coherence-square-htpy-eq-dependent-cocone-span-diagram :
       coherence-htpy-dependent-cocone-span-diagram d'
-        ( horizontal-htpy-eq-dependent-cocone-span-diagram)
-        ( vertical-htpy-eq-dependent-cocone-span-diagram)
+        ( left-htpy-eq-dependent-cocone-span-diagram)
+        ( right-htpy-eq-dependent-cocone-span-diagram)
     coherence-square-htpy-eq-dependent-cocone-span-diagram =
       pr2 (pr2 (htpy-eq-dependent-cocone-span-diagram d' p))
 
@@ -202,26 +209,26 @@ module _
     is-torsorial-htpy-dependent-cocone-span-diagram =
       is-torsorial-Eq-structure
         ( λ α βγ K →
-            Σ ( vertical-map-dependent-cocone-span-diagram s c P d ~ pr1 βγ)
+            Σ ( right-map-dependent-cocone-span-diagram s c P d ~ pr1 βγ)
               ( coherence-htpy-dependent-cocone-span-diagram (α , βγ) K))
         ( is-torsorial-htpy
-          ( horizontal-map-dependent-cocone-span-diagram s c P d))
-        ( horizontal-map-dependent-cocone-span-diagram s c P d , refl-htpy)
+          ( left-map-dependent-cocone-span-diagram s c P d))
+        ( left-map-dependent-cocone-span-diagram s c P d , refl-htpy)
         ( is-torsorial-Eq-structure
           ( λ β γ →
             coherence-htpy-dependent-cocone-span-diagram
-              ( horizontal-map-dependent-cocone-span-diagram s c P d , β , γ)
+              ( left-map-dependent-cocone-span-diagram s c P d , β , γ)
               ( refl-htpy))
           ( is-torsorial-htpy
-            ( vertical-map-dependent-cocone-span-diagram s c P d))
-          ( vertical-map-dependent-cocone-span-diagram s c P d , refl-htpy)
+            ( right-map-dependent-cocone-span-diagram s c P d))
+          ( right-map-dependent-cocone-span-diagram s c P d , refl-htpy)
           ( is-contr-equiv
             ( Σ ( dependent-homotopy
                   ( λ _ → P)
                   ( coherence-square-cocone-span-diagram s c)
-                  ( horizontal-map-dependent-cocone-span-diagram s c P d ∘
+                  ( left-map-dependent-cocone-span-diagram s c P d ∘
                     left-map-span-diagram s)
-                  ( vertical-map-dependent-cocone-span-diagram s c P d ∘
+                  ( right-map-dependent-cocone-span-diagram s c P d ∘
                     right-map-span-diagram s))
                 ( λ γ →
                   coherence-square-dependent-cocone-span-diagram s c P d ~ γ))

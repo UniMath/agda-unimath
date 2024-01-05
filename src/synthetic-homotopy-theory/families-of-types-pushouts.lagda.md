@@ -166,12 +166,12 @@ module _
   left-type-family-structure-type-family-pushout-type-family :
     domain-span-diagram s → UU l5
   left-type-family-structure-type-family-pushout-type-family =
-    P ∘ horizontal-map-cocone-span-diagram s c
+    P ∘ left-map-cocone-span-diagram s c
 
   right-type-family-structure-type-family-pushout-type-family :
     codomain-span-diagram s → UU l5
   right-type-family-structure-type-family-pushout-type-family =
-    P ∘ vertical-map-cocone-span-diagram s c
+    P ∘ right-map-cocone-span-diagram s c
 
   matching-equiv-structure-type-family-pushout-type-family :
     (x : spanning-type-span-diagram s) →

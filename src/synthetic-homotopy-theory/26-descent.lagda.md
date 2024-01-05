@@ -102,9 +102,9 @@ pullback-property-dependent-pullback-property-pushout
     ( refl-htpy)
     { c =
       pair
-        ( _∘ horizontal-map-cocone-span-diagram s c)
+        ( _∘ left-map-cocone-span-diagram s c)
         ( pair
-          ( _∘ vertical-map-cocone-span-diagram s c)
+          ( _∘ right-map-cocone-span-diagram s c)
           ( λ h → eq-htpy (h ·l coherence-square-cocone-span-diagram s c)))}
     ( cone-dependent-pullback-property-pushout s c (λ x → Y))
     ( pair
@@ -121,7 +121,7 @@ pullback-property-dependent-pullback-property-pushout
                     ( tr-constant-type-family
                       ( coherence-square-cocone-span-diagram s c x)
                       ( h
-                        ( horizontal-map-cocone-span-diagram s c
+                        ( left-map-cocone-span-diagram s c
                           ( left-map-span-diagram s x))))
                     ( ap h (coherence-square-cocone-span-diagram s c x))
                     ( apd h (coherence-square-cocone-span-diagram s c x))
@@ -134,7 +134,7 @@ pullback-property-dependent-pullback-property-pushout
                   ( tr-constant-type-family
                     ( coherence-square-cocone-span-diagram s c x)
                     ( h
-                      ( horizontal-map-cocone-span-diagram s c
+                      ( left-map-cocone-span-diagram s c
                         ( left-map-span-diagram s x)))))
               ( λ x →
                 apd h (coherence-square-cocone-span-diagram s c x)))))))
@@ -438,9 +438,9 @@ module _
       ( fam-lifts X P)
   cone-family-dependent-pullback-property P γ =
     pair
-      ( precompose-lifts P (horizontal-map-cocone-span-diagram s c) γ)
+      ( precompose-lifts P (left-map-cocone-span-diagram s c) γ)
       ( pair
-        ( precompose-lifts P (vertical-map-cocone-span-diagram s c) γ)
+        ( precompose-lifts P (right-map-cocone-span-diagram s c) γ)
         ( triangle-precompose-lifts P
           ( coherence-square-cocone-span-diagram s c)
           ( γ)))
@@ -464,18 +464,18 @@ module _
       ( cone-family-dependent-pullback-property P)
       ( pb-c X)
       ( is-pullback-top-is-pullback-bottom-cube-is-equiv
-        ( precomp (horizontal-map-cocone-span-diagram s c) (Σ X P))
-        ( precomp (vertical-map-cocone-span-diagram s c) (Σ X P))
+        ( precomp (left-map-cocone-span-diagram s c) (Σ X P))
+        ( precomp (right-map-cocone-span-diagram s c) (Σ X P))
         ( precomp (left-map-span-diagram s) (Σ X P))
         ( precomp (right-map-span-diagram s) (Σ X P))
         ( map-Σ
           ( fam-lifts (domain-span-diagram s) P)
-          ( precomp (horizontal-map-cocone-span-diagram s c) X)
-          ( precompose-lifts P (horizontal-map-cocone-span-diagram s c)))
+          ( precomp (left-map-cocone-span-diagram s c) X)
+          ( precompose-lifts P (left-map-cocone-span-diagram s c)))
         ( map-Σ
           ( fam-lifts (codomain-span-diagram s) P)
-          ( precomp (vertical-map-cocone-span-diagram s c) X)
-          ( precompose-lifts P (vertical-map-cocone-span-diagram s c)))
+          ( precomp (right-map-cocone-span-diagram s c) X)
+          ( precompose-lifts P (right-map-cocone-span-diagram s c)))
         ( map-Σ
           ( fam-lifts (spanning-type-span-diagram s) P)
           ( precomp (left-map-span-diagram s) X)
@@ -513,7 +513,7 @@ module _
           ( coherence-square-cocone-span-diagram s c)) ·r
         ( precompose-lifts P
           ( left-map-span-diagram s)
-          ( horizontal-map-cocone-span-diagram s c)))
+          ( left-map-cocone-span-diagram s c)))
       ( refl-htpy)
       ( cone-family-dependent-pullback-property P id)
       { c' = cone-dependent-pullback-property-pushout s c P}

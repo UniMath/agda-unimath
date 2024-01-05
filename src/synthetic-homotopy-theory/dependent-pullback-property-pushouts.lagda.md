@@ -23,7 +23,7 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 
 ## Idea
 
-The **dependent pullback property** of
+The {{#concept "dependent pullback property" Disambiguation="pushouts"}} of
 [pushouts](synthetic-homotopy-theory.pushouts.md) asserts that the type of
 sections of a type family over a pushout can be expressed as a
 [pullback](foundation.pullbacks.md).
@@ -47,21 +47,21 @@ module _
     cone
       ( λ ( h :
             ( a : domain-span-diagram s) →
-            P (horizontal-map-cocone-span-diagram s c a))
+            P (left-map-cocone-span-diagram s c a))
           ( x : spanning-type-span-diagram s) →
         tr P
           ( coherence-square-cocone-span-diagram s c x)
           ( h (left-map-span-diagram s x)))
       ( λ ( h :
             ( b : codomain-span-diagram s) →
-            P (vertical-map-cocone-span-diagram s c b))
+            P (right-map-cocone-span-diagram s c b))
           ( x : spanning-type-span-diagram s) →
         h (right-map-span-diagram s x))
       ( (x : X) → P x)
   pr1 (cone-dependent-pullback-property-pushout P) h a =
-    h (horizontal-map-cocone-span-diagram s c a)
+    h (left-map-cocone-span-diagram s c a)
   pr1 (pr2 (cone-dependent-pullback-property-pushout P)) h b =
-    h (vertical-map-cocone-span-diagram s c b)
+    h (right-map-cocone-span-diagram s c b)
   pr2 (pr2 (cone-dependent-pullback-property-pushout P)) h =
     eq-htpy (λ x → apd h (coherence-square-cocone-span-diagram s c x))
 
@@ -71,14 +71,14 @@ module _
     is-pullback
       ( λ ( h :
             ( a : domain-span-diagram s) →
-            P (horizontal-map-cocone-span-diagram s c a))
+            P (left-map-cocone-span-diagram s c a))
           ( x : spanning-type-span-diagram s) →
         tr P
           ( coherence-square-cocone-span-diagram s c x)
           ( h (left-map-span-diagram s x)))
       ( λ ( h :
             ( b : codomain-span-diagram s) →
-            P (vertical-map-cocone-span-diagram s c b))
+            P (right-map-cocone-span-diagram s c b))
           ( x : spanning-type-span-diagram s) →
         h (right-map-span-diagram s x))
       ( cone-dependent-pullback-property-pushout P)

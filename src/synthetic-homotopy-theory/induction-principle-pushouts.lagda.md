@@ -87,16 +87,16 @@ module _
   left-compute-ind-induction-principle-pushout :
     ( h : dependent-cocone-span-diagram s c P) (a : domain-span-diagram s) →
     ind-induction-principle-pushout h
-      ( horizontal-map-cocone-span-diagram s c a) ＝
-    horizontal-map-dependent-cocone-span-diagram s c P h a
+      ( left-map-cocone-span-diagram s c a) ＝
+    left-map-dependent-cocone-span-diagram s c P h a
   left-compute-ind-induction-principle-pushout h =
     pr1 (compute-ind-induction-principle-pushout h)
 
   right-compute-ind-induction-principle-pushout :
     ( h : dependent-cocone-span-diagram s c P) (b : codomain-span-diagram s) →
     ind-induction-principle-pushout h
-      ( vertical-map-cocone-span-diagram s c b) ＝
-    vertical-map-dependent-cocone-span-diagram s c P h b
+      ( right-map-cocone-span-diagram s c b) ＝
+    right-map-dependent-cocone-span-diagram s c P h b
   right-compute-ind-induction-principle-pushout h =
     pr1 (pr2 (compute-ind-induction-principle-pushout h))
 

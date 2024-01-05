@@ -58,15 +58,15 @@ module _
     {l : Level} (Y : UU l) →
     cone (_∘ left-map-span-diagram s) (_∘ right-map-span-diagram s) (X → Y)
   pr1 (cone-pullback-property-pushout Y) =
-    precomp (horizontal-map-cocone-span-diagram s c) Y
+    precomp (left-map-cocone-span-diagram s c) Y
   pr1 (pr2 (cone-pullback-property-pushout Y)) =
-    precomp (vertical-map-cocone-span-diagram s c) Y
+    precomp (right-map-cocone-span-diagram s c) Y
   pr2 (pr2 (cone-pullback-property-pushout Y)) =
     precomp-coherence-square-maps
       ( right-map-span-diagram s)
       ( left-map-span-diagram s)
-      ( vertical-map-cocone-span-diagram s c)
-      ( horizontal-map-cocone-span-diagram s c)
+      ( right-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram s c)
       ( coherence-square-cocone-span-diagram s c)
       ( Y)
 
