@@ -1060,62 +1060,19 @@ module _
         ( left-map-span-diagram s')
         ( right-map-span-diagram s ∘ spanning-map-equiv-span-diagram s' s e))
       ( right-map-span-diagram s')
-      ( id-equiv ,
-        equiv-codomain-equiv-span-diagram s' s e ,
-        right-square-equiv-span-diagram s' s e)
-      {!!}
-      {!!}
-
-{-
-  universal-property-pushout-extension-by-equivalences :
-    {l : Level} → is-equiv-hom-span-diagram s' s h →
-    Σ ( cocone-span-diagram s' X) (universal-property-pushout s')
-  universal-property-pushout-extension-by-equivalences ie je ke =
-    universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram
-      ( left-map-span-diagram s')
-
-
-{-
-<<<<<<< HEAD
-      ( g')
-      ( comp-cocone-hom-span-diagram f g f' g' i j k c coh-l coh-r)
-  universal-property-pushout-extended-by-equivalences ie je ke =
-    universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram f'
-=======
->>>>>>> 0ea91d68392b1cabaad0e5b5a712cdfab687a4c1
--}
-
-      ( right-map-span-diagram s ∘ spanning-map-hom-span-diagram s' s h)
-      ( id)
-      ( map-codomain-hom-span-diagram s' s h)
-      ( right-map-span-diagram s')
-      ? -- ( horizontal-comp-cocone-span-diagram' f' k g f i c coh-l)
-      ?
-      {-
-      ( universal-property-pushout-left-extended-by-equivalences f g k i
-        ( f')
+      ( ( id-equiv) ,
+        ( equiv-codomain-equiv-span-diagram s' s e) ,
+        ( right-square-equiv-span-diagram s' s e))
+      ( cocone-left-extend-equiv-arrow-span-diagram s
+        ( left-map-span-diagram s')
+        ( equiv-left-arrow-equiv-span-diagram s' s e)
+        ( c))
+      ( universal-property-pushout-cocone-left-extend-equiv-arrow-span-diagram
+        ( s)
+        ( left-map-span-diagram s')
+        ( equiv-left-arrow-equiv-span-diagram s' s e)
         ( c)
-        ( H)
-        ( coh-l)
-        ( ke)
-        ( ie)) -}
-      ( right-square-hom-span-diagram s' s h)
-      ( is-equiv-id)
-      ( je)
-
--}
-```
-
-```text
-  universal-property-pushout-extended-by-equivalences :
-    is-equiv i → is-equiv j → is-equiv k →
-    {l : Level} →
-    universal-property-pushout l
-      ( f')
-      ( g')
-      ( comp-cocone-hom-span-diagram f g f' g' i j k c coh-l coh-r)
-  universal-property-pushout-extended-by-equivalences ie je ke =
-    pr2 (universal-property-pushout-extension-by-equivalences ie je ke)
+        ( H))
 ```
 
 ### In a commuting cube where the vertical maps are equivalences, the bottom square is a pushout if and only if the top square is a pushout

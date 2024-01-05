@@ -498,9 +498,6 @@ Notice that the triple `(i,j,k)` is really a morphism of span diagrams. So the
 resulting cocone arises as a composition of the original cocone with this
 morphism of span diagrams.
 
-**Note:** In the following definition we parenthesize the coherence explicitly,
-because the parenthesization is relevant in future computations.
-
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
@@ -509,38 +506,21 @@ module _
   {X : UU l7} (c : cocone-span-diagram s X)
   where
 
-  horizontal-map-comp-cocone-hom-span-diagram :
-    domain-span-diagram s' → X
-  horizontal-map-comp-cocone-hom-span-diagram =
-    horizontal-map-cocone-span-diagram s c ∘ map-domain-hom-span-diagram s' s h
-
-  vertical-map-comp-cocone-hom-span-diagram :
-    codomain-span-diagram s' → X
-  vertical-map-comp-cocone-hom-span-diagram =
-    vertical-map-cocone-span-diagram s c ∘ map-codomain-hom-span-diagram s' s h
-
-  coherence-square-comp-hom-span-diagram :
-    coherence-square-maps
-      ( right-map-span-diagram s')
-      ( left-map-span-diagram s')
-      ( vertical-map-comp-cocone-hom-span-diagram)
-      ( horizontal-map-comp-cocone-hom-span-diagram)
-  coherence-square-comp-hom-span-diagram =
-    ( ( horizontal-map-cocone-span-diagram s c ·l
-        left-square-hom-span-diagram s' s h) ∙h
-      ( coherence-square-cocone-span-diagram s c ·r
-        spanning-map-hom-span-diagram s' s h)) ∙h
-    ( inv-htpy
-      ( vertical-map-cocone-span-diagram s c ·l
-        right-square-hom-span-diagram s' s h))
-
   comp-cocone-hom-span-diagram : cocone-span-diagram s' X
-  pr1 comp-cocone-hom-span-diagram =
-    horizontal-map-comp-cocone-hom-span-diagram
-  pr1 (pr2 comp-cocone-hom-span-diagram) =
-    vertical-map-comp-cocone-hom-span-diagram
-  pr2 (pr2 comp-cocone-hom-span-diagram) =
-    coherence-square-comp-hom-span-diagram
+  comp-cocone-hom-span-diagram =
+    cocone-right-extend-hom-arrow-span-diagram
+      ( left-extend-hom-arrow-span-diagram s
+        ( left-map-span-diagram s')
+        ( left-hom-arrow-hom-span-diagram s' s h))
+      ( right-map-span-diagram s')
+      ( ( id) ,
+        ( map-codomain-hom-span-diagram s' s h) ,
+        ( right-square-hom-span-diagram s' s h))
+      ( cocone-left-extend-hom-arrow-span-diagram
+        ( s)
+        ( left-map-span-diagram s')
+        ( left-hom-arrow-hom-span-diagram s' s h)
+        ( c))
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}

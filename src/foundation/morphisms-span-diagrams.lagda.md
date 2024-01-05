@@ -9,6 +9,7 @@ module foundation.morphisms-span-diagrams where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.extensions-spans
+open import foundation.morphisms-arrows
 open import foundation.morphisms-spans
 open import foundation.span-diagrams
 open import foundation.universe-levels
@@ -147,6 +148,15 @@ module _
       ( span-span-diagram t)
       ( hom-span-hom-span-diagram)
 
+  left-hom-arrow-hom-span-diagram :
+    hom-arrow (left-map-span-diagram s) (left-map-span-diagram t)
+  pr1 left-hom-arrow-hom-span-diagram =
+    spanning-map-hom-span-diagram
+  pr1 (pr2 left-hom-arrow-hom-span-diagram) =
+    map-domain-hom-span-diagram
+  pr2 (pr2 left-hom-arrow-hom-span-diagram) =
+    left-square-hom-span-diagram
+
   right-square-hom-span-diagram :
     coherence-square-maps
       ( spanning-map-hom-span-diagram)
@@ -161,5 +171,14 @@ module _
         ( map-codomain-hom-span-diagram))
       ( span-span-diagram t)
       ( hom-span-hom-span-diagram)
+
+  right-hom-arrow-hom-span-diagram :
+    hom-arrow (right-map-span-diagram s) (right-map-span-diagram t)
+  pr1 right-hom-arrow-hom-span-diagram =
+    spanning-map-hom-span-diagram
+  pr1 (pr2 right-hom-arrow-hom-span-diagram) =
+    map-codomain-hom-span-diagram
+  pr2 (pr2 right-hom-arrow-hom-span-diagram) =
+    right-square-hom-span-diagram
 ```
 
