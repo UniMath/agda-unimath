@@ -47,6 +47,38 @@ elements `a` is a family of elements
   (i : I) → B (a i).
 ```
 
+To see how these families relate to
+[lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md), consider the
+lifting diagram
+
+```text
+      Σ (x : A) (B x)
+            |
+            | pr1
+            |
+            v
+  I ------> A         .
+       a
+```
+
+Then a lift of the map `a` against `pr1` is a map `b : I → Σ A B`, such that the
+triangle commutes. Invoking the
+[type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md),
+we can show that this type is equivalent to the type of families of elements
+`(i : I) → B (a i)`:
+
+```text
+  Σ (b : I → Σ A B) ((i : I) → a i ＝ pr1 (b i))
+    ≃ (i : I) → Σ ((x , b) : Σ A B) (a i ＝ x)
+    ≃ (i : I) → Σ (x : A) (a i ＝ x × B x)
+    ≃ (i : I) → B (a i) .
+```
+
+The first equivalence is the principle of choice, the second is associativity of
+dependent pair types, and the third is the left unit law of dependent pair
+types, since `Σ (x : A) (a i ＝ x)` is
+[contractible](foundation.contractible-types.md).
+
 ## Definitions
 
 ### Dependent lifts of families of elements
