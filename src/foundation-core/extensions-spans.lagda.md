@@ -93,7 +93,7 @@ and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` 
      |         |
   f' |       f |
      V         V
-     A' -----> A'.
+     A' -----> A.
           h₁
 ```
 
