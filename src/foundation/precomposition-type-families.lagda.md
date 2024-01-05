@@ -48,7 +48,16 @@ module _
 
 ### Transport in precomposed type families
 
-TODO
+[Transporting](foundation.transport-along-homotopies.md) along a
+[homotopy](foundation.homotopies.md) `H : g ~ h` in the family `Q ∘ f` gives us
+a map of families of elements
+
+```text
+  ((a : A) → Q (f (g a))) → ((a : A) → Q (f (h a))) .
+```
+
+We show that this map is homotopic to transporting along
+`f ·l H : f ∘ g ~ f ∘ h` in the family `Q`.
 
 ```agda
 module _
