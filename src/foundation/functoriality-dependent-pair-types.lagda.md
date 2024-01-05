@@ -39,7 +39,43 @@ open import foundation-core.truncation-levels
 
 ## Properties
 
-### TODO
+### The map `htpy-map-Σ` preserves homotopies
+
+Given a [homotopy](foundation.homotopies.md) `H : f ~ f'` and a family of
+[dependent homotopies](foundation.dependent-homotopies.md) `K a : g a ~ g' a`
+over `H`, expressed as
+[commuting triangles](foundation.commuting-triangles-of-maps.md)
+
+```text
+        g a
+    C a ----> D (f a)
+      \     /
+  g' a \   / tr D (H a)
+        V V
+       D (f' a)         ,
+```
+
+we get a homotopy `htpy-map-Σ H K : map-Σ f g ~ map-Σ f' g'`.
+
+This assignment itself preserves homotopies: given `H` and `K` as above,
+`H' : f ~ f'` with `K' a : g a ~ g' a` over `H'`, we would like to express
+coherences between the pairs `H, H'` and `K, K'` which would ensure
+`htpy-map-Σ H K ~ htpy-map-Σ H' K'`. Because `H` and `H'` have the same type, we
+may require a homotopy `H ~ H'`, but `K` and `K'` are families of dependent
+homotopies over different homotopies, so their coherence is provided as a family
+of
+[commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md)
+
+```text
+                      ap (tr D - (g a c)) (α a)
+  tr D (H a) (g a c) --------------------------- tr D (H' a) (g a c)
+                     \                         /
+                        \                   /
+                   K a c   \             /   K' a c
+                              \       /
+                                 \ /
+                               g' a c         .
+```
 
 ```agda
 module _
@@ -75,7 +111,13 @@ module _
                   ( ap-const (g' a c) (α a))) ∙
                 ( right-unit) ∙
                 ( β a c)))))
+```
 
+As a corollary of the above statement, we can provide a condition which
+guarantees that `htpy-map-Σ` is homotopic to the trivial homotopy.
+
+```agda
+  abstract
     htpy-htpy-map-Σ-refl-htpy :
       {f : A → B} {H : f ~ f} →
       {g : (x : A) → C x → D (f x)} {K : (a : A) → tr D (H a) ∘ g a ~ g a} →
