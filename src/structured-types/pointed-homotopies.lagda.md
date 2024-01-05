@@ -240,22 +240,18 @@ module _
     function-pointed-Π g ~ function-pointed-Π f
   htpy-inv-pointed-htpy = inv-htpy (htpy-pointed-htpy f g H)
 
-  coh-inv-pointed-htpy :
-    coherence-triangle-pointed-htpy g f htpy-inv-pointed-htpy
-  coh-inv-pointed-htpy =
-    ( ap inv (coh-pointed-htpy f g H)) ∙
-    ( ( distributive-inv-concat
-        ( preserves-point-function-pointed-Π f)
-        ( inv (preserves-point-function-pointed-Π g))) ∙
-      ( ap
-        ( concat'
-          ( function-pointed-Π g (point-Pointed-Type A))
-          ( inv (preserves-point-function-pointed-Π f)))
-        ( inv-inv (preserves-point-function-pointed-Π g))))
+  coh-inv-pointed-htpy' :
+    coherence-triangle-pointed-htpy' g f htpy-inv-pointed-htpy
+  coh-inv-pointed-htpy' =
+    left-transpose-eq-concat
+      ( htpy-pointed-htpy f g H (point-Pointed-Type A))
+      ( preserves-point-function-pointed-Π g)
+      ( preserves-point-function-pointed-Π f)
+      ( inv (coh-pointed-htpy' f g H))
 
   inv-pointed-htpy : pointed-htpy g f
-  pr1 inv-pointed-htpy = htpy-inv-pointed-htpy
-  pr2 inv-pointed-htpy = coh-inv-pointed-htpy
+  inv-pointed-htpy =
+    make-pointed-htpy g f htpy-inv-pointed-htpy coh-inv-pointed-htpy'
 ```
 
 ### Associativity of composition of pointed maps
@@ -319,14 +315,6 @@ module _
 
 ### The left unit law for composition of pointed maps
 
-**Lemma.** For any pointed map `f : A →∗ B` there is a pointed homotopy `id ∘∗ f ~∗ f`.
-
-**Proof.** The underlying homotopy of the asserted pointed homotopy is `refl-htpy`. Then we need to show that the triangle
-
-```text
-  
-```
-
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
@@ -336,38 +324,43 @@ module _
     map-pointed-map f ~ map-pointed-map f
   htpy-left-unit-law-comp-pointed-map = refl-htpy
 
-  coh-left-unit-law-comp-pointed-map :
-    coherence-triangle-pointed-htpy
-      ( comp-pointed-map id-pointed-map f)
+  coh-left-unit-law-comp-pointed-map' :
+    coherence-triangle-pointed-htpy'
+      ( id-pointed-map ∘∗ f)
       ( f)
       ( htpy-left-unit-law-comp-pointed-map)
-  coh-left-unit-law-comp-pointed-map =
-    right-transpose-eq-concat
-      ( refl)
-      ( preserves-point-pointed-map f)
-      ( ap id (preserves-point-pointed-map f) ∙ refl)
-      ( inv (right-unit ∙ ap-id (preserves-point-pointed-map f)))
+  coh-left-unit-law-comp-pointed-map' =
+    right-unit ∙ ap-id (preserves-point-pointed-map f)
 
   left-unit-law-comp-pointed-map :
-    htpy-pointed-map (comp-pointed-map id-pointed-map f) f
-  pr1 left-unit-law-comp-pointed-map = htpy-left-unit-law-comp-pointed-map
-  pr2 left-unit-law-comp-pointed-map = coh-left-unit-law-comp-pointed-map
+    htpy-pointed-map (id-pointed-map ∘∗ f) f
+  left-unit-law-comp-pointed-map =
+    make-pointed-htpy
+      ( id-pointed-map ∘∗ f)
+      ( f)
+      ( htpy-left-unit-law-comp-pointed-map)
+      ( coh-left-unit-law-comp-pointed-map')
 
   htpy-inv-left-unit-law-comp-pointed-map :
     map-pointed-map f ~ map-pointed-map f
   htpy-inv-left-unit-law-comp-pointed-map = refl-htpy
 
-  coh-inv-left-unit-law-comp-pointed-map :
-    coherence-triangle-pointed-htpy
+  coh-inv-left-unit-law-comp-pointed-map' :
+    coherence-triangle-pointed-htpy'
       ( f)
       ( comp-pointed-map id-pointed-map f)
       ( htpy-inv-left-unit-law-comp-pointed-map)
-  coh-inv-left-unit-law-comp-pointed-map =
-    right-transpose-eq-concat
-      ( refl)
-      ( ap id (preserves-point-pointed-map f) ∙ refl)
-      ( preserves-point-pointed-map f)
-      ( right-unit ∙ ap-id (preserves-point-pointed-map f))
+  coh-inv-left-unit-law-comp-pointed-map' =
+    inv (right-unit ∙ ap-id (preserves-point-pointed-map f))
+
+  inv-left-unit-law-comp-pointed-map :
+    f ~∗ id-pointed-map ∘∗ f
+  inv-left-unit-law-comp-pointed-map =
+    make-pointed-htpy
+      ( f)
+      ( id-pointed-map ∘∗ f)
+      ( htpy-inv-left-unit-law-comp-pointed-map)
+      ( coh-inv-left-unit-law-comp-pointed-map')
 ```
 
 ### The right unit law for composition of pointed maps
