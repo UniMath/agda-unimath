@@ -15,7 +15,7 @@ open import foundation.universe-levels
 open import foundation-core.function-types
 ```
 
-</details
+</details>
 
 ## Idea
 
