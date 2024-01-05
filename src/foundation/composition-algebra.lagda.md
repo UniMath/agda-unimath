@@ -31,11 +31,37 @@ This file collects various interactions of
 [postcomposition](foundation-core.postcomposition-functions.md) with
 [homotopies](foundation-core.homotopies.md).
 
-Given a homotopy of maps `H : f ~ g`
+Given a [homotopy of maps](foundation-core.homotopies.md) `H : f ~ g`, we have
+witnesses
+
+```text
+  htpy-precomp H S : precomp f S ~ precomp g S
+```
+
+and
+
+```text
+  htpy-postcomp S H : postcomp S f ~ postcomp S g
+```
+
+This file records their interactions with different operations on homotopies and
+eachother.
 
 ## Properties
 
-### Precomposition distributes over concatenations and whiskerings of homotopies
+### Precomposition distributes over whiskerings and concatenations of homotopies
+
+The operation `htpy-precomp` distributes over whiskerings contravariantly:
+
+```text
+    precomp h S ·l htpy-precomp H S ~ htpy-precomp (H ·r h) S
+```
+
+and
+
+```text
+  htpy-precomp H S ·r precomp h S ~ htpy-precomp (h ·l H) S.
+```
 
 ```agda
 module _
@@ -54,7 +80,15 @@ module _
     htpy-precomp H S ·r precomp h S ~ htpy-precomp (h ·l H) S
   distributive-htpy-precomp-left-whisker h H S i =
     ap eq-htpy (eq-htpy (ap-comp i h ∘ H))
+```
 
+The operation `htpy-precomp` distributes over concatenation of homotopies:
+
+```text
+  htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K Ss
+```
+
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {f g h : A → B}
