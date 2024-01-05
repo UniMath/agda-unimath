@@ -57,7 +57,8 @@ module _
   (h : hom-span-diagram s t)
   where
 
-  horizontal-coherence-square-hom-cocone-hom-span-diagram : (X → Y) → UU (l1 ⊔ l8)
+  horizontal-coherence-square-hom-cocone-hom-span-diagram :
+    (X → Y) → UU (l1 ⊔ l8)
   horizontal-coherence-square-hom-cocone-hom-span-diagram u =
     coherence-square-maps
       ( horizontal-map-cocone-span-diagram s c)

@@ -40,6 +40,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pullback-property-pushouts
 ```
@@ -1075,123 +1076,219 @@ module _
         ( H))
 ```
 
-### In a commuting cube where the vertical maps are equivalences, the bottom square is a pushout if and only if the top square is a pushout
+### Given an equivalence of cocones under an equivalence of span diagrams, one cocone is a pushout if and only if the other is
 
-```text
+**Note.** The following proofs can easily be shortened if we refactor `is-pullback-bottom-is-pullback-top-cube-is-equiv`.
+
+```agda
 module _
-  { l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  ( f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  ( f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  ( hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  ( top : coherence-square-maps g' f' k' h')
-  ( back-left : coherence-square-maps f' hA hB f)
-  ( back-right : coherence-square-maps g' hA hC g)
-  ( front-left : coherence-square-maps h' hB hD h)
-  ( front-right : coherence-square-maps k' hC hD k)
-  ( bottom : coherence-square-maps g f k h)
-  ( c :
-    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-      ( top)
-      ( back-left)
-      ( back-right)
-      ( front-left)
-      ( front-right)
-      ( bottom))
-  ( is-equiv-hA : is-equiv hA) (is-equiv-hB : is-equiv hB)
-  ( is-equiv-hC : is-equiv hC) (is-equiv-hD : is-equiv hD)
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (s : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram s X)
+  (t : span-diagram l5 l6 l7) {Y : UU l8} (d : cocone-span-diagram t Y)
+  (e : equiv-span-diagram s t) (e' : equiv-cocone-equiv-span-diagram s c t d e)
   where
 
-  universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv :
-    universal-property-pushout f g (h , k , bottom) →
-    universal-property-pushout f' g' (h' , k' , top))
-  universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
-    ( H)
-    { l = l} =
-    universal-property-pushout-pullback-property-pushout l f' g'
-      ( h' , k' , top)
-      ( λ W →
+  universal-property-pushout-equiv-cocone-equiv-span-diagram :
+    universal-property-pushout t d →
+    universal-property-pushout s c
+  universal-property-pushout-equiv-cocone-equiv-span-diagram U =
+    universal-property-pushout-pullback-property-pushout s c
+      ( λ Z →
         is-pullback-bottom-is-pullback-top-cube-is-equiv
-          ( precomp h' W)
-          ( precomp k' W)
-          ( precomp f' W)
-          ( precomp g' W)
-          ( precomp h W)
-          ( precomp k W)
-          ( precomp f W)
-          ( precomp g W)
-          ( precomp hD W)
-          ( precomp hB W)
-          ( precomp hC W)
-          ( precomp hA W)
-          ( precomp-coherence-square-maps g f k h bottom W)
-          ( precomp-coherence-square-maps hB h' h hD (inv-htpy front-left) W)
-          ( precomp-coherence-square-maps hC k' k hD (inv-htpy front-right) W)
-          ( precomp-coherence-square-maps hA f' f hB (inv-htpy back-left) W)
-          ( precomp-coherence-square-maps hA g' g hC (inv-htpy back-right) W)
-          ( precomp-coherence-square-maps g' f' k' h' top W)
-          ( precomp-coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-            ( top)
-            ( back-left)
-            ( back-right)
-            ( front-left)
-            ( front-right)
-            ( bottom)
-            ( c)
-            ( W))
-          ( is-equiv-precomp-is-equiv hD is-equiv-hD W)
-          ( is-equiv-precomp-is-equiv hB is-equiv-hB W)
-          ( is-equiv-precomp-is-equiv hC is-equiv-hC W)
-          ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
-          ( pullback-property-pushout-universal-property-pushout f g
-            ( h , k , bottom)
-            ( H)
-            ( W)))
+          ( precomp (horizontal-map-cocone-span-diagram s c) Z)
+          ( precomp (vertical-map-cocone-span-diagram s c) Z)
+          ( precomp (left-map-span-diagram s) Z)
+          ( precomp (right-map-span-diagram s) Z)
+          ( precomp (horizontal-map-cocone-span-diagram t d) Z)
+          ( precomp (vertical-map-cocone-span-diagram t d) Z)
+          ( precomp (left-map-span-diagram t) Z)
+          ( precomp (right-map-span-diagram t) Z)
+          ( precomp (map-equiv-cocone-equiv-span-diagram s c t d e e') Z)
+          ( precomp (map-domain-equiv-span-diagram s t e) Z)
+          ( precomp (map-codomain-equiv-span-diagram s t e) Z)
+          ( precomp (spanning-map-equiv-span-diagram s t e) Z)
+          ( precomp-coherence-square-maps
+            ( right-map-span-diagram t)
+            ( left-map-span-diagram t)
+            ( vertical-map-cocone-span-diagram t d)
+            ( horizontal-map-cocone-span-diagram t d)
+            ( coherence-square-cocone-span-diagram t d)
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( map-domain-equiv-span-diagram s t e)
+            ( horizontal-map-cocone-span-diagram s c)
+            ( horizontal-map-cocone-span-diagram t d)
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( inv-htpy
+              ( horizontal-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( map-codomain-equiv-span-diagram s t e)
+            ( vertical-map-cocone-span-diagram s c)
+            ( vertical-map-cocone-span-diagram t d)
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( inv-htpy
+              ( vertical-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( spanning-map-equiv-span-diagram s t e)
+            ( left-map-span-diagram s)
+            ( left-map-span-diagram t)
+            ( map-domain-equiv-span-diagram s t e)
+            ( inv-htpy (inv-htpy (left-square-equiv-span-diagram s t e)))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( spanning-map-equiv-span-diagram s t e)
+            ( right-map-span-diagram s)
+            ( right-map-span-diagram t)
+            ( map-codomain-equiv-span-diagram s t e)
+            ( inv-htpy (inv-htpy (right-square-equiv-span-diagram s t e)))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( right-map-span-diagram s)
+            ( left-map-span-diagram s)
+            ( vertical-map-cocone-span-diagram s c)
+            ( horizontal-map-cocone-span-diagram s c)
+            ( coherence-square-cocone-span-diagram s c)
+            ( Z))
+          ( precomp-coherence-cube-maps
+            ( left-map-span-diagram t)
+            ( right-map-span-diagram t)
+            ( horizontal-map-cocone-span-diagram t d)
+            ( vertical-map-cocone-span-diagram t d)
+            ( left-map-span-diagram s)
+            ( right-map-span-diagram s)
+            ( horizontal-map-cocone-span-diagram s c)
+            ( vertical-map-cocone-span-diagram s c)
+            ( spanning-map-equiv-span-diagram s t e)
+            ( map-domain-equiv-span-diagram s t e)
+            ( map-codomain-equiv-span-diagram s t e)
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( coherence-square-cocone-span-diagram s c)
+            ( inv-htpy (left-square-equiv-span-diagram s t e))
+            ( inv-htpy (right-square-equiv-span-diagram s t e))
+            ( horizontal-square-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( vertical-square-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( coherence-square-cocone-span-diagram t d)
+            ( cube-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( is-equiv-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( map-domain-equiv-span-diagram s t e)
+            ( is-equiv-map-domain-equiv-span-diagram s t e)
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( map-codomain-equiv-span-diagram s t e)
+            ( is-equiv-map-codomain-equiv-span-diagram s t e)
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( spanning-map-equiv-span-diagram s t e)
+            ( is-equiv-spanning-map-equiv-span-diagram s t e)
+            ( Z))
+          ( pullback-property-pushout-universal-property-pushout t d U Z))
 
-  universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv :
-    universal-property-pushout f' g' (h' , k' , top) →
-    universal-property-pushout f g (h , k , bottom))
-  universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
-    ( H)
-    { l = l} =
-    universal-property-pushout-pullback-property-pushout l f g
-      ( h , k , bottom)
-      ( λ W →
+  universal-property-pushout-equiv-cocone-equiv-span-diagram' :
+    universal-property-pushout s c →
+    universal-property-pushout t d
+  universal-property-pushout-equiv-cocone-equiv-span-diagram' U =
+    universal-property-pushout-pullback-property-pushout t d
+      ( λ Z →
         is-pullback-top-is-pullback-bottom-cube-is-equiv
-          ( precomp h' W)
-          ( precomp k' W)
-          ( precomp f' W)
-          ( precomp g' W)
-          ( precomp h W)
-          ( precomp k W)
-          ( precomp f W)
-          ( precomp g W)
-          ( precomp hD W)
-          ( precomp hB W)
-          ( precomp hC W)
-          ( precomp hA W)
-          ( precomp-coherence-square-maps g f k h bottom W)
-          ( precomp-coherence-square-maps hB h' h hD (inv-htpy front-left) W)
-          ( precomp-coherence-square-maps hC k' k hD (inv-htpy front-right) W)
-          ( precomp-coherence-square-maps hA f' f hB (inv-htpy back-left) W)
-          ( precomp-coherence-square-maps hA g' g hC (inv-htpy back-right) W)
-          ( precomp-coherence-square-maps g' f' k' h' top W)
-          ( precomp-coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-            ( top)
-            ( back-left)
-            ( back-right)
-            ( front-left)
-            ( front-right)
-            ( bottom)
-            ( c)
-            ( W))
-          ( is-equiv-precomp-is-equiv hD is-equiv-hD W)
-          ( is-equiv-precomp-is-equiv hB is-equiv-hB W)
-          ( is-equiv-precomp-is-equiv hC is-equiv-hC W)
-          ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
-          ( pullback-property-pushout-universal-property-pushout f' g'
-            ( h' , k' , top)
-            ( H)
-            ( W)))
+          ( precomp (horizontal-map-cocone-span-diagram s c) Z)
+          ( precomp (vertical-map-cocone-span-diagram s c) Z)
+          ( precomp (left-map-span-diagram s) Z)
+          ( precomp (right-map-span-diagram s) Z)
+          ( precomp (horizontal-map-cocone-span-diagram t d) Z)
+          ( precomp (vertical-map-cocone-span-diagram t d) Z)
+          ( precomp (left-map-span-diagram t) Z)
+          ( precomp (right-map-span-diagram t) Z)
+          ( precomp (map-equiv-cocone-equiv-span-diagram s c t d e e') Z)
+          ( precomp (map-domain-equiv-span-diagram s t e) Z)
+          ( precomp (map-codomain-equiv-span-diagram s t e) Z)
+          ( precomp (spanning-map-equiv-span-diagram s t e) Z)
+          ( precomp-coherence-square-maps
+            ( right-map-span-diagram t)
+            ( left-map-span-diagram t)
+            ( vertical-map-cocone-span-diagram t d)
+            ( horizontal-map-cocone-span-diagram t d)
+            ( coherence-square-cocone-span-diagram t d)
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( map-domain-equiv-span-diagram s t e)
+            ( horizontal-map-cocone-span-diagram s c)
+            ( horizontal-map-cocone-span-diagram t d)
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( inv-htpy
+              ( horizontal-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( map-codomain-equiv-span-diagram s t e)
+            ( vertical-map-cocone-span-diagram s c)
+            ( vertical-map-cocone-span-diagram t d)
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( inv-htpy
+              ( vertical-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( spanning-map-equiv-span-diagram s t e)
+            ( left-map-span-diagram s)
+            ( left-map-span-diagram t)
+            ( map-domain-equiv-span-diagram s t e)
+            ( inv-htpy (inv-htpy (left-square-equiv-span-diagram s t e)))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( spanning-map-equiv-span-diagram s t e)
+            ( right-map-span-diagram s)
+            ( right-map-span-diagram t)
+            ( map-codomain-equiv-span-diagram s t e)
+            ( inv-htpy (inv-htpy (right-square-equiv-span-diagram s t e)))
+            ( Z))
+          ( precomp-coherence-square-maps
+            ( right-map-span-diagram s)
+            ( left-map-span-diagram s)
+            ( vertical-map-cocone-span-diagram s c)
+            ( horizontal-map-cocone-span-diagram s c)
+            ( coherence-square-cocone-span-diagram s c)
+            ( Z))
+          ( precomp-coherence-cube-maps
+            ( left-map-span-diagram t)
+            ( right-map-span-diagram t)
+            ( horizontal-map-cocone-span-diagram t d)
+            ( vertical-map-cocone-span-diagram t d)
+            ( left-map-span-diagram s)
+            ( right-map-span-diagram s)
+            ( horizontal-map-cocone-span-diagram s c)
+            ( vertical-map-cocone-span-diagram s c)
+            ( spanning-map-equiv-span-diagram s t e)
+            ( map-domain-equiv-span-diagram s t e)
+            ( map-codomain-equiv-span-diagram s t e)
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( coherence-square-cocone-span-diagram s c)
+            ( inv-htpy (left-square-equiv-span-diagram s t e))
+            ( inv-htpy (right-square-equiv-span-diagram s t e))
+            ( horizontal-square-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( vertical-square-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( coherence-square-cocone-span-diagram t d)
+            ( cube-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( is-equiv-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( map-domain-equiv-span-diagram s t e)
+            ( is-equiv-map-domain-equiv-span-diagram s t e)
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( map-codomain-equiv-span-diagram s t e)
+            ( is-equiv-map-codomain-equiv-span-diagram s t e)
+            ( Z))
+          ( is-equiv-precomp-is-equiv
+            ( spanning-map-equiv-span-diagram s t e)
+            ( is-equiv-spanning-map-equiv-span-diagram s t e)
+            ( Z))
+          ( pullback-property-pushout-universal-property-pushout s c U Z))
 ```

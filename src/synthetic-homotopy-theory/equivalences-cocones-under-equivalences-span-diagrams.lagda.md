@@ -122,6 +122,11 @@ module _
     map-equiv-cocone-equiv-span-diagram =
       map-equiv equiv-equiv-cocone-equiv-span-diagram
 
+    is-equiv-equiv-cocone-equiv-span-diagram :
+      is-equiv map-equiv-cocone-equiv-span-diagram
+    is-equiv-equiv-cocone-equiv-span-diagram =
+      is-equiv-map-equiv equiv-equiv-cocone-equiv-span-diagram
+
     horizontal-square-equiv-cocone-equiv-span-diagram :
       horizontal-coherence-square-equiv-cocone-equiv-span-diagram
         ( equiv-equiv-cocone-equiv-span-diagram)
