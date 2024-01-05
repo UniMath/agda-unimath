@@ -9,6 +9,7 @@ module foundation.universal-property-contractible-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.singleton-induction
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -17,7 +18,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.singleton-induction
 ```
 
 </details>
@@ -42,7 +42,7 @@ The condition that `ev-point` has a [section](foundation-core.sections.md)
 ```
 
 is another way of phrasing that the type satisfies
-[singleton induction](foundation-core.singleton-induction.md). Furthermore, the
+[singleton induction](foundation.singleton-induction.md). Furthermore, the
 condition that `ev-point` has a [retraction](foundation-core.retractions.md)
 asserts that all dependent functions `(x : A) → P x` are fully determined by
 their value at `a`, thus, in particular, that the section of `ev-point` is
@@ -190,4 +190,4 @@ module _
 
 ## See also
 
-- [Singleton induction](foundation-core.singleton-induction.md)
+- [Singleton induction](foundation.singleton-induction.md)

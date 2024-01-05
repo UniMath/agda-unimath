@@ -8,13 +8,13 @@ module foundation.subsingleton-induction where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.singleton-induction
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sections
-open import foundation-core.singleton-induction
 ```
 
 </details>

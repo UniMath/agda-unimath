@@ -46,7 +46,6 @@ open import foundation-core.pullbacks public
 open import foundation-core.retractions public
 open import foundation-core.sections public
 open import foundation-core.sets public
-open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
 open import foundation-core.torsorial-type-families public
