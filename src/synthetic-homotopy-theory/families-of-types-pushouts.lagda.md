@@ -107,9 +107,9 @@ square of equivalences
 
 ## Definitions
 
-### The structure of type families over pushouts
+### The structure of type families over span diagrams
 
-**Note.** In the definition of structure of type families over pushouts we will
+**Note.** In the definition of structure of type families over span diagrams we will
 assume that the families `A → 𝒰` and `B → 𝒰` are of the same
 [universe level](foundation.universe-levels.md).
 
@@ -163,33 +163,33 @@ module _
   (P : X → UU l5)
   where
 
-  left-type-family-structure-type-family-pushout-type-family :
+  left-type-family-descent-data-type-family-pushout :
     domain-span-diagram s → UU l5
-  left-type-family-structure-type-family-pushout-type-family =
+  left-type-family-descent-data-type-family-pushout =
     P ∘ left-map-cocone-span-diagram s c
 
-  right-type-family-structure-type-family-pushout-type-family :
+  right-type-family-descent-data-type-family-pushout :
     codomain-span-diagram s → UU l5
-  right-type-family-structure-type-family-pushout-type-family =
+  right-type-family-descent-data-type-family-pushout =
     P ∘ right-map-cocone-span-diagram s c
 
-  matching-equiv-structure-type-family-pushout-type-family :
+  matching-equiv-descent-data-type-family-pushout :
     (x : spanning-type-span-diagram s) →
-    left-type-family-structure-type-family-pushout-type-family
+    left-type-family-descent-data-type-family-pushout
       ( left-map-span-diagram s x) ≃
-    right-type-family-structure-type-family-pushout-type-family
+    right-type-family-descent-data-type-family-pushout
       ( right-map-span-diagram s x)
-  matching-equiv-structure-type-family-pushout-type-family x =
+  matching-equiv-descent-data-type-family-pushout x =
     equiv-tr P (coherence-square-cocone-span-diagram s c x)
 
-  structure-type-family-pushout-type-family :
+  descent-data-type-family-pushout :
     structure-type-family-pushout l5 s
-  pr1 structure-type-family-pushout-type-family =
-    left-type-family-structure-type-family-pushout-type-family
-  pr1 (pr2 structure-type-family-pushout-type-family) =
-    right-type-family-structure-type-family-pushout-type-family
-  pr2 (pr2 structure-type-family-pushout-type-family) =
-    matching-equiv-structure-type-family-pushout-type-family
+  pr1 descent-data-type-family-pushout =
+    left-type-family-descent-data-type-family-pushout
+  pr1 (pr2 descent-data-type-family-pushout) =
+    right-type-family-descent-data-type-family-pushout
+  pr2 (pr2 descent-data-type-family-pushout) =
+    matching-equiv-descent-data-type-family-pushout
 ```
 
 ### Equivalences of type family structures over pushouts
@@ -444,14 +444,14 @@ module _
   {X : UU l4} (c : cocone-span-diagram s X)
   where
 
-  triangle-structure-type-family-pushout-type-family :
+  triangle-descent-data-type-family-pushout :
     coherence-triangle-maps
-      ( structure-type-family-pushout-type-family {l5 = l5} s c)
+      ( descent-data-type-family-pushout {l5 = l5} s c)
       ( structure-type-family-pushout-cocone-UU l5 s)
       ( cocone-map-span-diagram s {Y = UU l5} c)
-  triangle-structure-type-family-pushout-type-family P =
+  triangle-descent-data-type-family-pushout P =
     eq-equiv-structure-type-family-pushout s
-      ( structure-type-family-pushout-type-family s c P)
+      ( descent-data-type-family-pushout s c P)
       ( structure-type-family-pushout-cocone-UU l5 s
         ( cocone-map-span-diagram s c P))
       ( pair
@@ -462,25 +462,25 @@ module _
             htpy-equiv-eq-ap-fam P
               ( coherence-square-cocone-span-diagram s c x))))
 
-  is-equiv-structure-type-family-pushout-type-family :
+  is-equiv-descent-data-type-family-pushout :
     universal-property-pushout s c →
-    is-equiv (structure-type-family-pushout-type-family {l5 = l5} s c)
-  is-equiv-structure-type-family-pushout-type-family up-c =
+    is-equiv (descent-data-type-family-pushout {l5 = l5} s c)
+  is-equiv-descent-data-type-family-pushout up-c =
     is-equiv-left-map-triangle
-      ( structure-type-family-pushout-type-family s c)
+      ( descent-data-type-family-pushout s c)
       ( structure-type-family-pushout-cocone-UU l5 s)
       ( cocone-map-span-diagram s c)
-      ( triangle-structure-type-family-pushout-type-family)
+      ( triangle-descent-data-type-family-pushout)
       ( up-c (UU l5))
       ( is-equiv-structure-type-family-pushout-cocone-UU l5 s)
 
-  equiv-structure-type-family-pushout-type-family :
+  equiv-descent-data-type-family-pushout :
     universal-property-pushout s c →
     (X → UU l5) ≃ structure-type-family-pushout l5 s
-  pr1 (equiv-structure-type-family-pushout-type-family up-c) =
-    structure-type-family-pushout-type-family s c
-  pr2 (equiv-structure-type-family-pushout-type-family up-c) =
-    is-equiv-structure-type-family-pushout-type-family up-c
+  pr1 (equiv-descent-data-type-family-pushout up-c) =
+    descent-data-type-family-pushout s c
+  pr2 (equiv-descent-data-type-family-pushout up-c) =
+    is-equiv-descent-data-type-family-pushout up-c
 ```
 
 ### Corollary 18.2.4
@@ -497,17 +497,17 @@ module _
       ( Σ ( X → UU l)
           ( λ Q →
             equiv-structure-type-family-pushout s P
-              ( structure-type-family-pushout-type-family s c Q)))
+              ( descent-data-type-family-pushout s c Q)))
   uniqueness-structure-type-family-pushout P =
     is-contr-equiv'
-      ( fiber (structure-type-family-pushout-type-family s c) P)
+      ( fiber (descent-data-type-family-pushout s c) P)
       ( equiv-tot
         ( λ Q →
           ( equiv-equiv-structure-type-family-pushout s P
-            ( structure-type-family-pushout-type-family s c Q)) ∘e
-        ( equiv-inv (structure-type-family-pushout-type-family s c Q) P)))
+            ( descent-data-type-family-pushout s c Q)) ∘e
+        ( equiv-inv (descent-data-type-family-pushout s c Q) P)))
       ( is-contr-map-is-equiv
-        ( is-equiv-structure-type-family-pushout-type-family s c U)
+        ( is-equiv-descent-data-type-family-pushout s c U)
         ( P))
 
   fam-structure-type-family-pushout :
@@ -517,13 +517,13 @@ module _
 
   is-section-fam-structure-type-family-pushout :
     is-section
-      ( structure-type-family-pushout-type-family {l5 = l} s c)
+      ( descent-data-type-family-pushout {l5 = l} s c)
       ( fam-structure-type-family-pushout)
   is-section-fam-structure-type-family-pushout P =
     inv
       ( eq-equiv-structure-type-family-pushout s
       ( P)
-      ( structure-type-family-pushout-type-family s c
+      ( descent-data-type-family-pushout s c
         ( fam-structure-type-family-pushout P))
       ( pr2 (center (uniqueness-structure-type-family-pushout P))))
 

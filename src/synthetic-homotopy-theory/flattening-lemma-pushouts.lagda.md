@@ -14,6 +14,7 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-span-diagrams
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -30,6 +31,7 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.families-of-types-pushouts
+open import synthetic-homotopy-theory.flattening-families-of-types-pushouts
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -165,105 +167,15 @@ module _
   ( Q : X → UU l5)
   ( e :
     equiv-structure-type-family-pushout s P
-      ( structure-type-family-pushout-type-family s c Q))
+      ( descent-data-type-family-pushout s c Q))
   where
-
-  spanning-type-flattening-structure-type-family-pushout : UU (l3 ⊔ l5)
-  spanning-type-flattening-structure-type-family-pushout =
-    Σ ( spanning-type-span-diagram s)
-      ( ( left-type-family-structure-type-family-pushout s P) ∘
-        ( left-map-span-diagram s))
-
-  domain-flattening-structure-type-family-pushout : UU (l1 ⊔ l5)
-  domain-flattening-structure-type-family-pushout =
-    Σ ( domain-span-diagram s)
-      ( left-type-family-structure-type-family-pushout s P)
-
-  codomain-flattening-structure-type-family-pushout : UU (l2 ⊔ l5)
-  codomain-flattening-structure-type-family-pushout =
-    Σ ( codomain-span-diagram s)
-      ( right-type-family-structure-type-family-pushout s P)
-
-  left-map-flattening-structure-type-family-pushout :
-    spanning-type-flattening-structure-type-family-pushout →
-    domain-flattening-structure-type-family-pushout
-  left-map-flattening-structure-type-family-pushout =
-    map-Σ-map-base
-      ( left-map-span-diagram s)
-      ( left-type-family-structure-type-family-pushout s P)
-
-  right-map-flattening-structure-type-family-pushout :
-    spanning-type-flattening-structure-type-family-pushout →
-    codomain-flattening-structure-type-family-pushout
-  right-map-flattening-structure-type-family-pushout =
-    map-Σ
-      ( right-type-family-structure-type-family-pushout s P)
-      ( right-map-span-diagram s)
-      ( map-matching-equiv-structure-type-family-pushout s P)
-
-  span-diagram-flattening-structure-type-family-pushout :
-    span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
-  span-diagram-flattening-structure-type-family-pushout =
-    make-span-diagram
-      left-map-flattening-structure-type-family-pushout
-      right-map-flattening-structure-type-family-pushout
-
-  left-map-cocone-flattening-structure-type-family-pushout :
-    domain-flattening-structure-type-family-pushout → Σ X Q
-  left-map-cocone-flattening-structure-type-family-pushout =
-    map-Σ Q
-      ( left-map-cocone-span-diagram s c)
-      ( map-left-equiv-equiv-structure-type-family-pushout s P
-        ( structure-type-family-pushout-type-family s c Q)
-        ( e))
-
-  right-map-cocone-flattening-structure-type-family-pushout :
-    codomain-flattening-structure-type-family-pushout → Σ X Q
-  right-map-cocone-flattening-structure-type-family-pushout =
-    map-Σ Q
-      ( right-map-cocone-span-diagram s c)
-      ( map-right-equiv-equiv-structure-type-family-pushout s P
-        ( structure-type-family-pushout-type-family s c Q)
-        ( e))
-
-  coherence-square-cocone-flattening-structure-type-family-pushout :
-    coherence-square-maps
-      ( right-map-flattening-structure-type-family-pushout)
-      ( left-map-flattening-structure-type-family-pushout)
-      ( right-map-cocone-flattening-structure-type-family-pushout)
-      ( left-map-cocone-flattening-structure-type-family-pushout)
-  coherence-square-cocone-flattening-structure-type-family-pushout =
-    htpy-map-Σ Q
-      ( coherence-square-cocone-span-diagram s c)
-      ( λ x →
-        map-left-equiv-equiv-structure-type-family-pushout s P
-          ( structure-type-family-pushout-type-family s c Q)
-          ( e)
-          ( left-map-span-diagram s x))
-      ( λ x →
-        inv-htpy
-          ( coherence-equiv-structure-type-family-pushout s P
-            ( structure-type-family-pushout-type-family s c Q)
-            ( e)
-            ( x)))
-
-  cocone-flattening-structure-type-family-pushout :
-    cocone-span-diagram
-      ( span-diagram-flattening-structure-type-family-pushout)
-      ( Σ X Q)
-  pr1 cocone-flattening-structure-type-family-pushout =
-    left-map-cocone-flattening-structure-type-family-pushout
-  pr1 (pr2 cocone-flattening-structure-type-family-pushout) =
-    right-map-cocone-flattening-structure-type-family-pushout
-  pr2 (pr2 cocone-flattening-structure-type-family-pushout) =
-    coherence-square-cocone-flattening-structure-type-family-pushout
 
   statement-flattening-lemma-structure-type-family-pushout : UUω
   statement-flattening-lemma-structure-type-family-pushout =
     dependent-universal-property-pushout s c →
     universal-property-pushout
-      ( span-diagram-flattening-structure-type-family-pushout)
-      ( cocone-flattening-structure-type-family-pushout)
+      ( flattening-structure-type-family-pushout s P)
+      ( cocone-flattening-structure-type-family-pushout s c P Q e)
 ```
 
 ## Properties
@@ -385,7 +297,7 @@ module _
   ( Q : X → UU l5)
   ( e :
     equiv-structure-type-family-pushout s P
-      ( structure-type-family-pushout-type-family s c Q))
+      ( descent-data-type-family-pushout s c Q))
   where
 
   coherence-cube-flattening-lemma-descent-data-pushout :
@@ -394,33 +306,58 @@ module _
       ( right-map-flattening-pushout s c Q)
       ( left-map-cocone-flattening-pushout s c Q)
       ( right-map-cocone-flattening-pushout s c Q)
-      ( left-map-flattening-structure-type-family-pushout s c P Q e)
-      ( right-map-flattening-structure-type-family-pushout s c P Q e)
+      ( left-map-flattening-structure-type-family-pushout s P)
+      ( right-map-flattening-structure-type-family-pushout s P)
       ( left-map-cocone-flattening-structure-type-family-pushout s c P Q e)
       ( right-map-cocone-flattening-structure-type-family-pushout s c P Q e)
-      ( tot (λ x → map-equiv (pr1 e (left-map-span-diagram s x))))
-      ( tot (λ a → map-equiv (pr1 e a)))
-      ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
+      ( tot
+        ( λ x →
+          map-left-equiv-equiv-structure-type-family-pushout s P
+            ( descent-data-type-family-pushout s c Q)
+            ( e)
+            ( left-map-span-diagram s x)))
+      ( tot
+        ( map-left-equiv-equiv-structure-type-family-pushout s P
+            ( descent-data-type-family-pushout s c Q)
+            ( e)))
+      ( tot
+        ( map-right-equiv-equiv-structure-type-family-pushout s P
+          ( descent-data-type-family-pushout s c Q)
+          ( e)))
       ( id)
-      ( coherence-square-cocone-flattening-structure-type-family-pushout s c P Q e)
+      ( coherence-square-cocone-flattening-structure-type-family-pushout
+        s c P Q e)
       ( refl-htpy)
       ( htpy-map-Σ
         ( Q ∘ right-map-cocone-span-diagram s c)
         ( refl-htpy)
         ( λ x →
           ( tr Q (coherence-square-cocone-span-diagram s c x)) ∘
-          ( map-equiv (pr1 e (left-map-span-diagram s x))))
-        ( λ x → inv-htpy (pr2 (pr2 e) x)))
+          ( map-left-equiv-equiv-structure-type-family-pushout s P
+            ( descent-data-type-family-pushout s c Q)
+            ( e)
+            ( left-map-span-diagram s x)))
+        ( λ x →
+          inv-htpy
+            ( coherence-equiv-structure-type-family-pushout s P
+              ( descent-data-type-family-pushout s c Q)
+              ( e)
+              ( x))))
       ( refl-htpy)
       ( refl-htpy)
       ( coherence-square-cocone-flattening-pushout s c Q)
   coherence-cube-flattening-lemma-descent-data-pushout (u , v) =
     ( ap-id
-      ( coherence-square-cocone-flattening-structure-type-family-pushout s c P Q e
-        ( u , v))) ∙
+      ( coherence-square-cocone-flattening-structure-type-family-pushout
+        s c P Q e (u , v))) ∙
     ( triangle-eq-pair-Σ Q
       ( coherence-square-cocone-span-diagram s c u)
-      ( inv (pr2 (pr2 e) u v))) ∙
+      ( inv
+        ( coherence-equiv-structure-type-family-pushout s P
+          ( descent-data-type-family-pushout s c Q)
+          ( e)
+          ( u)
+          ( v)))) ∙
     ( ap
       ( eq-pair-Σ (coherence-square-cocone-span-diagram s c u) refl ∙_)
       ( inv
@@ -429,16 +366,33 @@ module _
             ( right-map-cocone-span-diagram s c)
             ( Q)
             ( refl)
-            ( inv (pr2 (pr2 e) u v))))))
+            ( inv
+              ( coherence-equiv-structure-type-family-pushout s P
+                ( descent-data-type-family-pushout s c Q)
+                ( e)
+                ( u)
+                ( v)))))))
 
+  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    domain-flattening-structure-type-family-pushout s P ≃
+    domain-flattening-pushout s c Q
+  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-tot (pr1 e)
+
+  equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    equiv-span-diagram
+     ( flattening-structure-type-family-pushout s P)
+     ( span-diagram-flattening-pushout s c Q)
+  equiv-span-diagram-flattening-lemma-descent-data-pushout = {!!}
+  
   flattening-lemma-descent-data-pushout :
     statement-flattening-lemma-structure-type-family-pushout s c P Q e
   flattening-lemma-descent-data-pushout dup-pushout =
     universal-property-pushout-equiv-cocone-equiv-span-diagram
-      {! span-diagram-flattening-pushout s c Q!}
-      {!!}
-      {!!}
-      {!!}
+      ( flattening-structure-type-family-pushout s P)
+      ( cocone-flattening-structure-type-family-pushout s c P Q e)
+      ( span-diagram-flattening-pushout s c Q)
+      ( cocone-flattening-pushout s c Q)
       {!!}
       {!!}
       {!!}
