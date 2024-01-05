@@ -32,7 +32,7 @@ and maps `i : A → A'` and `j : B → B'`. The {{#concept "extension" Disambigu
 
 ```text
        i ∘ f     j ∘ g
-  A' <------- S -------> B.
+  A' <------- S -------> B'.
 ```
 
 ## Definitions
