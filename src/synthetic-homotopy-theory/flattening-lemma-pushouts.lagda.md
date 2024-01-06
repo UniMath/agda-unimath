@@ -15,6 +15,8 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-span-diagrams
+open import foundation.equivalences-spans
+open import foundation.extensions-spans
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -300,6 +302,106 @@ module _
       ( descent-data-type-family-pushout s c Q))
   where
 
+  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    domain-flattening-structure-type-family-pushout s P ≃
+    domain-flattening-pushout s c Q
+  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-tot
+      ( left-equiv-equiv-structure-type-family-pushout s P
+        ( descent-data-type-family-pushout s c Q)
+        ( e))
+
+  map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    domain-flattening-structure-type-family-pushout s P →
+    domain-flattening-pushout s c Q
+  map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    map-equiv
+      equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+
+  equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    codomain-flattening-structure-type-family-pushout s P ≃
+    codomain-flattening-pushout s c Q
+  equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-tot
+      ( right-equiv-equiv-structure-type-family-pushout s P
+        ( descent-data-type-family-pushout s c Q)
+        ( e))
+
+  map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    codomain-flattening-structure-type-family-pushout s P →
+    codomain-flattening-pushout s c Q
+  map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    map-equiv
+      equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+
+  spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    spanning-type-flattening-structure-type-family-pushout s P ≃
+    spanning-type-flattening-pushout s c Q
+  spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-tot
+      ( λ x →
+        left-equiv-equiv-structure-type-family-pushout s P
+          ( descent-data-type-family-pushout s c Q)
+          ( e)
+          ( left-map-span-diagram s x))
+
+  spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    spanning-type-flattening-structure-type-family-pushout s P →
+    spanning-type-flattening-pushout s c Q
+  spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    map-equiv
+      ( spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+
+  left-square-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    coherence-square-maps
+      ( spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+      ( left-map-flattening-structure-type-family-pushout s P)
+      ( left-map-flattening-pushout s c Q)
+      ( map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+  left-square-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    refl-htpy
+
+  right-square-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    coherence-square-maps
+      ( spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+      ( right-map-flattening-structure-type-family-pushout s P)
+      ( right-map-flattening-pushout s c Q)
+      ( map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+  right-square-equiv-span-diagram-flattening-lemma-descent-data-pushout
+    (x , t) =
+    ap
+      ( pair (right-map-span-diagram s x))
+      ( coherence-equiv-structure-type-family-pushout s P
+        ( descent-data-type-family-pushout s c Q)
+        ( e)
+        ( x)
+        ( t))
+
+  equiv-span-flattening-lemma-descent-data-pushout :
+    equiv-span
+      ( extend-span
+        ( span-span-diagram (flattening-structure-type-family-pushout s P))
+        ( map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+        ( map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout))
+      ( span-span-diagram (span-diagram-flattening-pushout s c Q))
+  pr1 equiv-span-flattening-lemma-descent-data-pushout =
+    spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr1 (pr2 equiv-span-flattening-lemma-descent-data-pushout) =
+    left-square-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr2 (pr2 equiv-span-flattening-lemma-descent-data-pushout) =
+    right-square-equiv-span-diagram-flattening-lemma-descent-data-pushout
+
+  equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    equiv-span-diagram
+     ( flattening-structure-type-family-pushout s P)
+     ( span-diagram-flattening-pushout s c Q)
+  pr1 equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr1 (pr2 equiv-span-diagram-flattening-lemma-descent-data-pushout) =
+    equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr2 (pr2 equiv-span-diagram-flattening-lemma-descent-data-pushout) =
+    equiv-span-flattening-lemma-descent-data-pushout
+
   coherence-cube-flattening-lemma-descent-data-pushout :
     coherence-cube-maps
       ( left-map-flattening-pushout s c Q)
@@ -318,8 +420,8 @@ module _
             ( left-map-span-diagram s x)))
       ( tot
         ( map-left-equiv-equiv-structure-type-family-pushout s P
-            ( descent-data-type-family-pushout s c Q)
-            ( e)))
+          ( descent-data-type-family-pushout s c Q)
+          ( e)))
       ( tot
         ( map-right-equiv-equiv-structure-type-family-pushout s P
           ( descent-data-type-family-pushout s c Q)
@@ -373,18 +475,6 @@ module _
                 ( u)
                 ( v)))))))
 
-  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
-    domain-flattening-structure-type-family-pushout s P ≃
-    domain-flattening-pushout s c Q
-  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
-    equiv-tot (pr1 e)
-
-  equiv-span-diagram-flattening-lemma-descent-data-pushout :
-    equiv-span-diagram
-     ( flattening-structure-type-family-pushout s P)
-     ( span-diagram-flattening-pushout s c Q)
-  equiv-span-diagram-flattening-lemma-descent-data-pushout = {!!}
-  
   flattening-lemma-descent-data-pushout :
     statement-flattening-lemma-structure-type-family-pushout s c P Q e
   flattening-lemma-descent-data-pushout dup-pushout =
@@ -393,7 +483,7 @@ module _
       ( cocone-flattening-structure-type-family-pushout s c P Q e)
       ( span-diagram-flattening-pushout s c Q)
       ( cocone-flattening-pushout s c Q)
-      {!!}
+      ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
       {!!}
       {!!}
   {-

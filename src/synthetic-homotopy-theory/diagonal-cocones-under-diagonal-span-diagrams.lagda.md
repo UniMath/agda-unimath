@@ -20,7 +20,7 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ## Idea
 
 Consider a map `f : A → B`. Then any map `g : B → X` induces a
-{{#concept "diagonal cocone" Agda=diagonal-cocone-span Disambiguation="span diagram"}}
+{{#concept "diagonal cocone" Agda=diagonal-cocone-span-diagram Disambiguation="span diagram"}}
 on the [diagonal span diagram](foundation.diagonal-span-diagrams.md)
 
 ```text
