@@ -161,7 +161,19 @@ module _
 
 ## Properties
 
-### Transport in lifts of families of elements
+### Transport in lifts of families of elements along homotopies of precompositions
+
+Given a map `a : I → A`, and a homotopy `H : f ~ g`, where `f, g : J → I`, we
+know that there is an identification `a ∘ f ＝ a ∘ g`. Transporting along this
+identification in the type of lifts of families of elements into a type family
+`B : A → 𝓤`, we get a map
+
+```text
+  ((j : J) → B (a (f j))) → ((j : J) → B (a (g j))) .
+```
+
+We show that this map is homotopic to transporting along `H` in the type family
+`B ∘ a : I → 𝓤`.
 
 ```agda
 module _
@@ -169,33 +181,34 @@ module _
   {J : UU l4} {f : J → I}
   where
 
-  statement-tr-lift-family-of-elements : {g : J → I} (H : f ~ g) → UU (l3 ⊔ l4)
-  statement-tr-lift-family-of-elements H =
+  statement-tr-lift-family-of-elements-precomp :
+    {g : J → I} (H : f ~ g) → UU (l3 ⊔ l4)
+  statement-tr-lift-family-of-elements-precomp H =
     tr (lift-family-of-elements B) (htpy-precomp H A a) ~
     tr-htpy (λ _ → precomp-family a B) H
 
-  tr-lift-family-of-elements-refl-htpy :
-    statement-tr-lift-family-of-elements refl-htpy
-  tr-lift-family-of-elements-refl-htpy b =
+  tr-lift-family-of-elements-precomp-refl-htpy :
+    statement-tr-lift-family-of-elements-precomp refl-htpy
+  tr-lift-family-of-elements-precomp-refl-htpy b =
     ap
       ( λ p → tr (lift-family-of-elements B) p b)
       ( compute-htpy-precomp-refl-htpy f A a)
 
-  tr-lift-family-of-elements :
-    {g : J → I} (H : f ~ g) → statement-tr-lift-family-of-elements H
-  tr-lift-family-of-elements =
+  tr-lift-family-of-elements-precomp :
+    {g : J → I} (H : f ~ g) → statement-tr-lift-family-of-elements-precomp H
+  tr-lift-family-of-elements-precomp =
     ind-htpy f
-      ( λ g → statement-tr-lift-family-of-elements)
-      ( tr-lift-family-of-elements-refl-htpy)
+      ( λ g → statement-tr-lift-family-of-elements-precomp)
+      ( tr-lift-family-of-elements-precomp-refl-htpy)
 
   abstract
-    compute-tr-lift-family-of-elements :
-      tr-lift-family-of-elements refl-htpy ＝
-      tr-lift-family-of-elements-refl-htpy
-    compute-tr-lift-family-of-elements =
+    compute-tr-lift-family-of-elements-precomp :
+      tr-lift-family-of-elements-precomp refl-htpy ＝
+      tr-lift-family-of-elements-precomp-refl-htpy
+    compute-tr-lift-family-of-elements-precomp =
       compute-ind-htpy f
-        ( λ g → statement-tr-lift-family-of-elements)
-        ( tr-lift-family-of-elements-refl-htpy)
+        ( λ g → statement-tr-lift-family-of-elements-precomp)
+        ( tr-lift-family-of-elements-precomp-refl-htpy)
 ```
 
 ## See also

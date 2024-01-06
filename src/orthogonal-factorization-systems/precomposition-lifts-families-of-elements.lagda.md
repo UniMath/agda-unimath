@@ -98,7 +98,7 @@ module _
   triangle-precompose-lift-family-of-elements-htpy-refl-htpy :
     statement-triangle-precompose-lift-family-of-elements-htpy refl-htpy
   triangle-precompose-lift-family-of-elements-htpy-refl-htpy b =
-    tr-lift-family-of-elements B a refl-htpy (b ∘ f)
+    tr-lift-family-of-elements-precomp B a refl-htpy (b ∘ f)
 
   triangle-precompose-lift-family-of-elements-htpy :
     {g : J → I} (H : f ~ g) →
@@ -121,7 +121,7 @@ module _
     {g : J → I} (H : f ~ g) → UU (l1 ⊔ l3 ⊔ l4)
   statement-coherence-triangle-precompose-lift-family-of-elements-htpy H =
     ( triangle-precompose-lift-family-of-elements-htpy H) ~
-    ( ( ( tr-lift-family-of-elements B a H) ·r
+    ( ( ( tr-lift-family-of-elements-precomp B a H) ·r
         ( precomp-lift-family-of-elements B f a)) ∙h
       ( λ b → eq-htpy (λ j → apd b (H j))))
 
@@ -202,7 +202,8 @@ module _
         ( λ a →
           ( htpy-eq
             ( compute-triangle-precompose-lift-family-of-elements-htpy B a)) ∙h
-          ( λ b → (htpy-eq (compute-tr-lift-family-of-elements B a) (b ∘ f))))
+          ( λ b →
+            htpy-eq (compute-tr-lift-family-of-elements-precomp B a) (b ∘ f)))
 ```
 
 ### TODO

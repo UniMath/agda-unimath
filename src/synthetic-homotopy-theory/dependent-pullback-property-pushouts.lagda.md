@@ -187,7 +187,8 @@ module _
     ({l : Level} → dependent-pullback-property-pushout l f g c)
   dependent-pullback-property-pullback-property-pushout pp-c P =
     is-pullback-htpy'
-      ( ( tr-lift-family-of-elements P id (coherence-square-cocone f g c)) ·r
+      ( ( tr-lift-family-of-elements-precomp P id
+          ( coherence-square-cocone f g c)) ·r
         ( precomp-lift-family-of-elements P f (horizontal-map-cocone f g c)))
       ( refl-htpy)
       ( cone-family-dependent-pullback-property P id)
