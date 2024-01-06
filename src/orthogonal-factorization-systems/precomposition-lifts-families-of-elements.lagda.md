@@ -30,6 +30,34 @@ open import orthogonal-factorization-systems.lifts-families-of-elements
 
 </details>
 
+## Idea
+
+Consider a type family `B : A → 𝓤` and a map `a : I → A`. Then, given a map
+`f : J → I`, we may pull back a
+[lift](orthogonal-factorization-systems.lifts-families-of-elements.md) of `a` to
+a lift of `a ∘ f`.
+
+In other words, given a diagram
+
+```text
+                Σ (x : A) (B x)
+                      |
+                      | pr1
+                      |
+                      v
+  J ------> I ------> A         ,
+       f         a
+```
+
+we get a map of diagonals
+
+```text
+  ((i : I) → B (a i)) → ((j : J) → B (a (f j))) .
+```
+
+This map of lifts induces a map from lifted families of elements indexed by `I`
+to lifted families of elements indexed by `J`.
+
 ## Definitions
 
 ### Precomposition of lifts of families of elements by functions
@@ -37,25 +65,25 @@ open import orthogonal-factorization-systems.lifts-families-of-elements
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : UU l2} (B : A → UU l3) {J : UU l4}
-  (f : I → J)
+  (f : J → I)
   where
 
   precomp-lift-family-of-elements :
-    (a : J → A) →
+    (a : I → A) →
     lift-family-of-elements B a → lift-family-of-elements B (a ∘ f)
   precomp-lift-family-of-elements a b i = b (f i)
 ```
 
-### Precomposition in total spaces of lifts of families of elements
+### Precomposition in lifted families of elements
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : UU l2} (B : A → UU l3) {J : UU l4}
-  (f : I → J)
+  (f : J → I)
   where
 
   precomp-lifted-family-of-elements :
-    lifted-family-of-elements J B → lifted-family-of-elements I B
+    lifted-family-of-elements I B → lifted-family-of-elements J B
   precomp-lifted-family-of-elements =
     map-Σ
       ( lift-family-of-elements B)
@@ -67,7 +95,12 @@ module _
 
 ### Homotopies between maps induce commuting triangles of precompositions of lifts of families of elements
 
-We have a commuting triangle
+Consider two maps `f, g : J → I` and a homotopy `H : f ~ g` between them. The
+precomposition functions they induce on lifts of families of elements have
+different codomains, namely `lift-family-of-elements B (a ∘ f)` and
+`lift-family-of-elements B (a ∘ g)`, but they fit into a
+[commuting triangle](foundation.commuting-triangles-of-maps.md) with
+[transport](foundation.transport-along-identifications.md) in the type of lifts:
 
 ```text
                               precomp-lift B f a
@@ -87,72 +120,81 @@ module _
   {J : UU l4} {f : J → I}
   where
 
-  statement-triangle-precompose-lift-family-of-elements-htpy :
+  statement-triangle-precomp-lift-family-of-elements-htpy :
     {g : J → I} (H : f ~ g) → UU (l1 ⊔ l3 ⊔ l4)
-  statement-triangle-precompose-lift-family-of-elements-htpy {g} H =
+  statement-triangle-precomp-lift-family-of-elements-htpy {g} H =
     coherence-triangle-maps'
       ( precomp-lift-family-of-elements B g a)
       ( tr (lift-family-of-elements B) (htpy-precomp H A a))
       ( precomp-lift-family-of-elements B f a)
 
-  triangle-precompose-lift-family-of-elements-htpy-refl-htpy :
-    statement-triangle-precompose-lift-family-of-elements-htpy refl-htpy
-  triangle-precompose-lift-family-of-elements-htpy-refl-htpy b =
+  triangle-precomp-lift-family-of-elements-htpy-refl-htpy :
+    statement-triangle-precomp-lift-family-of-elements-htpy refl-htpy
+  triangle-precomp-lift-family-of-elements-htpy-refl-htpy b =
     tr-lift-family-of-elements-precomp B a refl-htpy (b ∘ f)
 
-  triangle-precompose-lift-family-of-elements-htpy :
+  triangle-precomp-lift-family-of-elements-htpy :
     {g : J → I} (H : f ~ g) →
-    statement-triangle-precompose-lift-family-of-elements-htpy H
-  triangle-precompose-lift-family-of-elements-htpy =
+    statement-triangle-precomp-lift-family-of-elements-htpy H
+  triangle-precomp-lift-family-of-elements-htpy =
     ind-htpy f
-      ( λ g → statement-triangle-precompose-lift-family-of-elements-htpy)
-      ( triangle-precompose-lift-family-of-elements-htpy-refl-htpy)
+      ( λ g → statement-triangle-precomp-lift-family-of-elements-htpy)
+      ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
 
   abstract
-    compute-triangle-precompose-lift-family-of-elements-htpy :
-      triangle-precompose-lift-family-of-elements-htpy refl-htpy ＝
-      triangle-precompose-lift-family-of-elements-htpy-refl-htpy
-    compute-triangle-precompose-lift-family-of-elements-htpy =
+    compute-triangle-precomp-lift-family-of-elements-htpy :
+      triangle-precomp-lift-family-of-elements-htpy refl-htpy ＝
+      triangle-precomp-lift-family-of-elements-htpy-refl-htpy
+    compute-triangle-precomp-lift-family-of-elements-htpy =
       compute-ind-htpy f
-        ( λ g → statement-triangle-precompose-lift-family-of-elements-htpy)
-        ( triangle-precompose-lift-family-of-elements-htpy-refl-htpy)
+        ( λ g → statement-triangle-precomp-lift-family-of-elements-htpy)
+        ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
+```
 
-  statement-coherence-triangle-precompose-lift-family-of-elements-htpy :
+### TODO
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : UU l2} (B : A → UU l3) (a : I → A)
+  {J : UU l4} {f : J → I}
+  where
+
+  statement-coherence-triangle-precomp-lift-family-of-elements-htpy :
     {g : J → I} (H : f ~ g) → UU (l1 ⊔ l3 ⊔ l4)
-  statement-coherence-triangle-precompose-lift-family-of-elements-htpy H =
-    ( triangle-precompose-lift-family-of-elements-htpy H) ~
+  statement-coherence-triangle-precomp-lift-family-of-elements-htpy H =
+    ( triangle-precomp-lift-family-of-elements-htpy B a H) ~
     ( ( ( tr-lift-family-of-elements-precomp B a H) ·r
         ( precomp-lift-family-of-elements B f a)) ∙h
       ( λ b → eq-htpy (λ j → apd b (H j))))
 
-  coherence-triangle-precompose-lift-family-of-elements-htpy-refl-htpy :
-    statement-coherence-triangle-precompose-lift-family-of-elements-htpy
+  coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy :
+    statement-coherence-triangle-precomp-lift-family-of-elements-htpy
       ( refl-htpy)
-  coherence-triangle-precompose-lift-family-of-elements-htpy-refl-htpy b =
-    ( htpy-eq (compute-triangle-precompose-lift-family-of-elements-htpy) b) ∙
+  coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy b =
+    ( htpy-eq (compute-triangle-precomp-lift-family-of-elements-htpy B a) b) ∙
     ( inv right-unit) ∙
     ( identification-left-whisk
-      ( triangle-precompose-lift-family-of-elements-htpy-refl-htpy b)
+      ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy B a b)
       ( inv (eq-htpy-refl-htpy (b ∘ f))))
 
-  coherence-triangle-precompose-lift-family-of-elements-htpy :
+  coherence-triangle-precomp-lift-family-of-elements-htpy :
     {g : J → I} (H : f ~ g) →
-    statement-coherence-triangle-precompose-lift-family-of-elements-htpy H
-  coherence-triangle-precompose-lift-family-of-elements-htpy =
+    statement-coherence-triangle-precomp-lift-family-of-elements-htpy H
+  coherence-triangle-precomp-lift-family-of-elements-htpy =
     ind-htpy f
       ( λ g →
-        statement-coherence-triangle-precompose-lift-family-of-elements-htpy)
-      ( coherence-triangle-precompose-lift-family-of-elements-htpy-refl-htpy)
+        statement-coherence-triangle-precomp-lift-family-of-elements-htpy)
+      ( coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
 
   abstract
-    compute-coherence-triangle-precompose-lift-family-of-elements-htpy :
-      coherence-triangle-precompose-lift-family-of-elements-htpy refl-htpy ＝
-      coherence-triangle-precompose-lift-family-of-elements-htpy-refl-htpy
-    compute-coherence-triangle-precompose-lift-family-of-elements-htpy =
+    compute-coherence-triangle-precomp-lift-family-of-elements-htpy :
+      coherence-triangle-precomp-lift-family-of-elements-htpy refl-htpy ＝
+      coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy
+    compute-coherence-triangle-precomp-lift-family-of-elements-htpy =
       compute-ind-htpy f
         ( λ g →
-          statement-coherence-triangle-precompose-lift-family-of-elements-htpy)
-        ( coherence-triangle-precompose-lift-family-of-elements-htpy-refl-htpy)
+          statement-coherence-triangle-precomp-lift-family-of-elements-htpy)
+        ( coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
 ```
 
 ### TODO
@@ -189,7 +231,7 @@ module _
       ( lift-family-of-elements B)
       ( htpy-precomp H A)
       ( precomp-lift-family-of-elements B f)
-      ( λ a → triangle-precompose-lift-family-of-elements-htpy B a H)
+      ( λ a → triangle-precomp-lift-family-of-elements-htpy B a H)
 
   abstract
     compute-htpy-precomp-lifted-family-of-elements-htpy :
@@ -201,7 +243,7 @@ module _
         ( compute-htpy-precomp-refl-htpy f A)
         ( λ a →
           ( htpy-eq
-            ( compute-triangle-precompose-lift-family-of-elements-htpy B a)) ∙h
+            ( compute-triangle-precomp-lift-family-of-elements-htpy B a)) ∙h
           ( λ b →
             htpy-eq (compute-tr-lift-family-of-elements-precomp B a) (b ∘ f)))
 ```

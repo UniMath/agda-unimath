@@ -131,7 +131,7 @@ module _
   pr1 (pr2 (cone-family-dependent-pullback-property P γ)) h =
     h ∘ vertical-map-cocone f g c
   pr2 (pr2 (cone-family-dependent-pullback-property P γ)) =
-    triangle-precompose-lift-family-of-elements-htpy P γ
+    triangle-precomp-lift-family-of-elements-htpy P γ
       ( coherence-square-cocone f g c)
 
   is-pullback-cone-family-dependent-pullback-family :
@@ -196,7 +196,7 @@ module _
       ( ( refl-htpy) ,
         ( refl-htpy) ,
         ( ( right-unit-htpy) ∙h
-          ( coherence-triangle-precompose-lift-family-of-elements-htpy P id
+          ( coherence-triangle-precomp-lift-family-of-elements-htpy P id
             ( coherence-square-cocone f g c))))
       ( is-pullback-cone-family-dependent-pullback-family P pp-c id)
 ```
