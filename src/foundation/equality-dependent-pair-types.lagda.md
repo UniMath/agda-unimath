@@ -90,6 +90,11 @@ module _
     inv (eq-pair-Σ p p') ＝
     eq-pair-Σ (inv p) (inv-dependent-identification B p p')
   distributive-inv-eq-pair-Σ refl refl = refl
+
+  distributive-inv-eq-pair-Σ-refl :
+    {x : A} {x' y' : B x} (p' : x' ＝ y') →
+    inv (eq-pair-Σ refl p') ＝ eq-pair-Σ {A = A} {B = B} refl (inv p')
+  distributive-inv-eq-pair-Σ-refl refl = refl
 ```
 
 ### Computing `pair-eq-Σ` at an identification of the form `ap f p`
