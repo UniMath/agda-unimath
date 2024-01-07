@@ -107,7 +107,9 @@ module _
   map-universal-property-pushout = map-inv-is-equiv (H Y) d
 
   htpy-cocone-universal-property-pushout :
-    htpy-cocone-span-diagram s (cocone-map-span-diagram s c map-universal-property-pushout) d
+    htpy-cocone-span-diagram s
+      ( cocone-map-span-diagram s c map-universal-property-pushout)
+      ( d)
   htpy-cocone-universal-property-pushout =
     htpy-eq-cocone-span-diagram
       ( s)
@@ -156,13 +158,21 @@ module _
 
   abstract
     uniqueness-map-universal-property-pushout :
-      is-contr (Σ (X → Y) (λ h → htpy-cocone-span-diagram s (cocone-map-span-diagram s c h) d))
+      is-contr
+        ( Σ ( X → Y)
+            ( λ h →
+              htpy-cocone-span-diagram s (cocone-map-span-diagram s c h) d))
     uniqueness-map-universal-property-pushout =
       is-contr-is-equiv'
         ( fiber (cocone-map-span-diagram s c) d)
-        ( tot (λ h → htpy-eq-cocone-span-diagram s (cocone-map-span-diagram s c h) d))
+        ( tot
+          ( λ h →
+            htpy-eq-cocone-span-diagram s (cocone-map-span-diagram s c h) d))
         ( is-equiv-tot-is-fiberwise-equiv
-          ( λ h → is-equiv-htpy-eq-cocone-span-diagram s (cocone-map-span-diagram s c h) d))
+          ( λ h →
+            is-equiv-htpy-eq-cocone-span-diagram s
+              ( cocone-map-span-diagram s c h)
+              ( d)))
         ( is-contr-map-is-equiv (H Y) d)
 ```
 
@@ -233,7 +243,10 @@ module _
       ( ( compute-comp-cocone-map-span-diagram s c h k) ∙
         ( ap
           ( λ t → cocone-map-span-diagram s t k)
-          ( eq-htpy-cocone-span-diagram s (cocone-map-span-diagram s c h) c' H)))
+          ( eq-htpy-cocone-span-diagram s
+            ( cocone-map-span-diagram s c h)
+            ( c')
+            ( H))))
 
   abstract
     is-equiv-universal-property-pushout-universal-property-pushout :
@@ -318,12 +331,16 @@ universal property of pushouts. Hence the claim follows.
 abstract
   uniquely-unique-pushout :
     { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-    { X : UU l4} {Y : UU l5} (c : cocone-span-diagram s X) (d : cocone-span-diagram s Y) →
+    { X : UU l4} (c : cocone-span-diagram s X)
+    { Y : UU l5} (d : cocone-span-diagram s Y) →
     universal-property-pushout s c →
     universal-property-pushout s d →
     is-contr
       ( Σ ( X ≃ Y)
-          ( λ e → htpy-cocone-span-diagram s (cocone-map-span-diagram s c (map-equiv e)) d))
+          ( λ e →
+            htpy-cocone-span-diagram s
+              ( cocone-map-span-diagram s c (map-equiv e))
+              ( d)))
   uniquely-unique-pushout s c d H K =
     is-torsorial-Eq-subtype
       ( uniqueness-map-universal-property-pushout s c H d)
@@ -356,7 +373,8 @@ conclude the theorem.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram s X)
   where
 
   triangle-pullback-property-pushout-universal-property-pushout :
@@ -373,7 +391,9 @@ module _
       ( refl)
       ( eq-pair-Σ
         ( refl)
-        ( inv (is-section-eq-htpy (h ·l coherence-square-cocone-span-diagram s c))))
+        ( inv
+          ( is-section-eq-htpy
+            ( h ·l coherence-square-cocone-span-diagram s c))))
 
   pullback-property-pushout-universal-property-pushout :
     universal-property-pushout s c → pullback-property-pushout s c
@@ -389,7 +409,10 @@ module _
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ i' →
           is-equiv-tot-is-fiberwise-equiv
-            ( λ j' → funext (i' ∘ left-map-span-diagram s) (j' ∘ right-map-span-diagram s))))
+            ( λ j' →
+              funext
+                ( i' ∘ left-map-span-diagram s)
+                ( j' ∘ right-map-span-diagram s))))
       ( H Y)
 
   universal-property-pushout-pullback-property-pushout :
@@ -407,19 +430,24 @@ module _
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ i' →
           is-equiv-tot-is-fiberwise-equiv
-            ( λ j' → funext (i' ∘ left-map-span-diagram s) (j' ∘ right-map-span-diagram s))))
+            ( λ j' →
+              funext
+                ( i' ∘ left-map-span-diagram s)
+                ( j' ∘ right-map-span-diagram s))))
 ```
 
 ### If the left map of a span diagram is an equivalence, then the right map of a cocone on it is an equivalence if and only if the cocone is a pushout
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {C : UU l4} (c : cocone-span-diagram s C)
+  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {C : UU l4} (c : cocone-span-diagram s C)
   where
 
   is-equiv-right-map-cocone-universal-property-pushout :
     is-equiv (left-map-span-diagram s) →
-    universal-property-pushout s c → is-equiv (right-map-cocone-span-diagram s c)
+    universal-property-pushout s c →
+    is-equiv (right-map-cocone-span-diagram s c)
   is-equiv-right-map-cocone-universal-property-pushout is-equiv-f H =
     is-equiv-is-equiv-precomp
       ( right-map-cocone-span-diagram s c)
@@ -432,7 +460,8 @@ module _
           ( pullback-property-pushout-universal-property-pushout s c H T))
 
   universal-property-pushout-is-equiv :
-    is-equiv (left-map-span-diagram s) → is-equiv (right-map-cocone-span-diagram s c) →
+    is-equiv (left-map-span-diagram s) →
+    is-equiv (right-map-cocone-span-diagram s c) →
     universal-property-pushout s c
   universal-property-pushout-is-equiv H K =
     universal-property-pushout-pullback-property-pushout s c
@@ -446,7 +475,8 @@ module _
 
 equiv-right-map-cocone-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
-  (e : S ≃ A) (g : S → B) (c : cocone-span-diagram (make-span-diagram (map-equiv e) g) C) →
+  (e : S ≃ A) (g : S → B)
+  (c : cocone-span-diagram (make-span-diagram (map-equiv e) g) C) →
   universal-property-pushout (make-span-diagram (map-equiv e) g) c →
   B ≃ C
 pr1 (equiv-right-map-cocone-universal-property-pushout e g c H) =
@@ -463,7 +493,8 @@ pr2 (equiv-right-map-cocone-universal-property-pushout e g c H) =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {C : UU l4} (c : cocone-span-diagram s C)
+  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {C : UU l4} (c : cocone-span-diagram s C)
   where
 
   is-equiv-left-map-cocone-universal-property-pushout :
@@ -482,7 +513,8 @@ module _
           ( pullback-property-pushout-universal-property-pushout s c H T))
 
   universal-property-pushout-is-equiv' :
-    is-equiv (right-map-span-diagram s) → is-equiv (left-map-cocone-span-diagram s c) →
+    is-equiv (right-map-span-diagram s) →
+    is-equiv (left-map-cocone-span-diagram s c) →
     universal-property-pushout s c
   universal-property-pushout-is-equiv' H K =
     universal-property-pushout-pullback-property-pushout s c
@@ -496,7 +528,8 @@ module _
 
 equiv-left-map-cocone-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
-  (f : S → A) (e : S ≃ B) (c : cocone-span-diagram (make-span-diagram f (map-equiv e)) C) →
+  (f : S → A) (e : S ≃ B)
+  (c : cocone-span-diagram (make-span-diagram f (map-equiv e)) C) →
   universal-property-pushout (make-span-diagram f (map-equiv e)) c →
   A ≃ C
 pr1 (equiv-left-map-cocone-universal-property-pushout f e c H) =
@@ -774,11 +807,15 @@ module _
       ( make-span-diagram h (left-map-cocone-span-diagram s c))
       ( d)) →
     ( universal-property-pushout
-      ( make-span-diagram (h ∘ left-map-span-diagram s) (right-map-span-diagram s))
+      ( make-span-diagram
+        ( h ∘ left-map-span-diagram s)
+        ( right-map-span-diagram s))
       ( vertical-comp-cocone-span-diagram s h c d))
   universal-property-pushout-rectangle-universal-property-pushout-top U =
     universal-property-pushout-pullback-property-pushout
-      ( make-span-diagram (h ∘ left-map-span-diagram s) (right-map-span-diagram s))
+      ( make-span-diagram
+        ( h ∘ left-map-span-diagram s)
+        ( right-map-span-diagram s))
       ( vertical-comp-cocone-span-diagram s h c d)
       ( λ W →
         tr
@@ -790,7 +827,9 @@ module _
               ( precomp (h ∘ left-map-span-diagram s) W)
               ( precomp (right-map-span-diagram s) W)
               ( cone-pullback-property-pushout
-                ( make-span-diagram (h ∘ left-map-span-diagram s) (right-map-span-diagram s))
+                ( make-span-diagram
+                  ( h ∘ left-map-span-diagram s)
+                  ( right-map-span-diagram s))
                 ( vertical-comp-cocone-span-diagram s h c d)
                 ( W))
               ( pasting-horizontal-cone
@@ -839,7 +878,9 @@ module _
 
   universal-property-pushout-top-universal-property-pushout-rectangle :
     universal-property-pushout
-      ( make-span-diagram (h ∘ left-map-span-diagram s) (right-map-span-diagram s))
+      ( make-span-diagram
+        ( h ∘ left-map-span-diagram s)
+        ( right-map-span-diagram s))
       ( vertical-comp-cocone-span-diagram s h c d) →
     universal-property-pushout
       ( make-span-diagram h (left-map-cocone-span-diagram s c))
@@ -867,7 +908,9 @@ module _
               ( precomp (h ∘ left-map-span-diagram s) W)
               ( precomp (right-map-span-diagram s) W)
               ( cone-pullback-property-pushout
-                ( make-span-diagram (h ∘ left-map-span-diagram s) (right-map-span-diagram s))
+                ( make-span-diagram
+                  ( h ∘ left-map-span-diagram s)
+                  ( right-map-span-diagram s))
                 ( vertical-comp-cocone-span-diagram s h c d)
                 ( W))
               ( pasting-horizontal-cone
@@ -899,13 +942,15 @@ module _
                     ( make-span-diagram h (left-map-cocone-span-diagram s c))
                     ( d)))))
             ( pullback-property-pushout-universal-property-pushout
-              ( make-span-diagram (h ∘ left-map-span-diagram s) (right-map-span-diagram s))
+              ( make-span-diagram
+                ( h ∘ left-map-span-diagram s)
+                ( right-map-span-diagram s))
               ( vertical-comp-cocone-span-diagram s h c d)
               ( U)
               ( W))))
 ```
 
-#### Extending pushouts by equivalences at the top
+#### Extending pushouts by an equivalence of arrows on top
 
 If we have a pushout square on the right, equivalences `S' ≃ S` and `B' ≃ B`,
 and a map `g' : S' → B'` making the top square commute, then the vertical
