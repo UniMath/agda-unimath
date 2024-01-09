@@ -70,9 +70,16 @@ module _
               ( λ j →
                 Σ ( C → X)
                   ( λ i →
-                    Σ ( coherence-square-maps j terminal-map i (point x))
+                    Σ ( coherence-square-maps
+                        ( j)
+                        ( terminal-map (type-mere-sphere n T))
+                        ( i)
+                        ( point x))
                       ( λ H →
-                        is-pushout terminal-map j (point x , i , H))))))
+                        is-pushout
+                          ( terminal-map (type-mere-sphere n T))
+                          ( j)
+                          ( point x , i , H))))))
 
 module _
   {l : Level} (n : ℕ) {X : UU l} {x : X} (T : has-tangent-sphere n x)
@@ -104,21 +111,24 @@ module _
   coherence-square-has-tangent-sphere :
     coherence-square-maps
       ( inclusion-tangent-sphere-has-tangent-sphere)
-      ( terminal-map)
+      ( terminal-map type-tangent-sphere-has-tangent-sphere)
       ( inclusion-complement-has-tangent-sphere)
       ( point x)
   coherence-square-has-tangent-sphere =
     pr1 (pr2 (pr2 (pr2 (pr2 T))))
 
   cocone-has-tangent-sphere :
-    cocone terminal-map inclusion-tangent-sphere-has-tangent-sphere X
+    cocone
+      ( terminal-map type-tangent-sphere-has-tangent-sphere)
+      ( inclusion-tangent-sphere-has-tangent-sphere)
+      ( X)
   pr1 cocone-has-tangent-sphere = point x
   pr1 (pr2 cocone-has-tangent-sphere) = inclusion-complement-has-tangent-sphere
   pr2 (pr2 cocone-has-tangent-sphere) = coherence-square-has-tangent-sphere
 
   is-pushout-has-tangent-sphere :
     is-pushout
-      ( terminal-map)
+      ( terminal-map type-tangent-sphere-has-tangent-sphere)
       ( inclusion-tangent-sphere-has-tangent-sphere)
       ( cocone-has-tangent-sphere)
   is-pushout-has-tangent-sphere =

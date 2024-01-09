@@ -202,7 +202,7 @@ module _
                   ( raise-unit l1)
                   ( X)
                   ( ( inv-equiv
-                        ( terminal-map , is-equiv-terminal-map-is-contr S)) ∘e
+                        ( terminal-map X , is-equiv-terminal-map-is-contr S)) ∘e
                     inv-equiv (compute-raise-unit l1)))
               ( C4) ,
             map-equiv-is-small (C5 X) S))

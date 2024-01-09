@@ -75,7 +75,7 @@ module _
     {l3 : Level} (A : UU l3) → is-trunc-map k (postcomp A f)
   is-trunc-map-postcomp-is-trunc-map is-trunc-f A =
     is-trunc-map-map-Π-is-trunc-map' k
-      ( const A unit star)
+      ( terminal-map A)
       ( const unit (X → Y) f)
       ( const unit (is-trunc-map k f) is-trunc-f)
 

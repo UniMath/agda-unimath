@@ -88,8 +88,13 @@ module _
 
   universal-property-suspension-cocone-fiber :
     {l : Level} →
-    Σ ( cocone terminal-map terminal-map (fiber (codiagonal-map f) b))
-      ( universal-property-pushout l terminal-map terminal-map)
+    Σ ( cocone
+        ( terminal-map (fiber f b))
+        ( terminal-map (fiber f b))
+        ( fiber (codiagonal-map f) b))
+      ( universal-property-pushout l
+        ( terminal-map (fiber f b))
+        ( terminal-map (fiber f b)))
   universal-property-suspension-cocone-fiber =
     universal-property-pushout-cogap-fiber-up-to-equiv f f
       ( cocone-codiagonal-map f)
@@ -98,14 +103,14 @@ module _
       ( unit)
       ( unit)
       ( inv-equiv
-        ( terminal-map ,
+        ( terminal-map (fiber id b) ,
         ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
       ( inv-equiv
-        ( terminal-map ,
+        ( terminal-map (fiber id b) ,
           ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
       ( id-equiv)
-      ( terminal-map)
-      ( terminal-map)
+      ( terminal-map (fiber f b))
+      ( terminal-map (fiber f b))
       ( λ _ → eq-is-contr (is-torsorial-path' b))
       ( λ _ → eq-is-contr (is-torsorial-path' b))
 
@@ -117,8 +122,8 @@ module _
   universal-property-suspension-fiber :
     {l : Level} →
     universal-property-pushout l
-      ( terminal-map)
-      ( terminal-map)
+      ( terminal-map (fiber f b))
+      ( terminal-map (fiber f b))
       ( suspension-cocone-fiber)
   universal-property-suspension-fiber =
     pr2 universal-property-suspension-cocone-fiber
@@ -126,24 +131,24 @@ module _
   fiber-codiagonal-map-suspension-fiber :
     suspension (fiber f b) → fiber (codiagonal-map f) b
   fiber-codiagonal-map-suspension-fiber =
-    cogap terminal-map terminal-map suspension-cocone-fiber
+    cogap-suspension' suspension-cocone-fiber
 
   is-equiv-fiber-codiagonal-map-suspension-fiber :
     is-equiv fiber-codiagonal-map-suspension-fiber
   is-equiv-fiber-codiagonal-map-suspension-fiber =
     is-equiv-up-pushout-up-pushout
-      ( terminal-map)
-      ( terminal-map)
-      ( cocone-pushout terminal-map terminal-map)
+      ( terminal-map (fiber f b))
+      ( terminal-map (fiber f b))
+      ( cocone-suspension (fiber f b))
       ( suspension-cocone-fiber)
-      ( cogap terminal-map terminal-map (suspension-cocone-fiber))
+      ( cogap-suspension' (suspension-cocone-fiber))
       ( htpy-cocone-map-universal-property-pushout
-        ( terminal-map)
-        ( terminal-map)
-        ( cocone-pushout terminal-map terminal-map)
-        ( up-pushout terminal-map terminal-map)
+        ( terminal-map (fiber f b))
+        ( terminal-map (fiber f b))
+        ( cocone-suspension (fiber f b))
+        ( up-suspension' (fiber f b))
         ( suspension-cocone-fiber))
-      ( up-pushout terminal-map terminal-map)
+      ( up-suspension' (fiber f b))
       ( universal-property-suspension-fiber)
 
   equiv-fiber-codiagonal-map-suspension-fiber :

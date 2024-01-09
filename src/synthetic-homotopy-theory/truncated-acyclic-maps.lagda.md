@@ -118,12 +118,12 @@ module _
 
   is-truncated-acyclic-map-terminal-map-is-truncated-acyclic :
     is-truncated-acyclic k A →
-    is-truncated-acyclic-map k (terminal-map {A = A})
+    is-truncated-acyclic-map k (terminal-map A)
   is-truncated-acyclic-map-terminal-map-is-truncated-acyclic ac u =
     is-truncated-acyclic-equiv (equiv-fiber-terminal-map u) ac
 
   is-truncated-acyclic-is-truncated-acyclic-map-terminal-map :
-    is-truncated-acyclic-map k (terminal-map {A = A}) →
+    is-truncated-acyclic-map k (terminal-map A) →
     is-truncated-acyclic k A
   is-truncated-acyclic-is-truncated-acyclic-map-terminal-map ac =
     is-truncated-acyclic-equiv inv-equiv-fiber-terminal-map-star (ac star)
@@ -150,9 +150,10 @@ module _
     is-emb (const A (type-Truncated-Type X))
   is-emb-const-is-truncated-acyclic-Truncated-Type ac X =
     is-emb-comp
-      ( precomp terminal-map (type-Truncated-Type X))
+      ( precomp (terminal-map A) (type-Truncated-Type X))
       ( map-inv-left-unit-law-function-type (type-Truncated-Type X))
-      ( is-epimorphism-is-truncated-acyclic-map-Truncated-Type terminal-map
+      ( is-epimorphism-is-truncated-acyclic-map-Truncated-Type
+        (terminal-map A)
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac)
         ( X))
       ( is-emb-is-equiv
@@ -165,11 +166,11 @@ module _
   is-truncated-acyclic-is-emb-const-Truncated-Type e =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
       ( is-truncated-acyclic-map-is-epimorphism-Truncated-Type
-        ( terminal-map)
+        ( terminal-map A)
         ( λ X →
           is-emb-triangle-is-equiv'
             ( const A (type-Truncated-Type X))
-            ( precomp terminal-map (type-Truncated-Type X))
+            ( precomp (terminal-map A) (type-Truncated-Type X))
             ( map-inv-left-unit-law-function-type (type-Truncated-Type X))
             ( refl-htpy)
             ( is-equiv-map-inv-left-unit-law-function-type
@@ -357,7 +358,7 @@ module _
   is-truncated-acyclic-succ-is-truncated-acyclic-succ-type-trunc ac =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
       ( is-truncated-acyclic-map-comp
-        ( terminal-map)
+        ( terminal-map (type-trunc k A))
         ( unit-trunc)
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic
           ( type-trunc k A)
@@ -371,7 +372,7 @@ module _
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
       ( type-trunc k A)
       ( is-truncated-acyclic-map-left-factor
-        ( terminal-map)
+        ( terminal-map (type-trunc k A))
         ( unit-trunc)
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac)
         ( is-truncated-acyclic-map-succ-unit-trunc A))
@@ -441,7 +442,7 @@ module _
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
       ( Σ A B)
       ( is-truncated-acyclic-map-comp
-        ( terminal-map)
+        ( terminal-map A)
         ( pr1)
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)
         ( λ a → is-truncated-acyclic-equiv (equiv-fiber-pr1 B a) (ac-B a)))
@@ -462,12 +463,12 @@ module _
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
       ( A × B)
       ( is-truncated-acyclic-map-comp
-        ( terminal-map)
+        ( terminal-map B)
         ( pr2)
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic B ac-B)
         ( is-truncated-acyclic-map-horizontal-map-cone-is-pullback
-          ( terminal-map)
-          ( terminal-map)
+          ( terminal-map A)
+          ( terminal-map B)
           ( cone-prod A B)
           ( is-pullback-prod A B)
           ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)))
@@ -490,7 +491,7 @@ module _
       ( λ a →
         is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
           ( is-truncated-acyclic-map-left-factor
-            ( terminal-map)
+            ( terminal-map A)
             ( point a)
             ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic
               ( unit)
