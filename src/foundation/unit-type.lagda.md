@@ -49,7 +49,7 @@ ind-unit p star = p
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l : Level} (A : UU l)
   where
 
   terminal-map : A → unit
@@ -76,8 +76,8 @@ raise-unit l = raise l unit
 raise-star : {l : Level} → raise l unit
 raise-star = map-raise star
 
-raise-terminal-map : {l1 l2 : Level} {A : UU l1} → A → raise-unit l2
-raise-terminal-map {l2 = l2} = const _ (raise-unit l2) raise-star
+raise-terminal-map : {l1 l2 : Level} (A : UU l1) → A → raise-unit l2
+raise-terminal-map {l2 = l2} A = const A (raise-unit l2) raise-star
 
 compute-raise-unit : (l : Level) → unit ≃ raise-unit l
 compute-raise-unit l = compute-raise l unit
@@ -103,18 +103,18 @@ module _
 
   abstract
     is-equiv-terminal-map-is-contr :
-      is-contr A → is-equiv (terminal-map {A = A})
+      is-contr A → is-equiv (terminal-map A)
     pr1 (pr1 (is-equiv-terminal-map-is-contr H)) = ind-unit (center H)
     pr2 (pr1 (is-equiv-terminal-map-is-contr H)) = ind-unit refl
     pr1 (pr2 (is-equiv-terminal-map-is-contr H)) x = center H
     pr2 (pr2 (is-equiv-terminal-map-is-contr H)) = contraction H
 
   equiv-unit-is-contr : is-contr A → A ≃ unit
-  pr1 (equiv-unit-is-contr H) = terminal-map
+  pr1 (equiv-unit-is-contr H) = terminal-map A
   pr2 (equiv-unit-is-contr H) = is-equiv-terminal-map-is-contr H
 
   abstract
-    is-contr-is-equiv-const : is-equiv (terminal-map {A = A}) → is-contr A
+    is-contr-is-equiv-const : is-equiv (terminal-map A) → is-contr A
     pr1 (is-contr-is-equiv-const ((g , G) , (h , H))) = h star
     pr2 (is-contr-is-equiv-const ((g , G) , (h , H))) = H
 ```

@@ -66,7 +66,7 @@ module _
     map-trunc-Prop
       ( pr1)
       ( is-surjective-is-0-acyclic-map
-        ( terminal-map)
+        ( terminal-map A)
         ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac)
         ( star))
 
@@ -74,10 +74,10 @@ module _
   is-0-acyclic-is-inhabited h =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
       ( is-0-acyclic-map-is-surjective
-        ( terminal-map)
+        ( terminal-map A)
         ( λ u →
           map-trunc-Prop
-            (λ a → pair a (contraction is-contr-unit u))
+            (λ a → (a , (contraction is-contr-unit u)))
             ( h)))
 ```
 

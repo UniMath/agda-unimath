@@ -64,8 +64,8 @@ universal-property-pushout-suspension :
   (s : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-pushout-suspension l X Y s =
   universal-property-pushout l
-    ( const X unit star)
-    ( const X unit star)
+    ( terminal-map X)
+    ( terminal-map X)
     ( suspension-cocone-suspension-structure s)
 ```
 
@@ -78,8 +78,8 @@ triangle-ev-suspension :
   (Z : UU l3) →
   ( ( suspension-structure-suspension-cocone) ∘
     ( cocone-map
-      ( const X unit star)
-      ( const X unit star)
+      ( terminal-map X)
+      ( terminal-map X)
       ( suspension-cocone-suspension-structure s))) ~
   ( ev-suspension s Z)
 triangle-ev-suspension (N , S , merid) Z h = refl
@@ -94,8 +94,8 @@ is-equiv-ev-suspension {X = X} s up-Y Z =
     ( ev-suspension s Z)
     ( suspension-structure-suspension-cocone)
     ( cocone-map
-      ( const X unit star)
-      ( const X unit star)
+      ( terminal-map X)
+      ( terminal-map X)
       ( suspension-cocone-suspension-structure s))
     ( inv-htpy (triangle-ev-suspension s Z))
     ( up-Y Z)

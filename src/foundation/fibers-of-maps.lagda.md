@@ -71,22 +71,22 @@ module _
   where
 
   equiv-fiber-terminal-map :
-    (u : unit) → fiber (terminal-map {A = A}) u ≃ A
+    (u : unit) → fiber (terminal-map A) u ≃ A
   equiv-fiber-terminal-map u =
     right-unit-law-Σ-is-contr
-      ( λ a → is-prop-is-contr is-contr-unit (terminal-map a) u)
+      ( λ a → is-prop-is-contr is-contr-unit (terminal-map A a) u)
 
   inv-equiv-fiber-terminal-map :
-    (u : unit) → A ≃ fiber (terminal-map {A = A}) u
+    (u : unit) → A ≃ fiber (terminal-map A) u
   inv-equiv-fiber-terminal-map u =
     inv-equiv (equiv-fiber-terminal-map u)
 
   equiv-fiber-terminal-map-star :
-    fiber (terminal-map {A = A}) star ≃ A
+    fiber (terminal-map A) star ≃ A
   equiv-fiber-terminal-map-star = equiv-fiber-terminal-map star
 
   inv-equiv-fiber-terminal-map-star :
-    A ≃ fiber (terminal-map {A = A}) star
+    A ≃ fiber (terminal-map A) star
   inv-equiv-fiber-terminal-map-star =
     inv-equiv equiv-fiber-terminal-map-star
 ```
@@ -99,13 +99,13 @@ module _
   where
 
   equiv-total-fiber-terminal-map :
-    Σ unit (fiber (terminal-map {A = A})) ≃ A
+    Σ unit (fiber (terminal-map A)) ≃ A
   equiv-total-fiber-terminal-map =
     ( left-unit-law-Σ-is-contr is-contr-unit star) ∘e
     ( equiv-tot equiv-fiber-terminal-map)
 
   inv-equiv-total-fiber-terminal-map :
-    A ≃ Σ unit (fiber (terminal-map {A = A}))
+    A ≃ Σ unit (fiber (terminal-map A))
   inv-equiv-total-fiber-terminal-map =
     inv-equiv equiv-total-fiber-terminal-map
 ```

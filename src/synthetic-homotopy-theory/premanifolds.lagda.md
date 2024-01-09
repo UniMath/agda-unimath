@@ -78,7 +78,7 @@ module _
     (x : type-Premanifold) →
     coherence-square-maps
       ( inclusion-tangent-sphere-Premanifold x)
-      ( terminal-map)
+      ( terminal-map (type-tangent-sphere-Premanifold x))
       ( inclusion-complement-Premanifold x)
       ( point x)
   coherence-square-Premanifold x =
@@ -87,7 +87,7 @@ module _
   cocone-Premanifold :
     (x : type-Premanifold) →
     cocone
-      ( terminal-map)
+      ( terminal-map (type-tangent-sphere-Premanifold x))
       ( inclusion-tangent-sphere-Premanifold x)
       ( type-Premanifold)
   cocone-Premanifold x =
@@ -96,7 +96,7 @@ module _
   is-pushout-Premanifold :
     (x : type-Premanifold) →
     is-pushout
-      ( terminal-map)
+      ( terminal-map (type-tangent-sphere-Premanifold x))
       ( inclusion-tangent-sphere-Premanifold x)
       ( cocone-Premanifold x)
   is-pushout-Premanifold x =

@@ -76,7 +76,8 @@ We can **left shift** a tower of types by padding it with the
 left-shift-tower : {l : Level} → tower l → tower l
 pr1 (left-shift-tower {l} A) zero-ℕ = raise-unit l
 pr1 (left-shift-tower A) (succ-ℕ n) = type-tower A n
-pr2 (left-shift-tower A) zero-ℕ = raise-terminal-map
+pr2 (left-shift-tower A) zero-ℕ =
+  raise-terminal-map (type-tower (left-shift-tower A) 1)
 pr2 (left-shift-tower A) (succ-ℕ n) = map-tower A n
 
 iterated-left-shift-tower : {l : Level} (n : ℕ) → tower l → tower l

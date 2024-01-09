@@ -68,8 +68,8 @@ module _
     ( ( map-equiv
         ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
       ( dependent-cocone-map
-        ( const X unit star)
-        ( const X unit star)
+        ( terminal-map X)
+        ( terminal-map X)
         ( suspension-cocone-suspension-structure s)
         ( B))) ~
     ( dependent-ev-suspension s B)

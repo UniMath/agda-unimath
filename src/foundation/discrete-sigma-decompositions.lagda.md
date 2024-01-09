@@ -87,10 +87,11 @@ module _
       ( right-unit-law-Σ-is-contr is-discrete ∘e
         matching-correspondence-Σ-Decomposition D))
   pr1 (pr2 equiv-discrete-is-discrete-Σ-Decomposition) x =
-    ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
+    ( map-equiv (compute-raise-unit l4) ∘
+      terminal-map (cotype-Σ-Decomposition D x) ,
       is-equiv-comp
         ( map-equiv (compute-raise-unit l4))
-        ( terminal-map)
+        ( terminal-map (cotype-Σ-Decomposition D x))
         ( is-equiv-terminal-map-is-contr (is-discrete x))
         ( is-equiv-map-equiv ( compute-raise-unit l4)))
   pr2 (pr2 equiv-discrete-is-discrete-Σ-Decomposition) a =
