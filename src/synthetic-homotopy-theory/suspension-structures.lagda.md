@@ -47,7 +47,7 @@ g : unit → Y
 and a homotopy
 
 ```text
-h : (x : X) → (f ∘ (const X unit star)) x ＝ (g ∘ (const X unit star)) x
+h : (x : X) → (f ∘ (terminal-map X)) x ＝ (g ∘ (terminal-map X)) x
 ```
 
 Using the
