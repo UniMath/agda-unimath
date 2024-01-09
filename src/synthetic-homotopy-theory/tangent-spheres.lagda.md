@@ -71,10 +71,10 @@ module _
                 Σ ( C → X)
                   ( λ i →
                     Σ ( coherence-square-maps
-                          ( j)
-                          ( terminal-map (type-mere-sphere n T))
-                          ( i)
-                          ( point x))
+                        ( j)
+                        ( terminal-map (type-mere-sphere n T))
+                        ( i)
+                        ( point x))
                       ( λ H →
                         is-pushout
                           ( terminal-map (type-mere-sphere n T))
