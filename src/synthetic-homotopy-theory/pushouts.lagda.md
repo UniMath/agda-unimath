@@ -285,7 +285,7 @@ Given a pushout square with a
    v    ⌜  v   \
    A ----> ∙    \
     \ inl   \   |
-  m  \  cogap-cocone-span-diagram\  |
+  m  \       \ cogap-cocone-span-diagram
       \       ∨ v
        \-----> X
 ```
@@ -308,21 +308,30 @@ module _
 
   equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span :
     fiber (left-map-cocone-span-diagram s c ∘ left-map-span-diagram s) x ≃
-    fiber (cogap-cocone-span-diagram s c ∘ inl-pushout s ∘ left-map-span-diagram s) x
+    fiber
+      ( cogap-cocone-span-diagram s c ∘ inl-pushout s ∘ left-map-span-diagram s)
+      ( x)
   equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span =
-    equiv-tot (λ y → equiv-concat (compute-inl-cogap-cocone-span-diagram s c (left-map-span-diagram s y)) x)
+    equiv-tot
+      ( λ y →
+        equiv-concat
+          ( compute-inl-cogap-cocone-span-diagram s c
+            ( left-map-span-diagram s y))
+          ( x))
 
   equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl :
     fiber (left-map-cocone-span-diagram s c) x ≃
     fiber (cogap-cocone-span-diagram s c ∘ inl-pushout s) x
   equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl =
-    equiv-tot (λ a → equiv-concat (compute-inl-cogap-cocone-span-diagram s c a) x)
+    equiv-tot
+      ( λ a → equiv-concat (compute-inl-cogap-cocone-span-diagram s c a) x)
 
   equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr :
     fiber (right-map-cocone-span-diagram s c) x ≃
     fiber (cogap-cocone-span-diagram s c ∘ inr-pushout s) x
   equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr =
-    equiv-tot (λ b → equiv-concat (compute-inr-cogap-cocone-span-diagram s c b) x)
+    equiv-tot
+      ( λ b → equiv-concat (compute-inr-cogap-cocone-span-diagram s c b) x)
 
   left-map-span-cogap-cocone-span-diagram-fiber :
     fiber (left-map-cocone-span-diagram s c ∘ left-map-span-diagram s) x →
