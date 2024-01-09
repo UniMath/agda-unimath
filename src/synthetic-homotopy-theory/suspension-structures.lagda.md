@@ -74,7 +74,7 @@ We call this type of structure `suspension-structure`.
 ```agda
 suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-cocone X Y = cocone (terminal-map {A = X}) (terminal-map {A = X}) Y
+suspension-cocone X Y = cocone (terminal-map X) (terminal-map X) Y
 ```
 
 ### Suspension structures on a type

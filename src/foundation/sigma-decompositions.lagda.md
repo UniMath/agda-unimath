@@ -111,7 +111,7 @@ module _
     (is-inhabited (indexing-type-Σ-Decomposition)) → (is-inhabited A)
   is-inhabited-base-is-inhabited-indexing-type-Σ-Decomposition p =
     map-is-inhabited
-      (map-inv-equiv matching-correspondence-Σ-Decomposition)
+      ( map-inv-equiv matching-correspondence-Σ-Decomposition)
       ( is-inhabited-Σ p is-inhabited-cotype-Σ-Decomposition)
 ```
 

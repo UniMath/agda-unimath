@@ -68,23 +68,23 @@ they star in the freudenthal suspension theorem and give us a definition of
 ```agda
 suspension :
   {l : Level} → UU l → UU l
-suspension X = pushout (terminal-map {A = X}) (terminal-map {A = X})
+suspension X = pushout (terminal-map X) (terminal-map X)
 
 north-suspension :
   {l : Level} {X : UU l} → suspension X
 north-suspension {X = X} =
-  inl-pushout terminal-map terminal-map star
+  inl-pushout (terminal-map X) (terminal-map X) star
 
 south-suspension :
   {l : Level} {X : UU l} → suspension X
 south-suspension {X = X} =
-  inr-pushout terminal-map terminal-map star
+  inr-pushout (terminal-map X) (terminal-map X) star
 
 meridian-suspension :
   {l : Level} {X : UU l} → X →
   north-suspension {X = X} ＝ south-suspension {X = X}
 meridian-suspension {X = X} =
-  glue-pushout terminal-map terminal-map
+  glue-pushout (terminal-map X) (terminal-map X)
 
 suspension-structure-suspension :
   {l : Level} (X : UU l) → suspension-structure X (suspension X)
@@ -94,14 +94,22 @@ pr2 (pr2 (suspension-structure-suspension X)) = meridian-suspension
 
 cocone-suspension :
   {l : Level} (X : UU l) →
-  cocone terminal-map terminal-map (pushout terminal-map terminal-map)
+  cocone (terminal-map X) (terminal-map X) (suspension X)
 cocone-suspension X =
-  cocone-pushout (terminal-map {A = X}) (terminal-map {A = X})
+  cocone-pushout (terminal-map X) (terminal-map X)
 
 cogap-suspension' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  cocone terminal-map terminal-map Y → pushout terminal-map terminal-map → Y
-cogap-suspension' {X = X} = cogap (terminal-map {A = X}) (terminal-map {A = X})
+  cocone (terminal-map X) (terminal-map X) Y → suspension X → Y
+cogap-suspension' {X = X} = cogap (terminal-map X) (terminal-map X)
+
+up-suspension' :
+  {l1 l2 : Level} (X : UU l1) →
+  universal-property-pushout l2
+    ( terminal-map X)
+    ( terminal-map X)
+    ( cocone-suspension X)
+up-suspension' X = up-pushout (terminal-map X) (terminal-map X)
 ```
 
 ### The cogap map of a suspension structure
@@ -147,7 +155,7 @@ module _
       ( cogap-suspension)
   is-section-cogap-suspension =
     ( suspension-structure-suspension-cocone) ·l
-    ( is-section-cogap terminal-map terminal-map) ·r
+    ( is-section-cogap (terminal-map X) (terminal-map X)) ·r
     ( suspension-cocone-suspension-structure)
 
   is-retraction-cogap-suspension :
@@ -155,7 +163,7 @@ module _
       ( ev-suspension (suspension-structure-suspension X) Z)
       ( cogap-suspension)
   is-retraction-cogap-suspension =
-    ( is-retraction-cogap terminal-map terminal-map)
+    ( is-retraction-cogap (terminal-map X) (terminal-map X))
 
 up-suspension :
   {l1 : Level} {X : UU l1} →
@@ -231,7 +239,7 @@ dup-suspension {X = X} B =
     ( ( equiv-dependent-suspension-structure-suspension-cocone
         ( suspension-structure-suspension X)
         ( B)) ∘e
-      ( equiv-dup-pushout terminal-map terminal-map B))
+      ( equiv-dup-pushout (terminal-map X) (terminal-map X) B))
     ( triangle-dependent-ev-suspension (suspension-structure-suspension X) B)
 
 equiv-dup-suspension :
@@ -515,15 +523,13 @@ is-contr-suspension-is-contr :
 is-contr-suspension-is-contr {l} {X} is-contr-X =
   is-contr-is-equiv'
     ( unit)
-    ( pr1 (pr2 (cocone-pushout terminal-map terminal-map)))
+    ( pr1 (pr2 (cocone-suspension X)))
     ( is-equiv-universal-property-pushout
-      ( terminal-map)
-      ( terminal-map)
-      ( cocone-pushout
-        ( terminal-map)
-        ( terminal-map))
-      ( is-equiv-is-contr terminal-map is-contr-X is-contr-unit)
-      ( up-pushout terminal-map terminal-map))
+      ( terminal-map X)
+      ( terminal-map X)
+      ( cocone-suspension X)
+      ( is-equiv-is-contr (terminal-map X) is-contr-X is-contr-unit)
+      ( up-suspension' X))
     ( is-contr-unit)
 ```
 
@@ -573,7 +579,8 @@ module _
         ( type-Truncated-Type Y))
       ( is-equiv-ev-suspension
         ( suspension-structure-suspension X)
-        ( up-pushout terminal-map terminal-map) (type-Truncated-Type Y))
+        ( up-suspension' X)
+        ( type-Truncated-Type Y))
       ( is-equiv-pr1-is-contr
         ( λ y →
           is-torsorial-fiber-Id

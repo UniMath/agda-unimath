@@ -146,7 +146,7 @@ module _
 
   cone-fiber-fam : cone (pr1 {B = B}) (point a) (B a)
   pr1 cone-fiber-fam = fiber-inclusion B a
-  pr1 (pr2 cone-fiber-fam) = terminal-map
+  pr1 (pr2 cone-fiber-fam) = terminal-map (B a)
   pr2 (pr2 cone-fiber-fam) = refl-htpy
 
   abstract

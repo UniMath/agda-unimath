@@ -145,7 +145,8 @@ left-shift-dependent-tower :
   dependent-tower l2 A → dependent-tower l2 (left-shift-tower A)
 pr1 (left-shift-dependent-tower {l2 = l2} B) zero-ℕ x = raise-unit l2
 pr1 (left-shift-dependent-tower B) (succ-ℕ n) = family-dependent-tower B n
-pr2 (left-shift-dependent-tower B) zero-ℕ _ = raise-terminal-map
+pr2 (left-shift-dependent-tower B) zero-ℕ x =
+  raise-terminal-map (family-dependent-tower (left-shift-dependent-tower B) 1 x)
 pr2 (left-shift-dependent-tower B) (succ-ℕ n) = map-dependent-tower B n
 ```
 
