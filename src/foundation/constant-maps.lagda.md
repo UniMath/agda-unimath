@@ -62,8 +62,8 @@ module _
   {l : Level} {A : UU l}
   where
 
-  fiber-const : (x y : A) → fiber (point x) y ≃ (x ＝ y)
-  fiber-const x y = left-unit-law-prod
+  compute-fiber-point : (x y : A) → fiber (point x) y ≃ (x ＝ y)
+  compute-fiber-point x y = left-unit-law-prod
 
   abstract
     is-trunc-map-const-is-trunc :
@@ -72,7 +72,7 @@ module _
     is-trunc-map-const-is-trunc k is-trunc-A x y =
       is-trunc-equiv k
         ( x ＝ y)
-        ( fiber-const x y)
+        ( compute-fiber-point x y)
         ( is-trunc-A x y)
 
   abstract
