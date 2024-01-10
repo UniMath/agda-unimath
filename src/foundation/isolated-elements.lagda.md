@@ -92,12 +92,12 @@ module _
   is-decidable-point-is-isolated :
     is-isolated a → is-decidable-map (point a)
   is-decidable-point-is-isolated d x =
-    is-decidable-equiv (fiber-const a x) (d x)
+    is-decidable-equiv (compute-fiber-point a x) (d x)
 
   is-isolated-is-decidable-point :
     is-decidable-map (point a) → is-isolated a
   is-isolated-is-decidable-point d x =
-    is-decidable-equiv' (fiber-const a x) (d x)
+    is-decidable-equiv' (compute-fiber-point a x) (d x)
 
   cases-Eq-isolated-element :
     is-isolated a → (x : A) → is-decidable (a ＝ x) → UU lzero
@@ -253,7 +253,7 @@ module _
   is-emb-point-isolated-element =
     is-emb-comp
       ( inclusion-isolated-element A)
-      ( const unit (isolated-element A) a)
+      ( point a)
       ( is-emb-inclusion-isolated-element A)
       ( is-emb-is-injective
         ( is-set-isolated-element A)

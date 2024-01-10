@@ -124,9 +124,11 @@ eq-Eq-bool :
 eq-Eq-bool {true} {true} star = refl
 eq-Eq-bool {false} {false} star = refl
 
-neq-false-true-bool :
-  false ≠ true
+neq-false-true-bool : false ≠ true
 neq-false-true-bool ()
+
+neq-true-false-bool : true ≠ false
+neq-true-false-bool ()
 ```
 
 ## Structure
@@ -195,12 +197,12 @@ Fin-two-ℕ-bool true = inl (inr star)
 Fin-two-ℕ-bool false = inr star
 
 abstract
-  is-retraction-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
+  is-retraction-Fin-two-ℕ-bool : Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ ~ id
   is-retraction-Fin-two-ℕ-bool (inl (inr star)) = refl
   is-retraction-Fin-two-ℕ-bool (inr star) = refl
 
 abstract
-  is-section-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
+  is-section-Fin-two-ℕ-bool : bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool ~ id
   is-section-Fin-two-ℕ-bool true = refl
   is-section-Fin-two-ℕ-bool false = refl
 
@@ -261,20 +263,6 @@ pr2 equiv-neg-bool = is-equiv-neg-bool
 abstract
   not-equiv-const :
     (b : bool) → ¬ (is-equiv (const bool bool b))
-  not-equiv-const true (pair (pair g G) (pair h H)) =
-    neq-false-true-bool (inv (G false))
-  not-equiv-const false (pair (pair g G) (pair h H)) =
-    neq-false-true-bool (G true)
-```
-
-### The constant function `const bool bool b` is injective
-
-```agda
-abstract
-  is-injective-const-true : is-injective (const unit bool true)
-  is-injective-const-true {star} {star} p = refl
-
-abstract
-  is-injective-const-false : is-injective (const unit bool false)
-  is-injective-const-false {star} {star} p = refl
+  not-equiv-const true ((g , G) , _) = neq-true-false-bool (G false)
+  not-equiv-const false ((g , G) , _) = neq-false-true-bool (G true)
 ```

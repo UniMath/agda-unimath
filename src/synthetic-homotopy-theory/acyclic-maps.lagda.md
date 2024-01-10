@@ -518,7 +518,7 @@ module _
             ( terminal-map A)
             ( point a)
             ( is-acyclic-map-terminal-map-is-acyclic unit is-acyclic-unit)
-            ( λ b → is-acyclic-equiv (fiber-const a b) (l-ac a b))))
+            ( λ b → is-acyclic-equiv (compute-fiber-point a b) (l-ac a b))))
 ```
 
 ## See also

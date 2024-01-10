@@ -496,7 +496,10 @@ module _
             ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic
               ( unit)
               ( is-truncated-acyclic-unit))
-            ( λ b → is-truncated-acyclic-equiv (fiber-const a b) (l-ac a b))))
+            ( λ b →
+              is-truncated-acyclic-equiv
+                ( compute-fiber-point a b)
+                ( l-ac a b))))
 ```
 
 ### Acyclic maps are closed under pushouts
