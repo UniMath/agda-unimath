@@ -39,26 +39,26 @@ module _
   where
 
   square-fiber :
-    f ∘ pr1 ~ const unit B b ∘ const (fiber f b) unit star
+    f ∘ pr1 ~ point b ∘ terminal-map (fiber f b)
   square-fiber = pr2
 
-  cone-fiber : cone f (const unit B b) (fiber f b)
+  cone-fiber : cone f (point b) (fiber f b)
   pr1 cone-fiber = pr1
-  pr1 (pr2 cone-fiber) = const (fiber f b) unit star
+  pr1 (pr2 cone-fiber) = terminal-map (fiber f b)
   pr2 (pr2 cone-fiber) = square-fiber
 
   abstract
-    is-pullback-cone-fiber : is-pullback f (const unit B b) cone-fiber
+    is-pullback-cone-fiber : is-pullback f (point b) cone-fiber
     is-pullback-cone-fiber =
       is-equiv-tot-is-fiberwise-equiv
         ( λ a → is-equiv-map-inv-left-unit-law-prod)
 
   abstract
     universal-property-pullback-cone-fiber :
-      universal-property-pullback f (const unit B b) cone-fiber
+      universal-property-pullback f (point b) cone-fiber
     universal-property-pullback-cone-fiber =
       universal-property-pullback-is-pullback f
-        ( const unit B b)
+        ( point b)
         ( cone-fiber)
         ( is-pullback-cone-fiber)
 ```
