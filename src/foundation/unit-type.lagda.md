@@ -15,6 +15,7 @@ open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncated-types
@@ -169,4 +170,11 @@ abstract
 raise-unit-Set : Set lzero
 pr1 raise-unit-Set = unit
 pr2 raise-unit-Set = is-set-unit
+```
+
+### The map `point x` is injective for every `x`
+
+```agda
+is-injective-point : {l : Level} {A : UU l} (x : A) → is-injective (point x)
+is-injective-point _ _ = refl
 ```

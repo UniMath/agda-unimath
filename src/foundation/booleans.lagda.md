@@ -266,15 +266,3 @@ abstract
   not-equiv-const true ((g , G) , _) = neq-true-false-bool (G false)
   not-equiv-const false ((g , G) , _) = neq-false-true-bool (G true)
 ```
-
-### The constant function `const bool bool b` is injective
-
-```agda
-abstract
-  is-injective-const-true : is-injective (const unit bool true)
-  is-injective-const-true {star} {star} p = refl
-
-abstract
-  is-injective-const-false : is-injective (const unit bool false)
-  is-injective-const-false {star} {star} p = refl
-```
