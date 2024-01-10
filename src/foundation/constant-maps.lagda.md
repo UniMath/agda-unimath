@@ -55,7 +55,7 @@ module _
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
-### A type is `k+1`-truncated if and only if all point inclusions are `k`-truncated
+### A type is `k+1`-truncated if and only if all point inclusions are `k`-truncated maps
 
 ```agda
 module _

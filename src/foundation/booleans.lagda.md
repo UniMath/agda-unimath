@@ -257,7 +257,7 @@ pr1 equiv-neg-bool = neg-bool
 pr2 equiv-neg-bool = is-equiv-neg-bool
 ```
 
-### The constant functions `const bool bool b` are not equivalences
+### The constant function `const bool bool b` is not an equivalence
 
 ```agda
 abstract
