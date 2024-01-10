@@ -253,7 +253,7 @@ module _
   is-emb-point-isolated-element =
     is-emb-comp
       ( inclusion-isolated-element A)
-      ( const unit (isolated-element A) a)
+      ( point a)
       ( is-emb-inclusion-isolated-element A)
       ( is-emb-is-injective
         ( is-set-isolated-element A)

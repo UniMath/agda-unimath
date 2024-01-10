@@ -97,9 +97,9 @@ is-equiv-inl-cofiber-point :
   {l : Level} {B : UU l} (b : B) → is-equiv (inl-cofiber (point b))
 is-equiv-inl-cofiber-point {B = B} b =
   is-equiv-universal-property-pushout'
-    ( const unit B b)
+    ( point b)
     ( terminal-map unit)
-    ( cocone-pushout (const unit B b) (terminal-map unit))
+    ( cocone-pushout (point b) (terminal-map unit))
     ( is-equiv-is-contr (terminal-map unit) is-contr-unit is-contr-unit)
-    ( up-pushout (const unit B b) (terminal-map unit))
+    ( up-pushout (point b) (terminal-map unit))
 ```
