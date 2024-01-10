@@ -149,8 +149,8 @@ abstract
 cone-Id :
   {l : Level} {A : UU l} (x y : A) →
   cone (point x) (point y) (x ＝ y)
-pr1 (cone-Id x y) = const (x ＝ y) unit star
-pr1 (pr2 (cone-Id x y)) = const (x ＝ y) unit star
+pr1 (cone-Id x y) = terminal-map (x ＝ y)
+pr1 (pr2 (cone-Id x y)) = terminal-map (x ＝ y)
 pr2 (pr2 (cone-Id x y)) = id
 
 inv-gap-cone-Id :
@@ -186,7 +186,7 @@ abstract
 cone-Id' :
   {l : Level} {A : UU l} (t : A × A) →
   cone (point t) (diagonal A) (pr1 t ＝ pr2 t)
-pr1 (cone-Id' {A = A} (x , y)) = const (x ＝ y) unit star
+pr1 (cone-Id' {A = A} (x , y)) = terminal-map (x ＝ y)
 pr1 (pr2 (cone-Id' {A = A} (x , y))) = const (x ＝ y) A x
 pr2 (pr2 (cone-Id' {A = A} (x , y))) p = eq-pair-eq-pr2 (inv p)
 

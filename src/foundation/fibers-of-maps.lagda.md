@@ -39,12 +39,12 @@ module _
   where
 
   square-fiber :
-    f ∘ pr1 ~ point b ∘ const (fiber f b) unit star
+    f ∘ pr1 ~ point b ∘ terminal-map (fiber f b)
   square-fiber = pr2
 
   cone-fiber : cone f (point b) (fiber f b)
   pr1 cone-fiber = pr1
-  pr1 (pr2 cone-fiber) = const (fiber f b) unit star
+  pr1 (pr2 cone-fiber) = terminal-map (fiber f b)
   pr2 (pr2 cone-fiber) = square-fiber
 
   abstract
