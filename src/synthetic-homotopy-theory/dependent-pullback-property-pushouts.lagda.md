@@ -83,6 +83,21 @@ dependent-pullback-property-pushout l {S} {A} {B} f g {X} (i , j , H) =
 
 ### The dependent pullback property is logically equivalent to the pullback property
 
+Consider a [cocone](synthetic-homotopy-theory.cocones-under-spans.md)
+
+```text
+        g
+    S -----> B
+    |        |
+  f |        | j
+    V        V
+    A -----> X  .
+        i
+```
+
+The non-dependent pullback property follows from the dependent one by applying
+the dependent pullback property to the constant type family `λ _ → Y`.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -117,7 +132,78 @@ module _
                       ( coherence-square-cocone f g c s))))) ∙
           ( eq-htpy-concat-htpy _ _))))
       ( dpp-c (λ _ → Y))
+```
 
+In the converse direction, we use the fact that by the
+[type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md),
+dependent functions distribute over Σ-types. That, and a handful of technical
+lemmas about [transport](foundation.transport-along-identifications.md) in
+[precomposed type families](foundation.precomposition-type-families.md) and
+[precomposition](orthogonal-factorization-systems.precomposition-lifts-families-of-elements.md)
+in
+[lifts of families of elements](orthogonal-factorization-systems.lifts-families-of-elements.md),
+allow us to construct the following
+[commuting cube](foundation.commuting-cubes-of-maps.md):
+
+```text
+                                Σ (h : X → X) ((x : X) → P (h x))
+                                       /        |        \
+                                     /          |          \
+                                   /            |            \
+                                 /              |              \
+                               /                |                \
+                             /                  |                  \
+                           /                    |                    \
+                         V                      V                      V
+  Σ (h : A → X) ((a : A) → P (h a))    X → Σ (x : X) (P x)    Σ (h : B → X) ((b : B) → P (h b))
+                         |\             /               \             /|
+                         |  \         /                   \         /  |
+                         |    \     /                       \     /    |
+                         |      \ /                           \ /      |
+                         |      / \                           / \      |
+                         |    /     \                       /     \    |
+                         |  /         \                   /         \  |
+                         VV             V               V             VV
+         A → Σ (x : X) (P x)    Σ (h : S → X) ((s : S) → P (h s))    B → Σ (x : X) (P x)
+                           \                    |                    /
+                             \                  |                  /
+                               \                |                /
+                                 \              |              /
+                                   \            |            /
+                                     \          |          /
+                                       \        |        /
+                                         V      V      V
+                                       S → Σ (x : X) (P x) .
+```
+
+The bottom square is the induced precomposition square for our fixed cocone, so
+by the assumed pullback property, instantiated at the type `Σ (x : X) (P x)`,
+it's a pullback. The top square is constructed by precomposition of maps on the
+first component, and by precomposition of lifts of families of elements on the
+second component. Since vertical maps are equivalences, by the principle of
+choice, and the bottom square is a pullback, we conclude that the top square is
+a pullback.
+
+Observe that restricting the top square to its first component, we again get the
+induced precomposition square, this time instantiated at `X`, so that is also a
+pullback. Hence the top square is a pullback of total spaces over a pullback
+square, which implies that we get a family of pullback squares of the fibers,
+i.e. for every `h : X → X` we have a pullback
+
+```text
+    (x : X) → P (h x) ---------> (b : B) → P (h (j b))
+            | ⌟                           |
+            |                             |
+            |                             |
+            |                             |
+            V                             V
+  (a : A) → P (h (i a)) -----> (s : S) → P (h (j (g s))) ,
+```
+
+and instantiating for `id : X → X` gives us exactly a proof of the dependent
+pullback property.
+
+```agda
   cone-family-dependent-pullback-property :
     {l : Level} (P : X → UU l) →
     cone-family
