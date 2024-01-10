@@ -55,7 +55,7 @@ module _
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
-### A type is `k+1`-truncated if and only if the map `point x` is `k`-truncated for all `x`
+### A type is `k+1`-truncated if and only if all point inclusions are `k`-truncated
 
 ```agda
 module _
@@ -79,11 +79,11 @@ module _
     is-trunc-is-trunc-map-point :
       (k : 𝕋) → ((x : A) → is-trunc-map k (point x)) →
       is-trunc (succ-𝕋 k) A
-    is-trunc-is-trunc-map-point k is-trunc-const x y =
+    is-trunc-is-trunc-map-point k is-trunc-point x y =
       is-trunc-equiv' k
         ( Σ unit (λ _ → x ＝ y))
         ( left-unit-law-Σ (λ _ → x ＝ y))
-        ( is-trunc-const x y)
+        ( is-trunc-point x y)
 
   abstract
     is-contr-map-point-is-prop :
