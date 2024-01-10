@@ -175,6 +175,14 @@ pr2 raise-unit-Set = is-set-unit
 ### The map `point x` is injective for every `x`
 
 ```agda
-is-injective-point : {l : Level} {A : UU l} (x : A) → is-injective (point x)
-is-injective-point _ _ = refl
+module _
+  {l : Level} {A : UU l} (x : A)
+  where
+
+  is-injective-point : is-injective (point x)
+  is-injective-point _ = refl
+
+  point-injection : injection unit A
+  pr1 point-injection = point x
+  pr2 point-injection = is-injective-point
 ```
