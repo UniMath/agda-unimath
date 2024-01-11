@@ -47,10 +47,10 @@ is-closed-under-multiplication-prop-subset-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (P : subset-Semigroup l2 G) →
   Prop (l1 ⊔ l2)
 is-closed-under-multiplication-prop-subset-Semigroup G P =
-  Π-Prop'
+  implicit-Π-Prop
     ( type-Semigroup G)
     ( λ x →
-      Π-Prop'
+      implicit-Π-Prop
         ( type-Semigroup G)
         ( λ y → hom-Prop (P x) (hom-Prop (P y) (P (mul-Semigroup G x y)))))
 

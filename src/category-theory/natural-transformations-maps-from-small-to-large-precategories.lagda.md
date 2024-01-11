@@ -183,9 +183,9 @@ module _
     (a : hom-family-map-Small-Large-Precategory C D F G) →
     is-prop (is-natural-transformation-map-Small-Large-Precategory C D F G a)
   is-prop-is-natural-transformation-map-Small-Large-Precategory a =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ y →
             is-prop-Π
               ( λ f →

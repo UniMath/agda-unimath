@@ -55,9 +55,9 @@ is-prop-preserves-mul-hom-Ab :
   ( f : hom-Ab (ab-Ring R) (ab-Ring S)) →
   is-prop (preserves-mul-hom-Ab R S f)
 is-prop-preserves-mul-hom-Ab R S f =
-  is-prop-Π'
+  is-prop-implicit-Π
     ( λ x →
-      is-prop-Π'
+      is-prop-implicit-Π
         ( λ y →
           is-set-type-Ring S
             ( map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y))

@@ -186,7 +186,9 @@ is-prop-iterated-implicit-Π :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π is-prop A → is-prop (iterated-implicit-Π A)
 is-prop-iterated-implicit-Π =
-  section-iterated-implicit-Π-section-Π-section-codomain is-prop is-prop-Π'
+  section-iterated-implicit-Π-section-Π-section-codomain
+    ( is-prop)
+    ( is-prop-implicit-Π)
 ```
 
 ### Iterated products of truncated types are truncated

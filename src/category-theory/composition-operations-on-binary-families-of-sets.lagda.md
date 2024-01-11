@@ -230,16 +230,16 @@ module _
       eq-type-subtype
         ( λ x →
           prod-Prop
-            ( Π-Prop' A
+            ( implicit-Π-Prop A
               ( λ a →
-                Π-Prop' A
+                implicit-Π-Prop A
                 ( λ b →
                   Π-Prop
                     ( type-Set (hom-set a b))
                     ( λ f' → Id-Prop (hom-set a b) (comp-hom (x b) f') f'))))
-            ( Π-Prop' A
+            ( implicit-Π-Prop A
               ( λ a →
-                Π-Prop' A
+                implicit-Π-Prop A
                 ( λ b →
                   Π-Prop
                     ( type-Set (hom-set a b))

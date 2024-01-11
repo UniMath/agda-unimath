@@ -88,7 +88,7 @@ module _
 
   is-closed-under-inverses-prop-subset-Group : Prop (l1 ⊔ l2)
   is-closed-under-inverses-prop-subset-Group =
-    Π-Prop'
+    implicit-Π-Prop
       ( type-Group G)
       ( λ x → hom-Prop (P x) (P (inv-Group G x)))
 
