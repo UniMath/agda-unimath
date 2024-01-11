@@ -295,7 +295,7 @@ pr1 (function-Prop A P) = type-function-Prop A P
 pr2 (function-Prop A P) = is-prop-type-function-Prop A P
 
 type-hom-Prop :
-  { l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
 type-hom-Prop P = type-function-Prop (type-Prop P)
 
 is-prop-type-hom-Prop :
@@ -304,7 +304,7 @@ is-prop-type-hom-Prop :
 is-prop-type-hom-Prop P = is-prop-type-function-Prop (type-Prop P)
 
 hom-Prop :
-  { l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
+  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
 pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
 
