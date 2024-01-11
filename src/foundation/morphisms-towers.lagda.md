@@ -132,10 +132,10 @@ module _
   is-torsorial-htpy-hom-tower :
     (f : hom-tower A B) → is-torsorial (htpy-hom-tower f)
   is-torsorial-htpy-hom-tower f =
-    is-torsorial-Eq-structure _
+    is-torsorial-Eq-structure
       ( is-torsorial-binary-htpy (map-hom-tower A B f))
       ( map-hom-tower A B f , refl-binary-htpy (map-hom-tower A B f))
-      ( is-torsorial-Eq-Π _
+      ( is-torsorial-Eq-Π
         ( λ n →
           is-torsorial-htpy (naturality-map-hom-tower A B f n ∙h refl-htpy)))
 

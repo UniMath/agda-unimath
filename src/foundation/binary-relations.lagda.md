@@ -246,11 +246,7 @@ module _
     is-torsorial (equiv-Relation R)
   is-torsorial-equiv-Relation =
     is-torsorial-Eq-Π
-      ( λ x P → (y : A) → R x y ≃ P y)
-      ( λ x →
-        is-torsorial-Eq-Π
-          ( λ y P → R x y ≃ P)
-          ( λ y → is-torsorial-equiv (R x y)))
+      ( λ x → is-torsorial-Eq-Π (λ y → is-torsorial-equiv (R x y)))
 
   equiv-eq-Relation : (S : Relation l2 A) → (R ＝ S) → equiv-Relation R S
   equiv-eq-Relation .R refl = id-equiv-Relation
@@ -290,9 +286,7 @@ module _
   is-torsorial-relates-same-elements-Relation-Prop :
     is-torsorial (relates-same-elements-Relation-Prop R)
   is-torsorial-relates-same-elements-Relation-Prop =
-    is-torsorial-Eq-Π
-      ( λ x P → has-same-elements-subtype (R x) P)
-      ( λ x → is-torsorial-has-same-elements-subtype (R x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-has-same-elements-subtype (R x))
 
   relates-same-elements-eq-Relation-Prop :
     (S : Relation-Prop l2 A) →

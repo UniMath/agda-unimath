@@ -209,7 +209,6 @@ module _
       is-torsorial (htpy-dependent-cocone-sequential-diagram A P d)
     is-torsorial-htpy-dependent-cocone-sequential-diagram d =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-dependent-cocone-sequential-diagram A P d))
         ( is-torsorial-binary-htpy
           ( map-dependent-cocone-sequential-diagram A P d))
         ( map-dependent-cocone-sequential-diagram A P d ,

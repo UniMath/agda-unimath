@@ -122,7 +122,6 @@ module _
     is-torsorial (equiv-Semigroup G)
   is-torsorial-equiv-Semigroup =
     is-torsorial-Eq-structure
-      ( λ H μH → preserves-mul-equiv-Semigroup G (pair H μH))
       ( is-torsorial-Eq-subtype
         ( is-torsorial-equiv (type-Semigroup G))
         ( is-prop-is-set)

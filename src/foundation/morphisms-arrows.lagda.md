@@ -239,11 +239,9 @@ module _
     is-torsorial htpy-hom-arrow
   is-torsorial-htpy-hom-arrow =
     is-torsorial-Eq-structure
-      ( λ i jH I → Σ _ _)
       ( is-torsorial-htpy (map-domain-hom-arrow f g α))
       ( map-domain-hom-arrow f g α , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ j H J → _)
         ( is-torsorial-htpy (map-codomain-hom-arrow f g α))
         ( map-codomain-hom-arrow f g α , refl-htpy)
         ( is-torsorial-htpy (coh-hom-arrow f g α ∙h refl-htpy)))

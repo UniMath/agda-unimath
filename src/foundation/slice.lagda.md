@@ -348,7 +348,6 @@ module _
       (f : Slice l2 A) → is-torsorial (equiv-slice' f)
     is-torsorial-equiv-slice' (pair X f) =
       is-torsorial-Eq-structure
-        ( λ Y g e → f ~ (g ∘ map-equiv e))
         ( is-torsorial-equiv X)
         ( pair X id-equiv)
         ( is-torsorial-htpy f)

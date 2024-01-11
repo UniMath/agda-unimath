@@ -80,7 +80,7 @@ is-torsorial-htpy-hom-species-types :
   (f : hom-species-types F G) →
   is-torsorial (htpy-hom-species-types f)
 is-torsorial-htpy-hom-species-types f =
-  is-torsorial-Eq-Π (λ X h → f X ~ h) (λ X → is-torsorial-htpy (f X))
+  is-torsorial-Eq-Π (λ X → is-torsorial-htpy (f X))
 
 is-equiv-htpy-eq-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}

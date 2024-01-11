@@ -196,9 +196,7 @@ abstract
     is-torsorial (multivariable-htpy {{A}} f)
   is-torsorial-multivariable-htpy .0 {{base-telescope A}} = is-torsorial-path
   is-torsorial-multivariable-htpy ._ {{cons-telescope A}} f =
-    is-torsorial-Eq-Π
-      ( λ x → multivariable-htpy {{A x}} (f x))
-      ( λ x → is-torsorial-multivariable-htpy _ {{A x}} (f x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-multivariable-htpy _ {{A x}} (f x))
 
 abstract
   is-torsorial-multivariable-htpy-implicit :
