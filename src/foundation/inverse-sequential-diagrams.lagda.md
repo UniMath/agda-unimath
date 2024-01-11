@@ -93,10 +93,11 @@ the [terminal type](foundation.unit-type.md) `unit`.
 ```agda
 left-shift-inverse-sequential-diagram :
   {l : Level} → inverse-sequential-diagram l → inverse-sequential-diagram l
-pr1 (left-shift-inverse-sequential-diagram {l} A) zero-ℕ = raise-unit l
+pr1 (left-shift-inverse-sequential-diagram {l} A) 0 = raise-unit l
 pr1 (left-shift-inverse-sequential-diagram A) (succ-ℕ n) =
   family-inverse-sequential-diagram A n
-pr2 (left-shift-inverse-sequential-diagram A) zero-ℕ = raise-terminal-map
+pr2 (left-shift-inverse-sequential-diagram A) 0 =
+  raise-terminal-map (family-inverse-sequential-diagram A 0)
 pr2 (left-shift-inverse-sequential-diagram A) (succ-ℕ n) =
   map-inverse-sequential-diagram A n
 

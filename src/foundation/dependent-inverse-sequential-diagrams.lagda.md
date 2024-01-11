@@ -171,12 +171,12 @@ left-shift-dependent-inverse-sequential-diagram :
   dependent-inverse-sequential-diagram l2 A →
   dependent-inverse-sequential-diagram l2
     ( left-shift-inverse-sequential-diagram A)
-pr1 (left-shift-dependent-inverse-sequential-diagram {l2 = l2} B) zero-ℕ x =
+pr1 (left-shift-dependent-inverse-sequential-diagram {l2 = l2} B) 0 x =
   raise-unit l2
 pr1 (left-shift-dependent-inverse-sequential-diagram B) (succ-ℕ n) =
   family-dependent-inverse-sequential-diagram B n
-pr2 (left-shift-dependent-inverse-sequential-diagram B) zero-ℕ _ =
-  raise-terminal-map
+pr2 (left-shift-dependent-inverse-sequential-diagram B) 0 x =
+  raise-terminal-map (family-dependent-inverse-sequential-diagram B 0 x)
 pr2 (left-shift-dependent-inverse-sequential-diagram B) (succ-ℕ n) =
   map-dependent-inverse-sequential-diagram B n
 ```
