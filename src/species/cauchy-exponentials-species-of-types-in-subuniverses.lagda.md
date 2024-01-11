@@ -227,9 +227,6 @@ module _
                       ( tr
                         ( is-in-subuniverse P)
                         ( eq-equiv
-                          ( pr1 X)
-                          ( Σ ( indexing-type-Relaxed-Σ-Decomposition d)
-                              ( cotype-Relaxed-Σ-Decomposition d))
                           ( matching-correspondence-Relaxed-Σ-Decomposition d))
                         ( pr2 X))))) ∘e
               ( ( commutative-prod) ∘e

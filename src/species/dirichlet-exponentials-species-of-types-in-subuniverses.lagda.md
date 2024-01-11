@@ -334,10 +334,6 @@ module _
         ( right-summand-binary-product-Decomposition d)
         ( tr
           ( is-in-subuniverse P)
-          ( eq-equiv
-            ( inclusion-subuniverse P X)
-            ( left-summand-binary-product-Decomposition d ×
-              right-summand-binary-product-Decomposition d)
-            ( matching-correspondence-binary-product-Decomposition d))
+          ( eq-equiv (matching-correspondence-binary-product-Decomposition d))
           ( pr2 X))
 ```
