@@ -150,9 +150,7 @@ module _
   is-torsorial-equiv-Fam-Inhabited-Types :
     is-torsorial (equiv-Fam-Inhabited-Types Y)
   is-torsorial-equiv-Fam-Inhabited-Types =
-    is-torsorial-Eq-Π
-      ( λ x → equiv-Inhabited-Type (Y x))
-      ( λ x → is-torsorial-equiv-Inhabited-Type (Y x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-equiv-Inhabited-Type (Y x))
 
   equiv-eq-Fam-Inhabited-Types :
     (Z : Fam-Inhabited-Types l2 X) → (Y ＝ Z) → equiv-Fam-Inhabited-Types Y Z

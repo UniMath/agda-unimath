@@ -188,12 +188,8 @@ module _
         ( vertex-hom-Directed-Graph G H f)
         ( refl-htpy))
       ( is-torsorial-Eq-Π
-        ( λ x g →
-          ( y : vertex-Directed-Graph G) →
-          ( λ e → edge-hom-Directed-Graph G H f e) ~ g y)
         ( λ x →
           is-torsorial-Eq-Π
-            ( λ y g → (λ e → edge-hom-Directed-Graph G H f e) ~ g)
             ( λ y → is-torsorial-htpy (edge-hom-Directed-Graph G H f))))
 
   is-equiv-htpy-eq-hom-Directed-Graph :

@@ -117,7 +117,6 @@ module _
   is-torsorial-htpy-binary-reflecting-map-equivalence-relation =
     is-torsorial-Eq-subtype
       ( is-torsorial-Eq-Π
-        ( λ x g → map-binary-reflecting-map-equivalence-relation R S f x ~ g)
         ( λ x →
           is-torsorial-htpy
             ( map-binary-reflecting-map-equivalence-relation R S f x)))

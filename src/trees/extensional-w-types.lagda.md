@@ -95,9 +95,7 @@ module _
   is-torsorial-Eq-Eq-ext-𝕎 :
     (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) → is-torsorial (Eq-Eq-ext-𝕎 x y u)
   is-torsorial-Eq-Eq-ext-𝕎 x y u =
-    is-torsorial-Eq-Π
-      ( λ z e → map-equiv (u z) ~ map-equiv e)
-      ( λ z → is-torsorial-htpy-equiv (u z))
+    is-torsorial-Eq-Π (λ z → is-torsorial-htpy-equiv (u z))
 
   Eq-Eq-ext-eq-𝕎 :
     (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → u ＝ v → Eq-Eq-ext-𝕎 x y u v

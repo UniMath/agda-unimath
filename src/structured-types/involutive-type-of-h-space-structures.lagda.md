@@ -129,11 +129,7 @@ module _
       ( μ , refl-htpy)
       ( is-torsorial-Eq-structure
         ( is-torsorial-Eq-Π
-          ( λ f ν' → (x : type-2-Element-Type X) → ν f x ~ ν' x)
-          ( λ f →
-            is-torsorial-Eq-Π
-              ( λ x ν' → ν f x ~ ν')
-              ( λ x → is-torsorial-htpy (ν f x))))
+          ( λ f → is-torsorial-Eq-Π (λ x → is-torsorial-htpy (ν f x))))
         ( ν , (λ f x p → refl))
         ( is-contr-equiv
           ( Σ ( symmetric-Id

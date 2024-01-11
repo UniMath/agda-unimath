@@ -222,7 +222,6 @@ module _
       ( pair (row-ferrers-diagram-𝔽 A D) id-equiv)
       ( is-torsorial-Eq-subtype
         ( is-torsorial-Eq-Π
-          ( λ x Y → type-dot-ferrers-diagram-𝔽 A D x ≃ type-𝔽 Y)
           ( λ x →
             is-torsorial-Eq-subtype
               ( is-torsorial-equiv (type-dot-ferrers-diagram-𝔽 A D x))

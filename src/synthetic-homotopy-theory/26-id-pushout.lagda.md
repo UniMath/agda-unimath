@@ -105,17 +105,13 @@ module hom-Fam-pushout
   is-torsorial-htpy-hom-Fam-pushout h =
     is-torsorial-Eq-structure
       ( is-torsorial-Eq-Π
-        ( λ x τ → (pr1 h x) ~ τ)
         ( λ x → is-torsorial-htpy (pr1 h x)))
       ( pair (pr1 h) (λ x → refl-htpy))
       ( is-torsorial-Eq-structure
         ( is-torsorial-Eq-Π
-          ( λ y τ → (pr1 (pr2 h) y) ~ τ)
           ( λ y → is-torsorial-htpy (pr1 (pr2 h) y)))
         ( pair (pr1 (pr2 h)) (λ y → refl-htpy))
         ( is-torsorial-Eq-Π
-          ( λ (s : S) he →
-            (he ~ (pr2 (pr2 h) s ∙h (map-equiv (QS s) ·l refl-htpy))))
           ( λ s → is-torsorial-htpy'
             ((pr2 (pr2 h) s) ∙h ((map-equiv (QS s)) ·l refl-htpy)))))
 

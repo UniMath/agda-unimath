@@ -262,14 +262,8 @@ module _
       ( is-torsorial-htpy-equiv (equiv-vertex-equiv-Directed-Graph G H e))
       ( equiv-vertex-equiv-Directed-Graph G H e , refl-htpy)
       ( is-torsorial-Eq-Π
-        ( λ x β →
-          (y : vertex-Directed-Graph G) (u : edge-Directed-Graph G x y) →
-          edge-equiv-Directed-Graph G H e x y u ＝ map-equiv (β y) u)
         ( λ x →
           is-torsorial-Eq-Π
-            ( λ y β →
-              (u : edge-Directed-Graph G x y) →
-              edge-equiv-Directed-Graph G H e x y u ＝ map-equiv β u)
             ( λ y →
               is-torsorial-htpy-equiv
                 ( equiv-edge-equiv-Directed-Graph G H e x y))))

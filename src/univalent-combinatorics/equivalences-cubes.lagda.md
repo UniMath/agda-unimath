@@ -75,7 +75,6 @@ is-torsorial-equiv-cube k X =
       ( dim-cube-UU-Fin k X)
       ( id-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X)))
     ( is-torsorial-Eq-Π
-      ( λ i (A : UU-Fin lzero 2) → equiv-UU-Fin 2 (axis-cube-UU-2 k X i) A)
       ( λ i → is-torsorial-equiv-UU-Fin {k = 2} (axis-cube-UU-2 k X i)))
 
 is-equiv-equiv-eq-cube :
@@ -119,10 +118,10 @@ is-torsorial-htpy-equiv-cube :
   is-torsorial (htpy-equiv-cube k X Y e)
 is-torsorial-htpy-equiv-cube k X Y e =
   is-torsorial-Eq-structure
+
     ( is-torsorial-htpy-equiv (dim-equiv-cube k X Y e))
     ( pair (dim-equiv-cube k X Y e) refl-htpy)
     ( is-torsorial-Eq-Π
-      ( λ d β → htpy-equiv (axis-equiv-cube k X Y e d) β)
       ( λ d → is-torsorial-htpy-equiv (axis-equiv-cube k X Y e d)))
 
 is-equiv-htpy-eq-equiv-cube :

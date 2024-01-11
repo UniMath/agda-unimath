@@ -217,10 +217,6 @@ module _
                       ( pr2 (refl-htpy-equiv-Undirected-Graph f) p e)
                       ( map-equiv (gE p) e)))))
         ( is-torsorial-Eq-Π
-          ( λ p e →
-            htpy-equiv
-              ( equiv-edge-equiv-Undirected-Graph G H f p)
-              ( e))
           ( λ p →
             is-torsorial-htpy-equiv
               ( equiv-edge-equiv-Undirected-Graph G H f p))))
@@ -266,7 +262,6 @@ module _
       ( is-torsorial-equiv (vertex-Undirected-Graph G))
       ( pair (vertex-Undirected-Graph G) id-equiv)
       ( is-torsorial-Eq-Π
-        ( λ p X → (edge-Undirected-Graph G p) ≃ X)
         ( λ p → is-torsorial-equiv (edge-Undirected-Graph G p)))
 
   is-equiv-equiv-eq-Undirected-Graph :

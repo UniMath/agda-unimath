@@ -107,7 +107,6 @@ module _
       ( is-torsorial-binary-htpy (map-cone-tower A c))
       ( map-cone-tower A c , (λ n → refl-htpy))
       ( is-torsorial-Eq-Π
-        ( λ n → (coherence-cone-tower A c n ∙h refl-htpy) ~_)
         ( λ n → is-torsorial-htpy (coherence-cone-tower A c n ∙h refl-htpy)))
 
   is-equiv-htpy-eq-cone-tower :

@@ -32,7 +32,7 @@ characterize the identity types of `(x : A) → B x`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   (is-torsorial-C : (x : A) → is-torsorial (C x))
   where
 
@@ -74,7 +74,7 @@ module _
       (g : (x : A) → B x) → is-equiv (map-extensionality-Π e g)
     is-equiv-map-extensionality-Π e =
       fundamental-theorem-id
-        ( is-torsorial-Eq-Π Eq-B
+        ( is-torsorial-Eq-Π
           ( λ x →
             fundamental-theorem-id'
               ( λ y → map-equiv (e x y))

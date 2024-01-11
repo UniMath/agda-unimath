@@ -179,11 +179,9 @@ abstract
   is-torsorial-equiv-sequential-diagram A =
     is-torsorial-Eq-structure
       ( is-torsorial-Eq-Π
-        ( λ n → family-sequential-diagram A n ≃_)
         ( λ n → is-torsorial-equiv (family-sequential-diagram A n)))
       ( family-sequential-diagram A , λ n → id-equiv)
       ( is-torsorial-Eq-Π
-        ( λ n → _~ map-sequential-diagram A n)
         ( λ n → is-torsorial-htpy' (map-sequential-diagram A n)))
 
   is-equiv-equiv-eq-sequential-diagram :

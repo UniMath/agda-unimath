@@ -154,9 +154,6 @@ module _
       ( family-Dependent-Type-With-Automorphism P Q ,
         id-equiv-fam (family-Dependent-Type-With-Automorphism P Q))
       ( is-torsorial-Eq-Π
-        ( λ x K →
-          ( map-Dependent-Type-With-Automorphism P Q) ~
-          ( map-equiv K))
         ( λ x →
           is-torsorial-htpy-equiv
             ( dependent-automorphism-Dependent-Type-With-Automorphism P Q x)))

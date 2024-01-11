@@ -162,9 +162,6 @@ module _
                         ( pr2 (refl-htpy-hom-Undirected-Graph f) p e)
                         ( gE p e)))))
           ( is-torsorial-Eq-Π
-            ( λ p gE →
-              ( e : edge-Undirected-Graph G p) →
-              Id (edge-hom-Undirected-Graph G H f p e) (gE e))
             ( λ p → is-torsorial-htpy (edge-hom-Undirected-Graph G H f p))))
 
   is-equiv-htpy-eq-hom-Undirected-Graph :

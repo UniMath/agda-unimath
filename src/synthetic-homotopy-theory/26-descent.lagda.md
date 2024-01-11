@@ -559,18 +559,12 @@ is-torsorial-equiv-Fam-pushout :
   is-torsorial (equiv-Fam-pushout P)
 is-torsorial-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P =
   is-torsorial-Eq-structure
-    ( is-torsorial-Eq-Π
-      ( λ a X → (pr1 P a) ≃ X)
-      ( λ a → is-torsorial-equiv (pr1 P a)))
+    ( is-torsorial-Eq-Π (λ a → is-torsorial-equiv (pr1 P a)))
     ( pair (pr1 P) (λ a → id-equiv))
     ( is-torsorial-Eq-structure
-      ( is-torsorial-Eq-Π
-        ( λ b Y → (pr1 (pr2 P) b) ≃ Y)
-        ( λ b → is-torsorial-equiv (pr1 (pr2 P) b)))
+      ( is-torsorial-Eq-Π (λ b → is-torsorial-equiv (pr1 (pr2 P) b)))
       ( pair (pr1 (pr2 P)) (λ b → id-equiv))
-      ( is-torsorial-Eq-Π
-        ( λ s e → (map-equiv (pr2 (pr2 P) s)) ~ (map-equiv e))
-        ( λ s → is-torsorial-htpy-equiv (pr2 (pr2 P) s))))
+      ( is-torsorial-Eq-Π (λ s → is-torsorial-htpy-equiv (pr2 (pr2 P) s))))
 
 is-equiv-equiv-Fam-pushout-eq :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}

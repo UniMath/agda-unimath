@@ -206,15 +206,6 @@ module _
           ( refl-htpy))
         ( is-torsorial-Eq-Π
           ( λ x →
-            htpy-equiv
-              ( ( equiv-neighbor-equiv-Undirected-Graph
-                  ( undirected-graph-Enriched-Undirected-Graph A B G)
-                  ( undirected-graph-Enriched-Undirected-Graph A B G)
-                    ( id-equiv-Undirected-Graph
-                      ( undirected-graph-Enriched-Undirected-Graph A B G))
-                    ( x)) ∘e
-                ( equiv-neighbor-Enriched-Undirected-Graph A B G x)))
-          ( λ x →
             is-torsorial-htpy-equiv
               ( equiv-neighbor-equiv-Undirected-Graph
                   ( undirected-graph-Enriched-Undirected-Graph A B G)

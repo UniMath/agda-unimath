@@ -171,8 +171,8 @@ equivalences of sets are torsorial.
         ( is-torsorial-Eq-structure
           ( {!   !})
           ( hom-set-Set-Magmoid A , λ {x} {y} → id-equiv)
-          ( is-torsorial-Eq-implicit-Π _
-            λ x → is-torsorial-Eq-implicit-Π _
-              λ y → is-torsorial-Eq-implicit-Π _
+          ( is-torsorial-Eq-implicit-Π
+            λ x → is-torsorial-Eq-implicit-Π
+              λ y → is-torsorial-Eq-implicit-Π
                 λ z → {!  z !})))
 ```
