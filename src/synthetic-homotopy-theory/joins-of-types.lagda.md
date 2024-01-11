@@ -169,6 +169,12 @@ right-unit-law-join-is-empty :
 pr1 (right-unit-law-join-is-empty is-empty-B) = inl-join
 pr2 (right-unit-law-join-is-empty is-empty-B) =
   is-equiv-inl-join-is-empty is-empty-B
+
+map-inv-right-unit-law-join-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-empty B → A * B → A
+map-inv-right-unit-law-join-is-empty H =
+  map-inv-equiv (right-unit-law-join-is-empty H)
 ```
 
 ### The left zero law for joins

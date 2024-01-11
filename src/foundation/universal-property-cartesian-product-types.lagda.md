@@ -65,7 +65,7 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  cone-prod : cone (const A unit star) (const B unit star) (A × B)
+  cone-prod : cone (terminal-map A) (terminal-map B) (A × B)
   pr1 cone-prod = pr1
   pr1 (pr2 cone-prod) = pr2
   pr2 (pr2 cone-prod) = refl-htpy
@@ -74,11 +74,11 @@ module _
 Cartesian products are a special case of pullbacks.
 
 ```agda
-  gap-prod : A × B → standard-pullback (const A unit star) (const B unit star)
-  gap-prod = gap (const A unit star) (const B unit star) cone-prod
+  gap-prod : A × B → standard-pullback (terminal-map A) (terminal-map B)
+  gap-prod = gap (terminal-map A) (terminal-map B) cone-prod
 
   inv-gap-prod :
-    standard-pullback (const A unit star) (const B unit star) → A × B
+    standard-pullback (terminal-map A) (terminal-map B) → A × B
   pr1 (inv-gap-prod (pair a (pair b p))) = a
   pr2 (inv-gap-prod (pair a (pair b p))) = b
 
@@ -86,8 +86,8 @@ Cartesian products are a special case of pullbacks.
     is-section-inv-gap-prod : (gap-prod ∘ inv-gap-prod) ~ id
     is-section-inv-gap-prod (pair a (pair b p)) =
       map-extensionality-standard-pullback
-        ( const A unit star)
-        ( const B unit star)
+        ( terminal-map A)
+        ( terminal-map B)
         ( refl)
         ( refl)
         ( eq-is-contr (is-prop-is-contr is-contr-unit star star))
@@ -98,7 +98,7 @@ Cartesian products are a special case of pullbacks.
 
   abstract
     is-pullback-prod :
-      is-pullback (const A unit star) (const B unit star) cone-prod
+      is-pullback (terminal-map A) (terminal-map B) cone-prod
     is-pullback-prod =
       is-equiv-is-invertible
         inv-gap-prod
@@ -112,13 +112,13 @@ We conclude that cartesian products satisfy the universal property of pullbacks.
   abstract
     universal-property-pullback-prod :
       universal-property-pullback
-        ( const A unit star)
-        ( const B unit star)
+        ( terminal-map A)
+        ( terminal-map B)
         ( cone-prod)
     universal-property-pullback-prod =
       universal-property-pullback-is-pullback
-        ( const A unit star)
-        ( const B unit star)
+        ( terminal-map A)
+        ( terminal-map B)
         ( cone-prod)
         ( is-pullback-prod)
 ```

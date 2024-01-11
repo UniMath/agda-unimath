@@ -9,11 +9,15 @@ module foundation.copartial-elements where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.negation
+open import foundation.partial-elements
 open import foundation.universe-levels
 
 open import foundation-core.propositions
 
 open import orthogonal-factorization-systems.closed-modalities
+
+open import synthetic-homotopy-theory.joins-of-types
 ```
 
 </details>
@@ -29,8 +33,8 @@ element of type
 
 where the type `A * Q` is the
 [join](synthetic-homotopy-theory.joins-of-types.md) of `Q` and `A`. We say that
-a copartial element `(Q , u)` is
-{{#concept "erased" Disambiguation="copartial element" Agda=is-erased-copartial-element}}
+evaluation of a copartial element `(Q , u)` is
+{{#concept "denied" Disambiguation="copartial element" Agda=is-denied-copartial-element}}
 if the proposition `Q` holds.
 
 In order to compare copartial elements with
@@ -114,12 +118,16 @@ module _
   {l1 l2 : Level} {A : UU l1} (a : copartial-element l2 A)
   where
 
-  is-erased-prop-copartial-element : Prop l2
-  is-erased-prop-copartial-element = pr1 a
+  is-denied-prop-copartial-element : Prop l2
+  is-denied-prop-copartial-element = pr1 a
 
-  is-erased-copartial-element : UU l2
-  is-erased-copartial-element =
-    type-Prop is-erased-prop-copartial-element
+  is-denied-copartial-element : UU l2
+  is-denied-copartial-element =
+    type-Prop is-denied-prop-copartial-element
+
+  value-copartial-element :
+    operator-closed-modality is-denied-prop-copartial-element A
+  value-copartial-element = pr2 a
 ```
 
 ### The unit of the copartial element operator
@@ -129,13 +137,42 @@ module _
   {l1 : Level} {A : UU l1} (a : A)
   where
 
-  is-erased-prop-unit-copartial-element : Prop lzero
-  is-erased-prop-unit-copartial-element = empty-Prop
+  is-denied-prop-unit-copartial-element : Prop lzero
+  is-denied-prop-unit-copartial-element = empty-Prop
 
-  is-erased-unit-copartial-element : UU lzero
-  is-erased-unit-copartial-element = empty
+  is-denied-unit-copartial-element : UU lzero
+  is-denied-unit-copartial-element = empty
 
   unit-copartial-element : copartial-element lzero A
-  pr1 unit-copartial-element = is-erased-prop-unit-copartial-element
+  pr1 unit-copartial-element = is-denied-prop-unit-copartial-element
   pr2 unit-copartial-element = unit-closed-modality empty-Prop a
+```
+
+## Properties
+
+### Forgetful map from copartial elements to partial elements
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (a : copartial-element l2 A)
+  where
+
+  is-defined-prop-partial-element-copartial-element : Prop l2
+  is-defined-prop-partial-element-copartial-element =
+    neg-Prop (is-denied-prop-copartial-element a)
+
+  is-defined-partial-element-copartial-element : UU l2
+  is-defined-partial-element-copartial-element =
+    type-Prop is-defined-prop-partial-element-copartial-element
+
+  value-partial-element-copartial-element :
+    is-defined-partial-element-copartial-element → A
+  value-partial-element-copartial-element f =
+    map-inv-right-unit-law-join-is-empty f (value-copartial-element a)
+
+  partial-element-copartial-element : partial-element l2 A
+  pr1 partial-element-copartial-element =
+    is-defined-prop-partial-element-copartial-element
+  pr2 partial-element-copartial-element =
+    value-partial-element-copartial-element
 ```

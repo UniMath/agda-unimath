@@ -191,15 +191,15 @@ is-trunc-map-is-trunc-map-map-Π' :
   (i : I) → is-trunc-map k (f i)
 is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
   is-trunc-equiv' k
-    ( fiber (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
+    ( fiber (map-Π (λ _ → f i)) (point b))
     ( equiv-Σ
       ( λ a → f i a ＝ b)
       ( equiv-universal-property-unit (A i))
       ( λ h → equiv-ap
         ( equiv-universal-property-unit (B i))
-        ( map-Π (λ x → f i) h)
-        ( const unit (B i) b)))
-    ( H (λ x → i) (const unit (B i) b))
+        ( map-Π (λ _ → f i) h)
+        ( point b)))
+    ( H (λ _ → i) (point b))
 
 is-emb-map-Π-is-emb' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
