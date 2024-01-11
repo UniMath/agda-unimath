@@ -26,13 +26,8 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-This file collects various interactions of
-[pre-](foundation-core.precomposition-functions.md) and
-[postcomposition](foundation-core.postcomposition-functions.md) with
-[homotopies](foundation-core.homotopies.md).
-
-Given a [homotopy of maps](foundation-core.homotopies.md) `H : f ~ g`, we have
-witnesses
+Given a [homotopy of maps](foundation-core.homotopies.md) `H : f ~ g`, there are
+standard witnesses
 
 ```text
   htpy-precomp H S : precomp f S ~ precomp g S
@@ -41,26 +36,36 @@ witnesses
 and
 
 ```text
-  htpy-postcomp S H : postcomp S f ~ postcomp S g
+  htpy-postcomp S H : postcomp S f ~ postcomp S g.
 ```
 
-This file records their interactions with different operations on homotopies and
-eachother.
+This file records their interactions with eachother and different operations on
+homotopies.
 
 ## Properties
 
-### Precomposition distributes over whiskerings and concatenations of homotopies
+### Precomposition distributes over whiskerings of homotopies
 
-The operation `htpy-precomp` distributes over whiskerings contravariantly:
+The operation `htpy-precomp` distributes over whiskerings contravariantly. Given
+a homotopy `H : f ~ g` and a suitable map `h` the homotopy constructed as the
+whiskering
 
 ```text
-    precomp h S ·l htpy-precomp H S ~ htpy-precomp (H ·r h) S
+               - ∘ f
+          ----------------->         - ∘ h
+  (B → S)  htpy-precomp H S  (A → S) -----> (C → S)
+          ----------------->
+               - ∘ g
 ```
 
-and
+is homotopic to the homotopy
 
 ```text
-  htpy-precomp H S ·r precomp h S ~ htpy-precomp (h ·l H) S.
+                    - ∘ (f ∘ h)
+            -------------------------->
+    (B → S)   htpy-precomp (H ·r h) S   (C → S).
+            -------------------------->
+                    - ∘ (g ∘ h)
 ```
 
 ```agda
@@ -74,7 +79,29 @@ module _
     precomp h S ·l htpy-precomp H S ~ htpy-precomp (H ·r h) S
   distributive-htpy-precomp-right-whisker h H S i =
     coherence-square-eq-htpy-ap-precomp h (i ∘ f) (i ∘ g) (i ·l H)
+```
 
+Similarly, the homotopy given by the whiskering
+
+```text
+                              - ∘ f
+          - ∘ h          ----------------->
+  (C → S) -----> (B → S)  htpy-precomp H S  (A → S)
+                         ----------------->
+                              - ∘ g
+```
+
+is homotopic to the homotopy
+
+```text
+                    - ∘ (h ∘ f)
+            -------------------------->
+    (C → S)   htpy-precomp (h · l H) S   (A → S).
+            -------------------------->
+                    - ∘ (h ∘ g)
+```
+
+```agda
   distributive-htpy-precomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →
     htpy-precomp H S ·r precomp h S ~ htpy-precomp (h ·l H) S
@@ -82,11 +109,70 @@ module _
     ap eq-htpy (eq-htpy (ap-comp i h ∘ H))
 ```
 
-The operation `htpy-precomp` distributes over concatenation of homotopies:
+### Postcomposition distributes over whiskerings of homotopies
+
+Given a homotopy `H : f ~ g` and a suitable map `h` the homotopy given by the
+whiskering
 
 ```text
-  htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K Ss
+                               f ∘ –
+          h ∘ -          ------------------>
+  (S → C) -----> (S → B)  htpy-postcomp S H  (S → A)
+                         ------------------>
+                               g ∘ -
 ```
+
+is homotopic to the homotopy
+
+```text
+                    (f ∘ h) ∘ -
+            -------------------------->
+    (S → C)   htpy-postcomp S (H ·r h)   (S → A).
+            -------------------------->
+                    (g ∘ h) ∘ -
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {f g : A → B}
+  where
+
+  distributive-htpy-postcomp-right-whisker :
+    (h : C → A) (H : f ~ g) (S : UU l4) →
+    htpy-postcomp S H ·r postcomp S h ~ htpy-postcomp S (H ·r h)
+  distributive-htpy-postcomp-right-whisker h H S = refl-htpy
+```
+
+Similarly, the homotopy given by the whiskering
+
+```text
+                f ∘ -
+          ----------------->          h ∘ -
+  (S → A)  htpy-postcomp S H  (S → B) -----> (S → C)
+          ----------------->
+                g ∘ -
+```
+
+is homotopic to the homotopy
+
+```text
+                    (h ∘ f) ∘ -
+            -------------------------->
+    (S → A)   htpy-postcomp S (h ·l H)   (S → C).
+            -------------------------->
+                    (h ∘ g) ∘ -
+```
+
+```agda
+  distributive-htpy-postcomp-left-whisker :
+    (h : B → C) (H : f ~ g) (S : UU l4) →
+    postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
+  distributive-htpy-postcomp-left-whisker h H S i =
+    coherence-square-eq-htpy-ap-postcomp h (f ∘ i) (g ∘ i) (H ·r i)
+```
+
+### Precomposition distributes over concatenations of homotopies
 
 ```agda
 module _
@@ -102,25 +188,9 @@ module _
     ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
 ```
 
-### Postcomposition distributes over whiskerings and concatenations of homotopies
+### Postcomposition distributes over concatenations of homotopies
 
 ```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {f g : A → B}
-  where
-
-  distributive-htpy-postcomp-right-whisker :
-    (h : C → A) (H : f ~ g) (S : UU l4) →
-    htpy-postcomp S H ·r postcomp S h ~ htpy-postcomp S (H ·r h)
-  distributive-htpy-postcomp-right-whisker h H S = refl-htpy
-
-  distributive-htpy-postcomp-left-whisker :
-    (h : B → C) (H : f ~ g) (S : UU l4) →
-    postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
-  distributive-htpy-postcomp-left-whisker h H S i =
-    coherence-square-eq-htpy-ap-postcomp h (f ∘ i) (g ∘ i) (H ·r i)
-
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {f g h : A → B}
@@ -135,6 +205,23 @@ module _
 ```
 
 ### The actions of precomposition and postcomposition on homotopies commute
+
+Given homotopies `F : f ~ f'` and `G : g ~ g'`, we have a commuting square of
+homotopies
+
+```text
+                        postcomp A g ·l htpy-precomp F X
+           (g ∘ - ∘ f) ---------------------------------> (g ∘ - ∘ f')
+                |                                              |
+                |                                              |
+                |                                              |
+  precomp f Y ·l htpy-postcomp B G            htpy-postcomp A G ·r precomp f' X
+                |                                              |
+                |                                              |
+                v                                              v
+          (g' ∘ - ∘ f) --------------------------------> (g' ∘ - ∘ f')
+                       htpy-precomp F Y ·r postcomp B g'
+```
 
 ```agda
 module _
