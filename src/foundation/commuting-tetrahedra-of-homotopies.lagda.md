@@ -18,7 +18,7 @@ open import foundation-core.homotopies
 ## Idea
 
 A
-{{#concept "commuting tetrahedron of homotopies" Agda=coherence-tetrahedron-homotopies}}s
+{{#concept "commuting tetrahedron of homotopies" Agda=coherence-tetrahedron-homotopies}}
 is a commuting diagram of the form
 
 ```text
