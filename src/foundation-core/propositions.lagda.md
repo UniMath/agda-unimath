@@ -226,48 +226,48 @@ abstract
     is-prop-is-proof-irrelevant
       ( λ f → is-contr-Π (λ x → is-proof-irrelevant-is-prop (H x) (f x)))
 
-type-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → UU (l1 ⊔ l2)
-type-Π-Prop A P = (x : A) → type-Prop (P x)
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
+  where
 
-is-prop-type-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (type-Π-Prop A P)
-is-prop-type-Π-Prop A P = is-prop-Π (λ x → is-prop-type-Prop (P x))
+  type-Π-Prop : UU (l1 ⊔ l2)
+  type-Π-Prop = (x : A) → type-Prop (P x)
 
-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) →
-  (A → Prop l2) → Prop (l1 ⊔ l2)
-pr1 (Π-Prop A P) = type-Π-Prop A P
-pr2 (Π-Prop A P) = is-prop-type-Π-Prop A P
+  is-prop-type-Π-Prop : is-prop type-Π-Prop
+  is-prop-type-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
+
+  Π-Prop : Prop (l1 ⊔ l2)
+  pr1 Π-Prop = type-Π-Prop
+  pr2 Π-Prop = is-prop-type-Π-Prop
 ```
 
 We repeat the above for implicit Π-types.
 
 ```agda
 abstract
-  is-prop-Π' :
+  is-prop-implicit-Π :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     ((x : A) → is-prop (B x)) → is-prop ({x : A} → B x)
-  is-prop-Π' {l1} {l2} {A} {B} H =
+  is-prop-implicit-Π H =
     is-prop-equiv
       ( ( λ f x → f {x}) ,
-        ( is-equiv-is-invertible
-          ( λ g {x} → g x)
-          ( refl-htpy)
-          ( refl-htpy)))
+        ( is-equiv-is-invertible (λ g {x} → g x) (refl-htpy) (refl-htpy)))
       ( is-prop-Π H)
 
-type-Π-Prop' :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → UU (l1 ⊔ l2)
-type-Π-Prop' A P = {x : A} → type-Prop (P x)
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
+  where
 
-is-prop-type-Π-Prop' :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (type-Π-Prop' A P)
-is-prop-type-Π-Prop' A P = is-prop-Π' (λ x → is-prop-type-Prop (P x))
+  type-implicit-Π-Prop : UU (l1 ⊔ l2)
+  type-implicit-Π-Prop = {x : A} → type-Prop (P x)
 
-Π-Prop' : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-pr1 (Π-Prop' A P) = type-Π-Prop' A P
-pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
+  is-prop-type-implicit-Π-Prop : is-prop type-implicit-Π-Prop
+  is-prop-type-implicit-Π-Prop =
+    is-prop-implicit-Π (λ x → is-prop-type-Prop (P x))
+
+  implicit-Π-Prop : Prop (l1 ⊔ l2)
+  pr1 implicit-Π-Prop = type-implicit-Π-Prop
+  pr2 implicit-Π-Prop = is-prop-type-implicit-Π-Prop
 ```
 
 ### The type of functions into a proposition is a proposition

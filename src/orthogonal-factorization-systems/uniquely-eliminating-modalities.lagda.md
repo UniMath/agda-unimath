@@ -104,7 +104,7 @@ module _
   is-prop-is-uniquely-eliminating-modality :
     is-prop (is-uniquely-eliminating-modality unit-○)
   is-prop-is-uniquely-eliminating-modality =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ X →
         is-prop-Π
           ( λ P → is-property-is-local-dependent-type unit-○ (○ ∘ P)))

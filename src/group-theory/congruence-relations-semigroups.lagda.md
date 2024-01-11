@@ -36,16 +36,16 @@ is-congruence-prop-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) →
   equivalence-relation l2 (type-Semigroup G) → Prop (l1 ⊔ l2)
 is-congruence-prop-Semigroup G R =
-  Π-Prop'
+  implicit-Π-Prop
     ( type-Semigroup G)
     ( λ x1 →
-      Π-Prop'
+      implicit-Π-Prop
         ( type-Semigroup G)
         ( λ x2 →
-          Π-Prop'
+          implicit-Π-Prop
             ( type-Semigroup G)
             ( λ y1 →
-              Π-Prop'
+              implicit-Π-Prop
                 ( type-Semigroup G)
                 ( λ y2 →
                   function-Prop

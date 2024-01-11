@@ -76,7 +76,7 @@ module _
 
   has-identity-maps-function-class-Prop : Prop (lsuc l1 ⊔ l2)
   has-identity-maps-function-class-Prop =
-    Π-Prop' (UU l1) λ A → P (id {A = A})
+    implicit-Π-Prop (UU l1) λ A → P (id {A = A})
 
   is-prop-has-identity-maps-function-class :
     is-prop has-identity-maps-function-class
