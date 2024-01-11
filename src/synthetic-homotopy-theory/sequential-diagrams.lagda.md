@@ -30,8 +30,9 @@ They can be represented by diagrams
 
 extending infinitely to the right.
 
-Sequential diagrams are dual to [towers](foundation.towers.md), and are also
-sometimes called **cotowers**.
+Sequential diagrams are dual to
+[inverse sequential diagrams](foundation.inverse-sequential-diagrams.md), and
+are also sometimes called **cotowers**.
 
 ## Definition
 
