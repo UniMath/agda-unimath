@@ -209,21 +209,22 @@ module _
   {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
   where
 
-  duniversal-property-pushout :
+  dependent-universal-property-pushout-pushout :
     dependent-universal-property-pushout s (cocone-pushout s)
-  duniversal-property-pushout =
+  dependent-universal-property-pushout-pushout =
     dependent-universal-property-universal-property-pushout
-    ( s)
-    ( cocone-pushout s)
-    ( up-pushout s)
+      ( s)
+      ( cocone-pushout s)
+      ( up-pushout s)
 
-  equiv-duniversal-property-pushout :
+  equiv-dependent-universal-property-pushout :
     (P : pushout s → UU l4) →
-    ((x : pushout s) → P x) ≃ dependent-cocone-span-diagram s (cocone-pushout s) P
-  pr1 (equiv-duniversal-property-pushout P) =
+    ((x : pushout s) → P x) ≃
+    dependent-cocone-span-diagram s (cocone-pushout s) P
+  pr1 (equiv-dependent-universal-property-pushout P) =
     dependent-cocone-map-span-diagram s (cocone-pushout s) P
-  pr2 (equiv-duniversal-property-pushout P) =
-    duniversal-property-pushout P
+  pr2 (equiv-dependent-universal-property-pushout P) =
+    dependent-universal-property-pushout-pushout P
 ```
 
 ### Computation with the cogap-cocone-span-diagram map
@@ -236,7 +237,8 @@ module _
 
   compute-inl-cogap-cocone-span-diagram :
     ( a : domain-span-diagram s) →
-    cogap-cocone-span-diagram s c (inl-pushout s a) ＝ left-map-cocone-span-diagram s c a
+    cogap-cocone-span-diagram s c (inl-pushout s a) ＝
+    left-map-cocone-span-diagram s c a
   compute-inl-cogap-cocone-span-diagram =
     left-htpy-cocone-universal-property-pushout
       ( s)
@@ -246,7 +248,8 @@ module _
 
   compute-inr-cogap-cocone-span-diagram :
     ( b : codomain-span-diagram s) →
-    cogap-cocone-span-diagram s c (inr-pushout s b) ＝ right-map-cocone-span-diagram s c b
+    cogap-cocone-span-diagram s c (inr-pushout s b) ＝
+    right-map-cocone-span-diagram s c b
   compute-inr-cogap-cocone-span-diagram =
     right-htpy-cocone-universal-property-pushout
       ( s)
@@ -256,7 +259,9 @@ module _
 
   compute-glue-cogap-cocone-span-diagram :
     statement-coherence-htpy-cocone-span-diagram s
-      ( cocone-map-span-diagram s (cocone-pushout s) (cogap-cocone-span-diagram s c))
+      ( cocone-map-span-diagram s
+        ( cocone-pushout s)
+        ( cogap-cocone-span-diagram s c))
       ( c)
       ( compute-inl-cogap-cocone-span-diagram)
       ( compute-inr-cogap-cocone-span-diagram)
@@ -346,11 +351,13 @@ module _
     fiber (right-map-cocone-span-diagram s c) x
   right-map-span-cogap-cocone-span-diagram-fiber =
     ( map-inv-equiv equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr) ∘
+    {!!}
+    {-
     ( left-map-flattening-pushout
       s -- ( transposition-span-diagram s)
       ( cocone-pushout s) -- ( cocone-pushout (transposition-span-diagram s))
       {! λ y → (cogap-cocone-span-diagram s c y) ＝ x!}) {- ( left-map-flattening-pushout
-      ( λ y → (cogap-cocone-span-diagram s c y) ＝ x) s cocone-pushout) -} ∘
+      ( λ y → (cogap-cocone-span-diagram s c y) ＝ x) s cocone-pushout) -} -} ∘
     ( map-equiv equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span)
 ```
 
@@ -400,7 +407,7 @@ square commute (almost) trivially.
         ( f)
         ( g)
         ( cocone-pushout f g)
-        ( duniversal-property-pushout f g))
+        ( dependent-universal-property-pushout f g))
       ( refl-htpy)
       ( λ _ →
         inv
