@@ -52,9 +52,9 @@ hom-structure P A B = Σ (A → B) (structure-map P)
 ```agda
 has-structure-equiv :
   {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P X → P Y
-has-structure-equiv P e = tr P (eq-equiv _ _ e)
+has-structure-equiv P e = tr P (eq-equiv e)
 
 has-structure-equiv' :
   {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P Y → P X
-has-structure-equiv' P e = tr P (inv (eq-equiv _ _ e))
+has-structure-equiv' P e = tr P (inv (eq-equiv e))
 ```

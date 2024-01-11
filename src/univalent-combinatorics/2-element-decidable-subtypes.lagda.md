@@ -221,8 +221,6 @@ module _
         (λ z →
           eq-pair-Σ
             ( eq-equiv
-              ( (Id x z) + (Id y z))
-              ( (Id y z) + (Id x z))
               ( pair
                 ( map-commutative-coprod (Id x z) (Id y z))
                 ( is-equiv-map-commutative-coprod (Id x z) (Id y z))))
@@ -258,8 +256,6 @@ module _
         ( λ v →
           eq-pair-Σ
             ( eq-equiv
-              ( (Id x v) + (Id y v))
-              ( (Id z v) + (Id w v))
               ( equiv-coprod
                 ( equiv-concat (inv r) v)
                 ( equiv-concat (inv s) v)))

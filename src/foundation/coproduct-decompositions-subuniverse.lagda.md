@@ -502,10 +502,7 @@ module _
               ( λ x →
                 eq-pair-Σ
                   ( eq-pair-Σ
-                    ( eq-equiv
-                      ( raise-empty l1)
-                      ( inclusion-subuniverse P (pr1 x))
-                      ( equiv-is-empty is-empty-raise-empty ( pr2 x)))
+                    ( eq-equiv (equiv-is-empty is-empty-raise-empty (pr2 x)))
                     ( eq-is-prop (is-prop-type-Prop (P _))))
                   ( eq-is-prop is-property-is-empty)))
             ( ( raise-empty l1 , C1) , is-empty-raise-empty)) ∘e
