@@ -194,10 +194,10 @@ commutativity-inv-eq-equiv f =
   is-injective-map-equiv
     ( equiv-univalence)
     ( ( inv (commutativity-inv-equiv-eq (eq-equiv f))) ∙
-      ( ap
-        ( λ e → (inv-equiv (map-equiv e f)))
-        ( right-inverse-law-equiv equiv-univalence)) ∙
-      ( ap
-        ( λ e → map-equiv e (inv-equiv f))
-        ( inv (right-inverse-law-equiv equiv-univalence))))
+      ( ( ap
+          ( λ e → (inv-equiv (map-equiv e f)))
+          ( right-inverse-law-equiv equiv-univalence)) ∙
+        ( ap
+          ( λ e → map-equiv e (inv-equiv f))
+          ( inv (right-inverse-law-equiv equiv-univalence)))))
 ```
