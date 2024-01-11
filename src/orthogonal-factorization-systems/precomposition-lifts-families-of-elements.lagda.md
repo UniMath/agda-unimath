@@ -197,7 +197,25 @@ module _
         ( coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
 ```
 
-### TODO
+### `precomp-lifted-family-of-elements` is homotopic to the precomposition map on functions up to equivalence
+
+We have a [commuting square](foundation.commuting-squares-of-maps.md) like this:
+
+```text
+                                     precomp-lifted-family f
+  Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
+                  |                                                           |
+                  |                                                           |
+                  | map-inv-distributive-Π-Σ         map-inv-distributive-Π-Σ |
+                  |                                                           |
+                  V                                                           V
+              I → Σ A B ------------------------------------------------> J → Σ A B ,
+                                               - ∘ f
+```
+
+which shows that `precomp-lifted-family-of-elements f` is a good choice for a
+precomposition map in the type of lifted families of elements, since it's
+homotopic to the regular precomposition map up to equivalence.
 
 ```agda
 module _
