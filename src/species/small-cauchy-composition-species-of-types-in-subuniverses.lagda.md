@@ -135,9 +135,6 @@ module _
                     ( tr
                       ( is-in-subuniverse P)
                       ( eq-equiv
-                        ( Σ (indexing-type-Relaxed-Σ-Decomposition (pr1 D))
-                          (cotype-Relaxed-Σ-Decomposition (pr1 D)))
-                        ( X)
                         ( inv-equiv
                           ( matching-correspondence-Relaxed-Σ-Decomposition
                             (pr1 D))))
@@ -199,11 +196,9 @@ module _
           ( tr
               ( is-in-subuniverse P)
               ( eq-equiv
-                  ( raise-unit l1)
-                  ( X)
                   ( ( inv-equiv
-                        ( terminal-map X , is-equiv-terminal-map-is-contr S)) ∘e
-                    inv-equiv (compute-raise-unit l1)))
+                      ( terminal-map X , is-equiv-terminal-map-is-contr S)) ∘e
+                    ( inv-equiv (compute-raise-unit l1))))
               ( C4) ,
             map-equiv-is-small (C5 X) S))
         ( λ x → eq-is-prop is-property-is-contr)

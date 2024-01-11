@@ -132,11 +132,11 @@ module _
 
   is-in-subuniverse-equiv :
     X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
-  is-in-subuniverse-equiv e = tr (is-in-subuniverse P) (eq-equiv X Y e)
+  is-in-subuniverse-equiv e = tr (is-in-subuniverse P) (eq-equiv e)
 
   is-in-subuniverse-equiv' :
     X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
-  is-in-subuniverse-equiv' e = tr (is-in-subuniverse P) (inv (eq-equiv X Y e))
+  is-in-subuniverse-equiv' e = tr (is-in-subuniverse P) (inv (eq-equiv e))
 ```
 
 ### Characterization of the identity type of subuniverses

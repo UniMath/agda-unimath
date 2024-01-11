@@ -47,12 +47,12 @@ luckily, these two notions coincide.
 map-tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
   X ≃ Y → f X → f Y
-map-tr-equiv f {X} {Y} e = tr f (eq-equiv X Y e)
+map-tr-equiv f e = tr f (eq-equiv e)
 
 is-equiv-map-tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1}
   (e : X ≃ Y) → is-equiv (map-tr-equiv f e)
-is-equiv-map-tr-equiv f {X} {Y} e = is-equiv-tr f (eq-equiv X Y e)
+is-equiv-map-tr-equiv f e = is-equiv-tr f (eq-equiv e)
 
 tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
@@ -63,7 +63,7 @@ pr2 (tr-equiv f e) = is-equiv-map-tr-equiv f e
 eq-tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
   X ≃ Y → f X ＝ f Y
-eq-tr-equiv f {X} {Y} = eq-equiv (f X) (f Y) ∘ tr-equiv f
+eq-tr-equiv f = eq-equiv ∘ tr-equiv f
 ```
 
 ### Transporting along `id-equiv` is the identity equivalence
@@ -90,13 +90,13 @@ distributive-map-tr-equiv-equiv-comp :
   map-tr-equiv f (e' ∘e e) ~ (map-tr-equiv f e' ∘ map-tr-equiv f e)
 distributive-map-tr-equiv-equiv-comp f {X} {Y} {Z} e e' x =
   ( ap (λ p → tr f p x) (inv (compute-eq-equiv-comp-equiv X Y Z e e'))) ∙
-  ( tr-concat (eq-equiv X Y e) (eq-equiv Y Z e') x)
+  ( tr-concat (eq-equiv e) (eq-equiv e') x)
 
 distributive-tr-equiv-equiv-comp :
   {l1 l2 : Level} (f : UU l1 → UU l2)
   {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
   tr-equiv f (e' ∘e e) ＝ (tr-equiv f e' ∘e tr-equiv f e)
-distributive-tr-equiv-equiv-comp f {X} {Y} {Z} e e' =
+distributive-tr-equiv-equiv-comp f e e' =
   eq-htpy-equiv (distributive-map-tr-equiv-equiv-comp f e e')
 ```
 
@@ -110,8 +110,8 @@ is-section-map-tr-equiv :
 is-section-map-tr-equiv f {X} {Y} e x =
   ( ap
     ( λ p → tr f p (map-tr-equiv f e x))
-    ( inv (commutativity-inv-eq-equiv X Y e))) ∙
-  ( is-retraction-inv-tr f (eq-equiv X Y e) x)
+    ( inv (commutativity-inv-eq-equiv e))) ∙
+  ( is-retraction-inv-tr f (eq-equiv e) x)
 
 is-retraction-map-tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2)
@@ -120,8 +120,8 @@ is-retraction-map-tr-equiv :
 is-retraction-map-tr-equiv f {X} {Y} e x =
   ( ap
     ( map-tr-equiv f e ∘ (λ p → tr f p x))
-    ( inv (commutativity-inv-eq-equiv X Y e))) ∙
-  ( is-section-inv-tr f (eq-equiv X Y e) x)
+    ( inv (commutativity-inv-eq-equiv e))) ∙
+  ( is-section-inv-tr f (eq-equiv e) x)
 ```
 
 ### Transposing transport along the inverse of an equivalence
@@ -151,7 +151,7 @@ substitution-map-tr-equiv :
   map-tr-equiv g (action-equiv-family f e) ~ map-tr-equiv (g ∘ f) e
 substitution-map-tr-equiv g f {X} {Y} e X' =
   ( ap (λ p → tr g p X') (is-retraction-eq-equiv (action-equiv-function f e))) ∙
-  ( substitution-law-tr g f (eq-equiv X Y e))
+  ( substitution-law-tr g f (eq-equiv e))
 
 substitution-law-tr-equiv :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
@@ -172,7 +172,7 @@ compute-map-tr-equiv-action-equiv-family {D = D} f g {X} {Y} e X' =
   ( ap
     ( λ p → tr D p (g X X'))
     ( is-retraction-eq-equiv (action-equiv-function f e))) ∙
-  ( tr-ap f g (eq-equiv X Y e) X')
+  ( tr-ap f g (eq-equiv e) X')
 ```
 
 ### Transport along equivalences and the action on equivalences in the universe coincide

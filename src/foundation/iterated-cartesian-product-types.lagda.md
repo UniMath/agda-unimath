@@ -155,10 +155,7 @@ eq-permutation-iterated-product-Fin-Π :
   {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) →
   permutation-iterated-product-Fin-Π n A t ＝ iterated-product-Fin-Π n A
 eq-permutation-iterated-product-Fin-Π n A t =
-  eq-equiv
-    ( permutation-iterated-product-Fin-Π n A t)
-    ( iterated-product-Fin-Π n A)
-    ( equiv-permutation-iterated-product-Fin-Π n A t)
+  eq-equiv (equiv-permutation-iterated-product-Fin-Π n A t)
 
 permutation-iterated-product-Fin-recursive :
   {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) → UU l
@@ -170,23 +167,20 @@ equiv-permutation-iterated-product-Fin-recursive :
   permutation-iterated-product-Fin-recursive n A t ≃
   iterated-product-Fin-recursive n A
 equiv-permutation-iterated-product-Fin-recursive n A t =
-  ( inv-equiv (equiv-iterated-product-Fin-recursive-Π n A) ∘e
-    ( equiv-permutation-iterated-product-Fin-Π n A t ∘e
-      equiv-iterated-product-Fin-recursive-Π n (A ∘ map-equiv t)))
+  ( inv-equiv (equiv-iterated-product-Fin-recursive-Π n A)) ∘e
+  ( equiv-permutation-iterated-product-Fin-Π n A t) ∘e
+  ( equiv-iterated-product-Fin-recursive-Π n (A ∘ map-equiv t))
 
 eq-permutation-iterated-product-Fin-recursive :
   {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) →
   permutation-iterated-product-Fin-recursive n A t ＝
   iterated-product-Fin-recursive n A
 eq-permutation-iterated-product-Fin-recursive n A t =
-  eq-equiv
-    ( permutation-iterated-product-Fin-recursive n A t)
-    ( iterated-product-Fin-recursive n A)
-    ( equiv-permutation-iterated-product-Fin-recursive n A t)
+  eq-equiv (equiv-permutation-iterated-product-Fin-recursive n A t)
 
 permutation-iterated-product-lists :
   {l : Level} (L : list (UU l)) (t : Permutation (length-list L)) → UU l
-permutation-iterated-product-lists L t =
+permutation-iterated-product-lists L t =
   iterated-product-lists (permute-list L t)
 
 equiv-permutation-iterated-product-lists :
@@ -216,8 +210,5 @@ eq-permutation-iterated-product-lists :
   permutation-iterated-product-lists L t ＝
   iterated-product-lists L
 eq-permutation-iterated-product-lists L t =
-  eq-equiv
-    ( permutation-iterated-product-lists L t)
-    ( iterated-product-lists L)
-    ( equiv-permutation-iterated-product-lists L t)
+  eq-equiv (equiv-permutation-iterated-product-lists L t)
 ```

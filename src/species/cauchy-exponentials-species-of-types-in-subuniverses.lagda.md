@@ -369,10 +369,6 @@ module _
         ( right-summand-binary-coproduct-Decomposition d)
         ( tr
           ( is-in-subuniverse P)
-          ( eq-equiv
-            ( inclusion-subuniverse P X)
-            ( left-summand-binary-coproduct-Decomposition d +
-              right-summand-binary-coproduct-Decomposition d)
-            ( matching-correspondence-binary-coproduct-Decomposition d))
+          ( eq-equiv (matching-correspondence-binary-coproduct-Decomposition d))
           ( pr2 X))
 ```

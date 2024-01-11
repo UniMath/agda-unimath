@@ -22,6 +22,8 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 ```
 
@@ -48,39 +50,37 @@ postulate
 
 ```agda
 module _
+  {l : Level} {A B : UU l}
+  where
+
+  equiv-univalence : (A ＝ B) ≃ (A ≃ B)
+  pr1 equiv-univalence = equiv-eq
+  pr2 equiv-univalence = univalence A B
+
+  eq-equiv : A ≃ B → A ＝ B
+  eq-equiv = map-inv-is-equiv (univalence A B)
+
+  abstract
+    is-section-eq-equiv : is-section equiv-eq eq-equiv
+    is-section-eq-equiv = is-section-map-inv-is-equiv (univalence A B)
+
+    is-retraction-eq-equiv : is-retraction equiv-eq eq-equiv
+    is-retraction-eq-equiv =
+      is-retraction-map-inv-is-equiv (univalence A B)
+
+module _
   {l : Level}
   where
 
-  equiv-univalence :
-    {A B : UU l} → (A ＝ B) ≃ (A ≃ B)
-  pr1 equiv-univalence = equiv-eq
-  pr2 (equiv-univalence {A} {B}) = univalence A B
+  is-equiv-eq-equiv : (A B : UU l) → is-equiv (eq-equiv)
+  is-equiv-eq-equiv A B = is-equiv-map-inv-is-equiv (univalence A B)
 
-  eq-equiv : (A B : UU l) → A ≃ B → A ＝ B
-  eq-equiv A B = map-inv-is-equiv (univalence A B)
+  compute-eq-equiv-id-equiv : (A : UU l) → eq-equiv {A = A} id-equiv ＝ refl
+  compute-eq-equiv-id-equiv A = is-retraction-eq-equiv refl
 
-  abstract
-    is-section-eq-equiv :
-      {A B : UU l} → (equiv-eq ∘ eq-equiv A B) ~ id
-    is-section-eq-equiv {A} {B} = is-section-map-inv-is-equiv (univalence A B)
-
-    is-retraction-eq-equiv :
-      {A B : UU l} → (eq-equiv A B ∘ equiv-eq) ~ id
-    is-retraction-eq-equiv {A} {B} =
-      is-retraction-map-inv-is-equiv (univalence A B)
-
-    is-equiv-eq-equiv :
-      (A B : UU l) → is-equiv (eq-equiv A B)
-    is-equiv-eq-equiv A B = is-equiv-map-inv-is-equiv (univalence A B)
-
-    compute-eq-equiv-id-equiv :
-      (A : UU l) → eq-equiv A A id-equiv ＝ refl
-    compute-eq-equiv-id-equiv A = is-retraction-eq-equiv refl
-
-    equiv-eq-equiv :
-      (A B : UU l) → (A ≃ B) ≃ (A ＝ B)
-    pr1 (equiv-eq-equiv A B) = eq-equiv A B
-    pr2 (equiv-eq-equiv A B) = is-equiv-eq-equiv A B
+  equiv-eq-equiv : (A B : UU l) → (A ≃ B) ≃ (A ＝ B)
+  pr1 (equiv-eq-equiv A B) = eq-equiv
+  pr2 (equiv-eq-equiv A B) = is-equiv-eq-equiv A B
 ```
 
 ### The total space of all equivalences out of a type or into a type is contractible
@@ -162,13 +162,13 @@ compute-equiv-eq-concat refl refl = eq-equiv-eq-map-equiv refl
 
 compute-eq-equiv-comp-equiv :
   {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
-  ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
+  ((eq-equiv f) ∙ (eq-equiv g)) ＝ eq-equiv (g ∘e f)
 compute-eq-equiv-comp-equiv A B C f g =
   is-injective-map-equiv
     ( equiv-univalence)
-    ( ( inv ( compute-equiv-eq-concat (eq-equiv A B f) (eq-equiv B C g))) ∙
+    ( ( inv ( compute-equiv-eq-concat (eq-equiv f) (eq-equiv g))) ∙
       ( ( ap
-          ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
+          ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv f)))
           ( right-inverse-law-equiv equiv-univalence)) ∙
         ( ( ap
             ( λ e → g ∘e map-equiv e f)
@@ -183,17 +183,17 @@ compute-equiv-eq-ap-inv :
 compute-equiv-eq-ap-inv refl = refl-htpy
 
 commutativity-inv-equiv-eq :
-  {l : Level} (A B : UU l) (p : A ＝ B) →
+  {l : Level} {A B : UU l} (p : A ＝ B) →
   inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
-commutativity-inv-equiv-eq A .A refl = eq-equiv-eq-map-equiv refl
+commutativity-inv-equiv-eq refl = eq-equiv-eq-map-equiv refl
 
 commutativity-inv-eq-equiv :
-  {l : Level} (A B : UU l) (f : A ≃ B) →
-  inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
-commutativity-inv-eq-equiv A B f =
+  {l : Level} {A B : UU l} (f : A ≃ B) →
+  inv (eq-equiv f) ＝ eq-equiv (inv-equiv f)
+commutativity-inv-eq-equiv f =
   is-injective-map-equiv
     ( equiv-univalence)
-    ( ( inv (commutativity-inv-equiv-eq A B (eq-equiv A B f))) ∙
+    ( ( inv (commutativity-inv-equiv-eq (eq-equiv f))) ∙
       ( ( ap
           ( λ e → (inv-equiv (map-equiv e f)))
           ( right-inverse-law-equiv equiv-univalence)) ∙

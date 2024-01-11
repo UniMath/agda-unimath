@@ -98,7 +98,7 @@ module _
     (X Y : Set l) →
     (type-Set X) ≃ (type-Set Y) → Id (type-Set Y) (type-Set X)
   map-hom-inv-symmetric-group-loop-group-Set X Y f =
-    inv (eq-equiv (type-Set X) (type-Set Y) f)
+    inv (eq-equiv f)
 
   commutative-inv-map-hom-symmetric-group-loop-group-Set :
     (X Y : UU l) (p : Id X Y) (sX : is-set X) (sY : is-set Y) →
@@ -132,9 +132,7 @@ module _
       ( inv
         ( compute-eq-equiv-comp-equiv
           ( type-Set X) (type-Set X) (type-Set X) g f))) ∙
-      ( distributive-inv-concat
-        ( eq-equiv (type-Set X) (type-Set X) g)
-        ( eq-equiv (type-Set X) (type-Set X) f))
+      ( distributive-inv-concat (eq-equiv g) (eq-equiv f))
 
   is-section-hom-inv-symmetric-group-loop-group-Set :
     Id
@@ -149,7 +147,7 @@ module _
     eq-pair-Σ
       ( eq-htpy
         ( λ f →
-          ( ap equiv-eq (inv-inv (eq-equiv (type-Set X) (type-Set X) f))) ∙
+          ( ap equiv-eq (inv-inv (eq-equiv f))) ∙
             ( ap
               ( λ e → map-equiv e f)
               ( right-inverse-law-equiv equiv-univalence))))

@@ -153,8 +153,6 @@ module _
       raise (l2 ⊔ lsuc l3) (Fin 2)
     eq-counting-equivalence-class-R n =
       eq-equiv
-        ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-        ( raise l4 (Fin 2))
         ( compute-raise-Fin l4 2 ∘e
           inv-equiv
             ( equiv-D/R-fin-2-equiv
@@ -887,11 +885,7 @@ module _
               ( ap
                 ( equivalence-class ∘ R (n +ℕ 2))
                 ( eq-pair-Σ
-                  ( inv
-                    ( eq-equiv
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( f)))
+                  ( inv (eq-equiv f))
                   ( eq-is-prop is-prop-type-trunc-Prop))) ∙
               ( ap
                 ( map-hom-Group
@@ -900,18 +894,10 @@ module _
                   ( hom-inv-symmetric-group-loop-group-Set
                     ( quotient-set-Fin (n +ℕ 2))))
                 ( eq-quotient-delooping-sign-loop-equiv-is-set-quotient n
-                  ( inv
-                    ( eq-equiv
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( f))) ∙
+                  ( inv (eq-equiv f)) ∙
                   ( inv
                     ( eq-map-quotient-aut-loop-equiv-is-set-quotient n
-                      ( inv
-                        ( eq-equiv
-                          ( raise l1 (Fin (n +ℕ 2)))
-                          ( raise l1 (Fin (n +ℕ 2)))
-                          ( f)))))) ∙
+                      ( inv (eq-equiv f))))) ∙
                 ( ap
                   ( λ g →
                     map-hom-Group
@@ -923,10 +909,7 @@ module _
                   ( commutative-inv-map-hom-symmetric-group-loop-group-Set
                     ( raise l1 (Fin (n +ℕ 2)))
                     ( raise l1 (Fin (n +ℕ 2)))
-                    ( eq-equiv
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( raise l1 (Fin (n +ℕ 2)))
-                      ( f))
+                    ( eq-equiv f)
                     ( pr2 (raise-Fin-Set l1 (n +ℕ 2)))
                     ( pr2 (raise-Fin-Set l1 (n +ℕ 2))) ∙
                     ( ap inv-equiv
@@ -935,15 +918,10 @@ module _
                           ( raise-Fin-Set l1 (n +ℕ 2))
                           ( raise-Fin-Set l1 (n +ℕ 2)))
                         ( ap
-                          ( eq-equiv
-                            ( raise l1 (Fin (n +ℕ 2)))
-                            ( raise l1 (Fin (n +ℕ 2))))
+                          ( eq-equiv)
                           ( inv (inv-inv-equiv f)) ∙
                           ( inv
-                            ( commutativity-inv-eq-equiv
-                              ( raise l1 (Fin (n +ℕ 2)))
-                              ( raise l1 (Fin (n +ℕ 2)))
-                              ( inv-equiv f)))) ∙
+                            ( commutativity-inv-eq-equiv (inv-equiv f)))) ∙
                         ( htpy-eq-hom-Group
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
                           ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -1155,10 +1133,6 @@ module _
                     ( ap
                       ( _∙
                         ( eq-equiv
-                          ( equivalence-class
-                            ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                          ( equivalence-class
-                            ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                           ( equiv-eq
                             ( inv
                               ( ap
@@ -1167,9 +1141,6 @@ module _
                                   ( eq-is-prop is-prop-type-trunc-Prop)))))))
                       ( inv
                         ( commutativity-inv-eq-equiv
-                          ( equivalence-class
-                            ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                          ( raise l4 (Fin 2))
                           ( compute-raise-Fin l4 2 ∘e
                             inv-equiv (that-thing n)))) ∙
                       ( ap
@@ -1241,9 +1212,6 @@ module _
                       ( _∙
                         ( eq-pair-Σ
                           ( eq-equiv
-                            ( equivalence-class
-                              ( R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                            ( raise l4 (Fin 2))
                             ( compute-raise-Fin l4 2 ∘e
                               inv-equiv (that-thing n)))
                           ( eq-is-prop is-prop-type-trunc-Prop)))
@@ -1554,8 +1522,7 @@ module _
           Fin 2 ≃
           equivalence-class (Id-equivalence-relation (set-UU-Fin 2 (Q n Y))))
         ( eq-pair-Σ
-          ( eq-equiv (raise l1 (Fin n)) (type-UU-Fin n X)
-            ( h ∘e inv-equiv (compute-raise-Fin l1 n)))
+          ( eq-equiv (h ∘e inv-equiv (compute-raise-Fin l1 n)))
           ( eq-is-prop is-prop-type-trunc-Prop))
         ( equiv-Q-equivalence-class n
           ( raise l1 (Fin n) ,

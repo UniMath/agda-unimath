@@ -223,7 +223,7 @@ module _
     tr
       ( is-in-function-class P)
       ( ap pr1 (is-section-eq-equiv e))
-      ( htpy-has-identity-maps-function-class has-ids-P (eq-equiv X Y e))
+      ( htpy-has-identity-maps-function-class has-ids-P (eq-equiv e))
 
   has-equivalences-has-identity-maps-function-class :
     has-identity-maps-function-class P → has-equivalences-function-class P

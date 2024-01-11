@@ -195,11 +195,7 @@ module _
                       ( pV)
                       ( tr
                         ( is-in-subuniverse P)
-                        ( eq-equiv
-                          ( pr1 X)
-                          ( Π ( indexing-type-Π-Decomposition d)
-                              ( cotype-Π-Decomposition d))
-                          ( matching-correspondence-Π-Decomposition d))
+                        ( eq-equiv (matching-correspondence-Π-Decomposition d))
                         ( pr2 X))))) ∘e
               ( ( commutative-prod) ∘e
                 ( inv-equiv
