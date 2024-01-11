@@ -185,16 +185,9 @@ module _
       is-torsorial htpy-dependent-cocone
     is-torsorial-htpy-dependent-cocone =
       is-torsorial-Eq-structure
-        ( λ α βγ K →
-            Σ ( vertical-map-dependent-cocone f g c P d ~ pr1 βγ)
-              ( coherence-htpy-dependent-cocone (α , βγ) K))
         ( is-torsorial-htpy (horizontal-map-dependent-cocone f g c P d))
         ( horizontal-map-dependent-cocone f g c P d , refl-htpy)
         ( is-torsorial-Eq-structure
-          ( λ β γ →
-            coherence-htpy-dependent-cocone
-              ( horizontal-map-dependent-cocone f g c P d , β , γ)
-              ( refl-htpy))
           ( is-torsorial-htpy (vertical-map-dependent-cocone f g c P d))
           ( vertical-map-dependent-cocone f g c P d , refl-htpy)
           ( is-contr-equiv

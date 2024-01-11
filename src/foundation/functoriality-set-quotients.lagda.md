@@ -55,9 +55,9 @@ module _
 
   preserves-sim-prop-equivalence-relation : (f : A → B) → Prop (l1 ⊔ l2 ⊔ l4)
   preserves-sim-prop-equivalence-relation f =
-    Π-Prop' A
+    implicit-Π-Prop A
       ( λ x →
-        Π-Prop' A
+        implicit-Π-Prop A
           ( λ y →
             function-Prop
               ( sim-equivalence-relation R x y)

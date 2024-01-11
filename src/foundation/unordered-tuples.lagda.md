@@ -145,7 +145,6 @@ module _
     (x : unordered-tuple n A) → is-torsorial (Eq-unordered-tuple x)
   is-torsorial-Eq-unordered-tuple x =
     is-torsorial-Eq-structure
-      ( λ i f e → element-unordered-tuple n x ~ (f ∘ map-equiv e))
       ( is-torsorial-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n x))
       ( pair (type-unordered-tuple-UU-Fin n x) id-equiv)
       ( is-torsorial-htpy (element-unordered-tuple n x))

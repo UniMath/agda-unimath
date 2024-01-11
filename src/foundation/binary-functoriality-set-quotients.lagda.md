@@ -62,13 +62,13 @@ module _
   preserves-sim-prop-binary-map-equivalence-relation :
     (A → B → C) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l6)
   preserves-sim-prop-binary-map-equivalence-relation f =
-    Π-Prop' A
+    implicit-Π-Prop A
       ( λ x →
-        Π-Prop' A
+        implicit-Π-Prop A
           ( λ x' →
-            Π-Prop' B
+            implicit-Π-Prop B
               ( λ y →
-                Π-Prop' B
+                implicit-Π-Prop B
                   ( λ y' →
                     function-Prop
                       ( sim-equivalence-relation R x x')

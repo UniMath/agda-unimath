@@ -244,10 +244,9 @@ module _
       is-torsorial (htpy-hom-sequential-diagram B f)
     is-torsorial-htpy-sequential-diagram f =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-hom-sequential-diagram B f))
         ( is-torsorial-binary-htpy (map-hom-sequential-diagram B f))
         ( map-hom-sequential-diagram B f , ev-pair refl-htpy)
-        ( is-torsorial-Eq-Π _
+        ( is-torsorial-Eq-Π
           ( λ n →
             is-torsorial-htpy
               ( naturality-map-hom-sequential-diagram B f n ∙h refl-htpy)))

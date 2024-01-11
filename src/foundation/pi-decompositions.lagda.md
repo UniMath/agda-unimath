@@ -311,23 +311,9 @@ module _
     is-torsorial (equiv-Π-Decomposition X)
   is-torsorial-equiv-Π-Decomposition =
     is-torsorial-Eq-structure
-      ( λ U Vf e →
-        Σ ( (x : indexing-type-Π-Decomposition X) →
-            cotype-Π-Decomposition X x ≃
-            (pr1 Vf (map-equiv e x)))
-          ( λ f →
-            ( ( map-equiv
-                ( equiv-Π (λ u → pr1 Vf u) e f)) ∘
-              ( map-matching-correspondence-Π-Decomposition X)) ~
-            ( map-equiv (pr2 Vf))))
       ( is-torsorial-equiv (indexing-type-Π-Decomposition X))
       ( pair (indexing-type-Π-Decomposition X) id-equiv)
       ( is-torsorial-Eq-structure
-        ( λ V g f →
-          ( ( map-equiv
-              ( equiv-Π (λ y → V y) id-equiv f)) ∘
-            ( map-matching-correspondence-Π-Decomposition X)) ~
-          ( map-equiv g))
         ( is-torsorial-equiv-fam
           ( cotype-Π-Decomposition X))
         ( pair
@@ -452,25 +438,12 @@ module _
     is-torsorial (equiv-fibered-Π-Decomposition D)
   is-torsorial-equiv-fibered-Π-Decomposition =
     is-torsorial-Eq-structure
-      ( λ X' Y' e →
-        equiv-snd-fibered-Π-Decomposition D (X' , Y') e)
       ( is-torsorial-equiv-Π-Decomposition X)
       ( X , id-equiv-Π-Decomposition X)
       ( is-torsorial-Eq-structure
-        ( λ U Vs e →
-          ( Σ ( ( u : indexing-type-Π-Decomposition Y) →
-                cotype-Π-Decomposition Y u ≃ pr1 Vs (map-equiv e u))
-              ( λ f →
-                ( ( ( map-equiv-Π (λ u → pr1 Vs u) e f) ∘
-                    ( map-matching-correspondence-Π-Decomposition Y)) ~
-                  ( map-equiv (pr2 Vs))))))
         ( is-torsorial-equiv (indexing-type-Π-Decomposition Y))
         ( pair (indexing-type-Π-Decomposition Y) id-equiv)
         ( is-torsorial-Eq-structure
-          ( λ V f g →
-            ( ( map-equiv-Π (λ u → V u) id-equiv g) ∘
-              ( map-matching-correspondence-Π-Decomposition Y)) ~
-              ( pr1 f))
           ( is-torsorial-equiv-fam
             ( cotype-Π-Decomposition Y))
           ( pair
@@ -589,10 +562,6 @@ module _
     is-torsorial (equiv-displayed-Π-Decomposition disp-D)
   is-torsorial-equiv-displayed-Π-Decomposition =
     is-torsorial-Eq-structure
-      ( λ X' f-Y' e → equiv-snd-displayed-Π-Decomposition
-        ( disp-D)
-        ( pair X' f-Y')
-        ( e))
       ( is-torsorial-equiv-Π-Decomposition X)
       ( pair X (id-equiv-Π-Decomposition X))
       ( is-contr-equiv

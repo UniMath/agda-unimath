@@ -295,11 +295,6 @@ module _
       is-torsorial (λ (Y : action-Group G l2) → equiv-action-Group G X Y)
     is-torsorial-equiv-action-Group =
       is-torsorial-Eq-structure
-        ( λ Y ν e →
-          (g : type-Group G) →
-          htpy-equiv
-            ( e ∘e map-hom-Group G (symmetric-Group (pr1 X)) (pr2 X) g)
-            ( map-hom-Group G (symmetric-Group Y) ν g ∘e e))
         ( is-torsorial-equiv-Set (pr1 X))
         ( pr1 X , id-equiv)
         ( is-contr-equiv

@@ -61,9 +61,9 @@ module _
     {l3 : Level} (B : Set l3) (f : A → type-Set B) →
     is-prop (reflects-equivalence-relation f)
   is-prop-reflects-equivalence-relation B f =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ y →
             is-prop-function-type (is-set-type-Set B (f x) (f y))))
 

@@ -192,9 +192,9 @@ module _
   is-prop-is-injective :
     is-set A → (f : A → B) → is-prop (is-injective f)
   is-prop-is-injective H f =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ y → is-prop-function-type (H x y)))
 
   is-injective-Prop : is-set A → (A → B) → Prop (l1 ⊔ l2)

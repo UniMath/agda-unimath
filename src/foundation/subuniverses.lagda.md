@@ -225,9 +225,7 @@ module _
     (Y : fam-subuniverse P X) →
     is-torsorial (equiv-fam-subuniverse Y)
   is-torsorial-equiv-fam-subuniverse Y =
-    is-torsorial-Eq-Π
-      ( λ x → equiv-subuniverse P (Y x))
-      ( λ x → is-torsorial-equiv-subuniverse P (Y x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-equiv-subuniverse P (Y x))
 
   equiv-eq-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → Y ＝ Z → equiv-fam-subuniverse Y Z

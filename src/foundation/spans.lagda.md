@@ -116,11 +116,9 @@ module _
     (c : span l A B) → is-torsorial (htpy-span c)
   is-torsorial-htpy-span c =
     is-torsorial-Eq-structure
-      ( λ X d e → coherence-hom-domain-span c (X , d) (map-equiv e))
       ( is-torsorial-equiv (pr1 c))
       ( domain-span c , id-equiv)
       ( is-torsorial-Eq-structure
-        ( λ _ f a → coherence-triangle-maps (right-map-span c) f id)
         ( is-torsorial-htpy (left-map-span c))
         ( left-map-span c , refl-htpy)
         (is-torsorial-htpy (right-map-span c)))

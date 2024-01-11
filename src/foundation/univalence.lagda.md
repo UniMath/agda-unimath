@@ -132,9 +132,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
     is-torsorial (λ (C : A → UU l2) → equiv-fam B C)
   is-torsorial-equiv-fam B =
-    is-torsorial-Eq-Π
-      ( λ x X → (B x) ≃ X)
-      ( λ x → is-torsorial-equiv (B x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-equiv (B x))
 
 abstract
   is-equiv-equiv-eq-fam :

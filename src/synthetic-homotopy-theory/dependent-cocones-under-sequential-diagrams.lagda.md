@@ -68,7 +68,7 @@ module _
       ( λ i →
         ( n : ℕ) →
         dependent-homotopy (λ _ → P)
-          ( coherence-triangle-cocone-sequential-diagram A c n)
+          ( coherence-cocone-sequential-diagram A c n)
           ( i n)
           ( i (succ-ℕ n) ∘ map-sequential-diagram A n))
 ```
@@ -90,7 +90,7 @@ module _
   coherence-triangle-dependent-cocone-sequential-diagram :
     ( n : ℕ) → (a : family-sequential-diagram A n) →
     dependent-identification P
-      ( coherence-triangle-cocone-sequential-diagram A c n a)
+      ( coherence-cocone-sequential-diagram A c n a)
       ( map-dependent-cocone-sequential-diagram n a)
       ( map-dependent-cocone-sequential-diagram
         ( succ-ℕ n)
@@ -122,7 +122,7 @@ module _
     ( ( coherence-triangle-dependent-cocone-sequential-diagram A P d n a) ∙
       ( K (succ-ℕ n) (map-sequential-diagram A n a))) ＝
     ( ( ap
-        ( tr P (coherence-triangle-cocone-sequential-diagram A c n a))
+        ( tr P (coherence-cocone-sequential-diagram A c n a))
         ( K n a)) ∙
       ( coherence-triangle-dependent-cocone-sequential-diagram A P d' n a))
 
@@ -175,7 +175,7 @@ module _
   pr1 (dependent-cocone-map-sequential-diagram P h) n =
     h ∘ map-cocone-sequential-diagram A c n
   pr2 (dependent-cocone-map-sequential-diagram P h) n =
-    apd h ∘ coherence-triangle-cocone-sequential-diagram A c n
+    apd h ∘ coherence-cocone-sequential-diagram A c n
 ```
 
 ## Properties
@@ -209,7 +209,6 @@ module _
       is-torsorial (htpy-dependent-cocone-sequential-diagram A P d)
     is-torsorial-htpy-dependent-cocone-sequential-diagram d =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-dependent-cocone-sequential-diagram A P d))
         ( is-torsorial-binary-htpy
           ( map-dependent-cocone-sequential-diagram A P d))
         ( map-dependent-cocone-sequential-diagram A P d ,
@@ -263,7 +262,7 @@ module _
                 equiv-concat
                   ( inv
                     ( tr-constant-type-family
-                      ( coherence-triangle-cocone-sequential-diagram A c n a)
+                      ( coherence-cocone-sequential-diagram A c n a)
                       ( i n a)))
                   ( i (succ-ℕ n) (map-sequential-diagram A n a)))))
 
@@ -289,7 +288,7 @@ module _
           left-transpose-eq-concat _ _ _
             ( inv
               ( apd-constant-type-family h
-                ( coherence-triangle-cocone-sequential-diagram A c n a)))))
+                ( coherence-cocone-sequential-diagram A c n a)))))
 ```
 
 ### Dependent cocones under sequential diagrams are special cases of dependent coforks

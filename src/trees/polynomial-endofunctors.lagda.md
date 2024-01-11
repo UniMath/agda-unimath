@@ -71,7 +71,6 @@ module _
     is-torsorial (Eq-type-polynomial-endofunctor x)
   is-torsorial-Eq-type-polynomial-endofunctor (pair x α) =
     is-torsorial-Eq-structure
-      ( ( λ (y : A) (β : B y → X) (p : x ＝ y) → α ~ (β ∘ tr B p)))
       ( is-torsorial-path x)
       ( pair x refl)
       ( is-torsorial-htpy α)

@@ -140,11 +140,9 @@ module _
     (m : map-over f g i) → is-torsorial (htpy-map-over m)
   is-torsorial-htpy-map-over m =
     is-torsorial-Eq-structure
-      ( λ g G → coherence-htpy-map-over m (g , G))
       ( is-torsorial-htpy (map-total-map-over f g i m))
       ( map-total-map-over f g i m , refl-htpy)
-      ( is-torsorial-htpy
-        ( is-map-over-map-total-map-over f g i m ∙h refl-htpy))
+      ( is-torsorial-htpy (is-map-over-map-total-map-over f g i m ∙h refl-htpy))
 
   is-equiv-htpy-eq-map-over :
     (m m' : map-over f g i) → is-equiv (htpy-eq-map-over m m')
@@ -197,17 +195,9 @@ module _
     (m : fibered-map f g) → is-torsorial (htpy-fibered-map m)
   is-torsorial-htpy-fibered-map m =
     is-torsorial-Eq-structure
-      ( λ i hH I →
-          Σ ( map-total-fibered-map f g m ~ map-total-fibered-map f g (i , hH))
-            ( coherence-htpy-fibered-map m (i , hH) I))
       ( is-torsorial-htpy (map-base-fibered-map f g m))
       ( map-base-fibered-map f g m , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ h H →
-          coherence-htpy-fibered-map
-            ( m)
-            ( map-base-fibered-map f g m , h , H)
-            ( refl-htpy))
         ( is-torsorial-htpy (map-total-fibered-map f g m))
         ( map-total-fibered-map f g m , refl-htpy)
         ( is-torsorial-htpy

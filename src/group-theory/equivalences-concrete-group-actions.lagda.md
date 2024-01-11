@@ -66,9 +66,7 @@ module _
   is-torsorial-equiv-action-Concrete-Group :
     is-torsorial equiv-action-Concrete-Group
   is-torsorial-equiv-action-Concrete-Group =
-    is-torsorial-Eq-Π
-      ( λ u → type-equiv-Set (X u))
-      ( λ u → is-torsorial-equiv-Set (X u))
+    is-torsorial-Eq-Π (λ u → is-torsorial-equiv-Set (X u))
 
 module _
   {l1 l2 l3 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)

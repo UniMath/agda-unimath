@@ -406,23 +406,9 @@ module _
     is-torsorial (equiv-Σ-Decomposition X)
   is-torsorial-equiv-Σ-Decomposition =
     is-torsorial-Eq-structure
-      ( λ U Vf e →
-        Σ ( (x : indexing-type-Σ-Decomposition X) →
-            cotype-Σ-Decomposition X x ≃
-            type-Inhabited-Type (pr1 Vf (map-equiv e x)))
-          ( λ f →
-            ( ( map-equiv
-                ( equiv-Σ (λ u → type-Inhabited-Type (pr1 Vf u)) e f)) ∘
-              ( map-matching-correspondence-Σ-Decomposition X)) ~
-            ( map-equiv (pr2 Vf))))
       ( is-torsorial-equiv (indexing-type-Σ-Decomposition X))
       ( pair (indexing-type-Σ-Decomposition X) id-equiv)
       ( is-torsorial-Eq-structure
-        ( λ V g f →
-          ( ( map-equiv
-              ( equiv-Σ (λ y → type-Inhabited-Type (V y)) id-equiv f)) ∘
-            ( map-matching-correspondence-Σ-Decomposition X)) ~
-          ( map-equiv g))
         ( is-torsorial-equiv-Fam-Inhabited-Types
           ( inhabited-cotype-Σ-Decomposition X))
         ( pair
@@ -507,23 +493,9 @@ module _
     is-torsorial (equiv-Set-Indexed-Σ-Decomposition X)
   is-torsorial-equiv-Set-Indexed-Σ-Decomposition =
     is-torsorial-Eq-structure
-      ( λ U Vf e →
-        Σ ( (x : indexing-type-Set-Indexed-Σ-Decomposition X) →
-            cotype-Set-Indexed-Σ-Decomposition X x ≃
-            type-Inhabited-Type (pr1 Vf (map-equiv e x)))
-          ( λ f →
-            ( ( map-equiv
-                ( equiv-Σ (λ u → type-Inhabited-Type (pr1 Vf u)) e f)) ∘
-              ( map-matching-correspondence-Set-Indexed-Σ-Decomposition X)) ~
-            ( map-equiv (pr2 Vf))))
       ( is-torsorial-equiv-Set (indexing-set-Set-Indexed-Σ-Decomposition X))
       ( pair (indexing-set-Set-Indexed-Σ-Decomposition X) id-equiv)
       ( is-torsorial-Eq-structure
-        ( λ V g f →
-          ( ( map-equiv
-              ( equiv-Σ (λ y → type-Inhabited-Type (V y)) id-equiv f)) ∘
-            ( map-matching-correspondence-Set-Indexed-Σ-Decomposition X)) ~
-          ( map-equiv g))
         ( is-torsorial-equiv-Fam-Inhabited-Types
           ( inhabited-cotype-Set-Indexed-Σ-Decomposition X))
         ( pair
@@ -623,26 +595,12 @@ module _
     is-torsorial (equiv-fibered-Σ-Decomposition D)
   is-torsorial-equiv-fibered-Σ-Decomposition =
     is-torsorial-Eq-structure
-      ( λ X' Y' e →
-        equiv-snd-fibered-Σ-Decomposition D (X' , Y') e)
       ( is-torsorial-equiv-Σ-Decomposition X)
       ( X , id-equiv-Σ-Decomposition X)
       ( is-torsorial-Eq-structure
-        ( λ U Vs e →
-          ( Σ ( ( u : indexing-type-Σ-Decomposition Y) →
-                cotype-Σ-Decomposition Y u ≃
-                type-Inhabited-Type (pr1 Vs (map-equiv e u)))
-              ( λ f →
-                ( ( ( map-equiv-Σ (λ u → type-Inhabited-Type (pr1 Vs u)) e f) ∘
-                    ( map-matching-correspondence-Σ-Decomposition Y)) ~
-                  ( map-equiv (pr2 Vs))))))
         ( is-torsorial-equiv (indexing-type-Σ-Decomposition Y))
         ( pair (indexing-type-Σ-Decomposition Y) id-equiv)
         ( is-torsorial-Eq-structure
-          ( λ V f g →
-            ( ( map-equiv-Σ (λ u → type-Inhabited-Type (V u)) id-equiv g) ∘
-              ( map-matching-correspondence-Σ-Decomposition Y)) ~
-              ( pr1 f))
           ( is-torsorial-equiv-Fam-Inhabited-Types
             ( inhabited-cotype-Σ-Decomposition Y))
           ( pair
@@ -754,10 +712,6 @@ module _
     is-torsorial (equiv-displayed-Σ-Decomposition disp-D)
   is-torsorial-equiv-displayed-Σ-Decomposition =
     is-torsorial-Eq-structure
-      ( λ X' f-Y' e → equiv-snd-displayed-Σ-Decomposition
-        ( disp-D)
-        ( pair X' f-Y')
-        ( e))
       ( is-torsorial-equiv-Σ-Decomposition X)
       ( pair X (id-equiv-Σ-Decomposition X))
       ( is-contr-equiv

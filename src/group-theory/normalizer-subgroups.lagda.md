@@ -73,7 +73,7 @@ module _
 
   subset-normalizer-Subgroup : subset-Group (l1 ⊔ l2) G
   subset-normalizer-Subgroup x =
-    Π-Prop'
+    implicit-Π-Prop
       ( type-Group G)
       ( λ y →
         iff-Prop
