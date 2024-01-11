@@ -1,7 +1,7 @@
-# Commuting `3`-simplices of maps
+# Commuting tetrahedra of maps
 
 ```agda
-module foundation.commuting-3-simplices-of-maps where
+module foundation.commuting-tetrahedra-of-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -18,7 +18,8 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A commuting 3-simplex is a commuting diagram of the form
+A {{#concept "commuting tetrahedron of maps" Agda=coherence-tetrahedron-maps}}
+is a commuting diagram of the form
 
 ```text
   A ----------> B
@@ -43,13 +44,13 @@ module _
   (lower-left : coherence-triangle-maps diagonal-down bottom left)
   where
 
-  coherence-3-simplex-maps : UU (l1 ⊔ l4)
-  coherence-3-simplex-maps =
+  coherence-tetrahedron-maps : UU (l1 ⊔ l4)
+  coherence-tetrahedron-maps =
     ( upper-right ∙h (right ·l upper-left)) ~
     ( lower-left ∙h (lower-right ·r left))
 
-  coherence-3-simplex-maps' : UU (l1 ⊔ l4)
-  coherence-3-simplex-maps' =
+  coherence-tetrahedron-maps' : UU (l1 ⊔ l4)
+  coherence-tetrahedron-maps' =
     ( lower-left ∙h (lower-right ·r left)) ~
     ( upper-right ∙h (right ·l upper-left))
 ```

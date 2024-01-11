@@ -1,7 +1,7 @@
-# Commuting `3`-simplices of homotopies
+# Commuting tetrahedra of homotopies
 
 ```agda
-module foundation.commuting-3-simplices-of-homotopies where
+module foundation.commuting-tetrahedra-of-homotopies where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,9 @@ open import foundation-core.homotopies
 
 ## Idea
 
-A **commuting 3-simplex of homotopies** is a commuting diagram of the form
+A
+{{#concept "commuting tetrahedron of homotopies" Agda=coherence-tetrahedron-homotopies}}
+is a commuting diagram of the form
 
 ```text
   f ----------> g
@@ -45,31 +47,31 @@ module _
   (lower-left : coherence-triangle-homotopies diagonal-down bottom left)
   where
 
-  coherence-3-simplex-homotopies : UU (l1 ⊔ l2)
-  coherence-3-simplex-homotopies =
-    ( upper-right ∙h
-      left-whisk-htpy-coherence-triangle-homotopies
+  coherence-tetrahedron-homotopies : UU (l1 ⊔ l2)
+  coherence-tetrahedron-homotopies =
+    ( ( upper-right) ∙h
+      ( left-whisk-htpy-coherence-triangle-homotopies
         ( diagonal-up)
         ( right)
-        ( upper-left)) ~
-    ( ( lower-left ∙h
-        right-whisk-htpy-coherence-triangle-homotopies
-          ( right)
-          ( lower-right)
-          ( left)) ∙h
-      assoc-htpy left diagonal-up right)
+        ( upper-left))) ~
+    ( ( lower-left) ∙h
+      ( right-whisk-htpy-coherence-triangle-homotopies
+        ( right)
+        ( lower-right)
+        ( left)) ∙h
+      ( assoc-htpy left diagonal-up right))
 
-  coherence-3-simplex-homotopies' : UU (l1 ⊔ l2)
-  coherence-3-simplex-homotopies' =
-    ( ( lower-left ∙h
-        right-whisk-htpy-coherence-triangle-homotopies
+  coherence-tetrahedron-homotopies' : UU (l1 ⊔ l2)
+  coherence-tetrahedron-homotopies' =
+    ( ( lower-left) ∙h
+      ( right-whisk-htpy-coherence-triangle-homotopies
           ( right)
           ( lower-right)
           ( left)) ∙h
-      assoc-htpy left diagonal-up right) ~
-    ( upper-right ∙h
-      left-whisk-htpy-coherence-triangle-homotopies
+      ( assoc-htpy left diagonal-up right)) ~
+    ( ( upper-right) ∙h
+      ( left-whisk-htpy-coherence-triangle-homotopies
         ( diagonal-up)
         ( right)
-        ( upper-left))
+        ( upper-left)))
 ```
