@@ -88,8 +88,8 @@ distributive-map-tr-equiv-equiv-comp :
   {l1 l2 : Level} (f : UU l1 → UU l2)
   {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
   map-tr-equiv f (e' ∘e e) ~ (map-tr-equiv f e' ∘ map-tr-equiv f e)
-distributive-map-tr-equiv-equiv-comp f {X} {Y} {Z} e e' x =
-  ( ap (λ p → tr f p x) (inv (compute-eq-equiv-comp-equiv X Y Z e e'))) ∙
+distributive-map-tr-equiv-equiv-comp f e e' x =
+  ( ap (λ p → tr f p x) (inv (compute-eq-equiv-comp-equiv e e'))) ∙
   ( tr-concat (eq-equiv e) (eq-equiv e') x)
 
 distributive-tr-equiv-equiv-comp :
@@ -107,7 +107,7 @@ is-section-map-tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2)
   {X Y : UU l1} (e : X ≃ Y) →
   (map-tr-equiv f (inv-equiv e) ∘ map-tr-equiv f e) ~ id
-is-section-map-tr-equiv f {X} {Y} e x =
+is-section-map-tr-equiv f e x =
   ( ap
     ( λ p → tr f p (map-tr-equiv f e x))
     ( inv (commutativity-inv-eq-equiv e))) ∙
@@ -117,7 +117,7 @@ is-retraction-map-tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2)
   {X Y : UU l1} (e : X ≃ Y) →
   (map-tr-equiv f e ∘ map-tr-equiv f (inv-equiv e)) ~ id
-is-retraction-map-tr-equiv f {X} {Y} e x =
+is-retraction-map-tr-equiv f e x =
   ( ap
     ( map-tr-equiv f e ∘ (λ p → tr f p x))
     ( inv (commutativity-inv-eq-equiv e))) ∙
@@ -149,7 +149,7 @@ substitution-map-tr-equiv :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
   (e : X ≃ Y) →
   map-tr-equiv g (action-equiv-family f e) ~ map-tr-equiv (g ∘ f) e
-substitution-map-tr-equiv g f {X} {Y} e X' =
+substitution-map-tr-equiv g f e X' =
   ( ap (λ p → tr g p X') (is-retraction-eq-equiv (action-equiv-function f e))) ∙
   ( substitution-law-tr g f (eq-equiv e))
 
@@ -168,7 +168,7 @@ compute-map-tr-equiv-action-equiv-family :
   (f : UU l1 → UU l3) (g : (X : UU l1) → B X → D (f X))
   {X Y : UU l1} (e : X ≃ Y) (X' : B X) →
   map-tr-equiv D (action-equiv-family f e) (g X X') ＝ g Y (map-tr-equiv B e X')
-compute-map-tr-equiv-action-equiv-family {D = D} f g {X} {Y} e X' =
+compute-map-tr-equiv-action-equiv-family {D = D} f g {X} e X' =
   ( ap
     ( λ p → tr D p (g X X'))
     ( is-retraction-eq-equiv (action-equiv-function f e))) ∙

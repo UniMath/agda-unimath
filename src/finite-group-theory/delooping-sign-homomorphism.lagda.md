@@ -1104,9 +1104,6 @@ module _
             ( ap inv
               ( inv
                 ( compute-eq-equiv-comp-equiv
-                  ( raise l4 (Fin 2))
-                  ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                  ( raise l4 (Fin 2))
                   ( equiv-eq
                     ( inv
                       ( ap
@@ -1119,9 +1116,6 @@ module _
                   ( _∙ eq-counting-equivalence-class-R n)
                   ( inv
                     ( compute-eq-equiv-comp-equiv
-                      ( raise l4 (Fin 2))
-                      ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-                      ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                       ( inv-equiv
                         ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n)))
                       ( equiv-eq

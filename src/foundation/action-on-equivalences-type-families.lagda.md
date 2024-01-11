@@ -121,8 +121,8 @@ coherence-square-action-equiv-family B X .X refl =
 ```agda
 compute-action-equiv-family-id :
   {l : Level} {X Y : UU l} (e : X ≃ Y) → (action-equiv-family id e) ＝ e
-compute-action-equiv-family-id {l} {X} {Y} e =
-  (ap equiv-eq (ap-id (eq-equiv e))) ∙ (is-section-eq-equiv e)
+compute-action-equiv-family-id e =
+  ap equiv-eq (ap-id (eq-equiv e)) ∙ is-section-eq-equiv e
 ```
 
 ### The action on equivalences of a constant map is constant

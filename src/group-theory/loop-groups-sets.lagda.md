@@ -97,8 +97,7 @@ module _
   map-hom-inv-symmetric-group-loop-group-Set :
     (X Y : Set l) →
     (type-Set X) ≃ (type-Set Y) → Id (type-Set Y) (type-Set X)
-  map-hom-inv-symmetric-group-loop-group-Set X Y f =
-    inv (eq-equiv f)
+  map-hom-inv-symmetric-group-loop-group-Set X Y f = inv (eq-equiv f)
 
   commutative-inv-map-hom-symmetric-group-loop-group-Set :
     (X Y : UU l) (p : Id X Y) (sX : is-set X) (sY : is-set Y) →
@@ -127,12 +126,8 @@ module _
   pr1 hom-inv-symmetric-group-loop-group-Set =
     map-hom-inv-symmetric-group-loop-group-Set X X
   pr2 hom-inv-symmetric-group-loop-group-Set {f} {g} =
-    ( ap
-      ( inv)
-      ( inv
-        ( compute-eq-equiv-comp-equiv
-          ( type-Set X) (type-Set X) (type-Set X) g f))) ∙
-      ( distributive-inv-concat (eq-equiv g) (eq-equiv f))
+    ( ap inv (inv (compute-eq-equiv-comp-equiv g f))) ∙
+    ( distributive-inv-concat (eq-equiv g) (eq-equiv f))
 
   is-section-hom-inv-symmetric-group-loop-group-Set :
     Id

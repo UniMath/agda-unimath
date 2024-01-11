@@ -79,8 +79,8 @@ distributive-action-equiv-function-comp-equiv :
   (e : X ≃ Y) (e' : Y ≃ Z) →
   action-equiv-function f (e' ∘e e) ＝
   action-equiv-function f e ∙ action-equiv-function f e'
-distributive-action-equiv-function-comp-equiv f {X} {Y} {Z} e e' =
-    ( ap (ap f) (inv (compute-eq-equiv-comp-equiv X Y Z e e'))) ∙
+distributive-action-equiv-function-comp-equiv f e e' =
+    ( ap (ap f) (inv (compute-eq-equiv-comp-equiv e e'))) ∙
     ( ap-concat f (eq-equiv e) (eq-equiv e'))
 ```
 
