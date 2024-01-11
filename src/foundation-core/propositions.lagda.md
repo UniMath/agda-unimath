@@ -296,12 +296,12 @@ pr2 (function-Prop A P) = is-prop-type-function-Prop A P
 
 type-hom-Prop :
   { l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
-type-hom-Prop P Q = type-function-Prop (type-Prop P) Q
+type-hom-Prop P = type-function-Prop (type-Prop P)
 
 is-prop-type-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   is-prop (type-hom-Prop P Q)
-is-prop-type-hom-Prop P Q = is-prop-type-function-Prop (type-Prop P) Q
+is-prop-type-hom-Prop P = is-prop-type-function-Prop (type-Prop P)
 
 hom-Prop :
   { l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
@@ -310,11 +310,11 @@ pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
 
 implication-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-implication-Prop P Q = hom-Prop P Q
+implication-Prop = hom-Prop
 
 type-implication-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-type-implication-Prop P Q = type-hom-Prop P Q
+type-implication-Prop = type-hom-Prop
 
 infixr 5 _⇒_
 _⇒_ = type-implication-Prop
