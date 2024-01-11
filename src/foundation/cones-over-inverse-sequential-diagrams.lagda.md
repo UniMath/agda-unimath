@@ -125,11 +125,9 @@ module _
     is-torsorial (htpy-cone-inverse-sequential-diagram c)
   is-torsorial-htpy-cone-inverse-sequential-diagram c =
     is-torsorial-Eq-structure
-      ( λ x z → coherence-htpy-cone-inverse-sequential-diagram c (x , z))
       ( is-torsorial-binary-htpy (map-cone-inverse-sequential-diagram A c))
       ( map-cone-inverse-sequential-diagram A c , (λ n → refl-htpy))
       ( is-torsorial-Eq-Π
-        ( λ n → coherence-cone-inverse-sequential-diagram A c n ∙h refl-htpy ~_)
         ( λ n →
           is-torsorial-htpy
             ( coherence-cone-inverse-sequential-diagram A c n ∙h refl-htpy)))

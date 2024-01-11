@@ -189,11 +189,11 @@ module _
     (f : hom-inverse-sequential-diagram A B) →
     is-torsorial (htpy-hom-inverse-sequential-diagram f)
   is-torsorial-htpy-hom-inverse-sequential-diagram f =
-    is-torsorial-Eq-structure _
+    is-torsorial-Eq-structure
       ( is-torsorial-binary-htpy (map-hom-inverse-sequential-diagram A B f))
       ( map-hom-inverse-sequential-diagram A B f ,
         refl-binary-htpy (map-hom-inverse-sequential-diagram A B f))
-      ( is-torsorial-Eq-Π _
+      ( is-torsorial-Eq-Π
         ( λ n →
           is-torsorial-htpy
             ( naturality-map-hom-inverse-sequential-diagram A B f n ∙h

@@ -90,12 +90,11 @@ is-torsorial-equiv-inverse-sequential-diagram :
   {l : Level} (A : inverse-sequential-diagram l) →
   is-torsorial (equiv-inverse-sequential-diagram A)
 is-torsorial-equiv-inverse-sequential-diagram A =
-  is-torsorial-Eq-structure _
+  is-torsorial-Eq-structure
     ( is-torsorial-Eq-Π
-      ( λ n → family-inverse-sequential-diagram A n ≃_)
       ( λ n → is-torsorial-equiv (family-inverse-sequential-diagram A n)))
     ( family-inverse-sequential-diagram A , λ n → id-equiv)
-    ( is-torsorial-Eq-Π _
+    ( is-torsorial-Eq-Π
       ( λ n → is-torsorial-htpy (map-inverse-sequential-diagram A n)))
 
 is-equiv-equiv-eq-inverse-sequential-diagram :
