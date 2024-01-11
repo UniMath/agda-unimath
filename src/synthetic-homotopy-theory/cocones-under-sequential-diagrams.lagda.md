@@ -219,7 +219,6 @@ module _
       is-torsorial (htpy-cocone-sequential-diagram A c)
     is-torsorial-htpy-cocone-sequential-diagram c =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-cocone-sequential-diagram A c))
         ( is-torsorial-binary-htpy (map-cocone-sequential-diagram A c))
         ( ( map-cocone-sequential-diagram A c) ,
           ( ev-pair refl-htpy))

@@ -196,15 +196,6 @@ module _
     is-torsorial (htpy-equiv-Undirected-Graph f)
   is-torsorial-htpy-equiv-Undirected-Graph f =
     is-torsorial-Eq-structure
-      ( λ gV gE α →
-        ( p : unordered-pair-vertices-Undirected-Graph G) →
-          ( e : edge-Undirected-Graph G p) →
-          Id
-            ( tr
-              ( edge-Undirected-Graph H)
-              ( htpy-unordered-pair α p)
-              ( edge-equiv-Undirected-Graph G H f p e))
-            ( map-equiv (gE p) e))
       ( is-torsorial-htpy-equiv (equiv-vertex-equiv-Undirected-Graph G H f))
       ( pair (equiv-vertex-equiv-Undirected-Graph G H f) refl-htpy)
       ( is-contr-equiv'
@@ -272,9 +263,6 @@ module _
     is-torsorial (equiv-Undirected-Graph G)
   is-torsorial-equiv-Undirected-Graph =
     is-torsorial-Eq-structure
-      ( λ VH VE e →
-        ( p : unordered-pair-vertices-Undirected-Graph G) →
-        edge-Undirected-Graph G p ≃ VE (map-equiv-unordered-pair e p))
       ( is-torsorial-equiv (vertex-Undirected-Graph G))
       ( pair (vertex-Undirected-Graph G) id-equiv)
       ( is-torsorial-Eq-Π

@@ -141,30 +141,12 @@ module _
     is-torsorial Eq-structure-Hatcher-Acyclic-Type
   is-torsorial-Eq-structure-Hatcher-Acyclic-Type =
     is-torsorial-Eq-structure
-      ( λ (ω : type-Ω A) u (p : pr1 s ＝ ω) →
-          Σ ( pr1 (pr2 s) ＝ pr1 u)
-            ( λ q →
-              ( ( pr1 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 3 A) q) ＝
-                ( ap (power-nat-Ω 5 A) p ∙ pr1 (pr2 u))) ×
-              ( ( pr2
-                  ( pr2 (pr2 s)) ∙ ap (power-nat-Ω 2 A) (ap-binary _∙_ p q)) ＝
-                ( ap (power-nat-Ω 3 A) q ∙ pr2 (pr2 u)))))
       ( is-torsorial-path (pr1 s))
       ( pr1 s , refl)
       ( is-torsorial-Eq-structure
-        ( λ ω u p →
-          Σ ( ( pr1 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 3 A) p) ＝
-              ( ap (power-nat-Ω 5 A) {pr1 s} refl ∙ pr1 u))
-            ( λ a →
-              ( ( pr2 (pr2 (pr2 s))) ∙
-                ( ap
-                  ( power-nat-Ω 2 A)
-                  ( ap-binary _∙_ {pr1 s} {pr1 s} refl p))) ＝
-              ( ap (power-nat-Ω 3 A) p ∙ pr2 u)))
         ( is-torsorial-path (pr1 (pr2 s)))
         ( pr1 (pr2 s) , refl)
         ( is-torsorial-Eq-structure
-          ( λ u v w → Id (pr2 (pr2 (pr2 s)) ∙ refl) v)
           ( is-torsorial-path (pr1 (pr2 (pr2 s)) ∙ refl))
           ( pr1 (pr2 (pr2 s)) , right-unit)
           ( is-torsorial-path (pr2 (pr2 (pr2 s)) ∙ refl))))

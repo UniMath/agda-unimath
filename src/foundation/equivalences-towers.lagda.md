@@ -75,7 +75,7 @@ equiv-eq-tower A .A refl = id-equiv-tower A
 is-torsorial-equiv-tower :
   {l : Level} (A : tower l) → is-torsorial (equiv-tower A)
 is-torsorial-equiv-tower A =
-  is-torsorial-Eq-structure _
+  is-torsorial-Eq-structure
     ( is-torsorial-Eq-Π
       ( λ n → type-tower A n ≃_)
       ( λ n → is-torsorial-equiv (type-tower A n)))

@@ -308,8 +308,6 @@ module _
     is-torsorial (equiv-Type-With-Endomorphism X)
   is-torsorial-equiv-Type-With-Endomorphism =
     is-torsorial-Eq-structure
-      ( λ Y f e →
-        map-equiv e ∘ endomorphism-Type-With-Endomorphism X ~ f ∘ map-equiv e)
       ( is-torsorial-equiv (type-Type-With-Endomorphism X))
       ( type-Type-With-Endomorphism X , id-equiv)
       ( is-torsorial-htpy (endomorphism-Type-With-Endomorphism X))

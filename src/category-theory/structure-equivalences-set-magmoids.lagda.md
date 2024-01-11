@@ -165,10 +165,10 @@ equivalences of sets are torsorial.
     is-contr-equiv'
       ( Σ (Set-Magmoid l1 l2) (componentwise-structure-equiv-Set-Magmoid A))
       (equiv-tot (compute-structure-equiv-Set-Magmoid A))
-      ( is-torsorial-Eq-structure _
+      ( is-torsorial-Eq-structure
         ( is-torsorial-equiv (obj-Set-Magmoid A))
         ( obj-Set-Magmoid A , id-equiv)
-        ( is-torsorial-Eq-structure _
+        ( is-torsorial-Eq-structure
           ( {!   !})
           ( hom-set-Set-Magmoid A , λ {x} {y} → id-equiv)
           ( is-torsorial-Eq-implicit-Π _

@@ -559,17 +559,11 @@ is-torsorial-equiv-Fam-pushout :
   is-torsorial (equiv-Fam-pushout P)
 is-torsorial-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P =
   is-torsorial-Eq-structure
-    ( λ PA' t eA →
-      Σ ( (b : B) → (pr1 (pr2 P) b) ≃ (pr1 t b))
-        ( coherence-equiv-Fam-pushout P (pair PA' t) eA))
     ( is-torsorial-Eq-Π
       ( λ a X → (pr1 P a) ≃ X)
       ( λ a → is-torsorial-equiv (pr1 P a)))
     ( pair (pr1 P) (λ a → id-equiv))
     ( is-torsorial-Eq-structure
-      ( λ PB' PS' eB →
-        coherence-equiv-Fam-pushout
-          P (pair (pr1 P) (pair PB' PS')) (λ a → id-equiv) eB)
       ( is-torsorial-Eq-Π
         ( λ b Y → (pr1 (pr2 P) b) ≃ Y)
         ( λ b → is-torsorial-equiv (pr1 (pr2 P) b)))

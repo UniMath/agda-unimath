@@ -240,13 +240,11 @@ module _
     is-torsorial (equiv-binary-coproduct-Decomposition-subuniverse P A X)
   is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse =
     is-torsorial-Eq-structure
-      ( _)
       ( is-torsorial-equiv-subuniverse P
         ( left-summand-binary-coproduct-Decomposition-subuniverse P A X))
       ( left-summand-binary-coproduct-Decomposition-subuniverse P A X ,
         id-equiv)
       ( is-torsorial-Eq-structure
-        ( _)
         ( is-torsorial-equiv-subuniverse P
           ( right-summand-binary-coproduct-Decomposition-subuniverse P A X))
         ( right-summand-binary-coproduct-Decomposition-subuniverse P A X ,

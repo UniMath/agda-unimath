@@ -259,14 +259,6 @@ module _
     is-torsorial (htpy-equiv-Directed-Graph G H e)
   is-torsorial-htpy-equiv-Directed-Graph =
     is-torsorial-Eq-structure
-      ( λ α β γ →
-        (x y : vertex-Directed-Graph G) (u : edge-Directed-Graph G x y) →
-        ( binary-tr
-          ( edge-Directed-Graph H)
-            ( γ x)
-            ( γ y)
-            ( edge-equiv-Directed-Graph G H e x y u)) ＝
-        ( map-equiv (β x y) u))
       ( is-torsorial-htpy-equiv (equiv-vertex-equiv-Directed-Graph G H e))
       ( equiv-vertex-equiv-Directed-Graph G H e , refl-htpy)
       ( is-torsorial-Eq-Π

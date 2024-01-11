@@ -474,7 +474,6 @@ module _
     is-torsorial (equiv-Connected-Map f)
   is-torsorial-equiv-Connected-Map =
     is-torsorial-Eq-structure
-      ( λ Y g e → (map-equiv e ∘ map-Connected-Map f) ~ map-connected-map g)
       ( is-torsorial-equiv (type-Connected-Map f))
       ( pair (type-Connected-Map f) id-equiv)
       ( is-torsorial-htpy-connected-map (connected-map-Connected-Map f))
@@ -528,9 +527,6 @@ module _
     is-torsorial (equiv-Connected-Map-Into-Truncated-Type f)
   is-torsorial-equiv-Connected-Map-Into-Truncated-Type =
     is-torsorial-Eq-structure
-      ( λ Y g e →
-        ( map-equiv e ∘ map-Connected-Map-Into-Truncated-Type f) ~
-        ( map-connected-map g))
       ( is-torsorial-equiv-Truncated-Type
         ( truncated-type-Connected-Map-Into-Truncated-Type f))
       ( pair (truncated-type-Connected-Map-Into-Truncated-Type f) id-equiv)

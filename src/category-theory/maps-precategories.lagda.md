@@ -170,7 +170,7 @@ module _
   is-torsorial-htpy-map-Precategory :
     (f : map-Precategory C D) → is-torsorial (htpy-map-Precategory f)
   is-torsorial-htpy-map-Precategory f =
-    is-torsorial-Eq-structure _
+    is-torsorial-Eq-structure
       ( is-torsorial-htpy (obj-map-Precategory C D f))
       ( obj-map-Precategory C D f , refl-htpy)
       ( is-torsorial-Eq-implicit-Π _

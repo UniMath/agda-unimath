@@ -70,9 +70,6 @@ is-torsorial-equiv-cube :
   (k : ℕ) (X : cube k) → is-torsorial (equiv-cube k X)
 is-torsorial-equiv-cube k X =
   is-torsorial-Eq-structure
-    ( λ D (A : type-UU-Fin k D → UU-Fin lzero 2)
-          (e : equiv-UU-Fin k (dim-cube-UU-Fin k X) D) →
-          (i : dim-cube k X) → axis-cube k X i ≃ pr1 (A (map-equiv e i)))
     ( is-torsorial-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X))
     ( pair
       ( dim-cube-UU-Fin k X)
@@ -122,10 +119,6 @@ is-torsorial-htpy-equiv-cube :
   is-torsorial (htpy-equiv-cube k X Y e)
 is-torsorial-htpy-equiv-cube k X Y e =
   is-torsorial-Eq-structure
-    ( λ α β H →
-      ( d : dim-cube k X) →
-      ( tr (axis-cube k Y) (H d) ∘ map-axis-equiv-cube k X Y e d) ~
-      ( map-equiv (β d)))
     ( is-torsorial-htpy-equiv (dim-equiv-cube k X Y e))
     ( pair (dim-equiv-cube k X Y e) refl-htpy)
     ( is-torsorial-Eq-Π

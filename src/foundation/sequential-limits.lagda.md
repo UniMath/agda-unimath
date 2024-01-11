@@ -178,7 +178,7 @@ module _
     (s : standard-sequential-limit A) →
     is-torsorial (Eq-standard-sequential-limit s)
   is-torsorial-Eq-standard-sequential-limit s =
-    is-torsorial-Eq-structure _
+    is-torsorial-Eq-structure
       ( is-torsorial-htpy (pr1 s))
       ( pr1 s , refl-htpy)
       ( is-torsorial-Eq-Π _ (λ n → is-torsorial-path (pr2 s n ∙ refl)))

@@ -160,9 +160,6 @@ module _
     is-torsorial equiv-ferrers-diagram
   is-torsorial-equiv-ferrers-diagram =
     is-torsorial-Eq-structure
-      ( λ X Y e →
-        (x : row-ferrers-diagram D) →
-        dot-ferrers-diagram D x ≃ pr1 Y (map-equiv e x))
       ( is-torsorial-equiv (row-ferrers-diagram D))
       ( pair (row-ferrers-diagram D) id-equiv)
       ( is-torsorial-Eq-subtype
@@ -216,9 +213,6 @@ module _
     is-torsorial equiv-ferrers-diagram-𝔽
   is-torsorial-equiv-ferrers-diagram-𝔽 =
     is-torsorial-Eq-structure
-      ( λ X Y e →
-        (x : type-row-ferrers-diagram-𝔽 A D) →
-        type-dot-ferrers-diagram-𝔽 A D x ≃ type-𝔽 (pr1 Y (map-equiv e x)))
       ( is-torsorial-Eq-subtype
         ( is-torsorial-equiv (type-row-ferrers-diagram-𝔽 A D))
         ( is-prop-is-finite)

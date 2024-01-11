@@ -104,7 +104,6 @@ module _
     (c : cone-tower A X) → is-torsorial (htpy-cone-tower c)
   is-torsorial-htpy-cone-tower c =
     is-torsorial-Eq-structure
-      ( λ x z → coherence-htpy-cone-tower c (x , z))
       ( is-torsorial-binary-htpy (map-cone-tower A c))
       ( map-cone-tower A c , (λ n → refl-htpy))
       ( is-torsorial-Eq-Π

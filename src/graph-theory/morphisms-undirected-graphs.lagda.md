@@ -141,15 +141,6 @@ module _
       is-torsorial (htpy-hom-Undirected-Graph f)
     is-torsorial-htpy-hom-Undirected-Graph f =
       is-torsorial-Eq-structure
-        ( λ gV gE α →
-          ( p : unordered-pair-vertices-Undirected-Graph G) →
-          ( e : edge-Undirected-Graph G p) →
-          Id
-            ( tr
-              ( edge-Undirected-Graph H)
-              ( htpy-unordered-pair α p)
-              ( edge-hom-Undirected-Graph G H f p e))
-            ( gE p e))
         ( is-torsorial-htpy (vertex-hom-Undirected-Graph G H f))
         ( pair (vertex-hom-Undirected-Graph G H f) refl-htpy)
         ( is-contr-equiv'

@@ -106,15 +106,9 @@ module _
     (s : is-invertible f) → is-torsorial (htpy-is-invertible s)
   is-torsorial-htpy-is-invertible s =
     is-torsorial-Eq-structure
-      ( λ x z → coherence-htpy-is-invertible s (x , z))
       ( is-torsorial-htpy (map-inv-is-invertible s))
       ( map-inv-is-invertible s , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ x z a →
-          coherence-htpy-retraction
-            ( retraction-is-invertible s)
-            ( retraction-is-invertible (map-inv-is-invertible s , x , z))
-            ( refl-htpy))
         ( is-torsorial-htpy (is-retraction-is-invertible s))
         ( is-retraction-is-invertible s , refl-htpy)
         (is-torsorial-htpy (is-section-is-invertible s)))
@@ -178,23 +172,12 @@ module _
     (s : invertible-map A B) → is-torsorial (htpy-invertible-map s)
   is-torsorial-htpy-invertible-map s =
     is-torsorial-Eq-structure
-      ( λ x z H →
-        Σ ( map-inv-invertible-map s ~ map-inv-invertible-map (x , z))
-          ( coherence-htpy-invertible-map s (x , z) H))
       ( is-torsorial-htpy (map-invertible-map s))
       ( map-invertible-map s , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ x z →
-          coherence-htpy-invertible-map s
-            ( map-invertible-map s , x , z)
-            ( refl-htpy))
         ( is-torsorial-htpy (map-inv-invertible-map s))
         ( map-inv-invertible-map s , refl-htpy)
         ( is-torsorial-Eq-structure
-          ( λ x z a →
-            ( is-section-map-invertible-map s) ~
-            ( is-section-map-invertible-map
-              ( map-invertible-map s , map-inv-invertible-map s , x , z)))
           ( is-torsorial-htpy (is-retraction-map-invertible-map s))
           ( is-retraction-map-invertible-map s , refl-htpy)
           ( is-torsorial-htpy (is-section-map-invertible-map s))))

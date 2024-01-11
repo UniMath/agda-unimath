@@ -153,19 +153,9 @@ abstract
     ( s : ELIM-ℤ P p0 pS) → is-torsorial (Eq-ELIM-ℤ P p0 pS s)
   is-torsorial-Eq-ELIM-ℤ P p0 pS s =
     is-torsorial-Eq-structure
-      ( λ f t H →
-        ( zero-Eq-ELIM-ℤ P p0 pS s (pair f t) H) ×
-        ( succ-Eq-ELIM-ℤ P p0 pS s (pair f t) H))
       ( is-torsorial-htpy (pr1 s))
       ( pair (pr1 s) refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ p K
-          ( q : zero-Eq-ELIM-ℤ P p0 pS s
-            ( pair (pr1 s) (pair p K))
-            ( refl-htpy)) →
-          succ-Eq-ELIM-ℤ P p0 pS s
-            ( pair (pr1 s) (pair p K))
-            ( refl-htpy))
         ( is-contr-is-equiv'
           ( Σ (Id (pr1 s zero-ℤ) p0) (λ α → Id α (pr1 (pr2 s))))
           ( tot (λ α → right-transpose-eq-concat refl α (pr1 (pr2 s))))

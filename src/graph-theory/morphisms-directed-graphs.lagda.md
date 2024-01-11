@@ -183,14 +183,6 @@ module _
     is-torsorial (htpy-hom-Directed-Graph f)
   is-torsorial-htpy-hom-Directed-Graph f =
     is-torsorial-Eq-structure
-      ( λ gV gE α →
-        (x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
-        binary-tr
-          ( edge-Directed-Graph H)
-          ( α x)
-          ( α y)
-          ( edge-hom-Directed-Graph G H f e) ＝
-        gE x y e)
       ( is-torsorial-htpy (vertex-hom-Directed-Graph G H f))
       ( pair
         ( vertex-hom-Directed-Graph G H f)

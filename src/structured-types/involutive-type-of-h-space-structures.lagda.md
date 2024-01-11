@@ -125,23 +125,9 @@ module _
     is-torsorial (htpy-h-space-Involutive-Type μ)
   is-torsorial-htpy-h-space-Involutive-Type (μ , ν , ρ) =
     is-torsorial-Eq-structure
-      ( λ μ' νρ' H → _)
       ( is-torsorial-htpy μ)
       ( μ , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ ν' ρ' H →
-          Eq-symmetric-Id
-            ( ( X) , (λ x → ν' (const-Pointed-Type _ A) x refl))
-            ( tr-symmetric-Id
-              ( X , (λ x → ν (const-Pointed-Type _ A) x refl))
-              ( X , (λ x → ν' (const-Pointed-Type _ A) x refl))
-              ( id-equiv)
-              ( λ x → H (const-Pointed-Type _ A) x refl)
-              ( ρ))
-            ( map-equiv-symmetric-Id
-              ( id-equiv)
-              ( X , (λ x → ν' (const-Pointed-Type _ A) x refl))
-              ( ρ')))
         ( is-torsorial-Eq-Π
           ( λ f ν' → (x : type-2-Element-Type X) → ν f x ~ ν' x)
           ( λ f →

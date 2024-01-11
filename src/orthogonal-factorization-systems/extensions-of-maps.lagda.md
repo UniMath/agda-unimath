@@ -266,7 +266,6 @@ module _
     (e : extension-dependent-type i P f) → is-torsorial (htpy-extension e)
   is-torsorial-htpy-extension e =
     is-torsorial-Eq-structure
-      ( λ g G → coherence-htpy-extension e (g , G))
       ( is-torsorial-htpy (map-extension e))
       ( map-extension e , refl-htpy)
       ( is-torsorial-htpy (is-extension-map-extension e ∙h refl-htpy))
