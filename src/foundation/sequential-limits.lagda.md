@@ -246,15 +246,15 @@ module _
       ( gap-inverse-sequential-diagram A)
   is-section-gap-inverse-sequential-diagram = refl-htpy
 
-  universal-property-standard-sequential-limit :
+  up-standard-sequential-limit :
     universal-property-sequential-limit A (cone-standard-sequential-limit A)
-  pr1 (pr1 (universal-property-standard-sequential-limit X)) =
+  pr1 (pr1 (up-standard-sequential-limit X)) =
     gap-inverse-sequential-diagram A
-  pr2 (pr1 (universal-property-standard-sequential-limit X)) =
+  pr2 (pr1 (up-standard-sequential-limit X)) =
     is-section-gap-inverse-sequential-diagram
-  pr1 (pr2 (universal-property-standard-sequential-limit X)) =
+  pr1 (pr2 (up-standard-sequential-limit X)) =
     gap-inverse-sequential-diagram A
-  pr2 (pr2 (universal-property-standard-sequential-limit X)) =
+  pr2 (pr2 (up-standard-sequential-limit X)) =
     is-retraction-gap-inverse-sequential-diagram
 ```
 
@@ -263,51 +263,48 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : inverse-sequential-diagram l1) {X : UU l2}
+  (c : cone-inverse-sequential-diagram A X)
   where
 
   htpy-cone-up-sequential-limit-standard-sequential-limit :
-    (c : cone-inverse-sequential-diagram A X) →
     htpy-cone-inverse-sequential-diagram A
       ( cone-map-inverse-sequential-diagram A
         ( cone-standard-sequential-limit A)
         ( gap-inverse-sequential-diagram A c))
       ( c)
-  pr1 (htpy-cone-up-sequential-limit-standard-sequential-limit c) n = refl-htpy
-  pr2 (htpy-cone-up-sequential-limit-standard-sequential-limit c) n =
+  pr1 htpy-cone-up-sequential-limit-standard-sequential-limit n = refl-htpy
+  pr2 htpy-cone-up-sequential-limit-standard-sequential-limit n =
     right-unit-htpy
 ```
 
-### A cone satisfies the universal property of the limit if and only if the gap map is an equivalence
+### A cone satisfies the universal property of the sequential limit if and only if the gap map is an equivalence
 
 ```agda
 module _
   {l1 l2 : Level} (A : inverse-sequential-diagram l1) {X : UU l2}
+  (c : cone-inverse-sequential-diagram A X)
   where
 
   is-sequential-limit-universal-property-sequential-limit :
-    (c : cone-inverse-sequential-diagram A X) →
-    universal-property-sequential-limit A c →
-    is-sequential-limit A c
-  is-sequential-limit-universal-property-sequential-limit c =
+    universal-property-sequential-limit A c → is-sequential-limit A c
+  is-sequential-limit-universal-property-sequential-limit =
     is-equiv-universal-property-sequential-limit-universal-property-sequential-limit
       ( cone-standard-sequential-limit A)
       ( c)
       ( gap-inverse-sequential-diagram A c)
       ( htpy-cone-up-sequential-limit-standard-sequential-limit A c)
-      ( universal-property-standard-sequential-limit A)
+      ( up-standard-sequential-limit A)
 
   universal-property-is-sequential-limit :
-    (c : cone-inverse-sequential-diagram A X) →
-    is-sequential-limit A c →
-    universal-property-sequential-limit A c
-  universal-property-is-sequential-limit c is-lim-c =
+    is-sequential-limit A c → universal-property-sequential-limit A c
+  universal-property-is-sequential-limit is-lim-c =
     universal-property-sequential-limit-universal-property-sequential-limit-is-equiv
       ( cone-standard-sequential-limit A)
       ( c)
       ( gap-inverse-sequential-diagram A c)
       ( htpy-cone-up-sequential-limit-standard-sequential-limit A c)
       ( is-lim-c)
-      ( universal-property-standard-sequential-limit A)
+      ( up-standard-sequential-limit A)
 ```
 
 ## Table of files about sequential limits
