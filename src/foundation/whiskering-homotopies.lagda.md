@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.path-algebra
+open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
@@ -265,3 +266,8 @@ module _
     coherence-square-homotopies (H ·r f) (H' ·r f) (K ·r f) (K' ·r f)
   ap-right-whisk-coherence-square-homotopies α = α ·r f
 ```
+
+## See also
+
+- For interactions between whiskering and exponentiation, see
+  [`foundation.composition-algebra`](foundation.composition-algebra.md).

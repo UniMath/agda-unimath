@@ -109,6 +109,24 @@ is homotopic to the homotopy
     ap eq-htpy (eq-htpy (ap-comp i h ∘ H))
 ```
 
+### Precomposition distributes over concatenations of homotopies
+
+### Precomposition distributes over concatenations of homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {f g h : A → B}
+  where
+
+  distributive-htpy-precomp-concat-htpy :
+    (H : f ~ g) (K : g ~ h) (S : UU l3) →
+    htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K S
+  distributive-htpy-precomp-concat-htpy H K S i =
+    ( ap eq-htpy (eq-htpy (distributive-left-whisk-concat-htpy i H K))) ∙
+    ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
+```
+
 ### Postcomposition distributes over whiskerings of homotopies
 
 Given a homotopy `H : f ~ g` and a suitable map `h` the homotopy given by the
@@ -170,22 +188,6 @@ is homotopic to the homotopy
     postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
   distributive-htpy-postcomp-left-whisker h H S i =
     coherence-square-eq-htpy-ap-postcomp h (f ∘ i) (g ∘ i) (H ·r i)
-```
-
-### Precomposition distributes over concatenations of homotopies
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {f g h : A → B}
-  where
-
-  distributive-htpy-precomp-concat-htpy :
-    (H : f ~ g) (K : g ~ h) (S : UU l3) →
-    htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K S
-  distributive-htpy-precomp-concat-htpy H K S i =
-    ( ap eq-htpy (eq-htpy (distributive-left-whisk-concat-htpy i H K))) ∙
-    ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
 ```
 
 ### Postcomposition distributes over concatenations of homotopies
@@ -268,8 +270,7 @@ module _
     ( postcomp A g ·l htpy-precomp F X ∙h htpy-postcomp A G ·r precomp f' X) ~
     ( precomp f Y ·l htpy-postcomp B G ∙h htpy-precomp F Y ·r postcomp B g')
   commutative-htpy-postcomp-htpy-precomp F =
-    ind-htpy
-      ( g)
+    ind-htpy g
       ( λ g' G →
         ( postcomp A g ·l htpy-precomp F X ∙h
           htpy-postcomp A G ·r precomp f' X) ~
