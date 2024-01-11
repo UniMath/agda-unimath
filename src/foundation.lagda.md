@@ -43,8 +43,6 @@ open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
 open import foundation.coherently-invertible-maps public
-open import foundation.commuting-3-simplices-of-homotopies public
-open import foundation.commuting-3-simplices-of-maps public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
 open import foundation.commuting-pentagons-of-identifications public
@@ -52,6 +50,8 @@ open import foundation.commuting-prisms-of-maps public
 open import foundation.commuting-squares-of-homotopies public
 open import foundation.commuting-squares-of-identifications public
 open import foundation.commuting-squares-of-maps public
+open import foundation.commuting-tetrahedra-of-homotopies public
+open import foundation.commuting-tetrahedra-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
 open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
