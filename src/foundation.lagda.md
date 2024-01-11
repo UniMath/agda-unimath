@@ -33,6 +33,7 @@ open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-reflecting-maps-equivalence-relations public
 open import foundation.binary-relations public
 open import foundation.binary-transport public
+open import foundation.binary-type-duality public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
@@ -131,6 +132,7 @@ open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-maybe public
+open import foundation.equivalences-spans public
 open import foundation.equivalences-towers public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
@@ -209,6 +211,7 @@ open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
+open import foundation.morphisms-spans public
 open import foundation.morphisms-towers public
 open import foundation.morphisms-twisted-arrows public
 open import foundation.multisubsets public

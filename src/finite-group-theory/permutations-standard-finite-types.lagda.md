@@ -213,7 +213,7 @@ abstract
         ( neq-inr-inl)
         ( λ r →
           neq-inr-inl
-            ( is-injective-map-equiv f (p ∙ (r ∙ inv q))))
+            ( is-injective-equiv f (p ∙ (r ∙ inv q))))
     lemma :
       Id
         ( map-equiv
@@ -404,7 +404,7 @@ abstract
     (succ-ℕ n) f (inr star) p (inl y) (inr star) q =
     ex-falso
       ( neq-inr-inl
-        ( is-injective-map-equiv f (p ∙ inv q)))
+        ( is-injective-equiv f (p ∙ inv q)))
   retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inr star) p (inr star) z q =
     ap

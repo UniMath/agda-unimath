@@ -13,7 +13,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-coequalizers

@@ -31,8 +31,8 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **morphism of arrows** from a function `f : A → B` to a function `g : X → Y`
-is a triple `(i , j , H)` consisting of maps `i : A → X` and `j : B → Y` and a
+A {{#concept "morphism of arrows"}} from a function `f : A → B` to a function `g : X → Y`
+is a [triple](foundation.dependent-pair-types.md) `(i , j , H)` consisting of maps `i : A → X` and `j : B → Y` and a
 [homotopy](foundation-core.homotopies.md) `H : j ∘ f ~ g ∘ i` witnessing that
 the square
 
@@ -59,8 +59,11 @@ module _
   (f : A → B) (g : X → Y)
   where
 
+  coherence-hom-arrow : (A → X) → (B → Y) → UU (l1 ⊔ l4)
+  coherence-hom-arrow i = coherence-square-maps i f g
+
   hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-arrow = Σ (A → X) (λ i → Σ (B → Y) (coherence-square-maps i f g))
+  hom-arrow = Σ (A → X) (λ i → Σ (B → Y) (coherence-hom-arrow i))
 
   map-domain-hom-arrow : hom-arrow → A → X
   map-domain-hom-arrow = pr1
@@ -70,15 +73,35 @@ module _
 
   coh-hom-arrow :
     (h : hom-arrow) →
-    coherence-square-maps
-      ( map-domain-hom-arrow h)
-      ( f)
-      ( g)
-      ( map-codomain-hom-arrow h)
+    coherence-hom-arrow (map-domain-hom-arrow h) (map-codomain-hom-arrow h)
   coh-hom-arrow = pr2 ∘ pr2
 ```
 
 ### Transposing morphisms of arrows
+
+The {{#concept "transposition" Disambiguation="morphism of arrows"}} of a morphism of arrows
+
+```text
+        i
+    A -----> X
+    |        |
+  f |        | g
+    V        V
+    B -----> Y
+        j
+```
+
+is the morphism of arrows
+
+```text
+        f
+    A -----> B
+    |        |
+  i |        | j
+    V        V
+    X -----> Y.
+        g
+```
 
 ```agda
 module _
@@ -86,14 +109,43 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
+  map-domain-transpose-hom-arrow : A → B
+  map-domain-transpose-hom-arrow = f
+
+  map-codomain-transpose-hom-arrow : X → Y
+  map-codomain-transpose-hom-arrow = g
+
+  coh-transpose-hom-arrow :
+    coherence-hom-arrow
+      ( map-domain-hom-arrow f g α)
+      ( map-codomain-hom-arrow f g α)
+      ( map-domain-transpose-hom-arrow)
+      ( map-codomain-transpose-hom-arrow)
+  coh-transpose-hom-arrow =
+    inv-htpy (coh-hom-arrow f g α)
+
   transpose-hom-arrow :
     hom-arrow (map-domain-hom-arrow f g α) (map-codomain-hom-arrow f g α)
-  pr1 transpose-hom-arrow = f
-  pr1 (pr2 transpose-hom-arrow) = g
-  pr2 (pr2 transpose-hom-arrow) = inv-htpy (coh-hom-arrow f g α)
+  pr1 transpose-hom-arrow = map-domain-transpose-hom-arrow
+  pr1 (pr2 transpose-hom-arrow) = map-codomain-transpose-hom-arrow
+  pr2 (pr2 transpose-hom-arrow) = coh-transpose-hom-arrow
 ```
 
 ### The identity morphism of arrows
+
+The identity morphism of arrows is defined as
+
+```text
+        id
+    A -----> A
+    |        |
+  f |        | f
+    V        V
+    B -----> B
+        id
+```
+
+where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
 
 ```agda
 module _
@@ -121,7 +173,17 @@ Consider a commuting diagram of the form
 ```
 
 Then the outer rectangle commutes by horizontal pasting of commuting squares of
-maps.
+maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of `β : g → h` with `α : f → g` is therefore defined to be
+
+```text
+        β₀ ∘ α₀       
+    A ----------> U
+    |             |
+  f |    α □ β    | h
+    V             V
+    B ----------> V.
+        β₁ ∘ α₁       
+```
 
 ```agda
 module _
@@ -139,10 +201,8 @@ module _
     map-codomain-hom-arrow g h b ∘ map-codomain-hom-arrow f g a
 
   coh-comp-hom-arrow :
-    coherence-square-maps
+    coherence-hom-arrow f h
       ( map-domain-comp-hom-arrow)
-      ( f)
-      ( h)
       ( map-codomain-comp-hom-arrow)
   coh-comp-hom-arrow =
     pasting-horizontal-coherence-square-maps
@@ -167,7 +227,7 @@ module _
 
 ### Homotopies of morphisms of arrows
 
-A **homotopy of morphisms of arrows** from `(i , j , H)` to `(i' , j' , H')` is
+A {{#concept "homotopy of morphisms of arrows"}} from `(i , j , H)` to `(i' , j' , H')` is
 a triple `(I , J , K)` consisting of homotopies `I : i ~ i'` and `J : j ~ j'`
 and a homotopy `K` witnessing that the
 [square of homotopies](foundation.commuting-squares-of-homotopies.md)
@@ -540,4 +600,5 @@ module _
 
 ## See also
 
+- [Equivalences of arrows](foundation.equivalences-arrows.md)
 - [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).

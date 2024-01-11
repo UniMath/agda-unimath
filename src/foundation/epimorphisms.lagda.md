@@ -21,7 +21,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts

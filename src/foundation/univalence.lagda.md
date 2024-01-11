@@ -157,14 +157,14 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ```agda
 compute-equiv-eq-concat :
   {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
-  ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
+  equiv-eq q ∘e equiv-eq p ＝ equiv-eq (p ∙ q)
 compute-equiv-eq-concat refl refl = eq-equiv-eq-map-equiv refl
 
 compute-eq-equiv-comp-equiv :
   {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
-  ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
+  eq-equiv A B f ∙ eq-equiv B C g ＝ eq-equiv A C (g ∘e f)
 compute-eq-equiv-comp-equiv A B C f g =
-  is-injective-map-equiv
+  is-injective-equiv
     ( equiv-univalence)
     ( ( inv ( compute-equiv-eq-concat (eq-equiv A B f) (eq-equiv B C g))) ∙
       ( ( ap
@@ -179,7 +179,7 @@ compute-eq-equiv-comp-equiv A B C f g =
 
 compute-equiv-eq-ap-inv :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : x ＝ y) →
-  map-equiv (equiv-eq (ap B (inv p)) ∘e (equiv-eq (ap B p))) ~ id
+  map-eq (ap B (inv p)) ∘ map-eq (ap B p) ~ id
 compute-equiv-eq-ap-inv refl = refl-htpy
 
 commutativity-inv-equiv-eq :
@@ -191,7 +191,7 @@ commutativity-inv-eq-equiv :
   {l : Level} (A B : UU l) (f : A ≃ B) →
   inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
 commutativity-inv-eq-equiv A B f =
-  is-injective-map-equiv
+  is-injective-equiv
     ( equiv-univalence)
     ( ( inv (commutativity-inv-equiv-eq A B (eq-equiv A B f))) ∙
       ( ( ap

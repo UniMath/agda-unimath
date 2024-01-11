@@ -31,8 +31,8 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.26-descent
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 

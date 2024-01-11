@@ -26,7 +26,7 @@ open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
@@ -35,7 +35,7 @@ open import synthetic-homotopy-theory.cocones-under-spans
 
 The suspension of `X` is the [pushout](synthetic-homotopy-theory.pushouts.md) of
 the span `unit <-- X --> unit`. A
-[cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
+[cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
 is called a `suspension-cocone`. Explicitly, a suspension cocone with nadir `Y`
 consists of functions
 
@@ -241,7 +241,7 @@ module _
   extensionality-suspension-structure-refl-htpy-suspension-structure :
     eq-htpy-suspension-structure refl-htpy-suspension-structure ＝ refl
   extensionality-suspension-structure-refl-htpy-suspension-structure =
-    is-injective-map-equiv
+    is-injective-equiv
       ( extensionality-suspension-structure c c)
       ( is-section-map-inv-equiv
         ( extensionality-suspension-structure c c)

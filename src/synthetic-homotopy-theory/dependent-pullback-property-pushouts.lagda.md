@@ -12,17 +12,18 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.pullbacks
+open import foundation.span-diagrams
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
 
 ## Idea
 
-The **dependent pullback property** of
+The {{#concept "dependent pullback property" Disambiguation="pushouts"}} of
 [pushouts](synthetic-homotopy-theory.pushouts.md) asserts that the type of
 sections of a type family over a pushout can be expressed as a
 [pullback](foundation.pullbacks.md).
@@ -36,32 +37,49 @@ of pushouts is shown in
 ## Definition
 
 ```agda
-cone-dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-  let i = pr1 c
-      j = pr1 (pr2 c)
-      H = pr2 (pr2 c)
-  in
-  cone
-    ( λ (h : (a : A) → P (i a)) → λ (s : S) → tr P (H s) (h (f s)))
-    ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
-    ( (x : X) → P x)
-pr1 (cone-dependent-pullback-property-pushout f g (i , j , H) P) h a =
-  h (i a)
-pr1 (pr2 (cone-dependent-pullback-property-pushout f g (i , j , H) P)) h b =
-  h (j b)
-pr2 (pr2 (cone-dependent-pullback-property-pushout f g (i , j , H) P)) h =
-  eq-htpy (λ s → apd h (H s))
+module _
+  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram s X)
+  where
 
-dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-dependent-pullback-property-pushout l {S} {A} {B} f g {X} (i , j , H) =
-  (P : X → UU l) →
-  is-pullback
-    ( λ (h : (a : A) → P (i a)) → λ s → tr P (H s) (h (f s)))
-    ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
-    ( cone-dependent-pullback-property-pushout f g (i , j , H) P)
+  cone-dependent-pullback-property-pushout :
+    {l5 : Level} (P : X → UU l5) →
+    cone
+      ( λ ( h :
+            ( a : domain-span-diagram s) →
+            P (left-map-cocone-span-diagram s c a))
+          ( x : spanning-type-span-diagram s) →
+        tr P
+          ( coherence-square-cocone-span-diagram s c x)
+          ( h (left-map-span-diagram s x)))
+      ( λ ( h :
+            ( b : codomain-span-diagram s) →
+            P (right-map-cocone-span-diagram s c b))
+          ( x : spanning-type-span-diagram s) →
+        h (right-map-span-diagram s x))
+      ( (x : X) → P x)
+  pr1 (cone-dependent-pullback-property-pushout P) h a =
+    h (left-map-cocone-span-diagram s c a)
+  pr1 (pr2 (cone-dependent-pullback-property-pushout P)) h b =
+    h (right-map-cocone-span-diagram s c b)
+  pr2 (pr2 (cone-dependent-pullback-property-pushout P)) h =
+    eq-htpy (λ x → apd h (coherence-square-cocone-span-diagram s c x))
+
+  dependent-pullback-property-pushout : UUω
+  dependent-pullback-property-pushout =
+    {l : Level} (P : X → UU l) →
+    is-pullback
+      ( λ ( h :
+            ( a : domain-span-diagram s) →
+            P (left-map-cocone-span-diagram s c a))
+          ( x : spanning-type-span-diagram s) →
+        tr P
+          ( coherence-square-cocone-span-diagram s c x)
+          ( h (left-map-span-diagram s x)))
+      ( λ ( h :
+            ( b : codomain-span-diagram s) →
+            P (right-map-cocone-span-diagram s c b))
+          ( x : spanning-type-span-diagram s) →
+        h (right-map-span-diagram s x))
+      ( cone-dependent-pullback-property-pushout P)
 ```

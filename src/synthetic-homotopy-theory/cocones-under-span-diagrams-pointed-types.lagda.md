@@ -1,7 +1,7 @@
-# Cocones under spans of pointed types
+# Cocones under span diagrams of pointed types
 
 ```agda
-module synthetic-homotopy-theory.cocones-under-spans-of-pointed-types where
+module synthetic-homotopy-theory.cocones-under-span-diagrams-pointed-types where
 ```
 
 <details><summary>Imports</summary>
@@ -17,16 +17,17 @@ open import structured-types.commuting-squares-of-pointed-maps
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
 
 ## Idea
 
-A [cocone under a span](synthetic-homotopy-theory.cocones-under-spans.md) of
-[pointed types](structured-types.pointed-types.md) is a **pointed cocone** if it
-consists of [pointed maps](structured-types.pointed-maps.md) equipped with a
+A
+[cocone under a span](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
+of [pointed types](structured-types.pointed-types.md) is a **pointed cocone** if
+it consists of [pointed maps](structured-types.pointed-maps.md) equipped with a
 [pointed homotopy](structured-types.pointed-homotopies.md) witnessing that the
 naturality square
 [commutes](structured-types.commuting-squares-of-pointed-maps.md).
@@ -110,7 +111,7 @@ module _
       ( horizontal-pointed-map-cocone-Pointed-Type)
   coherence-square-cocone-Pointed-Type = pr2 (pr2 c)
 
-  cocone-type-cocone-Pointed-Type : cocone (pr1 f) (pr1 g) (pr1 X)
+  cocone-type-cocone-Pointed-Type : cocone-span-diagram (pr1 f) (pr1 g) (pr1 X)
   pr1 cocone-type-cocone-Pointed-Type = horizontal-map-cocone-Pointed-Type
   pr1 (pr2 cocone-type-cocone-Pointed-Type) = vertical-map-cocone-Pointed-Type
   pr2 (pr2 cocone-type-cocone-Pointed-Type) =
