@@ -82,7 +82,8 @@ module _
   where
 
   sequence-standard-sequential-limit :
-    standard-sequential-limit A → (n : ℕ) → family-inverse-sequential-diagram A n
+    standard-sequential-limit A → (n : ℕ) →
+    family-inverse-sequential-diagram A n
   sequence-standard-sequential-limit = pr1
 
   coherence-standard-sequential-limit :

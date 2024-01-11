@@ -54,7 +54,8 @@ equiv-inverse-sequential-diagram :
   UU (l1 ⊔ l2)
 equiv-inverse-sequential-diagram A B =
   Σ ( (n : ℕ) →
-      family-inverse-sequential-diagram A n ≃ family-inverse-sequential-diagram B n)
+      family-inverse-sequential-diagram A n ≃
+      family-inverse-sequential-diagram B n)
     ( λ e →
       (n : ℕ) → naturality-hom-inverse-sequential-diagram A B (map-equiv ∘ e) n)
 

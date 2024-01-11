@@ -78,7 +78,8 @@ module _
 
   map-hom-inverse-sequential-diagram :
     hom-inverse-sequential-diagram A B → (n : ℕ) →
-    family-inverse-sequential-diagram A n → family-inverse-sequential-diagram B n
+    family-inverse-sequential-diagram A n →
+    family-inverse-sequential-diagram B n
   map-hom-inverse-sequential-diagram =
     map-section-dependent-inverse-sequential-diagram A
       ( const-dependent-inverse-sequential-diagram A B)
