@@ -79,7 +79,7 @@ module _
       Π-Prop
         ( type-Poset P)
         ( λ x →
-          Π-Prop'
+          implicit-Π-Prop
             ( UU l3)
             ( λ I →
               Π-Prop
@@ -141,7 +141,7 @@ module _
     Π-Prop
       ( type-Meet-Suplattice L)
       ( λ x →
-        Π-Prop'
+        implicit-Π-Prop
           ( UU l2)
           ( λ I →
             Π-Prop

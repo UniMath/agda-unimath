@@ -159,9 +159,9 @@ module _
     ( γ : hom-family-map-Precategory C D F G) →
     is-prop (is-natural-transformation-map-Precategory C D F G γ)
   is-prop-is-natural-transformation-map-Precategory γ =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ y →
             is-prop-Π
               ( λ f →

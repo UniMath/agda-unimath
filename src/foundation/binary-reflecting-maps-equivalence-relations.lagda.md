@@ -64,13 +64,13 @@ module _
     (X : Set l5) (f : A → B → type-Set X) →
     is-prop (binary-reflects-equivalence-relation f)
   is-prop-binary-reflects-equivalence-relation X f =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ x' →
-            is-prop-Π'
+            is-prop-implicit-Π
               ( λ y →
-                is-prop-Π'
+                is-prop-implicit-Π
                   ( λ y' →
                     is-prop-function-type
                       ( is-prop-function-type
