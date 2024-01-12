@@ -31,7 +31,8 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-Given a map `f : X → Y` and a type `A`, the **postcomposition function**
+Given a map `f : X → Y` and a type `A`, the
+{{#concept "postcomposition function"}}
 
 ```text
   f ∘ - : (A → X) → (A → Y)

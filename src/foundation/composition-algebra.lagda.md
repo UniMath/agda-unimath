@@ -108,6 +108,11 @@ is homotopic to the homotopy
 ```
 
 ```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {f g : A → B}
+  where
+
   inv-distributive-htpy-precomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →
     htpy-precomp H S ·r precomp h S ~ htpy-precomp (h ·l H) S
@@ -200,6 +205,11 @@ is homotopic to the homotopy
 ```
 
 ```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {f g : A → B}
+  where
+
   inv-distributive-htpy-postcomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →
     postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
