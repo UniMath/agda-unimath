@@ -18,6 +18,7 @@ open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.retracts-of-types
 open import foundation.universe-levels
@@ -773,17 +774,131 @@ module _
       ( is-retraction-map-codomain-precomp-retract-map ·r precomp f S)
       ( λ x → ap inv (eq-htpy-refl-htpy (precomp f S x))))
 
-  retract-precomp-retract-map : (precomp f S) retract-of-map (precomp g S)
-  pr1 retract-precomp-retract-map =
-    precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
-  pr1 (pr2 retract-precomp-retract-map) =
-    precomp-hom-arrow f g (inclusion-retract-map f g R) S
-  pr1 (pr2 (pr2 retract-precomp-retract-map)) =
+  is-retraction-hom-retraction-precomp-retract-map :
+    is-retraction-hom-arrow
+      ( precomp f S)
+      ( precomp g S)
+      ( inclusion-precomp-retract-map)
+      ( hom-retraction-precomp-retract-map)
+  pr1 is-retraction-hom-retraction-precomp-retract-map =
     is-retraction-map-domain-precomp-retract-map
-  pr1 (pr2 (pr2 (pr2 retract-precomp-retract-map))) =
+  pr1 (pr2 is-retraction-hom-retraction-precomp-retract-map) =
     is-retraction-map-codomain-precomp-retract-map
-  pr2 (pr2 (pr2 (pr2 retract-precomp-retract-map))) =
+  pr2 (pr2 is-retraction-hom-retraction-precomp-retract-map) =
     coh-retract-precomp-retract-map
+
+  retraction-precomp-retract-map :
+    retraction-hom-arrow
+      ( precomp f S)
+      ( precomp g S)
+      ( inclusion-precomp-retract-map)
+  pr1 retraction-precomp-retract-map = hom-retraction-precomp-retract-map
+  pr2 retraction-precomp-retract-map =
+    is-retraction-hom-retraction-precomp-retract-map
+
+  retract-precomp-retract-map : (precomp f S) retract-of-map (precomp g S)
+  pr1 retract-precomp-retract-map = inclusion-precomp-retract-map
+  pr2 retract-precomp-retract-map = retraction-precomp-retract-map
+```
+
+### If `f` is a retract of `g`, then `f ∘ -` is a retract of `g ∘ -`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (R : f retract-of-map g) (S : UU l5)
+  where
+
+  inclusion-postcomp-retract-map : hom-arrow (postcomp S f) (postcomp S g)
+  inclusion-postcomp-retract-map =
+    postcomp-hom-arrow f g (inclusion-retract-map f g R) S
+
+  hom-retraction-postcomp-retract-map : hom-arrow (postcomp S g) (postcomp S f)
+  hom-retraction-postcomp-retract-map =
+    postcomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+
+  is-retraction-map-domain-postcomp-retract-map :
+    is-retraction
+      ( map-domain-hom-arrow
+        ( postcomp S f)
+        ( postcomp S g)
+        ( inclusion-postcomp-retract-map))
+      ( map-domain-hom-arrow
+        ( postcomp S g)
+        ( postcomp S f)
+        ( hom-retraction-postcomp-retract-map))
+  is-retraction-map-domain-postcomp-retract-map =
+    htpy-postcomp S (is-retraction-map-domain-hom-retraction-retract-map f g R)
+
+  is-retraction-map-codomain-postcomp-retract-map :
+    is-retraction
+      ( map-codomain-hom-arrow
+        ( postcomp S f)
+        ( postcomp S g)
+        ( inclusion-postcomp-retract-map))
+      ( map-codomain-hom-arrow
+        ( postcomp S g)
+        ( postcomp S f)
+        ( hom-retraction-postcomp-retract-map))
+  is-retraction-map-codomain-postcomp-retract-map =
+    htpy-postcomp S
+      ( is-retraction-map-codomain-hom-retraction-retract-map f g R)
+
+  coh-retract-postcomp-retract-map :
+    coherence-retract-map
+      ( postcomp S f)
+      ( postcomp S g)
+      ( inclusion-postcomp-retract-map)
+      ( hom-retraction-postcomp-retract-map)
+      ( is-retraction-map-domain-postcomp-retract-map)
+      ( is-retraction-map-codomain-postcomp-retract-map)
+  coh-retract-postcomp-retract-map =
+    ( postcomp-vertical-coherence-prism-inv-triangles-maps
+      ( id)
+      ( map-domain-hom-retraction-retract-map f g R)
+      ( map-domain-inclusion-retract-map f g R)
+      ( id)
+      ( map-codomain-hom-retraction-retract-map f g R)
+      ( map-codomain-inclusion-retract-map f g R)
+      ( f)
+      ( g)
+      ( f)
+      ( is-retraction-map-domain-hom-retraction-retract-map f g R)
+      ( refl-htpy)
+      ( coh-hom-retraction-retract-map f g R)
+      ( coh-inclusion-retract-map f g R)
+      ( is-retraction-map-codomain-hom-retraction-retract-map f g R)
+      ( coh-retract-map f g R)
+      ( S)) ∙h
+      ap-concat-htpy
+        ( is-retraction-map-codomain-postcomp-retract-map ·r postcomp S f)
+        ( eq-htpy-refl-htpy ∘ postcomp S f)
+
+  is-retraction-hom-retraction-postcomp-retract-map :
+    is-retraction-hom-arrow
+      ( postcomp S f)
+      ( postcomp S g)
+      ( inclusion-postcomp-retract-map)
+      ( hom-retraction-postcomp-retract-map)
+  pr1 is-retraction-hom-retraction-postcomp-retract-map =
+    is-retraction-map-domain-postcomp-retract-map
+  pr1 (pr2 is-retraction-hom-retraction-postcomp-retract-map) =
+    is-retraction-map-codomain-postcomp-retract-map
+  pr2 (pr2 is-retraction-hom-retraction-postcomp-retract-map) =
+    coh-retract-postcomp-retract-map
+
+  retraction-postcomp-retract-map :
+    retraction-hom-arrow
+      ( postcomp S f)
+      ( postcomp S g)
+      ( inclusion-postcomp-retract-map)
+  pr1 retraction-postcomp-retract-map = hom-retraction-postcomp-retract-map
+  pr2 retraction-postcomp-retract-map =
+    is-retraction-hom-retraction-postcomp-retract-map
+
+  retract-postcomp-retract-map : (postcomp S f) retract-of-map (postcomp S g)
+  pr1 retract-postcomp-retract-map = inclusion-postcomp-retract-map
+  pr2 retract-postcomp-retract-map = retraction-postcomp-retract-map
 ```
 
 ## References
