@@ -119,12 +119,12 @@ module _
   pr2 (pr2 cocone-pushout) = glue-pushout
 
   postulate
-    up-pushout : universal-property-pushout s cocone-pushout
+    universal-property-pushout-pushout : universal-property-pushout s cocone-pushout
 
-  equiv-up-pushout :
+  equiv-universal-property-pushout-pushout :
     {l4 : Level} (X : UU l4) → (pushout → X) ≃ cocone-span-diagram s X
-  pr1 (equiv-up-pushout X) = cocone-map-span-diagram s cocone-pushout
-  pr2 (equiv-up-pushout X) = up-pushout X
+  pr1 (equiv-universal-property-pushout-pushout X) = cocone-map-span-diagram s cocone-pushout
+  pr2 (equiv-universal-property-pushout-pushout X) = universal-property-pushout-pushout X
 ```
 
 ## Definitions
@@ -137,21 +137,21 @@ module _
   where
 
   cogap-cocone-span-diagram : cocone-span-diagram s X → pushout s → X
-  cogap-cocone-span-diagram = map-inv-equiv (equiv-up-pushout s X)
+  cogap-cocone-span-diagram = map-inv-equiv (equiv-universal-property-pushout-pushout s X)
 
   is-section-cogap-cocone-span-diagram :
     is-section
       ( cocone-map-span-diagram s (cocone-pushout s))
       ( cogap-cocone-span-diagram)
   is-section-cogap-cocone-span-diagram =
-    is-section-map-inv-equiv (equiv-up-pushout s X)
+    is-section-map-inv-equiv (equiv-universal-property-pushout-pushout s X)
 
   is-retraction-cogap-cocone-span-diagram :
     is-retraction
       ( cocone-map-span-diagram s (cocone-pushout s))
       ( cogap-cocone-span-diagram)
   is-retraction-cogap-cocone-span-diagram =
-    is-retraction-map-inv-equiv (equiv-up-pushout s X)
+    is-retraction-map-inv-equiv (equiv-universal-property-pushout-pushout s X)
 ```
 
 ### The predicate of being a pushout cocone
@@ -183,10 +183,10 @@ module _
       ( cogap-cocone-span-diagram s c)
       ( htpy-cocone-universal-property-pushout s
         ( cocone-pushout s)
-        ( up-pushout s)
+        ( universal-property-pushout-pushout s)
         ( c))
       ( H)
-      ( up-pushout s)
+      ( universal-property-pushout-pushout s)
 
   is-pushout-universal-property-pushout :
     universal-property-pushout s c → is-pushout s c
@@ -197,9 +197,9 @@ module _
       ( cogap-cocone-span-diagram s c)
       ( htpy-cocone-universal-property-pushout s
         ( cocone-pushout s)
-        ( up-pushout s)
+        ( universal-property-pushout-pushout s)
         ( c))
-      ( up-pushout s)
+      ( universal-property-pushout-pushout s)
 ```
 
 ### The pushout of a span has the dependent universal property
@@ -215,7 +215,7 @@ module _
     dependent-universal-property-universal-property-pushout
       ( s)
       ( cocone-pushout s)
-      ( up-pushout s)
+      ( universal-property-pushout-pushout s)
 
   equiv-dependent-universal-property-pushout :
     (P : pushout s → UU l4) →
@@ -243,7 +243,7 @@ module _
     left-htpy-cocone-universal-property-pushout
       ( s)
       ( cocone-pushout s)
-      ( up-pushout s)
+      ( universal-property-pushout-pushout s)
       ( c)
 
   compute-inr-cogap-cocone-span-diagram :
@@ -254,7 +254,7 @@ module _
     right-htpy-cocone-universal-property-pushout
       ( s)
       ( cocone-pushout s)
-      ( up-pushout s)
+      ( universal-property-pushout-pushout s)
       ( c)
 
   compute-glue-cogap-cocone-span-diagram :
@@ -269,7 +269,7 @@ module _
     coherence-htpy-cocone-universal-property-pushout
       ( s)
       ( cocone-pushout s)
-      ( up-pushout s)
+      ( universal-property-pushout-pushout s)
       ( c)
 ```
 
