@@ -84,11 +84,11 @@ module _
 Similarly, the homotopy given by the whiskering
 
 ```text
-                              - ∘ f
+                               - ∘ f
           - ∘ h          ----------------->
   (C → S) -----> (B → S)  htpy-precomp H S  (A → S)
                          ----------------->
-                              - ∘ g
+                               - ∘ g
 ```
 
 is homotopic to the homotopy
@@ -108,8 +108,6 @@ is homotopic to the homotopy
   distributive-htpy-precomp-left-whisker h H S i =
     ap eq-htpy (eq-htpy (ap-comp i h ∘ H))
 ```
-
-### Precomposition distributes over concatenations of homotopies
 
 ### Precomposition distributes over concatenations of homotopies
 
