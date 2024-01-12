@@ -797,9 +797,9 @@ module _
   pr2 retraction-precomp-retract-map =
     is-retraction-hom-retraction-precomp-retract-map
 
-  retract-precomp-retract-map : (precomp f S) retract-of-map (precomp g S)
-  pr1 retract-precomp-retract-map = inclusion-precomp-retract-map
-  pr2 retract-precomp-retract-map = retraction-precomp-retract-map
+  precomp-retract-map : (precomp f S) retract-of-map (precomp g S)
+  pr1 precomp-retract-map = inclusion-precomp-retract-map
+  pr2 precomp-retract-map = retraction-precomp-retract-map
 ```
 
 ### If `f` is a retract of `g`, then `f ∘ -` is a retract of `g ∘ -`
@@ -897,9 +897,9 @@ module _
   pr2 retraction-postcomp-retract-map =
     is-retraction-hom-retraction-postcomp-retract-map
 
-  retract-postcomp-retract-map : (postcomp S f) retract-of-map (postcomp S g)
-  pr1 retract-postcomp-retract-map = inclusion-postcomp-retract-map
-  pr2 retract-postcomp-retract-map = retraction-postcomp-retract-map
+  postcomp-retract-map : (postcomp S f) retract-of-map (postcomp S g)
+  pr1 postcomp-retract-map = inclusion-postcomp-retract-map
+  pr2 postcomp-retract-map = retraction-postcomp-retract-map
 ```
 
 ## References

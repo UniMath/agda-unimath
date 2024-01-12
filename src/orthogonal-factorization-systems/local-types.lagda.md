@@ -127,7 +127,7 @@ module _
     is-equiv-retract-map-is-equiv
       ( precomp f S)
       ( precomp g S)
-      ( retract-precomp-retract-map f g R S)
+      ( precomp-retract-map f g R S)
 ```
 
 In fact, the higher coherence of the retract is not needed:
