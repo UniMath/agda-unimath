@@ -18,6 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.path-algebra
+open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -226,22 +227,22 @@ module _
       ( precomp-coherence-square-maps g hB hC g' right S)
       ( precomp-coherence-triangle-maps f g h top S)
   precomp-vertical-coherence-prism-inv-squares-maps =
-    ( ( ap-concat-htpy
-        ( htpy-precomp front S)
-        ( distributive-htpy-precomp-left-whisker hC top S)) ∙h
-      ( inv-htpy
-        ( distributive-htpy-precomp-concat-htpy front (hC ·l top) S))) ∙h
+    ( ap-concat-htpy
+      ( htpy-precomp front S)
+      ( inv-distributive-htpy-precomp-left-whisker hC top S)) ∙h
+    ( inv-htpy
+      ( distributive-htpy-precomp-concat-htpy front (hC ·l top) S)) ∙h
     ( λ i → ap eq-htpy (ap (i ·l_) (eq-htpy (inv-htpy H)))) ∙h
     ( distributive-htpy-precomp-concat-htpy
       ( bottom ·r hA)
       ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g' left right)
       ( S)) ∙h
     ( ap-binary-concat-htpy
-      ( inv-htpy (distributive-htpy-precomp-right-whisker hA bottom S))
+      ( distributive-htpy-precomp-right-whisker hA bottom S)
       ( ( distributive-htpy-precomp-concat-htpy (g' ·l left) (right ·r h) S) ∙h
         ( ap-binary-concat-htpy
-          ( inv-htpy (distributive-htpy-precomp-left-whisker g' left S))
-          ( inv-htpy (distributive-htpy-precomp-right-whisker h right S)))))
+          ( distributive-htpy-precomp-left-whisker g' left S)
+          ( distributive-htpy-precomp-right-whisker h right S))))
 
   precomp-vertical-coherence-prism-maps :
     vertical-coherence-prism-maps
@@ -316,22 +317,22 @@ module _
       ( precomp-coherence-square-maps g hB hC g' right S)
       ( precomp-coherence-triangle-maps' f g h inv-top S)
   precomp-vertical-inv-boundary-vertical-coherence-inv-triangles-prism-maps =
-    ( ap-binary-concat-htpy
-      ( ( ap-binary-concat-htpy
-          ( distributive-htpy-precomp-left-whisker g' left S)
-          ( distributive-htpy-precomp-right-whisker h right S)) ∙h
-        ( inv-htpy (compute-concat-htpy-precomp (g' ·l left) (right ·r h) S)))
-      ( distributive-htpy-precomp-left-whisker hC inv-top S)) ∙h
     ( inv-htpy
-      ( compute-concat-htpy-precomp
-        ( (g' ·l left) ∙h (right ·r h))
-        ( hC ·l inv-top)
-        ( S))) ∙h
+      ( ( compute-concat-htpy-precomp
+          ( (g' ·l left) ∙h (right ·r h))
+          ( hC ·l inv-top)
+          ( S)) ∙h
+        ( ap-binary-concat-htpy
+          ( ( compute-concat-htpy-precomp (g' ·l left) (right ·r h) S) ∙h
+            ( ap-binary-concat-htpy
+              ( distributive-htpy-precomp-left-whisker g' left S)
+              ( distributive-htpy-precomp-right-whisker h right S)))
+          ( distributive-htpy-precomp-left-whisker hC inv-top S)))) ∙h
     ( λ i → ap (λ p → htpy-precomp p S i) (eq-htpy H)) ∙h
     ( compute-concat-htpy-precomp (inv-bottom ·r hA) front S) ∙h
     ( ap-concat-htpy'
       ( htpy-precomp front S)
-      ( inv-htpy (distributive-htpy-precomp-right-whisker hA inv-bottom S)))
+      ( distributive-htpy-precomp-right-whisker hA inv-bottom S))
 
   precomp-vertical-coherence-prism-inv-triangles-maps :
     vertical-coherence-prism-inv-triangles-maps
@@ -366,4 +367,63 @@ module _
       ( precomp-coherence-square-maps g hB hC g' right S)
       ( precomp-coherence-triangle-maps' f g h inv-top S)
       ( precomp-vertical-inv-boundary-vertical-coherence-inv-triangles-prism-maps)
+```
+
+### Commuting prisms of maps induces commuting prisms on function types via postcomposition
+
+```agda
+module _
+  { l1 l2 l3 l1' l2' l3' l : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  ( f : A → C) (g : B → C) (h : A → B)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  ( f' : A' → C') (g' : B' → C') (h' : A' → B')
+  ( hA : A → A') (hB : B → B') (hC : C → C')
+  ( inv-top : coherence-triangle-maps' f g h)
+  ( front : coherence-square-maps f hA hC f')
+  ( right : coherence-square-maps g hB hC g')
+  ( left : coherence-square-maps h hA hB h')
+  ( inv-bottom : coherence-triangle-maps' f' g' h')
+  ( H :
+    vertical-coherence-prism-inv-triangles-maps f g h f' g' h' hA hB hC
+      ( inv-top)
+      ( front)
+      ( right)
+      ( left)
+      ( inv-bottom))
+  (S : UU l)
+  where
+
+  postcomp-vertical-coherence-prism-inv-triangles-maps :
+    vertical-coherence-prism-inv-triangles-maps
+      ( postcomp S f)
+      ( postcomp S g)
+      ( postcomp S h)
+      ( postcomp S f')
+      ( postcomp S g')
+      ( postcomp S h')
+      ( postcomp S hA)
+      ( postcomp S hB)
+      ( postcomp S hC)
+      ( htpy-postcomp S inv-top)
+      ( htpy-postcomp S front)
+      ( htpy-postcomp S right)
+      ( htpy-postcomp S left)
+      ( htpy-postcomp S inv-bottom)
+  postcomp-vertical-coherence-prism-inv-triangles-maps =
+    inv-htpy
+      ( ( distributive-htpy-postcomp-concat-htpy
+          ( g' ·l left ∙h right ·r h)
+          ( hC ·l inv-top)
+          ( S)) ∙h
+        ( ap-binary-concat-htpy
+          ( ( distributive-htpy-postcomp-concat-htpy
+              ( g' ·l left)
+              ( right ·r h) S) ∙h
+            ( ap-binary-concat-htpy
+              ( distributive-htpy-postcomp-left-whisker g' left S)
+              ( distributive-htpy-postcomp-right-whisker h right S)))
+          ( distributive-htpy-postcomp-left-whisker hC inv-top S))) ∙h
+    ( λ i → ap (λ p → htpy-postcomp S p i) (eq-htpy H)) ∙h
+    ( distributive-htpy-postcomp-concat-htpy (inv-bottom ·r hA) front S)
 ```

@@ -74,11 +74,17 @@ module _
   {f g : A → B}
   where
 
-  distributive-htpy-precomp-right-whisker :
+  inv-distributive-htpy-precomp-right-whisker :
     (h : C → A) (H : f ~ g) (S : UU l4) →
     precomp h S ·l htpy-precomp H S ~ htpy-precomp (H ·r h) S
-  distributive-htpy-precomp-right-whisker h H S i =
+  inv-distributive-htpy-precomp-right-whisker h H S i =
     coherence-square-eq-htpy-ap-precomp h (i ∘ f) (i ∘ g) (i ·l H)
+
+  distributive-htpy-precomp-right-whisker :
+    (h : C → A) (H : f ~ g) (S : UU l4) →
+    htpy-precomp (H ·r h) S ~ precomp h S ·l htpy-precomp H S
+  distributive-htpy-precomp-right-whisker h H S =
+    inv-htpy (inv-distributive-htpy-precomp-right-whisker h H S)
 ```
 
 Similarly, the homotopy given by the whiskering
@@ -102,11 +108,17 @@ is homotopic to the homotopy
 ```
 
 ```agda
-  distributive-htpy-precomp-left-whisker :
+  inv-distributive-htpy-precomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →
     htpy-precomp H S ·r precomp h S ~ htpy-precomp (h ·l H) S
-  distributive-htpy-precomp-left-whisker h H S i =
+  inv-distributive-htpy-precomp-left-whisker h H S i =
     ap eq-htpy (eq-htpy (ap-comp i h ∘ H))
+
+  distributive-htpy-precomp-left-whisker :
+    (h : B → C) (H : f ~ g) (S : UU l4) →
+    htpy-precomp (h ·l H) S ~ htpy-precomp H S ·r precomp h S
+  distributive-htpy-precomp-left-whisker h H S =
+    inv-htpy (inv-distributive-htpy-precomp-left-whisker h H S)
 ```
 
 ### Precomposition distributes over concatenations of homotopies
@@ -148,11 +160,18 @@ is homotopic to the homotopy
                     (g ∘ h) ∘ -
 ```
 
+In fact, they are syntactically equal.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {f g : A → B}
   where
+
+  inv-distributive-htpy-postcomp-right-whisker :
+    (h : C → A) (H : f ~ g) (S : UU l4) →
+    htpy-postcomp S (H ·r h) ~ htpy-postcomp S H ·r postcomp S h
+  inv-distributive-htpy-postcomp-right-whisker h H S = refl-htpy
 
   distributive-htpy-postcomp-right-whisker :
     (h : C → A) (H : f ~ g) (S : UU l4) →
@@ -181,11 +200,17 @@ is homotopic to the homotopy
 ```
 
 ```agda
-  distributive-htpy-postcomp-left-whisker :
+  inv-distributive-htpy-postcomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →
     postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
-  distributive-htpy-postcomp-left-whisker h H S i =
+  inv-distributive-htpy-postcomp-left-whisker h H S i =
     coherence-square-eq-htpy-ap-postcomp h (f ∘ i) (g ∘ i) (H ·r i)
+
+  distributive-htpy-postcomp-left-whisker :
+    (h : B → C) (H : f ~ g) (S : UU l4) →
+    htpy-postcomp S (h ·l H) ~ postcomp S h ·l htpy-postcomp S H
+  distributive-htpy-postcomp-left-whisker h H S =
+    inv-htpy (inv-distributive-htpy-postcomp-left-whisker h H S)
 ```
 
 ### Postcomposition distributes over concatenations of homotopies
