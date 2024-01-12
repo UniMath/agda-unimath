@@ -42,45 +42,34 @@ Consider a [span diagram](foundation.span-diagrams.md) `𝒮` of types
   A <--- S ---> B.
 ```
 
-The {{#concept "pushout"}} of `𝒮` is an initial type `X` equipped with a
+The {{#concept "standard pushout"}} `A ⊔_𝒮 B` of `𝒮` is a postulated choice of a type `X` equipped with a
 [cocone structure](synthetic-homotopy-theory.cocones-under-span-diagrams.md) of
-`𝒮` in `X`. In other words, a pushout `X` of `𝒮` comes equipped with a cocone
-structure `(i , j , H)` where
-
-```text
-        g
-    S -----> B
-    |        |
-  f |   H    | j
-    V        V
-    A -----> X,
-        i
-```
-
-such that for any type `Y`, the following evaluation map is an equivalence
-
-```text
-  (X → Y) → cocone 𝒮 Y.
-```
-
-This condition is the
+`𝒮` with codomain `X` satisfying the
 [universal property of the pushout](synthetic-homotopy-theory.universal-property-pushouts.md)
-of `𝒮`.
+of `𝒮`. In other words, the standard pushout `A ⊔_𝒮 B` of `𝒮` comes equipped with a cocone
+structure `(inl , inr , glue)` where
 
-The idea is that the pushout of `𝒮` is the universal type that contains the
-elements of the types `A` and `B` via the 'inclusions' `i : A → X` and
-`j : B → X`, and furthermore an identification `i a ＝ j b` for every `s : S`
-such that `f s ＝ a` and `g s ＝ b`.
+```text
+          g
+    S --------> B
+    |           |
+  f |   glue    | inr
+    V           V
+    A ------> A ⊔_𝒮 B,
+        inl
+```
 
-Examples of pushouts include
-[suspensions](synthetic-homotopy-theory.suspensions-of-types.md),
-[spheres](synthetic-homotopy-theory.spheres.md),
-[joins](synthetic-homotopy-theory.joins-of-types.md), and the
-[smash product](synthetic-homotopy-theory.smash-products-of-pointed-types.md).
+such that for any type `Y`, the [evaluation map](synthetic-homotopy-theory.operations-cocones-under-span-diagrams.md)
+
+```text
+  (A ⊔_𝒮 B → Y) → cocone 𝒮 Y
+```
+
+is an [equivalence](foundation-core.equivalences.md).
 
 ## Postulates
 
-We will assume that for any span
+We will assume that for any span diagram
 
 ```text
       f     g
@@ -202,7 +191,7 @@ module _
       ( universal-property-pushout-pushout s)
 ```
 
-### The pushout of a span has the dependent universal property
+### The pushout of a span diagram has the dependent universal property of pushouts
 
 ```agda
 module _
@@ -227,7 +216,7 @@ module _
     dependent-universal-property-pushout-pushout P
 ```
 
-### Computation with the cogap-cocone-span-diagram map
+### Computation with the cogap map
 
 ```agda
 module _
@@ -273,9 +262,9 @@ module _
       ( c)
 ```
 
-### Fibers of the cogap-cocone-span-diagram map
+### Fibers of the cogap map
 
-We characterize the [fibers](foundation-core.fibers-of-maps.md) of the cogap-cocone-span-diagram map
+We characterize the [fibers](foundation-core.fibers-of-maps.md) of the cogap map
 as a pushout of fibers. This is an application of the
 [flattening lemma for pushouts](synthetic-homotopy-theory.flattening-lemma-pushouts.md).
 
@@ -284,25 +273,25 @@ Given a pushout square with a
 
 ```text
        g
-   S ----> B
-   |       | \
- f |    inr|  \  n
-   v    ⌜  v   \
-   A ----> ∙    \
-    \ inl   \   |
-  m  \       \ cogap-cocone-span-diagram
-      \       ∨ v
-       \-----> X
+   S -------> B
+   |          | \
+ f |       inr|  \  n
+   v  inl  ⌜  v   \
+   A -------> ∙    \
+    \          \   |
+  m  \    cogap \  |
+      \          ∨ v
+        --------> X
 ```
 
 we have, for every `x : X`, a pushout square of fibers:
 
 ```text
-    fiber (m ∘ f) x ---> fiber (cogap-cocone-span-diagram ∘ inr) x
+    fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
            |                       |
            |                       |
            v                    ⌜  v
- fiber (cogap-cocone-span-diagram ∘ inl) x ----> fiber cogap-cocone-span-diagram x
+ fiber (cogap ∘ inl) x ----> fiber cogap x
 ```
 
 ```agda
@@ -421,8 +410,8 @@ square commute (almost) trivially.
 ```
 
 We record the following auxiliary lemma which says that if we have types `T`,
-`F` and `G` such that `T ≃ fiber (m ∘ f) x`, `F ≃ fiber (cogap-cocone-span-diagram ∘ inl) x` and
-`G ≃ fiber (cogap-cocone-span-diagram ∘ inr) x`, together with suitable maps `u : T → F` and
+`F` and `G` such that `T ≃ fiber (m ∘ f) x`, `F ≃ fiber (cogap ∘ inl) x` and
+`G ≃ fiber (cogap ∘ inr) x`, together with suitable maps `u : T → F` and
 `v : T → G`, then we get a pushout square:
 
 ```text
@@ -431,7 +420,7 @@ We record the following auxiliary lemma which says that if we have types `T`,
    |             |
  u |             |
    v           ⌜ v
-   F ----> fiber cogap-cocone-span-diagram x
+   F ----> fiber cogap x
 ```
 
 Thus, this lemma is useful in case we have convenient descriptions of the

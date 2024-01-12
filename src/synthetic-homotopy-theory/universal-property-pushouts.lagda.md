@@ -87,6 +87,12 @@ property of pushouts:
    This weaker form of the dependent universal property of pushouts expresses
    the induction principle of pushouts seen as higher inductive types.
 
+Examples of pushouts include
+[suspensions](synthetic-homotopy-theory.suspensions-of-types.md),
+[spheres](synthetic-homotopy-theory.spheres.md),
+[joins](synthetic-homotopy-theory.joins-of-types.md), and the
+[smash product](synthetic-homotopy-theory.smash-products-of-pointed-types.md).
+
 ## Definition
 
 ### The universal property of pushouts
