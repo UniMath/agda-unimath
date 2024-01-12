@@ -284,7 +284,7 @@ pullback property.
       ( ( refl-htpy) ,
         ( refl-htpy) ,
         ( ( right-unit-htpy) ∙h
-          ( coherence-triangle-precomp-lift-family-of-elements-htpy P id
+          ( coherence-triangle-precomp-lift-family-of-elements P id
             ( coherence-square-cocone f g c))))
       ( is-pullback-cone-family-dependent-pullback-family P pp-c id)
 ```

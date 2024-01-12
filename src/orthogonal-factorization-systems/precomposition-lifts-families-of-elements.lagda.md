@@ -151,7 +151,13 @@ module _
         ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
 ```
 
-### TODO
+### `triangle-precomp-lift-family-of-elements-htpy` factors through transport along a homotopy in the famiy `B ∘ a`
+
+Instead of defining the homotopy `triangle-precomp-lift-family-of-elements-htpy`
+by homotopy induction, we could have defined it manually using the
+characterization of transport in the type of lifts of a family of elements.
+
+We show that these two definitions are homotopic.
 
 ```agda
 module _
@@ -159,42 +165,42 @@ module _
   {J : UU l4} {f : J → I}
   where
 
-  statement-coherence-triangle-precomp-lift-family-of-elements-htpy :
+  statement-coherence-triangle-precomp-lift-family-of-elements :
     {g : J → I} (H : f ~ g) → UU (l1 ⊔ l3 ⊔ l4)
-  statement-coherence-triangle-precomp-lift-family-of-elements-htpy H =
+  statement-coherence-triangle-precomp-lift-family-of-elements H =
     ( triangle-precomp-lift-family-of-elements-htpy B a H) ~
     ( ( ( tr-lift-family-of-elements-precomp B a H) ·r
         ( precomp-lift-family-of-elements B f a)) ∙h
       ( λ b → eq-htpy (λ j → apd b (H j))))
 
-  coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy :
-    statement-coherence-triangle-precomp-lift-family-of-elements-htpy
+  coherence-triangle-precomp-lift-family-of-elements-refl-htpy :
+    statement-coherence-triangle-precomp-lift-family-of-elements
       ( refl-htpy)
-  coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy b =
+  coherence-triangle-precomp-lift-family-of-elements-refl-htpy b =
     ( htpy-eq (compute-triangle-precomp-lift-family-of-elements-htpy B a) b) ∙
     ( inv right-unit) ∙
     ( identification-left-whisk
       ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy B a b)
       ( inv (eq-htpy-refl-htpy (b ∘ f))))
 
-  coherence-triangle-precomp-lift-family-of-elements-htpy :
+  coherence-triangle-precomp-lift-family-of-elements :
     {g : J → I} (H : f ~ g) →
-    statement-coherence-triangle-precomp-lift-family-of-elements-htpy H
-  coherence-triangle-precomp-lift-family-of-elements-htpy =
+    statement-coherence-triangle-precomp-lift-family-of-elements H
+  coherence-triangle-precomp-lift-family-of-elements =
     ind-htpy f
       ( λ g →
-        statement-coherence-triangle-precomp-lift-family-of-elements-htpy)
-      ( coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
+        statement-coherence-triangle-precomp-lift-family-of-elements)
+      ( coherence-triangle-precomp-lift-family-of-elements-refl-htpy)
 
   abstract
-    compute-coherence-triangle-precomp-lift-family-of-elements-htpy :
-      coherence-triangle-precomp-lift-family-of-elements-htpy refl-htpy ＝
-      coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy
-    compute-coherence-triangle-precomp-lift-family-of-elements-htpy =
+    compute-coherence-triangle-precomp-lift-family-of-elements :
+      coherence-triangle-precomp-lift-family-of-elements refl-htpy ＝
+      coherence-triangle-precomp-lift-family-of-elements-refl-htpy
+    compute-coherence-triangle-precomp-lift-family-of-elements =
       compute-ind-htpy f
         ( λ g →
-          statement-coherence-triangle-precomp-lift-family-of-elements-htpy)
-        ( coherence-triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
+          statement-coherence-triangle-precomp-lift-family-of-elements)
+        ( coherence-triangle-precomp-lift-family-of-elements-refl-htpy)
 ```
 
 ### `precomp-lifted-family-of-elements` is homotopic to the precomposition map on functions up to equivalence
@@ -268,8 +274,8 @@ module _
 
 ### `coherence-square-precomp-map-inv-distributive-Π-Σ` commutes with induced homotopies between precompositions maps
 
-Diagrammatically, we have two ways of composing homotopies to connect `- ∘ f` and
-`precomp-lifted-family-of-elements g`. One factors through
+Diagrammatically, we have two ways of composing homotopies to connect `- ∘ f`
+and `precomp-lifted-family-of-elements g`. One factors through
 `precomp-lifted-family-of-elements f`:
 
 ```text
