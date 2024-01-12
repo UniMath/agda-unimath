@@ -78,8 +78,9 @@ witnessing that the
 where `H₀` and `H₁` are the retracting homotopies of `r₀ ∘ i₀` and `r₁ ∘ i₁`
 respectively.
 
-This coherence arises from the implicit requirement that the total pasting of
-the retraction square should restrict the the reflixivity homotopy on the square
+This coherence requirement arises from the implicit requirement that the total
+pasting of the retraction square should restrict to the reflexivity homotopy on
+the square
 
 ```text
     A ========= A

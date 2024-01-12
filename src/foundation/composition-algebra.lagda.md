@@ -244,7 +244,7 @@ homotopies
                 |                                              |
                 |                                              |
                 v                                              v
-          (g' ∘ - ∘ f) --------------------------------> (g' ∘ - ∘ f')
+          (g' ∘ - ∘ f) --------------------------------> (g' ∘ - ∘ f').
                        htpy-precomp F Y ·r postcomp B g'
 ```
 
@@ -312,7 +312,3 @@ module _
             ( precomp f Y)
             ( inv-htpy (compute-htpy-postcomp-refl-htpy B g)))))
 ```
-
-## See also
-
-- [Path algebra](foundation.path-algebra.md)

@@ -411,7 +411,7 @@ module _
       ( htpy-postcomp S left)
       ( htpy-postcomp S inv-bottom)
   postcomp-vertical-coherence-prism-inv-triangles-maps =
-    inv-htpy
+    ( inv-htpy
       ( ( distributive-htpy-postcomp-concat-htpy
           ( g' ·l left ∙h right ·r h)
           ( hC ·l inv-top)
@@ -423,7 +423,7 @@ module _
             ( ap-binary-concat-htpy
               ( distributive-htpy-postcomp-left-whisker g' left S)
               ( distributive-htpy-postcomp-right-whisker h right S)))
-          ( distributive-htpy-postcomp-left-whisker hC inv-top S))) ∙h
+          ( distributive-htpy-postcomp-left-whisker hC inv-top S)))) ∙h
     ( λ i → ap (λ p → htpy-postcomp S p i) (eq-htpy H)) ∙h
     ( distributive-htpy-postcomp-concat-htpy (inv-bottom ·r hA) front S)
 ```

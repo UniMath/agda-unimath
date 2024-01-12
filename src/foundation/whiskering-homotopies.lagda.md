@@ -274,19 +274,19 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  coh-left-refl-htpy-htpy-comp-horizontal :
+  coh-left-unit-htpy-comp-horizontal :
     {f : (x : A) → B x} {g g' : {x : A} → B x → C x}
     (G : {x : A} → g {x} ~ g' {x}) →
     htpy-comp-horizontal (refl-htpy' f) G ~
     htpy-comp-horizontal' (refl-htpy' f) G
-  coh-left-refl-htpy-htpy-comp-horizontal G = inv-htpy-right-unit-htpy
+  coh-left-unit-htpy-comp-horizontal G = inv-htpy-right-unit-htpy
 
-  coh-right-refl-htpy-htpy-comp-horizontal :
+  coh-right-unit-htpy-comp-horizontal :
     {f f' : (x : A) → B x} {g : {x : A} → B x → C x}
     (F : f ~ f') →
     htpy-comp-horizontal F (refl-htpy' g) ~
     htpy-comp-horizontal' F (refl-htpy' g)
-  coh-right-refl-htpy-htpy-comp-horizontal F = right-unit-htpy
+  coh-right-unit-htpy-comp-horizontal F = right-unit-htpy
 
   coh-htpy-comp-horizontal :
     {f f' : (x : A) → B x} {g g' : {x : A} → B x → C x}
@@ -295,7 +295,7 @@ module _
   coh-htpy-comp-horizontal {f} F G =
     ind-htpy f
       ( λ f' F → htpy-comp-horizontal F G ~ htpy-comp-horizontal' F G)
-      ( coh-left-refl-htpy-htpy-comp-horizontal G)
+      ( coh-left-unit-htpy-comp-horizontal G)
       ( F)
 ```
 

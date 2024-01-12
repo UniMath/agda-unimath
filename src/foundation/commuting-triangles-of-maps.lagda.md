@@ -89,7 +89,7 @@ module _
       ( precomp left W)
       ( precomp top W)
       ( precomp right W)
-  precomp-coherence-triangle-maps H W = htpy-precomp H W
+  precomp-coherence-triangle-maps = htpy-precomp
 
   precomp-coherence-triangle-maps' :
     coherence-triangle-maps' left right top →
@@ -98,7 +98,7 @@ module _
       ( precomp left W)
       ( precomp top W)
       ( precomp right W)
-  precomp-coherence-triangle-maps' H W = htpy-precomp H W
+  precomp-coherence-triangle-maps' = htpy-precomp
 ```
 
 ### Any commuting triangle of maps induces a commuting triangle of function spaces via postcomposition
