@@ -501,11 +501,8 @@ module _
                       ( is-in-subuniverse P)
                       ( inv
                         ( eq-equiv
-                          ( X)
-                          ( left-summand-binary-product-Decomposition d ×
-                            right-summand-binary-product-Decomposition d)
                           ( matching-correspondence-binary-product-Decomposition
-                              d)))
+                            ( d))))
                       ( C2
                         ( pr1 p)
                         ( pr2 p))))))) ∘e
