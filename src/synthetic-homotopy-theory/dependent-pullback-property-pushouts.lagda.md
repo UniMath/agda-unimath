@@ -254,14 +254,16 @@ pullback property.
         ( map-inv-distributive-Π-Σ)
         ( map-inv-distributive-Π-Σ)
         ( map-inv-distributive-Π-Σ)
-        ( htpy-precomp-lifted-family-of-elements-htpy P
+        ( htpy-precomp-lifted-family-of-elements P
           ( coherence-square-cocone f g c))
         ( refl-htpy)
         ( refl-htpy)
         ( refl-htpy)
         ( refl-htpy)
         ( htpy-precomp (coherence-square-cocone f g c) (Σ X P))
-        ( coherence-blabla P (coherence-square-cocone f g c))
+        ( coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
+          ( P)
+          ( coherence-square-cocone f g c))
         ( is-equiv-map-inv-distributive-Π-Σ)
         ( is-equiv-map-inv-distributive-Π-Σ)
         ( is-equiv-map-inv-distributive-Π-Σ)

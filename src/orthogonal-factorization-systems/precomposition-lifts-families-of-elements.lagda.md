@@ -206,7 +206,7 @@ We have a [commuting square](foundation.commuting-squares-of-maps.md) like this:
   Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
                   |                                                           |
                   |                                                           |
-                  | map-inv-distributive-Π-Σ         map-inv-distributive-Π-Σ |
+                  | map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ |
                   |                                                           |
                   V                                                           V
               I → Σ A B ------------------------------------------------> J → Σ A B ,
@@ -232,7 +232,7 @@ module _
   coherence-square-precomp-map-inv-distributive-Π-Σ = refl-htpy
 ```
 
-### TODO
+### Precomposition of lifted families of elements preserves homotopies
 
 ```agda
 module _
@@ -240,11 +240,11 @@ module _
   {f : J → I}
   where
 
-  htpy-precomp-lifted-family-of-elements-htpy :
+  htpy-precomp-lifted-family-of-elements :
     {g : J → I} (H : f ~ g) →
     ( precomp-lifted-family-of-elements B f) ~
     ( precomp-lifted-family-of-elements B g)
-  htpy-precomp-lifted-family-of-elements-htpy H =
+  htpy-precomp-lifted-family-of-elements H =
     htpy-map-Σ
       ( lift-family-of-elements B)
       ( htpy-precomp H A)
@@ -252,10 +252,10 @@ module _
       ( λ a → triangle-precomp-lift-family-of-elements-htpy B a H)
 
   abstract
-    compute-htpy-precomp-lifted-family-of-elements-htpy :
-      htpy-precomp-lifted-family-of-elements-htpy refl-htpy ~
+    compute-htpy-precomp-lifted-family-of-elements :
+      htpy-precomp-lifted-family-of-elements refl-htpy ~
       refl-htpy
-    compute-htpy-precomp-lifted-family-of-elements-htpy =
+    compute-htpy-precomp-lifted-family-of-elements =
       htpy-htpy-map-Σ-refl-htpy
         ( lift-family-of-elements B)
         ( compute-htpy-precomp-refl-htpy f A)
@@ -266,7 +266,47 @@ module _
             htpy-eq (compute-tr-lift-family-of-elements-precomp B a) (b ∘ f)))
 ```
 
-### TODO
+### `coherence-square-precomp-map-inv-distributive-Π-Σ` commutes with induced homotopies between precompositions maps
+
+Diagrammatically, we have two ways of composing homotopies to connect `- ∘ f` and
+`precomp-lifted-family-of-elements g`. One factors through
+`precomp-lifted-family-of-elements f`:
+
+```text
+                                     precomp-lifted-family g
+                               -----------------------------------
+                             /                                     \
+                           /     ⇗ htpy-precomp-lifted-family H      \
+                         /                                             V
+  Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
+                  |                  precomp-lifted-family f                  |
+                  |                                                           |
+                  |                             ⇗                             |
+                  | map-inv-distributive-Π-Σ         map-inv-distributive-Π-Σ |
+                  V                                                           V
+              I → Σ A B ------------------------------------------------> J → Σ A B ,
+                                              - ∘ f
+```
+
+while the other factors through `- ∘ g`:
+
+```text
+                                     precomp-lifted-family g
+  Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
+                  |                                                           |
+                  |                                                           |
+                  | map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ |
+                  |                                                           |
+                  V                           - ∘ g                           V
+              I → Σ A B ------------------------------------------------> J → Σ A B .
+                        \                                               >
+                          \             ⇗  htpy-precomp H             /
+                            \                                       /
+                              -------------------------------------
+                                              - ∘ f
+```
+
+We show that these homotopies are themselves homotopic, filling the cylinder.
 
 ```agda
 module _
@@ -274,21 +314,24 @@ module _
   {f : J → I}
   where
 
-  statement-coherence-blabla :
+  statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ :
     {g : J → I} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  statement-coherence-blabla {g} H =
+  statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
+    {g} H =
     coherence-square-homotopies
       ( htpy-precomp H (Σ A B) ·r map-inv-distributive-Π-Σ)
       ( coherence-square-precomp-map-inv-distributive-Π-Σ B f)
       ( coherence-square-precomp-map-inv-distributive-Π-Σ B g)
       ( ( map-inv-distributive-Π-Σ) ·l
-        ( htpy-precomp-lifted-family-of-elements-htpy B H))
+        ( htpy-precomp-lifted-family-of-elements B H))
 
-  coherence-blabla-refl-htpy : statement-coherence-blabla refl-htpy
-  coherence-blabla-refl-htpy =
+  coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ-refl-htpy :
+    statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
+      ( refl-htpy)
+  coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ-refl-htpy =
     ( ap-left-whisk-htpy
       ( map-inv-distributive-Π-Σ)
-      ( compute-htpy-precomp-lifted-family-of-elements-htpy B)) ∙h
+      ( compute-htpy-precomp-lifted-family-of-elements B)) ∙h
     ( inv-htpy
       ( λ h →
         compute-htpy-precomp-refl-htpy f
@@ -296,10 +339,13 @@ module _
           ( map-inv-distributive-Π-Σ h))) ∙h
     ( inv-htpy-right-unit-htpy)
 
-  coherence-blabla :
-    {g : J → I} (H : f ~ g) → statement-coherence-blabla H
-  coherence-blabla =
+  coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ :
+    {g : J → I} (H : f ~ g) →
+    statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
+      ( H)
+  coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ =
     ind-htpy f
-      ( λ g → statement-coherence-blabla)
-      ( coherence-blabla-refl-htpy)
+      ( λ g →
+        statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ)
+      ( coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ-refl-htpy)
 ```
