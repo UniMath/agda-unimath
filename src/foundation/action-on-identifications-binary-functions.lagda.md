@@ -88,7 +88,7 @@ module _
   where
 
   left-unit-ap-binary :
-    {x : A} {y y' : B} (q : y ＝ y') → ap-binary f refl q ＝ ap (f x) q
+    {x : A} {y y' : B} (q : y ＝ y') → ap-binary f (refl {x = x}) q ＝ ap (f x) q
   left-unit-ap-binary _ = refl
 
   right-unit-ap-binary :

@@ -183,7 +183,7 @@ module _
     map-equiv equiv-rotate-vertical-coherence-prism-maps
 ```
 
-### Commuting prisms of maps induces commuting prisms on function types via precomposition
+### Commuting prisms of maps induce commuting prisms of precomposition maps
 
 We prove this for a few different formulations of commuting prisms of maps.
 
@@ -369,7 +369,7 @@ module _
       ( precomp-vertical-inv-boundary-vertical-coherence-inv-triangles-prism-maps)
 ```
 
-### Commuting prisms of maps induces commuting prisms on function types via postcomposition
+### Commuting prisms of maps induce commuting prisms of postcomposition maps
 
 ```agda
 module _

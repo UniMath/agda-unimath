@@ -16,14 +16,15 @@ open import foundation-core.function-types
 
 ## Idea
 
-Given a type `A` and a dependent map `f : {a : A} → X a → Y a`, the **dependent
-postcomposition function**
+Given a type `A` and a dependent map `f : {a : A} → X a → Y a`, the
+{{#concept "dependent
+postcomposition function" Agda=postcomp-Π}}
 
 ```text
   f ∘ - : ((a : A) → X a) → ((a : A) → Y a)
 ```
 
-is defined by `λ h → f ∘ h`.
+is defined by `λ h x → f (h x)`.
 
 Note that, as opposed to
 [precomposition of dependent functions](foundation-core.precomposition-dependent-functions.md),

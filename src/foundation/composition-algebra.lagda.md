@@ -46,9 +46,10 @@ homotopies.
 
 ### Precomposition distributes over whiskerings of homotopies
 
-The operation `htpy-precomp` distributes over whiskerings contravariantly. Given
-a homotopy `H : f ~ g` and a suitable map `h` the homotopy constructed as the
-whiskering
+The operation `htpy-precomp` distributes over
+[whiskerings of homotopies](foundation-core.whiskering-homotopies.md)
+contravariantly. Given a homotopy `H : f ~ g` and a suitable map `h` the
+homotopy constructed as the whiskering
 
 ```text
                - ∘ f

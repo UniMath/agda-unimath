@@ -74,7 +74,7 @@ module _
     map-equiv equiv-coherence-triangle-maps-inv-top
 ```
 
-### Any commuting triangle of maps induces a commuting triangle of function spaces via precomposition
+### Commuting triangles of maps induce commuting triangles of precomposition maps
 
 ```agda
 module _
@@ -101,7 +101,7 @@ module _
   precomp-coherence-triangle-maps' = htpy-precomp
 ```
 
-### Any commuting triangle of maps induces a commuting triangle of function spaces via postcomposition
+### Commuting triangles of maps induce commuting triangles of postcomposition maps
 
 ```agda
 module _

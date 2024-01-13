@@ -713,11 +713,11 @@ module _
 
   inclusion-precomp-retract-map : hom-arrow (precomp f S) (precomp g S)
   inclusion-precomp-retract-map =
-    precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+    hom-arrow-precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
 
   hom-retraction-precomp-retract-map : hom-arrow (precomp g S) (precomp f S)
   hom-retraction-precomp-retract-map =
-    precomp-hom-arrow f g (inclusion-retract-map f g R) S
+    hom-arrow-precomp-hom-arrow f g (inclusion-retract-map f g R) S
 
   is-retraction-map-domain-precomp-retract-map :
     is-retraction
@@ -793,13 +793,14 @@ module _
       ( precomp f S)
       ( precomp g S)
       ( inclusion-precomp-retract-map)
-  pr1 retraction-precomp-retract-map = hom-retraction-precomp-retract-map
+  pr1 retraction-precomp-retract-map =
+    hom-retraction-precomp-retract-map
   pr2 retraction-precomp-retract-map =
     is-retraction-hom-retraction-precomp-retract-map
 
-  precomp-retract-map : (precomp f S) retract-of-map (precomp g S)
-  pr1 precomp-retract-map = inclusion-precomp-retract-map
-  pr2 precomp-retract-map = retraction-precomp-retract-map
+  retract-map-precomp-retract-map : (precomp f S) retract-of-map (precomp g S)
+  pr1 retract-map-precomp-retract-map = inclusion-precomp-retract-map
+  pr2 retract-map-precomp-retract-map = retraction-precomp-retract-map
 ```
 
 ### If `f` is a retract of `g`, then `f ∘ -` is a retract of `g ∘ -`
@@ -812,11 +813,11 @@ module _
 
   inclusion-postcomp-retract-map : hom-arrow (postcomp S f) (postcomp S g)
   inclusion-postcomp-retract-map =
-    postcomp-hom-arrow f g (inclusion-retract-map f g R) S
+    hom-arrow-postcomp-hom-arrow f g (inclusion-retract-map f g R) S
 
   hom-retraction-postcomp-retract-map : hom-arrow (postcomp S g) (postcomp S f)
   hom-retraction-postcomp-retract-map =
-    postcomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+    hom-arrow-postcomp-hom-arrow g f (hom-retraction-retract-map f g R) S
 
   is-retraction-map-domain-postcomp-retract-map :
     is-retraction
@@ -871,9 +872,9 @@ module _
       ( is-retraction-map-codomain-hom-retraction-retract-map f g R)
       ( coh-retract-map f g R)
       ( S)) ∙h
-      ap-concat-htpy
-        ( is-retraction-map-codomain-postcomp-retract-map ·r postcomp S f)
-        ( eq-htpy-refl-htpy ∘ postcomp S f)
+    ( ap-concat-htpy
+      ( is-retraction-map-codomain-postcomp-retract-map ·r postcomp S f)
+      ( eq-htpy-refl-htpy ∘ postcomp S f))
 
   is-retraction-hom-retraction-postcomp-retract-map :
     is-retraction-hom-arrow
@@ -893,13 +894,15 @@ module _
       ( postcomp S f)
       ( postcomp S g)
       ( inclusion-postcomp-retract-map)
-  pr1 retraction-postcomp-retract-map = hom-retraction-postcomp-retract-map
+  pr1 retraction-postcomp-retract-map =
+    hom-retraction-postcomp-retract-map
   pr2 retraction-postcomp-retract-map =
     is-retraction-hom-retraction-postcomp-retract-map
 
-  postcomp-retract-map : (postcomp S f) retract-of-map (postcomp S g)
-  pr1 postcomp-retract-map = inclusion-postcomp-retract-map
-  pr2 postcomp-retract-map = retraction-postcomp-retract-map
+  retract-map-postcomp-retract-map :
+    (postcomp S f) retract-of-map (postcomp S g)
+  pr1 retract-map-postcomp-retract-map = inclusion-postcomp-retract-map
+  pr2 retract-map-postcomp-retract-map = retraction-postcomp-retract-map
 ```
 
 ## References

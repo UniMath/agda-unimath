@@ -151,7 +151,7 @@ coherence-square-inv-all top left right bottom H =
       ( H))
 ```
 
-### Any commuting square of maps induces a commuting square of function spaces via precomposition
+### Commuting squares of maps induce commuting squares of precomposition maps
 
 ```agda
 module _
@@ -179,7 +179,7 @@ module _
   precomp-coherence-square-maps' = htpy-precomp
 ```
 
-### Any commuting square of maps induces a commuting square of function spaces via postcomposition
+### Commuting squares of maps induce commuting squares of postcomposition maps
 
 ```agda
 module _

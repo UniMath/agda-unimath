@@ -38,7 +38,7 @@ Given a map `f : X → Y` and a type `A`, the
   f ∘ - : (A → X) → (A → Y)
 ```
 
-is defined by `λ h → f ∘ h`.
+is defined by `λ h x → f (h x)`.
 
 ## Properties
 

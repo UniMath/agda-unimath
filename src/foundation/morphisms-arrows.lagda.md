@@ -439,11 +439,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  precomp-hom-arrow :
+  hom-arrow-precomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (precomp g S) (precomp f S)
-  pr1 (precomp-hom-arrow S) = precomp (map-codomain-hom-arrow f g α) S
-  pr1 (pr2 (precomp-hom-arrow S)) = precomp (map-domain-hom-arrow f g α) S
-  pr2 (pr2 (precomp-hom-arrow S)) h =
+  pr1 (hom-arrow-precomp-hom-arrow S) =
+    precomp (map-codomain-hom-arrow f g α) S
+  pr1 (pr2 (hom-arrow-precomp-hom-arrow S)) =
+    precomp (map-domain-hom-arrow f g α) S
+  pr2 (pr2 (hom-arrow-precomp-hom-arrow S)) h =
     inv (eq-htpy (h ·l coh-hom-arrow f g α))
 ```
 
@@ -459,11 +461,14 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  postcomp-hom-arrow :
+  hom-arrow-postcomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (postcomp S f) (postcomp S g)
-  pr1 (postcomp-hom-arrow S) = postcomp S (map-domain-hom-arrow f g α)
-  pr1 (pr2 (postcomp-hom-arrow S)) = postcomp S (map-codomain-hom-arrow f g α)
-  pr2 (pr2 (postcomp-hom-arrow S)) h = eq-htpy (coh-hom-arrow f g α ·r h)
+  pr1 (hom-arrow-postcomp-hom-arrow S) =
+    postcomp S (map-domain-hom-arrow f g α)
+  pr1 (pr2 (hom-arrow-postcomp-hom-arrow S)) =
+    postcomp S (map-codomain-hom-arrow f g α)
+  pr2 (pr2 (hom-arrow-postcomp-hom-arrow S)) h =
+    eq-htpy (coh-hom-arrow f g α ·r h)
 ```
 
 ### Associativity of composition of morphisms of arrows

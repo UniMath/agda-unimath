@@ -105,8 +105,10 @@ module _
 
   retract-precomp :
     (A → S) retract-of (B → S)
-  pr1 retract-precomp = precomp (map-retraction-retract R) S
-  pr1 (pr2 retract-precomp) = precomp (inclusion-retract R) S
+  pr1 retract-precomp =
+    precomp (map-retraction-retract R) S
+  pr1 (pr2 retract-precomp) =
+    precomp (inclusion-retract R) S
   pr2 (pr2 retract-precomp) h =
     eq-htpy (h ·l is-retraction-map-retraction-retract R)
 ```
