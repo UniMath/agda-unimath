@@ -39,9 +39,11 @@ function is completely determined by its values.
 
 ## Properties
 
-### Naturality of `eq-htpy` for dependent functions
+### Naturality of `eq-htpy` with respect to functions
 
-Consider a map `f : A → B` and two dependent functions `g h : (b : B) → C b`.
+#### Naturality of `eq-htpy` with respect to precomposition of dependent functions
+
+Consider a map `f : A → B` and two dependent functions `g h : (x : B) → C x`.
 Then the square
 
 ```text
@@ -74,50 +76,7 @@ coherence-square-eq-htpy-ap-precomp-Π f {C = C} g h =
     ( coherence-square-htpy-eq-ap-precomp-Π f g h)
 ```
 
-Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
-
-```text
-                     ap (postcomp A f)
-       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
-          ^                                       ^
-  eq-htpy |                                       | eq-htpy
-          |                                       |
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
-                          f ·l_
-```
-
-commutes.
-
-```agda
-coherence-square-eq-htpy-ap-postcomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  (f : {x : A} → B x → C x) (g h : (x : A) → B x) →
-  coherence-square-maps
-    ( f ·l_)
-    ( eq-htpy)
-    ( eq-htpy)
-    ( ap (postcomp-Π A f) {x = g} {y = h})
-coherence-square-eq-htpy-ap-postcomp-Π {A = A} f g h =
-    coherence-square-inv-vertical
-    ( ap (postcomp-Π A f) {x = g} {y = h})
-    ( equiv-funext)
-    ( equiv-funext)
-    ( f ·l_)
-    ( coherence-square-htpy-eq-ap-postcomp-Π f g h)
-
-coherence-square-eq-htpy-ap-postcomp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
-  (g h : A → B) →
-  coherence-square-maps
-    ( f ·l_)
-    ( eq-htpy)
-    ( eq-htpy)
-    ( ap (postcomp A f) {x = g} {y = h})
-coherence-square-eq-htpy-ap-postcomp f =
-  coherence-square-eq-htpy-ap-postcomp-Π f
-```
-
-### Naturality of `eq-htpy` for ordinary functions
+#### Naturality of `eq-htpy` with respect to precomposition of ordinary functions
 
 Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
 
@@ -149,6 +108,68 @@ coherence-square-eq-htpy-ap-precomp {C = C} f g h =
     ( equiv-funext)
     ( precomp-Π f (eq-value g h))
     ( coherence-square-htpy-eq-ap-precomp f g h)
+```
+
+#### Naturality of `eq-htpy` with respect to postcomposition of dependent functions
+
+Consider a map `f : {x : A} → B x → C x` and two functions
+`g h : (x : A) → B x`. Then the square
+
+```text
+                    ap (postcomp-Π A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          ^                                       ^
+  eq-htpy |                                       | eq-htpy
+          |                                       |
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+commutes.
+
+```agda
+coherence-square-eq-htpy-ap-postcomp-Π :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (f : {x : A} → B x → C x) (g h : (x : A) → B x) →
+  coherence-square-maps
+    ( f ·l_)
+    ( eq-htpy)
+    ( eq-htpy)
+    ( ap (postcomp-Π A f) {x = g} {y = h})
+coherence-square-eq-htpy-ap-postcomp-Π {A = A} f g h =
+    coherence-square-inv-vertical
+    ( ap (postcomp-Π A f) {x = g} {y = h})
+    ( equiv-funext)
+    ( equiv-funext)
+    ( f ·l_)
+    ( coherence-square-htpy-eq-ap-postcomp-Π f g h)
+```
+
+#### Naturality of `eq-htpy` with respect to postcomposition of ordinary functions
+
+Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
+
+```text
+                     ap (postcomp A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          ^                                       ^
+  eq-htpy |                                       | eq-htpy
+          |                                       |
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+```agda
+coherence-square-eq-htpy-ap-postcomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
+  (g h : A → B) →
+  coherence-square-maps
+    ( f ·l_)
+    ( eq-htpy)
+    ( eq-htpy)
+    ( ap (postcomp A f) {x = g} {y = h})
+coherence-square-eq-htpy-ap-postcomp f =
+  coherence-square-eq-htpy-ap-postcomp-Π f
 ```
 
 ### `eq-htpy` preserves inverses

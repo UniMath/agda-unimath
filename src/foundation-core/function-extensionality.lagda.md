@@ -166,9 +166,11 @@ module _
 
 ## Properties
 
-### Naturality of `htpy-eq` for dependent functions
+### Naturality of `htpy-eq` with respect to functions
 
-Consider a map `f : A → B` and two dependent functions `g h : (b : B) → C b`.
+#### Naturality of `htpy-eq` with respect to precomposition of dependent functions
+
+Consider a map `f : A → B` and two dependent functions `g h : (x : B) → C x`.
 Then the square
 
 ```text
@@ -195,7 +197,7 @@ coherence-square-htpy-eq-ap-precomp-Π :
 coherence-square-htpy-eq-ap-precomp-Π f g .g refl = refl
 ```
 
-### Naturality of `htpy-eq` for ordinary functions
+#### Naturality of `htpy-eq` with respect to precomposition of ordinary functions
 
 Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
 
@@ -223,10 +225,13 @@ coherence-square-htpy-eq-ap-precomp :
 coherence-square-htpy-eq-ap-precomp f = coherence-square-htpy-eq-ap-precomp-Π f
 ```
 
-Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
+#### Naturality of `htpy-eq` with respect to postcomposition of dependent functions
+
+Consider a map `f : {x : A} → B x → C x` and two functions
+`g h : (x : A) → B x`. Then the square
 
 ```text
-                     ap (postcomp A f)
+                   ap (postcomp-Π A f)
        (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
           |                                       |
   htpy-eq |                                       | htpy-eq
@@ -247,7 +252,25 @@ coherence-square-htpy-eq-ap-postcomp-Π :
     ( htpy-eq)
     ( f ·l_)
 coherence-square-htpy-eq-ap-postcomp-Π f g .g refl = refl
+```
 
+#### Naturality of `htpy-eq` with respect to postcomposition of ordinary functions
+
+Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
+
+```text
+                    ap (postcomp A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          V                                       V
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+commutes.
+
+```agda
 coherence-square-htpy-eq-ap-postcomp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
   (g h : A → B) →
