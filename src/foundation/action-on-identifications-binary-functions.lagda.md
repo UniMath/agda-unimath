@@ -132,8 +132,8 @@ module _
   where
 
   ap-binary-concat :
-    {a0 a1 a2 : A} (p : a0 ＝ a1) (p' : a1 ＝ a2)
-    {b0 b1 b2 : B} (q : b0 ＝ b1) (q' : b1 ＝ b2) →
+    {x y z : A} (p : x ＝ y) (p' : y ＝ z)
+    {x' y' z' : B} (q : x' ＝ y') (q' : y' ＝ z') →
     ap-binary f (p ∙ p') (q ∙ q') ＝ ap-binary f p q ∙ ap-binary f p' q'
   ap-binary-concat refl _ refl _ = refl
 ```
@@ -147,13 +147,13 @@ module _
 
   ap-binary-comp :
     {l4 l5 : Level} {X : UU l4} {Y : UU l5} (f : X → A) (g : Y → B)
-    {x0 x1 : X} (p : x0 ＝ x1) {y0 y1 : Y} (q : y0 ＝ y1) →
+    {x x' : X} (p : x ＝ x') {y y' : Y} (q : y ＝ y') →
     ap-binary (λ x y → H (f x) (g y)) p q ＝ ap-binary H (ap f p) (ap g q)
   ap-binary-comp f g refl refl = refl
 
   ap-binary-comp-diagonal :
     {l4 : Level} {A' : UU l4} (f : A' → A) (g : A' → B)
-    {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
+    {x y : A'} (p : x ＝ y) →
     ap (λ z → H (f z) (g z)) p ＝ ap-binary H (ap f p) (ap g p)
   ap-binary-comp-diagonal f g p =
     ( inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p)) ∙
@@ -161,7 +161,7 @@ module _
 
   ap-binary-comp' :
     {l4 : Level} {D : UU l4} (f : C → D)
-    {a0 a1 : A} (p : a0 ＝ a1) {b0 b1 : B} (q : b0 ＝ b1) →
+    {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
     ap-binary (λ a b → f (H a b)) p q ＝ ap f (ap-binary H p q)
   ap-binary-comp' f refl refl = refl
 ```
@@ -174,7 +174,7 @@ module _
   where
 
   ap-binary-permute :
-    {a0 a1 : A} (p : a0 ＝ a1) {b0 b1 : B} (q : b0 ＝ b1) →
+    {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
     ap-binary (λ y x → f x y) q p ＝ ap-binary f p q
   ap-binary-permute refl refl = refl
 ```
