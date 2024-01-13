@@ -193,7 +193,8 @@ module _
   where
 
   precomp-coherence-square-maps :
-    coherence-square-maps top left right bottom → (S : UU l5) →
+    coherence-square-maps top left right bottom →
+    (S : UU l5) →
     coherence-square-maps
       ( precomp right S)
       ( precomp bottom S)
@@ -202,7 +203,8 @@ module _
   precomp-coherence-square-maps = htpy-precomp
 
   precomp-coherence-square-maps' :
-    coherence-square-maps' top left right bottom → (S : UU l5) →
+    coherence-square-maps' top left right bottom →
+    (S : UU l5) →
     coherence-square-maps'
       ( precomp right S)
       ( precomp bottom S)

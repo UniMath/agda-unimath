@@ -145,7 +145,7 @@ module _
 
   concat-inv-htpy' :
     (f : (x : A) → B x) {g h : (x : A) → B x} →
-    (g ~ h) → (f ~ h) → (f ~ g)
+    g ~ h → f ~ h → f ~ g
   concat-inv-htpy' f K = concat-htpy' f (inv-htpy K)
 ```
 
@@ -198,7 +198,7 @@ module _
   left-unit-htpy : refl-htpy ∙h H ~ H
   left-unit-htpy x = left-unit
 
-  inv-htpy-left-unit-htpy : H ~ (refl-htpy ∙h H)
+  inv-htpy-left-unit-htpy : H ~ refl-htpy ∙h H
   inv-htpy-left-unit-htpy = inv-htpy left-unit-htpy
 
   right-unit-htpy : H ∙h refl-htpy ~ H
@@ -216,7 +216,7 @@ module _
   {f g : (x : A) → B x} (H : f ~ g)
   where
 
-  left-inv-htpy : ((inv-htpy H) ∙h H) ~ refl-htpy
+  left-inv-htpy : inv-htpy H ∙h H ~ refl-htpy
   left-inv-htpy = left-inv ∘ H
 
   inv-htpy-left-inv-htpy : refl-htpy ~ inv-htpy H ∙h H
@@ -253,23 +253,23 @@ module _
 nat-htpy :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   {x y : A} (p : x ＝ y) →
-  ((H x) ∙ (ap g p)) ＝ ((ap f p) ∙ (H y))
+  H x ∙ ap g p ＝ ap f p ∙ H y
 nat-htpy H refl = right-unit
 
 inv-nat-htpy :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   {x y : A} (p : x ＝ y) →
-  ((ap f p) ∙ (H y)) ＝ ((H x) ∙ (ap g p))
+  ap f p ∙ H y ＝ H x ∙ ap g p
 inv-nat-htpy H p = inv (nat-htpy H p)
 
 nat-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
-  {x y : A} (p : x ＝ y) → ((H x) ∙ p) ＝ ((ap f p) ∙ (H y))
+  {x y : A} (p : x ＝ y) → H x ∙ p ＝ ap f p ∙ H y
 nat-htpy-id H refl = right-unit
 
 inv-nat-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
-  {x y : A} (p : x ＝ y) → ((ap f p) ∙ (H y)) ＝ ((H x) ∙ p)
+  {x y : A} (p : x ＝ y) → ap f p ∙ H y ＝ H x ∙ p
 inv-nat-htpy-id H p = inv (nat-htpy-id H p)
 ```
 
@@ -281,16 +281,16 @@ module _
   where
 
   ap-concat-htpy :
-    (H : f ~ g) {K K' : g ~ h} → K ~ K' → (H ∙h K) ~ (H ∙h K')
+    (H : f ~ g) {K K' : g ~ h} → K ~ K' → H ∙h K ~ H ∙h K'
   ap-concat-htpy H L x = ap (concat (H x) (h x)) (L x)
 
   ap-concat-htpy' :
-    {H H' : f ~ g} (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
+    {H H' : f ~ g} (K : g ~ h) → H ~ H' → H ∙h K ~ H' ∙h K
   ap-concat-htpy' K L x =
     ap (concat' (f x) (K x)) (L x)
 
   ap-binary-concat-htpy :
-    {H H' : f ~ g} {K K' : g ~ h} → H ~ H' → K ~ K' → (H ∙h K) ~ (H' ∙h K')
+    {H H' : f ~ g} {K K' : g ~ h} → H ~ H' → K ~ K' → H ∙h K ~ H' ∙h K'
   ap-binary-concat-htpy {H} {H'} {K} {K'} HH KK =
     ap-concat-htpy H KK ∙h ap-concat-htpy' K' HH
 
@@ -300,7 +300,7 @@ module _
   where
 
   ap-inv-htpy :
-    H ~ H' → (inv-htpy H) ~ (inv-htpy H')
+    H ~ H' → inv-htpy H ~ inv-htpy H'
   ap-inv-htpy K x = ap inv (K x)
 ```
 
@@ -329,8 +329,8 @@ homotopy-reasoning f = refl-htpy
 
 step-homotopy-reasoning :
   {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
-  {f g : (x : X) → Y x} → (f ~ g) →
-  (h : (x : X) → Y x) → (g ~ h) → (f ~ h)
+  {f g : (x : X) → Y x} → f ~ g →
+  (h : (x : X) → Y x) → g ~ h → f ~ h
 step-homotopy-reasoning p h q = p ∙h q
 
 syntax step-homotopy-reasoning p h q = p ~ h by q

@@ -127,7 +127,7 @@ module _
   ( f' : A' → C') (g' : B' → C') (h' : A' → B')
   ( hA : A → A') (hB : B → B') (hC : C → C')
   ( top : coherence-triangle-maps f g h)
-  ( inv-front : coherence-square-maps hA f f' hC)
+  ( inv-front : coherence-square-maps' f hA hC f')
   ( inv-right : coherence-square-maps' g hB hC g')
   ( left : coherence-square-maps h hA hB h')
   ( bottom : coherence-triangle-maps f' g' h')
