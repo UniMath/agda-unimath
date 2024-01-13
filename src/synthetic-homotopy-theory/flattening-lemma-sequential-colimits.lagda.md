@@ -74,7 +74,7 @@ module _
     map-Σ
       ( P ∘ map-cocone-sequential-diagram A c (succ-ℕ n))
       ( map-sequential-diagram A n)
-      ( λ a → tr P (coherence-triangle-cocone-sequential-diagram A c n a))
+      ( λ a → tr P (coherence-cocone-sequential-diagram A c n a))
 
   cocone-sequential-diagram-flattening-lemma :
     cocone-sequential-diagram sequential-diagram-flattening-lemma (Σ X P)
@@ -85,7 +85,7 @@ module _
       ( map-cocone-sequential-diagram A c n)
       ( map-cocone-sequential-diagram A c (succ-ℕ n))
       ( map-sequential-diagram A n)
-      ( coherence-triangle-cocone-sequential-diagram A c n)
+      ( coherence-cocone-sequential-diagram A c n)
 ```
 
 ### Statement of the flattening lemma
@@ -181,7 +181,7 @@ module _
                 ( cofork-cocone-sequential-diagram A c))) ,
             ( refl-htpy))
           ( ind-Σ
-            ( coherence-triangle-cocone-sequential-diagram
+            ( coherence-cocone-sequential-diagram
               ( sequential-diagram-flattening-lemma c P)
               ( cocone-sequential-diagram-flattening-lemma c P)) ,
             ( coherence-cofork _ _

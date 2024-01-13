@@ -158,12 +158,9 @@ module _
                     ( tr
                       ( is-in-subuniverse P)
                       ( eq-equiv
-                        ( Σ (indexing-type-Relaxed-Σ-Decomposition (pr1 D))
-                          (cotype-Relaxed-Σ-Decomposition (pr1 D)))
-                        ( X)
                         ( inv-equiv
                           ( matching-correspondence-Relaxed-Σ-Decomposition
-                              ( pr1 D))))
+                            ( pr1 D))))
                       ( C2
                           ( indexing-type-Relaxed-Σ-Decomposition (pr1 D) ,
                               pr1 (pr2 D))

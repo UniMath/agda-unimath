@@ -390,8 +390,6 @@ full equivalence.
     tr
       ( is-modal (unit-higher-modality m))
       ( eq-equiv
-        ( type-is-small (is-locally-small-operator-higher-modality m X x' y'))
-        ( x' ＝ y')
         ( inv-equiv-is-small
           ( is-locally-small-operator-higher-modality m X x' y')))
       ( is-modal-small-identity-type-higher-modality m X x' y')

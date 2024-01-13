@@ -21,6 +21,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
@@ -83,13 +84,13 @@ module _
   map-cocone-sequential-diagram : (n : ℕ) → family-sequential-diagram A n → X
   map-cocone-sequential-diagram = pr1 c
 
-  coherence-triangle-cocone-sequential-diagram :
+  coherence-cocone-sequential-diagram :
     ( n : ℕ) →
     coherence-triangle-maps
       ( map-cocone-sequential-diagram n)
       ( map-cocone-sequential-diagram (succ-ℕ n))
       ( map-sequential-diagram A n)
-  coherence-triangle-cocone-sequential-diagram = pr2 c
+  coherence-cocone-sequential-diagram = pr2 c
 ```
 
 ### Homotopies of cocones under a sequential diagram
@@ -120,8 +121,8 @@ module _
     ( n : ℕ) →
     coherence-square-homotopies
       ( K n)
-      ( coherence-triangle-cocone-sequential-diagram A c n)
-      ( coherence-triangle-cocone-sequential-diagram A c' n)
+      ( coherence-cocone-sequential-diagram A c n)
+      ( coherence-cocone-sequential-diagram A c' n)
       ( K (succ-ℕ n) ·r map-sequential-diagram A n)
 
   htpy-cocone-sequential-diagram :
@@ -171,7 +172,7 @@ module _
   pr1 (cocone-map-sequential-diagram f) n =
     f ∘ map-cocone-sequential-diagram A c n
   pr2 (cocone-map-sequential-diagram f) n =
-    f ·l (coherence-triangle-cocone-sequential-diagram A c n)
+    f ·l (coherence-cocone-sequential-diagram A c n)
 ```
 
 ### Postcomposition cocones under postcomposition sequential diagrams
@@ -187,7 +188,7 @@ module _
   pr1 cocone-postcomp-sequential-diagram n g x =
     map-cocone-sequential-diagram A c n (g x)
   pr2 cocone-postcomp-sequential-diagram n g =
-    eq-htpy (λ x → coherence-triangle-cocone-sequential-diagram A c n (g x))
+    htpy-postcomp X (coherence-cocone-sequential-diagram A c n) g
 ```
 
 ## Properties
@@ -223,9 +224,7 @@ module _
         ( ( map-cocone-sequential-diagram A c) ,
           ( ev-pair refl-htpy))
         ( is-torsorial-binary-htpy
-          ( λ n →
-            ( coherence-triangle-cocone-sequential-diagram A c n) ∙h
-            ( refl-htpy)))
+          ( λ n → coherence-cocone-sequential-diagram A c n ∙h refl-htpy))
 
     is-equiv-htpy-eq-cocone-sequential-diagram :
       ( c c' : cocone-sequential-diagram A X) →
@@ -267,7 +266,7 @@ module _
       ( ( ev-pair refl-htpy) ,
         ( λ n →
           ( right-unit-htpy) ∙h
-          ( ap-id ∘ coherence-triangle-cocone-sequential-diagram A c n)))
+          ( ap-id ∘ coherence-cocone-sequential-diagram A c n)))
 ```
 
 ### Postcomposing cocones under a sequential colimit distributes over function composition
@@ -294,7 +293,7 @@ module _
       ( ( ev-pair refl-htpy) ,
         ( λ n →
           ( right-unit-htpy) ∙h
-          ( ap-comp k h ∘ coherence-triangle-cocone-sequential-diagram A c n)))
+          ( ap-comp k h ∘ coherence-cocone-sequential-diagram A c n)))
 ```
 
 ### Cocones under sequential diagrams are a special case of coequalizers
@@ -382,7 +381,7 @@ module _
     pr1 (cofork-cocone-sequential-diagram c) =
       ind-Σ (map-cocone-sequential-diagram A c)
     pr2 (cofork-cocone-sequential-diagram c) =
-      ind-Σ (coherence-triangle-cocone-sequential-diagram A c)
+      ind-Σ (coherence-cocone-sequential-diagram A c)
 
     abstract
       is-section-cocone-sequential-diagram-cofork :

@@ -375,11 +375,7 @@ module _
                       eq-pair-Σ
                         ( eq-pair-Σ
                           ( eq-equiv
-                            ( raise-unit l1)
-                            ( inclusion-subuniverse P (pr1 x))
-                            ( equiv-is-contr
-                              is-contr-raise-unit
-                              ( ( pr2 x))))
+                            ( equiv-is-contr is-contr-raise-unit (pr2 x)))
                           ( eq-is-prop (is-prop-type-Prop (P (pr1 (pr1 x))))))
                         ( eq-is-prop is-property-is-contr)))
                   ( ( raise-unit l1 , C1) ,

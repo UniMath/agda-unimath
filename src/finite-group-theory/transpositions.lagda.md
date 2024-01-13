@@ -984,13 +984,6 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype
       ( λ z →
         eq-pair-Σ
           ( eq-equiv
-            ( pr1
-              ( pr1
-                ( precomp-equiv-2-Element-Decidable-Subtype
-                  ( standard-transposition H np)
-                  ( standard-2-Element-Decidable-Subtype H np))
-                ( z)))
-            ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z))
             ( equiv-iff
               ( subtype-standard-2-Element-Decidable-Subtype H np
                 ( map-inv-equiv (standard-transposition H np) z))
@@ -1065,13 +1058,6 @@ eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
       ( λ u →
         eq-pair-Σ
           ( eq-equiv
-            ( pr1
-              ( pr1
-                ( precomp-equiv-2-Element-Decidable-Subtype
-                  ( standard-transposition H np)
-                  ( standard-2-Element-Decidable-Subtype H np'))
-                ( u)))
-            ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u))
             ( equiv-iff
               ( subtype-standard-2-Element-Decidable-Subtype H np'
                 ( map-inv-equiv (standard-transposition H np) u))

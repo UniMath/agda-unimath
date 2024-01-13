@@ -56,18 +56,18 @@ module _
   where
 
   map-tr-equiv : X ≃ Y → f X → f Y
-  map-tr-equiv e = tr f (eq-equiv X Y e)
+  map-tr-equiv e = tr f (eq-equiv e)
 
   abstract
     is-equiv-map-tr-equiv : (e : X ≃ Y) → is-equiv (map-tr-equiv e)
-    is-equiv-map-tr-equiv e = is-equiv-tr f (eq-equiv X Y e)
+    is-equiv-map-tr-equiv e = is-equiv-tr f (eq-equiv e)
 
   tr-equiv : X ≃ Y → f X ≃ f Y
   pr1 (tr-equiv e) = map-tr-equiv e
   pr2 (tr-equiv e) = is-equiv-map-tr-equiv e
 
   eq-tr-equiv : X ≃ Y → f X ＝ f Y
-  eq-tr-equiv = eq-equiv (f X) (f Y) ∘ tr-equiv
+  eq-tr-equiv = eq-equiv ∘ tr-equiv
 ```
 
 ### Transporting along inverse equivalences
@@ -78,18 +78,18 @@ module _
   where
 
   map-tr-inv-equiv : X ≃ Y → f Y → f X
-  map-tr-inv-equiv e = tr f (eq-equiv Y X (inv-equiv e))
+  map-tr-inv-equiv e = tr f (eq-equiv (inv-equiv e))
 
   abstract
     is-equiv-map-tr-inv-equiv : (e : X ≃ Y) → is-equiv (map-tr-inv-equiv e)
-    is-equiv-map-tr-inv-equiv e = is-equiv-tr f (eq-equiv Y X (inv-equiv e))
+    is-equiv-map-tr-inv-equiv e = is-equiv-tr f (eq-equiv (inv-equiv e))
 
   tr-inv-equiv : X ≃ Y → f Y ≃ f X
   pr1 (tr-inv-equiv e) = map-tr-inv-equiv e
   pr2 (tr-inv-equiv e) = is-equiv-map-tr-inv-equiv e
 
   eq-tr-inv-equiv : X ≃ Y → f Y ＝ f X
-  eq-tr-inv-equiv = eq-equiv (f Y) (f X) ∘ tr-inv-equiv
+  eq-tr-inv-equiv = eq-equiv ∘ tr-inv-equiv
 ```
 
 ## Properties
@@ -122,8 +122,6 @@ and `e' : Y ≃ Z` in `𝒰₁` we obtain a commuting triangle
                        \     /
                         ∨   ∨
                          f Z
-
-```
 
 ```agda
 module _
@@ -160,8 +158,8 @@ module _
     ( inv
       ( ap
         ( map-tr-equiv f e ∘ (λ p → tr f p x))
-        ( commutativity-inv-eq-equiv X Y e))) ∙
-    ( is-section-inv-tr f (eq-equiv X Y e) x)
+        ( commutativity-inv-eq-equiv e))) ∙
+    ( is-section-inv-tr f (eq-equiv e) x)
 
   is-retraction-map-tr-inv-equiv :
     is-retraction (map-tr-equiv f e) (map-tr-equiv f (inv-equiv e))
@@ -169,8 +167,8 @@ module _
     ( inv
       ( ap
         ( λ p → tr f p (map-tr-equiv f e x))
-        ( commutativity-inv-eq-equiv X Y e))) ∙
-    ( is-retraction-inv-tr f (eq-equiv X Y e) x)
+        ( commutativity-inv-eq-equiv e))) ∙
+    ( is-retraction-inv-tr f (eq-equiv e) x)
 ```
 
 ### Transposing transport along the inverse of an equivalence
@@ -207,7 +205,7 @@ module _
     ( ap
       ( λ p → tr g p X')
       ( is-retraction-eq-equiv (action-equiv-function f e))) ∙
-    ( substitution-law-tr g f (eq-equiv X Y e))
+    ( substitution-law-tr g f (eq-equiv e))
 
   substitution-law-tr-equiv :
     tr-equiv g (action-equiv-family f e) ＝ tr-equiv (g ∘ f) e
@@ -222,11 +220,11 @@ compute-map-tr-equiv-action-equiv-family :
   (f : UU l1 → UU l3) (g : (X : UU l1) → B X → D (f X))
   {X Y : UU l1} (e : X ≃ Y) (X' : B X) →
   map-tr-equiv D (action-equiv-family f e) (g X X') ＝ g Y (map-tr-equiv B e X')
-compute-map-tr-equiv-action-equiv-family {D = D} f g {X} {Y} e X' =
+compute-map-tr-equiv-action-equiv-family {D = D} f g {X} e X' =
   ( ap
     ( λ p → tr D p (g X X'))
     ( is-retraction-eq-equiv (action-equiv-function f e))) ∙
-  ( tr-ap f g (eq-equiv X Y e) X')
+  ( tr-ap f g (eq-equiv e) X')
 ```
 
 ### Transport along equivalences and the action on equivalences in the universe coincide

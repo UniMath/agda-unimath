@@ -197,15 +197,7 @@ module _
       ( cauchy-composition-species-types T U) ~
     cauchy-composition-species-types (cauchy-composition-species-types S T) U
   htpy-associative-cauchy-composition-species-types A =
-    eq-equiv
-      ( cauchy-composition-species-types S
-        ( cauchy-composition-species-types T U)
-        ( A))
-      ( cauchy-composition-species-types
-        ( cauchy-composition-species-types S T)
-        ( U)
-        ( A))
-      ( equiv-associative-cauchy-composition-species-types A)
+    eq-equiv (equiv-associative-cauchy-composition-species-types A)
 
   associative-cauchy-composition-species-types :
     ( cauchy-composition-species-types
