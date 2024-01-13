@@ -76,6 +76,31 @@ module _
 
 ### Commuting triangles of maps induce commuting triangles of precomposition maps
 
+Given a commuting triangle of maps
+
+```text
+       f
+   A ----> B
+    \  ⇗  /
+   h \   / g
+      V V
+       X
+```
+
+there is an induced commuting triangle of
+[precomposition maps](foundation-core.precomposition-functions.md)
+
+```text
+         (- ∘ g)
+  (X → S) ----> (B → S)
+        \   ⇗  /
+  (- ∘ h) \   / (- ∘ f)
+           V V
+         (A → S).
+```
+
+Note the change of order of `f` and `g`.
+
 ```agda
 module _
   { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
@@ -84,24 +109,47 @@ module _
 
   precomp-coherence-triangle-maps :
     coherence-triangle-maps left right top →
-    ( W : UU l4) →
+    (S : UU l4) →
     coherence-triangle-maps
-      ( precomp left W)
-      ( precomp top W)
-      ( precomp right W)
+      ( precomp left S)
+      ( precomp top S)
+      ( precomp right S)
   precomp-coherence-triangle-maps = htpy-precomp
 
   precomp-coherence-triangle-maps' :
     coherence-triangle-maps' left right top →
-    ( W : UU l4) →
+    (S : UU l4) →
     coherence-triangle-maps'
-      ( precomp left W)
-      ( precomp top W)
-      ( precomp right W)
+      ( precomp left S)
+      ( precomp top S)
+      ( precomp right S)
   precomp-coherence-triangle-maps' = htpy-precomp
 ```
 
 ### Commuting triangles of maps induce commuting triangles of postcomposition maps
+
+Given a commuting triangle of maps
+
+```text
+       f
+   A ----> B
+    \  ⇗  /
+   h \   / g
+      V V
+       X
+```
+
+there is an induced commuting triangle of
+[postcomposition maps](foundation-core.postcomposition-functions.md)
+
+```text
+         (f ∘ -)
+  (S → A) ----> (S → B)
+        \   ⇗  /
+  (h ∘ -) \   / (g ∘ -)
+           V V
+         (S → X).
+```
 
 ```agda
 module _

@@ -182,8 +182,8 @@ induces a commuting square of
                 precomp top S
 ```
 
-Note both that the order of composition has been flipped and the direction of
-the homotopy.
+Note both that the order of composition has been flipped as well as the
+direction of the homotopy.
 
 ```agda
 module _
@@ -230,14 +230,14 @@ Every commuting square
 ```
 
 induces a commuting square of
-[precomposition functions](foundation-core.precomposition-functions.md)
+[postcomposition functions](foundation-core.postcomposition-functions.md)
 
 ```text
               postcomp S top
      (S → A) ----------------> (S → X)
         |                         |
         |                         |
- postcomp S left    ⇗      postcomp S right
+ postcomp S left     ⇗     postcomp S right
         |                         |
         v                         v
      (S → B) ----------------> (S → Y)

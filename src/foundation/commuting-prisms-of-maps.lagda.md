@@ -205,7 +205,8 @@ The basic set-up is that, given a commuting prism of maps
           f'
 ```
 
-we have commuting prisms of precomposition maps
+we have commuting prisms of
+[precomposition maps](foundation-core.precomposition-functions.md)
 
 ```text
                     (B' → S)
@@ -224,10 +225,9 @@ we have commuting prisms of precomposition maps
                      (- ∘ f)
 ```
 
-Observe that the the bottom and top triangles have switched positions, the
-diagram is mirrored along the vertical axis compared to the underlying commuting
-prism, and that the direction of the homotopies of the vertical squares are
-flipped.
+Observe that the bottom and top triangles have switched positions, the diagram
+is mirrored along the vertical axis compared to the underlying commuting prism,
+and that the direction of the homotopies of the vertical squares are flipped.
 
 ```agda
 module _
@@ -431,7 +431,8 @@ Given a commuting prism of maps
           f'
 ```
 
-we have commuting prisms of postcomposition maps
+we have commuting prisms of
+[postcomposition maps](foundation-core.postcomposition-functions.md)s
 
 ```text
                      (S → B)
