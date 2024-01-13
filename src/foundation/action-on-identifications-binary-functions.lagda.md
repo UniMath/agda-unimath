@@ -103,7 +103,7 @@ instance of unary action on identifications. Specifically, we have the following
 uncurried [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
-                           (- ∘ Δ) ∘ 1
+                           (- ∘ Δ) × 1
        (A → A → B) × Path A --------> (A → B) × Path A
                 |                             |
                 |                             |
