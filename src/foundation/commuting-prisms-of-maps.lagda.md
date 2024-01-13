@@ -187,6 +187,47 @@ module _
 
 We prove this for a few different formulations of commuting prisms of maps.
 
+The basic set-up is that, given a commuting prism of maps
+
+```text
+          B
+      h  ^| \  g
+       /  |   \
+     /  f | ⇑   v
+    A ---------> C
+    |     | hB   |
+    | ⇗   v   ⇗  |
+ hA |     B'     | hC
+    | h' ^  \ g' |
+    |  /  ⇑   \  |
+    v/          vv
+    A' --------> C'
+          f'
+```
+
+we have commuting prisms of precomposition maps
+
+```text
+                    (B' → S)
+         (- ∘ g') ^     |     \ (- ∘ h')
+                /       |       \
+              / (- ∘ f')| ⇑       v
+       (C' → S) ---------------> (A' → S)
+           |            |            |
+           |            | (- ∘ hB)   |
+           |     ⇙      v      ⇙     |
+  (- ∘ hC) |         (B → S)         | (- ∘ hA)
+           |  (- ∘ g) ^   \ (- ∘ h)  |
+           |       /    ⇑    \       |
+           v    /               v    v
+        (C → S) ----------------> (A → S).
+                     (- ∘ f)
+```
+
+Observe that the diagram is mirrored along the vertical axis compared to the
+underlying commuting prism, and that the direction of the homotopies of the
+vertical squares are flipped.
+
 ```agda
 module _
   { l1 l2 l3 l1' l2' l3' l : Level}
@@ -370,6 +411,43 @@ module _
 ```
 
 ### Commuting prisms of maps induce commuting prisms of postcomposition maps
+
+Given a commuting prism of maps
+
+```text
+          B
+      h  ^| \  g
+       /  |   \
+     /  f | ⇑   v
+    A ---------> C
+    |     | hB   |
+    | ⇗   v   ⇗  |
+ hA |     B'     | hC
+    | h' ^  \ g' |
+    |  /  ⇑   \  |
+    v/          vv
+    A' --------> C'
+          f'
+```
+
+we have commuting prisms of postcomposition maps
+
+```text
+                     (S → B)
+          (h ∘ -) ^     |     \ (g ∘ -)
+                /       |       \
+              /  (f ∘ -)| ⇑       v
+        (S → A) ----------------> (S → C)
+           |            |            |
+           |            | (hB ∘ -)   |
+           |     ⇗      v      ⇗     |
+  (hA ∘ -) |         (S → B')        | (hC ∘ -)
+           | (h' ∘ -) ^   \ (g' ∘ -) |
+           |       /    ⇑    \       |
+           v    /               v    v
+        (S → A') ---------------> (S → C').
+                     (f' ∘ -)
+```
 
 ```agda
 module _
