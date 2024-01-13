@@ -104,13 +104,13 @@ uncurried [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                            (- ∘ Δ) × 1
-       (A → A → B) × Path A --------> (A → B) × Path A
+       (A × A → B) × Path A --------> (A → B) × Path A
                 |                             |
                 |                             |
           1 × Δ |                             | ap
                 |                             |
                 v                             v
-  (A → A → B) × Path A × Path A ----------> Path B.
+  (A × A → B) × Path A × Path A ----------> Path B.
                                  ap-binary
 ```
 
