@@ -224,9 +224,10 @@ we have commuting prisms of precomposition maps
                      (- ∘ f)
 ```
 
-Observe that the diagram is mirrored along the vertical axis compared to the
-underlying commuting prism, and that the direction of the homotopies of the
-vertical squares are flipped.
+Observe that the the bottom and top triangles have switched positions, the
+diagram is mirrored along the vertical axis compared to the underlying commuting
+prism, and that the direction of the homotopies of the vertical squares are
+flipped.
 
 ```agda
 module _

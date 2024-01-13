@@ -100,7 +100,7 @@ module _
 
 The binary action on identifications evaluated on the diagonal computes as an
 instance of unary action on identifications. Specifically, we have the following
-[commuting square](foundation-core.commuting-squares-of-maps.md)
+uncurried [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                             Δ(-) ∘ 1
