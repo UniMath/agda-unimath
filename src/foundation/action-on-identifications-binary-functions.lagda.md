@@ -39,7 +39,7 @@ module _
 
   ap-binary :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') → f x y ＝ f x' y'
-  ap-binary {x} refl = ap (f x)
+  ap-binary refl refl = refl
 ```
 
 ## Properties
@@ -68,12 +68,12 @@ module _
   triangle-ap-binary :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
     ap-binary f p q ＝ ap (λ z → f z y) p ∙ ap (f x') q
-  triangle-ap-binary refl _ = refl
+  triangle-ap-binary refl refl = refl
 
   triangle-ap-binary' :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
     ap-binary f p q ＝ ap (f x) q ∙ ap (λ z → f z y') p
-  triangle-ap-binary' refl _ = inv right-unit
+  triangle-ap-binary' refl refl = refl
 ```
 
 ### The unit laws for the binary action on identifications of binary functions
@@ -88,8 +88,8 @@ module _
   where
 
   left-unit-ap-binary :
-    {x : A} {y y' : B} (q : y ＝ y') → ap-binary f (refl {x = x}) q ＝ ap (f x) q
-  left-unit-ap-binary _ = refl
+    {x : A} {y y' : B} (q : y ＝ y') → ap-binary f refl q ＝ ap (f x) q
+  left-unit-ap-binary refl = refl
 
   right-unit-ap-binary :
     {x x' : A} (p : x ＝ x') {y : B} → ap-binary f p refl ＝ ap (λ z → f z y) p
