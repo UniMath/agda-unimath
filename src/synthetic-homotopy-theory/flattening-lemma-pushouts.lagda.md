@@ -151,7 +151,6 @@ module _
 
   statement-flattening-lemma-pushout : UUω
   statement-flattening-lemma-pushout =
-    dependent-universal-property-pushout s c →
     universal-property-pushout
       ( span-diagram-flattening-pushout)
       ( cocone-flattening-pushout)
@@ -176,7 +175,6 @@ module _
 
   statement-flattening-lemma-structure-type-family-pushout : UUω
   statement-flattening-lemma-structure-type-family-pushout =
-    dependent-universal-property-pushout s c →
     universal-property-pushout
       ( flattening-structure-type-family-pushout s P)
       ( cocone-flattening-structure-type-family-pushout s c P Q e)
@@ -250,24 +248,29 @@ module _
               ( coherence-square-cocone-span-diagram s c)
               ( h)))))
 
-  flattening-lemma-pushout :
-    statement-flattening-lemma-pushout s c P
-  flattening-lemma-pushout dup-pushout Y =
-    is-equiv-left-factor
-      ( cocone-map-flattening-pushout Y)
-      ( ind-Σ)
-      ( is-equiv-right-factor
-        ( map-equiv equiv-ev-pair³)
-        ( cocone-map-flattening-pushout Y ∘ ind-Σ)
-        ( is-equiv-map-equiv equiv-ev-pair³)
-        ( is-equiv-top-map-triangle
-          ( dependent-cocone-map-span-diagram s c (λ x → P x → Y))
-          ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-          ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)
-          ( triangle-comparison-dependent-cocone-ind-Σ-cocone Y)
-          ( is-equiv-map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-          ( dup-pushout (λ x → P x → Y))))
-      ( is-equiv-ind-Σ)
+  abstract
+    flattening-lemma-pushout :
+      universal-property-pushout s c →
+      statement-flattening-lemma-pushout s c P
+    flattening-lemma-pushout U Y =
+      is-equiv-left-factor
+        ( cocone-map-flattening-pushout Y)
+        ( ind-Σ)
+        ( is-equiv-right-factor
+          ( map-equiv equiv-ev-pair³)
+          ( cocone-map-flattening-pushout Y ∘ ind-Σ)
+          ( is-equiv-map-equiv equiv-ev-pair³)
+          ( is-equiv-top-map-triangle
+            ( dependent-cocone-map-span-diagram s c (λ x → P x → Y))
+            ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
+            ( map-equiv equiv-ev-pair³ ∘
+              cocone-map-flattening-pushout Y ∘
+              ind-Σ)
+            ( triangle-comparison-dependent-cocone-ind-Σ-cocone Y)
+            ( is-equiv-map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
+            ( dependent-universal-property-universal-property-pushout s c U
+              ( λ x → P x → Y))))
+        ( is-equiv-ind-Σ)
 ```
 
 ### Proof of the descent data statement of the flattening lemma
@@ -485,15 +488,17 @@ module _
   pr2 (pr2 (pr2 equiv-cocone-flattening-lemma-descent-data-pushout)) =
     cube-equiv-cocone-flattening-lemma-descent-data-pushout
 
-  flattening-lemma-descent-data-pushout :
-    statement-flattening-lemma-structure-type-family-pushout s c P Q e
-  flattening-lemma-descent-data-pushout H =
-    universal-property-pushout-equiv-cocone-equiv-span-diagram
-      ( flattening-structure-type-family-pushout s P)
-      ( cocone-flattening-structure-type-family-pushout s c P Q e)
-      ( span-diagram-flattening-pushout s c Q)
-      ( cocone-flattening-pushout s c Q)
-      ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
-      ( equiv-cocone-flattening-lemma-descent-data-pushout)
-      ( flattening-lemma-pushout s c Q H)
+  abstract
+    flattening-lemma-descent-data-pushout :
+      universal-property-pushout s c →
+      statement-flattening-lemma-structure-type-family-pushout s c P Q e
+    flattening-lemma-descent-data-pushout H =
+      universal-property-pushout-equiv-cocone-equiv-span-diagram
+        ( flattening-structure-type-family-pushout s P)
+        ( cocone-flattening-structure-type-family-pushout s c P Q e)
+        ( span-diagram-flattening-pushout s c Q)
+        ( cocone-flattening-pushout s c Q)
+        ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+        ( equiv-cocone-flattening-lemma-descent-data-pushout)
+        ( flattening-lemma-pushout s c Q H)
 ```
