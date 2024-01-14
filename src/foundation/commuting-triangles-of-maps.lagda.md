@@ -13,6 +13,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -70,4 +72,106 @@ module _
     coherence-triangle-maps right left (map-inv-equiv e)
   coherence-triangle-maps-inv-top =
     map-equiv equiv-coherence-triangle-maps-inv-top
+```
+
+### Commuting triangles of maps induce commuting triangles of precomposition maps
+
+Given a commuting triangle of maps
+
+```text
+       f
+   A ----> B
+    \  ⇗  /
+   h \   / g
+      V V
+       X
+```
+
+there is an induced commuting triangle of
+[precomposition maps](foundation-core.precomposition-functions.md)
+
+```text
+         (- ∘ g)
+  (X → S) ----> (B → S)
+        \   ⇗  /
+  (- ∘ h) \   / (- ∘ f)
+           V V
+         (A → S).
+```
+
+Note the change of order of `f` and `g`.
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  ( left : A → X) (right : B → X) (top : A → B)
+  where
+
+  precomp-coherence-triangle-maps :
+    coherence-triangle-maps left right top →
+    (S : UU l4) →
+    coherence-triangle-maps
+      ( precomp left S)
+      ( precomp top S)
+      ( precomp right S)
+  precomp-coherence-triangle-maps = htpy-precomp
+
+  precomp-coherence-triangle-maps' :
+    coherence-triangle-maps' left right top →
+    (S : UU l4) →
+    coherence-triangle-maps'
+      ( precomp left S)
+      ( precomp top S)
+      ( precomp right S)
+  precomp-coherence-triangle-maps' = htpy-precomp
+```
+
+### Commuting triangles of maps induce commuting triangles of postcomposition maps
+
+Given a commuting triangle of maps
+
+```text
+       f
+   A ----> B
+    \  ⇗  /
+   h \   / g
+      V V
+       X
+```
+
+there is an induced commuting triangle of
+[postcomposition maps](foundation-core.postcomposition-functions.md)
+
+```text
+         (f ∘ -)
+  (S → A) ----> (S → B)
+        \   ⇗  /
+  (h ∘ -) \   / (g ∘ -)
+           V V
+         (S → X).
+```
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  ( left : A → X) (right : B → X) (top : A → B)
+  where
+
+  postcomp-coherence-triangle-maps :
+    (S : UU l4) →
+    coherence-triangle-maps left right top →
+    coherence-triangle-maps
+      ( postcomp S left)
+      ( postcomp S right)
+      ( postcomp S top)
+  postcomp-coherence-triangle-maps S = htpy-postcomp S
+
+  postcomp-coherence-triangle-maps' :
+    (S : UU l4) →
+    coherence-triangle-maps' left right top →
+    coherence-triangle-maps'
+      ( postcomp S left)
+      ( postcomp S right)
+      ( postcomp S top)
+  postcomp-coherence-triangle-maps' S = htpy-postcomp S
 ```

@@ -7,7 +7,6 @@ module elementary-number-theory.hardy-ramanujan-number where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.taxicab-numbers
 

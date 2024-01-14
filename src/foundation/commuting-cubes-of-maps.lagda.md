@@ -373,7 +373,7 @@ module _
           ( ap-concat-htpy (bottom ·r hA) inv-htpy-right-unit-htpy))))
 ```
 
-### Any commuting cube of maps induces a commuting cube of function spaces
+### Commuting cubes of maps induce commuting cubes of precomposition maps
 
 ```agda
 module _

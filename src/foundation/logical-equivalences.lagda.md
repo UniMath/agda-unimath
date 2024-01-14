@@ -164,19 +164,18 @@ compute-fiber-iff-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} ((f , g) : A ↔ B) →
   fiber (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
 compute-fiber-iff-equiv {A = A} {B} (f , g) =
-  ( ( ( ( ( equiv-tot (λ _ → equiv-funext)) ∘e
-          ( left-unit-law-Σ-is-contr (is-torsorial-path' f) (f , refl))) ∘e
-        ( inv-associative-Σ (A → B) (_＝ f) _)) ∘e
-      ( equiv-tot (λ _ → equiv-left-swap-Σ))) ∘e
-    ( associative-Σ (A → B) _ _)) ∘e
+  ( equiv-tot (λ _ → equiv-funext)) ∘e
+  ( left-unit-law-Σ-is-contr (is-torsorial-path' f) (f , refl)) ∘e
+  ( inv-associative-Σ (A → B) (_＝ f) _) ∘e
+  ( equiv-tot (λ _ → equiv-left-swap-Σ)) ∘e
+  ( associative-Σ (A → B) _ _) ∘e
   ( equiv-tot (λ e → equiv-pair-eq (iff-equiv e) (f , g)))
 ```
 
 ### Two equal propositions are logically equivalent
 
 ```agda
-iff-eq :
-  {l1 : Level} {P Q : Prop l1} → P ＝ Q → P ⇔ Q
+iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → P ⇔ Q
 pr1 (iff-eq refl) = id
 pr2 (iff-eq refl) = id
 ```

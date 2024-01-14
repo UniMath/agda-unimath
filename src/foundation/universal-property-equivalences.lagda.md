@@ -13,7 +13,6 @@ open import foundation.precomposition-functions-into-subuniverses
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
 ```
 

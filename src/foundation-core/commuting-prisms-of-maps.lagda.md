@@ -22,19 +22,19 @@ open import foundation-core.whiskering-homotopies
 Consider an arrangment of maps composable into a diagram as follows:
 
 ```text
-         hA
-   A ---------> A'
-   |\           |\
-   | \ h   ⇗    | \ h'
-   |  \      f' |  \
-   |   V        |   V
- f | ⇐ B ------ | -> B'
-   |   /   hB   | ⇐ /
-   |  / g       |  / g'
-   | /     ⇗    | /
-   VV           VV
-   C ---------> C' ,
-         hC
+          hA
+    A ---------> A'
+    |\           |\
+    | \ h   ⇗    | \ h'
+    |  \      f' |  \
+    |   V        |   V
+  f | ⇐ B ------ | -> B'
+    |   /   hB   | ⇐ /
+    |  / g       |  / g'
+    | /     ⇗    | /
+    VV           VV
+    C ---------> C' ,
+          hC
 ```
 
 and [homotopies](foundation-core.homotopies.md) filling its faces. Then a
@@ -82,7 +82,8 @@ It remains to be formalized that the type of vertical prisms is
 ```agda
 module _
   { l1 l2 l3 l1' l2' l3' : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3} {A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
   ( hA : A → A') (h : A → B) (h' : A' → B')
   ( hB : B → B') (g : B → C) (g' : B' → C')
   ( hC : C → C') (f : A → C) (f' : A' → C')
@@ -137,8 +138,8 @@ module _
 
   module _
     ( top : coherence-triangle-maps f g h)
-    ( inv-front : coherence-square-maps hA f f' hC)
-    ( inv-right : coherence-square-maps hB g g' hC)
+    ( inv-front : coherence-square-maps' f hA hC f')
+    ( inv-right : coherence-square-maps' g hB hC g')
     ( left : coherence-square-maps h hA hB h')
     ( bottom : coherence-triangle-maps f' g' h')
     where
@@ -147,4 +148,149 @@ module _
     vertical-coherence-prism-maps' =
       ( inv-front ∙h ((bottom ·r hA) ∙h (g' ·l left))) ~
       ( (hC ·l top) ∙h (inv-right ·r h))
+
+  module _
+    ( top : coherence-triangle-maps f g h)
+    ( inv-front : coherence-square-maps' f hA hC f')
+    ( inv-right : coherence-square-maps' g hB hC g')
+    ( inv-left : coherence-square-maps' h hA hB h')
+    ( bottom : coherence-triangle-maps f' g' h')
+    where
+
+    vertical-coherence-prism-inv-squares-maps : UU (l1 ⊔ l3')
+    vertical-coherence-prism-inv-squares-maps =
+      ( inv-front ∙h (bottom ·r hA)) ~
+      ( (hC ·l top) ∙h ((inv-right ·r h) ∙h (g' ·l inv-left)))
+
+  module _
+    ( inv-top : coherence-triangle-maps' f g h)
+    ( front : coherence-square-maps f hA hC f')
+    ( right : coherence-square-maps g hB hC g')
+    ( left : coherence-square-maps h hA hB h')
+    ( inv-bottom : coherence-triangle-maps' f' g' h')
+    where
+
+    vertical-coherence-prism-inv-triangles-maps : UU (l1 ⊔ l3')
+    vertical-coherence-prism-inv-triangles-maps =
+      ( (g' ·l left) ∙h (right ·r h) ∙h (hC ·l inv-top)) ~
+      ( (inv-bottom ·r hA) ∙h front)
+
+  module _
+    ( inv-top : coherence-triangle-maps' f g h)
+    ( inv-front : coherence-square-maps' f hA hC f')
+    ( inv-right : coherence-square-maps' g hB hC g')
+    ( inv-left : coherence-square-maps' h hA hB h')
+    ( inv-bottom : coherence-triangle-maps' f' g' h')
+    where
+
+    vertical-coherence-prism-inv-boundary-maps : UU (l1 ⊔ l3')
+    vertical-coherence-prism-inv-boundary-maps =
+      ( (inv-right ·r h) ∙h (g' ·l inv-left) ∙h (inv-bottom ·r hA)) ~
+      ( (hC ·l inv-top) ∙h inv-front)
+```
+
+## Translations between coherences of prisms of maps
+
+Our different formulations of commuting prisms of maps are of course all
+equivalent, although this remains to be formalized. Below, we record various
+translations between them.
+
+```agda
+module _
+  { l1 l2 l3 l1' l2' l3' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3}
+  ( f : A → C) (g : B → C) (h : A → B)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'}
+  ( f' : A' → C') (g' : B' → C') (h' : A' → B')
+  ( hA : A → A') (hB : B → B') (hC : C → C')
+  where
+
+  module _
+    ( top : coherence-triangle-maps f g h)
+    ( inv-front : coherence-square-maps' f hA hC f')
+    ( inv-right : coherence-square-maps' g hB hC g')
+    ( inv-left : coherence-square-maps' h hA hB h')
+    ( bottom : coherence-triangle-maps f' g' h')
+    where
+
+    vertical-coherence-prism-maps-vertical-coherence-prism-inv-squares-maps :
+      vertical-coherence-prism-inv-squares-maps f g h f' g' h' hA hB hC
+        ( top)
+        ( inv-front)
+        ( inv-right)
+        ( inv-left)
+        ( bottom) →
+      vertical-coherence-prism-maps f g h f' g' h' hA hB hC
+        ( top)
+        ( inv-htpy inv-front)
+        ( inv-htpy inv-right)
+        ( inv-htpy inv-left)
+        ( bottom)
+    vertical-coherence-prism-maps-vertical-coherence-prism-inv-squares-maps H =
+      ( ap-concat-htpy
+        ( bottom ·r hA)
+        ( ( ap-concat-htpy'
+            ( inv-htpy inv-right ·r h)
+            ( left-whisk-inv-htpy g' inv-left)) ∙h
+          ( inv-htpy-distributive-inv-concat-htpy
+            ( inv-right ·r h)
+            ( g' ·l inv-left)))) ∙h
+      ( inv-htpy-right-transpose-htpy-concat
+        ( inv-htpy inv-front ∙h (hC ·l top))
+        ( inv-right ·r h ∙h (g' ·l inv-left))
+        ( bottom ·r hA)
+        ( ( assoc-htpy
+            ( inv-htpy inv-front)
+            ( hC ·l top)
+            ( inv-right ·r h ∙h (g' ·l inv-left))) ∙h
+          ( inv-htpy-left-transpose-htpy-concat
+            ( inv-front)
+            ( bottom ·r hA)
+            ( (hC ·l top) ∙h (inv-right ·r h ∙h (g' ·l inv-left)))
+            ( H))))
+
+  module _
+    ( inv-top : coherence-triangle-maps' f g h)
+    ( inv-front : coherence-square-maps' f hA hC f')
+    ( inv-right : coherence-square-maps' g hB hC g')
+    ( inv-left : coherence-square-maps' h hA hB h')
+    ( inv-bottom : coherence-triangle-maps' f' g' h')
+    where
+
+    vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps :
+      vertical-coherence-prism-inv-boundary-maps f g h f' g' h' hA hB hC
+        ( inv-top)
+        ( inv-front)
+        ( inv-right)
+        ( inv-left)
+        ( inv-bottom) →
+      vertical-coherence-prism-inv-triangles-maps f g h f' g' h' hA hB hC
+        ( inv-top)
+        ( inv-htpy inv-front)
+        ( inv-htpy inv-right)
+        ( inv-htpy inv-left)
+        ( inv-bottom)
+    vertical-coherence-prism-inv-triangles-maps-vertical-coherence-prism-inv-boundary-maps
+      H =
+      ( ap-concat-htpy'
+        ( hC ·l inv-top)
+        ( ( ap-concat-htpy'
+            ( inv-htpy inv-right ·r h)
+            ( left-whisk-inv-htpy g' inv-left)) ∙h
+          ( inv-htpy-distributive-inv-concat-htpy
+            ( inv-right ·r h)
+            ( g' ·l inv-left)))) ∙h
+      ( right-transpose-htpy-concat
+        ( ( inv-htpy (inv-right ·r h ∙h (g' ·l inv-left))) ∙h (hC ·l inv-top))
+        ( inv-front)
+        ( inv-bottom ·r hA)
+        ( ( assoc-htpy
+            ( inv-htpy (inv-right ·r h ∙h (g' ·l inv-left)))
+            ( hC ·l inv-top)
+            ( inv-front)) ∙h
+          ( inv-htpy-left-transpose-htpy-concat
+            ( inv-right ·r h ∙h (g' ·l inv-left))
+            ( inv-bottom ·r hA)
+            ( (hC ·l inv-top) ∙h inv-front)
+            ( H))))
 ```

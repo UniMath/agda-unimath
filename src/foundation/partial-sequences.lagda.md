@@ -10,8 +10,9 @@ module foundation.partial-sequences where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.partial-functions
-open import foundation.propositions
 open import foundation.universe-levels
+
+open import foundation-core.propositions
 ```
 
 </details>

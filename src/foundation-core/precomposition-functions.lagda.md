@@ -35,5 +35,5 @@ module _
   where
 
   precomp : (B → C) → (A → C)
-  precomp g = g ∘ f
+  precomp = _∘ f
 ```
