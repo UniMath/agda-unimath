@@ -176,7 +176,6 @@ module _
       is-torsorial (htpy-dependent-cofork f g P k)
     is-torsorial-htpy-dependent-cofork k =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-dependent-cofork f g P k))
         ( is-torsorial-htpy (map-dependent-cofork f g P k))
         ( map-dependent-cofork f g P k , refl-htpy)
         ( is-torsorial-htpy

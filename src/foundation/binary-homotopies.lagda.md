@@ -51,9 +51,7 @@ module _
     (f : (x : A) (y : B x) → C x y) →
     is-torsorial (binary-htpy f)
   is-torsorial-binary-htpy f =
-    is-torsorial-Eq-Π
-      ( λ x g → f x ~ g)
-      ( λ x → is-torsorial-htpy (f x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-htpy (f x))
 
   is-equiv-binary-htpy-eq :
     (f g : (x : A) (y : B x) → C x y) → is-equiv (binary-htpy-eq f g)

@@ -131,16 +131,9 @@ module _
     (c : cocone f g X) → is-torsorial (htpy-cocone c)
   is-torsorial-htpy-cocone c =
     is-torsorial-Eq-structure
-      ( λ i' jH' K →
-        Σ ( vertical-map-cocone f g c ~ pr1 jH')
-          ( statement-coherence-htpy-cocone c (i' , jH') K))
       ( is-torsorial-htpy (horizontal-map-cocone f g c))
       ( horizontal-map-cocone f g c , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ j' H' →
-          statement-coherence-htpy-cocone c
-            ( horizontal-map-cocone f g c , j' , H')
-            ( refl-htpy))
         ( is-torsorial-htpy (vertical-map-cocone f g c))
         ( vertical-map-cocone f g c , refl-htpy)
         ( is-contr-is-equiv'

@@ -8,8 +8,8 @@ module orthogonal-factorization-systems.lifting-squares where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps
+open import foundation.commuting-tetrahedra-of-homotopies
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.fibered-maps
@@ -150,7 +150,7 @@ module _
       ( is-lift-lifting-square l ∙h (g ·l K))) →
     UU (l1 ⊔ l4)
   coherence-htpy-lifting-square l l' K E L =
-    coherence-3-simplex-homotopies
+    coherence-tetrahedron-homotopies
       ( is-lift-lifting-square l ·r f)
       ( H)
       ( g ·l (K ·r f))

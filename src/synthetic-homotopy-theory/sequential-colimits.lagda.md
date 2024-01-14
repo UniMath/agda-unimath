@@ -106,14 +106,14 @@ module _
   map-cocone-standard-sequential-colimit =
     map-cocone-sequential-diagram A (cocone-standard-sequential-colimit A)
 
-  coherence-triangle-cocone-standard-sequential-colimit :
+  coherence-cocone-standard-sequential-colimit :
     ( n : ℕ) →
     coherence-triangle-maps
       ( map-cocone-standard-sequential-colimit n)
       ( map-cocone-standard-sequential-colimit (succ-ℕ n))
       ( map-sequential-diagram A n)
-  coherence-triangle-cocone-standard-sequential-colimit =
-    coherence-triangle-cocone-sequential-diagram A
+  coherence-cocone-standard-sequential-colimit =
+    coherence-cocone-sequential-diagram A
       ( cocone-standard-sequential-colimit A)
 ```
 
@@ -221,7 +221,7 @@ module _
             equiv-Π-equiv-family
               ( λ a →
                 compute-dependent-identification-eq-value-function f g
-                  ( coherence-triangle-cocone-standard-sequential-colimit n a)
+                  ( coherence-cocone-standard-sequential-colimit n a)
                   ( K n a)
                   ( K (succ-ℕ n) (map-sequential-diagram A n a))))))
 ```

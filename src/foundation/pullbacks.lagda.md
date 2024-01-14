@@ -191,26 +191,26 @@ module _
   {l : Level} {A : UU l} (x y : A)
   where
 
-  cone-Id : cone (const unit A x) (const unit A y) (x ＝ y)
-  pr1 cone-Id = const (x ＝ y) unit star
-  pr1 (pr2 cone-Id) = const (x ＝ y) unit star
+  cone-Id : cone (point x) (point y) (x ＝ y)
+  pr1 cone-Id = terminal-map (x ＝ y)
+  pr1 (pr2 cone-Id) = terminal-map (x ＝ y)
   pr2 (pr2 cone-Id) = id
 
-  inv-gap-cone-Id : standard-pullback (const unit A x) (const unit A y) → x ＝ y
+  inv-gap-cone-Id : standard-pullback (point x) (point y) → x ＝ y
   inv-gap-cone-Id (star , star , p) = p
 
   abstract
     is-section-inv-gap-cone-Id :
-      gap (const unit A x) (const unit A y) cone-Id ∘ inv-gap-cone-Id ~ id
+      gap (point x) (point y) cone-Id ∘ inv-gap-cone-Id ~ id
     is-section-inv-gap-cone-Id (star , star , p) = refl
 
   abstract
     is-retraction-inv-gap-cone-Id :
-      inv-gap-cone-Id ∘ gap (const unit A x) (const unit A y) cone-Id ~ id
+      inv-gap-cone-Id ∘ gap (point x) (point y) cone-Id ~ id
     is-retraction-inv-gap-cone-Id p = refl
 
   abstract
-    is-pullback-cone-Id : is-pullback (const unit A x) (const unit A y) cone-Id
+    is-pullback-cone-Id : is-pullback (point x) (point y) cone-Id
     is-pullback-cone-Id =
       is-equiv-is-invertible
         ( inv-gap-cone-Id)
@@ -221,30 +221,30 @@ module _
   {l : Level} {A : UU l} ((x , y) : A × A)
   where
 
-  cone-Id' : cone (const unit (A × A) (x , y)) (diagonal A) (x ＝ y)
-  pr1 cone-Id' = const (x ＝ y) unit star
+  cone-Id' : cone (point (x , y)) (diagonal A) (x ＝ y)
+  pr1 cone-Id' = terminal-map (x ＝ y)
   pr1 (pr2 cone-Id') = const (x ＝ y) A x
   pr2 (pr2 cone-Id') p = eq-pair-eq-pr2 (inv p)
 
   inv-gap-cone-Id' :
-    standard-pullback (const unit (A × A) (x , y)) (diagonal A) → x ＝ y
+    standard-pullback (point (x , y)) (diagonal A) → x ＝ y
   inv-gap-cone-Id' (star , z , p) = ap pr1 p ∙ inv (ap pr2 p)
 
   abstract
     is-section-inv-gap-cone-Id' :
-      gap (const unit (A × A) (x , y)) (diagonal A) cone-Id' ∘
+      gap (point (x , y)) (diagonal A) cone-Id' ∘
       inv-gap-cone-Id' ~ id
     is-section-inv-gap-cone-Id' (star , z , refl) = refl
 
   abstract
     is-retraction-inv-gap-cone-Id' :
       inv-gap-cone-Id' ∘
-      gap (const unit (A × A) (x , y)) (diagonal A) cone-Id' ~ id
+      gap (point (x , y)) (diagonal A) cone-Id' ~ id
     is-retraction-inv-gap-cone-Id' refl = refl
 
   abstract
     is-pullback-cone-Id' :
-      is-pullback (const unit (A × A) (x , y)) (diagonal A) cone-Id'
+      is-pullback (point (x , y)) (diagonal A) cone-Id'
     is-pullback-cone-Id' =
       is-equiv-is-invertible
         ( inv-gap-cone-Id')

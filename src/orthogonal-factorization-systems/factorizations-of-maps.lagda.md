@@ -192,10 +192,10 @@ module _
     (F : factorization-through f X) →
     is-torsorial (htpy-factorization-through F)
   is-torsorial-htpy-factorization-through F =
-    is-torsorial-Eq-structure _
+    is-torsorial-Eq-structure
       ( is-torsorial-htpy (right-map-factorization-through F))
       ( right-map-factorization-through F , refl-htpy)
-      ( is-torsorial-Eq-structure _
+      ( is-torsorial-Eq-structure
         ( is-torsorial-htpy (left-map-factorization-through F))
         ( left-map-factorization-through F , refl-htpy)
         ( is-torsorial-htpy (is-factorization-factorization-through F)))
@@ -256,7 +256,7 @@ module _
     (F : factorization l3 f) →
     is-torsorial (equiv-factorization F)
   is-torsorial-equiv-factorization F =
-    is-torsorial-Eq-structure _
+    is-torsorial-Eq-structure
       ( is-torsorial-equiv (image-factorization F))
       ( image-factorization F , id-equiv)
       ( is-torsorial-htpy-factorization-through f

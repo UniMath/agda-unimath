@@ -31,13 +31,13 @@ open import foundation-core.function-extensionality public
 open import foundation-core.function-types public
 open import foundation-core.functoriality-dependent-function-types public
 open import foundation-core.functoriality-dependent-pair-types public
-open import foundation-core.functoriality-function-types public
 open import foundation-core.homotopies public
 open import foundation-core.identity-types public
 open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
 open import foundation-core.negation public
 open import foundation-core.path-split-maps public
+open import foundation-core.postcomposition-functions public
 open import foundation-core.precomposition-dependent-functions public
 open import foundation-core.precomposition-functions public
 open import foundation-core.propositional-maps public
@@ -46,7 +46,6 @@ open import foundation-core.pullbacks public
 open import foundation-core.retractions public
 open import foundation-core.sections public
 open import foundation-core.sets public
-open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
 open import foundation-core.torsorial-type-families public

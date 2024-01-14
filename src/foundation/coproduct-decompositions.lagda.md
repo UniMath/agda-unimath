@@ -189,11 +189,9 @@ module _
     is-torsorial (equiv-binary-coproduct-Decomposition X)
   is-torsorial-equiv-binary-coproduct-Decomposition =
     is-torsorial-Eq-structure
-      ( _)
       ( is-torsorial-equiv ( left-summand-binary-coproduct-Decomposition X))
       ( left-summand-binary-coproduct-Decomposition X , id-equiv)
       ( is-torsorial-Eq-structure
-        ( _)
         ( is-torsorial-equiv (right-summand-binary-coproduct-Decomposition X))
         ( right-summand-binary-coproduct-Decomposition X , id-equiv)
         ( is-torsorial-htpy-equiv

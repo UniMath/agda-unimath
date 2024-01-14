@@ -118,11 +118,9 @@ module _
     (c : cospan l A B) → is-torsorial (htpy-cospan c)
   is-torsorial-htpy-cospan c =
     is-torsorial-Eq-structure
-      ( λ X d e → coherence-hom-codomain-cospan c (X , d) (map-equiv e))
       ( is-torsorial-equiv (pr1 c))
       ( codomain-cospan c , id-equiv)
       ( is-torsorial-Eq-structure
-        ( λ x f a → coherence-triangle-maps f id (right-map-cospan c))
         ( is-torsorial-htpy' (left-map-cospan c))
         ( left-map-cospan c , refl-htpy)
         (is-torsorial-htpy' (right-map-cospan c)))

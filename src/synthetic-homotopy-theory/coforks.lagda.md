@@ -144,7 +144,6 @@ module _
       ( e : cofork f g X) → is-torsorial (htpy-cofork f g e)
     is-torsorial-htpy-cofork e =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-cofork f g e))
         ( is-torsorial-htpy (map-cofork f g e))
         ( map-cofork f g e , refl-htpy)
         ( is-contr-is-equiv'

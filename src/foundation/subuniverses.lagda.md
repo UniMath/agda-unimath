@@ -132,11 +132,11 @@ module _
 
   is-in-subuniverse-equiv :
     X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
-  is-in-subuniverse-equiv e = tr (is-in-subuniverse P) (eq-equiv X Y e)
+  is-in-subuniverse-equiv e = tr (is-in-subuniverse P) (eq-equiv e)
 
   is-in-subuniverse-equiv' :
     X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
-  is-in-subuniverse-equiv' e = tr (is-in-subuniverse P) (inv (eq-equiv X Y e))
+  is-in-subuniverse-equiv' e = tr (is-in-subuniverse P) (inv (eq-equiv e))
 ```
 
 ### Characterization of the identity type of subuniverses
@@ -225,9 +225,7 @@ module _
     (Y : fam-subuniverse P X) →
     is-torsorial (equiv-fam-subuniverse Y)
   is-torsorial-equiv-fam-subuniverse Y =
-    is-torsorial-Eq-Π
-      ( λ x → equiv-subuniverse P (Y x))
-      ( λ x → is-torsorial-equiv-subuniverse P (Y x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-equiv-subuniverse P (Y x))
 
   equiv-eq-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → Y ＝ Z → equiv-fam-subuniverse Y Z

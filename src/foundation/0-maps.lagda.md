@@ -98,7 +98,7 @@ module _
   is-0-map-left-map-triangle = is-trunc-map-left-map-triangle zero-𝕋
 ```
 
-### If a composite is a 0-map, then so is its right factor
+### If a composite is a `0`-map, then so is its right factor
 
 ```agda
 module _
@@ -116,7 +116,7 @@ module _
   is-0-map-top-map-triangle = is-trunc-map-top-map-triangle zero-𝕋
 ```
 
-### A family of `0`-maps induces a `0`-map on total spaces
+### Families of `0`-maps induce `0`-maps on total spaces
 
 ```agda
 module _

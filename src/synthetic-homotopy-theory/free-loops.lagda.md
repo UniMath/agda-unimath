@@ -95,7 +95,6 @@ module _
       (α : free-loop X) → is-torsorial (Eq-free-loop α)
     is-torsorial-Eq-free-loop (pair x α) =
       is-torsorial-Eq-structure
-        ( λ x α' p → Id (α ∙ p) (p ∙ α'))
         ( is-torsorial-path x)
         ( pair x refl)
         ( is-contr-is-equiv'
@@ -143,7 +142,6 @@ module _
       ( p : free-dependent-loop α P) → is-torsorial (Eq-free-dependent-loop p)
     is-torsorial-Eq-free-dependent-loop (pair y p) =
       is-torsorial-Eq-structure
-        ( λ y' p' q → Id (p ∙ q) ((ap (tr P (loop-free-loop α)) q) ∙ p'))
         ( is-torsorial-path y)
         ( pair y refl)
         ( is-contr-is-equiv'

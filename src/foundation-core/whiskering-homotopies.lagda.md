@@ -283,3 +283,8 @@ module _
     (h ·l H) ·r h' ~ h ·l (H ·r h')
   coherence-left-right-whisk-htpy h H h' = refl-htpy
 ```
+
+## See also
+
+- For interactions between whiskering and exponentiation, see
+  [`foundation.composition-algebra`](foundation.composition-algebra.md).

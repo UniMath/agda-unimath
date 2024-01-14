@@ -116,11 +116,6 @@ module _
     is-torsorial (htpy-hom-Type-With-Endomorphism f)
   is-torsorial-htpy-hom-Type-With-Endomorphism f =
     is-torsorial-Eq-structure
-      ( λ g G H →
-        ( ( H ·r endomorphism-Type-With-Endomorphism X) ∙h
-          ( G)) ~
-        ( ( coherence-square-hom-Type-With-Endomorphism X Y f) ∙h
-          ( endomorphism-Type-With-Endomorphism Y ·l H)))
       ( is-torsorial-htpy (map-hom-Type-With-Endomorphism X Y f))
       ( map-hom-Type-With-Endomorphism X Y f , refl-htpy)
       ( is-contr-equiv

@@ -139,7 +139,6 @@ module _
     (s : involution A) → is-torsorial (htpy-involution s)
   is-torsorial-htpy-involution s =
     is-torsorial-Eq-structure
-      ( λ x z → coherence-htpy-involution s (x , z))
       ( is-torsorial-htpy (map-involution s))
       ( map-involution s , refl-htpy)
       ( is-torsorial-htpy (is-involution-map-involution s))

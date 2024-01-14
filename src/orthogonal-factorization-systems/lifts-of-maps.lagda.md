@@ -195,7 +195,6 @@ module _
     (l : lift i f) → is-torsorial (htpy-lift l)
   is-torsorial-htpy-lift l =
     is-torsorial-Eq-structure
-      (λ g G → coherence-htpy-lift l (g , G))
       (is-torsorial-htpy (map-lift i l))
       (map-lift i l , refl-htpy)
       (is-torsorial-htpy (is-lift-map-lift i l ∙h refl-htpy))

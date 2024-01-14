@@ -1,7 +1,9 @@
-# Postcomposition
+# Postcomposition of functions
 
 ```agda
 module foundation.postcomposition-functions where
+
+open import foundation-core.postcomposition-functions public
 ```
 
 <details><summary>Imports</summary>
@@ -31,24 +33,14 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-Given a map `f : X → Y` and a type `A`, the **postcomposition function**
+Given a map `f : X → Y` and a type `A`, the
+{{#concept "postcomposition function"}}
 
 ```text
   f ∘ - : (A → X) → (A → Y)
 ```
 
-is defined by `λ h → f ∘ h`.
-
-## Definitions
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3)
-  where
-
-  postcomp : (X → Y) → (A → X) → (A → Y)
-  postcomp f h = f ∘ h
-```
+is defined by `λ h x → f (h x)`.
 
 ## Properties
 

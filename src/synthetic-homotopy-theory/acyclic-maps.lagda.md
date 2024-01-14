@@ -113,12 +113,12 @@ module _
   where
 
   is-acyclic-map-terminal-map-is-acyclic :
-    is-acyclic A → is-acyclic-map (terminal-map {A = A})
+    is-acyclic A → is-acyclic-map (terminal-map A)
   is-acyclic-map-terminal-map-is-acyclic ac u =
     is-acyclic-equiv (equiv-fiber-terminal-map u) ac
 
   is-acyclic-is-acyclic-map-terminal-map :
-    is-acyclic-map (terminal-map {A = A}) → is-acyclic A
+    is-acyclic-map (terminal-map A) → is-acyclic A
   is-acyclic-is-acyclic-map-terminal-map ac =
     is-acyclic-equiv inv-equiv-fiber-terminal-map-star (ac star)
 ```
@@ -143,9 +143,9 @@ module _
     {l' : Level} (X : UU l') → is-emb (const A X)
   is-emb-const-is-acyclic ac X =
     is-emb-comp
-      ( precomp terminal-map X)
+      ( precomp (terminal-map A) X)
       ( map-inv-left-unit-law-function-type X)
-      ( is-epimorphism-is-acyclic-map terminal-map
+      ( is-epimorphism-is-acyclic-map (terminal-map A)
         ( is-acyclic-map-terminal-map-is-acyclic A ac)
         ( X))
       ( is-emb-is-equiv (is-equiv-map-inv-left-unit-law-function-type X))
@@ -156,11 +156,11 @@ module _
   is-acyclic-is-emb-const e =
     is-acyclic-is-acyclic-map-terminal-map A
       ( is-acyclic-map-is-epimorphism
-        ( terminal-map)
+        ( terminal-map A)
         ( λ X →
           is-emb-triangle-is-equiv'
             ( const A X)
-            ( precomp terminal-map X)
+            ( precomp (terminal-map A) X)
             ( map-inv-left-unit-law-function-type X)
             ( refl-htpy)
             ( is-equiv-map-inv-left-unit-law-function-type X)
@@ -468,7 +468,7 @@ module _
     is-acyclic-is-acyclic-map-terminal-map
       ( Σ A B)
       ( is-acyclic-map-comp
-        ( terminal-map)
+        ( terminal-map A)
         ( pr1)
         ( is-acyclic-map-terminal-map-is-acyclic A ac-A)
         ( λ a → is-acyclic-equiv (equiv-fiber-pr1 B a) (ac-B a)))
@@ -487,12 +487,12 @@ module _
     is-acyclic-is-acyclic-map-terminal-map
       ( A × B)
       ( is-acyclic-map-comp
-        ( terminal-map)
+        ( terminal-map B)
         ( pr2)
         ( is-acyclic-map-terminal-map-is-acyclic B ac-B)
         ( is-acyclic-map-horizontal-map-cone-is-pullback
-          ( terminal-map)
-          ( terminal-map)
+          ( terminal-map A)
+          ( terminal-map B)
           ( cone-prod A B)
           ( is-pullback-prod A B)
           ( is-acyclic-map-terminal-map-is-acyclic A ac-A)))
@@ -515,10 +515,10 @@ module _
       ( λ a →
         is-acyclic-is-acyclic-map-terminal-map A
           ( is-acyclic-map-left-factor
-            ( terminal-map)
+            ( terminal-map A)
             ( point a)
             ( is-acyclic-map-terminal-map-is-acyclic unit is-acyclic-unit)
-            ( λ b → is-acyclic-equiv (fiber-const a b) (l-ac a b))))
+            ( λ b → is-acyclic-equiv (compute-fiber-point a b) (l-ac a b))))
 ```
 
 ## See also

@@ -135,8 +135,7 @@ module _
         ( λ e →
           is-finite-is-decidable-Prop
             ( edge-ethane-Prop p)
-            ( is-decidable-edge-ethane-eq-Fin-two p
-              ( inv (eq-equiv (Fin 2) (type-unordered-pair p) e))))
+            ( is-decidable-edge-ethane-eq-Fin-two p (inv (eq-equiv e))))
 
   edge-ethane-𝔽 : unordered-pair vertex-ethane → 𝔽 lzero
   pr1 (edge-ethane-𝔽 p) = edge-ethane p

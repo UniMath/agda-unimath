@@ -135,16 +135,9 @@ module _
     (c : cone f g C) → is-torsorial (htpy-cone c)
   is-torsorial-htpy-cone c =
     is-torsorial-Eq-structure
-      ( λ p qH K →
-        Σ ( horizontal-map-cone f g c ~ pr1 qH)
-          ( coherence-htpy-cone c (p , qH) K))
       ( is-torsorial-htpy (vertical-map-cone f g c))
       ( vertical-map-cone f g c , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ q H →
-          coherence-htpy-cone c
-            ( vertical-map-cone f g c , q , H)
-            ( refl-htpy))
         ( is-torsorial-htpy (horizontal-map-cone f g c))
         ( horizontal-map-cone f g c , refl-htpy)
         ( is-torsorial-htpy (coherence-square-cone f g c ∙h refl-htpy)))

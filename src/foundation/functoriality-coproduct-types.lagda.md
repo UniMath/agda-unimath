@@ -279,7 +279,6 @@ is-contr-fiber-map-coprod {A = A} {B} {C} {D} f g =
           ( λ x → map-coprod (pr1 fg') (pr2 fg') x ＝ map-coprod f g x)) ∘e
         ( equiv-funext)))
     ( is-torsorial-Eq-structure
-      ( λ f' g' (H : f' ~ f) → (c : C) → g' c ＝ g c)
       ( is-torsorial-htpy' f)
       ( f , refl-htpy)
       ( is-torsorial-htpy' g))

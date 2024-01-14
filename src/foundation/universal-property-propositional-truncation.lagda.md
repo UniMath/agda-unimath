@@ -290,11 +290,11 @@ abstract
 abstract
   is-propositional-truncation-terminal-map :
     { l1 : Level} (A : UU l1) (a : A) →
-    is-propositional-truncation unit-Prop (terminal-map {A = A})
+    is-propositional-truncation unit-Prop (terminal-map A)
   is-propositional-truncation-terminal-map A a =
     is-propositional-truncation-has-section
       ( unit-Prop)
-      ( terminal-map)
+      ( terminal-map A)
       ( ind-unit a)
 ```
 

@@ -275,12 +275,6 @@ module _
     is-torsorial (equiv-Type-With-Automorphism X)
   is-torsorial-equiv-Type-With-Automorphism =
     is-torsorial-Eq-structure
-      ( λ Y e h →
-        coherence-square-maps
-          ( map-equiv h)
-          ( map-Type-With-Automorphism X)
-          ( map-equiv e)
-          ( map-equiv h))
       ( is-torsorial-equiv (type-Type-With-Automorphism X))
       ( type-Type-With-Automorphism X , id-equiv)
       ( is-torsorial-htpy-equiv (automorphism-Type-With-Automorphism X))

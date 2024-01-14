@@ -163,7 +163,6 @@ module _
     is-torsorial (λ B → A ≃∗ B)
   is-torsorial-equiv-Pointed-Type =
     is-torsorial-Eq-structure
-      ( λ X x e → map-equiv e (point-Pointed-Type A) ＝ x)
       ( is-torsorial-equiv (type-Pointed-Type A))
       ( pair (type-Pointed-Type A) id-equiv)
       ( is-torsorial-path (point-Pointed-Type A))
@@ -192,17 +191,6 @@ module _
     is-equiv-pointed-map f → is-contr (section-pointed-map f)
   is-contr-section-is-equiv-pointed-map H =
     is-torsorial-Eq-structure
-      ( λ g p (G : (map-pointed-map f ∘ g) ~ id) →
-        Id
-          { A =
-            Id
-              { A = type-Pointed-Type B}
-              ( map-pointed-map f (g (point-Pointed-Type B)))
-              ( point-Pointed-Type B)}
-          ( G (point-Pointed-Type B))
-          ( ( ( ap (map-pointed-map f) p) ∙
-              ( preserves-point-pointed-map f)) ∙
-            ( refl)))
       ( is-contr-section-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-section-map-inv-is-equiv H))
       ( is-contr-equiv
@@ -234,10 +222,6 @@ module _
     is-equiv-pointed-map f → is-contr (retraction-pointed-map f)
   is-contr-retraction-is-equiv-pointed-map H =
     is-torsorial-Eq-structure
-      ( λ g p (G : g ∘ map-pointed-map f ~ id) →
-        Id
-          ( G (point-Pointed-Type A))
-          ( ( ap g (preserves-point-pointed-map f) ∙ p) ∙ refl))
       ( is-contr-retraction-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-retraction-map-inv-is-equiv H))
       ( is-contr-equiv

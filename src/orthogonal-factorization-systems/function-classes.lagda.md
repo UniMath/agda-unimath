@@ -18,7 +18,6 @@ open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.pullback-squares
 open import foundation.subtypes
-open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
@@ -76,7 +75,7 @@ module _
 
   has-identity-maps-function-class-Prop : Prop (lsuc l1 ⊔ l2)
   has-identity-maps-function-class-Prop =
-    Π-Prop' (UU l1) λ A → P (id {A = A})
+    implicit-Π-Prop (UU l1) λ A → P (id {A = A})
 
   is-prop-has-identity-maps-function-class :
     is-prop has-identity-maps-function-class
@@ -223,7 +222,7 @@ module _
     tr
       ( is-in-function-class P)
       ( ap pr1 (is-section-eq-equiv e))
-      ( htpy-has-identity-maps-function-class has-ids-P (eq-equiv X Y e))
+      ( htpy-has-identity-maps-function-class has-ids-P (eq-equiv e))
 
   has-equivalences-has-identity-maps-function-class :
     has-identity-maps-function-class P → has-equivalences-function-class P

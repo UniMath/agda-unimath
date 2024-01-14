@@ -240,13 +240,11 @@ module _
     is-torsorial (equiv-binary-coproduct-Decomposition-subuniverse P A X)
   is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse =
     is-torsorial-Eq-structure
-      ( _)
       ( is-torsorial-equiv-subuniverse P
         ( left-summand-binary-coproduct-Decomposition-subuniverse P A X))
       ( left-summand-binary-coproduct-Decomposition-subuniverse P A X ,
         id-equiv)
       ( is-torsorial-Eq-structure
-        ( _)
         ( is-torsorial-equiv-subuniverse P
           ( right-summand-binary-coproduct-Decomposition-subuniverse P A X))
         ( right-summand-binary-coproduct-Decomposition-subuniverse P A X ,
@@ -504,10 +502,7 @@ module _
               ( λ x →
                 eq-pair-Σ
                   ( eq-pair-Σ
-                    ( eq-equiv
-                      ( raise-empty l1)
-                      ( inclusion-subuniverse P (pr1 x))
-                      ( equiv-is-empty is-empty-raise-empty ( pr2 x)))
+                    ( eq-equiv (equiv-is-empty is-empty-raise-empty (pr2 x)))
                     ( eq-is-prop (is-prop-type-Prop (P _))))
                   ( eq-is-prop is-property-is-empty)))
             ( ( raise-empty l1 , C1) , is-empty-raise-empty)) ∘e

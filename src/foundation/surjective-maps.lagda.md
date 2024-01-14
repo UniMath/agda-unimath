@@ -631,7 +631,6 @@ module _
     is-torsorial (equiv-Surjection f)
   is-torsorial-equiv-Surjection =
     is-torsorial-Eq-structure
-      ( λ Y g e → (map-equiv e ∘ map-Surjection f) ~ map-surjection g)
       ( is-torsorial-equiv (type-Surjection f))
       ( type-Surjection f , id-equiv)
       ( is-torsorial-htpy-surjection (surjection-Surjection f))

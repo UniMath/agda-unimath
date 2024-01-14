@@ -54,7 +54,7 @@ south : (t : unit) → P (g t)
 together with a family of dependent identifications
 
 ```text
-merid : (x : X) → dependent-identification P (h x) ((north ∘ (const X unit star)) x) (south ∘ (const X unit star) x)
+merid : (x : X) → dependent-identification P (h x) ((north ∘ (terminal-map X)) x) (south ∘ (terminal-map X) x)
 ```
 
 Using the [universal property of `unit`](foundation.unit-type.md) and the
@@ -91,8 +91,8 @@ module _
   dependent-suspension-cocone : UU (l1 ⊔ l3)
   dependent-suspension-cocone =
     dependent-cocone
-      ( const X unit star)
-      ( const X unit star)
+      ( terminal-map X)
+      ( terminal-map X)
       ( c)
       ( B)
 ```
@@ -192,7 +192,7 @@ module _
                 ( north-suspension-c))
               ( s)))
           ( equiv-dependent-universal-property-unit
-            ( const unit (UU l3) (B (south-suspension-structure c))))
+            ( point (B (south-suspension-structure c))))
           ( λ south-suspension-c → id-equiv))))
 
   htpy-map-inv-equiv-dependent-suspension-structure-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure :

@@ -32,8 +32,8 @@ characterizations of the identity types of its components.
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  ( D : (x : A) → B x → C x → UU l4)
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  { D : (x : A) → B x → C x → UU l4}
   where
 
   abstract
@@ -69,7 +69,6 @@ module _
     structure-identity-principle {f} {g} h H K =
       fundamental-theorem-id
         ( is-torsorial-Eq-structure
-          ( λ x → Eq-B)
           ( fundamental-theorem-id' f H)
           ( pair a refl-A)
           ( fundamental-theorem-id' g K))

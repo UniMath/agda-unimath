@@ -87,9 +87,7 @@ module _
   is-torsorial-has-same-elements-subtype :
     is-torsorial has-same-elements-subtype
   is-torsorial-has-same-elements-subtype =
-    is-torsorial-Eq-Π
-      ( λ x Q → P x ⇔ Q)
-      ( λ x → is-torsorial-iff (P x))
+    is-torsorial-Eq-Π (λ x → is-torsorial-iff (P x))
 
   has-same-elements-eq-subtype :
     (Q : subtype l2 A) → (P ＝ Q) → has-same-elements-subtype Q

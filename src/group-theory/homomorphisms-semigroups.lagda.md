@@ -51,10 +51,10 @@ module _
   preserves-mul-prop-Semigroup :
     (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
   preserves-mul-prop-Semigroup f =
-    Π-Prop'
+    implicit-Π-Prop
       ( type-Semigroup G)
       ( λ x →
-        Π-Prop'
+        implicit-Π-Prop
           ( type-Semigroup G)
           ( λ y →
             Id-Prop
@@ -65,10 +65,10 @@ module _
   preserves-mul-prop-Semigroup' :
     (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
   preserves-mul-prop-Semigroup' f =
-    Π-Prop'
+    implicit-Π-Prop
       ( type-Semigroup G)
       ( λ x →
-        Π-Prop'
+        implicit-Π-Prop
           ( type-Semigroup G)
           ( λ y →
             Id-Prop

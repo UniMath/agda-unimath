@@ -12,6 +12,7 @@ open import foundation-core.whiskering-homotopies public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
+open import foundation.homotopy-induction
 open import foundation.path-algebra
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
@@ -265,3 +266,40 @@ module _
     coherence-square-homotopies (H ·r f) (H' ·r f) (K ·r f) (K' ·r f)
   ap-right-whisk-coherence-square-homotopies α = α ·r f
 ```
+
+### The two definitions of horizontal concatenation of homotopies agree
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  coh-left-unit-htpy-comp-horizontal :
+    {f : (x : A) → B x} {g g' : {x : A} → B x → C x}
+    (G : {x : A} → g {x} ~ g' {x}) →
+    htpy-comp-horizontal (refl-htpy' f) G ~
+    htpy-comp-horizontal' (refl-htpy' f) G
+  coh-left-unit-htpy-comp-horizontal G = inv-htpy-right-unit-htpy
+
+  coh-right-unit-htpy-comp-horizontal :
+    {f f' : (x : A) → B x} {g : {x : A} → B x → C x}
+    (F : f ~ f') →
+    htpy-comp-horizontal F (refl-htpy' g) ~
+    htpy-comp-horizontal' F (refl-htpy' g)
+  coh-right-unit-htpy-comp-horizontal F = right-unit-htpy
+
+  coh-htpy-comp-horizontal :
+    {f f' : (x : A) → B x} {g g' : {x : A} → B x → C x}
+    (F : f ~ f') (G : {x : A} → g {x} ~ g' {x}) →
+    htpy-comp-horizontal F G ~ htpy-comp-horizontal' F G
+  coh-htpy-comp-horizontal {f} F G =
+    ind-htpy f
+      ( λ f' F → htpy-comp-horizontal F G ~ htpy-comp-horizontal' F G)
+      ( coh-left-unit-htpy-comp-horizontal G)
+      ( F)
+```
+
+## See also
+
+- For interactions between whiskering and exponentiation, see
+  [`foundation.composition-algebra`](foundation.composition-algebra.md).

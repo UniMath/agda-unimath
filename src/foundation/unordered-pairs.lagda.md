@@ -33,7 +33,6 @@ open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-dependent-functions
@@ -193,7 +192,6 @@ module _
     is-torsorial (Eq-unordered-pair p)
   is-torsorial-Eq-unordered-pair (pair X p) =
     is-torsorial-Eq-structure
-      ( λ Y q e → p ~ (q ∘ map-equiv e))
       ( is-torsorial-equiv-UU-Fin {k = 2} X)
       ( pair X (id-equiv-UU-Fin {k = 2} X))
       ( is-torsorial-htpy p)

@@ -477,12 +477,9 @@ module _
         ( Σ (Ring l) (iso-ab-Ring R))
         ( equiv-tot (equiv-iso-ab-iso-Ring R))
         ( is-torsorial-Eq-structure
-          ( λ A μ f →
-            is-ring-homomorphism-hom-Ab R (A , μ) (hom-iso-Ab (ab-Ring R) A f))
           ( is-torsorial-iso-Ab (ab-Ring R))
           ( ab-Ring R , id-iso-Ab (ab-Ring R))
           ( is-torsorial-Eq-structure
-            ( λ μ H pres-mul → one-Ring R ＝ pr1 (pr1 H))
             ( is-torsorial-Eq-subtype
               ( is-torsorial-multivariable-implicit-htpy 2 (mul-Ring R))
               ( λ μ →

@@ -206,14 +206,14 @@ module _
   where
 
   abstract
-    universal-property-pullback-standard-pullback :
+    universal-property-standard-pullback :
       universal-property-pullback f g (cone-standard-pullback f g)
-    universal-property-pullback-standard-pullback C =
+    universal-property-standard-pullback C =
       is-equiv-comp
-        ( tot (λ p → map-distributive-Π-Σ))
+        ( tot (λ _ → map-distributive-Π-Σ))
         ( mapping-into-Σ)
         ( is-equiv-mapping-into-Σ)
-        ( is-equiv-tot-is-fiberwise-equiv (λ p → is-equiv-map-distributive-Π-Σ))
+        ( is-equiv-tot-is-fiberwise-equiv (λ _ → is-equiv-map-distributive-Π-Σ))
 ```
 
 ### A cone is equal to the value of `cone-map` at its own gap map
@@ -249,7 +249,7 @@ module _
         ( c)
         ( gap f g c)
         ( htpy-cone-up-pullback-standard-pullback f g c)
-        ( universal-property-pullback-standard-pullback f g)
+        ( universal-property-standard-pullback f g)
 
   abstract
     universal-property-pullback-is-pullback :
@@ -262,7 +262,7 @@ module _
         ( gap f g c)
         ( htpy-cone-up-pullback-standard-pullback f g c)
         ( is-pullback-c)
-        ( universal-property-pullback-standard-pullback f g)
+        ( universal-property-standard-pullback f g)
 ```
 
 ### The pullback of a Σ-type
