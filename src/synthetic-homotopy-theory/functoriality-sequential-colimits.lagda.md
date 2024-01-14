@@ -44,22 +44,23 @@ and `(B, b)`, their
 [sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
 `X` and `Y`, and a
 [morphism](synthetic-homotopy-theory.morphisms-sequential-diagrams.md)
-`f : (A, a) → (B, b)`, we get an induced map `f∞ : X → Y`, as in the following
-diagram:
+`f : (A, a) → (B, b)`, there is a unique map `g : X → Y`, such that the diagram
 
 ```text
         a₀      a₁      a₂
     A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
     |       |       |              |
- f₀ |       | f₁    | f₂           | f∞
+ f₀ |       | f₁    | f₂           | g
     V       V       V              V
     B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
-        b₀      b₁      b₂             .
+        b₀      b₁      b₂
 ```
 
-The identity morphism is taken to the identity function, `id∞ ~ id`, and
-composition of morphisms is taken to composition of functions,
-`(g ∘ f)∞ ~ g∞ ∘ f∞`.
+[commutes](foundation.commuting-squares-of-maps.md).
+
+The unique map corresponding to the identity morphism is the identity map
+`id : X → X`, and the unique map corresponding to a composite of two morphisms
+is the composite of the two unique maps for the individual morphisms.
 
 A corollary of these facts is that taking the
 [standard sequential colimit](synthetic-homotopy-theory.sequential-colimits.md)
@@ -95,19 +96,19 @@ module _
 
 ### A morphism of sequential diagrams induces a map of sequential colimits
 
-The induced map
+The unique map `g : X → Y` such that the diagram
 
 ```text
         a₀      a₁      a₂
     A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
     |       |       |              |
- f₀ |       | f₁    | f₂           | f∞
+ f₀ |       | f₁    | f₂           | g
     V       V       V              V
     B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
         b₀      b₁      b₂
 ```
 
-then induces a
+commutes then induces a
 [cocone](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md) under
 `(A, a)` with codomain `Y`, which is homotopic to the cocone under `(B, b)`
 precomposed by `f`.
@@ -123,7 +124,7 @@ This homotopy of cocones provides
     Aₙ ---------> X
     |      |      |
     |      V      |
- fₙ |     Bₙ₊₁    | f∞
+ fₙ |     Bₙ₊₁    | g
     |    ^   \    |
     |  /       \  |
     V/           VV
@@ -133,7 +134,7 @@ This homotopy of cocones provides
 where the [triangles](foundation-core.commuting-triangles-of-maps.md) are
 coherences of the cocones of the sequential colimits, the back left
 [square](foundation-core.commuting-triangles-of-maps.md) is coherence of `f`,
-and the front and back right squares are provided by uniqueness of `f∞`.
+and the front and back right squares are provided by uniqueness of `g`.
 
 ```agda
 module _
@@ -227,7 +228,7 @@ module _
           ( n)))
 ```
 
-### Homotopies between morphisms of sequential diagrams induce homotopies of maps between sequential colimits
+### Homotopies between morphisms of sequential diagrams induce homotopies of corresponding maps between sequential colimits
 
 ```agda
 module _
@@ -482,7 +483,19 @@ module _
 
 Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
-diagrams, i.e. `(e∞)⁻¹ = (e⁻¹)∞`.
+diagrams, i.e. it is the unique map `g : Y → X` making the diagram
+
+```text
+           b₀      b₁      b₂
+       B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
+       |       |       |              |
+  e₀⁻¹ |       | e₁⁻¹  | e₂⁻¹         | g
+       V       V       V              V
+       A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
+           a₀      a₁      a₂
+```
+
+commute.
 
 ```agda
 module _
@@ -546,7 +559,9 @@ module _
 ### Functoriality of taking the standard sequential colimit
 
 All of the above specializes to the case where `X` is the standard sequential
-colimit `A∞` and `Y` is the standard sequential colimit `B∞`.
+colimit `A∞` and `Y` is the standard sequential colimit `B∞`. In that case, we
+denote the unique map `g` corresponding to a morphism of diagrams `f` by
+`f∞ : A∞ → B∞`.
 
 #### A morphism of sequential diagrams induces a map of standard sequential colimits
 
