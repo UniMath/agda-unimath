@@ -8,16 +8,23 @@ module synthetic-homotopy-theory.flattening-families-of-types-pushouts where
 
 ```agda
 open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.span-diagrams
 open import foundation.spans
-open import foundation.transport-along-identifications
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.descent-property-families-of-types-pushouts
+open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts
 open import synthetic-homotopy-theory.families-of-types-pushouts
 ```
 
@@ -166,6 +173,18 @@ module _
 
 ### Flattening families of types over pushouts
 
+Consider a type family `P` over the codomain `X` of a cocone `c` under  a span diagram `A <- S -> B`. The descent data of `P` then yields the [structure of a type family](synthetic-homotopy-theory.structure-type-family-pushout.md) over a pushout. The flattening of `P` consists of the span diagram and the cocone as displayed in the following commuting square:
+
+```text
+  Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
+           |                                                 |
+           |                                                 |
+           V                                               ⌜ V
+  Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x).
+```
+
+Note that this is defined as a special case of the flattening of the structure of a type family over a pushout, by first taking the descent data of `P` and then flattening.
+
 ```agda
 module _
   { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
@@ -255,4 +274,97 @@ module _
       ( P)
       ( id-equiv-structure-type-family-pushout s
         ( descent-data-type-family-pushout s c P))
+```
+
+## Properties
+
+### Computation of cocones under the flattening span diagram of the structure of a type family of a pushout
+
+Consider the structure of a type family `(P , Q , e)` over a span diagram `A <- S -> B`, with flattening span diagram `𝒯`
+
+```text
+  Σ (a : A), P a <-- Σ (s : S), P (f s) --> Σ (s : S), Q (g s) --> Σ (b : B), Q b.
+```
+
+Furthermore, consider a type `X`, a type family `Y` over `X`, a cocone `c` on `𝒮` with codomain `X` and a dependent cocone `d` on `𝒯` over `c` with codomain `Y`. Then there is an equivalence
+
+```text
+  cocone 𝒯 Z ≃ dependent-cocone 𝒮 c (λ x → Y x → Z)
+```
+
+
+Then the type of cocones under `𝒯` with codomain `X` is equivalent to the type of pairs `(c , d)` consisting of a cocone `c` under `𝒮` with codomain `X` and a dependent cocone `d` over `C`
+
+Then a cocone under `𝒯` with codomain `X` is equivalently described as a triple `(p , q , H)` consisting of
+
+```text
+  p : (a : A) → P a → X
+  q : (b : B) → Q b → X
+  H : (s : S) (t : P (f s)) → p (f s) t ＝ q (g s) (e s t).
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram s X)
+  (Y : X → UU l5)
+  (Q : structure-type-family-pushout l6 s)
+  (e : equiv-structure-type-family-pushout s c Y Q)
+  where
+```
+
+```text
+module _
+  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  (P : structure-type-family-pushout l4 s) (X : UU l5)
+  where
+
+  structure-cocone-flattening-structure-type-family-pushout :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  structure-cocone-flattening-structure-type-family-pushout =
+    Σ ( (a : domain-span-diagram s) →
+        left-type-family-structure-type-family-pushout s P a → X)
+      ( λ p →
+        Σ ( (b : codomain-span-diagram s) →
+            right-type-family-structure-type-family-pushout s P b → X)
+          ( λ q →
+            (x : spanning-type-span-diagram s) →
+            (t : spanning-type-family-structure-type-family-pushout s P x) →
+            p (left-map-span-diagram s x) t ＝
+            q ( right-map-span-diagram s x)
+              ( map-matching-equiv-structure-type-family-pushout s P x t)))
+
+  compute-cocone-flattening-structure-type-family-pushout :
+    cocone-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout s P)
+      ( X) ≃
+    structure-cocone-flattening-structure-type-family-pushout
+  compute-cocone-flattening-structure-type-family-pushout =
+    equiv-Σ _
+      ( equiv-ev-pair)
+      ( λ _ → equiv-Σ _ equiv-ev-pair (λ _ → equiv-ev-pair))
+
+  map-compute-cocone-flattening-structure-type-family-pushout :
+    cocone-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout s P)
+      ( X) →
+    structure-cocone-flattening-structure-type-family-pushout
+  map-compute-cocone-flattening-structure-type-family-pushout =
+    map-equiv compute-cocone-flattening-structure-type-family-pushout
+
+  triangle-compute-cocone-flattening-structure-type-family-pushout :
+    coherence-triangle-maps
+      {!!}
+      {!!}
+      {!!}
+  triangle-compute-cocone-flattening-structure-type-family-pushout = {!!}
+
+{-
+  triangle-comparison-dependent-cocone-ind-Σ-cocone :
+    { l : Level} (Y : UU l) →
+    coherence-triangle-maps
+      ( dependent-cocone-map-span-diagram s c (λ x → P x → Y))
+      ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
+      ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-type-family-pushout Y ∘ ind-Σ)
+-}
 ```

@@ -70,52 +70,11 @@ with [homotopy](foundation-core.homotopies.md) `H : i ∘ f ~ j ∘ g`, and for 
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 
-is again a pushout square.
+is again a pushout square. The [span diagram](foundation.span-diagrams.md) in this square is the [flattening](synthetic-homotopy-theory.flattening-families-of-types-pushouts.md) of the type family `P` over `X`.
 
-## Definitions
+## Theorems
 
-### The statement of the flattening lemma for pushouts
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  { X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
-  where
-
-  statement-flattening-lemma-pushout : UUω
-  statement-flattening-lemma-pushout =
-    universal-property-pushout
-      ( span-diagram-flattening-type-family-pushout s c P)
-      ( cocone-flattening-type-family-pushout s c P)
-```
-
-### The statement of the flattening lemma for pushouts, phrased using descent data
-
-The above statement of the flattening lemma works with a provided type family
-over the pushout. We can instead accept a definition of this family via descent
-data for the pushout.
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  { X : UU l4} (c : cocone-span-diagram s X)
-  ( P : structure-type-family-pushout l5 s)
-  ( Q : X → UU l5)
-  ( e :
-    equiv-structure-type-family-pushout s P
-      ( descent-data-type-family-pushout s c Q))
-  where
-
-  statement-flattening-lemma-structure-type-family-pushout : UUω
-  statement-flattening-lemma-structure-type-family-pushout =
-    universal-property-pushout
-      ( span-diagram-flattening-structure-type-family-pushout s P)
-      ( cocone-flattening-structure-type-family-pushout s c P Q e)
-```
-
-## Properties
-
-### Proof of the flattening lemma for pushouts
+### The flattening lemma for pushouts
 
 The proof uses the theorem that maps from `Σ`-types are equivalent to dependent
 maps over the index type, for which we can invoke the dependent universal
@@ -129,7 +88,8 @@ module _
 
   cocone-map-flattening-type-family-pushout :
     {l : Level} (Y : UU l) →
-    (Σ X P → Y) → cocone-span-diagram (span-diagram-flattening-type-family-pushout s c P) Y
+    (Σ X P → Y) →
+    cocone-span-diagram (span-diagram-flattening-type-family-pushout s c P) Y
   cocone-map-flattening-type-family-pushout Y =
     cocone-map-span-diagram
       ( span-diagram-flattening-type-family-pushout s c P)
@@ -137,19 +97,9 @@ module _
 
   comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
-    Σ ( (a : domain-span-diagram s) →
-        P (left-map-cocone-span-diagram s c a) → Y)
-      ( λ k →
-        Σ ( (b : codomain-span-diagram s) →
-            P (right-map-cocone-span-diagram s c b) → Y)
-          ( λ l →
-            ( x : spanning-type-span-diagram s)
-            ( t :
-              P (left-map-cocone-span-diagram s c
-                ( left-map-span-diagram s x))) →
-            ( k (left-map-span-diagram s x) t) ＝
-            ( l ( right-map-span-diagram s x)
-                ( tr P (coherence-square-cocone-span-diagram s c x) t)))) ≃
+    structure-cocone-flattening-structure-type-family-pushout s
+      ( descent-data-type-family-pushout s c P)
+      ( Y) ≃
     dependent-cocone-span-diagram s c (λ x → P x → Y)
   comparison-dependent-cocone-ind-Σ-cocone Y =
     equiv-tot
@@ -184,7 +134,9 @@ module _
   abstract
     flattening-lemma-pushout :
       universal-property-pushout s c →
-      statement-flattening-lemma-pushout s c P
+      universal-property-pushout
+        ( span-diagram-flattening-type-family-pushout s c P)
+        ( cocone-flattening-type-family-pushout s c P)
     flattening-lemma-pushout U Y =
       is-equiv-left-factor
         ( cocone-map-flattening-type-family-pushout Y)
@@ -206,7 +158,7 @@ module _
         ( is-equiv-ind-Σ)
 ```
 
-### Proof of the descent data statement of the flattening lemma
+### The flattening lemma with descent data
 
 The proof is carried out by constructing a commuting cube, which has
 equivalences for vertical maps, the `cocone-flattening-type-family-pushout` square for the
@@ -424,7 +376,9 @@ module _
   abstract
     flattening-lemma-descent-data-pushout :
       universal-property-pushout s c →
-      statement-flattening-lemma-structure-type-family-pushout s c P Q e
+      universal-property-pushout
+        ( span-diagram-flattening-structure-type-family-pushout s P)
+        ( cocone-flattening-structure-type-family-pushout s c P Q e)
     flattening-lemma-descent-data-pushout H =
       universal-property-pushout-equiv-cocone-equiv-span-diagram
         ( span-diagram-flattening-structure-type-family-pushout s P)
