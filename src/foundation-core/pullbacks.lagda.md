@@ -28,6 +28,8 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.universal-property-pullbacks
 ```
@@ -302,12 +304,16 @@ module _
 
   abstract
     is-section-inv-gap-cone-standard-pullback-Σ :
-      gap f pr1 cone-standard-pullback-Σ ∘ inv-gap-cone-standard-pullback-Σ ~ id
+      is-section
+        ( gap f pr1 cone-standard-pullback-Σ)
+        ( inv-gap-cone-standard-pullback-Σ)
     is-section-inv-gap-cone-standard-pullback-Σ (x , (.(f x) , q) , refl) = refl
 
   abstract
     is-retraction-inv-gap-cone-standard-pullback-Σ :
-      inv-gap-cone-standard-pullback-Σ ∘ gap f pr1 cone-standard-pullback-Σ ~ id
+      is-retraction
+        ( gap f pr1 cone-standard-pullback-Σ)
+        ( inv-gap-cone-standard-pullback-Σ)
     is-retraction-inv-gap-cone-standard-pullback-Σ = refl-htpy
 
   abstract
@@ -470,7 +476,7 @@ module _
 
   abstract
     is-section-inv-map-fold-cone :
-      map-fold-cone ∘ inv-map-fold-cone ~ id
+      is-section (map-fold-cone) (inv-map-fold-cone)
     is-section-inv-map-fold-cone ((a , b) , (x , α)) =
       map-extensionality-standard-pullback
         ( map-prod f g)
@@ -494,7 +500,7 @@ module _
 
   abstract
     is-retraction-inv-map-fold-cone :
-      inv-map-fold-cone ∘ map-fold-cone ~ id
+      is-retraction (map-fold-cone) (inv-map-fold-cone)
     is-retraction-inv-map-fold-cone (a , b , p) =
       map-extensionality-standard-pullback f g
         ( refl)

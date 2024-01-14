@@ -199,12 +199,12 @@ module _
 
   abstract
     is-section-inv-gap-cone-Id :
-      gap (point x) (point y) cone-Id ∘ inv-gap-cone-Id ~ id
+      is-section (gap (point x) (point y) cone-Id) (inv-gap-cone-Id)
     is-section-inv-gap-cone-Id (star , star , p) = refl
 
   abstract
     is-retraction-inv-gap-cone-Id :
-      inv-gap-cone-Id ∘ gap (point x) (point y) cone-Id ~ id
+      is-retraction (gap (point x) (point y) cone-Id) (inv-gap-cone-Id)
     is-retraction-inv-gap-cone-Id p = refl
 
   abstract
@@ -631,7 +631,7 @@ module _
 
   abstract
     is-section-inv-map-standard-pullback-Π :
-      map-standard-pullback-Π ∘ inv-map-standard-pullback-Π ~ id
+      is-section (map-standard-pullback-Π) (inv-map-standard-pullback-Π)
     is-section-inv-map-standard-pullback-Π h =
       eq-htpy
         ( λ i →
@@ -642,7 +642,7 @@ module _
 
   abstract
     is-retraction-inv-map-standard-pullback-Π :
-      inv-map-standard-pullback-Π ∘ map-standard-pullback-Π ~ id
+      is-retraction (map-standard-pullback-Π) (inv-map-standard-pullback-Π)
     is-retraction-inv-map-standard-pullback-Π (α , β , γ) =
       map-extensionality-standard-pullback
         ( map-Π f)

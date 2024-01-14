@@ -15,6 +15,8 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 ```
 
@@ -79,11 +81,13 @@ module _
   eq-Eq-fiber α β = eq-Eq-fiber-uncurry (α , β)
 
   is-section-eq-Eq-fiber :
-    {s t : fiber f b} → Eq-eq-fiber {s} {t} ∘ eq-Eq-fiber-uncurry {s} {t} ~ id
+    {s t : fiber f b} →
+    is-section (Eq-eq-fiber {s} {t}) (eq-Eq-fiber-uncurry {s} {t})
   is-section-eq-Eq-fiber (refl , refl) = refl
 
   is-retraction-eq-Eq-fiber :
-    {s t : fiber f b} → eq-Eq-fiber-uncurry {s} {t} ∘ Eq-eq-fiber {s} {t} ~ id
+    {s t : fiber f b} →
+    is-retraction (Eq-eq-fiber {s} {t}) (eq-Eq-fiber-uncurry {s} {t})
   is-retraction-eq-Eq-fiber refl = refl
 
   abstract
@@ -144,12 +148,12 @@ module _
 
   is-section-eq-Eq-fiber' :
     {s t : fiber' f b} →
-    Eq-eq-fiber' {s} {t} ∘ eq-Eq-fiber-uncurry' {s} {t} ~ id
+    is-section (Eq-eq-fiber' {s} {t}) (eq-Eq-fiber-uncurry' {s} {t})
   is-section-eq-Eq-fiber' {x , refl} (refl , refl) = refl
 
   is-retraction-eq-Eq-fiber' :
     {s t : fiber' f b} →
-    eq-Eq-fiber-uncurry' {s} {t} ∘ Eq-eq-fiber' {s} {t} ~ id
+    is-retraction (Eq-eq-fiber' {s} {t}) (eq-Eq-fiber-uncurry' {s} {t})
   is-retraction-eq-Eq-fiber' {x , refl} refl = refl
 
   abstract
@@ -194,10 +198,12 @@ module _
   pr1 (map-inv-equiv-fiber (x , _)) = x
   pr2 (map-inv-equiv-fiber (x , p)) = inv p
 
-  is-section-map-inv-equiv-fiber : map-equiv-fiber ∘ map-inv-equiv-fiber ~ id
+  is-section-map-inv-equiv-fiber :
+    is-section map-equiv-fiber map-inv-equiv-fiber
   is-section-map-inv-equiv-fiber (x , refl) = refl
 
-  is-retraction-map-inv-equiv-fiber : map-inv-equiv-fiber ∘ map-equiv-fiber ~ id
+  is-retraction-map-inv-equiv-fiber :
+    is-retraction map-equiv-fiber map-inv-equiv-fiber
   is-retraction-map-inv-equiv-fiber (x , refl) = refl
 
   is-equiv-map-equiv-fiber : is-equiv map-equiv-fiber
@@ -227,19 +233,21 @@ module _
   pr2 (pr1 (map-inv-fiber-pr1 b)) = b
   pr2 (map-inv-fiber-pr1 b) = refl
 
-  is-section-map-inv-fiber-pr1 : map-inv-fiber-pr1 ∘ map-fiber-pr1 ~ id
-  is-section-map-inv-fiber-pr1 ((.a , y) , refl) = refl
+  is-section-map-inv-fiber-pr1 :
+    is-section map-fiber-pr1 map-inv-fiber-pr1
+  is-section-map-inv-fiber-pr1 b = refl
 
-  is-retraction-map-inv-fiber-pr1 : map-fiber-pr1 ∘ map-inv-fiber-pr1 ~ id
-  is-retraction-map-inv-fiber-pr1 b = refl
+  is-retraction-map-inv-fiber-pr1 :
+    is-retraction map-fiber-pr1 map-inv-fiber-pr1
+  is-retraction-map-inv-fiber-pr1 ((.a , y) , refl) = refl
 
   abstract
     is-equiv-map-fiber-pr1 : is-equiv map-fiber-pr1
     is-equiv-map-fiber-pr1 =
       is-equiv-is-invertible
         map-inv-fiber-pr1
-        is-retraction-map-inv-fiber-pr1
         is-section-map-inv-fiber-pr1
+        is-retraction-map-inv-fiber-pr1
 
   equiv-fiber-pr1 : fiber (pr1 {B = B}) a ≃ B a
   pr1 equiv-fiber-pr1 = map-fiber-pr1
@@ -250,8 +258,8 @@ module _
     is-equiv-map-inv-fiber-pr1 =
       is-equiv-is-invertible
         map-fiber-pr1
-        is-section-map-inv-fiber-pr1
         is-retraction-map-inv-fiber-pr1
+        is-section-map-inv-fiber-pr1
 
   inv-equiv-fiber-pr1 : B a ≃ fiber (pr1 {B = B}) a
   pr1 inv-equiv-fiber-pr1 = map-inv-fiber-pr1
@@ -277,11 +285,11 @@ module _
   pr2 (pr2 (map-inv-equiv-total-fiber x)) = refl
 
   is-retraction-map-inv-equiv-total-fiber :
-    (map-inv-equiv-total-fiber ∘ map-equiv-total-fiber) ~ id
+    is-retraction map-equiv-total-fiber map-inv-equiv-total-fiber
   is-retraction-map-inv-equiv-total-fiber (.(f x) , x , refl) = refl
 
   is-section-map-inv-equiv-total-fiber :
-    (map-equiv-total-fiber ∘ map-inv-equiv-total-fiber) ~ id
+    is-section map-equiv-total-fiber map-inv-equiv-total-fiber
   is-section-map-inv-equiv-total-fiber x = refl
 
   abstract
@@ -329,11 +337,11 @@ module _
   pr2 (inv-map-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
   is-section-inv-map-compute-fiber-comp :
-    map-compute-fiber-comp ∘ inv-map-compute-fiber-comp ~ id
+    is-section map-compute-fiber-comp inv-map-compute-fiber-comp
   is-section-inv-map-compute-fiber-comp ((.(h a) , refl) , (a , refl)) = refl
 
   is-retraction-inv-map-compute-fiber-comp :
-    inv-map-compute-fiber-comp ∘ map-compute-fiber-comp ~ id
+    is-retraction map-compute-fiber-comp inv-map-compute-fiber-comp
   is-retraction-inv-map-compute-fiber-comp (a , refl) = refl
 
   abstract
