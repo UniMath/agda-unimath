@@ -299,7 +299,7 @@ abstract
 is-contr-function-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-contr B → is-contr (A → B)
-is-contr-function-type is-contr-B = is-contr-Π λ _ → is-contr-B
+is-contr-function-type is-contr-B = is-contr-Π (λ _ → is-contr-B)
 ```
 
 ### The type of equivalences between contractible types is contractible

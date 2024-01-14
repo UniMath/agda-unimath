@@ -2,8 +2,6 @@
 
 ```agda
 module foundation.functoriality-function-types where
-
-open import foundation-core.functoriality-function-types public
 ```
 
 <details><summary>Imports</summary>

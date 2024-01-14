@@ -42,7 +42,7 @@ We often write `A *_X B` for the domain of the fiberwise join. In other words,
 the cogap map of any cartesian square
 
 ```text
-        i
+        j
     A -----> X
     | ⌟      |
   f |        | g

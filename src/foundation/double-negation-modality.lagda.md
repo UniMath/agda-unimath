@@ -53,15 +53,14 @@ is-uniquely-eliminating-modality-double-negation-modality {l} {A} P =
     ( unit-double-negation-modality)
     ( operator-double-negation-modality l ∘ P)
     ( λ _ → is-prop-double-negation)
-    ( λ f z g →
+    ( λ f z →
       double-negation-extend
         ( λ (a : A) →
           tr
             ( ¬¬ ∘ P)
             ( eq-is-prop is-prop-double-negation)
             ( f a))
-        ( z)
-        ( g))
+        ( z))
 ```
 
 This proof follows Example 1.9 in _Modalities in homotopy type theory_.

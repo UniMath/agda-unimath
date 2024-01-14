@@ -59,6 +59,7 @@ open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public
+open import foundation.composition-algebra public
 open import foundation.cones-over-cospans public
 open import foundation.cones-over-inverse-sequential-diagrams public
 open import foundation.conjunction public
@@ -245,6 +246,7 @@ open import foundation.perfect-images public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
+open import foundation.postcomposition-dependent-functions public
 open import foundation.postcomposition-functions public
 open import foundation.powersets public
 open import foundation.precomposition-dependent-functions public

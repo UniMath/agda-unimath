@@ -228,7 +228,7 @@ vertical-concat-Id² α β = α ∙ β
 horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z} →
   p ＝ q → u ＝ v → (p ∙ u) ＝ (q ∙ v)
-horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
+horizontal-concat-Id² α β = ap-binary (_∙_) α β
 ```
 
 ### Definition of identification whiskering
@@ -401,13 +401,13 @@ left-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
   horizontal-concat-Id² (refl {x = p}) γ ＝
   identification-left-whisk p γ
-left-unit-law-horizontal-concat-Id² γ = left-unit-ap-binary (λ s t → s ∙ t) γ
+left-unit-law-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
 
 right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α (refl {x = u}) ＝
   identification-right-whisk α u
-right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
+right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
 ```
 
 Horizontal concatination satisfies an additional "2-dimensional" unit law (on
@@ -437,7 +437,8 @@ module _
       ( α)
   nat-sq-left-unit-Id² =
     ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
-    ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
+      ( inv (left-unit-law-horizontal-concat-Id² α))) ∙
+    ( inv right-unit)
 ```
 
 ### Unit laws for whiskering
@@ -507,7 +508,7 @@ module _
   where
 
   horizontal-inv-Id² : p ＝ p' → (inv p) ＝ (inv p')
-  horizontal-inv-Id² α = ap inv α
+  horizontal-inv-Id² = ap inv
 ```
 
 This operation satisfies a left and right idenity induced by the inverse laws on
@@ -544,7 +545,7 @@ module _
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy left-inv α)) ∙
       ( horizontal-concat-Id²
-        ( ap-binary-comp-diagonal _∙_ inv id α)
+        ( ap-binary-comp-diagonal (_∙_) inv id α)
         ( refl))) ∙
     ( ap
       ( λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')
@@ -624,9 +625,9 @@ module _
       ( ap-inv f p')
       ( horizontal-inv-Id² (ap² f α))
   nat-sq-ap-inv-Id² =
-    (inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α)) ∙
-      (nat-htpy (ap-inv f) α)) ∙
-        (horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
+    ( ( inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α))) ∙
+      ( nat-htpy (ap-inv f) α)) ∙
+    ( horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
 ```
 
 Identity law and constant law.
@@ -704,7 +705,7 @@ concatination on 1-paths.
 y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α β : p ＝ q}
   {γ δ : q ＝ r} → α ＝ β → γ ＝ δ → (α ∙ γ) ＝ (β ∙ δ)
-y-concat-Id³ σ τ = horizontal-concat-Id² σ τ
+y-concat-Id³ = horizontal-concat-Id²
 ```
 
 The z-concatenation operation corresponds the concatination induced by the
@@ -715,7 +716,7 @@ z-concat-Id³ :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
   {α β : p ＝ q} {γ δ : u ＝ v} →
   α ＝ β → γ ＝ δ → horizontal-concat-Id² α γ ＝ horizontal-concat-Id² β δ
-z-concat-Id³ σ τ = ap-binary (λ s t → horizontal-concat-Id² s t) σ τ
+z-concat-Id³ σ τ = ap-binary horizontal-concat-Id² σ τ
 ```
 
 ### Unit laws for the concatenation operations on 3-paths
@@ -745,15 +746,15 @@ left-unit-law-z-concat-Id³ :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
   {α : p ＝ q} {γ δ : u ＝ v} (τ : γ ＝ δ) →
   z-concat-Id³ (refl {x = α}) τ ＝ ap (horizontal-concat-Id² α) τ
-left-unit-law-z-concat-Id³ τ =
-  left-unit-ap-binary (λ s t → horizontal-concat-Id² s t) τ
+left-unit-law-z-concat-Id³ {α = α} =
+  left-unit-ap-binary horizontal-concat-Id² {α}
 
 right-unit-law-z-concat-Id³ :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
   {α β : p ＝ q} {γ : u ＝ v} (σ : α ＝ β) →
   z-concat-Id³ σ (refl {x = γ}) ＝ ap (λ ω → horizontal-concat-Id² ω γ) σ
 right-unit-law-z-concat-Id³ σ =
-  right-unit-ap-binary (λ s t → horizontal-concat-Id² s t) σ
+  right-unit-ap-binary horizontal-concat-Id² σ
 ```
 
 ### Interchange laws for 3-paths for the concatenation operations on 3-paths

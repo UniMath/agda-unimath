@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.implicit-function-types
+open import foundation.postcomposition-dependent-functions
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
@@ -18,8 +19,10 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -163,9 +166,11 @@ module _
 
 ## Properties
 
-### Naturality of `htpy-eq` for dependent functions
+### Naturality of `htpy-eq` with respect to functions
 
-Consider a map `f : A → B` and two dependent functions `g h : (b : B) → C b`.
+#### Naturality of `htpy-eq` with respect to precomposition of dependent functions
+
+Consider a map `f : A → B` and two dependent functions `g h : (x : B) → C x`.
 Then the square
 
 ```text
@@ -192,7 +197,7 @@ coherence-square-htpy-eq-ap-precomp-Π :
 coherence-square-htpy-eq-ap-precomp-Π f g .g refl = refl
 ```
 
-### Naturality of `htpy-eq` for ordinary functions
+#### Naturality of `htpy-eq` with respect to precomposition of ordinary functions
 
 Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
 
@@ -217,7 +222,65 @@ coherence-square-htpy-eq-ap-precomp :
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-coherence-square-htpy-eq-ap-precomp f g .g refl = refl
+coherence-square-htpy-eq-ap-precomp f = coherence-square-htpy-eq-ap-precomp-Π f
+```
+
+#### Naturality of `htpy-eq` with respect to postcomposition of dependent functions
+
+Consider a map `f : {x : A} → B x → C x` and two functions
+`g h : (x : A) → B x`. Then the square
+
+```text
+                   ap (postcomp-Π A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          V                                       V
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+commutes.
+
+```agda
+coherence-square-htpy-eq-ap-postcomp-Π :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (f : {x : A} → B x → C x) (g h : (x : A) → B x) →
+  coherence-square-maps
+    ( ap (postcomp-Π A f) {x = g} {y = h})
+    ( htpy-eq)
+    ( htpy-eq)
+    ( f ·l_)
+coherence-square-htpy-eq-ap-postcomp-Π f g .g refl = refl
+```
+
+#### Naturality of `htpy-eq` with respect to postcomposition of ordinary functions
+
+Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
+
+```text
+                    ap (postcomp A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          V                                       V
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+commutes.
+
+```agda
+coherence-square-htpy-eq-ap-postcomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
+  (g h : A → B) →
+  coherence-square-maps
+    ( ap (postcomp A f) {x = g} {y = h})
+    ( htpy-eq)
+    ( htpy-eq)
+    ( f ·l_)
+coherence-square-htpy-eq-ap-postcomp f =
+  coherence-square-htpy-eq-ap-postcomp-Π f
 ```
 
 ### Computing the action on paths of an evaluation map
