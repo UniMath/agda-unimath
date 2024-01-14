@@ -11,7 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
-open import foundation.computations-higher-order-homotopies
+open import foundation.composition-algebra
 open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -1006,33 +1006,33 @@ module _
   where
 
   is-local-is-orthogonal-pullback-condition-terminal-map :
-    is-orthogonal-pullback-condition f terminal-map → is-local f X
+    is-orthogonal-pullback-condition f (terminal-map X) → is-local f X
   is-local-is-orthogonal-pullback-condition-terminal-map =
     is-equiv-horizontal-map-is-pullback
       ( precomp f unit)
-      ( postcomp A terminal-map)
-      ( cone-pullback-hom' f terminal-map)
+      ( postcomp A (terminal-map X))
+      ( cone-pullback-hom' f (terminal-map X))
       ( is-local-is-contr f unit is-contr-unit)
 
   is-local-is-orthogonal-terminal-map :
-    is-orthogonal f terminal-map → is-local f X
+    is-orthogonal f (terminal-map X) → is-local f X
   is-local-is-orthogonal-terminal-map F =
     is-local-is-orthogonal-pullback-condition-terminal-map
-      ( is-orthogonal-pullback-condition-is-orthogonal f terminal-map F)
+      ( is-orthogonal-pullback-condition-is-orthogonal f (terminal-map X) F)
 
   is-orthogonal-pullback-condition-terminal-map-is-local :
-    is-local f X → is-orthogonal-pullback-condition f terminal-map
+    is-local f X → is-orthogonal-pullback-condition f (terminal-map X)
   is-orthogonal-pullback-condition-terminal-map-is-local =
     is-pullback-is-equiv-horizontal-maps
       ( precomp f unit)
-      ( postcomp A terminal-map)
-      ( cone-pullback-hom' f terminal-map)
+      ( postcomp A (terminal-map X))
+      ( cone-pullback-hom' f (terminal-map X))
       ( is-local-is-contr f unit is-contr-unit)
 
   is-orthogonal-terminal-map-is-local :
-    is-local f X → is-orthogonal f terminal-map
+    is-local f X → is-orthogonal f (terminal-map X)
   is-orthogonal-terminal-map-is-local F =
-    is-orthogonal-is-orthogonal-pullback-condition f terminal-map
+    is-orthogonal-is-orthogonal-pullback-condition f (terminal-map X)
       ( is-orthogonal-pullback-condition-terminal-map-is-local F)
 ```
 
@@ -1062,7 +1062,7 @@ module _
     is-local f Y → is-orthogonal-pullback-condition f g → is-local f X
   is-local-domain-is-orthogonal-pullback-condition-is-local-codomain H G =
     is-local-is-orthogonal-pullback-condition-terminal-map f
-      ( is-orthogonal-pullback-condition-right-comp f g terminal-map
+      ( is-orthogonal-pullback-condition-right-comp f g (terminal-map Y)
         ( is-orthogonal-pullback-condition-terminal-map-is-local f H)
         ( G))
 

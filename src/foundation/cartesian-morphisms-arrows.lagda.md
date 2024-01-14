@@ -128,7 +128,7 @@ module _
   where
 
   fiber-cartesian-hom-arrow :
-    cartesian-hom-arrow (terminal-map {A = fiber f y}) f
+    cartesian-hom-arrow (terminal-map (fiber f y)) f
   pr1 fiber-cartesian-hom-arrow =
     hom-arrow-cone (point y) f (swap-cone f (point y) (cone-fiber f y))
   pr2 fiber-cartesian-hom-arrow =

@@ -60,12 +60,12 @@ module _
   where
 
   is-local-is-local-terminal-map :
-    is-local-map f (terminal-map {A = B}) → is-local f B
+    is-local-map f (terminal-map B) → is-local f B
   is-local-is-local-terminal-map H =
     is-local-equiv f (inv-equiv-fiber-terminal-map star) (H star)
 
   is-local-terminal-map-is-local :
-    is-local f B → is-local-map f (terminal-map {A = B})
+    is-local f B → is-local-map f (terminal-map B)
   is-local-terminal-map-is-local H u =
     is-local-equiv f (equiv-fiber-terminal-map u) H
 ```
@@ -83,14 +83,16 @@ module _
     is-orthogonal-pullback-condition f g → is-local-map f g
   is-local-map-is-orthogonal-pullback-condition G y =
     is-local-is-orthogonal-pullback-condition-terminal-map f
-      ( is-orthogonal-pullback-condition-right-base-change f g terminal-map
+      ( is-orthogonal-pullback-condition-right-base-change f g
+        ( terminal-map (fiber g y))
         ( fiber-cartesian-hom-arrow g y)
         ( G))
 
   is-local-map-is-orthogonal : is-orthogonal f g → is-local-map f g
   is-local-map-is-orthogonal G y =
     is-local-is-orthogonal-terminal-map f
-      ( is-orthogonal-right-base-change f g terminal-map
+      ( is-orthogonal-right-base-change f g
+        ( terminal-map (fiber g y))
         ( fiber-cartesian-hom-arrow g y)
         ( G))
 ```
