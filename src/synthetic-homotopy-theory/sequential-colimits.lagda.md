@@ -78,11 +78,10 @@ abstract
 
   dup-standard-sequential-colimit :
     { l : Level} {A : sequential-diagram l} →
-    dependent-universal-property-sequential-colimit A
+    dependent-universal-property-sequential-colimit
       ( cocone-standard-sequential-colimit A)
   dup-standard-sequential-colimit {A = A} =
     dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
-      ( A)
       ( cocone-standard-sequential-colimit A)
       ( dup-canonical-coequalizer
         ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -90,10 +89,10 @@ abstract
 
   up-standard-sequential-colimit :
     { l : Level} {A : sequential-diagram l} →
-    universal-property-sequential-colimit A
-      (cocone-standard-sequential-colimit A)
+    universal-property-sequential-colimit
+      ( cocone-standard-sequential-colimit A)
   up-standard-sequential-colimit {A = A} =
-    universal-property-dependent-universal-property-sequential-colimit A
+    universal-property-dependent-universal-property-sequential-colimit
       ( cocone-standard-sequential-colimit A)
       ( dup-standard-sequential-colimit)
 
@@ -104,7 +103,7 @@ module _
   map-cocone-standard-sequential-colimit :
     ( n : ℕ) → family-sequential-diagram A n → standard-sequential-colimit A
   map-cocone-standard-sequential-colimit =
-    map-cocone-sequential-diagram A (cocone-standard-sequential-colimit A)
+    map-cocone-sequential-diagram (cocone-standard-sequential-colimit A)
 
   coherence-cocone-standard-sequential-colimit :
     ( n : ℕ) →
@@ -113,7 +112,7 @@ module _
       ( map-cocone-standard-sequential-colimit (succ-ℕ n))
       ( map-sequential-diagram A n)
   coherence-cocone-standard-sequential-colimit =
-    coherence-cocone-sequential-diagram A
+    coherence-cocone-sequential-diagram
       ( cocone-standard-sequential-colimit A)
 ```
 
@@ -128,7 +127,7 @@ module _
     { X : UU l2} →
     (standard-sequential-colimit A → X) ≃ (cocone-sequential-diagram A X)
   pr1 equiv-up-standard-sequential-colimit =
-    cocone-map-sequential-diagram A (cocone-standard-sequential-colimit A)
+    cocone-map-sequential-diagram (cocone-standard-sequential-colimit A)
   pr2 (equiv-up-standard-sequential-colimit) =
     up-standard-sequential-colimit _
 
@@ -141,11 +140,11 @@ module _
   equiv-dup-standard-sequential-colimit :
     { P : standard-sequential-colimit A → UU l2} →
     ( (x : standard-sequential-colimit A) → P x) ≃
-    ( dependent-cocone-sequential-diagram A
+    ( dependent-cocone-sequential-diagram
       ( cocone-standard-sequential-colimit A)
       ( P))
   pr1 equiv-dup-standard-sequential-colimit =
-    dependent-cocone-map-sequential-diagram A
+    dependent-cocone-map-sequential-diagram
       ( cocone-standard-sequential-colimit A)
       ( _)
   pr2 equiv-dup-standard-sequential-colimit =
@@ -153,7 +152,7 @@ module _
 
   dependent-cogap-standard-sequential-colimit :
     { P : standard-sequential-colimit A → UU l2} →
-    dependent-cocone-sequential-diagram A
+    dependent-cocone-sequential-diagram
       ( cocone-standard-sequential-colimit A)
       ( P) →
     ( x : standard-sequential-colimit A) → P x
@@ -202,11 +201,11 @@ module _
 
   htpy-out-of-standard-sequential-colimit : UU (l1 ⊔ l2)
   htpy-out-of-standard-sequential-colimit =
-    htpy-cocone-sequential-diagram A
-      ( cocone-map-sequential-diagram A
+    htpy-cocone-sequential-diagram
+      ( cocone-map-sequential-diagram
         ( cocone-standard-sequential-colimit A)
         ( f))
-      ( cocone-map-sequential-diagram A
+      ( cocone-map-sequential-diagram
         ( cocone-standard-sequential-colimit A)
         ( g))
 
@@ -249,59 +248,51 @@ module _
   where
 
   universal-property-is-sequential-colimit :
-    is-sequential-colimit c → universal-property-sequential-colimit A c
+    is-sequential-colimit c → universal-property-sequential-colimit c
   universal-property-is-sequential-colimit =
     universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit
-      ( A)
       ( cocone-standard-sequential-colimit A)
       ( c)
       ( cogap-standard-sequential-colimit c)
-      ( htpy-cocone-universal-property-sequential-colimit A
-        ( cocone-standard-sequential-colimit A)
+      ( htpy-cocone-universal-property-sequential-colimit
         ( up-standard-sequential-colimit)
         ( c))
       ( up-standard-sequential-colimit)
 
   dependent-universal-property-is-sequential-colimit :
     is-sequential-colimit c →
-    dependent-universal-property-sequential-colimit A c
+    dependent-universal-property-sequential-colimit c
   dependent-universal-property-is-sequential-colimit =
     dependent-universal-property-sequential-colimit-is-equiv-dependent-universal-property-sequential-colimit
-      ( A)
       ( cocone-standard-sequential-colimit A)
       ( c)
       ( cogap-standard-sequential-colimit c)
-      ( htpy-cocone-universal-property-sequential-colimit A
-        ( cocone-standard-sequential-colimit A)
+      ( htpy-cocone-universal-property-sequential-colimit
         ( up-standard-sequential-colimit)
         ( c))
       ( dup-standard-sequential-colimit)
 
   is-sequential-colimit-universal-property :
-    universal-property-sequential-colimit A c → is-sequential-colimit c
+    universal-property-sequential-colimit c → is-sequential-colimit c
   is-sequential-colimit-universal-property =
     is-equiv-universal-property-sequential-colimit-universal-property-sequential-colimit
-      ( A)
       ( cocone-standard-sequential-colimit A)
       ( c)
       ( cogap-standard-sequential-colimit c)
-      ( htpy-cocone-universal-property-sequential-colimit A
-        ( cocone-standard-sequential-colimit A)
+      ( htpy-cocone-universal-property-sequential-colimit
         ( up-standard-sequential-colimit)
         ( c))
       ( up-standard-sequential-colimit)
 
   is-sequential-colimit-dependent-universal-property :
-    dependent-universal-property-sequential-colimit A c →
+    dependent-universal-property-sequential-colimit c →
     is-sequential-colimit c
   is-sequential-colimit-dependent-universal-property =
     is-equiv-dependent-universal-property-sequential-colimit-dependent-universal-property-sequential-colimit
-      ( A)
       ( cocone-standard-sequential-colimit A)
       ( c)
       ( cogap-standard-sequential-colimit c)
-      ( htpy-cocone-universal-property-sequential-colimit A
-        ( cocone-standard-sequential-colimit A)
+      ( htpy-cocone-universal-property-sequential-colimit
         ( up-standard-sequential-colimit)
         ( c))
       ( dup-standard-sequential-colimit)

@@ -128,15 +128,14 @@ module _
         ( cocone-standard-sequential-colimit B))
 
   htpy-cocone-map-hom-standard-sequential-colimit :
-    htpy-cocone-sequential-diagram A
-      ( cocone-map-sequential-diagram A
+    htpy-cocone-sequential-diagram
+      ( cocone-map-sequential-diagram
         ( cocone-standard-sequential-colimit A)
         ( map-hom-standard-sequential-colimit))
       ( map-cocone-hom-sequential-diagram f
         ( cocone-standard-sequential-colimit B))
   htpy-cocone-map-hom-standard-sequential-colimit =
-    htpy-cocone-universal-property-sequential-colimit A
-      ( cocone-standard-sequential-colimit A)
+    htpy-cocone-universal-property-sequential-colimit
       ( up-standard-sequential-colimit)
       ( map-cocone-hom-sequential-diagram f
         ( cocone-standard-sequential-colimit B))
@@ -149,7 +148,7 @@ module _
       ( map-cocone-standard-sequential-colimit n)
       ( map-hom-standard-sequential-colimit)
   htpy-htpy-cocone-map-hom-standard-sequential-colimit =
-    htpy-htpy-cocone-sequential-diagram A
+    htpy-htpy-cocone-sequential-diagram
       ( htpy-cocone-map-hom-standard-sequential-colimit)
 
   coherence-htpy-cocone-map-hom-standard-sequential-colimit :
@@ -158,14 +157,14 @@ module _
       ( htpy-htpy-cocone-map-hom-standard-sequential-colimit n)
       ( ( map-hom-standard-sequential-colimit) ·l
         ( coherence-cocone-standard-sequential-colimit n))
-      ( coherence-cocone-sequential-diagram A
+      ( coherence-cocone-sequential-diagram
           ( map-cocone-hom-sequential-diagram f
             ( cocone-standard-sequential-colimit B))
           ( n))
       ( ( htpy-htpy-cocone-map-hom-standard-sequential-colimit (succ-ℕ n)) ·r
         ( map-sequential-diagram A n))
   coherence-htpy-cocone-map-hom-standard-sequential-colimit =
-    coherence-htpy-htpy-cocone-sequential-diagram A
+    coherence-htpy-htpy-cocone-sequential-diagram
       ( htpy-cocone-map-hom-standard-sequential-colimit)
 
   prism-htpy-cocone-map-hom-standard-sequential-colimit :
@@ -308,7 +307,7 @@ module _
       ( htpy-htpy-cocone-map-hom-standard-sequential-colimit C
         ( comp-hom-sequential-diagram A B C g f)
         ( n))
-      ( coherence-cocone-sequential-diagram A
+      ( coherence-cocone-sequential-diagram
         ( map-cocone-hom-sequential-diagram
           ( comp-hom-sequential-diagram A B C g f)
           ( cocone-standard-sequential-colimit C))
