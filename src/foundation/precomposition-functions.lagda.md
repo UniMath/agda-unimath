@@ -13,7 +13,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.precomposition-dependent-functions
 open import foundation.sections
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps

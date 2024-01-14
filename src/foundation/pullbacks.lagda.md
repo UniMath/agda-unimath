@@ -16,10 +16,8 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.descent-equivalences
-open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -27,10 +25,6 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.multivariable-homotopies
-open import foundation.postcomposition-functions
-open import foundation.retractions
-open import foundation.sections
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -39,9 +33,13 @@ open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.postcomposition-functions
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
@@ -378,20 +376,22 @@ module _
       is-equiv (htpy-parallel-cone-refl-htpy-htpy-cone c c')
     is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone (p , q , H) (p' , q' , H') =
       is-equiv-tot-is-fiberwise-equiv
-        ( λ K → is-equiv-tot-is-fiberwise-equiv
-          ( λ L → is-equiv-comp
-            ( concat-htpy
-              ( ap-concat-htpy H right-unit-htpy)
-              ( (f ·l K) ∙h refl-htpy ∙h H'))
-            ( concat-htpy'
-              ( H ∙h (g ·l L))
-              ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
-            ( is-equiv-concat-htpy'
-              ( H ∙h (g ·l L))
-              ( λ x → ap (_∙ H' x) (inv right-unit)))
-            ( is-equiv-concat-htpy
-              ( λ x → ap (H x ∙_) right-unit)
-              ( (f ·l K) ∙h refl-htpy ∙h H'))))
+        ( λ K →
+          is-equiv-tot-is-fiberwise-equiv
+            ( λ L →
+              is-equiv-comp
+                ( concat-htpy
+                  ( ap-concat-htpy H right-unit-htpy)
+                  ( (f ·l K) ∙h refl-htpy ∙h H'))
+                ( concat-htpy'
+                  ( H ∙h (g ·l L))
+                  ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
+                ( is-equiv-concat-htpy'
+                  ( H ∙h (g ·l L))
+                  ( λ x → ap (_∙ H' x) (inv right-unit)))
+                ( is-equiv-concat-htpy
+                  ( λ x → ap (H x ∙_) right-unit)
+                  ( (f ·l K) ∙h refl-htpy ∙h H'))))
 
   abstract
     is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy :

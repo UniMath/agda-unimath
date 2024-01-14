@@ -8,12 +8,8 @@ module orthogonal-factorization-systems.local-maps where
 
 ```agda
 open import foundation.cartesian-morphisms-arrows
-open import foundation.constant-maps
-open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.precomposition-functions
 open import foundation.propositions
-open import foundation.pullbacks
 open import foundation.unit-type
 open import foundation.universe-levels
 

@@ -14,8 +14,6 @@ open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.homotopy-induction
 open import foundation.path-algebra
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -24,6 +22,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.postcomposition-functions
+open import foundation-core.precomposition-functions
 ```
 
 </details>

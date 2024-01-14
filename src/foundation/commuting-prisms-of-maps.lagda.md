@@ -9,13 +9,10 @@ open import foundation-core.commuting-prisms-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.composition-algebra
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.postcomposition-functions
@@ -24,6 +21,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies

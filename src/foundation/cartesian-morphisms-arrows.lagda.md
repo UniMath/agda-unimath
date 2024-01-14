@@ -7,16 +7,17 @@ module foundation.cartesian-morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.morphisms-arrows
-open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.unit-type
-open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
+
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.propositions
+open import foundation-core.universal-property-pullbacks
 ```
 
 </details>

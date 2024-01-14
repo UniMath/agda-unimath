@@ -10,15 +10,12 @@ module orthogonal-factorization-systems.orthogonal-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-maps
 open import foundation.composition-algebra
-open import foundation.cones-over-cospans
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -27,8 +24,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
@@ -40,7 +35,6 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-equivalences
 open import foundation.universal-property-pullbacks
-open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 

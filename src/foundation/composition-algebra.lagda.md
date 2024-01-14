@@ -9,16 +9,14 @@ module foundation.composition-algebra where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.homotopy-induction
-open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies
 ```
 

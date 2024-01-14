@@ -11,17 +11,13 @@ open import foundation-core.function-extensionality public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
-open import foundation.dependent-pair-types
-open import foundation.implicit-function-types
-open import foundation.injective-maps
 open import foundation.postcomposition-dependent-functions
-open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
 open import foundation-core.whiskering-homotopies

@@ -13,7 +13,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences

@@ -9,10 +9,10 @@ module foundation.pullback-squares where
 ```agda
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
-open import foundation.pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 

@@ -16,7 +16,6 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.families-of-equivalences
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
