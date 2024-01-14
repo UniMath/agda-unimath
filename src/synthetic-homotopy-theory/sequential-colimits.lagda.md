@@ -47,6 +47,58 @@ In other words, the sequential colimit universally completes the diagram
 We often abuse notation and write `A∞` for just the codomain of the universal
 cocone. You may also see the colimit written as `colimₙ Aₙ`.
 
+## Definitions
+
+### Homotopies between maps out of sequential colimits
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
+  ( c : cocone-sequential-diagram A X)
+  where
+
+  htpy-out-of-sequential-colimit : {Y : UU l3} (f g : X → Y) → UU (l1 ⊔ l3)
+  htpy-out-of-sequential-colimit f g =
+    htpy-cocone-sequential-diagram
+      ( cocone-map-sequential-diagram c f)
+      ( cocone-map-sequential-diagram c g)
+
+  equiv-htpy-htpy-out-of-sequential-colimit :
+    universal-property-sequential-colimit c →
+    {Y : UU l3} (f g : X → Y) →
+    htpy-out-of-sequential-colimit f g ≃ (f ~ g)
+  equiv-htpy-htpy-out-of-sequential-colimit up-c f g =
+    ( inv-equiv
+      ( equiv-dependent-universal-property-sequential-colimit
+        ( dependent-universal-property-universal-property-sequential-colimit c
+          ( up-c)))) ∘e
+    ( equiv-tot
+      ( λ K →
+        equiv-Π-equiv-family
+          ( λ n →
+            equiv-Π-equiv-family
+              ( λ a →
+                compute-dependent-identification-eq-value-function f g
+                  ( coherence-cocone-sequential-diagram c n a)
+                  ( K n a)
+                  ( K (succ-ℕ n) (map-sequential-diagram A n a))))))
+```
+
+### Components of a homotopy between maps out of sequential colimits
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
+  { c : cocone-sequential-diagram A X}
+  ( up-c : universal-property-sequential-colimit c) {Y : UU l3} {f g : X → Y}
+  ( H : htpy-out-of-sequential-colimit c f g)
+  where
+
+  htpy-htpy-out-of-sequential-colimit : f ~ g
+  htpy-htpy-out-of-sequential-colimit =
+    map-equiv (equiv-htpy-htpy-out-of-sequential-colimit c up-c f g) H
+```
+
 ## Properties
 
 ### All sequential diagrams admit a standard colimit
@@ -201,28 +253,16 @@ module _
 
   htpy-out-of-standard-sequential-colimit : UU (l1 ⊔ l2)
   htpy-out-of-standard-sequential-colimit =
-    htpy-cocone-sequential-diagram
-      ( cocone-map-sequential-diagram
-        ( cocone-standard-sequential-colimit A)
-        ( f))
-      ( cocone-map-sequential-diagram
-        ( cocone-standard-sequential-colimit A)
-        ( g))
+    htpy-out-of-sequential-colimit (cocone-standard-sequential-colimit A) f g
 
   equiv-htpy-htpy-out-of-standard-sequential-colimit :
     htpy-out-of-standard-sequential-colimit ≃ (f ~ g)
   equiv-htpy-htpy-out-of-standard-sequential-colimit =
-    ( inv-equiv equiv-dup-standard-sequential-colimit) ∘e
-    ( equiv-tot
-      ( λ K →
-        equiv-Π-equiv-family
-          ( λ n →
-            equiv-Π-equiv-family
-              ( λ a →
-                compute-dependent-identification-eq-value-function f g
-                  ( coherence-cocone-standard-sequential-colimit n a)
-                  ( K n a)
-                  ( K (succ-ℕ n) (map-sequential-diagram A n a))))))
+    equiv-htpy-htpy-out-of-sequential-colimit
+      ( cocone-standard-sequential-colimit A)
+      ( up-standard-sequential-colimit)
+      ( f)
+      ( g)
 ```
 
 We may then obtain a homotopy of maps from a homotopy of their induced cocones.
@@ -236,7 +276,9 @@ module _
 
   htpy-htpy-out-of-standard-sequential-colimit : f ~ g
   htpy-htpy-out-of-standard-sequential-colimit =
-    map-equiv (equiv-htpy-htpy-out-of-standard-sequential-colimit A f g) H
+    htpy-htpy-out-of-sequential-colimit
+      ( up-standard-sequential-colimit)
+      ( H)
 ```
 
 ### A type satisfies `is-sequential-colimit` if and only if it has the (dependent) universal property of sequential colimits
