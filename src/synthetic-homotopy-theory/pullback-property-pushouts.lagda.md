@@ -50,31 +50,31 @@ square is a [pullback](foundation-core.universal-property-pullbacks.md).
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   cone-pullback-property-pushout :
     {l : Level} (Y : UU l) →
-    cone (_∘ left-map-span-diagram s) (_∘ right-map-span-diagram s) (X → Y)
+    cone (_∘ left-map-span-diagram 𝒮) (_∘ right-map-span-diagram 𝒮) (X → Y)
   pr1 (cone-pullback-property-pushout Y) =
-    precomp (left-map-cocone-span-diagram s c) Y
+    precomp (left-map-cocone-span-diagram 𝒮 c) Y
   pr1 (pr2 (cone-pullback-property-pushout Y)) =
-    precomp (right-map-cocone-span-diagram s c) Y
+    precomp (right-map-cocone-span-diagram 𝒮 c) Y
   pr2 (pr2 (cone-pullback-property-pushout Y)) =
     precomp-coherence-square-maps
-      ( right-map-span-diagram s)
-      ( left-map-span-diagram s)
-      ( right-map-cocone-span-diagram s c)
-      ( left-map-cocone-span-diagram s c)
-      ( coherence-square-cocone-span-diagram s c)
+      ( right-map-span-diagram 𝒮)
+      ( left-map-span-diagram 𝒮)
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( left-map-cocone-span-diagram 𝒮 c)
+      ( coherence-square-cocone-span-diagram 𝒮 c)
       ( Y)
 
   pullback-property-pushout : UUω
   pullback-property-pushout =
     {l : Level} (Y : UU l) →
     is-pullback
-      ( precomp (left-map-span-diagram s) Y)
-      ( precomp (right-map-span-diagram s) Y)
+      ( precomp (left-map-span-diagram 𝒮) Y)
+      ( precomp (right-map-span-diagram 𝒮) Y)
       ( cone-pullback-property-pushout Y)
 ```

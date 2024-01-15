@@ -82,7 +82,7 @@ property of the indexing pushout.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
   { X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
   where
 
@@ -183,7 +183,7 @@ descent data.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
   { X : UU l4} (c : cocone-span-diagram s X)
   ( P : structure-type-family-pushout l5 s)
   ( Q : X → UU l5)

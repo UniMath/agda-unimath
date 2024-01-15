@@ -55,14 +55,14 @@ is an [equivalence](foundation-core.equivalences.md).
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   dependent-universal-property-pushout : UUω
   dependent-universal-property-pushout =
     {l : Level} (P : X → UU l) →
-    is-equiv (dependent-cocone-map-span-diagram s c P)
+    is-equiv (dependent-cocone-map-span-diagram 𝒮 c P)
 
   module _
     (U : dependent-universal-property-pushout)
@@ -71,19 +71,19 @@ module _
 
     abstract
       map-dependent-universal-property-pushout :
-        dependent-cocone-span-diagram s c P → ((x : X) → P x)
+        dependent-cocone-span-diagram 𝒮 c P → ((x : X) → P x)
       map-dependent-universal-property-pushout =
         map-inv-is-equiv (U P)
 
       compute-map-dependent-universal-property-pushout :
-        (d : dependent-cocone-span-diagram s c P) →
-        htpy-dependent-cocone-span-diagram s c P
-          ( dependent-cocone-map-span-diagram s c P
+        (d : dependent-cocone-span-diagram 𝒮 c P) →
+        htpy-dependent-cocone-span-diagram 𝒮 c P
+          ( dependent-cocone-map-span-diagram 𝒮 c P
             ( map-dependent-universal-property-pushout d))
           ( d)
       compute-map-dependent-universal-property-pushout d =
-        htpy-eq-dependent-cocone-span-diagram s c P
-          ( dependent-cocone-map-span-diagram s c P
+        htpy-eq-dependent-cocone-span-diagram 𝒮 c P
+          ( dependent-cocone-map-span-diagram 𝒮 c P
             ( map-dependent-universal-property-pushout d))
           ( d)
           ( is-section-map-inv-is-equiv (U P) d)
@@ -95,10 +95,10 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 l : Level} (s : span-diagram l1 l2 l3)
-  { X : UU l4} ( c : cocone-span-diagram s X)
-  ( U : dependent-universal-property-pushout s c)
-  ( P : X → UU l) (h : dependent-cocone-span-diagram s c P)
+  { l1 l2 l3 l4 l : Level} (𝒮 : span-diagram l1 l2 l3)
+  { X : UU l4} ( c : cocone-span-diagram 𝒮 X)
+  ( U : dependent-universal-property-pushout 𝒮 c)
+  ( P : X → UU l) (h : dependent-cocone-span-diagram 𝒮 c P)
   where
 
   abstract
@@ -106,16 +106,16 @@ module _
       is-contr
         ( Σ ( (x : X) → P x)
             ( λ k →
-              htpy-dependent-cocone-span-diagram s c P
-                ( dependent-cocone-map-span-diagram s c P k)
+              htpy-dependent-cocone-span-diagram 𝒮 c P
+                ( dependent-cocone-map-span-diagram 𝒮 c P k)
                 ( h)))
     uniqueness-dependent-universal-property-pushout =
       is-contr-equiv'
-        ( fiber (dependent-cocone-map-span-diagram s c P) h)
+        ( fiber (dependent-cocone-map-span-diagram 𝒮 c P) h)
         ( equiv-tot
           ( λ k →
-            extensionality-dependent-cocone-span-diagram s c P
-              ( dependent-cocone-map-span-diagram s c P k)
+            extensionality-dependent-cocone-span-diagram 𝒮 c P
+              ( dependent-cocone-map-span-diagram 𝒮 c P k)
               ( h)))
         ( is-contr-map-is-equiv (U P) h)
 ```
@@ -126,73 +126,73 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  { X : UU l4} (c : cocone-span-diagram s X)
-  ( H : induction-principle-pushout s c)
+  { l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  ( H : induction-principle-pushout 𝒮 c)
   where
 
   htpy-eq-dependent-cocone-map-span-diagram :
     {l : Level} {P : X → UU l} (h h' : (x : X) → P x) →
-    dependent-cocone-map-span-diagram s c P h ＝
-    dependent-cocone-map-span-diagram s c P h' →
+    dependent-cocone-map-span-diagram 𝒮 c P h ＝
+    dependent-cocone-map-span-diagram 𝒮 c P h' →
     h ~ h'
   htpy-eq-dependent-cocone-map-span-diagram {l} {P} h h' p =
-    ind-induction-principle-pushout s c H
+    ind-induction-principle-pushout 𝒮 c H
       ( λ x → Id (h x) (h' x))
       ( pair
-        ( left-htpy-eq-dependent-cocone-span-diagram s c P
-          ( dependent-cocone-map-span-diagram s c P h)
-          ( dependent-cocone-map-span-diagram s c P h')
+        ( left-htpy-eq-dependent-cocone-span-diagram 𝒮 c P
+          ( dependent-cocone-map-span-diagram 𝒮 c P h)
+          ( dependent-cocone-map-span-diagram 𝒮 c P h')
           ( p))
         ( pair
-          ( right-htpy-eq-dependent-cocone-span-diagram s c P
-            ( dependent-cocone-map-span-diagram s c P h)
-            ( dependent-cocone-map-span-diagram s c P h')
+          ( right-htpy-eq-dependent-cocone-span-diagram 𝒮 c P
+            ( dependent-cocone-map-span-diagram 𝒮 c P h)
+            ( dependent-cocone-map-span-diagram 𝒮 c P h')
             ( p))
-          ( λ x →
+          ( λ s →
             map-compute-dependent-identification-eq-value h h'
-              ( coherence-square-cocone-span-diagram s c x)
-              ( left-htpy-eq-dependent-cocone-span-diagram s c P
-                ( dependent-cocone-map-span-diagram s c P h)
-                ( dependent-cocone-map-span-diagram s c P h')
+              ( coherence-square-cocone-span-diagram 𝒮 c s)
+              ( left-htpy-eq-dependent-cocone-span-diagram 𝒮 c P
+                ( dependent-cocone-map-span-diagram 𝒮 c P h)
+                ( dependent-cocone-map-span-diagram 𝒮 c P h')
                 ( p)
-                ( left-map-span-diagram s x))
-              ( right-htpy-eq-dependent-cocone-span-diagram s c P
-                ( dependent-cocone-map-span-diagram s c P h)
-                ( dependent-cocone-map-span-diagram s c P h')
+                ( left-map-span-diagram 𝒮 s))
+              ( right-htpy-eq-dependent-cocone-span-diagram 𝒮 c P
+                ( dependent-cocone-map-span-diagram 𝒮 c P h)
+                ( dependent-cocone-map-span-diagram 𝒮 c P h')
                 ( p)
-                ( right-map-span-diagram s x))
-              ( coherence-square-htpy-eq-dependent-cocone-span-diagram s c P
-                ( dependent-cocone-map-span-diagram s c P h)
-                ( dependent-cocone-map-span-diagram s c P h')
+                ( right-map-span-diagram 𝒮 s))
+              ( coherence-square-htpy-eq-dependent-cocone-span-diagram 𝒮 c P
+                ( dependent-cocone-map-span-diagram 𝒮 c P h)
+                ( dependent-cocone-map-span-diagram 𝒮 c P h')
                 ( p)
-                ( x)))))
+                ( s)))))
 
   dependent-universal-property-pushout-induction-principle-pushout :
-    dependent-universal-property-pushout s c
+    dependent-universal-property-pushout 𝒮 c
   dependent-universal-property-pushout-induction-principle-pushout P =
     is-equiv-is-invertible
-      ( ind-induction-principle-pushout s c H P)
-      ( eq-compute-ind-induction-principle-pushout s c H P)
+      ( ind-induction-principle-pushout 𝒮 c H P)
+      ( eq-compute-ind-induction-principle-pushout 𝒮 c H P)
       ( λ h →
         eq-htpy
           ( htpy-eq-dependent-cocone-map-span-diagram
-            ( ind-induction-principle-pushout s c H P
-              ( dependent-cocone-map-span-diagram s c P h))
+            ( ind-induction-principle-pushout 𝒮 c H P
+              ( dependent-cocone-map-span-diagram 𝒮 c P h))
             ( h)
-            ( eq-compute-ind-induction-principle-pushout s c H P
-              ( dependent-cocone-map-span-diagram s c P h))))
+            ( eq-compute-ind-induction-principle-pushout 𝒮 c H P
+              ( dependent-cocone-map-span-diagram 𝒮 c P h))))
 ```
 
 #### The dependent universal property of pushouts implies the induction principle of pushouts
 
 ```agda
 induction-principle-pushout-dependent-universal-property-pushout :
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X) →
-  dependent-universal-property-pushout s c →
-  induction-principle-pushout s c
-induction-principle-pushout-dependent-universal-property-pushout s c U P =
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) →
+  dependent-universal-property-pushout 𝒮 c →
+  induction-principle-pushout 𝒮 c
+induction-principle-pushout-dependent-universal-property-pushout 𝒮 c U P =
   pr1 (U P)
 ```
 
@@ -202,29 +202,29 @@ induction-principle-pushout-dependent-universal-property-pushout s c U P =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   triangle-dependent-pullback-property-pushout :
     {l5 : Level} (P : X → UU l5) →
     coherence-triangle-maps
-      ( dependent-cocone-map-span-diagram s c P)
+      ( dependent-cocone-map-span-diagram 𝒮 c P)
       ( tot (λ h → tot (λ h' → htpy-eq)))
       ( gap
         ( λ ( h :
-              ( a : domain-span-diagram s) →
-              P (left-map-cocone-span-diagram s c a))
-            ( x : spanning-type-span-diagram s) →
+              ( a : domain-span-diagram 𝒮) →
+              P (left-map-cocone-span-diagram 𝒮 c a))
+            ( s : spanning-type-span-diagram 𝒮) →
           tr P
-            ( coherence-square-cocone-span-diagram s c x)
-            ( h (left-map-span-diagram s x)))
+            ( coherence-square-cocone-span-diagram 𝒮 c s)
+            ( h (left-map-span-diagram 𝒮 s)))
         ( λ ( h :
-              ( b : codomain-span-diagram s) →
-              P (right-map-cocone-span-diagram s c b))
-            ( x : spanning-type-span-diagram s) →
-          h (right-map-span-diagram s x))
-        ( cone-dependent-pullback-property-pushout s c P))
+              ( b : codomain-span-diagram 𝒮) →
+              P (right-map-cocone-span-diagram 𝒮 c b))
+            ( s : spanning-type-span-diagram 𝒮) →
+          h (right-map-span-diagram 𝒮 s))
+        ( cone-dependent-pullback-property-pushout 𝒮 c P))
   triangle-dependent-pullback-property-pushout P h =
     eq-pair-Σ
       ( refl)
@@ -232,32 +232,32 @@ module _
         ( refl)
         ( inv
           ( is-section-eq-htpy
-            ( apd h ∘ coherence-square-cocone-span-diagram s c))))
+            ( apd h ∘ coherence-square-cocone-span-diagram 𝒮 c))))
 
   dependent-pullback-property-dependent-universal-property-pushout :
-    dependent-universal-property-pushout s c →
-    dependent-pullback-property-pushout s c
+    dependent-universal-property-pushout 𝒮 c →
+    dependent-pullback-property-pushout 𝒮 c
   dependent-pullback-property-dependent-universal-property-pushout I P =
     is-equiv-top-map-triangle
-      ( dependent-cocone-map-span-diagram s c P)
+      ( dependent-cocone-map-span-diagram 𝒮 c P)
       ( tot (λ h → tot (λ h' → htpy-eq)))
       ( gap
-        ( λ h x →
+        ( λ h s →
           tr P
-            ( coherence-square-cocone-span-diagram s c x)
-            ( h (left-map-span-diagram s x)))
-        ( _∘ right-map-span-diagram s)
-        ( cone-dependent-pullback-property-pushout s c P))
+            ( coherence-square-cocone-span-diagram 𝒮 c s)
+            ( h (left-map-span-diagram 𝒮 s)))
+        ( _∘ right-map-span-diagram 𝒮)
+        ( cone-dependent-pullback-property-pushout 𝒮 c P))
         ( triangle-dependent-pullback-property-pushout P)
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ h → is-equiv-tot-is-fiberwise-equiv
           ( λ h' →
             funext
-              ( λ x →
+              ( λ s →
                 tr P
-                  ( coherence-square-cocone-span-diagram s c x)
-                  ( h (left-map-span-diagram s x)))
-              ( h' ∘ right-map-span-diagram s))))
+                  ( coherence-square-cocone-span-diagram 𝒮 c s)
+                  ( h (left-map-span-diagram 𝒮 s)))
+              ( h' ∘ right-map-span-diagram 𝒮))))
       ( I P)
 ```
 
@@ -265,34 +265,34 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   dependent-universal-property-dependent-pullback-property-pushout :
-    dependent-pullback-property-pushout s c →
-    dependent-universal-property-pushout s c
+    dependent-pullback-property-pushout 𝒮 c →
+    dependent-universal-property-pushout 𝒮 c
   dependent-universal-property-dependent-pullback-property-pushout U P =
     is-equiv-left-map-triangle
-      ( dependent-cocone-map-span-diagram s c P)
+      ( dependent-cocone-map-span-diagram 𝒮 c P)
       ( tot (λ h → tot (λ h' → htpy-eq)))
       ( gap
-        ( λ h x →
+        ( λ h s →
           tr P
-            ( coherence-square-cocone-span-diagram s c x)
-            ( h (left-map-span-diagram s x)))
-        ( _∘ right-map-span-diagram s)
-        ( cone-dependent-pullback-property-pushout s c P))
-      ( triangle-dependent-pullback-property-pushout s c P)
+            ( coherence-square-cocone-span-diagram 𝒮 c s)
+            ( h (left-map-span-diagram 𝒮 s)))
+        ( _∘ right-map-span-diagram 𝒮)
+        ( cone-dependent-pullback-property-pushout 𝒮 c P))
+      ( triangle-dependent-pullback-property-pushout 𝒮 c P)
       ( U P)
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ h →
           is-equiv-tot-is-fiberwise-equiv
             ( λ h' →
               funext
-                ( λ x →
+                ( λ s →
                   tr P
-                    ( coherence-square-cocone-span-diagram s c x)
-                    ( h (left-map-span-diagram s x)))
-                ( h' ∘ right-map-span-diagram s))))
+                    ( coherence-square-cocone-span-diagram 𝒮 c s)
+                    ( h (left-map-span-diagram 𝒮 s)))
+                ( h' ∘ right-map-span-diagram 𝒮))))
 ```

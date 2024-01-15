@@ -45,16 +45,16 @@ module _
   where
 
   extend-span-diagram :
-    (s : span-diagram l1 l2 l3)
-    {A' : UU l4} (f : domain-span-diagram s → A')
-    {B' : UU l5} (g : codomain-span-diagram s → B') →
+    (𝒮 : span-diagram l1 l2 l3)
+    {A' : UU l4} (f : domain-span-diagram 𝒮 → A')
+    {B' : UU l5} (g : codomain-span-diagram 𝒮 → B') →
     span-diagram l4 l5 l3
-  pr1 (extend-span-diagram s {A'} f {B'} g) =
+  pr1 (extend-span-diagram 𝒮 {A'} f {B'} g) =
     A'
-  pr1 (pr2 (extend-span-diagram s {A'} f {B'} g)) =
+  pr1 (pr2 (extend-span-diagram 𝒮 {A'} f {B'} g)) =
     B'
-  pr2 (pr2 (extend-span-diagram s {A'} f {B'} g)) =
-    extend-span (span-span-diagram s) f g
+  pr2 (pr2 (extend-span-diagram 𝒮 {A'} f {B'} g)) =
+    extend-span (span-span-diagram 𝒮) f g
 ```
 
 ### Extensions on the left
@@ -65,9 +65,9 @@ module _
   where
 
   left-extend-span-diagram :
-    (s : span-diagram l1 l2 l3) {A' : UU l4} →
-    (domain-span-diagram s → A') → span-diagram l4 l2 l3
-  left-extend-span-diagram s f = extend-span-diagram s f id
+    (𝒮 : span-diagram l1 l2 l3) {A' : UU l4} →
+    (domain-span-diagram 𝒮 → A') → span-diagram l4 l2 l3
+  left-extend-span-diagram 𝒮 f = extend-span-diagram 𝒮 f id
 ```
 
 ### Extensions on the right
@@ -78,9 +78,9 @@ module _
   where
 
   right-extend-span-diagram :
-    (s : span-diagram l1 l2 l3) {B' : UU l4} →
-    (codomain-span-diagram s → B') → span-diagram l1 l4 l3
-  right-extend-span-diagram s g = extend-span-diagram s id g
+    (𝒮 : span-diagram l1 l2 l3) {B' : UU l4} →
+    (codomain-span-diagram 𝒮 → B') → span-diagram l1 l4 l3
+  right-extend-span-diagram 𝒮 g = extend-span-diagram 𝒮 id g
 ```
 
 ### Extensions by morphisms of arrows on the left
@@ -108,16 +108,16 @@ Then we obtain a span diagram `A' <- S' -> B`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
   {S' : UU l4} {A' : UU l5} (f' : S' → A')
-  (h : hom-arrow f' (left-map-span-diagram s))
+  (h : hom-arrow f' (left-map-span-diagram 𝒮))
   where
 
   domain-left-extend-hom-arrow-span-diagram : UU l5
   domain-left-extend-hom-arrow-span-diagram = A'
 
   codomain-left-extend-hom-arrow-span-diagram : UU l2
-  codomain-left-extend-hom-arrow-span-diagram = codomain-span-diagram s
+  codomain-left-extend-hom-arrow-span-diagram = codomain-span-diagram 𝒮
 
   span-left-extend-hom-arrow-span-diagram :
     span l4
@@ -125,7 +125,7 @@ module _
       ( codomain-left-extend-hom-arrow-span-diagram)
   span-left-extend-hom-arrow-span-diagram =
     left-extend-hom-arrow-span
-      ( span-span-diagram s)
+      ( span-span-diagram 𝒮)
       ( f')
       ( h)
 
@@ -182,13 +182,13 @@ Then we obtain a span diagram `A <- S' -> B'`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
   {S' : UU l4} {B' : UU l5} (g' : S' → B')
-  (h : hom-arrow g' (right-map-span-diagram s))
+  (h : hom-arrow g' (right-map-span-diagram 𝒮))
   where
 
   domain-right-extend-hom-arrow-span-diagram : UU l1
-  domain-right-extend-hom-arrow-span-diagram = domain-span-diagram s
+  domain-right-extend-hom-arrow-span-diagram = domain-span-diagram 𝒮
 
   codomain-right-extend-hom-arrow-span-diagram : UU l5
   codomain-right-extend-hom-arrow-span-diagram = B'
@@ -199,7 +199,7 @@ module _
       ( codomain-right-extend-hom-arrow-span-diagram)
   span-right-extend-hom-arrow-span-diagram =
     right-extend-hom-arrow-span
-      ( span-span-diagram s)
+      ( span-span-diagram 𝒮)
       ( g')
       ( h)
 

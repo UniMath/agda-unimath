@@ -46,18 +46,18 @@ module _
   pr2 (pr2 (pr2 (pr2 (make-span-diagram f g)))) = g
 
 module _
-  {l1 l2 l3 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
   domain-span-diagram : UU l1
-  domain-span-diagram = pr1 s
+  domain-span-diagram = pr1 𝒮
 
   codomain-span-diagram : UU l2
-  codomain-span-diagram = pr1 (pr2 s)
+  codomain-span-diagram = pr1 (pr2 𝒮)
 
   span-span-diagram :
     span l3 domain-span-diagram codomain-span-diagram
-  span-span-diagram = pr2 (pr2 s)
+  span-span-diagram = pr2 (pr2 𝒮)
 
   spanning-type-span-diagram : UU l3
   spanning-type-span-diagram =

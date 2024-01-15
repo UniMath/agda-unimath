@@ -43,7 +43,7 @@ implies that the left map in the
           /       \
        ≃ /         \
         ∨           ∨
-  cocone s 𝒰 --> Σ (P : A → 𝒰) (Q : B → 𝒰), Π (x : S) → P (f x) ≃ Q (g x)
+  cocone s 𝒰 --> Σ (P : A → 𝒰) (Q : B → 𝒰), Π (s : S) → P (f s) ≃ Q (g s)
               ≃
 ```
 
@@ -56,7 +56,7 @@ consists of triples `(P , Q , e)` consisting of
 ```text
   P : A → 𝒰
   Q : B → 𝒰
-  e : Π (x : S) → P (f x) ≃ Q (g x).
+  e : Π (s : S) → P (f s) ≃ Q (g s).
 ```
 
 In other words, for any such triple `(P , Q , e)`, the type of families
@@ -72,16 +72,16 @@ and a family of [homotopies](foundation-core.homotopies.md) witnessing that the
 square of equivalences
 
 ```text
-             u (f x)
-    P (f x) --------> Y (i (f x))
+             u (f s)
+    P (f s) --------> Y (i (f s))
       |                   |
-  e x |                   | tr Y (H x)
+  e s |                   | tr Y (H s)
       V                   V
-    Q (g x) --------> Y (j (g x))
-             v (g x)
+    Q (g s) --------> Y (j (g s))
+             v (g s)
 ```
 
-[commutes](foundation-core.commuting-squares-of-maps.md) for each `x : S` is
+[commutes](foundation-core.commuting-squares-of-maps.md) for each `s : S` is
 [contractible](foundation-core.contractible-types.md).
 
 ## Definitions
@@ -94,46 +94,46 @@ assume that the families `A → 𝒰` and `B → 𝒰` are of the same
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (l : Level) (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 : Level} (l : Level) (𝒮 : span-diagram l1 l2 l3)
   where
 
   structure-type-family-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
   structure-type-family-pushout =
-    Σ ( domain-span-diagram s → UU l)
+    Σ ( domain-span-diagram 𝒮 → UU l)
       ( λ PA →
-        Σ ( codomain-span-diagram s → UU l)
+        Σ ( codomain-span-diagram 𝒮 → UU l)
           ( λ PB →
-            (x : spanning-type-span-diagram s) →
-            PA (left-map-span-diagram s x) ≃ PB (right-map-span-diagram s x)))
+            (s : spanning-type-span-diagram 𝒮) →
+            PA (left-map-span-diagram 𝒮 s) ≃ PB (right-map-span-diagram 𝒮 s)))
 
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  (P : structure-type-family-pushout l4 s)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  (P : structure-type-family-pushout l4 𝒮)
   where
 
   left-type-family-structure-type-family-pushout :
-    domain-span-diagram s → UU l4
+    domain-span-diagram 𝒮 → UU l4
   left-type-family-structure-type-family-pushout = pr1 P
 
   right-type-family-structure-type-family-pushout :
-    codomain-span-diagram s → UU l4
+    codomain-span-diagram 𝒮 → UU l4
   right-type-family-structure-type-family-pushout = pr1 (pr2 P)
 
   spanning-type-family-structure-type-family-pushout :
-    spanning-type-span-diagram s → UU l4
+    spanning-type-span-diagram 𝒮 → UU l4
   spanning-type-family-structure-type-family-pushout =
-    left-type-family-structure-type-family-pushout ∘ left-map-span-diagram s
+    left-type-family-structure-type-family-pushout ∘ left-map-span-diagram 𝒮
 
   matching-equiv-structure-type-family-pushout :
-    (x : spanning-type-span-diagram s) →
-    left-type-family-structure-type-family-pushout (left-map-span-diagram s x) ≃
-    right-type-family-structure-type-family-pushout (right-map-span-diagram s x)
+    (x : spanning-type-span-diagram 𝒮) →
+    left-type-family-structure-type-family-pushout (left-map-span-diagram 𝒮 x) ≃
+    right-type-family-structure-type-family-pushout (right-map-span-diagram 𝒮 x)
   matching-equiv-structure-type-family-pushout = pr2 (pr2 P)
 
   map-matching-equiv-structure-type-family-pushout :
-    (x : spanning-type-span-diagram s) →
-    left-type-family-structure-type-family-pushout (left-map-span-diagram s x) →
-    right-type-family-structure-type-family-pushout (right-map-span-diagram s x)
-  map-matching-equiv-structure-type-family-pushout x =
-    map-equiv (matching-equiv-structure-type-family-pushout x)
+    (s : spanning-type-span-diagram 𝒮) →
+    left-type-family-structure-type-family-pushout (left-map-span-diagram 𝒮 s) →
+    right-type-family-structure-type-family-pushout (right-map-span-diagram 𝒮 s)
+  map-matching-equiv-structure-type-family-pushout s =
+    map-equiv (matching-equiv-structure-type-family-pushout s)
 ```

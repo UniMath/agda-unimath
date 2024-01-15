@@ -37,11 +37,11 @@ is the span diagram
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
   transposition-span-diagram : span-diagram l2 l1 l3
-  pr1 transposition-span-diagram = codomain-span-diagram s
-  pr1 (pr2 transposition-span-diagram) = domain-span-diagram s
-  pr2 (pr2 transposition-span-diagram) = opposite-span (span-span-diagram s)
+  pr1 transposition-span-diagram = codomain-span-diagram 𝒮
+  pr1 (pr2 transposition-span-diagram) = domain-span-diagram 𝒮
+  pr2 (pr2 transposition-span-diagram) = opposite-span (span-span-diagram 𝒮)
 ```

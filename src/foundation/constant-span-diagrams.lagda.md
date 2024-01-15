@@ -55,10 +55,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
   is-constant-span-diagram : UU (l1 ⊔ l2 ⊔ l3)
   is-constant-span-diagram =
-    is-equiv (left-map-span-diagram s) × is-equiv (right-map-span-diagram s)
+    is-equiv (left-map-span-diagram 𝒮) × is-equiv (right-map-span-diagram 𝒮)
 ```

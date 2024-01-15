@@ -47,63 +47,63 @@ of pushouts is shown in
 
 ```agda
 induction-principle-pushout :
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X) → UUω
-induction-principle-pushout s {X} c =
-  {l : Level} (P : X → UU l) → section (dependent-cocone-map-span-diagram s c P)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) → UUω
+induction-principle-pushout 𝒮 {X} c =
+  {l : Level} (P : X → UU l) → section (dependent-cocone-map-span-diagram 𝒮 c P)
 
 module _
-  {l1 l2 l3 l4 l : Level} (s : span-diagram l1 l2 l3) {X : UU l4}
-  (c : cocone-span-diagram s X)
-  (H : induction-principle-pushout s c)
+  {l1 l2 l3 l4 l : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
+  (c : cocone-span-diagram 𝒮 X)
+  (H : induction-principle-pushout 𝒮 c)
   (P : X → UU l)
   where
 
   ind-induction-principle-pushout :
-    dependent-cocone-span-diagram s c P → (x : X) → P x
+    dependent-cocone-span-diagram 𝒮 c P → (x : X) → P x
   ind-induction-principle-pushout = pr1 (H P)
 
   eq-compute-ind-induction-principle-pushout :
-    (h : dependent-cocone-span-diagram s c P) →
-    dependent-cocone-map-span-diagram s c P
+    (h : dependent-cocone-span-diagram 𝒮 c P) →
+    dependent-cocone-map-span-diagram 𝒮 c P
       ( ind-induction-principle-pushout h) ＝
     h
   eq-compute-ind-induction-principle-pushout h =
     pr2 (H P) h
 
   compute-ind-induction-principle-pushout :
-    (h : dependent-cocone-span-diagram s c P) →
-    htpy-dependent-cocone-span-diagram s c P
-      ( dependent-cocone-map-span-diagram s c P
+    (h : dependent-cocone-span-diagram 𝒮 c P) →
+    htpy-dependent-cocone-span-diagram 𝒮 c P
+      ( dependent-cocone-map-span-diagram 𝒮 c P
         ( ind-induction-principle-pushout h))
       ( h)
   compute-ind-induction-principle-pushout h =
-    htpy-eq-dependent-cocone-span-diagram s c P
-      ( dependent-cocone-map-span-diagram s c P
+    htpy-eq-dependent-cocone-span-diagram 𝒮 c P
+      ( dependent-cocone-map-span-diagram 𝒮 c P
         ( ind-induction-principle-pushout h))
       ( h)
       ( eq-compute-ind-induction-principle-pushout h)
 
   left-compute-ind-induction-principle-pushout :
-    ( h : dependent-cocone-span-diagram s c P) (a : domain-span-diagram s) →
+    ( h : dependent-cocone-span-diagram 𝒮 c P) (a : domain-span-diagram 𝒮) →
     ind-induction-principle-pushout h
-      ( left-map-cocone-span-diagram s c a) ＝
-    left-map-dependent-cocone-span-diagram s c P h a
+      ( left-map-cocone-span-diagram 𝒮 c a) ＝
+    left-map-dependent-cocone-span-diagram 𝒮 c P h a
   left-compute-ind-induction-principle-pushout h =
     pr1 (compute-ind-induction-principle-pushout h)
 
   right-compute-ind-induction-principle-pushout :
-    ( h : dependent-cocone-span-diagram s c P) (b : codomain-span-diagram s) →
+    ( h : dependent-cocone-span-diagram 𝒮 c P) (b : codomain-span-diagram 𝒮) →
     ind-induction-principle-pushout h
-      ( right-map-cocone-span-diagram s c b) ＝
-    right-map-dependent-cocone-span-diagram s c P h b
+      ( right-map-cocone-span-diagram 𝒮 c b) ＝
+    right-map-dependent-cocone-span-diagram 𝒮 c P h b
   right-compute-ind-induction-principle-pushout h =
     pr1 (pr2 (compute-ind-induction-principle-pushout h))
 
   path-compute-ind-induction-principle-pushout :
-    (h : dependent-cocone-span-diagram s c P) →
-    coherence-htpy-dependent-cocone-span-diagram s c P
-      ( dependent-cocone-map-span-diagram s c P
+    (h : dependent-cocone-span-diagram 𝒮 c P) →
+    coherence-htpy-dependent-cocone-span-diagram 𝒮 c P
+      ( dependent-cocone-map-span-diagram 𝒮 c P
         ( ind-induction-principle-pushout h))
       ( h)
       ( left-compute-ind-induction-principle-pushout h)

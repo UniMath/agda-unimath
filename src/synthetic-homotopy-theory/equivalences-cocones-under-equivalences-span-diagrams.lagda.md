@@ -54,53 +54,53 @@ Consider an [equivalence of span diagrams](foundation.equivalences-span-diagrams
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  (s : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram s X)
-  (t : span-diagram l5 l6 l7) {Y : UU l8} (d : cocone-span-diagram t Y)
-  (e : equiv-span-diagram s t)
+  (𝒮 : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  (𝒯 : span-diagram l5 l6 l7) {Y : UU l8} (d : cocone-span-diagram 𝒯 Y)
+  (e : equiv-span-diagram 𝒮 𝒯)
   where
 
   left-coherence-square-equiv-cocone-equiv-span-diagram :
     (X ≃ Y) → UU (l1 ⊔ l8)
   left-coherence-square-equiv-cocone-equiv-span-diagram u =
     coherence-square-maps
-      ( left-map-cocone-span-diagram s c)
-      ( map-domain-equiv-span-diagram s t e)
+      ( left-map-cocone-span-diagram 𝒮 c)
+      ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
       ( map-equiv u)
-      ( left-map-cocone-span-diagram t d)
+      ( left-map-cocone-span-diagram 𝒯 d)
 
   right-coherence-square-equiv-cocone-equiv-span-diagram :
     (X ≃ Y) → UU (l2 ⊔ l8)
   right-coherence-square-equiv-cocone-equiv-span-diagram u =
     coherence-square-maps
-      ( right-map-cocone-span-diagram s c)
-      ( map-codomain-equiv-span-diagram s t e)
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
       ( map-equiv u)
-      ( right-map-cocone-span-diagram t d)
+      ( right-map-cocone-span-diagram 𝒯 d)
 
   coherence-cube-equiv-cocone-equiv-span-diagram :
-    (u : X ≃ Y) → 
+    (u : X ≃ Y) →
     left-coherence-square-equiv-cocone-equiv-span-diagram u →
     right-coherence-square-equiv-cocone-equiv-span-diagram u → UU (l3 ⊔ l8)
   coherence-cube-equiv-cocone-equiv-span-diagram u L R =
     coherence-cube-maps
-      ( left-map-span-diagram t)
-      ( right-map-span-diagram t)
-      ( left-map-cocone-span-diagram t d)
-      ( right-map-cocone-span-diagram t d)
-      ( left-map-span-diagram s)
-      ( right-map-span-diagram s)
-      ( left-map-cocone-span-diagram s c)
-      ( right-map-cocone-span-diagram s c)
-      ( spanning-map-equiv-span-diagram s t e)
-      ( map-domain-equiv-span-diagram s t e)
-      ( map-codomain-equiv-span-diagram s t e)
+      ( left-map-span-diagram 𝒯)
+      ( right-map-span-diagram 𝒯)
+      ( left-map-cocone-span-diagram 𝒯 d)
+      ( right-map-cocone-span-diagram 𝒯 d)
+      ( left-map-span-diagram 𝒮)
+      ( right-map-span-diagram 𝒮)
+      ( left-map-cocone-span-diagram 𝒮 c)
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+      ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+      ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
       ( map-equiv u)
-      ( coherence-square-cocone-span-diagram s c)
-      ( inv-htpy (left-square-equiv-span-diagram s t e))
-      ( inv-htpy (right-square-equiv-span-diagram s t e))
+      ( coherence-square-cocone-span-diagram 𝒮 c)
+      ( inv-htpy (left-square-equiv-span-diagram 𝒮 𝒯 e))
+      ( inv-htpy (right-square-equiv-span-diagram 𝒮 𝒯 e))
       ( L)
       ( R)
-      ( coherence-square-cocone-span-diagram t d)
+      ( coherence-square-cocone-span-diagram 𝒯 d)
 
   equiv-cocone-equiv-span-diagram : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l8)
   equiv-cocone-equiv-span-diagram =
@@ -148,7 +148,7 @@ module _
       pr2 (pr2 (pr2 u))
 
     hom-cocone-equiv-cocone-equiv-span-diagram :
-      hom-cocone-hom-span-diagram s c t d (hom-equiv-span-diagram s t e)
+      hom-cocone-hom-span-diagram 𝒮 c 𝒯 d (hom-equiv-span-diagram 𝒮 𝒯 e)
     pr1 hom-cocone-equiv-cocone-equiv-span-diagram =
       map-equiv-cocone-equiv-span-diagram
     pr1 (pr2 hom-cocone-equiv-cocone-equiv-span-diagram) =
@@ -158,4 +158,3 @@ module _
     pr2 (pr2 (pr2 hom-cocone-equiv-cocone-equiv-span-diagram)) =
       cube-equiv-cocone-equiv-span-diagram
 ```
-

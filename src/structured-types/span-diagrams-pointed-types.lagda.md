@@ -53,7 +53,7 @@ module _
   pr2 (pr2 (pr2 (pr2 (make-span-diagram-Pointed-Type f g)))) = g
 
 module _
-  {l1 l2 l3 : Level} (s : span-diagram-Pointed-Type l1 l2 l3)
+  {l1 l2 l3 : Level} (𝒮 : span-diagram-Pointed-Type l1 l2 l3)
   where
 
   pointed-domain-span-diagram-Pointed-Type : Pointed-Type l1

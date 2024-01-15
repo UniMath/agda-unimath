@@ -76,19 +76,19 @@ be presented equivalently as a cocone on a span.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
   cocone-span-diagram :
     UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   cocone-span-diagram X =
-    Σ ( domain-span-diagram s → X)
+    Σ ( domain-span-diagram 𝒮 → X)
       ( λ i →
-        Σ ( codomain-span-diagram s → X)
+        Σ ( codomain-span-diagram 𝒮 → X)
           ( λ j →
             coherence-square-maps
-              ( right-map-span-diagram s)
-              ( left-map-span-diagram s)
+              ( right-map-span-diagram 𝒮)
+              ( left-map-span-diagram 𝒮)
               ( j)
               ( i)))
 
@@ -96,16 +96,16 @@ module _
     {X : UU l4} (c : cocone-span-diagram X)
     where
 
-    left-map-cocone-span-diagram : domain-span-diagram s → X
+    left-map-cocone-span-diagram : domain-span-diagram 𝒮 → X
     left-map-cocone-span-diagram = pr1 c
 
-    right-map-cocone-span-diagram : codomain-span-diagram s → X
+    right-map-cocone-span-diagram : codomain-span-diagram 𝒮 → X
     right-map-cocone-span-diagram = pr1 (pr2 c)
 
     coherence-square-cocone-span-diagram :
       coherence-square-maps
-        ( right-map-span-diagram s)
-        ( left-map-span-diagram s)
+        ( right-map-span-diagram 𝒮)
+        ( left-map-span-diagram 𝒮)
         ( right-map-cocone-span-diagram)
         ( left-map-cocone-span-diagram)
     coherence-square-cocone-span-diagram = pr2 (pr2 c)
@@ -115,11 +115,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
   cocone-span-diagram' : UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  cocone-span-diagram' X = hom-span-diagram s (constant-span-diagram X)
+  cocone-span-diagram' X = hom-span-diagram 𝒮 (constant-span-diagram X)
 ```
 
 ### Cocones obtained from morphisms of arrows
@@ -171,47 +171,47 @@ witnessing that the square of homotopies
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {X : UU l4}
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
   where
 
   statement-coherence-htpy-cocone-span-diagram :
-    (c c' : cocone-span-diagram s X) →
+    (c c' : cocone-span-diagram 𝒮 X) →
     (K :
-      left-map-cocone-span-diagram s c ~
-      left-map-cocone-span-diagram s c')
+      left-map-cocone-span-diagram 𝒮 c ~
+      left-map-cocone-span-diagram 𝒮 c')
     (L :
-      right-map-cocone-span-diagram s c ~
-      right-map-cocone-span-diagram s c') →
+      right-map-cocone-span-diagram 𝒮 c ~
+      right-map-cocone-span-diagram 𝒮 c') →
     UU (l3 ⊔ l4)
   statement-coherence-htpy-cocone-span-diagram c c' K L =
     coherence-square-homotopies
-      ( K ·r left-map-span-diagram s)
-      ( coherence-square-cocone-span-diagram s c)
-      ( coherence-square-cocone-span-diagram s c')
-      ( L ·r right-map-span-diagram s)
+      ( K ·r left-map-span-diagram 𝒮)
+      ( coherence-square-cocone-span-diagram 𝒮 c)
+      ( coherence-square-cocone-span-diagram 𝒮 c')
+      ( L ·r right-map-span-diagram 𝒮)
 
   htpy-cocone-span-diagram :
-    (c c' : cocone-span-diagram s X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    (c c' : cocone-span-diagram 𝒮 X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-cocone-span-diagram c c' =
-    Σ ( left-map-cocone-span-diagram s c ~
-        left-map-cocone-span-diagram s c')
+    Σ ( left-map-cocone-span-diagram 𝒮 c ~
+        left-map-cocone-span-diagram 𝒮 c')
       ( λ K →
-        Σ ( right-map-cocone-span-diagram s c ~
-            right-map-cocone-span-diagram s c')
+        Σ ( right-map-cocone-span-diagram 𝒮 c ~
+            right-map-cocone-span-diagram 𝒮 c')
           ( statement-coherence-htpy-cocone-span-diagram c c' K))
 
   module _
-    (c c' : cocone-span-diagram s X) (H : htpy-cocone-span-diagram c c')
+    (c c' : cocone-span-diagram 𝒮 X) (H : htpy-cocone-span-diagram c c')
     where
 
     left-htpy-cocone-span-diagram :
-      left-map-cocone-span-diagram s c ~
-      left-map-cocone-span-diagram s c'
+      left-map-cocone-span-diagram 𝒮 c ~
+      left-map-cocone-span-diagram 𝒮 c'
     left-htpy-cocone-span-diagram = pr1 H
 
     right-htpy-cocone-span-diagram :
-      right-map-cocone-span-diagram s c ~
-      right-map-cocone-span-diagram s c'
+      right-map-cocone-span-diagram 𝒮 c ~
+      right-map-cocone-span-diagram 𝒮 c'
     right-htpy-cocone-span-diagram = pr1 (pr2 H)
 
     coherence-htpy-cocone-span-diagram :
@@ -221,36 +221,36 @@ module _
     coherence-htpy-cocone-span-diagram = pr2 (pr2 H)
 
   refl-htpy-cocone-span-diagram :
-    (c : cocone-span-diagram s X) → htpy-cocone-span-diagram c c
+    (c : cocone-span-diagram 𝒮 X) → htpy-cocone-span-diagram c c
   pr1 (refl-htpy-cocone-span-diagram (i , j , H)) = refl-htpy
   pr1 (pr2 (refl-htpy-cocone-span-diagram (i , j , H))) = refl-htpy
   pr2 (pr2 (refl-htpy-cocone-span-diagram (i , j , H))) = right-unit-htpy
 
   htpy-eq-cocone-span-diagram :
-    (c c' : cocone-span-diagram s X) → c ＝ c' → htpy-cocone-span-diagram c c'
+    (c c' : cocone-span-diagram 𝒮 X) → c ＝ c' → htpy-cocone-span-diagram c c'
   htpy-eq-cocone-span-diagram c .c refl = refl-htpy-cocone-span-diagram c
 
   is-torsorial-htpy-cocone-span-diagram :
-    (c : cocone-span-diagram s X) → is-torsorial (htpy-cocone-span-diagram c)
+    (c : cocone-span-diagram 𝒮 X) → is-torsorial (htpy-cocone-span-diagram c)
   is-torsorial-htpy-cocone-span-diagram c =
     is-torsorial-Eq-structure
-      ( is-torsorial-htpy (left-map-cocone-span-diagram s c))
-      ( left-map-cocone-span-diagram s c , refl-htpy)
+      ( is-torsorial-htpy (left-map-cocone-span-diagram 𝒮 c))
+      ( left-map-cocone-span-diagram 𝒮 c , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy (right-map-cocone-span-diagram s c))
-        ( right-map-cocone-span-diagram s c , refl-htpy)
+        ( is-torsorial-htpy (right-map-cocone-span-diagram 𝒮 c))
+        ( right-map-cocone-span-diagram 𝒮 c , refl-htpy)
         ( is-contr-is-equiv'
-          ( Σ ( ( left-map-cocone-span-diagram s c ∘
-                  left-map-span-diagram s) ~
-                ( right-map-cocone-span-diagram s c ∘
-                  right-map-span-diagram s))
-              ( λ H' → coherence-square-cocone-span-diagram s c ~ H'))
+          ( Σ ( ( left-map-cocone-span-diagram 𝒮 c ∘
+                  left-map-span-diagram 𝒮) ~
+                ( right-map-cocone-span-diagram 𝒮 c ∘
+                  right-map-span-diagram 𝒮))
+              ( λ H' → coherence-square-cocone-span-diagram 𝒮 c ~ H'))
           ( tot (λ H' M → right-unit-htpy ∙h M))
           ( is-equiv-tot-is-fiberwise-equiv (λ H' → is-equiv-concat-htpy _ _))
-          ( is-torsorial-htpy (coherence-square-cocone-span-diagram s c))))
+          ( is-torsorial-htpy (coherence-square-cocone-span-diagram 𝒮 c))))
 
   is-equiv-htpy-eq-cocone-span-diagram :
-    (c c' : cocone-span-diagram s X) →
+    (c c' : cocone-span-diagram 𝒮 X) →
     is-equiv (htpy-eq-cocone-span-diagram c c')
   is-equiv-htpy-eq-cocone-span-diagram c =
     fundamental-theorem-id
@@ -258,14 +258,14 @@ module _
       ( htpy-eq-cocone-span-diagram c)
 
   extensionality-cocone-span-diagram :
-    (c c' : cocone-span-diagram s X) → (c ＝ c') ≃ htpy-cocone-span-diagram c c'
+    (c c' : cocone-span-diagram 𝒮 X) → (c ＝ c') ≃ htpy-cocone-span-diagram c c'
   pr1 (extensionality-cocone-span-diagram c c') =
     htpy-eq-cocone-span-diagram c c'
   pr2 (extensionality-cocone-span-diagram c c') =
     is-equiv-htpy-eq-cocone-span-diagram c c'
 
   eq-htpy-cocone-span-diagram :
-    (c c' : cocone-span-diagram s X) → htpy-cocone-span-diagram c c' → c ＝ c'
+    (c c' : cocone-span-diagram 𝒮 X) → htpy-cocone-span-diagram c c' → c ＝ c'
   eq-htpy-cocone-span-diagram c c' =
     map-inv-is-equiv (is-equiv-htpy-eq-cocone-span-diagram c c')
 ```

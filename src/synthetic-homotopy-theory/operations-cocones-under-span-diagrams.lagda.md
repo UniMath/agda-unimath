@@ -76,60 +76,60 @@ on cocones is an [involution](foundation.involutions.md).
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {X : UU l4}
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
   where
 
   transposition-cocone-span-diagram :
-    cocone-span-diagram s X →
-    cocone-span-diagram (transposition-span-diagram s) X
+    cocone-span-diagram 𝒮 X →
+    cocone-span-diagram (transposition-span-diagram 𝒮) X
   pr1 (transposition-cocone-span-diagram c) =
-    right-map-cocone-span-diagram s c
+    right-map-cocone-span-diagram 𝒮 c
   pr1 (pr2 (transposition-cocone-span-diagram c)) =
-    left-map-cocone-span-diagram s c
+    left-map-cocone-span-diagram 𝒮 c
   pr2 (pr2 (transposition-cocone-span-diagram c)) =
-    inv-htpy (coherence-square-cocone-span-diagram s c)
+    inv-htpy (coherence-square-cocone-span-diagram 𝒮 c)
 
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) (X : UU l4)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) (X : UU l4)
   where
 
   is-involution-transposition-cocone-span-diagram :
-    transposition-cocone-span-diagram (transposition-span-diagram s) {X} ∘
-    transposition-cocone-span-diagram s {X} ~
+    transposition-cocone-span-diagram (transposition-span-diagram 𝒮) {X} ∘
+    transposition-cocone-span-diagram 𝒮 {X} ~
     id
   is-involution-transposition-cocone-span-diagram c =
-    eq-htpy-cocone-span-diagram s
+    eq-htpy-cocone-span-diagram 𝒮
       ( transposition-cocone-span-diagram
-        ( transposition-span-diagram s)
-        ( transposition-cocone-span-diagram s c))
+        ( transposition-span-diagram 𝒮)
+        ( transposition-cocone-span-diagram 𝒮 c))
       ( c)
       ( ( refl-htpy) ,
         ( refl-htpy) ,
         ( λ t →
           concat
             ( right-unit)
-            ( coherence-square-cocone-span-diagram s c t)
-            ( inv-inv (coherence-square-cocone-span-diagram s c t))))
+            ( coherence-square-cocone-span-diagram 𝒮 c t)
+            ( inv-inv (coherence-square-cocone-span-diagram 𝒮 c t))))
 
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) (X : UU l4)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) (X : UU l4)
   where
 
   is-equiv-transposition-cocone-span-diagram :
-    is-equiv (transposition-cocone-span-diagram s {X})
+    is-equiv (transposition-cocone-span-diagram 𝒮 {X})
   is-equiv-transposition-cocone-span-diagram =
     is-equiv-is-invertible
-      ( transposition-cocone-span-diagram (transposition-span-diagram s))
+      ( transposition-cocone-span-diagram (transposition-span-diagram 𝒮))
       ( is-involution-transposition-cocone-span-diagram
-        ( transposition-span-diagram s)
+        ( transposition-span-diagram 𝒮)
         ( X))
-      ( is-involution-transposition-cocone-span-diagram s X)
+      ( is-involution-transposition-cocone-span-diagram 𝒮 X)
 
   equiv-transposition-cocone-span-diagram :
-    cocone-span-diagram s X ≃
-    cocone-span-diagram (transposition-span-diagram s) X
+    cocone-span-diagram 𝒮 X ≃
+    cocone-span-diagram (transposition-span-diagram 𝒮) X
   pr1 equiv-transposition-cocone-span-diagram =
-    transposition-cocone-span-diagram s
+    transposition-cocone-span-diagram 𝒮
   pr2 equiv-transposition-cocone-span-diagram =
     is-equiv-transposition-cocone-span-diagram
 ```
@@ -166,38 +166,38 @@ This way of extending cocones by maps is used to express the
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3) {X : UU l4} {Y : UU l5}
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4} {Y : UU l5}
   where
 
   cocone-map-span-diagram :
-    cocone-span-diagram s X → (X → Y) → cocone-span-diagram s Y
+    cocone-span-diagram 𝒮 X → (X → Y) → cocone-span-diagram 𝒮 Y
   pr1 (cocone-map-span-diagram c h) =
-    h ∘ left-map-cocone-span-diagram s c
+    h ∘ left-map-cocone-span-diagram 𝒮 c
   pr1 (pr2 (cocone-map-span-diagram c h)) =
-    h ∘ right-map-cocone-span-diagram s c
+    h ∘ right-map-cocone-span-diagram 𝒮 c
   pr2 (pr2 (cocone-map-span-diagram c h)) =
-    h ·l coherence-square-cocone-span-diagram s c
+    h ·l coherence-square-cocone-span-diagram 𝒮 c
 
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {X : UU l4}
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
   where
 
   compute-id-cocone-map-span-diagram :
-    (c : cocone-span-diagram s X) → cocone-map-span-diagram s c id ＝ c
+    (c : cocone-span-diagram 𝒮 X) → cocone-map-span-diagram 𝒮 c id ＝ c
   compute-id-cocone-map-span-diagram c =
     eq-pair-Σ refl
       ( eq-pair-Σ refl
-        ( eq-htpy (ap-id ∘ coherence-square-cocone-span-diagram s c)))
+        ( eq-htpy (ap-id ∘ coherence-square-cocone-span-diagram 𝒮 c)))
 
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
   {X : UU l4} {Y : UU l5} {Z : UU l6}
   where
 
   compute-comp-cocone-map-span-diagram :
-    (c : cocone-span-diagram s X) (h : X → Y) (k : Y → Z) →
-    cocone-map-span-diagram s c (k ∘ h) ＝
-    cocone-map-span-diagram s (cocone-map-span-diagram s c h) k
+    (c : cocone-span-diagram 𝒮 X) (h : X → Y) (k : Y → Z) →
+    cocone-map-span-diagram 𝒮 c (k ∘ h) ＝
+    cocone-map-span-diagram 𝒮 (cocone-map-span-diagram 𝒮 c h) k
   compute-comp-cocone-map-span-diagram (i , j , H) h k =
     eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (ap-comp k h ∘ H)))
 ```
@@ -222,55 +222,55 @@ to obtain a cocone under the span diagram `A <-f- S -h∘g-> C`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
-  {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span-diagram s → C)
-  (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {C : UU l4} {X : UU l5} {Y : UU l6} (h : codomain-span-diagram 𝒮 → C)
+  (c : cocone-span-diagram 𝒮 X)
   (d :
     cocone-span-diagram
-      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+      ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( Y))
   where
 
   left-map-horizontal-comp-cocone-span-diagram :
-    domain-span-diagram s → Y
+    domain-span-diagram 𝒮 → Y
   left-map-horizontal-comp-cocone-span-diagram =
     left-map-cocone-span-diagram
-      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+      ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( d) ∘
-    left-map-cocone-span-diagram s c
+    left-map-cocone-span-diagram 𝒮 c
 
   right-map-horizontal-comp-cocone-span-diagram : C → Y
   right-map-horizontal-comp-cocone-span-diagram =
     right-map-cocone-span-diagram
-      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+      ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( d)
 
   coherence-square-horizontal-comp-cocone-span-diagram :
     coherence-square-maps
-      ( h ∘ right-map-span-diagram s)
-      ( left-map-span-diagram s)
+      ( h ∘ right-map-span-diagram 𝒮)
+      ( left-map-span-diagram 𝒮)
       ( right-map-horizontal-comp-cocone-span-diagram)
       ( left-map-horizontal-comp-cocone-span-diagram)
   coherence-square-horizontal-comp-cocone-span-diagram =
     pasting-horizontal-coherence-square-maps
-      ( right-map-span-diagram s)
+      ( right-map-span-diagram 𝒮)
       ( h)
-      ( left-map-span-diagram s)
-      ( right-map-cocone-span-diagram s c)
+      ( left-map-span-diagram 𝒮)
+      ( right-map-cocone-span-diagram 𝒮 c)
       ( right-map-cocone-span-diagram
-        ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+        ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
         ( d))
-      ( left-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram 𝒮 c)
       ( left-map-cocone-span-diagram
-        ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+        ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
         ( d))
-      ( coherence-square-cocone-span-diagram s c)
+      ( coherence-square-cocone-span-diagram 𝒮 c)
       ( coherence-square-cocone-span-diagram
-        ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+        ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
         ( d))
 
   horizontal-comp-cocone-span-diagram :
-    cocone-span-diagram (right-extend-span-diagram s h) Y
+    cocone-span-diagram (right-extend-span-diagram 𝒮 h) Y
   pr1 horizontal-comp-cocone-span-diagram =
     left-map-horizontal-comp-cocone-span-diagram
   pr1 (pr2 horizontal-comp-cocone-span-diagram) =
@@ -299,26 +299,26 @@ Then we obtain a new cocone on the outer span diagram `A' <- S' -> B`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
   {S' : UU l4} {A' : UU l5} (f' : S' → A') {X : UU l6}
   where
 
   cocone-left-extend-hom-arrow-span-diagram :
-    (h : hom-arrow f' (left-map-span-diagram s)) → cocone-span-diagram s X →
-    cocone-span-diagram (left-extend-hom-arrow-span-diagram s f' h) X
+    (h : hom-arrow f' (left-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
+    cocone-span-diagram (left-extend-hom-arrow-span-diagram 𝒮 f' h) X
   cocone-left-extend-hom-arrow-span-diagram h c =
     horizontal-comp-cocone-span-diagram
-      ( span-diagram-hom-arrow f' (left-map-span-diagram s) h)
-      ( right-map-span-diagram s)
-      ( cocone-hom-arrow f' (left-map-span-diagram s) h)
+      ( span-diagram-hom-arrow f' (left-map-span-diagram 𝒮) h)
+      ( right-map-span-diagram 𝒮)
+      ( cocone-hom-arrow f' (left-map-span-diagram 𝒮) h)
       ( c)
 
   cocone-left-extend-equiv-arrow-span-diagram :
-    (e : equiv-arrow f' (left-map-span-diagram s)) → cocone-span-diagram s X →
-    cocone-span-diagram (left-extend-equiv-arrow-span-diagram s f' e) X
+    (e : equiv-arrow f' (left-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
+    cocone-span-diagram (left-extend-equiv-arrow-span-diagram 𝒮 f' e) X
   cocone-left-extend-equiv-arrow-span-diagram e =
     cocone-left-extend-hom-arrow-span-diagram
-      ( hom-equiv-arrow f' (left-map-span-diagram s) e)
+      ( hom-equiv-arrow f' (left-map-span-diagram 𝒮) e)
 ```
 
 Consider a span diagram `s := A <-f- S -g-> B`, a cocone `(i , j , H)` on `s`,
@@ -360,54 +360,54 @@ to obtain a cocone under the span diagram `C <-h∘f- S -g-> B`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
-  {C : UU l4} (h : domain-span-diagram s → C) {X : UU l5} {Y : UU l6}
-  (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {C : UU l4} (h : domain-span-diagram 𝒮 → C) {X : UU l5} {Y : UU l6}
+  (c : cocone-span-diagram 𝒮 X)
   (d :
     cocone-span-diagram
-      ( make-span-diagram h (left-map-cocone-span-diagram s c))
+      ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
       ( Y))
   where
 
   left-map-vertical-comp-cocone-span-diagram : C → Y
   left-map-vertical-comp-cocone-span-diagram =
     left-map-cocone-span-diagram
-      ( make-span-diagram h (left-map-cocone-span-diagram s c))
+      ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
       ( d)
 
-  right-map-vertical-comp-cocone-span-diagram : codomain-span-diagram s → Y
+  right-map-vertical-comp-cocone-span-diagram : codomain-span-diagram 𝒮 → Y
   right-map-vertical-comp-cocone-span-diagram =
     right-map-cocone-span-diagram
-      ( make-span-diagram h (left-map-cocone-span-diagram s c))
+      ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
       ( d) ∘
-    right-map-cocone-span-diagram s c
+    right-map-cocone-span-diagram 𝒮 c
 
   coherence-square-vertical-comp-cocone-span-diagram :
     coherence-square-maps
-      ( right-map-span-diagram s)
-      ( h ∘ left-map-span-diagram s)
+      ( right-map-span-diagram 𝒮)
+      ( h ∘ left-map-span-diagram 𝒮)
       ( right-map-vertical-comp-cocone-span-diagram)
       ( left-map-vertical-comp-cocone-span-diagram)
   coherence-square-vertical-comp-cocone-span-diagram =
     pasting-vertical-coherence-square-maps
-      ( right-map-span-diagram s)
-      ( left-map-span-diagram s)
-      ( right-map-cocone-span-diagram s c)
-      ( left-map-cocone-span-diagram s c)
+      ( right-map-span-diagram 𝒮)
+      ( left-map-span-diagram 𝒮)
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( left-map-cocone-span-diagram 𝒮 c)
       ( h)
       ( right-map-cocone-span-diagram
-        ( make-span-diagram h (left-map-cocone-span-diagram s c))
+        ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
         ( d))
       ( left-map-cocone-span-diagram
-        ( make-span-diagram h (left-map-cocone-span-diagram s c))
+        ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
         ( d))
-      ( coherence-square-cocone-span-diagram s c)
+      ( coherence-square-cocone-span-diagram 𝒮 c)
       ( coherence-square-cocone-span-diagram
-        ( make-span-diagram h (left-map-cocone-span-diagram s c))
+        ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
         ( d))
 
   vertical-comp-cocone-span-diagram :
-    cocone-span-diagram (left-extend-span-diagram s h) Y
+    cocone-span-diagram (left-extend-span-diagram 𝒮 h) Y
   pr1 vertical-comp-cocone-span-diagram =
     left-map-vertical-comp-cocone-span-diagram
   pr1 (pr2 vertical-comp-cocone-span-diagram) =
@@ -439,32 +439,32 @@ to obtain a cocone under the span diagram `A <- S' -> B'`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
   {S' : UU l4} {B' : UU l5} (g' : S' → B') {X : UU l6}
   where
 
   cocone-right-extend-hom-arrow-span-diagram :
-    (h : hom-arrow g' (right-map-span-diagram s)) → cocone-span-diagram s X →
-    cocone-span-diagram (right-extend-hom-arrow-span-diagram s g' h) X
+    (h : hom-arrow g' (right-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
+    cocone-span-diagram (right-extend-hom-arrow-span-diagram 𝒮 g' h) X
   cocone-right-extend-hom-arrow-span-diagram h c =
     vertical-comp-cocone-span-diagram
       ( span-diagram-hom-arrow
-        ( map-domain-hom-arrow g' (right-map-span-diagram s) h)
-        ( map-codomain-hom-arrow g' (right-map-span-diagram s) h)
-        ( transpose-hom-arrow g' (right-map-span-diagram s) h))
-      ( left-map-span-diagram s)
+        ( map-domain-hom-arrow g' (right-map-span-diagram 𝒮) h)
+        ( map-codomain-hom-arrow g' (right-map-span-diagram 𝒮) h)
+        ( transpose-hom-arrow g' (right-map-span-diagram 𝒮) h))
+      ( left-map-span-diagram 𝒮)
       ( cocone-hom-arrow
-        ( map-domain-hom-arrow g' (right-map-span-diagram s) h)
-        ( map-codomain-hom-arrow g' (right-map-span-diagram s) h)
-        ( transpose-hom-arrow g' (right-map-span-diagram s) h))
+        ( map-domain-hom-arrow g' (right-map-span-diagram 𝒮) h)
+        ( map-codomain-hom-arrow g' (right-map-span-diagram 𝒮) h)
+        ( transpose-hom-arrow g' (right-map-span-diagram 𝒮) h))
       ( c)
 
   cocone-right-extend-equiv-arrow-span-diagram :
-    (e : equiv-arrow g' (right-map-span-diagram s)) → cocone-span-diagram s X →
-    cocone-span-diagram (right-extend-equiv-arrow-span-diagram s g' e) X
+    (e : equiv-arrow g' (right-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
+    cocone-span-diagram (right-extend-equiv-arrow-span-diagram 𝒮 g' e) X
   cocone-right-extend-equiv-arrow-span-diagram e =
     cocone-right-extend-hom-arrow-span-diagram
-      ( hom-equiv-arrow g' (right-map-span-diagram s) e)
+      ( hom-equiv-arrow g' (right-map-span-diagram 𝒮) e)
 ```
 
 ### Composition of cocones and morphisms of span diagrams
@@ -501,35 +501,35 @@ morphism of span diagrams.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
-  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6)
-  (h : hom-span-diagram s' s)
-  {X : UU l7} (c : cocone-span-diagram s X)
+  (𝒮' : span-diagram l1 l2 l3) (𝒮 : span-diagram l4 l5 l6)
+  (h : hom-span-diagram 𝒮' 𝒮)
+  {X : UU l7} (c : cocone-span-diagram 𝒮 X)
   where
 
-  comp-cocone-hom-span-diagram : cocone-span-diagram s' X
+  comp-cocone-hom-span-diagram : cocone-span-diagram 𝒮' X
   comp-cocone-hom-span-diagram =
     cocone-right-extend-hom-arrow-span-diagram
-      ( left-extend-hom-arrow-span-diagram s
-        ( left-map-span-diagram s')
-        ( left-hom-arrow-hom-span-diagram s' s h))
-      ( right-map-span-diagram s')
+      ( left-extend-hom-arrow-span-diagram 𝒮
+        ( left-map-span-diagram 𝒮')
+        ( left-hom-arrow-hom-span-diagram 𝒮' 𝒮 h))
+      ( right-map-span-diagram 𝒮')
       ( ( id) ,
-        ( map-codomain-hom-span-diagram s' s h) ,
-        ( right-square-hom-span-diagram s' s h))
+        ( map-codomain-hom-span-diagram 𝒮' 𝒮 h) ,
+        ( right-square-hom-span-diagram 𝒮' 𝒮 h))
       ( cocone-left-extend-hom-arrow-span-diagram
-        ( s)
-        ( left-map-span-diagram s')
-        ( left-hom-arrow-hom-span-diagram s' s h)
+        ( 𝒮)
+        ( left-map-span-diagram 𝒮')
+        ( left-hom-arrow-hom-span-diagram 𝒮' 𝒮 h)
         ( c))
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
-  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6)
-  (e : equiv-span-diagram s' s)
-  {X : UU l7} (c : cocone-span-diagram s X)
+  (𝒮' : span-diagram l1 l2 l3) (𝒮 : span-diagram l4 l5 l6)
+  (e : equiv-span-diagram 𝒮' 𝒮)
+  {X : UU l7} (c : cocone-span-diagram 𝒮 X)
   where
 
-  comp-cocone-equiv-span-diagram : cocone-span-diagram s' X
+  comp-cocone-equiv-span-diagram : cocone-span-diagram 𝒮' X
   comp-cocone-equiv-span-diagram =
-    comp-cocone-hom-span-diagram s' s (hom-equiv-span-diagram s' s e) c
+    comp-cocone-hom-span-diagram 𝒮' 𝒮 (hom-equiv-span-diagram 𝒮' 𝒮 e) c
 ```

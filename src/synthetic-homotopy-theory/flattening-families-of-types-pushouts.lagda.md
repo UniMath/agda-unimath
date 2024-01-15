@@ -53,42 +53,42 @@ The flattening span diagrams and cocones introduced in this file will be used to
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  (P : structure-type-family-pushout l4 s)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  (P : structure-type-family-pushout l4 𝒮)
   where
 
   spanning-type-flattening-structure-type-family-pushout : UU (l3 ⊔ l4)
   spanning-type-flattening-structure-type-family-pushout =
-    Σ ( spanning-type-span-diagram s)
-      ( ( left-type-family-structure-type-family-pushout s P) ∘
-        ( left-map-span-diagram s))
+    Σ ( spanning-type-span-diagram 𝒮)
+      ( ( left-type-family-structure-type-family-pushout 𝒮 P) ∘
+        ( left-map-span-diagram 𝒮))
 
   domain-flattening-structure-type-family-pushout : UU (l1 ⊔ l4)
   domain-flattening-structure-type-family-pushout =
-    Σ ( domain-span-diagram s)
-      ( left-type-family-structure-type-family-pushout s P)
+    Σ ( domain-span-diagram 𝒮)
+      ( left-type-family-structure-type-family-pushout 𝒮 P)
 
   codomain-flattening-structure-type-family-pushout : UU (l2 ⊔ l4)
   codomain-flattening-structure-type-family-pushout =
-    Σ ( codomain-span-diagram s)
-      ( right-type-family-structure-type-family-pushout s P)
+    Σ ( codomain-span-diagram 𝒮)
+      ( right-type-family-structure-type-family-pushout 𝒮 P)
 
   left-map-flattening-structure-type-family-pushout :
     spanning-type-flattening-structure-type-family-pushout →
     domain-flattening-structure-type-family-pushout
   left-map-flattening-structure-type-family-pushout =
     map-Σ-map-base
-      ( left-map-span-diagram s)
-      ( left-type-family-structure-type-family-pushout s P)
+      ( left-map-span-diagram 𝒮)
+      ( left-type-family-structure-type-family-pushout 𝒮 P)
 
   right-map-flattening-structure-type-family-pushout :
     spanning-type-flattening-structure-type-family-pushout →
     codomain-flattening-structure-type-family-pushout
   right-map-flattening-structure-type-family-pushout =
     map-Σ
-      ( right-type-family-structure-type-family-pushout s P)
-      ( right-map-span-diagram s)
-      ( map-matching-equiv-structure-type-family-pushout s P)
+      ( right-type-family-structure-type-family-pushout 𝒮 P)
+      ( right-map-span-diagram 𝒮)
+      ( map-matching-equiv-structure-type-family-pushout 𝒮 P)
 
   span-flattening-structure-type-family-pushout :
     span
@@ -114,57 +114,57 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
-  (P : structure-type-family-pushout l5 s)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  (P : structure-type-family-pushout l5 𝒮)
   (Q : X → UU l5)
   (e :
-    equiv-structure-type-family-pushout s P
-      ( descent-data-type-family-pushout s c Q))
+    equiv-structure-type-family-pushout 𝒮 P
+      ( descent-data-type-family-pushout 𝒮 c Q))
   where
 
   left-map-cocone-flattening-structure-type-family-pushout :
-    domain-flattening-structure-type-family-pushout s P → Σ X Q
+    domain-flattening-structure-type-family-pushout 𝒮 P → Σ X Q
   left-map-cocone-flattening-structure-type-family-pushout =
     map-Σ Q
-      ( left-map-cocone-span-diagram s c)
-      ( map-left-equiv-equiv-structure-type-family-pushout s P
-        ( descent-data-type-family-pushout s c Q)
+      ( left-map-cocone-span-diagram 𝒮 c)
+      ( map-left-equiv-equiv-structure-type-family-pushout 𝒮 P
+        ( descent-data-type-family-pushout 𝒮 c Q)
         ( e))
 
   right-map-cocone-flattening-structure-type-family-pushout :
-    codomain-flattening-structure-type-family-pushout s P → Σ X Q
+    codomain-flattening-structure-type-family-pushout 𝒮 P → Σ X Q
   right-map-cocone-flattening-structure-type-family-pushout =
     map-Σ Q
-      ( right-map-cocone-span-diagram s c)
-      ( map-right-equiv-equiv-structure-type-family-pushout s P
-        ( descent-data-type-family-pushout s c Q)
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( map-right-equiv-equiv-structure-type-family-pushout 𝒮 P
+        ( descent-data-type-family-pushout 𝒮 c Q)
         ( e))
 
   coherence-square-cocone-flattening-structure-type-family-pushout :
     coherence-square-maps
-      ( right-map-flattening-structure-type-family-pushout s P)
-      ( left-map-flattening-structure-type-family-pushout s P)
+      ( right-map-flattening-structure-type-family-pushout 𝒮 P)
+      ( left-map-flattening-structure-type-family-pushout 𝒮 P)
       ( right-map-cocone-flattening-structure-type-family-pushout)
       ( left-map-cocone-flattening-structure-type-family-pushout)
   coherence-square-cocone-flattening-structure-type-family-pushout =
     htpy-map-Σ Q
-      ( coherence-square-cocone-span-diagram s c)
+      ( coherence-square-cocone-span-diagram 𝒮 c)
       ( λ x →
-        map-left-equiv-equiv-structure-type-family-pushout s P
-          ( descent-data-type-family-pushout s c Q)
+        map-left-equiv-equiv-structure-type-family-pushout 𝒮 P
+          ( descent-data-type-family-pushout 𝒮 c Q)
           ( e)
-          ( left-map-span-diagram s x))
+          ( left-map-span-diagram 𝒮 x))
       ( λ x →
         inv-htpy
-          ( coherence-equiv-structure-type-family-pushout s P
-            ( descent-data-type-family-pushout s c Q)
+          ( coherence-equiv-structure-type-family-pushout 𝒮 P
+            ( descent-data-type-family-pushout 𝒮 c Q)
             ( e)
             ( x)))
 
   cocone-flattening-structure-type-family-pushout :
     cocone-span-diagram
-      ( span-diagram-flattening-structure-type-family-pushout s P)
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
       ( Σ X Q)
   pr1 cocone-flattening-structure-type-family-pushout =
     left-map-cocone-flattening-structure-type-family-pushout
@@ -190,38 +190,38 @@ Note that this is defined as a special case of the flattening of the structure o
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  { X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
+  { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram 𝒮 X) (P : X → UU l5)
   where
 
   spanning-type-flattening-type-family-pushout : UU (l3 ⊔ l5)
   spanning-type-flattening-type-family-pushout =
-    spanning-type-flattening-structure-type-family-pushout s
-      ( descent-data-type-family-pushout s c P)
+    spanning-type-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
 
   domain-flattening-type-family-pushout : UU (l1 ⊔ l5)
   domain-flattening-type-family-pushout =
-    domain-flattening-structure-type-family-pushout s
-      ( descent-data-type-family-pushout s c P)
+    domain-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
 
   codomain-flattening-type-family-pushout : UU (l2 ⊔ l5)
   codomain-flattening-type-family-pushout =
-    codomain-flattening-structure-type-family-pushout s
-      ( descent-data-type-family-pushout s c P)
+    codomain-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
 
   left-map-flattening-type-family-pushout :
     spanning-type-flattening-type-family-pushout →
     domain-flattening-type-family-pushout
   left-map-flattening-type-family-pushout =
-    left-map-flattening-structure-type-family-pushout s
-      ( descent-data-type-family-pushout s c P)
+    left-map-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
 
   right-map-flattening-type-family-pushout :
     spanning-type-flattening-type-family-pushout →
     codomain-flattening-type-family-pushout
   right-map-flattening-type-family-pushout =
-    right-map-flattening-structure-type-family-pushout s
-      ( descent-data-type-family-pushout s c P)
+    right-map-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
 
   span-flattening-type-family-pushout :
     span
@@ -229,32 +229,32 @@ module _
       ( domain-flattening-type-family-pushout)
       ( codomain-flattening-type-family-pushout)
   span-flattening-type-family-pushout =
-    span-flattening-structure-type-family-pushout s
-      ( descent-data-type-family-pushout s c P)
+    span-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
 
   span-diagram-flattening-type-family-pushout :
     span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
   span-diagram-flattening-type-family-pushout =
-    span-diagram-flattening-structure-type-family-pushout s
-      ( descent-data-type-family-pushout s c P)
+    span-diagram-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
 
   left-map-cocone-flattening-type-family-pushout :
     domain-flattening-type-family-pushout → Σ X P
   left-map-cocone-flattening-type-family-pushout =
-    left-map-cocone-flattening-structure-type-family-pushout s c
-      ( descent-data-type-family-pushout s c P)
+    left-map-cocone-flattening-structure-type-family-pushout 𝒮 c
+      ( descent-data-type-family-pushout 𝒮 c P)
       ( P)
-      ( id-equiv-structure-type-family-pushout s
-        ( descent-data-type-family-pushout s c P))
+      ( id-equiv-structure-type-family-pushout 𝒮
+        ( descent-data-type-family-pushout 𝒮 c P))
 
   right-map-cocone-flattening-type-family-pushout :
     codomain-flattening-type-family-pushout → Σ X P
   right-map-cocone-flattening-type-family-pushout =
-    right-map-cocone-flattening-structure-type-family-pushout s c
-      ( descent-data-type-family-pushout s c P)
+    right-map-cocone-flattening-structure-type-family-pushout 𝒮 c
+      ( descent-data-type-family-pushout 𝒮 c P)
       ( P)
-      ( id-equiv-structure-type-family-pushout s
-        ( descent-data-type-family-pushout s c P))
+      ( id-equiv-structure-type-family-pushout 𝒮
+        ( descent-data-type-family-pushout 𝒮 c P))
 
   coherence-square-cocone-flattening-type-family-pushout :
     coherence-square-maps
@@ -263,20 +263,20 @@ module _
       ( right-map-cocone-flattening-type-family-pushout)
       ( left-map-cocone-flattening-type-family-pushout)
   coherence-square-cocone-flattening-type-family-pushout =
-    coherence-square-cocone-flattening-structure-type-family-pushout s c
-      ( descent-data-type-family-pushout s c P)
+    coherence-square-cocone-flattening-structure-type-family-pushout 𝒮 c
+      ( descent-data-type-family-pushout 𝒮 c P)
       ( P)
-      ( id-equiv-structure-type-family-pushout s
-        ( descent-data-type-family-pushout s c P))
+      ( id-equiv-structure-type-family-pushout 𝒮
+        ( descent-data-type-family-pushout 𝒮 c P))
 
   cocone-flattening-type-family-pushout :
     cocone-span-diagram span-diagram-flattening-type-family-pushout (Σ X P)
   cocone-flattening-type-family-pushout =
-    cocone-flattening-structure-type-family-pushout s c
-      ( descent-data-type-family-pushout s c P)
+    cocone-flattening-structure-type-family-pushout 𝒮 c
+      ( descent-data-type-family-pushout 𝒮 c P)
       ( P)
-      ( id-equiv-structure-type-family-pushout s
-        ( descent-data-type-family-pushout s c P))
+      ( id-equiv-structure-type-family-pushout 𝒮
+        ( descent-data-type-family-pushout 𝒮 c P))
 ```
 
 ## Properties
@@ -308,17 +308,17 @@ Then a cocone under `𝒯` with codomain `X` is equivalently described as a trip
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 l7 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
-  (Y : family-with-descent-data-pushout l5 l6 s c)
+  {l1 l2 l3 l4 l5 l6 l7 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  (Y : family-with-descent-data-pushout l5 l6 𝒮 c)
   (Z : UU l7)
   where
 
   span-diagram-flattening-family-with-descent-data-pushout :
     span-diagram (l1 ⊔ l6) (l2 ⊔ l6) (l3 ⊔ l6)
   span-diagram-flattening-family-with-descent-data-pushout =
-    span-diagram-flattening-structure-type-family-pushout s
-      ( structure-type-family-family-with-descent-data-pushout s c Y)
+    span-diagram-flattening-structure-type-family-pushout 𝒮
+      ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y)
 
   cocone-flattening-family-with-descent-data-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l6 ⊔ l7)
@@ -330,8 +330,8 @@ module _
   dependent-cocone-flattening-family-with-descent-data-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l5 ⊔ l7)
   dependent-cocone-flattening-family-with-descent-data-pushout =
-    dependent-cocone-span-diagram s c
-      ( λ x → type-family-family-with-descent-data-pushout s c Y x → Z)
+    dependent-cocone-span-diagram 𝒮 c
+      ( λ s → type-family-family-with-descent-data-pushout 𝒮 c Y s → Z)
 
   compute-cocone-flattening-family-with-descent-data-pushout :
     cocone-flattening-family-with-descent-data-pushout ≃
@@ -342,7 +342,7 @@ module _
           ( equiv-Π-equiv-family
             ( λ a →
               equiv-precomp
-                ( left-equiv-family-with-descent-data-pushout s c Y a)
+                ( left-equiv-family-with-descent-data-pushout 𝒮 c Y a)
                 ( Z)))) ∘e
         ( equiv-ev-pair))
       ( λ α →
@@ -351,12 +351,12 @@ module _
               ( equiv-Π-equiv-family
                 ( λ b →
                   equiv-precomp
-                    ( right-equiv-family-with-descent-data-pushout s c Y b)
+                    ( right-equiv-family-with-descent-data-pushout 𝒮 c Y b)
                     ( Z)))) ∘e
             ( equiv-ev-pair))
           ( λ β →
             ( equiv-Π-equiv-family
-              ( λ x →
+              ( λ s →
                 {!!})) ∘e
             ( equiv-ev-pair)))
 
@@ -364,28 +364,28 @@ module _
 
 ```text
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
   (P : structure-type-family-pushout l4 s) (X : UU l5)
   where
 
   structure-cocone-flattening-structure-type-family-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   structure-cocone-flattening-structure-type-family-pushout =
-    Σ ( (a : domain-span-diagram s) →
-        left-type-family-structure-type-family-pushout s P a → X)
+    Σ ( (a : domain-span-diagram 𝒮) →
+        left-type-family-structure-type-family-pushout 𝒮 P a → X)
       ( λ p →
-        Σ ( (b : codomain-span-diagram s) →
-            right-type-family-structure-type-family-pushout s P b → X)
+        Σ ( (b : codomain-span-diagram 𝒮) →
+            right-type-family-structure-type-family-pushout 𝒮 P b → X)
           ( λ q →
-            (x : spanning-type-span-diagram s) →
-            (t : spanning-type-family-structure-type-family-pushout s P x) →
-            p (left-map-span-diagram s x) t ＝
-            q ( right-map-span-diagram s x)
-              ( map-matching-equiv-structure-type-family-pushout s P x t)))
+            (s : spanning-type-span-diagram 𝒮) →
+            (t : spanning-type-family-structure-type-family-pushout 𝒮 P s) →
+            p (left-map-span-diagram 𝒮 s) t ＝
+            q ( right-map-span-diagram 𝒮 s)
+              ( map-matching-equiv-structure-type-family-pushout 𝒮 P s t)))
 
   compute-cocone-flattening-structure-type-family-pushout :
     cocone-span-diagram
-      ( span-diagram-flattening-structure-type-family-pushout s P)
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
       ( X) ≃
     structure-cocone-flattening-structure-type-family-pushout
   compute-cocone-flattening-structure-type-family-pushout =
@@ -395,7 +395,7 @@ module _
 
   map-compute-cocone-flattening-structure-type-family-pushout :
     cocone-span-diagram
-      ( span-diagram-flattening-structure-type-family-pushout s P)
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
       ( X) →
     structure-cocone-flattening-structure-type-family-pushout
   map-compute-cocone-flattening-structure-type-family-pushout =
@@ -412,7 +412,7 @@ module _
   triangle-comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
     coherence-triangle-maps
-      ( dependent-cocone-map-span-diagram s c (λ x → P x → Y))
+      ( dependent-cocone-map-span-diagram 𝒮 c (λ x → P x → Y))
       ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
       ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-type-family-pushout Y ∘ ind-Σ)
 -}

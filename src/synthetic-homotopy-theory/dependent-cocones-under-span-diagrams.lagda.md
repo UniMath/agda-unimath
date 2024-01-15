@@ -62,17 +62,17 @@ over `H`.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
+  { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) (P : X → UU l5)
   where
 
   left-family-of-elements-dependent-cocone-span-diagram : UU (l1 ⊔ l5)
   left-family-of-elements-dependent-cocone-span-diagram =
-    (a : domain-span-diagram s) → P (left-map-cocone-span-diagram s c a)
+    (a : domain-span-diagram 𝒮) → P (left-map-cocone-span-diagram 𝒮 c a)
 
   right-family-of-elements-dependent-cocone-span-diagram : UU (l2 ⊔ l5)
   right-family-of-elements-dependent-cocone-span-diagram =
-    (b : codomain-span-diagram s) → P (right-map-cocone-span-diagram s c b)
+    (b : codomain-span-diagram 𝒮) → P (right-map-cocone-span-diagram 𝒮 c b)
 
   dependent-homotopy-dependent-cocone-span-diagram :
     left-family-of-elements-dependent-cocone-span-diagram →
@@ -80,10 +80,10 @@ module _
   dependent-homotopy-dependent-cocone-span-diagram hA hB =
     dependent-homotopy
       ( λ _ → P)
-      ( coherence-square-cocone-span-diagram s c)
-      ( hA ∘ left-map-span-diagram s)
-      ( hB ∘ right-map-span-diagram s)
-  
+      ( coherence-square-cocone-span-diagram 𝒮 c)
+      ( hA ∘ left-map-span-diagram 𝒮)
+      ( hB ∘ right-map-span-diagram 𝒮)
+
   dependent-cocone-span-diagram : UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
   dependent-cocone-span-diagram =
     Σ ( left-family-of-elements-dependent-cocone-span-diagram)
@@ -114,18 +114,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) (P : X → UU l5)
   where
 
   dependent-cocone-map-span-diagram :
-    ((x : X) → P x) → dependent-cocone-span-diagram s c P
+    ((x : X) → P x) → dependent-cocone-span-diagram 𝒮 c P
   pr1 (dependent-cocone-map-span-diagram h) a =
-    h (left-map-cocone-span-diagram s c a)
+    h (left-map-cocone-span-diagram 𝒮 c a)
   pr1 (pr2 (dependent-cocone-map-span-diagram h)) b =
-    h (right-map-cocone-span-diagram s c b)
-  pr2 (pr2 (dependent-cocone-map-span-diagram h)) x =
-    apd h (coherence-square-cocone-span-diagram s c x)
+    h (right-map-cocone-span-diagram 𝒮 c b)
+  pr2 (pr2 (dependent-cocone-map-span-diagram h)) s =
+    apd h (coherence-square-cocone-span-diagram 𝒮 c s)
 ```
 
 ## Properties
@@ -134,37 +134,37 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X) (P : X → UU l5)
-  (d : dependent-cocone-span-diagram s c P)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) (P : X → UU l5)
+  (d : dependent-cocone-span-diagram 𝒮 c P)
   where
 
   coherence-htpy-dependent-cocone-span-diagram :
-    ( d' : dependent-cocone-span-diagram s c P)
+    ( d' : dependent-cocone-span-diagram 𝒮 c P)
     ( K :
-      left-map-dependent-cocone-span-diagram s c P d ~
-      left-map-dependent-cocone-span-diagram s c P d')
+      left-map-dependent-cocone-span-diagram 𝒮 c P d ~
+      left-map-dependent-cocone-span-diagram 𝒮 c P d')
     ( L :
-      right-map-dependent-cocone-span-diagram s c P d ~
-      right-map-dependent-cocone-span-diagram s c P d') →
+      right-map-dependent-cocone-span-diagram 𝒮 c P d ~
+      right-map-dependent-cocone-span-diagram 𝒮 c P d') →
     UU (l3 ⊔ l5)
   coherence-htpy-dependent-cocone-span-diagram d' K L =
-    ( x : spanning-type-span-diagram s) →
-    ( ( coherence-square-dependent-cocone-span-diagram s c P d x) ∙
-      ( L (right-map-span-diagram s x))) ＝
+    ( s : spanning-type-span-diagram 𝒮) →
+    ( ( coherence-square-dependent-cocone-span-diagram 𝒮 c P d s) ∙
+      ( L (right-map-span-diagram 𝒮 s))) ＝
     ( ( ap
-        ( tr P (coherence-square-cocone-span-diagram s c x))
-        ( K (left-map-span-diagram s x))) ∙
-      ( coherence-square-dependent-cocone-span-diagram s c P d' x))
+        ( tr P (coherence-square-cocone-span-diagram 𝒮 c s))
+        ( K (left-map-span-diagram 𝒮 s))) ∙
+      ( coherence-square-dependent-cocone-span-diagram 𝒮 c P d' s))
 
   htpy-dependent-cocone-span-diagram :
-    (d' : dependent-cocone-span-diagram s c P) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
+    (d' : dependent-cocone-span-diagram 𝒮 c P) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
   htpy-dependent-cocone-span-diagram d' =
-    Σ ( left-map-dependent-cocone-span-diagram s c P d ~
-        left-map-dependent-cocone-span-diagram s c P d')
+    Σ ( left-map-dependent-cocone-span-diagram 𝒮 c P d ~
+        left-map-dependent-cocone-span-diagram 𝒮 c P d')
       ( λ K →
-        Σ ( right-map-dependent-cocone-span-diagram s c P d ~
-            right-map-dependent-cocone-span-diagram s c P d')
+        Σ ( right-map-dependent-cocone-span-diagram 𝒮 c P d ~
+            right-map-dependent-cocone-span-diagram 𝒮 c P d')
           ( coherence-htpy-dependent-cocone-span-diagram d' K))
 
   refl-htpy-dependent-cocone-span-diagram :
@@ -174,25 +174,25 @@ module _
   pr2 (pr2 refl-htpy-dependent-cocone-span-diagram) = right-unit-htpy
 
   htpy-eq-dependent-cocone-span-diagram :
-    (d' : dependent-cocone-span-diagram s c P) →
+    (d' : dependent-cocone-span-diagram 𝒮 c P) →
     d ＝ d' → htpy-dependent-cocone-span-diagram d'
   htpy-eq-dependent-cocone-span-diagram .d refl =
     refl-htpy-dependent-cocone-span-diagram
 
   module _
-    (d' : dependent-cocone-span-diagram s c P)
+    (d' : dependent-cocone-span-diagram 𝒮 c P)
     (p : d ＝ d')
     where
 
     left-htpy-eq-dependent-cocone-span-diagram :
-      left-map-dependent-cocone-span-diagram s c P d ~
-      left-map-dependent-cocone-span-diagram s c P d'
+      left-map-dependent-cocone-span-diagram 𝒮 c P d ~
+      left-map-dependent-cocone-span-diagram 𝒮 c P d'
     left-htpy-eq-dependent-cocone-span-diagram =
       pr1 (htpy-eq-dependent-cocone-span-diagram d' p)
 
     right-htpy-eq-dependent-cocone-span-diagram :
-      right-map-dependent-cocone-span-diagram s c P d ~
-      right-map-dependent-cocone-span-diagram s c P d'
+      right-map-dependent-cocone-span-diagram 𝒮 c P d ~
+      right-map-dependent-cocone-span-diagram 𝒮 c P d'
     right-htpy-eq-dependent-cocone-span-diagram =
       pr1 (pr2 (htpy-eq-dependent-cocone-span-diagram d' p))
 
@@ -209,29 +209,29 @@ module _
     is-torsorial-htpy-dependent-cocone-span-diagram =
       is-torsorial-Eq-structure
         ( is-torsorial-htpy
-          ( left-map-dependent-cocone-span-diagram s c P d))
-        ( left-map-dependent-cocone-span-diagram s c P d , refl-htpy)
+          ( left-map-dependent-cocone-span-diagram 𝒮 c P d))
+        ( left-map-dependent-cocone-span-diagram 𝒮 c P d , refl-htpy)
         ( is-torsorial-Eq-structure
           ( is-torsorial-htpy
-            ( right-map-dependent-cocone-span-diagram s c P d))
-          ( right-map-dependent-cocone-span-diagram s c P d , refl-htpy)
+            ( right-map-dependent-cocone-span-diagram 𝒮 c P d))
+          ( right-map-dependent-cocone-span-diagram 𝒮 c P d , refl-htpy)
           ( is-contr-equiv
             ( Σ ( dependent-homotopy
                   ( λ _ → P)
-                  ( coherence-square-cocone-span-diagram s c)
-                  ( left-map-dependent-cocone-span-diagram s c P d ∘
-                    left-map-span-diagram s)
-                  ( right-map-dependent-cocone-span-diagram s c P d ∘
-                    right-map-span-diagram s))
+                  ( coherence-square-cocone-span-diagram 𝒮 c)
+                  ( left-map-dependent-cocone-span-diagram 𝒮 c P d ∘
+                    left-map-span-diagram 𝒮)
+                  ( right-map-dependent-cocone-span-diagram 𝒮 c P d ∘
+                    right-map-span-diagram 𝒮))
                 ( λ γ →
-                  coherence-square-dependent-cocone-span-diagram s c P d ~ γ))
+                  coherence-square-dependent-cocone-span-diagram 𝒮 c P d ~ γ))
             ( equiv-tot (equiv-concat-htpy inv-htpy-right-unit-htpy))
             ( is-torsorial-htpy
-              ( coherence-square-dependent-cocone-span-diagram s c P d))))
+              ( coherence-square-dependent-cocone-span-diagram 𝒮 c P d))))
 
   abstract
     is-equiv-htpy-eq-dependent-cocone-span-diagram :
-      (d' : dependent-cocone-span-diagram s c P) →
+      (d' : dependent-cocone-span-diagram 𝒮 c P) →
       is-equiv (htpy-eq-dependent-cocone-span-diagram d')
     is-equiv-htpy-eq-dependent-cocone-span-diagram =
       fundamental-theorem-id
@@ -239,13 +239,13 @@ module _
         ( htpy-eq-dependent-cocone-span-diagram)
 
     eq-htpy-dependent-cocone-span-diagram :
-      (d' : dependent-cocone-span-diagram s c P) →
+      (d' : dependent-cocone-span-diagram 𝒮 c P) →
       htpy-dependent-cocone-span-diagram d' → d ＝ d'
     eq-htpy-dependent-cocone-span-diagram d' =
       map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone-span-diagram d')
 
     is-section-eq-htpy-dependent-cocone-span-diagram :
-      (d' : dependent-cocone-span-diagram s c P) →
+      (d' : dependent-cocone-span-diagram 𝒮 c P) →
       is-section
         ( htpy-eq-dependent-cocone-span-diagram d')
         ( eq-htpy-dependent-cocone-span-diagram d')
@@ -254,7 +254,7 @@ module _
         ( is-equiv-htpy-eq-dependent-cocone-span-diagram d')
 
     is-retraction-eq-htpy-dependent-cocone-span-diagram :
-      (d' : dependent-cocone-span-diagram s c P) →
+      (d' : dependent-cocone-span-diagram 𝒮 c P) →
       is-retraction
         ( htpy-eq-dependent-cocone-span-diagram d')
         ( eq-htpy-dependent-cocone-span-diagram d')
@@ -263,7 +263,7 @@ module _
         ( is-equiv-htpy-eq-dependent-cocone-span-diagram d')
 
   extensionality-dependent-cocone-span-diagram :
-    (d' : dependent-cocone-span-diagram s c P) →
+    (d' : dependent-cocone-span-diagram 𝒮 c P) →
     (d ＝ d') ≃ htpy-dependent-cocone-span-diagram d'
   pr1 (extensionality-dependent-cocone-span-diagram d') =
     htpy-eq-dependent-cocone-span-diagram d'

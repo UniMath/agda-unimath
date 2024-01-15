@@ -81,9 +81,9 @@ where `S : UU l1`, `A : UU l2`, and `B : UU l3` there is a pushout in
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
-  
+
   postulate
     standard-pushout : UU (l1 ⊔ l2 ⊔ l3)
 
@@ -125,7 +125,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {X : UU l4}
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
   where
 
   cogap-cocone-span-diagram : cocone-span-diagram s X → standard-pushout s → X
@@ -155,7 +155,7 @@ The `is-pushout` predicate defined below is a [small type](foundation.small-type
 
 ```agda
 is-pushout :
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {X : UU l4}
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
   (c : cocone-span-diagram s X) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 is-pushout s c = is-equiv (cogap-cocone-span-diagram s c)
@@ -167,7 +167,7 @@ is-pushout s c = is-equiv (cogap-cocone-span-diagram s c)
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
   {X : UU l4} (c : cocone-span-diagram s X)
   where
 
@@ -203,7 +203,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
   dependent-universal-property-pushout-standard-pushout :
@@ -228,7 +228,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  { l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
   { X : UU l4} (c : cocone-span-diagram s X)
   where
 
@@ -304,7 +304,7 @@ we have, for every `x : X`, a pushout square of fibers:
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  { l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
   { X : UU l4} (c : cocone-span-diagram s X) (x : X)
   where
 
@@ -482,7 +482,7 @@ fibers.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
   (X : UU l4) (c : cocone-span-diagram s X)
   where
 

@@ -83,73 +83,73 @@ following way:
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  (s : span-diagram l1 l2 l3) (t : span-diagram l4 l5 l6)
+  (𝒮 : span-diagram l1 l2 l3) (𝒯 : span-diagram l4 l5 l6)
   where
 
   hom-span-diagram : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   hom-span-diagram =
-    Σ ( domain-span-diagram s → domain-span-diagram t)
+    Σ ( domain-span-diagram 𝒮 → domain-span-diagram 𝒯)
       ( λ f →
-        Σ ( codomain-span-diagram s → codomain-span-diagram t)
+        Σ ( codomain-span-diagram 𝒮 → codomain-span-diagram 𝒯)
           ( λ g →
             hom-span
               ( extend-span
-                ( span-span-diagram s)
+                ( span-span-diagram 𝒮)
                 ( f)
                 ( g))
-              ( span-span-diagram t)))
+              ( span-span-diagram 𝒯)))
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  (s : span-diagram l1 l2 l3) (t : span-diagram l4 l5 l6)
-  (f : hom-span-diagram s t)
+  (𝒮 : span-diagram l1 l2 l3) (𝒯 : span-diagram l4 l5 l6)
+  (f : hom-span-diagram 𝒮 𝒯)
   where
 
   map-domain-hom-span-diagram :
-    domain-span-diagram s → domain-span-diagram t
+    domain-span-diagram 𝒮 → domain-span-diagram 𝒯
   map-domain-hom-span-diagram = pr1 f
 
   map-codomain-hom-span-diagram :
-    codomain-span-diagram s → codomain-span-diagram t
+    codomain-span-diagram 𝒮 → codomain-span-diagram 𝒯
   map-codomain-hom-span-diagram = pr1 (pr2 f)
 
   hom-span-hom-span-diagram :
     hom-span
       ( extend-span
-        ( span-span-diagram s)
+        ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))
-      ( span-span-diagram t)
+      ( span-span-diagram 𝒯)
   hom-span-hom-span-diagram = pr2 (pr2 f)
 
   spanning-map-hom-span-diagram :
-    spanning-type-span-diagram s → spanning-type-span-diagram t
+    spanning-type-span-diagram 𝒮 → spanning-type-span-diagram 𝒯
   spanning-map-hom-span-diagram =
     map-hom-span
       ( extend-span
-        ( span-span-diagram s)
+        ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))
-      ( span-span-diagram t)
+      ( span-span-diagram 𝒯)
       ( hom-span-hom-span-diagram)
 
   left-square-hom-span-diagram :
     coherence-square-maps
       ( spanning-map-hom-span-diagram)
-      ( left-map-span-diagram s)
-      ( left-map-span-diagram t)
+      ( left-map-span-diagram 𝒮)
+      ( left-map-span-diagram 𝒯)
       ( map-domain-hom-span-diagram)
   left-square-hom-span-diagram =
     left-triangle-hom-span
       ( extend-span
-        ( span-span-diagram s)
+        ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))
-      ( span-span-diagram t)
+      ( span-span-diagram 𝒯)
       ( hom-span-hom-span-diagram)
 
   left-hom-arrow-hom-span-diagram :
-    hom-arrow (left-map-span-diagram s) (left-map-span-diagram t)
+    hom-arrow (left-map-span-diagram 𝒮) (left-map-span-diagram 𝒯)
   pr1 left-hom-arrow-hom-span-diagram =
     spanning-map-hom-span-diagram
   pr1 (pr2 left-hom-arrow-hom-span-diagram) =
@@ -160,20 +160,20 @@ module _
   right-square-hom-span-diagram :
     coherence-square-maps
       ( spanning-map-hom-span-diagram)
-      ( right-map-span-diagram s)
-      ( right-map-span-diagram t)
+      ( right-map-span-diagram 𝒮)
+      ( right-map-span-diagram 𝒯)
       ( map-codomain-hom-span-diagram)
   right-square-hom-span-diagram =
     right-triangle-hom-span
       ( extend-span
-        ( span-span-diagram s)
+        ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))
-      ( span-span-diagram t)
+      ( span-span-diagram 𝒯)
       ( hom-span-hom-span-diagram)
 
   right-hom-arrow-hom-span-diagram :
-    hom-arrow (right-map-span-diagram s) (right-map-span-diagram t)
+    hom-arrow (right-map-span-diagram 𝒮) (right-map-span-diagram 𝒯)
   pr1 right-hom-arrow-hom-span-diagram =
     spanning-map-hom-span-diagram
   pr1 (pr2 right-hom-arrow-hom-span-diagram) =
@@ -181,4 +181,3 @@ module _
   pr2 (pr2 right-hom-arrow-hom-span-diagram) =
     right-square-hom-span-diagram
 ```
-

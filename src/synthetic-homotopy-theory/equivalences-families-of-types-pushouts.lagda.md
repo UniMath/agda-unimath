@@ -54,16 +54,16 @@ consists of [families of equivalences](foundation.families-of-equivalences.md)
 and a family of [homotopies](foundation-core.homotopies.md) witnessing that the square
 
 ```text
-               u (f x)
-     PA (f x) --------> QA (f x)
+               u (f s)
+     PA (f s) --------> QA (f s)
        |                  |
-  Pe x |                  | Qe x
+  Pe s |                  | Qe s
        V                  V
-     PB (g x) --------> QB (g x)
-               v (g x)
+     PB (g s) --------> QB (g s)
+               v (g s)
 ```
 
-[commutes](foundation-core.commuting-squares-of-maps.md) for each `x : S`.
+[commutes](foundation-core.commuting-squares-of-maps.md) for each `s : S`.
 
 
 ## Definitions
@@ -72,34 +72,34 @@ and a family of [homotopies](foundation-core.homotopies.md) witnessing that the 
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  (P : structure-type-family-pushout l4 s)
-  (Q : structure-type-family-pushout l5 s)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  (P : structure-type-family-pushout l4 𝒮)
+  (Q : structure-type-family-pushout l5 𝒮)
   where
 
   equiv-left-type-family-structure-type-family-pushout : UU (l1 ⊔ l4 ⊔ l5)
   equiv-left-type-family-structure-type-family-pushout =
-    (a : domain-span-diagram s) →
-    left-type-family-structure-type-family-pushout s P a ≃
-    left-type-family-structure-type-family-pushout s Q a
+    (a : domain-span-diagram 𝒮) →
+    left-type-family-structure-type-family-pushout 𝒮 P a ≃
+    left-type-family-structure-type-family-pushout 𝒮 Q a
 
   equiv-right-type-family-structure-type-family-pushout : UU (l2 ⊔ l4 ⊔ l5)
   equiv-right-type-family-structure-type-family-pushout =
-    (b : codomain-span-diagram s) →
-    right-type-family-structure-type-family-pushout s P b ≃
-    right-type-family-structure-type-family-pushout s Q b
+    (b : codomain-span-diagram 𝒮) →
+    right-type-family-structure-type-family-pushout 𝒮 P b ≃
+    right-type-family-structure-type-family-pushout 𝒮 Q b
 
   coherence-square-equiv-structure-type-family-pushout :
     equiv-left-type-family-structure-type-family-pushout →
     equiv-right-type-family-structure-type-family-pushout →
     UU (l3 ⊔ l4 ⊔ l5)
   coherence-square-equiv-structure-type-family-pushout eA eB =
-    ( x : spanning-type-span-diagram s) →
+    ( s : spanning-type-span-diagram 𝒮) →
     coherence-square-maps
-      ( map-equiv (eA (left-map-span-diagram s x)))
-      ( map-equiv (pr2 (pr2 P) x))
-      ( map-equiv (pr2 (pr2 Q) x))
-      ( map-equiv (eB (right-map-span-diagram s x)))
+      ( map-equiv (eA (left-map-span-diagram 𝒮 s)))
+      ( map-equiv (pr2 (pr2 P) s))
+      ( map-equiv (pr2 (pr2 Q) s))
+      ( map-equiv (eB (right-map-span-diagram 𝒮 s)))
 
   equiv-structure-type-family-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
@@ -116,9 +116,9 @@ module _
 
   map-left-equiv-equiv-structure-type-family-pushout :
     equiv-structure-type-family-pushout →
-    (a : domain-span-diagram s) →
-    left-type-family-structure-type-family-pushout s P a →
-    left-type-family-structure-type-family-pushout s Q a
+    (a : domain-span-diagram 𝒮) →
+    left-type-family-structure-type-family-pushout 𝒮 P a →
+    left-type-family-structure-type-family-pushout 𝒮 Q a
   map-left-equiv-equiv-structure-type-family-pushout e a =
     map-equiv (left-equiv-equiv-structure-type-family-pushout e a)
 
@@ -129,9 +129,9 @@ module _
 
   map-right-equiv-equiv-structure-type-family-pushout :
     equiv-structure-type-family-pushout →
-    (b : codomain-span-diagram s) →
-    right-type-family-structure-type-family-pushout s P b →
-    right-type-family-structure-type-family-pushout s Q b
+    (b : codomain-span-diagram 𝒮) →
+    right-type-family-structure-type-family-pushout 𝒮 P b →
+    right-type-family-structure-type-family-pushout 𝒮 Q b
   map-right-equiv-equiv-structure-type-family-pushout e b =
     map-equiv (right-equiv-equiv-structure-type-family-pushout e b)
 
@@ -147,15 +147,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  (P : structure-type-family-pushout l4 s)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  (P : structure-type-family-pushout l4 𝒮)
   where
 
   id-equiv-structure-type-family-pushout :
-    equiv-structure-type-family-pushout s P P
+    equiv-structure-type-family-pushout 𝒮 P P
   pr1 id-equiv-structure-type-family-pushout a = id-equiv
   pr1 (pr2 id-equiv-structure-type-family-pushout) b = id-equiv
-  pr2 (pr2 id-equiv-structure-type-family-pushout) x = refl-htpy
+  pr2 (pr2 id-equiv-structure-type-family-pushout) s = refl-htpy
 ```
 
 ## Properties
@@ -164,40 +164,40 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  (P : structure-type-family-pushout l4 s)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  (P : structure-type-family-pushout l4 𝒮)
   where
 
   equiv-eq-structure-type-family-pushout :
-    (Q : structure-type-family-pushout l4 s) →
-    P ＝ Q → equiv-structure-type-family-pushout s P Q
+    (Q : structure-type-family-pushout l4 𝒮) →
+    P ＝ Q → equiv-structure-type-family-pushout 𝒮 P Q
   equiv-eq-structure-type-family-pushout .P refl =
-    id-equiv-structure-type-family-pushout s P
+    id-equiv-structure-type-family-pushout 𝒮 P
 
   is-torsorial-equiv-structure-type-family-pushout :
-    is-torsorial (equiv-structure-type-family-pushout s P)
+    is-torsorial (equiv-structure-type-family-pushout 𝒮 P)
   is-torsorial-equiv-structure-type-family-pushout =
     is-torsorial-Eq-structure
       ( is-torsorial-Eq-Π
         ( λ a →
           is-torsorial-equiv
-            ( left-type-family-structure-type-family-pushout s P a)))
-      ( ( left-type-family-structure-type-family-pushout s  P) ,
+            ( left-type-family-structure-type-family-pushout 𝒮 P a)))
+      ( ( left-type-family-structure-type-family-pushout 𝒮  P) ,
         ( λ a → id-equiv))
       ( is-torsorial-Eq-structure
         ( is-torsorial-Eq-Π
           ( λ b →
             is-torsorial-equiv
-              ( right-type-family-structure-type-family-pushout s P b)))
-        ( ( right-type-family-structure-type-family-pushout s P) ,
+              ( right-type-family-structure-type-family-pushout 𝒮 P b)))
+        ( ( right-type-family-structure-type-family-pushout 𝒮 P) ,
           ( λ b → id-equiv))
         ( is-torsorial-Eq-Π
-          ( λ x →
+          ( λ s →
             is-torsorial-htpy-equiv
-              ( matching-equiv-structure-type-family-pushout s P x))))
+              ( matching-equiv-structure-type-family-pushout 𝒮 P s))))
 
   is-equiv-equiv-eq-structure-type-family-pushout :
-    (Q : structure-type-family-pushout l4 s) →
+    (Q : structure-type-family-pushout l4 𝒮) →
     is-equiv (equiv-eq-structure-type-family-pushout Q)
   is-equiv-equiv-eq-structure-type-family-pushout =
     fundamental-theorem-id
@@ -205,21 +205,21 @@ module _
       ( equiv-eq-structure-type-family-pushout)
 
   equiv-equiv-structure-type-family-pushout :
-    (Q : structure-type-family-pushout l4 s) →
-    (P ＝ Q) ≃ equiv-structure-type-family-pushout s P Q
+    (Q : structure-type-family-pushout l4 𝒮) →
+    (P ＝ Q) ≃ equiv-structure-type-family-pushout 𝒮 P Q
   pr1 (equiv-equiv-structure-type-family-pushout Q) =
     equiv-eq-structure-type-family-pushout Q
   pr2 (equiv-equiv-structure-type-family-pushout Q) =
     is-equiv-equiv-eq-structure-type-family-pushout Q
 
   eq-equiv-structure-type-family-pushout :
-    (Q : structure-type-family-pushout l4 s) →
-    equiv-structure-type-family-pushout s P Q → P ＝ Q
+    (Q : structure-type-family-pushout l4 𝒮) →
+    equiv-structure-type-family-pushout 𝒮 P Q → P ＝ Q
   eq-equiv-structure-type-family-pushout Q =
     map-inv-is-equiv (is-equiv-equiv-eq-structure-type-family-pushout Q)
 
   is-section-eq-equiv-structure-type-family-pushout :
-    (Q : structure-type-family-pushout l4 s) →
+    (Q : structure-type-family-pushout l4 𝒮) →
     is-section
       ( equiv-eq-structure-type-family-pushout Q)
       ( eq-equiv-structure-type-family-pushout Q)
@@ -228,7 +228,7 @@ module _
       ( is-equiv-equiv-eq-structure-type-family-pushout Q)
 
   is-retraction-eq-equiv-structure-type-family-pushout :
-    (Q : structure-type-family-pushout l4 s) →
+    (Q : structure-type-family-pushout l4 𝒮) →
     is-retraction
       ( equiv-eq-structure-type-family-pushout Q)
       ( eq-equiv-structure-type-family-pushout Q)

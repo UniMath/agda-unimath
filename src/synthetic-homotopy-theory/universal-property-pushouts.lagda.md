@@ -99,65 +99,66 @@ Examples of pushouts include
 
 ```agda
 universal-property-pushout :
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3) {X : UU l4} → cocone-span-diagram s X → UUω
-universal-property-pushout s c =
-  {l : Level} (Y : UU l) → is-equiv (cocone-map-span-diagram s {Y = Y} c)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} → cocone-span-diagram 𝒮 X → UUω
+universal-property-pushout 𝒮 c =
+  {l : Level} (Y : UU l) → is-equiv (cocone-map-span-diagram 𝒮 {Y = Y} c)
 
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X) (H : universal-property-pushout s c)
-  {Y : UU l5} (d : cocone-span-diagram s Y)
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) (H : universal-property-pushout 𝒮 c)
+  {Y : UU l5} (d : cocone-span-diagram 𝒮 Y)
   where
 
   map-universal-property-pushout : X → Y
   map-universal-property-pushout = map-inv-is-equiv (H Y) d
 
   htpy-cocone-universal-property-pushout :
-    htpy-cocone-span-diagram s
-      ( cocone-map-span-diagram s c map-universal-property-pushout)
+    htpy-cocone-span-diagram 𝒮
+      ( cocone-map-span-diagram 𝒮 c map-universal-property-pushout)
       ( d)
   htpy-cocone-universal-property-pushout =
     htpy-eq-cocone-span-diagram
-      ( s)
-      ( cocone-map-span-diagram s c map-universal-property-pushout)
+      ( 𝒮)
+      ( cocone-map-span-diagram 𝒮 c map-universal-property-pushout)
       ( d)
       ( is-section-map-inv-is-equiv (H Y) d)
 
-  cocone-map-universal-property-pushout : cocone-span-diagram s Y
+  cocone-map-universal-property-pushout : cocone-span-diagram 𝒮 Y
   cocone-map-universal-property-pushout =
-    cocone-map-span-diagram s c map-universal-property-pushout
+    cocone-map-span-diagram 𝒮 c map-universal-property-pushout
 
   left-htpy-cocone-universal-property-pushout :
     coherence-triangle-maps'
-      ( left-map-cocone-span-diagram s d)
+      ( left-map-cocone-span-diagram 𝒮 d)
       ( map-universal-property-pushout)
-      ( left-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram 𝒮 c)
   left-htpy-cocone-universal-property-pushout =
     left-htpy-cocone-span-diagram
-      ( s)
+      ( 𝒮)
       ( cocone-map-universal-property-pushout)
       ( d)
       ( htpy-cocone-universal-property-pushout)
 
   right-htpy-cocone-universal-property-pushout :
-    map-universal-property-pushout ∘ right-map-cocone-span-diagram s c ~
-    right-map-cocone-span-diagram s d
+    map-universal-property-pushout ∘ right-map-cocone-span-diagram 𝒮 c ~
+    right-map-cocone-span-diagram 𝒮 d
   right-htpy-cocone-universal-property-pushout =
     right-htpy-cocone-span-diagram
-      ( s)
+      ( 𝒮)
       ( cocone-map-universal-property-pushout)
       ( d)
       ( htpy-cocone-universal-property-pushout)
 
   coherence-htpy-cocone-universal-property-pushout :
-    statement-coherence-htpy-cocone-span-diagram s
-      ( cocone-map-span-diagram s c map-universal-property-pushout)
+    statement-coherence-htpy-cocone-span-diagram 𝒮
+      ( cocone-map-span-diagram 𝒮 c map-universal-property-pushout)
       ( d)
       ( left-htpy-cocone-universal-property-pushout)
       ( right-htpy-cocone-universal-property-pushout)
   coherence-htpy-cocone-universal-property-pushout =
     coherence-htpy-cocone-span-diagram
-      ( s)
+      ( 𝒮)
       ( cocone-map-universal-property-pushout)
       ( d)
       ( htpy-cocone-universal-property-pushout)
@@ -167,17 +168,17 @@ module _
       is-contr
         ( Σ ( X → Y)
             ( λ h →
-              htpy-cocone-span-diagram s (cocone-map-span-diagram s c h) d))
+              htpy-cocone-span-diagram 𝒮 (cocone-map-span-diagram 𝒮 c h) d))
     uniqueness-map-universal-property-pushout =
       is-contr-is-equiv'
-        ( fiber (cocone-map-span-diagram s c) d)
+        ( fiber (cocone-map-span-diagram 𝒮 c) d)
         ( tot
           ( λ h →
-            htpy-eq-cocone-span-diagram s (cocone-map-span-diagram s c h) d))
+            htpy-eq-cocone-span-diagram 𝒮 (cocone-map-span-diagram 𝒮 c h) d))
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ h →
-            is-equiv-htpy-eq-cocone-span-diagram s
-              ( cocone-map-span-diagram s c h)
+            is-equiv-htpy-eq-cocone-span-diagram 𝒮
+              ( cocone-map-span-diagram 𝒮 c h)
               ( d)))
         ( is-contr-map-is-equiv (H Y) d)
 ```
@@ -201,7 +202,7 @@ The {{#concept "3-for-2 property of pushouts}} asserts that for any two cocones
 and a map `h : X → X'` equipped with a homotopy of cocones
 
 ```text
-  cocone-map-span-diagram s (i , j , H) h ~ (i' , j' , H'),
+  cocone-map-span-diagram 𝒮 (i , j , H) h ~ (i' , j' , H'),
 ```
 
 if any two of the following three conditions hold, then so does the third:
@@ -232,39 +233,39 @@ universal if and only if `(i' , j' , H')` is an equivalence.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
-  {X' : UU l5} (c' : cocone-span-diagram s X')
-  (h : X → X') (H : htpy-cocone-span-diagram s (cocone-map-span-diagram s c h) c')
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  {X' : UU l5} (c' : cocone-span-diagram 𝒮 X')
+  (h : X → X') (H : htpy-cocone-span-diagram 𝒮 (cocone-map-span-diagram 𝒮 c h) c')
   where
 
   triangle-cocone-map-span-diagram :
     {l6 : Level} (Z : UU l6) →
     coherence-triangle-maps
-      ( cocone-map-span-diagram s c')
-      ( cocone-map-span-diagram s c)
+      ( cocone-map-span-diagram 𝒮 c')
+      ( cocone-map-span-diagram 𝒮 c)
       ( precomp h Z)
   triangle-cocone-map-span-diagram Z k =
     inv
-      ( ( compute-comp-cocone-map-span-diagram s c h k) ∙
+      ( ( compute-comp-cocone-map-span-diagram 𝒮 c h k) ∙
         ( ap
-          ( λ t → cocone-map-span-diagram s t k)
-          ( eq-htpy-cocone-span-diagram s
-            ( cocone-map-span-diagram s c h)
+          ( λ t → cocone-map-span-diagram 𝒮 t k)
+          ( eq-htpy-cocone-span-diagram 𝒮
+            ( cocone-map-span-diagram 𝒮 c h)
             ( c')
             ( H))))
 
   abstract
     is-equiv-universal-property-pushout-universal-property-pushout :
-      universal-property-pushout s c →
-      universal-property-pushout s c' →
+      universal-property-pushout 𝒮 c →
+      universal-property-pushout 𝒮 c' →
       is-equiv h
     is-equiv-universal-property-pushout-universal-property-pushout U V =
       is-equiv-is-equiv-precomp h
         ( λ Z →
           is-equiv-top-map-triangle
-            ( cocone-map-span-diagram s c')
-            ( cocone-map-span-diagram s c)
+            ( cocone-map-span-diagram 𝒮 c')
+            ( cocone-map-span-diagram 𝒮 c)
             ( precomp h Z)
             ( triangle-cocone-map-span-diagram Z)
             ( U Z)
@@ -273,12 +274,12 @@ module _
   abstract
     universal-property-pushout-universal-property-pushout-is-equiv :
       is-equiv h →
-      universal-property-pushout s c →
-      universal-property-pushout s c'
+      universal-property-pushout 𝒮 c →
+      universal-property-pushout 𝒮 c'
     universal-property-pushout-universal-property-pushout-is-equiv K U Z =
       is-equiv-left-map-triangle
-        ( cocone-map-span-diagram s c')
-        ( cocone-map-span-diagram s c)
+        ( cocone-map-span-diagram 𝒮 c')
+        ( cocone-map-span-diagram 𝒮 c)
         ( precomp h Z)
         ( triangle-cocone-map-span-diagram Z)
         ( is-equiv-precomp-is-equiv h K Z)
@@ -286,13 +287,13 @@ module _
 
   abstract
     universal-property-pushout-is-equiv-universal-property-pushout :
-      universal-property-pushout s c' →
+      universal-property-pushout 𝒮 c' →
       is-equiv h →
-      universal-property-pushout s c
+      universal-property-pushout 𝒮 c
     universal-property-pushout-is-equiv-universal-property-pushout U K Z =
       is-equiv-right-map-triangle
-        ( cocone-map-span-diagram s c')
-        ( cocone-map-span-diagram s c)
+        ( cocone-map-span-diagram 𝒮 c')
+        ( cocone-map-span-diagram 𝒮 c)
         ( precomp h Z)
         ( triangle-cocone-map-span-diagram Z)
         ( U Z)
@@ -318,7 +319,7 @@ H')`satisfy the universal property of the pushout of`s`. Then the type of equiva
 : X ≃ X'` equipped with a homotopy of cocones
 
 ```text
-  cocone-map-span-diagram s (i , j , H) (map-equiv e) ~ (i' , j' , H')
+  cocone-map-span-diagram 𝒮 (i , j , H) (map-equiv e) ~ (i' , j' , H')
 ```
 
 is contractible.
@@ -327,7 +328,7 @@ is contractible.
 `h : X → X'` equipped with a homotopy of cocones
 
 ```text
-  cocone-map-span-diagram s (i , j , H) h ~ (i' , j' , H'),
+  cocone-map-span-diagram 𝒮 (i , j , H) h ~ (i' , j' , H'),
 ```
 
 is an equivalence. Furthermore, the type of such maps is contractible by the
@@ -336,26 +337,26 @@ universal property of pushouts. Hence the claim follows.
 ```agda
 abstract
   uniquely-unique-pushout :
-    { l1 l2 l3 l4 l5 : Level} (s : span-diagram l1 l2 l3)
-    { X : UU l4} (c : cocone-span-diagram s X)
-    { Y : UU l5} (d : cocone-span-diagram s Y) →
-    universal-property-pushout s c →
-    universal-property-pushout s d →
+    { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+    { X : UU l4} (c : cocone-span-diagram 𝒮 X)
+    { Y : UU l5} (d : cocone-span-diagram 𝒮 Y) →
+    universal-property-pushout 𝒮 c →
+    universal-property-pushout 𝒮 d →
     is-contr
       ( Σ ( X ≃ Y)
           ( λ e →
-            htpy-cocone-span-diagram s
-              ( cocone-map-span-diagram s c (map-equiv e))
+            htpy-cocone-span-diagram 𝒮
+              ( cocone-map-span-diagram 𝒮 c (map-equiv e))
               ( d)))
-  uniquely-unique-pushout s c d H K =
+  uniquely-unique-pushout 𝒮 c d H K =
     is-torsorial-Eq-subtype
-      ( uniqueness-map-universal-property-pushout s c H d)
+      ( uniqueness-map-universal-property-pushout 𝒮 c H d)
       ( is-property-is-equiv)
-      ( map-universal-property-pushout s c H d)
-      ( htpy-cocone-universal-property-pushout s c H d)
-      ( is-equiv-universal-property-pushout-universal-property-pushout s c d
-        ( map-universal-property-pushout s c H d)
-        ( htpy-cocone-universal-property-pushout s c H d)
+      ( map-universal-property-pushout 𝒮 c H d)
+      ( htpy-cocone-universal-property-pushout 𝒮 c H d)
+      ( is-equiv-universal-property-pushout-universal-property-pushout 𝒮 c d
+        ( map-universal-property-pushout 𝒮 c H d)
+        ( htpy-cocone-universal-property-pushout 𝒮 c H d)
         ( H)
         ( K))
 ```
@@ -379,19 +380,19 @@ conclude the theorem.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   triangle-pullback-property-pushout-universal-property-pushout :
     {l : Level} (Y : UU l) →
     coherence-triangle-maps
-      ( cocone-map-span-diagram s c)
+      ( cocone-map-span-diagram 𝒮 c)
       ( tot (λ i' → tot (λ j' → htpy-eq)))
       ( gap
-        ( _∘ left-map-span-diagram s)
-        ( _∘ right-map-span-diagram s)
-        ( cone-pullback-property-pushout s c Y))
+        ( _∘ left-map-span-diagram 𝒮)
+        ( _∘ right-map-span-diagram 𝒮)
+        ( cone-pullback-property-pushout 𝒮 c Y))
   triangle-pullback-property-pushout-universal-property-pushout Y h =
     eq-pair-Σ
       ( refl)
@@ -399,38 +400,38 @@ module _
         ( refl)
         ( inv
           ( is-section-eq-htpy
-            ( h ·l coherence-square-cocone-span-diagram s c))))
+            ( h ·l coherence-square-cocone-span-diagram 𝒮 c))))
 
   pullback-property-pushout-universal-property-pushout :
-    universal-property-pushout s c → pullback-property-pushout s c
+    universal-property-pushout 𝒮 c → pullback-property-pushout 𝒮 c
   pullback-property-pushout-universal-property-pushout H Y =
     is-equiv-top-map-triangle
-      ( cocone-map-span-diagram s c)
+      ( cocone-map-span-diagram 𝒮 c)
       ( tot (λ i' → tot (λ j' → htpy-eq)))
       ( gap
-        ( _∘ left-map-span-diagram s)
-        ( _∘ right-map-span-diagram s)
-        ( cone-pullback-property-pushout s c Y))
+        ( _∘ left-map-span-diagram 𝒮)
+        ( _∘ right-map-span-diagram 𝒮)
+        ( cone-pullback-property-pushout 𝒮 c Y))
       ( triangle-pullback-property-pushout-universal-property-pushout Y)
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ i' →
           is-equiv-tot-is-fiberwise-equiv
             ( λ j' →
               funext
-                ( i' ∘ left-map-span-diagram s)
-                ( j' ∘ right-map-span-diagram s))))
+                ( i' ∘ left-map-span-diagram 𝒮)
+                ( j' ∘ right-map-span-diagram 𝒮))))
       ( H Y)
 
   universal-property-pushout-pullback-property-pushout :
-    pullback-property-pushout s c → universal-property-pushout s c
+    pullback-property-pushout 𝒮 c → universal-property-pushout 𝒮 c
   universal-property-pushout-pullback-property-pushout pb-c Y =
     is-equiv-left-map-triangle
-      ( cocone-map-span-diagram s c)
+      ( cocone-map-span-diagram 𝒮 c)
       ( tot (λ i' → tot (λ j' → htpy-eq)))
       ( gap
-        ( _∘ left-map-span-diagram s)
-        ( _∘ right-map-span-diagram s)
-        ( cone-pullback-property-pushout s c Y))
+        ( _∘ left-map-span-diagram 𝒮)
+        ( _∘ right-map-span-diagram 𝒮)
+        ( cone-pullback-property-pushout 𝒮 c Y))
       ( triangle-pullback-property-pushout-universal-property-pushout Y)
       ( pb-c Y)
       ( is-equiv-tot-is-fiberwise-equiv
@@ -438,46 +439,46 @@ module _
           is-equiv-tot-is-fiberwise-equiv
             ( λ j' →
               funext
-                ( i' ∘ left-map-span-diagram s)
-                ( j' ∘ right-map-span-diagram s))))
+                ( i' ∘ left-map-span-diagram 𝒮)
+                ( j' ∘ right-map-span-diagram 𝒮))))
 ```
 
 ### If the left map of a span diagram is an equivalence, then the right map of a cocone on it is an equivalence if and only if the cocone is a pushout
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {C : UU l4} (c : cocone-span-diagram s C)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {C : UU l4} (c : cocone-span-diagram 𝒮 C)
   where
 
   is-equiv-right-map-cocone-universal-property-pushout :
-    is-equiv (left-map-span-diagram s) →
-    universal-property-pushout s c →
-    is-equiv (right-map-cocone-span-diagram s c)
+    is-equiv (left-map-span-diagram 𝒮) →
+    universal-property-pushout 𝒮 c →
+    is-equiv (right-map-cocone-span-diagram 𝒮 c)
   is-equiv-right-map-cocone-universal-property-pushout is-equiv-f H =
     is-equiv-is-equiv-precomp
-      ( right-map-cocone-span-diagram s c)
+      ( right-map-cocone-span-diagram 𝒮 c)
       ( λ T →
         is-equiv-is-pullback'
-          ( _∘ left-map-span-diagram s)
-          ( _∘ right-map-span-diagram s)
-          ( cone-pullback-property-pushout s c T)
-          ( is-equiv-precomp-is-equiv (left-map-span-diagram s) is-equiv-f T)
-          ( pullback-property-pushout-universal-property-pushout s c H T))
+          ( _∘ left-map-span-diagram 𝒮)
+          ( _∘ right-map-span-diagram 𝒮)
+          ( cone-pullback-property-pushout 𝒮 c T)
+          ( is-equiv-precomp-is-equiv (left-map-span-diagram 𝒮) is-equiv-f T)
+          ( pullback-property-pushout-universal-property-pushout 𝒮 c H T))
 
   universal-property-pushout-is-equiv :
-    is-equiv (left-map-span-diagram s) →
-    is-equiv (right-map-cocone-span-diagram s c) →
-    universal-property-pushout s c
+    is-equiv (left-map-span-diagram 𝒮) →
+    is-equiv (right-map-cocone-span-diagram 𝒮 c) →
+    universal-property-pushout 𝒮 c
   universal-property-pushout-is-equiv H K =
-    universal-property-pushout-pullback-property-pushout s c
+    universal-property-pushout-pullback-property-pushout 𝒮 c
       ( λ T →
         is-pullback-is-equiv'
-          ( _∘ left-map-span-diagram s)
-          ( _∘ right-map-span-diagram s)
-          ( cone-pullback-property-pushout s c T)
-          ( is-equiv-precomp-is-equiv (left-map-span-diagram s) H T)
-          ( is-equiv-precomp-is-equiv (right-map-cocone-span-diagram s c) K T))
+          ( _∘ left-map-span-diagram 𝒮)
+          ( _∘ right-map-span-diagram 𝒮)
+          ( cone-pullback-property-pushout 𝒮 c T)
+          ( is-equiv-precomp-is-equiv (left-map-span-diagram 𝒮) H T)
+          ( is-equiv-precomp-is-equiv (right-map-cocone-span-diagram 𝒮 c) K T))
 
 equiv-right-map-cocone-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
@@ -499,38 +500,38 @@ pr2 (equiv-right-map-cocone-universal-property-pushout e g c H) =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {C : UU l4} (c : cocone-span-diagram s C)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {C : UU l4} (c : cocone-span-diagram 𝒮 C)
   where
 
   is-equiv-left-map-cocone-universal-property-pushout :
-    is-equiv (right-map-span-diagram s) →
-    universal-property-pushout s c →
-    is-equiv (left-map-cocone-span-diagram s c)
+    is-equiv (right-map-span-diagram 𝒮) →
+    universal-property-pushout 𝒮 c →
+    is-equiv (left-map-cocone-span-diagram 𝒮 c)
   is-equiv-left-map-cocone-universal-property-pushout is-equiv-g H =
     is-equiv-is-equiv-precomp
-      ( left-map-cocone-span-diagram s c)
+      ( left-map-cocone-span-diagram 𝒮 c)
       ( λ T →
         is-equiv-is-pullback
-          ( precomp (left-map-span-diagram s) T)
-          ( precomp (right-map-span-diagram s) T)
-          ( cone-pullback-property-pushout s c T)
-          ( is-equiv-precomp-is-equiv (right-map-span-diagram s) is-equiv-g T)
-          ( pullback-property-pushout-universal-property-pushout s c H T))
+          ( precomp (left-map-span-diagram 𝒮) T)
+          ( precomp (right-map-span-diagram 𝒮) T)
+          ( cone-pullback-property-pushout 𝒮 c T)
+          ( is-equiv-precomp-is-equiv (right-map-span-diagram 𝒮) is-equiv-g T)
+          ( pullback-property-pushout-universal-property-pushout 𝒮 c H T))
 
   universal-property-pushout-is-equiv' :
-    is-equiv (right-map-span-diagram s) →
-    is-equiv (left-map-cocone-span-diagram s c) →
-    universal-property-pushout s c
+    is-equiv (right-map-span-diagram 𝒮) →
+    is-equiv (left-map-cocone-span-diagram 𝒮 c) →
+    universal-property-pushout 𝒮 c
   universal-property-pushout-is-equiv' H K =
-    universal-property-pushout-pullback-property-pushout s c
+    universal-property-pushout-pullback-property-pushout 𝒮 c
       ( λ T →
         is-pullback-is-equiv
-          ( precomp (left-map-span-diagram s) T)
-          ( precomp (right-map-span-diagram s) T)
-          ( cone-pullback-property-pushout s c T)
-          ( is-equiv-precomp-is-equiv (right-map-span-diagram s) H T)
-          ( is-equiv-precomp-is-equiv (left-map-cocone-span-diagram s c) K T))
+          ( precomp (left-map-span-diagram 𝒮) T)
+          ( precomp (right-map-span-diagram 𝒮) T)
+          ( cone-pullback-property-pushout 𝒮 c T)
+          ( is-equiv-precomp-is-equiv (right-map-span-diagram 𝒮) H T)
+          ( is-equiv-precomp-is-equiv (left-map-cocone-span-diagram 𝒮 c) K T))
 
 equiv-left-map-cocone-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
@@ -585,46 +586,46 @@ pullback property of pushouts.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
   {C : UU l4} {X : UU l5} {Y : UU l6}
-  (h : codomain-span-diagram s → C)
-  (c : cocone-span-diagram s X)
-  (d : cocone-span-diagram (make-span-diagram (right-map-cocone-span-diagram s c) h) Y)
-  (H : universal-property-pushout s c)
+  (h : codomain-span-diagram 𝒮 → C)
+  (c : cocone-span-diagram 𝒮 X)
+  (d : cocone-span-diagram (make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h) Y)
+  (H : universal-property-pushout 𝒮 c)
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-right-square :
     universal-property-pushout
-      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+      ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( d) →
     universal-property-pushout
-      ( right-extend-span-diagram s h)
-      ( horizontal-comp-cocone-span-diagram s h c d)
+      ( right-extend-span-diagram 𝒮 h)
+      ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
   universal-property-pushout-rectangle-universal-property-pushout-right-square
     U =
     universal-property-pushout-pullback-property-pushout
-      ( right-extend-span-diagram s h)
-      ( horizontal-comp-cocone-span-diagram s h c d)
+      ( right-extend-span-diagram 𝒮 h)
+      ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
       ( λ W →
         tr
           ( is-pullback
-            ( precomp (left-map-span-diagram s) W)
-            ( precomp (h ∘ right-map-span-diagram s) W))
+            ( precomp (left-map-span-diagram 𝒮) W)
+            ( precomp (h ∘ right-map-span-diagram 𝒮) W))
           ( inv
             ( eq-htpy-cone
-              ( precomp (left-map-span-diagram s) W)
-              ( precomp (h ∘ right-map-span-diagram s) W)
+              ( precomp (left-map-span-diagram 𝒮) W)
+              ( precomp (h ∘ right-map-span-diagram 𝒮) W)
               ( cone-pullback-property-pushout
-                ( right-extend-span-diagram s h)
-                ( horizontal-comp-cocone-span-diagram s h c d)
+                ( right-extend-span-diagram 𝒮 h)
+                ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
                 ( W))
               ( pasting-vertical-cone
-                ( precomp (left-map-span-diagram s) W)
-                ( precomp (right-map-span-diagram s) W)
+                ( precomp (left-map-span-diagram 𝒮) W)
+                ( precomp (right-map-span-diagram 𝒮) W)
                 ( precomp h W)
-                ( cone-pullback-property-pushout s c W)
+                ( cone-pullback-property-pushout 𝒮 c W)
                 ( cone-pullback-property-pushout
-                  ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                  ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                   ( d)
                   ( W)))
               ( ( refl-htpy) ,
@@ -632,81 +633,81 @@ module _
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-horizontal-coherence-square-maps
                   ( W)
-                  ( right-map-span-diagram s)
+                  ( right-map-span-diagram 𝒮)
                   ( h)
-                  ( left-map-span-diagram s)
-                  ( right-map-cocone-span-diagram s c)
+                  ( left-map-span-diagram 𝒮)
+                  ( right-map-cocone-span-diagram 𝒮 c)
                   ( right-map-cocone-span-diagram
-                    ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                    ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d))
-                  ( left-map-cocone-span-diagram s c)
+                  ( left-map-cocone-span-diagram 𝒮 c)
                   ( left-map-cocone-span-diagram
-                    ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                    ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d))
-                  ( coherence-square-cocone-span-diagram s c)
+                  ( coherence-square-cocone-span-diagram 𝒮 c)
                   ( coherence-square-cocone-span-diagram
-                    ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                    ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d))))))
           ( is-pullback-rectangle-is-pullback-top
-            ( precomp (left-map-span-diagram s) W)
-            ( precomp (right-map-span-diagram s) W)
+            ( precomp (left-map-span-diagram 𝒮) W)
+            ( precomp (right-map-span-diagram 𝒮) W)
             ( precomp h W)
-            ( cone-pullback-property-pushout s c W)
+            ( cone-pullback-property-pushout 𝒮 c W)
             ( cone-pullback-property-pushout
-              ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+              ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
               ( d)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout s c
+            ( pullback-property-pushout-universal-property-pushout 𝒮 c
               ( H)
               ( W))
             ( pullback-property-pushout-universal-property-pushout
-              ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+              ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
               ( d)
               ( U)
               ( W))))
 
   universal-property-pushout-right-square-universal-property-pushout-rectangle :
     universal-property-pushout
-      ( right-extend-span-diagram s h)
-      ( horizontal-comp-cocone-span-diagram s h c d) →
+      ( right-extend-span-diagram 𝒮 h)
+      ( horizontal-comp-cocone-span-diagram 𝒮 h c d) →
     universal-property-pushout
-      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+      ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( d)
   universal-property-pushout-right-square-universal-property-pushout-rectangle
     ( K)
     { l} =
     universal-property-pushout-pullback-property-pushout
-      ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+      ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( d)
       ( λ W →
         is-pullback-top-is-pullback-rectangle
-          ( precomp (left-map-span-diagram s) W)
-          ( precomp (right-map-span-diagram s) W)
+          ( precomp (left-map-span-diagram 𝒮) W)
+          ( precomp (right-map-span-diagram 𝒮) W)
           ( precomp h W)
-          ( cone-pullback-property-pushout s c W)
+          ( cone-pullback-property-pushout 𝒮 c W)
           ( cone-pullback-property-pushout
-            ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+            ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
             ( d)
             ( W))
-          ( pullback-property-pushout-universal-property-pushout s c H W)
+          ( pullback-property-pushout-universal-property-pushout 𝒮 c H W)
           ( tr
             ( is-pullback
-              ( precomp (left-map-span-diagram s) W)
-              ( precomp (h ∘ (right-map-span-diagram s)) W))
+              ( precomp (left-map-span-diagram 𝒮) W)
+              ( precomp (h ∘ (right-map-span-diagram 𝒮)) W))
             ( eq-htpy-cone
-              ( precomp (left-map-span-diagram s) W)
-              ( precomp (h ∘ right-map-span-diagram s) W)
+              ( precomp (left-map-span-diagram 𝒮) W)
+              ( precomp (h ∘ right-map-span-diagram 𝒮) W)
               ( cone-pullback-property-pushout
-                ( right-extend-span-diagram s h)
-                ( horizontal-comp-cocone-span-diagram s h c d)
+                ( right-extend-span-diagram 𝒮 h)
+                ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
                 ( W))
               ( pasting-vertical-cone
-                ( precomp (left-map-span-diagram s) W)
-                ( precomp (right-map-span-diagram s) W)
+                ( precomp (left-map-span-diagram 𝒮) W)
+                ( precomp (right-map-span-diagram 𝒮) W)
                 ( precomp h W)
-                ( cone-pullback-property-pushout s c W)
+                ( cone-pullback-property-pushout 𝒮 c W)
                 ( cone-pullback-property-pushout
-                  ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                  ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                   ( d)
                   ( W)))
               ( ( refl-htpy) ,
@@ -714,24 +715,24 @@ module _
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-horizontal-coherence-square-maps
                   ( W)
-                  ( right-map-span-diagram s)
+                  ( right-map-span-diagram 𝒮)
                   ( h)
-                  ( left-map-span-diagram s)
-                  ( right-map-cocone-span-diagram s c)
+                  ( left-map-span-diagram 𝒮)
+                  ( right-map-cocone-span-diagram 𝒮 c)
                   ( right-map-cocone-span-diagram
-                    ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                    ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d))
-                  ( left-map-cocone-span-diagram s c)
+                  ( left-map-cocone-span-diagram 𝒮 c)
                   ( left-map-cocone-span-diagram
-                    ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                    ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d))
-                  ( coherence-square-cocone-span-diagram s c)
+                  ( coherence-square-cocone-span-diagram 𝒮 c)
                   ( coherence-square-cocone-span-diagram
-                    ( make-span-diagram (right-map-cocone-span-diagram s c) h)
+                    ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d)))))
             ( pullback-property-pushout-universal-property-pushout
-              ( right-extend-span-diagram s h)
-              ( horizontal-comp-cocone-span-diagram s h c d)
+              ( right-extend-span-diagram 𝒮 h)
+              ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
               ( K)
               ( W))))
 ```
@@ -739,9 +740,9 @@ module _
 #### Extending pushouts by equivalences on the left
 
 As a special case of the horizontal pushout pasting lemma we can extend a
-pushout square by equivalences on the left.
+pushout 𝒮quare by equivalences on the left.
 
-If we have a pushout square on the right, equivalences S' ≃ S and A' ≃ A, and a
+If we have a pushout 𝒮quare on the right, equivalences S' ≃ S and A' ≃ A, and a
 map f' : S' → A' making the left square commute, then the outer rectangle is
 again a pushout.
 
@@ -757,28 +758,28 @@ again a pushout.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3) {X : UU l4}
+  { l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
   { S' : UU l5} {A' : UU l6} (f' : S' → A')
-  ( e : equiv-arrow f' (left-map-span-diagram s))
-  ( c : cocone-span-diagram s X)
+  ( e : equiv-arrow f' (left-map-span-diagram 𝒮))
+  ( c : cocone-span-diagram 𝒮 X)
   where
 
   universal-property-pushout-cocone-left-extend-equiv-arrow-span-diagram :
-    universal-property-pushout s c →
+    universal-property-pushout 𝒮 c →
     universal-property-pushout
-      ( left-extend-equiv-arrow-span-diagram s f' e)
-      ( cocone-left-extend-equiv-arrow-span-diagram s f' e c)
+      ( left-extend-equiv-arrow-span-diagram 𝒮 f' e)
+      ( cocone-left-extend-equiv-arrow-span-diagram 𝒮 f' e c)
   universal-property-pushout-cocone-left-extend-equiv-arrow-span-diagram =
     universal-property-pushout-rectangle-universal-property-pushout-right-square
-      ( span-diagram-equiv-arrow f' (left-map-span-diagram s) e)
-      ( right-map-span-diagram s)
-      ( cocone-equiv-arrow f' (left-map-span-diagram s) e)
+      ( span-diagram-equiv-arrow f' (left-map-span-diagram 𝒮) e)
+      ( right-map-span-diagram 𝒮)
+      ( cocone-equiv-arrow f' (left-map-span-diagram 𝒮) e)
       ( c)
       ( universal-property-pushout-is-equiv'
-        ( span-diagram-equiv-arrow f' (left-map-span-diagram s) e)
-        ( cocone-equiv-arrow f' (left-map-span-diagram s) e)
-        ( is-equiv-map-domain-equiv-arrow f' (left-map-span-diagram s) e)
-        ( is-equiv-map-codomain-equiv-arrow f' (left-map-span-diagram s) e))
+        ( span-diagram-equiv-arrow f' (left-map-span-diagram 𝒮) e)
+        ( cocone-equiv-arrow f' (left-map-span-diagram 𝒮) e)
+        ( is-equiv-map-domain-equiv-arrow f' (left-map-span-diagram 𝒮) e)
+        ( is-equiv-map-codomain-equiv-arrow f' (left-map-span-diagram 𝒮) e))
 ```
 
 #### The vertical pushout pasting lemma
@@ -801,83 +802,83 @@ rectangle is a pushout if and only if the bottom square is a pushout.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
-  { C : UU l4} {X : UU l5} {Y : UU l6} (h : domain-span-diagram s → C)
-  ( c : cocone-span-diagram s X)
-  ( d : cocone-span-diagram (make-span-diagram h (left-map-cocone-span-diagram s c)) Y)
-  ( H : universal-property-pushout s c)
+  { l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
+  { C : UU l4} {X : UU l5} {Y : UU l6} (h : domain-span-diagram 𝒮 → C)
+  ( c : cocone-span-diagram 𝒮 X)
+  ( d : cocone-span-diagram (make-span-diagram h (left-map-cocone-span-diagram 𝒮 c)) Y)
+  ( H : universal-property-pushout 𝒮 c)
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-top :
     ( universal-property-pushout
-      ( make-span-diagram h (left-map-cocone-span-diagram s c))
+      ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
       ( d)) →
     ( universal-property-pushout
       ( make-span-diagram
-        ( h ∘ left-map-span-diagram s)
-        ( right-map-span-diagram s))
-      ( vertical-comp-cocone-span-diagram s h c d))
+        ( h ∘ left-map-span-diagram 𝒮)
+        ( right-map-span-diagram 𝒮))
+      ( vertical-comp-cocone-span-diagram 𝒮 h c d))
   universal-property-pushout-rectangle-universal-property-pushout-top U =
     universal-property-pushout-pullback-property-pushout
       ( make-span-diagram
-        ( h ∘ left-map-span-diagram s)
-        ( right-map-span-diagram s))
-      ( vertical-comp-cocone-span-diagram s h c d)
+        ( h ∘ left-map-span-diagram 𝒮)
+        ( right-map-span-diagram 𝒮))
+      ( vertical-comp-cocone-span-diagram 𝒮 h c d)
       ( λ W →
         tr
           ( is-pullback
-            ( precomp (h ∘ left-map-span-diagram s) W)
-            ( precomp (right-map-span-diagram s) W))
+            ( precomp (h ∘ left-map-span-diagram 𝒮) W)
+            ( precomp (right-map-span-diagram 𝒮) W))
           ( inv
             ( eq-htpy-cone
-              ( precomp (h ∘ left-map-span-diagram s) W)
-              ( precomp (right-map-span-diagram s) W)
+              ( precomp (h ∘ left-map-span-diagram 𝒮) W)
+              ( precomp (right-map-span-diagram 𝒮) W)
               ( cone-pullback-property-pushout
                 ( make-span-diagram
-                  ( h ∘ left-map-span-diagram s)
-                  ( right-map-span-diagram s))
-                ( vertical-comp-cocone-span-diagram s h c d)
+                  ( h ∘ left-map-span-diagram 𝒮)
+                  ( right-map-span-diagram 𝒮))
+                ( vertical-comp-cocone-span-diagram 𝒮 h c d)
                 ( W))
               ( pasting-horizontal-cone
                 ( precomp h W)
-                ( precomp (left-map-span-diagram s) W)
-                ( precomp (right-map-span-diagram s) W)
-                ( cone-pullback-property-pushout s c W)
+                ( precomp (left-map-span-diagram 𝒮) W)
+                ( precomp (right-map-span-diagram 𝒮) W)
+                ( cone-pullback-property-pushout 𝒮 c W)
                 ( cone-pullback-property-pushout
-                  ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                  ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                   ( d)
                   ( W)))
               ( ( refl-htpy) ,
                 ( refl-htpy) ,
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-vertical-coherence-square-maps W
-                  ( right-map-span-diagram s)
-                  ( left-map-span-diagram s)
-                  ( right-map-cocone-span-diagram s c)
-                  ( left-map-cocone-span-diagram s c)
+                  ( right-map-span-diagram 𝒮)
+                  ( left-map-span-diagram 𝒮)
+                  ( right-map-cocone-span-diagram 𝒮 c)
+                  ( left-map-cocone-span-diagram 𝒮 c)
                   ( h)
                   ( right-map-cocone-span-diagram
-                    ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                    ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                     ( d))
                   ( left-map-cocone-span-diagram
-                    ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                    ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                     ( d))
-                  ( coherence-square-cocone-span-diagram s c)
+                  ( coherence-square-cocone-span-diagram 𝒮 c)
                   ( coherence-square-cocone-span-diagram
-                    ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                    ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                     ( d))))))
           ( is-pullback-rectangle-is-pullback-left-square
             ( precomp h W)
-            ( precomp (left-map-span-diagram s) W)
-            ( precomp (right-map-span-diagram s) W)
-            ( cone-pullback-property-pushout s c W)
+            ( precomp (left-map-span-diagram 𝒮) W)
+            ( precomp (right-map-span-diagram 𝒮) W)
+            ( cone-pullback-property-pushout 𝒮 c W)
             ( cone-pullback-property-pushout
-              ( make-span-diagram h (left-map-cocone-span-diagram s c))
+              ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
               ( d)
               ( W))
-            ( pullback-property-pushout-universal-property-pushout s c H W)
+            ( pullback-property-pushout-universal-property-pushout 𝒮 c H W)
             ( pullback-property-pushout-universal-property-pushout
-              ( make-span-diagram h (left-map-cocone-span-diagram s c))
+              ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
               ( d)
               ( U)
               ( W))))
@@ -885,80 +886,80 @@ module _
   universal-property-pushout-top-universal-property-pushout-rectangle :
     universal-property-pushout
       ( make-span-diagram
-        ( h ∘ left-map-span-diagram s)
-        ( right-map-span-diagram s))
-      ( vertical-comp-cocone-span-diagram s h c d) →
+        ( h ∘ left-map-span-diagram 𝒮)
+        ( right-map-span-diagram 𝒮))
+      ( vertical-comp-cocone-span-diagram 𝒮 h c d) →
     universal-property-pushout
-      ( make-span-diagram h (left-map-cocone-span-diagram s c))
+      ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
       ( d)
   universal-property-pushout-top-universal-property-pushout-rectangle U =
     universal-property-pushout-pullback-property-pushout
-      ( make-span-diagram h (left-map-cocone-span-diagram s c))
+      ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
       ( d)
       ( λ W →
         is-pullback-left-square-is-pullback-rectangle
           ( precomp h W)
-          ( precomp (left-map-span-diagram s) W)
-          ( precomp (right-map-span-diagram s) W)
-          ( cone-pullback-property-pushout s c W)
+          ( precomp (left-map-span-diagram 𝒮) W)
+          ( precomp (right-map-span-diagram 𝒮) W)
+          ( cone-pullback-property-pushout 𝒮 c W)
           ( cone-pullback-property-pushout
-            ( make-span-diagram h (left-map-cocone-span-diagram s c))
+            ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
             ( d)
             ( W))
-          ( pullback-property-pushout-universal-property-pushout s c H W)
+          ( pullback-property-pushout-universal-property-pushout 𝒮 c H W)
           ( tr
             ( is-pullback
-              ( precomp (h ∘ left-map-span-diagram s) W)
-              ( precomp (right-map-span-diagram s) W))
+              ( precomp (h ∘ left-map-span-diagram 𝒮) W)
+              ( precomp (right-map-span-diagram 𝒮) W))
             ( eq-htpy-cone
-              ( precomp (h ∘ left-map-span-diagram s) W)
-              ( precomp (right-map-span-diagram s) W)
+              ( precomp (h ∘ left-map-span-diagram 𝒮) W)
+              ( precomp (right-map-span-diagram 𝒮) W)
               ( cone-pullback-property-pushout
                 ( make-span-diagram
-                  ( h ∘ left-map-span-diagram s)
-                  ( right-map-span-diagram s))
-                ( vertical-comp-cocone-span-diagram s h c d)
+                  ( h ∘ left-map-span-diagram 𝒮)
+                  ( right-map-span-diagram 𝒮))
+                ( vertical-comp-cocone-span-diagram 𝒮 h c d)
                 ( W))
               ( pasting-horizontal-cone
                 ( precomp h W)
-                ( precomp (left-map-span-diagram s) W)
-                ( precomp (right-map-span-diagram s) W)
-                ( cone-pullback-property-pushout s c W)
+                ( precomp (left-map-span-diagram 𝒮) W)
+                ( precomp (right-map-span-diagram 𝒮) W)
+                ( cone-pullback-property-pushout 𝒮 c W)
                 ( cone-pullback-property-pushout
-                  ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                  ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                   ( d)
                   ( W)))
               ( refl-htpy ,
                 refl-htpy ,
                 ( right-unit-htpy) ∙h
                 ( distributive-precomp-pasting-vertical-coherence-square-maps W
-                  ( right-map-span-diagram s)
-                  ( left-map-span-diagram s)
-                  ( right-map-cocone-span-diagram s c)
-                  ( left-map-cocone-span-diagram s c)
+                  ( right-map-span-diagram 𝒮)
+                  ( left-map-span-diagram 𝒮)
+                  ( right-map-cocone-span-diagram 𝒮 c)
+                  ( left-map-cocone-span-diagram 𝒮 c)
                   ( h)
                   ( right-map-cocone-span-diagram
-                    ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                    ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                     ( d))
                   ( left-map-cocone-span-diagram
-                    ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                    ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                     ( d))
-                  ( coherence-square-cocone-span-diagram s c)
+                  ( coherence-square-cocone-span-diagram 𝒮 c)
                   ( coherence-square-cocone-span-diagram
-                    ( make-span-diagram h (left-map-cocone-span-diagram s c))
+                    ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
                     ( d)))))
             ( pullback-property-pushout-universal-property-pushout
               ( make-span-diagram
-                ( h ∘ left-map-span-diagram s)
-                ( right-map-span-diagram s))
-              ( vertical-comp-cocone-span-diagram s h c d)
+                ( h ∘ left-map-span-diagram 𝒮)
+                ( right-map-span-diagram 𝒮))
+              ( vertical-comp-cocone-span-diagram 𝒮 h c d)
               ( U)
               ( W))))
 ```
 
 #### Extending pushouts by an equivalence of arrows on top
 
-If we have a pushout square on the right, equivalences `S' ≃ S` and `B' ≃ B`,
+If we have a pushout 𝒮quare on the right, equivalences `S' ≃ S` and `B' ≃ B`,
 and a map `g' : S' → B'` making the top square commute, then the vertical
 rectangle is again a pushout. This is a special case of the vertical pushout
 pasting lemma.
@@ -979,34 +980,34 @@ pasting lemma.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
+  { l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
   { S' : UU l5} {B' : UU l6} (g' : S' → B')
-  ( e : equiv-arrow g' (right-map-span-diagram s))
-  { X : UU l4} ( c : cocone-span-diagram s X)
+  ( e : equiv-arrow g' (right-map-span-diagram 𝒮))
+  { X : UU l4} ( c : cocone-span-diagram 𝒮 X)
   where
 
   universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram :
-    universal-property-pushout s c →
+    universal-property-pushout 𝒮 c →
     universal-property-pushout
-      ( right-extend-equiv-arrow-span-diagram s g' e)
-      ( cocone-right-extend-equiv-arrow-span-diagram s g' e c)
+      ( right-extend-equiv-arrow-span-diagram 𝒮 g' e)
+      ( cocone-right-extend-equiv-arrow-span-diagram 𝒮 g' e c)
   universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram =
     universal-property-pushout-rectangle-universal-property-pushout-top
       ( transposition-span-diagram
-        ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e))
-      ( left-map-span-diagram s)
+        ( span-diagram-equiv-arrow g' (right-map-span-diagram 𝒮) e))
+      ( left-map-span-diagram 𝒮)
       ( transposition-cocone-span-diagram
-        ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e)
-        ( cocone-equiv-arrow g' (right-map-span-diagram s) e))
+        ( span-diagram-equiv-arrow g' (right-map-span-diagram 𝒮) e)
+        ( cocone-equiv-arrow g' (right-map-span-diagram 𝒮) e))
       ( c)
       ( universal-property-pushout-is-equiv
         ( transposition-span-diagram
-          ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e))
+          ( span-diagram-equiv-arrow g' (right-map-span-diagram 𝒮) e))
         ( transposition-cocone-span-diagram
-          ( span-diagram-equiv-arrow g' (right-map-span-diagram s) e)
-          ( cocone-equiv-arrow g' (right-map-span-diagram s) e))
-        ( is-equiv-map-domain-equiv-arrow g' (right-map-span-diagram s) e)
-        ( is-equiv-map-codomain-equiv-arrow g' (right-map-span-diagram s) e))
+          ( span-diagram-equiv-arrow g' (right-map-span-diagram 𝒮) e)
+          ( cocone-equiv-arrow g' (right-map-span-diagram 𝒮) e))
+        ( is-equiv-map-domain-equiv-arrow g' (right-map-span-diagram 𝒮) e)
+        ( is-equiv-map-codomain-equiv-arrow g' (right-map-span-diagram 𝒮) e))
 ```
 
 ### Extending pushouts by cocartesian morphisms of span diagrams
@@ -1026,7 +1027,7 @@ Given a commutative diagram
          A -----> X
 ```
 
-in which the left and top squares are pushout squares. Then the bottom right square is a pushout square if and only if the the outer rectangle
+in which the left and top squares are pushout 𝒮quares. Then the bottom right square is a pushout 𝒮quare if and only if the the outer rectangle
 
 ```text
    S' ---> B'
@@ -1036,7 +1037,7 @@ in which the left and top squares are pushout squares. Then the bottom right squ
    A' ---> X.
 ```
 
-is a pushout square. In other words, pushout squares extended by [cocartesian morphisms of span diagrams](synthetic-homotopy-theory.cocartesian-morphisms-span-diagrams.md) are again pushout squares.
+is a pushout 𝒮quare. In other words, pushout 𝒮quares extended by [cocartesian morphisms of span diagrams](synthetic-homotopy-theory.cocartesian-morphisms-span-diagrams.md) are again pushout 𝒮quares.
 
 ### Extending pushouts by equivalences of span diagrams
 
@@ -1078,7 +1079,7 @@ the induced square is a pushout:
           ≃        i
 ```
 
-is a pushout square. The vertical pushout pasting lemma then implies that the outer square
+is a pushout 𝒮quare. The vertical pushout pasting lemma then implies that the outer square
 
 ```text
                g'
@@ -1094,35 +1095,35 @@ is a pushout square. The vertical pushout pasting lemma then implies that the ou
           ≃        i
 ```
 
-is a pushout square.
+is a pushout 𝒮quare.
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
-  (s' : span-diagram l1 l2 l3) (s : span-diagram l4 l5 l6)
-  (e : equiv-span-diagram s' s)
-  {X : UU l7} (c : cocone-span-diagram s X) (H : universal-property-pushout s c)
+  (𝒮' : span-diagram l1 l2 l3) (𝒮 : span-diagram l4 l5 l6)
+  (e : equiv-span-diagram 𝒮' 𝒮)
+  {X : UU l7} (c : cocone-span-diagram 𝒮 X) (H : universal-property-pushout 𝒮 c)
   where
 
   universal-property-pushout-comp-cocone-equiv-span-diagram :
-    universal-property-pushout s' (comp-cocone-equiv-span-diagram s' s e c)
+    universal-property-pushout 𝒮' (comp-cocone-equiv-span-diagram 𝒮' 𝒮 e c)
   universal-property-pushout-comp-cocone-equiv-span-diagram =
     universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram
       ( make-span-diagram
-        ( left-map-span-diagram s')
-        ( right-map-span-diagram s ∘ spanning-map-equiv-span-diagram s' s e))
-      ( right-map-span-diagram s')
+        ( left-map-span-diagram 𝒮')
+        ( right-map-span-diagram 𝒮 ∘ spanning-map-equiv-span-diagram 𝒮' 𝒮 e))
+      ( right-map-span-diagram 𝒮')
       ( ( id-equiv) ,
-        ( equiv-codomain-equiv-span-diagram s' s e) ,
-        ( right-square-equiv-span-diagram s' s e))
-      ( cocone-left-extend-equiv-arrow-span-diagram s
-        ( left-map-span-diagram s')
-        ( equiv-left-arrow-equiv-span-diagram s' s e)
+        ( equiv-codomain-equiv-span-diagram 𝒮' 𝒮 e) ,
+        ( right-square-equiv-span-diagram 𝒮' 𝒮 e))
+      ( cocone-left-extend-equiv-arrow-span-diagram 𝒮
+        ( left-map-span-diagram 𝒮')
+        ( equiv-left-arrow-equiv-span-diagram 𝒮' 𝒮 e)
         ( c))
       ( universal-property-pushout-cocone-left-extend-equiv-arrow-span-diagram
-        ( s)
-        ( left-map-span-diagram s')
-        ( equiv-left-arrow-equiv-span-diagram s' s e)
+        ( 𝒮)
+        ( left-map-span-diagram 𝒮')
+        ( equiv-left-arrow-equiv-span-diagram 𝒮' 𝒮 e)
         ( c)
         ( H))
 ```
@@ -1134,212 +1135,212 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  (s : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram s X)
-  (t : span-diagram l5 l6 l7) {Y : UU l8} (d : cocone-span-diagram t Y)
-  (e : equiv-span-diagram s t) (e' : equiv-cocone-equiv-span-diagram s c t d e)
+  (𝒮 : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  (𝒯 : span-diagram l5 l6 l7) {Y : UU l8} (d : cocone-span-diagram 𝒯 Y)
+  (e : equiv-span-diagram 𝒮 𝒯) (e' : equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e)
   where
 
   universal-property-pushout-equiv-cocone-equiv-span-diagram :
-    universal-property-pushout t d →
-    universal-property-pushout s c
+    universal-property-pushout 𝒯 d →
+    universal-property-pushout 𝒮 c
   universal-property-pushout-equiv-cocone-equiv-span-diagram U =
-    universal-property-pushout-pullback-property-pushout s c
+    universal-property-pushout-pullback-property-pushout 𝒮 c
       ( λ Z →
         is-pullback-bottom-is-pullback-top-cube-is-equiv
-          ( precomp (left-map-cocone-span-diagram s c) Z)
-          ( precomp (right-map-cocone-span-diagram s c) Z)
-          ( precomp (left-map-span-diagram s) Z)
-          ( precomp (right-map-span-diagram s) Z)
-          ( precomp (left-map-cocone-span-diagram t d) Z)
-          ( precomp (right-map-cocone-span-diagram t d) Z)
-          ( precomp (left-map-span-diagram t) Z)
-          ( precomp (right-map-span-diagram t) Z)
-          ( precomp (map-equiv-cocone-equiv-span-diagram s c t d e e') Z)
-          ( precomp (map-domain-equiv-span-diagram s t e) Z)
-          ( precomp (map-codomain-equiv-span-diagram s t e) Z)
-          ( precomp (spanning-map-equiv-span-diagram s t e) Z)
+          ( precomp (left-map-cocone-span-diagram 𝒮 c) Z)
+          ( precomp (right-map-cocone-span-diagram 𝒮 c) Z)
+          ( precomp (left-map-span-diagram 𝒮) Z)
+          ( precomp (right-map-span-diagram 𝒮) Z)
+          ( precomp (left-map-cocone-span-diagram 𝒯 d) Z)
+          ( precomp (right-map-cocone-span-diagram 𝒯 d) Z)
+          ( precomp (left-map-span-diagram 𝒯) Z)
+          ( precomp (right-map-span-diagram 𝒯) Z)
+          ( precomp (map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e') Z)
+          ( precomp (map-domain-equiv-span-diagram 𝒮 𝒯 e) Z)
+          ( precomp (map-codomain-equiv-span-diagram 𝒮 𝒯 e) Z)
+          ( precomp (spanning-map-equiv-span-diagram 𝒮 𝒯 e) Z)
           ( precomp-coherence-square-maps
-            ( right-map-span-diagram t)
-            ( left-map-span-diagram t)
-            ( right-map-cocone-span-diagram t d)
-            ( left-map-cocone-span-diagram t d)
-            ( coherence-square-cocone-span-diagram t d)
+            ( right-map-span-diagram 𝒯)
+            ( left-map-span-diagram 𝒯)
+            ( right-map-cocone-span-diagram 𝒯 d)
+            ( left-map-cocone-span-diagram 𝒯 d)
+            ( coherence-square-cocone-span-diagram 𝒯 d)
             ( Z))
           ( precomp-coherence-square-maps
-            ( map-domain-equiv-span-diagram s t e)
-            ( left-map-cocone-span-diagram s c)
-            ( left-map-cocone-span-diagram t d)
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( left-map-cocone-span-diagram 𝒮 c)
+            ( left-map-cocone-span-diagram 𝒯 d)
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( inv-htpy
-              ( left-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+              ( left-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e'))
             ( Z))
           ( precomp-coherence-square-maps
-            ( map-codomain-equiv-span-diagram s t e)
-            ( right-map-cocone-span-diagram s c)
-            ( right-map-cocone-span-diagram t d)
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( right-map-cocone-span-diagram 𝒮 c)
+            ( right-map-cocone-span-diagram 𝒯 d)
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( inv-htpy
-              ( right-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+              ( right-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e'))
             ( Z))
           ( precomp-coherence-square-maps
-            ( spanning-map-equiv-span-diagram s t e)
-            ( left-map-span-diagram s)
-            ( left-map-span-diagram t)
-            ( map-domain-equiv-span-diagram s t e)
-            ( inv-htpy (inv-htpy (left-square-equiv-span-diagram s t e)))
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( left-map-span-diagram 𝒮)
+            ( left-map-span-diagram 𝒯)
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( inv-htpy (inv-htpy (left-square-equiv-span-diagram 𝒮 𝒯 e)))
             ( Z))
           ( precomp-coherence-square-maps
-            ( spanning-map-equiv-span-diagram s t e)
-            ( right-map-span-diagram s)
-            ( right-map-span-diagram t)
-            ( map-codomain-equiv-span-diagram s t e)
-            ( inv-htpy (inv-htpy (right-square-equiv-span-diagram s t e)))
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( right-map-span-diagram 𝒮)
+            ( right-map-span-diagram 𝒯)
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( inv-htpy (inv-htpy (right-square-equiv-span-diagram 𝒮 𝒯 e)))
             ( Z))
           ( precomp-coherence-square-maps
-            ( right-map-span-diagram s)
-            ( left-map-span-diagram s)
-            ( right-map-cocone-span-diagram s c)
-            ( left-map-cocone-span-diagram s c)
-            ( coherence-square-cocone-span-diagram s c)
+            ( right-map-span-diagram 𝒮)
+            ( left-map-span-diagram 𝒮)
+            ( right-map-cocone-span-diagram 𝒮 c)
+            ( left-map-cocone-span-diagram 𝒮 c)
+            ( coherence-square-cocone-span-diagram 𝒮 c)
             ( Z))
           ( precomp-coherence-cube-maps
-            ( left-map-span-diagram t)
-            ( right-map-span-diagram t)
-            ( left-map-cocone-span-diagram t d)
-            ( right-map-cocone-span-diagram t d)
-            ( left-map-span-diagram s)
-            ( right-map-span-diagram s)
-            ( left-map-cocone-span-diagram s c)
-            ( right-map-cocone-span-diagram s c)
-            ( spanning-map-equiv-span-diagram s t e)
-            ( map-domain-equiv-span-diagram s t e)
-            ( map-codomain-equiv-span-diagram s t e)
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( coherence-square-cocone-span-diagram s c)
-            ( inv-htpy (left-square-equiv-span-diagram s t e))
-            ( inv-htpy (right-square-equiv-span-diagram s t e))
-            ( left-square-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( right-square-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( coherence-square-cocone-span-diagram t d)
-            ( cube-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( left-map-span-diagram 𝒯)
+            ( right-map-span-diagram 𝒯)
+            ( left-map-cocone-span-diagram 𝒯 d)
+            ( right-map-cocone-span-diagram 𝒯 d)
+            ( left-map-span-diagram 𝒮)
+            ( right-map-span-diagram 𝒮)
+            ( left-map-cocone-span-diagram 𝒮 c)
+            ( right-map-cocone-span-diagram 𝒮 c)
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( coherence-square-cocone-span-diagram 𝒮 c)
+            ( inv-htpy (left-square-equiv-span-diagram 𝒮 𝒯 e))
+            ( inv-htpy (right-square-equiv-span-diagram 𝒮 𝒯 e))
+            ( left-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( right-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( coherence-square-cocone-span-diagram 𝒯 d)
+            ( cube-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( is-equiv-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( is-equiv-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( map-domain-equiv-span-diagram s t e)
-            ( is-equiv-map-domain-equiv-span-diagram s t e)
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( is-equiv-map-domain-equiv-span-diagram 𝒮 𝒯 e)
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( map-codomain-equiv-span-diagram s t e)
-            ( is-equiv-map-codomain-equiv-span-diagram s t e)
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( is-equiv-map-codomain-equiv-span-diagram 𝒮 𝒯 e)
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( spanning-map-equiv-span-diagram s t e)
-            ( is-equiv-spanning-map-equiv-span-diagram s t e)
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( is-equiv-spanning-map-equiv-span-diagram 𝒮 𝒯 e)
             ( Z))
-          ( pullback-property-pushout-universal-property-pushout t d U Z))
+          ( pullback-property-pushout-universal-property-pushout 𝒯 d U Z))
 
   universal-property-pushout-equiv-cocone-equiv-span-diagram' :
-    universal-property-pushout s c →
-    universal-property-pushout t d
+    universal-property-pushout 𝒮 c →
+    universal-property-pushout 𝒯 d
   universal-property-pushout-equiv-cocone-equiv-span-diagram' U =
-    universal-property-pushout-pullback-property-pushout t d
+    universal-property-pushout-pullback-property-pushout 𝒯 d
       ( λ Z →
         is-pullback-top-is-pullback-bottom-cube-is-equiv
-          ( precomp (left-map-cocone-span-diagram s c) Z)
-          ( precomp (right-map-cocone-span-diagram s c) Z)
-          ( precomp (left-map-span-diagram s) Z)
-          ( precomp (right-map-span-diagram s) Z)
-          ( precomp (left-map-cocone-span-diagram t d) Z)
-          ( precomp (right-map-cocone-span-diagram t d) Z)
-          ( precomp (left-map-span-diagram t) Z)
-          ( precomp (right-map-span-diagram t) Z)
-          ( precomp (map-equiv-cocone-equiv-span-diagram s c t d e e') Z)
-          ( precomp (map-domain-equiv-span-diagram s t e) Z)
-          ( precomp (map-codomain-equiv-span-diagram s t e) Z)
-          ( precomp (spanning-map-equiv-span-diagram s t e) Z)
+          ( precomp (left-map-cocone-span-diagram 𝒮 c) Z)
+          ( precomp (right-map-cocone-span-diagram 𝒮 c) Z)
+          ( precomp (left-map-span-diagram 𝒮) Z)
+          ( precomp (right-map-span-diagram 𝒮) Z)
+          ( precomp (left-map-cocone-span-diagram 𝒯 d) Z)
+          ( precomp (right-map-cocone-span-diagram 𝒯 d) Z)
+          ( precomp (left-map-span-diagram 𝒯) Z)
+          ( precomp (right-map-span-diagram 𝒯) Z)
+          ( precomp (map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e') Z)
+          ( precomp (map-domain-equiv-span-diagram 𝒮 𝒯 e) Z)
+          ( precomp (map-codomain-equiv-span-diagram 𝒮 𝒯 e) Z)
+          ( precomp (spanning-map-equiv-span-diagram 𝒮 𝒯 e) Z)
           ( precomp-coherence-square-maps
-            ( right-map-span-diagram t)
-            ( left-map-span-diagram t)
-            ( right-map-cocone-span-diagram t d)
-            ( left-map-cocone-span-diagram t d)
-            ( coherence-square-cocone-span-diagram t d)
+            ( right-map-span-diagram 𝒯)
+            ( left-map-span-diagram 𝒯)
+            ( right-map-cocone-span-diagram 𝒯 d)
+            ( left-map-cocone-span-diagram 𝒯 d)
+            ( coherence-square-cocone-span-diagram 𝒯 d)
             ( Z))
           ( precomp-coherence-square-maps
-            ( map-domain-equiv-span-diagram s t e)
-            ( left-map-cocone-span-diagram s c)
-            ( left-map-cocone-span-diagram t d)
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( left-map-cocone-span-diagram 𝒮 c)
+            ( left-map-cocone-span-diagram 𝒯 d)
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( inv-htpy
-              ( left-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+              ( left-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e'))
             ( Z))
           ( precomp-coherence-square-maps
-            ( map-codomain-equiv-span-diagram s t e)
-            ( right-map-cocone-span-diagram s c)
-            ( right-map-cocone-span-diagram t d)
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( right-map-cocone-span-diagram 𝒮 c)
+            ( right-map-cocone-span-diagram 𝒯 d)
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( inv-htpy
-              ( right-square-equiv-cocone-equiv-span-diagram s c t d e e'))
+              ( right-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e'))
             ( Z))
           ( precomp-coherence-square-maps
-            ( spanning-map-equiv-span-diagram s t e)
-            ( left-map-span-diagram s)
-            ( left-map-span-diagram t)
-            ( map-domain-equiv-span-diagram s t e)
-            ( inv-htpy (inv-htpy (left-square-equiv-span-diagram s t e)))
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( left-map-span-diagram 𝒮)
+            ( left-map-span-diagram 𝒯)
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( inv-htpy (inv-htpy (left-square-equiv-span-diagram 𝒮 𝒯 e)))
             ( Z))
           ( precomp-coherence-square-maps
-            ( spanning-map-equiv-span-diagram s t e)
-            ( right-map-span-diagram s)
-            ( right-map-span-diagram t)
-            ( map-codomain-equiv-span-diagram s t e)
-            ( inv-htpy (inv-htpy (right-square-equiv-span-diagram s t e)))
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( right-map-span-diagram 𝒮)
+            ( right-map-span-diagram 𝒯)
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( inv-htpy (inv-htpy (right-square-equiv-span-diagram 𝒮 𝒯 e)))
             ( Z))
           ( precomp-coherence-square-maps
-            ( right-map-span-diagram s)
-            ( left-map-span-diagram s)
-            ( right-map-cocone-span-diagram s c)
-            ( left-map-cocone-span-diagram s c)
-            ( coherence-square-cocone-span-diagram s c)
+            ( right-map-span-diagram 𝒮)
+            ( left-map-span-diagram 𝒮)
+            ( right-map-cocone-span-diagram 𝒮 c)
+            ( left-map-cocone-span-diagram 𝒮 c)
+            ( coherence-square-cocone-span-diagram 𝒮 c)
             ( Z))
           ( precomp-coherence-cube-maps
-            ( left-map-span-diagram t)
-            ( right-map-span-diagram t)
-            ( left-map-cocone-span-diagram t d)
-            ( right-map-cocone-span-diagram t d)
-            ( left-map-span-diagram s)
-            ( right-map-span-diagram s)
-            ( left-map-cocone-span-diagram s c)
-            ( right-map-cocone-span-diagram s c)
-            ( spanning-map-equiv-span-diagram s t e)
-            ( map-domain-equiv-span-diagram s t e)
-            ( map-codomain-equiv-span-diagram s t e)
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( coherence-square-cocone-span-diagram s c)
-            ( inv-htpy (left-square-equiv-span-diagram s t e))
-            ( inv-htpy (right-square-equiv-span-diagram s t e))
-            ( left-square-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( right-square-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( coherence-square-cocone-span-diagram t d)
-            ( cube-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( left-map-span-diagram 𝒯)
+            ( right-map-span-diagram 𝒯)
+            ( left-map-cocone-span-diagram 𝒯 d)
+            ( right-map-cocone-span-diagram 𝒯 d)
+            ( left-map-span-diagram 𝒮)
+            ( right-map-span-diagram 𝒮)
+            ( left-map-cocone-span-diagram 𝒮 c)
+            ( right-map-cocone-span-diagram 𝒮 c)
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( coherence-square-cocone-span-diagram 𝒮 c)
+            ( inv-htpy (left-square-equiv-span-diagram 𝒮 𝒯 e))
+            ( inv-htpy (right-square-equiv-span-diagram 𝒮 𝒯 e))
+            ( left-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( right-square-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( coherence-square-cocone-span-diagram 𝒯 d)
+            ( cube-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( map-equiv-cocone-equiv-span-diagram s c t d e e')
-            ( is-equiv-equiv-cocone-equiv-span-diagram s c t d e e')
+            ( map-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
+            ( is-equiv-equiv-cocone-equiv-span-diagram 𝒮 c 𝒯 d e e')
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( map-domain-equiv-span-diagram s t e)
-            ( is-equiv-map-domain-equiv-span-diagram s t e)
+            ( map-domain-equiv-span-diagram 𝒮 𝒯 e)
+            ( is-equiv-map-domain-equiv-span-diagram 𝒮 𝒯 e)
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( map-codomain-equiv-span-diagram s t e)
-            ( is-equiv-map-codomain-equiv-span-diagram s t e)
+            ( map-codomain-equiv-span-diagram 𝒮 𝒯 e)
+            ( is-equiv-map-codomain-equiv-span-diagram 𝒮 𝒯 e)
             ( Z))
           ( is-equiv-precomp-is-equiv
-            ( spanning-map-equiv-span-diagram s t e)
-            ( is-equiv-spanning-map-equiv-span-diagram s t e)
+            ( spanning-map-equiv-span-diagram 𝒮 𝒯 e)
+            ( is-equiv-spanning-map-equiv-span-diagram 𝒮 𝒯 e)
             ( Z))
-          ( pullback-property-pushout-universal-property-pushout s c U Z))
+          ( pullback-property-pushout-universal-property-pushout 𝒮 c U Z))
 ```

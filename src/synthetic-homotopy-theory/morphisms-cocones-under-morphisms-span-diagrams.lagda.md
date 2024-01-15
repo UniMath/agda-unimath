@@ -52,52 +52,52 @@ Consider a [morphism of span diagrams](foundation.morphisms-span-diagrams.md) `h
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  (s : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram s X)
-  (t : span-diagram l5 l6 l7) {Y : UU l8} (d : cocone-span-diagram t Y)
-  (h : hom-span-diagram s t)
+  (𝒮 : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  (𝒯 : span-diagram l5 l6 l7) {Y : UU l8} (d : cocone-span-diagram 𝒯 Y)
+  (h : hom-span-diagram 𝒮 𝒯)
   where
 
   left-coherence-square-hom-cocone-hom-span-diagram :
     (X → Y) → UU (l1 ⊔ l8)
   left-coherence-square-hom-cocone-hom-span-diagram u =
     coherence-square-maps
-      ( left-map-cocone-span-diagram s c)
-      ( map-domain-hom-span-diagram s t h)
+      ( left-map-cocone-span-diagram 𝒮 c)
+      ( map-domain-hom-span-diagram 𝒮 𝒯 h)
       ( u)
-      ( left-map-cocone-span-diagram t d)
+      ( left-map-cocone-span-diagram 𝒯 d)
 
   right-coherence-square-hom-cocone-hom-span-diagram : (X → Y) → UU (l2 ⊔ l8)
   right-coherence-square-hom-cocone-hom-span-diagram u =
     coherence-square-maps
-      ( right-map-cocone-span-diagram s c)
-      ( map-codomain-hom-span-diagram s t h)
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( map-codomain-hom-span-diagram 𝒮 𝒯 h)
       ( u)
-      ( right-map-cocone-span-diagram t d)
+      ( right-map-cocone-span-diagram 𝒯 d)
 
   coherence-cube-hom-cocone-hom-span-diagram :
-    (u : X → Y) → 
+    (u : X → Y) →
     left-coherence-square-hom-cocone-hom-span-diagram u →
     right-coherence-square-hom-cocone-hom-span-diagram u → UU (l3 ⊔ l8)
   coherence-cube-hom-cocone-hom-span-diagram u L R =
     coherence-cube-maps
-      ( left-map-span-diagram t)
-      ( right-map-span-diagram t)
-      ( left-map-cocone-span-diagram t d)
-      ( right-map-cocone-span-diagram t d)
-      ( left-map-span-diagram s)
-      ( right-map-span-diagram s)
-      ( left-map-cocone-span-diagram s c)
-      ( right-map-cocone-span-diagram s c)
-      ( spanning-map-hom-span-diagram s t h)
-      ( map-domain-hom-span-diagram s t h)
-      ( map-codomain-hom-span-diagram s t h)
+      ( left-map-span-diagram 𝒯)
+      ( right-map-span-diagram 𝒯)
+      ( left-map-cocone-span-diagram 𝒯 d)
+      ( right-map-cocone-span-diagram 𝒯 d)
+      ( left-map-span-diagram 𝒮)
+      ( right-map-span-diagram 𝒮)
+      ( left-map-cocone-span-diagram 𝒮 c)
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( spanning-map-hom-span-diagram 𝒮 𝒯 h)
+      ( map-domain-hom-span-diagram 𝒮 𝒯 h)
+      ( map-codomain-hom-span-diagram 𝒮 𝒯 h)
       ( u)
-      ( coherence-square-cocone-span-diagram s c)
-      ( inv-htpy (left-square-hom-span-diagram s t h))
-      ( inv-htpy (right-square-hom-span-diagram s t h))
+      ( coherence-square-cocone-span-diagram 𝒮 c)
+      ( inv-htpy (left-square-hom-span-diagram 𝒮 𝒯 h))
+      ( inv-htpy (right-square-hom-span-diagram 𝒮 𝒯 h))
       ( L)
       ( R)
-      ( coherence-square-cocone-span-diagram t d)
+      ( coherence-square-cocone-span-diagram 𝒯 d)
 
   hom-cocone-hom-span-diagram : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l8)
   hom-cocone-hom-span-diagram =

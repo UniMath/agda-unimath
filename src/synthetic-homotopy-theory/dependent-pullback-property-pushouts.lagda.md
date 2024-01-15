@@ -38,48 +38,48 @@ of pushouts is shown in
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (s : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram s X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   cone-dependent-pullback-property-pushout :
     {l5 : Level} (P : X → UU l5) →
     cone
       ( λ ( h :
-            ( a : domain-span-diagram s) →
-            P (left-map-cocone-span-diagram s c a))
-          ( x : spanning-type-span-diagram s) →
+            ( a : domain-span-diagram 𝒮) →
+            P (left-map-cocone-span-diagram 𝒮 c a))
+          ( s : spanning-type-span-diagram 𝒮) →
         tr P
-          ( coherence-square-cocone-span-diagram s c x)
-          ( h (left-map-span-diagram s x)))
+          ( coherence-square-cocone-span-diagram 𝒮 c s)
+          ( h (left-map-span-diagram 𝒮 s)))
       ( λ ( h :
-            ( b : codomain-span-diagram s) →
-            P (right-map-cocone-span-diagram s c b))
-          ( x : spanning-type-span-diagram s) →
-        h (right-map-span-diagram s x))
+            ( b : codomain-span-diagram 𝒮) →
+            P (right-map-cocone-span-diagram 𝒮 c b))
+          ( s : spanning-type-span-diagram 𝒮) →
+        h (right-map-span-diagram 𝒮 s))
       ( (x : X) → P x)
   pr1 (cone-dependent-pullback-property-pushout P) h a =
-    h (left-map-cocone-span-diagram s c a)
+    h (left-map-cocone-span-diagram 𝒮 c a)
   pr1 (pr2 (cone-dependent-pullback-property-pushout P)) h b =
-    h (right-map-cocone-span-diagram s c b)
+    h (right-map-cocone-span-diagram 𝒮 c b)
   pr2 (pr2 (cone-dependent-pullback-property-pushout P)) h =
-    eq-htpy (λ x → apd h (coherence-square-cocone-span-diagram s c x))
+    eq-htpy (λ s → apd h (coherence-square-cocone-span-diagram 𝒮 c s))
 
   dependent-pullback-property-pushout : UUω
   dependent-pullback-property-pushout =
     {l : Level} (P : X → UU l) →
     is-pullback
       ( λ ( h :
-            ( a : domain-span-diagram s) →
-            P (left-map-cocone-span-diagram s c a))
-          ( x : spanning-type-span-diagram s) →
+            ( a : domain-span-diagram 𝒮) →
+            P (left-map-cocone-span-diagram 𝒮 c a))
+          ( s : spanning-type-span-diagram 𝒮) →
         tr P
-          ( coherence-square-cocone-span-diagram s c x)
-          ( h (left-map-span-diagram s x)))
+          ( coherence-square-cocone-span-diagram 𝒮 c s)
+          ( h (left-map-span-diagram 𝒮 s)))
       ( λ ( h :
-            ( b : codomain-span-diagram s) →
-            P (right-map-cocone-span-diagram s c b))
-          ( x : spanning-type-span-diagram s) →
-        h (right-map-span-diagram s x))
+            ( b : codomain-span-diagram 𝒮) →
+            P (right-map-cocone-span-diagram 𝒮 c b))
+          ( s : spanning-type-span-diagram 𝒮) →
+        h (right-map-span-diagram 𝒮 s))
       ( cone-dependent-pullback-property-pushout P)
 ```
