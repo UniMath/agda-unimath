@@ -123,55 +123,55 @@ module _
   equiv-structure-type-family-family-with-descent-data-pushout =
     pr2 (pr2 Y)
 
-  left-equiv-structure-type-family-family-with-descent-data-pushout :
+  left-equiv-family-with-descent-data-pushout :
     equiv-left-type-family-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)
-  left-equiv-structure-type-family-family-with-descent-data-pushout =
+  left-equiv-family-with-descent-data-pushout =
     left-equiv-equiv-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)
       ( equiv-structure-type-family-family-with-descent-data-pushout)
 
-  map-left-equiv-structure-type-family-family-with-descent-data-pushout :
+  map-left-equiv-family-with-descent-data-pushout :
     (a : domain-span-diagram s) →
     left-type-family-family-with-descent-data-pushout a →
     type-family-family-with-descent-data-pushout
       ( left-map-cocone-span-diagram s c a)
-  map-left-equiv-structure-type-family-family-with-descent-data-pushout =
+  map-left-equiv-family-with-descent-data-pushout =
     map-left-equiv-equiv-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)
       ( equiv-structure-type-family-family-with-descent-data-pushout)
 
-  right-equiv-structure-type-family-family-with-descent-data-pushout :
+  right-equiv-family-with-descent-data-pushout :
     equiv-right-type-family-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)
-  right-equiv-structure-type-family-family-with-descent-data-pushout =
+  right-equiv-family-with-descent-data-pushout =
     right-equiv-equiv-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)
       ( equiv-structure-type-family-family-with-descent-data-pushout)
 
-  map-right-equiv-structure-type-family-family-with-descent-data-pushout :
+  map-right-equiv-family-with-descent-data-pushout :
     (b : codomain-span-diagram s) →
     right-type-family-family-with-descent-data-pushout b →
     type-family-family-with-descent-data-pushout
       ( right-map-cocone-span-diagram s c b)
-  map-right-equiv-structure-type-family-family-with-descent-data-pushout =
+  map-right-equiv-family-with-descent-data-pushout =
     map-right-equiv-equiv-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)
       ( equiv-structure-type-family-family-with-descent-data-pushout)
 
-  coherence-equiv-structure-type-family-family-with-descent-data-pushout :
+  coherence-equiv-family-with-descent-data-pushout :
     coherence-square-equiv-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)
-      ( left-equiv-structure-type-family-family-with-descent-data-pushout)
-      ( right-equiv-structure-type-family-family-with-descent-data-pushout)
-  coherence-equiv-structure-type-family-family-with-descent-data-pushout =
+      ( left-equiv-family-with-descent-data-pushout)
+      ( right-equiv-family-with-descent-data-pushout)
+  coherence-equiv-family-with-descent-data-pushout =
     coherence-equiv-structure-type-family-pushout s
       ( structure-type-family-family-with-descent-data-pushout)
       ( descent-data-type-family-family-with-descent-data-pushout)

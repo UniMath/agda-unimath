@@ -20,12 +20,15 @@ open import foundation.identity-types
 open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.descent-property-families-of-types-pushouts
 open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts
 open import synthetic-homotopy-theory.families-of-types-pushouts
+open import synthetic-homotopy-theory.families-of-types-equipped-with-descent-data-pushouts
 ```
 
 </details>
@@ -305,12 +308,58 @@ Then a cocone under `𝒯` with codomain `X` is equivalently described as a trip
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (s : span-diagram l1 l2 l3)
+  {l1 l2 l3 l4 l5 l6 l7 : Level} (s : span-diagram l1 l2 l3)
   {X : UU l4} (c : cocone-span-diagram s X)
-  (Y : X → UU l5)
-  (Q : structure-type-family-pushout l6 s)
-  (e : equiv-structure-type-family-pushout s c Y Q)
+  (Y : family-with-descent-data-pushout l5 l6 s c)
+  (Z : UU l7)
   where
+
+  span-diagram-flattening-family-with-descent-data-pushout :
+    span-diagram (l1 ⊔ l6) (l2 ⊔ l6) (l3 ⊔ l6)
+  span-diagram-flattening-family-with-descent-data-pushout =
+    span-diagram-flattening-structure-type-family-pushout s
+      ( structure-type-family-family-with-descent-data-pushout s c Y)
+
+  cocone-flattening-family-with-descent-data-pushout :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l6 ⊔ l7)
+  cocone-flattening-family-with-descent-data-pushout =
+    cocone-span-diagram
+      ( span-diagram-flattening-family-with-descent-data-pushout)
+      ( Z)
+
+  dependent-cocone-flattening-family-with-descent-data-pushout :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l5 ⊔ l7)
+  dependent-cocone-flattening-family-with-descent-data-pushout =
+    dependent-cocone-span-diagram s c
+      ( λ x → type-family-family-with-descent-data-pushout s c Y x → Z)
+
+  compute-cocone-flattening-family-with-descent-data-pushout :
+    cocone-flattening-family-with-descent-data-pushout ≃
+    dependent-cocone-flattening-family-with-descent-data-pushout
+  compute-cocone-flattening-family-with-descent-data-pushout =
+    equiv-Σ _
+      ( ( inv-equiv
+          ( equiv-Π-equiv-family
+            ( λ a →
+              equiv-precomp
+                ( left-equiv-family-with-descent-data-pushout s c Y a)
+                ( Z)))) ∘e
+        ( equiv-ev-pair))
+      ( λ α →
+        equiv-Σ _
+          ( ( inv-equiv
+              ( equiv-Π-equiv-family
+                ( λ b →
+                  equiv-precomp
+                    ( right-equiv-family-with-descent-data-pushout s c Y b)
+                    ( Z)))) ∘e
+            ( equiv-ev-pair))
+          ( λ β →
+            ( equiv-Π-equiv-family
+              ( λ x →
+                {!!})) ∘e
+            ( equiv-ev-pair)))
+
 ```
 
 ```text
