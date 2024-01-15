@@ -28,6 +28,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.descent-property-families-of-types-pushouts
+open import synthetic-homotopy-theory.sections-families-of-types-pushouts
 ```
 
 </details>
@@ -58,38 +60,36 @@ over `H`.
 
 ## Definitions
 
-### Dependent cocones
+### Dependent cocones with respect to type families over the codomain of a cocone
 
 ```agda
 module _
   { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram 𝒮 X) (P : X → UU l5)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) (Y : X → UU l5)
   where
 
   left-family-of-elements-dependent-cocone-span-diagram : UU (l1 ⊔ l5)
   left-family-of-elements-dependent-cocone-span-diagram =
-    (a : domain-span-diagram 𝒮) → P (left-map-cocone-span-diagram 𝒮 c a)
+    (a : domain-span-diagram 𝒮) → Y (left-map-cocone-span-diagram 𝒮 c a)
 
   right-family-of-elements-dependent-cocone-span-diagram : UU (l2 ⊔ l5)
   right-family-of-elements-dependent-cocone-span-diagram =
-    (b : codomain-span-diagram 𝒮) → P (right-map-cocone-span-diagram 𝒮 c b)
+    (b : codomain-span-diagram 𝒮) → Y (right-map-cocone-span-diagram 𝒮 c b)
 
   dependent-homotopy-dependent-cocone-span-diagram :
     left-family-of-elements-dependent-cocone-span-diagram →
     right-family-of-elements-dependent-cocone-span-diagram → UU (l3 ⊔ l5)
   dependent-homotopy-dependent-cocone-span-diagram hA hB =
     dependent-homotopy
-      ( λ _ → P)
+      ( λ _ → Y)
       ( coherence-square-cocone-span-diagram 𝒮 c)
       ( hA ∘ left-map-span-diagram 𝒮)
       ( hB ∘ right-map-span-diagram 𝒮)
 
   dependent-cocone-span-diagram : UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
   dependent-cocone-span-diagram =
-    Σ ( left-family-of-elements-dependent-cocone-span-diagram)
-      ( λ hA →
-        Σ ( right-family-of-elements-dependent-cocone-span-diagram)
-          ( dependent-homotopy-dependent-cocone-span-diagram hA))
+    structure-section-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c Y)
 
   module _
     (d : dependent-cocone-span-diagram)
