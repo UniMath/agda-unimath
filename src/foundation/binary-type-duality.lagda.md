@@ -236,10 +236,7 @@ module _
         ( λ a →
           eq-htpy
             ( λ b →
-              eq-equiv
-                ( R a b)
-                ( binary-relation-span (span-binary-relation R) a b)
-                ( equiv-binary-relation-span-binary-relation R a b))))
+              eq-equiv (equiv-binary-relation-span-binary-relation R a b))))
 
   is-equiv-span-binary-relation :
     is-equiv (span-binary-relation {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})

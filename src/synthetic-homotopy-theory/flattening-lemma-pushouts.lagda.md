@@ -50,13 +50,13 @@ states that pushouts commute with
 given a pushout square
 
 ```text
-      g
-  S -----> B
-  |        |
- f|        |j
-  V      ⌜ V
-  A -----> X
-      i
+        g
+    S -----> B
+    |        |
+  f |        | j
+    V      ⌜ V
+    A -----> X
+        i
 ```
 
 with [homotopy](foundation-core.homotopies.md) `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the

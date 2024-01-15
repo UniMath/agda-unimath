@@ -416,4 +416,4 @@ module _
       ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
       ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-type-family-pushout Y ∘ ind-Σ)
 -}
-```
+ ```
