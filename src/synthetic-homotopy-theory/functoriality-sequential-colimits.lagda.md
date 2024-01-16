@@ -62,9 +62,10 @@ The unique map corresponding to the identity morphism is the identity map
 `id : X → X`, and the unique map corresponding to a composite of two morphisms
 is the composite of the two unique maps for the individual morphisms.
 
-A corollary of these facts is that taking the
-[standard sequential colimit](synthetic-homotopy-theory.sequential-colimits.md)
-is a functorial action
+In particular, when we also consider existence of the
+[standard sequential colimits](synthetic-homotopy-theory.sequential-colimits.md),
+we obtain a functorial action taking sequential diagrams and morphisms between
+them to their colimits and maps between them.
 
 ```text
   (A, a)    A∞
