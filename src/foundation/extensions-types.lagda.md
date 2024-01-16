@@ -26,7 +26,8 @@ general concept of what it means to be an extension of a type. Similarly, in any
 object `X` consists of an object `Y` equipped with a morphism `f : X → Y`.
 
 Our notion of extensions of types are not to be confused with extension types of
-cubical or simplicial homotopy type theory.
+cubical type theory or
+[extension types of simplicial type theory](https://arxiv.org/abs/1705.07442).
 
 ## Definitions
 
