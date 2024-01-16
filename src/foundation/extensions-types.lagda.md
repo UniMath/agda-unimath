@@ -15,9 +15,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a type `X`. An {{#concept "extension" Disambiguation="type" Agda=extension-type}} of `X` is
-an object of the coslice category of `X`, i.e., it consists of a type `Y` and a
-map `f : X → Y`.
+Consider a type `X`. An
+{{#concept "extension" Disambiguation="type" Agda=extension-type}} of `X` is an
+object of the coslice category of `X`, i.e., it consists of a type `Y` and a map
+`f : X → Y`.
 
 ## Definitions
 
