@@ -24,6 +24,23 @@ macros = "website/latex-macros.txt"
 [preprocessor.catppuccin]
 assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
+[preprocessor.svgbob2] # NOTE: Currently the default settings
+font_size = "14"
+font_family = "monospace"
+fill_color = "black"
+background = "transparent"
+stroke_color = "var(--fg)" # variable from the mdbook css files
+stroke_width = "2.0"
+scale = "8.0"
+enhance_circuitries = "true"
+include_backdrop = "true"
+include_styles = "true"
+include_defs = "true"
+merge_line_with_shapes = "false"
+
+# this is a non-svgbob custom setting
+font_color = "var(--fg)"
+
 [preprocessor.git-metadata]
 command = "python3 ./scripts/preprocessor_git_metadata.py"
 # Disable by default - it takes a non-trivial amount of time

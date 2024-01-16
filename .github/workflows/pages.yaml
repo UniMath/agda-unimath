@@ -84,6 +84,12 @@ jobs:
           crate: mdbook-catppuccin
           version: '1.2.0'
 
+      - name: Install mdbook-svgbob2
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-svgbob2
+          version: '0.3.0'
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.8'

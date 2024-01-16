@@ -128,6 +128,8 @@ install-website-dev:
 	@cargo install mdbook-katex@0.5.7
 	@cargo install mdbook-pagetoc@0.1.7
 	@cargo install mdbook-catppuccin@1.2.0
+	@cargo install mdbook-svgbob2@0.3.0
+
 
 .PHONY: unused-imports
 unused-imports:
