@@ -11,6 +11,7 @@
     "ms-python.vscode-pylance",
     "oderwat.indent-rainbow",
     "brunnerh.insert-unicode",
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+    "tamasfe.even-better-toml"
   ]
 }
