@@ -43,7 +43,7 @@ A **lifting square** is a commuting square
 
 together with a diagonal map `j : X → B` such that the complete diagram
 
-```text
+```svgbob
        h
   A ------> B
   |       ^ |

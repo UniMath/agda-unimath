@@ -36,7 +36,7 @@ open import foundation-core.identity-types
 
 Two [commuting triangles](foundation-core.commuting-triangles-of-maps.md)
 
-```text
+```svgbob
    A         A --> X
   | \         \    |
   |  \ H  L  K \   |
@@ -48,7 +48,7 @@ Two [commuting triangles](foundation-core.commuting-triangles-of-maps.md)
 with a [homotopic](foundation-core.homotopies.md) diagonal may be pasted into a
 commuting square
 
-```text
+```svgbob
   A -----> X
   |        |
   |        |

@@ -21,7 +21,7 @@ open import foundation-core.whiskering-homotopies
 
 Consider an arrangment of maps composable into a diagram as follows:
 
-```text
+```svgbob
           hA
     A ---------> A'
     |\           |\
@@ -51,7 +51,7 @@ composite.
 
 We may also arrange the maps into a more vertical shape, like so:
 
-```text
+```svgbob
           B
       h  ^| \  g
        /  |   \
