@@ -20,6 +20,14 @@ Consider a type `X`. An
 object of the coslice category of `X`, i.e., it consists of a type `Y` and a map
 `f : X → Y`.
 
+In the above definition of extensions of types our aim is to capture the most
+general concept of what it means to be an extension of a type. Similarly, in any
+[category](category-theory.categories.md) we would say that an extension of an
+object `X` consists of an object `Y` equipped with a morphism `f : X → Y`.
+
+Our notion of extensions of types are not to be confused with extension types of
+cubical or simplicial homotopy type theory.
+
 ## Definitions
 
 ### Extensions of types
