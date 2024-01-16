@@ -136,7 +136,7 @@ open import foundation.equivalences-maybe public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
-open import foundation.extensions-of-types public
+open import foundation.extensions-types public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
