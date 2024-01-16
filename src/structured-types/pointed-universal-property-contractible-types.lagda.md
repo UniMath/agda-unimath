@@ -51,6 +51,17 @@ module _
 
 ### A contractible type has the universal property of contractible types with respect to pointed types and maps
 
+**Proof:** If `A` is contractible with a point `a : A`, then we have
+
+```text
+   ((A , a) →∗ (X , x))
+ ≃ Σ (A → X) (λ f → f a ＝ x)
+ ≃ Σ X (λ y → y ＝ x)
+```
+
+where the last equivalence holds since `(A → X) ≃ X` by the
+[universal property of contractible types](foundation.universal-property-contractible-types.md).
+
 ```agda
 module _
   {l1 : Level} {A : UU l1} (a : A)
