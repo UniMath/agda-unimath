@@ -203,16 +203,16 @@ module _
   ( c : cocone-sequential-diagram A X)
   where
 
-  reflexive-htpy-cocone-sequential-diagram :
+  refl-htpy-cocone-sequential-diagram :
     htpy-cocone-sequential-diagram c c
-  pr1 reflexive-htpy-cocone-sequential-diagram n = refl-htpy
-  pr2 reflexive-htpy-cocone-sequential-diagram n = right-unit-htpy
+  pr1 refl-htpy-cocone-sequential-diagram n = refl-htpy
+  pr2 refl-htpy-cocone-sequential-diagram n = right-unit-htpy
 
   htpy-eq-cocone-sequential-diagram :
     ( c' : cocone-sequential-diagram A X) → ( c ＝ c') →
     htpy-cocone-sequential-diagram c c'
   htpy-eq-cocone-sequential-diagram .c refl =
-    reflexive-htpy-cocone-sequential-diagram
+    refl-htpy-cocone-sequential-diagram
 
   abstract
     is-torsorial-htpy-cocone-sequential-diagram :

@@ -191,17 +191,17 @@ module _
   { c : cocone-sequential-diagram A X} (P : X → UU l3)
   where
 
-  reflexive-htpy-dependent-cocone-sequential-diagram :
+  refl-htpy-dependent-cocone-sequential-diagram :
     ( d : dependent-cocone-sequential-diagram c P) →
     htpy-dependent-cocone-sequential-diagram P d d
-  pr1 (reflexive-htpy-dependent-cocone-sequential-diagram d) n = refl-htpy
-  pr2 (reflexive-htpy-dependent-cocone-sequential-diagram d) n = right-unit-htpy
+  pr1 (refl-htpy-dependent-cocone-sequential-diagram d) n = refl-htpy
+  pr2 (refl-htpy-dependent-cocone-sequential-diagram d) n = right-unit-htpy
 
   htpy-eq-dependent-cocone-sequential-diagram :
     ( d d' : dependent-cocone-sequential-diagram c P) →
     ( d ＝ d') → htpy-dependent-cocone-sequential-diagram P d d'
   htpy-eq-dependent-cocone-sequential-diagram d .d refl =
-    reflexive-htpy-dependent-cocone-sequential-diagram d
+    refl-htpy-dependent-cocone-sequential-diagram d
 
   abstract
     is-torsorial-htpy-dependent-cocone-sequential-diagram :
