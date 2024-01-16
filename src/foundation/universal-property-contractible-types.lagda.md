@@ -191,3 +191,4 @@ module _
 ## See also
 
 - [Singleton induction](foundation.singleton-induction.md)
+- [Universal property of contractible types with respect to pointed types and maps](structured-types.pointed-universal-property-contractible-types.md)
