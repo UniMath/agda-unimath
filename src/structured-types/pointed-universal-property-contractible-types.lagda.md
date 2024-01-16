@@ -61,14 +61,7 @@ module _
   universal-property-contr-is-contr-Pointed-Type' c (X , x) =
     is-contr-equiv
       ( Σ X (λ y → y ＝ x))
-      ( equivalence-reasoning
-          (A , a) →∗ (X , x)
-          ≃ Σ (A → X) (λ f → f a ＝ x)
-            by id-equiv
-          ≃ Σ X (λ y → y ＝ x)
-            by equiv-Σ-equiv-base
-              ( _＝ x)
-              ( equiv-universal-property-contr a c X))
+      ( equiv-Σ-equiv-base _ (equiv-universal-property-contr a c X))
       ( is-torsorial-path' x)
 
 module _
