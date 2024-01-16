@@ -1,7 +1,7 @@
 # Extensions of types
 
 ```agda
-module foundation.extensions-of-types where
+module foundation.extensions-types where
 ```
 
 <details><summary>Imports</summary>
