@@ -42,9 +42,8 @@ module _
   is-sequentially-compact =
     {l2 l3 : Level} (A : sequential-diagram l2) {A∞ : UU l3}
     (c : cocone-sequential-diagram A A∞) →
-    universal-property-sequential-colimit A c →
+    universal-property-sequential-colimit c →
     universal-property-sequential-colimit
-      ( postcomp-sequential-diagram X A)
       ( cocone-postcomp-sequential-diagram X A c)
 ```
 
