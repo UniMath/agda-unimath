@@ -24,6 +24,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
+open import synthetic-homotopy-theory.retracts-of-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
 ```
 
@@ -247,4 +248,24 @@ module _
         ( equiv-equiv-sequential-diagram B e (succ-ℕ n))
         ( map-sequential-diagram B n)
         ( naturality-equiv-sequential-diagram B e n))
+
+  retraction-equiv-sequential-diagram :
+    retraction-hom-sequential-diagram A B
+      ( hom-equiv-sequential-diagram B e)
+  pr1 retraction-equiv-sequential-diagram = hom-inv-equiv-sequential-diagram B e
+  pr2 retraction-equiv-sequential-diagram =
+    is-retraction-inv-equiv-sequential-diagram
+```
+
+### Equivalences of sequential diagrams induce retracts of sequential diagrams
+
+```agda
+module _
+  { l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
+  ( e : equiv-sequential-diagram A B)
+  where
+
+  retract-equiv-sequential-diagram : retract-sequential-diagram B A
+  pr1 retract-equiv-sequential-diagram = hom-equiv-sequential-diagram B e
+  pr2 retract-equiv-sequential-diagram = retraction-equiv-sequential-diagram B e
 ```

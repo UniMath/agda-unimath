@@ -228,15 +228,15 @@ module _
   { l1 l2 : Level} (A : sequential-diagram l1) (B : sequential-diagram l2)
   where
 
-  reflexive-htpy-hom-sequential-diagram :
+  refl-htpy-hom-sequential-diagram :
     ( f : hom-sequential-diagram A B) → htpy-hom-sequential-diagram B f f
-  pr1 (reflexive-htpy-hom-sequential-diagram f) = ev-pair refl-htpy
-  pr2 (reflexive-htpy-hom-sequential-diagram f) = ev-pair right-unit-htpy
+  pr1 (refl-htpy-hom-sequential-diagram f) = ev-pair refl-htpy
+  pr2 (refl-htpy-hom-sequential-diagram f) = ev-pair right-unit-htpy
 
   htpy-eq-sequential-diagram :
     ( f f' : hom-sequential-diagram A B) →
     ( f ＝ f') → htpy-hom-sequential-diagram B f f'
-  htpy-eq-sequential-diagram f .f refl = reflexive-htpy-hom-sequential-diagram f
+  htpy-eq-sequential-diagram f .f refl = refl-htpy-hom-sequential-diagram f
 
   abstract
     is-torsorial-htpy-sequential-diagram :
