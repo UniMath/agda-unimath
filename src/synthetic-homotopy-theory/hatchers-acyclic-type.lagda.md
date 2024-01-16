@@ -71,40 +71,45 @@ algebra-Hatcher-Acyclic-Type l =
 ### Morphisms of types equipped with the structure of Hatcher's acyclic type
 
 ```agda
-hom-algebra-Hatcher-Acyclic-Type :
-  {l1 l2 : Level} → algebra-Hatcher-Acyclic-Type l1 →
-  algebra-Hatcher-Acyclic-Type l2 → UU (l1 ⊔ l2)
-hom-algebra-Hatcher-Acyclic-Type
-  (A , a1 , a2 , r1 , r2) (B , b1 , b2 , s1 , s2) =
-  Σ ( A →∗ B)
-    ( λ f →
-      Σ ( map-Ω f a1 ＝ b1)
-        ( λ u →
-          Σ ( map-Ω f a2 ＝ b2)
-            ( λ v →
-              ( coherence-square-identifications
-                ( ap (map-Ω f) r1)
-                ( map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u)
-                ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
-                ( s1)) ×
-              ( coherence-square-identifications
-                ( ap (map-Ω f) r2)
-                ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
-                ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
-                  ( ap
-                    ( power-nat-Ω 2 B)
-                    ( ( preserves-mul-map-Ω f) ∙
-                      ( horizontal-concat-Id² u v))))
-                ( s2)))))
+module _
+  {l1 l2 : Level}
+  ((A , a1 , a2 , r1 , r2) : algebra-Hatcher-Acyclic-Type l1)
+  ((B , b1 , b2 , s1 , s2) : algebra-Hatcher-Acyclic-Type l2)
+  where
+
+  hom-algebra-Hatcher-Acyclic-Type-pointed-map : (A →∗ B) → UU l2
+  hom-algebra-Hatcher-Acyclic-Type-pointed-map f =
+    Σ ( map-Ω f a1 ＝ b1)
+              ( λ u →
+                Σ ( map-Ω f a2 ＝ b2)
+                  ( λ v →
+                    ( coherence-square-identifications
+                      ( ap (map-Ω f) r1)
+                      ( map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u)
+                      ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
+                      ( s1)) ×
+                    ( coherence-square-identifications
+                      ( ap (map-Ω f) r2)
+                      ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
+                      ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
+                        ( ap
+                          ( power-nat-Ω 2 B)
+                          ( ( preserves-mul-map-Ω f) ∙
+                            ( horizontal-concat-Id² u v))))
+                      ( s2))))
+
+  hom-algebra-Hatcher-Acyclic-Type : UU (l1 ⊔ l2)
+  hom-algebra-Hatcher-Acyclic-Type =
+    Σ ( A →∗ B) hom-algebra-Hatcher-Acyclic-Type-pointed-map
 ```
 
 ### The Hatcher acyclic type is the initial Hatcher acyclic algebra
 
 ```agda
 is-initial-algebra-Hatcher-Acyclic-Type :
-  {l1 : Level} (l : Level)
-  (A : algebra-Hatcher-Acyclic-Type l1) → UU (l1 ⊔ lsuc l)
-is-initial-algebra-Hatcher-Acyclic-Type l A =
+  {l1 : Level} (A : algebra-Hatcher-Acyclic-Type l1) → UUω
+is-initial-algebra-Hatcher-Acyclic-Type A =
+  {l : Level} →
   (B : algebra-Hatcher-Acyclic-Type l) →
   is-contr (hom-algebra-Hatcher-Acyclic-Type A B)
 ```
@@ -228,6 +233,194 @@ module _
                       ( power-nat-Ω 3 (Ω A) b)
                       ( interchange-concat-Ω² a b a b)))))))))
         ( is-torsorial-path refl)
+```
+
+### For a fixed pointed map, the `hom-algebra-Hatcher-Acyclic-Type-pointed-map` family is [torsorial](foundation.torsorial-type-families.md)
+
+In proving this, it is helpful to consider an equivalent formulation of
+`hom-algebra-Hatcher-Acyclic-Type-pointed-map` for which torsoriality is almost
+immediate.
+
+```agda
+module _
+  {l1 l2 : Level}
+  ((A , a1 , a2 , r1 , r2) : algebra-Hatcher-Acyclic-Type l1)
+  ((B , b1 , b2 , s1 , s2) : algebra-Hatcher-Acyclic-Type l2)
+  where
+
+  hom-algebra-Hatcher-Acyclic-Type-pointed-map' : (A →∗ B) → UU l2
+  hom-algebra-Hatcher-Acyclic-Type-pointed-map' f =
+    Σ ( map-Ω f a1 ＝ b1)
+              ( λ u →
+                Σ ( map-Ω f a2 ＝ b2)
+                  ( λ v →
+                    ( Id
+                      ( inv (map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u) ∙
+                        ( ap (map-Ω f) r1 ∙
+                          (map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)))
+                      ( s1)) ×
+                    ( Id
+                      ( inv (map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v) ∙
+                        ( ap (map-Ω f) r2 ∙
+                          ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
+                            ( ap
+                              ( power-nat-Ω 2 B)
+                              ( ( preserves-mul-map-Ω f) ∙
+                                ( horizontal-concat-Id² u v))))))
+                      ( s2))))
+
+module _
+  {l1 l2 : Level}
+  ((A , σ) : algebra-Hatcher-Acyclic-Type l1)
+  ((B , τ) : algebra-Hatcher-Acyclic-Type l2)
+  where
+
+  equiv-hom-algebra-Hatcher-Acyclic-Type-pointed-map :
+    (f : A →∗ B) →
+    hom-algebra-Hatcher-Acyclic-Type-pointed-map (A , σ) (B , τ) f ≃
+    hom-algebra-Hatcher-Acyclic-Type-pointed-map' (A , σ) (B , τ) f
+  equiv-hom-algebra-Hatcher-Acyclic-Type-pointed-map f =
+    equiv-tot
+      ( λ p →
+        equiv-tot
+          ( λ q →
+            equiv-prod
+              ( equiv-left-transpose-eq-concat' _ _ _ ∘e equiv-inv _ _)
+              ( equiv-left-transpose-eq-concat' _ _ _ ∘e equiv-inv _ _ )))
+
+module _
+  {l1 l2 : Level}
+  (A : Pointed-Type l1)
+  (B : Pointed-Type l2)
+  (σ@(a1 , a2 , r1 , r2) : structure-Hatcher-Acyclic-Type A)
+  (f : A →∗ B)
+  where
+
+  is-torsorial-hom-algebra-Hatcher-Acyclic-Type-pointed-map' :
+    is-torsorial
+      ( λ τ → hom-algebra-Hatcher-Acyclic-Type-pointed-map' (A , σ) (B , τ) f)
+  is-torsorial-hom-algebra-Hatcher-Acyclic-Type-pointed-map' =
+    is-torsorial-Eq-structure
+      ( is-torsorial-path (map-Ω f a1)) ((map-Ω f a1) , refl)
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-path (map-Ω f a2)) ((map-Ω f a2) , refl)
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-path _)
+          ( _ , refl)
+          ( is-torsorial-path _)))
+
+  abstract
+    is-torsorial-hom-algebra-Hatcher-Acyclic-Type-pointed-map :
+      is-torsorial
+        ( λ τ → hom-algebra-Hatcher-Acyclic-Type-pointed-map (A , σ) (B , τ) f)
+    is-torsorial-hom-algebra-Hatcher-Acyclic-Type-pointed-map =
+      is-contr-equiv
+        ( Σ ( structure-Hatcher-Acyclic-Type B)
+            ( λ τ → hom-algebra-Hatcher-Acyclic-Type-pointed-map' (A , σ) (B , τ) f))
+        ( equiv-tot
+          ( λ τ →
+            equiv-hom-algebra-Hatcher-Acyclic-Type-pointed-map (A , σ) (B , τ) f))
+        ( is-torsorial-hom-algebra-Hatcher-Acyclic-Type-pointed-map')
+```
+
+### Characterization of pointed maps out of the Hatcher acyclic type
+
+```agda
+module _
+    {l1 l2 : Level}
+    (A : Pointed-Type l1)
+    (B : Pointed-Type l2)
+    (σ@(a1 , a2 , r1 , r2) : structure-Hatcher-Acyclic-Type A)
+    where
+
+  structure-Hatcher-Acyclic-Type-map-Ω :
+    (f : A →∗ B) →
+    ( power-nat-Ω 5 B (map-Ω f a1) ＝
+      power-nat-Ω 3 B (map-Ω f a2)) ×
+    ( power-nat-Ω 3 B (map-Ω f a2) ＝
+      power-nat-Ω 2 B (mul-Ω B (map-Ω f a1) (map-Ω f a2)))
+  pr1 (structure-Hatcher-Acyclic-Type-map-Ω f) =
+    inv (map-power-nat-Ω 5 f a1) ∙ (ap (map-Ω f) r1 ∙ map-power-nat-Ω 3 f a2)
+  pr2 (structure-Hatcher-Acyclic-Type-map-Ω f) =
+    inv (map-power-nat-Ω 3 f a2) ∙
+    ( ap (map-Ω f) r2 ∙
+      ( map-power-nat-Ω 2 f (a1 ∙ a2) ∙
+        ap (power-nat-Ω 2 B) (preserves-mul-map-Ω f)))
+
+  structure-Hatcher-Acyclic-Type-pointed-map :
+    (A →∗ B) →
+    structure-Hatcher-Acyclic-Type B
+  pr1 (structure-Hatcher-Acyclic-Type-pointed-map f) = map-Ω f a1
+  pr1 (pr2 (structure-Hatcher-Acyclic-Type-pointed-map f)) = map-Ω f a2
+  (pr2 (pr2 (structure-Hatcher-Acyclic-Type-pointed-map f))) =
+    structure-Hatcher-Acyclic-Type-map-Ω f
+
+  test' :
+    (f : A →∗ B) →
+    hom-algebra-Hatcher-Acyclic-Type-pointed-map'
+      ( A , σ)
+      ( B , structure-Hatcher-Acyclic-Type-pointed-map f)
+      ( f)
+  pr1 (test' f) = refl
+  pr1 (pr2 (test' f)) = refl
+  pr1 (pr2 (pr2 (test' f))) =
+    ap-binary
+      ( λ p q → inv p ∙ (ap (map-Ω f) r1 ∙ q))
+      ( right-unit {p = map-power-nat-Ω 5 f a1})
+      ( right-unit)
+  pr2 (pr2 (pr2 (test' f))) =
+    ap-binary
+      ( λ p q →
+        inv p ∙
+        ( ap (map-Ω f) r2 ∙
+          (map-power-nat-Ω 2 f (a1 ∙ a2) ∙ ap (power-nat-Ω 2 B) q)))
+      ( right-unit {p = map-power-nat-Ω 3 f a2})
+      ( right-unit {p = preserves-mul-map-Ω f})
+
+  test :
+    (f : A →∗ B) →
+    hom-algebra-Hatcher-Acyclic-Type-pointed-map
+      ( A , σ)
+      ( B , structure-Hatcher-Acyclic-Type-pointed-map f)
+      ( f)
+  test f = map-inv-equiv (equiv-hom-algebra-Hatcher-Acyclic-Type-pointed-map (A , σ) (B , structure-Hatcher-Acyclic-Type-pointed-map f) f) (test' f)
+
+  is-equiv-structure-Hatcher-Acyclic-Type-pointed-map :
+    is-initial-algebra-Hatcher-Acyclic-Type (A , σ) →
+    is-equiv structure-Hatcher-Acyclic-Type-pointed-map
+  is-equiv-structure-Hatcher-Acyclic-Type-pointed-map i =
+    is-equiv-htpy-equiv
+      ( equivalence-reasoning
+           A →∗ B
+           ≃ Σ ( A →∗ B)
+               ( λ f →
+                 Σ ( structure-Hatcher-Acyclic-Type B)
+                   ( λ τ →
+                     hom-algebra-Hatcher-Acyclic-Type-pointed-map
+                       ( A , σ)
+                       ( B , τ)
+                       ( f)))
+             by inv-right-unit-law-Σ-is-contr
+               ( λ f →
+                 is-torsorial-hom-algebra-Hatcher-Acyclic-Type-pointed-map
+                   ( A)
+                   ( B)
+                   ( σ)
+                   ( f))
+           ≃ Σ ( structure-Hatcher-Acyclic-Type B)
+               ( λ τ → hom-algebra-Hatcher-Acyclic-Type (A , σ) (B , τ))
+             by equiv-left-swap-Σ
+           ≃ structure-Hatcher-Acyclic-Type B
+             by equiv-pr1 (λ τ → i (B , τ)))
+      ( λ f → ap pr1 (inv (contraction (is-torsorial-hom-algebra-Hatcher-Acyclic-Type-pointed-map A B σ f) (structure-Hatcher-Acyclic-Type-pointed-map f , test f))))
+
+  equiv-pointed-map-Hatcher-Acyclic-Type :
+    is-initial-algebra-Hatcher-Acyclic-Type (A , σ) →
+    (A →∗ B) ≃ structure-Hatcher-Acyclic-Type B
+  pr1 (equiv-pointed-map-Hatcher-Acyclic-Type i) =
+    structure-Hatcher-Acyclic-Type-pointed-map
+  pr2 (equiv-pointed-map-Hatcher-Acyclic-Type i) =
+    is-equiv-structure-Hatcher-Acyclic-Type-pointed-map i
 ```
 
 ## See also
