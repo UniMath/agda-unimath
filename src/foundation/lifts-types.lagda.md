@@ -37,6 +37,6 @@ module _
   type-lift-type : UU l2
   type-lift-type = pr1 Y
 
-  inclusion-lift-type : type-lift-type → X
-  inclusion-lift-type = pr2 Y
+  projection-lift-type : type-lift-type → X
+  projection-lift-type = pr2 Y
 ```
