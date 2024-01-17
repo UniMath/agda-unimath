@@ -102,8 +102,8 @@ module _
                     ( horizontal-concat-Id² u v))))
               ( s2))))
 
-  Hom-algebra-Hatcher-Acyclic-Type : UU (l1 ⊔ l2)
-  Hom-algebra-Hatcher-Acyclic-Type =
+  hom-algebra-Hatcher-Acyclic-Type : UU (l1 ⊔ l2)
+  hom-algebra-Hatcher-Acyclic-Type =
     Σ ( A →∗ B) is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
 ```
 
@@ -115,7 +115,7 @@ is-initial-algebra-Hatcher-Acyclic-Type :
 is-initial-algebra-Hatcher-Acyclic-Type A =
   {l : Level} →
   (B : algebra-Hatcher-Acyclic-Type l) →
-  is-contr (Hom-algebra-Hatcher-Acyclic-Type A B)
+  is-contr (hom-algebra-Hatcher-Acyclic-Type A B)
 ```
 
 ## Properties
@@ -434,7 +434,7 @@ module _
                   ( σ)
                   ( f))
           ≃ Σ ( structure-Hatcher-Acyclic-Type B)
-              ( λ τ → Hom-algebra-Hatcher-Acyclic-Type (A , σ) (B , τ))
+              ( λ τ → hom-algebra-Hatcher-Acyclic-Type (A , σ) (B , τ))
             by equiv-left-swap-Σ
           ≃ structure-Hatcher-Acyclic-Type B
             by equiv-pr1 (λ τ → i (B , τ)))
