@@ -8,13 +8,14 @@ module synthetic-homotopy-theory.families-of-types-pushouts where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation-core.equivalences
-open import foundation-core.function-types
 open import foundation.span-diagrams
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
+open import foundation-core.function-types
+
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
-open import foundation.transport-along-identifications
 ```
 
 </details>
@@ -88,8 +89,8 @@ square of equivalences
 
 ### The structure of type families over span diagrams
 
-**Note.** In the definition of structure of type families over span diagrams we will
-assume that the families `A → 𝒰` and `B → 𝒰` are of the same
+**Note.** In the definition of structure of type families over span diagrams we
+will assume that the families `A → 𝒰` and `B → 𝒰` are of the same
 [universe level](foundation.universe-levels.md).
 
 ```agda

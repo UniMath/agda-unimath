@@ -34,11 +34,10 @@ open import foundation-core.torsorial-type-families
 ## Idea
 
 An {{#concept "equivalence of span diagrams"}} from a
-[span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B`
-to a span diagram `C <-h- T -k-> D` consists of
-[equivalences](foundation-core.equivalences.md) `u : A ≃ C`, `v : B ≃ D`,
-and `w : S ≃ T` [equipped](foundation.structure.md) with two
-[homotopies](foundation-core.homotopies.md) witnessing that the diagram
+[span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` to a span diagram
+`C <-h- T -k-> D` consists of [equivalences](foundation-core.equivalences.md)
+`u : A ≃ C`, `v : B ≃ D`, and `w : S ≃ T` [equipped](foundation.structure.md)
+with two [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
 ```text
          f       g

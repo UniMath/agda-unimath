@@ -22,9 +22,9 @@ open import foundation-core.commuting-squares-of-maps
 ## Idea
 
 A {{#concept "morphism of span diagrams"}} from a
-[span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` to
-a span diagram `C <-h- T -k-> D` consists of maps `u : A → C`, `v : B → D`, and
-`w : S → T` [equipped](foundation.structure.md) with two
+[span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` to a span diagram
+`C <-h- T -k-> D` consists of maps `u : A → C`, `v : B → D`, and `w : S → T`
+[equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
 ```text
@@ -39,10 +39,9 @@ a span diagram `C <-h- T -k-> D` consists of maps `u : A → C`, `v : B → D`, 
 
 [commutes](foundation-core.commuting-squares-of-maps.md).
 
-The definition of morphisms of span diagrams is given concisely in terms of the notion
-of morphisms of spans. In the resulting
-definitions, the commuting squares of morphisms of spans are oriented in the
-following way:
+The definition of morphisms of span diagrams is given concisely in terms of the
+notion of morphisms of spans. In the resulting definitions, the commuting
+squares of morphisms of spans are oriented in the following way:
 
 - A homotopy
   `map-domain-hom-span ∘ left-map-span s ~ left-map-span t ∘ spanning-map-hom-span`

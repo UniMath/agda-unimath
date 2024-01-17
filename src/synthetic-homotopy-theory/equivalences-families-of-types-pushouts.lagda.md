@@ -31,8 +31,10 @@ open import synthetic-homotopy-theory.families-of-types-pushouts
 
 ## Idea
 
-Consider two [structures](synthetic-homotopy-theory.families-of-types-pushouts.md) `(PA , PB , Pe)` and (QA , QB , Qe)` of type families
-over a [span diagram](foundation.span-diagrams.md)
+Consider two
+[structures](synthetic-homotopy-theory.families-of-types-pushouts.md)
+`(PA , PB , Pe)` and (QA , QB , Qe)` of type families over a
+[span diagram](foundation.span-diagrams.md)
 
 ```text
         g
@@ -51,7 +53,8 @@ consists of [families of equivalences](foundation.families-of-equivalences.md)
   v : (b : B) → PB b ≃ QB b
 ```
 
-and a family of [homotopies](foundation-core.homotopies.md) witnessing that the square
+and a family of [homotopies](foundation-core.homotopies.md) witnessing that the
+square
 
 ```text
                u (f s)
@@ -64,7 +67,6 @@ and a family of [homotopies](foundation-core.homotopies.md) witnessing that the 
 ```
 
 [commutes](foundation-core.commuting-squares-of-maps.md) for each `s : S`.
-
 
 ## Definitions
 
@@ -182,7 +184,7 @@ module _
         ( λ a →
           is-torsorial-equiv
             ( left-type-family-structure-type-family-pushout 𝒮 P a)))
-      ( ( left-type-family-structure-type-family-pushout 𝒮  P) ,
+      ( ( left-type-family-structure-type-family-pushout 𝒮 P) ,
         ( λ a → id-equiv))
       ( is-torsorial-Eq-structure
         ( is-torsorial-Eq-Π

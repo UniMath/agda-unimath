@@ -15,8 +15,8 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.span-diagrams
 open import foundation.structure-identity-principle
@@ -31,14 +31,17 @@ open import synthetic-homotopy-theory.families-of-types-pushouts
 
 ## Idea
 
-Consider the [structure of a type family over the pushout](synthetic-homotopy-theory.families-of-types-pushouts.md) `(P , Q , e)` of a [span diagram](foundation.span-diagrams.md) `𝒮`
+Consider the
+[structure of a type family over the pushout](synthetic-homotopy-theory.families-of-types-pushouts.md)
+`(P , Q , e)` of a [span diagram](foundation.span-diagrams.md) `𝒮`
 
 ```text
       f     g
   A <--- S ---> B.
 ```
 
-The {{#concept "structure of a section of a type family over a pushout"}} is a triple `(p , q , H)` consisting of
+The {{#concept "structure of a section of a type family over a pushout"}} is a
+triple `(p , q , H)` consisting of
 
 ```text
   p : (a : A) → P a

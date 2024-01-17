@@ -31,14 +31,21 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A {{#concept "pointed homotopy"}} between [pointed dependent functions](structured-types.pointed-dependent-functions.md) is a pointed dependent
-function of the [pointed family](structured-types.pointed-families-of-types.md) of [pointwise identifications](foundation-core.homotopies.md). The base point of the family `x ↦ f x ＝ g x` over `A` is the identification
+A {{#concept "pointed homotopy"}} between
+[pointed dependent functions](structured-types.pointed-dependent-functions.md)
+is a pointed dependent function of the
+[pointed family](structured-types.pointed-families-of-types.md) of
+[pointwise identifications](foundation-core.homotopies.md). The base point of
+the family `x ↦ f x ＝ g x` over `A` is the identification
 
 ```text
   preserves-point f ∙ inv (preserves-point g) : f * ＝ g *.
 ```
 
-A pointed homotopy `f ~∗ g` therefore consists of a homotopy `H : f ~ g` between the underlying dependent functions, and an [identification](foundation-core.identity-types.md) witnessing that the triangle of identifications
+A pointed homotopy `f ~∗ g` therefore consists of a homotopy `H : f ~ g` between
+the underlying dependent functions, and an
+[identification](foundation-core.identity-types.md) witnessing that the triangle
+of identifications
 
 ```text
                      H *
@@ -51,9 +58,11 @@ A pointed homotopy `f ~∗ g` therefore consists of a homotopy `H : f ~ g` betwe
 
 [commutes](foundation.commuting-triangles-of-identifications.md).
 
-Note that since pointed
-homotopies are defined for pointed dependent functions, a pointed homotopy
-between pointed homotopies is just an instance of a pointed homotopy. A minor nuissance of this approach to the definition of pointed homotopies is that the commuting triangle in a pointed homotopy is slightly more complicated than the simpler triangle
+Note that since pointed homotopies are defined for pointed dependent functions,
+a pointed homotopy between pointed homotopies is just an instance of a pointed
+homotopy. A minor nuissance of this approach to the definition of pointed
+homotopies is that the commuting triangle in a pointed homotopy is slightly more
+complicated than the simpler triangle
 
 ```text
                 f * ----> g *
@@ -61,7 +70,6 @@ between pointed homotopies is just an instance of a pointed homotopy. A minor nu
   preserves-point f \   / preserves-point g
                      ∨ ∨
                       *.
-
 ```
 
 ## Definitions
@@ -119,7 +127,7 @@ module _
       ( preserves-point-function-pointed-Π g)
       ( preserves-point-function-pointed-Π f)
       ( inv p)
-  
+
   infix 6 _~∗_
 
 module _
@@ -277,7 +285,7 @@ module _
       ( htpy-associative-comp-pointed-map h g f)
   coh-associative-comp-pointed-map (h , refl) (g , refl) (f , refl) =
     refl
-    
+
   associative-comp-pointed-map :
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
     htpy-pointed-map

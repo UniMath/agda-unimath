@@ -27,8 +27,8 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.descent-property-families-of-types-pushouts
 open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts
-open import synthetic-homotopy-theory.families-of-types-pushouts
 open import synthetic-homotopy-theory.families-of-types-equipped-with-descent-data-pushouts
+open import synthetic-homotopy-theory.families-of-types-pushouts
 open import synthetic-homotopy-theory.sections-families-of-types-pushouts
 ```
 
@@ -363,7 +363,8 @@ module _
   compute-cocone-flattening-family-with-descent-data-pushout =
     ( ( equiv-structure-section-type-family-pushout 𝒮
         {!!}
-        ( descent-data-type-family-pushout 𝒮 c (λ x → type-family-family-with-descent-data-pushout 𝒮 c Y x → Z))
+        ( descent-data-type-family-pushout 𝒮 c
+          ( λ x → type-family-family-with-descent-data-pushout 𝒮 c Y x → Z))
         {!!})) ∘e
     ( {!!} ∘e
       ( equiv-Σ _
@@ -393,7 +394,6 @@ module _
               ( λ s →
                 {!!})) ∘e
             ( equiv-ev-pair))) -}
-
 ```
 
 ```text

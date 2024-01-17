@@ -122,6 +122,7 @@ and `e' : Y ≃ Z` in `𝒰₁` we obtain a commuting triangle
                        \     /
                         ∨   ∨
                          f Z
+```
 
 ```agda
 module _
@@ -135,8 +136,8 @@ module _
       ( map-tr-equiv f e')
       ( map-tr-equiv f e)
   distributive-map-tr-equiv-equiv-comp x =
-    ( ap (λ p → tr f p x) (inv (compute-eq-equiv-comp-equiv X Y Z e e'))) ∙
-    ( tr-concat (eq-equiv X Y e) (eq-equiv Y Z e') x)
+    ( inv (ap (λ p → tr f p x) (compute-eq-equiv-comp-equiv e e'))) ∙
+    ( tr-concat (eq-equiv e) (eq-equiv e') x)
 
   distributive-tr-equiv-equiv-comp :
     tr-equiv f (e' ∘e e) ＝ tr-equiv f e' ∘e tr-equiv f e
@@ -233,7 +234,7 @@ compute-map-tr-equiv-action-equiv-family {D = D} f g {X} e X' =
 module _
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} (e : X ≃ Y)
   where
-  
+
   eq-tr-equiv-action-equiv-family :
     tr-equiv f e ＝ action-equiv-family f e
   eq-tr-equiv-action-equiv-family =

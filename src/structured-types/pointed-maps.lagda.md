@@ -129,7 +129,7 @@ module _
   pr2 (comp-pointed-map g f) = preserves-point-comp-pointed-map g f
 
   infixr 15 _∘∗_
-  
+
   _∘∗_ : B →∗ C → A →∗ B → A →∗ C
   _∘∗_ = comp-pointed-map
 

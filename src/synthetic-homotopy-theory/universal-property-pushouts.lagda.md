@@ -236,7 +236,8 @@ module _
   {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
   {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   {X' : UU l5} (c' : cocone-span-diagram 𝒮 X')
-  (h : X → X') (H : htpy-cocone-span-diagram 𝒮 (cocone-map-span-diagram 𝒮 c h) c')
+  (h : X → X')
+  (H : htpy-cocone-span-diagram 𝒮 (cocone-map-span-diagram 𝒮 c h) c')
   where
 
   triangle-cocone-map-span-diagram :
@@ -590,7 +591,10 @@ module _
   {C : UU l4} {X : UU l5} {Y : UU l6}
   (h : codomain-span-diagram 𝒮 → C)
   (c : cocone-span-diagram 𝒮 X)
-  (d : cocone-span-diagram (make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h) Y)
+  (d :
+    cocone-span-diagram
+      ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
+      ( Y))
   (H : universal-property-pushout 𝒮 c)
   where
 
@@ -805,7 +809,10 @@ module _
   { l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
   { C : UU l4} {X : UU l5} {Y : UU l6} (h : domain-span-diagram 𝒮 → C)
   ( c : cocone-span-diagram 𝒮 X)
-  ( d : cocone-span-diagram (make-span-diagram h (left-map-cocone-span-diagram 𝒮 c)) Y)
+  ( d :
+    cocone-span-diagram
+      ( make-span-diagram h (left-map-cocone-span-diagram 𝒮 c))
+      ( Y))
   ( H : universal-property-pushout 𝒮 c)
   where
 

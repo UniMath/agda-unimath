@@ -42,12 +42,13 @@ Consider a [span diagram](foundation.span-diagrams.md) `𝒮` of types
   A <--- S ---> B.
 ```
 
-The {{#concept "standard pushout"}} `A ⊔_𝒮 B` of `𝒮` is a postulated choice of a type `X` equipped with a
+The {{#concept "standard pushout"}} `A ⊔_𝒮 B` of `𝒮` is a postulated choice of a
+type `X` equipped with a
 [cocone structure](synthetic-homotopy-theory.cocones-under-span-diagrams.md) of
 `𝒮` with codomain `X` satisfying the
 [universal property of the pushout](synthetic-homotopy-theory.universal-property-pushouts.md)
-of `𝒮`. In other words, the standard pushout `A ⊔_𝒮 B` of `𝒮` comes equipped with a cocone
-structure `(inl , inr , glue)` where
+of `𝒮`. In other words, the standard pushout `A ⊔_𝒮 B` of `𝒮` comes equipped
+with a cocone structure `(inl , inr , glue)` where
 
 ```text
           g
@@ -59,7 +60,8 @@ structure `(inl , inr , glue)` where
         inl
 ```
 
-such that for any type `Y`, the [evaluation map](synthetic-homotopy-theory.operations-cocones-under-span-diagrams.md)
+such that for any type `Y`, the
+[evaluation map](synthetic-homotopy-theory.operations-cocones-under-span-diagrams.md)
 
 ```text
   (A ⊔_𝒮 B → Y) → cocone 𝒮 Y
@@ -151,7 +153,9 @@ module _
 
 ### The predicate on cocones under span diagrams of being a pushout cocone
 
-The `is-pushout` predicate defined below is a [small type](foundation.small-types.md), as opposed to the universal property of pushouts, which is in `UUω`.
+The `is-pushout` predicate defined below is a
+[small type](foundation.small-types.md), as opposed to the universal property of
+pushouts, which is in `UUω`.
 
 ```agda
 is-pushout :
@@ -311,7 +315,9 @@ module _
   equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span :
     fiber (left-map-cocone-span-diagram s c ∘ left-map-span-diagram s) x ≃
     fiber
-      ( cogap-cocone-span-diagram s c ∘ inl-standard-pushout s ∘ left-map-span-diagram s)
+      ( cogap-cocone-span-diagram s c ∘
+        inl-standard-pushout s ∘
+        left-map-span-diagram s)
       ( x)
   equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span =
     equiv-tot
@@ -347,15 +353,22 @@ module _
     fiber (left-map-cocone-span-diagram s c ∘ left-map-span-diagram s) x →
     fiber (right-map-cocone-span-diagram s c) x
   right-map-span-cogap-cocone-span-diagram-fiber =
-    ( map-inv-equiv equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr) ∘
+    ( map-inv-equiv
+      equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr) ∘
     {!!}
     {-
     ( left-map-flattening-pushout
       s -- ( transposition-span-diagram s)
-      ( cocone-standard-pushout s) -- ( cocone-standard-pushout (transposition-span-diagram s))
-      {! λ y → (cogap-cocone-span-diagram s c y) ＝ x!}) {- ( left-map-flattening-pushout
-      ( λ y → (cogap-cocone-span-diagram s c y) ＝ x) s cocone-standard-pushout) -} -} ∘
-    ( map-equiv equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span)
+      ( cocone-standard-pushout s)
+      -- ( cocone-standard-pushout (transposition-span-diagram s))
+      {! λ y → (cogap-cocone-span-diagram s c y) ＝ x!})
+    {-
+      ( left-map-flattening-pushout
+        ( λ y → (cogap-cocone-span-diagram s c y) ＝ x)
+        s
+        cocone-standard-pushout) -} -} ∘
+    ( map-equiv
+      equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span)
 ```
 
 Since our pushout square of fibers has `fiber (m ∘ f) x` as its top-left corner
@@ -391,9 +404,12 @@ square commute (almost) trivially.
         ( cocone-standard-pushout f g))
       ( left-map-span-cogap-cocone-span-diagram-fiber)
       ( right-map-span-cogap-cocone-span-diagram-fiber)
-      ( map-equiv equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl)
-      ( map-equiv equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr)
-      ( map-equiv equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span)
+      ( map-equiv
+        equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl)
+      ( map-equiv
+        equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr)
+      ( map-equiv
+        equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span)
       ( cocone-flattening-pushout
         ( λ y → cogap-cocone-span-diagram f g c y ＝ x)
         ( f)
@@ -411,8 +427,10 @@ square commute (almost) trivially.
           ( is-section-map-inv-equiv
             ( equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr)
             ( _)))
-      ( is-equiv-map-equiv equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl)
-      ( is-equiv-map-equiv equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr)
+      ( is-equiv-map-equiv
+        equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl)
+      ( is-equiv-map-equiv
+        equiv-fiber-right-map-cocone-span-diagram-cogap-cocone-span-diagram-inr)
       ( is-equiv-map-equiv
         ( equiv-fiber-left-map-cocone-span-diagram-cogap-cocone-span-diagram-inl-horizontal-span))
 ```
@@ -439,7 +457,8 @@ fibers.
     { l5 l6 l7 : Level} (T : UU l5) (F : UU l6) (G : UU l7)
     ( i : F ≃ fiber (left-map-cocone-span-diagram s c) x)
     ( j : G ≃ fiber (right-map-cocone-span-diagram s c) x)
-    ( k : T ≃ fiber (left-map-cocone-span-diagram s c ∘ left-map-span-diagram s) x)
+    ( k :
+      T ≃ fiber (left-map-cocone-span-diagram s c ∘ left-map-span-diagram s) x)
     ( u : T → F)
     ( v : T → G)
     ( coh-l :
@@ -460,7 +479,8 @@ fibers.
       { l : Level} →
       ( Σ ( cocone-span-diagram u v (fiber (cogap-cocone-span-diagram s c) x))
           ( λ c → universal-property-pushout l u v c))
-    universal-property-pushout-cogap-cocone-span-diagram-fiber-universal-property-to-equiv {l} =
+    universal-property-pushout-cogap-cocone-span-diagram-fiber-universal-property-to-equiv
+      {l} =
       universal-property-pushout-comp-cocone-equiv-span-diagram
         ( left-map-span-cogap-cocone-span-diagram-fiber)
         ( right-map-span-cogap-cocone-span-diagram-fiber)
@@ -488,8 +508,11 @@ module _
 
   universal-property-pushout-transposition-cocone-span-diagram-universal-property-pushout :
     universal-property-pushout s c →
-    universal-property-pushout (transposition-span-diagram s) (transposition-cocone-span-diagram s c)
-  universal-property-pushout-transposition-cocone-span-diagram-universal-property-pushout up Y =
+    universal-property-pushout
+      ( transposition-span-diagram s)
+      ( transposition-cocone-span-diagram s c)
+  universal-property-pushout-transposition-cocone-span-diagram-universal-property-pushout
+    up Y =
     is-equiv-equiv'
       ( id-equiv)
       ( equiv-transposition-cocone-span-diagram s Y)
@@ -505,11 +528,15 @@ module _
           ( ( refl-htpy) ,
             ( refl-htpy) ,
             ( λ x →
-              right-unit ∙ inv (ap-inv h (coherence-square-cocone-span-diagram s c x)))))
+              right-unit ∙
+              inv (ap-inv h (coherence-square-cocone-span-diagram s c x)))))
       ( up Y)
 
   is-pushout-transposition-cocone-span-diagram-is-pushout :
-    is-pushout s c → is-pushout (transposition-span-diagram s) (transposition-cocone-span-diagram s c)
+    is-pushout s c →
+    is-pushout
+      ( transposition-span-diagram s)
+      ( transposition-cocone-span-diagram s c)
   is-pushout-transposition-cocone-span-diagram-is-pushout H =
     is-pushout-universal-property-pushout (transposition-span-diagram s)
       ( transposition-cocone-span-diagram s c)

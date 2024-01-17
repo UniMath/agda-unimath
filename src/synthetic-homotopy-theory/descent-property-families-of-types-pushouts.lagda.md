@@ -38,6 +38,8 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
+To do.
+
 ## Definitions
 
 ### The structure of a type family over a pushout obtained from a type family over a cocone
@@ -159,7 +161,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  {l1 l2 l3 l4 l : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   (U : universal-property-pushout 𝒮 c)
   where
 

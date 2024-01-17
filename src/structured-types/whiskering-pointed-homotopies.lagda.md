@@ -23,7 +23,10 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Consider a [pointed homotopy](structured-types.pointed-homotopies.md) `H : f ~∗ g` between [pointed maps](structured-types.pointed-maps.md) `f g : A →∗ B`, and consider a pointed map `h : B →∗ C`, as indicated in the diagram
+Consider a [pointed homotopy](structured-types.pointed-homotopies.md)
+`H : f ~∗ g` between [pointed maps](structured-types.pointed-maps.md)
+`f g : A →∗ B`, and consider a pointed map `h : B →∗ C`, as indicated in the
+diagram
 
 ```text
       f
@@ -32,7 +35,8 @@ Consider a [pointed homotopy](structured-types.pointed-homotopies.md) `H : f ~�
       g
 ```
 
-The {{#concept "left whiskering operation on pointed homotopies"}} takes a pointed homotopy `H` and a pointed map `f` and returns a pointed homotopy
+The {{#concept "left whiskering operation on pointed homotopies"}} takes a
+pointed homotopy `H` and a pointed map `f` and returns a pointed homotopy
 
 ```text
   h ·l∗ H : h ∘∗ f ~∗ h ∘∗ g

@@ -24,7 +24,12 @@ open import synthetic-homotopy-theory.families-of-types-pushouts
 
 ## Idea
 
-A {{#concept "family of types equipped with descent data" Disambiguation="pushouts"}} for the [pushout](synthetic-homotopy-theory.universal-property-pushouts.md) over a [cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c` with codomain `X` under a [span diagram](foundation.span-diagrams.md) `𝒮` as indicated in the diagram
+A
+{{#concept "family of types equipped with descent data" Disambiguation="pushouts"}}
+for the [pushout](synthetic-homotopy-theory.universal-property-pushouts.md) over
+a [cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c` with
+codomain `X` under a [span diagram](foundation.span-diagrams.md) `𝒮` as
+indicated in the diagram
 
 ```text
         g
@@ -36,13 +41,21 @@ A {{#concept "family of types equipped with descent data" Disambiguation="pushou
         i
 ```
 
-consists of a type family `Y` over `X`, the [structure of a type family](synthetic-homotopy-theory.families-of-types-pushouts.md) `P` over the span diagram `𝒮` and an [equivalence of structures of type families for pushouts](synthetic-homotopy-theory.equivalences-families-of-types-pushouts.md)
+consists of a type family `Y` over `X`, the
+[structure of a type family](synthetic-homotopy-theory.families-of-types-pushouts.md)
+`P` over the span diagram `𝒮` and an
+[equivalence of structures of type families for pushouts](synthetic-homotopy-theory.equivalences-families-of-types-pushouts.md)
 
 ```text
   e : P ≃ descent-data-type-family 𝒮 c Y.
 ```
 
-By the [descent property](synthetic-homotopy-theory.descent-property-families-of-types-pushouts.md) for pushouts it follows that for any type family equipped with descent data `(Y , P , e)` over a _pushout_, the types of [pairs](foundation.dependent-pair-types.md) `(Y , e)` and `(P , e)` are [contractible](foundation-core.contractible-types.md).
+By the
+[descent property](synthetic-homotopy-theory.descent-property-families-of-types-pushouts.md)
+for pushouts it follows that for any type family equipped with descent data
+`(Y , P , e)` over a _pushout_, the types of
+[pairs](foundation.dependent-pair-types.md) `(Y , e)` and `(P , e)` are
+[contractible](foundation-core.contractible-types.md).
 
 ## Definitions
 

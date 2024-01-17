@@ -34,7 +34,11 @@ A {{#concept "cospan"}} is a diagram of the form
   A -----> X <----- B
 ```
 
-In other words, a cospan consists of three types `A`, `B`, and `X` and two functions `f : A → X` and `g : B → X`. A {{#concept "cospan structure" Disambiguation="pair of types"}} on a pair of types `A` and `B` consists of a type `X` and two functions `f : A → X` and `g : B → X`.
+In other words, a cospan consists of three types `A`, `B`, and `X` and two
+functions `f : A → X` and `g : B → X`. A
+{{#concept "cospan structure" Disambiguation="pair of types"}} on a pair of
+types `A` and `B` consists of a type `X` and two functions `f : A → X` and
+`g : B → X`.
 
 ## Definitions
 
