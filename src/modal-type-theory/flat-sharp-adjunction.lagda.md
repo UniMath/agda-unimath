@@ -52,25 +52,7 @@ the future.
 
 ## Postulates
 
-### Crisp induction for `♯`
-
-Sharp-Codiscrete types are local at the flat counit.
-
-```agda
-postulate
-  crisp-ind-sharp :
-    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
-    ((x : A) → is-sharp-codiscrete (C x)) →
-    ((@♭ x : A) → C x) → (x : A) → C x
-
-  compute-crisp-ind-sharp :
-    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
-    (is-sharp-codiscrete-C : (x : A) → is-sharp-codiscrete (C x))
-    (f : (@♭ x : A) → C x) →
-    (@♭ x : A) → crisp-ind-sharp C is-sharp-codiscrete-C f x ＝ f x
-```
-
-### Crisp elimination of `♯`
+### Crisp elimination for the sharp modality
 
 ```agda
 postulate
@@ -91,9 +73,28 @@ postulate
     ( ap unit-sharp (compute-crisp-elim-sharp x))
 ```
 
+### Crisp induction for the sharp modality
+
+The crisp induction principle for the sharp modality is the principle that sharp
+codiscrete types are local at the flat counit.
+
+```agda
+postulate
+  crisp-ind-sharp :
+    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
+    ((x : A) → is-sharp-codiscrete (C x)) →
+    ((@♭ x : A) → C x) → (x : A) → C x
+
+  compute-crisp-ind-sharp :
+    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
+    (is-sharp-codiscrete-C : (x : A) → is-sharp-codiscrete (C x))
+    (f : (@♭ x : A) → C x) →
+    (@♭ x : A) → crisp-ind-sharp C is-sharp-codiscrete-C f x ＝ f x
+```
+
 ## Definitions
 
-### Crisp recursion for `♯`
+### Crisp recursion for the sharp modality
 
 ```agda
 crisp-rec-sharp :
@@ -172,40 +173,40 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  ap-flat-elim-sharp : ♭ (♯ A) → ♭ A
-  ap-flat-elim-sharp = ap-crisp-flat crisp-elim-sharp
+  ap-map-flat-elim-sharp : ♭ (♯ A) → ♭ A
+  ap-map-flat-elim-sharp = ap-crisp-map-flat crisp-elim-sharp
 
-  ap-flat-unit-sharp : ♭ A → ♭ (♯ A)
-  ap-flat-unit-sharp = ap-flat unit-sharp
+  ap-map-flat-unit-sharp : ♭ A → ♭ (♯ A)
+  ap-map-flat-unit-sharp = ap-map-flat unit-sharp
 
-  is-section-ap-flat-unit-sharp : ap-flat-elim-sharp ∘ ap-flat-unit-sharp ~ id
-  is-section-ap-flat-unit-sharp (cons-flat x) =
+  is-section-ap-map-flat-unit-sharp : ap-map-flat-elim-sharp ∘ ap-map-flat-unit-sharp ~ id
+  is-section-ap-map-flat-unit-sharp (cons-flat x) =
     ap-crisp cons-flat (compute-crisp-elim-sharp x)
 
-  is-retraction-ap-flat-unit-sharp :
-    ap-flat-unit-sharp ∘ ap-flat-elim-sharp ~ id
-  is-retraction-ap-flat-unit-sharp (cons-flat x) =
+  is-retraction-ap-map-flat-unit-sharp :
+    ap-map-flat-unit-sharp ∘ ap-map-flat-elim-sharp ~ id
+  is-retraction-ap-map-flat-unit-sharp (cons-flat x) =
     ap-crisp cons-flat (uniqueness-crisp-elim-sharp x)
 
-  is-equiv-ap-flat-elim-sharp : is-equiv ap-flat-elim-sharp
-  pr1 (pr1 is-equiv-ap-flat-elim-sharp) = ap-flat-unit-sharp
-  pr2 (pr1 is-equiv-ap-flat-elim-sharp) = is-section-ap-flat-unit-sharp
-  pr1 (pr2 is-equiv-ap-flat-elim-sharp) = ap-flat-unit-sharp
-  pr2 (pr2 is-equiv-ap-flat-elim-sharp) = is-retraction-ap-flat-unit-sharp
+  is-equiv-ap-map-flat-elim-sharp : is-equiv ap-map-flat-elim-sharp
+  pr1 (pr1 is-equiv-ap-map-flat-elim-sharp) = ap-map-flat-unit-sharp
+  pr2 (pr1 is-equiv-ap-map-flat-elim-sharp) = is-section-ap-map-flat-unit-sharp
+  pr1 (pr2 is-equiv-ap-map-flat-elim-sharp) = ap-map-flat-unit-sharp
+  pr2 (pr2 is-equiv-ap-map-flat-elim-sharp) = is-retraction-ap-map-flat-unit-sharp
 
-  equiv-ap-flat-elim-sharp : ♭ (♯ A) ≃ ♭ A
-  pr1 equiv-ap-flat-elim-sharp = ap-flat-elim-sharp
-  pr2 equiv-ap-flat-elim-sharp = is-equiv-ap-flat-elim-sharp
+  equiv-ap-map-flat-elim-sharp : ♭ (♯ A) ≃ ♭ A
+  pr1 equiv-ap-map-flat-elim-sharp = ap-map-flat-elim-sharp
+  pr2 equiv-ap-map-flat-elim-sharp = is-equiv-ap-map-flat-elim-sharp
 
-  is-equiv-ap-flat-unit-sharp : is-equiv ap-flat-unit-sharp
-  pr1 (pr1 is-equiv-ap-flat-unit-sharp) = ap-flat-elim-sharp
-  pr2 (pr1 is-equiv-ap-flat-unit-sharp) = is-retraction-ap-flat-unit-sharp
-  pr1 (pr2 is-equiv-ap-flat-unit-sharp) = ap-flat-elim-sharp
-  pr2 (pr2 is-equiv-ap-flat-unit-sharp) = is-section-ap-flat-unit-sharp
+  is-equiv-ap-map-flat-unit-sharp : is-equiv ap-map-flat-unit-sharp
+  pr1 (pr1 is-equiv-ap-map-flat-unit-sharp) = ap-map-flat-elim-sharp
+  pr2 (pr1 is-equiv-ap-map-flat-unit-sharp) = is-retraction-ap-map-flat-unit-sharp
+  pr1 (pr2 is-equiv-ap-map-flat-unit-sharp) = ap-map-flat-elim-sharp
+  pr2 (pr2 is-equiv-ap-map-flat-unit-sharp) = is-section-ap-map-flat-unit-sharp
 
-  equiv-ap-flat-unit-sharp : ♭ A ≃ ♭ (♯ A)
-  pr1 equiv-ap-flat-unit-sharp = ap-flat-unit-sharp
-  pr2 equiv-ap-flat-unit-sharp = is-equiv-ap-flat-unit-sharp
+  equiv-ap-map-flat-unit-sharp : ♭ A ≃ ♭ (♯ A)
+  pr1 equiv-ap-map-flat-unit-sharp = ap-map-flat-unit-sharp
+  pr2 equiv-ap-map-flat-unit-sharp = is-equiv-ap-map-flat-unit-sharp
 ```
 
 ### Sharp after flat

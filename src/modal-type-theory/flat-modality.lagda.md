@@ -74,29 +74,6 @@ crisp-rec-flat :
 crisp-rec-flat C = crisp-ind-flat (λ _ → C)
 ```
 
-### Flat action on maps
-
-```agda
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
-  where
-
-  ap-flat : @♭ (A → B) → (♭ A → ♭ B)
-  ap-flat f (cons-flat x) = cons-flat (f x)
-
-  ap-crisp-flat : @♭ (@♭ A → B) → (♭ A → ♭ B)
-  ap-crisp-flat f (cons-flat x) = cons-flat (f x)
-
-  coap-flat : (♭ A → ♭ B) → (@♭ A → B)
-  coap-flat f x = counit-flat (f (cons-flat x))
-
-  is-crisp-retraction-coap-flat :
-    (@♭ f : @♭ A → B) → coap-flat (ap-crisp-flat f) ＝ f
-  is-crisp-retraction-coap-flat _ = refl
-```
-
-## Properties
-
 ### Crisp assumptions are weaker
 
 ```agda
@@ -105,6 +82,37 @@ crispen :
   ((x : A) → P x) → ((@♭ x : A) → P x)
 crispen f x = f x
 ```
+
+### Flat's action on maps
+
+```agda
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
+  where
+
+  ap-crisp-map-flat : @♭ (@♭ A → B) → (♭ A → ♭ B)
+  ap-crisp-map-flat f (cons-flat x) = cons-flat (f x)
+
+  ap-map-flat : @♭ (A → B) → (♭ A → ♭ B)
+  ap-map-flat f = ap-crisp-map-flat (crispen f)
+
+  naturality-counit-flat :
+    (@♭ f : A → B) → counit-flat ∘ ap-map-flat f ~ f ∘ counit-flat
+  naturality-counit-flat f (cons-flat x) = refl
+```
+
+### Flat's coaction on maps
+
+```agda
+  coap-flat : (♭ A → ♭ B) → (@♭ A → B)
+  coap-flat f x = counit-flat (f (cons-flat x))
+
+  is-crisp-retraction-coap-flat :
+    (@♭ f : @♭ A → B) → coap-flat (ap-crisp-map-flat f) ＝ f
+  is-crisp-retraction-coap-flat _ = refl
+```
+
+## Properties
 
 ### The flat modality is idempotent
 
@@ -155,8 +163,21 @@ module _
   pr1 equiv-flat-counit-flat = map-flat-counit-flat
   pr2 equiv-flat-counit-flat = is-equiv-flat-counit-flat
 
-  inv-equiv-flat-counit-flat : ♭ A ≃ ♭ (♭ A)
-  inv-equiv-flat-counit-flat = inv-equiv equiv-flat-counit-flat
+  section-diagonal-flat : section diagonal-flat
+  pr1 section-diagonal-flat = map-flat-counit-flat
+  pr2 section-diagonal-flat = is-section-flat-counit-flat
+
+  retraction-diagonal-flat : retraction diagonal-flat
+  pr1 retraction-diagonal-flat = map-flat-counit-flat
+  pr2 retraction-diagonal-flat = is-retraction-flat-counit-flat
+
+  is-equiv-diagonal-flat : is-equiv diagonal-flat
+  pr1 is-equiv-diagonal-flat = section-diagonal-flat
+  pr2 is-equiv-diagonal-flat = retraction-diagonal-flat
+
+  equiv-diagonal-flat : ♭ A ≃ ♭ (♭ A)
+  pr1 equiv-diagonal-flat = diagonal-flat
+  pr2 equiv-diagonal-flat = is-equiv-diagonal-flat
 ```
 
 ## See also
@@ -164,8 +185,8 @@ module _
 - In [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md) we
   postulate that the flat modality is left adjoint to the
   [sharp modality](modal-type-theory.sharp-modality.md).
-- [Flat discrete types](modal-type-theory.flat-discrete-types.md) for types that
-  are flat modal.
+- [Flat discrete types](modal-type-theory.flat-discrete-crisp-types.md) for
+  types that are flat modal.
 
 ## References
 

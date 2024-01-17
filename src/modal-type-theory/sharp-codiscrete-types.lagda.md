@@ -21,15 +21,16 @@ open import foundation.universe-levels
 open import modal-type-theory.sharp-modality
 
 open import orthogonal-factorization-systems.higher-modalities
+open import orthogonal-factorization-systems.modal-operators
 ```
 
 </details>
 
 ## Idea
 
-A type is said to be **(sharp) codiscrete** if it is
-[sharp](modal-type-theory.sharp-modality.md) modal, i.e. if the sharp unit is an
-[equivalence](foundation-core.equivalences.md) at that type.
+A type is said to be {{#concept "sharp codiscrete" Agda=is-sharp-codiscrete}} if
+it is [sharp](modal-type-theory.sharp-modality.md) modal, i.e. if the sharp unit
+is an [equivalence](foundation-core.equivalences.md) at that type.
 
 We postulate that codiscrete types are closed under
 
@@ -45,69 +46,29 @@ be subject to change in the future.
 
 ## Definition
 
-```agda
-is-sharp-codiscrete : {l : Level} (A : UU l) → UU l
-is-sharp-codiscrete {l} A = is-equiv (unit-sharp {l} {A})
-
-is-sharp-codiscrete-family :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
-is-sharp-codiscrete-family {A = A} B = (x : A) → is-sharp-codiscrete (B x)
-
-Sharp-Codiscrete : (l : Level) → UU (lsuc l)
-Sharp-Codiscrete l = Σ (UU l) (is-sharp-codiscrete)
-```
-
-## Postulates
-
-### The identity types of `♯` are codiscrete
-
-```agda
-postulate
-  is-sharp-codiscrete-Id-sharp :
-    {l1 : Level} {A : UU l1} (x y : ♯ A) → is-sharp-codiscrete (x ＝ y)
-
-is-sharp-codiscrete-Id :
-  {l1 : Level} {A : UU l1} (x y : A) →
-  is-sharp-codiscrete A → is-sharp-codiscrete (x ＝ y)
-is-sharp-codiscrete-Id x y is-sharp-codiscrete-A =
-  map-tr-equiv
-    ( is-sharp-codiscrete)
-    ( inv-equiv-ap-is-emb (is-emb-is-equiv is-sharp-codiscrete-A))
-    ( is-sharp-codiscrete-Id-sharp (unit-sharp x) (unit-sharp y))
-```
-
-### A `Π`-type is codiscrete if its codomain is
-
-```agda
-postulate
-  is-sharp-codiscrete-Π :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    ((x : A) → is-sharp-codiscrete (B x)) →
-    is-sharp-codiscrete ((x : A) → B x)
-```
-
-### The universe of codiscrete types is codiscrete
-
-```agda
-postulate
-  is-sharp-codiscrete-Sharp-Codiscrete :
-    (l : Level) → is-sharp-codiscrete (Sharp-Codiscrete l)
-```
-
-## Properties
-
-### Being codiscrete is a property
+### Sharp codiscrete types
 
 ```agda
 module _
   {l : Level} (A : UU l)
   where
 
-  is-sharp-codiscrete-Prop : Prop l
-  is-sharp-codiscrete-Prop = is-equiv-Prop (unit-sharp {l} {A})
+  is-sharp-codiscrete : UU l
+  is-sharp-codiscrete = is-modal unit-sharp A
 
-  is-property-is-sharp-codiscrete : is-prop (is-sharp-codiscrete A)
-  is-property-is-sharp-codiscrete = is-prop-type-Prop is-sharp-codiscrete-Prop
+  is-sharp-codiscrete-Prop : Prop l
+  is-sharp-codiscrete-Prop = is-modal-Prop unit-sharp A
+
+  is-property-is-sharp-codiscrete : is-prop is-sharp-codiscrete
+  is-property-is-sharp-codiscrete = is-property-is-modal unit-sharp A
+```
+
+### Sharp codiscrete families
+
+```agda
+is-sharp-codiscrete-family :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
+is-sharp-codiscrete-family {A = A} B = (x : A) → is-sharp-codiscrete (B x)
 
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
@@ -122,7 +83,58 @@ module _
     is-prop-type-Prop is-sharp-codiscrete-family-Prop
 ```
 
-### Codiscreteness is a higher modality
+### The subuniverse of sharp codiscrete types
+
+```agda
+Sharp-Codiscrete-Type : (l : Level) → UU (lsuc l)
+Sharp-Codiscrete-Type l = Σ (UU l) (is-sharp-codiscrete)
+```
+
+## Postulates
+
+### The identity types of `♯ A` are sharp codiscrete
+
+```agda
+postulate
+  is-sharp-codiscrete-Id-sharp :
+    {l1 : Level} {A : UU l1} (x y : ♯ A) → is-sharp-codiscrete (x ＝ y)
+
+is-sharp-codiscrete-Id :
+  {l1 : Level} {A : UU l1} (x y : A) →
+  is-sharp-codiscrete A → is-sharp-codiscrete (x ＝ y)
+is-sharp-codiscrete-Id x y is-sharp-A =
+  map-tr-equiv
+    ( is-sharp-codiscrete)
+    ( inv-equiv-ap-is-emb (is-emb-is-equiv is-sharp-A))
+    ( is-sharp-codiscrete-Id-sharp (unit-sharp x) (unit-sharp y))
+```
+
+### A dependent function type is codiscrete if its codomain is
+
+```agda
+postulate
+  is-sharp-codiscrete-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-sharp-codiscrete (B x)) →
+    is-sharp-codiscrete ((x : A) → B x)
+
+is-sharp-codiscrete-function-type :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-sharp-codiscrete B →
+  is-sharp-codiscrete (A → B)
+is-sharp-codiscrete-function-type is-sharp-B =
+  is-sharp-codiscrete-Π (λ _ → is-sharp-B)
+```
+
+### The universe of codiscrete types is codiscrete
+
+```agda
+postulate
+  is-sharp-codiscrete-Sharp-Codiscrete :
+    (l : Level) → is-sharp-codiscrete (Sharp-Codiscrete-Type l)
+```
+
+### The sharp higher modality
 
 ```agda
 module _
@@ -140,7 +152,9 @@ module _
   pr2 (pr2 sharp-higher-modality) = is-higher-modality-sharp
 ```
 
-### Types in the image of `♯` are codiscrete
+## Properties
+
+### Types in the image of the sharp modality are codiscrete
 
 ```agda
 is-sharp-codiscrete-sharp : {l : Level} (X : UU l) → is-sharp-codiscrete (♯ X)
@@ -150,5 +164,5 @@ is-sharp-codiscrete-sharp {l} =
 
 ## See also
 
-- [Flat discrete types](modal-type-theory.flat-discrete-types.md) for the dual
-  notion.
+- [Flat discrete types](modal-type-theory.flat-discrete-crisp-types.md) for the
+  dual notion.

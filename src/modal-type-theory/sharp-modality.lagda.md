@@ -26,7 +26,7 @@ open import orthogonal-factorization-systems.modal-subuniverse-induction
 
 ## Idea
 
-The **sharp modality `♯`** is an axiomatized
+The {{#concept "sharp modality" Agda=♯}} `♯` is an axiomatized
 [monadic modality](orthogonal-factorization-systems.higher-modalities.md) we
 postulate as a right adjoint to the
 [flat modality](modal-type-theory.flat-modality.md).
@@ -128,7 +128,7 @@ compute-ind-subuniverse-sharp =
     ( induction-principle-subuniverse-sharp)
 ```
 
-### Sharp recursion
+### The sharp recursion principle
 
 ```agda
 rec-sharp :
@@ -194,7 +194,7 @@ compute-rec-subuniverse-sharp =
     ( recursion-principle-subuniverse-sharp)
 ```
 
-### Action on maps
+### Sharp's action on maps
 
 ```agda
 ap-sharp : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)

@@ -1,17 +1,21 @@
-# Flat dependent function types
+# Crisp dependent function types
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.flat-dependent-function-types where
+module modal-type-theory.crisp-dependent-function-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.universe-levels
+open import foundation.homotopies
+open import foundation.function-types
+open import foundation.identity-types
 
 open import modal-type-theory.flat-modality
+open import modal-type-theory.flat-discrete-crisp-types
 ```
 
 </details>
@@ -35,6 +39,14 @@ module _
   map-crisp-distributive-flat-Π (cons-flat f) x = cons-flat (f x)
 
 module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
+  where
+
+  map-distributive-flat-Π :
+    ♭ ((x : A) → B x) → (@♭ x : ♭ A) → ♭ (B (counit-flat x))
+  map-distributive-flat-Π (cons-flat f) (cons-flat x) = cons-flat (f x)
+
+module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
@@ -48,8 +60,8 @@ module _
 
 ## See also
 
-- [Flat discrete types](modal-type-theory.flat-discrete-types.md) for types that
-  are flat modal.
+- [Flat discrete types](modal-type-theory.flat-discrete-crisp-types.md) for
+  types that are flat modal.
 
 ## References
 
