@@ -239,11 +239,11 @@ module _
         ( is-torsorial-path refl)
 ```
 
-### For a fixed pointed map, the `is-hom-pointed-map-algebra-Hatcher-Acyclic-Type` family is [torsorial](foundation.torsorial-type-families.md)
+### For a fixed pointed map, the `is-hom-pointed-map-algebra-Hatcher-Acyclic-Type` family is torsorial
 
 In proving this, it is helpful to consider an equivalent formulation of
-`is-hom-pointed-map-algebra-Hatcher-Acyclic-Type` for which torsoriality is
-almost immediate.
+`is-hom-pointed-map-algebra-Hatcher-Acyclic-Type` for which
+[torsoriality](foundation.torsorial-type-families.md) is almost immediate.
 
 ```agda
 module _
