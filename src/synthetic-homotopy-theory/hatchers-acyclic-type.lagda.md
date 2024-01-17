@@ -84,23 +84,23 @@ module _
   Hom-algebra-Hatcher-Acyclic-Type-pointed-map : (A →∗ B) → UU l2
   Hom-algebra-Hatcher-Acyclic-Type-pointed-map f =
     Σ ( map-Ω f a1 ＝ b1)
-              ( λ u →
-                Σ ( map-Ω f a2 ＝ b2)
-                  ( λ v →
-                    ( coherence-square-identifications
-                      ( ap (map-Ω f) r1)
-                      ( map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u)
-                      ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
-                      ( s1)) ×
-                    ( coherence-square-identifications
-                      ( ap (map-Ω f) r2)
-                      ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
-                      ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
-                        ( ap
-                          ( power-nat-Ω 2 B)
-                          ( ( preserves-mul-map-Ω f) ∙
-                            ( horizontal-concat-Id² u v))))
-                      ( s2))))
+      ( λ u →
+        Σ ( map-Ω f a2 ＝ b2)
+          ( λ v →
+            ( coherence-square-identifications
+              ( ap (map-Ω f) r1)
+              ( map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u)
+              ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
+              ( s1)) ×
+            ( coherence-square-identifications
+              ( ap (map-Ω f) r2)
+              ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
+              ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
+                ( ap
+                  ( power-nat-Ω 2 B)
+                  ( ( preserves-mul-map-Ω f) ∙
+                    ( horizontal-concat-Id² u v))))
+              ( s2))))
 
   Hom-algebra-Hatcher-Acyclic-Type : UU (l1 ⊔ l2)
   Hom-algebra-Hatcher-Acyclic-Type =
