@@ -93,11 +93,4 @@ module _
   pr1 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) =
     compute-structure-commutative-ring-𝔽 X p
   pr2 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) = s
-
---   is-finite-structure-semisimple-commutative-ring-𝔽 :
---     is-finite structure-semisimple-commutative-ring-𝔽
---   is-finite-structure-semisimple-commutative-ring-𝔽 =
---     is-finite-Σ
---       ( is-finite-structure-commutative-ring-𝔽 X)
---       ( λ c → {!!})
 ```
