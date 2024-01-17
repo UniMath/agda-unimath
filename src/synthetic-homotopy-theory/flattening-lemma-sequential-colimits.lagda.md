@@ -69,23 +69,23 @@ module _
   sequential-diagram-flattening-lemma : sequential-diagram (l1 ⊔ l3)
   pr1 sequential-diagram-flattening-lemma n =
     Σ ( family-sequential-diagram A n)
-      ( P ∘ map-cocone-sequential-diagram A c n)
+      ( P ∘ map-cocone-sequential-diagram c n)
   pr2 sequential-diagram-flattening-lemma n =
     map-Σ
-      ( P ∘ map-cocone-sequential-diagram A c (succ-ℕ n))
+      ( P ∘ map-cocone-sequential-diagram c (succ-ℕ n))
       ( map-sequential-diagram A n)
-      ( λ a → tr P (coherence-cocone-sequential-diagram A c n a))
+      ( λ a → tr P (coherence-cocone-sequential-diagram c n a))
 
   cocone-sequential-diagram-flattening-lemma :
     cocone-sequential-diagram sequential-diagram-flattening-lemma (Σ X P)
   pr1 cocone-sequential-diagram-flattening-lemma n =
-    map-Σ-map-base (map-cocone-sequential-diagram A c n) P
+    map-Σ-map-base (map-cocone-sequential-diagram c n) P
   pr2 cocone-sequential-diagram-flattening-lemma n =
     coherence-triangle-maps-map-Σ-map-base P
-      ( map-cocone-sequential-diagram A c n)
-      ( map-cocone-sequential-diagram A c (succ-ℕ n))
+      ( map-cocone-sequential-diagram c n)
+      ( map-cocone-sequential-diagram c (succ-ℕ n))
       ( map-sequential-diagram A n)
-      ( coherence-cocone-sequential-diagram A c n)
+      ( coherence-cocone-sequential-diagram c n)
 ```
 
 ### Statement of the flattening lemma
@@ -99,9 +99,8 @@ module _
 
   statement-flattening-lemma-sequential-colimit : UUω
   statement-flattening-lemma-sequential-colimit =
-    dependent-universal-property-sequential-colimit A c →
+    dependent-universal-property-sequential-colimit c →
     universal-property-sequential-colimit
-      ( sequential-diagram-flattening-lemma c P)
       ( cocone-sequential-diagram-flattening-lemma c P)
 ```
 
@@ -150,15 +149,14 @@ module _
       statement-flattening-lemma-sequential-colimit c P
     flattening-lemma-sequential-colimit dup-c =
       universal-property-sequential-colimit-universal-property-coequalizer
-        ( sequential-diagram-flattening-lemma c P)
         ( cocone-sequential-diagram-flattening-lemma c P)
         ( universal-property-coequalizer-top-universal-property-coequalizer-bottom-hom-arrow-is-equiv
           ( map-inv-associative-Σ ℕ
             ( family-sequential-diagram A)
-            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+            ( P ∘ ind-Σ (map-cocone-sequential-diagram c)))
           ( map-inv-associative-Σ ℕ
             ( family-sequential-diagram A)
-            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+            ( P ∘ ind-Σ (map-cocone-sequential-diagram c)))
           ( id)
           ( ( bottom-map-cofork-cocone-sequential-diagram
               ( sequential-diagram-flattening-lemma c P)) ,
@@ -182,7 +180,6 @@ module _
             ( refl-htpy))
           ( ind-Σ
             ( coherence-cocone-sequential-diagram
-              ( sequential-diagram-flattening-lemma c P)
               ( cocone-sequential-diagram-flattening-lemma c P)) ,
             ( coherence-cofork _ _
               ( cofork-flattening-lemma-coequalizer _ _ P
@@ -191,10 +188,10 @@ module _
           ( is-equiv-map-equiv
             ( inv-associative-Σ ℕ
               ( family-sequential-diagram A)
-              ( P ∘ ind-Σ (map-cocone-sequential-diagram A c))))
+              ( P ∘ ind-Σ (map-cocone-sequential-diagram c))))
           ( is-equiv-map-inv-associative-Σ ℕ
             ( family-sequential-diagram A)
-            ( P ∘ ind-Σ (map-cocone-sequential-diagram A c)))
+            ( P ∘ ind-Σ (map-cocone-sequential-diagram c)))
           ( is-equiv-id)
           ( flattening-lemma-coequalizer
             ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -202,7 +199,6 @@ module _
             ( P)
             ( cofork-cocone-sequential-diagram A c)
             ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
-              ( A)
               ( c)
               ( dup-c))))
 ```
