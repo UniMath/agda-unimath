@@ -255,23 +255,23 @@ module _
   Hom-algebra-Hatcher-Acyclic-Type-pointed-map' : (A →∗ B) → UU l2
   Hom-algebra-Hatcher-Acyclic-Type-pointed-map' f =
     Σ ( map-Ω f a1 ＝ b1)
-              ( λ u →
-                Σ ( map-Ω f a2 ＝ b2)
-                  ( λ v →
-                    ( Id
-                      ( inv (map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u) ∙
-                        ( ap (map-Ω f) r1 ∙
-                          (map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)))
-                      ( s1)) ×
-                    ( Id
-                      ( inv (map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v) ∙
-                        ( ap (map-Ω f) r2 ∙
-                          ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
-                            ( ap
-                              ( power-nat-Ω 2 B)
-                              ( ( preserves-mul-map-Ω f) ∙
-                                ( horizontal-concat-Id² u v))))))
-                      ( s2))))
+      ( λ u →
+        Σ ( map-Ω f a2 ＝ b2)
+          ( λ v →
+            ( Id
+              ( inv (map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u) ∙
+                ( ap (map-Ω f) r1 ∙
+                  (map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)))
+              ( s1)) ×
+            ( Id
+              ( inv (map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v) ∙
+                ( ap (map-Ω f) r2 ∙
+                  ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
+                    ( ap
+                      ( power-nat-Ω 2 B)
+                      ( ( preserves-mul-map-Ω f) ∙
+                        ( horizontal-concat-Id² u v))))))
+              ( s2))))
 
 module _
   {l1 l2 : Level}
