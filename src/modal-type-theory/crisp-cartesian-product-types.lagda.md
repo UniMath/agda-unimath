@@ -36,7 +36,7 @@ a crisp context.
 
 ## Properties
 
-### Flat distributes over coproduct types
+### Flat distributes over cartesian product types
 
 This is Theorem 6.9 of _Brouwer's fixed-point theorem in real-cohesive homotopy
 type theory_.
@@ -81,7 +81,7 @@ module _
   inv-distributive-flat-prod = inv-equiv distributive-flat-prod
 ```
 
-### Computing the flat counit on a coproduct type
+### Computing the flat counit on a cartesian product type
 
 The counit of the flat modality computes as the counit on each component of a
 crisp dependent pair type.
