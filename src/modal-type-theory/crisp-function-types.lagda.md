@@ -1,9 +1,9 @@
-# Crisp dependent function types
+# Crisp function types
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.crisp-dependent-function-types where
+module modal-type-theory.crisp-function-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,6 +14,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import modal-type-theory.crisp-dependent-function-types
 open import modal-type-theory.flat-discrete-crisp-types
 open import modal-type-theory.flat-modality
 ```
@@ -22,9 +23,9 @@ open import modal-type-theory.flat-modality
 
 ## Idea
 
-We say a dependent function type is
-{{#concept "crisp" Disambigiation="dependent function type"}} if it is formed in
-a crisp context.
+We say a [function type](foundation-core.function-types.md) is
+{{#concept "crisp" Disambigiation="function type"}} if it is formed in a crisp
+context.
 
 ## Properties
 
@@ -32,19 +33,15 @@ a crisp context.
 
 ```agda
 module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-crisp-distributive-flat-Π : ♭ ((x : A) → B x) → ((@♭ x : A) → ♭ (B x))
-  map-crisp-distributive-flat-Π (cons-flat f) x = cons-flat (f x)
+  map-crisp-distributive-flat-function-types : ♭ (A → B) → (@♭ A → ♭ B)
+  map-crisp-distributive-flat-function-types = map-crisp-distributive-flat-Π
 
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
-  where
-
-  map-distributive-flat-Π :
-    ♭ ((x : A) → B x) → ((x : ♭ A) → flat-family B x)
-  map-distributive-flat-Π (cons-flat f) (cons-flat x) = cons-flat (f x)
+  map-distributive-flat-function-types : ♭ (A → B) → (♭ A → ♭ B)
+  map-distributive-flat-function-types f (cons-flat x) =
+    map-crisp-distributive-flat-function-types f x
 ```
 
 ## See also

@@ -12,22 +12,22 @@ module modal-type-theory.crisp-dependent-pair-types where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.homotopies
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 
-open import modal-type-theory.flat-modality
 open import modal-type-theory.flat-discrete-crisp-types
+open import modal-type-theory.flat-modality
 ```
 
 </details>
 
 ## Idea
 
-We say a dependent pair type is
+We say a [dependent pair type](foundation.dependent-pair-types.md) is
 {{#concept "crisp" Disambigiation="dependent pair type"}} if it is formed in a
 crisp context. Here, we study the interactions between the
 [flat modality](modal-type-theory.flat-modality.md) and
@@ -37,7 +37,7 @@ crisp context. Here, we study the interactions between the
 
 ```agda
 Σ-♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : A → UU l2) → UU (l1 ⊔ l2)
-Σ-♭ A B = Σ (♭ A) (λ where (cons-flat x) → ♭ (B x))
+Σ-♭ A B = Σ (♭ A) (flat-family B)
 ```
 
 ## Properties
@@ -59,21 +59,21 @@ module _
   map-inv-distributive-flat-Σ : Σ-♭ A B → ♭ (Σ A B)
   map-inv-distributive-flat-Σ (cons-flat x , cons-flat y) = cons-flat (x , y)
 
-  is-section-distributive-flat-Σ :
-    (map-inv-distributive-flat-Σ ∘ map-distributive-flat-Σ) ~ id
-  is-section-distributive-flat-Σ (cons-flat _) = refl
+  is-section-map-distributive-flat-Σ :
+    is-section map-inv-distributive-flat-Σ map-distributive-flat-Σ
+  is-section-map-distributive-flat-Σ (cons-flat _) = refl
 
-  is-retraction-distributive-flat-Σ :
-    (map-distributive-flat-Σ ∘ map-inv-distributive-flat-Σ) ~ id
-  is-retraction-distributive-flat-Σ (cons-flat _ , cons-flat _) = refl
+  is-retraction-map-distributive-flat-Σ :
+    is-retraction map-inv-distributive-flat-Σ map-distributive-flat-Σ
+  is-retraction-map-distributive-flat-Σ (cons-flat _ , cons-flat _) = refl
 
   section-distributive-flat-Σ : section map-distributive-flat-Σ
   pr1 section-distributive-flat-Σ = map-inv-distributive-flat-Σ
-  pr2 section-distributive-flat-Σ = is-retraction-distributive-flat-Σ
+  pr2 section-distributive-flat-Σ = is-retraction-map-distributive-flat-Σ
 
   retraction-distributive-flat-Σ : retraction map-distributive-flat-Σ
   pr1 retraction-distributive-flat-Σ = map-inv-distributive-flat-Σ
-  pr2 retraction-distributive-flat-Σ = is-section-distributive-flat-Σ
+  pr2 retraction-distributive-flat-Σ = is-section-map-distributive-flat-Σ
 
   is-equiv-map-distributive-flat-Σ : is-equiv map-distributive-flat-Σ
   pr1 is-equiv-map-distributive-flat-Σ = section-distributive-flat-Σ

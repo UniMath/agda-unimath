@@ -180,6 +180,20 @@ module _
   pr2 equiv-diagonal-flat = is-equiv-diagonal-flat
 ```
 
+### Flat's action on type families
+
+```agda
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1}
+  where
+
+  flat-family : (@♭ B : A → UU l2) → ♭ A → UU l2
+  flat-family B (cons-flat x) = ♭ (B x)
+
+  flat-crisp-family : (@♭ B : @♭ A → UU l2) → ♭ A → UU l2
+  flat-crisp-family B (cons-flat x) = ♭ (B x)
+```
+
 ## See also
 
 - In [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md) we

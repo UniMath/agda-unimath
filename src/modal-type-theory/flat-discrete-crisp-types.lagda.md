@@ -9,23 +9,25 @@ module modal-type-theory.flat-discrete-crisp-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.booleans
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.sections
-open import foundation.action-on-identifications-functions
-open import foundation.retractions
-open import foundation.coproduct-types
 open import foundation.identity-types
-open import elementary-number-theory.natural-numbers
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import modal-type-theory.flat-modality
 open import modal-type-theory.crisp-identity-types
+open import modal-type-theory.flat-modality
 ```
 
 </details>
@@ -51,7 +53,8 @@ module _
   is-flat-discrete-crisp = is-equiv (counit-flat {l} {A})
 
   is-property-is-flat-discrete-crisp : is-prop is-flat-discrete-crisp
-  is-property-is-flat-discrete-crisp = is-property-is-equiv (counit-flat {l} {A})
+  is-property-is-flat-discrete-crisp =
+    is-property-is-equiv (counit-flat {l} {A})
 
   is-flat-discrete-crisp-Prop : Prop l
   is-flat-discrete-crisp-Prop = is-equiv-Prop (counit-flat {l} {A})
@@ -114,7 +117,32 @@ is-flat-discrete-crisp-unit =
     ( is-retraction-map-is-flat-discrete-crisp-unit)
 ```
 
-### The natural numbers type is flat discrete
+### The type of booleans is flat discrete
+
+```agda
+map-is-flat-discrete-crisp-bool : bool → ♭ bool
+map-is-flat-discrete-crisp-bool true = cons-flat true
+map-is-flat-discrete-crisp-bool false = cons-flat false
+
+is-section-map-is-flat-discrete-crisp-bool :
+  is-section counit-flat map-is-flat-discrete-crisp-bool
+is-section-map-is-flat-discrete-crisp-bool true = refl
+is-section-map-is-flat-discrete-crisp-bool false = refl
+
+is-retraction-map-is-flat-discrete-crisp-bool :
+  is-retraction counit-flat map-is-flat-discrete-crisp-bool
+is-retraction-map-is-flat-discrete-crisp-bool (cons-flat true) = refl
+is-retraction-map-is-flat-discrete-crisp-bool (cons-flat false) = refl
+
+is-flat-discrete-crisp-bool : is-flat-discrete-crisp bool
+is-flat-discrete-crisp-bool =
+  is-equiv-is-invertible
+    ( map-is-flat-discrete-crisp-bool)
+    ( is-section-map-is-flat-discrete-crisp-bool)
+    ( is-retraction-map-is-flat-discrete-crisp-bool)
+```
+
+### The type of natural numbers is flat discrete
 
 ```agda
 map-is-flat-discrete-crisp-ℕ : ℕ → ♭ ℕ

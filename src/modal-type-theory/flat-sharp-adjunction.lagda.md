@@ -14,6 +14,8 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.sections
+open import foundation.retractions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.locally-small-types
@@ -179,12 +181,13 @@ module _
   ap-map-flat-unit-sharp : ♭ A → ♭ (♯ A)
   ap-map-flat-unit-sharp = ap-map-flat unit-sharp
 
-  is-section-ap-map-flat-unit-sharp : ap-map-flat-elim-sharp ∘ ap-map-flat-unit-sharp ~ id
+  is-section-ap-map-flat-unit-sharp :
+    is-section ap-map-flat-elim-sharp ap-map-flat-unit-sharp
   is-section-ap-map-flat-unit-sharp (cons-flat x) =
     ap-crisp cons-flat (compute-crisp-elim-sharp x)
 
   is-retraction-ap-map-flat-unit-sharp :
-    ap-map-flat-unit-sharp ∘ ap-map-flat-elim-sharp ~ id
+    is-retraction ap-map-flat-elim-sharp ap-map-flat-unit-sharp
   is-retraction-ap-map-flat-unit-sharp (cons-flat x) =
     ap-crisp cons-flat (uniqueness-crisp-elim-sharp x)
 
@@ -192,7 +195,8 @@ module _
   pr1 (pr1 is-equiv-ap-map-flat-elim-sharp) = ap-map-flat-unit-sharp
   pr2 (pr1 is-equiv-ap-map-flat-elim-sharp) = is-section-ap-map-flat-unit-sharp
   pr1 (pr2 is-equiv-ap-map-flat-elim-sharp) = ap-map-flat-unit-sharp
-  pr2 (pr2 is-equiv-ap-map-flat-elim-sharp) = is-retraction-ap-map-flat-unit-sharp
+  pr2 (pr2 is-equiv-ap-map-flat-elim-sharp) =
+    is-retraction-ap-map-flat-unit-sharp
 
   equiv-ap-map-flat-elim-sharp : ♭ (♯ A) ≃ ♭ A
   pr1 equiv-ap-map-flat-elim-sharp = ap-map-flat-elim-sharp
@@ -200,7 +204,8 @@ module _
 
   is-equiv-ap-map-flat-unit-sharp : is-equiv ap-map-flat-unit-sharp
   pr1 (pr1 is-equiv-ap-map-flat-unit-sharp) = ap-map-flat-elim-sharp
-  pr2 (pr1 is-equiv-ap-map-flat-unit-sharp) = is-retraction-ap-map-flat-unit-sharp
+  pr2 (pr1 is-equiv-ap-map-flat-unit-sharp) =
+    is-retraction-ap-map-flat-unit-sharp
   pr1 (pr2 is-equiv-ap-map-flat-unit-sharp) = ap-map-flat-elim-sharp
   pr2 (pr2 is-equiv-ap-map-flat-unit-sharp) = is-section-ap-map-flat-unit-sharp
 
@@ -231,7 +236,7 @@ module _
 It remains to show that these two are inverses to each other.
 
 ```text
-  is-section-cons-flat : ap-sharp-counit-flat ∘ cons-flat ~ id
+  is-section-cons-flat : is-section ap-sharp-counit-flat cons-flat
   is-section-cons-flat =
     ind-subuniverse-sharp
       ( A)

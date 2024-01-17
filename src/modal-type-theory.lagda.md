@@ -9,10 +9,13 @@
 ```agda
 module modal-type-theory where
 
+open import modal-type-theory.crisp-cartesian-product-types public
+open import modal-type-theory.crisp-coproduct-types public
+open import modal-type-theory.crisp-dependent-function-types public
+open import modal-type-theory.crisp-dependent-pair-types public
+open import modal-type-theory.crisp-function-types public
 open import modal-type-theory.crisp-identity-types public
 open import modal-type-theory.crisp-law-of-excluded-middle public
-open import modal-type-theory.flat-dependent-function-types public
-open import modal-type-theory.flat-dependent-pair-types public
 open import modal-type-theory.flat-discrete-crisp-types public
 open import modal-type-theory.flat-modality public
 open import modal-type-theory.flat-sharp-adjunction public
