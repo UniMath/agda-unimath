@@ -26,6 +26,8 @@ A {{#concept "(binary) span diagram"}} is a diagram of the form
 
 In other words, a span diagram consists of two types `A` and `B` and a [span](foundation.spans.md) from `A` to `B`.
 
+We disambiguate between [spans](foundation.spans.md) and span diagrams. We consider a span from `A` to `B` a *morphism* from `A` to `B` in the category of types and spans between them, whereas we consider span diagrams to be *objects* in the category of diagrams of types of the form `* <---- * ----> *`. Conceptually there is a subtle, but important distinction between spans and span diagrams. In [binary type duality](foundation.binary-type-duality.md) we show a span from `A` to `B` is [equivalently](foundation-core.equivalences.md) described as a [binary relation](foundation.binary-relations.md) from `A` to `B`. On the other hand, span diagrams are more suitable for functorial operations that take "spans" as input, but for which the functorial action takes a natural transformation, i.e., a morphism of span diagrams, as input. Examples of this kind include [pushouts](synthetic-homotopy-theory.pushouts.md).
+
 ### (Binary) span diagrams
 
 ```agda
