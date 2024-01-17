@@ -24,7 +24,12 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 
 ## Idea
 
-Consider a [morphism of span diagrams](foundation.morphisms-span-diagrams.md) `h : hom-span-diagram s t` and [cocones](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c` with vertex `X` and `d` with vertex `Y` on `s` and `t`, respectively. A {{#concept "morphism of cocones under a morphism of span diagrams"}} from `c` to `d` under `h` consists of a map `u : X → Y` such that the cube
+Consider a [morphism of span diagrams](foundation.morphisms-span-diagrams.md)
+`h : hom-span-diagram s t` and
+[cocones](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c` with
+vertex `X` and `d` with vertex `Y` on `𝒮` and `t`, respectively. A
+{{#concept "morphism of cocones under a morphism of span diagrams"}} from `c` to
+`d` under `h` consists of a map `u : X → Y` such that the cube
 
 ```text
           S

@@ -36,17 +36,29 @@ open import synthetic-homotopy-theory.sections-families-of-types-pushouts
 
 ## Idea
 
-Consider the [structure of a type family](synthetic-homotopy-theory.families-of-types-pushouts.md) `(P , Q , e)` over a [span diagram](foundation.span-diagrams.md) `s`. The {{#concept "flattening" Disambiguation="families over span diagrams"}} of `(P , Q , e)` is the span diagram
+Consider the
+[structure of a type family](synthetic-homotopy-theory.families-of-types-pushouts.md)
+`(P , Q , e)` over a [span diagram](foundation.span-diagrams.md) `𝒮`. The
+{{#concept "flattening" Disambiguation="families over span diagrams"}} of
+`(P , Q , e)` is the span diagram
 
 ```text
   Σ (a : A), P a <-- Σ (s : S), P (f s) --> Σ (s : S), Q (g s) --> Σ (b : B), Q b
 ```
 
-where the map in the middle is the [map on total spaces](foundation.functoriality-dependent-pair-types.md) of the [family of equivalences](foundation.families-of-equivalences.md) `e`.
+where the map in the middle is the
+[map on total spaces](foundation.functoriality-dependent-pair-types.md) of the
+[family of equivalences](foundation.families-of-equivalences.md) `e`.
 
-In the case where the structure of a family over a span diagram is obtained from a type family `P` over the codomain of a [cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md), we obtain a cocone on the flattening of that structure. This will be called the {{#concept "flattening" Disambiguation="families over cocones under span diagrams"}}.
+In the case where the structure of a family over a span diagram is obtained from
+a type family `P` over the codomain of a
+[cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md), we obtain a
+cocone on the flattening of that structure. This will be called the
+{{#concept "flattening" Disambiguation="families over cocones under span diagrams"}}.
 
-The flattening span diagrams and cocones introduced in this file will be used to state and prove the [flattening lemma](synthetic-homotopy-theory.flattening-lemma.md).
+The flattening span diagrams and cocones introduced in this file will be used to
+state and prove the
+[flattening lemma](synthetic-homotopy-theory.flattening-lemma.md).
 
 ## Definitions
 
@@ -177,7 +189,11 @@ module _
 
 ### Flattening families of types over pushouts
 
-Consider a type family `P` over the codomain `X` of a cocone `c` under  a span diagram `A <- S -> B`. The descent data of `P` then yields the [structure of a type family](synthetic-homotopy-theory.structure-type-family-pushout.md) over a pushout. The flattening of `P` consists of the span diagram and the cocone as displayed in the following commuting square:
+Consider a type family `P` over the codomain `X` of a cocone `c` under a span
+diagram `A <- S -> B`. The descent data of `P` then yields the
+[structure of a type family](synthetic-homotopy-theory.structure-type-family-pushout.md)
+over a pushout. The flattening of `P` consists of the span diagram and the
+cocone as displayed in the following commuting square:
 
 ```text
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
@@ -187,7 +203,9 @@ Consider a type family `P` over the codomain `X` of a cocone `c` under  a span d
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x).
 ```
 
-Note that this is defined as a special case of the flattening of the structure of a type family over a pushout, by first taking the descent data of `P` and then flattening.
+Note that this is defined as a special case of the flattening of the structure
+of a type family over a pushout, by first taking the descent data of `P` and
+then flattening.
 
 ```agda
 module _
@@ -284,22 +302,27 @@ module _
 
 ### Computation of cocones under the flattening span diagram of the structure of a type family of a pushout
 
-Consider the structure of a type family `(P , Q , e)` over a span diagram `A <- S -> B`, with flattening span diagram `𝒯`
+Consider the structure of a type family `(P , Q , e)` over a span diagram
+`A <- S -> B`, with flattening span diagram `𝒯`
 
 ```text
   Σ (a : A), P a <-- Σ (s : S), P (f s) --> Σ (s : S), Q (g s) --> Σ (b : B), Q b.
 ```
 
-Furthermore, consider a type `X`, a type family `Y` over `X`, a cocone `c` on `𝒮` with codomain `X` and a dependent cocone `d` on `𝒯` over `c` with codomain `Y`. Then there is an equivalence
+Furthermore, consider a type `X`, a type family `Y` over `X`, a cocone `c` on
+`𝒮` with codomain `X` and a dependent cocone `d` on `𝒯` over `c` with codomain
+`Y`. Then there is an equivalence
 
 ```text
   cocone 𝒯 Z ≃ dependent-cocone 𝒮 c (λ x → Y x → Z)
 ```
 
+Then the type of cocones under `𝒯` with codomain `X` is equivalent to the type
+of pairs `(c , d)` consisting of a cocone `c` under `𝒮` with codomain `X` and a
+dependent cocone `d` over `C`
 
-Then the type of cocones under `𝒯` with codomain `X` is equivalent to the type of pairs `(c , d)` consisting of a cocone `c` under `𝒮` with codomain `X` and a dependent cocone `d` over `C`
-
-Then a cocone under `𝒯` with codomain `X` is equivalently described as a triple `(p , q , H)` consisting of
+Then a cocone under `𝒯` with codomain `X` is equivalently described as a triple
+`(p , q , H)` consisting of
 
 ```text
   p : (a : A) → P a → X
@@ -427,4 +450,4 @@ module _
       ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
       ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-type-family-pushout Y ∘ ind-Σ)
 -}
- ```
+```

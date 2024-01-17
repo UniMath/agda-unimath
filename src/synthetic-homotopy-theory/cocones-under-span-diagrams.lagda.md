@@ -35,9 +35,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A {{#concept "cocone" Agda=cocone-span-diagram Disambiguation="span diagram"}} under a
-[span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` with codomain `X` consists of two
-maps `i : A → X` and `j : B → X` equipped with a
+A {{#concept "cocone" Agda=cocone-span-diagram Disambiguation="span diagram"}}
+under a [span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` with
+codomain `X` consists of two maps `i : A → X` and `j : B → X` equipped with a
 [homotopy](foundation.homotopies.md) witnessing that the square
 
 ```text
@@ -53,9 +53,11 @@ maps `i : A → X` and `j : B → X` equipped with a
 [commutes](foundation.commuting-squares-of-maps.md).
 
 [Equivalently](foundation-core.equivalences.md), a cocone with codomain `X`
-under a span diagram `s` given by `A <-f- S -g-> B` can be described as a
-[morphism of span diagrams](foundation.morphisms-span-diagrams.md) from `s` into the [constant span diagram](foundation.constant-span-diagrams.md) at `X`. In other words, a cocone under `s` with codomain `X` is a commuting
-diagram of the form
+under a span diagram `𝒮` given by `A <-f- S -g-> B` can be described as a
+[morphism of span diagrams](foundation.morphisms-span-diagrams.md) from `𝒮` into
+the [constant span diagram](foundation.constant-span-diagrams.md) at `X`. In
+other words, a cocone under `𝒮` with codomain `X` is a commuting diagram of the
+form
 
 ```text
          f       g
@@ -150,12 +152,12 @@ module _
 
 ### Homotopies of cocones under span diagrams
 
-Given two cocones `c` and `c'` on a span diagram `s`, both with the same codomain `X`,
-we also introduce homotopies of cocones under span diagrams. A
-{{#concept "homotopy of cocones under a span diagram" Agda=htpy-cocone-span-diagram}} from
-`c := (i , j , H)` to `c' := (i' , j' , H')` under a span diagram `A <-f- S -g-> B`
-consists of two homotopies `K : i ~ i'` and `L : j ~ j'` and a homotopy `M`
-witnessing that the square of homotopies
+Given two cocones `c` and `c'` on a span diagram `𝒮`, both with the same
+codomain `X`, we also introduce homotopies of cocones under span diagrams. A
+{{#concept "homotopy of cocones under a span diagram" Agda=htpy-cocone-span-diagram}}
+from `c := (i , j , H)` to `c' := (i' , j' , H')` under a span diagram
+`A <-f- S -g-> B` consists of two homotopies `K : i ~ i'` and `L : j ~ j'` and a
+homotopy `M` witnessing that the square of homotopies
 
 ```text
          K · f
@@ -274,8 +276,10 @@ module _
 
 - In
   [Operations on cocones under span diagrams](synthetic-homotopy-theory.operations-cocones-under-span-diagrams.md)
-  we define several ways of constructing cocones under span diagrams from given cocones
-  under span diagrams, [morphisms of arrows](foundation.morphisms-arrows.md),
+  we define several ways of constructing cocones under span diagrams from given
+  cocones under span diagrams,
+  [morphisms of arrows](foundation.morphisms-arrows.md),
   [equivalences of arrows](foundation.equivalences-arrows.md),
   [morphisms of span diagrams](foundation.morphisms-span-diagrams.md),
-  [equivalences of span diagrams](foundation.equivalences-span-diagrams.md), and so on.
+  [equivalences of span diagrams](foundation.equivalences-span-diagrams.md), and
+  so on.

@@ -26,7 +26,14 @@ open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-span-dia
 
 ## Idea
 
-Consider an [equivalence of span diagrams](foundation.equivalences-span-diagrams.md) `e : equiv-span-diagram s t` and [cocones](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c` with vertex `X` and `d` with vertex `Y` on `s` and `t`, respectively. An {{#concept "equivalence of cocones under an equivalence of span diagrams"}} from `c` to `d` under `e` consists of an [equivalence](foundation-core.equivalences.md) `e : X ≃ Y` such that the cube
+Consider an
+[equivalence of span diagrams](foundation.equivalences-span-diagrams.md)
+`e : equiv-span-diagram s t` and
+[cocones](synthetic-homotopy-theory.cocones-under-span-diagrams.md) `c` with
+vertex `X` and `d` with vertex `Y` on `𝒮` and `t`, respectively. An
+{{#concept "equivalence of cocones under an equivalence of span diagrams"}} from
+`c` to `d` under `e` consists of an
+[equivalence](foundation-core.equivalences.md) `e : X ≃ Y` such that the cube
 
 ```text
           S

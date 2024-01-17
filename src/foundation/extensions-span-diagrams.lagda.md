@@ -21,14 +21,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a [span diagram](foundation.span-diagrams.md) `s` given by
+Consider a [span diagram](foundation.span-diagrams.md) `𝒮` given by
 
 ```text
        f       g
   A <----- S -----> B
 ```
 
-and maps `i : A → A'` and `j : B → B'`. The {{#concept "extension" Disambiguation="span diagram"}} of `s` by `i` and `j` is the span diagram
+and maps `i : A → A'` and `j : B → B'`. The
+{{#concept "extension" Disambiguation="span diagram"}} of `𝒮` by `i` and `j` is
+the span diagram
 
 ```text
        i ∘ f     j ∘ g
@@ -39,14 +41,15 @@ and maps `i : A → A'` and `j : B → B'`. The {{#concept "extension" Disambigu
 
 #### Extensions of span diagrams by equivalences of arrows on the left
 
-Consider a span diagram `s` given by
+Consider a span diagram `𝒮` given by
 
 ```text
        f       g
   A <----- S -----> B
 ```
 
-and an [equivalence of arrows](foundation.equivalence-arrows.md) `h : equiv-arrow f' f` as indicated in the diagram
+and an [equivalence of arrows](foundation.equivalence-arrows.md)
+`h : equiv-arrow f' f` as indicated in the diagram
 
 ```text
           h₀       g
@@ -107,14 +110,15 @@ module _
 
 #### Extensions of span diagrams by equivalences of arrows on the left
 
-Consider a span diagram `s` given by
+Consider a span diagram `𝒮` given by
 
 ```text
        f       g
   A <----- S -----> B
 ```
 
-and a [equivalence of arrows](foundation.equivalences-arrows.md) `h : equiv-arrow g' g` as indicated in the diagram
+and a [equivalence of arrows](foundation.equivalences-arrows.md)
+`h : equiv-arrow g' g` as indicated in the diagram
 
 ```text
          g'

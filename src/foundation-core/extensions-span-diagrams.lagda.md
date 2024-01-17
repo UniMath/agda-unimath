@@ -21,14 +21,16 @@ open import foundation-core.function-types
 
 ## Idea
 
-Consider a [span diagram](foundation.span-diagrams.md) `s` given by
+Consider a [span diagram](foundation.span-diagrams.md) `𝒮` given by
 
 ```text
        f       g
   A <----- S -----> B
 ```
 
-and maps `i : A → A'` and `j : B → B'`. The {{#concept "extension" Disambiguation="span diagram"}} of `s` by `i` and `j` is the span diagram
+and maps `i : A → A'` and `j : B → B'`. The
+{{#concept "extension" Disambiguation="span diagram"}} of `𝒮` by `i` and `j` is
+the span diagram
 
 ```text
        i ∘ f     j ∘ g
@@ -85,14 +87,15 @@ module _
 
 ### Extensions by morphisms of arrows on the left
 
-Consider a span diagram `s` given by
+Consider a span diagram `𝒮` given by
 
 ```text
        f       g
   A <----- S -----> B
 ```
 
-and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` as indicated in the diagram
+and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f`
+as indicated in the diagram
 
 ```text
           h₀       g
@@ -156,14 +159,15 @@ module _
 
 ### Extensions by morphisms of arrows on the left
 
-Consider a span diagram `s` given by
+Consider a span diagram `𝒮` given by
 
 ```text
        f       g
   A <----- S -----> B
 ```
 
-and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow g' g` as indicated in the diagram
+and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow g' g`
+as indicated in the diagram
 
 ```text
          g'

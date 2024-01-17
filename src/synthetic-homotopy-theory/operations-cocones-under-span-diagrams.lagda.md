@@ -206,7 +206,7 @@ module _
 
 Consider a span diagram `s := A <-f- S -g-> B` and a moprhism `h : B → C`. Then
 we can **compose** any cocone `c := (i , j , H)` with codomain `X` under the
-span diagram `s` **leftly** with a cocone `d` under the span diagram
+span diagram `𝒮` **on the left** with a cocone `d` under the span diagram
 `X <-j- B -h-> C` as indicated in the diagram
 
 ```text
@@ -281,7 +281,7 @@ module _
 
 ### Cocones under span diagrams extended on the left by morphisms and equivalences of arrows
 
-Consider a span diagram `s := A <-f- S -g-> B`, a cocone on `s`, and a
+Consider a span diagram `s := A <-f- S -g-> B`, a cocone on `𝒮`, and a
 [moprhism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` for
 some map `f : S' → A'`, as indicated in the diagram
 
@@ -321,7 +321,7 @@ module _
       ( hom-equiv-arrow f' (left-map-span-diagram 𝒮) e)
 ```
 
-Consider a span diagram `s := A <-f- S -g-> B`, a cocone `(i , j , H)` on `s`,
+Consider a span diagram `s := A <-f- S -g-> B`, a cocone `(i , j , H)` on `𝒮`,
 and a moprhism of arrows `h : hom-arrow j j'` for some map `j' : B' → X'`, as
 indicated in the diagram
 
@@ -340,7 +340,7 @@ Then we obtain a new cocone on the outer span diagram `A <- S -> B'`.
 ### Vertical composition of cocones under span diagrams
 
 Consider a span diagram `s := A <-f- S -g-> B` and a map `h : A → C`. Then we
-can **compose** a cocone `c := (i , j , H)` under `s` **rightly** with a
+can **compose** a cocone `c := (i , j , H)` under `𝒮` **on the right** with a
 cocone `d` under the span diagram `C <-h- A -i-> X` as indicated in the diagram
 
 ```text
@@ -420,7 +420,7 @@ module _
 
 Consider a span diagram `s := A <-f- S -g-> B` and a map `g' : S' → B'`. Then we
 can **compose** a morphism of arrows `h : hom-arrow g' g` with a cocone
-`c := (i , j , H)` under `s`, as indicated in the diagram
+`c := (i , j , H)` under `𝒮`, as indicated in the diagram
 
 ```text
          g'

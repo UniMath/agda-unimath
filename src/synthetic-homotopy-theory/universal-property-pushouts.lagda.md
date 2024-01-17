@@ -208,9 +208,9 @@ and a map `h : X → X'` equipped with a homotopy of cocones
 if any two of the following three conditions hold, then so does the third:
 
 1. The cocone `(i , j , H)` satisfies the universal property of the pushout of
-   `s`
+   `𝒮`
 2. The cocone `(i' , j' , H')` satisfies the universal property of the pushout
-   of `s`
+   of `𝒮`
 3. The map `h : X → X'` is an equivalence.
 
 **Proof.** For any type `Y` there is a commuting triangle
@@ -314,8 +314,8 @@ Consider two cocones
         i                i'
 ```
 
-on the same span diagram `s`, and assume that both `(i , j , H)` and (i' , j' ,
-H')`satisfy the universal property of the pushout of`s`. Then the type of equivalences `e
+on the same span diagram `𝒮`, and assume that both `(i , j , H)` and (i' , j' ,
+H')`satisfy the universal property of the pushout of`𝒮`. Then the type of equivalences `e
 : X ≃ X'` equipped with a homotopy of cocones
 
 ```text
@@ -1027,7 +1027,8 @@ Given a commutative diagram
          A -----> X
 ```
 
-in which the left and top squares are pushout 𝒮quares. Then the bottom right square is a pushout 𝒮quare if and only if the the outer rectangle
+in which the left and top squares are pushout 𝒮quares. Then the bottom right
+square is a pushout 𝒮quare if and only if the the outer rectangle
 
 ```text
    S' ---> B'
@@ -1037,7 +1038,9 @@ in which the left and top squares are pushout 𝒮quares. Then the bottom right 
    A' ---> X.
 ```
 
-is a pushout 𝒮quare. In other words, pushout 𝒮quares extended by [cocartesian morphisms of span diagrams](synthetic-homotopy-theory.cocartesian-morphisms-span-diagrams.md) are again pushout 𝒮quares.
+is a pushout 𝒮quare. In other words, pushout 𝒮quares extended by
+[cocartesian morphisms of span diagrams](synthetic-homotopy-theory.cocartesian-morphisms-span-diagrams.md)
+are again pushout 𝒮quares.
 
 ### Extending pushouts by equivalences of span diagrams
 
@@ -1067,7 +1070,8 @@ the induced square is a pushout:
    A' ---> X.
 ```
 
-**Proof.** We combine both cases of the pushout pasting lemmas for equivalences. The horizontal pushout pasting lemma implies that the outer rectangle
+**Proof.** We combine both cases of the pushout pasting lemmas for equivalences.
+The horizontal pushout pasting lemma implies that the outer rectangle
 
 ```text
           ≃        g
@@ -1079,7 +1083,8 @@ the induced square is a pushout:
           ≃        i
 ```
 
-is a pushout 𝒮quare. The vertical pushout pasting lemma then implies that the outer square
+is a pushout 𝒮quare. The vertical pushout pasting lemma then implies that the
+outer square
 
 ```text
                g'
@@ -1130,7 +1135,8 @@ module _
 
 ### Given an equivalence of cocones under an equivalence of span diagrams, one cocone is a pushout if and only if the other is
 
-**Note.** The following proofs can easily be shortened if we refactor `is-pullback-bottom-is-pullback-top-cube-is-equiv`.
+**Note.** The following proofs can easily be shortened if we refactor
+`is-pullback-bottom-is-pullback-top-cube-is-equiv`.
 
 ```agda
 module _
