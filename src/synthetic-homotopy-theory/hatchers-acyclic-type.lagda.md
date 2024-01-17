@@ -81,8 +81,8 @@ module _
   ((B , b1 , b2 , s1 , s2) : algebra-Hatcher-Acyclic-Type l2)
   where
 
-  Hom-algebra-Hatcher-Acyclic-Type-pointed-map : (A →∗ B) → UU l2
-  Hom-algebra-Hatcher-Acyclic-Type-pointed-map f =
+  is-hom-pointed-map-algebra-Hatcher-Acyclic-Type : (A →∗ B) → UU l2
+  is-hom-pointed-map-algebra-Hatcher-Acyclic-Type f =
     Σ ( map-Ω f a1 ＝ b1)
       ( λ u →
         Σ ( map-Ω f a2 ＝ b2)
@@ -104,7 +104,7 @@ module _
 
   Hom-algebra-Hatcher-Acyclic-Type : UU (l1 ⊔ l2)
   Hom-algebra-Hatcher-Acyclic-Type =
-    Σ ( A →∗ B) Hom-algebra-Hatcher-Acyclic-Type-pointed-map
+    Σ ( A →∗ B) is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
 ```
 
 ### The Hatcher acyclic type is the initial Hatcher acyclic algebra
@@ -239,11 +239,11 @@ module _
         ( is-torsorial-path refl)
 ```
 
-### For a fixed pointed map, the `Hom-algebra-Hatcher-Acyclic-Type-pointed-map` family is [torsorial](foundation.torsorial-type-families.md)
+### For a fixed pointed map, the `is-hom-pointed-map-algebra-Hatcher-Acyclic-Type` family is [torsorial](foundation.torsorial-type-families.md)
 
 In proving this, it is helpful to consider an equivalent formulation of
-`Hom-algebra-Hatcher-Acyclic-Type-pointed-map` for which torsoriality is almost
-immediate.
+`is-hom-pointed-map-algebra-Hatcher-Acyclic-Type` for which torsoriality is
+almost immediate.
 
 ```agda
 module _
@@ -252,8 +252,8 @@ module _
   ((B , b1 , b2 , s1 , s2) : algebra-Hatcher-Acyclic-Type l2)
   where
 
-  Hom-algebra-Hatcher-Acyclic-Type-pointed-map' : (A →∗ B) → UU l2
-  Hom-algebra-Hatcher-Acyclic-Type-pointed-map' f =
+  is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' : (A →∗ B) → UU l2
+  is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' f =
     Σ ( map-Ω f a1 ＝ b1)
       ( λ u →
         Σ ( map-Ω f a2 ＝ b2)
@@ -279,11 +279,11 @@ module _
   ((B , τ) : algebra-Hatcher-Acyclic-Type l2)
   where
 
-  equiv-Hom-algebra-Hatcher-Acyclic-Type-pointed-map :
+  equiv-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type :
     (f : A →∗ B) →
-    Hom-algebra-Hatcher-Acyclic-Type-pointed-map (A , σ) (B , τ) f ≃
-    Hom-algebra-Hatcher-Acyclic-Type-pointed-map' (A , σ) (B , τ) f
-  equiv-Hom-algebra-Hatcher-Acyclic-Type-pointed-map f =
+    is-hom-pointed-map-algebra-Hatcher-Acyclic-Type (A , σ) (B , τ) f ≃
+    is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' (A , σ) (B , τ) f
+  equiv-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type f =
     equiv-tot
       ( λ p →
         equiv-tot
@@ -300,10 +300,11 @@ module _
   (f : A →∗ B)
   where
 
-  is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map' :
+  is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' :
     is-torsorial
-      ( λ τ → Hom-algebra-Hatcher-Acyclic-Type-pointed-map' (A , σ) (B , τ) f)
-  is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map' =
+      ( λ τ →
+        is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' (A , σ) (B , τ) f)
+  is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' =
     is-torsorial-Eq-structure
       ( is-torsorial-path (map-Ω f a1)) ((map-Ω f a1) , refl)
       ( is-torsorial-Eq-structure
@@ -314,21 +315,25 @@ module _
           ( is-torsorial-path _)))
 
   abstract
-    is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map :
+    is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type :
       is-torsorial
-        ( λ τ → Hom-algebra-Hatcher-Acyclic-Type-pointed-map (A , σ) (B , τ) f)
-    is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map =
+        ( λ τ →
+          is-hom-pointed-map-algebra-Hatcher-Acyclic-Type (A , σ) (B , τ) f)
+    is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type =
       is-contr-equiv
         ( Σ ( structure-Hatcher-Acyclic-Type B)
             ( λ τ →
-              Hom-algebra-Hatcher-Acyclic-Type-pointed-map' (A , σ) (B , τ) f))
+              is-hom-pointed-map-algebra-Hatcher-Acyclic-Type'
+                ( A , σ)
+                ( B , τ)
+                ( f)))
         ( equiv-tot
           ( λ τ →
-            equiv-Hom-algebra-Hatcher-Acyclic-Type-pointed-map
+            equiv-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
               ( A , σ)
               ( B , τ)
               ( f)))
-        ( is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map')
+        ( is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type')
 ```
 
 ### Characterization of pointed maps out of Hatcher's acyclic type
@@ -372,7 +377,7 @@ module _
 
   hom-algebra-Hatcher-Acyclic-Type-pointed-map' :
     (f : A →∗ B) →
-    Hom-algebra-Hatcher-Acyclic-Type-pointed-map'
+    is-hom-pointed-map-algebra-Hatcher-Acyclic-Type'
       ( A , σ)
       ( B , structure-Hatcher-Acyclic-Type-pointed-map f)
       ( f)
@@ -394,13 +399,13 @@ module _
 
   hom-algebra-Hatcher-Acyclic-Type-pointed-map :
     (f : A →∗ B) →
-    Hom-algebra-Hatcher-Acyclic-Type-pointed-map
+    is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
       ( A , σ)
       ( B , structure-Hatcher-Acyclic-Type-pointed-map f)
       ( f)
   hom-algebra-Hatcher-Acyclic-Type-pointed-map f =
     map-inv-equiv
-      ( equiv-Hom-algebra-Hatcher-Acyclic-Type-pointed-map
+      ( equiv-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
         ( A , σ)
         ( B , structure-Hatcher-Acyclic-Type-pointed-map f)
         ( f))
@@ -417,13 +422,13 @@ module _
               ( λ f →
                 Σ ( structure-Hatcher-Acyclic-Type B)
                   ( λ τ →
-                    Hom-algebra-Hatcher-Acyclic-Type-pointed-map
+                    is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
                       ( A , σ)
                       ( B , τ)
                       ( f)))
             by inv-right-unit-law-Σ-is-contr
               ( λ f →
-                is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map
+                is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
                   ( A)
                   ( B)
                   ( σ)
@@ -438,7 +443,8 @@ module _
           ( pr1)
           ( inv
             ( contraction
-              ( is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map A B σ
+              ( is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type A B
+                ( σ)
                 ( f))
               ( structure-Hatcher-Acyclic-Type-pointed-map f ,
                 hom-algebra-Hatcher-Acyclic-Type-pointed-map f))))
