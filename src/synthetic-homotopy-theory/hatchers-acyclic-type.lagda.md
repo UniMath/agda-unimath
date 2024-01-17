@@ -107,7 +107,10 @@ module _
     Σ ( A →∗ B) is-hom-pointed-map-algebra-Hatcher-Acyclic-Type
 ```
 
-### The Hatcher acyclic type is the initial Hatcher acyclic algebra
+### Initial Hatcher acyclic algebras
+
+One characterization of Hatcher's acyclic type is through its universal property
+as being the initial Hatcher acyclic algebra.
 
 ```agda
 is-initial-algebra-Hatcher-Acyclic-Type :
