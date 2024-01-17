@@ -27,11 +27,15 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import structured-types.pointed-universal-property-contractible-types
 
+open import synthetic-homotopy-theory.acyclic-types
 open import synthetic-homotopy-theory.eckmann-hilton-argument
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.powers-of-loops
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
 </details>
@@ -327,7 +331,7 @@ module _
         ( is-torsorial-Hom-algebra-Hatcher-Acyclic-Type-pointed-map')
 ```
 
-### Characterization of pointed maps out of the Hatcher acyclic type
+### Characterization of pointed maps out of Hatcher's acyclic type
 
 For the initial Hatcher acyclic algebra `A` and any pointed type `B`, we exhibit
 an equivalence `(A →∗ B) ≃ structure-Hatcher-Acyclic-Type B`.
@@ -446,6 +450,44 @@ module _
     structure-Hatcher-Acyclic-Type-pointed-map
   pr2 (equiv-pointed-map-Hatcher-Acyclic-Type i) =
     is-equiv-structure-Hatcher-Acyclic-Type-pointed-map i
+```
+
+### Hatcher's acyclic type is acyclic
+
+**Proof:** For the Hatcher acyclic type `A`, and any pointed type `X`, we have
+
+```text
+ (Σ A →∗ X) ≃ (A →∗ Ω X) ≃ structure-Hatcher-Acyclic-Type (Ω X),
+```
+
+where the first equivalence is the
+[suspension-loop space adjunction](synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types.md),
+the second equivalence was just proven above, and the latter type is
+contractible, as shown by `is-contr-structure-Hatcher-Acyclic-Type-Ω`.
+
+Hence, the suspension `Σ A` of `A` satisfies the
+[universal property of contractible types with respect to pointed types and maps](structured-types.pointed-universal-property-contractible-types.md),
+and hence must be contractible.
+
+```agda
+module _
+  {l1 : Level}
+  ((A , σ) : algebra-Hatcher-Acyclic-Type l1)
+  where
+
+  is-acyclic-is-initial-algebra-Hatcher-Acyclic-Type :
+    is-initial-algebra-Hatcher-Acyclic-Type (A , σ) →
+    is-acyclic (type-Pointed-Type A)
+  is-acyclic-is-initial-algebra-Hatcher-Acyclic-Type i =
+    is-contr-universal-property-contr-Pointed-Type
+      ( suspension-Pointed-Type A)
+      ( λ X →
+        is-contr-equiv
+          ( structure-Hatcher-Acyclic-Type (Ω X))
+          ( equiv-comp
+            ( equiv-pointed-map-Hatcher-Acyclic-Type A (Ω X) σ i)
+            ( equiv-transpose-suspension-loop-adjunction A X))
+          ( is-contr-structure-Hatcher-Acyclic-Type-Ω X))
 ```
 
 ## See also
