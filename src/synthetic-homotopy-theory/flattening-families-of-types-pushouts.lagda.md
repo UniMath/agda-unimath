@@ -10,7 +10,11 @@ module synthetic-homotopy-theory.flattening-families-of-types-pushouts where
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-span-diagrams
+open import foundation.equivalences-spans
+open import foundation.extensions-spans
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -300,6 +304,98 @@ module _
 
 ## Properties
 
+### The flattening span diagrams of equivalent structures of type families of a pushout are equivalent
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  (P : structure-type-family-pushout l4 𝒮)
+  (Q : structure-type-family-pushout l5 𝒮)
+  (e : equiv-structure-type-family-pushout 𝒮 P Q)
+  where
+
+  left-equiv-flattening-equiv-structure-type-family-pushout :
+    domain-flattening-structure-type-family-pushout 𝒮 P ≃
+    domain-flattening-structure-type-family-pushout 𝒮 Q
+  left-equiv-flattening-equiv-structure-type-family-pushout =
+    equiv-tot (left-equiv-equiv-structure-type-family-pushout 𝒮 P Q e)
+
+  left-map-flattening-equiv-structure-type-family-pushout :
+    domain-flattening-structure-type-family-pushout 𝒮 P →
+    domain-flattening-structure-type-family-pushout 𝒮 Q
+  left-map-flattening-equiv-structure-type-family-pushout =
+    map-equiv left-equiv-flattening-equiv-structure-type-family-pushout
+
+  right-equiv-flattening-equiv-structure-type-family-pushout :
+    codomain-flattening-structure-type-family-pushout 𝒮 P ≃
+    codomain-flattening-structure-type-family-pushout 𝒮 Q
+  right-equiv-flattening-equiv-structure-type-family-pushout =
+    equiv-tot (right-equiv-equiv-structure-type-family-pushout 𝒮 P Q e)
+
+  right-map-flattening-equiv-structure-type-family-pushout :
+    codomain-flattening-structure-type-family-pushout 𝒮 P →
+    codomain-flattening-structure-type-family-pushout 𝒮 Q
+  right-map-flattening-equiv-structure-type-family-pushout =
+    map-equiv right-equiv-flattening-equiv-structure-type-family-pushout
+
+  spanning-equiv-flattening-equiv-structure-type-family-pushout :
+    spanning-type-flattening-structure-type-family-pushout 𝒮 P ≃
+    spanning-type-flattening-structure-type-family-pushout 𝒮 Q
+  spanning-equiv-flattening-equiv-structure-type-family-pushout =
+    equiv-tot
+      ( ( left-equiv-equiv-structure-type-family-pushout 𝒮 P Q e) ∘
+        ( left-map-span-diagram 𝒮))
+
+  spanning-map-flattening-equiv-structure-type-family-pushout :
+    spanning-type-flattening-structure-type-family-pushout 𝒮 P →
+    spanning-type-flattening-structure-type-family-pushout 𝒮 Q
+  spanning-map-flattening-equiv-structure-type-family-pushout =
+    map-equiv spanning-equiv-flattening-equiv-structure-type-family-pushout
+
+  left-square-equiv-flattening-equiv-structure-type-family-pushout :
+    coherence-square-maps
+      ( spanning-map-flattening-equiv-structure-type-family-pushout)
+      ( left-map-flattening-structure-type-family-pushout 𝒮 P)
+      ( left-map-flattening-structure-type-family-pushout 𝒮 Q)
+      ( left-map-flattening-equiv-structure-type-family-pushout)
+  left-square-equiv-flattening-equiv-structure-type-family-pushout =
+    refl-htpy
+
+  right-square-equiv-flattening-equiv-structure-type-family-pushout :
+    coherence-square-maps
+      ( spanning-map-flattening-equiv-structure-type-family-pushout)
+      ( right-map-flattening-structure-type-family-pushout 𝒮 P)
+      ( right-map-flattening-structure-type-family-pushout 𝒮 Q)
+      ( right-map-flattening-equiv-structure-type-family-pushout)
+  right-square-equiv-flattening-equiv-structure-type-family-pushout (s , p) =
+    eq-pair-Σ refl (coherence-equiv-structure-type-family-pushout 𝒮 P Q e s p)
+
+  equiv-span-flattening-equiv-structure-type-family-pushout :
+    equiv-span
+      ( extend-span
+        ( span-flattening-structure-type-family-pushout 𝒮 P)
+        ( left-map-flattening-equiv-structure-type-family-pushout)
+        ( right-map-flattening-equiv-structure-type-family-pushout))
+      ( span-flattening-structure-type-family-pushout 𝒮 Q)
+  pr1 equiv-span-flattening-equiv-structure-type-family-pushout =
+    spanning-equiv-flattening-equiv-structure-type-family-pushout
+  pr1 (pr2 equiv-span-flattening-equiv-structure-type-family-pushout) =
+    left-square-equiv-flattening-equiv-structure-type-family-pushout
+  pr2 (pr2 equiv-span-flattening-equiv-structure-type-family-pushout) =
+    right-square-equiv-flattening-equiv-structure-type-family-pushout
+
+  equiv-span-diagram-flattening-equiv-structure-type-family-pushout :
+    equiv-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 Q)
+  pr1 equiv-span-diagram-flattening-equiv-structure-type-family-pushout =
+    left-equiv-flattening-equiv-structure-type-family-pushout
+  pr1 (pr2 equiv-span-diagram-flattening-equiv-structure-type-family-pushout) =
+    right-equiv-flattening-equiv-structure-type-family-pushout
+  pr2 (pr2 equiv-span-diagram-flattening-equiv-structure-type-family-pushout) =
+    equiv-span-flattening-equiv-structure-type-family-pushout
+```
+
 ### Computation of cocones under the flattening span diagram of the structure of a type family of a pushout
 
 Consider the structure of a type family `(P , Q , e)` over a span diagram
@@ -330,7 +426,7 @@ Then a cocone under `𝒯` with codomain `X` is equivalently described as a trip
   H : (s : S) (t : P (f s)) → p (f s) t ＝ q (g s) (e s t).
 ```
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level} (𝒮 : span-diagram l1 l2 l3)
   {X : UU l4} (c : cocone-span-diagram 𝒮 X)
