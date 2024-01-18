@@ -277,7 +277,8 @@ module _
 
 ### Equivalent span diagrams have equivalent types of cocones under them
 
-Consider an [equivalence of span diagrams](foundation.equivalences-span-diagrams.md)
+Consider an
+[equivalence of span diagrams](foundation.equivalences-span-diagrams.md)
 
 ```text
           f         g
@@ -295,7 +296,8 @@ and a type `X`. Then we obtain an equivalence
   cocone-span-diagram 𝒯 X ≃ cocone-span-diagram 𝒮 X.
 ```
 
-**Proof.** We will construct the equivalence between the two types of cocones by [functoriality of `Σ`-types](foundation.functoriality-dependent-pair-types.md).
+**Proof.** We will construct the equivalence between the two types of cocones by
+[functoriality of `Σ`-types](foundation.functoriality-dependent-pair-types.md).
 The equivalence of span diagrams induces equivalences
 
 ```text
@@ -303,16 +305,20 @@ The equivalence of span diagrams induces equivalences
   (D → X) ≃ (B → X)
 ```
 
-via the [universal property of equivalences](foundation.universal-property-equivalences.md). It remains to construct an equivalence
+via the
+[universal property of equivalences](foundation.universal-property-equivalences.md).
+It remains to construct an equivalence
 
 ```text
   (i ∘ f ~ j ∘ g) ≃ (i ∘ α ∘ f' ~ j ∘ β ∘ g').
 ```
 
-This equivalence is constructed by first applying the [dependent universal property](foundation.dependent-universal-property-equivalences.md) of the equivalence `γ : S ≃ T` to obtain
+This equivalence is constructed by first applying the
+[dependent universal property](foundation.dependent-universal-property-equivalences.md)
+of the equivalence `γ : S ≃ T` to obtain
 
 ```text
-  (i ∘ f ~ j ∘ g) ≃ (i ∘ f ∘ γ ~ j ∘ g ∘ γ). 
+  (i ∘ f ~ j ∘ g) ≃ (i ∘ f ∘ γ ~ j ∘ g ∘ γ).
 ```
 
 Now we finish the construction with the equivalences
