@@ -36,8 +36,8 @@ ind-Id-crisp C b _ refl = b
 ### Action on crisp identifications
 
 ```agda
-ap-crisp :
+crisp-ap :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {B : UU l2} {@♭ x y : A}
   (f : (@♭ x : A) → B) → @♭ (x ＝ y) → f x ＝ f y
-ap-crisp f refl = refl
+crisp-ap f refl = refl
 ```

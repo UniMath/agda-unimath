@@ -83,35 +83,6 @@ crispen :
 crispen f x = f x
 ```
 
-### Flat's action on maps
-
-```agda
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
-  where
-
-  ap-crisp-map-flat : @♭ (@♭ A → B) → (♭ A → ♭ B)
-  ap-crisp-map-flat f (cons-flat x) = cons-flat (f x)
-
-  ap-map-flat : @♭ (A → B) → (♭ A → ♭ B)
-  ap-map-flat f = ap-crisp-map-flat (crispen f)
-
-  naturality-counit-flat :
-    (@♭ f : A → B) → counit-flat ∘ ap-map-flat f ~ f ∘ counit-flat
-  naturality-counit-flat f (cons-flat x) = refl
-```
-
-### Flat's coaction on maps
-
-```agda
-  coap-flat : (♭ A → ♭ B) → (@♭ A → B)
-  coap-flat f x = counit-flat (f (cons-flat x))
-
-  is-crisp-retraction-coap-flat :
-    (@♭ f : @♭ A → B) → coap-flat (ap-crisp-map-flat f) ＝ f
-  is-crisp-retraction-coap-flat _ = refl
-```
-
 ## Properties
 
 ### The flat modality is idempotent
@@ -178,20 +149,6 @@ module _
   equiv-diagonal-flat : ♭ A ≃ ♭ (♭ A)
   pr1 equiv-diagonal-flat = diagonal-flat
   pr2 equiv-diagonal-flat = is-equiv-diagonal-flat
-```
-
-### Flat's action on type families
-
-```agda
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1}
-  where
-
-  flat-family : (@♭ B : A → UU l2) → ♭ A → UU l2
-  flat-family B (cons-flat x) = ♭ (B x)
-
-  flat-crisp-family : (@♭ B : @♭ A → UU l2) → ♭ A → UU l2
-  flat-crisp-family B (cons-flat x) = ♭ (B x)
 ```
 
 ## See also

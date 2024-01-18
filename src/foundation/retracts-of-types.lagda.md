@@ -13,6 +13,7 @@ open import foundation.universe-levels
 
 open import foundation-core.function-extensionality
 open import foundation-core.identity-types
+open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-functions
 open import foundation-core.retractions
 open import foundation-core.sections
@@ -111,6 +112,23 @@ module _
     precomp (inclusion-retract R) S
   pr2 (pr2 retract-precomp) h =
     eq-htpy (h ·l is-retraction-map-retraction-retract R)
+```
+
+### If `A` is a retract of `B` then `S → A` is a retract of `S → B` via postcomposition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) (S : UU l3)
+  where
+
+  retract-postcomp :
+    (S → A) retract-of (S → B)
+  pr1 retract-postcomp =
+    postcomp S (inclusion-retract R)
+  pr1 (pr2 retract-postcomp) =
+    postcomp S (map-retraction-retract R)
+  pr2 (pr2 retract-postcomp) h =
+    eq-htpy (is-retraction-map-retraction-retract R ·r h)
 ```
 
 ## See also

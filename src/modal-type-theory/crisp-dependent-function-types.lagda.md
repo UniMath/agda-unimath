@@ -14,8 +14,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import modal-type-theory.flat-discrete-crisp-types
 open import modal-type-theory.flat-modality
+open import modal-type-theory.functoriality-flat-modality
 ```
 
 </details>
