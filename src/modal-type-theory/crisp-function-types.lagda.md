@@ -71,17 +71,17 @@ module _
       ( ap-map-flat (postcomp (♭ B) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
   is-section-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
-    crisp-ap cons-flat (eq-htpy (λ where (cons-flat x) → refl))
+    crisp-ap cons-flat (eq-htpy (λ where (cons-flat _) → refl))
 
   is-retraction-map-inv-ap-map-flat-postcomp-counit-flat :
     is-retraction
       ( ap-map-flat (postcomp (♭ B) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
   is-retraction-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
-      crisp-ap cons-flat
-        ( eq-htpy
-          ( λ where
-            (cons-flat x) → is-crisp-retraction-cons-flat (f (cons-flat x))))
+    crisp-ap cons-flat
+      ( eq-htpy
+        ( λ where
+          (cons-flat x) → is-crisp-retraction-cons-flat (f (cons-flat x))))
 
   is-equiv-ap-map-flat-postcomp-counit-flat :
     is-equiv (ap-map-flat (postcomp (♭ B) (counit-flat {A = A})))
@@ -93,7 +93,7 @@ module _
 
   equiv-ap-map-flat-postcomp-counit-flat : ♭ (♭ B → ♭ A) ≃ ♭ (♭ B → A)
   pr1 equiv-ap-map-flat-postcomp-counit-flat =
-    ap-map-flat (postcomp (♭ B) (counit-flat {A = A}))
+    ap-map-flat (postcomp (♭ B) counit-flat)
   pr2 equiv-ap-map-flat-postcomp-counit-flat =
     is-equiv-ap-map-flat-postcomp-counit-flat
 ```

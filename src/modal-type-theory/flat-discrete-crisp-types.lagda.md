@@ -37,8 +37,6 @@ open import modal-type-theory.crisp-function-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
-
-open import orthogonal-factorization-systems.types-colocal-at-maps
 ```
 
 </details>
@@ -46,10 +44,9 @@ open import orthogonal-factorization-systems.types-colocal-at-maps
 ## Idea
 
 A crisp type is said to be
-{{$concept "flat discrete" Disambiguation="crisp type" Agda=is-flat-discrete-crisp}},
-or simply {{#concept "flat" Disambiguation="crisp type"}}, if it is
-[flat](modal-type-theory.flat-modality.md) modal. I.e. if the flat counit is an
-[equivalence](foundation-core.equivalences.md) at that type.
+{{$concept "flat discrete" Disambiguation="crisp type" Agda=is-flat-discrete-crisp}}
+if it is [flat](modal-type-theory.flat-modality.md) modal. I.e. if the flat
+counit is an [equivalence](foundation-core.equivalences.md) at that type.
 
 **Note:** In _Brouwer's fixed-point theorem in real-cohesive homotopy type
 theory_, this is called a _crisply discrete_ type.
@@ -144,6 +141,21 @@ module _
                   ap
                     ( counit-flat ∘ f)
                     ( inv (is-section-map-inv-is-equiv is-flat-A x)))))
+```
+
+### Types `♭ A` are flat discrete
+
+```agda
+module _
+  {@♭ l : Level} {@♭ A : UU l}
+  where
+
+  is-flat-discrete-crisp-flat : is-flat-discrete-crisp (♭ A)
+  is-flat-discrete-crisp-flat =
+    is-equiv-is-invertible
+      ( diagonal-flat)
+      ( is-section-diagonal-flat)
+      ( is-retraction-diagonal-flat)
 ```
 
 ### The empty type is flat discrete
