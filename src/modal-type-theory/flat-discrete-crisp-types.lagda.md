@@ -92,6 +92,33 @@ module _
   is-flat-discrete-crisp-family B = (@♭ x : A) → is-flat-discrete-crisp (B x)
 ```
 
+### The universal property of flat discrete crisp types
+
+```agda
+coev-flat :
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ B : UU l2) → ♭ (A → ♭ B) → ♭ (A → B)
+coev-flat {A = A} B (cons-flat f) = cons-flat (postcomp A counit-flat f)
+
+universal-property-flat-discrete-crisp-type :
+  {@♭ l1 : Level} (@♭ A : UU l1) → UUω
+universal-property-flat-discrete-crisp-type A =
+  {@♭ l : Level} {@♭ B : UU l} → is-equiv (coev-flat {A = A} B)
+```
+
+### The dependent universal property of flat discrete crisp types
+
+```agda
+dependent-coev-flat :
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ B : A → UU l2) →
+  ♭ ((@♭ x : A) → ♭ (B x)) → ♭ ((@♭ x : A) → B x)
+dependent-coev-flat B (cons-flat f) = cons-flat (λ x → counit-flat (f x))
+
+dependent-universal-property-flat-discrete-crisp-type :
+  {@♭ l1 : Level} (@♭ A : UU l1) → UUω
+dependent-universal-property-flat-discrete-crisp-type A =
+  {@♭ l : Level} {@♭ B : A → UU l} → is-equiv (dependent-coev-flat B)
+```
+
 ## Properties
 
 ### If the flat counit has a crisp section then it is an equivalence
