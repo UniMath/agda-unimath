@@ -22,7 +22,8 @@ open import foundation-core.propositions
 
 ## Idea
 
-An {{#concept "equivalence of arrows"}} is a [morphism of arrows](foundation.morphisms-arrows.md)
+An {{#concept "equivalence of arrows"}} is a
+[morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text
         i
@@ -34,7 +35,8 @@ An {{#concept "equivalence of arrows"}} is a [morphism of arrows](foundation.mor
         j
 ```
 
-in which the top and bottom morphisms are [equivalences](foundation-core.equivalences.md).
+in which the top and bottom morphisms are
+[equivalences](foundation-core.equivalences.md).
 
 ## Definitions
 

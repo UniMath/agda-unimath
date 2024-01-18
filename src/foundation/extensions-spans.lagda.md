@@ -18,7 +18,7 @@ open import foundation.universe-levels
 open import foundation-core.function-types
 ```
 
-</details
+</details>
 
 ## Idea
 
@@ -29,7 +29,8 @@ Consider a [span](foundation.spans.md) `s` given by
   A <----- S -----> B
 ```
 
-and maps `i : A → A'` and `j : B → B'`. The {{#concept "extension" Disambiguation="span"}} of `s` by `i` and `j` is the span
+and maps `i : A → A'` and `j : B → B'`. The
+{{#concept "extension" Disambiguation="span"}} of `s` by `i` and `j` is the span
 
 ```text
        i ∘ f     j ∘ g
@@ -47,7 +48,8 @@ Consider a span `s` given by
   A <----- S -----> B
 ```
 
-and an [equivalence of arrows](foundation.equivalence-arrows.md) `h : equiv-arrow f' f` as indicated in the diagram
+and an [equivalence of arrows](foundation.equivalence-arrows.md)
+`h : equiv-arrow f' f` as indicated in the diagram
 
 ```text
           h₀       g
@@ -101,7 +103,8 @@ Consider a span `s` given by
   A <----- S -----> B
 ```
 
-and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow g' g` as indicated in the diagram
+and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow g' g`
+as indicated in the diagram
 
 ```text
          g'
@@ -148,4 +151,3 @@ module _
   pr2 (pr2 right-extend-equiv-arrow-span) =
     right-map-right-extend-equiv-arrow-span
 ```
-

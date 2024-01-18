@@ -34,6 +34,7 @@ open import structured-types.magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-h-spaces public
 open import structured-types.morphisms-magmas public
+open import structured-types.morphisms-pointed-arrows public
 open import structured-types.morphisms-types-equipped-with-automorphisms public
 open import structured-types.morphisms-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-wild-monoids public
@@ -51,11 +52,14 @@ open import structured-types.pointed-types-equipped-with-automorphisms public
 open import structured-types.pointed-unit-type public
 open import structured-types.pointed-universal-property-contractible-types public
 open import structured-types.sets-equipped-with-automorphisms public
+open import structured-types.span-diagrams-pointed-types public
+open import structured-types.spans-pointed-types public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-h-spaces public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
 open import structured-types.unpointed-maps public
+open import structured-types.whiskering-pointed-homotopies public
 open import structured-types.wild-groups public
 open import structured-types.wild-loops public
 open import structured-types.wild-monoids public

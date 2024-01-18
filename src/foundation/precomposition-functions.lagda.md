@@ -104,7 +104,8 @@ module _
 
 ### The fibers of `precomp`
 
-The fiber of `- ∘ f : (B → X) → (A → X)` at `g ∘ f : B → X` is equivalent to the type of maps `h : B → X` equipped with a homotopy witnessing that the square
+The fiber of `- ∘ f : (B → X) → (A → X)` at `g ∘ f : B → X` is equivalent to the
+type of maps `h : B → X` equipped with a homotopy witnessing that the square
 
 ```text
         f

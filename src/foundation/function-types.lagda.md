@@ -30,14 +30,16 @@ open import foundation-core.transport-along-identifications
 
 ### Transport in a family of function types
 
-Consider two type families `B` and `C` over `A`, an identification `p : x ＝ y` in `A` and two functions
+Consider two type families `B` and `C` over `A`, an identification `p : x ＝ y`
+in `A` and two functions
 
 ```text
   f : B x → C x
   g : B y → C y.
 ```
 
-Then the type of dependent identifications from `f` to `g` over `p` can be computed as
+Then the type of dependent identifications from `f` to `g` over `p` can be
+computed as
 
 ```text
   ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃ dependent-identification (x ↦ B x → C x) f g.
@@ -88,9 +90,8 @@ module _
     dependent-identification (λ a → B a → C) p f g
   map-compute-dependent-identification-function-type-fixed-codomain p f g =
     map-equiv
-      ( compute-dependent-identification-function-type-fixed-codomain p f g) 
+      ( compute-dependent-identification-function-type-fixed-codomain p f g)
 ```
-
 
 ### Relation between `compute-dependent-identification-function-type` and `preserves-tr`
 

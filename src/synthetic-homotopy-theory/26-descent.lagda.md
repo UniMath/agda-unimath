@@ -534,7 +534,8 @@ We give some further useful implications.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   dependent-universal-property-universal-property-pushout :

@@ -44,9 +44,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The {{#concept "flattening lemma" Disambiguation="pushouts"}} for [pushouts](synthetic-homotopy-theory.pushouts.md)
-states that pushouts commute with
-[dependent pair types](foundation.dependent-pair-types.md). More precisely,
+The {{#concept "flattening lemma" Disambiguation="pushouts"}} for
+[pushouts](synthetic-homotopy-theory.pushouts.md) states that pushouts commute
+with [dependent pair types](foundation.dependent-pair-types.md). More precisely,
 given a pushout square
 
 ```text
@@ -59,7 +59,8 @@ given a pushout square
         i
 ```
 
-with [homotopy](foundation-core.homotopies.md) `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
+with [homotopy](foundation-core.homotopies.md) `H : i ∘ f ~ j ∘ g`, and for any
+type family `P` over `X`, the
 [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
@@ -70,7 +71,10 @@ with [homotopy](foundation-core.homotopies.md) `H : i ∘ f ~ j ∘ g`, and for 
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 
-is again a pushout square. The [span diagram](foundation.span-diagrams.md) in this square is the [flattening](synthetic-homotopy-theory.flattening-families-of-types-pushouts.md) of the type family `P` over `X`.
+is again a pushout square. The [span diagram](foundation.span-diagrams.md) in
+this square is the
+[flattening](synthetic-homotopy-theory.flattening-families-of-types-pushouts.md)
+of the type family `P` over `X`.
 
 ## Theorems
 
@@ -118,7 +122,9 @@ module _
     coherence-triangle-maps
       ( dependent-cocone-map-span-diagram s c (λ x → P x → Y))
       ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-      ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-type-family-pushout Y ∘ ind-Σ)
+      ( map-equiv equiv-ev-pair³ ∘
+        cocone-map-flattening-type-family-pushout Y ∘
+        ind-Σ)
   triangle-comparison-dependent-cocone-ind-Σ-cocone Y h =
     eq-pair-Σ
       ( refl)
@@ -161,8 +167,9 @@ module _
 ### The flattening lemma with descent data
 
 The proof is carried out by constructing a commuting cube, which has
-equivalences for vertical maps, the `cocone-flattening-type-family-pushout` square for the
-bottom, and the `cocone-flattening-structure-type-family-pushout` square for the top.
+equivalences for vertical maps, the `cocone-flattening-type-family-pushout`
+square for the bottom, and the `cocone-flattening-structure-type-family-pushout`
+square for the top.
 
 The bottom is a pushout by the above flattening lemma, which implies that the
 top is also a pushout.
@@ -283,8 +290,8 @@ module _
 
   equiv-span-diagram-flattening-lemma-descent-data-pushout :
     equiv-span-diagram
-     ( span-diagram-flattening-structure-type-family-pushout s P)
-     ( span-diagram-flattening-type-family-pushout s c Q)
+      ( span-diagram-flattening-structure-type-family-pushout s P)
+      ( span-diagram-flattening-type-family-pushout s c Q)
   pr1 equiv-span-diagram-flattening-lemma-descent-data-pushout =
     equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout
   pr1 (pr2 equiv-span-diagram-flattening-lemma-descent-data-pushout) =

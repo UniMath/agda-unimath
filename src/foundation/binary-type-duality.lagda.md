@@ -28,9 +28,16 @@ open import foundation-core.identity-types
 ## Idea
 
 The principle of {{#concept "binary type duality"}} asserts that the type of
-[binary relations](foundation.binary-relations.md) `A → B → 𝒰` is [equivalent](foundation-core.equivalences.md) to the type of [binary spans](foundation.spans.md) from `A` to `B`. The binary type duality principle is a binary version of the [type duality](foundation.type-duality.md) principle, which asserts that type families over a type `A` are equivalently described as maps into `A`, and makes essential use of the [univalence axiom](foundation.univalence.md).
+[binary relations](foundation.binary-relations.md) `A → B → 𝒰` is
+[equivalent](foundation-core.equivalences.md) to the type of
+[binary spans](foundation.spans.md) from `A` to `B`. The binary type duality
+principle is a binary version of the [type duality](foundation.type-duality.md)
+principle, which asserts that type families over a type `A` are equivalently
+described as maps into `A`, and makes essential use of the
+[univalence axiom](foundation.univalence.md).
 
-The equivalence of binary type duality takes a binary relation `R : A → B → 𝒰` to the span
+The equivalence of binary type duality takes a binary relation `R : A → B → 𝒰`
+to the span
 
 ```text
   A <----- Σ (a : A), Σ (b : B), R a b -----> B.
@@ -98,7 +105,8 @@ module _
 
 ### Any span `S` is equivalent to the span associated to the binary relation associated to `S`
 
-The construction of this equivalence of span diagrams is simply by pattern matching all the way.
+The construction of this equivalence of span diagrams is simply by pattern
+matching all the way.
 
 ```agda
 module _
@@ -120,7 +128,7 @@ module _
     is-section
       ( map-equiv-spanning-type-span-binary-relation-span)
       ( map-inv-equiv-spanning-type-span-binary-relation-span)
-  is-section-map-inv-equiv-spanning-type-span-binary-relation-span 
+  is-section-map-inv-equiv-spanning-type-span-binary-relation-span
     ( ._ , ._ , s , refl , refl) =
     refl
 
@@ -141,7 +149,7 @@ module _
 
   equiv-spanning-type-span-binary-relation-span :
     spanning-type-span S ≃
-    spanning-type-span-binary-relation (binary-relation-span S)    
+    spanning-type-span-binary-relation (binary-relation-span S)
   pr1 equiv-spanning-type-span-binary-relation-span =
     map-equiv-spanning-type-span-binary-relation-span
   pr2 equiv-spanning-type-span-binary-relation-span =

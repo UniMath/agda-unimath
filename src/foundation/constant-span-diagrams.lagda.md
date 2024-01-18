@@ -20,7 +20,8 @@ open import foundation-core.equivalences
 
 ## Idea
 
-The {{#concept "constant span diagram"}} at a type `X` is the [span diagram](foundation.span-diagrams.md)
+The {{#concept "constant span diagram"}} at a type `X` is the
+[span diagram](foundation.span-diagrams.md)
 
 ```text
       id       id
@@ -34,7 +35,8 @@ Alternatively, a span diagram
   A <----- S -----> B
 ```
 
-is said to be constant if both `f` and `g` are [equivalences](foundation-core.equivalences.md).
+is said to be constant if both `f` and `g` are
+[equivalences](foundation-core.equivalences.md).
 
 ## Definitions
 

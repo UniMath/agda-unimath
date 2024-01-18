@@ -18,13 +18,17 @@ open import foundation-core.function-types
 
 ## Idea
 
-Consider a family of types `A i` indexed by `i : I`. A {{#concept "span" Disambiguation="family of types"}} on `A` consists of a type `S` equipped with a family of maps
+Consider a family of types `A i` indexed by `i : I`. A
+{{#concept "span" Disambiguation="family of types"}} on `A` consists of a type
+`S` equipped with a family of maps
 
 ```text
   (i : I) → S → A i.
 ```
 
-The type `S` is called the {{#concept "spanning type" Disambiguation="span of family of types"}} of the span.
+The type `S` is called the
+{{#concept "spanning type" Disambiguation="span of family of types"}} of the
+span.
 
 ## Definitions
 

@@ -18,11 +18,29 @@ open import foundation-core.function-types
 
 ## Idea
 
-A {{#concept "binary span"}} from `A` to `B` consists of a {{#concept "spanning type" Disambiguation="binary span"}} `S` and a [pair](foundation.dependent-pair-types.md) of functions `f : S → A` and `g : S → B`. The types `A` and `B` in the specification of a binary span are also
-referred to as the {{#concept "domain" Disambiguation="binary span"}} and {{#concept "codomain" Disambiguation="binary span"}} of the span, respectively.
+A {{#concept "binary span"}} from `A` to `B` consists of a
+{{#concept "spanning type" Disambiguation="binary span"}} `S` and a
+[pair](foundation.dependent-pair-types.md) of functions `f : S → A` and
+`g : S → B`. The types `A` and `B` in the specification of a binary span are
+also referred to as the {{#concept "domain" Disambiguation="binary span"}} and
+{{#concept "codomain" Disambiguation="binary span"}} of the span, respectively.
 
-In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we show that [binary relations](foundation.binary-relations.md) are equivalently described as spans of types.
-  
+In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we show
+that [binary relations](foundation.binary-relations.md) are equivalently
+described as spans of types.
+
+We disambiguate between spans and [span diagrams](foundation.span-diagrams.md).
+We consider a span from `A` to `B` a morphism from `A` to `B` in the category of
+types and spans between them, whereas we consider span diagrams to be _objects_
+in the category of diagrams of types of the form `* <---- * ----> *`.
+Conceptually there is a subtle, but important distinction between spans and span
+diagrams. As mentioned previously, a span from `A` to `B` is equivalently
+described as a binary relation from `A` to `B`. On the other hand, span diagrams
+are more suitable for functorial operations that take "spans" as input, but for
+which the functorial action takes a natural transformation, i.e., a morphism of
+span diagrams, as input. Examples of this kind include
+[pushouts](synthetic-homotopy-theory.pushouts.md).
+
 ## Definitions
 
 ### (Binary) spans

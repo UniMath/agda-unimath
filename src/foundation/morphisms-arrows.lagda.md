@@ -34,8 +34,9 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A {{#concept "morphism of arrows"}} from a function `f : A → B` to a function `g : X → Y`
-is a [triple](foundation.dependent-pair-types.md) `(i , j , H)` consisting of maps `i : A → X` and `j : B → Y` and a
+A {{#concept "morphism of arrows"}} from a function `f : A → B` to a function
+`g : X → Y` is a [triple](foundation.dependent-pair-types.md) `(i , j , H)`
+consisting of maps `i : A → X` and `j : B → Y` and a
 [homotopy](foundation-core.homotopies.md) `H : j ∘ f ~ g ∘ i` witnessing that
 the square
 
@@ -82,7 +83,8 @@ module _
 
 ### Transposing morphisms of arrows
 
-The {{#concept "transposition" Disambiguation="morphism of arrows"}} of a morphism of arrows
+The {{#concept "transposition" Disambiguation="morphism of arrows"}} of a
+morphism of arrows
 
 ```text
         i
@@ -176,16 +178,17 @@ Consider a commuting diagram of the form
 ```
 
 Then the outer rectangle commutes by horizontal pasting of commuting squares of
-maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of `β : g → h` with `α : f → g` is therefore defined to be
+maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
+`β : g → h` with `α : f → g` is therefore defined to be
 
 ```text
-        β₀ ∘ α₀       
+        β₀ ∘ α₀
     A ----------> U
     |             |
   f |    α □ β    | h
     V             V
     B ----------> V.
-        β₁ ∘ α₁       
+        β₁ ∘ α₁
 ```
 
 ```agda
@@ -230,9 +233,9 @@ module _
 
 ### Homotopies of morphisms of arrows
 
-A {{#concept "homotopy of morphisms of arrows"}} from `(i , j , H)` to `(i' , j' , H')` is
-a triple `(I , J , K)` consisting of homotopies `I : i ~ i'` and `J : j ~ j'`
-and a homotopy `K` witnessing that the
+A {{#concept "homotopy of morphisms of arrows"}} from `(i , j , H)` to
+`(i' , j' , H')` is a triple `(I , J , K)` consisting of homotopies `I : i ~ i'`
+and `J : j ~ j'` and a homotopy `K` witnessing that the
 [square of homotopies](foundation.commuting-squares-of-homotopies.md)
 
 ```text

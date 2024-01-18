@@ -18,7 +18,7 @@ open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocartesian-morphisms-arrows public
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.cocones-under-span-diagrams public
-open import synthetic-homotopy-theory.cocones-under-span-diagrams-of-pointed-types public
+open import synthetic-homotopy-theory.cocones-under-span-diagrams-pointed-types public
 open import synthetic-homotopy-theory.codiagonals-of-maps public
 open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
@@ -43,9 +43,16 @@ open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
 open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
+open import synthetic-homotopy-theory.descent-property-families-of-types-pushouts public
+open import synthetic-homotopy-theory.diagonal-cocones-under-diagonal-span-diagrams public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams public
+open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
+open import synthetic-homotopy-theory.families-of-types-equipped-with-descent-data-pushouts public
+open import synthetic-homotopy-theory.families-of-types-pushouts public
+open import synthetic-homotopy-theory.flattening-families-of-types-pushouts public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.flattening-lemma-sequential-colimits public
@@ -67,9 +74,11 @@ open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
 open import synthetic-homotopy-theory.mere-spheres public
+open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-span-diagrams public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
 open import synthetic-homotopy-theory.premanifolds public
@@ -80,6 +89,7 @@ open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.retracts-of-sequential-diagrams public
 open import synthetic-homotopy-theory.sections-descent-circle public
+open import synthetic-homotopy-theory.sections-families-of-types-pushouts public
 open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
 open import synthetic-homotopy-theory.sequentially-compact-types public

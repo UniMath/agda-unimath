@@ -21,8 +21,17 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Consider two [pointed types](structured-types.pointed-types.md). A {{#concept "binary span" Disambiguation="pointed types"}} from `A` to `B` consists of a {{#concept "spanning pointed type" Disambiguation="binary span of pointed types"}} `S` and a [pair](foundation.dependent-pair-types.md) of [pointed maps](structured-types.pointed-maps.md) `f : S →∗ A` and `g : S →∗ B`. The pointed types `A` and `B` in the specification of a binary span of pointed types are also
-referred to as the {{#concept "domain" Disambiguation="binary span of pointed types"}} and {{#concept "codomain" Disambiguation="binary span of pointed types"}} of the span, respectively.
+Consider two [pointed types](structured-types.pointed-types.md). A
+{{#concept "binary span" Disambiguation="pointed types"}} from `A` to `B`
+consists of a
+{{#concept "spanning pointed type" Disambiguation="binary span of pointed types"}}
+`S` and a [pair](foundation.dependent-pair-types.md) of
+[pointed maps](structured-types.pointed-maps.md) `f : S →∗ A` and `g : S →∗ B`.
+The pointed types `A` and `B` in the specification of a binary span of pointed
+types are also referred to as the
+{{#concept "domain" Disambiguation="binary span of pointed types"}} and
+{{#concept "codomain" Disambiguation="binary span of pointed types"}} of the
+span, respectively.
 
 ## Definitions
 

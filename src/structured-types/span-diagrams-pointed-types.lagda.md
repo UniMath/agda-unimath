@@ -21,14 +21,18 @@ open import structured-types.spans-pointed-types
 
 ## Idea
 
-A {{#concept "(binary) span diagram of pointed types"}} is a diagram of [pointed maps](structured-types.pointed-maps.md) of the form
+A {{#concept "(binary) span diagram of pointed types"}} is a diagram of
+[pointed maps](structured-types.pointed-maps.md) of the form
 
 ```text
        f       g
   A <----- S -----> B.
 ```
 
-In other words, a span diagram of pointed types consists of two [pointed types](structured-types.pointed-types.md) `A` and `B` and a [span of pointed types](structured-types.spans-pointed-types.md) from `A` to `B`.
+In other words, a span diagram of pointed types consists of two
+[pointed types](structured-types.pointed-types.md) `A` and `B` and a
+[span of pointed types](structured-types.spans-pointed-types.md) from `A` to
+`B`.
 
 ### (Binary) span diagrams of pointed types
 
@@ -145,7 +149,8 @@ module _
 
 ### The span diagram obtained from a morphism of arrows
 
-Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of arrows `α : f → g`, the span diagram associated to `α` is the span diagram
+Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of arrows
+`α : f → g`, the span diagram associated to `α` is the span diagram
 
 ```text
        f       α₀
