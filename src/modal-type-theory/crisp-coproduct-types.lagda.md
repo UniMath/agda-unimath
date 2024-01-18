@@ -33,6 +33,31 @@ We say a [coproduct type](foundation-core.coproduct-types.md) is
 {{#concept "crisp" Disambigiation="coproduct type"}} if it is formed in a crisp
 context.
 
+## Definitions
+
+### Crisp case analysis
+
+This is Theorem 5.4 of _Brouwer's fixed-point theorem in real-cohesive homotopy
+type theory_, although the proof is much simpler.
+
+```agda
+crisp-ind-coprod :
+  {@♭ l1 l2 l3 : Level}
+  {@♭ A : UU l1} {@♭ B : UU l2} {@♭ C : @♭ A + B → UU l3} →
+  @♭ ((@♭ x : A) → C (inl x)) →
+  @♭ ((@♭ y : B) → C (inr y)) →
+  ((@♭ u : A + B) → C u)
+crisp-ind-coprod f g (inl x) = f x
+crisp-ind-coprod f g (inr y) = g y
+
+crisp-rec-coprod :
+  {@♭ l1 l2 l3 : Level} {@♭ A : UU l1} {@♭ B : UU l2} {@♭ C : UU l3} →
+  @♭ ((@♭ x : A) → C) →
+  @♭ ((@♭ y : B) → C) →
+  (@♭ (A + B) → C)
+crisp-rec-coprod = crisp-ind-coprod
+```
+
 ## Properties
 
 ### Flat distributes over coproduct types
