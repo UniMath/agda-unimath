@@ -147,3 +147,8 @@ module _
   theory_, 2015 ([arXiv:1509.07584](https://arxiv.org/abs/1509.07584))
 - Dan Licata, _cohesion-agda_, GitHub repository
   (<https://github.com/dlicata335/cohesion-agda>)
+
+## External links
+
+- [Flat Modality](https://agda.readthedocs.io/en/latest/language/flat.html) on
+  the Agda documentation pages.
