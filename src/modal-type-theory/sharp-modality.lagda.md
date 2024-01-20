@@ -14,9 +14,11 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.locally-small-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import reflection.rewriting
 
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-induction
@@ -389,3 +391,6 @@ ap-map-sharp f = rec-sharp (unit-sharp ∘ f)
 
 {{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}
 {{#reference Felixwellen/DCHoTT-Agda}}
+
+- David Jaz Myers, _Cohesion_, GitHub repository
+  (<https://github.com/DavidJaz/Cohesion>)
