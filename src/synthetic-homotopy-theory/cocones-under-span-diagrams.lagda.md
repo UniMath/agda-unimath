@@ -10,7 +10,9 @@ module synthetic-homotopy-theory.cocones-under-span-diagrams where
 open import foundation.commuting-squares-of-homotopies
 open import foundation.constant-span-diagrams
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences-arrows
+open import foundation.equivalences-span-diagrams
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
@@ -18,6 +20,7 @@ open import foundation.morphisms-arrows
 open import foundation.morphisms-span-diagrams
 open import foundation.span-diagrams
 open import foundation.structure-identity-principle
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -270,6 +273,97 @@ module _
     (c c' : cocone-span-diagram 𝒮 X) → htpy-cocone-span-diagram c c' → c ＝ c'
   eq-htpy-cocone-span-diagram c c' =
     map-inv-is-equiv (is-equiv-htpy-eq-cocone-span-diagram c c')
+```
+
+### Equivalent span diagrams have equivalent types of cocones under them
+
+Consider an
+[equivalence of span diagrams](foundation.equivalences-span-diagrams.md)
+
+```text
+          f         g
+     A <------ S ------> B
+     |         |         |
+   α | ≃     γ | ≃     β | ≃
+     V         V         V
+     C <------ T ------> D
+          f'        g'
+```
+
+and a type `X`. Then we obtain an equivalence
+
+```text
+  cocone-span-diagram 𝒯 X ≃ cocone-span-diagram 𝒮 X.
+```
+
+**Proof.** We will construct the equivalence between the two types of cocones by
+[functoriality of `Σ`-types](foundation.functoriality-dependent-pair-types.md).
+The equivalence of span diagrams induces equivalences
+
+```text
+  (C → X) ≃ (A → X)
+  (D → X) ≃ (B → X)
+```
+
+via the
+[universal property of equivalences](foundation.universal-property-equivalences.md).
+It remains to construct an equivalence
+
+```text
+  (i ∘ f ~ j ∘ g) ≃ (i ∘ α ∘ f' ~ j ∘ β ∘ g').
+```
+
+This equivalence is constructed by first applying the
+[dependent universal property](foundation.dependent-universal-property-equivalences.md)
+of the equivalence `γ : S ≃ T` to obtain
+
+```text
+  (i ∘ f ~ j ∘ g) ≃ (i ∘ f ∘ γ ~ j ∘ g ∘ γ).
+```
+
+Now we finish the construction with the equivalences
+
+```text
+  (i ∘ f ∘ γ ~ j ∘ g ∘ γ) ≃ (i ∘ α ∘ f' ~ j ∘ g ∘ γ)
+                          ≃ (i ∘ α ∘ f' ~ j ∘ β ∘ g').
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 : Level}
+  (𝒮 : span-diagram l1 l2 l3) (𝒯 : span-diagram l4 l5 l6)
+  (e : equiv-span-diagram 𝒮 𝒯)
+  {X : UU l7}
+  where
+
+  equiv-cocone-equiv-span-diagram :
+    cocone-span-diagram 𝒯 X ≃ cocone-span-diagram 𝒮 X
+  equiv-cocone-equiv-span-diagram =
+    equiv-Σ _
+      ( equiv-precomp (equiv-domain-equiv-span-diagram 𝒮 𝒯 e) X)
+      ( λ i →
+        equiv-Σ _
+          ( equiv-precomp (equiv-codomain-equiv-span-diagram 𝒮 𝒯 e) X)
+          ( λ j →
+            ( inv-equiv
+              ( equiv-concat-htpy' _
+                ( j ·l right-square-equiv-span-diagram 𝒮 𝒯 e))) ∘e
+            ( equiv-concat-htpy
+              ( i ·l left-square-equiv-span-diagram 𝒮 𝒯 e)
+              ( _)) ∘e
+            ( equiv-precomp-Π
+              ( spanning-equiv-equiv-span-diagram 𝒮 𝒯 e)
+              ( eq-value _ _))))
+
+  map-equiv-cocone-equiv-span-diagram :
+    cocone-span-diagram 𝒯 X → cocone-span-diagram 𝒮 X
+  map-equiv-cocone-equiv-span-diagram =
+    map-equiv equiv-cocone-equiv-span-diagram
+
+  is-equiv-map-equiv-cocone-equiv-span-diagram :
+    is-equiv map-equiv-cocone-equiv-span-diagram
+  is-equiv-map-equiv-cocone-equiv-span-diagram =
+    is-equiv-map-equiv equiv-cocone-equiv-span-diagram
 ```
 
 ## See also
