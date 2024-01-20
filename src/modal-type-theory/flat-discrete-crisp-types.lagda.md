@@ -176,7 +176,8 @@ module _
     is-section counit-flat map-is-flat-discrete-crisp-flat-Id
   is-section-map-is-flat-discrete-crisp-flat-Id x = {!   !}
 
-  is-flat-discrete-crisp-flat-Id : is-flat-discrete-crisp (cons-flat x ＝ cons-flat y)
+  is-flat-discrete-crisp-flat-Id :
+    is-flat-discrete-crisp (cons-flat x ＝ cons-flat y)
   is-flat-discrete-crisp-flat-Id = {!   !}
 ```
 

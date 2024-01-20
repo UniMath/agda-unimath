@@ -9,13 +9,13 @@ module modal-type-theory.sharp-codiscrete-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.function-extensionality
-open import foundation.action-on-identifications-functions
 open import foundation.propositions
 open import foundation.transport-along-equivalences
 open import foundation.universe-levels

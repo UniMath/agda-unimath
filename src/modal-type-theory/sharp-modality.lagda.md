@@ -14,14 +14,15 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.transport-along-identifications
 open import foundation.locally-small-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import reflection.rewriting
 
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-subuniverse-induction
+
+open import reflection.rewriting
 ```
 
 </details>
@@ -204,7 +205,7 @@ module _
   where
 
   ind-sharp' : (x : ♯ A) → ♯ (C x)
-  ind-sharp'  =
+  ind-sharp' =
     crisp-ind-sharp C (λ x → crisp-elim-sharp (f (crisp-elim-sharp x)))
 
   compute-ind-sharp' : (@♭ x : A) → ind-sharp' (unit-sharp x) ＝ f x

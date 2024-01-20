@@ -9,16 +9,17 @@ module modal-type-theory.crisp-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.dependent-pair-types
-open import foundation.sections
-open import foundation.retracts-of-types
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.retractions
+open import foundation.retracts-of-types
+open import foundation.sections
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.injective-maps
+
 open import modal-type-theory.flat-modality
 ```
 
@@ -101,7 +102,7 @@ The retraction part is easy:
     (u v : ♭ A) → is-retraction (Eq-eq-flat u v) (eq-Eq-flat u v)
   is-retraction-eq-Eq-flat (cons-flat x) (cons-flat .x) refl = refl
 
-  retraction-Eq-eq-flat : (u v : ♭ A) →  retraction (Eq-eq-flat u v)
+  retraction-Eq-eq-flat : (u v : ♭ A) → retraction (Eq-eq-flat u v)
   pr1 (retraction-Eq-eq-flat u v) = eq-Eq-flat u v
   pr2 (retraction-Eq-eq-flat u v) = is-retraction-eq-Eq-flat u v
 
