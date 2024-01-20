@@ -165,3 +165,7 @@ module _
     pr2 (pr2 (pr2 hom-cocone-equiv-cocone-equiv-span-diagram)) =
       cube-equiv-cocone-equiv-span-diagram
 ```
+
+## Properties
+
+### For any equivalence of cocones under an equivalence of span diagrams, there is a naturality square involving `cocone-map`

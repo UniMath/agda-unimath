@@ -1017,38 +1017,6 @@ module _
         ( is-equiv-map-codomain-equiv-arrow g' (right-map-span-diagram 𝒮) e))
 ```
 
-### Extending pushouts by cocartesian morphisms of span diagrams
-
-Given a commutative diagram
-
-```text
-         g'
-    S' -----> B'
-    | \        \
-  f'|  \k       \j
-    V   V    g ⌜ V
-    A'   S -----> B
-     \   |        |
-     i\ ⌜| f      |
-       V V        V
-         A -----> X
-```
-
-in which the left and top squares are pushout 𝒮quares. Then the bottom right
-square is a pushout 𝒮quare if and only if the the outer rectangle
-
-```text
-   S' ---> B'
-   |       |
-   |       |
-   v     ⌜ v
-   A' ---> X.
-```
-
-is a pushout 𝒮quare. In other words, pushout 𝒮quares extended by
-[cocartesian morphisms of span diagrams](synthetic-homotopy-theory.cocartesian-morphisms-span-diagrams.md)
-are again pushout 𝒮quares.
-
 ### Extending pushouts by equivalences of span diagrams
 
 Given a commutative diagram where `(i , j , k)` form an
