@@ -158,6 +158,28 @@ module _
       ( is-retraction-diagonal-flat)
 ```
 
+### The identity types of `♭ A` are flat discrete
+
+```agda
+module _
+  {@♭ l : Level} {@♭ A : UU l} {@♭ x y : A}
+  where
+
+  map-is-flat-discrete-crisp-flat-Id :
+    (cons-flat x ＝ cons-flat y) → ♭ (cons-flat x ＝ cons-flat y)
+  map-is-flat-discrete-crisp-flat-Id p =
+    ap-crisp-map-flat
+      ( crisp-ap cons-flat)
+      ( Eq-eq-flat (cons-flat x) (cons-flat y) p)
+
+  is-section-map-is-flat-discrete-crisp-flat-Id :
+    is-section counit-flat map-is-flat-discrete-crisp-flat-Id
+  is-section-map-is-flat-discrete-crisp-flat-Id x = {!   !}
+
+  is-flat-discrete-crisp-flat-Id : is-flat-discrete-crisp (cons-flat x ＝ cons-flat y)
+  is-flat-discrete-crisp-flat-Id = {!   !}
+```
+
 ### The empty type is flat discrete
 
 ```agda
