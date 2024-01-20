@@ -14,6 +14,8 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.function-extensionality
+open import foundation.action-on-identifications-functions
 open import foundation.propositions
 open import foundation.transport-along-equivalences
 open import foundation.universe-levels
@@ -44,7 +46,7 @@ here and in the files on
 file on the [sharp modality](modal-type-theory.sharp-modality.md), and they may
 be subject to change in the future.
 
-## Definition
+## Definitions
 
 ### Sharp codiscrete types
 
@@ -88,6 +90,40 @@ module _
 ```agda
 Sharp-Codiscrete-Type : (l : Level) → UU (lsuc l)
 Sharp-Codiscrete-Type l = Σ (UU l) (is-sharp-codiscrete)
+
+module _
+  {l : Level} (A : Sharp-Codiscrete-Type l)
+  where
+
+  type-Sharp-Codiscrete-Type : UU l
+  type-Sharp-Codiscrete-Type = pr1 A
+
+  is-sharp-codiscrete-type-Sharp-Codiscrete-Type :
+    is-sharp-codiscrete type-Sharp-Codiscrete-Type
+  is-sharp-codiscrete-type-Sharp-Codiscrete-Type = pr2 A
+```
+
+### Crisp induction for sharp codiscrete types
+
+The following is Theorem 3.3 in _Brouwer's fixed-point theorem in real-cohesive
+homotopy type theory_.
+
+```agda
+crisp-ind-sharp-codiscrete :
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
+  ((x : A) → is-sharp-codiscrete (C x)) →
+  ((@♭ x : A) → C x) → (x : A) → C x
+crisp-ind-sharp-codiscrete C is-codisc-C f x =
+  map-inv-is-equiv (is-codisc-C x) (crisp-ind-sharp C f x)
+
+compute-crisp-ind-sharp-codiscrete :
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
+  (is-codisc-C : (x : A) → is-sharp-codiscrete (C x))
+  (f : (@♭ x : A) → C x) →
+  (@♭ x : A) → crisp-ind-sharp-codiscrete C is-codisc-C f x ＝ f x
+compute-crisp-ind-sharp-codiscrete C is-codisc-C f x =
+  ( ap (map-inv-is-equiv (is-codisc-C x)) (compute-crisp-ind-sharp C f x)) ∙
+  ( is-retraction-map-inv-is-equiv (is-codisc-C x) (f x))
 ```
 
 ## Postulates
@@ -130,7 +166,7 @@ is-sharp-codiscrete-function-type is-sharp-B =
 
 ```agda
 postulate
-  is-sharp-codiscrete-Sharp-Codiscrete :
+  is-sharp-codiscrete-Sharp-Codiscrete-Type :
     (l : Level) → is-sharp-codiscrete (Sharp-Codiscrete-Type l)
 ```
 
@@ -150,6 +186,69 @@ module _
   pr1 sharp-higher-modality = sharp-locally-small-operator-modality l
   pr1 (pr2 sharp-higher-modality) = unit-sharp
   pr2 (pr2 sharp-higher-modality) = is-higher-modality-sharp
+```
+
+### Iterated crisp induction for the sharp codiscrete types
+
+```agda
+module _
+  {@♭ l1 l2 : Level} {l3 : Level}
+  {@♭ A : UU l1} {@♭ B : A → UU l2} (C : (x : A) → B x → UU l3)
+  (is-codisc-C : (x : A) (y : B x) → is-sharp-codiscrete (C x y))
+  (f : (@♭ x : A) (@♭ y : B x) → C x y)
+  where
+
+  crisp-binary-ind-sharp-codiscrete : (x : A) (y : B x) → C x y
+  crisp-binary-ind-sharp-codiscrete =
+    crisp-ind-sharp-codiscrete
+      ( λ x → (y : B x) → C x y)
+      ( λ x → is-sharp-codiscrete-Π (is-codisc-C x))
+      ( λ x → crisp-ind-sharp-codiscrete (C x) (is-codisc-C x) (f x))
+
+  compute-crisp-binary-ind-sharp-codiscrete :
+    (@♭ x : A) (@♭ y : B x) → crisp-binary-ind-sharp-codiscrete x y ＝ f x y
+  compute-crisp-binary-ind-sharp-codiscrete x y =
+    ( htpy-eq
+      ( compute-crisp-ind-sharp-codiscrete
+        ( λ x → (y : B x) → C x y)
+        ( λ x → is-sharp-codiscrete-Π (is-codisc-C x))
+        ( λ x → crisp-ind-sharp-codiscrete (C x) (is-codisc-C x) (f x))
+        ( x))
+      ( y)) ∙
+    ( compute-crisp-ind-sharp-codiscrete (C x) (is-codisc-C x) (f x) y)
+
+module _
+  {@♭ l1 l2 l3 : Level} {l4 : Level}
+  {@♭ A : UU l1} {@♭ B : A → UU l2} {@♭ C : (x : A) → B x → UU l3}
+  (D : (x : A) (y : B x) → C x y → UU l4)
+  (is-codisc-D : (x : A) (y : B x) (z : C x y) → is-sharp-codiscrete (D x y z))
+  (f : (@♭ x : A) (@♭ y : B x) (@♭ z : C x y) → D x y z)
+  where
+
+  crisp-ternary-ind-sharp-codiscrete : (x : A) (y : B x) (z : C x y) → D x y z
+  crisp-ternary-ind-sharp-codiscrete =
+    crisp-ind-sharp-codiscrete
+      ( λ x → (y : B x) (z : C x y) → D x y z)
+      ( λ x →
+        is-sharp-codiscrete-Π (λ y → is-sharp-codiscrete-Π (is-codisc-D x y)))
+      ( λ x → crisp-binary-ind-sharp-codiscrete (D x) (is-codisc-D x) (f x))
+
+  compute-crisp-ternary-ind-sharp-codiscrete :
+    (@♭ x : A) (@♭ y : B x) (@♭ z : C x y) →
+    crisp-ternary-ind-sharp-codiscrete x y z ＝ f x y z
+  compute-crisp-ternary-ind-sharp-codiscrete x y z =
+    ( htpy-eq
+      ( htpy-eq
+        ( compute-crisp-ind-sharp-codiscrete
+          ( λ x → (y : B x) (z : C x y) → D x y z)
+          ( λ x →
+            is-sharp-codiscrete-Π
+              ( λ y → is-sharp-codiscrete-Π (is-codisc-D x y)))
+          ( λ x → crisp-binary-ind-sharp-codiscrete (D x) (is-codisc-D x) (f x))
+          ( x))
+        ( y))
+      ( z)) ∙
+    ( compute-crisp-binary-ind-sharp-codiscrete (D x) (is-codisc-D x) (f x) y z)
 ```
 
 ## Properties

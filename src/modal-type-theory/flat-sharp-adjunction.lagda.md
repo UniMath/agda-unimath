@@ -53,67 +53,32 @@ types has appropriate closure properties. Please note that there is some
 redundancy between the postulated axioms, and they may be subject to change in
 the future.
 
-## Postulates
-
-### Crisp elimination for the sharp modality
-
-```agda
-postulate
-  crisp-elim-sharp :
-    {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
-
-  compute-crisp-elim-sharp :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
-    crisp-elim-sharp (unit-sharp x) ＝ x
-
-  uniqueness-crisp-elim-sharp :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) →
-    unit-sharp (crisp-elim-sharp x) ＝ x
-
-  coherence-uniqueness-crisp-elim-sharp :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
-    ( uniqueness-crisp-elim-sharp (unit-sharp x)) ＝
-    ( ap unit-sharp (compute-crisp-elim-sharp x))
-```
-
-### Crisp induction for the sharp modality
-
-The crisp induction principle for the sharp modality is the principle that sharp
-codiscrete types are local at the flat counit.
-
-```agda
-postulate
-  crisp-ind-sharp :
-    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
-    ((x : A) → is-sharp-codiscrete (C x)) →
-    ((@♭ x : A) → C x) → (x : A) → C x
-
-  compute-crisp-ind-sharp :
-    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
-    (is-sharp-codiscrete-C : (x : A) → is-sharp-codiscrete (C x))
-    (f : (@♭ x : A) → C x) →
-    (@♭ x : A) → crisp-ind-sharp C is-sharp-codiscrete-C f x ＝ f x
-```
-
 ## Definitions
 
 ### Crisp recursion for the sharp modality
 
 ```agda
-crisp-rec-sharp :
-  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2) →
-  (is-sharp-codiscrete C) →
-  ((@♭ x : A) → C) → A → C
-crisp-rec-sharp C is-sharp-codiscrete-C =
-  crisp-ind-sharp (λ _ → C) (λ _ → is-sharp-codiscrete-C)
+module _
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {C : UU l2}
+  (f : (@♭ x : A) → C)
+  where
 
-compute-crisp-rec-sharp :
-  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2)
-  (is-sharp-codiscrete-C : is-sharp-codiscrete C)
-  (f : (@♭ x : A) → C) →
-  (@♭ x : A) → crisp-rec-sharp C is-sharp-codiscrete-C f x ＝ f x
-compute-crisp-rec-sharp C is-sharp-codiscrete-C =
-  compute-crisp-ind-sharp (λ _ → C) (λ _ → is-sharp-codiscrete-C)
+  crisp-rec-sharp : A → ♯ C
+  crisp-rec-sharp = crisp-ind-sharp (λ _ → C) f
+
+module _
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {C : UU l2}
+  (is-codisc-C : is-sharp-codiscrete C) (f : (@♭ x : A) → C)
+  where
+
+  crisp-rec-sharp-codiscrete : A → C
+  crisp-rec-sharp-codiscrete =
+    crisp-ind-sharp-codiscrete (λ _ → C) (λ _ → is-codisc-C) f
+
+  compute-crisp-rec-sharp-codiscrete :
+    (@♭ x : A) → crisp-rec-sharp-codiscrete x ＝ f x
+  compute-crisp-rec-sharp-codiscrete =
+    compute-crisp-ind-sharp-codiscrete (λ _ → C) (λ _ → is-codisc-C) f
 ```
 
 ## Properties
@@ -125,25 +90,25 @@ crisp-tr-sharp :
 crisp-tr-sharp refl {x} = uniqueness-crisp-elim-sharp x
 ```
 
-### Crisp induction on `♯` implies typal induction
+### Crisp induction on `♯` implies cohesive induction
 
 ```agda
-ind-crisp-ind-sharp :
+ind-crisp-ind-sharp-codiscrete :
   {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
   ((x : ♯ A) → is-sharp-codiscrete (C x)) →
   ((x : A) → C (unit-sharp x)) →
   (x : ♯ A) → C x
-ind-crisp-ind-sharp {A = A} C is-sharp-codiscrete-C f x' =
-  crisp-ind-sharp
+ind-crisp-ind-sharp-codiscrete {A = A} C is-codisc-C f x' =
+  crisp-ind-sharp-codiscrete
     ( λ X → (x : ♯ X) (p : X ＝ A) → C (tr ♯ p x))
     ( λ x →
       is-sharp-codiscrete-Π
         ( λ y → is-sharp-codiscrete-Π
-          ( λ p → is-sharp-codiscrete-C (tr ♯ p y))))
+          ( λ p → is-codisc-C (tr ♯ p y))))
     ( λ A' →
-      crisp-ind-sharp
+      crisp-ind-sharp-codiscrete
         ( λ y → (p : A' ＝ A) → C (tr ♯ p y))
-        ( λ y → is-sharp-codiscrete-Π (λ p → is-sharp-codiscrete-C (tr ♯ p y)))
+        ( λ y → is-sharp-codiscrete-Π (λ p → is-codisc-C (tr ♯ p y)))
         ( λ x p → tr C (crisp-tr-sharp p) (f (tr id p (crisp-elim-sharp x)))))
     ( A)
     ( x')
@@ -151,23 +116,6 @@ ind-crisp-ind-sharp {A = A} C is-sharp-codiscrete-C f x' =
 ```
 
 The accompanying computation principle remains to be fully formalized.
-
-```text
-compute-ind-crisp-ind-sharp :
-  {@♭ l1 : Level} {l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
-  (is-sharp-codiscrete-C : (x : ♯ A) → is-sharp-codiscrete (C x)) →
-  (f : (x : A) → C (unit-sharp x)) → (x : A) →
-  ind-crisp-ind-sharp C is-sharp-codiscrete-C f (unit-sharp x) ＝ f x
-compute-ind-crisp-ind-sharp {A = A} C is-sharp-codiscrete-C f x =
-  crisp-ind-sharp
-    ( λ X → (x : X) (p : X ＝ A) →
-      ind-crisp-ind-sharp {!   !} {!   !} {!   !} {!   !})
-    ( {!   !})
-    {!   !}
-    ( A)
-    ( x)
-    ( refl)
-```
 
 ### Flat after sharp
 
@@ -226,65 +174,38 @@ module _
   ap-sharp-counit-flat = rec-sharp (unit-sharp ∘ counit-flat)
 
   ap-sharp-cons-flat : ♯ A → ♯ (♭ A)
-  ap-sharp-cons-flat =
-    rec-sharp
-      ( crisp-rec-sharp
-        ( ♯ (♭ A))
-        ( is-sharp-codiscrete-sharp (♭ A))
-        ( λ x → unit-sharp (cons-flat x)))
+  ap-sharp-cons-flat = rec-sharp (crisp-rec-sharp cons-flat)
 ```
 
 It remains to show that these two are inverses to each other.
-
-```text
-  is-section-cons-flat : is-section ap-sharp-counit-flat cons-flat
-  is-section-cons-flat =
-    ind-subuniverse-sharp
-      ( A)
-      ( λ x → ap-sharp-counit-flat (cons-flat x) ＝ x)
-      ( λ x → is-sharp-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat x)) x)
-      ( λ x →
-          crisp-rec-sharp
-            ( ap-sharp-counit-flat (cons-flat (unit-sharp x)) ＝ unit-sharp x)
-            ( is-sharp-codiscrete-Id-sharp (ap-sharp-counit-flat (cons-flat (unit-sharp x))) (unit-sharp x))
-            ( λ y →
-              compute-rec-subuniverse-sharp
-                {!   !} (♯ A) {!  is-sharp-codiscrete-sharp ?  !} {!   !} {!   !})
-            {!   !})
-```
 
 ### Sharp is uniquely eliminating
 
 This remains to be formalized.
 
-```text
-map-crisp-retraction-precomp-unit-sharp :
-  {l1 : Level} {l2 : Level} {X : UU l1} {P : ♯ X → UU l2} →
-  ((x : ♯ X) → ♯ (P x)) → (x : X) → ♯ (P (unit-sharp x))
-map-crisp-retraction-precomp-unit-sharp {P = P} f = {!   !}
+### Crisp identity induction
 
-crisp-elim-sharp' :
-    {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
-crisp-elim-sharp' {A = A} x = crisp-ind-sharp {!   !} {!   !} {!   !} {!   !}
+```agda
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1}
+  (@♭ C : (@♭ x y : A) → @♭ (x ＝ y) → UU l2)
+  (@♭ d : ((@♭ x : A) → C x x refl))
+  where
 
-is-retraction-map-crisp-retraction-precomp-unit-sharp :
-  {@♭ l1 : Level} {l2 : Level} {@♭ X : UU l1} {P : ♯ X → UU l2} →
-  map-crisp-retraction-precomp-unit-sharp {X = X} {P} ∘ {! precomp-Π (unit-sharp) (♯ ∘ P)  !} ~ id
-is-retraction-map-crisp-retraction-precomp-unit-sharp = {!   !}
-
-is-uniquely-eliminating-sharp :
-  {l : Level} → is-uniquely-eliminating-modality (unit-sharp {l})
-is-uniquely-eliminating-sharp X P .pr1 =
-  section-multivariable-section 2 (precomp-Π unit-sharp (♯ ∘ P)) (induction-principle-sharp X P)
-is-uniquely-eliminating-sharp {l} X P .pr2 .pr1 x =
-is-uniquely-eliminating-sharp X P .pr2 .pr2 f =
-  eq-htpy
-  ( λ x →
-    equational-reasoning
+  crisp-ind-Id'' :
+    {@♭ x y : A} (@♭ p : x ＝ y) → {!   !} -- C x y p
+  crisp-ind-Id'' {x} {y} p =
+    (ind-Id
+      ( x)
+      ( λ y p →
+        type-Sharp-Codiscrete-Type
+          ( crisp-binary-ind-sharp-codiscrete
+            ( λ _ _ → Sharp-Codiscrete-Type l2)
+            ( λ _ _ → is-sharp-codiscrete-Sharp-Codiscrete-Type l2)
+            ( λ y p → (♯ (C x y p) , is-sharp-codiscrete-sharp (C x y p))) y p))
+      {! unit-sharp ?  !}
       {!   !}
-      ＝ {!   !} by {!   !}
-      ＝ {!   !} by compute-crisp-ind-sharp (♯ ∘ P) {! is-sharp-codiscrete-sharp ∘ P  !} crisp-elim-sharp {! f !}
-      ＝ {!   !} by {!   !})
+      p)
 ```
 
 ## See also
