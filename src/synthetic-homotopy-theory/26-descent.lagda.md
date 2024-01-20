@@ -47,36 +47,6 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 </details>
 
-### Remark 18.1.3 Computation of the identity type of `dependent-cocone`
-
-Before we state the main theorem of this section, we also state a dependent
-version of the pullback property of pushouts.
-
-## Theorem 18.1.4
-
-    The following properties are all equivalent:
-
-    1. universal-property-pushout
-    2. pullback-property-pushout
-    3. dependent-pullback-property-pushout
-    4. dependent-universal-property-pushout
-    5. Ind-pushout
-
-We have already shown (1) ↔ (2). Therefore we will first show (3) ↔ (4) ↔ (5).
-Finally, we will show (2) ↔ (3). Here are the precise references to the proofs
-of those parts:
-
-- Proof of (1) → (2): `pullback-property-pushout-universal-property-pushout`
-- Proof of (2) → (1): `universal-property-pushout-pullback-property-pushout`
-- Proof of (2) → (3): `dependent-pullback-property-pullback-property-pushout`
-- Proof of (3) → (2): `pullback-property-dependent-pullback-property-pushout`
-- Proof of (3) → (4):
-  `dependent-universal-property-dependent-pullback-property-pushout`
-- Proof of (4) → (3):
-  `dependent-pullback-property-dependent-universal-property-pushout`
-- Proof of (4) → (5): `Ind-pushout-dependent-universal-property-pushout`
-- Proof of (5) → (4): `dependent-universal-property-pushout-Ind-pushout`
-
 ## Section 16.2 Families over pushouts
 
 ### Definition 18.2.1

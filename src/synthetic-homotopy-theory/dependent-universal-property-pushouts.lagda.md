@@ -232,6 +232,11 @@ dependent-universal-property-dependent-pullback-property-pushout
 
 ### The non-dependent and dependent universal property of pushouts are logically equivalent
 
+This follows from the fact that the
+[dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md)
+is logically equivalent to the
+[pullback property of pushouts](synthetic-homotopy-theory.pullback-property-pushouts.md).
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
