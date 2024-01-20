@@ -110,34 +110,34 @@ module _
 ```agda
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
-  (is-flat-A : is-flat-discrete-crisp A)
+  (is-disc-A : is-flat-discrete-crisp A)
   where
 
   is-flat-discrete-crisp-Σ :
     is-flat-discrete-crisp-family (λ x → B x) → is-flat-discrete-crisp (Σ A B)
-  is-flat-discrete-crisp-Σ is-flat-B =
+  is-flat-discrete-crisp-Σ is-disc-B =
     is-equiv-left-map-triangle
       ( counit-flat)
       ( map-Σ B counit-flat (λ where (cons-flat _) → counit-flat))
       ( map-distributive-flat-Σ)
       ( λ where (cons-flat _) → refl)
       ( is-equiv-map-distributive-flat-Σ)
-      ( is-equiv-map-Σ B is-flat-A (λ where (cons-flat x) → is-flat-B x))
+      ( is-equiv-map-Σ B is-disc-A (λ where (cons-flat x) → is-disc-B x))
 
   is-flat-discrete-crisp-family-is-flat-discrete-crisp-Σ :
     is-flat-discrete-crisp (Σ A B) → is-flat-discrete-crisp-family (λ x → B x)
-  is-flat-discrete-crisp-family-is-flat-discrete-crisp-Σ is-flat-Σ-B x =
+  is-flat-discrete-crisp-family-is-flat-discrete-crisp-Σ is-disc-Σ-B x =
     is-fiberwise-equiv-is-equiv-map-Σ
       ( B)
       ( counit-flat)
       ( λ where (cons-flat _) → counit-flat)
-      ( is-flat-A)
+      ( is-disc-A)
       ( is-equiv-right-map-triangle
         ( counit-flat)
         ( _)
         ( map-distributive-flat-Σ)
         ( λ where (cons-flat _) → refl)
-        ( is-flat-Σ-B)
+        ( is-disc-Σ-B)
         ( is-equiv-map-distributive-flat-Σ))
       ( cons-flat x)
 ```

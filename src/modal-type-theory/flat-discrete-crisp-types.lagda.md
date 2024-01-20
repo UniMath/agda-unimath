@@ -126,12 +126,12 @@ module _
       @♭ is-flat-discrete-crisp A →
       universal-property-flat-discrete-crisp-type A
     universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp
-      is-flat-A {B = B} =
+      is-disc-A {B = B} =
       is-equiv-htpy-equiv
         ( ( ap-equiv-flat
-            ( equiv-precomp (inv-equiv (counit-flat , is-flat-A)) B)) ∘e
+            ( equiv-precomp (inv-equiv (counit-flat , is-disc-A)) B)) ∘e
           ( equiv-ap-map-flat-postcomp-counit-flat) ∘e
-          ( ap-equiv-flat (equiv-precomp (counit-flat , is-flat-A) (♭ B))))
+          ( ap-equiv-flat (equiv-precomp (counit-flat , is-disc-A) (♭ B))))
         ( λ where
           (cons-flat f) →
             crisp-ap
@@ -140,7 +140,7 @@ module _
                 ( λ x →
                   ap
                     ( counit-flat ∘ f)
-                    ( inv (is-section-map-inv-is-equiv is-flat-A x)))))
+                    ( inv (is-section-map-inv-is-equiv is-disc-A x)))))
 ```
 
 ### Types `♭ A` are flat discrete

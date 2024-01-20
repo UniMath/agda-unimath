@@ -48,37 +48,37 @@ counit-flat (cons-flat x) = counit-crisp x
 ### Flat dependent elimination
 
 ```agda
+crisp-ind-flat :
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : @♭ ♭ A → UU l2) →
+  ((@♭ u : A) → C (cons-flat u)) → (@♭ x : ♭ A) → C x
+crisp-ind-flat C f (cons-flat x) = f x
+
 ind-flat :
   {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level} (C : ♭ A → UU l2) →
   ((@♭ u : A) → C (cons-flat u)) →
   (x : ♭ A) → C x
 ind-flat C f (cons-flat x) = f x
-
-crisp-ind-flat :
-  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : @♭ ♭ A → UU l2) →
-  ((@♭ u : A) → C (cons-flat u)) → (@♭ x : ♭ A) → C x
-crisp-ind-flat C f (cons-flat x) = f x
 ```
 
 ### Flat elimination
 
 ```agda
-rec-flat :
-  {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level} (C : UU l2) →
-  ((@♭ u : A) → C) → (x : ♭ A) → C
-rec-flat C = ind-flat (λ _ → C)
-
 crisp-rec-flat :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2) →
-  ((@♭ u : A) → C) → (@♭ x : ♭ A) → C
+  (@♭ A → C) → @♭ ♭ A → C
 crisp-rec-flat C = crisp-ind-flat (λ _ → C)
+
+rec-flat :
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2) →
+  (@♭ A → C) → ♭ A → C
+rec-flat C = ind-flat (λ _ → C)
 ```
 
 ### Crisp assumptions are weaker
 
 ```agda
 crispen :
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {P : A → UU l2} →
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {P : A → UU l2} →
   ((x : A) → P x) → ((@♭ x : A) → P x)
 crispen f x = f x
 ```

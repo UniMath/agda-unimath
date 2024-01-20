@@ -142,7 +142,7 @@ module _
     is-flat-discrete-crisp A →
     is-flat-discrete-crisp B →
     is-flat-discrete-crisp (A + B)
-  is-flat-discrete-crisp-coprod is-flat-A is-flat-B =
+  is-flat-discrete-crisp-coprod is-disc-A is-disc-B =
     is-equiv-left-map-triangle
       ( counit-flat)
       ( map-coprod counit-flat counit-flat)
@@ -151,7 +151,7 @@ module _
         (cons-flat (inl x)) → refl
         (cons-flat (inr x)) → refl)
       ( is-equiv-map-distributive-flat-coprod)
-      ( is-equiv-map-coprod is-flat-A is-flat-B)
+      ( is-equiv-map-coprod is-disc-A is-disc-B)
 ```
 
 ## References

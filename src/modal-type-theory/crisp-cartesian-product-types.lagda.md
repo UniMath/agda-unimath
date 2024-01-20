@@ -108,21 +108,21 @@ module _
     is-flat-discrete-crisp A →
     is-flat-discrete-crisp B →
     is-flat-discrete-crisp (A × B)
-  is-flat-discrete-crisp-prod is-flat-A is-flat-B =
+  is-flat-discrete-crisp-prod is-disc-A is-disc-B =
     is-equiv-left-map-triangle
       ( counit-flat)
       ( map-prod counit-flat counit-flat)
       ( map-distributive-flat-prod)
       ( λ where (cons-flat _) → refl)
       ( is-equiv-map-distributive-flat-prod)
-      ( is-equiv-map-prod counit-flat counit-flat is-flat-A is-flat-B)
+      ( is-equiv-map-prod counit-flat counit-flat is-disc-A is-disc-B)
 
   is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-prod :
     is-flat-discrete-crisp (A × B) →
     (x : A) →
     is-flat-discrete-crisp B
   is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-prod
-    is-flat-prod-A-B x =
+    is-disc-prod-A-B x =
     is-equiv-right-factor-is-equiv-map-prod
       ( counit-flat)
       ( counit-flat)
@@ -132,7 +132,7 @@ module _
         ( map-prod counit-flat counit-flat)
         ( map-distributive-flat-prod)
         ( λ where (cons-flat _) → refl)
-        ( is-flat-prod-A-B)
+        ( is-disc-prod-A-B)
         ( is-equiv-map-distributive-flat-prod))
 
   is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-prod :
@@ -140,7 +140,7 @@ module _
     (x : B) →
     is-flat-discrete-crisp A
   is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-prod
-    is-flat-prod-A-B x =
+    is-disc-prod-A-B x =
     is-equiv-left-factor-is-equiv-map-prod
       ( counit-flat)
       ( counit-flat)
@@ -150,7 +150,7 @@ module _
         ( map-prod counit-flat counit-flat)
         ( map-distributive-flat-prod)
         ( λ where (cons-flat _) → refl)
-        ( is-flat-prod-A-B)
+        ( is-disc-prod-A-B)
         ( is-equiv-map-distributive-flat-prod))
 ```
 
