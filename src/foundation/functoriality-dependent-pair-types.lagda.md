@@ -67,14 +67,15 @@ of
 [commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md)
 
 ```text
-                      ap (tr D - (g a c)) (α a)
-  tr D (H a) (g a c) --------------------------- tr D (H' a) (g a c)
-                     \                         /
-                        \                   /
-                   K a c   \             /   K' a c
-                              \       /
-                                 \ /
-                               g' a c         .
+                      ap (λ p → tr D p (g a c)) (α a)
+  tr D (H a) (g a c) --------------------------------- tr D (H' a) (g a c)
+                     \                               /
+                        \                         /
+                           \                   /
+                      K a c   \             /   K' a c
+                                 \       /
+                                   \ /
+                                 g' a c         .
 ```
 
 ```agda
