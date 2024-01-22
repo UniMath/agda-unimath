@@ -33,6 +33,7 @@ open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-reflecting-maps-equivalence-relations public
 open import foundation.binary-relations public
 open import foundation.binary-transport public
+open import foundation.binary-type-duality public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
@@ -67,6 +68,7 @@ open import foundation.connected-components-universes public
 open import foundation.connected-maps public
 open import foundation.connected-types public
 open import foundation.constant-maps public
+open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
@@ -103,6 +105,7 @@ open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
 open import foundation.diagonal-maps-of-types public
+open import foundation.diagonal-span-diagrams public
 open import foundation.diagonals-of-maps public
 open import foundation.diagonals-of-morphisms-arrows public
 open import foundation.discrete-reflexive-relations public
@@ -131,11 +134,18 @@ open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
+open import foundation.equivalences-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
+open import foundation.equivalences-span-diagrams public
+open import foundation.equivalences-span-diagrams-families-of-types public
+open import foundation.equivalences-spans public
+open import foundation.equivalences-spans-families-of-types public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
+open import foundation.extensions-span-diagrams public
+open import foundation.extensions-spans public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
@@ -191,6 +201,7 @@ open import foundation.iterated-dependent-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
+open import foundation.kernel-span-diagrams-of-maps public
 open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public
@@ -212,6 +223,8 @@ open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-inverse-sequential-diagrams public
+open import foundation.morphisms-span-diagrams public
+open import foundation.morphisms-spans public
 open import foundation.morphisms-twisted-arrows public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
@@ -294,7 +307,9 @@ open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.sorial-type-families public
+open import foundation.span-diagrams public
 open import foundation.spans public
+open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
 open import foundation.strongly-extensional-maps public
@@ -323,6 +338,7 @@ open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
+open import foundation.transposition-span-diagrams public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
 open import foundation.truncated-equality public
