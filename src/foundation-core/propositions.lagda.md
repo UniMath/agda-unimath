@@ -308,16 +308,8 @@ hom-Prop :
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
 pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
 
-implication-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-implication-Prop = hom-Prop
-
-type-implication-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-type-implication-Prop = type-hom-Prop
-
 infixr 5 _⇒_
-_⇒_ = type-implication-Prop
+_⇒_ = hom-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition

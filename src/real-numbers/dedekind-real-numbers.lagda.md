@@ -80,7 +80,7 @@ module _
             ( λ q →
               Π-Prop ℚ
                 ( λ r →
-                  implication-Prop
+                  hom-Prop
                     ( le-ℚ-Prop q r)
                     ( disjunction-Prop (L q) (U r)))))))
 

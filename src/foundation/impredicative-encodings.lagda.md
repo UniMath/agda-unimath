@@ -45,13 +45,13 @@ impredicative-trunc-Prop {l} A =
 
 type-impredicative-trunc-Prop :
   {l : Level} → UU l → UU (lsuc l)
-type-impredicative-trunc-Prop {l} A =
+type-impredicative-trunc-Prop A =
   type-Prop (impredicative-trunc-Prop A)
 
 map-impredicative-trunc-Prop :
   {l : Level} (A : UU l) →
   type-trunc-Prop A → type-impredicative-trunc-Prop A
-map-impredicative-trunc-Prop {l} A =
+map-impredicative-trunc-Prop A =
   map-universal-property-trunc-Prop
     ( impredicative-trunc-Prop A)
     ( λ x Q f → f x)
@@ -91,14 +91,14 @@ type-impredicative-conjunction-Prop P1 P2 =
 map-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-conjunction-Prop P1 P2 → type-impredicative-conjunction-Prop P1 P2
-map-impredicative-conjunction-Prop {l1} {l2} P1 P2 (pair p1 p2) Q f =
+map-impredicative-conjunction-Prop P1 P2 (pair p1 p2) Q f =
   f p1 p2
 
 inv-map-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-conjunction-Prop P1 P2 → type-conjunction-Prop P1 P2
 inv-map-impredicative-conjunction-Prop P1 P2 H =
-  H (conjunction-Prop P1 P2) (λ p1 p2 → pair p1 p2)
+  H (conjunction-Prop P1 P2) pair
 
 equiv-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
@@ -120,9 +120,9 @@ impredicative-disjunction-Prop {l1} {l2} P1 P2 =
   Π-Prop
     ( Prop (l1 ⊔ l2))
     ( λ Q →
-      function-Prop
-        ( type-implication-Prop P1 Q)
-        ( function-Prop (type-implication-Prop P2 Q) Q))
+      hom-Prop
+        ( hom-Prop P1 Q)
+        ( hom-Prop (hom-Prop P2 Q) Q))
 
 type-impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -132,7 +132,7 @@ type-impredicative-disjunction-Prop P1 P2 =
 map-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-disjunction-Prop P1 P2 → type-impredicative-disjunction-Prop P1 P2
-map-impredicative-disjunction-Prop {l1} {l2} P1 P2 =
+map-impredicative-disjunction-Prop P1 P2 =
   map-universal-property-trunc-Prop
     ( impredicative-disjunction-Prop P1 P2)
     ( ind-coprod
@@ -211,7 +211,7 @@ type-impredicative-exists-Prop P =
 map-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
   exists A P → type-impredicative-exists-Prop P
-map-impredicative-exists-Prop {l1} {l2} {A} P =
+map-impredicative-exists-Prop P =
   map-universal-property-trunc-Prop
     ( impredicative-exists-Prop P)
     ( ind-Σ (λ x y Q h → h x y))
