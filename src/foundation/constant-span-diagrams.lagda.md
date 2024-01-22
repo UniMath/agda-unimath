@@ -20,8 +20,8 @@ open import foundation-core.equivalences
 
 ## Idea
 
-The {{#concept "constant span diagram"}} at a type `X` is the
-[span diagram](foundation.span-diagrams.md)
+The {{#concept "constant span diagram" Agda=constant-span-diagram}} at a type
+`X` is the [span diagram](foundation.span-diagrams.md)
 
 ```text
       id       id

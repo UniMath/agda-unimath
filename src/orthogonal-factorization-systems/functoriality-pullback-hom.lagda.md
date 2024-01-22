@@ -10,7 +10,7 @@ module orthogonal-factorization-systems.functoriality-pullback-hom where
 open import foundation.fibered-maps
 open import foundation.function-types
 open import foundation.functoriality-pullbacks
-open import foundation.morphisms-cospans
+open import foundation.morphisms-cospan-diagrams
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels

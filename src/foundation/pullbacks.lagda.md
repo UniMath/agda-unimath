@@ -11,7 +11,7 @@ open import foundation-core.pullbacks public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.descent-equivalences

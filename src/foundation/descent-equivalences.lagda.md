@@ -7,7 +7,7 @@ module foundation.descent-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
 open import foundation.functoriality-fibers-of-maps

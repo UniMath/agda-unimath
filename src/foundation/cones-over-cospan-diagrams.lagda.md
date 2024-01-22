@@ -1,7 +1,7 @@
-# Cones over cospans
+# Cones over cospan diagrams
 
 ```agda
-module foundation.cones-over-cospans where
+module foundation.cones-over-cospan-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -28,9 +28,10 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **cone over a [cospan](foundation.cospans.md)** `A -f-> X <-g- B` with domain
-`C` is a triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`,
-and a homotopy `H` witnessing that the square
+A {{#concept "cone" Disambiguation="cospan diagram" Agda=cone}} over a
+[cospan diagram](foundation.cospans.md) `A -f-> X <-g- B` with domain `C` is a
+triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`, and a
+[homotopy](foundation-core.homotopies.md) `H` witnessing that the square
 
 ```text
       q
@@ -42,7 +43,7 @@ and a homotopy `H` witnessing that the square
       f
 ```
 
-commutes.
+[commutes](foundation-core.commuting-squares-of-maps.lagda.md).
 
 ## Definitions
 
@@ -81,7 +82,7 @@ module _
   hom-arrow-cone' = transpose-hom-arrow vertical-map-cone g hom-arrow-cone
 ```
 
-### Dependent cones over cospans
+### Dependent cones over cospan diagrams
 
 ```agda
 cone-family :
@@ -100,7 +101,7 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
     ( PC x)
 ```
 
-### Identifications of cones over cospans
+### Identifications of cones over cospan diagram
 
 ```agda
 module _
@@ -154,7 +155,7 @@ module _
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
 ```
 
-### Precomposing cones over cospans with a map
+### Precomposing cones over cospan diagrams with a map
 
 ```agda
 module _
@@ -219,7 +220,7 @@ module _
       ( coherence-square-cone f g c)
 ```
 
-### The swapping function on cones over cospans
+### The swapping function on cones over cospan diagrams
 
 ```agda
 swap-cone :
@@ -231,7 +232,7 @@ pr1 (pr2 (swap-cone f g c)) = vertical-map-cone f g c
 pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 ```
 
-### Parallel cones over cospans
+### Parallel cones over cospan diagrams
 
 ```agda
 module _

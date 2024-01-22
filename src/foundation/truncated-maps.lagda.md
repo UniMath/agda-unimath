@@ -9,7 +9,7 @@ open import foundation-core.truncated-maps public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
