@@ -18,10 +18,10 @@ open import foundation-core.function-types
 
 ## Idea
 
-A {{#concept "binary span"}} from `A` to `B` consists of a
-{{#concept "spanning type" Disambiguation="binary span"}} `S` and a
-[pair](foundation.dependent-pair-types.md) of functions `f : S → A` and
-`g : S → B`. The types `A` and `B` in the specification of a binary span are
+A {{#concept "binary span" Agda=span}} from `A` to `B` consists of a
+{{#concept "spanning type" Disambiguation="binary span" Agda=spanning-type-span}}
+`S` and a [pair](foundation.dependent-pair-types.md) of functions `f : S → A`
+and `g : S → B`. The types `A` and `B` in the specification of a binary span are
 also referred to as the {{#concept "domain" Disambiguation="binary span"}} and
 {{#concept "codomain" Disambiguation="binary span"}} of the span, respectively.
 

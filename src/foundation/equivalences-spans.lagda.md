@@ -33,9 +33,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A {{#concept "equivalence of spans"}} from a [span](foundation.spans.md)
-`A <-f- S -g-> B` to a span `A <-h- T -k-> B` consists of an
-[equivalence](foundation-core.equivalences.md) `w : S ≃ T`
+A {{#concept "equivalence of spans" Agda=equiv-span}} from a
+[span](foundation.spans.md) `A <-f- S -g-> B` to a span `A <-h- T -k-> B`
+consists of an [equivalence](foundation-core.equivalences.md) `w : S ≃ T`
 [equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 

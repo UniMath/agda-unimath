@@ -27,7 +27,8 @@ Consider a [span](foundation.spans.md) `s` given by
 ```
 
 and maps `i : A → A'` and `j : B → B'`. The
-{{#concept "extension" Disambiguation="span"}} of `s` by `i` and `j` is the span
+{{#concept "extension" Disambiguation="span" Agda=extend-span}} of `s` by `i`
+and `j` is the span
 
 ```text
        i ∘ f     j ∘ g

@@ -21,8 +21,8 @@ open import foundation-core.identity-types
 ## Idea
 
 Consider a map `f : A → B`. The
-{{#concept "kernel span diagram" Disambiguation="map"}} of `f` is the
-[span diagram](foundation.span-diagrams.md)
+{{#concept "kernel span diagram" Disambiguation="map" Agda=kernel-span-diagram}}
+of `f` is the [span diagram](foundation.span-diagrams.md)
 
 ```text
       pr1                           pr1 ∘ pr2

@@ -21,9 +21,9 @@ open import foundation-core.extensions-spans
 
 ## Idea
 
-A {{#concept "morphism of spans"}} from a [span](foundation.spans.md)
-`A <-f- S -g-> B` to a span `A <-h- T -k-> B` consists of a map `w : S → T`
-[equipped](foundation.structure.md) with two
+A {{#concept "morphism of spans" Agda=hom-span}} from a
+[span](foundation.spans.md) `A <-f- S -g-> B` to a span `A <-h- T -k-> B`
+consists of a map `w : S → T` [equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
 ```text

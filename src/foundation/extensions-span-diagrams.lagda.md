@@ -108,7 +108,7 @@ module _
     right-map-span-diagram left-extend-equiv-arrow-span-diagram
 ```
 
-#### Extensions of span diagrams by equivalences of arrows on the left
+#### Extensions of span diagrams by equivalences of arrows on the right
 
 Consider a span diagram `𝒮` given by
 

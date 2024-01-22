@@ -26,10 +26,10 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An {{#concept "equivalence of cospans"}} from [cospans](foundation.cospans.md)
-`(X , f , g)` to `(Y , h , k)` between types `A` and `B` consists of an
-[equivalence](foundation-core.equivalences.md) `e : X ≃ Y` such that the
-triangles
+An {{#concept "equivalence of cospans" Agda=equiv-cospan}} from
+[cospans](foundation.cospans.md) `(X , f , g)` to `(Y , h , k)` between types
+`A` and `B` consists of an [equivalence](foundation-core.equivalences.md)
+`e : X ≃ Y` such that the triangles
 
 ```text
       e              e

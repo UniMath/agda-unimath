@@ -15,8 +15,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a map `f : A → B`. The {{#concept "diagonal span diagram"}} of `f` is
-the [span diagram](foundation.span-diagrams.md)
+Consider a map `f : A → B`. The
+{{#concept "diagonal span diagram" Agda=diagonal-span-diagram}} of `f` is the
+[span diagram](foundation.span-diagrams.md)
 
 ```text
        f       f

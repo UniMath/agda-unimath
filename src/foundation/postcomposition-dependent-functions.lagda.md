@@ -17,8 +17,7 @@ open import foundation-core.function-types
 ## Idea
 
 Given a type `A` and a dependent map `f : {a : A} → X a → Y a`, the
-{{#concept "dependent
-postcomposition function" Agda=postcomp-Π}}
+{{#concept "dependent postcomposition function" Agda=postcomp-Π}}
 
 ```text
   f ∘ - : ((a : A) → X a) → ((a : A) → Y a)

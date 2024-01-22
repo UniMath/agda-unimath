@@ -22,7 +22,7 @@ open import foundation-core.propositions
 
 ## Idea
 
-An {{#concept "equivalence of arrows"}} is a
+An {{#concept "equivalence of arrows" Agda=equiv-arrow}} is a
 [morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text

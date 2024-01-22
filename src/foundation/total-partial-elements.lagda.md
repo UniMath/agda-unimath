@@ -17,8 +17,8 @@ open import foundation.universe-levels
 ## Idea
 
 A [partial element](foundation.partial-elements.md) `a` of `A` is said to be
-{{#concept "total" Disambiguation="partial element"}} if it is defined. The type
-of total partial elements of `A` is
+{{#concept "total" Disambiguation="partial element" Agda=total-partial-element}}
+if it is defined. The type of total partial elements of `A` is
 [equivalent](foundation-core.equivalences.md) to the type `A`.
 
 ## Definitions

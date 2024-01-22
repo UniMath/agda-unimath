@@ -39,7 +39,7 @@ and maps `i : A → A'` and `j : B → B'`. The
 
 ## Definitions
 
-### Extensions of spans with fixed domain and codomain by equivalences of arrows on the left
+### Extensions of spans by equivalences of arrows on the left
 
 Consider a span `s` given by
 
@@ -94,7 +94,7 @@ module _
     right-map-left-extend-equiv-arrow-span
 ```
 
-### Extensions of spans with fixed domain and codomain by equivalences of arrows on the right
+### Extensions of spans by equivalences of arrows on the right
 
 Consider a span `s` given by
 

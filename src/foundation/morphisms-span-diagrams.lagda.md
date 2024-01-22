@@ -21,7 +21,7 @@ open import foundation-core.commuting-squares-of-maps
 
 ## Idea
 
-A {{#concept "morphism of span diagrams"}} from a
+A {{#concept "morphism of span diagrams" Agda=hom-span-diagram}} from a
 [span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` to a span diagram
 `C <-h- T -k-> D` consists of maps `u : A → C`, `v : B → D`, and `w : S → T`
 [equipped](foundation.structure.md) with two

@@ -19,8 +19,8 @@ open import synthetic-homotopy-theory.pushouts
 ## Idea
 
 A [morphism of arrows](foundation.morphisms-arrows.md) `h : f → g` is said to be
-{{#concept "cocartesian" Disambiguation="morphism of arrows"}} if the
-[commuting square](foundation-core.commuting-squares-of-maps.md)
+{{#concept "cocartesian" Disambiguation="morphism of arrows" Agda=is-cocartesian-hom-arrow}}
+if the [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
         i

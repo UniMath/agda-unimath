@@ -36,7 +36,7 @@ Applying
 [transport along identifications](foundation-core.transport-along-identifications.md)
 to [identifications](foundation-core.identity-types.md) arising from the
 [univalence axiom](foundation.univalence.md) gives us
-{{#concept "transport along equivalences"}}.
+{{#concept "transport along equivalences" Agda=tr-equiv}}.
 
 Since transport defines [equivalences](foundation-core.equivalences.md) of
 [fibers](foundation-core.fibers-of-maps.md), this gives us an _action on

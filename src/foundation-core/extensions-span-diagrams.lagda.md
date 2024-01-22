@@ -29,8 +29,8 @@ Consider a [span diagram](foundation.span-diagrams.md) `𝒮` given by
 ```
 
 and maps `i : A → A'` and `j : B → B'`. The
-{{#concept "extension" Disambiguation="span diagram"}} of `𝒮` by `i` and `j` is
-the span diagram
+{{#concept "extension" Disambiguation="span diagram" Agda=extend-span-diagram}}
+of `𝒮` by `i` and `j` is the span diagram
 
 ```text
        i ∘ f     j ∘ g

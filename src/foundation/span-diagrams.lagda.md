@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "(binary) span diagram"}} is a diagram of the form
+A {{#concept "(binary) span diagram" Agda=span-diagram}} is a diagram of the
+form
 
 ```text
        f       g

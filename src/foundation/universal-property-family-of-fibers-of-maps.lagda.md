@@ -47,7 +47,7 @@ the type family `(fiber f) ∘ f : A → 𝒰`, which always has a section given
 
 We can uniquely characterize the family of fibers `fiber f : B → 𝒰` as the
 initial type family equipped with such a section. Explicitly, the
-{{#concept "universal property of the family of fibers" Disambiguation="maps"}}
+{{#concept "universal property of the family of fibers" Disambiguation="maps" Agda=universal-property-family-of-fibers}}
 `fiber f : B → 𝒰` of a map `f` is that the precomposition operation
 
 ```text
@@ -92,8 +92,8 @@ for any binary type family `X : (b : B) → F b → 𝒰`. This evaluation map t
 binary family of elements of `X` to a
 [double lift](orthogonal-factorization-systems.double-lifts-families-of-elements.md)
 of `f` and `δ`. The
-{{#concept "dependent universal property of the family of fibers of a map"}} `f`
-asserts that this evaluation map is an equivalence.
+{{#concept "dependent universal property of the family of fibers of a map" Agda=dependent-universal-property-family-of-fibers}}
+`f` asserts that this evaluation map is an equivalence.
 
 ```agda
 module _

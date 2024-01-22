@@ -26,7 +26,8 @@ functions `f g : (x : A) → B x`. Furthermore, consider a type family
   g' : (x : A) → C x (g x)
 ```
 
-A {{#concept "dependent homotopy"}} from `f'` to `g'` over `H` is a family of
+A {{#concept "dependent homotopy" Agda=dependent-homotopy}} from `f'` to `g'`
+over `H` is a family of
 [dependent identifications](foundation-core.dependent-identifications.md) from
 `f' x` to `g' x` over `H x`.
 

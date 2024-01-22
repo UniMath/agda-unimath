@@ -16,8 +16,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "cospan diagram"}} consists of two types `A` and `B` and a
-[cospan](foundation.cospans.md) `A -f-> X <-g- B` between them.
+A {{#concept "cospan diagram" Agda=cospan-diagram}} consists of two types `A`
+and `B` and a [cospan](foundation.cospans.md) `A -f-> X <-g- B` between them.
 
 ## Definitions
 

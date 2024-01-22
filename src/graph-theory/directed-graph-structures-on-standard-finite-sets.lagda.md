@@ -19,9 +19,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "directed graph structure" WD="Directed graph" WDID=Q1137726}} on a
-[standard finite set](univalent-combinatorics.standard-finite-types.md) `Fin n`
-is a [binary type-valued relation](foundation.binary-relations.md)
+A
+{{#concept "directed graph structure" WD="Directed graph" WDID=Q1137726 Agda=structure-directed-graph-Fin}}
+on a [standard finite set](univalent-combinatorics.standard-finite-types.md)
+`Fin n` is a [binary type-valued relation](foundation.binary-relations.md)
 
 ```text
   Fin n → Fin n → 𝒰.

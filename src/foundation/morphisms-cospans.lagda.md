@@ -20,9 +20,10 @@ open import foundation-core.commuting-triangles-of-maps
 ## Idea
 
 Consider two [cospand](foundation.cospans.md) `c := (X , f , g)` and
-`d := (Y , h , k)` from `A` to `B`. A {{#concept "morphism of cospans"}} from
-`c` to `d` consists of a map `u : X → Y` equipped with
-[homotopies](foundation-core.homotopies.md) witnessing that the two triangles
+`d := (Y , h , k)` from `A` to `B`. A
+{{#concept "morphism of cospans" Agda=hom-cospan}} from `c` to `d` consists of a
+map `u : X → Y` equipped with [homotopies](foundation-core.homotopies.md)
+witnessing that the two triangles
 
 ```text
       u              u
@@ -45,14 +46,14 @@ module _
   (c : cospan l3 A B) (d : cospan l4 A B)
   where
 
-  coherence-hom-codomain-cospan :
+  coherence-hom-cospan :
     (codomain-cospan c → codomain-cospan d) → UU (l1 ⊔ l2 ⊔ l4)
-  coherence-hom-codomain-cospan h =
+  coherence-hom-cospan h =
     ( coherence-triangle-maps (left-map-cospan d) h (left-map-cospan c)) ×
     ( coherence-triangle-maps (right-map-cospan d) h (right-map-cospan c))
 
-  hom-codomain-cospan : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-codomain-cospan =
+  hom-cospan : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-cospan =
     Σ ( codomain-cospan c → codomain-cospan d)
-      ( coherence-hom-codomain-cospan)
+      ( coherence-hom-cospan)
 ```
