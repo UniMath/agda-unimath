@@ -44,7 +44,7 @@ abstract
   is-prop-type-disjunction-Prop P Q = is-prop-type-Prop (disjunction-Prop P Q)
 
 infixr 10 _∨_
-_∨_ = type-disjunction-Prop
+_∨_ = disjunction-Prop
 ```
 
 **Note**: The symbol used for the disjunction `_∨_` is the

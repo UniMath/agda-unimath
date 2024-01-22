@@ -40,7 +40,7 @@ abstract
   is-prop-type-conjunction-Prop P Q = is-prop-type-Prop (conjunction-Prop P Q)
 
 infixr 15 _∧_
-_∧_ = type-conjunction-Prop
+_∧_ = conjunction-Prop
 ```
 
 **Note**: The symbol used for the conjunction `_∧_` is the
