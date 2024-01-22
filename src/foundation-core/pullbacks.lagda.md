@@ -152,7 +152,8 @@ module _
     { s t : standard-pullback f g}
     ( α : vertical-map-standard-pullback s ＝ vertical-map-standard-pullback t)
     ( β :
-      horizontal-map-standard-pullback s ＝ horizontal-map-standard-pullback t) →
+      horizontal-map-standard-pullback s ＝
+      horizontal-map-standard-pullback t) →
     ( ( ap f α ∙ coherence-square-standard-pullback t) ＝
       ( coherence-square-standard-pullback s ∙ ap g β)) →
     s ＝ t

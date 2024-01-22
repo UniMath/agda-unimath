@@ -238,7 +238,7 @@ abstract
     (inl (inr star)) (inl (inr star)) p q (inl (inr star)) = inv p
   is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inr star) =
-    ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
+    ex-falso (Eq-Fin-eq 2 (is-injective-equiv e (p ∙ inv q)))
   is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inl (inr star)) = inv p
   is-retraction-aut-point-Fin-two-ℕ' e
@@ -249,10 +249,10 @@ abstract
     (inr star) (inl (inr star)) p q (inr star) = inv q
   is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inl (inr star)) =
-    ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
+    ex-falso (Eq-Fin-eq 2 (is-injective-equiv e (p ∙ inv q)))
   is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inr star) =
-    ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
+    ex-falso (Eq-Fin-eq 2 (is-injective-equiv e (p ∙ inv q)))
 
   is-retraction-aut-point-Fin-two-ℕ :
     (aut-point-Fin-two-ℕ ∘ ev-zero-aut-Fin-two-ℕ) ~ id
@@ -544,10 +544,10 @@ cases-is-involution-aut-Fin-two-ℕ e
   (inl (inr star)) (inr star) (inl (inr star)) p q =
   ap (map-equiv e) p ∙ q
 cases-is-involution-aut-Fin-two-ℕ e (inl (inr star)) (inr star) (inr star) p q =
-  ex-falso (neq-inr-inl (is-injective-map-equiv e (q ∙ inv p)))
+  ex-falso (neq-inr-inl (is-injective-equiv e (q ∙ inv p)))
 cases-is-involution-aut-Fin-two-ℕ e
   (inr star) (inl (inr star)) (inl (inr star)) p q =
-  ex-falso (neq-inr-inl (is-injective-map-equiv e (p ∙ inv q)))
+  ex-falso (neq-inr-inl (is-injective-equiv e (p ∙ inv q)))
 cases-is-involution-aut-Fin-two-ℕ e (inr star) (inl (inr star)) (inr star) p q =
   ap (map-equiv e) p ∙ q
 cases-is-involution-aut-Fin-two-ℕ e (inr star) (inr star) z p q =
@@ -656,7 +656,7 @@ module _
       ( empty-Prop)
       ( λ f →
         neq-inr-inl
-          ( is-injective-map-equiv f
+          ( is-injective-equiv f
             ( htpy-eq-equiv (htpy-eq-equiv p' f) (zero-Fin 1))))
 
   is-not-identity-swap-2-Element-Type : swap-2-Element-Type X ≠ id-equiv
@@ -719,7 +719,7 @@ module _
     f h y (inl (inr star)) (inl (inr star)) k3 p q r =
       tr
         ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
-        ( is-injective-map-equiv h (p ∙ inv q))
+        ( is-injective-equiv h (p ∙ inv q))
         ( P)
     f h y (inl (inr star)) (inr star) (inl (inr star)) p q r =
       ex-falso
@@ -727,23 +727,23 @@ module _
           ( inv p ∙ (ap (map-equiv h) (inv P) ∙
             ( ap
               ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( is-injective-map-equiv h (p ∙ inv r)) ∙
+              ( is-injective-equiv h (p ∙ inv r)) ∙
               ( ( ap
                   ( map-equiv h)
                   ( is-involution-aut-2-element-type X
                     ( swap-2-Element-Type X) y)) ∙
                 ( q))))))
     f h y (inl (inr star)) (inr star) (inr star) p q r =
-      ( is-injective-map-equiv h (r ∙ inv q))
+      ( is-injective-equiv h (r ∙ inv q))
     f h y (inr star) (inl (inr star)) (inl (inr star)) p q r =
-      ( is-injective-map-equiv h (r ∙ inv q))
+      ( is-injective-equiv h (r ∙ inv q))
     f h y (inr star) (inl (inr star)) (inr star) p q r =
       ex-falso
         ( neq-inr-inl
           ( inv p ∙ (ap (map-equiv h) (inv P) ∙
             ( ap
               ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( is-injective-map-equiv h (p ∙ inv r)) ∙
+              ( is-injective-equiv h (p ∙ inv r)) ∙
               ( ( ap
                   ( map-equiv h)
                   ( is-involution-aut-2-element-type X
@@ -753,7 +753,7 @@ module _
     f h y (inr star) (inr star) k3 p q r =
       tr
         ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
-        ( is-injective-map-equiv h (p ∙ inv q))
+        ( is-injective-equiv h (p ∙ inv q))
         ( P)
 ```
 

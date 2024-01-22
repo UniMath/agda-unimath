@@ -421,7 +421,7 @@ module _
     ( map-inv-equiv (equiv-tot e)) ~
     ( map-equiv (equiv-tot (λ x → inv-equiv (e x))))
   compute-inv-equiv-tot e (a , c) =
-    is-injective-map-equiv
+    is-injective-equiv
       ( equiv-tot e)
       ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙
         ( eq-pair-Σ refl (inv (is-section-map-inv-equiv (e a) c))))

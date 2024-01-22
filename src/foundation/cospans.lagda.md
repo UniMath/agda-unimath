@@ -27,11 +27,22 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A **cospan** is a pair of functions with a common codomain.
+A {{#concept "cospan"}} is a diagram of the form
 
-## Definition
+```text
+      f         g
+  A -----> X <----- B
+```
 
-### Cospans
+In other words, a cospan consists of three types `A`, `B`, and `X` and two
+functions `f : A → X` and `g : B → X`. A
+{{#concept "cospan structure" Disambiguation="pair of types"}} on a pair of
+types `A` and `B` consists of a type `X` and two functions `f : A → X` and
+`g : B → X`.
+
+## Definitions
+
+### Cospan structures
 
 ```agda
 cospan :
@@ -62,9 +73,11 @@ between their codomains so that the triangles on either side commute:
 ```text
   A ===== A
   |       |
+  |       |
   v       v
   C ----> D
-  ^       ^
+  ∧       ∧
+  |       |
   |       |
   B ===== B
 ```
@@ -118,7 +131,7 @@ module _
       ( is-torsorial-Eq-structure
         ( is-torsorial-htpy' (left-map-cospan c))
         ( left-map-cospan c , refl-htpy)
-        (is-torsorial-htpy' (right-map-cospan c)))
+        ( is-torsorial-htpy' (right-map-cospan c)))
 
   is-equiv-htpy-eq-cospan :
     (c d : cospan l A B) → is-equiv (htpy-eq-cospan c d)
@@ -137,8 +150,9 @@ module _
 ## See also
 
 - The formal dual of cospans is [spans](foundation.spans.md).
+- [Pullbacks](foundation-core.pullbacks.md) are limits of cospans.
 
-## Table of files about pullbacks
+### Table of files about pullbacks
 
 The following table lists files that are about pullbacks as a general concept.
 

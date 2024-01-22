@@ -310,7 +310,7 @@ module _
     (x : A) (y : B) → map-equiv f (inl x) ≠ inr y
   equiv-coproduct-induce-equiv-disjoint f g p x y q =
     neq-inr-inl
-      ( is-injective-map-equiv f
+      ( is-injective-equiv f
         ( ( p (map-equiv (inv-equiv g) y) ∙
           ( ( ap (λ z → inr (map-equiv z y)) (right-inverse-law-equiv g)) ∙
             ( inv q)))))
@@ -320,7 +320,7 @@ module _
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b)) →
     (b : B) → map-inv-equiv f (inr b) ＝ inr (map-inv-equiv g b)
   inv-commutative-square-inr f g p b =
-    is-injective-map-equiv f
+    is-injective-equiv f
       ( ( ap (λ z → map-equiv z (inr b)) (right-inverse-law-equiv f)) ∙
         ( ( inv (ap (λ z → inr (map-equiv z b)) (right-inverse-law-equiv g))) ∙
           ( inv (p (map-inv-equiv g b)))))
