@@ -31,7 +31,7 @@ open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
-open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
 ```
