@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
 open import foundation.unit-type
+open import foundation-core.sections
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
@@ -237,7 +238,7 @@ neq-neg-bool false ()
 ### Boolean negation is an involution
 
 ```agda
-neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
+neg-neg-bool : neg-bool ∘ neg-bool ~ id
 neg-neg-bool true = refl
 neg-neg-bool false = refl
 ```
@@ -261,8 +262,12 @@ pr2 equiv-neg-bool = is-equiv-neg-bool
 
 ```agda
 abstract
+  not-section-const : (b : bool) → ¬ (section (const bool bool b))
+  not-section-const true (g , G) = neq-true-false-bool (G false)
+  not-section-const false (g , G) = neq-false-true-bool (G true)
+
+abstract
   not-equiv-const :
     (b : bool) → ¬ (is-equiv (const bool bool b))
-  not-equiv-const true ((g , G) , _) = neq-true-false-bool (G false)
-  not-equiv-const false ((g , G) , _) = neq-false-true-bool (G true)
+  not-equiv-const b e = not-section-const b (section-is-equiv e)
 ```
