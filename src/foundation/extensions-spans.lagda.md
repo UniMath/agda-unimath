@@ -48,7 +48,7 @@ Consider a span `s` given by
   A <----- S -----> B
 ```
 
-and an [equivalence of arrows](foundation.equivalence-arrows.md)
+and an [equivalence of arrows](foundation.equivalences-arrows.md)
 `h : equiv-arrow f' f` as indicated in the diagram
 
 ```text

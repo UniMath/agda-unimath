@@ -134,8 +134,8 @@ module _
 ## See also
 
 - [Cospans](foundation.cospans.md)
-- [Diagonal spans](foundation.diagonal-spans.md)
+- [Diagonal spans](foundation.diagonal-span-diagrams.md)
 - [Extensions of spans](foundation.extensions-spans.md)
-- [Kernel spans of maps](foundation.kernel-spans-of-maps.md)
+- [Kernel spans of maps](foundation.kernel-span-diagrams-of-maps.md)
 - [Spans of families of types](foundation.spans-families-of-types.md)
 - [Transposition of span diagrams](foundation.transposition-span-diagrams.md)
