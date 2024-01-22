@@ -714,7 +714,13 @@ equivalence-reasoning
 The equivalence constructed in this way is `equiv-1 ∘e (equiv-2 ∘e equiv-3)`,
 i.e., the equivivalence is associated fully to the right.
 
-**Note.** In situations where it is important to have precise control over an equivalence or its inverse, it is often better to avoid making use of equivalence reasoning. Even if a proof by equivalence reasoning is clear to the human reader, constructing equivalences by hand by constructing maps back and forth and two homotopies witnessing that they are mutual inverses is often the most straigtforward solution that gives the best expected computational behavior of the constructed equivalence.
+**Note.** In situations where it is important to have precise control over an
+equivalence or its inverse, it is often better to avoid making use of
+equivalence reasoning. Even if a proof by equivalence reasoning is clear to the
+human reader, constructing equivalences by hand by constructing maps back and
+forth and two homotopies witnessing that they are mutual inverses is often the
+most straigtforward solution that gives the best expected computational behavior
+of the constructed equivalence.
 
 ```agda
 infixl 1 equivalence-reasoning_
