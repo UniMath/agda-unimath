@@ -40,6 +40,12 @@ pr2 (neg-Prop' A) = is-prop-neg
 
 neg-Prop : {l1 : Level} → Prop l1 → Prop l1
 neg-Prop P = neg-Prop' (type-Prop P)
+
+type-neg-Prop : {l1 : Level} → Prop l1 → UU l1
+type-neg-Prop P = type-Prop (neg-Prop P)
+
+not_ : {l1 : Level} → Prop l1 → UU l1
+not_ = type-neg-Prop
 ```
 
 ### Reductio ad absurdum
@@ -74,6 +80,6 @@ no-fixed-points-neg A (pair f g) =
 ```agda
 abstract
   no-fixed-points-neg-Prop :
-    {l1 : Level} (P : Prop l1) → ¬ (P ⇔ neg-Prop P)
+    {l1 : Level} (P : Prop l1) → ¬ ((P) iff (neg-Prop P))
   no-fixed-points-neg-Prop P = no-fixed-points-neg (type-Prop P)
 ```

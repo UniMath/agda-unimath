@@ -120,8 +120,9 @@ module _
   where
 
   iff-distributive-conjunction-exists-Prop :
-    ( conjunction-Prop P (exists-Prop A Q)) ⇔
-    ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
+    type-iff-Prop
+      ( conjunction-Prop P (exists-Prop A Q))
+      ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
   pr1 iff-distributive-conjunction-exists-Prop (p , e) =
     elim-exists-Prop Q
       ( exists-Prop A (λ a → conjunction-Prop P (Q a)))

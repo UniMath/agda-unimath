@@ -157,12 +157,12 @@ module _
   iff-universes-decidable-subtype :
     (l l' : Level) (S : decidable-subtype l X) →
     ( (x : X) →
-      prop-Decidable-Prop (S x) ⇔
-      prop-Decidable-Prop
+      type-Decidable-Prop (S x) ↔
+      type-Decidable-Prop
         ( map-equiv (equiv-universes-decidable-subtype l l') S x))
   iff-universes-decidable-subtype l l' S x =
     tr
-      ( λ P → prop-Decidable-Prop (S x) ⇔ prop-Decidable-Prop P)
+      ( λ P → type-Decidable-Prop (S x) ↔ type-Decidable-Prop P)
       ( inv
         ( compute-map-equiv-Π
           ( λ _ → Decidable-Prop l')
