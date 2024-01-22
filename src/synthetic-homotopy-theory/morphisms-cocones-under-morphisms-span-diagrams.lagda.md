@@ -36,22 +36,22 @@ vertex `X` and `d` with vertex `Y` on `𝒮` and `t`, respectively. A
 `d` under `h` consists of a map `u : X → Y` such that the cube
 
 ```text
-          S
-         /|\
-        / | \
-       /  hS \
-      ∨   ∨   ∨
-     A    T    B
-     |\  / \  /|
-  hA | \/   \/ | hB
-     | /\   /\ |
-     ∨∨  ∨ ∨  ∨∨
-     A'   X    B'
-      \   |   /
-       \  |u /
-        \ | /
-         ∨∨∨
-          Y
+              S
+            / | \
+          /   |   \
+        /   hS|     \
+      ∨       ∨       ∨
+     A        T        B
+     | \    /   \    / |
+  hA |   \/       \/   | hB
+     |  /  \     /  \  |
+     ∨∨      ∨ ∨      ∨∨
+     A'       X        B'
+       \      |      /
+         \    |u   /
+           \  |  /
+             ∨∨∨
+              Y
 ```
 
 [commutes](foundation.commuting-cubes-of-maps.md).
