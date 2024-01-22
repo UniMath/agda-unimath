@@ -101,7 +101,8 @@ postulate
 
   -- White/blacklist specific definitions for reduction while executing the TC computation
   -- 'true' for whitelist, 'false' for blacklist
-  withReduceDefs : {l1 : Level} {A : UU l1} → (Σ bool λ _ → list Name) → TC A → TC A
+  withReduceDefs :
+    {l1 : Level} {A : UU l1} → (Σ bool λ _ → list Name) → TC A → TC A
   askReduceDefs : TC (Σ bool λ _ → list Name)
 
   -- Fail if the given computation gives rise to new, unsolved

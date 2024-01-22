@@ -41,6 +41,9 @@ abstract
 
 infixr 15 _∧_
 _∧_ = conjunction-Prop
+
+infixr 15 _and_
+_and_ = type-conjunction-Prop
 ```
 
 **Note**: The symbol used for the conjunction `_∧_` is the

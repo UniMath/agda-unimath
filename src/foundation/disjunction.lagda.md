@@ -45,6 +45,9 @@ abstract
 
 infixr 10 _∨_
 _∨_ = disjunction-Prop
+
+infixr 10 _or_
+_or_ = type-disjunction-Prop
 ```
 
 **Note**: The symbol used for the disjunction `_∨_` is the
