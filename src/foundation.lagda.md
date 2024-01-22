@@ -78,6 +78,7 @@ open import foundation.coproduct-decompositions public
 open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
 open import foundation.coslice public
+open import foundation.cospan-diagrams public
 open import foundation.cospans public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public

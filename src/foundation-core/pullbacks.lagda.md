@@ -77,7 +77,7 @@ module _
 ### The gap map into the standard pullback
 
 The **gap map** of a square is the map fron the vertex of the
-[cone](foundation.cones-over-cospans.md) into the standard pullback.
+[cone](foundation.cones-over-cospan-diagrams.md) into the standard pullback.
 
 ```agda
 module _

@@ -43,7 +43,7 @@ triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`, and a
       f
 ```
 
-[commutes](foundation-core.commuting-squares-of-maps.lagda.md).
+[commutes](foundation-core.commuting-squares-of-maps.md).
 
 ## Definitions
 
