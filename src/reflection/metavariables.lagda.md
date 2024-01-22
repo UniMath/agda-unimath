@@ -37,7 +37,8 @@ primitive
   primMetaLess : Meta → Meta → bool
   primShowMeta : Meta → String
   primMetaToNat : Meta → ℕ
-  primMetaToNatInjective : ∀ a b → primMetaToNat a ＝ primMetaToNat b → a ＝ b
+  primMetaToNatInjective :
+    (a b : Meta) → primMetaToNat a ＝ primMetaToNat b → a ＝ b
 
 data Blocker : UU lzero where
   blocker-any : list Blocker → Blocker

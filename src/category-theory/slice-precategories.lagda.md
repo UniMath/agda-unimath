@@ -266,7 +266,11 @@ module _
         eq-hom-Slice-Precategory C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
 
       q :
-        ∀ k →
+        (k :
+          hom-Precategory
+            ( Slice-Precategory C A)
+            ( Z , comp-hom-Precategory C f h₁)
+            ( W , p)) →
         is-prop
           ( ( comp-hom-Precategory
               (Slice-Precategory C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
@@ -278,7 +282,11 @@ module _
           ( is-set-hom-Slice-Precategory C A _ _ _ _)
 
       σ :
-        ∀ k →
+        (k :
+          hom-Precategory
+            ( Slice-Precategory C A)
+            ( Z , comp-hom-Precategory C f h₁)
+            ( W , p)) →
         ( ( comp-hom-Precategory
             ( Slice-Precategory C A)
             ( p₁ , α₁)
@@ -334,7 +342,7 @@ module _
                   ( p₂' , α')))))
 
       q :
-        ∀ k' →
+        (k' : hom-Precategory C W' W) →
         is-prop
           (( comp-hom-Precategory C p₁ k' ＝ p₁') ×
           ( comp-hom-Precategory C p₂ k' ＝ p₂'))

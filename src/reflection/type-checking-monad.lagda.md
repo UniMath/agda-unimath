@@ -49,33 +49,33 @@ data ErrorPart : UU lzero where
 
 postulate
   -- The type checking monad
-  TC : ∀ {a} → UU a → UU a
-  returnTC : ∀ {a} {A : UU a} → A → TC A
-  bindTC : ∀ {a b} {A : UU a} {B : UU b} → TC A → (A → TC B) → TC B
+  TC : {l1 : Level} → UU l1 → UU l1
+  returnTC : {l1 : Level} {A : UU l1} → A → TC A
+  bindTC : {l1 l2 : Level} {A : UU l1} {B : UU l2} → TC A → (A → TC B) → TC B
   -- Tries the unify the first term with the second
   unify : Term → Term → TC unit
   -- Gives an error
-  typeError : ∀ {a} {A : UU a} → list ErrorPart → TC A
+  typeError : {l1 : Level} {A : UU l1} → list ErrorPart → TC A
   -- Infers the type of a goal
   inferType : Term → TC Term
   checkType : Term → Term → TC Term
   normalise : Term → TC Term
   reduce : Term → TC Term
   -- Tries the first computation, if it fails tries the second
-  catchTC : ∀ {a} {A : UU a} → TC A → TC A → TC A
-  quoteTC : ∀ {a} {A : UU a} → A → TC Term
-  unquoteTC : ∀ {a} {A : UU a} → Term → TC A
-  quoteωTC : ∀ {A : UUω} → A → TC Term
+  catchTC : {l1 : Level} {A : UU l1} → TC A → TC A → TC A
+  quoteTC : {l1 : Level} {A : UU l1} → A → TC Term
+  unquoteTC : {l1 : Level} {A : UU l1} → Term → TC A
+  quoteωTC : {A : UUω} → A → TC Term
   getContext : TC Telescope
-  extendContext : ∀ {a} {A : UU a} → String → Arg Term → TC A → TC A
-  inContext : ∀ {a} {A : UU a} → Telescope → TC A → TC A
+  extendContext : {l1 : Level} {A : UU l1} → String → Arg Term → TC A → TC A
+  inContext : {l1 : Level} {A : UU l1} → Telescope → TC A → TC A
   freshName : String → TC Name
   declareDef : Arg Name → Term → TC unit
   declarePostulate : Arg Name → Term → TC unit
   defineFun : Name → list Clause → TC unit
   getType : Name → TC Term
   getDefinition : Name → TC Definition
-  blockTC : ∀ {a} {A : UU a} → Blocker → TC A
+  blockTC : {l1 : Level} {A : UU l1} → Blocker → TC A
   commitTC : TC unit
   isMacro : Name → TC bool
 
@@ -87,31 +87,31 @@ postulate
 
   -- If 'true', makes the following primitives also normalise
   -- their results: inferType, checkType, quoteTC, getType, and getContext
-  withNormalisation : ∀ {a} {A : UU a} → bool → TC A → TC A
+  withNormalisation : {l1 : Level} {A : UU l1} → bool → TC A → TC A
   askNormalisation : TC bool
 
   -- If 'true', makes the following primitives to reconstruct hidden arguments:
   -- getDefinition, normalise, reduce, inferType, checkType and getContext
-  withReconstructed : ∀ {a} {A : UU a} → bool → TC A → TC A
+  withReconstructed : {l1 : Level} {A : UU l1} → bool → TC A → TC A
   askReconstructed : TC bool
 
   -- Whether implicit arguments at the end should be turned into metavariables
-  withExpandLast : ∀ {a} {A : UU a} → bool → TC A → TC A
+  withExpandLast : {l1 : Level} {A : UU l1} → bool → TC A → TC A
   askExpandLast : TC bool
 
   -- White/blacklist specific definitions for reduction while executing the TC computation
   -- 'true' for whitelist, 'false' for blacklist
-  withReduceDefs : ∀ {a} {A : UU a} → (Σ bool λ _ → list Name) → TC A → TC A
+  withReduceDefs : {l1 : Level} {A : UU l1} → (Σ bool λ _ → list Name) → TC A → TC A
   askReduceDefs : TC (Σ bool λ _ → list Name)
 
   -- Fail if the given computation gives rise to new, unsolved
   -- "blocking" constraints.
-  noConstraints : ∀ {a} {A : UU a} → TC A → TC A
+  noConstraints : {l1 : Level} {A : UU l1} → TC A → TC A
 
   -- Run the given TC action and return the first component. Resets to
   -- the old TC state if the second component is 'false', or keep the
   -- new TC state if it is 'true'.
-  runSpeculative : ∀ {a} {A : UU a} → TC (Σ A λ _ → bool) → TC A
+  runSpeculative : {l1 : Level} {A : UU l1} → TC (Σ A λ _ → bool) → TC A
 
   -- Get a list of all possible instance candidates for the given meta
   -- variable (it does not have to be an instance meta).

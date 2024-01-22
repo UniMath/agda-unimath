@@ -40,7 +40,7 @@ primitive
   primShowQName : Name → String
   primQNameToWord64s : Name → Word64 × Word64
   primQNameToWord64sInjective :
-    ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
+    (a b : Name) → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
 ```
 
 ## Examples
