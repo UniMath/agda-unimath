@@ -121,25 +121,25 @@ module _
 
   iff-distributive-conjunction-exists-Prop :
     type-iff-Prop
-      ( conjunction-Prop P (exists-Prop A Q))
-      ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
+      ( P ∧ (exists-Prop A Q))
+      ( exists-Prop A (λ a → P ∧ (Q a)))
   pr1 iff-distributive-conjunction-exists-Prop (p , e) =
     elim-exists-Prop Q
-      ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
+      ( exists-Prop A (λ a → P ∧ (Q a)))
       ( λ x q → intro-∃ x (p , q))
       ( e)
   pr2 iff-distributive-conjunction-exists-Prop =
     elim-exists-Prop
-      ( λ x → conjunction-Prop P (Q x))
-      ( conjunction-Prop P (exists-Prop A Q))
+      ( λ x → P ∧ (Q x))
+      ( P ∧ (exists-Prop A Q))
       ( λ x (p , q) → (p , intro-∃ x q))
 
   distributive-conjunction-exists-Prop :
-    conjunction-Prop P (exists-Prop A Q) ＝
-    exists-Prop A (λ a → conjunction-Prop P (Q a))
+    P ∧ (exists-Prop A Q) ＝
+    exists-Prop A (λ a → P ∧ (Q a))
   distributive-conjunction-exists-Prop =
     eq-iff'
-      ( conjunction-Prop P (exists-Prop A Q))
-      ( exists-Prop A (λ a → conjunction-Prop P (Q a)))
+      ( P ∧ (exists-Prop A Q))
+      ( exists-Prop A (λ a → P ∧ (Q a)))
       ( iff-distributive-conjunction-exists-Prop)
 ```

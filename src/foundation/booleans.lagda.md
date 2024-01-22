@@ -11,7 +11,6 @@ open import foundation.dependent-pair-types
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
 open import foundation.unit-type
-open import foundation-core.sections
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
@@ -24,6 +23,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.sets
 
 open import univalent-combinatorics.finite-types

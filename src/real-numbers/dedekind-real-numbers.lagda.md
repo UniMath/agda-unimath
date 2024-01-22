@@ -61,28 +61,19 @@ module _
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
     prod-Prop
-      ( prod-Prop (exists-Prop ℚ L) (exists-Prop ℚ U))
+      ( (exists-Prop ℚ L) ∧ (exists-Prop ℚ U))
       ( prod-Prop
         ( prod-Prop
           ( Π-Prop ℚ
-            ( λ q →
-              iff-Prop
-                ( L q)
-                ( exists-Prop ℚ (λ r → prod-Prop (le-ℚ-Prop q r) (L r)))))
+            ( λ q → (L q) ⇔ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧ (L r)))))
           ( Π-Prop ℚ
-            ( λ r →
-              iff-Prop
-                ( U r)
-                ( exists-Prop ℚ (λ q → prod-Prop (le-ℚ-Prop q r) (U q))))))
+            ( λ r → (U r) ⇔ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧ (U q))))))
         ( prod-Prop
-          ( Π-Prop ℚ (λ q → neg-Prop (prod-Prop (L q) (U q))))
+          ( Π-Prop ℚ (λ q → neg-Prop ((L q) ∧ (U q))))
           ( Π-Prop ℚ
             ( λ q →
               Π-Prop ℚ
-                ( λ r →
-                  hom-Prop
-                    ( le-ℚ-Prop q r)
-                    ( disjunction-Prop (L q) (U r)))))))
+                ( λ r → (le-ℚ-Prop q r) ⇒ ((L q) ∨ (U r)))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop

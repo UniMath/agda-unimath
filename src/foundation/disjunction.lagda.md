@@ -78,12 +78,12 @@ pr2 (pr2 (disjunction-Decidable-Prop P Q)) =
 ```agda
 inl-disjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-hom-Prop P (disjunction-Prop P Q)
+  (P) implies (P ∨ Q)
 inl-disjunction-Prop P Q = unit-trunc-Prop ∘ inl
 
 inr-disjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-hom-Prop Q (disjunction-Prop P Q)
+  Q implies (P ∨ Q)
 inr-disjunction-Prop P Q = unit-trunc-Prop ∘ inr
 ```
 
@@ -92,18 +92,14 @@ inr-disjunction-Prop P Q = unit-trunc-Prop ∘ inr
 ```agda
 ev-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  type-hom-Prop
-    ( hom-Prop (disjunction-Prop P Q) R)
-    ( conjunction-Prop (hom-Prop P R) (hom-Prop Q R))
+  ((P ∨ Q) ⇒ R) implies ((P ⇒ R) ∧ (Q ⇒ R))
 pr1 (ev-disjunction-Prop P Q R h) = h ∘ (inl-disjunction-Prop P Q)
 pr2 (ev-disjunction-Prop P Q R h) = h ∘ (inr-disjunction-Prop P Q)
 
 elim-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  type-hom-Prop
-    ( conjunction-Prop (hom-Prop P R) (hom-Prop Q R))
-    ( hom-Prop (disjunction-Prop P Q) R)
-elim-disjunction-Prop P Q R (pair f g) =
+  ( (P ⇒ R) ∧ (Q ⇒ R)) implies ((P ∨ Q) ⇒ R)
+elim-disjunction-Prop P Q R (f , g) =
   map-universal-property-trunc-Prop R (ind-coprod (λ t → type-Prop R) f g)
 
 abstract
@@ -112,8 +108,8 @@ abstract
     is-equiv (ev-disjunction-Prop P Q R)
   is-equiv-ev-disjunction-Prop P Q R =
     is-equiv-is-prop
-      ( is-prop-type-Prop (hom-Prop (disjunction-Prop P Q) R))
-      ( is-prop-type-Prop (conjunction-Prop (hom-Prop P R) (hom-Prop Q R)))
+      ( is-prop-type-Prop ((P ∨ Q) ⇒ R))
+      ( is-prop-type-Prop ((P ⇒ R) ∧ (Q ⇒ R)))
       ( elim-disjunction-Prop P Q R)
 ```
 

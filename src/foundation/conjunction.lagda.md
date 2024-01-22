@@ -81,8 +81,7 @@ pr2 (intro-conjunction-Prop P Q p q) = q
 iff-universal-property-conjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
-  ( type-hom-Prop R P × type-hom-Prop R Q) ↔
-  ( type-hom-Prop R (conjunction-Prop P Q))
+  ((R ⇒ P) ∧ (R ⇒ Q)) iff (R ⇒ (P ∧ Q))
 pr1 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = f r
 pr2 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = g r
 pr1 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr1 (h r)
@@ -91,11 +90,10 @@ pr2 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr2 (h r)
 equiv-universal-property-conjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
-  ( type-hom-Prop R P × type-hom-Prop R Q) ≃
-  ( type-hom-Prop R (conjunction-Prop P Q))
+  type-Prop ((R ⇒ P) ∧ (R ⇒ Q)) ≃ type-Prop (R ⇒ (P ∧ Q))
 equiv-universal-property-conjunction-Prop P Q R =
   equiv-iff'
-    ( conjunction-Prop (hom-Prop R P) (hom-Prop R Q))
-    ( hom-Prop R (conjunction-Prop P Q))
+    ( (R ⇒ P) ∧ (R ⇒ Q))
+    ( R ⇒ (P ∧ Q))
     ( iff-universal-property-conjunction-Prop P Q R)
 ```

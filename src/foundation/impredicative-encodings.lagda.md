@@ -11,6 +11,7 @@ open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.homotopies
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -79,9 +80,7 @@ equiv-impredicative-trunc-Prop A =
 impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-conjunction-Prop {l1} {l2} P1 P2 =
-  Π-Prop
-    ( Prop (l1 ⊔ l2))
-    ( λ Q → function-Prop (type-Prop P1 → (type-Prop P2 → type-Prop Q)) Q)
+  Π-Prop (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒ (P2 ⇒ Q)) ⇒ Q)
 
 type-impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -91,21 +90,19 @@ type-impredicative-conjunction-Prop P1 P2 =
 map-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-conjunction-Prop P1 P2 → type-impredicative-conjunction-Prop P1 P2
-map-impredicative-conjunction-Prop P1 P2 (pair p1 p2) Q f =
-  f p1 p2
+map-impredicative-conjunction-Prop P1 P2 (p1 , p2) Q f = f p1 p2
 
 inv-map-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-conjunction-Prop P1 P2 → type-conjunction-Prop P1 P2
-inv-map-impredicative-conjunction-Prop P1 P2 H =
-  H (conjunction-Prop P1 P2) pair
+inv-map-impredicative-conjunction-Prop P1 P2 H = H (P1 ∧ P2) pair
 
 equiv-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-conjunction-Prop P1 P2 ≃ type-impredicative-conjunction-Prop P1 P2
 equiv-impredicative-conjunction-Prop P1 P2 =
   equiv-iff
-    ( conjunction-Prop P1 P2)
+    ( P1 ∧ P2)
     ( impredicative-conjunction-Prop P1 P2)
     ( map-impredicative-conjunction-Prop P1 P2)
     ( inv-map-impredicative-conjunction-Prop P1 P2)
@@ -117,12 +114,7 @@ equiv-impredicative-conjunction-Prop P1 P2 =
 impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-disjunction-Prop {l1} {l2} P1 P2 =
-  Π-Prop
-    ( Prop (l1 ⊔ l2))
-    ( λ Q →
-      hom-Prop
-        ( hom-Prop P1 Q)
-        ( hom-Prop (hom-Prop P2 Q) Q))
+  Π-Prop (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒ Q) ⇒ ((P2 ⇒ Q) ⇒ Q))
 
 type-impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -144,7 +136,7 @@ inv-map-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-disjunction-Prop P1 P2 → type-disjunction-Prop P1 P2
 inv-map-impredicative-disjunction-Prop P1 P2 H =
-  H ( disjunction-Prop P1 P2)
+  H ( P1 ∨ P2)
     ( inl-disjunction-Prop P1 P2)
     ( inr-disjunction-Prop P1 P2)
 
@@ -153,7 +145,7 @@ equiv-impredicative-disjunction-Prop :
   type-disjunction-Prop P1 P2 ≃ type-impredicative-disjunction-Prop P1 P2
 equiv-impredicative-disjunction-Prop P1 P2 =
   equiv-iff
-    ( disjunction-Prop P1 P2)
+    ( P1 ∨ P2)
     ( impredicative-disjunction-Prop P1 P2)
     ( map-impredicative-disjunction-Prop P1 P2)
     ( inv-map-impredicative-disjunction-Prop P1 P2)
@@ -220,8 +212,7 @@ inv-map-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
   type-impredicative-exists-Prop P → exists A P
 inv-map-impredicative-exists-Prop {A = A} P H =
-  H ( exists-Prop A P)
-    ( λ x y → unit-trunc-Prop (pair x y))
+  H (exists-Prop A P) (λ x y → unit-trunc-Prop (x , y))
 
 equiv-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
@@ -256,14 +247,14 @@ inv-map-impredicative-based-id-Prop :
   {l : Level} (A : Set l) (a x : type-Set A) →
   type-impredicative-based-id-Prop A a x → a ＝ x
 inv-map-impredicative-based-id-Prop A a x H =
-  H (λ x → pair (a ＝ x) (is-set-type-Set A a x)) refl
+  H (Id-Prop A a) refl
 
 equiv-impredicative-based-id-Prop :
   {l : Level} (A : Set l) (a x : type-Set A) →
   (a ＝ x) ≃ type-impredicative-based-id-Prop A a x
 equiv-impredicative-based-id-Prop A a x =
   equiv-iff
-    ( pair (a ＝ x) (is-set-type-Set A a x))
+    ( Id-Prop A a x)
     ( impredicative-based-id-Prop A a x)
     ( map-impredicative-based-id-Prop A a x)
     ( inv-map-impredicative-based-id-Prop A a x)
@@ -292,14 +283,14 @@ inv-map-impredicative-id-Prop :
   {l : Level} (A : Set l) (x y : type-Set A) →
   type-impredicative-id-Prop A x y → x ＝ y
 inv-map-impredicative-id-Prop A x y H =
-  H (λ a b → pair (a ＝ b) (is-set-type-Set A a b)) (λ a → refl)
+  H (Id-Prop A) (refl-htpy)
 
 equiv-impredicative-id-Prop :
   {l : Level} (A : Set l) (x y : type-Set A) →
   (x ＝ y) ≃ type-impredicative-id-Prop A x y
 equiv-impredicative-id-Prop A x y =
   equiv-iff
-    ( pair (x ＝ y) (is-set-type-Set A x y))
+    ( Id-Prop A x y)
     ( impredicative-id-Prop A x y)
     ( map-impredicative-id-Prop A x y)
     ( inv-map-impredicative-id-Prop A x y)
