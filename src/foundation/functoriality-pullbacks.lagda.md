@@ -37,7 +37,8 @@ module _
   where
 
   map-standard-pullback :
-    hom-cospan-diagram f' g' f g → standard-pullback f' g' → standard-pullback f g
+    hom-cospan-diagram f' g' f g →
+    standard-pullback f' g' → standard-pullback f g
   pr1 (map-standard-pullback (hA , _) (a' , _)) = hA a'
   pr1 (pr2 (map-standard-pullback (hA , hB , _) (a' , b' , _))) = hB b'
   pr2 (pr2 (map-standard-pullback (hA , hB , hX , HA , HB) (a' , b' , p'))) =
