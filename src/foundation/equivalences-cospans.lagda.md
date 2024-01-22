@@ -54,7 +54,7 @@ module _
   equiv-cospan : cospan l3 A B → cospan l4 A B → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   equiv-cospan c d =
     Σ ( codomain-cospan c ≃ codomain-cospan d)
-      ( λ e → coherence-hom-codomain-cospan c d (map-equiv e))
+      ( λ e → coherence-hom-cospan c d (map-equiv e))
 ```
 
 ### The identity equivalence of cospans

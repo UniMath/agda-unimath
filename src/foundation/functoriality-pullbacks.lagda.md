@@ -37,7 +37,7 @@ module _
   where
 
   map-standard-pullback :
-    hom-cospan f' g' f g → standard-pullback f' g' → standard-pullback f g
+    hom-cospan-diagram f' g' f g → standard-pullback f' g' → standard-pullback f g
   pr1 (map-standard-pullback (hA , _) (a' , _)) = hA a'
   pr1 (pr2 (map-standard-pullback (hA , hB , _) (a' , b' , _))) = hB b'
   pr2 (pr2 (map-standard-pullback (hA , hB , hX , HA , HB) (a' , b' , p'))) =
@@ -47,7 +47,7 @@ module _
     {l4 l4' : Level} {C : UU l4} {C' : UU l4'} →
     (c : cone f g C) (c' : cone f' g' C') →
     is-pullback f g c → is-pullback f' g' c' →
-    hom-cospan f' g' f g → C' → C
+    hom-cospan-diagram f' g' f g → C' → C
   map-is-pullback c c' is-pb-c is-pb-c' h x =
     map-inv-is-equiv is-pb-c (map-standard-pullback h (gap f' g' c' x))
 ```

@@ -61,10 +61,10 @@ module _
 span-diagram-family-of-types :
   {l1 : Level} (l2 l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 span-diagram-family-of-types l2 l3 I =
-  Σ (I → UU l2) (λ A → span-fixed-family-of-types l3 A)
+  Σ (I → UU l2) (λ A → span-family-of-types l3 A)
 
 module _
-  {l1 l2 l3 : Level} {I : UU l1} (s : span-family-of-types l2 l3 I)
+  {l1 l2 l3 : Level} {I : UU l1} (s : span-diagram-family-of-types l2 l3 I)
   where
 
   family-span-diagram-family-of-types : I → UU l2
