@@ -16,7 +16,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a [span](foundation.spans.md) `(S , f , g)` from `A` to `B`. The {{#concept "opposite span" Agda=opposite-span}} of `(S , f , g)` is the span `(S , g , f)` from `B` to `A`. In other words, the opposite of a span
+Consider a [span](foundation.spans.md) `(S , f , g)` from `A` to `B`. The
+{{#concept "opposite span" Agda=opposite-span}} of `(S , f , g)` is the span
+`(S , g , f)` from `B` to `A`. In other words, the opposite of a span
 
 ```text
        f       g
@@ -48,5 +50,3 @@ module _
 ## See also
 
 - [Transpositions of span diagrams](foundation.transposition-span-diagrams.md)
-
-

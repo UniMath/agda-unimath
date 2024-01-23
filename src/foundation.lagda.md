@@ -240,6 +240,7 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
@@ -248,6 +249,7 @@ open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
+open import foundation.permutations-spans-families-of-types public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
@@ -311,6 +313,7 @@ open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.sorial-type-families public
 open import foundation.span-diagrams public
+open import foundation.span-diagrams-families-of-types public
 open import foundation.spans public
 open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public

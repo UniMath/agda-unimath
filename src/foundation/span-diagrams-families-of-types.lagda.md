@@ -16,7 +16,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "span diagram" Disambiguation="family of types"}} on a family of types indexed by a type `I` consists of a type family `A : I → 𝒰`, and a [span](foundation.spans-families-of-types.md) on the type family `A`. More explicitly, a span diagram on a family of types indexed by `I` consists of a type family `A : I → 𝒰`, a {{#concept "spanning type" Disambiguation="span diagram on a family of types"}} `S`, and a family of maps `f : (i : I) → S → A i`.
+A {{#concept "span diagram" Disambiguation="family of types"}} on a family of
+types indexed by a type `I` consists of a type family `A : I → 𝒰`, and a
+[span](foundation.spans-families-of-types.md) on the type family `A`. More
+explicitly, a span diagram on a family of types indexed by `I` consists of a
+type family `A : I → 𝒰`, a
+{{#concept "spanning type" Disambiguation="span diagram on a family of types"}}
+`S`, and a family of maps `f : (i : I) → S → A i`.
 
 ## Definitions
 
@@ -51,4 +57,3 @@ module _
     map-span-family-of-types
       ( span-family-of-types-span-diagram-family-of-types)
 ```
-

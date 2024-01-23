@@ -17,10 +17,15 @@ open import foundation-core.function-types
 
 </details>
 
-
 ## Idea
 
-Permutations of spans of families of types are a generalization of the [opposite](foundation.opposite-spans.md) of a [binary span](foundation.spans.md). Consider a [span](foundation.spans-families-of-types.md) `(S , f)` on a type family `A : I → 𝒰` and an [equivalence](foundation-core.equivalences.md) `e : I ≃ I`. Then the {{#concept "permutation" Disambiguation="spans of families of types"}} is the span `(S , f ∘ e)` on the type family `A ∘ e`.
+Permutations of spans of families of types are a generalization of the
+[opposite](foundation.opposite-spans.md) of a
+[binary span](foundation.spans.md). Consider a
+[span](foundation.spans-families-of-types.md) `(S , f)` on a type family
+`A : I → 𝒰` and an [equivalence](foundation-core.equivalences.md) `e : I ≃ I`.
+Then the {{#concept "permutation" Disambiguation="spans of families of types"}}
+is the span `(S , f ∘ e)` on the type family `A ∘ e`.
 
 ## Definitions
 
