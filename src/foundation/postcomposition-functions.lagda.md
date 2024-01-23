@@ -58,7 +58,13 @@ compute-htpy-postcomp-refl-htpy :
 compute-htpy-postcomp-refl-htpy A f h = eq-htpy-refl-htpy (f ∘ h)
 ```
 
-### Computations with the fibers of `postcomp`
+### Computations of the fibers of `postcomp`
+
+We give three computations of the fibers of a postcomposition function:
+
+1. `fiber (postcomp A f) h ≃ ((x : A) → fiber f (h x))`
+2. `fiber (postcomp A f) h ≃ Σ (A → X) (coherence-triangle-maps h f)`, and
+3. `fiber (postcomp A f) (f ∘ h) ≃ Σ (A → X) (λ g → coherence-square-maps g h f f)`
 
 ```agda
 module _
