@@ -10,6 +10,7 @@ module real-numbers.dedekind-real-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -69,11 +70,10 @@ module _
           ( Π-Prop ℚ
             ( λ r → (U r) ⇔ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧ (U q))))))
         ( prod-Prop
-          ( Π-Prop ℚ (λ q → neg-Prop ((L q) ∧ (U q))))
           ( Π-Prop ℚ
-            ( λ q →
-              Π-Prop ℚ
-                ( λ r → (le-ℚ-Prop q r) ⇒ ((L q) ∨ (U r)))))))
+            ( λ q → neg-Prop ((L q) ∧ (U q))))
+          ( Π-Prop ℚ
+            ( λ q → Π-Prop ℚ (λ r → (le-ℚ-Prop q r) ⇒ ((L q) ∨ (U r)))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
