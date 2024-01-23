@@ -17,7 +17,7 @@ open import foundation.universe-levels
 
 Consider a type `X`. An
 {{#concept "extension" Disambiguation="type" Agda=extension-type}} of `X` is an
-object of the coslice category of `X`, i.e., it consists of a type `Y` and a map
+object in the [coslice](foundation.coslice.md) under `X`, i.e., it consists of a type `Y` and a map
 `f : X → Y`.
 
 In the above definition of extensions of types our aim is to capture the most
