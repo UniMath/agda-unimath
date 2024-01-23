@@ -37,8 +37,8 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Consider two maps `f : A → B` and `g : B → A`. For `(g ◦ f ) ^ n (a₀) ＝ a`,
-consider also the following chain
+Consider two maps `f : A → B` and `g : B → A`. For `(g ◦ f)ⁿ(a₀) ＝ a`, consider
+also the following chain
 
 ```text
       f          g            f               g       g
@@ -142,7 +142,7 @@ module _
       (is-section-inverse-of-perfect-image (g b) ρ)
 ```
 
-If `g(f(a))` is a perzfect image for `g`, so is `a`.
+If `g(f(a))` is a perfect image for `g`, so is `a`.
 
 ```agda
 module _
@@ -193,8 +193,8 @@ module _
     Σ A (λ a₀ → (Σ ℕ (λ n → ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fiber g a₀))))
 ```
 
-If we assume the law of excluded middle and `g` is embedding, we can prove that
-if `is-not-perfect-image a` does not hold, we have `is-perfect-image a`.
+If we assume the law of excluded middle and `g` is an embedding, we can prove
+that if `is-not-perfect-image a` does not hold, we have `is-perfect-image a`.
 
 ```agda
 module _
@@ -236,16 +236,16 @@ module _
       ii :
         is-not-perfect-image (g b) →
         Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
-      ii (pair x₀ (pair zero-ℕ u)) =
-        ex-falso (pr2 u (pair b (inv (pr1 u))))
-      ii (pair x₀ (pair (succ-ℕ n) u)) =
-        pair a w
+      ii (x₀ , 0 , u) =
+        ex-falso (pr2 u (b , inv (pr1 u)))
+      ii (x₀ , succ-ℕ n , u) =
+        a , w
         where
-        q : f ((iterate n (g ∘ f)) x₀) ＝ b
+        q : f (iterate n (g ∘ f) x₀) ＝ b
         q = is-injective-is-emb is-emb-g (pr1 u)
 
         a : fiber f b
-        a = pair ((iterate n (g ∘ f)) x₀) q
+        a = iterate n (g ∘ f) x₀ , q
 
         w : ¬ (is-perfect-image f g ((iterate n (g ∘ f)) x₀))
         w = λ s → pr2 u (s x₀ n refl)
@@ -260,5 +260,5 @@ module _
           (λ s → is-prop-neg {A = is-perfect-image f g (pr1 s)})
 
       v : Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
-      v = double-negation-elim-is-decidable (lem (pair _ iv)) iii
+      v = double-negation-elim-is-decidable (lem (_ , iv)) iii
 ```
