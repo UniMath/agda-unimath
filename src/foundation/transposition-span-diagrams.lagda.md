@@ -34,6 +34,11 @@ is the span diagram
   B <----- S -----> A.
 ```
 
+In other words, the transposition of a span diagram `(A , B , s)` is the span
+diagram `(B , A , opposite-span s)` where `opposite-span s` is the
+[opposite](foundation.opposite-spans.md) of the [span](foundation.spans.md) `s`
+from `A` to `B`.
+
 ## Definitions
 
 ### Transposition of span diagrams

@@ -14,7 +14,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.extensions-spans
+open import foundation-core.operations-spans
 ```
 
 </details>

@@ -146,8 +146,6 @@ open import foundation.equivalences-spans-families-of-types public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
-open import foundation.extensions-span-diagrams public
-open import foundation.extensions-spans public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
@@ -240,6 +238,8 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.operations-span-diagrams public
+open import foundation.operations-spans public
 open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
