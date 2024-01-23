@@ -16,8 +16,8 @@ open import foundation.universe-levels
 ## Idea
 
 Consider a type `X`. A {{#concept "lift" Disambiguation="type" Agda=lift-type}}
-of `X` is an object in the [slice](foundation.slice.md) over `X`, i.e., it consists of a type
-`Y` and a map `f : Y → X`.
+of `X` is an object in the [slice](foundation.slice.md) over `X`, i.e., it
+consists of a type `Y` and a map `f : Y → X`.
 
 In the above definition of lifts of types our aim is to capture the most general
 concept of what it means to be an lift of a type. Similarly, in any
