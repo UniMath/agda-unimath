@@ -19,8 +19,8 @@ open import foundation-core.homotopies
 
 ## Idea
 
-A {{#concept "morphism of cospan diagrams" Agda=hom-cospan-diagram}} is a commuting
-diagram of the form
+A {{#concept "morphism of cospan diagrams" Agda=hom-cospan-diagram}} is a
+commuting diagram of the form
 
 ```text
   A -----> X <----- B
