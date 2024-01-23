@@ -105,7 +105,7 @@ module _
     equiv-htpy-precomp-htpy-Π f g e
 ```
 
-### Computations with the fibers of `precomp`
+### Computations of the fibers of `precomp`
 
 ```agda
 module _
