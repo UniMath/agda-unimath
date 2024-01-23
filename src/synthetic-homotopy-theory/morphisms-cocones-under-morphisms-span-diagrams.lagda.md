@@ -149,7 +149,9 @@ module _
 
 ### For any morphism of cocones under a morphism of span diagrams, there is a naturality square involving `cocone-map`
 
-**Lemma.** Consider a morphism of cocones `(h , H)` under a morphism `f : 𝒮 → 𝒯` of span diagrams, where the map between the codomains of the cocones is `h : X → Y`. Then the square
+**Lemma.** Consider a morphism of cocones `(h , H)` under a morphism `f : 𝒮 → 𝒯`
+of span diagrams, where the map between the codomains of the cocones is
+`h : X → Y`. Then the square
 
 ```text
                                 - ∘ h
@@ -161,13 +163,16 @@ module _
                     comp-cocone-hom-span-diagram 𝒮 𝒯 f
 ```
 
-**Proof.** Consider a map `g : Y → Z`. Then we have to construct a homotopy of cocones under span diagrams
+**Proof.** Consider a map `g : Y → Z`. Then we have to construct a homotopy of
+cocones under span diagrams
 
 ```text
   f ∘ cocone-map 𝒯 d g ~ cocone-map 𝒮 c (g ∘ h)
 ```
 
-from the composite of the cocone `cocoen-map 𝒯 d g` and the morphism of span diagrams `f` to the cocone `cocone-map 𝒮 c (g ∘ h)`. The cocone on the left hand side consists of
+from the composite of the cocone `cocoen-map 𝒯 d g` and the morphism of span
+diagrams `f` to the cocone `cocone-map 𝒮 c (g ∘ h)`. The cocone on the left hand
+side consists of
 
 ```text
   S ------------> B
@@ -180,7 +185,6 @@ from the composite of the cocone `cocoen-map 𝒯 d g` and the morphism of span 
 
 The cocone on the right hand side consists of
 
-
 ```text
   S ------------> B
   |               |
@@ -190,7 +194,7 @@ The cocone on the right hand side consists of
      g ∘ h ∘ i
 ```
 
-Thus we see that we have to construct a triple consisting of 
+Thus we see that we have to construct a triple consisting of
 
 ```text
   α : g ∘ i' ∘ f₀ ~ g ∘ h ∘ i
@@ -211,8 +215,8 @@ and a homotopy `γ` witnessing that the square of homotopies
 
 commutes.
 
-
-The homotopy `α` is defined to be `g ·l H₀`, where `H₀` is the first component of the triple `H`.
+The homotopy `α` is defined to be `g ·l H₀`, where `H₀` is the first component
+of the triple `H`.
 
 ```agda
 module _
