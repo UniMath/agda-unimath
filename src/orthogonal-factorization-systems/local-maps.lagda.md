@@ -93,7 +93,7 @@ module _
         ( G))
 ```
 
-the converse remains to be formalized.
+The converse remains to be formalized.
 
 ## See also
 
