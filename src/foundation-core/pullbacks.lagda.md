@@ -116,9 +116,9 @@ module _
 
 ### The gap map into the standard pullback
 
-The {{#concept "gap map" Disambiguation="cone over a cospan" Agda=gap}} of a
-[commuting square](foundation-core.commuting-squares-of-maps.md) is the map from
-the domain of the cone into the standard pullback.
+The {{#concept "standard gap map" Disambiguation="cone over a cospan" Agda=gap}}
+of a [commuting square](foundation-core.commuting-squares-of-maps.md) is the map
+from the domain of the cone into the standard pullback.
 
 ```agda
 module _
