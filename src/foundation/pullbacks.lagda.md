@@ -99,7 +99,35 @@ module _
   pr2 (is-pullback-Prop c) = is-prop-is-pullback c
 ```
 
-### Pullbacks are closed under postcomposition
+### Pullbacks are closed under exponentiation
+
+Given a pullback square
+
+```text
+          f'
+    C ---------> B
+    | ⌟          |
+  g'|            | g
+    |            |
+    v            v
+    A ---------> X
+          f
+```
+
+then the exponentiated square given by postcomposition
+
+```text
+                 (f' ∘ -)
+        (S → C) ---------> (S → B)
+           |                  |
+  (g' ∘ -) |                  | (g ∘ -)
+           |                  |
+           v                  v
+        (S → A) ---------> (S → X)
+                 (f ∘ -)
+```
+
+is a pullback square for any type `S`.
 
 ```agda
 postcomp-cone :
