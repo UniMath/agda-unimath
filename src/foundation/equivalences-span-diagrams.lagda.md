@@ -12,10 +12,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
-open import foundation.operations-spans
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.morphisms-span-diagrams
 open import foundation.morphisms-spans
+open import foundation.operations-spans
 open import foundation.propositions
 open import foundation.span-diagrams
 open import foundation.structure-identity-principle

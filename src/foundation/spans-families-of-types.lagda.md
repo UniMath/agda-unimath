@@ -59,4 +59,4 @@ module _
 
 - [(Binary) spans](foundation.spans.md)
 - [Span diagrams on families of types](foundation.span-diagrams-families-of-types.md)
-- [Permutations of spans of on families of types](foundation.permuations-spans-families-of-types.md)
+- [Permutations of spans of on families of types](foundation.permutations-spans-families-of-types.md)

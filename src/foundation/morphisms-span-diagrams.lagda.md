@@ -8,9 +8,9 @@ module foundation.morphisms-span-diagrams where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.operations-spans
 open import foundation.morphisms-arrows
 open import foundation.morphisms-spans
+open import foundation.operations-spans
 open import foundation.span-diagrams
 open import foundation.universe-levels
 
