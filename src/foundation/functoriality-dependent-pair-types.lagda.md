@@ -48,11 +48,11 @@ over `H`, expressed as
 
 ```text
         g a
-    C a ----> D (f a)
-      \     /
-  g' a \   / tr D (H a)
-        V V
-       D (f' a)         ,
+   C a -----> D (f a)
+      \      /
+  g' a \    / tr D (H a)
+        V  V
+      D (f' a)         ,
 ```
 
 we get a homotopy `htpy-map-Σ H K : map-Σ f g ~ map-Σ f' g'`.
@@ -61,7 +61,7 @@ This assignment itself preserves homotopies: given `H` and `K` as above,
 `H' : f ~ f'` with `K' a : g a ~ g' a` over `H'`, we would like to express
 coherences between the pairs `H, H'` and `K, K'` which would ensure
 `htpy-map-Σ H K ~ htpy-map-Σ H' K'`. Because `H` and `H'` have the same type, we
-may require a homotopy `H ~ H'`, but `K` and `K'` are families of dependent
+may require a homotopy `α : H ~ H'`, but `K` and `K'` are families of dependent
 homotopies over different homotopies, so their coherence is provided as a family
 of
 [commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md)
