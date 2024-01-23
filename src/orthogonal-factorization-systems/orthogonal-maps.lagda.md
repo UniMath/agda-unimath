@@ -569,30 +569,30 @@ If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ (map-Π g)`.
 **Proof:** We need to show that the square
 
 ```text
-                           (- ∘ f)
-           (B → Πᵢ Xᵢ) ---------------> (A → Πᵢ Xᵢ)
-                |                           |
-                |                           |
-  (map-Π g ∘ -) |                           | (map-Π g ∘ -)
-                |                           |
-                v                           v
-           (B → Πᵢ Yᵢ) ---------------> (A → Πᵢ Yᵢ)
-                           (- ∘ f)
+                          - ∘ f
+         (B → Πᵢ Xᵢ) ---------------> (A → Πᵢ Xᵢ)
+              |                           |
+              |                           |
+  map-Π g ∘ - |                           | map-Π g ∘ -
+              |                           |
+              v                           v
+         (B → Πᵢ Yᵢ) ---------------> (A → Πᵢ Yᵢ)
+                          - ∘ f
 ```
 
 is a pullback. By swapping the arguments at each vertex, this square is
 equivalent to
 
 ```text
-                          (map-Π (- ∘ f))
-              (Πᵢ B → Xᵢ) ---------------> (Πᵢ A → Xᵢ)
-                   |                           |
-                   |                           |
-  (map-Π (gᵢ ∘ -)) |                           | (map-Π (gᵢ ∘ -))
-                   |                           |
-                   v                           v
-              (Πᵢ B → Yᵢ) ---------------> (Πᵢ A → Yᵢ)
-                          (map-Π (- ∘ f))
+                          map-Π (- ∘ f)
+            (Πᵢ B → Xᵢ) ---------------> (Πᵢ A → Xᵢ)
+                  |                           |
+                  |                           |
+   map-Π (gᵢ ∘ -) |                           | map-Π (gᵢ ∘ -)
+                  |                           |
+                  v                           v
+            (Πᵢ B → Yᵢ) ---------------> (Πᵢ A → Yᵢ)
+                          map-Π (- ∘ f)
 ```
 
 which is a pullback by assumption since pullbacks are preserved by dependent
@@ -648,7 +648,7 @@ module _
         ( λ i → is-orthogonal-pullback-condition-is-orthogonal f (g i) (G i)))
 ```
 
-### Right orthogonality is preserved by postcomposition
+### Any map that is left orthogonal to a map `g` is also left orthogonal to postcomposing by `g`
 
 If `f ⊥ g` then `f ⊥ postcomp S g` for every type `S`.
 
@@ -740,15 +740,15 @@ If `fᵢ ⊥ g` for every `i`, then `(tot f) ⊥ g`.
 **Proof:** We need to show that the square
 
 ```text
-                   (- ∘ (tot f))
-    ((Σ I B) → X) ---------------> ((Σ I A) → X)
-          |                               |
-          |                               |
-  (g ∘ -) |                               | (g ∘ -)
-          |                               |
-          v                               v
-    ((Σ I B) → Y) ---------------> ((Σ I A) → Y)
-                   (- ∘ (tot f))
+                  - ∘ (tot f)
+  ((Σ I B) → X) ---------------> ((Σ I A) → X)
+        |                               |
+        |                               |
+  g ∘ - |                               | g ∘ -
+        |                               |
+        v                               v
+  ((Σ I B) → Y) ---------------> ((Σ I A) → Y)
+                  - ∘ (tot f)
 ```
 
 is a pullback. However, by the universal property of dependent pair types this
@@ -816,8 +816,7 @@ module _
         ( F))
 
   is-orthogonal-left-Σ :
-    ((i : I) → is-orthogonal (f i) g) →
-    is-orthogonal (tot f) g
+    ((i : I) → is-orthogonal (f i) g) → is-orthogonal (tot f) g
   is-orthogonal-left-Σ F =
     is-orthogonal-is-orthogonal-pullback-condition (tot f) g
       ( is-orthogonal-pullback-condition-left-Σ
@@ -831,15 +830,15 @@ If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
 **Proof:** We need to show that the square
 
 ```text
-                    (- ∘ (f + f'))
-    ((B + B') → X) ---------------> ((A + A') → X)
-          |                               |
-          |                               |
-  (g ∘ -) |                               | (g ∘ -)
-          |                               |
-          v                               v
-    ((B + B') → Y) ---------------> ((A + A') → Y)
-                    (- ∘ (f + f'))
+                     - ∘ (f + f')
+  ((B + B') → X) ---------------> ((A + A') → X)
+        |                               |
+        |                               |
+  g ∘ - |                               | g ∘ -
+        |                               |
+        v                               v
+  ((B + B') → Y) ---------------> ((A + A') → Y)
+                   - ∘ (f + f')
 ```
 
 is a pullback. However, by the universal property of coproducts this square is
@@ -861,7 +860,8 @@ which is a pullback by assumption and the fact that pullbacks are preserved
 under products.
 
 **Note:** This result can also be obtained as a special case of the previous one
-by taking the indexing type to be the two-element type.
+by taking the indexing type to be the
+[two-element type](foundation.booleans.md).
 
 ```agda
 module _

@@ -117,14 +117,14 @@ Given a pullback square
 then the exponentiated square given by postcomposition
 
 ```text
-                 (f' ∘ -)
-        (S → C) ---------> (S → B)
-           |                  |
-  (g' ∘ -) |                  | (g ∘ -)
-           |                  |
-           v                  v
-        (S → A) ---------> (S → X)
-                 (f ∘ -)
+                f' ∘ -
+      (S → C) ---------> (S → B)
+         |                  |
+  g' ∘ - |                  | g ∘ -
+         |                  |
+         v                  v
+      (S → A) ---------> (S → X)
+                f ∘ -
 ```
 
 is a pullback square for any type `S`.
