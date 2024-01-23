@@ -79,8 +79,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   where
 
-  htpy-eq-cospan : (c d : cospan l3 A B) → c ＝ d → equiv-cospan c d
-  htpy-eq-cospan c .c refl = id-equiv-cospan c
+  equiv-eq-cospan : (c d : cospan l3 A B) → c ＝ d → equiv-cospan c d
+  equiv-eq-cospan c .c refl = id-equiv-cospan c
 
   is-torsorial-equiv-cospan :
     (c : cospan l3 A B) → is-torsorial (equiv-cospan c)
@@ -93,15 +93,15 @@ module _
         ( left-map-cospan c , refl-htpy)
         ( is-torsorial-htpy' (right-map-cospan c)))
 
-  is-equiv-htpy-eq-cospan :
-    (c d : cospan l3 A B) → is-equiv (htpy-eq-cospan c d)
-  is-equiv-htpy-eq-cospan c =
-    fundamental-theorem-id (is-torsorial-equiv-cospan c) (htpy-eq-cospan c)
+  is-equiv-equiv-eq-cospan :
+    (c d : cospan l3 A B) → is-equiv (equiv-eq-cospan c d)
+  is-equiv-equiv-eq-cospan c =
+    fundamental-theorem-id (is-torsorial-equiv-cospan c) (equiv-eq-cospan c)
 
   extensionality-cospan :
     (c d : cospan l3 A B) → (c ＝ d) ≃ (equiv-cospan c d)
-  pr1 (extensionality-cospan c d) = htpy-eq-cospan c d
-  pr2 (extensionality-cospan c d) = is-equiv-htpy-eq-cospan c d
+  pr1 (extensionality-cospan c d) = equiv-eq-cospan c d
+  pr2 (extensionality-cospan c d) = is-equiv-equiv-eq-cospan c d
 
   eq-equiv-cospan : (c d : cospan l3 A B) → equiv-cospan c d → c ＝ d
   eq-equiv-cospan c d = map-inv-equiv (extensionality-cospan c d)

@@ -55,57 +55,8 @@ module _
   map-span-family-of-types = pr2 s
 ```
 
-### Span diagrams of families of types
-
-```agda
-span-diagram-family-of-types :
-  {l1 : Level} (l2 l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-span-diagram-family-of-types l2 l3 I =
-  Σ (I → UU l2) (λ A → span-family-of-types l3 A)
-
-module _
-  {l1 l2 l3 : Level} {I : UU l1} (s : span-diagram-family-of-types l2 l3 I)
-  where
-
-  family-span-diagram-family-of-types : I → UU l2
-  family-span-diagram-family-of-types = pr1 s
-
-  span-family-of-types-span-diagram-family-of-types :
-    span-family-of-types l3 family-span-diagram-family-of-types
-  span-family-of-types-span-diagram-family-of-types = pr2 s
-
-  spanning-type-span-diagram-family-of-types : UU l3
-  spanning-type-span-diagram-family-of-types =
-    spanning-type-span-family-of-types
-      ( span-family-of-types-span-diagram-family-of-types)
-
-  map-span-diagram-family-of-types :
-    (i : I) → spanning-type-span-diagram-family-of-types →
-    family-span-diagram-family-of-types i
-  map-span-diagram-family-of-types =
-    map-span-family-of-types
-      ( span-family-of-types-span-diagram-family-of-types)
-```
-
-### Permutations of spans of families of types
-
-Permutations of spans of families of types are a generalization of the opposite
-of a binary span.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
-  where
-
-  permutation-span-family-of-types :
-    (e : I ≃ I) → span-family-of-types l3 A →
-    span-family-of-types l3 (A ∘ map-equiv e)
-  pr1 (permutation-span-family-of-types e s) =
-    spanning-type-span-family-of-types s
-  pr2 (permutation-span-family-of-types e s) i =
-    map-span-family-of-types s (map-equiv e i)
-```
-
 ## See also
 
 - [(Binary) spans](foundation.spans.md)
+- [Span diagrams on families of types](foundation.span-diagrams-families-of-types.md)
+- [Permutations of spans of on families of types](foundation.permuations-spans-families-of-types.md)

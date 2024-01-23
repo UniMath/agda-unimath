@@ -78,19 +78,6 @@ module _
   pr2 (pr2 id-span) = id
 ```
 
-### The opposite of a span
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  opposite-span : span l3 A B → span l3 B A
-  pr1 (opposite-span s) = spanning-type-span s
-  pr1 (pr2 (opposite-span s)) = right-map-span s
-  pr2 (pr2 (opposite-span s)) = left-map-span s
-```
-
 ## See also
 
 - [Binary type duality](foundation.binary-type-duality.md)

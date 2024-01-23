@@ -8,6 +8,7 @@ module foundation.transposition-span-diagrams where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.opposite-spans
 open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
