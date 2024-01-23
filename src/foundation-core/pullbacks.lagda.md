@@ -116,9 +116,9 @@ module _
 
 ### The gap map into the standard pullback
 
-The {{#concept "gap map" Disambiguation="standard pullback of types" Agda=gap}}
-of a [commuting square](foundation-core.commuting-squares-of-maps.md) is the map
-from the domain of the cone into the standard pullback.
+The {{#concept "gap map" Disambiguation="cone over a cospan" Agda=gap}} of a
+[commuting square](foundation-core.commuting-squares-of-maps.md) is the map from
+the domain of the cone into the standard pullback.
 
 ```agda
 module _
@@ -671,16 +671,17 @@ Given a map `f : A → B` with a family of maps over it
 `g : (x : A) → P x → Q (f x)`, then the square
 
 ```text
-         Σg
-  Σ A P ----> Σ B Q
-    |           |
-    |           |
-    v           v
-    A --------> B
-          f
+         map-Σ f g
+  Σ A P ----------> Σ B Q
+    |                |
+    |                |
+    v                v
+    A -------------> B
+             f
 ```
 
-is a pullback if and only if `g` is a fiberwise equivalence.
+is a pullback if and only if `g` is a
+[fiberwise equivalence](foundation-core.families-of-equivalences.md).
 
 ```agda
 module _
