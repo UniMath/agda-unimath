@@ -169,3 +169,5 @@ module _
 ## Properties
 
 ### For any equivalence of cocones under an equivalence of span diagrams, there is a naturality square involving `cocone-map`
+
+This remains to be formalized.

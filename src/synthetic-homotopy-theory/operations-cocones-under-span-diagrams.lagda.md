@@ -134,74 +134,6 @@ module _
     is-equiv-transposition-cocone-span-diagram
 ```
 
-### Postcomposing cocones under span diagrams with maps
-
-Consider a span diagram `A <-f- S -g-> B`. equipped with a cocone
-`c := (i , j , H)` as indicated in the diagram
-
-```text
-        g
-    S -----> B
-    |        |
-  f |   H    | j
-    V        V
-    A -----> X.
-        i
-```
-
-Then any map `h : X → Y` induces a cocone
-
-```text
-         g
-    S -------> B
-    |          |
-  f |  h · H   | h ∘ j
-    V          V
-    A -------> Y.
-       h ∘ i
-```
-
-This way of extending cocones by maps is used to express the
-[universal property of pushouts](synthetic-homotopy-theory.universal-property-pushouts.md).
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4} {Y : UU l5}
-  where
-
-  cocone-map-span-diagram :
-    cocone-span-diagram 𝒮 X → (X → Y) → cocone-span-diagram 𝒮 Y
-  pr1 (cocone-map-span-diagram c h) =
-    h ∘ left-map-cocone-span-diagram 𝒮 c
-  pr1 (pr2 (cocone-map-span-diagram c h)) =
-    h ∘ right-map-cocone-span-diagram 𝒮 c
-  pr2 (pr2 (cocone-map-span-diagram c h)) =
-    h ·l coherence-square-cocone-span-diagram 𝒮 c
-
-module _
-  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
-  where
-
-  compute-id-cocone-map-span-diagram :
-    (c : cocone-span-diagram 𝒮 X) → cocone-map-span-diagram 𝒮 c id ＝ c
-  compute-id-cocone-map-span-diagram c =
-    eq-pair-Σ refl
-      ( eq-pair-Σ refl
-        ( eq-htpy (ap-id ∘ coherence-square-cocone-span-diagram 𝒮 c)))
-
-module _
-  {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
-  {X : UU l4} {Y : UU l5} {Z : UU l6}
-  where
-
-  compute-comp-cocone-map-span-diagram :
-    (c : cocone-span-diagram 𝒮 X) (h : X → Y) (k : Y → Z) →
-    cocone-map-span-diagram 𝒮 c (k ∘ h) ＝
-    cocone-map-span-diagram 𝒮 (cocone-map-span-diagram 𝒮 c h) k
-  compute-comp-cocone-map-span-diagram (i , j , H) h k =
-    eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (ap-comp k h ∘ H)))
-```
-
 ### Horizontal composition of cocones under span diagrams
 
 Consider a span diagram `s := A <-f- S -g-> B` and a moprhism `h : B → C`. Then
@@ -213,12 +145,19 @@ span diagram `𝒮` **on the left** with a cocone `d` under the span diagram
         g       h
     S ----> B ----> C
     |       |       |
-  f |       |       |
+  f |       | j     | j'
     v       v       v
     A ----> X ----> Y
+        i       i'
 ```
 
-to obtain a cocone under the span diagram `A <-f- S -h∘g-> C`.
+to obtain a cocone `(i'' , j'' , H'')` under the span diagram `A <-f- S -h∘g-> C`. The components of this cocone are given by
+
+```text
+  i'' := i' ∘ i
+  j'' := j'
+  H'' := (i ·l H) ∙h (H' ·r g).
+```
 
 ```agda
 module _
@@ -295,7 +234,13 @@ some map `f : S' → A'`, as indicated in the diagram
           h₁       i
 ```
 
-Then we obtain a new cocone on the outer span diagram `A' <- S' -> B`.
+Then we obtain a new cocone `(i' , j' , H')` on the outer span diagram `A' <- S' -> B`. The components of this new cocone are:
+
+```text
+  i' := i ∘ h₁
+  j' := j
+  H' := (i ·l h) ∙h (H ·r h₀).
+```
 
 ```agda
 module _
@@ -321,7 +266,7 @@ module _
       ( hom-equiv-arrow f' (left-map-span-diagram 𝒮) e)
 ```
 
-Consider a span diagram `s := A <-f- S -g-> B`, a cocone `(i , j , H)` on `𝒮`,
+Consider a span diagram `𝒮 := A <-f- S -g-> B`, a cocone `(i , j , H)` on `𝒮`,
 and a moprhism of arrows `h : hom-arrow j j'` for some map `j' : B' → X'`, as
 indicated in the diagram
 
@@ -339,7 +284,7 @@ Then we obtain a new cocone on the outer span diagram `A <- S -> B'`.
 
 ### Vertical composition of cocones under span diagrams
 
-Consider a span diagram `s := A <-f- S -g-> B` and a map `h : A → C`. Then we
+Consider a span diagram `𝒮 := A <-f- S -g-> B` and a map `h : A → C`. Then we
 can **compose** a cocone `c := (i , j , H)` under `𝒮` **on the right** with a
 cocone `d` under the span diagram `C <-h- A -i-> X` as indicated in the diagram
 
@@ -347,16 +292,23 @@ cocone `d` under the span diagram `C <-h- A -i-> X` as indicated in the diagram
         g
     S -----> B
     |        |
-  f |        |
-    v        v
+  f |        | j
+    v   i    v
     A -----> X
     |        |
-  h |        |
+  h |        | j'
     v        v
     C -----> Y
+        i'
 ```
 
-to obtain a cocone under the span diagram `C <-h∘f- S -g-> B`.
+to obtain a cocone `(i'' , j'' , H'')` under the span diagram `C <-h∘f- S -g-> B`. The components of this new cocone are given by
+
+```text
+  i'' := i'
+  j'' := j' ∘ j
+  H'' := (H' ·r f) ∙h (j' ·l H).
+```
 
 ```agda
 module _
@@ -426,16 +378,23 @@ can **compose** a morphism of arrows `h : hom-arrow g' g` with a cocone
          g'
      S' ----> B'
      |        |
-  h₀ |        | h₁
+  h₀ |   h    | h₁
      v   g    v
      S -----> B
      |        |
-   f |        |
+   f |        | j
      v        v
      A -----> X
+         i
 ```
 
-to obtain a cocone under the span diagram `A <- S' -> B'`.
+to obtain a cocone `(i' , j' , H')` under the span diagram `A <- S' -> B'`. The components of this new cocone are given by
+
+```text
+  i' := i
+  j' := j ∘ h₁
+  H' := (H ·r h₀) ∙h (j ·l h).
+```
 
 ```agda
 module _
@@ -469,7 +428,19 @@ module _
 
 ### Composition of cocones and morphisms of span diagrams
 
-Given a commutative diagram of the form
+Consider a morphism `h := (h₀ , h₁ , h₂ , h₃ , h₄) : 𝒮 → 𝒯` of span diagrams
+
+```text
+          f'        g'
+     A' <----- S' -----> B'
+     |         |         |
+  h₀ |      h₂ |         | h₁
+     V         V         V
+     A <------ S ------> B
+          f         g
+```
+
+and a cocone `c := (i , j , H)` under the span `𝒮 := A <- S -> B`, as indicated in the diagram
 
 ```text
           g'
@@ -481,22 +452,32 @@ Given a commutative diagram of the form
       \   |         |
      i \  | f       |
         v v         v
-          A ------> X
+          A ------> X.
 ```
 
-we can compose both vertically and horizontally to get the following cocone:
+Then we obtain a cocone `c ∘ h` under the span `𝒮' := A' <- S' -> B'`. This cocone is defined by first composing `c` horizontally with the morphism of arrows `f' ⇒ f`, and then composing vertically with the morphism of arrows `id ⇒ ?`, as indicated in the following diagram
 
 ```text
-   S' ---> B'
-   |       |
-   |       |
-   v       v
-   A' ---> X
+               g'
+     S' --------------> B'
+     |                  |
+     |         h₄       | h₁
+     V    h₂       g    V
+     S' -----> S -----> B
+     |         |        |
+  f' |   h₃  f |   H    | j
+     V         V        V
+     A' -----> A -----> X
+          h₀       i
 ```
 
-Notice that the triple `(i,j,k)` is really a morphism of span diagrams. So the
-resulting cocone arises as a composition of the original cocone with this
-morphism of span diagrams.
+The components of the resulting cocone `(i' , j' , H')` are as follows:
+
+```text
+  i' := i ∘ h₀
+  j' := j ∘ h₁
+  H' := ((i ·l h₃) ∙h (H ·r h₂)) ∙h (j ·l h₄)
+```
 
 ```agda
 module _

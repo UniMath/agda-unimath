@@ -20,6 +20,7 @@ open import foundation.span-diagrams
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
+open import synthetic-homotopy-theory.action-on-cocones-under-span-diagrams-functions
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 ```
@@ -163,24 +164,26 @@ of span diagrams, where the map between the codomains of the cocones is
                     comp-cocone-hom-span-diagram 𝒮 𝒯 f
 ```
 
+commutes.
+
 **Proof.** Consider a map `g : Y → Z`. Then we have to construct a homotopy of
 cocones under span diagrams
 
 ```text
-  f ∘ cocone-map 𝒯 d g ~ cocone-map 𝒮 c (g ∘ h)
+  cocone-map 𝒯 d g ∘ f ~ cocone-map 𝒮 c (g ∘ h)
 ```
 
-from the composite of the cocone `cocoen-map 𝒯 d g` and the morphism of span
+from the composite of the cocone `cocone-map 𝒯 d g` and the morphism of span
 diagrams `f` to the cocone `cocone-map 𝒮 c (g ∘ h)`. The cocone on the left hand
 side consists of
 
 ```text
-  S ------------> B
-  |               |
-  |               | g ∘ j' ∘ f₁
-  V               V
-  A ------------> Y
-     g ∘ i' ∘ f₀
+  S ----------------------------------------> B
+  |                                           |
+  |   ((i ·l h₃) ∙h (H ·r h₂)) ∙h (j ·l h₄)   | g ∘ j' ∘ f₁
+  V                                           V
+  A ----------------------------------------> Y
+                   g ∘ i' ∘ f₀
 ```
 
 The cocone on the right hand side consists of
