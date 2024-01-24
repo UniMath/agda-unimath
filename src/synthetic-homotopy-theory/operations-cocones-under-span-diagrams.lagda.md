@@ -151,7 +151,8 @@ span diagram `𝒮` **on the left** with a cocone `d` under the span diagram
         i       i'
 ```
 
-to obtain a cocone `(i'' , j'' , H'')` under the span diagram `A <-f- S -h∘g-> C`. The components of this cocone are given by
+to obtain a cocone `(i'' , j'' , H'')` under the span diagram
+`A <-f- S -h∘g-> C`. The components of this cocone are given by
 
 ```text
   i'' := i' ∘ i
@@ -234,7 +235,8 @@ some map `f : S' → A'`, as indicated in the diagram
           h₁       i
 ```
 
-Then we obtain a new cocone `(i' , j' , H')` on the outer span diagram `A' <- S' -> B`. The components of this new cocone are:
+Then we obtain a new cocone `(i' , j' , H')` on the outer span diagram
+`A' <- S' -> B`. The components of this new cocone are:
 
 ```text
   i' := i ∘ h₁
@@ -302,7 +304,8 @@ cocone `d` under the span diagram `C <-h- A -i-> X` as indicated in the diagram
         i'
 ```
 
-to obtain a cocone `(i'' , j'' , H'')` under the span diagram `C <-h∘f- S -g-> B`. The components of this new cocone are given by
+to obtain a cocone `(i'' , j'' , H'')` under the span diagram
+`C <-h∘f- S -g-> B`. The components of this new cocone are given by
 
 ```text
   i'' := i'
@@ -388,7 +391,8 @@ can **compose** a morphism of arrows `h : hom-arrow g' g` with a cocone
          i
 ```
 
-to obtain a cocone `(i' , j' , H')` under the span diagram `A <- S' -> B'`. The components of this new cocone are given by
+to obtain a cocone `(i' , j' , H')` under the span diagram `A <- S' -> B'`. The
+components of this new cocone are given by
 
 ```text
   i' := i
@@ -440,7 +444,8 @@ Consider a morphism `h := (h₀ , h₁ , h₂ , h₃ , h₄) : 𝒮 → 𝒯` of
           f         g
 ```
 
-and a cocone `c := (i , j , H)` under the span `𝒮 := A <- S -> B`, as indicated in the diagram
+and a cocone `c := (i , j , H)` under the span `𝒮 := A <- S -> B`, as indicated
+in the diagram
 
 ```text
           g'
@@ -455,7 +460,10 @@ and a cocone `c := (i , j , H)` under the span `𝒮 := A <- S -> B`, as indicat
           A ------> X.
 ```
 
-Then we obtain a cocone `c ∘ h` under the span `𝒮' := A' <- S' -> B'`. This cocone is defined by first composing `c` horizontally with the morphism of arrows `f' ⇒ f`, and then composing vertically with the morphism of arrows `id ⇒ ?`, as indicated in the following diagram
+Then we obtain a cocone `c ∘ h` under the span `𝒮' := A' <- S' -> B'`. This
+cocone is defined by first composing `c` horizontally with the morphism of
+arrows `f' ⇒ f`, and then composing vertically with the morphism of arrows
+`id ⇒ ?`, as indicated in the following diagram
 
 ```text
                g'

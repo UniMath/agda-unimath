@@ -27,7 +27,9 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 
 ## Idea
 
-Consider a [span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B`. equipped with a [cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
+Consider a [span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B`.
+equipped with a
+[cocone](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
 `c := (i , j , H)` as indicated in the diagram
 
 ```text
@@ -52,7 +54,9 @@ Then any map `h : X → Y` induces a cocone
        h ∘ i
 ```
 
-This {{#concept "action on cocones under span diagrams" Disambiguation="functions" Agda=cocone-map-span-diagram}} is used to express the
+This
+{{#concept "action on cocones under span diagrams" Disambiguation="functions" Agda=cocone-map-span-diagram}}
+is used to express the
 [universal property of pushouts](synthetic-homotopy-theory.universal-property-pushouts.md).
 
 ```agda
