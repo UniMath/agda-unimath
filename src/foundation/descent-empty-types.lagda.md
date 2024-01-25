@@ -32,7 +32,7 @@ module _
   abstract
     descent-empty : (c : cone ex-falso g C) → is-pullback ex-falso g c
     descent-empty c =
-      is-pullback-is-fiberwise-equiv-map-fiber-vertical-cone _ g c ind-empty
+      is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone _ g c ind-empty
 
   abstract
     descent-empty' :
