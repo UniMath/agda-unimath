@@ -748,8 +748,7 @@ is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H nil D y d p =
           ( 1)
           ( inv (is-decomposition-list-is-prime-decomposition-list-ℕ x nil D))))
 is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H (cons z l) D y d p =
-  ind-coprod
-    ( λ _ → y ∈-list (cons z l))
+  rec-coprod
     ( λ e → tr (λ w → w ∈-list (cons z l)) (inv e) (is-head z l))
     ( λ e →
       is-in-tail
@@ -947,7 +946,7 @@ pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
 ```agda
 is-prime-list-concat-list-ℕ :
   (p q : list ℕ) → is-prime-list-ℕ p → is-prime-list-ℕ q →
-  is-prime-list-ℕ (concat-list p q)
+  is-prime-list-ℕ (concat-list p q)
 is-prime-list-concat-list-ℕ nil q Pp Pq = Pq
 is-prime-list-concat-list-ℕ (cons x p) q Pp Pq =
   pr1 Pp , is-prime-list-concat-list-ℕ p q (pr2 Pp) Pq

@@ -111,11 +111,12 @@ module _
   where
 
   map-equiv-left-summand : Σ (X + Y) is-left → X
-  map-equiv-left-summand (pair (inl x) star) = x
-  map-equiv-left-summand (pair (inr x) ())
+  map-equiv-left-summand (inl x , star) = x
+  map-equiv-left-summand (inr x , ())
 
   map-inv-equiv-left-summand : X → Σ (X + Y) is-left
-  map-inv-equiv-left-summand x = pair (inl x) star
+  pr1 (map-inv-equiv-left-summand x) = inl x
+  pr2 (map-inv-equiv-left-summand x) = star
 
   is-section-map-inv-equiv-left-summand :
     (map-equiv-left-summand ∘ map-inv-equiv-left-summand) ~ id
@@ -123,8 +124,8 @@ module _
 
   is-retraction-map-inv-equiv-left-summand :
     (map-inv-equiv-left-summand ∘ map-equiv-left-summand) ~ id
-  is-retraction-map-inv-equiv-left-summand (pair (inl x) star) = refl
-  is-retraction-map-inv-equiv-left-summand (pair (inr x) ())
+  is-retraction-map-inv-equiv-left-summand (inl x , star) = refl
+  is-retraction-map-inv-equiv-left-summand (inr x , ())
 
   equiv-left-summand : (Σ (X + Y) is-left) ≃ X
   pr1 equiv-left-summand = map-equiv-left-summand
@@ -143,22 +144,23 @@ module _
   where
 
   map-equiv-right-summand : Σ (X + Y) is-right → Y
-  map-equiv-right-summand (pair (inl x) ())
-  map-equiv-right-summand (pair (inr x) star) = x
+  map-equiv-right-summand (inl x , ())
+  map-equiv-right-summand (inr x , star) = x
 
   map-inv-equiv-right-summand : Y → Σ (X + Y) is-right
-  map-inv-equiv-right-summand y = pair (inr y) star
+  pr1 (map-inv-equiv-right-summand y) = inr y
+  pr2 (map-inv-equiv-right-summand y) = star
 
   is-section-map-inv-equiv-right-summand :
-    (map-equiv-right-summand ∘ map-inv-equiv-right-summand) ~ id
+    map-equiv-right-summand ∘ map-inv-equiv-right-summand ~ id
   is-section-map-inv-equiv-right-summand y = refl
 
   is-retraction-map-inv-equiv-right-summand :
-    (map-inv-equiv-right-summand ∘ map-equiv-right-summand) ~ id
-  is-retraction-map-inv-equiv-right-summand (pair (inl x) ())
-  is-retraction-map-inv-equiv-right-summand (pair (inr x) star) = refl
+    map-inv-equiv-right-summand ∘ map-equiv-right-summand ~ id
+  is-retraction-map-inv-equiv-right-summand (inl x , ())
+  is-retraction-map-inv-equiv-right-summand (inr x , star) = refl
 
-  equiv-right-summand : (Σ (X + Y) is-right) ≃ Y
+  equiv-right-summand : Σ (X + Y) is-right ≃ Y
   pr1 equiv-right-summand = map-equiv-right-summand
   pr2 equiv-right-summand =
     is-equiv-is-invertible

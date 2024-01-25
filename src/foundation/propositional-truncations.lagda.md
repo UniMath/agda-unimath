@@ -374,8 +374,7 @@ module _
   map-trunc-Prop-diagonal-coprod =
     map-universal-property-trunc-Prop
       ( trunc-Prop A)
-      ( unit-trunc ∘
-        ind-coprod (λ _ → A) id id)
+      ( unit-trunc ∘ rec-coprod id id)
 
   map-inv-trunc-Prop-diagonal-coprod :
     type-trunc-Prop A → type-trunc-Prop (A + A)
