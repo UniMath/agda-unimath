@@ -29,7 +29,7 @@ hom-[sets](foundation-core.sets.md).
 
 ## Definition
 
-### The predicate of being full on maps between precategories
+### The predicate on maps between precategories of being full
 
 ```agda
 module _

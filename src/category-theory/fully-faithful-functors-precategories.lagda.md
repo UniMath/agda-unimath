@@ -44,7 +44,7 @@ precategories.
 
 ## Definitions
 
-### The predicate of being fully faithful on functors between precategories
+### The predicate on functors between precategories of being fully faithful
 
 ```agda
 module _

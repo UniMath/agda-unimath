@@ -30,7 +30,7 @@ every morphism is an
 
 ## Definitions
 
-### The predicate on precategories of being pregroupoids
+### The predicate on precategories of being a pregroupoid
 
 ```agda
 module _

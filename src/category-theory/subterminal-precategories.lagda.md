@@ -43,7 +43,7 @@ A [precategory](category-theory.precategories.md) is **subterminal** if its
 
 ## Definitions
 
-### The predicate of being subterminal on precategories
+### The predicate on precategories of being subterminal
 
 ```agda
 module _

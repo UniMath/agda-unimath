@@ -148,7 +148,7 @@ module _
     is-prop-is-closed-under-composition-subtype-hom-wide-Category
 ```
 
-### The predicate on a subtype of the hom-sets of being a wide subcategory
+### The predicate on subtypes of hom-sets of being a wide subcategory
 
 ```agda
 module _
@@ -236,7 +236,7 @@ module _
     inclusion-subtype (subtype-hom-Wide-Subcategory x y)
 ```
 
-The predicate on a morphism between any objects of being contained in the wide
+The predicate on morphisms between any objects of being contained in the wide
 subcategory:
 
 ```agda
