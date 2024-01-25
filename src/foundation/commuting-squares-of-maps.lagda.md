@@ -825,7 +825,7 @@ module _
           ( (h ∘ bottom-right) ·l H) ∙
           ap
             ( precomp top-left W)
-            ( eq-htpy (h ·l K))
+            ( htpy-precomp K W h)
         by
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
@@ -911,7 +911,7 @@ module _
           ( h ·l (right-bottom ·l H))
       ＝ ap
           ( precomp left-top W)
-          ( eq-htpy (h ·l K)) ∙
+          ( htpy-precomp K W h) ∙
         eq-htpy
           ( (h ∘ right-bottom) ·l H)
         by

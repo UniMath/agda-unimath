@@ -400,13 +400,13 @@ module _
 
   is-contr-extension-dependent-type-is-local-dependent-type :
     is-local-dependent-type i P →
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f))
+    (f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)
   is-contr-extension-dependent-type-is-local-dependent-type =
     map-equiv equiv-is-contr-extension-dependent-type-is-local-dependent-type
 
   is-local-dependent-type-is-contr-extension-dependent-type :
-    ((f : (x : A) → P (i x)) →
-    is-contr (extension-dependent-type i P f)) → is-local-dependent-type i P
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)) →
+    is-local-dependent-type i P
   is-local-dependent-type-is-contr-extension-dependent-type =
     map-inv-equiv
       equiv-is-contr-extension-dependent-type-is-local-dependent-type

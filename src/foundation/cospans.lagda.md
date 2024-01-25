@@ -27,18 +27,24 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A {{#concept "cospan"}} is a diagram of the form
+A {{#concept "cospan" Disambiguation="types" Agda=cospan}} from `A` to `B` consists of a type `X` and
+maps `f : A → X` and `g : B → X`, as indicated in the diagram
 
 ```text
       f         g
   A -----> X <----- B
 ```
 
-In other words, a cospan consists of three types `A`, `B`, and `X` and two
-functions `f : A → X` and `g : B → X`. A
-{{#concept "cospan structure" Disambiguation="pair of types"}} on a pair of
-types `A` and `B` consists of a type `X` and two functions `f : A → X` and
-`g : B → X`.
+We disambiguate between cospans and
+[cospan diagrams](foundation.cospan-diagrams.md). We consider a cospan from `A`
+to `B` a morphism from `A` to `B` in the category of types and cospans between
+them, whereas we consider cospan diagrams to be _objects_ in the category of
+diagrams of types of the form `* <---- * ----> *`. Conceptually there is a
+subtle, but important distinction between cospans and cospan diagrams. Cospan
+diagrams are more suitable for functorial operations that take "cospans" as
+input, but for which the functorial action takes a natural transformation, i.e.,
+a morphism of cospan diagrams, as input. Examples of this kind include
+[pullbacks](foundation.pullbacks.md).
 
 ## Definitions
 

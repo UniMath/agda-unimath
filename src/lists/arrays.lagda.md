@@ -77,8 +77,7 @@ module _
 
   cons-array : A → array A → array A
   cons-array a t =
-    ( succ-ℕ (length-array t) ,
-      ind-coprod (λ _ → A) (functional-vec-array t) λ _ → a)
+    ( succ-ℕ (length-array t) , rec-coprod (functional-vec-array t) (λ _ → a))
 
   revert-array : array A → array A
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))

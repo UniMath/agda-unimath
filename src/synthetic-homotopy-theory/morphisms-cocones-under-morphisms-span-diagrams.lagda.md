@@ -1,6 +1,8 @@
 # Morphisms of cocones under morphisms of span diagrams
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module
   synthetic-homotopy-theory.morphisms-cocones-under-morphisms-span-diagrams
   where

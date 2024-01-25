@@ -13,6 +13,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -48,7 +50,7 @@ is defined by `λ h x → f (h x)`.
 htpy-postcomp :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
   {f g : X → Y} → (f ~ g) → postcomp A f ~ postcomp A g
-htpy-postcomp A H h = eq-htpy (H ∘ h)
+htpy-postcomp A H h = eq-htpy (H ·r h)
 
 compute-htpy-postcomp-refl-htpy :
   {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} {C : UU l3} (f : B → C) →
@@ -56,15 +58,54 @@ compute-htpy-postcomp-refl-htpy :
 compute-htpy-postcomp-refl-htpy A f h = eq-htpy-refl-htpy (f ∘ h)
 ```
 
-### The fibers of `postcomp`
+### Computations of the fibers of `postcomp`
+
+We give three computations of the fibers of a postcomposition function:
+
+1. `fiber (postcomp A f) h ≃ ((x : A) → fiber f (h x))`
+2. `fiber (postcomp A f) h ≃ Σ (A → X) (coherence-triangle-maps h f)`, and
+3. `fiber (postcomp A f) (f ∘ h) ≃ Σ (A → X) (λ g → coherence-square-maps g h f f)`
 
 ```agda
-compute-fiber-postcomp :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
-  (f : X → Y) (h : A → Y) →
-  ((x : A) → fiber f (h x)) ≃ fiber (postcomp A f) h
-compute-fiber-postcomp A f h =
-  equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3)
+  (f : X → Y)
+  where
+
+  inv-compute-Π-fiber-postcomp :
+    (h : A → Y) → fiber (postcomp A f) h ≃ ((x : A) → fiber f (h x))
+  inv-compute-Π-fiber-postcomp h =
+    inv-distributive-Π-Σ ∘e equiv-tot (λ _ → equiv-funext)
+
+  compute-Π-fiber-postcomp :
+    (h : A → Y) → ((x : A) → fiber f (h x)) ≃ fiber (postcomp A f) h
+  compute-Π-fiber-postcomp h =
+    equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
+
+  inv-compute-coherence-triangle-fiber-postcomp :
+    (h : A → Y) →
+    fiber (postcomp A f) h ≃ Σ (A → X) (coherence-triangle-maps h f)
+  inv-compute-coherence-triangle-fiber-postcomp h =
+    equiv-tot (λ _ → equiv-funext) ∘e equiv-fiber (postcomp A f) h
+
+  compute-coherence-triangle-fiber-postcomp :
+    (h : A → Y) →
+    Σ (A → X) (coherence-triangle-maps h f) ≃ fiber (postcomp A f) h
+  compute-coherence-triangle-fiber-postcomp h =
+    inv-equiv (inv-compute-coherence-triangle-fiber-postcomp h)
+
+  inv-compute-fiber-postcomp :
+    (h : A → X) →
+    fiber (postcomp A f) (f ∘ h) ≃
+    Σ (A → X) (λ g → coherence-square-maps g h f f)
+  inv-compute-fiber-postcomp h =
+    inv-compute-coherence-triangle-fiber-postcomp (f ∘ h)
+
+  compute-fiber-postcomp :
+    (h : A → X) →
+    Σ (A → X) (λ g → coherence-square-maps g h f f) ≃
+    fiber (postcomp A f) (f ∘ h)
+  compute-fiber-postcomp h = compute-coherence-triangle-fiber-postcomp (f ∘ h)
 ```
 
 ### Postcomposition and equivalences
@@ -94,10 +135,9 @@ module _
         ( eq-is-contr
           ( is-contr-map-is-equiv (H X) f)
           { x =
-            pair
-              ( map-inv-is-equiv-is-equiv-postcomp ∘ f)
-              ( ap (λ u → u ∘ f) (is-section-map-inv-is-equiv (H Y) id))}
-          { y = pair id refl}))
+              ( map-inv-is-equiv-is-equiv-postcomp ∘ f) ,
+              ( ap (_∘ f) (is-section-map-inv-is-equiv (H Y) id))}
+          { y = id , refl}))
 
   abstract
     is-equiv-is-equiv-postcomp : is-equiv f
@@ -116,8 +156,7 @@ simplified to that universe.
 is-equiv-is-equiv-postcomp' :
   {l : Level} {X : UU l} {Y : UU l} (f : X → Y) →
   ((A : UU l) → is-equiv (postcomp A f)) → is-equiv f
-is-equiv-is-equiv-postcomp'
-  {l} {X} {Y} f is-equiv-postcomp-f =
+is-equiv-is-equiv-postcomp' {l} {X} {Y} f is-equiv-postcomp-f =
   let section-f = center (is-contr-map-is-equiv (is-equiv-postcomp-f Y) id)
   in
   is-equiv-is-invertible
@@ -128,8 +167,8 @@ is-equiv-is-equiv-postcomp'
         ( pr1)
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-equiv-postcomp-f X) f)
-          ( pair ((pr1 section-f) ∘ f) (ap (λ t → t ∘ f) (pr2 section-f)))
-          ( pair id refl))))
+          ( pr1 section-f ∘ f , ap (_∘ f) (pr2 section-f))
+          ( id , refl))))
 
 abstract
   is-equiv-postcomp-is-equiv :
@@ -165,6 +204,5 @@ module _
   equiv-htpy-postcomp-htpy :
     (e : B ≃ C) (f g : A → B) → (f ~ g) ≃ (map-equiv e ∘ f ~ map-equiv e ∘ g)
   equiv-htpy-postcomp-htpy e f g =
-    equiv-Π-equiv-family
-      ( λ a → equiv-ap e (f a) (g a))
+    equiv-Π-equiv-family (λ a → equiv-ap e (f a) (g a))
 ```

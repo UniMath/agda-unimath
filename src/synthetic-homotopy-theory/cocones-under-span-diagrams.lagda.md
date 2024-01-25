@@ -336,9 +336,9 @@ module _
   {X : UU l7}
   where
 
-  equiv-cocone-equiv-span-diagram :
+  compute-cocone-equiv-span-diagram :
     cocone-span-diagram 𝒯 X ≃ cocone-span-diagram 𝒮 X
-  equiv-cocone-equiv-span-diagram =
+  compute-cocone-equiv-span-diagram =
     equiv-Σ _
       ( equiv-precomp (equiv-domain-equiv-span-diagram 𝒮 𝒯 e) X)
       ( λ i →
@@ -355,15 +355,15 @@ module _
               ( spanning-equiv-equiv-span-diagram 𝒮 𝒯 e)
               ( eq-value _ _))))
 
-  map-equiv-cocone-equiv-span-diagram :
+  map-compute-cocone-equiv-span-diagram :
     cocone-span-diagram 𝒯 X → cocone-span-diagram 𝒮 X
-  map-equiv-cocone-equiv-span-diagram =
-    map-equiv equiv-cocone-equiv-span-diagram
+  map-compute-cocone-equiv-span-diagram =
+    map-equiv compute-cocone-equiv-span-diagram
 
-  is-equiv-map-equiv-cocone-equiv-span-diagram :
-    is-equiv map-equiv-cocone-equiv-span-diagram
-  is-equiv-map-equiv-cocone-equiv-span-diagram =
-    is-equiv-map-equiv equiv-cocone-equiv-span-diagram
+  is-equiv-map-compute-cocone-equiv-span-diagram :
+    is-equiv map-compute-cocone-equiv-span-diagram
+  is-equiv-map-compute-cocone-equiv-span-diagram =
+    is-equiv-map-equiv compute-cocone-equiv-span-diagram
 ```
 
 ## See also

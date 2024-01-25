@@ -42,7 +42,7 @@ module _
     is-equiv-ind-Σ : is-equiv (ind-Σ {C = C})
     is-equiv-ind-Σ = is-equiv-is-section is-equiv-ev-pair refl-htpy
 
-  equiv-ev-pair : ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (pair a b))
+  equiv-ev-pair : ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (a , b))
   pr1 equiv-ev-pair = ev-pair
   pr2 equiv-ev-pair = is-equiv-ev-pair
 
@@ -61,10 +61,8 @@ equiv-ev-pair² :
   { A : UU l1} {B : A → UU l2} {C : UU l3}
   { X : UU l4} {Y : X → UU l5}
   { Z : ( Σ A B → C) → Σ X Y → UU l6} →
-  Σ ( Σ A B → C)
-    ( λ k → ( xy : Σ X Y) → Z k xy) ≃
-  Σ ( (a : A) → B a → C)
-    ( λ k → (x : X) → (y : Y x) → Z (ind-Σ k) (x , y))
+  Σ ( Σ A B → C) (λ k → ( xy : Σ X Y) → Z k xy) ≃
+  Σ ( (a : A) → B a → C) (λ k → (x : X) → (y : Y x) → Z (ind-Σ k) (x , y))
 equiv-ev-pair² {X = X} {Y = Y} {Z = Z} =
   equiv-Σ
     ( λ k → (x : X) (y : Y x) → Z (ind-Σ k) (x , y))

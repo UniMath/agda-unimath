@@ -15,9 +15,11 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.families-of-equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
@@ -96,22 +98,73 @@ module _
   {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
   where
 
-  map-distributive-Π-is-local-dependent-type :
+  distributive-Π-is-local-dependent-type :
     {l3 l4 : Level} {A : UU l3} (B : A → X → UU l4) →
     ((a : A) → is-local-dependent-type f (B a)) →
     is-local-dependent-type f (λ x → (a : A) → B a x)
-  map-distributive-Π-is-local-dependent-type B f-loc =
+  distributive-Π-is-local-dependent-type B f-loc =
     is-equiv-map-equiv
       ( ( equiv-swap-Π) ∘e
         ( equiv-Π-equiv-family (λ a → precomp-Π f (B a) , (f-loc a))) ∘e
         ( equiv-swap-Π))
 
-  map-distributive-Π-is-local :
+  distributive-Π-is-local :
     {l3 l4 : Level} {A : UU l3} (B : A → UU l4) →
     ((a : A) → is-local f (B a)) →
     is-local f ((a : A) → B a)
-  map-distributive-Π-is-local B =
-    map-distributive-Π-is-local-dependent-type (λ a _ → B a)
+  distributive-Π-is-local B =
+    distributive-Π-is-local-dependent-type (λ a _ → B a)
+```
+
+### Local types are closed under equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {Y : UU l1} {X : UU l2} {A : X → UU l3} {B : X → UU l4}
+  (f : Y → X)
+  where
+
+  is-local-dependent-type-fam-equiv :
+    fam-equiv A B → is-local-dependent-type f B → is-local-dependent-type f A
+  is-local-dependent-type-fam-equiv e is-local-B =
+    is-equiv-htpy-equiv
+      ( ( equiv-Π-equiv-family (inv-equiv ∘ e ∘ f)) ∘e
+        ( precomp-Π f B , is-local-B) ∘e
+        ( equiv-Π-equiv-family e))
+      ( λ g →
+        eq-htpy (λ y → inv (is-retraction-map-inv-equiv (e (f y)) (g (f y)))))
+
+  is-local-dependent-type-inv-fam-equiv :
+    fam-equiv B A → is-local-dependent-type f B → is-local-dependent-type f A
+  is-local-dependent-type-inv-fam-equiv e =
+    is-local-dependent-type-fam-equiv (inv-equiv ∘ e)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {Y : UU l1} {X : UU l2} {A : UU l3} {B : UU l4}
+  (f : Y → X)
+  where
+
+  is-local-equiv : A ≃ B → is-local f B → is-local f A
+  is-local-equiv e = is-local-dependent-type-fam-equiv f (λ _ → e)
+
+  is-local-inv-equiv : B ≃ A → is-local f B → is-local f A
+  is-local-inv-equiv e = is-local-dependent-type-inv-fam-equiv f (λ _ → e)
+```
+
+### Locality is preserved by homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} {A : UU l3} {f f' : Y → X}
+  where
+
+  is-local-htpy : (H : f ~ f') → is-local f' A → is-local f A
+  is-local-htpy H = is-equiv-htpy (precomp f' A) (htpy-precomp H A)
+
+  is-local-htpy' : (H : f ~ f') → is-local f A → is-local f' A
+  is-local-htpy' H = is-equiv-htpy' (precomp f A) (htpy-precomp H A)
 ```
 
 ### If `S` is `f`-local then `S` is local at every retract of `f`
@@ -253,7 +306,7 @@ module _
   is-local-is-equiv is-equiv-f = is-equiv-precomp-is-equiv f is-equiv-f
 ```
 
-### Families of contractible types are local at any map
+### Contractible types are local at any map
 
 ```agda
 module _

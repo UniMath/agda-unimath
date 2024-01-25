@@ -219,6 +219,20 @@ module _
       ( coherence-square-cone f g c)
 ```
 
+### Cones obtained from morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
+  where
+
+  cone-hom-arrow : cone (map-codomain-hom-arrow f g h) g A
+  pr1 cone-hom-arrow = f
+  pr1 (pr2 cone-hom-arrow) = map-domain-hom-arrow f g h
+  pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
+```
+
 ### The swapping function on cones over cospans
 
 ```agda
@@ -263,6 +277,15 @@ module _
   htpy-parallel-cone c c' =
     Σ ( vertical-map-cone f g c ~ vertical-map-cone f' g' c')
       ( fam-htpy-parallel-cone c c')
+```
+
+### The identity cone over the identity cospan
+
+```agda
+id-cone : {l : Level} (A : UU l) → cone (id {A = A}) (id {A = A}) A
+pr1 (id-cone A) = id
+pr1 (pr2 (id-cone A)) = id
+pr2 (pr2 (id-cone A)) = refl-htpy
 ```
 
 ## Table of files about pullbacks

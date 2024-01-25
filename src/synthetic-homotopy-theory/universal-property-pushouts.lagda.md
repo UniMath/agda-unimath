@@ -39,6 +39,7 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
+open import synthetic-homotopy-theory.action-on-cocones-under-span-diagrams-functions
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
@@ -460,7 +461,7 @@ module _
     is-equiv-is-equiv-precomp
       ( right-map-cocone-span-diagram 𝒮 c)
       ( λ T →
-        is-equiv-is-pullback'
+        is-equiv-horizontal-map-is-pullback
           ( _∘ left-map-span-diagram 𝒮)
           ( _∘ right-map-span-diagram 𝒮)
           ( cone-pullback-property-pushout 𝒮 c T)
@@ -474,7 +475,7 @@ module _
   universal-property-pushout-is-equiv H K =
     universal-property-pushout-pullback-property-pushout 𝒮 c
       ( λ T →
-        is-pullback-is-equiv'
+        is-pullback-is-equiv-horizontal-maps
           ( _∘ left-map-span-diagram 𝒮)
           ( _∘ right-map-span-diagram 𝒮)
           ( cone-pullback-property-pushout 𝒮 c T)
@@ -513,7 +514,7 @@ module _
     is-equiv-is-equiv-precomp
       ( left-map-cocone-span-diagram 𝒮 c)
       ( λ T →
-        is-equiv-is-pullback
+        is-equiv-vertical-map-is-pullback
           ( precomp (left-map-span-diagram 𝒮) T)
           ( precomp (right-map-span-diagram 𝒮) T)
           ( cone-pullback-property-pushout 𝒮 c T)
@@ -527,7 +528,7 @@ module _
   universal-property-pushout-is-equiv' H K =
     universal-property-pushout-pullback-property-pushout 𝒮 c
       ( λ T →
-        is-pullback-is-equiv
+        is-pullback-is-equiv-vertical-maps
           ( precomp (left-map-span-diagram 𝒮) T)
           ( precomp (right-map-span-diagram 𝒮) T)
           ( cone-pullback-property-pushout 𝒮 c T)
