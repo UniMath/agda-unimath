@@ -129,7 +129,7 @@ is-decidable-has-repetition-of-values-Fin k l f =
 ```text
 is-injective-map-Fin-zero-Fin :
   {k : ℕ} (f : Fin zero-ℕ → Fin k) → is-injective f
-is-injective-map-Fin-zero-Fin f {()} {y}
+is-injective-map-Fin-zero-Fin f {()}
 
 is-injective-map-Fin-one-Fin : {k : ℕ} (f : Fin 1 → Fin k) → is-injective f
 is-injective-map-Fin-one-Fin f {inr star} {inr star} p = refl

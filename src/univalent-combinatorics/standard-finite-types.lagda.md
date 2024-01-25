@@ -26,6 +26,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.injective-type-families
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
@@ -430,12 +431,17 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
 
 ```agda
 abstract
-  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → k ＝ l
-  is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
-  is-injective-Fin {zero-ℕ} {succ-ℕ l} e =
+  is-equiv-injective-Fin : is-equiv-injective Fin
+  is-equiv-injective-Fin {zero-ℕ} {zero-ℕ} e =
+    refl
+  is-equiv-injective-Fin {zero-ℕ} {succ-ℕ l} e =
     ex-falso (map-inv-equiv e (zero-Fin l))
-  is-injective-Fin {succ-ℕ k} {zero-ℕ} e =
+  is-equiv-injective-Fin {succ-ℕ k} {zero-ℕ} e =
     ex-falso (map-equiv e (zero-Fin k))
-  is-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
-    ap succ-ℕ (is-injective-Fin (equiv-equiv-Maybe e))
+  is-equiv-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+    ap succ-ℕ (is-equiv-injective-Fin (equiv-equiv-Maybe e))
+
+abstract
+  is-injective-Fin : is-injective Fin
+  is-injective-Fin = is-injective-is-equiv-injective is-equiv-injective-Fin
 ```

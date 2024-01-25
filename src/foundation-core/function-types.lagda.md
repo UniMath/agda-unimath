@@ -70,6 +70,14 @@ map-Π' :
   ((j : J) → A (α j)) →
   ((j : J) → B (α j))
 map-Π' α f = map-Π (f ∘ α)
+
+map-implicit-Π :
+  {l1 l2 l3 : Level}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i) →
+  ({i : I} → A i) →
+  ({i : I} → B i)
+map-implicit-Π f h {i} = map-Π f (λ i → h {i}) i
 ```
 
 ## See also

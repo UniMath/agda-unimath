@@ -69,7 +69,7 @@ compute-fiber-map-Π' α f = compute-fiber-map-Π (f ∘ α)
 abstract
   is-equiv-map-Π-is-fiberwise-equiv :
     {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    {f : (i : I) → A i → B i} (is-equiv-f : is-fiberwise-equiv f) →
+    {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
     is-equiv (map-Π f)
   is-equiv-map-Π-is-fiberwise-equiv is-equiv-f =
     is-equiv-is-contr-map
@@ -81,15 +81,26 @@ abstract
 equiv-Π-equiv-family :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
-pr1 (equiv-Π-equiv-family e) = map-Π (λ i → map-equiv (e i))
+pr1 (equiv-Π-equiv-family e) =
+  map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =
-  is-equiv-map-Π-is-fiberwise-equiv
-    ( λ i → is-equiv-map-equiv (e i))
+  is-equiv-map-Π-is-fiberwise-equiv (λ i → is-equiv-map-equiv (e i))
 ```
 
 ### Families of equivalences induce equivalences of implicit dependent function types
 
 ```agda
+is-equiv-map-implicit-Π-is-fiberwise-equiv :
+    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+    {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
+    is-equiv (map-implicit-Π f)
+is-equiv-map-implicit-Π-is-fiberwise-equiv is-equiv-f =
+  is-equiv-comp _ _
+    ( is-equiv-explicit-implicit-Π)
+    ( is-equiv-comp _ _
+      ( is-equiv-map-Π-is-fiberwise-equiv is-equiv-f)
+      ( is-equiv-implicit-explicit-Π))
+
 equiv-implicit-Π-equiv-family :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)

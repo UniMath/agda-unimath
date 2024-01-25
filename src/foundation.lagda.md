@@ -179,6 +179,7 @@ open import foundation.induction-principle-propositional-truncation public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
+open import foundation.injective-type-families public
 open import foundation.interchange-law public
 open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public
