@@ -155,8 +155,7 @@ fibered maps.
     is-equiv-map-equiv equiv-type-standard-pullback-hom-fibered-map
 
   universal-property-pullback-fibered-map :
-    universal-property-pullback
-      ( precomp f Y) (postcomp A g) (cone-pullback-hom)
+    universal-property-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom)
   universal-property-pullback-fibered-map =
     universal-property-pullback-is-pullback
       ( precomp f Y)
@@ -187,8 +186,13 @@ module _
   (f : A → B) (g : X → Y)
   where
 
+  cone-pullback-hom' : cone (precomp f Y) (postcomp A g) (B → X)
+  pr1 cone-pullback-hom' = postcomp B g
+  pr1 (pr2 cone-pullback-hom') = precomp f X
+  pr2 (pr2 cone-pullback-hom') = refl-htpy
+
   pullback-hom : (B → X) → fibered-map f g
-  pullback-hom = gap-pullback-hom f g (postcomp B g , precomp f X , refl-htpy)
+  pullback-hom = gap-pullback-hom f g cone-pullback-hom'
 
   infix 30 _⋔_
   _⋔_ = pullback-hom
@@ -238,6 +242,44 @@ module _
   compute-fiber-pullback-hom :
     lifting-square-fibered-map f g h ≃ fiber (pullback-hom f g) h
   compute-fiber-pullback-hom = inv-equiv inv-compute-fiber-pullback-hom
+```
+
+### Computing the pullback-hom of a composite
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {S : UU l5}
+  (f : A → B) (g : X → Y) (h : Y → S)
+  where
+
+  map-fibered-map-comp-right-fibered-map :
+    fibered-map f g → fibered-map f (h ∘ g)
+  pr1 (map-fibered-map-comp-right-fibered-map (j , i , H)) = h ∘ j
+  pr1 (pr2 (map-fibered-map-comp-right-fibered-map (j , i , H))) = i
+  pr2 (pr2 (map-fibered-map-comp-right-fibered-map (j , i , H))) = h ·l H
+
+  compute-pullback-hom-comp-right :
+    pullback-hom f (h ∘ g) ~
+    map-fibered-map-comp-right-fibered-map ∘ pullback-hom f g
+  compute-pullback-hom-comp-right = refl-htpy
+
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {S : UU l5}
+  (f : A → B) (g : X → Y) (h : S → A)
+  where
+
+  map-fibered-map-comp-left-fibered-map :
+    fibered-map f g → fibered-map (f ∘ h) g
+  pr1 (map-fibered-map-comp-left-fibered-map (j , i , H)) = j
+  pr1 (pr2 (map-fibered-map-comp-left-fibered-map (j , i , H))) = i ∘ h
+  pr2 (pr2 (map-fibered-map-comp-left-fibered-map (j , i , H))) = H ·r h
+
+  compute-pullback-hom-comp-left :
+    pullback-hom (f ∘ h) g ~
+    map-fibered-map-comp-left-fibered-map ∘ pullback-hom f g
+  compute-pullback-hom-comp-left = refl-htpy
 ```
 
 ## Table of files about pullbacks

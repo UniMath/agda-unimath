@@ -8,13 +8,13 @@ module foundation.equality-coproduct-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
@@ -22,6 +22,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
@@ -77,20 +79,14 @@ module _
     (x : A + B) → is-torsorial (Eq-coprod x)
   pr1 (pr1 (is-torsorial-Eq-coprod (inl x))) = inl x
   pr2 (pr1 (is-torsorial-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
-  pr2
-    ( is-torsorial-Eq-coprod (inl x))
-    ( pair (inl .x) (Eq-eq-coprod-inl refl)) = refl
+  pr2 (is-torsorial-Eq-coprod (inl x)) (.(inl x) , Eq-eq-coprod-inl refl) = refl
   pr1 (pr1 (is-torsorial-Eq-coprod (inr x))) = inr x
   pr2 (pr1 (is-torsorial-Eq-coprod (inr x))) = Eq-eq-coprod-inr refl
-  pr2
-    ( is-torsorial-Eq-coprod (inr x))
-    ( pair .(inr x) (Eq-eq-coprod-inr refl)) = refl
+  pr2 (is-torsorial-Eq-coprod (inr x)) (.(inr x) , Eq-eq-coprod-inr refl) = refl
 
   is-equiv-Eq-eq-coprod : (x y : A + B) → is-equiv (Eq-eq-coprod x y)
   is-equiv-Eq-eq-coprod x =
-    fundamental-theorem-id
-      ( is-torsorial-Eq-coprod x)
-      ( Eq-eq-coprod x)
+    fundamental-theorem-id (is-torsorial-Eq-coprod x) (Eq-eq-coprod x)
 
   extensionality-coprod : (x y : A + B) → (x ＝ y) ≃ Eq-coprod x y
   pr1 (extensionality-coprod x y) = Eq-eq-coprod x y
@@ -256,6 +252,34 @@ module _
   pr2 emb-inr = is-emb-inr
 ```
 
+Moreover, `is-injective-inl` and `is-injective-inr` are the inverses.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-retraction-is-injective-inl :
+    {x y : A} →
+    is-retraction (ap (inl {A = A} {B = B}) {x} {y}) (is-injective-inl)
+  is-retraction-is-injective-inl refl = refl
+
+  is-section-is-injective-inl :
+    {x y : A} →
+    is-section (ap (inl {A = A} {B = B}) {x} {y}) (is-injective-inl)
+  is-section-is-injective-inl refl = refl
+
+  is-retraction-is-injective-inr :
+    {x y : B} →
+    is-retraction (ap (inr {A = A} {B = B}) {x} {y}) (is-injective-inr)
+  is-retraction-is-injective-inr refl = refl
+
+  is-section-is-injective-inr :
+    {x y : B} →
+    is-section (ap (inr {A = A} {B = B}) {x} {y}) (is-injective-inr)
+  is-section-is-injective-inr refl = refl
+```
+
 ### A map `A + B → C` defined by maps `f : A → C` and `B → C` is an embedding if both `f` and `g` are embeddings and they don't overlap
 
 ```agda
@@ -265,30 +289,30 @@ module _
 
   is-emb-coprod :
     is-emb f → is-emb g → ((a : A) (b : B) → f a ≠ g b) →
-    is-emb (ind-coprod (λ x → C) f g)
+    is-emb (rec-coprod f g)
   is-emb-coprod H K L (inl a) (inl a') =
     is-equiv-right-map-triangle
       ( ap f)
-      ( ap (ind-coprod (λ x → C) f g))
+      ( ap (rec-coprod f g))
       ( ap inl)
-      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inl p)
+      ( ap-comp (rec-coprod f g) inl)
       ( H a a')
       ( is-emb-inl A B a a')
   is-emb-coprod H K L (inl a) (inr b') =
-    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a b')
+    is-equiv-is-empty (ap (rec-coprod f g)) (L a b')
   is-emb-coprod H K L (inr b) (inl a') =
-    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a' b ∘ inv)
+    is-equiv-is-empty (ap (rec-coprod f g)) (L a' b ∘ inv)
   is-emb-coprod H K L (inr b) (inr b') =
     is-equiv-right-map-triangle
       ( ap g)
-      ( ap (ind-coprod (λ x → C) f g))
+      ( ap (rec-coprod f g))
       ( ap inr)
-      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inr p)
+      ( ap-comp (rec-coprod f g) inr)
       ( K b b')
       ( is-emb-inr A B b b')
 ```
 
-### Coproducts of (k+2)-truncated types are (k+2)-truncated
+### Coproducts of `k+2`-truncated types are `k+2`-truncated
 
 ```agda
 module _
@@ -326,8 +350,8 @@ abstract
 
 coprod-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2) → Set (l1 ⊔ l2)
-pr1 (coprod-Set (pair A is-set-A) (pair B is-set-B)) = A + B
-pr2 (coprod-Set (pair A is-set-A) (pair B is-set-B)) =
+pr1 (coprod-Set (A , is-set-A) (B , is-set-B)) = A + B
+pr2 (coprod-Set (A , is-set-A) (B , is-set-B)) =
   is-set-coprod is-set-A is-set-B
 ```
 

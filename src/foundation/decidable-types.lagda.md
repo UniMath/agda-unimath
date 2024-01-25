@@ -95,7 +95,7 @@ is-decidable-coprod :
   is-decidable A → is-decidable B → is-decidable (A + B)
 is-decidable-coprod (inl a) y = inl (inl a)
 is-decidable-coprod (inr na) (inl b) = inl (inr b)
-is-decidable-coprod (inr na) (inr nb) = inr (ind-coprod (λ x → empty) na nb)
+is-decidable-coprod (inr na) (inr nb) = inr (rec-coprod na nb)
 ```
 
 ### Cartesian products of decidable types are decidable

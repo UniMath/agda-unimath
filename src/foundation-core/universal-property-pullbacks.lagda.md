@@ -46,20 +46,42 @@ module _
   map-universal-property-pullback :
     universal-property-pullback f g c →
     {C' : UU l5} (c' : cone f g C') → C' → C
-  map-universal-property-pullback up-c {C'} c' =
-    map-inv-is-equiv (up-c C') c'
+  map-universal-property-pullback up-c {C'} =
+    map-inv-is-equiv (up-c C')
 
   compute-map-universal-property-pullback :
     (up-c : universal-property-pullback f g c) →
     {C' : UU l5} (c' : cone f g C') →
     cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
-  compute-map-universal-property-pullback up-c {C'} c' =
-    is-section-map-inv-is-equiv (up-c C') c'
+  compute-map-universal-property-pullback up-c {C'} =
+    is-section-map-inv-is-equiv (up-c C')
 ```
 
 ## Properties
 
 ### 3-for-2 property of pullbacks
+
+Given two cones `c` and `c'` over a common cospan `f : A → X ← B : g`, and a map
+between them `h` such that the diagram
+
+```text
+              h
+          C ----> C'
+        /   \   /   \
+      /      / \      \
+    /   /          \    \
+   v v                 v v
+  A --------> X <-------- B
+        f           g
+```
+
+is coherent, then if two out of the three conditions
+
+- `c` is a pullback cone
+- `c'` is a pullback cone
+- `h` is an equivalence
+
+hold, then so does the third.
 
 ```agda
 module _
@@ -78,8 +100,7 @@ module _
       ( eq-htpy-cone f g (cone-map f g c h) c' KLM)
 
   triangle-cone-cone :
-    {l6 : Level} (D : UU l6) →
-    cone-map f g c' ~ cone-map f g c ∘ postcomp D h
+    {l6 : Level} (D : UU l6) → cone-map f g c' ~ cone-map f g c ∘ postcomp D h
   triangle-cone-cone D k = inv (inv-triangle-cone-cone D k)
 
   abstract

@@ -408,8 +408,8 @@ module _
     is-truncated-acyclic-map k (vertical-map-cone f g c)
   is-truncated-acyclic-map-vertical-map-cone-is-pullback pb ac a =
     is-truncated-acyclic-equiv
-      ( map-fiber-cone f g c a ,
-        is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
+      ( map-fiber-vertical-map-cone f g c a ,
+        is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f g c pb a)
       ( ac (f a))
 
 module _

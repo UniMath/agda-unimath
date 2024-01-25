@@ -99,11 +99,11 @@ map-prod-id (a , b) = refl
 ### Functoriality of products preserves composition
 
 ```agda
-map-prod-comp :
+preserves-comp-map-prod :
   {l1 l2 l3 l4 l5 l6 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   {E : UU l5} {F : UU l6} (f : A → C) (g : B → D) (h : C → E) (k : D → F) →
   map-prod (h ∘ f) (k ∘ g) ~ map-prod h k ∘ map-prod f g
-map-prod-comp f g h k t = refl
+preserves-comp-map-prod f g h k t = refl
 ```
 
 ### Functoriality of products preserves homotopies

@@ -550,5 +550,7 @@ module _
 
 ## See also
 
+- [Morphisms of arrows](foundation.morphisms-arrows.md) for the same concept
+  under a different name.
 - For the pullback property of the type of fibered maps, see
   [the pullback-hom](orthogonal-factorization-systems.pullback-hom.md)

@@ -10,6 +10,7 @@
 | Pullbacks (foundation)                                | [`foundation.pullbacks`](foundation.pullbacks.md)                                                                               |
 | Functoriality of pullbacks                            | [`foundation.functoriality-pullbacks`](foundation.functoriality-pullbacks.md)                                                   |
 | Pullback squares                                      | [`foundation.pullback-squares`](foundation.pullback-squares.md)                                                                 |
+| Cartesian morphisms of arrows                         | [`foundation.cartesian-morphisms-arrows`](foundation.cartesian-morphisms-arrows.md)                                             |
 | The pullback-hom                                      | [`orthogonal-factorization-systems.pullback-hom`](orthogonal-factorization-systems.pullback-hom.md)                             |
 | Functoriality of the pullback-hom                     | [`orthogonal-factorization-systems.functoriality-pullback-hom`](orthogonal-factorization-systems.functoriality-pullback-hom.md) |
 | Pullbacks in precategories                            | [`category-theory.pullbacks-in-precategories`](category-theory.pullbacks-in-precategories.md)                                   |

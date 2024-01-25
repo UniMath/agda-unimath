@@ -9,10 +9,10 @@ module foundation.pullback-squares where
 ```agda
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -48,13 +48,7 @@ module _
   where
 
   pullback-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  pullback-square =
-    Σ ( A → C)
-      ( λ f →
-        Σ ( B → C)
-          ( λ g →
-            Σ ( cone f g X)
-              ( is-pullback f g)))
+  pullback-square = Σ (A → C) (λ f → Σ (B → C) (λ g → pullback-cone f g X))
 ```
 
 ### Components of a pullback cone
