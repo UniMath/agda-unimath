@@ -2,7 +2,7 @@
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Cospans                                               | [`foundation.cospans`](foundation.cospans.md)                                                                                   |
 | Morphisms of cospans                                  | [`foundation.morphisms-cospans`](foundation.morphisms-cospans.md)                                                               |
-| Cones over cospans                                    | [`foundation.cones-over-cospans`](foundation.cones-over-cospan-diagrams.md)                                                     |
+| Cones over cospans                                    | [`foundation.cones-over-cospan-diagrams`](foundation.cones-over-cospan-diagrams.md)                                             |
 | The universal property of pullbacks (foundation-core) | [`foundation-core.universal-property-pullbacks`](foundation-core.universal-property-pullbacks.md)                               |
 | The universal property of pullbacks (foundation)      | [`foundation.universal-property-pullbacks`](foundation.universal-property-pullbacks.md)                                         |
 | The universal property of fiber products              | [`foundation.universal-property-fiber-products`](foundation.universal-property-fiber-products.md)                               |

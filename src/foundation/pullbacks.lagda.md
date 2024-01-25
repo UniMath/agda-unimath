@@ -78,8 +78,8 @@ The standard pullback consists of [pairs](foundation.dependent-pair-types.md)
   A ×_X B := Σ (a : A) (b : B), (f a ＝ g b),
 ```
 
-thus the standard [cone](foundation.cones-over-cospans.md) consists of the
-canonical projections.
+thus the standard [cone](foundation.cones-over-cospan-diagrams.md) consists of
+the canonical projections.
 
 ## Properties
 
