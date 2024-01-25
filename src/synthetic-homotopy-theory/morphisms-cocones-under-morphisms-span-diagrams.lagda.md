@@ -190,7 +190,8 @@ side consists of
      k ∘ i' ∘ α₀
 ```
 
-where `K := (((k ∘ i') ·l α₃) ∙h ((k ·l H) ·r α₂)) ∙h ((k ∘ j') ·l α₄)`. The cocone on the right hand side consists of
+where `K := (((k ∘ i') ·l α₃) ∙h ((k ·l H) ·r α₂)) ∙h ((k ∘ j') ·l α₄)`. The
+cocone on the right hand side consists of
 
 ```text
   S -------------> B
@@ -201,7 +202,8 @@ where `K := (((k ∘ i') ·l α₃) ∙h ((k ·l H) ·r α₂)) ∙h ((k ∘ j')
       k ∘ h ∘ i
 ```
 
-where `K' := (k ∘ h) ·l H`. Thus we see that we have to construct a triple consisting of
+where `K' := (k ∘ h) ·l H`. Thus we see that we have to construct a triple
+consisting of
 
 ```text
   γ : k ∘ i' ∘ α₀ ~ k ∘ h ∘ i
@@ -229,30 +231,19 @@ We define the homotopies
   δ := k ·l β₁,
 ```
 
-where `β₀` is the first component of the triple `β` and `β₁` is the second component of `β`. Then it remains to construct a homotopy
+where `β₀` is the first component of the triple `β` and `β₁` is the second
+component of `β`. Then it remains to construct a homotopy
 
 ```text
   ((((k ∘ i') ·l α₃) ∙h ((k ·l H) ·r α₂)) ∙h ((k ∘ j') ·l α₄)) ∙h ((k ·l β₁) ·r g) ~
   ((k ·l β₀) ·r f) ∙h ((k ∘ h) ·l H).
 ```
 
-{-
-goal:
-  ap (k ∘ i')) (α₃ s) ∙
-  ap k (H' (α₂ s)) ∙
-  ap (k ∘ j') (inv (α₄ s)) ∙
-  ap k (β₂ (g s))) ＝
-  ap k (β₁ (f s)) ∙
-  ap (k ∘ β₀) (H s)
+{- goal: ap (k ∘ i')) (α₃ s) ∙ ap k (H' (α₂ s)) ∙ ap (k ∘ j') (inv (α₄ s)) ∙ ap
+k (β₂ (g s))) ＝ ap k (β₁ (f s)) ∙ ap (k ∘ β₀) (H s)
 
-β₂ s :
-  ap i' (inv (α₃ s)) ∙
-  β₁ (f s) ∙
-  ap β₀ (H s) ＝
-  H' (α₂ s) ∙
-  ( ap j' (inv (α₄ s)) ∙
-    β₂ (g s))
- -}
+β₂ s : ap i' (inv (α₃ s)) ∙ β₁ (f s) ∙ ap β₀ (H s) ＝ H' (α₂ s) ∙ ( ap j' (inv
+(α₄ s)) ∙ β₂ (g s)) -}
 
 Recall that the homotopy `β₃` is a family of identifications of type
 
@@ -263,7 +254,6 @@ Recall that the homotopy `β₃` is a family of identifications of type
   ( ( coherence-square-cocone-span-diagram 𝒯 d (hA a')) ∙
     ( ( ap k (inv-htpy (right-square-hom-span-diagram 𝒮 𝒯 f) a')) ∙
       ( R (g' a'))))
-
 ```
 
 ```agda
@@ -310,7 +300,7 @@ module _
       {!!}
 
 -- cube-hom-cocone-hom-span-diagram 𝒮 c 𝒯 d α β
- 
+
     htpy-coherence-square-cocone-map-hom-cocone-hom-span-diagram :
       htpy-cocone-span-diagram 𝒮
         ( comp-cocone-hom-span-diagram 𝒮 𝒯 α (cocone-map-span-diagram 𝒯 d k))

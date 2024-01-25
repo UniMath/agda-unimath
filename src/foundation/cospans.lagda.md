@@ -27,8 +27,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A {{#concept "cospan" Disambiguation="types" Agda=cospan}} from `A` to `B` consists of a type `X` and
-maps `f : A → X` and `g : B → X`, as indicated in the diagram
+A {{#concept "cospan" Disambiguation="types" Agda=cospan}} from `A` to `B`
+consists of a type `X` and maps `f : A → X` and `g : B → X`, as indicated in the
+diagram
 
 ```text
       f         g
