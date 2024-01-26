@@ -154,20 +154,14 @@ module _
     cube-equiv-cocone-equiv-span-diagram =
       pr2 (pr2 (pr2 u))
 
-    hom-cocone-equiv-cocone-equiv-span-diagram :
+    hom-equiv-cocone-equiv-span-diagram :
       hom-cocone-hom-span-diagram 𝒮 c 𝒯 d (hom-equiv-span-diagram 𝒮 𝒯 e)
-    pr1 hom-cocone-equiv-cocone-equiv-span-diagram =
+    pr1 hom-equiv-cocone-equiv-span-diagram =
       map-equiv-cocone-equiv-span-diagram
-    pr1 (pr2 hom-cocone-equiv-cocone-equiv-span-diagram) =
+    pr1 (pr2 hom-equiv-cocone-equiv-span-diagram) =
       left-square-equiv-cocone-equiv-span-diagram
-    pr1 (pr2 (pr2 hom-cocone-equiv-cocone-equiv-span-diagram)) =
+    pr1 (pr2 (pr2 hom-equiv-cocone-equiv-span-diagram)) =
       right-square-equiv-cocone-equiv-span-diagram
-    pr2 (pr2 (pr2 hom-cocone-equiv-cocone-equiv-span-diagram)) =
+    pr2 (pr2 (pr2 hom-equiv-cocone-equiv-span-diagram)) =
       cube-equiv-cocone-equiv-span-diagram
 ```
-
-## Properties
-
-### For any equivalence of cocones under an equivalence of span diagrams, there is a naturality square involving `cocone-map`
-
-This remains to be formalized.
