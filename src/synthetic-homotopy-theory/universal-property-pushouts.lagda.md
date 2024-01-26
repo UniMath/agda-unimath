@@ -39,7 +39,7 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
-open import synthetic-homotopy-theory.action-on-cocones-under-span-diagrams-functions
+open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams

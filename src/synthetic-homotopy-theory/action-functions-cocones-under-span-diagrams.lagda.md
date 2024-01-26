@@ -1,8 +1,8 @@
-# The action on cocones under span diagrams of functions
+# The action of functions on cocones under span diagrams
 
 ```agda
 module
-  synthetic-homotopy-theory.action-on-cocones-under-span-diagrams-functions
+  synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
   where
 ```
 
@@ -228,8 +228,8 @@ By whiskering the commutativity `β₂` of a cube with the map `k` and inverting
 we obtain identifications of type
 
 ```text
-ap k (H' (α₂ s)) ∙ (ap (k ∘ j') (α₄ s)⁻¹ ∙ ap k (β₂ (g s))) ＝
-ap (k ∘ i') (α₃ s)⁻¹ ∙ ap k (β₁ (f s)) ∙ ap (k ∘ h) (H s)
+  ap k (H' (α₂ s)) ∙ ap (k ∘ j') (α₄ s)⁻¹ ∙ ap k (β₂ (g s)) ＝
+  ap (k ∘ i') (α₃ s)⁻¹ ∙ ap k (β₁ (f s)) ∙ ap (k ∘ h) (H s)
 ```
 
 By `ap-inv` we have `ap (k ∘ i') (α₃ s)⁻¹ ＝ (ap (k ∘ i') (α₃ s))⁻¹` on the
@@ -237,8 +237,8 @@ right hand side. This can be transposed to the left hand side to obtain an
 identification of type
 
 ```text
-ap (k ∘ i') (α₃ s) ∙ (ap k (H' (α₂ s)) ∙ (ap (k ∘ j') (α₄ s)⁻¹ ∙ ap k (β₂ (g s))))) ＝
-ap k (β₁ (f s)) ∙ ap (k ∘ h) (H s)
+  ap (k ∘ i') (α₃ s) ∙ ap k (H' (α₂ s)) ∙ ap (k ∘ j') (α₄ s)⁻¹ ∙ ap k (β₂ (g s)) ＝
+  ap k (β₁ (f s)) ∙ ap (k ∘ h) (H s)
 ```
 
 This identification solves our goal up to some applications of associativity.
@@ -373,12 +373,12 @@ cocones is `h : X ≃ Y`. Then the square
 
 ```text
                                 - ∘ h
-          (Y → Z) ---------------------------------------> (X → Z)
-             |                                                |
-  cocone-map |                                                | cocone-map
-             V                                                V
-        cocone 𝒯 Z ------------------------------------> cocone 𝒮 Z
-                    comp-cocone-hom-span-diagram 𝒮 𝒯 α
+          (Y → Z) -----------------------------------------> (X → Z)
+             |                                                  |
+  cocone-map |                                                  | cocone-map
+             V                                                  V
+        cocone 𝒯 Z --------------------------------------> cocone 𝒮 Z
+                    comp-cocone-equiv-span-diagram 𝒮 𝒯 α
 ```
 
 commutes.
