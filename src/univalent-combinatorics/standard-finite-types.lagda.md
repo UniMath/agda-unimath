@@ -20,13 +20,13 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
+open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.injective-type-families
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
