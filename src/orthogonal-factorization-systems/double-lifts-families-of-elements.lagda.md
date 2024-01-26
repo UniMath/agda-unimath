@@ -26,8 +26,8 @@ elements `a : (i : I) → A i` and consider a family of types
 Recall that `b` is also a
 [dependent lift](orthogonal-factorization-systems.lifts-families-of-elements.md)
 of the family of elements `a`. The type of
-{{#concept "dependent double lifts" Disambiguation="family of elements"}} of `b`
-and `a` to `C` is defined to be the type
+{{#concept "dependent double lifts" Disambiguation="family of elements" Agda=dependent-double-lift-family-of-elements}}
+of `b` and `a` to `C` is defined to be the type
 
 ```text
   (i : I) → C i (a i) (b i).
@@ -38,8 +38,8 @@ lifts `a` and `b` to the type family `C`.
 
 The definition of (ordinary) double lifts is somewhat simpler: Given a lift `b`
 of `a : I → A` to a type family `B : A → 𝒰`, a
-{{#concept "double lift" Disambiguation="families of elements"}} of `a` and `b`
-to a type family
+{{#concept "double lift" Disambiguation="families of elements" Agda=double-lift-family-of-elements}}
+of `a` and `b` to a type family
 
 ```text
   C : (x : A) → B x → 𝒰

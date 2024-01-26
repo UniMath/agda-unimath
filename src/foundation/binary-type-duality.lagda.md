@@ -27,9 +27,9 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The principle of {{#concept "binary type duality"}} asserts that the type of
-[binary relations](foundation.binary-relations.md) `A → B → 𝒰` is
-[equivalent](foundation-core.equivalences.md) to the type of
+The principle of {{#concept "binary type duality" Agda=binary-type-duality}}
+asserts that the type of [binary relations](foundation.binary-relations.md)
+`A → B → 𝒰` is [equivalent](foundation-core.equivalences.md) to the type of
 [binary spans](foundation.spans.md) from `A` to `B`. The binary type duality
 principle is a binary version of the [type duality](foundation.type-duality.md)
 principle, which asserts that type families over a type `A` are equivalently

@@ -219,6 +219,6 @@ module _
 
 Several structures make essential use of commuting squares of maps:
 
-- [Cones over cospans](foundation.cones-over-cospans.md)
-- [Cocones under span diagrams](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
+- [Cones over cospan diagrams](foundation.cones-over-cospan-diagrams.md)
+- [Cocones under span diagrams](synthetic-homotopy-theory.cocones-under-spans.md)
 - [Morphisms of arrows](foundation.morphisms-arrows.md)

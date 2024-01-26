@@ -17,7 +17,7 @@ open import foundation-core.function-types
 ## Idea
 
 Any map `f : A → B` induces a
-{{#concept "precomposition operation" Disambiguation="type families"}}
+{{#concept "precomposition operation" Disambiguation="type families" Agda=precomp-family}}
 
 ```text
   (B → 𝒰) → (A → 𝒰)

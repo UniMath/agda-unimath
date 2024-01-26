@@ -32,9 +32,9 @@ Consider a family of elements `a : I → A`, a type family `B` over `A` and a
 ```
 
 of the family of elements `a`. An
-{{#concept "extension" Disambiguation="family of elements"}} of `b` to `A`
-consists of a family of elements `f : (x : A) → B x` equipped with a
-[homotopy](foundation-core.homotopies.md) `f ∘ a ~ b`.
+{{#concept "extension" Disambiguation="family of elements" Agda=extension-lift-family-of-elements}}
+of `b` to `A` consists of a family of elements `f : (x : A) → B x` equipped with
+a [homotopy](foundation-core.homotopies.md) `f ∘ a ~ b`.
 
 More generally, given a family of elements `a : (i : I) → A i`, a type family
 `B` over `A`, and a dependent lift
@@ -44,8 +44,8 @@ More generally, given a family of elements `a : (i : I) → A i`, a type family
 ```
 
 of the family of elements `A`, a
-{{#concet "dependent extension" Disambiguation"family of elements"}} of `b` to
-`A` consists of a family of elements
+{{#concept "dependent extension" Disambiguation"family of elements" Agda=extension-dependent-lift-family-of-elements}}
+of `b` to `A` consists of a family of elements
 
 ```text
   f : (i : I) (x : A i) → B i x

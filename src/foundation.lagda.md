@@ -61,7 +61,7 @@ open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public
 open import foundation.composition-algebra public
-open import foundation.cones-over-cospans public
+open import foundation.cones-over-cospan-diagrams public
 open import foundation.cones-over-inverse-sequential-diagrams public
 open import foundation.conjunction public
 open import foundation.connected-components public
@@ -79,6 +79,7 @@ open import foundation.coproduct-decompositions public
 open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
 open import foundation.coslice public
+open import foundation.cospan-diagrams public
 open import foundation.cospans public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
@@ -136,6 +137,7 @@ open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public
+open import foundation.equivalences-cospans public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences-span-diagrams public
@@ -224,6 +226,7 @@ open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
+open import foundation.morphisms-cospan-diagrams public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-inverse-sequential-diagrams public
 open import foundation.morphisms-span-diagrams public
@@ -240,6 +243,9 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.operations-span-diagrams public
+open import foundation.operations-spans public
+open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
@@ -248,6 +254,7 @@ open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
+open import foundation.permutations-spans-families-of-types public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
@@ -311,6 +318,10 @@ open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.sorial-type-families public
 open import foundation.span-diagrams public
+<<<<<<< HEAD
+=======
+open import foundation.span-diagrams-families-of-types public
+>>>>>>> c689506117661a4fa73d428b172af6b83bf4aaba
 open import foundation.spans public
 open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public

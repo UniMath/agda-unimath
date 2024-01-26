@@ -18,10 +18,10 @@ open import foundation-core.function-types
 
 ## Idea
 
-A {{#concept "binary span"}} from `A` to `B` consists of a
-{{#concept "spanning type" Disambiguation="binary span"}} `S` and a
-[pair](foundation.dependent-pair-types.md) of functions `f : S → A` and
-`g : S → B`. The types `A` and `B` in the specification of a binary span are
+A {{#concept "binary span" Agda=span}} from `A` to `B` consists of a
+{{#concept "spanning type" Disambiguation="binary span" Agda=spanning-type-span}}
+`S` and a [pair](foundation.dependent-pair-types.md) of functions `f : S → A`
+and `g : S → B`. The types `A` and `B` in the specification of a binary span are
 also referred to as the {{#concept "domain" Disambiguation="binary span"}} and
 {{#concept "codomain" Disambiguation="binary span"}} of the span, respectively.
 
@@ -76,19 +76,6 @@ module _
   pr1 id-span = X
   pr1 (pr2 id-span) = id
   pr2 (pr2 id-span) = id
-```
-
-### The opposite of a span
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  opposite-span : span l3 A B → span l3 B A
-  pr1 (opposite-span s) = spanning-type-span s
-  pr1 (pr2 (opposite-span s)) = right-map-span s
-  pr2 (pr2 (opposite-span s)) = left-map-span s
 ```
 
 ## See also

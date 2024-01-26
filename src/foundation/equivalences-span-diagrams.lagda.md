@@ -12,10 +12,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
-open import foundation.extensions-spans
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.morphisms-span-diagrams
 open import foundation.morphisms-spans
+open import foundation.operations-spans
 open import foundation.propositions
 open import foundation.span-diagrams
 open import foundation.structure-identity-principle
@@ -33,7 +33,7 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An {{#concept "equivalence of span diagrams"}} from a
+An {{#concept "equivalence of span diagrams" Agda=equiv-span-diagram}} from a
 [span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` to a span diagram
 `C <-h- T -k-> D` consists of [equivalences](foundation-core.equivalences.md)
 `u : A ≃ C`, `v : B ≃ D`, and `w : S ≃ T` [equipped](foundation.structure.md)
@@ -93,7 +93,7 @@ module _
         Σ ( codomain-span-diagram 𝒮 ≃ codomain-span-diagram 𝒯)
           ( λ f →
             equiv-span
-              ( extend-span (span-span-diagram 𝒮) (map-equiv e) (map-equiv f))
+              ( concat-span (span-span-diagram 𝒮) (map-equiv e) (map-equiv f))
               ( span-span-diagram 𝒯)))
 
   module _
@@ -129,7 +129,7 @@ module _
 
     equiv-span-equiv-span-diagram :
       equiv-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
@@ -141,7 +141,7 @@ module _
       spanning-type-span-diagram 𝒮 ≃ spanning-type-span-diagram 𝒯
     spanning-equiv-equiv-span-diagram =
       equiv-equiv-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
@@ -152,7 +152,7 @@ module _
       spanning-type-span-diagram 𝒮 → spanning-type-span-diagram 𝒯
     spanning-map-equiv-span-diagram =
       map-equiv-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
@@ -163,7 +163,7 @@ module _
       is-equiv spanning-map-equiv-span-diagram
     is-equiv-spanning-map-equiv-span-diagram =
       is-equiv-equiv-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
@@ -178,7 +178,7 @@ module _
         ( map-domain-equiv-span-diagram)
     left-square-equiv-span-diagram =
       left-triangle-equiv-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
@@ -202,7 +202,7 @@ module _
         ( map-codomain-equiv-span-diagram)
     right-square-equiv-span-diagram =
       right-triangle-equiv-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
@@ -220,14 +220,14 @@ module _
 
     hom-span-equiv-span-diagram :
       hom-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
         ( span-span-diagram 𝒯)
     hom-span-equiv-span-diagram =
       hom-equiv-span
-        ( extend-span
+        ( concat-span
           ( span-span-diagram 𝒮)
           ( map-domain-equiv-span-diagram)
           ( map-codomain-equiv-span-diagram))
@@ -257,7 +257,7 @@ module _
           ( equiv-tot
             ( λ f →
               compute-equiv-span
-                ( extend-span
+                ( concat-span
                   ( span-span-diagram 𝒮)
                   ( map-equiv e)
                   ( map-equiv f))

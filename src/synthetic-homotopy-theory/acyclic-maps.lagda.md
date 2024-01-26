@@ -9,7 +9,7 @@ module synthetic-homotopy-theory.acyclic-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types

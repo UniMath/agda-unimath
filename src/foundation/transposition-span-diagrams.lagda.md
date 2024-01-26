@@ -8,6 +8,7 @@ module foundation.transposition-span-diagrams where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.opposite-spans
 open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
@@ -17,8 +18,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "trasposition" Disambiguation="span diagram"}} of a
-[span diagram](foundation.span-diagrams.md)
+The
+{{#concept "trasposition" Disambiguation="span diagram" Agda=transposition-span-diagram}}
+of a [span diagram](foundation.span-diagrams.md)
 
 ```text
        f       g
@@ -31,6 +33,11 @@ is the span diagram
        g       f
   B <----- S -----> A.
 ```
+
+In other words, the transposition of a span diagram `(A , B , s)` is the span
+diagram `(B , A , opposite-span s)` where `opposite-span s` is the
+[opposite](foundation.opposite-spans.md) of the [span](foundation.spans.md) `s`
+from `A` to `B`.
 
 ## Definitions
 

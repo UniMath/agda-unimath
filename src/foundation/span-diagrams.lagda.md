@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "(binary) span diagram"}} is a diagram of the form
+A {{#concept "(binary) span diagram" Agda=span-diagram}} is a diagram of the
+form
 
 ```text
        f       g
@@ -133,9 +134,9 @@ module _
 
 ## See also
 
-- [Cospans](foundation.cospans.md)
-- [Diagonal spans](foundation.diagonal-spans.md)
-- [Extensions of spans](foundation.extensions-spans.md)
-- [Kernel spans of maps](foundation.kernel-spans-of-maps.md)
+- [Cospan diagrams](foundation.cospan-diagrams.md)
+- [Diagonal span diagrams](foundation.diagonal-span-diagrams.md)
+- [Extensions of span diagrams](foundation.operations-span-diagrams.md)
+- [Kernel span diagrams of maps](foundation.kernel-span-diagrams-of-maps.md)
 - [Spans of families of types](foundation.spans-families-of-types.md)
 - [Transposition of span diagrams](foundation.transposition-span-diagrams.md)

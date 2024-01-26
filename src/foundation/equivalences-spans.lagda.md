@@ -22,10 +22,10 @@ open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
-open import foundation-core.extensions-spans
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.operations-spans
 open import foundation-core.torsorial-type-families
 ```
 
@@ -33,9 +33,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A {{#concept "equivalence of spans"}} from a [span](foundation.spans.md)
-`A <-f- S -g-> B` to a span `A <-h- T -k-> B` consists of an
-[equivalence](foundation-core.equivalences.md) `w : S ≃ T`
+A {{#concept "equivalence of spans" Agda=equiv-span}} from a
+[span](foundation.spans.md) `A <-f- S -g-> B` to a span `A <-h- T -k-> B`
+consists of an [equivalence](foundation-core.equivalences.md) `w : S ≃ T`
 [equipped](foundation.structure.md) with two
 [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 

@@ -10,7 +10,7 @@ module foundation.commuting-cubes-of-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-hexagons-of-identifications
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.path-algebra

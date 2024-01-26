@@ -8,9 +8,9 @@ module foundation.morphisms-span-diagrams where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.extensions-spans
 open import foundation.morphisms-arrows
 open import foundation.morphisms-spans
+open import foundation.operations-spans
 open import foundation.span-diagrams
 open import foundation.universe-levels
 
@@ -21,7 +21,7 @@ open import foundation-core.commuting-squares-of-maps
 
 ## Idea
 
-A {{#concept "morphism of span diagrams"}} from a
+A {{#concept "morphism of span diagrams" Agda=hom-span-diagram}} from a
 [span diagram](foundation.span-diagrams.md) `A <-f- S -g-> B` to a span diagram
 `C <-h- T -k-> D` consists of maps `u : A → C`, `v : B → D`, and `w : S → T`
 [equipped](foundation.structure.md) with two
@@ -92,7 +92,7 @@ module _
         Σ ( codomain-span-diagram 𝒮 → codomain-span-diagram 𝒯)
           ( λ g →
             hom-span
-              ( extend-span
+              ( concat-span
                 ( span-span-diagram 𝒮)
                 ( f)
                 ( g))
@@ -114,7 +114,7 @@ module _
 
   hom-span-hom-span-diagram :
     hom-span
-      ( extend-span
+      ( concat-span
         ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))
@@ -125,7 +125,7 @@ module _
     spanning-type-span-diagram 𝒮 → spanning-type-span-diagram 𝒯
   spanning-map-hom-span-diagram =
     map-hom-span
-      ( extend-span
+      ( concat-span
         ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))
@@ -140,7 +140,7 @@ module _
       ( map-domain-hom-span-diagram)
   left-square-hom-span-diagram =
     left-triangle-hom-span
-      ( extend-span
+      ( concat-span
         ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))
@@ -164,7 +164,7 @@ module _
       ( map-codomain-hom-span-diagram)
   right-square-hom-span-diagram =
     right-triangle-hom-span
-      ( extend-span
+      ( concat-span
         ( span-span-diagram 𝒮)
         ( map-domain-hom-span-diagram)
         ( map-codomain-hom-span-diagram))

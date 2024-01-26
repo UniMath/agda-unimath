@@ -9,7 +9,7 @@ module foundation.functoriality-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.morphisms-arrows
 open import foundation.universe-levels

@@ -9,7 +9,7 @@ open import foundation-core.universal-property-pullbacks public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types

@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "cube" Disambiguation="natural number"}} `n³` of a
+The {{#concept "cube" Disambiguation="natural number" Agda=cube-ℕ}} `n³` of a
 [natural number](elementary-number-theory.natural-numbers.md) `n` is the triple
 [product](elementary-number-theory.multiplication-natural-numbers.md)
 
