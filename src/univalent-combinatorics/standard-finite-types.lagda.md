@@ -431,17 +431,18 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
 
 ```agda
 abstract
-  is-equiv-injective-Fin : is-equiv-injective Fin
-  is-equiv-injective-Fin {zero-ℕ} {zero-ℕ} e =
+  is-equivalence-injective-Fin : is-equivalence-injective Fin
+  is-equivalence-injective-Fin {zero-ℕ} {zero-ℕ} e =
     refl
-  is-equiv-injective-Fin {zero-ℕ} {succ-ℕ l} e =
+  is-equivalence-injective-Fin {zero-ℕ} {succ-ℕ l} e =
     ex-falso (map-inv-equiv e (zero-Fin l))
-  is-equiv-injective-Fin {succ-ℕ k} {zero-ℕ} e =
+  is-equivalence-injective-Fin {succ-ℕ k} {zero-ℕ} e =
     ex-falso (map-equiv e (zero-Fin k))
-  is-equiv-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
-    ap succ-ℕ (is-equiv-injective-Fin (equiv-equiv-Maybe e))
+  is-equivalence-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+    ap succ-ℕ (is-equivalence-injective-Fin (equiv-equiv-Maybe e))
 
 abstract
   is-injective-Fin : is-injective Fin
-  is-injective-Fin = is-injective-is-equiv-injective is-equiv-injective-Fin
+  is-injective-Fin =
+    is-injective-is-equivalence-injective is-equivalence-injective-Fin
 ```

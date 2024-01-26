@@ -129,6 +129,7 @@ open import foundation.equality-fibers-of-maps public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
+open import foundation.equivalence-injective-type-families public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-inverse-sequential-diagrams public
@@ -179,7 +180,6 @@ open import foundation.induction-principle-propositional-truncation public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
-open import foundation.injective-type-families public
 open import foundation.interchange-law public
 open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public

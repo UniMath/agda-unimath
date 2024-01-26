@@ -31,7 +31,7 @@ abstract
     (count-B : count B) (e : A ≃ B) →
     Id (number-of-elements-count count-A) (number-of-elements-count count-B)
   double-counting-equiv (k , f) (l , g) e =
-    is-equiv-injective-Fin (inv-equiv g ∘e e ∘e f)
+    is-equivalence-injective-Fin (inv-equiv g ∘e e ∘e f)
 
 abstract
   double-counting :

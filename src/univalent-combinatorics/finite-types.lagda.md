@@ -315,7 +315,8 @@ abstract
         ( λ (e : Fin k ≃ X) →
           apply-universal-property-trunc-Prop L
             ( Id-Prop ℕ-Set k l)
-            ( λ (f : Fin l ≃ X) → is-equiv-injective-Fin (inv-equiv f ∘e e))))
+            ( λ (f : Fin l ≃ X) →
+              is-equivalence-injective-Fin (inv-equiv f ∘e e))))
 
 abstract
   is-prop-has-finite-cardinality :
@@ -380,7 +381,7 @@ module _
             ( number-of-elements-count e)
             ( number-of-elements-is-finite g))
         ( λ g →
-          ( is-equiv-injective-Fin
+          ( is-equivalence-injective-Fin
             ( inv-equiv (equiv-count g) ∘e equiv-count e)) ∙
           ( ap pr1
             ( eq-is-prop' is-prop-has-finite-cardinality
@@ -409,7 +410,7 @@ eq-cardinality H K =
     ( λ e →
       apply-universal-property-trunc-Prop K
         ( Id-Prop ℕ-Set _ _)
-        ( λ f → is-equiv-injective-Fin (inv-equiv f ∘e e)))
+        ( λ f → is-equivalence-injective-Fin (inv-equiv f ∘e e)))
 ```
 
 ### Any finite type is a set
