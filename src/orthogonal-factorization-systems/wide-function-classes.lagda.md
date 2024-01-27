@@ -28,7 +28,7 @@ and is composition closed. This means it is morally a wide sub-∞-category of t
 
 ## Definition
 
-### The predicate on a small function class of being wide
+### The predicate on small function classes of being wide
 
 ```agda
 module _

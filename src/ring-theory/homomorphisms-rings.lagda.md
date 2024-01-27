@@ -37,7 +37,7 @@ Ring homomorphisms are maps between rings that preserve the ring structure
 
 ## Definitions
 
-### The predicate that a group homomorphism between rings preserves multiplication
+### The predicate on group homomorphisms between rings of preserving multiplication
 
 ```agda
 preserves-mul-hom-Ab :
@@ -66,7 +66,7 @@ is-prop-preserves-mul-hom-Ab R S f =
               ( map-hom-Ab (ab-Ring R) (ab-Ring S) f y))))
 ```
 
-### The predicate that a group homomorphism between rings preserves the unit
+### The predicate on group homomorphisms between rings of preserving the unit
 
 ```agda
 preserves-unit-hom-Ab :
