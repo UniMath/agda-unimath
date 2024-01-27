@@ -372,7 +372,7 @@ module _
 
   equiv-span-flattening-equiv-structure-type-family-pushout :
     equiv-span
-      ( extend-span
+      ( concat-span
         ( span-flattening-structure-type-family-pushout 𝒮 P)
         ( left-map-flattening-equiv-structure-type-family-pushout)
         ( right-map-flattening-equiv-structure-type-family-pushout))
@@ -407,24 +407,61 @@ Consider the structure of a type family `(P , Q , e)` over a span diagram
 
 Furthermore, consider a type `X`, a type family `Y` over `X`, a cocone `c` on
 `𝒮` with codomain `X` and a dependent cocone `d` on `𝒯` over `c` with codomain
-`Y`. Then there is an equivalence
+`Y`. Then there is a commuting square
 
 ```text
-  cocone 𝒯 Z ≃ dependent-cocone 𝒮 c (λ x → Y x → Z)
+                          ev-pair
+  ((Σ (x : X), Y x) → Z) ---------> ((x : X) → Y x → Z)
+             |                               |
+  cocone-map |                               | dependent-cocone-map
+             V         ≃                     V
+        cocone 𝒯 Z ---------> dependent-cocone 𝒮 c (λ x → Y x → Z)
 ```
 
-Then the type of cocones under `𝒯` with codomain `X` is equivalent to the type
-of pairs `(c , d)` consisting of a cocone `c` under `𝒮` with codomain `X` and a
-dependent cocone `d` over `C`
-
-Then a cocone under `𝒯` with codomain `X` is equivalently described as a triple
-`(p , q , H)` consisting of
+in which the bottom map is an equivalence. Here, the type of cocones on `𝒯` is the type of triples
 
 ```text
-  p : (a : A) → P a → X
-  q : (b : B) → Q b → X
-  H : (s : S) (t : P (f s)) → p (f s) t ＝ q (g s) (e s t).
+  i' : (Σ (a : A), P a) → Z
+  j' : (Σ (b : B), Q b) → Z
+  H' : ((s , p) : Σ (s : S), P (f s)) → i' (f s , p) ＝ j' (g s , e s p),
 ```
+
+and the type of dependent cocones on `𝒮` over `c` is the type of triples
+
+```text
+  i" : (a : A) → Y (i a) → Z
+  j" : (b : B) → Y (j b) → Z
+  H" : (s : S) (y : Y (i (f s))) → i" (f s) y ＝ j" (g s) (tr Y (H s) y)
+```
+
+**Proof.** Since the span diagram `𝒯` is equivalent to the flattening span diagram `Σ 𝒮 Y`
+
+```text
+  Σ (a : A), Y (i a) <----- Σ (s : S), Y (i (f s)) -----> Σ (b : B), Y (j b)
+```
+
+we obtain a commuting square
+
+```text
+                           id
+  ((Σ (x : X), Y x) → Z) -----> ((Σ (x : x), Y x) → Z)
+               |                             |
+    cocone-map |                             | cocone-map
+               V             ≃               V
+          cocone 𝒯 Z -----------------> cocone (Σ 𝒮 Y) Z
+```
+
+Furthermore, it is straightforward to see that we have a commuting square
+
+```text
+  ((Σ (x : X), Y x) → Z) -------------> ((x : X) → Y x → Z)
+               |                                 |
+    cocone-map |                                 | dependent-cocone-map
+               V                ≃                V
+          cocone (Σ 𝒮 Y) Z ----------> dependent-cocone 𝒮 (λ x → Y x → Z)
+```
+
+The claim now follows by pasting these two commuting squares.
 
 ```text
 module _
