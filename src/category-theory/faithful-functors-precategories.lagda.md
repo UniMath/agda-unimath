@@ -34,7 +34,7 @@ in terms of embeddings because this is the notion that generalizes.
 
 ## Definition
 
-### The predicate of being faithful on functors between precategories
+### The predicate on functors between precategories of being faithful
 
 ```agda
 module _
@@ -95,7 +95,7 @@ module _
     hom-functor-Precategory C D functor-faithful-functor-Precategory
 ```
 
-### The predicate of being injective on hom-sets on functors between precategories
+### The predicate on functors between precategories of being injective on hom-sets
 
 ```agda
 module _

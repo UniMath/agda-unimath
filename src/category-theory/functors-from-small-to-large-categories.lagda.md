@@ -34,7 +34,7 @@ A **functor** from a [(small) category](category-theory.categories.md) `C` to a
 
 ## Definition
 
-### The predicate of being a functor on maps from small to large categories
+### The predicate on maps from small to large categories of being a functor
 
 ```agda
 module _

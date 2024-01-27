@@ -44,7 +44,7 @@ identities between the objects are exactly the isomorphisms.
 
 ## Definitions
 
-### The predicate of being a precategory on composition operations on binary families of sets
+### The predicate on composition operations on binary families of sets of being a precategory
 
 ```agda
 module _

@@ -33,7 +33,7 @@ correct universe polymorphic definition.
 
 ## Definitions
 
-### The predicate on a family of function classes of being closed under composition with equivalences
+### The predicate on families of function classes of being closed under composition with equivalences
 
 ```agda
 module _
