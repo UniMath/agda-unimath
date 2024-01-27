@@ -14,7 +14,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-span-diagrams
 open import foundation.equivalences-spans
-open import foundation.extensions-spans
+open import foundation.operations-spans
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types

@@ -11,7 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences-arrows
 open import foundation.equivalences-span-diagrams
-open import foundation.extensions-span-diagrams
+open import foundation.operations-span-diagrams
 open import foundation.function-extensionality
 open import foundation.morphisms-arrows
 open import foundation.morphisms-span-diagrams
@@ -210,7 +210,7 @@ module _
         ( d))
 
   horizontal-comp-cocone-span-diagram :
-    cocone-span-diagram (right-extend-span-diagram 𝒮 h) Y
+    cocone-span-diagram (right-concat-span-diagram 𝒮 h) Y
   pr1 horizontal-comp-cocone-span-diagram =
     left-map-horizontal-comp-cocone-span-diagram
   pr1 (pr2 horizontal-comp-cocone-span-diagram) =
@@ -219,7 +219,7 @@ module _
     coherence-square-horizontal-comp-cocone-span-diagram
 ```
 
-### Cocones under span diagrams extended on the left by morphisms and equivalences of arrows
+### Concatenation of cocones under span diagrams and morphisms and equivalences of arrows on the left
 
 Consider a span diagram `s := A <-f- S -g-> B`, a cocone on `𝒮`, and a
 [moprhism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f` for
@@ -250,21 +250,21 @@ module _
   {S' : UU l4} {A' : UU l5} (f' : S' → A') {X : UU l6}
   where
 
-  cocone-left-extend-hom-arrow-span-diagram :
+  cocone-left-concat-hom-arrow-span-diagram :
     (h : hom-arrow f' (left-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
-    cocone-span-diagram (left-extend-hom-arrow-span-diagram 𝒮 f' h) X
-  cocone-left-extend-hom-arrow-span-diagram h c =
+    cocone-span-diagram (left-concat-hom-arrow-span-diagram 𝒮 f' h) X
+  cocone-left-concat-hom-arrow-span-diagram h c =
     horizontal-comp-cocone-span-diagram
       ( span-diagram-hom-arrow f' (left-map-span-diagram 𝒮) h)
       ( right-map-span-diagram 𝒮)
       ( cocone-hom-arrow f' (left-map-span-diagram 𝒮) h)
       ( c)
 
-  cocone-left-extend-equiv-arrow-span-diagram :
+  cocone-left-concat-equiv-arrow-span-diagram :
     (e : equiv-arrow f' (left-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
-    cocone-span-diagram (left-extend-equiv-arrow-span-diagram 𝒮 f' e) X
-  cocone-left-extend-equiv-arrow-span-diagram e =
-    cocone-left-extend-hom-arrow-span-diagram
+    cocone-span-diagram (left-concat-equiv-arrow-span-diagram 𝒮 f' e) X
+  cocone-left-concat-equiv-arrow-span-diagram e =
+    cocone-left-concat-hom-arrow-span-diagram
       ( hom-equiv-arrow f' (left-map-span-diagram 𝒮) e)
 ```
 
@@ -362,7 +362,7 @@ module _
         ( d))
 
   vertical-comp-cocone-span-diagram :
-    cocone-span-diagram (left-extend-span-diagram 𝒮 h) Y
+    cocone-span-diagram (left-concat-span-diagram 𝒮 h) Y
   pr1 vertical-comp-cocone-span-diagram =
     left-map-vertical-comp-cocone-span-diagram
   pr1 (pr2 vertical-comp-cocone-span-diagram) =
@@ -406,10 +406,10 @@ module _
   {S' : UU l4} {B' : UU l5} (g' : S' → B') {X : UU l6}
   where
 
-  cocone-right-extend-hom-arrow-span-diagram :
+  cocone-right-concat-hom-arrow-span-diagram :
     (h : hom-arrow g' (right-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
-    cocone-span-diagram (right-extend-hom-arrow-span-diagram 𝒮 g' h) X
-  cocone-right-extend-hom-arrow-span-diagram h c =
+    cocone-span-diagram (right-concat-hom-arrow-span-diagram 𝒮 g' h) X
+  cocone-right-concat-hom-arrow-span-diagram h c =
     vertical-comp-cocone-span-diagram
       ( span-diagram-hom-arrow
         ( map-domain-hom-arrow g' (right-map-span-diagram 𝒮) h)
@@ -422,11 +422,11 @@ module _
         ( transpose-hom-arrow g' (right-map-span-diagram 𝒮) h))
       ( c)
 
-  cocone-right-extend-equiv-arrow-span-diagram :
+  cocone-right-concat-equiv-arrow-span-diagram :
     (e : equiv-arrow g' (right-map-span-diagram 𝒮)) → cocone-span-diagram 𝒮 X →
-    cocone-span-diagram (right-extend-equiv-arrow-span-diagram 𝒮 g' e) X
-  cocone-right-extend-equiv-arrow-span-diagram e =
-    cocone-right-extend-hom-arrow-span-diagram
+    cocone-span-diagram (right-concat-equiv-arrow-span-diagram 𝒮 g' e) X
+  cocone-right-concat-equiv-arrow-span-diagram e =
+    cocone-right-concat-hom-arrow-span-diagram
       ( hom-equiv-arrow g' (right-map-span-diagram 𝒮) e)
 ```
 
@@ -497,15 +497,15 @@ module _
 
   comp-cocone-hom-span-diagram : cocone-span-diagram 𝒮' X
   comp-cocone-hom-span-diagram =
-    cocone-right-extend-hom-arrow-span-diagram
-      ( left-extend-hom-arrow-span-diagram 𝒮
+    cocone-right-concat-hom-arrow-span-diagram
+      ( left-concat-hom-arrow-span-diagram 𝒮
         ( left-map-span-diagram 𝒮')
         ( left-hom-arrow-hom-span-diagram 𝒮' 𝒮 h))
       ( right-map-span-diagram 𝒮')
       ( ( id) ,
         ( map-codomain-hom-span-diagram 𝒮' 𝒮 h) ,
         ( right-square-hom-span-diagram 𝒮' 𝒮 h))
-      ( cocone-left-extend-hom-arrow-span-diagram
+      ( cocone-left-concat-hom-arrow-span-diagram
         ( 𝒮)
         ( left-map-span-diagram 𝒮')
         ( left-hom-arrow-hom-span-diagram 𝒮' 𝒮 h)

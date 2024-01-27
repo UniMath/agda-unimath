@@ -25,8 +25,6 @@ open import foundation-core.endomorphisms public
 open import foundation-core.equality-dependent-pair-types public
 open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
-open import foundation-core.extensions-span-diagrams public
-open import foundation-core.extensions-spans public
 open import foundation-core.families-of-equivalences public
 open import foundation-core.fibers-of-maps public
 open import foundation-core.function-extensionality public

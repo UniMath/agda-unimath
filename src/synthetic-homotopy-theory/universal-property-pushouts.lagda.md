@@ -21,7 +21,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.equivalences-span-diagrams
-open import foundation.extensions-span-diagrams
+open import foundation.operations-span-diagrams
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -604,12 +604,12 @@ module _
       ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( d) →
     universal-property-pushout
-      ( right-extend-span-diagram 𝒮 h)
+      ( right-concat-span-diagram 𝒮 h)
       ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
   universal-property-pushout-rectangle-universal-property-pushout-right-square
     U =
     universal-property-pushout-pullback-property-pushout
-      ( right-extend-span-diagram 𝒮 h)
+      ( right-concat-span-diagram 𝒮 h)
       ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
       ( λ W →
         tr
@@ -621,7 +621,7 @@ module _
               ( precomp (left-map-span-diagram 𝒮) W)
               ( precomp (h ∘ right-map-span-diagram 𝒮) W)
               ( cone-pullback-property-pushout
-                ( right-extend-span-diagram 𝒮 h)
+                ( right-concat-span-diagram 𝒮 h)
                 ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
                 ( W))
               ( pasting-vertical-cone
@@ -673,7 +673,7 @@ module _
 
   universal-property-pushout-right-square-universal-property-pushout-rectangle :
     universal-property-pushout
-      ( right-extend-span-diagram 𝒮 h)
+      ( right-concat-span-diagram 𝒮 h)
       ( horizontal-comp-cocone-span-diagram 𝒮 h c d) →
     universal-property-pushout
       ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
@@ -703,7 +703,7 @@ module _
               ( precomp (left-map-span-diagram 𝒮) W)
               ( precomp (h ∘ right-map-span-diagram 𝒮) W)
               ( cone-pullback-property-pushout
-                ( right-extend-span-diagram 𝒮 h)
+                ( right-concat-span-diagram 𝒮 h)
                 ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
                 ( W))
               ( pasting-vertical-cone
@@ -736,16 +736,16 @@ module _
                     ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d)))))
             ( pullback-property-pushout-universal-property-pushout
-              ( right-extend-span-diagram 𝒮 h)
+              ( right-concat-span-diagram 𝒮 h)
               ( horizontal-comp-cocone-span-diagram 𝒮 h c d)
               ( K)
               ( W))))
 ```
 
-#### Extending pushouts by equivalences on the left
+#### Concatenating pushout squares and equivalences of arrows on the left
 
-As a special case of the horizontal pushout pasting lemma we can extend a
-pushout 𝒮quare by equivalences on the left.
+As a special case of the horizontal pushout pasting lemma we can concatenate a
+pushout square and an equivalence of arrows on the left.
 
 If we have a pushout 𝒮quare on the right, equivalences S' ≃ S and A' ≃ A, and a
 map f' : S' → A' making the left square commute, then the outer rectangle is
@@ -769,12 +769,12 @@ module _
   ( c : cocone-span-diagram 𝒮 X)
   where
 
-  universal-property-pushout-cocone-left-extend-equiv-arrow-span-diagram :
+  universal-property-pushout-cocone-left-concat-equiv-arrow-span-diagram :
     universal-property-pushout 𝒮 c →
     universal-property-pushout
-      ( left-extend-equiv-arrow-span-diagram 𝒮 f' e)
-      ( cocone-left-extend-equiv-arrow-span-diagram 𝒮 f' e c)
-  universal-property-pushout-cocone-left-extend-equiv-arrow-span-diagram =
+      ( left-concat-equiv-arrow-span-diagram 𝒮 f' e)
+      ( cocone-left-concat-equiv-arrow-span-diagram 𝒮 f' e c)
+  universal-property-pushout-cocone-left-concat-equiv-arrow-span-diagram =
     universal-property-pushout-rectangle-universal-property-pushout-right-square
       ( span-diagram-equiv-arrow f' (left-map-span-diagram 𝒮) e)
       ( right-map-span-diagram 𝒮)
@@ -965,7 +965,7 @@ module _
               ( W))))
 ```
 
-#### Extending pushouts by an equivalence of arrows on top
+#### Concatenating pushout squares and equivalences of arrows on top
 
 If we have a pushout 𝒮quare on the right, equivalences `S' ≃ S` and `B' ≃ B`,
 and a map `g' : S' → B'` making the top square commute, then the vertical
@@ -994,12 +994,12 @@ module _
   { X : UU l4} ( c : cocone-span-diagram 𝒮 X)
   where
 
-  universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram :
+  universal-property-pushout-cocone-right-concat-equiv-arrow-span-diagram :
     universal-property-pushout 𝒮 c →
     universal-property-pushout
-      ( right-extend-equiv-arrow-span-diagram 𝒮 g' e)
-      ( cocone-right-extend-equiv-arrow-span-diagram 𝒮 g' e c)
-  universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram =
+      ( right-concat-equiv-arrow-span-diagram 𝒮 g' e)
+      ( cocone-right-concat-equiv-arrow-span-diagram 𝒮 g' e c)
+  universal-property-pushout-cocone-right-concat-equiv-arrow-span-diagram =
     universal-property-pushout-rectangle-universal-property-pushout-top
       ( transposition-span-diagram
         ( span-diagram-equiv-arrow g' (right-map-span-diagram 𝒮) e))
@@ -1018,7 +1018,7 @@ module _
         ( is-equiv-map-codomain-equiv-arrow g' (right-map-span-diagram 𝒮) e))
 ```
 
-### Extending pushouts by equivalences of span diagrams
+### Concatenating pushout squares and equivalences of span diagrams
 
 Given a commutative diagram where `(i , j , k)` form an
 [equivalence of span diagrams](foundation.equivalences-span-diagrams.md),
@@ -1089,7 +1089,7 @@ module _
   universal-property-pushout-comp-cocone-equiv-span-diagram :
     universal-property-pushout 𝒮' (comp-cocone-equiv-span-diagram 𝒮' 𝒮 e c)
   universal-property-pushout-comp-cocone-equiv-span-diagram =
-    universal-property-pushout-cocone-right-extend-equiv-arrow-span-diagram
+    universal-property-pushout-cocone-right-concat-equiv-arrow-span-diagram
       ( make-span-diagram
         ( left-map-span-diagram 𝒮')
         ( right-map-span-diagram 𝒮 ∘ spanning-map-equiv-span-diagram 𝒮' 𝒮 e))
@@ -1097,11 +1097,11 @@ module _
       ( ( id-equiv) ,
         ( equiv-codomain-equiv-span-diagram 𝒮' 𝒮 e) ,
         ( right-square-equiv-span-diagram 𝒮' 𝒮 e))
-      ( cocone-left-extend-equiv-arrow-span-diagram 𝒮
+      ( cocone-left-concat-equiv-arrow-span-diagram 𝒮
         ( left-map-span-diagram 𝒮')
         ( equiv-left-arrow-equiv-span-diagram 𝒮' 𝒮 e)
         ( c))
-      ( universal-property-pushout-cocone-left-extend-equiv-arrow-span-diagram
+      ( universal-property-pushout-cocone-left-concat-equiv-arrow-span-diagram
         ( 𝒮)
         ( left-map-span-diagram 𝒮')
         ( equiv-left-arrow-equiv-span-diagram 𝒮' 𝒮 e)

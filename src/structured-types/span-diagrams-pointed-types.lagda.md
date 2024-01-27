@@ -199,7 +199,7 @@ module _
 
 - [Cospans](foundation.cospans.md)
 - [Diagonal spans](foundation.diagonal-spans.md)
-- [Extensions of spans](foundation.extensions-spans.md)
+- [Operations on spans](foundation.operations-spans.md)
 - [Kernel spans of maps](foundation.kernel-spans-of-maps.md)
 - [Spans of families of types](foundation.spans-families-of-types.md)
 - [Transposition of span diagrams](foundation.transposition-span-diagram-Pointed-Types.md)
