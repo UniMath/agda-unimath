@@ -37,7 +37,7 @@ of:
 
 ## Definition
 
-### The predicate of being a functor on maps from small to large precategories
+### The predicate on maps from small to large precategories of being a functor
 
 ```agda
 module _

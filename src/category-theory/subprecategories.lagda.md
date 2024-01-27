@@ -225,7 +225,7 @@ module _
     inclusion-subtype (subtype-hom-obj-subprecategory-Subprecategory x y)
 ```
 
-The predicate on a morphism between subobjects of being contained in the
+The predicate on morphisms between subobjects of being contained in the
 subprecategory:
 
 ```agda
@@ -249,7 +249,7 @@ subprecategory:
     is-prop-is-in-subtype (subtype-hom-obj-subprecategory-Subprecategory x y)
 ```
 
-The predicate on a morphism between any objects of being contained in the
+The predicate on morphisms between any objects of being contained in the
 subprecategory:
 
 ```agda

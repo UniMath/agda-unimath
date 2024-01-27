@@ -43,7 +43,7 @@ map of the factorization.
 
 ## Definitions
 
-### The predicate on a triangle of maps of being a factorization
+### The predicate on triangles of maps of being a factorization
 
 ```agda
 module _

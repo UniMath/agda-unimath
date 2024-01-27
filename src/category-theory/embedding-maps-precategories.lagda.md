@@ -36,7 +36,7 @@ considered in
 
 ## Definition
 
-### The predicate of being an embedding map on maps between precategories
+### The predicate on maps between precategories of being an embedding map
 
 ```agda
 module _
