@@ -37,6 +37,10 @@ In this file we record some further facts about the
 [structures](foundation.structure.md) introduced in
 [`foundation-core.type-theoretic-principle-of-choice`](foundation-core.type-theoretic-principle-of-choice.md).
 
+We relate precomposition of maps into a dependent pair type by a function with
+precomposition in dependent pair types of functions in the file
+[`orthogonal-factorization-systems.precomposition-lifts-families-of-elements`](orthogonal-factorization-systems.precomposition-lifts-families-of-elements.md).
+
 ## Lemma
 
 ### Characterizing the identity type of `universally-structured-Π`

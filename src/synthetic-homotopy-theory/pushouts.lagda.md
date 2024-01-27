@@ -21,7 +21,6 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
