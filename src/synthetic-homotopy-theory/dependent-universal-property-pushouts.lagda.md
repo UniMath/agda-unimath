@@ -307,24 +307,24 @@ is logically equivalent to the
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  (f : S → A) (g : S → B) (c : cocone f g X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   universal-property-dependent-universal-property-pushout :
-    ({l : Level} → dependent-universal-property-pushout l f g c) →
-    ({l : Level} → universal-property-pushout l f g c)
-  universal-property-dependent-universal-property-pushout dup-c {l} =
-    universal-property-pushout-pullback-property-pushout l f g c
-      ( pullback-property-dependent-pullback-property-pushout f g c
-        ( dependent-pullback-property-dependent-universal-property-pushout f g c
+    dependent-universal-property-pushout 𝒮 c →
+    universal-property-pushout 𝒮 c
+  universal-property-dependent-universal-property-pushout dup-c =
+    universal-property-pushout-pullback-property-pushout 𝒮 c
+      ( pullback-property-dependent-pullback-property-pushout 𝒮 c
+        ( dependent-pullback-property-dependent-universal-property-pushout 𝒮 c
           ( dup-c)))
 
   dependent-universal-property-universal-property-pushout :
-    ({l : Level} → universal-property-pushout l f g c) →
-    ({l : Level} → dependent-universal-property-pushout l f g c)
+    universal-property-pushout 𝒮 c →
+    dependent-universal-property-pushout 𝒮 c
   dependent-universal-property-universal-property-pushout up-c =
-    dependent-universal-property-dependent-pullback-property-pushout f g c
-      ( dependent-pullback-property-pullback-property-pushout f g c
-        ( pullback-property-pushout-universal-property-pushout f g c up-c))
+    dependent-universal-property-dependent-pullback-property-pushout 𝒮 c
+      ( dependent-pullback-property-pullback-property-pushout 𝒮 c
+        ( pullback-property-pushout-universal-property-pushout 𝒮 c up-c))
 ```

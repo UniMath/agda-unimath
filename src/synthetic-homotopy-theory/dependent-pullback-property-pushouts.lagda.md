@@ -118,13 +118,13 @@ the dependent pullback property to the constant type family `λ _ → Y`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3)
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
   where
 
   pullback-property-dependent-pullback-property-pushout :
-    ({l : Level} → dependent-pullback-property-pushout l f g c) →
-    ({l : Level} → pullback-property-pushout l f g c)
+    dependent-pullback-property-pushout 𝒮 c →
+    pullback-property-pushout 𝒮 c
   pullback-property-dependent-pullback-property-pushout dpp-c Y =
     is-pullback-htpy
       ( λ h →
@@ -132,10 +132,10 @@ module _
           ( λ s →
             inv
               ( tr-constant-type-family
-                ( coherence-square-cocone f g c s)
-                ( h (f s)))))
+                ( coherence-square-cocone-span-diagram 𝒮 c s)
+                ( h (left-map-span-diagram 𝒮 s)))))
       ( refl-htpy)
-      ( cone-dependent-pullback-property-pushout f g c (λ _ → Y))
+      ( cone-dependent-pullback-property-pushout 𝒮 c (λ _ → Y))
       ( ( refl-htpy) ,
         ( refl-htpy) ,
         ( λ h →
@@ -147,7 +147,7 @@ module _
                 left-transpose-eq-concat _ _ _
                   ( inv
                     ( apd-constant-type-family h
-                      ( coherence-square-cocone f g c s))))) ∙
+                      ( coherence-square-cocone-span-diagram 𝒮 c s))))) ∙
           ( eq-htpy-concat-htpy _ _))))
       ( dpp-c (λ _ → Y))
 ```
@@ -226,62 +226,64 @@ pullback property.
     {l : Level} (P : X → UU l) →
     cone-family
       ( lift-family-of-elements P)
-      ( precomp-lift-family-of-elements P f)
-      ( precomp-lift-family-of-elements P g)
-      ( cone-pullback-property-pushout f g c X)
+      ( precomp-lift-family-of-elements P (left-map-span-diagram 𝒮))
+      ( precomp-lift-family-of-elements P (right-map-span-diagram 𝒮))
+      ( cone-pullback-property-pushout 𝒮 c X)
       ( lift-family-of-elements P)
   pr1 (cone-family-dependent-pullback-property P γ) h =
-    h ∘ horizontal-map-cocone f g c
+    h ∘ left-map-cocone-span-diagram 𝒮 c
   pr1 (pr2 (cone-family-dependent-pullback-property P γ)) h =
-    h ∘ vertical-map-cocone f g c
+    h ∘ right-map-cocone-span-diagram 𝒮 c
   pr2 (pr2 (cone-family-dependent-pullback-property P γ)) =
     triangle-precomp-lift-family-of-elements-htpy P γ
-      ( coherence-square-cocone f g c)
+      ( coherence-square-cocone-span-diagram 𝒮 c)
 
   is-pullback-cone-family-dependent-pullback-family :
     {l : Level} (P : X → UU l) →
-    ({l : Level} → pullback-property-pushout l f g c) →
+    pullback-property-pushout 𝒮 c →
     (γ : X → X) →
     is-pullback
       ( ( tr
           ( lift-family-of-elements P)
-          ( htpy-precomp (coherence-square-cocone f g c) X γ)) ∘
-        ( precomp-lift-family-of-elements P f
-          ( γ ∘ horizontal-map-cocone f g c)))
-      ( precomp-lift-family-of-elements P g
-        ( γ ∘ vertical-map-cocone f g c))
+          ( htpy-precomp (coherence-square-cocone-span-diagram 𝒮 c) X γ)) ∘
+        ( precomp-lift-family-of-elements P
+          ( left-map-span-diagram 𝒮)
+          ( γ ∘ left-map-cocone-span-diagram 𝒮 c)))
+      ( precomp-lift-family-of-elements P
+        ( right-map-span-diagram 𝒮)
+        ( γ ∘ right-map-cocone-span-diagram 𝒮 c))
       ( cone-family-dependent-pullback-property P γ)
   is-pullback-cone-family-dependent-pullback-family P pp-c =
     is-pullback-family-is-pullback-tot
       ( lift-family-of-elements P)
-      ( precomp-lift-family-of-elements P f)
-      ( precomp-lift-family-of-elements P g)
-      ( cone-pullback-property-pushout f g c X)
+      ( precomp-lift-family-of-elements P (left-map-span-diagram 𝒮))
+      ( precomp-lift-family-of-elements P (right-map-span-diagram 𝒮))
+      ( cone-pullback-property-pushout 𝒮 c X)
       ( cone-family-dependent-pullback-property P)
       ( pp-c X)
       ( is-pullback-top-is-pullback-bottom-cube-is-equiv
-        ( precomp (horizontal-map-cocone f g c) (Σ X P))
-        ( precomp (vertical-map-cocone f g c) (Σ X P))
-        ( precomp f (Σ X P))
-        ( precomp g (Σ X P))
-        ( precomp-lifted-family-of-elements P (horizontal-map-cocone f g c))
-        ( precomp-lifted-family-of-elements P (vertical-map-cocone f g c))
-        ( precomp-lifted-family-of-elements P f)
-        ( precomp-lifted-family-of-elements P g)
+        ( precomp (left-map-cocone-span-diagram 𝒮 c) (Σ X P))
+        ( precomp (right-map-cocone-span-diagram 𝒮 c) (Σ X P))
+        ( precomp (left-map-span-diagram 𝒮) (Σ X P))
+        ( precomp (right-map-span-diagram 𝒮) (Σ X P))
+        ( precomp-lifted-family-of-elements P (left-map-cocone-span-diagram 𝒮 c))
+        ( precomp-lifted-family-of-elements P (right-map-cocone-span-diagram 𝒮 c))
+        ( precomp-lifted-family-of-elements P (left-map-span-diagram 𝒮))
+        ( precomp-lifted-family-of-elements P (right-map-span-diagram 𝒮))
         ( map-inv-distributive-Π-Σ)
         ( map-inv-distributive-Π-Σ)
         ( map-inv-distributive-Π-Σ)
         ( map-inv-distributive-Π-Σ)
         ( htpy-precomp-lifted-family-of-elements P
-          ( coherence-square-cocone f g c))
+          ( coherence-square-cocone-span-diagram 𝒮 c))
         ( refl-htpy)
         ( refl-htpy)
         ( refl-htpy)
         ( refl-htpy)
-        ( htpy-precomp (coherence-square-cocone f g c) (Σ X P))
+        ( htpy-precomp (coherence-square-cocone-span-diagram 𝒮 c) (Σ X P))
         ( coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
           ( P)
-          ( coherence-square-cocone f g c))
+          ( coherence-square-cocone-span-diagram 𝒮 c))
         ( is-equiv-map-inv-distributive-Π-Σ)
         ( is-equiv-map-inv-distributive-Π-Σ)
         ( is-equiv-map-inv-distributive-Π-Σ)
@@ -289,20 +291,21 @@ pullback property.
         ( pp-c (Σ X P)))
 
   dependent-pullback-property-pullback-property-pushout :
-    ({l : Level} → pullback-property-pushout l f g c) →
-    ({l : Level} → dependent-pullback-property-pushout l f g c)
+    pullback-property-pushout 𝒮 c →
+    dependent-pullback-property-pushout 𝒮 c
   dependent-pullback-property-pullback-property-pushout pp-c P =
     is-pullback-htpy'
       ( ( tr-lift-family-of-elements-precomp P id
-          ( coherence-square-cocone f g c)) ·r
-        ( precomp-lift-family-of-elements P f (horizontal-map-cocone f g c)))
+          ( coherence-square-cocone-span-diagram 𝒮 c)) ·r
+        ( precomp-lift-family-of-elements P
+          ( left-map-span-diagram 𝒮)
+          ( left-map-cocone-span-diagram 𝒮 c)))
       ( refl-htpy)
       ( cone-family-dependent-pullback-property P id)
-      { c' = cone-dependent-pullback-property-pushout f g c P}
       ( ( refl-htpy) ,
         ( refl-htpy) ,
         ( ( right-unit-htpy) ∙h
           ( coherence-triangle-precomp-lift-family-of-elements P id
-            ( coherence-square-cocone f g c))))
+            ( coherence-square-cocone-span-diagram 𝒮 c))))
       ( is-pullback-cone-family-dependent-pullback-family P pp-c id)
 ```
