@@ -69,24 +69,10 @@ map is an equivalence:
 ```
 
 There are several ways of asserting a condition equivalent to the universal
-property of pushouts:
+property of pushouts. The statements and proofs of mutual equivalence may be
+found in the following table:
 
-1. The universal property of pushouts
-2. The
-   [pullback property of pushouts](synthetic-homotopy-theory.pullback-property-pushouts.md).
-   This is a restatement of the universal property of pushouts in terms of
-   pullbacks.
-3. The
-   [dependent universal property of pushouts](synthetic-homotopy-theory.dependent-universal-property-pushouts.md).
-   This property characterizes _dependent_ functions out of a pushout
-4. The
-   [dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md).
-   This is a restatement of the dependent universal property of pushouts in
-   terms of pullbacks
-5. The
-   [induction principle of pushouts](synthetic-homotopy-theory.induction-principle-pushouts.md).
-   This weaker form of the dependent universal property of pushouts expresses
-   the induction principle of pushouts seen as higher inductive types.
+{{#include tables/pushouts.md}}
 
 Examples of pushouts include
 [suspensions](synthetic-homotopy-theory.suspensions-of-types.md),

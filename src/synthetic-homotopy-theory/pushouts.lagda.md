@@ -23,7 +23,6 @@ open import foundation.span-diagrams
 open import foundation.transposition-span-diagrams
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams

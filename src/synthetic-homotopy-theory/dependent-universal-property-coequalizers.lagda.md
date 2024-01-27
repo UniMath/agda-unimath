@@ -15,7 +15,6 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-coforks

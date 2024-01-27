@@ -29,6 +29,7 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
@@ -295,4 +296,35 @@ module _
                     ( coherence-square-cocone-span-diagram 𝒮 c s)
                     ( h (left-map-span-diagram 𝒮 s)))
                 ( h' ∘ right-map-span-diagram 𝒮))))
+```
+
+### The non-dependent and dependent universal property of pushouts are logically equivalent
+
+This follows from the fact that the
+[dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md)
+is logically equivalent to the
+[pullback property of pushouts](synthetic-homotopy-theory.pullback-property-pushouts.md).
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  (f : S → A) (g : S → B) (c : cocone f g X)
+  where
+
+  universal-property-dependent-universal-property-pushout :
+    ({l : Level} → dependent-universal-property-pushout l f g c) →
+    ({l : Level} → universal-property-pushout l f g c)
+  universal-property-dependent-universal-property-pushout dup-c {l} =
+    universal-property-pushout-pullback-property-pushout l f g c
+      ( pullback-property-dependent-pullback-property-pushout f g c
+        ( dependent-pullback-property-dependent-universal-property-pushout f g c
+          ( dup-c)))
+
+  dependent-universal-property-universal-property-pushout :
+    ({l : Level} → universal-property-pushout l f g c) →
+    ({l : Level} → dependent-universal-property-pushout l f g c)
+  dependent-universal-property-universal-property-pushout up-c =
+    dependent-universal-property-dependent-pullback-property-pushout f g c
+      ( dependent-pullback-property-pullback-property-pushout f g c
+        ( pullback-property-pushout-universal-property-pushout f g c up-c))
 ```
