@@ -74,28 +74,28 @@ of
                            \                   /
                       K a c   \             /   K' a c
                                  \       /
-                                   \ /
-                                 g' a c         .
+                                    \ /
+                                  g' a c        .
 ```
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
-  (D : B → UU l4)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  {f f' : A → B} {H H' : f ~ f'}
+  {g : (a : A) → C a → D (f a)}
+  {g' : (a : A) → C a → D (f' a)}
+  {K : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H a) (g a) (g' a)}
+  {K' : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H' a) (g a) (g' a)}
   where
 
   abstract
     htpy-htpy-map-Σ :
-      {f f' : A → B} {H H' : f ~ f'} →
-      {g : (a : A) → C a → D (f a)} {g' : (a : A) → C a → D (f' a)} →
-      {K : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H a) (g a) (g' a)} →
-      {K' : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H' a) (g a) (g' a)} →
       (α : H ~ H') →
       (β :
         (a : A) (c : C a) →
         K a c ＝ ap (λ p → tr D p (g a c)) (α a) ∙ K' a c) →
       htpy-map-Σ D H g K ~ htpy-map-Σ D H' g K'
-    htpy-htpy-map-Σ {g = g} {g'} {K} {K'} α β (a , c) =
+    htpy-htpy-map-Σ α β (a , c) =
       ap
         ( eq-pair-Σ')
         ( eq-pair-Σ
@@ -118,15 +118,20 @@ As a corollary of the above statement, we can provide a condition which
 guarantees that `htpy-map-Σ` is homotopic to the trivial homotopy.
 
 ```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  {f : A → B} {H : f ~ f}
+  {g : (a : A) → C a → D (f a)}
+  {K : (a : A) → tr D (H a) ∘ g a ~ g a}
+  where
+
   abstract
     htpy-htpy-map-Σ-refl-htpy :
-      {f : A → B} {H : f ~ f} →
-      {g : (x : A) → C x → D (f x)} {K : (a : A) → tr D (H a) ∘ g a ~ g a} →
       (α : H ~ refl-htpy) →
       (β : (a : A) (c : C a) → K a c ＝ ap (λ p → tr D p (g a c)) (α a)) →
       htpy-map-Σ D H g K ~ refl-htpy
     htpy-htpy-map-Σ-refl-htpy α β =
-      htpy-htpy-map-Σ α (λ a c → β a c ∙ inv right-unit)
+      htpy-htpy-map-Σ D α (λ a c → β a c ∙ inv right-unit)
 ```
 
 ### The map on total spaces induced by a family of truncated maps is truncated

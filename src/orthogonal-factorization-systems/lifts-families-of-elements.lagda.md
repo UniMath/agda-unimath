@@ -194,14 +194,14 @@ module _
       ( λ p → tr (lift-family-of-elements B) p b)
       ( compute-htpy-precomp-refl-htpy f A a)
 
-  tr-lift-family-of-elements-precomp :
-    {g : J → I} (H : f ~ g) → statement-tr-lift-family-of-elements-precomp H
-  tr-lift-family-of-elements-precomp =
-    ind-htpy f
-      ( λ g → statement-tr-lift-family-of-elements-precomp)
-      ( tr-lift-family-of-elements-precomp-refl-htpy)
-
   abstract
+    tr-lift-family-of-elements-precomp :
+      {g : J → I} (H : f ~ g) → statement-tr-lift-family-of-elements-precomp H
+    tr-lift-family-of-elements-precomp =
+      ind-htpy f
+        ( λ g → statement-tr-lift-family-of-elements-precomp)
+        ( tr-lift-family-of-elements-precomp-refl-htpy)
+
     compute-tr-lift-family-of-elements-precomp :
       tr-lift-family-of-elements-precomp refl-htpy ＝
       tr-lift-family-of-elements-precomp-refl-htpy

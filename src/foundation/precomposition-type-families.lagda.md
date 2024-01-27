@@ -46,7 +46,7 @@ module _
 
 ## Properties
 
-### Transport in precomposed type families
+### Transport along homotopies in precomposed type families
 
 [Transporting](foundation.transport-along-homotopies.md) along a
 [homotopy](foundation.homotopies.md) `H : g ~ h` in the family `Q ∘ f` gives us
@@ -65,25 +65,25 @@ module _
   {X : UU l4} {g : X → A}
   where
 
-  statement-tr-precomp-family :
+  statement-tr-htpy-precomp-family :
     {h : X → A} (H : g ~ h) → UU (l3 ⊔ l4)
-  statement-tr-precomp-family H =
+  statement-tr-htpy-precomp-family H =
     tr-htpy (λ _ → precomp-family f Q) H ~ tr-htpy (λ _ → Q) (f ·l H)
 
-  tr-precomp-family :
-    {h : X → A} (H : g ~ h) →
-    statement-tr-precomp-family H
-  tr-precomp-family =
-    ind-htpy g
-      ( λ h → statement-tr-precomp-family)
-      ( refl-htpy)
-
   abstract
-    compute-tr-precomp-family :
-      tr-precomp-family refl-htpy ＝
+    tr-htpy-precomp-family :
+      {h : X → A} (H : g ~ h) →
+      statement-tr-htpy-precomp-family H
+    tr-htpy-precomp-family =
+      ind-htpy g
+        ( λ h → statement-tr-htpy-precomp-family)
+        ( refl-htpy)
+
+    compute-tr-htpy-precomp-family :
+      tr-htpy-precomp-family refl-htpy ＝
       refl-htpy
-    compute-tr-precomp-family =
+    compute-tr-htpy-precomp-family =
       compute-ind-htpy g
-        ( λ h → statement-tr-precomp-family)
+        ( λ h → statement-tr-htpy-precomp-family)
         ( refl-htpy)
 ```

@@ -49,7 +49,7 @@ In other words, given a diagram
        f         a
 ```
 
-we get a map of diagonals
+we get a map of lifts of families of elements
 
 ```text
   ((i : I) → B (a i)) → ((j : J) → B (a (f j))) .
@@ -133,15 +133,15 @@ module _
   triangle-precomp-lift-family-of-elements-htpy-refl-htpy b =
     tr-lift-family-of-elements-precomp B a refl-htpy (b ∘ f)
 
-  triangle-precomp-lift-family-of-elements-htpy :
-    {g : J → I} (H : f ~ g) →
-    statement-triangle-precomp-lift-family-of-elements-htpy H
-  triangle-precomp-lift-family-of-elements-htpy =
-    ind-htpy f
-      ( λ g → statement-triangle-precomp-lift-family-of-elements-htpy)
-      ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
-
   abstract
+    triangle-precomp-lift-family-of-elements-htpy :
+      {g : J → I} (H : f ~ g) →
+      statement-triangle-precomp-lift-family-of-elements-htpy H
+    triangle-precomp-lift-family-of-elements-htpy =
+      ind-htpy f
+        ( λ g → statement-triangle-precomp-lift-family-of-elements-htpy)
+        ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy)
+
     compute-triangle-precomp-lift-family-of-elements-htpy :
       triangle-precomp-lift-family-of-elements-htpy refl-htpy ＝
       triangle-precomp-lift-family-of-elements-htpy-refl-htpy
@@ -183,16 +183,16 @@ module _
       ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy B a b)
       ( inv (eq-htpy-refl-htpy (b ∘ f))))
 
-  coherence-triangle-precomp-lift-family-of-elements :
-    {g : J → I} (H : f ~ g) →
-    statement-coherence-triangle-precomp-lift-family-of-elements H
-  coherence-triangle-precomp-lift-family-of-elements =
-    ind-htpy f
-      ( λ g →
-        statement-coherence-triangle-precomp-lift-family-of-elements)
-      ( coherence-triangle-precomp-lift-family-of-elements-refl-htpy)
-
   abstract
+    coherence-triangle-precomp-lift-family-of-elements :
+      {g : J → I} (H : f ~ g) →
+      statement-coherence-triangle-precomp-lift-family-of-elements H
+    coherence-triangle-precomp-lift-family-of-elements =
+      ind-htpy f
+        ( λ g →
+          statement-coherence-triangle-precomp-lift-family-of-elements)
+        ( coherence-triangle-precomp-lift-family-of-elements-refl-htpy)
+
     compute-coherence-triangle-precomp-lift-family-of-elements :
       coherence-triangle-precomp-lift-family-of-elements refl-htpy ＝
       coherence-triangle-precomp-lift-family-of-elements-refl-htpy
