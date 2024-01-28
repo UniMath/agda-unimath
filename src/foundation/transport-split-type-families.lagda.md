@@ -94,4 +94,3 @@ module _
 
 - [Univalent type families](foundation.univalent-type-families.md)
 - [Preunivalent type families](foundation.preunivalent-type-families.md)
-- [Transport-split type families](foundation.transport-split-type-families.md)
