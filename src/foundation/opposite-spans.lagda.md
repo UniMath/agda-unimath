@@ -32,6 +32,8 @@ is the span
   B <----- S -----> A.
 ```
 
+Recall that [binary type duality](foundation.binary-type-duality.md) shows that spans are equivalent to [binary relations](foundation.binary-relations.md) from `A` to `B`. The opposite of a span corresponds to the opposite of a binary relation.
+
 ## Definitions
 
 ### The opposite of a span
