@@ -323,9 +323,13 @@ open import foundation.small-universes public
 open import foundation.sorial-type-families public
 open import foundation.span-diagrams public
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 open import foundation.span-diagrams-families-of-types public
 >>>>>>> c689506117661a4fa73d428b172af6b83bf4aaba
+=======
+open import foundation.span-diagrams-families-of-types public
+>>>>>>> c8c9f89f0ec0d52168fcaf77023717c33ada68cb
 open import foundation.spans public
 open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public
