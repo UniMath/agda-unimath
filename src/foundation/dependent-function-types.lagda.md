@@ -33,7 +33,7 @@ dependent function `f`.
 
 The type of dependent function `(x : A) → B x` is built in to the kernel of
 Agda, and doesn't need to be introduced by us. The purpose of this file is to
-record some properties of dependent function types
+record some properties of dependent function types.
 
 ## Definitions
 

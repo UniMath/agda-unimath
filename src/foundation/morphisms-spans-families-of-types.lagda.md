@@ -87,7 +87,7 @@ module _
     pr2 h
 ```
 
-### Homotopopies of morphisms of spans on families of types
+### Homotopies of morphisms of spans on families of types
 
 Consider two spans `𝒮 := (S , f)` and `𝒯 := (T , g)` on a family of types
 `A : I → 𝒰`, and consider two morphisms `(h , H)` and `(k , K)` between them. A
@@ -163,7 +163,7 @@ module _
 
 ## Properties
 
-### Characterization if identifications of morphisms of spans on families of types
+### Characterization of identifications of morphisms of spans on families of types
 
 ```agda
 module _
