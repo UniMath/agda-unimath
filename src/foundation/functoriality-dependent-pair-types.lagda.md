@@ -11,6 +11,7 @@ open import foundation-core.functoriality-dependent-pair-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
+open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -37,6 +38,101 @@ open import foundation-core.truncation-levels
 </details>
 
 ## Properties
+
+### The map `htpy-map-Σ` preserves homotopies
+
+Given a [homotopy](foundation.homotopies.md) `H : f ~ f'` and a family of
+[dependent homotopies](foundation.dependent-homotopies.md) `K a : g a ~ g' a`
+over `H`, expressed as
+[commuting triangles](foundation.commuting-triangles-of-maps.md)
+
+```text
+        g a
+   C a -----> D (f a)
+      \      /
+  g' a \    / tr D (H a)
+        V  V
+      D (f' a)         ,
+```
+
+we get a homotopy `htpy-map-Σ H K : map-Σ f g ~ map-Σ f' g'`.
+
+This assignment itself preserves homotopies: given `H` and `K` as above,
+`H' : f ~ f'` with `K' a : g a ~ g' a` over `H'`, we would like to express
+coherences between the pairs `H, H'` and `K, K'` which would ensure
+`htpy-map-Σ H K ~ htpy-map-Σ H' K'`. Because `H` and `H'` have the same type, we
+may require a homotopy `α : H ~ H'`, but `K` and `K'` are families of dependent
+homotopies over different homotopies, so their coherence is provided as a family
+of
+[commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md)
+
+```text
+                      ap (λ p → tr D p (g a c)) (α a)
+  tr D (H a) (g a c) --------------------------------- tr D (H' a) (g a c)
+                     \                               /
+                        \                         /
+                           \                   /
+                      K a c   \             /   K' a c
+                                 \       /
+                                    \ /
+                                  g' a c        .
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  {f f' : A → B} {H H' : f ~ f'}
+  {g : (a : A) → C a → D (f a)}
+  {g' : (a : A) → C a → D (f' a)}
+  {K : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H a) (g a) (g' a)}
+  {K' : (a : A) → dependent-homotopy (λ _ → D) (λ _ → H' a) (g a) (g' a)}
+  where
+
+  abstract
+    htpy-htpy-map-Σ :
+      (α : H ~ H') →
+      (β :
+        (a : A) (c : C a) →
+        K a c ＝ ap (λ p → tr D p (g a c)) (α a) ∙ K' a c) →
+      htpy-map-Σ D H g K ~ htpy-map-Σ D H' g K'
+    htpy-htpy-map-Σ α β (a , c) =
+      ap
+        ( eq-pair-Σ')
+        ( eq-pair-Σ
+          ( α a)
+          ( map-compute-dependent-identification-eq-value-function
+            ( λ p → tr D p (g a c))
+            ( λ _ → g' a c)
+            ( α a)
+            ( K a c)
+            ( K' a c)
+            ( inv
+              ( ( ap
+                  ( K a c ∙_)
+                  ( ap-const (g' a c) (α a))) ∙
+                ( right-unit) ∙
+                ( β a c)))))
+```
+
+As a corollary of the above statement, we can provide a condition which
+guarantees that `htpy-map-Σ` is homotopic to the trivial homotopy.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  {f : A → B} {H : f ~ f}
+  {g : (a : A) → C a → D (f a)}
+  {K : (a : A) → tr D (H a) ∘ g a ~ g a}
+  where
+
+  abstract
+    htpy-htpy-map-Σ-refl-htpy :
+      (α : H ~ refl-htpy) →
+      (β : (a : A) (c : C a) → K a c ＝ ap (λ p → tr D p (g a c)) (α a)) →
+      htpy-map-Σ D H g K ~ refl-htpy
+    htpy-htpy-map-Σ-refl-htpy α β =
+      htpy-htpy-map-Σ D α (λ a c → β a c ∙ inv right-unit)
+```
 
 ### The map on total spaces induced by a family of truncated maps is truncated
 

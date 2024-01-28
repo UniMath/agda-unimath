@@ -590,7 +590,7 @@ newly created rectangles, or by first horizontally composing the squares, and
 then vertically composing the rectangles.
 
 The following lemma states that the big squares obtained by these two
-compositions are again homotopic. Diagramatically, we have
+compositions are again homotopic. Diagrammatically, we have
 
 ```text
  H | K   H | K
