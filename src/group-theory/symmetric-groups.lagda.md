@@ -147,8 +147,10 @@ module _
 
   iso-symmetric-group-equiv-Set :
     iso-Group (symmetric-Group X) (symmetric-Group Y)
-  pr1 iso-symmetric-group-equiv-Set = hom-symmetric-group-equiv-Set
-  pr1 (pr2 iso-symmetric-group-equiv-Set) = hom-inv-symmetric-group-equiv-Set
+  pr1 iso-symmetric-group-equiv-Set =
+    hom-symmetric-group-equiv-Set
+  pr1 (pr2 iso-symmetric-group-equiv-Set) =
+    hom-inv-symmetric-group-equiv-Set
   pr1 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
     is-section-hom-inv-symmetric-group-equiv-Set
   pr2 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
