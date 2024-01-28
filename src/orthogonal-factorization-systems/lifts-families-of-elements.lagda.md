@@ -31,8 +31,9 @@ Consider a type family
 
 and a family of elements `a : (i : I) → A i`.
 
-A {{#concept "dependent lift" Disambiguation="family of elements"}} of the
-family of elements `a` to the type family `B` is a family of elements
+A
+{{#concept "dependent lift" Disambiguation="family of elements" Agda=dependent-lift-family-of-elements}}
+of the family of elements `a` to the type family `B` is a family of elements
 
 ```text
   (i : I) → B i (a i).
@@ -40,8 +41,8 @@ family of elements `a` to the type family `B` is a family of elements
 
 An important special case occurs when `a : I → A` is a family of elements of a
 fixed type `A`, and `B` is a type family over `A`. In this case, a
-{{#concept "lift" Disambiguation="family of elements"}} of the family of
-elements `a` is a family of elements
+{{#concept "lift" Disambiguation="family of elements" Agda=lift-family-of-elements}}
+of the family of elements `a` is a family of elements
 
 ```text
   (i : I) → B (a i).

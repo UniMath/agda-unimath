@@ -10,7 +10,7 @@ module orthogonal-factorization-systems.functoriality-pullback-hom where
 open import foundation.fibered-maps
 open import foundation.function-types
 open import foundation.functoriality-pullbacks
-open import foundation.morphisms-cospans
+open import foundation.morphisms-cospan-diagrams
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
@@ -40,7 +40,11 @@ module _
   where
 
   map-pullback-hom :
-    hom-cospan (precomp f' Y') (postcomp A' g') (precomp f Y) (postcomp A g) →
+    hom-cospan-diagram
+      ( precomp f' Y')
+      ( postcomp A' g')
+      ( precomp f Y)
+      ( postcomp A g) →
     fibered-map f' g' → fibered-map f g
   map-pullback-hom =
     map-is-pullback

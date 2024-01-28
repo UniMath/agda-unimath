@@ -714,6 +714,23 @@ equivalence-reasoning
 The equivalence constructed in this way is `equiv-1 ∘e (equiv-2 ∘e equiv-3)`,
 i.e., the equivivalence is associated fully to the right.
 
+**Note.** In situations where it is important to have precise control over an
+equivalence or its inverse, it is often better to avoid making use of
+equivalence reasoning. For example, since many of the entries proving that a map
+is an equivalence are marked as `abstract` in agda-unimath, the inverse of an
+equivalence often does not compute to any map that one might expect the inverse
+to be. If inverses of equivalences are used in equivalence reasoning, this
+results in a composed equivalence that also does not compute to any expected
+underlying map.
+
+Even if a proof by equivalence reasoning is clear to the human reader,
+constructing equivalences by hand by constructing maps back and forth and two
+homotopies witnessing that they are mutual inverses is often the most
+straigtforward solution that gives the best expected computational behavior of
+the constructed equivalence. In particular, if the underlying map or its inverse
+are noteworthy maps, it is good practice to define them directly rather than as
+underlying maps of equivalences constructed by equivalence reasoning.
+
 ```agda
 infixl 1 equivalence-reasoning_
 infixl 0 step-equivalence-reasoning

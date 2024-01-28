@@ -96,6 +96,10 @@ equivalences out of a type `A` is contractible can therefore be stated more
 succinctly as the claim that the family of equivalences out of `A` is torsorial.
 
 ```agda
+module _
+  {l : Level}
+  where
+
   abstract
     is-torsorial-equiv :
       (A : UU l) → is-torsorial (λ (X : UU l) → A ≃ X)
@@ -164,7 +168,7 @@ compute-eq-equiv-comp-equiv :
   {l : Level} {A B C : UU l} (f : A ≃ B) (g : B ≃ C) →
   eq-equiv f ∙ eq-equiv g ＝ eq-equiv (g ∘e f)
 compute-eq-equiv-comp-equiv f g =
-  is-injective-map-equiv
+  is-injective-equiv
     ( equiv-univalence)
     ( ( inv ( compute-equiv-eq-concat (eq-equiv f) (eq-equiv g))) ∙
       ( ( ap
@@ -179,7 +183,7 @@ compute-eq-equiv-comp-equiv f g =
 
 compute-equiv-eq-ap-inv :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : x ＝ y) →
-  map-equiv (equiv-eq (ap B (inv p)) ∘e (equiv-eq (ap B p))) ~ id
+  map-eq (ap B (inv p)) ∘ map-eq (ap B p) ~ id
 compute-equiv-eq-ap-inv refl = refl-htpy
 
 commutativity-inv-equiv-eq :
@@ -191,7 +195,7 @@ commutativity-inv-eq-equiv :
   {l : Level} {A B : UU l} (f : A ≃ B) →
   inv (eq-equiv f) ＝ eq-equiv (inv-equiv f)
 commutativity-inv-eq-equiv f =
-  is-injective-map-equiv
+  is-injective-equiv
     ( equiv-univalence)
     ( ( inv (commutativity-inv-equiv-eq (eq-equiv f))) ∙
       ( ( ap

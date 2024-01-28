@@ -173,7 +173,7 @@ abstract
   is-one-number-of-elements-count-is-contr (pair (succ-ℕ (succ-ℕ k)) e) H =
     ex-falso
       ( Eq-Fin-eq (succ-ℕ (succ-ℕ k))
-        ( is-injective-map-equiv e
+        ( is-injective-equiv e
           ( eq-is-contr' H
             ( map-equiv e (zero-Fin (succ-ℕ k)))
             ( map-equiv e (neg-one-Fin (succ-ℕ k))))))

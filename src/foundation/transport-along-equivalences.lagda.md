@@ -13,14 +13,19 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
+open import foundation.equivalences
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -30,8 +35,8 @@ open import foundation-core.identity-types
 Applying
 [transport along identifications](foundation-core.transport-along-identifications.md)
 to [identifications](foundation-core.identity-types.md) arising from the
-[univalence axiom](foundation.univalence.md) gives us **transport along
-equivalences**.
+[univalence axiom](foundation.univalence.md) gives us
+{{#concept "transport along equivalences" Agda=tr-equiv}}.
 
 Since transport defines [equivalences](foundation-core.equivalences.md) of
 [fibers](foundation-core.fibers-of-maps.md), this gives us an _action on
@@ -41,123 +46,171 @@ to get another
 [action on equivalences](foundation.action-on-equivalences-functions.md), but
 luckily, these two notions coincide.
 
-## Definition
+## Definitions
+
+### Transporting along equivalences
 
 ```agda
-map-tr-equiv :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  X ≃ Y → f X → f Y
-map-tr-equiv f e = tr f (eq-equiv e)
-
-is-equiv-map-tr-equiv :
+module _
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1}
-  (e : X ≃ Y) → is-equiv (map-tr-equiv f e)
-is-equiv-map-tr-equiv f e = is-equiv-tr f (eq-equiv e)
+  where
 
-tr-equiv :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  X ≃ Y → f X ≃ f Y
-pr1 (tr-equiv f e) = map-tr-equiv f e
-pr2 (tr-equiv f e) = is-equiv-map-tr-equiv f e
+  map-tr-equiv : X ≃ Y → f X → f Y
+  map-tr-equiv e = tr f (eq-equiv e)
 
-eq-tr-equiv :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  X ≃ Y → f X ＝ f Y
-eq-tr-equiv f = eq-equiv ∘ tr-equiv f
+  abstract
+    is-equiv-map-tr-equiv : (e : X ≃ Y) → is-equiv (map-tr-equiv e)
+    is-equiv-map-tr-equiv e = is-equiv-tr f (eq-equiv e)
+
+  tr-equiv : X ≃ Y → f X ≃ f Y
+  pr1 (tr-equiv e) = map-tr-equiv e
+  pr2 (tr-equiv e) = is-equiv-map-tr-equiv e
+
+  eq-tr-equiv : X ≃ Y → f X ＝ f Y
+  eq-tr-equiv = eq-equiv ∘ tr-equiv
 ```
+
+### Transporting along inverse equivalences
+
+```agda
+module _
+  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1}
+  where
+
+  map-tr-inv-equiv : X ≃ Y → f Y → f X
+  map-tr-inv-equiv e = tr f (eq-equiv (inv-equiv e))
+
+  abstract
+    is-equiv-map-tr-inv-equiv : (e : X ≃ Y) → is-equiv (map-tr-inv-equiv e)
+    is-equiv-map-tr-inv-equiv e = is-equiv-tr f (eq-equiv (inv-equiv e))
+
+  tr-inv-equiv : X ≃ Y → f Y ≃ f X
+  pr1 (tr-inv-equiv e) = map-tr-inv-equiv e
+  pr2 (tr-inv-equiv e) = is-equiv-map-tr-inv-equiv e
+
+  eq-tr-inv-equiv : X ≃ Y → f Y ＝ f X
+  eq-tr-inv-equiv = eq-equiv ∘ tr-inv-equiv
+```
+
+## Properties
 
 ### Transporting along `id-equiv` is the identity equivalence
 
 ```agda
-compute-map-tr-equiv-id-equiv :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X : UU l1} →
-  map-tr-equiv f id-equiv ＝ id
-compute-map-tr-equiv-id-equiv f {X} = ap (tr f) (compute-eq-equiv-id-equiv X)
+module _
+  {l1 l2 : Level} (f : UU l1 → UU l2) {X : UU l1}
+  where
 
-compute-tr-equiv-id-equiv :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X : UU l1} →
-  tr-equiv f id-equiv ＝ id-equiv
-compute-tr-equiv-id-equiv f {X} =
-  (ap (equiv-tr f) (compute-eq-equiv-id-equiv X)) ∙ (equiv-tr-refl f)
+  compute-map-tr-equiv-id-equiv : map-tr-equiv f id-equiv ＝ id
+  compute-map-tr-equiv-id-equiv = ap (tr f) (compute-eq-equiv-id-equiv X)
+
+  compute-tr-equiv-id-equiv : tr-equiv f id-equiv ＝ id-equiv
+  compute-tr-equiv-id-equiv =
+    is-injective-map-equiv (ap (tr f) (compute-eq-equiv-id-equiv X))
 ```
 
 ### Transport along equivalences preserves composition of equivalences
 
-```agda
-distributive-map-tr-equiv-equiv-comp :
-  {l1 l2 : Level} (f : UU l1 → UU l2)
-  {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
-  map-tr-equiv f (e' ∘e e) ~ (map-tr-equiv f e' ∘ map-tr-equiv f e)
-distributive-map-tr-equiv-equiv-comp f e e' x =
-  ( ap (λ p → tr f p x) (inv (compute-eq-equiv-comp-equiv e e'))) ∙
-  ( tr-concat (eq-equiv e) (eq-equiv e') x)
+For any operation `f : 𝒰₁ → 𝒰₂` and any two composable equivalences `e : X ≃ Y`
+and `e' : Y ≃ Z` in `𝒰₁` we obtain a commuting triangle
 
-distributive-tr-equiv-equiv-comp :
-  {l1 l2 : Level} (f : UU l1 → UU l2)
-  {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
-  tr-equiv f (e' ∘e e) ＝ (tr-equiv f e' ∘e tr-equiv f e)
-distributive-tr-equiv-equiv-comp f e e' =
-  eq-htpy-equiv (distributive-map-tr-equiv-equiv-comp f e e')
+```text
+                     tr-equiv f e
+                 f X ----------> f Y
+                     \         /
+  tr-equiv f (e' ∘ e) \       / tr-equiv f e'
+                       \     /
+                        ∨   ∨
+                         f Z
 ```
 
-### Transporting along an equivalence and its inverse is just the identity
+```agda
+module _
+  {l1 l2 : Level} (f : UU l1 → UU l2)
+  {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z)
+  where
+
+  distributive-map-tr-equiv-equiv-comp :
+    coherence-triangle-maps
+      ( map-tr-equiv f (e' ∘e e))
+      ( map-tr-equiv f e')
+      ( map-tr-equiv f e)
+  distributive-map-tr-equiv-equiv-comp x =
+    ( inv (ap (λ p → tr f p x) (compute-eq-equiv-comp-equiv e e'))) ∙
+    ( tr-concat (eq-equiv e) (eq-equiv e') x)
+
+  distributive-tr-equiv-equiv-comp :
+    tr-equiv f (e' ∘e e) ＝ tr-equiv f e' ∘e tr-equiv f e
+  distributive-tr-equiv-equiv-comp =
+    eq-htpy-equiv distributive-map-tr-equiv-equiv-comp
+```
+
+### Transporting along an inverse equivalence is inverse to transporting along the original equivalence
 
 ```agda
-is-section-map-tr-equiv :
+module _
   {l1 l2 : Level} (f : UU l1 → UU l2)
-  {X Y : UU l1} (e : X ≃ Y) →
-  (map-tr-equiv f (inv-equiv e) ∘ map-tr-equiv f e) ~ id
-is-section-map-tr-equiv f e x =
-  ( ap
-    ( λ p → tr f p (map-tr-equiv f e x))
-    ( inv (commutativity-inv-eq-equiv e))) ∙
-  ( is-retraction-inv-tr f (eq-equiv e) x)
+  {X Y : UU l1} (e : X ≃ Y)
+  where
 
-is-retraction-map-tr-equiv :
-  {l1 l2 : Level} (f : UU l1 → UU l2)
-  {X Y : UU l1} (e : X ≃ Y) →
-  (map-tr-equiv f e ∘ map-tr-equiv f (inv-equiv e)) ~ id
-is-retraction-map-tr-equiv f e x =
-  ( ap
-    ( map-tr-equiv f e ∘ (λ p → tr f p x))
-    ( inv (commutativity-inv-eq-equiv e))) ∙
-  ( is-section-inv-tr f (eq-equiv e) x)
+  is-section-map-tr-inv-equiv :
+    is-section (map-tr-equiv f e) (map-tr-equiv f (inv-equiv e))
+  is-section-map-tr-inv-equiv x =
+    ( inv
+      ( ap
+        ( map-tr-equiv f e ∘ (λ p → tr f p x))
+        ( commutativity-inv-eq-equiv e))) ∙
+    ( is-section-inv-tr f (eq-equiv e) x)
+
+  is-retraction-map-tr-inv-equiv :
+    is-retraction (map-tr-equiv f e) (map-tr-equiv f (inv-equiv e))
+  is-retraction-map-tr-inv-equiv x =
+    ( inv
+      ( ap
+        ( λ p → tr f p (map-tr-equiv f e x))
+        ( commutativity-inv-eq-equiv e))) ∙
+    ( is-retraction-inv-tr f (eq-equiv e) x)
 ```
 
 ### Transposing transport along the inverse of an equivalence
 
 ```agda
-eq-transpose-map-tr-equiv :
+module _
   {l1 l2 : Level} (f : UU l1 → UU l2)
-  {X Y : UU l1} (e : X ≃ Y) {u : f X} {v : f Y} →
-  v ＝ map-tr-equiv f e u → map-tr-equiv f (inv-equiv e) v ＝ u
-eq-transpose-map-tr-equiv f e {u} p =
-  (ap (map-tr-equiv f (inv-equiv e)) p) ∙ (is-section-map-tr-equiv f e u)
+  {X Y : UU l1} (e : X ≃ Y) {u : f X} {v : f Y}
+  where
 
-eq-transpose-map-tr-equiv' :
-  {l1 l2 : Level} (f : UU l1 → UU l2)
-  {X Y : UU l1} (e : X ≃ Y) {u : f X} {v : f Y} →
-  map-tr-equiv f e u ＝ v → u ＝ map-tr-equiv f (inv-equiv e) v
-eq-transpose-map-tr-equiv' f e {u} p =
-  (inv (is-section-map-tr-equiv f e u)) ∙ (ap (map-tr-equiv f (inv-equiv e)) p)
+  eq-transpose-map-tr-equiv :
+    v ＝ map-tr-equiv f e u → map-tr-equiv f (inv-equiv e) v ＝ u
+  eq-transpose-map-tr-equiv p =
+    ap (map-tr-equiv f (inv-equiv e)) p ∙ is-retraction-map-tr-inv-equiv f e u
+
+  eq-transpose-map-tr-equiv' :
+    map-tr-equiv f e u ＝ v → u ＝ map-tr-equiv f (inv-equiv e) v
+  eq-transpose-map-tr-equiv' p =
+    ( inv (is-retraction-map-tr-inv-equiv f e u)) ∙
+    ( ap (map-tr-equiv f (inv-equiv e)) p)
 ```
 
 ### Substitution law for transport along equivalences
 
 ```agda
-substitution-map-tr-equiv :
+module _
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
-  (e : X ≃ Y) →
-  map-tr-equiv g (action-equiv-family f e) ~ map-tr-equiv (g ∘ f) e
-substitution-map-tr-equiv g f e X' =
-  ( ap (λ p → tr g p X') (is-retraction-eq-equiv (action-equiv-function f e))) ∙
-  ( substitution-law-tr g f (eq-equiv e))
+  (e : X ≃ Y)
+  where
 
-substitution-law-tr-equiv :
-  {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
-  (e : X ≃ Y) → tr-equiv g (action-equiv-family f e) ＝ tr-equiv (g ∘ f) e
-substitution-law-tr-equiv g f e =
-  eq-htpy-equiv (substitution-map-tr-equiv g f e)
+  substitution-map-tr-equiv :
+    map-tr-equiv g (action-equiv-family f e) ~ map-tr-equiv (g ∘ f) e
+  substitution-map-tr-equiv X' =
+    ( ap
+      ( λ p → tr g p X')
+      ( is-retraction-eq-equiv (action-equiv-function f e))) ∙
+    ( substitution-law-tr g f (eq-equiv e))
+
+  substitution-law-tr-equiv :
+    tr-equiv g (action-equiv-family f e) ＝ tr-equiv (g ∘ f) e
+  substitution-law-tr-equiv = eq-htpy-equiv substitution-map-tr-equiv
 ```
 
 ### Transporting along the action on equivalences of a function
@@ -178,18 +231,21 @@ compute-map-tr-equiv-action-equiv-family {D = D} f g {X} e X' =
 ### Transport along equivalences and the action on equivalences in the universe coincide
 
 ```agda
-eq-tr-equiv-action-equiv-family :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  (e : X ≃ Y) → tr-equiv f e ＝ action-equiv-family f e
-eq-tr-equiv-action-equiv-family f {X} =
-  ind-equiv
-    ( λ Y e → tr-equiv f e ＝ action-equiv-family f e)
-    ( compute-tr-equiv-id-equiv f ∙
-      inv (compute-action-equiv-family-id-equiv f))
+module _
+  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} (e : X ≃ Y)
+  where
 
-eq-map-tr-equiv-map-action-equiv-family :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  (e : X ≃ Y) → map-tr-equiv f e ＝ map-action-equiv-family f e
-eq-map-tr-equiv-map-action-equiv-family f e =
-  ap map-equiv (eq-tr-equiv-action-equiv-family f e)
+  eq-tr-equiv-action-equiv-family :
+    tr-equiv f e ＝ action-equiv-family f e
+  eq-tr-equiv-action-equiv-family =
+    ind-equiv
+      ( λ Y d → tr-equiv f d ＝ action-equiv-family f d)
+      ( compute-tr-equiv-id-equiv f ∙
+        inv (compute-action-equiv-family-id-equiv f))
+      ( e)
+
+  eq-map-tr-equiv-map-action-equiv-family :
+    map-tr-equiv f e ＝ map-action-equiv-family f e
+  eq-map-tr-equiv-map-action-equiv-family =
+    ap map-equiv eq-tr-equiv-action-equiv-family
 ```

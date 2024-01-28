@@ -8,7 +8,7 @@ module foundation-core.pullbacks where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
@@ -67,8 +67,8 @@ The standard pullback consists of [pairs](foundation.dependent-pair-types.md)
   A ×_X B := Σ (a : A) (b : B), (f a ＝ g b).
 ```
 
-Thus the standard [cone](foundation.cones-over-cospans.md) consists of the
-canonical projections.
+Thus the standard [cone](foundation.cones-over-cospan-diagrams.md) consists of
+the canonical projections.
 
 ## Definitions
 
@@ -192,7 +192,8 @@ module _
     { s t : standard-pullback f g}
     ( α : vertical-map-standard-pullback s ＝ vertical-map-standard-pullback t)
     ( β :
-      horizontal-map-standard-pullback s ＝ horizontal-map-standard-pullback t) →
+      horizontal-map-standard-pullback s ＝
+      horizontal-map-standard-pullback t) →
     ( ( ap f α ∙ coherence-square-standard-pullback t) ＝
       ( coherence-square-standard-pullback s ∙ ap g β)) →
     s ＝ t
