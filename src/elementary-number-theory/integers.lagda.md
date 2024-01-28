@@ -23,6 +23,8 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -160,17 +162,17 @@ pr2 ℤ-Set = is-set-ℤ
 
 ```agda
 abstract
-  is-retraction-pred-ℤ : (pred-ℤ ∘ succ-ℤ) ~ id
+  is-retraction-pred-ℤ : is-retraction succ-ℤ pred-ℤ
   is-retraction-pred-ℤ (inl zero-ℕ) = refl
   is-retraction-pred-ℤ (inl (succ-ℕ x)) = refl
-  is-retraction-pred-ℤ (inr (inl star)) = refl
+  is-retraction-pred-ℤ (inr (inl _)) = refl
   is-retraction-pred-ℤ (inr (inr zero-ℕ)) = refl
   is-retraction-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
-  is-section-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
+  is-section-pred-ℤ : is-section succ-ℤ pred-ℤ
   is-section-pred-ℤ (inl zero-ℕ) = refl
   is-section-pred-ℤ (inl (succ-ℕ x)) = refl
-  is-section-pred-ℤ (inr (inl star)) = refl
+  is-section-pred-ℤ (inr (inl _)) = refl
   is-section-pred-ℤ (inr (inr zero-ℕ)) = refl
   is-section-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
@@ -213,7 +215,7 @@ has-no-fixed-points-succ-ℤ (inr (inl star)) ()
 ### The negative function is an involution
 
 ```agda
-neg-neg-ℤ : (neg-ℤ ∘ neg-ℤ) ~ id
+neg-neg-ℤ : neg-ℤ ∘ neg-ℤ ~ id
 neg-neg-ℤ (inl n) = refl
 neg-neg-ℤ (inr (inl star)) = refl
 neg-neg-ℤ (inr (inr n)) = refl
@@ -419,7 +421,7 @@ decide-is-nonnegative-ℤ {inl x} = inr star
 decide-is-nonnegative-ℤ {inr x} = inl star
 
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
-  (x : ℤ) → (is-nonnegative-ℤ x) → (is-nonnegative-ℤ (neg-ℤ x)) → is-zero-ℤ x
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
   refl
 ```

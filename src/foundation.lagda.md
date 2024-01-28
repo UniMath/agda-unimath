@@ -135,6 +135,7 @@ open import foundation.equality-fibers-of-maps public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
+open import foundation.equivalence-injective-type-families public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public

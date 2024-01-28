@@ -20,6 +20,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
+open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.function-types
@@ -430,12 +431,18 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
 
 ```agda
 abstract
-  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → k ＝ l
-  is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
-  is-injective-Fin {zero-ℕ} {succ-ℕ l} e =
+  is-equivalence-injective-Fin : is-equivalence-injective Fin
+  is-equivalence-injective-Fin {zero-ℕ} {zero-ℕ} e =
+    refl
+  is-equivalence-injective-Fin {zero-ℕ} {succ-ℕ l} e =
     ex-falso (map-inv-equiv e (zero-Fin l))
-  is-injective-Fin {succ-ℕ k} {zero-ℕ} e =
+  is-equivalence-injective-Fin {succ-ℕ k} {zero-ℕ} e =
     ex-falso (map-equiv e (zero-Fin k))
-  is-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
-    ap succ-ℕ (is-injective-Fin (equiv-equiv-Maybe e))
+  is-equivalence-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+    ap succ-ℕ (is-equivalence-injective-Fin (equiv-equiv-Maybe e))
+
+abstract
+  is-injective-Fin : is-injective Fin
+  is-injective-Fin =
+    is-injective-is-equivalence-injective is-equivalence-injective-Fin
 ```
