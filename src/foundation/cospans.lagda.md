@@ -49,7 +49,7 @@ a morphism of cospan diagrams, as input. Examples of this kind include
 
 ## Definitions
 
-### Cospan structures
+### Cospans
 
 ```agda
 cospan :
