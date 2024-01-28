@@ -29,6 +29,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import structured-types.whiskering-pointed-homotopies
 ```
 
 </details>
@@ -304,12 +305,12 @@ module _
                 ( eq-htpy-pointed-map
                   ( ( f ∘∗ g) ∘∗ f)
                   ( f)
-                  ( concat-htpy-pointed-map
+                  ( concat-pointed-htpy
                     ( ( f ∘∗ g) ∘∗ f)
                     ( f ∘∗ (g ∘∗ f))
                     ( f)
                     ( associative-comp-pointed-map f g f)
-                    ( concat-htpy-pointed-map
+                    ( concat-pointed-htpy
                       ( f ∘∗ (g ∘∗ f))
                       ( f ∘∗ id-pointed-map)
                       ( f)
@@ -346,12 +347,12 @@ module _
           eq-htpy-pointed-map
             ( (k ∘∗ h) ∘∗ f)
             ( k)
-            ( concat-htpy-pointed-map
+            ( concat-pointed-htpy
               ( (k ∘∗ h) ∘∗ f)
               ( k ∘∗ (h ∘∗ f))
               ( k)
               ( associative-comp-pointed-map k h f)
-              ( concat-htpy-pointed-map
+              ( concat-pointed-htpy
                 ( k ∘∗ (h ∘∗ f))
                 ( k ∘∗ id-pointed-map)
                 ( k)
@@ -366,12 +367,12 @@ module _
           eq-htpy-pointed-map
             ( (k ∘∗ f) ∘∗ g)
             ( k)
-            ( concat-htpy-pointed-map
+            ( concat-pointed-htpy
               ( (k ∘∗ f) ∘∗ g)
               ( k ∘∗ (f ∘∗ g))
               ( k)
               ( associative-comp-pointed-map k f g)
-              ( concat-htpy-pointed-map
+              ( concat-pointed-htpy
                 ( k ∘∗ (f ∘∗ g))
                 ( k ∘∗ id-pointed-map)
                 ( k)
@@ -428,12 +429,12 @@ module _
                   ( eq-htpy-pointed-map
                     ( f ∘∗ (g ∘∗ f))
                     ( f)
-                    ( concat-htpy-pointed-map
+                    ( concat-pointed-htpy
                       ( f ∘∗ (g ∘∗ f))
                       ( (f ∘∗ g) ∘∗ f)
                       ( f)
                       ( inv-associative-comp-pointed-map f g f)
-                      ( concat-htpy-pointed-map
+                      ( concat-pointed-htpy
                         ( (f ∘∗ g) ∘∗ f)
                         ( id-pointed-map ∘∗ f)
                         ( f)
@@ -470,12 +471,12 @@ module _
           eq-htpy-pointed-map
             ( f ∘∗ (g ∘∗ k))
             ( k)
-            ( concat-htpy-pointed-map
+            ( concat-pointed-htpy
               ( f ∘∗ (g ∘∗ k))
               ( (f ∘∗ g) ∘∗ k)
               ( k)
               ( inv-associative-comp-pointed-map f g k)
-              ( concat-htpy-pointed-map
+              ( concat-pointed-htpy
                 ( (f ∘∗ g) ∘∗ k)
                 ( id-pointed-map ∘∗ k)
                 ( k)
@@ -491,12 +492,12 @@ module _
           eq-htpy-pointed-map
             ( h ∘∗ (f ∘∗ k))
             ( k)
-            ( concat-htpy-pointed-map
+            ( concat-pointed-htpy
               ( h ∘∗ (f ∘∗ k))
               ( (h ∘∗ f) ∘∗ k)
               ( k)
               ( inv-associative-comp-pointed-map h f k)
-              ( concat-htpy-pointed-map
+              ( concat-pointed-htpy
                 ( (h ∘∗ f) ∘∗ k)
                 ( id-pointed-map ∘∗ k)
                 ( k)

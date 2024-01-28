@@ -128,18 +128,16 @@ module _
   pr1 (comp-pointed-map g f) = map-comp-pointed-map g f
   pr2 (comp-pointed-map g f) = preserves-point-comp-pointed-map g f
 
+  infixr 15 _∘∗_
+
+  _∘∗_ : B →∗ C → A →∗ B → A →∗ C
+  _∘∗_ = comp-pointed-map
+
 precomp-pointed-map :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} (C : Pointed-Type l3) →
   A →∗ B → B →∗ C → A →∗ C
 precomp-pointed-map C f g = comp-pointed-map g f
-
-infixr 15 _∘∗_
-_∘∗_ :
-  {l1 l2 l3 : Level}
-  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →
-  B →∗ C → A →∗ B → A →∗ C
-_∘∗_ {A = A} {B} {C} = comp-pointed-map
 ```
 
 ### The identity pointed map

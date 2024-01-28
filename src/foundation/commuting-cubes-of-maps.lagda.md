@@ -13,6 +13,7 @@ open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.homotopies
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import foundation-core.function-extensionality
@@ -647,4 +648,117 @@ module _
         ( k ∘ hC)
         ( k ·l inv-htpy back-right)
         ( W)
+```
+
+### Left whiskering commuting cubes of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  {X : UU l5} (α : D → X)
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
+  (top : (h' ∘ f') ~ (k' ∘ g'))
+  (back-left : (f ∘ hA) ~ (hB ∘ f'))
+  (back-right : (g ∘ hA) ~ (hC ∘ g'))
+  (front-left : (h ∘ hB) ~ (hD ∘ h'))
+  (front-right : (k ∘ hC) ~ (hD ∘ k'))
+  (bottom : (h ∘ f) ~ (k ∘ g))
+  where
+
+  left-whisker-coherence-cube-maps :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom) →
+    coherence-cube-maps f g
+      ( α ∘ h)
+      ( α ∘ k)
+      ( f')
+      ( g')
+      ( h')
+      ( k')
+      ( hA)
+      ( hB)
+      ( hC)
+      ( α ∘ hD)
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( α ·l front-left)
+      ( α ·l front-right)
+      ( α ·l bottom)
+  left-whisker-coherence-cube-maps c a' =
+    ( ( horizontal-concat-Id²
+        ( ( ap
+            ( λ q → q ∙ ap α (front-left (f' a')))
+            ( ap-comp α h (back-left a'))) ∙
+          ( inv (ap-concat α (ap h (back-left a')) (front-left (f' a')))))
+        ( ap-comp α hD (top a'))) ∙
+      ( inv
+        ( ap-concat α
+          ( ap h (back-left a') ∙ front-left (f' a'))
+          ( ap hD (top a'))))) ∙
+    ( ( ap (ap α) (c a')) ∙
+      ( ( ap-concat α
+          ( bottom (hA a'))
+          ( ap k (back-right a') ∙ front-right (g' a'))) ∙
+        ( horizontal-concat-Id²
+          ( refl)
+          ( ( ap-concat α (ap k (back-right a')) (front-right (g' a'))) ∙
+            ( ap
+              ( λ p → p ∙ ap α (front-right (g' a')))
+              ( inv (ap-comp α k (back-right a'))))))))
+```
+
+### Right whiskering commuting cubes of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
+  (top : (h' ∘ f') ~ (k' ∘ g'))
+  (back-left : (f ∘ hA) ~ (hB ∘ f'))
+  (back-right : (g ∘ hA) ~ (hC ∘ g'))
+  (front-left : (h ∘ hB) ~ (hD ∘ h'))
+  (front-right : (k ∘ hC) ~ (hD ∘ k'))
+  (bottom : (h ∘ f) ~ (k ∘ g))
+  {X : UU l5} (α : X → A')
+  where
+
+  right-whisker-commuting-cube-maps :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom) →
+    coherence-cube-maps f g h k
+      ( f' ∘ α)
+      ( g' ∘ α)
+      ( h')
+      ( k')
+      ( hA ∘ α)
+      ( hB)
+      ( hC)
+      ( hD)
+      ( top ·r α)
+      ( back-left ·r α)
+      ( back-right ·r α)
+      ( front-left)
+      ( front-right)
+      ( bottom)
+  right-whisker-commuting-cube-maps c x =
+    c (α x)
 ```
