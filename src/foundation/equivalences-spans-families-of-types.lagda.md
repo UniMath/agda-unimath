@@ -13,6 +13,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.morphisms-spans-families-of-types
 open import foundation.spans-families-of-types
 open import foundation.structure-identity-principle
 open import foundation.univalence
@@ -91,6 +92,10 @@ module _
         ( map-span-family-of-types T i)
         ( map-equiv-span-family-of-types)
     triangle-equiv-span-family-of-types = pr2 e
+
+    hom-equiv-span-family-of-types : hom-span-family-of-types S T
+    pr1 hom-equiv-span-family-of-types = map-equiv-span-family-of-types
+    pr2 hom-equiv-span-family-of-types = triangle-equiv-span-family-of-types
 ```
 
 ### Identity equivalences of spans of families of types
