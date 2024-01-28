@@ -29,6 +29,9 @@ of `f` is the [span diagram](foundation.span-diagrams.md)
   A <----- Σ (x y : A), f x ＝ f y -----------> A.
 ```
 
+We call this the kernel span diagram, since the pair `(pr1 , pr1 ∘ pr2)` is
+often called the kernel pair of a map.
+
 ## Definitions
 
 ### Kernel span diagrams of maps

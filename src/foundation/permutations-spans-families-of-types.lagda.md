@@ -36,11 +36,11 @@ module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
   where
 
-  permutation-span-family-of-types :
-    (e : I ≃ I) → span-family-of-types l3 A →
-    span-family-of-types l3 (A ∘ map-equiv e)
-  pr1 (permutation-span-family-of-types e s) =
-    spanning-type-span-family-of-types s
-  pr2 (permutation-span-family-of-types e s) i =
-    map-span-family-of-types s (map-equiv e i)
+  permutation-span-type-family :
+    (e : I ≃ I) → span-type-family l3 A →
+    span-type-family l3 (A ∘ map-equiv e)
+  pr1 (permutation-span-type-family e s) =
+    spanning-type-span-type-family s
+  pr2 (permutation-span-type-family e s) i =
+    map-span-type-family s (map-equiv e i)
 ```

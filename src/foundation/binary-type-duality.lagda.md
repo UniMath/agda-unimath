@@ -12,6 +12,7 @@ open import foundation.equivalences
 open import foundation.equivalences-spans
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.multivariable-homotopies
 open import foundation.retractions
 open import foundation.sections
 open import foundation.spans
@@ -240,11 +241,8 @@ module _
       ( binary-relation-span {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})
   is-retraction-binary-relation-span R =
     inv
-      ( eq-htpy
-        ( λ a →
-          eq-htpy
-            ( λ b →
-              eq-equiv (equiv-binary-relation-span-binary-relation R a b))))
+      ( eq-multivariable-htpy 2
+        ( λ a b → eq-equiv (equiv-binary-relation-span-binary-relation R a b)))
 
   is-equiv-span-binary-relation :
     is-equiv (span-binary-relation {l3 = l1 ⊔ l2 ⊔ l3} {A} {B})

@@ -84,11 +84,11 @@ abstract
 𝔽 l = Σ (UU l) is-finite
 
 type-𝔽 : {l : Level} → 𝔽 l → UU l
-type-𝔽 X = pr1 X
+type-𝔽 = pr1
 
 is-finite-type-𝔽 :
   {l : Level} (X : 𝔽 l) → is-finite (type-𝔽 X)
-is-finite-type-𝔽 X = pr2 X
+is-finite-type-𝔽 = pr2
 ```
 
 ### Types with cardinality `k`
@@ -96,11 +96,11 @@ is-finite-type-𝔽 X = pr2 X
 ```agda
 has-cardinality-Prop :
   {l : Level} → ℕ → UU l → Prop l
-has-cardinality-Prop k X = mere-equiv-Prop (Fin k) X
+has-cardinality-Prop k = mere-equiv-Prop (Fin k)
 
 has-cardinality :
   {l : Level} → ℕ → UU l → UU l
-has-cardinality k X = mere-equiv (Fin k) X
+has-cardinality k = mere-equiv (Fin k)
 ```
 
 ### The type of all types of cardinality `k` of a given universe level
@@ -110,13 +110,13 @@ UU-Fin : (l : Level) → ℕ → UU (lsuc l)
 UU-Fin l k = Σ (UU l) (mere-equiv (Fin k))
 
 type-UU-Fin : {l : Level} (k : ℕ) → UU-Fin l k → UU l
-type-UU-Fin k X = pr1 X
+type-UU-Fin k = pr1
 
 abstract
   has-cardinality-type-UU-Fin :
     {l : Level} (k : ℕ) (X : UU-Fin l k) →
     mere-equiv (Fin k) (type-UU-Fin k X)
-  has-cardinality-type-UU-Fin k X = pr2 X
+  has-cardinality-type-UU-Fin k = pr2
 ```
 
 ### Types of finite cardinality
@@ -311,11 +311,12 @@ abstract
     eq-type-subtype
       ( λ k → mere-equiv-Prop (Fin k) X)
       ( apply-universal-property-trunc-Prop K
-        ( pair (Id k l) (is-set-ℕ k l))
+        ( Id-Prop ℕ-Set k l)
         ( λ (e : Fin k ≃ X) →
           apply-universal-property-trunc-Prop L
-            ( pair (Id k l) (is-set-ℕ k l))
-            ( λ (f : Fin l ≃ X) → is-injective-Fin ((inv-equiv f) ∘e e))))
+            ( Id-Prop ℕ-Set k l)
+            ( λ (f : Fin l ≃ X) →
+              is-equivalence-injective-Fin (inv-equiv f ∘e e))))
 
 abstract
   is-prop-has-finite-cardinality :
@@ -341,7 +342,7 @@ module _
     is-finite-has-finite-cardinality (pair k K) =
       apply-universal-property-trunc-Prop K
         ( is-finite-Prop X)
-        ( is-finite-count ∘ (pair k))
+        ( is-finite-count ∘ pair k)
 
   abstract
     is-finite-has-cardinality : (k : ℕ) → has-cardinality k X → is-finite X
@@ -380,7 +381,8 @@ module _
             ( number-of-elements-count e)
             ( number-of-elements-is-finite g))
         ( λ g →
-          ( is-injective-Fin ((inv-equiv (equiv-count g)) ∘e (equiv-count e))) ∙
+          ( is-equivalence-injective-Fin
+            ( inv-equiv (equiv-count g) ∘e equiv-count e)) ∙
           ( ap pr1
             ( eq-is-prop' is-prop-has-finite-cardinality
               ( has-finite-cardinality-count g)
@@ -408,7 +410,7 @@ eq-cardinality H K =
     ( λ e →
       apply-universal-property-trunc-Prop K
         ( Id-Prop ℕ-Set _ _)
-        ( λ f → is-injective-Fin (inv-equiv f ∘e e)))
+        ( λ f → is-equivalence-injective-Fin (inv-equiv f ∘e e)))
 ```
 
 ### Any finite type is a set

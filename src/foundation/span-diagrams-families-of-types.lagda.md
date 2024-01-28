@@ -29,31 +29,31 @@ type family `A : I → 𝒰`, a
 ### Span diagrams of families of types
 
 ```agda
-span-diagram-family-of-types :
+span-diagram-type-family :
   {l1 : Level} (l2 l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-span-diagram-family-of-types l2 l3 I =
-  Σ (I → UU l2) (λ A → span-family-of-types l3 A)
+span-diagram-type-family l2 l3 I =
+  Σ (I → UU l2) (λ A → span-type-family l3 A)
 
 module _
-  {l1 l2 l3 : Level} {I : UU l1} (s : span-diagram-family-of-types l2 l3 I)
+  {l1 l2 l3 : Level} {I : UU l1} (s : span-diagram-type-family l2 l3 I)
   where
 
-  family-span-diagram-family-of-types : I → UU l2
-  family-span-diagram-family-of-types = pr1 s
+  family-span-diagram-type-family : I → UU l2
+  family-span-diagram-type-family = pr1 s
 
-  span-family-of-types-span-diagram-family-of-types :
-    span-family-of-types l3 family-span-diagram-family-of-types
-  span-family-of-types-span-diagram-family-of-types = pr2 s
+  span-span-diagram-type-family :
+    span-type-family l3 family-span-diagram-type-family
+  span-span-diagram-type-family = pr2 s
 
-  spanning-type-span-diagram-family-of-types : UU l3
-  spanning-type-span-diagram-family-of-types =
-    spanning-type-span-family-of-types
-      ( span-family-of-types-span-diagram-family-of-types)
+  spanning-type-span-diagram-type-family : UU l3
+  spanning-type-span-diagram-type-family =
+    spanning-type-span-type-family
+      ( span-span-diagram-type-family)
 
-  map-span-diagram-family-of-types :
-    (i : I) → spanning-type-span-diagram-family-of-types →
-    family-span-diagram-family-of-types i
-  map-span-diagram-family-of-types =
-    map-span-family-of-types
-      ( span-family-of-types-span-diagram-family-of-types)
+  map-span-diagram-type-family :
+    (i : I) → spanning-type-span-diagram-type-family →
+    family-span-diagram-type-family i
+  map-span-diagram-type-family =
+    map-span-type-family
+      ( span-span-diagram-type-family)
 ```

@@ -23,9 +23,9 @@ open import foundation.universe-levels
 
 This file contains some further operations on
 [span diagrams](foundation.span-diagrams.md) that produce new span diagrams from
-given span diagrams and possibly other data. Previous operations on spans were
-defined in
-[`foundation-core.operations-spans`](foundation-core.operations-spans.md).
+given span diagrams and possibly other data. Previous operations on span
+diagrams were defined in
+[`foundation-core.operations-span-diagrams`](foundation-core.operations-span-diagrams.md).
 
 ## Definitions
 

@@ -95,6 +95,7 @@ open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types public
+open import foundation.dependent-function-types public
 open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
@@ -134,6 +135,7 @@ open import foundation.equality-fibers-of-maps public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
+open import foundation.equivalence-injective-type-families public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public
@@ -231,6 +233,7 @@ open import foundation.morphisms-cospans public
 open import foundation.morphisms-inverse-sequential-diagrams public
 open import foundation.morphisms-span-diagrams public
 open import foundation.morphisms-spans public
+open import foundation.morphisms-spans-families-of-types public
 open import foundation.morphisms-twisted-arrows public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
@@ -245,6 +248,7 @@ open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
+open import foundation.operations-spans-families-of-types public
 open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
@@ -343,6 +347,7 @@ open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.telescopes public
+open import foundation.terminal-spans-families-of-types public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.total-partial-elements public
@@ -388,6 +393,7 @@ open import foundation.universal-property-booleans public
 open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-contractible-types public
 open import foundation.universal-property-coproduct-types public
+open import foundation.universal-property-dependent-function-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-equivalences public

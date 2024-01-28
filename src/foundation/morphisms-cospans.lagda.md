@@ -19,7 +19,7 @@ open import foundation-core.commuting-triangles-of-maps
 
 ## Idea
 
-Consider two [cospand](foundation.cospans.md) `c := (X , f , g)` and
+Consider two [cospans](foundation.cospans.md) `c := (X , f , g)` and
 `d := (Y , h , k)` from `A` to `B`. A
 {{#concept "morphism of cospans" Agda=hom-cospan}} from `c` to `d` consists of a
 map `u : X → Y` equipped with [homotopies](foundation-core.homotopies.md)

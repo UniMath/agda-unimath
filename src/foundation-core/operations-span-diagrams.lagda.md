@@ -102,7 +102,7 @@ Consider a [span diagram](foundation.span-diagrams.md) `𝒮` given by
 ```
 
 and a map `j : B → B'`. The
-{{#concept "right extension" Disambiguation="span diagram" Agda=right-concat-span-diagram}}
+{{#concept "right concatenation" Disambiguation="span diagram" Agda=right-concat-span-diagram}}
 of `𝒮` by `j` is the span diagram
 
 ```text
@@ -193,7 +193,7 @@ module _
     right-map-span-diagram left-concat-hom-arrow-span-diagram
 ```
 
-### Extensions by morphisms of arrows on the left
+### Concatenation of span diagrams and morphisms of arrows on the right
 
 Consider a span diagram `𝒮` given by
 

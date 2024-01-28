@@ -42,7 +42,7 @@ consists of a map `w : S → T` [equipped](foundation.structure.md) with two
 
 ## Definitions
 
-### Morphisms between (binary) spans
+### Morphisms between spans
 
 ```agda
 module _

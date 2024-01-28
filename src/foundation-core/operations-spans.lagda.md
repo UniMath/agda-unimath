@@ -65,8 +65,8 @@ Consider a [span](foundation.spans.md) `s` given by
 ```
 
 and a map `i : A → A'`. The
-{{#concept "left extension" Disambiguation="span" Agda=left-concat-span}} of `s`
-by `i` is the span
+{{#concept "left concatenation" Disambiguation="span" Agda=left-concat-span}} of
+`s` by `i` is the span
 
 ```text
        i ∘ f      g
@@ -94,8 +94,8 @@ Consider a [span](foundation.spans.md) `s` given by
 ```
 
 and a map `j : B → B'`. The
-{{#concept "right extension" Disambiguation="span" Agda=right-concat-span}} of
-`s` by `j` is the span
+{{#concept "right concatenation" Disambiguation="span" Agda=right-concat-span}}
+of `s` by `j` is the span
 
 ```text
         f      j ∘ g
