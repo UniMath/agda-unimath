@@ -28,10 +28,11 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An {{#concept "equivalence of spans on a family of types"}} from a
-[span](foundation.spans-families-of-types.md) `s` on `A : I → 𝒰` to a span `t`
-on `A` consists of an [equivalence](foundation-core.equivalences.md) `e : S ≃ T`
-[equipped](foundation.structure.md) with a family of
+An
+{{#concept "equivalence of spans on a family of types" Agda=equiv-span-type-family}}
+from a [span](foundation.spans-families-of-types.md) `s` on `A : I → 𝒰` to a
+span `t` on `A` consists of an [equivalence](foundation-core.equivalences.md)
+`e : S ≃ T` [equipped](foundation.structure.md) with a family of
 [homotopies](foundation-core.homotopies.md) witnessing that the triangle
 
 ```text

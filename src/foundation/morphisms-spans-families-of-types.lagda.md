@@ -91,7 +91,7 @@ module _
 
 Consider two spans `𝒮 := (S , f)` and `𝒯 := (T , g)` on a family of types
 `A : I → 𝒰`, and consider two morphisms `(h , H)` and `(k , K)` between them. A
-{{#concept "homotopy" Disambiguation="morphism between spans on families of types" Agda=htpy-homs-apn-family-of-types}}
+{{#concept "homotopy" Disambiguation="morphism between spans on families of types" Agda=htpy-hom-span-type-family}}
 is a pair `(α , β)` consisting of a homotopy
 
 ```text

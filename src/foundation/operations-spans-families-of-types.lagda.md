@@ -19,8 +19,8 @@ open import foundation-core.function-types
 ## Idea
 
 This file contains a collection of operations that produce new
-[spans of families of types](foundation.spans-families-of-types.lagda.md) from
-given spans of families of types.
+[spans of families of types](foundation.spans-families-of-types.md) from given
+spans of families of types.
 
 ## Definitions
 

@@ -49,8 +49,11 @@ given by `h ↦ λ x t → f x (h t)` is an
 `(x : A) → B x` equipped with the span structure defined above satisfies the
 universal property of dependent function types.
 
-The universal property of dependent function types is also shown to be
-equivalent to being a
+In
+[`foundation.dependent-function-types`](foundation.dependent-function-types.md)
+we show that dependent function types satisfy the universal property of
+dependent function types. In this file we also show that the universal property
+of dependent function types is equivalent to being a
 [terminal span](foundation.terminal-spans-families-of-types.md) on the type
 family `B`.
 
@@ -116,3 +119,7 @@ module _
                 ( equiv-funext)))
             ( U (T , g)))
 ```
+
+## See also
+
+- [Dependent function types](foundation.dependent-function-types.md)
