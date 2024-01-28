@@ -29,7 +29,7 @@ In other words, a span diagram consists of two types `A` and `B` and a
 [span](foundation.spans.md) from `A` to `B`.
 
 We disambiguate between [spans](foundation.spans.md) and span diagrams. We
-consider a span from `A` to `B` a _morphism_ from `A` to `B` in the category of
+consider spans from `A` to `B` to be _morphisms_ from `A` to `B` in the category of
 types and spans between them, whereas we consider span diagrams to be _objects_
 in the category of diagrams of types of the form `* <---- * ----> *`.
 Conceptually there is a subtle, but important distinction between spans and span

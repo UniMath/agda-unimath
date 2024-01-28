@@ -42,7 +42,8 @@ Then the type of dependent identifications from `f` to `g` over `p` can be
 computed as
 
 ```text
-  ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃ dependent-identification (x ↦ B x → C x) f g.
+  ((b : B x) → tr C p (f b) ＝ g (tr B p b))
+  ≃ dependent-identification (x ↦ B x → C x) f g.
 ```
 
 ```agda

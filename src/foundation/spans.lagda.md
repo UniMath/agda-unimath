@@ -30,7 +30,7 @@ that [binary relations](foundation.binary-relations.md) are equivalently
 described as spans of types.
 
 We disambiguate between spans and [span diagrams](foundation.span-diagrams.md).
-We consider a span from `A` to `B` a morphism from `A` to `B` in the category of
+We consider spans from `A` to `B` to be _morphisms_ from `A` to `B` in the category of
 types and spans between them, whereas we consider span diagrams to be _objects_
 in the category of diagrams of types of the form `* <---- * ----> *`.
 Conceptually there is a subtle, but important distinction between spans and span

@@ -283,7 +283,7 @@ module _
 
 ### Extensionality of span diagrams
 
-Equality of span diagrams is equivalent to equivalences of span diagrams
+Equality of span diagrams is equivalent to equivalences of span diagrams.
 
 ```agda
 module _
@@ -291,11 +291,11 @@ module _
   where
 
   equiv-eq-span-diagram :
-    (𝒯 : span-diagram l1 l2 l3) → (𝒮 ＝ 𝒯) → equiv-span-diagram 𝒮 𝒯
+    (𝒯 : span-diagram l1 l2 l3) → 𝒮 ＝ 𝒯 → equiv-span-diagram 𝒮 𝒯
   equiv-eq-span-diagram 𝒯 refl = id-equiv-span-diagram 𝒮
 
   is-torsorial-equiv-span-diagram :
-    is-torsorial (equiv-span-diagram {l1} {l2} {l3} {l1} {l2} {l3} 𝒮)
+    is-torsorial (equiv-span-diagram 𝒮)
   is-torsorial-equiv-span-diagram =
     is-torsorial-Eq-structure
       ( is-torsorial-equiv (domain-span-diagram 𝒮))
