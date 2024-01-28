@@ -463,7 +463,7 @@ Furthermore, it is straightforward to see that we have a commuting square
 
 The claim now follows by pasting these two commuting squares.
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level} (𝒮 : span-diagram l1 l2 l3)
   {X : UU l4} (c : cocone-span-diagram 𝒮 X)
