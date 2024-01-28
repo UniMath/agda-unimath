@@ -58,9 +58,10 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  universal-property-dependent-function-types-Π :
-    universal-property-dependent-function-types (span-type-family-Π B)
-  universal-property-dependent-function-types-Π T = is-equiv-swap-Π
+  abstract
+    universal-property-dependent-function-types-Π :
+      universal-property-dependent-function-types (span-type-family-Π B)
+    universal-property-dependent-function-types-Π T = is-equiv-swap-Π
 ```
 
 ### Dependent function types are terminal spans on families of types
@@ -70,10 +71,11 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-terminal-span-type-family-Π :
-    is-terminal-span-type-family (span-type-family-Π B)
-  is-terminal-span-type-family-Π =
-    is-terminal-universal-property-dependent-function-types
-      ( span-type-family-Π B)
-      ( universal-property-dependent-function-types-Π B)
+  abstract
+    is-terminal-span-type-family-Π :
+      is-terminal-span-type-family (span-type-family-Π B)
+    is-terminal-span-type-family-Π =
+      is-terminal-universal-property-dependent-function-types
+        ( span-type-family-Π B)
+        ( universal-property-dependent-function-types-Π B)
 ```
