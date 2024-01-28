@@ -28,12 +28,18 @@ open import foundation-core.sets
 
 We say a type family `P` is
 {{#concept "equivalence injective" Disambiguation="type family" Agda=is-equivalence-injective}}
-if for every [equivalences of types](foundation-core.equivalences.md)
-`P x ≃ P y` we have `x ＝ y `. By [univalence](foundation-core.univalence.md),
-the [structure](foundation.structure.md) of being equivalence injective is
+if for every [equivalence of types](foundation-core.equivalences.md) `P x ≃ P y`
+we have `x ＝ y `. By [univalence](foundation-core.univalence.md), the
+[structure](foundation.structure.md) of being equivalence injective is
 equivalent to being [injective as a map](foundation-core.injective-maps.md), but
 more generally every equivalence injective type family must always be injective
 as a map.
+
+**Note.** The concept of equivalence injective type family as considered here is
+unrelated to the concept of "injective type" as studied by Martín Escardó in
+_Injective types in univalent mathematics_
+([arXiv:1903.01211](https://arxiv.org/abs/1903.01211),
+[TypeTopology](https://www.cs.bham.ac.uk/~mhe/TypeTopology/InjectiveTypes.index.html)).
 
 ## Definition
 
