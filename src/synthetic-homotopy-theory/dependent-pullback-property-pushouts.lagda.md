@@ -8,8 +8,8 @@ module synthetic-homotopy-theory.dependent-pullback-property-pushouts where
 
 ```agda
 open import foundation.action-on-identifications-dependent-functions
-open import foundation.cones-over-cospan-diagrams
 open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospan-diagrams
 open import foundation.constant-type-families
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
