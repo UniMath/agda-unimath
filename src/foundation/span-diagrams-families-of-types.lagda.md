@@ -41,19 +41,19 @@ module _
   family-span-diagram-family-of-types : I → UU l2
   family-span-diagram-family-of-types = pr1 s
 
-  span-family-of-types-span-diagram-family-of-types :
+  span-span-diagram-family-of-types :
     span-family-of-types l3 family-span-diagram-family-of-types
-  span-family-of-types-span-diagram-family-of-types = pr2 s
+  span-span-diagram-family-of-types = pr2 s
 
   spanning-type-span-diagram-family-of-types : UU l3
   spanning-type-span-diagram-family-of-types =
     spanning-type-span-family-of-types
-      ( span-family-of-types-span-diagram-family-of-types)
+      ( span-span-diagram-family-of-types)
 
   map-span-diagram-family-of-types :
     (i : I) → spanning-type-span-diagram-family-of-types →
     family-span-diagram-family-of-types i
   map-span-diagram-family-of-types =
     map-span-family-of-types
-      ( span-family-of-types-span-diagram-family-of-types)
+      ( span-span-diagram-family-of-types)
 ```
