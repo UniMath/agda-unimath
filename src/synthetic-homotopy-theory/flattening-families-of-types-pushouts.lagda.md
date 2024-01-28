@@ -477,6 +477,12 @@ module _
     span-diagram-flattening-structure-type-family-pushout 𝒮
       ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y)
 
+  span-diagram-flattening-family-with-descent-data-pushout' :
+    span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
+  span-diagram-flattening-family-with-descent-data-pushout' =
+    span-diagram-flattening-type-family-pushout 𝒮 c
+      ( type-family-family-with-descent-data-pushout 𝒮 c Y)
+
   cocone-flattening-family-with-descent-data-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l6 ⊔ l7)
   cocone-flattening-family-with-descent-data-pushout =
@@ -484,11 +490,36 @@ module _
       ( span-diagram-flattening-family-with-descent-data-pushout)
       ( Z)
 
+  cocone-flattening-family-with-descent-data-pushout' :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l5 ⊔ l7)
+  cocone-flattening-family-with-descent-data-pushout' =
+    cocone-span-diagram
+      ( span-diagram-flattening-family-with-descent-data-pushout')
+      ( Z)
+
   dependent-cocone-flattening-family-with-descent-data-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l5 ⊔ l7)
   dependent-cocone-flattening-family-with-descent-data-pushout =
     dependent-cocone-span-diagram 𝒮 c
       ( λ s → type-family-family-with-descent-data-pushout 𝒮 c Y s → Z)
+
+  compute-cocone-flattening-family-with-descent-data-pushout' :
+    cocone-flattening-family-with-descent-data-pushout' ≃
+    dependent-cocone-flattening-family-with-descent-data-pushout
+  compute-cocone-flattening-family-with-descent-data-pushout' =
+    equiv-Σ _
+      ( equiv-ev-pair)
+      ( λ f →
+        equiv-Σ _
+          ( equiv-ev-pair)
+          ( λ g →
+            ( equiv-Π-equiv-family
+              ( λ s →
+                ( inv-equiv equiv-funext) ∘e
+                ( equiv-Π _
+                  {!!}
+                  {!!}))) ∘e
+            ( equiv-ev-pair)))
 
   compute-cocone-flattening-family-with-descent-data-pushout :
     cocone-flattening-family-with-descent-data-pushout ≃
