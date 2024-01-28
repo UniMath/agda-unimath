@@ -11,7 +11,7 @@ open import foundation-core.pullbacks public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
@@ -78,8 +78,8 @@ The standard pullback consists of [pairs](foundation.dependent-pair-types.md)
   A ×_X B := Σ (a : A) (b : B), (f a ＝ g b),
 ```
 
-thus the standard [cone](foundation.cones-over-cospans.md) consists of the
-canonical projections.
+thus the standard [cone](foundation.cones-over-cospan-diagrams.md) consists of
+the canonical projections.
 
 ## Properties
 

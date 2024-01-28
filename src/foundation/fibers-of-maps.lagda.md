@@ -10,7 +10,7 @@ open import foundation-core.fibers-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type

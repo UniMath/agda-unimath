@@ -403,29 +403,29 @@ module _
       ( Id (pr1 two-elements-transposition) x) +
       ( Id (pr1 (pr2 two-elements-transposition)) x)
     cases-coprod-id-type-t x p h (inl (inr star)) (inl (inr star)) k3 K1 K2 K3 =
-      inl (ap pr1 (is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K1)))
+      inl (ap pr1 (is-injective-equiv (inv-equiv h) (K2 ∙ inv K1)))
     cases-coprod-id-type-t x p h
       (inl (inr star)) (inr star) (inl (inr star)) K1 K2 K3 =
-      inr (ap pr1 (is-injective-map-equiv (inv-equiv h) (K3 ∙ inv K1)))
+      inr (ap pr1 (is-injective-equiv (inv-equiv h) (K3 ∙ inv K1)))
     cases-coprod-id-type-t x p h
       (inl (inr star)) (inr star) (inr star) K1 K2 K3 =
       ex-falso
         ( pr2 element-is-not-identity-map-transposition
         ( inv
           ( ap pr1
-            ( is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K3)))))
+            ( is-injective-equiv (inv-equiv h) (K2 ∙ inv K3)))))
     cases-coprod-id-type-t x p h
       (inr star) (inl (inr star)) (inl (inr star)) K1 K2 K3 =
       ex-falso
         ( pr2 element-is-not-identity-map-transposition
         ( inv
           ( ap pr1
-            ( is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K3)))))
+            ( is-injective-equiv (inv-equiv h) (K2 ∙ inv K3)))))
     cases-coprod-id-type-t x p h
       (inr star) (inl (inr star)) (inr star) K1 K2 K3 =
-      inr (ap pr1 (is-injective-map-equiv (inv-equiv h) (K3 ∙ inv K1)))
+      inr (ap pr1 (is-injective-equiv (inv-equiv h) (K3 ∙ inv K1)))
     cases-coprod-id-type-t x p h (inr star) (inr star) k3 K1 K2 K3 =
-      inl (ap pr1 (is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K1)))
+      inl (ap pr1 (is-injective-equiv (inv-equiv h) (K2 ∙ inv K1)))
     coprod-id-type-t :
       (x : X) → type-Decidable-Prop (pr1 Y x) →
       ( Id (pr1 two-elements-transposition) x) +
@@ -673,7 +673,7 @@ module _
   pr1 (pr2 (pr1 (transposition-conjugation-equiv (pair P H)) x)) =
     is-prop-all-elements-equal
       (λ p1 p2 →
-        is-injective-map-equiv
+        is-injective-equiv
           ( inv-equiv
             ( compute-raise l4 (type-Decidable-Prop (P (map-inv-equiv e x)))))
           ( eq-is-prop (is-prop-type-Decidable-Prop (P (map-inv-equiv e x)))))
@@ -781,7 +781,7 @@ module _
                 ( pair (Σ X (λ y → type-Decidable-Prop (pr1 t y))) (pr2 t))
                 { pair (map-inv-equiv e x) p}
                 ( eq-pair-Σ
-                  ( is-injective-map-equiv
+                  ( is-injective-equiv
                     ( e)
                     ( inv (pr1 (pair-eq-Σ q)) ∙
                       ap
@@ -1013,13 +1013,13 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype
     pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z)
   f z (inl p) =
     inr
-      ( is-injective-map-equiv
+      ( is-injective-equiv
         ( standard-transposition H np)
         ( ( right-computation-standard-transposition H np) ∙
           ( p)))
   f z (inr p) =
     inl
-      ( is-injective-map-equiv
+      ( is-injective-equiv
         ( standard-transposition H np)
         ( ( left-computation-standard-transposition H np) ∙
           ( p)))
@@ -1087,13 +1087,13 @@ eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
     pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u)
   f u (inl p) =
     inl
-      ( is-injective-map-equiv
+      ( is-injective-equiv
         ( standard-transposition H np)
         ( ( is-fixed-point-standard-transposition H np z nq1 nq3) ∙
           ( p)))
   f u (inr p) =
     inr
-      ( is-injective-map-equiv
+      ( is-injective-equiv
         ( standard-transposition H np)
         ( ( is-fixed-point-standard-transposition H np w nq2 nq4) ∙
           ( p)))

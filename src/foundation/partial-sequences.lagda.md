@@ -19,9 +19,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-A {{#concept "partial sequence"}} of elements of a type `A` is a
-[partial function](foundation.partial-functions.md) from `ℕ` to `A`. In other
-words, a partial sequence is a map
+A {{#concept "partial sequence" Agda=partial-sequence}} of elements of a type
+`A` is a [partial function](foundation.partial-functions.md) from `ℕ` to `A`. In
+other words, a partial sequence is a map
 
 ```text
   ℕ → Σ (P : Prop), (P → A)

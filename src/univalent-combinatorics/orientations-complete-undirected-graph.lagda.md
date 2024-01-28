@@ -629,7 +629,7 @@ module _
                           ( λ h → pr1 Y ∘ (map-equiv h))
                           ( inv (left-inverse-law-equiv e)))
                         ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-                      ( ( is-injective-map-equiv e (pr1 (pair-eq-Σ p))) ∙
+                      ( ( is-injective-equiv e (pr1 (pair-eq-Σ p))) ∙
                         ( ap
                           ( λ Y' → pr1 (d' Y'))
                           ( eq-pair-Σ
@@ -817,7 +817,7 @@ module _
           ( two-distinct-elements-leq-2-Fin
             ( number-of-elements-count eX)
             ( ineq)))
-        ( is-injective-map-equiv (equiv-count eX) p)
+        ( is-injective-equiv (equiv-count eX) p)
 
   canonical-2-Element-Decidable-Subtype-count :
     2-Element-Decidable-Subtype l X

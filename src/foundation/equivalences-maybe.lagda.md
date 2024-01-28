@@ -84,7 +84,7 @@ abstract
     is-exception-Maybe (map-equiv e (inl x)) →
     is-not-exception-Maybe (map-equiv e exception-Maybe)
   is-not-exception-map-equiv-exception-Maybe e =
-    is-not-exception-injective-map-exception-Maybe (is-injective-map-equiv e)
+    is-not-exception-injective-map-exception-Maybe (is-injective-equiv e)
 
 abstract
   is-not-exception-emb-exception-Maybe :
@@ -224,12 +224,12 @@ map-equiv-equiv-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y)
   (x : X) (u : Maybe Y) (p : map-equiv e (inl x) ＝ u) → Y
 map-equiv-equiv-Maybe' e =
-  restrict-injective-map-Maybe' (is-injective-map-equiv e)
+  restrict-injective-map-Maybe' (is-injective-equiv e)
 
 map-equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) → X → Y
 map-equiv-equiv-Maybe e =
-  restrict-injective-map-Maybe (is-injective-map-equiv e)
+  restrict-injective-map-Maybe (is-injective-equiv e)
 
 compute-map-equiv-equiv-is-exception-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
@@ -237,7 +237,7 @@ compute-map-equiv-equiv-is-exception-Maybe' :
   is-exception-Maybe (map-equiv e (inl x)) →
   inl (map-equiv-equiv-Maybe' e x u p) ＝ map-equiv e exception-Maybe
 compute-map-equiv-equiv-is-exception-Maybe' e =
-  compute-restrict-injective-map-is-exception-Maybe' (is-injective-map-equiv e)
+  compute-restrict-injective-map-is-exception-Maybe' (is-injective-equiv e)
 
 compute-map-equiv-equiv-is-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →

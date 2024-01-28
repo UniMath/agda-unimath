@@ -17,17 +17,18 @@ open import foundation-core.propositions
 
 ## Idea
 
-A {{#concept "partial function"}} from `A` to `B` is a function from `A` into
-the type of [partial elements](foundation.partial-elements.md) of `B`. In other
-words, a partial function is a function
+A {{#concept "partial function" Agda=partial-function}} from `A` to `B` is a
+function from `A` into the type of
+[partial elements](foundation.partial-elements.md) of `B`. In other words, a
+partial function is a function
 
 ```text
   A → Σ (P : Prop), (P → B).
 ```
 
 Given a partial function `f : A → B` and an element `a : A`, we say that `f` is
-{{#concept "defined" Disambiguation="partial function"}} at `a` if the partial
-element `f a` of `A` is defined.
+{{#concept "defined" Disambiguation="partial function" Agda=is-defined-partial-function}}
+at `a` if the partial element `f a` of `A` is defined.
 
 Partial functions can be described
 [equivalently](foundation-core.equivalences.md) as

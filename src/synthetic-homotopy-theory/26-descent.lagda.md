@@ -10,7 +10,7 @@ module synthetic-homotopy-theory.26-descent where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.constant-type-families
 open import foundation.contractible-maps
 open import foundation.contractible-types

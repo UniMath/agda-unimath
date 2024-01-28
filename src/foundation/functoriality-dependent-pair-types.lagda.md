@@ -10,7 +10,7 @@ open import foundation-core.functoriality-dependent-pair-types public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -526,7 +526,7 @@ module _
     map-inv-equiv (equiv-tot e) ~
     map-equiv (equiv-tot (λ x → inv-equiv (e x)))
   compute-inv-equiv-tot e (a , c) =
-    is-injective-map-equiv
+    is-injective-equiv
       ( equiv-tot e)
       ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙
         ( eq-pair-Σ refl (inv (is-section-map-inv-equiv (e a) c))))

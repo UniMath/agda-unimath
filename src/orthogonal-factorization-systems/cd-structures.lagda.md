@@ -18,7 +18,8 @@ open import foundation.universe-levels
 ## Idea
 
 A _cd-structure_ on a [category](category-theory.categories.md) consists of a
-class `𝒟` of {{#concept "distinguished squares" Disambiguation="cd-structure"}}
+class `𝒟` of
+{{#concept "distinguished squares" Disambiguation="cd-structure" Agda=is-distinguished-square-cd-structure}}
 
 ```text
         i
@@ -31,8 +32,8 @@ class `𝒟` of {{#concept "distinguished squares" Disambiguation="cd-structure"
 ```
 
 On this page we will consider _internal_ cd-structures, i.e., cd-structure on
-types. In other words, a {{#concept "cd-structure"}} is a family of
-[subtypes](foundation-core.subtypes.md)
+types. In other words, a {{#concept "cd-structure" Agda=cd-structure}} is a
+family of [subtypes](foundation-core.subtypes.md)
 
 ```text
   (f : A → B) (g : X → Y) → hom-arrow f g → Prop,

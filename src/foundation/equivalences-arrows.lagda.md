@@ -7,28 +7,18 @@ module foundation.equivalences-arrows where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-identifications
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
+open import foundation.homotopies
 open import foundation.morphisms-arrows
-open import foundation.path-algebra
-open import foundation.structure-identity-principle
+open import foundation.span-diagrams
+open import foundation.spans
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.function-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
+open import foundation-core.propositions
 ```
 
 </details>
@@ -40,41 +30,49 @@ function `g : X → Y` is a [morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text
         i
-    A ----> X
-    |       |
-  f |   H   | g
-    v       v
-    B ----> Y
+    A -----> X
+    |   ≃    |
+  f |        | g
+    V   ≃    V
+    B -----> Y
         j
 ```
 
-such that `i` and `j` are [equivalences](foundation-core.equivalences.md).
+in which `i` and `j` are [equivalences](foundation-core.equivalences.md).
 
 ## Definitions
 
-### The predicate of being an equivalence of arrows on morphisms of arrows
+### The predicate of being an equivalence of arrows
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
   where
+
+  is-equiv-prop-hom-arrow : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-equiv-prop-hom-arrow =
+    prod-Prop
+      ( is-equiv-Prop (map-domain-hom-arrow f g h))
+      ( is-equiv-Prop (map-codomain-hom-arrow f g h))
 
   is-equiv-hom-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-equiv-hom-arrow =
-    is-equiv (map-domain-hom-arrow f g α) ×
-    is-equiv (map-codomain-hom-arrow f g α)
+    type-Prop is-equiv-prop-hom-arrow
+
+  is-prop-is-equiv-hom-arrow : is-prop is-equiv-hom-arrow
+  is-prop-is-equiv-hom-arrow = is-prop-type-Prop is-equiv-prop-hom-arrow
 
   is-equiv-map-domain-is-equiv-hom-arrow :
-    is-equiv-hom-arrow → is-equiv (map-domain-hom-arrow f g α)
+    is-equiv-hom-arrow → is-equiv (map-domain-hom-arrow f g h)
   is-equiv-map-domain-is-equiv-hom-arrow = pr1
 
   is-equiv-map-codomain-is-equiv-hom-arrow :
-    is-equiv-hom-arrow → is-equiv (map-codomain-hom-arrow f g α)
+    is-equiv-hom-arrow → is-equiv (map-codomain-hom-arrow f g h)
   is-equiv-map-codomain-is-equiv-hom-arrow = pr2
 ```
 
-### The type of equivalences of arrows
+### Equivalences of arrows
 
 ```agda
 module _
@@ -82,49 +80,62 @@ module _
   (f : A → B) (g : X → Y)
   where
 
+  coherence-equiv-arrow : (A ≃ X) → (B ≃ Y) → UU (l1 ⊔ l4)
+  coherence-equiv-arrow i j =
+    coherence-hom-arrow f g (map-equiv i) (map-equiv j)
+
   equiv-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-arrow = Σ (hom-arrow f g) (is-equiv-hom-arrow f g)
+  equiv-arrow =
+    Σ (A ≃ X) (λ i → Σ (B ≃ Y) (coherence-equiv-arrow i))
 
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : equiv-arrow f g)
-  where
+  module _
+    (e : equiv-arrow)
+    where
 
-  hom-arrow-equiv-arrow : hom-arrow f g
-  hom-arrow-equiv-arrow = pr1 α
+    equiv-domain-equiv-arrow : A ≃ X
+    equiv-domain-equiv-arrow = pr1 e
 
-  is-equiv-hom-arrow-equiv-arrow : is-equiv-hom-arrow f g hom-arrow-equiv-arrow
-  is-equiv-hom-arrow-equiv-arrow = pr2 α
+    map-domain-equiv-arrow : A → X
+    map-domain-equiv-arrow = map-equiv equiv-domain-equiv-arrow
 
-  map-domain-equiv-arrow : A → X
-  map-domain-equiv-arrow = map-domain-hom-arrow f g hom-arrow-equiv-arrow
+    is-equiv-map-domain-equiv-arrow : is-equiv map-domain-equiv-arrow
+    is-equiv-map-domain-equiv-arrow =
+      is-equiv-map-equiv equiv-domain-equiv-arrow
 
-  is-equiv-map-domain-equiv-arrow : is-equiv map-domain-equiv-arrow
-  is-equiv-map-domain-equiv-arrow =
-    is-equiv-map-domain-is-equiv-hom-arrow f g
-      ( hom-arrow-equiv-arrow)
-      ( is-equiv-hom-arrow-equiv-arrow)
+    equiv-codomain-equiv-arrow : B ≃ Y
+    equiv-codomain-equiv-arrow = pr1 (pr2 e)
 
-  equiv-domain-equiv-arrow : A ≃ X
-  pr1 equiv-domain-equiv-arrow = map-domain-equiv-arrow
-  pr2 equiv-domain-equiv-arrow = is-equiv-map-domain-equiv-arrow
+    map-codomain-equiv-arrow : B → Y
+    map-codomain-equiv-arrow = map-equiv equiv-codomain-equiv-arrow
 
-  map-codomain-equiv-arrow : B → Y
-  map-codomain-equiv-arrow = map-codomain-hom-arrow f g hom-arrow-equiv-arrow
+    is-equiv-map-codomain-equiv-arrow : is-equiv map-codomain-equiv-arrow
+    is-equiv-map-codomain-equiv-arrow =
+      is-equiv-map-equiv equiv-codomain-equiv-arrow
 
-  is-equiv-map-codomain-equiv-arrow : is-equiv map-codomain-equiv-arrow
-  is-equiv-map-codomain-equiv-arrow =
-    is-equiv-map-codomain-is-equiv-hom-arrow f g
-      ( hom-arrow-equiv-arrow)
-      ( is-equiv-hom-arrow-equiv-arrow)
+    coh-equiv-arrow :
+      coherence-equiv-arrow
+        ( equiv-domain-equiv-arrow)
+        ( equiv-codomain-equiv-arrow)
+    coh-equiv-arrow = pr2 (pr2 e)
 
-  equiv-codomain-equiv-arrow : B ≃ Y
-  pr1 equiv-codomain-equiv-arrow = map-codomain-equiv-arrow
-  pr2 equiv-codomain-equiv-arrow = is-equiv-map-codomain-equiv-arrow
+    hom-equiv-arrow : hom-arrow f g
+    pr1 hom-equiv-arrow = map-domain-equiv-arrow
+    pr1 (pr2 hom-equiv-arrow) = map-codomain-equiv-arrow
+    pr2 (pr2 hom-equiv-arrow) = coh-equiv-arrow
 
-  coh-equiv-arrow :
-    coherence-square-maps map-domain-equiv-arrow f g map-codomain-equiv-arrow
-  coh-equiv-arrow = coh-hom-arrow f g hom-arrow-equiv-arrow
+    is-equiv-equiv-arrow : is-equiv-hom-arrow f g hom-equiv-arrow
+    pr1 is-equiv-equiv-arrow = is-equiv-map-domain-equiv-arrow
+    pr2 is-equiv-equiv-arrow = is-equiv-map-codomain-equiv-arrow
+
+    span-equiv-arrow :
+      span l1 B X
+    span-equiv-arrow =
+      span-hom-arrow f g hom-equiv-arrow
+
+    span-diagram-equiv-arrow : span-diagram l2 l3 l1
+    pr1 span-diagram-equiv-arrow = B
+    pr1 (pr2 span-diagram-equiv-arrow) = X
+    pr2 (pr2 span-diagram-equiv-arrow) = span-equiv-arrow
 ```
 
 ### The identity equivalence of arrows
@@ -135,9 +146,9 @@ module _
   where
 
   id-equiv-arrow : equiv-arrow f f
-  pr1 id-equiv-arrow = id-hom-arrow
-  pr1 (pr2 id-equiv-arrow) = is-equiv-id
-  pr2 (pr2 id-equiv-arrow) = is-equiv-id
+  pr1 id-equiv-arrow = id-equiv
+  pr1 (pr2 id-equiv-arrow) = id-equiv
+  pr2 (pr2 id-equiv-arrow) = refl-htpy
 ```
 
 ### Composition of equivalences of arrows
@@ -150,23 +161,36 @@ module _
   (b : equiv-arrow g h) (a : equiv-arrow f g)
   where
 
+  equiv-domain-comp-equiv-arrow : A ≃ U
+  equiv-domain-comp-equiv-arrow =
+    equiv-domain-equiv-arrow g h b ∘e equiv-domain-equiv-arrow f g a
+
+  map-domain-comp-equiv-arrow : A → U
+  map-domain-comp-equiv-arrow = map-equiv equiv-domain-comp-equiv-arrow
+
+  equiv-codomain-comp-equiv-arrow : B ≃ V
+  equiv-codomain-comp-equiv-arrow =
+    equiv-codomain-equiv-arrow g h b ∘e equiv-codomain-equiv-arrow f g a
+
+  map-codomain-comp-equiv-arrow : B → V
+  map-codomain-comp-equiv-arrow = map-equiv equiv-codomain-comp-equiv-arrow
+
+  coh-comp-equiv-arrow :
+    coherence-equiv-arrow f h
+      ( equiv-domain-comp-equiv-arrow)
+      ( equiv-codomain-comp-equiv-arrow)
+  coh-comp-equiv-arrow =
+    coh-comp-hom-arrow f g h
+      ( hom-equiv-arrow g h b)
+      ( hom-equiv-arrow f g a)
+
   comp-equiv-arrow : equiv-arrow f h
-  pr1 comp-equiv-arrow =
-    comp-hom-arrow f g h
-      ( hom-arrow-equiv-arrow g h b)
-      ( hom-arrow-equiv-arrow f g a)
-  pr1 (pr2 comp-equiv-arrow) =
-    is-equiv-comp
-      ( map-domain-equiv-arrow g h b)
-      ( map-domain-equiv-arrow f g a)
-      ( is-equiv-map-domain-equiv-arrow f g a)
-      ( is-equiv-map-domain-equiv-arrow g h b)
-  pr2 (pr2 comp-equiv-arrow) =
-    is-equiv-comp
-      ( map-codomain-equiv-arrow g h b)
-      ( map-codomain-equiv-arrow f g a)
-      ( is-equiv-map-codomain-equiv-arrow f g a)
-      ( is-equiv-map-codomain-equiv-arrow g h b)
+  pr1 comp-equiv-arrow = equiv-domain-comp-equiv-arrow
+  pr1 (pr2 comp-equiv-arrow) = equiv-codomain-comp-equiv-arrow
+  pr2 (pr2 comp-equiv-arrow) = coh-comp-equiv-arrow
+
+  hom-comp-equiv-arrow : hom-arrow f h
+  hom-comp-equiv-arrow = hom-equiv-arrow f h comp-equiv-arrow
 ```
 
 ### Inverses of equivalences of arrows
@@ -177,12 +201,23 @@ module _
   (f : A → B) (g : X → Y) (α : equiv-arrow f g)
   where
 
-  hom-inv-equiv-arrow : hom-arrow g f
-  pr1 hom-inv-equiv-arrow =
-    map-inv-is-equiv (is-equiv-map-domain-equiv-arrow f g α)
-  pr1 (pr2 hom-inv-equiv-arrow) =
-    map-inv-is-equiv (is-equiv-map-codomain-equiv-arrow f g α)
-  pr2 (pr2 hom-inv-equiv-arrow) =
+  equiv-domain-inv-equiv-arrow : X ≃ A
+  equiv-domain-inv-equiv-arrow = inv-equiv (equiv-domain-equiv-arrow f g α)
+
+  map-domain-inv-equiv-arrow : X → A
+  map-domain-inv-equiv-arrow = map-equiv equiv-domain-inv-equiv-arrow
+
+  equiv-codomain-inv-equiv-arrow : Y ≃ B
+  equiv-codomain-inv-equiv-arrow = inv-equiv (equiv-codomain-equiv-arrow f g α)
+
+  map-codomain-inv-equiv-arrow : Y → B
+  map-codomain-inv-equiv-arrow = map-equiv equiv-codomain-inv-equiv-arrow
+
+  coh-inv-equiv-arrow :
+    coherence-equiv-arrow g f
+      ( equiv-domain-inv-equiv-arrow)
+      ( equiv-codomain-inv-equiv-arrow)
+  coh-inv-equiv-arrow =
     coherence-square-inv-horizontal
       ( equiv-domain-equiv-arrow f g α)
       ( f)
@@ -190,15 +225,16 @@ module _
       ( equiv-codomain-equiv-arrow f g α)
       ( coh-equiv-arrow f g α)
 
-  is-equiv-inv-equiv-arrow : is-equiv-hom-arrow g f hom-inv-equiv-arrow
-  pr1 is-equiv-inv-equiv-arrow =
-    is-equiv-map-inv-is-equiv (is-equiv-map-domain-equiv-arrow f g α)
-  pr2 is-equiv-inv-equiv-arrow =
-    is-equiv-map-inv-is-equiv (is-equiv-map-codomain-equiv-arrow f g α)
-
   inv-equiv-arrow : equiv-arrow g f
-  pr1 inv-equiv-arrow = hom-inv-equiv-arrow
-  pr2 inv-equiv-arrow = is-equiv-inv-equiv-arrow
+  pr1 inv-equiv-arrow = equiv-domain-inv-equiv-arrow
+  pr1 (pr2 inv-equiv-arrow) = equiv-codomain-inv-equiv-arrow
+  pr2 (pr2 inv-equiv-arrow) = coh-inv-equiv-arrow
+
+  hom-inv-equiv-arrow : hom-arrow g f
+  hom-inv-equiv-arrow = hom-equiv-arrow g f inv-equiv-arrow
+
+  is-equiv-inv-equiv-arrow : is-equiv-hom-arrow g f hom-inv-equiv-arrow
+  is-equiv-inv-equiv-arrow = is-equiv-equiv-arrow g f inv-equiv-arrow
 ```
 
 ### If a map is equivalent to an equivalence, then it is an equivalence
@@ -241,16 +277,16 @@ module _
   where
 
   is-cartesian-equiv-arrow :
-    is-cartesian-hom-arrow f g (hom-arrow-equiv-arrow f g α)
+    is-cartesian-hom-arrow f g (hom-equiv-arrow f g α)
   is-cartesian-equiv-arrow =
     is-pullback-is-equiv-horizontal-maps
       ( map-codomain-equiv-arrow f g α)
       ( g)
-      ( cone-hom-arrow f g (hom-arrow-equiv-arrow f g α))
+      ( cone-hom-arrow f g (hom-equiv-arrow f g α))
       ( is-equiv-map-codomain-equiv-arrow f g α)
       ( is-equiv-map-domain-equiv-arrow f g α)
 
-  cartesian-hom-arrow-equiv-arrow : cartesian-hom-arrow f g
-  pr1 cartesian-hom-arrow-equiv-arrow = hom-arrow-equiv-arrow f g α
-  pr2 cartesian-hom-arrow-equiv-arrow = is-cartesian-equiv-arrow
+  cartesian-hom-equiv-arrow : cartesian-hom-arrow f g
+  pr1 cartesian-hom-equiv-arrow = hom-equiv-arrow f g α
+  pr2 cartesian-hom-equiv-arrow = is-cartesian-equiv-arrow
 ```

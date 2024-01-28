@@ -114,8 +114,8 @@ module _
         ( is-retraction-map-inv-is-equiv H y))
 
   abstract
-    is-injective-map-equiv : (e : A ≃ B) → is-injective (map-equiv e)
-    is-injective-map-equiv (pair f H) = is-injective-is-equiv H
+    is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
+    is-injective-equiv (pair f H) = is-injective-is-equiv H
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}

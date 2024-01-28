@@ -281,7 +281,7 @@ module _
                   ( λ x → le-ℕ x first-point-min-repeating)
                   ( equality-pred-second)
                   ( le-min-reporting)))
-              ( is-injective-map-equiv
+              ( is-injective-equiv
                 ( f)
                 ( tr
                   ( λ x →
@@ -1900,7 +1900,7 @@ module _
           ( inl k)
       section-h'-inl k (inl Q) R (inl Q') R' =
         ap inl
-          ( is-injective-map-equiv (equiv-count h)
+          ( is-injective-equiv (equiv-count h)
             ( ap
               ( λ f → map-equiv f (class (same-orbits-permutation-count g) a))
               ( right-inverse-law-equiv (equiv-count h)) ∙

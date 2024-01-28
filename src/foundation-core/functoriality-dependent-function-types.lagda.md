@@ -121,7 +121,7 @@ module _
     ( map-inv-equiv (equiv-Π-equiv-family e)) ~
     ( map-equiv (equiv-Π-equiv-family (λ x → inv-equiv (e x))))
   compute-inv-equiv-Π-equiv-family e f =
-    is-injective-map-equiv
+    is-injective-equiv
       ( equiv-Π-equiv-family e)
       ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
         ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))

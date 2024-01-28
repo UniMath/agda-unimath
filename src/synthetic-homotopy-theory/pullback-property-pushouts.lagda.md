@@ -8,7 +8,7 @@ module synthetic-homotopy-theory.pullback-property-pushouts where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.precomposition-functions
@@ -38,8 +38,8 @@ pushout of `S` if and only if the square
 ```
 
 is a [pullback square](foundation.pullback-squares.md) for every type `Y`.
-Below, we first define the [cone](foundation.cones-over-cospans.md) of this
-[commuting square](foundation.commuting-squares-of-maps.md), and then we
+Below, we first define the [cone](foundation.cones-over-cospan-diagrams.md) of
+this [commuting square](foundation.commuting-squares-of-maps.md), and then we
 introduce the type `pullback-property-pushout`, which states that the above
 square is a [pullback](foundation-core.universal-property-pullbacks.md).
 
