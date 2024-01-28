@@ -19,15 +19,15 @@ open import foundation-core.function-types
 ## Idea
 
 Consider a family of types `A i` indexed by `i : I`. A
-{{#concept "span" Disambiguation="family of types" Agda=span-family-of-types}}
-on `A` consists of a type `S` equipped with a family of maps
+{{#concept "span" Disambiguation="family of types" Agda=span-type-family}} on
+`A` consists of a type `S` equipped with a family of maps
 
 ```text
   (i : I) → S → A i.
 ```
 
 The type `S` is called the
-{{#concept "spanning type" Disambiguation="span of family of types" Agda=spanning-type-span-family-of-types}}
+{{#concept "spanning type" Disambiguation="span of family of types" Agda=spanning-type-span-type-family}}
 of the span.
 
 ## Definitions
@@ -39,20 +39,20 @@ module _
   {l1 l2 : Level} (l3 : Level) {I : UU l1} (A : I → UU l2)
   where
 
-  span-family-of-types : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  span-family-of-types = Σ (UU l3) (λ S → (i : I) → S → A i)
+  span-type-family : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  span-type-family = Σ (UU l3) (λ S → (i : I) → S → A i)
 
 module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
-  (s : span-family-of-types l3 A)
+  (s : span-type-family l3 A)
   where
 
-  spanning-type-span-family-of-types : UU l3
-  spanning-type-span-family-of-types = pr1 s
+  spanning-type-span-type-family : UU l3
+  spanning-type-span-type-family = pr1 s
 
-  map-span-family-of-types :
-    (i : I) → spanning-type-span-family-of-types → A i
-  map-span-family-of-types = pr2 s
+  map-span-type-family :
+    (i : I) → spanning-type-span-type-family → A i
+  map-span-type-family = pr2 s
 ```
 
 ## See also

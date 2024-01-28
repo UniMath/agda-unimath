@@ -48,92 +48,92 @@ indexed by a type `I` to a span `(B , t)` indexed by `I` consists of a
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {I : UU l1}
-  (S : span-diagram-family-of-types l2 l3 I)
-  (T : span-diagram-family-of-types l4 l5 I)
+  (S : span-diagram-type-family l2 l3 I)
+  (T : span-diagram-type-family l4 l5 I)
   where
 
-  equiv-span-diagram-family-of-types : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  equiv-span-diagram-family-of-types =
+  equiv-span-diagram-type-family : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  equiv-span-diagram-type-family =
     Σ ( (i : I) →
-        family-span-diagram-family-of-types S i ≃
-        family-span-diagram-family-of-types T i)
+        family-span-diagram-type-family S i ≃
+        family-span-diagram-type-family T i)
       ( λ e →
-        equiv-span-family-of-types
+        equiv-span-type-family
           ( concat-span-hom-family-of-types
-            ( span-span-diagram-family-of-types S)
+            ( span-span-diagram-type-family S)
             ( λ i → map-equiv (e i)))
-          ( span-span-diagram-family-of-types T))
+          ( span-span-diagram-type-family T))
 
   module _
-    (e : equiv-span-diagram-family-of-types)
+    (e : equiv-span-diagram-type-family)
     where
 
-    equiv-family-equiv-span-diagram-family-of-types :
+    equiv-family-equiv-span-diagram-type-family :
       (i : I) →
-      family-span-diagram-family-of-types S i ≃
-      family-span-diagram-family-of-types T i
-    equiv-family-equiv-span-diagram-family-of-types = pr1 e
+      family-span-diagram-type-family S i ≃
+      family-span-diagram-type-family T i
+    equiv-family-equiv-span-diagram-type-family = pr1 e
 
-    map-family-equiv-span-diagram-family-of-types :
+    map-family-equiv-span-diagram-type-family :
       (i : I) →
-      family-span-diagram-family-of-types S i →
-      family-span-diagram-family-of-types T i
-    map-family-equiv-span-diagram-family-of-types i =
-      map-equiv (equiv-family-equiv-span-diagram-family-of-types i)
+      family-span-diagram-type-family S i →
+      family-span-diagram-type-family T i
+    map-family-equiv-span-diagram-type-family i =
+      map-equiv (equiv-family-equiv-span-diagram-type-family i)
 
-    equiv-span-equiv-span-diagram-family-of-types :
-      equiv-span-family-of-types
+    equiv-span-equiv-span-diagram-type-family :
+      equiv-span-type-family
         ( concat-span-hom-family-of-types
-          ( span-span-diagram-family-of-types S)
-          ( map-family-equiv-span-diagram-family-of-types))
-        ( span-span-diagram-family-of-types T)
-    equiv-span-equiv-span-diagram-family-of-types = pr2 e
+          ( span-span-diagram-type-family S)
+          ( map-family-equiv-span-diagram-type-family))
+        ( span-span-diagram-type-family T)
+    equiv-span-equiv-span-diagram-type-family = pr2 e
 
-    spanning-equiv-equiv-span-diagram-family-of-types :
-      spanning-type-span-diagram-family-of-types S ≃
-      spanning-type-span-diagram-family-of-types T
-    spanning-equiv-equiv-span-diagram-family-of-types =
-      equiv-equiv-span-family-of-types
+    spanning-equiv-equiv-span-diagram-type-family :
+      spanning-type-span-diagram-type-family S ≃
+      spanning-type-span-diagram-type-family T
+    spanning-equiv-equiv-span-diagram-type-family =
+      equiv-equiv-span-type-family
         ( concat-span-hom-family-of-types
-          ( span-span-diagram-family-of-types S)
-          ( map-family-equiv-span-diagram-family-of-types))
-        ( span-span-diagram-family-of-types T)
-        ( equiv-span-equiv-span-diagram-family-of-types)
+          ( span-span-diagram-type-family S)
+          ( map-family-equiv-span-diagram-type-family))
+        ( span-span-diagram-type-family T)
+        ( equiv-span-equiv-span-diagram-type-family)
 
-    spanning-map-equiv-span-diagram-family-of-types :
-      spanning-type-span-diagram-family-of-types S →
-      spanning-type-span-diagram-family-of-types T
-    spanning-map-equiv-span-diagram-family-of-types =
-      map-equiv spanning-equiv-equiv-span-diagram-family-of-types
+    spanning-map-equiv-span-diagram-type-family :
+      spanning-type-span-diagram-type-family S →
+      spanning-type-span-diagram-type-family T
+    spanning-map-equiv-span-diagram-type-family =
+      map-equiv spanning-equiv-equiv-span-diagram-type-family
 
-    coherence-square-equiv-span-diagram-family-of-types :
+    coherence-square-equiv-span-diagram-type-family :
       (i : I) →
       coherence-square-maps
-        ( spanning-map-equiv-span-diagram-family-of-types) 
-        ( map-span-diagram-family-of-types S i)
-        ( map-span-diagram-family-of-types T i)
-        ( map-family-equiv-span-diagram-family-of-types i)
-    coherence-square-equiv-span-diagram-family-of-types =
-      triangle-equiv-span-family-of-types
+        ( spanning-map-equiv-span-diagram-type-family)
+        ( map-span-diagram-type-family S i)
+        ( map-span-diagram-type-family T i)
+        ( map-family-equiv-span-diagram-type-family i)
+    coherence-square-equiv-span-diagram-type-family =
+      triangle-equiv-span-type-family
         ( concat-span-hom-family-of-types
-          ( span-span-diagram-family-of-types S)
-          ( map-family-equiv-span-diagram-family-of-types))
-        ( span-span-diagram-family-of-types T)
-        ( equiv-span-equiv-span-diagram-family-of-types)
+          ( span-span-diagram-type-family S)
+          ( map-family-equiv-span-diagram-type-family))
+        ( span-span-diagram-type-family T)
+        ( equiv-span-equiv-span-diagram-type-family)
 ```
 
 ### Identity equivalences of spans diagrams on families of types
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {𝒮 : span-diagram-family-of-types l2 l3 I}
+  {l1 l2 l3 : Level} {I : UU l1} {𝒮 : span-diagram-type-family l2 l3 I}
   where
 
-  id-equiv-span-diagram-family-of-types :
-    equiv-span-diagram-family-of-types 𝒮 𝒮
-  pr1 id-equiv-span-diagram-family-of-types i = id-equiv
-  pr1 (pr2 id-equiv-span-diagram-family-of-types) = id-equiv
-  pr2 (pr2 id-equiv-span-diagram-family-of-types) i = refl-htpy
+  id-equiv-span-diagram-type-family :
+    equiv-span-diagram-type-family 𝒮 𝒮
+  pr1 id-equiv-span-diagram-type-family i = id-equiv
+  pr1 (pr2 id-equiv-span-diagram-type-family) = id-equiv
+  pr2 (pr2 id-equiv-span-diagram-type-family) i = refl-htpy
 ```
 
 ## See also

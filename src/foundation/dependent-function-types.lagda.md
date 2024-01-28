@@ -19,15 +19,21 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a family `B` of types over `A`. A {{#concept "dependent function"}} that takes elements `x : A` to elements of type `B x` is an assignment of an element `f x : B x` for each `x : A`. In Agda, dependent functions can be written using `λ`-abstraction, i.e., using the syntax
+Consider a family `B` of types over `A`. A {{#concept "dependent function"}}
+that takes elements `x : A` to elements of type `B x` is an assignment of an
+element `f x : B x` for each `x : A`. In Agda, dependent functions can be
+written using `λ`-abstraction, i.e., using the syntax
 
 ```text
   λ x → f x.
 ```
 
-Informally, we also use the notation `x ↦ f x` for the assignment of values of a dependent function `f`.
+Informally, we also use the notation `x ↦ f x` for the assignment of values of a
+dependent function `f`.
 
-The type of dependent function `(x : A) → B x` is built in to the kernel of Agda, and doesn't need to be introduced by us. The purpose of this file is to record some properties of dependent function types
+The type of dependent function `(x : A) → B x` is built in to the kernel of
+Agda, and doesn't need to be introduced by us. The purpose of this file is to
+record some properties of dependent function types
 
 ## Definitions
 
@@ -38,9 +44,9 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  span-family-of-types-Π : span-family-of-types (l1 ⊔ l2) B
-  pr1 span-family-of-types-Π = (x : A) → B x
-  pr2 span-family-of-types-Π x f = f x
+  span-type-family-Π : span-type-family (l1 ⊔ l2) B
+  pr1 span-type-family-Π = (x : A) → B x
+  pr2 span-type-family-Π x f = f x
 ```
 
 ## Properties
@@ -53,7 +59,7 @@ module _
   where
 
   universal-property-dependent-function-types-Π :
-    universal-property-dependent-function-types (span-family-of-types-Π B)
+    universal-property-dependent-function-types (span-type-family-Π B)
   universal-property-dependent-function-types-Π T = is-equiv-swap-Π
 ```
 
@@ -64,10 +70,10 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-terminal-span-family-of-types-Π :
-    is-terminal-span-family-of-types (span-family-of-types-Π B)
-  is-terminal-span-family-of-types-Π =
+  is-terminal-span-type-family-Π :
+    is-terminal-span-type-family (span-type-family-Π B)
+  is-terminal-span-type-family-Π =
     is-terminal-universal-property-dependent-function-types
-      ( span-family-of-types-Π B)
+      ( span-type-family-Π B)
       ( universal-property-dependent-function-types-Π B)
 ```

@@ -18,32 +18,36 @@ open import foundation-core.function-types
 
 ## Idea
 
-This file contains a collection of operations that produce new [spans of families of types](foundation.spans-families-of-types.lagda.md) from given spans of families of types.
+This file contains a collection of operations that produce new
+[spans of families of types](foundation.spans-families-of-types.lagda.md) from
+given spans of families of types.
 
 ## Definitions
 
 ### Concatenation of spans and families of maps
 
-Consider a span `𝒮 := (S , s)` on a family of types `A : I → 𝒰` and consider a family of maps `f : (i : I) → A i → B i`. Then we can concatenate the span `𝒮` with the family of maps `f` to obtain the span `(S , λ i → f i ∘ s i)` on `B`.
+Consider a span `𝒮 := (S , s)` on a family of types `A : I → 𝒰` and consider a
+family of maps `f : (i : I) → A i → B i`. Then we can concatenate the span `𝒮`
+with the family of maps `f` to obtain the span `(S , λ i → f i ∘ s i)` on `B`.
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (𝒮 : span-family-of-types l4 A)
+  (𝒮 : span-type-family l4 A)
   (f : (i : I) → A i → B i)
   where
 
   spanning-type-concat-span-hom-family-of-types : UU l4
   spanning-type-concat-span-hom-family-of-types =
-    spanning-type-span-family-of-types 𝒮
+    spanning-type-span-type-family 𝒮
 
   map-concat-span-hom-family-of-types :
     (i : I) → spanning-type-concat-span-hom-family-of-types → B i
   map-concat-span-hom-family-of-types i =
-    f i ∘ map-span-family-of-types 𝒮 i
+    f i ∘ map-span-type-family 𝒮 i
 
   concat-span-hom-family-of-types :
-    span-family-of-types l4 B
+    span-type-family l4 B
   pr1 concat-span-hom-family-of-types =
     spanning-type-concat-span-hom-family-of-types
   pr2 concat-span-hom-family-of-types =

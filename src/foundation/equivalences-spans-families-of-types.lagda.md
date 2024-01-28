@@ -52,50 +52,50 @@ on `A` consists of an [equivalence](foundation-core.equivalences.md) `e : S ≃ 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2}
-  (S : span-family-of-types l3 A) (T : span-family-of-types l4 A)
+  (S : span-type-family l3 A) (T : span-type-family l4 A)
   where
 
-  equiv-span-family-of-types : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-span-family-of-types =
-    Σ ( spanning-type-span-family-of-types S ≃
-        spanning-type-span-family-of-types T)
+  equiv-span-type-family : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  equiv-span-type-family =
+    Σ ( spanning-type-span-type-family S ≃
+        spanning-type-span-type-family T)
       ( λ e →
         (i : I) →
         coherence-triangle-maps
-          ( map-span-family-of-types S i)
-          ( map-span-family-of-types T i)
+          ( map-span-type-family S i)
+          ( map-span-type-family T i)
           ( map-equiv e))
 
   module _
-    (e : equiv-span-family-of-types)
+    (e : equiv-span-type-family)
     where
 
-    equiv-equiv-span-family-of-types :
-      spanning-type-span-family-of-types S ≃
-      spanning-type-span-family-of-types T
-    equiv-equiv-span-family-of-types = pr1 e
+    equiv-equiv-span-type-family :
+      spanning-type-span-type-family S ≃
+      spanning-type-span-type-family T
+    equiv-equiv-span-type-family = pr1 e
 
-    map-equiv-span-family-of-types :
-      spanning-type-span-family-of-types S →
-      spanning-type-span-family-of-types T
-    map-equiv-span-family-of-types = map-equiv equiv-equiv-span-family-of-types
+    map-equiv-span-type-family :
+      spanning-type-span-type-family S →
+      spanning-type-span-type-family T
+    map-equiv-span-type-family = map-equiv equiv-equiv-span-type-family
 
-    is-equiv-equiv-span-family-of-types :
-      is-equiv map-equiv-span-family-of-types
-    is-equiv-equiv-span-family-of-types =
-      is-equiv-map-equiv equiv-equiv-span-family-of-types
+    is-equiv-equiv-span-type-family :
+      is-equiv map-equiv-span-type-family
+    is-equiv-equiv-span-type-family =
+      is-equiv-map-equiv equiv-equiv-span-type-family
 
-    triangle-equiv-span-family-of-types :
+    triangle-equiv-span-type-family :
       (i : I) →
       coherence-triangle-maps
-        ( map-span-family-of-types S i)
-        ( map-span-family-of-types T i)
-        ( map-equiv-span-family-of-types)
-    triangle-equiv-span-family-of-types = pr2 e
+        ( map-span-type-family S i)
+        ( map-span-type-family T i)
+        ( map-equiv-span-type-family)
+    triangle-equiv-span-type-family = pr2 e
 
-    hom-equiv-span-family-of-types : hom-span-family-of-types S T
-    pr1 hom-equiv-span-family-of-types = map-equiv-span-family-of-types
-    pr2 hom-equiv-span-family-of-types = triangle-equiv-span-family-of-types
+    hom-equiv-span-type-family : hom-span-type-family S T
+    pr1 hom-equiv-span-type-family = map-equiv-span-type-family
+    pr2 hom-equiv-span-type-family = triangle-equiv-span-type-family
 ```
 
 ### Identity equivalences of spans of families of types
@@ -103,12 +103,12 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2}
-  {S : span-family-of-types l3 A}
+  {S : span-type-family l3 A}
   where
 
-  id-equiv-span-family-of-types : equiv-span-family-of-types S S
-  pr1 id-equiv-span-family-of-types = id-equiv
-  pr2 id-equiv-span-family-of-types i = refl-htpy
+  id-equiv-span-type-family : equiv-span-type-family S S
+  pr1 id-equiv-span-type-family = id-equiv
+  pr2 id-equiv-span-type-family i = refl-htpy
 ```
 
 ## Properties
@@ -117,39 +117,39 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} (S : span-family-of-types l3 A)
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} (S : span-type-family l3 A)
   where
 
-  equiv-eq-span-family-of-types :
-    (T : span-family-of-types l3 A) → S ＝ T → equiv-span-family-of-types S T
-  equiv-eq-span-family-of-types .S refl = id-equiv-span-family-of-types
+  equiv-eq-span-type-family :
+    (T : span-type-family l3 A) → S ＝ T → equiv-span-type-family S T
+  equiv-eq-span-type-family .S refl = id-equiv-span-type-family
 
-  is-torsorial-equiv-span-family-of-types :
-    is-torsorial (equiv-span-family-of-types S)
-  is-torsorial-equiv-span-family-of-types =
+  is-torsorial-equiv-span-type-family :
+    is-torsorial (equiv-span-type-family S)
+  is-torsorial-equiv-span-type-family =
     is-torsorial-Eq-structure
       ( is-torsorial-equiv _)
-      ( spanning-type-span-family-of-types S , id-equiv)
+      ( spanning-type-span-type-family S , id-equiv)
       ( is-torsorial-Eq-Π (λ i → is-torsorial-htpy _))
 
-  is-equiv-equiv-eq-span-family-of-types :
-    (T : span-family-of-types l3 A) → is-equiv (equiv-eq-span-family-of-types T)
-  is-equiv-equiv-eq-span-family-of-types =
+  is-equiv-equiv-eq-span-type-family :
+    (T : span-type-family l3 A) → is-equiv (equiv-eq-span-type-family T)
+  is-equiv-equiv-eq-span-type-family =
     fundamental-theorem-id
-      ( is-torsorial-equiv-span-family-of-types)
-      ( equiv-eq-span-family-of-types)
+      ( is-torsorial-equiv-span-type-family)
+      ( equiv-eq-span-type-family)
 
-  extensionality-span-family-of-types :
-    (T : span-family-of-types l3 A) → (S ＝ T) ≃ equiv-span-family-of-types S T
-  pr1 (extensionality-span-family-of-types T) =
-    equiv-eq-span-family-of-types T
-  pr2 (extensionality-span-family-of-types T) =
-    is-equiv-equiv-eq-span-family-of-types T
+  extensionality-span-type-family :
+    (T : span-type-family l3 A) → (S ＝ T) ≃ equiv-span-type-family S T
+  pr1 (extensionality-span-type-family T) =
+    equiv-eq-span-type-family T
+  pr2 (extensionality-span-type-family T) =
+    is-equiv-equiv-eq-span-type-family T
 
-  eq-equiv-span-family-of-types :
-    (T : span-family-of-types l3 A) → equiv-span-family-of-types S T → S ＝ T
-  eq-equiv-span-family-of-types T =
-    map-inv-equiv (extensionality-span-family-of-types T)
+  eq-equiv-span-type-family :
+    (T : span-type-family l3 A) → equiv-span-type-family S T → S ＝ T
+  eq-equiv-span-type-family T =
+    map-inv-equiv (extensionality-span-type-family T)
 ```
 
 ## See also
