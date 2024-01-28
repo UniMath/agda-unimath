@@ -732,8 +732,8 @@ syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 
 ## See also
 
-- For the notions of inverses and coherently invertible maps, also known as
-  half-adjoint equivalences, see
+- For the notion of coherently invertible maps, also known as half-adjoint
+  equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).

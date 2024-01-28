@@ -56,7 +56,7 @@ module _
       ( is-section-inv-tr p)
       ( is-retraction-inv-tr p)
 
-  equiv-tr : x ＝ y → (B x) ≃ (B y)
+  equiv-tr : x ＝ y → B x ≃ B y
   pr1 (equiv-tr p) = tr B p
   pr2 (equiv-tr p) = is-equiv-tr p
 ```
