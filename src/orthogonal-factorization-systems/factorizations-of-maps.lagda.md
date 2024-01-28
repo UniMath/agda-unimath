@@ -7,8 +7,6 @@ module orthogonal-factorization-systems.factorizations-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -16,10 +14,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
 open import foundation.retracts-of-types
-open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.univalence
@@ -48,7 +43,7 @@ map of the factorization.
 
 ## Definitions
 
-### The predicate on a triangle of maps of being a factorization
+### The predicate on triangles of maps of being a factorization
 
 ```agda
 module _

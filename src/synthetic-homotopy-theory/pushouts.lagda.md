@@ -16,11 +16,11 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
@@ -150,14 +150,23 @@ module _
     is-retraction-map-inv-equiv (equiv-up-pushout f g X)
 ```
 
-### The predicate of being a pushout cocone
+### The small predicate of being a pushout cocone
 
 ```agda
-is-pushout :
-  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-is-pushout f g c = is-equiv (cogap f g c)
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  is-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-pushout = is-equiv (cogap f g c)
+
+  is-prop-is-pushout : is-prop is-pushout
+  is-prop-is-pushout = is-property-is-equiv (cogap f g c)
+
+  is-pushout-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pr1 is-pushout-Prop = is-pushout
+  pr2 is-pushout-Prop = is-prop-is-pushout
 ```
 
 ## Properties
@@ -166,8 +175,8 @@ is-pushout f g c = is-equiv (cogap f g c)
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
   where
 
   universal-property-pushout-is-pushout :

@@ -36,6 +36,7 @@ open import foundation.binary-transport public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
+open import foundation.cartesian-morphisms-arrows public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
 open import foundation.category-of-families-of-sets public
@@ -132,6 +133,7 @@ open import foundation.equivalence-induction public
 open import foundation.equivalence-injective-type-families public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
+open import foundation.equivalences-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
 open import foundation.exclusive-disjunction public

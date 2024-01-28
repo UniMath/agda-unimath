@@ -57,9 +57,9 @@ map.
 
   inv-gap-fiberwise-prod :
     standard-pullback (pr1 {B = P}) (pr1 {B = Q}) → Σ X (λ x → (P x) × (Q x))
-  pr1 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl))) = x
-  pr1 (pr2 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)))) = p
-  pr2 (pr2 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)))) = q
+  pr1 (inv-gap-fiberwise-prod ((x , p) , (.x , q) , refl)) = x
+  pr1 (pr2 (inv-gap-fiberwise-prod ((x , p) , (.x , q) , refl))) = p
+  pr2 (pr2 (inv-gap-fiberwise-prod ((x , p) , (.x , q) , refl))) = q
 
   abstract
     is-section-inv-gap-fiberwise-prod :

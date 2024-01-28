@@ -33,7 +33,7 @@ open import foundation.universe-levels
 
 ## Definition
 
-### The predicate `is-gcd-ℤ`
+### The predicate of being a greatest common divisor
 
 ```agda
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero

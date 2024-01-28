@@ -52,8 +52,7 @@ compute-fiber-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) (h : (i : I) → B i) →
   ((i : I) → fiber (f i) (h i)) ≃ fiber (map-Π f) h
-compute-fiber-map-Π f h =
-  equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
+compute-fiber-map-Π f h = equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
 
 compute-fiber-map-Π' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
@@ -120,7 +119,7 @@ module _
   compute-inv-equiv-Π-equiv-family :
     (e : (x : A) → B x ≃ C x) →
     ( map-inv-equiv (equiv-Π-equiv-family e)) ~
-    ( map-equiv (equiv-Π-equiv-family λ x → (inv-equiv (e x))))
+    ( map-equiv (equiv-Π-equiv-family (λ x → inv-equiv (e x))))
   compute-inv-equiv-Π-equiv-family e f =
     is-injective-map-equiv
       ( equiv-Π-equiv-family e)

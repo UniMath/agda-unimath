@@ -27,7 +27,12 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A **cospan** is a pair of functions with a common codomain.
+A {{#concept "cospan" Disambiguation="types" Agda=cospan}} is a
+[pair](foundation.dependent-pair-types.md) of functions with a common codomain
+
+```text
+  f : A → X ← B : g.
+```
 
 ## Definition
 

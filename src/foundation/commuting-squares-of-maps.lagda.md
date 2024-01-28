@@ -590,7 +590,7 @@ newly created rectangles, or by first horizontally composing the squares, and
 then vertically composing the rectangles.
 
 The following lemma states that the big squares obtained by these two
-compositions are again homotopic. Diagramatically, we have
+compositions are again homotopic. Diagrammatically, we have
 
 ```text
  H | K   H | K
@@ -825,7 +825,7 @@ module _
           ( (h ∘ bottom-right) ·l H) ∙
           ap
             ( precomp top-left W)
-            ( eq-htpy (h ·l K))
+            ( htpy-precomp K W h)
         by
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
@@ -911,7 +911,7 @@ module _
           ( h ·l (right-bottom ·l H))
       ＝ ap
           ( precomp left-top W)
-          ( eq-htpy (h ·l K)) ∙
+          ( htpy-precomp K W h) ∙
         eq-htpy
           ( (h ∘ right-bottom) ·l H)
         by

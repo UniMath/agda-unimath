@@ -101,7 +101,7 @@ elim-disjunction-Prop :
     ( conjunction-Prop (hom-Prop P R) (hom-Prop Q R))
     ( hom-Prop (disjunction-Prop P Q) R)
 elim-disjunction-Prop P Q R (pair f g) =
-  map-universal-property-trunc-Prop R (ind-coprod (λ t → type-Prop R) f g)
+  map-universal-property-trunc-Prop R (rec-coprod f g)
 
 abstract
   is-equiv-ev-disjunction-Prop :

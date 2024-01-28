@@ -14,7 +14,6 @@ open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.homotopy-induction
 open import foundation.path-algebra
-open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -23,6 +22,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-functions
 ```
 
@@ -115,7 +115,7 @@ may be whiskered by a homotopy `L` on the left or right, which results in a
 commuting square of homotopies with `L` appended or prepended to the two ways of
 going around the square.
 
-Diagramatically, we may turn the pasting diagram
+Diagrammatically, we may turn the pasting diagram
 
 ```text
         H

@@ -48,7 +48,7 @@ module _
     (c : cone f g C) (c' : cone f' g' C') →
     is-pullback f g c → is-pullback f' g' c' →
     hom-cospan f' g' f g → C' → C
-  map-is-pullback c c' is-pb-c is-pb-c' h x =
+  map-is-pullback c c' is-pb-c _ h x =
     map-inv-is-equiv is-pb-c (map-standard-pullback h (gap f' g' c' x))
 ```
 

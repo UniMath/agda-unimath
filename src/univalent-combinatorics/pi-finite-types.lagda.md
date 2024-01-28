@@ -703,7 +703,7 @@ module _
   where
 
   map-is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
-  map-is-coprod-codomain = ind-coprod (λ x → B) pr1 pr1
+  map-is-coprod-codomain = rec-coprod pr1 pr1
 
   triangle-is-coprod-codomain :
     ( ( map-is-coprod-codomain) ∘
@@ -864,7 +864,7 @@ abstract
             ( right-distributive-Σ-coprod
               ( im (f ∘ inl))
               ( im (f ∘ inr))
-              ( ind-coprod (λ x → UU l2) (B ∘ pr1) (B ∘ pr1))))
+              ( rec-coprod (B ∘ pr1) (B ∘ pr1))))
       i : Fin k → type-trunc-Set (im (f ∘ inl))
       i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
       is-surjective-i : is-surjective i
