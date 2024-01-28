@@ -33,3 +33,7 @@ module _
     {l : Level} (𝒯 : span-family-of-types l A) →
     is-contr (hom-span-family-of-types 𝒯 𝒮)
 ```
+
+## See also
+
+- [The universal property of dependent function types](foundation.universal-property-dependent-function-types.md) is equivalent to the condition of being a terminal span of families of types.
