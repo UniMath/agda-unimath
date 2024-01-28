@@ -53,7 +53,7 @@ is-equivalence-injective {A = A} P = {x y : A} → P x ≃ P y → x ＝ y
 
 ## Properties
 
-### Equivalence injective type families are injective maps
+### Equivalence injective type families are injective as maps
 
 ```agda
 module _
@@ -93,7 +93,7 @@ module _
     inv-equiv equiv-is-injective-is-equivalence-injective
 ```
 
-### For a map between sets, being equivalence injective is a property
+### For a type family over a set, being equivalence injective is a property
 
 ```agda
 module _
