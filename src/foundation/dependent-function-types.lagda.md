@@ -37,7 +37,7 @@ record some properties of dependent function types
 
 ## Definitions
 
-### The structure of a span on a family of types on a dependet function type
+### The structure of a span on a family of types on a dependent function type
 
 ```agda
 module _
