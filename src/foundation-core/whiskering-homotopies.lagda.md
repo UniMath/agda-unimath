@@ -154,8 +154,8 @@ module _
   left-whisker-inv-htpy : g ·l (inv-htpy H) ~ inv-htpy (g ·l H)
   left-whisker-inv-htpy x = ap-inv g (H x)
 
-  inv-left-whisker-htpy-inv-htpy : inv-htpy (g ·l H) ~ g ·l (inv-htpy H)
-  inv-left-whisker-htpy-inv-htpy = inv-htpy left-whisker-inv-htpy
+  inv-left-whisker-inv-htpy : inv-htpy (g ·l H) ~ g ·l (inv-htpy H)
+  inv-left-whisker-inv-htpy = inv-htpy left-whisker-inv-htpy
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
@@ -166,8 +166,8 @@ module _
   right-whisker-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
   right-whisker-inv-htpy = refl-htpy
 
-  inv-right-whisker-htpy-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
-  inv-right-whisker-htpy-inv-htpy = inv-htpy right-whisker-inv-htpy
+  inv-right-whisker-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
+  inv-right-whisker-inv-htpy = inv-htpy right-whisker-inv-htpy
 ```
 
 ### Distributivity of whiskering over composition of homotopies
