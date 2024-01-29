@@ -56,10 +56,10 @@ module _
 module _
   {l : Level} {A : UU l} {a b : A} (p : a ＝ b)
   where
-  
-  horizontal-refl-coherence-square-identification :
+
+  horizontal-refl-coherence-square-identifications :
     coherence-square-identifications refl p p refl
-  horizontal-refl-coherence-square-identification = right-unit
+  horizontal-refl-coherence-square-identifications = right-unit
 ```
 
 ### Vertically constant squares
@@ -121,6 +121,82 @@ module _
           inv (assoc p-left middle q-right)) ∙
         ap-binary (_∙_) p (refl {x = q-right}))) ∙
       assoc p-top p-right q-right
+```
+
+### Horizontal pasting of commuting squares of identifications
+
+Consider a commuting diagram of identifications
+
+```text
+            top-left        top-right
+       a -------------> b -------------> c
+       |                |                |
+  left |                | middle         | right
+       ∨                ∨                ∨
+       d -------------> e -------------> f
+          bottom-left      bottom-right
+```
+
+in a type `A`.
+
+```agda
+{-
+  (p-lleft : a ＝ b) (p-lbottom : b ＝ d) (p-rbottom : d ＝ f)
+  (p-middle : c ＝ d) (p-ltop : a ＝ c) (p-rtop : c ＝ e) (p-rright : e ＝ f)
+-}
+
+module _
+  {l : Level} {A : UU l} {a b c d e f : A}
+  (top-left : a ＝ b) (top-right : b ＝ c)
+  (left : a ＝ d) (middle : b ＝ e) (right : c ＝ f)
+  (bottom-left : d ＝ e) (bottom-right : e ＝ f)
+  where
+
+  horizontal-concat-square :
+    coherence-square-identifications top-left left middle bottom-left →
+    coherence-square-identifications top-right middle right bottom-right →
+    coherence-square-identifications
+      ( top-left ∙ top-right)
+      ( left)
+      ( right)
+      ( bottom-left ∙ bottom-right)
+  horizontal-concat-square s t =
+    ( inv (assoc left bottom-left bottom-right)) ∙
+    ( ( ap (concat' a bottom-right) s) ∙
+      ( ( assoc top-left middle bottom-right) ∙
+        ( ( ap (concat top-left f) t) ∙
+          ( inv (assoc top-left top-right right)))))
+
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  where
+
+  left-unit-law-horizontal-concat-square :
+    (top : a ＝ b) (left : a ＝ c) (right : b ＝ d) (bottom : c ＝ d)
+    (s : coherence-square-identifications top left right bottom) →
+    horizontal-concat-square refl top left left right refl bottom
+      ( horizontal-refl-coherence-square-identifications left)
+      ( s) ＝
+    s
+  left-unit-law-horizontal-concat-square top refl right bottom s =
+    right-unit ∙ ap-id s
+
+vertical-concat-square :
+  {l : Level} {A : UU l} {a b c d e f : A}
+  (p-tleft : a ＝ b) (p-bleft : b ＝ c) (p-bbottom : c ＝ f)
+  (p-middle : b ＝ e) (p-ttop : a ＝ d) (p-tright : d ＝ e) (p-bright : e ＝ f)
+  (s-top : coherence-square-identifications p-ttop p-tleft p-tright p-middle)
+  (s-bottom :
+    coherence-square-identifications p-middle p-bleft p-bright p-bbottom) →
+  coherence-square-identifications
+    p-ttop (p-tleft ∙ p-bleft) (p-tright ∙ p-bright) p-bbottom
+vertical-concat-square {a = a} {f = f}
+  p-tleft p-bleft p-bbottom p-middle p-ttop p-tright p-bright s-top s-bottom =
+  ( assoc p-tleft p-bleft p-bbottom) ∙
+  ( ( ap (concat p-tleft f) s-bottom) ∙
+    ( ( inv (assoc p-tleft p-middle p-bright)) ∙
+      ( ( ap (concat' a p-bright) s-top) ∙
+        ( assoc p-ttop p-tright p-bright))))
 ```
 
 ### Pasting of identifications along edges of squares of identifications

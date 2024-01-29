@@ -12,7 +12,6 @@ open import foundation-core.homotopies public
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation-core.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
@@ -20,6 +19,7 @@ open import foundation.path-algebra
 open import foundation.universe-levels
 open import foundation.whiskering-identifications
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality

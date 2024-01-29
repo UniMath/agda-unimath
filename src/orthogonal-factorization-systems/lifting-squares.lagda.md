@@ -45,12 +45,12 @@ together with a diagonal map `j : X → B` such that the complete diagram
 
 ```text
        h
-  A ------> B
-  |       ^ |
- f|   j  /  |g
-  |    /    |
-  V  /      V
-  X ------> Y
+  A --------> B
+  |        ∧  |
+ f|   j  /    |g
+  |    /      |
+  V  /        V
+  X --------> Y
        i
 ```
 
@@ -204,7 +204,8 @@ module _
                   ( _)
                   ( ap (H x ∙_) (inv right-unit))) ∙
                 ( inv
-                  ( is-section-inv-concat' _ α (ap (H x ∙_) (inv right-unit))))))) ∙
+                  ( is-section-inv-concat' _ α
+                    ( ap (H x ∙_) (inv right-unit))))))) ∙
           ( ( inv
               ( assoc
                 ( coherence-lifting-square l x)

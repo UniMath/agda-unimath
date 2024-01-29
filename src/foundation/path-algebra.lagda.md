@@ -11,12 +11,12 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation-core.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-identifications
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types

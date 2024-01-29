@@ -167,7 +167,10 @@ commute:
 
 These two ways in which the square commutes are inverse to each other.
 
-**Note.** The following statements could have been formalized using [commuting squares of identifications](foundation.commuting-squares-of-identifications.md). However, in order to avoid cyclic module dependencies in the library we avoid doing so.
+**Note.** The following statements could have been formalized using
+[commuting squares of identifications](foundation.commuting-squares-of-identifications.md).
+However, in order to avoid cyclic module dependencies in the library we avoid
+doing so.
 
 ```agda
 module _
