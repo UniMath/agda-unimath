@@ -13,6 +13,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import structured-types.whiskering-pointed-homotopies
 ```
 
 </details>
@@ -33,7 +34,9 @@ A coherence square of pointed maps
 is a coherence of the underlying square of (unpointed) maps, plus a coherence
 between the pointedness preservation proofs.
 
-## Definition
+## Definitions
+
+### Coherences of commuting squares of pointed maps
 
 ```agda
 module _
@@ -56,4 +59,43 @@ module _
       ( map-pointed-map bottom)
   coherence-square-maps-coherence-square-pointed-maps =
     htpy-pointed-htpy (bottom ∘∗ left) (right ∘∗ top)
+```
+
+## Properties
+
+### Horizontal pasting of coherences of commuting squares of pointed maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  {U : Pointed-Type l5} {V : Pointed-Type l6}
+  (top-left : A →∗ X) (top-right : X →∗ U)
+  (left : A →∗ B) (middle : X →∗ Y) (right : U →∗ V)
+  (bottom-left : B →∗ Y) (bottom-right : Y →∗ V)
+  (left-square :
+    coherence-square-pointed-maps top-left left middle bottom-left)
+  (right-square :
+    coherence-square-pointed-maps top-right middle right bottom-right)
+  where
+
+  horizontal-pasting-coherence-square-pointed-maps :
+    coherence-square-pointed-maps
+      ( top-right ∘∗ top-left)
+      ( left)
+      ( right)
+      ( bottom-right ∘∗ bottom-left)
+  horizontal-pasting-coherence-square-pointed-maps =
+    concat-pointed-htpy
+      ( (bottom-right ∘∗ bottom-left) ∘∗ left)
+      ( bottom-right ∘∗ (bottom-left ∘∗ left))
+      ( right ∘∗ (top-right ∘∗ top-left))
+      ( associative-comp-pointed-map bottom-right bottom-left left)
+      ( concat-pointed-htpy
+        ( bottom-right ∘∗ (bottom-left ∘∗ left))
+        ( bottom-right ∘∗ (middle ∘∗ top-left))
+        ( right ∘∗ (top-right ∘∗ top-left))
+        {! left-whisker-pointed-htpy!}
+        {!!})
 ```

@@ -24,17 +24,17 @@ open import foundation-core.identity-types
 A triangle of [identifications](foundation-core.identity-types.md)
 
 ```text
- x ----- y
-  \     /
-   \   /
-    \ /
-     z
+      q
+  x ----> y
+   \     /
+  p \   / r
+     ∨ ∨
+      z
 ```
 
-is said to **commute** if there is a higher identification between the `x ＝ z`
-and the concatenated identification `x ＝ y ＝ z`.
+is said to **commute** if there is an identification `p ＝ q ∙ r`.
 
-## Definition
+## Definitions
 
 ```agda
 module _
@@ -43,11 +43,11 @@ module _
 
   coherence-triangle-identifications :
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) → UU l
-  coherence-triangle-identifications left right top = left ＝ (top ∙ right)
+  coherence-triangle-identifications left right top = left ＝ top ∙ right
 
   coherence-triangle-identifications' :
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) → UU l
-  coherence-triangle-identifications' left right top = (top ∙ right) ＝ left
+  coherence-triangle-identifications' left right top = top ∙ right ＝ left
 ```
 
 ## Properties
@@ -198,4 +198,19 @@ module _
     coherence-triangle-identifications' left right top
   left-unwhisk-triangle-identifications' =
     map-inv-equiv equiv-left-whisk-triangle-identifications'
+```
+
+### The action of functions on commuting triangles of identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {x y z : A} (left : x ＝ z) (right : y ＝ z) (top : x ＝ y)
+  where
+
+  action-function-coherence-triangle-identifications :
+    coherence-triangle-identifications left right top →
+    coherence-triangle-identifications (ap f left) (ap f right) (ap f top)
+  action-function-coherence-triangle-identifications s =
+    ap (ap f) s ∙ ap-concat f top right
 ```
