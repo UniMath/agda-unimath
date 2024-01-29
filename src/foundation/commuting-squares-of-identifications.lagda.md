@@ -193,26 +193,42 @@ module _
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
   coherence-square-identifications-top-right-whisker refl =
-    coherence-square-identifications-top-paste
-      left bottom top right (inv right-unit)
+    top-concat-identification-coherence-square-identification
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
 
   coherence-square-identifications-bottom-left-whisker :
     {z' : A} (p : z ＝ z') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
   coherence-square-identifications-bottom-left-whisker refl =
-    coherence-square-identifications-left-paste
-      left bottom top right (inv right-unit)
+    left-concat-identification-coherence-square-identification
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
 
   coherence-square-identifications-bottom-right-whisker :
     {w' : A} (p : w ＝ w') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
   coherence-square-identifications-bottom-right-whisker refl =
-    ( coherence-square-identifications-bottom-paste
-      left bottom top (right ∙ refl) (inv right-unit)) ∘
-    ( coherence-square-identifications-right-paste
-      left bottom top right (inv right-unit))
+    ( bottom-concat-identification-coherence-square-identification
+      ( top)
+      ( left)
+      ( right ∙ refl)
+      ( bottom)
+      ( inv right-unit)) ∘
+    ( right-concat-identification-coherence-square-identification
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit))
 ```
 
 ## Properties

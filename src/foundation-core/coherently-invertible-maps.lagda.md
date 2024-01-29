@@ -139,13 +139,13 @@ module _
           ( ( ap f
               ( is-section-is-invertible H (map-inv-is-invertible H (f x)))) ∙
             ( is-retraction-is-invertible H (f x)))
-          ( coherence-square-identifications-top-paste
+          ( top-concat-identification-coherence-square-identification
+            ( ap
+              ( f ∘ (map-inv-is-invertible H ∘ f))
+              ( is-section-is-invertible H x))
             ( is-retraction-is-invertible H (f (map-inv-is-invertible H (f x))))
-            ( ap f (is-section-is-invertible H x))
-            ( ( ap
-                ( f ∘ (map-inv-is-invertible H ∘ f))
-                ( is-section-is-invertible H x)))
             ( is-retraction-is-invertible H (f x))
+            ( ap f (is-section-is-invertible H x))
             ( ( ap-comp f
                 ( map-inv-is-invertible H ∘ f)
                 ( is-section-is-invertible H x)) ∙

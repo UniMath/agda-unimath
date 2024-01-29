@@ -117,30 +117,30 @@ having `p'` as an edge instead of `p`.
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
-  (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w)
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-left-paste :
+  left-concat-identification-coherence-square-identification :
     {left' : x ＝ z} (s : left ＝ left') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left' right bottom
-  coherence-square-identifications-left-paste refl sq = sq
+  left-concat-identification-coherence-square-identification refl sq = sq
 
-  coherence-square-identifications-bottom-paste :
+  bottom-concat-identification-coherence-square-identification :
     {bottom' : z ＝ w} (s : bottom ＝ bottom') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left right bottom'
-  coherence-square-identifications-bottom-paste refl sq = sq
+  bottom-concat-identification-coherence-square-identification refl sq = sq
 
-  coherence-square-identifications-top-paste :
+  top-concat-identification-coherence-square-identification :
     {top' : x ＝ y} (s : top ＝ top') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top' left right bottom
-  coherence-square-identifications-top-paste refl sq = sq
+  top-concat-identification-coherence-square-identification refl sq = sq
 
-  coherence-square-identifications-right-paste :
+  right-concat-identification-coherence-square-identification :
     {right' : y ＝ w} (s : right ＝ right') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left right' bottom
-  coherence-square-identifications-right-paste refl sq = sq
+  right-concat-identification-coherence-square-identification refl sq = sq
 ```

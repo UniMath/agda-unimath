@@ -339,11 +339,11 @@ module _
                 ( top (map-inv-equiv left (map-equiv left a))))
               ( is-retraction-map-inv-equiv right (top a))
               ( ap top (is-retraction-map-inv-equiv left a))
-              ( coherence-square-identifications-top-paste
+              ( top-concat-identification-coherence-square-identification
+                ( _)
                 ( ap
                   ( map-inv-equiv right)
                   ( H (map-inv-equiv left (map-equiv left a))))
-                ( _)
                 ( _)
                 ( _)
                 ( inv
@@ -366,10 +366,8 @@ module _
                     ( map-equiv right ∘ top)
                     ( is-retraction-map-inv-equiv left a))
                   ( nat-htpy H (is-retraction-map-inv-equiv left a))))
-              ( coherence-square-identifications-top-paste _
+              ( top-concat-identification-coherence-square-identification _ _ _
                 ( ap top (is-retraction-map-inv-equiv left a))
-                ( _)
-                ( _)
                 ( ap-comp
                   ( map-inv-equiv right)
                   ( map-equiv right ∘ top)
