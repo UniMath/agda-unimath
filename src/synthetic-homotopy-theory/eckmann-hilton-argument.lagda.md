@@ -13,6 +13,7 @@ open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types

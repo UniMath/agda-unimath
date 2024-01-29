@@ -19,13 +19,13 @@ open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.mere-equality
-open import foundation.path-algebra
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import higher-group-theory.higher-groups
 

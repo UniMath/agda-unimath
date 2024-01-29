@@ -18,12 +18,12 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.precomposition-functions
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+open import foundation.whiskering-identifications
 
 open import orthogonal-factorization-systems.lifts-families-of-elements
 ```

@@ -20,11 +20,11 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import synthetic-homotopy-theory.cocones-under-spans
 ```

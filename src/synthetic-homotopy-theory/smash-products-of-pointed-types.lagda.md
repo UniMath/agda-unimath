@@ -12,9 +12,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+open import foundation.whiskering-identifications
 
 open import structured-types.pointed-cartesian-product-types
 open import structured-types.pointed-homotopies

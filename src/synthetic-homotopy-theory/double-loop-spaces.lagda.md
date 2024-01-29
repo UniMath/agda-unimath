@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
