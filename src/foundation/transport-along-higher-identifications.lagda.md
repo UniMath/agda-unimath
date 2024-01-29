@@ -122,7 +122,7 @@ module _
       ( right-whisker-identification
         ( tr³
           ( B)
-          ( path-swap-nat-left-whisker-identification β α)
+          ( commutative-left-whisker-right-whisker-identification β α)
           ( b))
         ( tr-concat p' q' b))
       ( left-whisker-identification
