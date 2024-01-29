@@ -490,7 +490,10 @@ module _
           ( mid-right ·l sq-top)) ∙h
         ( ap-concat-htpy
           ( bottom-right ·l (sq-mid ·r top-left))
-          ( preserves-comp-left-whisker-htpy bottom-right mid-right sq-top)))) ∙h
+          ( preserves-comp-left-whisker-htpy
+            ( bottom-right)
+            ( mid-right)
+            ( sq-top))))) ∙h
     ( inv-htpy-assoc-htpy
       ( sq-bottom ·r mid-left ·r top-left)
       ( bottom-right ·l (sq-mid ·r top-left))

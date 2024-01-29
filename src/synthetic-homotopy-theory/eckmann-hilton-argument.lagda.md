@@ -211,12 +211,14 @@ module _
     (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
   eckmann-hilton-inverse-Ω² α β = equational-reasoning_
     (α ∙ β)
-    ＝ (identification-right-whisker α refl) ∙ (identification-left-whisker refl β)
+    ＝ ( identification-right-whisker α refl) ∙
+      ( identification-left-whisker refl β)
     by ( inv
       ( horizontal-concat-Id²
         ( right-unit-law-identification-right-whisker-Ω² α)
         ( left-unit-law-identification-left-whisker-Ω² β)))
-    ＝ (identification-left-whisker refl β) ∙ (identification-right-whisker α refl)
+    ＝ ( identification-left-whisker refl β) ∙
+      ( identification-right-whisker α refl)
     by path-swap-nat-identification-right-whisker α β
     ＝ β ∙ α
     by ( horizontal-concat-Id²

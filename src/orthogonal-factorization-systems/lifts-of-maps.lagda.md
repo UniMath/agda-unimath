@@ -160,7 +160,8 @@ module _
   {i : A → B} {f : X → B} {g : X → A}
   where
 
-  is-lift-right-whisker : is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
+  is-lift-right-whisker :
+    is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
   is-lift-right-whisker H h s = H (h s)
 ```
 

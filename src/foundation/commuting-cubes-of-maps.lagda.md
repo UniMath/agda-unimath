@@ -431,11 +431,15 @@ module _
         inv-htpy
           ( horizontal-concat-htpy²
             ( horizontal-concat-htpy²
-              ( distributive-precomp-right-whisker-coherence-square-maps W hB h' h
+              ( distributive-precomp-right-whisker-coherence-square-maps W hB
+                ( h')
+                ( h)
                 ( hD)
                 ( inv-htpy front-left)
                 ( f'))
-              ( distributive-precomp-left-whisker-coherence-square-maps W hA f' f
+              ( distributive-precomp-left-whisker-coherence-square-maps W hA
+                ( f')
+                ( f)
                 ( hB)
                 ( inv-htpy back-left)
                 ( h)))
@@ -511,7 +515,11 @@ module _
           ( precomp-back-right-inv ·r (precomp k W)))
         by
         horizontal-concat-htpy²
-          ( distributive-precomp-left-whisker-coherence-square-maps W g' f' k' h'
+          ( distributive-precomp-left-whisker-coherence-square-maps W
+            ( g')
+            ( f')
+            ( k')
+            ( h')
             ( top)
             ( hD))
           ( horizontal-concat-htpy²
@@ -519,7 +527,10 @@ module _
               ( hD)
               ( inv-htpy front-right)
               ( g'))
-            ( distributive-precomp-left-whisker-coherence-square-maps W hA g' g hC
+            ( distributive-precomp-left-whisker-coherence-square-maps W hA
+              ( g')
+              ( g)
+              ( hC)
               ( inv-htpy back-right)
               ( k)))
     where

@@ -268,7 +268,8 @@ module _
     (p : x ＝ y) {q q' : y ＝ z} →
     (q ＝ q') ≃ (p ∙ q ＝ p ∙ q')
   pr1 (equiv-identification-left-whisker p) = identification-left-whisker p
-  pr2 (equiv-identification-left-whisker p) = is-equiv-identification-left-whisker p
+  pr2 (equiv-identification-left-whisker p) =
+    is-equiv-identification-left-whisker p
 
   is-equiv-identification-right-whisker :
     {p p' : x ＝ y} → (q : y ＝ z) →
@@ -279,7 +280,8 @@ module _
   equiv-identification-right-whisker :
     {p p' : x ＝ y} → (q : y ＝ z) →
     (p ＝ p') ≃ (p ∙ q ＝ p' ∙ q)
-  pr1 (equiv-identification-right-whisker q) α = identification-right-whisker α q
+  pr1 (equiv-identification-right-whisker q) α =
+    identification-right-whisker α q
   pr2 (equiv-identification-right-whisker q) =
     is-equiv-identification-right-whisker q
 ```

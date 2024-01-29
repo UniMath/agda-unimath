@@ -177,8 +177,10 @@ abstract
   is-equiv-postcomp-is-equiv {X = X} {Y = Y} f is-equiv-f A =
     is-equiv-is-invertible
       ( postcomp A (map-inv-is-equiv is-equiv-f))
-      ( eq-htpy ∘ right-whisker-htpy (is-section-map-inv-is-equiv is-equiv-f))
-      ( eq-htpy ∘ right-whisker-htpy (is-retraction-map-inv-is-equiv is-equiv-f))
+      ( eq-htpy ∘
+        right-whisker-htpy (is-section-map-inv-is-equiv is-equiv-f))
+      ( eq-htpy ∘
+        right-whisker-htpy (is-retraction-map-inv-is-equiv is-equiv-f))
 
   is-equiv-postcomp-equiv :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ≃ Y) →
