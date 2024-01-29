@@ -1,4 +1,4 @@
-# Action of functions on higher identifications
+# The action of functions on higher identifications
 
 ```agda
 module foundation.action-on-higher-identifications-functions where
@@ -44,10 +44,10 @@ higher identifications is defined by
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
-  {p p' : x ＝ y} (f : A → B) (α : p ＝ p')
+  {p q : x ＝ y} (f : A → B) (α : p ＝ q)
   where
 
-  ap² : ap f p ＝ ap f p'
+  ap² : ap f p ＝ ap f q
   ap² = ap (ap f) α
 ```
 
@@ -139,14 +139,14 @@ commutes.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {x y : A} {p p' : x ＝ y} (g : B → C) (f : A → B) (α : p ＝ p')
+  {x y : A} {p q : x ＝ y} (g : B → C) (f : A → B) (α : p ＝ q)
   where
 
   nat-sq-ap-comp-Id² :
     coherence-square-identifications
       ( ap² (g ∘ f) α)
       ( ap-comp g f p)
-      ( ap-comp g f p')
+      ( ap-comp g f q)
       ( (ap² g ∘ ap² f) α)
   nat-sq-ap-comp-Id² =
     (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
