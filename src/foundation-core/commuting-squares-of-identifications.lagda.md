@@ -110,7 +110,8 @@ module _
 
 ### Pasting of identifications along edges of squares of identifications
 
-Consider a commuting square of identifications and an identification of one of the four sides with another identification, as for example in the diagram below:
+Consider a commuting square of identifications and an identification of one of
+the four sides with another identification, as for example in the diagram below:
 
 ```text
              top
@@ -122,7 +123,9 @@ Consider a commuting square of identifications and an identification of one of t
            bottom
 ```
 
-Then any identification witnessing that the square commutes can be concatenated with the identification on the side, to obtain a new commuting square of identifications.
+Then any identification witnessing that the square commutes can be concatenated
+with the identification on the side, to obtain a new commuting square of
+identifications.
 
 ```agda
 module _
