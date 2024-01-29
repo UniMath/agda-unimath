@@ -213,7 +213,25 @@ module _
         ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
-## Transposing inverses is an equivalence
+### Reassociating one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u : A}
+  where
+
+  equiv-concat-assoc :
+    (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : x ＝ u) →
+    ((p ∙ q) ∙ r ＝ s) ≃ (p ∙ (q ∙ r) ＝ s)
+  equiv-concat-assoc p q r = equiv-concat (inv (assoc p q r))
+
+  equiv-concat-assoc' :
+    (s : x ＝ u) (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) →
+    (s ＝ (p ∙ q) ∙ r) ≃ (s ＝ p ∙ (q ∙ r))
+  equiv-concat-assoc' s p q r = equiv-concat' s (assoc p q r)
+```
+
+### Transposing inverses is an equivalence
 
 ```agda
 module _
