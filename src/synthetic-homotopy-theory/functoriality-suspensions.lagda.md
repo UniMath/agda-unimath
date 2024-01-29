@@ -168,7 +168,7 @@ module _
         ( _)
         ( _)
         ( compute-meridian-map-suspension g (f a))
-        ( coherence-square-identifications-horizontal-inv
+        ( horizontal-inv-coherence-square-identifications
           ( compute-north-map-suspension (g ∘ f))
           ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
           ( meridian-suspension (g (f a)))

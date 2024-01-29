@@ -51,6 +51,19 @@ module _
 
 ### Horizontally constant squares
 
+{{#concept "Horizontally constant squares" Disambiguation="identifications" Agda=horizontal-refl-coherence-square-identifications}}
+are commuting squares of identifications of the form
+
+```text
+       refl
+    a -----> a
+    |        |
+  p |        | p
+    ∨        ∨
+    b -----> b.
+       refl
+```
+
 ```agda
 module _
   {l : Level} {A : UU l} {a b : A} (p : a ＝ b)
@@ -62,6 +75,19 @@ module _
 ```
 
 ### Vertically constant squares
+
+{{#concept "Vertically constant squares" Disambiguation="identifications" Agda=vertical-refl-coherence-square-identifications}}
+are commuting squares of identifications of the form
+
+```text
+           p
+       a -----> b
+       |        |
+  refl |        | refl
+       ∨        ∨
+       a -----> b.
+           p
+```
 
 ```agda
 module _
@@ -75,22 +101,114 @@ module _
 
 ## Operations
 
-### Inverting squares of identifications
+### Inverting squares of identifications horizontally
+
+Given a commuting square of identifications
+
+```text
+           top
+       x -------> y
+       |          |
+  left |          | right
+       ∨          ∨
+       z -------> w,
+          bottom
+```
+
+the square of identifications
+
+```text
+             inv top
+        y ------------> x
+        |               |
+  right |               | left
+        ∨               ∨
+        w ------------> z
+           inv bottom
+```
+
+commutes.
 
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
   where
 
-  coherence-square-identifications-horizontal-inv :
+  horizontal-inv-coherence-square-identifications :
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (inv top) right left (inv bottom)
-  coherence-square-identifications-horizontal-inv refl refl right refl coh =
+  horizontal-inv-coherence-square-identifications refl refl right refl coh =
     right-unit ∙ inv coh
 ```
 
+### Inverting squares of identifications vertically
+
+Given a commuting square of identifications
+
+```text
+           top
+       x -------> y
+       |          |
+  left |          | right
+       ∨          ∨
+       z -------> w,
+          bottom
+```
+
+the square of identifications
+
+```text
+              bottom
+           z -------> w
+           |          |
+  inv left |          | inv right
+           ∨          ∨
+           x -------> y
+               top
+```
+
+commutes.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  where
+
+  vertical-inv-coherence-square-identifications :
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications bottom (inv left) (inv right) top
+  vertical-inv-coherence-square-identifications refl refl refl refl refl = refl
+```
+
 ### Functions acting on squares of identifications
+
+Given a commuting square of identifications
+
+```text
+           top
+       x -------> y
+       |          |
+  left |          | right
+       ∨          ∨
+       z -------> w
+          bottom
+```
+
+in a type `A`, and given a map `f : A → B`, the square of identifications
+
+```text
+                 ap f top
+           f x -----------> f y
+            |                |
+  ap f left |                | ap f right
+            ∨                ∨
+            z -------------> w
+               ap f bottom
+```
+
+commutes.
 
 ```agda
 module _
