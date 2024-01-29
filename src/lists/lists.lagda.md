@@ -9,6 +9,7 @@ module lists.lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -191,7 +192,7 @@ eq-Eq-refl-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
   Id (eq-Eq-list l l (refl-Eq-list l)) refl
 eq-Eq-refl-Eq-list nil = refl
-eq-Eq-refl-Eq-list (cons x l) = ap (ap (cons x)) (eq-Eq-refl-Eq-list l)
+eq-Eq-refl-Eq-list (cons x l) = ap² (cons x) (eq-Eq-refl-Eq-list l)
 
 is-retraction-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (p : Id l l') →

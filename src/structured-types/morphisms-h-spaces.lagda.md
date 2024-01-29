@@ -7,6 +7,7 @@ module structured-types.morphisms-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -76,7 +77,7 @@ preserves-coh-unit-laws-mul :
 preserves-coh-unit-laws-mul M
   (pair (pair N ._) μ)
   (pair f refl) μf lf rf =
-  Id (ap (ap f) cM ∙ rf eM) (lf eM ∙ ap (concat μf (f eM)) cN)
+  Id (ap² f cM ∙ rf eM) (lf eM ∙ ap (concat μf (f eM)) cN)
   where
   eM = unit-H-Space M
   cM = coh-unit-laws-mul-H-Space M
@@ -143,7 +144,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                     ( μf ∙_)
                     ( inv (triangle-ap-binary μN ef ef)))
                   ( cN))))))))
-    ( ( ap (_∙ ef) (ap (ap (pr1 f)) cM)) ∙
+    ( ( ap (_∙ ef) (ap² (pr1 f) cM)) ∙
       ( ( horizontal-concat-Id² (rf eM) (inv (ap-id ef))) ∙
         ( ( ap
             ( _∙ ap id ef)

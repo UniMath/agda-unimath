@@ -8,6 +8,7 @@ module foundation.action-on-equivalences-type-families where
 
 ```agda
 open import foundation.action-on-equivalences-functions
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.equivalence-induction
 open import foundation.univalence
@@ -145,7 +146,7 @@ distributive-action-equiv-function-comp :
   action-equiv-function g ∘ action-equiv-family f
 distributive-action-equiv-function-comp g f e =
   ( ap-comp g f (eq-equiv e)) ∙
-  ( ap (ap g) (inv (is-retraction-eq-equiv (action-equiv-function f e))))
+  ( ap² g (inv (is-retraction-eq-equiv (action-equiv-function f e))))
 
 distributive-action-equiv-family-comp :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2)

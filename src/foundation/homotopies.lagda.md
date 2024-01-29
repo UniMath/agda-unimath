@@ -9,6 +9,7 @@ open import foundation-core.homotopies public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
@@ -324,7 +325,7 @@ module _
       ( h)
       ( λ k p → eq-htpy (λ i → ap (f i) (p i)) ＝ ap (map-Π f) (eq-htpy p))
       ( eq-htpy-refl-htpy (map-Π f h) ∙
-        ap (ap (map-Π f)) (inv (eq-htpy-refl-htpy h)))
+        ap² (map-Π f) (inv (eq-htpy-refl-htpy h)))
 ```
 
 ## See also

@@ -7,6 +7,7 @@ module structured-types.pointed-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -221,7 +222,7 @@ module _
   left-whisker-htpy-pointed-map g f1 f2 H =
     pair
       ( map-pointed-map g ·l (pr1 H))
-      ( ( ( ( ap (ap (pr1 g)) (pr2 H)) ∙
+      ( ( ( ( ap² (pr1 g) (pr2 H)) ∙
             ( ap-concat (pr1 g) (pr2 f1) (inv (pr2 f2)))) ∙
           ( ap
             ( concat

@@ -11,6 +11,7 @@ open import foundation-core.commuting-squares-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
@@ -349,7 +350,7 @@ module _
                 ( inv
                   ( ap
                     ( ap (map-inv-equiv right))
-                    ( ( ap (ap bottom) (coherence-map-inv-equiv left a)) ∙
+                    ( ( ap² bottom (coherence-map-inv-equiv left a)) ∙
                       ( inv
                         ( ap-comp
                           ( bottom)

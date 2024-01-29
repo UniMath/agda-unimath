@@ -7,6 +7,7 @@ module lists.universal-property-lists-wild-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -75,7 +76,7 @@ unit-law-101-associative-concat-list (cons x l) z =
           ( cons x)
           ( associative-concat-list l nil z)
           ( ap (concat-list l) (left-unit-law-concat-list z)))) ∙
-      ( ap (ap (cons x)) (unit-law-101-associative-concat-list l z))) ∙
+      ( ap² (cons x) (unit-law-101-associative-concat-list l z))) ∙
     ( inv
       ( ap-comp (cons x) (concat-list' z) (right-unit-law-concat-list l)))) ∙
   ( ap-comp (concat-list' z) (cons x) (right-unit-law-concat-list l))
@@ -99,7 +100,7 @@ unit-law-110-associative-concat-list (cons a x) y =
         ( cons a)
         ( associative-concat-list x y nil)
         ( ap (concat-list x) (right-unit-law-concat-list y)))) ∙
-    ( ap (ap (cons a)) (unit-law-110-associative-concat-list x y)))
+    ( ap² (cons a) (unit-law-110-associative-concat-list x y)))
 
 list-Wild-Monoid : {l : Level} → UU l → Wild-Monoid l
 list-Wild-Monoid X =

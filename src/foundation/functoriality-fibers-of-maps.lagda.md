@@ -7,6 +7,7 @@ module foundation.functoriality-fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.cones-over-cospan-diagrams
@@ -191,7 +192,7 @@ module _
         ( ap
           ( concat (inv (coh-hom-arrow g h β (pr1 α a))) _)
           ( inv
-            ( ( ap (ap (map-codomain-hom-arrow g h β)) right-unit) ∙
+            ( ( ap² (map-codomain-hom-arrow g h β) right-unit) ∙
               ( ap-inv
                 ( map-codomain-hom-arrow g h β)
                 ( coh-hom-arrow f g α a))))))
@@ -484,7 +485,7 @@ module _
                 ( p (p' a))
                 ( p' a , refl))))
           ( ( inv (ap-inv g (H' a))) ∙
-            ( ap (ap g) (inv right-unit)))))
+            ( ap² g (inv right-unit)))))
 ```
 
 ## See also

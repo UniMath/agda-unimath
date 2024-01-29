@@ -9,6 +9,7 @@ module linear-algebra.vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -178,7 +179,7 @@ module _
     (p : u ＝ v) → eq-Eq-vec n u v (Eq-eq-vec n u v p) ＝ p
   is-retraction-eq-Eq-vec zero-ℕ empty-vec empty-vec refl = refl
   is-retraction-eq-Eq-vec (succ-ℕ n) (x ∷ xs) .(x ∷ xs) refl =
-    ap (ap (x ∷_)) (is-retraction-eq-Eq-vec n xs xs refl)
+    ap² (x ∷_) (is-retraction-eq-Eq-vec n xs xs refl)
 
   square-Eq-eq-vec :
     (n : ℕ) (x : A) (u v : vec A n) (p : Id u v) →

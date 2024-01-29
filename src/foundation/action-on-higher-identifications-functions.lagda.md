@@ -77,13 +77,13 @@ module _
   {p q : x ＝ y} (f : A → B) (α : p ＝ q)
   where
 
-  nat-sq-ap-inv-Id² :
+  compute-ap²-inv :
     coherence-square-identifications
       ( ap² f (horizontal-inv-Id² α))
       ( ap-inv f p)
       ( ap-inv f q)
       ( horizontal-inv-Id² (ap² f α))
-  nat-sq-ap-inv-Id² =
+  compute-ap²-inv =
     ( ( inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α))) ∙
       ( nat-htpy (ap-inv f) α)) ∙
     ( horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
@@ -112,9 +112,9 @@ module _
   {p q : x ＝ y} (α : p ＝ q)
   where
 
-  nat-sq-ap-id-Id² :
+  compute-ap²-id :
     coherence-square-identifications (ap² id α) (ap-id p) (ap-id q) α
-  nat-sq-ap-id-Id² =
+  compute-ap²-id =
     horizontal-concat-Id² refl (inv (ap-id α)) ∙ nat-htpy ap-id α
 ```
 
@@ -142,13 +142,13 @@ module _
   {x y : A} {p q : x ＝ y} (g : B → C) (f : A → B) (α : p ＝ q)
   where
 
-  nat-sq-ap-comp-Id² :
+  compute-ap²-comp :
     coherence-square-identifications
       ( ap² (g ∘ f) α)
       ( ap-comp g f p)
       ( ap-comp g f q)
       ( (ap² g ∘ ap² f) α)
-  nat-sq-ap-comp-Id² =
+  compute-ap²-comp =
     (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
       (nat-htpy (ap-comp g f) α))
 ```
@@ -174,14 +174,14 @@ module _
   {p q : x ＝ y} (α : p ＝ q)
   where
 
-  nat-sq-ap-const-Id² :
+  compute-ap²-const :
     (b : B) →
     coherence-square-identifications
       ( ap² (const A B b) α)
       ( ap-const b p)
       ( ap-const b q)
       ( refl)
-  nat-sq-ap-const-Id² b =
+  compute-ap²-const b =
     ( inv (horizontal-concat-Id² refl (ap-const refl α))) ∙
     ( nat-htpy (ap-const b) α)
 ```
