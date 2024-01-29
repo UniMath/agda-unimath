@@ -114,7 +114,7 @@ module _
   where
 
   left-unit-law-left-whisker-identification :
-     {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
+    {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
     left-whisker-identification refl α ＝ α
   left-unit-law-left-whisker-identification refl = refl
 
@@ -132,7 +132,7 @@ module _
   where
 
   right-unit-law-right-whisker-identification :
-     {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
+    {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
     right-whisker-identification α refl ＝
     right-unit ∙ α ∙ inv right-unit
   right-unit-law-right-whisker-identification {p = refl} refl = refl
