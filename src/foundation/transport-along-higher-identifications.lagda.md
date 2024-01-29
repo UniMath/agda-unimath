@@ -51,7 +51,7 @@ module _
     coherence-square-identifications
       ( tr-Id-right q p)
       ( tr² (Id a) α p)
-      ( identification-left-whisker p α)
+      ( left-whisker-identification p α)
       ( tr-Id-right q' p)
   tr²-Id-right α p =
     inv-nat-htpy (λ (t : b ＝ c) → tr-Id-right t p) α
@@ -79,7 +79,7 @@ module _
     (p : x ＝ y) {q q' : y ＝ z} (β : q ＝ q') (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (identification-left-whisker p β) b)
+      ( tr² B (left-whisker-identification p β) b)
       ( right-whisker-htpy (tr² B β) (tr B p) b)
       ( tr-concat p q' b)
   tr²-left-whisker refl refl b = refl
@@ -88,7 +88,7 @@ module _
     {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (identification-right-whisker α q) b)
+      ( tr² B (right-whisker-identification α q) b)
       ( left-whisker-htpy (tr B q) (tr² B α) b)
       ( tr-concat p' q b)
   tr²-right-whisker refl refl b = inv right-unit
@@ -105,13 +105,13 @@ module _
   tr³-htpy-swap-path-swap :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
     coherence-square-identifications
-      ( ( identification-right-whisker
-          ( tr²-concat (identification-left-whisker p β)
-          ( identification-right-whisker α q') b)
+      ( ( right-whisker-identification
+          ( tr²-concat (left-whisker-identification p β)
+          ( right-whisker-identification α q') b)
           ( tr-concat p' q' b)) ∙
         ( vertical-concat-square
-          ( tr² B (identification-left-whisker p β) b)
-          ( tr² B (identification-right-whisker α q') b)
+          ( tr² B (left-whisker-identification p β) b)
+          ( tr² B (right-whisker-identification α q') b)
           ( tr-concat p' q' b)
           ( tr-concat p q' b)
           ( tr-concat p q b)
@@ -119,23 +119,23 @@ module _
           ( left-whisker-htpy (tr B q') (tr² B α) b)
           ( tr²-left-whisker p β b)
           ( tr²-right-whisker α q' b)))
-      ( identification-right-whisker
+      ( right-whisker-identification
         ( tr³
           ( B)
-          ( path-swap-nat-identification-left-whisker β α)
+          ( path-swap-nat-left-whisker-identification β α)
           ( b))
         ( tr-concat p' q' b))
-      ( identification-left-whisker
+      ( left-whisker-identification
         ( tr-concat p q b)
         ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
-      ( ( identification-right-whisker
+      ( ( right-whisker-identification
           ( tr²-concat
-            ( identification-right-whisker α q)
-            ( identification-left-whisker p' β) b)
+            ( right-whisker-identification α q)
+            ( left-whisker-identification p' β) b)
           ( tr-concat p' q' b)) ∙
         ( vertical-concat-square
-          ( tr² B (identification-right-whisker α q) b)
-          ( tr² B (identification-left-whisker p' β) b)
+          ( tr² B (right-whisker-identification α q) b)
+          ( tr² B (left-whisker-identification p' β) b)
           ( tr-concat p' q' b)
           ( tr-concat p' q b)
           ( tr-concat p q b)

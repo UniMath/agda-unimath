@@ -301,9 +301,9 @@ eckmann-hilton-htpy :
   {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
   (H ∙h K) ~ (K ∙h H)
 eckmann-hilton-htpy H K x =
-  ( inv (identification-left-whisker (H x) (ap-id (K x))) ∙
+  ( inv (left-whisker-identification (H x) (ap-id (K x))) ∙
   ( htpy-swap-nat-right-htpy H K x)) ∙
-  ( identification-right-whisker (ap-id (K x)) (H x))
+  ( right-whisker-identification (ap-id (K x)) (H x))
 ```
 
 ### Action on identifications at `eq-htpy`

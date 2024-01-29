@@ -123,7 +123,7 @@ module _
     ( coherence-triangle-identifications (left ∙ p) (right ∙ p) top)
   equiv-right-whisker-triangle-identifications =
     ( equiv-concat-assoc' (left ∙ p) top right p) ∘e
-    ( equiv-identification-right-whisker p)
+    ( equiv-right-whisker-identification p)
 
   right-whisker-triangle-identifications :
     coherence-triangle-identifications left right top →
@@ -142,7 +142,7 @@ module _
     ( coherence-triangle-identifications' (left ∙ p) (right ∙ p) top)
   equiv-right-whisker-triangle-identifications' =
     ( equiv-concat-assoc top right p (left ∙ p)) ∘e
-    ( equiv-identification-right-whisker p)
+    ( equiv-right-whisker-identification p)
 
   right-whisker-triangle-identifications' :
     coherence-triangle-identifications' left right top →
@@ -166,7 +166,7 @@ module _
     ( coherence-triangle-identifications (p ∙ left) right (p ∙ top))
   equiv-left-whisker-triangle-identifications =
     ( inv-equiv (equiv-concat-assoc' (p ∙ left) p top right)) ∘e
-    ( equiv-identification-left-whisker p)
+    ( equiv-left-whisker-identification p)
 
   left-whisker-triangle-identifications :
     coherence-triangle-identifications left right top →
@@ -185,7 +185,7 @@ module _
     ( coherence-triangle-identifications' (p ∙ left) right (p ∙ top))
   equiv-left-whisker-triangle-identifications' =
     ( inv-equiv (equiv-concat-assoc p top right (p ∙ left))) ∘e
-    ( equiv-identification-left-whisker p)
+    ( equiv-left-whisker-identification p)
 
   left-whisker-triangle-identifications' :
     coherence-triangle-identifications' left right top →

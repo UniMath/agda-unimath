@@ -179,7 +179,7 @@ module _
   coherence-triangle-precomp-lift-family-of-elements-refl-htpy b =
     ( htpy-eq (compute-triangle-precomp-lift-family-of-elements-htpy B a) b) ∙
     ( inv right-unit) ∙
-    ( identification-left-whisker
+    ( left-whisker-identification
       ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy B a b)
       ( inv (eq-htpy-refl-htpy (b ∘ f))))
 

@@ -238,17 +238,17 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  identification-left-whisker :
+  left-whisker-identification :
     (p : x ＝ y) {q q' : y ＝ z} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
-  identification-left-whisker p β = ap (p ∙_) β
+  left-whisker-identification p β = ap (p ∙_) β
 
-  identification-right-whisker :
+  right-whisker-identification :
     {p p' : x ＝ y} → p ＝ p' → (q : y ＝ z) → (p ∙ q) ＝ (p' ∙ q)
-  identification-right-whisker α q = ap (_∙ q) α
+  right-whisker-identification α q = ap (_∙ q) α
 
-  htpy-identification-left-whisker :
+  htpy-left-whisker-identification :
     {q q' : y ＝ z} → q ＝ q' → (_∙ q) ~ (_∙ q')
-  htpy-identification-left-whisker β p = identification-left-whisker p β
+  htpy-left-whisker-identification β p = left-whisker-identification p β
 ```
 
 ### Whiskerings of identifications are equivalences
@@ -258,32 +258,32 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  is-equiv-identification-left-whisker :
+  is-equiv-left-whisker-identification :
     (p : x ＝ y) {q q' : y ＝ z} →
-    is-equiv (identification-left-whisker p {q} {q'})
-  is-equiv-identification-left-whisker p {q} {q'} =
+    is-equiv (left-whisker-identification p {q} {q'})
+  is-equiv-left-whisker-identification p {q} {q'} =
     is-emb-is-equiv (is-equiv-concat p z) q q'
 
-  equiv-identification-left-whisker :
+  equiv-left-whisker-identification :
     (p : x ＝ y) {q q' : y ＝ z} →
     (q ＝ q') ≃ (p ∙ q ＝ p ∙ q')
-  pr1 (equiv-identification-left-whisker p) = identification-left-whisker p
-  pr2 (equiv-identification-left-whisker p) =
-    is-equiv-identification-left-whisker p
+  pr1 (equiv-left-whisker-identification p) = left-whisker-identification p
+  pr2 (equiv-left-whisker-identification p) =
+    is-equiv-left-whisker-identification p
 
-  is-equiv-identification-right-whisker :
+  is-equiv-right-whisker-identification :
     {p p' : x ＝ y} → (q : y ＝ z) →
-    is-equiv (λ (α : p ＝ p') → identification-right-whisker α q)
-  is-equiv-identification-right-whisker {p} {p'} q =
+    is-equiv (λ (α : p ＝ p') → right-whisker-identification α q)
+  is-equiv-right-whisker-identification {p} {p'} q =
     is-emb-is-equiv (is-equiv-concat' x q) p p'
 
-  equiv-identification-right-whisker :
+  equiv-right-whisker-identification :
     {p p' : x ＝ y} → (q : y ＝ z) →
     (p ＝ p') ≃ (p ∙ q ＝ p' ∙ q)
-  pr1 (equiv-identification-right-whisker q) α =
-    identification-right-whisker α q
-  pr2 (equiv-identification-right-whisker q) =
-    is-equiv-identification-right-whisker q
+  pr1 (equiv-right-whisker-identification q) α =
+    right-whisker-identification α q
+  pr2 (equiv-right-whisker-identification q) =
+    is-equiv-right-whisker-identification q
 ```
 
 ### Reassociating one side of a higher identification is an equivalence
@@ -318,7 +318,7 @@ module _
   equiv-right-whisker-square-identification =
     ( equiv-concat-assoc' (p' ∙ (q' ∙ r)) p q r) ∘e
     ( equiv-concat-assoc p' q' r (p ∙ q ∙ r)) ∘e
-    ( equiv-identification-right-whisker r)
+    ( equiv-right-whisker-identification r)
 
   right-whisker-square-identification :
     coherence-square-identifications p p' q q' →
@@ -343,7 +343,7 @@ module _
   equiv-left-whisker-square-identification =
     ( inv-equiv (equiv-concat-assoc p q' r' (p ∙ q ∙ r))) ∘e
     ( inv-equiv (equiv-concat-assoc' (p ∙ (q' ∙ r')) p q r)) ∘e
-    ( equiv-identification-left-whisker p)
+    ( equiv-left-whisker-identification p)
 
   left-whisker-square-identification :
     coherence-square-identifications q q' r r' →
@@ -402,13 +402,13 @@ right-unit-law-vertical-concat-Id² = right-unit
 left-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
   horizontal-concat-Id² (refl {x = p}) γ ＝
-  identification-left-whisker p γ
+  left-whisker-identification p γ
 left-unit-law-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
 
 right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α (refl {x = u}) ＝
-  identification-right-whisker α u
+  right-whisker-identification α u
 right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
 ```
 
@@ -450,16 +450,16 @@ module _
   {l : Level} {A : UU l} {x y : A}
   where
 
-  left-unit-law-identification-left-whisker :
+  left-unit-law-left-whisker-identification :
     {p p' : x ＝ y} (α : p ＝ p') →
-    identification-left-whisker refl α ＝ α
-  left-unit-law-identification-left-whisker refl = refl
+    left-whisker-identification refl α ＝ α
+  left-unit-law-left-whisker-identification refl = refl
 
-  right-unit-law-identification-right-whisker :
+  right-unit-law-right-whisker-identification :
     {p p' : x ＝ y} (α : p ＝ p') →
-    identification-right-whisker α refl ＝
+    right-whisker-identification α refl ＝
     right-unit ∙ α ∙ inv right-unit
-  right-unit-law-identification-right-whisker {p = refl} refl = refl
+  right-unit-law-right-whisker-identification {p = refl} refl = refl
 ```
 
 ### The whiskering operations allow us to commute higher identifications
@@ -473,30 +473,30 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  path-swap-nat-identification-left-whisker :
+  path-swap-nat-left-whisker-identification :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
     coherence-square-identifications
-      ( identification-right-whisker α q)
-      ( identification-left-whisker p β)
-      ( identification-left-whisker p' β)
-      ( identification-right-whisker α q')
-  path-swap-nat-identification-left-whisker β =
-    nat-htpy (htpy-identification-left-whisker β)
+      ( right-whisker-identification α q)
+      ( left-whisker-identification p β)
+      ( left-whisker-identification p' β)
+      ( right-whisker-identification α q')
+  path-swap-nat-left-whisker-identification β =
+    nat-htpy (htpy-left-whisker-identification β)
 
-  path-swap-nat-identification-right-whisker :
+  path-swap-nat-right-whisker-identification :
     {p p' : x ＝ y} (α : p ＝ p') {q q' : y ＝ z} (β : q ＝ q') →
     coherence-square-identifications
-      ( identification-left-whisker p β)
-      ( identification-right-whisker α q)
-      ( identification-right-whisker α q')
-      ( identification-left-whisker p' β)
-  path-swap-nat-identification-right-whisker α =
-    nat-htpy (identification-right-whisker α)
+      ( left-whisker-identification p β)
+      ( right-whisker-identification α q)
+      ( right-whisker-identification α q')
+      ( left-whisker-identification p' β)
+  path-swap-nat-right-whisker-identification α =
+    nat-htpy (right-whisker-identification α)
 
   path-swap-right-undoes-path-swap-left :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
-    inv (path-swap-nat-identification-right-whisker α β) ＝
-    (path-swap-nat-identification-left-whisker β α)
+    inv (path-swap-nat-right-whisker-identification α β) ＝
+    (path-swap-nat-left-whisker-identification β α)
   path-swap-right-undoes-path-swap-left refl refl = refl
 ```
 

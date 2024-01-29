@@ -199,7 +199,7 @@ module _
       ( apd
         ( contraction-map-smash-prod-wedge-Pointed-Type)
         ( glue-wedge-Pointed-Type A B))) ∙
-    ( identification-left-whisker
+    ( left-whisker-identification
       ( contraction-map-smash-prod-wedge-Pointed-Type
         ( map-inl-wedge-Pointed-Type A B (point-Pointed-Type A)))
       ( ap-const
@@ -249,7 +249,7 @@ module _
     inl-glue-smash-prod-Pointed-Type (point-Pointed-Type A) ＝
     inr-glue-smash-prod-Pointed-Type (point-Pointed-Type B)
   coh-glue-smash-prod-Pointed-Type =
-    ( identification-left-whisker
+    ( left-whisker-identification
       ( ap
         ( map-smash-prod-prod-Pointed-Type A B)
         ( inv (compute-inl-prod-wedge-Pointed-Type A B (point-Pointed-Type A))))
@@ -263,8 +263,8 @@ module _
           ( glue-wedge-Pointed-Type A B))
         ( contraction-map-smash-prod-wedge-Pointed-Type A B
           ( map-inr-wedge-Pointed-Type A B (point-Pointed-Type B))))) ∙
-    ( identification-right-whisker
-      ( ( identification-left-whisker
+    ( right-whisker-identification
+      ( ( left-whisker-identification
           ( ap (map-smash-prod-prod-Pointed-Type A B)
             ( inv
               ( compute-inl-prod-wedge-Pointed-Type A B
@@ -362,7 +362,7 @@ pr2 (universal-property-smash-prod-Pointed-Type A B C f) =
           ( map-pointed-map f)
           ( inr-glue-smash-prod-Pointed-Type A B y) ∙
         ( preserves-point-pointed-map f))) ,
-      ( ( identification-right-whisker
+      ( ( right-whisker-identification
           ( ap²
             ( map-pointed-map f)
             ( inv (coh-glue-smash-prod-Pointed-Type A B)))

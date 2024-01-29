@@ -114,11 +114,11 @@ Eckmann-Hilton argument is often depicted as follows:
 The first picture represents the vertical concatination of `α` and `β`. The
 notation ` | γ | δ |` represents the horizontal concatination of 2-dimensional
 identifications `γ` and `δ`. Then `| refl | α |` is just
-[`identification-left-whisker refl-Ω² α`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697).
+[`left-whisker-identification refl-Ω² α`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697).
 The first and last equality come from the unit laws of whiskering. And the
 middle equality can be recognized as
-[`path-swap-nat-identification-left-whisker`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#9823),
-which is the naturality condition of `htpy-identification-left-whisker α`
+[`path-swap-nat-left-whisker-identification`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#9823),
+which is the naturality condition of `htpy-left-whisker-identification α`
 applied to `β`.
 
 Since this version of the Eckmann-Hilton argument may seem more complicated than
@@ -132,7 +132,7 @@ induces an autoequivalence `Ω X ≃ Ω X` given by concatinating on the right b
 `l`. This is shown in
 [`tr-Id-right`](https://unimath.github.io/agda-unimath/foundation.identity-types.html#11216).
 A 2-loop `s` induces a homotpy `id {A = Ω X} ~ id` given by
-[`htpy-identification-left-whisker`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7977).
+[`htpy-left-whisker-identification`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7977).
 This claim is shown in TODO (provide link). Thus, the 2-D descent data of
 `Id base` is (up to equivalence) exactly the homotopy at the heart of this
 version of the Eckmann-Hilton argument.
@@ -172,19 +172,19 @@ module _
     (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
   eckmann-hilton-Ω² α β = equational-reasoning_
     (α ∙ β) ＝
-    ( identification-left-whisker refl α) ∙
-      ( identification-right-whisker β refl)
+    ( left-whisker-identification refl α) ∙
+      ( right-whisker-identification β refl)
     by ( inv
       ( horizontal-concat-Id²
-        ( left-unit-law-identification-left-whisker-Ω² α)
-        ( right-unit-law-identification-right-whisker-Ω² β)))
-    ＝ ( identification-right-whisker β refl) ∙
-      ( identification-left-whisker refl α)
-    by ( path-swap-nat-identification-left-whisker α β)
+        ( left-unit-law-left-whisker-identification-Ω² α)
+        ( right-unit-law-right-whisker-identification-Ω² β)))
+    ＝ ( right-whisker-identification β refl) ∙
+      ( left-whisker-identification refl α)
+    by ( path-swap-nat-left-whisker-identification α β)
     ＝ β ∙ α
     by ( horizontal-concat-Id²
-      ( right-unit-law-identification-right-whisker-Ω² β)
-      ( left-unit-law-identification-left-whisker-Ω² α))
+      ( right-unit-law-right-whisker-identification-Ω² β)
+      ( left-unit-law-left-whisker-identification-Ω² α))
 ```
 
 #### Using right whiskering
@@ -211,19 +211,19 @@ module _
     (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
   eckmann-hilton-inverse-Ω² α β = equational-reasoning_
     (α ∙ β)
-    ＝ ( identification-right-whisker α refl) ∙
-      ( identification-left-whisker refl β)
+    ＝ ( right-whisker-identification α refl) ∙
+      ( left-whisker-identification refl β)
     by ( inv
       ( horizontal-concat-Id²
-        ( right-unit-law-identification-right-whisker-Ω² α)
-        ( left-unit-law-identification-left-whisker-Ω² β)))
-    ＝ ( identification-left-whisker refl β) ∙
-      ( identification-right-whisker α refl)
-    by path-swap-nat-identification-right-whisker α β
+        ( right-unit-law-right-whisker-identification-Ω² α)
+        ( left-unit-law-left-whisker-identification-Ω² β)))
+    ＝ ( left-whisker-identification refl β) ∙
+      ( right-whisker-identification α refl)
+    by path-swap-nat-right-whisker-identification α β
     ＝ β ∙ α
     by ( horizontal-concat-Id²
-        ( left-unit-law-identification-left-whisker-Ω² β))
-        ( right-unit-law-identification-right-whisker-Ω² α)
+        ( left-unit-law-left-whisker-identification-Ω² β))
+        ( right-unit-law-right-whisker-identification-Ω² α)
 ```
 
 We now prove that this Eckmann-Hilton identification "undoes" the previously
@@ -254,87 +254,87 @@ module _
     ＝ concat
       ( inv
         ( horizontal-concat-Id²
-          ( left-unit-law-identification-left-whisker-Ω² α)
-            ( right-unit-law-identification-right-whisker-Ω² β)))
+          ( left-unit-law-left-whisker-identification-Ω² α)
+            ( right-unit-law-right-whisker-identification-Ω² β)))
       ( _)
       ( inv
         ( concat
           ( inv
             ( horizontal-concat-Id²
-              ( right-unit-law-identification-right-whisker-Ω² β)
-              ( left-unit-law-identification-left-whisker-Ω² α)))
+              ( right-unit-law-right-whisker-identification-Ω² β)
+              ( left-unit-law-left-whisker-identification-Ω² α)))
           ( _)
-          ( path-swap-nat-identification-right-whisker β α)))
+          ( path-swap-nat-right-whisker-identification β α)))
     by distributive-inv-concat
       ( concat
         ( inv
           ( horizontal-concat-Id²
-            ( right-unit-law-identification-right-whisker-Ω² β)
-            ( left-unit-law-identification-left-whisker-Ω² α)))
+            ( right-unit-law-right-whisker-identification-Ω² β)
+            ( left-unit-law-left-whisker-identification-Ω² α)))
         ( _)
-        ( path-swap-nat-identification-right-whisker β α))
+        ( path-swap-nat-right-whisker-identification β α))
       ( horizontal-concat-Id²
-        ( left-unit-law-identification-left-whisker-Ω² α)
-        ( right-unit-law-identification-right-whisker-Ω² β))
+        ( left-unit-law-left-whisker-identification-Ω² α)
+        ( right-unit-law-right-whisker-identification-Ω² β))
     ＝ concat
       ( inv
         ( horizontal-concat-Id²
-          ( left-unit-law-identification-left-whisker-Ω² α)
-            ( right-unit-law-identification-right-whisker-Ω² β)))
+          ( left-unit-law-left-whisker-identification-Ω² α)
+            ( right-unit-law-right-whisker-identification-Ω² β)))
       ( _)
       ( concat
-        ( inv (path-swap-nat-identification-right-whisker β α))
+        ( inv (path-swap-nat-right-whisker-identification β α))
         ( _)
         ( inv
           ( inv
             ( horizontal-concat-Id²
-              ( right-unit-law-identification-right-whisker-Ω² β)
-              ( left-unit-law-identification-left-whisker-Ω² α)))))
-    by identification-left-whisker
+              ( right-unit-law-right-whisker-identification-Ω² β)
+              ( left-unit-law-left-whisker-identification-Ω² α)))))
+    by left-whisker-identification
       ( inv
         ( horizontal-concat-Id²
-          ( left-unit-law-identification-left-whisker-Ω² α)
-            ( right-unit-law-identification-right-whisker-Ω² β)))
+          ( left-unit-law-left-whisker-identification-Ω² α)
+            ( right-unit-law-right-whisker-identification-Ω² β)))
       ( distributive-inv-concat
         ( inv
           ( horizontal-concat-Id²
-            ( right-unit-law-identification-right-whisker-Ω² β)
-            ( left-unit-law-identification-left-whisker-Ω² α)))
-        ( path-swap-nat-identification-right-whisker β α))
+            ( right-unit-law-right-whisker-identification-Ω² β)
+            ( left-unit-law-left-whisker-identification-Ω² α)))
+        ( path-swap-nat-right-whisker-identification β α))
     ＝ concat
       ( inv
         ( horizontal-concat-Id²
-          ( left-unit-law-identification-left-whisker-Ω² α)
-            ( right-unit-law-identification-right-whisker-Ω² β)))
+          ( left-unit-law-left-whisker-identification-Ω² α)
+            ( right-unit-law-right-whisker-identification-Ω² β)))
       ( _)
       ( concat
-        ( path-swap-nat-identification-left-whisker α β)
+        ( path-swap-nat-left-whisker-identification α β)
         ( _)
         ( horizontal-concat-Id²
-          ( right-unit-law-identification-right-whisker-Ω² β)
-          ( left-unit-law-identification-left-whisker-Ω² α)))
-    by identification-left-whisker
+          ( right-unit-law-right-whisker-identification-Ω² β)
+          ( left-unit-law-left-whisker-identification-Ω² α)))
+    by left-whisker-identification
       ( inv
         ( horizontal-concat-Id²
-          ( left-unit-law-identification-left-whisker-Ω² α)
-            ( right-unit-law-identification-right-whisker-Ω² β)))
+          ( left-unit-law-left-whisker-identification-Ω² α)
+            ( right-unit-law-right-whisker-identification-Ω² β)))
       ( horizontal-concat-Id²
         ( path-swap-right-undoes-path-swap-left α β)
         ( inv-inv
           ( horizontal-concat-Id²
-            ( right-unit-law-identification-right-whisker-Ω² β)
-            ( left-unit-law-identification-left-whisker-Ω² α))))
+            ( right-unit-law-right-whisker-identification-Ω² β)
+            ( left-unit-law-left-whisker-identification-Ω² α))))
     ＝ eckmann-hilton-Ω² α β
     by inv (
       assoc
         ( inv
           ( horizontal-concat-Id²
-            ( left-unit-law-identification-left-whisker-Ω² α)
-            ( right-unit-law-identification-right-whisker-Ω² β)))
-        ( path-swap-nat-identification-left-whisker α β)
+            ( left-unit-law-left-whisker-identification-Ω² α)
+            ( right-unit-law-right-whisker-identification-Ω² β)))
+        ( path-swap-nat-left-whisker-identification α β)
         ( horizontal-concat-Id²
-          ( right-unit-law-identification-right-whisker-Ω² β)
-          ( left-unit-law-identification-left-whisker-Ω² α)))
+          ( right-unit-law-right-whisker-identification-Ω² β)
+          ( left-unit-law-left-whisker-identification-Ω² α)))
 ```
 
 ## Properties
