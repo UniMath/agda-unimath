@@ -230,7 +230,7 @@ the original identifications.
     ( ap
       ( is-retraction-map-inv-equiv e x ∙_)
       ( htpy-map-eq-transpose-equiv refl)) ∙
-    ( is-retraction-left-concat-inv (is-retraction-map-inv-equiv e x) refl)
+    ( is-section-inv-concat (is-retraction-map-inv-equiv e x) _ refl)
 
   triangle-eq-transpose-equiv-inv' :
     {x : A} {y : B} (p : y ＝ map-equiv e x) →

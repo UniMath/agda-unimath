@@ -352,9 +352,9 @@ apply-loop-universal-property-𝕊¹-sphere-1-circle-sphere-1 =
     ( meridian-sphere 0 (one-Fin 1))) ∙
   ( left-whisker-identification
     ( sphere-1-circle-base-𝕊¹-eq-north-sphere-1)
-    ( is-section-right-concat-inv
-      ( meridian-sphere 0 (zero-Fin 1))
-      ( meridian-sphere 0 (one-Fin 1))))
+    ( is-section-inv-concat' _
+      ( meridian-sphere 0 (one-Fin 1))
+      ( meridian-sphere 0 (zero-Fin 1))))
 
 map-sphere-1-circle-sphere-1-meridian :
   ( n : Fin 2) →

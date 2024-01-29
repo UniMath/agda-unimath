@@ -62,61 +62,6 @@ module _
   htpy-right-unit p = right-unit
 ```
 
-### Squares
-
-```agda
-horizontal-concat-square :
-  {l : Level} {A : UU l} {a b c d e f : A}
-  (p-lleft : a ＝ b) (p-lbottom : b ＝ d) (p-rbottom : d ＝ f)
-  (p-middle : c ＝ d) (p-ltop : a ＝ c) (p-rtop : c ＝ e) (p-rright : e ＝ f)
-  (s-left : coherence-square-identifications p-ltop p-lleft p-middle p-lbottom)
-  (s-right :
-    coherence-square-identifications p-rtop p-middle p-rright p-rbottom) →
-  coherence-square-identifications
-    (p-ltop ∙ p-rtop) p-lleft p-rright (p-lbottom ∙ p-rbottom)
-horizontal-concat-square {a = a} {f = f}
-  p-lleft p-lbottom p-rbottom p-middle p-ltop p-rtop p-rright s-left s-right =
-  ( inv (assoc p-lleft p-lbottom p-rbottom)) ∙
-  ( ( ap (concat' a p-rbottom) s-left) ∙
-    ( ( assoc p-ltop p-middle p-rbottom) ∙
-      ( ( ap (concat p-ltop f) s-right) ∙
-        ( inv (assoc p-ltop p-rtop p-rright)))))
-
-horizontal-unit-square :
-  {l : Level} {A : UU l} {a b : A} (p : a ＝ b) →
-  coherence-square-identifications refl p p refl
-horizontal-unit-square p = right-unit
-
-left-unit-law-horizontal-concat-square :
-  {l : Level} {A : UU l} {a b c d : A}
-  (p-left : a ＝ b) (p-bottom : b ＝ d) (p-top : a ＝ c) (p-right : c ＝ d) →
-  (s : coherence-square-identifications p-top p-left p-right p-bottom) →
-  ( horizontal-concat-square
-    p-left refl p-bottom p-left refl p-top p-right
-    ( horizontal-unit-square p-left)
-    ( s)) ＝
-  ( s)
-left-unit-law-horizontal-concat-square refl p-bottom p-top p-right s =
-  right-unit ∙ ap-id s
-
-vertical-concat-square :
-  {l : Level} {A : UU l} {a b c d e f : A}
-  (p-tleft : a ＝ b) (p-bleft : b ＝ c) (p-bbottom : c ＝ f)
-  (p-middle : b ＝ e) (p-ttop : a ＝ d) (p-tright : d ＝ e) (p-bright : e ＝ f)
-  (s-top : coherence-square-identifications p-ttop p-tleft p-tright p-middle)
-  (s-bottom :
-    coherence-square-identifications p-middle p-bleft p-bright p-bbottom) →
-  coherence-square-identifications
-    p-ttop (p-tleft ∙ p-bleft) (p-tright ∙ p-bright) p-bbottom
-vertical-concat-square {a = a} {f = f}
-  p-tleft p-bleft p-bbottom p-middle p-ttop p-tright p-bright s-top s-bottom =
-  ( assoc p-tleft p-bleft p-bbottom) ∙
-  ( ( ap (concat p-tleft f) s-bottom) ∙
-    ( ( inv (assoc p-tleft p-middle p-bright)) ∙
-      ( ( ap (concat' a p-bright) s-top) ∙
-        ( assoc p-ttop p-tright p-bright))))
-```
-
 ### Unit laws for `assoc`
 
 We give two treatments of the unit laws for the associator. One for computing
@@ -191,30 +136,6 @@ ap-concat-eq-inv-right-unit :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
   (p : x ＝ y) → inv right-unit ＝ ap-concat-eq f p refl p (inv right-unit)
 ap-concat-eq-inv-right-unit f refl = refl
-```
-
-### Iterated inverse laws
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  is-section-left-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) → (inv p ∙ (p ∙ q)) ＝ q
-  is-section-left-concat-inv refl q = refl
-
-  is-retraction-left-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : x ＝ z) → (p ∙ (inv p ∙ q)) ＝ q
-  is-retraction-left-concat-inv refl q = refl
-
-  is-section-right-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : z ＝ y) → ((p ∙ inv q) ∙ q) ＝ p
-  is-section-right-concat-inv refl refl = refl
-
-  is-retraction-right-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) → ((p ∙ q) ∙ inv q) ＝ p
-  is-retraction-right-concat-inv refl refl = refl
 ```
 
 ## Properties of 2-paths

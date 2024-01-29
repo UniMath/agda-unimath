@@ -165,9 +165,9 @@ module _
       ( ap
         ( ap-map-higher-modality m g)
         ( compute-rec-higher-modality m (unit-higher-modality m ∘ f) x) ∙_)
-      ( is-section-right-concat-inv
-        ( compute-rec-higher-modality m (unit-higher-modality m ∘ g) (f x))
-        ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)))
+      ( is-section-inv-concat' _
+        ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)
+        ( compute-rec-higher-modality m (unit-higher-modality m ∘ g) (f x))))
 ```
 
 ### Action on homotopies

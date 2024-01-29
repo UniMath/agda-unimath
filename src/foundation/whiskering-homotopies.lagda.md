@@ -11,10 +11,11 @@ open import foundation-core.whiskering-homotopies public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
-open import foundation-core.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-identifications
 open import foundation.homotopy-induction
 open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality

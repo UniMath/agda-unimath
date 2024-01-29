@@ -22,30 +22,56 @@ open import foundation-core.identity-types
 A square of [identifications](foundation-core.identity-types.md)
 
 ```text
-          top
-      x ------- y
-      |         |
- left |         | right
-      |         |
-      z ------- w
-         bottom
+           top
+       x -------> y
+       |          |
+  left |          | right
+       ∨          ∨
+       z -------> w
+          bottom
 ```
 
 is said to **commute** if there is an identification
-`left ∙ bottom ＝ top ∙ right`. Such an identification is called a **coherence**
+`left ∙ bottom ＝ top ∙ right`. Such an identification is called a
+{{#concept "coherence" Disambiguation="commuting square of identifications" Agda=coherence-square-identifications}}
 of the square.
 
 ## Definition
 
+### Commuting squares of identifications
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications :
-    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) → UU l
-  coherence-square-identifications top left right bottom =
-    left ∙ bottom ＝ top ∙ right
+  coherence-square-identifications : UU l
+  coherence-square-identifications = left ∙ bottom ＝ top ∙ right
+```
+
+### Horizontally constant squares
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b : A} (p : a ＝ b)
+  where
+  
+  horizontal-refl-coherence-square-identification :
+    coherence-square-identifications refl p p refl
+  horizontal-refl-coherence-square-identification = right-unit
+```
+
+### Vertically constant squares
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b : A} (p : a ＝ b)
+  where
+
+  vertical-refl-coherence-square-identifications :
+    coherence-square-identifications p refl refl p
+  vertical-refl-coherence-square-identifications = inv right-unit
 ```
 
 ## Operations

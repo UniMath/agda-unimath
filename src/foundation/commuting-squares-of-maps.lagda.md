@@ -12,10 +12,10 @@ open import foundation-core.commuting-squares-of-maps public
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
-open import foundation-core.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-maps
 open import foundation.equivalences
-open import foundation.path-algebra
+open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
@@ -25,7 +25,6 @@ open import foundation-core.commuting-prisms-of-maps
 open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 ```
 
 </details>
@@ -418,8 +417,9 @@ module _
             ( right)
             ( ( inv (H (map-inv-equiv left a))) ∙
               ( ap bottom (is-section-map-inv-equiv left a))))) ∙
-        ( is-retraction-left-concat-inv
+        ( is-section-inv-concat
           ( H (map-inv-equiv left a))
+          ( _)
           ( ap bottom (is-section-map-inv-equiv left a)))))
 ```
 

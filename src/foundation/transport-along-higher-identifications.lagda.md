@@ -8,10 +8,10 @@ module foundation.transport-along-higher-identifications where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation-core.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-identifications
 open import foundation.homotopies
-open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
