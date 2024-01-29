@@ -227,7 +227,7 @@ module _
                   ( λ x →
                     ap
                       ( is-map-over-map-total-fibered-map f g h x ∙_)
-                      ( inv-htpy-left-whisk-inv-htpy g E x))) ∘e
+                      ( inv-htpy-left-whisker-inv-htpy g E x))) ∘e
                 ( equiv-right-transpose-htpy-concat
                   ( inv-htpy (L ·r f))
                   ( g ·l E)

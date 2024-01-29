@@ -523,7 +523,7 @@ module _
     is-equiv-section-is-equiv (g , is-section-g) is-equiv-section-f =
       is-equiv-htpy h
         ( ( f ·l (inv-htpy (is-section-map-inv-is-equiv is-equiv-section-f))) ∙h
-          ( htpy-right-whisk is-section-g h))
+          ( htpy-right-whisker is-section-g h))
         ( is-equiv-map-inv-is-equiv is-equiv-section-f)
       where
       h : A → B

@@ -92,20 +92,20 @@ module _
         ( right-top)
         ( left-bottom)
         ( right-bottom))) ∙h
-    ( right-whisk-square-htpy
+    ( right-whisker-square-htpy
       ( front-bottom ·r hA)
       ( bottom ·r hA' ·r hA)
       ( hC' ·l ((g' ·l left-top) ∙h (right-top ·r h)))
       ( prism-bottom ·r hA)) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r hA)
-      ( ( ap-left-whisk-coherence-square-homotopies hC'
+      ( ( ap-left-whisker-coherence-square-homotopies hC'
           ( front-top)
           ( mid ·r hA)
           ( prism-top)) ∙h
         ( ap-concat-htpy
           ( hC' ·l front-top)
-          ( associative-left-whisk-comp hC' hC top)))) ∙h
+          ( associative-left-whisker-comp hC' hC top)))) ∙h
     ( inv-htpy-assoc-htpy
       ( front-bottom ·r hA)
       ( hC' ·l front-top)

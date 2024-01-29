@@ -324,10 +324,10 @@ module _
             (x : X) →
             coherence-square-identifications
               ( h x)
-              ( identification-left-whisk
+              ( identification-left-whisker
                 ( meridian-suspension-structure c x)
                 ( q))
-              ( identification-right-whisk
+              ( identification-right-whisker
                 ( p)
                 ( meridian-suspension-structure c' x))
               ( h' x)))
@@ -343,10 +343,10 @@ module _
             (x : X) →
             coherence-square-identifications
               ( h x)
-              ( identification-left-whisk
+              ( identification-left-whisker
                 ( meridian-suspension-structure c x)
                 ( q))
-              ( identification-right-whisk
+              ( identification-right-whisker
                 ( p)
                 ( meridian-suspension-structure c' x))
               ( pr2 y x)))
@@ -358,8 +358,8 @@ module _
           (x : X) →
           coherence-square-identifications
             ( h x)
-            ( identification-left-whisk (meridian-suspension-structure c x) q)
-            ( identification-right-whisk
+            ( identification-left-whisker (meridian-suspension-structure c x) q)
+            ( identification-right-whisker
               ( refl)
               ( meridian-suspension-structure c' x))
             ( h' x))
@@ -391,10 +391,10 @@ module _
     (x : X) →
       coherence-square-identifications
         ( meridian-htpy-suspension-structure h x)
-        ( identification-left-whisk
+        ( identification-left-whisker
           ( meridian-suspension-structure c x)
           ( south-htpy-in-htpy-suspension-structure H))
-        ( identification-right-whisk
+        ( identification-right-whisker
           ( north-htpy-in-htpy-suspension-structure H)
           ( meridian-suspension-structure c' x))
         ( meridian-htpy-suspension-structure h' x)

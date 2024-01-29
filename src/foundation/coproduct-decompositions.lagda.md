@@ -109,7 +109,7 @@ pr2 (equiv-coproduct-Decomposition-full-subuniverse X) =
         ( d)
         ( id-equiv ,
           ( id-equiv ,
-            htpy-right-whisk
+            htpy-right-whisker
               ( id-map-coprod _ _)
               ( map-equiv
                 ( matching-correspondence-binary-coproduct-Decomposition-subuniverse

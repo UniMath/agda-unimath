@@ -70,20 +70,20 @@ module _
   { f g : B → C} (h : A → B)
   where
 
-  compute-eq-htpy-htpy-eq-right-whisk :
+  compute-eq-htpy-htpy-eq-right-whisker :
     ( p : f ＝ g) →
     eq-htpy ((htpy-eq p) ·r h) ＝ ap (precomp h C) p
-  compute-eq-htpy-htpy-eq-right-whisk refl =
+  compute-eq-htpy-htpy-eq-right-whisker refl =
     eq-htpy-refl-htpy (f ∘ h)
 
-  compute-eq-htpy-right-whisk :
+  compute-eq-htpy-right-whisker :
     ( H : f ~ g) →
     eq-htpy (H ·r h) ＝ ap (precomp h C) (eq-htpy H)
-  compute-eq-htpy-right-whisk H =
+  compute-eq-htpy-right-whisker H =
     ( ap
       ( λ K → eq-htpy (K ·r h))
       ( inv (is-section-eq-htpy H))) ∙
-    ( compute-eq-htpy-htpy-eq-right-whisk (eq-htpy H))
+    ( compute-eq-htpy-htpy-eq-right-whisker (eq-htpy H))
 ```
 
 ```agda
@@ -92,19 +92,19 @@ module _
   { f g : A → B} (h : B → C)
   where
 
-  compute-eq-htpy-htpy-eq-left-whisk :
+  compute-eq-htpy-htpy-eq-left-whisker :
     ( p : f ＝ g) → eq-htpy (h ·l (htpy-eq p)) ＝ ap (postcomp A h) p
-  compute-eq-htpy-htpy-eq-left-whisk refl =
+  compute-eq-htpy-htpy-eq-left-whisker refl =
     eq-htpy-refl-htpy (h ∘ f)
 
-  compute-eq-htpy-left-whisk :
+  compute-eq-htpy-left-whisker :
     (H : f ~ g) →
     eq-htpy (h ·l H) ＝ ap (postcomp A h) (eq-htpy H)
-  compute-eq-htpy-left-whisk H =
+  compute-eq-htpy-left-whisker H =
     ( ap
       ( λ K → eq-htpy (h ·l K))
       ( inv (is-section-eq-htpy H))) ∙
-    ( compute-eq-htpy-htpy-eq-left-whisk (eq-htpy H))
+    ( compute-eq-htpy-htpy-eq-left-whisker (eq-htpy H))
 ```
 
 ### Whiskering a square of homotopies by a homotopy is an equivalence
@@ -151,43 +151,43 @@ module _
     ( H : f ~ g) (H' : f ~ g') {K : g ~ h} {K' : g' ~ h} (L : h ~ k)
     where
 
-    equiv-right-whisk-square-htpy :
+    equiv-right-whisker-square-htpy :
       ( coherence-square-homotopies H H' K K') ≃
       ( coherence-square-homotopies H H' (K ∙h L) (K' ∙h L))
-    equiv-right-whisk-square-htpy =
+    equiv-right-whisker-square-htpy =
       equiv-Π-equiv-family
-        ( λ a → equiv-right-whisk-square-identification (H a) (H' a) (L a))
+        ( λ a → equiv-right-whisker-square-identification (H a) (H' a) (L a))
 
-    right-whisk-square-htpy :
+    right-whisker-square-htpy :
       coherence-square-homotopies H H' K K' →
       coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
-    right-whisk-square-htpy = map-equiv equiv-right-whisk-square-htpy
+    right-whisker-square-htpy = map-equiv equiv-right-whisker-square-htpy
 
-    right-unwhisk-square-htpy :
+    right-unwhisker-square-htpy :
       coherence-square-homotopies H H' (K ∙h L) (K' ∙h L) →
       coherence-square-homotopies H H' K K'
-    right-unwhisk-square-htpy = map-inv-equiv equiv-right-whisk-square-htpy
+    right-unwhisker-square-htpy = map-inv-equiv equiv-right-whisker-square-htpy
 
   module _
     ( L : k ~ f) {H : f ~ g} {H' : f ~ g'} {K : g ~ h} {K' : g' ~ h}
     where
 
-    equiv-left-whisk-square-htpy :
+    equiv-left-whisker-square-htpy :
       ( coherence-square-homotopies H H' K K') ≃
       ( coherence-square-homotopies (L ∙h H) (L ∙h H') K K')
-    equiv-left-whisk-square-htpy =
+    equiv-left-whisker-square-htpy =
       equiv-Π-equiv-family
-        ( λ a → equiv-left-whisk-square-identification (L a))
+        ( λ a → equiv-left-whisker-square-identification (L a))
 
-    left-whisk-square-htpy :
+    left-whisker-square-htpy :
       coherence-square-homotopies H H' K K' →
       coherence-square-homotopies (L ∙h H) (L ∙h H') K K'
-    left-whisk-square-htpy = map-equiv equiv-left-whisk-square-htpy
+    left-whisker-square-htpy = map-equiv equiv-left-whisker-square-htpy
 
-    left-unwhisk-square-htpy :
+    left-unwhisker-square-htpy :
       coherence-square-homotopies (L ∙h H) (L ∙h H') K K' →
       coherence-square-homotopies H H' K K'
-    left-unwhisk-square-htpy = map-inv-equiv equiv-left-whisk-square-htpy
+    left-unwhisker-square-htpy = map-inv-equiv equiv-left-whisker-square-htpy
 
 module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -195,22 +195,22 @@ module _
   ( H : f ~ g) {K : g ~ h} {K' : g ~ h'} {L : h ~ k} {L' : h' ~ k} (M : k ~ m)
   where
 
-  equiv-both-whisk-square-htpy :
+  equiv-both-whisker-square-htpy :
     ( coherence-square-homotopies K K' L L') ≃
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
-  equiv-both-whisk-square-htpy =
+  equiv-both-whisker-square-htpy =
     equiv-Π-equiv-family
-      ( λ a → equiv-both-whisk-square-identifications (H a) (M a))
+      ( λ a → equiv-both-whisker-square-identifications (H a) (M a))
 
-  both-whisk-square-htpy :
+  both-whisker-square-htpy :
     ( coherence-square-homotopies K K' L L') →
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
-  both-whisk-square-htpy = map-equiv equiv-both-whisk-square-htpy
+  both-whisker-square-htpy = map-equiv equiv-both-whisker-square-htpy
 
-  both-unwhisk-square-htpy :
+  both-unwhisker-square-htpy :
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M)) →
     ( coherence-square-homotopies K K' L L')
-  both-unwhisk-square-htpy = map-inv-equiv equiv-both-whisk-square-htpy
+  both-unwhisker-square-htpy = map-inv-equiv equiv-both-whisker-square-htpy
 ```
 
 ### Whiskering a square of homotopies by a map
@@ -249,10 +249,10 @@ module _
   ( H : g ~ h) (H' : g ~ h') {K : h ~ k} {K' : h' ~ k}
   where
 
-  ap-left-whisk-coherence-square-homotopies :
+  ap-left-whisker-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (f ·l H) (f ·l H') (f ·l K) (f ·l K')
-  ap-left-whisk-coherence-square-homotopies α a =
+  ap-left-whisker-coherence-square-homotopies α a =
     coherence-square-identifications-ap f (H a) (H' a) (K a) (K' a) (α a)
 
 module _
@@ -261,10 +261,10 @@ module _
   ( f : A → B)
   where
 
-  ap-right-whisk-coherence-square-homotopies :
+  ap-right-whisker-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (H ·r f) (H' ·r f) (K ·r f) (K' ·r f)
-  ap-right-whisk-coherence-square-homotopies α = α ·r f
+  ap-right-whisker-coherence-square-homotopies α = α ·r f
 ```
 
 ### The two definitions of horizontal concatenation of homotopies agree

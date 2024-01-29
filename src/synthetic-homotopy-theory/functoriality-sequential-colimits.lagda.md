@@ -274,7 +274,7 @@ module _
     ( ap-concat-htpy _
       ( ( right-unit-htpy) ∙h
         ( inv-htpy
-          ( left-unit-law-left-whisk-htpy
+          ( left-unit-law-left-whisker-htpy
             ( coherence-cocone-sequential-diagram c n)))))
 
   preserves-id-map-sequential-colimit-hom-sequential-diagram :
@@ -329,7 +329,7 @@ module _
           ( g)
           ( n))))
   pr2 htpy-preserves-comp-map-sequential-colimit-hom-sequential-diagram n =
-    ( right-whisk-square-htpy
+    ( right-whisker-square-htpy
       ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
         ( comp-hom-sequential-diagram A B C g f)
         ( n))

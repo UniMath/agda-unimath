@@ -137,7 +137,7 @@ module _
     (H : f ~ g) (K : g ~ h) (S : UU l3) →
     htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K S
   distributive-htpy-precomp-concat-htpy H K S i =
-    ( ap eq-htpy (eq-htpy (distributive-left-whisk-concat-htpy i H K))) ∙
+    ( ap eq-htpy (eq-htpy (distributive-left-whisker-concat-htpy i H K))) ∙
     ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
 ```
 
@@ -234,7 +234,7 @@ module _
     (H : f ~ g) (K : g ~ h) (S : UU l3) →
     htpy-postcomp S (H ∙h K) ~ htpy-postcomp S H ∙h htpy-postcomp S K
   distributive-htpy-postcomp-concat-htpy H K S i =
-    ( ap eq-htpy (eq-htpy (distributive-right-whisk-concat-htpy i H K))) ∙
+    ( ap eq-htpy (eq-htpy (distributive-right-whisker-concat-htpy i H K))) ∙
     ( eq-htpy-concat-htpy (H ·r i) (K ·r i))
 ```
 
@@ -269,11 +269,11 @@ module _
     ind-htpy f
       ( λ f' F →
         htpy-precomp F Y ·r postcomp B g ~ postcomp A g ·l htpy-precomp F X)
-      ( ( ap-right-whisk-htpy
+      ( ( ap-right-whisker-htpy
           ( compute-htpy-precomp-refl-htpy f Y)
           ( postcomp B g)) ∙h
         ( inv-htpy
-          ( ap-left-whisk-htpy
+          ( ap-left-whisker-htpy
             ( postcomp A g)
             ( compute-htpy-precomp-refl-htpy f X))))
 
@@ -284,11 +284,11 @@ module _
     ind-htpy g
       ( λ g' G →
         htpy-postcomp A G ·r precomp f X ~ precomp f Y ·l htpy-postcomp B G)
-      ( ( ap-right-whisk-htpy
+      ( ( ap-right-whisker-htpy
           ( compute-htpy-postcomp-refl-htpy A g)
           ( precomp f X)) ∙h
         ( inv-htpy
-          ( ap-left-whisk-htpy
+          ( ap-left-whisker-htpy
             ( precomp f Y)
             ( compute-htpy-postcomp-refl-htpy B g))))
 
@@ -310,14 +310,14 @@ module _
           htpy-precomp F Y ·r postcomp B g'))
       ( ( ap-concat-htpy
           ( postcomp A g ·l htpy-precomp F X)
-          ( ap-right-whisk-htpy
+          ( ap-right-whisker-htpy
             ( compute-htpy-postcomp-refl-htpy A g)
             ( precomp f' X))) ∙h
         ( right-unit-htpy) ∙h
         ( inv-htpy (commutative-postcomp-htpy-precomp g F)) ∙h
         ( ap-concat-htpy'
           ( htpy-precomp F Y ·r postcomp B g)
-          ( ap-left-whisk-htpy
+          ( ap-left-whisker-htpy
             ( precomp f Y)
             ( inv-htpy (compute-htpy-postcomp-refl-htpy B g)))))
 ```

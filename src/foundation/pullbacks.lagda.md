@@ -525,7 +525,7 @@ module _
         ( concat (tr-tr-refl-htpy-cone c) c')) ~
       ( htpy-eq-square c c')
     left-map-triangle-parallel-cone-eq' c c' =
-      ( htpy-right-whisk
+      ( htpy-right-whisker
         ( multivariable-htpy-eq 3
           ( compute-ind-htpy g
             ( λ g'' Hg' →
@@ -568,7 +568,7 @@ module _
         ( concat (tr-tr-refl-htpy-cone c) c') ~
       ( htpy-eq-square c c')
     left-map-triangle-parallel-cone-eq c c' =
-      ( htpy-right-whisk
+      ( htpy-right-whisker
         ( multivariable-htpy-eq 5
           ( compute-ind-htpy f
             ( λ f'' Hf' →

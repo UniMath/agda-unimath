@@ -443,7 +443,7 @@ module _
       ( htpy-domain-left-whisker-htpy-hom-arrow)
       ( htpy-codomain-left-whisker-htpy-hom-arrow)
   coh-left-whisker-htpy-hom-arrow a =
-    ( left-whisk-triangle-identifications'
+    ( left-whisker-triangle-identifications'
       ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
       ( ( ap
           ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a) ∙_)
@@ -454,7 +454,7 @@ module _
         ( nat-htpy
           ( coh-hom-arrow g h γ)
           ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
-    ( right-whisk-square-identification
+    ( right-whisker-square-identification
       ( ap
         ( map-codomain-hom-arrow g h γ)
         ( htpy-codomain-htpy-hom-arrow f g α β H (f a)))

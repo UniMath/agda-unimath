@@ -95,17 +95,17 @@ right-unit-law-horizontal-concat-Ω² :
 right-unit-law-horizontal-concat-Ω² {α = α} =
   ( right-unit-law-horizontal-concat-Id² α) ∙ (naturality-right-unit-Ω² α)
 
-left-unit-law-identification-left-whisk-Ω² :
+left-unit-law-identification-left-whisker-Ω² :
   {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
-  identification-left-whisk (refl-Ω (pair A a)) α ＝ α
-left-unit-law-identification-left-whisk-Ω² α =
-  left-unit-law-identification-left-whisk α
+  identification-left-whisker (refl-Ω (pair A a)) α ＝ α
+left-unit-law-identification-left-whisker-Ω² α =
+  left-unit-law-identification-left-whisker α
 
-right-unit-law-identification-right-whisk-Ω² :
+right-unit-law-identification-right-whisker-Ω² :
   {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
-  identification-right-whisk α (refl-Ω (pair A a)) ＝ α
-right-unit-law-identification-right-whisk-Ω² α =
-  (right-unit-law-identification-right-whisk α) ∙ right-unit
+  identification-right-whisker α (refl-Ω (pair A a)) ＝ α
+right-unit-law-identification-right-whisker-Ω² α =
+  (right-unit-law-identification-right-whisker α) ∙ right-unit
 ```
 
 ### The interchange law for double loop spaces

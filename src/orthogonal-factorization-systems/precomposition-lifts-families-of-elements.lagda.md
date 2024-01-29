@@ -179,7 +179,7 @@ module _
   coherence-triangle-precomp-lift-family-of-elements-refl-htpy b =
     ( htpy-eq (compute-triangle-precomp-lift-family-of-elements-htpy B a) b) ∙
     ( inv right-unit) ∙
-    ( identification-left-whisk
+    ( identification-left-whisker
       ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy B a b)
       ( inv (eq-htpy-refl-htpy (b ∘ f))))
 
@@ -335,7 +335,7 @@ module _
     statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
       ( refl-htpy)
   coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ-refl-htpy =
-    ( ap-left-whisk-htpy
+    ( ap-left-whisker-htpy
       ( map-inv-distributive-Π-Σ)
       ( compute-htpy-precomp-lifted-family-of-elements B)) ∙h
     ( inv-htpy

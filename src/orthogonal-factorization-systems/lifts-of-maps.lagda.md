@@ -139,8 +139,8 @@ module _
   {i : A → B} {f : X → B} {g : X → A}
   where
 
-  is-lift-left-whisk : (h : B → S) → is-lift i f g → is-lift (h ∘ i) (h ∘ f) g
-  is-lift-left-whisk h H x = ap h (H x)
+  is-lift-left-whisker : (h : B → S) → is-lift i f g → is-lift (h ∘ i) (h ∘ f) g
+  is-lift-left-whisker h H x = ap h (H x)
 ```
 
 ## Right whiskering of lifts of maps
@@ -160,8 +160,8 @@ module _
   {i : A → B} {f : X → B} {g : X → A}
   where
 
-  is-lift-right-whisk : is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
-  is-lift-right-whisk H h s = H (h s)
+  is-lift-right-whisker : is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
+  is-lift-right-whisker H h s = H (h s)
 ```
 
 ## Properties

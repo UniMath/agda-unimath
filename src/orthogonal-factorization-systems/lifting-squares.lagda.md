@@ -158,8 +158,8 @@ module _
       ( g ·l is-extension-lifting-square l)
       ( is-lift-lifting-square l' ·r f)
       ( coherence-lifting-square l)
-      ( left-whisk-coherence-triangle-homotopies (K ·r f) g E)
-      ( right-whisk-coherence-triangle-homotopies (g ·l K) L f)
+      ( left-whisker-coherence-triangle-homotopies (K ·r f) g E)
+      ( right-whisker-coherence-triangle-homotopies (g ·l K) L f)
       ( coherence-lifting-square l')
 
   htpy-lifting-square :

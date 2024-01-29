@@ -72,7 +72,7 @@ compute-concat-htpy-precomp :
 compute-concat-htpy-precomp H K C k =
   ( ap
     ( eq-htpy)
-    ( eq-htpy (distributive-left-whisk-concat-htpy k H K))) ∙
+    ( eq-htpy (distributive-left-whisker-concat-htpy k H K))) ∙
   ( eq-htpy-concat-htpy (k ·l H) (k ·l K))
 ```
 

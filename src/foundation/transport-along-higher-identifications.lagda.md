@@ -51,7 +51,7 @@ module _
     coherence-square-identifications
       ( tr-Id-right q p)
       ( tr² (Id a) α p)
-      ( identification-left-whisk p α)
+      ( identification-left-whisker p α)
       ( tr-Id-right q' p)
   tr²-Id-right α p =
     inv-nat-htpy (λ (t : b ＝ c) → tr-Id-right t p) α
@@ -75,23 +75,23 @@ module _
   {B : A → UU l2}
   where
 
-  tr²-left-whisk :
+  tr²-left-whisker :
     (p : x ＝ y) {q q' : y ＝ z} (β : q ＝ q') (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (identification-left-whisk p β) b)
-      ( htpy-right-whisk (tr² B β) (tr B p) b)
+      ( tr² B (identification-left-whisker p β) b)
+      ( htpy-right-whisker (tr² B β) (tr B p) b)
       ( tr-concat p q' b)
-  tr²-left-whisk refl refl b = refl
+  tr²-left-whisker refl refl b = refl
 
-  tr²-right-whisk :
+  tr²-right-whisker :
     {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (identification-right-whisk α q) b)
-      ( htpy-left-whisk (tr B q) (tr² B α) b)
+      ( tr² B (identification-right-whisker α q) b)
+      ( htpy-left-whisker (tr B q) (tr² B α) b)
       ( tr-concat p' q b)
-  tr²-right-whisk refl refl b = inv right-unit
+  tr²-right-whisker refl refl b = inv right-unit
 ```
 
 #### Coherences and algebraic identities for `tr³`
@@ -105,43 +105,43 @@ module _
   tr³-htpy-swap-path-swap :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
     coherence-square-identifications
-      ( ( identification-right-whisk
-          ( tr²-concat (identification-left-whisk p β)
-          ( identification-right-whisk α q') b)
+      ( ( identification-right-whisker
+          ( tr²-concat (identification-left-whisker p β)
+          ( identification-right-whisker α q') b)
           ( tr-concat p' q' b)) ∙
         ( vertical-concat-square
-          ( tr² B (identification-left-whisk p β) b)
-          ( tr² B (identification-right-whisk α q') b)
+          ( tr² B (identification-left-whisker p β) b)
+          ( tr² B (identification-right-whisker α q') b)
           ( tr-concat p' q' b)
           ( tr-concat p q' b)
           ( tr-concat p q b)
-          ( htpy-right-whisk (tr² B β) (tr B p) b)
-          ( htpy-left-whisk (tr B q') (tr² B α) b)
-          ( tr²-left-whisk p β b)
-          ( tr²-right-whisk α q' b)))
-      ( identification-right-whisk
+          ( htpy-right-whisker (tr² B β) (tr B p) b)
+          ( htpy-left-whisker (tr B q') (tr² B α) b)
+          ( tr²-left-whisker p β b)
+          ( tr²-right-whisker α q' b)))
+      ( identification-right-whisker
         ( tr³
           ( B)
-          ( path-swap-nat-identification-left-whisk β α)
+          ( path-swap-nat-identification-left-whisker β α)
           ( b))
         ( tr-concat p' q' b))
-      ( identification-left-whisk
+      ( identification-left-whisker
         ( tr-concat p q b)
         ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
-      ( ( identification-right-whisk
+      ( ( identification-right-whisker
           ( tr²-concat
-            ( identification-right-whisk α q)
-            ( identification-left-whisk p' β) b)
+            ( identification-right-whisker α q)
+            ( identification-left-whisker p' β) b)
           ( tr-concat p' q' b)) ∙
         ( vertical-concat-square
-          ( tr² B (identification-right-whisk α q) b)
-          ( tr² B (identification-left-whisk p' β) b)
+          ( tr² B (identification-right-whisker α q) b)
+          ( tr² B (identification-left-whisker p' β) b)
           ( tr-concat p' q' b)
           ( tr-concat p' q b)
           ( tr-concat p q b)
-          ( htpy-left-whisk (tr B q) (tr² B α) b)
-          ( htpy-right-whisk (tr² B β) (tr B p') b)
-          ( tr²-right-whisk α q b)
-          ( tr²-left-whisk p' β b)))
+          ( htpy-left-whisker (tr B q) (tr² B α) b)
+          ( htpy-right-whisker (tr² B β) (tr B p') b)
+          ( tr²-right-whisker α q b)
+          ( tr²-left-whisker p' β b)))
   tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
 ```

@@ -325,7 +325,7 @@ module _
               ( ap bottom (is-section-map-inv-equiv left (map-equiv left a)))))
           ( ap (map-inv-equiv right) (H a))
           ( is-retraction-map-inv-equiv right (top a))) ∙
-        ( left-whisk-square-identification
+        ( left-whisker-square-identification
           ( map-eq-transpose-equiv
             ( right)
             ( inv (H (map-inv-equiv left (map-equiv left a)))))
@@ -484,13 +484,13 @@ module _
   assoc-pasting-vertical-coherence-square-maps =
     ( ap-concat-htpy
       ( sq-bottom ·r mid-left ·r top-left)
-      ( ( distributive-left-whisk-concat-htpy
+      ( ( distributive-left-whisker-concat-htpy
           ( bottom-right)
           ( sq-mid ·r top-left)
           ( mid-right ·l sq-top)) ∙h
         ( ap-concat-htpy
           ( bottom-right ·l (sq-mid ·r top-left))
-          ( associative-left-whisk-comp bottom-right mid-right sq-top)))) ∙h
+          ( associative-left-whisker-comp bottom-right mid-right sq-top)))) ∙h
     ( inv-htpy-assoc-htpy
       ( sq-bottom ·r mid-left ·r top-left)
       ( bottom-right ·l (sq-mid ·r top-left))
@@ -675,11 +675,11 @@ module _
         ( sq-right-bottom)))
   commutative-pasting-vertical-pasting-horizontal-coherence-square-maps =
     ( ap-concat-htpy' _
-      ( distributive-left-whisk-concat-htpy
+      ( distributive-left-whisker-concat-htpy
         ( bottom-right)
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
-      ( both-whisk-square-htpy
+      ( both-whisker-square-htpy
         ( bottom-right ·l (sq-left-bottom ·r left-top))
         ( right-bottom ·l (sq-right-top ·r top-left))
         ( inv-htpy
@@ -696,7 +696,7 @@ module _
             ( sq-right-bottom))))) ∙h
       ( ap-concat-htpy _
         ( inv-htpy
-          ( distributive-left-whisk-concat-htpy
+          ( distributive-left-whisker-concat-htpy
             ( right-bottom)
             ( mid-right ·l sq-left-top)
             ( sq-right-top ·r top-left))))
@@ -809,7 +809,7 @@ module _
         ap
           ( eq-htpy)
           ( eq-htpy
-            ( distributive-left-whisk-concat-htpy
+            ( distributive-left-whisker-concat-htpy
               ( h)
               ( bottom-right ·l H)
               ( K ·r top-left)))
@@ -829,8 +829,8 @@ module _
         by
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
-          ( eq-htpy (associative-left-whisk-comp h bottom-right H))
-          ( compute-eq-htpy-right-whisk
+          ( eq-htpy (associative-left-whisker-comp h bottom-right H))
+          ( compute-eq-htpy-right-whisker
             ( top-left)
             ( h ·l K))
 
@@ -897,7 +897,7 @@ module _
         ap
           ( eq-htpy)
           ( eq-htpy
-            ( distributive-left-whisk-concat-htpy
+            ( distributive-left-whisker-concat-htpy
             ( h)
             ( K ·r left-top)
             ( right-bottom ·l H)))
@@ -917,8 +917,8 @@ module _
         by
         ap-binary
           ( λ p L → p ∙ eq-htpy L)
-          ( compute-eq-htpy-right-whisk left-top (h ·l K))
-          ( eq-htpy (associative-left-whisk-comp h right-bottom H))
+          ( compute-eq-htpy-right-whisker left-top (h ·l K))
+          ( eq-htpy (associative-left-whisker-comp h right-bottom H))
 ```
 
 ### Transposing by precomposition of whiskered squares
@@ -956,7 +956,7 @@ module _
   ( H : coherence-square-maps top left right bottom)
   where
 
-  distributive-precomp-right-whisk-coherence-square-maps :
+  distributive-precomp-right-whisker-coherence-square-maps :
     ( f : X → A) →
     precomp-coherence-square-maps
       ( top ∘ f)
@@ -967,15 +967,15 @@ module _
       ( W) ~
     ( ( precomp f W) ·l
       ( precomp-coherence-square-maps top left right bottom H W))
-  distributive-precomp-right-whisk-coherence-square-maps f g =
-    compute-eq-htpy-right-whisk f (g ·l H)
+  distributive-precomp-right-whisker-coherence-square-maps f g =
+    compute-eq-htpy-right-whisker f (g ·l H)
 ```
 
 Similarly, we can calculate transpositions of left-whiskered squares with the
 formula `W^(f ·l H) = W^H ·r W^f`.
 
 ```agda
-  distributive-precomp-left-whisk-coherence-square-maps :
+  distributive-precomp-left-whisker-coherence-square-maps :
     ( f : D → X) →
     precomp-coherence-square-maps
       ( top)
@@ -986,7 +986,7 @@ formula `W^(f ·l H) = W^H ·r W^f`.
       ( W) ~
     ( ( precomp-coherence-square-maps top left right bottom H W) ·r
       ( precomp f W))
-  distributive-precomp-left-whisk-coherence-square-maps f g =
+  distributive-precomp-left-whisker-coherence-square-maps f g =
     ap eq-htpy (eq-htpy (λ a → inv (ap-comp g f (H a))))
 ```
 

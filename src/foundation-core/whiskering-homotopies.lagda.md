@@ -58,13 +58,13 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  htpy-left-whisk :
+  htpy-left-whisker :
     (h : {x : A} → B x → C x)
     {f g : (x : A) → B x} → f ~ g → h ∘ f ~ h ∘ g
-  htpy-left-whisk h H x = ap h (H x)
+  htpy-left-whisker h H x = ap h (H x)
 
   infixr 17 _·l_
-  _·l_ = htpy-left-whisk
+  _·l_ = htpy-left-whisker
 ```
 
 ### Right whiskering of homotopies
@@ -74,14 +74,14 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   where
 
-  htpy-right-whisk :
+  htpy-right-whisker :
     {g h : {x : A} (y : B x) → C x y}
     (H : {x : A} → g {x} ~ h {x})
     (f : (x : A) → B x) → g ∘ f ~ h ∘ f
-  htpy-right-whisk H f x = H (f x)
+  htpy-right-whisker H f x = H (f x)
 
   infixl 16 _·r_
-  _·r_ = htpy-right-whisk
+  _·r_ = htpy-right-whisker
 ```
 
 ### Horizontal composition of homotopies
@@ -112,35 +112,35 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  left-unit-law-left-whisk-htpy :
+  left-unit-law-left-whisker-htpy :
     {f f' : (x : A) → B x} → (H : f ~ f') → id ·l H ~ H
-  left-unit-law-left-whisk-htpy H x = ap-id (H x)
+  left-unit-law-left-whisker-htpy H x = ap-id (H x)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  right-unit-law-left-whisk-htpy :
+  right-unit-law-left-whisker-htpy :
     {f : (x : A) → B x} (g : {x : A} → B x → C x) →
     g ·l refl-htpy {f = f} ~ refl-htpy
-  right-unit-law-left-whisk-htpy g = refl-htpy
+  right-unit-law-left-whisker-htpy g = refl-htpy
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   where
 
-  left-unit-law-right-whisk-htpy :
+  left-unit-law-right-whisker-htpy :
     {g : {x : A} (y : B x) → C x y} (f : (x : A) → B x) →
     refl-htpy {f = g} ·r f ~ refl-htpy
-  left-unit-law-right-whisk-htpy f = refl-htpy
+  left-unit-law-right-whisker-htpy f = refl-htpy
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  right-unit-law-right-whisk-htpy :
+  right-unit-law-right-whisker-htpy :
     {f f' : (x : A) → B x} → (H : f ~ f') → H ·r id ~ H
-  right-unit-law-right-whisk-htpy H = refl-htpy
+  right-unit-law-right-whisker-htpy H = refl-htpy
 ```
 
 ### Laws for whiskering an inverted homotopy
@@ -151,11 +151,11 @@ module _
   {f f' : (x : A) → B x} (g : {x : A} → B x → C x) (H : f ~ f')
   where
 
-  left-whisk-inv-htpy : g ·l (inv-htpy H) ~ inv-htpy (g ·l H)
-  left-whisk-inv-htpy x = ap-inv g (H x)
+  left-whisker-inv-htpy : g ·l (inv-htpy H) ~ inv-htpy (g ·l H)
+  left-whisker-inv-htpy x = ap-inv g (H x)
 
-  inv-htpy-left-whisk-inv-htpy : inv-htpy (g ·l H) ~ g ·l (inv-htpy H)
-  inv-htpy-left-whisk-inv-htpy = inv-htpy left-whisk-inv-htpy
+  inv-htpy-left-whisker-inv-htpy : inv-htpy (g ·l H) ~ g ·l (inv-htpy H)
+  inv-htpy-left-whisker-inv-htpy = inv-htpy left-whisker-inv-htpy
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
@@ -163,11 +163,11 @@ module _
   (f : (x : A) → B x)
   where
 
-  right-whisk-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
-  right-whisk-inv-htpy = refl-htpy
+  right-whisker-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
+  right-whisker-inv-htpy = refl-htpy
 
-  inv-htpy-right-whisk-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
-  inv-htpy-right-whisk-inv-htpy = inv-htpy right-whisk-inv-htpy
+  inv-htpy-right-whisker-inv-htpy : inv-htpy H ·r f ~ inv-htpy (H ·r f)
+  inv-htpy-right-whisker-inv-htpy = inv-htpy right-whisker-inv-htpy
 ```
 
 ### Distributivity of whiskering over composition of homotopies
@@ -177,11 +177,11 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  distributive-left-whisk-concat-htpy :
+  distributive-left-whisker-concat-htpy :
     { f g h : (x : A) → B x} (k : {x : A} → B x → C x) →
     ( H : f ~ g) (K : g ~ h) →
     k ·l (H ∙h K) ~ (k ·l H) ∙h (k ·l K)
-  distributive-left-whisk-concat-htpy k H K a =
+  distributive-left-whisker-concat-htpy k H K a =
     ap-concat k (H a) (K a)
 
 module _
@@ -190,9 +190,9 @@ module _
   (H : {x : A} → f {x} ~ g {x}) (K : {x : A} → g {x} ~ h {x})
   where
 
-  distributive-right-whisk-concat-htpy :
+  distributive-right-whisker-concat-htpy :
     (H ∙h K) ·r k ~ (H ·r k) ∙h (K ·r k)
-  distributive-right-whisk-concat-htpy = refl-htpy
+  distributive-right-whisker-concat-htpy = refl-htpy
 ```
 
 ### Associativity of whiskering and function composition
@@ -203,11 +203,11 @@ module _
   {A : UU l1} {B : A → UU l2} {C : A → UU l3} {D : A → UU l4}
   where
 
-  associative-left-whisk-comp :
+  associative-left-whisker-comp :
     ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
     ( H : f ~ g) →
     k ·l (h ·l H) ~ (k ∘ h) ·l H
-  associative-left-whisk-comp k h H x = inv (ap-comp k h (H x))
+  associative-left-whisker-comp k h H x = inv (ap-comp k h (H x))
 
 module _
   { l1 l2 l3 l4 : Level}
@@ -218,8 +218,8 @@ module _
   ( H : {x : A} {y : B x} → f {x} {y} ~ g {x} {y})
   where
 
-  associative-right-whisk-comp : (H ·r h) ·r k ~ H ·r (h ∘ k)
-  associative-right-whisk-comp = refl-htpy
+  associative-right-whisker-comp : (H ·r h) ·r k ~ H ·r (h ∘ k)
+  associative-right-whisker-comp = refl-htpy
 ```
 
 ### A coherence for homotopies to the identity function
@@ -244,18 +244,18 @@ module _
   {f g : (x : A) → B x}
   where
 
-  ap-left-whisk-htpy :
+  ap-left-whisker-htpy :
     (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
-  ap-left-whisk-htpy h α = (ap h) ·l α
+  ap-left-whisker-htpy h α = (ap h) ·l α
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
   where
 
-  ap-right-whisk-htpy :
+  ap-right-whisker-htpy :
     (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
-  ap-right-whisk-htpy α h = α ·r h
+  ap-right-whisker-htpy α h = α ·r h
 ```
 
 ### The left and right whiskering operations commute
@@ -276,12 +276,12 @@ module _
   {f g : {x : A} (y : B x) → C y}
   where
 
-  coherence-left-right-whisk-htpy :
+  coherence-left-right-whisker-htpy :
     (h : {x : A} {y : B x} → C y → D y)
     (H : {x : A} → f {x} ~ g {x})
     (h' : (x : A) → B x) →
     (h ·l H) ·r h' ~ h ·l (H ·r h')
-  coherence-left-right-whisk-htpy h H h' = refl-htpy
+  coherence-left-right-whisker-htpy h H h' = refl-htpy
 ```
 
 ## See also
