@@ -362,9 +362,13 @@ module _
         ( htpy-domain-htpy-hom-arrow f g α β H a)
         ( htpy-domain-htpy-hom-arrow f g β γ K a))) ∙
     ( coherence-square-identifications-comp-horizontal
+      ( htpy-codomain-htpy-hom-arrow f g α β H (f a))
+      ( htpy-codomain-htpy-hom-arrow f g β γ K (f a))
       ( coh-hom-arrow f g α a)
       ( coh-hom-arrow f g β a)
       ( coh-hom-arrow f g γ a)
+      ( (g ·l htpy-domain-htpy-hom-arrow f g α β H) a)
+      ( (g ·l htpy-domain-htpy-hom-arrow f g β γ K) a)
       ( coh-htpy-hom-arrow f g α β H a)
       ( coh-htpy-hom-arrow f g β γ K a))
 

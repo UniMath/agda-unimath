@@ -1,6 +1,8 @@
 # Commuting squares of maps
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.commuting-squares-of-maps where
 
 open import foundation-core.commuting-squares-of-maps public
@@ -155,34 +157,27 @@ coherence-square-inv-all top left right bottom H =
 Every commuting square
 
 ```text
-             top
-    A -----------------> X
-    |                    |
-    |                    |
-   left       ⇗        right
-    |                    |
-    v                    v
-    B -----------------> Y
-            bottom
+            top
+       A --------> X
+       |           |
+  left |           | right
+       ∨           ∨
+       B --------> Y
+          bottom
 ```
 
 induces a commuting square of
 [precomposition functions](foundation-core.precomposition-functions.md)
 
 ```text
-              precomp bottom S
-      (A → S) ----------------> (B → S)
-        |                         |
-        |                         |
- precomp right S     ⇙     precomp left S
-        |                         |
-        v                         v
-      (X → S) ----------------> (Y → S)
-                precomp top S
+                         precomp right S
+                (A → S) -----------------> (X → S)
+                   |                           |
+  precomp bottom S |                           | precomp top S
+                   ∨                           ∨
+                (B → S) ------------------> (Y → S).
+                          precomp left S
 ```
-
-Note both that the order of composition has been flipped as well as the
-direction of the homotopy.
 
 ```agda
 module _
@@ -217,30 +212,26 @@ module _
 Every commuting square
 
 ```text
-             top
-    A -----------------> X
-    |                    |
-    |                    |
-   left       ⇗        right
-    |                    |
-    v                    v
-    B -----------------> Y
-            bottom
+            top
+       A --------> X
+       |           |
+  left |           | right
+       ∨           ∨
+       B --------> Y
+          bottom
 ```
 
 induces a commuting square of
 [postcomposition functions](foundation-core.postcomposition-functions.md)
 
 ```text
-              postcomp S top
-     (S → A) ----------------> (S → X)
-        |                         |
-        |                         |
- postcomp S left     ⇗     postcomp S right
-        |                         |
-        v                         v
-     (S → B) ----------------> (S → Y)
-             postcomp S bottom
+                        postcomp S top
+              (S → A) ------------------> (S → X)
+                 |                           |
+ postcomp S left |                           | postcomp S right
+                 ∨                           ∨
+              (S → B) ------------------> (S → Y).
+                       postcomp S bottom
 ```
 
 ```agda
@@ -330,17 +321,24 @@ module _
             ( inv (H (map-inv-equiv left (map-equiv left a)))))
           ( inv
             ( coherence-square-identifications-comp-vertical
-              { p-left =
-                  ap
-                    ( map-inv-equiv right)
-                    ( H (map-inv-equiv left (map-equiv left a)))}
-              { p-top =
-                  ap
-                    ( map-inv-equiv right)
-                    ( ap
-                      ( bottom)
-                      ( is-section-map-inv-equiv left (map-equiv left a)))}
-              { q-bottom = ap top (is-retraction-map-inv-equiv left a)}
+              ( ap
+                ( map-inv-equiv right)
+                ( ap
+                  ( bottom)
+                  ( is-section-map-inv-equiv left (map-equiv left a))))
+              ( ap
+                ( map-inv-equiv right)
+                ( H (map-inv-equiv left (map-equiv left a))))
+              ( ap (map-inv-equiv right) (H a))
+              ( ap
+                ( map-inv-equiv right)
+                ( ap
+                  ( map-equiv right ∘ top)
+                  ( is-retraction-map-inv-equiv left a)))
+              ( is-retraction-map-inv-equiv right
+                ( top (map-inv-equiv left (map-equiv left a))))
+              ( is-retraction-map-inv-equiv right (top a))
+              ( ap top (is-retraction-map-inv-equiv left a))
               ( coherence-square-identifications-top-paste
                 ( ap
                   ( map-inv-equiv right)
