@@ -42,7 +42,8 @@ Consider two squares of identifications as in the diagram
           bottom-left      bottom-right
 ```
 
-with `s : left ∙ bottom-left ＝ top-left ∙ middle` and t : middle ∙ bottom-right ＝ top-right ∙ right`. Then the outer square commutes.
+with `s : left ∙ bottom-left ＝ top-left ∙ middle` and t : middle ∙ bottom-right
+＝ top-right ∙ right`. Then the outer square commutes.
 
 ```agda
 module _
