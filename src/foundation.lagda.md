@@ -14,6 +14,7 @@ open import foundation.action-on-equivalences-functions public
 open import foundation.action-on-equivalences-functions-out-of-subuniverses public
 open import foundation.action-on-equivalences-type-families public
 open import foundation.action-on-equivalences-type-families-over-subuniverses public
+open import foundation.action-on-higher-identifications-functions public
 open import foundation.action-on-homotopies-functions public
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public

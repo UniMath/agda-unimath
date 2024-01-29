@@ -22,6 +22,21 @@ open import foundation-core.identity-types
 
 ## Idea
 
+Any map `f : A → B` has an
+{{#concept "action on higher identifications" Disambiguation="functions" Agda=ap²}},
+which is a map
+
+```text
+  ap² f : (p ＝ q) → (ap f p ＝ ap f q)
+```
+
+Here `p q : x ＝ y` are identifications in the type `A`. The action of `f` on
+higher identifications is defined by
+
+```text
+  ap² f := ap (ap f).
+```
+
 ## Definitions
 
 ### The action of functions on higher identifications
@@ -40,7 +55,9 @@ module _
 
 ### The inverse law of the action of functions on higher identifications
 
-Consider an identification `α : p ＝ q` between two identifications `p q : x ＝ y` in a type `A`, and consider a map `f : A → B`. Then the square of identifications
+Consider an identification `α : p ＝ q` between two identifications
+`p q : x ＝ y` in a type `A`, and consider a map `f : A → B`. Then the square of
+identifications
 
 ```text
                       ap² f (horizontal-inv-Id² α)
@@ -74,7 +91,8 @@ module _
 
 ### The action of the identity function on higher identifications is trivial
 
-Consider an identification `α : p ＝ q` between two identifications `p q : x ＝ y` in a type `A`. Then the square of identifications
+Consider an identification `α : p ＝ q` between two identifications
+`p q : x ＝ y` in a type `A`. Then the square of identifications
 
 ```text
                 ap² id α
@@ -102,7 +120,9 @@ module _
 
 ### The action of a composite function on higher identifications
 
-Consider an identification `α : p ＝ q` between two identifications `p q : x ＝ y` in a type `A` and consider two functions `f : A → B` and `g : B → C`. Then the square of identifications
+Consider an identification `α : p ＝ q` between two identifications
+`p q : x ＝ y` in a type `A` and consider two functions `f : A → B` and
+`g : B → C`. Then the square of identifications
 
 ```text
                          ap² (g ∘ f) α
@@ -135,7 +155,9 @@ module _
 
 ### The action of a constant function on higher identifications is constant
 
-Consider an identification `α : p ＝ q` between two identifications `p q : x ＝ y` in a type `A` and consider an element `b : B`. Then the triangle of identifications
+Consider an identification `α : p ＝ q` between two identifications
+`p q : x ＝ y` in a type `A` and consider an element `b : B`. Then the triangle
+of identifications
 
 ```text
                  ap² (const b) α
