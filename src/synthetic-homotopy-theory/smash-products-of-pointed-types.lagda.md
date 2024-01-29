@@ -162,7 +162,7 @@ module _
       ( map-pointed-map {A = A ∨∗ B} {B = unit-Pointed-Type}
         ( terminal-pointed-map (A ∨∗ B)))
       ( x)) ∙
-    ( htpy-right-whisker
+    ( right-whisker-htpy
       ( htpy-pointed-htpy
         ( inr-pushout-Pointed-Type
           ( pointed-map-prod-wedge-Pointed-Type A B)

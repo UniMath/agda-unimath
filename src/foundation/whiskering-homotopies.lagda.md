@@ -76,10 +76,10 @@ module _
   compute-eq-htpy-htpy-eq-right-whisker refl =
     eq-htpy-refl-htpy (f ∘ h)
 
-  compute-eq-htpy-right-whisker :
+  compute-eq-right-whisker-htpy :
     ( H : f ~ g) →
     eq-htpy (H ·r h) ＝ ap (precomp h C) (eq-htpy H)
-  compute-eq-htpy-right-whisker H =
+  compute-eq-right-whisker-htpy H =
     ( ap
       ( λ K → eq-htpy (K ·r h))
       ( inv (is-section-eq-htpy H))) ∙
@@ -97,10 +97,10 @@ module _
   compute-eq-htpy-htpy-eq-left-whisker refl =
     eq-htpy-refl-htpy (h ∘ f)
 
-  compute-eq-htpy-left-whisker :
+  compute-eq-left-whisker-htpy :
     (H : f ~ g) →
     eq-htpy (h ·l H) ＝ ap (postcomp A h) (eq-htpy H)
-  compute-eq-htpy-left-whisker H =
+  compute-eq-left-whisker-htpy H =
     ( ap
       ( λ K → eq-htpy (h ·l K))
       ( inv (is-section-eq-htpy H))) ∙

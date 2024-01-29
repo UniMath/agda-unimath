@@ -47,16 +47,16 @@ abstract
               ( λ s →
                 Σ ( ( map-section f s ∘ f) ~ id)
                   ( λ H →
-                    ( htpy-right-whisker (is-section-map-section f s) f) ~
-                    ( htpy-left-whisker f H))))
+                    ( right-whisker-htpy (is-section-map-section f s) f) ~
+                    ( left-whisker-htpy f H))))
           ( associative-Σ
             ( B → A)
             ( λ g → (f ∘ g) ~ id)
             ( λ s →
               Σ ( ( map-section f s ∘ f) ~ id)
                 ( λ H →
-                  ( htpy-right-whisker (is-section-map-section f s) f) ~
-                  ( htpy-left-whisker f H))))
+                  ( right-whisker-htpy (is-section-map-section f s) f) ~
+                  ( left-whisker-htpy f H))))
           ( is-contr-Σ
             ( is-contr-section-is-equiv (is-equiv-is-coherently-invertible H))
             ( section-is-coherently-invertible H)

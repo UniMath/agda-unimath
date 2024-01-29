@@ -292,8 +292,8 @@ htpy-swap-nat-right-htpy :
   {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
   {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
   (H : f ~ g) →
-  (htpy-right-whisker H' f ∙h htpy-left-whisker g' H) ~
-  (htpy-left-whisker f' H ∙h htpy-right-whisker H' g)
+  (right-whisker-htpy H' f ∙h left-whisker-htpy g' H) ~
+  (left-whisker-htpy f' H ∙h right-whisker-htpy H' g)
 htpy-swap-nat-right-htpy H' H x =
     nat-htpy H' (H x)
 

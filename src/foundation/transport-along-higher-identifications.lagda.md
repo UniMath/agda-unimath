@@ -80,7 +80,7 @@ module _
     coherence-square-identifications
       ( tr-concat p q b)
       ( tr² B (identification-left-whisker p β) b)
-      ( htpy-right-whisker (tr² B β) (tr B p) b)
+      ( right-whisker-htpy (tr² B β) (tr B p) b)
       ( tr-concat p q' b)
   tr²-left-whisker refl refl b = refl
 
@@ -89,7 +89,7 @@ module _
     coherence-square-identifications
       ( tr-concat p q b)
       ( tr² B (identification-right-whisker α q) b)
-      ( htpy-left-whisker (tr B q) (tr² B α) b)
+      ( left-whisker-htpy (tr B q) (tr² B α) b)
       ( tr-concat p' q b)
   tr²-right-whisker refl refl b = inv right-unit
 ```
@@ -115,8 +115,8 @@ module _
           ( tr-concat p' q' b)
           ( tr-concat p q' b)
           ( tr-concat p q b)
-          ( htpy-right-whisker (tr² B β) (tr B p) b)
-          ( htpy-left-whisker (tr B q') (tr² B α) b)
+          ( right-whisker-htpy (tr² B β) (tr B p) b)
+          ( left-whisker-htpy (tr B q') (tr² B α) b)
           ( tr²-left-whisker p β b)
           ( tr²-right-whisker α q' b)))
       ( identification-right-whisker
@@ -139,8 +139,8 @@ module _
           ( tr-concat p' q' b)
           ( tr-concat p' q b)
           ( tr-concat p q b)
-          ( htpy-left-whisker (tr B q) (tr² B α) b)
-          ( htpy-right-whisker (tr² B β) (tr B p') b)
+          ( left-whisker-htpy (tr B q) (tr² B α) b)
+          ( right-whisker-htpy (tr² B β) (tr B p') b)
           ( tr²-right-whisker α q b)
           ( tr²-left-whisker p' β b)))
   tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl

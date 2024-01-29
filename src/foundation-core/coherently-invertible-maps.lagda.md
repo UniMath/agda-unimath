@@ -155,7 +155,7 @@ module _
                   ( coh-is-coherently-invertible-id
                     ( is-section-is-invertible H) x))))
             ( nat-htpy
-              ( htpy-right-whisker (is-retraction-is-invertible H) f)
+              ( right-whisker-htpy (is-retraction-is-invertible H) f)
               ( is-section-is-invertible H x))))
 
   abstract
