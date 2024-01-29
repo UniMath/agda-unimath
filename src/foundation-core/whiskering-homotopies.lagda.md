@@ -203,11 +203,11 @@ module _
   {A : UU l1} {B : A → UU l2} {C : A → UU l3} {D : A → UU l4}
   where
 
-  associative-left-whisker-htpy :
+  preserves-comp-left-whisker-htpy :
     ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
     ( H : f ~ g) →
     k ·l (h ·l H) ~ (k ∘ h) ·l H
-  associative-left-whisker-htpy k h H x = inv (ap-comp k h (H x))
+  preserves-comp-left-whisker-htpy k h H x = inv (ap-comp k h (H x))
 
 module _
   { l1 l2 l3 l4 : Level}
@@ -218,8 +218,8 @@ module _
   ( H : {x : A} {y : B x} → f {x} {y} ~ g {x} {y})
   where
 
-  associative-right-whisker-htpy : (H ·r h) ·r k ~ H ·r (h ∘ k)
-  associative-right-whisker-htpy = refl-htpy
+  preserves-comp-right-whisker-htpy : (H ·r h) ·r k ~ H ·r (h ∘ k)
+  preserves-comp-right-whisker-htpy = refl-htpy
 ```
 
 ### A coherence for homotopies to the identity function
