@@ -105,7 +105,7 @@ module _
           ( prism-top)) ∙h
         ( ap-concat-htpy
           ( hC' ·l front-top)
-          ( associative-left-whisker-comp hC' hC top)))) ∙h
+          ( associative-left-whisker-htpy hC' hC top)))) ∙h
     ( inv-htpy-assoc-htpy
       ( front-bottom ·r hA)
       ( hC' ·l front-top)

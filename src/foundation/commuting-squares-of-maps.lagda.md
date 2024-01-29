@@ -490,7 +490,7 @@ module _
           ( mid-right ·l sq-top)) ∙h
         ( ap-concat-htpy
           ( bottom-right ·l (sq-mid ·r top-left))
-          ( associative-left-whisker-comp bottom-right mid-right sq-top)))) ∙h
+          ( associative-left-whisker-htpy bottom-right mid-right sq-top)))) ∙h
     ( inv-htpy-assoc-htpy
       ( sq-bottom ·r mid-left ·r top-left)
       ( bottom-right ·l (sq-mid ·r top-left))
@@ -829,7 +829,7 @@ module _
         by
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
-          ( eq-htpy (associative-left-whisker-comp h bottom-right H))
+          ( eq-htpy (associative-left-whisker-htpy h bottom-right H))
           ( compute-eq-right-whisker-htpy
             ( top-left)
             ( h ·l K))
@@ -918,7 +918,7 @@ module _
         ap-binary
           ( λ p L → p ∙ eq-htpy L)
           ( compute-eq-right-whisker-htpy left-top (h ·l K))
-          ( eq-htpy (associative-left-whisker-comp h right-bottom H))
+          ( eq-htpy (associative-left-whisker-htpy h right-bottom H))
 ```
 
 ### Transposing by precomposition of whiskered squares
