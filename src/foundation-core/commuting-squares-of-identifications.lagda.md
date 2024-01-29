@@ -110,9 +110,19 @@ module _
 
 ### Pasting of identifications along edges of squares of identifications
 
-Given a coherence square with an edge `p` and a new identification `s : p ＝ p'`
-then we may paste that identification onto the square to get a coherence square
-having `p'` as an edge instead of `p`.
+Consider a commuting square of identifications and an identification of one of the four sides with another identification, as for example in the diagram below:
+
+```text
+             top
+       a ---------> b
+       |           | |
+  left |     right |=| right'
+       ∨           ∨ ∨
+       c ---------> d.
+           bottom
+```
+
+Then any identification witnessing that the square commutes can be concatenated with the identification on the side, to obtain a new commuting square of identifications.
 
 ```agda
 module _
