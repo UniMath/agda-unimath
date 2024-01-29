@@ -1,7 +1,7 @@
 # Commuting squares of identifications
 
 ```agda
-module foundation.commuting-squares-of-identifications where
+module foundation-core.commuting-squares-of-identifications where
 ```
 
 <details><summary>Imports</summary>

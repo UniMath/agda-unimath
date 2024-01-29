@@ -8,11 +8,11 @@ module foundation.whiskering-identifications where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 ```

@@ -12,7 +12,7 @@ open import foundation-core.homotopies public
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation.commuting-squares-of-identifications
+open import foundation-core.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.homotopy-induction
 open import foundation.identity-types

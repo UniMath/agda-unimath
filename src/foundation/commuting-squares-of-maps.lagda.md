@@ -12,7 +12,7 @@ open import foundation-core.commuting-squares-of-maps public
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-identifications
+open import foundation-core.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-maps
 open import foundation.equivalences
 open import foundation.path-algebra
