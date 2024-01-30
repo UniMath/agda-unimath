@@ -461,18 +461,20 @@ compute-is-equivalence-injective-Fin-id-equiv {succ-ℕ n} =
 
 ### `Fin` is a preunivalent type family
 
-```agda
-is-retraction-is-equivalence-injective-Fin :
-  {n m : ℕ} →
-  is-retraction (equiv-tr Fin) (is-equivalence-injective-Fin {n} {m})
-is-retraction-is-equivalence-injective-Fin refl =
-  compute-is-equivalence-injective-Fin-id-equiv
+The proof does not rely on the (pre-)univalence axiom.
 
+```agda
 is-section-on-diagonal-is-equivalence-injective-Fin :
   {n : ℕ} →
   equiv-tr Fin (is-equivalence-injective-Fin {n} {n} id-equiv) ＝ id-equiv
 is-section-on-diagonal-is-equivalence-injective-Fin =
   ap (equiv-tr Fin) compute-is-equivalence-injective-Fin-id-equiv
+
+is-retraction-is-equivalence-injective-Fin :
+  {n m : ℕ} →
+  is-retraction (equiv-tr Fin) (is-equivalence-injective-Fin {n} {m})
+is-retraction-is-equivalence-injective-Fin refl =
+  compute-is-equivalence-injective-Fin-id-equiv
 
 retraction-equiv-tr-Fin : (n m : ℕ) → retraction (equiv-tr Fin {n} {m})
 pr1 (retraction-equiv-tr-Fin n m) = is-equivalence-injective-Fin
@@ -480,5 +482,5 @@ pr2 (retraction-equiv-tr-Fin n m) = is-retraction-is-equivalence-injective-Fin
 
 is-preunivalent-Fin : is-preunivalent Fin
 is-preunivalent-Fin =
-  is-preunivalent-retraction-equiv-tr Fin is-set-Fin retraction-equiv-tr-Fin
+  is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
 ```

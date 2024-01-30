@@ -76,7 +76,7 @@ univalent-type-family l2 A = Σ (A → UU l2) is-univalent
 
 ## Properties
 
-### Type families are univalent if and only if they are embeddings as maps
+### Assuming the univalence axiom, type families are univalent if and only if they are embeddings as maps
 
 **Proof:** We have the
 [commuting triangle of maps](foundation-core.commuting-triangles-of-maps.md)
