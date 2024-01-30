@@ -325,7 +325,7 @@ module _
       ( h)
       ( λ k p → eq-htpy (λ i → ap (f i) (p i)) ＝ ap (map-Π f) (eq-htpy p))
       ( eq-htpy-refl-htpy (map-Π f h) ∙
-        ap² (map-Π f) (inv (eq-htpy-refl-htpy h)))
+        inv (ap² (map-Π f) (eq-htpy-refl-htpy h)))
 ```
 
 ## See also

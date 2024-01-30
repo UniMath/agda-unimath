@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies
 open import foundation.whiskering-homotopies
 
 open import foundation-core.commuting-prisms-of-maps
@@ -350,7 +351,10 @@ module _
                 ( inv
                   ( ap
                     ( ap (map-inv-equiv right))
-                    ( ( ap² bottom (coherence-map-inv-equiv left a)) ∙
+                    ( ( left-whisker-htpy²
+                        ( bottom)
+                        ( coherence-map-inv-equiv left)
+                        ( a)) ∙
                       ( inv
                         ( ap-comp
                           ( bottom)
