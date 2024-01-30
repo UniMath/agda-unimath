@@ -47,7 +47,7 @@ is-preunivalent {A = A} B = (x y : A) → is-emb (λ (p : x ＝ y) → equiv-tr 
 
 ## Properties
 
-### Preunivalent type families are faithful as maps
+### Type families are preunivalent if and only if they are faithful as maps
 
 **Proof:** We have the
 [commuting triangle of maps](foundation-core.commuting-triangles-of-maps.md)

@@ -76,7 +76,7 @@ univalent-type-family l2 A = Σ (A → UU l2) is-univalent
 
 ## Properties
 
-### Univalent type families are embeddings as maps
+### Type families are univalent if and only if they are embeddings as maps
 
 **Proof:** We have the
 [commuting triangle of maps](foundation-core.commuting-triangles-of-maps.md)
@@ -147,7 +147,7 @@ module _
 
 ### Inclusions of subuniverses into the universe are univalent
 
-**Note.** The proof relies on essential use of the univalence axiom.
+**Note.** This proof relies on essential use of the univalence axiom.
 
 ```agda
 module _
