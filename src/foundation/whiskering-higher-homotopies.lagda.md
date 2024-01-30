@@ -18,13 +18,19 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-Consider two dependent functions `f g : (x : A) → B x` equipped with two homotopies `H H' : f ~ g`, and consider a family of maps `h : (x : A) → B x → C x`. Then we obtain a map
+Consider two dependent functions `f g : (x : A) → B x` equipped with two
+homotopies `H H' : f ~ g`, and consider a family of maps
+`h : (x : A) → B x → C x`. Then we obtain a map
 
 ```text
   α ↦ ap h ·l α : H ~ H' → h ·l H ~ h ·l H'
 ```
 
-This operation is called the {{#concept "left whiskering of 2-homotopies"}}. Alternatively the left whiskering operation of 2-homotopies can be defined using the [action on higher identifications of functions](foundation.action-on-higher-identifications-functions.md) by
+This operation is called the {{#concept "left whiskering of 2-homotopies"}}.
+Alternatively the left whiskering operation of 2-homotopies can be defined using
+the
+[action on higher identifications of functions](foundation.action-on-higher-identifications-functions.md)
+by
 
 ```text
   α x ↦ ap² h (α x).
