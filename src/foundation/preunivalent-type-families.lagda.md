@@ -10,11 +10,14 @@ module foundation.preunivalent-type-families where
 open import foundation.embeddings
 open import foundation.equivalence-injective-type-families
 open import foundation.retractions
+open import foundation.action-on-identifications-functions
+open import foundation.faithful-maps
 open import foundation.preunivalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.univalence
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.sets
@@ -44,7 +47,55 @@ is-preunivalent {A = A} B = (x y : A) → is-emb (λ (p : x ＝ y) → equiv-tr 
 
 ## Properties
 
-### Families of sets are preunivalent if `equiv-tr B` is fiberwise injective
+### Preunivalent type families are faithful as maps
+
+**Proof:** We have the
+[commuting triangle of maps](foundation-core.commuting-triangles-of-maps.md)
+
+```text
+                 ap B
+       (x ＝ y) -----> (B x ＝ B y)
+           \               /
+            \             /
+  equiv-tr B \           / equiv-eq
+              v         v
+              (B x ≃ B y)
+```
+
+where the right edge is an embedding by the
+[preunivalence axiom](foundation.preunivalence.md). Hence, the top map is an
+embedding if and only if the left map is.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-faithful-is-preunivalent :
+      is-preunivalent B → is-faithful B
+    is-faithful-is-preunivalent U x y =
+      is-emb-top-map-triangle
+        ( equiv-tr B)
+        ( equiv-eq)
+        ( ap B)
+        ( λ where refl → refl)
+        ( preunivalence (B x) (B y))
+        ( U x y)
+
+    is-preunivalent-is-faithful :
+      is-faithful B → is-preunivalent B
+    is-preunivalent-is-faithful is-faithful-B x y =
+      is-emb-left-map-triangle
+        ( equiv-tr B)
+        ( equiv-eq)
+        ( ap B)
+        ( λ where refl → refl)
+        ( preunivalence (B x) (B y))
+        ( is-faithful-B x y)
+```
+
+### Families of sets are preunivalent if `equiv-tr` is fiberwise injective
 
 ```agda
 module _
