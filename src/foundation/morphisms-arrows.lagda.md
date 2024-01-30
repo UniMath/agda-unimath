@@ -447,7 +447,7 @@ module _
       ( htpy-domain-left-whisker-htpy-hom-arrow)
       ( htpy-codomain-left-whisker-htpy-hom-arrow)
   coh-left-whisker-htpy-hom-arrow a =
-    ( left-whisker-triangle-identifications'
+    ( left-whisker-coherence-triangle-identifications'
       ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
       ( ( ap
           ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a) ∙_)
