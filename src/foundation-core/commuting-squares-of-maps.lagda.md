@@ -24,15 +24,24 @@ open import foundation-core.whiskering-homotopies
 A square of maps
 
 ```text
-  A ------> X
-  |         |
-  |         |
-  |         |
-  V         V
-  B ------> Y
+            top
+       A --------> X
+       |           |
+  left |           | right
+       ∨           ∨
+       B --------> Y
+          bottom
 ```
 
-is said to commute if there is a homotopy between both composites.
+is said to **commute** if there is a homotopy
+
+```text
+  bottom ∘ left ~ right ∘ top.
+```
+
+Such a homotopy is called the
+{{#concept "coherence" Disambiguation="commuting square of maps" Agda=coherence-square-maps}}
+of the commuting square.
 
 ## Definitions
 

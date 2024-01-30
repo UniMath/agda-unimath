@@ -361,7 +361,7 @@ module _
       ( ap-concat g
         ( htpy-domain-htpy-hom-arrow f g α β H a)
         ( htpy-domain-htpy-hom-arrow f g β γ K a))) ∙
-    ( coherence-square-identifications-comp-horizontal
+    ( horizontal-pasting-coherence-square-identifications
       ( htpy-codomain-htpy-hom-arrow f g α β H (f a))
       ( htpy-codomain-htpy-hom-arrow f g β γ K (f a))
       ( coh-hom-arrow f g α a)

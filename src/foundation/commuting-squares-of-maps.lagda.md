@@ -322,7 +322,7 @@ module _
             ( right)
             ( inv (H (map-inv-equiv left (map-equiv left a)))))
           ( inv
-            ( coherence-square-identifications-comp-vertical
+            ( vertical-pasting-coherence-square-identifications
               ( ap
                 ( map-inv-equiv right)
                 ( ap

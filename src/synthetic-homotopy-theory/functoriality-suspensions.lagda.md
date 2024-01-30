@@ -138,7 +138,7 @@ module _
       ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
       ( preserves-comp-map-suspension-south)
   coherence-square-identifications-comp-map-suspension a =
-    coherence-square-identifications-comp-horizontal _ _
+    horizontal-pasting-coherence-square-identifications _ _
       ( ap (map-suspension g ∘ map-suspension f) (meridian-suspension a))
       ( ap (map-suspension g) (meridian-suspension (f a)))
       ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
@@ -161,7 +161,7 @@ module _
           ( meridian-suspension (f a))
           ( compute-south-map-suspension f)
           ( compute-meridian-map-suspension f a)))
-      ( coherence-square-identifications-comp-horizontal _ _
+      ( horizontal-pasting-coherence-square-identifications _ _
         ( ap (map-suspension g) (meridian-suspension (f a)))
         ( meridian-suspension (g (f a)))
         ( ap (map-suspension (g ∘ f)) (meridian-suspension a))

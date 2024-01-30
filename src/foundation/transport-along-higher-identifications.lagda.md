@@ -109,7 +109,7 @@ module _
           ( tr²-concat (left-whisker-identification p β)
           ( right-whisker-identification α q') b)
           ( tr-concat p' q' b)) ∙
-        ( vertical-concat-square
+        ( vertical-pasting-coherence-square-identifications
           ( tr² B (left-whisker-identification p β) b)
           ( tr² B (right-whisker-identification α q') b)
           ( tr-concat p' q' b)
@@ -133,7 +133,7 @@ module _
             ( right-whisker-identification α q)
             ( left-whisker-identification p' β) b)
           ( tr-concat p' q' b)) ∙
-        ( vertical-concat-square
+        ( vertical-pasting-coherence-square-identifications
           ( tr² B (right-whisker-identification α q) b)
           ( tr² B (left-whisker-identification p' β) b)
           ( tr-concat p' q' b)
