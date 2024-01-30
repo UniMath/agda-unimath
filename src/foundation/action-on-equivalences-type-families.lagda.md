@@ -148,7 +148,7 @@ distributive-action-equiv-function-comp g f e =
   ( ap-comp g f (eq-equiv e)) ∙
   ( left-whisker-htpy² g
     ( inv-htpy is-retraction-eq-equiv)
-    ( action-equiv-function f e)
+    ( action-equiv-function f e))
 
 distributive-action-equiv-family-comp :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2)
