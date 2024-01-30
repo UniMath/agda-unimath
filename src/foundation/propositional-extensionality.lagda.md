@@ -118,7 +118,6 @@ pr2 (Prop-Set l) = is-set-type-Prop
 
 ### The canonical type family over `Prop` is univalent
 
-The proof does not rely on [the univalence axiom](foundation.univalence.md).
 
 ```agda
 is-univalent-type-Prop : {l : Level} → is-univalent (type-Prop {l})
