@@ -41,10 +41,15 @@ A type family `B` over `A` is said to be
 if the map
 
 ```text
-  equiv-tr : x ＝ y → B x ≃ B y
+  equiv-tr B : x ＝ y → B x ≃ B y
 ```
 
-admits a [section](foundation-core.section.md) for every `x y : A`.
+admits a [section](foundation-core.section.md) for every `x y : A`. By a
+corollary of
+[the fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types)
+every transport-split type family is
+[univalent](foundation.univalent-type-families.md), meaning that `equiv-tr B` is
+in fact an [equivalence](foundation-core.equivalences.md) for all `x y : A`.
 
 ## Definition
 

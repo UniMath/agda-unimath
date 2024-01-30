@@ -24,7 +24,6 @@ open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.function-types
-open import foundation.preunivalent-type-families
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -32,6 +31,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.path-algebra
+open import foundation.preunivalent-type-families
 open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections
@@ -468,10 +468,10 @@ is-retraction-is-equivalence-injective-Fin :
 is-retraction-is-equivalence-injective-Fin refl =
   compute-is-equivalence-injective-Fin-id-equiv
 
-is-section-is-equivalence-injective-Fin' :
+is-section-on-diagonal-is-equivalence-injective-Fin :
   {n : ℕ} →
   equiv-tr Fin (is-equivalence-injective-Fin {n} {n} id-equiv) ＝ id-equiv
-is-section-is-equivalence-injective-Fin' =
+is-section-on-diagonal-is-equivalence-injective-Fin =
   ap (equiv-tr Fin) compute-is-equivalence-injective-Fin-id-equiv
 
 retraction-equiv-tr-Fin : (n m : ℕ) → retraction (equiv-tr Fin {n} {m})

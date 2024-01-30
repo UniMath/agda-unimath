@@ -147,6 +147,8 @@ module _
 
 ### Inclusions of subuniverses into the universe are univalent
 
+**Note.** The proof relies on essential use of the univalence axiom.
+
 ```agda
 module _
   {l1 l2 : Level} (S : subuniverse l1 l2)
@@ -159,6 +161,11 @@ module _
 
 ## See also
 
-- [Univalent type families](foundation.univalent-type-families.md)
 - [Preunivalent type families](foundation.preunivalent-type-families.md)
-- [Transport-split type families](foundation.transport-split-type-families.md)
+- By a corollary of
+  [the fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types),
+  `equiv-tr B` is a
+  [fiberwise equivalence](foundation-core.families-of-equivalences.md) as soon
+  as it admits a fiberwise [section](foundation-core.sections.md). We consider
+  this in
+  [Transport-split type families](foundation.transport-split-type-families.md).
