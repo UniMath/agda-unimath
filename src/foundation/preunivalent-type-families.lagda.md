@@ -10,6 +10,7 @@ module foundation.preunivalent-type-families where
 open import foundation.embeddings
 open import foundation.equivalence-injective-type-families
 open import foundation.retractions
+open import foundation.preunivalence
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -43,7 +44,7 @@ is-preunivalent {A = A} B = (x y : A) → is-emb (λ (p : x ＝ y) → equiv-tr 
 
 ## Properties
 
-### Every equivalence injective family of sets is preunivalent
+### Families of sets are preunivalent if `equiv-tr B` is fiberwise injective
 
 ```agda
 module _
