@@ -40,9 +40,9 @@ map
 ```
 
 is an [equivalence](foundation-core.equivalences.md) for every `x y : A`. By
-[univalence](foundation-core.univalence.md), this is equivalent to the type
-family `B` being an [embedding](foundation-core.embeddings.md) considered as a
-map.
+[the univalence axiom](foundation-core.univalence.md), this is equivalent to the
+type family `B` being an [embedding](foundation-core.embeddings.md) considered
+as a map.
 
 ## Definition
 
@@ -162,10 +162,9 @@ module _
 ## See also
 
 - [Preunivalent type families](foundation.preunivalent-type-families.md)
-- By a corollary of
+- [Transport-split type families](foundation.transport-split-type-families.md):
+  By a corollary of
   [the fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types),
   `equiv-tr B` is a
   [fiberwise equivalence](foundation-core.families-of-equivalences.md) as soon
-  as it admits a fiberwise [section](foundation-core.sections.md). We consider
-  this in
-  [Transport-split type families](foundation.transport-split-type-families.md).
+  as it admits a fiberwise [section](foundation-core.sections.md).

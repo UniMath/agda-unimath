@@ -73,8 +73,8 @@ module _
 
   is-equivalence-injective-is-transport-split :
     is-transport-split B → is-equivalence-injective B
-  is-equivalence-injective-is-transport-split s {x} {y} e =
-    map-section (equiv-tr B) (s x y) e
+  is-equivalence-injective-is-transport-split s {x} {y} =
+    map-section (equiv-tr B) (s x y)
 ```
 
 ### Transport-split type families are univalent
@@ -114,7 +114,7 @@ module _
     is-prop-is-proof-irrelevant is-proof-irrelevant-is-transport-split
 ```
 
-### Transport-split type families are embeddings as maps
+### Type families are transport-split if and only if they are embeddings as maps
 
 ```agda
 module _
@@ -140,17 +140,16 @@ module _
 
   is-torsorial-fam-equiv-is-transport-split :
     {x : A} → is-torsorial (λ y → B x ≃ B y)
-  is-torsorial-fam-equiv-is-transport-split {x} =
-    is-torsorial-fam-equiv-is-univalent (is-univalent-is-transport-split s) {x}
+  is-torsorial-fam-equiv-is-transport-split =
+    is-torsorial-fam-equiv-is-univalent (is-univalent-is-transport-split s)
 
   dependent-universal-property-identity-system-fam-equiv-is-transport-split :
     {x : A} →
     dependent-universal-property-identity-system (λ y → B x ≃ B y) id-equiv
-  dependent-universal-property-identity-system-fam-equiv-is-transport-split
-    { x} =
+  dependent-universal-property-identity-system-fam-equiv-is-transport-split =
     dependent-universal-property-identity-system-is-torsorial
       ( id-equiv)
-      ( is-torsorial-fam-equiv-is-transport-split {x})
+      ( is-torsorial-fam-equiv-is-transport-split)
 ```
 
 ## See also
