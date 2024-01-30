@@ -256,6 +256,19 @@ triangle of identifications
              f z
 ```
 
+Furthermore, in the case where the identification `right` is `refl` we obtain an identification
+
+```text
+  inv right-unit ＝
+  map-coherence-triangle-identifications p refl p (inv right-unit)
+```
+
+and in the case where the identification `top` is refl` we obtain
+
+```text
+  refl ＝ map-coherence-triangle-identifications p p refl refl.
+```
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
@@ -273,4 +286,9 @@ module _
     inv right-unit ＝
     map-coherence-triangle-identifications p refl p (inv right-unit)
   compute-refl-right-map-coherence-triangle-identifications refl = refl
+
+  compute-refl-top-map-coherence-triangle-identifications :
+    {x  y : A} (p : x ＝ y) →
+    refl ＝ map-coherence-triangle-identifications p p refl refl
+  compute-refl-top-map-coherence-triangle-identifications p = refl
 ```
