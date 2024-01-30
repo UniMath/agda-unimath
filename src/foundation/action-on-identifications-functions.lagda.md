@@ -95,20 +95,3 @@ ap-const :
   (p : x ＝ y) → (ap (const A B b) p) ＝ refl
 ap-const b refl = refl
 ```
-
-### The action on identifications of concatenating by `refl` on the right
-
-Note that `_∙ refl` is only homotopic to the identity function. Therefore we
-will compute here the action on identifications of the map `_∙ refl`.
-
-```agda
-inv-ap-refl-concat :
-  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
-  (right-unit ∙ (r ∙ inv right-unit)) ＝ (ap (_∙ refl) r)
-inv-ap-refl-concat refl = right-inv right-unit
-
-ap-refl-concat :
-  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
-  (ap (_∙ refl) r) ＝ (right-unit ∙ (r ∙ inv right-unit))
-ap-refl-concat = inv ∘ inv-ap-refl-concat
-```

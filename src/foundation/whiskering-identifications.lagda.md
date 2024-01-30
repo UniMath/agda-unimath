@@ -13,6 +13,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 ```
 
@@ -197,4 +198,32 @@ module _
     commutative-left-whisker-right-whisker-identification β α
   compute-inv-commutative-left-whisker-right-whisker-identification refl refl =
     refl
+```
+
+### The action on identifications of concatenating by `refl` on the right
+
+Consider an identification `r : p ＝ q` between two identifications
+`p q : x ＝ y` in a type `A`. Then the square of identifications
+
+```text
+                      right-whisker r refl
+            p ∙ refl ----------------------> q ∙ refl
+              |                                |
+   right-unit |                                | right-unit
+              ∨                                ∨
+              p -----------------------------> q
+                                r
+```
+
+commutes.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y}
+  where
+
+  compute-refl-right-whisker-identification :
+    (r : p ＝ q) →
+    right-unit ∙ r ＝ right-whisker-identification r refl ∙ right-unit
+  compute-refl-right-whisker-identification refl = right-unit
 ```

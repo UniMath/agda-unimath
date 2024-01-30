@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+open import foundation.whiskering-identifications
 
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifts-of-maps
@@ -187,7 +188,14 @@ module _
         ( _∙ α)
         ( ( ap
             ( inv right-unit ∙_)
-            ( ap-refl-concat (coherence-lifting-square l x))) ∙
+            ( ( right-transpose-eq-concat _ _ _
+                ( inv
+                  ( compute-refl-right-whisker-identification
+                    ( coherence-lifting-square l x)))) ∙
+              ( assoc
+                ( right-unit)
+                ( coherence-lifting-square l x)
+                ( inv right-unit)))) ∙
           ( is-retraction-inv-concat
             ( right-unit)
             ( _)

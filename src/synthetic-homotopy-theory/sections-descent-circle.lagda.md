@@ -10,8 +10,8 @@ module synthetic-homotopy-theory.sections-descent-circle where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
 open import foundation.commuting-triangles-of-identifications
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications

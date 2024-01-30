@@ -36,7 +36,9 @@ A triangle of [identifications](foundation-core.identity-types.md)
 is said to **commute** if there is a higher identification between the `x ＝ z`
 and the concatenated identification `x ＝ y ＝ z`.
 
-## Definition
+## Definitions
+
+### Commuting triangles of identifications
 
 ```agda
 module _
@@ -67,47 +69,74 @@ Given a commuting triangle of identifications
          z     ,
 ```
 
-we may consider three ways of attaching new identifications to it: prepending
-`p : u ＝ x` to the left, which gives us a commuting triangle
+we may consider three ways of attaching new identifications to it:
 
-```text
-          p ∙ top
-         u ----> y
-          \     /
-  p ∙ left \   / right
-            ∨ ∨
-             z     ,
-```
+1. Prepending `p : u ＝ x` to the left gives us a commuting triangle
 
-or appending an identification `p : z ＝ u` to the right, which gives
+   ```text
+             p ∙ top
+            u ----> y
+             \     /
+     p ∙ left \   / right
+               ∨ ∨
+                z.
+   ```
 
-```text
-            top
-         u ----> y
-          \     /
-  left ∙ p \   / right ∙ p
-            ∨ ∨
-             z     ,
-```
+   In other words, we have a map
 
-or splicing an identification `p : y ＝ u` and its inverse into the middle, to
-get
+   ```text
+     (left ＝ top ∙ right) → (p ∙ left ＝ (p ∙ top) ∙ right).
+   ```
 
-```text
-      top ∙ p
-     u ----> y
-      \     /
-  left \   / p⁻¹ ∙ right
-        ∨ ∨
-         z     ,
-```
+2. Appending an identification `p : z ＝ u` to the right gives a commuting
+   triangle of identifications
 
-which isn't formalized yet.
+   ```text
+               top
+            x ----> y
+             \     /
+     left ∙ p \   / right ∙ p
+               ∨ ∨
+                u.
+   ```
+
+   In other words, we have a map
+
+   ```text
+     (left ＝ top ∙ right) → (left ∙ p ＝ top ∙ (right ∙ p)).
+
+   ```
+
+3. Splicing an identification `p : y ＝ u` and its inverse into the middle gives
+   a commuting triangle of identifications
+
+   ```text
+         top ∙ p
+        x ----> u
+         \     /
+     left \   / p⁻¹ ∙ right
+           ∨ ∨
+            z.
+   ```
+
+   In other words, we have a map
+
+   ```text
+     (left ＝ top ∙ right) → left ＝ (top ∙ p) ∙ (p⁻¹ ∙ right).
+   ```
+
+   Similarly, we have a map
+
+   ```text
+     (left ＝ top ∙ right) → left ＝ (top ∙ p⁻¹) ∙ (p ∙ right).
+   ```
+
+   This isn't formalized yet.
 
 Because concatenation of identifications is an equivalence, it follows that all
 of these transformations are equivalences.
 
-These lemmas are useful in proofs involving path algebra, because taking
+These operations are useful in proofs involving path algebra, because taking
 `equiv-right-whisker-triangle-identicications` as an example, it provides us
 with two maps: the forward direction states
 `(p ＝ q ∙ r) → (p ∙ s ＝ q ∙ (r ∙ s))`, which allows one to append an
