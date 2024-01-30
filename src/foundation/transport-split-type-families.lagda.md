@@ -15,14 +15,21 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-injective-type-families
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
+open import foundation.univalent-type-families
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
+open import foundation-core.embeddings
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -65,29 +72,80 @@ module _
     map-section (equiv-tr B) (s x y) e
 ```
 
-### Transport-split type families satisfy an equivalence induction principle
+### Transport-split type families are univalent
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (s : is-transport-split B)
-  {P : {x y : A} → B x ≃ B y → UU l3}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  ind-equiv-is-transport-split' :
-    (f : {x y : A} (p : x ＝ y) → P (equiv-tr B p))
-    {x y : A} (e : B x ≃ B y) → P e
-  ind-equiv-is-transport-split' f {x} {y} e =
-    tr P
-      ( is-section-map-section (equiv-tr B) (s x y) e)
-      ( f (map-section (equiv-tr B) (s x y) e))
+  is-transport-split-is-univalent :
+    is-univalent B → is-transport-split B
+  is-transport-split-is-univalent U x y = section-is-equiv (U x y)
 
-  abstract
-    ind-equiv-is-transport-split :
-      (f : (x : A) → P (id-equiv {A = B x})) →
-      {x y : A} (e : B x ≃ B y) → P e
-    ind-equiv-is-transport-split f =
-      ind-equiv-is-transport-split' (λ where refl → f _)
+  is-univalent-is-transport-split :
+    is-transport-split B → is-univalent B
+  is-univalent-is-transport-split s x =
+    fundamental-theorem-id-section x (λ y → equiv-tr B) (s x)
+```
+
+### The type `is-transport-split` is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-proof-irrelevant-is-transport-split :
+    is-proof-irrelevant (is-transport-split B)
+  is-proof-irrelevant-is-transport-split s =
+    is-contr-iterated-Π 2
+      ( λ x y →
+        is-contr-section-is-equiv (is-univalent-is-transport-split s x y))
+
+  is-prop-is-transport-split :
+    is-prop (is-transport-split B)
+  is-prop-is-transport-split =
+    is-prop-is-proof-irrelevant is-proof-irrelevant-is-transport-split
+```
+
+### Transport-split type families are embeddings as maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-emb-is-transport-split : is-transport-split B → is-emb B
+  is-emb-is-transport-split s =
+    is-emb-is-univalent (is-univalent-is-transport-split s)
+
+  is-transport-split-is-emb : is-emb B → is-transport-split B
+  is-transport-split-is-emb H =
+    is-transport-split-is-univalent (is-univalent-is-emb H)
+```
+
+### Transport-split type families satisfy equivalence induction
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (s : is-transport-split B)
+  where
+
+  is-torsorial-fam-equiv-is-transport-split :
+    {x : A} → is-torsorial (λ y → B x ≃ B y)
+  is-torsorial-fam-equiv-is-transport-split {x} =
+    is-torsorial-fam-equiv-is-univalent (is-univalent-is-transport-split s) {x}
+
+  dependent-universal-property-identity-system-fam-equiv-is-transport-split :
+    {x : A} →
+    dependent-universal-property-identity-system (λ y → B x ≃ B y) id-equiv
+  dependent-universal-property-identity-system-fam-equiv-is-transport-split
+    { x} =
+    dependent-universal-property-identity-system-is-torsorial
+      ( id-equiv)
+      ( is-torsorial-fam-equiv-is-transport-split {x})
 ```
 
 ## See also

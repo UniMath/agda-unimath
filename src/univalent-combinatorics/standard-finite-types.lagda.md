@@ -430,16 +430,15 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
 ### Fin is injective
 
 ```agda
-abstract
-  is-equivalence-injective-Fin : is-equivalence-injective Fin
-  is-equivalence-injective-Fin {zero-ℕ} {zero-ℕ} e =
-    refl
-  is-equivalence-injective-Fin {zero-ℕ} {succ-ℕ l} e =
-    ex-falso (map-inv-equiv e (zero-Fin l))
-  is-equivalence-injective-Fin {succ-ℕ k} {zero-ℕ} e =
-    ex-falso (map-equiv e (zero-Fin k))
-  is-equivalence-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
-    ap succ-ℕ (is-equivalence-injective-Fin (equiv-equiv-Maybe e))
+is-equivalence-injective-Fin : is-equivalence-injective Fin
+is-equivalence-injective-Fin {zero-ℕ} {zero-ℕ} e =
+  refl
+is-equivalence-injective-Fin {zero-ℕ} {succ-ℕ l} e =
+  ex-falso (map-inv-equiv e (zero-Fin l))
+is-equivalence-injective-Fin {succ-ℕ k} {zero-ℕ} e =
+  ex-falso (map-equiv e (zero-Fin k))
+is-equivalence-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+  ap succ-ℕ (is-equivalence-injective-Fin (equiv-equiv-Maybe e))
 
 abstract
   is-injective-Fin : is-injective Fin

@@ -11,16 +11,19 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-systems
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
-open import foundation.transport-split-type-families
 open import foundation.univalence
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.identity-types
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -119,32 +122,26 @@ module _
         ( univalence (B x) (B y))
 ```
 
-### Univalent type families are transport-split
+### Univalent type families satisfy equivalence induction
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  is-transport-split-is-univalent :
-    is-univalent B → is-transport-split B
-  is-transport-split-is-univalent U x y = section-is-equiv (U x y)
-```
-
-### Univalent type families satisfy an equivalence induction principle
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (U : is-univalent B)
-  {P : {x y : A} → B x ≃ B y → UU l3}
   where
 
-  ind-equiv-is-univalent' :
-    (f : {x y : A} (p : x ＝ y) → P (equiv-tr B p))
-    {x y : A} (e : B x ≃ B y) → P e
-  ind-equiv-is-univalent' =
-    ind-equiv-is-transport-split' (is-transport-split-is-univalent U)
+  is-torsorial-fam-equiv-is-univalent :
+    {x : A} → is-torsorial (λ y → B x ≃ B y)
+  is-torsorial-fam-equiv-is-univalent {x} =
+    fundamental-theorem-id' (λ y → equiv-tr B) (U x)
+
+  dependent-universal-property-identity-system-fam-equiv-is-univalent :
+    {x : A} →
+    dependent-universal-property-identity-system (λ y → B x ≃ B y) id-equiv
+  dependent-universal-property-identity-system-fam-equiv-is-univalent {x} =
+    dependent-universal-property-identity-system-is-torsorial
+      ( id-equiv)
+      ( is-torsorial-fam-equiv-is-univalent {x})
 ```
 
 ## See also
