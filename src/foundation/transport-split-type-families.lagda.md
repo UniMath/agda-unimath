@@ -114,7 +114,7 @@ module _
     is-prop-is-proof-irrelevant is-proof-irrelevant-is-transport-split
 ```
 
-### Type families are transport-split if and only if they are embeddings as maps
+### Assuming the univalence axiom, type families are transport-split if and only if they are embeddings as maps
 
 ```agda
 module _
