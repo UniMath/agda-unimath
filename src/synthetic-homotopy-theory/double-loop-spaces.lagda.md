@@ -96,16 +96,16 @@ right-unit-law-horizontal-concat-Ω² :
 right-unit-law-horizontal-concat-Ω² {α = α} =
   ( right-unit-law-horizontal-concat-Id² α) ∙ (naturality-right-unit-Ω² α)
 
-left-unit-law-left-whisker-identification-Ω² :
+left-unit-law-left-whisker-Ω² :
   {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
   left-whisker-identification (refl-Ω (pair A a)) α ＝ α
-left-unit-law-left-whisker-identification-Ω² α =
+left-unit-law-left-whisker-Ω² α =
   left-unit-law-left-whisker-identification α
 
-right-unit-law-right-whisker-identification-Ω² :
+right-unit-law-right-whisker-Ω² :
   {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
   right-whisker-identification α (refl-Ω (pair A a)) ＝ α
-right-unit-law-right-whisker-identification-Ω² α =
+right-unit-law-right-whisker-Ω² α =
   (right-unit-law-right-whisker-identification α) ∙ right-unit
 ```
 
