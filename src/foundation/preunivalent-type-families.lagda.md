@@ -7,12 +7,16 @@ module foundation.preunivalent-type-families where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-maps
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-injective-type-families
 open import foundation.faithful-maps
+open import foundation.function-types
 open import foundation.preunivalence
 open import foundation.retractions
+open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -93,6 +97,16 @@ module _
         ( λ where refl → refl)
         ( preunivalence (B x) (B y))
         ( is-faithful-B x y)
+
+    is-0-map-is-preunivalent :
+      is-preunivalent B → is-0-map B
+    is-0-map-is-preunivalent U =
+      is-0-map-is-faithful (is-faithful-is-preunivalent U)
+
+    is-preunivalent-is-0-map :
+      is-0-map B → is-preunivalent B
+    is-preunivalent-is-0-map H =
+      is-preunivalent-is-faithful (is-faithful-is-0-map H)
 ```
 
 ### Families of sets are preunivalent if `equiv-tr` is fiberwise injective
@@ -117,6 +131,24 @@ module _
   is-preunivalent-retraction-equiv-tr R =
     is-preunivalent-is-injective-equiv-tr
       ( λ x y → is-injective-retraction (equiv-tr B) (R x y))
+```
+
+### Inclusions of subuniverses into the universe are preunivalent
+
+**Note.** These proofs rely on essential use of the preunivalence axiom.
+
+```agda
+is-preunivalent-projection-Type-With-Set-Element :
+  {l1 l2 : Level} (S : UU l1 → Set l2) →
+  is-preunivalent (pr1 {A = UU l1} {B = type-Set ∘ S})
+is-preunivalent-projection-Type-With-Set-Element S =
+  is-preunivalent-is-0-map (is-0-map-pr1 (is-set-type-Set ∘ S))
+
+is-preunivalent-inclusion-subuniverse :
+  {l1 l2 : Level} (S : subuniverse l1 l2) →
+  is-preunivalent (inclusion-subuniverse S)
+is-preunivalent-inclusion-subuniverse S =
+  is-preunivalent-projection-Type-With-Set-Element (set-Prop ∘ S)
 ```
 
 ## See also
