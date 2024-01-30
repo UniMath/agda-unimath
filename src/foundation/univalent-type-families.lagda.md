@@ -15,6 +15,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
+open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universal-property-identity-systems
@@ -35,7 +36,7 @@ A type family `B` over `A` is said to be
 map
 
 ```text
-  equiv-tr : x ＝ y → B x ≃ B y
+  equiv-tr B : x ＝ y → B x ≃ B y
 ```
 
 is an [equivalence](foundation-core.equivalences.md) for every `x y : A`. By
@@ -142,6 +143,18 @@ module _
     dependent-universal-property-identity-system-is-torsorial
       ( id-equiv)
       ( is-torsorial-fam-equiv-is-univalent {x})
+```
+
+### Inclusions of subuniverses into the universe are univalent
+
+```agda
+module _
+  {l1 l2 : Level} (S : subuniverse l1 l2)
+  where
+
+  is-univalent-inclusion-subuniverse : is-univalent (inclusion-subuniverse S)
+  is-univalent-inclusion-subuniverse =
+    is-univalent-is-emb (is-emb-inclusion-subuniverse S)
 ```
 
 ## See also
