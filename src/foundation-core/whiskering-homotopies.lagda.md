@@ -230,28 +230,6 @@ module _
   inv-htpy-coh-htpy-id = inv-htpy coh-htpy-id
 ```
 
-### Whiskering whiskerings
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  {f g : (x : A) → B x}
-  where
-
-  ap-left-whisker-htpy :
-    (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
-  ap-left-whisker-htpy h α = (ap h) ·l α
-
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
-  {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
-  where
-
-  ap-right-whisker-htpy :
-    (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
-  ap-right-whisker-htpy α h = α ·r h
-```
-
 ### The left and right whiskering operations commute
 
 We have the coherence
