@@ -44,9 +44,9 @@ if the map
   equiv-tr B : x ＝ y → B x ≃ B y
 ```
 
-admits a [section](foundation-core.section.md) for every `x y : A`. By a
+admits a [section](foundation-core.sections.md) for every `x y : A`. By a
 corollary of
-[the fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types)
+[the fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 every transport-split type family is
 [univalent](foundation.univalent-type-families.md), meaning that `equiv-tr B` is
 in fact an [equivalence](foundation-core.equivalences.md) for all `x y : A`.

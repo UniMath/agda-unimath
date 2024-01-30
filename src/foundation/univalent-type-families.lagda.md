@@ -164,7 +164,7 @@ module _
 - [Preunivalent type families](foundation.preunivalent-type-families.md)
 - [Transport-split type families](foundation.transport-split-type-families.md):
   By a corollary of
-  [the fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types),
+  [the fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md),
   `equiv-tr B` is a
   [fiberwise equivalence](foundation-core.families-of-equivalences.md) as soon
   as it admits a fiberwise [section](foundation-core.sections.md).

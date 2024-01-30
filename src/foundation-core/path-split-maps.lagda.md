@@ -25,7 +25,7 @@ open import foundation-core.sections
 
 A map `f : A → B` is said to be **path split** if it has a
 [section](foundation-core.sections.md) and its
-[action on identifications](foundation.action-on-identifications.md)
+[action on identifications](foundation.action-on-identifications-functions.md)
 `x ＝ y → f x ＝ f y` has a section for each `x y : A`. By the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md),
 it follows that a map is path-split if and only if it is an
