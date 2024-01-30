@@ -103,8 +103,9 @@ module _
 
 ### Unit laws and absorption laws for whiskering homotopies
 
-The identity map is a _unit element_ for whiskerings from the function side,
-and the reflexivity homotopy is an _absorbing element_ on the homotopy side for whiskerings.
+The identity map is a _unit element_ for whiskerings from the function side, and
+the reflexivity homotopy is an _absorbing element_ on the homotopy side for
+whiskerings.
 
 ```agda
 module _
@@ -188,7 +189,7 @@ module _
   distributive-right-whisker-concat-htpy = refl-htpy
 ```
 
-### Whiskering preserves function composition.
+### Whiskering preserves function composition
 
 In other words, whiskering is an action of functions on homotopies.
 
@@ -219,7 +220,8 @@ module _
 
 ### A coherence for homotopies to the identity function
 
-Consider a function `f : A → A` and let `H : f ~ id` be a homotopy to the identity function. Then we have a homotopy
+Consider a function `f : A → A` and let `H : f ~ id` be a homotopy to the
+identity function. Then we have a homotopy
 
 ```text
   H ·r f ~ f ·l H.
