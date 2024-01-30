@@ -7,20 +7,20 @@ module foundation.preunivalent-type-families where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.embeddings
 open import foundation.equivalence-injective-type-families
-open import foundation.retractions
-open import foundation.action-on-identifications-functions
 open import foundation.faithful-maps
 open import foundation.preunivalence
+open import foundation.retractions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.univalence
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.sets
+open import foundation-core.univalence
 ```
 
 </details>
