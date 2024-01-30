@@ -101,11 +101,10 @@ module _
 
 ## Properties
 
-### Unit laws for whiskering homotopies
+### Unit laws and absorption laws for whiskering homotopies
 
-The identity map is the identity element for whiskerings from the function side,
-and the reflexivity homotopy is the identity element for whiskerings from the
-homotopy side.
+The identity map is a _unit element_ for whiskerings from the function side,
+and the reflexivity homotopy is an _absorbing element_ on the homotopy side for whiskerings.
 
 ```agda
 module _
@@ -120,19 +119,19 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  right-unit-law-left-whisker-htpy :
+  right-absorption-law-left-whisker-htpy :
     {f : (x : A) → B x} (g : {x : A} → B x → C x) →
     g ·l refl-htpy {f = f} ~ refl-htpy
-  right-unit-law-left-whisker-htpy g = refl-htpy
+  right-absorption-law-left-whisker-htpy g = refl-htpy
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   where
 
-  left-unit-law-right-whisker-htpy :
+  left-absorption-law-right-whisker-htpy :
     {g : {x : A} (y : B x) → C x y} (f : (x : A) → B x) →
     refl-htpy {f = g} ·r f ~ refl-htpy
-  left-unit-law-right-whisker-htpy f = refl-htpy
+  left-absorption-law-right-whisker-htpy f = refl-htpy
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -164,7 +163,7 @@ module _
   right-whisker-inv-htpy = refl-htpy
 ```
 
-### Distributivity of whiskering over composition of homotopies
+### Distributivity of whiskering over concatenation of homotopies
 
 ```agda
 module _
@@ -189,7 +188,9 @@ module _
   distributive-right-whisker-concat-htpy = refl-htpy
 ```
 
-### Associativity of whiskering and function composition
+### Whiskering preserves function composition.
+
+In other words, whiskering is an action of functions on homotopies.
 
 ```agda
 module _
@@ -218,6 +219,12 @@ module _
 
 ### A coherence for homotopies to the identity function
 
+Consider a function `f : A → A` and let `H : f ~ id` be a homotopy to the identity function. Then we have a homotopy
+
+```text
+  H ·r f ~ f ·l H.
+```
+
 ```agda
 module _
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
@@ -242,8 +249,7 @@ definitionally.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : A → UU l2}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
   {C : {x : A} → B x → UU l3} {D : {x : A} → B x → UU l4}
   {f g : {x : A} (y : B x) → C y}
   where
