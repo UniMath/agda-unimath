@@ -470,7 +470,7 @@ module _
             ( map-codomain-hom-arrow g h γ)
             ( g)
             ( htpy-domain-htpy-hom-arrow f g α β H a))) ∙
-        ( coherence-square-identifications-ap
+        ( map-coherence-square-identifications
           ( map-codomain-hom-arrow g h γ)
           ( htpy-codomain-htpy-hom-arrow f g α β H (f a))
           ( coh-hom-arrow f g α a)

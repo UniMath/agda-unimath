@@ -129,15 +129,6 @@ module _
   unit-law-assoc-110' refl refl = refl
 ```
 
-### Unit laws for `ap-concat-eq`
-
-```agda
-ap-concat-eq-inv-right-unit :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : x ＝ y) → inv right-unit ＝ ap-concat-eq f p refl p (inv right-unit)
-ap-concat-eq-inv-right-unit f refl = refl
-```
-
 ## Properties of 2-paths
 
 ### Definition of vertical and horizontal concatenation in identity types of identity types (a type of 2-paths)

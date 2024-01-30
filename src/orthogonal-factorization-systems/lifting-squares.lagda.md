@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-tetrahedra-of-homotopies
 open import foundation.commuting-triangles-of-homotopies
+open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.fibered-maps
 open import foundation.function-types
@@ -214,7 +215,7 @@ module _
             ( ap
               ( λ r →
                 ( coherence-lifting-square l x ∙ (ap (H x ∙_) r ∙ inv α)) ∙ α)
-              ( ap-concat-eq-inv-right-unit
+              ( map-coherence-triangle-identifications-inv-right-unit
                 ( g)
                 ( is-extension-lifting-square l x)))))))
     where

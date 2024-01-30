@@ -356,7 +356,7 @@ module _
                           ( bottom)
                           ( map-equiv left)
                           ( is-retraction-map-inv-equiv left a))))))
-                ( coherence-square-identifications-ap
+                ( map-coherence-square-identifications
                   ( map-inv-equiv right)
                   ( ap
                     ( bottom ∘ map-equiv left)

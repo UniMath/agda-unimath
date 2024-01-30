@@ -74,14 +74,8 @@ ap-refl f x = refl
 ```agda
 ap-concat :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) → (ap f (p ∙ q)) ＝ ((ap f p) ∙ (ap f q))
+  (p : x ＝ y) (q : y ＝ z) → ap f (p ∙ q) ＝ ap f p ∙ ap f q
 ap-concat f refl q = refl
-
-ap-concat-eq :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z)
-  (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
-ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
 ```
 
 ### The action on identifications of any map preserves inverses

@@ -8,6 +8,7 @@ module foundation.commuting-triangles-of-homotopies where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-identifications
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -66,7 +67,7 @@ module _
     coherence-triangle-homotopies left right top →
     (i ·l left) ~ ((i ·l top) ∙h (i ·l right))
   distributivity-left-whisker T x =
-    ap-concat-eq i (top x) (right x) (left x) (T x)
+    map-coherence-triangle-identifications i (left x) (right x) (top x) (T x)
 ```
 
 ### Left whiskering triangles of homotopies

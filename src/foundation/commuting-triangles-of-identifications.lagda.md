@@ -25,11 +25,12 @@ open import foundation-core.homotopies
 A triangle of [identifications](foundation-core.identity-types.md)
 
 ```text
- x ----- y
-  \     /
-   \   /
-    \ /
-     z
+        top
+     x ----> y
+      \     /
+  left \   / right
+        ∨ ∨
+         z
 ```
 
 is said to **commute** if there is a higher identification between the `x ＝ z`
@@ -58,47 +59,47 @@ module _
 Given a commuting triangle of identifications
 
 ```text
-       top
-    x ----- y
-     \     /
- left \   / right
-       \ /
-        z     ,
+        top
+     x ----> y
+      \     /
+  left \   / right
+        ∨ ∨
+         z     ,
 ```
 
 we may consider three ways of attaching new identifications to it: prepending
 `p : u ＝ x` to the left, which gives us a commuting triangle
 
 ```text
-         p ∙ top
-        u ----- y
-         \     /
- p ∙ left \   / right
-           \ /
-            z     ,
+          p ∙ top
+         u ----> y
+          \     /
+  p ∙ left \   / right
+            ∨ ∨
+             z     ,
 ```
 
 or appending an identification `p : z ＝ u` to the right, which gives
 
 ```text
-           top
-        u ----- y
-         \     /
- left ∙ p \   / right ∙ p
-           \ /
-            z     ,
+            top
+         u ----> y
+          \     /
+  left ∙ p \   / right ∙ p
+            ∨ ∨
+             z     ,
 ```
 
 or splicing an identification `p : y ＝ u` and its inverse into the middle, to
 get
 
 ```text
-     top ∙ p
-    u ----- y
-     \     /
- left \   / p⁻¹ ∙ right
-       \ /
-        z     ,
+      top ∙ p
+     u ----> y
+      \     /
+  left \   / p⁻¹ ∙ right
+        ∨ ∨
+         z     ,
 ```
 
 which isn't formalized yet.
@@ -199,4 +200,48 @@ module _
     coherence-triangle-identifications' left right top
   left-unwhisker-triangle-identifications' =
     map-inv-equiv equiv-left-whisker-triangle-identifications'
+```
+
+### The action of functions on commuting triangles of identifications
+
+Consider a commuting triangle of identifications
+
+```text
+        top
+     x ----> y
+      \     /
+  left \   / right
+        ∨ ∨
+         z
+```
+
+in a type `A` and consider a map `f : A → B`. Then we obtain a commuting
+triangle of identifications
+
+```text
+          ap f top
+        f x ----> f y
+           \     /
+  ap f left \   / ap f right
+             ∨ ∨
+             f z
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  map-coherence-triangle-identifications :
+    {x y z : A} (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
+    coherence-triangle-identifications left right top →
+    coherence-triangle-identifications (ap f left) (ap f right) (ap f top)
+  map-coherence-triangle-identifications .(top ∙ right) right top refl =
+    ap-concat f top right
+
+  map-coherence-triangle-identifications-inv-right-unit :
+    {x y : A} (p : x ＝ y) →
+    inv right-unit ＝
+    map-coherence-triangle-identifications p refl p (inv right-unit)
+  map-coherence-triangle-identifications-inv-right-unit refl = refl
 ```

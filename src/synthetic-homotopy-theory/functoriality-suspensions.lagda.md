@@ -154,7 +154,7 @@ module _
             ( map-suspension g)
             ( map-suspension f)
             ( meridian-suspension a)))
-        ( coherence-square-identifications-ap
+        ( map-coherence-square-identifications
           ( map-suspension g)
           ( compute-north-map-suspension f)
           ( ap (map-suspension f) (meridian-suspension a))

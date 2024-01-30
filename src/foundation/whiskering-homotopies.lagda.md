@@ -254,7 +254,7 @@ module _
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (f ·l H) (f ·l H') (f ·l K) (f ·l K')
   ap-left-whisker-coherence-square-homotopies α a =
-    coherence-square-identifications-ap f (H a) (H' a) (K a) (K' a) (α a)
+    map-coherence-square-identifications f (H a) (H' a) (K a) (K' a) (α a)
 
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}

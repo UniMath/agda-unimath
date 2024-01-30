@@ -215,7 +215,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y z w : A} (f : A → B)
   where
 
-  coherence-square-identifications-ap :
+  map-coherence-square-identifications :
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications
@@ -223,7 +223,7 @@ module _
       ( ap f left)
       ( ap f right)
       ( ap f bottom)
-  coherence-square-identifications-ap refl refl right refl coh = ap (ap f) coh
+  map-coherence-square-identifications refl refl right refl coh = ap (ap f) coh
 ```
 
 ### Pasting of identifications along edges of squares of identifications
