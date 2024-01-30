@@ -263,7 +263,9 @@ module _
 
 #### Splicing a pair of mutual inverse identifications in a commuting triangle of identifications
 
-Consider two identifications `p : y ＝ u` and `q : u ＝ y` equipped with an identification `α : inv p ＝ q`. Then we have an equivalence of commuting triangles of identifications
+Consider two identifications `p : y ＝ u` and `q : u ＝ y` equipped with an
+identification `α : inv p ＝ q`. Then we have an equivalence of commuting
+triangles of identifications
 
 ```text
         top                       top ∙ p
@@ -295,7 +297,7 @@ module _
   where
 
   equiv-splice-inverse-pair-coherence-triangle-identifications :
-    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) → 
+    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
     coherence-triangle-identifications left right top ≃
     coherence-triangle-identifications left (q ∙ right) (top ∙ p)
@@ -304,7 +306,7 @@ module _
     equiv-concat' left (right-whisker-identification (inv right-unit) right)
 
   splice-inverse-pair-coherence-triangle-identifications :
-    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) → 
+    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
     coherence-triangle-identifications left right top →
     coherence-triangle-identifications left (q ∙ right) (top ∙ p)
@@ -313,7 +315,7 @@ module _
     t ∙ inv (right-whisker-identification right-unit right)
 
   unsplice-inverse-pair-coherence-triangle-identifications :
-    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) → 
+    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
     coherence-triangle-identifications left (q ∙ right) (top ∙ p) →
     coherence-triangle-identifications left right top
@@ -322,7 +324,7 @@ module _
     t ∙ right-whisker-identification right-unit right
 
   equiv-splice-inverse-pair-coherence-triangle-identifications' :
-    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) → 
+    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
     coherence-triangle-identifications' left right top ≃
     coherence-triangle-identifications' left (q ∙ right) (top ∙ p)
@@ -331,7 +333,7 @@ module _
     equiv-concat (right-whisker-identification right-unit right) left
 
   splice-inverse-pair-coherence-triangle-identifications' :
-    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) → 
+    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
     coherence-triangle-identifications' left right top →
     coherence-triangle-identifications' left (q ∙ right) (top ∙ p)
@@ -340,7 +342,7 @@ module _
     right-whisker-identification right-unit right ∙ t
 
   unsplice-inverse-pair-coherence-triangle-identifications' :
-    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) → 
+    (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
     coherence-triangle-identifications' left (q ∙ right) (top ∙ p) →
     coherence-triangle-identifications' left right top
