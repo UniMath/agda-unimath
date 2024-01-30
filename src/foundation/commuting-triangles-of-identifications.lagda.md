@@ -256,7 +256,8 @@ triangle of identifications
              f z
 ```
 
-Furthermore, in the case where the identification `right` is `refl` we obtain an identification
+Furthermore, in the case where the identification `right` is `refl` we obtain an
+identification
 
 ```text
   inv right-unit ＝
@@ -288,7 +289,7 @@ module _
   compute-refl-right-map-coherence-triangle-identifications refl = refl
 
   compute-refl-top-map-coherence-triangle-identifications :
-    {x  y : A} (p : x ＝ y) →
+    {x y : A} (p : x ＝ y) →
     refl ＝ map-coherence-triangle-identifications p p refl refl
   compute-refl-top-map-coherence-triangle-identifications p = refl
 ```
