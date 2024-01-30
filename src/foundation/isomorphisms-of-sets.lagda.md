@@ -73,15 +73,15 @@ module _
       ( htpy-eq (pr1 (pr2 H)))
       ( htpy-eq (pr2 (pr2 H)))
 
-  iso-equiv-Set : type-equiv-Set A B → iso-Set
+  iso-equiv-Set : equiv-Set A B → iso-Set
   pr1 (iso-equiv-Set e) = map-equiv e
   pr2 (iso-equiv-Set e) = is-iso-is-equiv-Set (is-equiv-map-equiv e)
 
-  equiv-iso-Set : iso-Set → type-equiv-Set A B
+  equiv-iso-Set : iso-Set → equiv-Set A B
   pr1 (equiv-iso-Set f) = map-iso-Set f
   pr2 (equiv-iso-Set f) = is-equiv-is-iso-Set (is-iso-map-iso-Set f)
 
-  equiv-iso-equiv-Set : type-equiv-Set A B ≃ iso-Set
+  equiv-iso-equiv-Set : equiv-Set A B ≃ iso-Set
   equiv-iso-equiv-Set =
     equiv-type-subtype
       ( is-property-is-equiv)

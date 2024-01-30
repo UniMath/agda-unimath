@@ -158,10 +158,11 @@ module _
   {l1 l2 : Level} (A : Set l1) (B : Set l2)
   where
 
-  type-equiv-Set : UU (l1 ⊔ l2)
-  type-equiv-Set = type-Set A ≃ type-Set B
+  equiv-Set : UU (l1 ⊔ l2)
+  equiv-Set = type-Set A ≃ type-Set B
 
-  equiv-Set : Set (l1 ⊔ l2)
-  pr1 equiv-Set = type-equiv-Set
-  pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
+  equiv-set-Set : Set (l1 ⊔ l2)
+  pr1 equiv-set-Set = equiv-Set
+  pr2 equiv-set-Set =
+    is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
 ```

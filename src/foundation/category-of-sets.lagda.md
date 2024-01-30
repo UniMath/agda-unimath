@@ -68,7 +68,7 @@ is-large-category-Set-Large-Precategory :
 is-large-category-Set-Large-Precategory {l} X =
   fundamental-theorem-id
     ( is-contr-equiv'
-      ( Σ (Set l) (type-equiv-Set X))
+      ( Σ (Set l) (equiv-Set X))
       ( equiv-tot (equiv-iso-equiv-Set X))
       ( is-torsorial-equiv-Set X))
     ( iso-eq-Set X)

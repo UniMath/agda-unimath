@@ -182,11 +182,11 @@ module _
   {l : Level} (X : Set l)
   where
 
-  equiv-eq-Set : (Y : Set l) → X ＝ Y → type-equiv-Set X Y
+  equiv-eq-Set : (Y : Set l) → X ＝ Y → equiv-Set X Y
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
 
   abstract
-    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → type-equiv-Set X Y)
+    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → equiv-Set X Y)
     is-torsorial-equiv-Set =
       is-torsorial-equiv-subuniverse is-set-Prop X
 
@@ -194,10 +194,10 @@ module _
     is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)
     is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
 
-  eq-equiv-Set : (Y : Set l) → type-equiv-Set X Y → X ＝ Y
+  eq-equiv-Set : (Y : Set l) → equiv-Set X Y → X ＝ Y
   eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
 
-  extensionality-Set : (Y : Set l) → (X ＝ Y) ≃ type-equiv-Set X Y
+  extensionality-Set : (Y : Set l) → (X ＝ Y) ≃ equiv-Set X Y
   pr1 (extensionality-Set Y) = equiv-eq-Set Y
   pr2 (extensionality-Set Y) = is-equiv-equiv-eq-Set Y
 ```
