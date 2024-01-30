@@ -46,9 +46,9 @@ module _
   {f g : (x : A) → B x}
   where
 
-  ap-left-whisker-htpy :
+  left-whisker-htpy² :
     (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
-  ap-left-whisker-htpy h α = ap h ·l α
+  left-whisker-htpy² h α = ap h ·l α
 ```
 
 ### Right whiskering higher homotopies
@@ -59,7 +59,7 @@ module _
   {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
   where
 
-  ap-right-whisker-htpy :
+  right-whisker-htpy² :
     (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
-  ap-right-whisker-htpy α h = α ·r h
+  right-whisker-htpy² α h = α ·r h
 ```

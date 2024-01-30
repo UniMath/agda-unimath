@@ -13,6 +13,7 @@ open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -269,11 +270,11 @@ module _
     ind-htpy f
       ( λ f' F →
         htpy-precomp F Y ·r postcomp B g ~ postcomp A g ·l htpy-precomp F X)
-      ( ( ap-right-whisker-htpy
+      ( ( right-whisker-htpy²
           ( compute-htpy-precomp-refl-htpy f Y)
           ( postcomp B g)) ∙h
         ( inv-htpy
-          ( ap-left-whisker-htpy
+          ( left-whisker-htpy²
             ( postcomp A g)
             ( compute-htpy-precomp-refl-htpy f X))))
 
@@ -284,11 +285,11 @@ module _
     ind-htpy g
       ( λ g' G →
         htpy-postcomp A G ·r precomp f X ~ precomp f Y ·l htpy-postcomp B G)
-      ( ( ap-right-whisker-htpy
+      ( ( right-whisker-htpy²
           ( compute-htpy-postcomp-refl-htpy A g)
           ( precomp f X)) ∙h
         ( inv-htpy
-          ( ap-left-whisker-htpy
+          ( left-whisker-htpy²
             ( precomp f Y)
             ( compute-htpy-postcomp-refl-htpy B g))))
 
@@ -310,14 +311,14 @@ module _
           htpy-precomp F Y ·r postcomp B g'))
       ( ( ap-concat-htpy
           ( postcomp A g ·l htpy-precomp F X)
-          ( ap-right-whisker-htpy
+          ( right-whisker-htpy²
             ( compute-htpy-postcomp-refl-htpy A g)
             ( precomp f' X))) ∙h
         ( right-unit-htpy) ∙h
         ( inv-htpy (commutative-postcomp-htpy-precomp g F)) ∙h
         ( ap-concat-htpy'
           ( htpy-precomp F Y ·r postcomp B g)
-          ( ap-left-whisker-htpy
+          ( left-whisker-htpy²
             ( precomp f Y)
             ( inv-htpy (compute-htpy-postcomp-refl-htpy B g)))))
 ```

@@ -22,6 +22,7 @@ open import foundation.precomposition-functions
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies
 open import foundation.whiskering-homotopies
 open import foundation.whiskering-identifications
 
@@ -335,7 +336,7 @@ module _
     statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
       ( refl-htpy)
   coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ-refl-htpy =
-    ( ap-left-whisker-htpy
+    ( left-whisker-htpy²
       ( map-inv-distributive-Π-Σ)
       ( compute-htpy-precomp-lifted-family-of-elements B)) ∙h
     ( inv-htpy
