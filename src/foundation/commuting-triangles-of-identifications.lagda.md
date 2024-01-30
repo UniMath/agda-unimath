@@ -268,9 +268,9 @@ module _
   map-coherence-triangle-identifications .(top ∙ right) right top refl =
     ap-concat f top right
 
-  map-coherence-triangle-identifications-inv-right-unit :
+  compute-refl-right-map-coherence-triangle-identifications :
     {x y : A} (p : x ＝ y) →
     inv right-unit ＝
     map-coherence-triangle-identifications p refl p (inv right-unit)
-  map-coherence-triangle-identifications-inv-right-unit refl = refl
+  compute-refl-right-map-coherence-triangle-identifications refl = refl
 ```

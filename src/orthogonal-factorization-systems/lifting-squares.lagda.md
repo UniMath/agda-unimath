@@ -223,7 +223,7 @@ module _
             ( ap
               ( λ r →
                 ( coherence-lifting-square l x ∙ (ap (H x ∙_) r ∙ inv α)) ∙ α)
-              ( map-coherence-triangle-identifications-inv-right-unit
+              ( compute-refl-right-map-coherence-triangle-identifications
                 ( g)
                 ( is-extension-lifting-square l x)))))))
     where
