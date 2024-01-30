@@ -8,6 +8,7 @@ module foundation.fundamental-theorem-of-identity-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -115,12 +116,20 @@ module _
           ( is-contr-retract-of
             ( Σ _ (λ y → a ＝ y))
             ( ( tot i) ,
-              ( tot λ x → pr1 (R x)) ,
+              ( tot (λ x → pr1 (R x))) ,
               ( ( inv-htpy (preserves-comp-tot i (pr1 ∘ R))) ∙h
                 ( tot-htpy (pr2 ∘ R)) ∙h
                 ( tot-id B)))
             ( is-torsorial-path a))
           ( is-torsorial-path a))
+
+    fundamental-theorem-id-retract :
+      (R : (x : A) → (B x) retract-of (a ＝ x)) →
+      is-fiberwise-equiv (inclusion-retract ∘ R)
+    fundamental-theorem-id-retract R =
+      fundamental-theorem-id-retraction
+        ( inclusion-retract ∘ R)
+        ( retraction-retract ∘ R)
 ```
 
 ### The fundamental theorem of identity types, using sections
