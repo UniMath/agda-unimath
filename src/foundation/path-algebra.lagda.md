@@ -81,12 +81,13 @@ module _
 
   middle-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p refl q ＝ ap (_∙ q) (right-unit)
+    assoc p refl q ＝ right-whisker-identification right-unit q
   middle-unit-law-assoc refl q = refl
 
   right-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p q refl ＝ (right-unit ∙ ap (p ∙_) (inv right-unit))
+    assoc p q refl ＝
+      right-unit ∙ left-whisker-identification p (inv right-unit)
   right-unit-law-assoc refl refl = refl
 ```
 
@@ -110,22 +111,23 @@ module _
 
   unit-law-assoc-101 :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p refl q ＝ ap (_∙ q) (right-unit)
+    assoc p refl q ＝ right-whisker-identification right-unit q
   unit-law-assoc-101 refl q = refl
 
   unit-law-assoc-101' :
     (p : x ＝ y) (q : y ＝ z) →
-    inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
+    inv (assoc p refl q) ＝ right-whisker-identification (inv right-unit) q
   unit-law-assoc-101' refl q = refl
 
   unit-law-assoc-110 :
     (p : x ＝ y) (q : y ＝ z) →
-    (assoc p q refl ∙ ap (p ∙_) right-unit) ＝ right-unit
+    assoc p q refl ∙ left-whisker-identification p right-unit ＝ right-unit
   unit-law-assoc-110 refl refl = refl
 
   unit-law-assoc-110' :
     (p : x ＝ y) (q : y ＝ z) →
-    (inv right-unit ∙ assoc p q refl) ＝ ap (p ∙_) (inv right-unit)
+    inv right-unit ∙ assoc p q refl ＝
+    left-whisker-identification p (inv right-unit)
   unit-law-assoc-110' refl refl = refl
 ```
 
@@ -141,7 +143,7 @@ vertical-concat-Id² α β = α ∙ β
 horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z} →
   p ＝ q → u ＝ v → (p ∙ u) ＝ (q ∙ v)
-horizontal-concat-Id² α β = ap-binary (_∙_) α β
+horizontal-concat-Id² α β = ap-binary _∙_ α β
 ```
 
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences
@@ -176,13 +178,13 @@ left-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
   horizontal-concat-Id² (refl {x = p}) γ ＝
   left-whisker-identification p γ
-left-unit-law-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
+left-unit-law-horizontal-concat-Id² = left-unit-ap-binary _∙_
 
 right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α (refl {x = u}) ＝
   right-whisker-identification α u
-right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
+right-unit-law-horizontal-concat-Id² = right-unit-ap-binary _∙_
 ```
 
 Horizontal concatination satisfies an additional "2-dimensional" unit law (on
@@ -247,7 +249,7 @@ module _
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy right-inv α)) ∙
       ( horizontal-concat-Id²
-        ( ap-binary-comp-diagonal (_∙_) id inv α)
+        ( ap-binary-comp-diagonal _∙_ id inv α)
         ( refl))) ∙
     ( ap
       ( λ t → horizontal-concat-Id² t (horizontal-inv-Id² α) ∙ right-inv p')
@@ -263,7 +265,7 @@ module _
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy left-inv α)) ∙
       ( horizontal-concat-Id²
-        ( ap-binary-comp-diagonal (_∙_) inv id α)
+        ( ap-binary-comp-diagonal _∙_ inv id α)
         ( refl))) ∙
     ( ap
       ( λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')
@@ -493,16 +495,16 @@ module _
     p000̂ p00̂0 p0̂00 p00̂1 p0̂01 p010̂ p0̂10 p100̂ p10̂0 p0̂11 p10̂1 p110̂
     p00̂0̂ p0̂00̂ p0̂0̂0 p0̂0̂1 p0̂10̂ p10̂0̂ =
     Id
-      ( ( ap (concat' x000 p0̂11) p00̂0̂) ∙
+      ( ( right-whisker-identification p00̂0̂ p0̂11) ∙
         ( ( assoc p00̂0 p010̂ p0̂11) ∙
-          ( ( ap (concat p00̂0 x111) p0̂10̂) ∙
+          ( ( left-whisker-identification p00̂0 p0̂10̂) ∙
             ( ( inv (assoc p00̂0 p0̂10 p110̂)) ∙
-              ( ( ap (concat' x000 p110̂) p0̂0̂0) ∙
+              ( ( right-whisker-identification p0̂0̂0 p110̂) ∙
                 ( assoc p0̂00 p10̂0 p110̂))))))
       ( ( assoc p000̂ p00̂1 p0̂11) ∙
-        ( ( ap (concat p000̂ x111) p0̂0̂1) ∙
+        ( ( left-whisker-identification p000̂ p0̂0̂1) ∙
           ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
-            ( ( ap (concat' x000 p10̂1) p0̂00̂) ∙
+            ( ( right-whisker-identification p0̂00̂ p10̂1) ∙
               ( ( assoc p0̂00 p100̂ p10̂1) ∙
-                ( ( ap (concat p0̂00 x111) p10̂0̂)))))))
+                ( ( left-whisker-identification p0̂00 p10̂0̂)))))))
 ```

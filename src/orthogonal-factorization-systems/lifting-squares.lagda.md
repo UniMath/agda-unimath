@@ -184,10 +184,9 @@ module _
   pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
   pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) x =
     ( inv (assoc (inv right-unit) (β) (α))) ∙
-    ( ( ap
-        ( _∙ α)
-        ( ( ap
-            ( inv right-unit ∙_)
+    ( ( right-whisker-identification
+        ( ( left-whisker-identification
+            ( inv right-unit)
             ( ( right-transpose-eq-concat _ _ _
                 ( inv
                   ( compute-refl-right-whisker-identification
@@ -199,36 +198,39 @@ module _
           ( is-retraction-inv-concat
             ( right-unit)
             ( _)
-            ( coherence-lifting-square l x ∙ inv right-unit)))) ∙
+            ( coherence-lifting-square l x ∙ inv right-unit)))
+        ( α)) ∙
       ( ( assoc (coherence-lifting-square l x) (inv right-unit) (α)) ∙
-        ( ( ap
-            ( coherence-lifting-square l x ∙_)
-            ( ( ap
-                ( inv right-unit ∙_)
+        ( ( left-whisker-identification
+            ( coherence-lifting-square l x)
+            ( ( left-whisker-identification
+                ( inv right-unit)
                 ( right-unit-law-assoc
                   ( H x)
                   ( ap g (is-extension-lifting-square l x)))) ∙
               ( ( is-retraction-inv-concat
                   ( right-unit)
                   ( _)
-                  ( ap (H x ∙_) (inv right-unit))) ∙
+                  ( left-whisker-identification (H x) (inv right-unit))) ∙
                 ( inv
                   ( is-section-inv-concat' _ α
-                    ( ap (H x ∙_) (inv right-unit))))))) ∙
+                    ( left-whisker-identification (H x) (inv right-unit))))))) ∙
           ( ( inv
               ( assoc
                 ( coherence-lifting-square l x)
-                ( ap (H x ∙_) (inv right-unit) ∙ inv α)
+                ( left-whisker-identification (H x) (inv right-unit) ∙ inv α)
                 ( α))) ∙
             ( ap
               ( λ r →
-                ( coherence-lifting-square l x ∙ (ap (H x ∙_) r ∙ inv α)) ∙ α)
+                ( ( coherence-lifting-square l x) ∙
+                  ( left-whisker-identification (H x) r ∙ inv α)) ∙
+                ( α))
               ( compute-refl-right-map-coherence-triangle-identifications
                 ( g)
                 ( is-extension-lifting-square l x)))))))
     where
       α = assoc (H x) (ap g (is-extension-lifting-square l x)) refl
-      β = ap (_∙ refl) (coherence-lifting-square l x)
+      β = right-whisker-identification (coherence-lifting-square l x) refl
 
   htpy-eq-lifting-square :
     (l l' : lifting-square h f g i H) → l ＝ l' → htpy-lifting-square l l'

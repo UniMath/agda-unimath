@@ -27,6 +27,7 @@ open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
@@ -416,9 +417,9 @@ module _
                   ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
                 ( is-equiv-concat-htpy'
                   ( H ∙h (g ·l L))
-                  ( λ x → ap (_∙ H' x) (inv right-unit)))
+                  ( λ x → right-whisker-identification (inv right-unit) (H' x)))
                 ( is-equiv-concat-htpy
-                  ( λ x → ap (H x ∙_) right-unit)
+                  ( λ x → left-whisker-identification (H x) right-unit)
                   ( (f ·l K) ∙h refl-htpy ∙h H'))))
 
   abstract
@@ -1080,12 +1081,12 @@ module _
   pr1 (cone-ap c1 c2) = ap (vertical-map-cone f g c)
   pr1 (pr2 (cone-ap c1 c2)) = ap (horizontal-map-cone f g c)
   pr2 (pr2 (cone-ap c1 c2)) γ =
-    ( ap
-      ( _∙ coherence-square-cone f g c c2)
-      ( inv (ap-comp f (vertical-map-cone f g c) γ))) ∙
+    ( right-whisker-identification
+      ( inv (ap-comp f (vertical-map-cone f g c) γ))
+      ( coherence-square-cone f g c c2)) ∙
     ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
-      ( ap
-        ( coherence-square-cone f g c c1 ∙_)
+      ( left-whisker-identification
+        ( coherence-square-cone f g c c1)
         ( ap-comp g (horizontal-map-cone f g c) γ)))
 
   cone-ap' :
@@ -1105,12 +1106,12 @@ module _
     ( tr-Id-right
       ( coherence-square-cone f g c c2)
       ( ap f (ap (vertical-map-cone f g c) γ))) ∙
-    ( ( ap
-        ( _∙ coherence-square-cone f g c c2)
-        ( inv (ap-comp f (vertical-map-cone f g c) γ))) ∙
+    ( ( right-whisker-identification
+        ( inv (ap-comp f (vertical-map-cone f g c) γ))
+        ( coherence-square-cone f g c c2)) ∙
       ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
-        ( ap
-          ( coherence-square-cone f g c c1 ∙_)
+        ( left-whisker-identification
+          ( coherence-square-cone f g c c1)
           ( ap-comp g (horizontal-map-cone f g c) γ))))
 
   is-pullback-cone-ap :

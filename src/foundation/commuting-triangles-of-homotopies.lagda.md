@@ -10,6 +10,7 @@ module foundation.commuting-triangles-of-homotopies where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -84,7 +85,7 @@ module _
     (H : h ~ i) (T : coherence-triangle-homotopies left right top) →
     coherence-triangle-homotopies {h = i} (left ∙h H) (right ∙h H) top
   left-whisker-htpy-coherence-triangle-homotopies H T =
-    (λ x → ap (_∙ H x) (T x)) ∙h assoc-htpy top right H
+    (λ x → right-whisker-identification (T x) (H x)) ∙h assoc-htpy top right H
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -116,7 +117,8 @@ module _
     (T : coherence-triangle-homotopies left right top) (H : i ~ f) →
     coherence-triangle-homotopies {f = i} (H ∙h left) right (H ∙h top)
   right-whisker-htpy-coherence-triangle-homotopies T H =
-    (λ x → ap (H x ∙_) (T x)) ∙h (inv-htpy-assoc-htpy H top right)
+    ( λ x → left-whisker-identification (H x) (T x)) ∙h
+    ( inv-htpy-assoc-htpy H top right)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}

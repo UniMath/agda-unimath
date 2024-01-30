@@ -58,6 +58,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import group-theory.concrete-groups
 open import group-theory.generating-sets-groups
@@ -1112,8 +1113,7 @@ module _
                     ( inv-equiv
                       ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))))
                   ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))) ∙
-                ( ap
-                  ( _∙ eq-counting-equivalence-class-R n)
+                ( right-whisker-identification
                   ( inv
                     ( compute-eq-equiv-comp-equiv
                       ( inv-equiv
@@ -1124,19 +1124,18 @@ module _
                             ( equivalence-class ∘ R (n +ℕ 2))
                             ( eq-pair-Σ p
                               ( eq-is-prop is-prop-type-trunc-Prop)))))) ∙
-                    ( ap
-                      ( _∙
-                        ( eq-equiv
+                    ( right-whisker-identification
+                      ( inv
+                        ( commutativity-inv-eq-equiv
+                          ( compute-raise-Fin l4 2 ∘e
+                            inv-equiv (that-thing n))))
+                      ( ( eq-equiv
                           ( equiv-eq
                             ( inv
                               ( ap
                                 ( equivalence-class ∘ R (n +ℕ 2))
                                 ( eq-pair-Σ p
-                                  ( eq-is-prop is-prop-type-trunc-Prop)))))))
-                      ( inv
-                        ( commutativity-inv-eq-equiv
-                          ( compute-raise-Fin l4 2 ∘e
-                            inv-equiv (that-thing n)))) ∙
+                                  ( eq-is-prop is-prop-type-trunc-Prop))))))) ∙
                       ( ap
                         ( λ e →
                           inv (eq-counting-equivalence-class-R n) ∙
@@ -1146,7 +1145,8 @@ module _
                                   ( equivalence-class ∘ R (n +ℕ 2))
                                   ( eq-pair-Σ p
                                     ( eq-is-prop is-prop-type-trunc-Prop))))))
-                        ( left-inverse-law-equiv equiv-univalence)))))) ∙
+                        ( left-inverse-law-equiv equiv-univalence))))
+                  ( eq-counting-equivalence-class-R n))) ∙
               ( distributive-inv-concat
                 ( inv (eq-counting-equivalence-class-R n) ∙
                   ( inv
@@ -1154,26 +1154,26 @@ module _
                       ( equivalence-class ∘ R (n +ℕ 2))
                       ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))
                 ( eq-counting-equivalence-class-R n) ∙
-                ( ap
-                  ( inv (eq-counting-equivalence-class-R n) ∙_)
+                ( left-whisker-identification
+                  ( inv (eq-counting-equivalence-class-R n))
                   ( distributive-inv-concat
                     ( inv (eq-counting-equivalence-class-R n))
                     ( inv
                       ( ap
                         ( equivalence-class ∘ R (n +ℕ 2))
                         ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))) ∙
-                    ( ap
-                      ( _∙ inv (inv (eq-counting-equivalence-class-R n)))
+                    ( right-whisker-identification
                       ( inv-inv
                         ( ap
                           ( equivalence-class ∘ R (n +ℕ 2))
                           ( eq-pair-Σ p
-                            ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
-                      ( ap
+                            ( eq-is-prop is-prop-type-trunc-Prop))))
+                      ( inv (inv (eq-counting-equivalence-class-R n))) ∙
+                      ( left-whisker-identification
                         ( ap
                           ( equivalence-class ∘ R (n +ℕ 2))
                           ( eq-pair-Σ p
-                            ( eq-is-prop is-prop-type-trunc-Prop)) ∙_)
+                            ( eq-is-prop is-prop-type-trunc-Prop)))
                         ( inv-inv (eq-counting-equivalence-class-R n)))))))) ∙
             ( ( ap
               ( eq-pair-Σ
@@ -1191,10 +1191,10 @@ module _
                   ( eq-counting-equivalence-class-R n))
                 ( eq-is-prop is-prop-type-trunc-Prop)
                 ( _) ∙
-                ( ap
+                ( left-whisker-identification
                   ( eq-pair-Σ
                     ( inv (eq-counting-equivalence-class-R n))
-                    ( eq-is-prop is-prop-type-trunc-Prop) ∙_)
+                    ( eq-is-prop is-prop-type-trunc-Prop))
                   ( interchange-concat-eq-pair-Σ
                     ( ap
                       ( equivalence-class ∘ R (n +ℕ 2))
@@ -1202,13 +1202,7 @@ module _
                     ( eq-counting-equivalence-class-R n)
                     ( eq-is-prop is-prop-type-trunc-Prop)
                     ( eq-is-prop is-prop-type-trunc-Prop) ∙
-                    ( ap
-                      ( _∙
-                        ( eq-pair-Σ
-                          ( eq-equiv
-                            ( compute-raise-Fin l4 2 ∘e
-                              inv-equiv (that-thing n)))
-                          ( eq-is-prop is-prop-type-trunc-Prop)))
+                    ( right-whisker-identification
                       ( ap
                         ( λ w → eq-pair-Σ (pr1 w) (pr2 w))
                         { y =
@@ -1234,20 +1228,24 @@ module _
                           ( ap
                             ( map-quotient-delooping-sign (n +ℕ 2))
                             ( eq-pair-Σ p
-                              ( eq-is-prop is-prop-type-trunc-Prop))))))))) ∙
-              ( ap
-                ( _∙
-                    ( ap
-                      ( map-quotient-delooping-sign (n +ℕ 2))
-                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
+                              ( eq-is-prop is-prop-type-trunc-Prop))))
                       ( eq-pair-Σ
-                        ( eq-counting-equivalence-class-R n)
-                        ( eq-is-prop is-prop-type-trunc-Prop))))
+                        ( eq-equiv
+                          ( compute-raise-Fin l4 2 ∘e
+                            inv-equiv (that-thing n)))
+                        ( eq-is-prop is-prop-type-trunc-Prop))))))) ∙
+              ( right-whisker-identification
                 ( ap
                   ( eq-pair-Σ (inv (eq-counting-equivalence-class-R n)))
                   ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
                   ( inv
                     ( distributive-inv-eq-pair-Σ
+                      ( eq-counting-equivalence-class-R n)
+                      ( eq-is-prop is-prop-type-trunc-Prop))))
+                ( ( ap
+                    ( map-quotient-delooping-sign (n +ℕ 2))
+                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
+                    ( eq-pair-Σ
                       ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
                 ( inv

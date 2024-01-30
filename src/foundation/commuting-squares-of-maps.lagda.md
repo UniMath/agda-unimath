@@ -24,6 +24,7 @@ open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies
 open import foundation.whiskering-homotopies
+open import foundation.whiskering-identifications
 
 open import foundation-core.commuting-prisms-of-maps
 open import foundation-core.function-extensionality
@@ -95,7 +96,7 @@ module _
     ( coherence-square-htpy-coherence-triangles-maps refl-htpy H K) ~
     ( coherence-square-coherence-triangles-maps diagonal H K)
   compute-coherence-square-refl-htpy-coherence-triangles-maps diagonal H K x =
-    ap (_∙ K x) right-unit
+    right-whisker-identification right-unit (K x)
 ```
 
 ### Inverting squares horizontally and vertically
@@ -380,11 +381,11 @@ module _
                 ( nat-htpy
                   ( is-retraction-map-inv-equiv right ·r top)
                   ( is-retraction-map-inv-equiv left a)))))) ∙
-        ( ap
-          ( _∙ ap top (is-retraction-map-inv-equiv left a))
+        ( right-whisker-identification
           ( right-inverse-eq-transpose-equiv
             ( right)
-            ( H (map-inv-equiv left (map-equiv left a)))))))
+            ( H (map-inv-equiv left (map-equiv left a))))
+          ( ap top (is-retraction-map-inv-equiv left a)))))
 
   right-inverse-law-pasting-vertical-coherence-square-maps :
     ( H : coherence-square-maps top (map-equiv left) (map-equiv right) bottom) →
@@ -412,8 +413,8 @@ module _
             ( map-equiv right)
             ( coherence-square-inv-vertical top left right bottom H a))
           ( is-section-map-inv-equiv right (bottom a))) ∙
-        ( ap
-          ( H (map-inv-equiv left a) ∙_)
+        ( left-whisker-identification
+          ( H (map-inv-equiv left a))
           ( triangle-eq-transpose-equiv
             ( right)
             ( ( inv (H (map-inv-equiv left a))) ∙
@@ -1037,9 +1038,9 @@ module _
     ( K)
     ( h) =
     ( compute-concat-htpy-precomp (H ∙h L) K W h) ∙
-    ( ap
-      ( _∙ precomp-coherence-triangle-maps diagonal-right right top K W h)
-      ( compute-concat-htpy-precomp H L W h))
+    ( right-whisker-identification
+      ( compute-concat-htpy-precomp H L W h)
+      ( precomp-coherence-triangle-maps diagonal-right right top K W h))
 
   distributive-precomp-coherence-square-left-map-triangle-coherence-triangle-maps' :
     { diagonal-left diagonal-right : A → Y} →
@@ -1075,8 +1076,8 @@ module _
     ( K)
     ( h) =
     ( compute-concat-htpy-precomp H (L ∙h K) W h) ∙
-    ( ap
-      ( precomp-coherence-triangle-maps' diagonal-left bottom left H W h ∙_)
+    ( left-whisker-identification
+      ( precomp-coherence-triangle-maps' diagonal-left bottom left H W h)
       ( compute-concat-htpy-precomp L K W h))
 
   distributive-precomp-coherence-square-comp-coherence-triangles-maps :
