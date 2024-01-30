@@ -30,8 +30,12 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
+open import foundation.path-algebra
 open import foundation.raising-universe-levels
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -427,7 +431,7 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( leq-zero-ℕ (succ-ℕ (nat-Fin (succ-ℕ k) (inr star))))
 ```
 
-### Fin is injective
+### `Fin` is injective
 
 ```agda
 is-equivalence-injective-Fin : is-equivalence-injective Fin
@@ -444,4 +448,24 @@ abstract
   is-injective-Fin : is-injective Fin
   is-injective-Fin =
     is-injective-is-equivalence-injective is-equivalence-injective-Fin
+
+compute-is-equivalence-injective-Fin-id-equiv :
+  {n : ℕ} → is-equivalence-injective-Fin {n} {n} id-equiv ＝ refl
+compute-is-equivalence-injective-Fin-id-equiv {zero-ℕ} = refl
+compute-is-equivalence-injective-Fin-id-equiv {succ-ℕ n} =
+  ap² succ-ℕ
+    ( ( ap is-equivalence-injective-Fin compute-equiv-equiv-Maybe-id-equiv) ∙
+      ( compute-is-equivalence-injective-Fin-id-equiv {n}))
+
+is-retraction-is-equivalence-injective-Fin :
+  {n m : ℕ} →
+  is-retraction (equiv-tr Fin) (is-equivalence-injective-Fin {n} {m})
+is-retraction-is-equivalence-injective-Fin refl =
+  compute-is-equivalence-injective-Fin-id-equiv
+
+is-section-is-equivalence-injective-Fin' :
+  {n : ℕ} →
+  equiv-tr Fin (is-equivalence-injective-Fin {n} {n} id-equiv) ＝ id-equiv
+is-section-is-equivalence-injective-Fin' =
+  ap (equiv-tr Fin) compute-is-equivalence-injective-Fin-id-equiv
 ```
