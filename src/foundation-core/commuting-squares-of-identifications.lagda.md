@@ -398,7 +398,6 @@ For any identification `p : u ＝ x` we obtain an equivalence
        ∨          ∨                         ∨          ∨
        z -------> w                         z -------> w
           bottom                               bottom
-
 ```
 
 of coherences of commuting squares of identifications.
@@ -415,7 +414,6 @@ For any identification `p : w ＝ u` we obtain an equivalence
        ∨          ∨                     ∨               ∨
        z -------> w                     z ------------> w
           bottom                           bottom ∙ p
-
 ```
 
 of coherences of commuting squares of identifications.
@@ -433,7 +431,6 @@ For inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped wit
        ∨          ∨                         ∨              ∨
        z -------> w                         u -----------> w
           bottom                               q ∙ bottom
-
 ```
 
 of coherences of commuting squares of identifications.
@@ -451,7 +448,6 @@ For inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped wit
        ∨          ∨                     ∨           ∨
        z -------> w                     z --------> w
           bottom                           bottom
-
 ```
 
 of coherences of commuting squares of identifications.
