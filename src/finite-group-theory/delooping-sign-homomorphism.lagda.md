@@ -1129,13 +1129,13 @@ module _
                         ( commutativity-inv-eq-equiv
                           ( compute-raise-Fin l4 2 ∘e
                             inv-equiv (that-thing n))))
-                      ( ( eq-equiv
-                          ( equiv-eq
-                            ( inv
-                              ( ap
-                                ( equivalence-class ∘ R (n +ℕ 2))
-                                ( eq-pair-Σ p
-                                  ( eq-is-prop is-prop-type-trunc-Prop))))))) ∙
+                      ( eq-equiv
+                        ( equiv-eq
+                          ( inv
+                            ( ap
+                              ( equivalence-class ∘ R (n +ℕ 2))
+                              ( eq-pair-Σ p
+                                ( eq-is-prop is-prop-type-trunc-Prop)))))) ∙
                       ( ap
                         ( λ e →
                           inv (eq-counting-equivalence-class-R n) ∙
@@ -1244,10 +1244,10 @@ module _
                       ( eq-is-prop is-prop-type-trunc-Prop))))
                 ( ( ap
                     ( map-quotient-delooping-sign (n +ℕ 2))
-                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
-                    ( eq-pair-Σ
-                      ( eq-counting-equivalence-class-R n)
-                      ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
+                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                  ( eq-pair-Σ
+                    ( eq-counting-equivalence-class-R n)
+                    ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                 ( inv
                   ( eq-tr-type-Ω
                     ( eq-pair-Σ
