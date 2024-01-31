@@ -1,6 +1,8 @@
 # Natural transformations between functors between precategories
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module category-theory.natural-transformations-functors-precategories where
 ```
 
@@ -255,4 +257,23 @@ module _
       ( map-functor-Precategory C D G)
       ( map-functor-Precategory C D H)
       ( map-functor-Precategory C D I)
+```
+
+## Composition of natural transformations
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4) (E : Precategory l5 l6)
+  where
+  horizontal-comp-natural-transformation-Precategory :
+    (F G : functor-Precategory C D)
+    (H I : functor-Precategory D E)
+    (β : natural-transformation-Precategory D E H I)
+    (α : natural-transformation-Precategory C D F G) →
+    natural-transformation-Precategory
+      ( C)
+      ( E)
+      ( comp-functor-Precategory C D E H F)
+      ( comp-functor-Precategory C D E I G)
+  horizontal-comp-natural-transformation-Precategory = {!   !}
 ```
