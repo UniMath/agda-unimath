@@ -66,7 +66,7 @@ Given a commuting triangle of identifications
       \     /
   left \   / right
         ∨ ∨
-         z     ,
+         z,
 ```
 
 we may consider three ways of attaching new identifications to it:
