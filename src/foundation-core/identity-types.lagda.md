@@ -116,7 +116,9 @@ While the third option may be preferred by some for its symmetry, for practical
 reasons, we use the first alternative by convention.
 
 See also
-[judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md).
+
+- [judgmentally left unital concatenation operation on indentifications](foundation.judgmentally-left-unital-concatenation-operation-identifications.md)
+- [judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
 
 ```agda
 module _
@@ -132,14 +134,6 @@ module _
 
   concat' : (x : A) {y z : A} → y ＝ z → x ＝ y → x ＝ z
   concat' x q p = p ∙ q
-
-  infixl 15 _∙ᵣ_
-  _∙ᵣ_ : {x y z : A} → x ＝ y → y ＝ z → x ＝ z
-  p ∙ᵣ refl = p
-
-  coh-concat :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) → p ∙ q ＝ p ∙ᵣ q
-  coh-concat refl refl = refl
 ```
 
 ### Inverting identifications
