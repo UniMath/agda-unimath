@@ -7,9 +7,10 @@ module foundation.judgmentally-right-unital-concatenation-identifications where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
-open import foundation-core.identity-types
 open import foundation.action-on-identifications-functions
+open import foundation.universe-levels
+
+open import foundation-core.identity-types
 ```
 
 </details>
