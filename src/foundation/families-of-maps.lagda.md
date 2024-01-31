@@ -56,7 +56,7 @@ module _
       ≃ (((x , _) : Σ A B) →
           Σ (Σ A (x ＝_)) λ (x' , _) → C x') by equiv-Π-equiv-family (λ (x , _) →
                                                   inv-left-unit-law-Σ-is-contr
-                                                    (is-torsorial-path x)
+                                                    (is-torsorial-Id x)
                                                     (x , refl))
       ≃ (((x , _) : Σ A B) →
           Σ (Σ A C) λ (x' , _) → x ＝ x') by equiv-Π-equiv-family (λ (x , _) →

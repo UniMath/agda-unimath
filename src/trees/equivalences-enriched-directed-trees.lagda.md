@@ -506,7 +506,7 @@ module _
     is-contr-equiv'
       ( Σ (Enriched-Directed-Tree l3 l4 A B) (λ S → T ＝ S))
       ( equiv-tot extensionality-Enriched-Directed-Tree)
-      ( is-torsorial-path T)
+      ( is-torsorial-Id T)
 ```
 
 ### A morphism of enriched directed trees is an equivalence if it is an equivalence on the nodes

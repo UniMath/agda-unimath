@@ -161,7 +161,7 @@ abstract
           ( tot (λ α → right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α → is-equiv-right-transpose-eq-concat refl α (pr1 (pr2 s))))
-          ( is-torsorial-path' (pr1 (pr2 s))))
+          ( is-torsorial-Id' (pr1 (pr2 s))))
         ( pair (pr1 (pr2 s)) (inv (right-inv (pr1 (pr2 s)))))
         ( is-contr-is-equiv'
           ( Σ ( ( k : ℤ) → Id (pr1 s (succ-ℤ k)) (pr1 (pS k) (pr1 s k)))

@@ -169,7 +169,7 @@ module _
     is-contr
       ( vertex-on-walk-Undirected-Graph G (refl-walk-Undirected-Graph {x = x}))
   is-contr-vertex-on-walk-refl-walk-Undirected-Graph =
-    is-torsorial-path x
+    is-torsorial-Id x
 ```
 
 ### The type of vertices on a walk is equivalent to `Fin (n + 1)` where `n` is the length of the walk
@@ -192,7 +192,7 @@ module _
     ( equiv-coprod
       ( compute-vertex-on-walk-Undirected-Graph w)
       ( equiv-is-contr
-        ( is-torsorial-path (other-element-unordered-pair p y))
+        ( is-torsorial-Id (other-element-unordered-pair p y))
         ( is-contr-unit))) ∘e
     ( left-distributive-Σ-coprod
       ( vertex-Undirected-Graph G)
@@ -231,7 +231,7 @@ module _
     ( equiv-coprod
       ( compute-edge-on-walk-Undirected-Graph w)
       ( equiv-is-contr
-        ( is-torsorial-path (pair p e))
+        ( is-torsorial-Id (pair p e))
         ( is-contr-unit))) ∘e
     ( left-distributive-Σ-coprod
       ( total-edge-Undirected-Graph G)

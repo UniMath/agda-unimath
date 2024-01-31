@@ -256,5 +256,5 @@ module _
     is-contr-equiv'
       ( Σ (rooted-hom-Directed-Tree S T) (λ g → f ＝ g))
       ( equiv-tot extensionality-rooted-hom-Directed-Tree)
-      ( is-torsorial-path f)
+      ( is-torsorial-Id f)
 ```

@@ -82,16 +82,16 @@ module _
   where
 
   abstract
-    is-torsorial-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
-    pr1 (pr1 (is-torsorial-path a)) = a
-    pr2 (pr1 (is-torsorial-path a)) = refl
-    pr2 (is-torsorial-path a) (pair .a refl) = refl
+    is-torsorial-Id : (a : A) → is-contr (Σ A (λ x → a ＝ x))
+    pr1 (pr1 (is-torsorial-Id a)) = a
+    pr2 (pr1 (is-torsorial-Id a)) = refl
+    pr2 (is-torsorial-Id a) (pair .a refl) = refl
 
   abstract
-    is-torsorial-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
-    pr1 (pr1 (is-torsorial-path' a)) = a
-    pr2 (pr1 (is-torsorial-path' a)) = refl
-    pr2 (is-torsorial-path' a) (pair .a refl) = refl
+    is-torsorial-Id' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
+    pr1 (pr1 (is-torsorial-Id' a)) = a
+    pr2 (pr1 (is-torsorial-Id' a)) = refl
+    pr2 (is-torsorial-Id' a) (pair .a refl) = refl
 ```
 
 ## Properties
