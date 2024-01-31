@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.truncated-types
+open import foundation.univalent-type-families
 open import foundation.universe-levels
 
 open import foundation-core.1-types
@@ -23,6 +24,7 @@ open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 ```
@@ -173,28 +175,6 @@ precomp-Set :
 precomp-Set f C = precomp f (type-Set C)
 ```
 
-### The type of equivalences between sets is a set
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-set-equiv-is-set : is-set A → is-set B → is-set (A ≃ B)
-  is-set-equiv-is-set = is-trunc-equiv-is-trunc zero-𝕋
-
-module _
-  {l1 l2 : Level} (A : Set l1) (B : Set l2)
-  where
-
-  type-equiv-Set : UU (l1 ⊔ l2)
-  type-equiv-Set = type-Set A ≃ type-Set B
-
-  equiv-Set : Set (l1 ⊔ l2)
-  pr1 equiv-Set = type-equiv-Set
-  pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
-```
-
 ### Extensionality of sets
 
 ```agda
@@ -202,11 +182,11 @@ module _
   {l : Level} (X : Set l)
   where
 
-  equiv-eq-Set : (Y : Set l) → X ＝ Y → type-equiv-Set X Y
+  equiv-eq-Set : (Y : Set l) → X ＝ Y → equiv-Set X Y
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
 
   abstract
-    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → type-equiv-Set X Y)
+    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → equiv-Set X Y)
     is-torsorial-equiv-Set =
       is-torsorial-equiv-subuniverse is-set-Prop X
 
@@ -214,10 +194,10 @@ module _
     is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)
     is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
 
-  eq-equiv-Set : (Y : Set l) → type-equiv-Set X Y → X ＝ Y
+  eq-equiv-Set : (Y : Set l) → equiv-Set X Y → X ＝ Y
   eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
 
-  extensionality-Set : (Y : Set l) → (X ＝ Y) ≃ type-equiv-Set X Y
+  extensionality-Set : (Y : Set l) → (X ＝ Y) ≃ equiv-Set X Y
   pr1 (extensionality-Set Y) = equiv-eq-Set Y
   pr2 (extensionality-Set Y) = is-equiv-equiv-eq-Set Y
 ```
@@ -262,4 +242,24 @@ set-Truncated-Type :
   {l : Level} (k : 𝕋) → Set l → Truncated-Type l (succ-𝕋 (succ-𝕋 k))
 pr1 (set-Truncated-Type k A) = type-Set A
 pr2 (set-Truncated-Type k A) = is-trunc-is-set k (is-set-type-Set A)
+```
+
+### The type of equivalences is a set if the domain or codomain is a set
+
+```agda
+abstract
+  is-set-equiv-is-set-codomain :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-set B → is-set (A ≃ B)
+  is-set-equiv-is-set-codomain = is-trunc-equiv-is-trunc-codomain neg-one-𝕋
+
+  is-set-equiv-is-set-domain :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-set A → is-set (A ≃ B)
+  is-set-equiv-is-set-domain = is-trunc-equiv-is-trunc-domain neg-one-𝕋
+```
+
+### The canonical type family over `Set` is univalent
+
+```agda
+is-univalent-type-Set : {l : Level} → is-univalent (type-Set {l})
+is-univalent-type-Set = is-univalent-inclusion-subuniverse is-set-Prop
 ```

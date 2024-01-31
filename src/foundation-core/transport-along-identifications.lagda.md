@@ -110,7 +110,7 @@ module _
 ```agda
 tr-Id-left :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
-  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+  tr (_＝ a) q p ＝ (inv q ∙ p)
 tr-Id-left refl p = refl
 ```
 
