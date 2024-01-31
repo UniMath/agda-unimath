@@ -71,7 +71,9 @@ identifications in arbitrary types.
 
 ### Identity types
 
-We introduce identity types as a `data` type. This is Agda's mechanism of introducing types equipped with induction principles. The only constructor of the identity type `Id x : A → 𝒰` is the reflexivity identification
+We introduce identity types as a `data` type. This is Agda's mechanism of
+introducing types equipped with induction principles. The only constructor of
+the identity type `Id x : A → 𝒰` is the reflexivity identification
 
 ```text
   refl : Id x x.
@@ -92,9 +94,13 @@ module _
 {-# BUILTIN EQUALITY Id #-}
 ```
 
-We marked `refl` as an `instance` to enable Agda to automatically insert `refl` in definitions that make use of Agda's [instance search mechanism](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
+We marked `refl` as an `instance` to enable Agda to automatically insert `refl`
+in definitions that make use of Agda's
+[instance search mechanism](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
 
-Furthermore, we marked the identity type as [`BUILTIN`](https://agda.readthedocs.io/en/latest/language/built-ins.html) in order to support faster type checking.
+Furthermore, we marked the identity type as
+[`BUILTIN`](https://agda.readthedocs.io/en/latest/language/built-ins.html) in
+order to support faster type checking.
 
 ### The induction principle of identity types
 
@@ -117,9 +123,15 @@ ind-Id x B b y refl = b
 
 ## Operations on the identity type
 
-The identity types form a weak groupoidal structure on types. Thus they come equipped with **concatenation** `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an **inverse operation** `(x ＝ y) → (y ＝ x)`.
+The identity types form a weak groupoidal structure on types. Thus they come
+equipped with **concatenation** `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
+**inverse operation** `(x ＝ y) → (y ＝ x)`.
 
-There are many more operations on identity types. Some of them are defined in [path algebra](foundation.path-algebra.md) and [whiskering of identifications](foundation.whiskering-identifications.md). For a complete reference to all the files about general identity types, see the table given above.
+There are many more operations on identity types. Some of them are defined in
+[path algebra](foundation.path-algebra.md) and
+[whiskering of identifications](foundation.whiskering-identifications.md). For a
+complete reference to all the files about general identity types, see the table
+given above.
 
 ### Concatenation of identifications
 
@@ -168,15 +180,21 @@ module _
 
 ### Associativity of concatenation
 
-For any three identifications `p : x ＝ y`, `q : y ＝ z`, and `r : z ＝ w`, we have an identification
+For any three identifications `p : x ＝ y`, `q : y ＝ z`, and `r : z ＝ w`, we
+have an identification
 
 ```text
   assoc p q r : ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r)).
 ```
 
-The identification `assoc p q r` is also called the {{#concept "associator" Disambiguation="identification" Agda=assoc}}.
+The identification `assoc p q r` is also called the
+{{#concept "associator" Disambiguation="identification" Agda=assoc}}.
 
-Note that the associator `assoc p q r` is an identification in the type `x ＝ w`, i.e., it is an identification of identifications. Here we make crucial use of the fact that the identity types are defined _for all types_. In other words, since identity types are themselves types, we can consider identity types of identity types, and so on.
+Note that the associator `assoc p q r` is an identification in the type
+`x ＝ w`, i.e., it is an identification of identifications. Here we make crucial
+use of the fact that the identity types are defined _for all types_. In other
+words, since identity types are themselves types, we can consider identity types
+of identity types, and so on.
 
 ```agda
 module _
@@ -203,7 +221,8 @@ Similarly, there is an identification
   right-unit : (p ∙ refl) ＝ p.
 ```
 
-In other words, the reflexivity identification is a unit element for concatenation of identifications.
+In other words, the reflexivity identification is a unit element for
+concatenation of identifications.
 
 ```agda
 module _
@@ -257,21 +276,27 @@ module _
 
 ### Concatenating with an inverse is inverse to concatenating
 
-We show that the operation `q ↦ inv p ∙ q` is inverse to the operation `q ↦ p ∙ q` by constructing identifications
+We show that the operation `q ↦ inv p ∙ q` is inverse to the operation
+`q ↦ p ∙ q` by constructing identifications
 
 ```text
   inv p ∙ (p ∙ q) ＝ q
   p ∙ (inv p ∙ q) ＝ q.
 ```
 
-Similarly, we show that the operation `p ↦ p ∙ inv q` is inverse to the operation `p ↦ p ∙ q` by constructing identifications
+Similarly, we show that the operation `p ↦ p ∙ inv q` is inverse to the
+operation `p ↦ p ∙ q` by constructing identifications
 
 ```text
   (p ∙ q) ∙ inv q ＝ p
   (p ∙ inv q) ∙ q ＝ p.
 ```
 
-In [`foundation.identity-types`](foundation.identity-types.md)` we will use these families of identifications to conclude that `concat p z` and `concat' x q` are [equivalences](foundation-core.equivalences.md) with inverses `concat (inv p) z` and `concat' x (inv q)`, respectively.
+In
+[`foundation.identity-types`](foundation.identity-types.md)`we will use these families of identifications to conclude that`concat
+p z`and`concat' x
+q`are [equivalences](foundation-core.equivalences.md) with inverses`concat (inv
+p) z`and`concat' x (inv q)`, respectively.
 
 ```agda
 module _
@@ -376,9 +401,21 @@ step-equational-reasoning p z q = p ∙ q
 syntax step-equational-reasoning p z q = p ＝ z by q
 ```
 
-**Note.** Equational reasoning is a convenient way to construct identifications. However, in some situations it may not be the fastest or cleanest mechanism to construct an identification. Some constructions of identifications naturally involve computations that are more deeply nested in the terms. Furthermore, proofs by equational reasoning tend to require a lot of reassociation.
+**Note.** Equational reasoning is a convenient way to construct identifications.
+However, in some situations it may not be the fastest or cleanest mechanism to
+construct an identification. Some constructions of identifications naturally
+involve computations that are more deeply nested in the terms. Furthermore,
+proofs by equational reasoning tend to require a lot of reassociation.
 
-Some tools that allow us to perform faster comutations are the transpositions defined above, the transpositions and splicing operations defined in [commuting squares of identifications](foundation.commuting-squares-identifications.md) and [commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md), and the higher concatenation operations defined in [path algebra](foundation.path-algebra.md). Each of these operations has good computational behavior, so there is infrastructure for reasoning about identifications that are constructed using them.
+Some tools that allow us to perform faster comutations are the transpositions
+defined above, the transpositions and splicing operations defined in
+[commuting squares of identifications](foundation.commuting-squares-identifications.md)
+and
+[commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md),
+and the higher concatenation operations defined in
+[path algebra](foundation.path-algebra.md). Each of these operations has good
+computational behavior, so there is infrastructure for reasoning about
+identifications that are constructed using them.
 
 ## References
 
