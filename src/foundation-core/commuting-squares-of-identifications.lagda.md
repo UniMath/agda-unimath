@@ -1,4 +1,4 @@
-# Commuting squares of identifications
+l# Commuting squares of identifications
 
 ```agda
 module foundation-core.commuting-squares-of-identifications where
@@ -227,7 +227,7 @@ module _
   map-coherence-square-identifications refl refl right refl coh = ap (ap f) coh
 ```
 
-### Pasting of identifications along edges of squares of identifications
+### Concatenating identifications of edges and coherences of commuting squares of identifications
 
 Consider a commuting square of identifications and an identification of one of
 the four sides with another identification, as for example in the diagram below:
@@ -246,6 +246,24 @@ Then any identification witnessing that the square commutes can be concatenated
 with the identification on the side, to obtain a new commuting square of
 identifications.
 
+#### Concatenating identifications of the top edge with a coherence of a commuting square of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
+
+  top-concat-identification-coherence-square-identifications :
+    {top' : x ＝ y} (s : top ＝ top') →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top' left right bottom
+  top-concat-identification-coherence-square-identifications s sq =
+    sq ∙ ap (concat' _ right) s
+```
+
+#### Concatenating identifications of the left edge with a coherence of a commuting square of identifications
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
@@ -257,6 +275,30 @@ module _
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left' right bottom
   left-concat-identification-coherence-square-identifications refl sq = sq
+```
+
+#### Concatenating identifications of the right edge with a coherence of a commuting square of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
+
+  right-concat-identification-coherence-square-identifications :
+    {right' : y ＝ w} (s : right ＝ right') →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top left right' bottom
+  right-concat-identification-coherence-square-identifications refl sq = sq
+```
+
+#### Concatenating identifications of the bottom edge with a coherence of a commuting square of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
 
   bottom-concat-identification-coherence-square-identifications :
     {bottom' : z ＝ w} (s : bottom ＝ bottom') →
@@ -264,19 +306,6 @@ module _
     coherence-square-identifications top left right bottom'
   bottom-concat-identification-coherence-square-identifications s sq =
     {!!}
-
-  top-concat-identification-coherence-square-identifications :
-    {top' : x ＝ y} (s : top ＝ top') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top' left right bottom
-  top-concat-identification-coherence-square-identifications s sq =
-    sq ∙ ap (concat' _ right) s
-
-  right-concat-identification-coherence-square-identifications :
-    {right' : y ＝ w} (s : right ＝ right') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top left right' bottom
-  right-concat-identification-coherence-square-identifications refl sq = sq
 ```
 
 ### Whiskering and splicing coherences of commuting squares of identifications
