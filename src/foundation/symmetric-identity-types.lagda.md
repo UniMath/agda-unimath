@@ -67,7 +67,7 @@ module _
       (p : symmetric-Id a) → is-torsorial (Eq-symmetric-Id p)
     is-torsorial-Eq-symmetric-Id (x , H) =
       is-torsorial-Eq-structure
-        ( is-torsorial-path x)
+        ( is-torsorial-Id x)
         ( x , refl)
         ( is-torsorial-htpy H)
 

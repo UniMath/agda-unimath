@@ -94,7 +94,7 @@ module _
       (x : im f) → is-torsorial (Eq-im x)
     is-torsorial-Eq-im x =
       is-torsorial-Eq-subtype
-        ( is-torsorial-path (pr1 x))
+        ( is-torsorial-Id (pr1 x))
         ( λ x → is-prop-type-trunc-Prop)
         ( pr1 x)
         ( refl)

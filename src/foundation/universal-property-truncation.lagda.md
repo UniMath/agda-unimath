@@ -68,7 +68,7 @@ module _
                       ( K x' x)
                       ( Id-Truncated-Type C (g x') z)))) ∘e
               ( equiv-ev-pair)))
-          ( is-torsorial-path (g x)))
+          ( is-torsorial-Id (g x)))
 
   is-truncation-is-truncation-ap :
     is-truncation B f

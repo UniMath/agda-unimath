@@ -641,7 +641,7 @@ module _
                         ( subtype-inhabited-subtype Q x)) ∘e
                     ( equiv-inv-equiv))) ∘e
                 ( left-unit-law-Σ-is-contr
-                  ( is-torsorial-path (index-Set-Indexed-Σ-Decomposition D a))
+                  ( is-torsorial-Id (index-Set-Indexed-Σ-Decomposition D a))
                   ( pair
                     ( index-Set-Indexed-Σ-Decomposition D a)
                     ( refl)))) ∘e

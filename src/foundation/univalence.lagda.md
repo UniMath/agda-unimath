@@ -112,7 +112,7 @@ module _
       is-contr-equiv'
         ( Σ (UU l) (λ X → X ＝ A))
         ( equiv-tot (λ X → equiv-univalence))
-        ( is-torsorial-path' A)
+        ( is-torsorial-Id' A)
 ```
 
 ### Univalence for type families

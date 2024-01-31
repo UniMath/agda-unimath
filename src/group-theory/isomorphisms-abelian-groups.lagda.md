@@ -196,7 +196,7 @@ abstract
     is-contr-equiv'
       ( Σ (Ab l) (Id A))
       ( equiv-tot (equiv-iso-eq-Ab' A))
-      ( is-torsorial-path A)
+      ( is-torsorial-Id A)
 
 is-equiv-iso-eq-Ab :
   {l : Level} (A B : Ab l) → is-equiv (iso-eq-Ab A B)
