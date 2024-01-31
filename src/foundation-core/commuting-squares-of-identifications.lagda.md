@@ -408,17 +408,17 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-top-left-whisker' :
+  left-whisker-coherence-square-identifications' :
     {u : A} (p : u ＝ x) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  coherence-square-identifications-top-left-whisker' refl sq = sq
+  left-whisker-coherence-square-identifications' refl sq = sq
 
-  coherence-square-identifications-top-left-whisker :
+  left-whisker-coherence-square-identifications :
     {u : A} (p : x ＝ u) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (inv p ∙ top) (inv p ∙ left) right bottom
-  coherence-square-identifications-top-left-whisker refl sq = sq
+  left-whisker-coherence-square-identifications refl sq = sq
 ```
 
 #### Right whiskering coherences of commuting squares of identifications
@@ -443,11 +443,11 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-bottom-right-whisker :
+  right-whisker-coherence-square-identifications :
     {u : A} (p : w ＝ u) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
-  coherence-square-identifications-bottom-right-whisker refl =
+  right-whisker-coherence-square-identifications refl =
     ( bottom-concat-identification-coherence-square-identifications
       ( top)
       ( left)
@@ -485,11 +485,11 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-bottom-left-whisker :
+  left-splice-coherence-square-identifications :
     {u : A} (p : z ＝ u) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
-  coherence-square-identifications-bottom-left-whisker refl =
+  left-splice-coherence-square-identifications refl =
     left-concat-identification-coherence-square-identifications
       ( top)
       ( left)
@@ -521,11 +521,11 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-top-right-whisker :
+  right-splice-coherence-square-identifications :
     {u : A} (p : y ＝ u) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
-  coherence-square-identifications-top-right-whisker refl =
+  right-splice-coherence-square-identifications refl =
     top-concat-identification-coherence-square-identifications
       ( top)
       ( left)
