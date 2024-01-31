@@ -93,6 +93,31 @@ The identity types form a weak groupoidal structure on types.
 
 ### Concatenation of identifications
 
+The
+{{#concept "concatenation operation on identifications" Agda=_∙_ Agda=_∙'_ Agda=concat}}
+is a map
+
+```text
+  _∙_ : x ＝ y → y ＝ z → x ＝ z
+```
+
+for all `x y z : A`. However, there are essentially three different ways we can
+define concatenation of identifications, all with different computational
+behaviours.
+
+1. We can define concatenation by induction on the equality `x ＝ y`. This gives
+   us the computation rule `refl ∙ q = q`.
+2. We can define concatenation by induction on the equality `y ＝ z`. This gives
+   us the computation rule `p ∙ refl = p`.
+3. We can define `_∙_` by induction on both `x ＝ y` and `y ＝ z`. This only
+   gives us the computation rule `refl ∙ refl = refl`.
+
+While the third option may be preferred by some for its symmetry, for practical
+reasons, we use the first alternative by convention.
+
+See also
+[judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md).
+
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -107,6 +132,14 @@ module _
 
   concat' : (x : A) {y z : A} → y ＝ z → x ＝ y → x ＝ z
   concat' x q p = p ∙ q
+
+  infixl 15 _∙ᵣ_
+  _∙ᵣ_ : {x y z : A} → x ＝ y → y ＝ z → x ＝ z
+  p ∙ᵣ refl = p
+
+  coh-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → p ∙ q ＝ p ∙ᵣ q
+  coh-concat refl refl = refl
 ```
 
 ### Inverting identifications
@@ -194,11 +227,11 @@ module _
   where
 
   is-injective-concat :
-    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → (p ∙ q) ＝ (p ∙ r) → q ＝ r
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → p ∙ q ＝ p ∙ r → q ＝ r
   is-injective-concat refl s = s
 
   is-injective-concat' :
-    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → (p ∙ r) ＝ (q ∙ r) → p ＝ q
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ r ＝ q ∙ r → p ＝ q
   is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
 ```
 
