@@ -279,7 +279,7 @@ module _
   is-section-inv-map-Σ-emb-base (b , c) =
     ap
       ( λ s → (pr1 s , inv-tr C (pr2 s) c))
-      ( eq-is-contr (is-torsorial-path' b))
+      ( eq-is-contr (is-torsorial-Id' b))
 
   is-retraction-inv-map-Σ-emb-base :
     is-retraction (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base

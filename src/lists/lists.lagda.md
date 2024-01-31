@@ -221,7 +221,7 @@ is-torsorial-Eq-list {A = A} l =
   is-contr-equiv'
     ( Σ (list A) (Id l))
     ( equiv-tot (equiv-Eq-list l))
-    ( is-torsorial-path l)
+    ( is-torsorial-Id l)
 
 is-trunc-Eq-list :
   (k : 𝕋) {l : Level} {A : UU l} → is-trunc (succ-𝕋 (succ-𝕋 k)) A →

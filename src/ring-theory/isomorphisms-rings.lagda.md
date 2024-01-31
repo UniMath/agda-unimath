@@ -491,7 +491,7 @@ module _
             ( (mul-Ring R , associative-mul-Ring R) , λ {x} {y} → refl)
             ( is-torsorial-Eq-subtype
               ( is-torsorial-Eq-subtype
-                ( is-torsorial-path (one-Ring R))
+                ( is-torsorial-Id (one-Ring R))
                 ( λ x →
                   is-prop-prod
                     ( is-prop-Π (λ y → is-set-type-Ring R (mul-Ring R x y) y))

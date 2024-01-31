@@ -1146,11 +1146,11 @@ module _
             ( c)
             ( cone-ap' c1))
           ( is-equiv-is-contr _
-            ( is-torsorial-path (horizontal-map-cone f g c c1))
-            ( is-torsorial-path (f (vertical-map-cone f g c c1))))
+            ( is-torsorial-Id (horizontal-map-cone f g c c1))
+            ( is-torsorial-Id (f (vertical-map-cone f g c c1))))
           ( is-equiv-is-contr _
-            ( is-torsorial-path c1)
-            ( is-torsorial-path (vertical-map-cone f g c c1))))
+            ( is-torsorial-Id c1)
+            ( is-torsorial-Id (vertical-map-cone f g c c1))))
         ( c2))
 ```
 

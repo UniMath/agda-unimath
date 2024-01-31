@@ -129,10 +129,10 @@ module _
     ( equiv-coprod
       ( equiv-is-contr
         ( is-contr-Fin-one-ℕ)
-        ( is-torsorial-path x))
+        ( is-torsorial-Id x))
       ( equiv-is-contr
         ( is-contr-unit)
-        ( is-torsorial-path y)))
+        ( is-torsorial-Id y)))
 
   has-two-elements-type-standard-2-Element-Subtype :
     has-two-elements type-standard-2-Element-Subtype

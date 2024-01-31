@@ -85,7 +85,7 @@ equiv-left-factor :
 equiv-left-factor {l1} {l2} {X} {Y} y =
   ( ( right-unit-law-prod) ∘e
     ( equiv-tot
-      ( λ x → equiv-is-contr (is-torsorial-path' y) is-contr-unit))) ∘e
+      ( λ x → equiv-is-contr (is-torsorial-Id' y) is-contr-unit))) ∘e
   ( associative-Σ X (λ x → Y) (λ t → Id (pr2 t) y))
 
 count-left-factor :

@@ -743,7 +743,7 @@ module _
     is-contr-equiv'
       ( Σ (obj-Category C) (X ＝_))
       ( equiv-tot (extensionality-obj-Category C X))
-      ( is-torsorial-path X)
+      ( is-torsorial-Id X)
 
   is-torsorial-iso-Category' :
     is-torsorial (λ Y → iso-Category C Y X)
@@ -751,7 +751,7 @@ module _
     is-contr-equiv'
       ( Σ (obj-Category C) (_＝ X))
       ( equiv-tot (λ Y → extensionality-obj-Category C Y X))
-      ( is-torsorial-path' X)
+      ( is-torsorial-Id' X)
 ```
 
 ### Functoriality of `eq-iso`

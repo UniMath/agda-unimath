@@ -90,7 +90,7 @@ module _
       is-contr-equiv'
         ( Σ ((x : A) → B x) (Id f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-torsorial-path f)
+        ( is-torsorial-Id f)
 
   abstract
     is-torsorial-htpy' : is-torsorial (λ g → g ~ f)
@@ -98,7 +98,7 @@ module _
       is-contr-equiv'
         ( Σ ((x : A) → B x) (λ g → g ＝ f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-torsorial-path' f)
+        ( is-torsorial-Id' f)
 ```
 
 ### Homotopy induction is equivalent to function extensionality

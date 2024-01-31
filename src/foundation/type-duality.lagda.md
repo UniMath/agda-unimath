@@ -119,7 +119,7 @@ is-emb-map-type-duality {l} {l1} {A} H (X , f) =
                 ( Σ Y (λ y → type-is-small (H (g y) a)))) ∘e
               ( equiv-univalence))) ∘e
           ( equiv-funext)))
-      ( is-torsorial-path (X , f)))
+      ( is-torsorial-Id (X , f)))
     ( λ Y → ap (map-type-duality H))
 
 emb-type-duality :
