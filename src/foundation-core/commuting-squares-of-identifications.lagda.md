@@ -1,4 +1,4 @@
-l# Commuting squares of identifications
+# Commuting squares of identifications
 
 ```agda
 module foundation-core.commuting-squares-of-identifications where
@@ -250,7 +250,8 @@ with the identification on the side, to obtain a new commuting square of
 identifications.
 
 **Note.** To avoid cyclic module dependencies we will give direct proofs that
-concatenating identifications of edges of a square with the coherence of its commutativity is an equivalence.
+concatenating identifications of edges of a square with the coherence of its
+commutativity is an equivalence.
 
 #### Concatenating identifications of the top edge with a coherence of a commuting square of identifications
 
