@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
@@ -203,6 +204,11 @@ module _
 
 ### Concatenation of judgmentally involutive identifications
 
+**Note.** We define the concatenation operation on the judgmentally involutive
+identifications using the
+[judgmentally right unital concatenation operation on identifications](foundation.judgmentally-right-unital-concatenation-operation-identifications.md),
+to obtain a judgmental _left_ unit law.
+
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -210,14 +216,36 @@ module _
 
   infixl 15 _∙⁻_
   _∙⁻_ : {x y z : A} → x ＝⁻ y → y ＝⁻ z → x ＝⁻ z
-  (z , p , q) ∙⁻ (z' , p' , q') = (z' , p' , (q' ∙ inv p) ∙ q)
+  (z , p , q) ∙⁻ (z' , p' , q') = (z' , p' , (q' ∙ᵣ inv p) ∙ᵣ q)
 
   concat-involutive-eq : {x y : A} → x ＝⁻ y → (z : A) → y ＝⁻ z → x ＝⁻ z
   concat-involutive-eq p z q = p ∙⁻ q
 
   concat-involutive-eq' : (x : A) {y z : A} → y ＝⁻ z → x ＝⁻ y → x ＝⁻ z
   concat-involutive-eq' x q p = p ∙⁻ q
+```
 
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  infixl 15 _∙ₗ⁻_
+  _∙ₗ⁻_ : {x y z : A} → x ＝⁻ y → y ＝⁻ z → x ＝⁻ z
+  (z , p , q) ∙ₗ⁻ (z' , p' , q') = (z' , p' , (q' ∙ inv p) ∙ q)
+
+  lconcat-involutive-eq : {x y : A} → x ＝⁻ y → (z : A) → y ＝⁻ z → x ＝⁻ z
+  lconcat-involutive-eq p z q = p ∙ₗ⁻ q
+
+  lconcat-involutive-eq' : (x : A) {y z : A} → y ＝⁻ z → x ＝⁻ y → x ＝⁻ z
+  lconcat-involutive-eq' x q p = p ∙ₗ⁻ q
+
+  eq-concat-lconcat-involutive-Id :
+    {x y z : A} (p : x ＝⁻ y) (q : y ＝⁻ z) → p ∙ₗ⁻ q ＝ p ∙⁻ q
+  eq-concat-lconcat-involutive-Id (z , p , q) (z' , p' , q') =
+    eq-pair-eq-pr2
+      ( eq-pair-eq-pr2
+        ( eq-double-rconcat-concat-left-associated q' (inv p) q))
 ```
 
 The concatenation operation corresponds to the standard concatenation operation
@@ -233,10 +261,10 @@ module _
     involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙⁻ involutive-eq-eq q
   distributive-concat-involutive-eq-eq refl q = refl
 
-  distributive-concat-eq-involutive-eq :
+  distributive-lconcat-eq-involutive-eq :
     {x y z : A} (p : x ＝⁻ y) (q : y ＝⁻ z) →
-    eq-involutive-eq (p ∙⁻ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  distributive-concat-eq-involutive-eq (z , p , q) (z' , p' , q') =
+    eq-involutive-eq (p ∙ₗ⁻ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
+  distributive-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q') =
     ( ap
       ( _∙ p')
       ( ( distributive-inv-concat (q' ∙ inv p) q) ∙
@@ -245,6 +273,15 @@ module _
           ( distributive-inv-concat q' (inv p) ∙ ap (_∙ inv q') (inv-inv p))) ∙
         ( inv (assoc (inv q) p (inv q'))))) ∙
     ( assoc (inv q ∙ p) (inv q') p')
+
+  distributive-concat-eq-involutive-eq :
+    {x y z : A} (p : x ＝⁻ y) (q : y ＝⁻ z) →
+    eq-involutive-eq (p ∙⁻ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
+  distributive-concat-eq-involutive-eq (z , p , q) (z' , p' , q') =
+    ( ap
+      ( λ x → inv x ∙ p')
+      ( eq-double-concat-rconcat-left-associated q' (inv p) q)) ∙
+    ( distributive-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q'))
 ```
 
 ### The groupoidal laws for the judgmentally involutive identity types
@@ -260,56 +297,33 @@ module _
   assoc-involutive-eq (z , p , q) (z' , p' , q') (z'' , p'' , q'') =
     eq-pair-eq-pr2
       ( eq-pair-eq-pr2
-        ( ( inv (assoc (q'' ∙ inv p') (q' ∙ inv p) q)) ∙
-          ( ap (_∙ q) (inv (assoc (q'' ∙ inv p') q' (inv p))))))
+        ( ( inv (assoc-rconcat (q'' ∙ᵣ inv p') (q' ∙ᵣ inv p) q)) ∙
+          ( ap (_∙ᵣ q) (inv (assoc-rconcat (q'' ∙ᵣ inv p') q' (inv p))))))
 
   left-unit-involutive-eq :
     {x y : A} {p : x ＝⁻ y} → refl-involutive-Id ∙⁻ p ＝ p
-  left-unit-involutive-eq =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-unit ∙ right-unit))
+  left-unit-involutive-eq = refl
 
   right-unit-involutive-eq :
     {x y : A} {p : x ＝⁻ y} → p ∙⁻ refl-involutive-Id ＝ p
-  right-unit-involutive-eq {p = z , refl , q} = refl
+  right-unit-involutive-eq {p = z , refl , q} =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 left-unit-rconcat)
 
   left-inv-involutive-eq :
     {x y : A} (p : x ＝⁻ y) → inv-involutive-eq p ∙⁻ p ＝ refl-involutive-Id
   left-inv-involutive-eq (z , refl , q) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-unit ∙ right-inv q))
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-rconcat q))
 
   right-inv-involutive-eq :
     {x y : A} (p : x ＝⁻ y) → p ∙⁻ inv-involutive-eq p ＝ refl-involutive-Id
   right-inv-involutive-eq (z , p , refl) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-unit ∙ right-inv p))
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-rconcat p))
 
   distributive-inv-concat-involutive-eq :
     {x y : A} (p : x ＝⁻ y) {z : A} (q : y ＝⁻ z) →
     inv-involutive-eq (p ∙⁻ q) ＝ inv-involutive-eq q ∙⁻ inv-involutive-eq p
-  distributive-inv-concat-involutive-eq (z , refl , q) (.z , p' , refl) = refl
-```
-
-### Transposing inverses of judgmentally involutive identifications
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  left-transpose-eq-concat-involutive-eq :
-    {x y : A} (p : x ＝⁻ y) {z : A} (q : y ＝⁻ z) (r : x ＝⁻ z) →
-    p ∙⁻ q ＝ r → q ＝ inv-involutive-eq p ∙⁻ r
-  left-transpose-eq-concat-involutive-eq
-    ( z , p , q) (z' , refl , q') (.z' , refl , q'') refl =
-    eq-pair-eq-pr2
-      ( eq-pair-eq-pr2
-        ( ( inv right-unit) ∙
-          ( ap
-            ( q' ∙_)
-            ( ( inv (left-inv p)) ∙
-              ( ap (λ x → inv p ∙ (x ∙ p)) (inv (right-inv q))))) ∙
-          ( ( inv (assoc q' (inv p) (q ∙ inv q ∙ p))) ∙
-            ( inv (assoc (q' ∙ inv p) (q ∙ inv q) p)) ∙
-            ( ap (_∙ p) (inv (assoc (q' ∙ inv p) q (inv q)))))))
+  distributive-inv-concat-involutive-eq (z , refl , refl) (z' , p' , refl) =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 (inv left-unit-rconcat))
 ```
 
 ## References
