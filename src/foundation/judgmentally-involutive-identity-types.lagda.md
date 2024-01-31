@@ -41,7 +41,7 @@ In this file, we consider the
 ```
 
 This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfy the law
+standard identity types, but satisfies the law
 
 ```text
   inv (inv p) ＝ p
@@ -67,9 +67,12 @@ module _
   refl-involutive-Id {x} = (x , refl , refl)
 ```
 
+## Properties
+
 ### The judgmentally involutive identity types are equivalent to the standard identity types
 
-Moreover, the [retraction](foundation-core.retractions.md) is judgmental.
+In fact, the [retraction](foundation-core.retractions.md) is judgmental, and the
+equivalence preserves the groupoid structure.
 
 ```agda
 module _
@@ -176,6 +179,15 @@ module _
   inv-inv-involutive-eq :
     {x y : A} (p : x ＝ⁱ y) → inv-involutive-eq (inv-involutive-eq p) ＝ p
   inv-inv-involutive-eq p = refl
+```
+
+The inversion operation corresponds to the standard inversion operation on
+identifications:
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   distributive-inv-involutive-eq-eq :
     {x y : A} (p : x ＝ y) →
@@ -189,7 +201,7 @@ module _
     ap (inv p ∙_) (inv (inv-inv q)) ∙ inv (distributive-inv-concat (inv q) p)
 ```
 
-### Concatenation of identifications
+### Concatenation of judgmentally involutive identifications
 
 ```agda
 module _
@@ -205,6 +217,15 @@ module _
 
   concat-involutive-eq' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
   concat-involutive-eq' x q p = p ∙ⁱ q
+```
+
+The concatenation operation corresponds to the standard concatenation operation
+on identifications:
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   distributive-concat-involutive-eq-eq :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
@@ -238,9 +259,8 @@ module _
   assoc-involutive-eq (z , p , q) (z' , p' , q') (z'' , p'' , q'') =
     eq-pair-eq-pr2
       ( eq-pair-eq-pr2
-        ( inv
-          ( ( ap (_∙ q) (assoc (q'' ∙ inv p') q' (inv p))) ∙
-            ( assoc (q'' ∙ inv p') (q' ∙ inv p) q))))
+        ( ( inv (assoc (q'' ∙ inv p') (q' ∙ inv p) q)) ∙
+          ( ap (_∙ q) (inv (assoc (q'' ∙ inv p') q' (inv p))))))
 
   left-unit-involutive-eq :
     {x y : A} {p : x ＝ⁱ y} → refl-involutive-Id ∙ⁱ p ＝ p
@@ -267,7 +287,7 @@ module _
   distributive-inv-concat-involutive-eq (z , refl , q) (.z , p' , refl) = refl
 ```
 
-### Transposing inverses
+### Transposing inverses of judgmentally involutive identifications
 
 ```agda
 module _
@@ -284,8 +304,8 @@ module _
         ( ( inv right-unit) ∙
           ( ap
             ( q' ∙_)
-            ( inv (left-inv p) ∙
-              ap (λ x → inv p ∙ (x ∙ p)) (inv (right-inv q)))) ∙
+            ( ( inv (left-inv p)) ∙
+              ( ap (λ x → inv p ∙ (x ∙ p)) (inv (right-inv q))))) ∙
           ( ( inv (assoc q' (inv p) (q ∙ inv q ∙ p))) ∙
             ( inv (assoc (q' ∙ inv p) (q ∙ inv q) p)) ∙
             ( ap (_∙ p) (inv (assoc (q' ∙ inv p) q (inv q)))))))
