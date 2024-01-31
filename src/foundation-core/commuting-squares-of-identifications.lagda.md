@@ -276,7 +276,7 @@ module _
   right-concat-identification-coherence-square-identifications refl sq = sq
 ```
 
-### Whiskering squares of identifications
+### Whiskering and splicing coherences of commuting squares of identifications
 
 Given a commuting square of identifications
 
@@ -402,6 +402,25 @@ For any identification `p : u ＝ x` we obtain an equivalence
 
 of coherences of commuting squares of identifications.
 
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
+
+  coherence-square-identifications-top-left-whisker' :
+    {u : A} (p : u ＝ x) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
+  coherence-square-identifications-top-left-whisker' refl sq = sq
+
+  coherence-square-identifications-top-left-whisker :
+    {u : A} (p : x ＝ u) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications (inv p ∙ top) (inv p ∙ left) right bottom
+  coherence-square-identifications-top-left-whisker refl sq = sq
+```
+
 #### Right whiskering coherences of commuting squares of identifications
 
 For any identification `p : w ＝ u` we obtain an equivalence
@@ -417,6 +436,31 @@ For any identification `p : w ＝ u` we obtain an equivalence
 ```
 
 of coherences of commuting squares of identifications.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
+
+  coherence-square-identifications-bottom-right-whisker :
+    {u : A} (p : w ＝ u) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
+  coherence-square-identifications-bottom-right-whisker refl =
+    ( bottom-concat-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right ∙ refl)
+      ( bottom)
+      ( inv right-unit)) ∘
+    ( right-concat-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit))
+```
 
 #### Left splicing coherences of commuting squares of identifications
 
@@ -434,6 +478,25 @@ For inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped wit
 ```
 
 of coherences of commuting squares of identifications.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
+
+  coherence-square-identifications-bottom-left-whisker :
+    {u : A} (p : z ＝ u) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
+  coherence-square-identifications-bottom-left-whisker refl =
+    left-concat-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
+```
 
 #### Right splicing coherences of commuting squares of identifications
 
@@ -455,24 +518,11 @@ of coherences of commuting squares of identifications.
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
---  (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w)
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-top-left-whisker' :
-    {x' : A} (p : x' ＝ x) →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  coherence-square-identifications-top-left-whisker' refl sq = sq
-
-  coherence-square-identifications-top-left-whisker :
-    {x' : A} (p : x ＝ x') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications (inv p ∙ top) (inv p ∙ left) right bottom
-  coherence-square-identifications-top-left-whisker refl sq = sq
-
   coherence-square-identifications-top-right-whisker :
-    {y' : A} (p : y ＝ y') →
+    {u : A} (p : y ＝ u) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
   coherence-square-identifications-top-right-whisker refl =
@@ -482,34 +532,4 @@ module _
       ( right)
       ( bottom)
       ( inv right-unit)
-
-  coherence-square-identifications-bottom-left-whisker :
-    {z' : A} (p : z ＝ z') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
-  coherence-square-identifications-bottom-left-whisker refl =
-    left-concat-identification-coherence-square-identifications
-      ( top)
-      ( left)
-      ( right)
-      ( bottom)
-      ( inv right-unit)
-
-  coherence-square-identifications-bottom-right-whisker :
-    {w' : A} (p : w ＝ w') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
-  coherence-square-identifications-bottom-right-whisker refl =
-    ( bottom-concat-identification-coherence-square-identifications
-      ( top)
-      ( left)
-      ( right ∙ refl)
-      ( bottom)
-      ( inv right-unit)) ∘
-    ( right-concat-identification-coherence-square-identifications
-      ( top)
-      ( left)
-      ( right)
-      ( bottom)
-      ( inv right-unit))
 ```
