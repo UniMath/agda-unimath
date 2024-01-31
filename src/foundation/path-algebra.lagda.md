@@ -291,7 +291,7 @@ unit-law-α-interchange-Id² :
   ( ( interchange-Id² α refl (refl {x = u}) refl) ∙
     ( right-unit ∙ right-unit-law-horizontal-concat-Id² α)) ＝
   ( ( right-unit-law-horizontal-concat-Id² (α ∙ refl)) ∙
-    ( ap (ap (concat' x u)) right-unit))
+    ( ap (λ s → right-whisker-identification s u) right-unit))
 unit-law-α-interchange-Id² refl u = refl
 
 unit-law-β-interchange-Id² :
@@ -304,7 +304,7 @@ unit-law-γ-interchange-Id² :
   ( ( interchange-Id² (refl {x = p}) refl γ refl) ∙
     ( right-unit ∙ left-unit-law-horizontal-concat-Id² γ)) ＝
   ( ( left-unit-law-horizontal-concat-Id² (γ ∙ refl)) ∙
-    ( ap (ap (concat p z)) right-unit))
+    ( ap (left-whisker-identification p) right-unit))
 unit-law-γ-interchange-Id² p refl = refl
 
 unit-law-δ-interchange-Id² :
@@ -373,12 +373,14 @@ right-unit-law-x-concat-Id³ = right-unit-law-vertical-concat-Id²
 
 left-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α : p ＝ q} {γ δ : q ＝ r}
-  {τ : γ ＝ δ} → y-concat-Id³ (refl {x = α}) τ ＝ ap (concat α r) τ
+  {τ : γ ＝ δ} →
+  y-concat-Id³ (refl {x = α}) τ ＝ left-whisker-identification α τ
 left-unit-law-y-concat-Id³ {τ = τ} = left-unit-law-horizontal-concat-Id² τ
 
 right-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α β : p ＝ q} {γ : q ＝ r}
-  {σ : α ＝ β} → y-concat-Id³ σ (refl {x = γ}) ＝ ap (concat' p γ) σ
+  {σ : α ＝ β} →
+  y-concat-Id³ σ (refl {x = γ}) ＝ right-whisker-identification σ γ
 right-unit-law-y-concat-Id³ {σ = σ} = right-unit-law-horizontal-concat-Id² σ
 
 left-unit-law-z-concat-Id³ :

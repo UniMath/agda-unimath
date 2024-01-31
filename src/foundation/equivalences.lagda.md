@@ -19,6 +19,7 @@ open import foundation.path-algebra
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
@@ -182,16 +183,17 @@ the original identifications.
       ( is-section-map-inv-equiv e y)) ＝
     ( p)
   triangle-eq-transpose-equiv {x} {y} p =
-    ( ap
-      ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
+    ( right-whisker-identification
       ( is-section-map-inv-equiv
         ( equiv-ap e x (map-inv-equiv e y))
-        ( p ∙ inv (is-section-map-inv-equiv e y)))) ∙
+        ( p ∙ inv (is-section-map-inv-equiv e y)))
+      ( is-section-map-inv-equiv e y)) ∙
     ( ( assoc
         ( p)
         ( inv (is-section-map-inv-equiv e y))
         ( is-section-map-inv-equiv e y)) ∙
-      ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙
+      ( ( left-whisker-identification p
+          ( left-inv (is-section-map-inv-equiv e y))) ∙
         ( right-unit)))
 
   triangle-eq-transpose-equiv-inv :
@@ -210,15 +212,15 @@ the original identifications.
               ( ap (map-equiv e) (inv (map-eq-transpose-equiv-inv e p)))
               ( is-section-map-inv-equiv e y)
               ( inv p)
-              ( ( ap
-                  ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
+              ( ( right-whisker-identification
                   ( ap
                     ( ap (map-equiv e))
                     ( inv-inv
                       ( map-inv-equiv
                         ( equiv-ap e x (map-inv-equiv e y))
                         ( ( inv p) ∙
-                          ( inv (is-section-map-inv-equiv e y))))))) ∙
+                          ( inv (is-section-map-inv-equiv e y))))))
+                  ( is-section-map-inv-equiv e y)) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv-inv e p))))
 
@@ -227,8 +229,8 @@ the original identifications.
     ( is-retraction-map-inv-equiv e x ∙ map-eq-transpose-equiv e p) ＝
     ( ap (map-inv-equiv e) p)
   triangle-eq-transpose-equiv' {x} refl =
-    ( ap
-      ( is-retraction-map-inv-equiv e x ∙_)
+    ( left-whisker-identification
+      ( is-retraction-map-inv-equiv e x)
       ( htpy-map-eq-transpose-equiv refl)) ∙
     ( is-section-inv-concat (is-retraction-map-inv-equiv e x) _ refl)
 

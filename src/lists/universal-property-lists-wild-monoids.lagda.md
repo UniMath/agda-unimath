@@ -337,6 +337,6 @@ htpy-elim-list-Wild-Monoid {X = X} M g h H =
   γ : Id (pr2 g) (α nil ∙ pr2 h)
   γ =
     ( inv right-unit) ∙
-    ( ( ap (concat (pr2 g) (pr1 (pr2 M))) (inv (left-inv (pr2 h)))) ∙
+    ( ( left-whisker-identification (pr2 g) (inv (left-inv (pr2 h)))) ∙
       ( inv (assoc (pr2 g) (inv (pr2 h)) (pr2 h))))
 ```

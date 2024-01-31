@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 ```
 
 </details>
@@ -1056,7 +1057,7 @@ We introduce the slice of a dependent type theory.
           ( section-system.element
             ( section-system.slice (comp-hom-system g f) X)
             ( generic-element.type δA X)))
-      ( ap (α ∙_) (right-unit))) ∙
+      ( left-whisker-identification α right-unit)) ∙
     ( ( tr-concat
         { B =
           system.element

@@ -14,6 +14,7 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.function-extensionality
 open import foundation-core.function-types
@@ -124,9 +125,11 @@ module _
       ( inv-htpy front-left)
       ( front-right)
   coherence-cube-maps-rotate-120 a' =
-    ( ap (λ t → t ∙ (ap h (back-left a')))
-      ( ap (λ t' → t' ∙ inv (bottom (hA a')))
-        ( ap-inv k (back-right a')))) ∙
+    ( right-whisker-identification
+      ( right-whisker-identification
+        ( ap-inv k (back-right a'))
+        ( inv (bottom (hA a'))))
+      ( ap h (back-left a'))) ∙
     ( ( hexagon-rotate-120
         ( ap h (back-left a'))
         ( front-left (f' a'))
@@ -136,9 +139,11 @@ module _
         ( front-right (g' a'))
         ( c a')) ∙
       ( inv
-        ( ap (λ t → (front-right (g' a')) ∙ t)
-          ( ap (λ t' → t' ∙ inv (front-left (f' a')))
-            ( ap-inv hD (top a'))))))
+        ( left-whisker-identification
+          ( front-right (g' a'))
+          ( right-whisker-identification
+            ( ap-inv hD (top a'))
+            ( inv (front-left (f' a')))))))
 
   coherence-cube-maps-rotate-240 :
     coherence-cube-maps h' hB hD h g' hA hC g f' k' f k
@@ -149,7 +154,7 @@ module _
       ( bottom)
       ( inv-htpy front-left)
   coherence-cube-maps-rotate-240 a' =
-    ( ap (λ t → _ ∙ t) (ap-inv k (back-right a'))) ∙
+    ( left-whisker-identification _ (ap-inv k (back-right a'))) ∙
     ( ( hexagon-rotate-240
         ( ap h (back-left a'))
         ( front-left (f' a'))
@@ -159,9 +164,9 @@ module _
         ( front-right (g' a'))
         ( c a')) ∙
       ( inv
-        ( ap
-          ( λ t → inv (front-left (f' a')) ∙ t)
-          ( ap (λ t' → t' ∙ _) (ap-inv h (back-left a'))))))
+        ( left-whisker-identification
+          ( inv (front-left (f' a')))
+          ( right-whisker-identification (ap-inv h (back-left a')) _))))
 
   coherence-cube-maps-mirror-A :
     coherence-cube-maps g f k h g' f' k' h' hA hC hB hD
@@ -172,7 +177,7 @@ module _
       ( front-left)
       ( inv-htpy bottom)
   coherence-cube-maps-mirror-A a' =
-    ( ap (λ t → _ ∙ t) (ap-inv hD (top a'))) ∙
+    ( left-whisker-identification _ (ap-inv hD (top a'))) ∙
     ( hexagon-mirror-A
       ( ap h (back-left a'))
       ( front-left (f' a'))
@@ -191,8 +196,9 @@ module _
       ( inv-htpy front-right)
       ( front-left)
   coherence-cube-maps-mirror-B a' =
-    ( ap (λ t → t ∙ (ap k (back-right a')))
-      ( ap (λ t → t ∙ _) (ap-inv h (back-left a')))) ∙
+    ( right-whisker-identification
+      ( right-whisker-identification (ap-inv h (back-left a')) _)
+      ( ap k (back-right a'))) ∙
     ( hexagon-mirror-B
       ( ap h (back-left a'))
       ( front-left (f' a'))
@@ -214,7 +220,7 @@ module _
     ( ap
       ( λ t → (t ∙ inv (front-left (f' a'))) ∙ (ap h (inv (back-left a'))))
       ( ap-inv hD (top a'))) ∙
-    ( ( ap (λ t → _ ∙ t) (ap-inv h (back-left a'))) ∙
+    ( ( left-whisker-identification _ (ap-inv h (back-left a'))) ∙
       ( ( hexagon-mirror-C
           ( ap h (back-left a'))
           ( front-left (f' a'))
@@ -224,9 +230,9 @@ module _
           ( front-right (g' a'))
           ( c a')) ∙
         ( inv
-          ( ap
-            ( λ t → inv (front-right (g' a')) ∙ t)
-            ( ap (λ t' → t' ∙ _) (ap-inv k (back-right a')))))))
+          ( left-whisker-identification
+            ( inv (front-right (g' a')))
+            ( right-whisker-identification (ap-inv k (back-right a')) _)))))
 ```
 
 ### Rectangles in commuting cubes
@@ -270,12 +276,7 @@ module _
       ( refl-htpy' hA)
       ( top)
   coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube c =
-    ( λ a' →
-      ( ap
-        ( concat
-          ( rectangle-left-cube a')
-          ( hD (k' (g' a'))))
-        ( right-unit))) ∙h
+    ( λ a' → left-whisker-identification (rectangle-left-cube a') right-unit) ∙h
     ( c)
 
   rectangle-top-front-left-cube :

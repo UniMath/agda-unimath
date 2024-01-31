@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
@@ -47,7 +48,9 @@ module _
     ( fiber-map-coprod-inl-fiber f g x)
   triangle-descent-square-fiber-map-coprod-inl-fiber x (a' , p) =
     eq-pair-eq-pr2
-      ( ap (concat (inv (HA a')) (αA x)) (ap-comp (ind-coprod _ αA αB) inl p))
+      ( left-whisker-identification
+        ( inv (HA a'))
+        ( ap-comp (ind-coprod _ αA αB) inl p))
 
   triangle-descent-square-fiber-map-coprod-inr-fiber :
     (y : B) →
@@ -58,7 +61,9 @@ module _
     ( fiber-map-coprod-inr-fiber f g y)
   triangle-descent-square-fiber-map-coprod-inr-fiber y (b' , p) =
     eq-pair-eq-pr2
-      ( ap (concat (inv (HB b')) (αB y)) (ap-comp (ind-coprod _ αA αB) inr p))
+      ( left-whisker-identification
+        ( inv (HB b'))
+        ( ap-comp (ind-coprod _ αA αB) inr p))
 
 module _
   {l1 l2 l3 l1' l2' l3' : Level}

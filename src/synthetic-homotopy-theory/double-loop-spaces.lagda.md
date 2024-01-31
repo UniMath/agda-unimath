@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.double-loop-spaces where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.path-algebra
@@ -82,12 +83,16 @@ left-unit-law-horizontal-concat-Ω² {α = α} =
 
 naturality-right-unit :
   {l : Level} {A : UU l} {x y : A} {p q : Id x y} (α : Id p q) →
-  Id (ap (concat' x refl) α ∙ right-unit) (right-unit ∙ α)
+  coherence-square-identifications
+    ( right-unit)
+    ( right-whisker-identification α refl)
+    ( α)
+    ( right-unit)
 naturality-right-unit {p = refl} refl = refl
 
 naturality-right-unit-Ω² :
   {l : Level} {A : UU l} {x : A} (α : type-Ω² x) →
-  Id (ap (concat' x refl) α) α
+  right-whisker-identification α refl ＝ α
 naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
 
 right-unit-law-horizontal-concat-Ω² :

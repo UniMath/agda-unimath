@@ -489,7 +489,10 @@ module _
           ( ap
             ( λ t → eq-pair t (ap pr2 α))
             ( ( inv right-unit) ∙
-              ( inv (ap (concat (ap pr1 α) x) (left-inv (ap pr2 α)))) ∙
+              ( inv
+                ( left-whisker-identification
+                  ( ap pr1 α)
+                  ( left-inv (ap pr2 α)))) ∙
               ( inv (assoc (ap pr1 α) (inv (ap pr2 α)) (ap pr2 α))))) ∙
           ( eq-pair-concat
             ( ap pr1 α ∙ inv (ap pr2 α))
@@ -508,13 +511,13 @@ module _
         ( refl)
         ( refl)
         ( inv
-          ( ( ap
-              ( concat' (f a) refl)
+          ( ( right-whisker-identification
               ( ( right-whisker-identification
                   ( ap-pr1-eq-pair p refl)
                   ( inv (ap pr2 (eq-pair p refl)))) ∙
                 ( ap (λ t → p ∙ inv t) (ap-pr2-eq-pair p refl)) ∙
-                ( right-unit))) ∙
+                ( right-unit))
+              ( refl)) ∙
             ( right-unit)))
 
   abstract

@@ -10,6 +10,7 @@ module foundation.unital-binary-operations where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-identifications
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.homotopies
@@ -85,7 +86,7 @@ module _
       ( H e)
       ( (ap (μ e) (H e)) ∙ (K e))
       ( ( inv-nat-htpy-id (H) (K e)) ∙
-        ( ap (concat' (μ e (μ e e)) (K e)) (coh-htpy-id (H) e)))
+        ( right-whisker-identification (coh-htpy-id (H) e) (K e)))
 
 module _
   {l : Level} {A : UU l} {μ : A → A → A}
