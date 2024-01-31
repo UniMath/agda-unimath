@@ -165,7 +165,7 @@ module _
       ( ap
         ( ap-map-higher-modality m g)
         ( compute-rec-higher-modality m (unit-higher-modality m ∘ f) x))
-      ( is-section-inv-concat' _
+      ( is-section-inv-concat'
         ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)
         ( compute-rec-higher-modality m (unit-higher-modality m ∘ g) (f x))))
 ```

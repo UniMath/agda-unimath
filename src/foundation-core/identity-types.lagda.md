@@ -14,11 +14,27 @@ open import foundation.universe-levels
 
 ## Idea
 
-The equality relation on a type is a reflexive relation, with the universal
-property that it maps uniquely into any other reflexive relation. In type
-theory, we introduce the identity type as an inductive family of types, where
-the induction principle can be understood as expressing that the identity type
-is the least reflexive relation.
+The equality relation on a type is introduced as binary family of types
+
+```text
+  Id : A → A → 𝒰
+```
+
+equipped with a proof of reflexivity
+
+```text
+  refl : (x : A) → Id x x.
+```
+
+In other words, the identity type is a reflexive
+[type valued relation](foundation.binary-relations.md) on `A`. Furthermore, the
+identity type on `A` satisfies the
+[universal property](foundation.universal-property-identity-types.md) that it
+maps uniquely into any other reflexive relation.
+
+In type theory, we introduce the identity type as an inductive family of types,
+where the induction principle can be understood as expressing that the identity
+type is the least reflexive relation.
 
 ### Notation of the identity type
 
@@ -53,6 +69,14 @@ identifications in arbitrary types.
 
 ## Definition
 
+### Identity types
+
+We introduce identity types as a `data` type. This is Agda's mechanism of introducing types equipped with induction principles. The only constructor of the identity type `Id x : A → 𝒰` is the reflexivity identification
+
+```text
+  refl : Id x x.
+```
+
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -68,7 +92,11 @@ module _
 {-# BUILTIN EQUALITY Id #-}
 ```
 
-### The induction principle
+We marked `refl` as an `instance` to enable Agda to automatically insert `refl` in definitions that make use of Agda's [instance search mechanism](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
+
+Furthermore, we marked the identity type as [`BUILTIN`](https://agda.readthedocs.io/en/latest/language/built-ins.html) in order to support faster type checking.
+
+### The induction principle of identity types
 
 The induction principle of identity types states that given a base point `x : A`
 and a family of types over the identity types based at `x`,
@@ -87,9 +115,11 @@ ind-Id :
 ind-Id x B b y refl = b
 ```
 
-## Structure
+## Operations on the identity type
 
-The identity types form a weak groupoidal structure on types.
+The identity types form a weak groupoidal structure on types. Thus they come equipped with **concatenation** `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an **inverse operation** `(x ＝ y) → (y ＝ x)`.
+
+There are many more operations on identity types. Some of them are defined in [path algebra](foundation.path-algebra.md) and [whiskering of identifications](foundation.whiskering-identifications.md). For a complete reference to all the files about general identity types, see the table given above.
 
 ### Concatenation of identifications
 
@@ -120,7 +150,33 @@ module _
   inv refl = refl
 ```
 
-### The groupoidal laws for types
+### Concatenating with inverse identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
+  inv-concat p = concat (inv p)
+
+  inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
+  inv-concat' x q = concat' x (inv q)
+```
+
+## Properties
+
+### Associativity of concatenation
+
+For any three identifications `p : x ＝ y`, `q : y ＝ z`, and `r : z ＝ w`, we have an identification
+
+```text
+  assoc p q r : ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r)).
+```
+
+The identification `assoc p q r` is also called the {{#concept "associator" Disambiguation="identification" Agda=assoc}}.
+
+Note that the associator `assoc p q r` is an identification in the type `x ＝ w`, i.e., it is an identification of identifications. Here we make crucial use of the fact that the identity types are defined _for all types_. In other words, since identity types are themselves types, we can consider identity types of identity types, and so on.
 
 ```agda
 module _
@@ -131,26 +187,96 @@ module _
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
     ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r))
   assoc refl q r = refl
+```
+
+### The unit laws for concatenation
+
+For any identification `p : x ＝ y` there is an identification
+
+```text
+  left-unit : (refl ∙ p) ＝ p.
+```
+
+Similarly, there is an identification
+
+```text
+  right-unit : (p ∙ refl) ＝ p.
+```
+
+In other words, the reflexivity identification is a unit element for concatenation of identifications.
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   left-unit : {x y : A} {p : x ＝ y} → refl ∙ p ＝ p
   left-unit = refl
 
   right-unit : {x y : A} {p : x ＝ y} → p ∙ refl ＝ p
   right-unit {p = refl} = refl
+```
+
+### The inverse laws for concatenation
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   left-inv : {x y : A} (p : x ＝ y) → inv p ∙ p ＝ refl
   left-inv refl = refl
 
   right-inv : {x y : A} (p : x ＝ y) → p ∙ (inv p) ＝ refl
   right-inv refl = refl
+```
+
+### Inverting identifications is an involution
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   inv-inv : {x y : A} (p : x ＝ y) → inv (inv p) ＝ p
   inv-inv refl = refl
+```
+
+### Inverting identifications distributes over concatenation
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   distributive-inv-concat :
     {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) →
     inv (p ∙ q) ＝ inv q ∙ inv p
   distributive-inv-concat refl refl = refl
+```
+
+### Concatenating with an inverse is inverse to concatenating
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-retraction-inv-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → (inv p ∙ (p ∙ q)) ＝ q
+  is-retraction-inv-concat refl q = refl
+
+  is-section-inv-concat :
+    {x y z : A} (p : x ＝ y) (r : x ＝ z) → (p ∙ (inv p ∙ r)) ＝ r
+  is-section-inv-concat refl refl = refl
+
+  is-retraction-inv-concat' :
+    {x y z : A} (q : y ＝ z) (p : x ＝ y) → (p ∙ q) ∙ inv q ＝ p
+  is-retraction-inv-concat' refl refl = refl
+
+  is-section-inv-concat' :
+    {x y z : A} (q : y ＝ z) (r : x ＝ z) → (r ∙ inv q) ∙ q ＝ r
+  is-section-inv-concat' refl refl = refl
 ```
 
 ### Transposing inverses
@@ -233,6 +359,10 @@ step-equational-reasoning p z q = p ∙ q
 
 syntax step-equational-reasoning p z q = p ＝ z by q
 ```
+
+**Note.** Equational reasoning is a convenient way to construct identifications. However, in some situations it may not be the fastest or cleanest mechanism to construct an identification. Some constructions of identifications naturally involve computations that are more deeply nested in the terms. Furthermore, proofs by equational reasoning tend to require a lot of reassociation.
+
+Some tools that allow us to perform faster comutations are the transpositions defined above, the transpositions and splicing operations defined in [commuting squares of identifications](foundation.commuting-squares-identifications.md) and [commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md), and the higher concatenation operations defined in [path algebra](foundation.path-algebra.md). Each of these operations has good computational behavior, so there is infrastructure for reasoning about identifications that are constructed using them.
 
 ## References
 

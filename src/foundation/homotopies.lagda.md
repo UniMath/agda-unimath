@@ -95,12 +95,12 @@ module _
   is-section-concat-inv-htpy' :
     ((concat-htpy' f K) ∘ (concat-inv-htpy' f K)) ~ id
   is-section-concat-inv-htpy' L =
-    eq-htpy (λ x → is-section-inv-concat' (f x) (K x) (L x))
+    eq-htpy (λ x → is-section-inv-concat' (K x) (L x))
 
   is-retraction-concat-inv-htpy' :
     ((concat-inv-htpy' f K) ∘ (concat-htpy' f K)) ~ id
   is-retraction-concat-inv-htpy' L =
-    eq-htpy (λ x → is-retraction-inv-concat' (f x) (K x) (L x))
+    eq-htpy (λ x → is-retraction-inv-concat' (K x) (L x))
 
   is-equiv-concat-htpy' : is-equiv (concat-htpy' f K)
   is-equiv-concat-htpy' =

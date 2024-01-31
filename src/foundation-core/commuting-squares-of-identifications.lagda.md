@@ -1,6 +1,8 @@
 l# Commuting squares of identifications
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module foundation-core.commuting-squares-of-identifications where
 ```
 
@@ -254,12 +256,26 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  top-concat-identification-coherence-square-identifications :
+  concat-top-identification-coherence-square-identifications :
     {top' : x ＝ y} (s : top ＝ top') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top' left right bottom
-  top-concat-identification-coherence-square-identifications s sq =
+  concat-top-identification-coherence-square-identifications s sq =
     sq ∙ ap (concat' _ right) s
+
+  inv-concat-top-identification-coherence-square-identifications :
+    {top' : x ＝ y} (s : top ＝ top') →
+    coherence-square-identifications top' left right bottom →
+    coherence-square-identifications top left right bottom
+  inv-concat-top-identification-coherence-square-identifications s t =
+    t ∙ inv (ap (concat' _ right) s)
+
+  equiv-concat-top-identification-coherence-square-identifications :
+    {top' : x ＝ y} (s : top ＝ top') →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top' left right bottom
+  equiv-concat-top-identification-coherence-square-identifications s =
+    {!equiv-concat'!}
 ```
 
 #### Concatenating identifications of the left edge with a coherence of a commuting square of identifications
@@ -563,7 +579,7 @@ module _
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
   right-splice-coherence-square-identifications refl =
-    top-concat-identification-coherence-square-identifications
+    concat-top-identification-coherence-square-identifications
       ( top)
       ( left)
       ( right)

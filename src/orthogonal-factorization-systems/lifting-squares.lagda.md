@@ -197,7 +197,6 @@ module _
                 ( inv right-unit)))) ∙
           ( is-retraction-inv-concat
             ( right-unit)
-            ( _)
             ( coherence-lifting-square l x ∙ inv right-unit)))
         ( α)) ∙
       ( ( assoc (coherence-lifting-square l x) (inv right-unit) (α)) ∙
@@ -210,10 +209,9 @@ module _
                   ( ap g (is-extension-lifting-square l x)))) ∙
               ( ( is-retraction-inv-concat
                   ( right-unit)
-                  ( _)
                   ( left-whisker-identification (H x) (inv right-unit))) ∙
                 ( inv
-                  ( is-section-inv-concat' _ α
+                  ( is-section-inv-concat' α
                     ( left-whisker-identification (H x) (inv right-unit))))))) ∙
           ( ( inv
               ( assoc

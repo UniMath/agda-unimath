@@ -771,7 +771,7 @@ module _
               ( is-section-map-inv-is-equiv
                 ( K (i a) (j (f a)))
                 ( L a ∙ inv (M (f a))))) ∙
-            ( is-section-inv-concat' (g (i a)) (M (f a)) (L a)))))
+            ( is-section-inv-concat' (M (f a)) (L a)))))
     where
 
     J : (b : B) → fiber g (h b)

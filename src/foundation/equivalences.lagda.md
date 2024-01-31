@@ -232,7 +232,7 @@ the original identifications.
     ( left-whisker-identification
       ( is-retraction-map-inv-equiv e x)
       ( htpy-map-eq-transpose-equiv refl)) ∙
-    ( is-section-inv-concat (is-retraction-map-inv-equiv e x) _ refl)
+    ( is-section-inv-concat (is-retraction-map-inv-equiv e x) refl)
 
   triangle-eq-transpose-equiv-inv' :
     {x : A} {y : B} (p : y ＝ map-equiv e x) →
