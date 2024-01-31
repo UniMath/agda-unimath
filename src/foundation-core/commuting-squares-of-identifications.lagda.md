@@ -1,8 +1,6 @@
 l# Commuting squares of identifications
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation-core.commuting-squares-of-identifications where
 ```
 
@@ -10,11 +8,14 @@ module foundation-core.commuting-squares-of-identifications where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -248,34 +249,60 @@ Then any identification witnessing that the square commutes can be concatenated
 with the identification on the side, to obtain a new commuting square of
 identifications.
 
+**Note.** To avoid cyclic module dependencies we will give direct proofs that
+concatenating identifications of edges of a square with the coherence of its commutativity is an equivalence.
+
 #### Concatenating identifications of the top edge with a coherence of a commuting square of identifications
 
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {top' : x ＝ y} (s : top ＝ top')
   where
 
   concat-top-identification-coherence-square-identifications :
-    {top' : x ＝ y} (s : top ＝ top') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top' left right bottom
-  concat-top-identification-coherence-square-identifications s sq =
-    sq ∙ ap (concat' _ right) s
+  concat-top-identification-coherence-square-identifications t =
+    t ∙ ap (concat' _ right) s
 
   inv-concat-top-identification-coherence-square-identifications :
-    {top' : x ＝ y} (s : top ＝ top') →
     coherence-square-identifications top' left right bottom →
     coherence-square-identifications top left right bottom
-  inv-concat-top-identification-coherence-square-identifications s t =
+  inv-concat-top-identification-coherence-square-identifications t =
     t ∙ inv (ap (concat' _ right) s)
 
+  is-section-inv-concat-top-identification-coherence-square-identifications :
+    is-section
+      concat-top-identification-coherence-square-identifications
+      inv-concat-top-identification-coherence-square-identifications
+  is-section-inv-concat-top-identification-coherence-square-identifications =
+    is-section-inv-concat' (ap (concat' _ right) s)
+
+  is-retraction-inv-concat-top-identification-coherence-square-identifications :
+    is-retraction
+      concat-top-identification-coherence-square-identifications
+      inv-concat-top-identification-coherence-square-identifications
+  is-retraction-inv-concat-top-identification-coherence-square-identifications =
+    is-retraction-inv-concat' (ap (concat' _ right) s)
+
+  abstract
+    is-equiv-concat-top-identification-coherence-square-identifications :
+      is-equiv concat-top-identification-coherence-square-identifications
+    is-equiv-concat-top-identification-coherence-square-identifications =
+      is-equiv-is-invertible
+        inv-concat-top-identification-coherence-square-identifications
+        is-section-inv-concat-top-identification-coherence-square-identifications
+        is-retraction-inv-concat-top-identification-coherence-square-identifications
+
   equiv-concat-top-identification-coherence-square-identifications :
-    {top' : x ＝ y} (s : top ＝ top') →
     coherence-square-identifications top left right bottom ≃
     coherence-square-identifications top' left right bottom
-  equiv-concat-top-identification-coherence-square-identifications s =
-    {!equiv-concat'!}
+  pr1 equiv-concat-top-identification-coherence-square-identifications =
+    concat-top-identification-coherence-square-identifications
+  pr2 equiv-concat-top-identification-coherence-square-identifications =
+    is-equiv-concat-top-identification-coherence-square-identifications
 ```
 
 #### Concatenating identifications of the left edge with a coherence of a commuting square of identifications
@@ -284,13 +311,50 @@ module _
 module _
   {l : Level} {A : UU l} {x y z w : A}
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {left' : x ＝ z} (s : left ＝ left')
   where
 
-  left-concat-identification-coherence-square-identifications :
-    {left' : x ＝ z} (s : left ＝ left') →
+  concat-left-identification-coherence-square-identifications :
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left' right bottom
-  left-concat-identification-coherence-square-identifications refl sq = sq
+  concat-left-identification-coherence-square-identifications t =
+    inv (ap (concat' _ bottom) s) ∙ t
+
+  inv-concat-left-identification-coherence-square-identifications :
+    coherence-square-identifications top left' right bottom →
+    coherence-square-identifications top left right bottom
+  inv-concat-left-identification-coherence-square-identifications t =
+    ap (concat' _ bottom) s ∙ t
+
+  is-section-inv-concat-left-identification-coherence-square-identifications :
+    is-section
+      concat-left-identification-coherence-square-identifications
+      inv-concat-left-identification-coherence-square-identifications
+  is-section-inv-concat-left-identification-coherence-square-identifications =
+    is-retraction-inv-concat (ap (concat' _ bottom) s)
+
+  is-retraction-inv-concat-left-identification-coherence-square-identifications :
+    is-retraction
+      concat-left-identification-coherence-square-identifications
+      inv-concat-left-identification-coherence-square-identifications
+  is-retraction-inv-concat-left-identification-coherence-square-identifications =
+    is-section-inv-concat (ap (concat' _ bottom) s)
+
+  is-equiv-concat-left-identification-coherence-square-identifications :
+    is-equiv concat-left-identification-coherence-square-identifications
+  is-equiv-concat-left-identification-coherence-square-identifications =
+    is-equiv-is-invertible
+      inv-concat-left-identification-coherence-square-identifications
+      is-section-inv-concat-left-identification-coherence-square-identifications
+      is-retraction-inv-concat-left-identification-coherence-square-identifications
+
+  equiv-concat-left-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top left' right bottom
+  pr1 equiv-concat-left-identification-coherence-square-identifications =
+    concat-left-identification-coherence-square-identifications
+  pr2 equiv-concat-left-identification-coherence-square-identifications =
+    is-equiv-concat-left-identification-coherence-square-identifications
 ```
 
 #### Concatenating identifications of the right edge with a coherence of a commuting square of identifications
@@ -299,13 +363,51 @@ module _
 module _
   {l : Level} {A : UU l} {x y z w : A}
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {right' : y ＝ w} (s : right ＝ right')
   where
 
-  right-concat-identification-coherence-square-identifications :
-    {right' : y ＝ w} (s : right ＝ right') →
+  concat-right-identification-coherence-square-identifications :
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left right' bottom
-  right-concat-identification-coherence-square-identifications refl sq = sq
+  concat-right-identification-coherence-square-identifications t =
+    t ∙ ap (concat top _) s
+
+  inv-concat-right-identification-coherence-square-identifications :
+    coherence-square-identifications top left right' bottom →
+    coherence-square-identifications top left right bottom
+  inv-concat-right-identification-coherence-square-identifications t =
+    t ∙ inv (ap (concat top _) s)
+
+  is-section-inv-concat-right-identification-coherence-square-identifications :
+    is-section
+      concat-right-identification-coherence-square-identifications
+      inv-concat-right-identification-coherence-square-identifications
+  is-section-inv-concat-right-identification-coherence-square-identifications =
+    is-section-inv-concat' (ap (concat top _) s)
+
+  is-retraction-inv-concat-right-identification-coherence-square-identifications :
+    is-retraction
+      concat-right-identification-coherence-square-identifications
+      inv-concat-right-identification-coherence-square-identifications
+  is-retraction-inv-concat-right-identification-coherence-square-identifications =
+    is-retraction-inv-concat' (ap (concat top _) s)
+
+  abstract
+    is-equiv-concat-right-identification-coherence-square-identifications :
+      is-equiv concat-right-identification-coherence-square-identifications
+    is-equiv-concat-right-identification-coherence-square-identifications =
+      is-equiv-is-invertible
+        inv-concat-right-identification-coherence-square-identifications
+        is-section-inv-concat-right-identification-coherence-square-identifications
+        is-retraction-inv-concat-right-identification-coherence-square-identifications
+
+  equiv-concat-right-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top left right' bottom
+  pr1 equiv-concat-right-identification-coherence-square-identifications =
+    concat-right-identification-coherence-square-identifications
+  pr2 equiv-concat-right-identification-coherence-square-identifications =
+    is-equiv-concat-right-identification-coherence-square-identifications
 ```
 
 #### Concatenating identifications of the bottom edge with a coherence of a commuting square of identifications
@@ -314,14 +416,50 @@ module _
 module _
   {l : Level} {A : UU l} {x y z w : A}
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {bottom' : z ＝ w} (s : bottom ＝ bottom')
   where
 
-  bottom-concat-identification-coherence-square-identifications :
-    {bottom' : z ＝ w} (s : bottom ＝ bottom') →
+  concat-bottom-identification-coherence-square-identifications :
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left right bottom'
-  bottom-concat-identification-coherence-square-identifications s sq =
-    {!!}
+  concat-bottom-identification-coherence-square-identifications t =
+    inv (ap (concat left _) s) ∙ t
+
+  inv-concat-bottom-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom' →
+    coherence-square-identifications top left right bottom
+  inv-concat-bottom-identification-coherence-square-identifications t =
+    ap (concat left _) s ∙ t
+
+  is-section-inv-concat-bottom-identification-coherence-square-identifications :
+    is-section
+      concat-bottom-identification-coherence-square-identifications
+      inv-concat-bottom-identification-coherence-square-identifications
+  is-section-inv-concat-bottom-identification-coherence-square-identifications =
+    is-retraction-inv-concat (ap (concat left _) s)
+
+  is-retraction-inv-concat-bottom-identification-coherence-square-identifications :
+    is-retraction
+      concat-bottom-identification-coherence-square-identifications
+      inv-concat-bottom-identification-coherence-square-identifications
+  is-retraction-inv-concat-bottom-identification-coherence-square-identifications =
+    is-section-inv-concat (ap (concat left _) s)
+
+  is-equiv-concat-bottom-identification-coherence-square-identifications :
+    is-equiv concat-bottom-identification-coherence-square-identifications
+  is-equiv-concat-bottom-identification-coherence-square-identifications =
+    is-equiv-is-invertible
+      inv-concat-bottom-identification-coherence-square-identifications
+      is-section-inv-concat-bottom-identification-coherence-square-identifications
+      is-retraction-inv-concat-bottom-identification-coherence-square-identifications
+
+  equiv-concat-bottom-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top left right bottom'
+  pr1 equiv-concat-bottom-identification-coherence-square-identifications =
+    concat-bottom-identification-coherence-square-identifications
+  pr2 equiv-concat-bottom-identification-coherence-square-identifications =
+    is-equiv-concat-bottom-identification-coherence-square-identifications
 ```
 
 ### Whiskering and splicing coherences of commuting squares of identifications
@@ -460,10 +598,10 @@ module _
   equiv-left-whisker-coherence-square-identifications :
     (p : u ＝ x)
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
-    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top left right bottom ≃
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
   equiv-left-whisker-coherence-square-identifications refl
-    top left right bottom = {!!} -- id-equiv
+    top left right bottom = id-equiv
 
   left-whisker-coherence-square-identifications :
     (p : u ＝ x)
@@ -501,13 +639,13 @@ module _
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
   right-whisker-coherence-square-identifications refl =
-    ( bottom-concat-identification-coherence-square-identifications
+    ( concat-bottom-identification-coherence-square-identifications
       ( top)
       ( left)
       ( right ∙ refl)
       ( bottom)
       ( inv right-unit)) ∘
-    ( right-concat-identification-coherence-square-identifications
+    ( concat-right-identification-coherence-square-identifications
       ( top)
       ( left)
       ( right)
@@ -543,7 +681,7 @@ module _
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
   left-splice-coherence-square-identifications refl =
-    left-concat-identification-coherence-square-identifications
+    concat-left-identification-coherence-square-identifications
       ( top)
       ( left)
       ( right)
