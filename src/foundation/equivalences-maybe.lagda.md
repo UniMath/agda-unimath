@@ -380,6 +380,11 @@ equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Maybe X ≃ Maybe Y) → (X ≃ Y)
 pr1 (equiv-equiv-Maybe e) = map-equiv-equiv-Maybe e
 pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
+
+compute-equiv-equiv-Maybe-id-equiv :
+  {l1 : Level} {X : UU l1} →
+  equiv-equiv-Maybe id-equiv ＝ id-equiv {A = X}
+compute-equiv-equiv-Maybe-id-equiv = eq-htpy-equiv refl-htpy
 ```
 
 ### For any set `X`, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception

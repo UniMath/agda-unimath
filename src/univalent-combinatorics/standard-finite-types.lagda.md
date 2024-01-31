@@ -30,8 +30,13 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
+open import foundation.path-algebra
+open import foundation.preunivalent-type-families
 open import foundation.raising-universe-levels
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -427,22 +432,55 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( leq-zero-ℕ (succ-ℕ (nat-Fin (succ-ℕ k) (inr star))))
 ```
 
-### Fin is injective
+### `Fin` is injective
 
 ```agda
-abstract
-  is-equivalence-injective-Fin : is-equivalence-injective Fin
-  is-equivalence-injective-Fin {zero-ℕ} {zero-ℕ} e =
-    refl
-  is-equivalence-injective-Fin {zero-ℕ} {succ-ℕ l} e =
-    ex-falso (map-inv-equiv e (zero-Fin l))
-  is-equivalence-injective-Fin {succ-ℕ k} {zero-ℕ} e =
-    ex-falso (map-equiv e (zero-Fin k))
-  is-equivalence-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
-    ap succ-ℕ (is-equivalence-injective-Fin (equiv-equiv-Maybe e))
+is-equivalence-injective-Fin : is-equivalence-injective Fin
+is-equivalence-injective-Fin {zero-ℕ} {zero-ℕ} e =
+  refl
+is-equivalence-injective-Fin {zero-ℕ} {succ-ℕ l} e =
+  ex-falso (map-inv-equiv e (zero-Fin l))
+is-equivalence-injective-Fin {succ-ℕ k} {zero-ℕ} e =
+  ex-falso (map-equiv e (zero-Fin k))
+is-equivalence-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+  ap succ-ℕ (is-equivalence-injective-Fin (equiv-equiv-Maybe e))
 
 abstract
   is-injective-Fin : is-injective Fin
   is-injective-Fin =
     is-injective-is-equivalence-injective is-equivalence-injective-Fin
+
+compute-is-equivalence-injective-Fin-id-equiv :
+  {n : ℕ} → is-equivalence-injective-Fin {n} {n} id-equiv ＝ refl
+compute-is-equivalence-injective-Fin-id-equiv {zero-ℕ} = refl
+compute-is-equivalence-injective-Fin-id-equiv {succ-ℕ n} =
+  ap² succ-ℕ
+    ( ( ap is-equivalence-injective-Fin compute-equiv-equiv-Maybe-id-equiv) ∙
+      ( compute-is-equivalence-injective-Fin-id-equiv {n}))
+```
+
+### `Fin` is a preunivalent type family
+
+The proof does not rely on the (pre-)univalence axiom.
+
+```agda
+is-section-on-diagonal-is-equivalence-injective-Fin :
+  {n : ℕ} →
+  equiv-tr Fin (is-equivalence-injective-Fin {n} {n} id-equiv) ＝ id-equiv
+is-section-on-diagonal-is-equivalence-injective-Fin =
+  ap (equiv-tr Fin) compute-is-equivalence-injective-Fin-id-equiv
+
+is-retraction-is-equivalence-injective-Fin :
+  {n m : ℕ} →
+  is-retraction (equiv-tr Fin) (is-equivalence-injective-Fin {n} {m})
+is-retraction-is-equivalence-injective-Fin refl =
+  compute-is-equivalence-injective-Fin-id-equiv
+
+retraction-equiv-tr-Fin : (n m : ℕ) → retraction (equiv-tr Fin {n} {m})
+pr1 (retraction-equiv-tr-Fin n m) = is-equivalence-injective-Fin
+pr2 (retraction-equiv-tr-Fin n m) = is-retraction-is-equivalence-injective-Fin
+
+is-preunivalent-Fin : is-preunivalent Fin
+is-preunivalent-Fin =
+  is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
 ```
