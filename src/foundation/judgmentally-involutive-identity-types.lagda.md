@@ -144,7 +144,7 @@ module _
     is-contr-equiv
       ( Σ A (x ＝_))
       ( equiv-tot (λ y → equiv-eq-involutive-eq {x = x} {y}))
-      ( is-torsorial-path x)
+      ( is-torsorial-Id x)
 
   dependent-universal-property-identity-system-involutive-Id :
     dependent-universal-property-identity-system
