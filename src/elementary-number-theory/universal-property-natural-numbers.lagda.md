@@ -69,7 +69,7 @@ module _
       ( is-torsorial-htpy (pr1 h))
       ( pair (pr1 h) refl-htpy)
       ( is-torsorial-Eq-structure
-        ( is-torsorial-path (pr1 (pr2 h)))
+        ( is-torsorial-Id (pr1 (pr2 h)))
         ( pair (pr1 (pr2 h)) refl)
         ( is-torsorial-htpy (λ n → (pr2 (pr2 h) n ∙ refl))))
 

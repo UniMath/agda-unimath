@@ -407,7 +407,7 @@ module _
     is-contr-equiv'
       ( Σ (vertex-Directed-Graph G) (λ y → y ＝ x))
       ( equiv-tot (λ y → compute-raise l2 (y ＝ x)))
-      ( is-torsorial-path' x)
+      ( is-torsorial-Id' x)
 ```
 
 ### `cons-walk e w ≠ refl-walk`

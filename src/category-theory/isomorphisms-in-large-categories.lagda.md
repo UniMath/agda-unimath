@@ -199,7 +199,7 @@ module _
     is-contr-equiv'
       ( Σ (obj-Large-Category C l1) (X ＝_))
       ( equiv-tot (extensionality-obj-Large-Category C X))
-      ( is-torsorial-path X)
+      ( is-torsorial-Id X)
 
   is-torsorial-iso-Large-Category' :
     is-torsorial (λ Y → iso-Large-Category C Y X)
@@ -207,7 +207,7 @@ module _
     is-contr-equiv'
       ( Σ (obj-Large-Category C l1) (_＝ X))
       ( equiv-tot (λ Y → extensionality-obj-Large-Category C Y X))
-      ( is-torsorial-path' X)
+      ( is-torsorial-Id' X)
 ```
 
 ## Properties

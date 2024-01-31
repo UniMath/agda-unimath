@@ -61,7 +61,7 @@ module _
       is-torsorial B → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
     fundamental-theorem-id is-contr-AB f =
       is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-is-contr (tot f) (is-torsorial-path a) is-contr-AB)
+        ( is-equiv-is-contr (tot f) (is-torsorial-Id a) is-contr-AB)
 
   abstract
     fundamental-theorem-id' :
@@ -71,7 +71,7 @@ module _
         ( Σ A (Id a))
         ( tot f)
         ( is-equiv-tot-is-fiberwise-equiv is-fiberwise-equiv-f)
-        ( is-torsorial-path a)
+        ( is-torsorial-Id a)
 ```
 
 ## Corollaries
@@ -95,7 +95,7 @@ module _
         ( Σ A (Id a))
         ( tot (ind-Id a (λ x p → B x) b))
         ( is-equiv-tot-is-fiberwise-equiv H)
-        ( is-torsorial-path a)
+        ( is-torsorial-Id a)
 ```
 
 ### Retracts of the identity type are equivalent to the identity type
@@ -120,8 +120,8 @@ module _
               ( ( inv-htpy (preserves-comp-tot i (pr1 ∘ R))) ∙h
                 ( tot-htpy (pr2 ∘ R)) ∙h
                 ( tot-id B)))
-            ( is-torsorial-path a))
-          ( is-torsorial-path a))
+            ( is-torsorial-Id a))
+          ( is-torsorial-Id a))
 
     fundamental-theorem-id-retract :
       (R : (x : A) → (B x) retract-of (a ＝ x)) →

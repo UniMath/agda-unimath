@@ -335,7 +335,7 @@ module _
     is-contr-equiv'
       ( Σ (Directed-Graph l1 l2) (λ H → G ＝ H))
       ( equiv-tot extensionality-Directed-Graph)
-      ( is-torsorial-path G)
+      ( is-torsorial-Id G)
 ```
 
 ### The inverse of an equivalence of directed trees

@@ -585,7 +585,7 @@ is-torsorial-equiv-𝔽 {l} X =
   is-contr-equiv'
     ( Σ (𝔽 l) (Id X))
     ( equiv-tot (extensionality-𝔽 X))
-    ( is-torsorial-path X)
+    ( is-torsorial-Id X)
 
 equiv-eq-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y → equiv-𝔽 X Y
 equiv-eq-𝔽 X Y = map-equiv (extensionality-𝔽 X Y)

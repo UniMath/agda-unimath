@@ -165,12 +165,12 @@ module _
               Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
                 ( λ (q , l) → p ∙ q ＝ refl))))
         ( is-contr-iterated-Σ 2
-          ( is-torsorial-path x ,
+          ( is-torsorial-Id x ,
             ( x , refl) ,
             ( is-contr-equiv
               ( Σ (x ＝ x) (λ q → q ＝ refl))
               ( equiv-tot (λ q → equiv-concat (inv right-unit) refl))
-              ( is-torsorial-path' refl)) ,
+              ( is-torsorial-Id' refl)) ,
             ( refl , refl) ,
             ( is-proof-irrelevant-is-prop
               ( is-1-type-type-1-Type X x x refl refl)

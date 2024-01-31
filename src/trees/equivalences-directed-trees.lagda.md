@@ -443,7 +443,7 @@ module _
     is-contr-equiv'
       ( Σ (Directed-Tree l1 l2) (λ S → T ＝ S))
       ( equiv-tot extensionality-Directed-Tree)
-      ( is-torsorial-path T)
+      ( is-torsorial-Id T)
 ```
 
 ### A morphism of directed trees is an equivalence if it is an equivalence on the nodes

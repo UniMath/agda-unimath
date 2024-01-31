@@ -129,7 +129,7 @@ module _
               ( equiv-ev-refl x) ∘e
               ( equiv-inclusion-is-full-subtype
                 ( Π-Prop A ∘ (is-equiv-Prop ∘_))
-                ( fundamental-theorem-id (is-torsorial-path a))) ∘e
+                ( fundamental-theorem-id (is-torsorial-Id a))) ∘e
               ( distributive-Π-Σ))))
         ( emb-tot
           ( λ x →
@@ -145,7 +145,7 @@ module _
         ( λ _ →
           is-injective-emb
             ( emb-fiber-Id-preunivalent-Id a)
-            ( eq-is-contr (is-torsorial-path a))))
+            ( eq-is-contr (is-torsorial-Id a))))
       ( λ _ → ap Id)
 
 module _

@@ -212,7 +212,7 @@ module _
       ( Σ (hom-Precategory C A X) (λ g → f ＝ g))
       ( equiv-tot
         ( λ g → equiv-concat' f (left-unit-law-comp-hom-Precategory C g)))
-      ( is-torsorial-path f)
+      ( is-torsorial-Id f)
 ```
 
 ### Products in slice precategories are pullbacks in the original category
