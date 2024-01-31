@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -139,24 +138,19 @@ module _
           ( ( ap f
               ( is-section-is-invertible H (map-inv-is-invertible H (f x)))) ∙
             ( is-retraction-is-invertible H (f x)))
-          ( top-concat-identification-coherence-square-identifications
-            ( ap
-              ( f ∘ (map-inv-is-invertible H ∘ f))
-              ( is-section-is-invertible H x))
-            ( is-retraction-is-invertible H (f (map-inv-is-invertible H (f x))))
-            ( is-retraction-is-invertible H (f x))
-            ( ap f (is-section-is-invertible H x))
-            ( ( ap-comp f
-                ( map-inv-is-invertible H ∘ f)
-                ( is-section-is-invertible H x)) ∙
-              ( inv
-                ( ap
-                  ( ap f)
-                  ( coh-is-coherently-invertible-id
-                    ( is-section-is-invertible H) x))))
-            ( nat-htpy
+          ( ( nat-htpy
               ( right-whisker-htpy (is-retraction-is-invertible H) f)
-              ( is-section-is-invertible H x))))
+              ( is-section-is-invertible H x)) ∙
+            ( ap
+              ( concat' _ (is-retraction-is-invertible H (f x)))
+              ( ( ap-comp f
+                  ( map-inv-is-invertible H ∘ f)
+                  ( is-section-is-invertible H x)) ∙
+                ( inv
+                  ( ap
+                    ( ap f)
+                    ( coh-is-coherently-invertible-id
+                      ( is-section-is-invertible H) x)))))))
 
   abstract
     is-coherently-invertible-is-invertible :

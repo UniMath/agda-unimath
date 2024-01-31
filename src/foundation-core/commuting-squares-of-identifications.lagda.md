@@ -10,6 +10,7 @@ module foundation-core.commuting-squares-of-identifications where
 open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 ```
@@ -261,13 +262,15 @@ module _
     {bottom' : z ＝ w} (s : bottom ＝ bottom') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left right bottom'
-  bottom-concat-identification-coherence-square-identifications refl sq = sq
+  bottom-concat-identification-coherence-square-identifications s sq =
+    {!!}
 
   top-concat-identification-coherence-square-identifications :
     {top' : x ＝ y} (s : top ＝ top') →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top' left right bottom
-  top-concat-identification-coherence-square-identifications refl sq = sq
+  top-concat-identification-coherence-square-identifications s sq =
+    sq ∙ ap (concat' _ right) s
 
   right-concat-identification-coherence-square-identifications :
     {right' : y ＝ w} (s : right ＝ right') →
@@ -404,21 +407,26 @@ of coherences of commuting squares of identifications.
 
 ```agda
 module _
-  {l : Level} {A : UU l} {x y z w : A}
+  {l : Level} {A : UU l} {x y z w u : A}
+  (p : u ＝ x)
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  left-whisker-coherence-square-identifications' :
-    {u : A} (p : u ＝ x) →
+  equiv-left-whisker-coherence-square-identifications :
+    (p : u ＝ x)
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  left-whisker-coherence-square-identifications' refl sq = sq
+  equiv-left-whisker-coherence-square-identifications refl
+    top left right bottom = {!!} -- id-equiv
 
   left-whisker-coherence-square-identifications :
-    {u : A} (p : x ＝ u) →
+    (p : u ＝ x)
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
-    coherence-square-identifications (inv p ∙ top) (inv p ∙ left) right bottom
-  left-whisker-coherence-square-identifications refl sq = sq
+    coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
+  left-whisker-coherence-square-identifications refl top left right bottom =
+    id
 ```
 
 #### Right whiskering coherences of commuting squares of identifications
