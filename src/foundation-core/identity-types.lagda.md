@@ -257,6 +257,22 @@ module _
 
 ### Concatenating with an inverse is inverse to concatenating
 
+We show that the operation `q ↦ inv p ∙ q` is inverse to the operation `q ↦ p ∙ q` by constructing identifications
+
+```text
+  inv p ∙ (p ∙ q) ＝ q
+  p ∙ (inv p ∙ q) ＝ q.
+```
+
+Similarly, we show that the operation `p ↦ p ∙ inv q` is inverse to the operation `p ↦ p ∙ q` by constructing identifications
+
+```text
+  (p ∙ q) ∙ inv q ＝ p
+  (p ∙ inv q) ∙ q ＝ p.
+```
+
+In [`foundation.identity-types`](foundation.identity-types.md)` we will use these families of identifications to conclude that `concat p z` and `concat' x q` are [equivalences](foundation-core.equivalences.md) with inverses `concat (inv p) z` and `concat' x (inv q)`, respectively.
+
 ```agda
 module _
   {l : Level} {A : UU l}
