@@ -159,7 +159,7 @@ for any identification `p : u ＝ x`.
 ```agda
 module _
   {l : Level} {A : UU l} {x y z u : A}
-  (p : u ＝ x) {left : x ＝ z} {right : y ＝ z} {top : x ＝ y}
+  (p : u ＝ x) (left : x ＝ z) (right : y ＝ z) (top : x ＝ y)
   where
 
   equiv-left-whisker-coherence-triangle-identifications :
@@ -219,7 +219,7 @@ for any identification `p : z ＝ u`.
 ```agda
 module _
   {l : Level} {A : UU l} {x y z u : A}
-  (left : x ＝ z) (top : x ＝ y) {right : y ＝ z} (p : z ＝ u)
+  (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) (p : z ＝ u)
   where
 
   equiv-right-whisker-coherence-triangle-identifications :

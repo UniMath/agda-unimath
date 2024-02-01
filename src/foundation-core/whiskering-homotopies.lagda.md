@@ -30,7 +30,7 @@ assumes a diagram of the form
       g
 ```
 
-and is defined to be a function `h ·l_ : (f ~ g) → (h ∘ f ~ h ∘ g)`. The **right
+and is defined to be a function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The **right
 whiskering** operation assumes a diagram of the form
 
 ```text
@@ -40,7 +40,7 @@ whiskering** operation assumes a diagram of the form
                h
 ```
 
-and is defined to be a function `_·r f : (g ~ h) → (g ∘ f ~ h ∘ f)`.
+and is defined to be a function `H ↦ H ·r f : (g ~ h) → (g ∘ f ~ h ∘ f)`.
 
 **Note**: The infix whiskering operators `_·l_` and `_·r_` use the
 [middle dot](https://codepoints.net/U+00B7) `·` (agda-input: `\cdot`

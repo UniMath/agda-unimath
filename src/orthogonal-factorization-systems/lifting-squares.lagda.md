@@ -160,8 +160,13 @@ module _
       ( g ·l is-extension-lifting-square l)
       ( is-lift-lifting-square l' ·r f)
       ( coherence-lifting-square l)
-      ( left-whisker-coherence-triangle-homotopies (K ·r f) g E)
-      ( right-whisker-coherence-triangle-homotopies (g ·l K) L f)
+      ( left-whisker-coherence-triangle-homotopies
+        {!!}
+        {!!}
+        {!!}
+        {!g ·l K!}
+        {!coherence-lifting-square l!}) --(K ·r f) g E)
+      ( -whisker-coherence-triangle-homotopies {!!} {!!} {!!} {!!} {!!}) --(g ·l K) L f)
       ( coherence-lifting-square l')
 
   htpy-lifting-square :
@@ -177,121 +182,121 @@ module _
                 ( is-lift-lifting-square l ∙h (g ·l K)))
               ( coherence-htpy-lifting-square l l' K E)))
 
-  refl-htpy-lifting-square :
-    (l : lifting-square h f g i H) → htpy-lifting-square l l
-  pr1 (refl-htpy-lifting-square l) = refl-htpy
-  pr1 (pr2 (refl-htpy-lifting-square l)) = inv-htpy-right-unit-htpy
-  pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
-  pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) x =
-    ( inv (assoc (inv right-unit) (β) (α))) ∙
-    ( ( right-whisker-identification
-        ( ( left-whisker-identification
-            ( inv right-unit)
-            ( ( right-transpose-eq-concat _ _ _
-                ( inv
-                  ( compute-refl-right-whisker-identification
-                    ( coherence-lifting-square l x)))) ∙
-              ( assoc
-                ( right-unit)
-                ( coherence-lifting-square l x)
-                ( inv right-unit)))) ∙
-          ( is-retraction-inv-concat
-            ( right-unit)
-            ( coherence-lifting-square l x ∙ inv right-unit)))
-        ( α)) ∙
-      ( ( assoc (coherence-lifting-square l x) (inv right-unit) (α)) ∙
-        ( ( left-whisker-identification
-            ( coherence-lifting-square l x)
-            ( ( left-whisker-identification
-                ( inv right-unit)
-                ( right-unit-law-assoc
-                  ( H x)
-                  ( ap g (is-extension-lifting-square l x)))) ∙
-              ( ( is-retraction-inv-concat
-                  ( right-unit)
-                  ( left-whisker-identification (H x) (inv right-unit))) ∙
-                ( inv
-                  ( is-section-inv-concat' α
-                    ( left-whisker-identification (H x) (inv right-unit))))))) ∙
-          ( ( inv
-              ( assoc
-                ( coherence-lifting-square l x)
-                ( left-whisker-identification (H x) (inv right-unit) ∙ inv α)
-                ( α))) ∙
-            ( ap
-              ( λ r →
-                ( ( coherence-lifting-square l x) ∙
-                  ( left-whisker-identification (H x) r ∙ inv α)) ∙
-                ( α))
-              ( compute-refl-right-map-coherence-triangle-identifications
-                ( g)
-                ( is-extension-lifting-square l x)))))))
-    where
-      α = assoc (H x) (ap g (is-extension-lifting-square l x)) refl
-      β = right-whisker-identification (coherence-lifting-square l x) refl
+--   refl-htpy-lifting-square :
+--     (l : lifting-square h f g i H) → htpy-lifting-square l l
+--   pr1 (refl-htpy-lifting-square l) = refl-htpy
+--   pr1 (pr2 (refl-htpy-lifting-square l)) = inv-htpy-right-unit-htpy
+--   pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
+--   pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) x =
+--     ( inv (assoc (inv right-unit) (β) (α))) ∙
+--     ( ( right-whisker-identification
+--         ( ( left-whisker-identification
+--             ( inv right-unit)
+--             ( ( right-transpose-eq-concat _ _ _
+--                 ( inv
+--                   ( compute-refl-right-whisker-identification
+--                     ( coherence-lifting-square l x)))) ∙
+--               ( assoc
+--                 ( right-unit)
+--                 ( coherence-lifting-square l x)
+--                 ( inv right-unit)))) ∙
+--           ( is-retraction-inv-concat
+--             ( right-unit)
+--             ( coherence-lifting-square l x ∙ inv right-unit)))
+--         ( α)) ∙
+--       ( ( assoc (coherence-lifting-square l x) (inv right-unit) (α)) ∙
+--         ( ( left-whisker-identification
+--             ( coherence-lifting-square l x)
+--             ( ( left-whisker-identification
+--                 ( inv right-unit)
+--                 ( right-unit-law-assoc
+--                   ( H x)
+--                   ( ap g (is-extension-lifting-square l x)))) ∙
+--               ( ( is-retraction-inv-concat
+--                   ( right-unit)
+--                   ( left-whisker-identification (H x) (inv right-unit))) ∙
+--                 ( inv
+--                   ( is-section-inv-concat' α
+--                     ( left-whisker-identification (H x) (inv right-unit))))))) ∙
+--           ( ( inv
+--               ( assoc
+--                 ( coherence-lifting-square l x)
+--                 ( left-whisker-identification (H x) (inv right-unit) ∙ inv α)
+--                 ( α))) ∙
+--             ( ap
+--               ( λ r →
+--                 ( ( coherence-lifting-square l x) ∙
+--                   ( left-whisker-identification (H x) r ∙ inv α)) ∙
+--                 ( α))
+--               ( compute-refl-right-map-coherence-triangle-identifications
+--                 ( g)
+--                 ( is-extension-lifting-square l x)))))))
+--     where
+--       α = assoc (H x) (ap g (is-extension-lifting-square l x)) refl
+--       β = right-whisker-identification (coherence-lifting-square l x) refl
 
-  htpy-eq-lifting-square :
-    (l l' : lifting-square h f g i H) → l ＝ l' → htpy-lifting-square l l'
-  htpy-eq-lifting-square l .l refl = refl-htpy-lifting-square l
-```
+--   htpy-eq-lifting-square :
+--     (l l' : lifting-square h f g i H) → l ＝ l' → htpy-lifting-square l l'
+--   htpy-eq-lifting-square l .l refl = refl-htpy-lifting-square l
+-- ```
 
-It remains to show that `coherence-htpy-lifting-square` indeed is a
-characterization of identifications of lifting squares.
+-- It remains to show that `coherence-htpy-lifting-square` indeed is a
+-- characterization of identifications of lifting squares.
 
-### Diagonal maps give lifting squares
+-- ### Diagonal maps give lifting squares
 
-The diagram
+-- The diagram
 
-```text
-  A         B
-  |       ^ |
- f|   j  /  |g
-  |    /    |
-  V  /      V
-  X         Y
-```
+-- ```text
+--   A         B
+--   |       ^ |
+--  f|   j  /  |g
+--   |    /    |
+--   V  /      V
+--   X         Y
+-- ```
 
-gives rise to a lifting square
+-- gives rise to a lifting square
 
-```text
-     j ∘ f
-  A ------> B
-  |       ^ |
- f|   j  /  |g
-  |    /    |
-  V  /      V
-  X ------> Y
-     g ∘ j
-```
+-- ```text
+--      j ∘ f
+--   A ------> B
+--   |       ^ |
+--  f|   j  /  |g
+--   |    /    |
+--   V  /      V
+--   X ------> Y
+--      g ∘ j
+-- ```
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → X) (g : B → Y)
-  where
+-- ```agda
+-- module _
+--   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+--   (f : A → X) (g : B → Y)
+--   where
 
-  is-lifting-square-diagonal :
-    (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
-  pr1 (is-lifting-square-diagonal j) = refl-htpy
-  pr1 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
-  pr2 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
-```
+--   is-lifting-square-diagonal :
+--     (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
+--   pr1 (is-lifting-square-diagonal j) = refl-htpy
+--   pr1 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
+--   pr2 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
+-- ```
 
-### The lifting square associated to a fibered map
+-- ### The lifting square associated to a fibered map
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  where
+-- ```agda
+-- module _
+--   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+--   (f : A → B) (g : X → Y)
+--   where
 
-  lifting-square-fibered-map :
-    (h : fibered-map f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  lifting-square-fibered-map h =
-    lifting-square
-      ( map-total-fibered-map f g h)
-      ( f)
-      ( g)
-      ( map-base-fibered-map f g h)
-      ( is-map-over-map-total-fibered-map f g h)
-```
+--   lifting-square-fibered-map :
+--     (h : fibered-map f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+--   lifting-square-fibered-map h =
+--     lifting-square
+--       ( map-total-fibered-map f g h)
+--       ( f)
+--       ( g)
+--       ( map-base-fibered-map f g h)
+--       ( is-map-over-map-total-fibered-map f g h)
+-- ```
