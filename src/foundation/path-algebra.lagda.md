@@ -16,7 +16,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-identifications
 
-open import foundation-core.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-identifications
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types

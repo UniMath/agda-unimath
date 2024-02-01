@@ -6,7 +6,6 @@
 | Action on identifications of functions                                | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                                               |
 | Binary transport                                                      | [`foundation.binary-transport`](foundation.binary-transport.md)                                                                                     |
 | Commuting hexagons of identifications                                 | [`foundation.commuting-hexagons-of-identifications`](foundation.commuting-hexagons-of-identifications.md)                                           |
-| Commuting squares of identifications (foundation-core)                | [`foundation-core.commuting-squares-of-identifications`](foundation-core.commuting-squares-of-identifications.md)                                   |
 | Commuting squares of identifications                                  | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                                             |
 | Dependent identifications (foundation)                                | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                                                   |
 | Dependent identifications (foundation-core)                           | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                                                         |
