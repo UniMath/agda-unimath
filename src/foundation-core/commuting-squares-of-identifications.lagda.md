@@ -709,6 +709,14 @@ module _
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
   left-whisker-coherence-square-identifications refl top left right bottom =
     id
+
+  left-unwhisker-coherence-square-identifications :
+    (p : u ＝ x)
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
+    coherence-square-identifications (p ∙ top) (p ∙ left) right bottom →
+    coherence-square-identifications top left right bottom
+  left-unwhisker-coherence-square-identifications refl top left right bottom =
+    id
 ```
 
 #### Right whiskering coherences of commuting squares of identifications
@@ -733,6 +741,24 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
+  equiv-right-whisker-coherence-square-identifications :
+    {u : A} (p : w ＝ u) →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
+  equiv-right-whisker-coherence-square-identifications refl =
+    ( equiv-concat-bottom-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right ∙ refl)
+      ( bottom)
+      ( inv right-unit)) ∘e
+    ( equiv-concat-right-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit))
+
   right-whisker-coherence-square-identifications :
     {u : A} (p : w ＝ u) →
     coherence-square-identifications top left right bottom →
@@ -748,6 +774,24 @@ module _
       ( top)
       ( left)
       ( right)
+      ( bottom)
+      ( inv right-unit))
+
+  right-unwhisker-cohernece-square-identifications :
+    {u : A} (p : w ＝ u) →
+    coherence-square-identifications top left (right ∙ p) (bottom ∙ p) →
+    coherence-square-identifications top left right bottom
+  right-unwhisker-cohernece-square-identifications refl =
+    ( inv-concat-right-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)) ∘
+    ( inv-concat-bottom-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right ∙ refl)
       ( bottom)
       ( inv right-unit))
 ```
@@ -775,12 +819,36 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
+  equiv-left-splice-coherence-square-identifications :
+    {u : A} (p : z ＝ u) (q : u ＝ z) (α : inv p ＝ q) →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top (left ∙ p) right (q ∙ bottom)
+  equiv-left-splice-coherence-square-identifications refl .refl refl =
+    equiv-concat-left-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
+
   left-splice-coherence-square-identifications :
-    {u : A} (p : z ＝ u) →
+    {u : A} (p : z ＝ u) (q : u ＝ z) (α : inv p ＝ q) →
     coherence-square-identifications top left right bottom →
-    coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
-  left-splice-coherence-square-identifications refl =
+    coherence-square-identifications top (left ∙ p) right (q ∙ bottom)
+  left-splice-coherence-square-identifications refl .refl refl =
     concat-left-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
+
+  left-unsplice-coherence-square-identifications :
+    {u : A} (p : z ＝ u) (q : u ＝ z) (α : inv p ＝ q) →
+    coherence-square-identifications top (left ∙ p) right (q ∙ bottom) →
+    coherence-square-identifications top left right bottom
+  left-unsplice-coherence-square-identifications refl .refl refl =
+    inv-concat-left-identification-coherence-square-identifications
       ( top)
       ( left)
       ( right)
@@ -811,12 +879,36 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
+  equiv-right-splice-coherence-square-identifications :
+    {u : A} (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
+  equiv-right-splice-coherence-square-identifications refl .refl refl =
+    equiv-concat-top-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
+
   right-splice-coherence-square-identifications :
-    {u : A} (p : y ＝ u) →
+    {u : A} (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
-  right-splice-coherence-square-identifications refl =
+  right-splice-coherence-square-identifications refl .refl refl =
     concat-top-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
+
+  right-unsplice-coherence-square-identifications :
+    {u : A} (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
+    coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom →
+    coherence-square-identifications top left right bottom
+  right-unsplice-coherence-square-identifications refl .refl refl =
+    inv-concat-top-identification-coherence-square-identifications
       ( top)
       ( left)
       ( right)
