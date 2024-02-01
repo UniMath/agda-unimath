@@ -90,7 +90,7 @@ module _
   pr1 (pr2 htpy-function-out-of-suspension-id-map-suspension) =
     compute-south-map-suspension id
   pr2 (pr2 htpy-function-out-of-suspension-id-map-suspension) a =
-    right-concat-identification-coherence-square-identifications
+    concat-right-identification-coherence-square-identifications
       ( compute-north-map-suspension id)
       ( ap (map-suspension id) (meridian-suspension a))
       ( meridian-suspension a)
@@ -144,7 +144,7 @@ module _
       ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
       ( _)
       ( _)
-      ( left-concat-identification-coherence-square-identifications
+      ( concat-left-identification-coherence-square-identifications
         ( ap (map-suspension g) (compute-north-map-suspension f))
         ( ap (map-suspension g) (ap (map-suspension f) (meridian-suspension a)))
         ( ap (map-suspension g) (meridian-suspension (f a)))
