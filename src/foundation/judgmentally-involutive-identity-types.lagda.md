@@ -43,13 +43,19 @@ In this file, we consider the
 ```
 
 This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfies the law
+standard identity types, but satisfies the judgmental law
 
 ```text
-  inv (inv p) ＝ p
+  inv (inv p) ＝ p.
 ```
 
-judgmentally.
+In addition, we maintain the following judgmental laws
+
+- `inv refl ＝ refl`
+- `ind-Id f refl ＝ f refl`
+- `refl ∙ p ＝ p`
+
+among other more technical ones considered in this file.
 
 ## Definition
 
@@ -240,10 +246,15 @@ module _
 
 ### Concatenation of judgmentally involutive identifications
 
-**Note.** We define the concatenation operation on the judgmentally involutive
+We define the concatenation operation on the judgmentally involutive
 identifications using the
 [judgmentally right unital concatenation operation on identifications](foundation.judgmentally-right-unital-concatenation-operation-identifications.md),
-to obtain a judgmental _left_ unit law.
+to obtain a one-sided judgmental unit law. There is both a judgmentally left
+unital definition and a judgmentally right unital definition. To be consistent
+with the convention for the standard identity types, we take the judgmentally
+left unital concatenation operation as the default.
+
+#### The judgmentally left unital concatenation operation
 
 ```agda
 module _
@@ -252,114 +263,171 @@ module _
 
   infixl 15 _∙ⁱ_
   _∙ⁱ_ : {x y z : A} → x ＝ⁱ y → y ＝ⁱ z → x ＝ⁱ z
-  (z , p , q) ∙ⁱ (z' , p' , q') = (z' , p' , (q' ∙ᵣ inv p) ∙ᵣ q)
+  (w , p , q) ∙ⁱ (w' , p' , q') = (w' , p' , (q' ∙ᵣ inv p) ∙ᵣ q)
 
   concat-involutive-Id : {x y : A} → x ＝ⁱ y → (z : A) → y ＝ⁱ z → x ＝ⁱ z
   concat-involutive-Id p z q = p ∙ⁱ q
 
   concat-involutive-Id' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
   concat-involutive-Id' x q p = p ∙ⁱ q
-```
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  infixl 15 _∙ₗⁱ_
-  _∙ₗⁱ_ : {x y z : A} → x ＝ⁱ y → y ＝ⁱ z → x ＝ⁱ z
-  (z , p , q) ∙ₗⁱ (z' , p' , q') = (z' , p' , (q' ∙ inv p) ∙ q)
-
-  lconcat-involutive-Id : {x y : A} → x ＝ⁱ y → (z : A) → y ＝ⁱ z → x ＝ⁱ z
-  lconcat-involutive-Id p z q = p ∙ₗⁱ q
-
-  lconcat-involutive-Id' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
-  lconcat-involutive-Id' x q p = p ∙ₗⁱ q
-
-  eq-concat-lconcat-involutive-Id :
-    {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) → p ∙ₗⁱ q ＝ p ∙ⁱ q
-  eq-concat-lconcat-involutive-Id (z , p , q) (z' , p' , q') =
-    eq-pair-eq-pr2
-      ( eq-pair-eq-pr2
-        ( eq-double-rconcat-concat-left-associated q' (inv p) q))
-```
-
-The concatenation operation corresponds to the standard concatenation operation
-on identifications:
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
 
   commutative-concat-involutive-eq-eq :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
     involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙ⁱ involutive-eq-eq q
   commutative-concat-involutive-eq-eq refl q = refl
 
-  commutative-lconcat-eq-involutive-eq :
-    {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
-    eq-involutive-eq (p ∙ₗⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  commutative-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q') =
-    ( ap
-      ( _∙ p')
-      ( ( distributive-inv-concat (q' ∙ inv p) q) ∙
-        ( ap
-          ( inv q ∙_)
-          ( distributive-inv-concat q' (inv p) ∙ ap (_∙ inv q') (inv-inv p))) ∙
-        ( inv (assoc (inv q) p (inv q'))))) ∙
-    ( assoc (inv q ∙ p) (inv q') p')
-
   commutative-concat-eq-involutive-eq :
     {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
     eq-involutive-eq (p ∙ⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  commutative-concat-eq-involutive-eq (z , p , q) (z' , p' , q') =
+  commutative-concat-eq-involutive-eq (w , p , q) (w' , p' , q') =
     ( ap
-      ( λ x → inv x ∙ p')
-      ( eq-double-concat-rconcat-left-associated q' (inv p) q)) ∙
-    ( commutative-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q'))
+      ( _∙ p')
+      ( ( distributive-inv-concatr (q' ∙ᵣ inv p) q) ∙
+        ( ( ap
+            ( inv q ∙ᵣ_)
+            ( ( distributive-inv-concatr q' (inv p)) ∙
+              ( ap (_∙ᵣ inv q') (inv-inv p)))) ∙
+          ( inv (assoc-concatr (inv q) p (inv q'))) ∙
+          ( eq-double-concat-concatr-left-associated (inv q) p (inv q'))))) ∙
+    ( assoc (inv q ∙ p) (inv q') p')
 ```
 
-### The groupoidal laws for the judgmentally involutive identity types
+#### The judgmentally right unital concatenation operation
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
+  infixl 15 _∙ᵣⁱ_
+  _∙ᵣⁱ_ : {x y z : A} → x ＝ⁱ y → y ＝ⁱ z → x ＝ⁱ z
+  (w , p , q) ∙ᵣⁱ (w' , p' , q') = (w , (p ∙ᵣ inv q') ∙ᵣ p' , q)
+
+  concatr-involutive-Id : {x y : A} → x ＝ⁱ y → (z : A) → y ＝ⁱ z → x ＝ⁱ z
+  concatr-involutive-Id p z q = p ∙ᵣⁱ q
+
+  concatr-involutive-Id' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
+  concatr-involutive-Id' x q p = p ∙ᵣⁱ q
+
+  eq-concat-concatr-involutive-Id :
+    {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) → p ∙ᵣⁱ q ＝ p ∙ⁱ q
+  eq-concat-concatr-involutive-Id (w , refl , q) (w' , p' , refl) =
+    eq-pair-eq-pr2 (eq-pair (left-unit-concatr) (inv left-unit-concatr))
+
+  commutative-concatr-involutive-eq-eq :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙ᵣⁱ involutive-eq-eq q
+  commutative-concatr-involutive-eq-eq p refl = ap involutive-eq-eq right-unit
+
+  commutative-concatr-eq-involutive-eq :
+    {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
+    eq-involutive-eq (p ∙ᵣⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
+  commutative-concatr-eq-involutive-eq (w , p , q) (w' , p' , q') =
+    ( ap
+      ( inv q ∙_)
+      ( ( eq-double-concat-concatr-left-associated p (inv q') p') ∙
+        ( assoc p (inv q') p'))) ∙
+    ( inv (assoc (inv q) p (inv q' ∙ p')))
+```
+
+### The groupoidal laws for the judgmentally involutive identity types
+
+The general proof-technique is to induct on the necessary paths to make the left
+endpoints judgmentally equal, and then proceed by reasoning with the
+groupoid-laws of the underlying identity system.
+
+#### The groupoidal laws for the judgmentally left unital concatenation operation
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  where
+
   assoc-involutive-Id :
-    {x y z w : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
+    (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
     ((p ∙ⁱ q) ∙ⁱ r) ＝ (p ∙ⁱ (q ∙ⁱ r))
-  assoc-involutive-Id (z , p , q) (z' , p' , q') (z'' , p'' , q'') =
+  assoc-involutive-Id (_ , p , q) (_ , p' , q') (_ , p'' , q'') =
     eq-pair-eq-pr2
       ( eq-pair-eq-pr2
-        ( ( inv (assoc-rconcat (q'' ∙ᵣ inv p') (q' ∙ᵣ inv p) q)) ∙
-          ( ap (_∙ᵣ q) (inv (assoc-rconcat (q'' ∙ᵣ inv p') q' (inv p))))))
+        ( ( inv (assoc-concatr (q'' ∙ᵣ inv p') (q' ∙ᵣ inv p) q)) ∙
+          ( ap (_∙ᵣ q) (inv (assoc-concatr (q'' ∙ᵣ inv p') q' (inv p))))))
+
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
 
   left-unit-involutive-Id :
-    {x y : A} {p : x ＝ⁱ y} → refl-involutive-Id ∙ⁱ p ＝ p
+    {p : x ＝ⁱ y} → refl-involutive-Id ∙ⁱ p ＝ p
   left-unit-involutive-Id = refl
 
   right-unit-involutive-Id :
-    {x y : A} {p : x ＝ⁱ y} → p ∙ⁱ refl-involutive-Id ＝ p
-  right-unit-involutive-Id {p = z , refl , q} =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 left-unit-rconcat)
+    {p : x ＝ⁱ y} → p ∙ⁱ refl-involutive-Id ＝ p
+  right-unit-involutive-Id {p = .y , refl , q} =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 left-unit-concatr)
 
   left-inv-involutive-Id :
-    {x y : A} (p : x ＝ⁱ y) → inv-involutive-Id p ∙ⁱ p ＝ refl-involutive-Id
-  left-inv-involutive-Id (z , refl , q) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-rconcat q))
+    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ⁱ p ＝ refl-involutive-Id
+  left-inv-involutive-Id (.y , refl , q) =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-concatr q))
 
   right-inv-involutive-Id :
-    {x y : A} (p : x ＝ⁱ y) → p ∙ⁱ inv-involutive-Id p ＝ refl-involutive-Id
-  right-inv-involutive-Id (z , p , refl) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-rconcat p))
+    (p : x ＝ⁱ y) → p ∙ⁱ inv-involutive-Id p ＝ refl-involutive-Id
+  right-inv-involutive-Id (.x , p , refl) =
+    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-concatr p))
 
   distributive-inv-concat-involutive-Id :
-    {x y : A} (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
+    (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
     inv-involutive-Id (p ∙ⁱ q) ＝ inv-involutive-Id q ∙ⁱ inv-involutive-Id p
-  distributive-inv-concat-involutive-Id (z , refl , refl) (z' , p' , refl) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (inv left-unit-rconcat))
+  distributive-inv-concat-involutive-Id (.y , refl , q') (.y , p' , refl) =
+    eq-pair-eq-pr2 (eq-pair (left-unit-concatr) (inv left-unit-concatr))
+```
+
+#### The groupoidal laws for the judgmentally right unital concatenation operation
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  where
+
+  assoc-concatr-involutive-Id :
+    (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
+    ((p ∙ᵣⁱ q) ∙ᵣⁱ r) ＝ (p ∙ᵣⁱ (q ∙ᵣⁱ r))
+  assoc-concatr-involutive-Id (_ , p , q) (_ , p' , q') (_ , p'' , q'') =
+    eq-pair-eq-pr2
+      ( eq-pair
+        ( ( assoc-concatr (p ∙ᵣ inv q' ∙ᵣ p') (inv q'') p'') ∙
+          ( assoc-concatr (p ∙ᵣ inv q') p' (inv q'' ∙ᵣ p'')) ∙
+          ( ap (p ∙ᵣ inv q' ∙ᵣ_) (inv (assoc-concatr p' (inv q'') p''))))
+        ( refl))
+
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  left-unit-concatr-involutive-Id :
+    {p : x ＝ⁱ y} → refl-involutive-Id ∙ᵣⁱ p ＝ p
+  left-unit-concatr-involutive-Id {p = .x , p , refl} =
+    eq-pair-eq-pr2 (eq-pair left-unit-concatr refl)
+
+  right-unit-concatr-involutive-Id :
+    {p : x ＝ⁱ y} → p ∙ᵣⁱ refl-involutive-Id ＝ p
+  right-unit-concatr-involutive-Id = refl
+
+  left-inv-concatr-involutive-Id :
+    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ᵣⁱ p ＝ refl-involutive-Id
+  left-inv-concatr-involutive-Id (.y , refl , q) =
+    eq-pair-eq-pr2 (eq-pair (right-inv-concatr q) refl)
+
+  right-inv-concatr-involutive-Id :
+    (p : x ＝ⁱ y) → p ∙ᵣⁱ inv-involutive-Id p ＝ refl-involutive-Id
+  right-inv-concatr-involutive-Id (.x , p , refl) =
+    eq-pair-eq-pr2 (eq-pair (right-inv-concatr p) refl)
+
+  distributive-inv-concatr-involutive-Id :
+    (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
+    inv-involutive-Id (p ∙ᵣⁱ q) ＝ inv-involutive-Id q ∙ᵣⁱ inv-involutive-Id p
+  distributive-inv-concatr-involutive-Id (.y , refl , q) (.y , p' , refl) =
+    eq-pair-eq-pr2 (eq-pair (inv left-unit-concatr) (left-unit-concatr))
 ```
 
 ## References
