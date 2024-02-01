@@ -36,7 +36,7 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-equivalences
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.lifting-squares
 open import orthogonal-factorization-systems.local-types

@@ -25,4 +25,4 @@
 | Transport along identifications (foundation-core)                     | [`foundation-core.transport-along-identifications`](foundation-core.transport-along-identifications.md)                                             |
 | The universal property of identity systems                            | [`foundation.universal-property-identity-systems`](foundation.universal-property-identity-systems.md)                                               |
 | The universal property of identity types                              | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                                                   |
-| Whiskering identifications                                            | [`foundation.whiskering-identifications`](foundation.whiskering-identifications.md)                                                                 |
+| Whiskering identifications                                            | [`foundation.whiskering-identifications-concatenation`](foundation.whiskering-identifications-concatenation.md)                                     |

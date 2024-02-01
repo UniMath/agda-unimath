@@ -19,7 +19,7 @@ open import foundation.path-algebra
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
@@ -183,7 +183,7 @@ the original identifications.
       ( is-section-map-inv-equiv e y)) ＝
     ( p)
   triangle-eq-transpose-equiv {x} {y} p =
-    ( right-whisker-identification
+    ( right-whisker-concat
       ( is-section-map-inv-equiv
         ( equiv-ap e x (map-inv-equiv e y))
         ( p ∙ inv (is-section-map-inv-equiv e y)))
@@ -192,7 +192,7 @@ the original identifications.
         ( p)
         ( inv (is-section-map-inv-equiv e y))
         ( is-section-map-inv-equiv e y)) ∙
-      ( ( left-whisker-identification p
+      ( ( left-whisker-concat p
           ( left-inv (is-section-map-inv-equiv e y))) ∙
         ( right-unit)))
 
@@ -212,7 +212,7 @@ the original identifications.
               ( ap (map-equiv e) (inv (map-eq-transpose-equiv-inv e p)))
               ( is-section-map-inv-equiv e y)
               ( inv p)
-              ( ( right-whisker-identification
+              ( ( right-whisker-concat
                   ( ap
                     ( ap (map-equiv e))
                     ( inv-inv
@@ -229,7 +229,7 @@ the original identifications.
     ( is-retraction-map-inv-equiv e x ∙ map-eq-transpose-equiv e p) ＝
     ( ap (map-inv-equiv e) p)
   triangle-eq-transpose-equiv' {x} refl =
-    ( left-whisker-identification
+    ( left-whisker-concat
       ( is-retraction-map-inv-equiv e x)
       ( htpy-map-eq-transpose-equiv refl)) ∙
     ( is-section-inv-concat (is-retraction-map-inv-equiv e x) refl)

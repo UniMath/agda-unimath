@@ -1,9 +1,9 @@
-# Whiskering homotopies
+# Whiskering homotopies with respect to composition
 
 ```agda
-module foundation.whiskering-homotopies where
+module foundation.whiskering-homotopies-composition where
 
-open import foundation-core.whiskering-homotopies public
+open import foundation-core.whiskering-homotopies-composition public
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +15,7 @@ open import foundation.commuting-squares-of-identifications
 open import foundation.homotopy-induction
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
@@ -42,8 +42,8 @@ assumes a diagram of the form
       g
 ```
 
-and is defined to be a function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The **right
-whiskering** operation assumes a diagram of the form
+and is defined to be a function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The
+**right whiskering** operation assumes a diagram of the form
 
 ```text
                g
@@ -77,10 +77,10 @@ module _
   compute-eq-htpy-htpy-eq-right-whisker refl =
     eq-htpy-refl-htpy (f ∘ h)
 
-  compute-eq-right-whisker-htpy :
+  compute-eq-right-whisker-comp :
     ( H : f ~ g) →
     eq-htpy (H ·r h) ＝ ap (precomp h C) (eq-htpy H)
-  compute-eq-right-whisker-htpy H =
+  compute-eq-right-whisker-comp H =
     ( ap
       ( λ K → eq-htpy (K ·r h))
       ( inv (is-section-eq-htpy H))) ∙
@@ -98,10 +98,10 @@ module _
   compute-eq-htpy-htpy-eq-left-whisker refl =
     eq-htpy-refl-htpy (h ∘ f)
 
-  compute-eq-left-whisker-htpy :
+  compute-eq-left-whisker-comp :
     (H : f ~ g) →
     eq-htpy (h ·l H) ＝ ap (postcomp A h) (eq-htpy H)
-  compute-eq-left-whisker-htpy H =
+  compute-eq-left-whisker-comp H =
     ( ap
       ( λ K → eq-htpy (h ·l K))
       ( inv (is-section-eq-htpy H))) ∙

@@ -29,7 +29,7 @@ open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>

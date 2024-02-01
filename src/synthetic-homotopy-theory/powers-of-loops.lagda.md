@@ -18,7 +18,7 @@ open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.iterating-functions
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
@@ -68,7 +68,7 @@ power-nat-refl-Ω :
   power-nat-Ω n A refl ＝ refl
 power-nat-refl-Ω zero-ℕ A = refl
 power-nat-refl-Ω (succ-ℕ n) A =
-  right-whisker-identification (power-nat-refl-Ω n A) refl
+  right-whisker-concat (power-nat-refl-Ω n A) refl
 ```
 
 ### `ωⁿ⁺¹ = ωⁿ ∙ ω`
@@ -84,7 +84,7 @@ power-nat-succ-Ω' :
   power-nat-Ω (succ-ℕ n) A ω ＝ (ω ∙ power-nat-Ω n A ω)
 power-nat-succ-Ω' zero-ℕ A ω = inv right-unit
 power-nat-succ-Ω' (succ-ℕ n) A ω =
-  ( right-whisker-identification (power-nat-succ-Ω' n A ω) ω) ∙
+  ( right-whisker-concat (power-nat-succ-Ω' n A ω) ω) ∙
   ( assoc ω (power-nat-Ω n A ω) ω)
 ```
 
@@ -96,7 +96,7 @@ power-nat-add-Ω :
   power-nat-Ω (m +ℕ n) A ω ＝ (power-nat-Ω m A ω ∙ power-nat-Ω n A ω)
 power-nat-add-Ω m zero-ℕ A ω = inv right-unit
 power-nat-add-Ω m (succ-ℕ n) A ω =
-  ( right-whisker-identification (power-nat-add-Ω m n A ω) ω) ∙
+  ( right-whisker-concat (power-nat-add-Ω m n A ω) ω) ∙
   ( assoc (power-nat-Ω m A ω) (power-nat-Ω n A ω) ω)
 ```
 
@@ -109,7 +109,7 @@ power-nat-mul-Ω :
 power-nat-mul-Ω zero-ℕ n A ω = refl
 power-nat-mul-Ω (succ-ℕ m) n A ω =
   ( power-nat-add-Ω (m *ℕ n) n A ω) ∙
-  ( ( right-whisker-identification
+  ( ( right-whisker-concat
       ( power-nat-mul-Ω m n A ω)
       ( power-nat-Ω n A ω)))
 
@@ -131,5 +131,5 @@ map-power-nat-Ω :
 map-power-nat-Ω zero-ℕ {A} {B} f ω = preserves-refl-map-Ω f
 map-power-nat-Ω (succ-ℕ n) {A} {B} f ω =
   ( preserves-mul-map-Ω f) ∙
-  ( right-whisker-identification (map-power-nat-Ω n f ω) (map-Ω f ω))
+  ( right-whisker-concat (map-power-nat-Ω n f ω) (map-Ω f ω))
 ```

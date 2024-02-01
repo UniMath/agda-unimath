@@ -17,7 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types
@@ -214,12 +214,12 @@ module _
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
   where
 
-  left-whisker-htpy-pointed-map :
+  left-whisker-comp-pointed-map :
     (g : B →∗ C) (f1 f2 : A →∗ B) (H : htpy-pointed-map f1 f2) →
     htpy-pointed-map
       ( comp-pointed-map g f1)
       ( comp-pointed-map g f2)
-  left-whisker-htpy-pointed-map g f1 f2 H =
+  left-whisker-comp-pointed-map g f1 f2 H =
     pair
       ( map-pointed-map g ·l (pr1 H))
       ( ( ( ( ap² (pr1 g) (pr2 H)) ∙
@@ -259,10 +259,10 @@ module _
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
   where
 
-  right-whisker-htpy-pointed-map :
+  right-whisker-comp-pointed-map :
     (g1 g2 : B →∗ C) (H : htpy-pointed-map g1 g2) (f : A →∗ B) →
     htpy-pointed-map (comp-pointed-map g1 f) (comp-pointed-map g2 f)
-  right-whisker-htpy-pointed-map g1 g2 H (pair f refl) =
+  right-whisker-comp-pointed-map g1 g2 H (pair f refl) =
     pair (pr1 H ·r f) (pr2 H)
 
 module _

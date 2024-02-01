@@ -26,7 +26,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -178,9 +178,9 @@ abstract
     is-equiv-is-invertible
       ( postcomp A (map-inv-is-equiv is-equiv-f))
       ( eq-htpy ∘
-        right-whisker-htpy (is-section-map-inv-is-equiv is-equiv-f))
+        right-whisker-comp (is-section-map-inv-is-equiv is-equiv-f))
       ( eq-htpy ∘
-        right-whisker-htpy (is-retraction-map-inv-is-equiv is-equiv-f))
+        right-whisker-comp (is-retraction-map-inv-is-equiv is-equiv-f))
 
   is-equiv-postcomp-equiv :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ≃ Y) →

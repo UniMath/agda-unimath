@@ -1,7 +1,7 @@
-# Whiskering identifications
+# Whiskering identifications with respect to concatenation
 
 ```agda
-module foundation.whiskering-identifications where
+module foundation.whiskering-identifications-concatenation where
 ```
 
 <details><summary>Imports</summary>
@@ -27,10 +27,10 @@ identifications `p ＝ q` to identifications `r ∙ p ＝ r ∙ q` or to
 identifications `p ∙ r ＝ q ∙ r`.
 
 The
-{{#concept "left whiskering" Disambiguation="identifcations" Agda=left-whisker-identification"}}
+{{#concept "left whiskering" Disambiguation="identifcations" Agda=left-whisker-concat"}}
 operation takes an identification `r : z ＝ x` and an identification `p ＝ q` to
 an identification `r ∙ p ＝ r ∙ q`. Similarly, the
-{{#concept "right whiskering" Disambiguation="identifications" Agda=right-whisker-identification"}}
+{{#concept "right whiskering" Disambiguation="identifications" Agda=right-whisker-concat"}}
 operation takes an identification `r : y ＝ z` and an identification `p ＝ q` to
 an identification `p ∙ r ＝ q ∙ r`.
 
@@ -49,9 +49,9 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  left-whisker-identification :
+  left-whisker-concat :
     (p : x ＝ y) {q q' : y ＝ z} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
-  left-whisker-identification p β = ap (p ∙_) β
+  left-whisker-concat p β = ap (p ∙_) β
 ```
 
 ### Right whiskering of identifications
@@ -61,9 +61,9 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  right-whisker-identification :
+  right-whisker-concat :
     {p p' : x ＝ y} → p ＝ p' → (q : y ＝ z) → (p ∙ q) ＝ (p' ∙ q)
-  right-whisker-identification α q = ap (_∙ q) α
+  right-whisker-concat α q = ap (_∙ q) α
 ```
 
 ## Properties
@@ -75,16 +75,16 @@ module _
   {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {q q' : y ＝ z}
   where
 
-  is-equiv-left-whisker-identification :
-    is-equiv (left-whisker-identification p {q} {q'})
-  is-equiv-left-whisker-identification =
+  is-equiv-left-whisker-concat :
+    is-equiv (left-whisker-concat p {q} {q'})
+  is-equiv-left-whisker-concat =
     is-emb-is-equiv (is-equiv-concat p z) q q'
 
-  equiv-left-whisker-identification : (q ＝ q') ≃ (p ∙ q ＝ p ∙ q')
-  pr1 equiv-left-whisker-identification =
-    left-whisker-identification p
-  pr2 equiv-left-whisker-identification =
-    is-equiv-left-whisker-identification
+  equiv-left-whisker-concat : (q ＝ q') ≃ (p ∙ q ＝ p ∙ q')
+  pr1 equiv-left-whisker-concat =
+    left-whisker-concat p
+  pr2 equiv-left-whisker-concat =
+    is-equiv-left-whisker-concat
 ```
 
 ### Right whiskering of identification is an equivalence
@@ -94,16 +94,16 @@ module _
   {l : Level} {A : UU l} {x y z : A} {p p' : x ＝ y} (q : y ＝ z)
   where
 
-  is-equiv-right-whisker-identification :
-    is-equiv (λ (α : p ＝ p') → right-whisker-identification α q)
-  is-equiv-right-whisker-identification =
+  is-equiv-right-whisker-concat :
+    is-equiv (λ (α : p ＝ p') → right-whisker-concat α q)
+  is-equiv-right-whisker-concat =
     is-emb-is-equiv (is-equiv-concat' x q) p p'
 
-  equiv-right-whisker-identification : (p ＝ p') ≃ (p ∙ q ＝ p' ∙ q)
-  pr1 equiv-right-whisker-identification α =
-    right-whisker-identification α q
-  pr2 equiv-right-whisker-identification =
-    is-equiv-right-whisker-identification
+  equiv-right-whisker-concat : (p ＝ p') ≃ (p ∙ q ＝ p' ∙ q)
+  pr1 equiv-right-whisker-concat α =
+    right-whisker-concat α q
+  pr2 equiv-right-whisker-concat =
+    is-equiv-right-whisker-concat
 ```
 
 ### The unit and absorption laws for left whiskering of identifications
@@ -113,15 +113,15 @@ module _
   {l : Level} {A : UU l}
   where
 
-  left-unit-law-left-whisker-identification :
+  left-unit-law-left-whisker-concat :
     {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
-    left-whisker-identification refl α ＝ α
-  left-unit-law-left-whisker-identification refl = refl
+    left-whisker-concat refl α ＝ α
+  left-unit-law-left-whisker-concat refl = refl
 
-  right-absorption-law-left-whisker-identification :
+  right-absorption-law-left-whisker-concat :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
-    left-whisker-identification p (refl {x = q}) ＝ refl
-  right-absorption-law-left-whisker-identification p q = refl
+    left-whisker-concat p (refl {x = q}) ＝ refl
+  right-absorption-law-left-whisker-concat p q = refl
 ```
 
 ### The unit and absorption laws for right whiskering of identifications
@@ -131,16 +131,16 @@ module _
   {l : Level} {A : UU l}
   where
 
-  right-unit-law-right-whisker-identification :
+  right-unit-law-right-whisker-concat :
     {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
-    right-whisker-identification α refl ＝
+    right-whisker-concat α refl ＝
     right-unit ∙ α ∙ inv right-unit
-  right-unit-law-right-whisker-identification {p = refl} refl = refl
+  right-unit-law-right-whisker-concat {p = refl} refl = refl
 
-  left-absorption-law-right-whisker-identification :
+  left-absorption-law-right-whisker-concat :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
-    right-whisker-identification (refl {x = p}) q ＝ refl
-  left-absorption-law-right-whisker-identification p q = refl
+    right-whisker-concat (refl {x = p}) q ＝ refl
+  left-absorption-law-right-whisker-concat p q = refl
 ```
 
 ### Commutativity of left and right whiskering of identifications
@@ -162,9 +162,9 @@ commutes. There are at least two natural ways in which this square is seen to
 commute:
 
 1. The square commutes by naturality of the homotopy
-   `α ↦ left-whisker-identification α β`.
+   `α ↦ left-whisker-concat α β`.
 2. The transposed square commutes by the naturality of the homotopy
-   `β ↦ right-whisker-identification α β`.
+   `β ↦ right-whisker-concat α β`.
 
 These two ways in which the square commutes are inverse to each other.
 
@@ -178,25 +178,25 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  commutative-left-whisker-right-whisker-identification :
+  commutative-left-whisker-right-whisker-concat :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
-    left-whisker-identification p β ∙ right-whisker-identification α q' ＝
-    right-whisker-identification α q ∙ left-whisker-identification p' β
-  commutative-left-whisker-right-whisker-identification β =
-    nat-htpy (λ α → left-whisker-identification α β)
+    left-whisker-concat p β ∙ right-whisker-concat α q' ＝
+    right-whisker-concat α q ∙ left-whisker-concat p' β
+  commutative-left-whisker-right-whisker-concat β =
+    nat-htpy (λ α → left-whisker-concat α β)
 
-  commutative-right-whisker-left-whisker-identification :
+  commutative-right-whisker-left-whisker-concat :
     {p p' : x ＝ y} (α : p ＝ p') {q q' : y ＝ z} (β : q ＝ q') →
-    right-whisker-identification α q ∙ left-whisker-identification p' β ＝
-    left-whisker-identification p β ∙ right-whisker-identification α q'
-  commutative-right-whisker-left-whisker-identification α =
-    nat-htpy (right-whisker-identification α)
+    right-whisker-concat α q ∙ left-whisker-concat p' β ＝
+    left-whisker-concat p β ∙ right-whisker-concat α q'
+  commutative-right-whisker-left-whisker-concat α =
+    nat-htpy (right-whisker-concat α)
 
-  compute-inv-commutative-left-whisker-right-whisker-identification :
+  compute-inv-commutative-left-whisker-right-whisker-concat :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
-    inv (commutative-right-whisker-left-whisker-identification α β) ＝
-    commutative-left-whisker-right-whisker-identification β α
-  compute-inv-commutative-left-whisker-right-whisker-identification refl refl =
+    inv (commutative-right-whisker-left-whisker-concat α β) ＝
+    commutative-left-whisker-right-whisker-concat β α
+  compute-inv-commutative-left-whisker-right-whisker-concat refl refl =
     refl
 ```
 
@@ -222,8 +222,8 @@ module _
   {l : Level} {A : UU l} {x y : A} {p q : x ＝ y}
   where
 
-  compute-refl-right-whisker-identification :
+  compute-refl-right-whisker-concat :
     (r : p ＝ q) →
-    right-unit ∙ r ＝ right-whisker-identification r refl ∙ right-unit
-  compute-refl-right-whisker-identification refl = right-unit
+    right-unit ∙ r ＝ right-whisker-concat r refl ∙ right-unit
+  compute-refl-right-whisker-concat refl = right-unit
 ```

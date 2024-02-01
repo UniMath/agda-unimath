@@ -17,7 +17,7 @@ open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>

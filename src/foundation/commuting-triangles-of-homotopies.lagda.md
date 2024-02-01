@@ -10,12 +10,12 @@ module foundation.commuting-triangles-of-homotopies where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-identifications
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -117,7 +117,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  {f g h i : (x : A) → B x} (H : i ~ f) 
+  {f g h i : (x : A) → B x} (H : i ~ f)
   (left : f ~ h) (right : g ~ h) (top : f ~ g)
   where
 

@@ -13,12 +13,12 @@ open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-higher-homotopies
+open import foundation.whiskering-higher-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -46,7 +46,7 @@ homotopies.
 ### Precomposition distributes over whiskerings of homotopies
 
 The operation `htpy-precomp` distributes over
-[whiskerings of homotopies](foundation-core.whiskering-homotopies.md)
+[whiskerings of homotopies](foundation-core.whiskering-homotopies-composition.md)
 contravariantly. Given a homotopy `H : f ~ g` and a suitable map `h` the
 homotopy constructed as the whiskering
 
@@ -270,11 +270,11 @@ module _
     ind-htpy f
       ( λ f' F →
         htpy-precomp F Y ·r postcomp B g ~ postcomp A g ·l htpy-precomp F X)
-      ( ( right-whisker-htpy²
+      ( ( right-whisker-comp²
           ( compute-htpy-precomp-refl-htpy f Y)
           ( postcomp B g)) ∙h
         ( inv-htpy
-          ( left-whisker-htpy²
+          ( left-whisker-comp²
             ( postcomp A g)
             ( compute-htpy-precomp-refl-htpy f X))))
 
@@ -285,11 +285,11 @@ module _
     ind-htpy g
       ( λ g' G →
         htpy-postcomp A G ·r precomp f X ~ precomp f Y ·l htpy-postcomp B G)
-      ( ( right-whisker-htpy²
+      ( ( right-whisker-comp²
           ( compute-htpy-postcomp-refl-htpy A g)
           ( precomp f X)) ∙h
         ( inv-htpy
-          ( left-whisker-htpy²
+          ( left-whisker-comp²
             ( precomp f Y)
             ( compute-htpy-postcomp-refl-htpy B g))))
 
@@ -311,14 +311,14 @@ module _
           htpy-precomp F Y ·r postcomp B g'))
       ( ( ap-concat-htpy
           ( postcomp A g ·l htpy-precomp F X)
-          ( right-whisker-htpy²
+          ( right-whisker-comp²
             ( compute-htpy-postcomp-refl-htpy A g)
             ( precomp f' X))) ∙h
         ( right-unit-htpy) ∙h
         ( inv-htpy (commutative-postcomp-htpy-precomp g F)) ∙h
         ( ap-concat-htpy'
           ( htpy-precomp F Y ·r postcomp B g)
-          ( left-whisker-htpy²
+          ( left-whisker-comp²
             ( precomp f Y)
             ( inv-htpy (compute-htpy-postcomp-refl-htpy B g)))))
 ```

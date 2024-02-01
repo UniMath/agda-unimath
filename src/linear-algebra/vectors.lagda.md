@@ -26,7 +26,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-higher-homotopies
+open import foundation.whiskering-higher-homotopies-composition
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -179,7 +179,7 @@ module _
     (p : u ＝ v) → eq-Eq-vec n u v (Eq-eq-vec n u v p) ＝ p
   is-retraction-eq-Eq-vec zero-ℕ empty-vec empty-vec refl = refl
   is-retraction-eq-Eq-vec (succ-ℕ n) (x ∷ xs) .(x ∷ xs) refl =
-    left-whisker-htpy² (x ∷_) (is-retraction-eq-Eq-vec n xs xs) refl
+    left-whisker-comp² (x ∷_) (is-retraction-eq-Eq-vec n xs xs) refl
 
   square-Eq-eq-vec :
     (n : ℕ) (x : A) (u v : vec A n) (p : Id u v) →

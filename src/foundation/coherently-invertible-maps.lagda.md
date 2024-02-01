@@ -25,7 +25,7 @@ open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -47,16 +47,16 @@ abstract
               ( λ s →
                 Σ ( ( map-section f s ∘ f) ~ id)
                   ( λ H →
-                    ( right-whisker-htpy (is-section-map-section f s) f) ~
-                    ( left-whisker-htpy f H))))
+                    ( right-whisker-comp (is-section-map-section f s) f) ~
+                    ( left-whisker-comp f H))))
           ( associative-Σ
             ( B → A)
             ( λ g → (f ∘ g) ~ id)
             ( λ s →
               Σ ( ( map-section f s ∘ f) ~ id)
                 ( λ H →
-                  ( right-whisker-htpy (is-section-map-section f s) f) ~
-                  ( left-whisker-htpy f H))))
+                  ( right-whisker-comp (is-section-map-section f s) f) ~
+                  ( left-whisker-comp f H))))
           ( is-contr-Σ
             ( is-contr-section-is-equiv (is-equiv-is-coherently-invertible H))
             ( section-is-coherently-invertible H)

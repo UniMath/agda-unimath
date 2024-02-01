@@ -11,11 +11,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.homotopies
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -51,7 +51,7 @@ module _
     coherence-square-identifications
       ( tr-Id-right q p)
       ( tr² (Id a) α p)
-      ( left-whisker-identification p α)
+      ( left-whisker-concat p α)
       ( tr-Id-right q' p)
   tr²-Id-right α p =
     inv-nat-htpy (λ (t : b ＝ c) → tr-Id-right t p) α
@@ -79,8 +79,8 @@ module _
     (p : x ＝ y) {q q' : y ＝ z} (β : q ＝ q') (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (left-whisker-identification p β) b)
-      ( right-whisker-htpy (tr² B β) (tr B p) b)
+      ( tr² B (left-whisker-concat p β) b)
+      ( right-whisker-comp (tr² B β) (tr B p) b)
       ( tr-concat p q' b)
   tr²-left-whisker refl refl b = refl
 
@@ -88,8 +88,8 @@ module _
     {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (right-whisker-identification α q) b)
-      ( left-whisker-htpy (tr B q) (tr² B α) b)
+      ( tr² B (right-whisker-concat α q) b)
+      ( left-whisker-comp (tr B q) (tr² B α) b)
       ( tr-concat p' q b)
   tr²-right-whisker refl refl b = inv right-unit
 ```
@@ -105,41 +105,41 @@ module _
   tr³-htpy-swap-path-swap :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
     coherence-square-identifications
-      ( ( right-whisker-identification
-          ( tr²-concat (left-whisker-identification p β)
-          ( right-whisker-identification α q') b)
+      ( ( right-whisker-concat
+          ( tr²-concat (left-whisker-concat p β)
+          ( right-whisker-concat α q') b)
           ( tr-concat p' q' b)) ∙
         ( vertical-pasting-coherence-square-identifications
           ( tr-concat p q b)
-          ( tr² B (left-whisker-identification p β) b)
-          ( right-whisker-htpy (tr² B β) (tr B p) b)
+          ( tr² B (left-whisker-concat p β) b)
+          ( right-whisker-comp (tr² B β) (tr B p) b)
           ( tr-concat p q' b)
-          ( tr² B (right-whisker-identification α q') b)
-          ( left-whisker-htpy (tr B q') (tr² B α) b)
+          ( tr² B (right-whisker-concat α q') b)
+          ( left-whisker-comp (tr B q') (tr² B α) b)
           ( tr-concat p' q' b)
           ( tr²-left-whisker p β b)
           ( tr²-right-whisker α q' b)))
-      ( right-whisker-identification
+      ( right-whisker-concat
         ( tr³
           ( B)
-          ( commutative-left-whisker-right-whisker-identification β α)
+          ( commutative-left-whisker-right-whisker-concat β α)
           ( b))
         ( tr-concat p' q' b))
-      ( left-whisker-identification
+      ( left-whisker-concat
         ( tr-concat p q b)
         ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
-      ( ( right-whisker-identification
+      ( ( right-whisker-concat
           ( tr²-concat
-            ( right-whisker-identification α q)
-            ( left-whisker-identification p' β) b)
+            ( right-whisker-concat α q)
+            ( left-whisker-concat p' β) b)
           ( tr-concat p' q' b)) ∙
         ( vertical-pasting-coherence-square-identifications
           ( tr-concat p q b)
-          ( tr² B (right-whisker-identification α q) b)
-          ( left-whisker-htpy (tr B q) (tr² B α) b)
+          ( tr² B (right-whisker-concat α q) b)
+          ( left-whisker-comp (tr B q) (tr² B α) b)
           ( tr-concat p' q b)
-          ( tr² B (left-whisker-identification p' β) b)
-          ( right-whisker-htpy (tr² B β) (tr B p') b)
+          ( tr² B (left-whisker-concat p' β) b)
+          ( right-whisker-comp (tr² B β) (tr B p') b)
           ( tr-concat p' q' b)
           ( tr²-right-whisker α q b)
           ( tr²-left-whisker p' β b)))

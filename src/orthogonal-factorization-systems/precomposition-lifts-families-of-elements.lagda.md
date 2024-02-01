@@ -22,9 +22,9 @@ open import foundation.precomposition-functions
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-open import foundation.whiskering-higher-homotopies
-open import foundation.whiskering-homotopies
-open import foundation.whiskering-identifications
+open import foundation.whiskering-higher-homotopies-composition
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import orthogonal-factorization-systems.lifts-families-of-elements
 ```
@@ -180,7 +180,7 @@ module _
   coherence-triangle-precomp-lift-family-of-elements-refl-htpy b =
     ( htpy-eq (compute-triangle-precomp-lift-family-of-elements-htpy B a) b) ∙
     ( inv right-unit) ∙
-    ( left-whisker-identification
+    ( left-whisker-concat
       ( triangle-precomp-lift-family-of-elements-htpy-refl-htpy B a b)
       ( inv (eq-htpy-refl-htpy (b ∘ f))))
 
@@ -336,7 +336,7 @@ module _
     statement-coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ
       ( refl-htpy)
   coherence-htpy-precomp-coherence-square-precomp-map-inv-distributive-Π-Σ-refl-htpy =
-    ( left-whisker-htpy²
+    ( left-whisker-comp²
       ( map-inv-distributive-Π-Σ)
       ( compute-htpy-precomp-lifted-family-of-elements B)) ∙h
     ( inv-htpy

@@ -14,56 +14,103 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a type `A` with a [binary relation](foundation.binary-relations.md) `R : A → A → 𝒰`, which comes equipped with a multiplicative operation
+Consider a type `A` with a [binary relation](foundation.binary-relations.md)
+`R : A → A → 𝒰`, which comes equipped with a multiplicative operation
 
 ```text
   μ : (x y z : A) → R x y → R y z → R x z.
 ```
 
-Furthermore, assume that each `R x y` comes equipped with a further binary relation `E : R x y → R x y → 𝒰`. A {{#concept "left whiskering operation" Agda=whiskering}} on `E` with respect to `μ` is an operation
+Furthermore, assume that each `R x y` comes equipped with a further binary
+relation `E : R x y → R x y → 𝒰`. A
+{{#concept "left whiskering operation" Agda=whiskering}} on `E` with respect to
+`μ` is an operation
 
 ```text
   (f : R x y) {g h : R y z} → E g h → E (μ f g) (μ f h).
 ```
 
-Similarly, a {{#concept "right whiskering operation" Agda=right-whiskering}} on `E` with respect to `μ` is an operation
+Similarly, a {{#concept "right whiskering operation" Agda=right-whiskering}} on
+`E` with respect to `μ` is an operation
 
 ```text
   {g h : R x y} → E g h → (f : R y z) → E (μ g f) (μ h f).
 ```
 
-The general notion of whiskering is introduced in order to establish a clear naming scheme for all the variations of whiskering that exist in the `agda-unimath` library:
+The general notion of whiskering is introduced in order to establish a clear
+naming scheme for all the variations of whiskering that exist in the
+`agda-unimath` library:
 
-1. In [whiskering identifications with respect to concatenation](foundation.whiskering-identifications-concatenation.md) we define a whiskering operation
+1. In
+   [whiskering identifications with respect to concatenation](foundation.whiskering-identifications-concatenation.md)
+   we define the whiskering operations
 
    ```text
-     (p : x ＝ y) {q r : y ＝ z} → q ＝ r → p ∙ q ＝ p ∙ r
+     left-whisker-concat :
+       (p : x ＝ y) {q r : y ＝ z} → q ＝ r → p ∙ q ＝ p ∙ r
    ```
-   
-   with respect to concatenation of identifications.
-   
-2. In [whiskering homotopies with respect to composition](foundation.whiskering-homotopies-composition.md) we define a whiskering operation
+
+   and
 
    ```text
-     (f : B → C) {g h : A → B} → g ~ h → f ∘ g ~ f ∘ h
+     right-whisker-concat :
+       {p q : x ＝ y} → p ＝ q → (r : y ＝ z) → p ∙ r ＝ q ∙ r
+   ```
+
+   with respect to concatenation of identifications.
+
+2. In
+   [whiskering homotopies with respect to composition](foundation.whiskering-homotopies-composition.md)
+   we define the whiskering operations
+
+   ```text
+     left-whisker-comp :
+       (f : B → C) {g h : A → B} → g ~ h → f ∘ g ~ f ∘ h
+   ```
+
+   and
+
+   ```text
+     right-whisker-comp :
+       {f g : B → C} → (f ~ g) → (h : A → B) → f ∘ h ~ g ∘ h
    ```
 
    of homotopies with respect to composition of functions.
-   
-3. In [whiskering homotopies with respect to concatenation](foundation.whiskering-homotopies-concatenation.md) we define a whiskering operation
-   
-   ```text
-     (H : f ~ g) {K L : g ~ h} → K ~ L → H ∙h K ~ H ∙h L
-   ```
-   
-   of homotopies with respect to concatenation of homotopies.
-   
-4. In [whsikering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md) we define a whiskering operation
+
+3. In
+   [whiskering homotopies with respect to concatenation](foundation.whiskering-homotopies-composition-concatenation.md)
+   we define the whiskering operations
 
    ```text
-     (f : B → C) {g h : A → B} {H K : g ~ h} → H ~ K → f ·l H ~ f ·l K
+     left-whisker-concat-htpy :
+       (H : f ~ g) {K L : g ~ h} → K ~ L → H ∙h K ~ H ∙h L
    ```
-   
+
+   and
+
+   ```text
+     right-whisker-concat-htpy :
+       {H K : f ~ g} → H ~ K → (L : g ~ h) → H ∙h L ~ K ∙h L
+   ```
+
+   of homotopies with respect to concatenation of homotopies.
+
+4. In
+   [whsikering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md)
+   we define the whiskering operations
+
+   ```text
+     left-whisker-comp² :
+       (f : B → C) {g h : A → B} {H K : g ~ h} → H ~ K → f ·l H ~ f ·l K
+   ```
+
+   and
+
+   ```text
+     rigth-whisker-comp² :
+       {f g : B → C} {H K : f ~ g} → H ~ K → (h : A → B) → H ·r h ~ K ·r h
+   ```
+
    of higher homotopies with respect to composition of functions.
 
 ## Definitions
@@ -73,7 +120,7 @@ The general notion of whiskering is introduced in order to establish a clear nam
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {R : A → A → UU l2}
-  
+
   where
 
   left-whiskering-operation :

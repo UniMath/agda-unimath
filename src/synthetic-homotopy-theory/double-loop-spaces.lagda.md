@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
@@ -85,14 +85,14 @@ naturality-right-unit :
   {l : Level} {A : UU l} {x y : A} {p q : Id x y} (α : Id p q) →
   coherence-square-identifications
     ( right-unit)
-    ( right-whisker-identification α refl)
+    ( right-whisker-concat α refl)
     ( α)
     ( right-unit)
 naturality-right-unit {p = refl} refl = refl
 
 naturality-right-unit-Ω² :
   {l : Level} {A : UU l} {x : A} (α : type-Ω² x) →
-  right-whisker-identification α refl ＝ α
+  right-whisker-concat α refl ＝ α
 naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
 
 right-unit-law-horizontal-concat-Ω² :
@@ -103,15 +103,15 @@ right-unit-law-horizontal-concat-Ω² {α = α} =
 
 left-unit-law-left-whisker-Ω² :
   {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
-  left-whisker-identification (refl-Ω (pair A a)) α ＝ α
+  left-whisker-concat (refl-Ω (pair A a)) α ＝ α
 left-unit-law-left-whisker-Ω² α =
-  left-unit-law-left-whisker-identification α
+  left-unit-law-left-whisker-concat α
 
 right-unit-law-right-whisker-Ω² :
   {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
-  right-whisker-identification α (refl-Ω (pair A a)) ＝ α
+  right-whisker-concat α (refl-Ω (pair A a)) ＝ α
 right-unit-law-right-whisker-Ω² α =
-  (right-unit-law-right-whisker-identification α) ∙ right-unit
+  (right-unit-law-right-whisker-concat α) ∙ right-unit
 ```
 
 ### The interchange law for double loop spaces

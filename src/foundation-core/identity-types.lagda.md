@@ -129,9 +129,9 @@ equipped with **concatenation** `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
 
 There are many more operations on identity types. Some of them are defined in
 [path algebra](foundation.path-algebra.md) and
-[whiskering of identifications](foundation.whiskering-identifications.md). For a
-complete reference to all the files about general identity types, see the table
-given above.
+[whiskering of identifications](foundation.whiskering-identifications-concatenation.md).
+For a complete reference to all the files about general identity types, see the
+table given above.
 
 ### Concatenation of identifications
 

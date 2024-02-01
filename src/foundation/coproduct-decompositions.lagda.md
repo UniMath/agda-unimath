@@ -34,7 +34,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -109,7 +109,7 @@ pr2 (equiv-coproduct-Decomposition-full-subuniverse X) =
         ( d)
         ( id-equiv ,
           ( id-equiv ,
-            right-whisker-htpy
+            right-whisker-comp
               ( id-map-coprod _ _)
               ( map-equiv
                 ( matching-correspondence-binary-coproduct-Decomposition-subuniverse

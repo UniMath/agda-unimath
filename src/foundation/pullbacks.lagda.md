@@ -27,7 +27,7 @@ open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
@@ -43,7 +43,7 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -417,9 +417,9 @@ module _
                   ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
                 ( is-equiv-concat-htpy'
                   ( H ∙h (g ·l L))
-                  ( λ x → right-whisker-identification (inv right-unit) (H' x)))
+                  ( λ x → right-whisker-concat (inv right-unit) (H' x)))
                 ( is-equiv-concat-htpy
-                  ( λ x → left-whisker-identification (H x) right-unit)
+                  ( λ x → left-whisker-concat (H x) right-unit)
                   ( (f ·l K) ∙h refl-htpy ∙h H'))))
 
   abstract
@@ -526,7 +526,7 @@ module _
         ( concat (tr-tr-refl-htpy-cone c) c')) ~
       ( htpy-eq-square c c')
     left-map-triangle-parallel-cone-eq' c c' =
-      ( right-whisker-htpy
+      ( right-whisker-comp
         ( multivariable-htpy-eq 3
           ( compute-ind-htpy g
             ( λ g'' Hg' →
@@ -569,7 +569,7 @@ module _
         ( concat (tr-tr-refl-htpy-cone c) c') ~
       ( htpy-eq-square c c')
     left-map-triangle-parallel-cone-eq c c' =
-      ( right-whisker-htpy
+      ( right-whisker-comp
         ( multivariable-htpy-eq 5
           ( compute-ind-htpy f
             ( λ f'' Hf' →
@@ -1081,11 +1081,11 @@ module _
   pr1 (cone-ap c1 c2) = ap (vertical-map-cone f g c)
   pr1 (pr2 (cone-ap c1 c2)) = ap (horizontal-map-cone f g c)
   pr2 (pr2 (cone-ap c1 c2)) γ =
-    ( right-whisker-identification
+    ( right-whisker-concat
       ( inv (ap-comp f (vertical-map-cone f g c) γ))
       ( coherence-square-cone f g c c2)) ∙
     ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
-      ( left-whisker-identification
+      ( left-whisker-concat
         ( coherence-square-cone f g c c1)
         ( ap-comp g (horizontal-map-cone f g c) γ)))
 
@@ -1106,11 +1106,11 @@ module _
     ( tr-Id-right
       ( coherence-square-cone f g c c2)
       ( ap f (ap (vertical-map-cone f g c) γ))) ∙
-    ( ( right-whisker-identification
+    ( ( right-whisker-concat
         ( inv (ap-comp f (vertical-map-cone f g c) γ))
         ( coherence-square-cone f g c c2)) ∙
       ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
-        ( left-whisker-identification
+        ( left-whisker-concat
           ( coherence-square-cone f g c c1)
           ( ap-comp g (horizontal-map-cone f g c) γ))))
 

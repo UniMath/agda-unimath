@@ -20,7 +20,7 @@ open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>

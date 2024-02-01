@@ -11,7 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -167,7 +167,7 @@ module _
     coherence-triangle-identifications (p ∙ left) right (p ∙ top)
   equiv-left-whisker-coherence-triangle-identifications =
     ( inv-equiv (equiv-concat-assoc' (p ∙ left) p top right)) ∘e
-    ( equiv-left-whisker-identification p)
+    ( equiv-left-whisker-concat p)
 
   left-whisker-coherence-triangle-identifications :
     coherence-triangle-identifications left right top →
@@ -186,7 +186,7 @@ module _
     coherence-triangle-identifications' (p ∙ left) right (p ∙ top)
   equiv-left-whisker-coherence-triangle-identifications' =
     ( inv-equiv (equiv-concat-assoc p top right (p ∙ left))) ∘e
-    ( equiv-left-whisker-identification p)
+    ( equiv-left-whisker-concat p)
 
   left-whisker-coherence-triangle-identifications' :
     coherence-triangle-identifications' left right top →
@@ -227,7 +227,7 @@ module _
     coherence-triangle-identifications (left ∙ p) (right ∙ p) top
   equiv-right-whisker-coherence-triangle-identifications =
     ( equiv-concat-assoc' (left ∙ p) top right p) ∘e
-    ( equiv-right-whisker-identification p)
+    ( equiv-right-whisker-concat p)
 
   right-whisker-coherence-triangle-identifications :
     coherence-triangle-identifications left right top →
@@ -246,7 +246,7 @@ module _
     coherence-triangle-identifications' (left ∙ p) (right ∙ p) top
   equiv-right-whisker-coherence-triangle-identifications' =
     ( equiv-concat-assoc top right p (left ∙ p)) ∘e
-    ( equiv-right-whisker-identification p)
+    ( equiv-right-whisker-concat p)
 
   right-whisker-coherence-triangle-identifications' :
     coherence-triangle-identifications' left right top →
@@ -303,7 +303,7 @@ module _
     coherence-triangle-identifications left (q ∙ right) (top ∙ p)
   equiv-splice-inverse-pair-coherence-triangle-identifications refl .refl refl
     left right top =
-    equiv-concat' left (right-whisker-identification (inv right-unit) right)
+    equiv-concat' left (right-whisker-concat (inv right-unit) right)
 
   splice-inverse-pair-coherence-triangle-identifications :
     (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
@@ -312,7 +312,7 @@ module _
     coherence-triangle-identifications left (q ∙ right) (top ∙ p)
   splice-inverse-pair-coherence-triangle-identifications refl .refl refl
     left right top t =
-    t ∙ inv (right-whisker-identification right-unit right)
+    t ∙ inv (right-whisker-concat right-unit right)
 
   unsplice-inverse-pair-coherence-triangle-identifications :
     (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
@@ -321,7 +321,7 @@ module _
     coherence-triangle-identifications left right top
   unsplice-inverse-pair-coherence-triangle-identifications refl .refl refl
     left right top t =
-    t ∙ right-whisker-identification right-unit right
+    t ∙ right-whisker-concat right-unit right
 
   equiv-splice-inverse-pair-coherence-triangle-identifications' :
     (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
@@ -330,7 +330,7 @@ module _
     coherence-triangle-identifications' left (q ∙ right) (top ∙ p)
   equiv-splice-inverse-pair-coherence-triangle-identifications' refl .refl refl
     left right top =
-    equiv-concat (right-whisker-identification right-unit right) left
+    equiv-concat (right-whisker-concat right-unit right) left
 
   splice-inverse-pair-coherence-triangle-identifications' :
     (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
@@ -339,7 +339,7 @@ module _
     coherence-triangle-identifications' left (q ∙ right) (top ∙ p)
   splice-inverse-pair-coherence-triangle-identifications' refl .refl refl
     left right top t =
-    right-whisker-identification right-unit right ∙ t
+    right-whisker-concat right-unit right ∙ t
 
   unsplice-inverse-pair-coherence-triangle-identifications' :
     (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
@@ -348,7 +348,7 @@ module _
     coherence-triangle-identifications' left right top
   unsplice-inverse-pair-coherence-triangle-identifications' refl .refl refl
     left right top t =
-    inv (right-whisker-identification right-unit right) ∙ t
+    inv (right-whisker-concat right-unit right) ∙ t
 ```
 
 ### The action of functions on commuting triangles of identifications

@@ -17,7 +17,7 @@ open import foundation-core.identity-types
 open import foundation-core.invertible-maps
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -139,7 +139,7 @@ module _
               ( is-section-is-invertible H (map-inv-is-invertible H (f x)))) ∙
             ( is-retraction-is-invertible H (f x)))
           ( ( nat-htpy
-              ( right-whisker-htpy (is-retraction-is-invertible H) f)
+              ( right-whisker-comp (is-retraction-is-invertible H) f)
               ( is-section-is-invertible H x)) ∙
             ( ap
               ( concat' _ (is-retraction-is-invertible H (f x)))

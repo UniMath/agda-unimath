@@ -16,7 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import group-theory.homomorphisms-semigroups
 
@@ -115,7 +115,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
     { A =
       Id (ap (pr1 f) (lM eM) ∙ ef) ((μf ∙ ap-binary μN ef ef) ∙ rN eN)}
     ( ( horizontal-concat-Id² (lf eM) (inv (ap-id ef))) ∙
-      ( ( right-whisker-identification
+      ( ( right-whisker-concat
           ( inv
             ( assoc
               ( μf)
@@ -126,7 +126,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
             ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
             ( lN (pr1 f eM))
             ( ap id ef)) ∙
-          ( ( left-whisker-identification
+          ( ( left-whisker-concat
               ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
               ( nat-htpy lN ef)) ∙
             ( ( inv
@@ -141,13 +141,13 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                     ( ap (mul-H-Space' N (pr1 f eM)) ef)
                     ( ap (μN eN) ef))) ∙
                 ( horizontal-concat-Id²
-                  ( left-whisker-identification
+                  ( left-whisker-concat
                     ( μf)
                     ( inv (triangle-ap-binary μN ef ef)))
                   ( cN))))))))
-    ( ( right-whisker-identification (ap² (pr1 f) cM) ef) ∙
+    ( ( right-whisker-concat (ap² (pr1 f) cM) ef) ∙
       ( ( horizontal-concat-Id² (rf eM) (inv (ap-id ef))) ∙
-        ( ( right-whisker-identification
+        ( ( right-whisker-concat
             ( inv
               ( assoc
                 ( μf) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))
@@ -156,7 +156,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
               ( μf ∙ ap (μN (pr1 f eM)) ef)
               ( rN (pr1 f eM))
               ( ap id ef)) ∙
-            ( ( left-whisker-identification
+            ( ( left-whisker-concat
                 ( μf ∙ ap (μN (pr1 f eM)) ef)
                 ( nat-htpy rN ef)) ∙
               ( ( inv
@@ -170,7 +170,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                       ( μf)
                       ( ap (μN (pr1 f eM)) ef)
                       ( ap (mul-H-Space' N eN) ef)) ∙
-                    ( left-whisker-identification
+                    ( left-whisker-concat
                       ( μf)
                       ( inv (triangle-ap-binary' μN ef ef)))))))))))
   where

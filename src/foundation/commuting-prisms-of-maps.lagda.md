@@ -18,7 +18,7 @@ open import foundation.path-algebra
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
@@ -105,7 +105,7 @@ module _
           ( prism-top)) ∙h
         ( ap-concat-htpy
           ( hC' ·l front-top)
-          ( preserves-comp-left-whisker-htpy hC' hC top)))) ∙h
+          ( preserves-comp-left-whisker-comp hC' hC top)))) ∙h
     ( inv-htpy-assoc-htpy
       ( front-bottom ·r hA)
       ( hC' ·l front-top)

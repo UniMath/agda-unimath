@@ -50,7 +50,7 @@ open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.univalence
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>

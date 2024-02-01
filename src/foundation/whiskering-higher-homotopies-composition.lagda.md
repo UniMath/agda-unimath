@@ -1,7 +1,7 @@
-# Whiskering higher homotopies
+# Whiskering higher homotopies with respect to composition
 
 ```agda
-module foundation.whiskering-higher-homotopies where
+module foundation.whiskering-higher-homotopies-composition where
 ```
 
 <details><summary>Imports</summary>
@@ -11,7 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
 open import foundation-core.homotopies
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -46,9 +46,9 @@ module _
   {f g : (x : A) → B x}
   where
 
-  left-whisker-htpy² :
+  left-whisker-comp² :
     (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
-  left-whisker-htpy² h α = ap h ·l α
+  left-whisker-comp² h α = ap h ·l α
 ```
 
 ### Right whiskering higher homotopies
@@ -59,7 +59,7 @@ module _
   {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
   where
 
-  right-whisker-htpy² :
+  right-whisker-comp² :
     (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
-  right-whisker-htpy² α h = α ·r h
+  right-whisker-comp² α h = α ·r h
 ```

@@ -340,5 +340,5 @@ syntax step-homotopy-reasoning p h q = p ~ h by q
   functions in the file
   [`foundation.function-extensionality`](foundation.function-extensionality.md).
 - [Multivariable homotopies](foundation.multivariable-homotopies.md).
-- The [whiskering operations](foundation.whiskering-homotopies.md) on
-  homotopies.
+- The [whiskering operations](foundation.whiskering-homotopies-composition.md)
+  on homotopies.

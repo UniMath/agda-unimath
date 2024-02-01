@@ -14,8 +14,8 @@ open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
-open import foundation.whiskering-identifications
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-cartesian-product-types
 open import structured-types.pointed-homotopies
@@ -163,7 +163,7 @@ module _
       ( map-pointed-map {A = A ∨∗ B} {B = unit-Pointed-Type}
         ( terminal-pointed-map (A ∨∗ B)))
       ( x)) ∙
-    ( right-whisker-htpy
+    ( right-whisker-comp
       ( htpy-pointed-htpy
         ( inr-pushout-Pointed-Type
           ( pointed-map-prod-wedge-Pointed-Type A B)
@@ -200,7 +200,7 @@ module _
       ( apd
         ( contraction-map-smash-prod-wedge-Pointed-Type)
         ( glue-wedge-Pointed-Type A B))) ∙
-    ( left-whisker-identification
+    ( left-whisker-concat
       ( contraction-map-smash-prod-wedge-Pointed-Type
         ( map-inl-wedge-Pointed-Type A B (point-Pointed-Type A)))
       ( ap-const
@@ -250,7 +250,7 @@ module _
     inl-glue-smash-prod-Pointed-Type (point-Pointed-Type A) ＝
     inr-glue-smash-prod-Pointed-Type (point-Pointed-Type B)
   coh-glue-smash-prod-Pointed-Type =
-    ( left-whisker-identification
+    ( left-whisker-concat
       ( ap
         ( map-smash-prod-prod-Pointed-Type A B)
         ( inv (compute-inl-prod-wedge-Pointed-Type A B (point-Pointed-Type A))))
@@ -264,8 +264,8 @@ module _
           ( glue-wedge-Pointed-Type A B))
         ( contraction-map-smash-prod-wedge-Pointed-Type A B
           ( map-inr-wedge-Pointed-Type A B (point-Pointed-Type B))))) ∙
-    ( right-whisker-identification
-      ( ( left-whisker-identification
+    ( right-whisker-concat
+      ( ( left-whisker-concat
           ( ap (map-smash-prod-prod-Pointed-Type A B)
             ( inv
               ( compute-inl-prod-wedge-Pointed-Type A B
@@ -363,7 +363,7 @@ pr2 (universal-property-smash-prod-Pointed-Type A B C f) =
           ( map-pointed-map f)
           ( inr-glue-smash-prod-Pointed-Type A B y) ∙
         ( preserves-point-pointed-map f))) ,
-      ( ( right-whisker-identification
+      ( ( right-whisker-concat
           ( ap²
             ( map-pointed-map f)
             ( inv (coh-glue-smash-prod-Pointed-Type A B)))

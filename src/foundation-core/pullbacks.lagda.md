@@ -17,7 +17,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-squares-of-maps
@@ -490,7 +490,7 @@ module _
             ( λ t → eq-pair t (ap pr2 α))
             ( ( inv right-unit) ∙
               ( inv
-                ( left-whisker-identification
+                ( left-whisker-concat
                   ( ap pr1 α)
                   ( left-inv (ap pr2 α)))) ∙
               ( inv (assoc (ap pr1 α) (inv (ap pr2 α)) (ap pr2 α))))) ∙
@@ -511,8 +511,8 @@ module _
         ( refl)
         ( refl)
         ( inv
-          ( ( right-whisker-identification
-              ( ( right-whisker-identification
+          ( ( right-whisker-concat
+              ( ( right-whisker-concat
                   ( ap-pr1-eq-pair p refl)
                   ( inv (ap pr2 (eq-pair p refl)))) ∙
                 ( ap (λ t → p ∙ inv t) (ap-pr2-eq-pair p refl)) ∙

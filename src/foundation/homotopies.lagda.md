@@ -19,7 +19,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
@@ -27,7 +27,7 @@ open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -294,8 +294,8 @@ htpy-swap-nat-right-htpy :
   {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
   {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
   (H : f ~ g) →
-  (right-whisker-htpy H' f ∙h left-whisker-htpy g' H) ~
-  (left-whisker-htpy f' H ∙h right-whisker-htpy H' g)
+  (right-whisker-comp H' f ∙h left-whisker-comp g' H) ~
+  (left-whisker-comp f' H ∙h right-whisker-comp H' g)
 htpy-swap-nat-right-htpy H' H x =
     nat-htpy H' (H x)
 
@@ -303,9 +303,9 @@ eckmann-hilton-htpy :
   {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
   (H ∙h K) ~ (K ∙h H)
 eckmann-hilton-htpy H K x =
-  ( inv (left-whisker-identification (H x) (ap-id (K x))) ∙
+  ( inv (left-whisker-concat (H x) (ap-id (K x))) ∙
   ( htpy-swap-nat-right-htpy H K x)) ∙
-  ( right-whisker-identification (ap-id (K x)) (H x))
+  ( right-whisker-concat (ap-id (K x)) (H x))
 ```
 
 ### Action on identifications at `eq-htpy`
@@ -331,5 +331,5 @@ module _
 ## See also
 
 - [Multivariable homotopies](foundation.multivariable-homotopies.md).
-- The [whiskering operations](foundation.whiskering-homotopies.md) on
-  homotopies.
+- The [whiskering operations](foundation.whiskering-homotopies-composition.md)
+  on homotopies.

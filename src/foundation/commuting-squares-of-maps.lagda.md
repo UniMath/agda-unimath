@@ -20,9 +20,9 @@ open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-higher-homotopies
-open import foundation.whiskering-homotopies
-open import foundation.whiskering-identifications
+open import foundation.whiskering-higher-homotopies-composition
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-prisms-of-maps
 open import foundation-core.function-extensionality
@@ -94,7 +94,7 @@ module _
     ( coherence-square-homotopies-coherence-triangles-maps refl-htpy H K) ~
     ( coherence-square-coherence-triangles-maps diagonal H K)
   compute-coherence-square-refl-htpy-coherence-triangles-maps diagonal H K x =
-    right-whisker-identification right-unit (K x)
+    right-whisker-concat right-unit (K x)
 ```
 
 ### Inverting squares horizontally and vertically
@@ -354,7 +354,7 @@ module _
                 ( inv
                   ( ap
                     ( ap (map-inv-equiv right))
-                    ( ( left-whisker-htpy²
+                    ( ( left-whisker-comp²
                         ( bottom)
                         ( coherence-map-inv-equiv left)
                         ( a)) ∙
@@ -383,7 +383,7 @@ module _
                 ( nat-htpy
                   ( is-retraction-map-inv-equiv right ·r top)
                   ( is-retraction-map-inv-equiv left a)))))) ∙
-        ( right-whisker-identification
+        ( right-whisker-concat
           ( right-inverse-eq-transpose-equiv
             ( right)
             ( H (map-inv-equiv left (map-equiv left a))))
@@ -415,7 +415,7 @@ module _
             ( map-equiv right)
             ( coherence-square-inv-vertical top left right bottom H a))
           ( is-section-map-inv-equiv right (bottom a))) ∙
-        ( left-whisker-identification
+        ( left-whisker-concat
           ( H (map-inv-equiv left a))
           ( triangle-eq-transpose-equiv
             ( right)
@@ -493,7 +493,7 @@ module _
           ( mid-right ·l sq-top)) ∙h
         ( ap-concat-htpy
           ( bottom-right ·l (sq-mid ·r top-left))
-          ( preserves-comp-left-whisker-htpy
+          ( preserves-comp-left-whisker-comp
             ( bottom-right)
             ( mid-right)
             ( sq-top))))) ∙h
@@ -835,8 +835,8 @@ module _
         by
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
-          ( eq-htpy (preserves-comp-left-whisker-htpy h bottom-right H))
-          ( compute-eq-right-whisker-htpy
+          ( eq-htpy (preserves-comp-left-whisker-comp h bottom-right H))
+          ( compute-eq-right-whisker-comp
             ( top-left)
             ( h ·l K))
 
@@ -923,8 +923,8 @@ module _
         by
         ap-binary
           ( λ p L → p ∙ eq-htpy L)
-          ( compute-eq-right-whisker-htpy left-top (h ·l K))
-          ( eq-htpy (preserves-comp-left-whisker-htpy h right-bottom H))
+          ( compute-eq-right-whisker-comp left-top (h ·l K))
+          ( eq-htpy (preserves-comp-left-whisker-comp h right-bottom H))
 ```
 
 ### Transposing by precomposition of whiskered squares
@@ -974,7 +974,7 @@ module _
     ( ( precomp f W) ·l
       ( precomp-coherence-square-maps top left right bottom H W))
   distributive-precomp-right-whisker-coherence-square-maps f g =
-    compute-eq-right-whisker-htpy f (g ·l H)
+    compute-eq-right-whisker-comp f (g ·l H)
 ```
 
 Similarly, we can calculate transpositions of left-whiskered squares with the
@@ -1039,7 +1039,7 @@ module _
     ( K)
     ( h) =
     ( compute-concat-htpy-precomp (H ∙h L) K W h) ∙
-    ( right-whisker-identification
+    ( right-whisker-concat
       ( compute-concat-htpy-precomp H L W h)
       ( precomp-coherence-triangle-maps diagonal-right right top K W h))
 
@@ -1077,7 +1077,7 @@ module _
     ( K)
     ( h) =
     ( compute-concat-htpy-precomp H (L ∙h K) W h) ∙
-    ( left-whisker-identification
+    ( left-whisker-concat
       ( precomp-coherence-triangle-maps' diagonal-left bottom left H W h)
       ( compute-concat-htpy-precomp L K W h))
 

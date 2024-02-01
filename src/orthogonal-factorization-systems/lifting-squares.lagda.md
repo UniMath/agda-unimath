@@ -19,8 +19,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
-open import foundation.whiskering-identifications
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifts-of-maps
@@ -131,7 +131,7 @@ module _
 
 ### Characterization of identifications of lifting squares
 
-```agda
+````agda
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -189,12 +189,12 @@ module _
 --   pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
 --   pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) x =
 --     ( inv (assoc (inv right-unit) (β) (α))) ∙
---     ( ( right-whisker-identification
---         ( ( left-whisker-identification
+--     ( ( right-whisker-concat
+--         ( ( left-whisker-concat
 --             ( inv right-unit)
 --             ( ( right-transpose-eq-concat _ _ _
 --                 ( inv
---                   ( compute-refl-right-whisker-identification
+--                   ( compute-refl-right-whisker-concat
 --                     ( coherence-lifting-square l x)))) ∙
 --               ( assoc
 --                 ( right-unit)
@@ -205,35 +205,35 @@ module _
 --             ( coherence-lifting-square l x ∙ inv right-unit)))
 --         ( α)) ∙
 --       ( ( assoc (coherence-lifting-square l x) (inv right-unit) (α)) ∙
---         ( ( left-whisker-identification
+--         ( ( left-whisker-concat
 --             ( coherence-lifting-square l x)
---             ( ( left-whisker-identification
+--             ( ( left-whisker-concat
 --                 ( inv right-unit)
 --                 ( right-unit-law-assoc
 --                   ( H x)
 --                   ( ap g (is-extension-lifting-square l x)))) ∙
 --               ( ( is-retraction-inv-concat
 --                   ( right-unit)
---                   ( left-whisker-identification (H x) (inv right-unit))) ∙
+--                   ( left-whisker-concat (H x) (inv right-unit))) ∙
 --                 ( inv
 --                   ( is-section-inv-concat' α
---                     ( left-whisker-identification (H x) (inv right-unit))))))) ∙
+--                     ( left-whisker-concat (H x) (inv right-unit))))))) ∙
 --           ( ( inv
 --               ( assoc
 --                 ( coherence-lifting-square l x)
---                 ( left-whisker-identification (H x) (inv right-unit) ∙ inv α)
+--                 ( left-whisker-concat (H x) (inv right-unit) ∙ inv α)
 --                 ( α))) ∙
 --             ( ap
 --               ( λ r →
 --                 ( ( coherence-lifting-square l x) ∙
---                   ( left-whisker-identification (H x) r ∙ inv α)) ∙
+--                   ( left-whisker-concat (H x) r ∙ inv α)) ∙
 --                 ( α))
 --               ( compute-refl-right-map-coherence-triangle-identifications
 --                 ( g)
 --                 ( is-extension-lifting-square l x)))))))
 --     where
 --       α = assoc (H x) (ap g (is-extension-lifting-square l x)) refl
---       β = right-whisker-identification (coherence-lifting-square l x) refl
+--       β = right-whisker-concat (coherence-lifting-square l x) refl
 
 --   htpy-eq-lifting-square :
 --     (l l' : lifting-square h f g i H) → l ＝ l' → htpy-lifting-square l l'
@@ -300,3 +300,4 @@ module _
 --       ( map-base-fibered-map f g h)
 --       ( is-map-over-map-total-fibered-map f g h)
 -- ```
+````

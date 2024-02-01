@@ -22,7 +22,7 @@ open import foundation.pullbacks
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.lifts-families-of-elements
 open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements

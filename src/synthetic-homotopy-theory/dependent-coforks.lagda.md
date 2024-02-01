@@ -26,7 +26,7 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -342,7 +342,7 @@ module _
               ( λ where
                 ( inl a) →
                   inv
-                    ( ( right-whisker-identification
+                    ( ( right-whisker-concat
                         ( ap-id
                           ( inv
                             ( coherence-square-dependent-cocone
@@ -368,7 +368,7 @@ module _
                               ( d)
                               ( inl a))))
                 ( inr a) →
-                  right-whisker-identification
+                  right-whisker-concat
                     ( inv
                       ( ap-inv
                         ( tr P (coherence-cofork f g e a))

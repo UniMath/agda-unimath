@@ -26,7 +26,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -608,7 +608,7 @@ module _
               ( inclusion-retract-map f g R))
             ( b)))
         ( id-hom-arrow)
-        ( left-whisker-htpy-hom-arrow
+        ( left-whisker-comp-hom-arrow
           ( inclusion-fiber f)
           ( inclusion-fiber f)
           ( inclusion-fiber f)

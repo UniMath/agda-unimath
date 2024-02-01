@@ -15,7 +15,7 @@ open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
@@ -81,13 +81,13 @@ module _
 
   middle-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p refl q ＝ right-whisker-identification right-unit q
+    assoc p refl q ＝ right-whisker-concat right-unit q
   middle-unit-law-assoc refl q = refl
 
   right-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
     assoc p q refl ＝
-      right-unit ∙ left-whisker-identification p (inv right-unit)
+      right-unit ∙ left-whisker-concat p (inv right-unit)
   right-unit-law-assoc refl refl = refl
 ```
 
@@ -111,23 +111,23 @@ module _
 
   unit-law-assoc-101 :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p refl q ＝ right-whisker-identification right-unit q
+    assoc p refl q ＝ right-whisker-concat right-unit q
   unit-law-assoc-101 refl q = refl
 
   unit-law-assoc-101' :
     (p : x ＝ y) (q : y ＝ z) →
-    inv (assoc p refl q) ＝ right-whisker-identification (inv right-unit) q
+    inv (assoc p refl q) ＝ right-whisker-concat (inv right-unit) q
   unit-law-assoc-101' refl q = refl
 
   unit-law-assoc-110 :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p q refl ∙ left-whisker-identification p right-unit ＝ right-unit
+    assoc p q refl ∙ left-whisker-concat p right-unit ＝ right-unit
   unit-law-assoc-110 refl refl = refl
 
   unit-law-assoc-110' :
     (p : x ＝ y) (q : y ＝ z) →
     inv right-unit ∙ assoc p q refl ＝
-    left-whisker-identification p (inv right-unit)
+    left-whisker-concat p (inv right-unit)
   unit-law-assoc-110' refl refl = refl
 ```
 
@@ -177,13 +177,13 @@ right-unit-law-vertical-concat-Id² = right-unit
 left-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
   horizontal-concat-Id² (refl {x = p}) γ ＝
-  left-whisker-identification p γ
+  left-whisker-concat p γ
 left-unit-law-horizontal-concat-Id² = left-unit-ap-binary _∙_
 
 right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α (refl {x = u}) ＝
-  right-whisker-identification α u
+  right-whisker-concat α u
 right-unit-law-horizontal-concat-Id² = right-unit-ap-binary _∙_
 ```
 
@@ -291,7 +291,7 @@ unit-law-α-interchange-Id² :
   ( ( interchange-Id² α refl (refl {x = u}) refl) ∙
     ( right-unit ∙ right-unit-law-horizontal-concat-Id² α)) ＝
   ( ( right-unit-law-horizontal-concat-Id² (α ∙ refl)) ∙
-    ( ap (λ s → right-whisker-identification s u) right-unit))
+    ( ap (λ s → right-whisker-concat s u) right-unit))
 unit-law-α-interchange-Id² refl u = refl
 
 unit-law-β-interchange-Id² :
@@ -304,7 +304,7 @@ unit-law-γ-interchange-Id² :
   ( ( interchange-Id² (refl {x = p}) refl γ refl) ∙
     ( right-unit ∙ left-unit-law-horizontal-concat-Id² γ)) ＝
   ( ( left-unit-law-horizontal-concat-Id² (γ ∙ refl)) ∙
-    ( ap (left-whisker-identification p) right-unit))
+    ( ap (left-whisker-concat p) right-unit))
 unit-law-γ-interchange-Id² p refl = refl
 
 unit-law-δ-interchange-Id² :
@@ -374,13 +374,13 @@ right-unit-law-x-concat-Id³ = right-unit-law-vertical-concat-Id²
 left-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α : p ＝ q} {γ δ : q ＝ r}
   {τ : γ ＝ δ} →
-  y-concat-Id³ (refl {x = α}) τ ＝ left-whisker-identification α τ
+  y-concat-Id³ (refl {x = α}) τ ＝ left-whisker-concat α τ
 left-unit-law-y-concat-Id³ {τ = τ} = left-unit-law-horizontal-concat-Id² τ
 
 right-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α β : p ＝ q} {γ : q ＝ r}
   {σ : α ＝ β} →
-  y-concat-Id³ σ (refl {x = γ}) ＝ right-whisker-identification σ γ
+  y-concat-Id³ σ (refl {x = γ}) ＝ right-whisker-concat σ γ
 right-unit-law-y-concat-Id³ {σ = σ} = right-unit-law-horizontal-concat-Id² σ
 
 left-unit-law-z-concat-Id³ :
@@ -497,16 +497,16 @@ module _
     p000̂ p00̂0 p0̂00 p00̂1 p0̂01 p010̂ p0̂10 p100̂ p10̂0 p0̂11 p10̂1 p110̂
     p00̂0̂ p0̂00̂ p0̂0̂0 p0̂0̂1 p0̂10̂ p10̂0̂ =
     Id
-      ( ( right-whisker-identification p00̂0̂ p0̂11) ∙
+      ( ( right-whisker-concat p00̂0̂ p0̂11) ∙
         ( ( assoc p00̂0 p010̂ p0̂11) ∙
-          ( ( left-whisker-identification p00̂0 p0̂10̂) ∙
+          ( ( left-whisker-concat p00̂0 p0̂10̂) ∙
             ( ( inv (assoc p00̂0 p0̂10 p110̂)) ∙
-              ( ( right-whisker-identification p0̂0̂0 p110̂) ∙
+              ( ( right-whisker-concat p0̂0̂0 p110̂) ∙
                 ( assoc p0̂00 p10̂0 p110̂))))))
       ( ( assoc p000̂ p00̂1 p0̂11) ∙
-        ( ( left-whisker-identification p000̂ p0̂0̂1) ∙
+        ( ( left-whisker-concat p000̂ p0̂0̂1) ∙
           ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
-            ( ( right-whisker-identification p0̂00̂ p10̂1) ∙
+            ( ( right-whisker-concat p0̂00̂ p10̂1) ∙
               ( ( assoc p0̂00 p100̂ p10̂1) ∙
-                ( ( left-whisker-identification p0̂00 p10̂0̂)))))))
+                ( ( left-whisker-concat p0̂00 p10̂0̂)))))))
 ```

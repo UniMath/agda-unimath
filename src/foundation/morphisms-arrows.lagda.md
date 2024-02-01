@@ -17,7 +17,7 @@ open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
@@ -27,7 +27,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-homotopies-composition
 ```
 
 </details>
@@ -429,24 +429,24 @@ module _
   (γ : hom-arrow g h) (α β : hom-arrow f g) (H : htpy-hom-arrow f g α β)
   where
 
-  htpy-domain-left-whisker-htpy-hom-arrow :
+  htpy-domain-left-whisker-comp-hom-arrow :
     map-domain-comp-hom-arrow f g h γ α ~ map-domain-comp-hom-arrow f g h γ β
-  htpy-domain-left-whisker-htpy-hom-arrow =
+  htpy-domain-left-whisker-comp-hom-arrow =
     map-domain-hom-arrow g h γ ·l htpy-domain-htpy-hom-arrow f g α β H
 
-  htpy-codomain-left-whisker-htpy-hom-arrow :
+  htpy-codomain-left-whisker-comp-hom-arrow :
     map-codomain-comp-hom-arrow f g h γ α ~
     map-codomain-comp-hom-arrow f g h γ β
-  htpy-codomain-left-whisker-htpy-hom-arrow =
+  htpy-codomain-left-whisker-comp-hom-arrow =
     map-codomain-hom-arrow g h γ ·l htpy-codomain-htpy-hom-arrow f g α β H
 
-  coh-left-whisker-htpy-hom-arrow :
+  coh-left-whisker-comp-hom-arrow :
     coherence-htpy-hom-arrow f h
       ( comp-hom-arrow f g h γ α)
       ( comp-hom-arrow f g h γ β)
-      ( htpy-domain-left-whisker-htpy-hom-arrow)
-      ( htpy-codomain-left-whisker-htpy-hom-arrow)
-  coh-left-whisker-htpy-hom-arrow a =
+      ( htpy-domain-left-whisker-comp-hom-arrow)
+      ( htpy-codomain-left-whisker-comp-hom-arrow)
+  coh-left-whisker-comp-hom-arrow a =
     ( left-whisker-coherence-triangle-identifications'
       ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
       ( _)
@@ -485,16 +485,16 @@ module _
           ( ap g (htpy-domain-htpy-hom-arrow f g α β H a))
           ( coh-htpy-hom-arrow f g α β H a))))
 
-  left-whisker-htpy-hom-arrow :
+  left-whisker-comp-hom-arrow :
     htpy-hom-arrow f h
       ( comp-hom-arrow f g h γ α)
       ( comp-hom-arrow f g h γ β)
-  pr1 left-whisker-htpy-hom-arrow =
-    htpy-domain-left-whisker-htpy-hom-arrow
-  pr1 (pr2 left-whisker-htpy-hom-arrow) =
-    htpy-codomain-left-whisker-htpy-hom-arrow
-  pr2 (pr2 left-whisker-htpy-hom-arrow) =
-    coh-left-whisker-htpy-hom-arrow
+  pr1 left-whisker-comp-hom-arrow =
+    htpy-domain-left-whisker-comp-hom-arrow
+  pr1 (pr2 left-whisker-comp-hom-arrow) =
+    htpy-codomain-left-whisker-comp-hom-arrow
+  pr2 (pr2 left-whisker-comp-hom-arrow) =
+    coh-left-whisker-comp-hom-arrow
 ```
 
 #### Right whiskering

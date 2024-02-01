@@ -18,7 +18,7 @@ open import foundation.small-types
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-identifications
+open import foundation.whiskering-identifications-concatenation
 
 open import orthogonal-factorization-systems.higher-modalities
 open import orthogonal-factorization-systems.modal-induction
@@ -146,7 +146,7 @@ module _
         ( naturality-unit-higher-modality m f x)) ∙
       ( naturality-unit-higher-modality m g (f x)))
   compute-naturality-unit-ind-modality g f x =
-    ( right-whisker-identification
+    ( right-whisker-concat
       ( compute-ind-subuniverse-Id-higher-modality m
         ( ap-map-higher-modality m g ∘ ap-map-higher-modality m f)
         ( ap-map-higher-modality m (g ∘ f))
@@ -161,7 +161,7 @@ module _
         ( inv
           ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)))
       ( compute-rec-higher-modality m (unit-higher-modality m ∘ g ∘ f) x)) ∙
-    ( left-whisker-identification
+    ( left-whisker-concat
       ( ap
         ( ap-map-higher-modality m g)
         ( compute-rec-higher-modality m (unit-higher-modality m ∘ f) x))

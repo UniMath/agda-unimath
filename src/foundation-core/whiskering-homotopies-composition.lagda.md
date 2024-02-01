@@ -1,7 +1,7 @@
-# Whiskering homotopies
+# Whiskering homotopies with respect to composition
 
 ```agda
-module foundation-core.whiskering-homotopies where
+module foundation-core.whiskering-homotopies-composition where
 ```
 
 <details><summary>Imports</summary>
@@ -30,8 +30,8 @@ assumes a diagram of the form
       g
 ```
 
-and is defined to be a function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The **right
-whiskering** operation assumes a diagram of the form
+and is defined to be a function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The
+**right whiskering** operation assumes a diagram of the form
 
 ```text
                g
@@ -42,12 +42,17 @@ whiskering** operation assumes a diagram of the form
 
 and is defined to be a function `H ↦ H ·r f : (g ~ h) → (g ∘ f ~ h ∘ f)`.
 
-**Note**: The infix whiskering operators `_·l_` and `_·r_` use the
+**Note.** The infix whiskering operators `_·l_` and `_·r_` use the
 [middle dot](https://codepoints.net/U+00B7) `·` (agda-input: `\cdot`
 `\centerdot`), as opposed to the infix homotopy concatenation operator `_∙h_`
 which uses the [bullet operator](https://codepoints.net/U+2219) `∙` (agda-input:
 `\.`). If these look the same in your editor, we suggest that you change your
 font. For more details, see [How to install](HOWTO-INSTALL.md).
+
+**Note.** We will define the whiskering operations with respect to function
+composition for dependent functions. The definition of `whiskering-operations`
+in [whiskering operations](foundation.whiskering-operations.md) does not support
+this level of generality, so we will not be able to use it here.
 
 ## Definitions
 
@@ -58,13 +63,13 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  left-whisker-htpy :
+  left-whisker-comp :
     (h : {x : A} → B x → C x)
     {f g : (x : A) → B x} → f ~ g → h ∘ f ~ h ∘ g
-  left-whisker-htpy h H x = ap h (H x)
+  left-whisker-comp h H x = ap h (H x)
 
   infixr 17 _·l_
-  _·l_ = left-whisker-htpy
+  _·l_ = left-whisker-comp
 ```
 
 ### Right whiskering of homotopies
@@ -74,14 +79,14 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   where
 
-  right-whisker-htpy :
+  right-whisker-comp :
     {g h : {x : A} (y : B x) → C x y}
     (H : {x : A} → g {x} ~ h {x})
     (f : (x : A) → B x) → g ∘ f ~ h ∘ f
-  right-whisker-htpy H f x = H (f x)
+  right-whisker-comp H f x = H (f x)
 
   infixl 16 _·r_
-  _·r_ = right-whisker-htpy
+  _·r_ = right-whisker-comp
 ```
 
 ### Horizontal concatenation of homotopies
@@ -113,35 +118,35 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  left-unit-law-left-whisker-htpy :
+  left-unit-law-left-whisker-comp :
     {f f' : (x : A) → B x} → (H : f ~ f') → id ·l H ~ H
-  left-unit-law-left-whisker-htpy H x = ap-id (H x)
+  left-unit-law-left-whisker-comp H x = ap-id (H x)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  right-absorption-law-left-whisker-htpy :
+  right-absorption-law-left-whisker-comp :
     {f : (x : A) → B x} (g : {x : A} → B x → C x) →
     g ·l refl-htpy {f = f} ~ refl-htpy
-  right-absorption-law-left-whisker-htpy g = refl-htpy
+  right-absorption-law-left-whisker-comp g = refl-htpy
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   where
 
-  left-absorption-law-right-whisker-htpy :
+  left-absorption-law-right-whisker-comp :
     {g : {x : A} (y : B x) → C x y} (f : (x : A) → B x) →
     refl-htpy {f = g} ·r f ~ refl-htpy
-  left-absorption-law-right-whisker-htpy f = refl-htpy
+  left-absorption-law-right-whisker-comp f = refl-htpy
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  right-unit-law-right-whisker-htpy :
+  right-unit-law-right-whisker-comp :
     {f f' : (x : A) → B x} → (H : f ~ f') → H ·r id ~ H
-  right-unit-law-right-whisker-htpy H = refl-htpy
+  right-unit-law-right-whisker-comp H = refl-htpy
 ```
 
 ### Laws for whiskering an inverted homotopy
@@ -200,11 +205,11 @@ module _
   {A : UU l1} {B : A → UU l2} {C : A → UU l3} {D : A → UU l4}
   where
 
-  preserves-comp-left-whisker-htpy :
+  preserves-comp-left-whisker-comp :
     ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
     ( H : f ~ g) →
     k ·l (h ·l H) ~ (k ∘ h) ·l H
-  preserves-comp-left-whisker-htpy k h H x = inv (ap-comp k h (H x))
+  preserves-comp-left-whisker-comp k h H x = inv (ap-comp k h (H x))
 
 module _
   { l1 l2 l3 l4 : Level}
@@ -215,8 +220,8 @@ module _
   ( H : {x : A} {y : B x} → f {x} {y} ~ g {x} {y})
   where
 
-  preserves-comp-right-whisker-htpy : (H ·r h) ·r k ~ H ·r (h ∘ k)
-  preserves-comp-right-whisker-htpy = refl-htpy
+  preserves-comp-right-whisker-comp : (H ·r h) ·r k ~ H ·r (h ∘ k)
+  preserves-comp-right-whisker-comp = refl-htpy
 ```
 
 ### A coherence for homotopies to the identity function
@@ -257,12 +262,12 @@ module _
   {f g : {x : A} (y : B x) → C y}
   where
 
-  coherence-double-whisker-htpy :
+  coherence-double-whisker-comp :
     (h : {x : A} {y : B x} → C y → D y)
     (H : {x : A} → f {x} ~ g {x})
     (h' : (x : A) → B x) →
     (h ·l H) ·r h' ~ h ·l (H ·r h')
-  coherence-double-whisker-htpy h H h' = refl-htpy
+  coherence-double-whisker-comp h H h' = refl-htpy
 ```
 
 ## See also
