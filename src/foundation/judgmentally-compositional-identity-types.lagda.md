@@ -180,7 +180,11 @@ module _
   equiv-eq-compositional-eq : (x ＝ᶜ y) ≃ (x ＝ y)
   pr1 equiv-eq-compositional-eq = eq-compositional-eq
   pr2 equiv-eq-compositional-eq = is-equiv-eq-compositional-eq
+```
 
+The reflexivity witnesses are mapped to reflexivity witnesses judgementally.
+
+```agda
 module _
   {l : Level} {A : UU l}
   where
