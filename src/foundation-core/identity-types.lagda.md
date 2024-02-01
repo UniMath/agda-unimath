@@ -370,10 +370,6 @@ module _
   double-transpose-eq-concat' r refl refl q α = right-unit ∙ (α ∙ right-unit)
 ```
 
-The fact that `left-transpose-eq-concat` and `right-transpose-eq-concat` are
-equivalences is recorded in
-[`foundation.identity-types`](foundation.identity-types.md).
-
 ### Concatenation is injective
 
 ```agda
