@@ -82,14 +82,14 @@ naming scheme for all the variations of whiskering that exist in the
    we define the whiskering operations
 
    ```text
-     left-whisker-concat-htpy :
+     left-whisker-comp-concat :
        (H : f ~ g) {K L : g ~ h} → K ~ L → H ∙h K ~ H ∙h L
    ```
 
    and
 
    ```text
-     right-whisker-concat-htpy :
+     right-whisker-comp-concat :
        {H K : f ~ g} → H ~ K → (L : g ~ h) → H ∙h L ~ K ∙h L
    ```
 
@@ -120,7 +120,6 @@ naming scheme for all the variations of whiskering that exist in the
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {R : A → A → UU l2}
-
   where
 
   left-whiskering-operation :

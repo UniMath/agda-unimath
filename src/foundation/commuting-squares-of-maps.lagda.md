@@ -487,7 +487,7 @@ module _
   assoc-pasting-vertical-coherence-square-maps =
     ( ap-concat-htpy
       ( sq-bottom ·r mid-left ·r top-left)
-      ( ( distributive-left-whisker-concat-htpy
+      ( ( distributive-left-whisker-comp-concat
           ( bottom-right)
           ( sq-mid ·r top-left)
           ( mid-right ·l sq-top)) ∙h
@@ -681,7 +681,7 @@ module _
         ( sq-right-bottom)))
   commutative-pasting-vertical-pasting-horizontal-coherence-square-maps =
     ( ap-concat-htpy' _
-      ( distributive-left-whisker-concat-htpy
+      ( distributive-left-whisker-comp-concat
         ( bottom-right)
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
@@ -702,7 +702,7 @@ module _
             ( sq-right-bottom))))) ∙h
       ( ap-concat-htpy _
         ( inv-htpy
-          ( distributive-left-whisker-concat-htpy
+          ( distributive-left-whisker-comp-concat
             ( right-bottom)
             ( mid-right ·l sq-left-top)
             ( sq-right-top ·r top-left))))
@@ -815,7 +815,7 @@ module _
         ap
           ( eq-htpy)
           ( eq-htpy
-            ( distributive-left-whisker-concat-htpy
+            ( distributive-left-whisker-comp-concat
               ( h)
               ( bottom-right ·l H)
               ( K ·r top-left)))
@@ -903,7 +903,7 @@ module _
         ap
           ( eq-htpy)
           ( eq-htpy
-            ( distributive-left-whisker-concat-htpy
+            ( distributive-left-whisker-comp-concat
             ( h)
             ( K ·r left-top)
             ( right-bottom ·l H)))

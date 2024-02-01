@@ -177,11 +177,11 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  distributive-left-whisker-concat-htpy :
+  distributive-left-whisker-comp-concat :
     { f g h : (x : A) → B x} (k : {x : A} → B x → C x) →
     ( H : f ~ g) (K : g ~ h) →
     k ·l (H ∙h K) ~ (k ·l H) ∙h (k ·l K)
-  distributive-left-whisker-concat-htpy k H K a =
+  distributive-left-whisker-comp-concat k H K a =
     ap-concat k (H a) (K a)
 
 module _
@@ -190,9 +190,9 @@ module _
   (H : {x : A} → f {x} ~ g {x}) (K : {x : A} → g {x} ~ h {x})
   where
 
-  distributive-right-whisker-concat-htpy :
+  distributive-right-whisker-comp-concat :
     (H ∙h K) ·r k ~ (H ·r k) ∙h (K ·r k)
-  distributive-right-whisker-concat-htpy = refl-htpy
+  distributive-right-whisker-comp-concat = refl-htpy
 ```
 
 ### Whiskering preserves function composition

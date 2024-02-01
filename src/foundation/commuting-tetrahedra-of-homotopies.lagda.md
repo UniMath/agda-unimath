@@ -30,7 +30,7 @@ is a commuting diagram of the form
        |    /   \    |
        ∨  /       ∨  ∨
        h ----------> i.
-            bottom 
+            bottom
 ```
 
 where `f`, `g`, `h`, and `i` are functions.

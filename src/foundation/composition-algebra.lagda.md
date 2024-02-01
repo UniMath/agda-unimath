@@ -138,7 +138,7 @@ module _
     (H : f ~ g) (K : g ~ h) (S : UU l3) →
     htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K S
   distributive-htpy-precomp-concat-htpy H K S i =
-    ( ap eq-htpy (eq-htpy (distributive-left-whisker-concat-htpy i H K))) ∙
+    ( ap eq-htpy (eq-htpy (distributive-left-whisker-comp-concat i H K))) ∙
     ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
 ```
 
@@ -235,7 +235,7 @@ module _
     (H : f ~ g) (K : g ~ h) (S : UU l3) →
     htpy-postcomp S (H ∙h K) ~ htpy-postcomp S H ∙h htpy-postcomp S K
   distributive-htpy-postcomp-concat-htpy H K S i =
-    ( ap eq-htpy (eq-htpy (distributive-right-whisker-concat-htpy i H K))) ∙
+    ( ap eq-htpy (eq-htpy (distributive-right-whisker-comp-concat i H K))) ∙
     ( eq-htpy-concat-htpy (H ·r i) (K ·r i))
 ```
 

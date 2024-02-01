@@ -421,4 +421,5 @@ open import foundation.weakly-constant-maps public
 open import foundation.whiskering-higher-homotopies-composition public
 open import foundation.whiskering-homotopies-composition public
 open import foundation.whiskering-identifications-concatenation public
+open import foundation.whiskering-operations public
 ```

@@ -122,7 +122,7 @@ module _
   where
 
   left-whisker-coherence-triangle-homotopies :
-    (T : coherence-triangle-homotopies left right top)→
+    (T : coherence-triangle-homotopies left right top) →
     coherence-triangle-homotopies {f = i} (H ∙h left) right (H ∙h top)
   left-whisker-coherence-triangle-homotopies T x =
     left-whisker-coherence-triangle-identifications
