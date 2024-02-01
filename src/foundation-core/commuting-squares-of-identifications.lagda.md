@@ -690,8 +690,6 @@ of coherences of commuting squares of identifications.
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w u : A}
-  (p : u ＝ x)
-  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
   equiv-left-whisker-coherence-square-identifications :

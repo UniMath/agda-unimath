@@ -59,11 +59,21 @@ module _
     coherence-square-identifications
       (top-left ∙ top-right) left right (bottom-left ∙ bottom-right)
   horizontal-pasting-coherence-square-identifications s t =
-    ( inv (assoc left bottom-left bottom-right)) ∙
-    ( ( right-whisker-identification s bottom-right) ∙
-      ( ( assoc top-left middle bottom-right) ∙
-        ( ( left-whisker-identification top-left t) ∙
-          ( inv (assoc top-left top-right right)))))
+    ( right-whisker-coherence-square-identifications
+      ( top-left)
+      ( left)
+      ( middle)
+      ( bottom-left)
+      ( bottom-right)
+      ( s)) ∙
+    ( ( inv (assoc top-left middle bottom-right)) ∙
+      ( left-whisker-coherence-square-identifications
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( right)
+        ( bottom-right)
+        ( t)))
 ```
 
 ### Vertically pasting squares of identifications
@@ -102,11 +112,21 @@ module _
     coherence-square-identifications
       top (top-left ∙ bottom-left) (top-right ∙ bottom-right) bottom
   vertical-pasting-coherence-square-identifications p q =
-    ( assoc top-left bottom-left bottom) ∙
-    ( ( left-whisker-identification top-left q) ∙
-      ( ( inv (assoc top-left middle bottom-right)) ∙
-        ( ( right-whisker-identification p bottom-right) ∙
-          ( assoc top top-right bottom-right))))
+    ( left-whisker-coherence-square-identifications
+      ( top-left)
+      ( middle)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom)
+      ( q)) ∙
+    ( ( assoc top-left middle bottom-right) ∙
+      ( right-whisker-coherence-square-identifications
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( bottom-right)
+        ( p)))
 ```
 
 ## Properties
@@ -135,8 +155,7 @@ module _
       ( s) ＝
     s
   left-unit-law-horizontal-pasting-coherence-square-identifications
-    top refl right bottom s =
-    right-unit ∙ ap-id s
+    refl refl right refl s = refl
 ```
 
 ### Whiskering of squares of identifications
