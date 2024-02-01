@@ -92,7 +92,7 @@ module _
         ( right-top)
         ( left-bottom)
         ( right-bottom))) ∙h
-    ( right-whisker-square-htpy
+    ( right-whisker-coherence-square-htpy
       ( front-bottom ·r hA)
       ( bottom ·r hA' ·r hA)
       ( hC' ·l ((g' ·l left-top) ∙h (right-top ·r h)))

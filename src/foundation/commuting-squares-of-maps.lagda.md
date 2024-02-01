@@ -687,7 +687,7 @@ module _
         ( bottom-right)
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
-      ( double-whisker-square-htpy
+      ( double-whisker-coherence-square-htpy
         ( bottom-right ·l (sq-left-bottom ·r left-top))
         ( right-bottom ·l (sq-right-top ·r top-left))
         ( inv-htpy

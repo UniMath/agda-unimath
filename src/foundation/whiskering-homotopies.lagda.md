@@ -152,10 +152,10 @@ module _
     ( H : f ~ g) (H' : f ~ g') {K : g ~ h} {K' : g' ~ h} (L : h ~ k)
     where
 
-    equiv-right-whisker-square-htpy :
+    equiv-right-whisker-coherence-square-htpy :
       ( coherence-square-homotopies H H' K K') ≃
       ( coherence-square-homotopies H H' (K ∙h L) (K' ∙h L))
-    equiv-right-whisker-square-htpy =
+    equiv-right-whisker-coherence-square-htpy =
       equiv-Π-equiv-family
         ( λ a →
           equiv-right-whisker-coherence-square-identifications
@@ -165,24 +165,24 @@ module _
             ( K' a)
             ( L a))
 
-    right-whisker-square-htpy :
+    right-whisker-coherence-square-htpy :
       coherence-square-homotopies H H' K K' →
       coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
-    right-whisker-square-htpy = map-equiv equiv-right-whisker-square-htpy
+    right-whisker-coherence-square-htpy = map-equiv equiv-right-whisker-coherence-square-htpy
 
-    right-unwhisker-square-htpy :
+    right-unwhisker-coherence-square-htpy :
       coherence-square-homotopies H H' (K ∙h L) (K' ∙h L) →
       coherence-square-homotopies H H' K K'
-    right-unwhisker-square-htpy = map-inv-equiv equiv-right-whisker-square-htpy
+    right-unwhisker-coherence-square-htpy = map-inv-equiv equiv-right-whisker-coherence-square-htpy
 
   module _
     ( L : k ~ f) {H : f ~ g} {H' : f ~ g'} {K : g ~ h} {K' : g' ~ h}
     where
 
-    equiv-left-whisker-square-htpy :
+    equiv-left-whisker-coherence-square-htpy :
       ( coherence-square-homotopies H H' K K') ≃
       ( coherence-square-homotopies (L ∙h H) (L ∙h H') K K')
-    equiv-left-whisker-square-htpy =
+    equiv-left-whisker-coherence-square-htpy =
       equiv-Π-equiv-family
         ( λ a →
           equiv-left-whisker-coherence-square-identifications
@@ -192,15 +192,15 @@ module _
             ( K a)
             ( K' a))
 
-    left-whisker-square-htpy :
+    left-whisker-coherence-square-htpy :
       coherence-square-homotopies H H' K K' →
       coherence-square-homotopies (L ∙h H) (L ∙h H') K K'
-    left-whisker-square-htpy = map-equiv equiv-left-whisker-square-htpy
+    left-whisker-coherence-square-htpy = map-equiv equiv-left-whisker-coherence-square-htpy
 
-    left-unwhisker-square-htpy :
+    left-unwhisker-coherence-square-htpy :
       coherence-square-homotopies (L ∙h H) (L ∙h H') K K' →
       coherence-square-homotopies H H' K K'
-    left-unwhisker-square-htpy = map-inv-equiv equiv-left-whisker-square-htpy
+    left-unwhisker-coherence-square-htpy = map-inv-equiv equiv-left-whisker-coherence-square-htpy
 
 module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -208,10 +208,10 @@ module _
   ( H : f ~ g) {K : g ~ h} {K' : g ~ h'} {L : h ~ k} {L' : h' ~ k} (M : k ~ m)
   where
 
-  equiv-double-whisker-square-htpy :
+  equiv-double-whisker-coherence-square-htpy :
     ( coherence-square-homotopies K K' L L') ≃
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
-  equiv-double-whisker-square-htpy =
+  equiv-double-whisker-coherence-square-htpy =
     equiv-Π-equiv-family
       ( λ a →
         equiv-double-whisker-square-identifications
@@ -222,15 +222,15 @@ module _
           ( L' a)
           ( M a))
 
-  double-whisker-square-htpy :
+  double-whisker-coherence-square-htpy :
     ( coherence-square-homotopies K K' L L') →
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
-  double-whisker-square-htpy = map-equiv equiv-double-whisker-square-htpy
+  double-whisker-coherence-square-htpy = map-equiv equiv-double-whisker-coherence-square-htpy
 
-  both-unwhisker-square-htpy :
+  both-unwhisker-coherence-square-htpy :
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M)) →
     ( coherence-square-homotopies K K' L L')
-  both-unwhisker-square-htpy = map-inv-equiv equiv-double-whisker-square-htpy
+  both-unwhisker-coherence-square-htpy = map-inv-equiv equiv-double-whisker-coherence-square-htpy
 ```
 
 ### Whiskering a square of homotopies by a map
