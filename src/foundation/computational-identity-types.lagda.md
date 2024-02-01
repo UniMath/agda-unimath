@@ -227,7 +227,7 @@ structure satisfies the following algebraic laws strictly
 
 but not
 
-- `refl ∙ p ＝ p` and `p ∙ refl ＝ p`
+- `refl ∙ p ＝ p` and `p ∙ refl ＝ p` simultaneously
 - `inv p ∙ p ＝ refl`
 - `p ∙ inv p ＝ refl`.
 
@@ -354,7 +354,8 @@ module _
   left-inv-concatl-computational-Id (z , p , q) =
     ind-compositional-Id
       ( λ _ p →
-        inv-computational-Id (z , p , q) ∙ₗʲ (z , p , q) ＝ refl-computational-Id)
+        ( inv-computational-Id (z , p , q) ∙ₗʲ (z , p , q)) ＝
+        ( refl-computational-Id))
       ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-compositional-Id q)))
       ( p)
 
@@ -363,7 +364,8 @@ module _
   right-inv-concatl-computational-Id (z , p , q) =
     ind-compositional-Id
       ( λ _ q →
-        (z , p , q) ∙ₗʲ inv-computational-Id (z , p , q) ＝ refl-computational-Id)
+        ( (z , p , q) ∙ₗʲ inv-computational-Id (z , p , q)) ＝
+        ( refl-computational-Id))
       ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-compositional-Id p)))
       ( q)
 

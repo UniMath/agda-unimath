@@ -248,7 +248,7 @@ module _
 
 We define the concatenation operation on the judgmentally involutive
 identifications using the
-[judgmentally right unital concatenation operation on identifications](foundation.judgmentally-right-unital-concatenation-operation-identifications.md),
+[judgmentally right unital concatenation operation on identifications](foundation.judgmentally-right-unital-concatenation-identifications.md),
 to obtain a one-sided judgmental unit law. There is both a judgmentally left
 unital definition and a judgmentally right unital definition. To be consistent
 with the convention for the standard identity types, we take the judgmentally
