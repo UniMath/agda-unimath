@@ -19,7 +19,7 @@ open import foundation.identity-types
 
 ```agda
 Monad-Precategory :
-  (l : Level) (C : Precategory l l) → UU (lsuc l)
+  (l : Level) (C : Precategory l l) → UU l
 Monad-Precategory l C =
   Σ ( functor-Precategory C C)
     ( λ T →
@@ -30,7 +30,7 @@ Monad-Precategory l C =
               Σ ( comp-natural-transformation-Precategory
                     ( C)
                     ( C)
-                    ( T)
+                    (comp-functor-Precategory C C C T (comp-functor-Precategory C C C T T))
                     ( comp-functor-Precategory C C C T T)
                     ( T)
                     ( mu)
@@ -38,15 +38,68 @@ Monad-Precategory l C =
                       ( C)
                       ( C)
                       ( C)
-                      ( comp-functor-Precategory C C C {!  !} {!   !})
+                      ( comp-functor-Precategory C C C T T)
                       ( T)
                       ( T)
                       ( T)
                       ( id-natural-transformation-Precategory C C T)
                       ( mu))
                   ＝
-                    {!   !} )
-                  ( λ _ → prod {!   !} {!   !} ))))
-
--- proposed solution: (comp-functor-Precategory C C C T T)
+                    comp-natural-transformation-Precategory
+                      ( C)
+                      ( C)
+                      (comp-functor-Precategory C C C (comp-functor-Precategory C C C T T) T)
+                      ( comp-functor-Precategory C C C T T)
+                      ( T)
+                      ( mu)
+                      ( horizontal-comp-natural-transformation-Precategory
+                        ( C)
+                        ( C)
+                        ( C)
+                        ( T)
+                        ( T)
+                        ( comp-functor-Precategory C C C T T)
+                        ( T)
+                        ( mu)
+                        ( id-natural-transformation-Precategory C C T)))
+                  ( λ _ →
+                    prod
+                      ( comp-natural-transformation-Precategory
+                          ( C)
+                          ( C)
+                          ( T)
+                          ( comp-functor-Precategory C C C T T)
+                          ( T)
+                          ( mu)
+                          ( horizontal-comp-natural-transformation-Precategory
+                            ( C)
+                            ( C)
+                            ( C)
+                            ( id-functor-Precategory C)
+                            ( T)
+                            ( T)
+                            ( T)
+                            ( id-natural-transformation-Precategory C C T)
+                            ( eta))
+                      ＝
+                        id-natural-transformation-Precategory C C T)
+                      ( comp-natural-transformation-Precategory
+                          ( C)
+                          ( C)
+                          ( T)
+                          ( comp-functor-Precategory C C C T T)
+                          ( T)
+                          ( mu)
+                          ( horizontal-comp-natural-transformation-Precategory
+                            ( C)
+                            ( C)
+                            ( C)
+                            ( T)
+                            ( T)
+                            ( id-functor-Precategory C)
+                            ( T)
+                            ( eta)
+                            ( id-natural-transformation-Precategory C C T))
+                      ＝
+                        id-natural-transformation-Precategory C C T)))))
 ```
