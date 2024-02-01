@@ -222,7 +222,8 @@ coherence-square-homotopies-eq-ap-precomp :
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-coherence-square-homotopies-eq-ap-precomp f = coherence-square-homotopies-eq-ap-precomp-Π f
+coherence-square-homotopies-eq-ap-precomp f =
+  coherence-square-homotopies-eq-ap-precomp-Π f
 ```
 
 #### Naturality of `htpy-eq` with respect to postcomposition of dependent functions
