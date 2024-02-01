@@ -80,11 +80,11 @@ module _
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  left-whisker-htpy-coherence-triangle-homotopies :
+  left-whisker-coherence-triangle-homotopies :
     {i : (x : A) → B x}
     (H : h ~ i) (T : coherence-triangle-homotopies left right top) →
     coherence-triangle-homotopies {h = i} (left ∙h H) (right ∙h H) top
-  left-whisker-htpy-coherence-triangle-homotopies H T =
+  left-whisker-coherence-triangle-homotopies H T =
     (λ x → right-whisker-identification (T x) (H x)) ∙h assoc-htpy top right H
 
 module _
@@ -112,11 +112,11 @@ module _
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  right-whisker-htpy-coherence-triangle-homotopies :
+  right-whisker-coherence-triangle-homotopies :
     {i : (x : A) → B x}
     (T : coherence-triangle-homotopies left right top) (H : i ~ f) →
     coherence-triangle-homotopies {f = i} (H ∙h left) right (H ∙h top)
-  right-whisker-htpy-coherence-triangle-homotopies T H =
+  right-whisker-coherence-triangle-homotopies T H =
     ( λ x → left-whisker-identification (H x) (T x)) ∙h
     ( inv-htpy-assoc-htpy H top right)
 

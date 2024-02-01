@@ -69,7 +69,7 @@ coherence-square-eq-htpy-ap-precomp-Π f {C = C} g h =
     ( equiv-funext)
     ( equiv-funext)
     ( precomp-Π f (eq-value g h))
-    ( coherence-square-htpy-eq-ap-precomp-Π f g h)
+    ( coherence-square-homotopies-eq-ap-precomp-Π f g h)
 ```
 
 #### Naturality of `eq-htpy` with respect to precomposition of ordinary functions
@@ -103,7 +103,7 @@ coherence-square-eq-htpy-ap-precomp {C = C} f g h =
     ( equiv-funext)
     ( equiv-funext)
     ( precomp-Π f (eq-value g h))
-    ( coherence-square-htpy-eq-ap-precomp f g h)
+    ( coherence-square-homotopies-eq-ap-precomp f g h)
 ```
 
 #### Naturality of `eq-htpy` with respect to postcomposition of dependent functions
@@ -138,7 +138,7 @@ coherence-square-eq-htpy-ap-postcomp-Π {A = A} f g h =
     ( equiv-funext)
     ( equiv-funext)
     ( f ·l_)
-    ( coherence-square-htpy-eq-ap-postcomp-Π f g h)
+    ( coherence-square-homotopies-eq-ap-postcomp-Π f g h)
 ```
 
 #### Naturality of `eq-htpy` with respect to postcomposition of ordinary functions

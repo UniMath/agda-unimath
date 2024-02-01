@@ -186,7 +186,7 @@ Then the square
 [commutes](foundation-core.commuting-squares-of-maps.md).
 
 ```agda
-coherence-square-htpy-eq-ap-precomp-Π :
+coherence-square-homotopies-eq-ap-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
   (g h : (b : B) → C b) →
   coherence-square-maps
@@ -194,7 +194,7 @@ coherence-square-htpy-eq-ap-precomp-Π :
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-coherence-square-htpy-eq-ap-precomp-Π f g .g refl = refl
+coherence-square-homotopies-eq-ap-precomp-Π f g .g refl = refl
 ```
 
 #### Naturality of `htpy-eq` with respect to precomposition of ordinary functions
@@ -214,7 +214,7 @@ Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
 commutes.
 
 ```agda
-coherence-square-htpy-eq-ap-precomp :
+coherence-square-homotopies-eq-ap-precomp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) →
   (g h : B → C) →
   coherence-square-maps
@@ -222,7 +222,7 @@ coherence-square-htpy-eq-ap-precomp :
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-coherence-square-htpy-eq-ap-precomp f = coherence-square-htpy-eq-ap-precomp-Π f
+coherence-square-homotopies-eq-ap-precomp f = coherence-square-homotopies-eq-ap-precomp-Π f
 ```
 
 #### Naturality of `htpy-eq` with respect to postcomposition of dependent functions
@@ -243,7 +243,7 @@ Consider a map `f : {x : A} → B x → C x` and two functions
 commutes.
 
 ```agda
-coherence-square-htpy-eq-ap-postcomp-Π :
+coherence-square-homotopies-eq-ap-postcomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : {x : A} → B x → C x) (g h : (x : A) → B x) →
   coherence-square-maps
@@ -251,7 +251,7 @@ coherence-square-htpy-eq-ap-postcomp-Π :
     ( htpy-eq)
     ( htpy-eq)
     ( f ·l_)
-coherence-square-htpy-eq-ap-postcomp-Π f g .g refl = refl
+coherence-square-homotopies-eq-ap-postcomp-Π f g .g refl = refl
 ```
 
 #### Naturality of `htpy-eq` with respect to postcomposition of ordinary functions
@@ -271,7 +271,7 @@ Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
 commutes.
 
 ```agda
-coherence-square-htpy-eq-ap-postcomp :
+coherence-square-homotopies-eq-ap-postcomp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
   (g h : A → B) →
   coherence-square-maps
@@ -279,8 +279,8 @@ coherence-square-htpy-eq-ap-postcomp :
     ( htpy-eq)
     ( htpy-eq)
     ( f ·l_)
-coherence-square-htpy-eq-ap-postcomp f =
-  coherence-square-htpy-eq-ap-postcomp-Π f
+coherence-square-homotopies-eq-ap-postcomp f =
+  coherence-square-homotopies-eq-ap-postcomp-Π f
 ```
 
 ### Computing the action on paths of an evaluation map

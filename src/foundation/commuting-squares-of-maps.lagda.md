@@ -64,21 +64,21 @@ module _
   ( top : A → X) (left : A → B) (right : X → Y) (bottom : B → Y)
   where
 
-  coherence-square-htpy-coherence-triangles-maps :
+  coherence-square-homotopies-coherence-triangles-maps :
     { diagonal-left diagonal-right : A → Y} →
     diagonal-left ~ diagonal-right →
     coherence-triangle-maps' diagonal-left bottom left →
     coherence-triangle-maps diagonal-right right top →
     coherence-square-maps top left right bottom
-  coherence-square-htpy-coherence-triangles-maps L H K = (H ∙h L) ∙h K
+  coherence-square-homotopies-coherence-triangles-maps L H K = (H ∙h L) ∙h K
 
-  coherence-square-htpy-coherence-triangles-maps' :
+  coherence-square-homotopies-coherence-triangles-maps' :
     { diagonal-left diagonal-right : A → Y} →
     diagonal-left ~ diagonal-right →
     coherence-triangle-maps' diagonal-left bottom left →
     coherence-triangle-maps diagonal-right right top →
     coherence-square-maps top left right bottom
-  coherence-square-htpy-coherence-triangles-maps' L H K = H ∙h (L ∙h K)
+  coherence-square-homotopies-coherence-triangles-maps' L H K = H ∙h (L ∙h K)
 
   coherence-square-coherence-triangles-maps :
     ( diagonal : A → Y) →
@@ -91,7 +91,7 @@ module _
     ( diagonal : A → Y) →
     ( H : coherence-triangle-maps' diagonal bottom left) →
     ( K : coherence-triangle-maps diagonal right top) →
-    ( coherence-square-htpy-coherence-triangles-maps refl-htpy H K) ~
+    ( coherence-square-homotopies-coherence-triangles-maps refl-htpy H K) ~
     ( coherence-square-coherence-triangles-maps diagonal H K)
   compute-coherence-square-refl-htpy-coherence-triangles-maps diagonal H K x =
     right-whisker-identification right-unit (K x)
@@ -685,7 +685,7 @@ module _
         ( bottom-right)
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
-      ( double-whisker-coherence-square-htpy
+      ( double-whisker-coherence-square-homotopies
         ( bottom-right ·l (sq-left-bottom ·r left-top))
         ( right-bottom ·l (sq-right-top ·r top-left))
         ( inv-htpy
@@ -1015,7 +1015,7 @@ module _
       ( left)
       ( right)
       ( bottom)
-      ( coherence-square-htpy-coherence-triangles-maps
+      ( coherence-square-homotopies-coherence-triangles-maps
         ( top)
         ( left)
         ( right)
@@ -1024,7 +1024,7 @@ module _
         ( H)
         ( K))
       ( W)) ~
-    ( coherence-square-htpy-coherence-triangles-maps
+    ( coherence-square-homotopies-coherence-triangles-maps
       ( precomp right W)
       ( precomp bottom W)
       ( precomp top W)
@@ -1053,7 +1053,7 @@ module _
       ( left)
       ( right)
       ( bottom)
-      ( coherence-square-htpy-coherence-triangles-maps'
+      ( coherence-square-homotopies-coherence-triangles-maps'
         ( top)
         ( left)
         ( right)
@@ -1062,7 +1062,7 @@ module _
         ( H)
         ( K))
       ( W)) ~
-    ( coherence-square-htpy-coherence-triangles-maps'
+    ( coherence-square-homotopies-coherence-triangles-maps'
       ( precomp right W)
       ( precomp bottom W)
       ( precomp top W)
