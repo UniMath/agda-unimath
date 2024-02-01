@@ -52,14 +52,18 @@ where `x ＝ᶜ y` is the
 ```
 
 This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but is computational and compositional, meaning all the
-laws
+standard identity types, but satisfies the algebraic laws
 
-```text
-  inv (inv p) ＝ p
-```
+- `inv refl ＝ refl`
+- `inv (inv p) ＝ p`
+- `(p ∙ q) ∙ r ＝ p ∙ (q ∙ r)`
+- `refl ∙ p ＝ p` or `p ∙ refl ＝ p`
 
-judgmentally.
+judgmentally, but not
+
+- `refl ∙ p ＝ p` and `p ∙ refl ＝ p` simultaneously,
+- `inv p ∙ p ＝ refl`, or
+- `p ∙ inv p ＝ refl`.
 
 ## Definition
 
@@ -144,13 +148,13 @@ module _
   {l : Level} {A : UU l}
   where
 
-  computational-eq-eq-refl :
+  compute-computational-eq-eq-refl :
     {x : A} → computational-eq-eq (refl {x = x}) ＝ refl-computational-Id
-  computational-eq-eq-refl = refl
+  compute-computational-eq-eq-refl = refl
 
-  eq-computational-eq-refl :
+  compute-eq-computational-eq-refl :
     {x : A} → eq-computational-eq (refl-computational-Id {x = x}) ＝ refl
-  eq-computational-eq-refl = refl
+  compute-eq-computational-eq-refl = refl
 ```
 
 ### The induction principle for computational identity types
@@ -161,10 +165,6 @@ of types over the identity types based at `x`,
 `B : (y : A) (p : x ＝ʲ y) → UU l2`, then to construct a dependent function
 `f : (y : A) (p : x ＝ʲ y) → B y p` it suffices to define it at
 `f x refl-computational-Id`.
-
-**Note.** The only reason we must apply
-[function extensionality](foundation.function-extensionality.md) is to show
-uniqueness of the induction principle up to _equality_.
 
 ```agda
 module _
@@ -223,7 +223,7 @@ structure satisfies the following algebraic laws strictly
 - `inv refl ＝ refl`
 - `inv (inv p) ＝ p`
 - `(p ∙ q) ∙ r ＝ p ∙ (q ∙ r)`
-- `refl ∙ p ＝ p` or `p ∙ refl ＝ p`
+- `refl ∙ p ＝ p` or `p ∙ refl ＝ p`,
 
 but not
 
@@ -274,12 +274,13 @@ module _
 ### The concatenation operations on computational identifications
 
 There is both a judgmentally left unital concatenation operation and a
-judgmentally right unital concatenation operation, although both are
-judgmentally associative.
+judgmentally right unital concatenation operation, while both are judgmentally
+associative.
 
-**Note.** Since they are judgmentally associative, the only instances where they
-will not reduce is thus when the reflexivity appears all the way to the right,
-or all the way to the left in a string of concatenations respectively.
+**Observation.** Since they are judgmentally associative, the only instances
+where they will not reduce is thus when the reflexivity appears all the way to
+the right, or all the way to the left in a string of concatenations
+respectively.
 
 #### The judgmentally left unital concatenation operation
 
