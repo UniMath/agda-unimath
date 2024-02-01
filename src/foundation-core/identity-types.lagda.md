@@ -322,6 +322,19 @@ module _
 
 ### Transposing inverses
 
+Consider a triangle of identifications
+
+```text
+        top
+     x ----> y
+      \     /
+  left \   / right
+        ∨ ∨
+         z
+```
+
+in a type `A`. Then we can {{#concept "transpose"}} any identification `left ＝ top ∙ right` to an identification
+
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -409,7 +422,7 @@ proofs by equational reasoning tend to require a lot of reassociation.
 
 Some tools that allow us to perform faster comutations are the transpositions
 defined above, the transpositions and splicing operations defined in
-[commuting squares of identifications](foundation.commuting-squares-identifications.md)
+[commuting squares of identifications](foundation.commuting-squares-of-identifications.md)
 and
 [commuting triangles of identifications](foundation.commuting-triangles-of-identifications.md),
 and the higher concatenation operations defined in
