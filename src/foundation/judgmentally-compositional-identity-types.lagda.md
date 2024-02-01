@@ -75,7 +75,7 @@ module _
 
 ## Properties
 
-### Elements of the judgmentally compositional identity type act as postconcatenation operations
+### Elements of the judgmentally compositional identity type act like postconcatenation operations
 
 ```agda
 module _
@@ -92,15 +92,15 @@ module _
   commutative-concat-refl-Id-compositional-Id {z = z} f q =
     ap (f z) (inv right-unit) ∙ commutative-concat-Id-compositional-Id f q refl
 
-  commutative-rconcat-Id-compositional-Id :
+  commutative-concatr-Id-compositional-Id :
     {x y z w : A} (f : x ＝ᶜ y) (p : w ＝ z) (q : z ＝ x) →
     f w (p ∙ᵣ q) ＝ p ∙ᵣ f z q
-  commutative-rconcat-Id-compositional-Id f refl refl = inv left-unit-rconcat
+  commutative-concatr-Id-compositional-Id f refl refl = inv left-unit-concatr
 
-  commutative-rconcat-refl-Id-compositional-Id :
+  commutative-concatr-refl-Id-compositional-Id :
     {x y z : A} (f : x ＝ᶜ y) (q : z ＝ x) → f z q ＝ q ∙ᵣ f x refl
-  commutative-rconcat-refl-Id-compositional-Id f q =
-    commutative-rconcat-Id-compositional-Id f q refl
+  commutative-concatr-refl-Id-compositional-Id f q =
+    commutative-concatr-Id-compositional-Id f q refl
 
   compute-inv-Id-compositional-Id :
     {x y : A} (f : x ＝ᶜ y) → f y (inv (f x refl)) ＝ refl
@@ -155,11 +155,11 @@ module _
     is-section compositional-eq-eq eq-compositional-eq
   is-section-eq-compositional-eq f =
     eq-multivariable-htpy 2
-      ( λ z p → inv (commutative-rconcat-refl-Id-compositional-Id f p))
+      ( λ z p → inv (commutative-concatr-refl-Id-compositional-Id f p))
 
   is-retraction-eq-compositional-eq :
     is-retraction compositional-eq-eq eq-compositional-eq
-  is-retraction-eq-compositional-eq p = left-unit-rconcat
+  is-retraction-eq-compositional-eq p = left-unit-concatr
 
   is-equiv-compositional-eq-eq : is-equiv compositional-eq-eq
   pr1 (pr1 is-equiv-compositional-eq-eq) = eq-compositional-eq
@@ -230,8 +230,8 @@ module _
 The judgementally compositional identity types satisfy the induction principle
 of the identity types. This states that given a base point `x : A` and a family
 of types over the identity types based at `x`,
-`B : (y : A) (p : x ＝ᶜ y) → UU l2`, then to construct a dependent function
-`f : (y : A) (p : x ＝ᶜ y) → B y p` it suffices to define it at
+`B : (y : A) (f : x ＝ᶜ y) → UU l2`, then to construct a dependent function
+`f : (y : A) (f : x ＝ᶜ y) → B y p` it suffices to define it at
 `f x refl-compositional-Id`.
 
 **Note.** A drawback of the judgmentally compositional identity types is that
@@ -260,11 +260,11 @@ module _
 
 module _
   {l1 l2 : Level} {A : UU l1} {x : A}
-  {B : (y : A) (p : x ＝ᶜ y) → UU l2}
+  (B : (y : A) (f : x ＝ᶜ y) → UU l2)
   where
 
   ind-compositional-Id :
-    (b : B x refl-compositional-Id) {y : A} (p : x ＝ᶜ y) → B y p
+    (b : B x refl-compositional-Id) {y : A} (f : x ＝ᶜ y) → B y f
   ind-compositional-Id b {y} =
     map-inv-is-equiv
       ( dependent-universal-property-identity-system-compositional-Id B)
@@ -279,8 +279,8 @@ module _
       ( dependent-universal-property-identity-system-compositional-Id B)
 
   uniqueness-ind-compositional-Id :
-    (f : (y : A) (p : x ＝ᶜ y) → B y p) →
-    (λ y → ind-compositional-Id (f x refl-compositional-Id) {y}) ＝ f
+    (b : (y : A) (f : x ＝ᶜ y) → B y f) →
+    (λ y → ind-compositional-Id (b x refl-compositional-Id) {y}) ＝ b
   uniqueness-ind-compositional-Id =
     is-retraction-map-inv-is-equiv
       ( dependent-universal-property-identity-system-compositional-Id B)
@@ -293,52 +293,35 @@ weak groupoidal structure on types.
 
 ### Inverting judgmentally compositional identifications
 
+We consider two ways of defining the inversion operation on judgmentally
+compositional identifications: by the judgmentally left unital, and judgmentally
+right unital concatenation respectively. Elsewhere, we will prefer the latter by
+convention.
+
+#### The inversion operation defined by the judgmentally left unital concatenation operation on identifications
+
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  inv-compositional-Id : {x y : A} → x ＝ᶜ y → y ＝ᶜ x
-  inv-compositional-Id {x} f z p = p ∙ inv (f x refl)
+  invl-compositional-Id : {x y : A} → x ＝ᶜ y → y ＝ᶜ x
+  invl-compositional-Id {x} f z p = p ∙ inv (f x refl)
 
-  compute-inv-compositional-Id-refl :
+  compute-invl-compositional-Id-refl :
     {x : A} →
-    inv-compositional-Id (refl-compositional-Id {x = x}) ＝
+    invl-compositional-Id (refl-compositional-Id {x = x}) ＝
     refl-compositional-Id
-  compute-inv-compositional-Id-refl =
+  compute-invl-compositional-Id-refl =
     eq-multivariable-htpy 2 (λ z p → right-unit)
 
-  inv-inv-compositional-Id :
-    {x y : A} (p : x ＝ᶜ y) → inv-compositional-Id (inv-compositional-Id p) ＝ p
-  inv-inv-compositional-Id {x} f =
+  invl-invl-compositional-Id :
+    {x y : A} (f : x ＝ᶜ y) → invl-compositional-Id (invl-compositional-Id f) ＝ f
+  invl-invl-compositional-Id {x} f =
     eq-multivariable-htpy 2
       ( λ w p →
         ap (p ∙_) (inv-inv (f x refl)) ∙
         inv (commutative-concat-refl-Id-compositional-Id f p))
-```
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  inv-compositional-Id' : {x y : A} → x ＝ᶜ y → y ＝ᶜ x
-  inv-compositional-Id' {x} f z p = p ∙ᵣ inv (f x refl)
-
-  compute-inv-compositional-Id-refl' :
-    {x : A} →
-    inv-compositional-Id' (refl-compositional-Id {x = x}) ＝
-    refl-compositional-Id
-  compute-inv-compositional-Id-refl' = refl
-
-  inv-inv-compositional-Id' :
-    {x y : A} (p : x ＝ᶜ y) →
-    inv-compositional-Id' (inv-compositional-Id' p) ＝ p
-  inv-inv-compositional-Id' {x} f =
-    eq-multivariable-htpy 2
-      ( λ w p →
-        ( ap (p ∙ᵣ_) (ap inv left-unit-rconcat ∙ inv-inv (f x refl))) ∙
-        ( inv (commutative-rconcat-refl-Id-compositional-Id f p)))
 ```
 
 The inversion operation corresponds to the standard inversion operation on
@@ -349,19 +332,94 @@ module _
   {l : Level} {A : UU l}
   where
 
-  commutative-inv-compositional-eq-eq :
+  commutative-invl-compositional-eq-eq :
     {x y : A} (p : x ＝ y) →
-    compositional-eq-eq (inv p) ＝ inv-compositional-Id (compositional-eq-eq p)
-  commutative-inv-compositional-eq-eq p =
+    compositional-eq-eq (inv p) ＝ invl-compositional-Id (compositional-eq-eq p)
+  commutative-invl-compositional-eq-eq p =
     eq-multivariable-htpy 2
       ( λ z q →
-        ( eq-concat-rconcat q (inv p)) ∙
-        ( ap (λ x → q ∙ inv x) (inv left-unit-rconcat)))
+        ( eq-concat-concatr q (inv p)) ∙
+        ( ap (λ x → q ∙ inv x) (inv left-unit-concatr)))
 
-  commutative-inv-eq-compositional-eq :
-    {x y : A} (p : x ＝ᶜ y) →
-    eq-compositional-eq (inv-compositional-Id p) ＝ inv (eq-compositional-eq p)
-  commutative-inv-eq-compositional-eq f = refl
+  commutative-invl-eq-compositional-eq :
+    {x y : A} (f : x ＝ᶜ y) →
+    eq-compositional-eq (invl-compositional-Id f) ＝ inv (eq-compositional-eq f)
+  commutative-invl-eq-compositional-eq f = refl
+```
+
+#### The inversion operation defined by the judgmentally right unital concatenation operation on identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  invr-compositional-Id : {x y : A} → x ＝ᶜ y → y ＝ᶜ x
+  invr-compositional-Id {x} f z p = p ∙ᵣ inv (f x refl)
+
+  compute-invr-compositional-Id-refl :
+    {x : A} →
+    invr-compositional-Id (refl-compositional-Id {x = x}) ＝
+    refl-compositional-Id
+  compute-invr-compositional-Id-refl = refl
+
+  invr-invr-compositional-Id :
+    {x y : A} (f : x ＝ᶜ y) →
+    invr-compositional-Id (invr-compositional-Id f) ＝ f
+  invr-invr-compositional-Id {x} f =
+    eq-multivariable-htpy 2
+      ( λ w p →
+        ( ap (p ∙ᵣ_) (ap inv left-unit-concatr ∙ inv-inv (f x refl))) ∙
+        ( inv (commutative-concatr-refl-Id-compositional-Id f p)))
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  commutative-invr-compositional-eq-eq' :
+    {x y : A} (p : x ＝ y) →
+    compositional-eq-eq (inv p) ＝ invr-compositional-Id (compositional-eq-eq' p)
+  commutative-invr-compositional-eq-eq' p = refl
+
+  commutative-invr-compositional-eq-eq :
+    {x y : A} (p : x ＝ y) →
+    compositional-eq-eq (inv p) ＝ invr-compositional-Id (compositional-eq-eq p)
+  commutative-invr-compositional-eq-eq refl = refl
+
+  commutative-invr-eq-compositional-eq :
+    {x y : A} (f : x ＝ᶜ y) →
+    eq-compositional-eq (invr-compositional-Id f) ＝ inv (eq-compositional-eq f)
+  commutative-invr-eq-compositional-eq {x} {y} f = left-unit-concatr
+```
+
+We prefer the inversion operation defined by the judgmentally right unital
+concatenation operation on identifications by convention, as it satisfies the
+judgmental computation law
+
+```text
+  inv refl ＝ refl.
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  inv-compositional-Id : {x y : A} → x ＝ᶜ y → y ＝ᶜ x
+  inv-compositional-Id = invr-compositional-Id
+
+  compute-inv-compositional-Id-refl :
+    {x : A} →
+    inv-compositional-Id (refl-compositional-Id {x = x}) ＝
+    refl-compositional-Id
+  compute-inv-compositional-Id-refl = compute-invr-compositional-Id-refl
+
+  inv-inv-compositional-Id :
+    {x y : A} (f : x ＝ᶜ y) →
+    inv-compositional-Id (inv-compositional-Id f) ＝ f
+  inv-inv-compositional-Id = invr-invr-compositional-Id
 ```
 
 ### Concatenation of judgmentally compositional identifications
@@ -376,10 +434,10 @@ module _
   (f ∙ᶜ g) z p = g z (f z p)
 
   concat-compositional-Id : {x y : A} → x ＝ᶜ y → (z : A) → y ＝ᶜ z → x ＝ᶜ z
-  concat-compositional-Id p z q = p ∙ᶜ q
+  concat-compositional-Id f z g = f ∙ᶜ g
 
   concat-compositional-Id' : (x : A) {y z : A} → y ＝ᶜ z → x ＝ᶜ y → x ＝ᶜ z
-  concat-compositional-Id' x q p = p ∙ᶜ q
+  concat-compositional-Id' x g f = f ∙ᶜ g
 ```
 
 The concatenation operation corresponds to the standard concatenation operation
@@ -396,8 +454,8 @@ module _
   commutative-concat-compositional-eq-eq refl refl = refl
 
   commutative-concat-eq-compositional-eq :
-    {x y z : A} (p : x ＝ᶜ y) (q : y ＝ᶜ z) →
-    eq-compositional-eq (p ∙ᶜ q) ＝ eq-compositional-eq p ∙ eq-compositional-eq q
+    {x y z : A} (f : x ＝ᶜ y) (g : y ＝ᶜ z) →
+    eq-compositional-eq (f ∙ᶜ g) ＝ eq-compositional-eq f ∙ eq-compositional-eq g
   commutative-concat-eq-compositional-eq {x} {y} {z} f g =
     commutative-concat-refl-Id-compositional-Id g (f x refl)
 ```
@@ -410,31 +468,51 @@ module _
   where
 
   assoc-compositional-Id :
-    {x y z w : A} (p : x ＝ᶜ y) (q : y ＝ᶜ z) (r : z ＝ᶜ w) →
-    ((p ∙ᶜ q) ∙ᶜ r) ＝ (p ∙ᶜ (q ∙ᶜ r))
+    {x y z w : A} (f : x ＝ᶜ y) (g : y ＝ᶜ z) (h : z ＝ᶜ w) →
+    (f ∙ᶜ g) ∙ᶜ h ＝ f ∙ᶜ (g ∙ᶜ h)
   assoc-compositional-Id f g h = refl
 
   left-unit-compositional-Id :
-    {x y : A} {p : x ＝ᶜ y} → refl-compositional-Id ∙ᶜ p ＝ p
+    {x y : A} {f : x ＝ᶜ y} → refl-compositional-Id ∙ᶜ f ＝ f
   left-unit-compositional-Id = refl
 
   right-unit-compositional-Id :
-    {x y : A} {p : x ＝ᶜ y} → p ∙ᶜ refl-compositional-Id ＝ p
+    {x y : A} {f : x ＝ᶜ y} → f ∙ᶜ refl-compositional-Id ＝ f
   right-unit-compositional-Id = refl
 
   left-inv-compositional-Id :
-    {x y : A} (p : x ＝ᶜ y) →
-    inv-compositional-Id p ∙ᶜ p ＝ refl-compositional-Id
+    {x y : A} (f : x ＝ᶜ y) →
+    inv-compositional-Id f ∙ᶜ f ＝ refl-compositional-Id
   left-inv-compositional-Id {x} f =
+    eq-multivariable-htpy 2
+      ( λ z p →
+        ( commutative-concatr-Id-compositional-Id f p (inv (f x refl))) ∙
+        ( ap (p ∙ᵣ_) (compute-inv-Id-compositional-Id f)))
+
+  left-invl-compositional-Id :
+    {x y : A} (f : x ＝ᶜ y) →
+    invl-compositional-Id f ∙ᶜ f ＝ refl-compositional-Id
+  left-invl-compositional-Id {x} f =
     eq-multivariable-htpy 2
       ( λ z p →
         ( commutative-concat-Id-compositional-Id f p (inv (f x refl))) ∙
         ( ap (p ∙_) (compute-inv-Id-compositional-Id f) ∙ right-unit))
 
   right-inv-compositional-Id :
-    {x y : A} (p : x ＝ᶜ y) →
-    p ∙ᶜ inv-compositional-Id p ＝ refl-compositional-Id
+    {x y : A} (f : x ＝ᶜ y) →
+    f ∙ᶜ inv-compositional-Id f ＝ refl-compositional-Id
   right-inv-compositional-Id {x} f =
+    eq-multivariable-htpy 2
+      ( λ z p →
+        ( ap (_∙ᵣ inv (f x refl))
+          ( commutative-concatr-refl-Id-compositional-Id f p)) ∙
+        ( assoc-concatr p (f x refl) (inv (f x refl))) ∙
+        ( ap (p ∙ᵣ_) (right-inv-concatr (f x refl))))
+
+  right-invl-compositional-Id :
+    {x y : A} (f : x ＝ᶜ y) →
+    f ∙ᶜ invl-compositional-Id f ＝ refl-compositional-Id
+  right-invl-compositional-Id {x} f =
     eq-multivariable-htpy 2
       ( λ z p →
         ( ap
@@ -445,10 +523,25 @@ module _
         ( right-unit))
 
   distributive-inv-concat-compositional-Id :
-    {x y : A} (p : x ＝ᶜ y) {z : A} (q : y ＝ᶜ z) →
-    inv-compositional-Id (p ∙ᶜ q) ＝
-    inv-compositional-Id q ∙ᶜ inv-compositional-Id p
+    {x y : A} (f : x ＝ᶜ y) {z : A} (g : y ＝ᶜ z) →
+    inv-compositional-Id (f ∙ᶜ g) ＝
+    inv-compositional-Id g ∙ᶜ inv-compositional-Id f
   distributive-inv-concat-compositional-Id {x} {y} f g =
+    eq-multivariable-htpy 2
+      ( λ z p →
+        ( ap
+          ( p ∙ᵣ_)
+          ( ( ap
+              ( inv)
+              ( commutative-concatr-refl-Id-compositional-Id g (f x refl))) ∙
+            ( distributive-inv-concatr (f x refl) (g y refl)))) ∙
+          ( inv (assoc-concatr p (inv (g y refl)) (inv (f x refl)))))
+
+  distributive-invl-concat-compositional-Id :
+    {x y : A} (f : x ＝ᶜ y) {z : A} (g : y ＝ᶜ z) →
+    invl-compositional-Id (f ∙ᶜ g) ＝
+    invl-compositional-Id g ∙ᶜ invl-compositional-Id f
+  distributive-invl-concat-compositional-Id {x} {y} f g =
     eq-multivariable-htpy 2
       ( λ z p →
         ( ap
