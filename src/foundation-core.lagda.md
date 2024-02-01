@@ -9,7 +9,6 @@ open import foundation-core.1-types public
 open import foundation-core.cartesian-product-types public
 open import foundation-core.coherently-invertible-maps public
 open import foundation-core.commuting-prisms-of-maps public
-open import foundation.commuting-squares-of-identifications public
 open import foundation-core.commuting-squares-of-maps public
 open import foundation-core.commuting-triangles-of-maps public
 open import foundation-core.constant-maps public
