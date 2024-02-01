@@ -12,6 +12,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.judgmentally-right-unital-concatenation-identifications
+open import foundation.multivariable-homotopies
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
@@ -38,7 +39,7 @@ In this file, we consider the
 {{#concept "judgmentally involutive identity types" Agda=involutive-Id}}
 
 ```text
-  (x ＝⁻ y) := Σ (z : A) ((z ＝ y) × (z ＝ x))
+  (x ＝ⁱ y) := Σ (z : A) ((z ＝ y) × (z ＝ x))
 ```
 
 This type family is [equivalent](foundation-core.equivalences.md) to the
@@ -60,11 +61,11 @@ module _
   involutive-Id : (x y : A) → UU l
   involutive-Id x y = Σ A (λ z → (z ＝ y) × (z ＝ x))
 
-  infix 6 _＝⁻_
-  _＝⁻_ : A → A → UU l
-  (a ＝⁻ b) = involutive-Id a b
+  infix 6 _＝ⁱ_
+  _＝ⁱ_ : A → A → UU l
+  (a ＝ⁱ b) = involutive-Id a b
 
-  refl-involutive-Id : {x : A} → x ＝⁻ x
+  refl-involutive-Id : {x : A} → x ＝ⁱ x
   refl-involutive-Id {x} = (x , refl , refl)
 ```
 
@@ -80,10 +81,10 @@ module _
   {l : Level} {A : UU l} {x y : A}
   where
 
-  involutive-eq-eq : x ＝ y → x ＝⁻ y
+  involutive-eq-eq : x ＝ y → x ＝ⁱ y
   involutive-eq-eq p = (x , p , refl)
 
-  eq-involutive-eq : x ＝⁻ y → x ＝ y
+  eq-involutive-eq : x ＝ⁱ y → x ＝ y
   eq-involutive-eq (z , p , q) = inv q ∙ p
 
   is-section-eq-involutive-eq : is-section involutive-eq-eq eq-involutive-eq
@@ -105,11 +106,11 @@ module _
   pr1 (pr2 is-equiv-eq-involutive-eq) = involutive-eq-eq
   pr2 (pr2 is-equiv-eq-involutive-eq) = is-section-eq-involutive-eq
 
-  equiv-involutive-eq-eq : (x ＝ y) ≃ (x ＝⁻ y)
+  equiv-involutive-eq-eq : (x ＝ y) ≃ (x ＝ⁱ y)
   pr1 equiv-involutive-eq-eq = involutive-eq-eq
   pr2 equiv-involutive-eq-eq = is-equiv-involutive-eq-eq
 
-  equiv-eq-involutive-eq : (x ＝⁻ y) ≃ (x ＝ y)
+  equiv-eq-involutive-eq : (x ＝ⁱ y) ≃ (x ＝ y)
   pr1 equiv-eq-involutive-eq = eq-involutive-eq
   pr2 equiv-eq-involutive-eq = is-equiv-eq-involutive-eq
 
@@ -130,9 +131,13 @@ module _
 
 The judgementally involutive identity types satisfy the induction principle of
 the identity types. This states that given a base point `x : A` and a family of
-types over the identity types based at `x`, `B : (y : A) (p : x ＝⁻ y) → UU l2`,
-then to construct a dependent function `f : (y : A) (p : x ＝⁻ y) → B y p` it
+types over the identity types based at `x`, `B : (y : A) (p : x ＝ⁱ y) → UU l2`,
+then to construct a dependent function `f : (y : A) (p : x ＝ⁱ y) → B y p` it
 suffices to define it at `f x refl-involutive-Id`.
+
+**Note.** The only reason we must apply
+[function extensionality](foundation.function-extensionality.md) is to show
+uniqueness of the induction principle up to _equality_.
 
 ```agda
 module _
@@ -155,11 +160,24 @@ module _
       ( refl-involutive-Id)
       ( is-torsorial-involutive-Id)
 
+module _
+  {l1 l2 : Level} {A : UU l1}
+  (x : A) (B : (y : A) (p : x ＝ⁱ y) → UU l2)
+  where
+
   ind-involutive-Id :
-    {l1 l2 : Level} {A : UU l1}
-    (x : A) (B : (y : A) (p : x ＝⁻ y) → UU l2) →
-    (B x refl-involutive-Id) → (y : A) (p : x ＝⁻ y) → B y p
-  ind-involutive-Id x B b .x (.x , refl , refl) = b
+    B x refl-involutive-Id → (y : A) (p : x ＝ⁱ y) → B y p
+  ind-involutive-Id b .x (.x , refl , refl) = b
+
+  compute-ind-involutive-Id :
+    (b : B x refl-involutive-Id) → ind-involutive-Id b x refl-involutive-Id ＝ b
+  compute-ind-involutive-Id b = refl
+
+  uniqueness-ind-involutive-Id :
+    (f : (y : A) (p : x ＝ⁱ y) → B y p) →
+    ind-involutive-Id (f x refl-involutive-Id) ＝ f
+  uniqueness-ind-involutive-Id f =
+    eq-multivariable-htpy 2 (λ where .x (.x , refl , refl) → refl)
 ```
 
 ## Structure
@@ -169,17 +187,35 @@ groupoidal structure on types.
 
 ### Inverting judgmentally involutive identifications
 
+We have an inversion operation on `involutive-Id` that satisfies the judgmental
+laws
+
+```text
+  inv (inv p) ＝ p
+```
+
+and
+
+```text
+  inv refl ＝ refl.
+```
+
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  inv-involutive-eq : {x y : A} → x ＝⁻ y → y ＝⁻ x
-  inv-involutive-eq (z , p , q) = (z , q , p)
+  inv-involutive-Id : {x y : A} → x ＝ⁱ y → y ＝ⁱ x
+  inv-involutive-Id (z , p , q) = (z , q , p)
 
-  inv-inv-involutive-eq :
-    {x y : A} (p : x ＝⁻ y) → inv-involutive-eq (inv-involutive-eq p) ＝ p
-  inv-inv-involutive-eq p = refl
+  compute-inv-involutive-Id-refl :
+    {x : A} →
+    inv-involutive-Id (refl-involutive-Id {x = x}) ＝ refl-involutive-Id
+  compute-inv-involutive-Id-refl = refl
+
+  inv-inv-involutive-Id :
+    {x y : A} (p : x ＝ⁱ y) → inv-involutive-Id (inv-involutive-Id p) ＝ p
+  inv-inv-involutive-Id p = refl
 ```
 
 The inversion operation corresponds to the standard inversion operation on
@@ -190,15 +226,15 @@ module _
   {l : Level} {A : UU l}
   where
 
-  distributive-inv-involutive-eq-eq :
+  commutative-inv-involutive-eq-eq :
     {x y : A} (p : x ＝ y) →
-    involutive-eq-eq (inv p) ＝ inv-involutive-eq (involutive-eq-eq p)
-  distributive-inv-involutive-eq-eq refl = refl
+    involutive-eq-eq (inv p) ＝ inv-involutive-Id (involutive-eq-eq p)
+  commutative-inv-involutive-eq-eq refl = refl
 
-  distributive-inv-eq-involutive-eq :
-    {x y : A} (p : x ＝⁻ y) →
-    eq-involutive-eq (inv-involutive-eq p) ＝ inv (eq-involutive-eq p)
-  distributive-inv-eq-involutive-eq (z , p , q) =
+  commutative-inv-eq-involutive-eq :
+    {x y : A} (p : x ＝ⁱ y) →
+    eq-involutive-eq (inv-involutive-Id p) ＝ inv (eq-involutive-eq p)
+  commutative-inv-eq-involutive-eq (z , p , q) =
     ap (inv p ∙_) (inv (inv-inv q)) ∙ inv (distributive-inv-concat (inv q) p)
 ```
 
@@ -214,15 +250,15 @@ module _
   {l : Level} {A : UU l}
   where
 
-  infixl 15 _∙⁻_
-  _∙⁻_ : {x y z : A} → x ＝⁻ y → y ＝⁻ z → x ＝⁻ z
-  (z , p , q) ∙⁻ (z' , p' , q') = (z' , p' , (q' ∙ᵣ inv p) ∙ᵣ q)
+  infixl 15 _∙ⁱ_
+  _∙ⁱ_ : {x y z : A} → x ＝ⁱ y → y ＝ⁱ z → x ＝ⁱ z
+  (z , p , q) ∙ⁱ (z' , p' , q') = (z' , p' , (q' ∙ᵣ inv p) ∙ᵣ q)
 
-  concat-involutive-eq : {x y : A} → x ＝⁻ y → (z : A) → y ＝⁻ z → x ＝⁻ z
-  concat-involutive-eq p z q = p ∙⁻ q
+  concat-involutive-Id : {x y : A} → x ＝ⁱ y → (z : A) → y ＝ⁱ z → x ＝ⁱ z
+  concat-involutive-Id p z q = p ∙ⁱ q
 
-  concat-involutive-eq' : (x : A) {y z : A} → y ＝⁻ z → x ＝⁻ y → x ＝⁻ z
-  concat-involutive-eq' x q p = p ∙⁻ q
+  concat-involutive-Id' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
+  concat-involutive-Id' x q p = p ∙ⁱ q
 ```
 
 ```agda
@@ -230,18 +266,18 @@ module _
   {l : Level} {A : UU l}
   where
 
-  infixl 15 _∙ₗ⁻_
-  _∙ₗ⁻_ : {x y z : A} → x ＝⁻ y → y ＝⁻ z → x ＝⁻ z
-  (z , p , q) ∙ₗ⁻ (z' , p' , q') = (z' , p' , (q' ∙ inv p) ∙ q)
+  infixl 15 _∙ₗⁱ_
+  _∙ₗⁱ_ : {x y z : A} → x ＝ⁱ y → y ＝ⁱ z → x ＝ⁱ z
+  (z , p , q) ∙ₗⁱ (z' , p' , q') = (z' , p' , (q' ∙ inv p) ∙ q)
 
-  lconcat-involutive-eq : {x y : A} → x ＝⁻ y → (z : A) → y ＝⁻ z → x ＝⁻ z
-  lconcat-involutive-eq p z q = p ∙ₗ⁻ q
+  lconcat-involutive-Id : {x y : A} → x ＝ⁱ y → (z : A) → y ＝ⁱ z → x ＝ⁱ z
+  lconcat-involutive-Id p z q = p ∙ₗⁱ q
 
-  lconcat-involutive-eq' : (x : A) {y z : A} → y ＝⁻ z → x ＝⁻ y → x ＝⁻ z
-  lconcat-involutive-eq' x q p = p ∙ₗ⁻ q
+  lconcat-involutive-Id' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
+  lconcat-involutive-Id' x q p = p ∙ₗⁱ q
 
   eq-concat-lconcat-involutive-Id :
-    {x y z : A} (p : x ＝⁻ y) (q : y ＝⁻ z) → p ∙ₗ⁻ q ＝ p ∙⁻ q
+    {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) → p ∙ₗⁱ q ＝ p ∙ⁱ q
   eq-concat-lconcat-involutive-Id (z , p , q) (z' , p' , q') =
     eq-pair-eq-pr2
       ( eq-pair-eq-pr2
@@ -256,15 +292,15 @@ module _
   {l : Level} {A : UU l}
   where
 
-  distributive-concat-involutive-eq-eq :
+  commutative-concat-involutive-eq-eq :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
-    involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙⁻ involutive-eq-eq q
-  distributive-concat-involutive-eq-eq refl q = refl
+    involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙ⁱ involutive-eq-eq q
+  commutative-concat-involutive-eq-eq refl q = refl
 
-  distributive-lconcat-eq-involutive-eq :
-    {x y z : A} (p : x ＝⁻ y) (q : y ＝⁻ z) →
-    eq-involutive-eq (p ∙ₗ⁻ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  distributive-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q') =
+  commutative-lconcat-eq-involutive-eq :
+    {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
+    eq-involutive-eq (p ∙ₗⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
+  commutative-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q') =
     ( ap
       ( _∙ p')
       ( ( distributive-inv-concat (q' ∙ inv p) q) ∙
@@ -274,14 +310,14 @@ module _
         ( inv (assoc (inv q) p (inv q'))))) ∙
     ( assoc (inv q ∙ p) (inv q') p')
 
-  distributive-concat-eq-involutive-eq :
-    {x y z : A} (p : x ＝⁻ y) (q : y ＝⁻ z) →
-    eq-involutive-eq (p ∙⁻ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  distributive-concat-eq-involutive-eq (z , p , q) (z' , p' , q') =
+  commutative-concat-eq-involutive-eq :
+    {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
+    eq-involutive-eq (p ∙ⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
+  commutative-concat-eq-involutive-eq (z , p , q) (z' , p' , q') =
     ( ap
       ( λ x → inv x ∙ p')
       ( eq-double-concat-rconcat-left-associated q' (inv p) q)) ∙
-    ( distributive-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q'))
+    ( commutative-lconcat-eq-involutive-eq (z , p , q) (z' , p' , q'))
 ```
 
 ### The groupoidal laws for the judgmentally involutive identity types
@@ -291,38 +327,38 @@ module _
   {l : Level} {A : UU l}
   where
 
-  assoc-involutive-eq :
-    {x y z w : A} (p : x ＝⁻ y) (q : y ＝⁻ z) (r : z ＝⁻ w) →
-    ((p ∙⁻ q) ∙⁻ r) ＝ (p ∙⁻ (q ∙⁻ r))
-  assoc-involutive-eq (z , p , q) (z' , p' , q') (z'' , p'' , q'') =
+  assoc-involutive-Id :
+    {x y z w : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
+    ((p ∙ⁱ q) ∙ⁱ r) ＝ (p ∙ⁱ (q ∙ⁱ r))
+  assoc-involutive-Id (z , p , q) (z' , p' , q') (z'' , p'' , q'') =
     eq-pair-eq-pr2
       ( eq-pair-eq-pr2
         ( ( inv (assoc-rconcat (q'' ∙ᵣ inv p') (q' ∙ᵣ inv p) q)) ∙
           ( ap (_∙ᵣ q) (inv (assoc-rconcat (q'' ∙ᵣ inv p') q' (inv p))))))
 
-  left-unit-involutive-eq :
-    {x y : A} {p : x ＝⁻ y} → refl-involutive-Id ∙⁻ p ＝ p
-  left-unit-involutive-eq = refl
+  left-unit-involutive-Id :
+    {x y : A} {p : x ＝ⁱ y} → refl-involutive-Id ∙ⁱ p ＝ p
+  left-unit-involutive-Id = refl
 
-  right-unit-involutive-eq :
-    {x y : A} {p : x ＝⁻ y} → p ∙⁻ refl-involutive-Id ＝ p
-  right-unit-involutive-eq {p = z , refl , q} =
+  right-unit-involutive-Id :
+    {x y : A} {p : x ＝ⁱ y} → p ∙ⁱ refl-involutive-Id ＝ p
+  right-unit-involutive-Id {p = z , refl , q} =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 left-unit-rconcat)
 
-  left-inv-involutive-eq :
-    {x y : A} (p : x ＝⁻ y) → inv-involutive-eq p ∙⁻ p ＝ refl-involutive-Id
-  left-inv-involutive-eq (z , refl , q) =
+  left-inv-involutive-Id :
+    {x y : A} (p : x ＝ⁱ y) → inv-involutive-Id p ∙ⁱ p ＝ refl-involutive-Id
+  left-inv-involutive-Id (z , refl , q) =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-rconcat q))
 
-  right-inv-involutive-eq :
-    {x y : A} (p : x ＝⁻ y) → p ∙⁻ inv-involutive-eq p ＝ refl-involutive-Id
-  right-inv-involutive-eq (z , p , refl) =
+  right-inv-involutive-Id :
+    {x y : A} (p : x ＝ⁱ y) → p ∙ⁱ inv-involutive-Id p ＝ refl-involutive-Id
+  right-inv-involutive-Id (z , p , refl) =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-rconcat p))
 
-  distributive-inv-concat-involutive-eq :
-    {x y : A} (p : x ＝⁻ y) {z : A} (q : y ＝⁻ z) →
-    inv-involutive-eq (p ∙⁻ q) ＝ inv-involutive-eq q ∙⁻ inv-involutive-eq p
-  distributive-inv-concat-involutive-eq (z , refl , refl) (z' , p' , refl) =
+  distributive-inv-concat-involutive-Id :
+    {x y : A} (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
+    inv-involutive-Id (p ∙ⁱ q) ＝ inv-involutive-Id q ∙ⁱ inv-involutive-Id p
+  distributive-inv-concat-involutive-Id (z , refl , refl) (z' , p' , refl) =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 (inv left-unit-rconcat))
 ```
 

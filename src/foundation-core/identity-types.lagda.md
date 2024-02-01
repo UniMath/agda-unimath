@@ -117,7 +117,7 @@ reasons, we use the first alternative by convention.
 
 See also
 
-- [judgmentally left unital concatenation operation on indentifications](foundation.judgmentally-left-unital-concatenation-operation-identifications.md)
+- [judgmentally right unital concatenation operation on indentifications](foundation.judgmentally-right-unital-concatenation-operation-identifications.md)
 - [judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
 
 ```agda
