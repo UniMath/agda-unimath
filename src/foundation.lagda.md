@@ -205,6 +205,7 @@ open import foundation.iterated-dependent-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
+open import foundation.judgmentally-compositional-identity-types public
 open import foundation.judgmentally-involutive-identity-types public
 open import foundation.judgmentally-right-unital-concatenation-identifications public
 open import foundation.kernel-span-diagrams-of-maps public

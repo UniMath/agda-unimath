@@ -174,3 +174,7 @@ module _
     {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ᵣ r ＝ q ∙ᵣ r → p ＝ q
   is-injective-rconcat' refl s = s
 ```
+
+## See also
+
+- [judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
