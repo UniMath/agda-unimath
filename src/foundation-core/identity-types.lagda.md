@@ -325,15 +325,22 @@ module _
 Consider a triangle of identifications
 
 ```text
-        top
-     x ----> y
-      \     /
-  left \   / right
-        ∨ ∨
-         z
+      p
+  x ----> y
+   \     /
+  r \   / q
+     ∨ ∨
+      z
 ```
 
-in a type `A`. Then we can {{#concept "transpose"}} any identification `left ＝ top ∙ right` to an identification
+in a type `A`. Then we have maps
+
+```text
+  p ∙ q ＝ r → q ＝ inv p ∙ r
+  p ∙ q ＝ r → p ＝ r ∙ inv q.
+```
+
+In [`foundation.identity-types`](foundation.identity-types.md) we will show that these maps are equivalences.
 
 ```agda
 module _
