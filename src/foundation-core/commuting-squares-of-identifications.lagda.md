@@ -255,6 +255,31 @@ commutativity is an equivalence.
 
 #### Concatenating identifications of the top edge with a coherence of a commuting square of identifications
 
+Consider a commuting diagram of identifications
+
+```text
+           top'
+         ------->
+       x -------> y
+       |   top    |
+  left |          | right
+       ∨          ∨
+       z -------> w.
+          bottom
+```
+
+with an identification `top ＝ top'`. Then we get an equivalence
+
+```text
+           top                             top'
+       x -------> y                    x -------> y
+       |          |                    |          |
+  left |          | right    ≃    left |          | right
+       ∨          ∨                    ∨          ∨
+       z -------> w                    z -------> w.
+          bottom                          bottom
+```
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
@@ -308,6 +333,30 @@ module _
 
 #### Concatenating identifications of the left edge with a coherence of a commuting square of identifications
 
+Consider a commuting diagram of identifications
+
+```text
+              top
+         x -------> y
+        | |         |
+  left' | | left    | right
+        ∨ ∨         ∨
+         z -------> w.
+            bottom
+```
+
+with an identification `left ＝ left'`. Then we get an equivalence
+
+```text
+           top                              top
+       x -------> y                     x -------> y
+       |          |                     |          |
+  left |          | right    ≃    left' |          | right
+       ∨          ∨                     ∨          ∨
+       z -------> w                     z -------> w.
+          bottom                           bottom
+```
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
@@ -359,6 +408,30 @@ module _
 ```
 
 #### Concatenating identifications of the right edge with a coherence of a commuting square of identifications
+
+Consider a commuting diagram of identifications
+
+```text
+            top
+       x -------> y
+       |         | |
+  left |   right | | right'
+       ∨         ∨ ∨
+       z -------> w.
+          bottom
+```
+
+with an identification `right ＝ right'`. Then we get an equivalence
+
+```text
+           top                             top
+       x -------> y                    x -------> y
+       |          |                    |          |
+  left |          | right    ≃    left |          | right'
+       ∨          ∨                    ∨          ∨
+       z -------> w                    z -------> w.
+          bottom                          bottom
+```
 
 ```agda
 module _
@@ -412,6 +485,31 @@ module _
 ```
 
 #### Concatenating identifications of the bottom edge with a coherence of a commuting square of identifications
+
+Consider a commuting diagram of identifications
+
+```text
+            top
+       x -------> y
+       |          |
+  left |          | right
+       ∨  bottom  ∨
+       z -------> w.
+         ------->
+          bottom'
+```
+
+with an identification `bottom ＝ bottom'`. Then we get an equivalence
+
+```text
+           top                             top
+       x -------> y                    x -------> y
+       |          |                    |          |
+  left |          | right    ≃    left |          | right
+       ∨          ∨                    ∨          ∨
+       z -------> w                    z -------> w.
+          bottom                          bottom'
+```
 
 ```agda
 module _
