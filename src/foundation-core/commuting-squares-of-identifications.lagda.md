@@ -798,8 +798,8 @@ module _
 
 #### Left splicing coherences of commuting squares of identifications
 
-For inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped with
-`α : inv p ＝ q` we obtain an equivalence
+For any inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped
+with `α : inv p ＝ q` we obtain an equivalence
 
 ```text
            top                                    top
@@ -858,8 +858,8 @@ module _
 
 #### Right splicing coherences of commuting squares of identifications
 
-For inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped with
-`α : inv p ＝ q` we obtain an equivalence
+For any inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped
+with `α : inv p ＝ q` we obtain an equivalence
 
 ```text
            top                             top ∙ p
