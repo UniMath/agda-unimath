@@ -117,11 +117,11 @@ module _
   {f g h : (x : A) → B x}
   where
 
-  distributive-action-htpy-function-comp-htpy :
+  distributive-action-htpy-function-concat-htpy :
     (H : f ~ g) (H' : g ~ h) →
     action-htpy-function F (H ∙h H') ＝
     action-htpy-function F H ∙ action-htpy-function F H'
-  distributive-action-htpy-function-comp-htpy H H' =
+  distributive-action-htpy-function-concat-htpy H H' =
     ap² F (eq-htpy-concat-htpy H H') ∙ ap-concat F (eq-htpy H) (eq-htpy H')
 ```
 
