@@ -1,8 +1,6 @@
 # Commuting squares of maps
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module foundation.commuting-squares-of-maps where
 
 open import foundation-core.commuting-squares-of-maps public
