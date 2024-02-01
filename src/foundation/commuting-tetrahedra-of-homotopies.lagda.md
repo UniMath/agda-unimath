@@ -52,14 +52,14 @@ module _
   coherence-tetrahedron-homotopies : UU (l1 ⊔ l2)
   coherence-tetrahedron-homotopies =
     ( ( upper-right) ∙h
-      ( right-whisker-coherence-triangle-homotopies
+      ( right-whisker-concat-coherence-triangle-homotopies
         ( top)
         ( diagonal-up)
         ( left)
         ( right)
         ( upper-left))) ~
     ( ( lower-left) ∙h
-      ( left-whisker-coherence-triangle-homotopies
+      ( left-whisker-concat-coherence-triangle-homotopies
         ( left)
         ( bottom)
         ( right)
@@ -70,7 +70,7 @@ module _
   coherence-tetrahedron-homotopies' : UU (l1 ⊔ l2)
   coherence-tetrahedron-homotopies' =
     ( ( lower-left) ∙h
-      ( left-whisker-coherence-triangle-homotopies
+      ( left-whisker-concat-coherence-triangle-homotopies
         ( left)
         ( bottom)
         ( right)
@@ -78,7 +78,7 @@ module _
         ( lower-right)) ∙h
       ( assoc-htpy left diagonal-up right)) ~
     ( ( upper-right) ∙h
-      ( right-whisker-coherence-triangle-homotopies
+      ( right-whisker-concat-coherence-triangle-homotopies
         ( top)
         ( diagonal-up)
         ( left)

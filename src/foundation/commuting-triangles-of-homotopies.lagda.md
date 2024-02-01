@@ -76,25 +76,23 @@ module _
 ### Left whiskering triangles of homotopies
 
 ```agda
-{-
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   {f g h : (x : A) → B x}
   (left : f ~ h) (right : g ~ h) (top : f ~ g)
   where
 
-  right-whisker-coherence-triangle-homotopies :
+  right-whisker-concat-coherence-triangle-homotopies :
     {i : (x : A) → B x} (H : h ~ i) →
     coherence-triangle-homotopies left right top →
     coherence-triangle-homotopies (left ∙h H) (right ∙h H) top
-  right-whisker-coherence-triangle-homotopies H T x =
+  right-whisker-concat-coherence-triangle-homotopies H T x =
     right-whisker-coherence-triangle-identifications
       ( left x)
       ( right x)
       ( top x)
       ( H x)
       ( T x)
--}
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -102,13 +100,13 @@ module _
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  right-whisker-coherence-triangle-homotopies :
+  right-whisker-comp-coherence-triangle-homotopies :
     {l3 : Level} {X : UU l3} (i : B → X)
     (T : coherence-triangle-homotopies left right top) →
     coherence-triangle-homotopies
       {f = i ∘ f} {i ∘ g} {i ∘ h}
       (i ·l left) (i ·l right) (i ·l top)
-  right-whisker-coherence-triangle-homotopies i =
+  right-whisker-comp-coherence-triangle-homotopies i =
     distributivity-left-whisker i left right top
 ```
 
@@ -121,10 +119,10 @@ module _
   (left : f ~ h) (right : g ~ h) (top : f ~ g)
   where
 
-  left-whisker-coherence-triangle-homotopies :
+  left-whisker-concat-coherence-triangle-homotopies :
     (T : coherence-triangle-homotopies left right top) →
     coherence-triangle-homotopies {f = i} (H ∙h left) right (H ∙h top)
-  left-whisker-coherence-triangle-homotopies T x =
+  left-whisker-concat-coherence-triangle-homotopies T x =
     left-whisker-coherence-triangle-identifications
       ( H x)
       ( left x)
@@ -132,19 +130,17 @@ module _
       ( top x)
       ( T x)
 
-{-
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   {f g h : A → B}
   {left : f ~ h} (right : g ~ h) {top : f ~ g}
   where
 
-  left-whisker-coherence-triangle-homotopies :
+  left-whisker-comp-coherence-triangle-homotopies :
     {l3 : Level} {X : UU l3}
     (T : coherence-triangle-homotopies left right top) (i : X → A) →
     coherence-triangle-homotopies
       {f = f ∘ i} {g ∘ i} {h ∘ i}
       (left ·r i) (right ·r i) (top ·r i)
-  left-whisker-coherence-triangle-homotopies T i = T ∘ i
--}
+  left-whisker-comp-coherence-triangle-homotopies T i = T ∘ i
 ```
