@@ -913,3 +913,27 @@ module _
       ( bottom)
       ( inv right-unit)
 ```
+
+### Double whiskering of commuting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u v w : A}
+  where
+
+  equiv-double-whisker-square-identifications :
+    (p : x ＝ y)
+    (top : y ＝ u) (left : y ＝ z) (right : u ＝ v) (bottom : z ＝ v)
+    (s : v ＝ w) →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications
+      ( p ∙ top)
+      ( p ∙ left)
+      ( right ∙ s)
+      ( bottom ∙ s)
+  equiv-double-whisker-square-identifications p top left right bottom q =
+    equiv-left-whisker-coherence-square-identifications p top left
+      ( right ∙ q)
+      ( bottom ∙ q) ∘e
+    equiv-right-whisker-coherence-square-identifications top left right bottom q
+```

@@ -318,10 +318,14 @@ module _
               ( ap bottom (is-section-map-inv-equiv left (map-equiv left a)))))
           ( ap (map-inv-equiv right) (H a))
           ( is-retraction-map-inv-equiv right (top a))) ∙
-        ( left-whisker-square-identification
+        ( left-whisker-coherence-square-identifications
           ( map-eq-transpose-equiv
             ( right)
             ( inv (H (map-inv-equiv left (map-equiv left a)))))
+          ( _)
+          ( _)
+          ( _)
+          ( _)
           ( inv
             ( vertical-pasting-coherence-square-identifications
               ( ap
@@ -683,7 +687,7 @@ module _
         ( bottom-right)
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
-      ( both-whisker-square-htpy
+      ( double-whisker-square-htpy
         ( bottom-right ·l (sq-left-bottom ·r left-top))
         ( right-bottom ·l (sq-right-top ·r top-left))
         ( inv-htpy

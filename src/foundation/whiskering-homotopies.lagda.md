@@ -157,7 +157,13 @@ module _
       ( coherence-square-homotopies H H' (K ∙h L) (K' ∙h L))
     equiv-right-whisker-square-htpy =
       equiv-Π-equiv-family
-        ( λ a → equiv-right-whisker-square-identification (H a) (H' a) (L a))
+        ( λ a →
+          equiv-right-whisker-coherence-square-identifications
+            ( H a)
+            ( H' a)
+            ( K a)
+            ( K' a)
+            ( L a))
 
     right-whisker-square-htpy :
       coherence-square-homotopies H H' K K' →
@@ -178,7 +184,13 @@ module _
       ( coherence-square-homotopies (L ∙h H) (L ∙h H') K K')
     equiv-left-whisker-square-htpy =
       equiv-Π-equiv-family
-        ( λ a → equiv-left-whisker-square-identification (L a))
+        ( λ a →
+          equiv-left-whisker-coherence-square-identifications
+            ( L a)
+            ( H a)
+            ( H' a)
+            ( K a)
+            ( K' a))
 
     left-whisker-square-htpy :
       coherence-square-homotopies H H' K K' →
@@ -196,22 +208,29 @@ module _
   ( H : f ~ g) {K : g ~ h} {K' : g ~ h'} {L : h ~ k} {L' : h' ~ k} (M : k ~ m)
   where
 
-  equiv-both-whisker-square-htpy :
+  equiv-double-whisker-square-htpy :
     ( coherence-square-homotopies K K' L L') ≃
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
-  equiv-both-whisker-square-htpy =
+  equiv-double-whisker-square-htpy =
     equiv-Π-equiv-family
-      ( λ a → equiv-both-whisker-square-identifications (H a) (M a))
+      ( λ a →
+        equiv-double-whisker-square-identifications
+          ( H a)
+          ( K a)
+          ( K' a)
+          ( L a)
+          ( L' a)
+          ( M a))
 
-  both-whisker-square-htpy :
+  double-whisker-square-htpy :
     ( coherence-square-homotopies K K' L L') →
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M))
-  both-whisker-square-htpy = map-equiv equiv-both-whisker-square-htpy
+  double-whisker-square-htpy = map-equiv equiv-double-whisker-square-htpy
 
   both-unwhisker-square-htpy :
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M)) →
     ( coherence-square-homotopies K K' L L')
-  both-unwhisker-square-htpy = map-inv-equiv equiv-both-whisker-square-htpy
+  both-unwhisker-square-htpy = map-inv-equiv equiv-double-whisker-square-htpy
 ```
 
 ### Whiskering a square of homotopies by a map

@@ -458,11 +458,15 @@ module _
         ( nat-htpy
           ( coh-hom-arrow g h γ)
           ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
-    ( right-whisker-square-identification
+    ( right-whisker-coherence-square-identifications
       ( ap
         ( map-codomain-hom-arrow g h γ)
         ( htpy-codomain-htpy-hom-arrow f g α β H (f a)))
       ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
+      ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g β a))
+      ( ap
+        ( map-codomain-hom-arrow g h γ ∘ g)
+        ( htpy-domain-htpy-hom-arrow f g α β H a))
       ( coh-hom-arrow g h γ (map-domain-hom-arrow f g β a))
       ( ( ap
           ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a) ∙_)
