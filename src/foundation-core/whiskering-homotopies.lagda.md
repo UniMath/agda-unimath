@@ -84,7 +84,7 @@ module _
   _·r_ = right-whisker-htpy
 ```
 
-### Horizontal composition of homotopies
+### Horizontal concatenation of homotopies
 
 ```agda
 module _
@@ -92,11 +92,12 @@ module _
   {f f' : (x : A) → B x} {g g' : {x : A} → B x → C x}
   where
 
-  htpy-comp-horizontal : f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
-  htpy-comp-horizontal F G = (g ·l F) ∙h (G ·r f')
+  horizontal-concat-htpy : f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
+  horizontal-concat-htpy F G = (g ·l F) ∙h (G ·r f')
 
-  htpy-comp-horizontal' : f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
-  htpy-comp-horizontal' F G = (G ·r f) ∙h (g' ·l F)
+  horizontal-concat-htpy' :
+    f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
+  horizontal-concat-htpy' F G = (G ·r f) ∙h (g' ·l F)
 ```
 
 ## Properties
@@ -256,12 +257,12 @@ module _
   {f g : {x : A} (y : B x) → C y}
   where
 
-  coherence-left-right-whisker-htpy :
+  coherence-double-whisker-htpy :
     (h : {x : A} {y : B x} → C y → D y)
     (H : {x : A} → f {x} ~ g {x})
     (h' : (x : A) → B x) →
     (h ·l H) ·r h' ~ h ·l (H ·r h')
-  coherence-left-right-whisker-htpy h H h' = refl-htpy
+  coherence-double-whisker-htpy h H h' = refl-htpy
 ```
 
 ## See also

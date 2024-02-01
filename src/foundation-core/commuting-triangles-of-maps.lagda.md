@@ -89,7 +89,7 @@ module _
   coherence-htpy-triangle-maps :
     left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
   coherence-htpy-triangle-maps L R T =
-    c ∙h htpy-comp-horizontal T R ~ L ∙h c'
+    c ∙h horizontal-concat-htpy T R ~ L ∙h c'
 ```
 
 ## Properties

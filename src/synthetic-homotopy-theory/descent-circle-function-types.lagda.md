@@ -98,7 +98,7 @@ module _
       ( type-family-with-descent-data-circle B))
   pr2 eq-descent-data-circle-function-type h =
     ( eq-htpy
-      ( htpy-comp-horizontal
+      ( horizontal-concat-htpy
         ( h ·l
           inv-htpy
             ( coherence-square-inv-all

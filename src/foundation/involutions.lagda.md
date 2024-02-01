@@ -121,7 +121,7 @@ module _
     (s t : involution A) → map-involution s ~ map-involution t → UU l
   coherence-htpy-involution s t H =
     ( is-involution-map-involution s) ~
-    ( htpy-comp-horizontal H H ∙h is-involution-map-involution t)
+    ( horizontal-concat-htpy H H ∙h is-involution-map-involution t)
 
   htpy-involution : (s t : involution A) → UU l
   htpy-involution s t =

@@ -160,7 +160,7 @@ module _
     UU (l1 ⊔ l2)
   coherence-htpy-factorization-through F E R L =
     ( is-factorization-factorization-through F) ~
-    ( htpy-comp-horizontal L R ∙h is-factorization-factorization-through E)
+    ( horizontal-concat-htpy L R ∙h is-factorization-factorization-through E)
 
   htpy-factorization-through :
     (F E : factorization-through f X) → UU (l1 ⊔ l2 ⊔ l3)
