@@ -340,7 +340,8 @@ in a type `A`. Then we have maps
   p ∙ q ＝ r → p ＝ r ∙ inv q.
 ```
 
-In [`foundation.identity-types`](foundation.identity-types.md) we will show that these maps are equivalences.
+In [`foundation.identity-types`](foundation.identity-types.md) we will show that
+these maps are equivalences.
 
 ```agda
 module _
