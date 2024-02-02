@@ -34,15 +34,13 @@ Monad-Precategory l C =
                     ( comp-functor-Precategory C C C T T)
                     ( T)
                     ( mu)
-                    ( horizontal-comp-natural-transformation-Precategory
-                      ( C)
-                      ( C)
-                      ( C)
+                    ( whiskering-functor-natural-transformation-Precategory
+                      {C = C}
+                      {D = C}
+                      {E = C}
                       ( comp-functor-Precategory C C C T T)
                       ( T)
                       ( T)
-                      ( T)
-                      ( id-natural-transformation-Precategory C C T)
                       ( mu))
                   ＝
                     comp-natural-transformation-Precategory
@@ -52,16 +50,14 @@ Monad-Precategory l C =
                       ( comp-functor-Precategory C C C T T)
                       ( T)
                       ( mu)
-                      ( horizontal-comp-natural-transformation-Precategory
-                        ( C)
-                        ( C)
-                        ( C)
-                        ( T)
-                        ( T)
+                      ( whiskering-natural-transformation-functor-Precategory
+                        {C = C}
+                        {D = C}
+                        {E = C}
                         ( comp-functor-Precategory C C C T T)
                         ( T)
                         ( mu)
-                        ( id-natural-transformation-Precategory C C T)))
+                        ( T)))
                   ( λ _ →
                     prod
                       ( comp-natural-transformation-Precategory
@@ -71,15 +67,13 @@ Monad-Precategory l C =
                           ( comp-functor-Precategory C C C T T)
                           ( T)
                           ( mu)
-                          ( horizontal-comp-natural-transformation-Precategory
-                            ( C)
-                            ( C)
-                            ( C)
+                          ( whiskering-functor-natural-transformation-Precategory
+                            {C = C}
+                            {D = C}
+                            {E = C}
                             ( id-functor-Precategory C)
                             ( T)
                             ( T)
-                            ( T)
-                            ( id-natural-transformation-Precategory C C T)
                             ( eta))
                       ＝
                         id-natural-transformation-Precategory C C T)
@@ -90,16 +84,14 @@ Monad-Precategory l C =
                           ( comp-functor-Precategory C C C T T)
                           ( T)
                           ( mu)
-                          ( horizontal-comp-natural-transformation-Precategory
-                            ( C)
-                            ( C)
-                            ( C)
-                            ( T)
-                            ( T)
+                          ( whiskering-natural-transformation-functor-Precategory
+                            {C = C}
+                            {D = C}
+                            {E = C}
                             ( id-functor-Precategory C)
                             ( T)
                             ( eta)
-                            ( id-natural-transformation-Precategory C C T))
+                            ( T))
                       ＝
                         id-natural-transformation-Precategory C C T)))))
 ```
