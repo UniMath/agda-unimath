@@ -158,7 +158,6 @@ module _
   coherence-htpy-lifting-square :
     {j k : B → X} → j ~ k → UU {!!}
   coherence-htpy-lifting-square = {!!}
-
 ```
 
 ```text
