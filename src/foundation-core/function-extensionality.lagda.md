@@ -186,7 +186,7 @@ Then the square
 [commutes](foundation-core.commuting-squares-of-maps.md).
 
 ```agda
-coherence-square-homotopies-eq-ap-precomp-Π :
+coherence-square-homotopies-htpy-eq-ap-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
   (g h : (b : B) → C b) →
   coherence-square-maps
@@ -194,7 +194,7 @@ coherence-square-homotopies-eq-ap-precomp-Π :
     ( htpy-eq)
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
-coherence-square-homotopies-eq-ap-precomp-Π f g .g refl = refl
+coherence-square-homotopies-htpy-eq-ap-precomp-Π f g .g refl = refl
 ```
 
 #### Naturality of `htpy-eq` with respect to precomposition of ordinary functions
@@ -223,7 +223,7 @@ coherence-square-homotopies-eq-ap-precomp :
     ( htpy-eq)
     ( precomp-Π f (eq-value g h))
 coherence-square-homotopies-eq-ap-precomp f =
-  coherence-square-homotopies-eq-ap-precomp-Π f
+  coherence-square-homotopies-htpy-eq-ap-precomp-Π f
 ```
 
 #### Naturality of `htpy-eq` with respect to postcomposition of dependent functions

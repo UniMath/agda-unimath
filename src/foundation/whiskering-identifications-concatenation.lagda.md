@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.whiskering-operations
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -44,25 +45,39 @@ operations are equivalences.
 
 ### Left whiskering of identifications
 
+Left whiskering of identifications with respect to concatenation is an operation
+
+```text
+  (p : x ＝ y) {q r : y ＝ z} → q ＝ r → p ∙ q ＝ p ∙ r
+```
+
+on any type.
+
 ```agda
 module _
-  {l : Level} {A : UU l} {x y z : A}
+  {l : Level} {A : UU l}
   where
 
-  left-whisker-concat :
-    (p : x ＝ y) {q q' : y ＝ z} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
+  left-whisker-concat : left-whiskering-operation A _＝_ _∙_ _＝_
   left-whisker-concat p β = ap (p ∙_) β
 ```
 
 ### Right whiskering of identifications
 
+Right whiskering of identifications with respect to concatenation is an operation
+
+```text
+  {p q : x ＝ y} → p ＝ q → (r : y ＝ z) → p ∙ r ＝ q ∙ r
+```
+
+on any type.
+
 ```agda
 module _
-  {l : Level} {A : UU l} {x y z : A}
+  {l : Level} {A : UU l}
   where
 
-  right-whisker-concat :
-    {p p' : x ＝ y} → p ＝ p' → (q : y ＝ z) → (p ∙ q) ＝ (p' ∙ q)
+  right-whisker-concat : right-whiskering-operation A _＝_ _∙_ _＝_
   right-whisker-concat α q = ap (_∙ q) α
 ```
 

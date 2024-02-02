@@ -69,7 +69,7 @@ coherence-square-eq-htpy-ap-precomp-Π f {C = C} g h =
     ( equiv-funext)
     ( equiv-funext)
     ( precomp-Π f (eq-value g h))
-    ( coherence-square-homotopies-eq-ap-precomp-Π f g h)
+    ( coherence-square-homotopies-htpy-eq-ap-precomp-Π f g h)
 ```
 
 #### Naturality of `eq-htpy` with respect to precomposition of ordinary functions

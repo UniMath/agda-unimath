@@ -119,7 +119,7 @@ naming scheme for all the variations of whiskering that exist in the
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {R : A → A → UU l2}
+  {l1 l2 l3 : Level} (A : UU l1) (R : A → A → UU l2)
   where
 
   left-whiskering-operation :
@@ -139,7 +139,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {R : A → A → UU l2}
+  {l1 l2 l3 : Level} (A : UU l1) (R : A → A → UU l2)
   where
 
   right-whiskering-operation :

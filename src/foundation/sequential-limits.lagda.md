@@ -10,7 +10,7 @@ module foundation.sequential-limits where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
+open import foundation-core.commuting-squares-of-homotopies
 open import foundation.cones-over-inverse-sequential-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types

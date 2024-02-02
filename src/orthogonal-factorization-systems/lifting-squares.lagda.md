@@ -26,6 +26,7 @@ open import foundation.whiskering-identifications-concatenation
 
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifts-of-maps
+open import orthogonal-factorization-systems.morphisms-arrows-from-diagonal-maps
 ```
 
 </details>
@@ -67,33 +68,6 @@ commutes. We note that there is a canonical map
 Therefore we see that a lifting square consists of a morphism `α : hom-arrow f g` of arrows from `f` to `g`, a map `j : B → X`, and a homotopy of morphisms of arrow `hom-arrow-map f ~ α`.  
 
 ## Definitions
-
-### Morphisms of arrows obtained from maps
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  where
-
-  map-domain-hom-arrow-map : (B → X) → A → X
-  map-domain-hom-arrow-map j = j ∘ f
-
-  map-codomain-hom-arrow-map : (B → X) → B → Y
-  map-codomain-hom-arrow-map j = g ∘ j
-
-  coh-hom-arrow-map :
-    (j : B → X) →
-    coherence-hom-arrow f g
-      ( map-domain-hom-arrow-map j)
-      ( map-codomain-hom-arrow-map j)
-  coh-hom-arrow-map j = refl-htpy
-
-  hom-arrow-map : (B → X) → hom-arrow f g
-  pr1 (hom-arrow-map j) = map-domain-hom-arrow-map j
-  pr1 (pr2 (hom-arrow-map j)) = map-codomain-hom-arrow-map j
-  pr2 (pr2 (hom-arrow-map j)) = coh-hom-arrow-map j
-```
 
 ### The predicate of being a lifting square
 
@@ -171,52 +145,6 @@ module _
 ```
 
 ## Properties
-
-### Transporting the structure of being a lifting square along homotopies of diagonal maps
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
-  {j k : B → X} (H : j ~ k) (l : is-lifting-square f g α j)
-  where
-
-  htpy-domain-tr-htpy-is-lifting-square :
-    map-domain-hom-arrow f g α ~ map-domain-hom-arrow-map f g k
-  htpy-domain-tr-htpy-is-lifting-square =
-    is-extension-is-lifting-square f g α j l ∙h H ·r f
-
-  htpy-codomain-tr-htpy-is-lifting-square :
-    map-codomain-hom-arrow f g α ~ map-codomain-hom-arrow-map f g k
-  htpy-codomain-tr-htpy-is-lifting-square =
-    is-lift-is-lifting-square f g α j l ∙h g ·l H
-
-  coh-tr-htpy-is-lifting-square :
-    coherence-htpy-hom-arrow f g α
-      ( hom-arrow-map f g k)
-      ( htpy-domain-tr-htpy-is-lifting-square)
-      ( htpy-codomain-tr-htpy-is-lifting-square)
-  coh-tr-htpy-is-lifting-square = ?
-
-{-
-    coherence-square-homotopies
-      ( (is-lift-is-lifting-square f g α j l ·r f) ∙h (g ·l H ·r f))
-      ( coh-hom-arrow f g α)
-      ( g ·l (is-extension-is-lifting-square f g α j l ∙h H ·r f))
-
-    coherence-square-homotopies
-      ( (is-lift-is-lifting-square f g α j l ·r f) ∙h (g ·l H ·r f))
-      ( coh-hom-arrow f g α)
-      ( coh-hom-arrow-map f g k) --refl-htpy
-      ( g ·l (is-extension-is-lifting-square f g α j l ∙h H ·r f))
-
--}
-
-  tr-htpy-is-lifting-square : is-lifting-square f g α k
-  pr1 tr-htpy-is-lifting-square = htpy-domain-tr-htpy-is-lifting-square
-  pr1 (pr2 tr-htpy-is-lifting-square) = htpy-codomain-tr-htpy-is-lifting-square
-  pr2 (pr2 tr-htpy-is-lifting-square) = coh-tr-htpy-is-lifting-square
-```
 
 ### Characterization of identifications of lifting squares
 

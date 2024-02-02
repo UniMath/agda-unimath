@@ -8,7 +8,6 @@ module foundation.morphisms-arrows where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
@@ -19,6 +18,7 @@ open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
+open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
@@ -501,6 +501,12 @@ module _
 
 Exercise for Fredrik.
 
+### Homotopies of homotopies of arrows
+
+```agda
+
+```
+
 ### Morphisms of arrows give morphisms of precomposition arrows
 
 A morphism of arrows `α : f → g` gives a morphism of precomposition arrows
@@ -665,3 +671,4 @@ module _
 - [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
 - [Fibered maps](foundation.fibered-maps.md) for the same concept under a
   different name.
+- [Morphisms of arrows obtained from diagonal maps](orthogonal-factorization-systems.morphisms-arrows-from-diagonal-maps.md)
