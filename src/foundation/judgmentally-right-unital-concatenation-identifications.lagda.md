@@ -74,7 +74,7 @@ module _
 
   eq-concatr-concat :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → p ∙ q ＝ p ∙ᵣ q
-  eq-concatr-concat refl refl = refl
+  eq-concatr-concat p refl = right-unit
 
   eq-concat-concatr :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → p ∙ᵣ q ＝ p ∙ q

@@ -1,4 +1,4 @@
-# Judgmentally involutive identity types
+# The judgmentally involutive identity types
 
 ```agda
 module foundation.judgmentally-involutive-identity-types where
@@ -33,9 +33,7 @@ open import foundation-core.torsorial-type-families
 
 The [standard definition of identity types](foundation-core.identity-types.md)
 suffer the limitation that many of the basic operations only satisfy algebraic
-laws _weakly_.
-
-In this file, we consider the
+laws _weakly_. In this file, we consider the
 {{#concept "judgmentally involutive identity types" Agda=involutive-Id}}
 
 ```text
@@ -43,17 +41,16 @@ In this file, we consider the
 ```
 
 This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfies the judgmental law
+standard identity types, but satisfies the judgmental laws
 
-```text
-  inv (inv p) ＝ p.
-```
+- `inv (inv p) = p`
+- `inv refl = refl`
 
 In addition, we maintain the following judgmental laws
 
-- `inv refl ＝ refl`
-- `ind-Id f refl ＝ f refl`
-- `refl ∙ p ＝ p`
+- `inv refl = refl`
+- `ind-Id f refl = f refl`
+- `refl ∙ p = p` or `p ∙ refl = p`
 
 among other more technical ones considered in this file.
 
@@ -79,8 +76,9 @@ module _
 
 ### The judgmentally involutive identity types are equivalent to the standard identity types
 
-In fact, the [retraction](foundation-core.retractions.md) is judgmental, and the
-equivalence preserves the groupoid structure.
+In fact, the [retraction](foundation-core.retractions.md) is judgmental, the
+equivalence preserves the groupoid structure, and moreover preserves the
+reflexivities judgmentally.
 
 ```agda
 module _
@@ -124,18 +122,18 @@ module _
   {l : Level} {A : UU l}
   where
 
-  involutive-eq-eq-refl :
+  preserves-refl-involutive-eq-eq :
     {x : A} → involutive-eq-eq (refl {x = x}) ＝ refl-involutive-Id
-  involutive-eq-eq-refl = refl
+  preserves-refl-involutive-eq-eq = refl
 
-  eq-involutive-eq-refl :
+  preserves-refl-eq-involutive-eq :
     {x : A} → eq-involutive-eq (refl-involutive-Id {x = x}) ＝ refl
-  eq-involutive-eq-refl = refl
+  preserves-refl-eq-involutive-eq = refl
 ```
 
 ### The induction principle for judgmentally involutive identity types
 
-The judgementally involutive identity types satisfy the induction principle of
+The judgmentally involutive identity types satisfy the induction principle of
 the identity types. This states that given a base point `x : A` and a family of
 types over the identity types based at `x`, `B : (y : A) (p : x ＝ⁱ y) → UU l2`,
 then to construct a dependent function `f : (y : A) (p : x ＝ⁱ y) → B y p` it
@@ -188,7 +186,7 @@ module _
 
 ## Structure
 
-The judgementally involutive identity types form a judgmentally involutive weak
+The judgmentally involutive identity types form a judgmentally involutive weak
 groupoidal structure on types.
 
 ### Inverting judgmentally involutive identifications
@@ -196,15 +194,8 @@ groupoidal structure on types.
 We have an inversion operation on `involutive-Id` that satisfies the judgmental
 laws
 
-```text
-  inv (inv p) ＝ p
-```
-
-and
-
-```text
-  inv refl ＝ refl.
-```
+- `inv (inv p) ＝ p`, and
+- `inv refl ＝ refl`.
 
 ```agda
 module _
@@ -232,15 +223,15 @@ module _
   {l : Level} {A : UU l}
   where
 
-  commutative-inv-involutive-eq-eq :
+  preserves-inv-involutive-eq-eq :
     {x y : A} (p : x ＝ y) →
     involutive-eq-eq (inv p) ＝ inv-involutive-Id (involutive-eq-eq p)
-  commutative-inv-involutive-eq-eq refl = refl
+  preserves-inv-involutive-eq-eq refl = refl
 
-  commutative-inv-eq-involutive-eq :
+  preserves-inv-eq-involutive-eq :
     {x y : A} (p : x ＝ⁱ y) →
     eq-involutive-eq (inv-involutive-Id p) ＝ inv (eq-involutive-eq p)
-  commutative-inv-eq-involutive-eq (z , p , q) =
+  preserves-inv-eq-involutive-eq (z , p , q) =
     ap (inv p ∙_) (inv (inv-inv q)) ∙ inv (distributive-inv-concat (inv q) p)
 ```
 
@@ -252,7 +243,7 @@ identifications using the
 to obtain a one-sided judgmental unit law. There is both a judgmentally left
 unital definition and a judgmentally right unital definition. To be consistent
 with the convention for the standard identity types, we take the judgmentally
-left unital concatenation operation as the default.
+left unital concatenation operation to be the default.
 
 #### The judgmentally left unital concatenation operation
 
@@ -271,15 +262,15 @@ module _
   concat-involutive-Id' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
   concat-involutive-Id' x q p = p ∙ⁱ q
 
-  commutative-concat-involutive-eq-eq :
+  preserves-concat-involutive-eq-eq :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
     involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙ⁱ involutive-eq-eq q
-  commutative-concat-involutive-eq-eq refl q = refl
+  preserves-concat-involutive-eq-eq refl q = refl
 
-  commutative-concat-eq-involutive-eq :
+  preserves-concat-eq-involutive-eq :
     {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
     eq-involutive-eq (p ∙ⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  commutative-concat-eq-involutive-eq (w , p , q) (w' , p' , q') =
+  preserves-concat-eq-involutive-eq (w , p , q) (w' , p' , q') =
     ( ap
       ( _∙ p')
       ( ( distributive-inv-concatr (q' ∙ᵣ inv p) q) ∙
@@ -314,15 +305,15 @@ module _
   eq-concat-concatr-involutive-Id (w , refl , q) (w' , p' , refl) =
     eq-pair-eq-pr2 (eq-pair (left-unit-concatr) (inv left-unit-concatr))
 
-  commutative-concatr-involutive-eq-eq :
+  preserves-concatr-involutive-eq-eq :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
     involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙ᵣⁱ involutive-eq-eq q
-  commutative-concatr-involutive-eq-eq p refl = ap involutive-eq-eq right-unit
+  preserves-concatr-involutive-eq-eq p refl = ap involutive-eq-eq right-unit
 
-  commutative-concatr-eq-involutive-eq :
+  preserves-concatr-eq-involutive-eq :
     {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
     eq-involutive-eq (p ∙ᵣⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  commutative-concatr-eq-involutive-eq (w , p , q) (w' , p' , q') =
+  preserves-concatr-eq-involutive-eq (w , p , q) (w' , p' , q') =
     ( ap
       ( inv q ∙_)
       ( ( eq-double-concat-concatr-left-associated p (inv q') p') ∙
@@ -332,9 +323,9 @@ module _
 
 ### The groupoidal laws for the judgmentally involutive identity types
 
-The general proof-technique is to induct on the necessary paths to make the left
+The general proof-strategy is to induct on the necessary paths to make the left
 endpoints judgmentally equal, and then proceed by reasoning with the
-groupoid-laws of the underlying identity system.
+groupoid-laws of the underlying identity types.
 
 #### The groupoidal laws for the judgmentally left unital concatenation operation
 
@@ -429,6 +420,16 @@ module _
   distributive-inv-concatr-involutive-Id (.y , refl , q) (.y , p' , refl) =
     eq-pair-eq-pr2 (eq-pair (inv left-unit-concatr) (left-unit-concatr))
 ```
+
+## See also
+
+- [The judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
+  for an identity relation that is strictly associative and unital, but does not
+  have a judgmentally computational induction principle.
+- [The computational identity types](foundation.computational-identity-types.md)
+  for an identity relation that is judgmentally involutive, associative, and
+  one-sided unital, but does not have a judgmentally computational induction
+  principle.
 
 ## References
 

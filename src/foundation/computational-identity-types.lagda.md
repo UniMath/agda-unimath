@@ -1,4 +1,4 @@
-# Computational identity types
+# The computational identity types
 
 ```agda
 module foundation.computational-identity-types where
@@ -7,6 +7,7 @@ module foundation.computational-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -35,35 +36,37 @@ open import foundation-core.torsorial-type-families
 
 The [standard definition of identity types](foundation-core.identity-types.md)
 suffer the limitation that many of the basic operations only satisfy algebraic
-laws _weakly_.
-
-In this file, we consider the
+laws _weakly_. In this file, we consider the
 {{#concept "computational identity types" Agda=computational-Id}}
 
 ```text
-  (x ＝ʲ y) := Σ (z : A) ((z ＝ᶜ y) × (z ＝ᶜ x))
+  (x ＝ʲ y) := Σ (z : A) ((z ＝ʸ y) × (z ＝ʸ x))
 ```
 
-where `x ＝ᶜ y` is the
+where `x ＝ʸ y` is the
 [judgmentally compositional identity type](foundation.judgmentally-compositional-identity-types.md)
 
 ```text
-  (x ＝ᶜ y) := (z : A) → (z ＝ x) → (z ＝ y)
+  (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y).
 ```
 
-This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfies the algebraic laws
+The computational identity types are
+[equivalent](foundation-core.equivalences.md) to the standard identity types,
+but satisfy the the following algebraic laws judgmentally:
 
-- `inv refl ＝ refl`
-- `inv (inv p) ＝ p`
-- `(p ∙ q) ∙ r ＝ p ∙ (q ∙ r)`
-- `refl ∙ p ＝ p` or `p ∙ refl ＝ p`
+- `inv refl = refl`
+- `inv (inv p) = p`
+- `(p ∙ q) ∙ r = p ∙ (q ∙ r)`
+- `refl ∙ p = p` or `p ∙ refl = p`.
 
-judgmentally, but not
+**Note.** The computational identity types do not satisfy the judgmental laws
 
-- `refl ∙ p ＝ p` and `p ∙ refl ＝ p` simultaneously,
-- `inv p ∙ p ＝ refl`, or
-- `p ∙ inv p ＝ refl`.
+- `refl ∙ p = p` and `p ∙ refl ＝ p` simultaneously,
+- `inv p ∙ p = refl`, or
+- `p ∙ inv p = refl`,
+
+and they do not have a judgmental computation property for their induction
+principle.
 
 ## Definition
 
@@ -73,23 +76,22 @@ module _
   where
 
   computational-Id : (x y : A) → UU l
-  computational-Id x y = Σ A (λ z → (z ＝ᶜ y) × (z ＝ᶜ x))
+  computational-Id x y = Σ A (λ z → (z ＝ʸ y) × (z ＝ʸ x))
 
   infix 6 _＝ʲ_
   _＝ʲ_ : A → A → UU l
   (a ＝ʲ b) = computational-Id a b
 
   refl-computational-Id : {x : A} → x ＝ʲ x
-  refl-computational-Id {x} =
-    (x , refl-compositional-Id , refl-compositional-Id)
+  refl-computational-Id {x} = (x , refl-yoneda-Id , refl-yoneda-Id)
 ```
 
 ## Properties
 
 ### The computational identity types are equivalent to the standard identity types
 
-In fact, the [retraction](foundation-core.retractions.md) is judgmental, and the
-equivalence preserves the groupoid structure.
+This equivalence preserves the groupoid structure of the computational identity
+types and moreover preserves the reflexivity witnesses judgmentally.
 
 ```agda
 module _
@@ -97,12 +99,10 @@ module _
   where
 
   computational-eq-eq : {x y : A} → x ＝ y → x ＝ʲ y
-  computational-eq-eq {x} p =
-    ( x , compositional-eq-eq p , refl-compositional-Id)
+  computational-eq-eq {x} p = (x , yoneda-eq-eq p , refl-yoneda-Id)
 
   eq-computational-eq : {x y : A} → x ＝ʲ y → x ＝ y
-  eq-computational-eq (z , p , q) =
-    eq-compositional-eq (inv-compositional-Id q ∙ᶜ p)
+  eq-computational-eq (z , p , q) = eq-yoneda-eq (inv-yoneda-Id q ∙ʸ p)
 
   is-retraction-eq-computational-eq :
     {x y : A} → is-retraction computational-eq-eq (eq-computational-eq {x} {y})
@@ -112,10 +112,10 @@ module _
     {x y : A} →
     is-section computational-eq-eq (eq-computational-eq {x} {y})
   is-section-eq-computational-eq (z , p , q) =
-    ind-compositional-Id
+    ind-yoneda-Id
       ( λ _ q →
         computational-eq-eq (eq-computational-eq (z , p , q)) ＝ (z , p , q))
-      ( eq-pair-eq-pr2 (eq-pair (is-section-eq-compositional-eq p) refl))
+      ( eq-pair-eq-pr2 (eq-pair (is-section-eq-yoneda-eq p) refl))
       ( q)
 
   is-equiv-computational-eq-eq :
@@ -141,30 +141,29 @@ module _
   pr2 equiv-eq-computational-eq = is-equiv-eq-computational-eq
 ```
 
-The reflexivities are mapped to the reflexivities judgementally.
+The reflexivity witnesses are preserved judgmentally.
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  compute-computational-eq-eq-refl :
+  preserves-refl-computational-eq-eq :
     {x : A} → computational-eq-eq (refl {x = x}) ＝ refl-computational-Id
-  compute-computational-eq-eq-refl = refl
+  preserves-refl-computational-eq-eq = refl
 
-  compute-eq-computational-eq-refl :
+  preserves-refl-eq-computational-eq :
     {x : A} → eq-computational-eq (refl-computational-Id {x = x}) ＝ refl
-  compute-eq-computational-eq-refl = refl
+  preserves-refl-eq-computational-eq = refl
 ```
 
 ### The induction principle for computational identity types
 
-The judgementally computational identity types satisfy the induction principle
-of the identity types. This states that given a base point `x : A` and a family
-of types over the identity types based at `x`,
-`B : (y : A) (p : x ＝ʲ y) → UU l2`, then to construct a dependent function
-`f : (y : A) (p : x ＝ʲ y) → B y p` it suffices to define it at
-`f x refl-computational-Id`.
+The judgmentally computational identity types satisfy the induction principle of
+the identity types. This states that given a base point `x : A` and a family of
+types over the identity types based at `x`, `B : (y : A) (p : x ＝ʲ y) → UU l2`,
+then to construct a dependent function `f : (y : A) (p : x ＝ʲ y) → B y p` it
+suffices to define it at `f x refl-computational-Id`.
 
 ```agda
 module _
@@ -220,16 +219,16 @@ module _
 The computational identity types form a groupoidal structure on types. This
 structure satisfies the following algebraic laws strictly
 
-- `inv refl ＝ refl`
-- `inv (inv p) ＝ p`
-- `(p ∙ q) ∙ r ＝ p ∙ (q ∙ r)`
-- `refl ∙ p ＝ p` or `p ∙ refl ＝ p`,
+- `inv refl = refl`
+- `inv (inv p) = p`
+- `(p ∙ q) ∙ r = p ∙ (q ∙ r)`
+- `refl ∙ p = p` or `p ∙ refl = p`.
 
-but not
+Note, however, that they do not satisfy the strict algebraic laws
 
-- `refl ∙ p ＝ p` and `p ∙ refl ＝ p` simultaneously
-- `inv p ∙ p ＝ refl`
-- `p ∙ inv p ＝ refl`.
+- `refl ∙ p ＝ p` and `p ∙ refl = p` simultaneously
+- `inv p ∙ p = refl`
+- `p ∙ inv p = refl`.
 
 ### Inverting computational identifications
 
@@ -243,11 +242,13 @@ module _
 
   compute-inv-computational-Id-refl :
     {x : A} →
-    inv-computational-Id (refl-computational-Id {x = x}) ＝ refl-computational-Id
+    inv-computational-Id (refl-computational-Id {x = x}) ＝
+    refl-computational-Id
   compute-inv-computational-Id-refl = refl
 
   inv-inv-computational-Id :
-    {x y : A} (p : x ＝ʲ y) → inv-computational-Id (inv-computational-Id p) ＝ p
+    {x y : A} (p : x ＝ʲ y) →
+    inv-computational-Id (inv-computational-Id p) ＝ p
   inv-inv-computational-Id p = refl
 ```
 
@@ -259,16 +260,18 @@ module _
   {l : Level} {A : UU l} {x y : A}
   where
 
-  commutative-inv-computational-eq-eq :
+  preserves-inv-computational-eq-eq :
     (p : x ＝ y) →
     computational-eq-eq (inv p) ＝ inv-computational-Id (computational-eq-eq p)
-  commutative-inv-computational-eq-eq refl = refl
+  preserves-inv-computational-eq-eq refl = refl
 
-  -- commutative-inv-eq-computational-eq :
-  --   (p : x ＝ʲ y) →
-  --   eq-computational-eq (inv-computational-Id p) ＝ inv (eq-computational-eq p)
-  -- commutative-inv-eq-computational-eq (z , f , g) =
-  --   equational-reasoning g y (refl ∙ᵣ inv (f z refl)) ＝ inv (f x (refl ∙ᵣ inv (g z refl))) by {!   !}
+  preserves-inv-eq-computational-eq :
+    (p : x ＝ʲ y) →
+    eq-computational-eq (inv-computational-Id p) ＝ inv (eq-computational-eq p)
+  preserves-inv-eq-computational-eq (z , f , g) =
+    ( ap (g y) (left-unit-concatr)) ∙
+    ( distributive-inv-Id-yoneda-Id g f) ∙
+    ( ap (λ r → inv (f x r)) (inv left-unit-concatr))
 ```
 
 ### The concatenation operations on computational identifications
@@ -291,8 +294,7 @@ module _
 
   infixl 15 _∙ₗʲ_
   _∙ₗʲ_ : {x y z : A} → x ＝ʲ y → y ＝ʲ z → x ＝ʲ z
-  (z , p , q) ∙ₗʲ (z' , p' , q') =
-    (z' , p' , q' ∙ᶜ invr-compositional-Id p ∙ᶜ q)
+  (z , p , q) ∙ₗʲ (z' , p' , q') = (z' , p' , q' ∙ʸ invr-yoneda-Id p ∙ʸ q)
 
   concatl-computational-Id : {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
   concatl-computational-Id p z q = p ∙ₗʲ q
@@ -301,7 +303,46 @@ module _
   concatl-computational-Id' x q p = p ∙ₗʲ q
 ```
 
-#### The judgmentally left unital concatenation operation
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  preserves-concatl-computational-eq-eq :
+    (p : x ＝ y) (q : y ＝ z) →
+    computational-eq-eq (p ∙ q) ＝
+    computational-eq-eq p ∙ₗʲ computational-eq-eq q
+  preserves-concatl-computational-eq-eq refl q = refl
+
+  preserves-concatl-eq-computational-eq :
+    (p : x ＝ʲ y) (q : y ＝ʲ z) →
+    eq-computational-eq (p ∙ₗʲ q) ＝
+    eq-computational-eq p ∙ eq-computational-eq q
+  preserves-concatl-eq-computational-eq (w , f , g) (w' , f' , g') =
+    ( ap (f' x) left-unit-concatr) ∙
+    ( ap
+      ( f' x)
+      ( ( ap
+          ( inv)
+          ( commutative-postconcatr-Id-yoneda-Id
+            ( g)
+            ( g' w' refl)
+            ( inv (f w refl)))) ∙
+        ( ( distributive-inv-concatr (g' w' refl) (g y (inv (f w refl)))) ∙
+          ( ( ap
+              ( _∙ᵣ inv (g' w' refl))
+              ( inv-distributive-inv-Id-yoneda-Id f g)) ∙
+            ( eq-concat-concatr (f x (inv (g w refl))) (inv (g' w' refl)))))) ∙
+    ( commutative-postconcat-Id-yoneda-Id f'
+      ( f x (inv (g w refl)))
+      ( inv (g' w' refl)))) ∙
+    ( ap-binary
+      ( _∙_)
+      ( ap (f x) (inv left-unit-concatr))
+      ( ap (f' y) (inv left-unit-concatr)))
+```
+
+#### The judgmentally right unital concatenation operation
 
 ```agda
 module _
@@ -311,13 +352,40 @@ module _
   infixl 15 _∙ᵣʲ_
   _∙ᵣʲ_ : {x y z : A} → x ＝ʲ y → y ＝ʲ z → x ＝ʲ z
   (w , p , q) ∙ᵣʲ (w' , p' , q') =
-    (w , p ∙ᶜ invr-compositional-Id q' ∙ᶜ p' , q)
+    (w , p ∙ʸ invr-yoneda-Id q' ∙ʸ p' , q)
 
   concatr-computational-Id : {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
   concatr-computational-Id p z q = p ∙ᵣʲ q
 
   concatr-computational-Id' : (x : A) {y z : A} → y ＝ʲ z → x ＝ʲ y → x ＝ʲ z
   concatr-computational-Id' x q p = p ∙ᵣʲ q
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  preserves-concatr-computational-eq-eq :
+    (p : x ＝ y) (q : y ＝ z) →
+    computational-eq-eq (p ∙ᵣ q) ＝
+    computational-eq-eq p ∙ᵣʲ computational-eq-eq q
+  preserves-concatr-computational-eq-eq p refl = refl
+
+  preserves-concatr-eq-computational-eq :
+    (p : x ＝ʲ y) (q : y ＝ʲ z) →
+    eq-computational-eq (p ∙ᵣʲ q) ＝
+    eq-computational-eq p ∙ᵣ eq-computational-eq q
+  preserves-concatr-eq-computational-eq (w , f , g) (w' , f' , g') =
+    ( ap (λ r → f' x (f x r ∙ᵣ inv (g' w' refl))) left-unit-concatr) ∙
+    ( commutative-postconcatr-Id-yoneda-Id
+      ( f')
+      ( f x (inv (g w refl)))
+      ( inv (g' w' refl))) ∙
+    ( ap-binary
+      ( _∙ᵣ_)
+      ( ap (f x) (inv left-unit-concatr))
+      ( ap (f' y) (inv left-unit-concatr)))
 ```
 
 ### The groupoidal laws for the computational identity types
@@ -345,7 +413,7 @@ module _
   right-unit-concatl-computational-Id :
     {p : x ＝ʲ y} → p ∙ₗʲ refl-computational-Id ＝ p
   right-unit-concatl-computational-Id {z , p , q} =
-    ind-compositional-Id
+    ind-yoneda-Id
       ( λ _ p → (z , p , q) ∙ₗʲ refl-computational-Id ＝ (z , p , q))
       ( refl)
       ( p)
@@ -353,28 +421,34 @@ module _
   left-inv-concatl-computational-Id :
     (p : x ＝ʲ y) → inv-computational-Id p ∙ₗʲ p ＝ refl-computational-Id
   left-inv-concatl-computational-Id (z , p , q) =
-    ind-compositional-Id
+    ind-yoneda-Id
       ( λ _ p →
         ( inv-computational-Id (z , p , q) ∙ₗʲ (z , p , q)) ＝
         ( refl-computational-Id))
-      ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-compositional-Id q)))
+      ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-yoneda-Id q)))
       ( p)
 
   right-inv-concatl-computational-Id :
     (p : x ＝ʲ y) → p ∙ₗʲ inv-computational-Id p ＝ refl-computational-Id
   right-inv-concatl-computational-Id (z , p , q) =
-    ind-compositional-Id
+    ind-yoneda-Id
       ( λ _ q →
         ( (z , p , q) ∙ₗʲ inv-computational-Id (z , p , q)) ＝
         ( refl-computational-Id))
-      ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-compositional-Id p)))
+      ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-yoneda-Id p)))
       ( q)
 
-  -- distributive-inv-concatl-computational-Id :
-  --   {x y : A} (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) →
-  --   inv-computational-Id (p ∙ₗʲ q) ＝ inv-computational-Id q ∙ₗʲ inv-computational-Id p
-  -- distributive-inv-concatl-computational-Id (z , refl , refl) (z' , p' , refl) =
-  --   eq-pair-eq-pr2 (eq-pair-eq-pr2 (inv left-unit-concatr))
+  distributive-inv-concatl-computational-Id :
+    (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) →
+    inv-computational-Id (p ∙ₗʲ q) ＝
+    inv-computational-Id q ∙ₗʲ inv-computational-Id p
+  distributive-inv-concatl-computational-Id p q =
+    ind-computational-Id
+      ( λ _ q →
+        inv-computational-Id (p ∙ₗʲ q) ＝
+        inv-computational-Id q ∙ₗʲ inv-computational-Id p)
+      ( ap inv-computational-Id (right-unit-concatl-computational-Id))
+      ( q)
 ```
 
 #### The groupoidal laws for the judgmentally right unital concatenation operation
@@ -389,19 +463,59 @@ module _
     (p ∙ᵣʲ q) ∙ᵣʲ r ＝ p ∙ᵣʲ (q ∙ᵣʲ r)
   assoc-concatr-computational-Id p q r = refl
 
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  right-unit-concatr-computational-Id :
+    {p : x ＝ʲ y} → p ∙ᵣʲ refl-computational-Id ＝ p
+  right-unit-concatr-computational-Id = refl
+
   left-unit-concatr-computational-Id :
-    {x y : A} {p : x ＝ʲ y} → refl-computational-Id ∙ᵣʲ p ＝ p
-  left-unit-concatr-computational-Id {x} {y} {z , p , q} =
-    ind-compositional-Id
+    {p : x ＝ʲ y} → refl-computational-Id ∙ᵣʲ p ＝ p
+  left-unit-concatr-computational-Id {z , p , q} =
+    ind-yoneda-Id
       ( λ w q → refl-computational-Id ∙ᵣʲ (z , p , q) ＝ (z , p , q))
       ( refl)
       ( q)
 
-  right-unit-concatr-computational-Id :
-    {x y : A} {p : x ＝ʲ y} → p ∙ᵣʲ refl-computational-Id ＝ p
-  right-unit-concatr-computational-Id = refl
+  left-inv-concatr-computational-Id :
+    (p : x ＝ʲ y) → inv-computational-Id p ∙ᵣʲ p ＝ refl-computational-Id
+  left-inv-concatr-computational-Id (z , p , q) =
+    ind-yoneda-Id
+      ( λ _ p →
+        ( inv-computational-Id (z , p , q) ∙ᵣʲ (z , p , q)) ＝
+        ( refl-computational-Id))
+      ( eq-pair-eq-pr2 (eq-pair (right-inv-yoneda-Id q) refl))
+      ( p)
+
+  right-inv-concatr-computational-Id :
+    (p : x ＝ʲ y) → p ∙ᵣʲ inv-computational-Id p ＝ refl-computational-Id
+  right-inv-concatr-computational-Id (z , p , q) =
+    ind-yoneda-Id
+      ( λ _ q →
+        ( (z , p , q) ∙ᵣʲ inv-computational-Id (z , p , q)) ＝
+        ( refl-computational-Id))
+      ( eq-pair-eq-pr2 (eq-pair (right-inv-yoneda-Id p) refl))
+      ( q)
+
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  distributive-inv-concatr-computational-Id :
+    (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) →
+    inv-computational-Id (p ∙ᵣʲ q) ＝
+    inv-computational-Id q ∙ᵣʲ inv-computational-Id p
+  distributive-inv-concatr-computational-Id p q =
+    ind-computational-Id
+      ( λ _ q →
+        inv-computational-Id (p ∙ᵣʲ q) ＝
+        inv-computational-Id q ∙ᵣʲ inv-computational-Id p)
+      ( inv left-unit-concatr-computational-Id)
+      ( q)
 ```
 
-## References
+## See also
 
-- <https://groups.google.com/g/homotopytypetheory/c/FfiZj1vrkmQ/m/GJETdy0AAgAJ>
+- [The judgmentally involutive identity types](foundation.judgmentally-involutive-identity-types.md)
