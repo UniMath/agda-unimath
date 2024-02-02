@@ -1,4 +1,4 @@
-# The computational identity types
+# Computational identity types
 
 ```agda
 module foundation.computational-identity-types where
@@ -31,9 +31,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The [standard definition of identity types](foundation-core.identity-types.md)
-suffer the limitation that many of the basic operations only satisfy algebraic
-laws _weakly_. In this file, we consider the
+The standard definition of [identity types](foundation-core.identity-types.md)
+has the limitation that many of the basic operations only satisfy algebraic laws
+_weakly_. In this file, we consider the
 {{#concept "computational identity types" Agda=computational-Id}}
 
 ```text
@@ -51,16 +51,16 @@ The computational identity types are
 [equivalent](foundation-core.equivalences.md) to the standard identity types,
 but satisfy the following algebraic laws judgmentally:
 
-- `inv refl = refl`
-- `inv (inv p) = p`
-- `(p ∙ q) ∙ r = p ∙ (q ∙ r)`
-- `refl ∙ p = p` or `p ∙ refl = p`.
+- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`
+- `refl ∙ p ≐ p` or `p ∙ refl ≐ p`.
+- `inv refl ≐ refl`
+- `inv (inv p) ≐ p`
 
-**Note.** The computational identity types do not satisfy the judgmental laws
+**Note.** The computational identity types do _not_ satisfy the judgmental laws
 
-- `refl ∙ p = p` and `p ∙ refl ＝ p` simultaneously,
-- `inv p ∙ p = refl`, or
-- `p ∙ inv p = refl`,
+- `refl ∙ p ≐ p` and `p ∙ refl ≐ p` simultaneously,
+- `inv p ∙ p ≐ refl`, or
+- `p ∙ inv p ≐ refl`,
 
 and they do not have a judgmental computation property for their induction
 principle.
@@ -88,7 +88,7 @@ module _
 ### The computational identity types are equivalent to the standard identity types
 
 This equivalence preserves the groupoid structure of the computational identity
-types and moreover preserves the reflexivity witnesses judgmentally.
+types and moreover preserves the reflexivity elements judgmentally.
 
 ```agda
 module _
@@ -138,7 +138,7 @@ module _
   pr2 equiv-eq-computational-eq = is-equiv-eq-computational-eq
 ```
 
-The reflexivity witnesses are preserved judgmentally.
+The reflexivity elements are preserved judgmentally.
 
 ```agda
 module _
@@ -216,16 +216,16 @@ module _
 The computational identity types form a groupoidal structure on types. This
 structure satisfies the following algebraic laws strictly
 
-- `inv refl = refl`
-- `inv (inv p) = p`
-- `(p ∙ q) ∙ r = p ∙ (q ∙ r)`
-- `refl ∙ p = p` or `p ∙ refl = p`.
+- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`
+- `refl ∙ p ≐ p` or `p ∙ refl ≐ p`.
+- `inv (inv p) ≐ p`
+- `inv refl ≐ refl`
 
 Note, however, that they do not satisfy the strict algebraic laws
 
-- `refl ∙ p ＝ p` and `p ∙ refl = p` simultaneously
-- `inv p ∙ p = refl`
-- `p ∙ inv p = refl`.
+- `refl ∙ p ≐ p` and `p ∙ refl ≐ p` simultaneously
+- `inv p ∙ p ≐ refl`
+- `p ∙ inv p ≐ refl`.
 
 ### Inverting computational identifications
 
@@ -504,13 +504,12 @@ module _
     (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) →
     inv-computational-Id (p ∙ᵣʲ q) ＝
     inv-computational-Id q ∙ᵣʲ inv-computational-Id p
-  distributive-inv-concatr-computational-Id p q =
+  distributive-inv-concatr-computational-Id p =
     ind-computational-Id
       ( λ _ q →
         inv-computational-Id (p ∙ᵣʲ q) ＝
         inv-computational-Id q ∙ᵣʲ inv-computational-Id p)
       ( inv left-unit-concatr-computational-Id)
-      ( q)
 ```
 
 ## See also

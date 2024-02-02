@@ -79,10 +79,10 @@ equiv-ev-refl' a {B} =
   ( equiv-ev-refl a) ∘e
   ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
 
-is-equv-ev-refl' :
+is-equiv-ev-refl' :
   {l1 l2 : Level} {A : UU l1} (a : A)
   {B : (x : A) → x ＝ a → UU l2} → is-equiv (ev-refl' a {B})
-is-equv-ev-refl' a = is-equiv-map-equiv (equiv-ev-refl' a)
+is-equiv-ev-refl' a = is-equiv-map-equiv (equiv-ev-refl' a)
 ```
 
 ### `Id : A → (A → 𝒰)` is an embedding

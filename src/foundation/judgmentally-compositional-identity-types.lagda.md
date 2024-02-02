@@ -1,4 +1,4 @@
-# The judgmentally compositional identity types
+# Judgmentally compositional identity types
 
 ```agda
 module foundation.judgmentally-compositional-identity-types where
@@ -28,9 +28,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The [standard definition of identity types](foundation-core.identity-types.md)
-suffer the limitation that many of the basic operations only satisfy algebraic
-laws _weakly_. In this file, we consider the
+The standard definition of [identity types](foundation-core.identity-types.md)
+has the limitation that many of the basic operations only satisfy algebraic laws
+_weakly_. In this file, we consider the
 {{#concept "judgmentally compositional identity types" Agda=yoneda-Id}}
 
 ```text
@@ -40,9 +40,9 @@ laws _weakly_. In this file, we consider the
 This type family is [equivalent](foundation-core.equivalences.md) to the
 standard identity types, but satisfies the laws
 
-- `(p ∙ q) ∙ r = p ∙ (q ∙ r)`
-- `refl ∙ p = p`
-- `p ∙ refl = p`
+- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`
+- `refl ∙ p ≐ p`
+- `p ∙ refl ≐ p`
 
 judgmentally. This is achieved by proxiyng to function composition and utilizing
 its computational properties, and relies heavily on the
@@ -50,7 +50,7 @@ its computational properties, and relies heavily on the
 
 In addition, we can make the type satisfy the judgmental law
 
-- `inv refl = refl`.
+- `inv refl ≐ refl`.
 
 ## Definition
 
@@ -127,24 +127,24 @@ module _
 ### The judgmentally compositional identity types are equivalent to the standard identity types
 
 We define the equivalence `yoneda-eq-eq : x ＝ y → x ＝ʸ y` using the
-judgmentally right unital concatenation operation on identifications. While this
-makes the proof it is a section non-judgmental, it instead gives us the
-judgmental computation rules
+judgmentally right unital concatenation operation on identifications. This gives
+us the judgmental computation rules
 
 ```text
-  yoneda-eq-eq refl ＝ refl-yoneda-Id
+  yoneda-eq-eq refl ≐ refl-yoneda-Id
 ```
 
 and
 
 ```text
-  eq-yoneda-eq refl-yoneda-Id ＝ refl.
+  eq-yoneda-eq refl-yoneda-Id ≐ refl.
 ```
 
 The proof that it is a retraction requires the
 [function extensionality axiom](foundation.function-extensionality.md). However,
-function extensionality will become indispensable regardless when we move to
-proving miscellaneous algebraic laws of the type family.
+function extensionality will become indispensable regardless when we proceed to
+proving miscellaneous algebraic laws of the judgmentally compositional identity
+type.
 
 ```agda
 module _
@@ -188,7 +188,7 @@ module _
   pr2 equiv-eq-yoneda-eq = is-equiv-eq-yoneda-eq
 ```
 
-The reflexivity witnesses are mapped to reflexivity witnesses judgmentally.
+The reflexivity elements are mapped to reflexivity elements judgmentally.
 
 ```agda
 module _
@@ -308,7 +308,7 @@ right unital concatenation operation on the underlying identity type
 respectively. The latter enjoys the computational property
 
 ```text
-  inv refl = refl,
+  inv refl ≐ refl,
 ```
 
 hence will be preferred elsewhere.
@@ -411,7 +411,7 @@ concatenation operation on identifications by convention, as it satisfies the
 judgmental computation law
 
 ```text
-  inv refl ＝ refl.
+  inv refl ≐ refl.
 ```
 
 ```agda

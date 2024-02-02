@@ -1,4 +1,4 @@
-# The judgmentally involutive identity types
+# Judgmentally involutive identity types
 
 ```agda
 module foundation.judgmentally-involutive-identity-types where
@@ -30,9 +30,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The [standard definition of identity types](foundation-core.identity-types.md)
-suffer the limitation that many of the basic operations only satisfy algebraic
-laws _weakly_. In this file, we consider the
+The standard definition of [identity types](foundation-core.identity-types.md)
+has the limitation that many of the basic operations only satisfy algebraic laws
+_weakly_. In this file, we consider the
 {{#concept "judgmentally involutive identity types" Agda=involutive-Id}}
 
 ```text
@@ -42,14 +42,14 @@ laws _weakly_. In this file, we consider the
 This type family is [equivalent](foundation-core.equivalences.md) to the
 standard identity types, but satisfies the judgmental laws
 
-- `inv (inv p) = p`
-- `inv refl = refl`
+- `inv (inv p) ≐ p`
+- `inv refl ≐ refl`
 
 In addition, we maintain the following judgmental laws
 
-- `inv refl = refl`
-- `ind-Id f refl = f refl`
-- `refl ∙ p = p` or `p ∙ refl = p`
+- `inv refl ≐ refl`
+- `ind-Id f refl ≐ f refl`
+- `refl ∙ p ≐ p` or `p ∙ refl ≐ p`
 
 among other more technical ones considered in this file.
 
@@ -193,8 +193,8 @@ groupoidal structure on types.
 We have an inversion operation on `involutive-Id` that satisfies the judgmental
 laws
 
-- `inv (inv p) ＝ p`, and
-- `inv refl ＝ refl`.
+- `inv (inv p) ≐ p`, and
+- `inv refl ≐ refl`.
 
 ```agda
 module _
