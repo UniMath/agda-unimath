@@ -259,11 +259,45 @@ module _
       ( map-functor-Precategory C D I)
 ```
 
-## Composition of natural transformations
+## Whiskering and horizontal composition
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4) (E : Precategory l5 l6)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {C : Precategory l1 l2}
+  {D : Precategory l3 l4}
+  {E : Precategory l5 l6}
+  where
+
+  whiskering-functor-natural-transformation-Precategory :
+    (F G : functor-Precategory C D)
+    (H : functor-Precategory D E)
+    (α : natural-transformation-Precategory C D F G) →
+    natural-transformation-Precategory
+      ( C)
+      ( E)
+      ( comp-functor-Precategory C D E H F)
+      ( comp-functor-Precategory C D E H G)
+  whiskering-functor-natural-transformation-Precategory = {!   !}
+
+  whiskering-natural-transformation-functor-Precategory :
+    (F G : functor-Precategory C D)
+    (α : natural-transformation-Precategory C D F G)
+    (K : functor-Precategory E C) →
+    natural-transformation-Precategory
+      ( E)
+      ( D)
+      ( comp-functor-Precategory E C D F K)
+      ( comp-functor-Precategory E C D G K)
+  whiskering-natural-transformation-functor-Precategory = {!   !}
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (E : Precategory l5 l6)
   where
   horizontal-comp-natural-transformation-Precategory :
     (F G : functor-Precategory C D)
@@ -275,5 +309,13 @@ module _
       ( E)
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E I G)
-  horizontal-comp-natural-transformation-Precategory = {!   !}
+  horizontal-comp-natural-transformation-Precategory F G H I β α =
+    comp-natural-transformation-Precategory
+      ( C)
+      ( E)
+      ( comp-functor-Precategory C D E H F)
+      ( comp-functor-Precategory C D E H G)
+      ( comp-functor-Precategory C D E I G)
+      (whiskering-natural-transformation-functor-Precategory H I β G)
+      (whiskering-functor-natural-transformation-Precategory F G H α)
 ```
