@@ -89,3 +89,9 @@ module _
     is-equiv-map-Π-is-fiberwise-equiv
       ( λ x → is-equiv-right-whisker-concat (J x))
 ```
+
+### The unit and absorption laws for left whiskering of homotopies with respect to concatenation
+
+```agda
+
+```
