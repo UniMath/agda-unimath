@@ -8,18 +8,13 @@ module foundation.judgmentally-compositional-identity-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.multivariable-homotopies
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -27,7 +22,6 @@ open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
-open import foundation-core.transport-along-identifications
 ```
 
 </details>

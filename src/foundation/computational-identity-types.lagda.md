@@ -9,20 +9,17 @@ module foundation.computational-identity-types where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.judgmentally-compositional-identity-types
 open import foundation.judgmentally-right-unital-concatenation-identifications
-open import foundation.multivariable-homotopies
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.retractions
@@ -52,7 +49,7 @@ where `x ＝ʸ y` is the
 
 The computational identity types are
 [equivalent](foundation-core.equivalences.md) to the standard identity types,
-but satisfy the the following algebraic laws judgmentally:
+but satisfy the following algebraic laws judgmentally:
 
 - `inv refl = refl`
 - `inv (inv p) = p`
