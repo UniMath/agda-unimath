@@ -11,17 +11,21 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.multivariable-homotopies
+open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
+open import foundation-core.univalence
 ```
 
 </details>
@@ -295,6 +299,34 @@ module _
       ( dependent-universal-property-identity-system-yoneda-Id B)
 ```
 
+While the induction principle does not have the ideal reduction behaviour, the
+non-dependent eliminator does:
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x : A}
+  {B : A → UU l2}
+  where
+
+  rec-yoneda-Id :
+    (b : B x) {y : A} → x ＝ʸ y → B y
+  rec-yoneda-Id b {y} p = tr B (p x refl) b
+
+  compute-rec-yoneda-Id :
+    (b : B x) → rec-yoneda-Id b refl-yoneda-Id ＝ b
+  compute-rec-yoneda-Id b = refl
+
+  uniqueness-rec-yoneda-Id :
+    (b : (y : A) → x ＝ʸ y → B y) →
+    (λ y → rec-yoneda-Id (b x refl-yoneda-Id) {y}) ＝ b
+  uniqueness-rec-yoneda-Id b =
+    ( inv
+      ( uniqueness-ind-yoneda-Id
+        ( λ y _ → B y)
+        ( λ y → rec-yoneda-Id (b x refl-yoneda-Id)))) ∙
+    ( uniqueness-ind-yoneda-Id (λ y _ → B y) b)
+```
+
 ## Structure
 
 The judgmentally compositional identity types form a judgmentally compositional
@@ -555,6 +587,50 @@ module _
               ( commutative-postconcat-refl-Id-yoneda-Id g (f x refl))) ∙
             ( distributive-inv-concat (f x refl) (g y refl)))) ∙
         ( inv (assoc p (inv (g y refl)) (inv (f x refl)))))
+```
+
+### Action of functions on judgmentally compositional identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (f : A → B)
+  where
+
+  ap-yoneda-Id : x ＝ʸ y → f x ＝ʸ f y
+  ap-yoneda-Id p .(f x) refl = ap f (p x refl)
+```
+
+### Transport along judgmentally compositional identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
+  where
+
+  tr-yoneda-Id : x ＝ʸ y → B x → B y
+  tr-yoneda-Id p = tr B (p x refl)
+```
+
+### `htpy-compositional-eq`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  htpy-yoneda-eq : f ＝ʸ g → f ~ g
+  htpy-yoneda-eq p = htpy-eq (p f refl)
+```
+
+### `equiv-compositional-eq`
+
+```agda
+module _
+  {l1 : Level} {A B : UU l1}
+  where
+
+  equiv-yoneda-eq : A ＝ʸ B → A ≃ B
+  equiv-yoneda-eq p = equiv-eq (p A refl)
 ```
 
 ## See also
