@@ -107,7 +107,7 @@ naming scheme for all the variations of whiskering that exist in the
    and
 
    ```text
-     rigth-whisker-comp² :
+     right-whisker-comp² :
        {f g : B → C} {H K : f ~ g} → H ~ K → (h : A → B) → H ·r h ~ K ·r h
    ```
 
@@ -157,9 +157,11 @@ module _
 
 ### Double whiskering operations
 
-Double whiskering operations are operations that simultaneously perform whiskering on the left and on the right.
+Double whiskering operations are operations that simultaneously perform
+whiskering on the left and on the right.
 
-Note that double whiskering should not be confused with iterated whiskering on the left or with iterated whiskering on the right.
+Note that double whiskering should not be confused with iterated whiskering on
+the left or with iterated whiskering on the right.
 
 ```agda
 module _

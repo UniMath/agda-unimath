@@ -316,7 +316,7 @@ module _
               ( ap bottom (is-section-map-inv-equiv left (map-equiv left a)))))
           ( ap (map-inv-equiv right) (H a))
           ( is-retraction-map-inv-equiv right (top a))) ∙
-        ( left-whisker-coherence-square-identifications
+        ( left-whisker-concat-coherence-square-identifications
           ( map-eq-transpose-equiv
             ( right)
             ( inv (H (map-inv-equiv left (map-equiv left a)))))
@@ -962,7 +962,7 @@ module _
   ( H : coherence-square-maps top left right bottom)
   where
 
-  distributive-precomp-right-whisker-coherence-square-maps :
+  distributive-precomp-right-whisker-comp-coherence-square-maps :
     ( f : X → A) →
     precomp-coherence-square-maps
       ( top ∘ f)
@@ -973,7 +973,7 @@ module _
       ( W) ~
     ( ( precomp f W) ·l
       ( precomp-coherence-square-maps top left right bottom H W))
-  distributive-precomp-right-whisker-coherence-square-maps f g =
+  distributive-precomp-right-whisker-comp-coherence-square-maps f g =
     compute-ap-precomp-eq-htpy f (g ·l H)
 ```
 
@@ -981,7 +981,7 @@ Similarly, we can calculate transpositions of left-whiskered squares with the
 formula `W^(f ·l H) = W^H ·r W^f`.
 
 ```agda
-  distributive-precomp-left-whisker-coherence-square-maps :
+  distributive-precomp-left-whisker-comp-coherence-square-maps :
     ( f : D → X) →
     precomp-coherence-square-maps
       ( top)
@@ -992,7 +992,7 @@ formula `W^(f ·l H) = W^H ·r W^f`.
       ( W) ~
     ( ( precomp-coherence-square-maps top left right bottom H W) ·r
       ( precomp f W))
-  distributive-precomp-left-whisker-coherence-square-maps f g =
+  distributive-precomp-left-whisker-comp-coherence-square-maps f g =
     ap eq-htpy (eq-htpy (λ a → inv (ap-comp g f (H a))))
 ```
 

@@ -8,6 +8,7 @@ module foundation.higher-homotopies-morphisms-arrows where
 
 ```agda
 open import foundation.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies-morphisms-arrows
@@ -28,7 +29,12 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Consider two [morphisms of arrows](foundation.morphisms-arrows.md) `α := (i , j , H)` and `α' := (i' , j' , H')` and two [homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md) `β := (I , J , K)` and `β' : (I' , J' , K')` between them. A {{#concept "2-homotopy of morphisms of arrows" Agda=htpy-htpy-hom-arrow}} is a triple `(γ₀, γ₁ , γ₂)` consisting of [homotopies](foundation-core.homotopies.md)
+Consider two [morphisms of arrows](foundation.morphisms-arrows.md)
+`α := (i , j , H)` and `α' := (i' , j' , H')` and two
+[homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md)
+`β := (I , J , K)` and `β' : (I' , J' , K')` between them. A
+{{#concept "2-homotopy of morphisms of arrows" Agda=htpy-htpy-hom-arrow}} is a
+triple `(γ₀, γ₁ , γ₂)` consisting of [homotopies](foundation-core.homotopies.md)
 
 ```text
   γ₀ : I ~ I'
@@ -183,4 +189,60 @@ module _
     (β' : htpy-hom-arrow f g α α') →
     htpy-htpy-hom-arrow f g α α' β β' → β ＝ β'
   eq-htpy-htpy-hom-arrow β' = map-inv-equiv (extensionality-htpy-hom-arrow β')
+```
+
+### Concatenation of homotopies of morphisms of arrows satisfies the left unit law
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α α' : hom-arrow f g)
+  (β : htpy-hom-arrow f g α α')
+  where
+
+  htpy-domain-left-unit-law-concat-htpy-hom-arrow :
+    htpy-domain-concat-htpy-hom-arrow f g α α α' (refl-htpy-hom-arrow f g α) β ~
+    htpy-domain-htpy-hom-arrow f g α α' β
+  htpy-domain-left-unit-law-concat-htpy-hom-arrow = refl-htpy
+
+  htpy-codomain-left-unit-law-concat-htpy-hom-arrow :
+    htpy-codomain-concat-htpy-hom-arrow f g α α α'
+      ( refl-htpy-hom-arrow f g α)
+      ( β) ~
+    htpy-codomain-htpy-hom-arrow f g α α' β
+  htpy-codomain-left-unit-law-concat-htpy-hom-arrow = refl-htpy
+
+  coh-left-unit-law-concat-htpy-hom-arrow :
+    coherence-htpy-htpy-hom-arrow f g α α'
+      ( concat-htpy-hom-arrow f g α α α' (refl-htpy-hom-arrow f g α) β)
+      ( β)
+      ( htpy-domain-left-unit-law-concat-htpy-hom-arrow)
+      ( htpy-codomain-left-unit-law-concat-htpy-hom-arrow)
+  coh-left-unit-law-concat-htpy-hom-arrow =
+    ( right-unit-htpy) ∙h
+    {!!}
+
+{-
+(x : A) →
+Id
+(right-whisker-concat-coherence-square-identifications refl
+ (pr2 (pr2 α) x) (pr2 (pr2 α) x) refl
+ (foundation.action-on-identifications-functions.ap g (pr1 β x))
+ right-unit
+ ∙ pr2 (pr2 β) x)
+(pr2 (pr2 β) x)
+-}
+
+  left-unit-law-concat-htpy-hom-arrow :
+    htpy-htpy-hom-arrow f g α α'
+      ( concat-htpy-hom-arrow f g α α α' (refl-htpy-hom-arrow f g α) β)
+      ( β)
+  pr1 left-unit-law-concat-htpy-hom-arrow =
+    htpy-domain-left-unit-law-concat-htpy-hom-arrow
+  pr1 (pr2 left-unit-law-concat-htpy-hom-arrow) =
+    htpy-codomain-left-unit-law-concat-htpy-hom-arrow
+  pr2 (pr2 left-unit-law-concat-htpy-hom-arrow) =
+    coh-left-unit-law-concat-htpy-hom-arrow
+
 ```

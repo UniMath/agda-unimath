@@ -665,8 +665,8 @@ we may consider four ways of attaching new identifications to it:
    ```
 
 These operations are useful in proofs involving path algebra, because taking
-`equiv-right-whisker-square-identicications` as an example, it provides us with
-two maps: the forward direction states
+`equiv-right-whisker-concat-square-identicications` as an example, it provides
+us with two maps: the forward direction states
 `(p ∙ r ＝ q ∙ s) → (p ∙ (r ∙ t)) ＝ q ∙ (s ∙ t))`, which allows one to append
 an identification without needing to reassociate on the right, and the backwards
 direction conversely allows one to cancel out an identification in parentheses.
@@ -692,20 +692,20 @@ module _
   {l : Level} {A : UU l} {x y z w u : A}
   where
 
-  equiv-left-whisker-coherence-square-identifications :
+  equiv-left-whisker-concat-coherence-square-identifications :
     (p : u ＝ x)
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom ≃
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  equiv-left-whisker-coherence-square-identifications refl
+  equiv-left-whisker-concat-coherence-square-identifications refl
     top left right bottom = id-equiv
 
-  left-whisker-coherence-square-identifications :
+  left-whisker-concat-coherence-square-identifications :
     (p : u ＝ x)
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  left-whisker-coherence-square-identifications refl top left right bottom =
+  left-whisker-concat-coherence-square-identifications refl top left right bottom =
     id
 
   left-unwhisker-coherence-square-identifications :
@@ -739,11 +739,11 @@ module _
   (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  equiv-right-whisker-coherence-square-identifications :
+  equiv-right-whisker-concat-coherence-square-identifications :
     {u : A} (p : w ＝ u) →
     coherence-square-identifications top left right bottom ≃
     coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
-  equiv-right-whisker-coherence-square-identifications refl =
+  equiv-right-whisker-concat-coherence-square-identifications refl =
     ( equiv-concat-bottom-identification-coherence-square-identifications
       ( top)
       ( left)
@@ -757,11 +757,11 @@ module _
       ( bottom)
       ( inv right-unit))
 
-  right-whisker-coherence-square-identifications :
+  right-whisker-concat-coherence-square-identifications :
     {u : A} (p : w ＝ u) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
-  right-whisker-coherence-square-identifications refl =
+  right-whisker-concat-coherence-square-identifications refl =
     ( concat-bottom-identification-coherence-square-identifications
       ( top)
       ( left)
@@ -932,10 +932,10 @@ module _
       ( right ∙ s)
       ( bottom ∙ s)
   equiv-double-whisker-square-identifications p top left right bottom q =
-    equiv-left-whisker-coherence-square-identifications p top left
+    equiv-left-whisker-concat-coherence-square-identifications p top left
       ( right ∙ q)
       ( bottom ∙ q) ∘e
-    equiv-right-whisker-coherence-square-identifications top left right bottom q
+    equiv-right-whisker-concat-coherence-square-identifications top left right bottom q
 ```
 
 ### Horizontally pasting squares of identifications
@@ -969,7 +969,7 @@ module _
     coherence-square-identifications
       (top-left ∙ top-right) left right (bottom-left ∙ bottom-right)
   horizontal-pasting-coherence-square-identifications s t =
-    ( right-whisker-coherence-square-identifications
+    ( right-whisker-concat-coherence-square-identifications
       ( top-left)
       ( left)
       ( middle)
@@ -977,7 +977,7 @@ module _
       ( bottom-right)
       ( s)) ∙
     ( ( inv (assoc top-left middle bottom-right)) ∙
-      ( left-whisker-coherence-square-identifications
+      ( left-whisker-concat-coherence-square-identifications
         ( top-left)
         ( top-right)
         ( middle)
@@ -1022,7 +1022,7 @@ module _
     coherence-square-identifications
       top (top-left ∙ bottom-left) (top-right ∙ bottom-right) bottom
   vertical-pasting-coherence-square-identifications p q =
-    ( left-whisker-coherence-square-identifications
+    ( left-whisker-concat-coherence-square-identifications
       ( top-left)
       ( middle)
       ( bottom-left)
@@ -1030,7 +1030,7 @@ module _
       ( bottom)
       ( q)) ∙
     ( ( assoc top-left middle bottom-right) ∙
-      ( right-whisker-coherence-square-identifications
+      ( right-whisker-concat-coherence-square-identifications
         ( top)
         ( top-left)
         ( top-right)

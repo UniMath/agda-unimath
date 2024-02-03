@@ -8,6 +8,8 @@ module orthogonal-factorization-systems.morphisms-arrows-from-diagonal-maps wher
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.higher-homotopies-morphisms-arrows
+open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -102,4 +104,48 @@ module _
   pr1 htpy-hom-arrow-htpy = htpy-domain-htpy-hom-arrow-htpy
   pr1 (pr2 htpy-hom-arrow-htpy) = htpy-codomain-htpy-hom-arrow-htpy
   pr2 (pr2 htpy-hom-arrow-htpy) = coh-htpy-hom-arrow-htpy
+```
+
+## Properties
+
+### The action on homotopies at `refl-htpy` is the reflexivity homotopy of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) {j : B → X}
+  where
+
+  htpy-domain-compute-refl-htpy-hom-arrow-htpy :
+    htpy-domain-htpy-hom-arrow-htpy f g (refl-htpy' j) ~
+    htpy-domain-refl-htpy-hom-arrow f g (hom-arrow-map f g j)
+  htpy-domain-compute-refl-htpy-hom-arrow-htpy = refl-htpy
+
+  htpy-codomain-compute-refl-htpy-hom-arrow-htpy :
+    htpy-codomain-htpy-hom-arrow-htpy f g (refl-htpy' j) ~
+    htpy-codomain-refl-htpy-hom-arrow f g (hom-arrow-map f g j)
+  htpy-codomain-compute-refl-htpy-hom-arrow-htpy = refl-htpy
+
+  coh-compute-refl-htpy-hom-arrow-htpy :
+    coherence-htpy-htpy-hom-arrow f g
+      ( hom-arrow-map f g j)
+      ( hom-arrow-map f g j)
+      ( htpy-hom-arrow-htpy f g refl-htpy)
+      ( refl-htpy-hom-arrow f g (hom-arrow-map f g j))
+      ( htpy-domain-compute-refl-htpy-hom-arrow-htpy)
+      ( htpy-codomain-compute-refl-htpy-hom-arrow-htpy)
+  coh-compute-refl-htpy-hom-arrow-htpy = refl-htpy
+
+  compute-refl-htpy-hom-arrow-htpy :
+    htpy-htpy-hom-arrow f g
+      ( hom-arrow-map f g j)
+      ( hom-arrow-map f g j)
+      ( htpy-hom-arrow-htpy f g refl-htpy)
+      ( refl-htpy-hom-arrow f g (hom-arrow-map f g j))
+  pr1 compute-refl-htpy-hom-arrow-htpy =
+    htpy-domain-compute-refl-htpy-hom-arrow-htpy
+  pr1 (pr2 compute-refl-htpy-hom-arrow-htpy) =
+    htpy-codomain-compute-refl-htpy-hom-arrow-htpy
+  pr2 (pr2 compute-refl-htpy-hom-arrow-htpy) =
+    coh-compute-refl-htpy-hom-arrow-htpy
 ```

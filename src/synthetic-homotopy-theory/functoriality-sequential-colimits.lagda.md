@@ -329,7 +329,7 @@ module _
           ( g)
           ( n))))
   pr2 htpy-preserves-comp-map-sequential-colimit-hom-sequential-diagram n =
-    ( right-whisker-coherence-square-homotopies
+    ( right-whisker-concat-coherence-square-homotopies
       ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
         ( comp-hom-sequential-diagram A B C g f)
         ( n))

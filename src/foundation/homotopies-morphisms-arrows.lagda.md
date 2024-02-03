@@ -1,8 +1,6 @@
 # Homotopies of morphisms of arrows
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.homotopies-morphisms-arrows where
 ```
 
@@ -38,7 +36,8 @@ open import foundation.whiskering-homotopies-composition
 
 ## Idea
 
-Consider two [morphisms of arrows](foundation.morphisms-arrows.md) `(i , j , H)` and `(i' , j' , H')` from `f` to `g`, as in the diagrams
+Consider two [morphisms of arrows](foundation.morphisms-arrows.md) `(i , j , H)`
+and `(i' , j' , H')` from `f` to `g`, as in the diagrams
 
 ```text
         i                   i'
@@ -126,10 +125,26 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
+  htpy-domain-refl-htpy-hom-arrow :
+    map-domain-hom-arrow f g α ~ map-domain-hom-arrow f g α
+  htpy-domain-refl-htpy-hom-arrow = refl-htpy
+
+  htpy-codomain-refl-htpy-hom-arrow :
+    map-codomain-hom-arrow f g α ~ map-codomain-hom-arrow f g α
+  htpy-codomain-refl-htpy-hom-arrow = refl-htpy
+
+  coh-refl-htpy-hom-arrow :
+    coherence-square-homotopies
+      ( htpy-codomain-refl-htpy-hom-arrow ·r f)
+      ( coh-hom-arrow f g α)
+      ( coh-hom-arrow f g α)
+      ( g ·l htpy-domain-refl-htpy-hom-arrow)
+  coh-refl-htpy-hom-arrow = right-unit-htpy
+
   refl-htpy-hom-arrow : htpy-hom-arrow f g α α
-  pr1 refl-htpy-hom-arrow = refl-htpy
-  pr1 (pr2 refl-htpy-hom-arrow) = refl-htpy
-  pr2 (pr2 refl-htpy-hom-arrow) = right-unit-htpy
+  pr1 refl-htpy-hom-arrow = htpy-domain-refl-htpy-hom-arrow
+  pr1 (pr2 refl-htpy-hom-arrow) = htpy-codomain-refl-htpy-hom-arrow
+  pr2 (pr2 refl-htpy-hom-arrow) = coh-refl-htpy-hom-arrow
 ```
 
 ## Operations
@@ -265,7 +280,7 @@ module _
         ( nat-htpy
           ( coh-hom-arrow g h γ)
           ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
-    ( right-whisker-coherence-square-identifications
+    ( right-whisker-concat-coherence-square-identifications
       ( ap
         ( map-codomain-hom-arrow g h γ)
         ( htpy-codomain-htpy-hom-arrow f g α β H (f a)))
@@ -323,13 +338,13 @@ module _
     htpy-codomain-htpy-hom-arrow g h β γ H ·r map-codomain-hom-arrow f g α
 
   coh-right-whisker-comp-hom-arrow :
-    coherence-htpy-hom-arrow f h 
+    coherence-htpy-hom-arrow f h
       ( comp-hom-arrow f g h β α)
       ( comp-hom-arrow f g h γ α)
       ( htpy-domain-right-whisker-comp-hom-arrow)
       ( htpy-codomain-right-whisker-comp-hom-arrow)
   coh-right-whisker-comp-hom-arrow a =
-    ( left-whisker-coherence-square-identifications
+    ( left-whisker-concat-coherence-square-identifications
       ( ap (map-codomain-hom-arrow g h β) (coh-hom-arrow f g α a))
       ( htpy-codomain-htpy-hom-arrow g h β γ H
         ( g (map-domain-hom-arrow f g α a)))
@@ -344,7 +359,7 @@ module _
         ( htpy-codomain-htpy-hom-arrow g h β γ H
           ( g (map-domain-hom-arrow f g α a)))
         ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a))) ∙
-      ( right-whisker-coherence-square-identifications
+      ( right-whisker-concat-coherence-square-identifications
         ( htpy-codomain-htpy-hom-arrow g h β γ H
           ( map-codomain-hom-arrow f g α (f a)))
         ( ap (map-codomain-hom-arrow g h β) (coh-hom-arrow f g α a))
@@ -356,7 +371,7 @@ module _
           ( nat-htpy
             ( htpy-codomain-htpy-hom-arrow g h β γ H)
             ( coh-hom-arrow f g α a)))))
-  
+
   right-whisker-comp-hom-arrow :
     htpy-hom-arrow f h
       ( comp-hom-arrow f g h β α)
@@ -521,4 +536,3 @@ module _
   pr1 (pr2 right-unit-law-comp-hom-arrow) = refl-htpy
   pr2 (pr2 right-unit-law-comp-hom-arrow) = right-unit-htpy
 ```
-

@@ -93,14 +93,14 @@ module _
         ( right-top)
         ( left-bottom)
         ( right-bottom))) ∙h
-    ( right-whisker-coherence-square-homotopies
+    ( right-whisker-concat-coherence-square-homotopies
       ( front-bottom ·r hA)
       ( bottom ·r hA' ·r hA)
       ( hC' ·l ((g' ·l left-top) ∙h (right-top ·r h)))
       ( prism-bottom ·r hA)) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r hA)
-      ( ( ap-left-whisker-coherence-square-homotopies hC'
+      ( ( ap-left-whisker-concat-coherence-square-homotopies hC'
           ( front-top)
           ( mid ·r hA)
           ( prism-top)) ∙h

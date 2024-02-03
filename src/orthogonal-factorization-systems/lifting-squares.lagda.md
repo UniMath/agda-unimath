@@ -16,7 +16,9 @@ open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.fibered-maps
 open import foundation.function-types
+open import foundation.higher-homotopies-morphisms-arrows
 open import foundation.homotopies
+open import foundation.homotopies-morphisms-arrows
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.path-algebra
@@ -65,7 +67,9 @@ commutes. We note that there is a canonical map
   hom-arrow-map : (B → X) → hom-arrow f g.
 ```
 
-Therefore we see that a lifting square consists of a morphism `α : hom-arrow f g` of arrows from `f` to `g`, a map `j : B → X`, and a homotopy of morphisms of arrow `hom-arrow-map f ~ α`.  
+Therefore we see that a lifting square consists of a morphism
+`α : hom-arrow f g` of arrows from `f` to `g`, a map `j : B → X`, and a homotopy
+of morphisms of arrow `hom-arrow-map f ~ α`.
 
 ## Definitions
 
@@ -112,26 +116,31 @@ module _
   lifting-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   lifting-square = Σ (B → X) (is-lifting-square f g α)
 
-  map-diagonal-lifting-square : lifting-square → (B → X)
-  map-diagonal-lifting-square = pr1
+  diagonal-map-lifting-square : lifting-square → (B → X)
+  diagonal-map-lifting-square = pr1
+
+  is-lifting-diagonal-map-lifting-square :
+    (l : lifting-square) →
+    is-lifting-square f g α (diagonal-map-lifting-square l)
+  is-lifting-diagonal-map-lifting-square = pr2
 
   is-extension-lifting-square :
     (l : lifting-square) →
-    is-extension f (map-domain-hom-arrow f g α) (map-diagonal-lifting-square l)
+    is-extension f (map-domain-hom-arrow f g α) (diagonal-map-lifting-square l)
   is-extension-lifting-square = pr1 ∘ pr2
 
   extension-lifting-square :
     lifting-square → extension f (map-domain-hom-arrow f g α)
-  pr1 (extension-lifting-square L) = map-diagonal-lifting-square L
+  pr1 (extension-lifting-square L) = diagonal-map-lifting-square L
   pr2 (extension-lifting-square L) = is-extension-lifting-square L
 
   is-lift-lifting-square :
     (l : lifting-square) →
-    is-lift g (map-codomain-hom-arrow f g α) (map-diagonal-lifting-square l)
+    is-lift g (map-codomain-hom-arrow f g α) (diagonal-map-lifting-square l)
   is-lift-lifting-square = pr1 ∘ (pr2 ∘ pr2)
 
   lift-lifting-square : lifting-square → lift g (map-codomain-hom-arrow f g α)
-  pr1 (lift-lifting-square L) = map-diagonal-lifting-square L
+  pr1 (lift-lifting-square L) = diagonal-map-lifting-square L
   pr2 (lift-lifting-square L) = is-lift-lifting-square L
 
   coherence-lifting-square :
@@ -139,26 +148,75 @@ module _
     coherence-square-homotopies
       ( is-lift-lifting-square l ·r f)
       ( coh-hom-arrow f g α)
-      ( coh-hom-arrow-map f g (map-diagonal-lifting-square l))
+      ( coh-hom-arrow-map f g (diagonal-map-lifting-square l))
       ( g ·l is-extension-lifting-square l)
   coherence-lifting-square = pr2 ∘ (pr2 ∘ pr2)
 ```
 
-## Properties
-
-### Characterization of identifications of lifting squares
+### Homotopies of lifting squares
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  (k l : lifting-square f g α)
   where
 
   coherence-htpy-lifting-square :
-    {j k : B → X} → j ~ k → UU {!!}
-  coherence-htpy-lifting-square = {!!}
+    diagonal-map-lifting-square f g α k ~ diagonal-map-lifting-square f g α l →
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  coherence-htpy-lifting-square H =
+    htpy-htpy-hom-arrow f g α
+      ( hom-arrow-map f g (diagonal-map-lifting-square f g α l))
+      ( is-lifting-diagonal-map-lifting-square f g α l)
+      ( concat-htpy-hom-arrow f g α
+        ( hom-arrow-map f g (diagonal-map-lifting-square f g α k))
+        ( hom-arrow-map f g (diagonal-map-lifting-square f g α l))
+        ( is-lifting-diagonal-map-lifting-square f g α k)
+        ( htpy-hom-arrow-htpy f g H))
+
+  htpy-lifting-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-lifting-square =
+    Σ ( diagonal-map-lifting-square f g α k ~
+        diagonal-map-lifting-square f g α l)
+      ( coherence-htpy-lifting-square)
+
+  module _
+    (H : htpy-lifting-square)
+    where
+
+    htpy-diagonal-map-htpy-lifting-square :
+      diagonal-map-lifting-square f g α k ~ diagonal-map-lifting-square f g α l
+    htpy-diagonal-map-htpy-lifting-square = pr1 H
+
+    coh-htpy-lifting-square :
+      coherence-htpy-lifting-square htpy-diagonal-map-htpy-lifting-square
+    coh-htpy-lifting-square = pr2 H
 ```
+
+### The reflexivity homotopy of a lifting square
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  (k : lifting-square f g α)
+  where
+
+  htpy-diagonal-map-refl-htpy-lifting-square :
+    diagonal-map-lifting-square f g α k ~ diagonal-map-lifting-square f g α k
+  htpy-diagonal-map-refl-htpy-lifting-square = refl-htpy
+
+  refl-htpy-lifting-square : htpy-lifting-square f g α k k
+  pr1 refl-htpy-lifting-square = htpy-diagonal-map-refl-htpy-lifting-square
+  pr2 refl-htpy-lifting-square = {!!}
+```
+
+## Properties
+
+### Characterization of identifications of lifting squares
 
 ```text
 module _
@@ -171,8 +229,8 @@ module _
   coherence-htpy-lifting-square :
     (l l' : lifting-square h f g i H)
     (K :
-      ( map-diagonal-lifting-square l) ~
-      ( map-diagonal-lifting-square l'))
+      ( diagonal-map-lifting-square l) ~
+      ( diagonal-map-lifting-square l'))
     (E :
       ( is-extension-lifting-square l') ~
       ( is-extension-lifting-square l ∙h (K ·r f)))
@@ -196,8 +254,8 @@ module _
   htpy-lifting-square :
     (l l' : lifting-square h f g i H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-lifting-square l l' =
-    Σ ( ( map-diagonal-lifting-square l) ~
-        ( map-diagonal-lifting-square l'))
+    Σ ( ( diagonal-map-lifting-square l) ~
+        ( diagonal-map-lifting-square l'))
       ( λ K →
         Σ ( ( is-extension-lifting-square l') ~
             ( is-extension-lifting-square l ∙h (K ·r f)))
@@ -325,4 +383,3 @@ module _
       ( map-base-fibered-map f g h)
       ( is-map-over-map-total-fibered-map f g h)
 ```
-

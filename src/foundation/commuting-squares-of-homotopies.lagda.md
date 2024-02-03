@@ -52,7 +52,8 @@ Consider a
         bottom
 ```
 
-and consider a homotopy `H : i ~ j`. Then there is an equivalence of commuting squares of homotopies
+and consider a homotopy `H : i ~ j`. Then there is an equivalence of commuting
+squares of homotopies
 
 ```text
           top                               top
@@ -64,7 +65,9 @@ and consider a homotopy `H : i ~ j`. Then there is an equivalence of commuting s
         bottom                          bottom ∙h H
 ```
 
-This is the {{#concept "right whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}} operation of commuting squares of homotopies with respect to concatenation.
+This is the
+{{#concept "right whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}}
+operation of commuting squares of homotopies with respect to concatenation.
 
 ```agda
 module _
@@ -73,35 +76,35 @@ module _
   ( H : f ~ g) (H' : f ~ g') {K : g ~ h} {K' : g' ~ h} (L : h ~ k)
   where
 
-  equiv-right-whisker-coherence-square-homotopies :
+  equiv-right-whisker-concat-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' ≃
     coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
-  equiv-right-whisker-coherence-square-homotopies =
+  equiv-right-whisker-concat-coherence-square-homotopies =
     equiv-Π-equiv-family
       ( λ a →
-        equiv-right-whisker-coherence-square-identifications
+        equiv-right-whisker-concat-coherence-square-identifications
           ( H a)
           ( H' a)
           ( K a)
           ( K' a)
           ( L a))
-              
-  right-whisker-coherence-square-homotopies :
+
+  right-whisker-concat-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
-  right-whisker-coherence-square-homotopies =
-    map-equiv equiv-right-whisker-coherence-square-homotopies
-              
+  right-whisker-concat-coherence-square-homotopies =
+    map-equiv equiv-right-whisker-concat-coherence-square-homotopies
+
   right-unwhisker-coherence-square-homotopies :
     coherence-square-homotopies H H' (K ∙h L) (K' ∙h L) →
     coherence-square-homotopies H H' K K'
   right-unwhisker-coherence-square-homotopies =
-    map-inv-equiv equiv-right-whisker-coherence-square-homotopies
+    map-inv-equiv equiv-right-whisker-concat-coherence-square-homotopies
 ```
 
 ### Left whiskering a commuting square of homotopies with respect to concatenation of homotopies
 
-Consider a 
+Consider a
 [commuting square of homotopies](foundation.commuting-squares-of-homotopies.md)
 
 ```text
@@ -114,7 +117,8 @@ Consider a
         bottom
 ```
 
-and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting squares of homotopies
+and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting
+squares of homotopies
 
 ```text
           top                                H ∙h top
@@ -126,7 +130,9 @@ and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting s
         bottom                                bottom
 ```
 
-This is the {{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}} operation of commuting squares of homotopies with respect to concatenation.
+This is the
+{{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}}
+operation of commuting squares of homotopies with respect to concatenation.
 
 ```agda
 module _
@@ -135,35 +141,35 @@ module _
   ( L : k ~ f) {H : f ~ g} {H' : f ~ g'} {K : g ~ h} {K' : g' ~ h}
   where
 
-  equiv-left-whisker-coherence-square-homotopies :
+  equiv-left-whisker-concat-coherence-square-homotopies :
     ( coherence-square-homotopies H H' K K') ≃
     ( coherence-square-homotopies (L ∙h H) (L ∙h H') K K')
-  equiv-left-whisker-coherence-square-homotopies =
+  equiv-left-whisker-concat-coherence-square-homotopies =
     equiv-Π-equiv-family
       ( λ a →
-        equiv-left-whisker-coherence-square-identifications
+        equiv-left-whisker-concat-coherence-square-identifications
           ( L a)
           ( H a)
           ( H' a)
           ( K a)
           ( K' a))
 
-  left-whisker-coherence-square-homotopies :
+  left-whisker-concat-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (L ∙h H) (L ∙h H') K K'
-  left-whisker-coherence-square-homotopies =
-    map-equiv equiv-left-whisker-coherence-square-homotopies
+  left-whisker-concat-coherence-square-homotopies =
+    map-equiv equiv-left-whisker-concat-coherence-square-homotopies
 
   left-unwhisker-coherence-square-homotopies :
     coherence-square-homotopies (L ∙h H) (L ∙h H') K K' →
     coherence-square-homotopies H H' K K'
   left-unwhisker-coherence-square-homotopies =
-    map-inv-equiv equiv-left-whisker-coherence-square-homotopies
+    map-inv-equiv equiv-left-whisker-concat-coherence-square-homotopies
 ```
 
 ### Left whiskering a commuting square of homotopies with respect to concatenation of homotopies
 
-Consider a 
+Consider a
 [commuting square of homotopies](foundation.commuting-squares-of-homotopies.md)
 
 ```text
@@ -176,7 +182,8 @@ Consider a
         bottom
 ```
 
-and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting squares of homotopies
+and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting
+squares of homotopies
 
 ```text
           top                                H ∙h top
@@ -188,7 +195,9 @@ and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting s
         bottom                                bottom
 ```
 
-This is the {{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}} operation of commuting squares of homotopies with respect to concatenation.
+This is the
+{{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}}
+operation of commuting squares of homotopies with respect to concatenation.
 
 ```agda
 module _
@@ -260,10 +269,10 @@ module _
   ( H : g ~ h) (H' : g ~ h') {K : h ~ k} {K' : h' ~ k}
   where
 
-  ap-left-whisker-coherence-square-homotopies :
+  ap-left-whisker-concat-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (f ·l H) (f ·l H') (f ·l K) (f ·l K')
-  ap-left-whisker-coherence-square-homotopies α a =
+  ap-left-whisker-concat-coherence-square-homotopies α a =
     map-coherence-square-identifications f (H a) (H' a) (K a) (K' a) (α a)
 
 module _
@@ -272,8 +281,8 @@ module _
   ( f : A → B)
   where
 
-  ap-right-whisker-coherence-square-homotopies :
+  ap-right-whisker-concat-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (H ·r f) (H' ·r f) (K ·r f) (K' ·r f)
-  ap-right-whisker-coherence-square-homotopies α = α ·r f
+  ap-right-whisker-concat-coherence-square-homotopies α = α ·r f
 ```
