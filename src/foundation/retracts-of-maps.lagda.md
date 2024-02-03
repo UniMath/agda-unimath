@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-prisms-of-maps
 open import foundation.dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions

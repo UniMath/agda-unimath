@@ -11,6 +11,7 @@ open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
