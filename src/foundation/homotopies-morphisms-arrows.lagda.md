@@ -1,6 +1,8 @@
 # Homotopies of morphisms of arrows
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module foundation.homotopies-morphisms-arrows where
 ```
 
@@ -219,9 +221,9 @@ module _
   pr2 (pr2 inv-htpy-hom-arrow) = coh-inv-htpy-hom-arrow
 ```
 
-### Whiskering of homotopies of morphisms of arrows
+### Whiskering of homotopies of morphisms of arrows with respect to composition
 
-#### Left whiskering
+#### Left whiskering of homotopies of homotopies of morphisms of arrows with respect to composition
 
 ```agda
 module _
@@ -301,7 +303,71 @@ module _
 
 #### Right whiskering
 
-Exercise for Fredrik.
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V)
+  (β γ : hom-arrow g h) (H : htpy-hom-arrow g h β γ) (α : hom-arrow f g)
+  where
+
+  htpy-domain-right-whisker-comp-hom-arrow :
+    map-domain-comp-hom-arrow f g h β α ~ map-domain-comp-hom-arrow f g h γ α
+  htpy-domain-right-whisker-comp-hom-arrow =
+    htpy-domain-htpy-hom-arrow g h β γ H ·r map-domain-hom-arrow f g α
+
+  htpy-codomain-right-whisker-comp-hom-arrow :
+    map-codomain-comp-hom-arrow f g h β α ~
+    map-codomain-comp-hom-arrow f g h γ α
+  htpy-codomain-right-whisker-comp-hom-arrow =
+    htpy-codomain-htpy-hom-arrow g h β γ H ·r map-codomain-hom-arrow f g α
+
+  coh-right-whisker-comp-hom-arrow :
+    coherence-htpy-hom-arrow f h 
+      ( comp-hom-arrow f g h β α)
+      ( comp-hom-arrow f g h γ α)
+      ( htpy-domain-right-whisker-comp-hom-arrow)
+      ( htpy-codomain-right-whisker-comp-hom-arrow)
+  coh-right-whisker-comp-hom-arrow a =
+    ( left-whisker-coherence-square-identifications
+      ( ap (map-codomain-hom-arrow g h β) (coh-hom-arrow f g α a))
+      ( htpy-codomain-htpy-hom-arrow g h β γ H
+        ( g (map-domain-hom-arrow f g α a)))
+      ( coh-hom-arrow g h β (map-domain-hom-arrow f g α a))
+      ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a))
+      ( ap h
+        ( htpy-domain-htpy-hom-arrow g h β γ H
+          ( map-domain-hom-arrow f g α a)))
+      ( coh-htpy-hom-arrow g h β γ H (map-domain-hom-arrow f g α a))) ∙
+    ( ( assoc
+        ( ap (map-codomain-hom-arrow g h β) (coh-hom-arrow f g α a))
+        ( htpy-codomain-htpy-hom-arrow g h β γ H
+          ( g (map-domain-hom-arrow f g α a)))
+        ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a))) ∙
+      ( right-whisker-coherence-square-identifications
+        ( htpy-codomain-htpy-hom-arrow g h β γ H
+          ( map-codomain-hom-arrow f g α (f a)))
+        ( ap (map-codomain-hom-arrow g h β) (coh-hom-arrow f g α a))
+        ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
+        ( htpy-codomain-htpy-hom-arrow g h β γ H
+          ( g (map-domain-hom-arrow f g α a)))
+        ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a))
+        ( inv
+          ( nat-htpy
+            ( htpy-codomain-htpy-hom-arrow g h β γ H)
+            ( coh-hom-arrow f g α a)))))
+  
+  right-whisker-comp-hom-arrow :
+    htpy-hom-arrow f h
+      ( comp-hom-arrow f g h β α)
+      ( comp-hom-arrow f g h γ α)
+  pr1 right-whisker-comp-hom-arrow =
+    htpy-domain-right-whisker-comp-hom-arrow
+  pr1 (pr2 right-whisker-comp-hom-arrow) =
+    htpy-codomain-right-whisker-comp-hom-arrow
+  pr2 (pr2 right-whisker-comp-hom-arrow) =
+    coh-right-whisker-comp-hom-arrow
+```
 
 ## Properties
 
