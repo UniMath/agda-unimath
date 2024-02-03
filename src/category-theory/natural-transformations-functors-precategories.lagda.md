@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+open import foundation.action-on-identifications-functions
 ```
 
 </details>
@@ -278,7 +279,9 @@ module _
       ( E)
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E H G)
-  whiskering-functor-natural-transformation-Precategory = {!   !}
+  whiskering-functor-natural-transformation-Precategory F G H α =
+    ( λ x → (pr1 (pr2 H)) ((pr1 α) x)) ,
+    ( λ f → ({!   !} ∙ ap (pr1 (pr2 H)) ((pr2 α) f)) ∙ {!   !})
 
   whiskering-natural-transformation-functor-Precategory :
     (F G : functor-Precategory C D)
@@ -289,15 +292,16 @@ module _
       ( D)
       ( comp-functor-Precategory E C D F K)
       ( comp-functor-Precategory E C D G K)
-  whiskering-natural-transformation-functor-Precategory = {!   !}
+  whiskering-natural-transformation-functor-Precategory F G α K =
+    (λ x → (pr1 α) ((pr1 K) x)) , (λ f → (pr2 α) ((pr1 (pr2 K)) f))
 ```
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  (C : Precategory l1 l2)
-  (D : Precategory l3 l4)
-  (E : Precategory l5 l6)
+  {C : Precategory l1 l2}
+  {D : Precategory l3 l4}
+  {E : Precategory l5 l6}
   where
   horizontal-comp-natural-transformation-Precategory :
     (F G : functor-Precategory C D)
@@ -316,6 +320,6 @@ module _
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E H G)
       ( comp-functor-Precategory C D E I G)
-      (whiskering-natural-transformation-functor-Precategory H I β G)
-      (whiskering-functor-natural-transformation-Precategory F G H α)
+      ( whiskering-natural-transformation-functor-Precategory {C = D} {D = E} {E = C} H I β G)
+      ( whiskering-functor-natural-transformation-Precategory {C = C} {D = D} {E = E} F G H α)
 ```
