@@ -25,7 +25,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
@@ -150,4 +150,28 @@ module _
   diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
   diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
+```
+
+### Computing the action on identifications of precomposition by a map
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  { f g : B → C} (h : A → B)
+  where
+
+  compute-ap-precomp-htpy-eq :
+    ( p : f ＝ g) →
+    eq-htpy (htpy-eq p ·r h) ＝ ap (precomp h C) p
+  compute-ap-precomp-htpy-eq refl =
+    eq-htpy-refl-htpy (f ∘ h)
+
+  compute-ap-precomp-eq-htpy :
+    ( H : f ~ g) →
+    eq-htpy (H ·r h) ＝ ap (precomp h C) (eq-htpy H)
+  compute-ap-precomp-eq-htpy H =
+    ( ap
+      ( λ K → eq-htpy (K ·r h))
+      ( inv (is-section-eq-htpy H))) ∙
+    ( compute-ap-precomp-htpy-eq (eq-htpy H))
 ```

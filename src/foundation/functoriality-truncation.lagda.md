@@ -22,7 +22,7 @@ open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

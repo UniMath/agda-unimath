@@ -18,7 +18,7 @@ open import foundation.whiskering-higher-homotopies-composition
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
@@ -46,7 +46,7 @@ homotopies.
 ### Precomposition distributes over whiskerings of homotopies
 
 The operation `htpy-precomp` distributes over
-[whiskerings of homotopies](foundation-core.whiskering-homotopies-composition.md)
+[whiskerings of homotopies](foundation.whiskering-homotopies-composition.md)
 contravariantly. Given a homotopy `H : f ~ g` and a suitable map `h` the
 homotopy constructed as the whiskering
 

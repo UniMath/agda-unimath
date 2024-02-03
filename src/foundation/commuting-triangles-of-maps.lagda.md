@@ -12,6 +12,7 @@ open import foundation-core.commuting-triangles-of-maps public
 open import foundation.action-on-identifications-functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
@@ -174,4 +175,24 @@ module _
       ( postcomp S right)
       ( postcomp S top)
   postcomp-coherence-triangle-maps' S = htpy-postcomp S
+```
+
+### Coherences of commuting triangles of maps with fixed vertices
+
+This or its opposite should be the coherence in the characterization of
+identifications of commuting triangles of maps with fixed end vertices.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (left : A → X) (right : B → X) (top : A → B)
+  (left' : A → X) (right' : B → X) (top' : A → B)
+  (c : coherence-triangle-maps left right top)
+  (c' : coherence-triangle-maps left' right' top')
+  where
+
+  coherence-htpy-triangle-maps :
+    left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
+  coherence-htpy-triangle-maps L R T =
+    c ∙h horizontal-concat-htpy T R ~ L ∙h c'
 ```

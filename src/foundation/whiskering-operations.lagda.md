@@ -154,3 +154,29 @@ module _
   right-whiskering-operation' μ E =
     {x y z : A} {f g : R y z} → E f g → (h : R x y) → E (μ f h) (μ g h)
 ```
+
+### Double whiskering operations
+
+Double whiskering operations are operations that simultaneously perform whiskering on the left and on the right.
+
+Note that double whiskering should not be confused with iterated whiskering on the left or with iterated whiskering on the right.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (R : A → A → UU l2)
+  where
+
+  double-whiskering-operation :
+    (μ : {x y z : A} → R x y → R y z → R x z) →
+    ({x y : A} → R x y → R x y → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  double-whiskering-operation μ E =
+    {x' x y y' : A} (h : R x' x) {f g : R x y} (e : E f g) (k : R y y') →
+    E (μ (μ h f) k) (μ (μ h g) k)
+
+  double-whiskering-operation' :
+    (μ : {x y z : A} → R y z → R x y → R x z) →
+    ({x y : A} → R x y → R x y → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  double-whiskering-operation' μ E =
+    {x' x y y' : A} (h : R y y') {f g : R x y} (e : E f g) (k : R x' x) →
+    E (μ (μ h f) k) (μ (μ h g) k)
+```

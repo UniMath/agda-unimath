@@ -59,5 +59,5 @@ open import foundation-core.type-theoretic-principle-of-choice public
 open import foundation-core.univalence public
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.universal-property-truncation public
-open import foundation-core.whiskering-homotopies-composition public
+open import foundation.whiskering-homotopies-composition public
 ```

@@ -39,7 +39,7 @@ open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types

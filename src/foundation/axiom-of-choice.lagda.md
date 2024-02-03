@@ -25,7 +25,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.sets
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

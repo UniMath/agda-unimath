@@ -141,6 +141,19 @@ module _
 
 ### The unit and absorption laws for right whiskering of identifications
 
+The right unit law for right whiskering of identifications with respect to concatenation asserts that the square of identifications
+
+```text
+                     right-whisker-concat α refl
+           p ∙ refl -----------------------------> p' ∙ refl
+             |                                        |
+  right-unit |                                        |
+             ∨                                        ∨
+             p -------------------------------------> p'
+```
+
+commutes for any `α : p ＝ p'`. Note that this law is slightly more complicated, since concatenating with `refl` on the right does not compute to the identity function.
+
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -148,8 +161,7 @@ module _
 
   right-unit-law-right-whisker-concat :
     {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
-    right-whisker-concat α refl ＝
-    right-unit ∙ α ∙ inv right-unit
+    right-unit ∙ α ＝ right-whisker-concat α refl ∙ right-unit
   right-unit-law-right-whisker-concat {p = refl} refl = refl
 
   left-absorption-law-right-whisker-concat :

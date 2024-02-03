@@ -11,7 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
 open import foundation-core.homotopies
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

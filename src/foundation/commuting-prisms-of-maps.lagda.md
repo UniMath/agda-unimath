@@ -10,6 +10,7 @@ open import foundation-core.commuting-prisms-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.composition-algebra

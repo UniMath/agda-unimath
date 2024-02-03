@@ -35,7 +35,7 @@ open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.free-loops
 ```

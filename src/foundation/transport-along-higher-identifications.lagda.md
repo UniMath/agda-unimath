@@ -15,7 +15,7 @@ open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

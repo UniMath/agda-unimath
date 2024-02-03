@@ -26,7 +26,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
@@ -207,4 +207,27 @@ module _
     (e : B ≃ C) (f g : A → B) → (f ~ g) ≃ (map-equiv e ∘ f ~ map-equiv e ∘ g)
   equiv-htpy-postcomp-htpy e f g =
     equiv-Π-equiv-family (λ a → equiv-ap e (f a) (g a))
+```
+
+### Computing the action on identifications of postcomposition by a map
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  { f g : A → B} (h : B → C)
+  where
+
+  compute-ap-postcomp-htpy-eq :
+    ( p : f ＝ g) → eq-htpy (h ·l htpy-eq p) ＝ ap (postcomp A h) p
+  compute-ap-postcomp-htpy-eq refl =
+    eq-htpy-refl-htpy (h ∘ f)
+
+  compute-ap-postcomp-eq-htpy :
+    (H : f ~ g) →
+    eq-htpy (h ·l H) ＝ ap (postcomp A h) (eq-htpy H)
+  compute-ap-postcomp-eq-htpy H =
+    ( ap
+      ( λ K → eq-htpy (h ·l K))
+      ( inv (is-section-eq-htpy H))) ∙
+    ( compute-ap-postcomp-htpy-eq (eq-htpy H))
 ```

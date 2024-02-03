@@ -14,14 +14,13 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
-open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.invertible-maps
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
@@ -353,7 +352,9 @@ module _
         ( pair
           ( section-right-map-triangle f g h H section-f)
           ( retraction-left-map-triangle g f sh
-            ( triangle-section f g h H (sh , is-section-sh))
+            ( inv-htpy
+              ( ( H ·r map-section h (sh , is-section-sh)) ∙h
+                ( g ·l is-section-map-section h (sh , is-section-sh))))
             ( retraction-f)
             ( h , is-section-sh)))
 ```
@@ -372,7 +373,9 @@ module _
     section-left-map-triangle h
       ( map-retraction-is-equiv G)
       ( f)
-      ( triangle-retraction f g h H (retraction-is-equiv G))
+      ( inv-htpy
+        ( ( map-retraction g (retraction-is-equiv G) ·l H) ∙h
+          ( is-retraction-map-retraction g (retraction-is-equiv G) ·r h)))
       ( section-is-equiv F)
       ( g , is-retraction-map-retraction-is-equiv G)
 
@@ -389,7 +392,9 @@ module _
       ( section-f , retraction-f) =
       ( pair
         ( section-left-map-triangle h rg f
-          ( triangle-retraction f g h H (rg , is-retraction-rg))
+          ( inv-htpy
+            ( ( map-retraction g (rg , is-retraction-rg) ·l H) ∙h
+              ( is-retraction-map-retraction g (rg , is-retraction-rg) ·r h)))
           ( section-f)
           ( g , is-retraction-rg))
         ( retraction-top-map-triangle f g h H retraction-f))

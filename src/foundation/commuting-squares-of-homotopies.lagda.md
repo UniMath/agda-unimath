@@ -9,8 +9,10 @@ open import foundation-core.commuting-squares-of-homotopies public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-identifications
 open import foundation.functoriality-dependent-function-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
@@ -35,104 +37,160 @@ A square of [homotopies](foundation-core.homotopies.md)
 is said to **commute** if there is a homotopy `left ∙h bottom ~ top ∙h right `.
 Such a homotopy is called a **coherence** of the square.
 
-### Whiskering a square of homotopies by a homotopy is an equivalence
+### Right whiskering a commuting square of homotopies with respect to concatenation of homotopies
 
-A
+Consider a
 [commuting square of homotopies](foundation.commuting-squares-of-homotopies.md)
-may be whiskered by a homotopy `L` on the left or right, which results in a
-commuting square of homotopies with `L` appended or prepended to the two ways of
-going around the square.
-
-Diagrammatically, we may turn the pasting diagram
 
 ```text
-        H
-    f ----> g
-    |       |
- H' |   ⇗   | K
-    ∨       ∨
-   g' ----> h ----> k
-       K'       L
+          top
+      f ------> g
+      |         |
+ left |         | right
+      v         v
+      h ------> i
+        bottom
 ```
 
-into a commmuting square
+and consider a homotopy `H : i ~ j`. Then there is an equivalence of commuting squares of homotopies
 
 ```text
-           H
-    f ---------> g
-    |            |
- H' |      ⇗     | K ∙h L
-    ∨            ∨
-   g' ---------> k,
-       K' ∙h L   
+          top                               top
+      f ------> g                    f -------------> g
+      |         |                    |                |
+ left |         | right    ≃    left |                | right ∙h H
+      ∨         ∨                    ∨                ∨
+      h ------> i                    h -------------> j
+        bottom                          bottom ∙h H
 ```
 
-and similarly for the other side.
+This is the {{#concept "right whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}} operation of commuting squares of homotopies with respect to concatenation.
 
 ```agda
 module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2}
   { f g g' h k : A → B}
+  ( H : f ~ g) (H' : f ~ g') {K : g ~ h} {K' : g' ~ h} (L : h ~ k)
   where
 
-  module _
-    ( H : f ~ g) (H' : f ~ g') {K : g ~ h} {K' : g' ~ h} (L : h ~ k)
-    where
+  equiv-right-whisker-coherence-square-homotopies :
+    coherence-square-homotopies H H' K K' ≃
+    coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
+  equiv-right-whisker-coherence-square-homotopies =
+    equiv-Π-equiv-family
+      ( λ a →
+        equiv-right-whisker-coherence-square-identifications
+          ( H a)
+          ( H' a)
+          ( K a)
+          ( K' a)
+          ( L a))
+              
+  right-whisker-coherence-square-homotopies :
+    coherence-square-homotopies H H' K K' →
+    coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
+  right-whisker-coherence-square-homotopies =
+    map-equiv equiv-right-whisker-coherence-square-homotopies
+              
+  right-unwhisker-coherence-square-homotopies :
+    coherence-square-homotopies H H' (K ∙h L) (K' ∙h L) →
+    coherence-square-homotopies H H' K K'
+  right-unwhisker-coherence-square-homotopies =
+    map-inv-equiv equiv-right-whisker-coherence-square-homotopies
+```
 
-    equiv-right-whisker-coherence-square-homotopies :
-      ( coherence-square-homotopies H H' K K') ≃
-      ( coherence-square-homotopies H H' (K ∙h L) (K' ∙h L))
-    equiv-right-whisker-coherence-square-homotopies =
-      equiv-Π-equiv-family
-        ( λ a →
-          equiv-right-whisker-coherence-square-identifications
-            ( H a)
-            ( H' a)
-            ( K a)
-            ( K' a)
-            ( L a))
+### Left whiskering a commuting square of homotopies with respect to concatenation of homotopies
 
-    right-whisker-coherence-square-homotopies :
-      coherence-square-homotopies H H' K K' →
-      coherence-square-homotopies H H' (K ∙h L) (K' ∙h L)
-    right-whisker-coherence-square-homotopies =
-      map-equiv equiv-right-whisker-coherence-square-homotopies
+Consider a 
+[commuting square of homotopies](foundation.commuting-squares-of-homotopies.md)
 
-    right-unwhisker-coherence-square-homotopies :
-      coherence-square-homotopies H H' (K ∙h L) (K' ∙h L) →
-      coherence-square-homotopies H H' K K'
-    right-unwhisker-coherence-square-homotopies =
-      map-inv-equiv equiv-right-whisker-coherence-square-homotopies
+```text
+          top
+      f ------> g
+      |         |
+ left |         | right
+      v         v
+      h ------> i
+        bottom
+```
 
-  module _
-    ( L : k ~ f) {H : f ~ g} {H' : f ~ g'} {K : g ~ h} {K' : g' ~ h}
-    where
+and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting squares of homotopies
 
-    equiv-left-whisker-coherence-square-homotopies :
-      ( coherence-square-homotopies H H' K K') ≃
-      ( coherence-square-homotopies (L ∙h H) (L ∙h H') K K')
-    equiv-left-whisker-coherence-square-homotopies =
-      equiv-Π-equiv-family
-        ( λ a →
-          equiv-left-whisker-coherence-square-identifications
-            ( L a)
-            ( H a)
-            ( H' a)
-            ( K a)
-            ( K' a))
+```text
+          top                                H ∙h top
+      f ------> g                         e ----------> g
+      |         |                         |             |
+ left |         | right    ≃    H ∙h left |             | right
+      ∨         ∨                         ∨             ∨
+      h ------> i                         h ----------> i
+        bottom                                bottom
+```
 
-    left-whisker-coherence-square-homotopies :
-      coherence-square-homotopies H H' K K' →
-      coherence-square-homotopies (L ∙h H) (L ∙h H') K K'
-    left-whisker-coherence-square-homotopies =
-      map-equiv equiv-left-whisker-coherence-square-homotopies
+This is the {{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}} operation of commuting squares of homotopies with respect to concatenation.
 
-    left-unwhisker-coherence-square-homotopies :
-      coherence-square-homotopies (L ∙h H) (L ∙h H') K K' →
-      coherence-square-homotopies H H' K K'
-    left-unwhisker-coherence-square-homotopies =
-      map-inv-equiv equiv-left-whisker-coherence-square-homotopies
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2}
+  { f g g' h k : A → B}
+  ( L : k ~ f) {H : f ~ g} {H' : f ~ g'} {K : g ~ h} {K' : g' ~ h}
+  where
 
+  equiv-left-whisker-coherence-square-homotopies :
+    ( coherence-square-homotopies H H' K K') ≃
+    ( coherence-square-homotopies (L ∙h H) (L ∙h H') K K')
+  equiv-left-whisker-coherence-square-homotopies =
+    equiv-Π-equiv-family
+      ( λ a →
+        equiv-left-whisker-coherence-square-identifications
+          ( L a)
+          ( H a)
+          ( H' a)
+          ( K a)
+          ( K' a))
+
+  left-whisker-coherence-square-homotopies :
+    coherence-square-homotopies H H' K K' →
+    coherence-square-homotopies (L ∙h H) (L ∙h H') K K'
+  left-whisker-coherence-square-homotopies =
+    map-equiv equiv-left-whisker-coherence-square-homotopies
+
+  left-unwhisker-coherence-square-homotopies :
+    coherence-square-homotopies (L ∙h H) (L ∙h H') K K' →
+    coherence-square-homotopies H H' K K'
+  left-unwhisker-coherence-square-homotopies =
+    map-inv-equiv equiv-left-whisker-coherence-square-homotopies
+```
+
+### Left whiskering a commuting square of homotopies with respect to concatenation of homotopies
+
+Consider a 
+[commuting square of homotopies](foundation.commuting-squares-of-homotopies.md)
+
+```text
+          top
+      f ------> g
+      |         |
+ left |         | right
+      v         v
+      h ------> i
+        bottom
+```
+
+and consider a homotopy `H : e ~ f`. Then there is an equivalence of commuting squares of homotopies
+
+```text
+          top                                H ∙h top
+      f ------> g                         e ----------> g
+      |         |                         |             |
+ left |         | right    ≃    H ∙h left |             | right
+      ∨         ∨                         ∨             ∨
+      h ------> i                         h ----------> i
+        bottom                                bottom
+```
+
+This is the {{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}} operation of commuting squares of homotopies with respect to concatenation.
+
+```agda
 module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2}
   { f g h h' k m : A → B}

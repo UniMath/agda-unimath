@@ -12,7 +12,7 @@ open import foundation-core.commuting-squares-of-maps public
 open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation-core.commuting-squares-of-homotopies
+open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-maps
 open import foundation.equivalences
@@ -836,7 +836,7 @@ module _
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
           ( eq-htpy (preserves-comp-left-whisker-comp h bottom-right H))
-          ( compute-eq-right-whisker-comp
+          ( compute-ap-precomp-eq-htpy
             ( top-left)
             ( h ·l K))
 
@@ -923,7 +923,7 @@ module _
         by
         ap-binary
           ( λ p L → p ∙ eq-htpy L)
-          ( compute-eq-right-whisker-comp left-top (h ·l K))
+          ( compute-ap-precomp-eq-htpy left-top (h ·l K))
           ( eq-htpy (preserves-comp-left-whisker-comp h right-bottom H))
 ```
 
@@ -974,7 +974,7 @@ module _
     ( ( precomp f W) ·l
       ( precomp-coherence-square-maps top left right bottom H W))
   distributive-precomp-right-whisker-coherence-square-maps f g =
-    compute-eq-right-whisker-comp f (g ·l H)
+    compute-ap-precomp-eq-htpy f (g ·l H)
 ```
 
 Similarly, we can calculate transpositions of left-whiskered squares with the
