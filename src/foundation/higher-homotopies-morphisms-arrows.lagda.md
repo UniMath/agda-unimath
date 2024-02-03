@@ -193,7 +193,7 @@ module _
   eq-htpy-htpy-hom-arrow β' = map-inv-equiv (extensionality-htpy-hom-arrow β')
 ```
 
-### Concatenation of homotopies of morphisms of arrows satisfies the left unit law
+### The left unit law for concatenation of homotopies of morphisms of arrows
 
 ```agda
 module _
@@ -239,4 +239,78 @@ module _
     htpy-codomain-left-unit-law-concat-htpy-hom-arrow
   pr2 (pr2 left-unit-law-concat-htpy-hom-arrow) =
     coh-left-unit-law-concat-htpy-hom-arrow
+```
+
+### The right unit law for concatenation of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α α' : hom-arrow f g)
+  (β : htpy-hom-arrow f g α α')
+  where
+
+  htpy-domain-right-unit-law-concat-htpy-hom-arrow :
+    htpy-domain-concat-htpy-hom-arrow f g α α' α' β
+      ( refl-htpy-hom-arrow f g α') ~
+    htpy-domain-htpy-hom-arrow f g α α' β
+  htpy-domain-right-unit-law-concat-htpy-hom-arrow = right-unit-htpy
+
+  htpy-codomain-right-unit-law-concat-htpy-hom-arrow :
+    htpy-codomain-concat-htpy-hom-arrow f g α α' α' β
+      ( refl-htpy-hom-arrow f g α') ~
+    htpy-codomain-htpy-hom-arrow f g α α' β
+  htpy-codomain-right-unit-law-concat-htpy-hom-arrow = right-unit-htpy
+
+  coh-right-unit-law-concat-htpy-hom-arrow :
+    coherence-htpy-htpy-hom-arrow f g α α'
+      ( concat-htpy-hom-arrow f g α α' α' β (refl-htpy-hom-arrow f g α'))
+      ( β)
+      ( htpy-domain-right-unit-law-concat-htpy-hom-arrow)
+      ( htpy-codomain-right-unit-law-concat-htpy-hom-arrow)
+  coh-right-unit-law-concat-htpy-hom-arrow a = {!!}
+
+{-
+Id
+( ( left-whisker-concat (α₂ a) (ap-concat g (β₀ a) refl)) ∙
+  ( ( ( ( inv (left-whisker-concat (α₂ a) (inv right-unit))) ∙
+        ( ( β₂ a) ∙
+          ( left-whisker-concat (β₁ (f a)) (inv right-unit)))) ∙
+      ( ( inv (assoc (β₁ (f a)) (α'₂ a) refl)) ∙
+        ( left-whisker-concat-coherence-square-identifications
+          ( β₁ (f a))
+          ( refl) -- top
+          ( α'₂ a) -- left
+          ( α'₂ a) -- right
+          ( refl) -- bottom
+          ( right-unit))))) ∙
+    ( right-whisker-concat (α'₂ a) right-unit))
+
+( ( left-whisker-concat (α₂ a) (ap (ap g) right-unit)) ∙
+  ( β₂ a))
+-}
+
+{-
+    coherence-square-homotopies
+      ( left-whisker-concat-htpy
+        ( coh-hom-arrow f g α)
+        ( left-whisker-comp² g right-unit-htpy))
+      ( coh-concat-htpy-hom-arrow f g α α' α' β (refl-htpy-hom-arrow f g α'))
+      ( coh-htpy-hom-arrow f g α α' β)
+      ( right-whisker-concat-htpy
+        ( right-whisker-comp² right-unit-htpy f)
+        ( coh-hom-arrow f g α'))
+-}
+
+  right-unit-law-concat-htpy-hom-arrow :
+    htpy-htpy-hom-arrow f g α α'
+      ( concat-htpy-hom-arrow f g α α' α' β (refl-htpy-hom-arrow f g α'))
+      ( β)
+  pr1 right-unit-law-concat-htpy-hom-arrow =
+    htpy-domain-right-unit-law-concat-htpy-hom-arrow
+  pr1 (pr2 right-unit-law-concat-htpy-hom-arrow) =
+    htpy-codomain-right-unit-law-concat-htpy-hom-arrow
+  pr2 (pr2 right-unit-law-concat-htpy-hom-arrow) =
+    coh-right-unit-law-concat-htpy-hom-arrow
 ```

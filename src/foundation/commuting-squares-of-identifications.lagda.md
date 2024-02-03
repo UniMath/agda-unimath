@@ -10,6 +10,7 @@ module foundation.commuting-squares-of-identifications where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -1148,4 +1149,184 @@ module _
   right-whisker-concat-horizontal-refl-coherence-square-identifications
     refl refl =
     refl
+```
+
+### Computing the left whiskering of a horizontally constant square with an identification
+
+Consider an identification `p : x ＝ y` and a horizontally constant commuting square of identifications
+
+```text
+       refl
+    y -----> y
+    |        |
+  q |        | q
+    ∨        ∨
+    z -----> z
+       refl
+```
+
+at an identification `q : y ＝ z`. The the left whiskering of the above square with `p` is the commuting square
+
+```text
+                                  q ∙ refl
+        x ------------------------------------------------------> y
+        |                                                         |
+  q ∙ p |  right-unit ∙ inv (right-whisker-concat right-unit p)   | p
+        ∨                                                         ∨
+        z ------------------------------------------------------> z.
+                                   refl
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  left-whisker-concat-horizontal-refl-coherence-square-identifications :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    left-whisker-concat-coherence-square-identifications p refl q q refl
+      ( horizontal-refl-coherence-square-identifications q) ∙
+    right-whisker-concat right-unit q ＝
+    right-unit
+  left-whisker-concat-horizontal-refl-coherence-square-identifications
+    refl refl =
+    refl
+
+  left-whisker-concat-horizontal-refl-coherence-square-identifications' :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    left-whisker-concat-coherence-square-identifications p refl q q refl
+      ( horizontal-refl-coherence-square-identifications q) ＝
+    right-unit ∙ inv (right-whisker-concat right-unit q)
+  left-whisker-concat-horizontal-refl-coherence-square-identifications'
+    refl refl =
+    refl
+```
+
+### Computing the left whiskering of a vertically constant square with an identification
+
+Consider the vertically constant square of identifications
+
+```text
+           q
+       y -----> z
+       |        |
+  refl |        | refl
+       ∨        ∨
+       y -----> z
+           q
+```
+
+at an identification `q : y ＝ z` and consider an identification `p : x ＝ y`. Then the left whiskering of the above square with `p` is the square
+
+```text
+                                    p ∙ q
+           x ---------------------------------------------------> z
+           |                                                      |
+  p ∙ refl |  right-whisker-concat right-unit q ∙ inv right-unit  | refl
+           ∨                                                      ∨
+           y ---------------------------------------------------> z.
+                                      q
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  left-whisker-concat-vertical-refl-coherence-square-identifications :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    left-whisker-concat-coherence-square-identifications p q refl refl q
+      ( vertical-refl-coherence-square-identifications q) ∙
+    right-unit ＝
+    right-whisker-concat right-unit q
+  left-whisker-concat-vertical-refl-coherence-square-identifications
+    refl refl =
+    refl
+
+  left-whisker-concat-vertical-refl-coherence-square-identifications' :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    left-whisker-concat-coherence-square-identifications p q refl refl q
+      ( vertical-refl-coherence-square-identifications q) ＝
+    right-whisker-concat right-unit q ∙ inv right-unit
+  left-whisker-concat-vertical-refl-coherence-square-identifications'
+    refl refl =
+    refl
+```
+
+### Left whiskering horizontal concatenations of squares with identifications
+
+Consider a commuting diagram of identifications of the form
+
+```text
+            top-left        top-right
+       a -------------> c -------------> e
+       |                |                |
+  left |                | middle         | right
+       ∨                ∨                ∨
+       b -------------> d -------------> f
+          bottom-left      bottom-right
+```
+
+and consider an identification `p : x ＝ a`. Then the left whiskering of `p` and the horizontal concatenation of coherences of commuting squares is up to associativity the horizontal concatenation of the squares
+
+```text
+              p ∙ top-left      top-right
+           x -------------> c -------------> e
+           |                |                |
+  p ∙ left |                | middle         | right
+           ∨                ∨                ∨
+           b -------------> d -------------> f
+              bottom-left      bottom-right
+```
+
+where the left square is the left whiskering of `p` and the original left square.
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  left-whisker-concat-horizontal-pasting-coherence-square-identifications :
+    {x a b c d e f : A} (p : x ＝ a)
+    (top-left : a ＝ c) (top-right : c ＝ e)
+    (left : a ＝ b) (middle : c ＝ d) (right : e ＝ f)
+    (bottom-left : b ＝ d) (bottom-right : d ＝ f)
+    (l : coherence-square-identifications top-left left middle bottom-left)
+    (r : coherence-square-identifications top-right middle right bottom-right) →
+    left-whisker-concat-coherence-square-identifications p
+      ( top-left ∙ top-right)
+      ( left)
+      ( right)
+      ( bottom-left ∙ bottom-right)
+      ( horizontal-pasting-coherence-square-identifications
+        ( top-left)
+        ( top-right)
+        ( left)
+        ( middle)
+        ( right)
+        ( bottom-left)
+        ( bottom-right)
+        ( l)
+        ( r)) ＝
+    horizontal-pasting-coherence-square-identifications
+      ( p ∙ top-left)
+      ( top-right)
+      ( p ∙ left)
+      ( middle)
+      ( right)
+      ( bottom-left)
+      ( bottom-right)
+      ( left-whisker-concat-coherence-square-identifications p
+        ( top-left)
+        ( left)
+        ( middle)
+        ( bottom-left)
+        ( l))
+      ( r) ∙
+    right-whisker-concat
+      ( assoc p top-left top-right)
+      ( right)
+  left-whisker-concat-horizontal-pasting-coherence-square-identifications
+    refl top-left top-right left middle right bottom-left bottom-right l r =
+    inv right-unit 
 ```

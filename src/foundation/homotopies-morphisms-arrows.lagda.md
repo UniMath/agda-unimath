@@ -175,8 +175,8 @@ module _
       ( htpy-domain-concat-htpy-hom-arrow)
       ( htpy-codomain-concat-htpy-hom-arrow)
   coh-concat-htpy-hom-arrow a =
-    ( ap
-      ( concat (coh-hom-arrow f g α a) (g (map-domain-hom-arrow f g γ a)))
+    ( left-whisker-concat
+      ( coh-hom-arrow f g α a)
       ( ap-concat g
         ( htpy-domain-htpy-hom-arrow f g α β H a)
         ( htpy-domain-htpy-hom-arrow f g β γ K a))) ∙
