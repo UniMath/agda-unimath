@@ -95,10 +95,10 @@ module _
   right-whisker-concat-coherence-square-homotopies =
     map-equiv equiv-right-whisker-concat-coherence-square-homotopies
 
-  right-unwhisker-coherence-square-homotopies :
+  right-unwhisker-concat-htpy-coherence-square-homotopies :
     coherence-square-homotopies H H' (K ∙h L) (K' ∙h L) →
     coherence-square-homotopies H H' K K'
-  right-unwhisker-coherence-square-homotopies =
+  right-unwhisker-concat-htpy-coherence-square-homotopies =
     map-inv-equiv equiv-right-whisker-concat-coherence-square-homotopies
 ```
 
@@ -160,10 +160,10 @@ module _
   left-whisker-concat-coherence-square-homotopies =
     map-equiv equiv-left-whisker-concat-coherence-square-homotopies
 
-  left-unwhisker-coherence-square-homotopies :
+  left-unwhisker-concat-htpy-coherence-square-homotopies :
     coherence-square-homotopies (L ∙h H) (L ∙h H') K K' →
     coherence-square-homotopies H H' K K'
-  left-unwhisker-coherence-square-homotopies =
+  left-unwhisker-concat-htpy-coherence-square-homotopies =
     map-inv-equiv equiv-left-whisker-concat-coherence-square-homotopies
 ```
 
@@ -226,10 +226,10 @@ module _
   double-whisker-coherence-square-homotopies =
     map-equiv equiv-double-whisker-coherence-square-homotopies
 
-  both-unwhisker-coherence-square-homotopies :
+  double-unwhisker-concat-htpy-coherence-square-homotopies :
     ( coherence-square-homotopies (H ∙h K) (H ∙h K') (L ∙h M) (L' ∙h M)) →
     ( coherence-square-homotopies K K' L L')
-  both-unwhisker-coherence-square-homotopies =
+  double-unwhisker-concat-htpy-coherence-square-homotopies =
     map-inv-equiv equiv-double-whisker-coherence-square-homotopies
 ```
 

@@ -665,8 +665,8 @@ we may consider four ways of attaching new identifications to it:
    ```
 
 These operations are useful in proofs involving path algebra, because taking
-`equiv-right-whisker-concat-square-identicications` as an example, it provides
-us with two maps: the forward direction states
+`equiv-right-whisker-concat-coherence-square-identicications` as an example, it
+provides us with two maps: the forward direction states
 `(p ∙ r ＝ q ∙ s) → (p ∙ (r ∙ t)) ＝ q ∙ (s ∙ t))`, which allows one to append
 an identification without needing to reassociate on the right, and the backwards
 direction conversely allows one to cancel out an identification in parentheses.
@@ -708,12 +708,12 @@ module _
   left-whisker-concat-coherence-square-identifications refl top left right bottom =
     id
 
-  left-unwhisker-coherence-square-identifications :
+  left-unwhisker-concat-coherence-square-identifications :
     (p : u ＝ x)
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom →
     coherence-square-identifications top left right bottom
-  left-unwhisker-coherence-square-identifications refl top left right bottom =
+  left-unwhisker-concat-coherence-square-identifications refl top left right bottom =
     id
 ```
 
@@ -1066,4 +1066,86 @@ module _
     s
   left-unit-law-horizontal-pasting-coherence-square-identifications
     refl refl right refl s = refl
+```
+
+### Computing the right whiskering of a vertically constant square with an identification
+
+Consider the vertically constant square of identifications
+
+```text
+           p
+       x -----> y
+       |        |
+  refl |        | refl
+       ∨        ∨
+       x -----> y
+           p
+```
+
+at an identification `p : x ＝ y`, and consider an identification `q : y ＝ z`. Then the right whiskering of the above square with `q` is the commuting square of identifications
+
+```text
+            p
+       x -------> y
+       |          |
+  refl |   refl   | q
+       ∨          ∨
+       x -------> z
+          p ∙ q
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  right-whisker-concat-vertical-refl-coherence-square-identifications :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    right-whisker-concat-coherence-square-identifications p refl refl p q
+      ( vertical-refl-coherence-square-identifications p) ＝
+    refl
+  right-whisker-concat-vertical-refl-coherence-square-identifications
+    refl refl =
+    refl
+```
+
+### Computing the right whiskering of a horizontally constant square with an identification
+
+Consider a horizontally constant commuting square of identifications
+
+```text
+       refl
+    x -----> x
+    |        |
+  p |        | p
+    ∨        ∨
+    y -----> y
+       refl
+```
+
+at an identification `p` and consider an identification `q : y ＝ z`. Then the right whiskering of the above square with `q` is the square
+
+```text
+       refl
+    x -----> x
+    |        |
+  p |  refl  | p ∙ q
+    ∨        ∨
+    y -----> z.
+        q
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  right-whisker-concat-horizontal-refl-coherence-square-identifications :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    right-whisker-concat-coherence-square-identifications refl p p refl q
+      ( horizontal-refl-coherence-square-identifications p) ＝
+    refl
+  right-whisker-concat-horizontal-refl-coherence-square-identifications
+    refl refl =
+    refl
 ```

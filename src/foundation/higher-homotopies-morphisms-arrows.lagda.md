@@ -7,6 +7,7 @@ module foundation.higher-homotopies-morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
@@ -19,6 +20,7 @@ open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-concatenation
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
@@ -219,20 +221,13 @@ module _
       ( β)
       ( htpy-domain-left-unit-law-concat-htpy-hom-arrow)
       ( htpy-codomain-left-unit-law-concat-htpy-hom-arrow)
-  coh-left-unit-law-concat-htpy-hom-arrow =
-    ( right-unit-htpy) ∙h
-    {!!}
-
-{-
-(x : A) →
-Id
-(right-whisker-concat-coherence-square-identifications refl
- (pr2 (pr2 α) x) (pr2 (pr2 α) x) refl
- (foundation.action-on-identifications-functions.ap g (pr1 β x))
- right-unit
- ∙ pr2 (pr2 β) x)
-(pr2 (pr2 β) x)
--}
+  coh-left-unit-law-concat-htpy-hom-arrow a =
+    ( right-unit) ∙
+    ( right-whisker-concat
+      ( right-whisker-concat-horizontal-refl-coherence-square-identifications
+        ( coh-hom-arrow f g α a)
+        ( ap g (htpy-domain-htpy-hom-arrow f g α α' β a)))
+      ( coh-htpy-hom-arrow f g α α' β a))
 
   left-unit-law-concat-htpy-hom-arrow :
     htpy-htpy-hom-arrow f g α α'
@@ -244,5 +239,4 @@ Id
     htpy-codomain-left-unit-law-concat-htpy-hom-arrow
   pr2 (pr2 left-unit-law-concat-htpy-hom-arrow) =
     coh-left-unit-law-concat-htpy-hom-arrow
-
 ```
