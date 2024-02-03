@@ -281,7 +281,21 @@ module _
       ( comp-functor-Precategory C D E H G)
   whiskering-functor-natural-transformation-Precategory F G H α =
     ( λ x → (pr1 (pr2 H)) ((pr1 α) x)) ,
-    ( λ f → ({!   !} ∙ ap (pr1 (pr2 H)) ((pr2 α) f)) ∙ {!   !})
+    ( λ {x} {y} → λ f →
+      inv
+        ( preserves-comp-functor-Precategory
+          ( D)
+          ( E)
+          ( H)
+          ( (pr1 (pr2 G)) f)
+          ( (pr1 α) x)) ∙
+      ( ap (pr1 (pr2 H)) ((pr2 α) f)) ∙
+      ( preserves-comp-functor-Precategory
+        ( D)
+        ( E)
+        ( H)
+        ( (pr1 α) y)
+        ( (pr1 (pr2 F)) f)))
 
   whiskering-natural-transformation-functor-Precategory :
     (F G : functor-Precategory C D)
