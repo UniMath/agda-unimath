@@ -227,6 +227,43 @@ module _
   pr2 refl-htpy-lifting-square = coh-refl-htpy-lifting-square
 ```
 
+### Trivial lifting squares
+
+The diagram
+
+```text
+  A         X
+  |       ^ |
+ f|   j  /  |g
+  |    /    |
+  V  /      V
+  B         Y
+```
+
+gives rise to a lifting square
+
+```text
+       j ∘ f
+    A ------> X
+    |        ∧ |
+  f |   j  /   | g
+    |    /     |
+    ∨  /       ∨
+    B -------> Y
+       g ∘ j
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-lifting-square-hom-arrow-map :
+    (j : B → X) → is-lifting-square f g (hom-arrow-map f g j) j
+  is-lifting-square-hom-arrow-map j = refl-htpy-hom-arrow f g (hom-arrow-map f g j)
+```
+
 ## Properties
 
 ### Characterization of identifications of lifting squares
@@ -266,62 +303,4 @@ module _
   eq-htpy-lifting-square :
     (k : lifting-square f g α) → htpy-lifting-square f g α l k → l ＝ k
   eq-htpy-lifting-square k = map-inv-equiv (extensionality-lifting-square k)
-```
-
-### Diagonal maps give lifting squares
-
-The diagram
-
-```text
-  A         X
-  |       ^ |
- f|   j  /  |g
-  |    /    |
-  V  /      V
-  B         Y
-```
-
-gives rise to a lifting square
-
-```text
-     j ∘ f
-  A ------> X
-  |       ^ |
- f|   j  /  |g
-  |    /    |
-  V  /      V
-  B ------> Y
-     g ∘ j
-```
-
-```text
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  where
-
-  is-lifting-square-diagonal :
-    (j : B → X) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
-  pr1 (is-lifting-square-diagonal j) = refl-htpy
-  pr1 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
-  pr2 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
-```
-
-### The lifting square associated to a fibered map
-
-```text
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
-  (f : A → X) (g : B → Y)
-  where
-
-  lifting-square-fibered-map :
-    (h : fibered-map f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  lifting-square-fibered-map h =
-    lifting-square
-      ( map-total-fibered-map f g h)
-      ( f)
-      ( g)
-      ( map-base-fibered-map f g h)
-      ( is-map-over-map-total-fibered-map f g h)
 ```
