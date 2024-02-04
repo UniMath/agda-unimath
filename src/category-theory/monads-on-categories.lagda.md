@@ -8,8 +8,8 @@ module category-theory.monads-on-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.precategories
 open import category-theory.monads-on-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 ```

@@ -260,7 +260,19 @@ module _
       ( map-functor-Precategory C D I)
 ```
 
-## Whiskering and horizontal composition
+## Whiskering
+
+If `α : F ⇒ G` is a natural transformations between functors `F, G : C → D`, and
+`H : D → E` is another functor, we can form the natural transformation
+`H • α : H ∘ F ⇒ H ∘ G`. Its component at `x` is `(H • α)(x) = H(α(x))`.
+
+On the other hand, if we have a functor `K : B → C`, we can form a natural
+transformation `α • K : F ∘ K ⇒ G ∘ K`. Its component at `x` is
+`(α • K)(x) = α(K(x))`.
+
+Here, `•` denotes _whiskering_. Note that there are two kinds of whiskering,
+depending on whether the first or the second parameter expects a natural
+transformation.
 
 ```agda
 module _
@@ -309,6 +321,14 @@ module _
   whiskering-natural-transformation-functor-Precategory F G α K =
     (λ x → (pr1 α) ((pr1 K) x)) , (λ f → (pr2 α) ((pr1 (pr2 K)) f))
 ```
+
+## Horizontal composition
+
+Horizontal composition (here denoted by `*`) is generalized whiskering (here
+denoted by `•`), and also defined by it. Given natural transformations
+`α : F ⇒ G`, `F, G : C → D`, and `β : H ⇒ I`, `H, I : D → E`, we can form a
+natural transformation `β * α : H ∘ F ⇒ I ∘ G`. Its componentat at `x` is
+`(β * α)(x) = (β • G)(x) ∘ (H • α)(x)`.
 
 ```agda
 module _

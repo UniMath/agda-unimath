@@ -20,6 +20,22 @@ open import foundation-core.cartesian-product-types
 
 </details>
 
+## Idea
+
+A monad on a precategory `C` consists of an endofunctor `T : C → C` together
+with two natural transformations: `η : 1_C ⇒ T` and `μ : T² ⇒ T` (where
+`1_C : C → C` is the identity functor for `C`, and `T²` is the functor
+`T ∘ T : C → C`).
+
+These must fulfill the _coherence conditions_:
+
+- `μ ∘ (T • μ) = μ ∘ (μ • T)`, and
+- `μ ∘ (T • η) = μ ∘ (η • T) = 1_T`.
+
+Here, `•` denotes
+[whiskering](category-theory.natural-transformations-functors-precategories.md#whiskering),
+and `1_T : T ⇒ T` denotes the identity natural transformation for `T`.
+
 ## Definitions
 
 ### The type of monads on precategories
