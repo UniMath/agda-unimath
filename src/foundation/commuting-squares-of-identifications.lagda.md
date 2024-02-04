@@ -759,22 +759,23 @@ module _
       ( inv right-unit))
 
   right-whisker-concat-coherence-square-identifications :
-    {u : A} (p : w ＝ u) →
     coherence-square-identifications top left right bottom →
+    {u : A} (p : w ＝ u) →
     coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
-  right-whisker-concat-coherence-square-identifications refl =
-    ( concat-bottom-identification-coherence-square-identifications
+  right-whisker-concat-coherence-square-identifications s refl =
+    concat-bottom-identification-coherence-square-identifications
       ( top)
       ( left)
       ( right ∙ refl)
       ( bottom)
-      ( inv right-unit)) ∘
-    ( concat-right-identification-coherence-square-identifications
-      ( top)
-      ( left)
-      ( right)
-      ( bottom)
-      ( inv right-unit))
+      ( inv right-unit)
+      ( concat-right-identification-coherence-square-identifications
+        ( top)
+        ( left)
+        ( right)
+        ( bottom)
+        ( inv right-unit)
+        ( s))
 
   right-unwhisker-cohernece-square-identifications :
     {u : A} (p : w ＝ u) →
@@ -975,8 +976,8 @@ module _
       ( left)
       ( middle)
       ( bottom-left)
-      ( bottom-right)
-      ( s)) ∙
+      ( s)
+      ( bottom-right)) ∙
     ( ( inv (assoc top-left middle bottom-right)) ∙
       ( left-whisker-concat-coherence-square-identifications
         ( top-left)
@@ -1036,15 +1037,13 @@ module _
         ( top-left)
         ( top-right)
         ( middle)
-        ( bottom-right)
-        ( p)))
+        ( p)
+        ( bottom-right)))
 ```
 
 ## Properties
 
-### Unit law for horizontal pasting of identifications
-
-in a type `A`.
+### Left unit law for horizontal pasting of commuting squares of identifications
 
 ```agda
 module _
@@ -1067,6 +1066,85 @@ module _
     s
   left-unit-law-horizontal-pasting-coherence-square-identifications
     refl refl right refl s = refl
+```
+
+### Right unit law for horizontal pasting of commuting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  where
+
+  right-unit-law-horizontal-pasting-coherence-square-identifications :
+    (top : a ＝ b) (left : a ＝ c) (right : b ＝ d) (bottom : c ＝ d)
+    (s :  coherence-square-identifications top left right bottom) →
+    horizontal-pasting-coherence-square-identifications
+      ( top)
+      ( refl)
+      ( left)
+      ( right)
+      ( right)
+      ( bottom)
+      ( refl)
+      ( s)
+      ( horizontal-refl-coherence-square-identifications right) ∙
+    right-whisker-concat right-unit right ＝
+    left-whisker-concat left right-unit ∙ s
+  right-unit-law-horizontal-pasting-coherence-square-identifications
+    refl refl .refl refl refl =
+    refl
+```
+
+### Left unit law for vertical pasting of commuting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  where
+
+  left-unit-law-vertical-pasting-coherence-square-identifications :
+    (top : a ＝ b) (left : a ＝ c) (right : b ＝ d) (bottom : c ＝ d)
+    (s : coherence-square-identifications top left right bottom) →
+    vertical-pasting-coherence-square-identifications
+      ( top)
+      ( refl)
+      ( refl)
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( vertical-refl-coherence-square-identifications top)
+      ( s) ＝
+    s
+  left-unit-law-vertical-pasting-coherence-square-identifications
+    refl refl .refl refl refl = refl
+```
+
+### Right unit law for vertical pasting of commuting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  where
+
+  right-unit-law-vertical-pasting-coherence-square-identifications :
+    (top : a ＝ b) (left : a ＝ c) (right : b ＝ d) (bottom : c ＝ d)
+    (s : coherence-square-identifications top left right bottom) →
+    vertical-pasting-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( refl)
+      ( refl)
+      ( bottom)
+      ( s)
+      ( vertical-refl-coherence-square-identifications bottom) ∙
+    left-whisker-concat top right-unit ＝
+    right-whisker-concat right-unit bottom ∙ s
+  right-unit-law-vertical-pasting-coherence-square-identifications
+    refl refl .(refl ∙ refl) refl refl =
+    refl
 ```
 
 ### Computing the right whiskering of a vertically constant square with an identification
@@ -1102,8 +1180,9 @@ module _
 
   right-whisker-concat-vertical-refl-coherence-square-identifications :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
-    right-whisker-concat-coherence-square-identifications p refl refl p q
-      ( vertical-refl-coherence-square-identifications p) ＝
+    right-whisker-concat-coherence-square-identifications p refl refl p
+      ( vertical-refl-coherence-square-identifications p)
+      ( q) ＝
     refl
   right-whisker-concat-vertical-refl-coherence-square-identifications
     refl refl =
@@ -1143,8 +1222,9 @@ module _
 
   right-whisker-concat-horizontal-refl-coherence-square-identifications :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
-    right-whisker-concat-coherence-square-identifications refl p p refl q
-      ( horizontal-refl-coherence-square-identifications p) ＝
+    right-whisker-concat-coherence-square-identifications refl p p refl
+      ( horizontal-refl-coherence-square-identifications p)
+      ( q) ＝
     refl
   right-whisker-concat-horizontal-refl-coherence-square-identifications
     refl refl =
@@ -1329,4 +1409,249 @@ module _
   left-whisker-concat-horizontal-pasting-coherence-square-identifications
     refl top-left top-right left middle right bottom-left bottom-right l r =
     inv right-unit 
+```
+
+### Left whiskering vertical concatenations of squares with identifications
+
+Consider two squares of identifications as in the diagram
+
+```text
+                  top
+              a --------> b
+              |           |
+     top-left |           | top-right
+              ∨  middle   ∨
+              c --------> d
+              |           |
+  bottom-left |           | bottom-right
+              ∨           ∨
+              e --------> f
+                 bottom
+```
+
+and consider an identification `p : x ＝ a`. Then the left whiskering of `p` with the vertical pasting of the two squares above is up to associativity the vertical pasting of the squares
+
+```text
+                  p ∙ top
+               x --------> b
+               |           |
+  p ∙ top-left |           | top-right
+               ∨  middle   ∨
+               c --------> d
+               |           |
+   bottom-left |           | bottom-right
+               ∨           ∨
+               e --------> f.
+                  bottom
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  left-whisker-concat-vertical-concat-coherence-square-identifications :
+    {x a b c d e f : A} (p : x ＝ a) →
+    (top : a ＝ b) (top-left : a ＝ c) (top-right : b ＝ d) (middle : c ＝ d)
+    (bottom-left : c ＝ e) (bottom-right : d ＝ f) (bottom : e ＝ f)
+    (t : coherence-square-identifications top top-left top-right middle) →
+    (b :
+      coherence-square-identifications middle bottom-left bottom-right bottom) →
+    right-whisker-concat (assoc p top-left bottom-left) bottom ∙
+    left-whisker-concat-coherence-square-identifications p
+      ( top)
+      ( top-left ∙ bottom-left)
+      ( top-right ∙ bottom-right)
+      ( bottom)
+      ( vertical-pasting-coherence-square-identifications
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( t)
+        ( b)) ＝
+    vertical-pasting-coherence-square-identifications
+      ( p ∙ top)
+      ( p ∙ top-left)
+      ( top-right)
+      ( middle)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom)
+      ( left-whisker-concat-coherence-square-identifications p
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( t))
+      ( b)
+  left-whisker-concat-vertical-concat-coherence-square-identifications
+    refl top top-left top-right middle bottom-left bottom-right bottom t b =
+    refl
+```
+
+### Right whiskering horizontal pastings of commuting squares of identifications
+
+Consider a commuting diagram of identifications of the form
+
+```text
+            top-left        top-right
+       a -------------> c -------------> e
+       |                |                |
+  left |                | middle         | right
+       ∨                ∨                ∨
+       b -------------> d -------------> f
+          bottom-left      bottom-right
+```
+
+and consider an identification `q : f ＝ y`. Then the right whiskering of the horizontal pasting of the squares above is up to associativity the horizontal pasting of the squares
+
+```text
+            top-left           top-right
+       a -------------> c ------------------> e
+       |                |                     |
+  left |                | middle              | right ∙ q
+       ∨                ∨                     ∨
+       b -------------> d ------------------> y
+          bottom-left      bottom-right ∙ q
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  right-whisker-concat-horizontal-pasting-coherence-square-identifications :
+    {a b c d e f y : A}
+    (top-left : a ＝ c) (top-right : c ＝ e)
+    (left : a ＝ b) (middle : c ＝ d) (right : e ＝ f)
+    (bottom-left : b ＝ d) (bottom-right : d ＝ f)
+    (l : coherence-square-identifications top-left left middle bottom-left) →
+    (r : coherence-square-identifications top-right middle right bottom-right) →
+    (q : f ＝ y) →
+    right-whisker-concat-coherence-square-identifications
+      ( top-left ∙ top-right)
+      ( left)
+      ( right)
+      ( bottom-left ∙ bottom-right)
+      ( horizontal-pasting-coherence-square-identifications
+        ( top-left)
+        ( top-right)
+        ( left)
+        ( middle)
+        ( right)
+        ( bottom-left)
+        ( bottom-right)
+        ( l)
+        ( r))
+      ( q) ＝
+    left-whisker-concat left (assoc bottom-left bottom-right q) ∙
+    horizontal-pasting-coherence-square-identifications
+      ( top-left)
+      ( top-right)
+      ( left)
+      ( middle)
+      ( right ∙ q)
+      ( bottom-left)
+      ( bottom-right ∙ q)
+      ( l)
+      ( right-whisker-concat-coherence-square-identifications
+        ( top-right)
+        ( middle)
+        ( right)
+        ( bottom-right)
+        ( r)
+        ( q))
+  right-whisker-concat-horizontal-pasting-coherence-square-identifications
+    refl refl refl .refl .refl refl refl refl refl refl =
+    refl
+```
+
+ ### Right whiskering vertical concatenations of squares with identifications
+
+Consider two squares of identifications as in the diagram
+
+```text
+                  top
+              a --------> b
+              |           |
+     top-left |           | top-right
+              ∨  middle   ∨
+              c --------> d
+              |           |
+  bottom-left |           | bottom-right
+              ∨           ∨
+              e --------> f
+                 bottom
+```
+
+and consider an identification `q : f ＝ y`. Then the right whiskering of the vertical pasting of the two squares above with `q` is up to associativity the vertical pasting of the squares
+
+```text
+                     top
+              a ------------> b
+              |               |
+     top-left |               | top-right
+              ∨    middle     ∨
+              c ------------> d
+              |               |
+  bottom-left |               | bottom-right ∙ q
+              ∨               ∨
+              e ------------> y.
+                 bottom ∙ q
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  right-whisker-concat-vertical-pasting-coherence-square-identifications :
+    {a b c d e f y : A}
+    (top : a ＝ b) (top-left : a ＝ c) (top-right : b ＝ d)
+    (middle : c ＝ d)
+    (bottom-left : c ＝ e) (bottom-right : d ＝ f) (bottom : e ＝ f)
+    (t : coherence-square-identifications top top-left top-right middle) →
+    (b :
+      coherence-square-identifications middle bottom-left bottom-right bottom) →
+    (q : f ＝ y) →
+    right-whisker-concat-coherence-square-identifications
+      ( top)
+      ( top-left ∙ bottom-left)
+      ( top-right ∙ bottom-right)
+      ( bottom)
+      ( vertical-pasting-coherence-square-identifications
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( t)
+        ( b))
+      ( q)∙
+    left-whisker-concat top (assoc top-right bottom-right q) ＝
+    vertical-pasting-coherence-square-identifications
+      ( top)
+      ( top-left)
+      ( top-right)
+      ( middle)
+      ( bottom-left)
+      ( bottom-right ∙ q)
+      ( bottom ∙ q)
+      ( t)
+      ( right-whisker-concat-coherence-square-identifications
+        ( middle)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( b)
+        ( q))
+  right-whisker-concat-vertical-pasting-coherence-square-identifications
+    refl refl .refl refl refl .refl refl refl refl refl =
+    refl
 ```

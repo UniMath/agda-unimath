@@ -269,7 +269,8 @@ module _
       ( β)
       ( htpy-domain-right-unit-law-concat-htpy-hom-arrow)
       ( htpy-codomain-right-unit-law-concat-htpy-hom-arrow)
-  coh-right-unit-law-concat-htpy-hom-arrow a = {!!}
+  coh-right-unit-law-concat-htpy-hom-arrow a =
+    {!!}
 
 {-
 Id
@@ -294,13 +295,39 @@ Id
 {-
     coherence-square-homotopies
       ( left-whisker-concat-htpy
-        ( coh-hom-arrow f g α)
+        ( α₂)
         ( left-whisker-comp² g right-unit-htpy))
       ( coh-concat-htpy-hom-arrow f g α α' α' β (refl-htpy-hom-arrow f g α'))
-      ( coh-htpy-hom-arrow f g α α' β)
+      ( β₂)
       ( right-whisker-concat-htpy
         ( right-whisker-comp² right-unit-htpy f)
-        ( coh-hom-arrow f g α'))
+        ( α₂'))
+
+where
+
+  ( ( left-whisker-concat
+      ( α₂ a)
+      ( ap-concat g
+        ( β₀ a)
+        ( refl))) ∙
+    ( horizontal-pasting-coherence-square-identifications
+      ( β₁ (f a))
+      ( refl)
+      ( α₂ a)
+      ( α'₂ a)
+      ( α'₂ a)
+      ( (g ·l β₀) a)
+      ( refl)
+      ( β₂ a)
+      ( right-unit))) ∙
+  ( right-whisker-concat-htpy
+    ( right-whisker-comp² right-unit-htpy f)
+    ( α₂')
+    ( a)) ＝
+  ( left-whisker-concat-htpy
+    ( α₂)
+    ( left-whisker-comp² g right-unit-htpy)) ∙
+  ( β₂ a)
 -}
 
   right-unit-law-concat-htpy-hom-arrow :

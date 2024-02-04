@@ -220,8 +220,8 @@ module _
       ( htpy-domain-inv-htpy-hom-arrow)
       ( htpy-codomain-inv-htpy-hom-arrow)
   coh-inv-htpy-hom-arrow a =
-    ( ap
-      ( concat (coh-hom-arrow f g β a) _)
+    ( left-whisker-concat
+      ( coh-hom-arrow f g β a)
       ( ap-inv g (htpy-domain-htpy-hom-arrow f g α β H a))) ∙
     ( double-transpose-eq-concat'
       ( coh-hom-arrow f g α a)
@@ -289,7 +289,6 @@ module _
       ( ap
         ( map-codomain-hom-arrow g h γ ∘ g)
         ( htpy-domain-htpy-hom-arrow f g α β H a))
-      ( coh-hom-arrow g h γ (map-domain-hom-arrow f g β a))
       ( ( ap
           ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a) ∙_)
           ( ap-comp
@@ -302,7 +301,8 @@ module _
           ( coh-hom-arrow f g α a)
           ( coh-hom-arrow f g β a)
           ( ap g (htpy-domain-htpy-hom-arrow f g α β H a))
-          ( coh-htpy-hom-arrow f g α β H a))))
+          ( coh-htpy-hom-arrow f g α β H a)))
+      ( coh-hom-arrow g h γ (map-domain-hom-arrow f g β a)))
 
   left-whisker-comp-hom-arrow :
     htpy-hom-arrow f h
@@ -366,11 +366,11 @@ module _
         ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
         ( htpy-codomain-htpy-hom-arrow g h β γ H
           ( g (map-domain-hom-arrow f g α a)))
-        ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a))
         ( inv
           ( nat-htpy
             ( htpy-codomain-htpy-hom-arrow g h β γ H)
-            ( coh-hom-arrow f g α a)))))
+            ( coh-hom-arrow f g α a)))
+        ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a))))
 
   right-whisker-comp-hom-arrow :
     htpy-hom-arrow f h

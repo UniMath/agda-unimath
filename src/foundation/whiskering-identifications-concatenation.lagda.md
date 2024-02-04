@@ -81,6 +81,21 @@ module _
   right-whisker-concat α q = ap (_∙ q) α
 ```
 
+### Double whiskering of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  {a b c d : A} (p : a ＝ b) {r s : b ＝ c} (t : r ＝ s) (q : c ＝ d)
+  where
+
+  double-whisker-concat : (p ∙ r) ∙ q ＝ (p ∙ s) ∙ q
+  double-whisker-concat = right-whisker-concat (left-whisker-concat p t) q
+
+  double-whisker-concat' : p ∙ (r ∙ q) ＝ p ∙ (s ∙ q)
+  double-whisker-concat' = left-whisker-concat p (right-whisker-concat t q)
+```
+
 ## Properties
 
 ### Left whiskering of identifications is an equivalence
@@ -225,6 +240,43 @@ module _
     commutative-left-whisker-right-whisker-concat β α
   compute-inv-commutative-left-whisker-right-whisker-concat refl refl =
     refl
+```
+
+### Swapping the order of left and right whiskering of identifications
+
+Consider a diagram of identifications
+
+```text
+               r
+      p      ----->     q
+  a -----> b -----> c ----->
+               s
+```
+
+with `t : r ＝ s`. Then the square of identifications
+
+```text
+                               assoc p r q
+                  (p ∙ r) ∙ q -------------> p ∙ (r ∙ q)
+                       |                          |
+  double-whisker p t q |                          | double-whisker' p t q
+                       ∨                          ∨
+                  (p ∙ s) ∙ q -------------> p ∙ (s ∙ q)
+                               assoc p s q
+```
+
+commutes.
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  swap-double-whisker-concat :
+    {a b c d : A} (p : a ＝ b) {r s : b ＝ c} (t : r ＝ s) (q : c ＝ d) →
+    double-whisker-concat p t q ∙ assoc p s q ＝
+    assoc p r q ∙ double-whisker-concat' p t q
+  swap-double-whisker-concat refl refl refl = refl
 ```
 
 ### The action on identifications of concatenating by `refl` on the right
