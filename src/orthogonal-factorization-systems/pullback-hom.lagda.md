@@ -114,6 +114,19 @@ pushout-product:
 
 ### The pullback-hom
 
+The pullback-hom `f ⋔ g` is the map `(B → X) → hom-arrow f g`, that takes a
+diagonal map `j` from the codomain of `f` to the domain of `g` to the morphism of arrows
+
+```text
+         j ∘ f
+    A ----------> X
+    |             |
+  f |  refl-htpy  | g
+    ∨             ∨
+    B ----------> Y.
+         g ∘ j
+```
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : UU l3} {Y : UU l4}
@@ -153,24 +166,24 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  left-projection-pullback-hom : hom-arrow f g → B → Y
-  left-projection-pullback-hom = map-codomain-hom-arrow f g
+  left-projection-hom-arrow-pullback-hom : hom-arrow f g → B → Y
+  left-projection-hom-arrow-pullback-hom = map-codomain-hom-arrow f g
 
-  right-projection-pullback-hom : hom-arrow f g → A → X
-  right-projection-pullback-hom = map-domain-hom-arrow f g
+  right-projection-hom-arrow-pullback-hom : hom-arrow f g → A → X
+  right-projection-hom-arrow-pullback-hom = map-domain-hom-arrow f g
 
-  coherence-square-cone-pullback-hom :
+  coherence-square-cone-hom-arrow-pullback-hom :
     coherence-square-maps
-      ( right-projection-pullback-hom)
-      ( left-projection-pullback-hom)
+      ( right-projection-hom-arrow-pullback-hom)
+      ( left-projection-hom-arrow-pullback-hom)
       ( postcomp A g)
       ( precomp f Y)
-  coherence-square-cone-pullback-hom h = eq-htpy (coh-hom-arrow f g h)
+  coherence-square-cone-hom-arrow-pullback-hom h = eq-htpy (coh-hom-arrow f g h)
 
-  cone-pullback-hom : cone (precomp f Y) (postcomp A g) (hom-arrow f g)
-  pr1 cone-pullback-hom = left-projection-pullback-hom
-  pr1 (pr2 cone-pullback-hom) = right-projection-pullback-hom
-  pr2 (pr2 cone-pullback-hom) = coherence-square-cone-pullback-hom
+  cone-hom-arrow-pullback-hom : cone (precomp f Y) (postcomp A g) (hom-arrow f g)
+  pr1 cone-hom-arrow-pullback-hom = left-projection-hom-arrow-pullback-hom
+  pr1 (pr2 cone-hom-arrow-pullback-hom) = right-projection-hom-arrow-pullback-hom
+  pr2 (pr2 cone-hom-arrow-pullback-hom) = coherence-square-cone-hom-arrow-pullback-hom
 ```
 
 ### The standard pullback of the defining cospan of the pullback-hom
@@ -204,6 +217,23 @@ module _
       precomp f Y map-codomain-standard-pullback-hom ~
       postcomp A g map-domain-standard-pullback-hom
     coh-standard-pullback-hom = htpy-eq eq-coh-standard-pullback-hom
+```
+
+### The cone of the diagram defining the pullback-hom
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  cone-pullback-hom : cone (precomp f Y) (postcomp A g) (B → X)
+  pr1 cone-pullback-hom = postcomp B g
+  pr1 (pr2 cone-pullback-hom) = precomp f X
+  pr2 (pr2 cone-pullback-hom) = refl-htpy
+
+  gap-cone-pullback-hom : (B → X) → type-standard-pullback-hom f g
+  gap-cone-pullback-hom = gap (precomp f Y) (postcomp A g) cone-pullback-hom
 ```
 
 ### The equivalence of the codomain of the pullback-hom with the standard pullback
@@ -294,13 +324,9 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  gap-standard-pullback-hom : (B → X) → type-standard-pullback-hom f g
-  gap-standard-pullback-hom =
-    gap (precomp f Y) (postcomp A g) (postcomp B g , precomp f X , refl-htpy)
-
   triangle-pullback-hom :
     coherence-triangle-maps'
-      ( gap-standard-pullback-hom)
+      ( gap-cone-pullback-hom f g)
       ( map-compute-pullback-hom f g)
       ( pullback-hom f g)
   triangle-pullback-hom j =
@@ -349,22 +375,22 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  is-pullback-cone-pullback-hom :
-    is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom f g)
-  is-pullback-cone-pullback-hom =
+  is-pullback-cone-hom-arrow-pullback-hom :
+    is-pullback (precomp f Y) (postcomp A g) (cone-hom-arrow-pullback-hom f g)
+  is-pullback-cone-hom-arrow-pullback-hom =
     is-equiv-map-compute-pullback-hom f g
 
-  universal-property-pullback-cone-pullback-hom :
+  universal-property-pullback-cone-hom-arrow-pullback-hom :
     universal-property-pullback
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom f g)
-  universal-property-pullback-cone-pullback-hom =
+      ( cone-hom-arrow-pullback-hom f g)
+  universal-property-pullback-cone-hom-arrow-pullback-hom =
     universal-property-pullback-is-pullback
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom f g)
-      ( is-pullback-cone-pullback-hom)
+      ( cone-hom-arrow-pullback-hom f g)
+      ( is-pullback-cone-hom-arrow-pullback-hom)
 ```
 
 ### The action on homotopies at `refl-htpy` is the reflexivity homotopy of morphisms of arrows

@@ -15,8 +15,9 @@ open import foundation.commuting-triangles-of-homotopies
 open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibered-maps
+open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.higher-homotopies-morphisms-arrows
 open import foundation.homotopies
@@ -27,6 +28,7 @@ open import foundation.morphisms-arrows
 open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
@@ -266,6 +268,27 @@ module _
 
 ## Properties
 
+### The types of lifting squares are equivalent to the fibers of the pullback-hom
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
+  where
+
+  inv-compute-fiber-pullback-hom :
+    fiber (pullback-hom f g) h ≃ lifting-square f g h
+  inv-compute-fiber-pullback-hom =
+    equiv-tot
+      ( λ j →
+        extensionality-hom-arrow f g _ _ ∘e
+        equiv-inv (pullback-hom f g j) h)
+
+  compute-fiber-pullback-hom :
+    lifting-square f g h ≃ fiber (pullback-hom f g) h
+  compute-fiber-pullback-hom = inv-equiv inv-compute-fiber-pullback-hom
+```
+
 ### Characterization of identifications of lifting squares
 
 ```agda
@@ -303,45 +326,4 @@ module _
   eq-htpy-lifting-square :
     (k : lifting-square f g α) → htpy-lifting-square f g α l k → l ＝ k
   eq-htpy-lifting-square k = map-inv-equiv (extensionality-lifting-square k)
-```
-
-### The fibers of the pullback-hom-old
-
-```text
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (h : hom-arrow f g)
-  where
-
-  inv-compute-fiber-pullback-hom-old :
-    fiber (pullback-hom-old f g) h ≃ lifting-square f g h
-  inv-compute-fiber-pullback-hom-old =
-    equiv-tot
-      ( λ j →
-        ( equiv-Σ _
-          ( equiv-inv-htpy (j ∘ f) (map-domain-hom-arrow f g h))
-          ( λ E →
-            equiv-Σ _
-              ( equiv-inv-htpy (g ∘ j) (map-codomain-hom-arrow f g h))
-              ( λ L →
-                ( equiv-concat-htpy'
-                  ( inv-htpy L ·r f)
-                  ( λ x →
-                    ap
-                      ( coh-hom-arrow f g h x ∙_)
-                      ( inv-htpy (left-whisker-inv-htpy g E) x))) ∘e
-                ( equiv-right-transpose-htpy-concat
-                  ( inv-htpy (L ·r f))
-                  ( g ·l E)
-                  ( coh-hom-arrow f g h)) ∘e
-                ( equiv-left-transpose-htpy-concat'
-                  ( g ·l E)
-                  ( L ·r f)
-                  ( coh-hom-arrow f g h))))) ∘e
-        ( equiv-left-swap-Σ) ∘e
-        ( extensionality-hom-arrow f g (pullback-hom-old f g j) h))
-
-  compute-fiber-pullback-hom-old :
-    lifting-square f g h ≃ fiber (pullback-hom-old f g) h
-  compute-fiber-pullback-hom-old = inv-equiv inv-compute-fiber-pullback-hom-old
 ```
