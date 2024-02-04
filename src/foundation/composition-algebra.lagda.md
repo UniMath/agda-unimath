@@ -14,11 +14,11 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

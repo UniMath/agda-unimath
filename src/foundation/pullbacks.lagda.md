@@ -27,6 +27,7 @@ open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.cartesian-product-types
@@ -43,7 +44,6 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

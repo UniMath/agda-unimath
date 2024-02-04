@@ -75,7 +75,7 @@ ap-refl f x = refl
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-    
+
   ap-concat :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f (p ∙ q) ＝ ap f p ∙ ap f q
   ap-concat refl q = refl

@@ -17,6 +17,7 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
@@ -33,7 +34,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

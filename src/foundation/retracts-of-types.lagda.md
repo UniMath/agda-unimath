@@ -10,13 +10,13 @@ module foundation.retracts-of-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-extensionality
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

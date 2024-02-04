@@ -372,7 +372,9 @@ module _
 
 ### Splicing and unsplicing concatenations of identifications
 
-Consider two identifications `p : a ＝ b` and `q : b ＝ c`, and consider two further identifications `r : b ＝ x` and `s : x ＝ b` equipped with an identification `inv r ＝ s`, as indicated in the diagram
+Consider two identifications `p : a ＝ b` and `q : b ＝ c`, and consider two
+further identifications `r : b ＝ x` and `s : x ＝ b` equipped with an
+identification `inv r ＝ s`, as indicated in the diagram
 
 ```text
            x

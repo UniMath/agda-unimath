@@ -64,7 +64,8 @@ module _
 
 ### Right whiskering of identifications
 
-Right whiskering of identifications with respect to concatenation is an operation
+Right whiskering of identifications with respect to concatenation is an
+operation
 
 ```text
   {p q : x ＝ y} → p ＝ q → (r : y ＝ z) → p ∙ r ＝ q ∙ r
@@ -156,7 +157,8 @@ module _
 
 ### The unit and absorption laws for right whiskering of identifications
 
-The right unit law for right whiskering of identifications with respect to concatenation asserts that the square of identifications
+The right unit law for right whiskering of identifications with respect to
+concatenation asserts that the square of identifications
 
 ```text
                      right-whisker-concat α refl
@@ -167,7 +169,9 @@ The right unit law for right whiskering of identifications with respect to conca
              p -------------------------------------> p'
 ```
 
-commutes for any `α : p ＝ p'`. Note that this law is slightly more complicated, since concatenating with `refl` on the right does not compute to the identity function.
+commutes for any `α : p ＝ p'`. Note that this law is slightly more complicated,
+since concatenating with `refl` on the right does not compute to the identity
+function.
 
 ```agda
 module _

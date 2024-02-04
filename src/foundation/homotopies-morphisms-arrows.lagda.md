@@ -18,6 +18,7 @@ open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-squares-of-homotopies
@@ -29,7 +30,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.torsorial-type-families
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

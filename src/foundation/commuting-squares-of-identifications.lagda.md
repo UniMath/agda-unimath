@@ -706,7 +706,8 @@ module _
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom →
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  left-whisker-concat-coherence-square-identifications refl top left right bottom =
+  left-whisker-concat-coherence-square-identifications
+    refl top left right bottom =
     id
 
   left-unwhisker-concat-coherence-square-identifications :
@@ -714,7 +715,8 @@ module _
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom →
     coherence-square-identifications top left right bottom
-  left-unwhisker-concat-coherence-square-identifications refl top left right bottom =
+  left-unwhisker-concat-coherence-square-identifications
+    refl top left right bottom =
     id
 ```
 
@@ -937,7 +939,12 @@ module _
     equiv-left-whisker-concat-coherence-square-identifications p top left
       ( right ∙ q)
       ( bottom ∙ q) ∘e
-    equiv-right-whisker-concat-coherence-square-identifications top left right bottom q
+    equiv-right-whisker-concat-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( q)
 ```
 
 ### Horizontally pasting squares of identifications
@@ -1077,7 +1084,7 @@ module _
 
   right-unit-law-horizontal-pasting-coherence-square-identifications :
     (top : a ＝ b) (left : a ＝ c) (right : b ＝ d) (bottom : c ＝ d)
-    (s :  coherence-square-identifications top left right bottom) →
+    (s : coherence-square-identifications top left right bottom) →
     horizontal-pasting-coherence-square-identifications
       ( top)
       ( refl)
@@ -1161,7 +1168,9 @@ Consider the vertically constant square of identifications
            p
 ```
 
-at an identification `p : x ＝ y`, and consider an identification `q : y ＝ z`. Then the right whiskering of the above square with `q` is the commuting square of identifications
+at an identification `p : x ＝ y`, and consider an identification `q : y ＝ z`.
+Then the right whiskering of the above square with `q` is the commuting square
+of identifications
 
 ```text
             p
@@ -1203,7 +1212,8 @@ Consider a horizontally constant commuting square of identifications
        refl
 ```
 
-at an identification `p` and consider an identification `q : y ＝ z`. Then the right whiskering of the above square with `q` is the square
+at an identification `p` and consider an identification `q : y ＝ z`. Then the
+right whiskering of the above square with `q` is the square
 
 ```text
        refl
@@ -1233,7 +1243,8 @@ module _
 
 ### Computing the left whiskering of a horizontally constant square with an identification
 
-Consider an identification `p : x ＝ y` and a horizontally constant commuting square of identifications
+Consider an identification `p : x ＝ y` and a horizontally constant commuting
+square of identifications
 
 ```text
        refl
@@ -1245,7 +1256,8 @@ Consider an identification `p : x ＝ y` and a horizontally constant commuting s
        refl
 ```
 
-at an identification `q : y ＝ z`. The the left whiskering of the above square with `p` is the commuting square
+at an identification `q : y ＝ z`. The the left whiskering of the above square
+with `p` is the commuting square
 
 ```text
                                   q ∙ refl
@@ -1296,7 +1308,8 @@ Consider the vertically constant square of identifications
            q
 ```
 
-at an identification `q : y ＝ z` and consider an identification `p : x ＝ y`. Then the left whiskering of the above square with `p` is the square
+at an identification `q : y ＝ z` and consider an identification `p : x ＝ y`.
+Then the left whiskering of the above square with `p` is the square
 
 ```text
                                     p ∙ q
@@ -1347,7 +1360,9 @@ Consider a commuting diagram of identifications of the form
           bottom-left      bottom-right
 ```
 
-and consider an identification `p : x ＝ a`. Then the left whiskering of `p` and the horizontal concatenation of coherences of commuting squares is up to associativity the horizontal concatenation of the squares
+and consider an identification `p : x ＝ a`. Then the left whiskering of `p` and
+the horizontal concatenation of coherences of commuting squares is up to
+associativity the horizontal concatenation of the squares
 
 ```text
               p ∙ top-left      top-right
@@ -1359,7 +1374,8 @@ and consider an identification `p : x ＝ a`. Then the left whiskering of `p` an
               bottom-left      bottom-right
 ```
 
-where the left square is the left whiskering of `p` and the original left square.
+where the left square is the left whiskering of `p` and the original left
+square.
 
 ```agda
 module _
@@ -1408,7 +1424,7 @@ module _
       ( right)
   left-whisker-concat-horizontal-pasting-coherence-square-identifications
     refl top-left top-right left middle right bottom-left bottom-right l r =
-    inv right-unit 
+    inv right-unit
 ```
 
 ### Left whiskering vertical concatenations of squares with identifications
@@ -1429,7 +1445,9 @@ Consider two squares of identifications as in the diagram
                  bottom
 ```
 
-and consider an identification `p : x ＝ a`. Then the left whiskering of `p` with the vertical pasting of the two squares above is up to associativity the vertical pasting of the squares
+and consider an identification `p : x ＝ a`. Then the left whiskering of `p`
+with the vertical pasting of the two squares above is up to associativity the
+vertical pasting of the squares
 
 ```text
                   p ∙ top
@@ -1507,7 +1525,9 @@ Consider a commuting diagram of identifications of the form
           bottom-left      bottom-right
 ```
 
-and consider an identification `q : f ＝ y`. Then the right whiskering of the horizontal pasting of the squares above is up to associativity the horizontal pasting of the squares
+and consider an identification `q : f ＝ y`. Then the right whiskering of the
+horizontal pasting of the squares above is up to associativity the horizontal
+pasting of the squares
 
 ```text
             top-left           top-right
@@ -1570,7 +1590,7 @@ module _
     refl
 ```
 
- ### Right whiskering vertical concatenations of squares with identifications
+### Right whiskering vertical concatenations of squares with identifications
 
 Consider two squares of identifications as in the diagram
 
@@ -1588,7 +1608,9 @@ Consider two squares of identifications as in the diagram
                  bottom
 ```
 
-and consider an identification `q : f ＝ y`. Then the right whiskering of the vertical pasting of the two squares above with `q` is up to associativity the vertical pasting of the squares
+and consider an identification `q : f ＝ y`. Then the right whiskering of the
+vertical pasting of the two squares above with `q` is up to associativity the
+vertical pasting of the squares
 
 ```text
                      top
@@ -1633,7 +1655,7 @@ module _
         ( bottom)
         ( t)
         ( b))
-      ( q)∙
+      ( q) ∙
     left-whisker-concat top (assoc top-right bottom-right q) ＝
     vertical-pasting-coherence-square-identifications
       ( top)

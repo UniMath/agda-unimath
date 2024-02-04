@@ -263,7 +263,8 @@ module _
 
   is-lifting-square-pullback-hom :
     (j : B → X) → is-lifting-square f g (pullback-hom f g j) j
-  is-lifting-square-pullback-hom j = refl-htpy-hom-arrow f g (pullback-hom f g j)
+  is-lifting-square-pullback-hom j =
+    refl-htpy-hom-arrow f g (pullback-hom f g j)
 ```
 
 ## Properties

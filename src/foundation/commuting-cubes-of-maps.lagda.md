@@ -14,13 +14,13 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
@@ -432,19 +432,28 @@ module _
         inv-htpy
           ( horizontal-concat-htpy²
             ( horizontal-concat-htpy²
-              ( distributive-precomp-right-whisker-comp-coherence-square-maps W hB
+              ( distributive-precomp-right-whisker-comp-coherence-square-maps
+                ( W)
+                ( hB)
                 ( h')
                 ( h)
                 ( hD)
                 ( inv-htpy front-left)
                 ( f'))
-              ( distributive-precomp-left-whisker-comp-coherence-square-maps W hA
+              ( distributive-precomp-left-whisker-comp-coherence-square-maps
+                ( W)
+                ( hA)
                 ( f')
                 ( f)
                 ( hB)
                 ( inv-htpy back-left)
                 ( h)))
-            ( distributive-precomp-right-whisker-comp-coherence-square-maps W g f k h
+            ( distributive-precomp-right-whisker-comp-coherence-square-maps
+              ( W)
+              ( g)
+              ( f)
+              ( k)
+              ( h)
               ( bottom)
               ( hA)))
       ~ precomp-coherence-square-maps hA
@@ -524,7 +533,11 @@ module _
             ( top)
             ( hD))
           ( horizontal-concat-htpy²
-            ( distributive-precomp-right-whisker-comp-coherence-square-maps W hC k' k
+            ( distributive-precomp-right-whisker-comp-coherence-square-maps
+              ( W)
+              ( hC)
+              ( k')
+              ( k)
               ( hD)
               ( inv-htpy front-right)
               ( g'))

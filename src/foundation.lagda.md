@@ -178,8 +178,11 @@ open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
+open import foundation.higher-homotopies-morphisms-arrows public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
+open import foundation.homotopies-morphisms-arrows public
+open import foundation.homotopy-algebra public
 open import foundation.homotopy-induction public
 open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
@@ -420,6 +423,7 @@ open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public
 open import foundation.whiskering-higher-homotopies-composition public
 open import foundation.whiskering-homotopies-composition public
+open import foundation.whiskering-homotopies-concatenation public
 open import foundation.whiskering-identifications-concatenation public
 open import foundation.whiskering-operations public
 ```

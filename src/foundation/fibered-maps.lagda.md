@@ -17,6 +17,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
@@ -32,7 +33,6 @@ open import foundation-core.small-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

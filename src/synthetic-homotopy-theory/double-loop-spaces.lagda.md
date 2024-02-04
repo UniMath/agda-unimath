@@ -68,7 +68,7 @@ horizontal-concat-Ω² α β = horizontal-concat-Id² α β
 module _
   {l : Level} {A : UU l}
   where
-  
+
   left-unit-law-vertical-concat-Ω² :
     {a : A} {α : type-Ω² a} →
     Id (vertical-concat-Ω² refl-Ω² α) α

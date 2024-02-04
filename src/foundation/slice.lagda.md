@@ -17,6 +17,7 @@ open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
@@ -31,7 +32,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation.whiskering-homotopies-composition
 
 open import trees.polynomial-endofunctors
 ```

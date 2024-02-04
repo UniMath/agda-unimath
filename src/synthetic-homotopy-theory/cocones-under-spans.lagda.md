@@ -15,6 +15,7 @@ open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
@@ -25,7 +26,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

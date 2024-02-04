@@ -214,7 +214,9 @@ maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
         β₁ ∘ α₁
 ```
 
-**Note.** Associativity and the unit laws for composition of morphisms of arrows are proven in [Homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md).
+**Note.** Associativity and the unit laws for composition of morphisms of arrows
+are proven in
+[Homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md).
 
 ```agda
 module _

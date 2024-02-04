@@ -40,7 +40,8 @@ open import foundation.whiskering-homotopies-composition
 
 ## Idea
 
-The {{#concept "pullback-hom" Agda=pullback-hom}} or {{#concept "pullback-power" Agda=pullback-hom}} of two maps `f : A → B` and
+The {{#concept "pullback-hom" Agda=pullback-hom}} or
+{{#concept "pullback-power" Agda=pullback-hom}} of two maps `f : A → B` and
 `g : X → Y`, is the [gap map](foundation.pullbacks.md) of the
 [commuting square](foundation-core.commuting-squares-of-maps.md):
 
@@ -73,7 +74,8 @@ This map takes a map `j : B → X` as in the diagram
     B       Y
 ```
 
-to the [morphism of arrows](foundation.morphisms-arrows.md) from `f` to `g` as in the diagram
+to the [morphism of arrows](foundation.morphisms-arrows.md) from `f` to `g` as
+in the diagram
 
 ```text
          j ∘ f
@@ -85,7 +87,9 @@ to the [morphism of arrows](foundation.morphisms-arrows.md) from `f` to `g` as i
          g ∘ j
 ```
 
-The [fibers](foundation-core.fibers-of-maps.md) of the pullback-hom are [lifting squares](orthogonal-factorization-systems.lifting-squares.md). The pullback-hom is therefore a fundamental operation in the study of
+The [fibers](foundation-core.fibers-of-maps.md) of the pullback-hom are
+[lifting squares](orthogonal-factorization-systems.lifting-squares.md). The
+pullback-hom is therefore a fundamental operation in the study of
 [lifting conditions](orthogonal-factorization-systems.mere-lifting-properties.md)
 and
 [orthogonality conditions](orthogonal-factorization-systems.orthogonal-maps.md):
@@ -108,14 +112,13 @@ pushout-product:
   ⟨f □ g , h⟩ ＝ ⟨f , ⟨g , h⟩⟩.
 ```
 
-## Idea
-
 ## Definitions
 
 ### The pullback-hom
 
 The pullback-hom `f ⋔ g` is the map `(B → X) → hom-arrow f g`, that takes a
-diagonal map `j` from the codomain of `f` to the domain of `g` to the morphism of arrows
+diagonal map `j` from the codomain of `f` to the domain of `g` to the morphism
+of arrows
 
 ```text
          j ∘ f
@@ -180,10 +183,13 @@ module _
       ( precomp f Y)
   coherence-square-cone-hom-arrow-pullback-hom h = eq-htpy (coh-hom-arrow f g h)
 
-  cone-hom-arrow-pullback-hom : cone (precomp f Y) (postcomp A g) (hom-arrow f g)
+  cone-hom-arrow-pullback-hom :
+    cone (precomp f Y) (postcomp A g) (hom-arrow f g)
   pr1 cone-hom-arrow-pullback-hom = left-projection-hom-arrow-pullback-hom
-  pr1 (pr2 cone-hom-arrow-pullback-hom) = right-projection-hom-arrow-pullback-hom
-  pr2 (pr2 cone-hom-arrow-pullback-hom) = coherence-square-cone-hom-arrow-pullback-hom
+  pr1 (pr2 cone-hom-arrow-pullback-hom) =
+    right-projection-hom-arrow-pullback-hom
+  pr2 (pr2 cone-hom-arrow-pullback-hom) =
+    coherence-square-cone-hom-arrow-pullback-hom
 ```
 
 ### The standard pullback of the defining cospan of the pullback-hom
@@ -315,7 +321,8 @@ We construct the homotopy witnessing that the triangle of maps
      hom-arrow f g -----> type-standard-pullback-hom f g
 ```
 
-commutes. The bottom map in this triangle is the underlying map of the equivalence `hom-arrow f g ≃ type-stanard-pullback-hom f g` constructed above.
+commutes. The bottom map in this triangle is the underlying map of the
+equivalence `hom-arrow f g ≃ type-stanard-pullback-hom f g` constructed above.
 
 ```agda
 module _
@@ -451,7 +458,7 @@ module _
   map-codomain-left-whisker-hom-arrow α = h ∘ map-codomain-hom-arrow f g α
 
   coh-left-whisker-hom-arrow :
-    (α : hom-arrow f g) → 
+    (α : hom-arrow f g) →
     coherence-square-maps
       ( map-domain-left-whisker-hom-arrow α)
       ( f)
@@ -491,13 +498,13 @@ module _
       ( map-codomain-right-whisker-hom-arrow α)
   coh-right-whisker-hom-arrow α =
     coh-hom-arrow f g α ·r h
-      
+
   right-whisker-hom-arrow :
     hom-arrow f g → hom-arrow (f ∘ h) g
   pr1 (right-whisker-hom-arrow α) = map-domain-right-whisker-hom-arrow α
   pr1 (pr2 (right-whisker-hom-arrow α)) = map-codomain-right-whisker-hom-arrow α
   pr2 (pr2 (right-whisker-hom-arrow α)) = coh-right-whisker-hom-arrow α
-  
+
   compute-pullback-hom-comp-left :
     coherence-triangle-maps
       ( pullback-hom (f ∘ h) g)

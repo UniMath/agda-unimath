@@ -8,11 +8,11 @@ module foundation-core.commuting-prisms-of-maps where
 
 ```agda
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

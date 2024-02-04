@@ -23,6 +23,7 @@ open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalence-relations
 open import foundation-core.function-extensionality
@@ -32,7 +33,6 @@ open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

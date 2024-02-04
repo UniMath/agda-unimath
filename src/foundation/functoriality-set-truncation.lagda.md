@@ -20,6 +20,7 @@ open import foundation.uniqueness-set-truncations
 open import foundation.universal-property-image
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
@@ -33,7 +34,6 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncation-levels
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

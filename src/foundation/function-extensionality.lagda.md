@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.postcomposition-dependent-functions
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -20,7 +21,6 @@ open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

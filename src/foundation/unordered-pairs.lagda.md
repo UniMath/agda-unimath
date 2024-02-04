@@ -24,6 +24,7 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-contractible-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-maps
 open import foundation-core.coproduct-types
@@ -39,7 +40,6 @@ open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
-open import foundation.whiskering-homotopies-composition
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types

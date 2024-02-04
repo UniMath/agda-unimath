@@ -21,6 +21,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
@@ -34,7 +35,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
-open import foundation.whiskering-homotopies-composition
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types

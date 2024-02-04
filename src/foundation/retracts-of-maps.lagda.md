@@ -17,6 +17,7 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.retracts-of-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
@@ -27,7 +28,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

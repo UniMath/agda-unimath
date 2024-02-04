@@ -8,12 +8,12 @@ module foundation-core.commuting-triangles-of-maps where
 
 ```agda
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

@@ -20,13 +20,20 @@ open import foundation-core.homotopies
 
 ## Idea
 
-Consider a homotopy `H : f ~ g` and a homotopy `K : I ~ J` between two homotopies `I J : g ~ f`. The {{#concept "left whiskering" Disambiguation="homotopies with respect to concatenation" Agda=left-whisker-concat-htpy}} of `H` and `K` is a homotopy `H ∙ I ~ H ∙ J`. In other words, left whiskering of homotopies with respect to concatenation is a [whiskering operation](foundation.whiskering-operations.md)
+Consider a homotopy `H : f ~ g` and a homotopy `K : I ~ J` between two
+homotopies `I J : g ~ f`. The
+{{#concept "left whiskering" Disambiguation="homotopies with respect to concatenation" Agda=left-whisker-concat-htpy}}
+of `H` and `K` is a homotopy `H ∙ I ~ H ∙ J`. In other words, left whiskering of
+homotopies with respect to concatenation is a
+[whiskering operation](foundation.whiskering-operations.md)
 
 ```text
   (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙h I ~ H ∙h K.
 ```
 
-Similarly, we introduce {{#concept 'right whiskering" Disambiguation="homotopies with respect to concatenation' Agda=right-whisker-concat-htpy}} to be an operation
+Similarly, we introduce
+{{#concept 'right whiskering" Disambiguation="homotopies with respect to concatenation' Agda=right-whisker-concat-htpy}}
+to be an operation
 
 ```text
   {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J.
@@ -42,7 +49,8 @@ Left whiskering of homotopies with respect to concatenation is an operation
   (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙h I ~ H ∙h K.
 ```
 
-We implement the left whiskering operation of homotopies with respect to concatenation as an instance of a general left whiskering operation.
+We implement the left whiskering operation of homotopies with respect to
+concatenation as an instance of a general left whiskering operation.
 
 ```agda
 module _
@@ -62,7 +70,8 @@ Right whiskering of homotopies with respect to concatenation is an operation
   {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J.
 ```
 
-We implement the right whiskering operation of homotopies with respect to concatenation as an instance of a general right whiskering operation.
+We implement the right whiskering operation of homotopies with respect to
+concatenation as an instance of a general right whiskering operation.
 
 ```agda
 module _
@@ -146,4 +155,3 @@ module _
   right-unit-law-right-whisker-concat-htpy K x =
     right-unit-law-right-whisker-concat (K x)
 ```
-

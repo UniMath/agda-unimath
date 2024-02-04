@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.precomposition-dependent-functions
 open import foundation.sections
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
@@ -25,7 +26,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

@@ -27,6 +27,7 @@ open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-extensionality
@@ -36,7 +37,6 @@ open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.free-loops
 ```

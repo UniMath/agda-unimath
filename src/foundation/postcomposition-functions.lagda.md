@@ -12,6 +12,7 @@ open import foundation-core.postcomposition-functions public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
@@ -26,7 +27,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

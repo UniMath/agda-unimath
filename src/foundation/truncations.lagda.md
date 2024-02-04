@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.truncated-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-maps
 open import foundation-core.equality-dependent-pair-types
@@ -29,7 +30,6 @@ open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>

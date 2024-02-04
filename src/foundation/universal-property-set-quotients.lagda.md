@@ -29,6 +29,7 @@ open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-triangles-of-maps
@@ -50,7 +51,6 @@ open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.univalence
-open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
