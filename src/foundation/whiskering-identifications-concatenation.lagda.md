@@ -306,3 +306,57 @@ module _
     right-unit ∙ r ＝ right-whisker-concat r refl ∙ right-unit
   compute-refl-right-whisker-concat refl = right-unit
 ```
+
+### Left whiskering of identifications distributes over concatenation
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  distributive-left-whisker-concat-concat :
+    {a b c : A} (p : a ＝ b) {q r s : b ＝ c} (α : q ＝ r) (β : r ＝ s) →
+    left-whisker-concat p (α ∙ β) ＝
+    left-whisker-concat p α ∙ left-whisker-concat p β
+  distributive-left-whisker-concat-concat p refl β = refl
+```
+
+### Right whiskering of identifications distributes over concatenation
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  distributive-right-whisker-concat-concat :
+    {a b c : A} {p q r : a ＝ b} (α : p ＝ q) (β : q ＝ r) (s : b ＝ c) →
+    right-whisker-concat (α ∙ β) s ＝
+    right-whisker-concat α s ∙ right-whisker-concat β s
+  distributive-right-whisker-concat-concat refl β s = refl
+```
+
+### Left whiskering of identifications commutes with inverses of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  compute-inv-left-whisker-concat :
+    {a b c : A} (p : a ＝ b) {q r : b ＝ c} (s : q ＝ r) →
+    left-whisker-concat p (inv s) ＝ inv (left-whisker-concat p s)
+  compute-inv-left-whisker-concat p s = ap-inv (concat p _) s
+```
+
+### Right whiskering of identifications commutes with inverses of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  compute-inv-right-whisker-concat :
+    {a b c : A} {p q : a ＝ b} (s : p ＝ q) (r : b ＝ c) →
+    right-whisker-concat (inv s) r ＝ inv (right-whisker-concat s r)
+  compute-inv-right-whisker-concat s r = ap-inv (concat' _ r) s
+```

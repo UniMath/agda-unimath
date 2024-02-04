@@ -15,6 +15,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies-morphisms-arrows
 open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
@@ -270,65 +271,29 @@ module _
       ( htpy-domain-right-unit-law-concat-htpy-hom-arrow)
       ( htpy-codomain-right-unit-law-concat-htpy-hom-arrow)
   coh-right-unit-law-concat-htpy-hom-arrow a =
-    {!!}
-
-{-
-Id
-( ( left-whisker-concat (α₂ a) (ap-concat g (β₀ a) refl)) ∙
-  ( ( ( ( inv (left-whisker-concat (α₂ a) (inv right-unit))) ∙
-        ( ( β₂ a) ∙
-          ( left-whisker-concat (β₁ (f a)) (inv right-unit)))) ∙
-      ( ( inv (assoc (β₁ (f a)) (α'₂ a) refl)) ∙
-        ( left-whisker-concat-coherence-square-identifications
-          ( β₁ (f a))
-          ( refl) -- top
-          ( α'₂ a) -- left
-          ( α'₂ a) -- right
-          ( refl) -- bottom
-          ( right-unit))))) ∙
-    ( right-whisker-concat (α'₂ a) right-unit))
-
-( ( left-whisker-concat (α₂ a) (ap (ap g) right-unit)) ∙
-  ( β₂ a))
--}
-
-{-
-    coherence-square-homotopies
-      ( left-whisker-concat-htpy
-        ( α₂)
-        ( left-whisker-comp² g right-unit-htpy))
-      ( coh-concat-htpy-hom-arrow f g α α' α' β (refl-htpy-hom-arrow f g α'))
-      ( β₂)
-      ( right-whisker-concat-htpy
-        ( right-whisker-comp² right-unit-htpy f)
-        ( α₂'))
-
-where
-
-  ( ( left-whisker-concat
-      ( α₂ a)
-      ( ap-concat g
-        ( β₀ a)
-        ( refl))) ∙
-    ( horizontal-pasting-coherence-square-identifications
-      ( β₁ (f a))
-      ( refl)
-      ( α₂ a)
-      ( α'₂ a)
-      ( α'₂ a)
-      ( (g ·l β₀) a)
-      ( refl)
-      ( β₂ a)
-      ( right-unit))) ∙
-  ( right-whisker-concat-htpy
-    ( right-whisker-comp² right-unit-htpy f)
-    ( α₂')
-    ( a)) ＝
-  ( left-whisker-concat-htpy
-    ( α₂)
-    ( left-whisker-comp² g right-unit-htpy)) ∙
-  ( β₂ a)
--}
+    ( assoc
+      ( left-whisker-concat (coh-hom-arrow f g α a) (ap-concat g _ refl))
+      ( _)
+      ( right-whisker-concat right-unit (coh-hom-arrow f g α' a))) ∙
+    ( horizontal-concat-Id²
+      ( ( ap
+          ( left-whisker-concat (coh-hom-arrow f g α a))
+          ( compute-right-refl-ap-concat g
+            ( htpy-domain-htpy-hom-arrow f g α α' β a))) ∙
+        ( distributive-left-whisker-concat-concat
+          ( coh-hom-arrow f g α a)
+          ( ap (ap g) right-unit)
+          ( inv right-unit)))
+      ( right-unit-law-horizontal-pasting-coherence-square-identifications
+        ( htpy-codomain-htpy-hom-arrow f g α α' β (f a))
+        ( coh-hom-arrow f g α a)
+        ( coh-hom-arrow f g α' a)
+        ( ap g (htpy-domain-htpy-hom-arrow f g α α' β a))
+        ( coh-htpy-hom-arrow f g α α' β a)) ∙
+      ( unsplice-concat'
+        ( left-whisker-concat (coh-hom-arrow f g α a) (ap (ap g) right-unit))
+        ( compute-inv-left-whisker-concat (coh-hom-arrow f g α a) right-unit)
+        ( coh-htpy-hom-arrow f g α α' β a)))
 
   right-unit-law-concat-htpy-hom-arrow :
     htpy-htpy-hom-arrow f g α α'

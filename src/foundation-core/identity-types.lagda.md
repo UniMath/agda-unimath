@@ -370,6 +370,55 @@ module _
   double-transpose-eq-concat' r refl refl q α = right-unit ∙ (α ∙ right-unit)
 ```
 
+### Splicing and unsplicing concatenations of identifications
+
+Consider two identifications `p : a ＝ b` and `q : b ＝ c`, and consider two further identifications `r : b ＝ x` and `s : x ＝ b` equipped with an identification `inv r ＝ s`, as indicated in the diagram
+
+```text
+           x
+          ∧ |
+        r | | s
+          | ∨
+  a -----> b -----> c.
+```
+
+Then we have identifications
+
+```text
+    splice-concat : p ∙ q ＝ (p ∙ r) ∙ (s ∙ q)
+  unsplice-concat : (p ∙ r) ∙ (s ∙ q) ＝ p ∙ q.
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  splice-concat :
+    {a b c x : A}
+    (p : a ＝ b) {r : b ＝ x} {s : x ＝ b} (α : inv r ＝ s) (q : b ＝ c) →
+    p ∙ q ＝ (p ∙ r) ∙ (s ∙ q)
+  splice-concat refl {r} refl q = inv (is-section-inv-concat r q)
+
+  splice-concat' :
+    {a b c x : A}
+    (p : a ＝ b) {r : b ＝ x} {s : x ＝ b} (α : r ＝ inv s) (q : b ＝ c) →
+    p ∙ q ＝ (p ∙ r) ∙ (s ∙ q)
+  splice-concat' refl {.(inv s)} {s} refl q = inv (is-retraction-inv-concat s q)
+
+  unsplice-concat :
+    {a b c x : A}
+    (p : a ＝ b) {r : b ＝ x} {s : x ＝ b} (α : inv r ＝ s) (q : b ＝ c) →
+    (p ∙ r) ∙ (s ∙ q) ＝ p ∙ q
+  unsplice-concat p α q = inv (splice-concat p α q)
+
+  unsplice-concat' :
+    {a b c x : A}
+    (p : a ＝ b) {r : b ＝ x} {s : x ＝ b} (α : r ＝ inv s) (q : b ＝ c) →
+    (p ∙ r) ∙ (s ∙ q) ＝ p ∙ q
+  unsplice-concat' p α q = inv (splice-concat' p α q)
+```
+
 ### Concatenation is injective
 
 ```agda
