@@ -7,15 +7,18 @@ module category-theory.monads-on-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-precategories
+open import category-theory.precategories
 
-open import foundation.universe-levels
 open import foundation.dependent-pair-types
-open import foundation-core.cartesian-product-types
 open import foundation.identity-types
+open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
 ```
+
+</details>
 
 ```agda
 Monad-Precategory :
@@ -25,12 +28,20 @@ Monad-Precategory l C =
     ( λ T →
       Σ ( natural-transformation-Precategory C C (id-functor-Precategory C) T)
         ( λ eta →
-          Σ ( natural-transformation-Precategory C C (comp-functor-Precategory C C C T T) T)
+          Σ ( natural-transformation-Precategory
+              ( C)
+              ( C)
+              ( comp-functor-Precategory C C C T T) T)
             ( λ mu →
               Σ ( comp-natural-transformation-Precategory
                     ( C)
                     ( C)
-                    (comp-functor-Precategory C C C T (comp-functor-Precategory C C C T T))
+                    ( comp-functor-Precategory
+                      ( C)
+                      ( C)
+                      ( C)
+                      ( T)
+                      ( comp-functor-Precategory C C C T T))
                     ( comp-functor-Precategory C C C T T)
                     ( T)
                     ( mu)
@@ -46,7 +57,11 @@ Monad-Precategory l C =
                     comp-natural-transformation-Precategory
                       ( C)
                       ( C)
-                      (comp-functor-Precategory C C C (comp-functor-Precategory C C C T T) T)
+                      (comp-functor-Precategory
+                        ( C)
+                        ( C)
+                        ( C)
+                        ( comp-functor-Precategory C C C T T) T)
                       ( comp-functor-Precategory C C C T T)
                       ( T)
                       ( mu)

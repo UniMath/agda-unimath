@@ -13,6 +13,7 @@ open import category-theory.functors-precategories
 open import category-theory.natural-transformations-maps-precategories
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -21,7 +22,6 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
-open import foundation.action-on-identifications-functions
 ```
 
 </details>
@@ -334,6 +334,20 @@ module _
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E H G)
       ( comp-functor-Precategory C D E I G)
-      ( whiskering-natural-transformation-functor-Precategory {C = D} {D = E} {E = C} H I β G)
-      ( whiskering-functor-natural-transformation-Precategory {C = C} {D = D} {E = E} F G H α)
+      ( whiskering-natural-transformation-functor-Precategory
+        {C = D}
+        {D = E}
+        {E = C}
+        ( H)
+        ( I)
+        ( β)
+        ( G))
+      ( whiskering-functor-natural-transformation-Precategory
+        {C = C}
+        {D = D}
+        {E = E}
+        ( F)
+        ( G)
+        ( H)
+        ( α))
 ```

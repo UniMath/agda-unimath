@@ -96,6 +96,7 @@ open import category-theory.maps-from-small-to-large-categories public
 open import category-theory.maps-from-small-to-large-precategories public
 open import category-theory.maps-precategories public
 open import category-theory.maps-set-magmoids public
+open import category-theory.monads-on-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
 open import category-theory.natural-isomorphisms-functors-categories public
 open import category-theory.natural-isomorphisms-functors-large-precategories public
