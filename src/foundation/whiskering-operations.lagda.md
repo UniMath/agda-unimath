@@ -78,7 +78,7 @@ naming scheme for all the variations of whiskering that exist in the
    of homotopies with respect to composition of functions.
 
 3. In
-   [whiskering homotopies with respect to concatenation](foundation.whiskering-homotopies-composition-concatenation.md)
+   [whiskering homotopies with respect to concatenation](foundation.whiskering-homotopies-concatenation.md)
    we define the whiskering operations
 
    ```text
