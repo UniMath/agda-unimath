@@ -18,6 +18,7 @@ open import foundation.full-subtypes
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.propositions

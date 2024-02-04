@@ -33,7 +33,7 @@ open import foundation.whiskering-identifications-concatenation
 
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifts-of-maps
-open import orthogonal-factorization-systems.morphisms-arrows-from-diagonal-maps
+open import orthogonal-factorization-systems.pullback-hom
 ```
 
 </details>
@@ -69,12 +69,12 @@ consists of a diagonal map `j : B → B` such that the complete diagram
 commutes. We note that there is a canonical map
 
 ```text
-  hom-arrow-map : (B → X) → hom-arrow f g.
+  pullback-hom : (B → X) → hom-arrow f g.
 ```
 
 Therefore we see that a lifting square consists of a morphism
 `α : hom-arrow f g` of arrows from `f` to `g`, a map `j : B → X`, and a homotopy
-of morphisms of arrow `hom-arrow-map f ~ α`.
+of morphisms of arrow `pullback-hom f ~ α`.
 
 ## Definitions
 
@@ -88,7 +88,7 @@ module _
   where
 
   is-lifting-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-lifting-square = htpy-hom-arrow f g α (hom-arrow-map f g j)
+  is-lifting-square = htpy-hom-arrow f g α (pullback-hom f g j)
 
   is-extension-is-lifting-square :
     is-lifting-square →
@@ -104,7 +104,7 @@ module _
     coherence-square-homotopies
       ( is-lift-is-lifting-square l ·r f)
       ( coh-hom-arrow f g α)
-      ( coh-hom-arrow-map f g j)
+      ( coh-pullback-hom f g j)
       ( g ·l is-extension-is-lifting-square l)
   coherence-is-lifting-square = pr2 ∘ pr2
 ```
@@ -153,7 +153,7 @@ module _
     coherence-square-homotopies
       ( is-lift-lifting-square l ·r f)
       ( coh-hom-arrow f g α)
-      ( coh-hom-arrow-map f g (diagonal-map-lifting-square l))
+      ( coh-pullback-hom f g (diagonal-map-lifting-square l))
       ( g ·l is-extension-lifting-square l)
   coherence-lifting-square = pr2 ∘ (pr2 ∘ pr2)
 ```
@@ -173,10 +173,10 @@ module _
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   coherence-htpy-lifting-square H =
     htpy-htpy-hom-arrow f g α
-      ( hom-arrow-map f g (diagonal-map-lifting-square f g α l))
+      ( pullback-hom f g (diagonal-map-lifting-square f g α l))
       ( concat-htpy-hom-arrow f g α
-        ( hom-arrow-map f g (diagonal-map-lifting-square f g α k))
-        ( hom-arrow-map f g (diagonal-map-lifting-square f g α l))
+        ( pullback-hom f g (diagonal-map-lifting-square f g α k))
+        ( pullback-hom f g (diagonal-map-lifting-square f g α l))
         ( is-lifting-diagonal-map-lifting-square f g α k)
         ( htpy-hom-arrow-htpy f g H))
       ( is-lifting-diagonal-map-lifting-square f g α l)
@@ -219,7 +219,7 @@ module _
       ( htpy-diagonal-map-refl-htpy-lifting-square)
   coh-refl-htpy-lifting-square =
     right-unit-law-concat-htpy-hom-arrow f g α
-      ( hom-arrow-map f g (diagonal-map-lifting-square f g α k))
+      ( pullback-hom f g (diagonal-map-lifting-square f g α k))
       ( is-lifting-diagonal-map-lifting-square f g α k)
 
   refl-htpy-lifting-square : htpy-lifting-square f g α k k
@@ -259,9 +259,9 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  is-lifting-square-hom-arrow-map :
-    (j : B → X) → is-lifting-square f g (hom-arrow-map f g j) j
-  is-lifting-square-hom-arrow-map j = refl-htpy-hom-arrow f g (hom-arrow-map f g j)
+  is-lifting-square-pullback-hom :
+    (j : B → X) → is-lifting-square f g (pullback-hom f g j) j
+  is-lifting-square-pullback-hom j = refl-htpy-hom-arrow f g (pullback-hom f g j)
 ```
 
 ## Properties
@@ -285,7 +285,7 @@ module _
       ( is-torsorial-htpy _)
       ( diagonal-map-lifting-square f g α l , refl-htpy)
       ( is-torsorial-htpy-htpy-hom-arrow f g α
-        ( hom-arrow-map f g (diagonal-map-lifting-square f g α l))
+        ( pullback-hom f g (diagonal-map-lifting-square f g α l))
         ( _))
 
   is-equiv-htpy-eq-lifting-square :
@@ -303,4 +303,45 @@ module _
   eq-htpy-lifting-square :
     (k : lifting-square f g α) → htpy-lifting-square f g α l k → l ＝ k
   eq-htpy-lifting-square k = map-inv-equiv (extensionality-lifting-square k)
+```
+
+### The fibers of the pullback-hom-old
+
+```text
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
+  where
+
+  inv-compute-fiber-pullback-hom-old :
+    fiber (pullback-hom-old f g) h ≃ lifting-square f g h
+  inv-compute-fiber-pullback-hom-old =
+    equiv-tot
+      ( λ j →
+        ( equiv-Σ _
+          ( equiv-inv-htpy (j ∘ f) (map-domain-hom-arrow f g h))
+          ( λ E →
+            equiv-Σ _
+              ( equiv-inv-htpy (g ∘ j) (map-codomain-hom-arrow f g h))
+              ( λ L →
+                ( equiv-concat-htpy'
+                  ( inv-htpy L ·r f)
+                  ( λ x →
+                    ap
+                      ( coh-hom-arrow f g h x ∙_)
+                      ( inv-htpy (left-whisker-inv-htpy g E) x))) ∘e
+                ( equiv-right-transpose-htpy-concat
+                  ( inv-htpy (L ·r f))
+                  ( g ·l E)
+                  ( coh-hom-arrow f g h)) ∘e
+                ( equiv-left-transpose-htpy-concat'
+                  ( g ·l E)
+                  ( L ·r f)
+                  ( coh-hom-arrow f g h))))) ∘e
+        ( equiv-left-swap-Σ) ∘e
+        ( extensionality-hom-arrow f g (pullback-hom-old f g j) h))
+
+  compute-fiber-pullback-hom-old :
+    lifting-square f g h ≃ fiber (pullback-hom-old f g) h
+  compute-fiber-pullback-hom-old = inv-equiv inv-compute-fiber-pullback-hom-old
 ```
