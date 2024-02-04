@@ -272,6 +272,7 @@ open import foundation.precomposition-type-families public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
+open import foundation.preunivalent-type-families public
 open import foundation.principle-of-omniscience public
 open import foundation.product-decompositions public
 open import foundation.product-decompositions-subuniverse public
@@ -361,6 +362,7 @@ open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
+open import foundation.transport-split-type-families public
 open import foundation.transposition-span-diagrams public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public

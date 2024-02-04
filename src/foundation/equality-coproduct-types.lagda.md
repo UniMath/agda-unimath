@@ -230,7 +230,7 @@ module _
         ( is-contr-equiv
           ( Σ A (Id x))
           ( equiv-tot (compute-eq-coprod-inl-inl x))
-          ( is-torsorial-path x))
+          ( is-torsorial-Id x))
         ( λ y → ap inl)
 
   emb-inl : A ↪ (A + B)
@@ -244,7 +244,7 @@ module _
         ( is-contr-equiv
           ( Σ B (Id x))
           ( equiv-tot (compute-eq-coprod-inr-inr x))
-          ( is-torsorial-path x))
+          ( is-torsorial-Id x))
         ( λ y → ap inr)
 
   emb-inr : B ↪ (A + B)

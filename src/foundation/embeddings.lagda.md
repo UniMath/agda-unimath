@@ -279,7 +279,7 @@ module _
   is-section-inv-map-Σ-emb-base (b , c) =
     ap
       ( λ s → (pr1 s , inv-tr C (pr2 s) c))
-      ( eq-is-contr (is-torsorial-path' b))
+      ( eq-is-contr (is-torsorial-Id' b))
 
   is-retraction-inv-map-Σ-emb-base :
     is-retraction (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base
@@ -322,9 +322,9 @@ module _
 
   abstract
     is-emb-section-ap :
-      ((x y : A) → section (ap f {x = x} {y = y})) → is-emb f
-    is-emb-section-ap section-ap-f x y =
-      fundamental-theorem-id-section x (λ y → ap f {y = y}) (section-ap-f x) y
+      ((x y : A) → section (ap f {x} {y})) → is-emb f
+    is-emb-section-ap section-ap-f x =
+      fundamental-theorem-id-section x (λ y → ap f) (section-ap-f x)
 ```
 
 ### If there is an equivalence `(f x = f y) ≃ (x = y)` that sends `refl` to `refl`, then f is an embedding

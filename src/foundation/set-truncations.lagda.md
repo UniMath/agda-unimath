@@ -423,7 +423,7 @@ module _
   abstract
     distributive-trunc-coprod-Set :
       is-contr
-        ( Σ ( type-equiv-Set
+        ( Σ ( equiv-Set
               ( trunc-Set (A + B))
               ( coprod-Set (trunc-Set A) (trunc-Set B)))
             ( λ e →
@@ -451,7 +451,7 @@ module _
                 ( is-set-truncation-trunc-Set B C))))
 
   equiv-distributive-trunc-coprod-Set :
-    type-equiv-Set (trunc-Set (A + B)) (coprod-Set (trunc-Set A) (trunc-Set B))
+    equiv-Set (trunc-Set (A + B)) (coprod-Set (trunc-Set A) (trunc-Set B))
   equiv-distributive-trunc-coprod-Set =
     pr1 (center distributive-trunc-coprod-Set)
 

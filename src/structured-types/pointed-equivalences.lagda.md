@@ -166,7 +166,7 @@ module _
     is-torsorial-Eq-structure
       ( is-torsorial-equiv (type-Pointed-Type A))
       ( pair (type-Pointed-Type A) id-equiv)
-      ( is-torsorial-path (point-Pointed-Type A))
+      ( is-torsorial-Id (point-Pointed-Type A))
 
   extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃∗ B)
   extensionality-Pointed-Type =

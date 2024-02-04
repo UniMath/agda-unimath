@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.families-of-equivalences
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
@@ -59,11 +60,11 @@ module _
 
 ```agda
 module _
-    {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
-    where
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
+  where
 
-    is-identity-system : UUω
-    is-identity-system = {l : Level} → is-identity-system-Level l B a b
+  is-identity-system : UUω
+  is-identity-system = {l : Level} → is-identity-system-Level l B a b
 ```
 
 ## Properties

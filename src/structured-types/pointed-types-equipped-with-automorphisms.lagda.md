@@ -159,7 +159,7 @@ is-torsorial-htpy-hom-Pointed-Type-With-Aut X Y h1 =
     ( is-torsorial-htpy (map-hom-Pointed-Type-With-Aut X Y h1))
     ( pair (map-hom-Pointed-Type-With-Aut X Y h1) refl-htpy)
     ( is-torsorial-Eq-structure
-      ( is-torsorial-path
+      ( is-torsorial-Id
         ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1))
       ( pair (preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) refl)
       ( is-contr-equiv'

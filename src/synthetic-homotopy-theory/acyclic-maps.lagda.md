@@ -376,7 +376,7 @@ module _
           equiv-left-swap-Σ
       ≃ (C → X)
         by
-          equiv-pr1 (λ v → is-torsorial-path' (v ∘ horizontal-map-cocone f g c))
+          equiv-pr1 (λ v → is-torsorial-Id' (v ∘ horizontal-map-cocone f g c))
 
   is-acyclic-map-vertical-map-cocone-is-pushout :
     is-pushout f g c →

@@ -410,7 +410,7 @@ is-identity-system-type-2-Element-Type X x =
 dependent-universal-property-identity-system-type-2-Element-Type :
   {l1 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
   dependent-universal-property-identity-system
-    { B = type-2-Element-Type {l1}}
+    ( type-2-Element-Type {l1})
     { a = X}
     ( x)
 dependent-universal-property-identity-system-type-2-Element-Type X x =

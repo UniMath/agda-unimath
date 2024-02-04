@@ -268,7 +268,7 @@ module _
           ( Σ (suspension-structure X Z) (λ c' → c ＝ c'))
           ( inv-equiv
             ( equiv-tot (extensionality-suspension-structure c)))
-          ( is-torsorial-path c))
+          ( is-torsorial-Id c))
         ( P))
 ```
 
