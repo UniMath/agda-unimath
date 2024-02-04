@@ -20,10 +20,14 @@ open import foundation-core.cartesian-product-types
 
 </details>
 
+## Definitions
+
+### The type of monads on precategories
+
 ```agda
-Monad-Precategory :
+monad-Precategory :
   (l : Level) (C : Precategory l l) → UU l
-Monad-Precategory l C =
+monad-Precategory l C =
   Σ ( functor-Precategory C C)
     ( λ T →
       Σ ( natural-transformation-Precategory C C (id-functor-Precategory C) T)
