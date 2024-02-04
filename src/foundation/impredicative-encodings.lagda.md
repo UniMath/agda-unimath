@@ -135,7 +135,7 @@ map-impredicative-disjunction-Prop :
 map-impredicative-disjunction-Prop {l1} {l2} P1 P2 =
   map-universal-property-trunc-Prop
     ( impredicative-disjunction-Prop P1 P2)
-    ( rec-coprod
+    ( rec-coproduct
       ( λ x Q f1 f2 → f1 x)
       ( λ y Q f1 f2 → f2 y))
 

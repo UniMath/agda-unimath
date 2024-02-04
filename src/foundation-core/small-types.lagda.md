@@ -276,18 +276,19 @@ is-small-function-type H K = is-small-Π H (λ a → K)
 ### Small types are closed under coproduct types
 
 ```agda
-is-small-coprod :
+is-small-coproduct :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} →
   is-small l3 A → is-small l4 B → is-small (l3 ⊔ l4) (A + B)
-pr1 (is-small-coprod H K) = type-is-small H + type-is-small K
-pr2 (is-small-coprod H K) = equiv-coprod (equiv-is-small H) (equiv-is-small K)
+pr1 (is-small-coproduct H K) = type-is-small H + type-is-small K
+pr2 (is-small-coproduct H K) =
+  equiv-coproduct (equiv-is-small H) (equiv-is-small K)
 
-coprod-Small-Type :
+coproduct-Small-Type :
   {l1 l2 l3 l4 : Level} →
   Small-Type l1 l2 → Small-Type l3 l4 → Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
-pr1 (coprod-Small-Type A B) = type-Small-Type A + type-Small-Type B
-pr2 (coprod-Small-Type A B) =
-  is-small-coprod (is-small-type-Small-Type A) (is-small-type-Small-Type B)
+pr1 (coproduct-Small-Type A B) = type-Small-Type A + type-Small-Type B
+pr2 (coproduct-Small-Type A B) =
+  is-small-coproduct (is-small-type-Small-Type A) (is-small-type-Small-Type B)
 ```
 
 ### The type of logical equivalences between small types is small

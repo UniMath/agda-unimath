@@ -90,12 +90,12 @@ is-decidable-empty = inr id
 ### Coproducts of decidable types are decidable
 
 ```agda
-is-decidable-coprod :
+is-decidable-coproduct :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A + B)
-is-decidable-coprod (inl a) y = inl (inl a)
-is-decidable-coprod (inr na) (inl b) = inl (inr b)
-is-decidable-coprod (inr na) (inr nb) = inr (rec-coprod na nb)
+is-decidable-coproduct (inl a) y = inl (inl a)
+is-decidable-coproduct (inr na) (inl b) = inl (inr b)
+is-decidable-coproduct (inr na) (inr nb) = inr (rec-coproduct na nb)
 ```
 
 ### Cartesian products of decidable types are decidable
@@ -239,7 +239,7 @@ abstract
   is-prop-is-inhabited-or-empty :
     {l1 : Level} (A : UU l1) → is-prop (is-inhabited-or-empty A)
   is-prop-is-inhabited-or-empty A =
-    is-prop-coprod
+    is-prop-coproduct
       ( λ t → apply-universal-property-trunc-Prop t empty-Prop)
       ( is-prop-type-trunc-Prop)
       ( is-prop-neg)
@@ -255,7 +255,7 @@ pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
 is-fixed-point-is-decidable-is-inhabited :
   {l : Level} {X : UU l} → type-trunc-Prop X → is-decidable X ≃ X
 is-fixed-point-is-decidable-is-inhabited {l} {X} t =
-  right-unit-law-coprod-is-empty X (¬ X) (is-nonempty-is-inhabited t)
+  right-unit-law-coproduct-is-empty X (¬ X) (is-nonempty-is-inhabited t)
 ```
 
 ### Raising types converves decidability

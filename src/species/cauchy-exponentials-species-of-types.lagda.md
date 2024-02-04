@@ -151,5 +151,5 @@ module _
               ( indexing-type-Relaxed-Σ-Decomposition d))
               ( _)) ∘e
         ( equiv-tot
-          ( λ d → distributive-Π-coprod-binary-coproduct-Decomposition))))
+          ( λ d → distributive-Π-coproduct-binary-coproduct-Decomposition))))
 ```

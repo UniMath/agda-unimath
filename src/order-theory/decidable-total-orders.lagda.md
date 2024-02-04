@@ -168,7 +168,7 @@ module _
     (x y : type-Decidable-Total-Order) →
     is-prop (leq-or-strict-greater-Decidable-Poset x y)
   is-prop-leq-or-strict-greater-Decidable-Total-Order x y =
-    is-prop-coprod
+    is-prop-coproduct
       ( λ p q →
         pr1 q (inv (antisymmetric-leq-Decidable-Total-Order x y p (pr2 q))))
       ( is-prop-leq-Decidable-Total-Order x y)

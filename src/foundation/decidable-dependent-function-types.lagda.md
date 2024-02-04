@@ -27,13 +27,13 @@ We describe conditions under which dependent products are decidable.
 ### Decidablitilty of dependent products over coproducts
 
 ```agda
-is-decidable-Π-coprod :
+is-decidable-Π-coproduct :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : A + B → UU l3} →
   is-decidable ((a : A) → C (inl a)) → is-decidable ((b : B) → C (inr b)) →
   is-decidable ((x : A + B) → C x)
-is-decidable-Π-coprod {C = C} dA dB =
+is-decidable-Π-coproduct {C = C} dA dB =
   is-decidable-equiv
-    ( equiv-dependent-universal-property-coprod C)
+    ( equiv-dependent-universal-property-coproduct C)
     ( is-decidable-product dA dB)
 ```
 

@@ -126,7 +126,7 @@ module _
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H X p e e'
-          ( map-equiv-coprod
+          ( map-equiv-coproduct
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ (pair X K) e e'))
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
               ( pair X K)
@@ -147,7 +147,7 @@ module _
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
-          ( map-equiv-coprod
+          ( map-equiv-coproduct
             ( inv-equiv
               ( equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin' 2) e e'))
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ

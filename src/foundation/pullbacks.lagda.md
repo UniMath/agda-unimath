@@ -737,53 +737,53 @@ module _
   (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
   where
 
-  map-coprod-cone-inl :
+  map-coproduct-cone-inl :
     standard-pullback f g →
-    standard-pullback (map-coprod f f') (map-coprod g g')
-  pr1 (map-coprod-cone-inl (x , y , p)) = inl x
-  pr1 (pr2 (map-coprod-cone-inl (x , y , p))) = inl y
-  pr2 (pr2 (map-coprod-cone-inl (x , y , p))) = ap inl p
+    standard-pullback (map-coproduct f f') (map-coproduct g g')
+  pr1 (map-coproduct-cone-inl (x , y , p)) = inl x
+  pr1 (pr2 (map-coproduct-cone-inl (x , y , p))) = inl y
+  pr2 (pr2 (map-coproduct-cone-inl (x , y , p))) = ap inl p
 
-  map-coprod-cone-inr :
+  map-coproduct-cone-inr :
     standard-pullback f' g' →
-    standard-pullback (map-coprod f f') (map-coprod g g')
-  pr1 (map-coprod-cone-inr (x , y , p)) = inr x
-  pr1 (pr2 (map-coprod-cone-inr (x , y , p))) = inr y
-  pr2 (pr2 (map-coprod-cone-inr (x , y , p))) = ap inr p
+    standard-pullback (map-coproduct f f') (map-coproduct g g')
+  pr1 (map-coproduct-cone-inr (x , y , p)) = inr x
+  pr1 (pr2 (map-coproduct-cone-inr (x , y , p))) = inr y
+  pr2 (pr2 (map-coproduct-cone-inr (x , y , p))) = ap inr p
 
-  map-coprod-cone :
+  map-coproduct-cone :
     standard-pullback f g + standard-pullback f' g' →
-    standard-pullback (map-coprod f f') (map-coprod g g')
-  map-coprod-cone (inl v) = map-coprod-cone-inl v
-  map-coprod-cone (inr u) = map-coprod-cone-inr u
+    standard-pullback (map-coproduct f f') (map-coproduct g g')
+  map-coproduct-cone (inl v) = map-coproduct-cone-inl v
+  map-coproduct-cone (inr u) = map-coproduct-cone-inr u
 
-  map-inv-coprod-cone :
-    standard-pullback (map-coprod f f') (map-coprod g g') →
+  map-inv-coproduct-cone :
+    standard-pullback (map-coproduct f f') (map-coproduct g g') →
     standard-pullback f g + standard-pullback f' g'
-  map-inv-coprod-cone (inl x , inl y , p) = inl (x , y , is-injective-inl p)
-  map-inv-coprod-cone (inr x , inr y , p) = inr (x , y , is-injective-inr p)
+  map-inv-coproduct-cone (inl x , inl y , p) = inl (x , y , is-injective-inl p)
+  map-inv-coproduct-cone (inr x , inr y , p) = inr (x , y , is-injective-inr p)
 
-  is-section-map-inv-coprod-cone :
-    is-section map-coprod-cone map-inv-coprod-cone
-  is-section-map-inv-coprod-cone (inl x , inl y , p) =
+  is-section-map-inv-coproduct-cone :
+    is-section map-coproduct-cone map-inv-coproduct-cone
+  is-section-map-inv-coproduct-cone (inl x , inl y , p) =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inl p))
-  is-section-map-inv-coprod-cone (inr x , inr y , p) =
+  is-section-map-inv-coproduct-cone (inr x , inr y , p) =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inr p))
 
-  is-retraction-map-inv-coprod-cone :
-    is-retraction map-coprod-cone map-inv-coprod-cone
-  is-retraction-map-inv-coprod-cone (inl (x , y , p)) =
+  is-retraction-map-inv-coproduct-cone :
+    is-retraction map-coproduct-cone map-inv-coproduct-cone
+  is-retraction-map-inv-coproduct-cone (inl (x , y , p)) =
     ap inl (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inl p)))
-  is-retraction-map-inv-coprod-cone (inr (x , y , p)) =
+  is-retraction-map-inv-coproduct-cone (inr (x , y , p)) =
     ap inr (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inr p)))
 
   abstract
-    is-equiv-map-coprod-cone : is-equiv map-coprod-cone
-    is-equiv-map-coprod-cone =
+    is-equiv-map-coproduct-cone : is-equiv map-coproduct-cone
+    is-equiv-map-coproduct-cone =
       is-equiv-is-invertible
-        map-inv-coprod-cone
-        is-section-map-inv-coprod-cone
-        is-retraction-map-inv-coprod-cone
+        map-inv-coproduct-cone
+        is-section-map-inv-coproduct-cone
+        is-retraction-map-inv-coproduct-cone
 ```
 
 ```agda
@@ -794,38 +794,42 @@ module _
   (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
   where
 
-  coprod-cone :
+  coproduct-cone :
     cone f g C → cone f' g' C' →
-    cone (map-coprod f f') (map-coprod g g') (C + C')
-  pr1 (coprod-cone (p , q , H) (p' , q' , H')) = map-coprod p p'
-  pr1 (pr2 (coprod-cone (p , q , H) (p' , q' , H'))) = map-coprod q q'
-  pr2 (pr2 (coprod-cone (p , q , H) (p' , q' , H'))) =
-    ( inv-htpy (preserves-comp-map-coprod p f p' f')) ∙h
-    ( htpy-map-coprod H H') ∙h
-    ( preserves-comp-map-coprod q g q' g')
+    cone (map-coproduct f f') (map-coproduct g g') (C + C')
+  pr1 (coproduct-cone (p , q , H) (p' , q' , H')) = map-coproduct p p'
+  pr1 (pr2 (coproduct-cone (p , q , H) (p' , q' , H'))) = map-coproduct q q'
+  pr2 (pr2 (coproduct-cone (p , q , H) (p' , q' , H'))) =
+    ( inv-htpy (preserves-comp-map-coproduct p f p' f')) ∙h
+    ( htpy-map-coproduct H H') ∙h
+    ( preserves-comp-map-coproduct q g q' g')
 
-  triangle-map-coprod-cone :
+  triangle-map-coproduct-cone :
     (c : cone f g C) (c' : cone f' g' C') →
-    gap (map-coprod f f') (map-coprod g g') (coprod-cone c c') ~
-    map-coprod-cone f g f' g' ∘ map-coprod (gap f g c) (gap f' g' c')
-  triangle-map-coprod-cone c c' (inl _) =
+    gap (map-coproduct f f') (map-coproduct g g') (coproduct-cone c c') ~
+    map-coproduct-cone f g f' g' ∘ map-coproduct (gap f g c) (gap f' g' c')
+  triangle-map-coproduct-cone c c' (inl _) =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
-  triangle-map-coprod-cone c c' (inr _) =
+  triangle-map-coproduct-cone c c' (inr _) =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
 
   abstract
-    is-pullback-coprod-is-pullback-pair :
+    is-pullback-coproduct-is-pullback-pair :
       (c : cone f g C) (c' : cone f' g' C') →
-      is-pullback f g c → is-pullback f' g' c' →
-      is-pullback (map-coprod f f') (map-coprod g g') (coprod-cone c c')
-    is-pullback-coprod-is-pullback-pair c c' is-pb-c is-pb-c' =
+      is-pullback f g c →
+      is-pullback f' g' c' →
+      is-pullback
+        ( map-coproduct f f')
+        ( map-coproduct g g')
+        ( coproduct-cone c c')
+    is-pullback-coproduct-is-pullback-pair c c' is-pb-c is-pb-c' =
       is-equiv-left-map-triangle
-        ( gap (map-coprod f f') (map-coprod g g') (coprod-cone c c'))
-        ( map-coprod-cone f g f' g')
-        ( map-coprod (gap f g c) (gap f' g' c'))
-        ( triangle-map-coprod-cone c c')
-        ( is-equiv-map-coprod is-pb-c is-pb-c')
-        ( is-equiv-map-coprod-cone f g f' g')
+        ( gap (map-coproduct f f') (map-coproduct g g') (coproduct-cone c c'))
+        ( map-coproduct-cone f g f' g')
+        ( map-coproduct (gap f g c) (gap f' g' c'))
+        ( triangle-map-coproduct-cone c c')
+        ( is-equiv-map-coproduct is-pb-c is-pb-c')
+        ( is-equiv-map-coproduct-cone f g f' g')
 ```
 
 ```agda

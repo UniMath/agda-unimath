@@ -84,7 +84,7 @@ bool-aut-bool :
 bool-aut-bool e = map-equiv e true
 
 decide-true-false :
-  (b : bool) → coprod (b ＝ true) (b ＝ false)
+  (b : bool) → coproduct (b ＝ true) (b ＝ false)
 decide-true-false true = inl refl
 decide-true-false false = inr refl
 

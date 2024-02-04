@@ -59,7 +59,7 @@ segment of `ℕ`.
 ```agda
 Fin-Set : ℕ → Set lzero
 Fin-Set zero-ℕ = empty-Set
-Fin-Set (succ-ℕ n) = coprod-Set (Fin-Set n) unit-Set
+Fin-Set (succ-ℕ n) = coproduct-Set (Fin-Set n) unit-Set
 
 Fin : ℕ → UU lzero
 Fin n = type-Set (Fin-Set n)

@@ -86,7 +86,7 @@ le-one-quotient-div-is-proper-divisor-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
   d ≠ x → le-ℕ 1 (quotient-div-ℕ d x H)
 le-one-quotient-div-is-proper-divisor-ℕ d x f H g =
-  map-left-unit-law-coprod-is-empty
+  map-left-unit-law-coproduct-is-empty
     ( is-one-ℕ (quotient-div-ℕ d x H))
     ( le-ℕ 1 (quotient-div-ℕ d x H))
     ( map-neg (eq-is-one-quotient-div-ℕ d x H) g)

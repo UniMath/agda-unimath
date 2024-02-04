@@ -229,7 +229,7 @@ abstract
         ( λ x →
           is-prop-Π
           ( λ y →
-            is-prop-coprod
+            is-prop-coproduct
             ( intro-double-negation)
             ( is-set-has-decidable-equality d x y)
             ( is-prop-neg))))
@@ -304,16 +304,16 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  has-decidable-equality-coprod :
+  has-decidable-equality-coproduct :
     has-decidable-equality A → has-decidable-equality B →
     has-decidable-equality (A + B)
-  has-decidable-equality-coprod d e (inl x) (inl y) =
+  has-decidable-equality-coproduct d e (inl x) (inl y) =
     is-decidable-iff (ap inl) is-injective-inl (d x y)
-  has-decidable-equality-coprod d e (inl x) (inr y) =
+  has-decidable-equality-coproduct d e (inl x) (inr y) =
     inr neq-inl-inr
-  has-decidable-equality-coprod d e (inr x) (inl y) =
+  has-decidable-equality-coproduct d e (inr x) (inl y) =
     inr neq-inr-inl
-  has-decidable-equality-coprod d e (inr x) (inr y) =
+  has-decidable-equality-coproduct d e (inr x) (inr y) =
     is-decidable-iff (ap inr) is-injective-inr (e x y)
 
   has-decidable-equality-left-summand :

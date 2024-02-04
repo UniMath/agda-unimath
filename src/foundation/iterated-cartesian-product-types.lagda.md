@@ -97,7 +97,7 @@ equiv-iterated-product-Fin-recursive-Π :
 equiv-iterated-product-Fin-recursive-Π zero-ℕ A =
   equiv-is-contr is-contr-raise-unit (dependent-universal-property-empty' A)
 equiv-iterated-product-Fin-recursive-Π (succ-ℕ n) A =
-  ( ( inv-equiv (equiv-dependent-universal-property-coprod A)) ∘e
+  ( ( inv-equiv (equiv-dependent-universal-property-coproduct A)) ∘e
     ( ( commutative-product) ∘e
       ( ( equiv-product
             ( inv-equiv (left-unit-law-Π-is-contr is-contr-unit star))

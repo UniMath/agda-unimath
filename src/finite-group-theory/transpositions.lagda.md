@@ -326,8 +326,8 @@ module _
               ( x)}
             { y = subtype-2-Element-Decidable-Subtype Y x}
             ( eq-iff
-              (type-t-coprod-id x)
-              (coprod-id-type-t x)))
+              (type-t-coproduct-id x)
+              (coproduct-id-type-t x)))
           ( eq-pair-Σ
             ( eq-is-prop (is-prop-is-prop (pr1 (pr1 Y x))))
             ( eq-is-prop (is-prop-is-decidable (pr1 (pr2 (pr1 Y x))))))))
@@ -368,22 +368,22 @@ module _
     type-decidable-prop-pr1-pr2-two-elements-transposition =
       preserves-subtype-map-transposition Y (pr1 two-elements-transposition)
         ( type-decidable-prop-pr1-two-elements-transposition)
-    type-t-coprod-id :
+    type-t-coproduct-id :
       (x : X) →
       ( Id (pr1 two-elements-transposition) x) +
       ( Id (pr1 (pr2 two-elements-transposition)) x) →
       type-Decidable-Prop (pr1 Y x)
-    type-t-coprod-id x (inl Q) =
+    type-t-coproduct-id x (inl Q) =
       tr
         ( is-in-2-Element-Decidable-Subtype Y)
         ( Q)
         ( type-decidable-prop-pr1-two-elements-transposition)
-    type-t-coprod-id x (inr Q) =
+    type-t-coproduct-id x (inr Q) =
       tr
         ( is-in-2-Element-Decidable-Subtype Y)
         ( Q)
         ( type-decidable-prop-pr1-pr2-two-elements-transposition)
-    cases-coprod-id-type-t :
+    cases-coproduct-id-type-t :
       (x : X) (p : is-in-2-Element-Decidable-Subtype Y x) →
       (h : Fin 2 ≃ type-2-Element-Decidable-Subtype Y) →
       (k1 k2 k3 : Fin 2) →
@@ -402,37 +402,38 @@ module _
         ( k3) →
       ( Id (pr1 two-elements-transposition) x) +
       ( Id (pr1 (pr2 two-elements-transposition)) x)
-    cases-coprod-id-type-t x p h (inl (inr star)) (inl (inr star)) k3 K1 K2 K3 =
+    cases-coproduct-id-type-t
+      x p h (inl (inr star)) (inl (inr star)) k3 K1 K2 K3 =
       inl (ap pr1 (is-injective-equiv (inv-equiv h) (K2 ∙ inv K1)))
-    cases-coprod-id-type-t x p h
+    cases-coproduct-id-type-t x p h
       (inl (inr star)) (inr star) (inl (inr star)) K1 K2 K3 =
       inr (ap pr1 (is-injective-equiv (inv-equiv h) (K3 ∙ inv K1)))
-    cases-coprod-id-type-t x p h
+    cases-coproduct-id-type-t x p h
       (inl (inr star)) (inr star) (inr star) K1 K2 K3 =
       ex-falso
         ( pr2 element-is-not-identity-map-transposition
         ( inv
           ( ap pr1
             ( is-injective-equiv (inv-equiv h) (K2 ∙ inv K3)))))
-    cases-coprod-id-type-t x p h
+    cases-coproduct-id-type-t x p h
       (inr star) (inl (inr star)) (inl (inr star)) K1 K2 K3 =
       ex-falso
         ( pr2 element-is-not-identity-map-transposition
         ( inv
           ( ap pr1
             ( is-injective-equiv (inv-equiv h) (K2 ∙ inv K3)))))
-    cases-coprod-id-type-t x p h
+    cases-coproduct-id-type-t x p h
       (inr star) (inl (inr star)) (inr star) K1 K2 K3 =
       inr (ap pr1 (is-injective-equiv (inv-equiv h) (K3 ∙ inv K1)))
-    cases-coprod-id-type-t x p h (inr star) (inr star) k3 K1 K2 K3 =
+    cases-coproduct-id-type-t x p h (inr star) (inr star) k3 K1 K2 K3 =
       inl (ap pr1 (is-injective-equiv (inv-equiv h) (K2 ∙ inv K1)))
-    coprod-id-type-t :
+    coproduct-id-type-t :
       (x : X) → type-Decidable-Prop (pr1 Y x) →
       ( Id (pr1 two-elements-transposition) x) +
       ( Id (pr1 (pr2 two-elements-transposition)) x)
-    coprod-id-type-t x p =
+    coproduct-id-type-t x p =
       apply-universal-property-trunc-Prop (pr2 Y)
-        ( coprod-Prop
+        ( coproduct-Prop
           ( Id-Prop
             ( pair X (is-set-count eX))
             ( pr1 two-elements-transposition)
@@ -444,7 +445,7 @@ module _
           ( λ q r →
             pr2 element-is-not-identity-map-transposition (inv (q ∙ inv r))))
         ( λ h →
-          cases-coprod-id-type-t x p h
+          cases-coproduct-id-type-t x p h
             ( map-inv-equiv h (pair x p))
             ( map-inv-equiv h
               ( pair
@@ -857,7 +858,7 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
     ( λ h →
       unit-trunc-Prop
         ( ( pair f (is-equiv-is-invertible inv-f retraction-f section-f)) ∘e
-          ( ( inv-right-unit-law-coprod-is-empty
+          ( ( inv-right-unit-law-coproduct-is-empty
               ( Σ
                 ( Fin n)
                 ( type-Decidable-Prop ∘ P))
@@ -946,7 +947,7 @@ correct-Fin-succ-Fin-transposition-list :
         ( extend-equiv-Maybe (Fin-Set n))
         ( permutation-list-transpositions l)))
 correct-Fin-succ-Fin-transposition-list n nil =
-  inv-htpy (id-map-coprod (Fin n) unit)
+  inv-htpy (id-map-coproduct (Fin n) unit)
 correct-Fin-succ-Fin-transposition-list n (cons t l) x =
   correct-Fin-succ-Fin-transposition
     ( n)

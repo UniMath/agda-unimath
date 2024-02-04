@@ -372,44 +372,47 @@ pr2 inv-distributive-trunc-product-Prop =
 ```agda
 module _
   {l : Level} {A : UU l} where
-  map-trunc-Prop-diagonal-coprod : type-trunc-Prop (A + A) → type-trunc-Prop A
-  map-trunc-Prop-diagonal-coprod =
+  map-trunc-Prop-diagonal-coproduct :
+    type-trunc-Prop (A + A) → type-trunc-Prop A
+  map-trunc-Prop-diagonal-coproduct =
     map-universal-property-trunc-Prop
       ( trunc-Prop A)
-      ( unit-trunc ∘ rec-coprod id id)
+      ( unit-trunc ∘ rec-coproduct id id)
 
-  map-inv-trunc-Prop-diagonal-coprod :
+  map-inv-trunc-Prop-diagonal-coproduct :
     type-trunc-Prop A → type-trunc-Prop (A + A)
-  map-inv-trunc-Prop-diagonal-coprod =
+  map-inv-trunc-Prop-diagonal-coproduct =
     map-universal-property-trunc-Prop
       ( trunc-Prop (A + A))
       ( unit-trunc ∘ (inl ∘ id))
 
   abstract
-    is-equiv-map-trunc-Prop-diagonal-coprod :
-      is-equiv map-trunc-Prop-diagonal-coprod
-    is-equiv-map-trunc-Prop-diagonal-coprod =
+    is-equiv-map-trunc-Prop-diagonal-coproduct :
+      is-equiv map-trunc-Prop-diagonal-coproduct
+    is-equiv-map-trunc-Prop-diagonal-coproduct =
       is-equiv-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
-        map-inv-trunc-Prop-diagonal-coprod
+        map-inv-trunc-Prop-diagonal-coproduct
 
-    is-equiv-map-inv-trunc-Prop-diagonal-coprod :
-      is-equiv map-inv-trunc-Prop-diagonal-coprod
-    is-equiv-map-inv-trunc-Prop-diagonal-coprod =
+    is-equiv-map-inv-trunc-Prop-diagonal-coproduct :
+      is-equiv map-inv-trunc-Prop-diagonal-coproduct
+    is-equiv-map-inv-trunc-Prop-diagonal-coproduct =
       is-equiv-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
-        map-trunc-Prop-diagonal-coprod
+        map-trunc-Prop-diagonal-coproduct
 
-  equiv-trunc-Prop-diagonal-coprod :
+  equiv-trunc-Prop-diagonal-coproduct :
     (type-trunc-Prop (A + A)) ≃ type-trunc-Prop A
-  pr1 equiv-trunc-Prop-diagonal-coprod = map-trunc-Prop-diagonal-coprod
-  pr2 equiv-trunc-Prop-diagonal-coprod = is-equiv-map-trunc-Prop-diagonal-coprod
+  pr1 equiv-trunc-Prop-diagonal-coproduct = map-trunc-Prop-diagonal-coproduct
+  pr2 equiv-trunc-Prop-diagonal-coproduct =
+    is-equiv-map-trunc-Prop-diagonal-coproduct
 
-  inv-equiv-trunc-Prop-diagonal-coprod :
+  inv-equiv-trunc-Prop-diagonal-coproduct :
     (type-trunc-Prop A) ≃ type-trunc-Prop (A + A)
-  pr1 inv-equiv-trunc-Prop-diagonal-coprod = map-inv-trunc-Prop-diagonal-coprod
-  pr2 inv-equiv-trunc-Prop-diagonal-coprod =
-    is-equiv-map-inv-trunc-Prop-diagonal-coprod
+  pr1 inv-equiv-trunc-Prop-diagonal-coproduct =
+    map-inv-trunc-Prop-diagonal-coproduct
+  pr2 inv-equiv-trunc-Prop-diagonal-coproduct =
+    is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```

@@ -870,19 +870,19 @@ module _
   (f : A → B) (f' : A' → B') (g : X → Y)
   where
 
-  is-orthogonal-pullback-condition-left-coprod :
+  is-orthogonal-pullback-condition-left-coproduct :
     is-orthogonal-pullback-condition f g →
     is-orthogonal-pullback-condition f' g →
-    is-orthogonal-pullback-condition (map-coprod f f') g
-  is-orthogonal-pullback-condition-left-coprod F F' =
+    is-orthogonal-pullback-condition (map-coproduct f f') g
+  is-orthogonal-pullback-condition-left-coproduct F F' =
     is-pullback-top-is-pullback-bottom-cube-is-equiv
       ( map-product (postcomp B g) (postcomp B' g))
       ( map-product (precomp f X) (precomp f' X))
       ( map-product (precomp f Y) (precomp f' Y))
       ( map-product (postcomp A g) (postcomp A' g))
       ( postcomp (B + B') g)
-      ( precomp (map-coprod f f') X)
-      ( precomp (map-coprod f f') Y)
+      ( precomp (map-coproduct f f') X)
+      ( precomp (map-coproduct f f') Y)
       ( postcomp (A + A') g)
       ( ev-inl-inr (λ _ → X))
       ( ev-inl-inr (λ _ → Y))
@@ -895,10 +895,10 @@ module _
       ( refl-htpy)
       ( refl-htpy)
       ( refl-htpy)
-      ( universal-property-coprod X)
-      ( universal-property-coprod Y)
-      ( universal-property-coprod X)
-      ( universal-property-coprod Y)
+      ( universal-property-coproduct X)
+      ( universal-property-coproduct Y)
+      ( universal-property-coproduct X)
+      ( universal-property-coproduct Y)
       ( is-pullback-product-is-pullback-pair
         ( precomp f Y)
         ( postcomp A g)
@@ -909,11 +909,13 @@ module _
         ( F)
         ( F'))
 
-  is-orthogonal-left-coprod :
-    is-orthogonal f g → is-orthogonal f' g → is-orthogonal (map-coprod f f') g
-  is-orthogonal-left-coprod F F' =
-    is-orthogonal-is-orthogonal-pullback-condition (map-coprod f f') g
-      ( is-orthogonal-pullback-condition-left-coprod
+  is-orthogonal-left-coproduct :
+    is-orthogonal f g →
+    is-orthogonal f' g →
+    is-orthogonal (map-coproduct f f') g
+  is-orthogonal-left-coproduct F F' =
+    is-orthogonal-is-orthogonal-pullback-condition (map-coproduct f f') g
+      ( is-orthogonal-pullback-condition-left-coproduct
         ( is-orthogonal-pullback-condition-is-orthogonal f g F)
         ( is-orthogonal-pullback-condition-is-orthogonal f' g F'))
 ```

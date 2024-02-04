@@ -324,7 +324,7 @@ abstract
 is-prime-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → is-prime-ℕ (nat-least-nontrivial-divisor-ℕ n H)
 pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
-  map-right-unit-law-coprod-is-empty
+  map-right-unit-law-coproduct-is-empty
     ( is-one-ℕ x)
     ( le-ℕ 1 x)
     ( λ p →
@@ -748,7 +748,7 @@ is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H nil D y d p =
           ( 1)
           ( inv (is-decomposition-list-is-prime-decomposition-list-ℕ x nil D))))
 is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H (cons z l) D y d p =
-  rec-coprod
+  rec-coproduct
     ( λ e → tr (λ w → w ∈-list (cons z l)) (inv e) (is-head z l))
     ( λ e →
       is-in-tail

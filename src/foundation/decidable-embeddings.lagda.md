@@ -238,7 +238,7 @@ abstract
   pr1 (is-decidable-emb-comp {g = g} {f} H K) =
     is-emb-comp _ _ (pr1 K) (pr1 H)
   pr2 (is-decidable-emb-comp {g = g} {f} H K) x =
-    rec-coprod
+    rec-coproduct
       ( λ u →
         is-decidable-equiv
           ( compute-fiber-comp g f x)

@@ -69,9 +69,9 @@ eq-Eq-ℤ (inr (inr x)) (inr (inr y)) e = ap (inr ∘ inr) (eq-Eq-ℕ x y e)
 ```agda
 has-decidable-equality-ℤ : has-decidable-equality ℤ
 has-decidable-equality-ℤ =
-  has-decidable-equality-coprod
+  has-decidable-equality-coproduct
     has-decidable-equality-ℕ
-    ( has-decidable-equality-coprod
+    ( has-decidable-equality-coproduct
       has-decidable-equality-unit
       has-decidable-equality-ℕ)
 

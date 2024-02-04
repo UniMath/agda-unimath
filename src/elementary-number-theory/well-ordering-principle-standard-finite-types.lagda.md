@@ -63,7 +63,7 @@ exists-not-not-forall-Fin {l} (succ-ℕ k) {P} d H with d (inr star)
 ... | inl p =
   T ( exists-not-not-forall-Fin k
       ( λ x → d (inl x))
-      ( λ f → H (ind-coprod P f (ind-unit p))))
+      ( λ f → H (ind-coproduct P f (ind-unit p))))
   where
   T : Σ (Fin k) (λ x → ¬ (P (inl x))) → Σ (Fin (succ-ℕ k)) (λ x → ¬ (P x))
   T z = pair (inl (pr1 z)) (pr2 z)
@@ -237,10 +237,10 @@ abstract
       ( elim-trunc-decidable-fam-Fin {l1} {k} {B ∘ inl}
         ( λ x → d (inl x))
         ( map-equiv-trunc-Prop
-          ( ( ( right-unit-law-coprod-is-empty
+          ( ( ( right-unit-law-coproduct-is-empty
                 ( Σ (Fin k) (B ∘ inl))
                 ( B (inr star)) f) ∘e
-              ( equiv-coprod id-equiv (left-unit-law-Σ (B ∘ inr)))) ∘e
-            ( right-distributive-Σ-coprod (Fin k) unit B))
+              ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr)))) ∘e
+            ( right-distributive-Σ-coproduct (Fin k) unit B))
           ( y)))
 ```

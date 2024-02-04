@@ -157,7 +157,7 @@ module _
   is-decidable-type-prop-standard-2-Element-Decidable-Subtype :
     (z : X) → is-decidable (type-prop-standard-2-Element-Decidable-Subtype z)
   is-decidable-type-prop-standard-2-Element-Decidable-Subtype z =
-    is-decidable-coprod (d x z) (d y z)
+    is-decidable-coproduct (d x z) (d y z)
 
   subtype-standard-2-Element-Decidable-Subtype : subtype l X
   subtype-standard-2-Element-Decidable-Subtype =
@@ -222,8 +222,8 @@ module _
           eq-pair-Σ
             ( eq-equiv
               ( pair
-                ( map-commutative-coprod (Id x z) (Id y z))
-                ( is-equiv-map-commutative-coprod (Id x z) (Id y z))))
+                ( map-commutative-coproduct (Id x z) (Id y z))
+                ( is-equiv-map-commutative-coproduct (Id x z) (Id y z))))
             ( eq-pair-Σ
               ( eq-is-prop
                 ( is-prop-is-prop
@@ -256,7 +256,7 @@ module _
         ( λ v →
           eq-pair-Σ
             ( eq-equiv
-              ( equiv-coprod
+              ( equiv-coproduct
                 ( equiv-concat (inv r) v)
                 ( equiv-concat (inv s) v)))
             ( eq-pair-Σ

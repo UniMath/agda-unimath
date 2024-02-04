@@ -53,7 +53,7 @@ module _
   where
 
   vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 : 𝔽 (l1 ⊔ l2)
-  vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 = coprod-𝔽 X Y
+  vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 = coproduct-𝔽 X Y
 
   vertex-complete-bipartite-Undirected-Graph-𝔽 : UU (l1 ⊔ l2)
   vertex-complete-bipartite-Undirected-Graph-𝔽 =
@@ -72,14 +72,14 @@ module _
         ( λ x →
           fiber-𝔽
             ( finite-type-2-Element-Type (pr1 p))
-            ( coprod-𝔽 X Y)
+            ( coproduct-𝔽 X Y)
             ( element-unordered-pair p)
             ( inl x)))
       ( Σ-𝔽 Y
         ( λ y →
           fiber-𝔽
             ( finite-type-2-Element-Type (pr1 p))
-            ( coprod-𝔽 X Y)
+            ( coproduct-𝔽 X Y)
             ( element-unordered-pair p)
             ( inr y)))
 

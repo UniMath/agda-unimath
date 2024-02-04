@@ -296,39 +296,39 @@ pr2 (unit-π-Finite k) = is-π-finite-unit k
 ### Coproducts of π-finite types are π-finite
 
 ```agda
-is-π-finite-coprod :
+is-π-finite-coproduct :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
   is-π-finite k A → is-π-finite k B →
   is-π-finite k (A + B)
-is-π-finite-coprod zero-ℕ H K =
+is-π-finite-coproduct zero-ℕ H K =
   is-finite-equiv'
-    ( equiv-distributive-trunc-coprod-Set _ _)
-    ( is-finite-coprod H K)
-pr1 (is-π-finite-coprod (succ-ℕ k) H K) =
-  is-π-finite-coprod zero-ℕ (pr1 H) (pr1 K)
-pr2 (is-π-finite-coprod (succ-ℕ k) H K) (inl x) (inl y) =
+    ( equiv-distributive-trunc-coproduct-Set _ _)
+    ( is-finite-coproduct H K)
+pr1 (is-π-finite-coproduct (succ-ℕ k) H K) =
+  is-π-finite-coproduct zero-ℕ (pr1 H) (pr1 K)
+pr2 (is-π-finite-coproduct (succ-ℕ k) H K) (inl x) (inl y) =
   is-π-finite-equiv k
-    ( compute-eq-coprod-inl-inl x y)
+    ( compute-eq-coproduct-inl-inl x y)
     ( pr2 H x y)
-pr2 (is-π-finite-coprod (succ-ℕ k) H K) (inl x) (inr y) =
+pr2 (is-π-finite-coproduct (succ-ℕ k) H K) (inl x) (inr y) =
   is-π-finite-equiv k
-    ( compute-eq-coprod-inl-inr x y)
+    ( compute-eq-coproduct-inl-inr x y)
     ( is-π-finite-empty k)
-pr2 (is-π-finite-coprod (succ-ℕ k) H K) (inr x) (inl y) =
+pr2 (is-π-finite-coproduct (succ-ℕ k) H K) (inr x) (inl y) =
   is-π-finite-equiv k
-    ( compute-eq-coprod-inr-inl x y)
+    ( compute-eq-coproduct-inr-inl x y)
     ( is-π-finite-empty k)
-pr2 (is-π-finite-coprod (succ-ℕ k) H K) (inr x) (inr y) =
+pr2 (is-π-finite-coproduct (succ-ℕ k) H K) (inr x) (inr y) =
   is-π-finite-equiv k
-    ( compute-eq-coprod-inr-inr x y)
+    ( compute-eq-coproduct-inr-inr x y)
     ( pr2 K x y)
 
-coprod-π-Finite :
+coproduct-π-Finite :
   {l1 l2 : Level} (k : ℕ) →
   π-Finite l1 k → π-Finite l2 k → π-Finite (l1 ⊔ l2) k
-pr1 (coprod-π-Finite k A B) = (type-π-Finite k A + type-π-Finite k B)
-pr2 (coprod-π-Finite k A B) =
-  is-π-finite-coprod k
+pr1 (coproduct-π-Finite k A B) = (type-π-Finite k A + type-π-Finite k B)
+pr2 (coproduct-π-Finite k A B) =
+  is-π-finite-coproduct k
     ( is-π-finite-type-π-Finite k A)
     ( is-π-finite-type-π-Finite k B)
 ```
@@ -339,13 +339,13 @@ pr2 (coprod-π-Finite k A B) =
 Maybe-π-Finite :
   {l : Level} (k : ℕ) → π-Finite l k → π-Finite l k
 Maybe-π-Finite k A =
-  coprod-π-Finite k A (unit-π-Finite k)
+  coproduct-π-Finite k A (unit-π-Finite k)
 
 is-π-finite-Maybe :
   {l : Level} (k : ℕ) {A : UU l} →
   is-π-finite k A → is-π-finite k (Maybe A)
 is-π-finite-Maybe k H =
-  is-π-finite-coprod k H (is-π-finite-unit k)
+  is-π-finite-coproduct k H (is-π-finite-unit k)
 ```
 
 ### Any stanadard finite type is π-finite
@@ -494,7 +494,7 @@ is-locally-finite-Π-Fin {l1} zero-ℕ {B} f =
   is-locally-finite-is-contr (dependent-universal-property-empty' B)
 is-locally-finite-Π-Fin {l1} (succ-ℕ k) {B} f =
   is-locally-finite-equiv
-    ( equiv-dependent-universal-property-coprod B)
+    ( equiv-dependent-universal-property-coproduct B)
     ( is-locally-finite-product
       ( is-locally-finite-Π-Fin k (λ x → f (inl x)))
       ( is-locally-finite-equiv
@@ -702,19 +702,19 @@ module _
   (H : (unit-trunc-Set ∘ f) ~ map-equiv e)
   where
 
-  map-is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
-  map-is-coprod-codomain = rec-coprod pr1 pr1
+  map-is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
+  map-is-coproduct-codomain = rec-coproduct pr1 pr1
 
-  triangle-is-coprod-codomain :
-    ( ( map-is-coprod-codomain) ∘
-      ( map-coprod (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)))) ~ f
-  triangle-is-coprod-codomain (inl x) = refl
-  triangle-is-coprod-codomain (inr x) = refl
+  triangle-is-coproduct-codomain :
+    ( ( map-is-coproduct-codomain) ∘
+      ( map-coproduct (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)))) ~ f
+  triangle-is-coproduct-codomain (inl x) = refl
+  triangle-is-coproduct-codomain (inr x) = refl
 
   abstract
-    is-emb-map-is-coprod-codomain : is-emb map-is-coprod-codomain
-    is-emb-map-is-coprod-codomain =
-      is-emb-coprod
+    is-emb-map-is-coproduct-codomain : is-emb map-is-coproduct-codomain
+    is-emb-map-is-coproduct-codomain =
+      is-emb-coproduct
         ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
         ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
         ( λ (b1 , u) (b2 , v) →
@@ -726,32 +726,33 @@ module _
                   ( function-Prop _ empty-Prop)
                   ( λ where
                     ( y , refl) r →
-                      is-empty-eq-coprod-inl-inr x y
+                      is-empty-eq-coproduct-inl-inr x y
                         ( is-injective-is-equiv
                           ( is-equiv-map-equiv e)
                           ( ( inv (H (inl x))) ∙
                             ( ap unit-trunc-Set r) ∙
                             ( H (inr y)))))))
 
-  is-surjective-map-is-coprod-codomain : is-surjective map-is-coprod-codomain
-  is-surjective-map-is-coprod-codomain b =
+  is-surjective-map-is-coproduct-codomain :
+    is-surjective map-is-coproduct-codomain
+  is-surjective-map-is-coproduct-codomain b =
     apply-universal-property-trunc-Prop
       ( apply-effectiveness-unit-trunc-Set
         ( inv (is-section-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
-      ( trunc-Prop (fiber map-is-coprod-codomain b))
+      ( trunc-Prop (fiber map-is-coproduct-codomain b))
       ( λ p →
         unit-trunc-Prop
-          ( ( map-coprod (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)) a) ,
-            ( triangle-is-coprod-codomain a ∙ inv p)))
+          ( ( map-coproduct (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)) a) ,
+            ( triangle-is-coproduct-codomain a ∙ inv p)))
     where
     a = map-inv-equiv e (unit-trunc-Set b)
 
-  is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ B
-  pr1 is-coprod-codomain = map-is-coprod-codomain
-  pr2 is-coprod-codomain =
+  is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ B
+  pr1 is-coproduct-codomain = map-is-coproduct-codomain
+  pr2 is-coproduct-codomain =
     is-equiv-is-emb-is-surjective
-      is-surjective-map-is-coprod-codomain
-      is-emb-map-is-coprod-codomain
+      is-surjective-map-is-coproduct-codomain
+      is-emb-map-is-coproduct-codomain
 
 is-0-connected-unit : is-0-connected unit
 is-0-connected-unit =
@@ -830,10 +831,10 @@ abstract
       is-finite-equiv
         ( equiv-trunc-Set g)
         ( is-finite-equiv'
-          ( equiv-distributive-trunc-coprod-Set
+          ( equiv-distributive-trunc-coproduct-Set
             ( Σ (im (f ∘ inl)) (B ∘ pr1))
             ( Σ (im (f ∘ inr)) (B ∘ pr1)))
-          ( is-finite-coprod
+          ( is-finite-coproduct
             ( has-finite-connected-components-Σ' k
               ( h)
               ( λ x y →
@@ -856,15 +857,15 @@ abstract
       g : ((Σ (im (f ∘ inl)) (B ∘ pr1)) + (Σ (im (f ∘ inr)) (B ∘ pr1))) ≃
           Σ A B
       g = ( equiv-Σ B
-            ( is-coprod-codomain f
+            ( is-coproduct-codomain f
               ( unit-trunc-Set ∘ f , Eηf)
               ( refl-htpy))
             ( λ { (inl x) → id-equiv ; (inr x) → id-equiv})) ∘e
           ( inv-equiv
-            ( right-distributive-Σ-coprod
+            ( right-distributive-Σ-coproduct
               ( im (f ∘ inl))
               ( im (f ∘ inr))
-              ( rec-coprod (B ∘ pr1) (B ∘ pr1))))
+              ( rec-coproduct (B ∘ pr1) (B ∘ pr1))))
       i : Fin k → type-trunc-Set (im (f ∘ inl))
       i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
       is-surjective-i : is-surjective i

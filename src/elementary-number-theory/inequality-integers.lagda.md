@@ -67,7 +67,7 @@ transitive-leq-ℤ k l m p q =
 decide-leq-ℤ :
   {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
 decide-leq-ℤ {x} {y} =
-  map-coprod
+  map-coproduct
     ( id)
     ( is-nonnegative-eq-ℤ (distributive-neg-diff-ℤ y x))
     ( decide-is-nonnegative-ℤ {y -ℤ x})

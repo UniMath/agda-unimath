@@ -282,7 +282,7 @@ module _
       ( is-root-Directed-Tree T x +
         Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-      ( left-unit-law-coprod-is-empty
+      ( left-unit-law-coproduct-is-empty
         ( is-root-Directed-Tree T x)
         ( Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))

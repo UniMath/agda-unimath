@@ -70,7 +70,7 @@ module _
 
   xor-Prop : Prop (l1 ⊔ l2)
   xor-Prop =
-    coprod-Prop
+    coproduct-Prop
       ( conjunction-Prop P (neg-Prop Q))
       ( conjunction-Prop Q (neg-Prop P))
       ( λ p q → pr2 q (pr1 p))
@@ -171,17 +171,17 @@ module _
 
   map-equiv-xor-Prop : type-xor-Prop' P Q → type-xor-Prop P Q
   map-equiv-xor-Prop (pair (inl p) H) =
-    inl (pair p (λ q → is-empty-eq-coprod-inl-inr p q (H (inr q))))
+    inl (pair p (λ q → is-empty-eq-coproduct-inl-inr p q (H (inr q))))
   map-equiv-xor-Prop (pair (inr q) H) =
-    inr (pair q (λ p → is-empty-eq-coprod-inr-inl q p (H (inl p))))
+    inr (pair q (λ p → is-empty-eq-coproduct-inr-inl q p (H (inl p))))
 
   equiv-xor-Prop : type-xor-Prop' P Q ≃ type-xor-Prop P Q
   equiv-xor-Prop =
-    ( equiv-coprod
+    ( equiv-coproduct
       ( equiv-tot
         ( λ p →
           ( ( equiv-Π-equiv-family
-              ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
+              ( λ q → compute-eq-coproduct-inl-inr p q)) ∘e
             ( left-unit-law-product-is-contr
               ( is-contr-Π
                 ( λ p' →
@@ -189,11 +189,11 @@ module _
                     ( p ＝ p')
                     ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
                     ( is-prop-type-Prop P p p'))))) ∘e
-          ( equiv-dependent-universal-property-coprod (λ x → inl p ＝ x))))
+          ( equiv-dependent-universal-property-coproduct (λ x → inl p ＝ x))))
       ( equiv-tot
         ( λ q →
           ( ( equiv-Π-equiv-family
-              ( λ p → compute-eq-coprod-inr-inl q p)) ∘e
+              ( λ p → compute-eq-coproduct-inr-inl q p)) ∘e
             ( right-unit-law-product-is-contr
               ( is-contr-Π
                 ( λ q' →
@@ -201,8 +201,9 @@ module _
                     ( q ＝ q')
                     ( equiv-ap-emb (emb-inr (type-Prop P) (type-Prop Q)))
                     ( is-prop-type-Prop Q q q'))))) ∘e
-          ( equiv-dependent-universal-property-coprod (λ x → inr q ＝ x))))) ∘e
-    ( right-distributive-Σ-coprod
+          ( equiv-dependent-universal-property-coproduct
+            ( λ x → inr q ＝ x))))) ∘e
+    ( right-distributive-Σ-coproduct
       ( type-Prop P)
       ( type-Prop Q)
       ( λ x → (y : type-Prop P + type-Prop Q) → x ＝ y))
@@ -252,9 +253,9 @@ module _
 
 {-
   eq-equiv-Prop
-    ( ( ( equiv-coprod
-          ( ( ( left-unit-law-coprod (type-Prop (conjunction-Prop P (neg-Prop Q)))) ∘e
-              ( equiv-coprod
+    ( ( ( equiv-coproduct
+          ( ( ( left-unit-law-coproduct (type-Prop (conjunction-Prop P (neg-Prop Q)))) ∘e
+              ( equiv-coproduct
                 ( left-absorption-Σ
                   ( λ x →
                     ( type-Prop
@@ -283,7 +284,7 @@ module _
                                 ( map-swap-2-Element-Type
                                   ( pr1 (standard-unordered-pair P Q))
                                   ( inl (inr y))))))))))) ∘e
-          ( ( right-distributive-Σ-coprod
+          ( ( right-distributive-Σ-coproduct
               ( Fin 0)
               ( unit)
               ( λ x →
@@ -311,7 +312,7 @@ module _
                         ( map-swap-2-Element-Type
                           ( pr1 (standard-unordered-pair P Q))
                           ( inr y)))))))))) ∘e
-      ( right-distributive-Σ-coprod
+      ( right-distributive-Σ-coproduct
         ( Fin 1)
         ( unit)
         ( λ x →
@@ -388,7 +389,7 @@ is-decidable-xor :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (xor A B)
 is-decidable-xor d e =
-  is-decidable-coprod
+  is-decidable-coproduct
     ( is-decidable-product d (is-decidable-neg e))
     ( is-decidable-product e (is-decidable-neg d))
 
@@ -400,7 +401,7 @@ pr1 (xor-Decidable-Prop P Q) =
 pr1 (pr2 (xor-Decidable-Prop P Q)) =
   is-prop-type-xor-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
 pr2 (pr2 (xor-Decidable-Prop P Q)) =
-  is-decidable-coprod
+  is-decidable-coproduct
     ( is-decidable-product
       ( is-decidable-Decidable-Prop P)
       ( is-decidable-neg (is-decidable-Decidable-Prop Q)))
