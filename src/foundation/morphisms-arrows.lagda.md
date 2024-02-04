@@ -308,5 +308,6 @@ module _
 - [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
 - [Fibered maps](foundation.fibered-maps.md) for the same concept under a
   different name.
-- [The pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is an operation that returns a morphism of arrows from a diagonal map.
+- [The pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is an
+  operation that returns a morphism of arrows from a diagonal map.
 - [Homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md)
