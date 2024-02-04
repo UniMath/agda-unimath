@@ -123,7 +123,8 @@ all-elements-equal-type-symmetric-xor-Prop (pair X P) x y =
   cases-is-prop-type-symmetric-xor-Prop (inl p) =
     eq-pair-Σ
       ( p)
-      ( eq-is-prop (is-prop-prod (is-prop-type-Prop (P (pr1 y))) is-prop-neg))
+      ( eq-is-prop
+        ( is-prop-product (is-prop-type-Prop (P (pr1 y))) is-prop-neg))
   cases-is-prop-type-symmetric-xor-Prop (inr np) =
     ex-falso
       ( tr
@@ -181,7 +182,7 @@ module _
         ( λ p →
           ( ( equiv-Π-equiv-family
               ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
-            ( left-unit-law-prod-is-contr
+            ( left-unit-law-product-is-contr
               ( is-contr-Π
                 ( λ p' →
                   is-contr-equiv'
@@ -193,7 +194,7 @@ module _
         ( λ q →
           ( ( equiv-Π-equiv-family
               ( λ p → compute-eq-coprod-inr-inl q p)) ∘e
-            ( right-unit-law-prod-is-contr
+            ( right-unit-law-product-is-contr
               ( is-contr-Π
                 ( λ q' →
                   is-contr-equiv'
@@ -264,7 +265,7 @@ module _
                               ( map-swap-2-Element-Type
                                 ( pr1 (standard-unordered-pair P Q))
                                 ( inl (inl x))))))))
-                ( ( equiv-prod
+                ( ( equiv-product
                     ( id-equiv)
                     ( tr
                       ( λ b →
@@ -292,7 +293,7 @@ module _
                         ( standard-unordered-pair P Q)
                         ( map-swap-2-Element-Type
                           ( pr1 (standard-unordered-pair P Q)) (inl x)))))))))
-        ( ( equiv-prod
+        ( ( equiv-product
             ( tr
               ( λ b →
                 ¬ (type-Prop (pr2 (standard-unordered-pair P Q) b)) ≃
@@ -300,7 +301,7 @@ module _
               ( inv (compute-swap-Fin-two-ℕ (one-Fin ?)))
               ( id-equiv))
             ( id-equiv)) ∘e
-          ( ( commutative-prod) ∘e
+          ( ( commutative-product) ∘e
             ( left-unit-law-Σ
               ( λ y →
                 ( type-Prop (pr2 (standard-unordered-pair P Q) (inr y))) ×
@@ -388,8 +389,8 @@ is-decidable-xor :
   is-decidable A → is-decidable B → is-decidable (xor A B)
 is-decidable-xor d e =
   is-decidable-coprod
-    ( is-decidable-prod d (is-decidable-neg e))
-    ( is-decidable-prod e (is-decidable-neg d))
+    ( is-decidable-product d (is-decidable-neg e))
+    ( is-decidable-product e (is-decidable-neg d))
 
 xor-Decidable-Prop :
   {l1 l2 : Level} → Decidable-Prop l1 → Decidable-Prop l2 →
@@ -400,10 +401,10 @@ pr1 (pr2 (xor-Decidable-Prop P Q)) =
   is-prop-type-xor-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
 pr2 (pr2 (xor-Decidable-Prop P Q)) =
   is-decidable-coprod
-    ( is-decidable-prod
+    ( is-decidable-product
       ( is-decidable-Decidable-Prop P)
       ( is-decidable-neg (is-decidable-Decidable-Prop Q)))
-    ( is-decidable-prod
+    ( is-decidable-product
       ( is-decidable-Decidable-Prop Q)
       ( is-decidable-neg (is-decidable-Decidable-Prop P)))
 ```

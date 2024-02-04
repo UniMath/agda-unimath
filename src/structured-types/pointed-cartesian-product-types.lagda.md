@@ -34,13 +34,13 @@ module _
   {l1 l2 : Level}
   where
 
-  prod-Pointed-Type :
+  product-Pointed-Type :
     (A : Pointed-Type l1) (B : Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-  pr1 (prod-Pointed-Type (A , a) (B , b)) = A × B
-  pr2 (prod-Pointed-Type (A , a) (B , b)) = a , b
+  pr1 (product-Pointed-Type (A , a) (B , b)) = A × B
+  pr2 (product-Pointed-Type (A , a) (B , b)) = a , b
 
   infixr 15 _×∗_
-  _×∗_ = prod-Pointed-Type
+  _×∗_ = product-Pointed-Type
 ```
 
 ## Properties
@@ -52,19 +52,21 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
-  map-pr1-prod-Pointed-Type : type-Pointed-Type (A ×∗ B) → type-Pointed-Type A
-  map-pr1-prod-Pointed-Type = pr1
+  map-pr1-product-Pointed-Type :
+    type-Pointed-Type (A ×∗ B) → type-Pointed-Type A
+  map-pr1-product-Pointed-Type = pr1
 
-  pr1-prod-Pointed-Type : (A ×∗ B) →∗ A
-  pr1 pr1-prod-Pointed-Type = map-pr1-prod-Pointed-Type
-  pr2 pr1-prod-Pointed-Type = refl
+  pr1-product-Pointed-Type : (A ×∗ B) →∗ A
+  pr1 pr1-product-Pointed-Type = map-pr1-product-Pointed-Type
+  pr2 pr1-product-Pointed-Type = refl
 
-  map-pr2-prod-Pointed-Type : type-Pointed-Type (A ×∗ B) → type-Pointed-Type B
-  map-pr2-prod-Pointed-Type = pr2
+  map-pr2-product-Pointed-Type :
+    type-Pointed-Type (A ×∗ B) → type-Pointed-Type B
+  map-pr2-product-Pointed-Type = pr2
 
-  pr2-prod-Pointed-Type : (A ×∗ B) →∗ B
-  pr1 pr2-prod-Pointed-Type = map-pr2-prod-Pointed-Type
-  pr2 pr2-prod-Pointed-Type = refl
+  pr2-product-Pointed-Type : (A ×∗ B) →∗ B
+  pr1 pr2-product-Pointed-Type = map-pr2-product-Pointed-Type
+  pr2 pr2-product-Pointed-Type = refl
 ```
 
 ### The pointed product `A ×∗ B` comes equipped with pointed inclusion of `A` and `B`
@@ -74,21 +76,23 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
-  map-inl-prod-Pointed-Type : type-Pointed-Type A → type-Pointed-Type (A ×∗ B)
-  pr1 (map-inl-prod-Pointed-Type x) = x
-  pr2 (map-inl-prod-Pointed-Type x) = point-Pointed-Type B
+  map-inl-product-Pointed-Type :
+    type-Pointed-Type A → type-Pointed-Type (A ×∗ B)
+  pr1 (map-inl-product-Pointed-Type x) = x
+  pr2 (map-inl-product-Pointed-Type x) = point-Pointed-Type B
 
-  inl-prod-Pointed-Type : A →∗ (A ×∗ B)
-  pr1 inl-prod-Pointed-Type = map-inl-prod-Pointed-Type
-  pr2 inl-prod-Pointed-Type = refl
+  inl-product-Pointed-Type : A →∗ (A ×∗ B)
+  pr1 inl-product-Pointed-Type = map-inl-product-Pointed-Type
+  pr2 inl-product-Pointed-Type = refl
 
-  map-inr-prod-Pointed-Type : type-Pointed-Type B → type-Pointed-Type (A ×∗ B)
-  pr1 (map-inr-prod-Pointed-Type y) = point-Pointed-Type A
-  pr2 (map-inr-prod-Pointed-Type y) = y
+  map-inr-product-Pointed-Type :
+    type-Pointed-Type B → type-Pointed-Type (A ×∗ B)
+  pr1 (map-inr-product-Pointed-Type y) = point-Pointed-Type A
+  pr2 (map-inr-product-Pointed-Type y) = y
 
-  inr-prod-Pointed-Type : B →∗ (A ×∗ B)
-  pr1 inr-prod-Pointed-Type = map-inr-prod-Pointed-Type
-  pr2 inr-prod-Pointed-Type = refl
+  inr-product-Pointed-Type : B →∗ (A ×∗ B)
+  pr1 inr-product-Pointed-Type = map-inr-product-Pointed-Type
+  pr2 inr-product-Pointed-Type = refl
 ```
 
 ### The pointed inclusions into `A ×∗ B` are sections to the pointed projections
@@ -98,13 +102,13 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
-  is-section-map-inl-prod-Pointed-Type :
-    (map-pr1-prod-Pointed-Type A B ∘ map-inl-prod-Pointed-Type A B) ~ id
-  is-section-map-inl-prod-Pointed-Type = refl-htpy
+  is-section-map-inl-product-Pointed-Type :
+    (map-pr1-product-Pointed-Type A B ∘ map-inl-product-Pointed-Type A B) ~ id
+  is-section-map-inl-product-Pointed-Type = refl-htpy
 
-  is-section-map-inr-prod-Pointed-Type :
-    (map-pr2-prod-Pointed-Type A B ∘ map-inr-prod-Pointed-Type A B) ~ id
-  is-section-map-inr-prod-Pointed-Type = refl-htpy
+  is-section-map-inr-product-Pointed-Type :
+    (map-pr2-product-Pointed-Type A B ∘ map-inr-product-Pointed-Type A B) ~ id
+  is-section-map-inr-product-Pointed-Type = refl-htpy
 ```
 
 ### The pointed gap map for the pointed product
@@ -114,19 +118,19 @@ module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
   where
 
-  map-gap-prod-Pointed-Type :
+  map-gap-product-Pointed-Type :
     {l3 : Level} {S : Pointed-Type l3}
     (f : S →∗ A) (g : S →∗ B) →
     type-Pointed-Type S → type-Pointed-Type (A ×∗ B)
-  pr1 (map-gap-prod-Pointed-Type f g x) = map-pointed-map f x
-  pr2 (map-gap-prod-Pointed-Type f g x) = map-pointed-map g x
+  pr1 (map-gap-product-Pointed-Type f g x) = map-pointed-map f x
+  pr2 (map-gap-product-Pointed-Type f g x) = map-pointed-map g x
 
-  gap-prod-Pointed-Type :
+  gap-product-Pointed-Type :
     {l3 : Level} {S : Pointed-Type l3}
     (f : S →∗ A) (g : S →∗ B) → S →∗ (A ×∗ B)
-  pr1 (gap-prod-Pointed-Type f g) =
-    map-gap-prod-Pointed-Type f g
-  pr2 (gap-prod-Pointed-Type f g) =
+  pr1 (gap-product-Pointed-Type f g) =
+    map-gap-product-Pointed-Type f g
+  pr2 (gap-product-Pointed-Type f g) =
     eq-pair
       ( preserves-point-pointed-map f)
       ( preserves-point-pointed-map g)

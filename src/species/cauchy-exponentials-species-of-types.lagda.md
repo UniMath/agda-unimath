@@ -73,7 +73,7 @@ module _
     cauchy-composition-species-types (λ _ → unit) S X ≃
     cauchy-exponential-species-types S X
   equiv-cauchy-exponential-composition-unit-species-types =
-    equiv-tot λ _ → left-unit-law-prod-is-contr is-contr-unit
+    equiv-tot λ _ → left-unit-law-product-is-contr is-contr-unit
 ```
 
 ### The Cauchy exponential of the sum of a species is equivalent to the Cauchy product of the exponential of the two species
@@ -127,7 +127,7 @@ module _
             T (cotype-Relaxed-Σ-Decomposition (pr2 (pr2 D)) b)))
         ( equiv-binary-coproduct-Decomposition-Σ-Decomposition)
         ( λ D →
-          equiv-prod
+          equiv-product
             ( equiv-Π-equiv-family
               ( λ a' →
                 equiv-eq

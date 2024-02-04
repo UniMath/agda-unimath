@@ -51,7 +51,7 @@ count-Π-Fin {l1} zero-ℕ {B} e =
 count-Π-Fin {l1} (succ-ℕ k) {B} e =
   count-equiv'
     ( equiv-dependent-universal-property-coprod B)
-    ( count-prod
+    ( count-product
       ( count-Π-Fin k (λ x → e (inl x)))
       ( count-equiv'
         ( equiv-dependent-universal-property-unit (B ∘ inr))

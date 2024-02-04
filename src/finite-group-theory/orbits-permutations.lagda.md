@@ -682,7 +682,7 @@ module _
       well-ordering-principle-ℕ
         ( λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) x) y)
         ( λ k →
-          is-decidable-prod
+          is-decidable-product
             ( is-decidable-neg (has-decidable-equality-ℕ k zero-ℕ))
             ( has-decidable-equality-count eX (iterate k (map-equiv g) x) y))
 

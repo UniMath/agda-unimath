@@ -127,7 +127,7 @@ is-finite-is-unital-Semigroup-𝔽 G =
   is-finite-Σ
     ( is-finite-type-Semigroup-𝔽 G)
     ( λ e →
-      is-finite-prod
+      is-finite-product
         ( is-finite-Π
           ( is-finite-type-Semigroup-𝔽 G)
           ( λ x → is-finite-eq-𝔽 (finite-type-Semigroup-𝔽 G)))

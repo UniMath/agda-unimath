@@ -135,9 +135,9 @@ module _
   is-prop-is-prime-decomposition-list-ℕ :
     is-prop (is-prime-decomposition-list-ℕ)
   is-prop-is-prime-decomposition-list-ℕ =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-sorted-list ℕ-Decidable-Total-Order l)
-      ( is-prop-prod
+      ( is-prop-product
         ( is-prop-is-prime-list-ℕ l)
         ( is-prop-is-decomposition-list-ℕ))
 
@@ -168,7 +168,7 @@ pr2 (is-nontrivial-divisor-ℕ-Prop n x) = is-prop-is-nontrivial-divisor-ℕ n x
 is-decidable-is-nontrivial-divisor-ℕ :
   (n x : ℕ) → is-decidable (is-nontrivial-divisor-ℕ n x)
 is-decidable-is-nontrivial-divisor-ℕ n x =
-  is-decidable-prod (is-decidable-le-ℕ 1 x) (is-decidable-div-ℕ x n)
+  is-decidable-product (is-decidable-le-ℕ 1 x) (is-decidable-div-ℕ x n)
 
 is-nontrivial-divisor-diagonal-ℕ :
   (n : ℕ) → le-ℕ 1 n → is-nontrivial-divisor-ℕ n n

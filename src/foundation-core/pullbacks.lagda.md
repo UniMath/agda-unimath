@@ -455,14 +455,14 @@ module _
 
   fold-cone :
     {l4 : Level} {C : UU l4} →
-    cone f g C → cone (map-prod f g) (diagonal X) C
+    cone f g C → cone (map-product f g) (diagonal X) C
   pr1 (pr1 (fold-cone c) z) = vertical-map-cone f g c z
   pr2 (pr1 (fold-cone c) z) = horizontal-map-cone f g c z
   pr1 (pr2 (fold-cone c)) = g ∘ horizontal-map-cone f g c
   pr2 (pr2 (fold-cone c)) z = eq-pair (coherence-square-cone f g c z) refl
 
   map-fold-cone :
-    standard-pullback f g → standard-pullback (map-prod f g) (diagonal X)
+    standard-pullback f g → standard-pullback (map-product f g) (diagonal X)
   pr1 (pr1 (map-fold-cone x)) = vertical-map-standard-pullback x
   pr2 (pr1 (map-fold-cone x)) = horizontal-map-standard-pullback x
   pr1 (pr2 (map-fold-cone x)) = g (horizontal-map-standard-pullback x)
@@ -470,7 +470,7 @@ module _
     eq-pair (coherence-square-standard-pullback x) refl
 
   inv-map-fold-cone :
-    standard-pullback (map-prod f g) (diagonal X) → standard-pullback f g
+    standard-pullback (map-product f g) (diagonal X) → standard-pullback f g
   pr1 (inv-map-fold-cone ((a , b) , x , α)) = a
   pr1 (pr2 (inv-map-fold-cone ((a , b) , x , α))) = b
   pr2 (pr2 (inv-map-fold-cone ((a , b) , x , α))) = ap pr1 α ∙ inv (ap pr2 α)
@@ -480,7 +480,7 @@ module _
       is-section (map-fold-cone) (inv-map-fold-cone)
     is-section-inv-map-fold-cone ((a , b) , (x , α)) =
       map-extensionality-standard-pullback
-        ( map-prod f g)
+        ( map-product f g)
         ( diagonal X)
         ( refl)
         ( ap pr2 α)
@@ -526,7 +526,7 @@ module _
 
   triangle-map-fold-cone :
     {l4 : Level} {C : UU l4} (c : cone f g C) →
-    gap (map-prod f g) (diagonal X) (fold-cone c) ~
+    gap (map-product f g) (diagonal X) (fold-cone c) ~
     map-fold-cone ∘ gap f g c
   triangle-map-fold-cone c = refl-htpy
 
@@ -534,10 +534,10 @@ module _
     is-pullback-fold-cone-is-pullback :
       {l4 : Level} {C : UU l4} (c : cone f g C) →
       is-pullback f g c →
-      is-pullback (map-prod f g) (diagonal X) (fold-cone c)
+      is-pullback (map-product f g) (diagonal X) (fold-cone c)
     is-pullback-fold-cone-is-pullback c is-pb-c =
       is-equiv-left-map-triangle
-        ( gap (map-prod f g) (diagonal X) (fold-cone c))
+        ( gap (map-product f g) (diagonal X) (fold-cone c))
         ( map-fold-cone)
         ( gap f g c)
         ( triangle-map-fold-cone c)
@@ -547,11 +547,11 @@ module _
   abstract
     is-pullback-is-pullback-fold-cone :
       {l4 : Level} {C : UU l4} (c : cone f g C) →
-      is-pullback (map-prod f g) (diagonal X) (fold-cone c) →
+      is-pullback (map-product f g) (diagonal X) (fold-cone c) →
       is-pullback f g c
     is-pullback-is-pullback-fold-cone c =
       is-equiv-top-map-triangle
-        ( gap (map-prod f g) (diagonal X) (fold-cone c))
+        ( gap (map-product f g) (diagonal X) (fold-cone c))
         ( map-fold-cone)
         ( gap f g c)
         ( triangle-map-fold-cone c)
@@ -568,10 +568,10 @@ module _
   (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
   where
 
-  map-prod-cone :
+  map-product-cone :
     (standard-pullback f g) × (standard-pullback f' g') →
-    standard-pullback (map-prod f f') (map-prod g g')
-  map-prod-cone =
+    standard-pullback (map-product f f') (map-product g g')
+  map-product-cone =
     ( tot
       ( λ t →
         ( tot (λ s → eq-pair')) ∘
@@ -579,8 +579,8 @@ module _
     ( map-interchange-Σ-Σ (λ x t x' → Σ B' (λ y' → f' x' ＝ g' y')))
 
   abstract
-    is-equiv-map-prod-cone : is-equiv map-prod-cone
-    is-equiv-map-prod-cone =
+    is-equiv-map-product-cone : is-equiv map-product-cone
+    is-equiv-map-product-cone =
       is-equiv-comp
         ( tot (λ t → tot (λ s → eq-pair') ∘ map-interchange-Σ-Σ _))
         ( map-interchange-Σ-Σ _)
@@ -592,7 +592,8 @@ module _
               ( map-interchange-Σ-Σ (λ y p y' → f' (pr2 t) ＝ g' y'))
               ( is-equiv-map-interchange-Σ-Σ _)
               ( is-equiv-tot-is-fiberwise-equiv
-                ( λ s → is-equiv-eq-pair (map-prod f f' t) (map-prod g g' s)))))
+                ( λ s →
+                  is-equiv-eq-pair (map-product f f' t) (map-product g g' s)))))
 
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
@@ -601,68 +602,68 @@ module _
   (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
   where
 
-  prod-cone :
+  product-cone :
     cone f g C → cone f' g' C' →
-    cone (map-prod f f') (map-prod g g') (C × C')
-  pr1 (prod-cone (p , q , H) (p' , q' , H')) = map-prod p p'
-  pr1 (pr2 (prod-cone (p , q , H) (p' , q' , H'))) = map-prod q q'
-  pr2 (pr2 (prod-cone (p , q , H) (p' , q' , H'))) =
-    ( inv-htpy (preserves-comp-map-prod p p' f f')) ∙h
-    ( htpy-map-prod H H') ∙h
-    ( preserves-comp-map-prod q q' g g')
+    cone (map-product f f') (map-product g g') (C × C')
+  pr1 (product-cone (p , q , H) (p' , q' , H')) = map-product p p'
+  pr1 (pr2 (product-cone (p , q , H) (p' , q' , H'))) = map-product q q'
+  pr2 (pr2 (product-cone (p , q , H) (p' , q' , H'))) =
+    ( inv-htpy (preserves-comp-map-product p p' f f')) ∙h
+    ( htpy-map-product H H') ∙h
+    ( preserves-comp-map-product q q' g g')
 
-  triangle-map-prod-cone :
+  triangle-map-product-cone :
     (c : cone f g C) (c' : cone f' g' C') →
-    gap (map-prod f f') (map-prod g g') (prod-cone c c') ~
-    map-prod-cone f g f' g' ∘ map-prod (gap f g c) (gap f' g' c')
-  triangle-map-prod-cone c c' z =
+    gap (map-product f f') (map-product g g') (product-cone c c') ~
+    map-product-cone f g f' g' ∘ map-product (gap f g c) (gap f' g' c')
+  triangle-map-product-cone c c' z =
     eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
 
   abstract
-    is-pullback-prod-is-pullback-pair :
+    is-pullback-product-is-pullback-pair :
       (c : cone f g C) (c' : cone f' g' C') →
       is-pullback f g c → is-pullback f' g' c' →
-      is-pullback (map-prod f f') (map-prod g g') (prod-cone c c')
-    is-pullback-prod-is-pullback-pair c c' is-pb-c is-pb-c' =
+      is-pullback (map-product f f') (map-product g g') (product-cone c c')
+    is-pullback-product-is-pullback-pair c c' is-pb-c is-pb-c' =
       is-equiv-left-map-triangle
-        ( gap (map-prod f f') (map-prod g g') (prod-cone c c'))
-        ( map-prod-cone f g f' g')
-        ( map-prod (gap f g c) (gap f' g' c'))
-        ( triangle-map-prod-cone c c')
-        ( is-equiv-map-prod (gap f g c) (gap f' g' c') is-pb-c is-pb-c')
-        ( is-equiv-map-prod-cone f g f' g')
+        ( gap (map-product f f') (map-product g g') (product-cone c c'))
+        ( map-product-cone f g f' g')
+        ( map-product (gap f g c) (gap f' g' c'))
+        ( triangle-map-product-cone c c')
+        ( is-equiv-map-product (gap f g c) (gap f' g' c') is-pb-c is-pb-c')
+        ( is-equiv-map-product-cone f g f' g')
 
   abstract
-    is-pullback-left-factor-is-pullback-prod :
+    is-pullback-left-factor-is-pullback-product :
       (c : cone f g C) (c' : cone f' g' C') →
-      is-pullback (map-prod f f') (map-prod g g') (prod-cone c c') →
+      is-pullback (map-product f f') (map-product g g') (product-cone c c') →
       standard-pullback f' g' → is-pullback f g c
-    is-pullback-left-factor-is-pullback-prod c c' is-pb-cc' t =
-      is-equiv-left-factor-is-equiv-map-prod (gap f g c) (gap f' g' c') t
+    is-pullback-left-factor-is-pullback-product c c' is-pb-cc' t =
+      is-equiv-left-factor-is-equiv-map-product (gap f g c) (gap f' g' c') t
         ( is-equiv-top-map-triangle
-          ( gap (map-prod f f') (map-prod g g') (prod-cone c c'))
-        ( map-prod-cone f g f' g')
-          ( map-prod (gap f g c) (gap f' g' c'))
-          ( triangle-map-prod-cone c c')
-          ( is-equiv-map-prod-cone f g f' g')
+          ( gap (map-product f f') (map-product g g') (product-cone c c'))
+        ( map-product-cone f g f' g')
+          ( map-product (gap f g c) (gap f' g' c'))
+          ( triangle-map-product-cone c c')
+          ( is-equiv-map-product-cone f g f' g')
           ( is-pb-cc'))
 
   abstract
-    is-pullback-right-factor-is-pullback-prod :
+    is-pullback-right-factor-is-pullback-product :
       (c : cone f g C) (c' : cone f' g' C') →
-      is-pullback (map-prod f f') (map-prod g g') (prod-cone c c') →
+      is-pullback (map-product f f') (map-product g g') (product-cone c c') →
       standard-pullback f g → is-pullback f' g' c'
-    is-pullback-right-factor-is-pullback-prod c c' is-pb-cc' t =
-      is-equiv-right-factor-is-equiv-map-prod (gap f g c) (gap f' g' c') t
+    is-pullback-right-factor-is-pullback-product c c' is-pb-cc' t =
+      is-equiv-right-factor-is-equiv-map-product (gap f g c) (gap f' g' c') t
         ( is-equiv-top-map-triangle
           ( gap
-            ( map-prod f f')
-            ( map-prod g g')
-            ( prod-cone c c'))
-          ( map-prod-cone f g f' g')
-          ( map-prod (gap f g c) (gap f' g' c'))
-          ( triangle-map-prod-cone c c')
-          ( is-equiv-map-prod-cone f g f' g')
+            ( map-product f f')
+            ( map-product g g')
+            ( product-cone c c'))
+          ( map-product-cone f g f' g')
+          ( map-product (gap f g c) (gap f' g' c'))
+          ( triangle-map-product-cone c c')
+          ( is-equiv-map-product-cone f g f' g')
           ( is-pb-cc'))
 ```
 

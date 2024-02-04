@@ -134,8 +134,8 @@ paradox-Russell {l} H =
           ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot
                 ( λ t →
-                  ( commutative-prod) ∘e
-                  ( equiv-prod
+                  ( commutative-product) ∘e
+                  ( equiv-product
                     ( id-equiv)
                     ( inv-equiv
                       ( ( equiv-concat'

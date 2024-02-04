@@ -300,7 +300,7 @@ module _
       ( _)) ∘e
     ( ( equiv-Σ
         ( _)
-        ( commutative-prod)
+        ( commutative-product)
         ( λ x →
           equiv-postcomp-equiv
             ( commutative-coprod
@@ -507,7 +507,7 @@ module _
                   ( eq-is-prop is-property-is-empty)))
             ( ( raise-empty l1 , C1) , is-empty-raise-empty)) ∘e
           ( ( inv-associative-Σ _ _ _) ∘e
-            ( ( equiv-tot (λ _ → commutative-prod)) ∘e
+            ( ( equiv-tot (λ _ → commutative-product)) ∘e
               ( ( associative-Σ _ _ _))))))) ∘e
     ( ( associative-Σ _ _ _))
 ```

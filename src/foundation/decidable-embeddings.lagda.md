@@ -186,7 +186,7 @@ equiv-Fiber-Decidable-Prop l A =
       equiv-tot
         ( λ f →
           ( inv-distributive-Π-Σ) ∘e
-          ( equiv-prod (equiv-is-prop-map-is-emb f) id-equiv))))
+          ( equiv-product (equiv-is-prop-map-is-emb f) id-equiv))))
 ```
 
 ### Any equivalence is a decidable embedding
@@ -221,7 +221,7 @@ abstract
   is-prop-is-decidable-emb f =
     is-prop-is-inhabited
       ( λ H →
-        is-prop-prod
+        is-prop-product
           ( is-property-is-emb f)
           ( is-prop-Π
             ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))

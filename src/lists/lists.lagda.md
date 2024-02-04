@@ -232,7 +232,7 @@ is-trunc-Eq-list k H nil (cons x l') =
 is-trunc-Eq-list k H (cons x l) nil =
   is-trunc-is-empty k is-empty-raise-empty
 is-trunc-Eq-list k H (cons x l) (cons y l') =
-  is-trunc-prod (succ-𝕋 k) (H x y) (is-trunc-Eq-list k H l l')
+  is-trunc-product (succ-𝕋 k) (H x y) (is-trunc-Eq-list k H l l')
 
 is-trunc-list :
   (k : 𝕋) {l : Level} {A : UU l} → is-trunc (succ-𝕋 (succ-𝕋 k)) A →

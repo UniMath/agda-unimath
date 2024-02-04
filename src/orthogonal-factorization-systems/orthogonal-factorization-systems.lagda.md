@@ -61,9 +61,9 @@ module _
   is-prop-is-orthogonal-factorization-system :
     is-prop is-orthogonal-factorization-system
   is-prop-is-orthogonal-factorization-system =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-wide-function-class L)
-      ( is-prop-prod
+      ( is-prop-product
         ( is-prop-is-wide-function-class R)
         ( is-prop-unique-factorization-operation-function-class L R))
 

@@ -34,7 +34,7 @@ is-decidable-Π-coprod :
 is-decidable-Π-coprod {C = C} dA dB =
   is-decidable-equiv
     ( equiv-dependent-universal-property-coprod C)
-    ( is-decidable-prod dA dB)
+    ( is-decidable-product dA dB)
 ```
 
 ### Decidability of dependent products over `Maybe`
@@ -47,7 +47,7 @@ is-decidable-Π-Maybe :
 is-decidable-Π-Maybe {B = B} du de =
   is-decidable-equiv
     ( equiv-dependent-universal-property-Maybe B)
-    ( is-decidable-prod du de)
+    ( is-decidable-product du de)
 ```
 
 ### Decidability of dependent products over an equivalence

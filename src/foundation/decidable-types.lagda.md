@@ -101,21 +101,21 @@ is-decidable-coprod (inr na) (inr nb) = inr (rec-coprod na nb)
 ### Cartesian products of decidable types are decidable
 
 ```agda
-is-decidable-prod :
+is-decidable-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A × B)
-is-decidable-prod (inl a) (inl b) = inl (pair a b)
-is-decidable-prod (inl a) (inr g) = inr (g ∘ pr2)
-is-decidable-prod (inr f) (inl b) = inr (f ∘ pr1)
-is-decidable-prod (inr f) (inr g) = inr (f ∘ pr1)
+is-decidable-product (inl a) (inl b) = inl (pair a b)
+is-decidable-product (inl a) (inr g) = inr (g ∘ pr2)
+is-decidable-product (inr f) (inl b) = inr (f ∘ pr1)
+is-decidable-product (inr f) (inr g) = inr (f ∘ pr1)
 
-is-decidable-prod' :
+is-decidable-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → (A → is-decidable B) → is-decidable (A × B)
-is-decidable-prod' (inl a) d with d a
+is-decidable-product' (inl a) d with d a
 ... | inl b = inl (pair a b)
 ... | inr nb = inr (nb ∘ pr2)
-is-decidable-prod' (inr na) d = inr (na ∘ pr1)
+is-decidable-product' (inr na) d = inr (na ∘ pr1)
 
 is-decidable-left-factor :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →

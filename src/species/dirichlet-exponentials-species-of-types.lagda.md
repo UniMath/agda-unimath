@@ -106,7 +106,7 @@ module _
             T (cotype-Π-Decomposition (pr2 (pr2 D)) b)))
         ( equiv-binary-product-Decomposition-Π-Decomposition)
         ( λ D →
-          equiv-prod
+          equiv-product
             ( equiv-Π-equiv-family
               ( λ a' →
                 equiv-eq

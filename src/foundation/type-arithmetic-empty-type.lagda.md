@@ -36,48 +36,48 @@ module _
   {l : Level} (X : UU l)
   where
 
-  inv-pr1-prod-empty : empty → empty × X
-  inv-pr1-prod-empty ()
+  inv-pr1-product-empty : empty → empty × X
+  inv-pr1-product-empty ()
 
-  is-section-inv-pr1-prod-empty : (pr1 ∘ inv-pr1-prod-empty) ~ id
-  is-section-inv-pr1-prod-empty ()
+  is-section-inv-pr1-product-empty : (pr1 ∘ inv-pr1-product-empty) ~ id
+  is-section-inv-pr1-product-empty ()
 
-  is-retraction-inv-pr1-prod-empty : (inv-pr1-prod-empty ∘ pr1) ~ id
-  is-retraction-inv-pr1-prod-empty (pair () x)
+  is-retraction-inv-pr1-product-empty : (inv-pr1-product-empty ∘ pr1) ~ id
+  is-retraction-inv-pr1-product-empty (pair () x)
 
-  is-equiv-pr1-prod-empty : is-equiv (pr1 {A = empty} {B = λ t → X})
-  is-equiv-pr1-prod-empty =
+  is-equiv-pr1-product-empty : is-equiv (pr1 {A = empty} {B = λ t → X})
+  is-equiv-pr1-product-empty =
     is-equiv-is-invertible
-      inv-pr1-prod-empty
-      is-section-inv-pr1-prod-empty
-      is-retraction-inv-pr1-prod-empty
+      inv-pr1-product-empty
+      is-section-inv-pr1-product-empty
+      is-retraction-inv-pr1-product-empty
 
-  left-zero-law-prod : (empty × X) ≃ empty
-  pr1 left-zero-law-prod = pr1
-  pr2 left-zero-law-prod = is-equiv-pr1-prod-empty
+  left-zero-law-product : (empty × X) ≃ empty
+  pr1 left-zero-law-product = pr1
+  pr2 left-zero-law-product = is-equiv-pr1-product-empty
 
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (is-empty-A : is-empty A)
   where
-  inv-pr1-prod-is-empty : A → A × B
-  inv-pr1-prod-is-empty a = ex-falso (is-empty-A a)
+  inv-pr1-product-is-empty : A → A × B
+  inv-pr1-product-is-empty a = ex-falso (is-empty-A a)
 
-  is-section-inv-pr1-prod-is-empty : (pr1 ∘ inv-pr1-prod-is-empty) ~ id
-  is-section-inv-pr1-prod-is-empty a = ex-falso (is-empty-A a)
+  is-section-inv-pr1-product-is-empty : (pr1 ∘ inv-pr1-product-is-empty) ~ id
+  is-section-inv-pr1-product-is-empty a = ex-falso (is-empty-A a)
 
-  is-retraction-inv-pr1-prod-is-empty : (inv-pr1-prod-is-empty ∘ pr1) ~ id
-  is-retraction-inv-pr1-prod-is-empty (pair a b) = ex-falso (is-empty-A a)
+  is-retraction-inv-pr1-product-is-empty : (inv-pr1-product-is-empty ∘ pr1) ~ id
+  is-retraction-inv-pr1-product-is-empty (pair a b) = ex-falso (is-empty-A a)
 
-  is-equiv-pr1-prod-is-empty : is-equiv (pr1 {A = A} {B = λ a → B})
-  is-equiv-pr1-prod-is-empty =
+  is-equiv-pr1-product-is-empty : is-equiv (pr1 {A = A} {B = λ a → B})
+  is-equiv-pr1-product-is-empty =
     is-equiv-is-invertible
-      inv-pr1-prod-is-empty
-      is-section-inv-pr1-prod-is-empty
-      is-retraction-inv-pr1-prod-is-empty
+      inv-pr1-product-is-empty
+      is-section-inv-pr1-product-is-empty
+      is-retraction-inv-pr1-product-is-empty
 
-  left-zero-law-prod-is-empty : (A × B) ≃ A
-  pr1 left-zero-law-prod-is-empty = pr1
-  pr2 left-zero-law-prod-is-empty = is-equiv-pr1-prod-is-empty
+  left-zero-law-product-is-empty : (A × B) ≃ A
+  pr1 left-zero-law-product-is-empty = pr1
+  pr2 left-zero-law-product-is-empty = is-equiv-pr1-product-is-empty
 ```
 
 ### Right zero law for cartesian products
@@ -87,48 +87,48 @@ module _
   {l : Level} (X : UU l)
   where
 
-  inv-pr2-prod-empty : empty → (X × empty)
-  inv-pr2-prod-empty ()
+  inv-pr2-product-empty : empty → (X × empty)
+  inv-pr2-product-empty ()
 
-  is-section-inv-pr2-prod-empty : (pr2 ∘ inv-pr2-prod-empty) ~ id
-  is-section-inv-pr2-prod-empty ()
+  is-section-inv-pr2-product-empty : (pr2 ∘ inv-pr2-product-empty) ~ id
+  is-section-inv-pr2-product-empty ()
 
-  is-retraction-inv-pr2-prod-empty : (inv-pr2-prod-empty ∘ pr2) ~ id
-  is-retraction-inv-pr2-prod-empty (pair x ())
+  is-retraction-inv-pr2-product-empty : (inv-pr2-product-empty ∘ pr2) ~ id
+  is-retraction-inv-pr2-product-empty (pair x ())
 
-  is-equiv-pr2-prod-empty : is-equiv (pr2 {A = X} {B = λ x → empty})
-  is-equiv-pr2-prod-empty =
+  is-equiv-pr2-product-empty : is-equiv (pr2 {A = X} {B = λ x → empty})
+  is-equiv-pr2-product-empty =
     is-equiv-is-invertible
-      inv-pr2-prod-empty
-      is-section-inv-pr2-prod-empty
-      is-retraction-inv-pr2-prod-empty
+      inv-pr2-product-empty
+      is-section-inv-pr2-product-empty
+      is-retraction-inv-pr2-product-empty
 
-  right-zero-law-prod : (X × empty) ≃ empty
-  pr1 right-zero-law-prod = pr2
-  pr2 right-zero-law-prod = is-equiv-pr2-prod-empty
+  right-zero-law-product : (X × empty) ≃ empty
+  pr1 right-zero-law-product = pr2
+  pr2 right-zero-law-product = is-equiv-pr2-product-empty
 
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (is-empty-B : is-empty B)
   where
-  inv-pr2-prod-is-empty : B → A × B
-  inv-pr2-prod-is-empty b = ex-falso (is-empty-B b)
+  inv-pr2-product-is-empty : B → A × B
+  inv-pr2-product-is-empty b = ex-falso (is-empty-B b)
 
-  is-section-inv-pr2-prod-is-empty : (pr2 ∘ inv-pr2-prod-is-empty) ~ id
-  is-section-inv-pr2-prod-is-empty b = ex-falso (is-empty-B b)
+  is-section-inv-pr2-product-is-empty : (pr2 ∘ inv-pr2-product-is-empty) ~ id
+  is-section-inv-pr2-product-is-empty b = ex-falso (is-empty-B b)
 
-  is-retraction-inv-pr2-prod-is-empty : (inv-pr2-prod-is-empty ∘ pr2) ~ id
-  is-retraction-inv-pr2-prod-is-empty (pair a b) = ex-falso (is-empty-B b)
+  is-retraction-inv-pr2-product-is-empty : (inv-pr2-product-is-empty ∘ pr2) ~ id
+  is-retraction-inv-pr2-product-is-empty (pair a b) = ex-falso (is-empty-B b)
 
-  is-equiv-pr2-prod-is-empty : is-equiv (pr2 {A = A} {B = λ a → B})
-  is-equiv-pr2-prod-is-empty =
+  is-equiv-pr2-product-is-empty : is-equiv (pr2 {A = A} {B = λ a → B})
+  is-equiv-pr2-product-is-empty =
     is-equiv-is-invertible
-      inv-pr2-prod-is-empty
-      is-section-inv-pr2-prod-is-empty
-      is-retraction-inv-pr2-prod-is-empty
+      inv-pr2-product-is-empty
+      is-section-inv-pr2-product-is-empty
+      is-retraction-inv-pr2-product-is-empty
 
-  right-zero-law-prod-is-empty : (A × B) ≃ B
-  pr1 right-zero-law-prod-is-empty = pr2
-  pr2 right-zero-law-prod-is-empty = is-equiv-pr2-prod-is-empty
+  right-zero-law-product-is-empty : (A × B) ≃ B
+  pr1 right-zero-law-product-is-empty = pr2
+  pr2 right-zero-law-product-is-empty = is-equiv-pr2-product-is-empty
 ```
 
 ### Right absorption law for dependent pair types and for cartesian products
@@ -175,18 +175,18 @@ module _
   {l : Level} {A : UU l}
   where
 
-  map-right-absorption-prod : A × empty → empty
-  map-right-absorption-prod = map-right-absorption-Σ A
+  map-right-absorption-product : A × empty → empty
+  map-right-absorption-product = map-right-absorption-Σ A
 
-  is-equiv-map-right-absorption-prod : is-equiv map-right-absorption-prod
-  is-equiv-map-right-absorption-prod = is-equiv-map-right-absorption-Σ A
+  is-equiv-map-right-absorption-product : is-equiv map-right-absorption-product
+  is-equiv-map-right-absorption-product = is-equiv-map-right-absorption-Σ A
 
-  right-absorption-prod : (A × empty) ≃ empty
-  right-absorption-prod = right-absorption-Σ A
+  right-absorption-product : (A × empty) ≃ empty
+  right-absorption-product = right-absorption-Σ A
 
-is-empty-right-factor-is-empty-prod :
+is-empty-right-factor-is-empty-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → A → is-empty B
-is-empty-right-factor-is-empty-prod f a b = f (pair a b)
+is-empty-right-factor-is-empty-product f a b = f (pair a b)
 ```
 
 ### Left absorption law for cartesian products
@@ -196,19 +196,19 @@ module _
   {l : Level} (A : UU l)
   where
 
-  map-left-absorption-prod : empty × A → empty
-  map-left-absorption-prod = map-left-absorption-Σ (λ x → A)
+  map-left-absorption-product : empty × A → empty
+  map-left-absorption-product = map-left-absorption-Σ (λ x → A)
 
-  is-equiv-map-left-absorption-prod : is-equiv map-left-absorption-prod
-  is-equiv-map-left-absorption-prod =
+  is-equiv-map-left-absorption-product : is-equiv map-left-absorption-product
+  is-equiv-map-left-absorption-product =
     is-equiv-map-left-absorption-Σ (λ x → A)
 
-  left-absorption-prod : (empty × A) ≃ empty
-  left-absorption-prod = left-absorption-Σ (λ x → A)
+  left-absorption-product : (empty × A) ≃ empty
+  left-absorption-product = left-absorption-Σ (λ x → A)
 
-is-empty-left-factor-is-empty-prod :
+is-empty-left-factor-is-empty-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
-is-empty-left-factor-is-empty-prod f b a = f (pair a b)
+is-empty-left-factor-is-empty-product f b a = f (pair a b)
 ```
 
 ### Left unit law for coproducts

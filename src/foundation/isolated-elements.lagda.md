@@ -201,7 +201,7 @@ module _
       fundamental-theorem-id
         ( is-contr-equiv
           ( a ＝ a)
-          ( left-unit-law-prod)
+          ( left-unit-law-product)
           ( is-proof-irrelevant-is-prop
             ( is-prop-eq-isolated-element d a)
             ( refl)))
@@ -266,7 +266,7 @@ module _
   is-decidable-point-isolated-element :
     is-decidable-map point-isolated-element
   is-decidable-point-isolated-element x =
-    is-decidable-prod is-decidable-unit (is-isolated-isolated-element a x)
+    is-decidable-product is-decidable-unit (is-isolated-isolated-element a x)
 
   is-decidable-emb-point-isolated-element :
     is-decidable-emb point-isolated-element

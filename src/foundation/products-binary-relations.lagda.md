@@ -33,10 +33,10 @@ module _
   {B : UU l3} (S : Relation-Prop l4 B)
   where
 
-  prod-Relation-Prop :
+  product-Relation-Prop :
     Relation-Prop (l2 ⊔ l4) (A × B)
-  prod-Relation-Prop (a , b) (a' , b') =
-    prod-Prop
+  product-Relation-Prop (a , b) (a' , b') =
+    product-Prop
       ( R a a')
       ( S b b')
 ```

@@ -862,7 +862,7 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
                 ( Fin n)
                 ( type-Decidable-Prop ∘ P))
               ( Σ unit (λ _ → empty))
-              ( map-right-absorption-prod)) ∘e
+              ( map-right-absorption-product)) ∘e
             ( h))))
   where
   f :

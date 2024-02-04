@@ -83,7 +83,7 @@ module _
 
   is-abstractly-transitive-prop-action-∞-Group : Prop (l1 ⊔ l2)
   is-abstractly-transitive-prop-action-∞-Group =
-    prod-Prop
+    product-Prop
       ( is-inhabited-Prop (type-action-∞-Group G X))
       ( Π-Prop
         ( type-action-∞-Group G X)

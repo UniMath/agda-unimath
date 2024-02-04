@@ -125,7 +125,8 @@ abstract
   all-elements-equal-minimal-element-Fin k P
     (pair x (pair p l)) (pair y (pair q m)) =
     eq-type-subtype
-      ( λ t → prod-Prop (P t) (is-lower-bound-fin-Prop k (is-in-subtype P) t))
+      ( λ t →
+        product-Prop (P t) (is-lower-bound-fin-Prop k (is-in-subtype P) t))
       ( antisymmetric-leq-Fin k x y (l y q) (m x p))
 
 abstract

@@ -304,13 +304,13 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  emb-prod : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
-  emb-prod f g = emb-Σ (λ _ → D) f (λ _ → g)
+  emb-product : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
+  emb-product f g = emb-Σ (λ _ → D) f (λ _ → g)
 
-  is-emb-map-prod :
-    (f : A → C) (g : B → D) → is-emb f → is-emb g → (is-emb (map-prod f g))
-  is-emb-map-prod f g is-emb-f is-emb-g =
-    is-emb-map-emb (emb-prod (f , is-emb-f) (g , is-emb-g))
+  is-emb-map-product :
+    (f : A → C) (g : B → D) → is-emb f → is-emb g → (is-emb (map-product f g))
+  is-emb-map-product f g is-emb-f is-emb-g =
+    is-emb-map-emb (emb-product (f , is-emb-f) (g , is-emb-g))
 ```
 
 ### If the action on identifications has a section, then `f` is an embedding

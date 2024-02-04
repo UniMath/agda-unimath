@@ -319,16 +319,16 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-maybe-prod : (Maybe A × Maybe B) → Maybe (A × B)
-  map-maybe-prod (inl a , inl b) = inl (a , b)
-  map-maybe-prod (inl a , inr star) = inr star
-  map-maybe-prod (inr star , inl b) = inr star
-  map-maybe-prod (inr star , inr star) = inr star
+  map-maybe-product : (Maybe A × Maybe B) → Maybe (A × B)
+  map-maybe-product (inl a , inl b) = inl (a , b)
+  map-maybe-product (inl a , inr star) = inr star
+  map-maybe-product (inr star , inl b) = inr star
+  map-maybe-product (inr star , inr star) = inr star
 
-  is-surjective-map-maybe-prod : is-surjective map-maybe-prod
-  is-surjective-map-maybe-prod (inl (a , b)) =
+  is-surjective-map-maybe-product : is-surjective map-maybe-product
+  is-surjective-map-maybe-product (inl (a , b)) =
     unit-trunc-Prop ((inl a , inl b) , refl)
-  is-surjective-map-maybe-prod (inr star) =
+  is-surjective-map-maybe-product (inr star) =
     unit-trunc-Prop ((inr star , inr star) , refl)
 ```
 
@@ -405,20 +405,20 @@ module _
   {l1 l2 : Level} (X : Set l1) (Y : Set l2)
   where
 
-  is-countable-prod :
-    is-countable X → is-countable Y → is-countable (prod-Set X Y)
-  is-countable-prod H H' =
+  is-countable-product :
+    is-countable X → is-countable Y → is-countable (product-Set X Y)
+  is-countable-product H H' =
     apply-twice-universal-property-trunc-Prop H' H
-      ( is-countable-Prop (prod-Set X Y))
+      ( is-countable-Prop (product-Set X Y))
       ( λ h' h →
         ( unit-trunc-Prop
           ( pair
-            ( map-maybe-prod ∘
-              ( map-prod (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
+            ( map-maybe-product ∘
+              ( map-product (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
             ( is-surjective-comp
-              ( is-surjective-map-maybe-prod)
+              ( is-surjective-map-maybe-product)
               ( is-surjective-comp
-                ( is-surjective-map-prod (pr2 h) (pr2 h'))
+                ( is-surjective-map-product (pr2 h) (pr2 h'))
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ×ℕ)))))))
 ```
 
@@ -429,9 +429,9 @@ is-countable-ℕ+ℕ : is-countable (coprod-Set ℕ-Set ℕ-Set)
 is-countable-ℕ+ℕ =
   is-countable-coprod ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
 
-is-countable-ℕ×ℕ : is-countable (prod-Set ℕ-Set ℕ-Set)
+is-countable-ℕ×ℕ : is-countable (product-Set ℕ-Set ℕ-Set)
 is-countable-ℕ×ℕ =
-  is-countable-prod ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
+  is-countable-product ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
 
 is-countable-ℤ : is-countable (ℤ-Set)
 is-countable-ℤ =

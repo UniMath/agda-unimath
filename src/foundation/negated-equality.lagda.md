@@ -102,8 +102,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  nonequal-prod-pr2 : (u v : A × B) → pr2 u ≠ pr2 v → u ≠ v
-  nonequal-prod-pr2 u v = map-neg (ap pr2)
+  nonequal-product-pr2 : (u v : A × B) → pr2 u ≠ pr2 v → u ≠ v
+  nonequal-product-pr2 u v = map-neg (ap pr2)
 ```
 
 ### If there is a reflexive relation that does not relate `a` and `b`, then they are nonequal

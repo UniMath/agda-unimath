@@ -685,20 +685,20 @@ module _
   (f : A → B) (g : X → Y) (g' : X' → Y')
   where
 
-  is-orthogonal-pullback-condition-right-prod :
+  is-orthogonal-pullback-condition-right-product :
     is-orthogonal-pullback-condition f g →
     is-orthogonal-pullback-condition f g' →
-    is-orthogonal-pullback-condition f (map-prod g g')
-  is-orthogonal-pullback-condition-right-prod G G' =
+    is-orthogonal-pullback-condition f (map-product g g')
+  is-orthogonal-pullback-condition-right-product G G' =
     is-pullback-top-is-pullback-bottom-cube-is-equiv
-      ( map-prod (postcomp B g) (postcomp B g'))
-      ( map-prod (precomp f X) (precomp f X'))
-      ( map-prod (precomp f Y) (precomp f Y'))
-      ( map-prod (postcomp A g) (postcomp A g'))
-      ( postcomp B (map-prod g g'))
+      ( map-product (postcomp B g) (postcomp B g'))
+      ( map-product (precomp f X) (precomp f X'))
+      ( map-product (precomp f Y) (precomp f Y'))
+      ( map-product (postcomp A g) (postcomp A g'))
+      ( postcomp B (map-product g g'))
       ( precomp f (X × X'))
       ( precomp f (Y × Y'))
-      ( postcomp A (map-prod g g'))
+      ( postcomp A (map-product g g'))
       ( map-up-product)
       ( map-up-product)
       ( map-up-product)
@@ -714,7 +714,7 @@ module _
       ( up-product)
       ( up-product)
       ( up-product)
-      ( is-pullback-prod-is-pullback-pair
+      ( is-pullback-product-is-pullback-pair
         ( precomp f Y)
         ( postcomp A g)
         ( precomp f Y')
@@ -724,11 +724,11 @@ module _
         ( G)
         ( G'))
 
-  is-orthogonal-right-prod :
-    is-orthogonal f g → is-orthogonal f g' → is-orthogonal f (map-prod g g')
-  is-orthogonal-right-prod G G' =
-    is-orthogonal-is-orthogonal-pullback-condition f (map-prod g g')
-      ( is-orthogonal-pullback-condition-right-prod
+  is-orthogonal-right-product :
+    is-orthogonal f g → is-orthogonal f g' → is-orthogonal f (map-product g g')
+  is-orthogonal-right-product G G' =
+    is-orthogonal-is-orthogonal-pullback-condition f (map-product g g')
+      ( is-orthogonal-pullback-condition-right-product
         ( is-orthogonal-pullback-condition-is-orthogonal f g G)
         ( is-orthogonal-pullback-condition-is-orthogonal f g' G'))
 ```
@@ -876,10 +876,10 @@ module _
     is-orthogonal-pullback-condition (map-coprod f f') g
   is-orthogonal-pullback-condition-left-coprod F F' =
     is-pullback-top-is-pullback-bottom-cube-is-equiv
-      ( map-prod (postcomp B g) (postcomp B' g))
-      ( map-prod (precomp f X) (precomp f' X))
-      ( map-prod (precomp f Y) (precomp f' Y))
-      ( map-prod (postcomp A g) (postcomp A' g))
+      ( map-product (postcomp B g) (postcomp B' g))
+      ( map-product (precomp f X) (precomp f' X))
+      ( map-product (precomp f Y) (precomp f' Y))
+      ( map-product (postcomp A g) (postcomp A' g))
       ( postcomp (B + B') g)
       ( precomp (map-coprod f f') X)
       ( precomp (map-coprod f f') Y)
@@ -899,7 +899,7 @@ module _
       ( universal-property-coprod Y)
       ( universal-property-coprod X)
       ( universal-property-coprod Y)
-      ( is-pullback-prod-is-pullback-pair
+      ( is-pullback-product-is-pullback-pair
         ( precomp f Y)
         ( postcomp A g)
         ( precomp f' Y)

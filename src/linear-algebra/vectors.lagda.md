@@ -300,7 +300,7 @@ module _
   is-trunc-Eq-vec k zero-ℕ A-trunc empty-vec empty-vec =
     is-trunc-is-contr k is-contr-raise-unit
   is-trunc-Eq-vec k (succ-ℕ n) A-trunc (x ∷ xs) (y ∷ ys) =
-    is-trunc-prod k (A-trunc x y) (is-trunc-Eq-vec k n A-trunc xs ys)
+    is-trunc-product k (A-trunc x y) (is-trunc-Eq-vec k n A-trunc xs ys)
 
   center-is-contr-vec :
     {n : ℕ} → is-contr A → vec A n

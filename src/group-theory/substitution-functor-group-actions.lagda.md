@@ -113,7 +113,7 @@ module _
   preset-obj-left-adjoint-subst-action-Group :
     {l3 : Level} → action-Group G l3 → Set (l2 ⊔ l3)
   preset-obj-left-adjoint-subst-action-Group X =
-    prod-Set (set-Group H) (set-action-Group G X)
+    product-Set (set-Group H) (set-action-Group G X)
 
   pretype-obj-left-adjoint-subst-action-Group :
     {l3 : Level} → action-Group G l3 → UU (l2 ⊔ l3)

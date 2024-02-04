@@ -90,7 +90,7 @@ module _
         ( λ A →
           equiv-tot
             ( λ B →
-              ( equiv-prod
+              ( equiv-product
                 ( id-equiv)
                 ( equiv-universal-property-coprod X)) ∘e
               ( left-unit-law-Σ-is-contr

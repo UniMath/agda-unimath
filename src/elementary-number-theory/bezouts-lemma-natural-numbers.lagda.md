@@ -789,7 +789,7 @@ minimal-pos-distance-between-multiples x y = well-ordering-principle-ℕ
   (pos-distance-between-multiples x y)
   (λ z → is-decidable-function-type
     (is-decidable-neg (is-decidable-is-zero-ℕ (x +ℕ y)))
-    (is-decidable-prod (is-decidable-neg (is-decidable-is-zero-ℕ z))
+    (is-decidable-product (is-decidable-neg (is-decidable-is-zero-ℕ z))
       (is-decidable-is-distance-between-multiples-ℕ x y z)))
   (is-inhabited-pos-distance-between-multiples x y)
 

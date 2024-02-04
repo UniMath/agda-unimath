@@ -286,21 +286,21 @@ module _
 ### Propositional truncations distribute over cartesian products
 
 ```agda
-equiv-prod-trunc-Prop :
+equiv-product-trunc-Prop :
   {l1 l2 : Level} (A : UU l1) (A' : UU l2) →
   type-equiv-Prop
     ( trunc-Prop (A × A'))
-    ( prod-Prop (trunc-Prop A) (trunc-Prop A'))
-equiv-prod-trunc-Prop A A' =
+    ( product-Prop (trunc-Prop A) (trunc-Prop A'))
+equiv-product-trunc-Prop A A' =
   pr1
     ( center
       ( is-uniquely-unique-propositional-truncation
         ( trunc-Prop (A × A'))
-        ( prod-Prop (trunc-Prop A) (trunc-Prop A'))
+        ( product-Prop (trunc-Prop A) (trunc-Prop A'))
         ( unit-trunc-Prop)
-        ( map-prod unit-trunc-Prop unit-trunc-Prop)
+        ( map-product unit-trunc-Prop unit-trunc-Prop)
         ( is-propositional-truncation-trunc-Prop (A × A'))
-        ( is-propositional-truncation-prod
+        ( is-propositional-truncation-product
           ( trunc-Prop A)
           ( unit-trunc-Prop)
           ( trunc-Prop A')
@@ -308,20 +308,20 @@ equiv-prod-trunc-Prop A A' =
           ( is-propositional-truncation-trunc-Prop A)
           ( is-propositional-truncation-trunc-Prop A'))))
 
-map-distributive-trunc-prod-Prop :
+map-distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   type-trunc-Prop (A × B) → type-trunc-Prop A × type-trunc-Prop B
-map-distributive-trunc-prod-Prop {l1} {l2} {A} {B} =
+map-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
   map-universal-property-trunc-Prop
     ( pair
       ( type-trunc-Prop A × type-trunc-Prop B)
-      ( is-prop-prod is-prop-type-trunc-Prop is-prop-type-trunc-Prop))
-    ( map-prod unit-trunc-Prop unit-trunc-Prop)
+      ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop))
+    ( map-product unit-trunc-Prop unit-trunc-Prop)
 
-map-inv-distributive-trunc-prod-Prop :
+map-inv-distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   type-trunc-Prop A × type-trunc-Prop B → type-trunc-Prop (A × B)
-map-inv-distributive-trunc-prod-Prop {l1} {l2} {A} {B} t =
+map-inv-distributive-trunc-product-Prop {l1} {l2} {A} {B} t =
   map-universal-property-trunc-Prop
     ( trunc-Prop (A × B))
     ( λ x →
@@ -332,37 +332,39 @@ map-inv-distributive-trunc-prod-Prop {l1} {l2} {A} {B} t =
     ( pr1 t)
 
 abstract
-  is-equiv-map-distributive-trunc-prod-Prop :
+  is-equiv-map-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    is-equiv (map-distributive-trunc-prod-Prop {A = A} {B = B})
-  is-equiv-map-distributive-trunc-prod-Prop {l1} {l2} {A} {B} =
+    is-equiv (map-distributive-trunc-product-Prop {A = A} {B = B})
+  is-equiv-map-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
     is-equiv-is-prop
       ( is-prop-type-trunc-Prop)
-      ( is-prop-prod is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
-      ( map-inv-distributive-trunc-prod-Prop)
+      ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
+      ( map-inv-distributive-trunc-product-Prop)
 
-distributive-trunc-prod-Prop :
+distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   type-trunc-Prop (A × B) ≃ (type-trunc-Prop A × type-trunc-Prop B)
-pr1 distributive-trunc-prod-Prop = map-distributive-trunc-prod-Prop
-pr2 distributive-trunc-prod-Prop = is-equiv-map-distributive-trunc-prod-Prop
+pr1 distributive-trunc-product-Prop = map-distributive-trunc-product-Prop
+pr2 distributive-trunc-product-Prop =
+  is-equiv-map-distributive-trunc-product-Prop
 
 abstract
-  is-equiv-map-inv-distributive-trunc-prod-Prop :
+  is-equiv-map-inv-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    is-equiv (map-inv-distributive-trunc-prod-Prop {A = A} {B = B})
-  is-equiv-map-inv-distributive-trunc-prod-Prop {l1} {l2} {A} {B} =
+    is-equiv (map-inv-distributive-trunc-product-Prop {A = A} {B = B})
+  is-equiv-map-inv-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
     is-equiv-is-prop
-      ( is-prop-prod is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
+      ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
-      ( map-distributive-trunc-prod-Prop)
+      ( map-distributive-trunc-product-Prop)
 
-inv-distributive-trunc-prod-Prop :
+inv-distributive-trunc-product-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   ( type-trunc-Prop A × type-trunc-Prop B) ≃ type-trunc-Prop (A × B)
-pr1 inv-distributive-trunc-prod-Prop = map-inv-distributive-trunc-prod-Prop
-pr2 inv-distributive-trunc-prod-Prop =
-  is-equiv-map-inv-distributive-trunc-prod-Prop
+pr1 inv-distributive-trunc-product-Prop =
+  map-inv-distributive-trunc-product-Prop
+pr2 inv-distributive-trunc-product-Prop =
+  is-equiv-map-inv-distributive-trunc-product-Prop
 ```
 
 ### Propositional truncations of coproducts of types with themselves

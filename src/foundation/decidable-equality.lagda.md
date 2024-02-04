@@ -74,23 +74,23 @@ has-decidable-equality-unit star star = inl refl
 ### A product of types with decidable equality has decidable equality
 
 ```agda
-has-decidable-equality-prod' :
+has-decidable-equality-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (f : B → has-decidable-equality A) (g : A → has-decidable-equality B) →
   has-decidable-equality (A × B)
-has-decidable-equality-prod' f g (pair x y) (pair x' y') with
+has-decidable-equality-product' f g (pair x y) (pair x' y') with
   f y x x' | g x y y'
 ... | inl refl | inl refl = inl refl
 ... | inl refl | inr nq = inr (λ r → nq (ap pr2 r))
 ... | inr np | inl refl = inr (λ r → np (ap pr1 r))
 ... | inr np | inr nq = inr (λ r → np (ap pr1 r))
 
-has-decidable-equality-prod :
+has-decidable-equality-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-decidable-equality A → has-decidable-equality B →
   has-decidable-equality (A × B)
-has-decidable-equality-prod d e =
-  has-decidable-equality-prod' (λ y → d) (λ x → e)
+has-decidable-equality-product d e =
+  has-decidable-equality-product' (λ y → d) (λ x → e)
 ```
 
 ### Decidability of equality of the factors of a cartesian product

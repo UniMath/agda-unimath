@@ -164,7 +164,7 @@ module _
   all-elements-equal-is-iso-Large-Precategory f (g , p , q) (g' , p' , q') =
     eq-type-subtype
       ( λ g →
-        prod-Prop
+        product-Prop
           ( Id-Prop
             ( hom-set-Large-Precategory C Y Y)
             ( comp-hom-Large-Precategory C f g)

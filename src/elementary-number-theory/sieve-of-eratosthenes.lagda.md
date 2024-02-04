@@ -59,7 +59,7 @@ le-in-sieve-of-eratosthenes-ℕ n a = pr1
 is-decidable-in-sieve-of-eratosthenes-ℕ :
   (n a : ℕ) → is-decidable (in-sieve-of-eratosthenes-ℕ n a)
 is-decidable-in-sieve-of-eratosthenes-ℕ n a =
-  is-decidable-prod
+  is-decidable-product
     ( is-decidable-le-ℕ n a)
     ( is-decidable-bounded-Π-ℕ
       ( λ x → leq-ℕ x n)

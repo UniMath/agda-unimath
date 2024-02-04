@@ -121,7 +121,7 @@ module _
                                 equiv-tot
                                   ( λ B' →
                                     equiv-postcomp-equiv
-                                      ( equiv-prod
+                                      ( equiv-product
                                         ( inv-equiv (pr2 A'))
                                         ( inv-equiv (pr2 B')))
                                       ( X))) ∘e

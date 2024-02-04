@@ -103,7 +103,7 @@ is-prop-is-locally-finite A = is-prop-type-Prop (is-locally-finite-Prop A)
 is-truncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-truncated-π-finite-Prop zero-ℕ X = is-finite-Prop X
 is-truncated-π-finite-Prop (succ-ℕ k) X =
-  prod-Prop
+  product-Prop
     ( is-finite-Prop (type-trunc-Set X))
     ( Π-Prop X
       ( λ x → Π-Prop X (λ y → is-truncated-π-finite-Prop k (Id x y))))
@@ -143,7 +143,7 @@ mere-equiv-number-of-connected-components H =
 is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-π-finite-Prop zero-ℕ X = has-finite-connected-components-Prop X
 is-π-finite-Prop (succ-ℕ k) X =
-  prod-Prop ( is-π-finite-Prop zero-ℕ X)
+  product-Prop ( is-π-finite-Prop zero-ℕ X)
             ( Π-Prop X
               ( λ x → Π-Prop X (λ y → is-π-finite-Prop k (Id x y))))
 
@@ -478,13 +478,13 @@ pr2 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
 #### The dependent product of locally finite types
 
 ```agda
-is-locally-finite-prod :
+is-locally-finite-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-locally-finite A → is-locally-finite B → is-locally-finite (A × B)
-is-locally-finite-prod f g x y =
+is-locally-finite-product f g x y =
   is-finite-equiv
     ( equiv-eq-pair x y)
-    ( is-finite-prod (f (pr1 x) (pr1 y)) (g (pr2 x) (pr2 y)))
+    ( is-finite-product (f (pr1 x) (pr1 y)) (g (pr2 x) (pr2 y)))
 
 is-locally-finite-Π-Fin :
   {l1 : Level} (k : ℕ) {B : Fin k → UU l1} →
@@ -495,7 +495,7 @@ is-locally-finite-Π-Fin {l1} zero-ℕ {B} f =
 is-locally-finite-Π-Fin {l1} (succ-ℕ k) {B} f =
   is-locally-finite-equiv
     ( equiv-dependent-universal-property-coprod B)
-    ( is-locally-finite-prod
+    ( is-locally-finite-product
       ( is-locally-finite-Π-Fin k (λ x → f (inl x)))
       ( is-locally-finite-equiv
         ( equiv-dependent-universal-property-unit (B ∘ inr))

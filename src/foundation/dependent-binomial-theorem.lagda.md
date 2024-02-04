@@ -105,7 +105,7 @@ module _
   distributive-Π-coprod =
     ( ( equiv-tot
         ( λ f →
-          ( ( equiv-prod
+          ( ( equiv-product
               ( equiv-Π-equiv-family
                 ( λ x →
                   equiv-Π-equiv-family
@@ -164,7 +164,7 @@ module _
             ( inr v))))
       ( equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ X)
       ( λ f →
-        equiv-prod
+        equiv-product
           ( equiv-Π
               ( λ z →
                   A

@@ -162,7 +162,7 @@ compute-binomial-type-Level l {l1} {l2} A B =
         ( UU (l1 ⊔ l))
         ( λ X → X ↪ᵈ A)
         ( λ X → mere-equiv B (pr1 X)))) ∘e
-    ( equiv-tot (λ X → commutative-prod))) ∘e
+    ( equiv-tot (λ X → commutative-product))) ∘e
   ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪ᵈ A))
 
 binomial-type' :

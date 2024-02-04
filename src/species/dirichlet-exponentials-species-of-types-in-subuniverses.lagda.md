@@ -197,7 +197,7 @@ module _
                         ( is-in-subuniverse P)
                         ( eq-equiv (matching-correspondence-Π-Decomposition d))
                         ( pr2 X))))) ∘e
-              ( ( commutative-prod) ∘e
+              ( ( commutative-product) ∘e
                 ( inv-equiv
                   ( equiv-add-redundant-prop
                     ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
@@ -261,7 +261,7 @@ module _
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
             ( λ d →
-              equiv-prod
+              equiv-product
                 (( inv-equiv
                   ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
                     ( P)

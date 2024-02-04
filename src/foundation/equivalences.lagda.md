@@ -340,7 +340,7 @@ module _
 
   is-contr-is-equiv-is-equiv : {f : A → B} → is-equiv f → is-contr (is-equiv f)
   is-contr-is-equiv-is-equiv is-equiv-f =
-    is-contr-prod
+    is-contr-product
       ( is-contr-section-is-equiv is-equiv-f)
       ( is-contr-retraction-is-equiv is-equiv-f)
 

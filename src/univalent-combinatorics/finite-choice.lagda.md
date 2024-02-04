@@ -53,7 +53,7 @@ abstract
   finite-choice-Fin {l1} (succ-ℕ k) {Y} H =
     map-inv-equiv-trunc-Prop
       ( equiv-dependent-universal-property-coprod Y)
-      ( map-inv-distributive-trunc-prod-Prop
+      ( map-inv-distributive-trunc-product-Prop
         ( pair
           ( finite-choice-Fin k (λ x → H (inl x)))
           ( map-inv-equiv-trunc-Prop

@@ -54,7 +54,7 @@ is-prop-is-decidable-prop :
 is-prop-is-decidable-prop X =
   is-prop-is-inhabited
     ( λ H →
-      is-prop-prod
+      is-prop-product
         ( is-prop-is-prop X)
         ( is-prop-is-decidable (pr1 H)))
 

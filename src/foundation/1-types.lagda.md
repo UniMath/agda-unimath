@@ -130,14 +130,14 @@ abstract
 
 ```agda
 abstract
-  is-1-type-prod :
+  is-1-type-product :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-1-type A → is-1-type B → is-1-type (A × B)
-  is-1-type-prod = is-trunc-prod one-𝕋
+  is-1-type-product = is-trunc-product one-𝕋
 
-prod-1-Type :
+product-1-Type :
   {l1 l2 : Level} (A : 1-Type l1) (B : 1-Type l2) → 1-Type (l1 ⊔ l2)
-prod-1-Type A B = Σ-1-Type A (λ x → B)
+product-1-Type A B = Σ-1-Type A (λ x → B)
 ```
 
 ### Subtypes of 1-types are 1-types

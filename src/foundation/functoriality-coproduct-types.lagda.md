@@ -270,7 +270,7 @@ is-contr-fiber-map-coprod {A = A} {B} {C} {D} f g =
           ((a : A) → pr1 fg' a ＝ f a) × ((c : C) → pr2 fg' c ＝ g c)))
     ( equiv-tot
       ( λ fg' →
-        ( equiv-prod
+        ( equiv-product
           ( equiv-Π-equiv-family
             ( λ a → compute-eq-coprod-inl-inl (pr1 fg' a) (f a)))
           ( equiv-Π-equiv-family

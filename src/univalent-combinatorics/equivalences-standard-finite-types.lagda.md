@@ -39,8 +39,8 @@ function-Fin zero-ℕ l =
   ( inv-left-unit-law-coprod unit) ∘e
   ( equiv-is-contr (universal-property-empty' (Fin l)) is-contr-unit)
 function-Fin (succ-ℕ k) l =
-  ( prod-Fin (exp-ℕ l k) l) ∘e
-  ( equiv-prod (function-Fin k l) (equiv-universal-property-unit (Fin l))) ∘e
+  ( product-Fin (exp-ℕ l k) l) ∘e
+  ( equiv-product (function-Fin k l) (equiv-universal-property-unit (Fin l))) ∘e
   ( equiv-universal-property-coprod (Fin l))
 
 Fin-exp-ℕ : (k l : ℕ) → Fin (exp-ℕ l k) ≃ (Fin k → Fin l)

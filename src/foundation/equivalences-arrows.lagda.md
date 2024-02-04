@@ -52,7 +52,7 @@ module _
 
   is-equiv-prop-hom-arrow : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-equiv-prop-hom-arrow =
-    prod-Prop
+    product-Prop
       ( is-equiv-Prop (map-domain-hom-arrow f g h))
       ( is-equiv-Prop (map-codomain-hom-arrow f g h))
 

@@ -186,7 +186,7 @@ equiv-iterated-product-ℕ :
 equiv-iterated-product-ℕ zero-ℕ = id-equiv
 equiv-iterated-product-ℕ (succ-ℕ n) =
   ( ℕ×ℕ≃ℕ) ∘e
-    ( equiv-prod id-equiv (equiv-iterated-product-ℕ n))
+    ( equiv-product id-equiv (equiv-iterated-product-ℕ n))
 ```
 
 ### The coproduct `(Fin n) + ℕ` is equivalent to `N` for any standard finite `Fin n`
@@ -203,15 +203,15 @@ equiv-coprod-Fin-ℕ (succ-ℕ n) =
 ### The product `(Fin n) × ℕ` is equivalent to `N` for any standard finite `Fin n` where n is nonzero
 
 ```agda
-equiv-prod-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
-equiv-prod-Fin-ℕ zero-ℕ =
+equiv-product-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
+equiv-product-Fin-ℕ zero-ℕ =
   ( left-unit-law-coprod ℕ) ∘e
-    ( ( equiv-coprod (left-absorption-prod ℕ) left-unit-law-prod) ∘e
-      ( right-distributive-prod-coprod empty unit ℕ))
-equiv-prod-Fin-ℕ (succ-ℕ n) =
+    ( ( equiv-coprod (left-absorption-product ℕ) left-unit-law-product) ∘e
+      ( right-distributive-product-coprod empty unit ℕ))
+equiv-product-Fin-ℕ (succ-ℕ n) =
   ( ℕ+ℕ≃ℕ) ∘e
-    ( ( equiv-coprod (equiv-prod-Fin-ℕ n) left-unit-law-prod) ∘e
-      ( right-distributive-prod-coprod (Fin (succ-ℕ n)) unit ℕ))
+    ( ( equiv-coprod (equiv-product-Fin-ℕ n) left-unit-law-product) ∘e
+      ( right-distributive-product-coprod (Fin (succ-ℕ n)) unit ℕ))
 ```
 
 ### The integers `ℤ` is equivalent to `ℕ`

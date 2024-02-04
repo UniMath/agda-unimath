@@ -67,7 +67,7 @@ module _
   edge-finite-type-complete-bipartite-Undirected-Graph-𝔽 :
     unordered-pair-vertices-complete-bipartite-Undirected-Graph-𝔽 → 𝔽 (l1 ⊔ l2)
   edge-finite-type-complete-bipartite-Undirected-Graph-𝔽 p =
-    prod-𝔽
+    product-𝔽
       ( Σ-𝔽 X
         ( λ x →
           fiber-𝔽

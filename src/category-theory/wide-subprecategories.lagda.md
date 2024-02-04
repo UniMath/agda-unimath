@@ -126,7 +126,7 @@ module _
 
   is-wide-subprecategory-Prop : Prop (l1 ⊔ l2 ⊔ l3)
   is-wide-subprecategory-Prop =
-    prod-Prop
+    product-Prop
       ( contains-id-prop-subtype-hom-wide-Precategory C P₁)
       ( is-closed-under-composition-prop-subtype-hom-wide-Precategory C P₁)
 
