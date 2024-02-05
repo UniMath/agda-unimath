@@ -11,6 +11,7 @@ open import foundation-core.precomposition-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.precomposition-dependent-functions
 open import foundation.sections
 open import foundation.universe-levels
@@ -20,7 +21,6 @@ open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -174,4 +174,67 @@ module _
       ( λ K → eq-htpy (K ·r h))
       ( inv (is-section-eq-htpy H))) ∙
     ( compute-ap-precomp-htpy-eq (eq-htpy H))
+```
+
+#### Naturality of `htpy-eq` with respect to precomposition of ordinary functions
+
+Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
+
+```text
+                     ap (precomp f C)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          V                                       V
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                precomp f (eq-value g h)
+```
+
+commutes.
+
+```agda
+coherence-square-homotopies-eq-ap-precomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) →
+  (g h : B → C) →
+  coherence-square-maps
+    ( ap (precomp f C))
+    ( htpy-eq)
+    ( htpy-eq)
+    ( precomp-Π f (eq-value g h))
+coherence-square-homotopies-eq-ap-precomp f =
+  coherence-square-maps-htpy-eq-ap-precomp-Π f
+```
+
+#### Naturality of `eq-htpy` with respect to precomposition of ordinary functions
+
+Consider a map `f : A → B` and two functions `g h : B → C`. Then the square
+
+```text
+                     ap (precomp f C)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          ∧                                       ∧
+  eq-htpy |                                       | eq-htpy
+          |                                       |
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                precomp f (eq-value g h)
+```
+
+commutes.
+
+```agda
+coherence-square-eq-htpy-ap-precomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → B) (g h : B → C) →
+  coherence-square-maps
+    ( precomp-Π f (eq-value g h))
+    ( eq-htpy)
+    ( eq-htpy)
+    ( ap (precomp f C))
+coherence-square-eq-htpy-ap-precomp {C = C} f g h =
+  coherence-square-inv-vertical
+    ( ap (precomp f C))
+    ( equiv-funext)
+    ( equiv-funext)
+    ( precomp-Π f (eq-value g h))
+    ( coherence-square-homotopies-eq-ap-precomp f g h)
 ```

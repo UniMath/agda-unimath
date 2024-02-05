@@ -12,6 +12,7 @@ open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-identifications
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
@@ -24,7 +25,6 @@ open import foundation.whiskering-identifications-concatenation
 open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -238,7 +238,7 @@ module _
 
 ### Whiskering of homotopies of morphisms of arrows with respect to composition
 
-#### Left whiskering of homotopies of homotopies of morphisms of arrows with respect to composition
+#### Left whiskering of homotopies of morphisms of arrows with respect to composition
 
 ```agda
 module _
@@ -316,7 +316,7 @@ module _
     coh-left-whisker-comp-hom-arrow
 ```
 
-#### Right whiskering
+#### Right whiskering of homotopies of morphisms of arrows with respect to composition
 
 ```agda
 module _

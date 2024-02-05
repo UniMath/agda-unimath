@@ -15,6 +15,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
@@ -24,7 +25,6 @@ open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.transport-along-identifications

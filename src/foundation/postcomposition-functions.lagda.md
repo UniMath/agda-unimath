@@ -11,6 +11,8 @@ open import foundation-core.postcomposition-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.postcomposition-dependent-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -20,7 +22,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -230,4 +231,60 @@ module _
       ( λ K → eq-htpy (h ·l K))
       ( inv (is-section-eq-htpy H))) ∙
     ( compute-ap-postcomp-htpy-eq (eq-htpy H))
+```
+
+#### Naturality of `htpy-eq` with respect to postcomposition of ordinary functions
+
+Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
+
+```text
+                    ap (postcomp A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          V                                       V
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+commutes.
+
+```agda
+coherence-square-homotopies-eq-ap-postcomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
+  (g h : A → B) →
+  coherence-square-maps
+    ( ap (postcomp A f) {x = g} {y = h})
+    ( htpy-eq)
+    ( htpy-eq)
+    ( f ·l_)
+coherence-square-homotopies-eq-ap-postcomp f =
+  coherence-square-homotopies-eq-ap-postcomp-Π f
+```
+
+#### Naturality of `eq-htpy` with respect to postcomposition of ordinary functions
+
+Consider a map `f : B → C` and two functions `g h : A → B`. Then the square
+
+```text
+                     ap (postcomp A f)
+       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+          ^                                       ^
+  eq-htpy |                                       | eq-htpy
+          |                                       |
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+                          f ·l_
+```
+
+```agda
+coherence-square-eq-htpy-ap-postcomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : B → C) →
+  (g h : A → B) →
+  coherence-square-maps
+    ( f ·l_)
+    ( eq-htpy)
+    ( eq-htpy)
+    ( ap (postcomp A f) {x = g} {y = h})
+coherence-square-eq-htpy-ap-postcomp f =
+  coherence-square-eq-htpy-ap-postcomp-Π f
 ```

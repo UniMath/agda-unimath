@@ -8,6 +8,7 @@ module foundation.axiom-of-choice where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.postcomposition-functions
 open import foundation.projective-types
@@ -20,7 +21,6 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types

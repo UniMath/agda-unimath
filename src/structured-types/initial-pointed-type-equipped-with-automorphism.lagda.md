@@ -14,12 +14,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.equivalences
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```

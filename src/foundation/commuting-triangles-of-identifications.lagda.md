@@ -386,7 +386,7 @@ identification
   map-coherence-triangle-identifications p refl p (inv right-unit)
 ```
 
-and in the case where the identification `top` is refl` we obtain
+and in the case where the identification `top` is `refl` we obtain
 
 ```text
   refl ＝ map-coherence-triangle-identifications p p refl refl.

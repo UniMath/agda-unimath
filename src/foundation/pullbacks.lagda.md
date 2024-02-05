@@ -18,6 +18,7 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.descent-equivalences
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -35,7 +36,6 @@ open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.postcomposition-functions
@@ -367,7 +367,7 @@ module _
 
 In the following part we will relate the type `htpy-parallel-cone` to the
 identity type of cones. Here we will rely on
-[function extensionality](foundation-core.function-extensionality.md).
+[function extensionality](foundation.function-extensionality.md).
 
 ```agda
 module _

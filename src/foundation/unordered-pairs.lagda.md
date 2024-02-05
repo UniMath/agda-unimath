@@ -14,6 +14,7 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
@@ -30,7 +31,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types

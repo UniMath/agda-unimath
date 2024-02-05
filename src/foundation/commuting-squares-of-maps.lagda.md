@@ -15,17 +15,18 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-maps
-open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-prisms-of-maps
-open import foundation-core.function-extensionality
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 ```
@@ -95,62 +96,6 @@ module _
     ( coherence-square-coherence-triangles-maps diagonal H K)
   compute-coherence-square-refl-htpy-coherence-triangles-maps diagonal H K x =
     right-whisker-concat right-unit (K x)
-```
-
-### Inverting squares horizontally and vertically
-
-If the horizontal/vertical maps in a commuting square are both
-[equivalences](foundation-core.equivalences.md), then the square remains
-commuting if we invert those equivalences.
-
-```agda
-coherence-square-inv-horizontal :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (top : A ≃ B) (left : A → X) (right : B → Y) (bottom : X ≃ Y) →
-  coherence-square-maps (map-equiv top) left right (map-equiv bottom) →
-  coherence-square-maps (map-inv-equiv top) right left (map-inv-equiv bottom)
-coherence-square-inv-horizontal top left right bottom H b =
-  map-eq-transpose-equiv-inv
-    ( bottom)
-    ( ( ap right (inv (is-section-map-inv-equiv top b))) ∙
-      ( inv (H (map-inv-equiv top b))))
-
-coherence-square-inv-vertical :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (top : A → B) (left : A ≃ X) (right : B ≃ Y) (bottom : X → Y) →
-  coherence-square-maps top (map-equiv left) (map-equiv right) bottom →
-  coherence-square-maps bottom (map-inv-equiv left) (map-inv-equiv right) top
-coherence-square-inv-vertical top left right bottom H x =
-  map-eq-transpose-equiv
-    ( right)
-    ( ( inv (H (map-inv-equiv left x))) ∙
-      ( ap bottom (is-section-map-inv-equiv left x)))
-
-coherence-square-inv-all :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (top : A ≃ B) (left : A ≃ X) (right : B ≃ Y) (bottom : X ≃ Y) →
-  coherence-square-maps
-    ( map-equiv top)
-    ( map-equiv left)
-    ( map-equiv right)
-    ( map-equiv bottom) →
-  coherence-square-maps
-    ( map-inv-equiv bottom)
-    ( map-inv-equiv right)
-    ( map-inv-equiv left)
-    ( map-inv-equiv top)
-coherence-square-inv-all top left right bottom H =
-  coherence-square-inv-vertical
-    ( map-inv-equiv top)
-    ( right)
-    ( left)
-    ( map-inv-equiv bottom)
-    ( coherence-square-inv-horizontal
-      ( top)
-      ( map-equiv left)
-      ( map-equiv right)
-      ( bottom)
-      ( H))
 ```
 
 ### Commuting squares of maps induce commuting squares of precomposition maps
