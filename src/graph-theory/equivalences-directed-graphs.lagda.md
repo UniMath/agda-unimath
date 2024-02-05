@@ -29,7 +29,7 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
+open import foundation.equivalences
 
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs

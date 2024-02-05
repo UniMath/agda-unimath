@@ -37,7 +37,7 @@ constructing this equivalence. One way uses the fact that `e⁻¹` is a
  (e x ＝ y) ≃ (e x ＝ e e⁻¹ y) ≃ (x ＝ e⁻¹ y).
 ```
 
-The other way usex the fact that `e⁻¹` is a
+The other way uses the fact that `e⁻¹` is a
 [retraction](foundation-core.retractions.md) of `e`, resulting in the
 equivalence
 
