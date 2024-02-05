@@ -97,7 +97,7 @@ module _
     (T : coherence-triangle-homotopies left right top) →
     coherence-triangle-homotopies (H ∙h left) right (H ∙h top)
   left-whisker-concat-coherence-triangle-homotopies T x =
-    left-whisker-coherence-triangle-identifications
+    left-whisker-concat-coherence-triangle-identifications
       ( H x)
       ( left x)
       ( right x)
@@ -145,7 +145,7 @@ module _
     {i : (x : A) → B x} (H : h ~ i) →
     coherence-triangle-homotopies (left ∙h H) (right ∙h H) top
   right-whisker-concat-coherence-triangle-homotopies T H x =
-    right-whisker-coherence-triangle-identifications
+    right-whisker-concat-coherence-triangle-identifications
       ( left x)
       ( right x)
       ( top x)

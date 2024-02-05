@@ -266,7 +266,7 @@ module _
       ( htpy-domain-left-whisker-comp-hom-arrow)
       ( htpy-codomain-left-whisker-comp-hom-arrow)
   coh-left-whisker-comp-hom-arrow a =
-    ( left-whisker-coherence-triangle-identifications'
+    ( left-whisker-concat-coherence-triangle-identifications'
       ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
       ( _)
       ( _)
