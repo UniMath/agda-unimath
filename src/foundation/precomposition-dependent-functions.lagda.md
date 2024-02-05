@@ -41,7 +41,7 @@ module _
     equiv-precomp-Π e (eq-value f g)
 ```
 
-#### Naturality of `htpy-eq` with respect to precomposition of dependent functions
+### The action on identifications of precomposition of dependent functions
 
 Consider a map `f : A → B` and two dependent functions `g h : (x : B) → C x`.
 Then the square
@@ -58,51 +58,45 @@ Then the square
 
 [commutes](foundation-core.commuting-squares-of-maps.md).
 
-```agda
-coherence-square-maps-htpy-eq-ap-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
-  (g h : (b : B) → C b) →
-  coherence-square-maps
-    ( ap (precomp-Π f C) {g} {h})
-    ( htpy-eq)
-    ( htpy-eq)
-    ( precomp-Π f (eq-value g h))
-coherence-square-maps-htpy-eq-ap-precomp-Π f g .g refl = refl
-```
-
-#### Naturality of `eq-htpy` with respect to precomposition of dependent functions
-
-Consider a map `f : A → B` and two dependent functions `g h : (x : B) → C x`.
-Then the square
+Similarly, the map `ap (precomp-Π f C)` fits in a commuting square
 
 ```text
-                     ap (precomp-Π f C)
-       (g ＝ h) ---------------------------> (g ∘ f ＝ h ∘ f)
-          ∧                                         ∧
-  eq-htpy |                                         | eq-htpy
-          |                                         |
-       (g ~ h) ----------------------------> (g ∘ f ~ h ∘ f)
                 precomp-Π f (eq-value g h)
+       (g ~ h) ----------------------------> (g ∘ f ~ h ∘ f)
+          |                                         |
+  eq-htpy |                                         | eq-htpy
+          ∨                                         ∨
+       (g ＝ h) ---------------------------> (g ∘ f ＝ h ∘ f).
+                     ap (precomp-Π f C)
 ```
 
-[commutes](foundation-core.commuting-squares-of-maps.md).
-
 ```agda
-coherence-square-eq-htpy-ap-precomp-Π :
+module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
-  (g h : (b : B) → C b) →
-  coherence-square-maps
-    ( precomp-Π f (eq-value g h))
-    ( eq-htpy)
-    ( eq-htpy)
-    ( ap (precomp-Π f C) {g} {h})
-coherence-square-eq-htpy-ap-precomp-Π f {C = C} g h =
-  coherence-square-inv-vertical
-    ( ap (precomp-Π f C))
-    ( equiv-funext)
-    ( equiv-funext)
-    ( precomp-Π f (eq-value g h))
-    ( coherence-square-maps-htpy-eq-ap-precomp-Π f g h)
+  {g h : (b : B) → C b}
+  where
+
+  compute-htpy-eq-ap-precomp-Π :
+    coherence-square-maps
+      ( ap (precomp-Π f C) {g} {h})
+      ( htpy-eq)
+      ( htpy-eq)
+      ( precomp-Π f (eq-value g h))
+  compute-htpy-eq-ap-precomp-Π refl = refl
+
+  compute-eq-htpy-ap-precomp-Π :
+    coherence-square-maps
+      ( precomp-Π f (eq-value g h))
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (precomp-Π f C) {g} {h})
+  compute-eq-htpy-ap-precomp-Π =
+    coherence-square-inv-vertical
+      ( ap (precomp-Π f C))
+      ( equiv-funext)
+      ( equiv-funext)
+      ( precomp-Π f (eq-value g h))
+      ( compute-htpy-eq-ap-precomp-Π)
 ```
 
 ### Precomposing functions `Π B C` by `f : A → B` is `k+1`-truncated if and only if precomposing homotopies is `k`-truncated
@@ -121,7 +115,7 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( htpy-eq)
         ( htpy-eq)
         ( precomp-Π f (eq-value g h))
-        ( coherence-square-maps-htpy-eq-ap-precomp-Π f g h)
+        ( compute-htpy-eq-ap-precomp-Π f)
         ( funext g h)
         ( funext (g ∘ f) (h ∘ f))
         ( H g h))

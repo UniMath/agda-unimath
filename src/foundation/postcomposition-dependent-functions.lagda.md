@@ -50,10 +50,13 @@ module _
 
 ## Properties
 
-#### Naturality of `htpy-eq` with respect to postcomposition of dependent functions
+### The action on identifications of postcomposition by a map
 
 Consider a map `f : {x : A} → B x → C x` and two functions
-`g h : (x : A) → B x`. Then the square
+`g h : (x : A) → B x`. Then the
+[action on identifications](foundation.action-on-identifications-functions.md)
+`ap (postcomp-Π A f)` fits in a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                    ap (postcomp-Π A f)
@@ -61,28 +64,12 @@ Consider a map `f : {x : A} → B x → C x` and two functions
           |                                       |
   htpy-eq |                                       | htpy-eq
           V                                       V
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f).
                           f ·l_
 ```
 
-commutes.
-
-```agda
-coherence-square-homotopies-eq-ap-postcomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  (f : {x : A} → B x → C x) (g h : (x : A) → B x) →
-  coherence-square-maps
-    ( ap (postcomp-Π A f) {x = g} {y = h})
-    ( htpy-eq)
-    ( htpy-eq)
-    ( f ·l_)
-coherence-square-homotopies-eq-ap-postcomp-Π f g .g refl = refl
-```
-
-#### Naturality of `eq-htpy` with respect to postcomposition of dependent functions
-
-Consider a map `f : {x : A} → B x → C x` and two functions
-`g h : (x : A) → B x`. Then the square
+Similarly, the action on identifications `ap (postcomp-Π A f)` also fits in a
+commuting square
 
 ```text
                     ap (postcomp-Π A f)
@@ -90,26 +77,35 @@ Consider a map `f : {x : A} → B x → C x` and two functions
           ^                                       ^
   eq-htpy |                                       | eq-htpy
           |                                       |
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f).
                           f ·l_
 ```
 
-commutes.
-
 ```agda
-coherence-square-eq-htpy-ap-postcomp-Π :
+module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  (f : {x : A} → B x → C x) (g h : (x : A) → B x) →
-  coherence-square-maps
-    ( f ·l_)
-    ( eq-htpy)
-    ( eq-htpy)
-    ( ap (postcomp-Π A f) {x = g} {y = h})
-coherence-square-eq-htpy-ap-postcomp-Π {A = A} f g h =
+  (f : {x : A} → B x → C x) {g h : (x : A) → B x}
+  where
+
+  compute-htpy-eq-ap-postcomp-Π :
+    coherence-square-maps
+      ( ap (postcomp-Π A f) {x = g} {y = h})
+      ( htpy-eq)
+      ( htpy-eq)
+      ( f ·l_)
+  compute-htpy-eq-ap-postcomp-Π refl = refl
+
+  compute-eq-htpy-ap-postcomp-Π :
+    coherence-square-maps
+      ( f ·l_)
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (postcomp-Π A f))
+  compute-eq-htpy-ap-postcomp-Π =
     coherence-square-inv-vertical
-    ( ap (postcomp-Π A f) {x = g} {y = h})
-    ( equiv-funext)
-    ( equiv-funext)
-    ( f ·l_)
-    ( coherence-square-homotopies-eq-ap-postcomp-Π f g h)
+      ( ap (postcomp-Π A f))
+      ( equiv-funext)
+      ( equiv-funext)
+      ( f ·l_)
+      ( compute-htpy-eq-ap-postcomp-Π)
 ```

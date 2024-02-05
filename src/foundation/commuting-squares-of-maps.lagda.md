@@ -666,25 +666,25 @@ them.
   |        |        |         |           |
 l |       m|        | r  ↦   l|          r|
   |   H    |   K    |         |   H | K   |
-  v        v        v         v           v
+  ∨        ∨        ∨         ∨           ∨
   X -----> Y -----> Z         X --------> Z
       bl       br                br ∘ bl
 
          -                          -
          |                          |
-         v                          v
+         ∨                          ∨
 
            -∘r
     W^Z ------> W^C
      |           |
 -∘br |    W^K    | -∘tr           W^(H | K)
      |           |
-     v     -∘m   v                   ~
+     ∨     -∘m   ∨                   ~
     W^Y ------> W^B   |->
      |           |                  W^K
 -∘bl |    W^H    | -∘tl             ---
      |           |                  W^H
-     v           v
+     ∨           ∨
     W^X ------> W^A
           -∘l
 ```
@@ -781,9 +781,7 @@ module _
         ap-binary
           ( λ L q → eq-htpy L ∙ q)
           ( eq-htpy (preserves-comp-left-whisker-comp h bottom-right H))
-          ( compute-ap-precomp-eq-htpy
-            ( top-left)
-            ( h ·l K))
+          ( inv (compute-eq-htpy-ap-precomp top-left (h ·l K)))
 
   distributive-precomp-pasting-vertical-coherence-square-maps :
     ( top : A → X) (left-top : A → B) (right-top : X → Y) (middle : B → Y) →
@@ -868,7 +866,7 @@ module _
         by
         ap-binary
           ( λ p L → p ∙ eq-htpy L)
-          ( compute-ap-precomp-eq-htpy left-top (h ·l K))
+          ( inv (compute-eq-htpy-ap-precomp left-top (h ·l K)))
           ( eq-htpy (preserves-comp-left-whisker-comp h right-bottom H))
 ```
 
@@ -919,7 +917,7 @@ module _
     ( ( precomp f W) ·l
       ( precomp-coherence-square-maps top left right bottom H W))
   distributive-precomp-right-whisker-comp-coherence-square-maps f g =
-    compute-ap-precomp-eq-htpy f (g ·l H)
+    inv (compute-eq-htpy-ap-precomp f (g ·l H))
 ```
 
 Similarly, we can calculate transpositions of left-whiskered squares with the
