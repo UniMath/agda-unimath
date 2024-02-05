@@ -80,7 +80,7 @@ module _
 
   based-function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
   based-function-extensionality f =
-    (g : (x : A) → B x) → is-equiv (htpy-eq {f = f} {g})
+    (g : (x : A) → B x) → instance-function-extensionality f g
 ```
 
 ### The function extensionality principle with respect to a universe level
@@ -89,8 +89,7 @@ module _
 function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 function-extensionality-Level l1 l2 =
   {A : UU l1} {B : A → UU l2}
-  (f g : (x : A) → B x) →
-  instance-function-extensionality f g
+  (f : (x : A) → B x) → based-function-extensionality f
 ```
 
 ### The function extensionality axiom
@@ -161,29 +160,6 @@ module _
 
 ## Properties
 
-### Computing the action on paths of an evaluation map
-
-```agda
-ap-ev :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (a : A) → {f g : A → B} →
-  (p : f ＝ g) → (ap (λ h → h a) p) ＝ htpy-eq p a
-ap-ev a refl = refl
-```
-
-### `htpy-eq` preserves inverses
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  where
-
-  compute-htpy-eq-inv : inv-htpy {f = f} {g} ∘ htpy-eq ~ htpy-eq ∘ inv
-  compute-htpy-eq-inv refl = refl
-
-  compute-inv-htpy-htpy-eq : htpy-eq ∘ inv ~ inv-htpy {f = f} {g} ∘ htpy-eq
-  compute-inv-htpy-htpy-eq = inv-htpy compute-htpy-eq-inv
-```
-
 ### `htpy-eq` preserves concatenation of identifications
 
 ```agda
@@ -192,7 +168,7 @@ module _
   where
 
   htpy-eq-concat :
-    (p : f ＝ g) (q : g ＝ h) → htpy-eq (p ∙ q) ＝ (htpy-eq p ∙h htpy-eq q)
+    (p : f ＝ g) (q : g ＝ h) → htpy-eq (p ∙ q) ＝ htpy-eq p ∙h htpy-eq q
   htpy-eq-concat refl refl = refl
 ```
 
@@ -213,38 +189,45 @@ module _
       ( is-retraction-eq-htpy (eq-htpy H ∙ eq-htpy K))
 ```
 
-## See also
+### `htpy-eq` preserves inverses
 
-- The fact that the univalence axiom implies function extensionality is proven
-  in
-  [`foundation.univalence-implies-function-extensionality`](foundation.univalence-implies-function-extensionality.md).
-- Weak function extensionality is defined in
-  [`foundation.weak-function-extensionality`](foundation.weak-function-extensionality.md).
-- Transporting along homotopies is defined in
-  [`foundation.transport-along-homotopies`](foundation.transport-along-homotopies.md).
-
-## Idea
-
-The {{#concept "function extensionality axiom"}} asserts that
-[identifications](foundation-core.identity-types.md) of (dependent) functions
-are [equivalently](foundation-core.equivalences.md) described as
-[homotopies](foundation-core.homotopies.md) between them. In other words, a
-function is completely determined by its values.
-
-## Properties
-
-### `eq-htpy` preserves inverses
-
-In other words, we have a commutative diagram
+For any two functions `f g : (x : A) → B x` we have a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                   inv
-       (f ＝ g) --------> (g ＝ f)
-          ∧                  ∧
-  eq-htpy |                  | eq-htpy
+       (f = g) ---------> (g = f)
           |                  |
+  htpy-eq |                  | htpy-eq
+          ∨                  ∨
        (f ~ g) ---------> (g ~ f).
                 inv-htpy
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  compute-htpy-eq-inv : inv-htpy {f = f} {g} ∘ htpy-eq ~ htpy-eq ∘ inv
+  compute-htpy-eq-inv refl = refl
+
+  compute-inv-htpy-htpy-eq : htpy-eq ∘ inv ~ inv-htpy {f = f} {g} ∘ htpy-eq
+  compute-inv-htpy-htpy-eq = inv-htpy compute-htpy-eq-inv
+```
+
+### `eq-htpy` preserves inverses
+
+For any two functions `f g : (x : A) → B x` we have a commuting square
+
+```text
+                inv-htpy
+       (f ~ g) ---------> (g ~ f)
+          |                  |
+  eq-htpy |                  | eq-htpy
+          ∨                  ∨
+       (f = g) ---------> (g = f).
+                  inv
 ```
 
 ```agda

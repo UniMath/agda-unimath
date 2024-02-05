@@ -23,15 +23,16 @@ Consider a type `A` with a [binary relation](foundation.binary-relations.md)
 
 Furthermore, assume that each `R x y` comes equipped with a further binary
 relation `E : R x y → R x y → 𝒰`. A
-{{#concept "left whiskering operation" Agda=whiskering}} on `E` with respect to
-`μ` is an operation
+{{#concept "left whiskering operation" Agda=left-whiskering-operation}} on `E`
+with respect to `μ` is an operation
 
 ```text
   (f : R x y) {g h : R y z} → E g h → E (μ f g) (μ f h).
 ```
 
-Similarly, a {{#concept "right whiskering operation" Agda=right-whiskering}} on
-`E` with respect to `μ` is an operation
+Similarly, a
+{{#concept "right whiskering operation" Agda=right-whiskering-operation}} on `E`
+with respect to `μ` is an operation
 
 ```text
   {g h : R x y} → E g h → (f : R y z) → E (μ g f) (μ h f).

@@ -78,7 +78,7 @@ module _
     (h : C → A) (H : f ~ g) (S : UU l4) →
     precomp h S ·l htpy-precomp H S ~ htpy-precomp (H ·r h) S
   inv-distributive-htpy-precomp-right-whisker h H S i =
-    coherence-square-eq-htpy-ap-precomp h (i ∘ f) (i ∘ g) (i ·l H)
+    compute-eq-htpy-ap-precomp h (i ·l H)
 
   distributive-htpy-precomp-right-whisker :
     (h : C → A) (H : f ~ g) (S : UU l4) →
@@ -214,7 +214,7 @@ module _
     (h : B → C) (H : f ~ g) (S : UU l4) →
     postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
   inv-distributive-htpy-postcomp-left-whisker h H S i =
-    coherence-square-eq-htpy-ap-postcomp h (f ∘ i) (g ∘ i) (H ·r i)
+    compute-eq-htpy-ap-postcomp h (H ·r i)
 
   distributive-htpy-postcomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →

@@ -147,6 +147,7 @@ open import foundation.equivalences-span-diagrams public
 open import foundation.equivalences-span-diagrams-families-of-types public
 open import foundation.equivalences-spans public
 open import foundation.equivalences-spans-families-of-types public
+open import foundation.evaluation-functions public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public

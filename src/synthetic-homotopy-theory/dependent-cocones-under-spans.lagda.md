@@ -173,11 +173,11 @@ module _
     vertical-htpy-eq-dependent-cocone =
       pr1 (pr2 (htpy-eq-dependent-cocone d' p))
 
-    coherence-square-homotopies-eq-dependent-cocone :
+    coherence-square-htpy-eq-dependent-cocone :
       coherence-htpy-dependent-cocone d'
         ( horizontal-htpy-eq-dependent-cocone)
         ( vertical-htpy-eq-dependent-cocone)
-    coherence-square-homotopies-eq-dependent-cocone =
+    coherence-square-htpy-eq-dependent-cocone =
       pr2 (pr2 (htpy-eq-dependent-cocone d' p))
 
   abstract

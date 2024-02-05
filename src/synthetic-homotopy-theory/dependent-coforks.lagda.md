@@ -353,20 +353,20 @@ module _
                               ( d)
                               ( inl a))))
                         ( coherence-square-dependent-cocone
-                            ( vertical-map-span-cocone-cofork f g)
-                            ( horizontal-map-span-cocone-cofork f g)
-                            ( cocone-codiagonal-cofork f g e)
-                            ( P)
-                            ( d)
-                            ( inl a))) ∙
+                          ( vertical-map-span-cocone-cofork f g)
+                          ( horizontal-map-span-cocone-cofork f g)
+                          ( cocone-codiagonal-cofork f g e)
+                          ( P)
+                          ( d)
+                          ( inl a))) ∙
                       ( left-inv
                         ( coherence-square-dependent-cocone
-                              ( vertical-map-span-cocone-cofork f g)
-                              ( horizontal-map-span-cocone-cofork f g)
-                              ( cocone-codiagonal-cofork f g e)
-                              ( P)
-                              ( d)
-                              ( inl a))))
+                          ( vertical-map-span-cocone-cofork f g)
+                          ( horizontal-map-span-cocone-cofork f g)
+                          ( cocone-codiagonal-cofork f g e)
+                          ( P)
+                          ( d)
+                          ( inl a))))
                 ( inr a) →
                   right-whisker-concat
                     ( inv
@@ -380,12 +380,12 @@ module _
                           ( d)
                           ( inl a))))
                     ( coherence-square-dependent-cocone
-                        ( vertical-map-span-cocone-cofork f g)
-                        ( horizontal-map-span-cocone-cofork f g)
-                        ( cocone-codiagonal-cofork f g e)
-                        ( P)
-                        ( d)
-                        ( inr a)))))
+                      ( vertical-map-span-cocone-cofork f g)
+                      ( horizontal-map-span-cocone-cofork f g)
+                      ( cocone-codiagonal-cofork f g e)
+                      ( P)
+                      ( d)
+                      ( inr a)))))
 
     is-equiv-dependent-cofork-dependent-cocone-codiagonal :
       is-equiv dependent-cofork-dependent-cocone-codiagonal
