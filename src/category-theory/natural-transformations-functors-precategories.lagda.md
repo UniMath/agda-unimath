@@ -324,11 +324,14 @@ module _
 
 ## Horizontal composition
 
-Horizontal composition (here denoted by `*`) is generalized whiskering (here
-denoted by `•`), and also defined by it. Given natural transformations
+Horizontal composition (here denoted by `*`) is generalized
+[whiskering](category-theory.natural-transformations-functors-precategories.md#whiskering)
+(here denoted by `•`), and also defined by it. Given natural transformations
 `α : F ⇒ G`, `F, G : C → D`, and `β : H ⇒ I`, `H, I : D → E`, we can form a
-natural transformation `β * α : H ∘ F ⇒ I ∘ G`. Its componentat at `x` is
-`(β * α)(x) = (β • G)(x) ∘ (H • α)(x)`.
+natural transformation `β * α : H ∘ F ⇒ I ∘ G`.
+
+More precisely, `β * α = (β • G) ∘ (H • α)`, that is, we compose two natural
+transformations obtained by whiskering.
 
 ```agda
 module _
