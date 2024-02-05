@@ -296,11 +296,10 @@ operation `p ↦ p ∙ q` by constructing identifications
   (p ∙ inv q) ∙ q ＝ p.
 ```
 
-In
-[`foundation.identity-types`](foundation.identity-types.md)`we will use these families of identifications to conclude that`concat
-p z`and`concat' x
-q`are [equivalences](foundation-core.equivalences.md) with inverses`concat (inv
-p) z`and`concat' x (inv q)`, respectively.
+In [`foundation.identity-types`](foundation.identity-types.md) we will use these
+families of identifications to conclude that `concat p z` and `concat' x q` are
+[equivalences](foundation-core.equivalences.md) with inverses `concat (inv p) z`
+and `concat' x (inv q)`, respectively.
 
 ```agda
 module _
@@ -313,7 +312,7 @@ module _
 
   is-section-inv-concat :
     {x y z : A} (p : x ＝ y) (r : x ＝ z) → (p ∙ (inv p ∙ r)) ＝ r
-  is-section-inv-concat refl refl = refl
+  is-section-inv-concat refl r = refl
 
   is-retraction-inv-concat' :
     {x y z : A} (q : y ＝ z) (p : x ＝ y) → (p ∙ q) ∙ inv q ＝ p

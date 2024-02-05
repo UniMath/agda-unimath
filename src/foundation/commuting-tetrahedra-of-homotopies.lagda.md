@@ -56,8 +56,8 @@ module _
         ( top)
         ( diagonal-up)
         ( left)
-        ( right)
-        ( upper-left))) ~
+        ( upper-left)
+        ( right))) ~
     ( ( lower-left) ∙h
       ( left-whisker-concat-coherence-triangle-homotopies
         ( left)
@@ -82,6 +82,6 @@ module _
         ( top)
         ( diagonal-up)
         ( left)
-        ( right)
-        ( upper-left)))
+        ( upper-left)
+        ( right)))
 ```

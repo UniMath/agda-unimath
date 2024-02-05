@@ -58,61 +58,32 @@ module _
 
 ## Properties
 
-### Distributive law for left whiskering
+### Left whiskering commuting triangles of homotopies with respect to concatenation of homotopies
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f g h : A → B}
-  {l3 : Level} {X : UU l3} (i : B → X)
-  (left : f ~ h) (right : g ~ h) (top : f ~ g)
-  where
+Consider a commuting triangle of homotopies
 
-  distributivity-left-whisker :
-    coherence-triangle-homotopies left right top →
-    (i ·l left) ~ ((i ·l top) ∙h (i ·l right))
-  distributivity-left-whisker T x =
-    map-coherence-triangle-identifications i (left x) (right x) (top x) (T x)
+```text
+        top
+     f ----> g
+      \     /
+  left \   / right
+        ∨ ∨
+         h
 ```
 
-### Left whiskering triangles of homotopies
+where `f g h : (x : A) → B x`, and consider a homotopy `H : i ~ f` for a fourth dependent function `i : (x : A) → B x`. Then the triangle of homotopies
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  {f g h : (x : A) → B x}
-  (left : f ~ h) (right : g ~ h) (top : f ~ g)
-  where
-
-  right-whisker-concat-coherence-triangle-homotopies :
-    {i : (x : A) → B x} (H : h ~ i) →
-    coherence-triangle-homotopies left right top →
-    coherence-triangle-homotopies (left ∙h H) (right ∙h H) top
-  right-whisker-concat-coherence-triangle-homotopies H T x =
-    right-whisker-coherence-triangle-identifications
-      ( left x)
-      ( right x)
-      ( top x)
-      ( H x)
-      ( T x)
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f g h : A → B}
-  {left : f ~ h} (right : g ~ h) {top : f ~ g}
-  where
-
-  right-whisker-comp-coherence-triangle-homotopies :
-    {l3 : Level} {X : UU l3} (i : B → X)
-    (T : coherence-triangle-homotopies left right top) →
-    coherence-triangle-homotopies
-      {f = i ∘ f} {i ∘ g} {i ∘ h}
-      (i ·l left) (i ·l right) (i ·l top)
-  right-whisker-comp-coherence-triangle-homotopies i =
-    distributivity-left-whisker i left right top
+```text
+           H ∙h top
+         i --------> g
+           \       /
+  H ∙h left \     / right
+             \   /
+              ∨ ∨
+               h
 ```
 
-### Right whiskering triangles of homotopies
+commutes.
 
 ```agda
 module _
@@ -123,7 +94,7 @@ module _
 
   left-whisker-concat-coherence-triangle-homotopies :
     (T : coherence-triangle-homotopies left right top) →
-    coherence-triangle-homotopies {f = i} (H ∙h left) right (H ∙h top)
+    coherence-triangle-homotopies (H ∙h left) right (H ∙h top)
   left-whisker-concat-coherence-triangle-homotopies T x =
     left-whisker-coherence-triangle-identifications
       ( H x)
@@ -131,18 +102,130 @@ module _
       ( right x)
       ( top x)
       ( T x)
+```
 
+### Right whiskering triangles of homotopies with respect to concatenation of homotopies
+
+Consider a commuting triangle of homotopies
+
+```text
+        top
+     f ----> g
+      \     /
+  left \   / right
+        ∨ ∨
+         h
+```
+
+where `f g h : (x : A) → B x`, and consider a homotopy `H : h ~ i` for a fourth dependent function `i : (x : A) → B x`. Then the triangle of homotopies
+
+```text
+              top
+         f --------> g
+           \       /
+  left ∙h H \     / right ∙h H
+             \   /
+              ∨ ∨
+               i
+```
+
+commutes.
+
+```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f g h : A → B}
-  {left : f ~ h} (right : g ~ h) {top : f ~ g}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g h : (x : A) → B x}
+  (left : f ~ h) (right : g ~ h) (top : f ~ g)
+  where
+
+  right-whisker-concat-coherence-triangle-homotopies :
+    coherence-triangle-homotopies left right top →
+    {i : (x : A) → B x} (H : h ~ i) →
+    coherence-triangle-homotopies (left ∙h H) (right ∙h H) top
+  right-whisker-concat-coherence-triangle-homotopies T H x =
+    right-whisker-coherence-triangle-identifications
+      ( left x)
+      ( right x)
+      ( top x)
+      ( H x)
+      ( T x)
+```
+
+### Left whiskering of commuting triangles of homotopies with respect to composition
+
+Consider a commuting triangle of homotopies
+
+```text
+        top
+     f ----> g
+      \     /
+  left \   / right
+        ∨ ∨
+         h
+```
+
+where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map `i : B → X`. Then we obtain a commuting triangle of homotopies
+
+```text
+           i ·l top
+     i ∘ f --------> i ∘ g
+           \       /
+  i ·l left \     / i ·l right
+             \   / 
+              ∨ ∨
+             i ∘ h.
+```
+
+This notion of whiskering should be compared to [whiskering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md).
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}  {X : UU l3} (i : B → X)
+  {f g h : A → B} (left : f ~ h) (right : g ~ h) (top : f ~ g)
   where
 
   left-whisker-comp-coherence-triangle-homotopies :
-    {l3 : Level} {X : UU l3}
+    (T : coherence-triangle-homotopies left right top) →
+    coherence-triangle-homotopies (i ·l left) (i ·l right) (i ·l top)
+  left-whisker-comp-coherence-triangle-homotopies T x =
+    map-coherence-triangle-identifications i (left x) (right x) (top x) (T x)
+```
+
+### Right whiskering commuting triangles of homotopies with respect to composition
+
+Consider a commuting triangle of homotopies
+
+```text
+        top
+     f ----> g
+      \     /
+  left \   / right
+        ∨ ∨
+         h
+```
+
+where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map `i : X → A`. Then we obtain a commuting triangle of homotopies
+
+```text
+           top ·r i
+     f ∘ i --------> g ∘ i
+           \       /
+  left ·r i \     / right ·r i
+             \   / 
+              ∨ ∨
+             h ∘ i.
+```
+
+This notion of whiskering should be compared to [whiskering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md).
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {f g h : A → B} (left : f ~ h) (right : g ~ h) (top : f ~ g)
+  where
+
+  right-whisker-comp-coherence-triangle-homotopies :
     (T : coherence-triangle-homotopies left right top) (i : X → A) →
-    coherence-triangle-homotopies
-      {f = f ∘ i} {g ∘ i} {h ∘ i}
-      (left ·r i) (right ·r i) (top ·r i)
-  left-whisker-comp-coherence-triangle-homotopies T i = T ∘ i
+    coherence-triangle-homotopies (left ·r i) (right ·r i) (top ·r i)
+  right-whisker-comp-coherence-triangle-homotopies T i = T ∘ i
 ```
