@@ -19,14 +19,15 @@ open import foundation-core.homotopies
 ## Idea
 
 Consider two dependent functions `f g : (x : A) → B x` equipped with two
-[homotopies](foundation-core.homotopies.md) `H H' : f ~ g`, and consider a family of maps
-`h : (x : A) → B x → C x`. Then we obtain a map
+[homotopies](foundation-core.homotopies.md) `H H' : f ~ g`, and consider a
+family of maps `h : (x : A) → B x → C x`. Then we obtain a map
 
 ```text
   α ↦ ap h ·l α : H ~ H' → h ·l H ~ h ·l H'
 ```
 
-This operation is called the {{#concept "left whiskering" Disambiguation="2-homotopies with respect to composition" Agda=left-whisker-comp²}}.
+This operation is called the
+{{#concept "left whiskering" Disambiguation="2-homotopies with respect to composition" Agda=left-whisker-comp²}}.
 Alternatively the left whiskering operation of 2-homotopies can be defined using
 the
 [action on higher identifications of functions](foundation.action-on-higher-identifications-functions.md)
@@ -36,7 +37,9 @@ by
   α x ↦ ap² h (α x).
 ```
 
-Similarly, the {{#concept "right whiskering" Disambiguation="2-homotopies with respect to composition" Agda=right-whisker-comp²]} is defined to be the operation
+Similarly, the {{#concept "right whiskering" Disambiguation="2-homotopies with
+respect to composition" Agda=right-whisker-comp²]} is defined to be the
+operation
 
 ```text
   (H ~ H') → (h : (x : A) → B x) → (H ·r h ~ H' ·r h)
@@ -48,7 +51,8 @@ given by
   α h ↦ α ·r h,
 ```
 
-for any pair of homotopies `H H' : f ~ g`, where `f g : (x : A) (y : B x) → C x y`.
+for any pair of homotopies `H H' : f ~ g`, where
+`f g : (x : A) (y : B x) → C x y`.
 
 ## Definitions
 

@@ -22,7 +22,8 @@ binary family of types
   Id : A → A → 𝒰
 ```
 
-equipped with a {{#concept "reflexivity element" Disambiguation="identity type" Agda=refl}}
+equipped with a
+{{#concept "reflexivity element" Disambiguation="identity type" Agda=refl}}
 
 ```text
   refl : (x : A) → Id x x.
@@ -126,7 +127,8 @@ ind-Id x B b y refl = b
 ## Operations on the identity type
 
 The identity types form a weak groupoidal structure on types. Thus they come
-equipped with {{#concept "concatenation" Disambiguation="identifications" Agda=concat]} `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
+equipped with
+{{#concept "concatenation" Disambiguation="identifications" Agda=concat]} `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
 {{#concept "inverse" Disambiguation="identification" Agda=inv}} operation `(x ＝ y) → (y ＝ x)`.
 
 There are many more operations on identity types. Some of them are defined in
@@ -487,7 +489,8 @@ and the higher concatenation operations defined in
 computational behavior, so there is infrastructure for reasoning about
 identifications that are constructed using them.
 
-We also note that there is similar infrastructure for [homotopy reasoning](foundation-core.homotopies.md).
+We also note that there is similar infrastructure for
+[homotopy reasoning](foundation-core.homotopies.md).
 
 ## References
 
