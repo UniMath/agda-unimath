@@ -23,6 +23,7 @@
 | Transport along higher identifications                                | [`foundation.transport-along-higher-identifications`](foundation.transport-along-higher-identifications.md)                                         |
 | Transport along identifications (foundation)                          | [`foundation.transport-along-identifications`](foundation.transport-along-identifications.md)                                                       |
 | Transport along identifications (foundation-core)                     | [`foundation-core.transport-along-identifications`](foundation-core.transport-along-identifications.md)                                             |
+| Transposition of identifications along equivalences                   | [`foundation.transposition-identifications-along-equivalences`](foundation.transposition-identifications-along-equivalences.md)                     |
 | The universal property of identity systems                            | [`foundation.universal-property-identity-systems`](foundation.universal-property-identity-systems.md)                                               |
 | The universal property of identity types                              | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                                                   |
 | Whiskering identifications                                            | [`foundation.whiskering-identifications-concatenation`](foundation.whiskering-identifications-concatenation.md)                                     |
