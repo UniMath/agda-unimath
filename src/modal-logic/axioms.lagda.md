@@ -8,23 +8,29 @@ module modal-logic.axioms where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
+open import foundation.function-extensionality
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.raising-universe-levels
-open import foundation.sets
-open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-identifications
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.function-types
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtypes
+open import foundation-core.transport-along-identifications
 
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
@@ -45,99 +51,69 @@ module _
   {l : Level} (i : Set l)
   where
 
-  ax-k : formulas l i
-  pr1 (ax-k f) = Σ (formula i) (λ a → Σ (formula i) (λ b → f ＝ a ⇒ b ⇒ a))
-  pr2 (ax-k (a ⇒ b ⇒ a)) (_ , _ , refl) =
+  ax-1-parameter : (h : formula i → formula i) → is-injective h → formulas l i
+  pr1 (ax-1-parameter h inj f) = Σ (formula i) (λ a → f ＝ h a)
+  pr2 (ax-1-parameter h inj f) (a , refl) =
     is-prop-is-contr
-      ( is-contr-Σ-is-prop
-        ( a)
-        ( b , refl)
-        ( λ x y →
-          ( is-prop-is-contr
-            ( is-contr-Σ-is-prop
-              ( b)
-              ( ap _ ((eq-implication-left ∘ pr2) y))
-              ( λ _ → is-set-formula i _ _)
-              ( λ _ → eq-implication-left ∘ eq-implication-right))
-            ( y)))
-        ( λ _ → eq-implication-left ∘ pr2))
+      ( is-contr-Σ-is-prop a refl
+        ( λ _ → is-set-formula i _ _)
+        ( λ x → inj))
+      ( a , refl)
+
+  ax-2-parameters :
+    (h : formula i → formula i → formula i) →
+    ({x x' y y' : formula i} → h x y ＝ h x' y' → x ＝ x') →
+    ({x x' y y' : formula i} → h x y ＝ h x' y' → y ＝ y') →
+    formulas l i
+  pr1 (ax-2-parameters h inj-1 inj-2 f) =
+    Σ (formula i) (λ a → Σ (formula i) (λ b → f ＝ h a b))
+  pr2 (ax-2-parameters h inj-1 inj-2 f) (a , b , refl) =
+    is-prop-is-contr
+      ( is-contr-Σ-is-prop a (b , refl)
+        ( λ x → is-prop-type-Prop (ax-1-parameter (h x) inj-2 (h a b)))
+        ( λ x (y , e) → inj-1 e))
       ( a , b , refl)
 
-  ax-s : formulas l i
-  pr1 (ax-s f) =
-    Σ
-      ( formula i)
-      ( λ a →
-        ( Σ
-          ( formula i)
-          ( λ b → Σ (formula i) (λ c → f ＝ (a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c))))
-  pr2 (ax-s ((a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c)) (_ , _ , _ , refl) =
+  ax-3-parameters :
+    (h : formula i → formula i → formula i → formula i) →
+    ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → x ＝ x') →
+    ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → y ＝ y') →
+    ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → z ＝ z') →
+    formulas l i
+  pr1 (ax-3-parameters h inj-1 inj-2 inj-3 f) =
+    Σ ( formula i)
+      ( λ a → Σ (formula i) (λ b → Σ (formula i) ( λ c → f ＝ h a b c)))
+  pr2 (ax-3-parameters h inj-1 inj-2 inj-3 f) (a , b , c , refl) =
     is-prop-is-contr
-      ( is-contr-Σ-is-prop
-        ( a)
-        ( b , c , refl)
-        ( λ x y →
-          ( is-prop-is-contr
-            ( is-contr-Σ-is-prop
-              ( pr1 y)
-              ( pr2 y)
-              ( λ z e →
-                ( is-prop-is-contr
-                  ( is-contr-Σ-is-prop
-                    ( c)
-                    ( ap-binary _
-                      ( eq-implication-left (eq-implication-left (pr2 (pr2 y))))
-                      ( eq-implication-left
-                        ( eq-implication-right (eq-implication-left (pr2 e)))))
-                    ( λ _ → is-set-formula i _ _)
-                    ( λ _ →
-                      ( eq-implication-right ∘
-                        eq-implication-right ∘
-                        eq-implication-right)))
-                    ( e)))
-              ( λ z e →
-                ( _∙_
-                  ( inv
-                    ( eq-implication-left
-                      ( eq-implication-right
-                        ( eq-implication-left (pr2 (pr2 y))))))
-                  ( eq-implication-left
-                    ( eq-implication-right
-                      ( eq-implication-left (pr2 e)))))))
-            ( y)))
-        ( λ _ → eq-implication-left ∘ eq-implication-left ∘ pr2 ∘ pr2))
+      ( is-contr-Σ-is-prop a (b , c , refl)
+        ( λ x → is-prop-type-Prop (ax-2-parameters (h x) inj-2 inj-3 (h a b c)))
+        ( λ x (y , z , e) → inj-1 e))
       ( a , b , c , refl)
 
+  ax-k : formulas l i
+  ax-k =
+    ax-2-parameters
+      ( λ a b → a ⇒ b ⇒ a)
+      ( eq-implication-left)
+      ( eq-implication-left ∘ eq-implication-right)
+
+  ax-s : formulas l i
+  ax-s =
+    ax-3-parameters
+      ( λ a b c → (a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c)
+      ( eq-implication-left ∘ eq-implication-left)
+      ( eq-implication-left ∘ eq-implication-right ∘ eq-implication-left)
+      ( eq-implication-right ∘ eq-implication-right ∘ eq-implication-left)
+
   ax-n : formulas l i
-  pr1 (ax-n f) =
-    Σ (formula i) (λ a → Σ (formula i) (λ b → f ＝ □ (a ⇒ b) ⇒ □ a ⇒ □ b))
-  pr2 (ax-n (□ (a ⇒ b) ⇒ □ a ⇒ □ b)) (_ , _ , refl) =
-    is-prop-is-contr
-      ( is-contr-Σ-is-prop
-        ( a)
-        ( b , refl)
-        ( λ x y →
-          ( is-prop-is-contr
-            ( is-contr-Σ-is-prop
-              ( b)
-              ( ap _
-                ( eq-box (eq-implication-left (eq-implication-right (pr2 y)))))
-              ( λ _ → is-set-formula i _ _)
-              ( λ _ → eq-box ∘ eq-implication-right ∘ eq-implication-right))
-            ( y)))
-        ( λ _ → eq-box ∘ eq-implication-left ∘ eq-implication-right ∘ pr2))
-      ( a , b , refl)
+  ax-n =
+    ax-2-parameters
+      ( λ a b → □ (a ⇒ b) ⇒ □ a ⇒ □ b)
+      ( eq-implication-left ∘ eq-box ∘ eq-implication-left)
+      ( eq-implication-right ∘ eq-box ∘ eq-implication-left)
 
   ax-dn : formulas l i
-  pr1 (ax-dn f) = Σ (formula i) (λ a → f ＝ ~~ a ⇒ a)
-  pr2 (ax-dn (((a ⇒ ⊥) ⇒ ⊥) ⇒ a)) (_ , refl) =
-    is-prop-is-contr
-      ( is-contr-Σ-is-prop
-        ( a)
-        ( refl)
-        ( λ _ → is-set-formula i _ _)
-        ( λ _ → eq-implication-right))
-      ( a , refl)
+  ax-dn = ax-1-parameter ( λ a → ~~ a ⇒ a) ( eq-implication-right)
 
 module _
   {l1 l2 : Level}

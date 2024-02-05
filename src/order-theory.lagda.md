@@ -10,6 +10,7 @@ open import order-theory.bottom-elements-posets public
 open import order-theory.bottom-elements-preorders public
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
+open import order-theory.chains-union public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public
@@ -101,6 +102,7 @@ open import order-theory.similarity-of-order-preserving-maps-large-posets public
 open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
+open import order-theory.subtypes-leq-posets public
 open import order-theory.suplattices public
 open import order-theory.top-elements-large-posets public
 open import order-theory.top-elements-posets public

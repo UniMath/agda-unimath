@@ -44,13 +44,6 @@ module _
   {l1 l2 : Level} {i : Set l1}
   where
 
-  theory-add-formula : formula i → formulas l2 i → formulas (l1 ⊔ l2) i
-  theory-add-formula a = union-subtype (Id-formula-Prop a)
-
-module _
-  {l1 l2 : Level} {i : Set l1}
-  where
-
   infix 5 _⊢_
 
   data _⊢_ (axioms : formulas l2 i) : formula i → UU (l1 ⊔ l2) where
@@ -72,6 +65,35 @@ module _
 
   is-consistent-modal-logic : formulas l2 i → UU l2
   is-consistent-modal-logic = type-Prop ∘ is-consistent-modal-logic-Prop
+
+module _
+  {l1 l2 : Level} {i : Set l1} {axioms : formulas l2 i}
+  where
+
+  modal-logic-ax :
+    {a : formula i} →
+    is-in-subtype axioms a →
+    is-in-subtype (modal-logic axioms) a
+  modal-logic-ax = unit-trunc-Prop ∘ ax
+
+  modal-logic-mp :
+    {a b : formula i} →
+    is-in-subtype (modal-logic axioms) (a ⇒ b) →
+    is-in-subtype (modal-logic axioms) a →
+    is-in-subtype (modal-logic axioms) b
+  modal-logic-mp {a} {b} tdab tda =
+    apply-twice-universal-property-trunc-Prop tdab tda
+      ( modal-logic axioms b)
+      ( λ dab da → unit-trunc-Prop (mp dab da))
+
+  modal-logic-nec :
+    {a : formula i} →
+    is-in-subtype (modal-logic axioms) a →
+    is-in-subtype (modal-logic axioms) (□ a)
+  modal-logic-nec {a} =
+    map-universal-property-trunc-Prop
+      ( modal-logic axioms (□ a))
+      ( λ da → unit-trunc-Prop (nec da))
 
 module _
   {l1 : Level} {i : Set l1}
@@ -146,4 +168,17 @@ module _
       ( modal-logic ax₂)
       ( subset-double-modal-logic ax₂)
       ( modal-logic-monotic leq)
+
+module _
+  {l1 l2 : Level} {i : Set l1} (a : formula i) (logic : formulas l2 i)
+  where
+
+  theory-add-formula : formulas (l1 ⊔ l2) i
+  theory-add-formula = union-subtype (Id-formula-Prop a) logic
+
+  formula-in-add-formula : is-in-subtype theory-add-formula a
+  formula-in-add-formula = subtype-union-left (Id-formula-Prop a) logic a refl
+
+  subset-add-formula : logic ⊆ theory-add-formula
+  subset-add-formula = subtype-union-right (Id-formula-Prop a) logic
 ```

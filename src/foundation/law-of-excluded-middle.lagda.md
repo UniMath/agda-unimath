@@ -9,11 +9,12 @@ module foundation.law-of-excluded-middle where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
 open import foundation-core.negation
-open import foundation-core.propositions
 
 open import univalent-combinatorics.2-element-types
 ```
@@ -29,11 +30,26 @@ The {{#concept "law of excluded middle" Agda=LEM}} asserts that any
 ## Definition
 
 ```agda
-LEM : (l : Level) → UU (lsuc l)
-LEM l = (P : Prop l) → is-decidable (type-Prop P)
+module _
+  (l : Level)
+  where
+
+  LEM-Prop : Prop (lsuc l)
+  LEM-Prop = Π-Prop (Prop l) is-decidable-Prop
+
+  LEM : UU (lsuc l)
+  LEM = type-Prop LEM-Prop
 ```
 
 ## Properties
+
+### TODO
+
+```agda
+lower-LEM : {l1 : Level} (l2 : Level) → LEM (l1 ⊔ l2) → LEM l1
+lower-LEM l2 lem P =
+  is-decidable-equiv (compute-raise l2 (type-Prop P)) (lem (raise-Prop l2 P))
+```
 
 ### Given LEM, we obtain a map from the type of propositions to the type of decidable propositions
 

@@ -125,6 +125,23 @@ is-nonnil-is-cons-list l ((a , l') , refl) q =
   is-nonnil-cons-list a l' q
 ```
 
+### TODO: change title
+
+```agda
+last-in-snoc-list :
+  {l : Level} {A : UU l} (xs : list A) (x : A) → x ∈-list (snoc xs x)
+last-in-snoc-list nil x = is-head x nil
+last-in-snoc-list (cons y xs) x =
+  is-in-tail x y (snoc xs x) (last-in-snoc-list xs x)
+
+rest-in-snoc-list :
+  {l : Level} {A : UU l} (xs : list A) (x y : A) →
+  y ∈-list xs → y ∈-list (snoc xs x)
+rest-in-snoc-list (cons y xs) x .y (is-head .y .xs) = is-head y (snoc xs x)
+rest-in-snoc-list (cons y xs) x z (is-in-tail .z .y .xs in-list) =
+  is-in-tail z y (snoc xs x) (rest-in-snoc-list xs x z in-list)
+```
+
 ### A list that uses cons is not nil
 
 ```agda
