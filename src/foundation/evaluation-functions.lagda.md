@@ -83,38 +83,9 @@ module _
   ev-implicit-function' = ev-implicit-function a
 ```
 
-## Properties
+## See also
 
-### The action on paths of an evaluation map
-
-For any two functions `f g : A → B`, the action on identifications of
-`ev-function B a`
-
-```text
-  ap (ev-function B a) : (f ＝ g) → (f a ＝ g a)
-```
-
-is homotopic to the map `p ↦ htpy-eq p a`, where `htpy-eq` is the operation that
-constructs a homotopy from an identification of functions, which we constructed
-in [Function extensionality](foundation.function-extensionality.md). In other
-words, the triangle of maps
-
-```text
-                          htpy-eq
-               (f ＝ g) ----------> (f ~ g)
-                      \            /
-  ap (ev-function B a) \          / ev a
-                        ∨        ∨
-                       (f a ＝ g a)
-```
-
-[commutes](foundation-core.commuting-triangles-of-maps.md).
-
-```text
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (a : A)
-  where
-
-  ap-ev : {f g : A → B} (p : f ＝ g) → (ap (ev-function B a) p) ＝ htpy-eq p a
-  ap-ev refl = refl
-```
+- The
+  [action on identifications](foundation.action-on-identifications-functions.md)
+  of the evaluation map is the function `a ↦ λ p → htpy-eq p a` defined in
+  [Function extensionality](foundation.function-extensionality.md).

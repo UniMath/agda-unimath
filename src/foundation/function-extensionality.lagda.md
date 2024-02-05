@@ -32,6 +32,33 @@ functions are [equivalently](foundation-core.equivalences.md) described as
 [homotopies](foundation-core.homotopies.md) between them. In other words, a
 function is completely determined by its values.
 
+Function extensionality is postulated by stating that the canonical map
+
+```text
+  htpy-eq : f ＝ g → f ~ g
+```
+
+from identifications between two functions to homotopies between them is an
+equivalence. The map `htpy-eq` is the unique map that fits in a
+[commuting triangle](foundation-core.commuting-triangles-of-maps.md)
+
+```text
+              htpy-eq
+    (f ＝ g) ----------> (f ~ g)
+           \            /
+  ap (ev a) \          / ev a
+             ∨        ∨
+            (f a ＝ g a)
+```
+
+In other words, we define
+
+```text
+  htpy-eq p a := ap (ev a) p.
+```
+
+It follows from this definition that `htpy-eq refl ≐ refl-htpy`, as expected.
+
 ## Definitions
 
 ### Equalities induce homotopies
