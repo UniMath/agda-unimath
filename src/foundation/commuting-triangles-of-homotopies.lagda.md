@@ -71,7 +71,8 @@ Consider a commuting triangle of homotopies
          h
 ```
 
-where `f g h : (x : A) → B x`, and consider a homotopy `H : i ~ f` for a fourth dependent function `i : (x : A) → B x`. Then the triangle of homotopies
+where `f g h : (x : A) → B x`, and consider a homotopy `H : i ~ f` for a fourth
+dependent function `i : (x : A) → B x`. Then the triangle of homotopies
 
 ```text
            H ∙h top
@@ -117,7 +118,8 @@ Consider a commuting triangle of homotopies
          h
 ```
 
-where `f g h : (x : A) → B x`, and consider a homotopy `H : h ~ i` for a fourth dependent function `i : (x : A) → B x`. Then the triangle of homotopies
+where `f g h : (x : A) → B x`, and consider a homotopy `H : h ~ i` for a fourth
+dependent function `i : (x : A) → B x`. Then the triangle of homotopies
 
 ```text
               top
@@ -164,23 +166,25 @@ Consider a commuting triangle of homotopies
          h
 ```
 
-where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map `i : B → X`. Then we obtain a commuting triangle of homotopies
+where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map
+`i : B → X`. Then we obtain a commuting triangle of homotopies
 
 ```text
            i ·l top
      i ∘ f --------> i ∘ g
            \       /
   i ·l left \     / i ·l right
-             \   / 
+             \   /
               ∨ ∨
              i ∘ h.
 ```
 
-This notion of whiskering should be compared to [whiskering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md).
+This notion of whiskering should be compared to
+[whiskering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md).
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}  {X : UU l3} (i : B → X)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (i : B → X)
   {f g h : A → B} (left : f ~ h) (right : g ~ h) (top : f ~ g)
   where
 
@@ -204,19 +208,21 @@ Consider a commuting triangle of homotopies
          h
 ```
 
-where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map `i : X → A`. Then we obtain a commuting triangle of homotopies
+where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map
+`i : X → A`. Then we obtain a commuting triangle of homotopies
 
 ```text
            top ·r i
      f ∘ i --------> g ∘ i
            \       /
   left ·r i \     / right ·r i
-             \   / 
+             \   /
               ∨ ∨
              h ∘ i.
 ```
 
-This notion of whiskering should be compared to [whiskering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md).
+This notion of whiskering should be compared to
+[whiskering higher homotopies with respect to composition](foundation.whiskering-higher-homotopies-composition.md).
 
 ```agda
 module _
