@@ -430,7 +430,7 @@ interchange-y-z-concat-Id³ refl refl refl refl = inv right-unit
 ## Properties of 4-paths
 
 The pattern for concatenation of 1, 2, and 3-paths continues. There are four
-ways to concatenate in quadruple identity types. We name the three non-standard
+ways to concatenate in quadruple identity types. We name the three nonstandard
 concatenations in quadruple identity types `i`-, `j`-, and `k`-concatenation,
 after the standard names for the quaternions `i`, `j`, and `k`.
 

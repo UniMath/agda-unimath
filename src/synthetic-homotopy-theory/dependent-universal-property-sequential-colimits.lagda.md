@@ -193,7 +193,7 @@ module _
       ( dup-c P)
 ```
 
-### The non-dependent and dependent universal properties of sequential colimits are logically equivalent
+### The nondependent and dependent universal properties of sequential colimits are logically equivalent
 
 ```agda
 module _

@@ -138,7 +138,7 @@ module _
 
 ## Properties
 
-### Every non-coherent H-space can be upgraded to a coherent H-space
+### Every noncoherent H-space can be upgraded to a coherent H-space
 
 ```agda
 h-space-Noncoherent-H-Space :

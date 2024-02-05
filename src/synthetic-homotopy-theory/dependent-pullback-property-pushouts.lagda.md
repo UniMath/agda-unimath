@@ -95,7 +95,7 @@ Consider a [cocone](synthetic-homotopy-theory.cocones-under-spans.md)
         i
 ```
 
-The non-dependent pullback property follows from the dependent one by applying
+The nondependent pullback property follows from the dependent one by applying
 the dependent pullback property to the constant type family `λ _ → Y`.
 
 ```agda

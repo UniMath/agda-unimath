@@ -230,7 +230,7 @@ dependent-universal-property-dependent-pullback-property-pushout
           ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
 ```
 
-### The non-dependent and dependent universal property of pushouts are logically equivalent
+### The nondependent and dependent universal property of pushouts are logically equivalent
 
 This follows from the fact that the
 [dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md)

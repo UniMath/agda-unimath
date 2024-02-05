@@ -191,7 +191,7 @@ module _
   pr2 inv-left-unit-law-Π = is-equiv-map-inv-left-unit-law-Π
 ```
 
-### Left unit law for non-dependent function types
+### Left unit law for nondependent function types
 
 ```agda
 module _
