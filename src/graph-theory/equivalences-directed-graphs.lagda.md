@@ -15,6 +15,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -28,8 +29,6 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
-
-open import foundation.equivalences
 
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
