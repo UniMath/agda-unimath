@@ -33,7 +33,7 @@ A triangle of [homotopies](foundation-core.homotopies.md) of dependent functions
         h
 ```
 
-is said to commute if there is a homotopy `left ~ top ∙h right`.
+is said to {{#concept "commute" Disambiguation="triangle of homotopies" Agda=coherence-triangle-homotopies}} if there is a homotopy `left ~ top ∙h right`.
 
 ## Definitions
 

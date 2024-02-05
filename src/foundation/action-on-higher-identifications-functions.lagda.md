@@ -30,7 +30,7 @@ which is a map
   ap² f : (p ＝ q) → (ap f p ＝ ap f q)
 ```
 
-Here `p q : x ＝ y` are identifications in the type `A`. The action of `f` on
+Here `p q : x ＝ y` are [identifications](foundation-core.identity-types.md) in the type `A`. The action of `f` on
 higher identifications is defined by
 
 ```text
@@ -69,7 +69,7 @@ identifications
                       horizontal-inv-Id² (ap² f α)
 ```
 
-commutes.
+[commutes](foundation.commuting-squares-of-identifications.md).
 
 ```agda
 module _
@@ -167,6 +167,8 @@ of identifications
                      ∨      ∨
                        refl
 ```
+
+[commutes](foundation.commuting-triangles-of-identifications.md).
 
 ```agda
 module _

@@ -14,13 +14,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-The equality relation on a type is introduced as binary family of types
+The {{#concept "equality" Agda=Id}} relation is defined in type theory by the
+{{#concept "identity type" Agda=Id}}. The identity type on a type `A` is a
+binary family of types
 
 ```text
   Id : A → A → 𝒰
 ```
 
-equipped with a proof of reflexivity
+equipped with a {{#concept "reflexivity element" Disambiguation="identity type" Agda=refl}}
 
 ```text
   refl : (x : A) → Id x x.
@@ -124,8 +126,8 @@ ind-Id x B b y refl = b
 ## Operations on the identity type
 
 The identity types form a weak groupoidal structure on types. Thus they come
-equipped with **concatenation** `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
-**inverse operation** `(x ＝ y) → (y ＝ x)`.
+equipped with {{#concept "concatenation" Disambiguation="identifications" Agda=concat]} `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
+{{#concept "inverse" Disambiguation="identification" Agda=inv}} operation `(x ＝ y) → (y ＝ x)`.
 
 There are many more operations on identity types. Some of them are defined in
 [path algebra](foundation.path-algebra.md) and
@@ -475,7 +477,7 @@ construct an identification. Some constructions of identifications naturally
 involve computations that are more deeply nested in the terms. Furthermore,
 proofs by equational reasoning tend to require a lot of reassociation.
 
-Some tools that allow us to perform faster comutations are the transpositions
+Some tools that allow us to perform faster computations are the transpositions
 defined above, the transpositions and splicing operations defined in
 [commuting squares of identifications](foundation.commuting-squares-of-identifications.md)
 and
@@ -484,6 +486,8 @@ and the higher concatenation operations defined in
 [path algebra](foundation.path-algebra.md). Each of these operations has good
 computational behavior, so there is infrastructure for reasoning about
 identifications that are constructed using them.
+
+We also note that there is similar infrastructure for [homotopy reasoning](foundation-core.homotopies.md).
 
 ## References
 

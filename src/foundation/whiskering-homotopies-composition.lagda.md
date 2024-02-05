@@ -19,9 +19,9 @@ open import foundation-core.identity-types
 
 ## Idea
 
-There are two **whiskering operations** on
-[homotopies](foundation-core.homotopies.md). The **left whiskering** operation
-assumes a diagram of the form
+There are two {{#concept "whiskering operations" Disambiguation="homotopies with respect to compostion"}} on
+[homotopies](foundation-core.homotopies.md) with respect to composition. The {{#concept "left whiskering" Disambiguation="homotopies with respect to composition" Agda=left-whisker-comp}} operation of homotopies with respect to composition
+assumes a diagram of maps of the form
 
 ```text
       f
@@ -31,7 +31,7 @@ assumes a diagram of the form
 ```
 
 and is defined to be a function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The
-**right whiskering** operation assumes a diagram of the form
+{{#concept "right whiskering" Disambiguation="homotopies with respect to composition" Agda=right-whisker-comp}} operation of homotopies with respect to composition assumes a diagram of maps the form
 
 ```text
                g
