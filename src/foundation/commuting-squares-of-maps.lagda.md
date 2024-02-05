@@ -358,7 +358,9 @@ module _
           ( H (map-inv-equiv left a))
           ( ap
             ( map-equiv right)
-            ( coherence-square-maps-inv-equiv-vertical top left right bottom H a))
+            ( coherence-square-maps-inv-equiv-vertical top left right bottom
+              ( H)
+              ( a)))
           ( is-section-map-inv-equiv right (bottom a))) ∙
         ( left-whisker-concat
           ( H (map-inv-equiv left a))
