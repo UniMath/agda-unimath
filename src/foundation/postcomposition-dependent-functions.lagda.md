@@ -106,7 +106,7 @@ coherence-square-eq-htpy-ap-postcomp-Π :
     ( eq-htpy)
     ( ap (postcomp-Π A f) {x = g} {y = h})
 coherence-square-eq-htpy-ap-postcomp-Π {A = A} f g h =
-    coherence-square-inv-vertical
+    coherence-square-maps-inv-equiv-vertical
     ( ap (postcomp-Π A f) {x = g} {y = h})
     ( equiv-funext)
     ( equiv-funext)

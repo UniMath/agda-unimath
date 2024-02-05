@@ -102,7 +102,7 @@ module _
       ( horizontal-concat-htpy
         ( h ·l
           inv-htpy
-            ( coherence-square-inv-all
+            ( coherence-square-maps-inv-equiv
               ( equiv-family-with-descent-data-circle A)
               ( aut-family-with-descent-data-circle A)
               ( equiv-tr

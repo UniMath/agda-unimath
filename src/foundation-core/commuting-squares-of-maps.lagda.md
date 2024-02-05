@@ -233,29 +233,29 @@ If the horizontal/vertical maps in a commuting square are both
 commuting if we invert those equivalences.
 
 ```agda
-coherence-square-inv-horizontal :
+coherence-square-maps-inv-equiv-horizontal :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (top : A ≃ B) (left : A → X) (right : B → Y) (bottom : X ≃ Y) →
   coherence-square-maps (map-equiv top) left right (map-equiv bottom) →
   coherence-square-maps (map-inv-equiv top) right left (map-inv-equiv bottom)
-coherence-square-inv-horizontal top left right bottom H b =
+coherence-square-maps-inv-equiv-horizontal top left right bottom H b =
   map-eq-transpose-equiv-inv
     ( bottom)
     ( ( ap right (inv (is-section-map-inv-equiv top b))) ∙
       ( inv (H (map-inv-equiv top b))))
 
-coherence-square-inv-vertical :
+coherence-square-maps-inv-equiv-vertical :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (top : A → B) (left : A ≃ X) (right : B ≃ Y) (bottom : X → Y) →
   coherence-square-maps top (map-equiv left) (map-equiv right) bottom →
   coherence-square-maps bottom (map-inv-equiv left) (map-inv-equiv right) top
-coherence-square-inv-vertical top left right bottom H x =
+coherence-square-maps-inv-equiv-vertical top left right bottom H x =
   map-eq-transpose-equiv
     ( right)
     ( ( inv (H (map-inv-equiv left x))) ∙
       ( ap bottom (is-section-map-inv-equiv left x)))
 
-coherence-square-inv-all :
+coherence-square-maps-inv-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (top : A ≃ B) (left : A ≃ X) (right : B ≃ Y) (bottom : X ≃ Y) →
   coherence-square-maps
@@ -268,13 +268,13 @@ coherence-square-inv-all :
     ( map-inv-equiv right)
     ( map-inv-equiv left)
     ( map-inv-equiv top)
-coherence-square-inv-all top left right bottom H =
-  coherence-square-inv-vertical
+coherence-square-maps-inv-equiv top left right bottom H =
+  coherence-square-maps-inv-equiv-vertical
     ( map-inv-equiv top)
     ( right)
     ( left)
     ( map-inv-equiv bottom)
-    ( coherence-square-inv-horizontal
+    ( coherence-square-maps-inv-equiv-horizontal
       ( top)
       ( map-equiv left)
       ( map-equiv right)

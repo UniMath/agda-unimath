@@ -407,7 +407,7 @@ module _
       ( map-inv-is-equiv K)
       ( map-inv-is-equiv L)
       ( top)
-      ( coherence-square-inv-vertical
+      ( coherence-square-maps-inv-equiv-vertical
         ( top)
         ( left , K)
         ( right , L)

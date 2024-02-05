@@ -231,7 +231,7 @@ coherence-square-eq-htpy-ap-precomp :
     ( eq-htpy)
     ( ap (precomp f C))
 coherence-square-eq-htpy-ap-precomp {C = C} f g h =
-  coherence-square-inv-vertical
+  coherence-square-maps-inv-equiv-vertical
     ( ap (precomp f C))
     ( equiv-funext)
     ( equiv-funext)
