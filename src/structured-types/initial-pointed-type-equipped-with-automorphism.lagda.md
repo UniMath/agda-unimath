@@ -21,7 +21,7 @@ open import foundation.transposition-identifications-along-equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
+open import foundation.equivalences
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```

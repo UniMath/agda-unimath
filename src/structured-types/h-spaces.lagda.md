@@ -179,10 +179,9 @@ compute-pointed-section-ev-point-Pointed-Type (pair A a) =
         ( λ H →
           equiv-tot
             ( λ K →
-              ( ( ( equiv-inv (K a) (htpy-eq H a)) ∘e
-                  ( equiv-concat' (K a) (ap-ev a H))) ∘e
-                ( equiv-concat' (K a) right-unit)) ∘e
-              ( equiv-concat' (K a) right-unit)))))) ∘e
+              equiv-inv (K a) (htpy-eq H a) ∘e
+              equiv-concat' (K a) right-unit ∘e
+              equiv-concat' (K a) right-unit))))) ∘e
   ( associative-Σ
     ( A → (A → A))
     ( λ μ → μ a ＝ id)
