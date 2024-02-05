@@ -126,31 +126,37 @@ module _
       (H : is-invertible f) → (map-inv-is-invertible H ∘ f) ~ id
     is-retraction-map-inv-is-invertible = is-section-is-invertible
 
+    inv-coherence-map-inv-is-invertible :
+      (H : is-invertible f) →
+      f ·l is-retraction-map-inv-is-invertible H ~
+      is-section-map-inv-is-invertible H ·r f
+    inv-coherence-map-inv-is-invertible H x =
+      left-transpose-eq-concat
+        ( is-retraction-is-invertible H (f (map-inv-is-invertible H (f x))))
+        ( ap f (is-section-is-invertible H x))
+        ( ( ap f
+            ( is-section-is-invertible H (map-inv-is-invertible H (f x)))) ∙
+          ( is-retraction-is-invertible H (f x)))
+        ( ( nat-htpy
+            ( right-whisker-comp (is-retraction-is-invertible H) f)
+            ( is-section-is-invertible H x)) ∙
+          ( ap
+            ( concat' _ (is-retraction-is-invertible H (f x)))
+            ( ( ap-comp f
+                ( map-inv-is-invertible H ∘ f)
+                ( is-section-is-invertible H x)) ∙
+              ( inv
+                ( ap
+                  ( ap f)
+                  ( coh-is-coherently-invertible-id
+                    ( is-section-is-invertible H) x))))))
+
     coherence-map-inv-is-invertible :
       ( H : is-invertible f) →
       ( is-section-map-inv-is-invertible H ·r f) ~
       ( f ·l is-retraction-map-inv-is-invertible H)
     coherence-map-inv-is-invertible H x =
-      inv
-        ( left-transpose-eq-concat
-          ( is-retraction-is-invertible H (f (map-inv-is-invertible H (f x))))
-          ( ap f (is-section-is-invertible H x))
-          ( ( ap f
-              ( is-section-is-invertible H (map-inv-is-invertible H (f x)))) ∙
-            ( is-retraction-is-invertible H (f x)))
-          ( ( nat-htpy
-              ( right-whisker-comp (is-retraction-is-invertible H) f)
-              ( is-section-is-invertible H x)) ∙
-            ( ap
-              ( concat' _ (is-retraction-is-invertible H (f x)))
-              ( ( ap-comp f
-                  ( map-inv-is-invertible H ∘ f)
-                  ( is-section-is-invertible H x)) ∙
-                ( inv
-                  ( ap
-                    ( ap f)
-                    ( coh-is-coherently-invertible-id
-                      ( is-section-is-invertible H) x)))))))
+      inv (inv-coherence-map-inv-is-invertible H x)
 
   abstract
     is-coherently-invertible-is-invertible :
