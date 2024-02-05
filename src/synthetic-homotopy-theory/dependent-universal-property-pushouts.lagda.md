@@ -120,7 +120,7 @@ htpy-eq-dependent-cocone-map f g c ind-c {P} h h' p =
               ( dependent-cocone-map f g c P h')
               ( p)
               ( g s))
-            ( coherence-square-homotopies-eq-dependent-cocone f g c P
+            ( coherence-square-htpy-eq-dependent-cocone f g c P
               ( dependent-cocone-map f g c P h)
               ( dependent-cocone-map f g c P h')
               ( p)

@@ -35,69 +35,6 @@ open import foundation-core.homotopies
 
 ## Definitions
 
-### Pasting commuting triangles into commuting squares along homotopic diagonals
-
-Two [commuting triangles](foundation-core.commuting-triangles-of-maps.md)
-
-```text
-   A         A --> X
-  | \         \    |
-  |  \ H  L  K \   |
-  |   \         \  |
-  v    v         v v
-  B --> Y         Y
-```
-
-with a [homotopic](foundation-core.homotopies.md) diagonal may be pasted into a
-commuting square
-
-```text
-  A -----> X
-  |        |
-  |        |
-  v        v
-  B -----> Y.
-```
-
-```agda
-module _
-  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  ( top : A → X) (left : A → B) (right : X → Y) (bottom : B → Y)
-  where
-
-  coherence-square-homotopies-coherence-triangles-maps :
-    { diagonal-left diagonal-right : A → Y} →
-    diagonal-left ~ diagonal-right →
-    coherence-triangle-maps' diagonal-left bottom left →
-    coherence-triangle-maps diagonal-right right top →
-    coherence-square-maps top left right bottom
-  coherence-square-homotopies-coherence-triangles-maps L H K = (H ∙h L) ∙h K
-
-  coherence-square-homotopies-coherence-triangles-maps' :
-    { diagonal-left diagonal-right : A → Y} →
-    diagonal-left ~ diagonal-right →
-    coherence-triangle-maps' diagonal-left bottom left →
-    coherence-triangle-maps diagonal-right right top →
-    coherence-square-maps top left right bottom
-  coherence-square-homotopies-coherence-triangles-maps' L H K = H ∙h (L ∙h K)
-
-  coherence-square-coherence-triangles-maps :
-    ( diagonal : A → Y) →
-    coherence-triangle-maps' diagonal bottom left →
-    coherence-triangle-maps diagonal right top →
-    coherence-square-maps top left right bottom
-  coherence-square-coherence-triangles-maps diagonal H K = H ∙h K
-
-  compute-coherence-square-refl-htpy-coherence-triangles-maps :
-    ( diagonal : A → Y) →
-    ( H : coherence-triangle-maps' diagonal bottom left) →
-    ( K : coherence-triangle-maps diagonal right top) →
-    ( coherence-square-homotopies-coherence-triangles-maps refl-htpy H K) ~
-    ( coherence-square-coherence-triangles-maps diagonal H K)
-  compute-coherence-square-refl-htpy-coherence-triangles-maps diagonal H K x =
-    right-whisker-concat right-unit (K x)
-```
-
 ### Commuting squares of maps induce commuting squares of precomposition maps
 
 Every commuting square
@@ -455,13 +392,13 @@ Similarly to the naturality square of homotopies and
 square of coherence squares of maps and identifications:
 
 ```text
-           ap f (ap g p)
-  f (g x) =============== f (g y)
-     ‖                       ‖
- H x ‖                       ‖ H y
-     ‖                       ‖
-  h (k x) =============== h (k y)
-           ap h (ap k p)           .
+            ap f (ap g p)
+   f (g x) ---------------> f (g y)
+      |                       |
+  H x |                       | H y
+      ∨                       ∨
+   h (k x) ---------------> h (k y)
+            ap h (ap k p)           .
 ```
 
 ```agda
@@ -958,7 +895,7 @@ module _
       ( left)
       ( right)
       ( bottom)
-      ( coherence-square-homotopies-coherence-triangles-maps
+      ( horizontal-pasting-htpy-coherence-triangle-maps
         ( top)
         ( left)
         ( right)
@@ -967,7 +904,7 @@ module _
         ( H)
         ( K))
       ( W)) ~
-    ( coherence-square-homotopies-coherence-triangles-maps
+    ( horizontal-pasting-htpy-coherence-triangle-maps
       ( precomp right W)
       ( precomp bottom W)
       ( precomp top W)
@@ -996,7 +933,7 @@ module _
       ( left)
       ( right)
       ( bottom)
-      ( coherence-square-homotopies-coherence-triangles-maps'
+      ( horizontal-pasting-htpy-coherence-triangle-maps'
         ( top)
         ( left)
         ( right)
@@ -1005,7 +942,7 @@ module _
         ( H)
         ( K))
       ( W)) ~
-    ( coherence-square-homotopies-coherence-triangles-maps'
+    ( horizontal-pasting-htpy-coherence-triangle-maps'
       ( precomp right W)
       ( precomp bottom W)
       ( precomp top W)
@@ -1033,7 +970,7 @@ module _
       ( left)
       ( right)
       ( bottom)
-      ( coherence-square-coherence-triangles-maps
+      ( horizontal-pasting-coherence-triangle-maps
         ( top)
         ( left)
         ( right)
@@ -1042,7 +979,7 @@ module _
         ( H)
         ( K))
       ( W)) ~
-    ( coherence-square-coherence-triangles-maps
+    ( horizontal-pasting-coherence-triangle-maps
       ( precomp right W)
       ( precomp bottom W)
       ( precomp top W)
