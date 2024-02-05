@@ -256,8 +256,8 @@ module _
     (diagonal : A → Y) →
     (H : coherence-triangle-maps' diagonal bottom left) →
     (K : coherence-triangle-maps diagonal right top) →
-    (horizontal-pasting-htpy-coherence-triangle-maps refl-htpy H K) ~
-    (horizontal-pasting-coherence-triangle-maps diagonal H K)
+    horizontal-pasting-htpy-coherence-triangle-maps refl-htpy H K ~
+    horizontal-pasting-coherence-triangle-maps diagonal H K
   compute-refl-htpy-horizontal-pasting-coherence-triangle-maps diagonal H K x =
     right-whisker-concat right-unit (K x)
 ```

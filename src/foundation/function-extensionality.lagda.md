@@ -10,6 +10,7 @@ module foundation.function-extensionality where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.evaluation-functions
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -41,7 +42,7 @@ module _
   where
 
   htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
-  htpy-eq refl = refl-htpy
+  htpy-eq p x = ap (ev x) p
 ```
 
 ### An instance of function extensionality

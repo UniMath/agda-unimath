@@ -8,7 +8,6 @@ module foundation.evaluation-functions where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -73,7 +72,7 @@ module _
   ev-implicit-function f = f {a}
 ```
 
-### The evaluation function of implicit function, specified with an explicit type family
+### The evaluation function of implicit functions, specified with an explicit type family
 
 ```agda
 module _
@@ -97,7 +96,8 @@ For any two functions `f g : A → B`, the action on identifications of
 
 is homotopic to the map `p ↦ htpy-eq p a`, where `htpy-eq` is the operation that
 constructs a homotopy from an identification of functions, which we constructed
-in [foundation.function-extensionality. In other words, the triangle of maps
+in [Function extensionality](foundation.function-extensionality.md). In other
+words, the triangle of maps
 
 ```text
                           htpy-eq
@@ -110,7 +110,7 @@ in [foundation.function-extensionality. In other words, the triangle of maps
 
 [commutes](foundation-core.commuting-triangles-of-maps.md).
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (a : A)
   where
