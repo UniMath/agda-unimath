@@ -34,8 +34,11 @@ A square of [homotopies](foundation-core.homotopies.md)
         bottom
 ```
 
-is said to **commute** if there is a homotopy `left ∙h bottom ~ top ∙h right `.
-Such a homotopy is called a **coherence** of the square.
+is said to be a {{#concept "commuting sqsuare" Disambiguation="homotopies"}} of
+homotopies if there is a homotopy `left ∙h bottom ~ top ∙h right `. Such a
+homotopy is called a
+{{#concept "coherence" Disambiguation="commuting square of homotopies" Agda=coherence-square-homotopies}}
+of the square.
 
 ### Right whiskering a commuting square of homotopies with respect to concatenation of homotopies
 

@@ -35,7 +35,8 @@ A square of maps
           bottom
 ```
 
-is said to **commute** if there is a homotopy
+is said to be a {{#concept "commuting square" Disambiguation="maps"}} of maps if
+there is a [homotopy](foundation-core.homotopies.md)
 
 ```text
   bottom ∘ left ~ right ∘ top.
