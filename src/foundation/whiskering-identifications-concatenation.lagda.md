@@ -28,10 +28,10 @@ identifications `p ＝ q` to identifications `r ∙ p ＝ r ∙ q` or to
 identifications `p ∙ r ＝ q ∙ r`.
 
 The
-{{#concept "left whiskering" Disambiguation="identifcations" Agda=left-whisker-concat"}}
+{{#concept "left whiskering" Disambiguation="identifcations" Agda=left-whisker-concat}}
 operation takes an identification `r : z ＝ x` and an identification `p ＝ q` to
 an identification `r ∙ p ＝ r ∙ q`. Similarly, the
-{{#concept "right whiskering" Disambiguation="identifications" Agda=right-whisker-concat"}}
+{{#concept "right whiskering" Disambiguation="identifications" Agda=right-whisker-concat}}
 operation takes an identification `r : y ＝ z` and an identification `p ＝ q` to
 an identification `p ∙ r ＝ q ∙ r`.
 
