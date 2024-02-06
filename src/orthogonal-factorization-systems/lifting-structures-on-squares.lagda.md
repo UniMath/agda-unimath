@@ -43,7 +43,7 @@ open import orthogonal-factorization-systems.pullback-hom
 ## Idea
 
 A
-{{#concept "lifting structure" Disambiguation="commuting square of maps" Agda=lifting-square}}
+{{#concept "lifting structure" Disambiguation="commuting square of maps" Agda=lifting-structure-square}}
 of a commuting square
 
 ```text
@@ -137,41 +137,41 @@ module _
     is-diagonal-lift-square f g α (diagonal-map-lifting-structure-square l)
   is-lifting-diagonal-map-lifting-structure-square = pr2
 
-  is-extension-lifting-structure-square :
+  is-extension-diagonal-map-lifting-structure-square :
     (l : lifting-structure-square) →
     is-extension f
       ( map-domain-hom-arrow f g α)
       ( diagonal-map-lifting-structure-square l)
-  is-extension-lifting-structure-square = pr1 ∘ pr2
+  is-extension-diagonal-map-lifting-structure-square = pr1 ∘ pr2
 
   extension-lifting-structure-square :
     lifting-structure-square → extension f (map-domain-hom-arrow f g α)
   pr1 (extension-lifting-structure-square L) =
     diagonal-map-lifting-structure-square L
   pr2 (extension-lifting-structure-square L) =
-    is-extension-lifting-structure-square L
+    is-extension-diagonal-map-lifting-structure-square L
 
-  is-lift-lifting-structure-square :
+  is-lift-diagonal-map-lifting-structure-square :
     (l : lifting-structure-square) →
     is-lift g
       ( map-codomain-hom-arrow f g α)
       ( diagonal-map-lifting-structure-square l)
-  is-lift-lifting-structure-square = pr1 ∘ (pr2 ∘ pr2)
+  is-lift-diagonal-map-lifting-structure-square = pr1 ∘ (pr2 ∘ pr2)
 
   lift-lifting-structure-square :
     lifting-structure-square → lift g (map-codomain-hom-arrow f g α)
   pr1 (lift-lifting-structure-square L) =
     diagonal-map-lifting-structure-square L
   pr2 (lift-lifting-structure-square L) =
-    is-lift-lifting-structure-square L
+    is-lift-diagonal-map-lifting-structure-square L
 
   coherence-lifting-structure-square :
     (l : lifting-structure-square) →
     coherence-square-homotopies
-      ( is-lift-lifting-structure-square l ·r f)
+      ( is-lift-diagonal-map-lifting-structure-square l ·r f)
       ( coh-hom-arrow f g α)
       ( coh-pullback-hom f g (diagonal-map-lifting-structure-square l))
-      ( g ·l is-extension-lifting-structure-square l)
+      ( g ·l is-extension-diagonal-map-lifting-structure-square l)
   coherence-lifting-structure-square = pr2 ∘ (pr2 ∘ pr2)
 ```
 
