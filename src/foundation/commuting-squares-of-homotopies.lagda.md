@@ -134,7 +134,7 @@ squares of homotopies
 ```
 
 This is the
-{{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}}
+{{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation" Agda=left-whisker-concat-coherence-square-homotopies}}
 operation of commuting squares of homotopies with respect to concatenation.
 
 ```agda
