@@ -24,7 +24,7 @@ open import orthogonal-factorization-systems.factorization-operations-function-c
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
 open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.wide-function-classes
 ```
 

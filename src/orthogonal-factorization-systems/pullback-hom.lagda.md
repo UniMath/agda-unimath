@@ -88,8 +88,8 @@ in the diagram
 ```
 
 The [fibers](foundation-core.fibers-of-maps.md) of the pullback-hom are
-[lifting squares](orthogonal-factorization-systems.lifting-squares.md). The
-pullback-hom is therefore a fundamental operation in the study of
+[lifting squares](orthogonal-factorization-systems.lifting-structures-on-squares.md).
+The pullback-hom is therefore a fundamental operation in the study of
 [lifting conditions](orthogonal-factorization-systems.mere-lifting-properties.md)
 and
 [orthogonality conditions](orthogonal-factorization-systems.orthogonal-maps.md):

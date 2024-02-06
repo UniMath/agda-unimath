@@ -39,7 +39,7 @@ open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.pullback-hom
 ```
@@ -193,24 +193,24 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  unique-lifting-squares-is-orthogonal :
+  unique-lifting-structure-squares-is-orthogonal :
     is-orthogonal f g →
     (h : hom-arrow f g) →
-    is-contr (lifting-square f g h)
-  unique-lifting-squares-is-orthogonal H h =
+    is-contr (lifting-structure-square f g h)
+  unique-lifting-structure-squares-is-orthogonal H h =
     is-contr-equiv
       ( fiber (pullback-hom f g) h)
       ( compute-fiber-pullback-hom f g h)
       ( is-contr-map-is-equiv H h)
 
-  is-orthogonal-unique-lifting-squares :
-    ( (h : hom-arrow f g) → is-contr (lifting-square f g h)) →
+  is-orthogonal-unique-lifting-structure-squares :
+    ( (h : hom-arrow f g) → is-contr (lifting-structure-square f g h)) →
     is-orthogonal f g
-  is-orthogonal-unique-lifting-squares H =
+  is-orthogonal-unique-lifting-structure-squares H =
     is-equiv-is-contr-map
       ( λ h →
         is-contr-equiv'
-          ( lifting-square f g h)
+          ( lifting-structure-square f g h)
           ( compute-fiber-pullback-hom f g h)
           ( H h))
 ```
