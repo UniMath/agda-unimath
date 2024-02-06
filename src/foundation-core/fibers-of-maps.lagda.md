@@ -140,7 +140,7 @@ module _
 
   eq-Eq-fiber-uncurry' : {s t : fiber' f b} → Eq-fiber' s t → s ＝ t
   eq-Eq-fiber-uncurry' {x , p} (refl , refl) =
-    eq-pair-eq-fiber (inv right-unit)
+    ap (pair _) (inv right-unit)
 
   eq-Eq-fiber' :
     {s t : fiber' f b} (α : pr1 s ＝ pr1 t) → pr2 t ＝ pr2 s ∙ ap f α → s ＝ t

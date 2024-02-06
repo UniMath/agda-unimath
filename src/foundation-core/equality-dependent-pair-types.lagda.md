@@ -51,15 +51,6 @@ module _
   pair-eq-Σ : {s t : Σ A B} → s ＝ t → Eq-Σ s t
   pair-eq-Σ {s} refl = refl-Eq-Σ s
 
-  eq-pair-Σ :
-    {s t : Σ A B}
-    (α : pr1 s ＝ pr1 t) →
-    dependent-identification B α (pr2 s) (pr2 t) → s ＝ t
-  eq-pair-Σ refl refl = refl
-
-  eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
-  eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
-
   eq-pair-eq-base :
     {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
   eq-pair-eq-base refl = refl
@@ -71,6 +62,15 @@ module _
   eq-pair-eq-fiber :
     {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
   eq-pair-eq-fiber {x} = ap {B = Σ A B} (pair x)
+
+  eq-pair-Σ :
+    {s t : Σ A B}
+    (α : pr1 s ＝ pr1 t) →
+    dependent-identification B α (pr2 s) (pr2 t) → s ＝ t
+  eq-pair-Σ refl = eq-pair-eq-fiber
+
+  eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
+  eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 
   ap-pr1-eq-pair-eq-fiber :
     {x : A} {s t : B x} (p : s ＝ t) → ap pr1 (eq-pair-eq-fiber p) ＝ refl
