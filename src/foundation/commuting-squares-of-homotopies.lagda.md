@@ -272,10 +272,10 @@ module _
   ( H : g ~ h) (H' : g ~ h') {K : h ~ k} {K' : h' ~ k}
   where
 
-  ap-left-whisker-concat-coherence-square-homotopies :
+  map-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (f ·l H) (f ·l H') (f ·l K) (f ·l K')
-  ap-left-whisker-concat-coherence-square-homotopies α a =
+  map-coherence-square-homotopies α a =
     map-coherence-square-identifications f (H a) (H' a) (K a) (K' a) (α a)
 
 module _

@@ -100,7 +100,7 @@ module _
       ( prism-bottom ·r hA)) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r hA)
-      ( ( ap-left-whisker-concat-coherence-square-homotopies hC'
+      ( ( map-coherence-square-homotopies hC'
           ( front-top)
           ( mid ·r hA)
           ( prism-top)) ∙h
