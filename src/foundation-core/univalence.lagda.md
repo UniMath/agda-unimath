@@ -129,8 +129,8 @@ commuting diagram
                  equiv-eq
     (B x = B y) ---------> (B x ≃ B y)
          ∧                      |
-         |                      | map-equiv
-  ap B p |                      ∨
+  ap B p |                      | map-equiv
+         |                      ∨
       (x = y) -----------> (B x → B y).
                   tr B p
 ```
