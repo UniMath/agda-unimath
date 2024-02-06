@@ -9,21 +9,22 @@ module foundation-core.univalence where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
-open import foundation-core.transport-along-identifications
 ```
 
 </details>
 
 ## Idea
 
-The univalence axiom characterizes the identity types of universes. It asserts
-that the map `Id A B → A ≃ B` is an equivalence.
+The {{#concept "univalence axiom" Disambiguation="types" Agda=univalence-axiom}}
+characterizes the identity types of universes. It asserts that the map
+`Id A B → A ≃ B` is an equivalence.
 
 In this file, we define the statement of the axiom. The axiom itself is
 postulated in [`foundation.univalence`](foundation.univalence.md) as
@@ -32,10 +33,14 @@ postulated in [`foundation.univalence`](foundation.univalence.md) as
 ## Statement
 
 ```agda
-equiv-eq : {l : Level} {A : UU l} {B : UU l} → A ＝ B → A ≃ B
-equiv-eq refl = id-equiv
+equiv-eq : {l : Level} {A B : UU l} → A ＝ B → A ≃ B
+equiv-eq = equiv-tr id
 
-map-eq : {l : Level} {A : UU l} {B : UU l} → A ＝ B → A → B
+compute-equiv-eq-refl :
+  {l : Level} {A : UU l} → equiv-eq (refl {x = A}) ＝ id-equiv
+compute-equiv-eq-refl = refl
+
+map-eq : {l : Level} {A B : UU l} → A ＝ B → A → B
 map-eq = map-equiv ∘ equiv-eq
 
 instance-univalence : {l : Level} (A B : UU l) → UU (lsuc l)

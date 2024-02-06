@@ -43,10 +43,10 @@ module _
   inv-tr : x ＝ y → B y → B x
   inv-tr p = tr B (inv p)
 
-  is-retraction-inv-tr : (p : x ＝ y) → (inv-tr p ∘ tr B p) ~ id
+  is-retraction-inv-tr : (p : x ＝ y) → inv-tr p ∘ tr B p ~ id
   is-retraction-inv-tr refl b = refl
 
-  is-section-inv-tr : (p : x ＝ y) → (tr B p ∘ inv-tr p) ~ id
+  is-section-inv-tr : (p : x ＝ y) → tr B p ∘ inv-tr p ~ id
   is-section-inv-tr refl b = refl
 
   is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
