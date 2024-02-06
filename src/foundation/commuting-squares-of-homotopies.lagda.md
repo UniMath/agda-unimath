@@ -242,25 +242,25 @@ Given a square of homotopies
 
 ```text
         H
-    g ~~~~~ h
-    ︴      ︴
- H' ︴  ⇗   ︴ K
-    ︴      ︴
-   h' ~~~~~ k
-       K'
+    g -----> h
+    |        |
+ H' |   ⇗    | K
+    ∨        ∨
+   h' -----> k
+        K'
 ```
 
 and a map `f`, we may whisker it by a map on the left into a square of
 homotopies
 
 ```text
-           f ·l H
-         fg ~~~~~ fh
-         ︴        ︴
- f ·l H' ︴   ⇗    ︴f ·l K
-         ︴        ︴
-        fh' ~~~~~ fk
-           f ·l K' ,
+             f ·l H
+         fg --------> fh
+         |            |
+ f ·l H' |      ⇗     |f ·l K
+         ∨            ∨
+        fh' --------> fk,
+             f ·l K'
 ```
 
 and similarly we may whisker it on the right.
@@ -284,8 +284,8 @@ module _
   ( f : A → B)
   where
 
-  ap-right-whisker-concat-coherence-square-homotopies :
+  right-whisker-comp-coherence-square-homotopies :
     coherence-square-homotopies H H' K K' →
     coherence-square-homotopies (H ·r f) (H' ·r f) (K ·r f) (K' ·r f)
-  ap-right-whisker-concat-coherence-square-homotopies α = α ·r f
+  right-whisker-comp-coherence-square-homotopies α = α ·r f
 ```
