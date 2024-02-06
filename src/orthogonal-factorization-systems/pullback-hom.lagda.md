@@ -238,8 +238,8 @@ module _
   pr1 (pr2 cone-pullback-hom) = precomp f X
   pr2 (pr2 cone-pullback-hom) = refl-htpy
 
-  gap-cone-pullback-hom : (B → X) → type-standard-pullback-hom f g
-  gap-cone-pullback-hom = gap (precomp f Y) (postcomp A g) cone-pullback-hom
+  gap-pullback-hom : (B → X) → type-standard-pullback-hom f g
+  gap-pullback-hom = gap (precomp f Y) (postcomp A g) cone-pullback-hom
 ```
 
 ### The equivalence of the codomain of the pullback-hom with the standard pullback
@@ -333,7 +333,7 @@ module _
 
   triangle-pullback-hom :
     coherence-triangle-maps'
-      ( gap-cone-pullback-hom f g)
+      ( gap-pullback-hom f g)
       ( map-compute-pullback-hom f g)
       ( pullback-hom f g)
   triangle-pullback-hom j =

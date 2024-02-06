@@ -227,7 +227,7 @@ module _
     is-orthogonal f g → is-orthogonal-pullback-condition f g
   is-orthogonal-pullback-condition-is-orthogonal H =
     is-equiv-left-map-triangle
-      ( gap-cone-pullback-hom f g)
+      ( gap-pullback-hom f g)
       ( map-compute-pullback-hom f g)
       ( pullback-hom f g)
       ( inv-htpy (triangle-pullback-hom f g))
@@ -238,7 +238,7 @@ module _
     is-orthogonal-pullback-condition f g → is-orthogonal f g
   is-orthogonal-is-orthogonal-pullback-condition =
     is-equiv-top-map-triangle
-      ( gap-cone-pullback-hom f g)
+      ( gap-pullback-hom f g)
       ( map-compute-pullback-hom f g)
       ( pullback-hom f g)
       ( inv-htpy (triangle-pullback-hom f g))
