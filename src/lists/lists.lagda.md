@@ -186,7 +186,7 @@ is-section-eq-Eq-list nil (cons x l') e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) nil e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
   ( square-eq-Eq-list (eq-Eq-list l l' e)) ∙
-  ( ap (pair refl) (is-section-eq-Eq-list l l' e))
+  ( eq-pair-eq-fiber (is-section-eq-Eq-list l l' e))
 
 eq-Eq-refl-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →

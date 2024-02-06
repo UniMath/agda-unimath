@@ -323,7 +323,7 @@ module _
     map-equiv interchange-Σ-Σ ((a , b) , x) ＝
     map-equiv interchange-Σ-Σ ((a , b) , y)
   eq-interchange-Σ-Σ-is-contr H =
-    ap (map-equiv interchange-Σ-Σ) (ap (pair _) (eq-is-contr H))
+    ap (map-equiv interchange-Σ-Σ) (eq-pair-eq-fiber (eq-is-contr H))
 ```
 
 ### Swapping the order of quantification in a Σ-type, on the left

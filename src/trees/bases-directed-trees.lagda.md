@@ -372,5 +372,5 @@ module _
   eq-compute-proper-node-Directed-Tree {x} H b w =
     ap
       ( map-equiv equiv-left-swap-Σ)
-      ( ap (pair x) (eq-is-prop (is-prop-walk-to-base-Directed-Tree T x)))
+      ( eq-pair-eq-fiber (eq-is-prop (is-prop-walk-to-base-Directed-Tree T x)))
 ```

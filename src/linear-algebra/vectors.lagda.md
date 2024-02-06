@@ -193,7 +193,7 @@ module _
   is-section-eq-Eq-vec zero-ℕ empty-vec empty-vec (map-raise star) = refl
   is-section-eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , ps) =
     ( square-Eq-eq-vec n x xs ys (eq-Eq-vec n xs ys ps)) ∙
-    ( ap (pair refl) (is-section-eq-Eq-vec n xs ys ps))
+    ( eq-pair-eq-fiber (is-section-eq-Eq-vec n xs ys ps))
 
   is-equiv-Eq-eq-vec :
     (n : ℕ) → (u v : vec A n) → is-equiv (Eq-eq-vec n u v)
