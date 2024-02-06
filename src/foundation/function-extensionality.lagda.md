@@ -70,6 +70,9 @@ module _
 
   htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
   htpy-eq p x = ap (ev x) p
+
+  compute-htpy-eq-refl : {f : (x : A) → B x} → htpy-eq refl ＝ refl-htpy' f
+  compute-htpy-eq-refl = refl
 ```
 
 ### An instance of function extensionality
