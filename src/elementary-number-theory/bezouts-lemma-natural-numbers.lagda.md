@@ -777,10 +777,10 @@ is-inhabited-pos-distance-between-multiples :
 is-inhabited-pos-distance-between-multiples zero-ℕ zero-ℕ =
   pair zero-ℕ (λ H → ex-falso (H refl))
 is-inhabited-pos-distance-between-multiples zero-ℕ (succ-ℕ y) =
-  pair (succ-ℕ y) (λ H → pair' (is-nonzero-succ-ℕ y)
+  pair (succ-ℕ y) (λ H → pair (is-nonzero-succ-ℕ y)
     (pair zero-ℕ (pair 1 (ap succ-ℕ (left-unit-law-add-ℕ y)))))
 is-inhabited-pos-distance-between-multiples (succ-ℕ x) y = pair (succ-ℕ x)
-  (λ H → pair' (is-nonzero-succ-ℕ x)
+  (λ H → pair (is-nonzero-succ-ℕ x)
     (pair 1 (pair zero-ℕ (ap succ-ℕ (left-unit-law-add-ℕ x)))))
 
 minimal-pos-distance-between-multiples :
@@ -829,7 +829,7 @@ minimal-positive-distance-leq-sym :
 minimal-positive-distance-leq-sym x y =
   minimal-positive-distance-is-minimal x y (minimal-positive-distance y x)
   (λ H →
-    pair'
+    pair
       ( minimal-positive-distance-nonzero
         ( y)
         ( x)
@@ -1318,7 +1318,7 @@ remainder-min-dist-succ-x-is-distance x y =
 
       x-pos-dist : pos-distance-between-multiples (succ-ℕ x) y (succ-ℕ x)
       x-pos-dist H =
-        pair'
+        pair
           ( is-nonzero-succ-ℕ x)
           ( pair 1 (pair 0 (ap succ-ℕ (left-unit-law-add-ℕ x))))
 
@@ -1721,7 +1721,7 @@ remainder-min-dist-succ-x-not-is-nonzero x y nonzero =
       ( remainder-euclidean-division-ℕ
         ( minimal-positive-distance (succ-ℕ x) y)
         ( succ-ℕ x))
-  rem-pos-dist H = pair' nonzero (remainder-min-dist-succ-x-is-distance x y)
+  rem-pos-dist H = pair nonzero (remainder-min-dist-succ-x-is-distance x y)
 
   d-leq-rem :
     leq-ℕ
@@ -1841,7 +1841,7 @@ minimal-positive-distance-div-gcd-ℕ x y =
     ( x)
     ( y)
     ( minimal-positive-distance x y)
-    ( pair'
+    ( pair
       ( minimal-positive-distance-div-fst x y)
       ( minimal-positive-distance-div-snd x y))
 
