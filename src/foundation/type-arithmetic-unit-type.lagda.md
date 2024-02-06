@@ -79,72 +79,73 @@ module _
   {l : Level} {A : UU l}
   where
 
-  map-left-unit-law-prod : unit × A → A
-  map-left-unit-law-prod = pr2
+  map-left-unit-law-product : unit × A → A
+  map-left-unit-law-product = pr2
 
-  map-inv-left-unit-law-prod : A → unit × A
-  map-inv-left-unit-law-prod = map-inv-left-unit-law-Σ (λ x → A)
+  map-inv-left-unit-law-product : A → unit × A
+  map-inv-left-unit-law-product = map-inv-left-unit-law-Σ (λ x → A)
 
-  is-section-map-inv-left-unit-law-prod :
-    ( map-left-unit-law-prod ∘ map-inv-left-unit-law-prod) ~ id
-  is-section-map-inv-left-unit-law-prod =
+  is-section-map-inv-left-unit-law-product :
+    ( map-left-unit-law-product ∘ map-inv-left-unit-law-product) ~ id
+  is-section-map-inv-left-unit-law-product =
     is-section-map-inv-left-unit-law-Σ (λ x → A)
 
-  is-retraction-map-inv-left-unit-law-prod :
-    ( map-inv-left-unit-law-prod ∘ map-left-unit-law-prod) ~ id
-  is-retraction-map-inv-left-unit-law-prod (pair star a) = refl
+  is-retraction-map-inv-left-unit-law-product :
+    ( map-inv-left-unit-law-product ∘ map-left-unit-law-product) ~ id
+  is-retraction-map-inv-left-unit-law-product (pair star a) = refl
 
-  is-equiv-map-left-unit-law-prod : is-equiv map-left-unit-law-prod
-  is-equiv-map-left-unit-law-prod =
+  is-equiv-map-left-unit-law-product : is-equiv map-left-unit-law-product
+  is-equiv-map-left-unit-law-product =
     is-equiv-is-invertible
-      map-inv-left-unit-law-prod
-      is-section-map-inv-left-unit-law-prod
-      is-retraction-map-inv-left-unit-law-prod
+      map-inv-left-unit-law-product
+      is-section-map-inv-left-unit-law-product
+      is-retraction-map-inv-left-unit-law-product
 
-  left-unit-law-prod : (unit × A) ≃ A
-  pr1 left-unit-law-prod = map-left-unit-law-prod
-  pr2 left-unit-law-prod = is-equiv-map-left-unit-law-prod
+  left-unit-law-product : (unit × A) ≃ A
+  pr1 left-unit-law-product = map-left-unit-law-product
+  pr2 left-unit-law-product = is-equiv-map-left-unit-law-product
 
-  is-equiv-map-inv-left-unit-law-prod : is-equiv map-inv-left-unit-law-prod
-  is-equiv-map-inv-left-unit-law-prod =
+  is-equiv-map-inv-left-unit-law-product :
+    is-equiv map-inv-left-unit-law-product
+  is-equiv-map-inv-left-unit-law-product =
     is-equiv-is-invertible
-      map-left-unit-law-prod
-      is-retraction-map-inv-left-unit-law-prod
-      is-section-map-inv-left-unit-law-prod
+      map-left-unit-law-product
+      is-retraction-map-inv-left-unit-law-product
+      is-section-map-inv-left-unit-law-product
 
-  inv-left-unit-law-prod : A ≃ (unit × A)
-  pr1 inv-left-unit-law-prod = map-inv-left-unit-law-prod
-  pr2 inv-left-unit-law-prod = is-equiv-map-inv-left-unit-law-prod
+  inv-left-unit-law-product : A ≃ (unit × A)
+  pr1 inv-left-unit-law-product = map-inv-left-unit-law-product
+  pr2 inv-left-unit-law-product = is-equiv-map-inv-left-unit-law-product
 ```
 
 ### Right unit law for cartesian products
 
 ```agda
-  map-right-unit-law-prod : A × unit → A
-  map-right-unit-law-prod = pr1
+  map-right-unit-law-product : A × unit → A
+  map-right-unit-law-product = pr1
 
-  map-inv-right-unit-law-prod : A → A × unit
-  pr1 (map-inv-right-unit-law-prod a) = a
-  pr2 (map-inv-right-unit-law-prod a) = star
+  map-inv-right-unit-law-product : A → A × unit
+  pr1 (map-inv-right-unit-law-product a) = a
+  pr2 (map-inv-right-unit-law-product a) = star
 
-  is-section-map-inv-right-unit-law-prod :
-    (map-right-unit-law-prod ∘ map-inv-right-unit-law-prod) ~ id
-  is-section-map-inv-right-unit-law-prod a = refl
+  is-section-map-inv-right-unit-law-product :
+    (map-right-unit-law-product ∘ map-inv-right-unit-law-product) ~ id
+  is-section-map-inv-right-unit-law-product a = refl
 
-  is-retraction-map-inv-right-unit-law-prod :
-    (map-inv-right-unit-law-prod ∘ map-right-unit-law-prod) ~ id
-  is-retraction-map-inv-right-unit-law-prod (pair a star) = refl
+  is-retraction-map-inv-right-unit-law-product :
+    (map-inv-right-unit-law-product ∘ map-right-unit-law-product) ~ id
+  is-retraction-map-inv-right-unit-law-product (pair a star) = refl
 
-  is-equiv-map-right-unit-law-prod : is-equiv map-right-unit-law-prod
-  is-equiv-map-right-unit-law-prod =
+  is-equiv-map-right-unit-law-product : is-equiv map-right-unit-law-product
+  is-equiv-map-right-unit-law-product =
     is-equiv-is-invertible
-      map-inv-right-unit-law-prod
-      is-section-map-inv-right-unit-law-prod
-      is-retraction-map-inv-right-unit-law-prod
+      map-inv-right-unit-law-product
+      is-section-map-inv-right-unit-law-product
+      is-retraction-map-inv-right-unit-law-product
 
-  right-unit-law-prod : (A × unit) ≃ A
-  pr1 right-unit-law-prod = map-right-unit-law-prod
-  pr2 right-unit-law-prod = is-equiv-map-right-unit-law-prod
+  right-unit-law-product : (A × unit) ≃ A
+  pr1 right-unit-law-product = map-right-unit-law-product
+  pr2 right-unit-law-product = is-equiv-map-right-unit-law-product
 ```
 
 ### Left unit law for dependent function types

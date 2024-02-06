@@ -27,21 +27,21 @@ open import foundation-core.functoriality-dependent-pair-types
 We describe conditions under which dependent sums are decidable.
 
 ```agda
-is-decidable-Σ-coprod :
+is-decidable-Σ-coproduct :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3) →
   is-decidable (Σ A (C ∘ inl)) → is-decidable (Σ B (C ∘ inr)) →
   is-decidable (Σ (A + B) C)
-is-decidable-Σ-coprod {l1} {l2} {l3} {A} {B} C dA dB =
+is-decidable-Σ-coproduct {l1} {l2} {l3} {A} {B} C dA dB =
   is-decidable-equiv
-    ( right-distributive-Σ-coprod A B C)
-    ( is-decidable-coprod dA dB)
+    ( right-distributive-Σ-coproduct A B C)
+    ( is-decidable-coproduct dA dB)
 
 is-decidable-Σ-Maybe :
   {l1 l2 : Level} {A : UU l1} {B : Maybe A → UU l2} →
   is-decidable (Σ A (B ∘ unit-Maybe)) → is-decidable (B exception-Maybe) →
   is-decidable (Σ (Maybe A) B)
 is-decidable-Σ-Maybe {l1} {l2} {A} {B} dA de =
-  is-decidable-Σ-coprod B dA
+  is-decidable-Σ-coproduct B dA
     ( is-decidable-equiv
       ( left-unit-law-Σ (B ∘ inr))
       ( de))

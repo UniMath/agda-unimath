@@ -73,7 +73,7 @@ compute-Inhabited-𝔽 = equiv-right-swap-Σ
 
 is-finite-and-inhabited-Prop : {l : Level} → UU l → Prop l
 is-finite-and-inhabited-Prop X =
-  prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
+  product-Prop (is-finite-Prop X) (is-inhabited-Prop X)
 
 is-finite-and-inhabited : {l : Level} → UU l → UU l
 is-finite-and-inhabited X =

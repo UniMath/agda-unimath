@@ -339,18 +339,18 @@ abstract
 
 ```agda
 abstract
-  is-propositional-truncation-prod :
+  is-propositional-truncation-product :
     {l1 l2 l3 l4 : Level}
     {A : UU l1} (P : Prop l2) (f : A → type-Prop P)
     {A' : UU l3} (P' : Prop l4) (f' : A' → type-Prop P') →
     is-propositional-truncation P f →
     is-propositional-truncation P' f' →
-    is-propositional-truncation (prod-Prop P P') (map-prod f f')
-  is-propositional-truncation-prod P f P' f' is-ptr-f is-ptr-f' Q =
+    is-propositional-truncation (product-Prop P P') (map-product f f')
+  is-propositional-truncation-product P f P' f' is-ptr-f is-ptr-f' Q =
     is-equiv-top-is-equiv-bottom-square
       ( ev-pair)
       ( ev-pair)
-      ( precomp (map-prod f f') (type-Prop Q))
+      ( precomp (map-product f f') (type-Prop Q))
       ( λ h a a' → h (f a) (f' a'))
       ( refl-htpy)
       ( is-equiv-ev-pair)

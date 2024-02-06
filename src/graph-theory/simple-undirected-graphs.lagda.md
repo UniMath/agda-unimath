@@ -37,7 +37,7 @@ module _
 
   is-simple-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2)
   is-simple-Undirected-Graph-Prop =
-    prod-Prop
+    product-Prop
       ( Π-Prop
         ( unordered-pair-vertices-Undirected-Graph G)
         ( λ p →

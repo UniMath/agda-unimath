@@ -187,7 +187,7 @@ module _
       ( λ x y z w →
         is-prop-iterated-Π 3
           ( λ h g f →
-            is-prop-prod
+            is-prop-product
               ( is-set-type-Set
                 ( hom-set x w)
                 ( comp-hom (comp-hom h g) f)
@@ -229,7 +229,7 @@ module _
       ( e' , left-unit-law-e' , right-unit-law-e') =
       eq-type-subtype
         ( λ x →
-          prod-Prop
+          product-Prop
             ( implicit-Π-Prop A
               ( λ a →
                 implicit-Π-Prop A

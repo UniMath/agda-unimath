@@ -180,8 +180,8 @@ module _
   where
 
   abstract
-    is-contr-left-factor-prod : is-contr (A × B) → is-contr A
-    is-contr-left-factor-prod is-contr-AB =
+    is-contr-left-factor-product : is-contr (A × B) → is-contr A
+    is-contr-left-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
@@ -194,8 +194,8 @@ module _
   where
 
   abstract
-    is-contr-right-factor-prod : is-contr (A × B) → is-contr B
-    is-contr-right-factor-prod is-contr-AB =
+    is-contr-right-factor-product : is-contr (A × B) → is-contr B
+    is-contr-right-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
@@ -208,10 +208,11 @@ module _
   where
 
   abstract
-    is-contr-prod : is-contr A → is-contr B → is-contr (A × B)
-    pr1 (pr1 (is-contr-prod (pair a C) (pair b D))) = a
-    pr2 (pr1 (is-contr-prod (pair a C) (pair b D))) = b
-    pr2 (is-contr-prod (pair a C) (pair b D)) (pair x y) = eq-pair (C x) (D y)
+    is-contr-product : is-contr A → is-contr B → is-contr (A × B)
+    pr1 (pr1 (is-contr-product (pair a C) (pair b D))) = a
+    pr2 (pr1 (is-contr-product (pair a C) (pair b D))) = b
+    pr2 (is-contr-product (pair a C) (pair b D)) (pair x y) =
+      eq-pair (C x) (D y)
 ```
 
 ### Contractibility of Σ-types
@@ -315,7 +316,7 @@ module _
     is-contr-Σ
       ( is-contr-function-type (pair b β))
       ( λ x → b)
-      ( is-contr-prod
+      ( is-contr-product
         ( is-contr-Σ
           ( is-contr-function-type (pair a α))
           ( λ y → a)

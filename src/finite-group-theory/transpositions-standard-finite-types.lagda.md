@@ -199,7 +199,7 @@ adjacent-transposition-Fin :
   (n : ℕ) → (k : Fin n) →
   Permutation (succ-ℕ n)
 adjacent-transposition-Fin (succ-ℕ n) (inl x) =
-  equiv-coprod (adjacent-transposition-Fin n x) id-equiv
+  equiv-coproduct (adjacent-transposition-Fin n x) id-equiv
 adjacent-transposition-Fin (succ-ℕ n) (inr x) =
   swap-two-last-elements-transposition-Fin n
 
@@ -212,19 +212,19 @@ map-adjacent-transposition-Fin n k = map-equiv (adjacent-transposition-Fin n k)
 #### `adjacent-transposition-Fin` is an instance of the definiton `transposition-Fin`
 
 ```agda
-cases-htpy-map-coprod-map-transposition-id-Fin :
+cases-htpy-map-coproduct-map-transposition-id-Fin :
   (n : ℕ) → (k l : Fin n) → (neq : k ≠ l) →
   (x : Fin (succ-ℕ n)) →
   (x ＝ inl-Fin n k) + (x ≠ inl-Fin n k) →
   (x ＝ inl-Fin n l) + (x ≠ inl-Fin n l) →
-  map-coprod (map-transposition-Fin n k l neq) id x ＝
+  map-coproduct (map-transposition-Fin n k l neq) id x ＝
   map-transposition-Fin
     ( succ-ℕ n)
     ( inl-Fin n k)
     ( inl-Fin n l)
     ( neq ∘ is-injective-inl-Fin n)
     ( x)
-cases-htpy-map-coprod-map-transposition-id-Fin n k l neq x (inl refl) _ =
+cases-htpy-map-coproduct-map-transposition-id-Fin n k l neq x (inl refl) _ =
   ( ( ap
       ( inl-Fin n)
       ( left-computation-transposition-Fin n k l neq)) ∙
@@ -234,7 +234,7 @@ cases-htpy-map-coprod-map-transposition-id-Fin n k l neq x (inl refl) _ =
         ( inl-Fin n k)
         ( inl-Fin n l)
         ( neq ∘ is-injective-inl-Fin n))))
-cases-htpy-map-coprod-map-transposition-id-Fin
+cases-htpy-map-coproduct-map-transposition-id-Fin
   ( n)
   ( k)
   ( l)
@@ -251,7 +251,7 @@ cases-htpy-map-coprod-map-transposition-id-Fin
         ( inl-Fin n k)
         ( inl-Fin n l)
         ( neq ∘ is-injective-inl-Fin n))))
-cases-htpy-map-coprod-map-transposition-id-Fin
+cases-htpy-map-coproduct-map-transposition-id-Fin
   ( n)
   ( k)
   ( l)
@@ -278,7 +278,7 @@ cases-htpy-map-coprod-map-transposition-id-Fin
         ( inl x)
         ( neqk ∘ inv)
         ( neql ∘ inv))))
-cases-htpy-map-coprod-map-transposition-id-Fin
+cases-htpy-map-coproduct-map-transposition-id-Fin
   ( n)
   ( k)
   ( l)
@@ -296,17 +296,17 @@ cases-htpy-map-coprod-map-transposition-id-Fin
       ( neqk ∘ inv)
       ( neql ∘ inv))
 
-htpy-map-coprod-map-transposition-id-Fin :
+htpy-map-coproduct-map-transposition-id-Fin :
   (n : ℕ) → (k l : Fin n) → (neq : k ≠ l) →
   htpy-equiv
-    ( equiv-coprod (transposition-Fin n k l neq) id-equiv)
+    ( equiv-coproduct (transposition-Fin n k l neq) id-equiv)
     ( transposition-Fin
       ( succ-ℕ n)
       ( inl-Fin n k)
       ( inl-Fin n l)
       ( neq ∘ is-injective-inl-Fin n))
-htpy-map-coprod-map-transposition-id-Fin n k l neq x =
-  cases-htpy-map-coprod-map-transposition-id-Fin
+htpy-map-coproduct-map-transposition-id-Fin n k l neq x =
+  cases-htpy-map-coproduct-map-transposition-id-Fin
     ( n)
     ( k)
     ( l)
@@ -341,8 +341,8 @@ htpy-adjacent-transposition-Fin :
       ( inr-Fin n k)
       ( neq-inl-Fin-inr-Fin n k))
 htpy-adjacent-transposition-Fin (succ-ℕ n) (inl x) =
-  ( ( htpy-map-coprod (htpy-adjacent-transposition-Fin n x) refl-htpy) ∙h
-    ( ( htpy-map-coprod-map-transposition-id-Fin
+  ( ( htpy-map-coproduct (htpy-adjacent-transposition-Fin n x) refl-htpy) ∙h
+    ( ( htpy-map-coproduct-map-transposition-id-Fin
         ( succ-ℕ n)
         ( inl-Fin n x)
         ( inr-Fin n x)
@@ -584,16 +584,16 @@ htpy-permutation-inl-list-adjacent-transpositions :
     ( permutation-list-adjacent-transpositions
       ( succ-ℕ n)
       ( map-list (inl-Fin n) l))
-    ( equiv-coprod
+    ( equiv-coproduct
       ( permutation-list-adjacent-transpositions n l)
       ( id-equiv))
 htpy-permutation-inl-list-adjacent-transpositions n nil =
-  inv-htpy (id-map-coprod (Fin (succ-ℕ n)) unit)
+  inv-htpy (id-map-coproduct (Fin (succ-ℕ n)) unit)
 htpy-permutation-inl-list-adjacent-transpositions n (cons x l) =
-  ( map-coprod (map-adjacent-transposition-Fin n x) id ·l
+  ( map-coproduct (map-adjacent-transposition-Fin n x) id ·l
     htpy-permutation-inl-list-adjacent-transpositions n l) ∙h
   ( inv-htpy
-      ( preserves-comp-map-coprod
+      ( preserves-comp-map-coproduct
         ( map-permutation-list-adjacent-transpositions n l)
         ( map-adjacent-transposition-Fin n x)
         ( id)
@@ -630,14 +630,14 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
   ( ( htpy-permutation-inl-list-adjacent-transpositions
       ( n)
       ( list-adjacent-transpositions-transposition-Fin n i j)) ∙h
-    ( ( htpy-map-coprod
+    ( ( htpy-map-coproduct
         ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
           ( n)
           ( i)
           ( j)
           ( neq ∘ (ap (inl-Fin (succ-ℕ n)))))
         ( refl-htpy)) ∙h
-      ( ( htpy-map-coprod-map-transposition-id-Fin
+      ( ( htpy-map-coproduct-map-transposition-id-Fin
           ( succ-ℕ n)
           ( i)
           ( j)
@@ -666,14 +666,14 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
               ( n)
               ( inl i)
               ( inr star))) ∙h
-          ( htpy-map-coprod
+          ( htpy-map-coproduct
             ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
               ( n)
               ( inl i)
               ( inr star)
               ( neq-inl-inr))
             ( refl-htpy) ∙h
-            htpy-map-coprod-map-transposition-id-Fin
+            htpy-map-coproduct-map-transposition-id-Fin
               ( succ-ℕ n)
               ( inl i)
               ( inr star)
@@ -714,14 +714,14 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
               ( n)
               ( inr star)
               ( inl j))) ∙h
-          ( ( htpy-map-coprod
+          ( ( htpy-map-coproduct
               ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
                 ( n)
                 ( inr star)
                 ( inl j)
                 ( neq-inr-inl))
               ( refl-htpy)) ∙h
-            ( ( htpy-map-coprod-map-transposition-id-Fin
+            ( ( htpy-map-coproduct-map-transposition-id-Fin
                 ( succ-ℕ n)
                 ( inr star)
                 ( inl j)

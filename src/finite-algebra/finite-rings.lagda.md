@@ -544,9 +544,9 @@ module _
                         ( is-finite-type-𝔽 X)
                         ( λ z → is-finite-eq-𝔽 X)))))
           ( λ a →
-            is-finite-prod
+            is-finite-product
               ( is-finite-is-unital-Semigroup-𝔽 (X , a))
-              ( is-finite-prod
+              ( is-finite-product
                 ( is-finite-Π
                   ( is-finite-type-𝔽 X)
                   ( λ _ →

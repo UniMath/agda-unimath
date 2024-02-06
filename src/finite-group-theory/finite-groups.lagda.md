@@ -310,7 +310,7 @@ is-finite-is-group {l} n G =
           ( count-Σ
             ( pair n e)
             ( λ u →
-              count-prod
+              count-product
                 ( count-Π
                   ( pair n e)
                   ( λ x →
@@ -329,7 +329,7 @@ is-finite-is-group {l} n G =
             is-decidable-Σ-count
               ( count-function-type (pair n e) (pair n e))
               ( λ i →
-                is-decidable-prod
+                is-decidable-product
                   ( is-decidable-Π-count
                     ( pair n e)
                     ( λ x →

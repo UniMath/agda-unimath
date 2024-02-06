@@ -47,7 +47,7 @@ module _
   is-emb-hom-Directed-Graph-Prop :
     hom-Directed-Graph G H → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-emb-hom-Directed-Graph-Prop f =
-    prod-Prop
+    product-Prop
       ( is-emb-Prop (vertex-hom-Directed-Graph G H f))
       ( Π-Prop
         ( vertex-Directed-Graph G)

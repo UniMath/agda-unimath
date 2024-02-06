@@ -62,7 +62,7 @@ module _
 
   edge-ethane-Prop : unordered-pair vertex-ethane → Prop lzero
   edge-ethane-Prop p =
-    prod-Prop
+    product-Prop
       ( is-in-unordered-pair-Prop p (zero-Fin 1))
       ( is-in-unordered-pair-Prop p (one-Fin 1))
 

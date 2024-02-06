@@ -197,7 +197,7 @@ equiv-type-∞-Group-iterated-product-∞-Group zero-ℕ G =
         ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl)
     is-contr-raise-unit
 equiv-type-∞-Group-iterated-product-∞-Group (succ-ℕ n) G =
-  ( ( equiv-prod
+  ( ( equiv-product
         ( id-equiv)
         ( equiv-type-∞-Group-iterated-product-∞-Group
             ( n)

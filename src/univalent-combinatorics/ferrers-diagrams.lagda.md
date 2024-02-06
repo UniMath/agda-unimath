@@ -165,7 +165,7 @@ module _
       ( is-torsorial-Eq-subtype
         ( is-torsorial-equiv-fam (dot-ferrers-diagram D))
         ( λ Y →
-          is-prop-prod
+          is-prop-product
             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
             ( is-prop-mere-equiv A (Σ (row-ferrers-diagram D) Y)))
         ( dot-ferrers-diagram D)
@@ -230,7 +230,7 @@ module _
               ( id-equiv)
               ( is-finite-type-dot-ferrers-diagram-𝔽 A D x)))
         ( λ x →
-          is-prop-prod
+          is-prop-product
             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
             ( is-prop-mere-equiv (type-𝔽 A) _))
         ( dot-ferrers-diagram-𝔽 A D)

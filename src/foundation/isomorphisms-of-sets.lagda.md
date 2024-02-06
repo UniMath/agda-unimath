@@ -51,7 +51,7 @@ module _
   pr2 (is-proof-irrelevant-is-iso-Set f (g , p , q)) (g' , p' , q') =
     eq-type-subtype
       ( λ h →
-        prod-Prop
+        product-Prop
           ( Id-Prop (hom-set-Set B B) (f ∘ h) id)
           ( Id-Prop (hom-set-Set A A) (h ∘ f) id))
       ( ( ap (λ h → g ∘ h) (inv p')) ∙

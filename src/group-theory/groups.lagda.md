@@ -555,7 +555,7 @@ abstract
     ( pair i' (pair left-inv-i' right-inv-i')) =
     eq-type-subtype
       ( λ i →
-        prod-Prop
+        product-Prop
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy

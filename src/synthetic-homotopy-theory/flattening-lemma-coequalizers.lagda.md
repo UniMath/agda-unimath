@@ -161,7 +161,7 @@ module _
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
           ( map-equiv
-            ( right-distributive-Σ-coprod A A
+            ( right-distributive-Σ-coproduct A A
               ( ( P) ∘
                 ( horizontal-map-cocone-cofork f g e) ∘
                 ( vertical-map-span-cocone-cofork f g))))
@@ -172,8 +172,8 @@ module _
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( ind-Σ (ind-coprod _ (ev-pair refl-htpy) (ev-pair refl-htpy)))
-          ( ind-Σ (ind-coprod _ (ev-pair refl-htpy) (ev-pair refl-htpy)))
+          ( ind-Σ (ind-coproduct _ (ev-pair refl-htpy) (ev-pair refl-htpy)))
+          ( ind-Σ (ind-coproduct _ (ev-pair refl-htpy) (ev-pair refl-htpy)))
           ( refl-htpy)
           ( refl-htpy)
           ( coherence-square-cocone-cofork
@@ -181,11 +181,11 @@ module _
             ( top-map-cofork-flattening-lemma-coequalizer f g P e)
             ( cofork-flattening-lemma-coequalizer f g P e))
           ( ind-Σ
-            ( ind-coprod _
+            ( ind-coproduct _
               ( ev-pair refl-htpy)
               ( ev-pair (λ t → ap-id _ ∙ inv right-unit))))
           ( is-equiv-map-equiv
-            ( right-distributive-Σ-coprod A A
+            ( right-distributive-Σ-coproduct A A
               ( ( P) ∘
                 ( horizontal-map-cocone-cofork f g e) ∘
                 ( vertical-map-span-cocone-cofork f g))))

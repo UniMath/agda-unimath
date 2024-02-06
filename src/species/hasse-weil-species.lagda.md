@@ -36,7 +36,8 @@ is-closed-under-products-function-from-Commutative-Ring-𝔽 :
   {l1 l2 : Level} → (Commutative-Ring-𝔽 l1 → 𝔽 l2) → UU (lsuc l1 ⊔ l2)
 is-closed-under-products-function-from-Commutative-Ring-𝔽 {l1} {l2} S =
   (R1 R2 : Commutative-Ring-𝔽 l1) →
-  type-𝔽 (S (prod-Commutative-Ring-𝔽 R1 R2)) ≃ (type-𝔽 (S R1) × type-𝔽 (S R2))
+  ( type-𝔽 (S (product-Commutative-Ring-𝔽 R1 R2))) ≃
+  ( type-𝔽 (S R1) × type-𝔽 (S R2))
 ```
 
 ```text

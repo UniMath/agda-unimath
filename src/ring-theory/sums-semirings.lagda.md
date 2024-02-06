@@ -257,8 +257,8 @@ split-sum-Semiring :
   (n m : ℕ) (f : functional-vec-Semiring R (n +ℕ m)) →
   sum-Semiring R (n +ℕ m) f ＝
   add-Semiring R
-    ( sum-Semiring R n (f ∘ inl-coprod-Fin n m))
-    ( sum-Semiring R m (f ∘ inr-coprod-Fin n m))
+    ( sum-Semiring R n (f ∘ inl-coproduct-Fin n m))
+    ( sum-Semiring R m (f ∘ inr-coproduct-Fin n m))
 split-sum-Semiring R n zero-ℕ f =
   inv (right-unit-law-add-Semiring R (sum-Semiring R n f))
 split-sum-Semiring R n (succ-ℕ m) f =

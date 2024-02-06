@@ -250,7 +250,7 @@ module _
   is-contr-is-iso-is-equiv-pointed-map :
     is-equiv-pointed-map f → is-contr (is-iso-pointed-map f)
   is-contr-is-iso-is-equiv-pointed-map H =
-    is-contr-prod
+    is-contr-product
       ( is-contr-section-is-equiv-pointed-map H)
       ( is-contr-retraction-is-equiv-pointed-map H)
 
