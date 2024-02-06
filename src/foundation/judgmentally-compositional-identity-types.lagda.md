@@ -41,20 +41,24 @@ _weakly_. In this file, we consider the
   (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y)
 ```
 
+Through the interpretation of types as ∞-categories, we can immediately see that
+this is an instance of the Yoneda-embedding.
+
 This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfies the laws
+standard identity types, but satisfies the judgmental laws
 
-- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`
-- `refl ∙ p ≐ p`
-- `p ∙ refl ≐ p`
+- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`,
+- `refl ∙ p ≐ p`, and
+- `p ∙ refl ≐ p`.
 
-judgmentally. This is achieved by proxiyng to function composition and utilizing
-its computational properties, and relies heavily on the
+This is achieved by proxiyng to function composition and utilizing its
+computational properties, and relies heavily on the
 [function extensionality axiom](foundation.function-extensionality.md).
 
 In addition, we can make the type satisfy the judgmental law
 
-- `inv refl ≐ refl`.
+- `inv refl ≐ refl`, and even
+- `rec f refl ≐ f refl`.
 
 ## Definition
 
@@ -71,7 +75,7 @@ module _
   (a ＝ʸ b) = yoneda-Id a b
 
   refl-yoneda-Id : {x : A} → x ＝ʸ x
-  refl-yoneda-Id {x} z = id
+  refl-yoneda-Id z = id
 ```
 
 ## Properties
@@ -199,6 +203,10 @@ module _
   {l : Level} {A : UU l}
   where
 
+  is-section-eq-yoneda-eq-refl :
+    {x : A} → yoneda-eq-eq (eq-yoneda-eq (refl-yoneda-Id {x = x})) ＝ refl-yoneda-Id
+  is-section-eq-yoneda-eq-refl = refl
+
   preserves-refl-yoneda-eq-eq :
     {x : A} → yoneda-eq-eq (refl {x = x}) ＝ refl-yoneda-Id
   preserves-refl-yoneda-eq-eq = refl
@@ -297,6 +305,22 @@ module _
   uniqueness-ind-yoneda-Id =
     is-retraction-map-inv-is-equiv
       ( dependent-universal-property-identity-system-yoneda-Id B)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {x : A}
+  (B : (y : A) (f : x ＝ʸ y) → UU l2)
+  where
+
+  ind-yoneda-Id' :
+    (b : B x refl-yoneda-Id) {y : A} (f : x ＝ʸ y) → B y (yoneda-eq-eq (f x refl))
+  ind-yoneda-Id' b {y} f = ind-Id x (λ y p → B y (yoneda-eq-eq p)) b y (f x refl)
+
+  -- compute-ind-yoneda-Id :
+  --   (b : B x refl-yoneda-Id) →
+  --   ind-yoneda-Id b refl-yoneda-Id ＝ b
+  -- compute-ind-yoneda-Id =
+  --   is-section-map-inv-is-equiv
+  --     ( dependent-universal-property-identity-system-yoneda-Id B)
 ```
 
 While the induction principle does not have the ideal reduction behaviour, the
