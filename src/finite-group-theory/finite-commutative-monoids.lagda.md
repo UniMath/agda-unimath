@@ -192,11 +192,11 @@ module _
     Σ ( structure-monoid-𝔽 X)
       ( λ m → is-commutative-Monoid-𝔽 (finite-monoid-structure-monoid-𝔽 X m))
 
-  compute-structure-commutative-monoid-𝔽 :
+  commutative-monoid-structure-commutative-monoid-𝔽 :
     structure-commutative-monoid-𝔽 → Commutative-Monoid-𝔽 l
-  pr1 (compute-structure-commutative-monoid-𝔽 (m , c)) =
+  pr1 (commutative-monoid-structure-commutative-monoid-𝔽 (m , c)) =
     finite-monoid-structure-monoid-𝔽 X m
-  pr2 (compute-structure-commutative-monoid-𝔽 (m , c)) = c
+  pr2 (commutative-monoid-structure-commutative-monoid-𝔽 (m , c)) = c
 
   is-finite-structure-commutative-monoid-𝔽 :
     is-finite structure-commutative-monoid-𝔽

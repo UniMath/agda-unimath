@@ -603,13 +603,13 @@ module _
     UU l1
   structure-commutative-ring-𝔽 =
     Σ ( structure-ring-𝔽 X)
-      ( λ r → is-commutative-Ring-𝔽 (compute-structure-ring-𝔽 X r))
+      ( λ r → is-commutative-Ring-𝔽 (finite-ring-structure-ring-𝔽 X r))
 
   finite-commutative-ring-structure-commutative-ring-𝔽 :
     structure-commutative-ring-𝔽 →
     Commutative-Ring-𝔽 l1
   pr1 (finite-commutative-ring-structure-commutative-ring-𝔽 (r , c)) =
-    compute-structure-ring-𝔽 X r
+    finite-ring-structure-ring-𝔽 X r
   pr2 (finite-commutative-ring-structure-commutative-ring-𝔽 (r , c)) = c
 
   is-finite-structure-commutative-ring-𝔽 :

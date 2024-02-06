@@ -159,5 +159,5 @@ module _
 
   product-Ring-𝔽 : Ring-𝔽 (l1 ⊔ l2)
   product-Ring-𝔽 =
-    compute-ring-𝔽 ring-product-Ring-𝔽 is-finite-type-product-Ring-𝔽
+    finite-ring-is-finite-Ring ring-product-Ring-𝔽 is-finite-type-product-Ring-𝔽
 ```

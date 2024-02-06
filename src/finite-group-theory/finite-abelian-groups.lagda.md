@@ -67,10 +67,11 @@ is-finite-Ab A = type-Prop (is-finite-prop-Ab A)
 Ab-𝔽 : (l : Level) → UU (lsuc l)
 Ab-𝔽 l = Σ (Group-𝔽 l) is-abelian-Group-𝔽
 
-compute-abelian-group-𝔽 :
+finite-abelian-group-is-finite-Ab :
   {l : Level} → (A : Ab l) → is-finite (type-Ab A) → Ab-𝔽 l
-pr1 (compute-abelian-group-𝔽 A f) = finite-group-is-finite-Group (group-Ab A) f
-pr2 (compute-abelian-group-𝔽 A f) = pr2 A
+pr1 (finite-abelian-group-is-finite-Ab A f) =
+  finite-group-is-finite-Group (group-Ab A) f
+pr2 (finite-abelian-group-is-finite-Ab A f) = pr2 A
 
 module _
   {l : Level} (A : Ab-𝔽 l)
@@ -227,11 +228,11 @@ module _
     Σ ( structure-group-𝔽 X)
       ( λ g → is-abelian-Group-𝔽 (finite-group-structure-group-𝔽 X g))
 
-  compute-structure-abelian-group-𝔽 :
+  abelian-group-structure-abelian-group-𝔽 :
     structure-abelian-group-𝔽 → Ab-𝔽 l
-  pr1 (compute-structure-abelian-group-𝔽 (m , c)) =
+  pr1 (abelian-group-structure-abelian-group-𝔽 (m , c)) =
     finite-group-structure-group-𝔽 X m
-  pr2 (compute-structure-abelian-group-𝔽 (m , c)) = c
+  pr2 (abelian-group-structure-abelian-group-𝔽 (m , c)) = c
 
   is-finite-structure-abelian-group-𝔽 :
     is-finite structure-abelian-group-𝔽
