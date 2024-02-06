@@ -23,7 +23,7 @@ open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams
@@ -274,7 +274,7 @@ module _
     ( ap-concat-htpy _
       ( ( right-unit-htpy) ∙h
         ( inv-htpy
-          ( left-unit-law-left-whisk-htpy
+          ( left-unit-law-left-whisker-comp
             ( coherence-cocone-sequential-diagram c n)))))
 
   preserves-id-map-sequential-colimit-hom-sequential-diagram :
@@ -329,7 +329,7 @@ module _
           ( g)
           ( n))))
   pr2 htpy-preserves-comp-map-sequential-colimit-hom-sequential-diagram n =
-    ( right-whisk-square-htpy
+    ( right-whisker-concat-coherence-square-homotopies
       ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
         ( comp-hom-sequential-diagram A B C g f)
         ( n))

@@ -29,7 +29,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import lists.functoriality-lists
 open import lists.lists
@@ -445,16 +445,11 @@ htpy-conjugate-transposition-Fin n x y z neqxy neqyz neqxz =
     ( neqxz)
 
 private
-  htpy-whisk-conjugate :
+  htpy-whisker-conjugate :
     {l1 : Level} {A : UU l1} {f f' : A → A} (g : A → A) →
     (f ~ f') → (f ∘ (g ∘ f)) ~ (f' ∘ (g ∘ f'))
-  htpy-whisk-conjugate {f = f} {f' = f'} g H x =
+  htpy-whisker-conjugate {f = f} {f' = f'} g H x =
     H (g ( f x)) ∙ ap (f' ∘ g) (H x)
-
-  htpy-whisk :
-    {l : Level} {A : UU l} (f : A → A) {g g' : A → A} →
-    g ~ g' → (f ∘ (g ∘ f)) ~ (f ∘ (g' ∘ f))
-  htpy-whisk f H x = ap f (H (f x))
 
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin :
   (n : ℕ) (x : Fin (succ-ℕ n)) (neq : x ≠ neg-one-Fin n) →
@@ -472,7 +467,7 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin :
       ( neg-one-Fin (succ-ℕ n))
       ( neq-inl-inr))
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin n x neq =
-  ( ( htpy-whisk-conjugate
+  ( ( htpy-whisker-conjugate
         ( map-transposition-Fin
           ( succ-ℕ (succ-ℕ n))
           ( inl-Fin (succ-ℕ n) x)
@@ -504,14 +499,15 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin' :
       ( inl-Fin (succ-ℕ n) x)
       ( neq-inr-inl))
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin' n x neq =
-  ( ( htpy-whisk
+  ( ( double-whisker-comp
       ( map-swap-two-last-elements-transposition-Fin n)
       ( ( htpy-transposition-Fin-transposition-swap-Fin
           ( succ-ℕ (succ-ℕ n))
           ( neg-two-Fin (succ-ℕ n))
           ( inl-Fin (succ-ℕ n) x)
           ( neq ∘ (is-injective-inl-Fin (succ-ℕ n) ∘ inv))) ∙h
-        htpy-same-transposition-Fin)) ∙h
+        htpy-same-transposition-Fin)
+      ( map-swap-two-last-elements-transposition-Fin n)) ∙h
       ( ( htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin
           ( n)
           ( x)
@@ -662,7 +658,7 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
             ( inl i)
             ( inr star)))
         ( inr star)) ∙h
-    ( ( htpy-whisk
+    ( ( double-whisker-comp
         ( map-swap-two-last-elements-transposition-Fin n)
         ( ( htpy-permutation-inl-list-adjacent-transpositions
             ( n)
@@ -681,7 +677,8 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
               ( succ-ℕ n)
               ( inl i)
               ( inr star)
-              ( neq-inl-inr)))) ∙h
+              ( neq-inl-inr)))
+        ( map-swap-two-last-elements-transposition-Fin n)) ∙h
         ( htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin
           ( n)
           ( inl i)
@@ -709,7 +706,7 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
             ( inr star)
             ( inl j)))
         ( inr star)) ∙h
-    ( ( htpy-whisk
+    ( ( double-whisker-comp
         ( map-swap-two-last-elements-transposition-Fin n)
         ( ( htpy-permutation-inl-list-adjacent-transpositions
             ( n)
@@ -729,7 +726,8 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
                 ( inr star)
                 ( inl j)
                 ( neq-inr-inl)) ∙h
-              ( htpy-same-transposition-Fin))))) ∙h
+              ( htpy-same-transposition-Fin))))
+        ( map-swap-two-last-elements-transposition-Fin n)) ∙h
       ( ( htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin'
           ( n)
           ( inl j)

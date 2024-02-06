@@ -124,7 +124,7 @@ module _
     is-retraction-inv-gap-total-prod-fibers :
       (inv-gap-total-prod-fibers ∘ gap-total-prod-fibers) ~ id
     is-retraction-inv-gap-total-prod-fibers (.(g b) , (a , p) , (b , refl)) =
-      eq-pair-eq-pr2 (eq-pair (eq-pair-eq-pr2 right-unit) refl)
+      eq-pair-eq-fiber (eq-pair (eq-pair-eq-fiber right-unit) refl)
 
   abstract
     is-pullback-total-prod-fibers :

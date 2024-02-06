@@ -8,9 +8,9 @@ module orthogonal-factorization-systems.lifting-operations where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fibered-maps
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.morphisms-arrows
 open import foundation.sections
 open import foundation.universe-levels
 
@@ -58,7 +58,7 @@ module _
 
   _⧄_ = diagonal-lift
 
-  map-diagonal-lift : diagonal-lift → fibered-map f g → X → B
+  map-diagonal-lift : diagonal-lift → hom-arrow f g → X → B
   map-diagonal-lift = pr1
 
   is-section-map-diagonal-lift :

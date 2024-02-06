@@ -111,7 +111,7 @@ has-decidable-equality-right-factor :
   has-decidable-equality (A × B) → A → has-decidable-equality B
 has-decidable-equality-right-factor d a x y with d (pair a x) (pair a y)
 ... | inl p = inl (ap pr2 p)
-... | inr np = inr (λ q → np (ap (pair a) q))
+... | inr np = inr (λ q → np (eq-pair-eq-fiber q))
 ```
 
 ### Types with decidable equality are closed under retracts

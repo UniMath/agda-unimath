@@ -26,6 +26,7 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -341,15 +342,7 @@ module _
               ( λ where
                 ( inl a) →
                   inv
-                    ( ( ap
-                        ( _∙
-                          coherence-square-dependent-cocone
-                            ( vertical-map-span-cocone-cofork f g)
-                            ( horizontal-map-span-cocone-cofork f g)
-                            ( cocone-codiagonal-cofork f g e)
-                            ( P)
-                            ( d)
-                            ( inl a))
+                    ( ( right-whisker-concat
                         ( ap-id
                           ( inv
                             ( coherence-square-dependent-cocone
@@ -358,25 +351,24 @@ module _
                               ( cocone-codiagonal-cofork f g e)
                               ( P)
                               ( d)
-                              ( inl a))))) ∙
+                              ( inl a))))
+                        ( coherence-square-dependent-cocone
+                          ( vertical-map-span-cocone-cofork f g)
+                          ( horizontal-map-span-cocone-cofork f g)
+                          ( cocone-codiagonal-cofork f g e)
+                          ( P)
+                          ( d)
+                          ( inl a))) ∙
                       ( left-inv
                         ( coherence-square-dependent-cocone
-                              ( vertical-map-span-cocone-cofork f g)
-                              ( horizontal-map-span-cocone-cofork f g)
-                              ( cocone-codiagonal-cofork f g e)
-                              ( P)
-                              ( d)
-                              ( inl a))))
+                          ( vertical-map-span-cocone-cofork f g)
+                          ( horizontal-map-span-cocone-cofork f g)
+                          ( cocone-codiagonal-cofork f g e)
+                          ( P)
+                          ( d)
+                          ( inl a))))
                 ( inr a) →
-                  ap
-                    ( _∙
-                      coherence-square-dependent-cocone
-                        ( vertical-map-span-cocone-cofork f g)
-                        ( horizontal-map-span-cocone-cofork f g)
-                        ( cocone-codiagonal-cofork f g e)
-                        ( P)
-                        ( d)
-                        ( inr a))
+                  right-whisker-concat
                     ( inv
                       ( ap-inv
                         ( tr P (coherence-cofork f g e a))
@@ -386,7 +378,14 @@ module _
                           ( cocone-codiagonal-cofork f g e)
                           ( P)
                           ( d)
-                          ( inl a)))))))
+                          ( inl a))))
+                    ( coherence-square-dependent-cocone
+                      ( vertical-map-span-cocone-cofork f g)
+                      ( horizontal-map-span-cocone-cofork f g)
+                      ( cocone-codiagonal-cofork f g e)
+                      ( P)
+                      ( d)
+                      ( inr a)))))
 
     is-equiv-dependent-cofork-dependent-cocone-codiagonal :
       is-equiv dependent-cofork-dependent-cocone-codiagonal

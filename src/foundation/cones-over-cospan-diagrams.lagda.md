@@ -10,9 +10,9 @@ module foundation.cones-over-cospan-diagrams where
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
-open import foundation.morphisms-arrows
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
@@ -21,7 +21,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -72,14 +71,6 @@ module _
   coherence-square-cone :
     coherence-square-maps horizontal-map-cone vertical-map-cone g f
   coherence-square-cone = pr2 (pr2 c)
-
-  hom-arrow-cone : hom-arrow vertical-map-cone g
-  pr1 hom-arrow-cone = horizontal-map-cone
-  pr1 (pr2 hom-arrow-cone) = f
-  pr2 (pr2 hom-arrow-cone) = coherence-square-cone
-
-  hom-arrow-cone' : hom-arrow horizontal-map-cone f
-  hom-arrow-cone' = transpose-hom-arrow vertical-map-cone g hom-arrow-cone
 ```
 
 ### Dependent cones over cospan diagrams
@@ -218,20 +209,6 @@ module _
       ( f)
       ( H')
       ( coherence-square-cone f g c)
-```
-
-### Cones obtained from morphisms of arrows
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (h : hom-arrow f g)
-  where
-
-  cone-hom-arrow : cone (map-codomain-hom-arrow f g h) g A
-  pr1 cone-hom-arrow = f
-  pr1 (pr2 cone-hom-arrow) = map-domain-hom-arrow f g h
-  pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
 ```
 
 ### The swapping function on cones over cospans

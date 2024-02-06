@@ -38,7 +38,7 @@
             # We can reference the directory since we're using flakes,
             # which copies the version-tracked files into the nix store
             # before evaluation, # so we don't run into the issue with
-            # non-reproducible source paths as outlined here:
+            # nonreproducible source paths as outlined here:
             # https://nix.dev/recipes/best-practices#reproducible-source-paths
             src = ./.;
 

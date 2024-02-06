@@ -8,10 +8,10 @@ module foundation.commuting-tetrahedra-of-maps where
 
 ```agda
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
