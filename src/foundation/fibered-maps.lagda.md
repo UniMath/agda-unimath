@@ -9,6 +9,7 @@ module foundation.fibered-maps where
 ```agda
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.slice
@@ -17,6 +18,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
@@ -24,7 +26,6 @@ open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -32,7 +33,6 @@ open import foundation-core.small-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -242,7 +242,7 @@ module _
     (α : fiberwise-map-over f g i) (x : X) →
     fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x ~ α x
   is-section-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
-    eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
+    eq-pair-eq-fiber (inv-inv (pr2 (α (f a) (pair a refl))))
 
   is-section-map-over-fiberwise-map-over :
     fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over ~ id
@@ -252,7 +252,7 @@ module _
   is-retraction-map-over-fiberwise-map-over :
     map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over ~ id
   is-retraction-map-over-fiberwise-map-over (pair h H) =
-    eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
+    eq-pair-eq-fiber (eq-htpy (inv-inv ∘ H))
 
   abstract
     is-equiv-fiberwise-map-over-map-over :

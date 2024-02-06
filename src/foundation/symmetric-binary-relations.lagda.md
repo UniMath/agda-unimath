@@ -11,13 +11,13 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.morphisms-binary-relations
 open import foundation.symmetric-operations
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

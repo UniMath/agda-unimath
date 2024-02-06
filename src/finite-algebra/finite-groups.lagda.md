@@ -207,7 +207,7 @@ module _
                 ( is-finite-type-𝔽 X)
                 ( λ _ → is-finite-type-𝔽 X))
               ( λ i →
-                is-finite-prod
+                is-finite-product
                   ( is-finite-Π
                     ( is-finite-type-𝔽 X)
                     ( λ x → is-finite-eq-𝔽 X))

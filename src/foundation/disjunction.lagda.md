@@ -63,7 +63,7 @@ pr2 (pr2 (disjunction-Decidable-Prop P Q)) =
   is-decidable-trunc-Prop-is-merely-decidable
     ( type-Decidable-Prop P + type-Decidable-Prop Q)
     ( unit-trunc-Prop
-      ( is-decidable-coprod
+      ( is-decidable-coproduct
         ( is-decidable-Decidable-Prop P)
         ( is-decidable-Decidable-Prop Q)))
 ```
@@ -101,7 +101,7 @@ elim-disjunction-Prop :
     ( conjunction-Prop (hom-Prop P R) (hom-Prop Q R))
     ( hom-Prop (disjunction-Prop P Q) R)
 elim-disjunction-Prop P Q R (pair f g) =
-  map-universal-property-trunc-Prop R (rec-coprod f g)
+  map-universal-property-trunc-Prop R (rec-coproduct f g)
 
 abstract
   is-equiv-ev-disjunction-Prop :

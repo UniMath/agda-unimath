@@ -11,6 +11,7 @@ module foundation.exponents-set-quotients where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
 open import foundation.postcomposition-functions
 open import foundation.reflecting-maps-equivalence-relations
@@ -18,16 +19,15 @@ open import foundation.set-quotients
 open import foundation.sets
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>

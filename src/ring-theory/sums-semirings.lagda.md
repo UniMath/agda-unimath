@@ -17,7 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import linear-algebra.vectors
 open import linear-algebra.vectors-on-semirings
@@ -257,8 +257,8 @@ split-sum-Semiring :
   (n m : ℕ) (f : functional-vec-Semiring R (n +ℕ m)) →
   sum-Semiring R (n +ℕ m) f ＝
   add-Semiring R
-    ( sum-Semiring R n (f ∘ inl-coprod-Fin n m))
-    ( sum-Semiring R m (f ∘ inr-coprod-Fin n m))
+    ( sum-Semiring R n (f ∘ inl-coproduct-Fin n m))
+    ( sum-Semiring R m (f ∘ inr-coproduct-Fin n m))
 split-sum-Semiring R n zero-ℕ f =
   inv (right-unit-law-add-Semiring R (sum-Semiring R n f))
 split-sum-Semiring R n (succ-ℕ m) f =

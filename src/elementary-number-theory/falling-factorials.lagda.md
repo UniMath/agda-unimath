@@ -69,12 +69,12 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
               ( λ x →
                 has-decidable-equality-Fin (map-emb f x) (inr star))))) ∘e
       ( ( inv-equiv
-          ( left-distributive-Σ-coprod
+          ( left-distributive-Σ-coproduct
             ( Fin (succ-ℕ m) ↪ Fin (succ-ℕ n))
             ( λ f → fiber (map-emb f) (inr star))
             ( λ f → ¬ (fiber (map-emb f) (inr star))))) ∘e
         {!!})) ∘e
-    ( equiv-coprod
+    ( equiv-coproduct
       ( Fin-falling-factorial-ℕ n m)
       ( Fin-falling-factorial-ℕ n (succ-ℕ m)))) ∘e
   ( Fin-add-ℕ (falling-factorial-ℕ n m) (falling-factorial-ℕ n (succ-ℕ m)))

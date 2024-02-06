@@ -96,7 +96,9 @@ module _
 
   is-gaunt-prop-Precategory : Prop (l1 ⊔ l2)
   is-gaunt-prop-Precategory =
-    prod-Prop (is-category-prop-Precategory C) (is-prop-iso-prop-Precategory C)
+    product-Prop
+      ( is-category-prop-Precategory C)
+      ( is-prop-iso-prop-Precategory C)
 
   is-gaunt-Precategory : UU (l1 ⊔ l2)
   is-gaunt-Precategory = type-Prop is-gaunt-prop-Precategory

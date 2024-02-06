@@ -83,7 +83,7 @@ module _
 
   is-pseudomonic-prop-functor-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   is-pseudomonic-prop-functor-Precategory =
-    prod-Prop
+    product-Prop
       ( is-faithful-prop-functor-Precategory C D F)
       ( is-full-on-isos-prop-functor-Precategory C D F)
 

@@ -84,7 +84,7 @@ pr2 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
 is-decidable-is-common-divisor-ℕ :
   (a b : ℕ) → is-decidable-fam (is-common-divisor-ℕ a b)
 is-decidable-is-common-divisor-ℕ a b x =
-  is-decidable-prod
+  is-decidable-product
     ( is-decidable-div-ℕ x a)
     ( is-decidable-div-ℕ x b)
 ```
@@ -137,7 +137,7 @@ is-decidable-is-multiple-of-gcd-ℕ a b n =
   is-decidable-function-type'
     ( is-decidable-neg (is-decidable-is-zero-ℕ (a +ℕ b)))
     ( λ np →
-      is-decidable-prod
+      is-decidable-product
         ( is-decidable-neg (is-decidable-is-zero-ℕ n))
         ( is-decidable-bounded-Π-ℕ
           ( is-common-divisor-ℕ a b)
@@ -358,7 +358,7 @@ preserves-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-common-divisor-ℕ a b d →
   is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d)
 preserves-is-common-divisor-mul-ℕ k a b d =
-  map-prod
+  map-product
     ( preserves-div-mul-ℕ k d a)
     ( preserves-div-mul-ℕ k d b)
 
@@ -367,7 +367,7 @@ reflects-is-common-divisor-mul-ℕ :
   is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d) →
   is-common-divisor-ℕ a b d
 reflects-is-common-divisor-mul-ℕ k a b d H =
-  map-prod
+  map-product
     ( reflects-div-mul-ℕ k d a H)
     ( reflects-div-mul-ℕ k d b H)
 ```

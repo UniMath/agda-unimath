@@ -60,22 +60,22 @@ module _
 
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
-    prod-Prop
-      ( prod-Prop (exists-Prop ℚ L) (exists-Prop ℚ U))
-      ( prod-Prop
-        ( prod-Prop
+    product-Prop
+      ( product-Prop (exists-Prop ℚ L) (exists-Prop ℚ U))
+      ( product-Prop
+        ( product-Prop
           ( Π-Prop ℚ
             ( λ q →
               iff-Prop
                 ( L q)
-                ( exists-Prop ℚ (λ r → prod-Prop (le-ℚ-Prop q r) (L r)))))
+                ( exists-Prop ℚ (λ r → product-Prop (le-ℚ-Prop q r) (L r)))))
           ( Π-Prop ℚ
             ( λ r →
               iff-Prop
                 ( U r)
-                ( exists-Prop ℚ (λ q → prod-Prop (le-ℚ-Prop q r) (U q))))))
-        ( prod-Prop
-          ( Π-Prop ℚ (λ q → neg-Prop (prod-Prop (L q) (U q))))
+                ( exists-Prop ℚ (λ q → product-Prop (le-ℚ-Prop q r) (U q))))))
+        ( product-Prop
+          ( Π-Prop ℚ (λ q → neg-Prop (product-Prop (L q) (U q))))
           ( Π-Prop ℚ
             ( λ q →
               Π-Prop ℚ
