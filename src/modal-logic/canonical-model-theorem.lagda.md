@@ -1065,4 +1065,85 @@ module _
           ( backward-implication
             ( canonical-model-theorem a (y , is-canonical))
             ( f (y , is-canonical) access)))
+
+    canonical-model-theorem' :
+      (a : formula i) →
+      neg-Prop (logic a) ⇔ neg-Prop (canonical-kripke-model ⊨M a)
+    pr1 (canonical-model-theorem' a) nf in-logic =
+      apply-universal-property-trunc-Prop
+        ( lindenbaum x)
+        ( empty-Prop)
+        ( λ w →
+          ( pr2 (pr1 w)
+            ( weak-modal-logic-mp
+              { a = a}
+              ( weak-modal-logic-ax
+                ( transitive-leq-subtype
+                  ( theory-add-formula (~ a) logic)
+                  ( pr1 (pr1 w))
+                  ( union-subtype logic (pr1 (pr1 w)))
+                  ( subtype-union-right logic (pr1 (pr1 w)))
+                  ( pr1 (pr2 w))
+                  ( ~ a)
+                  ( formula-in-add-formula (~ a) logic)))
+              ( weak-modal-logic-ax
+                ( subtype-union-right
+                  ( logic)
+                  ( pr1 (pr1 w))
+                  ( a)
+                  ( backward-implication
+                    ( canonical-model-theorem a
+                      ( pr1 (pr1 w) , pr2 (pr1 w) , pr2 (pr2 w)))
+                    ( in-logic
+                      ( pr1 (pr1 w) , pr2 (pr1 w) , pr2 (pr2 w)))))))))
+      where
+      x : L-consistent-theory
+      pr1 x = theory-add-formula (~ a) logic
+      pr2 x bot-in-logic =
+        nf
+          ( modal-logic-mp
+            { a = ~~ a}
+            { b = a}
+            ( contains-ax-dn _ (a , refl))
+            ( subset-double-modal-logic
+              ( axioms)
+              ( ~~ a)
+              ( weak-modal-logic-subset-modal-logic
+                ( logic)
+                ( ~~ a)
+                ( forward-implication
+                  ( deduction-lemma logic
+                    ( transitive-leq-subtype
+                      ( ax-k i)
+                      ( logic)
+                      ( weak-modal-logic logic)
+                      ( axioms-subset-weak-modal-logic logic)
+                      ( contains-ax-k))
+                    ( transitive-leq-subtype
+                      ( ax-s i)
+                      ( logic)
+                      ( weak-modal-logic logic)
+                      ( axioms-subset-weak-modal-logic logic)
+                      ( contains-ax-s))
+                    ( ~ a)
+                    ( ⊥))
+                  ( weak-modal-logic-monotic
+                    ( subtype-union-both
+                      ( logic)
+                      ( theory-add-formula (~ a) logic)
+                      ( theory-add-formula (~ a) logic)
+                      ( subtype-union-right (Id-formula-Prop (~ a)) logic)
+                      ( refl-leq-subtype (theory-add-formula (~ a) logic)))
+                    ( ⊥)
+                    ( bot-in-logic))))))
+    pr2 (canonical-model-theorem' a) =
+      map-neg
+        ( λ in-logic x →
+          ( forward-implication
+            ( canonical-model-theorem a x)
+            ( logic-subset-L-complete-theory
+              ( pr1 x , pr1 (pr2 x))
+              ( pr2 (pr2 x))
+              ( a)
+              ( in-logic))))
 ```
