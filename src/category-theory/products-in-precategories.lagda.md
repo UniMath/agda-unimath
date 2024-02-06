@@ -71,18 +71,18 @@ module _
   (t : has-all-binary-products-Precategory C)
   where
 
-  obj-product-obj-Precategory :
+  object-product-obj-Precategory :
     obj-Precategory C → obj-Precategory C → obj-Precategory C
-  obj-product-obj-Precategory x y = pr1 (t x y)
+  object-product-obj-Precategory x y = pr1 (t x y)
 
   pr1-product-obj-Precategory :
     (x y : obj-Precategory C) →
-    hom-Precategory C (obj-product-obj-Precategory x y) x
+    hom-Precategory C (object-product-obj-Precategory x y) x
   pr1-product-obj-Precategory x y = pr1 (pr2 (t x y))
 
   pr2-product-obj-Precategory :
     (x y : obj-Precategory C) →
-    hom-Precategory C (obj-product-obj-Precategory x y) y
+    hom-Precategory C (object-product-obj-Precategory x y) y
   pr2-product-obj-Precategory x y = pr1 (pr2 (pr2 (t x y)))
 
   module _
@@ -92,7 +92,7 @@ module _
     where
 
     morphism-into-product-obj-Precategory :
-      hom-Precategory C z (obj-product-obj-Precategory x y)
+      hom-Precategory C z (object-product-obj-Precategory x y)
     morphism-into-product-obj-Precategory =
       pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
@@ -111,7 +111,7 @@ module _
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
     is-unique-morphism-into-product-obj-Precategory :
-      (h : hom-Precategory C z (obj-product-obj-Precategory x y)) →
+      (h : hom-Precategory C z (object-product-obj-Precategory x y)) →
       comp-hom-Precategory C (pr1-product-obj-Precategory x y) h ＝ f →
       comp-hom-Precategory C (pr2-product-obj-Precategory x y) h ＝ g →
       morphism-into-product-obj-Precategory ＝ h
@@ -154,8 +154,8 @@ module _
 
   map-product-obj-Precategory :
     hom-Precategory C
-      (obj-product-obj-Precategory C t x₁ x₂)
-      (obj-product-obj-Precategory C t y₁ y₂)
+      (object-product-obj-Precategory C t x₁ x₂)
+      (object-product-obj-Precategory C t y₁ y₂)
   map-product-obj-Precategory =
     morphism-into-product-obj-Precategory C t _ _ _
       (comp-hom-Precategory C f (pr1-product-obj-Precategory C t x₁ x₂))

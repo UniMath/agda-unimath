@@ -42,11 +42,11 @@ module _
 
   is-exponential-obj-Precategory :
     (x y e : obj-Precategory C) →
-    hom-Precategory C (obj-product-obj-Precategory C p e x) y →
+    hom-Precategory C (object-product-obj-Precategory C p e x) y →
     UU (l1 ⊔ l2)
   is-exponential-obj-Precategory x y e ev =
     (z : obj-Precategory C)
-    (f : hom-Precategory C (obj-product-obj-Precategory C p z x) y) →
+    (f : hom-Precategory C (object-product-obj-Precategory C p z x) y) →
     ∃!
       ( hom-Precategory C z e)
       ( λ g →
@@ -58,7 +58,7 @@ module _
     obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)
   exponential-obj-Precategory x y =
     Σ (obj-Precategory C) (λ e →
-    Σ (hom-Precategory C (obj-product-obj-Precategory C p e x) y) λ ev →
+    Σ (hom-Precategory C (object-product-obj-Precategory C p e x) y) λ ev →
       is-exponential-obj-Precategory x y e ev)
 
   has-all-exponentials-Precategory : UU (l1 ⊔ l2)
@@ -77,13 +77,13 @@ module _
 
   eval-exponential-obj-Precategory :
     hom-Precategory C
-      ( obj-product-obj-Precategory C p object-exponential-obj-Precategory x)
+      ( object-product-obj-Precategory C p object-exponential-obj-Precategory x)
       ( y)
   eval-exponential-obj-Precategory = pr1 (pr2 (t x y))
 
   module _
     (z : obj-Precategory C)
-    (f : hom-Precategory C (obj-product-obj-Precategory C p z x) y)
+    (f : hom-Precategory C (object-product-obj-Precategory C p z x) y)
     where
 
     morphism-into-exponential-obj-Precategory :
