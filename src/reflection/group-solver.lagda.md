@@ -35,31 +35,31 @@ way and removes units and inverses next to the original.
 The main entry-point is `solveExpr` below
 
 ```agda
-data Fin : ℕ → UU lzero where
-  zero-Fin : ∀ {n} → Fin (succ-ℕ n)
-  succ-Fin : ∀ {n} → Fin n → Fin (succ-ℕ n)
+data Inductive-Fin : ℕ → UU lzero where
+  zero-Inductive-Fin : {n : ℕ} → Inductive-Fin (succ-ℕ n)
+  succ-Inductive-Fin : {n : ℕ} → Inductive-Fin n → Inductive-Fin (succ-ℕ n)
 
-finEq : ∀ {n} → (a b : Fin n) → is-decidable (Id a b)
-finEq zero-Fin zero-Fin = inl refl
-finEq zero-Fin (succ-Fin b) = inr (λ ())
-finEq (succ-Fin a) zero-Fin = inr (λ ())
-finEq (succ-Fin a) (succ-Fin b) with finEq a b
-... | inl eq = inl (ap succ-Fin eq)
+finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (Id a b)
+finEq zero-Inductive-Fin zero-Inductive-Fin = inl refl
+finEq zero-Inductive-Fin (succ-Inductive-Fin b) = inr (λ ())
+finEq (succ-Inductive-Fin a) zero-Inductive-Fin = inr (λ ())
+finEq (succ-Inductive-Fin a) (succ-Inductive-Fin b) with finEq a b
+... | inl eq = inl (ap succ-Inductive-Fin eq)
 ... | inr neq = inr (λ where refl → neq refl)
 
-getVec : ∀ {n} {l} {A : UU l} → vec A n → Fin n → A
-getVec (x ∷ v) zero-Fin = x
-getVec (x ∷ v) (succ-Fin k) = getVec v k
+getVec : {n : ℕ} {l : Level} {A : UU l} → vec A n → Inductive-Fin n → A
+getVec (x ∷ v) zero-Inductive-Fin = x
+getVec (x ∷ v) (succ-Inductive-Fin k) = getVec v k
 
 data GroupSyntax (n : ℕ) : UU where
   gUnit : GroupSyntax n
   gMul : GroupSyntax n → GroupSyntax n → GroupSyntax n
   gInv : GroupSyntax n → GroupSyntax n
-  inner : Fin n → GroupSyntax n
+  inner : Inductive-Fin n → GroupSyntax n
 
 data SimpleElem (n : ℕ) : UU where
-  inv-SE : Fin n → SimpleElem n
-  pure-SE : Fin n → SimpleElem n
+  inv-SE : Inductive-Fin n → SimpleElem n
+  pure-SE : Inductive-Fin n → SimpleElem n
 
 inv-SE' : ∀ {n} → SimpleElem n → SimpleElem n
 inv-SE' (inv-SE k) = pure-SE k
@@ -366,14 +366,14 @@ module _ {n : ℕ} where
     n-args zero-ℕ A B = B
     n-args (succ-ℕ n) A B = A → n-args n A B
     map-n-args :
-      ∀ {A A' B : UU} (n : ℕ) → (A' → A) → n-args n A B → n-args n A' B
+      {A A' B : UU} (n : ℕ) → (A' → A) → n-args n A B → n-args n A' B
     map-n-args zero-ℕ f v = v
     map-n-args (succ-ℕ n) f v = λ x → map-n-args n f (v (f x))
-    apply-n-args-fin : ∀ {B : UU} (n : ℕ) → n-args n (Fin n) B → B
+    apply-n-args-fin : {B : UU} (n : ℕ) → n-args n (Inductive-Fin n) B → B
     apply-n-args-fin zero-ℕ f = f
     apply-n-args-fin (succ-ℕ n) f =
-      apply-n-args-fin n (map-n-args n succ-Fin (f zero-Fin))
-    apply-n-args : ∀ {B : UU} (n : ℕ) → n-args n (GroupSyntax n) B → B
+      apply-n-args-fin n (map-n-args n succ-Inductive-Fin (f zero-Inductive-Fin))
+    apply-n-args : {B : UU} (n : ℕ) → n-args n (GroupSyntax n) B → B
     apply-n-args n f = apply-n-args-fin n (map-n-args n inner f)
 
     -- A variation of simplifyExpression which takes a function from the free variables to expr
@@ -387,8 +387,8 @@ module _ {n : ℕ} where
 
 ```agda
 -- private _\*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n _\*'_ =
--- gMul x : GroupSyntax 2 x = inner (zero-Fin) y : GroupSyntax 2 y = inner
--- (succ-Fin zero-Fin)
+-- gMul x : GroupSyntax 2 x = inner (zero-Inductive-Fin) y : GroupSyntax 2 y = inner
+-- (succ-Inductive-Fin zero-Inductive-Fin)
 
 --     infixl 40 _*'_
 --     ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
