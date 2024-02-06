@@ -272,15 +272,15 @@ module _
   is-section-map-inv-compute-pullback-hom :
     is-section map-compute-pullback-hom map-inv-compute-pullback-hom
   is-section-map-inv-compute-pullback-hom h =
-    eq-pair-Σ refl
-      ( eq-pair-Σ refl
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( is-retraction-eq-htpy (eq-coh-standard-pullback-hom f g h)))
 
   is-retraction-map-inv-compute-pullback-hom :
     is-retraction map-compute-pullback-hom map-inv-compute-pullback-hom
   is-retraction-map-inv-compute-pullback-hom h =
-    eq-pair-Σ refl
-      ( eq-pair-Σ refl (is-section-eq-htpy (coh-hom-arrow f g h)))
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber (is-section-eq-htpy (coh-hom-arrow f g h)))
 
   abstract
     is-equiv-map-compute-pullback-hom :
@@ -337,7 +337,7 @@ module _
       ( map-compute-pullback-hom f g)
       ( pullback-hom f g)
   triangle-pullback-hom j =
-    eq-pair-Σ refl (eq-pair-Σ refl (is-retraction-eq-htpy refl))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-eq-htpy refl))
 ```
 
 ### The action on homotopies of the `pullback-hom`

@@ -47,7 +47,7 @@ module _
       ( inl x)) ∘
     ( fiber-map-coprod-inl-fiber f g x)
   triangle-descent-square-fiber-map-coprod-inl-fiber x (a' , p) =
-    eq-pair-eq-pr2
+    eq-pair-eq-fiber
       ( left-whisker-concat
         ( inv (HA a'))
         ( ap-comp (ind-coprod _ αA αB) inl p))
@@ -60,7 +60,7 @@ module _
       ( inr y)) ∘
     ( fiber-map-coprod-inr-fiber f g y)
   triangle-descent-square-fiber-map-coprod-inr-fiber y (b' , p) =
-    eq-pair-eq-pr2
+    eq-pair-eq-fiber
       ( left-whisker-concat
         ( inv (HB b'))
         ( ap-comp (ind-coprod _ αA αB) inr p))

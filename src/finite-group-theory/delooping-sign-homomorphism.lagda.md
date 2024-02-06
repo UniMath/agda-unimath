@@ -384,7 +384,7 @@ module _
               ( w))
             ( class (R (n +ℕ 2) (X , eX)) (x)))
         ( ap
-          ( λ w → ap (equivalence-class ∘ R (n +ℕ 2)) (eq-pair-Σ refl w))
+          ( λ w → ap (equivalence-class ∘ R (n +ℕ 2)) (eq-pair-eq-fiber w))
           { x = eq-is-prop is-prop-type-trunc-Prop}
           ( eq-is-prop
             ( is-trunc-Id
@@ -1400,8 +1400,7 @@ module _
                   ( raise-Set l4 (Fin-Set 2))
                   ( compute-raise-Fin l4 2 ∘e inv-equiv (that-thing n))))))
         ( eq-quotient-delooping-sign-loop-sign-homomorphism n) ∙
-        ( eq-pair-Σ
-          ( refl)
+        ( eq-pair-eq-fiber
           ( eq-is-prop
             ( is-prop-preserves-mul-Semigroup
               ( semigroup-Group (symmetric-Group (raise-Fin-Set l1 (n +ℕ 2))))

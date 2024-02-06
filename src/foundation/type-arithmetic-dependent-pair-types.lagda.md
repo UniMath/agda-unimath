@@ -143,7 +143,7 @@ module _
     (H : (a : A) → is-contr (B a)) →
     map-inv-right-unit-law-Σ-is-contr H ∘ pr1 ~ id
   is-retraction-map-inv-right-unit-law-Σ-is-contr H (a , b) =
-    eq-pair-Σ refl (eq-is-contr (H a))
+    eq-pair-eq-fiber (eq-is-contr (H a))
 
   is-equiv-map-inv-right-unit-law-Σ-is-contr :
     (H : (a : A) → is-contr (B a)) →

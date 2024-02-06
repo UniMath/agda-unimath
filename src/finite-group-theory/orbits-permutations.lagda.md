@@ -1657,7 +1657,7 @@ module _
                     ( same-orbits-permutation-count g)
                     ( pair (pr1 T) (H-conserves T NQ NR))
                     ( b)))) ∙
-              ( eq-pair-Σ refl ( eq-is-prop is-prop-type-trunc-Prop)))))
+              ( eq-pair-eq-fiber ( eq-is-prop is-prop-type-trunc-Prop)))))
       retraction-h' :
         (T :
           equivalence-class
@@ -1938,8 +1938,7 @@ module _
           ( inl)
           ( ap
             ( map-inv-equiv-count h)
-            ( eq-pair-Σ
-              ( refl)
+            ( eq-pair-eq-fiber
               ( eq-is-prop is-prop-type-trunc-Prop)) ∙
             ap (λ f → map-equiv f k) (left-inverse-law-equiv (equiv-count h)))
       section-h'-inr :

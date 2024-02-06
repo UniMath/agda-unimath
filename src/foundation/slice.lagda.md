@@ -162,7 +162,7 @@ module _
     (α : fiberwise-hom f g) (x : X) →
     (fiberwise-hom-hom-slice (hom-slice-fiberwise-hom α) x) ~ (α x)
   is-section-hom-slice-fiberwise-hom-eq-htpy α .(f a) (pair a refl) =
-    eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
+    eq-pair-eq-fiber (inv-inv (pr2 (α (f a) (pair a refl))))
 
   is-section-hom-slice-fiberwise-hom :
     (fiberwise-hom-hom-slice ∘ hom-slice-fiberwise-hom) ~ id
@@ -172,7 +172,7 @@ module _
   is-retraction-hom-slice-fiberwise-hom :
     (hom-slice-fiberwise-hom ∘ fiberwise-hom-hom-slice) ~ id
   is-retraction-hom-slice-fiberwise-hom (pair h H) =
-    eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
+    eq-pair-eq-fiber (eq-htpy (inv-inv ∘ H))
 
   abstract
     is-equiv-fiberwise-hom-hom-slice : is-equiv (fiberwise-hom-hom-slice)

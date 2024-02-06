@@ -141,7 +141,7 @@ module _
     ap
       ( λ (n , v) → (n , functional-vec-vec n v))
       ( is-retraction-vec-list (n , listed-vec-functional-vec n t)) ∙
-    eq-pair-Σ refl (is-retraction-functional-vec-vec n t)
+    eq-pair-eq-fiber (is-retraction-functional-vec-vec n t)
 
   equiv-list-array : array A ≃ list A
   pr1 equiv-list-array = list-array

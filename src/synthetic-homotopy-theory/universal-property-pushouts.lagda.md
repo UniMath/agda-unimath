@@ -248,8 +248,8 @@ triangle-pullback-property-pushout-universal-property-pushout :
   ( ( tot (λ i' → tot (λ j' → htpy-eq))) ∘
     ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y)))
 triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
-    eq-pair-Σ refl
-      ( eq-pair-Σ refl
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( inv (is-section-eq-htpy (h ·l coherence-square-cocone f g c))))
 
 pullback-property-pushout-universal-property-pushout :

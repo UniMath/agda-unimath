@@ -105,7 +105,7 @@ Cartesian products are a special case of pullbacks.
 
   abstract
     is-retraction-inv-gap-prod : (inv-gap-prod ∘ gap-prod) ~ id
-    is-retraction-inv-gap-prod (pair a b) = eq-pair-Σ refl refl
+    is-retraction-inv-gap-prod (pair a b) = eq-pair-eq-fiber refl
 
   abstract
     is-pullback-prod :

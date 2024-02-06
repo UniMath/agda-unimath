@@ -187,3 +187,9 @@ module _
     ( inv (horizontal-concat-Id² refl (ap-const refl α))) ∙
     ( nat-htpy (ap-const b) α)
 ```
+
+## See also
+
+- [Action of functions on identifications](foundation.action-on-identifications-functions.md)
+- [Action of binary functions on identifications](foundation.action-on-identifications-binary-functions.md).
+- [Action of dependent functions on identifications](foundation.action-on-identifications-dependent-functions.md).

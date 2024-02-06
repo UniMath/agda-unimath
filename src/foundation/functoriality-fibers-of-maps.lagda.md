@@ -472,7 +472,7 @@ module _
   preserves-pasting-vertical-map-fiber-vertical-map-cone
     (p , q , H) (p' , q' , H') .(p (p' a))
     ((.(p' a) , refl) , (a , refl)) =
-    eq-pair-eq-pr2
+    eq-pair-eq-fiber
       ( ( right-unit) ∙
         ( distributive-inv-concat (H (p' a)) (ap g (H' a))) ∙
         ( ap

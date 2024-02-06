@@ -242,7 +242,7 @@ module _
     (α : fiberwise-map-over f g i) (x : X) →
     fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x ~ α x
   is-section-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
-    eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
+    eq-pair-eq-fiber (inv-inv (pr2 (α (f a) (pair a refl))))
 
   is-section-map-over-fiberwise-map-over :
     fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over ~ id
@@ -252,7 +252,7 @@ module _
   is-retraction-map-over-fiberwise-map-over :
     map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over ~ id
   is-retraction-map-over-fiberwise-map-over (pair h H) =
-    eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
+    eq-pair-eq-fiber (eq-htpy (inv-inv ∘ H))
 
   abstract
     is-equiv-fiberwise-map-over-map-over :

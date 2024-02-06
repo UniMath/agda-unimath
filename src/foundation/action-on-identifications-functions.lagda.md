@@ -103,3 +103,9 @@ ap-const :
   (p : x ＝ y) → (ap (const A B b) p) ＝ refl
 ap-const b refl = refl
 ```
+
+## See also
+
+- [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
+- [Action of binary functions on identifications](foundation.action-on-identifications-binary-functions.md).
+- [Action of dependent functions on identifications](foundation.action-on-identifications-dependent-functions.md).

@@ -94,8 +94,7 @@ module _
     ( inv-equiv (matching-correspondence-Relaxed-Σ-Decomposition D)) ∘e
     ( inv-left-unit-law-Σ-is-contr is-trivial x)
   pr2 (pr2 equiv-trivial-is-trivial-Relaxed-Σ-Decomposition) a =
-    eq-pair-Σ
-      ( refl)
+    eq-pair-eq-fiber
       ( inv-map-eq-transpose-equiv
         ( inv-equiv (matching-correspondence-Relaxed-Σ-Decomposition D))
         ( refl))

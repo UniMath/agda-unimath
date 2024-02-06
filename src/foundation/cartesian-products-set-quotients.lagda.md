@@ -152,7 +152,7 @@ module _
                 ( eq-htpy λ a →
                   ( ap
                     ( inv-precomp-set-quotient S X)
-                    ( eq-pair-Σ refl
+                    ( eq-pair-eq-fiber
                       ( eq-is-prop
                         ( is-prop-reflects-equivalence-relation S X _)))) ∙
                     ( is-retraction-inv-precomp-set-quotient S X _))

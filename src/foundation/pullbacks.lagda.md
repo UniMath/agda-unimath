@@ -162,8 +162,8 @@ triangle-map-standard-pullback-postcomp :
   map-standard-pullback-postcomp f g T ∘
   gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
 triangle-map-standard-pullback-postcomp T f g c h =
-  eq-pair-eq-pr2
-    ( eq-pair-eq-pr2
+  eq-pair-eq-fiber
+    ( eq-pair-eq-fiber
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
 
 abstract
@@ -251,7 +251,7 @@ module _
   cone-Id' : cone (point (x , y)) (diagonal A) (x ＝ y)
   pr1 cone-Id' = terminal-map (x ＝ y)
   pr1 (pr2 cone-Id') = const (x ＝ y) A x
-  pr2 (pr2 cone-Id') p = eq-pair-eq-pr2 (inv p)
+  pr2 (pr2 cone-Id') p = eq-pair-eq-fiber (inv p)
 
   inv-gap-cone-Id' :
     standard-pullback (point (x , y)) (diagonal A) → x ＝ y
@@ -767,16 +767,20 @@ module _
   is-section-map-inv-coprod-cone :
     is-section map-coprod-cone map-inv-coprod-cone
   is-section-map-inv-coprod-cone (inl x , inl y , p) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inl p))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (is-section-is-injective-inl p))
   is-section-map-inv-coprod-cone (inr x , inr y , p) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inr p))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (is-section-is-injective-inr p))
 
   is-retraction-map-inv-coprod-cone :
     is-retraction map-coprod-cone map-inv-coprod-cone
   is-retraction-map-inv-coprod-cone (inl (x , y , p)) =
-    ap inl (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inl p)))
+    ap
+      ( inl)
+      ( eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-is-injective-inl p)))
   is-retraction-map-inv-coprod-cone (inr (x , y , p)) =
-    ap inr (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inr p)))
+    ap
+      ( inr)
+      ( eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-is-injective-inr p)))
 
   abstract
     is-equiv-map-coprod-cone : is-equiv map-coprod-cone
@@ -810,9 +814,9 @@ module _
     gap (map-coprod f f') (map-coprod g g') (coprod-cone c c') ~
     map-coprod-cone f g f' g' ∘ map-coprod (gap f g c) (gap f' g' c')
   triangle-map-coprod-cone c c' (inl _) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
+    eq-pair-eq-fiber (eq-pair-eq-fiber right-unit)
   triangle-map-coprod-cone c c' (inr _) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
+    eq-pair-eq-fiber (eq-pair-eq-fiber right-unit)
 
   abstract
     is-pullback-coprod-is-pullback-pair :

@@ -287,7 +287,7 @@ abstract
               ( all-sim-equivalence-relation n
                 ( tail-functional-vec n A)
                 ( λ x → R (inl x))) X f)
-            ( eq-pair-Σ refl
+            ( eq-pair-eq-fiber
               ( map-equiv-equiv-set-quotient-vector-quotient-map n _ _ a)) ∙
           ( htpy-eq
             ( ap
@@ -383,8 +383,7 @@ abstract
       eq-htpy
         ( λ (qa0 , qa) →
           ( ap f
-            ( eq-pair-Σ
-              ( refl)
+            ( eq-pair-eq-fiber
               ( is-retraction-map-inv-equiv
                 ( equiv-set-quotient-vector n _ _)
                 ( qa)))))
@@ -444,8 +443,7 @@ abstract
               ( map-inv-equiv-f ∘_)
               ( eq-htpy
                 ( λ (a0 , a) →
-                  ( eq-pair-Σ
-                    ( refl)
+                  ( eq-pair-eq-fiber
                     ( map-equiv-equiv-set-quotient-vector-quotient-map
                       _ _ _ a))))))
           ( eq-is-prop
