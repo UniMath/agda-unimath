@@ -120,7 +120,7 @@ module _
     is-torsorial (Eq-classifying-type-Automorphism-∞-Group X)
   is-torsorial-Eq-classifying-type-Automorphism-∞-Group X =
     is-torsorial-Eq-subtype
-      ( is-torsorial-path (pr1 X))
+      ( is-torsorial-Id (pr1 X))
       ( λ a → is-prop-type-trunc-Prop)
       ( pr1 X)
       ( refl)

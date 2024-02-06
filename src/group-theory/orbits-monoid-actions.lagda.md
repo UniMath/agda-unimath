@@ -81,7 +81,7 @@ module _
     is-torsorial (htpy-hom-orbit-action-Monoid f)
   is-torsorial-htpy-hom-orbit-action-Monoid {x} {y} f =
     is-torsorial-Eq-subtype
-      ( is-torsorial-path (element-hom-orbit-action-Monoid f))
+      ( is-torsorial-Id (element-hom-orbit-action-Monoid f))
       ( λ u →
         is-set-type-action-Monoid M X (mul-action-Monoid M X u x) y)
       ( element-hom-orbit-action-Monoid f)
