@@ -69,7 +69,7 @@ squares of homotopies
 ```
 
 This is the
-{{#concept "right whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}}
+{{#concept "right whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation" Agda=right-whisker-concat-coherence-square-homotopies}}
 operation of commuting squares of homotopies with respect to concatenation.
 
 ```agda
@@ -199,7 +199,7 @@ squares of homotopies
 ```
 
 This is the
-{{#concept "left whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation"}}
+{{#concept "double whiskering" Disambiguation="commuting squares of homotopies with respect to concatenation" Agda=double-whisker-coherence-square-homotopies}}
 operation of commuting squares of homotopies with respect to concatenation.
 
 ```agda

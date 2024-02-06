@@ -699,7 +699,8 @@ module _
     coherence-square-identifications top left right bottom ≃
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
   equiv-left-whisker-concat-coherence-square-identifications refl
-    top left right bottom = id-equiv
+    top left right bottom =
+    id-equiv
 
   left-whisker-concat-coherence-square-identifications :
     (p : u ＝ x)
