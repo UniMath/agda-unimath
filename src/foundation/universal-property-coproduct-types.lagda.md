@@ -70,7 +70,7 @@ module _
     uniqueness-coproduct :
       {l3 : Level} {Y : UU l3} (i : A → Y) (j : B → Y) →
       ( {l : Level} (X : UU l) →
-        is-equiv (λ (s : Y → X) → pair (s ∘ i) (s ∘ j))) →
+        is-equiv (λ (s : Y → X) → pair' (s ∘ i) (s ∘ j))) →
       is-equiv (rec-coproduct i j)
     uniqueness-coproduct i j H =
       is-equiv-is-equiv-precomp
@@ -87,7 +87,7 @@ module _
       {l3 : Level} (X : UU l3) (i : A → X) (j : B → X) →
       is-equiv (rec-coproduct i j) →
       (l4 : Level) (Y : UU l4) →
-      is-equiv (λ (s : X → Y) → pair (s ∘ i) (s ∘ j))
+      is-equiv (λ (s : X → Y) → pair' (s ∘ i) (s ∘ j))
     universal-property-coproduct-is-equiv-rec-coproduct X i j H l Y =
       is-equiv-comp
         ( ev-inl-inr (λ _ → Y))

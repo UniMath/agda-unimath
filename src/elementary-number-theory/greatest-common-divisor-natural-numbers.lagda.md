@@ -403,7 +403,7 @@ is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
     (tr (λ t → is-gcd-ℕ 0 b t) H (is-gcd-gcd-ℕ 0 b))))
   (tr (λ t → div-ℕ b t) H
     (div-gcd-is-common-divisor-ℕ 0 b b
-      (pair (div-zero-ℕ b) (refl-div-ℕ b))))
+      (pair' (div-zero-ℕ b) (refl-div-ℕ b))))
 ```
 
 ### `gcd-ℕ a 0 ＝ a`

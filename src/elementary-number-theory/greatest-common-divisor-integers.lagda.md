@@ -329,7 +329,7 @@ is-sim-id-is-gcd-zero-ℤ {b} {x} H = antisymmetric-div-ℤ x b
       is-gcd-gcd-ℤ zero-ℤ b))))
   (tr (λ t → div-ℤ b t) H
     (div-gcd-is-common-divisor-ℤ zero-ℤ b b
-      (pair (div-zero-ℤ b) (refl-div-ℤ b))))
+      (pair' (div-zero-ℤ b) (refl-div-ℤ b))))
 
 is-id-is-gcd-zero-ℤ : {b x : ℤ} → gcd-ℤ zero-ℤ b ＝ x → x ＝ int-ℕ (abs-ℤ b)
 is-id-is-gcd-zero-ℤ {inl b} {x} H
