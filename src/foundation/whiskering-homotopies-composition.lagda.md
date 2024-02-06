@@ -33,7 +33,7 @@ the form
       g
 ```
 
-and is defined to be a function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The
+and is defined to be the function `H ↦ h ·l H : (f ~ g) → (h ∘ f ~ h ∘ g)`. The
 {{#concept "right whiskering" Disambiguation="homotopies with respect to composition" Agda=right-whisker-comp}}
 operation of homotopies with respect to composition assumes a diagram of maps
 the form
@@ -45,7 +45,7 @@ the form
                h
 ```
 
-and is defined to be a function `H ↦ H ·r f : (g ~ h) → (g ∘ f ~ h ∘ f)`.
+and is defined to be the function `H ↦ H ·r f : (g ~ h) → (g ∘ f ~ h ∘ f)`.
 
 **Note.** The infix whiskering operators `_·l_` and `_·r_` use the
 [middle dot](https://codepoints.net/U+00B7) `·` (agda-input: `\cdot`
