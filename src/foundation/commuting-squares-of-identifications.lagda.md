@@ -35,8 +35,10 @@ A square of [identifications](foundation-core.identity-types.md)
           bottom
 ```
 
-is said to **commute** if there is an identification
-`left ∙ bottom ＝ top ∙ right`. Such an identification is called a
+is said to be a
+{{#concept "commuting square" Disambiguation="identifications" Agda=coherence-square-identifications}}
+if there is an identification `left ∙ bottom ＝ top ∙ right`. Such an
+identification is called a
 {{#concept "coherence" Disambiguation="commuting square of identifications" Agda=coherence-square-identifications}}
 of the square.
 
