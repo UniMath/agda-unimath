@@ -22,9 +22,9 @@ open import foundation.universe-levels
 
 ```agda
 module _
-  {l : Level} (C : Category l l)
+  {l1 l2 : Level} (C : Category l1 l2)
   where
 
-  monad-Category : UU l
-  monad-Category = monad-Precategory l (precategory-Category C)
+  monad-Category : UU (l1 ⊔ l2)
+  monad-Category = monad-Precategory (precategory-Category C)
 ```
