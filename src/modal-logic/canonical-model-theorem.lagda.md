@@ -42,6 +42,7 @@ open import modal-logic.completeness
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
+open import modal-logic.modal-logic-K
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
 
@@ -68,14 +69,47 @@ module _
   (zorn : Zorn (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) l2)
   (prop-resize : propositional-resizing (l1 ⊔ l2) (lsuc (l1 ⊔ l2)))
   (L-is-cons : is-consistent-modal-logic (modal-logic axioms))
-  (contains-ax-k : ax-k i ⊆ modal-logic axioms)
-  (contains-ax-s : ax-s i ⊆ modal-logic axioms)
-  (contains-ax-dn : ax-dn i ⊆ modal-logic axioms)
-  (contains-ax-n : ax-n i ⊆ modal-logic axioms)
+  (contains-K : modal-logic-K i ⊆ modal-logic axioms)
   where
 
   logic : formulas (l1 ⊔ l2) i
   logic = modal-logic axioms
+
+  contains-ax-k : ax-k i ⊆ logic
+  contains-ax-k =
+    transitive-leq-subtype
+      ( ax-k i)
+      ( modal-logic-K i)
+      ( logic)
+      ( contains-K)
+      ( K-contains-ax-k i)
+
+  contains-ax-s : ax-s i ⊆ logic
+  contains-ax-s =
+    transitive-leq-subtype
+      ( ax-s i)
+      ( modal-logic-K i)
+      ( logic)
+      ( contains-K)
+      ( K-contains-ax-s i)
+
+  contains-ax-n : ax-n i ⊆ logic
+  contains-ax-n =
+    transitive-leq-subtype
+      ( ax-n i)
+      ( modal-logic-K i)
+      ( logic)
+      ( contains-K)
+      ( K-contains-ax-n i)
+
+  contains-ax-dn : ax-dn i ⊆ logic
+  contains-ax-dn =
+    transitive-leq-subtype
+      ( ax-dn i)
+      ( modal-logic-K i)
+      ( logic)
+      ( contains-K)
+      ( K-contains-ax-dn i)
 
   is-L-consistent-theory-Prop : formulas (l1 ⊔ l2) i → Prop (l1 ⊔ l2)
   is-L-consistent-theory-Prop t =
@@ -180,7 +214,7 @@ module _
   complete-theory-contains-all-formulas :
     LEM (l1 ⊔ l2) →
     (x : L-consistent-theory) → is-L-complete-theory x →
-    (a : formula i) → type-disj-Prop ((pr1 x) a) ((pr1 x) (~ a))
+    (a : formula i) → type-disj-Prop (pr1 x a) (pr1 x (~ a))
   complete-theory-contains-all-formulas lem x is-comp a with lem ((pr1 x) a)
   ... | inl a-in-logic = inl-disj-Prop ((pr1 x) a) ((pr1 x) (~ a)) a-in-logic
   ... | inr a-not-in-logic =
