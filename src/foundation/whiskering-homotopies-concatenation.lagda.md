@@ -79,7 +79,7 @@ module _
   where
 
   right-whisker-concat-htpy :
-    right-whiskering-operation ((x : A) → B x) _~_ _∙h_ _~_
+    right-whiskering-operation ((x : A) → B x) (_~_) (_∙h_) (_~_)
   right-whisker-concat-htpy K J x = right-whisker-concat (K x) (J x)
 ```
 
