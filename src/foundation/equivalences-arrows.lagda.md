@@ -218,7 +218,7 @@ module _
       ( equiv-domain-inv-equiv-arrow)
       ( equiv-codomain-inv-equiv-arrow)
   coh-inv-equiv-arrow =
-    coherence-square-inv-horizontal
+    coherence-square-maps-inv-equiv-horizontal
       ( equiv-domain-equiv-arrow f g α)
       ( f)
       ( g)

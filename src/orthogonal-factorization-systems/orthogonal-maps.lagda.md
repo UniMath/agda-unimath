@@ -24,6 +24,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
@@ -36,9 +37,9 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-equivalences
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
-open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.pullback-hom
 ```
@@ -149,19 +150,19 @@ module _
 
   is-orthogonal-pullback-condition : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-orthogonal-pullback-condition =
-    is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom' f g)
+    is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom f g)
 
   is-orthogonal-pullback-condition-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-orthogonal-pullback-condition-Prop =
-    is-pullback-Prop (precomp f Y) (postcomp A g) (cone-pullback-hom' f g)
+    is-pullback-Prop (precomp f Y) (postcomp A g) (cone-pullback-hom f g)
 
   is-prop-is-orthogonal-pullback-condition :
     is-prop is-orthogonal-pullback-condition
   is-prop-is-orthogonal-pullback-condition =
-    is-prop-is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom' f g)
+    is-prop-is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom f g)
 ```
 
-### The universal property of orthogonal maps
+### The universal property of orthogonal pairs of maps
 
 The universal property of orthogonal maps is the universal property associated
 to the pullback condition, which, as opposed to the pullback condition itself,
@@ -179,7 +180,7 @@ module _
     universal-property-pullback
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f g)
 ```
 
 ## Properties
@@ -192,24 +193,24 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  unique-lifting-squares-is-orthogonal :
+  unique-lifting-structure-squares-is-orthogonal :
     is-orthogonal f g →
-    (h : fibered-map f g) →
-    is-contr (lifting-square-fibered-map f g h)
-  unique-lifting-squares-is-orthogonal H h =
+    (h : hom-arrow f g) →
+    is-contr (lifting-structure-square f g h)
+  unique-lifting-structure-squares-is-orthogonal H h =
     is-contr-equiv
       ( fiber (pullback-hom f g) h)
       ( compute-fiber-pullback-hom f g h)
       ( is-contr-map-is-equiv H h)
 
-  is-orthogonal-unique-lifting-squares :
-    ( (h : fibered-map f g) → is-contr (lifting-square-fibered-map f g h)) →
+  is-orthogonal-unique-lifting-structure-squares :
+    ( (h : hom-arrow f g) → is-contr (lifting-structure-square f g h)) →
     is-orthogonal f g
-  is-orthogonal-unique-lifting-squares H =
+  is-orthogonal-unique-lifting-structure-squares H =
     is-equiv-is-contr-map
       ( λ h →
         is-contr-equiv'
-          ( lifting-square-fibered-map f g h)
+          ( lifting-structure-square f g h)
           ( compute-fiber-pullback-hom f g h)
           ( H h))
 ```
@@ -224,20 +225,24 @@ module _
 
   is-orthogonal-pullback-condition-is-orthogonal :
     is-orthogonal f g → is-orthogonal-pullback-condition f g
-  is-orthogonal-pullback-condition-is-orthogonal =
-    is-equiv-right-factor
-      ( map-fibered-map-type-standard-pullback-hom f g)
-      ( gap (precomp f Y) (postcomp A g) (cone-pullback-hom' f g))
-      ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
+  is-orthogonal-pullback-condition-is-orthogonal H =
+    is-equiv-left-map-triangle
+      ( gap-pullback-hom f g)
+      ( map-compute-pullback-hom f g)
+      ( pullback-hom f g)
+      ( inv-htpy (triangle-pullback-hom f g))
+      ( H)
+      ( is-equiv-map-compute-pullback-hom f g)
 
   is-orthogonal-is-orthogonal-pullback-condition :
     is-orthogonal-pullback-condition f g → is-orthogonal f g
-  is-orthogonal-is-orthogonal-pullback-condition H =
-    is-equiv-comp
-      ( map-fibered-map-type-standard-pullback-hom f g)
-      ( gap (precomp f Y) (postcomp A g) (cone-pullback-hom' f g))
-      ( H)
-      ( is-equiv-map-equiv (equiv-fibered-map-type-standard-pullback-hom f g))
+  is-orthogonal-is-orthogonal-pullback-condition =
+    is-equiv-top-map-triangle
+      ( gap-pullback-hom f g)
+      ( map-compute-pullback-hom f g)
+      ( pullback-hom f g)
+      ( inv-htpy (triangle-pullback-hom f g))
+      ( is-equiv-map-compute-pullback-hom f g)
 ```
 
 ### Being orthogonal means satisfying the universal property of being orthogonal
@@ -254,7 +259,7 @@ module _
     universal-property-pullback-is-pullback
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f g)
       ( is-orthogonal-pullback-condition-is-orthogonal f g H)
 
   is-orthogonal-universal-property-orthogonal-maps :
@@ -264,7 +269,7 @@ module _
       ( is-pullback-universal-property-pullback
         ( precomp f Y)
         ( postcomp A g)
-        ( cone-pullback-hom' f g)
+        ( cone-pullback-hom f g)
         ( H))
 ```
 
@@ -284,7 +289,7 @@ module _
     is-pullback-htpy'
       ( htpy-precomp F Y)
       ( htpy-postcomp A G)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f g)
       ( ( htpy-postcomp B G) ,
         ( htpy-precomp F X) ,
         ( ( commutative-htpy-postcomp-htpy-precomp F G) ∙h
@@ -319,7 +324,7 @@ module _
     is-pullback-is-equiv-horizontal-maps
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f g)
       ( is-equiv-precomp-is-equiv f is-equiv-f Y)
       ( is-equiv-precomp-is-equiv f is-equiv-f X)
 
@@ -334,7 +339,7 @@ module _
     is-pullback-is-equiv-vertical-maps
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f g)
       ( is-equiv-postcomp-is-equiv g is-equiv-g A)
       ( is-equiv-postcomp-is-equiv g is-equiv-g B)
 
@@ -414,8 +419,8 @@ module _
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
-      ( cone-pullback-hom' f h)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f h)
+      ( cone-pullback-hom f g)
 
   up-orthogonal-right-comp :
     universal-property-orthogonal-maps f h →
@@ -426,8 +431,8 @@ module _
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
-      ( cone-pullback-hom' f h)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f h)
+      ( cone-pullback-hom f g)
 
   is-orthogonal-right-comp :
     is-orthogonal f h → is-orthogonal f g → is-orthogonal f (h ∘ g)
@@ -446,8 +451,8 @@ module _
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
-      ( cone-pullback-hom' f h)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f h)
+      ( cone-pullback-hom f g)
 
   up-orthogonal-right-right-factor :
     universal-property-orthogonal-maps f h →
@@ -458,8 +463,8 @@ module _
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
-      ( cone-pullback-hom' f h)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f h)
+      ( cone-pullback-hom f g)
 
   is-orthogonal-right-right-factor :
     is-orthogonal f h → is-orthogonal f (h ∘ g) → is-orthogonal f g
@@ -506,8 +511,8 @@ module _
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
-      ( cone-pullback-hom' h g)
+      ( cone-pullback-hom f g)
+      ( cone-pullback-hom h g)
 
   up-orthogonal-left-comp :
     universal-property-orthogonal-maps f g →
@@ -518,8 +523,8 @@ module _
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
-      ( cone-pullback-hom' h g)
+      ( cone-pullback-hom f g)
+      ( cone-pullback-hom h g)
 
   is-orthogonal-left-comp :
     is-orthogonal f g → is-orthogonal h g → is-orthogonal (h ∘ f) g
@@ -538,8 +543,8 @@ module _
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
-      ( cone-pullback-hom' h g)
+      ( cone-pullback-hom f g)
+      ( cone-pullback-hom h g)
 
   up-orthogonal-left-left-factor :
     universal-property-orthogonal-maps f g →
@@ -550,8 +555,8 @@ module _
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
-      ( cone-pullback-hom' h g)
+      ( cone-pullback-hom f g)
+      ( cone-pullback-hom h g)
 
   is-orthogonal-left-left-factor :
     is-orthogonal f g → is-orthogonal (h ∘ f) g → is-orthogonal h g
@@ -637,7 +642,7 @@ module _
       ( is-pullback-Π
         ( λ i → precomp f (Y i))
         ( λ i → postcomp A (g i))
-        ( λ i → cone-pullback-hom' f (g i))
+        ( λ i → cone-pullback-hom f (g i))
         ( G))
 
   is-orthogonal-right-Π :
@@ -719,8 +724,8 @@ module _
         ( postcomp A g)
         ( precomp f Y')
         ( postcomp A g')
-        ( cone-pullback-hom' f g)
-        ( cone-pullback-hom' f g')
+        ( cone-pullback-hom f g)
+        ( cone-pullback-hom f g')
         ( G)
         ( G'))
 
@@ -812,7 +817,7 @@ module _
       ( is-pullback-Π
         ( λ i → precomp (f i) Y)
         ( λ i → postcomp (A i) g)
-        ( λ i → cone-pullback-hom' (f i) g)
+        ( λ i → cone-pullback-hom (f i) g)
         ( F))
 
   is-orthogonal-left-Σ :
@@ -904,8 +909,8 @@ module _
         ( postcomp A g)
         ( precomp f' Y)
         ( postcomp A' g)
-        ( cone-pullback-hom' f g)
-        ( cone-pullback-hom' f' g)
+        ( cone-pullback-hom f g)
+        ( cone-pullback-hom f' g)
         ( F)
         ( F'))
 
@@ -1007,7 +1012,7 @@ module _
     is-equiv-horizontal-map-is-pullback
       ( precomp f unit)
       ( postcomp A (terminal-map X))
-      ( cone-pullback-hom' f (terminal-map X))
+      ( cone-pullback-hom f (terminal-map X))
       ( is-local-is-contr f unit is-contr-unit)
 
   is-local-is-orthogonal-terminal-map :
@@ -1022,7 +1027,7 @@ module _
     is-pullback-is-equiv-horizontal-maps
       ( precomp f unit)
       ( postcomp A (terminal-map X))
-      ( cone-pullback-hom' f (terminal-map X))
+      ( cone-pullback-hom f (terminal-map X))
       ( is-local-is-contr f unit is-contr-unit)
 
   is-orthogonal-terminal-map-is-local :
@@ -1046,7 +1051,7 @@ module _
     is-pullback-is-equiv-horizontal-maps
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-pullback-hom' f g)
+      ( cone-pullback-hom f g)
 
   is-orthogonal-is-local-domain-is-local-codomain :
     is-local f Y → is-local f X → is-orthogonal f g

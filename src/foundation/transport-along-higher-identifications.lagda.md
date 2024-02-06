@@ -10,12 +10,12 @@ module foundation.transport-along-higher-identifications where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.homotopies
-open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -51,7 +51,7 @@ module _
     coherence-square-identifications
       ( tr-Id-right q p)
       ( tr² (Id a) α p)
-      ( identification-left-whisk p α)
+      ( left-whisker-concat p α)
       ( tr-Id-right q' p)
   tr²-Id-right α p =
     inv-nat-htpy (λ (t : b ＝ c) → tr-Id-right t p) α
@@ -75,23 +75,23 @@ module _
   {B : A → UU l2}
   where
 
-  tr²-left-whisk :
+  tr²-left-whisker :
     (p : x ＝ y) {q q' : y ＝ z} (β : q ＝ q') (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (identification-left-whisk p β) b)
-      ( htpy-right-whisk (tr² B β) (tr B p) b)
+      ( tr² B (left-whisker-concat p β) b)
+      ( right-whisker-comp (tr² B β) (tr B p) b)
       ( tr-concat p q' b)
-  tr²-left-whisk refl refl b = refl
+  tr²-left-whisker refl refl b = refl
 
-  tr²-right-whisk :
+  tr²-right-whisker :
     {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) (b : B x) →
     coherence-square-identifications
       ( tr-concat p q b)
-      ( tr² B (identification-right-whisk α q) b)
-      ( htpy-left-whisk (tr B q) (tr² B α) b)
+      ( tr² B (right-whisker-concat α q) b)
+      ( left-whisker-comp (tr B q) (tr² B α) b)
       ( tr-concat p' q b)
-  tr²-right-whisk refl refl b = inv right-unit
+  tr²-right-whisker refl refl b = inv right-unit
 ```
 
 #### Coherences and algebraic identities for `tr³`
@@ -105,43 +105,43 @@ module _
   tr³-htpy-swap-path-swap :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
     coherence-square-identifications
-      ( ( identification-right-whisk
-          ( tr²-concat (identification-left-whisk p β)
-          ( identification-right-whisk α q') b)
+      ( ( right-whisker-concat
+          ( tr²-concat (left-whisker-concat p β)
+          ( right-whisker-concat α q') b)
           ( tr-concat p' q' b)) ∙
-        ( vertical-concat-square
-          ( tr² B (identification-left-whisk p β) b)
-          ( tr² B (identification-right-whisk α q') b)
-          ( tr-concat p' q' b)
-          ( tr-concat p q' b)
+        ( vertical-pasting-coherence-square-identifications
           ( tr-concat p q b)
-          ( htpy-right-whisk (tr² B β) (tr B p) b)
-          ( htpy-left-whisk (tr B q') (tr² B α) b)
-          ( tr²-left-whisk p β b)
-          ( tr²-right-whisk α q' b)))
-      ( identification-right-whisk
+          ( tr² B (left-whisker-concat p β) b)
+          ( right-whisker-comp (tr² B β) (tr B p) b)
+          ( tr-concat p q' b)
+          ( tr² B (right-whisker-concat α q') b)
+          ( left-whisker-comp (tr B q') (tr² B α) b)
+          ( tr-concat p' q' b)
+          ( tr²-left-whisker p β b)
+          ( tr²-right-whisker α q' b)))
+      ( right-whisker-concat
         ( tr³
           ( B)
-          ( path-swap-nat-identification-left-whisk β α)
+          ( commutative-left-whisker-right-whisker-concat β α)
           ( b))
         ( tr-concat p' q' b))
-      ( identification-left-whisk
+      ( left-whisker-concat
         ( tr-concat p q b)
         ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
-      ( ( identification-right-whisk
+      ( ( right-whisker-concat
           ( tr²-concat
-            ( identification-right-whisk α q)
-            ( identification-left-whisk p' β) b)
+            ( right-whisker-concat α q)
+            ( left-whisker-concat p' β) b)
           ( tr-concat p' q' b)) ∙
-        ( vertical-concat-square
-          ( tr² B (identification-right-whisk α q) b)
-          ( tr² B (identification-left-whisk p' β) b)
-          ( tr-concat p' q' b)
-          ( tr-concat p' q b)
+        ( vertical-pasting-coherence-square-identifications
           ( tr-concat p q b)
-          ( htpy-left-whisk (tr B q) (tr² B α) b)
-          ( htpy-right-whisk (tr² B β) (tr B p') b)
-          ( tr²-right-whisk α q b)
-          ( tr²-left-whisk p' β b)))
+          ( tr² B (right-whisker-concat α q) b)
+          ( left-whisker-comp (tr B q) (tr² B α) b)
+          ( tr-concat p' q b)
+          ( tr² B (left-whisker-concat p' β) b)
+          ( right-whisker-comp (tr² B β) (tr B p') b)
+          ( tr-concat p' q' b)
+          ( tr²-right-whisker α q b)
+          ( tr²-left-whisker p' β b)))
   tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
 ```

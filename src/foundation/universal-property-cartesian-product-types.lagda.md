@@ -103,9 +103,8 @@ Cartesian products are a special case of pullbacks.
         ( refl)
         ( eq-is-contr (is-prop-is-contr is-contr-unit star star))
 
-  abstract
-    is-retraction-inv-gap-product : (inv-gap-product ∘ gap-product) ~ id
-    is-retraction-inv-gap-product (pair a b) = eq-pair-Σ refl refl
+  is-retraction-inv-gap-product : inv-gap-product ∘ gap-product ~ id
+  is-retraction-inv-gap-product (pair a b) = refl
 
   abstract
     is-pullback-product :

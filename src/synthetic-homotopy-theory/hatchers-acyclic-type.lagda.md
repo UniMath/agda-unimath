@@ -139,7 +139,8 @@ module _
           ( λ q →
             ( ( pr1 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 3 A) q) ＝
               ( (ap (power-nat-Ω 5 A) p) ∙ pr1 (pr2 (pr2 t)))) ×
-            ( ( pr2 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 2 A) (ap-binary _∙_ p q)) ＝
+            ( ( pr2 (pr2 (pr2 s)) ∙
+                ap (power-nat-Ω 2 A) (horizontal-concat-Id² p q)) ＝
               ( ap (power-nat-Ω 3 A) q ∙ pr2 (pr2 (pr2 t))))))
 
   refl-Eq-structure-Hatcher-Acyclic-Type :

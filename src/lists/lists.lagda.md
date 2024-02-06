@@ -9,12 +9,14 @@ module lists.lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -185,13 +187,13 @@ is-section-eq-Eq-list nil (cons x l') e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) nil e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
   ( square-eq-Eq-list (eq-Eq-list l l' e)) ∙
-  ( ap (pair refl) (is-section-eq-Eq-list l l' e))
+  ( eq-pair-eq-fiber (is-section-eq-Eq-list l l' e))
 
 eq-Eq-refl-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
   Id (eq-Eq-list l l (refl-Eq-list l)) refl
 eq-Eq-refl-Eq-list nil = refl
-eq-Eq-refl-Eq-list (cons x l) = ap (ap (cons x)) (eq-Eq-refl-Eq-list l)
+eq-Eq-refl-Eq-list (cons x l) = ap² (cons x) (eq-Eq-refl-Eq-list l)
 
 is-retraction-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (p : Id l l') →

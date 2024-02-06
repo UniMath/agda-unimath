@@ -282,8 +282,8 @@ module _
       pr2 h' =
         is-equiv-is-invertible
           ( λ (pair Y np) → pair Y (λ p' → np (inv p')))
-          ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
-          ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
+          ( λ (pair Y np) → eq-pair-eq-fiber (eq-is-prop is-prop-neg))
+          ( λ (pair Y np) → eq-pair-eq-fiber (eq-is-prop is-prop-neg))
   eq-mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     (d1 d2 d3 : orientation-Complete-Undirected-Graph) (m : Fin 2) →
     Id
@@ -521,7 +521,7 @@ module _
               eq-pair-Σ
                 ( ap
                   ( pr1 ∘ d)
-                  ( eq-pair-Σ refl (eq-is-prop is-prop-type-trunc-Prop)))
+                  ( eq-pair-eq-fiber (eq-is-prop is-prop-type-trunc-Prop)))
                 ( eq-is-prop
                   ( is-prop-type-Decidable-Prop
                     ( pr1 Y (pr1 (map-equiv id-equiv d Y)))))))

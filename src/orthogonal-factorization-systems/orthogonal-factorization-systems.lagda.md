@@ -18,13 +18,13 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.factorization-operations-function-classes
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
 open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.wide-function-classes
 ```
 

@@ -412,10 +412,8 @@ module _
       map-inv-pullback-product-Slice-Precategory) ~ id
   is-section-map-inv-pullback-product-Slice-Precategory
     ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-        ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( eq-type-subtype
           ( λ _ →
             is-product-prop-Precategory
@@ -432,12 +430,9 @@ module _
       map-pullback-product-Slice-Precategory) ~ id
   is-retraction-map-inv-pullback-product-Slice-Precategory
     ( W , p₁ , p₂ , α , q) =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-          ( refl)
-          ( eq-pair-Σ
-              ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
+          ( eq-pair-eq-fiber
               ( eq-type-subtype
                   (λ _ → is-pullback-prop-Precategory C A X Y f g _ _ _ α)
                   ( refl))))

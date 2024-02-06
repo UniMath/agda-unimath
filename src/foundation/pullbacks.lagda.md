@@ -18,6 +18,7 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.descent-equivalences
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -27,13 +28,14 @@ open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.postcomposition-functions
@@ -42,7 +44,6 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -161,8 +162,8 @@ triangle-map-standard-pullback-postcomp :
   map-standard-pullback-postcomp f g T ∘
   gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
 triangle-map-standard-pullback-postcomp T f g c h =
-  eq-pair-eq-pr2
-    ( eq-pair-eq-pr2
+  eq-pair-eq-fiber
+    ( eq-pair-eq-fiber
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
 
 abstract
@@ -250,7 +251,7 @@ module _
   cone-Id' : cone (point (x , y)) (diagonal A) (x ＝ y)
   pr1 cone-Id' = terminal-map (x ＝ y)
   pr1 (pr2 cone-Id') = const (x ＝ y) A x
-  pr2 (pr2 cone-Id') p = eq-pair-eq-pr2 (inv p)
+  pr2 (pr2 cone-Id') p = eq-pair-eq-fiber (inv p)
 
   inv-gap-cone-Id' :
     standard-pullback (point (x , y)) (diagonal A) → x ＝ y
@@ -366,7 +367,7 @@ module _
 
 In the following part we will relate the type `htpy-parallel-cone` to the
 identity type of cones. Here we will rely on
-[function extensionality](foundation-core.function-extensionality.md).
+[function extensionality](foundation.function-extensionality.md).
 
 ```agda
 module _
@@ -416,9 +417,9 @@ module _
                   ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
                 ( is-equiv-concat-htpy'
                   ( H ∙h (g ·l L))
-                  ( λ x → ap (_∙ H' x) (inv right-unit)))
+                  ( λ x → right-whisker-concat (inv right-unit) (H' x)))
                 ( is-equiv-concat-htpy
-                  ( λ x → ap (H x ∙_) right-unit)
+                  ( λ x → left-whisker-concat (H x) right-unit)
                   ( (f ·l K) ∙h refl-htpy ∙h H'))))
 
   abstract
@@ -525,7 +526,7 @@ module _
         ( concat (tr-tr-refl-htpy-cone c) c')) ~
       ( htpy-eq-square c c')
     left-map-triangle-parallel-cone-eq' c c' =
-      ( htpy-right-whisk
+      ( right-whisker-comp
         ( multivariable-htpy-eq 3
           ( compute-ind-htpy g
             ( λ g'' Hg' →
@@ -568,7 +569,7 @@ module _
         ( concat (tr-tr-refl-htpy-cone c) c') ~
       ( htpy-eq-square c c')
     left-map-triangle-parallel-cone-eq c c' =
-      ( htpy-right-whisk
+      ( right-whisker-comp
         ( multivariable-htpy-eq 5
           ( compute-ind-htpy f
             ( λ f'' Hf' →
@@ -766,16 +767,20 @@ module _
   is-section-map-inv-coproduct-cone :
     is-section map-coproduct-cone map-inv-coproduct-cone
   is-section-map-inv-coproduct-cone (inl x , inl y , p) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inl p))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (is-section-is-injective-inl p))
   is-section-map-inv-coproduct-cone (inr x , inr y , p) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-section-is-injective-inr p))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (is-section-is-injective-inr p))
 
   is-retraction-map-inv-coproduct-cone :
     is-retraction map-coproduct-cone map-inv-coproduct-cone
   is-retraction-map-inv-coproduct-cone (inl (x , y , p)) =
-    ap inl (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inl p)))
+    ap
+      ( inl)
+      ( eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-is-injective-inl p)))
   is-retraction-map-inv-coproduct-cone (inr (x , y , p)) =
-    ap inr (eq-pair-eq-pr2 (eq-pair-eq-pr2 (is-retraction-is-injective-inr p)))
+    ap
+      ( inr)
+      ( eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-is-injective-inr p)))
 
   abstract
     is-equiv-map-coproduct-cone : is-equiv map-coproduct-cone
@@ -809,9 +814,9 @@ module _
     gap (map-coproduct f f') (map-coproduct g g') (coproduct-cone c c') ~
     map-coproduct-cone f g f' g' ∘ map-coproduct (gap f g c) (gap f' g' c')
   triangle-map-coproduct-cone c c' (inl _) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
+    eq-pair-eq-fiber (eq-pair-eq-fiber right-unit)
   triangle-map-coproduct-cone c c' (inr _) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 right-unit)
+    eq-pair-eq-fiber (eq-pair-eq-fiber right-unit)
 
   abstract
     is-pullback-coproduct-is-pullback-pair :
@@ -1084,12 +1089,12 @@ module _
   pr1 (cone-ap c1 c2) = ap (vertical-map-cone f g c)
   pr1 (pr2 (cone-ap c1 c2)) = ap (horizontal-map-cone f g c)
   pr2 (pr2 (cone-ap c1 c2)) γ =
-    ( ap
-      ( _∙ coherence-square-cone f g c c2)
-      ( inv (ap-comp f (vertical-map-cone f g c) γ))) ∙
+    ( right-whisker-concat
+      ( inv (ap-comp f (vertical-map-cone f g c) γ))
+      ( coherence-square-cone f g c c2)) ∙
     ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
-      ( ap
-        ( coherence-square-cone f g c c1 ∙_)
+      ( left-whisker-concat
+        ( coherence-square-cone f g c c1)
         ( ap-comp g (horizontal-map-cone f g c) γ)))
 
   cone-ap' :
@@ -1109,12 +1114,12 @@ module _
     ( tr-Id-right
       ( coherence-square-cone f g c c2)
       ( ap f (ap (vertical-map-cone f g c) γ))) ∙
-    ( ( ap
-        ( _∙ coherence-square-cone f g c c2)
-        ( inv (ap-comp f (vertical-map-cone f g c) γ))) ∙
+    ( ( right-whisker-concat
+        ( inv (ap-comp f (vertical-map-cone f g c) γ))
+        ( coherence-square-cone f g c c2)) ∙
       ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
-        ( ap
-          ( coherence-square-cone f g c c1 ∙_)
+        ( left-whisker-concat
+          ( coherence-square-cone f g c c1)
           ( ap-comp g (horizontal-map-cone f g c) γ))))
 
   is-pullback-cone-ap :

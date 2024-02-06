@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-decompositions
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.raising-universe-levels
@@ -66,11 +67,11 @@ module _
     ap inr (is-retraction-map-inv-raise {l1} x)
 
   is-retraction-map-inv-compute-total-fam-coproduct :
-    (map-inv-compute-total-fam-coproduct ∘ map-compute-total-fam-coproduct) ~ id
+    map-inv-compute-total-fam-coproduct ∘ map-compute-total-fam-coproduct ~ id
   is-retraction-map-inv-compute-total-fam-coproduct (pair (inl (inr _)) y) =
-    ap (pair (zero-Fin 1)) (is-section-map-inv-raise y)
+    eq-pair-eq-fiber (is-section-map-inv-raise y)
   is-retraction-map-inv-compute-total-fam-coproduct (pair (inr _) y) =
-    ap (pair (one-Fin 1)) (is-section-map-inv-raise y)
+    eq-pair-eq-fiber (is-section-map-inv-raise y)
 
   is-equiv-map-compute-total-fam-coproduct :
     is-equiv map-compute-total-fam-coproduct

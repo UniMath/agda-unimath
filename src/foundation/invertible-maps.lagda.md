@@ -15,9 +15,11 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.full-subtypes
+open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.propositions
@@ -26,16 +28,15 @@ open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 
 open import synthetic-homotopy-theory.free-loops
 ```
@@ -145,11 +146,11 @@ module _
     ( coherence-triangle-homotopies
       ( is-retraction-map-invertible-map s)
       ( is-retraction-map-invertible-map t)
-      ( htpy-comp-horizontal I H)) ×
+      ( horizontal-concat-htpy I H)) ×
     ( coherence-triangle-homotopies
       ( is-section-map-invertible-map s)
       ( is-section-map-invertible-map t)
-      ( htpy-comp-horizontal H I))
+      ( horizontal-concat-htpy H I))
 
   htpy-invertible-map : (s t : invertible-map A B) → UU (l1 ⊔ l2)
   htpy-invertible-map s t =

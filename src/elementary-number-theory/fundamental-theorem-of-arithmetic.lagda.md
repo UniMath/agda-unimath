@@ -176,7 +176,7 @@ pr1 (is-nontrivial-divisor-diagonal-ℕ n H) = H
 pr2 (is-nontrivial-divisor-diagonal-ℕ n H) = refl-div-ℕ n
 ```
 
-If `l` is a prime decomposition of `n`, then `l` is a list of non-trivial
+If `l` is a prime decomposition of `n`, then `l` is a list of nontrivial
 divisors of `n`.
 
 ```agda
@@ -701,11 +701,11 @@ pr1 (prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H) =
 pr2 (prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H) =
   is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H
 
-le-one-is-non-empty-prime-decomposition-list-ℕ :
+le-one-is-nonempty-prime-decomposition-list-ℕ :
   (x : ℕ) (H : leq-ℕ 1 x) (y : ℕ) (l : list ℕ) →
   is-prime-decomposition-list-ℕ x (cons y l) →
   le-ℕ 1 x
-le-one-is-non-empty-prime-decomposition-list-ℕ x H y l D =
+le-one-is-nonempty-prime-decomposition-list-ℕ x H y l D =
   concatenate-le-leq-ℕ
     {x = 1}
     {y = y}
@@ -861,7 +861,7 @@ eq-prime-decomposition-list-ℕ x H (cons y l) nil I J =
     ( contradiction-le-ℕ
       ( 1)
       ( x)
-      ( le-one-is-non-empty-prime-decomposition-list-ℕ x H y l I)
+      ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l I)
       ( leq-eq-ℕ
         ( x)
         ( 1)
@@ -871,7 +871,7 @@ eq-prime-decomposition-list-ℕ x H nil (cons y l) I J =
     ( contradiction-le-ℕ
       ( 1)
       ( x)
-      ( le-one-is-non-empty-prime-decomposition-list-ℕ x H y l J)
+      ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l J)
       ( leq-eq-ℕ
         ( x)
         ( 1)

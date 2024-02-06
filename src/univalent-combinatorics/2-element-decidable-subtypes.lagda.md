@@ -368,8 +368,7 @@ preserves-comp-precomp-equiv-2-Element-Decidable-Subtype :
 preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f =
   eq-htpy
     ( λ (pair P H) →
-      eq-pair-Σ
-        ( refl)
+      eq-pair-eq-fiber
         ( eq-is-prop is-prop-type-trunc-Prop))
 ```
 

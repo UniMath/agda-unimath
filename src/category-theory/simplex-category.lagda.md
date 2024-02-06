@@ -162,6 +162,6 @@ This remains to be formalized.
 
 This remains to be formalized.
 
-### There is a unique non-trivial involution on the simplex category
+### There is a unique nontrivial involution on the simplex category
 
 This remains to be formalized.

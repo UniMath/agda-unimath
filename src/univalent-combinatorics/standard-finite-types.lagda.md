@@ -12,6 +12,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -30,7 +31,6 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
-open import foundation.path-algebra
 open import foundation.preunivalent-type-families
 open import foundation.raising-universe-levels
 open import foundation.retractions

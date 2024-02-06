@@ -14,6 +14,7 @@ open import foundation.slice
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
@@ -22,7 +23,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
