@@ -189,4 +189,128 @@ module _
   monad-Precategory =
     Σ ( pointed-endofunctor-Precategory C)
       ( structure-monad-pointed-endofunctor-Precategory C)
+
+  module _
+    (T : monad-Precategory)
+    where
+
+    pointed-endofunctor-monad-Precategory :
+      pointed-endofunctor-Precategory C
+    pointed-endofunctor-monad-Precategory = pr1 T
+
+    endofunctor-monad-Precategory :
+      functor-Precategory C C
+    endofunctor-monad-Precategory =
+      functor-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+
+    obj-endofunctor-monad-Precategory :
+      obj-Precategory C → obj-Precategory C
+    obj-endofunctor-monad-Precategory =
+      obj-functor-Precategory C C endofunctor-monad-Precategory
+
+    hom-endofunctor-monad-Precategory :
+      {X Y : obj-Precategory C} →
+      hom-Precategory C X Y →
+      hom-Precategory C
+        ( obj-endofunctor-monad-Precategory X)
+        ( obj-endofunctor-monad-Precategory Y)
+    hom-endofunctor-monad-Precategory =
+      hom-functor-Precategory C C endofunctor-monad-Precategory
+
+    preserves-id-endofunctor-monad-Precategory :
+      (X : obj-Precategory C) →
+      hom-endofunctor-monad-Precategory (id-hom-Precategory C {X}) ＝
+      id-hom-Precategory C
+    preserves-id-endofunctor-monad-Precategory =
+      preserves-id-functor-Precategory C C endofunctor-monad-Precategory
+
+    preserves-comp-endofunctor-monad-Precategory :
+      {X Y Z : obj-Precategory C} →
+      (g : hom-Precategory C Y Z) (f : hom-Precategory C X Y) →
+      hom-endofunctor-monad-Precategory (comp-hom-Precategory C g f) ＝
+      comp-hom-Precategory C
+        ( hom-endofunctor-monad-Precategory g)
+        ( hom-endofunctor-monad-Precategory f)
+    preserves-comp-endofunctor-monad-Precategory =
+      preserves-comp-functor-Precategory C C
+        ( endofunctor-monad-Precategory)
+
+    unit-monad-Precategory :
+      pointing-endofunctor-Precategory C endofunctor-monad-Precategory
+    unit-monad-Precategory =
+      pointing-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+
+    hom-unit-monad-Precategory :
+      hom-family-functor-Precategory C C
+        ( id-functor-Precategory C)
+        ( endofunctor-monad-Precategory)
+    hom-unit-monad-Precategory =
+      hom-family-pointing-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+
+    naturality-unit-monad-Precategory :
+      is-natural-transformation-Precategory C C
+        ( id-functor-Precategory C)
+        ( endofunctor-monad-Precategory)
+        ( hom-unit-monad-Precategory)
+    naturality-unit-monad-Precategory =
+      naturality-pointing-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+
+    mul-monad-Precategory :
+      structure-multiplication-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+    mul-monad-Precategory = pr1 (pr2 T)
+
+    hom-mul-monad-Precategory :
+      hom-family-functor-Precategory C C
+        ( comp-functor-Precategory C C C
+          ( endofunctor-monad-Precategory)
+          ( endofunctor-monad-Precategory))
+        ( endofunctor-monad-Precategory)
+    hom-mul-monad-Precategory =
+      hom-family-natural-transformation-Precategory C C
+        ( comp-functor-Precategory C C C
+          ( endofunctor-monad-Precategory)
+          ( endofunctor-monad-Precategory))
+        ( endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+
+    naturality-mul-monad-Precategory :
+      is-natural-transformation-Precategory C C
+        ( comp-functor-Precategory C C C
+          ( endofunctor-monad-Precategory)
+          ( endofunctor-monad-Precategory))
+        ( endofunctor-monad-Precategory)
+        ( hom-mul-monad-Precategory)
+    naturality-mul-monad-Precategory =
+      naturality-natural-transformation-Precategory C C
+        ( comp-functor-Precategory C C C
+          ( endofunctor-monad-Precategory)
+          ( endofunctor-monad-Precategory))
+        ( endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+
+    associative-mul-monad-Precategory :
+      associative-mul-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+    associative-mul-monad-Precategory =
+      pr1 (pr2 (pr2 T))
+
+    left-unit-law-mul-monad-Precategory :
+      left-unit-law-mul-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+    left-unit-law-mul-monad-Precategory =
+      pr1 (pr2 (pr2 (pr2 T)))
+
+    right-unit-law-mul-monad-Precategory :
+      right-unit-law-mul-pointed-endofunctor-Precategory C
+        ( pointed-endofunctor-monad-Precategory)
+        ( mul-monad-Precategory)
+    right-unit-law-mul-monad-Precategory =
+      pr2 (pr2 (pr2 (pr2 T)))
 ```
