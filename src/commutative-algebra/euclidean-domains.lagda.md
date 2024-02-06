@@ -55,7 +55,7 @@ open import ring-theory.semirings
 A **Euclidean domain** is an
 [integral domain](commutative-algebra.integral-domains.md) `R` that has a
 **Euclidean valuation**, i.e., a function `v : R → ℕ` such that for every
-`x y : R`, if `y` is non-zero then there are `q r : R` with `x = q y + r` and
+`x y : R`, if `y` is nonzero then there are `q r : R` with `x = q y + r` and
 `v r < v y`.
 
 ## Definition

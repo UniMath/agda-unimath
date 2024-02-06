@@ -248,7 +248,7 @@ module _
 
 ## Properties
 
-### If the objects of a precategory are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
+### If the objects of a precategory are `k`-truncated for nonnegative `k`, the total hom-type is `k`-truncated
 
 ```agda
 module _

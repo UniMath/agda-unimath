@@ -123,7 +123,7 @@ contraction-total-Eq-ℤ (inl x) (pair (inl y) e) =
     ( ap inl (eq-Eq-ℕ x y e))
     ( eq-is-prop (is-prop-Eq-ℕ x y))
 contraction-total-Eq-ℤ (inr (inl star)) (pair (inr (inl star)) e) =
-  eq-pair-Σ refl (eq-is-prop is-prop-unit)
+  eq-pair-eq-fiber (eq-is-prop is-prop-unit)
 contraction-total-Eq-ℤ (inr (inr x)) (pair (inr (inr y)) e) =
   eq-pair-Σ
     ( ap (inr ∘ inr) (eq-Eq-ℕ x y e))

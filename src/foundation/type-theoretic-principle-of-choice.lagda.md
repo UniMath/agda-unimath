@@ -10,12 +10,12 @@ open import foundation-core.type-theoretic-principle-of-choice public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.implicit-function-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications

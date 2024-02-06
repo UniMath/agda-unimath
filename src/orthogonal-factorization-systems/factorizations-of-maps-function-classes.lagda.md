@@ -25,7 +25,7 @@ open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.function-classes

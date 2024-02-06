@@ -10,11 +10,11 @@ module foundation.precomposition-type-families where
 open import foundation.homotopy-induction
 open import foundation.transport-along-homotopies
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>

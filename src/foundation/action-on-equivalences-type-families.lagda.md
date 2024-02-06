@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.equivalence-induction
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
@@ -145,7 +146,9 @@ distributive-action-equiv-function-comp :
   action-equiv-function g ∘ action-equiv-family f
 distributive-action-equiv-function-comp g f e =
   ( ap-comp g f (eq-equiv e)) ∙
-  ( ap (ap g) (inv (is-retraction-eq-equiv (action-equiv-function f e))))
+  ( left-whisker-comp² g
+    ( inv-htpy is-retraction-eq-equiv)
+    ( action-equiv-function f e))
 
 distributive-action-equiv-family-comp :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2)

@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -25,7 +26,6 @@ open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -47,16 +47,16 @@ abstract
               ( λ s →
                 Σ ( ( map-section f s ∘ f) ~ id)
                   ( λ H →
-                    ( htpy-right-whisk (is-section-map-section f s) f) ~
-                    ( htpy-left-whisk f H))))
+                    ( right-whisker-comp (is-section-map-section f s) f) ~
+                    ( left-whisker-comp f H))))
           ( associative-Σ
             ( B → A)
             ( λ g → (f ∘ g) ~ id)
             ( λ s →
               Σ ( ( map-section f s ∘ f) ~ id)
                 ( λ H →
-                  ( htpy-right-whisk (is-section-map-section f s) f) ~
-                  ( htpy-left-whisk f H))))
+                  ( right-whisker-comp (is-section-map-section f s) f) ~
+                  ( left-whisker-comp f H))))
           ( is-contr-Σ
             ( is-contr-section-is-equiv (is-equiv-is-coherently-invertible H))
             ( section-is-coherently-invertible H)

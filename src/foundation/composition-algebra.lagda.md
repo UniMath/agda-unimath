@@ -13,11 +13,12 @@ open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies-composition
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -45,7 +46,7 @@ homotopies.
 ### Precomposition distributes over whiskerings of homotopies
 
 The operation `htpy-precomp` distributes over
-[whiskerings of homotopies](foundation-core.whiskering-homotopies.md)
+[whiskerings of homotopies](foundation.whiskering-homotopies-composition.md)
 contravariantly. Given a homotopy `H : f ~ g` and a suitable map `h` the
 homotopy constructed as the whiskering
 
@@ -77,7 +78,7 @@ module _
     (h : C → A) (H : f ~ g) (S : UU l4) →
     precomp h S ·l htpy-precomp H S ~ htpy-precomp (H ·r h) S
   inv-distributive-htpy-precomp-right-whisker h H S i =
-    coherence-square-eq-htpy-ap-precomp h (i ∘ f) (i ∘ g) (i ·l H)
+    compute-eq-htpy-ap-precomp h (i ·l H)
 
   distributive-htpy-precomp-right-whisker :
     (h : C → A) (H : f ~ g) (S : UU l4) →
@@ -137,7 +138,7 @@ module _
     (H : f ~ g) (K : g ~ h) (S : UU l3) →
     htpy-precomp (H ∙h K) S ~ htpy-precomp H S ∙h htpy-precomp K S
   distributive-htpy-precomp-concat-htpy H K S i =
-    ( ap eq-htpy (eq-htpy (distributive-left-whisk-concat-htpy i H K))) ∙
+    ( ap eq-htpy (eq-htpy (distributive-left-whisker-comp-concat i H K))) ∙
     ( eq-htpy-concat-htpy (i ·l H) (i ·l K))
 ```
 
@@ -213,7 +214,7 @@ module _
     (h : B → C) (H : f ~ g) (S : UU l4) →
     postcomp S h ·l htpy-postcomp S H ~ htpy-postcomp S (h ·l H)
   inv-distributive-htpy-postcomp-left-whisker h H S i =
-    coherence-square-eq-htpy-ap-postcomp h (f ∘ i) (g ∘ i) (H ·r i)
+    compute-eq-htpy-ap-postcomp h (H ·r i)
 
   distributive-htpy-postcomp-left-whisker :
     (h : B → C) (H : f ~ g) (S : UU l4) →
@@ -234,7 +235,7 @@ module _
     (H : f ~ g) (K : g ~ h) (S : UU l3) →
     htpy-postcomp S (H ∙h K) ~ htpy-postcomp S H ∙h htpy-postcomp S K
   distributive-htpy-postcomp-concat-htpy H K S i =
-    ( ap eq-htpy (eq-htpy (distributive-right-whisk-concat-htpy i H K))) ∙
+    ( ap eq-htpy (eq-htpy (distributive-right-whisker-comp-concat i H K))) ∙
     ( eq-htpy-concat-htpy (H ·r i) (K ·r i))
 ```
 
@@ -269,11 +270,11 @@ module _
     ind-htpy f
       ( λ f' F →
         htpy-precomp F Y ·r postcomp B g ~ postcomp A g ·l htpy-precomp F X)
-      ( ( ap-right-whisk-htpy
+      ( ( right-whisker-comp²
           ( compute-htpy-precomp-refl-htpy f Y)
           ( postcomp B g)) ∙h
         ( inv-htpy
-          ( ap-left-whisk-htpy
+          ( left-whisker-comp²
             ( postcomp A g)
             ( compute-htpy-precomp-refl-htpy f X))))
 
@@ -284,11 +285,11 @@ module _
     ind-htpy g
       ( λ g' G →
         htpy-postcomp A G ·r precomp f X ~ precomp f Y ·l htpy-postcomp B G)
-      ( ( ap-right-whisk-htpy
+      ( ( right-whisker-comp²
           ( compute-htpy-postcomp-refl-htpy A g)
           ( precomp f X)) ∙h
         ( inv-htpy
-          ( ap-left-whisk-htpy
+          ( left-whisker-comp²
             ( precomp f Y)
             ( compute-htpy-postcomp-refl-htpy B g))))
 
@@ -310,14 +311,14 @@ module _
           htpy-precomp F Y ·r postcomp B g'))
       ( ( ap-concat-htpy
           ( postcomp A g ·l htpy-precomp F X)
-          ( ap-right-whisk-htpy
+          ( right-whisker-comp²
             ( compute-htpy-postcomp-refl-htpy A g)
             ( precomp f' X))) ∙h
         ( right-unit-htpy) ∙h
         ( inv-htpy (commutative-postcomp-htpy-precomp g F)) ∙h
         ( ap-concat-htpy'
           ( htpy-precomp F Y ·r postcomp B g)
-          ( ap-left-whisk-htpy
+          ( left-whisker-comp²
             ( precomp f Y)
             ( inv-htpy (compute-htpy-postcomp-refl-htpy B g)))))
 ```

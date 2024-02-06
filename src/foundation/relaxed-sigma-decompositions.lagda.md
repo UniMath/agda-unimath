@@ -15,6 +15,7 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels

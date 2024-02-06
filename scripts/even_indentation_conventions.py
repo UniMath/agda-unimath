@@ -67,6 +67,6 @@ if __name__ == '__main__':
         print(*map(lambda kv: f'  {kv[0]}: {kv[1]} lines',
                    sorted(offender_files.items(), key=lambda kv: kv[1])), sep='\n')
         print(
-            f'\nTotal number of lines in library unevenly indented: {sum(offender_files.values())}.\n\nUneven indentation means that there is code indented by a non-multiple of the base indentation (2 spaces). If you haven\'t already, we suggest you set up your environment to more easily spot uneven indentation. For instance using VSCode\'s indent-rainbow extension.')
+            f'\nTotal number of lines in library unevenly indented: {sum(offender_files.values())}.\n\nUneven indentation means that there is code indented by a nonmultiple of the base indentation (2 spaces). If you haven\'t already, we suggest you set up your environment to more easily spot uneven indentation. For instance using VSCode\'s indent-rainbow extension.')
 
     sys.exit(status)

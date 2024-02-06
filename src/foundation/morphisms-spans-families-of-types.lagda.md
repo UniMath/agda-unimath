@@ -15,7 +15,7 @@ open import foundation.homotopy-induction
 open import foundation.spans-families-of-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
