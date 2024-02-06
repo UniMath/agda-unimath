@@ -175,72 +175,72 @@ private
 
   pattern apply-pr1 xs =
     def (quote pr1)
-      ( hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
+      ( hidden-Argument-Agda unknown ∷
+        hidden-Argument-Agda unknown ∷
+        hidden-Argument-Agda unknown ∷
+        hidden-Argument-Agda unknown ∷
         xs)
 
   pattern apply-pr2 xs =
     def (quote pr2)
-      ( hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
-        hidden-Arg unknown ∷
+      ( hidden-Argument-Agda unknown ∷
+        hidden-Argument-Agda unknown ∷
+        hidden-Argument-Agda unknown ∷
+        hidden-Argument-Agda unknown ∷
         xs)
 ```
 
 ### Building a term of `Precategory-Expr C x y` from a term of type `hom-Precategory C x y`
 
 ```agda
-build-Precategory-Expr : Term → Term
+build-Precategory-Expr : Term-Agda → Term-Agda
 build-Precategory-Expr
   ( apply-pr1
-    ( visible-Arg
+    ( visible-Argument-Agda
       ( apply-pr2
-        ( visible-Arg
+        ( visible-Argument-Agda
           ( apply-pr2
-            ( visible-Arg
-              ( apply-pr2 (visible-Arg C ∷ nil)) ∷
+            ( visible-Argument-Agda
+              ( apply-pr2 (visible-Argument-Agda C ∷ nil)) ∷
               ( nil))) ∷
             ( nil))) ∷
-          ( visible-Arg x) ∷
+          ( visible-Argument-Agda x) ∷
           nil)) =
   con (quote id-hom-Precategory-Expr) nil
 build-Precategory-Expr
   ( apply-pr1
-    ( visible-Arg
+    ( visible-Argument-Agda
       ( apply-pr1
-        ( visible-Arg
+        ( visible-Argument-Agda
           ( apply-pr2
-            ( visible-Arg
+            ( visible-Argument-Agda
               ( apply-pr2
-                (visible-Arg C ∷ nil)) ∷ nil))
+                (visible-Argument-Agda C ∷ nil)) ∷ nil))
             ∷ nil)) ∷
-      hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
-      visible-Arg g ∷ visible-Arg f ∷ nil)) =
+      hidden-Argument-Agda x ∷ hidden-Argument-Agda y ∷ hidden-Argument-Agda z ∷
+      visible-Argument-Agda g ∷ visible-Argument-Agda f ∷ nil)) =
   con
     ( quote comp-hom-Precategory-Expr)
-    ( visible-Arg (build-Precategory-Expr g) ∷
-      visible-Arg (build-Precategory-Expr f) ∷
+    ( visible-Argument-Agda (build-Precategory-Expr g) ∷
+      visible-Argument-Agda (build-Precategory-Expr f) ∷
       nil)
 build-Precategory-Expr f =
-  con (quote hom-Precategory-Expr) (visible-Arg f ∷ nil)
+  con (quote hom-Precategory-Expr) (visible-Argument-Agda f ∷ nil)
 ```
 
 ### The application of the `solve-Precategory-Expr` lemma
 
 ```agda
-apply-solve-Precategory-Expr : Term → Term → Term → Term
+apply-solve-Precategory-Expr : Term-Agda → Term-Agda → Term-Agda → Term-Agda
 apply-solve-Precategory-Expr cat lhs rhs =
   def
     ( quote solve-Precategory-Expr)
-    ( replicate-hidden-Arg 2 ++
-      visible-Arg cat ∷
-      replicate-hidden-Arg 2 ++
-      visible-Arg lhs ∷
-      visible-Arg rhs ∷
-      visible-Arg (con (quote refl) nil) ∷
+    ( replicate-hidden-Argument-Agda 2 ++
+      visible-Argument-Agda cat ∷
+      replicate-hidden-Argument-Agda 2 ++
+      visible-Argument-Agda lhs ∷
+      visible-Argument-Agda rhs ∷
+      visible-Argument-Agda (con (quote refl) nil) ∷
       nil)
 ```
 
@@ -248,7 +248,7 @@ apply-solve-Precategory-Expr cat lhs rhs =
 
 ```agda
 macro
-  solve-Precategory! : Term → Term → TC unit
+  solve-Precategory! : Term-Agda → Term-Agda → TC unit
   solve-Precategory! cat hole = do
     goal ← inferType hole >>= reduce
     (lhs , rhs) ← boundary-TCM goal

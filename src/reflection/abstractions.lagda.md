@@ -16,14 +16,14 @@ open import primitives.strings
 
 ## Idea
 
-The `Abs` type represents a lambda abstraction.
+The `Abstraction-Agda` type represents a lambda abstraction.
 
 ## Definition
 
 ```agda
-data Abs {l} (A : UU l) : UU l where
-  abs : String → A → Abs A
+data Abstraction-Agda {l} (A : UU l) : UU l where
+  abs : String → A → Abstraction-Agda A
 
-{-# BUILTIN ABS Abs #-}
+{-# BUILTIN ABS Abstraction-Agda #-}
 {-# BUILTIN ABSABS abs #-}
 ```

@@ -24,7 +24,7 @@ open import reflection.names
 
 ## Idea
 
-The `Literal` type represents literals in Agda.
+The `Literal-Agda` type represents literals in Agda.
 
 For concrete examples, see
 [`reflection.definitions`](reflection.definitions.md).
@@ -32,16 +32,16 @@ For concrete examples, see
 ## Definition
 
 ```agda
-data Literal : UU lzero where
-  nat : (n : ℕ) → Literal
-  word64 : (n : Word64) → Literal
-  float : (x : Float) → Literal
-  char : (c : Char) → Literal
-  string : (s : String) → Literal
-  name : (x : Name) → Literal
-  meta : (x : Meta) → Literal
+data Literal-Agda : UU lzero where
+  nat : (n : ℕ) → Literal-Agda
+  word64 : (n : Word64) → Literal-Agda
+  float : (x : Float) → Literal-Agda
+  char : (c : Char) → Literal-Agda
+  string : (s : String) → Literal-Agda
+  name : (x : Name-Agda) → Literal-Agda
+  meta : (x : Metavariable-Agda) → Literal-Agda
 
-{-# BUILTIN AGDALITERAL Literal #-}
+{-# BUILTIN AGDALITERAL Literal-Agda #-}
 {-# BUILTIN AGDALITNAT nat #-}
 {-# BUILTIN AGDALITWORD64 word64 #-}
 {-# BUILTIN AGDALITFLOAT float #-}

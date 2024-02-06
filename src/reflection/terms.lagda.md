@@ -28,9 +28,9 @@ open import reflection.names
 ## Idea
 
 In this module we represent the terms of agda by an inductive definition of the
-type `Term`. See the comments for details on the constructors.
+type `Term-Agda`. See the comments for details on the constructors.
 
-We can obtain a `Term` from an agda term through the keyword `quoteTerm`.
+We can obtain a `Term-Agda` from an agda term through the keyword `quoteTerm`.
 
 For concrete examples, see
 [`reflection.definitions`](reflection.definitions.md).
@@ -38,70 +38,78 @@ For concrete examples, see
 ## Definition
 
 ```agda
-data Term : UU lzero
-data Sort : UU lzero
-data Pattern : UU lzero
-data Clause : UU lzero
-Telescope = list (String × Arg Term)
+data Term-Agda : UU lzero
+data Sort-Agda : UU lzero
+data Pattern-Agda : UU lzero
+data Clause-Agda : UU lzero
+Telescope-Agda = list (String × Argument-Agda Term-Agda)
 
-data Term where
+data Term-Agda where
   -- Variables, where the natural number is a de Bruijn index
-  var : (x : ℕ) (args : list (Arg Term)) → Term
+  var : (x : ℕ) (args : list (Argument-Agda Term-Agda)) → Term-Agda
   -- An application of a constructor or definition
-  con : (c : Name) (args : list (Arg Term)) → Term
-  def : (f : Name) (args : list (Arg Term)) → Term
+  con : (c : Name-Agda) (args : list (Argument-Agda Term-Agda)) → Term-Agda
+  def : (f : Name-Agda) (args : list (Argument-Agda Term-Agda)) → Term-Agda
   -- A lambda abstraction
-  lam : (v : Visibility) (t : Abs Term) → Term
-  pat-lam : (cs : list Clause) (args : list (Arg Term)) → Term
+  lam :
+    (v : Visibility-Argument-Agda) (t : Abstraction-Agda Term-Agda) → Term-Agda
+  pat-lam :
+    (cs : list Clause-Agda) (args : list (Argument-Agda Term-Agda)) → Term-Agda
   -- A Pi term
-  pi : (a : Arg Term) (b : Abs Term) → Term
+  pi :
+    (a : Argument-Agda Term-Agda) (b : Abstraction-Agda Term-Agda) → Term-Agda
   -- A sort, also called a universe
-  agda-sort : (s : Sort) → Term
+  agda-sort : (s : Sort-Agda) → Term-Agda
   -- A literal, e.g. `3`
-  lit : (l : Literal) → Term
+  lit : (l : Literal-Agda) → Term-Agda
   -- A metavariable
-  meta : (x : Meta) → list (Arg Term) → Term
+  meta : (x : Metavariable-Agda) → list (Argument-Agda Term-Agda) → Term-Agda
   -- A hole
-  unknown : Term
+  unknown : Term-Agda
 
-data Sort where
+data Sort-Agda where
   -- A universe of a given (possibly neutral) level
-  set : (t : Term) → Sort
+  set : (t : Term-Agda) → Sort-Agda
   -- A universe of a given concrete level
-  lit : (n : ℕ) → Sort
+  lit : (n : ℕ) → Sort-Agda
   -- A Prop of a given (possibly neutral) level
-  prop : (t : Term) → Sort
+  prop : (t : Term-Agda) → Sort-Agda
   -- A Prop of a given concrete level
-  propLit : (n : ℕ) → Sort
+  propLit : (n : ℕ) → Sort-Agda
   -- UUωi of a given concrete level i.
-  inf : (n : ℕ) → Sort
+  inf : (n : ℕ) → Sort-Agda
   -- A hole
-  unknown : Sort
+  unknown : Sort-Agda
 
-data Pattern where
-  con : (c : Name) (ps : list (Arg Pattern)) → Pattern
-  dot : (t : Term) → Pattern
-  var : (x : ℕ) → Pattern
-  lit : (l : Literal) → Pattern
-  proj : (f : Name) → Pattern
+data Pattern-Agda where
+  con : (c : Name-Agda) (ps : list (Argument-Agda Pattern-Agda)) → Pattern-Agda
+  dot : (t : Term-Agda) → Pattern-Agda
+  var : (x : ℕ) → Pattern-Agda
+  lit : (l : Literal-Agda) → Pattern-Agda
+  proj : (f : Name-Agda) → Pattern-Agda
   -- Absurd pattern with a de Bruijn index
-  absurd : (x : ℕ) → Pattern
+  absurd : (x : ℕ) → Pattern-Agda
 
 -- A clause on a pattern matching lambda
-data Clause where
+data Clause-Agda where
   clause :
-    (tel : Telescope) (ps : list (Arg Pattern)) (t : Term) → Clause
+    (tel : Telescope-Agda)
+    (ps : list (Argument-Agda Pattern-Agda))
+    (t : Term-Agda) →
+    Clause-Agda
   absurd-clause :
-    (tel : Telescope) (ps : list (Arg Pattern)) → Clause
+    (tel : Telescope-Agda)
+    (ps : list (Argument-Agda Pattern-Agda)) →
+    Clause-Agda
 ```
 
 <details><summary>Bindings</summary>
 
 ```agda
-{-# BUILTIN AGDATERM Term #-}
-{-# BUILTIN AGDASORT Sort #-}
-{-# BUILTIN AGDAPATTERN Pattern #-}
-{-# BUILTIN AGDACLAUSE Clause #-}
+{-# BUILTIN AGDATERM Term-Agda #-}
+{-# BUILTIN AGDASORT Sort-Agda #-}
+{-# BUILTIN AGDAPATTERN Pattern-Agda #-}
+{-# BUILTIN AGDACLAUSE Clause-Agda #-}
 
 {-# BUILTIN AGDATERMVAR var #-}
 {-# BUILTIN AGDATERMCON con #-}
@@ -137,8 +145,8 @@ data Clause where
 ## Helpers
 
 ```agda
-replicate-hidden-Arg : ℕ → list (Arg Term)
-replicate-hidden-Arg zero-ℕ = nil
-replicate-hidden-Arg (succ-ℕ n) =
-  cons (hidden-Arg (unknown)) (replicate-hidden-Arg n)
+replicate-hidden-Argument-Agda : ℕ → list (Argument-Agda Term-Agda)
+replicate-hidden-Argument-Agda zero-ℕ = nil
+replicate-hidden-Argument-Agda (succ-ℕ n) =
+  cons (hidden-Argument-Agda (unknown)) (replicate-hidden-Argument-Agda n)
 ```

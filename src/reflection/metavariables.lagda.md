@@ -22,29 +22,29 @@ open import primitives.strings
 
 ## Idea
 
-The `Meta` type represents metavariables in Agda.
+The `Metavariable-Agda` type represents metavariables in Agda.
 
 ## Definition
 
 ```agda
 postulate
-  Meta : UU lzero
+  Metavariable-Agda : UU lzero
 
-{-# BUILTIN AGDAMETA Meta #-}
+{-# BUILTIN AGDAMETA Metavariable-Agda #-}
 
 primitive
-  primMetaEquality : Meta → Meta → bool
-  primMetaLess : Meta → Meta → bool
-  primShowMeta : Meta → String
-  primMetaToNat : Meta → ℕ
+  primMetaEquality : Metavariable-Agda → Metavariable-Agda → bool
+  primMetaLess : Metavariable-Agda → Metavariable-Agda → bool
+  primShowMeta : Metavariable-Agda → String
+  primMetaToNat : Metavariable-Agda → ℕ
   primMetaToNatInjective : ∀ a b → primMetaToNat a ＝ primMetaToNat b → a ＝ b
 
-data Blocker : UU lzero where
-  blocker-any : list Blocker → Blocker
-  blocker-all : list Blocker → Blocker
-  blocker-meta : Meta → Blocker
+data Blocker-Agda : UU lzero where
+  blocker-any : list Blocker-Agda → Blocker-Agda
+  blocker-all : list Blocker-Agda → Blocker-Agda
+  blocker-meta : Metavariable-Agda → Blocker-Agda
 
-{-# BUILTIN AGDABLOCKER Blocker #-}
+{-# BUILTIN AGDABLOCKER Blocker-Agda #-}
 {-# BUILTIN AGDABLOCKERANY blocker-any #-}
 {-# BUILTIN AGDABLOCKERALL blocker-all #-}
 {-# BUILTIN AGDABLOCKERMETA blocker-meta #-}

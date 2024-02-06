@@ -28,19 +28,20 @@ open import reflection.terms
 
 ## Idea
 
-The `Definition` type represents a definition in Agda.
+The `Definition-Agda` type represents a definition in Agda.
 
 ## Definition
 
 ```agda
-data Definition : UU lzero where
-  function : (cs : list Clause) → Definition
-  data-type : (pars : ℕ) (cs : list Name) → Definition
-  record-type : (c : Name) (fs : list (Arg Name)) → Definition
-  data-cons : (d : Name) → Definition
-  axiom : Definition
-  prim-fun : Definition
-{-# BUILTIN AGDADEFINITION Definition #-}
+data Definition-Agda : UU lzero where
+  function : (cs : list Clause-Agda) → Definition-Agda
+  data-type : (pars : ℕ) (cs : list Name-Agda) → Definition-Agda
+  record-type :
+    (c : Name-Agda) (fs : list (Argument-Agda Name-Agda)) → Definition-Agda
+  data-cons : (d : Name-Agda) → Definition-Agda
+  axiom : Definition-Agda
+  prim-fun : Definition-Agda
+{-# BUILTIN AGDADEFINITION Definition-Agda #-}
 {-# BUILTIN AGDADEFINITIONFUNDEF function #-}
 {-# BUILTIN AGDADEFINITIONDATADEF data-type #-}
 {-# BUILTIN AGDADEFINITIONRECORDDEF record-type #-}
@@ -61,7 +62,7 @@ _ :
   quoteTerm (succ-ℕ zero-ℕ) ＝
   con
     ( quote succ-ℕ)
-    ( unit-list (visible-Arg (con (quote zero-ℕ) nil)))
+    ( unit-list (visible-Argument-Agda (con (quote zero-ℕ) nil)))
 _ = refl
 
 _ :
@@ -70,8 +71,8 @@ _ :
   def
     ( quote type-trunc-Prop)
     ( cons
-      ( hidden-Arg (var 1 nil))
-      ( unit-list (visible-Arg (var 0 nil))))
+      ( hidden-Argument-Agda (var 1 nil))
+      ( unit-list (visible-Argument-Agda (var 0 nil))))
 _ = refl
 ```
 
@@ -97,13 +98,13 @@ private
       ( quote helper)
       ( cons
         -- ℕ → ℕ
-        ( visible-Arg
+        ( visible-Argument-Agda
           ( pi
-            ( visible-Arg (def (quote ℕ) nil))
+            ( visible-Argument-Agda (def (quote ℕ) nil))
             ( abs "_" (def (quote ℕ) nil))))
         ( unit-list
           -- The pattern matching lambda
-          ( visible-Arg
+          ( visible-Argument-Agda
             ( pat-lam
               ( cons
                 -- zero-ℕ clause
@@ -111,20 +112,21 @@ private
                   -- No telescope
                   ( nil)
                   -- Left side of the first lambda case
-                  ( unit-list (visible-Arg (con (quote zero-ℕ) nil)))
+                  ( unit-list (visible-Argument-Agda (con (quote zero-ℕ) nil)))
                   -- Right side of the first lambda case
                   ( con (quote zero-ℕ) nil))
                 ( unit-list
                   -- succ-ℕ clause
                   ( clause
-                    -- Telescope matching the "x"
-                    ( unit-list ("x" , visible-Arg (def (quote ℕ) nil)))
+                    -- Telescope-Agda matching the "x"
+                    ( unit-list
+                      ( "x" , visible-Argument-Agda (def (quote ℕ) nil)))
                     -- Left side of the second lambda case
                     ( unit-list
-                      ( visible-Arg
+                      ( visible-Argument-Agda
                         ( con
                           ( quote succ-ℕ)
-                          ( unit-list ( visible-Arg (var 0))))))
+                          ( unit-list ( visible-Argument-Agda (var 0))))))
                     -- Right side of the second lambda case
                     ( var 0 nil))))
               ( nil)))))
@@ -135,20 +137,20 @@ private
     def
       ( quote helper)
       ( cons
-        ( visible-Arg
-          ( pi (visible-Arg (def (quote empty) nil))
+        ( visible-Argument-Agda
+          ( pi (visible-Argument-Agda (def (quote empty) nil))
           ( abs "_" (def (quote ℕ) nil))))
         ( unit-list
-          ( visible-Arg
+          ( visible-Argument-Agda
             -- Lambda
             ( pat-lam
               ( unit-list
-                -- Clause
+                -- Clause-Agda
                 ( absurd-clause
                   ( unit-list
-                    ( "()" , visible-Arg (def (quote empty) nil)))
+                    ( "()" , visible-Argument-Agda (def (quote empty) nil)))
                   ( unit-list
-                    ( visible-Arg (absurd 0)))))
+                    ( visible-Argument-Agda (absurd 0)))))
               ( nil)))))
   _ = refl
 ```
@@ -158,18 +160,18 @@ private
 ```agda
 _ : quoteTerm (ℕ → ℕ) ＝
     pi
-      ( visible-Arg (def (quote ℕ) nil))
+      ( visible-Argument-Agda (def (quote ℕ) nil))
       ( abs "_" (def (quote ℕ) nil))
 _ = refl
 
 _ : quoteTerm ((x : ℕ) → is-zero-ℕ x) ＝
     pi
-      ( visible-Arg (def (quote ℕ) nil))
+      ( visible-Argument-Agda (def (quote ℕ) nil))
       ( abs "x"
         ( def
           ( quote is-zero-ℕ)
           ( cons
-            ( visible-Arg (var 0 nil))
+            ( visible-Argument-Agda (var 0 nil))
             ( nil))))
 _ = refl
 ```

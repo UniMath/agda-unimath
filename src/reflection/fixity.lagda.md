@@ -30,32 +30,32 @@ The fixity of a quoted name is given by
 ## Definition
 
 ```agda
-data Associativity : UU lzero where
-  left-associative : Associativity
-  right-associative : Associativity
-  nonassociative : Associativity
+data Associativity-Agda : UU lzero where
+  left-associative : Associativity-Agda
+  right-associative : Associativity-Agda
+  nonassociative : Associativity-Agda
 
-data Precedence : UU lzero where
-  related : Float → Precedence
-  unrelated : Precedence
+data Precedence-Agda : UU lzero where
+  related : Float → Precedence-Agda
+  unrelated : Precedence-Agda
 
-data Fixity : UU lzero where
-  fixity : Associativity → Precedence → Fixity
+data Fixity-Agda : UU lzero where
+  fixity : Associativity-Agda → Precedence-Agda → Fixity-Agda
 
-{-# BUILTIN ASSOC Associativity #-}
+{-# BUILTIN ASSOC Associativity-Agda #-}
 {-# BUILTIN ASSOCLEFT left-associative #-}
 {-# BUILTIN ASSOCRIGHT right-associative #-}
 {-# BUILTIN ASSOCNON nonassociative #-}
 
-{-# BUILTIN PRECEDENCE Precedence #-}
+{-# BUILTIN PRECEDENCE Precedence-Agda #-}
 {-# BUILTIN PRECRELATED related #-}
 {-# BUILTIN PRECUNRELATED unrelated #-}
 
-{-# BUILTIN FIXITY Fixity #-}
+{-# BUILTIN FIXITY Fixity-Agda #-}
 {-# BUILTIN FIXITYFIXITY fixity #-}
 
 primitive
-  primQNameFixity : Name → Fixity
+  primQNameFixity : Name-Agda → Fixity-Agda
 ```
 
 ## Examples

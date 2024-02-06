@@ -43,9 +43,9 @@ the keyword `unquote` to manually unquote an element from `TC unit`.
 ```agda
 data ErrorPart : UU lzero where
   strErr : String → ErrorPart
-  termErr : Term → ErrorPart
-  pattErr : Pattern → ErrorPart
-  nameErr : Name → ErrorPart
+  termErr : Term-Agda → ErrorPart
+  pattErr : Pattern-Agda → ErrorPart
+  nameErr : Name-Agda → ErrorPart
 
 postulate
   -- The type checking monad
@@ -53,31 +53,32 @@ postulate
   returnTC : ∀ {a} {A : UU a} → A → TC A
   bindTC : ∀ {a b} {A : UU a} {B : UU b} → TC A → (A → TC B) → TC B
   -- Tries the unify the first term with the second
-  unify : Term → Term → TC unit
+  unify : Term-Agda → Term-Agda → TC unit
   -- Gives an error
   typeError : ∀ {a} {A : UU a} → list ErrorPart → TC A
   -- Infers the type of a goal
-  inferType : Term → TC Term
-  checkType : Term → Term → TC Term
-  normalise : Term → TC Term
-  reduce : Term → TC Term
+  inferType : Term-Agda → TC Term-Agda
+  checkType : Term-Agda → Term-Agda → TC Term-Agda
+  normalise : Term-Agda → TC Term-Agda
+  reduce : Term-Agda → TC Term-Agda
   -- Tries the first computation, if it fails tries the second
   catchTC : ∀ {a} {A : UU a} → TC A → TC A → TC A
-  quoteTC : ∀ {a} {A : UU a} → A → TC Term
-  unquoteTC : ∀ {a} {A : UU a} → Term → TC A
-  quoteωTC : ∀ {A : UUω} → A → TC Term
-  getContext : TC Telescope
-  extendContext : ∀ {a} {A : UU a} → String → Arg Term → TC A → TC A
-  inContext : ∀ {a} {A : UU a} → Telescope → TC A → TC A
-  freshName : String → TC Name
-  declareDef : Arg Name → Term → TC unit
-  declarePostulate : Arg Name → Term → TC unit
-  defineFun : Name → list Clause → TC unit
-  getType : Name → TC Term
-  getDefinition : Name → TC Definition
-  blockTC : ∀ {a} {A : UU a} → Blocker → TC A
+  quoteTC : ∀ {a} {A : UU a} → A → TC Term-Agda
+  unquoteTC : ∀ {a} {A : UU a} → Term-Agda → TC A
+  quoteωTC : ∀ {A : UUω} → A → TC Term-Agda
+  getContext : TC Telescope-Agda
+  extendContext :
+    ∀ {a} {A : UU a} → String → Argument-Agda Term-Agda → TC A → TC A
+  inContext : ∀ {a} {A : UU a} → Telescope-Agda → TC A → TC A
+  freshName : String → TC Name-Agda
+  declareDef : Argument-Agda Name-Agda → Term-Agda → TC unit
+  declarePostulate : Argument-Agda Name-Agda → Term-Agda → TC unit
+  defineFun : Name-Agda → list Clause-Agda → TC unit
+  getType : Name-Agda → TC Term-Agda
+  getDefinition : Name-Agda → TC Definition-Agda
+  blockTC : ∀ {a} {A : UU a} → Blocker-Agda → TC A
   commitTC : TC unit
-  isMacro : Name → TC bool
+  isMacro : Name-Agda → TC bool
 
   formatErrorParts : list ErrorPart → TC String
 
@@ -101,8 +102,9 @@ postulate
 
   -- White/blacklist specific definitions for reduction while executing the TC computation
   -- 'true' for whitelist, 'false' for blacklist
-  withReduceDefs : ∀ {a} {A : UU a} → (Σ bool λ _ → list Name) → TC A → TC A
-  askReduceDefs : TC (Σ bool λ _ → list Name)
+  withReduceDefs :
+    ∀ {a} {A : UU a} → (Σ bool λ _ → list Name-Agda) → TC A → TC A
+  askReduceDefs : TC (Σ bool λ _ → list Name-Agda)
 
   -- Fail if the given computation gives rise to new, unsolved
   -- "blocking" constraints.
@@ -115,10 +117,10 @@ postulate
 
   -- Get a list of all possible instance candidates for the given meta
   -- variable (it does not have to be an instance meta).
-  getInstances : Meta → TC (list Term)
+  getInstances : Metavariable-Agda → TC (list Term-Agda)
 
-  declareData : Name → ℕ → Term → TC unit
-  defineData : Name → list (Σ Name (λ _ → Term)) → TC unit
+  declareData : Name-Agda → ℕ → Term-Agda → TC unit
+  defineData : Name-Agda → list (Σ Name-Agda (λ _ → Term-Agda)) → TC unit
 ```
 
 <details><summary>Bindings</summary>
@@ -210,7 +212,7 @@ adapted from alhassy's
 
 ```agda
 private
-  numTCM : Term → TC unit
+  numTCM : Term-Agda → TC unit
   numTCM h = unify (quoteTerm 314) h
 
   _ : unquote numTCM ＝ 314
@@ -221,7 +223,7 @@ private
 
 ```agda
   macro
-    numTCM' : Term → TC unit
+    numTCM' : Term-Agda → TC unit
     numTCM' h = unify (quoteTerm 1) h
 
   _ : numTCM' ＝ 1
@@ -232,7 +234,7 @@ private
 
 ```agda
   macro
-    swap-add : Term → Term → TC unit
+    swap-add : Term-Agda → Term-Agda → TC unit
     swap-add (def (quote add-ℕ) (cons a (cons b nil))) hole =
       unify hole (def (quote add-ℕ) (cons b (cons a nil)))
     {-# CATCHALL #-}
@@ -255,14 +257,19 @@ example was addapted from
     infixr 10 _∷_
     pattern _∷_ x xs = cons x xs
 
-  ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))
+  ＝-type-info :
+    Term-Agda →
+    TC
+      ( Argument-Agda Term-Agda ×
+        ( Argument-Agda Term-Agda ×
+          ( Term-Agda × Term-Agda)))
   ＝-type-info
     ( def (quote _＝_) (𝓁 ∷ 𝒯 ∷ (arg _ l) ∷ (arg _ r) ∷ nil)) =
     returnTC (𝓁 , 𝒯 , l , r)
-  ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type."))
+  ＝-type-info _ = typeError (unit-list (strErr "Term-Agda is not a ＝-type."))
 
   macro
-    try-path! : Term → Term → TC unit
+    try-path! : Term-Agda → Term-Agda → TC unit
     try-path! p goal =
       ( unify goal p) <|>
       ( do
@@ -270,7 +277,12 @@ example was addapted from
         𝓁 , 𝒯 , l , r ← ＝-type-info p-type
         unify goal
           ( def (quote inv)
-            ( 𝓁 ∷ 𝒯 ∷ hidden-Arg l ∷ hidden-Arg r ∷ visible-Arg p ∷ nil)))
+            ( 𝓁 ∷
+              𝒯 ∷
+              hidden-Argument-Agda l ∷
+              hidden-Argument-Agda r ∷
+              visible-Argument-Agda p ∷
+              nil)))
 
   module _ (a b : ℕ) (p : a ＝ b) where
     ex3 : Id a b
@@ -283,7 +295,7 @@ example was addapted from
 ### Getting the lhs and rhs of a goal
 
 ```agda
-boundary-TCM : Term → TC (Term × Term)
+boundary-TCM : Term-Agda → TC (Term-Agda × Term-Agda)
 boundary-TCM
   ( def
     ( quote Id)
