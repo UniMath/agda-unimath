@@ -23,35 +23,75 @@ open import foundation-core.torsorial-type-families
 ## Idea
 
 The {{#concept "univalence axiom" Disambiguation="types" Agda=univalence-axiom}}
-characterizes the identity types of universes. It asserts that the map
-`Id A B → A ≃ B` is an equivalence.
+characterizes the [identity types](foundation-core.identity-types.md) of
+universes. It asserts that the map `(A ＝ B) → (A ≃ B)` is an equivalence.
 
 In this file, we define the statement of the axiom. The axiom itself is
 postulated in [`foundation.univalence`](foundation.univalence.md) as
 `univalence`.
 
-## Statement
+Univalence is postulated by stating that the canonical comparison map
+
+```text
+  equiv-eq : A ＝ B → A ≃ B
+```
+
+from identifications between two types to equivalences between them is an
+equivalence. Although we could define `equiv-eq` by pattern matching, due to
+computational considerations, we define it as
+
+```text
+  equiv-eq := equiv-tr (id_𝒰).
+```
+
+It follows from this definition that `equiv-eq refl ≐ id-equiv`, as expected.
+
+## Definitions
+
+### Equalities induce equivalences
 
 ```agda
-equiv-eq : {l : Level} {A B : UU l} → A ＝ B → A ≃ B
-equiv-eq = equiv-tr id
+module _
+  {l : Level}
+  where
 
-compute-equiv-eq-refl :
-  {l : Level} {A : UU l} → equiv-eq (refl {x = A}) ＝ id-equiv
-compute-equiv-eq-refl = refl
+  equiv-eq : {A B : UU l} → A ＝ B → A ≃ B
+  equiv-eq = equiv-tr id
 
-map-eq : {l : Level} {A B : UU l} → A ＝ B → A → B
-map-eq = map-equiv ∘ equiv-eq
+  map-eq : {A B : UU l} → A ＝ B → A → B
+  map-eq = map-equiv ∘ equiv-eq
 
+  compute-equiv-eq-refl :
+    {A : UU l} → equiv-eq (refl {x = A}) ＝ id-equiv
+  compute-equiv-eq-refl = refl
+```
+
+### The statement of the univalence axiom
+
+#### An instance of univalence
+
+```agda
 instance-univalence : {l : Level} (A B : UU l) → UU (lsuc l)
 instance-univalence A B = is-equiv (equiv-eq {A = A} {B = B})
+```
 
+#### Based univalence
+
+```agda
 based-univalence-axiom : {l : Level} (A : UU l) → UU (lsuc l)
 based-univalence-axiom {l} A = (B : UU l) → instance-univalence A B
+```
 
+#### The univalence axiom with respect to a universe level
+
+```agda
 univalence-axiom-Level : (l : Level) → UU (lsuc l)
 univalence-axiom-Level l = (A B : UU l) → instance-univalence A B
+```
 
+#### The univalence axiom
+
+```agda
 univalence-axiom : UUω
 univalence-axiom = {l : Level} → univalence-axiom-Level l
 ```
@@ -80,11 +120,31 @@ abstract
     fundamental-theorem-id c (λ B → equiv-eq)
 ```
 
-### Computing transport
+### The underlying map of `equiv-eq` evaluated at `ap B` is the same as transport in the family `B`
+
+For any type family `B` and identification `p : x ＝ y` in the base, we have a
+commuting diagram
+
+```text
+                 equiv-eq
+    (B x = B y) ---------> (B x ≃ B y)
+         ∧                      |
+         |                      | map-equiv
+  ap B p |                      ∨
+      (x = y) -----------> (B x → B y).
+                  tr B p
+```
 
 ```agda
-compute-equiv-eq-ap :
+module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A}
-  (p : x ＝ y) → map-equiv (equiv-eq (ap B p)) ＝ tr B p
-compute-equiv-eq-ap refl = refl
+  where
+
+  compute-equiv-eq-ap :
+    (p : x ＝ y) → equiv-eq (ap B p) ＝ equiv-tr B p
+  compute-equiv-eq-ap refl = refl
+
+  compute-map-eq-ap :
+    (p : x ＝ y) → map-eq (ap B p) ＝ tr B p
+  compute-map-eq-ap p = ap map-equiv (compute-equiv-eq-ap p)
 ```
