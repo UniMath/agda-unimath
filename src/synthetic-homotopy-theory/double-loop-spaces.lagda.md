@@ -48,7 +48,7 @@ module _
   refl-Ω² = refl
 ```
 
-### Vertical and horizontal concatination operations on double loop
+### Vertical and horizontal concatenation operations on double loop
 
 spaces.
 
@@ -62,7 +62,7 @@ horizontal-concat-Ω² :
 horizontal-concat-Ω² α β = horizontal-concat-Id² α β
 ```
 
-### Unit laws horizontal, vertical concatination, and whiskering
+### Unit laws horizontal, vertical concatenation, and whiskering
 
 ```agda
 module _

@@ -37,12 +37,12 @@ type is often called a _type of 2-paths_.
 
 Since 2-paths are just identifications, they have the usual operations and
 coherences on paths/identifications. In the context of 2-paths, this famliar
-concatination operation is called vertical concatination (see
+concatenation operation is called vertical concatenation (see
 `vertical-concat-Id²` below). However, 2-paths have novel operations and
 coherences derived from the operations and coherences of the boundary 1-paths
-(these are `p` and `q` in the example above). Since concatination of 1-paths is
+(these are `p` and `q` in the example above). Since concatenation of 1-paths is
 a functor, it has an induced action on paths. We call this operation horizontal
-concatination (see `horizontal-concat-Id²` below). It comes with the standard
+concatenation (see `horizontal-concat-Id²` below). It comes with the standard
 coherences of an action on paths function, as well as coherences induced by
 coherences on the boundary 1-paths.
 
@@ -187,7 +187,7 @@ right-unit-law-horizontal-concat-Id² :
 right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
 ```
 
-Horizontal concatination satisfies an additional "2-dimensional" unit law (on
+Horizontal concatenation satisfies an additional "2-dimensional" unit law (on
 both the left and right) induced by the unit laws on the boundary 1-paths.
 
 ```agda
@@ -318,7 +318,7 @@ unit-law-δ-interchange-Id² p refl = refl
 3-paths are identifications of 2-paths. In symbols, a type of 3-paths is a type
 of the form `α ＝ β` where `α β : p ＝ q` and `p q : x ＝ y`.
 
-### Concatination in a type of 3-paths
+### Concatenation in a type of 3-paths
 
 Like with 2-paths, 3-paths have the standard operations on equalties, plus the
 operations induced by the operations on 1-paths. But 3-paths also have
@@ -327,7 +327,7 @@ in triple identity types. We name the three concatenations of triple identity
 types x-, y-, and z-concatenation, after the standard names for the three axis
 in 3-dimensional space.
 
-The x-concatenation operation corresponds the standard concatination of
+The x-concatenation operation corresponds the standard concatenation of
 equalities.
 
 ```agda
@@ -338,7 +338,7 @@ x-concat-Id³ σ τ = vertical-concat-Id² σ τ
 ```
 
 The y-concatenation operation corresponds the operation induced by the
-concatination on 1-paths.
+concatenation on 1-paths.
 
 ```agda
 y-concat-Id³ :
@@ -347,8 +347,8 @@ y-concat-Id³ :
 y-concat-Id³ = horizontal-concat-Id²
 ```
 
-The z-concatenation operation corresponds the concatination induced by the
-horizontal concatination on 2-paths.
+The z-concatenation operation corresponds the concatenation induced by the
+horizontal concatenation on 2-paths.
 
 ```agda
 z-concat-Id³ :
@@ -436,7 +436,7 @@ after the standard names for the quaternions `i`, `j`, and `k`.
 
 ### Concatenation of four paths
 
-#### The standard concatination
+#### The standard concatenation
 
 ```agda
 concat-Id⁴ :
@@ -445,7 +445,7 @@ concat-Id⁴ :
 concat-Id⁴ σ τ = x-concat-Id³ σ τ
 ```
 
-#### Concatination induced by concatination of boundary 1-paths
+#### Concatenation induced by concatenation of boundary 1-paths
 
 ```agda
 i-concat-Id⁴ :
@@ -455,7 +455,7 @@ i-concat-Id⁴ :
 i-concat-Id⁴ σ τ = y-concat-Id³ σ τ
 ```
 
-#### Concatination induced by concatination of boundary 2-paths
+#### Concatenation induced by concatenation of boundary 2-paths
 
 ```agda
 j-concat-Id⁴ :
@@ -465,7 +465,7 @@ j-concat-Id⁴ :
 j-concat-Id⁴ σ τ = z-concat-Id³ σ τ
 ```
 
-#### Concatination induced by concatination of boundary 3-paths
+#### Concatenation induced by concatenation of boundary 3-paths
 
 ```agda
 k-concat-Id⁴ :

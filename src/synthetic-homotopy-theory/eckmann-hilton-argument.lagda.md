@@ -112,8 +112,8 @@ Eckmann-Hilton argument is often depicted as follows:
 | β |      | β | refl-Ω² |      | refl-Ω² | α |       | α |
 ```
 
-The first picture represents the vertical concatination of `α` and `β`. The
-notation ` | γ | δ |` represents the horizontal concatination of 2-dimensional
+The first picture represents the vertical concatenation of `α` and `β`. The
+notation ` | γ | δ |` represents the horizontal concatenation of 2-dimensional
 identifications `γ` and `δ`. Then `| refl | α |` is just
 [`left-whisker-concat refl-Ω² α`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697).
 The first and last equality come from the unit laws of whiskering. And the
