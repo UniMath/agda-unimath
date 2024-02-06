@@ -330,7 +330,7 @@ module _
     eq-equiv-descent-data-circle
       ( descent-data-family-circle l A)
       ( comparison-descent-data-circle l2 (ev-free-loop l (UU l2) A))
-      ( id-equiv , (htpy-eq (inv (compute-equiv-eq-ap (loop-free-loop l)))))
+      ( id-equiv , (htpy-eq (inv (compute-map-eq-ap (loop-free-loop l)))))
 
   is-equiv-descent-data-family-circle-universal-property-circle :
     ( up-circle : universal-property-circle (lsuc l2) l) →
