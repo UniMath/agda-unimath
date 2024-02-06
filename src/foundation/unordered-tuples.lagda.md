@@ -16,6 +16,7 @@ open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -24,7 +25,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.equality-finite-types

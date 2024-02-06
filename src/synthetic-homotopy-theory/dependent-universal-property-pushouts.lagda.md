@@ -227,10 +227,8 @@ module _
           h (right-map-span-diagram 𝒮 s))
         ( cone-dependent-pullback-property-pushout 𝒮 c P))
   triangle-dependent-pullback-property-pushout P h =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-        ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( inv
           ( is-section-eq-htpy
             ( apd h ∘ coherence-square-cocone-span-diagram 𝒮 c))))
@@ -298,7 +296,7 @@ module _
                 ( h' ∘ right-map-span-diagram 𝒮))))
 ```
 
-### The non-dependent and dependent universal property of pushouts are logically equivalent
+### The nondependent and dependent universal property of pushouts are logically equivalent
 
 This follows from the fact that the
 [dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md)

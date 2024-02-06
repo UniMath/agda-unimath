@@ -7,6 +7,7 @@ module structured-types.pointed-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-identifications
@@ -19,7 +20,7 @@ open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types

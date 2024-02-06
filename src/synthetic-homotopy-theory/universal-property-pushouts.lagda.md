@@ -37,7 +37,7 @@ open import foundation.transport-along-identifications
 open import foundation.transposition-span-diagrams
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
@@ -382,10 +382,8 @@ module _
         ( _∘ right-map-span-diagram 𝒮)
         ( cone-pullback-property-pushout 𝒮 c Y))
   triangle-pullback-property-pushout-universal-property-pushout Y h =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-        ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( inv
           ( is-section-eq-htpy
             ( h ·l coherence-square-cocone-span-diagram 𝒮 c))))

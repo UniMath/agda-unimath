@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -137,7 +138,7 @@ module _
 
 ## Properties
 
-### Every non-coherent H-space can be upgraded to a coherent H-space
+### Every noncoherent H-space can be upgraded to a coherent H-space
 
 ```agda
 h-space-Noncoherent-H-Space :
@@ -178,10 +179,9 @@ compute-pointed-section-ev-point-Pointed-Type (pair A a) =
         ( λ H →
           equiv-tot
             ( λ K →
-              ( ( ( equiv-inv (K a) (htpy-eq H a)) ∘e
-                  ( equiv-concat' (K a) (ap-ev a H))) ∘e
-                ( equiv-concat' (K a) right-unit)) ∘e
-              ( equiv-concat' (K a) right-unit)))))) ∘e
+              equiv-inv (K a) (htpy-eq H a) ∘e
+              equiv-concat' (K a) right-unit ∘e
+              equiv-concat' (K a) right-unit))))) ∘e
   ( associative-Σ
     ( A → (A → A))
     ( λ μ → μ a ＝ id)

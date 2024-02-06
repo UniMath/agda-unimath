@@ -16,6 +16,7 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.homotopies-morphisms-arrows
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.universe-levels

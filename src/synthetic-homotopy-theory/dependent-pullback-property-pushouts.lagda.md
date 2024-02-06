@@ -23,7 +23,7 @@ open import foundation.span-diagrams
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.lifts-families-of-elements
 open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements
@@ -113,7 +113,7 @@ Consider a [cocone](synthetic-homotopy-theory.cocones-under-spans.md)
         i
 ```
 
-The non-dependent pullback property follows from the dependent one by applying
+The nondependent pullback property follows from the dependent one by applying
 the dependent pullback property to the constant type family `λ _ → Y`.
 
 ```agda

@@ -28,7 +28,7 @@ open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams

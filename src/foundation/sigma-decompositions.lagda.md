@@ -18,6 +18,7 @@ open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels

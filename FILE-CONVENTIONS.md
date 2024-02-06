@@ -59,10 +59,10 @@ open import ... public
 
 ### Imports block
 
-After the module declaration, include an Agda code block of all non-public
-module imports starting with `<details><summary>Imports</summary>` and ending
-with `</details>`. This block should only contain module imports and there
-should have no further import statements after it. In the rendered markdown, the
+After the module declaration, include an Agda code block of all nonpublic module
+imports starting with `<details><summary>Imports</summary>` and ending with
+`</details>`. This block should only contain module imports and there should
+have no further import statements after it. In the rendered markdown, the
 contents of this block will be hidden by default, but can be revealed by
 clicking on _Imports_.
 

@@ -129,10 +129,8 @@ module _
         cocone-map-flattening-type-family-pushout Y ∘
         ind-Σ)
   triangle-comparison-dependent-cocone-ind-Σ-cocone Y h =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-        ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( eq-htpy
           ( inv-htpy
             ( compute-equiv-htpy-dependent-function-dependent-identification-function-type

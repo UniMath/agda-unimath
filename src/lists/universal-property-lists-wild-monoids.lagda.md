@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies-composition
 
 open import group-theory.homomorphisms-semigroups
 
@@ -75,7 +76,10 @@ unit-law-101-associative-concat-list (cons x l) z =
           ( cons x)
           ( associative-concat-list l nil z)
           ( ap (concat-list l) (left-unit-law-concat-list z)))) ∙
-      ( ap (ap (cons x)) (unit-law-101-associative-concat-list l z))) ∙
+      ( left-whisker-comp²
+        ( cons x)
+        ( unit-law-101-associative-concat-list l)
+        ( z))) ∙
     ( inv
       ( ap-comp (cons x) (concat-list' z) (right-unit-law-concat-list l)))) ∙
   ( ap-comp (concat-list' z) (cons x) (right-unit-law-concat-list l))
@@ -99,7 +103,10 @@ unit-law-110-associative-concat-list (cons a x) y =
         ( cons a)
         ( associative-concat-list x y nil)
         ( ap (concat-list x) (right-unit-law-concat-list y)))) ∙
-    ( ap (ap (cons a)) (unit-law-110-associative-concat-list x y)))
+    ( left-whisker-comp²
+      ( cons a)
+      ( unit-law-110-associative-concat-list x)
+      ( y)))
 
 list-Wild-Monoid : {l : Level} → UU l → Wild-Monoid l
 list-Wild-Monoid X =
@@ -330,6 +337,6 @@ htpy-elim-list-Wild-Monoid {X = X} M g h H =
   γ : Id (pr2 g) (α nil ∙ pr2 h)
   γ =
     ( inv right-unit) ∙
-    ( ( ap (concat (pr2 g) (pr1 (pr2 M))) (inv (left-inv (pr2 h)))) ∙
+    ( ( left-whisker-concat (pr2 g) (inv (left-inv (pr2 h)))) ∙
       ( inv (assoc (pr2 g) (inv (pr2 h)) (pr2 h))))
 ```
