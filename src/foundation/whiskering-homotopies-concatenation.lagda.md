@@ -58,7 +58,7 @@ module _
   where
 
   left-whisker-concat-htpy :
-    left-whiskering-operation ((x : A) → B x) _~_ _∙h_ _~_
+    left-whiskering-operation ((x : A) → B x) (_~_) (_∙h_) (_~_)
   left-whisker-concat-htpy H K x = left-whisker-concat (H x) (K x)
 ```
 
