@@ -143,7 +143,7 @@ vertical-concat-Id² α β = α ∙ β
 horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z} →
   p ＝ q → u ＝ v → (p ∙ u) ＝ (q ∙ v)
-horizontal-concat-Id² α β = ap-binary _∙_ α β
+horizontal-concat-Id² α β = ap-binary (_∙_) α β
 ```
 
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences
@@ -178,13 +178,13 @@ left-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
   horizontal-concat-Id² (refl {x = p}) γ ＝
   left-whisker-concat p γ
-left-unit-law-horizontal-concat-Id² = left-unit-ap-binary _∙_
+left-unit-law-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
 
 right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α (refl {x = u}) ＝
   right-whisker-concat α u
-right-unit-law-horizontal-concat-Id² = right-unit-ap-binary _∙_
+right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
 ```
 
 Horizontal concatination satisfies an additional "2-dimensional" unit law (on
@@ -249,7 +249,7 @@ module _
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy right-inv α)) ∙
       ( horizontal-concat-Id²
-        ( ap-binary-comp-diagonal _∙_ id inv α)
+        ( ap-binary-comp-diagonal (_∙_) id inv α)
         ( refl))) ∙
     ( ap
       ( λ t → horizontal-concat-Id² t (horizontal-inv-Id² α) ∙ right-inv p')
@@ -265,7 +265,7 @@ module _
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy left-inv α)) ∙
       ( horizontal-concat-Id²
-        ( ap-binary-comp-diagonal _∙_ inv id α)
+        ( ap-binary-comp-diagonal (_∙_) inv id α)
         ( refl))) ∙
     ( ap
       ( λ t → (horizontal-concat-Id² (horizontal-inv-Id² α) t) ∙ left-inv p')

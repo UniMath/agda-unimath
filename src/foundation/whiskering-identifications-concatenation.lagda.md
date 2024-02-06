@@ -58,7 +58,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  left-whisker-concat : left-whiskering-operation A _＝_ _∙_ _＝_
+  left-whisker-concat : left-whiskering-operation A (_＝_) (_∙_) (_＝_)
   left-whisker-concat p β = ap (p ∙_) β
 ```
 
@@ -78,7 +78,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  right-whisker-concat : right-whiskering-operation A _＝_ _∙_ _＝_
+  right-whisker-concat : right-whiskering-operation A (_＝_) (_∙_) (_＝_)
   right-whisker-concat α q = ap (_∙ q) α
 ```
 
