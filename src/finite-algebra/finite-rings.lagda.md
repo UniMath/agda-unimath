@@ -10,9 +10,9 @@ module finite-algebra.finite-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-algebra.finite-abelian-groups
-open import finite-algebra.finite-groups
-open import finite-algebra.finite-monoids
+open import finite-group-theory.finite-abelian-groups
+open import finite-group-theory.finite-groups
+open import finite-group-theory.finite-monoids
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences

@@ -85,12 +85,12 @@ module _
       ( λ r →
         is-semisimple-Commutative-Ring-𝔽
           ( l2)
-          ( compute-structure-commutative-ring-𝔽 X r))
+          ( finite-commutative-ring-structure-commutative-ring-𝔽 X r))
 
   compute-structure-semisimple-commutative-ring-𝔽 :
     structure-semisimple-commutative-ring-𝔽 →
     Semisimple-Commutative-Ring-𝔽 l1 l2
   pr1 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) =
-    compute-structure-commutative-ring-𝔽 X p
+    finite-commutative-ring-structure-commutative-ring-𝔽 X p
   pr2 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) = s
 ```

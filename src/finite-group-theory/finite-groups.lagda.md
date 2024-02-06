@@ -9,6 +9,7 @@ module finite-group-theory.finite-groups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.finite-monoids
 open import finite-group-theory.finite-semigroups
 
 open import foundation.binary-embeddings
@@ -30,6 +31,7 @@ open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import group-theory.commuting-elements-groups
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -43,6 +45,7 @@ open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
@@ -54,17 +57,37 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A finite group is a group of which the underlying type is finite.
+An {{#concept "(abstract) finite group" Agda=Group-𝔽}} is a finite group in the
+usual algebraic sense, i.e., it consists of a
+[finite type](univalent-combinatorics.finite-types.md)
+[equipped](foundation.structure.md) with a unit element `e`, a binary operation
+`x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the
+[group](group-theory.groups.md) laws
+
+```text
+  (xy)z = x(yz)      (associativity)
+     ex = x          (left unit law)
+     xe = x          (right unit law)
+   x⁻¹x = e          (left inverse law)
+   xx⁻¹ = e          (right inverse law)
+```
 
 ## Definitions
+
+### The condition that a finite semigroup is a finite group
+
+```agda
+is-group-𝔽 :
+  {l : Level} (G : Semigroup-𝔽 l) → UU l
+is-group-𝔽 G = is-group (semigroup-Semigroup-𝔽 G)
+```
 
 ### The type of finite groups
 
 ```agda
 Group-𝔽 :
   (l : Level) → UU (lsuc l)
-Group-𝔽 l =
-  Σ (Semigroup-𝔽 l) (λ G → is-group (semigroup-Semigroup-𝔽 G))
+Group-𝔽 l = Σ (Semigroup-𝔽 l) (is-group-𝔽)
 
 module _
   {l : Level} (G : Group-𝔽 l)
@@ -282,6 +305,22 @@ module _
   inv-inv-Group-𝔽 :
     (x : type-Group-𝔽) → inv-Group-𝔽 (inv-Group-𝔽 x) ＝ x
   inv-inv-Group-𝔽 = inv-inv-Group group-Group-𝔽
+
+finite-group-is-finite-Group :
+  {l : Level} → (G : Group l) → is-finite (type-Group G) → Group-𝔽 l
+pr1 (finite-group-is-finite-Group G f) =
+  finite-semigroup-is-finite-Semigroup (semigroup-Group G) f
+pr2 (finite-group-is-finite-Group G f) = is-group-Group G
+
+module _
+  {l : Level} (G : Group-𝔽 l)
+  where
+  commute-Group-𝔽 : type-Group-𝔽 G → type-Group-𝔽 G → UU l
+  commute-Group-𝔽 = commute-Group (group-Group-𝔽 G)
+
+  finite-monoid-Group-𝔽 : Monoid-𝔽 l
+  pr1 finite-monoid-Group-𝔽 = finite-semigroup-Group-𝔽 G
+  pr2 finite-monoid-Group-𝔽 = is-unital-Group-𝔽 G
 ```
 
 ### Groups of fixed finite order
@@ -373,4 +412,44 @@ mere-equiv-number-of-groups-of-order :
 mere-equiv-number-of-groups-of-order n =
   mere-equiv-number-of-connected-components
     ( is-π-finite-Group-of-Order {lzero} zero-ℕ n)
+```
+
+### There is a finite number of ways to equip a finite type with a structure of group
+
+```agda
+module _
+  {l : Level}
+  (X : 𝔽 l)
+  where
+
+  structure-group-𝔽 : UU l
+  structure-group-𝔽 =
+    Σ (structure-semigroup-𝔽 X) (λ s → is-group-𝔽 (X , s))
+
+  finite-group-structure-group-𝔽 :
+    structure-group-𝔽 → Group-𝔽 l
+  pr1 (finite-group-structure-group-𝔽 (s , g)) = (X , s)
+  pr2 (finite-group-structure-group-𝔽 (s , g)) = g
+
+  is-finite-structure-group-𝔽 :
+    is-finite (structure-group-𝔽)
+  is-finite-structure-group-𝔽 =
+    is-finite-Σ
+      ( is-finite-structure-semigroup-𝔽 X)
+      ( λ s →
+        is-finite-Σ
+          ( is-finite-is-unital-Semigroup-𝔽 (X , s))
+          ( λ u →
+            is-finite-Σ
+              ( is-finite-Π
+                ( is-finite-type-𝔽 X)
+                ( λ _ → is-finite-type-𝔽 X))
+              ( λ i →
+                is-finite-product
+                  ( is-finite-Π
+                    ( is-finite-type-𝔽 X)
+                    ( λ x → is-finite-eq-𝔽 X))
+                  ( is-finite-Π
+                    ( is-finite-type-𝔽 X)
+                    ( λ x → is-finite-eq-𝔽 X)))))
 ```
