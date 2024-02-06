@@ -70,12 +70,12 @@ count-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e f =
   count-equiv
     ( ( equiv-Σ-equiv-base B e) ∘e
       ( ( inv-equiv
-          ( right-distributive-Σ-coprod (Fin k) unit (B ∘ map-equiv e))) ∘e
-        ( equiv-coprod
+          ( right-distributive-Σ-coproduct (Fin k) unit (B ∘ map-equiv e))) ∘e
+        ( equiv-coproduct
           ( id-equiv)
           ( inv-equiv
             ( left-unit-law-Σ (B ∘ (map-equiv e ∘ inr)))))))
-    ( count-coprod
+    ( count-coproduct
       ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star))))
 
@@ -104,7 +104,7 @@ abstract
       ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x))))
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
-    ( number-of-elements-count-coprod
+    ( number-of-elements-count-coproduct
       ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star)))) ∙
     ( ap
@@ -199,11 +199,11 @@ count-base-count-Σ' {l1} {l2} {A} {B} e f g =
   count-base-count-Σ
     ( section-count-base-count-Σ' e f g)
     ( count-equiv'
-      ( left-distributive-Σ-coprod A B
+      ( left-distributive-Σ-coproduct A B
         ( λ x → is-zero-ℕ (number-of-elements-count (f x))))
-      ( count-coprod e g))
+      ( count-coproduct e g))
     ( λ x →
-      count-coprod
+      count-coproduct
         ( f x)
         ( count-eq has-decidable-equality-ℕ
           ( number-of-elements-count (f x))

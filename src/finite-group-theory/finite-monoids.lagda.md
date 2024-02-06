@@ -65,7 +65,7 @@ is-finite-is-unital-Semigroup {l} n X =
         ( is-decidable-Σ-count
           ( pair n e)
           ( λ u →
-            is-decidable-prod
+            is-decidable-product
               ( is-decidable-Π-count
                 ( pair n e)
                 ( λ x →

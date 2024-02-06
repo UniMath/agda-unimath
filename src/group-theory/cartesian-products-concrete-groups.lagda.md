@@ -56,7 +56,7 @@ module _
       ( equiv-type-∞-Group-product-∞-Group
           ( ∞-group-Concrete-Group G)
           ( ∞-group-Concrete-Group R))
-      ( is-set-prod
+      ( is-set-product
           ( is-set-type-Concrete-Group G)
           ( is-set-type-Concrete-Group R))
 

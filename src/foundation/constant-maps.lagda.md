@@ -63,7 +63,7 @@ module _
   where
 
   compute-fiber-point : (x y : A) → fiber (point x) y ≃ (x ＝ y)
-  compute-fiber-point x y = left-unit-law-prod
+  compute-fiber-point x y = left-unit-law-product
 
   abstract
     is-trunc-map-point-is-trunc :

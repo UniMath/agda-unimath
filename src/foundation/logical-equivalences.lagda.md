@@ -69,7 +69,7 @@ module _
 
   is-prop-iff-Prop : is-prop type-iff-Prop
   is-prop-iff-Prop =
-    is-prop-prod
+    is-prop-product
       ( is-prop-function-type (is-prop-type-Prop Q))
       ( is-prop-function-type (is-prop-type-Prop P))
 
@@ -119,7 +119,7 @@ module _
     ( backward-implication f ~ backward-implication g)
 
   ext-iff : (f g : A ↔ B) → (f ＝ g) ≃ htpy-iff f g
-  ext-iff f g = equiv-prod equiv-funext equiv-funext ∘e equiv-pair-eq f g
+  ext-iff f g = equiv-product equiv-funext equiv-funext ∘e equiv-pair-eq f g
 
   refl-htpy-iff : (f : A ↔ B) → htpy-iff f f
   pr1 (refl-htpy-iff f) = refl-htpy

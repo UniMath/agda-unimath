@@ -508,13 +508,13 @@ equiv-Surjection-Into-Set-Decidable-equivalence-relation {l1} A =
       ( λ z → (A ↠ z) × has-decidable-equality z)
       ( id-equiv)
       ( λ X →
-        ( equiv-prod
+        ( equiv-product
           ( id-equiv)
           ( inv-equiv
               ( equiv-add-redundant-prop
                 ( is-prop-is-set ( X))
                 ( is-set-has-decidable-equality)) ∘e
-            commutative-prod) ∘e
+            commutative-product) ∘e
         ( equiv-left-swap-Σ)))) ∘e
     ( ( associative-Σ
         ( UU l1)

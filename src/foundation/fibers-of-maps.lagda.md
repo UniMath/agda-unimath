@@ -50,7 +50,7 @@ module _
     is-pullback-cone-fiber : is-pullback f (point b) cone-fiber
     is-pullback-cone-fiber =
       is-equiv-tot-is-fiberwise-equiv
-        ( λ a → is-equiv-map-inv-left-unit-law-prod)
+        ( λ a → is-equiv-map-inv-left-unit-law-product)
 
   abstract
     universal-property-pullback-cone-fiber :

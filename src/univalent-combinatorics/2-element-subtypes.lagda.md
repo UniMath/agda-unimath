@@ -106,7 +106,7 @@ module _
   is-prop-type-prop-standard-2-Element-Subtype :
     (z : type-Set X) → is-prop (type-prop-standard-2-Element-Subtype z)
   is-prop-type-prop-standard-2-Element-Subtype z =
-    is-prop-coprod
+    is-prop-coproduct
       ( λ p q → np (p ∙ inv q))
       ( is-set-type-Set X x z)
       ( is-set-type-Set X y z)
@@ -125,8 +125,8 @@ module _
     Fin 2 ≃ type-standard-2-Element-Subtype
   equiv-type-standard-2-Element-Subtype =
     ( inv-equiv
-      ( left-distributive-Σ-coprod (type-Set X) (Id x) (Id y))) ∘e
-    ( equiv-coprod
+      ( left-distributive-Σ-coproduct (type-Set X) (Id x) (Id y))) ∘e
+    ( equiv-coproduct
       ( equiv-is-contr
         ( is-contr-Fin-one-ℕ)
         ( is-torsorial-Id x))

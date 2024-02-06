@@ -248,19 +248,19 @@ module _
   (f' : A' → X') (g' : B' → X') (c' : cone f' g' C')
   where
 
-  up-pullback-prod :
+  up-pullback-product :
     universal-property-pullback f g c →
     universal-property-pullback f' g' c' →
     universal-property-pullback
-      ( map-prod f f')
-      ( map-prod g g')
-      ( prod-cone f g f' g' c c')
-  up-pullback-prod H H' =
+      ( map-product f f')
+      ( map-product g g')
+      ( product-cone f g f' g' c c')
+  up-pullback-product H H' =
     universal-property-pullback-is-pullback
-      ( map-prod f f')
-      ( map-prod g g')
-      ( prod-cone f g f' g' c c')
-      ( is-pullback-prod-is-pullback-pair f g f' g' c c'
+      ( map-product f f')
+      ( map-product g g')
+      ( product-cone f g f' g' c c')
+      ( is-pullback-product-is-pullback-pair f g f' g' c c'
         ( is-pullback-universal-property-pullback f g c H)
         ( is-pullback-universal-property-pullback f' g' c' H'))
 ```

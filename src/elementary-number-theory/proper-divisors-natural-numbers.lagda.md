@@ -41,7 +41,7 @@ is-proper-divisor-ℕ n d = (d ≠ n) × (div-ℕ d n)
 is-decidable-is-proper-divisor-ℕ :
   (n d : ℕ) → is-decidable (is-proper-divisor-ℕ n d)
 is-decidable-is-proper-divisor-ℕ n d =
-  is-decidable-prod
+  is-decidable-product
     ( is-decidable-neg (has-decidable-equality-ℕ d n))
     ( is-decidable-div-ℕ d n)
 
@@ -64,7 +64,7 @@ is-prop-is-proper-divisor-ℕ : (n d : ℕ) → is-prop (is-proper-divisor-ℕ n
 is-prop-is-proper-divisor-ℕ n zero-ℕ (pair f g) =
   ex-falso (f (inv (is-zero-div-zero-ℕ n g)))
 is-prop-is-proper-divisor-ℕ n (succ-ℕ d) =
-  is-prop-prod is-prop-neg (is-prop-div-ℕ (succ-ℕ d) n (is-nonzero-succ-ℕ d))
+  is-prop-product is-prop-neg (is-prop-div-ℕ (succ-ℕ d) n (is-nonzero-succ-ℕ d))
 ```
 
 ### If a natural number has a proper divisor, then `1` is a proper divisor
@@ -86,7 +86,7 @@ le-one-quotient-div-is-proper-divisor-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
   d ≠ x → le-ℕ 1 (quotient-div-ℕ d x H)
 le-one-quotient-div-is-proper-divisor-ℕ d x f H g =
-  map-left-unit-law-coprod-is-empty
+  map-left-unit-law-coproduct-is-empty
     ( is-one-ℕ (quotient-div-ℕ d x H))
     ( le-ℕ 1 (quotient-div-ℕ d x H))
     ( map-neg (eq-is-one-quotient-div-ℕ d x H) g)

@@ -55,7 +55,7 @@ module _
 
   is-precategory-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
   is-precategory-prop-composition-operation-binary-family-Set =
-    prod-Prop
+    product-Prop
       ( is-unital-prop-composition-operation-binary-family-Set hom-set comp-hom)
       ( is-associative-prop-composition-operation-binary-family-Set
         ( hom-set)

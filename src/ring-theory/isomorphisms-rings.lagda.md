@@ -451,7 +451,7 @@ module _
         ( hom-Ab (ab-Ring R) (ab-Ring S))
         ( is-iso-Ab (ab-Ring R) (ab-Ring S))
         ( λ f → is-ring-homomorphism-hom-Ab R S (pr1 f)))) ∘e
-    ( equiv-tot (λ f → commutative-prod)) ∘e
+    ( equiv-tot (λ f → commutative-product)) ∘e
     ( associative-Σ
       ( hom-Ab (ab-Ring R) (ab-Ring S))
       ( is-ring-homomorphism-hom-Ab R S)
@@ -493,14 +493,14 @@ module _
               ( is-torsorial-Eq-subtype
                 ( is-torsorial-Id (one-Ring R))
                 ( λ x →
-                  is-prop-prod
+                  is-prop-product
                     ( is-prop-Π (λ y → is-set-type-Ring R (mul-Ring R x y) y))
                     ( is-prop-Π (λ y → is-set-type-Ring R (mul-Ring R y x) y)))
                 ( one-Ring R)
                 ( refl)
                 ( left-unit-law-mul-Ring R , right-unit-law-mul-Ring R))
               ( λ u →
-                is-prop-prod
+                is-prop-product
                   ( is-prop-iterated-Π 3
                     ( λ x y z →
                       is-set-type-Ring R

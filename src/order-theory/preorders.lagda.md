@@ -66,7 +66,7 @@ module _
 
   le-Preorder-Prop : Relation-Prop (l1 ⊔ l2) type-Preorder
   le-Preorder-Prop x y =
-    prod-Prop (x ≠ y , is-prop-neg) (leq-Preorder-Prop x y)
+    product-Prop (x ≠ y , is-prop-neg) (leq-Preorder-Prop x y)
 
   le-Preorder : Relation (l1 ⊔ l2) type-Preorder
   le-Preorder x y = type-Prop (le-Preorder-Prop x y)

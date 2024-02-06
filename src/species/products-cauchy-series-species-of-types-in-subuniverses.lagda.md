@@ -78,7 +78,7 @@ module _
       ≃
     product-cauchy-series-species-subuniverse P Q S T X
   equiv-product-cauchy-series-Σ-extension-species-subuniverse =
-    equiv-prod
+    equiv-product
           ( inv-equiv
             ( equiv-cauchy-series-Σ-extension-species-subuniverse
                 ( P)

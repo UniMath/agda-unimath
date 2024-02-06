@@ -42,7 +42,7 @@ module _
 
   is-wide-function-class-Prop : Prop (lsuc l1 ⊔ l2)
   is-wide-function-class-Prop =
-    prod-Prop
+    product-Prop
       ( has-equivalences-function-class-Prop P)
       ( is-closed-under-composition-function-class-Prop P)
 

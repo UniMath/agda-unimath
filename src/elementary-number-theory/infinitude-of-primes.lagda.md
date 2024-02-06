@@ -114,7 +114,7 @@ is-one-is-proper-divisor-larger-prime-ℕ :
 is-one-is-proper-divisor-larger-prime-ℕ n H x (pair f K) =
   is-one-is-divisor-below-larger-prime-ℕ n x
     ( leq-not-le-ℕ n x
-      ( is-empty-left-factor-is-empty-prod
+      ( is-empty-left-factor-is-empty-product
         ( not-in-sieve-of-eratosthenes-is-proper-divisor-larger-prime-ℕ n x
           ( pair f K))
         ( λ y l d →

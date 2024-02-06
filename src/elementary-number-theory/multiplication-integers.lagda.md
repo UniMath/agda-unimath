@@ -446,7 +446,7 @@ is-injective-left-mul-ℤ :
   (x : ℤ) → is-nonzero-ℤ x → is-injective (x *ℤ_)
 is-injective-left-mul-ℤ x f {y} {z} p =
   eq-diff-ℤ
-    ( map-left-unit-law-coprod-is-empty
+    ( map-left-unit-law-coproduct-is-empty
       ( is-zero-ℤ x)
       ( is-zero-ℤ (y -ℤ z))
       ( f)

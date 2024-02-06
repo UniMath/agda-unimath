@@ -96,7 +96,7 @@ monad-Precategory l C =
                         ( mu)
                         ( T)))
                   ( λ _ →
-                    prod
+                    product
                       ( comp-natural-transformation-Precategory
                           ( C)
                           ( C)

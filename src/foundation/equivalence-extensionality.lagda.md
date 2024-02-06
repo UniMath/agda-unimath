@@ -55,7 +55,7 @@ module _
     pr1 (is-equiv-Prop f) = is-equiv f
     pr2 (is-equiv-Prop f) H =
       is-prop-is-contr
-        ( is-contr-prod
+        ( is-contr-product
           ( is-contr-equiv'
             ( (b : B) → fiber f b)
             ( distributive-Π-Σ)

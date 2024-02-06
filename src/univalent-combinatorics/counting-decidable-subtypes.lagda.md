@@ -58,7 +58,7 @@ abstract
     count-equiv
       ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))
       ( count-equiv'
-        ( right-distributive-Σ-coprod
+        ( right-distributive-Σ-coproduct
           ( Fin k)
           ( unit)
           ( λ x → is-in-decidable-subtype P (map-equiv e x)))
@@ -69,7 +69,7 @@ abstract
                 ( λ x → P (map-equiv e (inl x)))
                 ( k)
                 ( id-equiv))))
-          ( equiv-coprod
+          ( equiv-coproduct
             ( equiv-count
               ( count-decidable-subtype'
                 ( λ x → P (map-equiv e (inl x)))
@@ -88,12 +88,12 @@ abstract
     count-equiv
       ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))
       ( count-equiv'
-        ( right-distributive-Σ-coprod
+        ( right-distributive-Σ-coproduct
           ( Fin k)
           ( unit)
           ( λ x → is-in-decidable-subtype P (map-equiv e x)))
         ( count-equiv'
-          ( right-unit-law-coprod-is-empty
+          ( right-unit-law-coproduct-is-empty
             ( Σ ( Fin k)
                 ( λ x → is-in-decidable-subtype P (map-equiv e (inl x))))
             ( Σ ( unit)

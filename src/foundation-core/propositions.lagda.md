@@ -205,14 +205,15 @@ pr2 (Σ-Prop P Q) =
 
 ```agda
 abstract
-  is-prop-prod :
+  is-prop-product :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop A → is-prop B → is-prop (A × B)
-  is-prop-prod H K = is-prop-Σ H (λ x → K)
+  is-prop-product H K = is-prop-Σ H (λ x → K)
 
-prod-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (prod-Prop P Q) = type-Prop P × type-Prop Q
-pr2 (prod-Prop P Q) = is-prop-prod (is-prop-type-Prop P) (is-prop-type-Prop Q)
+product-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
+pr1 (product-Prop P Q) = type-Prop P × type-Prop Q
+pr2 (product-Prop P Q) =
+  is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```
 
 ### Products of families of propositions are propositions
@@ -332,7 +333,7 @@ module _
     is-prop-Σ
       ( is-prop-function-type K)
       ( λ f →
-        is-prop-prod
+        is-prop-product
           ( is-prop-Σ
             ( is-prop-function-type H)
             ( λ g → is-prop-is-contr (is-contr-Π (λ y → K (f (g y)) y))))

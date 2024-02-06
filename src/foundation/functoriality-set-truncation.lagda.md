@@ -87,7 +87,7 @@ module _
   binary-map-trunc-Set x y =
     map-trunc-Set
       ( λ (x' , y') → f x' y')
-      ( map-inv-equiv-distributive-trunc-prod-Set A B (x , y))
+      ( map-inv-equiv-distributive-trunc-product-Set A B (x , y))
 ```
 
 ## Properties

@@ -157,10 +157,10 @@ abstract
               ( is-prop-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
         ( inv-equiv
-          ( left-distributive-Σ-coprod A
+          ( left-distributive-Σ-coproduct A
             ( λ x → type-trunc-Prop (B x))
             ( λ x → is-empty (B x)))))
-      ( is-finite-coprod
+      ( is-finite-coproduct
         ( is-finite-base-is-finite-Σ-merely-inhabited
           ( is-set-type-subtype (λ x → trunc-Prop _) K)
           ( λ t → pr2 t)

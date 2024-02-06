@@ -43,7 +43,7 @@ module _
 
   is-embedding-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-embedding-prop-map-Precategory =
-    prod-Prop
+    product-Prop
       ( is-functor-prop-map-Precategory C D F)
       ( is-embedding-map-prop-map-Precategory C D F)
 

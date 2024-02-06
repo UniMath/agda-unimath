@@ -60,7 +60,7 @@ module _
   extensionality-is-inverse :
     {s t : is-inverse f g} → (s ＝ t) ≃ htpy-is-inverse s t
   extensionality-is-inverse {s} {t} =
-    equiv-prod equiv-funext equiv-funext ∘e equiv-pair-eq s t
+    equiv-product equiv-funext equiv-funext ∘e equiv-pair-eq s t
 
   htpy-eq-is-inverse : {s t : is-inverse f g} → s ＝ t → htpy-is-inverse s t
   htpy-eq-is-inverse = map-equiv extensionality-is-inverse
@@ -212,7 +212,7 @@ module _
     is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) B →
     is-trunc k (is-inverse f g)
   is-trunc-is-inverse f g is-trunc-A is-trunc-B =
-    is-trunc-prod k
+    is-trunc-product k
       ( is-trunc-Π k (λ x → is-trunc-B (f (g x)) x))
       ( is-trunc-Π k (λ x → is-trunc-A (g (f x)) x))
 
