@@ -23,7 +23,7 @@ open import foundation-core.homotopies
 Consider a homotopy `H : f ~ g` and a homotopy `K : I ~ J` between two
 homotopies `I J : g ~ f`. The
 {{#concept "left whiskering" Disambiguation="homotopies with respect to concatenation" Agda=left-whisker-concat-htpy}}
-of `H` and `K` is a homotopy `H ∙ I ~ H ∙ J`. In other words, left whiskering of
+of `H` and `K` is a homotopy `H ∙h I ~ H ∙h J`. In other words, left whiskering of
 homotopies with respect to concatenation is a
 [whiskering operation](foundation.whiskering-operations.md)
 
