@@ -315,6 +315,7 @@ pr2 (finite-group-is-finite-Group G f) = is-group-Group G
 module _
   {l : Level} (G : Group-𝔽 l)
   where
+
   commute-Group-𝔽 : type-Group-𝔽 G → type-Group-𝔽 G → UU l
   commute-Group-𝔽 = commute-Group (group-Group-𝔽 G)
 
