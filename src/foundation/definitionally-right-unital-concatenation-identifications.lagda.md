@@ -43,7 +43,7 @@ where the second case may be preferred. Hence why we in this file consider the
 
 This definition is for instance used with the
 [strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
-to construct a strictly left unital concatenation operation.
+to construct a judgmentally left unital concatenation operation.
 
 ## Definition
 

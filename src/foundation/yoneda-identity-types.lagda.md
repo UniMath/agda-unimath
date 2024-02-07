@@ -526,6 +526,16 @@ module _
 
 ### Concatenation of yoneda identifications
 
+The concatenation operation on yoneda identifications is defined by function
+composition
+
+```text
+  f ∙ʸ g := z p ↦ g z (f z p)
+```
+
+and is thus strictly associative and two-sided unital (since the reflexivities
+are given by the identity functions).
+
 ```agda
 module _
   {l : Level} {A : UU l}

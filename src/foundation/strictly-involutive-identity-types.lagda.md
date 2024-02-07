@@ -291,20 +291,20 @@ other satisfies a strict right unit law. In both cases, we must use the
 [definitionally right unital concatenation operation on standard identifications](foundation.definitionally-right-unital-concatenation-identifications.md)
 `_∙ᵣ_`, to obtain this strict one-sided unit law.
 
-The strictly left unital concatenation operation is defined by
+The judgmentally left unital concatenation operation is defined by
 
 ```text
   (w , p , q) ∙ⁱ (w' , p' , q') := (w' , p' , (q' ∙ᵣ inv p) ∙ᵣ q),
 ```
 
-and the right unital concatenation operation is defined by
+and the judgmentally right unital concatenation operation is defined by
 
 ```text
   (w , p , q) ∙ᵣⁱ (w' , p' , q') = (w , (p ∙ᵣ inv q') ∙ᵣ p' , q).
 ```
 
-The following computation verifies that the strictly left unital concatenation
-operation is indeed strictly left unital:
+The following computation verifies that the judgmentally left unital
+concatenation operation is indeed judgmentally left unital:
 
 ```text
   reflⁱ ∙ⁱ r
@@ -317,10 +317,10 @@ operation is indeed strictly left unital:
 ```
 
 To be consistent with the convention for the standard identity types, we take
-the strictly left unital concatenation operation to be the default concatenation
-operation on strictly involutive identity types.
+the judgmentally left unital concatenation operation to be the default
+concatenation operation on strictly involutive identity types.
 
-#### The strictly left unital concatenation operation
+#### The judgmentally left unital concatenation operation
 
 ```agda
 module _
@@ -358,7 +358,7 @@ module _
     ( assoc (inv q ∙ p) (inv q') p')
 ```
 
-#### The strictly right unital concatenation operation
+#### The judgmentally right unital concatenation operation
 
 ```agda
 module _
@@ -402,7 +402,7 @@ The general proof-strategy is to induct on the necessary identifications to make
 the left endpoints judgmentally equal, and then proceed by reasoning with the
 groupoid-laws of the underlying identity types.
 
-#### The groupoidal laws for the strictly left unital concatenation operation
+#### The groupoidal laws for the judgmentally left unital concatenation operation
 
 ```agda
 module _
@@ -448,7 +448,7 @@ module _
     eq-pair-eq-fiber (eq-pair (left-unit-concatr) (inv left-unit-concatr))
 ```
 
-#### The groupoidal laws for the strictly right unital concatenation operation
+#### The groupoidal laws for the judgmentally right unital concatenation operation
 
 ```agda
 module _
