@@ -34,20 +34,25 @@ The `Definition-Agda` type represents a definition in Agda.
 
 ```agda
 data Definition-Agda : UU lzero where
-  function : (cs : list Clause-Agda) → Definition-Agda
-  data-type : (pars : ℕ) (cs : list Name-Agda) → Definition-Agda
-  record-type :
-    (c : Name-Agda) (fs : list (Argument-Agda Name-Agda)) → Definition-Agda
-  data-cons : (d : Name-Agda) → Definition-Agda
-  axiom : Definition-Agda
-  prim-fun : Definition-Agda
+  function-Definition-Agda : list Clause-Agda → Definition-Agda
+  data-type-Definition-Agda : ℕ → list Name-Agda → Definition-Agda
+  record-type-Definition-Agda :
+    Name-Agda → list (Argument-Agda Name-Agda) → Definition-Agda
+  data-constructor-Definition-Agda : Name-Agda → Definition-Agda
+  postulate-Definition-Agda : Definition-Agda
+  primitive-function-Definition-Agda : Definition-Agda
+```
+
+## Bindings
+
+```agda
 {-# BUILTIN AGDADEFINITION Definition-Agda #-}
-{-# BUILTIN AGDADEFINITIONFUNDEF function #-}
-{-# BUILTIN AGDADEFINITIONDATADEF data-type #-}
-{-# BUILTIN AGDADEFINITIONRECORDDEF record-type #-}
-{-# BUILTIN AGDADEFINITIONDATACONSTRUCTOR data-cons #-}
-{-# BUILTIN AGDADEFINITIONPOSTULATE axiom #-}
-{-# BUILTIN AGDADEFINITIONPRIMITIVE prim-fun #-}
+{-# BUILTIN AGDADEFINITIONFUNDEF function-Definition-Agda #-}
+{-# BUILTIN AGDADEFINITIONDATADEF data-type-Definition-Agda #-}
+{-# BUILTIN AGDADEFINITIONRECORDDEF record-type-Definition-Agda #-}
+{-# BUILTIN AGDADEFINITIONDATACONSTRUCTOR data-constructor-Definition-Agda #-}
+{-# BUILTIN AGDADEFINITIONPOSTULATE postulate-Definition-Agda #-}
+{-# BUILTIN AGDADEFINITIONPRIMITIVE primitive-function-Definition-Agda #-}
 ```
 
 ## Examples
