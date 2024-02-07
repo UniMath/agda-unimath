@@ -379,7 +379,7 @@ module _
   eq-concat-concatr-involutive-Id :
     {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) → p ∙ᵣⁱ q ＝ p ∙ⁱ q
   eq-concat-concatr-involutive-Id (w , refl , q) (w' , p' , refl) =
-    eq-pair-eq-pr2 (eq-pair (left-unit-concatr) (inv left-unit-concatr))
+    eq-pair-eq-fiber (eq-pair (left-unit-concatr) (inv left-unit-concatr))
 
   preserves-concatr-involutive-eq-eq :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
@@ -414,8 +414,8 @@ module _
     (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
     ((p ∙ⁱ q) ∙ⁱ r) ＝ (p ∙ⁱ (q ∙ⁱ r))
   assoc-involutive-Id (_ , p , q) (_ , p' , q') (_ , p'' , q'') =
-    eq-pair-eq-pr2
-      ( eq-pair-eq-pr2
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( ( inv (assoc-concatr (q'' ∙ᵣ inv p') (q' ∙ᵣ inv p) q)) ∙
           ( ap (_∙ᵣ q) (inv (assoc-concatr (q'' ∙ᵣ inv p') q' (inv p))))))
 
@@ -430,23 +430,23 @@ module _
   right-unit-involutive-Id :
     {p : x ＝ⁱ y} → p ∙ⁱ refl-involutive-Id ＝ p
   right-unit-involutive-Id {p = .y , refl , q} =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 left-unit-concatr)
+    eq-pair-eq-fiber (eq-pair-eq-fiber left-unit-concatr)
 
   left-inv-involutive-Id :
     (p : x ＝ⁱ y) → inv-involutive-Id p ∙ⁱ p ＝ refl-involutive-Id
   left-inv-involutive-Id (.y , refl , q) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-concatr q))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-concatr q))
 
   right-inv-involutive-Id :
     (p : x ＝ⁱ y) → p ∙ⁱ inv-involutive-Id p ＝ refl-involutive-Id
   right-inv-involutive-Id (.x , p , refl) =
-    eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-concatr p))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-concatr p))
 
   distributive-inv-concat-involutive-Id :
     (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
     inv-involutive-Id (p ∙ⁱ q) ＝ inv-involutive-Id q ∙ⁱ inv-involutive-Id p
   distributive-inv-concat-involutive-Id (.y , refl , q') (.y , p' , refl) =
-    eq-pair-eq-pr2 (eq-pair (left-unit-concatr) (inv left-unit-concatr))
+    eq-pair-eq-fiber (eq-pair (left-unit-concatr) (inv left-unit-concatr))
 ```
 
 #### The groupoidal laws for the judgmentally right unital concatenation operation
@@ -460,7 +460,7 @@ module _
     (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
     ((p ∙ᵣⁱ q) ∙ᵣⁱ r) ＝ (p ∙ᵣⁱ (q ∙ᵣⁱ r))
   assoc-concatr-involutive-Id (_ , p , q) (_ , p' , q') (_ , p'' , q'') =
-    eq-pair-eq-pr2
+    eq-pair-eq-fiber
       ( eq-pair
         ( ( assoc-concatr (p ∙ᵣ inv q' ∙ᵣ p') (inv q'') p'') ∙
           ( assoc-concatr (p ∙ᵣ inv q') p' (inv q'' ∙ᵣ p'')) ∙
@@ -474,7 +474,7 @@ module _
   left-unit-concatr-involutive-Id :
     {p : x ＝ⁱ y} → refl-involutive-Id ∙ᵣⁱ p ＝ p
   left-unit-concatr-involutive-Id {p = .x , p , refl} =
-    eq-pair-eq-pr2 (eq-pair left-unit-concatr refl)
+    eq-pair-eq-fiber (eq-pair left-unit-concatr refl)
 
   right-unit-concatr-involutive-Id :
     {p : x ＝ⁱ y} → p ∙ᵣⁱ refl-involutive-Id ＝ p
@@ -483,18 +483,18 @@ module _
   left-inv-concatr-involutive-Id :
     (p : x ＝ⁱ y) → inv-involutive-Id p ∙ᵣⁱ p ＝ refl-involutive-Id
   left-inv-concatr-involutive-Id (.y , refl , q) =
-    eq-pair-eq-pr2 (eq-pair (right-inv-concatr q) refl)
+    eq-pair-eq-fiber (eq-pair (right-inv-concatr q) refl)
 
   right-inv-concatr-involutive-Id :
     (p : x ＝ⁱ y) → p ∙ᵣⁱ inv-involutive-Id p ＝ refl-involutive-Id
   right-inv-concatr-involutive-Id (.x , p , refl) =
-    eq-pair-eq-pr2 (eq-pair (right-inv-concatr p) refl)
+    eq-pair-eq-fiber (eq-pair (right-inv-concatr p) refl)
 
   distributive-inv-concatr-involutive-Id :
     (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
     inv-involutive-Id (p ∙ᵣⁱ q) ＝ inv-involutive-Id q ∙ᵣⁱ inv-involutive-Id p
   distributive-inv-concatr-involutive-Id (.y , refl , q) (.y , p' , refl) =
-    eq-pair-eq-pr2 (eq-pair (inv left-unit-concatr) (left-unit-concatr))
+    eq-pair-eq-fiber (eq-pair (inv left-unit-concatr) (left-unit-concatr))
 ```
 
 ## See also

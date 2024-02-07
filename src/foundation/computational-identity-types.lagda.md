@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.function-extensionality
 open import foundation.judgmentally-compositional-identity-types
 open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.transport-along-identifications
@@ -21,7 +22,6 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -206,7 +206,6 @@ module _
   eq-computational-eq : {x y : A} → x ＝ʲ y → x ＝ y
   eq-computational-eq = eq-yoneda-eq ∘ yoneda-eq-computational-eq
 
-
   equiv-computational-eq-eq : {x y : A} → (x ＝ y) ≃ (x ＝ʲ y)
   equiv-computational-eq-eq =
     equiv-computational-eq-yoneda-eq ∘e equiv-yoneda-eq-eq
@@ -226,7 +225,7 @@ module _
     ind-yoneda-Id
       ( λ _ q →
         computational-eq-eq (eq-computational-eq (z , p , q)) ＝ (z , p , q))
-      ( eq-pair-eq-pr2 (eq-pair (is-section-eq-yoneda-eq p) refl))
+      ( eq-pair-eq-fiber (eq-pair (is-section-eq-yoneda-eq p) refl))
       ( q)
 
   is-equiv-computational-eq-eq :
@@ -591,7 +590,7 @@ module _
       ( λ _ p →
         ( inv-computational-Id (z , p , q) ∙ₗʲ (z , p , q)) ＝
         ( refl-computational-Id))
-      ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-yoneda-Id q)))
+      ( eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-yoneda-Id q)))
       ( p)
 
   right-inv-concat-computational-Id :
@@ -601,7 +600,7 @@ module _
       ( λ _ q →
         ( (z , p , q) ∙ₗʲ inv-computational-Id (z , p , q)) ＝
         ( refl-computational-Id))
-      ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-yoneda-Id p)))
+      ( eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-yoneda-Id p)))
       ( q)
 
   distributive-inv-concat-computational-Id :
@@ -654,7 +653,7 @@ module _
       ( λ _ p →
         ( inv-computational-Id (z , p , q) ∙ᵣʲ (z , p , q)) ＝
         ( refl-computational-Id))
-      ( eq-pair-eq-pr2 (eq-pair (right-inv-yoneda-Id q) refl))
+      ( eq-pair-eq-fiber (eq-pair (right-inv-yoneda-Id q) refl))
       ( p)
 
   right-inv-concatr-computational-Id :
@@ -664,7 +663,7 @@ module _
       ( λ _ q →
         ( (z , p , q) ∙ᵣʲ inv-computational-Id (z , p , q)) ＝
         ( refl-computational-Id))
-      ( eq-pair-eq-pr2 (eq-pair (right-inv-yoneda-Id p) refl))
+      ( eq-pair-eq-fiber (eq-pair (right-inv-yoneda-Id p) refl))
       ( q)
 
 module _
