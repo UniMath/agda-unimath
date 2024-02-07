@@ -13,7 +13,6 @@ open import foundation.definitionally-right-unital-concatenation-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.multivariable-homotopies
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universal-property-identity-systems
