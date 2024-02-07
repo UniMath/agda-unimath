@@ -690,7 +690,7 @@ module _
   preserves-concat-add-list-Ring = preserves-concat-add-list-Ab (ab-Ring R)
 ```
 
-### Equip a type with a structure of a ring
+### Equipping a type with the structure of a ring
 
 ```agda
 structure-ring :

@@ -199,7 +199,7 @@ mere-equiv-number-of-semi-groups-of-order n =
     ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
 ```
 
-### There is a finite number of ways to equip a finite type with a structure of semigroup
+### There is a finite number of ways to equip a finite type with the structure of a semigroup
 
 ```agda
 structure-semigroup-𝔽 :

@@ -591,7 +591,7 @@ module _
     preserves-concat-add-list-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 ```
 
-### Equip a finite type with a structure of commutative finite ring
+### Equipping a finite type with the structure of a commutative finite ring
 
 ```agda
 module _

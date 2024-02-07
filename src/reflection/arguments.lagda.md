@@ -17,10 +17,10 @@ open import foundation.universe-levels
 An argument to a function is a term together with some information about it. The
 argument has three properties:
 
-1. Visibility-Argument-Agda: whether they are visible, hidden, or an instance
-2. Relevance-Argument-Agda: whether they are relevant or not (see,
+1. Visibility: whether they are visible, hidden, or an instance
+2. Relevance: whether they are relevant or not (see,
    [docs](https://agda.readthedocs.io/en/latest/language/irrelevance.html))
-3. Quantity-Argument-Agda: whether they are run-time relevant or not (see,
+3. Quantity: whether they are run-time relevant or not (see,
    [docs](https://agda.readthedocs.io/en/latest/language/runtime-irrelevance.html))
 
 The properties of `Relevance-Argument-Agda` and `Quantity-Argument-Agda` are

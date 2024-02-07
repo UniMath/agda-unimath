@@ -415,7 +415,7 @@ mere-equiv-number-of-groups-of-order n =
     ( is-π-finite-Group-of-Order {lzero} zero-ℕ n)
 ```
 
-### There is a finite number of ways to equip a finite type with a structure of group
+### There is a finite number of ways to equip a finite type with the structure of a group
 
 ```agda
 module _

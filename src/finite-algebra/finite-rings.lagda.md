@@ -501,7 +501,7 @@ module _
 
 ## Properties
 
-### There is a finite number of ways to equip a finite type with a structure of ring
+### There is a finite number of ways to equip a finite type with the structure of a ring
 
 ```agda
 module _
@@ -512,12 +512,12 @@ module _
   structure-ring-𝔽 : UU l
   structure-ring-𝔽 =
     Σ ( structure-abelian-group-𝔽 X)
-      ( λ m → has-mul-Ab-𝔽 (abelian-group-structure-abelian-group-𝔽 X m))
+      ( λ m → has-mul-Ab-𝔽 (finite-abelian-group-structure-abelian-group-𝔽 X m))
 
   finite-ring-structure-ring-𝔽 :
     structure-ring-𝔽 → Ring-𝔽 l
   pr1 (finite-ring-structure-ring-𝔽 (m , c)) =
-    abelian-group-structure-abelian-group-𝔽 X m
+    finite-abelian-group-structure-abelian-group-𝔽 X m
   pr2 (finite-ring-structure-ring-𝔽 (m , c)) = c
 
   is-finite-structure-ring-𝔽 :
