@@ -197,7 +197,7 @@ module _
 ### The computational identity types are equivalent to the standard identity types
 
 We define the equivalence as the composite `(x ＝ y) ≃ (x ＝ʸ y) ≃ (x ＝ʲ y)`.
-Since each of these equivalences preserves the groupoid structure weakly so does
+Since each of these equivalences preserve the groupoid structure weakly so does
 the composite. For the same reason, it preserves the reflexivities strictly.
 
 ```agda

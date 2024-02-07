@@ -291,7 +291,8 @@ We have, practically speaking, two definitions of the concatenation operation on
 strictly involutive identity types. One satisfies a strict left unit law and the
 other satisfies a strict right unit law. In both cases, we must use the
 [strictly right unital concatenation operation on standard identifications](foundation.strictly-right-unital-concatenation-identifications.md)
-`_∙ᵣ_`, to obtain this strict one-sided unit law.
+`_∙ᵣ_`, to obtain this strict one-sided unit law, as will momentarily be
+demonstrated.
 
 The strictly left unital concatenation operation is defined by
 
@@ -314,6 +315,19 @@ operation is indeed strictly left unital:
     ≐ (w , p , (q ∙ᵣ inv refl) ∙ᵣ refl)
     ≐ (w , p , (q ∙ᵣ inv refl))
     ≐ (w , p , (q ∙ᵣ refl))
+    ≐ (w , p , q)
+    ≐ r.
+```
+
+While for the strictly right unital concatenation operation, we have the
+computation
+
+```text
+  r ∙ᵣⁱ reflⁱ
+    ≐  (w , p , q) ∙ᵣⁱ (x , refl , refl)
+    ≐ (w , (p ∙ᵣ inv refl) ∙ᵣ refl , q)
+    ≐ (w , p ∙ᵣ inv refl , q)
+    ≐ (w , p ∙ᵣ refl , q)
     ≐ (w , p , q)
     ≐ r.
 ```

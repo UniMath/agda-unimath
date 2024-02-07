@@ -161,9 +161,9 @@ and from right to left by evaluation at the reflexivity
 
 It should be noted that we define the map `x ＝ y → x ＝ʸ y` using the
 [strictly right unital concatenation operation](foundation.strictly-right-unital-concatenation-identifications.md).
-While this obstructs us from showing that the homotopy
-`eq-yoneda-eq ∘ yoneda-eq-eq ~ id` holds by reflexivity, as demonstrated by the
-computation
+While this obstructs us from showing that the
+[homotopy](foundation-core.homotopies.md) `eq-yoneda-eq ∘ yoneda-eq-eq ~ id`
+holds by reflexivity, as demonstrated by the computation
 
 ```text
   eq-yoneda-eq ∘ yoneda-eq-eq
@@ -384,9 +384,10 @@ module _
       ( ind-Id x (λ y p → B y (yoneda-eq-eq p)) b y (eq-yoneda-eq f))
 ```
 
-While the induction principle does not have the wanted reduction behaviour, the
-non-dependent eliminator does. This is simply because we no longer need to
-transport along `is-section-eq-yoneda-eq`.
+While the induction principle does not have the desired reduction behaviour, the
+nondependent eliminator does. This is simply because we no longer need to
+[transport](foundation-core.transport-along-identifications.md) along
+`is-section-eq-yoneda-eq`.
 
 ```agda
 module _
@@ -422,14 +423,14 @@ structure on types.
 
 We consider two ways of defining the inversion operation on Yoneda
 identifications: by the strictly right unital, and strictly left unital
-concatenation operation on the underlying identity type respectively. The former
-enjoys the computational property
+concatenation operation on the underlying identity type respectively. In
+contrast to the latter, the former enjoys the computational property
 
 ```text
   inv reflʸ ≐ reflʸ,
 ```
 
-hence will be preferred going.
+hence will be preferred going forward.
 
 #### The inversion operation defined by the strictly right unital concatenation operation on identifications
 

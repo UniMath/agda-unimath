@@ -82,25 +82,29 @@ module _
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
     (p ∙ q) ∙ r ＝ (p ∙ᵣ q) ∙ᵣ r
   eq-double-right-strict-concat-concat-left-associated p q r =
-    ap (_∙ r) (eq-right-strict-concat-concat p q) ∙ eq-right-strict-concat-concat (p ∙ᵣ q) r
+    ( ap (_∙ r) (eq-right-strict-concat-concat p q)) ∙
+    ( eq-right-strict-concat-concat (p ∙ᵣ q) r)
 
   eq-double-right-strict-concat-concat-right-associated :
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
     p ∙ (q ∙ r) ＝ p ∙ᵣ (q ∙ᵣ r)
   eq-double-right-strict-concat-concat-right-associated p q r =
-    ap (p ∙_) (eq-right-strict-concat-concat q r) ∙ eq-right-strict-concat-concat p (q ∙ᵣ r)
+    ( ap (p ∙_) (eq-right-strict-concat-concat q r)) ∙
+    ( eq-right-strict-concat-concat p (q ∙ᵣ r))
 
   eq-double-concat-right-strict-concat-left-associated :
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
     (p ∙ᵣ q) ∙ᵣ r ＝ (p ∙ q) ∙ r
   eq-double-concat-right-strict-concat-left-associated p q r =
-    ap (_∙ᵣ r) (eq-concat-right-strict-concat p q) ∙ eq-concat-right-strict-concat (p ∙ q) r
+    ( ap (_∙ᵣ r) (eq-concat-right-strict-concat p q)) ∙
+    ( eq-concat-right-strict-concat (p ∙ q) r)
 
   eq-double-concat-right-strict-concat-right-associated :
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
     p ∙ᵣ (q ∙ᵣ r) ＝ p ∙ (q ∙ r)
   eq-double-concat-right-strict-concat-right-associated p q r =
-    ap (p ∙ᵣ_) (eq-concat-right-strict-concat q r) ∙ eq-concat-right-strict-concat p (q ∙ r)
+    ( ap (p ∙ᵣ_) (eq-concat-right-strict-concat q r)) ∙
+    ( eq-concat-right-strict-concat p (q ∙ r))
 ```
 
 ## Properties
@@ -166,7 +170,8 @@ module _
 
   is-injective-right-strict-concat :
     {x y z : A} (p : x ＝ y) {q r : y ＝ z} → p ∙ᵣ q ＝ p ∙ᵣ r → q ＝ r
-  is-injective-right-strict-concat refl s = (inv left-unit-right-strict-concat ∙ s) ∙ left-unit-right-strict-concat
+  is-injective-right-strict-concat refl s =
+    (inv left-unit-right-strict-concat ∙ s) ∙ left-unit-right-strict-concat
 
   is-injective-right-strict-concat' :
     {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ᵣ r ＝ q ∙ᵣ r → p ＝ q
@@ -176,3 +181,4 @@ module _
 ## See also
 
 - [Yoneda identity types](foundation.yoneda-identity-types.md)
+- [Computational identity types](foundation.computational-identity-types.md)
