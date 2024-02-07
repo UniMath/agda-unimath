@@ -42,10 +42,10 @@ primitive
 data Blocker-Agda : UU lzero where
   blocker-any : list Blocker-Agda → Blocker-Agda
   blocker-all : list Blocker-Agda → Blocker-Agda
-  blocker-metavariable-Term-Agda : Metavariable-Agda → Blocker-Agda
+  blocker-metavariable : Metavariable-Agda → Blocker-Agda
 
 {-# BUILTIN AGDABLOCKER Blocker-Agda #-}
 {-# BUILTIN AGDABLOCKERANY blocker-any #-}
 {-# BUILTIN AGDABLOCKERALL blocker-all #-}
-{-# BUILTIN AGDABLOCKERMETA blocker-metavariable-Term-Agda #-}
+{-# BUILTIN AGDABLOCKERMETA blocker-metavariable #-}
 ```

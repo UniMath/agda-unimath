@@ -153,8 +153,8 @@ postulate
   run-speculative :
     {l : Level} {A : UU l} → type-Type-Checker (A × bool) → type-Type-Checker A
 
-  -- Get a list of all possible instance candidates for the given metavariable-Term-Agda
-  -- variable (it does not have to be an instance metavariable-Term-Agda).
+  -- Get a list of all possible instance candidates for the given metavariable
+  -- variable (it does not have to be an instance metavariable).
   get-instances :
     Metavariable-Agda → type-Type-Checker (list Term-Agda)
 

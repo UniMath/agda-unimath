@@ -215,9 +215,9 @@ _ = refl
 ### Literals
 
 ```agda
-_ : quoteTerm 3 ＝ literal-Term-Agda (nat 3)
+_ : quoteTerm 3 ＝ literal-Term-Agda (nat-Literal-Agda 3)
 _ = refl
 
-_ : quoteTerm "hello" ＝ literal-Term-Agda (string "hello")
+_ : quoteTerm "hello" ＝ literal-Term-Agda (string-Literal-Agda "hello")
 _ = refl
 ```

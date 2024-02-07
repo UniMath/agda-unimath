@@ -33,20 +33,20 @@ For concrete examples, see
 
 ```agda
 data Literal-Agda : UU lzero where
-  nat : (n : ℕ) → Literal-Agda
-  word64 : (n : Word64) → Literal-Agda
-  float : (x : Float) → Literal-Agda
-  char : (c : Char) → Literal-Agda
-  string : (s : String) → Literal-Agda
-  name : (x : Name-Agda) → Literal-Agda
-  metavariable-Term-Agda : (x : Metavariable-Agda) → Literal-Agda
+  nat-Literal-Agda : ℕ → Literal-Agda
+  word64-Literal-Agda : Word64 → Literal-Agda
+  float-Literal-Agda : Float → Literal-Agda
+  char-Literal-Agda : Char → Literal-Agda
+  string-Literal-Agda : String → Literal-Agda
+  quoted-name-Literal-Agda : Name-Agda → Literal-Agda
+  metavariable-Literal-Agda : Metavariable-Agda → Literal-Agda
 
 {-# BUILTIN AGDALITERAL Literal-Agda #-}
-{-# BUILTIN AGDALITNAT nat #-}
-{-# BUILTIN AGDALITWORD64 word64 #-}
-{-# BUILTIN AGDALITFLOAT float #-}
-{-# BUILTIN AGDALITCHAR char #-}
-{-# BUILTIN AGDALITSTRING string #-}
-{-# BUILTIN AGDALITQNAME name #-}
-{-# BUILTIN AGDALITMETA metavariable-Term-Agda #-}
+{-# BUILTIN AGDALITNAT nat-Literal-Agda #-}
+{-# BUILTIN AGDALITWORD64 word64-Literal-Agda #-}
+{-# BUILTIN AGDALITFLOAT float-Literal-Agda #-}
+{-# BUILTIN AGDALITCHAR char-Literal-Agda #-}
+{-# BUILTIN AGDALITSTRING string-Literal-Agda #-}
+{-# BUILTIN AGDALITQNAME quoted-name-Literal-Agda #-}
+{-# BUILTIN AGDALITMETA metavariable-Literal-Agda #-}
 ```
