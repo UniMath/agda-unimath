@@ -35,63 +35,51 @@ open import foundation-core.type-theoretic-principle-of-choice
 ### Being coherently invertible is a property
 
 ```agda
-abstract
-  is-prop-is-coherently-invertible :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-prop (is-coherently-invertible f)
-  is-prop-is-coherently-invertible {A = A} {B} f =
-    is-prop-is-proof-irrelevant
-      ( λ H →
-        is-contr-equiv'
-          ( Σ ( section f)
-              ( λ s →
-                Σ ( ( map-section f s ∘ f) ~ id)
-                  ( λ H →
-                    ( right-whisker-comp (is-section-map-section f s) f) ~
-                    ( left-whisker-comp f H))))
-          ( associative-Σ
-            ( B → A)
-            ( λ g → (f ∘ g) ~ id)
-            ( λ s →
-              Σ ( ( map-section f s ∘ f) ~ id)
-                ( λ H →
-                  ( right-whisker-comp (is-section-map-section f s) f) ~
-                  ( left-whisker-comp f H))))
-          ( is-contr-Σ
-            ( is-contr-section-is-equiv (is-equiv-is-coherently-invertible H))
-            ( section-is-coherently-invertible H)
-            ( is-contr-equiv'
-              ( (x : A) →
-                Σ ( map-inv-is-coherently-invertible H (f x) ＝ x)
-                  ( λ p →
-                    is-retraction-is-coherently-invertible H (f x) ＝ ap f p))
-              ( distributive-Π-Σ)
-              ( is-contr-Π
-                ( λ x →
-                  is-contr-equiv'
-                    ( fiber
-                      ( ap f)
-                      ( is-retraction-is-coherently-invertible H (f x)))
-                    ( equiv-tot
-                      ( λ p →
-                        equiv-inv
-                          ( ap f p)
-                          ( is-retraction-is-coherently-invertible H (f x))))
-                    ( is-contr-map-is-equiv
-                      ( is-emb-is-equiv
-                        ( is-equiv-is-coherently-invertible H)
-                        ( map-inv-is-coherently-invertible H (f x)) x)
-                      ( is-retraction-is-coherently-invertible H (f x))))))))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
-abstract
-  is-equiv-is-coherently-invertible-is-equiv :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-equiv (is-coherently-invertible-is-equiv {f = f})
-  is-equiv-is-coherently-invertible-is-equiv f =
-    is-equiv-is-prop
-      ( is-property-is-equiv f)
-      ( is-prop-is-coherently-invertible f)
-      ( is-equiv-is-coherently-invertible)
+  abstract
+    is-proof-irrelevant-is-coherently-invertible :
+      is-proof-irrelevant (is-coherently-invertible f)
+    is-proof-irrelevant-is-coherently-invertible H =
+      is-contr-equiv'
+        ( _)
+        ( associative-Σ _ _ _)
+        ( is-contr-Σ
+          ( is-contr-section-is-equiv (is-equiv-is-coherently-invertible H))
+          ( section-is-coherently-invertible H)
+          ( is-contr-equiv'
+            ( _)
+            ( distributive-Π-Σ)
+            ( is-contr-Π
+              ( λ x →
+                is-contr-equiv'
+                  ( _)
+                  ( equiv-tot
+                    ( λ p →
+                      equiv-inv
+                        ( ap f p)
+                        ( is-section-map-inv-is-coherently-invertible H (f x))))
+                  ( is-contr-map-is-equiv
+                    ( is-emb-is-equiv
+                      ( is-equiv-is-coherently-invertible H)
+                      ( map-inv-is-coherently-invertible H (f x)) x)
+                    ( is-section-map-inv-is-coherently-invertible H (f x)))))))
+
+  abstract
+    is-prop-is-coherently-invertible : is-prop (is-coherently-invertible f)
+    is-prop-is-coherently-invertible =
+      is-prop-is-proof-irrelevant is-proof-irrelevant-is-coherently-invertible
+
+  abstract
+    is-equiv-is-coherently-invertible-is-equiv :
+      is-equiv (is-coherently-invertible-is-equiv {f = f})
+    is-equiv-is-coherently-invertible-is-equiv =
+      is-equiv-is-prop
+        ( is-property-is-equiv f)
+        ( is-prop-is-coherently-invertible)
+        ( is-equiv-is-coherently-invertible)
 ```
 
 ## See also

@@ -7,12 +7,15 @@ module foundation-core.invertible-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -64,19 +67,19 @@ module _
   is-inverse-map-inv-is-invertible : is-inverse f map-inv-is-invertible
   is-inverse-map-inv-is-invertible = pr2 g
 
-  is-retraction-is-invertible : (f ∘ map-inv-is-invertible) ~ id
-  is-retraction-is-invertible = pr1 is-inverse-map-inv-is-invertible
+  is-section-map-inv-is-invertible : f ∘ map-inv-is-invertible ~ id
+  is-section-map-inv-is-invertible = pr1 is-inverse-map-inv-is-invertible
 
-  is-section-is-invertible : (map-inv-is-invertible ∘ f) ~ id
-  is-section-is-invertible = pr2 is-inverse-map-inv-is-invertible
+  is-retraction-map-inv-is-invertible : map-inv-is-invertible ∘ f ~ id
+  is-retraction-map-inv-is-invertible = pr2 is-inverse-map-inv-is-invertible
 
   section-is-invertible : section f
   pr1 section-is-invertible = map-inv-is-invertible
-  pr2 section-is-invertible = is-retraction-is-invertible
+  pr2 section-is-invertible = is-section-map-inv-is-invertible
 
   retraction-is-invertible : retraction f
   pr1 retraction-is-invertible = map-inv-is-invertible
-  pr2 retraction-is-invertible = is-section-is-invertible
+  pr2 retraction-is-invertible = is-retraction-map-inv-is-invertible
 ```
 
 ### The type of invertible maps
@@ -100,17 +103,17 @@ module _
   map-inv-invertible-map =
     map-inv-is-invertible ∘ is-invertible-map-invertible-map
 
-  is-section-map-invertible-map :
+  is-retraction-map-inv-invertible-map :
     (f : invertible-map A B) →
-    (map-inv-invertible-map f ∘ map-invertible-map f) ~ id
-  is-section-map-invertible-map =
-    is-section-is-invertible ∘ is-invertible-map-invertible-map
+    map-inv-invertible-map f ∘ map-invertible-map f ~ id
+  is-retraction-map-inv-invertible-map =
+    is-retraction-map-inv-is-invertible ∘ is-invertible-map-invertible-map
 
-  is-retraction-map-invertible-map :
+  is-section-map-inv-invertible-map :
     (f : invertible-map A B) →
-    (map-invertible-map f ∘ map-inv-invertible-map f) ~ id
-  is-retraction-map-invertible-map =
-    is-retraction-is-invertible ∘ is-invertible-map-invertible-map
+    map-invertible-map f ∘ map-inv-invertible-map f ~ id
+  is-section-map-inv-invertible-map =
+    is-section-map-inv-is-invertible ∘ is-invertible-map-invertible-map
 ```
 
 ## Properties
@@ -123,8 +126,8 @@ module _
   where
 
   inv-is-inverse : {g : B → A} → is-inverse f g → is-inverse g f
-  pr1 (inv-is-inverse {g} H) = is-section-is-invertible (g , H)
-  pr2 (inv-is-inverse {g} H) = is-retraction-is-invertible (g , H)
+  pr1 (inv-is-inverse {g} H) = is-retraction-map-inv-is-invertible (g , H)
+  pr2 (inv-is-inverse {g} H) = is-section-map-inv-is-invertible (g , H)
 
   inv-is-invertible :
     (g : is-invertible f) → is-invertible (map-inv-is-invertible g)

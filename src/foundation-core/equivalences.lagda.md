@@ -232,11 +232,13 @@ module _
 
   is-section-map-inv-is-equiv : is-section f map-inv-is-equiv
   is-section-map-inv-is-equiv =
-    is-section-map-inv-is-invertible (is-invertible-is-equiv H)
+    is-section-map-inv-is-coherently-invertible-is-invertible
+      ( is-invertible-is-equiv H)
 
   is-retraction-map-inv-is-equiv : is-retraction f map-inv-is-equiv
   is-retraction-map-inv-is-equiv =
-    is-retraction-map-inv-is-invertible (is-invertible-is-equiv H)
+    is-retraction-map-inv-is-coherently-invertible-is-invertible
+      ( is-invertible-is-equiv H)
 
   coherence-map-inv-is-equiv :
     coherence-is-coherently-invertible f
@@ -662,38 +664,10 @@ module _
   abstract
     is-emb-is-equiv :
       {f : A → B} → is-equiv f → (x y : A) → is-equiv (ap f {x} {y})
-    is-emb-is-equiv {f} H x y =
-      is-equiv-is-invertible
-        ( λ p →
-          ( inv (is-retraction-map-inv-is-equiv H x)) ∙
-          ( ( ap (map-inv-is-equiv H) p) ∙
-            ( is-retraction-map-inv-is-equiv H y)))
-        ( λ p →
-          ( ap-concat f
-            ( inv (is-retraction-map-inv-is-equiv H x))
-            ( ap (map-inv-is-equiv H) p ∙ is-retraction-map-inv-is-equiv H y)) ∙
-          ( ( ap-binary
-              ( λ u v → u ∙ v)
-              ( ap-inv f (is-retraction-map-inv-is-equiv H x))
-              ( ( ap-concat f
-                  ( ap (map-inv-is-equiv H) p)
-                  ( is-retraction-map-inv-is-equiv H y)) ∙
-                ( ap-binary
-                  ( λ u v → u ∙ v)
-                  ( inv (ap-comp f (map-inv-is-equiv H) p))
-                  ( inv (coherence-map-inv-is-equiv H y))))) ∙
-            ( inv
-              ( left-transpose-eq-concat
-                ( ap f (is-retraction-map-inv-is-equiv H x))
-                ( p)
-                ( ( ap (f ∘ map-inv-is-equiv H) p) ∙
-                  ( is-section-map-inv-is-equiv H (f y)))
-                ( ( ap-binary
-                    ( λ u v → u ∙ v)
-                    ( inv (coherence-map-inv-is-equiv H x))
-                    ( inv (ap-id p))) ∙
-                  ( nat-htpy (is-section-map-inv-is-equiv H) p))))))
-        ( λ where refl → left-inv (is-retraction-map-inv-is-equiv H x))
+    is-emb-is-equiv H x y =
+      is-equiv-is-invertible'
+        ( is-invertible-ap-is-coherently-invertible
+          ( is-coherently-invertible-is-equiv H))
 
   equiv-ap :
     (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)

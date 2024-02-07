@@ -93,14 +93,14 @@ module _
     pr1 (center-fiber-is-coherently-invertible H y) =
       map-inv-is-coherently-invertible H y
     pr2 (center-fiber-is-coherently-invertible H y) =
-      is-retraction-is-coherently-invertible H y
+      is-section-map-inv-is-coherently-invertible H y
 
     contraction-fiber-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fiber f y) →
       (center-fiber-is-coherently-invertible H y) ＝ t
     contraction-fiber-is-coherently-invertible H y (pair x refl) =
       eq-Eq-fiber f y
-        ( is-section-is-coherently-invertible H x)
+        ( is-retraction-map-inv-is-coherently-invertible H x)
         ( ( right-unit) ∙
           ( inv ( coh-is-coherently-invertible H x)))
 
