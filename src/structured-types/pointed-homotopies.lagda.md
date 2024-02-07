@@ -196,13 +196,10 @@ module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
-  htpy-pointed-map : (g : A →∗ B) → UU (l1 ⊔ l2)
-  htpy-pointed-map = pointed-htpy f
-
-  extensionality-pointed-map : (g : A →∗ B) → Id f g ≃ (htpy-pointed-map g)
+  extensionality-pointed-map : (g : A →∗ B) → (f ＝ g) ≃ (f ~∗ g)
   extensionality-pointed-map = extensionality-pointed-Π f
 
-  eq-htpy-pointed-map : (g : A →∗ B) → (htpy-pointed-map g) → Id f g
+  eq-htpy-pointed-map : (g : A →∗ B) → (f ~∗ g) → f ＝ g
   eq-htpy-pointed-map g = map-inv-equiv (extensionality-pointed-map g)
 ```
 
@@ -274,24 +271,22 @@ module _
 
   htpy-associative-comp-pointed-map :
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
-    map-comp-pointed-map (comp-pointed-map h g) f ~
-    map-comp-pointed-map h (comp-pointed-map g f)
+    map-comp-pointed-map (h ∘∗ g) f ~
+    map-comp-pointed-map h (g ∘∗ f)
   htpy-associative-comp-pointed-map h g f = refl-htpy
 
   coh-associative-comp-pointed-map :
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
     coherence-triangle-pointed-htpy
-      ( comp-pointed-map (comp-pointed-map h g) f)
-      ( comp-pointed-map h (comp-pointed-map g f))
+      ( (h ∘∗ g) ∘∗ f)
+      ( h ∘∗ (g ∘∗ f))
       ( htpy-associative-comp-pointed-map h g f)
   coh-associative-comp-pointed-map (h , refl) (g , refl) (f , refl) =
     refl
 
   associative-comp-pointed-map :
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
-    htpy-pointed-map
-      ( comp-pointed-map (comp-pointed-map h g) f)
-      ( comp-pointed-map h (comp-pointed-map g f))
+    (h ∘∗ g) ∘∗ f ~∗ h ∘∗ (g ∘∗ f)
   pr1 (associative-comp-pointed-map h g f) =
     htpy-associative-comp-pointed-map h g f
   pr2 (associative-comp-pointed-map h g f) =
@@ -299,23 +294,21 @@ module _
 
   htpy-inv-associative-comp-pointed-map :
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
-    map-pointed-map (comp-pointed-map h (comp-pointed-map g f)) ~
-    map-pointed-map (comp-pointed-map (comp-pointed-map h g) f)
+    map-pointed-map (h ∘∗ (g ∘∗ f)) ~
+    map-pointed-map ((h ∘∗ g) ∘∗ f)
   htpy-inv-associative-comp-pointed-map h g f = refl-htpy
 
   coh-inv-associative-comp-pointed-map :
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
     coherence-triangle-pointed-htpy
-      ( comp-pointed-map h (comp-pointed-map g f))
-      ( comp-pointed-map (comp-pointed-map h g) f)
+      ( h ∘∗ (g ∘∗ f))
+      ( (h ∘∗ g) ∘∗ f)
       ( htpy-inv-associative-comp-pointed-map h g f)
   coh-inv-associative-comp-pointed-map (h , refl) (g , refl) (f , refl) = refl
 
   inv-associative-comp-pointed-map :
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
-    htpy-pointed-map
-      ( comp-pointed-map h (comp-pointed-map g f))
-      ( comp-pointed-map (comp-pointed-map h g) f)
+    h ∘∗ (g ∘∗ f) ~∗ (h ∘∗ g) ∘∗ f
   pr1 (inv-associative-comp-pointed-map h g f) =
     htpy-associative-comp-pointed-map h g f
   pr2 (inv-associative-comp-pointed-map h g f) =
@@ -341,8 +334,7 @@ module _
   coh-left-unit-law-comp-pointed-map' =
     right-unit ∙ ap-id (preserves-point-pointed-map f)
 
-  left-unit-law-comp-pointed-map :
-    htpy-pointed-map (id-pointed-map ∘∗ f) f
+  left-unit-law-comp-pointed-map : id-pointed-map ∘∗ f ~∗ f
   left-unit-law-comp-pointed-map =
     make-pointed-htpy
       ( id-pointed-map ∘∗ f)
@@ -357,13 +349,12 @@ module _
   coh-inv-left-unit-law-comp-pointed-map' :
     coherence-triangle-pointed-htpy'
       ( f)
-      ( comp-pointed-map id-pointed-map f)
+      ( id-pointed-map ∘∗ f)
       ( htpy-inv-left-unit-law-comp-pointed-map)
   coh-inv-left-unit-law-comp-pointed-map' =
     inv (right-unit ∙ ap-id (preserves-point-pointed-map f))
 
-  inv-left-unit-law-comp-pointed-map :
-    f ~∗ id-pointed-map ∘∗ f
+  inv-left-unit-law-comp-pointed-map : f ~∗ id-pointed-map ∘∗ f
   inv-left-unit-law-comp-pointed-map =
     make-pointed-htpy
       ( f)
@@ -391,8 +382,7 @@ module _
   coh-right-unit-law-comp-pointed-map =
     inv (right-inv (preserves-point-pointed-map f))
 
-  right-unit-law-comp-pointed-map :
-    htpy-pointed-map (comp-pointed-map f id-pointed-map) f
+  right-unit-law-comp-pointed-map : f ∘∗ id-pointed-map ~∗ f
   pr1 right-unit-law-comp-pointed-map =
     htpy-right-unit-law-comp-pointed-map
   pr2 right-unit-law-comp-pointed-map =

@@ -8,11 +8,13 @@ module structured-types.whiskering-pointed-homotopies where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-homotopies
@@ -74,11 +76,36 @@ For the coherence, we have to show that the triangle
                                   ∗
 ```
 
+commutes. By right whiskering of [commuting triangles of identifications](foundation.commuting-squares-of-identifications.md) with respect to concatenation it suffices to show that the triangle
+
+```text
+                            ap g (H *)
+                   g (f1 *) --------> g (f2 *)
+                           \         /
+  ap g (preserves-point f1) \       / ap g (preserves-point f2)
+                             \     /
+                              ∨   ∨
+                               g *
+```
+
+commutes. By functoriality of commuting triangles of identifications, this follows from the fact that the triangle
+
+```text
+                       H *
+                f1 * ------> f2 *
+                    \       /
+  preserves-point f1 \     / preserves-point f2
+                      \   /
+                       ∨ ∨
+                        *
+```
+commutes.
+
 ```agda
 module _
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
-  (g : B →∗ C) (f1 f2 : A →∗ B) (H : htpy-pointed-map f1 f2)
+  (g : B →∗ C) (f1 f2 : A →∗ B) (H : f1 ~∗ f2)
   where
 
   htpy-left-whisker-pointed-htpy :
@@ -92,74 +119,30 @@ module _
       ( g ∘∗ f2)
       ( htpy-left-whisker-pointed-htpy)
   coh-left-whisker-pointed-htpy' =
-    ( ap
-      ( concat' _ (preserves-point-pointed-map g))
-      {!!}) ∙
-    ( assoc
-      ( ap (map-pointed-map g) (htpy-pointed-htpy f1 f2 H _))
+    right-whisker-concat-coherence-triangle-identifications
+      ( ap (map-pointed-map g) (preserves-point-pointed-map f1))
       ( ap (map-pointed-map g) (preserves-point-pointed-map f2))
-      ( preserves-point-pointed-map g))
-
-  coh-left-whisker-pointed-htpy :
-    coherence-triangle-pointed-htpy
-      ( g ∘∗ f1)
-      ( g ∘∗ f2)
-      ( htpy-left-whisker-pointed-htpy)
-  coh-left-whisker-pointed-htpy =
-    ( ( ( ap (ap (map-pointed-map g)) (coh-pointed-htpy f1 f2 H)) ∙
-        ( ap-concat
-          ( map-pointed-map g)
-          ( preserves-point-pointed-map f1)
-          ( inv (preserves-point-pointed-map f2)))) ∙
       ( ap
-        ( concat
-          ( ap (map-pointed-map g) (preserves-point-pointed-map f1))
-          ( map-pointed-map g
-            ( map-pointed-map f2 (point-Pointed-Type A))))
-        ( ( ( ( ap-inv
-                ( map-pointed-map g)
-                ( preserves-point-pointed-map f2)) ∙
-              ( ap
-                ( concat'
-                  ( map-pointed-map g
-                    ( point-Pointed-Fam A (constant-Pointed-Fam A B)))
-                  ( inv
-                    ( ap
-                      ( map-pointed-map g)
-                      ( preserves-point-pointed-map f2)))))
-              ( inv (right-inv (preserves-point-pointed-map g)))) ∙
-            ( assoc
-              ( preserves-point-pointed-map g)
-              ( inv (preserves-point-pointed-map g))
-              ( inv
-                ( ap
-                  ( map-pointed-map g)
-                  ( preserves-point-pointed-map f2))))) ∙
-          ( ap
-            ( concat
-              ( preserves-point-pointed-map g)
-              ( map-pointed-map g
-                ( map-pointed-map f2 (point-Pointed-Type A))))
-            ( inv
-              ( distributive-inv-concat
-                ( ap (map-pointed-map g) (preserves-point-pointed-map f2))
-                ( preserves-point-pointed-map g))))))) ∙
-    ( inv
-      ( assoc
-        ( ap (map-pointed-map g) (preserves-point-pointed-map f1))
-        ( preserves-point-pointed-map g)
-        ( inv
-          ( ( ap
-              ( map-pointed-map g)
-              ( preserves-point-pointed-map f2)) ∙
-            ( preserves-point-pointed-map g)))))
+        ( map-pointed-map g)
+        ( htpy-pointed-htpy f1 f2 H (point-Pointed-Type A)))
+      ( preserves-point-pointed-map g)
+      ( map-coherence-triangle-identifications
+        ( map-pointed-map g)
+        ( preserves-point-pointed-map f1)
+        ( preserves-point-pointed-map f2)
+        ( htpy-pointed-htpy f1 f2 H (point-Pointed-Type A))
+        ( coh-pointed-htpy' f1 f2 H))
 
   left-whisker-pointed-htpy :
     htpy-pointed-map
-      ( comp-pointed-map g f1)
-      ( comp-pointed-map g f2)
-  pr1 left-whisker-pointed-htpy = htpy-left-whisker-pointed-htpy
-  pr2 left-whisker-pointed-htpy = coh-left-whisker-pointed-htpy
+      ( g ∘∗ f1)
+      ( g ∘∗ f2)
+  left-whisker-pointed-htpy =
+    make-pointed-htpy
+      ( g ∘∗ f1)
+      ( g ∘∗ f2)
+      ( htpy-left-whisker-pointed-htpy)
+      ( coh-left-whisker-pointed-htpy')
 ```
 
 ### Right whiskering of pointed homotopies
