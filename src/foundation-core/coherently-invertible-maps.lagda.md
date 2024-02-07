@@ -186,8 +186,11 @@ module _
 
 ### Coherently invertible maps are embeddings
 
-We first construct the converse map to the action on identifications. This is
-essentially a repeat of the proof that maps with retractions are injective, and
+We first construct the converse map to the
+[action on identifications](foundation.action-on-identifications-functions.md).
+This is a rerun of the proof that maps with
+[retractions](foundation-core.retractions.md) are
+[injective](foundation-core.injective-maps.md) (`is-injective-retraction`), and
 we repeat the proof to avoid cyclic dependencies.
 
 ```agda
@@ -203,7 +206,8 @@ module _
       ( is-retraction-map-inv-is-coherently-invertible H y))
 ```
 
-Next, we show that this converse map is a section and retraction of `ap f`.
+Next, we show that this converse map is a [section](foundation-core.sections.md)
+and retraction of `ap f`.
 
 ```agda
   abstract
