@@ -396,8 +396,8 @@ module _
   inv-inv-computational-Id p = refl
 ```
 
-The inversion operation corresponds to the standard inversion operation on
-identifications:
+The inversion operation on computational identifications corresponds to the
+standard inversion operation on identifications:
 
 ```agda
 module _
@@ -461,8 +461,9 @@ module _
   concat-computational-Id' x q p = p ∙ʲ q
 ```
 
-The strictly left unital concatenation operation corresponds to the standard
-strictly left unital concatenation operation on identifications.
+The strictly left unital concatenation operation on computational
+identifications corresponds to the strictly left unital concatenation operation
+on standard identifications.
 
 ```agda
 module _
@@ -527,8 +528,9 @@ module _
   right-strict-concat-computational-Id' x q p = p ∙ᵣʲ q
 ```
 
-The strictly right unital concatenation operation corresponds to the standard
-strictly right unital concatenation operation on identifications.
+The strictly right unital concatenation operation on computational
+identifications corresponds to the strictly right unital concatenation operation
+on standard identifications.
 
 ```agda
 module _
@@ -569,14 +571,14 @@ To see that `_∙ʲ_` is strictly associative, we unfold both `(P ∙ʲ Q) ∙ʲ
 
 ```text
   (P ∙ʲ Q) ∙ʲ R
-    ≐ ((u , p , p') ∙ʲ (v , q , q')) ∙ʲ (w , r , r')
-    ≐ ((v , q , (q' ∙ʸ invʸ p) ∙ʸ p')) ∙ʲ (w , r , r')
-    ≐ (w , r , (r' ∙ʸ invʸ q) ∙ʸ ((q' ∙ʸ invʸ p) ∙ʸ p'))
+  ≐ ((u , p , p') ∙ʲ (v , q , q')) ∙ʲ (w , r , r')
+  ≐ ((v , q , (q' ∙ʸ inv p) ∙ʸ p')) ∙ʲ (w , r , r')
+  ≐ (w , r , (r' ∙ʸ inv q) ∙ʸ ((q' ∙ʸ inv p) ∙ʸ p'))
 
-    ≐ (w , r , (((r' ∙ʸ invʸ q) ∙ʸ q') ∙ʸ invʸ p) ∙ʸ p')
-    ≐ (u , p , p') ∙ʲ ((w , r , (r' ∙ʸ invʸ q) ∙ʸ q'))
-    ≐ (u , p , p') ∙ʲ ((v , q , q') ∙ʲ (w , r , r'))
-    ≐ P ∙ʲ (Q ∙ʲ R).
+  ≐ (w , r , (((r' ∙ʸ inv q) ∙ʸ q') ∙ʸ inv p) ∙ʸ p')
+  ≐ (u , p , p') ∙ʲ ((w , r , (r' ∙ʸ inv q) ∙ʸ q'))
+  ≐ (u , p , p') ∙ʲ ((v , q , q') ∙ʲ (w , r , r'))
+  ≐ P ∙ʲ (Q ∙ʲ R).
 ```
 
 ```agda
@@ -706,6 +708,9 @@ module _
 ```
 
 ## Operations
+
+We can define a range of basic operations on computational identifications that
+all enjoy strict computational properties.
 
 ### Action of functions on computational identifications
 

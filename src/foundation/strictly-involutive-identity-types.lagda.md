@@ -39,8 +39,10 @@ _weakly_. On this page, we consider the
   (x ＝ⁱ y) := Σ (z : A) ((z ＝ y) × (z ＝ x))
 ```
 
-This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfies the strict laws
+whose elements we call
+{{#concept "strictly involutive identifications" Agda=involutive-Id}}. This type
+family is [equivalent](foundation-core.equivalences.md) to the standard identity
+types, but satisfies the strict laws
 
 - `inv (inv p) ≐ p`
 - `inv reflⁱ ≐ reflⁱ`
@@ -51,12 +53,10 @@ type from the standard identity type.
 In addition, we maintain the following strict laws
 
 - `inv reflⁱ ≐ reflⁱ`
-- `ind-Id f reflⁱ ≐ f reflⁱ`
 - `reflⁱ ∙ p ≐ p` or `p ∙ reflⁱ ≐ p`
+- `ind-Idⁱ B f reflⁱ ≐ f reflⁱ`
 
-among other more specific laws considered on this page. We call elements of the
-strictly involutive identity type for
-{{#concept "strictly involutive identifications" Agda=involutive-Id}}.
+among other more specific laws considered on this page.
 
 ## Definition
 
@@ -93,22 +93,22 @@ and from right to left by the concatenation
   eq-involutive-eq := (z , p , q) ↦ inv q ∙ p   : x ＝ⁱ y → x ＝ y.
 ```
 
-This equivalence preserves the groupoid structure on the strictly involutive
-identity types as we will see later. Moreover, the composition
+This equivalence weakly preserves the groupoid structure on the strictly
+involutive identity types as we will see later. Moreover, the composition
 `eq-involutive-eq ∘ involutive-eq-eq` computes strictly to the identity:
 
 ```text
   eq-involutive-eq ∘ involutive-eq-eq
-    ≐ p ↦ (((z , p , q) ↦ inv q ∙ p) (r ↦ (w , r , refl)))
-    ≐ p ↦ inv refl ∙ p
-    ≐ p ↦ refl ∙ p
-    ≐ p ↦ p
+  ≐ p ↦ (((z , p , q) ↦ inv q ∙ p) (r ↦ (w , r , refl)))
+  ≐ p ↦ inv refl ∙ p
+  ≐ p ↦ refl ∙ p
+  ≐ p ↦ p
 ```
 
 and the reflexivities are preserved strictly:
 
 ```text
-  eq-involutive-eq reflⁱ ≐ inv refl ∙ refl ≐ refl ∙ refl ≐ refl
+  eq-involutive-eq reflⁱ ≐ inv refl ∙ refl ≐ refl ∙ refl ≐ refl,
 ```
 
 and
@@ -154,7 +154,11 @@ module _
   equiv-eq-involutive-eq : (x ＝ⁱ y) ≃ (x ＝ y)
   pr1 equiv-eq-involutive-eq = eq-involutive-eq
   pr2 equiv-eq-involutive-eq = is-equiv-eq-involutive-eq
+```
 
+This equivalence preserves the reflexivity elements strictly in both directions.
+
+```agda
 module _
   {l : Level} {A : UU l}
   where
@@ -311,12 +315,12 @@ operation is indeed strictly left unital:
 
 ```text
   reflⁱ ∙ⁱ r
-    ≐ (x , refl , refl) ∙ⁱ (w , p , q)
-    ≐ (w , p , (q ∙ᵣ inv refl) ∙ᵣ refl)
-    ≐ (w , p , (q ∙ᵣ inv refl))
-    ≐ (w , p , (q ∙ᵣ refl))
-    ≐ (w , p , q)
-    ≐ r.
+  ≐ (x , refl , refl) ∙ⁱ (w , p , q)
+  ≐ (w , p , (q ∙ᵣ inv refl) ∙ᵣ refl)
+  ≐ (w , p , (q ∙ᵣ inv refl))
+  ≐ (w , p , (q ∙ᵣ refl))
+  ≐ (w , p , q)
+  ≐ r.
 ```
 
 While for the strictly right unital concatenation operation, we have the
@@ -324,12 +328,12 @@ computation
 
 ```text
   r ∙ᵣⁱ reflⁱ
-    ≐  (w , p , q) ∙ᵣⁱ (x , refl , refl)
-    ≐ (w , (p ∙ᵣ inv refl) ∙ᵣ refl , q)
-    ≐ (w , p ∙ᵣ inv refl , q)
-    ≐ (w , p ∙ᵣ refl , q)
-    ≐ (w , p , q)
-    ≐ r.
+  ≐  (w , p , q) ∙ᵣⁱ (x , refl , refl)
+  ≐ (w , (p ∙ᵣ inv refl) ∙ᵣ refl , q)
+  ≐ (w , p ∙ᵣ inv refl , q)
+  ≐ (w , p ∙ᵣ refl , q)
+  ≐ (w , p , q)
+  ≐ r.
 ```
 
 To be consistent with the convention for the standard identity types, we take

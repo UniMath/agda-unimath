@@ -61,7 +61,7 @@ concretely, the reflexivity is given by the identity function, and path
 concatenation is given by function composition.
 
 In addition to these strictness laws, we can make the type satisfy the strict
-law `invʸ reflʸ ≐ reflʸ`. Moreover, while the induction principle of the Yoneda
+law `inv reflʸ ≐ reflʸ`. Moreover, while the induction principle of the Yoneda
 identity types does not in general satisfy the computation rule strictly, we can
 define its recursion principle such that does.
 
@@ -80,7 +80,7 @@ module _
   (a ＝ʸ b) = yoneda-Id a b
 ```
 
-We define the reflexivity to be the identity function:
+We define the reflexivity by the identity function:
 
 ```agda
   reflʸ : {x : A} → x ＝ʸ x
@@ -163,13 +163,13 @@ It should be noted that we define the map `x ＝ y → x ＝ʸ y` using the
 [strictly right unital concatenation operation](foundation.strictly-right-unital-concatenation-identifications.md).
 While this obstructs us from showing that the
 [homotopy](foundation-core.homotopies.md) `eq-yoneda-eq ∘ yoneda-eq-eq ~ id`
-holds by reflexivity, as demonstrated by the computation
+holds by reflexivity as demonstrated by the computation
 
 ```text
   eq-yoneda-eq ∘ yoneda-eq-eq
   ≐ p ↦ (f ↦ f refl) (q ↦ q ∙ p)
   ≐ p ↦ ((q ↦ q ∙ p) refl)
-  ≐ p ↦ refl ∙ p
+  ≐ p ↦ refl ∙ p,
 ```
 
 it allows us to show that reflexivities are preserved strictly in both
@@ -238,24 +238,23 @@ of the Yoneda identity type.
   pr2 equiv-eq-yoneda-eq = is-equiv-eq-yoneda-eq
 ```
 
-The reflexivity elements are preserved strictly.
+This equvialence preserves the reflexivity elements strictly in both directions.
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l : Level} {A : UU l} {x : A}
   where
 
   is-section-eq-yoneda-eq-refl :
-    {x : A} →
     yoneda-eq-eq (eq-yoneda-eq (reflʸ {x = x})) ＝ reflʸ
   is-section-eq-yoneda-eq-refl = refl
 
   preserves-refl-yoneda-eq-eq :
-    {x : A} → yoneda-eq-eq (refl {x = x}) ＝ reflʸ
+    yoneda-eq-eq (refl {x = x}) ＝ reflʸ
   preserves-refl-yoneda-eq-eq = refl
 
   preserves-refl-eq-yoneda-eq :
-    {x : A} → eq-yoneda-eq (reflʸ {x = x}) ＝ refl
+    eq-yoneda-eq (reflʸ {x = x}) ＝ refl
   preserves-refl-eq-yoneda-eq = refl
 ```
 
@@ -430,7 +429,7 @@ contrast to the latter, the former enjoys the computational property
   inv reflʸ ≐ reflʸ,
 ```
 
-hence will be preferred going forward.
+hence it will be preferred going forward.
 
 #### The inversion operation defined by the strictly right unital concatenation operation on identifications
 
@@ -673,8 +672,8 @@ module _
 
 ## Operations
 
-We can define basic operations on the Yoneda identifications. They all enjoy
-strict computational properties.
+We can define a range basic operations on the Yoneda identifications that all
+enjoy strict computational properties.
 
 ### Action of functions on Yoneda identifications
 
