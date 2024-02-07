@@ -40,7 +40,7 @@ primitive
   primShowQName : Name-Agda → String
   primQNameToWord64s : Name-Agda → Word64 × Word64
   primQNameToWord64sInjective :
-    ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
+    (a b : Name-Agda) → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
 ```
 
 ## Examples
