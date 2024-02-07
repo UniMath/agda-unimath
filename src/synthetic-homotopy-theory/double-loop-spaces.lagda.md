@@ -8,10 +8,12 @@ module synthetic-homotopy-theory.double-loop-spaces where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
@@ -46,7 +48,7 @@ module _
   refl-Ω² = refl
 ```
 
-### Vertical and horizontal concatination operations on double loop
+### Vertical and horizontal concatenation operations on double loop
 
 spaces.
 
@@ -60,52 +62,60 @@ horizontal-concat-Ω² :
 horizontal-concat-Ω² α β = horizontal-concat-Id² α β
 ```
 
-### Unit laws horizontal, vertical concatination, and whiskering
+### Unit laws horizontal, vertical concatenation, and whiskering
 
 ```agda
-left-unit-law-vertical-concat-Ω² :
-  {l : Level} {A : UU l} {a : A} {α : type-Ω² a} →
-  Id (vertical-concat-Ω² refl-Ω² α) α
-left-unit-law-vertical-concat-Ω² = left-unit
+module _
+  {l : Level} {A : UU l}
+  where
 
-right-unit-law-vertical-concat-Ω² :
-  {l : Level} {A : UU l} {a : A} {α : type-Ω² a} →
-  Id (vertical-concat-Ω² α refl-Ω²) α
-right-unit-law-vertical-concat-Ω² = right-unit
+  left-unit-law-vertical-concat-Ω² :
+    {a : A} {α : type-Ω² a} →
+    Id (vertical-concat-Ω² refl-Ω² α) α
+  left-unit-law-vertical-concat-Ω² = left-unit
 
-left-unit-law-horizontal-concat-Ω² :
-  {l : Level} {A : UU l} {a : A} {α : type-Ω² a} →
-  Id (horizontal-concat-Ω² refl-Ω² α) α
-left-unit-law-horizontal-concat-Ω² {α = α} =
-  ( left-unit-law-horizontal-concat-Id² α) ∙ (ap-id α)
+  right-unit-law-vertical-concat-Ω² :
+    {a : A} {α : type-Ω² a} →
+    Id (vertical-concat-Ω² α refl-Ω²) α
+  right-unit-law-vertical-concat-Ω² = right-unit
 
-naturality-right-unit :
-  {l : Level} {A : UU l} {x y : A} {p q : Id x y} (α : Id p q) →
-  Id (ap (concat' x refl) α ∙ right-unit) (right-unit ∙ α)
-naturality-right-unit {p = refl} refl = refl
+  left-unit-law-horizontal-concat-Ω² :
+    {a : A} {α : type-Ω² a} →
+    Id (horizontal-concat-Ω² refl-Ω² α) α
+  left-unit-law-horizontal-concat-Ω² {α = α} =
+    ( left-unit-law-horizontal-concat-Id² α) ∙ (ap-id α)
 
-naturality-right-unit-Ω² :
-  {l : Level} {A : UU l} {x : A} (α : type-Ω² x) →
-  Id (ap (concat' x refl) α) α
-naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
+  naturality-right-unit :
+    {x y : A} {p q : Id x y} (α : Id p q) →
+    coherence-square-identifications
+      ( right-unit)
+      ( right-whisker-concat α refl)
+      ( α)
+      ( right-unit)
+  naturality-right-unit {p = refl} refl = refl
 
-right-unit-law-horizontal-concat-Ω² :
-  {l : Level} {A : UU l} {a : A} {α : type-Ω² a} →
-  Id (horizontal-concat-Ω² α refl-Ω²) α
-right-unit-law-horizontal-concat-Ω² {α = α} =
-  ( right-unit-law-horizontal-concat-Id² α) ∙ (naturality-right-unit-Ω² α)
+  naturality-right-unit-Ω² :
+    {x : A} (α : type-Ω² x) →
+    right-whisker-concat α refl ＝ α
+  naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
 
-left-unit-law-identification-left-whisk-Ω² :
-  {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
-  identification-left-whisk (refl-Ω (pair A a)) α ＝ α
-left-unit-law-identification-left-whisk-Ω² α =
-  left-unit-law-identification-left-whisk α
+  right-unit-law-horizontal-concat-Ω² :
+    {a : A} {α : type-Ω² a} →
+    Id (horizontal-concat-Ω² α refl-Ω²) α
+  right-unit-law-horizontal-concat-Ω² {α = α} =
+    ( right-unit-law-horizontal-concat-Id² α) ∙ (naturality-right-unit-Ω² α)
 
-right-unit-law-identification-right-whisk-Ω² :
-  {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
-  identification-right-whisk α (refl-Ω (pair A a)) ＝ α
-right-unit-law-identification-right-whisk-Ω² α =
-  (right-unit-law-identification-right-whisk α) ∙ right-unit
+  left-unit-law-left-whisker-Ω² :
+    {a : A} (α : type-Ω² a) →
+    left-whisker-concat (refl-Ω (pair A a)) α ＝ α
+  left-unit-law-left-whisker-Ω² α =
+    left-unit-law-left-whisker-concat α
+
+  right-unit-law-right-whisker-Ω² :
+    {a : A} (α : type-Ω² a) →
+    right-whisker-concat α (refl-Ω (pair A a)) ＝ α
+  right-unit-law-right-whisker-Ω² α =
+    inv (right-unit-law-right-whisker-concat α ∙ right-unit)
 ```
 
 ### The interchange law for double loop spaces

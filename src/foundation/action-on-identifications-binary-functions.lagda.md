@@ -178,3 +178,9 @@ module _
     ap-binary (λ y x → f x y) q p ＝ ap-binary f p q
   ap-binary-permute refl refl = refl
 ```
+
+## See also
+
+- [Action of functions on identifications](foundation.action-on-identifications-functions.md)
+- [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
+- [Action of dependent functions on identifications](foundation.action-on-identifications-dependent-functions.md).

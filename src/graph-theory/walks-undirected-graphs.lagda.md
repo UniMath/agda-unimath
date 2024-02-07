@@ -189,12 +189,12 @@ module _
       ( is-contr-Fin-one-ℕ)
   compute-vertex-on-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e {y} w) =
-    ( equiv-coprod
+    ( equiv-coproduct
       ( compute-vertex-on-walk-Undirected-Graph w)
       ( equiv-is-contr
         ( is-torsorial-Id (other-element-unordered-pair p y))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coprod
+    ( left-distributive-Σ-coproduct
       ( vertex-Undirected-Graph G)
       ( is-vertex-on-walk-Undirected-Graph G w)
       ( λ z → other-element-unordered-pair p y ＝ z))
@@ -228,12 +228,12 @@ module _
       ( is-empty-edge-on-walk-refl-walk-Undirected-Graph G x)
       ( id)
   compute-edge-on-walk-Undirected-Graph (cons-walk-Undirected-Graph p e w) =
-    ( equiv-coprod
+    ( equiv-coproduct
       ( compute-edge-on-walk-Undirected-Graph w)
       ( equiv-is-contr
         ( is-torsorial-Id (pair p e))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coprod
+    ( left-distributive-Σ-coproduct
       ( total-edge-Undirected-Graph G)
       ( is-edge-on-walk-Undirected-Graph' G w)
       ( λ z → pair p e ＝ z))
@@ -363,7 +363,7 @@ module _
     inl refl
   is-vertex-on-first-or-second-segment-walk-Undirected-Graph
     ( cons-walk-Undirected-Graph p e w) (u , inl H) (v , inl K) =
-    map-coprod id
+    map-coproduct id
       ( is-vertex-on-walk-cons-walk-Undirected-Graph G p e
         ( second-segment-walk-Undirected-Graph G w (u , H)))
       ( is-vertex-on-first-or-second-segment-walk-Undirected-Graph w

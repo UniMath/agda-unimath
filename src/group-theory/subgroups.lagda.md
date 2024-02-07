@@ -103,9 +103,9 @@ module _
 
   is-subgroup-prop-subset-Group : Prop (l1 ⊔ l2)
   is-subgroup-prop-subset-Group =
-    prod-Prop
+    product-Prop
       ( contains-unit-prop-subset-Group)
-      ( prod-Prop
+      ( product-Prop
         ( is-closed-under-multiplication-prop-subset-Group)
         ( is-closed-under-inverses-prop-subset-Group))
 

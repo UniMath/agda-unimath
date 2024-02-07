@@ -97,12 +97,12 @@ equiv-iterated-product-Fin-recursive-Π :
 equiv-iterated-product-Fin-recursive-Π zero-ℕ A =
   equiv-is-contr is-contr-raise-unit (dependent-universal-property-empty' A)
 equiv-iterated-product-Fin-recursive-Π (succ-ℕ n) A =
-  ( ( inv-equiv (equiv-dependent-universal-property-coprod A)) ∘e
-    ( ( commutative-prod) ∘e
-      ( ( equiv-prod
+  ( ( inv-equiv (equiv-dependent-universal-property-coproduct A)) ∘e
+    ( ( commutative-product) ∘e
+      ( ( equiv-product
             ( inv-equiv (left-unit-law-Π-is-contr is-contr-unit star))
             ( id-equiv)) ∘e
-        ( ( equiv-prod
+        ( ( equiv-product
               ( id-equiv)
               ( equiv-iterated-product-Fin-recursive-Π n (A ∘ inl)))))))
 ```
@@ -118,7 +118,7 @@ equiv-iterated-product-Fin-recursive-lists :
   iterated-product-lists l
 equiv-iterated-product-Fin-recursive-lists nil = id-equiv
 equiv-iterated-product-Fin-recursive-lists (cons x l) =
-  equiv-prod id-equiv (equiv-iterated-product-Fin-recursive-lists l)
+  equiv-product id-equiv (equiv-iterated-product-Fin-recursive-lists l)
 ```
 
 ### The cartesian product of two iterated cartesian products (via list) is the iterated cartesian product of the concatenation of the corresponding lists
@@ -129,12 +129,15 @@ equiv-product-iterated-product-lists :
   (iterated-product-lists p × iterated-product-lists q) ≃
   iterated-product-lists (concat-list p q)
 equiv-product-iterated-product-lists nil q =
-  left-unit-law-prod-is-contr (is-contr-raise-unit)
+  left-unit-law-product-is-contr (is-contr-raise-unit)
 equiv-product-iterated-product-lists (cons x p) q =
-  ( ( equiv-prod
+  ( ( equiv-product
       ( id-equiv)
       ( equiv-product-iterated-product-lists p q)) ∘e
-    ( associative-prod x (iterated-product-lists p) (iterated-product-lists q)))
+    ( associative-product
+      ( x)
+      ( iterated-product-lists p)
+      ( iterated-product-lists q)))
 ```
 
 ### Iterated cartesian product is closed under permutations

@@ -161,9 +161,9 @@ module _
   is-finite-is-equivalence-Dec-Relation-Prop-𝔽 :
     is-finite (is-equivalence-relation (relation-Decidable-Relation R))
   is-finite-is-equivalence-Dec-Relation-Prop-𝔽 =
-    is-finite-prod
+    is-finite-product
       ( is-finite-is-reflexive-Dec-Relation-Prop-𝔽)
-      ( is-finite-prod
+      ( is-finite-product
           is-finite-is-symmetric-Dec-Relation-Prop-𝔽
           is-finite-is-transitive-Dec-Relation-Prop-𝔽)
 ```
@@ -199,16 +199,16 @@ equiv-Surjection-𝔽-Decidable-equivalence-relation-𝔽 {l1} A =
             ( id-equiv)
             ( λ X →
               ( ( inv-equiv
-                  ( associative-prod
+                  ( associative-product
                     ( has-decidable-equality X)
                     ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
                     ( type-𝔽 A ↠ X))) ∘e
-                ( ( equiv-prod id-equiv commutative-prod) ∘e
-                  ( ( associative-prod
+                ( ( equiv-product id-equiv commutative-product) ∘e
+                  ( ( associative-product
                       ( has-decidable-equality (map-equiv id-equiv X))
                       ( type-𝔽 A ↠ X)
                       ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
-                  ( ( equiv-prod commutative-prod id-equiv) ∘e
+                  ( ( equiv-product commutative-product id-equiv) ∘e
                     ( ( equiv-add-redundant-prop
                         ( is-prop-type-trunc-Prop)
                         ( λ x →

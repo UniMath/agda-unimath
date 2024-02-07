@@ -8,12 +8,12 @@ module foundation-core.commuting-triangles-of-maps where
 
 ```agda
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -70,26 +70,6 @@ module _
     coherence-triangle-maps f h (j ∘ i)
   concat-coherence-triangle-maps H K =
     H ∙h (K ·r i)
-```
-
-### Coherences of commuting triangles of maps with fixed vertices
-
-This or its opposite should be the coherence in the characterization of
-identifications of commuting triangles of maps with fixed end vertices.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (left : A → X) (right : B → X) (top : A → B)
-  (left' : A → X) (right' : B → X) (top' : A → B)
-  (c : coherence-triangle-maps left right top)
-  (c' : coherence-triangle-maps left' right' top')
-  where
-
-  coherence-htpy-triangle-maps :
-    left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
-  coherence-htpy-triangle-maps L R T =
-    c ∙h htpy-comp-horizontal T R ~ L ∙h c'
 ```
 
 ## Properties

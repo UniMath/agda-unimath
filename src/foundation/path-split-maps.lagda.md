@@ -34,7 +34,7 @@ module _
     is-prop-is-path-split f =
       is-prop-is-proof-irrelevant
         ( λ is-path-split-f →
-          ( is-contr-prod
+          ( is-contr-product
             ( is-contr-section-is-equiv
               ( is-equiv-is-path-split f is-path-split-f))
             ( is-contr-iterated-Π 2

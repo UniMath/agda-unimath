@@ -242,7 +242,7 @@ pr2 unit-𝔽 = is-finite-unit
 
 unit-UU-Fin : UU-Fin lzero 1
 pr1 unit-UU-Fin = unit
-pr2 unit-UU-Fin = unit-trunc-Prop (left-unit-law-coprod unit)
+pr2 unit-UU-Fin = unit-trunc-Prop (left-unit-law-coproduct unit)
 ```
 
 ### Contractible types are finite
@@ -548,7 +548,7 @@ is-inhabited-type-UU-Fin-succ-ℕ n A =
 is-decidable-type-trunc-Prop-is-finite :
   {l1 : Level} {A : UU l1} → is-finite A → is-decidable (type-trunc-Prop A)
 is-decidable-type-trunc-Prop-is-finite H =
-  map-coprod
+  map-coproduct
     ( id)
     ( map-universal-property-trunc-Prop empty-Prop)
       ( is-inhabited-or-empty-is-finite H)

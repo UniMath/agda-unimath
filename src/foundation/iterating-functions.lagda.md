@@ -13,13 +13,14 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.endomorphisms
-open import foundation-core.function-extensionality
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
@@ -115,7 +116,7 @@ module _
   left-unit-law-iterate-add-ℕ zero-ℕ f x = refl
   left-unit-law-iterate-add-ℕ (succ-ℕ l) f x =
     ( right-unit) ∙
-    ( ( ap (ap f) (left-unit-law-iterate-add-ℕ l f x)) ∙
+    ( ( ap² f (left-unit-law-iterate-add-ℕ l f x)) ∙
       ( ( inv (ap-comp f (λ t → iterate t f x) (left-unit-law-add-ℕ l))) ∙
         ( ap-comp (λ t → iterate t f x) succ-ℕ (left-unit-law-add-ℕ l))))
 

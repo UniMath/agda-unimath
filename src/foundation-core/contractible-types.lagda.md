@@ -10,6 +10,7 @@ module foundation-core.contractible-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.function-extensionality
 open import foundation.implicit-function-types
 open import foundation.retracts-of-types
 open import foundation.universe-levels
@@ -17,7 +18,6 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
 ```
@@ -180,8 +180,8 @@ module _
   where
 
   abstract
-    is-contr-left-factor-prod : is-contr (A × B) → is-contr A
-    is-contr-left-factor-prod is-contr-AB =
+    is-contr-left-factor-product : is-contr (A × B) → is-contr A
+    is-contr-left-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
@@ -194,8 +194,8 @@ module _
   where
 
   abstract
-    is-contr-right-factor-prod : is-contr (A × B) → is-contr B
-    is-contr-right-factor-prod is-contr-AB =
+    is-contr-right-factor-product : is-contr (A × B) → is-contr B
+    is-contr-right-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
@@ -208,10 +208,11 @@ module _
   where
 
   abstract
-    is-contr-prod : is-contr A → is-contr B → is-contr (A × B)
-    pr1 (pr1 (is-contr-prod (pair a C) (pair b D))) = a
-    pr2 (pr1 (is-contr-prod (pair a C) (pair b D))) = b
-    pr2 (is-contr-prod (pair a C) (pair b D)) (pair x y) = eq-pair (C x) (D y)
+    is-contr-product : is-contr A → is-contr B → is-contr (A × B)
+    pr1 (pr1 (is-contr-product (pair a C) (pair b D))) = a
+    pr2 (pr1 (is-contr-product (pair a C) (pair b D))) = b
+    pr2 (is-contr-product (pair a C) (pair b D)) (pair x y) =
+      eq-pair (C x) (D y)
 ```
 
 ### Contractibility of Σ-types
@@ -315,7 +316,7 @@ module _
     is-contr-Σ
       ( is-contr-function-type (pair b β))
       ( λ x → b)
-      ( is-contr-prod
+      ( is-contr-product
         ( is-contr-Σ
           ( is-contr-function-type (pair a α))
           ( λ y → a)

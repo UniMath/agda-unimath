@@ -90,11 +90,11 @@ module _
   pr1 (pr2 htpy-function-out-of-suspension-id-map-suspension) =
     compute-south-map-suspension id
   pr2 (pr2 htpy-function-out-of-suspension-id-map-suspension) a =
-    coherence-square-identifications-right-paste
-      ( ap (map-suspension id) (meridian-suspension a))
-      ( compute-south-map-suspension id)
+    concat-right-identification-coherence-square-identifications
       ( compute-north-map-suspension id)
+      ( ap (map-suspension id) (meridian-suspension a))
       ( meridian-suspension a)
+      ( compute-south-map-suspension id)
       ( inv (ap-id (meridian-suspension a)))
       ( compute-meridian-map-suspension id a)
 
@@ -138,33 +138,37 @@ module _
       ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
       ( preserves-comp-map-suspension-south)
   coherence-square-identifications-comp-map-suspension a =
-    coherence-square-identifications-comp-horizontal
+    horizontal-pasting-coherence-square-identifications _ _
       ( ap (map-suspension g ∘ map-suspension f) (meridian-suspension a))
       ( ap (map-suspension g) (meridian-suspension (f a)))
       ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
-      ( coherence-square-identifications-left-paste
-        ( ap (map-suspension g) (ap (map-suspension f) (meridian-suspension a)))
-        ( ap (map-suspension g) (compute-south-map-suspension f))
+      ( _)
+      ( _)
+      ( concat-left-identification-coherence-square-identifications
         ( ap (map-suspension g) (compute-north-map-suspension f))
+        ( ap (map-suspension g) (ap (map-suspension f) (meridian-suspension a)))
         ( ap (map-suspension g) (meridian-suspension (f a)))
+        ( ap (map-suspension g) (compute-south-map-suspension f))
         ( inv
           ( ap-comp
             ( map-suspension g)
             ( map-suspension f)
             ( meridian-suspension a)))
-        ( coherence-square-identifications-ap
+        ( map-coherence-square-identifications
           ( map-suspension g)
           ( compute-north-map-suspension f)
           ( ap (map-suspension f) (meridian-suspension a))
           ( meridian-suspension (f a))
           ( compute-south-map-suspension f)
           ( compute-meridian-map-suspension f a)))
-      ( coherence-square-identifications-comp-horizontal
+      ( horizontal-pasting-coherence-square-identifications _ _
         ( ap (map-suspension g) (meridian-suspension (f a)))
         ( meridian-suspension (g (f a)))
         ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
+        ( _)
+        ( _)
         ( compute-meridian-map-suspension g (f a))
-        ( coherence-square-identifications-horizontal-inv
+        ( horizontal-inv-coherence-square-identifications
           ( compute-north-map-suspension (g ∘ f))
           ( ap (map-suspension (g ∘ f)) (meridian-suspension a))
           ( meridian-suspension (g (f a)))

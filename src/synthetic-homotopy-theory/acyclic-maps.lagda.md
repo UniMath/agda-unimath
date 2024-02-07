@@ -481,9 +481,9 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  is-acyclic-prod :
+  is-acyclic-product :
     is-acyclic A → is-acyclic B → is-acyclic (A × B)
-  is-acyclic-prod ac-A ac-B =
+  is-acyclic-product ac-A ac-B =
     is-acyclic-is-acyclic-map-terminal-map
       ( A × B)
       ( is-acyclic-map-comp
@@ -493,8 +493,8 @@ module _
         ( is-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
           ( terminal-map B)
-          ( cone-prod A B)
-          ( is-pullback-prod A B)
+          ( cone-product A B)
+          ( is-pullback-product A B)
           ( is-acyclic-map-terminal-map-is-acyclic A ac-A)))
 ```
 

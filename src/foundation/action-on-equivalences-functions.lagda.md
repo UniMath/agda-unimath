@@ -7,6 +7,7 @@ module foundation.action-on-equivalences-functions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-induction
@@ -57,7 +58,7 @@ module _
   compute-action-equiv-function-id-equiv :
     (X : UU l1) → action-equiv-function id-equiv ＝ refl
   compute-action-equiv-function-id-equiv X =
-    ap (ap f) (compute-eq-equiv-id-equiv X)
+    ap² f (compute-eq-equiv-id-equiv X)
 ```
 
 ## Properties
@@ -80,7 +81,7 @@ distributive-action-equiv-function-comp-equiv :
   action-equiv-function f (e' ∘e e) ＝
   action-equiv-function f e ∙ action-equiv-function f e'
 distributive-action-equiv-function-comp-equiv f e e' =
-    ( ap (ap f) (inv (compute-eq-equiv-comp-equiv e e'))) ∙
+    ( ap² f (inv (compute-eq-equiv-comp-equiv e e'))) ∙
     ( ap-concat f (eq-equiv e) (eq-equiv e'))
 ```
 
@@ -92,6 +93,6 @@ compute-action-equiv-function-inv-equiv :
   (e : X ≃ Y) →
   action-equiv-function f (inv-equiv e) ＝ inv (action-equiv-function f e)
 compute-action-equiv-function-inv-equiv f e =
-  ( ap (ap f) (inv (commutativity-inv-eq-equiv e))) ∙
+  ( ap² f (inv (commutativity-inv-eq-equiv e))) ∙
   ( ap-inv f (eq-equiv e))
 ```

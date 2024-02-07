@@ -151,7 +151,7 @@ neg-ℤ (inr (inr x)) = inl x
 
 ```agda
 is-set-ℤ : is-set ℤ
-is-set-ℤ = is-set-coprod is-set-ℕ (is-set-coprod is-set-unit is-set-ℕ)
+is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
 
 ℤ-Set : Set lzero
 pr1 ℤ-Set = ℤ

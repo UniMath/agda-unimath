@@ -521,7 +521,7 @@ abstract
   is-not-decidable-type-2-Element-Type {l} d =
     no-section-type-2-Element-Type
       ( λ X →
-        map-right-unit-law-coprod-is-empty
+        map-right-unit-law-coproduct-is-empty
           ( pr1 X)
           ( ¬ (pr1 X))
           ( apply-universal-property-trunc-Prop
@@ -777,14 +777,14 @@ preserves-add-aut-point-Fin-two-ℕ (inr star) (inr star) =
 ### Any Σ-type over `Fin 2` is a coproduct
 
 ```agda
-is-coprod-Σ-Fin-two-ℕ :
+is-coproduct-Σ-Fin-two-ℕ :
   {l : Level} (P : Fin 2 → UU l) →
   Σ (Fin 2) P ≃ (P (zero-Fin 1) + P (one-Fin 1))
-is-coprod-Σ-Fin-two-ℕ P =
-  ( equiv-coprod
+is-coproduct-Σ-Fin-two-ℕ P =
+  ( equiv-coproduct
     ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (zero-Fin 0))
     ( left-unit-law-Σ (P ∘ inr))) ∘e
-  ( right-distributive-Σ-coprod (Fin 1) unit P)
+  ( right-distributive-Σ-coproduct (Fin 1) unit P)
 ```
 
 ### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`
@@ -803,7 +803,7 @@ module _
     is-contr-decide-value-equiv-Fin-two-ℕ e x =
       is-contr-equiv'
         ( fiber (map-equiv e) x)
-        ( ( is-coprod-Σ-Fin-two-ℕ (λ y → x ＝ map-equiv e y)) ∘e
+        ( ( is-coproduct-Σ-Fin-two-ℕ (λ y → x ＝ map-equiv e y)) ∘e
           ( equiv-tot (λ y → equiv-inv (map-equiv e y) x)))
         ( is-contr-map-is-equiv (is-equiv-map-equiv e) x)
 

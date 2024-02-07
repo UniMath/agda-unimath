@@ -191,8 +191,8 @@ module _
   is-0-connected-product =
     is-contr-equiv
       ( type-trunc-Set X × type-trunc-Set Y)
-      ( equiv-distributive-trunc-prod-Set X Y)
-      ( is-contr-prod p1 p2)
+      ( equiv-distributive-trunc-product-Set X Y)
+      ( is-contr-product p1 p2)
 ```
 
 ### A contractible type is `0`-connected

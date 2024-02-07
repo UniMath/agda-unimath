@@ -59,9 +59,9 @@ is-prop-is-equivalence-relation :
   {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →
   is-prop (is-equivalence-relation R)
 is-prop-is-equivalence-relation R =
-  is-prop-prod
+  is-prop-product
     ( is-prop-is-reflexive-Relation-Prop R)
-    ( is-prop-prod
+    ( is-prop-product
       ( is-prop-is-symmetric-Relation-Prop R)
       ( is-prop-is-transitive-Relation-Prop R))
 

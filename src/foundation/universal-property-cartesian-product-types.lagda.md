@@ -76,26 +76,26 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  cone-prod : cone (terminal-map A) (terminal-map B) (A × B)
-  pr1 cone-prod = pr1
-  pr1 (pr2 cone-prod) = pr2
-  pr2 (pr2 cone-prod) = refl-htpy
+  cone-product : cone (terminal-map A) (terminal-map B) (A × B)
+  pr1 cone-product = pr1
+  pr1 (pr2 cone-product) = pr2
+  pr2 (pr2 cone-product) = refl-htpy
 ```
 
 Cartesian products are a special case of pullbacks.
 
 ```agda
-  gap-prod : A × B → standard-pullback (terminal-map A) (terminal-map B)
-  gap-prod = gap (terminal-map A) (terminal-map B) cone-prod
+  gap-product : A × B → standard-pullback (terminal-map A) (terminal-map B)
+  gap-product = gap (terminal-map A) (terminal-map B) cone-product
 
-  inv-gap-prod :
+  inv-gap-product :
     standard-pullback (terminal-map A) (terminal-map B) → A × B
-  pr1 (inv-gap-prod (pair a (pair b p))) = a
-  pr2 (inv-gap-prod (pair a (pair b p))) = b
+  pr1 (inv-gap-product (pair a (pair b p))) = a
+  pr2 (inv-gap-product (pair a (pair b p))) = b
 
   abstract
-    is-section-inv-gap-prod : (gap-prod ∘ inv-gap-prod) ~ id
-    is-section-inv-gap-prod (pair a (pair b p)) =
+    is-section-inv-gap-product : (gap-product ∘ inv-gap-product) ~ id
+    is-section-inv-gap-product (pair a (pair b p)) =
       map-extensionality-standard-pullback
         ( terminal-map A)
         ( terminal-map B)
@@ -103,33 +103,32 @@ Cartesian products are a special case of pullbacks.
         ( refl)
         ( eq-is-contr (is-prop-is-contr is-contr-unit star star))
 
-  abstract
-    is-retraction-inv-gap-prod : (inv-gap-prod ∘ gap-prod) ~ id
-    is-retraction-inv-gap-prod (pair a b) = eq-pair-Σ refl refl
+  is-retraction-inv-gap-product : inv-gap-product ∘ gap-product ~ id
+  is-retraction-inv-gap-product (pair a b) = refl
 
   abstract
-    is-pullback-prod :
-      is-pullback (terminal-map A) (terminal-map B) cone-prod
-    is-pullback-prod =
+    is-pullback-product :
+      is-pullback (terminal-map A) (terminal-map B) cone-product
+    is-pullback-product =
       is-equiv-is-invertible
-        inv-gap-prod
-        is-section-inv-gap-prod
-        is-retraction-inv-gap-prod
+        inv-gap-product
+        is-section-inv-gap-product
+        is-retraction-inv-gap-product
 ```
 
 We conclude that cartesian products satisfy the universal property of pullbacks.
 
 ```agda
   abstract
-    universal-property-pullback-prod :
+    universal-property-pullback-product :
       universal-property-pullback
         ( terminal-map A)
         ( terminal-map B)
-        ( cone-prod)
-    universal-property-pullback-prod =
+        ( cone-product)
+    universal-property-pullback-product =
       universal-property-pullback-is-pullback
         ( terminal-map A)
         ( terminal-map B)
-        ( cone-prod)
-        ( is-pullback-prod)
+        ( cone-product)
+        ( is-pullback-product)
 ```

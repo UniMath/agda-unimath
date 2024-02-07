@@ -24,7 +24,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
@@ -107,7 +107,7 @@ is-equiv-inr-join-empty X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr1-prod-empty X)
+    ( is-equiv-pr1-product-empty X)
     ( up-join)
 
 left-unit-law-join :
@@ -123,7 +123,7 @@ is-equiv-inr-join-is-empty {A = A} {B = B} is-empty-A =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr1-prod-is-empty A B is-empty-A)
+    ( is-equiv-pr1-product-is-empty A B is-empty-A)
     ( up-join)
 
 left-unit-law-join-is-empty :
@@ -144,7 +144,7 @@ is-equiv-inl-join-empty X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr2-prod-empty X)
+    ( is-equiv-pr2-product-empty X)
     ( up-join)
 
 right-unit-law-join :
@@ -160,7 +160,7 @@ is-equiv-inl-join-is-empty {A = A} {B = B} is-empty-B =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr2-prod-is-empty A B is-empty-B)
+    ( is-equiv-pr2-product-is-empty A B is-empty-B)
     ( up-join)
 
 right-unit-law-join-is-empty :
@@ -187,7 +187,7 @@ is-equiv-inl-join-unit X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-map-left-unit-law-prod)
+    ( is-equiv-map-left-unit-law-product)
     ( up-join)
 
 left-zero-law-join :
@@ -206,7 +206,7 @@ is-equiv-inl-join-is-contr A B is-contr-A =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr2-prod-is-contr is-contr-A)
+    ( is-equiv-pr2-product-is-contr is-contr-A)
     ( up-join)
 
 left-zero-law-join-is-contr :
@@ -228,7 +228,7 @@ is-equiv-inr-join-unit X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-map-right-unit-law-prod)
+    ( is-equiv-map-right-unit-law-product)
     ( up-join)
 
 right-zero-law-join :

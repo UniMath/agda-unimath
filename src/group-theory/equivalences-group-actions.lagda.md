@@ -199,7 +199,7 @@ module _
     (e : equiv-action-Group G X Y) →
     preserves-action-Group G Y X (map-inv-equiv-action-Group e)
   preserves-action-map-inv-equiv-action-Group (e , H) g =
-    coherence-square-inv-horizontal
+    coherence-square-maps-inv-equiv-horizontal
       ( e)
       ( mul-action-Group G X g)
       ( mul-action-Group G Y g)

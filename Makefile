@@ -62,7 +62,7 @@ src/everything.lagda.md: agdaFiles
 		| cut -c 5-               \
 		| cut -f1 -d'.'           \
 		| sed 's/\//\./g'         \
-		| awk 'BEGIN { FS = "."; OFS = "."; lastdir = "" } { if ($$1 != lastdir) { print ""; lastdir = $$1 } print "open import " $$0 }' \
+		| awk 'BEGIN { FS = "."; OFS = "."; lastdir = "" } { if ($$1 != lastdir) { print ""; lastdir = $$1 } print "open import " $$0 " public"}' \
 		>> $@ ;\
 	echo "\`\`\`" >> $@ ;
 

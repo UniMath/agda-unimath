@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -112,7 +113,9 @@ module _
       ( pr2 (pr2 center-structure-preserving-map-ℕ) n ∙ ap f (α n)) ＝
       ( α (succ-ℕ n) ∙ pr2 (pr2 h) n)
     γ n = ( ( inv right-unit) ∙
-            ( ap (λ q → (ap f (α n) ∙ q)) (inv (left-inv (pr2 (pr2 h) n))))) ∙
+            ( left-whisker-concat
+              ( ap f (α n))
+              ( inv (left-inv (pr2 (pr2 h) n))))) ∙
           ( inv
             ( assoc (ap f (α n)) (inv (pr2 (pr2 h) n)) (pr2 (pr2 h) n)))
 

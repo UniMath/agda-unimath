@@ -459,7 +459,7 @@ module _
   coherence-square-maps-tot :
     ((a : A) → coherence-square-maps (top a) (left a) (right a) (bottom a)) →
     coherence-square-maps (tot top) (tot left) (tot right) (tot bottom)
-  coherence-square-maps-tot H (a , p) = eq-pair-Σ refl (H a p)
+  coherence-square-maps-tot H (a , p) = eq-pair-eq-fiber (H a p)
 ```
 
 #### `map-Σ-map-base` preserves commuting squares of maps
@@ -529,7 +529,7 @@ module _
     is-injective-equiv
       ( equiv-tot e)
       ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙
-        ( eq-pair-Σ refl (inv (is-section-map-inv-equiv (e a) c))))
+        ( eq-pair-eq-fiber (inv (is-section-map-inv-equiv (e a) c))))
 ```
 
 ## See also

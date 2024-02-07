@@ -7,6 +7,7 @@ module structured-types.morphisms-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -15,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import group-theory.homomorphisms-semigroups
 
@@ -76,7 +78,7 @@ preserves-coh-unit-laws-mul :
 preserves-coh-unit-laws-mul M
   (pair (pair N ._) μ)
   (pair f refl) μf lf rf =
-  Id (ap (ap f) cM ∙ rf eM) (lf eM ∙ ap (concat μf (f eM)) cN)
+  Id (ap² f cM ∙ rf eM) (lf eM ∙ ap (concat μf (f eM)) cN)
   where
   eM = unit-H-Space M
   cM = coh-unit-laws-mul-H-Space M
@@ -113,19 +115,19 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
     { A =
       Id (ap (pr1 f) (lM eM) ∙ ef) ((μf ∙ ap-binary μN ef ef) ∙ rN eN)}
     ( ( horizontal-concat-Id² (lf eM) (inv (ap-id ef))) ∙
-      ( ( ap
-          ( _∙ (ap id ef))
+      ( ( right-whisker-concat
           ( inv
             ( assoc
               ( μf)
               ( ap (mul-H-Space' N (pr1 f eM)) ef)
-              ( lN (pr1 f eM))))) ∙
+              ( lN (pr1 f eM))))
+          ( ap id ef)) ∙
         ( ( assoc
             ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
             ( lN (pr1 f eM))
             ( ap id ef)) ∙
-          ( ( ap
-              ( ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef) ∙_)
+          ( ( left-whisker-concat
+              ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
               ( nat-htpy lN ef)) ∙
             ( ( inv
                 ( assoc
@@ -139,23 +141,23 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                     ( ap (mul-H-Space' N (pr1 f eM)) ef)
                     ( ap (μN eN) ef))) ∙
                 ( horizontal-concat-Id²
-                  ( ap
-                    ( μf ∙_)
+                  ( left-whisker-concat
+                    ( μf)
                     ( inv (triangle-ap-binary μN ef ef)))
                   ( cN))))))))
-    ( ( ap (_∙ ef) (ap (ap (pr1 f)) cM)) ∙
+    ( ( right-whisker-concat (ap² (pr1 f) cM) ef) ∙
       ( ( horizontal-concat-Id² (rf eM) (inv (ap-id ef))) ∙
-        ( ( ap
-            ( _∙ ap id ef)
+        ( ( right-whisker-concat
             ( inv
               ( assoc
-                ( μf) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))) ∙
+                ( μf) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))
+            ( ap id ef)) ∙
           ( ( assoc
               ( μf ∙ ap (μN (pr1 f eM)) ef)
               ( rN (pr1 f eM))
               ( ap id ef)) ∙
-            ( ( ap
-                ( ( μf ∙ ap (μN (pr1 f eM)) ef) ∙_)
+            ( ( left-whisker-concat
+                ( μf ∙ ap (μN (pr1 f eM)) ef)
                 ( nat-htpy rN ef)) ∙
               ( ( inv
                   ( assoc
@@ -168,8 +170,8 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                       ( μf)
                       ( ap (μN (pr1 f eM)) ef)
                       ( ap (mul-H-Space' N eN) ef)) ∙
-                    ( ap
-                      ( μf ∙_)
+                    ( left-whisker-concat
+                      ( μf)
                       ( inv (triangle-ap-binary' μN ef ef)))))))))))
   where
   eM = unit-H-Space M
