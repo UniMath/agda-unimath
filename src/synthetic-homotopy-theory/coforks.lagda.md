@@ -240,7 +240,7 @@ module _
         ( X) →
       cofork f g X
     pr1 (cofork-cocone-codiagonal c) =
-      vertical-map-cocone
+      right-map-cocone
         ( vertical-map-span-cocone-cofork)
         ( horizontal-map-span-cocone-cofork)
         ( c)
@@ -257,19 +257,19 @@ module _
           ( c)) ·r
         ( inr))
 
-    horizontal-map-cocone-cofork : cofork f g X → A → X
-    horizontal-map-cocone-cofork e = map-cofork f g e ∘ f
+    left-map-cocone-cofork : cofork f g X → A → X
+    left-map-cocone-cofork e = map-cofork f g e ∘ f
 
-    vertical-map-cocone-cofork : cofork f g X → B → X
-    vertical-map-cocone-cofork e = map-cofork f g e
+    right-map-cocone-cofork : cofork f g X → B → X
+    right-map-cocone-cofork e = map-cofork f g e
 
     coherence-square-cocone-cofork :
       ( e : cofork f g X) →
       coherence-square-maps
         ( horizontal-map-span-cocone-cofork)
         ( vertical-map-span-cocone-cofork)
-        ( vertical-map-cocone-cofork e)
-        ( horizontal-map-cocone-cofork e)
+        ( right-map-cocone-cofork e)
+        ( left-map-cocone-cofork e)
     coherence-square-cocone-cofork e (inl a) = refl
     coherence-square-cocone-cofork e (inr a) = coherence-cofork f g e a
 
@@ -279,8 +279,8 @@ module _
         ( vertical-map-span-cocone-cofork)
         ( horizontal-map-span-cocone-cofork)
         ( X)
-    pr1 (cocone-codiagonal-cofork e) = horizontal-map-cocone-cofork e
-    pr1 (pr2 (cocone-codiagonal-cofork e)) = vertical-map-cocone-cofork e
+    pr1 (cocone-codiagonal-cofork e) = left-map-cocone-cofork e
+    pr1 (pr2 (cocone-codiagonal-cofork e)) = right-map-cocone-cofork e
     pr2 (pr2 (cocone-codiagonal-cofork e)) = coherence-square-cocone-cofork e
 
     abstract

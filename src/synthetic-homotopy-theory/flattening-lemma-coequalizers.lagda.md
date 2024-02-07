@@ -136,11 +136,11 @@ module _
           ( horizontal-map-span-cocone-cofork
             ( bottom-map-cofork-flattening-lemma-coequalizer f g P e)
             ( top-map-cofork-flattening-lemma-coequalizer f g P e))
-          ( horizontal-map-cocone-flattening-pushout P
+          ( left-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( vertical-map-cocone-flattening-pushout P
+          ( right-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
@@ -152,18 +152,18 @@ module _
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( horizontal-map-cocone-flattening-pushout P
+          ( left-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( vertical-map-cocone-flattening-pushout P
+          ( right-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
           ( map-equiv
             ( right-distributive-Σ-coproduct A A
               ( ( P) ∘
-                ( horizontal-map-cocone-cofork f g e) ∘
+                ( left-map-cocone-cofork f g e) ∘
                 ( vertical-map-span-cocone-cofork f g))))
           ( id)
           ( id)
@@ -187,7 +187,7 @@ module _
           ( is-equiv-map-equiv
             ( right-distributive-Σ-coproduct A A
               ( ( P) ∘
-                ( horizontal-map-cocone-cofork f g e) ∘
+                ( left-map-cocone-cofork f g e) ∘
                 ( vertical-map-span-cocone-cofork f g))))
           ( is-equiv-id)
           ( is-equiv-id)

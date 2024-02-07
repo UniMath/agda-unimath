@@ -123,7 +123,7 @@ module _
         ( cocone-codiagonal-cofork f g e)) →
     ( {l : Level} →
       universal-property-coequalizer l f g e)
-  universal-property-coequalizer-universal-property-pushout up-pushout Y =
+  universal-property-coequalizer-universal-property-pushout U Y =
     is-equiv-left-map-triangle
       ( cofork-map f g e)
       ( cofork-cocone-codiagonal f g)
@@ -132,7 +132,7 @@ module _
         ( horizontal-map-span-cocone-cofork f g)
         ( cocone-codiagonal-cofork f g e))
       ( triangle-cofork-cocone f g e)
-      ( up-pushout Y)
+      ( U Y)
       ( is-equiv-cofork-cocone-codiagonal f g)
 
   universal-property-pushout-universal-property-coequalizer :
@@ -215,16 +215,16 @@ module _
         ( horizontal-map-span-cocone-cofork
           ( map-codomain-hom-arrow hA hB f)
           ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
         ( vertical-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
         ( horizontal-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ top-cofork-hom-arrow)
         ( map-coproduct hA hA)
         ( hA)
         ( hB)
@@ -258,16 +258,16 @@ module _
         ( horizontal-map-span-cocone-cofork
           ( map-codomain-hom-arrow hA hB f)
           ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
         ( vertical-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
         ( horizontal-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ top-cofork-hom-arrow)
         ( map-coproduct hA hA)
         ( hA)
         ( hB)

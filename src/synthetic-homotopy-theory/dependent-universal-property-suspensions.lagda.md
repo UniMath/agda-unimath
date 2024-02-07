@@ -67,9 +67,8 @@ module _
     (B : Y → UU l3) →
     ( ( map-equiv
         ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
-      ( dependent-cocone-map
-        ( terminal-map X)
-        ( terminal-map X)
+      ( dependent-cocone-map-span-diagram
+        ( span-diagram-suspension X)
         ( suspension-cocone-suspension-structure s)
         ( B))) ~
     ( dependent-ev-suspension s B)

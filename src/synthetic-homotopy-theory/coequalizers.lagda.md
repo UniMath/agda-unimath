@@ -96,7 +96,7 @@ module _
                 ( cocone-pushout
                   ( vertical-map-span-cocone-cofork f g)
                   ( horizontal-map-span-cocone-cofork f g))))
-            ( dup-pushout
+            ( dependent-universal-property-pushout-standard-pushout
               ( vertical-map-span-cocone-cofork f g)
               ( horizontal-map-span-cocone-cofork f g)
               ( P)))

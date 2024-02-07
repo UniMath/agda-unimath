@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.codiagonals-of-maps where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-span-diagrams
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
@@ -16,7 +17,9 @@ open import foundation.homotopies
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.fibers-of-cogap-maps-pushouts
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
@@ -49,46 +52,56 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  cocone-codiagonal-map : cocone f f B
+  cocone-codiagonal-map : cocone-span-diagram (diagonal-span-diagram f) B
   pr1 cocone-codiagonal-map = id
   pr1 (pr2 cocone-codiagonal-map) = id
   pr2 (pr2 cocone-codiagonal-map) = refl-htpy
 
-  codiagonal-map : pushout f f → B
-  codiagonal-map = cogap f f cocone-codiagonal-map
+  codiagonal-map : standard-pushout (diagonal-span-diagram f) → B
+  codiagonal-map =
+    cogap-cocone-span-diagram (diagonal-span-diagram f) cocone-codiagonal-map
 
   compute-inl-codiagonal-map :
-    codiagonal-map ∘ inl-pushout f f ~ id
+    codiagonal-map ∘ inl-standard-pushout (diagonal-span-diagram f) ~ id
   compute-inl-codiagonal-map =
-    compute-inl-cogap f f cocone-codiagonal-map
+    compute-inl-cogap-cocone-span-diagram
+      ( diagonal-span-diagram f)
+      ( cocone-codiagonal-map)
 
   compute-inr-codiagonal-map :
-    codiagonal-map ∘ inr-pushout f f ~ id
+    codiagonal-map ∘ inr-standard-pushout (diagonal-span-diagram f) ~ id
   compute-inr-codiagonal-map =
-    compute-inr-cogap f f cocone-codiagonal-map
+    compute-inr-cogap-cocone-span-diagram
+      ( diagonal-span-diagram f)
+      ( cocone-codiagonal-map)
 
   compute-glue-codiagonal-map :
-    statement-coherence-htpy-cocone f f
-      ( cocone-map f f (cocone-pushout f f) codiagonal-map)
+    statement-coherence-htpy-cocone-span-diagram (diagonal-span-diagram f)
+      ( cocone-map-span-diagram
+        ( diagonal-span-diagram f)
+        ( cocone-standard-pushout (diagonal-span-diagram f))
+        ( codiagonal-map))
       ( cocone-codiagonal-map)
       ( compute-inl-codiagonal-map)
       ( compute-inr-codiagonal-map)
   compute-glue-codiagonal-map =
-    compute-glue-cogap f f cocone-codiagonal-map
+    compute-glue-cogap-cocone-span-diagram
+      ( diagonal-span-diagram f)
+      ( cocone-codiagonal-map)
 ```
 
 ## Properties
 
 ### The codiagonal is the fiberwise suspension
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
   where
 
   universal-property-suspension-cocone-fiber :
     {l : Level} →
-    Σ ( cocone
+    Σ ( cocone-span-diagram
         ( terminal-map (fiber f b))
         ( terminal-map (fiber f b))
         ( fiber (codiagonal-map f) b))
@@ -96,7 +109,7 @@ module _
         ( terminal-map (fiber f b))
         ( terminal-map (fiber f b)))
   universal-property-suspension-cocone-fiber =
-    universal-property-pushout-cogap-fiber-up-to-equiv f f
+    universal-property-pushout-cogap-cocone-span-diagram-fiber-universal-property-to-equiv (diagonal-span-diagram f)
       ( cocone-codiagonal-map f)
       ( b)
       ( fiber f b)
@@ -136,7 +149,7 @@ module _
   is-equiv-fiber-codiagonal-map-suspension-fiber :
     is-equiv fiber-codiagonal-map-suspension-fiber
   is-equiv-fiber-codiagonal-map-suspension-fiber =
-    is-equiv-up-pushout-up-pushout
+    is-equiv-universal-property-pushout-universal-property-pushout
       ( terminal-map (fiber f b))
       ( terminal-map (fiber f b))
       ( cocone-suspension (fiber f b))

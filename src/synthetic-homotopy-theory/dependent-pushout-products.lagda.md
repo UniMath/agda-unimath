@@ -96,7 +96,7 @@ module _
         ( map-Σ (Y ∘ f) id (g ∘ f))
         ( map-Σ B f (λ a → id))
         ( cocone-pushout (map-Σ (Y ∘ f) id (g ∘ f)) (map-Σ B f (λ a → id)))
-        ( up-pushout (map-Σ (Y ∘ f) id (g ∘ f)) (map-Σ B f (λ a → id)))
+        ( universal-property-pushout-standard-pushout (map-Σ (Y ∘ f) id (g ∘ f)) (map-Σ B f (λ a → id)))
         ( cocone-dependent-pushout-product)
 
   abstract

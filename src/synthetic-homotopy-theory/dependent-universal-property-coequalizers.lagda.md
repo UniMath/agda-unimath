@@ -133,7 +133,7 @@ module _
     ( {l : Level} →
       dependent-universal-property-coequalizer l f g e)
   dependent-universal-property-coequalizer-dependent-universal-property-pushout
-    ( dup-pushout)
+    ( dependent-universal-property-pushout-standard-pushout)
     ( P) =
     is-equiv-left-map-triangle
       ( dependent-cofork-map f g e)
@@ -144,7 +144,7 @@ module _
         ( cocone-codiagonal-cofork f g e)
         ( P))
       ( triangle-dependent-cofork-dependent-cocone-codiagonal f g e P)
-      ( dup-pushout P)
+      ( dependent-universal-property-pushout-standard-pushout P)
       ( is-equiv-dependent-cofork-dependent-cocone-codiagonal f g e P)
 
   dependent-universal-property-pushout-dependent-universal-property-coequalizer :

@@ -133,7 +133,7 @@ module _
       ( g)
       ( c)
       ( map-pointed-map (inl-pushout-Pointed-Type f g) x)) ＝
-    ( horizontal-map-cocone-Pointed-Type f g c x)
+    ( left-map-cocone-Pointed-Type f g c x)
   compute-inl-cogap-Pointed-Type =
     compute-inl-cogap
       ( map-pointed-map f)
@@ -147,7 +147,7 @@ module _
       ( g)
       ( c)
       ( map-pointed-map (inr-pushout-Pointed-Type f g) y)) ＝
-    ( vertical-map-cocone-Pointed-Type f g c y)
+    ( right-map-cocone-Pointed-Type f g c y)
   compute-inr-cogap-Pointed-Type =
     compute-inr-cogap
       ( map-pointed-map f)

@@ -16,7 +16,6 @@ open import foundation.function-extensionality
 open import foundation.morphisms-arrows
 open import foundation.morphisms-span-diagrams
 open import foundation.span-diagrams
-open import foundation.transposition-span-diagrams
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -44,95 +43,6 @@ by combining cocones with other cocones,
 so on.
 
 ## Definitions
-
-### Transposing cocones under span diagrams
-
-Any cocone
-
-```text
-        g
-    S -----> B
-    |        |
-  f |        | j
-    V        V
-    A -----> X
-        i
-```
-
-induces a cocone
-
-```text
-        f
-    S -----> A
-    |        |
-  g |        | i
-    V        V
-    B -----> X.
-        j
-```
-
-This {{#concept "transposition" Disambiguation="cocones under span diagrams"}}
-on cocones is an [involution](foundation.involutions.md).
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) {X : UU l4}
-  where
-
-  transposition-cocone-span-diagram :
-    cocone-span-diagram 𝒮 X →
-    cocone-span-diagram (transposition-span-diagram 𝒮) X
-  pr1 (transposition-cocone-span-diagram c) =
-    right-map-cocone-span-diagram 𝒮 c
-  pr1 (pr2 (transposition-cocone-span-diagram c)) =
-    left-map-cocone-span-diagram 𝒮 c
-  pr2 (pr2 (transposition-cocone-span-diagram c)) =
-    inv-htpy (coherence-square-cocone-span-diagram 𝒮 c)
-
-module _
-  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) (X : UU l4)
-  where
-
-  is-involution-transposition-cocone-span-diagram :
-    transposition-cocone-span-diagram (transposition-span-diagram 𝒮) {X} ∘
-    transposition-cocone-span-diagram 𝒮 {X} ~
-    id
-  is-involution-transposition-cocone-span-diagram c =
-    eq-htpy-cocone-span-diagram 𝒮
-      ( transposition-cocone-span-diagram
-        ( transposition-span-diagram 𝒮)
-        ( transposition-cocone-span-diagram 𝒮 c))
-      ( c)
-      ( ( refl-htpy) ,
-        ( refl-htpy) ,
-        ( λ t →
-          concat
-            ( right-unit)
-            ( coherence-square-cocone-span-diagram 𝒮 c t)
-            ( inv-inv (coherence-square-cocone-span-diagram 𝒮 c t))))
-
-module _
-  {l1 l2 l3 l4 : Level} (𝒮 : span-diagram l1 l2 l3) (X : UU l4)
-  where
-
-  is-equiv-transposition-cocone-span-diagram :
-    is-equiv (transposition-cocone-span-diagram 𝒮 {X})
-  is-equiv-transposition-cocone-span-diagram =
-    is-equiv-is-invertible
-      ( transposition-cocone-span-diagram (transposition-span-diagram 𝒮))
-      ( is-involution-transposition-cocone-span-diagram
-        ( transposition-span-diagram 𝒮)
-        ( X))
-      ( is-involution-transposition-cocone-span-diagram 𝒮 X)
-
-  equiv-transposition-cocone-span-diagram :
-    cocone-span-diagram 𝒮 X ≃
-    cocone-span-diagram (transposition-span-diagram 𝒮) X
-  pr1 equiv-transposition-cocone-span-diagram =
-    transposition-cocone-span-diagram 𝒮
-  pr2 equiv-transposition-cocone-span-diagram =
-    is-equiv-transposition-cocone-span-diagram
-```
 
 ### Horizontal composition of cocones under span diagrams
 

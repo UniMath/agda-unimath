@@ -79,23 +79,19 @@ and a family of dependent identifications
 meridian : (x : X) → dependent-identification P (m x) north south
 ```
 
-## Definition
+## Definitions
 
 ### Dependent Suspension Cocones
 
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  (c : suspension-cocone X Y)
+  (c : cocone-span-diagram-suspension X Y)
   where
 
   dependent-suspension-cocone : UU (l1 ⊔ l3)
   dependent-suspension-cocone =
-    dependent-cocone
-      ( terminal-map X)
-      ( terminal-map X)
-      ( c)
-      ( B)
+    dependent-cocone-span-diagram (span-diagram-suspension X) c B
 ```
 
 ### Dependent Suspension Structures

@@ -20,6 +20,8 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.spans
+open import foundation.span-diagrams
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -33,10 +35,11 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 
 ## Idea
 
-The suspension of `X` is the [pushout](synthetic-homotopy-theory.pushouts.md) of
-the span `unit <-- X --> unit`. A
-[cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
-is called a `suspension-cocone`. Explicitly, a suspension cocone with nadir `Y`
+The {{#concept "suspension" Disambiguation="of a type"}} of a type `X` is the
+[pushout](synthetic-homotopy-theory.pushouts.md) of the
+[span diagram](foundation.span-diagrams.md) `unit <-- X --> unit`. A
+[cocone](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md) under such a span
+is called a `suspension-cocone`. Explicitly, a suspension cocone with codomain `Y`
 consists of functions
 
 ```text
@@ -47,7 +50,7 @@ g : unit → Y
 and a homotopy
 
 ```text
-h : (x : X) → (f ∘ (terminal-map X)) x ＝ (g ∘ (terminal-map X)) x
+h : (x : X) → (f ∘ terminal-map X) x ＝ (g ∘ terminal-map X) x
 ```
 
 Using the
@@ -72,9 +75,41 @@ We call this type of structure `suspension-structure`.
 ### Suspension cocones on a type
 
 ```agda
-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-cocone X Y = cocone (terminal-map X) (terminal-map X) Y
+module _
+  {l1 : Level} (X : UU l1)
+  where
+
+  domain-span-diagram-suspension : UU lzero
+  domain-span-diagram-suspension = unit
+
+  codomain-span-diagram-suspension : UU lzero
+  codomain-span-diagram-suspension = unit
+
+  spanning-type-span-diagram-suspension : UU l1
+  spanning-type-span-diagram-suspension = X
+
+  left-map-span-diagram-suspension :
+    spanning-type-span-diagram-suspension → domain-span-diagram-suspension
+  left-map-span-diagram-suspension = terminal-map X
+
+  right-map-span-diagram-suspension :
+    spanning-type-span-diagram-suspension → codomain-span-diagram-suspension
+  right-map-span-diagram-suspension = terminal-map X
+
+  span-span-diagram-suspension :
+    span l1 domain-span-diagram-suspension codomain-span-diagram-suspension
+  pr1 span-span-diagram-suspension = spanning-type-span-diagram-suspension
+  pr1 (pr2 span-span-diagram-suspension) = left-map-span-diagram-suspension
+  pr2 (pr2 span-span-diagram-suspension) = right-map-span-diagram-suspension
+
+  span-diagram-suspension : span-diagram lzero lzero l1
+  pr1 span-diagram-suspension = domain-span-diagram-suspension
+  pr1 (pr2 span-diagram-suspension) = codomain-span-diagram-suspension
+  pr2 (pr2 span-diagram-suspension) = span-span-diagram-suspension
+
+  cocone-span-diagram-suspension : {l2 : Level} (Y : UU l2) → UU (l1 ⊔ l2)
+  cocone-span-diagram-suspension Y =
+    cocone-span-diagram span-diagram-suspension Y
 ```
 
 ### Suspension structures on a type
@@ -113,46 +148,46 @@ module _
   where
 
   suspension-cocone-suspension-structure :
-    suspension-structure X Y → suspension-cocone X Y
+    suspension-structure X Y → cocone-span-diagram-suspension X Y
   pr1 (suspension-cocone-suspension-structure (N , S , merid)) = point N
   pr1 (pr2 (suspension-cocone-suspension-structure (N , S , merid))) = point S
   pr2 (pr2 (suspension-cocone-suspension-structure (N , S , merid))) = merid
 
-  suspension-structure-suspension-cocone :
-    suspension-cocone X Y → suspension-structure X Y
-  pr1 (suspension-structure-suspension-cocone (N , S , merid)) = N star
-  pr1 (pr2 (suspension-structure-suspension-cocone (N , S , merid))) = S star
-  pr2 (pr2 (suspension-structure-suspension-cocone (N , S , merid))) = merid
+  suspension-structure-cocone-span-diagram-suspension :
+    cocone-span-diagram-suspension X Y → suspension-structure X Y
+  pr1 (suspension-structure-cocone-span-diagram-suspension (N , S , merid)) = N star
+  pr1 (pr2 (suspension-structure-cocone-span-diagram-suspension (N , S , merid))) = S star
+  pr2 (pr2 (suspension-structure-cocone-span-diagram-suspension (N , S , merid))) = merid
 
   is-equiv-suspension-cocone-suspension-structure :
     is-equiv suspension-cocone-suspension-structure
   is-equiv-suspension-cocone-suspension-structure =
     is-equiv-is-invertible
-      ( suspension-structure-suspension-cocone)
+      ( suspension-structure-cocone-span-diagram-suspension)
       ( refl-htpy)
       ( refl-htpy)
 
-  is-equiv-suspension-structure-suspension-cocone :
-    is-equiv suspension-structure-suspension-cocone
-  is-equiv-suspension-structure-suspension-cocone =
+  is-equiv-suspension-structure-cocone-span-diagram-suspension :
+    is-equiv suspension-structure-cocone-span-diagram-suspension
+  is-equiv-suspension-structure-cocone-span-diagram-suspension =
     is-equiv-is-invertible
       ( suspension-cocone-suspension-structure)
       ( refl-htpy)
       ( refl-htpy)
 
-  equiv-suspension-structure-suspension-cocone :
-    suspension-structure X Y ≃ suspension-cocone X Y
-  pr1 equiv-suspension-structure-suspension-cocone =
+  equiv-suspension-structure-cocone-span-diagram-suspension :
+    suspension-structure X Y ≃ cocone-span-diagram-suspension X Y
+  pr1 equiv-suspension-structure-cocone-span-diagram-suspension =
     suspension-cocone-suspension-structure
-  pr2 equiv-suspension-structure-suspension-cocone =
+  pr2 equiv-suspension-structure-cocone-span-diagram-suspension =
     is-equiv-suspension-cocone-suspension-structure
 
   equiv-suspension-cocone-suspension-structure :
-    suspension-cocone X Y ≃ suspension-structure X Y
+    cocone-span-diagram-suspension X Y ≃ suspension-structure X Y
   pr1 equiv-suspension-cocone-suspension-structure =
-    suspension-structure-suspension-cocone
+    suspension-structure-cocone-span-diagram-suspension
   pr2 equiv-suspension-cocone-suspension-structure =
-    is-equiv-suspension-structure-suspension-cocone
+    is-equiv-suspension-structure-cocone-span-diagram-suspension
 ```
 
 #### Characterization of equalities in `suspension-structure`

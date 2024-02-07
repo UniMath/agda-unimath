@@ -17,6 +17,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -60,12 +61,11 @@ module _
 
 ```agda
 universal-property-pushout-suspension :
-  (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2)
-  (s : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-pushout-suspension l X Y s =
-  universal-property-pushout l
-    ( terminal-map X)
-    ( terminal-map X)
+  {l1 l2 : Level} (X : UU l1) (Y : UU l2)
+  (s : suspension-structure X Y) → UUω
+universal-property-pushout-suspension X Y s =
+  universal-property-pushout
+    ( span-diagram-suspension X)
     ( suspension-cocone-suspension-structure s)
 ```
 
@@ -76,10 +76,9 @@ triangle-ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (s : suspension-structure X Y) →
   (Z : UU l3) →
-  ( ( suspension-structure-suspension-cocone) ∘
-    ( cocone-map
-      ( terminal-map X)
-      ( terminal-map X)
+  ( ( suspension-structure-cocone-span-diagram-suspension) ∘
+    ( cocone-map-span-diagram
+      ( span-diagram-suspension X)
       ( suspension-cocone-suspension-structure s))) ~
   ( ev-suspension s Z)
 triangle-ev-suspension (N , S , merid) Z h = refl
@@ -87,17 +86,16 @@ triangle-ev-suspension (N , S , merid) Z h = refl
 is-equiv-ev-suspension :
   { l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   ( s : suspension-structure X Y) →
-  ( up-Y : universal-property-pushout-suspension l3 X Y s) →
+  universal-property-pushout-suspension X Y s →
   ( Z : UU l3) → is-equiv (ev-suspension s Z)
 is-equiv-ev-suspension {X = X} s up-Y Z =
   is-equiv-left-map-triangle
     ( ev-suspension s Z)
-    ( suspension-structure-suspension-cocone)
-    ( cocone-map
-      ( terminal-map X)
-      ( terminal-map X)
+    ( suspension-structure-cocone-span-diagram-suspension)
+    ( cocone-map-span-diagram
+      ( span-diagram-suspension X)
       ( suspension-cocone-suspension-structure s))
     ( inv-htpy (triangle-ev-suspension s Z))
     ( up-Y Z)
-    ( is-equiv-suspension-structure-suspension-cocone)
+    ( is-equiv-suspension-structure-cocone-span-diagram-suspension)
 ```

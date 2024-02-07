@@ -124,7 +124,7 @@ module _
         ( map-product id g)
         ( map-product f id)
         ( cocone-pushout (map-product id g) (map-product f id))
-        ( up-pushout (map-product id g) (map-product f id))
+        ( universal-property-pushout-standard-pushout (map-product id g) (map-product f id))
         ( cocone-pushout-product)
 
   abstract

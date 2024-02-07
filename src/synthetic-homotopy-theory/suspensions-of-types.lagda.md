@@ -68,23 +68,23 @@ they star in the freudenthal suspension theorem and give us a definition of
 ```agda
 suspension :
   {l : Level} → UU l → UU l
-suspension X = pushout (terminal-map X) (terminal-map X)
+suspension X = standard-pushout (span-diagram-suspension X)
 
 north-suspension :
   {l : Level} {X : UU l} → suspension X
 north-suspension {X = X} =
-  inl-pushout (terminal-map X) (terminal-map X) star
+  inl-standard-pushout (span-diagram-suspension X) star
 
 south-suspension :
   {l : Level} {X : UU l} → suspension X
 south-suspension {X = X} =
-  inr-pushout (terminal-map X) (terminal-map X) star
+  inr-standard-pushout (span-diagram-suspension X) star
 
 meridian-suspension :
   {l : Level} {X : UU l} → X →
   north-suspension {X = X} ＝ south-suspension {X = X}
 meridian-suspension {X = X} =
-  glue-pushout (terminal-map X) (terminal-map X)
+  glue-standard-pushout (span-diagram-suspension X)
 
 suspension-structure-suspension :
   {l : Level} (X : UU l) → suspension-structure X (suspension X)
@@ -94,22 +94,22 @@ pr2 (pr2 (suspension-structure-suspension X)) = meridian-suspension
 
 cocone-suspension :
   {l : Level} (X : UU l) →
-  cocone (terminal-map X) (terminal-map X) (suspension X)
+  cocone-span-diagram (span-diagram-suspension X) (suspension X)
 cocone-suspension X =
-  cocone-pushout (terminal-map X) (terminal-map X)
+  cocone-standard-pushout (span-diagram-suspension X)
 
 cogap-suspension' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  cocone (terminal-map X) (terminal-map X) Y → suspension X → Y
-cogap-suspension' {X = X} = cogap (terminal-map X) (terminal-map X)
+  cocone-span-diagram (span-diagram-suspension X) Y → suspension X → Y
+cogap-suspension' {X = X} = cogap-cocone-span-diagram (span-diagram-suspension X)
 
 up-suspension' :
-  {l1 l2 : Level} (X : UU l1) →
-  universal-property-pushout l2
-    ( terminal-map X)
-    ( terminal-map X)
+  {l1 : Level} (X : UU l1) →
+  universal-property-pushout
+    ( span-diagram-suspension X)
     ( cocone-suspension X)
-up-suspension' X = up-pushout (terminal-map X) (terminal-map X)
+up-suspension' X =
+  universal-property-pushout-standard-pushout (span-diagram-suspension X)
 ```
 
 ### The cogap map of a suspension structure
@@ -154,8 +154,8 @@ module _
       ( ev-suspension (suspension-structure-suspension X) Z)
       ( cogap-suspension)
   is-section-cogap-suspension =
-    ( suspension-structure-suspension-cocone) ·l
-    ( is-section-cogap (terminal-map X) (terminal-map X)) ·r
+    ( suspension-structure-cocone-span-diagram-suspension) ·l
+    ( is-section-cogap-cocone-span-diagram (span-diagram-suspension X)) ·r
     ( suspension-cocone-suspension-structure)
 
   is-retraction-cogap-suspension :
@@ -163,7 +163,7 @@ module _
       ( ev-suspension (suspension-structure-suspension X) Z)
       ( cogap-suspension)
   is-retraction-cogap-suspension =
-    ( is-retraction-cogap (terminal-map X) (terminal-map X))
+    ( is-retraction-cogap-cocone-span-diagram (span-diagram-suspension X))
 
 up-suspension :
   {l1 : Level} {X : UU l1} →
@@ -239,7 +239,7 @@ dup-suspension {X = X} B =
     ( ( equiv-dependent-suspension-structure-suspension-cocone
         ( suspension-structure-suspension X)
         ( B)) ∘e
-      ( equiv-dup-pushout (terminal-map X) (terminal-map X) B))
+      ( equiv-dependent-universal-property-pushout (span-diagram-suspension X) B))
     ( triangle-dependent-ev-suspension (suspension-structure-suspension X) B)
 
 equiv-dup-suspension :
@@ -524,9 +524,8 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
   is-contr-is-equiv'
     ( unit)
     ( pr1 (pr2 (cocone-suspension X)))
-    ( is-equiv-universal-property-pushout
-      ( terminal-map X)
-      ( terminal-map X)
+    ( is-equiv-right-map-cocone-universal-property-pushout
+      ( span-diagram-suspension X)
       ( cocone-suspension X)
       ( is-equiv-is-contr (terminal-map X) is-contr-X is-contr-unit)
       ( up-suspension' X))

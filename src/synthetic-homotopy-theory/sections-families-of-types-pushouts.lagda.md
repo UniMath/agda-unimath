@@ -10,18 +10,18 @@ module synthetic-homotopy-theory.sections-families-of-types-pushouts where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.span-diagrams
 open import foundation.structure-identity-principle
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
+
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.torsorial-type-families
 
 open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts
 open import synthetic-homotopy-theory.families-of-types-pushouts

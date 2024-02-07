@@ -89,7 +89,7 @@ module _
                         ( is-modal-B q)
                         ( f' a)
                         ( center (is-modal-B q))))) ∘e
-              ( equiv-up-join B)))
+              ( equiv-universal-property-pushout-join B)))
           ( is-torsorial-Id' f))
 
   reflective-subuniverse-closed-modality :

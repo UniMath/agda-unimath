@@ -11,13 +11,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.spans
+open import foundation.span-diagrams
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -26,6 +27,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -37,14 +39,55 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 The **join** of `A` and `B` is the
 [pushout](synthetic-homotopy-theory.pushouts.md) of the
-[span](foundation.spans.md) `A ← A × B → B`.
+[span diagram](foundation.span-diagrams.md) `A ← A × B → B`.
 
-## Definition
+## Definitions
+
+### The defining span diagram of the join
 
 ```agda
-join :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-join A B = pushout (pr1 {A = A} {B = λ _ → B}) pr2
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  domain-span-diagram-join : UU l1
+  domain-span-diagram-join = A
+
+  codomain-span-diagram-join : UU l2
+  codomain-span-diagram-join = B
+
+  spanning-type-span-diagram-join : UU (l1 ⊔ l2)
+  spanning-type-span-diagram-join = A × B
+
+  left-map-span-diagram-join :
+    spanning-type-span-diagram-join → domain-span-diagram-join
+  left-map-span-diagram-join = pr1
+
+  right-map-span-diagram-join :
+    spanning-type-span-diagram-join → codomain-span-diagram-join
+  right-map-span-diagram-join = pr2
+
+  span-span-diagram-join :
+    span (l1 ⊔ l2) domain-span-diagram-join codomain-span-diagram-join
+  pr1 span-span-diagram-join = spanning-type-span-diagram-join
+  pr1 (pr2 span-span-diagram-join) = left-map-span-diagram-join
+  pr2 (pr2 span-span-diagram-join) = right-map-span-diagram-join
+
+  span-diagram-join : span-diagram l1 l2 (l1 ⊔ l2)
+  pr1 span-diagram-join = domain-span-diagram-join
+  pr1 (pr2 span-diagram-join) = codomain-span-diagram-join
+  pr2 (pr2 span-diagram-join) = span-span-diagram-join
+```
+
+### The join of two types
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  join : UU (l1 ⊔ l2)
+  join = standard-pushout (span-diagram-join A B)
 
 infixr 15 _*_
 _*_ = join
@@ -53,16 +96,17 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  cocone-join : cocone (pr1 {A = A} {B = λ _ → B}) pr2 (A * B)
-  cocone-join = cocone-pushout pr1 pr2
+  cocone-join : cocone-span-diagram (span-diagram-join A B) (A * B)
+  cocone-join = cocone-standard-pushout (span-diagram-join A B)
 
-  up-join :
-    {l : Level} → universal-property-pushout l pr1 pr2 (cocone-join)
-  up-join = up-pushout pr1 pr2
+  universal-property-pushout-join :
+    universal-property-pushout (span-diagram-join A B) (cocone-join)
+  universal-property-pushout-join =
+    universal-property-pushout-standard-pushout (span-diagram-join A B)
 
-  equiv-up-join :
-    {l : Level} (X : UU l) → (A * B → X) ≃ cocone pr1 pr2 X
-  equiv-up-join = equiv-up-pushout pr1 pr2
+  equiv-universal-property-pushout-join :
+    {l : Level} (X : UU l) → (A * B → X) ≃ cocone-span-diagram (span-diagram-join A B) X
+  equiv-universal-property-pushout-join = equiv-universal-property-pushout-standard-pushout (span-diagram-join A B)
 
   inl-join : A → A * B
   inl-join = pr1 cocone-join
@@ -74,25 +118,25 @@ module _
   glue-join = pr2 (pr2 cocone-join)
 
   cogap-join :
-    {l3 : Level} (X : UU l3) → cocone pr1 pr2 X → A * B → X
-  cogap-join X = map-inv-is-equiv (up-join X)
+    {l3 : Level} (X : UU l3) → cocone-span-diagram (span-diagram-join A B) X → A * B → X
+  cogap-join X = map-inv-is-equiv (universal-property-pushout-join X)
 
   compute-inl-cogap-join :
-    {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
-    ( cogap-join X c ∘ inl-join) ~ horizontal-map-cocone pr1 pr2 c
-  compute-inl-cogap-join = compute-inl-cogap pr1 pr2
+    {l3 : Level} {X : UU l3} (c : cocone-span-diagram (span-diagram-join A B) X) →
+    ( cogap-join X c ∘ inl-join) ~ left-map-cocone-span-diagram (span-diagram-join A B) c
+  compute-inl-cogap-join = compute-inl-cogap-cocone-span-diagram (span-diagram-join A B)
 
   compute-inr-cogap-join :
-    {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
-    ( cogap-join X c ∘ inr-join) ~ vertical-map-cocone pr1 pr2 c
-  compute-inr-cogap-join = compute-inr-cogap pr1 pr2
+    {l3 : Level} {X : UU l3} (c : cocone-span-diagram (span-diagram-join A B) X) →
+    ( cogap-join X c ∘ inr-join) ~ right-map-cocone-span-diagram (span-diagram-join A B) c
+  compute-inr-cogap-join = compute-inr-cogap-cocone-span-diagram (span-diagram-join A B)
 
   compute-glue-cogap-join :
-    {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
-    ( ( cogap-join X c ·l coherence-square-cocone pr1 pr2 cocone-join) ∙h
+    {l3 : Level} {X : UU l3} (c : cocone-span-diagram (span-diagram-join A B) X) →
+    ( ( cogap-join X c ·l coherence-square-cocone-span-diagram (span-diagram-join A B) cocone-join) ∙h
       ( compute-inr-cogap-join c ·r pr2)) ~
-    ( compute-inl-cogap-join c ·r pr1) ∙h coherence-square-cocone pr1 pr2 c
-  compute-glue-cogap-join = compute-glue-cogap pr1 pr2
+    ( compute-inl-cogap-join c ·r pr1) ∙h coherence-square-cocone-span-diagram (span-diagram-join A B) c
+  compute-glue-cogap-join = compute-glue-cogap-cocone-span-diagram (span-diagram-join A B)
 ```
 
 ## Properties
@@ -103,12 +147,11 @@ module _
 is-equiv-inr-join-empty :
   {l : Level} (X : UU l) → is-equiv (inr-join {A = empty} {B = X})
 is-equiv-inr-join-empty X =
-  is-equiv-universal-property-pushout
-    ( pr1)
-    ( pr2)
+  is-equiv-right-map-cocone-universal-property-pushout
+    ( span-diagram-join empty X)
     ( cocone-join)
     ( is-equiv-pr1-product-empty X)
-    ( up-join)
+    ( universal-property-pushout-join)
 
 left-unit-law-join :
   {l : Level} (X : UU l) → X ≃ (empty * X)
@@ -119,12 +162,11 @@ is-equiv-inr-join-is-empty :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-empty A → is-equiv (inr-join {A = A} {B = B})
 is-equiv-inr-join-is-empty {A = A} {B = B} is-empty-A =
-  is-equiv-universal-property-pushout
-    ( pr1)
-    ( pr2)
+  is-equiv-right-map-cocone-universal-property-pushout
+    ( span-diagram-join A B)
     ( cocone-join)
     ( is-equiv-pr1-product-is-empty A B is-empty-A)
-    ( up-join)
+    ( universal-property-pushout-join)
 
 left-unit-law-join-is-empty :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -140,12 +182,11 @@ pr2 (left-unit-law-join-is-empty is-empty-A) =
 is-equiv-inl-join-empty :
   {l : Level} (X : UU l) → is-equiv (inl-join {A = X} {B = empty})
 is-equiv-inl-join-empty X =
-  is-equiv-universal-property-pushout'
-    ( pr1)
-    ( pr2)
+  is-equiv-left-map-cocone-universal-property-pushout
+    ( span-diagram-join X empty)
     ( cocone-join)
     ( is-equiv-pr2-product-empty X)
-    ( up-join)
+    ( universal-property-pushout-join)
 
 right-unit-law-join :
   {l : Level} (X : UU l) → X ≃ (X * empty)
@@ -156,12 +197,11 @@ is-equiv-inl-join-is-empty :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-empty B → is-equiv (inl-join {A = A} {B = B})
 is-equiv-inl-join-is-empty {A = A} {B = B} is-empty-B =
-  is-equiv-universal-property-pushout'
-    ( pr1)
-    ( pr2)
+  is-equiv-left-map-cocone-universal-property-pushout
+    ( span-diagram-join A B)
     ( cocone-join)
     ( is-equiv-pr2-product-is-empty A B is-empty-B)
-    ( up-join)
+    ( universal-property-pushout-join)
 
 right-unit-law-join-is-empty :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -183,12 +223,11 @@ map-inv-right-unit-law-join-is-empty H =
 is-equiv-inl-join-unit :
   {l : Level} (X : UU l) → is-equiv (inl-join {A = unit} {B = X})
 is-equiv-inl-join-unit X =
-  is-equiv-universal-property-pushout'
-    ( pr1)
-    ( pr2)
+  is-equiv-left-map-cocone-universal-property-pushout
+    ( span-diagram-join unit X)
     ( cocone-join)
     ( is-equiv-map-left-unit-law-product)
-    ( up-join)
+    ( universal-property-pushout-join)
 
 left-zero-law-join :
   {l : Level} (X : UU l) → is-contr (unit * X)
@@ -202,12 +241,11 @@ is-equiv-inl-join-is-contr :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   is-contr A → is-equiv (inl-join {A = A} {B = B})
 is-equiv-inl-join-is-contr A B is-contr-A =
-  is-equiv-universal-property-pushout'
-    ( pr1)
-    ( pr2)
+  is-equiv-left-map-cocone-universal-property-pushout
+    ( span-diagram-join A B)
     ( cocone-join)
     ( is-equiv-pr2-product-is-contr is-contr-A)
-    ( up-join)
+    ( universal-property-pushout-join)
 
 left-zero-law-join-is-contr :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr A → is-contr (A * B)
@@ -224,12 +262,11 @@ left-zero-law-join-is-contr A B is-contr-A =
 is-equiv-inr-join-unit :
   {l : Level} (X : UU l) → is-equiv (inr-join {A = X} {B = unit})
 is-equiv-inr-join-unit X =
-  is-equiv-universal-property-pushout
-    ( pr1)
-    ( pr2)
+  is-equiv-right-map-cocone-universal-property-pushout
+    ( span-diagram-join X unit)
     ( cocone-join)
     ( is-equiv-map-right-unit-law-product)
-    ( up-join)
+    ( universal-property-pushout-join)
 
 right-zero-law-join :
   {l : Level} (X : UU l) → is-contr (X * unit)
@@ -243,12 +280,11 @@ is-equiv-inr-join-is-contr :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   is-contr B → is-equiv (inr-join {A = A} {B = B})
 is-equiv-inr-join-is-contr A B is-contr-B =
-  is-equiv-universal-property-pushout
-    ( pr1)
-    ( pr2)
+  is-equiv-right-map-cocone-universal-property-pushout
+    ( span-diagram-join A B)
     ( cocone-join)
     ( is-equiv-pr1-is-contr (λ _ → is-contr-B))
-    ( up-join)
+    ( universal-property-pushout-join)
 
 right-zero-law-join-is-contr :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr B → is-contr (A * B)
@@ -310,84 +346,12 @@ module _
   inr-join-Prop = inr-join
 ```
 
-### Disjunction is the join of propositions
-
-```agda
-module _
-  {l1 l2 : Level} (A : Prop l1) (B : Prop l2)
-  where
-
-  cocone-disjunction : cocone pr1 pr2 (type-disjunction-Prop A B)
-  pr1 cocone-disjunction = inl-disjunction-Prop A B
-  pr1 (pr2 cocone-disjunction) = inr-disjunction-Prop A B
-  pr2 (pr2 cocone-disjunction) (a , b) =
-    eq-is-prop'
-      ( is-prop-type-disjunction-Prop A B)
-      ( inl-disjunction-Prop A B a)
-      ( inr-disjunction-Prop A B b)
-
-  map-disjunction-join-Prop : type-join-Prop A B → type-disjunction-Prop A B
-  map-disjunction-join-Prop =
-    cogap-join (type-disjunction-Prop A B) cocone-disjunction
-
-  map-join-disjunction-Prop : type-disjunction-Prop A B → type-join-Prop A B
-  map-join-disjunction-Prop =
-    elim-disjunction-Prop A B
-      ( join-Prop A B)
-      ( inl-join-Prop A B , inr-join-Prop A B)
-
-  is-equiv-map-disjunction-join-Prop : is-equiv map-disjunction-join-Prop
-  is-equiv-map-disjunction-join-Prop =
-    is-equiv-is-prop
-      ( is-prop-type-join-Prop A B)
-      ( is-prop-type-disjunction-Prop A B)
-      ( map-join-disjunction-Prop)
-
-  equiv-disjunction-join-Prop :
-    (type-join-Prop A B) ≃ (type-disjunction-Prop A B)
-  pr1 equiv-disjunction-join-Prop = map-disjunction-join-Prop
-  pr2 equiv-disjunction-join-Prop = is-equiv-map-disjunction-join-Prop
-
-  is-equiv-map-join-disjunction-Prop : is-equiv map-join-disjunction-Prop
-  is-equiv-map-join-disjunction-Prop =
-    is-equiv-is-prop
-      ( is-prop-type-disjunction-Prop A B)
-      ( is-prop-type-join-Prop A B)
-      ( map-disjunction-join-Prop)
-
-  equiv-join-disjunction-Prop :
-    (type-disjunction-Prop A B) ≃ (type-join-Prop A B)
-  pr1 equiv-join-disjunction-Prop = map-join-disjunction-Prop
-  pr2 equiv-join-disjunction-Prop = is-equiv-map-join-disjunction-Prop
-
-  up-join-disjunction :
-    {l : Level} → universal-property-pushout l pr1 pr2 cocone-disjunction
-  up-join-disjunction =
-    up-pushout-up-pushout-is-equiv
-      ( pr1)
-      ( pr2)
-      ( cocone-join)
-      ( cocone-disjunction)
-      ( map-disjunction-join-Prop)
-      ( ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
-        ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
-        ( λ (a , b) → eq-is-contr
-          ( is-prop-type-disjunction-Prop A B
-            ( horizontal-map-cocone pr1 pr2
-              ( cocone-map pr1 pr2
-                ( cocone-join)
-                ( map-disjunction-join-Prop))
-              ( a))
-            ( vertical-map-cocone pr1 pr2 cocone-disjunction b))))
-      ( is-equiv-map-disjunction-join-Prop)
-      ( up-join)
-```
-
 ## See also
 
 - [Joins of maps](synthetic-homotopy-theory.joins-of-maps.md)
 - [Pushout-products](synthetic-homotopy-theory.pushout-products.md)
 - [Dependent pushout-products](synthetic-homotopy-theory.dependent-pushout-products.md)
+- [Disjunction](foundation.disjunction.md) is the join of two propositions
 
 ## References
 

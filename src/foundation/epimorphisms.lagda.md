@@ -114,14 +114,14 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
   is-equiv-codiagonal-map-is-epimorphism :
     is-epimorphism f → is-equiv (codiagonal-map f)
   is-equiv-codiagonal-map-is-epimorphism e =
-    is-equiv-up-pushout-up-pushout f f
+    is-equiv-universal-property-pushout-universal-property-pushout f f
       ( cocone-pushout f f)
       ( cocone-codiagonal-map f)
       ( codiagonal-map f)
       ( compute-inl-codiagonal-map f ,
         compute-inr-codiagonal-map f ,
         compute-glue-codiagonal-map f)
-      ( up-pushout f f)
+      ( universal-property-pushout-standard-pushout f f)
       ( universal-property-pushout-is-epimorphism e)
 
   is-pushout-is-epimorphism :
@@ -145,7 +145,7 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
           ( compute-fiber-precomp f X g)
           ( is-contr-fam-is-equiv-map-section-family
             ( λ h →
-              ( vertical-map-cocone f f
+              ( right-map-cocone f f
                 ( cocone-map f f (cocone-codiagonal-map f) h)) ,
               ( coherence-square-cocone f f
                 ( cocone-map f f (cocone-codiagonal-map f) h)))
@@ -162,16 +162,16 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
     is-equiv (codiagonal-map f) → is-epimorphism f
   is-epimorphism-is-equiv-codiagonal-map e =
     is-epimorphism-universal-property-pushout
-      ( up-pushout-up-pushout-is-equiv f f
+      ( universal-property-pushout-standard-pushout-universal-property-pushout-standard-pushout-is-equiv f f
         ( cocone-pushout f f)
         ( cocone-codiagonal-map f)
         ( codiagonal-map f)
         ( htpy-cocone-map-universal-property-pushout f f
           ( cocone-pushout f f)
-          ( up-pushout f f)
+          ( universal-property-pushout-standard-pushout f f)
           ( cocone-codiagonal-map f))
         ( e)
-        ( up-pushout f f))
+        ( universal-property-pushout-standard-pushout f f))
 
   is-epimorphism-is-pushout :
     is-pushout f f (cocone-codiagonal-map f) → is-epimorphism f

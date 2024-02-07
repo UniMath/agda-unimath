@@ -208,33 +208,33 @@ module _
       ( is-equiv-map-equiv
         ( compute-total-fiber-precomp f (type-Truncated-Type X)))
 
-  is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type :
+  is-equiv-left-map-cocone-is-epimorphism-Truncated-Type :
     is-epimorphism-Truncated-Type k f →
     {l : Level} (X : Truncated-Type l k) →
-    is-equiv (horizontal-map-cocone {X = type-Truncated-Type X} f f)
-  is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type e X =
+    is-equiv (left-map-cocone {X = type-Truncated-Type X} f f)
+  is-equiv-left-map-cocone-is-epimorphism-Truncated-Type e X =
     is-equiv-left-factor
-      ( horizontal-map-cocone f f)
+      ( left-map-cocone f f)
       ( diagonal-into-cocone f (type-Truncated-Type X))
       ( is-equiv-id)
       ( is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e X)
 
-  is-equiv-vertical-map-cocone-is-epimorphism-Truncated-Type :
+  is-equiv-right-map-cocone-is-epimorphism-Truncated-Type :
     is-epimorphism-Truncated-Type k f →
     {l : Level} (X : Truncated-Type l k) →
-    is-equiv (vertical-map-cocone {X = type-Truncated-Type X} f f)
-  is-equiv-vertical-map-cocone-is-epimorphism-Truncated-Type e X =
+    is-equiv (right-map-cocone {X = type-Truncated-Type X} f f)
+  is-equiv-right-map-cocone-is-epimorphism-Truncated-Type e X =
     is-equiv-left-factor
-      ( vertical-map-cocone f f)
+      ( right-map-cocone f f)
       ( diagonal-into-cocone f (type-Truncated-Type X))
       ( is-equiv-id)
       ( is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e X)
 
-  is-epimorphism-is-equiv-horizontal-map-cocone-Truncated-Type :
+  is-epimorphism-is-equiv-left-map-cocone-Truncated-Type :
     ( {l : Level} (X : Truncated-Type l k) →
-      is-equiv (horizontal-map-cocone {X = type-Truncated-Type X} f f)) →
+      is-equiv (left-map-cocone {X = type-Truncated-Type X} f f)) →
     is-epimorphism-Truncated-Type k f
-  is-epimorphism-is-equiv-horizontal-map-cocone-Truncated-Type h X =
+  is-epimorphism-is-equiv-left-map-cocone-Truncated-Type h X =
     is-emb-is-contr-fibers-values
       ( precomp f (type-Truncated-Type X))
       ( λ g →
@@ -244,15 +244,15 @@ module _
           ( compute-fiber-precomp f (type-Truncated-Type X) g)
           ( is-contr-is-equiv-pr1 (h X) g))
 
-  is-epimorphism-is-equiv-vertical-map-cocone-Truncated-Type :
+  is-epimorphism-is-equiv-right-map-cocone-Truncated-Type :
     ( {l : Level} (X : Truncated-Type l k) →
-      is-equiv (vertical-map-cocone {X = type-Truncated-Type X} f f)) →
+      is-equiv (right-map-cocone {X = type-Truncated-Type X} f f)) →
     is-epimorphism-Truncated-Type k f
-  is-epimorphism-is-equiv-vertical-map-cocone-Truncated-Type h =
-    is-epimorphism-is-equiv-horizontal-map-cocone-Truncated-Type
+  is-epimorphism-is-equiv-right-map-cocone-Truncated-Type h =
+    is-epimorphism-is-equiv-left-map-cocone-Truncated-Type
       ( λ X →
         is-equiv-comp
-          ( vertical-map-cocone f f)
+          ( right-map-cocone f f)
           ( swap-cocone f f (type-Truncated-Type X))
           ( is-equiv-swap-cocone f f (type-Truncated-Type X))
           ( h X))
@@ -263,7 +263,7 @@ module _
 We consider the commutative diagram for any `k`-type `X`:
 
 ```text
-             horizontal-map-cocone
+             left-map-cocone
  (B → X) <---------------------------- cocone f f X
     |                  ≃                  ^
  id | ≃                                 ≃ | (universal property)
@@ -288,14 +288,14 @@ module _
       ( codiagonal-map f)
       ( λ l X →
         is-equiv-right-factor
-          ( ( horizontal-map-cocone f f) ∘
-            ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
+          ( ( left-map-cocone f f) ∘
+            ( map-equiv (equiv-universal-property-pushout-standard-pushout f f (type-Truncated-Type X))))
           ( precomp (codiagonal-map f) (type-Truncated-Type X))
           ( is-equiv-comp
-            ( horizontal-map-cocone f f)
-            ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X)))
-            ( is-equiv-map-equiv (equiv-up-pushout f f (type-Truncated-Type X)))
-            ( is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type
+            ( left-map-cocone f f)
+            ( map-equiv (equiv-universal-property-pushout-standard-pushout f f (type-Truncated-Type X)))
+            ( is-equiv-map-equiv (equiv-universal-property-pushout-standard-pushout f f (type-Truncated-Type X)))
+            ( is-equiv-left-map-cocone-is-epimorphism-Truncated-Type
               ( k)
               ( f)
               ( e)
@@ -315,31 +315,31 @@ module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map :
+  is-equiv-left-map-cocone-is-truncation-equivalence-codiagonal-map :
     is-truncation-equivalence k (codiagonal-map f) →
     {l : Level} (X : Truncated-Type l k) →
-    is-equiv (horizontal-map-cocone {X = type-Truncated-Type X} f f)
-  is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map e X =
+    is-equiv (left-map-cocone {X = type-Truncated-Type X} f f)
+  is-equiv-left-map-cocone-is-truncation-equivalence-codiagonal-map e X =
     is-equiv-left-factor
-      ( horizontal-map-cocone f f)
-      ( ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X))) ∘
+      ( left-map-cocone f f)
+      ( ( map-equiv (equiv-universal-property-pushout-standard-pushout f f (type-Truncated-Type X))) ∘
         ( precomp (codiagonal-map f) (type-Truncated-Type X)))
       ( is-equiv-htpy
         ( id)
         ( λ g → eq-htpy (λ b → ap g (compute-inl-codiagonal-map f b)))
         ( is-equiv-id))
       ( is-equiv-comp
-        ( map-equiv (equiv-up-pushout f f (type-Truncated-Type X)))
+        ( map-equiv (equiv-universal-property-pushout-standard-pushout f f (type-Truncated-Type X)))
         ( precomp (codiagonal-map f) (type-Truncated-Type X))
         ( is-equiv-precomp-is-truncation-equivalence k (codiagonal-map f) e X)
-        ( is-equiv-map-equiv (equiv-up-pushout f f (type-Truncated-Type X))))
+        ( is-equiv-map-equiv (equiv-universal-property-pushout-standard-pushout f f (type-Truncated-Type X))))
 
   is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type :
     is-truncation-equivalence k (codiagonal-map f) →
     is-epimorphism-Truncated-Type k f
   is-epimorphism-is-truncation-equivalence-codiagonal-map-Truncated-Type e X =
-    is-epimorphism-is-equiv-horizontal-map-cocone-Truncated-Type k f
-      ( is-equiv-horizontal-map-cocone-is-truncation-equivalence-codiagonal-map
+    is-epimorphism-is-equiv-left-map-cocone-Truncated-Type k f
+      ( is-equiv-left-map-cocone-is-truncation-equivalence-codiagonal-map
         ( e))
       ( X)
 ```

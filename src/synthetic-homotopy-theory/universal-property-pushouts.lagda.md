@@ -44,6 +44,7 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pullback-property-pushouts
+open import synthetic-homotopy-theory.transposition-cocones-under-span-diagrams
 ```
 
 </details>

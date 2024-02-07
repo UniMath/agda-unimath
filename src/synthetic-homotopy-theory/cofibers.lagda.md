@@ -60,7 +60,7 @@ module _
   universal-property-cofiber :
     (f : A → B) {l : Level} →
     universal-property-pushout l f (terminal-map A) (cocone-cofiber f)
-  universal-property-cofiber f = up-pushout f (terminal-map A)
+  universal-property-cofiber f = universal-property-pushout-standard-pushout f (terminal-map A)
 ```
 
 ## Properties
@@ -101,5 +101,5 @@ is-equiv-inl-cofiber-point {B = B} b =
     ( terminal-map unit)
     ( cocone-pushout (point b) (terminal-map unit))
     ( is-equiv-is-contr (terminal-map unit) is-contr-unit is-contr-unit)
-    ( up-pushout (point b) (terminal-map unit))
+    ( universal-property-pushout-standard-pushout (point b) (terminal-map unit))
 ```

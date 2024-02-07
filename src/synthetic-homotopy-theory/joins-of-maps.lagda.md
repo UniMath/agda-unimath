@@ -151,7 +151,7 @@ module _
         ( cocone-pushout
           ( vertical-map-standard-pullback)
           ( horizontal-map-standard-pullback))
-        ( up-pushout _ _)
+        ( universal-property-pushout-standard-pushout _ _)
         ( cocone-join-maps)
 
   abstract
