@@ -31,28 +31,28 @@ The fixity of a quoted name is given by
 
 ```agda
 data Associativity-Agda : UU lzero where
-  left-associative : Associativity-Agda
-  right-associative : Associativity-Agda
-  nonassociative : Associativity-Agda
+  left-Associativity-Agda : Associativity-Agda
+  right-Associativity-Agda : Associativity-Agda
+  none-Associativity-Agda : Associativity-Agda
 
 data Precedence-Agda : UU lzero where
-  related : Float → Precedence-Agda
-  unrelated : Precedence-Agda
+  related-Precedence-Agda : Float → Precedence-Agda
+  unrelated-Precedence-Agda : Precedence-Agda
 
 data Fixity-Agda : UU lzero where
-  fixity : Associativity-Agda → Precedence-Agda → Fixity-Agda
+  cons-Fixity-Agda : Associativity-Agda → Precedence-Agda → Fixity-Agda
 
 {-# BUILTIN ASSOC Associativity-Agda #-}
-{-# BUILTIN ASSOCLEFT left-associative #-}
-{-# BUILTIN ASSOCRIGHT right-associative #-}
-{-# BUILTIN ASSOCNON nonassociative #-}
+{-# BUILTIN ASSOCLEFT left-Associativity-Agda #-}
+{-# BUILTIN ASSOCRIGHT right-Associativity-Agda #-}
+{-# BUILTIN ASSOCNON none-Associativity-Agda #-}
 
 {-# BUILTIN PRECEDENCE Precedence-Agda #-}
-{-# BUILTIN PRECRELATED related #-}
-{-# BUILTIN PRECUNRELATED unrelated #-}
+{-# BUILTIN PRECRELATED related-Precedence-Agda #-}
+{-# BUILTIN PRECUNRELATED unrelated-Precedence-Agda #-}
 
 {-# BUILTIN FIXITY Fixity-Agda #-}
-{-# BUILTIN FIXITYFIXITY fixity #-}
+{-# BUILTIN FIXITYFIXITY cons-Fixity-Agda #-}
 
 primitive
   primQNameFixity : Name-Agda → Fixity-Agda
@@ -61,9 +61,13 @@ primitive
 ## Examples
 
 ```agda
-_ : primQNameFixity (quote add-ℤ) ＝ fixity nonassociative unrelated
+_ :
+  primQNameFixity (quote add-ℤ) ＝
+  cons-Fixity-Agda none-Associativity-Agda unrelated-Precedence-Agda
 _ = refl
 
-_ : primQNameFixity (quote (_+ℤ_)) ＝ fixity left-associative (related 35.0)
+_ :
+  primQNameFixity (quote (_+ℤ_)) ＝
+  cons-Fixity-Agda left-Associativity-Agda (related-Precedence-Agda 35.0)
 _ = refl
 ```
