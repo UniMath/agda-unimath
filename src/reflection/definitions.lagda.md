@@ -155,7 +155,7 @@ private
             ( pattern-lambda-Term-Agda
               ( unit-list
                 -- Clause-Agda
-                ( absurd-Pattern-Agda-Clause-Agda
+                ( absurd-Clause-Agda
                   ( unit-list
                     ( "()" ,
                       visible-Argument-Agda

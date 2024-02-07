@@ -96,7 +96,7 @@ data Pattern-Agda where
 data Clause-Agda where
   clause-Clause-Agda :
     Telescope-Agda → list (Argument-Agda Pattern-Agda) → Term-Agda → Clause-Agda
-  absurd-Pattern-Agda-Clause-Agda :
+  absurd-Clause-Agda :
     Telescope-Agda → list (Argument-Agda Pattern-Agda) → Clause-Agda
 ```
 
@@ -134,7 +134,7 @@ data Clause-Agda where
 {-# BUILTIN AGDAPATABSURD absurd-Pattern-Agda #-}
 
 {-# BUILTIN AGDACLAUSECLAUSE clause-Clause-Agda #-}
-{-# BUILTIN AGDACLAUSEABSURD absurd-Pattern-Agda-Clause-Agda #-}
+{-# BUILTIN AGDACLAUSEABSURD absurd-Clause-Agda #-}
 ```
 
 ## Helpers
