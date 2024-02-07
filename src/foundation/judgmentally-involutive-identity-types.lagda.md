@@ -43,15 +43,18 @@ This type family is [equivalent](foundation-core.equivalences.md) to the
 standard identity types, but satisfies the judgmental laws
 
 - `inv (inv p) ≐ p`
-- `inv refl ≐ refl`
+- `inv reflⁱ ≐ reflⁱ`
+
+where we use a superscript `i` to distinguish the judgmentally involutive
+identity type from the standard identity type.
 
 In addition, we maintain the following judgmental laws
 
-- `inv refl ≐ refl`
-- `ind-Id f refl ≐ f refl`
-- `refl ∙ p ≐ p` or `p ∙ refl ≐ p`
+- `inv reflⁱ ≐ reflⁱ`
+- `ind-Id f reflⁱ ≐ f reflⁱ`
+- `reflⁱ ∙ p ≐ p` or `p ∙ reflⁱ ≐ p`
 
-among other more technical ones considered in this file.
+among other more specific ones considered in this file.
 
 ## Definition
 
@@ -75,9 +78,42 @@ module _
 
 ### The judgmentally involutive identity types are equivalent to the standard identity types
 
-In fact, the [retraction](foundation-core.retractions.md) is judgmental, the
-equivalence preserves the groupoid structure, and moreover preserves the
-reflexivities judgmentally.
+The equivalence `(x ＝ y) ≃ (x ＝ⁱ y)` is defined from left to right by
+inclusion at the second component
+
+```text
+  involutive-eq-eq := p ↦ (x , p , refl)   : x ＝ y → x ＝ⁱ y,
+```
+
+and from right to left by the concatenation
+
+```text
+  eq-involutive-eq := (z , p , q) ↦ inv q ∙ p   : x ＝ⁱ y → x ＝ y.
+```
+
+This equivalence preserves the groupoid structure on the judgmentally involutive
+identity types as we will see later. Moreover, the composition
+`eq-involutive-eq ∘ involutive-eq-eq` computes judgmentally to the identity:
+
+```text
+  eq-involutive-eq ∘ involutive-eq-eq
+    ≐ p ↦ (((z , p , q) ↦ inv q ∙ p) (r ↦ (w , r , refl)))
+    ≐ p ↦ inv refl ∙ p
+    ≐ p ↦ refl ∙ p
+    ≐ p ↦ p
+```
+
+and the reflexivities are preserved strictly:
+
+```text
+  eq-involutive-eq reflⁱ ≐ inv refl ∙ refl ≐ refl ∙ refl ≐ refl
+```
+
+and
+
+```text
+  involutive-eq-eq refl ≐ (x , refl , refl) ≐ reflⁱ.
+```
 
 ```agda
 module _
@@ -136,11 +172,8 @@ The judgmentally involutive identity types satisfy the induction principle of
 the identity types. This states that given a base point `x : A` and a family of
 types over the identity types based at `x`, `B : (y : A) (p : x ＝ⁱ y) → UU l2`,
 then to construct a dependent function `f : (y : A) (p : x ＝ⁱ y) → B y p` it
-suffices to define it at `f x refl-involutive-Id`.
-
-**Note.** The only reason we must apply
-[function extensionality](foundation.function-extensionality.md) is to show
-uniqueness of the induction principle up to _equality_.
+suffices to define it at `f x reflⁱ`. The judgmentally involutive identity types
+also satisfy the corresponding computation rule judgmentally.
 
 ```agda
 module _
@@ -183,6 +216,10 @@ module _
     eq-multivariable-htpy 2 (λ where .x (.x , refl , refl) → refl)
 ```
 
+**Note.** The only reason we must apply
+[function extensionality](foundation.function-extensionality.md) is to show
+uniqueness of the induction principle up to _equality_.
+
 ## Structure
 
 The judgmentally involutive identity types form a judgmentally involutive weak
@@ -190,11 +227,11 @@ groupoidal structure on types.
 
 ### Inverting judgmentally involutive identifications
 
-We have an inversion operation on `involutive-Id` that satisfies the judgmental
-laws
+We have an inversion operation on `involutive-Id` defined by swapping the
+position of the identifications. This operation satisfies the judgmental laws
 
 - `inv (inv p) ≐ p`, and
-- `inv refl ≐ refl`.
+- `inv reflⁱ ≐ reflⁱ`.
 
 ```agda
 module _
@@ -215,7 +252,7 @@ module _
 ```
 
 The inversion operation corresponds to the standard inversion operation on
-identifications:
+identifications.
 
 ```agda
 module _
@@ -236,13 +273,41 @@ module _
 
 ### Concatenation of judgmentally involutive identifications
 
-We define the concatenation operation on the judgmentally involutive
-identifications using the
-[judgmentally right unital concatenation operation on identifications](foundation.judgmentally-right-unital-concatenation-identifications.md),
-to obtain a one-sided judgmental unit law. There is both a judgmentally left
-unital definition and a judgmentally right unital definition. To be consistent
-with the convention for the standard identity types, we take the judgmentally
-left unital concatenation operation to be the default.
+We have practically speaking two definitions of the concatenation operation on
+judgmentally involutive identity types. One satisfies a judgmental left unit law
+and the other satisfies a judgmental right unit law. In both cases, we must use
+the
+[judgmentally right unital concatenation operation on standard identifications](foundation.judgmentally-right-unital-concatenation-identifications.md)
+`_∙ᵣ_`, to obtain this one-sided judgmental unit law.
+
+The judgmentally left unital concatenation operation is defined by
+
+```text
+  (w , p , q) ∙ⁱ (w' , p' , q') := (w' , p' , (q' ∙ᵣ inv p) ∙ᵣ q),
+```
+
+and the right unital concatenation operation is defined by
+
+```text
+  (w , p , q) ∙ᵣⁱ (w' , p' , q') = (w , (p ∙ᵣ inv q') ∙ᵣ p' , q).
+```
+
+The following computation verifies that the judgmentally left unital
+concatenation operation is indeed judgmentally left unital:
+
+```text
+  reflⁱ ∙ⁱ r
+    ≐ (x , refl , refl) ∙ⁱ (w , p , q)
+    ≐ (w , p , (q ∙ᵣ inv refl) ∙ᵣ refl)
+    ≐ (w , p , (q ∙ᵣ inv refl))
+    ≐ (w , p , (q ∙ᵣ refl))
+    ≐ (w , p , q)
+    ≐ r.
+```
+
+To be consistent with the convention for the standard identity types, we take
+the judgmentally left unital concatenation operation to be the default
+concatenation operation on judgmentally involutive identity types.
 
 #### The judgmentally left unital concatenation operation
 
@@ -322,8 +387,8 @@ module _
 
 ### The groupoidal laws for the judgmentally involutive identity types
 
-The general proof-strategy is to induct on the necessary paths to make the left
-endpoints judgmentally equal, and then proceed by reasoning with the
+The general proof-strategy is to induct on the necessary identifications to make
+the left endpoints judgmentally equal, and then proceed by reasoning with the
 groupoid-laws of the underlying identity types.
 
 #### The groupoidal laws for the judgmentally left unital concatenation operation
@@ -423,12 +488,10 @@ module _
 ## See also
 
 - [The judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
-  for an identity relation that is strictly associative and unital, but does not
-  have a judgmentally computational induction principle.
+  for an identity relation that is strictly associative and two-sided unital.
 - [The computational identity types](foundation.computational-identity-types.md)
   for an identity relation that is judgmentally involutive, associative, and
-  one-sided unital, but does not have a judgmentally computational induction
-  principle.
+  one-sided unital.
 
 ## References
 
