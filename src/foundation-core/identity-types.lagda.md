@@ -155,11 +155,16 @@ behaviours.
    us the computation rule `refl ∙ q ≐ q`.
 2. We can define concatenation by induction on the equality `y ＝ z`. This gives
    us the computation rule `p ∙ refl ≐ p`.
-3. We can define `_∙_` by induction on both `x ＝ y` and `y ＝ z`. This only
-   gives us the computation rule `refl ∙ refl ≐ refl`.
+3. We can define concatenation by induction on both `x ＝ y` and `y ＝ z`. This
+   only gives us the computation rule `refl ∙ refl ≐ refl`.
 
 While the third option may be preferred by some for its symmetry, for practical
-reasons, we use the first alternative by convention.
+reasons, we prefer one of the first two, and by convention we use the first
+alternative. The second option is considered in
+[`foundation.strictly-right-unital-concatenation-identifications`](foundation.strictly-right-unital-concatenation-identifications.md),
+and in [`foundation.yoneda-identity-types`](foundation.yoneda-identity-types.md)
+we construct an identity type which satisfies both computation rules among
+others.
 
 ```agda
 module _
@@ -176,11 +181,6 @@ module _
   concat' : (x : A) {y z : A} → y ＝ z → x ＝ y → x ＝ z
   concat' x q p = p ∙ q
 ```
-
-#### See also
-
-- [The strictly right unital concatenation operation on indentifications](foundation.strictly-right-unital-concatenation-identifications.md)
-- [The Yoneda identity types](foundation.yoneda-identity-types.md)
 
 ### Inverting identifications
 

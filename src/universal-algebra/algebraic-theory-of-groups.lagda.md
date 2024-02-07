@@ -50,7 +50,7 @@ pr2 group-signature inv-group-op = 1
 
 data group-laws : UU lzero where
   associative-l-group-laws : group-laws
-  left-strict-inv-l-group-laws : group-laws
+  invl-l-group-laws : group-laws
   invr-r-group-laws : group-laws
   idl-l-group-laws : group-laws
   idr-r-group-laws : group-laws
@@ -64,7 +64,7 @@ pr2 group-Theory =
       ( ( op mul-group-op (var 0 ∷ var 1 ∷ empty-vec)) ∷ var 2 ∷ empty-vec)) ,
     ( op mul-group-op
       ( var 0 ∷ (op mul-group-op (var 1 ∷ var 2 ∷ empty-vec)) ∷ empty-vec))
-  left-strict-inv-l-group-laws →
+  invl-l-group-laws →
     ( op mul-group-op
       ( op inv-group-op (var 0 ∷ empty-vec) ∷ var 0 ∷ empty-vec)) ,
     ( op unit-group-op empty-vec)
@@ -110,7 +110,7 @@ pr2 (pr2 (pr1 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
 pr1 (pr2 (pr2 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) x =
   models-A inv-group-op (x ∷ empty-vec)
 pr1 (pr2 (pr2 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A left-strict-inv-l-group-laws (λ _ → x)
+  satisfies-A invl-l-group-laws (λ _ → x)
 pr2 (pr2 (pr2 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
   satisfies-A invr-r-group-laws (λ _ → x)
 
@@ -129,7 +129,7 @@ Group-group-Algebra G =
     ( λ where
       associative-l-group-laws assign →
         associative-mul-Group G (assign 0) (assign 1) (assign 2)
-      left-strict-inv-l-group-laws assign →
+      invl-l-group-laws assign →
         left-inverse-law-mul-Group G (assign 0)
       invr-r-group-laws assign →
         right-inverse-law-mul-Group G (assign 0)

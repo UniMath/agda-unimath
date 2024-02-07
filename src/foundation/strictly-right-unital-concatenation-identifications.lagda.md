@@ -33,12 +33,13 @@ behaviours:
    us the computation rule `refl ∙ q ≐ q`.
 2. We can define concatenation by induction on the equality `y ＝ z`. This gives
    us the computation rule `p ∙ refl ≐ p`.
-3. We can define `_∙_` by induction on both `x ＝ y` and `y ＝ z`. This only
-   gives us the computation rule `refl ∙ refl ≐ refl`.
+3. We can define concatenation by induction on both `x ＝ y` and `y ＝ z`. This
+   only gives us the computation rule `refl ∙ refl ≐ refl`.
 
 While the third option may be preferred by some for its symmetry, for practical
-reasons, we use the first alternative by convention. However, there are cases
-where the second case may be preferred. Hence why we on this page consider the
+reasons, we prefer one of the first two, and by convention we use the first
+alternative. However, there are cases where the second case may be preferred.
+Hence why we on this page consider the
 {{#concept "strictly right unital concatenation operation on identifications" Agda=_∙ᵣ_ Agda=right-strict-concat Agda=right-strict-concat'}}.
 
 This definition is for instance used with the
