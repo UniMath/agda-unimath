@@ -141,30 +141,25 @@ table given above.
 
 The
 {{#concept "concatenation operation on identifications" Agda=_∙_ Agda=_∙'_ Agda=concat}}
-is a map
+is a family of binary operations
 
 ```text
   _∙_ : x ＝ y → y ＝ z → x ＝ z
 ```
 
-for all `x y z : A`. However, there are essentially three different ways we can
-define concatenation of identifications, all with different computational
+indexed by `x y z : A`. However, there are essentially three different ways we
+can define concatenation of identifications, all with different computational
 behaviours.
 
 1. We can define concatenation by induction on the equality `x ＝ y`. This gives
-   us the computation rule `refl ∙ q = q`.
+   us the computation rule `refl ∙ q ≐ q`.
 2. We can define concatenation by induction on the equality `y ＝ z`. This gives
-   us the computation rule `p ∙ refl = p`.
+   us the computation rule `p ∙ refl ≐ p`.
 3. We can define `_∙_` by induction on both `x ＝ y` and `y ＝ z`. This only
-   gives us the computation rule `refl ∙ refl = refl`.
+   gives us the computation rule `refl ∙ refl ≐ refl`.
 
 While the third option may be preferred by some for its symmetry, for practical
 reasons, we use the first alternative by convention.
-
-See also
-
-- [The definitionally right unital concatenation operation on indentifications](foundation.definitionally-right-unital-concatenation-identifications.md)
-- [The yoneda identity types](foundation.yoneda-identity-types.md)
 
 ```agda
 module _
@@ -181,6 +176,11 @@ module _
   concat' : (x : A) {y z : A} → y ＝ z → x ＝ y → x ＝ z
   concat' x q p = p ∙ q
 ```
+
+#### See also
+
+- [The strictly right unital concatenation operation on indentifications](foundation.strictly-right-unital-concatenation-identifications.md)
+- [The Yoneda identity types](foundation.yoneda-identity-types.md)
 
 ### Inverting identifications
 

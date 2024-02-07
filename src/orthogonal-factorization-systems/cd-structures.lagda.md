@@ -31,7 +31,7 @@ class `𝒟` of
         j
 ```
 
-On this page we will consider _internal_ cd-structures, i.e., cd-structure on
+In this file we will consider _internal_ cd-structures, i.e., cd-structure on
 types. In other words, a {{#concept "cd-structure" Agda=cd-structure}} is a
 family of [subtypes](foundation-core.subtypes.md)
 

@@ -8,10 +8,10 @@ module foundation.strictly-involutive-identity-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.definitionally-right-unital-concatenation-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.multivariable-homotopies
+open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
@@ -32,7 +32,7 @@ open import foundation-core.torsorial-type-families
 
 The standard definition of [identity types](foundation-core.identity-types.md)
 has the limitation that many of the basic operations only satisfy algebraic laws
-_weakly_. In this file, we consider the
+_weakly_. On this page, we consider the
 {{#concept "strictly involutive identity types" Agda=involutive-Id}}
 
 ```text
@@ -40,7 +40,7 @@ _weakly_. In this file, we consider the
 ```
 
 This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfies the judgmental laws
+standard identity types, but satisfies the strict laws
 
 - `inv (inv p) ≐ p`
 - `inv reflⁱ ≐ reflⁱ`
@@ -48,13 +48,15 @@ standard identity types, but satisfies the judgmental laws
 where we use a superscript `i` to distinguish the strictly involutive identity
 type from the standard identity type.
 
-In addition, we maintain the following judgmental laws
+In addition, we maintain the following strict laws
 
 - `inv reflⁱ ≐ reflⁱ`
 - `ind-Id f reflⁱ ≐ f reflⁱ`
 - `reflⁱ ∙ p ≐ p` or `p ∙ reflⁱ ≐ p`
 
-among other more specific ones considered in this file.
+among other more specific laws considered on this page. We call elements of the
+strictly involutive identity type for
+{{#concept "strictly involutive identifications" Agda=involutive-Id}}.
 
 ## Definition
 
@@ -70,8 +72,8 @@ module _
   _＝ⁱ_ : A → A → UU l
   (a ＝ⁱ b) = involutive-Id a b
 
-  refl-involutive-Id : {x : A} → x ＝ⁱ x
-  refl-involutive-Id {x} = (x , refl , refl)
+  reflⁱ : {x : A} → x ＝ⁱ x
+  reflⁱ {x} = (x , refl , refl)
 ```
 
 ## Properties
@@ -93,7 +95,7 @@ and from right to left by the concatenation
 
 This equivalence preserves the groupoid structure on the strictly involutive
 identity types as we will see later. Moreover, the composition
-`eq-involutive-eq ∘ involutive-eq-eq` computes judgmentally to the identity:
+`eq-involutive-eq ∘ involutive-eq-eq` computes strictly to the identity:
 
 ```text
   eq-involutive-eq ∘ involutive-eq-eq
@@ -158,11 +160,11 @@ module _
   where
 
   preserves-refl-involutive-eq-eq :
-    {x : A} → involutive-eq-eq (refl {x = x}) ＝ refl-involutive-Id
+    {x : A} → involutive-eq-eq (refl {x = x}) ＝ reflⁱ
   preserves-refl-involutive-eq-eq = refl
 
   preserves-refl-eq-involutive-eq :
-    {x : A} → eq-involutive-eq (refl-involutive-Id {x = x}) ＝ refl
+    {x : A} → eq-involutive-eq (reflⁱ {x = x}) ＝ refl
   preserves-refl-eq-involutive-eq = refl
 ```
 
@@ -191,10 +193,10 @@ module _
   dependent-universal-property-identity-system-involutive-Id :
     dependent-universal-property-identity-system
       ( involutive-Id x)
-      ( refl-involutive-Id)
+      ( reflⁱ)
   dependent-universal-property-identity-system-involutive-Id =
     dependent-universal-property-identity-system-is-torsorial
-      ( refl-involutive-Id)
+      ( reflⁱ)
       ( is-torsorial-involutive-Id)
 ```
 
@@ -205,7 +207,7 @@ identity types. This states that given a base point `x : A` and a family of
 types over the identity types based at `x`, `B : (y : A) (p : x ＝ⁱ y) → UU l2`,
 then to construct a dependent function `f : (y : A) (p : x ＝ⁱ y) → B y p` it
 suffices to define it at `f x reflⁱ`. The strictly involutive identity types
-also satisfy the corresponding computation rule judgmentally.
+also satisfy the corresponding computation rule strictly.
 
 ```agda
 module _
@@ -214,16 +216,16 @@ module _
   where
 
   ind-involutive-Id :
-    B x refl-involutive-Id → (y : A) (p : x ＝ⁱ y) → B y p
+    B x reflⁱ → (y : A) (p : x ＝ⁱ y) → B y p
   ind-involutive-Id b .x (.x , refl , refl) = b
 
   compute-ind-involutive-Id :
-    (b : B x refl-involutive-Id) → ind-involutive-Id b x refl-involutive-Id ＝ b
+    (b : B x reflⁱ) → ind-involutive-Id b x reflⁱ ＝ b
   compute-ind-involutive-Id b = refl
 
   uniqueness-ind-involutive-Id :
     (f : (y : A) (p : x ＝ⁱ y) → B y p) →
-    ind-involutive-Id (f x refl-involutive-Id) ＝ f
+    ind-involutive-Id (f x reflⁱ) ＝ f
   uniqueness-ind-involutive-Id f =
     eq-multivariable-htpy 2 (λ where .x (.x , refl , refl) → refl)
 ```
@@ -234,13 +236,13 @@ uniqueness of the induction principle up to _equality_.
 
 ## Structure
 
-The strictly involutive identity types form a judgmentally involutive weak
+The strictly involutive identity types form a strictly involutive weak
 groupoidal structure on types.
 
 ### Inverting strictly involutive identifications
 
 We have an inversion operation on `involutive-Id` defined by swapping the
-position of the identifications. This operation satisfies the judgmental laws
+position of the identifications. This operation satisfies the strict laws
 
 - `inv (inv p) ≐ p`, and
 - `inv reflⁱ ≐ reflⁱ`.
@@ -255,7 +257,7 @@ module _
 
   compute-inv-involutive-Id-refl :
     {x : A} →
-    inv-involutive-Id (refl-involutive-Id {x = x}) ＝ refl-involutive-Id
+    inv-involutive-Id (reflⁱ {x = x}) ＝ reflⁱ
   compute-inv-involutive-Id-refl = refl
 
   inv-inv-involutive-Id :
@@ -288,23 +290,23 @@ module _
 We have, practically speaking, two definitions of the concatenation operation on
 strictly involutive identity types. One satisfies a strict left unit law and the
 other satisfies a strict right unit law. In both cases, we must use the
-[definitionally right unital concatenation operation on standard identifications](foundation.definitionally-right-unital-concatenation-identifications.md)
+[strictly right unital concatenation operation on standard identifications](foundation.strictly-right-unital-concatenation-identifications.md)
 `_∙ᵣ_`, to obtain this strict one-sided unit law.
 
-The judgmentally left unital concatenation operation is defined by
+The strictly left unital concatenation operation is defined by
 
 ```text
   (w , p , q) ∙ⁱ (w' , p' , q') := (w' , p' , (q' ∙ᵣ inv p) ∙ᵣ q),
 ```
 
-and the judgmentally right unital concatenation operation is defined by
+and the strictly right unital concatenation operation is defined by
 
 ```text
   (w , p , q) ∙ᵣⁱ (w' , p' , q') = (w , (p ∙ᵣ inv q') ∙ᵣ p' , q).
 ```
 
-The following computation verifies that the judgmentally left unital
-concatenation operation is indeed judgmentally left unital:
+The following computation verifies that the strictly left unital concatenation
+operation is indeed strictly left unital:
 
 ```text
   reflⁱ ∙ⁱ r
@@ -317,10 +319,10 @@ concatenation operation is indeed judgmentally left unital:
 ```
 
 To be consistent with the convention for the standard identity types, we take
-the judgmentally left unital concatenation operation to be the default
-concatenation operation on strictly involutive identity types.
+the strictly left unital concatenation operation to be the default concatenation
+operation on strictly involutive identity types.
 
-#### The judgmentally left unital concatenation operation
+#### The strictly left unital concatenation operation
 
 ```agda
 module _
@@ -348,17 +350,20 @@ module _
   preserves-concat-eq-involutive-eq (w , p , q) (w' , p' , q') =
     ( ap
       ( _∙ p')
-      ( ( distributive-inv-concatr (q' ∙ᵣ inv p) q) ∙
+      ( ( distributive-inv-right-strict-concat (q' ∙ᵣ inv p) q) ∙
         ( ( ap
             ( inv q ∙ᵣ_)
-            ( ( distributive-inv-concatr q' (inv p)) ∙
+            ( ( distributive-inv-right-strict-concat q' (inv p)) ∙
               ( ap (_∙ᵣ inv q') (inv-inv p)))) ∙
-          ( inv (assoc-concatr (inv q) p (inv q'))) ∙
-          ( eq-double-concat-concatr-left-associated (inv q) p (inv q'))))) ∙
+          ( inv (assoc-right-strict-concat (inv q) p (inv q'))) ∙
+          ( eq-double-concat-right-strict-concat-left-associated
+            ( inv q)
+            ( p)
+            ( inv q'))))) ∙
     ( assoc (inv q ∙ p) (inv q') p')
 ```
 
-#### The judgmentally right unital concatenation operation
+#### The strictly right unital concatenation operation
 
 ```agda
 module _
@@ -369,40 +374,46 @@ module _
   _∙ᵣⁱ_ : {x y z : A} → x ＝ⁱ y → y ＝ⁱ z → x ＝ⁱ z
   (w , p , q) ∙ᵣⁱ (w' , p' , q') = (w , (p ∙ᵣ inv q') ∙ᵣ p' , q)
 
-  concatr-involutive-Id : {x y : A} → x ＝ⁱ y → (z : A) → y ＝ⁱ z → x ＝ⁱ z
-  concatr-involutive-Id p z q = p ∙ᵣⁱ q
+  right-strict-concat-involutive-Id :
+    {x y : A} → x ＝ⁱ y → (z : A) → y ＝ⁱ z → x ＝ⁱ z
+  right-strict-concat-involutive-Id p z q = p ∙ᵣⁱ q
 
-  concatr-involutive-Id' : (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
-  concatr-involutive-Id' x q p = p ∙ᵣⁱ q
+  right-strict-concat-involutive-Id' :
+    (x : A) {y z : A} → y ＝ⁱ z → x ＝ⁱ y → x ＝ⁱ z
+  right-strict-concat-involutive-Id' x q p = p ∙ᵣⁱ q
 
-  eq-concat-concatr-involutive-Id :
+  eq-concat-right-strict-concat-involutive-Id :
     {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) → p ∙ᵣⁱ q ＝ p ∙ⁱ q
-  eq-concat-concatr-involutive-Id (w , refl , q) (w' , p' , refl) =
-    eq-pair-eq-fiber (eq-pair (left-unit-concatr) (inv left-unit-concatr))
+  eq-concat-right-strict-concat-involutive-Id (w , refl , q) (w' , p' , refl) =
+    eq-pair-eq-fiber
+      ( eq-pair
+        ( left-unit-right-strict-concat)
+        ( inv left-unit-right-strict-concat))
 
-  preserves-concatr-involutive-eq-eq :
+  preserves-right-strict-concat-involutive-eq-eq :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
     involutive-eq-eq (p ∙ q) ＝ involutive-eq-eq p ∙ᵣⁱ involutive-eq-eq q
-  preserves-concatr-involutive-eq-eq p refl = ap involutive-eq-eq right-unit
+  preserves-right-strict-concat-involutive-eq-eq p refl =
+    ap involutive-eq-eq right-unit
 
-  preserves-concatr-eq-involutive-eq :
+  preserves-right-strict-concat-eq-involutive-eq :
     {x y z : A} (p : x ＝ⁱ y) (q : y ＝ⁱ z) →
     eq-involutive-eq (p ∙ᵣⁱ q) ＝ eq-involutive-eq p ∙ eq-involutive-eq q
-  preserves-concatr-eq-involutive-eq (w , p , q) (w' , p' , q') =
+  preserves-right-strict-concat-eq-involutive-eq (w , p , q) (w' , p' , q') =
     ( ap
       ( inv q ∙_)
-      ( ( eq-double-concat-concatr-left-associated p (inv q') p') ∙
+      ( ( eq-double-concat-right-strict-concat-left-associated p (inv q') p') ∙
         ( assoc p (inv q') p'))) ∙
     ( inv (assoc (inv q) p (inv q' ∙ p')))
 ```
 
 ### The groupoidal laws for the strictly involutive identity types
 
-The general proof-strategy is to induct on the necessary identifications to make
-the left endpoints judgmentally equal, and then proceed by reasoning with the
-groupoid-laws of the underlying identity types.
+The general proof strategy is to induct on the minimal number of identifications
+to make the left endpoints strictly equal, and then proceed by reasoning with
+the groupoid laws of the underlying identity types.
 
-#### The groupoidal laws for the judgmentally left unital concatenation operation
+#### The groupoidal laws for the strictly left unital concatenation operation
 
 ```agda
 module _
@@ -415,90 +426,109 @@ module _
   assoc-involutive-Id (_ , p , q) (_ , p' , q') (_ , p'' , q'') =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
-        ( ( inv (assoc-concatr (q'' ∙ᵣ inv p') (q' ∙ᵣ inv p) q)) ∙
-          ( ap (_∙ᵣ q) (inv (assoc-concatr (q'' ∙ᵣ inv p') q' (inv p))))))
+        ( ( inv (assoc-right-strict-concat (q'' ∙ᵣ inv p') (q' ∙ᵣ inv p) q)) ∙
+          ( ap
+            ( _∙ᵣ q)
+            ( inv (assoc-right-strict-concat (q'' ∙ᵣ inv p') q' (inv p))))))
+```
 
+**Note.** Observe that the previous proof relies solely on the associator of the
+underlying identity type. This is one of the fundamental observations leading to
+the construction of the
+[computational identity type](foundation.computational-identity-types.md).
+
+```agda
 module _
   {l : Level} {A : UU l} {x y : A}
   where
 
   left-unit-involutive-Id :
-    {p : x ＝ⁱ y} → refl-involutive-Id ∙ⁱ p ＝ p
+    {p : x ＝ⁱ y} → reflⁱ ∙ⁱ p ＝ p
   left-unit-involutive-Id = refl
 
   right-unit-involutive-Id :
-    {p : x ＝ⁱ y} → p ∙ⁱ refl-involutive-Id ＝ p
+    {p : x ＝ⁱ y} → p ∙ⁱ reflⁱ ＝ p
   right-unit-involutive-Id {p = .y , refl , q} =
-    eq-pair-eq-fiber (eq-pair-eq-fiber left-unit-concatr)
+    eq-pair-eq-fiber (eq-pair-eq-fiber left-unit-right-strict-concat)
 
   left-inv-involutive-Id :
-    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ⁱ p ＝ refl-involutive-Id
+    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ⁱ p ＝ reflⁱ
   left-inv-involutive-Id (.y , refl , q) =
-    eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-concatr q))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-right-strict-concat q))
 
   right-inv-involutive-Id :
-    (p : x ＝ⁱ y) → p ∙ⁱ inv-involutive-Id p ＝ refl-involutive-Id
+    (p : x ＝ⁱ y) → p ∙ⁱ inv-involutive-Id p ＝ reflⁱ
   right-inv-involutive-Id (.x , p , refl) =
-    eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-concatr p))
+    eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-right-strict-concat p))
 
   distributive-inv-concat-involutive-Id :
     (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
     inv-involutive-Id (p ∙ⁱ q) ＝ inv-involutive-Id q ∙ⁱ inv-involutive-Id p
   distributive-inv-concat-involutive-Id (.y , refl , q') (.y , p' , refl) =
-    eq-pair-eq-fiber (eq-pair (left-unit-concatr) (inv left-unit-concatr))
+    eq-pair-eq-fiber
+      ( eq-pair
+        ( left-unit-right-strict-concat)
+        ( inv left-unit-right-strict-concat))
 ```
 
-#### The groupoidal laws for the judgmentally right unital concatenation operation
+#### The groupoidal laws for the strictly right unital concatenation operation
 
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
   where
 
-  assoc-concatr-involutive-Id :
+  assoc-right-strict-concat-involutive-Id :
     (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
     ((p ∙ᵣⁱ q) ∙ᵣⁱ r) ＝ (p ∙ᵣⁱ (q ∙ᵣⁱ r))
-  assoc-concatr-involutive-Id (_ , p , q) (_ , p' , q') (_ , p'' , q'') =
+  assoc-right-strict-concat-involutive-Id
+    ( _ , p , q) (_ , p' , q') (_ , p'' , q'') =
     eq-pair-eq-fiber
       ( eq-pair
-        ( ( assoc-concatr (p ∙ᵣ inv q' ∙ᵣ p') (inv q'') p'') ∙
-          ( assoc-concatr (p ∙ᵣ inv q') p' (inv q'' ∙ᵣ p'')) ∙
-          ( ap (p ∙ᵣ inv q' ∙ᵣ_) (inv (assoc-concatr p' (inv q'') p''))))
+        ( ( assoc-right-strict-concat (p ∙ᵣ inv q' ∙ᵣ p') (inv q'') p'') ∙
+          ( assoc-right-strict-concat (p ∙ᵣ inv q') p' (inv q'' ∙ᵣ p'')) ∙
+          ( ap
+            ( p ∙ᵣ inv q' ∙ᵣ_)
+            ( inv (assoc-right-strict-concat p' (inv q'') p''))))
         ( refl))
 
 module _
   {l : Level} {A : UU l} {x y : A}
   where
 
-  left-unit-concatr-involutive-Id :
-    {p : x ＝ⁱ y} → refl-involutive-Id ∙ᵣⁱ p ＝ p
-  left-unit-concatr-involutive-Id {p = .x , p , refl} =
-    eq-pair-eq-fiber (eq-pair left-unit-concatr refl)
+  left-unit-right-strict-concat-involutive-Id :
+    {p : x ＝ⁱ y} → reflⁱ ∙ᵣⁱ p ＝ p
+  left-unit-right-strict-concat-involutive-Id {p = .x , p , refl} =
+    eq-pair-eq-fiber (eq-pair left-unit-right-strict-concat refl)
 
-  right-unit-concatr-involutive-Id :
-    {p : x ＝ⁱ y} → p ∙ᵣⁱ refl-involutive-Id ＝ p
-  right-unit-concatr-involutive-Id = refl
+  right-unit-right-strict-concat-involutive-Id :
+    {p : x ＝ⁱ y} → p ∙ᵣⁱ reflⁱ ＝ p
+  right-unit-right-strict-concat-involutive-Id = refl
 
-  left-inv-concatr-involutive-Id :
-    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ᵣⁱ p ＝ refl-involutive-Id
-  left-inv-concatr-involutive-Id (.y , refl , q) =
-    eq-pair-eq-fiber (eq-pair (right-inv-concatr q) refl)
+  left-inv-right-strict-concat-involutive-Id :
+    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ᵣⁱ p ＝ reflⁱ
+  left-inv-right-strict-concat-involutive-Id (.y , refl , q) =
+    eq-pair-eq-fiber (eq-pair (right-inv-right-strict-concat q) refl)
 
-  right-inv-concatr-involutive-Id :
-    (p : x ＝ⁱ y) → p ∙ᵣⁱ inv-involutive-Id p ＝ refl-involutive-Id
-  right-inv-concatr-involutive-Id (.x , p , refl) =
-    eq-pair-eq-fiber (eq-pair (right-inv-concatr p) refl)
+  right-inv-right-strict-concat-involutive-Id :
+    (p : x ＝ⁱ y) → p ∙ᵣⁱ inv-involutive-Id p ＝ reflⁱ
+  right-inv-right-strict-concat-involutive-Id (.x , p , refl) =
+    eq-pair-eq-fiber (eq-pair (right-inv-right-strict-concat p) refl)
 
-  distributive-inv-concatr-involutive-Id :
+  distributive-inv-right-strict-concat-involutive-Id :
     (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
     inv-involutive-Id (p ∙ᵣⁱ q) ＝ inv-involutive-Id q ∙ᵣⁱ inv-involutive-Id p
-  distributive-inv-concatr-involutive-Id (.y , refl , q) (.y , p' , refl) =
-    eq-pair-eq-fiber (eq-pair (inv left-unit-concatr) (left-unit-concatr))
+  distributive-inv-right-strict-concat-involutive-Id
+    ( .y , refl , q) (.y , p' , refl) =
+    eq-pair-eq-fiber
+      ( eq-pair
+        ( inv left-unit-right-strict-concat)
+        ( left-unit-right-strict-concat))
 ```
 
 ## See also
 
-- [The yoneda identity types](foundation.yoneda-identity-types.md) for an
+- [The Yoneda identity types](foundation.yoneda-identity-types.md) for an
   identity relation that is strictly associative and two-sided unital.
 - [The computational identity types](foundation.computational-identity-types.md)
   for an identity relation that is strictly involutive, associative, and

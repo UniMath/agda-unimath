@@ -30,7 +30,7 @@ element `b : B x`, we can
 `b` along the identification `p` to obtain an element `tr B p b : B y`.
 
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
-recorded in this file.
+recorded on this page.
 
 ## Properties
 
