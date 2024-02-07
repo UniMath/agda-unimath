@@ -156,5 +156,5 @@ module _
   ring-Π-Ring-𝔽 = Π-Ring (type-𝔽 I) (ring-Ring-𝔽 ∘ A)
 
   Π-Ring-𝔽 : Ring-𝔽 (l1 ⊔ l2)
-  Π-Ring-𝔽 = compute-ring-𝔽 ring-Π-Ring-𝔽 is-finite-type-Π-Ring-𝔽
+  Π-Ring-𝔽 = finite-ring-is-finite-Ring ring-Π-Ring-𝔽 is-finite-type-Π-Ring-𝔽
 ```
