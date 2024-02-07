@@ -66,7 +66,9 @@ module _
       hom-Precategory C x y → Precategory-Expression x y
     comp-hom-Precategory-Expression :
       {x y z : obj-Precategory C} →
-      Precategory-Expression y z → Precategory-Expression x y → Precategory-Expression x z
+      Precategory-Expression y z →
+      Precategory-Expression x y →
+      Precategory-Expression x z
 ```
 
 ### The syntactic representation of a morphism
