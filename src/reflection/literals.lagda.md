@@ -40,7 +40,11 @@ data Literal-Agda : UU lzero where
   string-Literal-Agda : String → Literal-Agda
   quoted-name-Literal-Agda : Name-Agda → Literal-Agda
   metavariable-Literal-Agda : Metavariable-Agda → Literal-Agda
+```
 
+## Bindings
+
+```agda
 {-# BUILTIN AGDALITERAL Literal-Agda #-}
 {-# BUILTIN AGDALITNAT nat-Literal-Agda #-}
 {-# BUILTIN AGDALITWORD64 word64-Literal-Agda #-}
