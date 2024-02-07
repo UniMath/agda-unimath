@@ -250,12 +250,12 @@ apply-solve-Precategory-Expr cat lhs rhs =
 
 ```agda
 macro
-  solve-Precategory! : Term-Agda → Term-Agda → TC unit
+  solve-Precategory! : Term-Agda → Term-Agda → type-Type-Checker unit
   solve-Precategory! cat hole = do
-    goal ← inferType hole >>= reduce
-    (lhs , rhs) ← boundary-TCM goal
-    built-lhs ← normalise lhs >>= (returnTC ∘ build-Precategory-Expr)
-    built-rhs ← normalise rhs >>= (returnTC ∘ build-Precategory-Expr)
+    goal ← infer-type hole >>= reduce
+    (lhs , rhs) ← boundary-Type-Checker goal
+    built-lhs ← normalize lhs >>= (return-Type-Checker ∘ build-Precategory-Expr)
+    built-rhs ← normalize rhs >>= (return-Type-Checker ∘ build-Precategory-Expr)
     unify hole (apply-solve-Precategory-Expr cat built-lhs built-rhs)
 ```
 
