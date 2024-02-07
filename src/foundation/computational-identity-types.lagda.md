@@ -12,11 +12,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.judgmentally-compositional-identity-types
 open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
+open import foundation.yoneda-identity-types
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
@@ -47,8 +47,7 @@ These are defined using the construction of the
   (x ＝ⁱ y) := Σ (z : A) ((z ＝ y) × (z ＝ x))
 ```
 
-but using the
-[yoneda identity types](foundation.judgmentally-compositional-identity-types.md)
+but using the [yoneda identity types](foundation.yoneda-identity-types.md)
 (`_＝ʸ_`) as the underlying identity types:
 
 ```text

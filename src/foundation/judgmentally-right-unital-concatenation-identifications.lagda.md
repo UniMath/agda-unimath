@@ -177,4 +177,4 @@ module _
 
 ## See also
 
-- [judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
+- [Yoneda identity types](foundation.yoneda-identity-types.md)

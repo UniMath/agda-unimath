@@ -499,8 +499,8 @@ module _
 
 ## See also
 
-- [The judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
-  for an identity relation that is strictly associative and two-sided unital.
+- [The yoneda identity types](foundation.yoneda-identity-types.md) for an
+  identity relation that is strictly associative and two-sided unital.
 - [The computational identity types](foundation.computational-identity-types.md)
   for an identity relation that is judgmentally involutive, associative, and
   one-sided unital.

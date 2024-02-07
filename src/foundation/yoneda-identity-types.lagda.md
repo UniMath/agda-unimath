@@ -1,7 +1,7 @@
-# Judgmentally compositional identity types
+# Yoneda identity types
 
 ```agda
-module foundation.judgmentally-compositional-identity-types where
+module foundation.yoneda-identity-types where
 ```
 
 <details><summary>Imports</summary>
@@ -35,7 +35,7 @@ open import foundation-core.torsorial-type-families
 The standard definition of [identity types](foundation-core.identity-types.md)
 has the limitation that many of the basic operations only satisfy algebraic laws
 _weakly_. In this file, we consider the
-{{#concept "judgmentally compositional identity types" Agda=yoneda-Id}}
+{{#concept "yoneda identity types" Agda=yoneda-Id}}
 
 ```text
   (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y)
@@ -43,9 +43,8 @@ _weakly_. In this file, we consider the
 
 Through the interpretation of types as ∞-categories, where the hom-space
 `hom(x , y)` is defined to be the identity type `x ＝ y`, we may observe that
-this is an instance of the Yoneda embedding. Thus we also dub these the
-{{#concept "yoneda identity types" Agda=yoneda-Id}}, and use a superscript `y`
-in their notation.
+this is an instance of the Yoneda embedding. We use a superscript `y` in the
+notation of the yoneda identity types.
 
 The yoneda identity types are [equivalent](foundation-core.equivalences.md) to
 the standard identity types, but satisfy judgmental laws
@@ -420,10 +419,10 @@ structure on types.
 
 ### Inverting yoneda identifications
 
-We consider two ways of defining the inversion operation on judgmentally
-compositional identifications: by the judgmentally right unital, and
-judgmentally left unital concatenation operation on the underlying identity type
-respectively. The former enjoys the computational property
+We consider two ways of defining the inversion operation on yoneda
+identifications: by the judgmentally right unital, and judgmentally left unital
+concatenation operation on the underlying identity type respectively. The former
+enjoys the computational property
 
 ```text
   inv reflʸ ≐ reflʸ,
@@ -653,7 +652,7 @@ module _
 
 ## Operations
 
-We can define basic operations on compositional identifications. They all enjoy
+We can define basic operations on the yoneda identifications. They all enjoy
 strict computational properties.
 
 ### Action of functions on yoneda identifications
@@ -701,7 +700,7 @@ module _
   compute-tr-refl-yoneda-Id = refl
 ```
 
-### Function extensionality with respect to compositional identifications
+### Function extensionality with respect to yoneda identifications
 
 ```agda
 module _
@@ -724,7 +723,7 @@ module _
   funext-yoneda-Id = is-equiv-map-equiv equiv-htpy-yoneda-eq
 ```
 
-### Univalence with respect to compositional identifications
+### Univalence with respect to yoneda identifications
 
 ```agda
 module _

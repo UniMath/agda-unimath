@@ -211,7 +211,6 @@ open import foundation.iterated-dependent-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
-open import foundation.judgmentally-compositional-identity-types public
 open import foundation.judgmentally-involutive-identity-types public
 open import foundation.judgmentally-right-unital-concatenation-identifications public
 open import foundation.kernel-span-diagrams-of-maps public
@@ -432,4 +431,5 @@ open import foundation.whiskering-homotopies-composition public
 open import foundation.whiskering-homotopies-concatenation public
 open import foundation.whiskering-identifications-concatenation public
 open import foundation.whiskering-operations public
+open import foundation.yoneda-identity-types public
 ```

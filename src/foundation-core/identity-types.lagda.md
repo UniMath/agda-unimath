@@ -164,7 +164,7 @@ reasons, we use the first alternative by convention.
 See also
 
 - [judgmentally right unital concatenation operation on indentifications](foundation.judgmentally-right-unital-concatenation-identifications.md)
-- [judgmentally compositional identity types](foundation.judgmentally-compositional-identity-types.md)
+- [yoneda identity types](foundation.yoneda-identity-types.md)
 
 ```agda
 module _
