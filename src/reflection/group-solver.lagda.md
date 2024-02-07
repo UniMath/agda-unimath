@@ -410,7 +410,9 @@ module _ {n : ℕ} where
     apply-n-args-fin : {B : UU} (n : ℕ) → n-args n (Inductive-Fin n) B → B
     apply-n-args-fin zero-ℕ f = f
     apply-n-args-fin (succ-ℕ n) f =
-      apply-n-args-fin n (map-n-args n succ-Inductive-Fin (f zero-Inductive-Fin))
+      apply-n-args-fin
+        ( n)
+        ( map-n-args n succ-Inductive-Fin (f zero-Inductive-Fin))
     apply-n-args : {B : UU} (n : ℕ) → n-args n (GroupSyntax n) B → B
     apply-n-args n f = apply-n-args-fin n (map-n-args n inner f)
 
