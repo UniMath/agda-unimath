@@ -8,27 +8,24 @@ module synthetic-homotopy-theory.pushouts where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.span-diagrams
-open import foundation.transposition-span-diagrams
 open import foundation.universe-levels
+
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 
 open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
-open import synthetic-homotopy-theory.flattening-lemma-pushouts
-open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -247,9 +244,10 @@ module _
   where
 
   compute-inl-cogap-cocone-span-diagram :
-    ( a : domain-span-diagram 𝒮) →
-    cogap-cocone-span-diagram 𝒮 c (inl-standard-pushout 𝒮 a) ＝
-    left-map-cocone-span-diagram 𝒮 c a
+    coherence-triangle-maps'
+      ( left-map-cocone-span-diagram 𝒮 c)
+      ( cogap-cocone-span-diagram 𝒮 c)
+      ( inl-standard-pushout 𝒮)
   compute-inl-cogap-cocone-span-diagram =
     left-htpy-cocone-universal-property-pushout
       ( 𝒮)
@@ -258,9 +256,10 @@ module _
       ( c)
 
   compute-inr-cogap-cocone-span-diagram :
-    ( b : codomain-span-diagram 𝒮) →
-    cogap-cocone-span-diagram 𝒮 c (inr-standard-pushout 𝒮 b) ＝
-    right-map-cocone-span-diagram 𝒮 c b
+    coherence-triangle-maps'
+      ( right-map-cocone-span-diagram 𝒮 c)
+      ( cogap-cocone-span-diagram 𝒮 c)
+      ( inr-standard-pushout 𝒮)
   compute-inr-cogap-cocone-span-diagram =
     right-htpy-cocone-universal-property-pushout
       ( 𝒮)
