@@ -22,7 +22,7 @@ open import foundation.span-diagrams
 open import foundation.structure-identity-principle
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types

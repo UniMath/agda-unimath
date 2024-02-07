@@ -1,6 +1,8 @@
 # Flattening families of types over pushouts
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module synthetic-homotopy-theory.flattening-families-of-types-pushouts where
 ```
 

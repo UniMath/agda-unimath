@@ -18,7 +18,7 @@ open import foundation.morphisms-span-diagrams
 open import foundation.span-diagrams
 open import foundation.transposition-span-diagrams
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equality-dependent-pair-types

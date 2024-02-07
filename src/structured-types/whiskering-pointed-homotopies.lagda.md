@@ -49,7 +49,9 @@ pointed homotopy `H` and a pointed map `f` and returns a pointed homotopy
 
 ### Left whiskering of pointed homotopies
 
-Consider two pointed maps `f1 f2 : A →∗ B` equipped with a pointed homotopy `H : f1 ~∗ f2`, and a pointed map `g : B →∗ C`. Then we construct a pointed homotopy
+Consider two pointed maps `f1 f2 : A →∗ B` equipped with a pointed homotopy
+`H : f1 ~∗ f2`, and a pointed map `g : B →∗ C`. Then we construct a pointed
+homotopy
 
 ```text
   g ·l H : (g ∘∗ f1) ~∗ (g ∘∗ f2)
@@ -76,7 +78,9 @@ For the coherence, we have to show that the triangle
                                   ∗
 ```
 
-commutes. By right whiskering of [commuting triangles of identifications](foundation.commuting-squares-of-identifications.md) with respect to concatenation it suffices to show that the triangle
+commutes. By right whiskering of
+[commuting triangles of identifications](foundation.commuting-squares-of-identifications.md)
+with respect to concatenation it suffices to show that the triangle
 
 ```text
                             ap g (H *)
@@ -88,7 +92,8 @@ commutes. By right whiskering of [commuting triangles of identifications](founda
                                g *
 ```
 
-commutes. By functoriality of commuting triangles of identifications, this follows from the fact that the triangle
+commutes. By functoriality of commuting triangles of identifications, this
+follows from the fact that the triangle
 
 ```text
                        H *
@@ -99,6 +104,7 @@ commutes. By functoriality of commuting triangles of identifications, this follo
                        ∨ ∨
                         *
 ```
+
 commutes.
 
 ```agda
@@ -133,10 +139,7 @@ module _
         ( htpy-pointed-htpy f1 f2 H (point-Pointed-Type A))
         ( coh-pointed-htpy' f1 f2 H))
 
-  left-whisker-pointed-htpy :
-    htpy-pointed-map
-      ( g ∘∗ f1)
-      ( g ∘∗ f2)
+  left-whisker-pointed-htpy : g ∘∗ f1 ~∗ g ∘∗ f2
   left-whisker-pointed-htpy =
     make-pointed-htpy
       ( g ∘∗ f1)
@@ -153,9 +156,8 @@ module _
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
   where
 
-  right-whisker-htpy-pointed-map :
-    (g1 g2 : B →∗ C) (H : htpy-pointed-map g1 g2) (f : A →∗ B) →
-    htpy-pointed-map (comp-pointed-map g1 f) (comp-pointed-map g2 f)
-  right-whisker-htpy-pointed-map g1 g2 H (pair f refl) =
+  right-whisker-pointed-htpy :
+    (g1 g2 : B →∗ C) (H : g1  ~∗ g2) (f : A →∗ B) → g1 ∘∗ f ~∗ g2 ∘∗ f
+  right-whisker-pointed-htpy g1 g2 H (pair f refl) =
     pair (htpy-pointed-htpy g1 g2 H ·r f) (coh-pointed-htpy g1 g2 H)
 ```

@@ -302,7 +302,7 @@ module _
               ( is-contr-map-is-equiv (H B) f)
               { pair
                 ( f ∘∗ g)
-                ( eq-htpy-pointed-map
+                ( eq-pointed-htpy
                   ( ( f ∘∗ g) ∘∗ f)
                   ( f)
                   ( concat-pointed-htpy
@@ -314,14 +314,14 @@ module _
                       ( f ∘∗ (g ∘∗ f))
                       ( f ∘∗ id-pointed-map)
                       ( f)
-                      ( left-whisker-comp-pointed-map f
+                      ( left-whisker-pointed-htpy f
                         ( g ∘∗ f)
                         ( id-pointed-map)
                         ( G))
                       ( right-unit-law-comp-pointed-map f))))}
               { pair
                 ( id-pointed-map)
-                ( eq-htpy-pointed-map
+                ( eq-pointed-htpy
                   ( id-pointed-map ∘∗ f)
                   ( f)
                   ( left-unit-law-comp-pointed-map f))}))))
@@ -344,7 +344,7 @@ module _
       ( pair
         ( precomp-pointed-map C h)
         ( λ k →
-          eq-htpy-pointed-map
+          eq-pointed-htpy
             ( (k ∘∗ h) ∘∗ f)
             ( k)
             ( concat-pointed-htpy
@@ -356,7 +356,7 @@ module _
                 ( k ∘∗ (h ∘∗ f))
                 ( k ∘∗ id-pointed-map)
                 ( k)
-                ( left-whisker-comp-pointed-map k
+                ( left-whisker-pointed-htpy k
                   ( h ∘∗ f)
                   ( id-pointed-map)
                   ( H))
@@ -364,7 +364,7 @@ module _
       ( pair
         ( precomp-pointed-map C g)
         ( λ k →
-          eq-htpy-pointed-map
+          eq-pointed-htpy
             ( (k ∘∗ f) ∘∗ g)
             ( k)
             ( concat-pointed-htpy
@@ -376,7 +376,7 @@ module _
                 ( k ∘∗ (f ∘∗ g))
                 ( k ∘∗ id-pointed-map)
                 ( k)
-                ( left-whisker-comp-pointed-map k
+                ( left-whisker-pointed-htpy k
                   ( f ∘∗ g)
                   ( id-pointed-map)
                   ( G))
@@ -426,7 +426,7 @@ module _
               ( is-contr-map-is-equiv (H A) f)
                 { pair
                   ( g ∘∗ f)
-                  ( eq-htpy-pointed-map
+                  ( eq-pointed-htpy
                     ( f ∘∗ (g ∘∗ f))
                     ( f)
                     ( concat-pointed-htpy
@@ -438,7 +438,7 @@ module _
                         ( (f ∘∗ g) ∘∗ f)
                         ( id-pointed-map ∘∗ f)
                         ( f)
-                        ( right-whisker-comp-pointed-map
+                        ( right-whisker-pointed-htpy
                           ( f ∘∗ g)
                           ( id-pointed-map)
                           ( G)
@@ -446,7 +446,7 @@ module _
                         ( left-unit-law-comp-pointed-map f))))}
                 { pair
                   ( id-pointed-map)
-                  ( eq-htpy-pointed-map
+                  ( eq-pointed-htpy
                     ( f ∘∗ id-pointed-map)
                     ( f)
                     ( right-unit-law-comp-pointed-map f))}))))
@@ -468,7 +468,7 @@ module _
       ( pair
         ( g ∘∗_)
         ( λ k →
-          eq-htpy-pointed-map
+          eq-pointed-htpy
             ( f ∘∗ (g ∘∗ k))
             ( k)
             ( concat-pointed-htpy
@@ -480,7 +480,7 @@ module _
                 ( (f ∘∗ g) ∘∗ k)
                 ( id-pointed-map ∘∗ k)
                 ( k)
-                ( right-whisker-comp-pointed-map
+                ( right-whisker-pointed-htpy
                   ( f ∘∗ g)
                   ( id-pointed-map)
                   ( G)
@@ -489,7 +489,7 @@ module _
       ( pair
         ( h ∘∗_)
         ( λ k →
-          eq-htpy-pointed-map
+          eq-pointed-htpy
             ( h ∘∗ (f ∘∗ k))
             ( k)
             ( concat-pointed-htpy
@@ -501,7 +501,7 @@ module _
                 ( (h ∘∗ f) ∘∗ k)
                 ( id-pointed-map ∘∗ k)
                 ( k)
-                ( right-whisker-comp-pointed-map
+                ( right-whisker-pointed-htpy
                   ( h ∘∗ f)
                   ( id-pointed-map)
                   ( H)

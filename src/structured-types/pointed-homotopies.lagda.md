@@ -189,18 +189,16 @@ module _
   eq-pointed-htpy g = map-inv-equiv (extensionality-pointed-Π g)
 ```
 
-### Pointed homotopies are equivalent to identifications of pointed maps
+### Extensionality of pointed maps
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (f : A →∗ B)
   where
 
   extensionality-pointed-map : (g : A →∗ B) → (f ＝ g) ≃ (f ~∗ g)
   extensionality-pointed-map = extensionality-pointed-Π f
-
-  eq-htpy-pointed-map : (g : A →∗ B) → (f ~∗ g) → f ＝ g
-  eq-htpy-pointed-map g = map-inv-equiv (extensionality-pointed-map g)
 ```
 
 ### Concatenation of pointed homotopies

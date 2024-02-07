@@ -23,7 +23,7 @@ open import foundation.morphisms-span-diagrams
 open import foundation.precomposition-functions
 open import foundation.span-diagrams
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams
