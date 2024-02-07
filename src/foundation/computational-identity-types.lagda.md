@@ -366,7 +366,7 @@ module _
       ( f' x)
       ( ( ap
           ( inv)
-          ( commutative-postconcatr-Id-yoneda-Id
+          ( commutative-preconcatr-Id-yoneda-Id
             ( g)
             ( g' w' refl)
             ( inv (f w refl)))) ∙
@@ -375,7 +375,7 @@ module _
               ( _∙ᵣ inv (g' w' refl))
               ( inv-distributive-inv-Id-yoneda-Id f g)) ∙
             ( eq-concat-concatr (f x (inv (g w refl))) (inv (g' w' refl)))))) ∙
-    ( commutative-postconcat-Id-yoneda-Id f'
+    ( commutative-preconcat-Id-yoneda-Id f'
       ( f x (inv (g w refl)))
       ( inv (g' w' refl)))) ∙
     ( ap-binary
@@ -419,7 +419,7 @@ module _
     eq-computational-eq p ∙ᵣ eq-computational-eq q
   preserves-concatr-eq-computational-eq (w , f , g) (w' , f' , g') =
     ( ap (λ r → f' x (f x r ∙ᵣ inv (g' w' refl))) left-unit-concatr) ∙
-    ( commutative-postconcatr-Id-yoneda-Id
+    ( commutative-preconcatr-Id-yoneda-Id
       ( f')
       ( f x (inv (g w refl)))
       ( inv (g' w' refl))) ∙

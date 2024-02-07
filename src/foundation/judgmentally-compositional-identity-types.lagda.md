@@ -25,7 +25,7 @@ open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
-open import foundation-core.univalence
+open import foundation.univalence
 ```
 
 </details>
@@ -41,24 +41,29 @@ _weakly_. In this file, we consider the
   (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y)
 ```
 
-Through the interpretation of types as ∞-categories, we can immediately see that
-this is an instance of the Yoneda-embedding.
+Through the interpretation of types as ∞-categories, where the hom-space
+`hom(x , y)` is defined to be the identity type `x ＝ y`, we may observe that
+this is an instance of the Yoneda embedding. Thus we also dub these the
+{{#concept "yoneda identity types" Agda=yoneda-Id}}, and use a superscript `y`
+in their notation.
 
-This type family is [equivalent](foundation-core.equivalences.md) to the
-standard identity types, but satisfies the judgmental laws
+The yoneda identity types are [equivalent](foundation-core.equivalences.md) to
+the standard identity types, but satisfy judgmental laws
 
-- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`,
-- `refl ∙ p ≐ p`, and
-- `p ∙ refl ≐ p`.
+- `(p ∙ʸ q) ∙ʸ r ≐ p ∙ʸ (q ∙ʸ r)`,
+- `reflʸ ∙ʸ p ≐ p`, and
+- `p ∙ʸ reflʸ ≐ p`.
 
 This is achieved by proxiyng to function composition and utilizing its
 computational properties, and relies heavily on the
-[function extensionality axiom](foundation.function-extensionality.md).
+[function extensionality axiom](foundation.function-extensionality.md). More
+concretely, the reflexivity is given by the identity function, and path
+concatenation is given by function composition.
 
-In addition, we can make the type satisfy the judgmental law
-
-- `inv refl ≐ refl`, and even
-- `rec f refl ≐ f refl`.
+In addition to these strictness laws, we can make the type satisfy judgmental
+law `invʸ reflʸ ≐ reflʸ`. Moreover, while the induction principle of the yoneda
+identity types does not in general satisfy the computation rule judgmentally, we
+can define its recursion principle such that does.
 
 ## Definition
 
@@ -73,57 +78,64 @@ module _
   infix 6 _＝ʸ_
   _＝ʸ_ : A → A → UU l
   (a ＝ʸ b) = yoneda-Id a b
+```
 
+We define the reflexivity to be the identity function:
+
+```agda
   refl-yoneda-Id : {x : A} → x ＝ʸ x
   refl-yoneda-Id z = id
 ```
 
 ## Properties
 
-### Elements of the judgmentally compositional identity type act like postconcatenation operations
+### Elements of the yoneda identity type act like postconcatenation operations
+
+The following is a collection of properties of yoneda identifications similar to
+properties of the postconcatenation operation of identifications.
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  commutative-postconcat-Id-yoneda-Id :
+  commutative-preconcat-Id-yoneda-Id :
     {x y z w : A} (f : x ＝ʸ y) (p : w ＝ z) (q : z ＝ x) →
     f w (p ∙ q) ＝ p ∙ f z q
-  commutative-postconcat-Id-yoneda-Id f refl q = refl
+  commutative-preconcat-Id-yoneda-Id f refl q = refl
 
-  commutative-postconcat-refl-Id-yoneda-Id :
+  commutative-preconcat-refl-Id-yoneda-Id :
     {x y z : A} (f : x ＝ʸ y) (q : z ＝ x) → f z q ＝ q ∙ f x refl
-  commutative-postconcat-refl-Id-yoneda-Id {z = z} f q =
-    ap (f z) (inv right-unit) ∙ commutative-postconcat-Id-yoneda-Id f q refl
+  commutative-preconcat-refl-Id-yoneda-Id {z = z} f q =
+    ap (f z) (inv right-unit) ∙ commutative-preconcat-Id-yoneda-Id f q refl
 
-  commutative-postconcatr-Id-yoneda-Id :
+  commutative-preconcatr-Id-yoneda-Id :
     {x y z w : A} (f : x ＝ʸ y) (p : w ＝ z) (q : z ＝ x) →
     f w (p ∙ᵣ q) ＝ p ∙ᵣ f z q
-  commutative-postconcatr-Id-yoneda-Id {x} {y} {z} {w} f p q =
+  commutative-preconcatr-Id-yoneda-Id {x} {y} {z} {w} f p q =
     ( ap (f w) (eq-concat-concatr p q)) ∙
-    ( commutative-postconcat-Id-yoneda-Id f p q) ∙
+    ( commutative-preconcat-Id-yoneda-Id f p q) ∙
     ( eq-concatr-concat p (f z q))
 
-  commutative-postconcatr-refl-Id-yoneda-Id :
+  commutative-preconcatr-refl-Id-yoneda-Id :
     {x y z : A} (f : x ＝ʸ y) (q : z ＝ x) → f z q ＝ q ∙ᵣ f x refl
-  commutative-postconcatr-refl-Id-yoneda-Id f q =
-    commutative-postconcatr-Id-yoneda-Id f q refl
+  commutative-preconcatr-refl-Id-yoneda-Id f q =
+    commutative-preconcatr-Id-yoneda-Id f q refl
 
   compute-inv-Id-yoneda-Id :
     {x y : A} (f : x ＝ʸ y) → f y (inv (f x refl)) ＝ refl
   compute-inv-Id-yoneda-Id {x} f =
-    ( commutative-postconcat-refl-Id-yoneda-Id f (inv (f x refl))) ∙
+    ( commutative-preconcat-refl-Id-yoneda-Id f (inv (f x refl))) ∙
     ( left-inv (f x refl))
 
   inv-distributive-inv-Id-yoneda-Id :
     {x y z : A} (f : x ＝ʸ y) (g : x ＝ʸ z) →
     inv (g y (inv (f x refl))) ＝ f z (inv (g x refl))
-  inv-distributive-inv-Id-yoneda-Id {x} {y} f g =
-    ( ap inv (commutative-postconcat-refl-Id-yoneda-Id g (inv (f x refl)))) ∙
+  inv-distributive-inv-Id-yoneda-Id {x} f g =
+    ( ap inv (commutative-preconcat-refl-Id-yoneda-Id g (inv (f x refl)))) ∙
     ( distributive-inv-concat (inv (f x refl)) (g x refl)) ∙
     ( ap (inv (g x refl) ∙_) (inv-inv (f x refl))) ∙
-    ( inv (commutative-postconcat-refl-Id-yoneda-Id f (inv (g x refl))))
+    ( inv (commutative-preconcat-refl-Id-yoneda-Id f (inv (g x refl))))
 
   distributive-inv-Id-yoneda-Id :
     {x y z : A} (f : x ＝ʸ y) (g : x ＝ʸ z) →
@@ -132,27 +144,48 @@ module _
     inv (inv-distributive-inv-Id-yoneda-Id f g)
 ```
 
-### The judgmentally compositional identity types are equivalent to the standard identity types
+### The yoneda identity types are equivalent to the standard identity types
 
-We define the equivalence `yoneda-eq-eq : x ＝ y → x ＝ʸ y` using the
-judgmentally right unital concatenation operation on identifications. This gives
-us the judgmental computation rules
-
-```text
-  yoneda-eq-eq refl ≐ refl-yoneda-Id
-```
-
-and
+The equivalence `(x ＝ y) ≃ (x ＝ʸ y)` is defined from left to right by the
+postconcatenation operation
 
 ```text
-  eq-yoneda-eq refl-yoneda-Id ≐ refl.
+  yoneda-eq-eq := p ↦ (q ↦ q ∙ p)   : x ＝ y → x ＝ʸ y,
 ```
 
-The proof that it is a retraction requires the
-[function extensionality axiom](foundation.function-extensionality.md). However,
-function extensionality will become indispensable regardless when we proceed to
-proving miscellaneous algebraic laws of the judgmentally compositional identity
-type.
+and from right to left by evaluation at the reflexivity
+
+```text
+  eq-yoneda-eq := f ↦ f refl   : x ＝ʸ y → x ＝ y.
+```
+
+It should be noted that we define the map `x ＝ y → x ＝ʸ y` using the
+[judgmentally right unital concatenation operation](foundation.judgmentally-right-unital-concatenation-identifications.md).
+While this obstructs us from showing that the homotopy
+`eq-yoneda-eq ∘ yoneda-eq-eq ~ id` holds by reflexivity, as demonstrated by the
+computation
+
+```text
+  eq-yoneda-eq ∘ yoneda-eq-eq
+  ≐ p ↦ (f ↦ f refl) (q ↦ q ∙ p)
+  ≐ p ↦ ((q ↦ q ∙ p) refl)
+  ≐ p ↦ refl ∙ p
+```
+
+it allows us to show that reflexivities are preserved strictly in both
+directions, and not just from `x ＝ʸ y` to `x ＝ y`.
+
+From left to right:
+
+```text
+  yoneda-eq-eq refl ≐ (p ↦ (q ↦ q ∙ p)) refl ≐ (q ↦ q ∙ refl) ≐ (q ↦ q) ≐ reflʸ
+```
+
+and from right to left:
+
+```text
+  eq-yoneda-eq reflʸ ≐ (f ↦ f refl) reflʸ ≐ (q ↦ q) refl ≐ refl.
+```
 
 ```agda
 module _
@@ -164,12 +197,21 @@ module _
 
   eq-yoneda-eq : x ＝ʸ y → x ＝ y
   eq-yoneda-eq f = f x refl
+```
 
+The construction of the homotopy `yoneda-eq-eq ∘ eq-yoneda-eq ~ id` requires the
+[function extensionality axiom](foundation.function-extensionality.md). And
+while we could show an analogous induction principle of the yoneda identity
+types without the use of this axiom, function extensionality will become
+indispensable regardless when we proceed to proving miscellaneous algebraic laws
+of the yoneda identity type.
+
+```agda
   is-section-eq-yoneda-eq :
     is-section yoneda-eq-eq eq-yoneda-eq
   is-section-eq-yoneda-eq f =
     eq-multivariable-htpy 2
-      ( λ _ p → inv (commutative-postconcatr-refl-Id-yoneda-Id f p))
+      ( λ _ p → inv (commutative-preconcatr-refl-Id-yoneda-Id f p))
 
   is-retraction-eq-yoneda-eq :
     is-retraction yoneda-eq-eq eq-yoneda-eq
@@ -196,7 +238,7 @@ module _
   pr2 equiv-eq-yoneda-eq = is-equiv-eq-yoneda-eq
 ```
 
-The reflexivity elements are mapped to reflexivity elements judgmentally.
+The reflexivity elements are preserved strictly.
 
 ```agda
 module _
@@ -216,8 +258,10 @@ module _
   preserves-refl-eq-yoneda-eq = refl
 ```
 
-An alternative definition of `yoneda-eq-eq'` using the judgmentally left unital
-concatenation operation on standard identity types.
+Below, we consider the alternative definition of `yoneda-eq-eq` using the
+judgmentally left unital concatenation operation on standard identity types. As
+we can see, the retracting homotopy holds judgmentally, but now
+`yoneda-eq-eq refl` does not compute definitionally to `reflʸ`.
 
 ```agda
 module _
@@ -231,7 +275,7 @@ module _
     is-section yoneda-eq-eq' eq-yoneda-eq
   is-section-eq-yoneda-eq' f =
     eq-multivariable-htpy 2
-      ( λ _ p → inv (commutative-postconcat-refl-Id-yoneda-Id f p))
+      ( λ _ p → inv (commutative-preconcat-refl-Id-yoneda-Id f p))
 
   is-retraction-eq-yoneda-eq' :
     is-retraction yoneda-eq-eq' eq-yoneda-eq
@@ -247,16 +291,16 @@ module _
     eq-multivariable-htpy 2 (λ _ p → right-unit)
 ```
 
-### The induction principle for judgmentally compositional identity types
+### The induction principle for the yoneda identity types
 
-The judgmentally compositional identity types satisfy the induction principle of
-the identity types. This states that given a base point `x : A` and a family of
-types over the identity types based at `x`, `B : (y : A) (f : x ＝ʸ y) → UU l2`,
-then to construct a dependent function `f : (y : A) (f : x ＝ʸ y) → B y p` it
-suffices to define it at `f x refl-yoneda-Id`.
+The yoneda identity types satisfy the induction principle of the identity types.
+This states that given a base point `x : A` and a family of types over the
+identity types based at `x`, `B : (y : A) (f : x ＝ʸ y) → UU l2`, then to
+construct a dependent function `g : (y : A) (f : x ＝ʸ y) → B y p` it suffices
+to define it at `g x reflʸ`.
 
-**Note.** A drawback of the judgmentally compositional identity types is that
-they do not satisfy a judgmental computation rule for this induction principle.
+**Note.** As stated before, a drawback of the yoneda identity types is that they
+do not satisfy a judgmental computation rule for this induction principle.
 
 ```agda
 module _
@@ -284,47 +328,52 @@ module _
   (B : (y : A) (f : x ＝ʸ y) → UU l2)
   where
 
-  ind-yoneda-Id :
+  ind-yoneda-Id' :
     (b : B x refl-yoneda-Id) {y : A} (f : x ＝ʸ y) → B y f
-  ind-yoneda-Id b {y} =
+  ind-yoneda-Id' b {y} =
     map-inv-is-equiv
       ( dependent-universal-property-identity-system-yoneda-Id B)
       ( b)
       ( y)
 
-  compute-ind-yoneda-Id :
+  compute-ind-yoneda-Id' :
     (b : B x refl-yoneda-Id) →
-    ind-yoneda-Id b refl-yoneda-Id ＝ b
-  compute-ind-yoneda-Id =
+    ind-yoneda-Id' b refl-yoneda-Id ＝ b
+  compute-ind-yoneda-Id' =
     is-section-map-inv-is-equiv
       ( dependent-universal-property-identity-system-yoneda-Id B)
 
-  uniqueness-ind-yoneda-Id :
+  uniqueness-ind-yoneda-Id' :
     (b : (y : A) (f : x ＝ʸ y) → B y f) →
-    (λ y → ind-yoneda-Id (b x refl-yoneda-Id) {y}) ＝ b
-  uniqueness-ind-yoneda-Id =
+    (λ y → ind-yoneda-Id' (b x refl-yoneda-Id) {y}) ＝ b
+  uniqueness-ind-yoneda-Id' =
     is-retraction-map-inv-is-equiv
       ( dependent-universal-property-identity-system-yoneda-Id B)
+```
 
+The following is a more concrete construction of the induction principle. We
+observe that while `eq-yoneda-eq` and `yoneda-eq-eq` preserve reflexivities
+strictly as required, the reduction is obstructed because the proof of
+`is-section-eq-yoneda-eq` does not reduce to `refl` when `f ≐ reflʸ`.
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {x : A}
   (B : (y : A) (f : x ＝ʸ y) → UU l2)
   where
 
-  ind-yoneda-Id' :
-    (b : B x refl-yoneda-Id) {y : A} (f : x ＝ʸ y) → B y (yoneda-eq-eq (f x refl))
-  ind-yoneda-Id' b {y} f = ind-Id x (λ y p → B y (yoneda-eq-eq p)) b y (f x refl)
-
-  -- compute-ind-yoneda-Id :
-  --   (b : B x refl-yoneda-Id) →
-  --   ind-yoneda-Id b refl-yoneda-Id ＝ b
-  -- compute-ind-yoneda-Id =
-  --   is-section-map-inv-is-equiv
-  --     ( dependent-universal-property-identity-system-yoneda-Id B)
+  ind-yoneda-Id :
+    (b : B x refl-yoneda-Id) {y : A} (f : x ＝ʸ y) → B y f
+  ind-yoneda-Id b {y} f =
+    tr
+      ( B y)
+      ( is-section-eq-yoneda-eq f)
+      ( ind-Id x (λ y p → B y (yoneda-eq-eq p)) b y (eq-yoneda-eq f))
 ```
 
-While the induction principle does not have the ideal reduction behaviour, the
-non-dependent eliminator does:
+While the induction principle does not have the wanted reduction behaviour, the
+non-dependent eliminator does. This is simply because we no longer need to
+transport along `is-section-eq-yoneda-eq`.
 
 ```agda
 module _
@@ -334,7 +383,7 @@ module _
 
   rec-yoneda-Id :
     (b : B x) {y : A} → x ＝ʸ y → B y
-  rec-yoneda-Id b {y} p = tr B (p x refl) b
+  rec-yoneda-Id b f = tr B (eq-yoneda-eq f) b
 
   compute-rec-yoneda-Id :
     (b : B x) → rec-yoneda-Id b refl-yoneda-Id ＝ b
@@ -345,29 +394,77 @@ module _
     (λ y → rec-yoneda-Id (b x refl-yoneda-Id) {y}) ＝ b
   uniqueness-rec-yoneda-Id b =
     ( inv
-      ( uniqueness-ind-yoneda-Id
+      ( uniqueness-ind-yoneda-Id'
         ( λ y _ → B y)
         ( λ y → rec-yoneda-Id (b x refl-yoneda-Id)))) ∙
-    ( uniqueness-ind-yoneda-Id (λ y _ → B y) b)
+    ( uniqueness-ind-yoneda-Id' (λ y _ → B y) b)
 ```
 
 ## Structure
 
-The judgmentally compositional identity types form a judgmentally compositional
-weak groupoidal structure on types.
+The yoneda identity types form a judgmentally compositional weak groupoidal
+structure on types.
 
-### Inverting judgmentally compositional identifications
+### Inverting yoneda identifications
 
 We consider two ways of defining the inversion operation on judgmentally
-compositional identifications: by the judgmentally left unital, and judgmentally
-right unital concatenation operation on the underlying identity type
-respectively. The latter enjoys the computational property
+compositional identifications: by the judgmentally right unital, and
+judgmentally left unital concatenation operation on the underlying identity type
+respectively. The former enjoys the computational property
 
 ```text
-  inv refl ≐ refl,
+  inv reflʸ ≐ reflʸ,
 ```
 
-hence will be preferred elsewhere.
+hence will be preferred going.
+
+#### The inversion operation defined by the judgmentally right unital concatenation operation on identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  inv-yoneda-Id : {x y : A} → x ＝ʸ y → y ＝ʸ x
+  inv-yoneda-Id {x} f z p = p ∙ᵣ inv (f x refl)
+
+  compute-inv-yoneda-Id-refl :
+    {x : A} →
+    inv-yoneda-Id (refl-yoneda-Id {x = x}) ＝ refl-yoneda-Id
+  compute-inv-yoneda-Id-refl = refl
+
+  inv-inv-yoneda-Id :
+    {x y : A} (f : x ＝ʸ y) →
+    inv-yoneda-Id (inv-yoneda-Id f) ＝ f
+  inv-inv-yoneda-Id {x} f =
+    eq-multivariable-htpy 2
+      ( λ _ p →
+        ( ap (p ∙ᵣ_) (ap inv left-unit-concatr ∙ inv-inv (f x refl))) ∙
+        ( inv (commutative-preconcatr-refl-Id-yoneda-Id f p)))
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  preserves-inv-yoneda-eq-eq' :
+    {x y : A} (p : x ＝ y) →
+    yoneda-eq-eq (inv p) ＝ inv-yoneda-Id (yoneda-eq-eq' p)
+  preserves-inv-yoneda-eq-eq' p = refl
+
+  preserves-inv-yoneda-eq-eq :
+    {x y : A} (p : x ＝ y) →
+    yoneda-eq-eq (inv p) ＝ inv-yoneda-Id (yoneda-eq-eq p)
+  preserves-inv-yoneda-eq-eq p =
+    eq-multivariable-htpy 2
+      ( λ _ q → ap (λ r → q ∙ᵣ inv r) (inv left-unit-concatr))
+
+  preserves-inv-eq-yoneda-eq :
+    {x y : A} (f : x ＝ʸ y) →
+    eq-yoneda-eq (inv-yoneda-Id f) ＝ inv (eq-yoneda-eq f)
+  preserves-inv-eq-yoneda-eq f = left-unit-concatr
+```
 
 #### The inversion operation defined by the judgmentally left unital concatenation operation on identifications
 
@@ -380,8 +477,7 @@ module _
   invl-yoneda-Id {x} f z p = p ∙ inv (f x refl)
 
   compute-invl-yoneda-Id-refl :
-    {x : A} →
-    invl-yoneda-Id (refl-yoneda-Id {x = x}) ＝ refl-yoneda-Id
+    {x : A} → invl-yoneda-Id (refl-yoneda-Id {x = x}) ＝ refl-yoneda-Id
   compute-invl-yoneda-Id-refl = eq-multivariable-htpy 2 (λ _ p → right-unit)
 
   invl-invl-yoneda-Id :
@@ -389,8 +485,8 @@ module _
   invl-invl-yoneda-Id {x} f =
     eq-multivariable-htpy 2
       ( λ _ p →
-        ap (p ∙_) (inv-inv (f x refl)) ∙
-        inv (commutative-postconcat-refl-Id-yoneda-Id f p))
+        ( ap (p ∙_) (inv-inv (f x refl))) ∙
+        ( inv (commutative-preconcat-refl-Id-yoneda-Id f p)))
 ```
 
 The inversion operation corresponds to the standard inversion operation on
@@ -416,78 +512,7 @@ module _
   preserves-invl-eq-yoneda-eq f = refl
 ```
 
-#### The inversion operation defined by the judgmentally right unital concatenation operation on identifications
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  invr-yoneda-Id : {x y : A} → x ＝ʸ y → y ＝ʸ x
-  invr-yoneda-Id {x} f z p = p ∙ᵣ inv (f x refl)
-
-  compute-invr-yoneda-Id-refl :
-    {x : A} →
-    invr-yoneda-Id (refl-yoneda-Id {x = x}) ＝ refl-yoneda-Id
-  compute-invr-yoneda-Id-refl = refl
-
-  invr-invr-yoneda-Id :
-    {x y : A} (f : x ＝ʸ y) →
-    invr-yoneda-Id (invr-yoneda-Id f) ＝ f
-  invr-invr-yoneda-Id {x} f =
-    eq-multivariable-htpy 2
-      ( λ _ p →
-        ( ap (p ∙ᵣ_) (ap inv left-unit-concatr ∙ inv-inv (f x refl))) ∙
-        ( inv (commutative-postconcatr-refl-Id-yoneda-Id f p)))
-```
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  preserves-invr-yoneda-eq-eq' :
-    {x y : A} (p : x ＝ y) →
-    yoneda-eq-eq (inv p) ＝ invr-yoneda-Id (yoneda-eq-eq' p)
-  preserves-invr-yoneda-eq-eq' p = refl
-
-  preserves-invr-yoneda-eq-eq :
-    {x y : A} (p : x ＝ y) →
-    yoneda-eq-eq (inv p) ＝ invr-yoneda-Id (yoneda-eq-eq p)
-  preserves-invr-yoneda-eq-eq refl = refl
-
-  preserves-invr-eq-yoneda-eq :
-    {x y : A} (f : x ＝ʸ y) →
-    eq-yoneda-eq (invr-yoneda-Id f) ＝ inv (eq-yoneda-eq f)
-  preserves-invr-eq-yoneda-eq {x} {y} f = left-unit-concatr
-```
-
-We will prefer the inversion operation defined by the judgmentally right unital
-concatenation operation on identifications by convention, as it satisfies the
-judgmental computation law
-
-```text
-  inv refl ≐ refl.
-```
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  inv-yoneda-Id : {x y : A} → x ＝ʸ y → y ＝ʸ x
-  inv-yoneda-Id = invr-yoneda-Id
-
-  compute-inv-yoneda-Id-refl :
-    {x : A} → inv-yoneda-Id (refl-yoneda-Id {x = x}) ＝ refl-yoneda-Id
-  compute-inv-yoneda-Id-refl = compute-invr-yoneda-Id-refl
-
-  inv-inv-yoneda-Id :
-    {x y : A} (f : x ＝ʸ y) → inv-yoneda-Id (inv-yoneda-Id f) ＝ f
-  inv-inv-yoneda-Id = invr-invr-yoneda-Id
-```
-
-### Concatenation of judgmentally compositional identifications
+### Concatenation of yoneda identifications
 
 ```agda
 module _
@@ -522,10 +547,10 @@ module _
     {x y z : A} (f : x ＝ʸ y) (g : y ＝ʸ z) →
     eq-yoneda-eq (f ∙ʸ g) ＝ eq-yoneda-eq f ∙ eq-yoneda-eq g
   preserves-concat-eq-yoneda-eq {x} f g =
-    commutative-postconcat-refl-Id-yoneda-Id g (f x refl)
+    commutative-preconcat-refl-Id-yoneda-Id g (f x refl)
 ```
 
-### The groupoidal laws for the judgmentally compositional identity types
+### The groupoidal laws for the yoneda identity types
 
 ```agda
 module _
@@ -550,7 +575,7 @@ module _
   left-inv-yoneda-Id f =
     eq-multivariable-htpy 2
       ( λ _ p →
-        ( commutative-postconcatr-Id-yoneda-Id f p (inv (f x refl))) ∙
+        ( commutative-preconcatr-Id-yoneda-Id f p (inv (f x refl))) ∙
         ( ap (p ∙ᵣ_) (compute-inv-Id-yoneda-Id f)))
 
   left-invl-yoneda-Id :
@@ -558,7 +583,7 @@ module _
   left-invl-yoneda-Id f =
     eq-multivariable-htpy 2
       ( λ _ p →
-        ( commutative-postconcat-Id-yoneda-Id f p (inv (f x refl))) ∙
+        ( commutative-preconcat-Id-yoneda-Id f p (inv (f x refl))) ∙
         ( ap (p ∙_) (compute-inv-Id-yoneda-Id f) ∙ right-unit))
 
   right-inv-yoneda-Id :
@@ -568,7 +593,7 @@ module _
       ( λ _ p →
         ( ap
           ( _∙ᵣ inv (f x refl))
-          ( commutative-postconcatr-refl-Id-yoneda-Id f p)) ∙
+          ( commutative-preconcatr-refl-Id-yoneda-Id f p)) ∙
         ( assoc-concatr p (f x refl) (inv (f x refl))) ∙
         ( ap (p ∙ᵣ_) (right-inv-concatr (f x refl))))
 
@@ -579,7 +604,7 @@ module _
       ( λ _ p →
         ( ap
           ( _∙ inv (f x refl))
-          ( commutative-postconcat-refl-Id-yoneda-Id f p)) ∙
+          ( commutative-preconcat-refl-Id-yoneda-Id f p)) ∙
         ( assoc p (f x refl) (inv (f x refl))) ∙
         ( ap (p ∙_) (right-inv (f x refl))) ∙
         ( right-unit))
@@ -594,7 +619,7 @@ module _
           ( p ∙ᵣ_)
           ( ( ap
               ( inv)
-              ( commutative-postconcatr-refl-Id-yoneda-Id g (f x refl))) ∙
+              ( commutative-preconcatr-refl-Id-yoneda-Id g (f x refl))) ∙
             ( distributive-inv-concatr (f x refl) (g y refl)))) ∙
           ( inv (assoc-concatr p (inv (g y refl)) (inv (f x refl)))))
 
@@ -608,34 +633,62 @@ module _
           ( p ∙_)
           ( ( ap
               ( inv)
-              ( commutative-postconcat-refl-Id-yoneda-Id g (f x refl))) ∙
+              ( commutative-preconcat-refl-Id-yoneda-Id g (f x refl))) ∙
             ( distributive-inv-concat (f x refl) (g y refl)))) ∙
         ( inv (assoc p (inv (g y refl)) (inv (f x refl)))))
 ```
 
-### Action of functions on judgmentally compositional identifications
+## Operations
+
+We can define basic operations on compositional identifications. They all enjoy
+strict computational properties.
+
+### Action of functions on yoneda identifications
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  ap-yoneda-Id : x ＝ʸ y → f x ＝ʸ f y
-  ap-yoneda-Id p .(f x) refl = ap f (p x refl)
+  eq-ap-yoneda-Id : {x y : A} → x ＝ʸ y → f x ＝ f y
+  eq-ap-yoneda-Id = ap f ∘ eq-yoneda-eq
+
+  ap-yoneda-Id : {x y : A} → x ＝ʸ y → f x ＝ʸ f y
+  ap-yoneda-Id = yoneda-eq-eq ∘ eq-ap-yoneda-Id
+
+  compute-ap-refl-yoneda-Id :
+    {x : A} → ap-yoneda-Id (refl-yoneda-Id {x = x}) ＝ refl-yoneda-Id
+  compute-ap-refl-yoneda-Id = refl
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  compute-ap-id-yoneda-Id :
+    {x y : A} (p : x ＝ʸ y) → ap-yoneda-Id id p ＝ p
+  compute-ap-id-yoneda-Id {x} p =
+    eq-multivariable-htpy 2
+      ( λ _ q →
+        ( ap (q ∙ᵣ_) (ap-id (p x refl))) ∙
+        ( inv (commutative-preconcatr-refl-Id-yoneda-Id p q)))
 ```
 
-### Transport along judgmentally compositional identifications
+### Transport along yoneda identifications
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  tr-yoneda-Id : x ＝ʸ y → B x → B y
-  tr-yoneda-Id p = tr B (p x refl)
+  tr-yoneda-Id : {x y : A} → x ＝ʸ y → B x → B y
+  tr-yoneda-Id = tr B ∘ eq-yoneda-eq
+
+  compute-tr-refl-yoneda-Id :
+    {x : A} → tr-yoneda-Id (refl-yoneda-Id {x = x}) ＝ id
+  compute-tr-refl-yoneda-Id = refl
 ```
 
-### `htpy-compositional-eq`
+### Function extensionality with respect to compositional identifications
 
 ```agda
 module _
@@ -643,18 +696,48 @@ module _
   where
 
   htpy-yoneda-eq : f ＝ʸ g → f ~ g
-  htpy-yoneda-eq p = htpy-eq (p f refl)
+  htpy-yoneda-eq = htpy-eq ∘ eq-yoneda-eq
+
+  yoneda-eq-htpy : f ~ g → f ＝ʸ g
+  yoneda-eq-htpy = yoneda-eq-eq ∘ eq-htpy
+
+  equiv-htpy-yoneda-eq : (f ＝ʸ g) ≃ (f ~ g)
+  equiv-htpy-yoneda-eq = equiv-funext ∘e equiv-eq-yoneda-eq
+
+  equiv-yoneda-eq-htpy : (f ~ g) ≃ (f ＝ʸ g)
+  equiv-yoneda-eq-htpy = equiv-yoneda-eq-eq ∘e equiv-eq-htpy
+
+  funext-yoneda-Id : is-equiv htpy-yoneda-eq
+  funext-yoneda-Id = is-equiv-map-equiv equiv-htpy-yoneda-eq
 ```
 
-### `equiv-compositional-eq`
+### Univalence with respect to compositional identifications
 
 ```agda
 module _
   {l1 : Level} {A B : UU l1}
   where
 
+  map-yoneda-eq : A ＝ʸ B → A → B
+  map-yoneda-eq = map-eq ∘ eq-yoneda-eq
+
   equiv-yoneda-eq : A ＝ʸ B → A ≃ B
-  equiv-yoneda-eq p = equiv-eq (p A refl)
+  equiv-yoneda-eq = equiv-eq ∘ eq-yoneda-eq
+
+  yoneda-eq-equiv : A ≃ B → A ＝ʸ B
+  yoneda-eq-equiv = yoneda-eq-eq ∘ eq-equiv
+
+  equiv-equiv-yoneda-eq : (A ＝ʸ B) ≃ (A ≃ B)
+  equiv-equiv-yoneda-eq = equiv-univalence ∘e equiv-eq-yoneda-eq
+
+  is-equiv-equiv-yoneda-eq : is-equiv equiv-yoneda-eq
+  is-equiv-equiv-yoneda-eq = is-equiv-map-equiv equiv-equiv-yoneda-eq
+
+  equiv-yoneda-eq-equiv : (A ≃ B) ≃ (A ＝ʸ B)
+  equiv-yoneda-eq-equiv = equiv-yoneda-eq-eq ∘e equiv-eq-equiv A B
+
+  is-equiv-yoneda-eq-equiv : is-equiv yoneda-eq-equiv
+  is-equiv-yoneda-eq-equiv = is-equiv-map-equiv equiv-yoneda-eq-equiv
 ```
 
 ## See also
