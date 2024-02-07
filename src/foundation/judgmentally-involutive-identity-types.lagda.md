@@ -166,14 +166,7 @@ module _
   preserves-refl-eq-involutive-eq = refl
 ```
 
-### The induction principle for judgmentally involutive identity types
-
-The judgmentally involutive identity types satisfy the induction principle of
-the identity types. This states that given a base point `x : A` and a family of
-types over the identity types based at `x`, `B : (y : A) (p : x ＝ⁱ y) → UU l2`,
-then to construct a dependent function `f : (y : A) (p : x ＝ⁱ y) → B y p` it
-suffices to define it at `f x reflⁱ`. The judgmentally involutive identity types
-also satisfy the corresponding computation rule judgmentally.
+### Torsoriality of the judgmentally involutive identity types
 
 ```agda
 module _
@@ -186,6 +179,14 @@ module _
       ( Σ A (x ＝_))
       ( equiv-tot (λ y → equiv-eq-involutive-eq {x = x} {y}))
       ( is-torsorial-Id x)
+```
+
+### The dependent universal property of the judgmentally involutive identity types
+
+```agda
+module _
+  {l : Level} {A : UU l} {x : A}
+  where
 
   dependent-universal-property-identity-system-involutive-Id :
     dependent-universal-property-identity-system
@@ -195,7 +196,18 @@ module _
     dependent-universal-property-identity-system-is-torsorial
       ( refl-involutive-Id)
       ( is-torsorial-involutive-Id)
+```
 
+### The induction principle for judgmentally involutive identity types
+
+The judgmentally involutive identity types satisfy the induction principle of
+the identity types. This states that given a base point `x : A` and a family of
+types over the identity types based at `x`, `B : (y : A) (p : x ＝ⁱ y) → UU l2`,
+then to construct a dependent function `f : (y : A) (p : x ＝ⁱ y) → B y p` it
+suffices to define it at `f x reflⁱ`. The judgmentally involutive identity types
+also satisfy the corresponding computation rule judgmentally.
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1}
   (x : A) (B : (y : A) (p : x ＝ⁱ y) → UU l2)

@@ -176,13 +176,7 @@ module _
   preserves-refl-yoneda-eq-computational-eq = refl
 ```
 
-### The induction principle for computational identity types
-
-The judgmentally computational identity types satisfy the induction principle of
-the identity types. This states that given a base point `x : A` and a family of
-types over the identity types based at `x`, `B : (y : A) (p : x ＝ʲ y) → UU l2`,
-then to construct a dependent function `f : (y : A) (p : x ＝ʲ y) → B y p` it
-suffices to define it at `f x refl-computational-Id`.
+### Torsoriality of the computational identity types
 
 ```agda
 module _
@@ -195,6 +189,14 @@ module _
       ( Σ A (x ＝_))
       ( equiv-tot (λ y → equiv-eq-computational-eq {x = x} {y}))
       ( is-torsorial-Id x)
+```
+
+### The dependent universal property of the computational identity types
+
+```agda
+module _
+  {l : Level} {A : UU l} {x : A}
+  where
 
   dependent-universal-property-identity-system-computational-Id :
     dependent-universal-property-identity-system
@@ -204,7 +206,17 @@ module _
     dependent-universal-property-identity-system-is-torsorial
       ( refl-computational-Id)
       ( is-torsorial-computational-Id)
+```
 
+### The induction principle for computational identity types
+
+The judgmentally computational identity types satisfy the induction principle of
+the identity types. This states that given a base point `x : A` and a family of
+types over the identity types based at `x`, `B : (y : A) (p : x ＝ʲ y) → UU l2`,
+then to construct a dependent function `f : (y : A) (p : x ＝ʲ y) → B y p` it
+suffices to define it at `f x refl-computational-Id`.
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {x : A}
   (B : (y : A) (p : x ＝ʲ y) → UU l2)
@@ -336,7 +348,7 @@ module _
 
   infixl 15 _∙ₗʲ_
   _∙ₗʲ_ : {x y z : A} → x ＝ʲ y → y ＝ʲ z → x ＝ʲ z
-  (z , p , q) ∙ₗʲ (z' , p' , q') = (z' , p' , q' ∙ʸ invr-yoneda-Id p ∙ʸ q)
+  (z , p , q) ∙ₗʲ (z' , p' , q') = (z' , p' , q' ∙ʸ inv-yoneda-Id p ∙ʸ q)
 
   concatl-computational-Id : {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
   concatl-computational-Id p z q = p ∙ₗʲ q
@@ -393,7 +405,7 @@ module _
 
   infixl 15 _∙ᵣʲ_
   _∙ᵣʲ_ : {x y z : A} → x ＝ʲ y → y ＝ʲ z → x ＝ʲ z
-  (w , p , q) ∙ᵣʲ (w' , p' , q') = (w , p ∙ʸ invr-yoneda-Id q' ∙ʸ p' , q)
+  (w , p , q) ∙ᵣʲ (w' , p' , q') = (w , p ∙ʸ inv-yoneda-Id q' ∙ʸ p' , q)
 
   concatr-computational-Id : {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
   concatr-computational-Id p z q = p ∙ᵣʲ q

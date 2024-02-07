@@ -291,16 +291,7 @@ module _
     eq-multivariable-htpy 2 (λ _ p → right-unit)
 ```
 
-### The induction principle for the yoneda identity types
-
-The yoneda identity types satisfy the induction principle of the identity types.
-This states that given a base point `x : A` and a family of types over the
-identity types based at `x`, `B : (y : A) (f : x ＝ʸ y) → UU l2`, then to
-construct a dependent function `g : (y : A) (f : x ＝ʸ y) → B y p` it suffices
-to define it at `g x reflʸ`.
-
-**Note.** As stated before, a drawback of the yoneda identity types is that they
-do not satisfy a judgmental computation rule for this induction principle.
+### Torsoriality of the yoneda identity types
 
 ```agda
 module _
@@ -313,6 +304,14 @@ module _
       ( Σ A (x ＝_))
       ( equiv-tot (λ y → equiv-eq-yoneda-eq {x = x} {y}))
       ( is-torsorial-Id x)
+```
+
+### The dependent universal property of the yoneda identity types
+
+```agda
+module _
+  {l : Level} {A : UU l} {x : A}
+  where
 
   dependent-universal-property-identity-system-yoneda-Id :
     dependent-universal-property-identity-system
@@ -322,7 +321,20 @@ module _
     dependent-universal-property-identity-system-is-torsorial
       ( refl-yoneda-Id)
       ( is-torsorial-yoneda-Id)
+```
 
+### The induction principle for the yoneda identity types
+
+The yoneda identity types satisfy the induction principle of the identity types.
+This states that given a base point `x : A` and a family of types over the
+identity types based at `x`, `B : (y : A) (f : x ＝ʸ y) → UU l2`, then to
+construct a dependent function `g : (y : A) (f : x ＝ʸ y) → B y p` it suffices
+to define it at `g x reflʸ`.
+
+**Note.** As stated before, a drawback of the yoneda identity types is that they
+do not satisfy a judgmental computation rule for this induction principle.
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {x : A}
   (B : (y : A) (f : x ＝ʸ y) → UU l2)
