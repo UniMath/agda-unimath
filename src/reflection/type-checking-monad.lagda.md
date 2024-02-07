@@ -264,7 +264,9 @@ example was addapted from
         ( Argument-Agda Term-Agda ×
           ( Term-Agda × Term-Agda)))
   ＝-type-info
-    ( definition-Term-Agda (quote _＝_) (𝓁 ∷ 𝒯 ∷ (arg _ l) ∷ (arg _ r) ∷ nil)) =
+    ( definition-Term-Agda
+      ( quote _＝_)
+      ( 𝓁 ∷ 𝒯 ∷ (cons-Argument-Agda _ l) ∷ (cons-Argument-Agda _ r) ∷ nil)) =
     returnTC (𝓁 , 𝒯 , l , r)
   ＝-type-info _ = typeError (unit-list (strErr "Term-Agda is not a ＝-type."))
 
@@ -299,7 +301,7 @@ boundary-TCM : Term-Agda → TC (Term-Agda × Term-Agda)
 boundary-TCM
   ( definition-Term-Agda
     ( quote Id)
-    ( 𝓁 ∷ 𝒯 ∷ arg _ l ∷ arg _ r ∷ nil)) =
+    ( 𝓁 ∷ 𝒯 ∷ cons-Argument-Agda _ l ∷ cons-Argument-Agda _ r ∷ nil)) =
   returnTC (l , r)
 boundary-TCM t =
   typeError

@@ -87,13 +87,17 @@ _ = refl
 ```agda
 _ :
   quoteTerm (λ (x : ℕ) → x) ＝
-  lambda-Term-Agda visible (abs "x" (variable-Term-Agda 0 nil))
+  lambda-Term-Agda visible-Visibility-Argument-Agda
+    ( abs "x" (variable-Term-Agda 0 nil))
 _ = refl
 
 _ :
   quoteTerm (λ {x : ℕ} (y : ℕ) → x) ＝
-  lambda-Term-Agda hidden
-    ( abs "x" (lambda-Term-Agda visible (abs "y" (variable-Term-Agda 1 nil))))
+  lambda-Term-Agda hidden-Visibility-Argument-Agda
+    ( abs
+      ( "x")
+      ( lambda-Term-Agda visible-Visibility-Argument-Agda
+        ( abs "y" (variable-Term-Agda 1 nil))))
 _ = refl
 
 private
