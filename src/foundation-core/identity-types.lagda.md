@@ -160,7 +160,9 @@ behaviours.
 
 While the third option may be preferred by some for its symmetry, for practical
 reasons, we prefer one of the first two, and by convention we use the first
-alternative. The second option is considered in
+alternative.
+
+The second option is considered in
 [`foundation.strictly-right-unital-concatenation-identifications`](foundation.strictly-right-unital-concatenation-identifications.md),
 and in [`foundation.yoneda-identity-types`](foundation.yoneda-identity-types.md)
 we construct an identity type which satisfies both computation rules among
