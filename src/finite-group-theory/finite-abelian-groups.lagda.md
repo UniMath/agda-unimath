@@ -51,16 +51,6 @@ is-prop-is-abelian-Group-𝔽 G =
   is-prop-type-Prop (is-abelian-prop-Group-𝔽 G)
 ```
 
-### The condition of being finite on abelian groups
-
-```agda
-is-finite-prop-Ab : {l : Level} → Ab l → Prop l
-is-finite-prop-Ab A = is-finite-Prop (type-Ab A)
-
-is-finite-Ab : {l : Level} → Ab l → UU l
-is-finite-Ab A = type-Prop (is-finite-prop-Ab A)
-```
-
 ### The type of abelian groups
 
 ```agda
