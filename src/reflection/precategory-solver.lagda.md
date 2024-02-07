@@ -174,19 +174,19 @@ private
   infixr 10 _++_
 
   pattern apply-pr1 xs =
-    def (quote pr1)
-      ( hidden-Argument-Agda unknown ∷
-        hidden-Argument-Agda unknown ∷
-        hidden-Argument-Agda unknown ∷
-        hidden-Argument-Agda unknown ∷
+    definition-Term-Agda (quote pr1)
+      ( hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
         xs)
 
   pattern apply-pr2 xs =
-    def (quote pr2)
-      ( hidden-Argument-Agda unknown ∷
-        hidden-Argument-Agda unknown ∷
-        hidden-Argument-Agda unknown ∷
-        hidden-Argument-Agda unknown ∷
+    definition-Term-Agda (quote pr2)
+      ( hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
+        hidden-Argument-Agda unknown-Term-Agda ∷
         xs)
 ```
 
@@ -206,7 +206,7 @@ build-Precategory-Expr
             ( nil))) ∷
           ( visible-Argument-Agda x) ∷
           nil)) =
-  con (quote id-hom-Precategory-Expr) nil
+  constructor-Term-Agda (quote id-hom-Precategory-Expr) nil
 build-Precategory-Expr
   ( apply-pr1
     ( visible-Argument-Agda
@@ -219,13 +219,15 @@ build-Precategory-Expr
             ∷ nil)) ∷
       hidden-Argument-Agda x ∷ hidden-Argument-Agda y ∷ hidden-Argument-Agda z ∷
       visible-Argument-Agda g ∷ visible-Argument-Agda f ∷ nil)) =
-  con
+  constructor-Term-Agda
     ( quote comp-hom-Precategory-Expr)
     ( visible-Argument-Agda (build-Precategory-Expr g) ∷
       visible-Argument-Agda (build-Precategory-Expr f) ∷
       nil)
 build-Precategory-Expr f =
-  con (quote hom-Precategory-Expr) (visible-Argument-Agda f ∷ nil)
+  constructor-Term-Agda
+    ( quote hom-Precategory-Expr)
+    ( visible-Argument-Agda f ∷ nil)
 ```
 
 ### The application of the `solve-Precategory-Expr` lemma
@@ -233,14 +235,14 @@ build-Precategory-Expr f =
 ```agda
 apply-solve-Precategory-Expr : Term-Agda → Term-Agda → Term-Agda → Term-Agda
 apply-solve-Precategory-Expr cat lhs rhs =
-  def
+  definition-Term-Agda
     ( quote solve-Precategory-Expr)
     ( replicate-hidden-Argument-Agda 2 ++
       visible-Argument-Agda cat ∷
       replicate-hidden-Argument-Agda 2 ++
       visible-Argument-Agda lhs ∷
       visible-Argument-Agda rhs ∷
-      visible-Argument-Agda (con (quote refl) nil) ∷
+      visible-Argument-Agda (constructor-Term-Agda (quote refl) nil) ∷
       nil)
 ```
 

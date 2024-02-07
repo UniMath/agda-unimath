@@ -39,7 +39,7 @@ data Literal-Agda : UU lzero where
   char : (c : Char) → Literal-Agda
   string : (s : String) → Literal-Agda
   name : (x : Name-Agda) → Literal-Agda
-  meta : (x : Metavariable-Agda) → Literal-Agda
+  metavariable-Term-Agda : (x : Metavariable-Agda) → Literal-Agda
 
 {-# BUILTIN AGDALITERAL Literal-Agda #-}
 {-# BUILTIN AGDALITNAT nat #-}
@@ -48,5 +48,5 @@ data Literal-Agda : UU lzero where
 {-# BUILTIN AGDALITCHAR char #-}
 {-# BUILTIN AGDALITSTRING string #-}
 {-# BUILTIN AGDALITQNAME name #-}
-{-# BUILTIN AGDALITMETA meta #-}
+{-# BUILTIN AGDALITMETA metavariable-Term-Agda #-}
 ```

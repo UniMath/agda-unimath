@@ -115,8 +115,8 @@ postulate
   -- new TC state if it is 'true'.
   runSpeculative : ∀ {a} {A : UU a} → TC (Σ A λ _ → bool) → TC A
 
-  -- Get a list of all possible instance candidates for the given meta
-  -- variable (it does not have to be an instance meta).
+  -- Get a list of all possible instance candidates for the given metavariable-Term-Agda
+  -- variable (it does not have to be an instance metavariable-Term-Agda).
   getInstances : Metavariable-Agda → TC (list Term-Agda)
 
   declareData : Name-Agda → ℕ → Term-Agda → TC unit
@@ -235,8 +235,8 @@ private
 ```agda
   macro
     swap-add : Term-Agda → Term-Agda → TC unit
-    swap-add (def (quote add-ℕ) (cons a (cons b nil))) hole =
-      unify hole (def (quote add-ℕ) (cons b (cons a nil)))
+    swap-add (definition-Term-Agda (quote add-ℕ) (cons a (cons b nil))) hole =
+      unify hole (definition-Term-Agda (quote add-ℕ) (cons b (cons a nil)))
     {-# CATCHALL #-}
     swap-add v hole = unify hole v
 
@@ -264,7 +264,7 @@ example was addapted from
         ( Argument-Agda Term-Agda ×
           ( Term-Agda × Term-Agda)))
   ＝-type-info
-    ( def (quote _＝_) (𝓁 ∷ 𝒯 ∷ (arg _ l) ∷ (arg _ r) ∷ nil)) =
+    ( definition-Term-Agda (quote _＝_) (𝓁 ∷ 𝒯 ∷ (arg _ l) ∷ (arg _ r) ∷ nil)) =
     returnTC (𝓁 , 𝒯 , l , r)
   ＝-type-info _ = typeError (unit-list (strErr "Term-Agda is not a ＝-type."))
 
@@ -276,7 +276,7 @@ example was addapted from
         p-type ← inferType p
         𝓁 , 𝒯 , l , r ← ＝-type-info p-type
         unify goal
-          ( def (quote inv)
+          ( definition-Term-Agda (quote inv)
             ( 𝓁 ∷
               𝒯 ∷
               hidden-Argument-Agda l ∷
@@ -297,7 +297,7 @@ example was addapted from
 ```agda
 boundary-TCM : Term-Agda → TC (Term-Agda × Term-Agda)
 boundary-TCM
-  ( def
+  ( definition-Term-Agda
     ( quote Id)
     ( 𝓁 ∷ 𝒯 ∷ arg _ l ∷ arg _ r ∷ nil)) =
   returnTC (l , r)

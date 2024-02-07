@@ -55,24 +55,25 @@ data Definition-Agda : UU lzero where
 ### Constructors and definitions
 
 ```agda
-_ : quoteTerm ℕ ＝ def (quote ℕ) nil
+_ : quoteTerm ℕ ＝ definition-Term-Agda (quote ℕ) nil
 _ = refl
 
 _ :
   quoteTerm (succ-ℕ zero-ℕ) ＝
-  con
+  constructor-Term-Agda
     ( quote succ-ℕ)
-    ( unit-list (visible-Argument-Agda (con (quote zero-ℕ) nil)))
+    ( unit-list
+      ( visible-Argument-Agda (constructor-Term-Agda (quote zero-ℕ) nil)))
 _ = refl
 
 _ :
   {l : Level} {A : UU l} →
   quoteTerm (type-trunc-Prop A) ＝
-  def
+  definition-Term-Agda
     ( quote type-trunc-Prop)
     ( cons
-      ( hidden-Argument-Agda (var 1 nil))
-      ( unit-list (visible-Argument-Agda (var 0 nil))))
+      ( hidden-Argument-Agda (variable-Term-Agda 1 nil))
+      ( unit-list (visible-Argument-Agda (variable-Term-Agda 0 nil))))
 _ = refl
 ```
 
@@ -80,12 +81,14 @@ _ = refl
 
 ```agda
 _ :
-  quoteTerm (λ (x : ℕ) → x) ＝ lam visible (abs "x" (var 0 nil))
+  quoteTerm (λ (x : ℕ) → x) ＝
+  lambda-Term-Agda visible (abs "x" (variable-Term-Agda 0 nil))
 _ = refl
 
 _ :
   quoteTerm (λ {x : ℕ} (y : ℕ) → x) ＝
-  lam hidden (abs "x" (lam visible (abs "y" (var 1 nil))))
+  lambda-Term-Agda hidden
+    ( abs "x" (lambda-Term-Agda visible (abs "y" (variable-Term-Agda 1 nil))))
 _ = refl
 
 private
@@ -94,63 +97,71 @@ private
 
   _ :
     quoteTerm (helper (ℕ → ℕ) (λ { zero-ℕ → zero-ℕ ; (succ-ℕ x) → x})) ＝
-    def
+    definition-Term-Agda
       ( quote helper)
       ( cons
         -- ℕ → ℕ
         ( visible-Argument-Agda
-          ( pi
-            ( visible-Argument-Agda (def (quote ℕ) nil))
-            ( abs "_" (def (quote ℕ) nil))))
+          ( dependent-product-Term-Agda
+            ( visible-Argument-Agda (definition-Term-Agda (quote ℕ) nil))
+            ( abs "_" (definition-Term-Agda (quote ℕ) nil))))
         ( unit-list
           -- The pattern matching lambda
           ( visible-Argument-Agda
-            ( pat-lam
+            ( pattern-lambda-Term-Agda
               ( cons
-                -- zero-ℕ clause
-                ( clause
+                -- zero-ℕ clause-Clause-Agda
+                ( clause-Clause-Agda
                   -- No telescope
                   ( nil)
                   -- Left side of the first lambda case
-                  ( unit-list (visible-Argument-Agda (con (quote zero-ℕ) nil)))
+                  ( unit-list
+                    ( visible-Argument-Agda
+                      ( constructor-Term-Agda (quote zero-ℕ) nil)))
                   -- Right side of the first lambda case
-                  ( con (quote zero-ℕ) nil))
+                  ( constructor-Term-Agda (quote zero-ℕ) nil))
                 ( unit-list
-                  -- succ-ℕ clause
-                  ( clause
+                  -- succ-ℕ clause-Clause-Agda
+                  ( clause-Clause-Agda
                     -- Telescope-Agda matching the "x"
                     ( unit-list
-                      ( "x" , visible-Argument-Agda (def (quote ℕ) nil)))
+                      ( "x" ,
+                        visible-Argument-Agda
+                          ( definition-Term-Agda (quote ℕ) nil)))
                     -- Left side of the second lambda case
                     ( unit-list
                       ( visible-Argument-Agda
-                        ( con
+                        ( constructor-Term-Agda
                           ( quote succ-ℕ)
-                          ( unit-list ( visible-Argument-Agda (var 0))))))
+                          ( unit-list
+                            ( visible-Argument-Agda (variable-Term-Agda 0))))))
                     -- Right side of the second lambda case
-                    ( var 0 nil))))
+                    ( variable-Term-Agda 0 nil))))
               ( nil)))))
   _ = refl
 
   _ :
     quoteTerm (helper (empty → ℕ) (λ ())) ＝
-    def
+    definition-Term-Agda
       ( quote helper)
       ( cons
         ( visible-Argument-Agda
-          ( pi (visible-Argument-Agda (def (quote empty) nil))
-          ( abs "_" (def (quote ℕ) nil))))
+          ( dependent-product-Term-Agda
+            ( visible-Argument-Agda (definition-Term-Agda (quote empty) nil))
+          ( abs "_" (definition-Term-Agda (quote ℕ) nil))))
         ( unit-list
           ( visible-Argument-Agda
             -- Lambda
-            ( pat-lam
+            ( pattern-lambda-Term-Agda
               ( unit-list
                 -- Clause-Agda
-                ( absurd-clause
+                ( absurd-Pattern-Agda-Clause-Agda
                   ( unit-list
-                    ( "()" , visible-Argument-Agda (def (quote empty) nil)))
+                    ( "()" ,
+                      visible-Argument-Agda
+                        ( definition-Term-Agda (quote empty) nil)))
                   ( unit-list
-                    ( visible-Argument-Agda (absurd 0)))))
+                    ( visible-Argument-Agda (absurd-Pattern-Agda 0)))))
               ( nil)))))
   _ = refl
 ```
@@ -159,19 +170,19 @@ private
 
 ```agda
 _ : quoteTerm (ℕ → ℕ) ＝
-    pi
-      ( visible-Argument-Agda (def (quote ℕ) nil))
-      ( abs "_" (def (quote ℕ) nil))
+    dependent-product-Term-Agda
+      ( visible-Argument-Agda (definition-Term-Agda (quote ℕ) nil))
+      ( abs "_" (definition-Term-Agda (quote ℕ) nil))
 _ = refl
 
 _ : quoteTerm ((x : ℕ) → is-zero-ℕ x) ＝
-    pi
-      ( visible-Argument-Agda (def (quote ℕ) nil))
+    dependent-product-Term-Agda
+      ( visible-Argument-Agda (definition-Term-Agda (quote ℕ) nil))
       ( abs "x"
-        ( def
+        ( definition-Term-Agda
           ( quote is-zero-ℕ)
           ( cons
-            ( visible-Argument-Agda (var 0 nil))
+            ( visible-Argument-Agda (variable-Term-Agda 0 nil))
             ( nil))))
 _ = refl
 ```
@@ -179,22 +190,25 @@ _ = refl
 ### Universes
 
 ```agda
-_ : {l : Level} → quoteTerm (UU l) ＝ agda-sort (set (var 0 nil))
+_ :
+  {l : Level} →
+  quoteTerm (UU l) ＝
+  sort-Term-Agda (universe-Sort-Agda (variable-Term-Agda 0 nil))
 _ = refl
 
-_ : quoteTerm (UU (lsuc lzero)) ＝ agda-sort (lit 1)
+_ : quoteTerm (UU (lsuc lzero)) ＝ sort-Term-Agda (fixed-universe-Sort-Agda 1)
 _ = refl
 
-_ : quoteTerm (UUω) ＝ agda-sort (inf 0)
+_ : quoteTerm (UUω) ＝ sort-Term-Agda (fixed-large-universe-Sort-Agda 0)
 _ = refl
 ```
 
 ### Literals
 
 ```agda
-_ : quoteTerm 3 ＝ lit (nat 3)
+_ : quoteTerm 3 ＝ literal-Term-Agda (nat 3)
 _ = refl
 
-_ : quoteTerm "hello" ＝ lit (string "hello")
+_ : quoteTerm "hello" ＝ literal-Term-Agda (string "hello")
 _ = refl
 ```
