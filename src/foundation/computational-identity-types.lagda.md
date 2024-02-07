@@ -9,10 +9,10 @@ module foundation.computational-identity-types where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.definitionally-right-unital-concatenation-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
@@ -41,7 +41,7 @@ has the limitation that many of the basic operations only satisfy algebraic laws
 _weakly_. In this file, we consider the
 {{#concept "computational identity types" Agda=computational-Id}} `x ＝ʲ y`.
 These are defined using the construction of the
-[judgmentally involutive identity types](foundation.judgmentally-involutive-identity-types.md):
+[strictly involutive identity types](foundation.strictly-involutive-identity-types.md):
 
 ```text
   (x ＝ⁱ y) := Σ (z : A) ((z ＝ y) × (z ＝ x))
@@ -62,7 +62,7 @@ The yoneda identity types are defined as
 
 The yoneda identity types are equivalent to the standard identity types, but
 have a strictly associative and unital concatenation operation. We can leverage
-this and the judgmental properties of the construction of the judgmentally
+this and the judgmental properties of the construction of the strictly
 involutive identity types to construct operations on the computational identity
 types that satisfy the strict algebraic laws
 
@@ -72,9 +72,9 @@ types that satisfy the strict algebraic laws
 - `inv reflʲ ≐ reflʲ`.
 
 While the last three equalities hold by the same computations as for the
-judgmentally involutive identity types using the fact that `inv reflʸ ≐ reflʸ`,
+strictly involutive identity types using the fact that `inv reflʸ ≐ reflʸ`,
 strict associativity relies on the strict associativity of the underlying yoneda
-identity types. See the file about judgmentally involutive identity types for
+identity types. See the file about strictly involutive identity types for
 further details on these computations.
 
 In addition to these strict algebraic laws, we can also define a recursion
@@ -88,7 +88,7 @@ principle for the computational identity types so that it computes judgmentally.
 
 and they do not have a judgmental computation property for their induction
 principle. This boils down to the fact that the yoneda identity types do not
-have a judgmental computation property for their induction principle, as
+have a judgmental computation property for their induction principle, which is
 explained further there.
 
 ## Definition
@@ -113,7 +113,7 @@ module _
 
 ### The computational identity types are equivalent to the yoneda identity types
 
-Similarly to the judgmentally involutive identity types, this equivalence is a
+Similarly to the strictly involutive identity types, this equivalence is a
 strict retraction and preserves the reflexivities strictly.
 
 ```agda
@@ -286,11 +286,11 @@ module _
 
 ### The induction principle for computational identity types
 
-The judgmentally computational identity types satisfy the induction principle of
-the identity types. This states that given a base point `x : A` and a family of
-types over the identity types based at `x`, `B : (y : A) (p : x ＝ʲ y) → UU l2`,
-then to construct a dependent function `f : (y : A) (p : x ＝ʲ y) → B y p` it
-suffices to define it at `f x refl-computational-Id`.
+The computational identity types satisfy the induction principle of the identity
+types. This states that given a base point `x : A` and a family of types over
+the identity types based at `x`, `B : (y : A) (p : x ＝ʲ y) → UU l2`, then to
+construct a dependent function `f : (y : A) (p : x ＝ʲ y) → B y p` it suffices
+to define it at `f x refl-computational-Id`.
 
 ```agda
 module _
@@ -322,7 +322,7 @@ module _
 ```
 
 Using the fact that the recusion principles of both the yoneda identity types
-and the judgmentally involutive identity types can be defined to compute
+and the strictly involutive identity types can be defined to compute
 judgmentally, we obtain a judgmentally computing recursion principle for the
 computational identity types as well.
 
@@ -363,7 +363,7 @@ structure satisfies the following algebraic laws strictly
 
 ### Inverting computational identifications
 
-The construction is the same as for the judgmentally involutive identity types.
+The construction is the same as for the strictly involutive identity types.
 
 ```agda
 module _
@@ -409,28 +409,25 @@ module _
 
 ### The concatenation operations on computational identifications
 
-There is both a judgmentally left unital concatenation operation and a
-judgmentally right unital concatenation operation, while both are judgmentally
-associative.
+There is both a strictly left unital concatenation operation and a strictly
+right unital concatenation operation, while both are strictly associative.
 
-The judgmental one-sided unitality follows in both cases from the judgmental
-right unitality of the concatenation operation on the yoneda identifications
-following the same computation as for the judgmentally involutive identity
-types.
+The strict one-sided unitality follows in both cases from the strict right
+unitality of the concatenation operation on the yoneda identifications following
+the same computation as for the strictly involutive identity types.
 
-For associativity on the other hand, we must use the judgmental associativity of
-the yoneda identity types. We will write out the explicit computation later.
+For associativity on the other hand, we must use the strict associativity of the
+yoneda identity types. We will write out the explicit computation later.
 
-**Observation.** Since they are judgmentally associative, the only instances
-where they will not reduce is thus when the reflexivity appears all the way to
-the right, or all the way to the left in a string of concatenations
-respectively.
+**Observation.** Since they are strictly associative, the only instances where
+they will not reduce is thus when the reflexivity appears all the way to the
+right, or all the way to the left in a string of concatenations respectively.
 
-#### The judgmentally left unital concatenation operation
+#### The strictly left unital concatenation operation
 
-The judgmentally left unital concatenation operation is constructed the same way
-as the judgmentally left unital concatenation operation for the judgmentally
-involutive identity types
+The strictly left unital concatenation operation is constructed the same way as
+the strictly left unital concatenation operation for the strictly involutive
+identity types
 
 ```text
   (z , p , q) ∙ₗʲ (z' , p' , q') := (z' , p' , q' ∙ʸ inv-yoneda-Id p ∙ʸ q)
@@ -491,7 +488,7 @@ module _
       ( ap (f' y) (inv left-unit-concatr)))
 ```
 
-#### The judgmentally right unital concatenation operation
+#### The strictly right unital concatenation operation
 
 ```agda
 module _
@@ -538,11 +535,11 @@ module _
 
 ### The groupoidal laws for the computational identity types
 
-#### The groupoidal laws for the judgmentally left unital concatenation operation
+#### The groupoidal laws for the strictly left unital concatenation operation
 
-To see that `_∙ₗʲ_` is judgmentally associative, we unfold both
-`(P ∙ₗʲ Q) ∙ₗʲ R` and `P ∙ₗʲ (Q ∙ₗʲ R)` and observe that it follows from the
-judgmental associativity of `_∙ʸ_`:
+To see that `_∙ₗʲ_` is strictly associative, we unfold both `(P ∙ₗʲ Q) ∙ₗʲ R`
+and `P ∙ₗʲ (Q ∙ₗʲ R)` and observe that it follows from the strict associativity
+of `_∙ʸ_`:
 
 ```text
   (P ∙ₗʲ Q) ∙ₗʲ R
@@ -614,10 +611,10 @@ module _
       ( ap inv-computational-Id (right-unit-concat-computational-Id))
 ```
 
-#### The groupoidal laws for the judgmentally right unital concatenation operation
+#### The groupoidal laws for the strictly right unital concatenation operation
 
-Associativity follows from a similar computation as for the judgmentally left
-unital concatenation operation.
+Associativity follows from a similar computation as for the strictly left unital
+concatenation operation.
 
 ```agda
 module _
@@ -732,4 +729,4 @@ module _
 
 ## See also
 
-- [The judgmentally involutive identity types](foundation.judgmentally-involutive-identity-types.md)
+- [The strictly involutive identity types](foundation.strictly-involutive-identity-types.md)

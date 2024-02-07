@@ -1,16 +1,16 @@
-# Judgmentally involutive identity types
+# Strictly involutive identity types
 
 ```agda
-module foundation.judgmentally-involutive-identity-types where
+module foundation.strictly-involutive-identity-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.definitionally-right-unital-concatenation-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.multivariable-homotopies
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
@@ -33,7 +33,7 @@ open import foundation-core.torsorial-type-families
 The standard definition of [identity types](foundation-core.identity-types.md)
 has the limitation that many of the basic operations only satisfy algebraic laws
 _weakly_. In this file, we consider the
-{{#concept "judgmentally involutive identity types" Agda=involutive-Id}}
+{{#concept "strictly involutive identity types" Agda=involutive-Id}}
 
 ```text
   (x ＝ⁱ y) := Σ (z : A) ((z ＝ y) × (z ＝ x))
@@ -45,8 +45,8 @@ standard identity types, but satisfies the judgmental laws
 - `inv (inv p) ≐ p`
 - `inv reflⁱ ≐ reflⁱ`
 
-where we use a superscript `i` to distinguish the judgmentally involutive
-identity type from the standard identity type.
+where we use a superscript `i` to distinguish the strictly involutive identity
+type from the standard identity type.
 
 In addition, we maintain the following judgmental laws
 
@@ -76,7 +76,7 @@ module _
 
 ## Properties
 
-### The judgmentally involutive identity types are equivalent to the standard identity types
+### The strictly involutive identity types are equivalent to the standard identity types
 
 The equivalence `(x ＝ y) ≃ (x ＝ⁱ y)` is defined from left to right by
 inclusion at the second component
@@ -91,7 +91,7 @@ and from right to left by the concatenation
   eq-involutive-eq := (z , p , q) ↦ inv q ∙ p   : x ＝ⁱ y → x ＝ y.
 ```
 
-This equivalence preserves the groupoid structure on the judgmentally involutive
+This equivalence preserves the groupoid structure on the strictly involutive
 identity types as we will see later. Moreover, the composition
 `eq-involutive-eq ∘ involutive-eq-eq` computes judgmentally to the identity:
 
@@ -166,7 +166,7 @@ module _
   preserves-refl-eq-involutive-eq = refl
 ```
 
-### Torsoriality of the judgmentally involutive identity types
+### Torsoriality of the strictly involutive identity types
 
 ```agda
 module _
@@ -181,7 +181,7 @@ module _
       ( is-torsorial-Id x)
 ```
 
-### The dependent universal property of the judgmentally involutive identity types
+### The dependent universal property of the strictly involutive identity types
 
 ```agda
 module _
@@ -198,13 +198,13 @@ module _
       ( is-torsorial-involutive-Id)
 ```
 
-### The induction principle for judgmentally involutive identity types
+### The induction principle for strictly involutive identity types
 
-The judgmentally involutive identity types satisfy the induction principle of
-the identity types. This states that given a base point `x : A` and a family of
+The strictly involutive identity types satisfy the induction principle of the
+identity types. This states that given a base point `x : A` and a family of
 types over the identity types based at `x`, `B : (y : A) (p : x ＝ⁱ y) → UU l2`,
 then to construct a dependent function `f : (y : A) (p : x ＝ⁱ y) → B y p` it
-suffices to define it at `f x reflⁱ`. The judgmentally involutive identity types
+suffices to define it at `f x reflⁱ`. The strictly involutive identity types
 also satisfy the corresponding computation rule judgmentally.
 
 ```agda
@@ -234,10 +234,10 @@ uniqueness of the induction principle up to _equality_.
 
 ## Structure
 
-The judgmentally involutive identity types form a judgmentally involutive weak
+The strictly involutive identity types form a judgmentally involutive weak
 groupoidal structure on types.
 
-### Inverting judgmentally involutive identifications
+### Inverting strictly involutive identifications
 
 We have an inversion operation on `involutive-Id` defined by swapping the
 position of the identifications. This operation satisfies the judgmental laws
@@ -283,16 +283,15 @@ module _
     ap (inv p ∙_) (inv (inv-inv q)) ∙ inv (distributive-inv-concat (inv q) p)
 ```
 
-### Concatenation of judgmentally involutive identifications
+### Concatenation of strictly involutive identifications
 
-We have practically speaking two definitions of the concatenation operation on
-judgmentally involutive identity types. One satisfies a judgmental left unit law
-and the other satisfies a judgmental right unit law. In both cases, we must use
-the
-[judgmentally right unital concatenation operation on standard identifications](foundation.judgmentally-right-unital-concatenation-identifications.md)
-`_∙ᵣ_`, to obtain this one-sided judgmental unit law.
+We have, practically speaking, two definitions of the concatenation operation on
+strictly involutive identity types. One satisfies a strict left unit law and the
+other satisfies a strict right unit law. In both cases, we must use the
+[definitionally right unital concatenation operation on standard identifications](foundation.definitionally-right-unital-concatenation-identifications.md)
+`_∙ᵣ_`, to obtain this strict one-sided unit law.
 
-The judgmentally left unital concatenation operation is defined by
+The strictly left unital concatenation operation is defined by
 
 ```text
   (w , p , q) ∙ⁱ (w' , p' , q') := (w' , p' , (q' ∙ᵣ inv p) ∙ᵣ q),
@@ -304,8 +303,8 @@ and the right unital concatenation operation is defined by
   (w , p , q) ∙ᵣⁱ (w' , p' , q') = (w , (p ∙ᵣ inv q') ∙ᵣ p' , q).
 ```
 
-The following computation verifies that the judgmentally left unital
-concatenation operation is indeed judgmentally left unital:
+The following computation verifies that the strictly left unital concatenation
+operation is indeed strictly left unital:
 
 ```text
   reflⁱ ∙ⁱ r
@@ -318,10 +317,10 @@ concatenation operation is indeed judgmentally left unital:
 ```
 
 To be consistent with the convention for the standard identity types, we take
-the judgmentally left unital concatenation operation to be the default
-concatenation operation on judgmentally involutive identity types.
+the strictly left unital concatenation operation to be the default concatenation
+operation on strictly involutive identity types.
 
-#### The judgmentally left unital concatenation operation
+#### The strictly left unital concatenation operation
 
 ```agda
 module _
@@ -359,7 +358,7 @@ module _
     ( assoc (inv q ∙ p) (inv q') p')
 ```
 
-#### The judgmentally right unital concatenation operation
+#### The strictly right unital concatenation operation
 
 ```agda
 module _
@@ -397,13 +396,13 @@ module _
     ( inv (assoc (inv q) p (inv q' ∙ p')))
 ```
 
-### The groupoidal laws for the judgmentally involutive identity types
+### The groupoidal laws for the strictly involutive identity types
 
 The general proof-strategy is to induct on the necessary identifications to make
 the left endpoints judgmentally equal, and then proceed by reasoning with the
 groupoid-laws of the underlying identity types.
 
-#### The groupoidal laws for the judgmentally left unital concatenation operation
+#### The groupoidal laws for the strictly left unital concatenation operation
 
 ```agda
 module _
@@ -449,7 +448,7 @@ module _
     eq-pair-eq-fiber (eq-pair (left-unit-concatr) (inv left-unit-concatr))
 ```
 
-#### The groupoidal laws for the judgmentally right unital concatenation operation
+#### The groupoidal laws for the strictly right unital concatenation operation
 
 ```agda
 module _
@@ -502,7 +501,7 @@ module _
 - [The yoneda identity types](foundation.yoneda-identity-types.md) for an
   identity relation that is strictly associative and two-sided unital.
 - [The computational identity types](foundation.computational-identity-types.md)
-  for an identity relation that is judgmentally involutive, associative, and
+  for an identity relation that is strictly involutive, associative, and
   one-sided unital.
 
 ## References

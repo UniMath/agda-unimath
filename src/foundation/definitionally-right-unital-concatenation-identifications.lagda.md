@@ -1,7 +1,7 @@
-# The judgmentally right unital concatenation operation on identifications
+# The definitionally right unital concatenation operation on identifications
 
 ```agda
-module foundation.judgmentally-right-unital-concatenation-identifications where
+module foundation.definitionally-right-unital-concatenation-identifications where
 ```
 
 <details><summary>Imports</summary>
@@ -27,7 +27,7 @@ is a map
 
 for all `x y z : A`. However, there are essentially three different ways we can
 define concatenation of identifications, all with different computational
-behaviours.
+behaviours:
 
 1. We can define concatenation by induction on the equality `x ＝ y`. This gives
    us the computation rule `refl ∙ q = q`.
@@ -37,15 +37,13 @@ behaviours.
    gives us the computation rule `refl ∙ refl = refl`.
 
 While the third option may be preferred by some for its symmetry, for practical
-reasons, we use the first alternative by convention.
-
-However, there are cases where the second case may be preferred. Hence, in this
-file we consider the
+reasons, we use the first alternative by convention. However, there are cases
+where the second case may be preferred. Hence why we in this file consider the
 {{#concept "definitionally right unital concatenation operation on identifications" Agda=_∙ᵣ_ Agda=concatr Agda=concatr'}}.
 
 This definition is for instance used with the
-[judgmentally involutive identity types](foundation.judgmentally-involutive-identity-types.md)
-to construct a judgmentally left unital concatenation operation.
+[strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
+to construct a strictly left unital concatenation operation.
 
 ## Definition
 

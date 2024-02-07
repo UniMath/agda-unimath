@@ -163,8 +163,8 @@ reasons, we use the first alternative by convention.
 
 See also
 
-- [judgmentally right unital concatenation operation on indentifications](foundation.judgmentally-right-unital-concatenation-identifications.md)
-- [yoneda identity types](foundation.yoneda-identity-types.md)
+- [The definitionally right unital concatenation operation on indentifications](foundation.definitionally-right-unital-concatenation-identifications.md)
+- [The yoneda identity types](foundation.yoneda-identity-types.md)
 
 ```agda
 module _

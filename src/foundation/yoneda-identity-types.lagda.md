@@ -8,9 +8,9 @@ module foundation.yoneda-identity-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.definitionally-right-unital-concatenation-identifications
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.judgmentally-right-unital-concatenation-identifications
 open import foundation.multivariable-homotopies
 open import foundation.transport-along-identifications
 open import foundation.univalence
@@ -159,7 +159,7 @@ and from right to left by evaluation at the reflexivity
 ```
 
 It should be noted that we define the map `x ＝ y → x ＝ʸ y` using the
-[judgmentally right unital concatenation operation](foundation.judgmentally-right-unital-concatenation-identifications.md).
+[definitionally right unital concatenation operation](foundation.definitionally-right-unital-concatenation-identifications.md).
 While this obstructs us from showing that the homotopy
 `eq-yoneda-eq ∘ yoneda-eq-eq ~ id` holds by reflexivity, as demonstrated by the
 computation
@@ -259,8 +259,8 @@ module _
 ```
 
 Below, we consider the alternative definition of `yoneda-eq-eq` using the
-judgmentally left unital concatenation operation on standard identity types. As
-we can see, the retracting homotopy holds judgmentally, but now
+definitionally left unital concatenation operation on standard identity types.
+As we can see, the retracting homotopy holds judgmentally, but now
 `yoneda-eq-eq refl` does not compute definitionally to `reflʸ`.
 
 ```agda
@@ -420,9 +420,9 @@ structure on types.
 ### Inverting yoneda identifications
 
 We consider two ways of defining the inversion operation on yoneda
-identifications: by the judgmentally right unital, and judgmentally left unital
-concatenation operation on the underlying identity type respectively. The former
-enjoys the computational property
+identifications: by the definitionally right unital, and definitionally left
+unital concatenation operation on the underlying identity type respectively. The
+former enjoys the computational property
 
 ```text
   inv reflʸ ≐ reflʸ,
@@ -430,7 +430,7 @@ enjoys the computational property
 
 hence will be preferred going.
 
-#### The inversion operation defined by the judgmentally right unital concatenation operation on identifications
+#### The inversion operation defined by the definitionally right unital concatenation operation on identifications
 
 ```agda
 module _
@@ -478,7 +478,7 @@ module _
   preserves-inv-eq-yoneda-eq f = left-unit-concatr
 ```
 
-#### The inversion operation defined by the judgmentally left unital concatenation operation on identifications
+#### The inversion operation defined by the definitionally left unital concatenation operation on identifications
 
 ```agda
 module _
@@ -754,13 +754,11 @@ module _
 
 ## See also
 
-- [The judgmentally involutive identity types](foundation.judgmentally-involutive-identity-types.md)
-  for an identity relation that is strictly involutive, one-sided unital, and
-  has a judgmentally computational induction principle.
+- [The strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
+  for an identity relation that is strictly involutive, and one-sided unital.
 - [The computational identity types](foundation.computational-identity-types.md)
-  for an identity relation that is judgmentally involutive, associative, and
-  one-sided unital, but does not have a judgmentally computational induction
-  principle.
+  for an identity relation that is strictly involutive, associative, and
+  one-sided unital.
 
 ## References
 

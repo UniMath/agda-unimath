@@ -93,6 +93,7 @@ open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
+open import foundation.definitionally-right-unital-concatenation-identifications public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
@@ -211,8 +212,6 @@ open import foundation.iterated-dependent-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
-open import foundation.judgmentally-involutive-identity-types public
-open import foundation.judgmentally-right-unital-concatenation-identifications public
 open import foundation.kernel-span-diagrams-of-maps public
 open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
@@ -334,6 +333,7 @@ open import foundation.spans public
 open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.strictly-involutive-identity-types public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public
