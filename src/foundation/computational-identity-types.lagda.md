@@ -13,7 +13,9 @@ open import foundation.definitionally-right-unital-concatenation-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.multivariable-homotopies
 open import foundation.transport-along-identifications
+open import foundation.univalence
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 open import foundation.yoneda-identity-types
@@ -29,7 +31,6 @@ open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
-open import foundation-core.univalence
 ```
 
 </details>
@@ -678,16 +679,38 @@ module _
       ( inv left-unit-concatr-computational-Id)
 ```
 
+## Operations
+
 ### Action of functions on computational identifications
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  ap-computational-Id : x ＝ʲ y → f x ＝ʲ f y
-  ap-computational-Id (z , p , q) =
-    (f z , ap-yoneda-Id f p , ap-yoneda-Id f q)
+  eq-ap-computational-Id : {x y : A} → x ＝ʲ y → f x ＝ f y
+  eq-ap-computational-Id = ap f ∘ eq-computational-eq
+
+  ap-computational-Id : {x y : A} → x ＝ʲ y → f x ＝ʲ f y
+  ap-computational-Id =
+    computational-eq-yoneda-eq ∘ ap-yoneda-Id f ∘ yoneda-eq-computational-eq
+
+  compute-ap-refl-computational-Id :
+    {x : A} →
+    ap-computational-Id (refl-computational-Id {x = x}) ＝ refl-computational-Id
+  compute-ap-refl-computational-Id = refl
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  compute-ap-id-computational-Id :
+    {x y : A} (p : x ＝ʲ y) → ap-computational-Id id p ＝ p
+  compute-ap-id-computational-Id p =
+    ( ap
+      ( computational-eq-yoneda-eq)
+      ( compute-ap-id-yoneda-Id (yoneda-eq-computational-eq p))) ∙
+    ( is-section-yoneda-eq-computational-eq p)
 ```
 
 ### Transport along computational identifications
@@ -698,14 +721,14 @@ module _
   where
 
   tr-computational-Id : {x y : A} → x ＝ʲ y → B x → B y
-  tr-computational-Id p = tr-yoneda-Id B (yoneda-eq-computational-eq p)
+  tr-computational-Id = tr B ∘ eq-computational-eq
 
-  compute-tr-computational-Id-refl :
+  compute-tr-refl-computational-Id :
     {x : A} → tr-computational-Id (refl-computational-Id {x = x}) ＝ id
-  compute-tr-computational-Id-refl = refl
+  compute-tr-refl-computational-Id = refl
 ```
 
-### `htpy-computational-eq`
+### Function extensionality with respect to computational identifications
 
 ```agda
 module _
@@ -713,20 +736,53 @@ module _
   where
 
   htpy-computational-eq : f ＝ʲ g → f ~ g
-  htpy-computational-eq p = htpy-yoneda-eq (yoneda-eq-computational-eq p)
+  htpy-computational-eq = htpy-eq ∘ eq-computational-eq
+
+  computational-eq-htpy : f ~ g → f ＝ʲ g
+  computational-eq-htpy = computational-eq-eq ∘ eq-htpy
+
+  equiv-htpy-computational-eq : (f ＝ʲ g) ≃ (f ~ g)
+  equiv-htpy-computational-eq = equiv-funext ∘e equiv-eq-computational-eq
+
+  equiv-computational-eq-htpy : (f ~ g) ≃ (f ＝ʲ g)
+  equiv-computational-eq-htpy = equiv-computational-eq-eq ∘e equiv-eq-htpy
+
+  funext-computational-Id : is-equiv htpy-computational-eq
+  funext-computational-Id = is-equiv-map-equiv equiv-htpy-computational-eq
 ```
 
-### `equiv-computational-eq`
+### Univalence with respect to computational identifications
 
 ```agda
 module _
   {l1 : Level} {A B : UU l1}
   where
 
+  map-computational-eq : A ＝ʲ B → A → B
+  map-computational-eq = map-eq ∘ eq-computational-eq
+
   equiv-computational-eq : A ＝ʲ B → A ≃ B
-  equiv-computational-eq p = equiv-yoneda-eq (yoneda-eq-computational-eq p)
+  equiv-computational-eq = equiv-eq ∘ eq-computational-eq
+
+  computational-eq-equiv : A ≃ B → A ＝ʲ B
+  computational-eq-equiv = computational-eq-eq ∘ eq-equiv
+
+  equiv-equiv-computational-eq : (A ＝ʲ B) ≃ (A ≃ B)
+  equiv-equiv-computational-eq = equiv-univalence ∘e equiv-eq-computational-eq
+
+  is-equiv-equiv-computational-eq : is-equiv equiv-computational-eq
+  is-equiv-equiv-computational-eq =
+    is-equiv-map-equiv equiv-equiv-computational-eq
+
+  equiv-computational-eq-equiv : (A ≃ B) ≃ (A ＝ʲ B)
+  equiv-computational-eq-equiv = equiv-computational-eq-eq ∘e equiv-eq-equiv A B
+
+  is-equiv-computational-eq-equiv : is-equiv computational-eq-equiv
+  is-equiv-computational-eq-equiv =
+    is-equiv-map-equiv equiv-computational-eq-equiv
 ```
 
 ## See also
 
 - [The strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
+- [The yoneda identity types](foundation.yoneda-identity-types.md)
