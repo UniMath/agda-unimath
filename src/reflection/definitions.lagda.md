@@ -88,16 +88,16 @@ _ = refl
 _ :
   quoteTerm (λ (x : ℕ) → x) ＝
   lambda-Term-Agda visible-Visibility-Argument-Agda
-    ( abs "x" (variable-Term-Agda 0 nil))
+    ( cons-Abstraction-Agda "x" (variable-Term-Agda 0 nil))
 _ = refl
 
 _ :
   quoteTerm (λ {x : ℕ} (y : ℕ) → x) ＝
   lambda-Term-Agda hidden-Visibility-Argument-Agda
-    ( abs
+    ( cons-Abstraction-Agda
       ( "x")
       ( lambda-Term-Agda visible-Visibility-Argument-Agda
-        ( abs "y" (variable-Term-Agda 1 nil))))
+        ( cons-Abstraction-Agda "y" (variable-Term-Agda 1 nil))))
 _ = refl
 
 private
@@ -113,7 +113,7 @@ private
         ( visible-Argument-Agda
           ( dependent-product-Term-Agda
             ( visible-Argument-Agda (definition-Term-Agda (quote ℕ) nil))
-            ( abs "_" (definition-Term-Agda (quote ℕ) nil))))
+            ( cons-Abstraction-Agda "_" (definition-Term-Agda (quote ℕ) nil))))
         ( unit-list
           -- The pattern matching lambda
           ( visible-Argument-Agda
@@ -157,7 +157,7 @@ private
         ( visible-Argument-Agda
           ( dependent-product-Term-Agda
             ( visible-Argument-Agda (definition-Term-Agda (quote empty) nil))
-          ( abs "_" (definition-Term-Agda (quote ℕ) nil))))
+          ( cons-Abstraction-Agda "_" (definition-Term-Agda (quote ℕ) nil))))
         ( unit-list
           ( visible-Argument-Agda
             -- Lambda
@@ -181,13 +181,13 @@ private
 _ : quoteTerm (ℕ → ℕ) ＝
     dependent-product-Term-Agda
       ( visible-Argument-Agda (definition-Term-Agda (quote ℕ) nil))
-      ( abs "_" (definition-Term-Agda (quote ℕ) nil))
+      ( cons-Abstraction-Agda "_" (definition-Term-Agda (quote ℕ) nil))
 _ = refl
 
 _ : quoteTerm ((x : ℕ) → is-zero-ℕ x) ＝
     dependent-product-Term-Agda
       ( visible-Argument-Agda (definition-Term-Agda (quote ℕ) nil))
-      ( abs "x"
+      ( cons-Abstraction-Agda "x"
         ( definition-Term-Agda
           ( quote is-zero-ℕ)
           ( cons
