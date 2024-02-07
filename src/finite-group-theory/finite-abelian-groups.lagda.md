@@ -1,13 +1,13 @@
 # Abelian groups
 
 ```agda
-module finite-algebra.finite-abelian-groups where
+module finite-group-theory.finite-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.finite-groups
+open import finite-group-theory.finite-groups
 
 open import foundation.equivalences
 open import foundation.identity-types
@@ -57,10 +57,11 @@ is-prop-is-abelian-Group-𝔽 G =
 Ab-𝔽 : (l : Level) → UU (lsuc l)
 Ab-𝔽 l = Σ (Group-𝔽 l) is-abelian-Group-𝔽
 
-compute-abelian-group-𝔽 :
+finite-abelian-group-is-finite-Ab :
   {l : Level} → (A : Ab l) → is-finite (type-Ab A) → Ab-𝔽 l
-pr1 (compute-abelian-group-𝔽 A f) = compute-group-𝔽 (group-Ab A) f
-pr2 (compute-abelian-group-𝔽 A f) = pr2 A
+pr1 (finite-abelian-group-is-finite-Ab A f) =
+  finite-group-is-finite-Group (group-Ab A) f
+pr2 (finite-abelian-group-is-finite-Ab A f) = pr2 A
 
 module _
   {l : Level} (A : Ab-𝔽 l)
@@ -204,7 +205,7 @@ module _
 
 ## Properties
 
-### There is a finite number of ways to equip a finite type with a structure of abelian group
+### There is a finite number of ways to equip a finite type with the structure of an abelian group
 
 ```agda
 module _
@@ -215,13 +216,13 @@ module _
   structure-abelian-group-𝔽 : UU l
   structure-abelian-group-𝔽 =
     Σ ( structure-group-𝔽 X)
-      ( λ g → is-abelian-Group-𝔽 (compute-structure-group-𝔽 X g))
+      ( λ g → is-abelian-Group-𝔽 (finite-group-structure-group-𝔽 X g))
 
-  compute-structure-abelian-group-𝔽 :
+  finite-abelian-group-structure-abelian-group-𝔽 :
     structure-abelian-group-𝔽 → Ab-𝔽 l
-  pr1 (compute-structure-abelian-group-𝔽 (m , c)) =
-    compute-structure-group-𝔽 X m
-  pr2 (compute-structure-abelian-group-𝔽 (m , c)) = c
+  pr1 (finite-abelian-group-structure-abelian-group-𝔽 (m , c)) =
+    finite-group-structure-group-𝔽 X m
+  pr2 (finite-abelian-group-structure-abelian-group-𝔽 (m , c)) = c
 
   is-finite-structure-abelian-group-𝔽 :
     is-finite structure-abelian-group-𝔽

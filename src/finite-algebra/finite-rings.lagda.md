@@ -10,9 +10,9 @@ module finite-algebra.finite-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import finite-algebra.finite-abelian-groups
-open import finite-algebra.finite-groups
-open import finite-algebra.finite-monoids
+open import finite-group-theory.finite-abelian-groups
+open import finite-group-theory.finite-groups
+open import finite-group-theory.finite-monoids
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
@@ -62,10 +62,11 @@ has-mul-Ab-𝔽 A = has-mul-Ab (ab-Ab-𝔽 A)
 Ring-𝔽 : (l1 : Level) → UU (lsuc l1)
 Ring-𝔽 l1 = Σ (Ab-𝔽 l1) (λ A → has-mul-Ab-𝔽 A)
 
-compute-ring-𝔽 :
+finite-ring-is-finite-Ring :
   {l : Level} → (R : Ring l) → is-finite (type-Ring R) → Ring-𝔽 l
-pr1 (compute-ring-𝔽 R f) = compute-abelian-group-𝔽 (ab-Ring R) f
-pr2 (compute-ring-𝔽 R f) = pr2 R
+pr1 (finite-ring-is-finite-Ring R f) =
+  finite-abelian-group-is-finite-Ab (ab-Ring R) f
+pr2 (finite-ring-is-finite-Ring R f) = pr2 R
 
 module _
   {l : Level} (R : Ring-𝔽 l)
@@ -500,7 +501,7 @@ module _
 
 ## Properties
 
-### There is a finite number of ways to equip a finite type with a structure of ring
+### There is a finite number of ways to equip a finite type with the structure of a ring
 
 ```agda
 module _
@@ -511,13 +512,13 @@ module _
   structure-ring-𝔽 : UU l
   structure-ring-𝔽 =
     Σ ( structure-abelian-group-𝔽 X)
-      ( λ m → has-mul-Ab-𝔽 (compute-structure-abelian-group-𝔽 X m))
+      ( λ m → has-mul-Ab-𝔽 (finite-abelian-group-structure-abelian-group-𝔽 X m))
 
-  compute-structure-ring-𝔽 :
+  finite-ring-structure-ring-𝔽 :
     structure-ring-𝔽 → Ring-𝔽 l
-  pr1 (compute-structure-ring-𝔽 (m , c)) =
-    compute-structure-abelian-group-𝔽 X m
-  pr2 (compute-structure-ring-𝔽 (m , c)) = c
+  pr1 (finite-ring-structure-ring-𝔽 (m , c)) =
+    finite-abelian-group-structure-abelian-group-𝔽 X m
+  pr2 (finite-ring-structure-ring-𝔽 (m , c)) = c
 
   is-finite-structure-ring-𝔽 :
     is-finite structure-ring-𝔽
