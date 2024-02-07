@@ -39,28 +39,47 @@ open import foundation-core.univalence
 The standard definition of [identity types](foundation-core.identity-types.md)
 has the limitation that many of the basic operations only satisfy algebraic laws
 _weakly_. In this file, we consider the
-{{#concept "computational identity types" Agda=computational-Id}}
+{{#concept "computational identity types" Agda=computational-Id}} `x ＝ʲ y`.
+These are defined using the construction of the
+[judgmentally involutive identity types](foundation.judgmentally-involutive-identity-types.md):
+
+```text
+  (x ＝ⁱ y) := Σ (z : A) ((z ＝ y) × (z ＝ x))
+```
+
+but using the
+[yoneda identity types](foundation.judgmentally-compositional-identity-types.md)
+(`_＝ʸ_`) as the underlying identity types:
 
 ```text
   (x ＝ʲ y) := Σ (z : A) ((z ＝ʸ y) × (z ＝ʸ x))
 ```
 
-where `x ＝ʸ y` is the
-[judgmentally compositional identity type](foundation.judgmentally-compositional-identity-types.md)
+The yoneda identity types are defined as
 
 ```text
   (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y).
 ```
 
-The computational identity types are
-[equivalent](foundation-core.equivalences.md) to the standard identity types,
-but satisfy the following algebraic laws judgmentally:
+The yoneda identity types are equivalent to the standard identity types, but
+have a strictly associative and unital concatenation operation. We can leverage
+this and the judgmental properties of the construction of the judgmentally
+involutive identity types to construct operations on the computational identity
+types that satisfy the strict algebraic laws
 
-- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`
-- `refl ∙ p ≐ p` or `p ∙ refl ≐ p`
+- `(p ∙ʲ q) ∙ʲ r ≐ p ∙ʲ (q ∙ʲ r)`
+- `reflʲ ∙ʲ p ≐ p` or `p ∙ʲ reflʲ ≐ p`
 - `inv (inv p) ≐ p`
-- `inv refl ≐ refl`
-- `rec f refl ≐ f refl`.
+- `inv reflʲ ≐ reflʲ`.
+
+While the last three equalities hold by the same computations as for the
+judgmentally involutive identity types using the fact that `inv reflʸ ≐ reflʸ`,
+strict associativity relies on the strict associativity of the underlying yoneda
+identity types. See the file about judgmentally involutive identity types for
+further details on these computations.
+
+In addition to these strict algebraic laws, we can also define a recursion
+principle for the computational identity types so that it computes judgmentally.
 
 **Note.** The computational identity types do _not_ satisfy the judgmental laws
 
@@ -69,7 +88,9 @@ but satisfy the following algebraic laws judgmentally:
 - `p ∙ inv p ≐ refl`,
 
 and they do not have a judgmental computation property for their induction
-principle.
+principle. This boils down to the fact that the yoneda identity types do not
+have a judgmental computation property for their induction principle, as
+explained further there.
 
 ## Definition
 
@@ -91,10 +112,88 @@ module _
 
 ## Properties
 
+### The computational identity types are equivalent to the yoneda identity types
+
+Similarly to the judgmentally involutive identity types, this equivalence is a
+strict retraction and preserves the reflexivities strictly.
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  computational-eq-yoneda-eq : {x y : A} → x ＝ʸ y → x ＝ʲ y
+  computational-eq-yoneda-eq {x} f = (x , f , refl-yoneda-Id)
+
+  yoneda-eq-computational-eq : {x y : A} → x ＝ʲ y → x ＝ʸ y
+  yoneda-eq-computational-eq (z , p , q) = inv-yoneda-Id q ∙ʸ p
+
+  is-retraction-yoneda-eq-computational-eq :
+    {x y : A} →
+    is-retraction
+      ( computational-eq-yoneda-eq)
+      ( yoneda-eq-computational-eq {x} {y})
+  is-retraction-yoneda-eq-computational-eq f = refl
+
+  is-section-yoneda-eq-computational-eq :
+    {x y : A} →
+    is-section
+      ( computational-eq-yoneda-eq)
+      ( yoneda-eq-computational-eq {x} {y})
+  is-section-yoneda-eq-computational-eq (z , p , q) =
+    ind-yoneda-Id
+      ( λ _ q →
+        computational-eq-yoneda-eq (yoneda-eq-computational-eq (z , p , q)) ＝
+        (z , p , q))
+      ( refl)
+      ( q)
+
+  is-equiv-computational-eq-yoneda-eq :
+    {x y : A} → is-equiv (computational-eq-yoneda-eq {x} {y})
+  is-equiv-computational-eq-yoneda-eq =
+    is-equiv-is-invertible
+      ( yoneda-eq-computational-eq)
+      ( is-section-yoneda-eq-computational-eq)
+      ( is-retraction-yoneda-eq-computational-eq)
+
+  is-equiv-yoneda-eq-computational-eq :
+    {x y : A} → is-equiv (yoneda-eq-computational-eq {x} {y})
+  is-equiv-yoneda-eq-computational-eq =
+    is-equiv-is-invertible
+      ( computational-eq-yoneda-eq)
+      ( is-retraction-yoneda-eq-computational-eq)
+      ( is-section-yoneda-eq-computational-eq)
+
+  equiv-computational-eq-yoneda-eq : {x y : A} → (x ＝ʸ y) ≃ (x ＝ʲ y)
+  pr1 equiv-computational-eq-yoneda-eq = computational-eq-yoneda-eq
+  pr2 equiv-computational-eq-yoneda-eq = is-equiv-computational-eq-yoneda-eq
+
+  equiv-yoneda-eq-computational-eq : {x y : A} → (x ＝ʲ y) ≃ (x ＝ʸ y)
+  pr1 equiv-yoneda-eq-computational-eq = yoneda-eq-computational-eq
+  pr2 equiv-yoneda-eq-computational-eq = is-equiv-yoneda-eq-computational-eq
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  preserves-refl-yoneda-eq-computational-eq :
+    {x : A} →
+    yoneda-eq-computational-eq (refl-computational-Id {x = x}) ＝ refl-yoneda-Id
+  preserves-refl-yoneda-eq-computational-eq = refl
+
+  preserves-refl-computational-eq-yoneda-eq :
+    {x : A} →
+    computational-eq-yoneda-eq (refl-yoneda-Id {x = x}) ＝ refl-computational-Id
+  preserves-refl-computational-eq-yoneda-eq = refl
+```
+
 ### The computational identity types are equivalent to the standard identity types
 
-This equivalence preserves the groupoid structure of the computational identity
-types and moreover preserves the reflexivity elements judgmentally.
+We define the equivalence as the composite `(x ＝ y) ≃ (x ＝ʸ y) ≃ (x ＝ʲ y)`.
+Since each of these equivalences preserves the groupoid structure so does the
+composite. For the same reason, it preserves the reflexivities strictly.
 
 ```agda
 module _
@@ -102,10 +201,19 @@ module _
   where
 
   computational-eq-eq : {x y : A} → x ＝ y → x ＝ʲ y
-  computational-eq-eq {x} p = (x , yoneda-eq-eq p , refl-yoneda-Id)
+  computational-eq-eq = computational-eq-yoneda-eq ∘ yoneda-eq-eq
 
   eq-computational-eq : {x y : A} → x ＝ʲ y → x ＝ y
-  eq-computational-eq (z , p , q) = eq-yoneda-eq (inv-yoneda-Id q ∙ʸ p)
+  eq-computational-eq = eq-yoneda-eq ∘ yoneda-eq-computational-eq
+
+
+  equiv-computational-eq-eq : {x y : A} → (x ＝ y) ≃ (x ＝ʲ y)
+  equiv-computational-eq-eq =
+    equiv-computational-eq-yoneda-eq ∘e equiv-yoneda-eq-eq
+
+  equiv-eq-computational-eq : {x y : A} → (x ＝ʲ y) ≃ (x ＝ y)
+  equiv-eq-computational-eq =
+    equiv-eq-yoneda-eq ∘e equiv-yoneda-eq-computational-eq
 
   is-retraction-eq-computational-eq :
     {x y : A} → is-retraction computational-eq-eq (eq-computational-eq {x} {y})
@@ -123,25 +231,11 @@ module _
 
   is-equiv-computational-eq-eq :
     {x y : A} → is-equiv (computational-eq-eq {x} {y})
-  pr1 (pr1 is-equiv-computational-eq-eq) = eq-computational-eq
-  pr2 (pr1 is-equiv-computational-eq-eq) = is-section-eq-computational-eq
-  pr1 (pr2 is-equiv-computational-eq-eq) = eq-computational-eq
-  pr2 (pr2 is-equiv-computational-eq-eq) = is-retraction-eq-computational-eq
+  is-equiv-computational-eq-eq = is-equiv-map-equiv equiv-computational-eq-eq
 
   is-equiv-eq-computational-eq :
     {x y : A} → is-equiv (eq-computational-eq {x} {y})
-  pr1 (pr1 is-equiv-eq-computational-eq) = computational-eq-eq
-  pr2 (pr1 is-equiv-eq-computational-eq) = is-retraction-eq-computational-eq
-  pr1 (pr2 is-equiv-eq-computational-eq) = computational-eq-eq
-  pr2 (pr2 is-equiv-eq-computational-eq) = is-section-eq-computational-eq
-
-  equiv-computational-eq-eq : {x y : A} → (x ＝ y) ≃ (x ＝ʲ y)
-  pr1 equiv-computational-eq-eq = computational-eq-eq
-  pr2 equiv-computational-eq-eq = is-equiv-computational-eq-eq
-
-  equiv-eq-computational-eq : {x y : A} → (x ＝ʲ y) ≃ (x ＝ y)
-  pr1 equiv-eq-computational-eq = eq-computational-eq
-  pr2 equiv-eq-computational-eq = is-equiv-eq-computational-eq
+  is-equiv-eq-computational-eq = is-equiv-map-equiv equiv-eq-computational-eq
 ```
 
 The reflexivity elements are preserved judgmentally.
@@ -158,22 +252,6 @@ module _
   preserves-refl-eq-computational-eq :
     {x : A} → eq-computational-eq (refl-computational-Id {x = x}) ＝ refl
   preserves-refl-eq-computational-eq = refl
-```
-
-### The computational identity types are equivalent to the yoneda identity types
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  yoneda-eq-computational-eq : {x y : A} → x ＝ʲ y → x ＝ʸ y
-  yoneda-eq-computational-eq (z , p , q) = inv-yoneda-Id q ∙ʸ p
-
-  preserves-refl-yoneda-eq-computational-eq :
-    {x : A} →
-    yoneda-eq-computational-eq (refl-computational-Id {x = x}) ＝ refl-yoneda-Id
-  preserves-refl-yoneda-eq-computational-eq = refl
 ```
 
 ### Torsoriality of the computational identity types
@@ -243,7 +321,14 @@ module _
   uniqueness-ind-computational-Id =
     is-retraction-map-inv-is-equiv
       ( dependent-universal-property-identity-system-computational-Id B)
+```
 
+Using the fact that the recusion principles of both the yoneda identity types
+and the judgmentally involutive identity types can be defined to compute
+judgmentally, we obtain a judgmentally computing recursion principle for the
+computational identity types as well.
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {x : A}
   {B : A → UU l2}
@@ -251,7 +336,7 @@ module _
 
   rec-computational-Id :
     (b : B x) {y : A} → x ＝ʲ y → B y
-  rec-computational-Id b {y} (z , p , q) = tr B (inv (q z refl) ∙ p z refl) b
+  rec-computational-Id b p = rec-yoneda-Id b (yoneda-eq-computational-eq p)
 
   compute-rec-computational-Id :
     (b : B x) → rec-computational-Id b refl-computational-Id ＝ b
@@ -273,18 +358,14 @@ module _
 The computational identity types form a groupoidal structure on types. This
 structure satisfies the following algebraic laws strictly
 
-- `(p ∙ q) ∙ r ≐ p ∙ (q ∙ r)`
-- `refl ∙ p ≐ p` or `p ∙ refl ≐ p`
+- `(p ∙ʲ q) ∙ʲ r ≐ p ∙ʲ (q ∙ʲ r)`
+- `reflʲ ∙ʲ p ≐ p` or `p ∙ʲ reflʲ ≐ p`
 - `inv (inv p) ≐ p`
-- `inv refl ≐ refl`.
-
-Note, however, that they do not satisfy the strict algebraic laws
-
-- `refl ∙ p ≐ p` and `p ∙ refl ≐ p` simultaneously,
-- `inv p ∙ p ≐ refl`, or
-- `p ∙ inv p ≐ refl`.
+- `inv reflʲ ≐ reflʲ`.
 
 ### Inverting computational identifications
+
+The construction is the same as for the judgmentally involutive identity types.
 
 ```agda
 module _
@@ -334,12 +415,28 @@ There is both a judgmentally left unital concatenation operation and a
 judgmentally right unital concatenation operation, while both are judgmentally
 associative.
 
+The judgmental one-sided unitality follows in both cases from the judgmental
+right unitality of the concatenation operation on the yoneda identifications
+following the same computation as for the judgmentally involutive identity
+types.
+
+For associativity on the other hand, we must use the judgmental associativity of
+the yoneda identity types. We will write out the explicit computation later.
+
 **Observation.** Since they are judgmentally associative, the only instances
 where they will not reduce is thus when the reflexivity appears all the way to
 the right, or all the way to the left in a string of concatenations
 respectively.
 
 #### The judgmentally left unital concatenation operation
+
+The judgmentally left unital concatenation operation is constructed the same way
+as the judgmentally left unital concatenation operation for the judgmentally
+involutive identity types
+
+```text
+  (z , p , q) ∙ₗʲ (z' , p' , q') := (z' , p' , q' ∙ʸ inv-yoneda-Id p ∙ʸ q)
+```
 
 ```agda
 module _
@@ -350,11 +447,11 @@ module _
   _∙ₗʲ_ : {x y z : A} → x ＝ʲ y → y ＝ʲ z → x ＝ʲ z
   (z , p , q) ∙ₗʲ (z' , p' , q') = (z' , p' , q' ∙ʸ inv-yoneda-Id p ∙ʸ q)
 
-  concatl-computational-Id : {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
-  concatl-computational-Id p z q = p ∙ₗʲ q
+  concat-computational-Id : {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
+  concat-computational-Id p z q = p ∙ₗʲ q
 
-  concatl-computational-Id' : (x : A) {y z : A} → y ＝ʲ z → x ＝ʲ y → x ＝ʲ z
-  concatl-computational-Id' x q p = p ∙ₗʲ q
+  concat-computational-Id' : (x : A) {y z : A} → y ＝ʲ z → x ＝ʲ y → x ＝ʲ z
+  concat-computational-Id' x q p = p ∙ₗʲ q
 ```
 
 ```agda
@@ -362,17 +459,17 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  preserves-concatl-computational-eq-eq :
+  preserves-concat-computational-eq-eq :
     (p : x ＝ y) (q : y ＝ z) →
     computational-eq-eq (p ∙ q) ＝
     computational-eq-eq p ∙ₗʲ computational-eq-eq q
-  preserves-concatl-computational-eq-eq refl q = refl
+  preserves-concat-computational-eq-eq refl q = refl
 
-  preserves-concatl-eq-computational-eq :
+  preserves-concat-eq-computational-eq :
     (p : x ＝ʲ y) (q : y ＝ʲ z) →
     eq-computational-eq (p ∙ₗʲ q) ＝
     eq-computational-eq p ∙ eq-computational-eq q
-  preserves-concatl-eq-computational-eq (w , f , g) (w' , f' , g') =
+  preserves-concat-eq-computational-eq (w , f , g) (w' , f' , g') =
     ( ap (f' x) left-unit-concatr) ∙
     ( ap
       ( f' x)
@@ -445,35 +542,51 @@ module _
 
 #### The groupoidal laws for the judgmentally left unital concatenation operation
 
+To see that `_∙ₗʲ_` is judgmentally associative, we unfold both
+`(P ∙ₗʲ Q) ∙ₗʲ R` and `P ∙ₗʲ (Q ∙ₗʲ R)` and observe that it follows from the
+judgmental associativity of `_∙ʸ_`:
+
+```text
+  (P ∙ₗʲ Q) ∙ₗʲ R
+    ≐ ((u , p , p') ∙ₗʲ (v , q , q')) ∙ₗʲ (w , r , r')
+    ≐ ((v , q , (q' ∙ʸ invʸ p) ∙ʸ p')) ∙ₗʲ (w , r , r')
+    ≐ (w , r , (r' ∙ʸ invʸ q) ∙ʸ ((q' ∙ʸ invʸ p) ∙ʸ p'))
+
+    ≐ (w , r , (((r' ∙ʸ invʸ q) ∙ʸ q') ∙ʸ invʸ p) ∙ʸ p')
+    ≐ (u , p , p') ∙ₗʲ ((w , r , (r' ∙ʸ invʸ q) ∙ʸ q'))
+    ≐ (u , p , p') ∙ₗʲ ((v , q , q') ∙ₗʲ (w , r , r'))
+    ≐ P ∙ₗʲ (Q ∙ₗʲ R).
+```
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
   where
 
-  assoc-concatl-computational-Id :
+  assoc-concat-computational-Id :
     (p : x ＝ʲ y) (q : y ＝ʲ z) (r : z ＝ʲ w) →
     (p ∙ₗʲ q) ∙ₗʲ r ＝ p ∙ₗʲ (q ∙ₗʲ r)
-  assoc-concatl-computational-Id p q r = refl
+  assoc-concat-computational-Id p q r = refl
 
 module _
   {l : Level} {A : UU l} {x y : A}
   where
 
-  left-unit-concatl-computational-Id :
+  left-unit-concat-computational-Id :
     {p : x ＝ʲ y} → refl-computational-Id ∙ₗʲ p ＝ p
-  left-unit-concatl-computational-Id = refl
+  left-unit-concat-computational-Id = refl
 
-  right-unit-concatl-computational-Id :
+  right-unit-concat-computational-Id :
     {p : x ＝ʲ y} → p ∙ₗʲ refl-computational-Id ＝ p
-  right-unit-concatl-computational-Id {z , p , q} =
+  right-unit-concat-computational-Id {z , p , q} =
     ind-yoneda-Id
       ( λ _ p → (z , p , q) ∙ₗʲ refl-computational-Id ＝ (z , p , q))
       ( refl)
       ( p)
 
-  left-inv-concatl-computational-Id :
+  left-inv-concat-computational-Id :
     (p : x ＝ʲ y) → inv-computational-Id p ∙ₗʲ p ＝ refl-computational-Id
-  left-inv-concatl-computational-Id (z , p , q) =
+  left-inv-concat-computational-Id (z , p , q) =
     ind-yoneda-Id
       ( λ _ p →
         ( inv-computational-Id (z , p , q) ∙ₗʲ (z , p , q)) ＝
@@ -481,9 +594,9 @@ module _
       ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-yoneda-Id q)))
       ( p)
 
-  right-inv-concatl-computational-Id :
+  right-inv-concat-computational-Id :
     (p : x ＝ʲ y) → p ∙ₗʲ inv-computational-Id p ＝ refl-computational-Id
-  right-inv-concatl-computational-Id (z , p , q) =
+  right-inv-concat-computational-Id (z , p , q) =
     ind-yoneda-Id
       ( λ _ q →
         ( (z , p , q) ∙ₗʲ inv-computational-Id (z , p , q)) ＝
@@ -491,19 +604,22 @@ module _
       ( eq-pair-eq-pr2 (eq-pair-eq-pr2 (right-inv-yoneda-Id p)))
       ( q)
 
-  distributive-inv-concatl-computational-Id :
+  distributive-inv-concat-computational-Id :
     (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) →
     inv-computational-Id (p ∙ₗʲ q) ＝
     inv-computational-Id q ∙ₗʲ inv-computational-Id p
-  distributive-inv-concatl-computational-Id p =
+  distributive-inv-concat-computational-Id p =
     ind-computational-Id
       ( λ _ q →
         inv-computational-Id (p ∙ₗʲ q) ＝
         inv-computational-Id q ∙ₗʲ inv-computational-Id p)
-      ( ap inv-computational-Id (right-unit-concatl-computational-Id))
+      ( ap inv-computational-Id (right-unit-concat-computational-Id))
 ```
 
 #### The groupoidal laws for the judgmentally right unital concatenation operation
+
+Associativity follows from a similar computation as for the judgmentally left
+unital concatenation operation.
 
 ```agda
 module _
