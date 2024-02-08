@@ -246,7 +246,7 @@ module _
       ( is-section-map-inv-is-equiv)
       ( is-retraction-map-inv-is-equiv)
   coherence-map-inv-is-equiv =
-    coherence-map-inv-is-invertible (is-invertible-is-equiv H)
+    coh-is-coherently-invertible-is-invertible (is-invertible-is-equiv H)
 
   is-equiv-map-inv-is-equiv : is-equiv map-inv-is-equiv
   is-equiv-map-inv-is-equiv =
