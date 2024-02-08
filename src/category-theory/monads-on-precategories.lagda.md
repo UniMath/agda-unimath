@@ -23,17 +23,18 @@ open import foundation-core.cartesian-product-types
 
 ## Idea
 
-A monad on a precategory `C` consists of an
-endo[functor](category-theory.functors-precategories.md) `T : C → C` together
+A {{#concept "monad" Disambiguation="on a precategory" Agda=monad-Precategory}}
+on a [precategory](category-theory.precategories.md) `C` consists of an
+[endofunctor](category-theory.functors-precategories.md) `T : C → C` together
 with two
 [natural transformations](category-theory.natural-transformations-functors-precategories.md):
-`η : 1_C ⇒ T` and `μ : T² ⇒ T` (where `1_C : C → C` is the identity functor for
-`C`, and `T²` is the functor `T ∘ T : C → C`).
+`η : 1_C ⇒ T` and `μ : T² ⇒ T`, where `1_C : C → C` is the identity functor for
+`C`, and `T²` is the functor `T ∘ T : C → C`. These must satisfy the following
+{{#concept "monad laws" Disambiguation="monad on a precategory"}}:
 
-These must fulfill the _coherence conditions_:
-
-- `μ ∘ (T • μ) = μ ∘ (μ • T)`, and
-- `μ ∘ (T • η) = μ ∘ (η • T) = 1_T`.
+- **Associativity:** `μ ∘ (T • μ) = μ ∘ (μ • T)`
+- The **left unit law:** `μ ∘ (T • η) = 1_T`
+- The **right unit law:** `μ ∘ (η • T) = 1_T`.
 
 Here, `•` denotes
 [whiskering](category-theory.natural-transformations-functors-precategories.md#whiskering),
