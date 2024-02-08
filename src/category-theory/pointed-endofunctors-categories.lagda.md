@@ -44,7 +44,7 @@ such that for each morphism `f : X → Y` in `C` the diagram
        η Y
 ```
 
-[commutes](category-theory.commuting-squares-of-morphisms-in-categories.md).
+[commutes](category-theory.commuting-squares-of-morphisms-in-precategories.md).
 
 ## Definitions
 
