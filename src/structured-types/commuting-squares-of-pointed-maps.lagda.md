@@ -20,19 +20,25 @@ open import structured-types.whiskering-pointed-homotopies
 
 ## Idea
 
-A coherence square of pointed maps
+Consider a square of [pointed maps](structured-types.pointed-maps.md)
 
 ```text
-  A ------> X
-  |         |
-  |         |
-  |         |
-  V         V
-  B ------> Y
+            top
+       A --------> X
+       |           |
+  left |           | right
+       ∨           ∨
+       B --------> Y.
+          bottom
 ```
 
-is a coherence of the underlying square of (unpointed) maps, plus a coherence
-between the pointedness preservation proofs.
+Such a square is said to be a {{#concept "commuting square of pointed maps" Agda=coherence-square-pointed-maps}} if there is a [pointed homotopy](structured-types.pointed-homotopies.md)
+
+```text
+  bottom ∘∗ left ~∗ right ∘∗ top.
+```
+
+Such a homotopy is referred to as the {{#concept "coherence" Disambiguation="commuting squares of pointed maps" Agda=coherence-square-pointed-maps}} of the commuting square of pointed maps.
 
 ## Definitions
 
@@ -64,6 +70,48 @@ module _
 ## Properties
 
 ### Horizontal pasting of coherences of commuting squares of pointed maps
+
+Consider two commuting squares of pointed maps, as in the diagram
+
+```text
+            top-left         top-right
+       A -------------> B --------------> C
+       |                |                 |
+  left |                | middle          | right
+       ∨                ∨                 ∨
+       D -------------> E --------------> F
+          bottom-left      bottom-right
+```
+
+with pointed homotopies
+
+```text
+  H : bottom-left ∘∗ left ~∗ middle ∘∗ top
+  K : bottom-right ∘∗ middle ~∗ right ∘∗ top-right
+```
+
+The {{#concept "horizontal pasting" Disambiguation="commuting squares of pointed maps" Agda=horizontal-pasting-coherence-square-pointed-maps}} of these coherences of commuting squares of pointed maps is the coherence of the commuting square
+
+```text
+             top-right ∘∗ top-left
+       A -----------------------------> C
+       |                                |
+  left |                                | right
+       ∨                                ∨
+       D -----------------------------> F
+          bottom-right ∘∗ bottom-left
+```
+
+obtained by concatenation of the following three pointed homotopies:
+
+```text
+  (bottom-right ∘∗ bottom-left) ∘∗ left
+  ~∗ (bottom-right ∘∗ middle) ∘∗ top-left
+  ~∗ bottom-right ∘∗ (middle ∘∗ top-left)
+  ~∗ right ∘∗ (top-right ∘∗ top-left).
+```
+
+The first and third homotopy in this concatenation are the whiskerings of coherences of [commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
 
 ```agda
 module _

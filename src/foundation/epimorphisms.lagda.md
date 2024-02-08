@@ -8,6 +8,7 @@ module foundation.epimorphisms where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.diagonal-span-diagrams
 open import foundation.embeddings
 open import foundation.precomposition-functions
 open import foundation.sections
@@ -21,6 +22,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 
+open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
@@ -99,7 +101,9 @@ module _
 
   universal-property-pushout-is-epimorphism :
     is-epimorphism f →
-    {l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)
+    universal-property-pushout
+      ( diagonal-span-diagram f)
+      ( cocone-codiagonal-map f)
   universal-property-pushout-is-epimorphism e X =
     is-equiv-comp
       ( map-equiv (compute-total-fiber-precomp f X))
@@ -114,18 +118,20 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
   is-equiv-codiagonal-map-is-epimorphism :
     is-epimorphism f → is-equiv (codiagonal-map f)
   is-equiv-codiagonal-map-is-epimorphism e =
-    is-equiv-universal-property-pushout-universal-property-pushout f f
-      ( cocone-pushout f f)
+    is-equiv-universal-property-pushout-universal-property-pushout
+      ( diagonal-span-diagram f)
+      ( cocone-standard-pushout (diagonal-span-diagram f))
       ( cocone-codiagonal-map f)
       ( codiagonal-map f)
       ( compute-inl-codiagonal-map f ,
         compute-inr-codiagonal-map f ,
         compute-glue-codiagonal-map f)
-      ( universal-property-pushout-standard-pushout f f)
+      ( universal-property-pushout-standard-pushout (diagonal-span-diagram f))
       ( universal-property-pushout-is-epimorphism e)
 
   is-pushout-is-epimorphism :
-    is-epimorphism f → is-pushout f f (cocone-codiagonal-map f)
+    is-epimorphism f →
+    is-pushout (diagonal-span-diagram f) (cocone-codiagonal-map f)
   is-pushout-is-epimorphism = is-equiv-codiagonal-map-is-epimorphism
 ```
 
@@ -133,9 +139,10 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
 
 ```agda
   is-epimorphism-universal-property-pushout-Level :
-    {l : Level} →
-    universal-property-pushout l f f (cocone-codiagonal-map f) →
-    is-epimorphism-Level l f
+    universal-property-pushout
+      ( diagonal-span-diagram f)
+      ( cocone-codiagonal-map f) →
+    {l : Level} → is-epimorphism-Level l f
   is-epimorphism-universal-property-pushout-Level up-c X =
     is-emb-is-contr-fibers-values
       ( precomp f X)
@@ -145,15 +152,24 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
           ( compute-fiber-precomp f X g)
           ( is-contr-fam-is-equiv-map-section-family
             ( λ h →
-              ( right-map-cocone f f
-                ( cocone-map f f (cocone-codiagonal-map f) h)) ,
-              ( coherence-square-cocone f f
-                ( cocone-map f f (cocone-codiagonal-map f) h)))
+              ( right-map-cocone-span-diagram (diagonal-span-diagram f)
+                ( cocone-map-span-diagram
+                  ( diagonal-span-diagram f)
+                  ( cocone-codiagonal-map f)
+                  ( h))) ,
+              ( coherence-square-cocone-span-diagram
+                ( diagonal-span-diagram f)
+                ( cocone-map-span-diagram
+                  ( diagonal-span-diagram f)
+                  ( cocone-codiagonal-map f)
+                  ( h))))
             ( up-c X)
             ( g)))
 
   is-epimorphism-universal-property-pushout :
-    ({l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)) →
+    universal-property-pushout
+      ( diagonal-span-diagram f)
+      ( cocone-codiagonal-map f) →
     is-epimorphism f
   is-epimorphism-universal-property-pushout up-c =
     is-epimorphism-universal-property-pushout-Level up-c
@@ -162,19 +178,23 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
     is-equiv (codiagonal-map f) → is-epimorphism f
   is-epimorphism-is-equiv-codiagonal-map e =
     is-epimorphism-universal-property-pushout
-      ( universal-property-pushout-standard-pushout-universal-property-pushout-standard-pushout-is-equiv f f
-        ( cocone-pushout f f)
+      ( universal-property-pushout-universal-property-pushout-is-equiv
+        ( diagonal-span-diagram f)
+        ( cocone-standard-pushout (diagonal-span-diagram f))
         ( cocone-codiagonal-map f)
         ( codiagonal-map f)
-        ( htpy-cocone-map-universal-property-pushout f f
-          ( cocone-pushout f f)
-          ( universal-property-pushout-standard-pushout f f)
+        ( htpy-cocone-universal-property-pushout (diagonal-span-diagram f)
+          ( cocone-standard-pushout (diagonal-span-diagram f))
+          ( universal-property-pushout-standard-pushout
+            ( diagonal-span-diagram f))
           ( cocone-codiagonal-map f))
         ( e)
-        ( universal-property-pushout-standard-pushout f f))
+        ( universal-property-pushout-standard-pushout
+          ( diagonal-span-diagram f)))
 
   is-epimorphism-is-pushout :
-    is-pushout f f (cocone-codiagonal-map f) → is-epimorphism f
+    is-pushout (diagonal-span-diagram f) (cocone-codiagonal-map f) →
+    is-epimorphism f
   is-epimorphism-is-pushout = is-epimorphism-is-equiv-codiagonal-map
 ```
 

@@ -120,7 +120,7 @@ module _
     map-pointed-map g ·l htpy-pointed-htpy f1 f2 H
 
   coh-left-whisker-pointed-htpy' :
-    coherence-triangle-pointed-htpy'
+    coherence-base-point-pointed-htpy'
       ( g ∘∗ f1)
       ( g ∘∗ f2)
       ( htpy-left-whisker-pointed-htpy)
