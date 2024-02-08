@@ -259,7 +259,7 @@ To insert these symbols in the editor, follow these steps:
 2. When the symbol appears as a greyed-out character in your editor, press `TAB`
    to insert it.
 
-- `＝`: Type `Id` or `equals`
+- `＝`: Type `Id`
 - `ょ`: Type `yoneda`
 - `⧄`: Type `diagonal` or `lifting`
 

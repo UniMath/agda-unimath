@@ -72,7 +72,7 @@ module _
         ( is-torsorial-htpy H)
 
     Eq-eq-symmetric-Id :
-      (p q : symmetric-Id a) → (p ＝ q) → Eq-symmetric-Id p q
+      (p q : symmetric-Id a) → p ＝ q → Eq-symmetric-Id p q
     Eq-eq-symmetric-Id p .p refl = refl-Eq-symmetric-Id p
 
     is-equiv-Eq-eq-symmetric-Id :

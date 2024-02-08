@@ -23,8 +23,8 @@ argument has three properties:
 3. Quantity: whether they are run-time relevant or not (see,
    [docs](https://agda.readthedocs.io/en/latest/language/runtime-irrelevance.html))
 
-The properties of `Relevance` and `Quantity` are combined in one, called
-`Modality`.
+The properties of `Relevance-Argument-Agda` and `Quantity-Argument-Agda` are
+combined in one, called `Modality-Argument-Agda`.
 
 For concrete examples, see
 [`reflection.definitions`](reflection.definitions.md).
@@ -32,49 +32,55 @@ For concrete examples, see
 ## Definitions
 
 ```agda
-data Visibility : UU lzero where
-  visible hidden instance′ : Visibility
+data Visibility-Argument-Agda : UU lzero where
+  visible-Visibility-Argument-Agda : Visibility-Argument-Agda
+  hidden-Visibility-Argument-Agda : Visibility-Argument-Agda
+  instance-Visibility-Argument-Agda : Visibility-Argument-Agda
 
-data Relevance : UU lzero where
-  relevant irrelevant : Relevance
+data Relevance-Argument-Agda : UU lzero where
+  relevant-Relevance-Argument-Agda : Relevance-Argument-Agda
+  irrelevant-Relevance-Argument-Agda : Relevance-Argument-Agda
 
-data Quantity : UU lzero where
-  quantity-0 quantity-ω : Quantity
+data Quantity-Argument-Agda : UU lzero where
+  zero-Quantity-Argument-Agda : Quantity-Argument-Agda
+  omega-Quantity-Argument-Agda : Quantity-Argument-Agda
 
-data Modality : UU lzero where
-  modality : (r : Relevance) (q : Quantity) → Modality
+data Modality-Argument-Agda : UU lzero where
+  cons-Modality-Argument-Agda :
+    Relevance-Argument-Agda → Quantity-Argument-Agda → Modality-Argument-Agda
 
-data ArgInfo : UU lzero where
-  arg-info : (v : Visibility) (m : Modality) → ArgInfo
+data Info-Argument-Agda : UU lzero where
+  cons-Info-Argument-Agda :
+    Visibility-Argument-Agda → Modality-Argument-Agda → Info-Argument-Agda
 
-data Arg {l} (A : UU l) : UU l where
-  arg : (i : ArgInfo) (x : A) → Arg A
+data Argument-Agda {l : Level} (A : UU l) : UU l where
+  cons-Argument-Agda : Info-Argument-Agda → A → Argument-Agda A
 ```
 
 <details><summary>Bindings</summary>
 
 ```agda
-{-# BUILTIN HIDING Visibility #-}
-{-# BUILTIN VISIBLE visible #-}
-{-# BUILTIN HIDDEN hidden #-}
-{-# BUILTIN INSTANCE instance′ #-}
+{-# BUILTIN HIDING Visibility-Argument-Agda #-}
+{-# BUILTIN VISIBLE visible-Visibility-Argument-Agda #-}
+{-# BUILTIN HIDDEN hidden-Visibility-Argument-Agda #-}
+{-# BUILTIN INSTANCE instance-Visibility-Argument-Agda #-}
 
-{-# BUILTIN RELEVANCE Relevance #-}
-{-# BUILTIN RELEVANT relevant #-}
-{-# BUILTIN IRRELEVANT irrelevant #-}
+{-# BUILTIN RELEVANCE Relevance-Argument-Agda #-}
+{-# BUILTIN RELEVANT relevant-Relevance-Argument-Agda #-}
+{-# BUILTIN IRRELEVANT irrelevant-Relevance-Argument-Agda #-}
 
-{-# BUILTIN QUANTITY Quantity #-}
-{-# BUILTIN QUANTITY-0 quantity-0 #-}
-{-# BUILTIN QUANTITY-ω quantity-ω #-}
+{-# BUILTIN QUANTITY Quantity-Argument-Agda #-}
+{-# BUILTIN QUANTITY-0 zero-Quantity-Argument-Agda #-}
+{-# BUILTIN QUANTITY-ω omega-Quantity-Argument-Agda #-}
 
-{-# BUILTIN MODALITY Modality #-}
-{-# BUILTIN MODALITY-CONSTRUCTOR modality #-}
+{-# BUILTIN MODALITY Modality-Argument-Agda #-}
+{-# BUILTIN MODALITY-CONSTRUCTOR cons-Modality-Argument-Agda #-}
 
-{-# BUILTIN ARGINFO ArgInfo #-}
-{-# BUILTIN ARGARGINFO arg-info #-}
+{-# BUILTIN ARGINFO Info-Argument-Agda #-}
+{-# BUILTIN ARGARGINFO cons-Info-Argument-Agda #-}
 
-{-# BUILTIN ARG Arg #-}
-{-# BUILTIN ARGARG arg #-}
+{-# BUILTIN ARG Argument-Agda #-}
+{-# BUILTIN ARGARG cons-Argument-Agda #-}
 ```
 
 </details>
@@ -84,9 +90,23 @@ data Arg {l} (A : UU l) : UU l where
 We create helper patterns for the two most common type of arguments.
 
 ```agda
--- visible-Arg : {l : Level} {A : UU l} → A → Arg A
-pattern visible-Arg t = arg (arg-info visible (modality relevant quantity-ω)) t
+-- visible-Argument-Agda : {l : Level} {A : UU l} → A → Argument-Agda A
+pattern visible-Argument-Agda t =
+  cons-Argument-Agda
+    ( cons-Info-Argument-Agda
+      ( visible-Visibility-Argument-Agda)
+      ( cons-Modality-Argument-Agda
+        ( relevant-Relevance-Argument-Agda)
+        ( omega-Quantity-Argument-Agda)))
+    ( t)
 
--- hidden-Arg : {l : Level} {A : UU l} → A → Arg A
-pattern hidden-Arg t = arg (arg-info hidden (modality relevant quantity-ω)) t
+-- hidden-Argument-Agda : {l : Level} {A : UU l} → A → Argument-Agda A
+pattern hidden-Argument-Agda t =
+  cons-Argument-Agda
+    ( cons-Info-Argument-Agda
+      ( hidden-Visibility-Argument-Agda)
+      ( cons-Modality-Argument-Agda
+        ( relevant-Relevance-Argument-Agda)
+        ( omega-Quantity-Argument-Agda)))
+    ( t)
 ```
