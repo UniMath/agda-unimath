@@ -48,7 +48,7 @@ module _
         ( associative-Σ _ _ _)
         ( is-contr-Σ
           ( is-contr-section-is-equiv (is-equiv-is-coherently-invertible H))
-          ( section-map-is-coherently-invertible H)
+          ( section-is-coherently-invertible H)
           ( is-contr-equiv'
             ( _)
             ( distributive-Π-Σ)
