@@ -9,6 +9,7 @@ module foundation.reflexive-relations where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 
@@ -16,10 +17,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-A reflexive relation on a type `A` is a type-valued binary relation
-`R : A → A → U` equipped with a proof `r : (x : A) → R x x
+A {{#concept "reflexive relation" Agda=Reflexive-Relation}} on a type `A` is a
+type-valued [binary relation](foundation.binary-relations.md) `R : A → A → 𝒰`
+[equipped](foundation.structure.md) with a proof `r : (x : A) → R x x
 
 ## Definition
+
+### Reflexive relations
 
 ```agda
 Reflexive-Relation :
