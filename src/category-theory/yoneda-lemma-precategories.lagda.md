@@ -54,7 +54,7 @@ equivalence.
 
 ## Theorem
 
-### The yoneda lemma into the large category of sets
+### The Yoneda lemma into the large category of sets
 
 ```agda
 module _
