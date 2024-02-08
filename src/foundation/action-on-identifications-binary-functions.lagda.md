@@ -39,7 +39,7 @@ module _
 
   ap-binary :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') → f x y ＝ f x' y'
-  ap-binary refl refl = refl
+  ap-binary {x} {x'} p {y} {y'} q = ap (λ z → f z y) p ∙ ap (f x') q
 ```
 
 ## Properties
@@ -68,7 +68,7 @@ module _
   triangle-ap-binary :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
     ap-binary f p q ＝ ap (λ z → f z y) p ∙ ap (f x') q
-  triangle-ap-binary refl refl = refl
+  triangle-ap-binary _ _ = refl
 
   triangle-ap-binary' :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
@@ -89,7 +89,7 @@ module _
 
   left-unit-ap-binary :
     {x : A} {y y' : B} (q : y ＝ y') → ap-binary f refl q ＝ ap (f x) q
-  left-unit-ap-binary refl = refl
+  left-unit-ap-binary _ = refl
 
   right-unit-ap-binary :
     {x x' : A} (p : x ＝ x') {y : B} → ap-binary f p refl ＝ ap (λ z → f z y) p

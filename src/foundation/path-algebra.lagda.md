@@ -142,7 +142,7 @@ vertical-concat-Id² α β = α ∙ β
 
 horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z} →
-  p ＝ q → u ＝ v → (p ∙ u) ＝ (q ∙ v)
+  p ＝ q → u ＝ v → p ∙ u ＝ q ∙ v
 horizontal-concat-Id² α β = ap-binary (_∙_) α β
 ```
 
@@ -176,14 +176,12 @@ right-unit-law-vertical-concat-Id² = right-unit
 
 left-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
-  horizontal-concat-Id² (refl {x = p}) γ ＝
-  left-whisker-concat p γ
+  horizontal-concat-Id² refl γ ＝ left-whisker-concat p γ
 left-unit-law-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
 
 right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
-  horizontal-concat-Id² α (refl {x = u}) ＝
-  right-whisker-concat α u
+  horizontal-concat-Id² α refl ＝ right-whisker-concat α u
 right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
 ```
 
@@ -208,7 +206,7 @@ module _
 
   nat-sq-left-unit-Id² :
     coherence-square-identifications
-      ( horizontal-concat-Id² (refl {x = refl}) α)
+      ( horizontal-concat-Id² refl α)
       ( left-unit)
       ( left-unit)
       ( α)
@@ -227,7 +225,7 @@ module _
   {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y}
   where
 
-  horizontal-inv-Id² : p ＝ p' → (inv p) ＝ (inv p')
+  horizontal-inv-Id² : p ＝ p' → inv p ＝ inv p'
   horizontal-inv-Id² = ap inv
 ```
 

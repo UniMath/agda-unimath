@@ -8,6 +8,7 @@ module foundation.yoneda-identity-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.multivariable-homotopies
@@ -705,6 +706,19 @@ module _
         ( inv (commutative-preconcatr-refl-Id-yoneda-Id p q)))
 ```
 
+### Action of binary functions on Yoneda identifications
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  where
+
+  ap-binary-yoneda-Id :
+    {x x' : A} (p : x ＝ʸ x') {y y' : B} (q : y ＝ʸ y') → f x y ＝ʸ f x' y'
+  ap-binary-yoneda-Id {x} {x'} p {y} {y'} q =
+    ap-yoneda-Id (λ z → f z y) p ∙ʸ ap-yoneda-Id (f x') q
+```
+
 ### Transport along Yoneda identifications
 
 ```agda
@@ -770,6 +784,77 @@ module _
 
   is-equiv-yoneda-eq-equiv : is-equiv yoneda-eq-equiv
   is-equiv-yoneda-eq-equiv = is-equiv-map-equiv equiv-yoneda-eq-equiv
+```
+
+### Horizontal concatenation of yoneda identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  horizontal-concat-yoneda-Id² :
+    {p q : x ＝ʸ y} → p ＝ʸ q → {u v : y ＝ʸ z} → u ＝ʸ v → p ∙ʸ u ＝ʸ q ∙ʸ v
+  horizontal-concat-yoneda-Id² α β = ap-binary-yoneda-Id (_∙ʸ_) α β
+
+  left-unit-horizontal-concat-yoneda-Id² :
+    {p : x ＝ʸ y} {u v : y ＝ʸ z} (β : u ＝ʸ v) →
+    horizontal-concat-yoneda-Id² reflʸ β ＝ ap-yoneda-Id (p ∙ʸ_) β
+  left-unit-horizontal-concat-yoneda-Id² β = refl
+
+  right-unit-horizontal-concat-yoneda-Id² :
+    {p q : x ＝ʸ y} (α : p ＝ʸ q) {u : y ＝ʸ z} →
+    horizontal-concat-yoneda-Id² α (reflʸ {x = u}) ＝ ap-yoneda-Id (_∙ʸ u) α
+  right-unit-horizontal-concat-yoneda-Id² α = refl
+
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  where
+
+  assoc-horizontal-concat-yoneda-Id² :
+    {p p' : x ＝ʸ y} (α : p ＝ʸ p')
+    {q q' : y ＝ʸ z} (β : q ＝ʸ q')
+    {r r' : z ＝ʸ w} (γ : r ＝ʸ r') →
+    horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ ＝
+    horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)
+  assoc-horizontal-concat-yoneda-Id² {p} α {q} β γ =
+    ind-yoneda-Id
+      ( λ _ α → horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ ＝ horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ))
+        (ind-yoneda-Id
+          ( λ _ β → horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² reflʸ β) γ ＝ horizontal-concat-yoneda-Id² reflʸ (horizontal-concat-yoneda-Id² β γ))
+          ( ind-yoneda-Id (λ _ γ → horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² (reflʸ {x = p}) (reflʸ {x = q})) γ ＝ horizontal-concat-yoneda-Id² (reflʸ {x = p}) (horizontal-concat-yoneda-Id² (reflʸ {x = q}) γ)) refl γ)
+          β) α
+```
+
+### Vertical concatenation of yoneda identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  vertical-concat-yoneda-Id² :
+    {p q r : x ＝ʸ y} → p ＝ʸ q → q ＝ʸ r → p ＝ʸ r
+  vertical-concat-yoneda-Id² α β = α ∙ʸ β
+```
+
+### The interchange law for Yoneda identificatinos
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  -- interchange-yoneda-Id² :
+  --   {p q r : x ＝ʸ y} {u v w : y ＝ʸ z}
+  --   (α : p ＝ʸ q) (β : q ＝ʸ r) (γ : u ＝ʸ v) (δ : v ＝ʸ w) →
+  --   ( horizontal-concat-yoneda-Id²
+  --     ( vertical-concat-yoneda-Id² α β)
+  --     ( vertical-concat-yoneda-Id² γ δ)) ＝
+  --   ( vertical-concat-yoneda-Id²
+  --     ( horizontal-concat-yoneda-Id² α γ)
+  --     ( horizontal-concat-yoneda-Id² β δ))
+  -- interchange-yoneda-Id² α β γ δ = {!   !}
 ```
 
 ## See also
