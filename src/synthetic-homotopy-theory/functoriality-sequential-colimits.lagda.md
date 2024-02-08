@@ -426,8 +426,8 @@ module _
 
 ### A retract of sequential diagrams induces a retract of sequential colimits
 
-Additionally, the underlying map of the retraction is definitionally equal to
-the map induced by the retraction of sequential diagrams.
+Additionally, the underlying map of the retraction is strictly equal to the map
+induced by the retraction of sequential diagrams.
 
 ```agda
 module _

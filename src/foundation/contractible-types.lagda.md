@@ -59,7 +59,7 @@ equiv-Contr :
 equiv-Contr X Y = type-Contr X ≃ type-Contr Y
 
 equiv-eq-Contr :
-  {l1 : Level} (X Y : Contr l1) → (X ＝ Y) → equiv-Contr X Y
+  {l1 : Level} (X Y : Contr l1) → X ＝ Y → equiv-Contr X Y
 equiv-eq-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
 
 abstract
@@ -69,7 +69,7 @@ abstract
     is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
 
 eq-equiv-Contr :
-  {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → (X ＝ Y)
+  {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → X ＝ Y
 eq-equiv-Contr = eq-equiv-subuniverse is-contr-Prop
 
 abstract
