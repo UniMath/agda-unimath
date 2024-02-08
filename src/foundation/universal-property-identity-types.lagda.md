@@ -47,10 +47,15 @@ ev-refl :
   ((x : A) (p : a ＝ x) → B x p) → B a refl
 ev-refl a f = f a refl
 
+ev-refl' :
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
+  ((x : A) (p : x ＝ a) → B x p) → B a refl
+ev-refl' a f = f a refl
+
 abstract
   is-equiv-ev-refl :
     {l1 l2 : Level} {A : UU l1} (a : A)
-    {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B = B})
+    {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B})
   is-equiv-ev-refl a =
     is-equiv-is-invertible
       ( ind-Id a _)
@@ -73,6 +78,11 @@ equiv-ev-refl' :
 equiv-ev-refl' a {B} =
   ( equiv-ev-refl a) ∘e
   ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
+
+is-equiv-ev-refl' :
+  {l1 l2 : Level} {A : UU l1} (a : A)
+  {B : (x : A) → x ＝ a → UU l2} → is-equiv (ev-refl' a {B})
+is-equiv-ev-refl' a = is-equiv-map-equiv (equiv-ev-refl' a)
 ```
 
 ### `Id : A → (A → 𝒰)` is an embedding

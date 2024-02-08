@@ -121,7 +121,7 @@ operators, so that expressions like `a - b + c` are parsed as `(a - b) + c`.
 
 Below, we outline a list of general rules when assigning associativities.
 
-- **Definitionally associative operators**, e.g.
+- **Strictly associative operators**, e.g.
   [function composition `_∘_`](foundation-core.function-types.md), can be
   assigned _any associativity_.
 
