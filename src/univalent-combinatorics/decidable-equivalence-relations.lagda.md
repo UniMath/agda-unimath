@@ -22,6 +22,8 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.reflexive-relations
+open import foundation.transitive-binary-relations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

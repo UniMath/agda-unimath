@@ -19,8 +19,10 @@ open import foundation.mere-embeddings
 open import foundation.mere-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.reflexive-relations
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 ```
 

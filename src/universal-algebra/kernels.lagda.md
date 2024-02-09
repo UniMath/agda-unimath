@@ -15,6 +15,8 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.identity-types
+open import foundation.reflexive-relations
+open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import linear-algebra.functoriality-vectors
