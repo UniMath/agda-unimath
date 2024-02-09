@@ -174,15 +174,15 @@ right-unit-law-vertical-concat-Id² :
   vertical-concat-Id² α refl ＝ α
 right-unit-law-vertical-concat-Id² = right-unit
 
-left-unit-law-horizontal-concat-Id² :
+compute-left-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
   horizontal-concat-Id² refl γ ＝ left-whisker-concat p γ
-left-unit-law-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
+compute-left-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
 
-right-unit-law-horizontal-concat-Id² :
+compute-right-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α refl ＝ right-whisker-concat α u
-right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
+compute-right-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
 ```
 
 Horizontal concatenation satisfies an additional "2-dimensional" unit law (on
@@ -202,7 +202,7 @@ module _
   nat-sq-right-unit-Id² =
     ( ( horizontal-concat-Id² refl (inv (ap-id α))) ∙
       ( nat-htpy htpy-right-unit α)) ∙
-    ( horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
+    ( horizontal-concat-Id² (inv (compute-right-horizontal-concat-Id² α)) refl)
 
   nat-sq-left-unit-Id² :
     coherence-square-identifications
@@ -212,7 +212,7 @@ module _
       ( α)
   nat-sq-left-unit-Id² =
     ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
-      ( inv (left-unit-law-horizontal-concat-Id² α))) ∙
+      ( inv (compute-left-horizontal-concat-Id² α))) ∙
     ( inv right-unit)
 ```
 
@@ -287,8 +287,8 @@ interchange-Id² refl refl refl refl = refl
 unit-law-α-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) (u : y ＝ z) →
   ( ( interchange-Id² α refl (refl {x = u}) refl) ∙
-    ( right-unit ∙ right-unit-law-horizontal-concat-Id² α)) ＝
-  ( ( right-unit-law-horizontal-concat-Id² (α ∙ refl)) ∙
+    ( right-unit ∙ compute-right-horizontal-concat-Id² α)) ＝
+  ( ( compute-right-horizontal-concat-Id² (α ∙ refl)) ∙
     ( ap (λ s → right-whisker-concat s u) right-unit))
 unit-law-α-interchange-Id² refl u = refl
 
@@ -300,8 +300,8 @@ unit-law-β-interchange-Id² refl u = refl
 unit-law-γ-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {u v : y ＝ z} (γ : u ＝ v) →
   ( ( interchange-Id² (refl {x = p}) refl γ refl) ∙
-    ( right-unit ∙ left-unit-law-horizontal-concat-Id² γ)) ＝
-  ( ( left-unit-law-horizontal-concat-Id² (γ ∙ refl)) ∙
+    ( right-unit ∙ compute-left-horizontal-concat-Id² γ)) ＝
+  ( ( compute-left-horizontal-concat-Id² (γ ∙ refl)) ∙
     ( ap (left-whisker-concat p) right-unit))
 unit-law-γ-interchange-Id² p refl = refl
 
@@ -373,13 +373,13 @@ left-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α : p ＝ q} {γ δ : q ＝ r}
   {τ : γ ＝ δ} →
   y-concat-Id³ (refl {x = α}) τ ＝ left-whisker-concat α τ
-left-unit-law-y-concat-Id³ {τ = τ} = left-unit-law-horizontal-concat-Id² τ
+left-unit-law-y-concat-Id³ {τ = τ} = compute-left-horizontal-concat-Id² τ
 
 right-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α β : p ＝ q} {γ : q ＝ r}
   {σ : α ＝ β} →
   y-concat-Id³ σ (refl {x = γ}) ＝ right-whisker-concat σ γ
-right-unit-law-y-concat-Id³ {σ = σ} = right-unit-law-horizontal-concat-Id² σ
+right-unit-law-y-concat-Id³ {σ = σ} = compute-right-horizontal-concat-Id² σ
 
 left-unit-law-z-concat-Id³ :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
