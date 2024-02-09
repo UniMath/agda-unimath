@@ -42,7 +42,7 @@ module _
   Ω² A = iterated-loop-space 2 A
 
   type-Ω² : {A : UU l} (a : A) → UU l
-  type-Ω² a = Id (refl {x = a}) (refl {x = a})
+  type-Ω² a = refl {x = a} ＝ refl {x = a}
 
   refl-Ω² : {A : UU l} {a : A} → type-Ω² a
   refl-Ω² = refl
@@ -70,23 +70,21 @@ module _
   where
 
   left-unit-law-vertical-concat-Ω² :
-    {a : A} {α : type-Ω² a} →
-    Id (vertical-concat-Ω² refl-Ω² α) α
+    {a : A} {α : type-Ω² a} → vertical-concat-Ω² refl-Ω² α ＝ α
   left-unit-law-vertical-concat-Ω² = left-unit
 
   right-unit-law-vertical-concat-Ω² :
-    {a : A} {α : type-Ω² a} →
-    Id (vertical-concat-Ω² α refl-Ω²) α
+    {a : A} {α : type-Ω² a} → vertical-concat-Ω² α refl-Ω² ＝ α
   right-unit-law-vertical-concat-Ω² = right-unit
 
   left-unit-law-horizontal-concat-Ω² :
     {a : A} {α : type-Ω² a} →
-    Id (horizontal-concat-Ω² refl-Ω² α) α
+    horizontal-concat-Ω² refl-Ω² α ＝ α
   left-unit-law-horizontal-concat-Ω² {α = α} =
-    ( compute-left-horizontal-concat-Id² α) ∙ (ap-id α)
+    compute-left-horizontal-concat-Id² α ∙ ap-id α
 
   naturality-right-unit :
-    {x y : A} {p q : Id x y} (α : Id p q) →
+    {x y : A} {p q : x ＝ y} (α : p ＝ q) →
     coherence-square-identifications
       ( right-unit)
       ( right-whisker-concat α refl)
@@ -95,25 +93,21 @@ module _
   naturality-right-unit {p = refl} refl = refl
 
   naturality-right-unit-Ω² :
-    {x : A} (α : type-Ω² x) →
-    right-whisker-concat α refl ＝ α
+    {x : A} (α : type-Ω² x) → right-whisker-concat α refl ＝ α
   naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
 
   right-unit-law-horizontal-concat-Ω² :
-    {a : A} {α : type-Ω² a} →
-    Id (horizontal-concat-Ω² α refl-Ω²) α
+    {a : A} {α : type-Ω² a} → horizontal-concat-Ω² α refl-Ω² ＝ α
   right-unit-law-horizontal-concat-Ω² {α = α} =
-    ( compute-right-horizontal-concat-Id² α) ∙ (naturality-right-unit-Ω² α)
+    compute-right-horizontal-concat-Id² α ∙ naturality-right-unit-Ω² α
 
   left-unit-law-left-whisker-Ω² :
-    {a : A} (α : type-Ω² a) →
-    left-whisker-concat (refl-Ω (pair A a)) α ＝ α
+    {a : A} (α : type-Ω² a) → left-whisker-concat (refl-Ω (A , a)) α ＝ α
   left-unit-law-left-whisker-Ω² α =
     left-unit-law-left-whisker-concat α
 
   right-unit-law-right-whisker-Ω² :
-    {a : A} (α : type-Ω² a) →
-    right-whisker-concat α (refl-Ω (pair A a)) ＝ α
+    {a : A} (α : type-Ω² a) → right-whisker-concat α (refl-Ω (A , a)) ＝ α
   right-unit-law-right-whisker-Ω² α =
     inv (right-unit-law-right-whisker-concat α ∙ right-unit)
 ```
@@ -126,7 +120,7 @@ interchange-Ω² :
   Id
     ( horizontal-concat-Ω² (vertical-concat-Ω² α β) (vertical-concat-Ω² γ δ))
     ( vertical-concat-Ω² (horizontal-concat-Ω² α γ) (horizontal-concat-Ω² β δ))
-interchange-Ω² α β γ δ = interchange-Id² α β γ δ
+interchange-Ω² = interchange-Id²
 ```
 
 ## Properties
@@ -140,8 +134,7 @@ module _
   where
 
   pointed-equiv-2-loop-pointed-identity :
-    Ω (pair (point-Pointed-Type A ＝ x) p) ≃∗ Ω² A
+    Ω (point-Pointed-Type A ＝ x , p) ≃∗ Ω² A
   pointed-equiv-2-loop-pointed-identity =
-    pointed-equiv-Ω-pointed-equiv
-      ( pointed-equiv-loop-pointed-identity A p)
+    pointed-equiv-Ω-pointed-equiv (pointed-equiv-loop-pointed-identity A p)
 ```

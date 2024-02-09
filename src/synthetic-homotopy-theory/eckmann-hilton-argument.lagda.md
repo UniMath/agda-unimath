@@ -1,4 +1,4 @@
-# The Eckmann-Hilton Argument
+# The Eckmann-Hilton argument
 
 ```agda
 module synthetic-homotopy-theory.eckmann-hilton-argument where
@@ -30,15 +30,15 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 
 There are two classical statements of the Eckmann-Hilton argument. The first
 states that a group object in the category of groups is abelian. The second
-states that `π₂ (X)` is abelian, for any space `X`. The former is an algebraic
+states that `π₂(X)` is abelian, for any space `X`. The former is an algebraic
 statement, while the latter is a homotopy theoretic statment. As it turns out,
 the two are equivalent. See the following
 [wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
 
-Both these phrasing, however, are about set level structures. Since we have
-access to untruncated types, it is more natural to prove untruncated analogs of
-the above two statements. Thus, we will work with the following statement of the
-Eckmann-Hilton argument:
+Both these phrasings, however, are about set level structures. Since we have
+access to untruncated types, it is more natural to consider untruncated analogs
+of the above two statements. Thus, we will work with the following statement of
+the Eckmann-Hilton argument:
 
 `(α β : Ω² X) → α ∙ β = β ∙ α`
 
@@ -171,22 +171,14 @@ module _
   eckmann-hilton-Ω² :
     (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
   eckmann-hilton-Ω² α β =
-    equational-reasoning
-    (α ∙ β) ＝
-    ( left-whisker-concat refl α ∙ right-whisker-concat β refl)
-    by
-      ( inv
-        ( horizontal-concat-Id²
-          ( left-unit-law-left-whisker-Ω² α)
-          ( right-unit-law-right-whisker-Ω² β)))
-    ＝ ( right-whisker-concat β refl) ∙
-      ( left-whisker-concat refl α)
-    by ( commutative-left-whisker-right-whisker-concat α β)
-    ＝ β ∙ α
-    by
+    ( inv
       ( horizontal-concat-Id²
-        ( right-unit-law-right-whisker-Ω² β)
-        ( left-unit-law-left-whisker-Ω² α))
+        ( left-unit-law-left-whisker-Ω² α)
+        ( right-unit-law-right-whisker-Ω² β))) ∙
+    ( commutative-left-whisker-right-whisker-concat α β) ∙
+    ( horizontal-concat-Id²
+      ( right-unit-law-right-whisker-Ω² β)
+      ( left-unit-law-left-whisker-Ω² α))
 ```
 
 #### Using right whiskering
@@ -199,7 +191,7 @@ braids `α` under `β`. This difference shows up nicely in the type theory. The
 first version uses the naturality of the operation of whiskering on the left,
 while the second version uses the naturality of the operation of whiskering on
 the right. Based on the intution of braiding, we should expect these two version
-of the Eckmann-Hilton identification to naturally "undo" each other, which the
+of the Eckmann-Hilton identification to naturally "undo" each other, which they
 do. Thus, we will refer to this alternate construction of Eckmann-Hilton as "the
 inverse Eckmann-Hilton argument", and the corresponding identification "the
 inverse Eckmann-Hilton identification".
@@ -209,24 +201,17 @@ module _
   {l : Level} {A : Pointed-Type l}
   where
 
-  eckmann-hilton-inverse-Ω² :
+  inv-eckmann-hilton-Ω² :
     (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
-  eckmann-hilton-inverse-Ω² α β =
-    equational-reasoning
-    (α ∙ β)
-    ＝ (right-whisker-concat α refl ∙ left-whisker-concat refl β)
-    by
-      ( inv
-        ( horizontal-concat-Id²
-          ( right-unit-law-right-whisker-Ω² α)
-          ( left-unit-law-left-whisker-Ω² β)))
-    ＝ (left-whisker-concat refl β ∙ right-whisker-concat α refl)
-    by commutative-right-whisker-left-whisker-concat α β
-    ＝ β ∙ α
-    by
+  inv-eckmann-hilton-Ω² α β =
+    ( inv
       ( horizontal-concat-Id²
-        ( left-unit-law-left-whisker-Ω² β)
-        ( right-unit-law-right-whisker-Ω² α))
+        ( right-unit-law-right-whisker-Ω² α)
+        ( left-unit-law-left-whisker-Ω² β))) ∙
+    ( commutative-right-whisker-left-whisker-concat α β) ∙
+    ( horizontal-concat-Id²
+      ( left-unit-law-left-whisker-Ω² β)
+      ( right-unit-law-right-whisker-Ω² α))
 ```
 
 We now prove that this Eckmann-Hilton identification "undoes" the previously
@@ -234,40 +219,28 @@ constructed Eckmann-Hilton identification. If we think of braiding `α` over `β
 then braiding `β` under `α`, we should end up with the trivial braid. Thus, we
 should have
 
-`eckmann-hilton-Ω² α β ∙ eckman-hilton-inverse-Ω² β α ＝ refl`
+`eckmann-hilton-Ω² α β ∙ inv-eckmann-hilton-Ω² β α ＝ refl`
 
 This is equivalent to,
 
-`inv eckman-hilton-inverse-Ω² β α ＝ eckmann-hilton-Ω² α β`
+`inv inv-eckmann-hilton-Ω² β α ＝ eckmann-hilton-Ω² α β`
 
-which is what we prove. Note that the above property is distinct from syllepsis,
-since it concerns two different construction of the Eckmann-Hilton
-identification. Further, it works for all 2-loops, not just 3-loops.
+which is what we prove.
+
+**Note.** that the above property is distinct from syllepsis, since it concerns
+two different construction of the Eckmann-Hilton identification. Further, it
+works for all 2-loops, not just 3-loops.
 
 ```agda
 module _
   {l : Level} {A : Pointed-Type l}
   where
 
-  eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² :
+  compute-inv-inv-eckmann-hilton-Ω² :
     (α β : type-Ω² (point-Pointed-Type A)) →
-    inv (eckmann-hilton-inverse-Ω² β α) ＝ (eckmann-hilton-Ω² α β)
-  eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² α β =
-    equational-reasoning
-    ( inv (eckmann-hilton-inverse-Ω² β α))
-    ＝
-        ( inv
-          ( horizontal-concat-Id²
-            ( left-unit-law-left-whisker-Ω² α)
-              ( right-unit-law-right-whisker-Ω² β))) ∙
-        ( inv
-          (
-            ( inv
-              ( horizontal-concat-Id²
-                ( right-unit-law-right-whisker-Ω² β)
-                ( left-unit-law-left-whisker-Ω² α))) ∙
-            ( commutative-right-whisker-left-whisker-concat β α)))
-    by distributive-inv-concat
+    inv (inv-eckmann-hilton-Ω² β α) ＝ eckmann-hilton-Ω² α β
+  compute-inv-inv-eckmann-hilton-Ω² α β =
+    ( distributive-inv-concat
       ( ( inv
           ( horizontal-concat-Id²
             ( right-unit-law-right-whisker-Ω² β)
@@ -275,19 +248,8 @@ module _
         ( commutative-right-whisker-left-whisker-concat β α))
       ( horizontal-concat-Id²
         ( left-unit-law-left-whisker-Ω² α)
-        ( right-unit-law-right-whisker-Ω² β))
-    ＝
-      ( inv
-        ( horizontal-concat-Id²
-          ( left-unit-law-left-whisker-Ω² α)
-            ( right-unit-law-right-whisker-Ω² β))) ∙
-      ( ( inv (commutative-right-whisker-left-whisker-concat β α)) ∙
-        ( inv
-          ( inv
-            ( horizontal-concat-Id²
-              ( right-unit-law-right-whisker-Ω² β)
-              ( left-unit-law-left-whisker-Ω² α)))))
-    by left-whisker-concat
+        ( right-unit-law-right-whisker-Ω² β))) ∙
+    ( left-whisker-concat
       ( inv
         ( horizontal-concat-Id²
           ( left-unit-law-left-whisker-Ω² α)
@@ -297,17 +259,8 @@ module _
           ( horizontal-concat-Id²
             ( right-unit-law-right-whisker-Ω² β)
             ( left-unit-law-left-whisker-Ω² α)))
-        ( commutative-right-whisker-left-whisker-concat β α))
-    ＝
-      ( inv
-        ( horizontal-concat-Id²
-          ( left-unit-law-left-whisker-Ω² α)
-            ( right-unit-law-right-whisker-Ω² β))) ∙
-      ( ( commutative-left-whisker-right-whisker-concat α β) ∙
-        ( horizontal-concat-Id²
-          ( right-unit-law-right-whisker-Ω² β)
-          ( left-unit-law-left-whisker-Ω² α)))
-    by left-whisker-concat
+        ( commutative-right-whisker-left-whisker-concat β α))) ∙
+    ( left-whisker-concat
       ( inv
         ( horizontal-concat-Id²
           ( left-unit-law-left-whisker-Ω² α)
@@ -317,10 +270,9 @@ module _
         ( inv-inv
           ( horizontal-concat-Id²
             ( right-unit-law-right-whisker-Ω² β)
-            ( left-unit-law-left-whisker-Ω² α))))
-    ＝ eckmann-hilton-Ω² α β
-    by inv (
-      assoc
+            ( left-unit-law-left-whisker-Ω² α))))) ∙
+    ( inv
+      ( assoc
         ( inv
           ( horizontal-concat-Id²
             ( left-unit-law-left-whisker-Ω² α)
@@ -328,12 +280,12 @@ module _
         ( commutative-left-whisker-right-whisker-concat α β)
         ( horizontal-concat-Id²
           ( right-unit-law-right-whisker-Ω² β)
-          ( left-unit-law-left-whisker-Ω² α)))
+          ( left-unit-law-left-whisker-Ω² α))))
 ```
 
 ## Properties
 
-### We can apply each `eckmann-hilton-Ω²` and `eckmann-hilton-inverse-Ω²` to a single 2-loop to obtain a 3-loop
+### We can apply each `eckmann-hilton-Ω²` and `inv-eckmann-hilton-Ω²` to a single 2-loop to obtain a 3-loop
 
 ```agda
 module _
@@ -346,11 +298,11 @@ module _
       ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
       ( eckmann-hilton-Ω² s s)
 
-  3-loop-eckmann-hilton-inverse-Ω² : type-Ω³ a
-  3-loop-eckmann-hilton-inverse-Ω² =
+  inv-3-loop-eckmann-hilton-Ω² : type-Ω³ a
+  inv-3-loop-eckmann-hilton-Ω² =
     map-equiv-pointed-equiv
       ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
-      ( eckmann-hilton-inverse-Ω² s s)
+      ( inv-eckmann-hilton-Ω² s s)
 ```
 
 ### The above two 3-loops are inverses
@@ -360,17 +312,26 @@ module _
   {l : Level} {A : UU l} {a : A} (s : type-Ω² a)
   where
 
-  Id-inv-3-loop-eckmann-hilton-inverse-Ω²-3-loop-eckmann-hilton-Ω² :
-    inv (3-loop-eckmann-hilton-inverse-Ω² s) ＝ 3-loop-eckmann-hilton-Ω² s
-  Id-inv-3-loop-eckmann-hilton-inverse-Ω²-3-loop-eckmann-hilton-Ω² =
+  compute-inv-inv-3-loop-eckmann-hilton-Ω² :
+    inv (inv-3-loop-eckmann-hilton-Ω² s) ＝ 3-loop-eckmann-hilton-Ω² s
+  compute-inv-inv-3-loop-eckmann-hilton-Ω² =
     ( inv
       ( preserves-inv-map-Ω
         ( pointed-map-pointed-equiv
           ( pointed-equiv-loop-pointed-identity (Ω (A , a)) (s ∙ s)))
-        (eckmann-hilton-inverse-Ω² s s))) ∙
+        (inv-eckmann-hilton-Ω² s s))) ∙
     ( ap
       ( map-Ω
         ( pointed-map-pointed-equiv
           ( pointed-equiv-loop-pointed-identity (Ω (A , a)) (s ∙ s))))
-      ( eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² s s))
+      ( compute-inv-inv-eckmann-hilton-Ω² s s))
 ```
+
+## External links
+
+- [The Eckmann-Hilton argument](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument)
+  at 1Lab.
+- [Eckmann-Hilton argument](https://ncatlab.org/nlab/show/Eckmann-Hilton+argument)
+  at $n$Lab.
+- [Eckmann-Hilton argument](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument)
+  at Wikipedia.

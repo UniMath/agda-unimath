@@ -242,8 +242,7 @@ module _
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
     inv (commutative-right-whisker-left-whisker-concat α β) ＝
     commutative-left-whisker-right-whisker-concat β α
-  compute-inv-commutative-left-whisker-right-whisker-concat refl refl =
-    refl
+  compute-inv-commutative-left-whisker-right-whisker-concat refl refl = refl
 ```
 
 ### Swapping the order of left and right whiskering of identifications
@@ -280,7 +279,7 @@ module _
     {a b c d : A} (p : a ＝ b) {r s : b ＝ c} (t : r ＝ s) (q : c ＝ d) →
     double-whisker-concat p t q ∙ assoc p s q ＝
     assoc p r q ∙ double-whisker-concat' p t q
-  swap-double-whisker-concat refl refl refl = refl
+  swap-double-whisker-concat refl refl _ = refl
 ```
 
 ### The action on identifications of concatenating by `refl` on the right
@@ -349,7 +348,7 @@ module _
   compute-inv-left-whisker-concat :
     {a b c : A} (p : a ＝ b) {q r : b ＝ c} (s : q ＝ r) →
     left-whisker-concat p (inv s) ＝ inv (left-whisker-concat p s)
-  compute-inv-left-whisker-concat p s = ap-inv (concat p _) s
+  compute-inv-left-whisker-concat p = ap-inv (concat p _)
 ```
 
 ### Right whiskering of identifications commutes with inverses of identifications

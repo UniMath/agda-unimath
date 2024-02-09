@@ -691,8 +691,8 @@ module _
   ap-yoneda-Id : {x y : A} → x ＝ʸ y → f x ＝ʸ f y
   ap-yoneda-Id = yoneda-eq-eq ∘ eq-ap-yoneda-Id
 
-  compute-ap-reflʸ : {x : A} → ap-yoneda-Id (reflʸ {x = x}) ＝ reflʸ
-  compute-ap-reflʸ = refl
+  compute-ap-refl-yoneda-Id : {x : A} → ap-yoneda-Id (reflʸ {x = x}) ＝ reflʸ
+  compute-ap-refl-yoneda-Id = refl
 
 module _
   {l1 : Level} {A : UU l1}
@@ -757,8 +757,8 @@ module _
   tr-yoneda-Id : {x y : A} → x ＝ʸ y → B x → B y
   tr-yoneda-Id = tr B ∘ eq-yoneda-eq
 
-  compute-tr-reflʸ : {x : A} → tr-yoneda-Id (reflʸ {x = x}) ＝ id
-  compute-tr-reflʸ = refl
+  compute-tr-refl-yoneda-Id : {x : A} → tr-yoneda-Id (reflʸ {x = x}) ＝ id
+  compute-tr-refl-yoneda-Id = refl
 ```
 
 ### Standard function extensionality with respect to Yoneda identifications
@@ -811,6 +811,33 @@ module _
 
   is-equiv-yoneda-eq-equiv : is-equiv yoneda-eq-equiv
   is-equiv-yoneda-eq-equiv = is-equiv-map-equiv equiv-yoneda-eq-equiv
+```
+
+### Whiskering of Yoneda identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  right-whisker-concat-yoenda-Id' :
+    {p q : x ＝ y} → p ＝ʸ q → (r : y ＝ z) → p ∙ᵣ r ＝ʸ q ∙ᵣ r
+  right-whisker-concat-yoenda-Id' α refl _ t = t ∙ eq-yoneda-eq α
+
+  right-whisker-concat-yoenda-Id :
+    {p q : x ＝ʸ y} → p ＝ʸ q → (r : y ＝ʸ z) → p ∙ʸ r ＝ʸ q ∙ʸ r
+  right-whisker-concat-yoenda-Id α r = ap-yoneda-Id (_∙ʸ r) α
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  right-unit-law-right-whisker-concat-yoenda-Id' :
+    {x y : A} {p q : x ＝ y} (α : p ＝ʸ q) →
+    right-whisker-concat-yoenda-Id' α refl ＝ α
+  right-unit-law-right-whisker-concat-yoenda-Id' α =
+    eq-multivariable-htpy 2
+      ( λ _ t → inv (commutative-preconcat-refl-Id-yoneda-Id α t))
 ```
 
 ### Horizontal concatenation of Yoneda identifications

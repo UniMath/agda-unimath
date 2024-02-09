@@ -282,7 +282,21 @@ interchange-Id² :
   ( vertical-concat-Id²
     ( horizontal-concat-Id² α γ)
     ( horizontal-concat-Id² β δ))
-interchange-Id² refl refl refl refl = refl
+interchange-Id² refl _ refl _ = refl
+
+inner-interchange-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p r : x ＝ y} {u v : y ＝ z}
+  (β : p ＝ r) (γ : u ＝ v) →
+  ( horizontal-concat-Id² β γ) ＝
+  ( vertical-concat-Id² (left-whisker-concat p γ) (right-whisker-concat β v))
+inner-interchange-Id² {u = refl} β refl = compute-right-horizontal-concat-Id² β
+
+outer-interchange-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u w : y ＝ z}
+  (α : p ＝ q) (δ : u ＝ w) →
+  ( horizontal-concat-Id² α δ) ＝
+  ( vertical-concat-Id² (right-whisker-concat α u) (left-whisker-concat q δ))
+outer-interchange-Id² {p = refl} refl δ = compute-left-horizontal-concat-Id² δ
 
 unit-law-α-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) (u : y ＝ z) →
@@ -290,12 +304,12 @@ unit-law-α-interchange-Id² :
     ( right-unit ∙ compute-right-horizontal-concat-Id² α)) ＝
   ( ( compute-right-horizontal-concat-Id² (α ∙ refl)) ∙
     ( ap (λ s → right-whisker-concat s u) right-unit))
-unit-law-α-interchange-Id² refl u = refl
+unit-law-α-interchange-Id² refl _ = refl
 
 unit-law-β-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (β : p ＝ q) (u : y ＝ z) →
   interchange-Id² refl β (refl {x = u}) refl ＝ refl
-unit-law-β-interchange-Id² refl u = refl
+unit-law-β-interchange-Id² refl _ = refl
 
 unit-law-γ-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {u v : y ＝ z} (γ : u ＝ v) →
@@ -303,12 +317,12 @@ unit-law-γ-interchange-Id² :
     ( right-unit ∙ compute-left-horizontal-concat-Id² γ)) ＝
   ( ( compute-left-horizontal-concat-Id² (γ ∙ refl)) ∙
     ( ap (left-whisker-concat p) right-unit))
-unit-law-γ-interchange-Id² p refl = refl
+unit-law-γ-interchange-Id² _ refl = refl
 
 unit-law-δ-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {u v : y ＝ z} (δ : u ＝ v) →
   interchange-Id² (refl {x = p}) refl refl δ ＝ refl
-unit-law-δ-interchange-Id² p refl = refl
+unit-law-δ-interchange-Id² _ refl = refl
 ```
 
 ## Properties of 3-paths
