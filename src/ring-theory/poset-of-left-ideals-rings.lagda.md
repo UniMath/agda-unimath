@@ -14,7 +14,6 @@ open import foundation.powersets
 open import foundation.propositions
 open import foundation.reflexive-relations
 open import foundation.subtypes
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import order-theory.large-posets

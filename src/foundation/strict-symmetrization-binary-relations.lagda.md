@@ -7,28 +7,16 @@ module foundation.strict-symmetrization-binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.subtypes
-open import foundation.contratransitive-binary-relations
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.binary-relations
-open import foundation.transitive-binary-relations
+open import foundation.contratransitive-binary-relations
+open import foundation.dependent-pair-types
 open import foundation.reflexive-relations
-open import foundation.univalence
+open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.empty-types
-open import foundation-core.equivalences
-open import foundation-core.retractions
 open import foundation-core.identity-types
-open import foundation-core.negation
-open import foundation-core.propositions
-open import foundation-core.torsorial-type-families
+open import foundation-core.retractions
 ```
 
 </details>
@@ -46,14 +34,15 @@ have a symmetry operation `sym r : R' y x` such that
 ```
 
 If the underlying binary relation is
-[reflexive](foundation.reflexive-relations.md), then this construction has a map
-`R → Rˢ`. if the binary relation is (right)
+[reflexive](foundation.reflexive-relations.md), then this construction has a
+unit map `R → Rˢ`. If the binary relation is (right)
 [contratransitive](foundation.contratransitive-binary-relations.md), then it has
-a map `Rˢ → R`.
+a counit map `Rˢ → R`.
 
-An essential fact about the strict symmetrization as defined here, is that the
-construction is idempotent on identity relations. E.g. the strict symmetrization
-of the identity type family is equivalent to the identity type family.
+An essential fact about the strict symmetrization of a relation as defined here
+is that the construction is idempotent on identity relations. E.g. the strict
+symmetrization of the identity type family is equivalent to the identity type
+family.
 
 ## Definition
 

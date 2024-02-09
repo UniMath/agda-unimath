@@ -7,19 +7,12 @@ module wild-category-theory.large-wild-1-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import wild-category-theory.large-wild-⟨0,1⟩-precategories
-
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.large-binary-relations
 open import foundation.binary-relations
-open import foundation.strict-symmetrization-binary-relations
 open import foundation.contratransitive-binary-relations
+open import foundation.strict-symmetrization-binary-relations
 open import foundation.universe-levels
+
+open import wild-category-theory.large-wild-⟨0,1⟩-precategories
 ```
 
 </details>

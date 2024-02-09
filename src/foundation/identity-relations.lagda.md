@@ -7,22 +7,12 @@ module foundation.identity-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.families-of-equivalences
 open import foundation-core.identity-types
-open import foundation-core.propositions
-open import foundation-core.sections
-open import foundation-core.torsorial-type-families
-open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -42,18 +32,6 @@ such that the canonical comparison map
 is an [equivalence](foundation-core.equivalences.md).
 
 ## Definitions
-
-### The canonical comparison map from the standard identity relation on `A` to a reflexive relation
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (R : Reflexive-Relation l2 A)
-  where
-
-  leq-eq-Reflextive-Relation :
-    (x y : A) (p : x ＝ y) → rel-Reflexive-Relation R x y
-  leq-eq-Reflextive-Relation x .x refl = is-reflexive-Reflexive-Relation R x
-```
 
 ### The predicate of being an identity relation
 

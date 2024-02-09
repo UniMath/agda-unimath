@@ -15,9 +15,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.reflexive-relations
 open import foundation.tight-apartness-relations
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types

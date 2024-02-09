@@ -7,13 +7,11 @@ module foundation.mere-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.decidable-equality
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.univalence
 open import foundation.universe-levels
 

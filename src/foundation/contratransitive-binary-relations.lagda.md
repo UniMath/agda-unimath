@@ -7,24 +7,14 @@ module foundation.contratransitive-binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.subtypes
 open import foundation.binary-relations
+open import foundation.dependent-pair-types
+open import foundation.iterated-dependent-product-types
 open import foundation.reflexive-relations
 open import foundation.transitive-binary-relations
-open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.empty-types
-open import foundation-core.equivalences
-open import foundation-core.identity-types
-open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.torsorial-type-families
 ```
 
 </details>
