@@ -51,6 +51,10 @@ If the underlying binary relation is
 [contratransitive](foundation.contratransitive-binary-relations.md), then it has
 a map `Rˢ → R`.
 
+An essential fact about the strict symmetrization as defined here, is that the
+construction is idempotent on identity relations. E.g. the strict symmetrization
+of the identity type family is equivalent to the identity type family.
+
 ## Definition
 
 ### The strict symmetrization construction on binary relations
