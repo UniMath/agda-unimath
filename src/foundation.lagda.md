@@ -358,6 +358,7 @@ open import foundation.torsorial-type-families public
 open import foundation.total-partial-elements public
 open import foundation.total-partial-functions public
 open import foundation.transfinite-cocomposition-of-maps public
+open import foundation.transitive-binary-relations public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-homotopies public

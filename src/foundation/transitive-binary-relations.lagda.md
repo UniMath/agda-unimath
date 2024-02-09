@@ -7,12 +7,12 @@ module foundation.transitive-binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.subtypes
-open import foundation.binary-relations
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -40,12 +40,7 @@ triple `x y z : A`, there is a binary operation
 
 ## Definition
 
-### The predicate of being a transitive relation
-
-A relation `R` on a type `A` is said to be
-{{#concept "transitive" Disambiguation="relation" Agda=is-transitive}} if it
-comes [equipped](foundation.structure.md) with a function
-`(x y z : A) → R y z → R x y → R x z`.
+### The structure of being a transitive relation
 
 ```agda
 module _
@@ -76,4 +71,44 @@ module _
       ( λ x y z →
         is-prop-function-type
           ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))
+```
+
+### The type of transitive relations
+
+```agda
+Transitive-Relation : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+Transitive-Relation l2 A = Σ (Relation l2 A) (is-transitive)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Transitive-Relation l2 A)
+  where
+
+  rel-Transitive-Relation : Relation l2 A
+  rel-Transitive-Relation = pr1 R
+
+  is-transitive-rel-Transitive-Relation : is-transitive rel-Transitive-Relation
+  is-transitive-rel-Transitive-Relation = pr2 R
+```
+
+### The type of transitive relations valued in propositions
+
+```agda
+Transitive-Relation-Prop : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+Transitive-Relation-Prop l2 A =
+  Σ (Relation-Prop l2 A) (is-transitive-Relation-Prop)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Transitive-Relation-Prop l2 A)
+  where
+
+  rel-prop-Transitive-Relation-Prop : Relation-Prop l2 A
+  rel-prop-Transitive-Relation-Prop = pr1 R
+
+  rel-Transitive-Relation-Prop : Relation l2 A
+  rel-Transitive-Relation-Prop =
+    type-Relation-Prop rel-prop-Transitive-Relation-Prop
+
+  is-transitive-rel-Transitive-Relation-Prop :
+    is-transitive rel-Transitive-Relation-Prop
+  is-transitive-rel-Transitive-Relation-Prop = pr2 R
 ```
