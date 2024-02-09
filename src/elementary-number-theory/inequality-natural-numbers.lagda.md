@@ -23,6 +23,8 @@ open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.reflexive-relations
+open import foundation.transitive-binary-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 

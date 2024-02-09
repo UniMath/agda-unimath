@@ -9,6 +9,8 @@ module foundation.morphisms-binary-relations where
 ```agda
 open import foundation.binary-homotopies
 open import foundation.binary-relations
+open import foundation.reflexive-relations
+open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

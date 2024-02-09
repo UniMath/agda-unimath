@@ -18,8 +18,10 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
+open import foundation.reflexive-relations
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.transitive-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

@@ -12,6 +12,8 @@ open import foundation.dependent-pair-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.reflexive-relations
+open import foundation.transitive-binary-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 

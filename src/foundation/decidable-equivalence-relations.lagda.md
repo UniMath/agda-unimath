@@ -25,9 +25,11 @@ open import foundation.images
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.reflexive-relations
 open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.transitive-binary-relations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image

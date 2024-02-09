@@ -17,7 +17,9 @@ open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.reflexive-relations
 open import foundation.sets
+open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 ```
 

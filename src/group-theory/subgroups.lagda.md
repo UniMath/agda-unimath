@@ -26,9 +26,11 @@ open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.reflexive-relations
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.transitive-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

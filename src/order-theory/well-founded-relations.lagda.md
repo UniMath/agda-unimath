@@ -14,6 +14,8 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.reflexive-relations
+open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import order-theory.accessible-elements-relations
