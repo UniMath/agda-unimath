@@ -173,13 +173,13 @@ Given a commuting square of homotopies
 the square of homotopies
 
 ```text
-              bottom
-           h -------> i
-           |          |
-    left⁻¹ |          | right⁻¹
-           ∨          ∨
-           f -------> g
-               top
+            bottom
+         h -------> i
+         |          |
+  left⁻¹ |          | right⁻¹
+         ∨          ∨
+         f -------> g
+             top
 ```
 
 commutes.
@@ -584,7 +584,7 @@ we may consider four ways of attaching new homotopies to it:
                       top
               f --------------> g
               |                 |
-     left ∙h H |                 | right
+    left ∙h H |                 | right
               ∨                 ∨
               u --------------> i.
                  H⁻¹ ∙h bottom
@@ -606,7 +606,7 @@ we may consider four ways of attaching new homotopies to it:
    commuting square of homotopies
 
    ```text
-             top ∙h H
+            top ∙h H
           f --------> u
           |           |
      left |           | H⁻¹ ∙h right
