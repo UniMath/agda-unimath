@@ -9,12 +9,12 @@ module foundation-core.commuting-squares-of-homotopies where
 ```agda
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation-core.whiskering-homotopies-concatenation
 
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.whiskering-homotopies-concatenation
 ```
 
 </details>
@@ -1258,5 +1258,377 @@ module _
   left-whisker-concat-vertical-refl-coherence-square-homotopies' H K x =
     left-whisker-concat-vertical-refl-coherence-square-identifications'
       ( H x)
+      ( K x)
+```
+
+### Left whiskering horizontal concatenations of squares with homotopies
+
+Consider a commuting diagram of homotopies of the form
+
+```text
+            top-left        top-right
+       a -------------> c -------------> e
+       |                |                |
+  left |                | middle         | right
+       ∨                ∨                ∨
+       b -------------> d -------------> f
+          bottom-left      bottom-right
+```
+
+and consider a homotopy `H : f ~ a`. Then the left whiskering of `H` and the
+horizontal concatenation of coherences of commuting squares is up to
+associativity the horizontal concatenation of the squares
+
+```text
+               H ∙h top-left      top-right
+            u -------------> c -------------> e
+            |                |                |
+  H ∙h left |                | middle         | right
+            ∨                ∨                ∨
+            b -------------> d -------------> f
+               bottom-left      bottom-right
+```
+
+where the left square is the left whiskering of `H` and the original left
+square.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  left-whisker-concat-horizontal-pasting-coherence-square-homotopies :
+    {u a b c d e f : (x : A) → B x} (H : u ~ a)
+    (top-left : a ~ c) (top-right : c ~ e)
+    (left : a ~ b) (middle : c ~ d) (right : e ~ f)
+    (bottom-left : b ~ d) (bottom-right : d ~ f)
+    (l : coherence-square-homotopies top-left left middle bottom-left)
+    (r : coherence-square-homotopies top-right middle right bottom-right) →
+    left-whisker-concat-coherence-square-homotopies H
+      ( top-left ∙h top-right)
+      ( left)
+      ( right)
+      ( bottom-left ∙h bottom-right)
+      ( horizontal-pasting-coherence-square-homotopies
+        ( top-left)
+        ( top-right)
+        ( left)
+        ( middle)
+        ( right)
+        ( bottom-left)
+        ( bottom-right)
+        ( l)
+        ( r)) ~
+    horizontal-pasting-coherence-square-homotopies
+      ( H ∙h top-left)
+      ( top-right)
+      ( H ∙h left)
+      ( middle)
+      ( right)
+      ( bottom-left)
+      ( bottom-right)
+      ( left-whisker-concat-coherence-square-homotopies H
+        ( top-left)
+        ( left)
+        ( middle)
+        ( bottom-left)
+        ( l))
+      ( r) ∙h
+    right-whisker-concat-htpy
+      ( assoc-htpy H top-left top-right)
+      ( right)
+  left-whisker-concat-horizontal-pasting-coherence-square-homotopies
+    H top-left top-right left middle right bottom-left bottom-right l r x =
+    left-whisker-concat-horizontal-pasting-coherence-square-identifications
+      ( H x)
+      ( top-left x)
+      ( top-right x)
+      ( left x)
+      ( middle x)
+      ( right x)
+      ( bottom-left x)
+      ( bottom-right x)
+      ( l x)
+      ( r x)
+```
+
+### Left whiskering vertical concatenations of squares with homotopies
+
+Consider two squares of homotopies as in the diagram
+
+```text
+                  top
+              a --------> b
+              |           |
+     top-left |           | top-right
+              ∨  middle   ∨
+              c --------> d
+              |           |
+  bottom-left |           | bottom-right
+              ∨           ∨
+              e --------> f
+                 bottom
+```
+
+and consider a homotopy `H : f ~ a`. Then the left whiskering of `H` with the
+vertical pasting of the two squares above is up to associativity the vertical
+pasting of the squares
+
+```text
+                  H ∙h top
+                u --------> b
+                |           |
+  H ∙h top-left |           | top-right
+                ∨  middle   ∨
+                c --------> d
+                |           |
+    bottom-left |           | bottom-right
+                ∨           ∨
+                e --------> f.
+                   bottom
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  left-whisker-concat-vertical-concat-coherence-square-homotopies :
+    {u a b c d e f : (x : A) → B x} (H : u ~ a) →
+    (top : a ~ b) (top-left : a ~ c) (top-right : b ~ d) (middle : c ~ d)
+    (bottom-left : c ~ e) (bottom-right : d ~ f) (bottom : e ~ f)
+    (t : coherence-square-homotopies top top-left top-right middle) →
+    (b :
+      coherence-square-homotopies middle bottom-left bottom-right bottom) →
+    right-whisker-concat-htpy (assoc-htpy H top-left bottom-left) bottom ∙h
+    left-whisker-concat-coherence-square-homotopies H
+      ( top)
+      ( top-left ∙h bottom-left)
+      ( top-right ∙h bottom-right)
+      ( bottom)
+      ( vertical-pasting-coherence-square-homotopies
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( t)
+        ( b)) ~
+    vertical-pasting-coherence-square-homotopies
+      ( H ∙h top)
+      ( H ∙h top-left)
+      ( top-right)
+      ( middle)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom)
+      ( left-whisker-concat-coherence-square-homotopies H
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( t))
+      ( b)
+  left-whisker-concat-vertical-concat-coherence-square-homotopies
+    H top top-left top-right middle bottom-left bottom-right bottom t b x =
+    left-whisker-concat-vertical-concat-coherence-square-identifications
+      ( H x)
+      ( top x)
+      ( top-left x)
+      ( top-right x)
+      ( middle x)
+      ( bottom-left x)
+      ( bottom-right x)
+      ( bottom x)
+      ( t x)
+      ( b x)
+```
+
+### Right whiskering horizontal pastings of commuting squares of homotopies
+
+Consider a commuting diagram of homotopies of the form
+
+```text
+            top-left        top-right
+       a -------------> c -------------> e
+       |                |                |
+  left |                | middle         | right
+       ∨                ∨                ∨
+       b -------------> d -------------> f
+          bottom-left      bottom-right
+```
+
+and consider a homotopy `K : f ~ g`. Then the right whiskering of the horizontal
+pasting of the squares above is up to associativity the horizontal pasting of
+the squares
+
+```text
+            top-left           top-right
+       a -------------> c ------------------> e
+       |                |                     |
+  left |                | middle              | right ∙h K
+       ∨                ∨                     ∨
+       b -------------> d ------------------> g
+          bottom-left      bottom-right ∙h K
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  right-whisker-concat-horizontal-pasting-coherence-square-homotopies :
+    {a b c d e f g : (x : A) → B x}
+    (top-left : a ~ c) (top-right : c ~ e)
+    (left : a ~ b) (middle : c ~ d) (right : e ~ f)
+    (bottom-left : b ~ d) (bottom-right : d ~ f)
+    (l : coherence-square-homotopies top-left left middle bottom-left) →
+    (r : coherence-square-homotopies top-right middle right bottom-right) →
+    (K : f ~ g) →
+    right-whisker-concat-coherence-square-homotopies
+      ( top-left ∙h top-right)
+      ( left)
+      ( right)
+      ( bottom-left ∙h bottom-right)
+      ( horizontal-pasting-coherence-square-homotopies
+        ( top-left)
+        ( top-right)
+        ( left)
+        ( middle)
+        ( right)
+        ( bottom-left)
+        ( bottom-right)
+        ( l)
+        ( r))
+      ( K) ~
+    left-whisker-concat-htpy left (assoc-htpy bottom-left bottom-right K) ∙h
+    horizontal-pasting-coherence-square-homotopies
+      ( top-left)
+      ( top-right)
+      ( left)
+      ( middle)
+      ( right ∙h K)
+      ( bottom-left)
+      ( bottom-right ∙h K)
+      ( l)
+      ( right-whisker-concat-coherence-square-homotopies
+        ( top-right)
+        ( middle)
+        ( right)
+        ( bottom-right)
+        ( r)
+        ( K))
+  right-whisker-concat-horizontal-pasting-coherence-square-homotopies
+    top-left top-right left middle right bottom-left bottom-right l r K x =
+    right-whisker-concat-horizontal-pasting-coherence-square-identifications
+      ( top-left x)
+      ( top-right x)
+      ( left x)
+      ( middle x)
+      ( right x)
+      ( bottom-left x)
+      ( bottom-right x)
+      ( l x)
+      ( r x)
+      ( K x)
+```
+
+### Right whiskering vertical concatenations of squares with homotopies
+
+Consider two squares of homotopies as in the diagram
+
+```text
+                  top
+              a --------> b
+              |           |
+     top-left |           | top-right
+              ∨  middle   ∨
+              c --------> d
+              |           |
+  bottom-left |           | bottom-right
+              ∨           ∨
+              e --------> f
+                 bottom
+```
+
+and consider a homotopy `K : f ~ g`. Then the right whiskering of the vertical
+pasting of the two squares above with `K` is up to associativity the vertical
+pasting of the squares
+
+```text
+                     top
+              a ------------> b
+              |               |
+     top-left |               | top-right
+              ∨    middle     ∨
+              c ------------> d
+              |               |
+  bottom-left |               | bottom-right ∙h K
+              ∨               ∨
+              e ------------> g.
+                 bottom ∙h K
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  right-whisker-concat-vertical-pasting-coherence-square-homotopies :
+    {a b c d e f g : (x : A) → B x}
+    (top : a ~ b) (top-left : a ~ c) (top-right : b ~ d)
+    (middle : c ~ d)
+    (bottom-left : c ~ e) (bottom-right : d ~ f) (bottom : e ~ f)
+    (t : coherence-square-homotopies top top-left top-right middle) →
+    (b :
+      coherence-square-homotopies middle bottom-left bottom-right bottom) →
+    (K : f ~ g) →
+    right-whisker-concat-coherence-square-homotopies
+      ( top)
+      ( top-left ∙h bottom-left)
+      ( top-right ∙h bottom-right)
+      ( bottom)
+      ( vertical-pasting-coherence-square-homotopies
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( middle)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( t)
+        ( b))
+      ( K) ∙h
+    left-whisker-concat-htpy top (assoc-htpy top-right bottom-right K) ~
+    vertical-pasting-coherence-square-homotopies
+      ( top)
+      ( top-left)
+      ( top-right)
+      ( middle)
+      ( bottom-left)
+      ( bottom-right ∙h K)
+      ( bottom ∙h K)
+      ( t)
+      ( right-whisker-concat-coherence-square-homotopies
+        ( middle)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( b)
+        ( K))
+  right-whisker-concat-vertical-pasting-coherence-square-homotopies
+    top top-left top-right middle bottom-left bottom-right bottom t b K x =
+    right-whisker-concat-vertical-pasting-coherence-square-identifications
+      ( top x)
+      ( top-left x)
+      ( top-right x)
+      ( middle x)
+      ( bottom-left x)
+      ( bottom-right x)
+      ( bottom x)
+      ( t x)
+      ( b x)
       ( K x)
 ```
