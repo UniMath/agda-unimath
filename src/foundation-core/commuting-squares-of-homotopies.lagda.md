@@ -7,9 +7,9 @@ module foundation-core.commuting-squares-of-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-identifications
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
 open import foundation-core.homotopies
 ```
 
@@ -39,7 +39,7 @@ of the square.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (f : A) → B f}
   (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
   where
 
@@ -50,4 +50,85 @@ module _
   coherence-square-homotopies' : UU (l1 ⊔ l2)
   coherence-square-homotopies' =
     top ∙h right ~ left ∙h bottom
+```
+
+### Inverting squares of homotopies horizontally
+
+Given a commuting square of homotopies
+
+```text
+           top
+       f -------> g
+       |          |
+  left |          | right
+       ∨          ∨
+       h -------> i,
+          bottom
+```
+
+the square of homotopies
+
+```text
+             inv top
+        g ------------> f
+        |               |
+  right |               | left
+        ∨               ∨
+        i ------------> h
+           inv bottom
+```
+
+commutes.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  where
+
+  horizontal-inv-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies (inv-htpy top) right left (inv-htpy bottom)
+  horizontal-inv-coherence-square-homotopies top left right bottom = {!   !}
+```
+
+### Inverting squares of homotopies vertically
+
+Given a commuting square of homotopies
+
+```text
+           top
+       f -------> g
+       |          |
+  left |          | right
+       ∨          ∨
+       h -------> i,
+          bottom
+```
+
+the square of homotopies
+
+```text
+              bottom
+           h -------> i
+           |          |
+  inv left |          | inv right
+           ∨          ∨
+           f -------> g
+               top
+```
+
+commutes.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  where
+
+  vertical-inv-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies bottom (inv-htpy left) (inv-htpy right) top
+  vertical-inv-coherence-square-homotopies top left right bottom H x =
+    {! vertical-inv-coherence-square-identifications (top x) (left x) (right x) (bottom x) (H x)  !}
 ```

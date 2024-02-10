@@ -10,11 +10,13 @@ open import foundation-core.coherently-invertible-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-maps
@@ -81,6 +83,81 @@ module _
         ( is-prop-is-coherently-invertible)
         ( is-equiv-is-coherently-invertible)
 ```
+
+### Coherently invertible maps are coherently invertible in both senses
+
+This is Lemma 4.2.2 in _Homotopy Type Theory – Univalent Foundations of
+Mathematics_.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  inv-coh-is-transpose-coherently-invertible-is-coherently-invertible' :
+    {f : A → B} (H : is-coherently-invertible f) →
+    ( ( map-inv-is-coherently-invertible H) ·l
+      ( is-section-map-inv-is-coherently-invertible H) ·r
+      ( f ∘ map-inv-is-coherently-invertible H)) ~
+    ( ( map-inv-is-coherently-invertible H ∘ f) ·l
+      ( is-retraction-map-inv-is-coherently-invertible H) ·r
+      ( map-inv-is-coherently-invertible H))
+  inv-coh-is-transpose-coherently-invertible-is-coherently-invertible' {f} H =
+    ( preserves-comp-right-whisker-comp
+      ( f)
+      ( map-inv-is-coherently-invertible H)
+      ( ( map-inv-is-coherently-invertible H) ·l
+        ( is-section-map-inv-is-coherently-invertible H))) ∙h
+    ( double-whisker-comp²
+      ( map-inv-is-coherently-invertible H)
+      ( coh-is-coherently-invertible H)
+      ( map-inv-is-coherently-invertible H)) ∙h
+    ( preserves-comp-left-whisker-comp
+      ( map-inv-is-coherently-invertible H)
+      ( f)
+      ( is-retraction-map-inv-is-coherently-invertible H ·r
+        map-inv-is-coherently-invertible H))
+
+  coh-is-transpose-coherently-invertible-is-coherently-invertible' :
+    {f : A → B} (H : is-coherently-invertible f) →
+    ( ( map-inv-is-coherently-invertible H ∘ f) ·l
+      ( is-retraction-map-inv-is-coherently-invertible H) ·r
+      ( map-inv-is-coherently-invertible H)) ~
+    ( ( map-inv-is-coherently-invertible H) ·l
+      ( is-section-map-inv-is-coherently-invertible H) ·r
+      ( f ∘ map-inv-is-coherently-invertible H))
+  coh-is-transpose-coherently-invertible-is-coherently-invertible' {f} H =
+    ( inv-preserves-comp-left-whisker-comp
+      ( map-inv-is-coherently-invertible H)
+      ( f)
+      ( ( is-retraction-map-inv-is-coherently-invertible H) ·r
+        ( map-inv-is-coherently-invertible H))) ∙h
+    ( double-whisker-comp²
+      ( map-inv-is-coherently-invertible H)
+      ( inv-htpy (coh-is-coherently-invertible H))
+      ( map-inv-is-coherently-invertible H)) ∙h
+    ( preserves-comp-right-whisker-comp
+      ( f)
+      ( map-inv-is-coherently-invertible H)
+      ( ( map-inv-is-coherently-invertible H) ·l
+        ( is-section-map-inv-is-coherently-invertible H)))
+
+  coh-is-transpose-coherently-invertible-is-coherently-invertible :
+    {f : A → B} (H : is-coherently-invertible f) →
+    coherence-is-transpose-coherently-invertible
+      ( f)
+      ( map-inv-is-coherently-invertible H)
+      ( is-section-map-inv-is-coherently-invertible H)
+      ( is-retraction-map-inv-is-coherently-invertible H)
+  coh-is-transpose-coherently-invertible-is-coherently-invertible {f} H =
+    {!   !}
+```
+
+## References
+
+1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
+   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
+   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
 
 ## See also
 
