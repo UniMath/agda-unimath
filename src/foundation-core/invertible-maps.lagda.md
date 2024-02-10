@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
@@ -42,11 +43,11 @@ module _
   is-inverse f g = ((f ∘ g) ~ id) × ((g ∘ f) ~ id)
 
   is-section-is-inverse :
-    {f : A → B} {g : B → A} → is-inverse f g → (f ∘ g) ~ id
+    {f : A → B} {g : B → A} → is-inverse f g → f ∘ g ~ id
   is-section-is-inverse = pr1
 
   is-retraction-is-inverse :
-    {f : A → B} {g : B → A} → is-inverse f g → (g ∘ f) ~ id
+    {f : A → B} {g : B → A} → is-inverse f g → g ∘ f ~ id
   is-retraction-is-inverse = pr2
 ```
 
@@ -118,22 +119,108 @@ module _
 
 ## Properties
 
-### The invertible inverse of an invertible map
+### The identity invertible map
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 : Level} {A : UU l1}
   where
 
-  inv-is-inverse : {g : B → A} → is-inverse f g → is-inverse g f
-  pr1 (inv-is-inverse {g} H) = is-retraction-map-inv-is-invertible (g , H)
-  pr2 (inv-is-inverse {g} H) = is-section-map-inv-is-invertible (g , H)
+  is-inverse-id : is-inverse id (id {A = A})
+  pr1 is-inverse-id = refl-htpy
+  pr2 is-inverse-id = refl-htpy
 
-  inv-is-invertible :
-    (g : is-invertible f) → is-invertible (map-inv-is-invertible g)
-  pr1 (inv-is-invertible g) = f
-  pr2 (inv-is-invertible g) =
-    inv-is-inverse (is-inverse-map-inv-is-invertible g)
+  is-invertible-id : is-invertible (id {A = A})
+  pr1 is-invertible-id = id
+  pr2 is-invertible-id = is-inverse-id
+
+  id-invertible-map : invertible-map A A
+  pr1 id-invertible-map = id
+  pr2 id-invertible-map = is-invertible-id
+```
+
+### The inverse of an invertible map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-inverse-inv-is-inverse :
+    {f : A → B} {g : B → A} → is-inverse f g → is-inverse g f
+  pr1 (is-inverse-inv-is-inverse {f} {g} H) =
+    is-retraction-map-inv-is-invertible (g , H)
+  pr2 (is-inverse-inv-is-inverse {f} {g} H) =
+    is-section-map-inv-is-invertible (g , H)
+
+  is-invertible-map-inv-is-invertible :
+    {f : A → B} (g : is-invertible f) → is-invertible (map-inv-is-invertible g)
+  pr1 (is-invertible-map-inv-is-invertible {f} g) = f
+  pr2 (is-invertible-map-inv-is-invertible {f} g) =
+    is-inverse-inv-is-inverse {f} (is-inverse-map-inv-is-invertible g)
+
+  is-invertible-map-inv-invertible-map :
+    (f : invertible-map A B) → is-invertible (map-inv-invertible-map f)
+  is-invertible-map-inv-invertible-map f =
+    is-invertible-map-inv-is-invertible (is-invertible-map-invertible-map f)
+
+  inv-invertible-map : invertible-map A B → invertible-map B A
+  pr1 (inv-invertible-map f) = map-inv-invertible-map f
+  pr2 (inv-invertible-map f) = is-invertible-map-inv-invertible-map f
+```
+
+### The inversion operation on invertible maps is a strict involution
+
+The inversion operation on invertible maps a strict involution, where, by strict
+involution, we mean that `inv-invertible-map (inv-invertible-map f) ≐ f`
+syntactically. This can be observed by the fact that the type-checker accepts
+`refl` as proof of this equation.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-involution-inv-invertible-map :
+    {f : invertible-map A B} → inv-invertible-map (inv-invertible-map f) ＝ f
+  is-involution-inv-invertible-map = refl
+```
+
+### Composition of invertible maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  is-invertible-comp :
+    (g : B → C) (f : A → B) →
+    is-invertible g → is-invertible f → is-invertible (g ∘ f)
+  pr1 (is-invertible-comp g f G F) =
+    map-inv-is-invertible F ∘ map-inv-is-invertible G
+  pr1 (pr2 (is-invertible-comp g f G F)) =
+    is-section-map-section-comp g f
+      ( section-is-invertible F)
+      ( section-is-invertible G)
+  pr2 (pr2 (is-invertible-comp g f G F)) =
+    is-retraction-map-retraction-comp g f
+      ( retraction-is-invertible G)
+      ( retraction-is-invertible F)
+
+  is-invertible-map-comp-invertible-map :
+    (g : invertible-map B C) (f : invertible-map A B) →
+    is-invertible (map-invertible-map g ∘ map-invertible-map f)
+  is-invertible-map-comp-invertible-map g f =
+    is-invertible-comp
+      ( map-invertible-map g)
+      ( map-invertible-map f)
+      ( is-invertible-map-invertible-map g)
+      ( is-invertible-map-invertible-map f)
+
+  comp-invertible-map :
+    invertible-map B C → invertible-map A B → invertible-map A C
+  pr1 (comp-invertible-map g f) = map-invertible-map g ∘ map-invertible-map f
+  pr2 (comp-invertible-map g f) = is-invertible-map-comp-invertible-map g f
 ```
 
 ## See also

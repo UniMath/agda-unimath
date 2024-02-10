@@ -30,12 +30,12 @@ open import foundation-core.whiskering-homotopies-concatenation
 
 A [(two-sided) inverse](foundation-core.invertible-maps.md) for a map
 `f : A → B` is a map `g : B → A` equipped with
-[homotopies](foundation-core.homotopies.md) ` f ∘ g ~ id` and `g ∘ f ~ id`. Such
-data, however is [structure](foundation.structure.md) on the map `f`, and not
-generally a [property](foundation-core.propositions.md). One way to make the
-type of inverses into a property is by adding a single coherence condition
-between the homotopies of the inverse, asking that the following diagram
-commmutes
+[homotopies](foundation-core.homotopies.md) ` G : f ∘ g ~ id` and
+`H : g ∘ f ~ id`. Such data, however is [structure](foundation.structure.md) on
+the map `f`, and not generally a [property](foundation-core.propositions.md).
+One way to make the type of inverses into a property is by adding a single
+coherence condition between the homotopies of the inverse, asking that the
+following diagram commmutes
 
 ```text
                G ·r f
@@ -86,7 +86,7 @@ module _
       ( λ g →
         Σ (f ∘ g ~ id)
           ( λ G →
-            Σ (g ∘ f ~ id)
+            Σ ( g ∘ f ~ id)
               ( λ H → coherence-is-coherently-invertible f g G H)))
 
 module _
@@ -214,7 +214,7 @@ module _
   is-transpose-coherently-invertible f =
     Σ ( B → A)
       ( λ g →
-        Σ (f ∘ g ~ id)
+        Σ ( f ∘ g ~ id)
           ( λ G →
             Σ (g ∘ f ~ id)
               ( λ H → coherence-is-transpose-coherently-invertible f g G H)))
