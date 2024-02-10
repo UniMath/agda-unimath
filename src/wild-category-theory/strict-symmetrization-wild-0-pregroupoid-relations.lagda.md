@@ -10,16 +10,17 @@ module wild-category-theory.strict-symmetrization-wild-0-pregroupoid-relations w
 open import foundation.binary-relations
 open import foundation.contratransitive-binary-relations
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.reflexive-relations
 open import foundation.strict-symmetrization-binary-relations
 open import foundation.transitive-binary-relations
 open import foundation.universe-levels
-open import foundation.function-types
-open import wild-category-theory.wild-0-pregroupoid-relations
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.identity-types
 open import foundation-core.retractions
+
+open import wild-category-theory.wild-0-pregroupoid-relations
 ```
 
 </details>
@@ -90,8 +91,8 @@ module _
     sim-Wild-0-Pregroupoid-Relation R x y
   counit-strict-symmetrization-Wild-0-Pregroupoid-Relation =
     counit-strict-symmetrization-Relation
-       ( sim-Wild-0-Pregroupoid-Relation R)
-       ( λ p q →
+      ( sim-Wild-0-Pregroupoid-Relation R)
+      ( λ p q →
         comp-Wild-0-Pregroupoid-Relation R
           ( q)
           ( inv-Wild-0-Pregroupoid-Relation R p))
