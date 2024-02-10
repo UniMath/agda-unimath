@@ -7,7 +7,11 @@ module wild-category-theory.large-wild-⟨0,1⟩-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import wild-category-theory.wild-0-pregroupoid-relations
 ```
 
 </details>
@@ -18,11 +22,12 @@ A {{#concept "large wild (0,1)-precategory" }} is...
 
 ## Definitions
 
-### Large wild 0-precategories
+### Large wild (0,1)-precategories
 
 ```agda
 record
-  Large-Wild-⟨0,1⟩-Precategory (α : Level → Level) (β : Level → Level → Level)
+  Large-Wild-⟨0,1⟩-Precategory
+  (α : Level → Level) (β γ : Level → Level → Level)
   : UUω
   where
 
@@ -51,6 +56,68 @@ record
       {l1 : Level}
       {X : obj-Large-Wild-⟨0,1⟩-Precategory l1} →
       hom-Large-Wild-⟨0,1⟩-Precategory X X
+
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+      {l1 l2 : Level}
+      {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
+      {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+      Relation
+        ( γ l1 l2)
+        ( hom-Large-Wild-⟨0,1⟩-Precategory X Y)
+
+    is-wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+      {l1 l2 : Level}
+      {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
+      {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+      is-wild-0-pregroupoid
+        ( relation-hom-Large-Wild-⟨0,1⟩-Precategory {X = X} {Y})
+```
+
+We also record a range of common projections.
+
+```agda
+  wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+    {l1 l2 : Level}
+    {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
+    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+    Wild-0-Pregroupoid-Relation (γ l1 l2) (hom-Large-Wild-⟨0,1⟩-Precategory X Y)
+  pr1 wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory
+  pr2 wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
+    is-wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory
+
+  refl-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+    {l1 l2 : Level}
+    {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
+    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+    {f : hom-Large-Wild-⟨0,1⟩-Precategory X Y} →
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory f f
+  refl-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
+    refl-Wild-0-Pregroupoid-Relation
+      ( wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory)
+
+  inv-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+    {l1 l2 : Level}
+    {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
+    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+    {f g : hom-Large-Wild-⟨0,1⟩-Precategory X Y} →
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory f g →
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory g f
+  inv-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
+    inv-Wild-0-Pregroupoid-Relation
+      ( wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory)
+
+  comp-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+    {l1 l2 : Level}
+    {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
+    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+    {f g h : hom-Large-Wild-⟨0,1⟩-Precategory X Y} →
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory g h →
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory f g →
+    relation-hom-Large-Wild-⟨0,1⟩-Precategory f h
+  comp-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
+    comp-Wild-0-Pregroupoid-Relation
+      ( wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory)
 
 open Large-Wild-⟨0,1⟩-Precategory public
 ```

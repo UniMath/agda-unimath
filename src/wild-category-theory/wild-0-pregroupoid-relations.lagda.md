@@ -53,11 +53,29 @@ module _
   reflexive-is-wild-0-pregroupoid : is-reflexive R
   reflexive-is-wild-0-pregroupoid = pr1 H
 
+  refl-is-wild-0-pregroupoid :
+    {x : A} → R x x
+  refl-is-wild-0-pregroupoid {x} =
+    reflexive-is-wild-0-pregroupoid x
+
   symmetric-is-wild-0-pregroupoid : is-symmetric R
   symmetric-is-wild-0-pregroupoid = pr1 (pr2 H)
 
+  inv-is-wild-0-pregroupoid :
+    {x y : A} → R x y → R y x
+  inv-is-wild-0-pregroupoid {x} {y} =
+    symmetric-is-wild-0-pregroupoid x y
+
   transitive-is-wild-0-pregroupoid : is-transitive R
   transitive-is-wild-0-pregroupoid = pr2 (pr2 H)
+
+  comp-is-wild-0-pregroupoid :
+    {x y z : A} → R y z → R x y → R x z
+  comp-is-wild-0-pregroupoid {x} {y} {z} =
+    transitive-is-wild-0-pregroupoid
+      ( x)
+      ( y)
+      ( z)
 ```
 
 ### The type of wild equivalence relations

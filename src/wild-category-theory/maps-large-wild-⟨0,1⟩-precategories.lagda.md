@@ -1,4 +1,4 @@
-# Maps between large wild 0-precategories
+# Maps between large wild (0,1)-precategories
 
 ```agda
 module wild-category-theory.maps-large-wild-⟨0,1⟩-precategories where
@@ -25,9 +25,9 @@ open import wild-category-theory.large-wild-⟨0,1⟩-precategories
 ## Idea
 
 A
-{{#concept "map" Disambiguation="between large wild 0-precategories" Agda=map-Large-Wild-⟨0,1⟩-Precategory}}
+{{#concept "map" Disambiguation="between large wild (0,1)-precategories" Agda=map-Large-Wild-⟨0,1⟩-Precategory}}
 between
-[large wild 0-precategories](wild-category-theory.large-wild-⟨0,1⟩-precategories.lagda.md)
+[large wild (0,1)-precategories](wild-category-theory.large-wild-⟨0,1⟩-precategories.lagda.md)
 is a map of objects `F₀ : Obj 𝒞 → Obj 𝒟` and a map of hom-types
 
 ```text
@@ -38,14 +38,16 @@ is a map of objects `F₀ : Obj 𝒞 → Obj 𝒟` and a map of hom-types
 
 ## Definitions
 
-### Maps between large wild 0-precategories
+### Maps between large wild (0,1)-precategories
 
 ```agda
 record
   map-Large-Wild-⟨0,1⟩-Precategory
-  {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} (γ : Level → Level)
-  (𝒞 : Large-Wild-⟨0,1⟩-Precategory α1 β1)
-  (𝒟 : Large-Wild-⟨0,1⟩-Precategory α2 β2)
+  {α1 α2 : Level → Level}
+  {β1 β2 γ1 γ2 : Level → Level → Level}
+  (δ : Level → Level)
+  (𝒞 : Large-Wild-⟨0,1⟩-Precategory α1 β1 γ1)
+  (𝒟 : Large-Wild-⟨0,1⟩-Precategory α2 β2 γ2)
   : UUω
   where
 
@@ -55,7 +57,7 @@ record
     obj-map-Large-Wild-⟨0,1⟩-Precategory :
       { l1 : Level} →
       obj-Large-Wild-⟨0,1⟩-Precategory 𝒞 l1 →
-      obj-Large-Wild-⟨0,1⟩-Precategory 𝒟 (γ l1)
+      obj-Large-Wild-⟨0,1⟩-Precategory 𝒟 (δ l1)
 
     hom-map-Large-Wild-⟨0,1⟩-Precategory :
       { l1 l2 : Level}
@@ -75,8 +77,8 @@ open map-Large-Wild-⟨0,1⟩-Precategory public
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  {𝒞 : Large-Wild-⟨0,1⟩-Precategory α β}
+  {α : Level → Level} {β γ : Level → Level → Level}
+  {𝒞 : Large-Wild-⟨0,1⟩-Precategory α β γ}
   where
 
   id-map-Large-Wild-⟨0,1⟩-Precategory :
@@ -85,21 +87,22 @@ module _
   hom-map-Large-Wild-⟨0,1⟩-Precategory id-map-Large-Wild-⟨0,1⟩-Precategory = id
 ```
 
-### Composition of maps of large wild 0-precategories
+### Composition of maps of large wild (0,1)-precategories
 
 ```agda
 module _
-  {α1 α2 α3 : Level → Level} {β1 β2 β3 : Level → Level → Level}
-  {γ1 γ2 : Level → Level}
-  {𝒜 : Large-Wild-⟨0,1⟩-Precategory α1 β1}
-  {ℬ : Large-Wild-⟨0,1⟩-Precategory α2 β2}
-  {𝒞 : Large-Wild-⟨0,1⟩-Precategory α3 β2}
+  {α1 α2 α3 : Level → Level}
+  {β1 β2 β3 γ1 γ2 γ3 : Level → Level → Level}
+  {δ1 δ2 : Level → Level}
+  {𝒜 : Large-Wild-⟨0,1⟩-Precategory α1 β1 γ1}
+  {ℬ : Large-Wild-⟨0,1⟩-Precategory α2 β2 γ2}
+  {𝒞 : Large-Wild-⟨0,1⟩-Precategory α3 β3 γ3}
   where
 
   comp-map-Large-Wild-⟨0,1⟩-Precategory :
-    map-Large-Wild-⟨0,1⟩-Precategory γ1 ℬ 𝒞 →
-    map-Large-Wild-⟨0,1⟩-Precategory γ2 𝒜 ℬ →
-    map-Large-Wild-⟨0,1⟩-Precategory (λ l → γ1 (γ2 l)) 𝒜 𝒞
+    map-Large-Wild-⟨0,1⟩-Precategory δ1 ℬ 𝒞 →
+    map-Large-Wild-⟨0,1⟩-Precategory δ2 𝒜 ℬ →
+    map-Large-Wild-⟨0,1⟩-Precategory (λ l → δ1 (δ2 l)) 𝒜 𝒞
   obj-map-Large-Wild-⟨0,1⟩-Precategory
     ( comp-map-Large-Wild-⟨0,1⟩-Precategory G F) =
     obj-map-Large-Wild-⟨0,1⟩-Precategory G ∘
