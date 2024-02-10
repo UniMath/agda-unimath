@@ -7,10 +7,13 @@ module foundation-core.commuting-squares-of-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -39,7 +42,7 @@ of the square.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (f : A) → B f}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
   (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
   where
 
@@ -51,6 +54,60 @@ module _
   coherence-square-homotopies' =
     top ∙h right ~ left ∙h bottom
 ```
+
+### Horizontally constant squares
+
+{{#concept "Horizontally constant squares" Disambiguation="homotopies" Agda=horizontal-refl-coherence-square-homotopies}}
+are commuting squares of homotopies of the form
+
+```text
+       refl-htpy
+    f ----------> f
+    |             |
+  H |             | H
+    ∨             ∨
+    g ----------> g.
+       refl-htpy
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} (H : f ~ g)
+  where
+
+  horizontal-refl-coherence-square-homotopies :
+    coherence-square-homotopies refl-htpy H H refl-htpy
+  horizontal-refl-coherence-square-homotopies x =
+    horizontal-refl-coherence-square-identifications (H x)
+```
+
+### Vertically constant squares
+
+{{#concept "Vertically constant squares" Disambiguation="homotopies" Agda=vertical-refl-coherence-square-homotopies}}
+are commuting squares of homotopies of the form
+
+```text
+                H
+            f -----> g
+            |        |
+  refl-htpy |        | refl-htpy
+            ∨        ∨
+            f -----> g.
+                H
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} (H : f ~ g)
+  where
+
+  vertical-refl-coherence-square-homotopies :
+    coherence-square-homotopies H refl-htpy refl-htpy H
+  vertical-refl-coherence-square-homotopies x =
+    vertical-refl-coherence-square-identifications (H x)
+```
+
+## Operations
 
 ### Inverting squares of homotopies horizontally
 
@@ -89,7 +146,13 @@ module _
     (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
     coherence-square-homotopies top left right bottom →
     coherence-square-homotopies (inv-htpy top) right left (inv-htpy bottom)
-  horizontal-inv-coherence-square-homotopies top left right bottom = {!   !}
+  horizontal-inv-coherence-square-homotopies top left right bottom H x =
+    horizontal-inv-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
 ```
 
 ### Inverting squares of homotopies vertically
@@ -130,5 +193,332 @@ module _
     coherence-square-homotopies top left right bottom →
     coherence-square-homotopies bottom (inv-htpy left) (inv-htpy right) top
   vertical-inv-coherence-square-homotopies top left right bottom H x =
-    {! vertical-inv-coherence-square-identifications (top x) (left x) (right x) (bottom x) (H x)  !}
+    vertical-inv-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
 ```
+
+### Functions acting on squares of homotopies
+
+Given a commuting square of homotopies
+
+```text
+           top
+       f -------> g
+       |          |
+  left |          | right
+       ∨          ∨
+       h -------> i
+          bottom
+```
+
+in `(x : A) → B x`, and given a dependent map `F : {x : A} → B x → C x`, the
+square of homotopies
+
+```text
+                 F ·l top
+           f f -----------> f g
+            |                |
+  F ·l left |                | F ·l right
+            ∨                ∨
+            h -------------> i
+               F ·l bottom
+```
+
+commutes.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f g h i : (x : A) → B x}
+  (F : {x : A} → B x → C x)
+  where
+
+  map-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies
+      ( F ·l top)
+      ( F ·l left)
+      ( F ·l right)
+      ( F ·l bottom)
+  map-coherence-square-homotopies top left right bottom H x =
+    map-coherence-square-identifications
+      ( F)
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+```
+
+### Concatenating homotopies of edges and coherences of commuting squares of homotopies
+
+Consider a commuting square of homotopies and a homotopy of one of the four
+sides with another homotopy, as for example in the diagram below:
+
+```text
+             top
+       a ---------> b
+       |           | |
+  left |     right |=| right'
+       ∨           ∨ ∨
+       c ---------> d.
+           bottom
+```
+
+Then any homotopy witnessing that the square commutes can be concatenated with
+the homotopy on the side, to obtain a new commuting square of homotopies.
+
+**Note.** To avoid cyclic module dependencies we will give direct proofs that
+concatenating homotopies of edges of a square with the coherence of its
+commutativity is an equivalence.
+
+#### Concatenating homotopies of the top edge with a coherence of a commuting square of homotopies
+
+Consider a commuting diagram of homotopies
+
+```text
+           top'
+         ------->
+       f -------> g
+       |   top    |
+  left |          | right
+       ∨          ∨
+       h -------> i.
+          bottom
+```
+
+with a homotopy `top ~ top'`. Then we get an equivalence
+
+```text
+           top                             top'
+       f -------> g                    f -------> g
+       |          |                    |          |
+  left |          | right    ≃    left |          | right
+       ∨          ∨                    ∨          ∨
+       h -------> i                    h -------> i.
+          bottom                          bottom
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
+  {top' : f ~ g} (s : top ~ top')
+  where
+
+  concat-top-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies top' left right bottom
+  concat-top-homotopy-coherence-square-homotopies H x =
+    concat-top-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+
+  inv-concat-top-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top' left right bottom →
+    coherence-square-homotopies top left right bottom
+  inv-concat-top-homotopy-coherence-square-homotopies H x =
+    inv-concat-top-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+```
+
+We record that this construction is an equivalence in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
+
+#### Concatenating homotopies of the left edge with a coherence of a commuting square of homotopies
+
+Consider a commuting diagram of homotopies
+
+```text
+              top
+         f -------> g
+        | |         |
+  left' | | left    | right
+        ∨ ∨         ∨
+         h -------> i.
+            bottom
+```
+
+with a homotopy `left ~ left'`. Then we get an equivalence
+
+```text
+           top                              top
+       f -------> g                     f -------> g
+       |          |                     |          |
+  left |          | right    ≃    left' |          | right
+       ∨          ∨                     ∨          ∨
+       h -------> i                     h -------> i.
+          bottom                           bottom
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
+  {left' : f ~ h} (s : left ~ left')
+  where
+
+  concat-left-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies top left' right bottom
+  concat-left-homotopy-coherence-square-homotopies H x =
+    concat-left-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+
+  inv-concat-left-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top left' right bottom →
+    coherence-square-homotopies top left right bottom
+  inv-concat-left-homotopy-coherence-square-homotopies H x =
+    inv-concat-left-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+```
+
+We record that this construction is an equivalence in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
+
+#### Concatenating homotopies of the right edge with a coherence of a commuting square of homotopies
+
+Consider a commuting diagram of homotopies
+
+```text
+            top
+       f -------> g
+       |         | |
+  left |   right | | right'
+       ∨         ∨ ∨
+       h -------> i.
+          bottom
+```
+
+with a homotopy `right ~ right'`. Then we get an equivalence
+
+```text
+           top                             top
+       f -------> g                    f -------> g
+       |          |                    |          |
+  left |          | right    ≃    left |          | right'
+       ∨          ∨                    ∨          ∨
+       h -------> i                    h -------> i.
+          bottom                          bottom
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
+  {right' : g ~ i} (s : right ~ right')
+  where
+
+  concat-right-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies top left right' bottom
+  concat-right-homotopy-coherence-square-homotopies H x =
+    concat-right-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+
+  inv-concat-right-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top left right' bottom →
+    coherence-square-homotopies top left right bottom
+  inv-concat-right-homotopy-coherence-square-homotopies H x =
+    inv-concat-right-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+```
+
+We record that this construction is an equivalence in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
+
+#### Concatenating homotopies of the bottom edge with a coherence of a commuting square of homotopies
+
+Consider a commuting diagram of homotopies
+
+```text
+            top
+       f -------> g
+       |          |
+  left |          | right
+       ∨  bottom  ∨
+       h -------> i.
+         ------->
+          bottom'
+```
+
+with a homotopy `bottom ~ bottom'`. Then we get an equivalence
+
+```text
+           top                             top
+       f -------> g                    f -------> g
+       |          |                    |          |
+  left |          | right    ≃    left |          | right
+       ∨          ∨                    ∨          ∨
+       h -------> i                    h -------> i.
+          bottom                          bottom'
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
+  {bottom' : h ~ i} (s : bottom ~ bottom')
+  where
+
+  concat-bottom-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies top left right bottom'
+  concat-bottom-homotopy-coherence-square-homotopies H x =
+    concat-bottom-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+
+  inv-concat-bottom-homotopy-coherence-square-homotopies :
+    coherence-square-homotopies top left right bottom' →
+    coherence-square-homotopies top left right bottom
+  inv-concat-bottom-homotopy-coherence-square-homotopies H x =
+    inv-concat-bottom-identification-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( s x)
+      ( H x)
+```
+
+We record that this construction is an equivalence in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
