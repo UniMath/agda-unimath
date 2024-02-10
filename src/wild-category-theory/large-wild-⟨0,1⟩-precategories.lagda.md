@@ -18,14 +18,13 @@ A {{#concept "large wild (0,1)-precategory" }} is...
 
 ## Definitions
 
-### Large wild 0 precategories
+### Large wild 0-precategories
 
 ```agda
 record
   Large-Wild-⟨0,1⟩-Precategory (α : Level → Level) (β : Level → Level → Level)
   : UUω
   where
-
 
   constructor make-Large-Wild-⟨0,1⟩-Precategory
 

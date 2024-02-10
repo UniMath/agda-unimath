@@ -67,7 +67,8 @@ record
         obj-Large-Wild-⟨0,1⟩-Precategory
           ( large-wild-⟨0,1⟩-precategory-Large-Wild-1-Precategory)
           ( l2)} →
-      is-right-contratransitive (relation-hom-Large-Wild-1-Precategory {X = X} {Y})
+      is-right-contratransitive
+        ( relation-hom-Large-Wild-1-Precategory {X = X} {Y})
 
     left-unit-comp-hom-Large-Wild-1-Precategory :
       {l1 l2 : Level}

@@ -102,7 +102,6 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-
   is-left-contratransitive : UU (l1 ⊔ l2)
   is-left-contratransitive = {x y z : A} → R x z → R y z → R x y
 
@@ -122,7 +121,8 @@ module _
   where
 
   is-right-contratransitive-Relation-Prop : UU (l1 ⊔ l2)
-  is-right-contratransitive-Relation-Prop = is-right-contratransitive (type-Relation-Prop R)
+  is-right-contratransitive-Relation-Prop =
+    is-right-contratransitive (type-Relation-Prop R)
 
   is-prop-is-right-contratransitive-Relation-Prop :
     is-prop is-right-contratransitive-Relation-Prop

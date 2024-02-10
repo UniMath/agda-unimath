@@ -44,6 +44,10 @@ is that the construction is idempotent on identity relations. E.g. the strict
 symmetrization of the identity type family is equivalent to the identity type
 family.
 
+**Note.** The strict symmetrization is not the symmetric closure. For instance,
+if the underlying relation has an initial element, then the strict
+symmetrization will be reflexive, while the symmetric closure need not be.
+
 ## Definition
 
 ### The strict symmetrization construction on binary relations
@@ -57,16 +61,16 @@ module _
   strict-symmetrization-Relation x y =
     Σ A (λ z → R z x × R z y)
 
-  is-symmetric-strict-symmetrization-Relation :
+  symmetric-strict-symmetrization-Relation :
     is-symmetric strict-symmetrization-Relation
-  is-symmetric-strict-symmetrization-Relation x y (z , p , q) = (z , q , p)
+  symmetric-strict-symmetrization-Relation x y (z , p , q) = (z , q , p)
 
-  is-involution-is-symmetric-strict-symmetrization-Relation :
+  is-involution-symmetric-strict-symmetrization-Relation :
     {x y : A} (p : strict-symmetrization-Relation x y) →
-    ( is-symmetric-strict-symmetrization-Relation y x
-      ( is-symmetric-strict-symmetrization-Relation x y p)) ＝
+    ( symmetric-strict-symmetrization-Relation y x
+      ( symmetric-strict-symmetrization-Relation x y p)) ＝
     ( p)
-  is-involution-is-symmetric-strict-symmetrization-Relation p = refl
+  is-involution-symmetric-strict-symmetrization-Relation p = refl
 
   unit-strict-symmetrization-Relation :
     is-reflexive R →
@@ -78,6 +82,8 @@ module _
     {x y : A} → strict-symmetrization-Relation x y → R x y
   counit-strict-symmetrization-Relation H (_ , p , q) = H p q
 ```
+
+## Properties
 
 ### The strict symmetrization of a reflexive relation is reflexive
 
@@ -91,19 +97,21 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  is-reflexive-strict-symmetrization-Relation' :
+  refl-strict-symmetrization-Relation' :
     ((x : A) → Σ A (λ y → R y x)) →
     is-reflexive (strict-symmetrization-Relation R)
-  is-reflexive-strict-symmetrization-Relation' r x =
+  refl-strict-symmetrization-Relation' r x =
     (pr1 (r x) , pr2 (r x) , pr2 (r x))
 
-  is-reflexive-strict-symmetrization-Relation :
+  refl-strict-symmetrization-Relation :
     is-reflexive R →
     is-reflexive (strict-symmetrization-Relation R)
-  is-reflexive-strict-symmetrization-Relation r x = (x , r x , r x)
+  refl-strict-symmetrization-Relation r x = (x , r x , r x)
 ```
 
-### The strict symmetrization of a contratransitive relation satisfies all 2-horn filler conditions
+### The strict symmetrization of a relation that satisfies any of the 2-horn filler conditions satisfies all of them
+
+#### The strict symmetrization of a right contratransitive relation satisfies all 2-horn filler conditions
 
 ```agda
 module _
@@ -121,9 +129,9 @@ module _
   is-left-contratransitive-strict-symmetrization-Relation
     {z = z} (w , p , q) (w' , p' , q') = (z , H q p , H q' p')
 
-  is-transitive-strict-symmetrization-Relation :
+  transitive-strict-symmetrization-Relation :
     is-transitive (strict-symmetrization-Relation R)
-  is-transitive-strict-symmetrization-Relation
+  transitive-strict-symmetrization-Relation
     x y z (w , p , q) (w' , p' , q') = (y , H q' p' , H p q)
 ```
 

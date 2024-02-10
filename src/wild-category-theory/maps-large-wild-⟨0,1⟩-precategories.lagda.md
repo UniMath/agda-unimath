@@ -7,8 +7,6 @@ module wild-category-theory.maps-large-wild-⟨0,1⟩-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import wild-category-theory.large-wild-⟨0,1⟩-precategories
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
@@ -18,13 +16,16 @@ open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
+
+open import wild-category-theory.large-wild-⟨0,1⟩-precategories
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "map" Disambiguation="between large wild 0-precategories" }}
+A
+{{#concept "map" Disambiguation="between large wild 0-precategories" Agda=map-Large-Wild-⟨0,1⟩-Precategory}}
 between
 [large wild 0-precategories](wild-category-theory.large-wild-⟨0,1⟩-precategories.lagda.md)
 is a map of objects `F₀ : Obj 𝒞 → Obj 𝒟` and a map of hom-types
@@ -43,7 +44,8 @@ is a map of objects `F₀ : Obj 𝒞 → Obj 𝒟` and a map of hom-types
 record
   map-Large-Wild-⟨0,1⟩-Precategory
   {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} (γ : Level → Level)
-  (𝒞 : Large-Wild-⟨0,1⟩-Precategory α1 β1) (𝒟 : Large-Wild-⟨0,1⟩-Precategory α2 β2)
+  (𝒞 : Large-Wild-⟨0,1⟩-Precategory α1 β1)
+  (𝒟 : Large-Wild-⟨0,1⟩-Precategory α2 β2)
   : UUω
   where
 
@@ -52,7 +54,8 @@ record
   field
     obj-map-Large-Wild-⟨0,1⟩-Precategory :
       { l1 : Level} →
-      obj-Large-Wild-⟨0,1⟩-Precategory 𝒞 l1 → obj-Large-Wild-⟨0,1⟩-Precategory 𝒟 (γ l1)
+      obj-Large-Wild-⟨0,1⟩-Precategory 𝒞 l1 →
+      obj-Large-Wild-⟨0,1⟩-Precategory 𝒟 (γ l1)
 
     hom-map-Large-Wild-⟨0,1⟩-Precategory :
       { l1 l2 : Level}
@@ -97,8 +100,12 @@ module _
     map-Large-Wild-⟨0,1⟩-Precategory γ1 ℬ 𝒞 →
     map-Large-Wild-⟨0,1⟩-Precategory γ2 𝒜 ℬ →
     map-Large-Wild-⟨0,1⟩-Precategory (λ l → γ1 (γ2 l)) 𝒜 𝒞
-  obj-map-Large-Wild-⟨0,1⟩-Precategory (comp-map-Large-Wild-⟨0,1⟩-Precategory G F) =
-    obj-map-Large-Wild-⟨0,1⟩-Precategory G ∘ obj-map-Large-Wild-⟨0,1⟩-Precategory F
-  hom-map-Large-Wild-⟨0,1⟩-Precategory (comp-map-Large-Wild-⟨0,1⟩-Precategory G F) =
-    hom-map-Large-Wild-⟨0,1⟩-Precategory G ∘ hom-map-Large-Wild-⟨0,1⟩-Precategory F
+  obj-map-Large-Wild-⟨0,1⟩-Precategory
+    ( comp-map-Large-Wild-⟨0,1⟩-Precategory G F) =
+    obj-map-Large-Wild-⟨0,1⟩-Precategory G ∘
+    obj-map-Large-Wild-⟨0,1⟩-Precategory F
+  hom-map-Large-Wild-⟨0,1⟩-Precategory
+    ( comp-map-Large-Wild-⟨0,1⟩-Precategory G F) =
+    hom-map-Large-Wild-⟨0,1⟩-Precategory G ∘
+    hom-map-Large-Wild-⟨0,1⟩-Precategory F
 ```

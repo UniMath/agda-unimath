@@ -75,6 +75,7 @@ open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
+open import foundation.contratransitive-binary-relations public
 open import foundation.copartial-elements public
 open import foundation.copartial-functions public
 open import foundation.coproduct-decompositions public
@@ -333,6 +334,7 @@ open import foundation.spans public
 open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.strict-symmetrization-binary-relations public
 open import foundation.strictly-involutive-identity-types public
 open import foundation.strictly-right-unital-concatenation-identifications public
 open import foundation.strongly-extensional-maps public
@@ -433,5 +435,6 @@ open import foundation.whiskering-homotopies-composition public
 open import foundation.whiskering-homotopies-concatenation public
 open import foundation.whiskering-identifications-concatenation public
 open import foundation.whiskering-operations public
+open import foundation.wild-category-of-types public
 open import foundation.yoneda-identity-types public
 ```

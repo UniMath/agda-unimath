@@ -7,13 +7,13 @@ module foundation.wild-category-of-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import wild-category-theory.large-wild-⟨0,1⟩-precategories
-open import wild-category-theory.large-wild-1-precategories
-
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.universe-levels
+
+open import wild-category-theory.large-wild-1-precategories
+open import wild-category-theory.large-wild-⟨0,1⟩-precategories
 ```
 
 </details>
