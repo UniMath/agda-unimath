@@ -842,3 +842,95 @@ module _
       ( α x)
       ( coh x)
 ```
+
+### Horizontally pasting squares of homotopies
+
+Consider two squares of homotopies as in the diagram
+
+```text
+            top-left         top-right
+       a -------------> b -------------> c
+       |                |                |
+  left |                | middle         | right
+       ∨                ∨                ∨
+       d -------------> e -------------> f
+          bottom-left      bottom-right
+```
+
+with `H : left ∙h bottom-left ~ top-left ∙h middle` and
+`K : middle ∙h bottom-right ~ top-right ∙h right`. Then the outer square
+commutes.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a b c d e f : (x : A) → B x}
+  (top-left : a ~ b) (top-right : b ~ c)
+  (left : a ~ d) (middle : b ~ e) (right : c ~ f)
+  (bottom-left : d ~ e) (bottom-right : e ~ f)
+  where
+
+  horizontal-pasting-coherence-square-homotopies :
+    coherence-square-homotopies top-left left middle bottom-left →
+    coherence-square-homotopies top-right middle right bottom-right →
+    coherence-square-homotopies
+      (top-left ∙h top-right) left right (bottom-left ∙h bottom-right)
+  horizontal-pasting-coherence-square-homotopies H K x =
+    horizontal-pasting-coherence-square-identifications
+      ( top-left x)
+      ( top-right x)
+      ( left x)
+      ( middle x)
+      ( right x)
+      ( bottom-left x)
+      ( bottom-right x)
+      ( H x)
+      ( K x)
+```
+
+### Vertically pasting squares of homotopies
+
+Consider two squares of homotopies as in the diagram
+
+```text
+                  top
+              a --------> b
+              |           |
+     top-left |           | top-right
+              ∨  middle   ∨
+              c --------> d
+              |           |
+  bottom-left |           | bottom-right
+              ∨           ∨
+              e --------> f
+                 bottom
+```
+
+with `H : top-left ∙h middle ~ top ∙h top-right` and
+`K : bottom-left ∙h bottom ~ middle ∙h bottom-right`. Then the outer square
+commutes.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a b c d e f : (x : A) → B x}
+  (top : a ~ b) (top-left : a ~ c) (top-right : b ~ d)
+  (middle : c ~ d) (bottom-left : c ~ e) (bottom-right : d ~ f)
+  (bottom : e ~ f)
+  where
+
+  vertical-pasting-coherence-square-homotopies :
+    coherence-square-homotopies top top-left top-right middle →
+    coherence-square-homotopies middle bottom-left bottom-right bottom →
+    coherence-square-homotopies
+      top (top-left ∙h bottom-left) (top-right ∙h bottom-right) bottom
+  vertical-pasting-coherence-square-homotopies H K x =
+    vertical-pasting-coherence-square-identifications
+      ( top x)
+      ( top-left x)
+      ( top-right x)
+      ( middle x)
+      ( bottom-left x)
+      ( bottom-right x)
+      ( bottom x)
+      ( H x)
+      ( K x)
+```
