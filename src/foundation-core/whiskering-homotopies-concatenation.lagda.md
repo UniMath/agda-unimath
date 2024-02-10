@@ -1,21 +1,17 @@
 # Whiskering homotopies with respect to concatenation
 
 ```agda
-module foundation.whiskering-homotopies-concatenation where
-
-open import foundation-core.whiskering-homotopies-concatenation public
+module foundation-core.whiskering-homotopies-concatenation where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functoriality-dependent-function-types
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
 open import foundation.whiskering-operations
 
-open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -86,36 +82,6 @@ module _
 ```
 
 ## Properties
-
-### Left whiskering of homotopies with respect to concatenation is an equivalence
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  is-equiv-left-whisker-concat-htpy :
-    {f g h : (x : A) → B x} (H : f ~ g) {I J : g ~ h} →
-    is-equiv (left-whisker-concat-htpy H {I} {J})
-  is-equiv-left-whisker-concat-htpy H =
-    is-equiv-map-Π-is-fiberwise-equiv
-      ( λ x → is-equiv-left-whisker-concat (H x))
-```
-
-### Right whiskering of homotopies with respect to concatenation is an equivalence
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  is-equiv-right-whisker-concat-htpy :
-    {f g h : (x : A) → B x} {H I : f ~ g} (J : g ~ h) →
-    is-equiv (λ (K : H ~ I) → right-whisker-concat-htpy K J)
-  is-equiv-right-whisker-concat-htpy J =
-    is-equiv-map-Π-is-fiberwise-equiv
-      ( λ x → is-equiv-right-whisker-concat (J x))
-```
 
 ### The unit and absorption laws for left whiskering of homotopies with respect to concatenation
 

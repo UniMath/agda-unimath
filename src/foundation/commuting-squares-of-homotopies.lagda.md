@@ -263,8 +263,6 @@ homotopies
              f ·l K'
 ```
 
-and similarly we may whisker it on the right.
-
 ```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -277,7 +275,11 @@ module _
     coherence-square-homotopies (f ·l H) (f ·l H') (f ·l K) (f ·l K')
   map-coherence-square-homotopies α a =
     map-coherence-square-identifications f (H a) (H' a) (K a) (K' a) (α a)
+```
 
+And similarly we may whisker it on the right.
+
+```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   { g h h' k : B → C} (H : g ~ h) (H' : g ~ h') {K : h ~ k} {K' : h' ~ k}

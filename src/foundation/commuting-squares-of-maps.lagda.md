@@ -175,7 +175,7 @@ module _
       ( id)
       ( is-retraction-map-inv-equiv left)
       ( H)
-      ( coherence-square-maps-inv-equiv-vertical top left right bottom H)
+      ( vertical-inv-equiv-coherence-square-maps top left right bottom H)
       ( refl-htpy)
       ( is-retraction-map-inv-equiv right)
   left-inverse-law-pasting-vertical-coherence-square-maps H a =
@@ -284,7 +284,7 @@ module _
       ( id)
       ( id)
       ( is-section-map-inv-equiv left)
-      ( coherence-square-maps-inv-equiv-vertical top left right bottom H)
+      ( vertical-inv-equiv-coherence-square-maps top left right bottom H)
       ( H)
       ( refl-htpy)
       ( is-section-map-inv-equiv right)
@@ -295,7 +295,7 @@ module _
           ( H (map-inv-equiv left a))
           ( ap
             ( map-equiv right)
-            ( coherence-square-maps-inv-equiv-vertical top left right bottom
+            ( vertical-inv-equiv-coherence-square-maps top left right bottom
               ( H)
               ( a)))
           ( is-section-map-inv-equiv right (bottom a))) ∙
