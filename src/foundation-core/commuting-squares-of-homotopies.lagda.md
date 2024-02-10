@@ -126,13 +126,13 @@ Given a commuting square of homotopies
 the square of homotopies
 
 ```text
-             inv top
+              top⁻¹
         g ------------> f
         |               |
   right |               | left
         ∨               ∨
         i ------------> h
-           inv bottom
+             bottom⁻¹
 ```
 
 commutes.
@@ -175,7 +175,7 @@ the square of homotopies
               bottom
            h -------> i
            |          |
-  inv left |          | inv right
+    left⁻¹ |          | right⁻¹
            ∨          ∨
            f -------> g
                top
@@ -522,3 +522,323 @@ module _
 
 We record that this construction is an equivalence in
 [`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
+
+### Whiskering and splicing coherences of commuting squares of homotopies
+
+Given a commuting square of homotopies
+
+```text
+           top
+       f -------> g
+       |          |
+  left |          | right
+       ∨          ∨
+       h -------> i,
+          bottom
+```
+
+we may consider four ways of attaching new homotopies to it:
+
+1. Prepending `H : u ~ f` to the left gives us a commuting square
+
+   ```text
+                H ∙h top
+              u -------> g
+              |          |
+    H ∙h left |          | right
+              ∨          ∨
+              h -------> i.
+                 bottom
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙h bottom ~ top ∙h right) ≃ ((H ∙h left) ∙h bottom ~ (H ∙h top) ∙h right).
+   ```
+
+2. Appending a homotopy `H : i ~ u` to the right gives a commuting square of
+   homotopies
+
+   ```text
+                   top
+           f ------------> g
+           |               |
+      left |               | right ∙h H
+           ∨               ∨
+           h ------------> u.
+              bottom ∙h H
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙h bottom ~ top ∙h right) ≃ (left ∙h (bottom ∙h H) ~ top ∙h (right ∙h H)).
+   ```
+
+3. Splicing a homotopy `H : h ~ u` and its inverse into the middle gives a
+   commuting square of homotopies
+
+   ```text
+                      top
+              f --------------> g
+              |                 |
+     left ∙h H |                 | right
+              ∨                 ∨
+              u --------------> i.
+                 H⁻¹ ∙h bottom
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙h bottom ~ top ∙h right) ≃ ((left ∙h H) ∙h (H⁻¹ ∙h bottom) ~ top ∙h right).
+   ```
+
+   Similarly, we have an equivalence
+
+   ```text
+     (left ∙h bottom ~ top ∙h right) ≃ ((left ∙h H⁻¹) ∙h (H ∙h bottom) ~ top ∙h right).
+   ```
+
+4. Splicing a homotopy `H : g ~ u` and its inverse into the middle gives a
+   commuting square of homotopies
+
+   ```text
+             top ∙h H
+          f --------> u
+          |           |
+     left |           | H⁻¹ ∙h right
+          ∨           ∨
+          h --------> i.
+             bottom
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙h bottom ~ top ∙h right) ≃ (left ∙h bottom ~ (top ∙h H) ∙h (H⁻¹ ∙h right)).
+   ```
+
+   Similarly, we have an equivalence
+
+   ```text
+     (left ∙h bottom ~ top ∙h right) ≃ (left ∙h bottom ~ (top ∙h H⁻¹) ∙h (H ∙h right)).
+   ```
+
+These operations are useful in proofs involving path algebra, because taking
+`equiv-right-whisker-concat-coherence-square-identicications` as an example, it
+provides us with two maps: the forward direction states
+`(H ∙h r ~ K ∙h s) → (H ∙h (r ∙h t)) ~ K ∙h (s ∙h t))`, which allows one to
+append an homotopy without needing to reassociate on the right, and the
+backwards direction conversely allows one to cancel out a homotopy in
+parentheses.
+
+#### Left whiskering coherences of commuting squares of homotopies
+
+For any homotopy `H : u ~ f` we obtain an equivalence
+
+```text
+           top                                H ∙h top
+       f -------> g                         u -------> g
+       |          |                         |          |
+  left |          | right    ≃    H ∙h left |          | right
+       ∨          ∨                         ∨          ∨
+       h -------> i                         h -------> i
+          bottom                               bottom
+```
+
+of coherences of commuting squares of homotopies.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  where
+
+  left-whisker-concat-coherence-square-homotopies :
+    {u : (x : A) → B x} (H : u ~ f)
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies (H ∙h top) (H ∙h left) right bottom
+  left-whisker-concat-coherence-square-homotopies
+    H top left right bottom coh x =
+    left-whisker-concat-coherence-square-identifications
+      ( H x)
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( coh x)
+
+  left-unwhisker-concat-coherence-square-homotopies :
+    {u : (x : A) → B x} (H : u ~ f)
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    coherence-square-homotopies (H ∙h top) (H ∙h left) right bottom →
+    coherence-square-homotopies top left right bottom
+  left-unwhisker-concat-coherence-square-homotopies
+    H top left right bottom coh x =
+    left-unwhisker-concat-coherence-square-identifications
+      ( H x)
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( coh x)
+```
+
+#### Right whiskering coherences of commuting squares of homotopies
+
+For any homotopy `H : i ~ u` we obtain an equivalence
+
+```text
+           top                                 top
+       f -------> g                     f ------------> g
+       |          |                     |               |
+  left |          | right    ≃     left |               | right ∙h H
+       ∨          ∨                     ∨               ∨
+       h -------> i                     h ------------> i
+          bottom                           bottom ∙h H
+```
+
+of coherences of commuting squares of homotopies.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
+  where
+
+  right-whisker-concat-coherence-square-homotopies :
+    coherence-square-homotopies top left right bottom →
+    {u : (x : A) → B x} (H : i ~ u) →
+    coherence-square-homotopies top left (right ∙h H) (bottom ∙h H)
+  right-whisker-concat-coherence-square-homotopies coh H x =
+    right-whisker-concat-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( coh x)
+      ( H x)
+
+  right-unwhisker-cohernece-square-homotopies :
+    {u : (x : A) → B x} (H : i ~ u) →
+    coherence-square-homotopies top left (right ∙h H) (bottom ∙h H) →
+    coherence-square-homotopies top left right bottom
+  right-unwhisker-cohernece-square-homotopies H coh x =
+    right-unwhisker-cohernece-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+      ( coh x)
+```
+
+#### Left splicing coherences of commuting squares of homotopies
+
+For any inverse pair of homotopies `H : g ~ u` and `K : u ~ g` equipped with
+`α : inv-htpy H ~ K` we obtain an equivalence
+
+```text
+           top                                    top
+       f -------> g                         f -----------> g
+       |          |                         |              |
+  left |          | right    ≃    left ∙h H |              | right
+       ∨          ∨                         ∨              ∨
+       h -------> i                         u -----------> i
+          bottom                               K ∙h bottom
+```
+
+of coherences of commuting squares of homotopies.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
+  where
+
+  left-splice-coherence-square-homotopies :
+    {u : (x : A) → B x} (H : h ~ u) (K : u ~ h) (α : inv-htpy H ~ K) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies top (left ∙h H) right (K ∙h bottom)
+  left-splice-coherence-square-homotopies H K α coh x =
+    left-splice-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+      ( K x)
+      ( α x)
+      ( coh x)
+
+  left-unsplice-coherence-square-homotopies :
+    {u : (x : A) → B x} (H : h ~ u) (K : u ~ h) (α : inv-htpy H ~ K) →
+    coherence-square-homotopies top (left ∙h H) right (K ∙h bottom) →
+    coherence-square-homotopies top left right bottom
+  left-unsplice-coherence-square-homotopies H K α coh x =
+    left-unsplice-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+      ( K x)
+      ( α x)
+      ( coh x)
+```
+
+#### Right splicing coherences of commuting squares of homotopies
+
+For any inverse pair of homotopies `H : g ~ u` and `K : u ~ g` equipped with
+`α : inv-htpy H ~ K` we obtain an equivalence
+
+```text
+           top                             top ∙h H
+       f -------> g                     f --------> u
+       |          |                     |           |
+  left |          | right    ≃     left |           | K ∙h right
+       ∨          ∨                     ∨           ∨
+       h -------> i                     h --------> i
+          bottom                           bottom
+```
+
+of coherences of commuting squares of homotopies.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i)
+  where
+
+  right-splice-coherence-square-homotopies :
+    {u : (x : A) → B x} (H : g ~ u) (K : u ~ g) (α : inv-htpy H ~ K) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies (top ∙h H) left (inv-htpy H ∙h right) bottom
+  right-splice-coherence-square-homotopies H K α coh x =
+    right-splice-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+      ( K x)
+      ( α x)
+      ( coh x)
+
+  right-unsplice-coherence-square-homotopies :
+    {u : (x : A) → B x} (H : g ~ u) (K : u ~ g) (α : inv-htpy H ~ K) →
+    coherence-square-homotopies (top ∙h H) left (inv-htpy H ∙h right) bottom →
+    coherence-square-homotopies top left right bottom
+  right-unsplice-coherence-square-homotopies H K α coh x =
+    right-unsplice-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+      ( K x)
+      ( α x)
+      ( coh x)
+```
