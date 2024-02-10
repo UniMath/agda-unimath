@@ -9,6 +9,7 @@ module foundation-core.commuting-squares-of-homotopies where
 ```agda
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation-core.whiskering-homotopies-concatenation
 
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.homotopies
@@ -933,4 +934,132 @@ module _
       ( bottom x)
       ( H x)
       ( K x)
+```
+
+## Properties
+
+### Left unit law for horizontal pasting of commuting squares of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  where
+
+  left-unit-law-horizontal-pasting-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    (H : coherence-square-homotopies top left right bottom) →
+    horizontal-pasting-coherence-square-homotopies
+      ( refl-htpy)
+      ( top)
+      ( left)
+      ( left)
+      ( right)
+      ( refl-htpy)
+      ( bottom)
+      ( horizontal-refl-coherence-square-homotopies left)
+      ( H) ~
+    H
+  left-unit-law-horizontal-pasting-coherence-square-homotopies
+    top left right bottom H x =
+    left-unit-law-horizontal-pasting-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+```
+
+### Right unit law for horizontal pasting of commuting squares of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  where
+
+  right-unit-law-horizontal-pasting-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    (H : coherence-square-homotopies top left right bottom) →
+    horizontal-pasting-coherence-square-homotopies
+      ( top)
+      ( refl-htpy)
+      ( left)
+      ( right)
+      ( right)
+      ( bottom)
+      ( refl-htpy)
+      ( H)
+      ( horizontal-refl-coherence-square-homotopies right) ∙h
+    right-whisker-concat-htpy right-unit-htpy right ~
+    left-whisker-concat-htpy left right-unit-htpy ∙h H
+  right-unit-law-horizontal-pasting-coherence-square-homotopies
+    top left right bottom H x =
+    right-unit-law-horizontal-pasting-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+```
+
+### Left unit law for vertical pasting of commuting squares of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  where
+
+  left-unit-law-vertical-pasting-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    (H : coherence-square-homotopies top left right bottom) →
+    vertical-pasting-coherence-square-homotopies
+      ( top)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( vertical-refl-coherence-square-homotopies top)
+      ( H) ~
+    H
+  left-unit-law-vertical-pasting-coherence-square-homotopies
+    top left right bottom H x =
+    left-unit-law-vertical-pasting-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
+```
+
+### Right unit law for vertical pasting of commuting squares of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
+  where
+
+  right-unit-law-vertical-pasting-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    (H : coherence-square-homotopies top left right bottom) →
+    vertical-pasting-coherence-square-homotopies
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( bottom)
+      ( H)
+      ( vertical-refl-coherence-square-homotopies bottom) ∙h
+    left-whisker-concat-htpy top right-unit-htpy ~
+    right-whisker-concat-htpy right-unit-htpy bottom ∙h H
+  right-unit-law-vertical-pasting-coherence-square-homotopies
+    top left right bottom H x =
+    right-unit-law-vertical-pasting-coherence-square-identifications
+      ( top x)
+      ( left x)
+      ( right x)
+      ( bottom x)
+      ( H x)
 ```
