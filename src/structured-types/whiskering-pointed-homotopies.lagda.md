@@ -120,7 +120,7 @@ module _
     map-pointed-map g ·l htpy-pointed-htpy f1 f2 H
 
   coh-left-whisker-pointed-htpy' :
-    coherence-base-point-pointed-htpy'
+    coherence-base-point-htpy-pointed-Π
       ( g ∘∗ f1)
       ( g ∘∗ f2)
       ( htpy-left-whisker-pointed-htpy)
@@ -137,7 +137,7 @@ module _
         ( preserves-point-pointed-map f1)
         ( preserves-point-pointed-map f2)
         ( htpy-pointed-htpy f1 f2 H (point-Pointed-Type A))
-        ( coh-pointed-htpy' f1 f2 H))
+        ( coh-pointed-htpy f1 f2 H))
 
   left-whisker-pointed-htpy : g ∘∗ f1 ~∗ g ∘∗ f2
   left-whisker-pointed-htpy =
@@ -159,5 +159,5 @@ module _
   right-whisker-pointed-htpy :
     (g1 g2 : B →∗ C) (H : g1  ~∗ g2) (f : A →∗ B) → g1 ∘∗ f ~∗ g2 ∘∗ f
   right-whisker-pointed-htpy g1 g2 H (pair f refl) =
-    pair (htpy-pointed-htpy g1 g2 H ·r f) (coh-pointed-htpy g1 g2 H)
+    pair (htpy-pointed-htpy g1 g2 H ·r f) (preserves-point-pointed-htpy g1 g2 H)
 ```

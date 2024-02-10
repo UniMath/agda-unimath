@@ -429,3 +429,169 @@ module _
   action-function-coherence-triangle-identifications s =
     ap (ap f) s ∙ ap-concat f top right
 ```
+
+### Inverting one side of a commuting triangle of identifications
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  transpose-top-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : b ＝ a) →
+    coherence-triangle-identifications right left top →
+    coherence-triangle-identifications left right (inv top)
+  transpose-top-coherence-triangle-identifications left right top t =
+    left-transpose-eq-concat _ _ _ (inv t)
+
+  equiv-transpose-top-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : b ＝ a) →
+    coherence-triangle-identifications right left top ≃
+    coherence-triangle-identifications left right (inv top)
+  equiv-transpose-top-coherence-triangle-identifications left right top =
+    equiv-left-transpose-eq-concat _ _ _ ∘e equiv-inv _ _
+
+  equiv-higher-transpose-top-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : b ＝ a) →
+    {left' : a ＝ c} (p : left ＝ left') →
+    (s : coherence-triangle-identifications right left top) →
+    (t : coherence-triangle-identifications right left' top) →
+    coherence-triangle-identifications t (left-whisker-concat top p) s ≃
+    coherence-triangle-identifications
+      ( transpose-top-coherence-triangle-identifications left right top s)
+      ( transpose-top-coherence-triangle-identifications left' right top t)
+      ( p)
+  equiv-higher-transpose-top-coherence-triangle-identifications
+    left right top refl s t =
+    ( equiv-ap
+      ( equiv-transpose-top-coherence-triangle-identifications left right top)
+      ( _)
+      ( _)) ∘e
+    ( equiv-inv _ _) ∘e
+    ( equiv-concat' _ right-unit)
+
+  higher-transpose-top-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : b ＝ a) →
+    {left' : a ＝ c} (p : left ＝ left') →
+    (s : coherence-triangle-identifications right left top) →
+    (t : coherence-triangle-identifications right left' top) →
+    coherence-triangle-identifications t (left-whisker-concat top p) s →
+    coherence-triangle-identifications
+      ( transpose-top-coherence-triangle-identifications left right top s)
+      ( transpose-top-coherence-triangle-identifications left' right top t)
+      ( p)
+  higher-transpose-top-coherence-triangle-identifications
+    left right top p s t =
+    map-equiv
+      ( equiv-higher-transpose-top-coherence-triangle-identifications
+        left right top p s t)
+
+  transpose-right-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : c ＝ b) (top : a ＝ b) →
+    coherence-triangle-identifications top right left →
+    coherence-triangle-identifications left (inv right) top
+  transpose-right-coherence-triangle-identifications left right top t =
+    right-transpose-eq-concat _ _ _ (inv t)
+
+  equiv-transpose-right-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : c ＝ b) (top : a ＝ b) →
+    coherence-triangle-identifications top right left ≃
+    coherence-triangle-identifications left (inv right) top
+  equiv-transpose-right-coherence-triangle-identifications left right top =
+    equiv-right-transpose-eq-concat _ _ _ ∘e equiv-inv _ _
+
+  equiv-higher-transpose-right-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : c ＝ b) (top : a ＝ b) →
+    {left' : a ＝ c} (p : left ＝ left') →
+    (s : coherence-triangle-identifications top right left) →
+    (t : coherence-triangle-identifications top right left') →
+    coherence-triangle-identifications t (right-whisker-concat p right) s ≃
+    coherence-triangle-identifications
+      ( transpose-right-coherence-triangle-identifications left right top s)
+      ( transpose-right-coherence-triangle-identifications left' right top t)
+      ( p)
+  equiv-higher-transpose-right-coherence-triangle-identifications
+    left right top refl s t =
+    ( equiv-ap
+      ( equiv-transpose-right-coherence-triangle-identifications left right top)
+      ( _)
+      ( _)) ∘e
+    ( equiv-inv _ _) ∘e
+    ( equiv-concat' t right-unit)
+
+  higher-transpose-right-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : c ＝ b) (top : a ＝ b) →
+    {left' : a ＝ c} (p : left ＝ left') →
+    (s : coherence-triangle-identifications top right left) →
+    (t : coherence-triangle-identifications top right left') →
+    coherence-triangle-identifications t (right-whisker-concat p right) s →
+    coherence-triangle-identifications
+      ( transpose-right-coherence-triangle-identifications left right top s)
+      ( transpose-right-coherence-triangle-identifications left' right top t)
+      ( p)
+  higher-transpose-right-coherence-triangle-identifications
+    left right top p s t =
+    map-equiv
+      ( equiv-higher-transpose-right-coherence-triangle-identifications left right top p s t)
+```
+
+### Concatenating identifications on edges with coherences of commuting triangles of identifications
+
+
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  equiv-concat-top-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : a ＝ b)
+    {top' : a ＝ b} (p : top' ＝ top) →
+    coherence-triangle-identifications left right top' ≃
+    coherence-triangle-identifications left right top
+  equiv-concat-top-coherence-triangle-identifications left right top p =
+    equiv-concat' left (right-whisker-concat p right)
+
+  concat-top-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : a ＝ b)
+    {top' : a ＝ b} (p : top' ＝ top) →
+    coherence-triangle-identifications left right top' →
+    coherence-triangle-identifications left right top
+  concat-top-coherence-triangle-identifications left right top p =
+    map-equiv
+      ( equiv-concat-top-coherence-triangle-identifications left right top p)
+
+  equiv-concat-right-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : a ＝ b)
+    {right' : b ＝ c} (p : right' ＝ right) →
+    coherence-triangle-identifications left right' top ≃
+    coherence-triangle-identifications left right top
+  equiv-concat-right-coherence-triangle-identifications left right top p =
+    equiv-concat' left (left-whisker-concat top p)
+
+  concat-right-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : a ＝ b)
+    {right' : b ＝ c} (p : right' ＝ right) →
+    coherence-triangle-identifications left right' top →
+    coherence-triangle-identifications left right top
+  concat-right-coherence-triangle-identifications left right top p =
+    map-equiv
+      ( equiv-concat-right-coherence-triangle-identifications left right top p)
+
+  equiv-concat-left-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : a ＝ b)
+    {left' : a ＝ c} (p : left ＝ left') →
+    coherence-triangle-identifications left' right top ≃
+    coherence-triangle-identifications left right top
+  equiv-concat-left-coherence-triangle-identifications left right top p =
+    equiv-concat p (top ∙ right)
+
+  concat-left-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : a ＝ b)
+    {left' : a ＝ c} (p : left ＝ left') →
+    coherence-triangle-identifications left' right top →
+    coherence-triangle-identifications left right top
+  concat-left-coherence-triangle-identifications left right top p =
+    map-equiv
+      ( equiv-concat-left-coherence-triangle-identifications left right top p)
+```

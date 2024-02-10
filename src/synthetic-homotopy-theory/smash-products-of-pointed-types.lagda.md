@@ -355,7 +355,7 @@ universal-property-smash-product-Pointed-Type :
 pr1 (universal-property-smash-product-Pointed-Type A B C f) =
   map-universal-property-smash-product-Pointed-Type A B C f
 pr2 (universal-property-smash-product-Pointed-Type A B C f) =
-  eq-htpy-pointed-Π
+  eq-pointed-htpy
     ( map-universal-property-smash-product-Pointed-Type A B C
       ( f)
       ( point-Pointed-Type A))
