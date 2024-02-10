@@ -1063,3 +1063,200 @@ module _
       ( bottom x)
       ( H x)
 ```
+
+### Computing the right whiskering of a vertically constant square with a homotopy
+
+Consider the vertically constant square of homotopies
+
+```text
+           H
+       f -----> g
+       |        |
+  refl |        | refl
+       ∨        ∨
+       f -----> g
+           H
+```
+
+at a homotopy `H : f ~ g`, and consider a homotopy `K : g ~ h`. Then the right
+whiskering of the above square with `K` is the commuting square of homotopies
+
+```text
+            H
+       f -------> g
+       |          |
+  refl |   refl   | K
+       ∨          ∨
+       f -------> h
+          H ∙h K
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  right-whisker-concat-vertical-refl-coherence-square-homotopies :
+    (H : f ~ g) (K : g ~ h) →
+    right-whisker-concat-coherence-square-homotopies H refl-htpy refl-htpy H
+      ( vertical-refl-coherence-square-homotopies H)
+      ( K) ~
+    refl-htpy
+  right-whisker-concat-vertical-refl-coherence-square-homotopies H K x =
+    right-whisker-concat-vertical-refl-coherence-square-identifications
+      ( H x)
+      ( K x)
+```
+
+### Computing the right whiskering of a horizontally constant square with a homotopy
+
+Consider a horizontally constant commuting square of homotopies
+
+```text
+       refl-htpy
+    f ----------> f
+    |             |
+  H |             | H
+    ∨             ∨
+    g ----------> g
+       refl-htpy
+```
+
+at a homotopy `H` and consider a homotopy `K : g ~ h`. Then the right whiskering
+of the above square with `K` is the square
+
+```text
+       refl-htpy
+    f ----------> f
+    |             |
+  H |  refl-htpy  | H ∙h K
+    ∨             ∨
+    g ----------> h.
+           K
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  right-whisker-concat-horizontal-refl-coherence-square-homotopies :
+    (H : f ~ g) (K : g ~ h) →
+    right-whisker-concat-coherence-square-homotopies refl-htpy H H refl-htpy
+      ( horizontal-refl-coherence-square-homotopies H)
+      ( K) ~
+    refl-htpy
+  right-whisker-concat-horizontal-refl-coherence-square-homotopies H K x =
+    right-whisker-concat-horizontal-refl-coherence-square-identifications
+      ( H x)
+      ( K x)
+```
+
+### Computing the left whiskering of a horizontally constant square with a homotopy
+
+Consider a homotopy `H : f ~ g` and a horizontally constant commuting square of
+homotopies
+
+```text
+       refl-htpy
+    g ----------> g
+    |             |
+  K |             | K
+    ∨             ∨
+    h ----------> h
+       refl-htpy
+```
+
+at a homotopy `K : g ~ h`. The the left whiskering of the above square with `H`
+is the commuting square
+
+```text
+                                    K ∙h refl-htpy
+         f -----------------------------------------------------------------> g
+         |                                                                    |
+  K ∙h H | right-unit-htpy ∙h (right-whisker-concat-htpy right-unit-htpy H)⁻¹ | H
+         ∨                                                                    ∨
+         h -----------------------------------------------------------------> h.
+                                      refl-htpy
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  left-whisker-concat-horizontal-refl-coherence-square-homotopies :
+    (H : f ~ g) (K : g ~ h) →
+    left-whisker-concat-coherence-square-homotopies H refl-htpy K K refl-htpy
+      ( horizontal-refl-coherence-square-homotopies K) ∙h
+    right-whisker-concat-htpy right-unit-htpy K ~
+    right-unit-htpy
+  left-whisker-concat-horizontal-refl-coherence-square-homotopies H K x =
+    left-whisker-concat-horizontal-refl-coherence-square-identifications
+      ( H x)
+      ( K x)
+
+  left-whisker-concat-horizontal-refl-coherence-square-homotopies' :
+    (H : f ~ g) (K : g ~ h) →
+    left-whisker-concat-coherence-square-homotopies H refl-htpy K K refl-htpy
+      ( horizontal-refl-coherence-square-homotopies K) ~
+    right-unit-htpy ∙h inv-htpy (right-whisker-concat-htpy right-unit-htpy K)
+  left-whisker-concat-horizontal-refl-coherence-square-homotopies' H K x =
+    left-whisker-concat-horizontal-refl-coherence-square-identifications'
+      ( H x)
+      ( K x)
+```
+
+### Computing the left whiskering of a vertically constant square with a homotopy
+
+Consider the vertically constant square of homotopies
+
+```text
+                K
+            g -----> h
+            |        |
+  refl-htpy |        | refl-htpy
+            ∨        ∨
+            g -----> h
+                K
+```
+
+at a homotopy `K : g ~ h` and consider a homotopy `H : f ~ g`. Then the left
+whiskering of the above square with `H` is the square
+
+```text
+                                            H ∙h K
+                 f ----------------------------------------------------------> h
+                 |                                                             |
+  H ∙h refl-htpy | right-whisker-concat-htpy right-unit-htpy K ∙h right-unit⁻¹ | refl-htpy
+                 ∨                                                             ∨
+                 g ----------------------------------------------------------> h.
+                                              K
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  left-whisker-concat-vertical-refl-coherence-square-homotopies :
+    (H : f ~ g) (K : g ~ h) →
+    left-whisker-concat-coherence-square-homotopies H K refl-htpy refl-htpy K
+      ( vertical-refl-coherence-square-homotopies K) ∙h
+    right-unit-htpy ~
+    right-whisker-concat-htpy right-unit-htpy K
+  left-whisker-concat-vertical-refl-coherence-square-homotopies H K x =
+    left-whisker-concat-vertical-refl-coherence-square-identifications
+      ( H x)
+      ( K x)
+
+  left-whisker-concat-vertical-refl-coherence-square-homotopies' :
+    (H : f ~ g) (K : g ~ h) →
+    left-whisker-concat-coherence-square-homotopies H K refl-htpy refl-htpy K
+      ( vertical-refl-coherence-square-homotopies K) ~
+    right-whisker-concat-htpy right-unit-htpy K ∙h inv-htpy right-unit-htpy
+  left-whisker-concat-vertical-refl-coherence-square-homotopies' H K x =
+    left-whisker-concat-vertical-refl-coherence-square-identifications'
+      ( H x)
+      ( K x)
+```
