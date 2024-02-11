@@ -1,10 +1,12 @@
 # Foundation
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Files in the foundation folder
 
 ```agda
-{-# OPTIONS --guardedness #-}
-
 module foundation where
 
 open import foundation.0-connected-types public
