@@ -73,7 +73,7 @@ to the type of maps `sphere (n + 1) → 𝒰` of `n + 1`-spheres in the universe
 data
   is-finitely-coherently-invertible
     {l1 l2 : Level} {A : UU l1} {B : UU l2} :
-    (n : ℕ) (f : A → B) → UU (lsuc l1 ⊔ lsuc l2)
+    (n : ℕ) (f : A → B) → UU (l1 ⊔ l2)
   where
   is-zero-coherently-invertible :
     (f : A → B) → (B → A) → is-finitely-coherently-invertible 0 f
