@@ -593,9 +593,9 @@ module _
   (H : coherence-is-coherently-invertible f g S R)
   where
 
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' :
+  lemma-is-coherently-invertible' :
     g ·l S ·r (f ∘ g) ~ (g ∘ f) ·l R ·r g
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' =
+  lemma-is-coherently-invertible' =
     ( preserves-comp-right-whisker-comp f g (g ·l S)) ∙h
     ( double-whisker-comp² g H g) ∙h
     ( preserves-comp-left-whisker-comp g f (R ·r g))
@@ -605,7 +605,7 @@ module _
   inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
     ( inv-preserves-comp-left-whisker-comp g (f ∘ g) S) ∙h
     ( left-whisker-comp² g (inv-htpy-coh-htpy-id S)) ∙h
-    ( inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible')
+    ( lemma-is-coherently-invertible')
 ```
 
 By naturality we have
@@ -638,6 +638,8 @@ module _
   naturality-square-is-retraction-is-section = nat-htpy (R ·r g) ·r S
 ```
 
+TODO Explain
+
 ```text
              Rgfg
      gfgfg -------> gfg
@@ -658,21 +660,17 @@ module _
   (H : coherence-is-coherently-invertible f g S R)
   where
 
-  naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
+  naturality-square-transposition-coherence-is-coherently-invertible :
     coherence-square-homotopies
       ( R ·r (g ∘ f ∘ g))
       ( (g ∘ f ∘ g) ·l S)
       ( R ·r g)
       ( R ·r g)
-  naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
+  naturality-square-transposition-coherence-is-coherently-invertible =
     ( ap-concat-htpy'
       ( R ·r g)
       ( inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible
-          ( f)
-          ( g)
-          ( S)
-          ( R)
-          ( H))) ∙h
+        ( f) (g) (S) (R) (H))) ∙h
     (inv-htpy (nat-htpy R ·r (R ·r g))) ∙h
     ap-concat-htpy (R ·r (g ∘ f ∘ g)) (left-unit-law-left-whisker-comp (R ·r g))
 ```
@@ -700,35 +698,87 @@ module _
   (S : is-section f g)
   (R : is-retraction f g)
   (H : coherence-is-coherently-invertible f g S R)
-  where
+  where abstract
 
-  coherence-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
+  coherence-transposition-coherence-is-coherently-invertible :
     coherence-is-transpose-coherently-invertible f g S R
-  coherence-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
+  coherence-transposition-coherence-is-coherently-invertible =
     ( ap-concat-htpy' (R ·r g) (inv-htpy (left-inv-htpy ((g ∘ f ∘ g) ·l S)))) ∙h
-    ( assoc-htpy (inv-htpy ((g ∘ f ∘ g) ·l S)) (((g ∘ f ∘ g) ·l S)) (R ·r g)) ∙h
+    ( assoc-htpy (inv-htpy ((g ∘ f ∘ g) ·l S)) ((g ∘ f ∘ g) ·l S) (R ·r g)) ∙h
     ( ap-concat-htpy
       ( inv-htpy ((g ∘ f ∘ g) ·l S))
       ( inv-htpy (naturality-square-is-retraction-is-section f g S R))) ∙h
     ( inv-htpy
       ( assoc-htpy
-        ( inv-htpy ((g ∘ f ∘ g) ·l S))
-        ( R ·r (g ∘ f ∘ g))
-        ( g ·l S))) ∙h
+        ( inv-htpy ((g ∘ f ∘ g) ·l S)) (R ·r (g ∘ f ∘ g)) (g ·l S))) ∙h
     ( ap-concat-htpy'
       ( g ·l S)
       ( ( vertical-inv-coherence-square-homotopies
-          ( R ·r (g ∘ f ∘ g))
-          ( (g ∘ f ∘ g) ·l S)
-          ( R ·r g)
-          ( R ·r g)
-          ( naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible
-            ( f)
-            ( g)
-            ( S)
-            ( R)
-            ( H))) ∙h
+          ( R ·r (g ∘ f ∘ g)) ((g ∘ f ∘ g) ·l S) (R ·r g) (R ·r g)
+          ( naturality-square-transposition-coherence-is-coherently-invertible
+            ( f) (g) (S) (R) (H))) ∙h
         ( right-inv-htpy (R ·r g))))
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  coherence-transposition-is-coherently-invertible :
+    (H : is-coherently-invertible f) →
+    coherence-is-transpose-coherently-invertible
+      ( f)
+      ( map-inv-is-coherently-invertible H)
+      ( is-section-map-inv-is-coherently-invertible H)
+      ( is-retraction-map-inv-is-coherently-invertible H)
+  coherence-transposition-is-coherently-invertible
+    ( g , S , R , H) =
+    coherence-transposition-coherence-is-coherently-invertible
+      f g S R H
+
+  transposition-is-coherently-invertible :
+    is-coherently-invertible f → is-transpose-coherently-invertible f
+  transposition-is-coherently-invertible H =
+    is-transpose-coherently-invertible-transpose-coherence-is-invertible
+      ( is-invertible-is-coherently-invertible H)
+      ( coherence-transposition-is-coherently-invertible H)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  coherence-transposition-is-transpose-coherently-invertible :
+    (H : is-transpose-coherently-invertible f) →
+    coherence-is-coherently-invertible
+      ( f)
+      ( map-inv-is-transpose-coherently-invertible H)
+      ( is-section-map-inv-is-transpose-coherently-invertible H)
+      ( is-retraction-map-inv-is-transpose-coherently-invertible H)
+  coherence-transposition-is-transpose-coherently-invertible H =
+    coherence-transposition-is-coherently-invertible
+      ( is-coherently-invertible-map-inv-is-transpose-coherently-invertible H)
+
+  transposition-is-transpose-coherently-invertible :
+    is-transpose-coherently-invertible f → is-coherently-invertible f
+  transposition-is-transpose-coherently-invertible H =
+    is-coherently-invertible-coherence-is-invertible
+      ( is-invertible-is-transpose-coherently-invertible H)
+      ( coherence-transposition-is-transpose-coherently-invertible H)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  transposition-coherently-invertible-map :
+    coherently-invertible-map A B → transpose-coherently-invertible-map A B
+  transposition-coherently-invertible-map (f , H) =
+    ( f , transposition-is-coherently-invertible H)
+
+  transposition-transpose-coherently-invertible-map :
+    transpose-coherently-invertible-map A B → coherently-invertible-map A B
+  transposition-transpose-coherently-invertible-map (f , H) =
+    ( f , transposition-is-transpose-coherently-invertible H)
 ```
 
 ### The identity map is coherently invertible
