@@ -781,6 +781,44 @@ module _
     ( f , transposition-is-transpose-coherently-invertible H)
 ```
 
+### Inversion of coherently invertible maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-coherently-invertible-map-inv-is-coherently-invertible :
+    {f : A → B} (H : is-coherently-invertible f) →
+    is-coherently-invertible (map-inv-is-coherently-invertible H)
+  is-coherently-invertible-map-inv-is-coherently-invertible H =
+    is-coherently-invertible-map-inv-is-transpose-coherently-invertible
+      ( transposition-is-coherently-invertible H)
+
+  is-transpose-coherently-invertible-map-inv-is-transpose-coherently-invertible :
+    {f : A → B} (H : is-transpose-coherently-invertible f) →
+    is-transpose-coherently-invertible
+      ( map-inv-is-transpose-coherently-invertible H)
+  is-transpose-coherently-invertible-map-inv-is-transpose-coherently-invertible
+    H =
+    transposition-is-coherently-invertible
+      ( is-coherently-invertible-map-inv-is-transpose-coherently-invertible H)
+
+  inv-coherently-invertible-map :
+    coherently-invertible-map A B → coherently-invertible-map B A
+  inv-coherently-invertible-map (f , H) =
+    ( map-inv-is-coherently-invertible H ,
+      is-coherently-invertible-map-inv-is-coherently-invertible H)
+
+  inv-transpose-coherently-invertible-map :
+    transpose-coherently-invertible-map A B →
+    transpose-coherently-invertible-map B A
+  inv-transpose-coherently-invertible-map (f , H) =
+    ( map-inv-is-transpose-coherently-invertible H ,
+      is-transpose-coherently-invertible-map-inv-is-transpose-coherently-invertible
+        ( H))
+```
+
 ### The identity map is coherently invertible
 
 ```agda
