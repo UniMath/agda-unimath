@@ -580,8 +580,8 @@ module _
 
 ### Coherently invertible maps are coherently invertible in both senses
 
-This is Lemma 4.2.2 in _Homotopy Type Theory – Univalent Foundations of
-Mathematics_.
+The proof follows Lemma 4.2.2 in _Homotopy Type Theory – Univalent Foundations
+of Mathematics_.
 
 ```agda
 module _
@@ -590,41 +590,22 @@ module _
   (g : B → A)
   (S : is-section f g)
   (R : is-retraction f g)
-  (🧘 : coherence-is-coherently-invertible f g S R)
+  (H : coherence-is-coherently-invertible f g S R)
   where
 
   inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' :
     g ·l S ·r (f ∘ g) ~ (g ∘ f) ·l R ·r g
   inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' =
     ( preserves-comp-right-whisker-comp f g (g ·l S)) ∙h
-    ( double-whisker-comp² g 🧘 g) ∙h
+    ( double-whisker-comp² g H g) ∙h
     ( preserves-comp-left-whisker-comp g f (R ·r g))
 
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible''' :
-    g ·l S ·r (f ∘ g) ~ R ·r (g ∘ f ∘ g)
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible''' =
-    inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' ∙h
-    right-whisker-comp² (inv-htpy-coh-htpy-id R) g
-
   inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
-    g ·l S ~ R ·r g
+    (g ∘ f ∘ g) ·l S ~ (g ∘ f) ·l R ·r g
   inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
-    {! right-whisker-comp²' (eq-htpy )  !}
-
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible'' :
-    (g ∘ f ∘ g) ·l S ~ R ·r (g ∘ f ∘ g)
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible'' =
     ( inv-preserves-comp-left-whisker-comp g (f ∘ g) S) ∙h
     ( left-whisker-comp² g (inv-htpy-coh-htpy-id S)) ∙h
-    ( inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible') ∙h
-    ( right-whisker-comp² (inv-htpy-coh-htpy-id R) g)
-
-  coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' :
-    ((g ∘ f) ·l R ·r g) ~ (g ·l S ·r (f ∘ g))
-  coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' =
-    ( inv-preserves-comp-left-whisker-comp g f (R ·r g)) ∙h
-    ( double-whisker-comp² g (inv-htpy 🧘) g) ∙h
-    ( preserves-comp-right-whisker-comp f g (g ·l S))
+    ( inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible')
 ```
 
 By naturality we have
@@ -658,10 +639,10 @@ module _
 ```
 
 ```text
-             gfgS
+             Rgfg
      gfgfg -------> gfg
        |             |
-  Rgfg |             | Rg
+  Sgfg |             | Rg
        ∨             ∨
       gfg ---------> g
               Rg
@@ -674,58 +655,42 @@ module _
   (g : B → A)
   (S : is-section f g)
   (R : is-retraction f g)
-  (🧘 : coherence-is-coherently-invertible f g S R)
+  (H : coherence-is-coherently-invertible f g S R)
   where
 
   naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
     coherence-square-homotopies
-      ( (g ∘ f ∘ g) ·l S)
       ( R ·r (g ∘ f ∘ g))
+      ( (g ∘ f ∘ g) ·l S)
       ( R ·r g)
       ( R ·r g)
   naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
-    ( ap-concat-htpy
-      ( R ·r (g ∘ f ∘ g))
-      ( inv-htpy (left-unit-law-left-whisker-comp (R ·r g)))) ∙h
-    ( ( nat-htpy R) ·r (R ·r g)) ∙h
     ( ap-concat-htpy'
       ( R ·r g)
-      ( ( inv-preserves-comp-left-whisker-comp g f (R ·r g)) ∙h
-        ( left-whisker-comp² g (inv-htpy 🧘 ·r g)) ∙h
-        ( left-whisker-comp² g (coh-htpy-id S)) ∙h
-        ( preserves-comp-left-whisker-comp g (f ∘ g) S)))
+      ( inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible
+          ( f)
+          ( g)
+          ( S)
+          ( R)
+          ( H))) ∙h
+    (inv-htpy (nat-htpy R ·r (R ·r g))) ∙h
+    ap-concat-htpy (R ·r (g ∘ f ∘ g)) (left-unit-law-left-whisker-comp (R ·r g))
 ```
 
-Pasting the two lemmas along the common edge `gfgS`,
+Pasting the two lemmas along the common edge `Rgfg`
 
 ```text
-             Rg
-      gfg ---------> g
-       ∧             ∧
-  Rgfg |             | Rg
-       |             |
-     gfgfg --gfgS-> gfg
-       |             |
-  Rgfg |             | Rg
-       ∨             ∨
-      gfg ---------> g
-             gS
-```
-
-or along the common edge `Rgfg`
-
-```text
-             gfgS        gfgS
-      gfg <------> gfgfg -------> gfg
+            gfgS           gfgS
+      gfg <------- gfgfg -------> gfg
        |             |             |
     Rg |            Rgfg           | Rg
        ∨             ∨             ∨
-       g <--------- gfg ---------> g
+       g <--------- gfg ---------> gm
              Rg             gS
 ```
 
-We observe that the left-hand and right-hand side cancel each other out, leaving
-us with a homotopy `Rg ~ gS` as desired.
+we observe that the homotopy `gfgS` at the top cancels itself, as well as the
+`Rg` on the left, leaving us with a homotopy `Rg ~ gS` as desired.
 
 ```agda
 module _
@@ -734,18 +699,41 @@ module _
   (g : B → A)
   (S : is-section f g)
   (R : is-retraction f g)
-  (🧘 : coherence-is-coherently-invertible f g S R)
+  (H : coherence-is-coherently-invertible f g S R)
   where
 
   coherence-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
     coherence-is-transpose-coherently-invertible f g S R
   coherence-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
-    {!   !}
+    ( ap-concat-htpy' (R ·r g) (inv-htpy (left-inv-htpy ((g ∘ f ∘ g) ·l S)))) ∙h
+    ( assoc-htpy (inv-htpy ((g ∘ f ∘ g) ·l S)) (((g ∘ f ∘ g) ·l S)) (R ·r g)) ∙h
+    ( ap-concat-htpy
+      ( inv-htpy ((g ∘ f ∘ g) ·l S))
+      ( inv-htpy (naturality-square-is-retraction-is-section f g S R))) ∙h
+    ( inv-htpy
+      ( assoc-htpy
+        ( inv-htpy ((g ∘ f ∘ g) ·l S))
+        ( R ·r (g ∘ f ∘ g))
+        ( g ·l S))) ∙h
+    ( ap-concat-htpy'
+      ( g ·l S)
+      ( ( vertical-inv-coherence-square-homotopies
+          ( R ·r (g ∘ f ∘ g))
+          ( (g ∘ f ∘ g) ·l S)
+          ( R ·r g)
+          ( R ·r g)
+          ( naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible
+            ( f)
+            ( g)
+            ( S)
+            ( R)
+            ( H))) ∙h
+        ( right-inv-htpy (R ·r g))))
 ```
 
 ### The identity map is coherently invertible
 
-```text
+```agda
 module _
   {l : Level} {A : UU l}
   where

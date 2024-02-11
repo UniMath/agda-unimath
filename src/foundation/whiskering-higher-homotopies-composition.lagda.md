@@ -83,17 +83,6 @@ module _
   right-whisker-comp² α h = α ·r h
 ```
 
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
-  {f g : (y : B) → C y} {H H' : f ~ g}  {k k' : A → B}
-  where
-
-  right-whisker-comp²' :
-    (K : k ＝ k') → H ·r k ~ H' ·r k → H ·r k' ~ H' ·r k'
-  right-whisker-comp²' refl β = β
-```
-
 ### Double whiskering higher homotopies
 
 ```agda
