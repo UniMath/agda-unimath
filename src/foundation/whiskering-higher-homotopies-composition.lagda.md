@@ -8,10 +8,12 @@ module foundation.whiskering-higher-homotopies-composition where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation-core.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 ```
 
 </details>
@@ -79,6 +81,17 @@ module _
   right-whisker-comp² :
     (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
   right-whisker-comp² α h = α ·r h
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  {f g : (y : B) → C y} {H H' : f ~ g}  {k k' : A → B}
+  where
+
+  right-whisker-comp²' :
+    (K : k ＝ k') → H ·r k ~ H' ·r k → H ·r k' ~ H' ·r k'
+  right-whisker-comp²' refl β = β
 ```
 
 ### Double whiskering higher homotopies

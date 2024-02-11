@@ -30,19 +30,19 @@ open import foundation-core.whiskering-homotopies-concatenation
 
 A [(two-sided) inverse](foundation-core.invertible-maps.md) for a map
 `f : A → B` is a map `g : B → A` equipped with
-[homotopies](foundation-core.homotopies.md) ` G : f ∘ g ~ id` and
-`H : g ∘ f ~ id`. Such data, however is [structure](foundation.structure.md) on
+[homotopies](foundation-core.homotopies.md) ` S : f ∘ g ~ id` and
+`R : g ∘ f ~ id`. Such data, however is [structure](foundation.structure.md) on
 the map `f`, and not generally a [property](foundation-core.propositions.md).
 One way to make the type of inverses into a property is by adding a single
 coherence condition between the homotopies of the inverse, asking that the
 following diagram commmutes
 
 ```text
-               G ·r f
+               S ·r f
              ~~~~~~~~~~
   f ∘ g ∘ f             f.
              ~~~~~~~~~~
-               f ·l H
+               f ·l R
 ```
 
 We call such data a
@@ -53,11 +53,11 @@ and this additional coherence.
 There is also the alternative coherence condition we could add
 
 ```text
-               H ·r g
+               R ·r g
              ~~~~~~~~~~
   g ∘ f ∘ g             g.
              ~~~~~~~~~~
-               g ·l G
+               g ·l S
 ```
 
 We will colloquially refer to invertible maps equipped with this coherence for
@@ -382,26 +382,6 @@ module _
 
 ### Invertible maps are coherently invertible
 
-#### Lemma: A coherence for homotopies to an identity map
-
-```agda
-coh-is-coherently-invertible-id :
-  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → H ·r f ~ f ·l H
-coh-is-coherently-invertible-id {A = A} {f} H x =
-  is-injective-concat'
-    ( H x)
-    ( ap (concat (H (f x)) x) (inv (ap-id (H x))) ∙ nat-htpy H (H x))
-
-inv-coh-is-coherently-invertible-id :
-  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → f ·l H ~ H ·r f
-inv-coh-is-coherently-invertible-id {A = A} {f} H x =
-  is-injective-concat'
-    ( H x)
-    ( inv (nat-htpy H (H x)) ∙ ap (concat (H (f x)) x) (ap-id (H x)))
-```
-
-#### The proof that invertible maps are coherently invertible
-
 The construction follows Theorem 4.2.3 in _Homotopy Type Theory – Univalent
 Foundations of Mathematics_.
 
@@ -450,7 +430,7 @@ module _
                 ( is-retraction-map-inv-is-invertible H)) ∙h
               ( left-whisker-comp²
                 ( f)
-                ( inv-coh-is-coherently-invertible-id
+                ( inv-htpy-coh-htpy-id
                   ( is-retraction-map-inv-is-invertible H))))
             ( is-section-map-inv-is-invertible H ·r f)))
 
@@ -606,72 +586,76 @@ Mathematics_.
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B)
+  (g : B → A)
+  (S : is-section f g)
+  (R : is-retraction f g)
+  (🧘 : coherence-is-coherently-invertible f g S R)
   where
 
-  inv-coh-is-transpose-coherently-invertible-is-coherently-invertible' :
-    {f : A → B} (H : is-coherently-invertible f) →
-    ( ( map-inv-is-coherently-invertible H) ·l
-      ( is-section-map-inv-is-coherently-invertible H) ·r
-      ( f ∘ map-inv-is-coherently-invertible H)) ~
-    ( ( map-inv-is-coherently-invertible H ∘ f) ·l
-      ( is-retraction-map-inv-is-coherently-invertible H) ·r
-      ( map-inv-is-coherently-invertible H))
-  inv-coh-is-transpose-coherently-invertible-is-coherently-invertible' {f} H =
-    ( preserves-comp-right-whisker-comp
-      ( f)
-      ( map-inv-is-coherently-invertible H)
-      ( ( map-inv-is-coherently-invertible H) ·l
-        ( is-section-map-inv-is-coherently-invertible H))) ∙h
-    ( double-whisker-comp²
-      ( map-inv-is-coherently-invertible H)
-      ( coh-is-coherently-invertible H)
-      ( map-inv-is-coherently-invertible H)) ∙h
-    ( preserves-comp-left-whisker-comp
-      ( map-inv-is-coherently-invertible H)
-      ( f)
-      ( is-retraction-map-inv-is-coherently-invertible H ·r
-        map-inv-is-coherently-invertible H))
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' :
+    g ·l S ·r (f ∘ g) ~ (g ∘ f) ·l R ·r g
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' =
+    ( preserves-comp-right-whisker-comp f g (g ·l S)) ∙h
+    ( double-whisker-comp² g 🧘 g) ∙h
+    ( preserves-comp-left-whisker-comp g f (R ·r g))
 
-  coh-is-transpose-coherently-invertible-is-coherently-invertible' :
-    {f : A → B} (H : is-coherently-invertible f) →
-    ( ( map-inv-is-coherently-invertible H ∘ f) ·l
-      ( is-retraction-map-inv-is-coherently-invertible H) ·r
-      ( map-inv-is-coherently-invertible H)) ~
-    ( ( map-inv-is-coherently-invertible H) ·l
-      ( is-section-map-inv-is-coherently-invertible H) ·r
-      ( f ∘ map-inv-is-coherently-invertible H))
-  coh-is-transpose-coherently-invertible-is-coherently-invertible' {f} H =
-    ( inv-preserves-comp-left-whisker-comp
-      ( map-inv-is-coherently-invertible H)
-      ( f)
-      ( ( is-retraction-map-inv-is-coherently-invertible H) ·r
-        ( map-inv-is-coherently-invertible H))) ∙h
-    ( double-whisker-comp²
-      ( map-inv-is-coherently-invertible H)
-      ( inv-htpy (coh-is-coherently-invertible H))
-      ( map-inv-is-coherently-invertible H)) ∙h
-    ( preserves-comp-right-whisker-comp
-      ( f)
-      ( map-inv-is-coherently-invertible H)
-      ( ( map-inv-is-coherently-invertible H) ·l
-        ( is-section-map-inv-is-coherently-invertible H)))
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible''' :
+    g ·l S ·r (f ∘ g) ~ R ·r (g ∘ f ∘ g)
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible''' =
+    inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' ∙h
+    right-whisker-comp² (inv-htpy-coh-htpy-id R) g
+
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
+    g ·l S ~ R ·r g
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
+    {! right-whisker-comp²' (eq-htpy )  !}
+
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible'' :
+    (g ∘ f ∘ g) ·l S ~ R ·r (g ∘ f ∘ g)
+  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible'' =
+    ( inv-preserves-comp-left-whisker-comp g (f ∘ g) S) ∙h
+    ( left-whisker-comp² g (inv-htpy-coh-htpy-id S)) ∙h
+    ( inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible') ∙h
+    ( right-whisker-comp² (inv-htpy-coh-htpy-id R) g)
+
+  coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' :
+    ((g ∘ f) ·l R ·r g) ~ (g ·l S ·r (f ∘ g))
+  coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible' =
+    ( inv-preserves-comp-left-whisker-comp g f (R ·r g)) ∙h
+    ( double-whisker-comp² g (inv-htpy 🧘) g) ∙h
+    ( preserves-comp-right-whisker-comp f g (g ·l S))
 ```
 
-By naturality of `R` we have the commuting square of homotopies
+By naturality we have
 
 ```text
-                 gfgS
-     gfgfg -----------------> gfg
-       |                       |
-       |                       |
-  Rgfg |  (nat-htpy Rg) ·r S   | Rg
-       |                       |
-       ∨                       ∨
-      gfg -------------------> g
-                  gS
+                   gfgS
+     gfgfg --------------------> gfg
+       |                          |
+  Rgfg |  nat-htpy (R ·r g) ·r S  | Rg
+       ∨                          ∨
+      gfg ----------------------> g
+                    gS
 ```
 
-and by naturality of `S` we have
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B)
+  (g : B → A)
+  (S : is-section f g)
+  (R : is-retraction f g)
+  where
+
+  naturality-square-is-retraction-is-section :
+    coherence-square-homotopies
+      ( (g ∘ f ∘ g) ·l S)
+      ( R ·r (g ∘ f ∘ g))
+      ( R ·r g)
+      ( g ·l S)
+  naturality-square-is-retraction-is-section = nat-htpy (R ·r g) ·r S
+```
 
 ```text
              gfgS
@@ -680,148 +664,88 @@ and by naturality of `S` we have
   Rgfg |             | Rg
        ∨             ∨
       gfg ---------> g
-              gS
+              Rg
 ```
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  (H : is-transpose-coherently-invertible f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B)
+  (g : B → A)
+  (S : is-section f g)
+  (R : is-retraction f g)
+  (🧘 : coherence-is-coherently-invertible f g S R)
   where
 
-  -- lemma-nat :
-  --   coherence-square-homotopies
-  --     ( ( map-inv-is-coherently-invertible H ∘ f ∘ map-inv-is-coherently-invertible H) ·l
-  --       ( is-section-map-inv-is-coherently-invertible H))
-  --     ( ( is-retraction-map-inv-is-coherently-invertible H) ·r
-  --       ( map-inv-is-coherently-invertible H ∘ f ∘ map-inv-is-coherently-invertible H))
-  --     (is-retraction-map-inv-is-coherently-invertible H ·r map-inv-is-coherently-invertible H )
-  --     ( map-inv-is-coherently-invertible H ·l is-section-map-inv-is-coherently-invertible H)
-  -- lemma-nat =
-  --     nat-htpy
-  --       ( is-retraction-map-inv-is-coherently-invertible H ·r map-inv-is-coherently-invertible H) ·r
-  --       ( is-section-map-inv-is-coherently-invertible H)
-
-  lemma-nat1 :
+  naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
     coherence-square-homotopies
-      ( ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f) ·l
-        ( is-retraction-map-inv-is-transpose-coherently-invertible H))
-      ( ( is-section-map-inv-is-transpose-coherently-invertible H) ·r
-        ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f))
-      ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-      ( f ·l is-retraction-map-inv-is-transpose-coherently-invertible H)
-  lemma-nat1 =
-    ( nat-htpy
-      ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)) ·r
-    ( is-retraction-map-inv-is-transpose-coherently-invertible H)
+      ( (g ∘ f ∘ g) ·l S)
+      ( R ·r (g ∘ f ∘ g))
+      ( R ·r g)
+      ( R ·r g)
+  naturality-square-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
+    ( ap-concat-htpy
+      ( R ·r (g ∘ f ∘ g))
+      ( inv-htpy (left-unit-law-left-whisker-comp (R ·r g)))) ∙h
+    ( ( nat-htpy R) ·r (R ·r g)) ∙h
+    ( ap-concat-htpy'
+      ( R ·r g)
+      ( ( inv-preserves-comp-left-whisker-comp g f (R ·r g)) ∙h
+        ( left-whisker-comp² g (inv-htpy 🧘 ·r g)) ∙h
+        ( left-whisker-comp² g (coh-htpy-id S)) ∙h
+        ( preserves-comp-left-whisker-comp g (f ∘ g) S)))
+```
 
-  lemma-nat2 :
-    coherence-square-homotopies
-      ( ( map-inv-is-transpose-coherently-invertible H ∘
-          f ∘
-          map-inv-is-transpose-coherently-invertible H) ·l
-        ( is-section-map-inv-is-transpose-coherently-invertible H))
-      ( ( is-retraction-map-inv-is-transpose-coherently-invertible H) ·r
-        ( map-inv-is-transpose-coherently-invertible H ∘
-          f ∘
-          map-inv-is-transpose-coherently-invertible H))
-      ( map-inv-is-transpose-coherently-invertible H ·l
-        is-section-map-inv-is-transpose-coherently-invertible H)
-      ( map-inv-is-transpose-coherently-invertible H ·l
-        is-section-map-inv-is-transpose-coherently-invertible H)
-  lemma-nat2 =
-    concat-left-homotopy-coherence-square-homotopies
-      ( ( map-inv-is-transpose-coherently-invertible H ∘
-          f ∘
-          map-inv-is-transpose-coherently-invertible H) ·l
-        is-section-map-inv-is-transpose-coherently-invertible H)
-      ( map-inv-is-transpose-coherently-invertible H ·l
-        is-section-map-inv-is-transpose-coherently-invertible H ·r
-        ( f ∘ map-inv-is-transpose-coherently-invertible H))
-      ( map-inv-is-transpose-coherently-invertible H ·l
-        is-section-map-inv-is-transpose-coherently-invertible H)
-      ( map-inv-is-transpose-coherently-invertible H ·l
-        is-section-map-inv-is-transpose-coherently-invertible H)
-      ( inv-htpy (coh-is-transpose-coherently-invertible H) ·r
-        ( f ∘ map-inv-is-transpose-coherently-invertible H))
-      ( nat-htpy
-        ( map-inv-is-transpose-coherently-invertible H ·l
-          is-section-map-inv-is-transpose-coherently-invertible H) ·r
-        is-section-map-inv-is-transpose-coherently-invertible H)
+Pasting the two lemmas along the common edge `gfgS`,
 
-  lemma-nat3 :
-    coherence-square-homotopies
-      ( ( is-section-map-inv-is-transpose-coherently-invertible H) ·r
-        ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f))
-      ( ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f) ·l
-        ( is-retraction-map-inv-is-transpose-coherently-invertible H))
-      ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-      ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-  lemma-nat3 =
-    {! nat-htpy (is-section-map-inv-is-transpose-coherently-invertible H ·r f) ·r ? !}
+```text
+             Rg
+      gfg ---------> g
+       ∧             ∧
+  Rgfg |             | Rg
+       |             |
+     gfgfg --gfgS-> gfg
+       |             |
+  Rgfg |             | Rg
+       ∨             ∨
+      gfg ---------> g
+             gS
+```
 
-  lemma-nat4 :
-    coherence-square-homotopies
-      ( ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f) ·l
-        is-retraction-map-inv-is-transpose-coherently-invertible H)
-      {!   !}
-      -- ( ( is-section-map-inv-is-transpose-coherently-invertible H) ·r
-      --   ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f))
-      -- ( ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f) ·l
-      --   ( is-retraction-map-inv-is-transpose-coherently-invertible H))
-      ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-      {!   !}
-  lemma-nat4 =
-    nat-htpy (is-section-map-inv-is-transpose-coherently-invertible H ·r f) ·r is-retraction-map-inv-is-transpose-coherently-invertible H
+or along the common edge `Rgfg`
 
-  coh-is-coherently-invertible-is-transpose-coherently-invertible :
-    coherence-is-coherently-invertible
-      ( f)
-      ( map-inv-is-transpose-coherently-invertible H)
-      ( is-section-map-inv-is-transpose-coherently-invertible H)
-      ( is-retraction-map-inv-is-transpose-coherently-invertible H)
-  coh-is-coherently-invertible-is-transpose-coherently-invertible =
-    inv-htpy right-unit-htpy ∙h
-    concat-bottom-homotopy-coherence-square-homotopies
-      ( refl-htpy)
-      ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-      ( f ·l is-retraction-map-inv-is-transpose-coherently-invertible H)
-      ( _)
-      ( left-inv-htpy
-        ( is-section-map-inv-is-transpose-coherently-invertible H ·r f))
-      ( concat-top-homotopy-coherence-square-homotopies
-        ( _)
-        ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-        ( f ·l is-retraction-map-inv-is-transpose-coherently-invertible H)
-        ( _)
-        ( left-inv-htpy
-          ( is-section-map-inv-is-transpose-coherently-invertible H) ·r
-          ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f))
-        ( horizontal-pasting-coherence-square-homotopies
-          ( _)
-          ( ( is-section-map-inv-is-transpose-coherently-invertible H) ·r
-            ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f))
-          ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-          ( ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f) ·l
-            ( is-retraction-map-inv-is-transpose-coherently-invertible H))
-          ( f ·l is-retraction-map-inv-is-transpose-coherently-invertible H)
-          ( inv-htpy
-            ( is-section-map-inv-is-transpose-coherently-invertible H ·r f))
-          ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-          ( horizontal-inv-coherence-square-homotopies
-            ( ( is-section-map-inv-is-transpose-coherently-invertible H) ·r
-              ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f))
-            ( ( f ∘ map-inv-is-transpose-coherently-invertible H ∘ f) ·l
-              ( is-retraction-map-inv-is-transpose-coherently-invertible H))
-            ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-            ( is-section-map-inv-is-transpose-coherently-invertible H ·r f)
-            ( lemma-nat3))
-          ( inv-htpy lemma-nat1)))
+```text
+             gfgS        gfgS
+      gfg <------> gfgfg -------> gfg
+       |             |             |
+    Rg |            Rgfg           | Rg
+       ∨             ∨             ∨
+       g <--------- gfg ---------> g
+             Rg             gS
+```
+
+We observe that the left-hand and right-hand side cancel each other out, leaving
+us with a homotopy `Rg ~ gS` as desired.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B)
+  (g : B → A)
+  (S : is-section f g)
+  (R : is-retraction f g)
+  (🧘 : coherence-is-coherently-invertible f g S R)
+  where
+
+  coherence-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
+    coherence-is-transpose-coherently-invertible f g S R
+  coherence-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
+    {!   !}
 ```
 
 ### The identity map is coherently invertible
 
-```agda
+```text
 module _
   {l : Level} {A : UU l}
   where
@@ -846,6 +770,73 @@ module _
   pr1 id-transpose-coherently-invertible-map = id
   pr2 id-transpose-coherently-invertible-map =
     is-transpose-coherently-invertible-id
+```
+
+### Composition of coherently invertible maps
+
+```text
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+    (g : B → C) (f : A → B)
+    (G : is-coherently-invertible g)
+    (F : is-coherently-invertible f)
+  where
+
+  coh-is-coherently-invertible-comp :
+    coherence-is-coherently-invertible
+      ( g ∘ f)
+      ( map-inv-is-invertible-comp g f
+        ( is-invertible-is-coherently-invertible G)
+        ( is-invertible-is-coherently-invertible F))
+      ( is-section-map-inv-is-invertible-comp g f
+        ( is-invertible-is-coherently-invertible G)
+        ( is-invertible-is-coherently-invertible F))
+      ( is-retraction-map-inv-is-invertible-comp g f
+        ( is-invertible-is-coherently-invertible G)
+        ( is-invertible-is-coherently-invertible F))
+  coh-is-coherently-invertible-comp =
+    homotopy-reasoning
+    ( ( g) ·l
+      ( is-section-map-inv-is-coherently-invertible F) ·r
+      ( map-inv-is-coherently-invertible G ∘ g ∘ f)) ∙h
+    ( is-section-map-inv-is-coherently-invertible G ·r (g ∘ f))
+    ~
+    ( {!  !}) ∙h
+    ( g ·l is-retraction-map-inv-is-coherently-invertible G ·r f)
+      by
+      ap-binary-concat-htpy
+        ( {! ( g) ·l
+          ( is-section-map-inv-is-coherently-invertible F) ·r
+          ( map-inv-is-coherently-invertible G ∘ g ∘ f)  !})
+        ( coh-is-coherently-invertible G ·r f)
+    ~ {!   !} by {!   !}
+    ~ {!   !} by {!   !}
+    ~ {!   !} by {!   !}
+    ~ {!   !} by {!   !}
+    ~ ( ( ( g ∘ f) ·l
+          ( map-inv-is-coherently-invertible F ·l
+            is-retraction-map-inv-is-coherently-invertible G ·r f)) ∙h
+          ( ( g ∘ f) ·l is-retraction-map-inv-is-coherently-invertible F))
+      by {!   !}
+    ~ ( ( g ∘ f) ·l
+        ( ( map-inv-is-coherently-invertible F ·l
+            is-retraction-map-inv-is-coherently-invertible G ·r f) ∙h
+          ( is-retraction-map-inv-is-coherently-invertible F)))
+      by
+        inv-htpy
+          ( distributive-left-whisker-comp-concat
+            ( g ∘ f)
+            ( map-inv-is-coherently-invertible F ·l is-retraction-map-inv-is-coherently-invertible G ·r f)
+            ( is-retraction-map-inv-is-coherently-invertible F))
+
+  is-coherently-invertible-comp : is-coherently-invertible (g ∘ f)
+  is-coherently-invertible-comp =
+    is-coherently-invertible-coherence-is-invertible
+      ( is-invertible-comp g f
+        ( is-invertible-is-coherently-invertible G)
+        ( is-invertible-is-coherently-invertible F))
+      {!   !}
+
 ```
 
 ## References

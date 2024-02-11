@@ -191,21 +191,36 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B) (G : is-invertible g) (F : is-invertible f)
   where
 
-  is-invertible-comp :
-    (g : B → C) (f : A → B) →
-    is-invertible g → is-invertible f → is-invertible (g ∘ f)
-  pr1 (is-invertible-comp g f G F) =
+  map-inv-is-invertible-comp : C → A
+  map-inv-is-invertible-comp =
     map-inv-is-invertible F ∘ map-inv-is-invertible G
-  pr1 (pr2 (is-invertible-comp g f G F)) =
+
+  is-section-map-inv-is-invertible-comp :
+    is-section (g ∘ f) map-inv-is-invertible-comp
+  is-section-map-inv-is-invertible-comp =
     is-section-map-section-comp g f
       ( section-is-invertible F)
       ( section-is-invertible G)
-  pr2 (pr2 (is-invertible-comp g f G F)) =
+
+  is-retraction-map-inv-is-invertible-comp :
+    is-retraction (g ∘ f) map-inv-is-invertible-comp
+  is-retraction-map-inv-is-invertible-comp =
     is-retraction-map-retraction-comp g f
       ( retraction-is-invertible G)
       ( retraction-is-invertible F)
+
+  is-invertible-comp : is-invertible (g ∘ f)
+  is-invertible-comp =
+    ( map-inv-is-invertible-comp ,
+      is-section-map-inv-is-invertible-comp ,
+      is-retraction-map-inv-is-invertible-comp)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
 
   is-invertible-map-comp-invertible-map :
     (g : invertible-map B C) (f : invertible-map A B) →
