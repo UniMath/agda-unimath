@@ -56,15 +56,15 @@ The condition of being an `n`-coherent equivalent is a [proposition](foundation-
 
 ```agda
 data
-  is-coherent-equivalence
+  is-finitely-coherent-equivalence
     {l1 l2 : Level}  {A : UU l1} {B : UU l2} :
-    (n : ℕ) (f : A → B) → UU (lsuc l1 ⊔ lsuc l2)
+    (n : ℕ) (f : A → B) → UU (l1 ⊔ l2)
   where
   is-zero-coherent-equivalence :
-    (f : A → B) → is-coherent-equivalence 0 f
+    (f : A → B) → is-finitely-coherent-equivalence 0 f
   is-succ-coherent-equivalence :
     (n : ℕ)
     (f : A → B) (g : B → A) (H : (x : A) (y : B) → (f x ＝ y) → (x ＝ g y)) →
-    ((x : A) (y : B) → is-coherent-equivalence n (H x y)) →
-    is-coherent-equivalence (succ-ℕ n) f
+    ((x : A) (y : B) → is-finitely-coherent-equivalence n (H x y)) →
+    is-finitely-coherent-equivalence (succ-ℕ n) f
 ```

@@ -16,6 +16,8 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 ```
@@ -63,90 +65,80 @@ which are the usual homotopies witnessing that `g` is a retraction and a section
 ### The predicate of being a infinitely coherent equivalence
 
 ```agda
-record is-infinitely-coherent-equivalence
+record is-∞-equiv
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) : UU (l1 ⊔ l2)
   where
   coinductive
   field
-    map-inv-is-infinitely-coherent-equivalence : B → A
-    map-transpose-is-infinitely-coherent-equivalence :
+    map-inv-is-∞-equiv : B → A
+    map-transpose-is-∞-equiv :
       (x : A) (y : B) →
-      (f x ＝ y) → (x ＝ map-inv-is-infinitely-coherent-equivalence y)
-    is-equiv-map-transpose-is-infinitely-coherent-equivalence :
+      (f x ＝ y) → (x ＝ map-inv-is-∞-equiv y)
+    is-∞-equiv-map-transpose-is-∞-equiv :
       (x : A) (y : B) →
-      is-infinitely-coherent-equivalence
-        ( map-transpose-is-infinitely-coherent-equivalence x y)
+      is-∞-equiv
+        ( map-transpose-is-∞-equiv x y)
 
-open is-infinitely-coherent-equivalence public
+open is-∞-equiv public
 ```
 
 ### Infinitely coherent equivalences
 
 ```agda
 record
-  infinitely-coherent-equivalence
+  ∞-equiv
     {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)
   where
   coinductive
   field
-    map : A → B
-    map-inv : B → A
-    eq :
-      (x : A) (y : B) →
-      infinitely-coherent-equivalence (map x ＝ y) (map-inv y ＝ x)
+    map-∞-equiv : A → B
+    map-inv-∞-equiv : B → A
+    ∞-equiv-transpose-∞-equiv :
+      (x : A) (y : B) → ∞-equiv (map-∞-equiv x ＝ y) (map-inv-∞-equiv y ＝ x)
 
-open infinitely-coherent-equivalence public
+open ∞-equiv public
 
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  infix 6 _≃ʰ_
+  infix 6 _≃ᶜᵒʰ_
 
-  _≃ʰ_ : UU (l1 ⊔ l2)
-  _≃ʰ_ = infinitely-coherent-equivalence A B
+  _≃ᶜᵒʰ_ : UU (l1 ⊔ l2)
+  _≃ᶜᵒʰ_ = ∞-equiv A B
 ```
 
 ### Composition of infinitely coherent equivalences
 
 ```agda
-is-infinitely-coherent-equivalence-comp :
+is-∞-equiv-comp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {g : B → C} {f : A → B}
-  (G : is-infinitely-coherent-equivalence g)
-  (F : is-infinitely-coherent-equivalence f) →
-  is-infinitely-coherent-equivalence (g ∘ f)
-map-inv-is-infinitely-coherent-equivalence
-  (is-infinitely-coherent-equivalence-comp G F) =
-  map-inv-is-infinitely-coherent-equivalence F ∘
-  map-inv-is-infinitely-coherent-equivalence G
-map-transpose-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-comp G F) x z p =
-  map-transpose-is-infinitely-coherent-equivalence F x _
-    ( map-transpose-is-infinitely-coherent-equivalence G _ z p)
-is-equiv-map-transpose-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-comp G F) x z =
-  is-infinitely-coherent-equivalence-comp
-    ( is-equiv-map-transpose-is-infinitely-coherent-equivalence F x _)
-    ( is-equiv-map-transpose-is-infinitely-coherent-equivalence G _ z)
+  (G : is-∞-equiv g)
+  (F : is-∞-equiv f) →
+  is-∞-equiv (g ∘ f)
+map-inv-is-∞-equiv (is-∞-equiv-comp G F) =
+  map-inv-is-∞-equiv F ∘ map-inv-is-∞-equiv G
+map-transpose-is-∞-equiv (is-∞-equiv-comp G F) x z p =
+  map-transpose-is-∞-equiv F x _ (map-transpose-is-∞-equiv G _ z p)
+is-∞-equiv-map-transpose-is-∞-equiv (is-∞-equiv-comp G F) x z =
+  is-∞-equiv-comp
+    ( is-∞-equiv-map-transpose-is-∞-equiv F x _)
+    ( is-∞-equiv-map-transpose-is-∞-equiv G _ z)
 ```
 
 ### Infinitely coherent equivalences obtained from equivalences
 
 ```agda
-is-infinitely-coherent-equivalence-is-equiv :
+is-∞-equiv-is-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-equiv f → is-infinitely-coherent-equivalence f
-map-inv-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-is-equiv H) =
+  is-equiv f → is-∞-equiv f
+map-inv-is-∞-equiv (is-∞-equiv-is-equiv H) =
   map-inv-is-equiv H
-map-transpose-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-is-equiv H) x y =
+map-transpose-is-∞-equiv (is-∞-equiv-is-equiv H) x y =
   map-eq-transpose-equiv (_ , H)
-is-equiv-map-transpose-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-is-equiv H) x y =
-  is-infinitely-coherent-equivalence-is-equiv
-    ( is-equiv-map-equiv (eq-transpose-equiv (_ , H) x y))
+is-∞-equiv-map-transpose-is-∞-equiv (is-∞-equiv-is-equiv H) x y =
+  is-∞-equiv-is-equiv (is-equiv-map-equiv (eq-transpose-equiv (_ , H) x y))
 ```
 
 ### Being a infinitely coherent equivalence implies being an equivalence
@@ -156,54 +148,46 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  is-equiv-is-infinitely-coherent-equivalence :
-    is-infinitely-coherent-equivalence f → is-equiv f
-  is-equiv-is-infinitely-coherent-equivalence H =
+  is-equiv-is-∞-equiv : is-∞-equiv f → is-equiv f
+  is-equiv-is-∞-equiv H =
     is-equiv-is-invertible
-      ( map-inv-is-infinitely-coherent-equivalence H)
-      ( λ y →
-        map-inv-is-infinitely-coherent-equivalence
-          ( is-equiv-map-transpose-is-infinitely-coherent-equivalence H _ y)
-          (  refl))
-      ( λ x →
-        inv (map-transpose-is-infinitely-coherent-equivalence H x (f x) refl))
+      ( map-inv-is-∞-equiv H)
+      ( λ y → map-inv-is-∞-equiv (is-∞-equiv-map-transpose-is-∞-equiv H _ y) refl)
+      ( λ x → inv (map-transpose-is-∞-equiv H x (f x) refl))
 ```
 
-### Any map homotopy to an infinitely coherent equivalence is an infinitely coherent equivalence
+### Any map-∞-equiv homotopic to an infinitely coherent equivalence is an infinitely coherent equivalence
 
 ```agda
-is-infinitely-coherent-equivalence-htpy :
+is-∞-equiv-htpy :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
   f ~ g →
-  is-infinitely-coherent-equivalence f → is-infinitely-coherent-equivalence g
-map-inv-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-htpy H K) =
-  map-inv-is-infinitely-coherent-equivalence K
-map-transpose-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-htpy H K) x y =
-  map-transpose-is-infinitely-coherent-equivalence K x y ∘ concat (H x) _
-is-equiv-map-transpose-is-infinitely-coherent-equivalence
-  ( is-infinitely-coherent-equivalence-htpy H K) x y =
-  is-infinitely-coherent-equivalence-comp
-    ( is-equiv-map-transpose-is-infinitely-coherent-equivalence K x y)
-    ( is-infinitely-coherent-equivalence-is-equiv (is-equiv-concat (H x) _))
+  is-∞-equiv f → is-∞-equiv g
+map-inv-is-∞-equiv (is-∞-equiv-htpy H K) =
+  map-inv-is-∞-equiv K
+map-transpose-is-∞-equiv (is-∞-equiv-htpy H K) x y =
+  map-transpose-is-∞-equiv K x y ∘ concat (H x) _
+is-∞-equiv-map-transpose-is-∞-equiv (is-∞-equiv-htpy H K) x y =
+  is-∞-equiv-comp
+    ( is-∞-equiv-map-transpose-is-∞-equiv K x y)
+    ( is-∞-equiv-is-equiv (is-equiv-concat (H x) _))
 ```
 
-### Homotopies of elements of type `is-infinitely-coherent-equivalence f`
+### Homotopies of elements of type `is-∞-equiv f`
 
-Consider a map `f : A → B` and consider two elements
+Consider a map-∞-equiv `f : A → B` and consider two elements
 
 ```text
-  H K : is-infinitely-coherent-equivalence f.
+  H K : is-∞-equiv f.
 ```
 
-A {{#concept "homotopy of elments of type `is-infinitely-coherent-equivalence`" Agda=htpy-is-infinitely-coherent-equivalence}} from `H := (h , s , H')` to `K := (k , t , K')` consists of a homotopy
+A {{#concept "homotopy of elments of type `is-∞-equiv`" Agda=htpy-is-∞-equiv}} from `H := (h , s , H')` to `K := (k , t , K')` consists of a homotopy
 
 ```text
   α₀ : h ~ k,
 ```
 
-for each `x : A` and `y : B` a homotopy witnessing that the triangle
+for each `x : A` and `y : B` a homotopy `α₁` witnessing that the triangle
 
 ```text
                (f x = y)
@@ -218,55 +202,96 @@ for each `x : A` and `y : B` a homotopy witnessing that the triangle
 commutes, and finally a homotopy of elements of type
 
 ```text
-  is-infintitely-coherent-equivalence 
+  is-infintitely-coherent-equivalence
+    ( is-∞-equiv-htpy α₁
+      ( is-∞-equiv-comp
+        ( is-∞-equiv-is-equiv
+          ( is-equiv-concat' _ (α₀ y)))
+        ( H' x y))
+    ( K' x y).
 ```
+
+In other words, there are by the previous data two witnesses of the fact that `t x y` is an infinintely coherent equivalence. The second (easiest) element is the given element `K' x y`. The first element is from the homotopy witnessing that the above triangle commutes. On the left we compose two infinitely coherent equivalences, which results in an infinitely coherent equivalence, and the element witnessing that the composite is an infinitely coherent equivalence transports along the homotopy to a new element witnessing that `t x y` is an infinitely coherent equivalence.
 
 ```agda
 record
-  htpy-is-infinitely-coherent-equivalence
+  htpy-is-∞-equiv
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-    (H K : is-infinitely-coherent-equivalence f) : UU (l1 ⊔ l2)
+    (H K : is-∞-equiv f) : UU (l1 ⊔ l2)
   where
   coinductive
   field
-    htpy-map-inv-htpy-is-infinitely-coherent-equivalence :
-      map-inv-is-infinitely-coherent-equivalence H ~
-      map-inv-is-infinitely-coherent-equivalence K
-    htpy-map-transpose-htpy-is-infinitely-coherent-equivalence :
+    htpy-map-inv-htpy-is-∞-equiv :
+      map-inv-is-∞-equiv H ~ map-inv-is-∞-equiv K
+    htpy-map-transpose-htpy-is-∞-equiv :
       (x : A) (y : B) →
       coherence-triangle-maps
-        ( map-transpose-is-infinitely-coherent-equivalence H x y)
-        {!!} -- ( concat _ (htpy-map-inv-htpy-is-infinitely-coherent-equivalence y))
-        ( map-transpose-is-infinitely-coherent-equivalence K x y)
-    infinitely-htpy-htpy-is-infinitely-coherent-equivalence :
+        ( map-transpose-is-∞-equiv K x y)
+        ( concat' _ (htpy-map-inv-htpy-is-∞-equiv y))
+        ( map-transpose-is-∞-equiv H x y)
+    infinitely-htpy-htpy-is-∞-equiv :
       (x : A) (y : B) →
-      htpy-is-infinitely-coherent-equivalence
-        ( map-transpose-is-infinitely-coherent-equivalence K x y)
-        {!!}
-        {!!}
-      
+      htpy-is-∞-equiv
+        ( map-transpose-is-∞-equiv K x y)
+        ( is-∞-equiv-htpy
+          ( inv-htpy (htpy-map-transpose-htpy-is-∞-equiv x y))
+          ( is-∞-equiv-comp
+            ( is-∞-equiv-is-equiv (is-equiv-concat' _ _))
+            ( is-∞-equiv-map-transpose-is-∞-equiv H x y)))
+        ( is-∞-equiv-map-transpose-is-∞-equiv K x y)
 ```
 
 ## Operations
 
 ```
-inv-infinitely-coherent-equivalence :
-   {l1 : Level} {A B : UU l1} → A ≃ʰ B → B ≃ʰ A
-map (inv-infinitely-coherent-equivalence e) = map-inv e
-map-inv (inv-infinitely-coherent-equivalence e) = map e
-eq (inv-infinitely-coherent-equivalence e) y x =
-  inv-infinitely-coherent-equivalence (eq e x y)
+inv-∞-equiv :
+   {l1 : Level} {A B : UU l1} → A ≃ᶜᵒʰ B → B ≃ᶜᵒʰ A
+map-∞-equiv (inv-∞-equiv e) =
+  map-inv-∞-equiv e
+map-inv-∞-equiv (inv-∞-equiv e) =
+  map-∞-equiv e
+∞-equiv-transpose-∞-equiv (inv-∞-equiv e) y x =
+  inv-∞-equiv (∞-equiv-transpose-∞-equiv e x y)
 ```
 
 ## Properties
 
-### Being a infinitely coherent equivalence is a property
+### Computing the type `is-∞-equiv f`
 
 ```agda
-is-prop-is-infinitely-coherent-equivalence :
+type-compute-is-∞-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → UU (l1 ⊔ l2)
+type-compute-is-∞-equiv {A = A} {B} f =
+  Σ (B → A) (λ g → (x : A) (y : B) →  Σ ((f x ＝ y) → (x ＝ g y)) is-∞-equiv)
+
+map-compute-is-∞-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop (is-infinitely-coherent-equivalence f)
-is-prop-is-infinitely-coherent-equivalence = {!!}
+  type-compute-is-∞-equiv f → is-∞-equiv f
+map-inv-is-∞-equiv (map-compute-is-∞-equiv f H) =
+  pr1 H
+map-transpose-is-∞-equiv (map-compute-is-∞-equiv f H) x y =
+  pr1 (pr2 H x y)
+is-∞-equiv-map-transpose-is-∞-equiv (map-compute-is-∞-equiv f H) x y =
+  pr2 (pr2 H x y)
+
+map-inv-compute-is-∞-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-∞-equiv f → type-compute-is-∞-equiv f
+pr1 (map-inv-compute-is-∞-equiv f H) =
+  map-inv-is-∞-equiv H
+pr1 (pr2 (map-inv-compute-is-∞-equiv f H) x y) =
+  map-transpose-is-∞-equiv H x y
+pr2 (pr2 (map-inv-compute-is-∞-equiv f H) x y) =
+  is-∞-equiv-map-transpose-is-∞-equiv H x y
+```
+
+### Being a infinitely coherent equivalence is a property
+
+```text
+is-prop-is-∞-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-prop (is-∞-equiv f)
+is-prop-is-∞-equiv = {!!}
 ```
 
 
