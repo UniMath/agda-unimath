@@ -18,17 +18,21 @@ open import foundation.universe-levels
 
 ## Idea
 
-Any map `f : A → B` is said to be a `0`-coherent equivalence.
-Furthermore, a map `f : A → B` is said to be a `n + 1`-coherent equivalence if
-it comes equipped with map `g : B → A` and a family of maps
+Any map `f : A → B` is said to be a `0`-coherent equivalence. Furthermore, a map
+`f : A → B` is said to be a `n + 1`-coherent equivalence if it comes equipped
+with map `g : B → A` and a family of maps
 
 ```text
   r x y : (f x ＝ y) → (x ＝ g y)
 ```
 
-indexed by `x : A` and `y : B`, such that each `r x y` is an `n`-coherent equivalence.
+indexed by `x : A` and `y : B`, such that each `r x y` is an `n`-coherent
+equivalence.
 
-A `1`-coherent equivalence is therefore a map equipped with a [retraction](foundation-core.retractions.md). A `2`-coherent equivalence is a map `f : A → B` equipped with `g : B → A` and for each `x : A` and `y : B` a map `r x y : (f x ＝ y) → (x ＝ g y)`, equipped with
+A `1`-coherent equivalence is therefore a map equipped with a
+[retraction](foundation-core.retractions.md). A `2`-coherent equivalence is a
+map `f : A → B` equipped with `g : B → A` and for each `x : A` and `y : B` a map
+`r x y : (f x ＝ y) → (x ＝ g y)`, equipped with
 
 ```text
   s x y : (x ＝ g y) → (f x ＝ y)
@@ -40,7 +44,8 @@ and for each `p : f x ＝ y` and `q : x ＝ g y` a map
   t p q : (r x y p ＝ q) → (p ＝ s x y q)
 ```
 
-This data is equivalent to the data of a [coherently invertible map](foundation-core.coherently-invertible-maps.md)
+This data is equivalent to the data of a
+[coherently invertible map](foundation-core.coherently-invertible-maps.md)
 
 ```text
   r : (x : A) → g (f x) ＝ x
@@ -48,7 +53,9 @@ This data is equivalent to the data of a [coherently invertible map](foundation-
   t : (x : A) → ap f (r x) ＝ s (f x)
 ```
 
-The condition of being an `n`-coherent equivalent is a [proposition](foundation-core.propositions.md) for each `n ≥ 2`, and this proposition is equivalent to being an equivalence.
+The condition of being an `n`-coherent equivalent is a
+[proposition](foundation-core.propositions.md) for each `n ≥ 2`, and this
+proposition is equivalent to being an equivalence.
 
 ## Definitions
 
@@ -57,7 +64,7 @@ The condition of being an `n`-coherent equivalent is a [proposition](foundation-
 ```agda
 data
   is-finitely-coherent-equivalence
-    {l1 l2 : Level}  {A : UU l1} {B : UU l2} :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} :
     (n : ℕ) (f : A → B) → UU (l1 ⊔ l2)
   where
   is-zero-coherent-equivalence :

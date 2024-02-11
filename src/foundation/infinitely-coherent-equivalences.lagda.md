@@ -22,6 +22,8 @@ open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 ```
 
+</details>
+
 ## Idea
 
 A {{#concept "infinitely coherent equivalence"}} `e : A ≃ᶜ B` from `A` to `B`
@@ -38,7 +40,8 @@ and for each `x : A` and `y : B` a infinitely coherent equivalence
   transpose-eq : (f x ＝ y) ≃ᶜ (g y ＝ x).
 ```
 
-Since this definition is infinite, it follows that for any `x : A` and `y : B` we have maps
+Since this definition is infinite, it follows that for any `x : A` and `y : B`
+we have maps
 
 ```text
   f' : (f x ＝ y) → (g y ＝ x)
@@ -58,7 +61,11 @@ In particular, we have identifications
   g' y (g y) refl : f (g y) ＝ y,
 ```
 
-which are the usual homotopies witnessing that `g` is a retraction and a section of `f`. By infinitely imposing the structure of a coherent equivalence, we have stated an infinite hierarchy of coherence conditions. In other words, the infinite condition on infinitely coherent equivalences is a way of stating infinite coherence for equivalences.
+which are the usual homotopies witnessing that `g` is a retraction and a section
+of `f`. By infinitely imposing the structure of a coherent equivalence, we have
+stated an infinite hierarchy of coherence conditions. In other words, the
+infinite condition on infinitely coherent equivalences is a way of stating
+infinite coherence for equivalences.
 
 ## Definitions
 
@@ -152,7 +159,8 @@ module _
   is-equiv-is-∞-equiv H =
     is-equiv-is-invertible
       ( map-inv-is-∞-equiv H)
-      ( λ y → map-inv-is-∞-equiv (is-∞-equiv-map-transpose-is-∞-equiv H _ y) refl)
+      ( λ y →
+        map-inv-is-∞-equiv (is-∞-equiv-map-transpose-is-∞-equiv H _ y) refl)
       ( λ x → inv (map-transpose-is-∞-equiv H x (f x) refl))
 ```
 
@@ -181,7 +189,8 @@ Consider a map-∞-equiv `f : A → B` and consider two elements
   H K : is-∞-equiv f.
 ```
 
-A {{#concept "homotopy of elments of type `is-∞-equiv`" Agda=htpy-is-∞-equiv}} from `H := (h , s , H')` to `K := (k , t , K')` consists of a homotopy
+A {{#concept "homotopy of elments of type `is-∞-equiv`" Agda=htpy-is-∞-equiv}}
+from `H := (h , s , H')` to `K := (k , t , K')` consists of a homotopy
 
 ```text
   α₀ : h ~ k,
@@ -211,7 +220,14 @@ commutes, and finally a homotopy of elements of type
     ( K' x y).
 ```
 
-In other words, there are by the previous data two witnesses of the fact that `t x y` is an infinintely coherent equivalence. The second (easiest) element is the given element `K' x y`. The first element is from the homotopy witnessing that the above triangle commutes. On the left we compose two infinitely coherent equivalences, which results in an infinitely coherent equivalence, and the element witnessing that the composite is an infinitely coherent equivalence transports along the homotopy to a new element witnessing that `t x y` is an infinitely coherent equivalence.
+In other words, there are by the previous data two witnesses of the fact that
+`t x y` is an infinintely coherent equivalence. The second (easiest) element is
+the given element `K' x y`. The first element is from the homotopy witnessing
+that the above triangle commutes. On the left we compose two infinitely coherent
+equivalences, which results in an infinitely coherent equivalence, and the
+element witnessing that the composite is an infinitely coherent equivalence
+transports along the homotopy to a new element witnessing that `t x y` is an
+infinitely coherent equivalence.
 
 ```agda
 record
@@ -243,9 +259,9 @@ record
 
 ## Operations
 
-```
+```agda
 inv-∞-equiv :
-   {l1 : Level} {A B : UU l1} → A ≃ᶜᵒʰ B → B ≃ᶜᵒʰ A
+  {l1 : Level} {A B : UU l1} → A ≃ᶜᵒʰ B → B ≃ᶜᵒʰ A
 map-∞-equiv (inv-∞-equiv e) =
   map-inv-∞-equiv e
 map-inv-∞-equiv (inv-∞-equiv e) =
@@ -262,7 +278,7 @@ map-inv-∞-equiv (inv-∞-equiv e) =
 type-compute-is-∞-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → UU (l1 ⊔ l2)
 type-compute-is-∞-equiv {A = A} {B} f =
-  Σ (B → A) (λ g → (x : A) (y : B) →  Σ ((f x ＝ y) → (x ＝ g y)) is-∞-equiv)
+  Σ (B → A) (λ g → (x : A) (y : B) → Σ ((f x ＝ y) → (x ＝ g y)) is-∞-equiv)
 
 map-compute-is-∞-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
@@ -293,5 +309,3 @@ is-prop-is-∞-equiv :
   is-prop (is-∞-equiv f)
 is-prop-is-∞-equiv = {!!}
 ```
-
-

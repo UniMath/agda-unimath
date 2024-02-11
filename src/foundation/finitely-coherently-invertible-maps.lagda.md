@@ -18,19 +18,26 @@ open import foundation.universe-levels
 
 ## Idea
 
-Any map `f : A → B` is said to be `0`-coherently invertible if it comes equipped with a map `g : B → A`
-Furthermore, a map `f : A → B` is said to be `n + 1`-coherently invertible if
-it comes equipped with map `g : B → A` and a family of maps
+Any map `f : A → B` is said to be `0`-coherently invertible if it comes equipped
+with a map `g : B → A` Furthermore, a map `f : A → B` is said to be
+`n + 1`-coherently invertible if it comes equipped with map `g : B → A` and a
+family of maps
 
 ```text
   r x y : (f x ＝ y) → (x ＝ g y)
 ```
 
-indexed by `x : A` and `y : B`, such that each `r x y` is `n`-coherently invertible.
+indexed by `x : A` and `y : B`, such that each `r x y` is `n`-coherently
+invertible.
 
-A `1`-coherently invertible map `f : A → B` is therefore equivalently described as a map equipped with an inverse `g : B → A` which is simultaneously a [retraction](foundation-core.retractions.md) and a [section](foundation-core.sections.md) of `f`. In other words, a `1`-coherently invertible map is just an [invertible map](foundation-core.invertible-maps.md).
+A `1`-coherently invertible map `f : A → B` is therefore equivalently described
+as a map equipped with an inverse `g : B → A` which is simultaneously a
+[retraction](foundation-core.retractions.md) and a
+[section](foundation-core.sections.md) of `f`. In other words, a `1`-coherently
+invertible map is just an [invertible map](foundation-core.invertible-maps.md).
 
-A `2`-coherently invertible map `f : A → B` comes equipped with `g : B → A` and for each `x : A` and `y : B` two maps
+A `2`-coherently invertible map `f : A → B` comes equipped with `g : B → A` and
+for each `x : A` and `y : B` two maps
 
 ```text
   r : (f x ＝ y) → (x ＝ g y)
@@ -53,7 +60,10 @@ This data is equivalent to the data of
   u : (y : B) → ap g (s y) ＝ r (f y)
 ```
 
-The condition of being a `n`-coherently invertible map is not a proposition [proposition](foundation-core.propositions.md) for any `n`. In fact, for `n ≥ 1` the type of all `n`-coherently invertible maps in a universe `𝒰` is equivalent to the type of maps `sphere (n + 1) → 𝒰` of `n + 1`-spheres in the universe `𝒰`.
+The condition of being a `n`-coherently invertible map is not a proposition
+[proposition](foundation-core.propositions.md) for any `n`. In fact, for `n ≥ 1`
+the type of all `n`-coherently invertible maps in a universe `𝒰` is equivalent
+to the type of maps `sphere (n + 1) → 𝒰` of `n + 1`-spheres in the universe `𝒰`.
 
 ## Definitions
 
@@ -62,7 +72,7 @@ The condition of being a `n`-coherently invertible map is not a proposition [pro
 ```agda
 data
   is-finitely-coherently-invertible
-    {l1 l2 : Level}  {A : UU l1} {B : UU l2} :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} :
     (n : ℕ) (f : A → B) → UU (lsuc l1 ⊔ lsuc l2)
   where
   is-zero-coherently-invertible :
