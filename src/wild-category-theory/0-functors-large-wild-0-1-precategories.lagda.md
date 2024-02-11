@@ -13,10 +13,10 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.wild-category-of-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
+open import foundation.wild-category-of-types
 
 open import wild-category-theory.large-wild-0-1-precategories
 open import wild-category-theory.maps-large-wild-0-1-precategories
@@ -196,5 +196,4 @@ module _
   --   map-Large-Wild-⟨0,1⟩-Precategory {!   !} 𝒞 {!   !}
   -- obj-map-Large-Wild-⟨0,1⟩-Precategory map-postcomp-Large-Wild-⟨0,1⟩-Precategory = {! hom-Large-Wild-⟨0,1⟩-Precategory 𝒞  !}
   -- hom-map-Large-Wild-⟨0,1⟩-Precategory map-postcomp-Large-Wild-⟨0,1⟩-Precategory x g = {! comp-hom-Large-Wild-⟨0,1⟩-Precategory 𝒞 g f !}
-
 ```

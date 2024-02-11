@@ -12,8 +12,8 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.universe-levels
 
-open import wild-category-theory.large-wild-1-precategories
 open import wild-category-theory.large-wild-0-1-precategories
+open import wild-category-theory.large-wild-1-precategories
 open import wild-category-theory.wild-0-pregroupoid-relations
 ```
 

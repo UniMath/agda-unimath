@@ -51,7 +51,4 @@ module _
   where
 
   map-large-wild-⟨0,1⟩-precategory-Large-Wild-⟨0,1⟩-Precategory :
-
-
-
 ```
