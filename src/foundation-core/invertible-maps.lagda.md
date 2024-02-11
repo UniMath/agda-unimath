@@ -238,6 +238,24 @@ module _
   pr2 (comp-invertible-map g f) = is-invertible-map-comp-invertible-map g f
 ```
 
+### Invertible maps are closed under homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-invertible-htpy :
+    {f f' : A → B} → f ~ f' → is-invertible f' → is-invertible f
+  pr1 (is-invertible-htpy H (g , S , R)) = g
+  pr1 (pr2 (is-invertible-htpy H (g , S , R))) = (H ·r g) ∙h S
+  pr2 (pr2 (is-invertible-htpy H (g , S , R))) = (g ·l H) ∙h R
+
+  is-invertible-inv-htpy :
+    {f f' : A → B} → f ~ f' → is-invertible f → is-invertible f'
+  is-invertible-inv-htpy H = is-invertible-htpy (inv-htpy H)
+```
+
 ## See also
 
 - For the coherent notion of invertible maps see

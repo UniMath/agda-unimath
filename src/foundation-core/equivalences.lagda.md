@@ -488,11 +488,10 @@ module _
     {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
     map-inv-is-equiv H ~ map-inv-is-equiv K
   htpy-map-inv-is-equiv G H K b =
-    ( inv
-      ( is-retraction-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
-    ( ap (map-inv-is-equiv K)
-      ( ( inv (G (map-inv-is-equiv H b))) ∙
-        ( is-section-map-inv-is-equiv H b)))
+    ( inv (is-retraction-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
+    ( ap
+      ( map-inv-is-equiv K)
+      ( inv (G (map-inv-is-equiv H b)) ∙ is-section-map-inv-is-equiv H b))
 ```
 
 ### Any retraction of an equivalence is an equivalence
