@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.strict-symmetrization-binary-relations
 open import foundation.universe-levels
 
-open import wild-category-theory.large-wild-⟨0,1⟩-precategories
+open import wild-category-theory.large-wild-0-1-precategories
 open import wild-category-theory.strict-symmetrization-wild-0-pregroupoid-relations
 open import wild-category-theory.wild-0-pregroupoid-relations
 ```

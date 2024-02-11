@@ -33,7 +33,9 @@ be done with Σ-types, we must use a record type.)
 ```agda
 record
   Large-Precategory (α : Level → Level) (β : Level → Level → Level) : UUω where
+
   constructor make-Large-Precategory
+
   field
     obj-Large-Precategory :
       (l : Level) → UU (α l)
@@ -44,6 +46,22 @@ record
       obj-Large-Precategory l2 →
       Set (β l1 l2)
 
+  hom-Large-Precategory :
+      {l1 l2 : Level} →
+      obj-Large-Precategory l1 →
+      obj-Large-Precategory l2 →
+      UU (β l1 l2)
+  hom-Large-Precategory X Y = type-Set (hom-set-Large-Precategory X Y)
+
+  is-set-hom-Large-Precategory :
+    {l1 l2 : Level}
+    (X : obj-Large-Precategory l1)
+    (Y : obj-Large-Precategory l2) →
+    is-set (hom-Large-Precategory X Y)
+  is-set-hom-Large-Precategory X Y =
+    is-set-type-Set (hom-set-Large-Precategory X Y)
+
+  field
     comp-hom-Large-Precategory :
       {l1 l2 l3 : Level}
       {X : obj-Large-Precategory l1}
@@ -105,21 +123,6 @@ module _
   {β : Level → Level → Level}
   (C : Large-Precategory α β)
   where
-
-  hom-Large-Precategory :
-    {l1 l2 : Level}
-    (X : obj-Large-Precategory C l1)
-    (Y : obj-Large-Precategory C l2) →
-    UU (β l1 l2)
-  hom-Large-Precategory X Y = type-Set (hom-set-Large-Precategory C X Y)
-
-  is-set-hom-Large-Precategory :
-    {l1 l2 : Level}
-    (X : obj-Large-Precategory C l1)
-    (Y : obj-Large-Precategory C l2) →
-    is-set (hom-Large-Precategory X Y)
-  is-set-hom-Large-Precategory X Y =
-    is-set-type-Set (hom-set-Large-Precategory C X Y)
 
   ap-comp-hom-Large-Precategory :
     {l1 l2 l3 : Level}

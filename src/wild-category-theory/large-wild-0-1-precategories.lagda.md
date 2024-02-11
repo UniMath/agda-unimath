@@ -1,7 +1,7 @@
 # Large wild (0,1)-precategories
 
 ```agda
-module wild-category-theory.large-wild-⟨0,1⟩-precategories where
+module wild-category-theory.large-wild-0-1-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -89,7 +89,7 @@ We also record a range of common projections.
   refl-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
     {l1 l2 : Level}
     {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
-    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2}
     {f : hom-Large-Wild-⟨0,1⟩-Precategory X Y} →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory f f
   refl-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
@@ -99,7 +99,7 @@ We also record a range of common projections.
   inv-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
     {l1 l2 : Level}
     {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
-    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2}
     {f g : hom-Large-Wild-⟨0,1⟩-Precategory X Y} →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory f g →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory g f
@@ -110,7 +110,7 @@ We also record a range of common projections.
   comp-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
     {l1 l2 : Level}
     {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
-    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
+    {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2}
     {f g h : hom-Large-Wild-⟨0,1⟩-Precategory X Y} →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory g h →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory f g →

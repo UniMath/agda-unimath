@@ -1,7 +1,7 @@
 # Functors between large wild (0,1)-precategories
 
 ```agda
-module wild-category-theory.0-functors-large-wild-⟨0,1⟩-precategories where
+module wild-category-theory.0-functors-large-wild-0-1-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -13,12 +13,13 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.wild-category-of-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import wild-category-theory.large-wild-⟨0,1⟩-precategories
-open import wild-category-theory.maps-large-wild-⟨0,1⟩-precategories
+open import wild-category-theory.large-wild-0-1-precategories
+open import wild-category-theory.maps-large-wild-0-1-precategories
 ```
 
 </details>
@@ -28,7 +29,7 @@ open import wild-category-theory.maps-large-wild-⟨0,1⟩-precategories
 A
 {{#concept "functor" Disambiguation="between large wild (0,1)-precategories" Agda=0-functor-Large-Wild-⟨0,1⟩-Precategory}}
 between
-[large wild (0,1)-precategories](wild-category-theory.large-wild-⟨0,1⟩-precategories.lagda.md)
+[large wild (0,1)-precategories](wild-category-theory.large-wild-0-1-precategories.lagda.md)
 is a map of objects `F₀ : Obj 𝒞 → Obj 𝒟` and a map of hom-types
 
 ```text
@@ -177,4 +178,23 @@ module _
       .preserves-relation-hom-0-functor-Large-Wild-⟨0,1⟩-Precategory →
         ( preserves-relation-hom-0-functor-Large-Wild-⟨0,1⟩-Precategory G ∘
           preserves-relation-hom-0-functor-Large-Wild-⟨0,1⟩-Precategory F)
+```
+
+### Postcomp
+
+```agda
+module _
+  {α : Level → Level} {β γ : Level → Level → Level}
+  {𝒞 : Large-Wild-⟨0,1⟩-Precategory α β γ}
+  {l2 l3 : Level}
+  {Y : obj-Large-Wild-⟨0,1⟩-Precategory 𝒞 l2}
+  {Z : obj-Large-Wild-⟨0,1⟩-Precategory 𝒞 l3}
+  (f : hom-Large-Wild-⟨0,1⟩-Precategory 𝒞 Y Z)
+  where
+
+  -- map-postcomp-Large-Wild-⟨0,1⟩-Precategory :
+  --   map-Large-Wild-⟨0,1⟩-Precategory {!   !} 𝒞 {!   !}
+  -- obj-map-Large-Wild-⟨0,1⟩-Precategory map-postcomp-Large-Wild-⟨0,1⟩-Precategory = {! hom-Large-Wild-⟨0,1⟩-Precategory 𝒞  !}
+  -- hom-map-Large-Wild-⟨0,1⟩-Precategory map-postcomp-Large-Wild-⟨0,1⟩-Precategory x g = {! comp-hom-Large-Wild-⟨0,1⟩-Precategory 𝒞 g f !}
+
 ```
