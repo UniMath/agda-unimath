@@ -44,7 +44,7 @@ to be an operation
 Left whiskering of homotopies with respect to concatenation is an operation
 
 ```text
-  (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙h I ~ H ∙h K.
+  (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙h I ~ H ∙h J.
 ```
 
 We implement the left whiskering operation of homotopies with respect to
@@ -58,6 +58,10 @@ module _
   left-whisker-concat-htpy :
     left-whiskering-operation ((x : A) → B x) (_~_) (_∙h_) (_~_)
   left-whisker-concat-htpy H K x = left-whisker-concat (H x) (K x)
+
+  left-unwhisker-concat-htpy :
+    {f g h : (x : A) → B x} (H : f ~ g) {I J : g ~ h} → H ∙h I ~ H ∙h J → I ~ J
+  left-unwhisker-concat-htpy H K x = left-unwhisker-concat (H x) (K x)
 ```
 
 ### Right whiskering of homotopies with respect to concatenation
@@ -79,6 +83,10 @@ module _
   right-whisker-concat-htpy :
     right-whiskering-operation ((x : A) → B x) (_~_) (_∙h_) (_~_)
   right-whisker-concat-htpy K J x = right-whisker-concat (K x) (J x)
+
+  right-unwhisker-concat-htpy :
+    {f g h : (x : A) → B x} {H I : f ~ g} (J : g ~ h) → H ∙h J ~ I ∙h J → H ~ I
+  right-unwhisker-concat-htpy H K x = right-unwhisker-concat (H x) (K x)
 ```
 
 ## Properties

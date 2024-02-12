@@ -245,11 +245,22 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
+  is-section-map-inv-is-invertible-htpy :
+    {f f' : A → B} (H : f' ~ f) (F : is-invertible f) →
+    is-section f' (map-inv-is-invertible F)
+  is-section-map-inv-is-invertible-htpy H (g , S , R) = (H ·r g) ∙h S
+
+  is-retraction-map-inv-is-invertible-htpy :
+    {f f' : A → B} (H : f' ~ f) (F : is-invertible f) →
+    is-retraction f' (map-inv-is-invertible F)
+  is-retraction-map-inv-is-invertible-htpy H (g , S , R) = (g ·l H) ∙h R
+
   is-invertible-htpy :
-    {f f' : A → B} → f ~ f' → is-invertible f' → is-invertible f
-  pr1 (is-invertible-htpy H (g , S , R)) = g
-  pr1 (pr2 (is-invertible-htpy H (g , S , R))) = (H ·r g) ∙h S
-  pr2 (pr2 (is-invertible-htpy H (g , S , R))) = (g ·l H) ∙h R
+    {f f' : A → B} → f' ~ f → is-invertible f → is-invertible f'
+  is-invertible-htpy H F =
+    ( map-inv-is-invertible F ,
+      is-section-map-inv-is-invertible-htpy H F ,
+      is-retraction-map-inv-is-invertible-htpy H F)
 
   is-invertible-inv-htpy :
     {f f' : A → B} → f ~ f' → is-invertible f → is-invertible f'

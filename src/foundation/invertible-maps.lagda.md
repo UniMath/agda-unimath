@@ -148,11 +148,11 @@ module _
     ( coherence-triangle-homotopies
       ( is-section-map-inv-invertible-map s)
       ( is-section-map-inv-invertible-map t)
-      ( horizontal-concat-htpy I H)) ×
+      ( horizontal-concat-htpy H I)) ×
     ( coherence-triangle-homotopies
       ( is-retraction-map-inv-invertible-map s)
       ( is-retraction-map-inv-invertible-map t)
-      ( horizontal-concat-htpy H I))
+      ( horizontal-concat-htpy I H))
 
   htpy-invertible-map : (s t : invertible-map A B) → UU (l1 ⊔ l2)
   htpy-invertible-map s t =

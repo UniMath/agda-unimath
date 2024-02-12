@@ -59,6 +59,10 @@ module _
 
   left-whisker-concat : left-whiskering-operation A (_＝_) (_∙_) (_＝_)
   left-whisker-concat p β = ap (p ∙_) β
+
+  left-unwhisker-concat :
+    {x y z : A}  (p : x ＝ y) {q r : y ＝ z} → p ∙ q ＝ p ∙ r → q ＝ r
+  left-unwhisker-concat = is-injective-concat
 ```
 
 ### Right whiskering of identifications
@@ -79,6 +83,10 @@ module _
 
   right-whisker-concat : right-whiskering-operation A (_＝_) (_∙_) (_＝_)
   right-whisker-concat α q = ap (_∙ q) α
+
+  right-unwhisker-concat :
+    {x y z : A}  {p q : x ＝ y} (r : y ＝ z) → p ∙ r ＝ q ∙ r → p ＝ q
+  right-unwhisker-concat r = is-injective-concat' r
 ```
 
 ### Double whiskering of identifications
