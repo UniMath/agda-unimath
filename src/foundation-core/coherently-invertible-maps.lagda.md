@@ -1286,7 +1286,9 @@ module _
       ( g , is-section-g) S =
       is-coherently-invertible-htpy
         ( ( f ·l (inv-htpy (is-section-map-inv-is-coherently-invertible S))) ∙h
-          ( right-whisker-comp is-section-g (map-inv-is-coherently-invertible S)))
+          ( right-whisker-comp
+            ( is-section-g)
+            ( map-inv-is-coherently-invertible S)))
         ( is-coherently-invertible-map-inv-is-coherently-invertible S)
 ```
 
