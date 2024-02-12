@@ -846,8 +846,8 @@ module _
     is-coherently-invertible-coherence-is-invertible is-invertible-id refl-htpy
 
   id-coherently-invertible-map : coherently-invertible-map A A
-  pr1 id-coherently-invertible-map = id
-  pr2 id-coherently-invertible-map = is-coherently-invertible-id
+  id-coherently-invertible-map =
+    ( id , is-coherently-invertible-id)
 
   is-transpose-coherently-invertible-id :
     is-transpose-coherently-invertible (id {A = A})
@@ -857,9 +857,8 @@ module _
 
   id-transpose-coherently-invertible-map :
     transpose-coherently-invertible-map A A
-  pr1 id-transpose-coherently-invertible-map = id
-  pr2 id-transpose-coherently-invertible-map =
-    is-transpose-coherently-invertible-id
+  id-transpose-coherently-invertible-map =
+    ( id , is-transpose-coherently-invertible-id)
 ```
 
 ### Composition of coherently invertible maps
@@ -871,16 +870,6 @@ module _
     (G : is-coherently-invertible g)
     (F : is-coherently-invertible f)
   where
-
-  my-lemma' :
-    ( g ·l ( is-section-map-inv-is-coherently-invertible F) ·r
-      ( map-inv-is-coherently-invertible G ∘ g)) ∙h
-    ( g ·l is-retraction-map-inv-is-coherently-invertible G) ~
-    ( (g ∘ f ∘ map-inv-is-coherently-invertible F) ·l
-      ( is-retraction-map-inv-is-coherently-invertible G)) ∙h
-    ( g ·l is-section-map-inv-is-coherently-invertible F)
-  my-lemma' =
-    nat-htpy (g ·l is-section-map-inv-is-coherently-invertible F) ·r (is-retraction-map-inv-is-coherently-invertible G)
 
   coh-is-coherently-invertible-comp :
     coherence-is-coherently-invertible
@@ -895,53 +884,30 @@ module _
         ( is-invertible-is-coherently-invertible G)
         ( is-invertible-is-coherently-invertible F))
   coh-is-coherently-invertible-comp =
-    homotopy-reasoning
-    ( ( g) ·l
-      ( is-section-map-inv-is-coherently-invertible F) ·r
-      ( map-inv-is-coherently-invertible G ∘ g ∘ f)) ∙h
-    ( is-section-map-inv-is-coherently-invertible G ·r (g ∘ f))
-    ~
-    ( ( g) ·l
-      ( is-section-map-inv-is-coherently-invertible F) ·r
-      ( map-inv-is-coherently-invertible G ∘ g ∘ f)) ∙h
-    ( g ·l is-retraction-map-inv-is-coherently-invertible G ·r f)
-      by
-      ap-concat-htpy
-        ( ( g) ·l
-          ( is-section-map-inv-is-coherently-invertible F) ·r
-          ( map-inv-is-coherently-invertible G ∘ g ∘ f))
-        ( coh-is-coherently-invertible G ·r f)
-    ~
-      ( ( g ∘ f ∘ map-inv-is-coherently-invertible F) ·l
-        ( is-retraction-map-inv-is-coherently-invertible G) ·r
-        ( f)) ∙h
-      ( g ·l is-section-map-inv-is-coherently-invertible F ·r f)
-    by
-      right-whisker-comp² my-lemma' f
-    ~ ( ( ( g ∘ f) ·l
-          ( map-inv-is-coherently-invertible F ·l
-            is-retraction-map-inv-is-coherently-invertible G ·r f)) ∙h
-          ( ( g ∘ f) ·l is-retraction-map-inv-is-coherently-invertible F))
-      by
-        ap-binary-concat-htpy
-          ( inv-htpy
-            ( preserves-comp-left-whisker-comp
-              ( g ∘ f)
-              ( map-inv-is-coherently-invertible F)
-              ( is-retraction-map-inv-is-coherently-invertible G ·r f)))
-          ( ( left-whisker-comp² g (coh-is-coherently-invertible F)) ∙h
-            ( preserves-comp-left-whisker-comp g f
-              ( is-retraction-map-inv-is-coherently-invertible F)))
-    ~ ( ( g ∘ f) ·l
-        ( ( map-inv-is-coherently-invertible F ·l
-            is-retraction-map-inv-is-coherently-invertible G ·r f) ∙h
-          ( is-retraction-map-inv-is-coherently-invertible F)))
-      by
-        inv-htpy
-          ( distributive-left-whisker-comp-concat
-            ( g ∘ f)
-            ( map-inv-is-coherently-invertible F ·l is-retraction-map-inv-is-coherently-invertible G ·r f)
-            ( is-retraction-map-inv-is-coherently-invertible F))
+    ( ap-concat-htpy
+      ( ( g) ·l
+        ( is-section-map-inv-is-coherently-invertible F) ·r
+        ( map-inv-is-coherently-invertible G ∘ g ∘ f))
+      ( coh-is-coherently-invertible G ·r f)) ∙h
+    ( right-whisker-comp²
+      ( ( nat-htpy (g ·l is-section-map-inv-is-coherently-invertible F)) ·r
+        ( is-retraction-map-inv-is-coherently-invertible G))
+      ( f)) ∙h
+    ( ap-binary-concat-htpy
+      ( inv-htpy
+        ( preserves-comp-left-whisker-comp
+          ( g ∘ f)
+          ( map-inv-is-coherently-invertible F)
+          ( is-retraction-map-inv-is-coherently-invertible G ·r f)))
+      ( ( left-whisker-comp² g (coh-is-coherently-invertible F)) ∙h
+        ( preserves-comp-left-whisker-comp g f
+          ( is-retraction-map-inv-is-coherently-invertible F)))) ∙h
+    ( inv-htpy
+      ( distributive-left-whisker-comp-concat
+        ( g ∘ f)
+        ( ( map-inv-is-coherently-invertible F) ·l
+          ( is-retraction-map-inv-is-coherently-invertible G ·r f))
+        ( is-retraction-map-inv-is-coherently-invertible F)))
 
   is-coherently-invertible-comp : is-coherently-invertible (g ∘ f)
   is-coherently-invertible-comp =
@@ -950,6 +916,59 @@ module _
         ( is-invertible-is-coherently-invertible G)
         ( is-invertible-is-coherently-invertible F))
       ( coh-is-coherently-invertible-comp)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+    (g : B → C) (f : A → B)
+    (G : is-transpose-coherently-invertible g)
+    (F : is-transpose-coherently-invertible f)
+  where
+
+  coh-is-transpose-coherently-invertible-comp :
+    coherence-is-transpose-coherently-invertible
+      ( g ∘ f)
+      ( map-inv-is-invertible-comp g f
+        ( is-invertible-is-transpose-coherently-invertible G)
+        ( is-invertible-is-transpose-coherently-invertible F))
+      ( is-section-map-inv-is-invertible-comp g f
+        ( is-invertible-is-transpose-coherently-invertible G)
+        ( is-invertible-is-transpose-coherently-invertible F))
+      ( is-retraction-map-inv-is-invertible-comp g f
+        ( is-invertible-is-transpose-coherently-invertible G)
+        ( is-invertible-is-transpose-coherently-invertible F))
+  coh-is-transpose-coherently-invertible-comp =
+    coh-is-coherently-invertible-comp
+      ( map-inv-is-transpose-coherently-invertible F)
+      ( map-inv-is-transpose-coherently-invertible G)
+      ( is-coherently-invertible-map-inv-is-transpose-coherently-invertible F)
+      ( is-coherently-invertible-map-inv-is-transpose-coherently-invertible G)
+
+  is-transpose-coherently-invertible-comp :
+    is-transpose-coherently-invertible (g ∘ f)
+  is-transpose-coherently-invertible-comp =
+    is-transpose-coherently-invertible-transpose-coherence-is-invertible
+      ( is-invertible-comp g f
+        ( is-invertible-is-transpose-coherently-invertible G)
+        ( is-invertible-is-transpose-coherently-invertible F))
+      ( coh-is-transpose-coherently-invertible-comp)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  comp-coherently-invertible-map :
+    coherently-invertible-map B C →
+    coherently-invertible-map A B →
+    coherently-invertible-map A C
+  comp-coherently-invertible-map (g , G) (f , F) =
+    ( g ∘ f , is-coherently-invertible-comp g f G F)
+
+  comp-transpose-coherently-invertible-map :
+    transpose-coherently-invertible-map B C →
+    transpose-coherently-invertible-map A B →
+    transpose-coherently-invertible-map A C
+  comp-transpose-coherently-invertible-map (g , G) (f , F) =
+    ( g ∘ f , is-transpose-coherently-invertible-comp g f G F)
 ```
 
 ## References
