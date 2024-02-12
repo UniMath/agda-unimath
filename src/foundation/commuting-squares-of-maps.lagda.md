@@ -570,8 +570,12 @@ module _
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
       ( double-whisker-coherence-square-homotopies
-        ( bottom-right ·l (sq-left-bottom ·r left-top))
-        ( right-bottom ·l (sq-right-top ·r top-left))
+        ( bottom-right ·l sq-left-bottom ·r left-top)
+        ( sq-right-bottom ·r mid-left ·r left-top)
+        ( bottom-right ·l mid-bottom ·l sq-left-top)
+        ( right-bottom ·l mid-right ·l sq-left-top)
+        ( sq-right-bottom ·r mid-top ·r top-left)
+        ( right-bottom ·l sq-right-top ·r top-left)
         ( inv-htpy
           ( swap-nat-coherence-square-maps
             ( top-left)

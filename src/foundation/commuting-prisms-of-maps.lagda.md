@@ -96,13 +96,22 @@ module _
     ( right-whisker-concat-coherence-square-homotopies
       ( front-bottom ·r hA)
       ( bottom ·r hA' ·r hA)
+      ( hC' ·l mid ·r hA)
+      ( ( pasting-horizontal-coherence-square-maps
+            h' g' hA' hB' hC' h'' g'' left-bottom right-bottom) ·r
+        ( hA))
+      ( prism-bottom ·r hA)
       ( hC' ·l ((g' ·l left-top) ∙h (right-top ·r h)))
-      ( prism-bottom ·r hA)) ∙h
+      ) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r hA)
       ( ( map-coherence-square-homotopies hC'
           ( front-top)
           ( mid ·r hA)
+          (hC ·l top)
+          ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g'
+            ( left-top)
+            ( right-top))
           ( prism-top)) ∙h
         ( ap-concat-htpy
           ( hC' ·l front-top)
