@@ -136,14 +136,8 @@ module _
       ( bottom-right ∘∗ bottom-left)
   horizontal-pasting-coherence-square-pointed-maps =
     concat-pointed-htpy
-      ( (bottom-right ∘∗ bottom-left) ∘∗ left)
-      ( bottom-right ∘∗ (bottom-left ∘∗ left))
-      ( right ∘∗ (top-right ∘∗ top-left))
       ( associative-comp-pointed-map bottom-right bottom-left left)
       ( concat-pointed-htpy
-        ( bottom-right ∘∗ (bottom-left ∘∗ left))
-        ( bottom-right ∘∗ (middle ∘∗ top-left))
-        ( right ∘∗ (top-right ∘∗ top-left))
         {! left-whisker-pointed-htpy!}
         {!!})
 ```

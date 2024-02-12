@@ -17,6 +17,7 @@ open import foundation.whiskering-identifications-concatenation
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation.commuting-squares-of-identifications
 ```
 
 </details>
@@ -686,4 +687,50 @@ module _
   associative-horizontal-pasting-coherence-triangle-identifications
     refl .refl .refl .refl refl refl refl refl refl refl =
     refl
+```
+
+### Vertically pasting commuting squares and commuting triangles of identifications
+
+Consider a diagram of the form
+
+```text
+                top
+         a ------------> b
+          \             /
+  top-left \           / top-right
+            ∨   mid   ∨
+             c ----> d
+              \     /
+   bottom-left \   / bottom-right
+                ∨ ∨
+                 e
+```
+
+with `s : top-left ∙ mid ＝ top ∙ top-right` witnessing that the square commutes, and with `t : bottom-left ＝ mid ∙ bottom-right` witnessing that the triangle commutes. Then the outer triangle commutes.
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  vertical-pasting-coherence-square-coherence-triangle-identifications :
+    {a b c d e : A}
+    (top : a ＝ b) (top-left : a ＝ c) (top-right : b ＝ d) (mid : c ＝ d)
+    (bottom-left : c ＝ e) (bottom-right : d ＝ e) →
+    coherence-square-identifications top top-left top-right mid →
+    coherence-triangle-identifications bottom-left bottom-right mid →
+    coherence-triangle-identifications
+      ( top-left ∙ bottom-left)
+      ( top-right ∙ bottom-right)
+      ( top)
+  vertical-pasting-coherence-square-coherence-triangle-identifications
+    top top-left top-right mid bottom-left bottom-right s t =
+    ( left-whisker-concat top-left t) ∙
+    ( right-whisker-concat-coherence-square-identifications
+      ( top)
+      ( top-left)
+      ( top-right)
+      ( mid)
+      ( s)
+      ( bottom-right))
 ```

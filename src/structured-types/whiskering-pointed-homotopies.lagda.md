@@ -8,6 +8,7 @@ module structured-types.whiskering-pointed-homotopies where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.homotopies
@@ -119,12 +120,12 @@ module _
   htpy-left-whisker-pointed-htpy =
     map-pointed-map g ·l htpy-pointed-htpy f1 f2 H
 
-  coh-left-whisker-pointed-htpy' :
-    coherence-base-point-htpy-pointed-Π
+  coherence-point-left-whisker-pointed-htpy :
+    coherence-point-unpointed-htpy-pointed-Π
       ( g ∘∗ f1)
       ( g ∘∗ f2)
       ( htpy-left-whisker-pointed-htpy)
-  coh-left-whisker-pointed-htpy' =
+  coherence-point-left-whisker-pointed-htpy =
     right-whisker-concat-coherence-triangle-identifications
       ( ap (map-pointed-map g) (preserves-point-pointed-map f1))
       ( ap (map-pointed-map g) (preserves-point-pointed-map f2))
@@ -137,15 +138,11 @@ module _
         ( preserves-point-pointed-map f1)
         ( preserves-point-pointed-map f2)
         ( htpy-pointed-htpy f1 f2 H (point-Pointed-Type A))
-        ( coh-pointed-htpy f1 f2 H))
+        ( coherence-point-pointed-htpy f1 f2 H))
 
   left-whisker-pointed-htpy : g ∘∗ f1 ~∗ g ∘∗ f2
-  left-whisker-pointed-htpy =
-    make-pointed-htpy
-      ( g ∘∗ f1)
-      ( g ∘∗ f2)
-      ( htpy-left-whisker-pointed-htpy)
-      ( coh-left-whisker-pointed-htpy')
+  pr1 left-whisker-pointed-htpy = htpy-left-whisker-pointed-htpy
+  pr2 left-whisker-pointed-htpy = coherence-point-left-whisker-pointed-htpy
 ```
 
 ### Right whiskering of pointed homotopies
@@ -154,10 +151,31 @@ module _
 module _
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
+  (g1 g2 : B →∗ C) (H : g1  ~∗ g2) (f : A →∗ B)
   where
 
-  right-whisker-pointed-htpy :
-    (g1 g2 : B →∗ C) (H : g1  ~∗ g2) (f : A →∗ B) → g1 ∘∗ f ~∗ g2 ∘∗ f
-  right-whisker-pointed-htpy g1 g2 H (pair f refl) =
-    pair (htpy-pointed-htpy g1 g2 H ·r f) (preserves-point-pointed-htpy g1 g2 H)
+  htpy-right-whisker-pointed-htpy :
+    unpointed-htpy-pointed-Π (g1 ∘∗ f) (g2 ∘∗ f)
+  htpy-right-whisker-pointed-htpy =
+    htpy-pointed-htpy g1 g2 H ·r map-pointed-map f
+
+  coherence-point-right-whisker-pointed-htpy :
+    coherence-point-unpointed-htpy-pointed-Π
+      ( g1 ∘∗ f)
+      ( g2 ∘∗ f)
+      ( htpy-right-whisker-pointed-htpy)
+  coherence-point-right-whisker-pointed-htpy =
+    vertical-pasting-coherence-square-coherence-triangle-identifications
+      ( htpy-pointed-htpy g1 g2 H _)
+      ( ap (map-pointed-map g1) _)
+      ( ap (map-pointed-map g2) _)
+      ( htpy-pointed-htpy g1 g2 H _)
+      ( preserves-point-pointed-map g1)
+      ( preserves-point-pointed-map g2)
+      ( inv (nat-htpy (htpy-pointed-htpy g1 g2 H) _))
+      ( coherence-point-pointed-htpy g1 g2 H)
+    
+  right-whisker-pointed-htpy : g1 ∘∗ f ~∗ g2 ∘∗ f
+  pr1 right-whisker-pointed-htpy = htpy-right-whisker-pointed-htpy
+  pr2 right-whisker-pointed-htpy = coherence-point-right-whisker-pointed-htpy
 ```
