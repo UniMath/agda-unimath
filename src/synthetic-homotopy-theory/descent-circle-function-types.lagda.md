@@ -100,6 +100,7 @@ module _
   pr2 eq-descent-data-circle-function-type h =
     ( eq-htpy
       ( horizontal-concat-htpy
+        ( coherence-square-family-with-descent-data-circle B)
         ( h ·l
           inv-htpy
             ( coherence-square-maps-inv-equiv
@@ -109,8 +110,7 @@ module _
                 ( family-family-with-descent-data-circle A)
                 ( loop-free-loop l))
               ( equiv-family-with-descent-data-circle A)
-              ( coherence-square-family-with-descent-data-circle A)))
-        ( coherence-square-family-with-descent-data-circle B))) ∙
+              ( coherence-square-family-with-descent-data-circle A))))) ∙
     ( inv
       ( ( tr-function-type
           ( family-family-with-descent-data-circle A)

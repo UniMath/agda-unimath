@@ -604,8 +604,8 @@ module _
       is-pullback-swap-cone' f g c
         ( is-pullback-is-equiv-vertical-maps g f
           ( swap-cone f g c)
-          is-equiv-f
-          is-equiv-q)
+          ( is-equiv-f)
+          ( is-equiv-q))
 ```
 
 ## See also
