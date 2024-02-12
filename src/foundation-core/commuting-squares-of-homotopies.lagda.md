@@ -256,6 +256,27 @@ module _
       ( H x)
 ```
 
+Similarly we may whisker it on the right.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  {f g h i : (y : B) → C y}
+  where
+
+  right-whisker-comp-coherence-square-homotopies :
+    (top : f ~ g) (left : f ~ h) (right : g ~ i) (bottom : h ~ i) →
+    (F : A → B) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies
+      ( top ·r F)
+      ( left ·r F)
+      ( right ·r F)
+      ( bottom ·r F)
+  right-whisker-comp-coherence-square-homotopies top left right bottom F α =
+    α ·r F
+```
+
 ### Concatenating homotopies of edges and coherences of commuting squares of homotopies
 
 Consider a commuting square of homotopies and a homotopy of one of the four
@@ -265,7 +286,7 @@ sides with another homotopy, as for example in the diagram below:
              top
        a ---------> b
        |           | |
-  left |     right |=| right'
+  left |     right |~| right'
        ∨           ∨ ∨
        c ---------> d.
            bottom
@@ -734,6 +755,36 @@ module _
       ( bottom x)
       ( H x)
       ( coh x)
+```
+
+### Double whiskering of commuting squares of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h u v i : (x : A) → B x}
+  where
+
+  double-whisker-coherence-square-homotopies :
+    (p : f ~ g)
+    (top : g ~ u) (left : g ~ h) (right : u ~ v) (bottom : h ~ v)
+    (s : v ~ i) →
+    coherence-square-homotopies top left right bottom →
+    coherence-square-homotopies
+      ( p ∙h top)
+      ( p ∙h left)
+      ( right ∙h s)
+      ( bottom ∙h s)
+  double-whisker-coherence-square-homotopies p top left right bottom q H =
+    left-whisker-concat-coherence-square-homotopies p top left
+      ( right ∙h q)
+      ( bottom ∙h q)
+    ( right-whisker-concat-coherence-square-homotopies
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( H)
+      ( q))
 ```
 
 #### Left splicing coherences of commuting squares of homotopies

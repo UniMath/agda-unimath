@@ -720,6 +720,37 @@ module _
       ( inv right-unit))
 ```
 
+### Double whiskering of commuting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u v w : A}
+  where
+
+  double-whisker-coherence-square-identifications :
+    (p : x ＝ y)
+    (top : y ＝ u) (left : y ＝ z) (right : u ＝ v) (bottom : z ＝ v)
+    (s : v ＝ w) →
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications
+      ( p ∙ top)
+      ( p ∙ left)
+      ( right ∙ s)
+      ( bottom ∙ s)
+  double-whisker-coherence-square-identifications
+    p top left right bottom q H =
+    left-whisker-concat-coherence-square-identifications p top left
+      ( right ∙ q)
+      ( bottom ∙ q)
+    ( right-whisker-concat-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( H)
+      ( q))
+```
+
 #### Left splicing coherences of commuting squares of identifications
 
 For any inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped

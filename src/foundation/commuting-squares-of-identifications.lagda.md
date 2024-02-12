@@ -427,8 +427,8 @@ module _
     (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
     coherence-square-identifications top left right bottom ≃
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  equiv-left-whisker-concat-coherence-square-identifications refl
-    top left right bottom =
+  equiv-left-whisker-concat-coherence-square-identifications
+    refl top left right bottom =
     id-equiv
 ```
 
@@ -552,7 +552,7 @@ module _
   {l : Level} {A : UU l} {x y z u v w : A}
   where
 
-  equiv-double-whisker-square-identifications :
+  equiv-double-whisker-coherence-square-identifications :
     (p : x ＝ y)
     (top : y ＝ u) (left : y ＝ z) (right : u ＝ v) (bottom : z ＝ v)
     (s : v ＝ w) →
@@ -562,7 +562,8 @@ module _
       ( p ∙ left)
       ( right ∙ s)
       ( bottom ∙ s)
-  equiv-double-whisker-square-identifications p top left right bottom q =
+  equiv-double-whisker-coherence-square-identifications
+    p top left right bottom q =
     equiv-left-whisker-concat-coherence-square-identifications p top left
       ( right ∙ q)
       ( bottom ∙ q) ∘e
