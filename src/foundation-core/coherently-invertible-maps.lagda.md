@@ -398,15 +398,13 @@ module _
   abstract
     is-section-map-inv-is-coherently-invertible-is-invertible :
       f ∘ map-inv-is-invertible H ~ id
-    is-section-map-inv-is-coherently-invertible-is-invertible y =
-      ( inv
-        ( is-section-map-inv-is-invertible H (f (map-inv-is-invertible H y)))) ∙
-      ( ( ap
-          ( f)
-          ( is-retraction-map-inv-is-invertible
-            ( H)
-            ( map-inv-is-invertible H y))) ∙
-        ( is-section-map-inv-is-invertible H y))
+    is-section-map-inv-is-coherently-invertible-is-invertible =
+      ( ( inv-htpy (is-section-map-inv-is-invertible H)) ·r
+        ( f ∘ map-inv-is-invertible H)) ∙h
+      ( ( ( f) ·l
+          ( is-retraction-map-inv-is-invertible H) ·r
+          ( map-inv-is-invertible H)) ∙h
+        ( is-section-map-inv-is-invertible H))
 
   abstract
     inv-coh-is-coherently-invertible-is-invertible :
@@ -430,8 +428,7 @@ module _
                 ( is-retraction-map-inv-is-invertible H)) ∙h
               ( left-whisker-comp²
                 ( f)
-                ( inv-htpy-coh-htpy-id
-                  ( is-retraction-map-inv-is-invertible H))))
+                ( inv-coh-htpy-id (is-retraction-map-inv-is-invertible H))))
             ( is-section-map-inv-is-invertible H ·r f)))
 
   abstract
@@ -604,7 +601,7 @@ module _
     (g ∘ f ∘ g) ·l S ~ (g ∘ f) ·l R ·r g
   inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
     ( inv-preserves-comp-left-whisker-comp g (f ∘ g) S) ∙h
-    ( left-whisker-comp² g (inv-htpy-coh-htpy-id S)) ∙h
+    ( left-whisker-comp² g (inv-coh-htpy-id S)) ∙h
     ( lemma-is-coherently-invertible')
 ```
 
@@ -675,7 +672,7 @@ module _
     ap-concat-htpy (R ·r (g ∘ f ∘ g)) (left-unit-law-left-whisker-comp (R ·r g))
 ```
 
-Pasting the two lemmas along the common edge `Rgfg`
+After pasting the two lemmas along the common edge `Rgfg`
 
 ```text
             gfgS           gfgS

@@ -278,8 +278,8 @@ module _
   coh-htpy-id : H ·r f ~ f ·l H
   coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))
 
-  inv-htpy-coh-htpy-id : f ·l H ~ H ·r f
-  inv-htpy-coh-htpy-id = inv-htpy coh-htpy-id
+  inv-coh-htpy-id : f ·l H ~ H ·r f
+  inv-coh-htpy-id = inv-htpy coh-htpy-id
 ```
 
 ## See also
