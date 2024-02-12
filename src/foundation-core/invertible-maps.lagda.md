@@ -171,8 +171,8 @@ module _
 
 ### The inversion operation on invertible maps is a strict involution
 
-The inversion operation on invertible maps a strict involution, where, by strict
-involution, we mean that `inv-invertible-map (inv-invertible-map f) ≐ f`
+The inversion operation on invertible maps is a strict involution, where, by
+strict involution, we mean that `inv-invertible-map (inv-invertible-map f) ≐ f`
 syntactically. This can be observed by the fact that the type-checker accepts
 `refl` as proof of this equation.
 

@@ -8,7 +8,6 @@ module foundation.whiskering-higher-homotopies-composition where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation-core.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

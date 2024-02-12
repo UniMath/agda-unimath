@@ -34,7 +34,7 @@ of homotopies with respect to concatenation is a
 ```
 
 Similarly, we introduce
-{{#concept "right whiskering" Disambiguation="homotopies with respect to concatenation' Agda=right-whisker-concat-htpy}}
+{{#concept "right whiskering" Disambiguation="homotopies with respect to concatenation" Agda=right-whisker-concat-htpy}}
 to be an operation
 
 ```text
