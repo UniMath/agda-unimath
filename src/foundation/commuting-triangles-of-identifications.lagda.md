@@ -8,6 +8,7 @@ module foundation.commuting-triangles-of-identifications where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
@@ -167,7 +168,7 @@ module _
     coherence-triangle-identifications left right top ≃
     coherence-triangle-identifications (p ∙ left) right (p ∙ top)
   equiv-left-whisker-concat-coherence-triangle-identifications =
-    ( inv-equiv (equiv-concat-assoc' (p ∙ left) p top right)) ∘e
+    ( equiv-inv-concat' _ (assoc p top right)) ∘e
     ( equiv-left-whisker-concat p)
 
   left-whisker-concat-coherence-triangle-identifications :
@@ -186,7 +187,7 @@ module _
     coherence-triangle-identifications' left right top ≃
     coherence-triangle-identifications' (p ∙ left) right (p ∙ top)
   equiv-left-whisker-concat-coherence-triangle-identifications' =
-    ( inv-equiv (equiv-concat-assoc p top right (p ∙ left))) ∘e
+    ( equiv-concat (assoc p top right) _) ∘e
     ( equiv-left-whisker-concat p)
 
   left-whisker-concat-coherence-triangle-identifications' :
@@ -537,8 +538,6 @@ module _
 
 ### Concatenating identifications on edges with coherences of commuting triangles of identifications
 
-
-
 ```agda
 module _
   {l1 : Level} {A : UU l1}
@@ -594,4 +593,97 @@ module _
   concat-left-coherence-triangle-identifications left right top p =
     map-equiv
       ( equiv-concat-left-coherence-triangle-identifications left right top p)
+```
+
+### Horizontal pasting of commuting triangles of identifications
+
+Consider a commuting diagram of identifications of the form
+
+```text
+  top-left   top-right
+    a ---> b ---> c
+      \    |    /
+  left \   |m  / right
+        \  |  /
+         ∨ ∨ ∨
+           d
+```
+
+Then the outer triangle commutes too. Indeed, an identification `left ＝ top-left ∙ middle` is given. Then, an identification
+
+```text
+  top-left ∙ middle ＝ (top-left ∙ top-right) ∙ right
+```
+
+is obtained immediately by left whiskering the right triangle with the identification `top-left`. Note that this direct construction of the coherence of the outer commuting triangle of identifications avoids any use of associativity.
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  {a b c d : A} (left : a ＝ d) (middle : b ＝ d) (right : c ＝ d)
+  (top-left : a ＝ b) (top-right : b ＝ c)
+  where
+  
+  horizontal-pasting-coherence-triangle-identifications :
+    coherence-triangle-identifications left middle top-left →
+    coherence-triangle-identifications middle right top-right →
+    coherence-triangle-identifications left right (top-left ∙ top-right)
+  horizontal-pasting-coherence-triangle-identifications s t =
+    ( s) ∙
+    ( left-whisker-concat-coherence-triangle-identifications
+      ( top-left)
+      ( middle)
+      ( right)
+      ( top-right)
+      ( t))
+```
+
+### Associativity of horizontal pasting of coherences of commuting triangles of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d e : A}
+  where
+
+  associative-horizontal-pasting-coherence-triangle-identifications :
+    (left : a ＝ e) (mid-left : b ＝ e) (mid-right : c ＝ e) (right : d ＝ e)
+    (top-left : a ＝ b) (top-middle : b ＝ c) (top-right : c ＝ d)
+    (r : coherence-triangle-identifications left mid-left top-left) →
+    (s : coherence-triangle-identifications mid-left mid-right top-middle) →
+    (t : coherence-triangle-identifications mid-right right top-right) →
+    coherence-triangle-identifications
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( mid-left)
+        ( right)
+        ( top-left)
+        ( top-middle ∙ top-right)
+        ( r)
+        ( horizontal-pasting-coherence-triangle-identifications
+          ( mid-left)
+          ( mid-right)
+          ( right)
+          ( top-middle)
+          ( top-right)
+          ( s)
+          ( t)))
+      ( right-whisker-concat (assoc top-left top-middle top-right) right)
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( mid-right)
+        ( right)
+        ( top-left ∙ top-middle)
+        ( top-right)
+        ( horizontal-pasting-coherence-triangle-identifications
+          ( left)
+          ( mid-left)
+          ( mid-right)
+          ( top-left)
+          ( top-middle)
+          ( r)
+          ( s))
+        ( t))
+  associative-horizontal-pasting-coherence-triangle-identifications
+    refl .refl .refl .refl refl refl refl refl refl refl =
+    refl
 ```
