@@ -248,12 +248,12 @@ module _
   is-section-map-inv-is-invertible-htpy :
     {f f' : A → B} (H : f' ~ f) (F : is-invertible f) →
     is-section f' (map-inv-is-invertible F)
-  is-section-map-inv-is-invertible-htpy H (g , S , R) = (H ·r g) ∙h S
+  is-section-map-inv-is-invertible-htpy H (g , S , R) = H ·r g ∙h S
 
   is-retraction-map-inv-is-invertible-htpy :
     {f f' : A → B} (H : f' ~ f) (F : is-invertible f) →
     is-retraction f' (map-inv-is-invertible F)
-  is-retraction-map-inv-is-invertible-htpy H (g , S , R) = (g ·l H) ∙h R
+  is-retraction-map-inv-is-invertible-htpy H (g , S , R) = g ·l H ∙h R
 
   is-invertible-htpy :
     {f f' : A → B} → f' ~ f → is-invertible f → is-invertible f'
