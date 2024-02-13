@@ -132,12 +132,6 @@ module _
 
   _∘∗_ : B →∗ C → A →∗ B → A →∗ C
   _∘∗_ = comp-pointed-map
-
-precomp-pointed-map :
-  {l1 l2 l3 : Level}
-  {A : Pointed-Type l1} {B : Pointed-Type l2} (C : Pointed-Type l3) →
-  A →∗ B → B →∗ C → A →∗ C
-precomp-pointed-map C f g = comp-pointed-map g f
 ```
 
 ### The identity pointed map
@@ -151,3 +145,7 @@ module _
   pr1 id-pointed-map = id
   pr2 id-pointed-map = refl
 ```
+
+## See also
+
+- [Precomposition of pointed maps](structured-types.precomposition-pointed-maps.md)

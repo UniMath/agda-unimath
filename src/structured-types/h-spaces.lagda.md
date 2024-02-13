@@ -167,7 +167,7 @@ module _
 
   pointed-section-ev-point-Pointed-Type : UU l
   pointed-section-ev-point-Pointed-Type =
-    pointed-section-Pointed-Type ev-endo-Pointed-Type
+    pointed-section ev-endo-Pointed-Type
 
   compute-pointed-section-ev-point-Pointed-Type :
     pointed-section-ev-point-Pointed-Type ≃ coherent-unital-mul-Pointed-Type A

@@ -221,23 +221,24 @@ module _
   _~∗_ : UU (l1 ⊔ l2)
   _~∗_ = pointed-htpy
 
-  module _
-    (H : pointed-htpy)
-    where
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B} (H : f ~∗ g)
+  where
 
-    htpy-pointed-htpy : function-pointed-Π f ~ function-pointed-Π g
-    htpy-pointed-htpy = pr1 H
+  htpy-pointed-htpy : function-pointed-Π f ~ function-pointed-Π g
+  htpy-pointed-htpy = pr1 H
 
-    coherence-point-pointed-htpy :
-      coherence-point-unpointed-htpy-pointed-Π f g htpy-pointed-htpy
-    coherence-point-pointed-htpy = pr2 H
+  coherence-point-pointed-htpy :
+    coherence-point-unpointed-htpy-pointed-Π f g htpy-pointed-htpy
+  coherence-point-pointed-htpy = pr2 H
 
-    preserves-point-pointed-htpy :
-      preserves-point-unpointed-htpy-pointed-Π f g htpy-pointed-htpy
-    preserves-point-pointed-htpy =
-      preserves-point-coherence-point-unpointed-htpy-pointed-Π f g
-        ( htpy-pointed-htpy)
-        ( coherence-point-pointed-htpy)
+  preserves-point-pointed-htpy :
+    preserves-point-unpointed-htpy-pointed-Π f g htpy-pointed-htpy
+  preserves-point-pointed-htpy =
+    preserves-point-coherence-point-unpointed-htpy-pointed-Π f g
+      ( htpy-pointed-htpy)
+      ( coherence-point-pointed-htpy)
 ```
 
 ### The reflexive pointed homotopy
@@ -255,6 +256,8 @@ module _
 
 ### The uniform definition of pointed homotopies
 
+**Note.** The operation `htpy-uniform-pointed-htpy` that converts a uniform pointed homotopy to an unpoined homotopy is set up with the pointed functions as explicit arguments, because Agda has trouble inferring them.
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
@@ -271,44 +274,53 @@ module _
   uniform-pointed-htpy : UU (l1 ⊔ l2)
   uniform-pointed-htpy = pointed-Π A eq-value-Pointed-Fam
 
-  module _
-    (H : uniform-pointed-htpy)
-    where
+  htpy-uniform-pointed-htpy :
+    uniform-pointed-htpy → function-pointed-Π f ~ function-pointed-Π g
+  htpy-uniform-pointed-htpy = pr1
 
-    htpy-uniform-pointed-htpy :
-      function-pointed-Π f ~ function-pointed-Π g
-    htpy-uniform-pointed-htpy = pr1 H
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B}
+  (H : uniform-pointed-htpy f g)
+  where
 
-    preserves-point-uniform-pointed-htpy :
-      preserves-point-unpointed-htpy-pointed-Π f g htpy-uniform-pointed-htpy
-    preserves-point-uniform-pointed-htpy = pr2 H
+  preserves-point-uniform-pointed-htpy :
+    preserves-point-unpointed-htpy-pointed-Π f g
+      ( htpy-uniform-pointed-htpy f g H)
+  preserves-point-uniform-pointed-htpy = pr2 H
 
-    coherence-point-uniform-pointed-htpy :
-      coherence-point-unpointed-htpy-pointed-Π f g htpy-uniform-pointed-htpy
-    coherence-point-uniform-pointed-htpy =
-      coherence-point-preserves-point-unpointed-htpy-pointed-Π f g
-        ( htpy-uniform-pointed-htpy)
-        ( preserves-point-uniform-pointed-htpy)
+  coherence-point-uniform-pointed-htpy :
+    coherence-point-unpointed-htpy-pointed-Π f g
+      ( htpy-uniform-pointed-htpy f g H)
+  coherence-point-uniform-pointed-htpy =
+    coherence-point-preserves-point-unpointed-htpy-pointed-Π f g
+      ( htpy-uniform-pointed-htpy f g H)
+      ( preserves-point-uniform-pointed-htpy)
+
+  pointed-htpy-uniform-pointed-htpy : f ~∗ g
+  pr1 pointed-htpy-uniform-pointed-htpy =
+    htpy-uniform-pointed-htpy f g H
+  pr2 pointed-htpy-uniform-pointed-htpy =
+    coherence-point-uniform-pointed-htpy
+
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B}
+  where
 
   make-uniform-pointed-htpy :
     (G : unpointed-htpy-pointed-Π f g) →
     coherence-point-unpointed-htpy-pointed-Π f g G →
-    uniform-pointed-htpy
+    uniform-pointed-htpy f g
   pr1 (make-uniform-pointed-htpy G p) = G
   pr2 (make-uniform-pointed-htpy G p) =
     preserves-point-coherence-point-unpointed-htpy-pointed-Π f g G p
 
-  uniform-pointed-htpy-pointed-htpy : f ~∗ g → uniform-pointed-htpy
-  pr1 (uniform-pointed-htpy-pointed-htpy H) = htpy-pointed-htpy f g H
-  pr2 (uniform-pointed-htpy-pointed-htpy H) = preserves-point-pointed-htpy f g H
+  uniform-pointed-htpy-pointed-htpy : f ~∗ g → uniform-pointed-htpy f g
+  pr1 (uniform-pointed-htpy-pointed-htpy H) = htpy-pointed-htpy H
+  pr2 (uniform-pointed-htpy-pointed-htpy H) = preserves-point-pointed-htpy H
 
-  pointed-htpy-uniform-pointed-htpy : uniform-pointed-htpy → f ~∗ g
-  pr1 (pointed-htpy-uniform-pointed-htpy H) =
-    htpy-uniform-pointed-htpy H
-  pr2 (pointed-htpy-uniform-pointed-htpy H) =
-    coherence-point-uniform-pointed-htpy H
-
-  compute-uniform-pointed-htpy : (f ~∗ g) ≃ uniform-pointed-htpy
+  compute-uniform-pointed-htpy : (f ~∗ g) ≃ uniform-pointed-htpy f g
   compute-uniform-pointed-htpy =
     equiv-tot (compute-coherence-point-unpointed-htpy-pointed-Π f g)
 ```
@@ -394,17 +406,17 @@ module _
 
   unpointed-htpy-pointed-htpy : UU (l1 ⊔ l2)
   unpointed-htpy-pointed-htpy =
-    htpy-pointed-htpy f g H ~ htpy-pointed-htpy f g K
+    htpy-pointed-htpy H ~ htpy-pointed-htpy K
 
   coherence-point-unpointed-htpy-pointed-htpy :
     unpointed-htpy-pointed-htpy → UU l2
   coherence-point-unpointed-htpy-pointed-htpy α =
     coherence-triangle-identifications
-      ( coherence-point-pointed-htpy f g K)
+      ( coherence-point-pointed-htpy K)
       ( right-whisker-concat
         ( α (point-Pointed-Type A))
         ( preserves-point-function-pointed-Π g))
-      ( coherence-point-pointed-htpy f g H)
+      ( coherence-point-pointed-htpy H)
 
   pointed-2-htpy : UU (l1 ⊔ l2)
   pointed-2-htpy =
@@ -423,31 +435,31 @@ module _
 
     preserves-point-pointed-2-htpy :
       preserves-point-unpointed-htpy-pointed-Π
-        ( make-uniform-pointed-htpy f g
-          ( htpy-pointed-htpy f g H)
-          ( coherence-point-pointed-htpy f g H))
-        ( make-uniform-pointed-htpy f g
-          ( htpy-pointed-htpy f g K)
-          ( coherence-point-pointed-htpy f g K))
+        ( make-uniform-pointed-htpy
+          ( htpy-pointed-htpy H)
+          ( coherence-point-pointed-htpy H))
+        ( make-uniform-pointed-htpy
+          ( htpy-pointed-htpy K)
+          ( coherence-point-pointed-htpy K))
         ( htpy-pointed-2-htpy)
     preserves-point-pointed-2-htpy =
       transpose-right-coherence-triangle-identifications
         ( htpy-pointed-2-htpy (point-Pointed-Type A))
-        ( preserves-point-pointed-htpy f g K)
-        ( preserves-point-pointed-htpy f g H)
+        ( preserves-point-pointed-htpy K)
+        ( preserves-point-pointed-htpy H)
         ( higher-transpose-right-coherence-triangle-identifications
-          ( htpy-pointed-htpy f g H (point-Pointed-Type A))
+          ( htpy-pointed-htpy H (point-Pointed-Type A))
           ( preserves-point-function-pointed-Π g)
           ( preserves-point-function-pointed-Π f)
           ( htpy-pointed-2-htpy (point-Pointed-Type A))
-          ( coherence-point-pointed-htpy f g H)
-          ( coherence-point-pointed-htpy f g K)
+          ( coherence-point-pointed-htpy H)
+          ( coherence-point-pointed-htpy K)
           ( coherence-point-pointed-2-htpy))
 
     uniform-pointed-htpy-pointed-2-htpy :
       uniform-pointed-htpy
-        ( uniform-pointed-htpy-pointed-htpy f g H)
-        ( uniform-pointed-htpy-pointed-htpy f g K)
+        ( uniform-pointed-htpy-pointed-htpy H)
+        ( uniform-pointed-htpy-pointed-htpy K)
     pr1 uniform-pointed-htpy-pointed-2-htpy =
       htpy-pointed-2-htpy
     pr2 uniform-pointed-htpy-pointed-2-htpy =
@@ -573,7 +585,7 @@ module _
   is-torsorial-pointed-2-htpy =
     is-torsorial-Eq-structure
       ( is-torsorial-htpy _)
-      ( htpy-pointed-htpy f g H , refl-htpy)
+      ( htpy-pointed-htpy H , refl-htpy)
       ( is-torsorial-Id' _)
 
   pointed-2-htpy-eq : (K : f ~∗ g) → H ＝ K → pointed-2-htpy H K
@@ -605,7 +617,7 @@ module _
   where
 
   htpy-concat-pointed-htpy : unpointed-htpy-pointed-Π f h
-  htpy-concat-pointed-htpy = htpy-pointed-htpy f g G ∙h htpy-pointed-htpy g h H
+  htpy-concat-pointed-htpy = htpy-pointed-htpy G ∙h htpy-pointed-htpy H
 
   coherence-point-concat-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-Π f h htpy-concat-pointed-htpy
@@ -614,10 +626,10 @@ module _
       ( preserves-point-function-pointed-Π f)
       ( preserves-point-function-pointed-Π g)
       ( preserves-point-function-pointed-Π h)
-      ( htpy-pointed-htpy f g G (point-Pointed-Type A))
-      ( htpy-pointed-htpy g h H (point-Pointed-Type A))
-      ( coherence-point-pointed-htpy f g G)
-      ( coherence-point-pointed-htpy g h H)
+      ( htpy-pointed-htpy G (point-Pointed-Type A))
+      ( htpy-pointed-htpy H (point-Pointed-Type A))
+      ( coherence-point-pointed-htpy G)
+      ( coherence-point-pointed-htpy H)
 
   concat-pointed-htpy : f ~∗ h
   pr1 concat-pointed-htpy = htpy-concat-pointed-htpy
@@ -642,12 +654,12 @@ module _
       ( htpy-concat-uniform-pointed-htpy)
   coherence-point-concat-uniform-pointed-htpy =
     coherence-point-concat-pointed-htpy
-      ( pointed-htpy-uniform-pointed-htpy f g G)
-      ( pointed-htpy-uniform-pointed-htpy g h H)
+      ( pointed-htpy-uniform-pointed-htpy G)
+      ( pointed-htpy-uniform-pointed-htpy H)
 
   concat-uniform-pointed-htpy : uniform-pointed-htpy f h
   concat-uniform-pointed-htpy =
-    make-uniform-pointed-htpy f h
+    make-uniform-pointed-htpy
       ( htpy-concat-uniform-pointed-htpy)
       ( coherence-point-concat-uniform-pointed-htpy)
 ```
@@ -657,11 +669,11 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  (f g : pointed-Π A B) (H : f ~∗ g)
+  {f g : pointed-Π A B} (H : f ~∗ g)
   where
 
   htpy-inv-pointed-htpy : unpointed-htpy-pointed-Π g f
-  htpy-inv-pointed-htpy = inv-htpy (htpy-pointed-htpy f g H)
+  htpy-inv-pointed-htpy = inv-htpy (htpy-pointed-htpy H)
 
   coherence-point-inv-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-Π g f htpy-inv-pointed-htpy
@@ -669,8 +681,8 @@ module _
     transpose-top-coherence-triangle-identifications
       ( preserves-point-function-pointed-Π g)
       ( preserves-point-function-pointed-Π f)
-      ( htpy-pointed-htpy f g H (point-Pointed-Type A))
-      ( coherence-point-pointed-htpy f g H)
+      ( htpy-pointed-htpy H (point-Pointed-Type A))
+      ( coherence-point-pointed-htpy H)
 
   inv-pointed-htpy : g ~∗ f
   pr1 inv-pointed-htpy = htpy-inv-pointed-htpy
@@ -691,12 +703,12 @@ module _
   coherence-point-inv-uniform-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-Π g f htpy-inv-uniform-pointed-htpy
   coherence-point-inv-uniform-pointed-htpy =
-    coherence-point-inv-pointed-htpy f g
-      ( pointed-htpy-uniform-pointed-htpy f g H)
+    coherence-point-inv-pointed-htpy
+      ( pointed-htpy-uniform-pointed-htpy H)
 
   inv-uniform-pointed-htpy : uniform-pointed-htpy g f
   inv-uniform-pointed-htpy =
-    make-uniform-pointed-htpy g f
+    make-uniform-pointed-htpy
       ( htpy-inv-uniform-pointed-htpy)
       ( coherence-point-inv-uniform-pointed-htpy)
 ```
@@ -846,15 +858,15 @@ module _
   where
 
   htpy-associative-concat-pointed-htpy :
-    htpy-pointed-htpy f k
+    htpy-pointed-htpy
       ( concat-pointed-htpy (concat-pointed-htpy G H) K) ~
-    htpy-pointed-htpy f k
+    htpy-pointed-htpy
       ( concat-pointed-htpy G (concat-pointed-htpy H K))
   htpy-associative-concat-pointed-htpy =
     assoc-htpy
-      ( htpy-pointed-htpy f g G)
-      ( htpy-pointed-htpy g h H)
-      ( htpy-pointed-htpy h k K)
+      ( htpy-pointed-htpy G)
+      ( htpy-pointed-htpy H)
+      ( htpy-pointed-htpy K)
 
   coherence-associative-concat-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-htpy
@@ -867,12 +879,12 @@ module _
       ( preserves-point-function-pointed-Π g)
       ( preserves-point-function-pointed-Π h)
       ( preserves-point-function-pointed-Π k)
-      ( htpy-pointed-htpy f g G _)
-      ( htpy-pointed-htpy g h H _)
-      ( htpy-pointed-htpy h k K _)
-      ( coherence-point-pointed-htpy f g G)
-      ( coherence-point-pointed-htpy g h H)
-      ( coherence-point-pointed-htpy h k K)
+      ( htpy-pointed-htpy G _)
+      ( htpy-pointed-htpy H _)
+      ( htpy-pointed-htpy K _)
+      ( coherence-point-pointed-htpy G)
+      ( coherence-point-pointed-htpy H)
+      ( coherence-point-pointed-htpy K)
 
   associative-concat-pointed-htpy :
     pointed-2-htpy

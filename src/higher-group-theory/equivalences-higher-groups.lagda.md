@@ -63,7 +63,7 @@ module _
   where
 
   is-iso-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
-  is-iso-∞-Group = is-iso-pointed-map
+  is-iso-∞-Group = is-pointed-iso
 ```
 
 ## Properties

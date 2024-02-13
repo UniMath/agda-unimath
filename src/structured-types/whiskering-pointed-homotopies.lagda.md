@@ -118,7 +118,7 @@ module _
   htpy-left-whisker-pointed-htpy :
     map-comp-pointed-map g f1 ~ map-comp-pointed-map g f2
   htpy-left-whisker-pointed-htpy =
-    map-pointed-map g ·l htpy-pointed-htpy f1 f2 H
+    map-pointed-map g ·l htpy-pointed-htpy H
 
   coherence-point-left-whisker-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-Π
@@ -131,14 +131,14 @@ module _
       ( ap (map-pointed-map g) (preserves-point-pointed-map f2))
       ( ap
         ( map-pointed-map g)
-        ( htpy-pointed-htpy f1 f2 H (point-Pointed-Type A)))
+        ( htpy-pointed-htpy H (point-Pointed-Type A)))
       ( preserves-point-pointed-map g)
       ( map-coherence-triangle-identifications
         ( map-pointed-map g)
         ( preserves-point-pointed-map f1)
         ( preserves-point-pointed-map f2)
-        ( htpy-pointed-htpy f1 f2 H (point-Pointed-Type A))
-        ( coherence-point-pointed-htpy f1 f2 H))
+        ( htpy-pointed-htpy H (point-Pointed-Type A))
+        ( coherence-point-pointed-htpy H))
 
   left-whisker-pointed-htpy : g ∘∗ f1 ~∗ g ∘∗ f2
   pr1 left-whisker-pointed-htpy = htpy-left-whisker-pointed-htpy
@@ -157,7 +157,7 @@ module _
   htpy-right-whisker-pointed-htpy :
     unpointed-htpy-pointed-Π (g1 ∘∗ f) (g2 ∘∗ f)
   htpy-right-whisker-pointed-htpy =
-    htpy-pointed-htpy g1 g2 H ·r map-pointed-map f
+    htpy-pointed-htpy H ·r map-pointed-map f
 
   coherence-point-right-whisker-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-Π
@@ -166,14 +166,14 @@ module _
       ( htpy-right-whisker-pointed-htpy)
   coherence-point-right-whisker-pointed-htpy =
     vertical-pasting-coherence-square-coherence-triangle-identifications
-      ( htpy-pointed-htpy g1 g2 H _)
+      ( htpy-pointed-htpy H _)
       ( ap (map-pointed-map g1) _)
       ( ap (map-pointed-map g2) _)
-      ( htpy-pointed-htpy g1 g2 H _)
+      ( htpy-pointed-htpy H _)
       ( preserves-point-pointed-map g1)
       ( preserves-point-pointed-map g2)
-      ( inv (nat-htpy (htpy-pointed-htpy g1 g2 H) _))
-      ( coherence-point-pointed-htpy g1 g2 H)
+      ( inv (nat-htpy (htpy-pointed-htpy H) _))
+      ( coherence-point-pointed-htpy H)
     
   right-whisker-pointed-htpy : g1 ∘∗ f ~∗ g2 ∘∗ f
   pr1 right-whisker-pointed-htpy = htpy-right-whisker-pointed-htpy
