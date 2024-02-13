@@ -1375,7 +1375,7 @@ module _
     map-retraction (map-coherently-invertible-map e) f
   htpy-map-inv-coherently-invertible-map-retraction =
     htpy-map-inv-invertible-map-retraction
-     ( invertible-map-coherently-invertible-map e)
+      ( invertible-map-coherently-invertible-map e)
 ```
 
 ## References
