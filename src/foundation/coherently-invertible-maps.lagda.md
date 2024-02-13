@@ -119,6 +119,10 @@ module _
         ( is-equiv-is-coherently-invertible)
 ```
 
+### Being transpose coherently invertible is a property
+
+This remains to be formalized.
+
 ## References
 
 1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
