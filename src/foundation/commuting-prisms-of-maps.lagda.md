@@ -10,7 +10,6 @@ open import foundation-core.commuting-prisms-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.composition-algebra
@@ -22,6 +21,7 @@ open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types

@@ -9,12 +9,12 @@ open import foundation-core.whiskering-homotopies-concatenation public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functoriality-dependent-function-types
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 open import foundation.whiskering-operations
 
 open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 ```
 

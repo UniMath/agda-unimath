@@ -17,11 +17,11 @@ open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
