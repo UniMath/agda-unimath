@@ -11,9 +11,9 @@ open import foundation-core.retractions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.coslice
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.multivariable-homotopies
-open import foundation.dependent-pair-types
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
