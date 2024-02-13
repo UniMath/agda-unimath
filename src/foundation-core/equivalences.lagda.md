@@ -524,16 +524,22 @@ module _
   where
 
   abstract
-    is-equiv-section-is-equiv :
-      ( section-f : section f) → is-equiv (pr1 section-f) → is-equiv f
-    is-equiv-section-is-equiv (g , is-section-g) is-equiv-section-f =
-      is-equiv-htpy h
-        ( ( f ·l (inv-htpy (is-section-map-inv-is-equiv is-equiv-section-f))) ∙h
-          ( right-whisker-comp is-section-g h))
-        ( is-equiv-map-inv-is-equiv is-equiv-section-f)
-      where
-      h : A → B
-      h = map-inv-is-equiv is-equiv-section-f
+    is-equiv-is-equiv-section :
+      (s : section f) → is-equiv (map-section f s) → is-equiv f
+    is-equiv-is-equiv-section (g , G) S = is-equiv-is-retraction S G
+```
+
+### If a retraction of `f` is an equivalence, then `f` is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-equiv-is-equiv-retraction :
+      (r : retraction f) → is-equiv (map-retraction f r) → is-equiv f
+    is-equiv-is-equiv-retraction (g , G) R = is-equiv-is-section R G
 ```
 
 ### Any section of an equivalence is homotopic to its inverse

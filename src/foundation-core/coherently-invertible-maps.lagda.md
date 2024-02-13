@@ -68,6 +68,21 @@ _transpose coherently invertible maps_.
 {{#concept "half adjoint equivalences"}} in _Homotopy Type Theory – Univalent
 Foundations of Mathematics_.
 
+On this page we will prove that every two-sided inverse `g` of `f` can be
+promoted to a coherent two-sided inverse. Thus, for most properties of
+coherently invertible maps, it suffices to consider the data of a two-sided
+inverse. However, this coherence construction requires us to replace the section
+homotopy (or retraction homotopy). For this reason we also give alternative
+constructions showing
+
+1. The identity map is coherently invertible.
+2. The composite of two coherently invertible maps is coherently invertible.
+3. The inverse of a coherently invertible map is coherently invertible.
+4. Every map homotopic to a coherently invertible map is coherently invertible.
+5. The 3-for-2 property of coherently invertible maps.
+
+That appropriately preserve the data of the underlying two-sided inverse.
+
 ## Definition
 
 ### The predicate of being coherently invertible on maps
@@ -381,6 +396,51 @@ module _
 
 ## Properties
 
+### The inverse of a coherently invertible map is transpose coherently invertible
+
+The inverse of a coherently invertible map is transpose coherently invertible.
+Of course, there is also a converse construction, and since these are defined by
+simply moving data around, they are strict inverses to one another.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-transpose-coherently-invertible-map-inv-is-coherently-invertible :
+    {f : A → B} (H : is-coherently-invertible f) →
+    is-transpose-coherently-invertible (map-inv-is-coherently-invertible H)
+  is-transpose-coherently-invertible-map-inv-is-coherently-invertible {f} H =
+    ( f ,
+      is-retraction-map-inv-is-coherently-invertible H ,
+      is-section-map-inv-is-coherently-invertible H ,
+      coh-is-coherently-invertible H)
+
+  is-coherently-invertible-map-inv-is-transpose-coherently-invertible :
+    {f : A → B} (H : is-transpose-coherently-invertible f) →
+    is-coherently-invertible (map-inv-is-transpose-coherently-invertible H)
+  is-coherently-invertible-map-inv-is-transpose-coherently-invertible {f} H =
+    ( f ,
+      is-retraction-map-inv-is-transpose-coherently-invertible H ,
+      is-section-map-inv-is-transpose-coherently-invertible H ,
+      coh-is-transpose-coherently-invertible H)
+
+  transpose-coherently-invertible-map-inv-coherently-invertible-map :
+    coherently-invertible-map A B → transpose-coherently-invertible-map B A
+  transpose-coherently-invertible-map-inv-coherently-invertible-map e =
+    ( map-inv-coherently-invertible-map e ,
+      is-transpose-coherently-invertible-map-inv-is-coherently-invertible
+        ( is-coherently-invertible-map-coherently-invertible-map e))
+
+  coherently-invertible-map-inv-transpose-coherently-invertible-map :
+    transpose-coherently-invertible-map A B → coherently-invertible-map B A
+  coherently-invertible-map-inv-transpose-coherently-invertible-map e =
+    ( map-inv-transpose-coherently-invertible-map e ,
+      is-coherently-invertible-map-inv-is-transpose-coherently-invertible
+        ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map
+          ( e)))
+```
+
 ### Invertible maps are coherently invertible
 
 The construction follows Lemma 10.4.5 in _Introduction to Homotopy Type Theory_.
@@ -441,16 +501,31 @@ module _
     coh-is-coherently-invertible-is-invertible =
       inv-htpy inv-coh-is-coherently-invertible-is-invertible
 
-  abstract
-    is-coherently-invertible-is-invertible : is-coherently-invertible f
-    pr1 is-coherently-invertible-is-invertible =
-      map-inv-is-invertible H
-    pr1 (pr2 is-coherently-invertible-is-invertible) =
-      is-section-map-inv-is-coherently-invertible-is-invertible
-    pr1 (pr2 (pr2 is-coherently-invertible-is-invertible)) =
-      is-retraction-map-inv-is-coherently-invertible-is-invertible
-    pr2 (pr2 (pr2 is-coherently-invertible-is-invertible)) =
-      coh-is-coherently-invertible-is-invertible
+  is-coherently-invertible-is-invertible : is-coherently-invertible f
+  is-coherently-invertible-is-invertible =
+    ( map-inv-is-invertible H ,
+      is-section-map-inv-is-coherently-invertible-is-invertible ,
+      is-retraction-map-inv-is-coherently-invertible-is-invertible ,
+      coh-is-coherently-invertible-is-invertible)
+```
+
+This result is known as
+[Vogt's lemma](https://ncatlab.org/nlab/show/homotopy+equivalence#vogts_lemma)
+in point-set topology.
+
+We also get the transpose version for free:
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-invertible f)
+  where
+
+  is-transpose-coherently-invertible-is-invertible :
+    is-transpose-coherently-invertible f
+  is-transpose-coherently-invertible-is-invertible =
+    is-transpose-coherently-invertible-map-inv-is-coherently-invertible
+      ( is-coherently-invertible-is-invertible
+        ( is-invertible-map-inv-is-invertible H))
 ```
 
 ### Coherently invertible maps are embeddings
@@ -459,8 +534,8 @@ We first construct the converse map to the
 [action on identifications](foundation.action-on-identifications-functions.md).
 This is a rerun of the proof that maps with
 [retractions](foundation-core.retractions.md) are
-[injective](foundation-core.injective-maps.md) (`is-injective-retraction`), and
-we repeat the proof to avoid cyclic dependencies.
+[injective](foundation-core.injective-maps.md) (`is-injective-retraction`). We
+repeat the proof to avoid cyclic dependencies.
 
 ```agda
 module _
@@ -515,64 +590,19 @@ and retraction of `ap f`.
     is-retraction-map-inv-ap-is-coherently-invertible refl =
       left-inv (is-retraction-map-inv-is-coherently-invertible H x)
 
-  abstract
-    is-invertible-ap-is-coherently-invertible : is-invertible (ap f {x} {y})
-    pr1 is-invertible-ap-is-coherently-invertible =
-      map-inv-ap-is-coherently-invertible
-    pr1 (pr2 is-invertible-ap-is-coherently-invertible) =
-      is-section-map-inv-ap-is-coherently-invertible
-    pr2 (pr2 is-invertible-ap-is-coherently-invertible) =
-      is-retraction-map-inv-ap-is-coherently-invertible
+  is-invertible-ap-is-coherently-invertible : is-invertible (ap f {x} {y})
+  pr1 is-invertible-ap-is-coherently-invertible =
+    map-inv-ap-is-coherently-invertible
+  pr1 (pr2 is-invertible-ap-is-coherently-invertible) =
+    is-section-map-inv-ap-is-coherently-invertible
+  pr2 (pr2 is-invertible-ap-is-coherently-invertible) =
+    is-retraction-map-inv-ap-is-coherently-invertible
 
-    is-coherently-invertible-ap-is-coherently-invertible :
-      is-coherently-invertible (ap f {x} {y})
-    is-coherently-invertible-ap-is-coherently-invertible =
-      is-coherently-invertible-is-invertible
-        ( is-invertible-ap-is-coherently-invertible)
-```
-
-### The inverse of a coherently invertible map is transpose coherently invertible
-
-Of course there is also a converse construction, and since these just move data
-around, they are strict inverses to one another.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-transpose-coherently-invertible-map-inv-is-coherently-invertible :
-    {f : A → B} (H : is-coherently-invertible f) →
-    is-transpose-coherently-invertible (map-inv-is-coherently-invertible H)
-  is-transpose-coherently-invertible-map-inv-is-coherently-invertible {f} H =
-    ( f ,
-      is-retraction-map-inv-is-coherently-invertible H ,
-      is-section-map-inv-is-coherently-invertible H ,
-      coh-is-coherently-invertible H)
-
-  is-coherently-invertible-map-inv-is-transpose-coherently-invertible :
-    {f : A → B} (H : is-transpose-coherently-invertible f) →
-    is-coherently-invertible (map-inv-is-transpose-coherently-invertible H)
-  is-coherently-invertible-map-inv-is-transpose-coherently-invertible {f} H =
-    ( f ,
-      is-retraction-map-inv-is-transpose-coherently-invertible H ,
-      is-section-map-inv-is-transpose-coherently-invertible H ,
-      coh-is-transpose-coherently-invertible H)
-
-  transpose-coherently-invertible-map-inv-coherently-invertible-map :
-    coherently-invertible-map A B → transpose-coherently-invertible-map B A
-  transpose-coherently-invertible-map-inv-coherently-invertible-map e =
-    ( map-inv-coherently-invertible-map e ,
-      is-transpose-coherently-invertible-map-inv-is-coherently-invertible
-        ( is-coherently-invertible-map-coherently-invertible-map e))
-
-  coherently-invertible-map-inv-transpose-coherently-invertible-map :
-    transpose-coherently-invertible-map A B → coherently-invertible-map B A
-  coherently-invertible-map-inv-transpose-coherently-invertible-map e =
-    ( map-inv-transpose-coherently-invertible-map e ,
-      is-coherently-invertible-map-inv-is-transpose-coherently-invertible
-        ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map
-          ( e)))
+  is-coherently-invertible-ap-is-coherently-invertible :
+    is-coherently-invertible (ap f {x} {y})
+  is-coherently-invertible-ap-is-coherently-invertible =
+    is-coherently-invertible-is-invertible
+      ( is-invertible-ap-is-coherently-invertible)
 ```
 
 ### Coherently invertible maps are coherently invertible in both senses
@@ -580,32 +610,37 @@ module _
 The proof follows Lemma 4.2.2 in _Homotopy Type Theory – Univalent Foundations
 of Mathematics_.
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B)
-  (g : B → A)
-  (S : is-section f g)
-  (R : is-retraction f g)
-  (H : coherence-is-coherently-invertible f g S R)
-  where
+**Proof.** By naturality we have
 
-  lemma-is-coherently-invertible' :
-    g ·l S ·r (f ∘ g) ~ (g ∘ f) ·l R ·r g
-  lemma-is-coherently-invertible' =
-    ( preserves-comp-right-whisker-comp f g (g ·l S)) ∙h
-    ( double-whisker-comp² g H g) ∙h
-    ( preserves-comp-left-whisker-comp g f (R ·r g))
-
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible :
-    (g ∘ f ∘ g) ·l S ~ (g ∘ f) ·l R ·r g
-  inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible =
-    ( inv-preserves-comp-left-whisker-comp g (f ∘ g) S) ∙h
-    ( left-whisker-comp² g (inv-coh-htpy-id S)) ∙h
-    ( lemma-is-coherently-invertible')
+```text
+                   gfRg
+     gfgfg --------------------> gfg
+       |                          |
+  Rgfg |  nat-htpy R ·r (R ·r g)  | Rg
+       ∨                          ∨
+      gfg ----------------------> g.
+                    Rg
 ```
 
-By naturality we have
+We can paste the homotopy
+
+```text
+  g(inv-coh-htpy-id S) ∙ gHg : Sgfg ~ gfSg ~ gfRg
+```
+
+along the top edge of this naturality square obtaining the coherence square
+
+```text
+             gfgS
+     gfgfg -------> gfg
+       |             |
+  Rgfg |             | Rg
+       ∨             ∨
+      gfg ---------> g.
+              Rg
+```
+
+There is also the following naturality square
 
 ```text
                    gfgS
@@ -613,66 +648,12 @@ By naturality we have
        |                          |
   Rgfg |  nat-htpy (R ·r g) ·r S  | Rg
        ∨                          ∨
-      gfg ----------------------> g
+      gfg ----------------------> g.
                     gS
 ```
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B)
-  (g : B → A)
-  (S : is-section f g)
-  (R : is-retraction f g)
-  where
-
-  naturality-square-is-retraction-is-section :
-    coherence-square-homotopies
-      ( (g ∘ f ∘ g) ·l S)
-      ( R ·r (g ∘ f ∘ g))
-      ( R ·r g)
-      ( g ·l S)
-  naturality-square-is-retraction-is-section = nat-htpy (R ·r g) ·r S
-```
-
-TODO Explain
-
-```text
-             Rgfg
-     gfgfg -------> gfg
-       |             |
-  Sgfg |             | Rg
-       ∨             ∨
-      gfg ---------> g
-              Rg
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B)
-  (g : B → A)
-  (S : is-section f g)
-  (R : is-retraction f g)
-  (H : coherence-is-coherently-invertible f g S R)
-  where
-
-  naturality-square-transposition-coherence-is-coherently-invertible :
-    coherence-square-homotopies
-      ( R ·r (g ∘ f ∘ g))
-      ( (g ∘ f ∘ g) ·l S)
-      ( R ·r g)
-      ( R ·r g)
-  naturality-square-transposition-coherence-is-coherently-invertible =
-    ( ap-concat-htpy'
-      ( R ·r g)
-      ( inv-coh-is-transpose-coherently-invertible-coherence-is-coherently-invertible
-        ( f) (g) (S) (R) (H))) ∙h
-    (inv-htpy (nat-htpy R ·r (R ·r g))) ∙h
-    ap-concat-htpy (R ·r (g ∘ f ∘ g)) (left-unit-law-left-whisker-comp (R ·r g))
-```
-
-After pasting the two lemmas along the common edge `Rgfg`
+Now, by pasting the first square to the second along the common edge `Rgfg`, we
+obtain
 
 ```text
             gfgS           gfgS
@@ -684,8 +665,8 @@ After pasting the two lemmas along the common edge `Rgfg`
              Rg             gS
 ```
 
-we observe that the homotopy `gfgS` at the top cancels itself, as well as the
-`Rg` on the left, leaving us with a homotopy `Rg ~ gS` as desired.
+After cancelling `gfgS` and `Rg` with themselves, we are left with `Rg ~ gS` as
+desired.
 
 ```agda
 module _
@@ -695,26 +676,55 @@ module _
   (S : is-section f g)
   (R : is-retraction f g)
   (H : coherence-is-coherently-invertible f g S R)
-  where abstract
+  where
 
-  coherence-transposition-coherence-is-coherently-invertible :
-    coherence-is-transpose-coherently-invertible f g S R
-  coherence-transposition-coherence-is-coherently-invertible =
-    ( ap-concat-htpy' (R ·r g) (inv-htpy (left-inv-htpy ((g ∘ f ∘ g) ·l S)))) ∙h
-    ( assoc-htpy (inv-htpy ((g ∘ f ∘ g) ·l S)) ((g ∘ f ∘ g) ·l S) (R ·r g)) ∙h
-    ( ap-concat-htpy
-      ( inv-htpy ((g ∘ f ∘ g) ·l S))
-      ( inv-htpy (naturality-square-is-retraction-is-section f g S R))) ∙h
-    ( inv-htpy
-      ( assoc-htpy
-        ( inv-htpy ((g ∘ f ∘ g) ·l S)) (R ·r (g ∘ f ∘ g)) (g ·l S))) ∙h
-    ( ap-concat-htpy'
-      ( g ·l S)
-      ( ( vertical-inv-coherence-square-homotopies
-          ( R ·r (g ∘ f ∘ g)) ((g ∘ f ∘ g) ·l S) (R ·r g) (R ·r g)
-          ( naturality-square-transposition-coherence-is-coherently-invertible
-            ( f) (g) (S) (R) (H))) ∙h
-        ( right-inv-htpy (R ·r g))))
+  abstract
+    coh-transposition-coherence-is-coherently-invertible :
+      (g ∘ f ∘ g) ·l S ~ (g ∘ f) ·l R ·r g
+    coh-transposition-coherence-is-coherently-invertible =
+      ( inv-preserves-comp-left-whisker-comp g (f ∘ g) S) ∙h
+      ( left-whisker-comp² g (inv-coh-htpy-id S)) ∙h
+      ( double-whisker-comp² g H g) ∙h
+      ( preserves-comp-left-whisker-comp g f (R ·r g))
+
+  abstract
+    naturality-square-transposition-coherence-is-coherently-invertible :
+      coherence-square-homotopies
+        ( R ·r (g ∘ f ∘ g))
+        ( (g ∘ f ∘ g) ·l S)
+        ( R ·r g)
+        ( R ·r g)
+    naturality-square-transposition-coherence-is-coherently-invertible =
+      ( ap-concat-htpy'
+        ( R ·r g)
+        ( coh-transposition-coherence-is-coherently-invertible)) ∙h
+      ( inv-htpy (nat-htpy R ·r (R ·r g))) ∙h
+      ( ap-concat-htpy
+        ( R ·r (g ∘ f ∘ g))
+        ( left-unit-law-left-whisker-comp (R ·r g)))
+
+  abstract
+    coherence-transposition-coherence-is-coherently-invertible :
+      coherence-is-transpose-coherently-invertible f g S R
+    coherence-transposition-coherence-is-coherently-invertible =
+      ( ap-concat-htpy'
+        ( R ·r g)
+        ( inv-htpy (left-inv-htpy ((g ∘ f ∘ g) ·l S)))) ∙h
+      ( assoc-htpy (inv-htpy ((g ∘ f ∘ g) ·l S)) ((g ∘ f ∘ g) ·l S) (R ·r g)) ∙h
+      ( ap-concat-htpy
+        ( inv-htpy ((g ∘ f ∘ g) ·l S))
+        ( inv-htpy (nat-htpy (R ·r g) ·r S))) ∙h
+      ( inv-htpy
+        ( assoc-htpy
+          ( inv-htpy ((g ∘ f ∘ g) ·l S))
+          ( R ·r (g ∘ f ∘ g))
+          ( g ·l S))) ∙h
+      ( ap-concat-htpy'
+        ( g ·l S)
+        ( ( vertical-inv-coherence-square-homotopies
+            ( R ·r (g ∘ f ∘ g)) ((g ∘ f ∘ g) ·l S) (R ·r g) (R ·r g)
+            ( naturality-square-transposition-coherence-is-coherently-invertible)) ∙h
+          ( right-inv-htpy (R ·r g))))
 ```
 
 ```agda
@@ -780,17 +790,17 @@ module _
 
 ### Coherently invertible maps are closed under homotopies
 
-Assume given a coherently invertible map `f` with inverse `g`, homotopies
-`S : f ∘ g ~ id`, `R : g ∘ f ~ id` and coherence `C : Sf ~ fR`. Moreover, assume
-the map `f'` is homotopic to `f` with homotopy `H : f' ~ f`. Then `g` is also a
-two-sided inverse to `f'` via the homotopies
+**Proof.** Assume given a coherently invertible map `f` with inverse `g`,
+homotopies `S : f ∘ g ~ id`, `R : g ∘ f ~ id` and coherence `C : Sf ~ fR`.
+Moreover, assume the map `f'` is homotopic to `f` with homotopy `H : f' ~ f`.
+Then `g` is also a two-sided inverse to `f'` via the homotopies
 
 ```text
   S' := Hg ∙ S : f' ∘ g ~ id    and    R' := gH ∙ R : g ∘ f' ~ id
 ```
 
-Now, we can also show that these witnesses are part of a coherent inverse to
-`f'`. To show this, we must construct a coherence `C'` of the square
+These witnesses are also part of a coherent inverse to `f'`. To show this, we
+must construct a coherence `C'` of the square
 
 ```text
            Hgf'
@@ -802,7 +812,7 @@ Now, we can also show that these witnesses are part of a coherent inverse to
            f'R
 ```
 
-We begin by observing that `C` fits somehere along the diagonal of this square
+We begin by observing that `C` fits somewhere along the diagonal of this square
 via the composite
 
 ```text
@@ -817,7 +827,7 @@ via the composite
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f f' : A → B} (H : f' ~ f)
   (g : B → A) (S : f ∘ g ~ id) (R : g ∘ f ~ id) (C : S ·r f ~ f ·l R)
-  where abstract
+  where
 
   coh-coh-is-coherently-invertible-htpy :
     horizontal-concat-htpy' (H ·r g) H ∙h (S ·r f ∙h inv-htpy H) ~
@@ -853,7 +863,7 @@ squares
              H                          H
 ```
 
-These squares are naturality squares, however, so we are done.
+However, these squares are naturality squares, so we are done.
 
 ```agda
   coh-section-is-coherently-invertible-htpy :
@@ -895,38 +905,41 @@ These squares are naturality squares, however, so we are done.
     ( inv-htpy (distributive-left-whisker-comp-concat f' (g ·l H) R))
 ```
 
+Finally, we concatenate the three coherences to obtain our desired result.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f f' : A → B}
   where
 
-  coh-is-coherently-invertible-htpy :
-    (H : f' ~ f) (F : is-coherently-invertible f) →
-    coherence-is-coherently-invertible
-      ( f')
-      ( map-inv-is-coherently-invertible F)
-      ( is-section-map-inv-is-invertible-htpy
-        ( H)
-        ( is-invertible-is-coherently-invertible F))
-      ( is-retraction-map-inv-is-invertible-htpy
-        ( H)
-        ( is-invertible-is-coherently-invertible F))
-  coh-is-coherently-invertible-htpy H F =
-    ( coh-section-is-coherently-invertible-htpy H
-      ( map-inv-is-coherently-invertible F)
-      ( is-section-map-inv-is-coherently-invertible F)
-      ( is-retraction-map-inv-is-coherently-invertible F)
-      ( coh-is-coherently-invertible F)) ∙h
-    ( coh-coh-is-coherently-invertible-htpy H
-      ( map-inv-is-coherently-invertible F)
-      ( is-section-map-inv-is-coherently-invertible F)
-      ( is-retraction-map-inv-is-coherently-invertible F)
-      ( coh-is-coherently-invertible F)) ∙h
-    ( coh-retraction-is-coherently-invertible-htpy H
-      ( map-inv-is-coherently-invertible F)
-      ( is-section-map-inv-is-coherently-invertible F)
-      ( is-retraction-map-inv-is-coherently-invertible F)
-      ( coh-is-coherently-invertible F))
+  abstract
+    coh-is-coherently-invertible-htpy :
+      (H : f' ~ f) (F : is-coherently-invertible f) →
+      coherence-is-coherently-invertible
+        ( f')
+        ( map-inv-is-coherently-invertible F)
+        ( is-section-map-inv-is-invertible-htpy
+          ( H)
+          ( is-invertible-is-coherently-invertible F))
+        ( is-retraction-map-inv-is-invertible-htpy
+          ( H)
+          ( is-invertible-is-coherently-invertible F))
+    coh-is-coherently-invertible-htpy H F =
+      ( coh-section-is-coherently-invertible-htpy H
+        ( map-inv-is-coherently-invertible F)
+        ( is-section-map-inv-is-coherently-invertible F)
+        ( is-retraction-map-inv-is-coherently-invertible F)
+        ( coh-is-coherently-invertible F)) ∙h
+      ( coh-coh-is-coherently-invertible-htpy H
+        ( map-inv-is-coherently-invertible F)
+        ( is-section-map-inv-is-coherently-invertible F)
+        ( is-retraction-map-inv-is-coherently-invertible F)
+        ( coh-is-coherently-invertible F)) ∙h
+      ( coh-retraction-is-coherently-invertible-htpy H
+        ( map-inv-is-coherently-invertible F)
+        ( is-section-map-inv-is-coherently-invertible F)
+        ( is-retraction-map-inv-is-coherently-invertible F)
+        ( coh-is-coherently-invertible F))
 
   is-coherently-invertible-htpy :
     f' ~ f → is-coherently-invertible f → is-coherently-invertible f'
@@ -939,6 +952,24 @@ module _
     f ~ f' → is-coherently-invertible f → is-coherently-invertible f'
   is-coherently-invertible-inv-htpy H =
     is-coherently-invertible-htpy (inv-htpy H)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-coherently-invertible-htpy-coherently-invertible-map :
+    (e : coherently-invertible-map A B) →
+    f ~ map-coherently-invertible-map e →
+    is-coherently-invertible f
+  is-coherently-invertible-htpy-coherently-invertible-map (e , E) H =
+    is-coherently-invertible-htpy H E
+
+  is-coherently-invertible-inv-htpy-coherently-invertible-map :
+    (e : coherently-invertible-map A B) →
+    map-coherently-invertible-map e ~ f →
+    is-coherently-invertible f
+  is-coherently-invertible-inv-htpy-coherently-invertible-map (e , E) H =
+    is-coherently-invertible-inv-htpy H E
 ```
 
 ### The identity map is coherently invertible
@@ -1144,7 +1175,7 @@ property the 3-for-2 property, despite most mathematicians calling it the
 _2-out-of-3 property_. The story goes that on the produce market is is common to
 advertise a discount as "3-for-2". If you buy two apples, then you get the third
 for free. Similarly, if you prove that two maps in a commuting triangle are
-equivalences, then you get the third for free.
+coherently invertible, then you get the third proof for free.
 
 #### The left map in a commuting triangle is coherently invertible if the other two maps are
 
@@ -1154,13 +1185,12 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (T : f ~ g ∘ h)
   where
 
-  abstract
-    is-coherently-invertible-left-map-triangle :
-      is-coherently-invertible h →
-      is-coherently-invertible g →
-      is-coherently-invertible f
-    is-coherently-invertible-left-map-triangle H G =
-      is-coherently-invertible-htpy T (is-coherently-invertible-comp g h G H)
+  is-coherently-invertible-left-map-triangle :
+    is-coherently-invertible h →
+    is-coherently-invertible g →
+    is-coherently-invertible f
+  is-coherently-invertible-left-map-triangle H G =
+    is-coherently-invertible-htpy T (is-coherently-invertible-comp g h G H)
 ```
 
 #### The right map in a commuting triangle is coherently invertible if the other two maps are
@@ -1171,23 +1201,22 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (T : f ~ g ∘ h)
   where
 
-  abstract
-    is-coherently-invertible-right-map-triangle :
-      is-coherently-invertible f →
-      is-coherently-invertible h →
-      is-coherently-invertible g
-    is-coherently-invertible-right-map-triangle F H =
-      is-coherently-invertible-htpy
-        ( ( g ·l inv-htpy (is-section-map-inv-is-coherently-invertible H)) ∙h
-          ( inv-htpy T ·r map-inv-is-coherently-invertible H))
-        ( is-coherently-invertible-comp
-          ( f)
-          ( map-inv-is-coherently-invertible H)
-          ( F)
-          ( is-coherently-invertible-map-inv-is-coherently-invertible H))
+  is-coherently-invertible-right-map-triangle :
+    is-coherently-invertible f →
+    is-coherently-invertible h →
+    is-coherently-invertible g
+  is-coherently-invertible-right-map-triangle F H =
+    is-coherently-invertible-htpy
+      ( ( g ·l inv-htpy (is-section-map-inv-is-coherently-invertible H)) ∙h
+        ( inv-htpy T ·r map-inv-is-coherently-invertible H))
+      ( is-coherently-invertible-comp
+        ( f)
+        ( map-inv-is-coherently-invertible H)
+        ( F)
+        ( is-coherently-invertible-map-inv-is-coherently-invertible H))
 ```
 
-#### The top map in a commuting triangle is coherently invertible if the other two maps
+#### The top map in a commuting triangle is coherently invertible if the other two maps are
 
 ```agda
 module _
@@ -1195,20 +1224,19 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (T : f ~ g ∘ h)
   where
 
-  abstract
-    is-coherently-invertible-top-map-triangle :
-      is-coherently-invertible g →
-      is-coherently-invertible f →
-      is-coherently-invertible h
-    is-coherently-invertible-top-map-triangle G F =
-      is-coherently-invertible-htpy
-        ( ( inv-htpy (is-retraction-map-inv-is-coherently-invertible G) ·r h) ∙h
-          ( map-inv-is-coherently-invertible G ·l inv-htpy T))
-        ( is-coherently-invertible-comp
-          ( map-inv-is-coherently-invertible G)
-          ( f)
-          ( is-coherently-invertible-map-inv-is-coherently-invertible G)
-          ( F))
+  is-coherently-invertible-top-map-triangle :
+    is-coherently-invertible g →
+    is-coherently-invertible f →
+    is-coherently-invertible h
+  is-coherently-invertible-top-map-triangle G F =
+    is-coherently-invertible-htpy
+      ( ( inv-htpy (is-retraction-map-inv-is-coherently-invertible G) ·r h) ∙h
+        ( map-inv-is-coherently-invertible G ·l inv-htpy T))
+      ( is-coherently-invertible-comp
+        ( map-inv-is-coherently-invertible G)
+        ( f)
+        ( is-coherently-invertible-map-inv-is-coherently-invertible G)
+        ( F))
 ```
 
 #### If a composite and its right factor are coherently invertible, then so is its left factor
@@ -1243,32 +1271,38 @@ module _
     is-coherently-invertible-top-map-triangle (g ∘ h) g h refl-htpy G GH
 ```
 
-### Any retraction of a coherently invertible map is coherently invertible
-
-```agda
-abstract
-  is-coherently-invertible-is-retraction :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
-    is-coherently-invertible f → (g ∘ f) ~ id → is-coherently-invertible g
-  is-coherently-invertible-is-retraction {f = f} {g} F H =
-    is-coherently-invertible-right-map-triangle id g f
-      ( inv-htpy H)
-      ( is-coherently-invertible-id)
-      ( F)
-```
-
 ### Any section of a coherently invertible map is coherently invertible
 
 ```agda
-abstract
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
   is-coherently-invertible-is-section :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
+    {f : A → B} {g : B → A} →
     is-coherently-invertible f → f ∘ g ~ id → is-coherently-invertible g
   is-coherently-invertible-is-section {f = f} {g} F H =
     is-coherently-invertible-top-map-triangle id f g
       ( inv-htpy H)
       ( F)
       ( is-coherently-invertible-id)
+```
+
+### Any retraction of a coherently invertible map is coherently invertible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-coherently-invertible-is-retraction :
+    {f : A → B} {g : B → A} →
+    is-coherently-invertible f → (g ∘ f) ~ id → is-coherently-invertible g
+  is-coherently-invertible-is-retraction {f = f} {g} F H =
+    is-coherently-invertible-right-map-triangle id g f
+      ( inv-htpy H)
+      ( is-coherently-invertible-id)
+      ( F)
 ```
 
 ### If a section of `f` is coherently invertible, then `f` is coherently invertible
@@ -1278,24 +1312,67 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
+    is-coherently-invertible-is-coherently-invertible-section :
+      (s : section f) →
+      is-coherently-invertible (map-section f s) → is-coherently-invertible f
+    is-coherently-invertible-is-coherently-invertible-section (g , G) S =
+      is-coherently-invertible-is-retraction S G
+```
+
+### If a retraction of `f` is coherently invertible, then `f` is coherently invertible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
   abstract
-    is-coherently-invertible-section-is-coherently-invertible :
-      ( section-f : section f) →
-      is-coherently-invertible (pr1 section-f) → is-coherently-invertible f
-    is-coherently-invertible-section-is-coherently-invertible
-      ( g , is-section-g) S =
-      is-coherently-invertible-htpy
-        ( ( f ·l (inv-htpy (is-section-map-inv-is-coherently-invertible S))) ∙h
-          ( right-whisker-comp
-            ( is-section-g)
-            ( map-inv-is-coherently-invertible S)))
-        ( is-coherently-invertible-map-inv-is-coherently-invertible S)
+    is-coherently-invertible-is-coherently-invertible-retraction :
+      (r : retraction f) →
+      is-coherently-invertible (map-retraction f r) → is-coherently-invertible f
+    is-coherently-invertible-is-coherently-invertible-retraction (g , G) R =
+      is-coherently-invertible-is-section R G
+```
+
+### Any section of a coherently invertible map is homotopic to its inverse
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : coherently-invertible-map A B)
+  where
+
+  htpy-map-inv-coherently-invertible-map-section :
+    (f : section (map-coherently-invertible-map e)) →
+    map-inv-coherently-invertible-map e ~
+    map-section (map-coherently-invertible-map e) f
+  htpy-map-inv-coherently-invertible-map-section (f , H) =
+    ( map-inv-coherently-invertible-map e ·l inv-htpy H) ∙h
+    ( is-retraction-map-inv-coherently-invertible-map e ·r f)
+```
+
+### Any retraction of a coherently invertible map is homotopic to its inverse
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : coherently-invertible-map A B)
+  where
+
+  htpy-map-inv-coherently-invertible-map-retraction :
+    (f : retraction (map-coherently-invertible-map e)) →
+    map-inv-coherently-invertible-map e ~
+    map-retraction (map-coherently-invertible-map e) f
+  htpy-map-inv-coherently-invertible-map-retraction (f , H) =
+    ( inv-htpy H ·r map-inv-coherently-invertible-map e) ∙h
+    ( f ·l is-section-map-inv-coherently-invertible-map e)
 ```
 
 ## References
 
 1. Egbert Rijke, _Introduction to Homotopy Type Theory_ (2022)
    ([arXiv:2212.11082](https://arxiv.org/abs/2212.11082))
+2. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
+   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
+   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
 
 ## See also
 
@@ -1305,3 +1382,9 @@ module _
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+
+## External links
+
+- [Adjoint equivalences](https://1lab.dev/1Lab.Equiv.HalfAdjoint.html) at 1lab
+- [adjoint equivalence](https://ncatlab.org/nlab/show/adjoint+equivalence) at
+  $n$Lab
