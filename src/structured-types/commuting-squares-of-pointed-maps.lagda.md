@@ -7,8 +7,14 @@ module structured-types.commuting-squares-of-pointed-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-squares-of-maps
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
@@ -67,7 +73,103 @@ module _
     htpy-pointed-htpy (bottom ∘∗ left) (right ∘∗ top)
 ```
 
-## Properties
+## Operations
+
+### Left whiskering of coherences of commuting squares of pointed maps
+
+Consider a commuting square of pointed maps
+
+```text
+            top
+       A --------> X
+       |           |
+  left |           | right
+       ∨           ∨
+       B --------> Y
+          bottom
+```
+
+and consider a pointed map `f : Y →∗ Z`. Then the square
+
+```text
+              top
+       A -------------> X
+       |                |
+  left |                | f ∘∗ right
+       ∨                ∨
+       B -------------> Z
+          f ∘∗ bottom
+```
+
+also commutes.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4} {Z : Pointed-Type l5}
+  (f : Y →∗ Z)
+  (top : A →∗ X) (left : A →∗ B) (right : X →∗ Y) (bottom : B →∗ Y)
+  (s : coherence-square-pointed-maps top left right bottom)
+  where
+ 
+  left-whisker-comp-coherence-square-pointed-maps :
+    coherence-square-pointed-maps top left (f ∘∗ right) (f ∘∗ bottom)
+  left-whisker-comp-coherence-square-pointed-maps =
+    concat-pointed-htpy
+      ( associative-comp-pointed-map f bottom left)
+      ( concat-pointed-htpy
+        ( left-whisker-pointed-htpy f _ _ s)
+        ( inv-associative-comp-pointed-map f right top))
+```
+
+### Left whiskering of coherences of commuting squares of pointed maps
+
+Consider a commuting square of pointed maps
+
+```text
+            top
+       A --------> X
+       |           |
+  left |           | right
+       ∨           ∨
+       B --------> Y
+          bottom
+```
+
+and consider a pointed map `f : Z →∗ A`. Then the square
+
+```text
+               f ∘∗ top
+            A ----------> X
+            |             |
+  left ∘∗ f |             | right
+            ∨             ∨
+            B ----------> Z
+                bottom
+```
+
+also commutes.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4} {Z : Pointed-Type l5}
+  (top : A →∗ X) (left : A →∗ B) (right : X →∗ Y) (bottom : B →∗ Y)
+  (s : coherence-square-pointed-maps top left right bottom)
+  (f : Z →∗ A)
+  where
+
+  right-whisker-comp-coherence-square-pointed-maps :
+    coherence-square-pointed-maps (top ∘∗ f) (left ∘∗ f) right bottom
+  right-whisker-comp-coherence-square-pointed-maps =
+    concat-pointed-htpy
+      ( inv-associative-comp-pointed-map bottom left f)
+      ( concat-pointed-htpy
+        ( right-whisker-pointed-htpy _ _ s f)
+        ( associative-comp-pointed-map right top f))
+```
 
 ### Horizontal pasting of coherences of commuting squares of pointed maps
 
@@ -136,8 +238,107 @@ module _
       ( bottom-right ∘∗ bottom-left)
   horizontal-pasting-coherence-square-pointed-maps =
     concat-pointed-htpy
-      ( associative-comp-pointed-map bottom-right bottom-left left)
+      ( left-whisker-comp-coherence-square-pointed-maps
+        ( bottom-right)
+        ( top-left)
+        ( left)
+        ( middle)
+        ( bottom-left)
+        ( left-square))
       ( concat-pointed-htpy
-        {! left-whisker-pointed-htpy!}
-        {!!})
+        ( associative-comp-pointed-map bottom-right middle top-left)
+        ( right-whisker-comp-coherence-square-pointed-maps
+          ( top-right)
+          ( middle)
+          ( right)
+          ( bottom-right)
+          ( right-square)
+          ( top-left)))
+```
+
+### Vertical pasting of coherences of commuting squares of pointed maps
+
+Consider two commuting squares of pointed maps, as in the diagram
+
+```text
+                   top
+              A --------> B
+              |           |
+     top-left |           | top-right
+              ∨  middle   ∨
+              C --------> D
+              |           |
+  bottom-left |           | bottom-right
+              ∨           ∨
+              E --------> F
+                 bottom
+```
+
+with pointed homotopies
+
+```text
+  H : middle ∘∗ top-left ~∗ top-right ∘∗ top
+  K : bottom ∘∗ bottom-left ~∗  bottom-right ∘∗ middle
+```
+
+The {{#concept "vertical pasting" Disambiguation="commuting squares of pointed maps" Agda=vertical-pasting-coherence-square-pointed-maps}} of these coherences of commuting squares of pointed maps is the coherence of the commuting square
+
+```text
+                               top
+                          A --------> B
+                          |           |
+  bottom-left ∘∗ top-left |           | bottom-right ∘∗ top-right
+                          ∨           ∨
+                          E --------> F
+                             bottom
+```
+
+obtained by concatenation of the following three pointed homotopies:
+
+```text
+  bottom ∘∗ (bottom-left ∘∗ top-left)
+  ~∗ bottom-right ∘∗ (middle ∘∗ top-left)
+  ~∗ (bottom-right ∘∗ middle) ∘∗ top-left
+  ~∗ (bottom-right ∘∗ top-right) ∘∗ top
+```
+
+The first and third homotopy in this concatenation are the whiskerings of coherences of [commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {C : Pointed-Type l3} {D : Pointed-Type l4}
+  {E : Pointed-Type l5} {F : Pointed-Type l6}
+  (top : A →∗ B) (top-left : A →∗ C) (top-right : B →∗ D) (middle : C →∗ D)
+  (bottom-left : C →∗ E) (bottom-right : D →∗ F) (bottom : E →∗ F)
+  (top-square : coherence-square-pointed-maps top top-left top-right middle)
+  (bottom-square :
+    coherence-square-pointed-maps middle bottom-left bottom-right bottom)
+  where
+
+  vertical-pasting-coherence-square-pointed-maps :
+    coherence-square-pointed-maps
+      ( top)
+      ( bottom-left ∘∗ top-left)
+      ( bottom-right ∘∗ top-right)
+      ( bottom)
+  vertical-pasting-coherence-square-pointed-maps =
+    concat-pointed-htpy
+      ( right-whisker-comp-coherence-square-pointed-maps
+        ( middle)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( bottom-square)
+        ( top-left))
+      ( concat-pointed-htpy
+        ( inv-associative-comp-pointed-map bottom-right middle top-left)
+        ( left-whisker-comp-coherence-square-pointed-maps
+          ( bottom-right)
+          ( top)
+          ( top-left)
+          ( top-right)
+          ( middle)
+          ( top-square)))
 ```

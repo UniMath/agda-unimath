@@ -36,7 +36,7 @@ open import structured-types.whiskering-pointed-homotopies
 
 ## Idea
 
-A **pointed equivalence** is an equivalence in the category of pointed spaces.
+A {{#concept "pointed equivalence" Agda=_≃∗_}} is an equivalence in the category of pointed spaces.
 Equivalently, a pointed equivalence is a
 [pointed map](structured-types.pointed-maps.md) of which the underlying function
 is an [equivalence](foundation-core.equivalences.md).
@@ -190,7 +190,9 @@ module _
 
   is-contr-section-is-equiv-pointed-map :
     is-equiv-pointed-map f → is-contr (section-pointed-map f)
-  is-contr-section-is-equiv-pointed-map H =
+  is-contr-section-is-equiv-pointed-map H = {!!}
+
+{-
     is-torsorial-Eq-structure
       ( is-contr-section-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-section-map-inv-is-equiv H))
@@ -217,11 +219,13 @@ module _
             ( map-inv-is-equiv H (point-Pointed-Type B))
             ( point-Pointed-Type A))
           ( ( is-section-map-inv-is-equiv H (point-Pointed-Type B)) ∙
-            ( inv (preserves-point-pointed-map f)))))
+            ( inv (preserves-point-pointed-map f))))) -}
 
   is-contr-retraction-is-equiv-pointed-map :
     is-equiv-pointed-map f → is-contr (retraction-pointed-map f)
-  is-contr-retraction-is-equiv-pointed-map H =
+  is-contr-retraction-is-equiv-pointed-map H = {!!}
+
+{-
     is-torsorial-Eq-structure
       ( is-contr-retraction-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-retraction-map-inv-is-equiv H))
@@ -245,7 +249,7 @@ module _
                 ( H)
                 ( map-pointed-map f (point-Pointed-Type A)))
               ( refl)))
-          ( is-retraction-map-inv-is-equiv H (point-Pointed-Type A))))
+          ( is-retraction-map-inv-is-equiv H (point-Pointed-Type A)))) -}
 
   is-contr-is-iso-is-equiv-pointed-map :
     is-equiv-pointed-map f → is-contr (is-iso-pointed-map f)
@@ -284,7 +288,7 @@ module _
 
 ### Precomposing by pointed equivalences is a pointed equivalence
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
@@ -292,7 +296,9 @@ module _
   is-equiv-is-equiv-precomp-pointed-map :
     ( {l : Level} (C : Pointed-Type l) → is-equiv (precomp-pointed-map C f)) →
     is-equiv-pointed-map f
-  is-equiv-is-equiv-precomp-pointed-map H =
+  is-equiv-is-equiv-precomp-pointed-map H = {!!}
+
+{-
     is-equiv-is-invertible
       ( map-pointed-map g)
       ( htpy-eq
@@ -334,12 +340,14 @@ module _
           ( extensionality-pointed-map
             ( g ∘∗ f)
             ( id-pointed-map))
-          ( pr2 (center (is-contr-map-is-equiv (H A) id-pointed-map)))
+          ( pr2 (center (is-contr-map-is-equiv (H A) id-pointed-map))) -}
 
   is-equiv-precomp-is-equiv-pointed-map :
     is-equiv-pointed-map f →
     {l : Level} → (C : Pointed-Type l) → is-equiv (precomp-pointed-map C f)
-  is-equiv-precomp-is-equiv-pointed-map E C =
+  is-equiv-precomp-is-equiv-pointed-map E C = {!!}
+
+{-
     pair
       ( pair
         ( precomp-pointed-map C h)
@@ -391,7 +399,7 @@ module _
     h : B →∗ A
     h = pr1 (pr2 I)
     H : (h ∘∗ f) ~∗ id-pointed-map
-    H = pr2 (pr2 I)
+    H = pr2 (pr2 I) -}
 
 equiv-precomp-pointed-map :
   {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
@@ -407,7 +415,7 @@ pr2 (equiv-precomp-pointed-map C f) =
 
 ### Postcomposing by pointed equivalences is a pointed equivalence
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
@@ -415,7 +423,9 @@ module _
   is-equiv-is-equiv-comp-pointed-map :
     ({l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map {A = X} f)) →
     is-equiv-pointed-map f
-  is-equiv-is-equiv-comp-pointed-map H =
+  is-equiv-is-equiv-comp-pointed-map H = {!!}
+
+{-
     is-equiv-is-invertible
       ( map-pointed-map g)
       ( pr1 G)
@@ -458,12 +468,14 @@ module _
           ( extensionality-pointed-map
             ( f ∘∗ g)
             ( id-pointed-map))
-        ( pr2 (center (is-contr-map-is-equiv (H B) id-pointed-map)))
+        ( pr2 (center (is-contr-map-is-equiv (H B) id-pointed-map))) -}
 
   is-equiv-comp-is-equiv-pointed-map :
     is-equiv-pointed-map f →
     {l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map {A = X} f)
-  is-equiv-comp-is-equiv-pointed-map E X =
+  is-equiv-comp-is-equiv-pointed-map E X = {!!}
+
+{-
     pair
       ( pair
         ( g ∘∗_)
@@ -517,5 +529,5 @@ module _
     h : B →∗ A
     h = pr1 (pr2 I)
     H : (h ∘∗ f) ~∗ id-pointed-map
-    H = pr2 (pr2 I)
+    H = pr2 (pr2 I) -}
 ```
