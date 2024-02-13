@@ -209,15 +209,26 @@ module _
   where
 
   abstract
-    is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
+    is-coherently-invertible-is-equiv :
+      is-equiv f → is-coherently-invertible f
     is-coherently-invertible-is-equiv =
       is-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
 
-  abstract
     is-equiv-is-coherently-invertible :
       is-coherently-invertible f → is-equiv f
     is-equiv-is-coherently-invertible H =
       is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
+
+    is-transpose-coherently-invertible-is-equiv :
+      is-equiv f → is-transpose-coherently-invertible f
+    is-transpose-coherently-invertible-is-equiv =
+      is-transpose-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
+
+    is-equiv-is-transpose-coherently-invertible :
+      is-transpose-coherently-invertible f → is-equiv f
+    is-equiv-is-transpose-coherently-invertible H =
+      is-equiv-is-invertible'
+        ( is-invertible-is-transpose-coherently-invertible H)
 ```
 
 ### Structure obtained from being coherently invertible

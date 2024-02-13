@@ -213,6 +213,12 @@ module _
   is-invertible-map-coherently-invertible-map =
     is-invertible-is-coherently-invertible
       ( is-coherently-invertible-map-coherently-invertible-map)
+
+  invertible-map-coherently-invertible-map : invertible-map A B
+  pr1 invertible-map-coherently-invertible-map =
+    map-coherently-invertible-map
+  pr2 invertible-map-coherently-invertible-map =
+    is-invertible-map-coherently-invertible-map
 ```
 
 ### The predicate of being transpose coherently invertible on maps
@@ -351,6 +357,12 @@ module _
   is-invertible-map-transpose-coherently-invertible-map =
     is-invertible-is-transpose-coherently-invertible
       ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  invertible-map-transpose-coherently-invertible-map : invertible-map A B
+  pr1 invertible-map-transpose-coherently-invertible-map =
+    map-transpose-coherently-invertible-map
+  pr2 invertible-map-transpose-coherently-invertible-map =
+    is-invertible-map-transpose-coherently-invertible-map
 ```
 
 ### Invertible maps that are coherent are coherently invertible maps
@@ -1345,9 +1357,9 @@ module _
     (f : section (map-coherently-invertible-map e)) →
     map-inv-coherently-invertible-map e ~
     map-section (map-coherently-invertible-map e) f
-  htpy-map-inv-coherently-invertible-map-section (f , H) =
-    ( map-inv-coherently-invertible-map e ·l inv-htpy H) ∙h
-    ( is-retraction-map-inv-coherently-invertible-map e ·r f)
+  htpy-map-inv-coherently-invertible-map-section =
+    htpy-map-inv-invertible-map-section
+      ( invertible-map-coherently-invertible-map e)
 ```
 
 ### Any retraction of a coherently invertible map is homotopic to its inverse
@@ -1361,9 +1373,9 @@ module _
     (f : retraction (map-coherently-invertible-map e)) →
     map-inv-coherently-invertible-map e ~
     map-retraction (map-coherently-invertible-map e) f
-  htpy-map-inv-coherently-invertible-map-retraction (f , H) =
-    ( inv-htpy H ·r map-inv-coherently-invertible-map e) ∙h
-    ( f ·l is-section-map-inv-coherently-invertible-map e)
+  htpy-map-inv-coherently-invertible-map-retraction =
+    htpy-map-inv-invertible-map-retraction
+     ( invertible-map-coherently-invertible-map e)
 ```
 
 ## References

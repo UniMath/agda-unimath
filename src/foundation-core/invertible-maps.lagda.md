@@ -267,6 +267,38 @@ module _
   is-invertible-inv-htpy H = is-invertible-htpy (inv-htpy H)
 ```
 
+### Any section of an invertible map is homotopic to its inverse
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : invertible-map A B)
+  where
+
+  htpy-map-inv-invertible-map-section :
+    (f : section (map-invertible-map e)) →
+    map-inv-invertible-map e ~
+    map-section (map-invertible-map e) f
+  htpy-map-inv-invertible-map-section (f , H) =
+    ( map-inv-invertible-map e ·l inv-htpy H) ∙h
+    ( is-retraction-map-inv-invertible-map e ·r f)
+```
+
+### Any retraction of an invertible map is homotopic to its inverse
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : invertible-map A B)
+  where
+
+  htpy-map-inv-invertible-map-retraction :
+    (f : retraction (map-invertible-map e)) →
+    map-inv-invertible-map e ~
+    map-retraction (map-invertible-map e) f
+  htpy-map-inv-invertible-map-retraction (f , H) =
+    ( inv-htpy H ·r map-inv-invertible-map e) ∙h
+    ( f ·l is-section-map-inv-invertible-map e)
+```
+
 ## See also
 
 - For the coherent notion of invertible maps see
