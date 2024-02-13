@@ -180,18 +180,16 @@ module _
   pr2 (pr2 (is-equiv-is-invertible' (g , H , K))) = K
 
   is-equiv-is-invertible :
-    (g : B → A) (H : (f ∘ g) ~ id) (K : (g ∘ f) ~ id) → is-equiv f
+    (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f
   is-equiv-is-invertible g H K =
     is-equiv-is-invertible' (g , H , K)
 
   is-retraction-map-section-is-equiv :
     (H : is-equiv f) → is-retraction f (map-section-is-equiv H)
   is-retraction-map-section-is-equiv H =
-    ( ( ( inv-htpy
-          ( ( is-retraction-map-retraction-is-equiv H) ·r
-            ( map-section-is-equiv H))) ∙h
-        ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H)) ·r
-      ( f)) ∙h
+    ( ( inv-htpy ( is-retraction-map-retraction-is-equiv H)) ·r
+      ( map-section-is-equiv H ∘ f) ∙h
+      ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h
     ( is-retraction-map-retraction-is-equiv H)
 
   is-invertible-is-equiv : is-equiv f → is-invertible f
@@ -427,12 +425,12 @@ module _
     pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) =
       retraction-comp g h rg rh
 
-  equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
-  pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
+  equiv-comp : B ≃ X → A ≃ B → A ≃ X
+  pr1 (equiv-comp g h) = map-equiv g ∘ map-equiv h
   pr2 (equiv-comp g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
   infixr 15 _∘e_
-  _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
+  _∘e_ : B ≃ X → A ≃ B → A ≃ X
   _∘e_ = equiv-comp
 ```
 
@@ -495,13 +493,12 @@ module _
     is-equiv-htpy' (map-equiv e) H (is-equiv-map-equiv e)
 
   htpy-map-inv-is-equiv :
-    {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
-    map-inv-is-equiv H ~ map-inv-is-equiv K
-  htpy-map-inv-is-equiv G H K b =
-    ( inv (is-retraction-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
-    ( ap
-      ( map-inv-is-equiv K)
-      ( inv (G (map-inv-is-equiv H b)) ∙ is-section-map-inv-is-equiv H b))
+    {f g : A → B} (H : f ~ g) (F : is-equiv f) (G : is-equiv g) →
+    map-inv-is-equiv F ~ map-inv-is-equiv G
+  htpy-map-inv-is-equiv H F G =
+    htpy-map-inv-is-invertible H
+      ( is-invertible-is-equiv F)
+      ( is-invertible-is-equiv G)
 ```
 
 ### Any retraction of an equivalence is an equivalence

@@ -9,6 +9,7 @@ module foundation-core.invertible-maps where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.action-on-identifications-functions
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
@@ -263,6 +264,16 @@ module _
   is-invertible-inv-htpy :
     {f f' : A → B} → f ~ f' → is-invertible f → is-invertible f'
   is-invertible-inv-htpy H = is-invertible-htpy (inv-htpy H)
+
+  htpy-map-inv-is-invertible :
+    {f g : A → B} (H : f ~ g) (F : is-invertible f) (G : is-invertible g) →
+    map-inv-is-invertible F ~ map-inv-is-invertible G
+  htpy-map-inv-is-invertible H F G =
+    ( ( inv-htpy (is-retraction-map-inv-is-invertible G)) ·r
+      ( map-inv-is-invertible F)) ∙h
+    ( ( map-inv-is-invertible G) ·l
+      ( ( inv-htpy H ·r map-inv-is-invertible F) ∙h
+        ( is-section-map-inv-is-invertible F)))
 ```
 
 ### Any section of an invertible map is homotopic to its inverse
