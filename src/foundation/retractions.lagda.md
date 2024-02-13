@@ -11,6 +11,8 @@ open import foundation-core.retractions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.coslice
+open import foundation.function-extensionality
+open import foundation.multivariable-homotopies
 open import foundation.dependent-pair-types
 open import foundation.retracts-of-types
 open import foundation.universe-levels
@@ -97,25 +99,54 @@ pr2
 ```agda
 abstract
   is-injective-retraction :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → retraction f →
-    is-injective f
-  is-injective-retraction f (h , H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    retraction f → is-injective f
+  is-injective-retraction f (h , H) {x} {y} p = inv (H x) ∙ (ap h p ∙ H y)
 ```
 
 ### Transposing identifications along retractions
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
 
-  transpose-eq-retraction :
-    (g : B → A) (H : (g ∘ f) ~ id) {x : B} {y : A} →
-    x ＝ f y → g x ＝ y
-  transpose-eq-retraction g H refl = H _
+  transpose-eq-is-retraction :
+    g ∘ f ~ id → {x : B} {y : A} → x ＝ f y → g x ＝ y
+  transpose-eq-is-retraction H {x} {y} p = ap g p ∙ H y
 
-  transpose-eq-retraction' :
-    (g : B → A) (H : (g ∘ f) ~ id) {x : A} {y : B} →
-    f x ＝ y → x ＝ g y
-  transpose-eq-retraction' g H refl = inv (H _)
+  transpose-eq-is-retraction' :
+    g ∘ f ~ id → {x : A} {y : B} → f x ＝ y → x ＝ g y
+  transpose-eq-is-retraction' H {x} refl = inv (H x)
+
+  is-retraction-transpose-eq :
+    ({x : B} {y : A} → x ＝ f y → g x ＝ y) → g ∘ f ~ id
+  is-retraction-transpose-eq H x = H refl
+
+  is-retraction-transpose-eq' :
+    ({x : A} {y : B} → f x ＝ y → x ＝ g y) → g ∘ f ~ id
+  is-retraction-transpose-eq' H x = inv (H refl)
+
+  is-retraction-is-retraction-transpose-eq :
+    is-retraction-transpose-eq ∘ transpose-eq-is-retraction ~ id
+  is-retraction-is-retraction-transpose-eq H = refl
+
+  abstract
+    is-section-is-retraction-transpose-eq :
+      transpose-eq-is-retraction ∘ is-retraction-transpose-eq ~ id
+    is-section-is-retraction-transpose-eq H =
+      eq-multivariable-htpy-implicit 2 (λ x y → eq-htpy (λ where refl → refl))
+
+  is-equiv-transpose-eq-is-retraction :
+    is-equiv transpose-eq-is-retraction
+  is-equiv-transpose-eq-is-retraction =
+    is-equiv-is-invertible
+      ( is-retraction-transpose-eq)
+      ( is-section-is-retraction-transpose-eq)
+      ( is-retraction-is-retraction-transpose-eq)
+
+  equiv-transpose-eq-is-retraction :
+    (g ∘ f ~ id) ≃ ({x : B} {y : A} → x ＝ f y → g x ＝ y)
+  equiv-transpose-eq-is-retraction =
+    (transpose-eq-is-retraction , is-equiv-transpose-eq-is-retraction)
 ```
