@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subsingleton-induction
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -135,6 +136,13 @@ module _
   hom-Displayed-Precategory f x' y' =
     type-Set (hom-set-Displayed-Precategory f x' y')
 
+  is-set-hom-Displayed-Precategory :
+    {x y : obj-Precategory C} (f : hom-Precategory C x y)
+    (x' : obj-Displayed-Precategory x) (y' : obj-Displayed-Precategory y) →
+    is-set (hom-Displayed-Precategory f x' y')
+  is-set-hom-Displayed-Precategory f x' y' =
+    is-set-type-Set (hom-set-Displayed-Precategory f x' y')
+
   comp-hom-Displayed-Precategory :
     dependent-composition-operation-Precategory C
       ( obj-Displayed-Precategory)
@@ -194,7 +202,9 @@ and hom-sets are
   hom ∫D (x , x') (y , y') := Σ (f : hom C x y) (hom D f x' y')
 ```
 
-form a precategory we call the **total precategory** of `D`.
+form a precategory called the
+{{#concept "total precategory" Disambiguation="of a displayed precategory" Agda=total-precategory-Displayed-Precategory}}
+of `D`.
 
 ```agda
 module _
@@ -319,6 +329,160 @@ module _
     associative-composition-operation-total-precategory-Displayed-Precategory
   pr2 (pr2 (pr2 total-precategory-Displayed-Precategory)) =
     is-unital-composition-operation-total-precategory-Displayed-Precategory
+```
+
+### The fiber precategory of a displayed precategory over an object
+
+Given a displayed precategory `D` over `C`, the fiber of `D` over `x : ob C`
+defines a precategory.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Displayed-Precategory l3 l4 C)
+  (c : obj-Precategory C)
+  where
+
+  obj-fiber-precategory-Displayed-Precategory : UU l3
+  obj-fiber-precategory-Displayed-Precategory = obj-Displayed-Precategory C D c
+
+  hom-set-fiber-precategory-Displayed-Precategory :
+    (x y : obj-fiber-precategory-Displayed-Precategory) → Set l4
+  hom-set-fiber-precategory-Displayed-Precategory =
+    hom-set-Displayed-Precategory C D (id-hom-Precategory C {c})
+
+  hom-fiber-precategory-Displayed-Precategory :
+    (x y : obj-fiber-precategory-Displayed-Precategory) → UU l4
+  hom-fiber-precategory-Displayed-Precategory x y =
+    type-Set (hom-set-fiber-precategory-Displayed-Precategory x y)
+
+  comp-hom-fiber-precategory-Displayed-Precategory :
+    {x y z : obj-fiber-precategory-Displayed-Precategory} →
+    hom-fiber-precategory-Displayed-Precategory y z →
+    hom-fiber-precategory-Displayed-Precategory x y →
+    hom-fiber-precategory-Displayed-Precategory x z
+  comp-hom-fiber-precategory-Displayed-Precategory {x} {y} {z} g f =
+    tr
+      ( λ i → hom-Displayed-Precategory C D i x z)
+      ( left-unit-law-comp-hom-Precategory C (id-hom-Precategory C))
+      ( comp-hom-Displayed-Precategory C D
+        ( id-hom-Precategory C) (id-hom-Precategory C) g f)
+```
+
+By associativity in `D`, composition in the fiber is dependently associative
+
+```text
+      f       g       h
+  x ----> y ----> z ----> w
+
+  c ===== c ===== c ===== c
+```
+
+```agda
+  associative-comp-hom-fiber-precategory-Displayed-Precategory :
+    {x y z w : obj-fiber-precategory-Displayed-Precategory}
+    (h : hom-fiber-precategory-Displayed-Precategory z w)
+    (g : hom-fiber-precategory-Displayed-Precategory y z)
+    (f : hom-fiber-precategory-Displayed-Precategory x y) →
+    ( comp-hom-fiber-precategory-Displayed-Precategory
+      ( comp-hom-fiber-precategory-Displayed-Precategory h g)
+      ( f)) ＝
+    ( comp-hom-fiber-precategory-Displayed-Precategory
+      ( h)
+      ( comp-hom-fiber-precategory-Displayed-Precategory g f))
+  associative-comp-hom-fiber-precategory-Displayed-Precategory
+    {x} {y} {z} {w} h g f =
+      {! associative-comp-hom-Displayed-Precategory C D _ _ _ h g f  !} -- this is a dependent identification over `associative-comp-hom-Precategory C id-hom id-hom id-hom`. Can we show it's a
+      -- equational-reasoning {! comp-hom-fiber-precategory-Displayed-Precategory (comp-hom-fiber-precategory-Displayed-Precategory h g) f !} ＝ {!   !} by {!   !}
+      -- ind-subsingleton
+      --   ( is-set-hom-Displayed-Precategory C D
+      --     ( id-hom-Precategory C {c})
+      --     ( x)
+      --     ( w)
+      --     ( comp-hom-fiber-precategory-Displayed-Precategory
+      --       ( comp-hom-fiber-precategory-Displayed-Precategory h g)
+      --       ( f))
+      --     ( comp-hom-fiber-precategory-Displayed-Precategory
+      --       ( h)
+      --       ( comp-hom-fiber-precategory-Displayed-Precategory g f)))
+      --   (associative-comp-hom-Displayed-Precategory C D
+      --     {c} {c} {c} {c}
+      --     ( id-hom-Precategory C)
+      --     ( id-hom-Precategory C)
+      --     ( id-hom-Precategory C)
+      --     {x} {y} {z} {w} h g f)
+    -- tr
+    --   (λ p → {!   !})
+    --   ( eq-is-prop
+    --     )
+    --   ( associative-comp-hom-Displayed-Precategory C D
+    --     {c} {c} {c} {c}
+    --     ( id-hom-Precategory C)
+    --     ( id-hom-Precategory C)
+    --     ( id-hom-Precategory C)
+    --     {x} {y} {z} {w} h g f)
+
+  -- associative-composition-operation-fiber-precategory-Displayed-Precategory :
+  --   associative-composition-operation-binary-family-Set
+  --     ( hom-set-fiber-precategory-Displayed-Precategory)
+  -- pr1
+  --   associative-composition-operation-fiber-precategory-Displayed-Precategory =
+  --   comp-hom-fiber-precategory-Displayed-Precategory
+  -- pr2
+  --   associative-composition-operation-fiber-precategory-Displayed-Precategory =
+  --   associative-comp-hom-fiber-precategory-Displayed-Precategory
+
+  -- id-hom-fiber-precategory-Displayed-Precategory :
+  --   {x : obj-fiber-precategory-Displayed-Precategory} →
+  --   hom-fiber-precategory-Displayed-Precategory x x
+  -- id-hom-fiber-precategory-Displayed-Precategory {x} =
+  --   id-hom-Displayed-Precategory C D x
+
+  -- left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
+  --   {x y : obj-fiber-precategory-Displayed-Precategory} →
+  --   (f : hom-fiber-precategory-Displayed-Precategory x y) →
+  --   comp-hom-fiber-precategory-Displayed-Precategory
+  --     ( id-hom-fiber-precategory-Displayed-Precategory)
+  --     ( f) ＝
+  --   f
+  -- left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
+  --   left-unit-law-comp-hom-Displayed-Precategory C D (id-hom-Precategory C {c})
+
+  -- right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
+  --   {x y : obj-fiber-precategory-Displayed-Precategory} →
+  --   (f : hom-fiber-precategory-Displayed-Precategory x y) →
+  --   comp-hom-fiber-precategory-Displayed-Precategory
+  --     ( f)
+  --     ( id-hom-fiber-precategory-Displayed-Precategory) ＝
+  --   f
+  -- right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
+  --   right-unit-law-comp-hom-Displayed-Precategory C D (id-hom-Precategory C {c})
+
+  -- is-unital-composition-operation-fiber-precategory-Displayed-Precategory :
+  --   is-unital-composition-operation-binary-family-Set
+  --     ( hom-set-fiber-precategory-Displayed-Precategory)
+  --     ( comp-hom-fiber-precategory-Displayed-Precategory)
+  -- pr1
+  --   is-unital-composition-operation-fiber-precategory-Displayed-Precategory x =
+  --   id-hom-fiber-precategory-Displayed-Precategory
+  -- pr1
+  --   ( pr2
+  --     is-unital-composition-operation-fiber-precategory-Displayed-Precategory) =
+  --       left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory
+  -- pr2
+  --   ( pr2
+  --     is-unital-composition-operation-fiber-precategory-Displayed-Precategory) =
+  --       right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory
+
+  -- fiber-precategory-Displayed-Precategory : Precategory l3 l4
+  -- pr1 fiber-precategory-Displayed-Precategory =
+  --   obj-fiber-precategory-Displayed-Precategory
+  -- pr1 (pr2 fiber-precategory-Displayed-Precategory) =
+  --   hom-set-fiber-precategory-Displayed-Precategory
+  -- pr1 (pr2 (pr2 fiber-precategory-Displayed-Precategory)) =
+  --   associative-composition-operation-fiber-precategory-Displayed-Precategory
+  -- pr2 (pr2 (pr2 fiber-precategory-Displayed-Precategory)) =
+  --   is-unital-composition-operation-fiber-precategory-Displayed-Precategory
 ```
 
 ## References
