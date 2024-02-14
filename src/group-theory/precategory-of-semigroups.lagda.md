@@ -39,6 +39,9 @@ instance
   associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
     {X = G} {H} {K} {L} =
     associative-comp-hom-Semigroup G H K L
+  inv-associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
+    {X = G} {H} {K} {L} =
+    inv-associative-comp-hom-Semigroup G H K L
   left-unit-law-comp-hom-Large-Precategory Semigroup-Large-Precategory
     {X = G} {H} =
     left-unit-law-comp-hom-Semigroup G H

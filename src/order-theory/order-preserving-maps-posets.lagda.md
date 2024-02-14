@@ -7,8 +7,6 @@ module order-theory.order-preserving-maps-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
@@ -190,11 +188,21 @@ module _
 
   associative-comp-hom-Poset :
     (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
-    Id
-      ( comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f)
-      ( comp-hom-Poset P R S h (comp-hom-Poset P Q R g f))
+    comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f ＝
+    comp-hom-Poset P R S h (comp-hom-Poset P Q R g f)
   associative-comp-hom-Poset =
     associative-comp-hom-Preorder
+      ( preorder-Poset P)
+      ( preorder-Poset Q)
+      ( preorder-Poset R)
+      ( preorder-Poset S)
+
+  inv-associative-comp-hom-Poset :
+    (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
+    comp-hom-Poset P R S h (comp-hom-Poset P Q R g f) ＝
+    comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f
+  inv-associative-comp-hom-Poset =
+    inv-associative-comp-hom-Preorder
       ( preorder-Poset P)
       ( preorder-Poset Q)
       ( preorder-Poset R)

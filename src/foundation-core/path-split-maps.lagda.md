@@ -24,9 +24,9 @@ open import foundation-core.sections
 ## Idea
 
 A map `f : A → B` is said to be **path split** if it has a
-[section](foundation-core.sections.md) and its action on
-[identity types](foundation-core.identity-types.md) `Id x y → Id (f x) (f y)`
-has a section for each `x y : A`. By the
+[section](foundation-core.sections.md) and its
+[action on identifications](foundation.action-on-identifications-functions.md)
+`x ＝ y → f x ＝ f y` has a section for each `x y : A`. By the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md),
 it follows that a map is path-split if and only if it is an
 [equivalence](foundation-core.equivalences.md).
@@ -80,8 +80,8 @@ module _
 
 - For the notion of biinvertible maps see
   [`foundation.equivalences`](foundation.equivalences.md).
-- For the notions of inverses and coherently invertible maps, also known as
-  half-adjoint equivalences, see
+- For the notion of coherently invertible maps, also known as half-adjoint
+  equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).

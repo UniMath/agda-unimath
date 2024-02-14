@@ -34,34 +34,31 @@ uniquely unique.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
-  (C : Set l3) (g : A → type-Set C) {h : type-hom-Set B C}
+  (C : Set l3) (g : A → type-Set C) {h : hom-Set B C}
   (H : (h ∘ f) ~ g)
   where
 
   abstract
     is-equiv-is-set-truncation-is-set-truncation :
-      ({l : Level} → is-set-truncation l B f) →
-      ({l : Level} → is-set-truncation l C g) →
-      is-equiv h
+      is-set-truncation B f → is-set-truncation C g → is-equiv h
     is-equiv-is-set-truncation-is-set-truncation Sf Sg =
       is-equiv-is-set-quotient-is-set-quotient
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( C)
         ( reflecting-map-mere-eq C g)
         ( H)
-        ( λ {l} → is-set-quotient-is-set-truncation B f Sf)
-        ( λ {l} → is-set-quotient-is-set-truncation C g Sg)
+        ( is-set-quotient-is-set-truncation B f Sf)
+        ( is-set-quotient-is-set-truncation C g Sg)
 
   abstract
     is-set-truncation-is-equiv-is-set-truncation :
-      ({l : Level} → is-set-truncation l C g) → is-equiv h →
-      {l : Level} → is-set-truncation l B f
+      is-set-truncation C g → is-equiv h → is-set-truncation B f
     is-set-truncation-is-equiv-is-set-truncation Sg Eh =
       is-set-truncation-is-set-quotient B f
         ( is-set-quotient-is-equiv-is-set-quotient
-          ( mere-eq-Equivalence-Relation A)
+          ( mere-eq-equivalence-relation A)
           ( B)
           ( reflecting-map-mere-eq B f)
           ( C)
@@ -72,12 +69,11 @@ module _
 
   abstract
     is-set-truncation-is-set-truncation-is-equiv :
-      is-equiv h → ({l : Level} → is-set-truncation l B f) →
-      {l : Level} → is-set-truncation l C g
+      is-equiv h → is-set-truncation B f → is-set-truncation C g
     is-set-truncation-is-set-truncation-is-equiv Eh Sf =
       is-set-truncation-is-set-quotient C g
         ( is-set-quotient-is-set-quotient-is-equiv
-          ( mere-eq-Equivalence-Relation A)
+          ( mere-eq-equivalence-relation A)
           ( B)
           ( reflecting-map-mere-eq B f)
           ( C)
@@ -87,14 +83,14 @@ module _
           ( is-set-quotient-is-set-truncation B f Sf))
 ```
 
-### The uniquely uniqueness of set truncations
+### The unique uniqueness of set truncations
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   (C : Set l3) (g : A → type-Set C)
-  (Sf : {l : Level} → is-set-truncation l B f)
-  (Sg : {l : Level} → is-set-truncation l C g)
+  (Sf : is-set-truncation B f)
+  (Sg : is-set-truncation C g)
   where
 
   abstract
@@ -102,7 +98,7 @@ module _
       is-contr (Σ (type-Set B ≃ type-Set C) (λ e → (map-equiv e ∘ f) ~ g))
     uniqueness-set-truncation =
       uniqueness-set-quotient
-        ( mere-eq-Equivalence-Relation A)
+        ( mere-eq-equivalence-relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( is-set-quotient-is-set-truncation B f Sf)

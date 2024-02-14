@@ -7,7 +7,6 @@ module ring-theory.homomorphisms-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -38,14 +37,14 @@ Ring homomorphisms are maps between rings that preserve the ring structure
 
 ## Definitions
 
-### The predicate that a group homomorphism between rings preserves multiplication
+### The predicate on group homomorphisms between rings of preserving multiplication
 
 ```agda
 preserves-mul-hom-Ab :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) →
   hom-Ab (ab-Ring R) (ab-Ring S) → UU (l1 ⊔ l2)
 preserves-mul-hom-Ab R S f =
-  (x y : type-Ring R) →
+  {x y : type-Ring R} →
   map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y) ＝
   mul-Ring S
     ( map-hom-Ab (ab-Ring R) (ab-Ring S) f x)
@@ -56,9 +55,9 @@ is-prop-preserves-mul-hom-Ab :
   ( f : hom-Ab (ab-Ring R) (ab-Ring S)) →
   is-prop (preserves-mul-hom-Ab R S f)
 is-prop-preserves-mul-hom-Ab R S f =
-  is-prop-Π
+  is-prop-implicit-Π
     ( λ x →
-      is-prop-Π
+      is-prop-implicit-Π
         ( λ y →
           is-set-type-Ring S
             ( map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y))
@@ -67,7 +66,7 @@ is-prop-preserves-mul-hom-Ab R S f =
               ( map-hom-Ab (ab-Ring R) (ab-Ring S) f y))))
 ```
 
-### The predicate that a group homomorphism between rings preserves the unit
+### The predicate on group homomorphisms between rings of preserving the unit
 
 ```agda
 preserves-unit-hom-Ab :
@@ -96,7 +95,7 @@ module _
   is-ring-homomorphism-hom-Ab-Prop :
     hom-Ab (ab-Ring R) (ab-Ring S) → Prop (l1 ⊔ l2)
   is-ring-homomorphism-hom-Ab-Prop f =
-    is-homomorphism-semiring-hom-Commutative-Monoid-Prop
+    is-homomorphism-semiring-prop-hom-Commutative-Monoid
       ( semiring-Ring R)
       ( semiring-Ring S)
       ( hom-commutative-monoid-hom-Ab (ab-Ring R) (ab-Ring S) f)
@@ -200,7 +199,7 @@ module _
   where
 
   preserves-mul-id-hom-Ring : preserves-mul-hom-Ab R R (id-hom-Ab (ab-Ring R))
-  preserves-mul-id-hom-Ring x y = refl
+  preserves-mul-id-hom-Ring = refl
 
   preserves-unit-id-hom-Ring : preserves-unit-hom-Ab R R (id-hom-Ab (ab-Ring R))
   preserves-unit-id-hom-Ring = refl
@@ -349,12 +348,21 @@ module _
   where
 
   associative-comp-hom-Ring :
-    ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f) ＝
-    ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
+    comp-hom-Ring R S U (comp-hom-Ring S T U h g) f ＝
+    comp-hom-Ring R T U h (comp-hom-Ring R S T g f)
   associative-comp-hom-Ring =
     eq-htpy-hom-Ring R U
       ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
       ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
+      ( refl-htpy)
+
+  inv-associative-comp-hom-Ring :
+    comp-hom-Ring R T U h (comp-hom-Ring R S T g f) ＝
+    comp-hom-Ring R S U (comp-hom-Ring S T U h g) f
+  inv-associative-comp-hom-Ring =
+    eq-htpy-hom-Ring R U
+      ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
+      ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
       ( refl-htpy)
 ```
 

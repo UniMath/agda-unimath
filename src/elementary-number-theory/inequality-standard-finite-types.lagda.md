@@ -25,7 +25,6 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 open import order-theory.preorders
-open import order-theory.total-orders
 
 open import univalent-combinatorics.standard-finite-types
 ```

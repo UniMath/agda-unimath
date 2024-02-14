@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.pushouts where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,10 +16,13 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -102,7 +106,7 @@ postulate
 postulate
   glue-pushout :
     {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) → ((inl-pushout f g) ∘ f) ~ ((inr-pushout f g) ∘ g)
+    (f : S → A) (g : S → B) → inl-pushout f g ∘ f ~ inr-pushout f g ∘ g
 
 cocone-pushout :
   {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -129,42 +133,104 @@ pr2 (equiv-up-pushout f g X) = up-pushout f g X
 ### The cogap map
 
 ```agda
-cogap :
-  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) →
-  { X : UU l4} → cocone f g X → pushout f g → X
-cogap f g {X} = map-inv-equiv (equiv-up-pushout f g X)
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) { X : UU l4}
+  where
+
+  cogap : cocone f g X → pushout f g → X
+  cogap = map-inv-equiv (equiv-up-pushout f g X)
+
+  is-section-cogap : is-section (cocone-map f g (cocone-pushout f g)) cogap
+  is-section-cogap = is-section-map-inv-equiv (equiv-up-pushout f g X)
+
+  is-retraction-cogap :
+    is-retraction (cocone-map f g (cocone-pushout f g)) cogap
+  is-retraction-cogap =
+    is-retraction-map-inv-equiv (equiv-up-pushout f g X)
 ```
 
-### The predicate of being a pushout cocone
+### The small predicate of being a pushout cocone
 
 ```agda
-is-pushout :
-  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-is-pushout f g c = is-equiv (cogap f g c)
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  is-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-pushout = is-equiv (cogap f g c)
+
+  is-prop-is-pushout : is-prop is-pushout
+  is-prop-is-pushout = is-property-is-equiv (cogap f g c)
+
+  is-pushout-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pr1 is-pushout-Prop = is-pushout
+  pr2 is-pushout-Prop = is-prop-is-pushout
 ```
 
 ## Properties
+
+### Pushout cocones satisfy the universal property of the pushout
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  universal-property-pushout-is-pushout :
+    is-pushout f g c → {l : Level} → universal-property-pushout l f g c
+  universal-property-pushout-is-pushout po =
+    up-pushout-up-pushout-is-equiv f g
+      ( cocone-pushout f g)
+      ( c)
+      ( cogap f g c)
+      ( htpy-cocone-map-universal-property-pushout f g
+        ( cocone-pushout f g)
+        ( up-pushout f g)
+        ( c))
+      ( po)
+      ( up-pushout f g)
+
+  is-pushout-universal-property-pushout :
+    ({l : Level} → universal-property-pushout l f g c) → is-pushout f g c
+  is-pushout-universal-property-pushout =
+    is-equiv-up-pushout-up-pushout f g
+      ( cocone-pushout f g)
+      ( c)
+      ( cogap f g c)
+      ( htpy-cocone-map-universal-property-pushout f g
+        ( cocone-pushout f g)
+        ( up-pushout f g)
+        ( c))
+      ( up-pushout f g)
+```
 
 ### The pushout of a span has the dependent universal property
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B)
   where
 
-  dependent-up-pushout :
-    (f : S → A) (g : S → B) →
+  dup-pushout :
     dependent-universal-property-pushout l4 f g (cocone-pushout f g)
-  dependent-up-pushout f g =
+  dup-pushout =
     dependent-universal-property-universal-property-pushout
     ( f)
     ( g)
     ( cocone-pushout f g)
-    ( λ l → up-pushout f g)
-    ( l4)
+    ( up-pushout f g)
+
+  equiv-dup-pushout :
+    (P : pushout f g → UU l4) →
+    ((x : pushout f g) → P x) ≃ dependent-cocone f g (cocone-pushout f g) P
+  pr1 (equiv-dup-pushout P) =
+    dependent-cocone-map f g (cocone-pushout f g) P
+  pr2 (equiv-dup-pushout P) =
+    dup-pushout P
 ```
 
 ### Computation with the cogap map
@@ -229,7 +295,7 @@ Given a pushout square with a
    A ----> ∙    \
     \ inl   \   |
   m  \  cogap\  |
-      \       \ v
+      \       ∨ v
        \-----> X
 ```
 
@@ -330,7 +396,7 @@ square commute (almost) trivially.
         ( f)
         ( g)
         ( cocone-pushout f g)
-        ( dependent-up-pushout f g))
+        ( dup-pushout f g))
       ( refl-htpy)
       ( λ _ →
         inv
@@ -353,7 +419,7 @@ We record the following auxiliary lemma which says that if we have types `T`,
    T ----------> G
    |             |
  u |             |
-   v          ⌜  v
+   v           ⌜ v
    F ----> fiber cogap x
 ```
 
@@ -402,4 +468,38 @@ fibers.
         ( is-equiv-map-equiv i)
         ( is-equiv-map-equiv j)
         ( is-equiv-map-equiv k)
+```
+
+### Swapping a pushout cocone yields another pushout cocone
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4) (c : cocone f g X)
+  where
+
+  universal-property-pushout-swap-cocone-universal-property-pushout :
+    {l : Level} → universal-property-pushout l f g c →
+    universal-property-pushout l g f (swap-cocone f g X c)
+  universal-property-pushout-swap-cocone-universal-property-pushout up Y =
+    is-equiv-equiv'
+      ( id-equiv)
+      ( equiv-swap-cocone f g Y)
+      ( λ h →
+        eq-htpy-cocone g f
+          ( swap-cocone f g Y (cocone-map f g c h))
+          ( cocone-map g f (swap-cocone f g X c) h)
+          ( ( refl-htpy) ,
+            ( refl-htpy) ,
+            ( λ s →
+              right-unit ∙ inv (ap-inv h (coherence-square-cocone f g c s)))))
+      ( up Y)
+
+  is-pushout-swap-cocone-is-pushout :
+    is-pushout f g c → is-pushout g f (swap-cocone f g X c)
+  is-pushout-swap-cocone-is-pushout po =
+    is-pushout-universal-property-pushout g f
+      ( swap-cocone f g X c)
+      ( universal-property-pushout-swap-cocone-universal-property-pushout
+        ( universal-property-pushout-is-pushout f g c po))
 ```

@@ -22,7 +22,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -106,7 +105,7 @@ module _
   is-closed-under-addition-radical-of-ideal-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
-  is-closed-under-addition-radical-of-ideal-Commutative-Ring x y H K =
+  is-closed-under-addition-radical-of-ideal-Commutative-Ring {x} {y} H K =
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (add-Commutative-Ring A x y))
       ( λ (n , p) →
@@ -117,7 +116,7 @@ module _
             intro-∃
               ( n +ℕ m)
               ( is-closed-under-eq-ideal-Commutative-Ring' A I
-                ( is-closed-under-addition-ideal-Commutative-Ring A I _ _
+                ( is-closed-under-addition-ideal-Commutative-Ring A I
                   ( is-closed-under-right-multiplication-ideal-Commutative-Ring
                     ( A)
                     ( I)
@@ -135,7 +134,7 @@ module _
   is-closed-under-negatives-radical-of-ideal-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
-  is-closed-under-negatives-radical-of-ideal-Commutative-Ring x H =
+  is-closed-under-negatives-radical-of-ideal-Commutative-Ring {x} H =
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (neg-Commutative-Ring A x))
       ( λ (n , p) →
@@ -238,7 +237,7 @@ module _
         ( H))
 
   radical-of-ideal-hom-large-poset-Commutative-Ring :
-    hom-set-Large-Poset
+    hom-Large-Poset
       ( λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)

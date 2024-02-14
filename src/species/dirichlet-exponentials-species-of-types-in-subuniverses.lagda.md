@@ -14,6 +14,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.pi-decompositions
 open import foundation.pi-decompositions-subuniverse
@@ -194,13 +195,9 @@ module _
                       ( pV)
                       ( tr
                         ( is-in-subuniverse P)
-                        ( eq-equiv
-                          ( pr1 X)
-                          ( Π ( indexing-type-Π-Decomposition d)
-                              ( cotype-Π-Decomposition d))
-                          ( matching-correspondence-Π-Decomposition d))
+                        ( eq-equiv (matching-correspondence-Π-Decomposition d))
                         ( pr2 X))))) ∘e
-              ( ( commutative-prod) ∘e
+              ( ( commutative-product) ∘e
                 ( inv-equiv
                   ( equiv-add-redundant-prop
                     ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
@@ -264,7 +261,7 @@ module _
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
             ( λ d →
-              equiv-prod
+              equiv-product
                 (( inv-equiv
                   ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
                     ( P)
@@ -337,10 +334,6 @@ module _
         ( right-summand-binary-product-Decomposition d)
         ( tr
           ( is-in-subuniverse P)
-          ( eq-equiv
-            ( inclusion-subuniverse P X)
-            ( left-summand-binary-product-Decomposition d ×
-              right-summand-binary-product-Decomposition d)
-            ( matching-correspondence-binary-product-Decomposition d))
+          ( eq-equiv (matching-correspondence-binary-product-Decomposition d))
           ( pr2 X))
 ```

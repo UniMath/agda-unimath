@@ -114,8 +114,8 @@ module _
         ( is-retraction-map-inv-is-equiv H y))
 
   abstract
-    is-injective-map-equiv : (e : A ≃ B) → is-injective (map-equiv e)
-    is-injective-map-equiv (pair f H) = is-injective-is-equiv H
+    is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
+    is-injective-equiv (pair f H) = is-injective-is-equiv H
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -192,9 +192,9 @@ module _
   is-prop-is-injective :
     is-set A → (f : A → B) → is-prop (is-injective f)
   is-prop-is-injective H f =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ y → is-prop-function-type (H x y)))
 
   is-injective-Prop : is-set A → (A → B) → Prop (l1 ⊔ l2)

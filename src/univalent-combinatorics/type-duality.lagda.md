@@ -17,6 +17,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.inhabited-types
+open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.structure
 open import foundation.structured-type-duality
@@ -52,7 +53,7 @@ equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
           equiv-Σ
             ( λ z → is-finite z × is-inhabited z)
             ( id-equiv)
-            ( λ _ → commutative-prod)))
+            ( λ _ → commutative-product)))
       ( λ b → id-equiv)) ∘e
     ( ( equiv-fixed-Slice-structure
         ( λ x → (is-inhabited x) × (is-finite x))

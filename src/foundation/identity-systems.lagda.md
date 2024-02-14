@@ -13,8 +13,9 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
@@ -59,11 +60,11 @@ module _
 
 ```agda
 module _
-    {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
-    where
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
+  where
 
-    is-identity-system : UUω
-    is-identity-system = {l : Level} → is-identity-system-Level l B a b
+  is-identity-system : UUω
+  is-identity-system = {l : Level} → is-identity-system-Level l B a b
 ```
 
 ## Properties
@@ -105,9 +106,12 @@ module _
   abstract
     fundamental-theorem-id-is-identity-system :
       is-identity-system B a b →
-      (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
-    fundamental-theorem-id-is-identity-system H f =
-      fundamental-theorem-id
-        ( is-torsorial-is-identity-system H)
-        ( f)
+      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
+    fundamental-theorem-id-is-identity-system H =
+      fundamental-theorem-id (is-torsorial-is-identity-system H)
 ```
+
+## External links
+
+- [Identity systems](https://1lab.dev/1Lab.Path.IdentitySystem.html) at 1lab
+- [identity system](https://ncatlab.org/nlab/show/identity+system) at $n$Lab

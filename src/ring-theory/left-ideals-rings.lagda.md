@@ -8,7 +8,6 @@ module ring-theory.left-ideals-rings where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -48,7 +47,7 @@ module _
   is-prop-is-left-ideal-subset-Ring :
     {l2 : Level} (S : subset-Ring l2 R) → is-prop (is-left-ideal-subset-Ring S)
   is-prop-is-left-ideal-subset-Ring S =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-additive-subgroup-subset-Ring R S)
       ( is-prop-is-closed-under-left-multiplication-subset-Ring R S)
 

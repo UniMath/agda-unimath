@@ -106,7 +106,7 @@ abstract
                       ( λ (x : A) → Id x (pr1 t))
                       ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e
                     ( inv-left-unit-law-Σ-is-contr
-                      ( is-torsorial-path' (pr1 t))
+                      ( is-torsorial-Id' (pr1 t))
                       ( pair (pr1 t) refl))))))
             ( count-Σ e
               ( λ t →
@@ -157,10 +157,10 @@ abstract
               ( is-prop-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
         ( inv-equiv
-          ( left-distributive-Σ-coprod A
+          ( left-distributive-Σ-coproduct A
             ( λ x → type-trunc-Prop (B x))
             ( λ x → is-empty (B x)))))
-      ( is-finite-coprod
+      ( is-finite-coproduct
         ( is-finite-base-is-finite-Σ-merely-inhabited
           ( is-set-type-subtype (λ x → trunc-Prop _) K)
           ( λ t → pr2 t)

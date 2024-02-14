@@ -42,6 +42,8 @@ parametric-Poset-Large-Precategory α β =
     .id-hom-Large-Precategory {X = X} → id-hom-Poset X
     .associative-comp-hom-Large-Precategory {X = X} {Y} {Z} {W} →
       associative-comp-hom-Poset X Y Z W
+    .inv-associative-comp-hom-Large-Precategory {X = X} {Y} {Z} {W} →
+      inv-associative-comp-hom-Poset X Y Z W
     .left-unit-law-comp-hom-Large-Precategory {X = X} {Y} →
       left-unit-law-comp-hom-Poset X Y
     .right-unit-law-comp-hom-Large-Precategory {X = X} {Y} →

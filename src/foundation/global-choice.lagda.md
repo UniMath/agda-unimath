@@ -23,9 +23,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Global choice is the principle that there is a map from `type-trunc-Prop A` back
-into `A`, for any type `A`. Here, we say that a type `A` satisfies global choice
-if there is such a map.
+**Global choice** is the principle that there is a map from `type-trunc-Prop A`
+back into `A`, for any type `A`. Here, we say that a type `A` _satisfies global
+choice_ if there is such a map.
 
 ## Definition
 

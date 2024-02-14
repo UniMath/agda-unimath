@@ -10,7 +10,6 @@ module foundation.equality-dependent-function-types where
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.implicit-function-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -18,6 +17,7 @@ open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -32,7 +32,7 @@ characterize the identity types of `(x : A) → B x`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   (is-torsorial-C : (x : A) → is-torsorial (C x))
   where
 
@@ -74,7 +74,7 @@ module _
       (g : (x : A) → B x) → is-equiv (map-extensionality-Π e g)
     is-equiv-map-extensionality-Π e =
       fundamental-theorem-id
-        ( is-torsorial-Eq-Π Eq-B
+        ( is-torsorial-Eq-Π
           ( λ x →
             fundamental-theorem-id'
               ( λ y → map-equiv (e x y))

@@ -22,7 +22,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-elements
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -469,7 +468,7 @@ module _
     is-contr-equiv
       ( root-coalgebra w ＝
         root-coalgebra w)
-      ( right-unit-law-coprod-is-empty
+      ( right-unit-law-coproduct-is-empty
         ( root-coalgebra w ＝
           root-coalgebra w)
         ( Σ ( node-element-coalgebra X w)
@@ -485,7 +484,7 @@ module _
       ( Σ ( node-element-coalgebra X w)
           ( edge-element-coalgebra X w
             ( node-inclusion-element-coalgebra H x)))
-      ( left-unit-law-coprod-is-empty
+      ( left-unit-law-coproduct-is-empty
         ( root-coalgebra w ＝
           node-inclusion-element-coalgebra H x)
         ( Σ ( node-element-coalgebra X w)

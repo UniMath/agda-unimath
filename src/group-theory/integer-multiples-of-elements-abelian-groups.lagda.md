@@ -286,8 +286,10 @@ module _
   where
 
   hom-integer-multiple-Ab : hom-Ab A A
-  pr1 hom-integer-multiple-Ab = integer-multiple-Ab A k
-  pr2 hom-integer-multiple-Ab = left-distributive-integer-multiple-add-Ab A k
+  pr1 hom-integer-multiple-Ab =
+    integer-multiple-Ab A k
+  pr2 hom-integer-multiple-Ab {x} {y} =
+    left-distributive-integer-multiple-add-Ab A k x y
 ```
 
 ### Multiples by products of integers are iterated integer multiples

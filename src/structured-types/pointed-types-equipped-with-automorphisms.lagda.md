@@ -156,42 +156,10 @@ is-torsorial-htpy-hom-Pointed-Type-With-Aut :
   is-torsorial (htpy-hom-Pointed-Type-With-Aut X Y h1)
 is-torsorial-htpy-hom-Pointed-Type-With-Aut X Y h1 =
   is-torsorial-Eq-structure
-    ( λ ( map-h2 : type-Pointed-Type-With-Aut X → type-Pointed-Type-With-Aut Y)
-        ( str-h2 :
-          ( ( map-h2 (point-Pointed-Type-With-Aut X)) ＝
-            ( point-Pointed-Type-With-Aut Y)) ×
-          ( ( x : type-Pointed-Type-With-Aut X) →
-            ( map-h2 (map-aut-Pointed-Type-With-Aut X x)) ＝
-            ( map-aut-Pointed-Type-With-Aut Y (map-h2 x))))
-        ( H : map-hom-Pointed-Type-With-Aut X Y h1 ~ map-h2) →
-        ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
-          ( ( H (point-Pointed-Type-With-Aut X)) ∙
-            ( pr1 str-h2))) ×
-        ( ( x : type-Pointed-Type-With-Aut X) →
-          ( ( ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x) ∙
-              ( ap (map-aut-Pointed-Type-With-Aut Y) (H x))) ＝
-            ( ( H (map-aut-Pointed-Type-With-Aut X x)) ∙
-              ( pr2 str-h2 x)))))
     ( is-torsorial-htpy (map-hom-Pointed-Type-With-Aut X Y h1))
     ( pair (map-hom-Pointed-Type-With-Aut X Y h1) refl-htpy)
     ( is-torsorial-Eq-structure
-      ( λ ( point-h2 :
-            ( map-hom-Pointed-Type-With-Aut X Y h1
-              ( point-Pointed-Type-With-Aut X)) ＝
-            ( point-Pointed-Type-With-Aut Y))
-          ( aut-h2 :
-            ( x : type-Pointed-Type-With-Aut X) →
-            ( map-hom-Pointed-Type-With-Aut X Y h1
-              ( map-aut-Pointed-Type-With-Aut X x)) ＝
-            ( map-aut-Pointed-Type-With-Aut Y
-              ( map-hom-Pointed-Type-With-Aut X Y h1 x)))
-          ( α :
-            preserves-point-map-hom-Pointed-Type-With-Aut X Y h1 ＝ point-h2) →
-          ( ( x : type-Pointed-Type-With-Aut X) →
-            ( ( preserves-aut-map-hom-Pointed-Type-With-Aut X Y h1 x) ∙
-              ( refl)) ＝
-            ( aut-h2 x)))
-      ( is-torsorial-path
+      ( is-torsorial-Id
         ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1))
       ( pair (preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) refl)
       ( is-contr-equiv'

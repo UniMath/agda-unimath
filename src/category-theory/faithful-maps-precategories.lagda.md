@@ -34,7 +34,7 @@ stronger notion, as this is the notion that generalizes.
 
 ## Definition
 
-### The predicate of being faithful on maps between precategories
+### The predicate on maps between precategories of being faithful
 
 ```agda
 module _
@@ -95,7 +95,7 @@ module _
     hom-map-Precategory C D ∘ map-faithful-map-Precategory
 ```
 
-### The predicate of being injective on hom-sets on maps between precategories
+### The predicate on maps between precategories of being injective on hom-sets
 
 ```agda
 module _

@@ -84,11 +84,10 @@ module _
     is-torsorial (Eq-pair-of-distinct-elements p)
   is-torsorial-Eq-pair-of-distinct-elements p =
     is-torsorial-Eq-structure
-      ( λ x ynp α → second-pair-of-distinct-elements p ＝ pr1 ynp)
-      ( is-torsorial-path (first-pair-of-distinct-elements p))
+      ( is-torsorial-Id (first-pair-of-distinct-elements p))
       ( pair (first-pair-of-distinct-elements p) refl)
       ( is-torsorial-Eq-subtype
-        ( is-torsorial-path (second-pair-of-distinct-elements p))
+        ( is-torsorial-Id (second-pair-of-distinct-elements p))
         ( λ x → is-prop-neg)
         ( second-pair-of-distinct-elements p)
         ( refl)

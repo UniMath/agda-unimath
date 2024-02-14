@@ -11,17 +11,16 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
-open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.invertible-maps
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -132,25 +131,6 @@ module _
     is-retraction map-equiv map-retraction-map-equiv
   is-retraction-map-retraction-map-equiv =
     is-retraction-map-retraction map-equiv retraction-map-equiv
-```
-
-### Families of equivalences
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1}
-  where
-
-  is-fiberwise-equiv :
-    {B : A → UU l2} {C : A → UU l3}
-    (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
-  is-fiberwise-equiv f = (x : A) → is-equiv (f x)
-
-  fiberwise-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  fiberwise-equiv B C = Σ ((x : A) → B x → C x) is-fiberwise-equiv
-
-  fam-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  fam-equiv B C = (x : A) → B x ≃ C x
 ```
 
 ### The identity equivalence
@@ -372,7 +352,9 @@ module _
         ( pair
           ( section-right-map-triangle f g h H section-f)
           ( retraction-left-map-triangle g f sh
-            ( triangle-section f g h H (sh , is-section-sh))
+            ( inv-htpy
+              ( ( H ·r map-section h (sh , is-section-sh)) ∙h
+                ( g ·l is-section-map-section h (sh , is-section-sh))))
             ( retraction-f)
             ( h , is-section-sh)))
 ```
@@ -391,7 +373,9 @@ module _
     section-left-map-triangle h
       ( map-retraction-is-equiv G)
       ( f)
-      ( triangle-retraction f g h H (retraction-is-equiv G))
+      ( inv-htpy
+        ( ( map-retraction g (retraction-is-equiv G) ·l H) ∙h
+          ( is-retraction-map-retraction g (retraction-is-equiv G) ·r h)))
       ( section-is-equiv F)
       ( g , is-retraction-map-retraction-is-equiv G)
 
@@ -408,7 +392,9 @@ module _
       ( section-f , retraction-f) =
       ( pair
         ( section-left-map-triangle h rg f
-          ( triangle-retraction f g h H (rg , is-retraction-rg))
+          ( inv-htpy
+            ( ( map-retraction g (rg , is-retraction-rg) ·l H) ∙h
+              ( is-retraction-map-retraction g (rg , is-retraction-rg) ·r h)))
           ( section-f)
           ( g , is-retraction-rg))
         ( retraction-top-map-triangle f g h H retraction-f))
@@ -498,7 +484,7 @@ module _
 
   htpy-map-inv-is-equiv :
     {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
-    (map-inv-is-equiv H) ~ (map-inv-is-equiv K)
+    map-inv-is-equiv H ~ map-inv-is-equiv K
   htpy-map-inv-is-equiv G H K b =
     ( inv
       ( is-retraction-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
@@ -542,7 +528,7 @@ module _
     is-equiv-section-is-equiv (g , is-section-g) is-equiv-section-f =
       is-equiv-htpy h
         ( ( f ·l (inv-htpy (is-section-map-inv-is-equiv is-equiv-section-f))) ∙h
-          ( htpy-right-whisk is-section-g h))
+          ( right-whisker-comp is-section-g h))
         ( is-equiv-map-inv-is-equiv is-equiv-section-f)
       where
       h : A → B
@@ -733,6 +719,23 @@ equivalence-reasoning
 The equivalence constructed in this way is `equiv-1 ∘e (equiv-2 ∘e equiv-3)`,
 i.e., the equivivalence is associated fully to the right.
 
+**Note.** In situations where it is important to have precise control over an
+equivalence or its inverse, it is often better to avoid making use of
+equivalence reasoning. For example, since many of the entries proving that a map
+is an equivalence are marked as `abstract` in agda-unimath, the inverse of an
+equivalence often does not compute to any map that one might expect the inverse
+to be. If inverses of equivalences are used in equivalence reasoning, this
+results in a composed equivalence that also does not compute to any expected
+underlying map.
+
+Even if a proof by equivalence reasoning is clear to the human reader,
+constructing equivalences by hand by constructing maps back and forth and two
+homotopies witnessing that they are mutual inverses is often the most
+straigtforward solution that gives the best expected computational behavior of
+the constructed equivalence. In particular, if the underlying map or its inverse
+are noteworthy maps, it is good practice to define them directly rather than as
+underlying maps of equivalences constructed by equivalence reasoning.
+
 ```agda
 infixl 1 equivalence-reasoning_
 infixl 0 step-equivalence-reasoning
@@ -751,10 +754,14 @@ syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 
 ## See also
 
-- For the notions of inverses and coherently invertible maps, also known as
-  half-adjoint equivalences, see
+- For the notion of coherently invertible maps, also known as half-adjoint
+  equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

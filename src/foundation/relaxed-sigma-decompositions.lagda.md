@@ -15,8 +15,8 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -26,6 +26,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -299,23 +300,9 @@ module _
     is-torsorial (equiv-Relaxed-Σ-Decomposition X)
   is-torsorial-equiv-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
-      ( λ U Vf e →
-        Σ ( (x : indexing-type-Relaxed-Σ-Decomposition X) →
-            cotype-Relaxed-Σ-Decomposition X x ≃
-            (pr1 Vf (map-equiv e x)))
-          ( λ f →
-            ( ( map-equiv
-                ( equiv-Σ (λ u → pr1 Vf u) e f)) ∘
-              ( map-matching-correspondence-Relaxed-Σ-Decomposition X)) ~
-            ( map-equiv (pr2 Vf))))
       ( is-torsorial-equiv (indexing-type-Relaxed-Σ-Decomposition X))
       ( pair (indexing-type-Relaxed-Σ-Decomposition X) id-equiv)
       ( is-torsorial-Eq-structure
-        ( λ V g f →
-          ( ( map-equiv
-              ( equiv-Σ (λ y → V y) id-equiv f)) ∘
-            ( map-matching-correspondence-Relaxed-Σ-Decomposition X)) ~
-          ( map-equiv g))
         ( is-torsorial-equiv-fam
           ( cotype-Relaxed-Σ-Decomposition X))
         ( pair
@@ -437,25 +424,12 @@ module _
     is-torsorial (equiv-fibered-Relaxed-Σ-Decomposition D)
   is-torsorial-equiv-fibered-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
-      ( λ X' Y' e →
-        equiv-snd-fibered-Relaxed-Σ-Decomposition D (X' , Y') e)
       ( is-torsorial-equiv-Relaxed-Σ-Decomposition X)
       ( X , id-equiv-Relaxed-Σ-Decomposition X)
       ( is-torsorial-Eq-structure
-        ( λ U Vs e →
-          ( Σ ( ( u : indexing-type-Relaxed-Σ-Decomposition Y) →
-                cotype-Relaxed-Σ-Decomposition Y u ≃ pr1 Vs (map-equiv e u))
-              ( λ f →
-                ( ( ( map-equiv-Σ (λ u → pr1 Vs u) e f) ∘
-                    ( map-matching-correspondence-Relaxed-Σ-Decomposition Y)) ~
-                  ( map-equiv (pr2 Vs))))))
         ( is-torsorial-equiv (indexing-type-Relaxed-Σ-Decomposition Y))
         ( pair (indexing-type-Relaxed-Σ-Decomposition Y) id-equiv)
         ( is-torsorial-Eq-structure
-          ( λ V f g →
-            ( ( map-equiv-Σ (λ u → V u) id-equiv g) ∘
-              ( map-matching-correspondence-Relaxed-Σ-Decomposition Y)) ~
-              ( pr1 f))
           ( is-torsorial-equiv-fam
             ( cotype-Relaxed-Σ-Decomposition Y))
           ( pair
@@ -568,10 +542,6 @@ module _
     is-torsorial (equiv-displayed-Relaxed-Σ-Decomposition disp-D)
   is-torsorial-equiv-displayed-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
-      ( λ X' f-Y' e → equiv-snd-displayed-Relaxed-Σ-Decomposition
-        ( disp-D)
-        ( pair X' f-Y')
-        ( e))
       ( is-torsorial-equiv-Relaxed-Σ-Decomposition X)
       ( pair X (id-equiv-Relaxed-Σ-Decomposition X))
       ( is-contr-equiv

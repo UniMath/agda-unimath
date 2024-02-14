@@ -20,7 +20,6 @@ open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -107,7 +106,7 @@ module _
   is-prop-type-prop-standard-2-Element-Subtype :
     (z : type-Set X) → is-prop (type-prop-standard-2-Element-Subtype z)
   is-prop-type-prop-standard-2-Element-Subtype z =
-    is-prop-coprod
+    is-prop-coproduct
       ( λ p q → np (p ∙ inv q))
       ( is-set-type-Set X x z)
       ( is-set-type-Set X y z)
@@ -126,14 +125,14 @@ module _
     Fin 2 ≃ type-standard-2-Element-Subtype
   equiv-type-standard-2-Element-Subtype =
     ( inv-equiv
-      ( left-distributive-Σ-coprod (type-Set X) (Id x) (Id y))) ∘e
-    ( equiv-coprod
+      ( left-distributive-Σ-coproduct (type-Set X) (Id x) (Id y))) ∘e
+    ( equiv-coproduct
       ( equiv-is-contr
         ( is-contr-Fin-one-ℕ)
-        ( is-torsorial-path x))
+        ( is-torsorial-Id x))
       ( equiv-is-contr
         ( is-contr-unit)
-        ( is-torsorial-path y)))
+        ( is-torsorial-Id y)))
 
   has-two-elements-type-standard-2-Element-Subtype :
     has-two-elements type-standard-2-Element-Subtype

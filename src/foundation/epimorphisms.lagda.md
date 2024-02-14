@@ -9,18 +9,16 @@ module foundation.epimorphisms where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.functoriality-function-types
-open import foundation.propositional-maps
+open import foundation.precomposition-functions
 open import foundation.sections
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -69,11 +67,13 @@ module _
 If the map `f : A → B` is epi, then the commutative square
 
 ```text
-      f
-    A → B
-  f ↓   ↓ id
-    B → B
-      id
+        f
+    A -----> B
+    |        |
+  f |        | id
+    V      ⌜ V
+    B -----> B
+        id
 ```
 
 is a pushout square.
@@ -83,12 +83,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
-  diagonal-into-fibers-precomp :
-    (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
-  diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
-
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism :
-    is-epimorphism f → is-equiv diagonal-into-fibers-precomp
+    is-epimorphism f → is-equiv (diagonal-into-fibers-precomp f X)
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism e =
     is-equiv-map-section-family
       ( λ g → (g , refl))
@@ -205,6 +201,5 @@ module _
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
 - [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
-- [Epimorphisms](foundation.epimorphisms.md)
 - [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
 - [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)

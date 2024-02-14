@@ -23,6 +23,8 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -149,7 +151,7 @@ neg-ℤ (inr (inr x)) = inl x
 
 ```agda
 is-set-ℤ : is-set ℤ
-is-set-ℤ = is-set-coprod is-set-ℕ (is-set-coprod is-set-unit is-set-ℕ)
+is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
 
 ℤ-Set : Set lzero
 pr1 ℤ-Set = ℤ
@@ -160,17 +162,17 @@ pr2 ℤ-Set = is-set-ℤ
 
 ```agda
 abstract
-  is-retraction-pred-ℤ : (pred-ℤ ∘ succ-ℤ) ~ id
+  is-retraction-pred-ℤ : is-retraction succ-ℤ pred-ℤ
   is-retraction-pred-ℤ (inl zero-ℕ) = refl
   is-retraction-pred-ℤ (inl (succ-ℕ x)) = refl
-  is-retraction-pred-ℤ (inr (inl star)) = refl
+  is-retraction-pred-ℤ (inr (inl _)) = refl
   is-retraction-pred-ℤ (inr (inr zero-ℕ)) = refl
   is-retraction-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
-  is-section-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
+  is-section-pred-ℤ : is-section succ-ℤ pred-ℤ
   is-section-pred-ℤ (inl zero-ℕ) = refl
   is-section-pred-ℤ (inl (succ-ℕ x)) = refl
-  is-section-pred-ℤ (inr (inl star)) = refl
+  is-section-pred-ℤ (inr (inl _)) = refl
   is-section-pred-ℤ (inr (inr zero-ℕ)) = refl
   is-section-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
@@ -202,7 +204,7 @@ pr2 equiv-pred-ℤ = is-equiv-pred-ℤ
 ```agda
 is-injective-succ-ℤ : is-injective succ-ℤ
 is-injective-succ-ℤ {x} {y} p =
-  inv (is-retraction-pred-ℤ x) ∙ (ap pred-ℤ p ∙ is-retraction-pred-ℤ y)
+  inv (is-retraction-pred-ℤ x) ∙ ap pred-ℤ p ∙ is-retraction-pred-ℤ y
 
 has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
 has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
@@ -213,7 +215,7 @@ has-no-fixed-points-succ-ℤ (inr (inl star)) ()
 ### The negative function is an involution
 
 ```agda
-neg-neg-ℤ : (neg-ℤ ∘ neg-ℤ) ~ id
+neg-neg-ℤ : neg-ℤ ∘ neg-ℤ ~ id
 neg-neg-ℤ (inl n) = refl
 neg-neg-ℤ (inr (inl star)) = refl
 neg-neg-ℤ (inr (inr n)) = refl
@@ -309,7 +311,8 @@ is-set-is-positive-ℤ (inr (inl x)) = is-set-empty
 is-set-is-positive-ℤ (inr (inr x)) = is-set-unit
 
 is-positive-ℤ-Set : ℤ → Set lzero
-is-positive-ℤ-Set z = pair (is-positive-ℤ z) (is-set-is-positive-ℤ z)
+pr1 (is-positive-ℤ-Set z) = is-positive-ℤ z
+pr2 (is-positive-ℤ-Set z) = is-set-is-positive-ℤ z
 
 positive-ℤ : UU lzero
 positive-ℤ = Σ ℤ is-positive-ℤ
@@ -409,8 +412,8 @@ pr2 equiv-nonnegative-int-ℕ = is-equiv-nonnegative-int-ℕ
 is-injective-nonnegative-int-ℕ : is-injective nonnegative-int-ℕ
 is-injective-nonnegative-int-ℕ {x} {y} p =
   ( inv (is-retraction-nat-nonnegative-ℤ x)) ∙
-  ( ( ap nat-nonnegative-ℤ p) ∙
-    ( is-retraction-nat-nonnegative-ℤ y))
+  ( ap nat-nonnegative-ℤ p) ∙
+  ( is-retraction-nat-nonnegative-ℤ y)
 
 decide-is-nonnegative-ℤ :
   {x : ℤ} → (is-nonnegative-ℤ x) + (is-nonnegative-ℤ (neg-ℤ x))
@@ -418,7 +421,7 @@ decide-is-nonnegative-ℤ {inl x} = inr star
 decide-is-nonnegative-ℤ {inr x} = inl star
 
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
-  (x : ℤ) → (is-nonnegative-ℤ x) → (is-nonnegative-ℤ (neg-ℤ x)) → is-zero-ℤ x
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
   refl
 ```
@@ -431,17 +434,16 @@ succ-int-ℕ (succ-ℕ x) = refl
 
 ```agda
 is-injective-neg-ℤ : is-injective neg-ℤ
-is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ (ap neg-ℤ p ∙ neg-neg-ℤ y)
+is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
 
-is-zero-is-zero-neg-ℤ :
-  (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-zero-neg-ℤ : (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
 is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 ```
 
 ## See also
 
-1. We show in
-   [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.md)
-   that ℤ is the initial pointed type equipped with an automorphism.
-2. The group of integers is constructed in
-   [`elementary-number-theory.group-of-integers`](elementary-number-theory.group-of-integers.md).
+- We show in
+  [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.md)
+  that ℤ is the initial pointed type equipped with an automorphism.
+- The group of integers is constructed in
+  [`elementary-number-theory.group-of-integers`](elementary-number-theory.group-of-integers.md).

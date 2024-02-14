@@ -28,7 +28,8 @@ open import foundation-core.subtypes
 
 ## Idea
 
-A decidable proposition is a proposition that has a decidable underlying type.
+A **decidable proposition** is a [proposition](foundation-core.propositions.md)
+that has a [decidable](foundation.decidable-types.md) underlying type.
 
 ## Definition
 
@@ -41,7 +42,7 @@ is-decidable-prop A = is-prop A × is-decidable A
 is-prop-is-decidable :
   {l : Level} {A : UU l} → is-prop A → is-prop (is-decidable A)
 is-prop-is-decidable is-prop-A =
-  is-prop-coprod intro-double-negation is-prop-A is-prop-neg
+  is-prop-coproduct intro-double-negation is-prop-A is-prop-neg
 
 is-decidable-Prop :
   {l : Level} → Prop l → Prop l
@@ -53,7 +54,7 @@ is-prop-is-decidable-prop :
 is-prop-is-decidable-prop X =
   is-prop-is-inhabited
     ( λ H →
-      is-prop-prod
+      is-prop-product
         ( is-prop-is-prop X)
         ( is-prop-is-decidable (pr1 H)))
 

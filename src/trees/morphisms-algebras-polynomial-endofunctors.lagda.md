@@ -20,7 +20,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.polynomial-endofunctors
@@ -135,13 +135,6 @@ module _
     is-torsorial htpy-hom-algebra-polynomial-endofunctor
   is-torsorial-htpy-hom-algebra-polynomial-endofunctor =
     is-torsorial-Eq-structure
-      ( λ ( g : pr1 X → pr1 Y)
-          ( G : (g ∘ pr2 X) ~ ((pr2 Y) ∘ (map-polynomial-endofunctor A B g)))
-          ( H : map-hom-algebra-polynomial-endofunctor X Y f ~ g) →
-          ( ( structure-hom-algebra-polynomial-endofunctor X Y f) ∙h
-            ( ( structure-algebra-polynomial-endofunctor Y) ·l
-              ( htpy-polynomial-endofunctor A B H))) ~
-          ( ( H ·r structure-algebra-polynomial-endofunctor X) ∙h G))
       ( is-torsorial-htpy (map-hom-algebra-polynomial-endofunctor X Y f))
       ( pair (map-hom-algebra-polynomial-endofunctor X Y f) refl-htpy)
       ( is-contr-equiv'

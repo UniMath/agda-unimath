@@ -158,7 +158,7 @@ inv-equiv-Type-With-Endomorphism :
 pr1 (inv-equiv-Type-With-Endomorphism X Y e) =
   inv-equiv (equiv-equiv-Type-With-Endomorphism X Y e)
 pr2 (inv-equiv-Type-With-Endomorphism X Y e) =
-  coherence-square-inv-horizontal
+  coherence-square-maps-inv-equiv-horizontal
     ( equiv-equiv-Type-With-Endomorphism X Y e)
     ( endomorphism-Type-With-Endomorphism X)
     ( endomorphism-Type-With-Endomorphism Y)
@@ -308,8 +308,6 @@ module _
     is-torsorial (equiv-Type-With-Endomorphism X)
   is-torsorial-equiv-Type-With-Endomorphism =
     is-torsorial-Eq-structure
-      ( λ Y f e →
-        map-equiv e ∘ endomorphism-Type-With-Endomorphism X ~ f ∘ map-equiv e)
       ( is-torsorial-equiv (type-Type-With-Endomorphism X))
       ( type-Type-With-Endomorphism X , id-equiv)
       ( is-torsorial-htpy (endomorphism-Type-With-Endomorphism X))

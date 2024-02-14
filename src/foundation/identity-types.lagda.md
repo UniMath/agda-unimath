@@ -73,25 +73,14 @@ module _
   pr1 (equiv-inv x y) = inv
   pr2 (equiv-inv x y) = is-equiv-inv x y
 
-  inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
-  inv-concat p = concat (inv p)
-
-  is-retraction-inv-concat :
-    {x y : A} (p : x ＝ y) (z : A) → (inv-concat p z ∘ concat p z) ~ id
-  is-retraction-inv-concat refl z q = refl
-
-  is-section-inv-concat :
-    {x y : A} (p : x ＝ y) (z : A) → (concat p z ∘ inv-concat p z) ~ id
-  is-section-inv-concat refl z refl = refl
-
   abstract
     is-equiv-concat :
       {x y : A} (p : x ＝ y) (z : A) → is-equiv (concat p z)
     is-equiv-concat p z =
       is-equiv-is-invertible
         ( inv-concat p z)
-        ( is-section-inv-concat p z)
-        ( is-retraction-inv-concat p z)
+        ( is-section-inv-concat p)
+        ( is-retraction-inv-concat p)
 
   equiv-concat :
     {x y : A} (p : x ＝ y) (z : A) → (y ＝ z) ≃ (x ＝ z)
@@ -126,25 +115,14 @@ module _
   pr1 equiv-concat-equiv = map-equiv-concat-equiv
   pr2 equiv-concat-equiv = is-equiv-map-equiv-concat-equiv
 
-  inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
-  inv-concat' x q = concat' x (inv q)
-
-  is-retraction-inv-concat' :
-    (x : A) {y z : A} (q : y ＝ z) → (inv-concat' x q ∘ concat' x q) ~ id
-  is-retraction-inv-concat' x refl refl = refl
-
-  is-section-inv-concat' :
-    (x : A) {y z : A} (q : y ＝ z) → (concat' x q ∘ inv-concat' x q) ~ id
-  is-section-inv-concat' x refl refl = refl
-
   abstract
     is-equiv-concat' :
       (x : A) {y z : A} (q : y ＝ z) → is-equiv (concat' x q)
     is-equiv-concat' x q =
       is-equiv-is-invertible
         ( inv-concat' x q)
-        ( is-section-inv-concat' x q)
-        ( is-retraction-inv-concat' x q)
+        ( is-section-inv-concat' q)
+        ( is-retraction-inv-concat' q)
 
   equiv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
@@ -213,7 +191,25 @@ module _
         ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
-## Transposing inverses is an equivalence
+### Reassociating one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u : A}
+  where
+
+  equiv-concat-assoc :
+    (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : x ＝ u) →
+    ((p ∙ q) ∙ r ＝ s) ≃ (p ∙ (q ∙ r) ＝ s)
+  equiv-concat-assoc p q r = equiv-concat (inv (assoc p q r))
+
+  equiv-concat-assoc' :
+    (s : x ＝ u) (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) →
+    (s ＝ (p ∙ q) ∙ r) ≃ (s ＝ p ∙ (q ∙ r))
+  equiv-concat-assoc' s p q r = equiv-concat' s (assoc p q r)
+```
+
+### Transposing inverses is an equivalence
 
 ```agda
 module _
@@ -233,6 +229,18 @@ module _
   pr2 (equiv-left-transpose-eq-concat p q r) =
     is-equiv-left-transpose-eq-concat p q r
 
+  equiv-left-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) ≃ (inv q ∙ p ＝ r)
+  equiv-left-transpose-eq-concat' p q r =
+    equiv-inv _ _ ∘e equiv-left-transpose-eq-concat q r p ∘e equiv-inv _ _
+
+  left-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) → (inv q ∙ p ＝ r)
+  left-transpose-eq-concat' p q r =
+    map-equiv (equiv-left-transpose-eq-concat' p q r)
+
   abstract
     is-equiv-right-transpose-eq-concat :
       (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
@@ -250,6 +258,18 @@ module _
   pr1 (equiv-right-transpose-eq-concat p q r) = right-transpose-eq-concat p q r
   pr2 (equiv-right-transpose-eq-concat p q r) =
     is-equiv-right-transpose-eq-concat p q r
+
+  equiv-right-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) ≃ (p ∙ inv r ＝ q)
+  equiv-right-transpose-eq-concat' p q r =
+    equiv-inv _ _ ∘e equiv-right-transpose-eq-concat q r p ∘e equiv-inv _ _
+
+  right-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) → (p ∙ inv r ＝ q)
+  right-transpose-eq-concat' p q r =
+    map-equiv (equiv-right-transpose-eq-concat' p q r)
 ```
 
 ### Computation of fibers of families of maps out of the identity type

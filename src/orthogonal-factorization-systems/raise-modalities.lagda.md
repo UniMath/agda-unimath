@@ -46,7 +46,7 @@ unit-raise-modality = map-raise
 is-uniquely-eliminating-modality-raise-modality :
   {l1 l2 : Level} →
   is-uniquely-eliminating-modality (unit-raise-modality {l1} {l2})
-is-uniquely-eliminating-modality-raise-modality {l1} {l2} _ P =
+is-uniquely-eliminating-modality-raise-modality {l1} {l2} P =
   is-local-dependent-type-is-equiv
     ( unit-raise-modality)
     ( is-equiv-map-raise)

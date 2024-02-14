@@ -4,14 +4,23 @@
 # files, and if these options are pervasive (i.e. they need to be enabled in all
 # modules that include the modules that have them enabled), then they need to be
 # added to the everything file as well.
-everythingOpts := --guardedness
+everythingOpts := --guardedness --cohesion --flat-split
 # use "$ export AGDAVERBOSE=-v20" if you want to see all
 AGDAVERBOSE ?= -v1
+AGDARTS := +RTS -M4.0G -RTS
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 
-AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
-AGDA ?= agda $(AGDAVERBOSE)
+# All our code is in literate Agda, so we could set highlight=code and drop the
+# css flag, which only affects how files with the .agda extension are processed.
+# However, the HTML backend also processes referenced library files
+# (Agda.Primitive at the time of writing), which is a pure Agda file, and
+# setting higlight=code would make it not recognized as code at all, so the
+# resulting page looks garbled. With highlight=auto and the default Agda.css, it
+# at is at least in a proper code block with syntax highlighting, albeit without
+# the agda-unimath chrome.
+AGDAHTMLFLAGS ?= --html --html-highlight=auto --html-dir=docs --css=website/css/Agda.css --only-scope-checking
+AGDA ?= agda $(AGDAVERBOSE) $(AGDARTS)
 TIME ?= time
 
 METAFILES := \
@@ -53,7 +62,7 @@ src/everything.lagda.md: agdaFiles
 		| cut -c 5-               \
 		| cut -f1 -d'.'           \
 		| sed 's/\//\./g'         \
-		| awk 'BEGIN { FS = "."; OFS = "."; lastdir = "" } { if ($$1 != lastdir) { print ""; lastdir = $$1 } print "open import " $$0 }' \
+		| awk 'BEGIN { FS = "."; OFS = "."; lastdir = "" } { if ($$1 != lastdir) { print ""; lastdir = $$1 } print "open import " $$0 " public"}' \
 		>> $@ ;\
 	echo "\`\`\`" >> $@ ;
 

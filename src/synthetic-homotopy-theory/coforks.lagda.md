@@ -14,7 +14,6 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -25,7 +24,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
 ```
@@ -145,7 +144,6 @@ module _
       ( e : cofork f g X) → is-torsorial (htpy-cofork f g e)
     is-torsorial-htpy-cofork e =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-cofork f g e))
         ( is-torsorial-htpy (map-cofork f g e))
         ( map-cofork f g e , refl-htpy)
         ( is-contr-is-equiv'

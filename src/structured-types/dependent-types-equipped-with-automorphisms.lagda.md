@@ -8,10 +8,8 @@ module structured-types.dependent-types-equipped-with-automorphisms where
 
 ```agda
 open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-types
@@ -20,7 +18,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
-open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -153,20 +150,10 @@ module _
     is-torsorial (equiv-Dependent-Type-With-Automorphism P Q)
   is-torsorial-equiv-Dependent-Type-With-Automorphism Q =
     is-torsorial-Eq-structure
-      ( λ R K H →
-        ( x : type-Type-With-Automorphism P) →
-        coherence-square-maps
-          ( map-equiv (H x))
-          ( map-Dependent-Type-With-Automorphism P Q)
-          ( map-equiv (K x))
-          ( map-equiv (H (map-Type-With-Automorphism P x))))
       ( is-torsorial-equiv-fam (family-Dependent-Type-With-Automorphism P Q))
       ( family-Dependent-Type-With-Automorphism P Q ,
         id-equiv-fam (family-Dependent-Type-With-Automorphism P Q))
       ( is-torsorial-Eq-Π
-        ( λ x K →
-          ( map-Dependent-Type-With-Automorphism P Q) ~
-          ( map-equiv K))
         ( λ x →
           is-torsorial-htpy-equiv
             ( dependent-automorphism-Dependent-Type-With-Automorphism P Q x)))

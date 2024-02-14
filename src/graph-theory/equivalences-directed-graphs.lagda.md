@@ -24,6 +24,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -259,25 +260,11 @@ module _
     is-torsorial (htpy-equiv-Directed-Graph G H e)
   is-torsorial-htpy-equiv-Directed-Graph =
     is-torsorial-Eq-structure
-      ( λ α β γ →
-        (x y : vertex-Directed-Graph G) (u : edge-Directed-Graph G x y) →
-        ( binary-tr
-          ( edge-Directed-Graph H)
-            ( γ x)
-            ( γ y)
-            ( edge-equiv-Directed-Graph G H e x y u)) ＝
-        ( map-equiv (β x y) u))
       ( is-torsorial-htpy-equiv (equiv-vertex-equiv-Directed-Graph G H e))
       ( equiv-vertex-equiv-Directed-Graph G H e , refl-htpy)
       ( is-torsorial-Eq-Π
-        ( λ x β →
-          (y : vertex-Directed-Graph G) (u : edge-Directed-Graph G x y) →
-          edge-equiv-Directed-Graph G H e x y u ＝ map-equiv (β y) u)
         ( λ x →
           is-torsorial-Eq-Π
-            ( λ y β →
-              (u : edge-Directed-Graph G x y) →
-              edge-equiv-Directed-Graph G H e x y u ＝ map-equiv β u)
             ( λ y →
               is-torsorial-htpy-equiv
                 ( equiv-edge-equiv-Directed-Graph G H e x y))))
@@ -349,7 +336,7 @@ module _
     is-contr-equiv'
       ( Σ (Directed-Graph l1 l2) (λ H → G ＝ H))
       ( equiv-tot extensionality-Directed-Graph)
-      ( is-torsorial-path G)
+      ( is-torsorial-Id G)
 ```
 
 ### The inverse of an equivalence of directed trees
@@ -492,7 +479,7 @@ module _
       ( edge-Directed-Graph G)
       ( vertex-is-retraction-inv-equiv-Directed-Graph x)
       ( vertex-is-retraction-inv-equiv-Directed-Graph y)
-      ( map-eq-transpose-equiv'
+      ( map-eq-transpose-equiv-inv
         ( equiv-edge-equiv-Directed-Graph G H f
           ( vertex-inv-equiv-Directed-Graph
             ( vertex-equiv-Directed-Graph G H f x))

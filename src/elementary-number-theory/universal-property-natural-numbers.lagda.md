@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -66,16 +67,10 @@ module _
     is-torsorial (htpy-structure-preserving-map-ℕ h)
   is-torsorial-htpy-structure-preserving-map-ℕ h =
     is-torsorial-Eq-structure
-      ( λ g p (H : pr1 h ~ g) →
-        ( pr1 (pr2 h) ＝ (H zero-ℕ ∙ pr1 p)) ×
-        ( (n : ℕ) →
-          (pr2 (pr2 h) n ∙ ap f (H n)) ＝ (H (succ-ℕ n) ∙ pr2 p n)))
       ( is-torsorial-htpy (pr1 h))
       ( pair (pr1 h) refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ p0 pS q →
-          (n : ℕ) → (pr2 (pr2 h) n ∙ refl) ＝ pS n)
-        ( is-torsorial-path (pr1 (pr2 h)))
+        ( is-torsorial-Id (pr1 (pr2 h)))
         ( pair (pr1 (pr2 h)) refl)
         ( is-torsorial-htpy (λ n → (pr2 (pr2 h) n ∙ refl))))
 
@@ -118,7 +113,9 @@ module _
       ( pr2 (pr2 center-structure-preserving-map-ℕ) n ∙ ap f (α n)) ＝
       ( α (succ-ℕ n) ∙ pr2 (pr2 h) n)
     γ n = ( ( inv right-unit) ∙
-            ( ap (λ q → (ap f (α n) ∙ q)) (inv (left-inv (pr2 (pr2 h) n))))) ∙
+            ( left-whisker-concat
+              ( ap f (α n))
+              ( inv (left-inv (pr2 (pr2 h) n))))) ∙
           ( inv
             ( assoc (ap f (α n)) (inv (pr2 (pr2 h) n)) (pr2 (pr2 h) n)))
 

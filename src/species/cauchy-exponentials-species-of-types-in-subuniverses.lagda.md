@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
@@ -129,7 +130,7 @@ module _
       ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
       ( cauchy-exponential-species-subuniverse P Q C1 S X)
   equiv-cauchy-exponential-composition-unit-species-subuniverse =
-    equiv-tot λ _ → left-unit-law-prod-is-contr is-contr-unit
+    equiv-tot λ _ → left-unit-law-product-is-contr is-contr-unit
 ```
 
 ### Equivalence form with species of types
@@ -226,12 +227,9 @@ module _
                       ( tr
                         ( is-in-subuniverse P)
                         ( eq-equiv
-                          ( pr1 X)
-                          ( Σ ( indexing-type-Relaxed-Σ-Decomposition d)
-                              ( cotype-Relaxed-Σ-Decomposition d))
                           ( matching-correspondence-Relaxed-Σ-Decomposition d))
                         ( pr2 X))))) ∘e
-              ( ( commutative-prod) ∘e
+              ( ( commutative-product) ∘e
                 ( inv-equiv
                   ( equiv-add-redundant-prop
                     ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
@@ -295,7 +293,7 @@ module _
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
             ( λ d →
-              equiv-prod
+              equiv-product
                 ( inv-equiv
                   ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
                     ( P)
@@ -368,10 +366,6 @@ module _
         ( right-summand-binary-coproduct-Decomposition d)
         ( tr
           ( is-in-subuniverse P)
-          ( eq-equiv
-            ( inclusion-subuniverse P X)
-            ( left-summand-binary-coproduct-Decomposition d +
-              right-summand-binary-coproduct-Decomposition d)
-            ( matching-correspondence-binary-coproduct-Decomposition d))
+          ( eq-equiv (matching-correspondence-binary-coproduct-Decomposition d))
           ( pr2 X))
 ```

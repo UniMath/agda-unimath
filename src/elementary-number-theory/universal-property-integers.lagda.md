@@ -153,25 +153,15 @@ abstract
     ( s : ELIM-ℤ P p0 pS) → is-torsorial (Eq-ELIM-ℤ P p0 pS s)
   is-torsorial-Eq-ELIM-ℤ P p0 pS s =
     is-torsorial-Eq-structure
-      ( λ f t H →
-        ( zero-Eq-ELIM-ℤ P p0 pS s (pair f t) H) ×
-        ( succ-Eq-ELIM-ℤ P p0 pS s (pair f t) H))
       ( is-torsorial-htpy (pr1 s))
       ( pair (pr1 s) refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ p K
-          ( q : zero-Eq-ELIM-ℤ P p0 pS s
-            ( pair (pr1 s) (pair p K))
-            ( refl-htpy)) →
-          succ-Eq-ELIM-ℤ P p0 pS s
-            ( pair (pr1 s) (pair p K))
-            ( refl-htpy))
         ( is-contr-is-equiv'
           ( Σ (Id (pr1 s zero-ℤ) p0) (λ α → Id α (pr1 (pr2 s))))
           ( tot (λ α → right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α → is-equiv-right-transpose-eq-concat refl α (pr1 (pr2 s))))
-          ( is-torsorial-path' (pr1 (pr2 s))))
+          ( is-torsorial-Id' (pr1 (pr2 s))))
         ( pair (pr1 (pr2 s)) (inv (right-inv (pr1 (pr2 s)))))
         ( is-contr-is-equiv'
           ( Σ ( ( k : ℤ) → Id (pr1 s (succ-ℤ k)) (pr1 (pS k) (pr1 s k)))
@@ -226,7 +216,7 @@ abstract
 
 ### The universal property of the integers
 
-The non-dependent universal property of the integers is a special case of the
+The nondependent universal property of the integers is a special case of the
 dependent universal property applied to constant type families.
 
 ```agda

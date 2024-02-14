@@ -32,6 +32,7 @@ open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equivalences
 open import foundation.negation
+open import foundation.postcomposition-functions
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -43,6 +44,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
@@ -160,7 +162,7 @@ compute-binomial-type-Level l {l1} {l2} A B =
         ( UU (l1 ⊔ l))
         ( λ X → X ↪ᵈ A)
         ( λ X → mere-equiv B (pr1 X)))) ∘e
-    ( equiv-tot (λ X → commutative-prod))) ∘e
+    ( equiv-tot (λ X → commutative-product))) ∘e
   ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪ᵈ A))
 
 binomial-type' :
@@ -235,22 +237,22 @@ abstract
     binomial-type' (Maybe A) (Maybe B) ≃
     (binomial-type' A B + binomial-type' A (Maybe B))
   recursion-binomial-type' A B =
-    ( ( ( left-distributive-Σ-coprod
+    ( ( ( left-distributive-Σ-coproduct
           ( A → Decidable-Prop _)
           ( λ P → mere-equiv B (Σ A _))
           ( λ P → mere-equiv (Maybe B) (Σ A _))) ∘e
         ( equiv-tot
           ( λ P →
-            ( ( equiv-coprod
+            ( ( equiv-coproduct
                 ( ( ( equiv-iff
                       ( mere-equiv-Prop (Maybe B) (Maybe (Σ A _)))
                       ( mere-equiv-Prop B (Σ A _))
                       ( map-trunc-Prop (equiv-equiv-Maybe))
                       ( map-trunc-Prop
-                        ( λ e → equiv-coprod e id-equiv))) ∘e
+                        ( λ e → equiv-coproduct e id-equiv))) ∘e
                     ( equiv-trunc-Prop
                       ( equiv-postcomp-equiv
-                        ( equiv-coprod
+                        ( equiv-coproduct
                           ( id-equiv)
                           ( equiv-is-contr is-contr-raise-unit is-contr-unit))
                         ( Maybe B)))) ∘e
@@ -259,7 +261,7 @@ abstract
                     ( pair (raise-unit-Prop _) raise-star)))
                 ( ( equiv-trunc-Prop
                     ( equiv-postcomp-equiv
-                      ( right-unit-law-coprod-is-empty
+                      ( right-unit-law-coproduct-is-empty
                         ( Σ A _)
                         ( raise-empty _)
                         ( is-empty-raise-empty))
@@ -267,10 +269,10 @@ abstract
                   ( left-unit-law-Σ-is-contr
                     ( is-torsorial-false-Prop)
                     ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
-              ( right-distributive-Σ-coprod
+              ( right-distributive-Σ-coproduct
                 ( Σ (Prop _) type-Prop)
                 ( Σ (Prop _) (¬ ∘ type-Prop))
-                ( ind-coprod _
+                ( ind-coproduct _
                   ( λ Q →
                     mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))
                   ( λ Q →
@@ -278,7 +280,7 @@ abstract
                       ( Maybe B)
                       ( (Σ A _) + (type-Prop (pr1 Q))))))) ∘e
             ( equiv-Σ
-              ( ind-coprod _
+              ( ind-coproduct _
                 ( λ Q →
                   mere-equiv
                     ( Maybe B)
@@ -294,7 +296,10 @@ abstract
                 ( λ Q →
                   ind-Σ
                     ( λ H →
-                      ind-coprod _ ( λ q → id-equiv) (λ q → id-equiv)))))))) ∘e
+                      ind-coproduct
+                        ( _)
+                        ( λ q → id-equiv)
+                        ( λ q → id-equiv)))))))) ∘e
       ( associative-Σ
         ( A → Decidable-Prop _)
         ( λ a → Decidable-Prop _)
@@ -313,10 +318,10 @@ abstract
       ( λ u →
         equiv-trunc-Prop
           ( equiv-postcomp-equiv
-            ( ( equiv-coprod
+            ( ( equiv-coproduct
                 ( id-equiv)
                 ( left-unit-law-Σ (λ y → type-Decidable-Prop (u (inr y))))) ∘e
-              ( right-distributive-Σ-coprod A unit
+              ( right-distributive-Σ-coproduct A unit
                 ( λ x → type-Decidable-Prop (u x))))
             ( Maybe B))))
 
@@ -327,7 +332,7 @@ abstract
     (binomial-type A B + binomial-type A (Maybe B))
   binomial-type-Maybe A B =
     ( inv-equiv
-      ( equiv-coprod
+      ( equiv-coproduct
         ( compute-binomial-type A B)
         ( compute-binomial-type A (Maybe B))) ∘e
       ( recursion-binomial-type' A B)) ∘e
@@ -351,7 +356,7 @@ equiv-small-binomial-type {l1} {l2} {l3} {l4} {A} {A'} {B} {B'} e f =
               ( ( right-unit-law-Σ-is-contr
                   ( λ u →
                     is-contr-map-is-equiv (is-equiv-map-equiv e) (pr1 u))) ∘e
-                ( equiv-compute-fiber-comp P (map-equiv e) true))) B) ∘e
+                ( compute-fiber-comp P (map-equiv e) true))) B) ∘e
           ( equiv-precomp-equiv f (fiber P true))))
 
 equiv-binomial-type :
@@ -375,7 +380,7 @@ binomial-type-Fin (succ-ℕ n) (succ-ℕ m) =
       ( Fin-add-ℕ
         ( binomial-coefficient-ℕ n m)
         ( binomial-coefficient-ℕ n (succ-ℕ m)))) ∘e
-    ( equiv-coprod
+    ( equiv-coproduct
       ( binomial-type-Fin n m)
       ( binomial-type-Fin n (succ-ℕ m)))) ∘e
   ( binomial-type-Maybe (Fin n) (Fin m))

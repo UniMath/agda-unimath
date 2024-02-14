@@ -16,8 +16,8 @@ open import foundation.function-extensionality
 open import foundation.retracts-of-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -26,8 +26,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.retractions
-open import foundation-core.whiskering-homotopies
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -112,11 +111,7 @@ is-retraction-section-left-map-triangle f g h H (k , K) (l , L) =
         ( inv-htpy (H ·r (k ∘ l)))
         ( H ·r (k ∘ l))
         ( (g ·l (K ·r l)) ∙h L)) ∙h
-      ( ap-concat-htpy'
-        ( (inv-htpy (H ·r (k ∘ l))) ∙h (H ·r (k ∘ l)))
-        ( refl-htpy)
-        ( (g ·l (K ·r l)) ∙h L)
-        ( left-inv-htpy (H ·r (k ∘ l)))))
+      ( ap-concat-htpy' ((g ·l (K ·r l)) ∙h L) (left-inv-htpy (H ·r (k ∘ l)))))
 
 section-left-factor-retract-of-section-composition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -144,7 +139,7 @@ module _
       ( is-contr-equiv
         ( Π-total-fam (λ x y → y ＝ x))
         ( inv-distributive-Π-Σ)
-        ( is-contr-Π is-torsorial-path'))
+        ( is-contr-Π is-torsorial-Id'))
       ( id , refl-htpy)) ∘e
     ( equiv-right-swap-Σ) ∘e
     ( equiv-Σ-equiv-base ( λ s → pr1 s ~ id) ( distributive-Π-Σ))

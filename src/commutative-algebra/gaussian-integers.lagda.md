@@ -333,7 +333,7 @@ right-distributive-mul-add-ℤ[i] x y z =
     ( ap-add-ℤ[i] (commutative-mul-ℤ[i] z x) (commutative-mul-ℤ[i] z y)))
 
 ℤ[i]-Semigroup : Semigroup lzero
-pr1 ℤ[i]-Semigroup = prod-Set ℤ-Set ℤ-Set
+pr1 ℤ[i]-Semigroup = product-Set ℤ-Set ℤ-Set
 pr1 (pr2 ℤ[i]-Semigroup) = add-ℤ[i]
 pr2 (pr2 ℤ[i]-Semigroup) = associative-add-ℤ[i]
 

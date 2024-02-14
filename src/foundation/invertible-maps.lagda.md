@@ -16,24 +16,24 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.full-subtypes
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
-open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -60,7 +60,7 @@ module _
   extensionality-is-inverse :
     {s t : is-inverse f g} → (s ＝ t) ≃ htpy-is-inverse s t
   extensionality-is-inverse {s} {t} =
-    equiv-prod equiv-funext equiv-funext ∘e equiv-pair-eq s t
+    equiv-product equiv-funext equiv-funext ∘e equiv-pair-eq s t
 
   htpy-eq-is-inverse : {s t : is-inverse f g} → s ＝ t → htpy-is-inverse s t
   htpy-eq-is-inverse = map-equiv extensionality-is-inverse
@@ -107,15 +107,9 @@ module _
     (s : is-invertible f) → is-torsorial (htpy-is-invertible s)
   is-torsorial-htpy-is-invertible s =
     is-torsorial-Eq-structure
-      ( λ x z → coherence-htpy-is-invertible s (x , z))
       ( is-torsorial-htpy (map-inv-is-invertible s))
       ( map-inv-is-invertible s , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ x z a →
-          coherence-htpy-retraction
-            ( retraction-is-invertible s)
-            ( retraction-is-invertible (map-inv-is-invertible s , x , z))
-            ( refl-htpy))
         ( is-torsorial-htpy (is-retraction-is-invertible s))
         ( is-retraction-is-invertible s , refl-htpy)
         (is-torsorial-htpy (is-section-is-invertible s)))
@@ -152,11 +146,11 @@ module _
     ( coherence-triangle-homotopies
       ( is-retraction-map-invertible-map s)
       ( is-retraction-map-invertible-map t)
-      ( htpy-comp-horizontal I H)) ×
+      ( horizontal-concat-htpy I H)) ×
     ( coherence-triangle-homotopies
       ( is-section-map-invertible-map s)
       ( is-section-map-invertible-map t)
-      ( htpy-comp-horizontal H I))
+      ( horizontal-concat-htpy H I))
 
   htpy-invertible-map : (s t : invertible-map A B) → UU (l1 ⊔ l2)
   htpy-invertible-map s t =
@@ -179,23 +173,12 @@ module _
     (s : invertible-map A B) → is-torsorial (htpy-invertible-map s)
   is-torsorial-htpy-invertible-map s =
     is-torsorial-Eq-structure
-      ( λ x z H →
-        Σ ( map-inv-invertible-map s ~ map-inv-invertible-map (x , z))
-          ( coherence-htpy-invertible-map s (x , z) H))
       ( is-torsorial-htpy (map-invertible-map s))
       ( map-invertible-map s , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ x z →
-          coherence-htpy-invertible-map s
-            ( map-invertible-map s , x , z)
-            ( refl-htpy))
         ( is-torsorial-htpy (map-inv-invertible-map s))
         ( map-inv-invertible-map s , refl-htpy)
         ( is-torsorial-Eq-structure
-          ( λ x z a →
-            ( is-section-map-invertible-map s) ~
-            ( is-section-map-invertible-map
-              ( map-invertible-map s , map-inv-invertible-map s , x , z)))
           ( is-torsorial-htpy (is-retraction-map-invertible-map s))
           ( is-retraction-map-invertible-map s , refl-htpy)
           ( is-torsorial-htpy (is-section-map-invertible-map s))))
@@ -229,7 +212,7 @@ module _
     is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) B →
     is-trunc k (is-inverse f g)
   is-trunc-is-inverse f g is-trunc-A is-trunc-B =
-    is-trunc-prod k
+    is-trunc-product k
       ( is-trunc-Π k (λ x → is-trunc-B (f (g x)) x))
       ( is-trunc-Π k (λ x → is-trunc-A (g (f x)) x))
 

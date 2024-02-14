@@ -32,8 +32,8 @@ open import trees.directed-trees
 
 ## Idea
 
-A **morphism of directed trees** from `S` to `T` is simply a morphism between
-their underlying directed graphs.
+A **morphism of directed trees** from `S` to `T` is a morphism between their
+underlying directed graphs.
 
 ## Definitions
 
@@ -282,7 +282,7 @@ module _
     is-root-Directed-Tree T (node-hom-Directed-Tree S T f x) →
     is-root-Directed-Tree S x
   is-root-is-root-node-hom-Directed-Tree x H =
-    map-right-unit-law-coprod-is-empty
+    map-right-unit-law-coproduct-is-empty
       ( is-root-Directed-Tree S x)
       ( Σ (node-Directed-Tree S) (edge-Directed-Tree S x))
       ( λ (y , e) →

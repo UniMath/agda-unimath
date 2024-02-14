@@ -9,34 +9,37 @@ module foundation.unordered-pairs where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-maps
-open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
-open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
+open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-function-types
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.contractible-maps
 open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
@@ -189,7 +192,6 @@ module _
     is-torsorial (Eq-unordered-pair p)
   is-torsorial-Eq-unordered-pair (pair X p) =
     is-torsorial-Eq-structure
-      ( λ Y q e → p ~ (q ∘ map-equiv e))
       ( is-torsorial-equiv-UU-Fin {k = 2} X)
       ( pair X (id-equiv-UU-Fin {k = 2} X))
       ( is-torsorial-htpy p)

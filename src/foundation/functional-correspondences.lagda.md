@@ -106,10 +106,6 @@ module _
   is-torsorial-equiv-functional-correspondence =
     is-torsorial-Eq-subtype
       ( is-torsorial-Eq-Π
-        ( λ x D →
-          (y : B x) →
-          correspondence-functional-correspondence C x y ≃
-          D y)
         ( λ x →
           is-torsorial-equiv-fam
             ( correspondence-functional-correspondence
@@ -159,7 +155,7 @@ module _
     ((x : A) → B x) → functional-correspondence l2 A B
   pr1 (functional-correspondence-function f) x y = f x ＝ y
   pr2 (functional-correspondence-function f) x =
-    is-torsorial-path (f x)
+    is-torsorial-Id (f x)
 
   function-functional-correspondence :
     {l3 : Level} → functional-correspondence l3 A B → ((x : A) → B x)

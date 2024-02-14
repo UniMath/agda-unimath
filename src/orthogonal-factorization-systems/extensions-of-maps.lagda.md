@@ -24,6 +24,8 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.monomorphisms
+open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
@@ -32,7 +34,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.torsorial-type-families
 
@@ -264,7 +266,6 @@ module _
     (e : extension-dependent-type i P f) → is-torsorial (htpy-extension e)
   is-torsorial-htpy-extension e =
     is-torsorial-Eq-structure
-      ( λ g G → coherence-htpy-extension e (g , G))
       ( is-torsorial-htpy (map-extension e))
       ( map-extension e , refl-htpy)
       ( is-torsorial-htpy (is-extension-map-extension e ∙h refl-htpy))
@@ -399,13 +400,13 @@ module _
 
   is-contr-extension-dependent-type-is-local-dependent-type :
     is-local-dependent-type i P →
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f))
+    (f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)
   is-contr-extension-dependent-type-is-local-dependent-type =
     map-equiv equiv-is-contr-extension-dependent-type-is-local-dependent-type
 
   is-local-dependent-type-is-contr-extension-dependent-type :
-    ((f : (x : A) → P (i x)) →
-    is-contr (extension-dependent-type i P f)) → is-local-dependent-type i P
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)) →
+    is-local-dependent-type i P
   is-local-dependent-type-is-contr-extension-dependent-type =
     map-inv-equiv
       equiv-is-contr-extension-dependent-type-is-local-dependent-type

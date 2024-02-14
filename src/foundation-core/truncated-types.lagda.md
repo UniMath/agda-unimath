@@ -22,7 +22,6 @@ open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.retractions
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncation-levels
 ```
@@ -86,6 +85,10 @@ pr1 (truncated-type-succ-Truncated-Type k A) = type-Truncated-Type A
 pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
 ```
+
+The corollary that any `-1`-truncated type, i.e., any propoosition, is
+`k+1`-truncated for any truncation level `k` is recorded in
+[Propositions](foundation.propositions.md) as `is-trunc-is-prop`.
 
 ### The identity type of a `k`-truncated type is `k`-truncated
 
@@ -218,51 +221,52 @@ fiber-Truncated-Type A B f b =
 
 ```agda
 abstract
-  is-trunc-prod :
+  is-trunc-product :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
     is-trunc k A → is-trunc k B → is-trunc k (A × B)
-  is-trunc-prod k is-trunc-A is-trunc-B =
+  is-trunc-product k is-trunc-A is-trunc-B =
     is-trunc-Σ is-trunc-A (λ x → is-trunc-B)
 
-prod-Truncated-Type :
+product-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋) →
   Truncated-Type l1 k → Truncated-Type l2 k → Truncated-Type (l1 ⊔ l2) k
-pr1 (prod-Truncated-Type k A B) = type-Truncated-Type A × type-Truncated-Type B
-pr2 (prod-Truncated-Type k A B) =
-  is-trunc-prod k
+pr1 (product-Truncated-Type k A B) =
+  type-Truncated-Type A × type-Truncated-Type B
+pr2 (product-Truncated-Type k A B) =
+  is-trunc-product k
     ( is-trunc-type-Truncated-Type A)
     ( is-trunc-type-Truncated-Type B)
 
-is-trunc-prod' :
+is-trunc-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   (B → is-trunc (succ-𝕋 k) A) → (A → is-trunc (succ-𝕋 k) B) →
   is-trunc (succ-𝕋 k) (A × B)
-is-trunc-prod' k f g (pair a b) (pair a' b') =
+is-trunc-product' k f g (pair a b) (pair a' b') =
   is-trunc-equiv k
-    ( Eq-prod (pair a b) (pair a' b'))
+    ( Eq-product (pair a b) (pair a' b'))
     ( equiv-pair-eq (pair a b) (pair a' b'))
-    ( is-trunc-prod k (f b a a') (g a b b'))
+    ( is-trunc-product k (f b a a') (g a b b'))
 
-is-trunc-left-factor-prod :
+is-trunc-left-factor-product :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-trunc k (A × B) → B → is-trunc k A
-is-trunc-left-factor-prod neg-two-𝕋 {A} {B} H b =
-  is-contr-left-factor-prod A B H
-is-trunc-left-factor-prod (succ-𝕋 k) H b a a' =
-  is-trunc-left-factor-prod k {A = (a ＝ a')} {B = (b ＝ b)}
+is-trunc-left-factor-product neg-two-𝕋 {A} {B} H b =
+  is-contr-left-factor-product A B H
+is-trunc-left-factor-product (succ-𝕋 k) H b a a' =
+  is-trunc-left-factor-product k {A = (a ＝ a')} {B = (b ＝ b)}
     ( is-trunc-equiv' k
       ( pair a b ＝ pair a' b)
       ( equiv-pair-eq (pair a b) (pair a' b))
       ( H (pair a b) (pair a' b)))
     ( refl)
 
-is-trunc-right-factor-prod :
+is-trunc-right-factor-product :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-trunc k (A × B) → A → is-trunc k B
-is-trunc-right-factor-prod neg-two-𝕋 {A} {B} H a =
-  is-contr-right-factor-prod A B H
-is-trunc-right-factor-prod (succ-𝕋 k) {A} {B} H a b b' =
-  is-trunc-right-factor-prod k {A = (a ＝ a)} {B = (b ＝ b')}
+is-trunc-right-factor-product neg-two-𝕋 {A} {B} H a =
+  is-contr-right-factor-product A B H
+is-trunc-right-factor-product (succ-𝕋 k) {A} {B} H a b b' =
+  is-trunc-right-factor-product k {A = (a ＝ a)} {B = (b ＝ b')}
     ( is-trunc-equiv' k
       ( pair a b ＝ pair a b')
       ( equiv-pair-eq (pair a b) (pair a b'))

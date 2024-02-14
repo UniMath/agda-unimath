@@ -23,7 +23,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.singleton-induction
 open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -60,7 +59,7 @@ equiv-Contr :
 equiv-Contr X Y = type-Contr X ≃ type-Contr Y
 
 equiv-eq-Contr :
-  {l1 : Level} (X Y : Contr l1) → (X ＝ Y) → equiv-Contr X Y
+  {l1 : Level} (X Y : Contr l1) → X ＝ Y → equiv-Contr X Y
 equiv-eq-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
 
 abstract
@@ -70,7 +69,7 @@ abstract
     is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
 
 eq-equiv-Contr :
-  {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → (X ＝ Y)
+  {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → X ＝ Y
 eq-equiv-Contr = eq-equiv-subuniverse is-contr-Prop
 
 abstract
@@ -163,106 +162,12 @@ module _
       ( f x y)
 ```
 
-### Equivalent characterizations of contractible types
+### The diagonal of contractible types
 
 ```agda
 module _
   {l1 : Level} {A : UU l1}
   where
-
-  dependent-universal-property-contr : (l : Level) (a : A) → UU (l1 ⊔ lsuc l)
-  dependent-universal-property-contr l a =
-    (P : A → UU l) → is-equiv (ev-point a {P})
-
-  universal-property-contr : (l : Level) (a : A) → UU (l1 ⊔ lsuc l)
-  universal-property-contr l a =
-    (X : UU l) → is-equiv (ev-point' a {X})
-
-  universal-property-dependent-universal-property-contr :
-    (a : A) →
-    ({l : Level} → dependent-universal-property-contr l a) →
-    ({l : Level} → universal-property-contr l a)
-  universal-property-dependent-universal-property-contr a dup-contr {l} X =
-    dup-contr {l} (λ x → X)
-
-  abstract
-    is-equiv-ev-point-universal-property-contr :
-      (a : A) → ({l : Level} → universal-property-contr l a) →
-      is-equiv (ev-point' a {A})
-    is-equiv-ev-point-universal-property-contr a up-contr =
-      up-contr A
-
-  abstract
-    is-contr-is-equiv-ev-point :
-      (a : A) → is-equiv (ev-point' a {A}) → is-contr A
-    pr1 (is-contr-is-equiv-ev-point a H) = a
-    pr2 (is-contr-is-equiv-ev-point a H) =
-      htpy-eq
-        ( ap
-          ( pr1)
-          ( eq-is-contr'
-            ( is-contr-map-is-equiv H a)
-            ( pair (λ x → a) refl)
-            ( pair id refl)))
-
-  abstract
-    is-contr-universal-property-contr :
-      (a : A) →
-      ({l : Level} → universal-property-contr l a) → is-contr A
-    is-contr-universal-property-contr a up-contr =
-      is-contr-is-equiv-ev-point a
-        ( is-equiv-ev-point-universal-property-contr a up-contr)
-
-  abstract
-    is-contr-dependent-universal-property-contr :
-      (a : A) →
-      ({l : Level} → dependent-universal-property-contr l a) → is-contr A
-    is-contr-dependent-universal-property-contr a dup-contr =
-      is-contr-universal-property-contr a
-        ( universal-property-dependent-universal-property-contr a dup-contr)
-
-  abstract
-    dependent-universal-property-contr-is-contr :
-      (a : A) → is-contr A →
-      {l : Level} → dependent-universal-property-contr l a
-    dependent-universal-property-contr-is-contr a H {l} P =
-      is-equiv-is-invertible
-        ( ind-singleton a H P)
-        ( compute-ind-singleton a H P)
-        ( λ f →
-          eq-htpy
-            ( ind-singleton a H
-              ( λ x → ind-singleton a H P (f a) x ＝ f x)
-              ( compute-ind-singleton a H P (f a))))
-
-  equiv-dependent-universal-property-contr :
-    (a : A) → is-contr A → {l : Level} (B : A → UU l) → ((x : A) → B x) ≃ B a
-  pr1 (equiv-dependent-universal-property-contr a H P) = ev-point a
-  pr2 (equiv-dependent-universal-property-contr a H P) =
-    dependent-universal-property-contr-is-contr a H P
-
-  apply-dependent-universal-property-contr :
-    (a : A) → is-contr A → {l : Level} (B : A → UU l) → (B a → ((x : A) → B x))
-  apply-dependent-universal-property-contr a H P =
-    map-inv-equiv (equiv-dependent-universal-property-contr a H P)
-
-  abstract
-    universal-property-contr-is-contr :
-      (a : A) → is-contr A → {l : Level} → universal-property-contr l a
-    universal-property-contr-is-contr a H =
-      universal-property-dependent-universal-property-contr a
-        ( dependent-universal-property-contr-is-contr a H)
-
-  equiv-universal-property-contr :
-    (a : A) → is-contr A → {l : Level} (X : UU l) → (A → X) ≃ X
-  pr1 (equiv-universal-property-contr a H X) = ev-point' a
-  pr2 (equiv-universal-property-contr a H X) =
-    universal-property-contr-is-contr a H X
-
-  apply-universal-property-contr :
-    (a : A) → is-contr A → {l : Level} (X : UU l) → X → (A → X)
-  apply-universal-property-contr a H X =
-    map-inv-equiv (equiv-universal-property-contr a H X)
 
   abstract
     is-equiv-self-diagonal-is-equiv-diagonal :
@@ -286,7 +191,7 @@ module _
   abstract
     is-equiv-diagonal-is-contr :
       is-contr A →
-      {l : Level} (X : UU l) → is-equiv (λ x → const A X x)
+      {l : Level} (X : UU l) → is-equiv (const A X)
     is-equiv-diagonal-is-contr H X =
       is-equiv-is-invertible
         ( ev-point' (center H))

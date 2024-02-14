@@ -31,7 +31,7 @@ hom-[sets](foundation-core.sets.md).
 
 ## Definition
 
-### The predicate of being an embedding on maps between precategories
+### The predicate on maps between precategories of being an embedding
 
 ```agda
 module _
@@ -43,7 +43,7 @@ module _
 
   is-embedding-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-embedding-prop-map-Precategory =
-    prod-Prop
+    product-Prop
       ( is-functor-prop-map-Precategory C D F)
       ( is-embedding-map-prop-map-Precategory C D F)
 
@@ -56,7 +56,7 @@ module _
     is-prop-type-Prop is-embedding-prop-map-Precategory
 ```
 
-### The predicate of being an embedding on functors between precategories
+### The predicate on functors between precategories of being an embedding
 
 ```agda
 module _

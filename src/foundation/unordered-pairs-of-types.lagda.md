@@ -14,7 +14,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
@@ -91,9 +90,6 @@ module _
     is-torsorial (equiv-unordered-pair-types A)
   is-torsorial-equiv-unordered-pair-types =
     is-torsorial-Eq-structure
-      ( λ I B e →
-        (i : type-unordered-pair A) →
-        element-unordered-pair A i ≃ B (map-equiv e i))
       ( is-torsorial-equiv-2-Element-Type (2-element-type-unordered-pair A))
       ( pair (2-element-type-unordered-pair A) id-equiv)
       ( is-torsorial-equiv-fam (element-unordered-pair A))

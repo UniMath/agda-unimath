@@ -9,6 +9,7 @@ module foundation.equivalence-induction where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-systems
+open import foundation.postcomposition-functions
 open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universal-property-identity-systems
@@ -16,13 +17,10 @@ open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sections
-open import foundation-core.singleton-induction
 open import foundation-core.torsorial-type-families
 ```
 
@@ -60,17 +58,16 @@ universe has an
 
 ```agda
 module _
-  {l1 : Level} {A : UU l1}
+  {l1 l2 : Level} {A : UU l1}
   where
 
   ev-id-equiv :
-    {l : Level} (P : (B : UU l1) → (A ≃ B) → UU l) →
+    (P : (B : UU l1) → (A ≃ B) → UU l2) →
     ((B : UU l1) (e : A ≃ B) → P B e) → P A id-equiv
   ev-id-equiv P f = f A id-equiv
 
   triangle-ev-id-equiv :
-    {l : Level}
-    (P : (Σ (UU l1) (A ≃_)) → UU l) →
+    (P : (Σ (UU l1) (A ≃_)) → UU l2) →
     coherence-triangle-maps
       ( ev-point (A , id-equiv))
       ( ev-id-equiv (λ X e → P (X , e)))

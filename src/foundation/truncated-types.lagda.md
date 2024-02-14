@@ -12,14 +12,15 @@ open import foundation-core.truncated-types public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.subtype-identity-principle
 open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
-open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 ```
@@ -92,4 +93,49 @@ truncated-type-iterated-succ-Truncated-Type :
 pr1 (truncated-type-iterated-succ-Truncated-Type k r A) = type-Truncated-Type A
 pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
   is-trunc-iterated-succ-is-trunc k r (is-trunc-type-Truncated-Type A)
+```
+
+### Two equivalent types are equivalently `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  equiv-is-trunc-equiv : A ≃ B → is-trunc k A ≃ is-trunc k B
+  equiv-is-trunc-equiv e =
+    equiv-prop
+      ( is-prop-is-trunc k A)
+      ( is-prop-is-trunc k B)
+      ( is-trunc-equiv' k A e)
+      ( is-trunc-equiv k B e)
+```
+
+### If the domain or codomain is `k+1`-truncated, then the type of equivalences is `k+1`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  is-trunc-equiv-is-trunc-codomain :
+    is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) (A ≃ B)
+  is-trunc-equiv-is-trunc-codomain is-trunc-B =
+    is-trunc-type-subtype
+      ( k)
+      ( is-equiv-Prop)
+      ( is-trunc-function-type (succ-𝕋 k) is-trunc-B)
+
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  is-trunc-equiv-is-trunc-domain :
+    is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (A ≃ B)
+  is-trunc-equiv-is-trunc-domain is-trunc-A =
+    is-trunc-equiv
+      ( succ-𝕋 k)
+      ( B ≃ A)
+      ( equiv-inv-equiv)
+      ( is-trunc-equiv-is-trunc-codomain k is-trunc-A)
 ```

@@ -51,30 +51,30 @@ module _
   pair-eq-Σ : {s t : Σ A B} → s ＝ t → Eq-Σ s t
   pair-eq-Σ {s} refl = refl-Eq-Σ s
 
+  eq-pair-eq-base :
+    {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
+  eq-pair-eq-base refl = refl
+
+  eq-pair-eq-base' :
+    {x y : A} {t : B y} (p : x ＝ y) → (x , tr B (inv p) t) ＝ (y , t)
+  eq-pair-eq-base' refl = refl
+
+  eq-pair-eq-fiber :
+    {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
+  eq-pair-eq-fiber {x} = ap {B = Σ A B} (pair x)
+
   eq-pair-Σ :
     {s t : Σ A B}
     (α : pr1 s ＝ pr1 t) →
     dependent-identification B α (pr2 s) (pr2 t) → s ＝ t
-  eq-pair-Σ refl refl = refl
+  eq-pair-Σ refl = eq-pair-eq-fiber
 
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 
-  eq-pair-eq-pr1 :
-    {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
-  eq-pair-eq-pr1 refl = refl
-
-  eq-pair-eq-pr1' :
-    {x y : A} {t : B y} (p : x ＝ y) → (x , tr B (inv p) t) ＝ (y , t)
-  eq-pair-eq-pr1' refl = refl
-
-  eq-pair-eq-pr2 :
-    {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
-  eq-pair-eq-pr2 {x} = ap {B = Σ A B} (pair x)
-
-  ap-pr1-eq-pair-eq-pr2 :
-    {x : A} {s t : B x} (p : s ＝ t) → ap pr1 (eq-pair-eq-pr2 p) ＝ refl
-  ap-pr1-eq-pair-eq-pr2 refl = refl
+  ap-pr1-eq-pair-eq-fiber :
+    {x : A} {s t : B x} (p : s ＝ t) → ap pr1 (eq-pair-eq-fiber p) ＝ refl
+  ap-pr1-eq-pair-eq-fiber refl = refl
 
   is-retraction-pair-eq-Σ :
     (s t : Σ A B) → pair-eq-Σ {s} {t} ∘ eq-pair-Σ' {s} {t} ~ id {A = Eq-Σ s t}
@@ -93,7 +93,8 @@ module _
         ( is-retraction-pair-eq-Σ s t)
 
   equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ (s ＝ t)
-  equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
+  pr1 (equiv-eq-pair-Σ s t) = eq-pair-Σ'
+  pr2 (equiv-eq-pair-Σ s t) = is-equiv-eq-pair-Σ s t
 
   abstract
     is-equiv-pair-eq-Σ : (s t : Σ A B) → is-equiv (pair-eq-Σ {s} {t})
@@ -104,7 +105,8 @@ module _
         ( is-section-pair-eq-Σ s t)
 
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
-  equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)
+  pr1 (equiv-pair-eq-Σ s t) = pair-eq-Σ
+  pr2 (equiv-pair-eq-Σ s t) = is-equiv-pair-eq-Σ s t
 
   η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
   η-pair t = refl

@@ -7,12 +7,12 @@ module foundation.propositional-extensionality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.postcomposition-functions
 open import foundation.raising-universe-levels
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
@@ -20,12 +20,13 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.univalent-type-families
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
@@ -141,7 +142,7 @@ abstract
                 ( raise-star)
                 ( is-contr-raise-unit)
                 ( type-Prop P)) ∘e
-              ( right-unit-law-prod-is-contr
+              ( right-unit-law-product-is-contr
                 ( is-contr-Π
                   ( λ x →
                     is-proof-irrelevant-is-prop
@@ -164,7 +165,7 @@ abstract
           inv-equiv
             ( ( inv-equiv
                 ( equiv-postcomp (type-Prop P) (compute-raise l1 empty))) ∘e
-              ( left-unit-law-prod-is-contr
+              ( left-unit-law-product-is-contr
                 ( universal-property-empty-is-empty
                   ( raise-empty l1)
                   ( is-empty-raise-empty)

@@ -59,6 +59,9 @@ id-hom-Large-Precategory
 associative-comp-hom-Large-Precategory
   Cyclic-Ring-Large-Precategory {X = R} {Y = S} {Z = T} {W = U} =
   associative-comp-hom-Cyclic-Ring R S T U
+inv-associative-comp-hom-Large-Precategory
+  Cyclic-Ring-Large-Precategory {X = R} {Y = S} {Z = T} {W = U} =
+  inv-associative-comp-hom-Cyclic-Ring R S T U
 left-unit-law-comp-hom-Large-Precategory
   Cyclic-Ring-Large-Precategory {X = R} {Y = S} =
   left-unit-law-comp-hom-Cyclic-Ring R S

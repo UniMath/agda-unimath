@@ -11,27 +11,29 @@ open import foundation-core.functoriality-dependent-function-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -129,23 +131,11 @@ module _
   { l1 l2 l3 : Level} {A : UU l1}
   where
 
-  equiv-htpy-Π-precomp-htpy :
-    { B : UU l2} {C : B → UU l3} →
-    ( f g : (b : B) → C b) (e : A ≃ B) →
-    ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
-    ( f ~ g)
-  equiv-htpy-Π-precomp-htpy f g e =
-    equiv-Π
-      ( eq-value f g)
-      ( e)
-      ( λ a → id-equiv)
-
-  equiv-htpy-Π-postcomp-htpy :
-    { B : A → UU l2} { C : UU l3} →
-    ( e : (a : A) → B a ≃ C) (f g : (a : A) → B a) →
-    ( f ~ g) ≃
-    ( (a : A) → ( map-equiv (e a) (f a) ＝ map-equiv (e a) (g a)))
-  equiv-htpy-Π-postcomp-htpy e f g =
+  equiv-htpy-map-Π-fam-equiv :
+    { B : A → UU l2} {C : A → UU l3} →
+    ( e : fam-equiv B C) (f g : (a : A) → B a) →
+    ( f ~ g) ≃ (map-Π (map-fam-equiv e) f ~ map-Π (map-fam-equiv e) g)
+  equiv-htpy-map-Π-fam-equiv e f g =
     equiv-Π-equiv-family
       ( λ a → equiv-ap (e a) (f a) (g a))
 ```
@@ -201,15 +191,15 @@ is-trunc-map-is-trunc-map-map-Π' :
   (i : I) → is-trunc-map k (f i)
 is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
   is-trunc-equiv' k
-    ( fiber (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
+    ( fiber (map-Π (λ _ → f i)) (point b))
     ( equiv-Σ
       ( λ a → f i a ＝ b)
       ( equiv-universal-property-unit (A i))
       ( λ h → equiv-ap
         ( equiv-universal-property-unit (B i))
-        ( map-Π (λ x → f i) h)
-        ( const unit (B i) b)))
-    ( H (λ x → i) (const unit (B i) b))
+        ( map-Π (λ _ → f i) h)
+        ( point b)))
+    ( H (λ _ → i) (point b))
 
 is-emb-map-Π-is-emb' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
@@ -296,38 +286,6 @@ automorphism-Π :
   ( (a : A) → B a) ≃ ((a : A) → B a)
 pr1 (automorphism-Π e f) = map-automorphism-Π e f
 pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
-```
-
-### Precomposing functions `Π B C` by `f : A → B` is `k+1`-truncated if and only if precomposing homotopies is `k`-truncated
-
-```agda
-coherence-square-ap-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
-  (g h : (b : B) → C b) →
-  coherence-square-maps
-    ( ap (precomp-Π f C) {g} {h})
-    ( htpy-eq)
-    ( htpy-eq)
-    ( precomp-Π f (eq-value g h))
-coherence-square-ap-precomp-Π f g .g refl = refl
-
-is-trunc-map-succ-precomp-Π :
-  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
-  {C : B → UU l3} →
-  ((g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))) →
-  is-trunc-map (succ-𝕋 k) (precomp-Π f C)
-is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
-  is-trunc-map-is-trunc-map-ap k (precomp-Π f C)
-    ( λ g h →
-      is-trunc-map-top-is-trunc-map-bottom-is-equiv k
-        ( ap (precomp-Π f C))
-        ( htpy-eq)
-        ( htpy-eq)
-        ( precomp-Π f (eq-value g h))
-        ( coherence-square-ap-precomp-Π f g h)
-        ( funext g h)
-        ( funext (g ∘ f) (h ∘ f))
-        ( H g h))
 ```
 
 ## See also

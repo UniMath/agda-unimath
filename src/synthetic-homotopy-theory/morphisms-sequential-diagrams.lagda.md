@@ -23,7 +23,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -76,6 +76,12 @@ module _
 ```
 
 ### Components of morphisms of sequential diagrams
+
+_Implementation note:_ Ideally we would have both the domain and codomain of a
+morphism of sequential diagrams inferred by Agda. Unfortunately that's not the
+case with the current implementation, and the codomain needs to be provided
+explicitly. This arises also in
+[equivalences of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md).
 
 ```agda
 module _
@@ -168,13 +174,13 @@ module _
   ( f g : hom-sequential-diagram A B)
   where
 
-  coherence-htpy-sequential-diagram :
+  coherence-htpy-hom-sequential-diagram :
     ( H :
       ( n : ℕ) →
       ( map-hom-sequential-diagram B f n) ~
       ( map-hom-sequential-diagram B g n)) →
     UU (l1 ⊔ l2)
-  coherence-htpy-sequential-diagram H =
+  coherence-htpy-hom-sequential-diagram H =
     ( n : ℕ) →
     coherence-square-homotopies
       ( map-sequential-diagram B n ·l H n)
@@ -187,7 +193,7 @@ module _
     Σ ( ( n : ℕ) →
         ( map-hom-sequential-diagram B f n) ~
         ( map-hom-sequential-diagram B g n))
-      ( coherence-htpy-sequential-diagram)
+      ( coherence-htpy-hom-sequential-diagram)
 ```
 
 ### Components of homotopies between morphisms of sequential diagrams
@@ -206,7 +212,7 @@ module _
   htpy-htpy-hom-sequential-diagram = pr1 H
 
   coherence-htpy-htpy-hom-sequential-diagram :
-    coherence-htpy-sequential-diagram B f g htpy-htpy-hom-sequential-diagram
+    coherence-htpy-hom-sequential-diagram B f g htpy-htpy-hom-sequential-diagram
   coherence-htpy-htpy-hom-sequential-diagram = pr2 H
 ```
 
@@ -222,15 +228,15 @@ module _
   { l1 l2 : Level} (A : sequential-diagram l1) (B : sequential-diagram l2)
   where
 
-  reflexive-htpy-hom-sequential-diagram :
+  refl-htpy-hom-sequential-diagram :
     ( f : hom-sequential-diagram A B) → htpy-hom-sequential-diagram B f f
-  pr1 (reflexive-htpy-hom-sequential-diagram f) = ev-pair refl-htpy
-  pr2 (reflexive-htpy-hom-sequential-diagram f) = ev-pair right-unit-htpy
+  pr1 (refl-htpy-hom-sequential-diagram f) = ev-pair refl-htpy
+  pr2 (refl-htpy-hom-sequential-diagram f) = ev-pair right-unit-htpy
 
   htpy-eq-sequential-diagram :
     ( f f' : hom-sequential-diagram A B) →
     ( f ＝ f') → htpy-hom-sequential-diagram B f f'
-  htpy-eq-sequential-diagram f .f refl = reflexive-htpy-hom-sequential-diagram f
+  htpy-eq-sequential-diagram f .f refl = refl-htpy-hom-sequential-diagram f
 
   abstract
     is-torsorial-htpy-sequential-diagram :
@@ -238,10 +244,9 @@ module _
       is-torsorial (htpy-hom-sequential-diagram B f)
     is-torsorial-htpy-sequential-diagram f =
       is-torsorial-Eq-structure
-        ( ev-pair (coherence-htpy-sequential-diagram B f))
         ( is-torsorial-binary-htpy (map-hom-sequential-diagram B f))
         ( map-hom-sequential-diagram B f , ev-pair refl-htpy)
-        ( is-torsorial-Eq-Π _
+        ( is-torsorial-Eq-Π
           ( λ n →
             is-torsorial-htpy
               ( naturality-map-hom-sequential-diagram B f n ∙h refl-htpy)))

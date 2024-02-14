@@ -70,7 +70,7 @@ module _
   intersection-decidable-subtype :
     decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
-  intersection-decidable-subtype P Q x = conj-Decidable-Prop (P x) (Q x)
+  intersection-decidable-subtype P Q x = conjunction-Decidable-Prop (P x) (Q x)
 ```
 
 ### The intersection of a family of subtypes

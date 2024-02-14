@@ -177,13 +177,13 @@ order-three-elements-ℕ zero-ℕ zero-ℕ zero-ℕ = inl (inl (pair star star))
 order-three-elements-ℕ zero-ℕ zero-ℕ (succ-ℕ z) = inl (inl (pair star star))
 order-three-elements-ℕ zero-ℕ (succ-ℕ y) zero-ℕ = inl (inr (pair star star))
 order-three-elements-ℕ zero-ℕ (succ-ℕ y) (succ-ℕ z) =
-  inl (map-coprod (pair star) (pair star) (linear-leq-ℕ y z))
+  inl (map-coproduct (pair star) (pair star) (linear-leq-ℕ y z))
 order-three-elements-ℕ (succ-ℕ x) zero-ℕ zero-ℕ =
   inr (inl (inl (pair star star)))
 order-three-elements-ℕ (succ-ℕ x) zero-ℕ (succ-ℕ z) =
-  inr (inl (map-coprod (pair star) (pair star) (linear-leq-ℕ z x)))
+  inr (inl (map-coproduct (pair star) (pair star) (linear-leq-ℕ z x)))
 order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) zero-ℕ =
-  inr (inr (map-coprod (pair star) (pair star) (linear-leq-ℕ x y)))
+  inr (inr (map-coproduct (pair star) (pair star) (linear-leq-ℕ x y)))
 order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
   order-three-elements-ℕ x y z
 ```
@@ -239,7 +239,7 @@ decide-leq-succ-ℕ zero-ℕ (succ-ℕ n) l = inl star
 decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
   inr (ap succ-ℕ (is-zero-leq-zero-ℕ m l))
 decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
-  map-coprod id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
+  map-coproduct id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
 ```
 
 ### If `m` is less than `n`, then it is less than `n+1`
@@ -268,13 +268,13 @@ cases-leq-succ-ℕ {zero-ℕ} {n} star = inl star
 cases-leq-succ-ℕ {succ-ℕ m} {zero-ℕ} p =
   inr (ap succ-ℕ (antisymmetric-leq-ℕ m zero-ℕ p star))
 cases-leq-succ-ℕ {succ-ℕ m} {succ-ℕ n} p =
-  map-coprod id (ap succ-ℕ) (cases-leq-succ-ℕ p)
+  map-coproduct id (ap succ-ℕ) (cases-leq-succ-ℕ p)
 
 cases-leq-succ-reflexive-leq-ℕ :
   {n : ℕ} → cases-leq-succ-ℕ {succ-ℕ n} {n} (refl-leq-ℕ n) ＝ inr refl
 cases-leq-succ-reflexive-leq-ℕ {zero-ℕ} = refl
 cases-leq-succ-reflexive-leq-ℕ {succ-ℕ n} =
-  ap (map-coprod id (ap succ-ℕ)) cases-leq-succ-reflexive-leq-ℕ
+  ap (map-coproduct id (ap succ-ℕ)) cases-leq-succ-reflexive-leq-ℕ
 ```
 
 ### `m ≤ n` if and only if `n + 1 ≰ m`

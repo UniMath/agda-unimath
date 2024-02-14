@@ -148,7 +148,7 @@ module _
     is-prop-is-closed-under-composition-subtype-hom-wide-Category
 ```
 
-### The predicate on a subtype of the hom-sets of being a wide subcategory
+### The predicate on subtypes of hom-sets of being a wide subcategory
 
 ```agda
 module _
@@ -159,7 +159,7 @@ module _
 
   is-wide-subcategory-Prop : Prop (l1 ⊔ l2 ⊔ l3)
   is-wide-subcategory-Prop =
-    prod-Prop
+    product-Prop
       ( contains-id-prop-subtype-hom-wide-Category C P₁)
       ( is-closed-under-composition-prop-subtype-hom-wide-Category C P₁)
 
@@ -236,7 +236,7 @@ module _
     inclusion-subtype (subtype-hom-Wide-Subcategory x y)
 ```
 
-The predicate on a morphism between any objects of being contained in the wide
+The predicate on morphisms between any objects of being contained in the wide
 subcategory:
 
 ```agda
@@ -349,12 +349,20 @@ module _
     (h : hom-Wide-Subcategory C P z w)
     (g : hom-Wide-Subcategory C P y z)
     (f : hom-Wide-Subcategory C P x y) →
-    ( comp-hom-Wide-Subcategory
-      ( comp-hom-Wide-Subcategory h g) f) ＝
-    ( comp-hom-Wide-Subcategory h
-      ( comp-hom-Wide-Subcategory g f))
+    comp-hom-Wide-Subcategory (comp-hom-Wide-Subcategory h g) f ＝
+    comp-hom-Wide-Subcategory h (comp-hom-Wide-Subcategory g f)
   associative-comp-hom-Wide-Subcategory =
     associative-comp-hom-Wide-Subprecategory (precategory-Category C) P
+
+  inv-associative-comp-hom-Wide-Subcategory :
+    {x y z w : obj-Wide-Subcategory C P}
+    (h : hom-Wide-Subcategory C P z w)
+    (g : hom-Wide-Subcategory C P y z)
+    (f : hom-Wide-Subcategory C P x y) →
+    comp-hom-Wide-Subcategory h (comp-hom-Wide-Subcategory g f) ＝
+    comp-hom-Wide-Subcategory (comp-hom-Wide-Subcategory h g) f
+  inv-associative-comp-hom-Wide-Subcategory =
+    inv-associative-comp-hom-Wide-Subprecategory (precategory-Category C) P
 
   left-unit-law-comp-hom-Wide-Subcategory :
     {x y : obj-Wide-Subcategory C P}

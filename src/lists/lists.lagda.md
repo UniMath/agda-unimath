@@ -9,12 +9,14 @@ module lists.lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -185,13 +187,13 @@ is-section-eq-Eq-list nil (cons x l') e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) nil e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
   ( square-eq-Eq-list (eq-Eq-list l l' e)) ∙
-  ( ap (pair refl) (is-section-eq-Eq-list l l' e))
+  ( eq-pair-eq-fiber (is-section-eq-Eq-list l l' e))
 
 eq-Eq-refl-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
   Id (eq-Eq-list l l (refl-Eq-list l)) refl
 eq-Eq-refl-Eq-list nil = refl
-eq-Eq-refl-Eq-list (cons x l) = ap (ap (cons x)) (eq-Eq-refl-Eq-list l)
+eq-Eq-refl-Eq-list (cons x l) = ap² (cons x) (eq-Eq-refl-Eq-list l)
 
 is-retraction-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (p : Id l l') →
@@ -220,7 +222,7 @@ is-torsorial-Eq-list {A = A} l =
   is-contr-equiv'
     ( Σ (list A) (Id l))
     ( equiv-tot (equiv-Eq-list l))
-    ( is-torsorial-path l)
+    ( is-torsorial-Id l)
 
 is-trunc-Eq-list :
   (k : 𝕋) {l : Level} {A : UU l} → is-trunc (succ-𝕋 (succ-𝕋 k)) A →
@@ -232,7 +234,7 @@ is-trunc-Eq-list k H nil (cons x l') =
 is-trunc-Eq-list k H (cons x l) nil =
   is-trunc-is-empty k is-empty-raise-empty
 is-trunc-Eq-list k H (cons x l) (cons y l') =
-  is-trunc-prod (succ-𝕋 k) (H x y) (is-trunc-Eq-list k H l l')
+  is-trunc-product (succ-𝕋 k) (H x y) (is-trunc-Eq-list k H l l')
 
 is-trunc-list :
   (k : 𝕋) {l : Level} {A : UU l} → is-trunc (succ-𝕋 (succ-𝕋 k)) A →

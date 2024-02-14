@@ -10,7 +10,6 @@ module category-theory.initial-objects-large-categories where
 open import category-theory.initial-objects-large-precategories
 open import category-theory.large-categories
 
-open import foundation.contractible-types
 open import foundation.universe-levels
 ```
 

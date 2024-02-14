@@ -20,6 +20,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
@@ -40,11 +41,11 @@ iterated Cartesian product `A 0 × ... × A (n-1)`.
 ### Iterated cartesian products
 
 ```agda
-iterated-prod : {l : Level} (n : ℕ) (A : Fin n → UU l) → UU l
-iterated-prod zero-ℕ A = raise-unit _
-iterated-prod (succ-ℕ zero-ℕ) A = A (zero-Fin 0)
-iterated-prod (succ-ℕ (succ-ℕ n)) A =
-  ( iterated-prod (succ-ℕ n) (A ∘ inl-Fin (succ-ℕ n))) ×
+iterated-product : {l : Level} (n : ℕ) (A : Fin n → UU l) → UU l
+iterated-product zero-ℕ A = raise-unit _
+iterated-product (succ-ℕ zero-ℕ) A = A (zero-Fin 0)
+iterated-product (succ-ℕ (succ-ℕ n)) A =
+  ( iterated-product (succ-ℕ n) (A ∘ inl-Fin (succ-ℕ n))) ×
   ( A (neg-one-Fin (succ-ℕ n)))
 ```
 
@@ -55,7 +56,7 @@ iterated-prod (succ-ℕ (succ-ℕ n)) A =
 ```agda
 equiv-dependent-universal-property-Fin :
   {l : Level} (n : ℕ) (A : Fin n → UU l) →
-  ((i : Fin n) → A i) ≃ iterated-prod n A
+  ((i : Fin n) → A i) ≃ iterated-product n A
 equiv-dependent-universal-property-Fin zero-ℕ A =
   equiv-is-contr
     ( dependent-universal-property-empty' A)
@@ -63,7 +64,7 @@ equiv-dependent-universal-property-Fin zero-ℕ A =
 equiv-dependent-universal-property-Fin (succ-ℕ zero-ℕ) A =
   equiv-dependent-universal-property-contr (zero-Fin 0) is-contr-Fin-one-ℕ A
 equiv-dependent-universal-property-Fin (succ-ℕ (succ-ℕ n)) A =
-  ( equiv-prod
+  ( equiv-product
     ( equiv-dependent-universal-property-Fin (succ-ℕ n) (A ∘ inl))
     ( id-equiv)) ∘e
   ( equiv-dependent-universal-property-Maybe A)
@@ -125,7 +126,7 @@ module _
 ```agda
 equiv-universal-property-Fin :
   {l : Level} (n : ℕ) {X : UU l} →
-  (Fin n → X) ≃ iterated-prod n (λ _ → X)
+  (Fin n → X) ≃ iterated-product n (λ _ → X)
 equiv-universal-property-Fin n =
   equiv-dependent-universal-property-Fin n (λ _ → _)
 ```

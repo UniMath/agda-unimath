@@ -8,7 +8,6 @@ module graph-theory.morphisms-directed-graphs where
 
 ```agda
 open import foundation.binary-transport
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
@@ -184,25 +183,13 @@ module _
     is-torsorial (htpy-hom-Directed-Graph f)
   is-torsorial-htpy-hom-Directed-Graph f =
     is-torsorial-Eq-structure
-      ( λ gV gE α →
-        (x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
-        binary-tr
-          ( edge-Directed-Graph H)
-          ( α x)
-          ( α y)
-          ( edge-hom-Directed-Graph G H f e) ＝
-        gE x y e)
       ( is-torsorial-htpy (vertex-hom-Directed-Graph G H f))
       ( pair
         ( vertex-hom-Directed-Graph G H f)
         ( refl-htpy))
       ( is-torsorial-Eq-Π
-        ( λ x g →
-          ( y : vertex-Directed-Graph G) →
-          ( λ e → edge-hom-Directed-Graph G H f e) ~ g y)
         ( λ x →
           is-torsorial-Eq-Π
-            ( λ y g → (λ e → edge-hom-Directed-Graph G H f e) ~ g)
             ( λ y → is-torsorial-htpy (edge-hom-Directed-Graph G H f))))
 
   is-equiv-htpy-eq-hom-Directed-Graph :

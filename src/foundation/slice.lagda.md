@@ -16,13 +16,13 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -31,7 +31,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
+open import foundation-core.type-theoretic-principle-of-choice
 
 open import trees.polynomial-endofunctors
 ```
@@ -162,7 +162,7 @@ module _
     (α : fiberwise-hom f g) (x : X) →
     (fiberwise-hom-hom-slice (hom-slice-fiberwise-hom α) x) ~ (α x)
   is-section-hom-slice-fiberwise-hom-eq-htpy α .(f a) (pair a refl) =
-    eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
+    eq-pair-eq-fiber (inv-inv (pr2 (α (f a) (pair a refl))))
 
   is-section-hom-slice-fiberwise-hom :
     (fiberwise-hom-hom-slice ∘ hom-slice-fiberwise-hom) ~ id
@@ -172,7 +172,7 @@ module _
   is-retraction-hom-slice-fiberwise-hom :
     (hom-slice-fiberwise-hom ∘ fiberwise-hom-hom-slice) ~ id
   is-retraction-hom-slice-fiberwise-hom (pair h H) =
-    eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
+    eq-pair-eq-fiber (eq-htpy (inv-inv ∘ H))
 
   abstract
     is-equiv-fiberwise-hom-hom-slice : is-equiv (fiberwise-hom-hom-slice)
@@ -348,7 +348,6 @@ module _
       (f : Slice l2 A) → is-torsorial (equiv-slice' f)
     is-torsorial-equiv-slice' (pair X f) =
       is-torsorial-Eq-structure
-        ( λ Y g e → f ~ (g ∘ map-equiv e))
         ( is-torsorial-equiv X)
         ( pair X id-equiv)
         ( is-torsorial-htpy f)

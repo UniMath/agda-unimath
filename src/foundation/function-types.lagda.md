@@ -30,6 +30,22 @@ open import foundation-core.transport-along-identifications
 
 ### Transport in a family of function types
 
+Consider two type families `B` and `C` over `A`, an identification `p : x ＝ y`
+in `A` and two functions
+
+```text
+  f : B x → C x
+  g : B y → C y.
+```
+
+Then the type of dependent identifications from `f` to `g` over `p` can be
+computed as
+
+```text
+  ((b : B x) → tr C p (f b) ＝ g (tr B p b))
+  ≃ dependent-identification (x ↦ B x → C x) f g.
+```
+
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : A → UU l2) (C : A → UU l3)
@@ -43,16 +59,39 @@ module _
   compute-dependent-identification-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
     ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
-    (tr (λ a → B a → C a) p f ＝ g)
+    dependent-identification (λ a → B a → C a) p f g
   compute-dependent-identification-function-type refl f g =
     inv-equiv equiv-funext
 
   map-compute-dependent-identification-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
     ((b : B x) → tr C p (f b) ＝ g (tr B p b)) →
-    (tr (λ a → B a → C a) p f ＝ g)
+    dependent-identification (λ a → B a → C a) p f g
   map-compute-dependent-identification-function-type p f g =
     map-equiv (compute-dependent-identification-function-type p f g)
+```
+
+### Transport in a family of function types with fixed codomain
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : A → UU l2) (C : UU l3)
+  where
+
+  compute-dependent-identification-function-type-fixed-codomain :
+    (p : x ＝ y) (f : B x → C) (g : B y → C) →
+    ((b : B x) → f b ＝ g (tr B p b)) ≃
+    dependent-identification (λ a → B a → C) p f g
+  compute-dependent-identification-function-type-fixed-codomain refl f g =
+    inv-equiv equiv-funext
+
+  map-compute-dependent-identification-function-type-fixed-codomain :
+    (p : x ＝ y) (f : B x → C) (g : B y → C) →
+    ((b : B x) → f b ＝ g (tr B p b)) →
+    dependent-identification (λ a → B a → C) p f g
+  map-compute-dependent-identification-function-type-fixed-codomain p f g =
+    map-equiv
+      ( compute-dependent-identification-function-type-fixed-codomain p f g)
 ```
 
 ### Relation between `compute-dependent-identification-function-type` and `preserves-tr`
@@ -147,3 +186,9 @@ module _
             ( λ k l s → inv-equiv (equiv-funext)))) ∙
         ( eq-htpy-refl-htpy (h (i s))))
 ```
+
+## See also
+
+### Table of files about function types, composition, and equivalences
+
+{{#include tables/composition.md}}

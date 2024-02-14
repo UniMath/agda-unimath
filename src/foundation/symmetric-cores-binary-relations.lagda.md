@@ -1,8 +1,6 @@
 # Symmetric cores of binary relations
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.symmetric-cores-binary-relations where
 ```
 
@@ -10,15 +8,16 @@ module foundation.symmetric-cores-binary-relations where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.equivalences
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-function-types
 open import foundation.morphisms-binary-relations
+open import foundation.postcomposition-functions
 open import foundation.symmetric-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-function-types
 
 open import univalent-combinatorics.standard-finite-types
 ```

@@ -43,7 +43,7 @@ unit-zero-modality _ = raise-star
 is-uniquely-eliminating-modality-zero-modality :
   {l1 l2 : Level} →
   is-uniquely-eliminating-modality (unit-zero-modality {l1} {l2})
-is-uniquely-eliminating-modality-zero-modality {l2 = l2} A P =
+is-uniquely-eliminating-modality-zero-modality {l2 = l2} P =
   is-local-is-contr
     ( unit-zero-modality)
     ( raise-unit l2)

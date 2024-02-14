@@ -14,7 +14,6 @@ open import elementary-number-theory.standard-cyclic-groups
 open import finite-group-theory.finite-groups
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -164,20 +163,20 @@ module _
     map-equiv equiv-Group-of-Order-2
 ```
 
-```agda
---   specified-hom-Group-of-Order-2 :
---     hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
---   specified-hom-Group-of-Order-2 = {!!}
+```text
+  specified-hom-Group-of-Order-2 :
+    hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
+  specified-hom-Group-of-Order-2 = {!!}
 ```
 
 ### The type of groups of order 2 is contractible
 
-```agda
--- is-contr-Group-of-Order-2 : (l : Level) → is-contr (Group-of-Order-2 l)
--- pr1 (is-contr-Group-of-Order-2 l) = symmetric-Group-of-Order-2 l
--- pr2 (is-contr-Group-of-Order-2 l) G =
---   eq-iso-Group-of-Order-2
---     ( symmetric-Group-of-Order-2 l)
---     ( G)
---     {!!}
+```text
+is-contr-Group-of-Order-2 : (l : Level) → is-contr (Group-of-Order-2 l)
+pr1 (is-contr-Group-of-Order-2 l) = symmetric-Group-of-Order-2 l
+pr2 (is-contr-Group-of-Order-2 l) G =
+  eq-iso-Group-of-Order-2
+    ( symmetric-Group-of-Order-2 l)
+    ( G)
+    {!!}
 ```

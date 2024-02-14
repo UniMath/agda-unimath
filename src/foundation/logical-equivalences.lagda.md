@@ -60,24 +60,27 @@ module _
 ### Logical equivalences between propositions
 
 ```agda
-infix 6 _⇔_
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
 
-_⇔_ :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-P ⇔ Q = type-Prop P ↔ type-Prop Q
+  type-iff-Prop : UU (l1 ⊔ l2)
+  type-iff-Prop = type-Prop P ↔ type-Prop Q
 
-is-prop-iff-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  is-prop (P ⇔ Q)
-is-prop-iff-Prop P Q =
-  is-prop-prod
-    ( is-prop-function-type (is-prop-type-Prop Q))
-    ( is-prop-function-type (is-prop-type-Prop P))
+  is-prop-iff-Prop : is-prop type-iff-Prop
+  is-prop-iff-Prop =
+    is-prop-product
+      ( is-prop-function-type (is-prop-type-Prop Q))
+      ( is-prop-function-type (is-prop-type-Prop P))
 
-iff-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (iff-Prop P Q) = P ⇔ Q
-pr2 (iff-Prop P Q) = is-prop-iff-Prop P Q
+  iff-Prop : Prop (l1 ⊔ l2)
+  pr1 iff-Prop = type-iff-Prop
+  pr2 iff-Prop = is-prop-iff-Prop
+
+  infix 6 _⇔_
+
+  _⇔_ : UU (l1 ⊔ l2)
+  _⇔_ = type-iff-Prop
 ```
 
 ### Composition of logical equivalences
@@ -116,7 +119,7 @@ module _
     ( backward-implication f ~ backward-implication g)
 
   ext-iff : (f g : A ↔ B) → (f ＝ g) ≃ htpy-iff f g
-  ext-iff f g = equiv-prod equiv-funext equiv-funext ∘e equiv-pair-eq f g
+  ext-iff f g = equiv-product equiv-funext equiv-funext ∘e equiv-pair-eq f g
 
   refl-htpy-iff : (f : A ↔ B) → htpy-iff f f
   pr1 (refl-htpy-iff f) = refl-htpy
@@ -161,19 +164,18 @@ compute-fiber-iff-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} ((f , g) : A ↔ B) →
   fiber (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
 compute-fiber-iff-equiv {A = A} {B} (f , g) =
-  ( ( ( ( ( equiv-tot (λ _ → equiv-funext)) ∘e
-          ( left-unit-law-Σ-is-contr (is-torsorial-path' f) (f , refl))) ∘e
-        ( inv-associative-Σ (A → B) (_＝ f) _)) ∘e
-      ( equiv-tot (λ _ → equiv-left-swap-Σ))) ∘e
-    ( associative-Σ (A → B) _ _)) ∘e
+  ( equiv-tot (λ _ → equiv-funext)) ∘e
+  ( left-unit-law-Σ-is-contr (is-torsorial-Id' f) (f , refl)) ∘e
+  ( inv-associative-Σ (A → B) (_＝ f) _) ∘e
+  ( equiv-tot (λ _ → equiv-left-swap-Σ)) ∘e
+  ( associative-Σ (A → B) _ _) ∘e
   ( equiv-tot (λ e → equiv-pair-eq (iff-equiv e) (f , g)))
 ```
 
 ### Two equal propositions are logically equivalent
 
 ```agda
-iff-eq :
-  {l1 : Level} {P Q : Prop l1} → P ＝ Q → P ⇔ Q
+iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → P ⇔ Q
 pr1 (iff-eq refl) = id
 pr2 (iff-eq refl) = id
 ```

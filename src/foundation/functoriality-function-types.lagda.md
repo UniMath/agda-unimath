@@ -2,8 +2,6 @@
 
 ```agda
 module foundation.functoriality-function-types where
-
-open import foundation-core.functoriality-function-types public
 ```
 
 <details><summary>Imports</summary>
@@ -11,25 +9,21 @@ open import foundation-core.functoriality-function-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.postcomposition-functions
 open import foundation.unit-type
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
-
-open import synthetic-homotopy-theory.cocones-under-spans
 ```
 
 </details>
@@ -67,53 +61,6 @@ module _
   pr2 equiv-function-type = is-equiv-map-equiv-function-type
 ```
 
-### Two maps being homotopic is equivalent to them being homotopic after pre- or postcomposition by an equivalence
-
-```agda
-module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  where
-
-  equiv-htpy-precomp-htpy :
-    ( f g : B → C) (e : A ≃ B) →
-    ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
-    ( f ~ g)
-  equiv-htpy-precomp-htpy f g e =
-    equiv-Π
-      ( eq-value f g)
-      ( e)
-      ( λ a → id-equiv)
-
-  equiv-htpy-postcomp-htpy :
-    ( e : B ≃ C) (f g : A → B) →
-    ( f ~ g) ≃
-    ( (map-equiv e ∘ f) ~ (map-equiv e ∘ g))
-  equiv-htpy-postcomp-htpy e f g =
-    equiv-Π-equiv-family
-      ( λ a → equiv-ap e (f a) (g a))
-```
-
-### The fibers of `precomp`
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
-  where
-
-  compute-fiber-precomp :
-    (g : B → X) →
-    fiber (precomp f X) (g ∘ f) ≃
-    Σ (B → X) (λ h → coherence-square-maps f f h g)
-  compute-fiber-precomp g =
-    equiv-tot ( λ h → equiv-funext) ∘e
-    equiv-fiber (precomp f X) (g ∘ f)
-
-  compute-total-fiber-precomp :
-    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
-  compute-total-fiber-precomp =
-    equiv-tot compute-fiber-precomp
-```
-
 ### A map is truncated iff postcomposition by it is truncated
 
 ```agda
@@ -126,16 +73,16 @@ module _
     {l3 : Level} (A : UU l3) → is-trunc-map k (postcomp A f)
   is-trunc-map-postcomp-is-trunc-map is-trunc-f A =
     is-trunc-map-map-Π-is-trunc-map' k
-      ( const A unit star)
-      ( const unit (X → Y) f)
-      ( const unit (is-trunc-map k f) is-trunc-f)
+      ( terminal-map A)
+      ( point f)
+      ( point is-trunc-f)
 
   is-trunc-map-is-trunc-map-postcomp :
     ({l3 : Level} (A : UU l3) → is-trunc-map k (postcomp A f)) →
     is-trunc-map k f
   is-trunc-map-is-trunc-map-postcomp is-trunc-postcomp-f =
     is-trunc-map-is-trunc-map-map-Π' k
-      ( const unit (X → Y) f)
+      ( point f)
       ( λ {l} {J} α → is-trunc-postcomp-f {l} J)
       ( star)
 

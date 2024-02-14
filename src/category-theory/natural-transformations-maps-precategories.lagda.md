@@ -159,9 +159,9 @@ module _
     ( γ : hom-family-map-Precategory C D F G) →
     is-prop (is-natural-transformation-map-Precategory C D F G γ)
   is-prop-is-natural-transformation-map-Precategory γ =
-    is-prop-Π'
+    is-prop-implicit-Π
       ( λ x →
-        is-prop-Π'
+        is-prop-implicit-Π
           ( λ y →
             is-prop-Π
               ( λ f →
@@ -290,6 +290,23 @@ module _
     eq-htpy-hom-family-natural-transformation-map-Precategory C D F I _ _
     ( λ x →
       associative-comp-hom-Precategory D
+        ( hom-family-natural-transformation-map-Precategory C D H I γ x)
+        ( hom-family-natural-transformation-map-Precategory C D G H β x)
+        ( hom-family-natural-transformation-map-Precategory C D F G α x))
+
+  inv-associative-comp-natural-transformation-map-Precategory :
+    (F G H I : map-Precategory C D)
+    (α : natural-transformation-map-Precategory C D F G)
+    (β : natural-transformation-map-Precategory C D G H)
+    (γ : natural-transformation-map-Precategory C D H I) →
+    comp-natural-transformation-map-Precategory C D F H I γ
+      ( comp-natural-transformation-map-Precategory C D F G H β α) ＝
+    comp-natural-transformation-map-Precategory C D F G I
+      ( comp-natural-transformation-map-Precategory C D G H I γ β) α
+  inv-associative-comp-natural-transformation-map-Precategory F G H I α β γ =
+    eq-htpy-hom-family-natural-transformation-map-Precategory C D F I _ _
+    ( λ x →
+      inv-associative-comp-hom-Precategory D
         ( hom-family-natural-transformation-map-Precategory C D H I γ x)
         ( hom-family-natural-transformation-map-Precategory C D G H β x)
         ( hom-family-natural-transformation-map-Precategory C D F G α x))

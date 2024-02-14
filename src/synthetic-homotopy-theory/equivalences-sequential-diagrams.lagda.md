@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.equivalences-sequential-diagrams where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
@@ -23,6 +24,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
+open import synthetic-homotopy-theory.retracts-of-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
 ```
 
@@ -56,6 +58,11 @@ module _
 
 ### Components of equivalences of sequential diagrams
 
+_Implementation note:_ As mentioned in
+[`morphisms-sequential-diagrams`](synthetic-homotopy-theory.morphisms-sequential-diagrams.md),
+Agda can't infer both the domain and the codomain when we use accessors for the
+equivalences, and the codomain needs to be provided explicitly.
+
 ```agda
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} (B : sequential-diagram l2)
@@ -67,15 +74,18 @@ module _
     family-sequential-diagram A n ≃ family-sequential-diagram B n
   equiv-equiv-sequential-diagram = pr1 e
 
-  hom-equiv-sequential-diagram : hom-sequential-diagram A B
-  pr1 hom-equiv-sequential-diagram n =
-    map-equiv (equiv-equiv-sequential-diagram n)
-  pr2 hom-equiv-sequential-diagram = pr2 e
-
   map-equiv-sequential-diagram :
     ( n : ℕ) →
     family-sequential-diagram A n → family-sequential-diagram B n
   map-equiv-sequential-diagram n = map-equiv (equiv-equiv-sequential-diagram n)
+
+  naturality-equiv-sequential-diagram :
+    naturality-hom-sequential-diagram A B map-equiv-sequential-diagram
+  naturality-equiv-sequential-diagram = pr2 e
+
+  hom-equiv-sequential-diagram : hom-sequential-diagram A B
+  pr1 hom-equiv-sequential-diagram = map-equiv-sequential-diagram
+  pr2 hom-equiv-sequential-diagram = naturality-equiv-sequential-diagram
 
   is-equiv-map-equiv-sequential-diagram :
     ( n : ℕ) →
@@ -118,6 +128,38 @@ module _
         ( hom-equiv-sequential-diagram B e'))
 ```
 
+### Inverses of equivalences of sequential diagrams
+
+```agda
+module _
+  { l1 l2 : Level} {A : sequential-diagram l1} (B : sequential-diagram l2)
+  ( e : equiv-sequential-diagram A B)
+  where
+
+  inv-equiv-sequential-diagram : equiv-sequential-diagram B A
+  pr1 inv-equiv-sequential-diagram n =
+    inv-equiv (equiv-equiv-sequential-diagram B e n)
+  pr2 inv-equiv-sequential-diagram n =
+    coherence-square-maps-inv-equiv-vertical
+      ( map-sequential-diagram A n)
+      ( equiv-equiv-sequential-diagram B e n)
+      ( equiv-equiv-sequential-diagram B e (succ-ℕ n))
+      ( map-sequential-diagram B n)
+      ( naturality-map-hom-sequential-diagram B
+        ( hom-equiv-sequential-diagram B e)
+        ( n))
+
+  map-inv-equiv-sequential-diagram :
+    ( n : ℕ) →
+    family-sequential-diagram B n → family-sequential-diagram A n
+  map-inv-equiv-sequential-diagram =
+    map-equiv-sequential-diagram A inv-equiv-sequential-diagram
+
+  hom-inv-equiv-sequential-diagram : hom-sequential-diagram B A
+  hom-inv-equiv-sequential-diagram =
+    hom-equiv-sequential-diagram A inv-equiv-sequential-diagram
+```
+
 ## Properties
 
 ### Characterization of equality of sequential diagrams
@@ -136,13 +178,11 @@ abstract
     { l1 : Level} (A : sequential-diagram l1) →
     is-torsorial (equiv-sequential-diagram {l2 = l1} A)
   is-torsorial-equiv-sequential-diagram A =
-    is-torsorial-Eq-structure _
+    is-torsorial-Eq-structure
       ( is-torsorial-Eq-Π
-        ( λ n → family-sequential-diagram A n ≃_)
         ( λ n → is-torsorial-equiv (family-sequential-diagram A n)))
       ( family-sequential-diagram A , λ n → id-equiv)
       ( is-torsorial-Eq-Π
-        ( λ n → _~ map-sequential-diagram A n)
         ( λ n → is-torsorial-htpy' (map-sequential-diagram A n)))
 
   is-equiv-equiv-eq-sequential-diagram :
@@ -165,4 +205,67 @@ eq-equiv-sequential-diagram :
   equiv-sequential-diagram A B → (A ＝ B)
 eq-equiv-sequential-diagram A B =
   map-inv-equiv (extensionality-sequential-diagram A B)
+```
+
+### Inverses of equivalences are inverses with respect to composition of morphisms of sequential diagrams
+
+```agda
+module _
+  { l1 l2 : Level} {A : sequential-diagram l1} (B : sequential-diagram l2)
+  ( e : equiv-sequential-diagram A B)
+  where
+
+  is-section-inv-equiv-sequential-diagram :
+    htpy-hom-sequential-diagram B
+      ( comp-hom-sequential-diagram B A B
+        ( hom-equiv-sequential-diagram B e)
+        ( hom-inv-equiv-sequential-diagram B e))
+      ( id-hom-sequential-diagram B)
+  pr1 is-section-inv-equiv-sequential-diagram n =
+    is-section-map-inv-equiv (equiv-equiv-sequential-diagram B e n)
+  pr2 is-section-inv-equiv-sequential-diagram n =
+    inv-htpy
+      ( right-inverse-law-pasting-vertical-coherence-square-maps
+        ( map-sequential-diagram A n)
+        ( equiv-equiv-sequential-diagram B e n)
+        ( equiv-equiv-sequential-diagram B e (succ-ℕ n))
+        ( map-sequential-diagram B n)
+        ( naturality-equiv-sequential-diagram B e n))
+
+  is-retraction-inv-equiv-sequential-diagram :
+    htpy-hom-sequential-diagram A
+      ( comp-hom-sequential-diagram A B A
+        ( hom-inv-equiv-sequential-diagram B e)
+        ( hom-equiv-sequential-diagram B e))
+      ( id-hom-sequential-diagram A)
+  pr1 is-retraction-inv-equiv-sequential-diagram n =
+    is-retraction-map-inv-equiv (equiv-equiv-sequential-diagram B e n)
+  pr2 is-retraction-inv-equiv-sequential-diagram n =
+    inv-htpy
+      ( left-inverse-law-pasting-vertical-coherence-square-maps
+        ( map-sequential-diagram A n)
+        ( equiv-equiv-sequential-diagram B e n)
+        ( equiv-equiv-sequential-diagram B e (succ-ℕ n))
+        ( map-sequential-diagram B n)
+        ( naturality-equiv-sequential-diagram B e n))
+
+  retraction-equiv-sequential-diagram :
+    retraction-hom-sequential-diagram A B
+      ( hom-equiv-sequential-diagram B e)
+  pr1 retraction-equiv-sequential-diagram = hom-inv-equiv-sequential-diagram B e
+  pr2 retraction-equiv-sequential-diagram =
+    is-retraction-inv-equiv-sequential-diagram
+```
+
+### Equivalences of sequential diagrams induce retracts of sequential diagrams
+
+```agda
+module _
+  { l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
+  ( e : equiv-sequential-diagram A B)
+  where
+
+  retract-equiv-sequential-diagram : retract-sequential-diagram B A
+  pr1 retract-equiv-sequential-diagram = hom-equiv-sequential-diagram B e
+  pr2 retract-equiv-sequential-diagram = retraction-equiv-sequential-diagram B e
 ```

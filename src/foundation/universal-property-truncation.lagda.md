@@ -17,7 +17,6 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-function-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
@@ -29,6 +28,7 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -42,8 +42,7 @@ module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 (succ-𝕋 k))
   {f : A → type-Truncated-Type B} (H : is-surjective f)
   ( K :
-    {l : Level} (x y : A) →
-    is-truncation l (Id-Truncated-Type B (f x) (f y)) (ap f {x} {y}))
+    (x y : A) → is-truncation (Id-Truncated-Type B (f x) (f y)) (ap f {x} {y}))
   where
 
   unique-extension-fiber-is-truncation-is-truncation-ap :
@@ -51,7 +50,7 @@ module _
     (g : A → type-Truncated-Type C) (y : type-Truncated-Type B) →
     is-contr
       ( Σ ( type-Truncated-Type C)
-          ( λ z → (t : fiber f y) → Id (g (pr1 t)) z))
+          ( λ z → (t : fiber f y) → g (pr1 t) ＝ z))
   unique-extension-fiber-is-truncation-is-truncation-ap C g =
     apply-dependent-universal-property-surj-is-surjective f H
       ( λ y → is-contr-Prop _)
@@ -69,10 +68,10 @@ module _
                       ( K x' x)
                       ( Id-Truncated-Type C (g x') z)))) ∘e
               ( equiv-ev-pair)))
-          ( is-torsorial-path (g x)))
+          ( is-torsorial-Id (g x)))
 
   is-truncation-is-truncation-ap :
-    {l : Level} → is-truncation l B f
+    is-truncation B f
   is-truncation-is-truncation-ap C =
     is-equiv-is-contr-map
       ( λ g →
@@ -98,7 +97,7 @@ module _
   where
 
   is-surjective-is-truncation :
-    ({l : Level} → is-truncation l B f) → is-surjective f
+    is-truncation B f → is-surjective f
   is-surjective-is-truncation H =
     map-inv-is-equiv
       ( dependent-universal-property-truncation-is-truncation B f H

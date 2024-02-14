@@ -16,7 +16,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-tuples
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
@@ -96,9 +95,6 @@ module _
     is-torsorial (equiv-unordered-tuple-types n A)
   is-torsorial-equiv-unordered-tuple-types =
     is-torsorial-Eq-structure
-      ( λ I B e →
-        (i : type-unordered-tuple n A) →
-        element-unordered-tuple n A i ≃ B (map-equiv e i))
       ( is-torsorial-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n A))
       ( pair (type-unordered-tuple-UU-Fin n A) id-equiv)
       ( is-torsorial-equiv-fam (element-unordered-tuple n A))

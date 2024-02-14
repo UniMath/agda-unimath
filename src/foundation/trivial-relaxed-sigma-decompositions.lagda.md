@@ -9,13 +9,14 @@ module foundation.trivial-relaxed-sigma-decompositions where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.relaxed-sigma-decompositions
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -82,18 +83,18 @@ module _
   equiv-trivial-is-trivial-Relaxed-Σ-Decomposition :
     equiv-Relaxed-Σ-Decomposition D (trivial-Relaxed-Σ-Decomposition l4 A)
   pr1 equiv-trivial-is-trivial-Relaxed-Σ-Decomposition =
-    ( map-equiv (compute-raise-unit l4) ∘ terminal-map ,
+    ( map-equiv (compute-raise-unit l4) ∘
+      terminal-map (indexing-type-Relaxed-Σ-Decomposition D) ,
       is-equiv-comp
         ( map-equiv (compute-raise-unit l4))
-        ( terminal-map)
+        ( terminal-map (indexing-type-Relaxed-Σ-Decomposition D))
         ( is-equiv-terminal-map-is-contr is-trivial)
         ( is-equiv-map-equiv ( compute-raise-unit l4)))
   pr1 (pr2 equiv-trivial-is-trivial-Relaxed-Σ-Decomposition) x =
     ( inv-equiv (matching-correspondence-Relaxed-Σ-Decomposition D)) ∘e
     ( inv-left-unit-law-Σ-is-contr is-trivial x)
   pr2 (pr2 equiv-trivial-is-trivial-Relaxed-Σ-Decomposition) a =
-    eq-pair-Σ
-      ( refl)
+    eq-pair-eq-fiber
       ( inv-map-eq-transpose-equiv
         ( inv-equiv (matching-correspondence-Relaxed-Σ-Decomposition D))
         ( refl))

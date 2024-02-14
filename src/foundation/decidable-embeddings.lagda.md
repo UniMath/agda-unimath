@@ -21,7 +21,7 @@ open import foundation.propositional-maps
 open import foundation.structured-type-duality
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -34,10 +34,10 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -186,7 +186,7 @@ equiv-Fiber-Decidable-Prop l A =
       equiv-tot
         ( λ f →
           ( inv-distributive-Π-Σ) ∘e
-          ( equiv-prod (equiv-is-prop-map-is-emb f) id-equiv))))
+          ( equiv-product (equiv-is-prop-map-is-emb f) id-equiv))))
 ```
 
 ### Any equivalence is a decidable embedding
@@ -221,7 +221,7 @@ abstract
   is-prop-is-decidable-emb f =
     is-prop-is-inhabited
       ( λ H →
-        is-prop-prod
+        is-prop-product
           ( is-property-is-emb f)
           ( is-prop-Π
             ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
@@ -238,18 +238,17 @@ abstract
   pr1 (is-decidable-emb-comp {g = g} {f} H K) =
     is-emb-comp _ _ (pr1 K) (pr1 H)
   pr2 (is-decidable-emb-comp {g = g} {f} H K) x =
-    ind-coprod
-      ( λ t → is-decidable (fiber (g ∘ f) x))
+    rec-coproduct
       ( λ u →
         is-decidable-equiv
-          ( equiv-compute-fiber-comp g f x)
+          ( compute-fiber-comp g f x)
           ( is-decidable-equiv
             ( left-unit-law-Σ-is-contr
               ( is-proof-irrelevant-is-prop
                 ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x) ( u))
               ( u))
             ( is-decidable-map-is-decidable-emb H (pr1 u))))
-      ( λ α → inr (λ t → α (pair (f (pr1 t)) (pr2 t))))
+      ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
       ( pr2 K x)
 ```
 

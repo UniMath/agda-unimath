@@ -24,18 +24,20 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.retractions
 ```
 
 </details>
 
 ## Idea
 
-A type is said to be decidable if we can either construct an element, or we can
-prove that it is empty. In other words, we interpret decidability via the
-Curry-Howard interpretation of logic into type theory. A related concept is that
-a type is either inhabited or empty, where inhabitedness of a type is expressed
-using the propositional truncation.
+A type is said to be **decidable** if we can either construct an element, or we
+can prove that it is [empty](foundation-core.empty-types.md). In other words, we
+interpret decidability via the
+[Curry-Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logic into type theory. A related concept is that a type is either
+[inhabited](foundation.inhabited-types.md) or empty, where inhabitedness of a
+type is expressed using the
+[propositional truncation](foundation.propositional-truncations.md).
 
 ## Definition
 
@@ -88,32 +90,32 @@ is-decidable-empty = inr id
 ### Coproducts of decidable types are decidable
 
 ```agda
-is-decidable-coprod :
+is-decidable-coproduct :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A + B)
-is-decidable-coprod (inl a) y = inl (inl a)
-is-decidable-coprod (inr na) (inl b) = inl (inr b)
-is-decidable-coprod (inr na) (inr nb) = inr (ind-coprod (λ x → empty) na nb)
+is-decidable-coproduct (inl a) y = inl (inl a)
+is-decidable-coproduct (inr na) (inl b) = inl (inr b)
+is-decidable-coproduct (inr na) (inr nb) = inr (rec-coproduct na nb)
 ```
 
 ### Cartesian products of decidable types are decidable
 
 ```agda
-is-decidable-prod :
+is-decidable-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A × B)
-is-decidable-prod (inl a) (inl b) = inl (pair a b)
-is-decidable-prod (inl a) (inr g) = inr (g ∘ pr2)
-is-decidable-prod (inr f) (inl b) = inr (f ∘ pr1)
-is-decidable-prod (inr f) (inr g) = inr (f ∘ pr1)
+is-decidable-product (inl a) (inl b) = inl (pair a b)
+is-decidable-product (inl a) (inr g) = inr (g ∘ pr2)
+is-decidable-product (inr f) (inl b) = inr (f ∘ pr1)
+is-decidable-product (inr f) (inr g) = inr (f ∘ pr1)
 
-is-decidable-prod' :
+is-decidable-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → (A → is-decidable B) → is-decidable (A × B)
-is-decidable-prod' (inl a) d with d a
+is-decidable-product' (inl a) d with d a
 ... | inl b = inl (pair a b)
 ... | inr nb = inr (nb ∘ pr2)
-is-decidable-prod' (inr na) d = inr (na ∘ pr1)
+is-decidable-product' (inr na) d = inr (na ∘ pr1)
 
 is-decidable-left-factor :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -237,7 +239,7 @@ abstract
   is-prop-is-inhabited-or-empty :
     {l1 : Level} (A : UU l1) → is-prop (is-inhabited-or-empty A)
   is-prop-is-inhabited-or-empty A =
-    is-prop-coprod
+    is-prop-coproduct
       ( λ t → apply-universal-property-trunc-Prop t empty-Prop)
       ( is-prop-type-trunc-Prop)
       ( is-prop-neg)
@@ -253,7 +255,7 @@ pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
 is-fixed-point-is-decidable-is-inhabited :
   {l : Level} {X : UU l} → type-trunc-Prop X → is-decidable X ≃ X
 is-fixed-point-is-decidable-is-inhabited {l} {X} t =
-  right-unit-law-coprod-is-empty X (¬ X) (is-nonempty-is-inhabited t)
+  right-unit-law-coproduct-is-empty X (¬ X) (is-nonempty-is-inhabited t)
 ```
 
 ### Raising types converves decidability

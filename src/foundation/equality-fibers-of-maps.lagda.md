@@ -15,6 +15,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -100,14 +101,14 @@ module _
     fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t)) →
     s ＝ t
   map-inv-fiber-ap-eq-fiber (x , refl) (.x , p) (refl , u) =
-    eq-pair-eq-pr2 (ap inv u ∙ inv-inv p)
+    eq-pair-eq-fiber (ap inv u ∙ inv-inv p)
 
   ap-pr1-map-inv-fiber-ap-eq-fiber :
     (s t : fiber f b) →
     (v : fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t))) →
     ap pr1 (map-inv-fiber-ap-eq-fiber s t v) ＝ pr1 v
   ap-pr1-map-inv-fiber-ap-eq-fiber (x , refl) (.x , p) (refl , u) =
-    ap-pr1-eq-pair-eq-pr2 (ap inv u ∙ inv-inv p)
+    ap-pr1-eq-pair-eq-fiber (ap inv u ∙ inv-inv p)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x y : A)

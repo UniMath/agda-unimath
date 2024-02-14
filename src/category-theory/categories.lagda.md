@@ -105,6 +105,16 @@ module _
   associative-comp-hom-Category =
     associative-comp-hom-Precategory precategory-Category
 
+  inv-associative-comp-hom-Category :
+    {x y z w : obj-Category}
+    (h : hom-Category z w)
+    (g : hom-Category y z)
+    (f : hom-Category x y) →
+    comp-hom-Category h (comp-hom-Category g f) ＝
+    comp-hom-Category (comp-hom-Category h g) f
+  inv-associative-comp-hom-Category =
+    inv-associative-comp-hom-Precategory precategory-Category
+
   associative-composition-operation-Category :
     associative-composition-operation-binary-family-Set hom-set-Category
   associative-composition-operation-Category =
@@ -156,13 +166,17 @@ module _
   {l1 l2 : Level} (C : Category l1 l2)
   where
 
+  is-preunivalent-category-Category :
+    is-preunivalent-Precategory (precategory-Category C)
+  is-preunivalent-category-Category x y =
+    is-emb-is-equiv (is-category-Category C x y)
+
   preunivalent-category-Category : Preunivalent-Category l1 l2
   pr1 preunivalent-category-Category = precategory-Category C
-  pr2 preunivalent-category-Category x y =
-    is-emb-is-equiv (is-category-Category C x y)
+  pr2 preunivalent-category-Category = is-preunivalent-category-Category
 ```
 
-### The total hom-type of a preunivalent category
+### The total hom-type of a category
 
 ```agda
 total-hom-Category :

@@ -10,11 +10,11 @@ module species.cauchy-composition-species-of-types where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.discrete-relaxed-sigma-decompositions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -112,7 +112,7 @@ right-unit-law-cauchy-composition-species-types {l1} F A =
               ( cotype-Relaxed-Σ-Decomposition D y)) ×
             F ( indexing-type-Relaxed-Σ-Decomposition D))
         ( id-equiv)
-        ( λ _ → commutative-prod))))
+        ( λ _ → commutative-product))))
 ```
 
 ### Associativity of composition of species
@@ -139,7 +139,7 @@ module _
       ( _)
       ( id-equiv)
       ( λ D1 →
-        ( ( inv-equiv right-distributive-prod-Σ) ∘e
+        ( ( inv-equiv right-distributive-product-Σ) ∘e
         ( ( equiv-Σ
             ( _)
             ( id-equiv)
@@ -154,9 +154,9 @@ module _
             ( _)
             ( id-equiv)
             ( λ D2 →
-              ( equiv-prod
+              ( equiv-product
                 ( id-equiv)
-                ( ( equiv-prod
+                ( ( equiv-product
                     ( id-equiv)
                     ( ( inv-equiv
                         ( equiv-precomp-Π
@@ -185,11 +185,11 @@ module _
           ( ( equiv-Σ
               ( _)
               ( id-equiv)
-              ( λ D → left-distributive-prod-Σ)) ∘e
+              ( λ D → left-distributive-product-Σ)) ∘e
             ( ( equiv-Σ
                 ( _)
                 ( id-equiv)
-                ( λ D → equiv-prod id-equiv distributive-Π-Σ)))))))
+                ( λ D → equiv-product id-equiv distributive-Π-Σ)))))))
 
   htpy-associative-cauchy-composition-species-types :
     cauchy-composition-species-types
@@ -197,15 +197,7 @@ module _
       ( cauchy-composition-species-types T U) ~
     cauchy-composition-species-types (cauchy-composition-species-types S T) U
   htpy-associative-cauchy-composition-species-types A =
-    eq-equiv
-      ( cauchy-composition-species-types S
-        ( cauchy-composition-species-types T U)
-        ( A))
-      ( cauchy-composition-species-types
-        ( cauchy-composition-species-types S T)
-        ( U)
-        ( A))
-      ( equiv-associative-cauchy-composition-species-types A)
+    eq-equiv (equiv-associative-cauchy-composition-species-types A)
 
   associative-cauchy-composition-species-types :
     ( cauchy-composition-species-types

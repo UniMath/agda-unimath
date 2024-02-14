@@ -7,7 +7,7 @@ module foundation.fibered-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
@@ -18,6 +18,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
@@ -32,7 +33,6 @@ open import foundation-core.small-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -140,11 +140,9 @@ module _
     (m : map-over f g i) → is-torsorial (htpy-map-over m)
   is-torsorial-htpy-map-over m =
     is-torsorial-Eq-structure
-      ( λ g G → coherence-htpy-map-over m (g , G))
       ( is-torsorial-htpy (map-total-map-over f g i m))
       ( map-total-map-over f g i m , refl-htpy)
-      ( is-torsorial-htpy
-        ( is-map-over-map-total-map-over f g i m ∙h refl-htpy))
+      ( is-torsorial-htpy (is-map-over-map-total-map-over f g i m ∙h refl-htpy))
 
   is-equiv-htpy-eq-map-over :
     (m m' : map-over f g i) → is-equiv (htpy-eq-map-over m m')
@@ -197,17 +195,9 @@ module _
     (m : fibered-map f g) → is-torsorial (htpy-fibered-map m)
   is-torsorial-htpy-fibered-map m =
     is-torsorial-Eq-structure
-      ( λ i hH I →
-          Σ ( map-total-fibered-map f g m ~ map-total-fibered-map f g (i , hH))
-            ( coherence-htpy-fibered-map m (i , hH) I))
       ( is-torsorial-htpy (map-base-fibered-map f g m))
       ( map-base-fibered-map f g m , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( λ h H →
-          coherence-htpy-fibered-map
-            ( m)
-            ( map-base-fibered-map f g m , h , H)
-            ( refl-htpy))
         ( is-torsorial-htpy (map-total-fibered-map f g m))
         ( map-total-fibered-map f g m , refl-htpy)
         ( is-torsorial-htpy
@@ -252,7 +242,7 @@ module _
     (α : fiberwise-map-over f g i) (x : X) →
     fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x ~ α x
   is-section-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
-    eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
+    eq-pair-eq-fiber (inv-inv (pr2 (α (f a) (pair a refl))))
 
   is-section-map-over-fiberwise-map-over :
     fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over ~ id
@@ -262,7 +252,7 @@ module _
   is-retraction-map-over-fiberwise-map-over :
     map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over ~ id
   is-retraction-map-over-fiberwise-map-over (pair h H) =
-    eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
+    eq-pair-eq-fiber (eq-htpy (inv-inv ∘ H))
 
   abstract
     is-equiv-fiberwise-map-over-map-over :
@@ -560,5 +550,7 @@ module _
 
 ## See also
 
+- [Morphisms of arrows](foundation.morphisms-arrows.md) for the same concept
+  under a different name.
 - For the pullback property of the type of fibered maps, see
   [the pullback-hom](orthogonal-factorization-systems.pullback-hom.md)

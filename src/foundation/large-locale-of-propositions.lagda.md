@@ -58,10 +58,10 @@ antisymmetric-leq-Large-Poset Prop-Large-Poset P Q = eq-iff
 ```agda
 has-meets-Prop-Large-Locale :
   has-meets-Large-Poset Prop-Large-Poset
-meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = conj-Prop
+meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = conjunction-Prop
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
   has-meets-Prop-Large-Locale =
-  iff-universal-property-conj-Prop
+  iff-universal-property-conjunction-Prop
 ```
 
 ### The largest element in the large poset of propositions
@@ -113,7 +113,7 @@ is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
 is-large-suplattice-Large-Frame Prop-Large-Frame =
   is-large-suplattice-Prop-Large-Locale
 distributive-meet-sup-Large-Frame Prop-Large-Frame =
-  distributive-conj-exists-Prop
+  distributive-conjunction-exists-Prop
 ```
 
 ### The large locale of propositions

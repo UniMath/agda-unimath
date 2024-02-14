@@ -9,6 +9,7 @@ module foundation.universal-property-identity-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.full-subtypes
@@ -17,7 +18,6 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.preunivalence
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -28,6 +28,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -46,10 +47,15 @@ ev-refl :
   ((x : A) (p : a ＝ x) → B x p) → B a refl
 ev-refl a f = f a refl
 
+ev-refl' :
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
+  ((x : A) (p : x ＝ a) → B x p) → B a refl
+ev-refl' a f = f a refl
+
 abstract
   is-equiv-ev-refl :
     {l1 l2 : Level} {A : UU l1} (a : A)
-    {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B = B})
+    {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B})
   is-equiv-ev-refl a =
     is-equiv-is-invertible
       ( ind-Id a _)
@@ -72,6 +78,11 @@ equiv-ev-refl' :
 equiv-ev-refl' a {B} =
   ( equiv-ev-refl a) ∘e
   ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
+
+is-equiv-ev-refl' :
+  {l1 l2 : Level} {A : UU l1} (a : A)
+  {B : (x : A) → x ＝ a → UU l2} → is-equiv (ev-refl' a {B})
+is-equiv-ev-refl' a = is-equiv-map-equiv (equiv-ev-refl' a)
 ```
 
 ### `Id : A → (A → 𝒰)` is an embedding
@@ -128,7 +139,7 @@ module _
               ( equiv-ev-refl x) ∘e
               ( equiv-inclusion-is-full-subtype
                 ( Π-Prop A ∘ (is-equiv-Prop ∘_))
-                ( fundamental-theorem-id (is-torsorial-path a))) ∘e
+                ( fundamental-theorem-id (is-torsorial-Id a))) ∘e
               ( distributive-Π-Σ))))
         ( emb-tot
           ( λ x →
@@ -144,7 +155,7 @@ module _
         ( λ _ →
           is-injective-emb
             ( emb-fiber-Id-preunivalent-Id a)
-            ( eq-is-contr (is-torsorial-path a))))
+            ( eq-is-contr (is-torsorial-Id a))))
       ( λ _ → ap Id)
 
 module _

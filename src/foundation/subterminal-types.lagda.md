@@ -34,7 +34,7 @@ module _
   where
 
   is-subterminal : UU l
-  is-subterminal = is-emb (terminal-map {A = A})
+  is-subterminal = is-emb (terminal-map A)
 ```
 
 ## Properties
@@ -68,7 +68,7 @@ module _
     is-prop-is-subterminal H x y =
       is-contr-is-equiv
         ( star ＝ star)
-        ( ap terminal-map)
+        ( ap (terminal-map A))
         ( H x y)
         ( is-prop-is-contr is-contr-unit star star)
 

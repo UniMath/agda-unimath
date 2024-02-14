@@ -50,63 +50,63 @@ each `R x y` is a
 ## Definition
 
 ```agda
-Decidable-Equivalence-Relation-𝔽 :
+Decidable-equivalence-relation-𝔽 :
   {l1 : Level} (l2 : Level) (X : 𝔽 l1) → UU (l1 ⊔ lsuc l2)
-Decidable-Equivalence-Relation-𝔽 l2 X =
-  Decidable-Equivalence-Relation l2 (type-𝔽 X)
+Decidable-equivalence-relation-𝔽 l2 X =
+  Decidable-equivalence-relation l2 (type-𝔽 X)
 
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (R : Decidable-Equivalence-Relation-𝔽 l2 X)
+  {l1 l2 : Level} (X : 𝔽 l1) (R : Decidable-equivalence-relation-𝔽 l2 X)
   where
 
-  decidable-relation-Decidable-Equivalence-Relation-𝔽 :
+  decidable-relation-Decidable-equivalence-relation-𝔽 :
     Decidable-Relation l2 (type-𝔽 X)
-  decidable-relation-Decidable-Equivalence-Relation-𝔽 =
-    decidable-relation-Decidable-Equivalence-Relation R
+  decidable-relation-Decidable-equivalence-relation-𝔽 =
+    decidable-relation-Decidable-equivalence-relation R
 
-  relation-Decidable-Equivalence-Relation-𝔽 :
+  relation-Decidable-equivalence-relation-𝔽 :
     type-𝔽 X → type-𝔽 X → Prop l2
-  relation-Decidable-Equivalence-Relation-𝔽 =
-    relation-Decidable-Equivalence-Relation R
+  relation-Decidable-equivalence-relation-𝔽 =
+    relation-Decidable-equivalence-relation R
 
-  sim-Decidable-Equivalence-Relation-𝔽 : type-𝔽 X → type-𝔽 X → UU l2
-  sim-Decidable-Equivalence-Relation-𝔽 =
-    sim-Decidable-Equivalence-Relation R
+  sim-Decidable-equivalence-relation-𝔽 : type-𝔽 X → type-𝔽 X → UU l2
+  sim-Decidable-equivalence-relation-𝔽 =
+    sim-Decidable-equivalence-relation R
 
-  is-prop-sim-Decidable-Equivalence-Relation-𝔽 :
-    (x y : type-𝔽 X) → is-prop (sim-Decidable-Equivalence-Relation-𝔽 x y)
-  is-prop-sim-Decidable-Equivalence-Relation-𝔽 =
-    is-prop-sim-Decidable-Equivalence-Relation R
+  is-prop-sim-Decidable-equivalence-relation-𝔽 :
+    (x y : type-𝔽 X) → is-prop (sim-Decidable-equivalence-relation-𝔽 x y)
+  is-prop-sim-Decidable-equivalence-relation-𝔽 =
+    is-prop-sim-Decidable-equivalence-relation R
 
-  is-decidable-sim-Decidable-Equivalence-Relation-𝔽 :
-    (x y : type-𝔽 X) → is-decidable (sim-Decidable-Equivalence-Relation-𝔽 x y)
-  is-decidable-sim-Decidable-Equivalence-Relation-𝔽 =
-    is-decidable-sim-Decidable-Equivalence-Relation R
+  is-decidable-sim-Decidable-equivalence-relation-𝔽 :
+    (x y : type-𝔽 X) → is-decidable (sim-Decidable-equivalence-relation-𝔽 x y)
+  is-decidable-sim-Decidable-equivalence-relation-𝔽 =
+    is-decidable-sim-Decidable-equivalence-relation R
 
-  is-equivalence-relation-Decidable-Equivalence-Relation-𝔽 :
-    is-equivalence-relation relation-Decidable-Equivalence-Relation-𝔽
-  is-equivalence-relation-Decidable-Equivalence-Relation-𝔽 =
-    is-equivalence-relation-Decidable-Equivalence-Relation R
+  is-equivalence-relation-Decidable-equivalence-relation-𝔽 :
+    is-equivalence-relation relation-Decidable-equivalence-relation-𝔽
+  is-equivalence-relation-Decidable-equivalence-relation-𝔽 =
+    is-equivalence-relation-Decidable-equivalence-relation R
 
-  equivalence-relation-Decidable-Equivalence-Relation-𝔽 :
-    Equivalence-Relation l2 (type-𝔽 X)
-  equivalence-relation-Decidable-Equivalence-Relation-𝔽 =
-    equivalence-relation-Decidable-Equivalence-Relation R
+  equivalence-relation-Decidable-equivalence-relation-𝔽 :
+    equivalence-relation l2 (type-𝔽 X)
+  equivalence-relation-Decidable-equivalence-relation-𝔽 =
+    equivalence-relation-Decidable-equivalence-relation R
 
-  refl-Decidable-Equivalence-Relation-𝔽 :
-    is-reflexive sim-Decidable-Equivalence-Relation-𝔽
-  refl-Decidable-Equivalence-Relation-𝔽 =
-    refl-Decidable-Equivalence-Relation R
+  refl-Decidable-equivalence-relation-𝔽 :
+    is-reflexive sim-Decidable-equivalence-relation-𝔽
+  refl-Decidable-equivalence-relation-𝔽 =
+    refl-Decidable-equivalence-relation R
 
-  symmetric-Decidable-Equivalence-Relation-𝔽 :
-    is-symmetric sim-Decidable-Equivalence-Relation-𝔽
-  symmetric-Decidable-Equivalence-Relation-𝔽 =
-    symmetric-Decidable-Equivalence-Relation R
+  symmetric-Decidable-equivalence-relation-𝔽 :
+    is-symmetric sim-Decidable-equivalence-relation-𝔽
+  symmetric-Decidable-equivalence-relation-𝔽 =
+    symmetric-Decidable-equivalence-relation R
 
-  transitive-Decidable-Equivalence-Relation-𝔽 :
-    is-transitive sim-Decidable-Equivalence-Relation-𝔽
-  transitive-Decidable-Equivalence-Relation-𝔽 =
-    transitive-Decidable-Equivalence-Relation R
+  transitive-Decidable-equivalence-relation-𝔽 :
+    is-transitive sim-Decidable-equivalence-relation-𝔽
+  transitive-Decidable-equivalence-relation-𝔽 =
+    transitive-Decidable-equivalence-relation R
 
 module _
   {l1 l2 : Level} (A : 𝔽 l1) (R : Decidable-Relation l2 (type-𝔽 A))
@@ -161,9 +161,9 @@ module _
   is-finite-is-equivalence-Dec-Relation-Prop-𝔽 :
     is-finite (is-equivalence-relation (relation-Decidable-Relation R))
   is-finite-is-equivalence-Dec-Relation-Prop-𝔽 =
-    is-finite-prod
+    is-finite-product
       ( is-finite-is-reflexive-Dec-Relation-Prop-𝔽)
-      ( is-finite-prod
+      ( is-finite-product
           is-finite-is-symmetric-Dec-Relation-Prop-𝔽
           is-finite-is-transitive-Dec-Relation-Prop-𝔽)
 ```
@@ -173,11 +173,11 @@ module _
 #### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a finite type
 
 ```agda
-equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 :
+equiv-Surjection-𝔽-Decidable-equivalence-relation-𝔽 :
   {l1 : Level} (A : 𝔽 l1) →
-  Decidable-Equivalence-Relation-𝔽 l1 A ≃
+  Decidable-equivalence-relation-𝔽 l1 A ≃
   Surjection-𝔽 l1 A
-equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 {l1} A =
+equiv-Surjection-𝔽-Decidable-equivalence-relation-𝔽 {l1} A =
   ( equiv-Σ-equiv-base
       ( λ X → (type-𝔽 A) ↠ (type-𝔽 X))
       ( equiv-Σ
@@ -199,16 +199,16 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 {l1} A =
             ( id-equiv)
             ( λ X →
               ( ( inv-equiv
-                  ( associative-prod
+                  ( associative-product
                     ( has-decidable-equality X)
                     ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
                     ( type-𝔽 A ↠ X))) ∘e
-                ( ( equiv-prod id-equiv commutative-prod) ∘e
-                  ( ( associative-prod
+                ( ( equiv-product id-equiv commutative-product) ∘e
+                  ( ( associative-product
                       ( has-decidable-equality (map-equiv id-equiv X))
                       ( type-𝔽 A ↠ X)
                       ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
-                  ( ( equiv-prod commutative-prod id-equiv) ∘e
+                  ( ( equiv-product commutative-product id-equiv) ∘e
                     ( ( equiv-add-redundant-prop
                         ( is-prop-type-trunc-Prop)
                         ( λ x →
@@ -223,7 +223,7 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 {l1} A =
                                     is-surjective-precomp-equiv
                                       ( is-surjective-map-surjection (pr1 x))
                                       ( equiv-count count-A)))))))))))) ∘e
-        ( equiv-Surjection-Into-Set-Decidable-Equivalence-Relation
+        ( equiv-Surjection-Into-Set-Decidable-equivalence-relation
           ( type-𝔽 A))))))
 ```
 
@@ -241,10 +241,10 @@ is-finite-Decidable-Relation-𝔽 A =
         ( is-finite-type-𝔽 A)
         ( λ b → is-finite-Decidable-Prop))
 
-is-finite-Decidable-Equivalence-Relation-𝔽 :
+is-finite-Decidable-equivalence-relation-𝔽 :
   {l1 : Level} (A : 𝔽 l1) →
-  is-finite (Decidable-Equivalence-Relation-𝔽 l1 A)
-is-finite-Decidable-Equivalence-Relation-𝔽 A =
+  is-finite (Decidable-equivalence-relation-𝔽 l1 A)
+is-finite-Decidable-equivalence-relation-𝔽 A =
   is-finite-Σ
     ( is-finite-Decidable-Relation-𝔽 A)
     ( is-finite-is-equivalence-Dec-Relation-Prop-𝔽 A)

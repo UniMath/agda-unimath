@@ -86,7 +86,7 @@ module _
     transitive-leq-Large-Preorder (large-preorder-Large-Poset X)
 ```
 
-### The predicate on a large category of being a large poset
+### The predicate on large categories of being a large poset
 
 A [large category](category-theory.large-categories.md) is said to be a **large
 poset** if `hom X Y` is a proposition for every two objects `X` and `Y`.
@@ -131,8 +131,6 @@ module _
     is-antisymmetric-is-large-poset-Large-Category H
 ```
 
-## Properties
-
 ### Small posets from large posets
 
 ```agda
@@ -153,6 +151,8 @@ module _
   is-set-type-Large-Poset : {l : Level} → is-set (type-Large-Poset X l)
   is-set-type-Large-Poset {l} = is-set-type-Poset (poset-Large-Poset l)
 ```
+
+## Properties
 
 ### Large posets are large categories
 

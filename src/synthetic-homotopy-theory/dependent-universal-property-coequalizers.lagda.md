@@ -15,7 +15,6 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-coforks
@@ -203,13 +202,10 @@ module _
       ( f)
       ( g)
       ( e)
-      ( λ {l : Level} →
-        dependent-universal-property-universal-property-pushout
+      ( dependent-universal-property-universal-property-pushout
           ( vertical-map-span-cocone-cofork f g)
           ( horizontal-map-span-cocone-cofork f g)
           ( cocone-codiagonal-cofork f g e)
-          ( λ l →
-            universal-property-pushout-universal-property-coequalizer f g e
-              ( up-coequalizer))
-          ( l))
+          ( universal-property-pushout-universal-property-coequalizer f g e
+            ( up-coequalizer)))
 ```

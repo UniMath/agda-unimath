@@ -27,7 +27,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -126,7 +125,7 @@ is-prop-is-prime-ℕ :
 is-prop-is-prime-ℕ n =
   is-prop-Π
     ( λ x →
-      is-prop-prod
+      is-prop-product
         ( is-prop-Π (λ p → is-set-ℕ x 1))
         ( is-prop-Π (λ p → is-prop-is-proper-divisor-ℕ n x)))
 
@@ -183,7 +182,7 @@ is-decidable-is-prime-easy-ℕ zero-ℕ =
     ( λ H →
       is-not-one-two-ℕ (pr2 H 2 (is-proper-divisor-zero-succ-ℕ 1)))
 is-decidable-is-prime-easy-ℕ (succ-ℕ n) =
-  is-decidable-prod
+  is-decidable-product
     ( is-decidable-neg (is-decidable-is-one-ℕ (succ-ℕ n)))
     ( is-decidable-bounded-Π-ℕ
       ( is-proper-divisor-ℕ (succ-ℕ n))

@@ -24,7 +24,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -179,7 +178,7 @@ equiv-binary-coproduct-Decomposition-subuniverse P A X Y =
       Σ ( type-right-summand-binary-coproduct-Decomposition-subuniverse P A X ≃
           type-right-summand-binary-coproduct-Decomposition-subuniverse P A Y)
         ( λ er →
-          ( map-coprod (map-equiv el) (map-equiv er) ∘
+          ( map-coproduct (map-equiv el) (map-equiv er) ∘
             map-equiv
               ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
                   P A X)) ~
@@ -229,7 +228,7 @@ module _
   pr1 id-equiv-binary-coproduct-Decomposition-subuniverse = id-equiv
   pr1 (pr2 id-equiv-binary-coproduct-Decomposition-subuniverse) = id-equiv
   pr2 (pr2 id-equiv-binary-coproduct-Decomposition-subuniverse) x =
-    id-map-coprod
+    id-map-coproduct
       ( type-left-summand-binary-coproduct-Decomposition-subuniverse P A X)
       ( type-right-summand-binary-coproduct-Decomposition-subuniverse P A X)
       ( map-equiv
@@ -241,19 +240,17 @@ module _
     is-torsorial (equiv-binary-coproduct-Decomposition-subuniverse P A X)
   is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse =
     is-torsorial-Eq-structure
-      ( _)
       ( is-torsorial-equiv-subuniverse P
         ( left-summand-binary-coproduct-Decomposition-subuniverse P A X))
       ( left-summand-binary-coproduct-Decomposition-subuniverse P A X ,
         id-equiv)
       ( is-torsorial-Eq-structure
-        ( _)
         ( is-torsorial-equiv-subuniverse P
           ( right-summand-binary-coproduct-Decomposition-subuniverse P A X))
         ( right-summand-binary-coproduct-Decomposition-subuniverse P A X ,
           id-equiv)
         ( is-torsorial-htpy-equiv
-          ( equiv-coprod id-equiv id-equiv ∘e
+          ( equiv-coproduct id-equiv id-equiv ∘e
             matching-correspondence-binary-coproduct-Decomposition-subuniverse
               P A X)))
 
@@ -303,10 +300,10 @@ module _
       ( _)) ∘e
     ( ( equiv-Σ
         ( _)
-        ( commutative-prod)
+        ( commutative-product)
         ( λ x →
           equiv-postcomp-equiv
-            ( commutative-coprod
+            ( commutative-coproduct
               ( inclusion-subuniverse P (pr1 x))
               ( inclusion-subuniverse P (pr2 x)))
             (inclusion-subuniverse P X))) ∘e
@@ -387,7 +384,7 @@ module _
     ( equiv-tot
       ( λ x →
         ( ( equiv-postcomp-equiv
-            ( commutative-coprod _ _)
+            ( commutative-coproduct _ _)
             ( inclusion-subuniverse P X)) ∘e
         ( ( left-unit-law-Σ-is-contr
             ( is-torsorial-equiv-subuniverse' P
@@ -495,7 +492,7 @@ module _
     ( equiv-tot
       ( λ x →
         ( equiv-postcomp-equiv
-          ( right-unit-law-coprod-is-empty
+          ( right-unit-law-coproduct-is-empty
             ( inclusion-subuniverse P x)
             ( raise-empty l1)
             ( is-empty-raise-empty))
@@ -505,15 +502,12 @@ module _
               ( λ x →
                 eq-pair-Σ
                   ( eq-pair-Σ
-                    ( eq-equiv
-                      ( raise-empty l1)
-                      ( inclusion-subuniverse P (pr1 x))
-                      ( equiv-is-empty is-empty-raise-empty ( pr2 x)))
+                    ( eq-equiv (equiv-is-empty is-empty-raise-empty (pr2 x)))
                     ( eq-is-prop (is-prop-type-Prop (P _))))
                   ( eq-is-prop is-property-is-empty)))
             ( ( raise-empty l1 , C1) , is-empty-raise-empty)) ∘e
           ( ( inv-associative-Σ _ _ _) ∘e
-            ( ( equiv-tot (λ _ → commutative-prod)) ∘e
+            ( ( equiv-tot (λ _ → commutative-product)) ∘e
               ( ( associative-Σ _ _ _))))))) ∘e
     ( ( associative-Σ _ _ _))
 ```

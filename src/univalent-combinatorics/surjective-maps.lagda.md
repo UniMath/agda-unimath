@@ -93,7 +93,7 @@ module _
   is-finite-if-∃-surjection-has-decidable-equality fin-X =
     apply-universal-property-trunc-Prop
       ( fin-X)
-      ( prod-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
+      ( product-Prop (has-decidable-equality-Prop X) (trunc-Prop _))
       ( λ count-X →
         ( has-decidable-equality-count count-X ,
           unit-trunc-Prop
@@ -121,7 +121,7 @@ module _
   is-finite-iff-∃-surjection-has-decidable-equality =
     equiv-prop
       ( is-prop-is-finite X)
-      ( is-prop-prod is-prop-has-decidable-equality is-prop-type-trunc-Prop)
+      ( is-prop-product is-prop-has-decidable-equality is-prop-type-trunc-Prop)
       ( λ fin-X → is-finite-if-∃-surjection-has-decidable-equality fin-X)
       ( λ dec-X-surj →
         ∃-surjection-has-decidable-equality-if-is-finite dec-X-surj)

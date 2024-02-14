@@ -31,7 +31,7 @@ restricted form of the law of excluded middle.
 WLPO : UU lzero
 WLPO =
   (f : ℕ → Fin 2) →
-  type-disj-Prop
+  type-disjunction-Prop
     ( Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
     ( neg-Prop (Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1))))
 ```

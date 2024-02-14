@@ -133,7 +133,7 @@ module _
   map-iso-Group = map-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   preserves-mul-iso-Group :
-    (f : iso-Group) (x y : type-Group G) →
+    (f : iso-Group) {x y : type-Group G} →
     map-iso-Group f (mul-Group G x y) ＝
     mul-Group H (map-iso-Group f x) (map-iso-Group f y)
   preserves-mul-iso-Group =
@@ -153,7 +153,7 @@ module _
     map-inv-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   preserves-mul-inv-iso-Group :
-    (f : iso-Group) (x y : type-Group H) →
+    (f : iso-Group) {x y : type-Group H} →
     map-inv-iso-Group f (mul-Group H x y) ＝
     mul-Group G (map-inv-iso-Group f x) (map-inv-iso-Group f y)
   preserves-mul-inv-iso-Group =
@@ -233,10 +233,8 @@ module _
   abstract
     extensionality-Group' : (H : Group l) → Id G H ≃ iso-Group G H
     extensionality-Group' H =
-      ( extensionality-Semigroup
-        ( semigroup-Group G)
-        ( semigroup-Group H)) ∘e
-      ( equiv-ap-inclusion-subtype is-group-Prop {s = G} {t = H})
+      ( extensionality-Semigroup (semigroup-Group G) (semigroup-Group H)) ∘e
+      ( equiv-ap-inclusion-subtype is-group-prop-Semigroup {s = G} {t = H})
 
   abstract
     is-torsorial-iso-Group : is-torsorial (λ (H : Group l) → iso-Group G H)
@@ -244,7 +242,7 @@ module _
       is-contr-equiv'
         ( Σ (Group l) (Id G))
         ( equiv-tot extensionality-Group')
-        ( is-torsorial-path G)
+        ( is-torsorial-Id G)
 ```
 
 ### Group isomorphisms are stable by composition
@@ -254,8 +252,7 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
   where
 
-  comp-iso-Group :
-    iso-Group H K → iso-Group G H → iso-Group G K
+  comp-iso-Group : iso-Group H K → iso-Group G H → iso-Group G K
   comp-iso-Group =
     comp-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H} {Z = K}
 ```

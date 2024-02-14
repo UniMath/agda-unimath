@@ -78,14 +78,24 @@ module _
     (h : hom-Large-Function-Category z w)
     (g : hom-Large-Function-Category y z)
     (f : hom-Large-Function-Category x y) →
-    ( comp-hom-Large-Function-Category
-      ( comp-hom-Large-Function-Category h g)
-      ( f)) ＝
-    ( comp-hom-Large-Function-Category
-      ( h)
-      ( comp-hom-Large-Function-Category g f))
+    comp-hom-Large-Function-Category (comp-hom-Large-Function-Category h g) f ＝
+    comp-hom-Large-Function-Category h (comp-hom-Large-Function-Category g f)
   associative-comp-hom-Large-Function-Category =
     associative-comp-hom-Π-Large-Category I (λ _ → C)
+
+  inv-associative-comp-hom-Large-Function-Category :
+    {l2 l3 l4 l5 : Level}
+    {x : obj-Large-Function-Category l2}
+    {y : obj-Large-Function-Category l3}
+    {z : obj-Large-Function-Category l4}
+    {w : obj-Large-Function-Category l5} →
+    (h : hom-Large-Function-Category z w)
+    (g : hom-Large-Function-Category y z)
+    (f : hom-Large-Function-Category x y) →
+    comp-hom-Large-Function-Category h (comp-hom-Large-Function-Category g f) ＝
+    comp-hom-Large-Function-Category (comp-hom-Large-Function-Category h g) f
+  inv-associative-comp-hom-Large-Function-Category =
+    inv-associative-comp-hom-Π-Large-Category I (λ _ → C)
 
   id-hom-Large-Function-Category :
     {l2 : Level} {x : obj-Large-Function-Category l2} →

@@ -9,6 +9,7 @@ module foundation.type-arithmetic-dependent-pair-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.singleton-induction
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -20,7 +21,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.singleton-induction
 open import foundation-core.torsorial-type-families
 ```
 
@@ -143,7 +143,7 @@ module _
     (H : (a : A) → is-contr (B a)) →
     map-inv-right-unit-law-Σ-is-contr H ∘ pr1 ~ id
   is-retraction-map-inv-right-unit-law-Σ-is-contr H (a , b) =
-    eq-pair-Σ refl (eq-is-contr (H a))
+    eq-pair-eq-fiber (eq-is-contr (H a))
 
   is-equiv-map-inv-right-unit-law-Σ-is-contr :
     (H : (a : A) → is-contr (B a)) →
@@ -201,13 +201,17 @@ module _
   pr1 associative-Σ = map-associative-Σ
   pr2 associative-Σ = is-equiv-map-associative-Σ
 
+  abstract
+    is-equiv-map-inv-associative-Σ : is-equiv map-inv-associative-Σ
+    is-equiv-map-inv-associative-Σ =
+      is-equiv-is-invertible
+        map-associative-Σ
+        is-retraction-map-inv-associative-Σ
+        is-section-map-inv-associative-Σ
+
   inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (x , y))) ≃ Σ (Σ A B) C
   pr1 inv-associative-Σ = map-inv-associative-Σ
-  pr2 inv-associative-Σ =
-    is-equiv-is-invertible
-      map-associative-Σ
-      is-retraction-map-inv-associative-Σ
-      is-section-map-inv-associative-Σ
+  pr2 inv-associative-Σ = is-equiv-map-inv-associative-Σ
 ```
 
 ### Associativity, second formulation
@@ -319,7 +323,7 @@ module _
     map-equiv interchange-Σ-Σ ((a , b) , x) ＝
     map-equiv interchange-Σ-Σ ((a , b) , y)
   eq-interchange-Σ-Σ-is-contr H =
-    ap (map-equiv interchange-Σ-Σ) (ap (pair _) (eq-is-contr H))
+    ap (map-equiv interchange-Σ-Σ) (eq-pair-eq-fiber (eq-is-contr H))
 ```
 
 ### Swapping the order of quantification in a Σ-type, on the left
@@ -400,16 +404,16 @@ module _
 ### Distributive laws of cartesian products over Σ
 
 ```agda
-left-distributive-prod-Σ :
+left-distributive-product-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
   (A × (Σ B C)) ≃ Σ B (λ b → A × (C b))
-left-distributive-prod-Σ =
+left-distributive-product-Σ =
   equiv-left-swap-Σ
 
-right-distributive-prod-Σ :
+right-distributive-product-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
   ((Σ A B) × C) ≃ Σ A (λ a → B a × C)
-right-distributive-prod-Σ {A} =
+right-distributive-product-Σ {A} =
   associative-Σ _ _ _
 ```
 

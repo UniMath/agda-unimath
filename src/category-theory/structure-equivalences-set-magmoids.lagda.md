@@ -10,28 +10,16 @@ module category-theory.structure-equivalences-set-magmoids where
 open import category-theory.functors-set-magmoids
 open import category-theory.set-magmoids
 
-open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
-open import foundation.sets
-open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universe-levels
 ```
 
@@ -67,7 +55,7 @@ module _
   is-prop-is-structure-equiv-functor-Set-Magmoid :
     is-prop is-structure-equiv-functor-Set-Magmoid
   is-prop-is-structure-equiv-functor-Set-Magmoid =
-    is-prop-prod
+    is-prop-product
       ( is-property-is-equiv (obj-functor-Set-Magmoid A B F))
       ( is-prop-iterated-implicit-Π 2
         ( λ x y → is-property-is-equiv (hom-functor-Set-Magmoid A B F {x} {y})))
@@ -177,14 +165,14 @@ equivalences of sets are torsorial.
     is-contr-equiv'
       ( Σ (Set-Magmoid l1 l2) (componentwise-structure-equiv-Set-Magmoid A))
       (equiv-tot (compute-structure-equiv-Set-Magmoid A))
-      ( is-torsorial-Eq-structure _
+      ( is-torsorial-Eq-structure
         ( is-torsorial-equiv (obj-Set-Magmoid A))
         ( obj-Set-Magmoid A , id-equiv)
-        ( is-torsorial-Eq-structure _
+        ( is-torsorial-Eq-structure
           ( {!   !})
           ( hom-set-Set-Magmoid A , λ {x} {y} → id-equiv)
-          ( is-torsorial-Eq-implicit-Π _
-            λ x → is-torsorial-Eq-implicit-Π _
-              λ y → is-torsorial-Eq-implicit-Π _
+          ( is-torsorial-Eq-implicit-Π
+            λ x → is-torsorial-Eq-implicit-Π
+              λ y → is-torsorial-Eq-implicit-Π
                 λ z → {!  z !})))
 ```

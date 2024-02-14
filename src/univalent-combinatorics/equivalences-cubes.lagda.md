@@ -9,7 +9,6 @@ module univalent-combinatorics.equivalences-cubes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
@@ -71,15 +70,11 @@ is-torsorial-equiv-cube :
   (k : ℕ) (X : cube k) → is-torsorial (equiv-cube k X)
 is-torsorial-equiv-cube k X =
   is-torsorial-Eq-structure
-    ( λ D (A : type-UU-Fin k D → UU-Fin lzero 2)
-          (e : equiv-UU-Fin k (dim-cube-UU-Fin k X) D) →
-          (i : dim-cube k X) → axis-cube k X i ≃ pr1 (A (map-equiv e i)))
     ( is-torsorial-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X))
     ( pair
       ( dim-cube-UU-Fin k X)
       ( id-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X)))
     ( is-torsorial-Eq-Π
-      ( λ i (A : UU-Fin lzero 2) → equiv-UU-Fin 2 (axis-cube-UU-2 k X i) A)
       ( λ i → is-torsorial-equiv-UU-Fin {k = 2} (axis-cube-UU-2 k X i)))
 
 is-equiv-equiv-eq-cube :
@@ -123,14 +118,10 @@ is-torsorial-htpy-equiv-cube :
   is-torsorial (htpy-equiv-cube k X Y e)
 is-torsorial-htpy-equiv-cube k X Y e =
   is-torsorial-Eq-structure
-    ( λ α β H →
-      ( d : dim-cube k X) →
-      ( tr (axis-cube k Y) (H d) ∘ map-axis-equiv-cube k X Y e d) ~
-      ( map-equiv (β d)))
+
     ( is-torsorial-htpy-equiv (dim-equiv-cube k X Y e))
     ( pair (dim-equiv-cube k X Y e) refl-htpy)
     ( is-torsorial-Eq-Π
-      ( λ d β → htpy-equiv (axis-equiv-cube k X Y e d) β)
       ( λ d → is-torsorial-htpy-equiv (axis-equiv-cube k X Y e d)))
 
 is-equiv-htpy-eq-equiv-cube :

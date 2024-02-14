@@ -7,6 +7,7 @@ module structured-types.morphisms-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -15,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import group-theory.homomorphisms-semigroups
 
@@ -41,7 +43,7 @@ preserves-left-unit-law-mul :
   (ν : B → B → B) {eB : B} → ((y : B) → Id (ν eB y) y) →
   (f : A → B) → Id (f eA) eB → preserves-mul μ ν f → UU (l1 ⊔ l2)
 preserves-left-unit-law-mul {A = A} {B} μ {eA} lA ν {eB} lB f p μf =
-  (x : A) → Id (ap f (lA x)) (μf eA x ∙ (ap (λ t → ν t (f x)) p ∙ lB (f x)))
+  (x : A) → Id (ap f (lA x)) (μf ∙ (ap (λ t → ν t (f x)) p ∙ lB (f x)))
 
 preserves-right-unit-law-mul :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -49,7 +51,7 @@ preserves-right-unit-law-mul :
   (ν : B → B → B) {eB : B} → ((y : B) → Id (ν y eB) y) →
   (f : A → B) → Id (f eA) eB → preserves-mul μ ν f → UU (l1 ⊔ l2)
 preserves-right-unit-law-mul {A = A} {B} μ {eA} rA ν {eB} rB f p μf =
-  (x : A) → Id (ap f (rA x)) (μf x eA ∙ (ap (ν (f x)) p ∙ rB (f x)))
+  (x : A) → Id (ap f (rA x)) (μf ∙ (ap (ν (f x)) p ∙ rB (f x)))
 
 preserves-coh-unit-laws-mul :
   {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
@@ -76,7 +78,7 @@ preserves-coh-unit-laws-mul :
 preserves-coh-unit-laws-mul M
   (pair (pair N ._) μ)
   (pair f refl) μf lf rf =
-  Id (ap (ap f) cM ∙ rf eM) (lf eM ∙ ap (concat (μf eM eM) (f eM)) cN)
+  Id (ap² f cM ∙ rf eM) (lf eM ∙ ap (concat μf (f eM)) cN)
   where
   eM = unit-H-Space M
   cM = coh-unit-laws-mul-H-Space M
@@ -111,65 +113,65 @@ preserves-coh-unit-laws-mul' :
 preserves-coh-unit-laws-mul' M N f μf lf rf =
   Id
     { A =
-      Id (ap (pr1 f) (lM eM) ∙ ef) ((μf eM eM ∙ ap-binary μN ef ef) ∙ rN eN)}
+      Id (ap (pr1 f) (lM eM) ∙ ef) ((μf ∙ ap-binary μN ef ef) ∙ rN eN)}
     ( ( horizontal-concat-Id² (lf eM) (inv (ap-id ef))) ∙
-      ( ( ap
-          ( _∙ (ap id ef))
+      ( ( right-whisker-concat
           ( inv
             ( assoc
-              ( μf eM eM)
+              ( μf)
               ( ap (mul-H-Space' N (pr1 f eM)) ef)
-              ( lN (pr1 f eM))))) ∙
+              ( lN (pr1 f eM))))
+          ( ap id ef)) ∙
         ( ( assoc
-            ( μf eM eM ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
+            ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
             ( lN (pr1 f eM))
             ( ap id ef)) ∙
-          ( ( ap
-              ( ( μf eM eM ∙ ap (mul-H-Space' N (pr1 f eM)) ef) ∙_)
+          ( ( left-whisker-concat
+              ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
               ( nat-htpy lN ef)) ∙
             ( ( inv
                 ( assoc
-                  ( μf eM eM ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
+                  ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
                   ( ap (μN eN) ef)
                   ( lN eN))) ∙
               ( ( ap
                   ( λ t → t ∙ lN eN)
                   ( assoc
-                    ( μf eM eM)
+                    ( μf)
                     ( ap (mul-H-Space' N (pr1 f eM)) ef)
                     ( ap (μN eN) ef))) ∙
                 ( horizontal-concat-Id²
-                  ( ap
-                    ( μf eM eM ∙_)
+                  ( left-whisker-concat
+                    ( μf)
                     ( inv (triangle-ap-binary μN ef ef)))
                   ( cN))))))))
-    ( ( ap (_∙ ef) (ap (ap (pr1 f)) cM)) ∙
+    ( ( right-whisker-concat (ap² (pr1 f) cM) ef) ∙
       ( ( horizontal-concat-Id² (rf eM) (inv (ap-id ef))) ∙
-        ( ( ap
-            ( _∙ ap id ef)
+        ( ( right-whisker-concat
             ( inv
               ( assoc
-                ( μf eM eM) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))) ∙
+                ( μf) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))
+            ( ap id ef)) ∙
           ( ( assoc
-              ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
+              ( μf ∙ ap (μN (pr1 f eM)) ef)
               ( rN (pr1 f eM))
               ( ap id ef)) ∙
-            ( ( ap
-                ( ( μf eM eM ∙ ap (μN (pr1 f eM)) ef) ∙_)
+            ( ( left-whisker-concat
+                ( μf ∙ ap (μN (pr1 f eM)) ef)
                 ( nat-htpy rN ef)) ∙
               ( ( inv
                   ( assoc
-                    ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
+                    ( μf ∙ ap (μN (pr1 f eM)) ef)
                     ( ap (mul-H-Space' N eN) ef)
                     ( rN eN))) ∙
                 ( ap
                   ( λ t → t ∙ rN eN)
                   ( ( assoc
-                      ( μf eM eM)
+                      ( μf)
                       ( ap (μN (pr1 f eM)) ef)
                       ( ap (mul-H-Space' N eN) ef)) ∙
-                    ( ap
-                      ( μf eM eM ∙_)
+                    ( left-whisker-concat
+                      ( μf)
                       ( inv (triangle-ap-binary' μN ef ef)))))))))))
   where
   eM = unit-H-Space M
@@ -219,19 +221,5 @@ preserves-mul-htpy :
   {f g : A → B} (μf : preserves-mul μA μB f) (μg : preserves-mul μA μB g) →
   (f ~ g) → UU (l1 ⊔ l2)
 preserves-mul-htpy {A = A} μA μB μf μg H =
-  (a b : A) → Id (μf a b ∙ ap-binary μB (H a) (H b)) (H (μA a b) ∙ μg a b)
-
-{-
-preserves-left-unit-law-mul-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (μA : A → A → A) {eA : A} (lA : (a : A) → Id (μA eA a) a)
-  (μB : B → B → B) {eB : B} (lB : (b : B) → Id (μB eB b) b)
-  {f : A → B} {pf : Id (f eA) eB} (μf : preserves-mul μA μB f)
-  (lf : preserves-left-unit-law-mul μA lA μB lB f pf μf)
-  {g : A → B} {pg : Id (g eA) eB} (μg : preserves-mul μA μB g)
-  (lg : preserves-left-unit-law-mul μA lA μB lB g pg μg) →
-  {H : f ~ g} (μH : preserves-mul-htpy μA μB μf μg H) (pH : Id pf (H eA ∙ pg)) →
-  UU (l1 ⊔ l2)
-preserves-left-unit-law-mul-htpy μA lA μB lB μf lf μg lg μH pH = {!!}
--}
+  (a b : A) → Id (μf ∙ ap-binary μB (H a) (H b)) (H (μA a b) ∙ μg)
 ```

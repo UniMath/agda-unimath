@@ -53,9 +53,9 @@ module _
   {l : Level} (X : Semigroup l)
   where
 
-  is-join-semilattice-Semigroup-Prop : Prop l
-  is-join-semilattice-Semigroup-Prop =
-    prod-Prop
+  is-join-semilattice-prop-Semigroup : Prop l
+  is-join-semilattice-prop-Semigroup =
+    product-Prop
       ( Π-Prop
         ( type-Semigroup X)
         ( λ x →
@@ -76,19 +76,19 @@ module _
 
   is-join-semilattice-Semigroup : UU l
   is-join-semilattice-Semigroup =
-    type-Prop is-join-semilattice-Semigroup-Prop
+    type-Prop is-join-semilattice-prop-Semigroup
 
   is-prop-is-join-semilattice-Semigroup :
     is-prop is-join-semilattice-Semigroup
   is-prop-is-join-semilattice-Semigroup =
-    is-prop-type-Prop is-join-semilattice-Semigroup-Prop
+    is-prop-type-Prop is-join-semilattice-prop-Semigroup
 ```
 
 ### The algebraic definition of join-semilattices
 
 ```agda
 Join-Semilattice : (l : Level) → UU (lsuc l)
-Join-Semilattice l = type-subtype is-join-semilattice-Semigroup-Prop
+Join-Semilattice l = type-subtype is-join-semilattice-prop-Semigroup
 
 module _
   {l : Level} (X : Join-Semilattice l)

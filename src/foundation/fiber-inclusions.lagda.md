@@ -8,7 +8,7 @@ module foundation.fiber-inclusions where
 
 ```agda
 open import foundation.0-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.fibers-of-maps
@@ -146,7 +146,7 @@ module _
 
   cone-fiber-fam : cone (pr1 {B = B}) (point a) (B a)
   pr1 cone-fiber-fam = fiber-inclusion B a
-  pr1 (pr2 cone-fiber-fam) = terminal-map
+  pr1 (pr2 cone-fiber-fam) = terminal-map (B a)
   pr2 (pr2 cone-fiber-fam) = refl-htpy
 
   abstract

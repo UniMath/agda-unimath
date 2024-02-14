@@ -36,7 +36,7 @@ module _
     ( left-unit-law-Π ( λ _ → B a)) ∘e
     ( equiv-Π
       ( λ _ → B a)
-      ( terminal-map , is-equiv-terminal-map-is-contr C)
+      ( terminal-map A , is-equiv-terminal-map-is-contr C)
       ( λ a → equiv-eq (ap B ( eq-is-contr C))))
 ```
 

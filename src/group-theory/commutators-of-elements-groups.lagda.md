@@ -14,6 +14,7 @@ open import foundation.universe-levels
 open import group-theory.commuting-elements-groups
 open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 ```
 
 </details>
@@ -103,6 +104,34 @@ module _
       ( distributive-conjugation-mul-Group G u x y)
       ( ( conjugation-inv-Group G u _) ∙
         ( ap (inv-Group G) (distributive-conjugation-mul-Group G u y x))))
+```
+
+### Group homomorphisms preserve commutators
+
+**Proof:** Consider a [group homomorphism](group-theory.homomorphisms-groups.md)
+`f : G → H` and two elements `x y : G`. Then we calculate
+
+```text
+  f([x,y]) ≐ f((xy)(yx)⁻¹)
+           = f(xy)f(yx)⁻¹
+           = (f(x)f(y))(f(y)f(x))⁻¹
+           ≐ [f(x),f(y)].
+```
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
+
+  preserves-commutator-hom-Group :
+    {x y : type-Group G} →
+    map-hom-Group G H f (commutator-Group G x y) ＝
+    commutator-Group H (map-hom-Group G H f x) (map-hom-Group G H f y)
+  preserves-commutator-hom-Group =
+    ( preserves-right-div-hom-Group G H f) ∙
+    ( ap-right-div-Group H
+      ( preserves-mul-hom-Group G H f)
+      ( preserves-mul-hom-Group G H f))
 ```
 
 ## External links

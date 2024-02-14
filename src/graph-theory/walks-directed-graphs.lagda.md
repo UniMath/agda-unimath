@@ -407,7 +407,7 @@ module _
     is-contr-equiv'
       ( Σ (vertex-Directed-Graph G) (λ y → y ＝ x))
       ( equiv-tot (λ y → compute-raise l2 (y ＝ x)))
-      ( is-torsorial-path' x)
+      ( is-torsorial-Id' x)
 ```
 
 ### `cons-walk e w ≠ refl-walk`
@@ -568,7 +568,7 @@ module _
           ( vertex-hom-Directed-Graph G H f _)))
       ( vertex-hom-Directed-Graph G H f)
       ( λ z →
-        map-prod
+        map-product
           ( edge-hom-Directed-Graph G H f)
           ( walk-of-length-hom-Directed-Graph n))
 
@@ -611,7 +611,7 @@ equiv-walk-of-length-equiv-Directed-Graph G H f (succ-ℕ n) =
         ( vertex-equiv-Directed-Graph G H f _)))
     ( equiv-vertex-equiv-Directed-Graph G H f)
     ( λ z →
-      equiv-prod
+      equiv-product
         ( equiv-edge-equiv-Directed-Graph G H f _ _)
         ( equiv-walk-of-length-equiv-Directed-Graph G H f n))
 ```

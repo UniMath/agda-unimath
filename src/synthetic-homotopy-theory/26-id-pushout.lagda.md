@@ -10,8 +10,8 @@ module synthetic-homotopy-theory.26-id-pushout where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -22,16 +22,18 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.precomposition-dependent-functions
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -103,27 +105,14 @@ module hom-Fam-pushout
     ( h : hom-Fam-pushout) → is-torsorial (htpy-hom-Fam-pushout h)
   is-torsorial-htpy-hom-Fam-pushout h =
     is-torsorial-Eq-structure
-      ( λ kA kB-ke (HA : (x : A) → (pr1 h x) ~ (kA x)) →
-          Σ ( (y : B) → (pr1 (pr2 h) y) ~ (pr1 kB-ke y)) (λ HB →
-            ( s : S) →
-              ( ((HB (g s)) ·r (map-equiv (PS s))) ∙h (pr2 kB-ke s)) ~
-              ( (pr2 (pr2 h) s) ∙h ((map-equiv (QS s)) ·l (HA (f s))))))
       ( is-torsorial-Eq-Π
-        ( λ x τ → (pr1 h x) ~ τ)
         ( λ x → is-torsorial-htpy (pr1 h x)))
       ( pair (pr1 h) (λ x → refl-htpy))
       ( is-torsorial-Eq-structure
-        ( λ kB ke (HB : (y : B) → (pr1 (pr2 h) y) ~ kB y) →
-          (s : S) →
-            ( ((HB (g s)) ·r (map-equiv (PS s))) ∙h (ke s)) ~
-            ( (pr2 (pr2 h) s) ∙h ((map-equiv (QS s)) ·l refl-htpy)))
         ( is-torsorial-Eq-Π
-          ( λ y τ → (pr1 (pr2 h) y) ~ τ)
           ( λ y → is-torsorial-htpy (pr1 (pr2 h) y)))
         ( pair (pr1 (pr2 h)) (λ y → refl-htpy))
         ( is-torsorial-Eq-Π
-          ( λ (s : S) he →
-            (he ~ (pr2 (pr2 h) s ∙h (map-equiv (QS s) ·l refl-htpy))))
           ( λ s → is-torsorial-htpy'
             ((pr2 (pr2 h) s) ∙h ((map-equiv (QS s)) ·l refl-htpy)))))
 
@@ -258,7 +247,7 @@ triangle-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q h =
 is-equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l : Level) → universal-property-pushout l f g c)
+  ( up-X : {l : Level} → universal-property-pushout l f g c)
   ( P : X → UU l5) (Q : X → UU l6) →
   is-equiv (hom-Fam-pushout-map c P Q)
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
@@ -268,13 +257,13 @@ is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
     ( dependent-cocone-map f g c (λ x → P x → Q x))
     ( triangle-hom-Fam-pushout-dependent-cocone c P Q)
     ( dependent-universal-property-universal-property-pushout
-      f g c up-X (l5 ⊔ l6) (λ x → P x → Q x))
+      f g c up-X (λ x → P x → Q x))
     ( is-equiv-hom-Fam-pushout-dependent-cocone c P Q)
 
 equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l : Level) → universal-property-pushout l f g c)
+  ( up-X : {l : Level} → universal-property-pushout l f g c)
   ( P : X → UU l5) (Q : X → UU l6) →
   ( (x : X) → P x → Q x) ≃
   hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
@@ -319,7 +308,7 @@ triangle-is-universal-id-Fam-pushout' c a Q = refl-htpy
 is-universal-id-Fam-pushout' :
   { l l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
-  ( up-X : (l' : Level) → universal-property-pushout l' f g c) (a : A) →
+  ( up-X : {l' : Level} → universal-property-pushout l' f g c) (a : A) →
   ( Q : (x : X) → UU l) →
   is-equiv
     ( ev-point-hom-Fam-pushout
@@ -339,16 +328,16 @@ is-universal-id-Fam-pushout' c up-X a Q =
     ( is-equiv-hom-Fam-pushout-map c up-X (Id (pr1 c a)) Q)
 
 is-universal-id-Fam-pushout :
-  { l1 l2 l3 l4 : Level} (l : Level)
+  { l1 l2 l3 l4 l : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
-  ( up-X : (l' : Level) → universal-property-pushout l' f g c) (a : A) →
+  ( up-X : {l' : Level} → universal-property-pushout l' f g c) (a : A) →
   is-universal-Fam-pushout l (desc-fam c (Id (pr1 c a))) a refl
-is-universal-id-Fam-pushout l {S = S} {A} {B} {X} {f} {g} c up-X a Q =
+is-universal-id-Fam-pushout {S = S} {A} {B} {X} {f} {g} c up-X a Q =
   map-inv-equiv
     ( equiv-precomp-Π
       ( equiv-desc-fam c up-X)
-      ( λ (Q : Fam-pushout l f g) →
+      ( λ (Q : Fam-pushout _ f g) →
         is-equiv (ev-point-hom-Fam-pushout
           ( desc-fam c (Id (pr1 c a))) Q refl)))
     ( is-universal-id-Fam-pushout' c up-X a)

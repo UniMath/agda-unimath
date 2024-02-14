@@ -19,13 +19,13 @@ open import foundation.small-universes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 
 open import trees.multisets
 open import trees.small-multisets
@@ -129,13 +129,13 @@ paradox-Russell {l} H =
     β = ( equiv-precomp α empty) ∘e
         ( ( left-unit-law-Σ-is-contr
             { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
-            ( is-torsorial-path' R')
+            ( is-torsorial-Id' R')
             ( pair R' refl)) ∘e
           ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot
                 ( λ t →
-                  ( commutative-prod) ∘e
-                  ( equiv-prod
+                  ( commutative-product) ∘e
+                  ( equiv-product
                     ( id-equiv)
                     ( inv-equiv
                       ( ( equiv-concat'

@@ -5,7 +5,7 @@
 ### Quick setup
 
 To work or experiment with the `agda-unimath` library on your machine, you will
-need to have `agda` version 2.6.3 installed, and a suitable editor such as
+need to have `agda` version 2.6.4 installed, and a suitable editor such as
 [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/). The following instructions
 will help you on your way right away:
@@ -122,7 +122,7 @@ working branches when necessary.
 
 ## Installing Agda {#installing-agda}
 
-The `agda-unimath` library is built and verified with Agda 2.6.3, and we provide
+The `agda-unimath` library is built and verified with Agda 2.6.4, and we provide
 two methods for installation: with or without the package manager
 [Nix](https://nixos.org/). Nix streamlines the installation of Agda and its
 dependencies, providing a consistent and reproducible environment for the
@@ -130,7 +130,7 @@ library across different systems.
 
 ### Without Nix
 
-To install Agda 2.6.3 without Nix, follow the
+To install Agda 2.6.4 without Nix, follow the
 [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html)
 provided on the Agda documentation page.
 
@@ -259,7 +259,7 @@ To insert these symbols in the editor, follow these steps:
 2. When the symbol appears as a greyed-out character in your editor, press `TAB`
    to insert it.
 
-- `＝`: Type `Id` or `equals`
+- `＝`: Type `Id`
 - `ょ`: Type `yoneda`
 - `⧄`: Type `diagonal` or `lifting`
 

@@ -10,8 +10,8 @@ module species.exponentials-cauchy-series-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.sigma-closed-subuniverses
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
@@ -72,7 +72,7 @@ module _
       ( S)
       ( X)
   equiv-exponential-cauchy-series-composition-unit-species-subuniverse =
-    equiv-tot (λ F → left-unit-law-prod-is-contr is-contr-unit)
+    equiv-tot (λ F → left-unit-law-product-is-contr is-contr-unit)
 ```
 
 ### The Cauchy series associated to the Cauchy exponential of `S` is equal to the exponential of its Cauchy series

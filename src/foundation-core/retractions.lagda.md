@@ -10,11 +10,11 @@ module foundation-core.retractions where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -68,10 +68,10 @@ i.e., that the concatenation
   x ========= r (i x) =============== r (i y) ===== y
 ```
 
-is identical to `p : x ＝ y` for all `p : x ＝ y`, we simply proceed by
-identification elimination. Then it suffices to show that `(H x)⁻¹ ∙ (H x)` is
-identical to `refl`, which is indeed the case by the left inverse law of
-concatenation of identifications.
+is identical to `p : x ＝ y` for all `p : x ＝ y`, we proceed by identification
+elimination. Then it suffices to show that `(H x)⁻¹ ∙ (H x)` is identical to
+`refl`, which is indeed the case by the left inverse law of concatenation of
+identifications.
 
 ```agda
 module _

@@ -98,10 +98,10 @@ abstract
         ( (x : A) → Σ (B x) (λ b → f x ＝ b))
         ( ( λ t x → (pr1 t x , pr2 t x)) ,
           ( λ t → (pr1 ∘ t , pr2 ∘ t)) ,
-          ( λ t → eq-pair-Σ refl refl))
+          ( λ t → eq-pair-eq-fiber refl))
         ( weak-funext A
           ( λ x → Σ (B x) (λ b → f x ＝ b))
-          ( λ x → is-torsorial-path (f x))))
+          ( λ x → is-torsorial-Id (f x))))
       ( λ g → htpy-eq {g = g})
 ```
 

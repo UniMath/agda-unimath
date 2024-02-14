@@ -14,8 +14,8 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -160,20 +160,20 @@ module _
                     P X d)))))
           ( ( equiv-Σ
               ( _)
-              ( associative-prod _ _ _ ∘e commutative-prod)
+              ( associative-product _ _ _ ∘e commutative-product)
               ( λ x →
                 equiv-postcomp-equiv
-                  ( ( ( associative-coprod) ∘e
-                    ( ( commutative-coprod _ _))))
+                  ( ( ( associative-coproduct) ∘e
+                    ( ( commutative-coproduct _ _))))
                   ( inclusion-subuniverse P X)) ∘e
               equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
                 P X C2))
-          ( λ d → associative-prod _ _ _) ∘e
+          ( λ d → associative-product _ _ _) ∘e
         ( ( inv-associative-Σ
             ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 z))
             ( _)) ∘e
-          ( ( equiv-tot λ d → right-distributive-prod-Σ))))
+          ( ( equiv-tot λ d → right-distributive-product-Σ))))
 
     equiv-right-iterated-cauchy-product-species-subuniverse :
       type-cauchy-product-species-subuniverse P Q
@@ -203,7 +203,7 @@ module _
             ( binary-coproduct-Decomposition-subuniverse P X)
             ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 (pr2 z)))
             ( _)) ∘e
-          ( ( equiv-tot (λ d → left-distributive-prod-Σ)))))
+          ( ( equiv-tot (λ d → left-distributive-product-Σ)))))
 
     equiv-associative-cauchy-product-species-subuniverse :
       type-cauchy-product-species-subuniverse P Q
@@ -267,7 +267,7 @@ module _
         inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
           ( S (right-summand-binary-coproduct-Decomposition-subuniverse P X d)))
       ( equiv-commutative-binary-coproduct-Decomposition-subuniverse P X)
-      ( λ _ → commutative-prod)
+      ( λ _ → commutative-product)
 
   commutative-cauchy-product-species-subuniverse :
     cauchy-product-species-subuniverse P Q C1 S T ＝
@@ -345,7 +345,7 @@ module _
                     P
                     X
                     (pr1 z))))) ∘e
-          ( ( equiv-tot (λ _ → commutative-prod))))))
+          ( ( equiv-tot (λ _ → commutative-product))))))
 
   equiv-left-unit-law-cauchy-product-species-subuniverse :
     (X : type-subuniverse P) →
@@ -470,11 +470,8 @@ module _
                         ( is-in-subuniverse P)
                         ( inv
                           ( eq-equiv
-                            ( X)
-                            ( left-summand-binary-coproduct-Decomposition d +
-                              right-summand-binary-coproduct-Decomposition d)
                             ( matching-correspondence-binary-coproduct-Decomposition
-                                d)))
+                              ( d))))
                         ( C2
                           ( pr1 p)
                           ( pr2 p))))))) ∘e

@@ -57,20 +57,18 @@ compute-ind-is-singleton a H B = pr2 (H B)
 ### Contractible types satisfy singleton induction
 
 ```agda
-abstract
-  ind-singleton :
-    {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
-    (B : A → UU l2) → B a → (x : A) → B x
-  ind-singleton a is-contr-A B b x =
-    tr B (inv (contraction is-contr-A a) ∙ contraction is-contr-A x) b
+ind-singleton :
+  {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
+  (B : A → UU l2) → B a → (x : A) → B x
+ind-singleton a is-contr-A B b x =
+  tr B (inv (contraction is-contr-A a) ∙ contraction is-contr-A x) b
 
-abstract
-  compute-ind-singleton :
-    {l1 l2 : Level} {A : UU l1}
-    (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
-    (ev-point a {B} ∘ ind-singleton a is-contr-A B) ~ id
-  compute-ind-singleton a is-contr-A B b =
-    ap (λ p → tr B p b) (left-inv (contraction is-contr-A a))
+compute-ind-singleton :
+  {l1 l2 : Level} {A : UU l1}
+  (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
+  (ev-point a {B} ∘ ind-singleton a is-contr-A B) ~ id
+compute-ind-singleton a is-contr-A B b =
+  ap (λ p → tr B p b) (left-inv (contraction is-contr-A a))
 ```
 
 ### A type satisfies singleton induction if and only if it is contractible
@@ -114,3 +112,4 @@ abstract
 
 - The equivalent principle of
   [subsingleton induction](foundation.subsingleton-induction.md)
+- [Singleton subsets](foundation.singleton-subtypes.md)

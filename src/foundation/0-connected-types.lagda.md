@@ -19,6 +19,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
+open import foundation.universal-property-contractible-types
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
@@ -27,6 +28,7 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.precomposition-functions
 open import foundation-core.propositions
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
@@ -189,8 +191,8 @@ module _
   is-0-connected-product =
     is-contr-equiv
       ( type-trunc-Set X × type-trunc-Set Y)
-      ( equiv-distributive-trunc-prod-Set X Y)
-      ( is-contr-prod p1 p2)
+      ( equiv-distributive-trunc-product-Set X Y)
+      ( is-contr-product p1 p2)
 ```
 
 ### A contractible type is `0`-connected

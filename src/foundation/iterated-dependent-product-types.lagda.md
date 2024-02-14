@@ -55,12 +55,13 @@ of universe level `l₀ ⊔ l₁ ⊔ l₂ ⊔ l₃`.
 iterated-Π :
   {l : Level} {n : ℕ} → telescope l n → UU l
 iterated-Π (base-telescope A) = A
-iterated-Π (cons-telescope A) = (x : _) → iterated-Π (A x)
+iterated-Π (cons-telescope {X = X} A) = (x : X) → iterated-Π (A x)
 
 iterated-implicit-Π :
   {l : Level} {n : ℕ} → telescope l n → UU l
 iterated-implicit-Π (base-telescope A) = A
-iterated-implicit-Π (cons-telescope A) = {x : _} → iterated-implicit-Π (A x)
+iterated-implicit-Π (cons-telescope {X = X} A) =
+  {x : X} → iterated-implicit-Π (A x)
 ```
 
 ### Iterated sections of type families
@@ -115,7 +116,7 @@ section-iterated-Π-section-Π-section-codomain :
     ((x : A) → P (B x)) → P ((x : A) → B x)) →
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π P A → P (iterated-Π A)
-section-iterated-Π-section-Π-section-codomain P f ._ {{base-telescope A}} H =
+section-iterated-Π-section-Π-section-codomain P f .0 {{base-telescope A}} H =
   H
 section-iterated-Π-section-Π-section-codomain P f ._ {{cons-telescope A}} H =
   f (λ x → section-iterated-Π-section-Π-section-codomain P f _ {{A x}} (H x))
@@ -127,7 +128,7 @@ section-iterated-implicit-Π-section-Π-section-codomain :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π P A → P (iterated-implicit-Π A)
 section-iterated-implicit-Π-section-Π-section-codomain
-  P f ._ {{base-telescope A}} H =
+  P f .0 {{base-telescope A}} H =
   H
 section-iterated-implicit-Π-section-Π-section-codomain
   P f ._ {{cons-telescope A}} H =
@@ -185,7 +186,9 @@ is-prop-iterated-implicit-Π :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π is-prop A → is-prop (iterated-implicit-Π A)
 is-prop-iterated-implicit-Π =
-  section-iterated-implicit-Π-section-Π-section-codomain is-prop is-prop-Π'
+  section-iterated-implicit-Π-section-Π-section-codomain
+    ( is-prop)
+    ( is-prop-implicit-Π)
 ```
 
 ### Iterated products of truncated types are truncated

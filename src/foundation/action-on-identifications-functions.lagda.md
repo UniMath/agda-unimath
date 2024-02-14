@@ -52,6 +52,12 @@ ap-comp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
   (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
 ap-comp g f refl = refl
+
+ap-comp-assoc :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (h : C → D) (g : B → C) (f : A → B) {x y : A} (p : x ＝ y) →
+  ap (h ∘ g) (ap f p) ＝ ap h (ap (g ∘ f) p)
+ap-comp-assoc h g f refl = refl
 ```
 
 ### The action on identifications of any map preserves `refl`
@@ -66,16 +72,18 @@ ap-refl f x = refl
 ### The action on identifications of any map preserves concatenation of identifications
 
 ```agda
-ap-concat :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) → (ap f (p ∙ q)) ＝ ((ap f p) ∙ (ap f q))
-ap-concat f refl q = refl
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
-ap-concat-eq :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z)
-  (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
-ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
+  ap-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f (p ∙ q) ＝ ap f p ∙ ap f q
+  ap-concat refl q = refl
+
+  compute-right-refl-ap-concat :
+    {x y : A} (p : x ＝ y) →
+    ap-concat p refl ＝ ap (ap f) right-unit ∙ inv right-unit
+  compute-right-refl-ap-concat refl = refl
 ```
 
 ### The action on identifications of any map preserves inverses
@@ -96,19 +104,8 @@ ap-const :
 ap-const b refl = refl
 ```
 
-### The action on identifications of concatenating by `refl` on the right
+## See also
 
-Note that `_∙ refl` is only homotopic to the identity function. Therefore we
-will compute here the action on identifications of the map `_∙ refl`.
-
-```agda
-inv-ap-refl-concat :
-  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
-  (right-unit ∙ (r ∙ inv right-unit)) ＝ (ap (_∙ refl) r)
-inv-ap-refl-concat refl = right-inv right-unit
-
-ap-refl-concat :
-  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
-  (ap (_∙ refl) r) ＝ (right-unit ∙ (r ∙ inv right-unit))
-ap-refl-concat = inv ∘ inv-ap-refl-concat
-```
+- [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
+- [Action of binary functions on identifications](foundation.action-on-identifications-binary-functions.md).
+- [Action of dependent functions on identifications](foundation.action-on-identifications-dependent-functions.md).

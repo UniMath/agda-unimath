@@ -13,19 +13,18 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
+open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.equality-finite-types
@@ -146,7 +145,6 @@ module _
     (x : unordered-tuple n A) → is-torsorial (Eq-unordered-tuple x)
   is-torsorial-Eq-unordered-tuple x =
     is-torsorial-Eq-structure
-      ( λ i f e → element-unordered-tuple n x ~ (f ∘ map-equiv e))
       ( is-torsorial-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n x))
       ( pair (type-unordered-tuple-UU-Fin n x) id-equiv)
       ( is-torsorial-htpy (element-unordered-tuple n x))

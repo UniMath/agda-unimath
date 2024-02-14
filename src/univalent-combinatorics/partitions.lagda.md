@@ -133,11 +133,11 @@ module _
   transitive-rel-partition-𝔽 : is-transitive rel-partition-𝔽
   transitive-rel-partition-𝔽 x y z r s = s ∙ r
 
-  eq-rel-partition-𝔽 : Equivalence-Relation l2 (type-𝔽 X)
-  pr1 eq-rel-partition-𝔽 = rel-partition-𝔽-Prop
-  pr1 (pr2 eq-rel-partition-𝔽) = refl-rel-partition-𝔽
-  pr1 (pr2 (pr2 eq-rel-partition-𝔽)) = symmetric-rel-partition-𝔽
-  pr2 (pr2 (pr2 eq-rel-partition-𝔽)) = transitive-rel-partition-𝔽
+  equivalence-relation-partition-𝔽 : equivalence-relation l2 (type-𝔽 X)
+  pr1 equivalence-relation-partition-𝔽 = rel-partition-𝔽-Prop
+  pr1 (pr2 equivalence-relation-partition-𝔽) = refl-rel-partition-𝔽
+  pr1 (pr2 (pr2 equivalence-relation-partition-𝔽)) = symmetric-rel-partition-𝔽
+  pr2 (pr2 (pr2 equivalence-relation-partition-𝔽)) = transitive-rel-partition-𝔽
 ```
 
 ### Equivalences of partitions
@@ -189,7 +189,7 @@ extensionality-partition-𝔽 X P =
       ( extensionality-fam-𝔽 (finite-block-partition-𝔽 X P))
       ( λ α →
         ( ( extensionality-equiv (conversion-partition-𝔽 X P) (pr2 α)) ∘e
-          ( left-unit-law-prod-is-contr
+          ( left-unit-law-product-is-contr
             ( is-prop-Π
               ( λ _ → is-prop-type-trunc-Prop)
               ( is-inhabited-block-partition-𝔽 X P)

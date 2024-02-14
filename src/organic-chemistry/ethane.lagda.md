@@ -11,7 +11,6 @@ open import elementary-number-theory.inequality-natural-numbers
 
 open import finite-group-theory.tetrahedra-in-3-space
 
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -63,7 +62,7 @@ module _
 
   edge-ethane-Prop : unordered-pair vertex-ethane → Prop lzero
   edge-ethane-Prop p =
-    prod-Prop
+    product-Prop
       ( is-in-unordered-pair-Prop p (zero-Fin 1))
       ( is-in-unordered-pair-Prop p (one-Fin 1))
 
@@ -136,8 +135,7 @@ module _
         ( λ e →
           is-finite-is-decidable-Prop
             ( edge-ethane-Prop p)
-            ( is-decidable-edge-ethane-eq-Fin-two p
-              ( inv (eq-equiv (Fin 2) (type-unordered-pair p) e))))
+            ( is-decidable-edge-ethane-eq-Fin-two p (inv (eq-equiv e))))
 
   edge-ethane-𝔽 : unordered-pair vertex-ethane → 𝔽 lzero
   pr1 (edge-ethane-𝔽 p) = edge-ethane p
@@ -168,7 +166,7 @@ module _
             ( inl (inr _) , is-one) → neq-inl-inr is-one
             ( inr _ , is-one) → neq-inl-inr is-one))
     pr2 (is-torsorial-standard-edge-ethane (inl (inr _))) (inr _ , P) =
-      eq-pair-Σ refl
+      eq-pair-eq-fiber
         ( eq-is-prop
           ( is-prop-edge-ethane
             ( standard-unordered-pair (inl (inr _)) (inr _))))
@@ -178,7 +176,7 @@ module _
     pr2 (pr2 (pr1 (is-torsorial-standard-edge-ethane (inr _)))) =
       unit-trunc-Prop (zero-Fin 1 , refl)
     pr2 (is-torsorial-standard-edge-ethane (inr _)) (inl (inr _) , P) =
-      eq-pair-Σ refl
+      eq-pair-eq-fiber
         ( eq-is-prop
           ( is-prop-edge-ethane
             ( standard-unordered-pair (inr star) (inl (inr star)))))

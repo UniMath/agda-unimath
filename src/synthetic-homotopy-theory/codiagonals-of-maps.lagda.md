@@ -7,14 +7,12 @@ module synthetic-homotopy-theory.codiagonals-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -23,7 +21,6 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.universal-property-pushouts
-open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
 </details>
@@ -91,8 +88,13 @@ module _
 
   universal-property-suspension-cocone-fiber :
     {l : Level} →
-    Σ ( cocone terminal-map terminal-map (fiber (codiagonal-map f) b))
-      ( universal-property-pushout l terminal-map terminal-map)
+    Σ ( cocone
+        ( terminal-map (fiber f b))
+        ( terminal-map (fiber f b))
+        ( fiber (codiagonal-map f) b))
+      ( universal-property-pushout l
+        ( terminal-map (fiber f b))
+        ( terminal-map (fiber f b)))
   universal-property-suspension-cocone-fiber =
     universal-property-pushout-cogap-fiber-up-to-equiv f f
       ( cocone-codiagonal-map f)
@@ -101,16 +103,16 @@ module _
       ( unit)
       ( unit)
       ( inv-equiv
-        ( terminal-map ,
-        ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
+        ( terminal-map (fiber id b) ,
+        ( is-equiv-terminal-map-is-contr (is-torsorial-Id' b))))
       ( inv-equiv
-        ( terminal-map ,
-          ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
+        ( terminal-map (fiber id b) ,
+          ( is-equiv-terminal-map-is-contr (is-torsorial-Id' b))))
       ( id-equiv)
-      ( terminal-map)
-      ( terminal-map)
-      ( λ _ → eq-is-contr (is-torsorial-path' b))
-      ( λ _ → eq-is-contr (is-torsorial-path' b))
+      ( terminal-map (fiber f b))
+      ( terminal-map (fiber f b))
+      ( λ _ → eq-is-contr (is-torsorial-Id' b))
+      ( λ _ → eq-is-contr (is-torsorial-Id' b))
 
   suspension-cocone-fiber :
     suspension-cocone (fiber f b) (fiber (codiagonal-map f) b)
@@ -120,8 +122,8 @@ module _
   universal-property-suspension-fiber :
     {l : Level} →
     universal-property-pushout l
-      ( terminal-map)
-      ( terminal-map)
+      ( terminal-map (fiber f b))
+      ( terminal-map (fiber f b))
       ( suspension-cocone-fiber)
   universal-property-suspension-fiber =
     pr2 universal-property-suspension-cocone-fiber
@@ -129,24 +131,24 @@ module _
   fiber-codiagonal-map-suspension-fiber :
     suspension (fiber f b) → fiber (codiagonal-map f) b
   fiber-codiagonal-map-suspension-fiber =
-    cogap terminal-map terminal-map suspension-cocone-fiber
+    cogap-suspension' suspension-cocone-fiber
 
   is-equiv-fiber-codiagonal-map-suspension-fiber :
     is-equiv fiber-codiagonal-map-suspension-fiber
   is-equiv-fiber-codiagonal-map-suspension-fiber =
     is-equiv-up-pushout-up-pushout
-      ( terminal-map)
-      ( terminal-map)
-      ( cocone-pushout terminal-map terminal-map)
+      ( terminal-map (fiber f b))
+      ( terminal-map (fiber f b))
+      ( cocone-suspension (fiber f b))
       ( suspension-cocone-fiber)
-      ( cogap terminal-map terminal-map (suspension-cocone-fiber))
+      ( cogap-suspension' (suspension-cocone-fiber))
       ( htpy-cocone-map-universal-property-pushout
-        ( terminal-map)
-        ( terminal-map)
-        ( cocone-pushout terminal-map terminal-map)
-        ( up-pushout terminal-map terminal-map)
+        ( terminal-map (fiber f b))
+        ( terminal-map (fiber f b))
+        ( cocone-suspension (fiber f b))
+        ( up-suspension' (fiber f b))
         ( suspension-cocone-fiber))
-      ( up-pushout terminal-map terminal-map)
+      ( up-suspension' (fiber f b))
       ( universal-property-suspension-fiber)
 
   equiv-fiber-codiagonal-map-suspension-fiber :

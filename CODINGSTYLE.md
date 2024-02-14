@@ -346,7 +346,7 @@ Here is a list of our naming conventions:
   [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
   as the standard equals sign is a reserved symbol in Agda.
 
-## <a name="formatting"></a>Formatting: Indentation, line breaks, and parentheses
+## Formatting: Indentation, line breaks, and parentheses { #formatting }
 
 Code formatting is like punctuation in a novel - it helps readers make sense of
 the story. Here's how we handle indentation and line breaks in the
@@ -448,6 +448,16 @@ the story. Here's how we handle indentation and line breaks in the
 
 ## Coding practices we tend to avoid
 
+- Agda permits us to make quick definitions without specifying their types, but
+  we avoid making such untyped definitions. While the type of the entry might be
+  clear to you when you are writing the code, it puts a burden on the reader if
+  you omit them. It is also hugely beneficial if you can see the specification
+  of a certain entry by jumping to its definition. Furthermore, omitting
+  specifications of entries might make maintainance a bit more difficult,
+  because some name changes might still result in valid definitions, but with an
+  unintended specifications. Catching such mistakes becomes a bit harder when
+  you leave your entries untyped.
+
 - Using Unicode characters in names is entirely permissible, but we recommend
   restraint to maintain readability. Just a few well-placed symbols can often
   express a lot.
@@ -488,8 +498,8 @@ the story. Here's how we handle indentation and line breaks in the
 - Lastly, we recommend not naming constructions after infix notation of
   operations included in them. Preferring primary prefix notation over infix
   notation can help keep our code consistent. For example, it's preferred to use
-  `commutative-prod` instead of `commutative-×` for denoting the commutativity
-  of cartesian products.
+  `commutative-product` instead of `commutative-×` for denoting the
+  commutativity of cartesian products.
 
 These guidelines are here to make everyone's coding experience more enjoyable
 and productive. As always, your contributions to the `agda-unimath` library are

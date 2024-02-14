@@ -39,8 +39,6 @@ open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.homotopies
-
 open import structured-types.types-equipped-with-endomorphisms
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -102,7 +100,7 @@ has-decidable-equality-ℤ-Mod zero-ℕ = has-decidable-equality-ℤ
 has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin (succ-ℕ k)
 ```
 
-### The integers modulo k are a discrete type
+### The integers modulo `k` are a discrete type
 
 ```agda
 ℤ-Mod-Discrete-Type : (k : ℕ) → Discrete-Type lzero
@@ -110,7 +108,7 @@ has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin (succ-�
 ℤ-Mod-Discrete-Type (succ-ℕ k) = Fin-Discrete-Type (succ-ℕ k)
 ```
 
-### The integers modulo k form a set
+### The integers modulo `k` form a set
 
 ```agda
 abstract
@@ -136,7 +134,7 @@ pr1 (ℤ-Mod-𝔽 k H) = ℤ-Mod k
 pr2 (ℤ-Mod-𝔽 k H) = is-finite-ℤ-Mod H
 ```
 
-## The inclusion of the integers modulo k into ℤ
+## The inclusion of the integers modulo `k` into ℤ
 
 ```agda
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
@@ -164,7 +162,7 @@ int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ
   (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
 ```
 
-## The successor and predecessor functions on the integers modulo k
+## The successor and predecessor functions on the integers modulo `k`
 
 ```agda
 succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
@@ -267,7 +265,7 @@ pr1 (equiv-neg-ℤ-Mod k) = neg-ℤ-Mod k
 pr2 (equiv-neg-ℤ-Mod k) = is-equiv-neg-ℤ-Mod k
 ```
 
-## Laws of addition modulo k
+## Laws of addition modulo `k`
 
 ```agda
 associative-add-ℤ-Mod :
@@ -349,7 +347,7 @@ is-left-add-neg-one-pred-ℤ-Mod' zero-ℕ = is-right-add-neg-one-pred-ℤ
 is-left-add-neg-one-pred-ℤ-Mod' (succ-ℕ k) = is-add-neg-one-pred-Fin' k
 ```
 
-## Multiplication modulo k
+## Multiplication modulo `k`
 
 ```agda
 mul-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
@@ -365,7 +363,7 @@ ap-mul-ℤ-Mod :
 ap-mul-ℤ-Mod k p q = ap-binary (mul-ℤ-Mod k) p q
 ```
 
-## Laws of multiplication modulo k
+## Laws of multiplication modulo `k`
 
 ```agda
 associative-mul-ℤ-Mod :
@@ -416,7 +414,7 @@ is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-right-mul-neg-one-neg-ℤ
 is-left-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin' k
 ```
 
-## Congruence classes of integers modulo k
+## Congruence classes of integers modulo `k`
 
 ```agda
 mod-ℕ : (k : ℕ) → ℕ → ℤ-Mod k

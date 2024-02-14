@@ -641,7 +641,7 @@ module _
                         ( subtype-inhabited-subtype Q x)) ∘e
                     ( equiv-inv-equiv))) ∘e
                 ( left-unit-law-Σ-is-contr
-                  ( is-torsorial-path (index-Set-Indexed-Σ-Decomposition D a))
+                  ( is-torsorial-Id (index-Set-Indexed-Σ-Decomposition D a))
                   ( pair
                     ( index-Set-Indexed-Σ-Decomposition D a)
                     ( refl)))) ∘e
@@ -671,23 +671,23 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 
 #### The partition obtained from the set-indexed Σ-decomposition induced by a partition has the same blocks as the original partition
 
-```agda
--- module _
---   {l1 l2 l3 : Level} {A : UU l1} (P : partition (l1 ⊔ l2) l3 A)
---   where
+```text
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (P : partition (l1 ⊔ l2) l3 A)
+  where
 
---   is-block-is-block-partition-set-indexed-Σ-decomposition-partition :
---     ( Q : inhabited-subtype (l1 ⊔ l2) A) →
---     is-block-partition
---       ( partition-Set-Indexed-Σ-Decomposition
---         ( set-indexed-Σ-decomposition-partition P))
---       ( Q) →
---     is-block-partition P Q
---   is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q (i , H) =
---     apply-universal-property-trunc-Prop
---       ( is-inhabited-subtype-inhabited-subtype Q)
---       ( subtype-partition P Q)
---       ( λ (a , q) → {!  !})
+  is-block-is-block-partition-set-indexed-Σ-decomposition-partition :
+    ( Q : inhabited-subtype (l1 ⊔ l2) A) →
+    is-block-partition
+      ( partition-Set-Indexed-Σ-Decomposition
+        ( set-indexed-Σ-decomposition-partition P))
+      ( Q) →
+    is-block-partition P Q
+  is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q (i , H) =
+    apply-universal-property-trunc-Prop
+      ( is-inhabited-subtype-inhabited-subtype Q)
+      ( subtype-partition P Q)
+      ( λ (a , q) → {!  !})
 
 {-  i : X  H : (x : A) → Q x ≃ (pr1 (inv-equiv
 (compute-total-block-partition P) x) ＝ i)  a : A  q : Q a
@@ -696,22 +696,22 @@ pr2 (partition-Set-Indexed-Σ-Decomposition D) =
 
  H' : (B : block)  -}
 
---   is-block-partition-set-indexed-Σ-decomposition-is-block-partition :
---     ( Q : inhabited-subtype (l1 ⊔ l2) A) →
---     is-block-partition P Q →
---     is-block-partition
---       ( partition-Set-Indexed-Σ-Decomposition
---         ( set-indexed-Σ-decomposition-partition P))
---       ( Q)
---   is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H = {!  !}
---
---   has-same-blocks-partition-set-indexed-Σ-decomposition-partition :
---     has-same-blocks-partition
---       ( partition-Set-Indexed-Σ-Decomposition
---         ( set-indexed-Σ-decomposition-partition P))
---       ( P)
---   pr1 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
---     is-block-is-block-partition-set-indexed-Σ-decomposition-partition B
---   pr2 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
---     is-block-partition-set-indexed-Σ-decomposition-is-block-partition B
+  is-block-partition-set-indexed-Σ-decomposition-is-block-partition :
+    ( Q : inhabited-subtype (l1 ⊔ l2) A) →
+    is-block-partition P Q →
+    is-block-partition
+      ( partition-Set-Indexed-Σ-Decomposition
+        ( set-indexed-Σ-decomposition-partition P))
+      ( Q)
+  is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H = {!  !}
+
+  has-same-blocks-partition-set-indexed-Σ-decomposition-partition :
+    has-same-blocks-partition
+      ( partition-Set-Indexed-Σ-Decomposition
+        ( set-indexed-Σ-decomposition-partition P))
+      ( P)
+  pr1 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
+    is-block-is-block-partition-set-indexed-Σ-decomposition-partition B
+  pr2 (has-same-blocks-partition-set-indexed-Σ-decomposition-partition B) =
+    is-block-partition-set-indexed-Σ-decomposition-is-block-partition B
 ```

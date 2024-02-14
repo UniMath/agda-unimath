@@ -40,10 +40,10 @@ module _
   add-hom-Ab :
     hom-Ab A B → hom-Ab A B → hom-Ab A B
   pr1 (add-hom-Ab f g) x = add-Ab B (map-hom-Ab A B f x) (map-hom-Ab A B g x)
-  pr2 (add-hom-Ab f g) x y =
+  pr2 (add-hom-Ab f g) {x} {y} =
     ( ap-add-Ab B
-      ( preserves-add-hom-Ab A B f x y)
-      ( preserves-add-hom-Ab A B g x y)) ∙
+      ( preserves-add-hom-Ab A B f)
+      ( preserves-add-hom-Ab A B g)) ∙
     ( interchange-add-add-Ab B
       ( map-hom-Ab A B f x)
       ( map-hom-Ab A B f y)
@@ -52,12 +52,12 @@ module _
 
   zero-hom-Ab : hom-Ab A B
   pr1 zero-hom-Ab x = zero-Ab B
-  pr2 zero-hom-Ab x y = inv (left-unit-law-add-Ab B (zero-Ab B))
+  pr2 zero-hom-Ab = inv (left-unit-law-add-Ab B (zero-Ab B))
 
   neg-hom-Ab : hom-Ab A B → hom-Ab A B
   pr1 (neg-hom-Ab f) x = neg-Ab B (map-hom-Ab A B f x)
-  pr2 (neg-hom-Ab f) x y =
-    ( ap (neg-Ab B) (preserves-add-hom-Ab A B f x y)) ∙
+  pr2 (neg-hom-Ab f) {x} {y} =
+    ( ap (neg-Ab B) (preserves-add-hom-Ab A B f)) ∙
     ( distributive-neg-add-Ab B (map-hom-Ab A B f x) (map-hom-Ab A B f y))
 ```
 
@@ -173,9 +173,7 @@ module _
     comp-hom-Ab A B C h (add-hom-Ab A B f g) ＝
     add-hom-Ab A C (comp-hom-Ab A B C h f) (comp-hom-Ab A B C h g)
   left-distributive-comp-add-hom-Ab h f g =
-    eq-htpy-hom-Ab A C
-      ( λ x →
-        preserves-add-hom-Ab B C h (map-hom-Ab A B f x) (map-hom-Ab A B g x))
+    eq-htpy-hom-Ab A C (λ x → preserves-add-hom-Ab B C h)
 
   right-distributive-comp-add-hom-Ab :
     (g h : hom-Ab B C) (f : hom-Ab A B) →
@@ -203,5 +201,5 @@ module _
 
   hom-ev-element-hom-Ab : hom-Ab (ab-hom-Ab A B) B
   pr1 hom-ev-element-hom-Ab = ev-element-hom-Ab
-  pr2 hom-ev-element-hom-Ab = preserves-add-ev-element-hom-Ab
+  pr2 hom-ev-element-hom-Ab {x} {y} = preserves-add-ev-element-hom-Ab x y
 ```

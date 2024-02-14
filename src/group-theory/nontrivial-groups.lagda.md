@@ -9,7 +9,6 @@ module group-theory.nontrivial-groups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.embeddings
@@ -25,7 +24,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -134,24 +132,24 @@ module _
             ( λ {P} {Q} α →
               eq-iff
                 ( λ p →
-                  map-left-unit-law-disj-is-empty-Prop
+                  map-left-unit-law-disjunction-is-empty-Prop
                     ( Id-Prop (set-Group G) _ _)
                     ( Q)
                     ( f)
                     ( forward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disj-Prop
+                      ( inr-disjunction-Prop
                         ( Id-Prop (set-Group G) _ _)
                         ( P)
                         ( p))))
                 ( λ q →
-                  map-left-unit-law-disj-is-empty-Prop
+                  map-left-unit-law-disjunction-is-empty-Prop
                     ( Id-Prop (set-Group G) _ _)
                     ( P)
                     ( f)
                     ( backward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disj-Prop
+                      ( inr-disjunction-Prop
                         ( Id-Prop (set-Group G) _ _)
                         ( Q)
                         ( q))))))

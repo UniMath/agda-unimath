@@ -13,17 +13,15 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subuniverses
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
+open import foundation-core.propositions
 ```
 
 </details>
@@ -160,10 +158,8 @@ pr1 (is-contr-type-is-empty l) = raise-empty l , is-empty-raise-empty
 pr2 (is-contr-type-is-empty l) x =
   eq-pair-Σ
     ( eq-equiv
-      ( raise-empty l)
-      ( inclusion-subuniverse is-empty-Prop x)
       ( equiv-is-empty
-        is-empty-raise-empty
+        ( is-empty-raise-empty)
         ( is-in-subuniverse-inclusion-subuniverse is-empty-Prop x)))
     ( eq-is-prop is-property-is-empty)
 ```

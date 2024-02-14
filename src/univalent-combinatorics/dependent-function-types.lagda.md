@@ -11,9 +11,9 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.propositional-truncations
 open import foundation.unit-type
@@ -50,8 +50,8 @@ count-Π-Fin {l1} zero-ℕ {B} e =
   count-is-contr (dependent-universal-property-empty' B)
 count-Π-Fin {l1} (succ-ℕ k) {B} e =
   count-equiv'
-    ( equiv-dependent-universal-property-coprod B)
-    ( count-prod
+    ( equiv-dependent-universal-property-coproduct B)
+    ( count-product
       ( count-Π-Fin k (λ x → e (inl x)))
       ( count-equiv'
         ( equiv-dependent-universal-property-unit (B ∘ inr))

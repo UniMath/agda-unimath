@@ -10,8 +10,8 @@ module species.products-cauchy-series-species-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.global-subuniverses
 open import foundation.subuniverses
 open import foundation.universe-levels
 
@@ -78,7 +78,7 @@ module _
       ≃
     product-cauchy-series-species-subuniverse P Q S T X
   equiv-product-cauchy-series-Σ-extension-species-subuniverse =
-    equiv-prod
+    equiv-product
           ( inv-equiv
             ( equiv-cauchy-series-Σ-extension-species-subuniverse
                 ( P)

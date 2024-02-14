@@ -95,15 +95,14 @@ module _
       (α : free-loop X) → is-torsorial (Eq-free-loop α)
     is-torsorial-Eq-free-loop (pair x α) =
       is-torsorial-Eq-structure
-        ( λ x α' p → Id (α ∙ p) (p ∙ α'))
-        ( is-torsorial-path x)
+        ( is-torsorial-Id x)
         ( pair x refl)
         ( is-contr-is-equiv'
           ( Σ (Id x x) (λ α' → Id α α'))
           ( tot (λ α' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α' → is-equiv-concat right-unit α'))
-          ( is-torsorial-path α))
+          ( is-torsorial-Id α))
 
   abstract
     is-equiv-Eq-eq-free-loop :
@@ -143,15 +142,14 @@ module _
       ( p : free-dependent-loop α P) → is-torsorial (Eq-free-dependent-loop p)
     is-torsorial-Eq-free-dependent-loop (pair y p) =
       is-torsorial-Eq-structure
-        ( λ y' p' q → Id (p ∙ q) ((ap (tr P (loop-free-loop α)) q) ∙ p'))
-        ( is-torsorial-path y)
+        ( is-torsorial-Id y)
         ( pair y refl)
         ( is-contr-is-equiv'
           ( Σ (Id (tr P (loop-free-loop α) y) y) (λ p' → Id p p'))
           ( tot (λ p' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ p' → is-equiv-concat right-unit p'))
-          ( is-torsorial-path p))
+          ( is-torsorial-Id p))
 
   abstract
     is-equiv-Eq-free-dependent-loop-eq :

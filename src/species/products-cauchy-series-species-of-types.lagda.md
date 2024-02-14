@@ -90,9 +90,9 @@ module _
         ( λ A →
           equiv-tot
             ( λ B →
-              ( equiv-prod
+              ( equiv-product
                 ( id-equiv)
-                ( equiv-universal-property-coprod X)) ∘e
+                ( equiv-universal-property-coproduct X)) ∘e
               ( left-unit-law-Σ-is-contr
                 ( is-torsorial-equiv' (A + B))
                 ( A + B , id-equiv))))) ∘e

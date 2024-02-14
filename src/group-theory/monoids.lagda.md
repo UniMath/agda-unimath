@@ -123,7 +123,7 @@ abstract
     ( e' , left-unit-e' , right-unit-e') =
     eq-type-subtype
       ( λ e →
-        prod-Prop
+        product-Prop
           ( Π-Prop (type-Set X) (λ y → Id-Prop X (μ e y) y))
           ( Π-Prop (type-Set X) (λ x → Id-Prop X (μ x e) x)))
       ( (inv (left-unit-e' e)) ∙ (right-unit-e e'))
@@ -134,9 +134,9 @@ abstract
   is-prop-is-unital-Semigroup G =
     is-prop-all-elements-equal (all-elements-equal-is-unital-Semigroup G)
 
-is-unital-Semigroup-Prop : {l : Level} (G : Semigroup l) → Prop l
-pr1 (is-unital-Semigroup-Prop G) = is-unital-Semigroup G
-pr2 (is-unital-Semigroup-Prop G) = is-prop-is-unital-Semigroup G
+is-unital-prop-Semigroup : {l : Level} (G : Semigroup l) → Prop l
+pr1 (is-unital-prop-Semigroup G) = is-unital-Semigroup G
+pr2 (is-unital-prop-Semigroup G) = is-prop-is-unital-Semigroup G
 ```
 
 ### Monoids are H-spaces
