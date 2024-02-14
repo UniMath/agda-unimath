@@ -48,7 +48,7 @@ module _
 
   data _⊢_ (axioms : formulas l2 i) : formula i → UU (l1 ⊔ l2) where
     ax : {a : formula i} → is-in-subtype axioms a → axioms ⊢ a
-    mp : {a b : formula i} → axioms ⊢ a ⇒ b → axioms ⊢ a → axioms ⊢ b
+    mp : {a b : formula i} → axioms ⊢ a →ₘ b → axioms ⊢ a → axioms ⊢ b
     nec : {a : formula i} → axioms ⊢ a → axioms ⊢ □ a
 
   modal-logic : formulas l2 i → formulas (l1 ⊔ l2) i
@@ -78,7 +78,7 @@ module _
 
   modal-logic-mp :
     {a b : formula i} →
-    is-in-subtype (modal-logic axioms) (a ⇒ b) →
+    is-in-subtype (modal-logic axioms) (a →ₘ b) →
     is-in-subtype (modal-logic axioms) a →
     is-in-subtype (modal-logic axioms) b
   modal-logic-mp {a} {b} tdab tda =

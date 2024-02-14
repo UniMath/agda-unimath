@@ -53,7 +53,7 @@ module _
 
   data _▷_ (axioms : formulas l2 i) : formula i → UU (l1 ⊔ l2) where
     w-ax : {a : formula i} → is-in-subtype axioms a → axioms ▷ a
-    w-mp : {a b : formula i} → axioms ▷ a ⇒ b → axioms ▷ a → axioms ▷ b
+    w-mp : {a b : formula i} → axioms ▷ a →ₘ b → axioms ▷ a → axioms ▷ b
 
   weak-modal-logic : formulas l2 i → formulas (l1 ⊔ l2) i
   weak-modal-logic axioms a = trunc-Prop (axioms ▷ a)
@@ -70,7 +70,7 @@ module _
 
   weak-modal-logic-mp :
     {a b : formula i} →
-    is-in-subtype (weak-modal-logic axioms) (a ⇒ b) →
+    is-in-subtype (weak-modal-logic axioms) (a →ₘ b) →
     is-in-subtype (weak-modal-logic axioms) a →
     is-in-subtype (weak-modal-logic axioms) b
   weak-modal-logic-mp {a} {b} twdab twda =
@@ -266,7 +266,7 @@ empty-in-list-nil = map-universal-property-trunc-Prop empty-Prop ( λ ())
 equiv-subset-head-tail :
   {l1 l2 : Level} {A : UU l1} (x : A) (xs : list A) (a : subtype l2 A) →
   (leq-prop-subtype (in-list (cons x xs)) a) ⇔
-    prod-Prop (a x) (leq-prop-subtype (in-list xs) a)
+    product-Prop (a x) (leq-prop-subtype (in-list xs) a)
 pr1 (equiv-subset-head-tail x xs a) sub =
   pair
     ( sub x (unit-trunc-Prop (is-head x xs)))
@@ -315,7 +315,7 @@ lists-in-union-lists (cons x xs) a b sub =
     ( sub x (unit-trunc-Prop (is-head x xs)))
     ( ∃-Prop _ (λ _ → Σ _ _))
     ( λ (xsl , xsr , sub-lists , sub-xsl , sub-xsr) →
-      ( ind-coprod
+      ( ind-coproduct
         ( λ _ → _)
         ( λ x-in-a →
           ( unit-trunc-Prop
@@ -495,7 +495,7 @@ module _
 
   backward-deduction-lemma :
     {a b : formula i} →
-    axioms ▷ a ⇒ b →
+    axioms ▷ a →ₘ b →
     is-in-subtype (weak-modal-logic (theory-add-formula a axioms)) b
   backward-deduction-lemma {a} wab =
     unit-trunc-Prop
@@ -511,29 +511,29 @@ module _
     where
 
     deduction-a->a :
-      (a : formula i) → is-in-subtype (weak-modal-logic axioms) (a ⇒ a)
+      (a : formula i) → is-in-subtype (weak-modal-logic axioms) (a →ₘ a)
     deduction-a->a a =
       apply-three-times-universal-property-trunc-Prop
-        ( contains-ax-s _ (a , a ⇒ a , a , refl))
-        ( contains-ax-k _ (a , a ⇒ a , refl))
+        ( contains-ax-s _ (a , a →ₘ a , a , refl))
+        ( contains-ax-k _ (a , a →ₘ a , refl))
         ( contains-ax-k _ (a , a , refl))
-        ( (weak-modal-logic axioms) (a ⇒ a))
+        ( (weak-modal-logic axioms) (a →ₘ a))
         ( λ x y z → unit-trunc-Prop (w-mp (w-mp x y) z))
 
     forward-deduction-lemma :
       (a : formula i) {b : formula i} →
       theory-add-formula a axioms ▷ b →
-      is-in-subtype (weak-modal-logic axioms) (a ⇒ b)
+      is-in-subtype (weak-modal-logic axioms) (a →ₘ b)
     forward-deduction-lemma a {b} (w-ax x) =
-      elim-disj-Prop
+      elim-disjunction-Prop
         ( Id-formula-Prop a b)
         ( axioms b)
-        ( (weak-modal-logic axioms) (a ⇒ b))
+        ( (weak-modal-logic axioms) (a →ₘ b))
         ( (λ { refl → deduction-a->a a})
         , (λ in-axioms →
             ( apply-universal-property-trunc-Prop
               ( contains-ax-k _ (b , a , refl))
-              ( (weak-modal-logic axioms) (a ⇒ b))
+              ( (weak-modal-logic axioms) (a →ₘ b))
               ( λ x → unit-trunc-Prop (w-mp x (w-ax in-axioms))))))
         ( x)
     forward-deduction-lemma a {b} (w-mp {c} twdcb twdc) =
@@ -541,17 +541,17 @@ module _
         ( forward-deduction-lemma a twdcb)
         ( forward-deduction-lemma a twdc)
         ( contains-ax-s _ (a , c , b , refl))
-        ( (weak-modal-logic axioms) (a ⇒ b))
+        ( (weak-modal-logic axioms) (a →ₘ b))
         ( λ wdacb wdac x →
           ( unit-trunc-Prop (w-mp (w-mp x wdacb) wdac)))
 
     deduction-lemma :
       (a b : formula i) →
       weak-modal-logic (theory-add-formula a axioms) b ⇔
-        weak-modal-logic axioms (a ⇒ b)
+        weak-modal-logic axioms (a →ₘ b)
     pr1 (deduction-lemma a b) =
       map-universal-property-trunc-Prop
-        ( (weak-modal-logic axioms) (a ⇒ b))
+        ( (weak-modal-logic axioms) (a →ₘ b))
         ( forward-deduction-lemma a)
     pr2 (deduction-lemma a b) =
       map-universal-property-trunc-Prop
@@ -567,24 +567,24 @@ module _
 
     deduction-ex-falso :
       (a b : formula i) →
-      is-in-subtype (weak-modal-logic axioms) (~ a ⇒ a ⇒ b)
+      is-in-subtype (weak-modal-logic axioms) (~ a →ₘ a →ₘ b)
     deduction-ex-falso a b =
       forward-implication
-        ( deduction-lemma axioms contains-ax-k contains-ax-s (~ a) (a ⇒ b))
+        ( deduction-lemma axioms contains-ax-k contains-ax-s (~ a) (a →ₘ b))
         ( forward-implication
           ( deduction-lemma
             ( theory-add-formula (~ a) axioms)
             ( transitive-leq-subtype
               ( ax-k i)
               ( weak-modal-logic axioms)
-              ( weak-modal-logic (theory-add-formula (a ⇒ ⊥) axioms))
+              ( weak-modal-logic (theory-add-formula (a →ₘ ⊥) axioms))
               ( weak-modal-logic-monotic
                 ( subtype-union-right (Id-formula-Prop (~ a)) axioms))
               ( contains-ax-k))
             ( transitive-leq-subtype
               ( ax-s i)
               ( weak-modal-logic axioms)
-              ( weak-modal-logic (theory-add-formula (a ⇒ ⊥) axioms))
+              ( weak-modal-logic (theory-add-formula (a →ₘ ⊥) axioms))
               ( weak-modal-logic-monotic
                 ( subtype-union-right (Id-formula-Prop (~ a)) axioms))
               ( contains-ax-s))

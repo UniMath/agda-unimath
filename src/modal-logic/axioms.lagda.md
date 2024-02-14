@@ -93,14 +93,14 @@ module _
   ax-k : formulas l i
   ax-k =
     ax-2-parameters
-      ( λ a b → a ⇒ b ⇒ a)
+      ( λ a b → a →ₘ b →ₘ a)
       ( eq-implication-left)
       ( eq-implication-left ∘ eq-implication-right)
 
   ax-s : formulas l i
   ax-s =
     ax-3-parameters
-      ( λ a b c → (a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c)
+      ( λ a b c → (a →ₘ b →ₘ c) →ₘ (a →ₘ b) →ₘ a →ₘ c)
       ( eq-implication-left ∘ eq-implication-left)
       ( eq-implication-left ∘ eq-implication-right ∘ eq-implication-left)
       ( eq-implication-right ∘ eq-implication-right ∘ eq-implication-left)
@@ -108,12 +108,12 @@ module _
   ax-n : formulas l i
   ax-n =
     ax-2-parameters
-      ( λ a b → □ (a ⇒ b) ⇒ □ a ⇒ □ b)
+      ( λ a b → □ (a →ₘ b) →ₘ □ a →ₘ □ b)
       ( eq-implication-left ∘ eq-box ∘ eq-implication-left)
       ( eq-implication-right ∘ eq-box ∘ eq-implication-left)
 
   ax-dn : formulas l i
-  ax-dn = ax-1-parameter ( λ a → ~~ a ⇒ a) ( eq-implication-right)
+  ax-dn = ax-1-parameter ( λ a → ~~ a →ₘ a) ( eq-implication-right)
 
 module _
   {l1 l2 : Level}
@@ -123,24 +123,24 @@ module _
   where
 
   ax-k-soundness : soundness (ax-k i) (all-models w l3 i l4)
-  ax-k-soundness (a ⇒ b ⇒ a) (_ , _ , refl) M _ x fa _ = fa
+  ax-k-soundness (a →ₘ b →ₘ a) (_ , _ , refl) M _ x fa _ = fa
 
   ax-n-soundness : soundness (ax-n i) (all-models w l3 i l4)
   ax-n-soundness
-    (□ (a ⇒ b) ⇒ □ a ⇒ □ b)
+    (□ (a →ₘ b) →ₘ □ a →ₘ □ b)
     (_ , _ , refl)
     M in-class x fab fa y r =
       fab y r (fa y r)
 
   ax-s-soundness : soundness (ax-s i) (all-models w l3 i l4)
   ax-s-soundness
-    ((a ⇒ b ⇒ c) ⇒ (a ⇒ b) ⇒ a ⇒ c)
+    ((a →ₘ b →ₘ c) →ₘ (a →ₘ b) →ₘ a →ₘ c)
     (_ , _ , _ , refl)
     M in-class x fabc fab fa =
       fabc fa (fab fa)
 
   ax-dn-soundness : soundness (ax-dn i) (decidable-models w l3 i l4)
-  ax-dn-soundness (((a ⇒ ⊥) ⇒ ⊥) ⇒ a) (_ , refl) _ is-dec x f
+  ax-dn-soundness (((a →ₘ ⊥) →ₘ ⊥) →ₘ a) (_ , refl) _ is-dec x f
     with (is-dec a x)
   ... | inl fa = fa
   ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))

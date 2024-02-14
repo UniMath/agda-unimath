@@ -99,15 +99,15 @@ module _
   where
 
   subtype-union-left : P ⊆ union-subtype P Q
-  subtype-union-left x = inl-disj-Prop (P x) (Q x)
+  subtype-union-left x = inl-disjunction-Prop (P x) (Q x)
 
   subtype-union-right : Q ⊆ union-subtype P Q
-  subtype-union-right x = inr-disj-Prop (P x) (Q x)
+  subtype-union-right x = inr-disjunction-Prop (P x) (Q x)
 
   subtype-union-both :
     {l4 : Level} (S : subtype l4 X) → P ⊆ S → Q ⊆ S → union-subtype P Q ⊆ S
   subtype-union-both S P-sub-S Q-sub-S x =
-    elim-disj-Prop (P x) (Q x) (S x) (P-sub-S x , Q-sub-S x)
+    elim-disjunction-Prop (P x) (Q x) (S x) (P-sub-S x , Q-sub-S x)
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)

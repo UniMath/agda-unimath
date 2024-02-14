@@ -214,9 +214,9 @@ module _
   complete-theory-contains-all-formulas :
     LEM (l1 ⊔ l2) →
     (x : L-consistent-theory) → is-L-complete-theory x →
-    (a : formula i) → type-disj-Prop (pr1 x a) (pr1 x (~ a))
+    (a : formula i) → type-disjunction-Prop (pr1 x a) (pr1 x (~ a))
   complete-theory-contains-all-formulas lem x is-comp a with lem ((pr1 x) a)
-  ... | inl a-in-logic = inl-disj-Prop ((pr1 x) a) ((pr1 x) (~ a)) a-in-logic
+  ... | inl a-in-logic = inl-disjunction-Prop ((pr1 x) a) ((pr1 x) (~ a)) a-in-logic
   ... | inr a-not-in-logic =
     unit-trunc-Prop
       ( inr
@@ -287,7 +287,7 @@ module _
                             ( logic-subset-L-complete-theory
                               ( x)
                               ( is-comp)
-                              ( ~~ a ⇒ a)
+                              ( ~~ a →ₘ a)
                               ( contains-ax-dn _ (a , refl))))
                           ( wd-bot))))))))
             ( subtype-union-right (Id-formula-Prop (~ a)) (pr1 x)))
@@ -297,16 +297,16 @@ module _
     LEM (l1 ⊔ l2) →
     (x : L-consistent-theory) → is-L-complete-theory x →
     {a b : formula i} → (is-in-subtype (pr1 x) a → is-in-subtype (pr1 x) b) →
-    is-in-subtype (pr1 x) (a ⇒ b)
+    is-in-subtype (pr1 x) (a →ₘ b)
   complete-theory-implication lem x is-comp {a} {b} imp =
     apply-universal-property-trunc-Prop
       ( complete-theory-contains-all-formulas lem x is-comp a)
-      ( pr1 x (a ⇒ b))
+      ( pr1 x (a →ₘ b))
       ( λ { (inl a-in-logic) →
               ( weak-modal-logic-subset-complete-theory
                 ( x)
                 ( is-comp)
-                ( a ⇒ b)
+                ( a →ₘ b)
                 ( forward-implication
                   ( deduction-lemma
                     ( pr1 x)
@@ -344,7 +344,7 @@ module _
               ( weak-modal-logic-subset-complete-theory
                 ( x)
                 ( is-comp)
-                ( a ⇒ b)
+                ( a →ₘ b)
                 ( forward-implication
                   ( deduction-lemma
                     ( pr1 x)
@@ -594,7 +594,7 @@ module _
                         ( pr1 (pr1 (pr1 y)))
                         ( pr1 (pr1 (pr1 z)))
                         ( y-leq-z))
-                      ( b ⇒ a)
+                      ( b →ₘ a)
                       ( ba-in-y))
                     ( b-in-z)))
               ; (inr z-leq-y) →
@@ -757,21 +757,21 @@ module _
       (l : list (formula i)) →
       formula i
     list-to-implications f nil = f
-    list-to-implications f (cons g l) = list-to-implications (g ⇒ f) l
+    list-to-implications f (cons g l) = list-to-implications (g →ₘ f) l
 
     list-to-implications-rev :
       formula i →
       (l : list (formula i)) →
       formula i
     list-to-implications-rev f nil = f
-    list-to-implications-rev f (cons g l) = g ⇒ list-to-implications-rev f l
+    list-to-implications-rev f (cons g l) = g →ₘ list-to-implications-rev f l
 
     list-to-implication-rev-snoc :
       (f g : formula i) (l : list (formula i)) →
-      list-to-implications f (snoc l g) ＝ g ⇒ list-to-implications f l
+      list-to-implications f (snoc l g) ＝ g →ₘ list-to-implications f l
     list-to-implication-rev-snoc f g nil = refl
     list-to-implication-rev-snoc f g (cons h l) =
-      list-to-implication-rev-snoc (h ⇒ f) g l
+      list-to-implication-rev-snoc (h →ₘ f) g l
 
     reverse-list-to-implications :
       (f : formula i) (l : list (formula i)) →
@@ -779,7 +779,7 @@ module _
     reverse-list-to-implications f nil = refl
     reverse-list-to-implications f (cons g l) =
       ( list-to-implication-rev-snoc f g (reverse-list l)) ∙
-      ( ap (λ x → g ⇒ x) (reverse-list-to-implications f l))
+      ( ap (λ x → g →ₘ x) (reverse-list-to-implications f l))
 
     move-right :
       {l' : Level} (axioms : formulas l' i)
@@ -798,7 +798,7 @@ module _
           ( λ _ → ex-falso ∘ empty-in-list-nil))
         ( f)
     move-right axioms f (cons c l) contains-ax-k contains-ax-s wd =
-      move-right axioms (c ⇒ f) l contains-ax-k contains-ax-s
+      move-right axioms (c →ₘ f) l contains-ax-k contains-ax-s
         ( forward-implication
           ( deduction-lemma
             ( union-subtype axioms (in-list l))
@@ -852,14 +852,14 @@ module _
           { a = □ c}
           { b = □ (list-to-implications-rev a l)}
           ( weak-modal-logic-mp
-            { a = □ (c ⇒ list-to-implications-rev a l)}
-            { b = □ c ⇒ □ (list-to-implications-rev a l)}
+            { a = □ (c →ₘ list-to-implications-rev a l)}
+            { b = □ c →ₘ □ (list-to-implications-rev a l)}
             ( weak-modal-logic-monotic
               { ax₁ = logic}
               { ax₂ = union-subtype logic (pr1 x)}
               ( subtype-union-left logic (pr1 x))
-              ( □ (c ⇒ list-to-implications-rev a l) ⇒
-                □ c ⇒ □ list-to-implications-rev a l)
+              ( □ (c →ₘ list-to-implications-rev a l) →ₘ
+                □ c →ₘ □ list-to-implications-rev a l)
               ( weak-modal-logic-ax
                 ( contains-ax-n _ (c , list-to-implications-rev a l , refl))))
             ( in-logic))
@@ -1063,7 +1063,7 @@ module _
           ( pr2 x)
           ( unit-trunc-Prop
             ( w-ax (subtype-union-right logic (pr1 x) ⊥ in-logic))))
-    pr1 (canonical-model-theorem (a ⇒ b) x) in-logic fa =
+    pr1 (canonical-model-theorem (a →ₘ b) x) in-logic fa =
       pr1
         ( canonical-model-theorem b x)
         ( weak-modal-logic-subset-complete-theory
@@ -1079,7 +1079,7 @@ module _
     pr2 (canonical-model-theorem (var n) x) f =
       map-inv-raise f
     pr2 (canonical-model-theorem ⊥ x) (map-raise ())
-    pr2 (canonical-model-theorem (a ⇒ b) x) f =
+    pr2 (canonical-model-theorem (a →ₘ b) x) f =
       complete-theory-implication
         ( lem)
         ( pr1 x , pr1 (pr2 x))

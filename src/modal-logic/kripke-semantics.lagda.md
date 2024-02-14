@@ -115,7 +115,7 @@ module _
   _⊨_ : kripke-model w l2 i l4 × w → formula i → Prop l
   (M , x) ⊨ var n = raise-Prop l (model-valuate i M n x)
   (M , x) ⊨ ⊥ = raise-empty-Prop l
-  (M , x) ⊨ a ⇒ b = implication-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
+  (M , x) ⊨ a →ₘ b = implication-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
   (M , x) ⊨ □ a =
     Π-Prop
       ( w)
@@ -178,9 +178,9 @@ module _
 
   finite-models : model-class w l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   finite-models M =
-    prod-Prop
+    product-Prop
       ( is-finite-Prop w)
-      ( prod-Prop
+      ( product-Prop
         ( Π-Prop
           ( w)
           ( λ x →
@@ -198,7 +198,7 @@ module _
     is-decidable-raise (l1 ⊔ l2 ⊔ l4) _ (dec-v x n)
   finite-models-subclass-decidable-models M _ ⊥ x =
     inr map-inv-raise
-  finite-models-subclass-decidable-models M is-fin (a ⇒ b) x =
+  finite-models-subclass-decidable-models M is-fin (a →ₘ b) x =
     is-decidable-function-type
       ( finite-models-subclass-decidable-models M is-fin a x)
       ( finite-models-subclass-decidable-models M is-fin b x)
