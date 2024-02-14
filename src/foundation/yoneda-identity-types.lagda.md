@@ -890,7 +890,7 @@ and
 ```
 
 live in the same type. Hence, we can pose the question of whether the horizontal
-concatenation operation is associative, which it is weakly:
+concatenation operation is associative, which it is, albeit weakly:
 
 ```agda
 module _
@@ -906,12 +906,8 @@ module _
   assoc-horizontal-concat-yoneda-Id² {p} α {q} β γ =
     ind-yoneda-Id
       ( λ _ α →
-        ( horizontal-concat-yoneda-Id²
-          ( horizontal-concat-yoneda-Id² α β)
-          ( γ)) ＝
-        ( horizontal-concat-yoneda-Id²
-          ( α)
-          ( horizontal-concat-yoneda-Id² β γ)))
+        ( horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ) ＝
+        ( horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)))
       ( ind-yoneda-Id
         ( λ _ β →
           ( horizontal-concat-yoneda-Id²
