@@ -329,8 +329,8 @@ module _
 
 ## External links
 
-- [The Eckmann-Hilton argument](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument)
-  at 1Lab.
+- [The Eckmann-Hilton argument](https://1lab.dev/Algebra.Magma.Unital.EckmannHilton.html)
+  at 1lab.
 - [Eckmann-Hilton argument](https://ncatlab.org/nlab/show/Eckmann-Hilton+argument)
   at $n$Lab.
 - [Eckmann-Hilton argument](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument)

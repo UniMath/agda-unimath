@@ -820,10 +820,6 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  right-whisker-concat-yoenda-Id' :
-    {p q : x ＝ y} → p ＝ʸ q → (r : y ＝ z) → p ∙ᵣ r ＝ʸ q ∙ᵣ r
-  right-whisker-concat-yoenda-Id' α refl _ t = t ∙ eq-yoneda-eq α
-
   right-whisker-concat-yoenda-Id :
     {p q : x ＝ʸ y} → p ＝ʸ q → (r : y ＝ʸ z) → p ∙ʸ r ＝ʸ q ∙ʸ r
   right-whisker-concat-yoenda-Id α r = ap-yoneda-Id (_∙ʸ r) α
