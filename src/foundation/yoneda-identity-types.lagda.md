@@ -782,4 +782,6 @@ module _
 
 ## References
 
-- <https://groups.google.com/g/homotopytypetheory/c/FfiZj1vrkmQ/m/GJETdy0AAgAJ>
+- _Definitions of equivalence satisfying judgmental/strict groupoid laws?_ -
+  Google groups conversation
+  (<https://groups.google.com/g/homotopytypetheory/c/FfiZj1vrkmQ/m/GJETdy0AAgAJ>)
