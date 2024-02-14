@@ -216,7 +216,8 @@ module _
     (x : L-consistent-theory) → is-L-complete-theory x →
     (a : formula i) → type-disjunction-Prop (pr1 x a) (pr1 x (~ a))
   complete-theory-contains-all-formulas lem x is-comp a with lem ((pr1 x) a)
-  ... | inl a-in-logic = inl-disjunction-Prop ((pr1 x) a) ((pr1 x) (~ a)) a-in-logic
+  ... | inl a-in-logic =
+    inl-disjunction-Prop ((pr1 x) a) ((pr1 x) (~ a)) a-in-logic
   ... | inr a-not-in-logic =
     unit-trunc-Prop
       ( inr
