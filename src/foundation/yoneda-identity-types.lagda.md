@@ -712,19 +712,19 @@ Using one of the two sides in the Gray interchange diagram
 
 ```text
                          ap (f x) q
-                 f x y -------------- f x y'
+                 f x y -------------> f x y'
                    |                    |
                    |                    |
   ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
                    |                    |
-                   |                    |
-                 f x' y ------------- f x' y'
+                   ∨                    ∨
+                 f x' y ------------> f x' y'
                          ap (f x') q
 ```
 
 and the fact that the concatenation operation on Yoneda identifications is
 two-sided strictly unital, we obtain an action of binary functions on Yoneda
-identifications that computes on both inputs.
+identifications that computes on both arguments.
 
 ```agda
 module _
@@ -820,20 +820,13 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
+  left-whisker-concat-yoenda-Id :
+    (p : x ＝ʸ y) {q r : y ＝ʸ z} → q ＝ʸ r → p ∙ʸ q ＝ʸ p ∙ʸ r
+  left-whisker-concat-yoenda-Id p β = ap-yoneda-Id (p ∙ʸ_) β
+
   right-whisker-concat-yoenda-Id :
     {p q : x ＝ʸ y} → p ＝ʸ q → (r : y ＝ʸ z) → p ∙ʸ r ＝ʸ q ∙ʸ r
   right-whisker-concat-yoenda-Id α r = ap-yoneda-Id (_∙ʸ r) α
-
-module _
-  {l : Level} {A : UU l}
-  where
-
-  right-unit-law-right-whisker-concat-yoenda-Id' :
-    {x y : A} {p q : x ＝ y} (α : p ＝ʸ q) →
-    right-whisker-concat-yoenda-Id' α refl ＝ α
-  right-unit-law-right-whisker-concat-yoenda-Id' α =
-    eq-multivariable-htpy 2
-      ( λ _ t → inv (commutative-preconcat-refl-Id-yoneda-Id α t))
 ```
 
 ### Horizontal concatenation of Yoneda identifications
@@ -885,8 +878,8 @@ and
   horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)
 ```
 
-live in the same type. Hence, we can pose the question of whether the horizontal
-concatenation operation is associative, which it is, albeit weakly:
+inhabit the same type. Therefore, we can pose the question of whether the
+horizontal concatenation operation is associative, which it is, albeit weakly:
 
 ```agda
 module _
@@ -899,31 +892,30 @@ module _
     {r r' : z ＝ʸ w} (γ : r ＝ʸ r') →
     horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ ＝
     horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)
-  assoc-horizontal-concat-yoneda-Id² {p} α {q} β γ =
+  assoc-horizontal-concat-yoneda-Id² α {q} β {r} =
     ind-yoneda-Id
-      ( λ _ α →
+      ( λ _ γ →
         ( horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ) ＝
         ( horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)))
       ( ind-yoneda-Id
         ( λ _ β →
           ( horizontal-concat-yoneda-Id²
-            ( horizontal-concat-yoneda-Id² reflʸ β)
-            ( γ)) ＝
+            ( horizontal-concat-yoneda-Id² α β)
+            ( reflʸ {x = r})) ＝
           ( horizontal-concat-yoneda-Id²
-            ( reflʸ)
-            ( horizontal-concat-yoneda-Id² β γ)))
+            ( α)
+            ( horizontal-concat-yoneda-Id² β (reflʸ {x = r}))))
         ( ind-yoneda-Id
-          ( λ _ γ →
+          ( λ _ α →
             ( horizontal-concat-yoneda-Id²
-              ( horizontal-concat-yoneda-Id² (reflʸ {x = p}) (reflʸ {x = q}))
-              ( γ)) ＝
+              ( horizontal-concat-yoneda-Id² α (reflʸ {x = q}))
+              ( reflʸ {x = r})) ＝
             ( horizontal-concat-yoneda-Id²
-              ( reflʸ {x = p})
-              ( horizontal-concat-yoneda-Id² (reflʸ {x = q}) γ)))
+              ( α)
+              ( horizontal-concat-yoneda-Id² (reflʸ {x = q}) (reflʸ {x = r}))))
           ( refl)
-          ( γ))
+          ( α))
         ( β))
-      ( α)
 ```
 
 ### Vertical concatenation of Yoneda identifications
