@@ -930,25 +930,6 @@ module _
   vertical-concat-yoneda-Id² α β = α ∙ʸ β
 ```
 
-### The interchange law for Yoneda identificatinos
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y z : A}
-  where
-
-  -- interchange-yoneda-Id² :
-  --   {p q r : x ＝ʸ y} {u v w : y ＝ʸ z}
-  --   (α : p ＝ʸ q) (β : q ＝ʸ r) (γ : u ＝ʸ v) (δ : v ＝ʸ w) →
-  --   ( horizontal-concat-yoneda-Id²
-  --     ( vertical-concat-yoneda-Id² α β)
-  --     ( vertical-concat-yoneda-Id² γ δ)) ＝
-  --   ( vertical-concat-yoneda-Id²
-  --     ( horizontal-concat-yoneda-Id² α γ)
-  --     ( horizontal-concat-yoneda-Id² β δ))
-  -- interchange-yoneda-Id² α β γ δ = {!   !}
-```
-
 ## See also
 
 - [The strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
