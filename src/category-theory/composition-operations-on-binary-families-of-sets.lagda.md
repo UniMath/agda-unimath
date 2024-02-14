@@ -216,8 +216,8 @@ function extensionality, it is enough to show that `e x ＝ e' x` for all
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1}
-  ( hom-set : A → A → Set l2)
-  ( comp-hom : composition-operation-binary-family-Set hom-set)
+  (hom-set : A → A → Set l2)
+  (comp-hom : composition-operation-binary-family-Set hom-set)
   where
 
   abstract

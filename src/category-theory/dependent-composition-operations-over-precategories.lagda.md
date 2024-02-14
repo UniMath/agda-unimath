@@ -46,7 +46,7 @@ for every pair `x y : ob C`, equipped with a **dependent composition operation**
 
 ## Definitions
 
-### The type of dependent composition structures over a precategory
+### The type of dependent composition operations over a precategory
 
 ```agda
 module _
@@ -69,7 +69,7 @@ module _
     type-Set (hom-set-D (comp-hom-Precategory C g f) x' z')
 ```
 
-### The predicate of being associative on dependent composition structures over a precategory
+### The predicate of being associative on dependent composition operations over a precategory
 
 ```agda
 module _
@@ -136,7 +136,7 @@ module _
     is-prop-is-associative-dependent-composition-operation-Precategory
 ```
 
-### The predicate of being unital on dependent binary composition structures over a precategory
+### The predicate of being unital on dependent composition operations over a precategory
 
 ```agda
 module _
