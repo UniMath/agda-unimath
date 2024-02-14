@@ -831,6 +831,10 @@ module _
 
 ### Horizontal concatenation of Yoneda identifications
 
+We define horizontal concatenation in such a way that it computes as left
+whiskering when the left-hand argument is `refl`, and computes as right
+whiskering when the right-hand argument is `refl`.
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z : A}
@@ -838,16 +842,18 @@ module _
 
   horizontal-concat-yoneda-Id² :
     {p q : x ＝ʸ y} → p ＝ʸ q → {u v : y ＝ʸ z} → u ＝ʸ v → p ∙ʸ u ＝ʸ q ∙ʸ v
-  horizontal-concat-yoneda-Id² α β = ap-binary-yoneda-Id (_∙ʸ_) α β
+  horizontal-concat-yoneda-Id² = ap-binary-yoneda-Id (_∙ʸ_)
 
   compute-left-horizontal-concat-yoneda-Id² :
     {p : x ＝ʸ y} {u v : y ＝ʸ z} (β : u ＝ʸ v) →
-    horizontal-concat-yoneda-Id² reflʸ β ＝ ap-yoneda-Id (p ∙ʸ_) β
+    horizontal-concat-yoneda-Id² reflʸ β ＝
+    left-whisker-concat-yoenda-Id p β
   compute-left-horizontal-concat-yoneda-Id² β = refl
 
   compute-right-horizontal-concat-yoneda-Id² :
     {p q : x ＝ʸ y} (α : p ＝ʸ q) {u : y ＝ʸ z} →
-    horizontal-concat-yoneda-Id² α (reflʸ {x = u}) ＝ ap-yoneda-Id (_∙ʸ u) α
+    horizontal-concat-yoneda-Id² α (reflʸ {x = u}) ＝
+    right-whisker-concat-yoenda-Id α u
   compute-right-horizontal-concat-yoneda-Id² α = refl
 
 module _
