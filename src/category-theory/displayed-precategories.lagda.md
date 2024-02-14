@@ -251,9 +251,16 @@ module _
   pr1
     associative-composition-operation-total-precategory-Displayed-Precategory =
     comp-hom-total-precategory-Displayed-Precategory
+  pr1
+    ( pr2
+      associative-composition-operation-total-precategory-Displayed-Precategory
+        h g f) =
+    associative-comp-hom-total-precategory-Displayed-Precategory h g f
   pr2
-    associative-composition-operation-total-precategory-Displayed-Precategory =
-    associative-comp-hom-total-precategory-Displayed-Precategory
+    ( pr2
+      associative-composition-operation-total-precategory-Displayed-Precategory
+      h g f) =
+    inv (associative-comp-hom-total-precategory-Displayed-Precategory h g f)
 
   id-hom-total-precategory-Displayed-Precategory :
     {x : obj-total-precategory-Displayed-Precategory} →

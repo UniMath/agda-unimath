@@ -234,7 +234,7 @@ module _
   is-prop-is-unit-dependent-composition-operation-Precategory :
     is-prop is-unit-dependent-composition-operation-Precategory
   is-prop-is-unit-dependent-composition-operation-Precategory =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-left-unit-dependent-composition-operation-Precategory)
       ( is-prop-is-right-unit-dependent-composition-operation-Precategory)
 
