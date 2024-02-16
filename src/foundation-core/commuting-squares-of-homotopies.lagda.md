@@ -324,6 +324,9 @@ with a homotopy `top ~ top'`. Then we get an equivalence
           bottom                          bottom
 ```
 
+We record that this construction is an equivalence in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i : (x : A) → B x}
@@ -355,9 +358,6 @@ module _
       ( s x)
       ( H x)
 ```
-
-We record that this construction is an equivalence in
-[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
 
 #### Concatenating homotopies of the left edge with a coherence of a commuting square of homotopies
 
@@ -646,13 +646,12 @@ we may consider four ways of attaching new homotopies to it:
      (left ∙h bottom ~ top ∙h right) ≃ (left ∙h bottom ~ (top ∙h H⁻¹) ∙h (H ∙h right)).
    ```
 
-These operations are useful in proofs involving path algebra, because taking
-`equiv-right-whisker-concat-coherence-square-identicications` as an example, it
+These operations are useful in proofs involving homotopy algebra, because taking
+`equiv-right-whisker-concat-coherence-square-homotopies` as an example, it
 provides us with two maps: the forward direction states
 `(H ∙h r ~ K ∙h s) → (H ∙h (r ∙h t)) ~ K ∙h (s ∙h t))`, which allows one to
-append an homotopy without needing to reassociate on the right, and the
-backwards direction conversely allows one to cancel out a homotopy in
-parentheses.
+append a homotopy without needing to reassociate on the right, and the backwards
+direction conversely allows one to cancel out a homotopy in parentheses.
 
 #### Left whiskering coherences of commuting squares of homotopies
 

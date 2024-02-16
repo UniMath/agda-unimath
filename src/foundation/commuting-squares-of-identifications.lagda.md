@@ -391,7 +391,7 @@ we may consider four ways of attaching new identifications to it:
    ```
 
 These operations are useful in proofs involving path algebra, because taking
-`equiv-right-whisker-concat-coherence-square-identicications` as an example, it
+`equiv-right-whisker-concat-coherence-square-identifications` as an example, it
 provides us with two maps: the forward direction states
 `(p ∙ r ＝ q ∙ s) → (p ∙ (r ∙ t)) ＝ q ∙ (s ∙ t))`, which allows one to append
 an identification without needing to reassociate on the right, and the backwards

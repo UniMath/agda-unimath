@@ -377,7 +377,7 @@ module _
     equiv-free-loop-equivalence-invertible-equivalence
 ```
 
-### Invertible maps are embeddings
+### The action of invertible maps on identifications is invertible
 
 ```agda
 module _

@@ -376,8 +376,8 @@ we may consider four ways of attaching new homotopies to it:
      (left ∙h bottom ~ top ∙h right) ≃ (left ∙h bottom ~ (top ∙h p⁻¹) ∙h (p ∙h right)).
    ```
 
-These operations are useful in proofs involving path algebra, because taking
-`equiv-right-whisker-concat-coherence-square-identicications` as an example, it
+These operations are useful in proofs involving homotopy algebra, because taking
+`equiv-right-whisker-concat-coherence-square-homotopies` as an example, it
 provides us with two maps: the forward direction states
 `(p ∙h r ~ q ∙h s) → (p ∙h (r ∙h t)) ~ q ∙h (s ∙h t))`, which allows one to
 append a homotopy without needing to reassociate on the right, and the backwards

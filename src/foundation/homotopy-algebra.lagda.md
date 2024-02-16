@@ -68,13 +68,13 @@ module _
 For the general case, we must construct a coherence of the square
 
 ```text
-          gF
-    gf -------> gf'
-     |          |
-  Gf |          | Gf'
-     ∨          ∨
-    g'f ----> g'f'
-         g'F
+            g ·r F
+        gf -------> gf'
+         |          |
+  G ·r f |          | G ·r f'
+         ∨          ∨
+       g'f ------> g'f'
+           g' ·r F
 ```
 
 but this is an instance of naturality of `G` applied to `F`.

@@ -72,7 +72,7 @@ On this page we will prove that every two-sided inverse `g` of `f` can be
 promoted to a coherent two-sided inverse. Thus, for most properties of
 coherently invertible maps, it suffices to consider the data of a two-sided
 inverse. However, this coherence construction requires us to replace the section
-homotopy (or retraction homotopy). For this reason we also give alternative
+homotopy (or retraction homotopy). For this reason we also give direct
 constructions showing
 
 1. The identity map is coherently invertible.
@@ -81,11 +81,12 @@ constructions showing
 4. Every map homotopic to a coherently invertible map is coherently invertible.
 5. The 3-for-2 property of coherently invertible maps.
 
-That appropriately preserve the data of the underlying two-sided inverse.
+Each of these constructions appropriately preserve the data of the underlying
+two-sided inverse.
 
 ## Definition
 
-### The predicate of being coherently invertible on maps
+### The predicate of being a coherently invertible map
 
 ```agda
 module _
@@ -114,11 +115,11 @@ module _
   map-inv-is-coherently-invertible = pr1 H
 
   is-section-map-inv-is-coherently-invertible :
-    f ∘ map-inv-is-coherently-invertible ~ id
+    is-section f map-inv-is-coherently-invertible
   is-section-map-inv-is-coherently-invertible = pr1 (pr2 H)
 
   is-retraction-map-inv-is-coherently-invertible :
-    map-inv-is-coherently-invertible ∘ f ~ id
+    is-retraction f map-inv-is-coherently-invertible
   is-retraction-map-inv-is-coherently-invertible = pr1 (pr2 (pr2 H))
 
   coh-is-coherently-invertible :
@@ -196,21 +197,21 @@ module _
     coh-is-coherently-invertible
       ( is-coherently-invertible-map-coherently-invertible-map)
 
-  section-map-coherently-invertible-map :
+  section-coherently-invertible-map :
     section map-coherently-invertible-map
-  section-map-coherently-invertible-map =
+  section-coherently-invertible-map =
     section-is-coherently-invertible
       ( is-coherently-invertible-map-coherently-invertible-map)
 
-  retraction-map-coherently-invertible-map :
+  retraction-coherently-invertible-map :
     retraction map-coherently-invertible-map
-  retraction-map-coherently-invertible-map =
+  retraction-coherently-invertible-map =
     retraction-is-coherently-invertible
       ( is-coherently-invertible-map-coherently-invertible-map)
 
-  is-invertible-map-coherently-invertible-map :
+  is-invertible-coherently-invertible-map :
     is-invertible map-coherently-invertible-map
-  is-invertible-map-coherently-invertible-map =
+  is-invertible-coherently-invertible-map =
     is-invertible-is-coherently-invertible
       ( is-coherently-invertible-map-coherently-invertible-map)
 
@@ -218,10 +219,10 @@ module _
   pr1 invertible-map-coherently-invertible-map =
     map-coherently-invertible-map
   pr2 invertible-map-coherently-invertible-map =
-    is-invertible-map-coherently-invertible-map
+    is-invertible-coherently-invertible-map
 ```
 
-### The predicate of being transpose coherently invertible on maps
+### The predicate of being a transpose coherently invertible map
 
 ```agda
 module _
@@ -340,21 +341,21 @@ module _
     coh-is-transpose-coherently-invertible
       ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
 
-  section-map-transpose-coherently-invertible-map :
+  section-transpose-coherently-invertible-map :
     section map-transpose-coherently-invertible-map
-  section-map-transpose-coherently-invertible-map =
+  section-transpose-coherently-invertible-map =
     section-is-transpose-coherently-invertible
       ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
 
-  retraction-map-transpose-coherently-invertible-map :
+  retraction-transpose-coherently-invertible-map :
     retraction map-transpose-coherently-invertible-map
-  retraction-map-transpose-coherently-invertible-map =
+  retraction-transpose-coherently-invertible-map =
     retraction-is-transpose-coherently-invertible
       ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
 
-  is-invertible-map-transpose-coherently-invertible-map :
+  is-invertible-transpose-coherently-invertible-map :
     is-invertible map-transpose-coherently-invertible-map
-  is-invertible-map-transpose-coherently-invertible-map =
+  is-invertible-transpose-coherently-invertible-map =
     is-invertible-is-transpose-coherently-invertible
       ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
 
@@ -362,7 +363,7 @@ module _
   pr1 invertible-map-transpose-coherently-invertible-map =
     map-transpose-coherently-invertible-map
   pr2 invertible-map-transpose-coherently-invertible-map =
-    is-invertible-map-transpose-coherently-invertible-map
+    is-invertible-transpose-coherently-invertible-map
 ```
 
 ### Invertible maps that are coherent are coherently invertible maps
@@ -408,11 +409,12 @@ module _
 
 ## Properties
 
-### The inverse of a coherently invertible map is transpose coherently invertible
+### The inverse of a coherently invertible map is transpose coherently invertible and vice versa
 
 The inverse of a coherently invertible map is transpose coherently invertible.
-Of course, there is also a converse construction, and since these are defined by
-simply moving data around, they are strict inverses to one another.
+Conversely, the inverse of a transpose coherently invertible map is coherently
+invertible. Since these are defined by simply moving data around, they are
+strict inverses to one another.
 
 ```agda
 module _
@@ -455,7 +457,10 @@ module _
 
 ### Invertible maps are coherently invertible
 
-The construction follows Lemma 10.4.5 in _Introduction to Homotopy Type Theory_.
+This result is known as
+[Vogt's lemma](https://ncatlab.org/nlab/show/homotopy+equivalence#vogts_lemma)
+in point-set topology. The construction follows Lemma 10.4.5 in _Introduction to
+Homotopy Type Theory_.
 
 ```agda
 module _
@@ -521,10 +526,6 @@ module _
       coh-is-coherently-invertible-is-invertible)
 ```
 
-This result is known as
-[Vogt's lemma](https://ncatlab.org/nlab/show/homotopy+equivalence#vogts_lemma)
-in point-set topology.
-
 We also get the transpose version for free:
 
 ```agda
@@ -540,11 +541,11 @@ module _
         ( is-invertible-map-inv-is-invertible H))
 ```
 
-### Coherently invertible maps are embeddings
+### Coherently invertible maps are injective
 
-We first construct the converse map to the
-[action on identifications](foundation.action-on-identifications-functions.md).
-This is a rerun of the proof that maps with
+The construction of the converse map of the
+[action on identifications](foundation.action-on-identifications-functions.md)
+is a rerun of the proof that maps with
 [retractions](foundation-core.retractions.md) are
 [injective](foundation-core.injective-maps.md) (`is-injective-retraction`). We
 repeat the proof to avoid cyclic dependencies.
@@ -555,21 +556,23 @@ module _
   (H : is-coherently-invertible f) {x y : A}
   where
 
-  map-inv-ap-is-coherently-invertible : f x ＝ f y → x ＝ y
-  map-inv-ap-is-coherently-invertible p =
+  is-injective-is-coherently-invertible : f x ＝ f y → x ＝ y
+  is-injective-is-coherently-invertible p =
     ( inv (is-retraction-map-inv-is-coherently-invertible H x)) ∙
     ( ( ap (map-inv-is-coherently-invertible H) p) ∙
       ( is-retraction-map-inv-is-coherently-invertible H y))
 ```
 
-Next, we show that this converse map is a [section](foundation-core.sections.md)
-and retraction of `ap f`.
+### Coherently invertible maps are embeddings
+
+We show that `is-injective-is-coherently-invertible` is a
+[section](foundation-core.sections.md) and retraction of `ap f`.
 
 ```agda
   abstract
-    is-section-map-inv-ap-is-coherently-invertible :
-      ap f ∘ map-inv-ap-is-coherently-invertible ~ id
-    is-section-map-inv-ap-is-coherently-invertible p =
+    is-section-is-injective-is-coherently-invertible :
+      ap f ∘ is-injective-is-coherently-invertible ~ id
+    is-section-is-injective-is-coherently-invertible p =
       ( ap-concat f
         ( inv (is-retraction-map-inv-is-coherently-invertible H x))
         ( ( ap (map-inv-is-coherently-invertible H) p) ∙
@@ -597,18 +600,18 @@ and retraction of `ap f`.
               ( nat-htpy (is-section-map-inv-is-coherently-invertible H) p)))))
 
   abstract
-    is-retraction-map-inv-ap-is-coherently-invertible :
-      map-inv-ap-is-coherently-invertible ∘ ap f ~ id
-    is-retraction-map-inv-ap-is-coherently-invertible refl =
+    is-retraction-is-injective-is-coherently-invertible :
+      is-injective-is-coherently-invertible ∘ ap f ~ id
+    is-retraction-is-injective-is-coherently-invertible refl =
       left-inv (is-retraction-map-inv-is-coherently-invertible H x)
 
   is-invertible-ap-is-coherently-invertible : is-invertible (ap f {x} {y})
   pr1 is-invertible-ap-is-coherently-invertible =
-    map-inv-ap-is-coherently-invertible
+    is-injective-is-coherently-invertible
   pr1 (pr2 is-invertible-ap-is-coherently-invertible) =
-    is-section-map-inv-ap-is-coherently-invertible
+    is-section-is-injective-is-coherently-invertible
   pr2 (pr2 is-invertible-ap-is-coherently-invertible) =
-    is-retraction-map-inv-ap-is-coherently-invertible
+    is-retraction-is-injective-is-coherently-invertible
 
   is-coherently-invertible-ap-is-coherently-invertible :
     is-coherently-invertible (ap f {x} {y})
@@ -617,12 +620,12 @@ and retraction of `ap f`.
       ( is-invertible-ap-is-coherently-invertible)
 ```
 
-### Coherently invertible maps are coherently invertible in both senses
+### Coherently invertible maps are transpose coherently invertible
 
 The proof follows Lemma 4.2.2 in _Homotopy Type Theory – Univalent Foundations
 of Mathematics_.
 
-**Proof.** By naturality we have
+**Proof.** By naturality of homotopies we have
 
 ```text
                    gfRg
@@ -637,7 +640,7 @@ of Mathematics_.
 We can paste the homotopy
 
 ```text
-  g(inv-coh-htpy-id S) ∙ gHg : Sgfg ~ gfSg ~ gfRg
+  g (inv-coh-htpy-id S) ∙ gHg : Sgfg ~ gfSg ~ gfRg
 ```
 
 along the top edge of this naturality square obtaining the coherence square
@@ -671,9 +674,9 @@ obtain
             gfgS           gfgS
       gfg <------- gfgfg -------> gfg
        |             |             |
-    Rg |            Rgfg           | Rg
+    Rg |             | Rgfg        | Rg
        ∨             ∨             ∨
-       g <--------- gfg ---------> gm
+       g <--------- gfg --------> gm
              Rg             gS
 ```
 
@@ -762,7 +765,11 @@ module _
     is-transpose-coherently-invertible-transpose-coherence-is-invertible
       ( is-invertible-is-coherently-invertible H)
       ( coherence-transposition-is-coherently-invertible H)
+```
 
+### Transpose coherently invertible maps are coherently invertible
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
