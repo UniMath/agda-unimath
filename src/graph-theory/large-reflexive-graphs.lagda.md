@@ -15,8 +15,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "large reflexive graph" }} is a large directed graph such that
-there is an loop edge at every vertex.
+A {{#concept "large reflexive graph" Agda=Large-Reflexive-Graph}} is a large
+directed graph [equipped](foundation.structure.md) with a loop edge at every
+vertex.
 
 ## Definition
 
@@ -40,6 +41,10 @@ record
 
 open Large-Reflexive-Graph public
 ```
+
+## See also
+
+- [Reflexive graphs](graph-theory.reflexive-graphs.md)
 
 ## External links
 
