@@ -540,7 +540,7 @@ module _
 We record that this construction is an equivalence in
 [`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
 
-### Whiskering and splicing coherences of commuting squares of homotopies
+### Whiskering and splicing coherences of commuting squares of homotopies with respect to concatenation of homotopies
 
 Given a commuting square of homotopies
 
