@@ -187,8 +187,9 @@ module _
   is-retraction-map-section-is-equiv :
     (H : is-equiv f) → is-retraction f (map-section-is-equiv H)
   is-retraction-map-section-is-equiv H =
-    ( ( inv-htpy ( is-retraction-map-retraction-is-equiv H)) ·r
-      ( map-section-is-equiv H ∘ f) ∙h
+    ( ( inv-htpy
+        ( ( is-retraction-map-retraction-is-equiv H) ·r
+          ( map-section-is-equiv H ∘ f))) ∙h
       ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h
     ( is-retraction-map-retraction-is-equiv H)
 
