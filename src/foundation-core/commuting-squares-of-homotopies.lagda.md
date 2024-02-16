@@ -653,19 +653,20 @@ direction conversely allows one to cancel out a homotopy in parentheses.
 
 #### Left whiskering coherences of commuting squares of homotopies
 
-For any homotopy `H : u ~ f` we obtain an equivalence
+For any homotopy `H : u ~ f` we obtain maps back and forth
 
 ```text
            top                                H ∙h top
        f -------> g                         u -------> g
        |          |                         |          |
-  left |          | right    ≃    H ∙h left |          | right
+  left |          | right    ↔    H ∙h left |          | right
        ∨          ∨                         ∨          ∨
        h -------> i                         h -------> i
           bottom                               bottom
 ```
 
-of coherences of commuting squares of homotopies.
+of coherences of commuting squares of homotopies. We show in ... that these maps are equivalences.
+
 
 ```agda
 module _
