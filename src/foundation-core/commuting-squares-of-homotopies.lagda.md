@@ -704,19 +704,19 @@ module _
 
 #### Right whiskering coherences of commuting squares of homotopies
 
-For any homotopy `H : i ~ u` we obtain an equivalence
+For any homotopy `H : i ~ u` we obtain maps back and forth
 
 ```text
            top                                 top
        f -------> g                     f ------------> g
        |          |                     |               |
-  left |          | right    ≃     left |               | right ∙h H
+  left |          | right    ↔     left |               | right ∙h H
        ∨          ∨                     ∨               ∨
        h -------> i                     h ------------> i
           bottom                           bottom ∙h H
 ```
 
-of coherences of commuting squares of homotopies.
+of coherences of commuting squares of homotopies. We show in ... that these maps are equivalences.
 
 ```agda
 module _
