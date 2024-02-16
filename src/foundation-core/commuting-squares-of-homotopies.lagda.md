@@ -312,17 +312,16 @@ Consider a commuting diagram of homotopies
           bottom
 ```
 
-with a homotopy `top ~ top'`. Then we get an equivalence
+with a homotopy `top ~ top'`. Then we get maps back and forth
 
 ```text
            top                             top'
        f -------> g                    f -------> g
        |          |                    |          |
-  left |          | right    ≃    left |          | right
+  left |          | right    ↔    left |          | right
        ∨          ∨                    ∨          ∨
        h -------> i                    h -------> i.
           bottom                          bottom
-```
 
 We record that this construction is an equivalence in
 [`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
