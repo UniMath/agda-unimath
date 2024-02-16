@@ -322,6 +322,7 @@ with a homotopy `top ~ top'`. Then we get maps back and forth
        ∨          ∨                    ∨          ∨
        h -------> i                    h -------> i.
           bottom                          bottom
+```
 
 We record that this construction is an equivalence in
 [`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
@@ -382,6 +383,10 @@ with a homotopy `left ~ left'`. Then we get maps back and forth
        ∨          ∨                     ∨          ∨
        h -------> i                     h -------> i.
           bottom                           bottom
+```
+
+We record that this construction is an equivalence in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
 
 ```agda
 module _
@@ -415,9 +420,6 @@ module _
       ( H x)
 ```
 
-We record that this construction is an equivalence in
-[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md).
-
 #### Concatenating homotopies of the right edge with a coherence of a commuting square of homotopies
 
 Consider a commuting diagram of homotopies
@@ -442,6 +444,7 @@ with a homotopy `right ~ right'`. Then we get maps back and forth
        ∨          ∨                    ∨          ∨
        h -------> i                    h -------> i.
           bottom                          bottom
+```
 
 ```agda
 module _
@@ -503,6 +506,7 @@ with a homotopy `bottom ~ bottom'`. Then we get maps back and forth
        ∨          ∨                    ∨          ∨
        h -------> i                    h -------> i.
           bottom                          bottom'
+```
 
 ```agda
 module _
@@ -663,8 +667,9 @@ For any homotopy `H : u ~ f` we obtain maps back and forth
           bottom                               bottom
 ```
 
-of coherences of commuting squares of homotopies. We show in ... that these maps are equivalences.
-
+of coherences of commuting squares of homotopies. We show in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md)
+that these maps are equivalences.
 
 ```agda
 module _
@@ -716,7 +721,9 @@ For any homotopy `H : i ~ u` we obtain maps back and forth
           bottom                           bottom ∙h H
 ```
 
-of coherences of commuting squares of homotopies. We show in ... that these maps are equivalences.
+of coherences of commuting squares of homotopies. We show in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md)
+that these maps are equivalences.
 
 ```agda
 module _
@@ -796,7 +803,9 @@ For any inverse pair of homotopies `H : g ~ u` and `K : u ~ g` equipped with
           bottom                               K ∙h bottom
 ```
 
-of coherences of commuting squares of homotopies. We show in ... that these maps are equivalences.
+of coherences of commuting squares of homotopies. We show in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md)
+that these maps are equivalences.
 
 ```agda
 module _
@@ -850,7 +859,9 @@ For any inverse pair of homotopies `H : g ~ u` and `K : u ~ g` equipped with
           bottom                           bottom
 ```
 
-of coherences of commuting squares of homotopies. We show in ... that these maps are equivalences.
+of coherences of commuting squares of homotopies. We show in
+[`foundation.commuting-squares-of-homotopies`](foundation.commuting-squares-of-homotopies.md)
+that these maps are equivalences.
 
 ```agda
 module _
