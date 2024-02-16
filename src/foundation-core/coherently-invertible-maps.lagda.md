@@ -815,11 +815,11 @@ Moreover, assume the map `f'` is homotopic to `f` with homotopy `H : f' ~ f`.
 Then `g` is also a two-sided inverse to `f'` via the homotopies
 
 ```text
-  S' := Hg ∙ S : f' ∘ g ~ id    and    R' := gH ∙ R : g ∘ f' ~ id
+  S' := Hg ∙ S : f' ∘ g ~ id    and    R' := gH ∙ R : g ∘ f' ~ id.
 ```
 
-These witnesses are also part of a coherent inverse to `f'`. To show this, we
-must construct a coherence `C'` of the square
+Moreover, these witnesses are part of a coherent inverse to `f'`. To show this,
+we must construct a coherence `C'` of the square
 
 ```text
            Hgf'
@@ -836,7 +836,7 @@ via the composite
 
 ```text
                        Sf
-           HgH       ------>     H⁻¹
+           HgH       ------>    H⁻¹
     f'gf' -----> fgf    C    f ----> f'.
                      ------>
                        fR
