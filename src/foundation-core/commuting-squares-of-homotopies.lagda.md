@@ -838,19 +838,19 @@ module _
 #### Right splicing coherences of commuting squares of homotopies
 
 For any inverse pair of homotopies `H : g ~ u` and `K : u ~ g` equipped with
-`α : inv-htpy H ~ K` we obtain an equivalence
+`α : inv-htpy H ~ K` we obtain maps back and forth
 
 ```text
            top                             top ∙h H
        f -------> g                     f --------> u
        |          |                     |           |
-  left |          | right    ≃     left |           | K ∙h right
+  left |          | right    ↔     left |           | K ∙h right
        ∨          ∨                     ∨           ∨
        h -------> i                     h --------> i
           bottom                           bottom
 ```
 
-of coherences of commuting squares of homotopies.
+of coherences of commuting squares of homotopies. We show in ... that these maps are equivalences.
 
 ```agda
 module _
