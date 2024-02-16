@@ -493,17 +493,16 @@ Consider a commuting diagram of homotopies
           bottom'
 ```
 
-with a homotopy `bottom ~ bottom'`. Then we get an equivalence
+with a homotopy `bottom ~ bottom'`. Then we get maps back and forth
 
 ```text
            top                             top
        f -------> g                    f -------> g
        |          |                    |          |
-  left |          | right    ≃    left |          | right
+  left |          | right    ↔    left |          | right
        ∨          ∨                    ∨          ∨
        h -------> i                    h -------> i.
           bottom                          bottom'
-```
 
 ```agda
 module _
