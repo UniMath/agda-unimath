@@ -1,4 +1,4 @@
-name: Profile typechecking library
+name: Profile library typechecking
 on:
   # To run this workflow manually
   workflow_dispatch:
