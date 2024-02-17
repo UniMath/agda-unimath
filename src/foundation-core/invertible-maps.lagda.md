@@ -308,6 +308,28 @@ module _
     ( f ·l is-section-map-inv-invertible-map e)
 ```
 
+### Invertible maps are injective
+
+The construction of the converse map of the
+[action on identifications](foundation.action-on-identifications-functions.md)
+is a rerun of the proof that maps with
+[retractions](foundation-core.retractions.md) are
+[injective](foundation-core.injective-maps.md) (`is-injective-retraction`). We
+repeat the proof to avoid cyclic dependencies.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-invertible f) {x y : A}
+  where
+
+  is-injective-is-invertible : f x ＝ f y → x ＝ y
+  is-injective-is-invertible p =
+    ( inv (is-retraction-map-inv-is-invertible H x)) ∙
+    ( ( ap (map-inv-is-invertible H) p) ∙
+      ( is-retraction-map-inv-is-invertible H y))
+```
+
 ## See also
 
 - For the coherent notion of invertible maps see

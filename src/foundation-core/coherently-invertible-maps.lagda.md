@@ -526,7 +526,7 @@ module _
       coh-is-coherently-invertible-is-invertible)
 ```
 
-We also get the transpose version for free:
+We get the transpose version for free:
 
 ```agda
 module _
@@ -543,12 +543,29 @@ module _
 
 ### Coherently invertible maps are injective
 
-The construction of the converse map of the
-[action on identifications](foundation.action-on-identifications-functions.md)
-is a rerun of the proof that maps with
-[retractions](foundation-core.retractions.md) are
-[injective](foundation-core.injective-maps.md) (`is-injective-retraction`). We
-repeat the proof to avoid cyclic dependencies.
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-injective-is-coherently-invertible :
+    (H : is-coherently-invertible f) {x y : A} → f x ＝ f y → x ＝ y
+  is-injective-is-coherently-invertible H =
+    is-injective-is-invertible
+      ( is-invertible-is-coherently-invertible H)
+
+  is-injective-is-transpose-coherently-invertible :
+    (H : is-transpose-coherently-invertible f) {x y : A} → f x ＝ f y → x ＝ y
+  is-injective-is-transpose-coherently-invertible H =
+    is-injective-is-invertible
+      ( is-invertible-is-transpose-coherently-invertible H)
+```
+
+### Coherently invertible maps are embeddings
+
+We show that `is-injective-is-coherently-invertible` is a
+[section](foundation-core.sections.md) and
+[retraction](foundation-core.retractions.md) of `ap f`.
 
 ```agda
 module _
@@ -556,62 +573,47 @@ module _
   (H : is-coherently-invertible f) {x y : A}
   where
 
-  is-injective-is-coherently-invertible : f x ＝ f y → x ＝ y
-  is-injective-is-coherently-invertible p =
-    ( inv (is-retraction-map-inv-is-coherently-invertible H x)) ∙
-    ( ( ap (map-inv-is-coherently-invertible H) p) ∙
-      ( is-retraction-map-inv-is-coherently-invertible H y))
-```
-
-### Coherently invertible maps are embeddings
-
-We show that `is-injective-is-coherently-invertible` is a
-[section](foundation-core.sections.md) and retraction of `ap f`.
-
-```agda
   abstract
     is-section-is-injective-is-coherently-invertible :
-      ap f ∘ is-injective-is-coherently-invertible ~ id
+      ap f {x} {y} ∘ is-injective-is-coherently-invertible H ~ id
     is-section-is-injective-is-coherently-invertible p =
       ( ap-concat f
         ( inv (is-retraction-map-inv-is-coherently-invertible H x))
         ( ( ap (map-inv-is-coherently-invertible H) p) ∙
           ( is-retraction-map-inv-is-coherently-invertible H y))) ∙
-      ( ( ap-binary
-          ( _∙_)
-          ( ap-inv f (is-retraction-map-inv-is-coherently-invertible H x))
-          ( ( ap-concat f
-              ( ap (map-inv-is-coherently-invertible H) p)
-              ( is-retraction-map-inv-is-coherently-invertible H y)) ∙
-            ( ap-binary
+      ( ap-binary
+        ( _∙_)
+        ( ap-inv f (is-retraction-map-inv-is-coherently-invertible H x))
+        ( ( ap-concat f
+            ( ap (map-inv-is-coherently-invertible H) p)
+            ( is-retraction-map-inv-is-coherently-invertible H y)) ∙
+          ( ap-binary
+            ( _∙_)
+            ( inv (ap-comp f (map-inv-is-coherently-invertible H) p))
+            ( inv (coh-is-coherently-invertible H y))))) ∙
+      ( inv
+        ( left-transpose-eq-concat
+          ( ap f (is-retraction-map-inv-is-coherently-invertible H x))
+          ( p)
+          ( ( ap (f ∘ map-inv-is-coherently-invertible H) p) ∙
+            ( is-section-map-inv-is-coherently-invertible H (f y)))
+          ( ( ap-binary
               ( _∙_)
-              ( inv (ap-comp f (map-inv-is-coherently-invertible H) p))
-              ( inv (coh-is-coherently-invertible H y))))) ∙
-        ( inv
-          ( left-transpose-eq-concat
-            ( ap f (is-retraction-map-inv-is-coherently-invertible H x))
-            ( p)
-            ( ( ap (f ∘ map-inv-is-coherently-invertible H) p) ∙
-              ( is-section-map-inv-is-coherently-invertible H (f y)))
-            ( ( ap-binary
-                ( _∙_)
-                ( inv (coh-is-coherently-invertible H x))
-                ( inv (ap-id p))) ∙
-              ( nat-htpy (is-section-map-inv-is-coherently-invertible H) p)))))
+              ( inv (coh-is-coherently-invertible H x))
+              ( inv (ap-id p))) ∙
+            ( nat-htpy (is-section-map-inv-is-coherently-invertible H) p))))
 
   abstract
     is-retraction-is-injective-is-coherently-invertible :
-      is-injective-is-coherently-invertible ∘ ap f ~ id
+      is-injective-is-coherently-invertible H ∘ ap f {x} {y} ~ id
     is-retraction-is-injective-is-coherently-invertible refl =
       left-inv (is-retraction-map-inv-is-coherently-invertible H x)
 
   is-invertible-ap-is-coherently-invertible : is-invertible (ap f {x} {y})
-  pr1 is-invertible-ap-is-coherently-invertible =
-    is-injective-is-coherently-invertible
-  pr1 (pr2 is-invertible-ap-is-coherently-invertible) =
-    is-section-is-injective-is-coherently-invertible
-  pr2 (pr2 is-invertible-ap-is-coherently-invertible) =
-    is-retraction-is-injective-is-coherently-invertible
+  is-invertible-ap-is-coherently-invertible =
+    ( is-injective-is-coherently-invertible H ,
+      is-section-is-injective-is-coherently-invertible ,
+      is-retraction-is-injective-is-coherently-invertible)
 
   is-coherently-invertible-ap-is-coherently-invertible :
     is-coherently-invertible (ap f {x} {y})
@@ -655,7 +657,7 @@ along the top edge of this naturality square obtaining the coherence square
               Rg
 ```
 
-There is also the following naturality square
+There is also the naturality square
 
 ```text
                    gfgS
@@ -667,8 +669,7 @@ There is also the following naturality square
                     gS
 ```
 
-Now, by pasting the first square to the second along the common edge `Rgfg`, we
-obtain
+Now, by pasting these along the common edge `Rgfg`, we obtain
 
 ```text
             gfgS           gfgS
@@ -756,8 +757,7 @@ module _
       ( is-retraction-map-inv-is-coherently-invertible H)
   coherence-transposition-is-coherently-invertible
     ( g , S , R , H) =
-    coherence-transposition-coherence-is-coherently-invertible
-      f g S R H
+    coherence-transposition-coherence-is-coherently-invertible f g S R H
 
   transposition-is-coherently-invertible :
     is-coherently-invertible f → is-transpose-coherently-invertible f
