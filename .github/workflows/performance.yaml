@@ -1,4 +1,4 @@
-name: Profile typechecking of whole library
+name: Profile typechecking library
 on:
   # To run this workflow manually
   workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
         with:
           agda-version: ${{ matrix.agda }}
 
-      - name: Typecheck the whole formalization with profiling
+      - name: Typecheck library with profiling
         run: |
           cd master
           make check-profile
