@@ -29,18 +29,22 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 ## Idea
 
 There are two classical statements of the Eckmann-Hilton argument. The first
-states that a group object in the category of groups is abelian. The second
-states that `π₂(X)` is abelian, for any space `X`. The former is an algebraic
-statement, while the latter is a homotopy theoretic statment. As it turns out,
-the two are equivalent. See the following
-[wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
+states that a group object in the
+[category of groups](group-theory.category-of-groups.md) is
+[abelian](group-theory.abelian-groups.md). The second states that `π₂(X)` is
+abelian, for any space `X`. The former is an algebraic statement, while the
+latter is a homotopy theoretic statment. As it turns out, the two are
+[equivalent](foundation.logical-equivalences.md). See the following
+[Wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
 
-Both these phrasings, however, are about set level structures. Since we have
-access to untruncated types, it is more natural to consider untruncated analogs
-of the above two statements. Thus, we will work with the following statement of
-the Eckmann-Hilton argument:
+Both of these phrasings, however, are about [set](foundation-core.sets.md) level
+structures. Since we have access to untruncated types, it is more natural to
+consider untruncated analogs of the above two statements. Thus, we will work
+with the following statement of the Eckmann-Hilton argument:
 
-`(α β : Ω² X) → α ∙ β = β ∙ α`
+```text
+  (α β : Ω² X) → α ∙ β = β ∙ α
+```
 
 For fixed 2-loops, we will call the resulting identification "the Eckmann-Hilton
 identification". In this file we will give two different constructions of this
