@@ -578,7 +578,7 @@ module _
 
 ### The groupoidal laws for the Yoneda identity types
 
-As we may now observe, associativity and the unit laws holds by `refl`.
+As we may now observe, associativity and the unit laws hold by `refl`.
 
 ```agda
 module _
