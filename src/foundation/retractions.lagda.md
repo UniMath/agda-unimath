@@ -13,7 +13,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.coslice
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.multivariable-homotopies
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -131,11 +130,21 @@ module _
     is-retraction-transpose-eq ∘ transpose-eq-is-retraction ~ id
   is-retraction-is-retraction-transpose-eq H = refl
 
+  htpy-is-section-is-retraction-transpose-eq :
+    (H : {x : B} {y : A} → x ＝ f y → g x ＝ y)
+    (x : B) (y : A) →
+    transpose-eq-is-retraction (is-retraction-transpose-eq H) {x} {y} ~
+    H {x} {y}
+  htpy-is-section-is-retraction-transpose-eq H x y refl = refl
+
   abstract
     is-section-is-retraction-transpose-eq :
       transpose-eq-is-retraction ∘ is-retraction-transpose-eq ~ id
     is-section-is-retraction-transpose-eq H =
-      eq-multivariable-htpy-implicit 2 (λ x y → eq-htpy (λ where refl → refl))
+      eq-htpy-implicit
+        ( λ x →
+          eq-htpy-implicit
+            ( λ y → eq-htpy (htpy-is-section-is-retraction-transpose-eq H x y)))
 
   is-equiv-transpose-eq-is-retraction :
     is-equiv transpose-eq-is-retraction

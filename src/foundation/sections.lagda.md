@@ -13,7 +13,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.multivariable-homotopies
 open import foundation.retracts-of-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
@@ -216,11 +215,21 @@ module _
     is-section-transpose-eq ∘ transpose-eq-is-section ~ id
   is-retraction-is-section-transpose-eq H = refl
 
+  htpy-is-section-is-section-transpose-eq :
+    (H : {x : A} {y : B} → x ＝ g y → f x ＝ y) →
+    (x : A) (y : B) →
+    transpose-eq-is-section (is-section-transpose-eq H) {x} {y} ~ H {x} {y}
+  htpy-is-section-is-section-transpose-eq H x y refl = refl
+
   abstract
     is-section-is-section-transpose-eq :
       transpose-eq-is-section ∘ is-section-transpose-eq ~ id
     is-section-is-section-transpose-eq H =
-      eq-multivariable-htpy-implicit 2 (λ x y → eq-htpy (λ where refl → refl))
+      eq-htpy-implicit
+        ( λ x →
+          eq-htpy-implicit
+          ( λ y →
+            eq-htpy (htpy-is-section-is-section-transpose-eq H x y)))
 
   is-equiv-transpose-eq-is-section :
     is-equiv transpose-eq-is-section
