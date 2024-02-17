@@ -708,7 +708,8 @@ module _
 
 ### Action of binary functions on Yoneda identifications
 
-Using one of the two sides in the Gray interchange diagram
+We obtain an action of binary functions on Yoneda identifications that computes
+on both arguments using one of the two sides in the Gray interchange diagram
 
 ```text
                          ap (f x) q
@@ -723,8 +724,7 @@ Using one of the two sides in the Gray interchange diagram
 ```
 
 and the fact that the concatenation operation on Yoneda identifications is
-two-sided strictly unital, we obtain an action of binary functions on Yoneda
-identifications that computes on both arguments.
+two-sided strictly unital.
 
 ```agda
 module _
