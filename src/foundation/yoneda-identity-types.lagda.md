@@ -712,15 +712,15 @@ We obtain an action of binary functions on Yoneda identifications that computes
 on both arguments using one of the two sides in the Gray interchange diagram
 
 ```text
-                         ap (f x) q
+                      ap (r ↦ f x r) q
                  f x y -------------> f x y'
                    |                    |
                    |                    |
   ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
                    |                    |
                    ∨                    ∨
-                 f x' y ------------> f x' y'
-                         ap (f x') q
+                 f x' y ------------> f x' y'.
+                      ap (r ↦ f x' r) q
 ```
 
 and the fact that the concatenation operation on Yoneda identifications is
