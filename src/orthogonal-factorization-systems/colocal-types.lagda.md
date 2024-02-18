@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.colocal-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -18,6 +19,7 @@ open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
 open import foundation.propositions
 open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 ```
@@ -146,7 +148,7 @@ module _
 
 In fact, the higher coherence of the retract is not needed:
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y) (R₀ : A retract-of X) (R₁ : B retract-of Y)
@@ -160,27 +162,29 @@ module _
   (S : UU l5)
   where
 
-  is-colocal-retract-map-is-colocal' : is-colocal S g → is-colocal S f
+  is-colocal-retract-map-is-colocal' : is-colocal g S → is-colocal f S
   is-colocal-retract-map-is-colocal' =
     is-equiv-retract-map-is-equiv'
       ( postcomp S f)
       ( postcomp S g)
-      ( retract-postcomp S R₁)
       ( retract-postcomp S R₀)
-      ( postcomp-coherence-square-maps
-        ( g)
-        ( map-retraction-retract R₀)
-        ( map-retraction-retract R₁)
-        ( f)
-        ( r)
-        ( S))
-      ( postcomp-coherence-square-maps
-        ( f)
-        ( inclusion-retract R₀)
-        ( inclusion-retract R₁)
-        ( g)
-        ( i)
-        ( S))
+      ( retract-postcomp S R₁)
+      ( inv-htpy
+        ( postcomp-coherence-square-maps
+          ( f)
+          ( inclusion-retract R₀)
+          ( inclusion-retract R₁)
+          ( g)
+          ( S)
+          ( i)))
+      ( inv-htpy
+        ( postcomp-coherence-square-maps
+          ( g)
+          ( map-retraction-retract R₀)
+          ( map-retraction-retract R₁)
+          ( f)
+          ( S)
+          ( r)))
 ```
 
 ### If every type is `f`-colocal, then `f` is an equivalence
