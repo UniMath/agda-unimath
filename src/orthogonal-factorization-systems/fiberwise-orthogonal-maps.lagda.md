@@ -96,3 +96,39 @@ module _
 ```
 
 ## Properties
+
+### Fiberwise orthogonality is preserved by homotopies
+
+This remains to be formalized.
+
+### Equivalences are fiberwise orthogonal to every map
+
+This remains to be formalized.
+
+### Fiberwise orthogonal maps are closed under composition and have the right cancellation property
+
+This remains to be formalized.
+
+### Fiberwise orthogonal maps are closed under coproducts
+
+This remains to be formalized.
+
+### Fiberwise orthogonality is preserved under base change
+
+This remains to be formalized.
+
+### Fiberwise orthogonal maps are closed under cobase change
+
+This remains to be formalized.
+
+### Fiberwise orthogonal maps are closed transfininte composition
+
+This remains to be formalized.
+
+### Fiberwise orthogonal maps are closed under coproducts
+
+This remains to be formalized.
+
+### Fiberwise orthogonal maps are closed under taking image inclusions
+
+This remains to be formalized.
