@@ -22,6 +22,7 @@ open import foundation.retracts-of-maps
 open import foundation.retracts-of-types
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
@@ -30,11 +31,11 @@ open import foundation.universe-levels
 
 A type `A` is said to be
 {{#concept "colocal" Disambiguation="type at a map" Agda=is-colocal}} at the map
-`f : Y → X`, or **`f`-colocal**, if the
+`f : X → Y`, or **`f`-colocal**, if the
 [postcomposition map](foundation-core.postcomposition-functions.md)
 
 ```text
-  f ∘_ : (A → Y) → (A → X)
+  f ∘_ : (A → X) → (A → Y)
 ```
 
 is an [equivalence](foundation-core.equivalences.md). This is dual to the notion
@@ -43,7 +44,7 @@ is a type such that the
 [precomposition map](foundation-core.precompositon-functions.md)
 
 ```text
-  _∘ f : (X → A) → (Y → A)
+  _∘ f : (Y → A) → (X → A)
 ```
 
 is an equivalence.
@@ -54,8 +55,8 @@ is an equivalence.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) {Y : A → UU l2} {X : A → UU l3}
-  (f : {a : A} → Y a → X a)
+  {l1 l2 l3 : Level} (A : UU l1) {X : A → UU l2} {Y : A → UU l3}
+  (f : {a : A} → X a → Y a)
   where
 
   is-dependent-map-colocal : UU (l1 ⊔ l2 ⊔ l3)
@@ -72,8 +73,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {Y : UU l2} {X : UU l3}
-  (f : Y → X) (A : UU l1)
+  {l1 l2 l3 : Level} {X : UU l2} {Y : UU l3}
+  (f : X → Y) (A : UU l1)
   where
 
   is-colocal : UU (l1 ⊔ l2 ⊔ l3)
@@ -93,24 +94,17 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  {Y : UU l1} {X : UU l2} {A : X → UU l3} {B : X → UU l4}
-  (f : Y → X)
-  where
-
-module _
-  {l1 l2 l3 l4 : Level}
-  {Y : UU l1} {X : UU l2} {A : UU l3} {B : UU l4}
-  (f : Y → X)
+  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4}
+  (f : X → Y)
   where
 
   is-colocal-equiv : A ≃ B → is-colocal f B → is-colocal f A
   is-colocal-equiv e is-colocal-B =
     is-equiv-htpy-equiv
-      ( ( equiv-precomp e X) ∘e
+      ( ( equiv-precomp e Y) ∘e
         ( postcomp B f , is-colocal-B) ∘e
-        ( equiv-precomp (inv-equiv e) Y))
-      ( λ g →
-        eq-htpy (λ x → ap (f ∘ g) (inv (is-retraction-map-inv-equiv e x))))
+        ( equiv-precomp (inv-equiv e) X))
+      ( λ g → eq-htpy ((f ∘ g) ·l inv-htpy (is-retraction-map-inv-equiv e)))
 
   is-colocal-inv-equiv : B ≃ A → is-colocal f B → is-colocal f A
   is-colocal-inv-equiv e = is-colocal-equiv (inv-equiv e)
@@ -120,7 +114,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} {A : UU l3} {f f' : Y → X}
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {f f' : X → Y}
   where
 
   is-colocal-htpy : (H : f ~ f') → is-colocal f' A → is-colocal f A
@@ -191,7 +185,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
   is-equiv-is-colocal : ({l : Level} (A : UU l) → is-colocal f A) → is-equiv f
@@ -202,7 +196,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
   is-colocal-is-equiv :
@@ -217,8 +211,3 @@ This remains to be formalized.
 ### A type that is colocal at the unique map `empty → unit` is empty
 
 This remains to be formalized.
-
-## See also
-
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
