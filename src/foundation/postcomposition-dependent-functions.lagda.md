@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.postcomposition-dependent-functions where
+
+open import foundation-core.postcomposition-dependent-functions public
 ```
 
 <details><summary>Imports</summary>
@@ -36,17 +38,6 @@ the use-case for postcomposition of dependent functions is very limited, since
 the definition of `f` depends on the particular choice of `A`. Once we allow `A`
 to vary while keeping `f` fixed, we reduce to the case of
 [postcomposition of (nondependent) functions](foundation-core.postcomposition-functions.md).
-
-## Definitions
-
-```agda
-module _
-  {l1 l2 l3 : Level} (A : UU l1) {X : A → UU l2} {Y : A → UU l3}
-  where
-
-  postcomp-Π : ({a : A} → X a → Y a) → ((a : A) → X a) → ((a : A) → Y a)
-  postcomp-Π f = f ∘_
-```
 
 ## Properties
 
