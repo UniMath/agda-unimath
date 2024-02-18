@@ -38,7 +38,8 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
         j
 ```
 
-is a [pullback](foundation.pullbacks.md) square.
+is a [pullback](foundation.pullbacks.md) square. In this instance, we also say
+that `f` is a {{#concept "base change" Disambiguation="maps of types"}} of `g`.
 
 ## Definitions
 

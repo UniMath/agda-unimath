@@ -287,8 +287,6 @@ module _
     is-local-dependent-type-is-prop (λ _ → A) (λ _ → is-prop-A)
 ```
 
-## Examples
-
 ### All type families are local at equivalences
 
 ```agda
