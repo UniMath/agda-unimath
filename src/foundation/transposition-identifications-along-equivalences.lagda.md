@@ -8,13 +8,13 @@ module foundation.transposition-identifications-along-equivalences where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
-open import foundation.commuting-triangles-of-identifications
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 ```
@@ -40,7 +40,9 @@ constructing this equivalence. One way uses the fact that `e⁻¹` is a
  (e x ＝ y) ≃ (e x ＝ e e⁻¹ y) ≃ (x ＝ e⁻¹ y).
 ```
 
-In other words, the transpose of an identification `p : e x ＝ y` along `e` is the unique identification `q : x ＝ e⁻¹ y` equipped with an identification witnessing that the triangle
+In other words, the transpose of an identification `p : e x ＝ y` along `e` is
+the unique identification `q : x ＝ e⁻¹ y` equipped with an identification
+witnessing that the triangle
 
 ```text
       ap e q
