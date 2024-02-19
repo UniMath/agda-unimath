@@ -81,7 +81,7 @@ module _
     {a : A} {α : type-Ω² a} →
     horizontal-concat-Ω² refl-Ω² α ＝ α
   left-unit-law-horizontal-concat-Ω² {α = α} =
-    compute-left-horizontal-concat-Id² α ∙ ap-id α
+    compute-left-refl-horizontal-concat-Id² α ∙ ap-id α
 
   naturality-right-unit :
     {x y : A} {p q : x ＝ y} (α : p ＝ q) →
@@ -99,7 +99,7 @@ module _
   right-unit-law-horizontal-concat-Ω² :
     {a : A} {α : type-Ω² a} → horizontal-concat-Ω² α refl-Ω² ＝ α
   right-unit-law-horizontal-concat-Ω² {α = α} =
-    compute-right-horizontal-concat-Id² α ∙ naturality-right-unit-Ω² α
+    compute-right-refl-horizontal-concat-Id² α ∙ naturality-right-unit-Ω² α
 
   left-unit-law-left-whisker-Ω² :
     {a : A} (α : type-Ω² a) → left-whisker-concat (refl-Ω (A , a)) α ＝ α

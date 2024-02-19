@@ -709,7 +709,7 @@ module _
 ### Action of binary functions on Yoneda identifications
 
 We obtain an action of binary functions on Yoneda identifications that computes
-on both arguments using one of the two sides in the Gray interchange diagram
+on both arguments using one of the two sides in the Gray interchanger diagram
 
 ```text
                       ap (r ↦ f x r) q
