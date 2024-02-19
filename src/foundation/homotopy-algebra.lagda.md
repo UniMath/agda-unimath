@@ -7,7 +7,6 @@ module foundation.homotopy-algebra where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.homotopy-induction
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -34,12 +33,12 @@ module _
   {f f' : (x : A) → B x} {g g' : {x : A} → B x → C x}
   where
 
-  horizontal-concat-htpy : f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
-  horizontal-concat-htpy F G = (g ·l F) ∙h (G ·r f')
+  horizontal-concat-htpy : ({x : A} → g {x} ~ g' {x}) → f ~ f' → g ∘ f ~ g' ∘ f'
+  horizontal-concat-htpy G F = (g ·l F) ∙h (G ·r f')
 
   horizontal-concat-htpy' :
-    f ~ f' → ({x : A} → g {x} ~ g' {x}) → g ∘ f ~ g' ∘ f'
-  horizontal-concat-htpy' F G = (G ·r f) ∙h (g' ·l F)
+    ({x : A} → g {x} ~ g' {x}) → f ~ f' → g ∘ f ~ g' ∘ f'
+  horizontal-concat-htpy' G F = (G ·r f) ∙h (g' ·l F)
 ```
 
 ## Properties
@@ -51,27 +50,43 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  coh-left-unit-horizontal-concat-htpy :
+  coh-right-unit-horizontal-concat-htpy :
     {f : (x : A) → B x} {g g' : {x : A} → B x → C x}
     (G : {x : A} → g {x} ~ g' {x}) →
-    horizontal-concat-htpy (refl-htpy' f) G ~
-    horizontal-concat-htpy' (refl-htpy' f) G
-  coh-left-unit-horizontal-concat-htpy G = inv-htpy-right-unit-htpy
+    horizontal-concat-htpy G (refl-htpy' f) ~
+    horizontal-concat-htpy' G (refl-htpy' f)
+  coh-right-unit-horizontal-concat-htpy G = inv-htpy-right-unit-htpy
 
-  coh-right-unit-horizontal-concat-htpy :
+  coh-left-unit-horizontal-concat-htpy :
     {f f' : (x : A) → B x} {g : {x : A} → B x → C x}
     (F : f ~ f') →
-    horizontal-concat-htpy F (refl-htpy' g) ~
-    horizontal-concat-htpy' F (refl-htpy' g)
-  coh-right-unit-horizontal-concat-htpy F = right-unit-htpy
+    horizontal-concat-htpy (refl-htpy' g) F ~
+    horizontal-concat-htpy' (refl-htpy' g) F
+  coh-left-unit-horizontal-concat-htpy F = right-unit-htpy
+```
+
+For the general case, we must construct a coherence of the square
+
+```text
+            g ·r F
+        gf -------> gf'
+         |          |
+  G ·r f |          | G ·r f'
+         ∨          ∨
+       g'f ------> g'f'
+           g' ·r F
+```
+
+but this is an instance of naturality of `G` applied to `F`.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f f' : (x : A) → B x} {g g' : {x : A} → B x → C x}
+  (G : {x : A} → g {x} ~ g' {x}) (F : f ~ f')
+  where
 
   coh-horizontal-concat-htpy :
-    {f f' : (x : A) → B x} {g g' : {x : A} → B x → C x}
-    (F : f ~ f') (G : {x : A} → g {x} ~ g' {x}) →
-    horizontal-concat-htpy F G ~ horizontal-concat-htpy' F G
-  coh-horizontal-concat-htpy {f} F G =
-    ind-htpy f
-      ( λ f' F → horizontal-concat-htpy F G ~ horizontal-concat-htpy' F G)
-      ( coh-left-unit-horizontal-concat-htpy G)
-      ( F)
+    horizontal-concat-htpy' G F ~ horizontal-concat-htpy G F
+  coh-horizontal-concat-htpy = nat-htpy G ·r F
 ```
