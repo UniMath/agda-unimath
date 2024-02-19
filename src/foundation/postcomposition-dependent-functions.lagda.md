@@ -93,7 +93,7 @@ module _
       ( eq-htpy)
       ( ap (postcomp-Π A f))
   compute-eq-htpy-ap-postcomp-Π =
-    coherence-square-maps-inv-equiv-vertical
+    vertical-inv-equiv-coherence-square-maps
       ( ap (postcomp-Π A f))
       ( equiv-funext)
       ( equiv-funext)

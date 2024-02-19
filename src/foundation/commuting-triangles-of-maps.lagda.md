@@ -17,11 +17,11 @@ open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -196,7 +196,7 @@ module _
   coherence-htpy-triangle-maps :
     left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
   coherence-htpy-triangle-maps L R T =
-    c ∙h horizontal-concat-htpy T R ~ L ∙h c'
+    c ∙h horizontal-concat-htpy R T ~ L ∙h c'
 ```
 
 ### Pasting commuting triangles into commuting squares along homotopic diagonals
