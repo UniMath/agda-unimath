@@ -9,26 +9,25 @@ open import foundation-core.commuting-squares-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-maps
 open import foundation.function-extensionality
-open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-prisms-of-maps
+open import foundation-core.commuting-squares-of-homotopies
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -175,7 +174,7 @@ module _
       ( id)
       ( is-retraction-map-inv-equiv left)
       ( H)
-      ( coherence-square-maps-inv-equiv-vertical top left right bottom H)
+      ( vertical-inv-equiv-coherence-square-maps top left right bottom H)
       ( refl-htpy)
       ( is-retraction-map-inv-equiv right)
   left-inverse-law-pasting-vertical-coherence-square-maps H a =
@@ -284,7 +283,7 @@ module _
       ( id)
       ( id)
       ( is-section-map-inv-equiv left)
-      ( coherence-square-maps-inv-equiv-vertical top left right bottom H)
+      ( vertical-inv-equiv-coherence-square-maps top left right bottom H)
       ( H)
       ( refl-htpy)
       ( is-section-map-inv-equiv right)
@@ -295,7 +294,7 @@ module _
           ( H (map-inv-equiv left a))
           ( ap
             ( map-equiv right)
-            ( coherence-square-maps-inv-equiv-vertical top left right bottom
+            ( vertical-inv-equiv-coherence-square-maps top left right bottom
               ( H)
               ( a)))
           ( is-section-map-inv-equiv right (bottom a))) ∙
@@ -570,8 +569,12 @@ module _
         ( sq-left-bottom ·r left-top)
         ( mid-bottom ·l sq-left-top)) ∙h
       ( double-whisker-coherence-square-homotopies
-        ( bottom-right ·l (sq-left-bottom ·r left-top))
-        ( right-bottom ·l (sq-right-top ·r top-left))
+        ( bottom-right ·l sq-left-bottom ·r left-top)
+        ( sq-right-bottom ·r mid-left ·r left-top)
+        ( bottom-right ·l mid-bottom ·l sq-left-top)
+        ( right-bottom ·l mid-right ·l sq-left-top)
+        ( sq-right-bottom ·r mid-top ·r top-left)
+        ( right-bottom ·l sq-right-top ·r top-left)
         ( inv-htpy
           ( swap-nat-coherence-square-maps
             ( top-left)
