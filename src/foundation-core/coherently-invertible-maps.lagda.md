@@ -61,7 +61,7 @@ There is also the alternative coherence condition we could add
                g ·l S
 ```
 
-We will colloquially refer to invertible maps equipped with this coherence for
+We will colloquially refer to invertible maps equipped with this coherence as
 _transpose coherently invertible maps_.
 
 **Note.** Coherently invertible maps are referred to as
@@ -878,7 +878,7 @@ squares
       |             |            |             |
   Sf' |             | Sf     f'R |             | fR
       ∨             ∨            ∨             ∨
-      f' ---------> f            f' ---------> f
+      f' ---------> f            f' ---------> f.
              H                          H
 ```
 
