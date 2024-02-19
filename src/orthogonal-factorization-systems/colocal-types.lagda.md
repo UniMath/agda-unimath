@@ -41,7 +41,7 @@ A type `A` is said to be
 is an [equivalence](foundation-core.equivalences.md). This is dual to the notion
 of an [`f`-local type](orthogonal-factorization-systems.local-types.md), which
 is a type such that the
-[precomposition map](foundation-core.precompositon-functions.md)
+[precomposition map](foundation-core.precomposition-functions.md)
 
 ```text
   _∘ f : (Y → A) → (X → A)
