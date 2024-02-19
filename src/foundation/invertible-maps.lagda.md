@@ -9,6 +9,7 @@ open import foundation-core.invertible-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -22,7 +23,6 @@ open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
-open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
@@ -31,9 +31,11 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.coherently-invertible-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -110,9 +112,9 @@ module _
       ( is-torsorial-htpy (map-inv-is-invertible s))
       ( map-inv-is-invertible s , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy (is-retraction-is-invertible s))
-        ( is-retraction-is-invertible s , refl-htpy)
-        (is-torsorial-htpy (is-section-is-invertible s)))
+        ( is-torsorial-htpy (is-section-map-inv-is-invertible s))
+        ( is-section-map-inv-is-invertible s , refl-htpy)
+        (is-torsorial-htpy (is-retraction-map-inv-is-invertible s)))
 
   is-equiv-htpy-eq-is-invertible :
     (s t : is-invertible f) → is-equiv (htpy-eq-is-invertible s t)
@@ -144,13 +146,13 @@ module _
     map-inv-invertible-map s ~ map-inv-invertible-map t → UU (l1 ⊔ l2)
   coherence-htpy-invertible-map s t H I =
     ( coherence-triangle-homotopies
-      ( is-retraction-map-invertible-map s)
-      ( is-retraction-map-invertible-map t)
-      ( horizontal-concat-htpy I H)) ×
+      ( is-section-map-inv-invertible-map s)
+      ( is-section-map-inv-invertible-map t)
+      ( horizontal-concat-htpy H I)) ×
     ( coherence-triangle-homotopies
-      ( is-section-map-invertible-map s)
-      ( is-section-map-invertible-map t)
-      ( horizontal-concat-htpy H I))
+      ( is-retraction-map-inv-invertible-map s)
+      ( is-retraction-map-inv-invertible-map t)
+      ( horizontal-concat-htpy I H))
 
   htpy-invertible-map : (s t : invertible-map A B) → UU (l1 ⊔ l2)
   htpy-invertible-map s t =
@@ -179,9 +181,9 @@ module _
         ( is-torsorial-htpy (map-inv-invertible-map s))
         ( map-inv-invertible-map s , refl-htpy)
         ( is-torsorial-Eq-structure
-          ( is-torsorial-htpy (is-retraction-map-invertible-map s))
-          ( is-retraction-map-invertible-map s , refl-htpy)
-          ( is-torsorial-htpy (is-section-map-invertible-map s))))
+          ( is-torsorial-htpy (is-section-map-inv-invertible-map s))
+          ( is-section-map-inv-invertible-map s , refl-htpy)
+          ( is-torsorial-htpy (is-retraction-map-inv-invertible-map s))))
 
   is-equiv-htpy-eq-invertible-map :
     (s t : invertible-map A B) → is-equiv (htpy-eq-invertible-map s t)
@@ -373,6 +375,20 @@ module _
   equiv-free-loop-equivalence-invertible-map =
     equiv-invertible-equivalence-invertible-map ∘e
     equiv-free-loop-equivalence-invertible-equivalence
+```
+
+### The action of invertible maps on identifications is invertible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-invertible f) {x y : A}
+  where
+
+  is-invertible-ap-is-invertible : is-invertible (ap f {x} {y})
+  is-invertible-ap-is-invertible =
+    is-invertible-ap-is-coherently-invertible
+      ( is-coherently-invertible-is-invertible H)
 ```
 
 ## See also

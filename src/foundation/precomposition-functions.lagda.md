@@ -206,7 +206,7 @@ module _
       ( eq-htpy)
       ( ap (precomp f C))
   compute-eq-htpy-ap-precomp =
-    coherence-square-maps-inv-equiv-vertical
+    vertical-inv-equiv-coherence-square-maps
       ( ap (precomp f C))
       ( equiv-funext)
       ( equiv-funext)
