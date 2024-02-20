@@ -222,6 +222,23 @@ module _
       ( left-unit-law-function-type (fiber f (b star)) , id-equiv , refl-htpy)
       ( H (b star))
 
+  is-null-map-is-orthogonal-pullback-condition-terminal-map :
+    is-orthogonal-pullback-condition (terminal-map Y) f → is-null-map Y f
+  is-null-map-is-orthogonal-pullback-condition-terminal-map H =
+    is-null-map-is-orthogonal-fiber-condition-terminal-map
+      ( is-orthogonal-fiber-condition-right-map-is-orthogonal-pullback-condition
+        ( terminal-map Y)
+        ( f)
+        ( H))
+
+  is-orthogonal-pullback-condition-terminal-map-is-null-map :
+    is-null-map Y f → is-orthogonal-pullback-condition (terminal-map Y) f
+  is-orthogonal-pullback-condition-terminal-map-is-null-map H =
+    is-orthogonal-pullback-condition-is-orthogonal-fiber-condition-right-map
+      ( terminal-map Y)
+      ( f)
+      ( is-orthogonal-fiber-condition-terminal-map-is-null-map H)
+
   is-null-map-is-orthogonal-terminal-map :
     is-orthogonal (terminal-map Y) f → is-null-map Y f
   is-null-map-is-orthogonal-terminal-map H =
