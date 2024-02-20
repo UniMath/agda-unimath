@@ -217,11 +217,24 @@ module _
       ( H f'' (cartesian-hom-arrow-htpy refl-htpy F' α))
 ```
 
-This remains to be formalized.
-
 ### Equivalences are fiberwise orthogonal to every map
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A ≃ B) (g : X → Y)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-left-equiv :
+    is-fiberwise-orthogonal-pullback-condition (map-equiv f) g
+  is-fiberwise-orthogonal-pullback-condition-left-equiv f' α =
+    is-orthogonal-pullback-condition-is-equiv-left f' g
+      ( is-equiv-source-is-equiv-target-cartesian-hom-arrow f'
+        ( map-equiv f)
+        ( α)
+        ( is-equiv-map-equiv f))
+```
 
 ### Fiberwise orthogonal maps are closed under composition and have the right cancellation property
 
