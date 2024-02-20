@@ -159,6 +159,8 @@ module _
   pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
 ```
 
+## Operations
+
 ### The identity morphism of arrows
 
 The identity morphism of arrows is defined as
@@ -257,6 +259,31 @@ module _
   pr2 (pr2 comp-hom-arrow) =
     coh-comp-hom-arrow
 ```
+
+### Morphisms of arrows are preserved under homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  hom-arrow-htpy-source :
+    {f f' : A → B} (F' : f' ~ f) (g : X → Y) →
+    hom-arrow f g → hom-arrow f' g
+  hom-arrow-htpy-source F' g (i , j , H) = (i , j , (j ·l F') ∙h H)
+
+  hom-arrow-htpy-target :
+    (f : A → B) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f g'
+  hom-arrow-htpy-target f G (i , j , H) = (i , j , H ∙h (G ·r i))
+
+  hom-arrow-htpy :
+    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f' g'
+  hom-arrow-htpy F' G (i , j , H) = (i , j , (j ·l F') ∙h H ∙h (G ·r i))
+```
+
+## Properties
 
 ### Morphisms of arrows give morphisms of precomposition arrows
 

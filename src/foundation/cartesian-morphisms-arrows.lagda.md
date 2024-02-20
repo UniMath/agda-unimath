@@ -8,15 +8,20 @@ module foundation.cartesian-morphisms-arrows where
 
 ```agda
 open import foundation.cones-over-cospan-diagrams
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.morphisms-arrows
 open import foundation.pullbacks
+open import foundation.identity-types
+open import foundation.function-types
+open import foundation.whiskering-homotopies-composition
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.propositions
+open import foundation-core.homotopies
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -137,6 +142,45 @@ module _
     is-pullback-swap-cone f (point y)
       ( cone-fiber f y)
       ( is-pullback-cone-fiber f y)
+```
+
+## Properties
+
+### Cartesian morphisms of arrows are preserved under homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  abstract
+    is-cartesian-cartesian-hom-arrow-htpy :
+      {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+      (α : hom-arrow f g) →
+      is-cartesian-hom-arrow f g α →
+      is-cartesian-hom-arrow f' g' (hom-arrow-htpy F' G α)
+    is-cartesian-cartesian-hom-arrow-htpy {f} F' {g} G α =
+      is-pullback-htpy
+        ( refl-htpy)
+        ( inv-htpy G)
+        ( cone-hom-arrow f g α)
+        ( ( F') ,
+          ( refl-htpy) ,
+          ( ( assoc-htpy
+              ( map-codomain-hom-arrow f g α ·l F' ∙h coh-hom-arrow f g α)
+              ( G ·r map-domain-hom-arrow f g α)
+              ( inv-htpy (G ·r map-domain-hom-arrow f g α))) ∙h
+            ( ap-concat-htpy
+              ( map-codomain-hom-arrow f g α ·l F' ∙h coh-hom-arrow f g α)
+              ( right-inv-htpy G ·r map-domain-hom-arrow f g α)) ∙h
+            ( right-unit-htpy) ∙h
+            ( ap-concat-htpy' (coh-hom-arrow f g α) inv-htpy-right-unit-htpy)))
+
+  cartesian-hom-arrow-htpy :
+    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+    cartesian-hom-arrow f g → cartesian-hom-arrow f' g'
+  cartesian-hom-arrow-htpy F' G (α , H) =
+    ( hom-arrow-htpy F' G α , is-cartesian-cartesian-hom-arrow-htpy F' G α H)
 ```
 
 ## See also

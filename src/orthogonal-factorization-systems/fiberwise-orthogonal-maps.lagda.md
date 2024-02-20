@@ -183,7 +183,26 @@ module _
       ( H f' α)
 ```
 
+### Fiberwise orthogonal maps are orthogonal
+
+This remains to be formalized.
+
 ### Fiberwise orthogonality is preserved by homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g')
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-htpy :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f' g'
+  is-fiberwise-orthogonal-pullback-condition-htpy H f'' α =
+    is-orthogonal-pullback-condition-htpy-right f'' g G
+      ( H f'' (cartesian-hom-arrow-htpy refl-htpy F' α))
+```
 
 This remains to be formalized.
 
