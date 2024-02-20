@@ -35,9 +35,12 @@ if it comes equipped with map `g : B → A` and a family of maps
 indexed by `x : A` and `y : B`, such that each `r x y` is an `n`-coherent
 equivalence.
 
-A `1`-coherent equivalence is therefore a map equipped with a
-[retraction](foundation-core.retractions.md). A `2`-coherent equivalence is a
-map `f : A → B` equipped with `g : B → A` and for each `x : A` and `y : B` a map
+By the equivalence of [retracting homotopies](foundeation-core.retractions.md)
+and
+[transposition operations of identifications](foundation.transposition-identifications-along-retractions.md)
+it therefore follows that a `1`-coherent equivalence is equivalently described
+as a map equipped with a retraction. A `2`-coherent equivalence is a map
+`f : A → B` equipped with `g : B → A` and for each `x : A` and `y : B` a map
 `r x y : (f x ＝ y) → (x ＝ g y)`, equipped with
 
 ```text
