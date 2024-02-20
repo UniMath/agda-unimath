@@ -517,7 +517,7 @@ module _
   compute-pullback-hom-comp-left = refl-htpy
 ```
 
-### Computing the fiber map of the pullback-hom square
+### Computing the fiber map between the vertical maps in the pullback-hom square
 
 ```agda
 module _

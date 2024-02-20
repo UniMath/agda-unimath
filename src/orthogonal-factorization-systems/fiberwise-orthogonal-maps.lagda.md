@@ -38,8 +38,10 @@ open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import orthogonal-factorization-systems.colocal-types
 open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.pullback-hom
 ```
@@ -53,31 +55,62 @@ The map `f : A → B` is said to be
 to `g : X → Y` if every [base change](foundation.cartesian-morphisms-arrows.md)
 of `f` is [orthogonal](orthogonal-factorization-systems.md) to `g`.
 
-More concretely, for every [pullback](foundation-core.pullbacks.md) square
+More concretely, `f` _is fiberwise orthogonal to_ `g` if for every
+[pullback](foundation-core.pullbacks.md) square
 
 ```text
     A' -------> A
     | ⌟         |
   f'|           | f
     ∨           ∨
-    B' -------> B
+    B' -------> B,
 ```
 
-The exponential square
+the exponential square
 
 ```text
-              - ∘ f'
-      B' → X -------> A' → X
-        |              |
-  g ∘ - |              | g ∘ -
-        V              V
-      B' → Y -------> A' → Y
-              - ∘ f'
+             - ∘ f'
+     B' → X -------> A' → X
+        |               |
+  g ∘ - |               | g ∘ -
+        ∨               ∨
+     B' → Y -------> A' → Y
+             - ∘ f'
 ```
 
 is also a pullback.
 
 ## Definitions
+
+### The fiber condition for fiberwise orthogonal maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-fiberwise-orthogonal : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-fiberwise-orthogonal =
+    (y : B) → is-null-map (fiber f y) g
+```
+
+### The pullback condition for fiberwise orthogonal maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition : UUω
+  is-fiberwise-orthogonal-pullback-condition =
+    {l5 l6 : Level} {A' : UU l5} {B' : UU l6}
+    (f' : A' → B') (α : cartesian-hom-arrow f' f) →
+    is-orthogonal-pullback-condition f' g
+```
 
 ### The universal property of fiberwise orthogonal maps
 
@@ -96,6 +129,59 @@ module _
 ```
 
 ## Properties
+
+### The fiber condition and the pullback condition for fiberwise orthogonal maps are equivalent
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-fiberwise-orthogonal-is-fiberwise-orthogonal-pullback-condition :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal f g
+  is-fiberwise-orthogonal-is-fiberwise-orthogonal-pullback-condition H y =
+    is-null-map-is-orthogonal-pullback-condition-terminal-map
+      ( fiber f y)
+      ( g)
+      ( H (terminal-map (fiber f y)) (fiber-cartesian-hom-arrow f y))
+```
+
+The converse remains to be formalized.
+
+### The pullback condition for fiberwise orthogonal maps is equivalent to the universal property
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  universal-property-fiberwise-orthogonal-maps-is-fiberwise-orthogonal-pullback-condition :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    universal-property-fiberwise-orthogonal-maps f g
+  universal-property-fiberwise-orthogonal-maps-is-fiberwise-orthogonal-pullback-condition
+    H f' α =
+    universal-property-pullback-is-pullback
+      ( precomp f' Y)
+      ( postcomp _ g)
+      ( cone-pullback-hom f' g)
+      ( H f' α)
+
+  is-fiberwise-orthogonal-pullback-condition-universal-property-fiberwise-orthogonal-maps :
+    universal-property-fiberwise-orthogonal-maps f g →
+    is-fiberwise-orthogonal-pullback-condition f g
+  is-fiberwise-orthogonal-pullback-condition-universal-property-fiberwise-orthogonal-maps
+    H f' α =
+    is-pullback-universal-property-pullback
+      ( precomp f' Y)
+      ( postcomp _ g)
+      ( cone-pullback-hom f' g)
+      ( H f' α)
+```
 
 ### Fiberwise orthogonality is preserved by homotopies
 
