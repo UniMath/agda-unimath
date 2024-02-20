@@ -134,7 +134,7 @@ module _
     inv-equiv equiv-is-local-terminal-map-is-null
 ```
 
-### `A` type is `Y`-null if and only if the terminal projection of `Y` is orthogonal to the terminal projection of `A`
+### A type is `Y`-null if and only if the terminal projection of `Y` is orthogonal to the terminal projection of `A`
 
 ```agda
 module _

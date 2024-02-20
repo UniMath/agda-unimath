@@ -75,7 +75,15 @@ The map `f : A → B` is said to be
                 - ∘ f
    ```
 
-4. The [fibers](foundation-core.fibers-of-maps.md) of `g` are
+4. The induced dependent precomposition map
+
+   ```text
+     - ∘ f : ((x : B) → fiber g (h x)) --> ((x : A) → fiber g (h (f x)))
+   ```
+
+   is an equivalence for every `h : B → Y`.
+
+5. The [fibers](foundation-core.fibers-of-maps.md) of `g` are
    [`f`-local](orthogonal-factorization-systems.local-types.md), i.e., `g` is an
    [`f`-local map](orthogonal-factorization-systems.local-maps.md).
 
@@ -202,7 +210,7 @@ fibers
                       |               |
               (g ∘ -) |               | (g ∘ -)
                       ∨    (- ∘ f)    ∨
-                   (B → Y) ------> (A → Y)
+               h ∈ (B → Y) ------> (A → Y)
 ```
 
 is a fiberwise equivalence.
