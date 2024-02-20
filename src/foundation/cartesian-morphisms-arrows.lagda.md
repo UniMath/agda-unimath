@@ -13,6 +13,8 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.pullbacks
@@ -290,7 +292,7 @@ module _
 
   abstract
     is-cartesian-cartesian-hom-arrow-htpy :
-      {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+      {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g')
       (α : hom-arrow f g) →
       is-cartesian-hom-arrow f g α →
       is-cartesian-hom-arrow f' g' (hom-arrow-htpy F' G α)
@@ -351,6 +353,82 @@ module _
       ( map-codomain-hom-arrow f g α)
       ( g)
       ( cone-hom-arrow f g α)
+```
+
+### Cartesian morphisms of arrows are preserved under products
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {C : UU l5} {D : UU l6} {Z : UU l7} {W : UU l8}
+  (f : A → B) (g : X → Y) (h : C → D) (i : Z → W)
+  (α : cartesian-hom-arrow f g) (β : cartesian-hom-arrow h i)
+  where
+
+  is-cartesian-product-cartesian-hom-arrow :
+    is-cartesian-hom-arrow
+      ( map-product f h)
+      ( map-product g i)
+      ( product-hom-arrow f g h i
+        ( hom-arrow-cartesian-hom-arrow f g α)
+        ( hom-arrow-cartesian-hom-arrow h i β))
+  is-cartesian-product-cartesian-hom-arrow =
+    is-pullback-product-is-pullback-pair
+      ( map-codomain-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α))
+      ( g)
+      ( map-codomain-hom-arrow h i (hom-arrow-cartesian-hom-arrow h i β))
+      ( i)
+      ( cone-cartesian-hom-arrow f g α)
+      ( cone-cartesian-hom-arrow h i β)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow h i β)
+
+  product-cartesian-hom-arrow :
+    cartesian-hom-arrow (map-product f h) (map-product g i)
+  product-cartesian-hom-arrow =
+    ( ( product-hom-arrow f g h i
+        ( hom-arrow-cartesian-hom-arrow f g α)
+        ( hom-arrow-cartesian-hom-arrow h i β)) ,
+      ( is-cartesian-product-cartesian-hom-arrow))
+```
+
+### Cartesian morphisms of arrows are preserved under coproducts
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {C : UU l5} {D : UU l6} {Z : UU l7} {W : UU l8}
+  (f : A → B) (g : X → Y) (h : C → D) (i : Z → W)
+  (α : cartesian-hom-arrow f g) (β : cartesian-hom-arrow h i)
+  where
+
+  is-cartesian-coproduct-cartesian-hom-arrow :
+    is-cartesian-hom-arrow
+      ( map-coproduct f h)
+      ( map-coproduct g i)
+      ( coproduct-hom-arrow f g h i
+        ( hom-arrow-cartesian-hom-arrow f g α)
+        ( hom-arrow-cartesian-hom-arrow h i β))
+  is-cartesian-coproduct-cartesian-hom-arrow =
+    is-pullback-coproduct-is-pullback-pair
+      ( map-codomain-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α))
+      ( g)
+      ( map-codomain-hom-arrow h i (hom-arrow-cartesian-hom-arrow h i β))
+      ( i)
+      ( cone-cartesian-hom-arrow f g α)
+      ( cone-cartesian-hom-arrow h i β)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow h i β)
+
+  coproduct-cartesian-hom-arrow :
+    cartesian-hom-arrow (map-coproduct f h) (map-coproduct g i)
+  coproduct-cartesian-hom-arrow =
+    ( ( coproduct-hom-arrow f g h i
+        ( hom-arrow-cartesian-hom-arrow f g α)
+        ( hom-arrow-cartesian-hom-arrow h i β)) ,
+      ( is-cartesian-coproduct-cartesian-hom-arrow))
 ```
 
 ## See also

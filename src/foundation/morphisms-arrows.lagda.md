@@ -260,8 +260,6 @@ module _
   pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
 ```
 
-## Properties
-
 ### Morphisms of arrows are preserved under homotopies
 
 ```agda

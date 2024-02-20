@@ -611,17 +611,13 @@ module _
     cone (map-product f f') (map-product g g') (C × C')
   pr1 (product-cone (p , q , H) (p' , q' , H')) = map-product p p'
   pr1 (pr2 (product-cone (p , q , H) (p' , q' , H'))) = map-product q q'
-  pr2 (pr2 (product-cone (p , q , H) (p' , q' , H'))) =
-    ( inv-htpy (preserves-comp-map-product p p' f f')) ∙h
-    ( htpy-map-product H H') ∙h
-    ( preserves-comp-map-product q q' g g')
+  pr2 (pr2 (product-cone (p , q , H) (p' , q' , H'))) = htpy-map-product H H'
 
   triangle-map-product-cone :
     (c : cone f g C) (c' : cone f' g' C') →
     gap (map-product f f') (map-product g g') (product-cone c c') ~
     map-product-cone f g f' g' ∘ map-product (gap f g c) (gap f' g' c')
-  triangle-map-product-cone c c' z =
-    eq-pair-eq-fiber (eq-pair-eq-fiber right-unit)
+  triangle-map-product-cone c c' z = refl
 
   abstract
     is-pullback-product-is-pullback-pair :
