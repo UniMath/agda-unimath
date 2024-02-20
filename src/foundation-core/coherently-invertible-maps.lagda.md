@@ -39,11 +39,11 @@ coherence condition between the homotopies of the inverse, asking that the
 following diagram commmutes
 
 ```text
-               S ·r f
-             --------->
-  f ∘ g ∘ f             f.
-             --------->
-               f ·l R
+              S ·r f
+            --------->
+  f ∘ g ∘ f            f.
+            --------->
+              f ·l R
 ```
 
 We call such data a
@@ -54,11 +54,11 @@ and this additional coherence.
 There is also the alternative coherence condition we could add
 
 ```text
-               R ·r g
-             --------->
-  g ∘ f ∘ g             g.
-             --------->
-               g ·l S
+              R ·r g
+            --------->
+  g ∘ f ∘ g            g.
+            --------->
+              g ·l S
 ```
 
 We will colloquially refer to invertible maps equipped with this coherence as
@@ -835,11 +835,11 @@ We begin by observing that `C` fits somewhere along the diagonal of this square
 via the composite
 
 ```text
-                       Sf
-           HgH       ------>    H⁻¹
-    f'gf' -----> fgf    C    f ----> f'.
-                     ------>
-                       fR
+                        Sf
+            HgH       ------>     H⁻¹
+    f'gf' ------> fgf    C    f ------> f'.
+                      ------>
+                        fR
 ```
 
 ```agda
