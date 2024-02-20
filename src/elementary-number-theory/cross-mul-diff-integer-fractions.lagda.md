@@ -40,8 +40,7 @@ cross-mul-diff-fraction-ℤ x y =
     ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
 ```
 
-Swapping the the fractions changes the sign of the cross-multiplication
-difference.
+Swapping the fractions changes the sign of the cross-multiplication difference.
 
 ```agda
 neg-cross-mul-diff-fraction-ℤ : (x y : fraction-ℤ)
