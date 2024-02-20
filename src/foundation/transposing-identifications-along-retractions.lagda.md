@@ -25,13 +25,13 @@ open import foundation-core.retractions
 
 Consider a map `f : A → B` and a map `g : B → A` in the converse direction. Then there is an [equivalence](foundation-core.equivalences.md)
 
-```agda
+```text
   is-retraction f g ≃ ((x : A) (y : B) → (f x ＝ y) ≃ (x ＝ g y))
 ```
 
-In other words, any [retracting homotopy](foundation-core.retractions.md) `g ∘ f ~ id` induces a unique family of {{#concept "transposition" Disambiguation="identifications along retractions Agda=transpose-eq-is-retraction}} maps
+In other words, any [retracting homotopy](foundation-core.retractions.md) `g ∘ f ~ id` induces a unique family of {{#concept "transposition" Disambiguation="identifications along retractions" Agda=transpose-eq-is-retraction}} maps
 
-```agda
+```text
   f x ＝ y → x ＝ g y
 ```
 
@@ -53,14 +53,6 @@ module _
   transpose-eq-is-retraction' :
     is-retraction f g → {x : A} {y : B} → f x ＝ y → x ＝ g y
   transpose-eq-is-retraction' H {x} refl = inv (H x)
-
-  is-retraction-transpose-eq :
-    ({x : B} {y : A} → x ＝ f y → g x ＝ y) → is-retraction f g
-  is-retraction-transpose-eq H x = H refl
-
-  is-retraction-transpose-eq' :
-    ({x : A} {y : B} → f x ＝ y → x ＝ g y) → is-retraction f g
-  is-retraction-transpose-eq' H x = inv (H refl)
 ```
 
 ## Properties
@@ -71,21 +63,29 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
+  
+  is-retraction-transpose-eq :
+    ({x : B} {y : A} → x ＝ f y → g x ＝ y) → is-retraction f g
+  is-retraction-transpose-eq H x = H refl
+
+  is-retraction-transpose-eq' :
+    ({x : A} {y : B} → f x ＝ y → x ＝ g y) → is-retraction f g
+  is-retraction-transpose-eq' H x = inv (H refl)
 
   is-retraction-is-retraction-transpose-eq :
-    is-retraction-transpose-eq f g ∘ transpose-eq-is-retraction f g ~ id
+    is-retraction-transpose-eq ∘ transpose-eq-is-retraction f g ~ id
   is-retraction-is-retraction-transpose-eq H = refl
 
   htpy-is-section-is-retraction-transpose-eq :
     (H : {x : B} {y : A} → x ＝ f y → g x ＝ y)
     (x : B) (y : A) →
-    transpose-eq-is-retraction f g (is-retraction-transpose-eq f g H) {x} {y} ~
+    transpose-eq-is-retraction f g (is-retraction-transpose-eq H) {x} {y} ~
     H {x} {y}
   htpy-is-section-is-retraction-transpose-eq H x y refl = refl
 
   abstract
     is-section-is-retraction-transpose-eq :
-      transpose-eq-is-retraction f g ∘ is-retraction-transpose-eq f g ~ id
+      transpose-eq-is-retraction f g ∘ is-retraction-transpose-eq ~ id
     is-section-is-retraction-transpose-eq H =
       eq-htpy-implicit
         ( λ x →
@@ -96,7 +96,7 @@ module _
     is-equiv (transpose-eq-is-retraction f g)
   is-equiv-transpose-eq-is-retraction =
     is-equiv-is-invertible
-      ( is-retraction-transpose-eq f g)
+      ( is-retraction-transpose-eq)
       ( is-section-is-retraction-transpose-eq)
       ( is-retraction-is-retraction-transpose-eq)
 
