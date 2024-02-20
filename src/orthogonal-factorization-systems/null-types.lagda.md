@@ -16,6 +16,8 @@ open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
@@ -75,6 +77,25 @@ module _
     is-equiv-htpy-equiv
       ( equiv-precomp e B ∘e equiv-postcomp Y (inv-equiv f) ∘e (_ , H) ∘e f)
       ( λ b → eq-htpy (λ _ → inv (is-retraction-map-inv-equiv f b)))
+
+  is-null-equiv-exponent : (e : X ≃ Y) → is-null Y A → is-null X A
+  is-null-equiv-exponent e H =
+    is-equiv-comp
+      ( precomp (map-equiv e) A)
+      ( const Y A)
+      ( H)
+      ( is-equiv-precomp-equiv e A)
+```
+
+### `Y`-null types are closed under retracts
+
+```agda
+  is-null-retract : (f : B retract-of A) → is-null Y A → is-null Y B
+  is-null-retract f =
+    is-equiv-retract-map-is-equiv
+      ( const Y B)
+      ( const Y A)
+      ( retract-map-const-retract Y f)
 ```
 
 ### A type is `Y`-null if and only if it is local at the terminal projection `Y → unit`
