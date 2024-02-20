@@ -185,7 +185,20 @@ module _
 
 ### Fiberwise orthogonal maps are orthogonal
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-pullback-condition-is-fiberwise-orthogonal-pullback-condition :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-is-fiberwise-orthogonal-pullback-condition
+    H =
+    H f id-cartesian-hom-arrow
+```
 
 ### Fiberwise orthogonality is preserved by homotopies
 

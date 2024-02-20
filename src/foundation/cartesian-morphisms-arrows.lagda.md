@@ -7,21 +7,22 @@ module foundation.cartesian-morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospan-diagrams
 open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.pullbacks
-open import foundation.identity-types
-open import foundation.function-types
-open import foundation.whiskering-homotopies-composition
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.propositions
 open import foundation-core.homotopies
+open import foundation-core.propositions
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -125,6 +126,24 @@ module _
       ( g)
       ( cone-cartesian-hom-arrow)
       ( is-cartesian-cartesian-hom-arrow)
+```
+
+## Operations
+
+### The identity cartesian morphism of arrows
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  id-cartesian-hom-arrow : cartesian-hom-arrow f f
+  id-cartesian-hom-arrow =
+    ( id-hom-arrow ,
+      is-pullback-is-equiv-horizontal-maps id f
+        ( f , id , refl-htpy)
+        ( is-equiv-id)
+        ( is-equiv-id))
 ```
 
 ### Cartesian morphisms of arrows arising from fibers
