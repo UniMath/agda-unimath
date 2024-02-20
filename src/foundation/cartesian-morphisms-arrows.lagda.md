@@ -336,6 +336,23 @@ module _
       ( is-cartesian-cartesian-hom-arrow f g α)
 ```
 
+### If the target and source of a morphism of arrows are equivalences then the morphism is cartesian
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  is-cartesian-hom-arrow-is-equiv-source-is-equiv-target :
+    is-equiv g → is-equiv f → is-cartesian-hom-arrow f g α
+  is-cartesian-hom-arrow-is-equiv-source-is-equiv-target =
+    is-pullback-is-equiv-vertical-maps
+      ( map-codomain-hom-arrow f g α)
+      ( g)
+      ( cone-hom-arrow f g α)
+```
+
 ## See also
 
 - [Cocartesian morphisms of arrows](synthetic-homotopy-theory.cocartesian-morphisms-arrows.md)
