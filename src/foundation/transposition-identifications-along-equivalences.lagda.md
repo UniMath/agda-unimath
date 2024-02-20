@@ -162,10 +162,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
   where
 
-  compute-map-eq-tranpsose-equiv :
+  compute-map-eq-transpose-equiv :
     {x : A} {y : B} →
     map-eq-transpose-equiv e {x} {y} ~ map-eq-transpose-equiv' e
-  compute-map-eq-tranpsose-equiv {x} refl =
+  compute-map-eq-transpose-equiv {x} refl =
     ( map-eq-transpose-equiv-inv
       ( equiv-ap e x _)
       ( ( ap inv (coherence-map-inv-equiv e x)) ∙
@@ -180,6 +180,10 @@ Transposed identifications fit in
 the original identifications.
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
   triangle-eq-transpose-equiv :
     {x : A} {y : B} (p : map-equiv e x ＝ y) →
     coherence-triangle-identifications'
@@ -215,7 +219,7 @@ the original identifications.
   triangle-eq-transpose-equiv' {x} refl =
     ( left-whisker-concat
       ( is-retraction-map-inv-equiv e x)
-      ( compute-map-eq-tranpsose-equiv refl)) ∙
+      ( compute-map-eq-transpose-equiv e refl)) ∙
     ( is-section-inv-concat (is-retraction-map-inv-equiv e x) refl)
 
   triangle-eq-transpose-equiv-inv' :
@@ -243,6 +247,10 @@ Transposing concatenated identifications into a triangle with a transpose of the
 left factor.
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
   triangle-eq-transpose-equiv-concat :
     {x : A} {y z : B} (p : map-equiv e x ＝ y) (q : y ＝ z) →
     ( map-eq-transpose-equiv e (p ∙ q)) ＝
