@@ -16,12 +16,19 @@ open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
+open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.1-types
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -191,17 +198,73 @@ pr1 (const-injection A B a) = const A B
 pr2 (const-injection A B a) = is-injective-const A B a
 ```
 
-### The action on identifications of a diagonal map is another diagonal map
+### The action on identifications of a constant map is a constant map
 
 ```agda
-htpy-diagonal-Id-ap-diagonal-htpy-eq :
-  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
-  htpy-eq ∘ ap (const A B) ~ const A (x ＝ y)
-htpy-diagonal-Id-ap-diagonal-htpy-eq A x y refl = refl
+module _
+  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B)
+  where
 
-htpy-ap-diagonal-htpy-eq-diagonal-Id :
-  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
-  const A (x ＝ y) ~ htpy-eq ∘ ap (const A B)
-htpy-ap-diagonal-htpy-eq-diagonal-Id A x y =
-  inv-htpy (htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
+  compute-htpy-eq-ap-const : htpy-eq ∘ ap (const A B) ~ const A (x ＝ y)
+  compute-htpy-eq-ap-const refl = refl
+
+  inv-compute-htpy-eq-ap-const : const A (x ＝ y) ~ htpy-eq ∘ ap (const A B)
+  inv-compute-htpy-eq-ap-const =
+    inv-htpy compute-htpy-eq-ap-const
+
+  compute-eq-htpy-ap-const : ap (const A B) ~ eq-htpy ∘ const A (x ＝ y)
+  compute-eq-htpy-ap-const p =
+    map-eq-transpose-equiv equiv-funext (compute-htpy-eq-ap-const p)
+```
+
+### If `A` is a retract of `B` then `const S A` is a retract of `const S B`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (S : UU l3) (R : A retract-of B)
+  where
+
+  inclusion-const-retract : hom-arrow (const S A) (const S B)
+  inclusion-const-retract =
+    ( inclusion-retract R ,
+      postcomp S (inclusion-retract R) ,
+      refl-htpy)
+
+  hom-retraction-const-retract : hom-arrow (const S B) (const S A)
+  hom-retraction-const-retract =
+    ( map-retraction-retract R ,
+      postcomp S (map-retraction-retract R) ,
+      refl-htpy)
+
+  coh-retract-map-const-retract :
+    coherence-retract-map
+      ( const S A)
+      ( const S B)
+      ( inclusion-const-retract)
+      ( hom-retraction-const-retract)
+      ( is-retraction-map-retraction-retract R)
+      ( htpy-postcomp S (is-retraction-map-retraction-retract R))
+  coh-retract-map-const-retract x =
+    ( compute-eq-htpy-ap-const S
+      ( map-retraction-retract R (inclusion-retract R x))
+      ( x)
+      ( is-retraction-map-retraction-retract R x)) ∙
+    ( inv right-unit)
+
+  is-retraction-hom-retraction-const-retract :
+    is-retraction-hom-arrow
+      ( const S A)
+      ( const S B)
+      ( inclusion-const-retract)
+      ( hom-retraction-const-retract)
+  is-retraction-hom-retraction-const-retract =
+    ( is-retraction-map-retraction-retract R ,
+      htpy-postcomp S (is-retraction-map-retraction-retract R) ,
+      coh-retract-map-const-retract)
+
+  retract-map-const-retract : (const S A) retract-of-map (const S B)
+  retract-map-const-retract =
+    ( inclusion-const-retract ,
+      hom-retraction-const-retract ,
+      is-retraction-hom-retraction-const-retract)
 ```

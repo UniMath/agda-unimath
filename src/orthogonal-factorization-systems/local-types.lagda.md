@@ -46,12 +46,12 @@ A dependent type `A` over `Y` is said to be
 [precomposition map](foundation-core.function-types.md)
 
 ```text
-  _∘ f : ((x : X) → A x) → ((y : Y) → A (f y))
+  _∘ f : ((y : Y) → A y) → ((x : X) → A (f x))
 ```
 
 is an [equivalence](foundation-core.equivalences.md).
 
-We reserve the name `is-local` for when `A` does not vary over `X`, and specify
+We reserve the name `is-local` for when `A` does not vary over `Y`, and specify
 with `is-local-dependent-type` when it does.
 
 ## Definition
@@ -93,7 +93,7 @@ module _
 
 ## Properties
 
-### Being local distributes over Π-types
+### Locality distributes over Π-types
 
 ```agda
 module _
