@@ -333,7 +333,7 @@ module _
     {x y z : type-Group G} →
     y ＝ conjugation-Group G (inv-Group G x) z → conjugation-Group G x y ＝ z
   transpose-eq-conjugation-Group {x} {y} {z} =
-    transpose-eq-section
+    transpose-eq-is-section
       ( conjugation-Group G x)
       ( conjugation-Group G (inv-Group G x))
       ( is-section-conjugation-inv-Group x)
@@ -342,7 +342,7 @@ module _
     {x y z : type-Group G} →
     conjugation-Group G (inv-Group G x) y ＝ z → y ＝ conjugation-Group G x z
   transpose-eq-conjugation-Group' {x} {y} {z} =
-    transpose-eq-section'
+    transpose-eq-is-section'
       ( conjugation-Group G x)
       ( conjugation-Group G (inv-Group G x))
       ( is-section-conjugation-inv-Group x)
@@ -351,7 +351,7 @@ module _
     {x y z : type-Group G} →
     y ＝ conjugation-Group G x z → conjugation-Group G (inv-Group G x) y ＝ z
   transpose-eq-conjugation-inv-Group {x} {y} {z} =
-    transpose-eq-retraction
+    transpose-eq-is-retraction
       ( conjugation-Group G x)
       ( conjugation-Group G (inv-Group G x))
       ( is-retraction-conjugation-inv-Group x)
@@ -360,7 +360,7 @@ module _
     {x y z : type-Group G} →
     conjugation-Group G x y ＝ z → y ＝ conjugation-Group G (inv-Group G x) z
   transpose-eq-conjugation-inv-Group' {x} {y} {z} =
-    transpose-eq-retraction'
+    transpose-eq-is-retraction'
       ( conjugation-Group G x)
       ( conjugation-Group G (inv-Group G x))
       ( is-retraction-conjugation-inv-Group x)

@@ -44,15 +44,15 @@ whose elements we call
 family is [equivalent](foundation-core.equivalences.md) to the standard identity
 types, but satisfies the strict laws
 
-- `inv (inv p) ≐ p`
-- `inv reflⁱ ≐ reflⁱ`
+- `invⁱ (invⁱ p) ≐ p`
+- `invⁱ reflⁱ ≐ reflⁱ`
 
 where we use a superscript `i` to distinguish the strictly involutive identity
 type from the standard identity type.
 
 In addition, we maintain the following strict laws
 
-- `inv reflⁱ ≐ reflⁱ`
+- `invⁱ reflⁱ ≐ reflⁱ`
 - `reflⁱ ∙ p ≐ p` or `p ∙ reflⁱ ≐ p`
 - `ind-Idⁱ B f reflⁱ ≐ f reflⁱ`
 
@@ -248,24 +248,21 @@ groupoidal structure on types.
 We have an inversion operation on `involutive-Id` defined by swapping the
 position of the identifications. This operation satisfies the strict laws
 
-- `inv (inv p) ≐ p`, and
-- `inv reflⁱ ≐ reflⁱ`.
+- `invⁱ (invⁱ p) ≐ p`, and
+- `invⁱ reflⁱ ≐ reflⁱ`.
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  inv-involutive-Id : {x y : A} → x ＝ⁱ y → y ＝ⁱ x
-  inv-involutive-Id (z , p , q) = (z , q , p)
+  invⁱ : {x y : A} → x ＝ⁱ y → y ＝ⁱ x
+  invⁱ (z , p , q) = (z , q , p)
 
-  compute-inv-involutive-Id-refl :
-    {x : A} →
-    inv-involutive-Id (reflⁱ {x = x}) ＝ reflⁱ
-  compute-inv-involutive-Id-refl = refl
+  compute-refl-inv-involutive-Id : {x : A} → invⁱ (reflⁱ {x = x}) ＝ reflⁱ
+  compute-refl-inv-involutive-Id = refl
 
-  inv-inv-involutive-Id :
-    {x y : A} (p : x ＝ⁱ y) → inv-involutive-Id (inv-involutive-Id p) ＝ p
+  inv-inv-involutive-Id : {x y : A} (p : x ＝ⁱ y) → invⁱ (invⁱ p) ＝ p
   inv-inv-involutive-Id p = refl
 ```
 
@@ -279,12 +276,12 @@ module _
 
   preserves-inv-involutive-eq-eq :
     {x y : A} (p : x ＝ y) →
-    involutive-eq-eq (inv p) ＝ inv-involutive-Id (involutive-eq-eq p)
+    involutive-eq-eq (inv p) ＝ invⁱ (involutive-eq-eq p)
   preserves-inv-involutive-eq-eq refl = refl
 
   preserves-inv-eq-involutive-eq :
     {x y : A} (p : x ＝ⁱ y) →
-    eq-involutive-eq (inv-involutive-Id p) ＝ inv (eq-involutive-eq p)
+    eq-involutive-eq (invⁱ p) ＝ inv (eq-involutive-eq p)
   preserves-inv-eq-involutive-eq (z , p , q) =
     ap (inv p ∙_) (inv (inv-inv q)) ∙ inv (distributive-inv-concat (inv q) p)
 ```
@@ -439,8 +436,7 @@ module _
   where
 
   assoc-involutive-Id :
-    (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
-    ((p ∙ⁱ q) ∙ⁱ r) ＝ (p ∙ⁱ (q ∙ⁱ r))
+    (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) → (p ∙ⁱ q) ∙ⁱ r ＝ p ∙ⁱ (q ∙ⁱ r)
   assoc-involutive-Id (_ , p , q) (_ , p' , q') (_ , p'' , q'') =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
@@ -470,18 +466,17 @@ module _
     eq-pair-eq-fiber (eq-pair-eq-fiber left-unit-right-strict-concat)
 
   left-inv-involutive-Id :
-    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ⁱ p ＝ reflⁱ
+    (p : x ＝ⁱ y) → invⁱ p ∙ⁱ p ＝ reflⁱ
   left-inv-involutive-Id (.y , refl , q) =
     eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-right-strict-concat q))
 
   right-inv-involutive-Id :
-    (p : x ＝ⁱ y) → p ∙ⁱ inv-involutive-Id p ＝ reflⁱ
+    (p : x ＝ⁱ y) → p ∙ⁱ invⁱ p ＝ reflⁱ
   right-inv-involutive-Id (.x , p , refl) =
     eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-right-strict-concat p))
 
   distributive-inv-concat-involutive-Id :
-    (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
-    inv-involutive-Id (p ∙ⁱ q) ＝ inv-involutive-Id q ∙ⁱ inv-involutive-Id p
+    (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) → invⁱ (p ∙ⁱ q) ＝ invⁱ q ∙ⁱ invⁱ p
   distributive-inv-concat-involutive-Id (.y , refl , q') (.y , p' , refl) =
     eq-pair-eq-fiber
       ( eq-pair
@@ -497,8 +492,7 @@ module _
   where
 
   assoc-right-strict-concat-involutive-Id :
-    (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) →
-    ((p ∙ᵣⁱ q) ∙ᵣⁱ r) ＝ (p ∙ᵣⁱ (q ∙ᵣⁱ r))
+    (p : x ＝ⁱ y) (q : y ＝ⁱ z) (r : z ＝ⁱ w) → (p ∙ᵣⁱ q) ∙ᵣⁱ r ＝ p ∙ᵣⁱ (q ∙ᵣⁱ r)
   assoc-right-strict-concat-involutive-Id
     ( _ , p , q) (_ , p' , q') (_ , p'' , q'') =
     eq-pair-eq-fiber
@@ -524,18 +518,18 @@ module _
   right-unit-right-strict-concat-involutive-Id = refl
 
   left-inv-right-strict-concat-involutive-Id :
-    (p : x ＝ⁱ y) → inv-involutive-Id p ∙ᵣⁱ p ＝ reflⁱ
+    (p : x ＝ⁱ y) → invⁱ p ∙ᵣⁱ p ＝ reflⁱ
   left-inv-right-strict-concat-involutive-Id (.y , refl , q) =
     eq-pair-eq-fiber (eq-pair (right-inv-right-strict-concat q) refl)
 
   right-inv-right-strict-concat-involutive-Id :
-    (p : x ＝ⁱ y) → p ∙ᵣⁱ inv-involutive-Id p ＝ reflⁱ
+    (p : x ＝ⁱ y) → p ∙ᵣⁱ invⁱ p ＝ reflⁱ
   right-inv-right-strict-concat-involutive-Id (.x , p , refl) =
     eq-pair-eq-fiber (eq-pair (right-inv-right-strict-concat p) refl)
 
   distributive-inv-right-strict-concat-involutive-Id :
     (p : x ＝ⁱ y) {z : A} (q : y ＝ⁱ z) →
-    inv-involutive-Id (p ∙ᵣⁱ q) ＝ inv-involutive-Id q ∙ᵣⁱ inv-involutive-Id p
+    invⁱ (p ∙ᵣⁱ q) ＝ invⁱ q ∙ᵣⁱ invⁱ p
   distributive-inv-right-strict-concat-involutive-Id
     ( .y , refl , q) (.y , p' , refl) =
     eq-pair-eq-fiber
