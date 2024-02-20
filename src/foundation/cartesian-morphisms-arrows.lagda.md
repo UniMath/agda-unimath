@@ -146,6 +146,68 @@ module _
         ( is-equiv-id))
 ```
 
+### Composition of cartesian morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
+  where
+
+  is-cartesian-comp-hom-arrow :
+    is-cartesian-hom-arrow g h b →
+    is-cartesian-hom-arrow f g a →
+    is-cartesian-hom-arrow f h (comp-hom-arrow f g h b a)
+  is-cartesian-comp-hom-arrow =
+    is-pullback-rectangle-is-pullback-left-square
+      ( map-codomain-hom-arrow f g a)
+      ( map-codomain-hom-arrow g h b)
+      ( h)
+      ( cone-hom-arrow g h b)
+      ( cone-hom-arrow f g a)
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V)
+  (b : cartesian-hom-arrow g h) (a : cartesian-hom-arrow f g)
+  where
+
+  comp-cartesian-hom-arrow : cartesian-hom-arrow f h
+  comp-cartesian-hom-arrow =
+    ( ( comp-hom-arrow f g h
+        ( hom-arrow-cartesian-hom-arrow g h b)
+        ( hom-arrow-cartesian-hom-arrow f g a)) ,
+      ( is-cartesian-comp-hom-arrow f g h
+        ( hom-arrow-cartesian-hom-arrow g h b)
+        ( hom-arrow-cartesian-hom-arrow f g a)
+        ( is-cartesian-cartesian-hom-arrow g h b)
+        ( is-cartesian-cartesian-hom-arrow f g a)))
+```
+
+### Left cancellation of cartesian morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
+  where
+
+  is-cartesian-right-factor-hom-arrow :
+    is-cartesian-hom-arrow g h b →
+    is-cartesian-hom-arrow f h (comp-hom-arrow f g h b a) →
+    is-cartesian-hom-arrow f g a
+  is-cartesian-right-factor-hom-arrow =
+    is-pullback-left-square-is-pullback-rectangle
+      ( map-codomain-hom-arrow f g a)
+      ( map-codomain-hom-arrow g h b)
+      ( h)
+      ( cone-hom-arrow g h b)
+      ( cone-hom-arrow f g a)
+```
+
 ### Cartesian morphisms of arrows arising from fibers
 
 ```agda
@@ -161,6 +223,60 @@ module _
     is-pullback-swap-cone f (point y)
       ( cone-fiber f y)
       ( is-pullback-cone-fiber f y)
+```
+
+### Transposing cartesian morphisms of arrows
+
+The {{#concept "transposition" Disambiguation="cartesian morphism of arrows"}}
+of a cartesian morphism of arrows
+
+```text
+        i
+    A -----> X
+    | ⌟      |
+  f |        | g
+    V        V
+    B -----> Y
+        j
+```
+
+is the cartesian morphism of arrows
+
+```text
+        f
+    A -----> B
+    | ⌟      |
+  i |        | j
+    V        V
+    X -----> Y.
+        g
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : cartesian-hom-arrow f g)
+  where
+
+  is-cartesian-transpose-cartesian-hom-arrow :
+    is-cartesian-hom-arrow
+      ( map-domain-cartesian-hom-arrow f g α)
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( transpose-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α))
+  is-cartesian-transpose-cartesian-hom-arrow =
+    is-pullback-swap-cone
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( g)
+      ( cone-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+
+  transpose-cartesian-hom-arrow :
+    cartesian-hom-arrow
+      ( map-domain-cartesian-hom-arrow f g α)
+      ( map-codomain-cartesian-hom-arrow f g α)
+  transpose-cartesian-hom-arrow =
+    ( transpose-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α) ,
+      is-cartesian-transpose-cartesian-hom-arrow)
 ```
 
 ## Properties
