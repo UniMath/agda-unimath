@@ -217,23 +217,55 @@ module _
       ( H f'' (cartesian-hom-arrow-htpy refl-htpy F' α))
 ```
 
-### Equivalences are fiberwise orthogonal to every map
+### Equivalences are fiberwise left and right orthogonal to every map
 
 ```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-is-equiv-left :
+    is-equiv f →
+    is-fiberwise-orthogonal-pullback-condition f g
+  is-fiberwise-orthogonal-pullback-condition-is-equiv-left F f' α =
+    is-orthogonal-pullback-condition-is-equiv-left f' g
+      ( is-equiv-source-is-equiv-target-cartesian-hom-arrow f' f α F)
+
+  is-fiberwise-orthogonal-pullback-condition-is-equiv-right :
+    is-equiv g →
+    is-fiberwise-orthogonal-pullback-condition f g
+  is-fiberwise-orthogonal-pullback-condition-is-equiv-right G f' _ =
+    is-orthogonal-pullback-condition-is-equiv-right f' g G
+
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A ≃ B) (g : X → Y)
   where
 
-  is-fiberwise-orthogonal-pullback-condition-left-equiv :
+  is-fiberwise-orthogonal-pullback-condition-equiv-left :
     is-fiberwise-orthogonal-pullback-condition (map-equiv f) g
-  is-fiberwise-orthogonal-pullback-condition-left-equiv f' α =
-    is-orthogonal-pullback-condition-is-equiv-left f' g
-      ( is-equiv-source-is-equiv-target-cartesian-hom-arrow f'
-        ( map-equiv f)
-        ( α)
-        ( is-equiv-map-equiv f))
+  is-fiberwise-orthogonal-pullback-condition-equiv-left =
+    is-fiberwise-orthogonal-pullback-condition-is-equiv-left
+      ( map-equiv f)
+      ( g)
+      ( is-equiv-map-equiv f)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X ≃ Y)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-equiv-right :
+    is-fiberwise-orthogonal-pullback-condition f (map-equiv g)
+  is-fiberwise-orthogonal-pullback-condition-equiv-right =
+    is-fiberwise-orthogonal-pullback-condition-is-equiv-right
+      ( f)
+      ( map-equiv g)
+      ( is-equiv-map-equiv g)
 ```
 
 ### Fiberwise orthogonal maps are closed under composition and have the right cancellation property
@@ -242,11 +274,34 @@ This remains to be formalized.
 
 ### Fiberwise orthogonal maps are closed under coproducts
 
-This remains to be formalized.
+If `f ⊥' g` and `h ⊥' i` then `(f + h) ⊥' (g + i)`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {C : UU l5} {D : UU l6} {Z : UU l7} {W : UU l8}
+  (f : A → B) (g : X → Y) (h : C → D) (i : Z → W)
+  where
+
+  -- TODO
+```
 
 ### Fiberwise orthogonality is preserved under base change
 
-This remains to be formalized.
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {A' : UU l5} {B' : UU l6}
+  (f : A → B) (g : X → Y) (f' : A' → B') (α : cartesian-hom-arrow f' f)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-left-base-change :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f' g
+  is-fiberwise-orthogonal-pullback-condition-left-base-change H f'' α' =
+    H f'' (comp-cartesian-hom-arrow f'' f' f α α')
+```
 
 ### Fiberwise orthogonal maps are closed under cobase change
 
@@ -256,7 +311,7 @@ This remains to be formalized.
 
 This remains to be formalized.
 
-### Fiberwise orthogonal maps are closed under coproducts
+### Fiberwise orthogonal maps are closed under products
 
 This remains to be formalized.
 

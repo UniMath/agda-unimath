@@ -553,7 +553,7 @@ module _
 
   map-domain-coproduct-hom-arrow : A + C → X + Z
   map-domain-coproduct-hom-arrow =
-     map-coproduct (map-domain-hom-arrow f g α) (map-domain-hom-arrow h i β)
+    map-coproduct (map-domain-hom-arrow f g α) (map-domain-hom-arrow h i β)
 
   map-codomain-coproduct-hom-arrow : B + D → Y + W
   map-codomain-coproduct-hom-arrow =
