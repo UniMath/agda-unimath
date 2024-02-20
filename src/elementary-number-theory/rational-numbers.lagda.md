@@ -11,6 +11,7 @@ open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.dependent-pair-types
@@ -39,11 +40,27 @@ equivalence relation given by `(n/m) ~ (n'/m') := Id (n *ℤ m') (n' *ℤ m)`.
 ℚ : UU lzero
 ℚ = Σ fraction-ℤ is-reduced-fraction-ℤ
 
-fraction-ℚ : ℚ → fraction-ℤ
-fraction-ℚ x = pr1 x
+module _
+  (x : ℚ)
+  where
 
-is-reduced-fraction-ℚ : (x : ℚ) → is-reduced-fraction-ℤ (fraction-ℚ x)
-is-reduced-fraction-ℚ x = pr2 x
+  fraction-ℚ : fraction-ℤ
+  fraction-ℚ = pr1 x
+
+  is-reduced-fraction-ℚ : is-reduced-fraction-ℤ fraction-ℚ
+  is-reduced-fraction-ℚ = pr2 x
+
+  numerator-ℚ : ℤ
+  numerator-ℚ = numerator-fraction-ℤ fraction-ℚ
+
+  positive-denominator-ℚ : positive-ℤ
+  positive-denominator-ℚ = positive-denominator-fraction-ℤ fraction-ℚ
+
+  denominator-ℚ : ℤ
+  denominator-ℚ = denominator-fraction-ℤ fraction-ℚ
+
+  is-positive-denominator-ℚ : is-positive-ℤ denominator-ℚ
+  is-positive-denominator-ℚ = is-positive-denominator-fraction-ℤ fraction-ℚ
 ```
 
 ### Inclusion of fractions
@@ -84,6 +101,17 @@ one-ℚ = in-int one-ℤ
 
 is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
+```
+
+### The mediant of two rationals
+
+```agda
+mediant-ℚ : ℚ → ℚ → ℚ
+mediant-ℚ x y =
+  in-fraction-ℤ
+    ( mediant-fraction-ℤ
+      ( fraction-ℚ x)
+      ( fraction-ℚ y))
 ```
 
 ## Properties

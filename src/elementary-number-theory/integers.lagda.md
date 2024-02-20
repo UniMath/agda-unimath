@@ -426,6 +426,29 @@ is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
   refl
 ```
 
+### Properties of positive integers
+
+```agda
+decide-is-positive-ℤ : {x : ℤ} → (is-positive-ℤ x) + is-nonnegative-ℤ (neg-ℤ x)
+decide-is-positive-ℤ {inl x} = inr star
+decide-is-positive-ℤ {inr (inl x)} = inr star
+decide-is-positive-ℤ {inr (inr x)} = inl star
+
+decide-is-positive-is-nonzero-ℤ : (x : ℤ) → (x ≠ zero-ℤ) →
+  (is-positive-ℤ x) + is-positive-ℤ (neg-ℤ x)
+decide-is-positive-is-nonzero-ℤ (inl x) H = inr star
+decide-is-positive-is-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
+decide-is-positive-is-nonzero-ℤ (inr (inr x)) H = inl star
+
+empty-is-positive-is-nonnegative-neg-ℤ : (x : ℤ) →
+  is-positive-ℤ x →
+  is-nonnegative-ℤ (neg-ℤ x) →
+  empty
+empty-is-positive-is-nonnegative-neg-ℤ (inr (inl x)) x-is-pos _ = x-is-pos
+empty-is-positive-is-nonnegative-neg-ℤ (inr (inr x)) x-is-pos neg-x-is-nonneg =
+  neg-x-is-nonneg
+```
+
 ```agda
 succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
 succ-int-ℕ zero-ℕ = refl

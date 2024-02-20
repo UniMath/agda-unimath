@@ -1,0 +1,195 @@
+# The cross-multiplication difference of two integer fractions
+
+```agda
+module elementary-number-theory.cross-mul-diff-integer-fractions where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
+
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+```
+
+</details>
+
+## Idea
+
+The cross-multiplication difference of two fractions `a/b` and `p/q` is the
+difference of the products of the numerator of each fraction with the
+denominator of the other : `p * b - a * q`.
+
+## Definitions
+
+### The cross-multiplication difference of two fractions
+
+```agda
+cross-mul-diff-fraction-ℤ : fraction-ℤ → fraction-ℤ → ℤ
+cross-mul-diff-fraction-ℤ x y =
+  diff-ℤ
+    ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
+    ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
+```
+
+Swapping the the fractions changes the sign of the cross-multiplication
+difference.
+
+```agda
+neg-cross-mul-diff-fraction-ℤ : (x y : fraction-ℤ)
+  → Id
+    ( neg-ℤ (cross-mul-diff-fraction-ℤ x y))
+    ( cross-mul-diff-fraction-ℤ y x)
+neg-cross-mul-diff-fraction-ℤ x y =
+  distributive-neg-diff-ℤ
+    ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
+    ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
+```
+
+Two fractions are similar when their cross-multiplication difference is zero.
+
+```agda
+module _
+  (x y : fraction-ℤ)
+  where
+
+  is-zero-cross-mul-diff-sim-fraction-ℤ :
+    sim-fraction-ℤ x y →
+    is-zero-ℤ (cross-mul-diff-fraction-ℤ x y)
+  is-zero-cross-mul-diff-sim-fraction-ℤ H =
+    is-zero-diff-ℤ (inv H)
+
+  sim-is-zero-coss-mul-diff-fraction-ℤ :
+    is-zero-ℤ (cross-mul-diff-fraction-ℤ x y) →
+    sim-fraction-ℤ x y
+  sim-is-zero-coss-mul-diff-fraction-ℤ H = inv (eq-diff-ℤ H)
+```
+
+## Transitivity relations for the cross-multiplication difference
+
+Given three fractions `a/b`, `x/y` and `m/n`, the pairwise cross-multiplication
+differences satisfy a transitive-additive property:
+
+`y * (m * b - a * n) = b * (m * y - x * n) + n * (x * b - a * y)`
+
+```agda
+lemma-add-cross-mul-diff-fraction-ℤ : (p q r : fraction-ℤ)
+  → Id
+    ( add-ℤ
+      ( denominator-fraction-ℤ p *ℤ cross-mul-diff-fraction-ℤ q r)
+      ( denominator-fraction-ℤ r *ℤ cross-mul-diff-fraction-ℤ p q))
+    ( denominator-fraction-ℤ q *ℤ cross-mul-diff-fraction-ℤ p r)
+lemma-add-cross-mul-diff-fraction-ℤ
+  (np , dp , hp)
+  (nq , dq , hq)
+  (nr , dr , hr) =
+  equational-reasoning
+  add-ℤ
+    (dp *ℤ (nr *ℤ dq -ℤ nq *ℤ dr))
+    (dr *ℤ (nq *ℤ dp -ℤ np *ℤ dq))
+  ＝ add-ℤ
+      (dp *ℤ (nr *ℤ dq) -ℤ dp *ℤ (nq *ℤ dr))
+      (dr *ℤ (nq *ℤ dp) -ℤ dr *ℤ (np *ℤ dq))
+    by ap-add-ℤ
+      ( inv (linear-diff-left-mul-ℤ dp (nr *ℤ dq) (nq *ℤ dr)))
+      ( inv (linear-diff-left-mul-ℤ dr (nq *ℤ dp) (np *ℤ dq)))
+  ＝ diff-ℤ
+      (dp *ℤ (nr *ℤ dq) +ℤ dr *ℤ (nq *ℤ dp))
+      (dp *ℤ (nq *ℤ dr) +ℤ dr *ℤ (np *ℤ dq))
+    by interchange-law-add-diff-ℤ
+      ( mul-ℤ dp ( mul-ℤ nr dq))
+      ( mul-ℤ dp ( mul-ℤ nq dr))
+      ( mul-ℤ dr ( mul-ℤ nq dp))
+      ( mul-ℤ dr ( mul-ℤ np dq))
+  ＝ diff-ℤ
+      (dq *ℤ (nr *ℤ dp) +ℤ dr *ℤ (nq *ℤ dp))
+      (dr *ℤ (nq *ℤ dp) +ℤ dq *ℤ (np *ℤ dr))
+    by ap-diff-ℤ
+      ( ap-add-ℤ
+        ( lemma-interchange-mul-ℤ dp nr dq)
+        refl)
+      ( ap-add-ℤ
+        ( lemma-interchange-mul-ℤ dp nq dr)
+        ( lemma-interchange-mul-ℤ dr np dq))
+  ＝ diff-ℤ
+      (dq *ℤ (nr *ℤ dp) +ℤ dr *ℤ (nq *ℤ dp))
+      ((dq *ℤ (np *ℤ dr)) +ℤ (dr *ℤ (nq *ℤ dp)))
+    by ap
+      ( diff-ℤ (dq *ℤ (nr *ℤ dp) +ℤ dr *ℤ (nq *ℤ dp)))
+      ( commutative-add-ℤ (dr *ℤ (nq *ℤ dp)) (dq *ℤ (np *ℤ dr)))
+  ＝ (dq *ℤ (nr *ℤ dp)) -ℤ (dq *ℤ (np *ℤ dr))
+    by right-translation-diff-ℤ
+      (dq *ℤ (nr *ℤ dp))
+      (dq *ℤ (np *ℤ dr))
+      (dr *ℤ (nq *ℤ dp))
+  ＝ dq *ℤ (nr *ℤ dp -ℤ np *ℤ dr)
+    by linear-diff-left-mul-ℤ dq (nr *ℤ dp) (np *ℤ dr)
+  where
+  lemma-interchange-mul-ℤ : (a b c : ℤ) → (a *ℤ (b *ℤ c)) ＝ (c *ℤ (b *ℤ a))
+  lemma-interchange-mul-ℤ a b c =
+    inv (associative-mul-ℤ a b c)
+    ∙ ap (mul-ℤ' c) (commutative-mul-ℤ a b)
+    ∙ commutative-mul-ℤ (b *ℤ a) c
+
+lemma-left-sim-cross-mul-diff-fraction-ℤ : (a a' b : fraction-ℤ)
+  → sim-fraction-ℤ a a'
+  → Id
+    ( denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ a' b)
+    ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
+lemma-left-sim-cross-mul-diff-fraction-ℤ a a' b H =
+  equational-reasoning
+  ( denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ a' b)
+  ＝ ( add-ℤ
+        ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
+        ( denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a' a))
+  by ( inv (lemma-add-cross-mul-diff-fraction-ℤ a' a b))
+  ＝ ( add-ℤ
+      ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
+      ( zero-ℤ))
+  by ( ap
+        ( add-ℤ
+          ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b))
+          ( ( ap
+              ( mul-ℤ (denominator-fraction-ℤ b))
+              ( is-zero-cross-mul-diff-sim-fraction-ℤ a' a H'))
+          ∙ ( right-zero-law-mul-ℤ (denominator-fraction-ℤ b))))
+  ＝ denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b
+  by right-unit-law-add-ℤ
+    ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
+  where
+  H' : sim-fraction-ℤ a' a
+  H' = symmetric-sim-fraction-ℤ a a' H
+
+lemma-right-sim-cross-mul-diff-fraction-ℤ : (a b b' : fraction-ℤ)
+  → sim-fraction-ℤ b b'
+  → Id
+    ( denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a b')
+    ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b)
+lemma-right-sim-cross-mul-diff-fraction-ℤ a b b' H =
+  equational-reasoning
+  ( denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a b')
+  ＝ ( add-ℤ
+      ( denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ b b')
+      ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b))
+  by ( inv ( lemma-add-cross-mul-diff-fraction-ℤ a b b'))
+  ＝ ( add-ℤ
+      zero-ℤ
+      ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b))
+  by ap
+      ( add-ℤ' (denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b))
+      ( ( ap
+          ( mul-ℤ (denominator-fraction-ℤ a))
+          ( is-zero-cross-mul-diff-sim-fraction-ℤ b b' H))
+        ∙ right-zero-law-mul-ℤ (denominator-fraction-ℤ a))
+  ＝ denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b
+  by left-unit-law-add-ℤ
+    ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b)
+```

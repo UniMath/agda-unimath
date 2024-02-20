@@ -27,6 +27,7 @@ open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.commutative-semiring-of-natural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
+open import elementary-number-theory.cross-mul-diff-integer-fractions public
 open import elementary-number-theory.cubes-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-total-order-natural-numbers public
@@ -73,6 +74,7 @@ open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
+open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
 open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
