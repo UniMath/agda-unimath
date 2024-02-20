@@ -23,19 +23,23 @@ open import foundation-core.retractions
 
 ## Idea
 
-Consider a map `f : A → B` and a map `g : B → A` in the converse direction. Then there is an [equivalence](foundation-core.equivalences.md)
+Consider a map `f : A → B` and a map `g : B → A` in the converse direction. Then
+there is an [equivalence](foundation-core.equivalences.md)
 
 ```text
   is-retraction f g ≃ ((x : A) (y : B) → (f x ＝ y) ≃ (x ＝ g y))
 ```
 
-In other words, any [retracting homotopy](foundation-core.retractions.md) `g ∘ f ~ id` induces a unique family of {{#concept "transposition" Disambiguation="identifications along retractions" Agda=transpose-eq-is-retraction}} maps
+In other words, any [retracting homotopy](foundation-core.retractions.md)
+`g ∘ f ~ id` induces a unique family of
+{{#concept "transposition" Disambiguation="identifications along retractions" Agda=transpose-eq-is-retraction}}
+maps
 
 ```text
   f x ＝ y → x ＝ g y
 ```
 
-indexed by `x : A` and `y : B`. 
+indexed by `x : A` and `y : B`.
 
 ## Definitions
 
@@ -63,7 +67,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
-  
+
   is-retraction-transpose-eq :
     ({x : B} {y : A} → x ＝ f y → g x ＝ y) → is-retraction f g
   is-retraction-transpose-eq H x = H refl

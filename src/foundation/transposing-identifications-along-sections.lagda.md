@@ -23,19 +23,23 @@ open import foundation-core.sections
 
 ## Idea
 
-Consider a map `f : A → B` and a map `g : B → A` in the converse direction. Then there is an [equivalence](foundation-core.equivalences.md)
+Consider a map `f : A → B` and a map `g : B → A` in the converse direction. Then
+there is an [equivalence](foundation-core.equivalences.md)
 
 ```text
   is-section f g ≃ ((x : A) (y : B) → (x ＝ g y) ≃ (f x ＝ y))
 ```
 
-In other words, any [section homotopy](foundation-core.sections.md) `f ∘ g ~ id` induces a unique family of {{#concept "transposition" Disambiguation="identifications along sections" Agda=transpose-eq-is-section}} maps
+In other words, any [section homotopy](foundation-core.sections.md) `f ∘ g ~ id`
+induces a unique family of
+{{#concept "transposition" Disambiguation="identifications along sections" Agda=transpose-eq-is-section}}
+maps
 
 ```text
   x ＝ g y → f x ＝ y
 ```
 
-indexed by `x : A` and `y : B`. 
+indexed by `x : A` and `y : B`.
 
 ### Transposing identifications along sections
 
