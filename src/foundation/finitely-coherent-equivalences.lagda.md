@@ -50,7 +50,7 @@ as a map equipped with a retraction. A `2`-coherent equivalence is a map
 and for each `p : f x ＝ y` and `q : x ＝ g y` a map
 
 ```text
-  t p q : (r x y p ＝ q) → (p ＝ s x y q)
+  t p q : (r x y p ＝ q) → (p ＝ s x y q).
 ```
 
 This data is equivalent to the data of a
@@ -59,10 +59,10 @@ This data is equivalent to the data of a
 ```text
   r : (x : A) → g (f x) ＝ x
   s : (y : B) → f (g y) ＝ y
-  t : (x : A) → ap f (r x) ＝ s (f x)
+  t : (x : A) → ap f (r x) ＝ s (f x).
 ```
 
-The condition of being an `n`-coherent equivalent is a
+The condition of being an `n`-coherent equivalence is a
 [proposition](foundation-core.propositions.md) for each `n ≥ 2`, and this
 proposition is equivalent to being an equivalence.
 
