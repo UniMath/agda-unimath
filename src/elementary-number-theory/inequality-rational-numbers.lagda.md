@@ -236,15 +236,10 @@ trichotomy-le-ℚ :
   ( Id x y → A) →
   ( le-ℚ y x → A) →
   A
-trichotomy-le-ℚ x y left eq right =
-  rec-coproduct
-    right
-    ( λ I →
-      rec-coproduct
-        left
-        ( eq ∘ is-antisymmetric-leq-ℚ x y I)
-        ( decide-le-leq-ℚ x y))
-    ( decide-le-leq-ℚ y x)
+trichotomy-le-ℚ x y left eq right with decide-le-leq-ℚ x y | decide-le-leq-ℚ y x
+... | inl I | _ = left I
+... | inr I | inl I' = right I'
+... | inr I | inr I' = eq (is-antisymmetric-leq-ℚ x y I' I)
 ```
 
 ### The mediant of two rationals is between them
