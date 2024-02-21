@@ -304,7 +304,7 @@ module _
     is-fiberwise-orthogonal-pullback-condition f h →
     is-fiberwise-orthogonal-pullback-condition f (h ∘ g) →
     is-fiberwise-orthogonal-pullback-condition f g
-  is-fiberwise-orthogonal-pullback-condition-right-right-factor H HG f' α  =
+  is-fiberwise-orthogonal-pullback-condition-right-right-factor H HG f' α =
     is-orthogonal-pullback-condition-right-right-factor f' g h
       ( H f' α)
       ( HG f' α)
