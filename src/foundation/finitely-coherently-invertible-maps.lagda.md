@@ -18,11 +18,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-We introduce the concept of being a {{#concept "finitely coherently invertible map" Agda=is-finitely-coherently-invertible}} by induction on the [natural numbers](elementary-number-theory.natural-numbers.md).
-In the base case, we say that a map `f : A → B` is a {{#concept "`0`-coherently invertible map" Agda=is-finitely-coherently-invertible}} if it comes equipped
-with a map `g : B → A`. Recursively, we say that a map `f : A → B` is an
-{{#concept "`n + 1`-coherently invertible map" Agda=is-finitely-coherently-invertible}} if it comes equipped with map `g : B → A` and a
-family of maps
+We introduce the concept of being a
+{{#concept "finitely coherently invertible map" Agda=is-finitely-coherently-invertible}}
+by induction on the
+[natural numbers](elementary-number-theory.natural-numbers.md). In the base
+case, we say that a map `f : A → B` is a
+{{#concept "`0`-coherently invertible map" Agda=is-finitely-coherently-invertible}}
+if it comes equipped with a map `g : B → A`. Recursively, we say that a map
+`f : A → B` is an
+{{#concept "`n + 1`-coherently invertible map" Agda=is-finitely-coherently-invertible}}
+if it comes equipped with map `g : B → A` and a family of maps
 
 ```text
   r x y : (f x ＝ y) → (x ＝ g y)

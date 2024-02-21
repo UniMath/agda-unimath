@@ -1,7 +1,7 @@
 # Transposing identifications along sections
 
 ```agda
-module foundation.transposing-identifications-along-sections where
+module foundation.transposition-identifications-along-sections where
 ```
 
 <details><summary>
@@ -32,7 +32,7 @@ there is an [equivalence](foundation-core.equivalences.md)
 
 In other words, any [section homotopy](foundation-core.sections.md) `f ∘ g ~ id`
 induces a unique family of
-{{#concept "transposition" Disambiguation="identifications along sections" Agda=transpose-eq-is-section}}
+{{#concept "transposition" Disambiguation="identifications along sections" Agda=eq-transpose-is-section}}
 maps
 
 ```text
@@ -48,13 +48,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
 
-  transpose-eq-is-section :
+  eq-transpose-is-section :
     f ∘ g ~ id → {x : A} {y : B} → x ＝ g y → f x ＝ y
-  transpose-eq-is-section H {x} {y} p = ap f p ∙ H y
+  eq-transpose-is-section H {x} {y} p = ap f p ∙ H y
 
-  transpose-eq-is-section' :
+  eq-transpose-is-section' :
     f ∘ g ~ id → {x : B} {y : A} → g x ＝ y → x ＝ f y
-  transpose-eq-is-section' H {x} refl = inv (H x)
+  eq-transpose-is-section' H {x} refl = inv (H x)
 ```
 
 ## Properties
@@ -75,18 +75,18 @@ module _
   is-section-transpose-eq' H x = inv (H refl)
 
   is-retraction-is-section-transpose-eq :
-    is-section-transpose-eq ∘ transpose-eq-is-section f g ~ id
+    is-section-transpose-eq ∘ eq-transpose-is-section f g ~ id
   is-retraction-is-section-transpose-eq H = refl
 
   htpy-is-section-is-section-transpose-eq :
     (H : {x : A} {y : B} → x ＝ g y → f x ＝ y) →
     (x : A) (y : B) →
-    transpose-eq-is-section f g (is-section-transpose-eq H) {x} {y} ~ H {x} {y}
+    eq-transpose-is-section f g (is-section-transpose-eq H) {x} {y} ~ H {x} {y}
   htpy-is-section-is-section-transpose-eq H x y refl = refl
 
   abstract
     is-section-is-section-transpose-eq :
-      transpose-eq-is-section f g ∘ is-section-transpose-eq ~ id
+      eq-transpose-is-section f g ∘ is-section-transpose-eq ~ id
     is-section-is-section-transpose-eq H =
       eq-htpy-implicit
         ( λ x →
@@ -94,16 +94,16 @@ module _
           ( λ y →
             eq-htpy (htpy-is-section-is-section-transpose-eq H x y)))
 
-  is-equiv-transpose-eq-is-section :
-    is-equiv (transpose-eq-is-section f g)
-  is-equiv-transpose-eq-is-section =
+  is-equiv-eq-transpose-is-section :
+    is-equiv (eq-transpose-is-section f g)
+  is-equiv-eq-transpose-is-section =
     is-equiv-is-invertible
       ( is-section-transpose-eq)
       ( is-section-is-section-transpose-eq)
       ( is-retraction-is-section-transpose-eq)
 
-  equiv-transpose-eq-is-section :
+  equiv-eq-transpose-is-section :
     (f ∘ g ~ id) ≃ ({x : A} {y : B} → x ＝ g y → f x ＝ y)
-  equiv-transpose-eq-is-section =
-    (transpose-eq-is-section f g , is-equiv-transpose-eq-is-section)
+  equiv-eq-transpose-is-section =
+    (eq-transpose-is-section f g , is-equiv-eq-transpose-is-section)
 ```

@@ -1,7 +1,7 @@
 # Transposing identifications along retractions
 
 ```agda
-module foundation.transposing-identifications-along-retractions where
+module foundation.transposition-identifications-along-retractions where
 ```
 
 <details><summary>
@@ -32,7 +32,7 @@ there is an [equivalence](foundation-core.equivalences.md)
 
 In other words, any [retracting homotopy](foundation-core.retractions.md)
 `g ∘ f ~ id` induces a unique family of
-{{#concept "transposition" Disambiguation="identifications along retractions" Agda=transpose-eq-is-retraction}}
+{{#concept "transposition" Disambiguation="identifications along retractions" Agda=eq-transpose-is-retraction}}
 maps
 
 ```text
@@ -50,13 +50,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
 
-  transpose-eq-is-retraction :
+  eq-transpose-is-retraction :
     is-retraction f g → {x : B} {y : A} → x ＝ f y → g x ＝ y
-  transpose-eq-is-retraction H {x} {y} p = ap g p ∙ H y
+  eq-transpose-is-retraction H {x} {y} p = ap g p ∙ H y
 
-  transpose-eq-is-retraction' :
+  eq-transpose-is-retraction' :
     is-retraction f g → {x : A} {y : B} → f x ＝ y → x ＝ g y
-  transpose-eq-is-retraction' H {x} refl = inv (H x)
+  eq-transpose-is-retraction' H {x} refl = inv (H x)
 ```
 
 ## Properties
@@ -77,35 +77,35 @@ module _
   is-retraction-transpose-eq' H x = inv (H refl)
 
   is-retraction-is-retraction-transpose-eq :
-    is-retraction-transpose-eq ∘ transpose-eq-is-retraction f g ~ id
+    is-retraction-transpose-eq ∘ eq-transpose-is-retraction f g ~ id
   is-retraction-is-retraction-transpose-eq H = refl
 
   htpy-is-section-is-retraction-transpose-eq :
     (H : {x : B} {y : A} → x ＝ f y → g x ＝ y)
     (x : B) (y : A) →
-    transpose-eq-is-retraction f g (is-retraction-transpose-eq H) {x} {y} ~
+    eq-transpose-is-retraction f g (is-retraction-transpose-eq H) {x} {y} ~
     H {x} {y}
   htpy-is-section-is-retraction-transpose-eq H x y refl = refl
 
   abstract
     is-section-is-retraction-transpose-eq :
-      transpose-eq-is-retraction f g ∘ is-retraction-transpose-eq ~ id
+      eq-transpose-is-retraction f g ∘ is-retraction-transpose-eq ~ id
     is-section-is-retraction-transpose-eq H =
       eq-htpy-implicit
         ( λ x →
           eq-htpy-implicit
             ( λ y → eq-htpy (htpy-is-section-is-retraction-transpose-eq H x y)))
 
-  is-equiv-transpose-eq-is-retraction :
-    is-equiv (transpose-eq-is-retraction f g)
-  is-equiv-transpose-eq-is-retraction =
+  is-equiv-eq-transpose-is-retraction :
+    is-equiv (eq-transpose-is-retraction f g)
+  is-equiv-eq-transpose-is-retraction =
     is-equiv-is-invertible
       ( is-retraction-transpose-eq)
       ( is-section-is-retraction-transpose-eq)
       ( is-retraction-is-retraction-transpose-eq)
 
-  equiv-transpose-eq-is-retraction :
+  equiv-eq-transpose-is-retraction :
     is-retraction f g ≃ ({x : B} {y : A} → x ＝ f y → g x ＝ y)
-  equiv-transpose-eq-is-retraction =
-    ( transpose-eq-is-retraction f g , is-equiv-transpose-eq-is-retraction)
+  equiv-eq-transpose-is-retraction =
+    ( eq-transpose-is-retraction f g , is-equiv-eq-transpose-is-retraction)
 ```
