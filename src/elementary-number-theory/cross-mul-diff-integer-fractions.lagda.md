@@ -43,8 +43,9 @@ cross-mul-diff-fraction-ℤ x y =
 Swapping the fractions changes the sign of the cross-multiplication difference.
 
 ```agda
-neg-cross-mul-diff-fraction-ℤ : (x y : fraction-ℤ)
-  → Id
+neg-cross-mul-diff-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  Id
     ( neg-ℤ (cross-mul-diff-fraction-ℤ x y))
     ( cross-mul-diff-fraction-ℤ y x)
 neg-cross-mul-diff-fraction-ℤ x y =
