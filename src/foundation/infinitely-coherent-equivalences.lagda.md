@@ -189,6 +189,12 @@ comp-∞-equiv f e =
 
 ### Infinitely coherent equivalences obtained from equivalences
 
+Since
+[transposing identifications along an equivalence](foundation.transposition-identifications-along-equivalences.md)
+is an equivalence, it follows immediately that equivalences are infinitely
+coherent equivalences. This argument does not require
+[function extensionality](foundation.function-extensionality.md).
+
 ```agda
 is-∞-equiv-is-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
