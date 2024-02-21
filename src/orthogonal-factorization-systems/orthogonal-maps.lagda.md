@@ -213,7 +213,7 @@ fibers
                h ∈ (B → Y) ------> (A → Y)
 ```
 
-is a fiberwise equivalence.
+is an equivalence for every `h : B → Y`.
 
 ```agda
 module _
