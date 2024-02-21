@@ -78,7 +78,9 @@ module _
 Given three fractions `a/b`, `x/y` and `m/n`, the pairwise cross-multiplication
 differences satisfy a transitive-additive property:
 
-`y * (m * b - a * n) = b * (m * y - x * n) + n * (x * b - a * y)`
+```text
+  y * (m * b - a * n) = b * (m * y - x * n) + n * (x * b - a * y)
+```
 
 ```agda
 lemma-add-cross-mul-diff-fraction-ℤ :
