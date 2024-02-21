@@ -39,7 +39,8 @@ mediant-fraction-ℤ (a , b , p) (c , d , q) =
 The mediant preserves cross-multiplication difference
 
 ```agda
-cross-mul-diff-left-mediant-fraction-ℤ : (x y : fraction-ℤ) →
+cross-mul-diff-left-mediant-fraction-ℤ :
+  (x y : fraction-ℤ) →
   Id
     ( cross-mul-diff-fraction-ℤ x y)
     ( cross-mul-diff-fraction-ℤ x ( mediant-fraction-ℤ x y))
