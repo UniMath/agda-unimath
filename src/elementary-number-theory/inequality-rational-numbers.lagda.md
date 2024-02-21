@@ -272,9 +272,10 @@ module _
   where
 
   dense-le-ℚ : ∃ ℚ (λ r → le-ℚ x r × le-ℚ r y)
-  dense-le-ℚ = intro-∃
-    ( mediant-ℚ x y)
-    ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
+  dense-le-ℚ =
+    intro-∃
+      ( mediant-ℚ x y)
+      ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
 ```
 
 ### The strict order on the rationals is located
