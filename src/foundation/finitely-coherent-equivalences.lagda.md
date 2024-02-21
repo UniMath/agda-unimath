@@ -26,7 +26,7 @@ case, we say that any map `f : A → B` is a
 {{#concept "`0`-coherent equivalence" Agda=is-finitely-coherent-equivalence}}.
 Recursively, we say that a map `f : A → B` is an
 {{#concept "`n + 1`-coherent equivalence" Agda=is-finitely-coherent-equivalence}}
-if it comes equipped with map `g : B → A` and a family of maps
+if it comes equipped with a map `g : B → A` and a family of maps
 
 ```text
   r x y : (f x ＝ y) → (x ＝ g y)

@@ -44,8 +44,8 @@ Since this definition is infinite, it follows that for any `x : A` and `y : B`
 we have maps
 
 ```text
-  f' : (f x ＝ y) → (g y ＝ x)
-  g' : (g y ＝ x) → (f x ＝ y)
+  f' : (f x ＝ y) → (x ＝ g y)
+  g' : (x ＝ g y) → (f x ＝ y)
 ```
 
 and for each `p : f x ＝ y` and `q : g y ＝ x` an infinitely coherent
@@ -261,7 +261,7 @@ for each `x : A` and `y : B` a homotopy `α₁` witnessing that the triangle
 commutes, and finally a homotopy of elements of type
 
 ```text
-  is-infintitely-coherent-equivalence
+  is-infinitely-coherent-equivalence
     ( is-∞-equiv-htpy α₁
       ( is-∞-equiv-comp
         ( is-∞-equiv-is-equiv
