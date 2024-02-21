@@ -208,7 +208,7 @@ module _
     ind-trunc-Prop
       ( λ s → lower-cut-ℝ x p)
       ( rec-coproduct
-          id
+          ( id)
           ( λ I → ex-falso (is-disjoint-cut-ℝ x q ( H' , I))))
       ( is-located-lower-upper-cut-ℝ x p q H)
 
@@ -222,7 +222,7 @@ module _
         tr
           ( is-in-lower-cut-ℝ x)
           ( antisymmetric-leq-ℚ q p I H)
-          H')
+          ( H'))
       ( decide-le-leq-ℚ p q)
 
   le-upper-cut-ℝ : le-ℚ p q →
@@ -233,7 +233,7 @@ module _
       ( λ s → upper-cut-ℝ x q)
       ( rec-coproduct
         ( λ I → ex-falso (is-disjoint-cut-ℝ x p ( I , H')))
-        id)
+        ( id))
       ( is-located-lower-upper-cut-ℝ x p q H)
 
   leq-upper-cut-ℝ : leq-ℚ p q →
@@ -449,12 +449,12 @@ module _
         ( pr2 ∘ has-same-elements-eq-subtype
           ( upper-cut-ℝ x)
           ( upper-cut-ℝ y)
-          H))
+          ( H)))
       ( subset-lower-cut-upper-cut-ℝ y x
         ( pr1 ∘ has-same-elements-eq-subtype
           ( upper-cut-ℝ x)
           ( upper-cut-ℝ y)
-          H))
+          ( H)))
 
   eq-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ＝ lower-cut-ℝ y

@@ -106,38 +106,43 @@ lemma-add-cross-mul-diff-fraction-ℤ
   ＝ add-ℤ
       (dp *ℤ (nr *ℤ dq) -ℤ dp *ℤ (nq *ℤ dr))
       (dr *ℤ (nq *ℤ dp) -ℤ dr *ℤ (np *ℤ dq))
-    by ap-add-ℤ
-      ( inv (linear-diff-left-mul-ℤ dp (nr *ℤ dq) (nq *ℤ dr)))
-      ( inv (linear-diff-left-mul-ℤ dr (nq *ℤ dp) (np *ℤ dq)))
+    by
+      ap-add-ℤ
+        ( inv (linear-diff-left-mul-ℤ dp (nr *ℤ dq) (nq *ℤ dr)))
+        ( inv (linear-diff-left-mul-ℤ dr (nq *ℤ dp) (np *ℤ dq)))
   ＝ diff-ℤ
       (dp *ℤ (nr *ℤ dq) +ℤ dr *ℤ (nq *ℤ dp))
       (dp *ℤ (nq *ℤ dr) +ℤ dr *ℤ (np *ℤ dq))
-    by interchange-law-add-diff-ℤ
-      ( mul-ℤ dp ( mul-ℤ nr dq))
-      ( mul-ℤ dp ( mul-ℤ nq dr))
-      ( mul-ℤ dr ( mul-ℤ nq dp))
-      ( mul-ℤ dr ( mul-ℤ np dq))
+    by
+      interchange-law-add-diff-ℤ
+        ( mul-ℤ dp ( mul-ℤ nr dq))
+        ( mul-ℤ dp ( mul-ℤ nq dr))
+        ( mul-ℤ dr ( mul-ℤ nq dp))
+        ( mul-ℤ dr ( mul-ℤ np dq))
   ＝ diff-ℤ
       (dq *ℤ (nr *ℤ dp) +ℤ dr *ℤ (nq *ℤ dp))
       (dr *ℤ (nq *ℤ dp) +ℤ dq *ℤ (np *ℤ dr))
-    by ap-diff-ℤ
-      ( ap-add-ℤ
-        ( lemma-interchange-mul-ℤ dp nr dq)
-        refl)
-      ( ap-add-ℤ
-        ( lemma-interchange-mul-ℤ dp nq dr)
-        ( lemma-interchange-mul-ℤ dr np dq))
+    by
+      ap-diff-ℤ
+        ( ap-add-ℤ
+          ( lemma-interchange-mul-ℤ dp nr dq)
+          ( refl))
+        ( ap-add-ℤ
+          ( lemma-interchange-mul-ℤ dp nq dr)
+          ( lemma-interchange-mul-ℤ dr np dq))
   ＝ diff-ℤ
       (dq *ℤ (nr *ℤ dp) +ℤ dr *ℤ (nq *ℤ dp))
       ((dq *ℤ (np *ℤ dr)) +ℤ (dr *ℤ (nq *ℤ dp)))
-    by ap
-      ( diff-ℤ (dq *ℤ (nr *ℤ dp) +ℤ dr *ℤ (nq *ℤ dp)))
-      ( commutative-add-ℤ (dr *ℤ (nq *ℤ dp)) (dq *ℤ (np *ℤ dr)))
+    by
+      ap
+        ( diff-ℤ (dq *ℤ (nr *ℤ dp) +ℤ dr *ℤ (nq *ℤ dp)))
+        ( commutative-add-ℤ (dr *ℤ (nq *ℤ dp)) (dq *ℤ (np *ℤ dr)))
   ＝ (dq *ℤ (nr *ℤ dp)) -ℤ (dq *ℤ (np *ℤ dr))
-    by right-translation-diff-ℤ
-      (dq *ℤ (nr *ℤ dp))
-      (dq *ℤ (np *ℤ dr))
-      (dr *ℤ (nq *ℤ dp))
+    by
+      right-translation-diff-ℤ
+        (dq *ℤ (nr *ℤ dp))
+        (dq *ℤ (np *ℤ dr))
+        (dr *ℤ (nq *ℤ dp))
   ＝ dq *ℤ (nr *ℤ dp -ℤ np *ℤ dr)
     by linear-diff-left-mul-ℤ dq (nr *ℤ dp) (np *ℤ dr)
   where

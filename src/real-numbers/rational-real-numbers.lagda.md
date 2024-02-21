@@ -130,21 +130,22 @@ eq-real-rational-is-rational-ℝ :
 eq-real-rational-is-rational-ℝ x q H =
   eq-ℝ-eq-lower-cut-ℝ
     ( real-rational q)
-    x
+    ( x)
     ( eq-has-same-elements-subtype
       ( λ p → le-ℚ-Prop p q)
       ( lower-cut-ℝ x)
       ( λ r →
-        ( λ I → elim-disjunction-Prop
+        pair
+          ( λ I → elim-disjunction-Prop
             ( lower-cut-ℝ x r)
             ( upper-cut-ℝ x q)
             ( lower-cut-ℝ x r)
             ( id , λ H' → ex-falso (pr2 H H'))
             ( is-located-lower-upper-cut-ℝ x r q I))
-        , trichotomy-le-ℚ r q
+          ( trichotomy-le-ℚ r q
             ( λ I _ → I)
             ( λ E H' → ex-falso ( pr1 ( tr ( is-rational-ℝ x) ( inv E) H) H'))
-            ( λ I H' → ex-falso ( pr1 H ( le-lower-cut-ℝ x q r I H')))))
+            ( λ I H' → ex-falso ( pr1 H ( le-lower-cut-ℝ x q r I H'))))))
 ```
 
 Being a rational is a property
@@ -164,9 +165,8 @@ all-eq-is-rational-ℝ x p q H H' =
       ( elim-disjunction-Prop
         ( lower-cut-ℝ x p)
         ( upper-cut-ℝ x q)
-        empty-Prop
-        (pr1 H
-        , pr2 H')
+        ( empty-Prop)
+        ( pr1 H , pr2 H')
         ( is-located-lower-upper-cut-ℝ x p q I))
 
   right-case : le-ℚ q p → p ＝ q
@@ -175,9 +175,8 @@ all-eq-is-rational-ℝ x p q H H' =
       ( elim-disjunction-Prop
         ( lower-cut-ℝ x q)
         ( upper-cut-ℝ x p)
-        empty-Prop
-        (pr1 H'
-        , pr2 H)
+        ( empty-Prop)
+        ( pr1 H' , pr2 H)
         ( is-located-lower-upper-cut-ℝ x q p I))
 
 is-prop-rational-real : {l : Level} (x : ℝ l) → is-prop (Σ ℚ (is-rational-ℝ x))

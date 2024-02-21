@@ -116,8 +116,7 @@ is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 ```agda
 transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
 transitive-le-ℤ k l m p q =
-  tr
-    is-positive-ℤ
+  tr is-positive-ℤ
     ( triangle-diff-ℤ m l k)
     ( is-positive-add-ℤ q p)
 
@@ -134,7 +133,7 @@ asymmetric-le-ℤ x y p q =
 connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
 connected-le-ℤ x y H =
   map-coproduct
-    id
+    ( id)
     ( is-positive-eq-ℤ ( distributive-neg-diff-ℤ y x))
     ( decide-is-positive-is-nonzero-ℤ (y -ℤ x) (H ∘ inv ∘ eq-diff-ℤ))
 
