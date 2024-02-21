@@ -69,7 +69,7 @@ is-prop-le-ℚ : (x y : ℚ) → is-prop (le-ℚ x y)
 is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 ```
 
-## Properties of inequalities on the rationals
+## Properties
 
 ### Inequality on rational numbers is antisymmetric
 
