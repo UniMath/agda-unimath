@@ -170,9 +170,10 @@ lemma-left-sim-cross-mul-diff-fraction-ℤ a a' b H =
   H' : sim-fraction-ℤ a' a
   H' = symmetric-sim-fraction-ℤ a a' H
 
-lemma-right-sim-cross-mul-diff-fraction-ℤ : (a b b' : fraction-ℤ)
-  → sim-fraction-ℤ b b'
-  → Id
+lemma-right-sim-cross-mul-diff-fraction-ℤ :
+  (a b b' : fraction-ℤ) →
+  sim-fraction-ℤ b b' →
+  Id
     ( denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a b')
     ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b)
 lemma-right-sim-cross-mul-diff-fraction-ℤ a b b' H =
