@@ -40,11 +40,9 @@ open import real-numbers.dedekind-real-numbers
 
 The type of rationals `ℚ` embeds into the type of Dedekind reals `ℝ`
 
-## Definition
+## Definitions
 
-### Inclusion of `ℚ` in `ℝ`
-
-Strict inequality on rational gives Dedekind cuts
+### Strict inequality on rational gives Dedekind cuts
 
 ```agda
 is-dedekind-cut-le-ℚ :
@@ -84,7 +82,7 @@ is-dedekind-cut-le-ℚ x =
         ( λ r ( p , q) → intro-∃ r ( q , p))
 ```
 
-The canonical map from `ℚ` to `ℝ`
+### The canonical map from `ℚ` to `ℝ`
 
 ```agda
 real-rational : ℚ → ℝ lzero
@@ -95,7 +93,7 @@ real-rational x =
     ( is-dedekind-cut-le-ℚ x)
 ```
 
-### Rational reals
+### The rational real property
 
 ```agda
 module _
@@ -110,45 +108,7 @@ module _
 
   is-rational-ℝ : UU l
   is-rational-ℝ = type-Prop is-rational-ℝ-Prop
-
-  is-prop-is-rational-ℝ : is-prop is-rational-ℝ
-  is-prop-is-rational-ℝ = is-prop-type-Prop is-rational-ℝ-Prop
 ```
-
-Real rationals are rationals and rational reals are real rationals
-
-```agda
-is-rational-real-rational : (p : ℚ) → is-rational-ℝ (real-rational p) p
-is-rational-real-rational p =
-  pair
-    ( irreflexive-le-ℚ p)
-    ( irreflexive-le-ℚ p)
-
-eq-real-rational-is-rational-ℝ :
-  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) →
-  real-rational q ＝ x
-eq-real-rational-is-rational-ℝ x q H =
-  eq-ℝ-eq-lower-cut-ℝ
-    ( real-rational q)
-    ( x)
-    ( eq-has-same-elements-subtype
-      ( λ p → le-ℚ-Prop p q)
-      ( lower-cut-ℝ x)
-      ( λ r →
-        pair
-          ( λ I → elim-disjunction-Prop
-            ( lower-cut-ℝ x r)
-            ( upper-cut-ℝ x q)
-            ( lower-cut-ℝ x r)
-            ( id , λ H' → ex-falso (pr2 H H'))
-            ( is-located-lower-upper-cut-ℝ x r q I))
-          ( trichotomy-le-ℚ r q
-            ( λ I _ → I)
-            ( λ E H' → ex-falso ( pr1 ( tr ( is-rational-ℝ x) ( inv E) H) H'))
-            ( λ I H' → ex-falso ( pr1 H ( le-lower-cut-ℝ x q r I H'))))))
-```
-
-Being a rational is a property
 
 ```agda
 all-eq-is-rational-ℝ :
@@ -188,7 +148,7 @@ is-prop-rational-real x =
         ( all-eq-is-rational-ℝ x (pr1 p) (pr1 q) (pr2 p) (pr2 q)))
 ```
 
-The subtype of rational reals
+### The subtype of rational reals
 
 ```agda
 subtype-rational-real : {l : Level} → ℝ l → Prop l
@@ -198,9 +158,6 @@ subtype-rational-real x =
 Rational-ℝ : (l : Level) → UU (lsuc l)
 Rational-ℝ l =
   type-subtype subtype-rational-real
-
-rational-ℝ-rational : ℚ → Rational-ℝ lzero
-rational-ℝ-rational q = real-rational q , q , is-rational-real-rational q
 
 module _
   {l : Level} (x : Rational-ℝ l)
@@ -216,7 +173,49 @@ module _
   is-rational-rational-ℝ = pr2 (pr2 x)
 ```
 
-The equivalence between rationals and rational reals
+## Properties
+
+### Real rationals are rationals and rational reals are real rationals
+
+```agda
+is-rational-real-rational : (p : ℚ) → is-rational-ℝ (real-rational p) p
+is-rational-real-rational p =
+  pair
+    ( irreflexive-le-ℚ p)
+    ( irreflexive-le-ℚ p)
+
+eq-real-rational-is-rational-ℝ :
+  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) →
+  real-rational q ＝ x
+eq-real-rational-is-rational-ℝ x q H =
+  eq-ℝ-eq-lower-cut-ℝ
+    ( real-rational q)
+    ( x)
+    ( eq-has-same-elements-subtype
+      ( λ p → le-ℚ-Prop p q)
+      ( lower-cut-ℝ x)
+      ( λ r →
+        pair
+          ( λ I → elim-disjunction-Prop
+            ( lower-cut-ℝ x r)
+            ( upper-cut-ℝ x q)
+            ( lower-cut-ℝ x r)
+            ( id , λ H' → ex-falso (pr2 H H'))
+            ( is-located-lower-upper-cut-ℝ x r q I))
+          ( trichotomy-le-ℚ r q
+            ( λ I _ → I)
+            ( λ E H' → ex-falso ( pr1 ( tr ( is-rational-ℝ x) ( inv E) H) H'))
+            ( λ I H' → ex-falso ( pr1 H ( le-lower-cut-ℝ x q r I H'))))))
+```
+
+### The cannonical map from rationals to rational reals
+
+```agda
+rational-ℝ-rational : ℚ → Rational-ℝ lzero
+rational-ℝ-rational q = real-rational q , q , is-rational-real-rational q
+```
+
+### The rationals and rational reals are equivalent
 
 ```agda
 is-section-rational-ℝ-rational :
