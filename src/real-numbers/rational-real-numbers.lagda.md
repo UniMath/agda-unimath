@@ -124,7 +124,8 @@ is-rational-real-rational p =
     ( is-irreflexive-le-ℚ p)
     ( is-irreflexive-le-ℚ p)
 
-eq-real-rational-is-rational-ℝ : (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) →
+eq-real-rational-is-rational-ℝ :
+  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) →
   real-rational q ＝ x
 eq-real-rational-is-rational-ℝ x q H =
   eq-ℝ-eq-lower-cut-ℝ
