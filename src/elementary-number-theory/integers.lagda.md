@@ -441,7 +441,8 @@ decide-is-positive-is-nonzero-ℤ (inl x) H = inr star
 decide-is-positive-is-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
 decide-is-positive-is-nonzero-ℤ (inr (inr x)) H = inl star
 
-empty-is-positive-is-nonnegative-neg-ℤ : (x : ℤ) →
+empty-is-positive-is-nonnegative-neg-ℤ :
+  (x : ℤ) →
   is-positive-ℤ x →
   is-nonnegative-ℤ (neg-ℤ x) →
   empty
