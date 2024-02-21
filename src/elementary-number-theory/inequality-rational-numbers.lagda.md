@@ -217,15 +217,15 @@ Decidability and trichotomy properties
 decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
 decide-le-leq-ℚ x y =
   map-coproduct
-    id
+    ( id)
     ( is-nonnegative-eq-ℤ
       ( neg-cross-mul-diff-fraction-ℤ
         ( fraction-ℚ x)
         ( fraction-ℚ y)))
     ( decide-is-positive-ℤ
       { cross-mul-diff-fraction-ℤ
-          ( fraction-ℚ x)
-          ( fraction-ℚ y)})
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)})
 
 trichotomy-le-ℚ :
   {l : Level} {A : UU l} (x y : ℚ) →
