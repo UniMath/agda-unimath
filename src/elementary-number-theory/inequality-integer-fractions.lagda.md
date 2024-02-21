@@ -81,10 +81,10 @@ module _
   is-sim-antisymmetric-leq-fraction-ℤ H H' =
     sim-is-zero-coss-mul-diff-fraction-ℤ x y
       ( is-zero-is-nonnegative-ℤ
-        H
+        ( H)
         ( is-nonnegative-eq-ℤ
             ( inv ( neg-cross-mul-diff-fraction-ℤ x y))
-            H'))
+            ( H')))
 ```
 
 ### Strict inequality on integer fractions is asymmetric
