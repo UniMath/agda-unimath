@@ -150,7 +150,8 @@ eq-real-rational-is-rational-ℝ x q H =
 Being a rational is a property
 
 ```agda
-all-eq-is-rational-ℝ : {l : Level} (x : ℝ l) (p q : ℚ) →
+all-eq-is-rational-ℝ :
+  {l : Level} (x : ℝ l) (p q : ℚ) →
   is-rational-ℝ x p →
   is-rational-ℝ x q →
   p ＝ q
