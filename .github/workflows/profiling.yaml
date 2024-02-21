@@ -45,9 +45,8 @@ jobs:
         # in a format compatible with github-action-benchmark or converted accordingly
 
       - name: Convert benchmark results to JSON
-        run:
-          python3 .github/workflows/benchmark_to_json.py 'benchmark-results.txt'
-          'memory-results.txt' 'benchmark-results.json'
+        run: |
+          python3 .github/workflows/benchmark_to_json.py benchmark-results.txt memory-results.txt benchmark-results.json
 
       - name: Benchmark
         uses: rhysd/github-action-benchmark@v1
@@ -56,4 +55,5 @@ jobs:
           output-file-path: './master/benchmark-results.json' # Adjust path to where your benchmark output is saved
           gh-pages-branch: 'gh-pages' # or any branch you prefer to store your benchmark results
           benchmark-data-dir-path: 'benchmarks' # Directory in the gh-pages branch where benchmark data will be stored
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true # Push and deploy GitHub pages branch automatically
