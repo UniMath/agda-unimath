@@ -8,7 +8,7 @@ module elementary-number-theory.inequality-integer-fractions where
 
 ```agda
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.cross-mul-diff-integer-fractions
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integer-fractions

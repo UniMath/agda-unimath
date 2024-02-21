@@ -1,7 +1,7 @@
 # The cross-multiplication difference of two integer fractions
 
 ```agda
-module elementary-number-theory.cross-mul-diff-integer-fractions where
+module elementary-number-theory.cross-multiplication-difference-integer-fractions where
 ```
 
 <details><summary>Imports</summary>
@@ -24,9 +24,12 @@ open import foundation.propositions
 
 ## Idea
 
-The {{#concept "cross-multiplication difference" Agda=cross-mul-diff-fraction-ℤ}} of two [integer fractions](elementary-number-theory.integer-fractions.md) `a/b` and `c/d` is the
-[difference](elementary-number-theory.difference-integers.md) of the [products](elementary-number-theory.multiplication-integers.md) of the numerator of each fraction with the
-denominator of the other : `c * b - a * d`.
+The
+{{#concept "cross-multiplication difference" Agda=cross-mul-diff-fraction-ℤ}} of
+two [integer fractions](elementary-number-theory.integer-fractions.md) `a/b` and
+`c/d` is the [difference](elementary-number-theory.difference-integers.md) of
+the [products](elementary-number-theory.multiplication-integers.md) of the
+numerator of each fraction with the denominator of the other : `c * b - a * d`.
 
 ## Definitions
 
@@ -140,9 +143,9 @@ lemma-add-cross-mul-diff-fraction-ℤ
   where
   lemma-interchange-mul-ℤ : (a b c : ℤ) → (a *ℤ (b *ℤ c)) ＝ (c *ℤ (b *ℤ a))
   lemma-interchange-mul-ℤ a b c =
-    inv (associative-mul-ℤ a b c)
-    ∙ ap (mul-ℤ' c) (commutative-mul-ℤ a b)
-    ∙ commutative-mul-ℤ (b *ℤ a) c
+    inv (associative-mul-ℤ a b c) ∙
+    ap (mul-ℤ' c) (commutative-mul-ℤ a b) ∙
+    commutative-mul-ℤ (b *ℤ a) c
 
 lemma-left-sim-cross-mul-diff-fraction-ℤ :
   (a a' b : fraction-ℤ) →
@@ -156,20 +159,22 @@ lemma-left-sim-cross-mul-diff-fraction-ℤ a a' b H =
   ＝ ( add-ℤ
         ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
         ( denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a' a))
-  by ( inv (lemma-add-cross-mul-diff-fraction-ℤ a' a b))
+    by inv (lemma-add-cross-mul-diff-fraction-ℤ a' a b)
   ＝ ( add-ℤ
       ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
       ( zero-ℤ))
-  by ( ap
+    by
+      ap
         ( add-ℤ
           ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b))
           ( ( ap
               ( mul-ℤ (denominator-fraction-ℤ b))
-              ( is-zero-cross-mul-diff-sim-fraction-ℤ a' a H'))
-          ∙ ( right-zero-law-mul-ℤ (denominator-fraction-ℤ b))))
+              ( is-zero-cross-mul-diff-sim-fraction-ℤ a' a H')) ∙
+            ( right-zero-law-mul-ℤ (denominator-fraction-ℤ b)))
   ＝ denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b
-  by right-unit-law-add-ℤ
-    ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
+    by
+      right-unit-law-add-ℤ
+        ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
   where
   H' : sim-fraction-ℤ a' a
   H' = symmetric-sim-fraction-ℤ a a' H
@@ -186,17 +191,19 @@ lemma-right-sim-cross-mul-diff-fraction-ℤ a b b' H =
   ＝ ( add-ℤ
       ( denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ b b')
       ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b))
-  by ( inv ( lemma-add-cross-mul-diff-fraction-ℤ a b b'))
+    by inv (lemma-add-cross-mul-diff-fraction-ℤ a b b')
   ＝ ( add-ℤ
-      zero-ℤ
+      ( zero-ℤ)
       ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b))
-  by ap
-      ( add-ℤ' (denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b))
-      ( ( ap
+    by
+      ap
+        ( add-ℤ' (denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b))
+        ( ( ap
           ( mul-ℤ (denominator-fraction-ℤ a))
-          ( is-zero-cross-mul-diff-sim-fraction-ℤ b b' H))
-        ∙ right-zero-law-mul-ℤ (denominator-fraction-ℤ a))
+          ( is-zero-cross-mul-diff-sim-fraction-ℤ b b' H)) ∙
+          ( right-zero-law-mul-ℤ (denominator-fraction-ℤ a)))
   ＝ denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b
-  by left-unit-law-add-ℤ
-    ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b)
+    by
+      left-unit-law-add-ℤ
+        ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b)
 ```

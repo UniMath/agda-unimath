@@ -27,7 +27,7 @@ open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.commutative-semiring-of-natural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
-open import elementary-number-theory.cross-mul-diff-integer-fractions public
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions public
 open import elementary-number-theory.cubes-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-total-order-natural-numbers public

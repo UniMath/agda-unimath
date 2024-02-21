@@ -7,7 +7,7 @@ module elementary-number-theory.inequality-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.cross-mul-diff-integer-fractions
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.inequality-integer-fractions
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integer-fractions
