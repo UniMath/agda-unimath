@@ -18,7 +18,7 @@ open import foundation-core.identity-types
 ## Idea
 
 The concatenation operation on
-[identifications](foundation-core.identifications.md) is a family of binary
+[identifications](foundation-core.identity-types.md) is a family of binary
 operations
 
 ```text
