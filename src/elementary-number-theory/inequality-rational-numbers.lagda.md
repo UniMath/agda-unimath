@@ -146,7 +146,7 @@ module _
       ( fraction-ℚ z)
 ```
 
-### Strict inequality on the rational numbers reflects strict inequality on the underlying fractions.
+### Strict inequality on the rational numbers reflects strict inequality on the underlying fractions
 
 ```agda
 module _
