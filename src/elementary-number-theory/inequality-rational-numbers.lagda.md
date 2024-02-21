@@ -81,16 +81,16 @@ is-reflexive-leq-ℚ x =
 
 is-antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
 is-antisymmetric-leq-ℚ x y H H' =
-  inv (in-fraction-fraction-ℚ x)
-  ∙ eq-ℚ-sim-fractions-ℤ
+  ( inv (in-fraction-fraction-ℚ x)) ∙
+  ( eq-ℚ-sim-fractions-ℤ
     ( fraction-ℚ x)
     ( fraction-ℚ y)
     ( is-sim-antisymmetric-leq-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ y)
-      H
-      H')
-  ∙ in-fraction-fraction-ℚ y
+      ( H)
+      ( H'))) ∙
+    ( in-fraction-fraction-ℚ y)
 ```
 
 ### Strict inequality on rationals is asymmetric
