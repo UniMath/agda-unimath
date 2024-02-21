@@ -74,8 +74,8 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 ### Inequality on rational numbers is reflexive
 
 ```agda
-is-reflexive-leq-ℚ : (x : ℚ) → leq-ℚ x x
-is-reflexive-leq-ℚ x =
+refl-leq-ℚ : (x : ℚ) → leq-ℚ x x
+refl-leq-ℚ x =
   refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
 ```
 
