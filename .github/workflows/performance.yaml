@@ -24,6 +24,8 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         agda: ['2.6.4']
+    permissions:
+      pages: write # to deploy to Pages
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
@@ -38,4 +40,20 @@ jobs:
       - name: Typecheck library with profiling
         run: |
           cd master
-          make check-profile
+          make check-profile > benchmark-results.txt 2> memory-results.txt
+        # Assume your make check-profile outputs a file `benchmark-results.txt`
+        # in a format compatible with github-action-benchmark or converted accordingly
+
+      - name: Convert benchmark results to JSON
+        run:
+          python3 .github/workflows/benchmark_to_json.py 'benchmark-results.txt'
+          'memory-results.txt' 'benchmark-results.json'
+
+      - name: Benchmark
+        uses: rhysd/github-action-benchmark@v1
+        with:
+          tool: 'customSmallerIsBetter'
+          output-file-path: './master/benchmark-results.json' # Adjust path to where your benchmark output is saved
+          gh-pages-branch: 'gh-pages' # or any branch you prefer to store your benchmark results
+          benchmark-data-dir-path: 'benchmarks' # Directory in the gh-pages branch where benchmark data will be stored
+          auto-push: true # Push and deploy GitHub pages branch automatically
