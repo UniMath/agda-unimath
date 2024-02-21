@@ -225,7 +225,8 @@ is-section-rational-ℝ-rational :
   rational-rational-ℝ (rational-ℝ-rational q) ＝ q
 is-section-rational-ℝ-rational q = refl
 
-is-retraction-rational-ℝ-rational : (x : Rational-ℝ lzero) →
+is-retraction-rational-ℝ-rational :
+  (x : Rational-ℝ lzero) →
   rational-ℝ-rational (rational-rational-ℝ x) ＝ x
 is-retraction-rational-ℝ-rational (x , q , H) =
   eq-type-subtype
