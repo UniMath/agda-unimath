@@ -68,41 +68,41 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
 
-  is-retraction-transpose-eq :
+  is-retraction-eq-transpose :
     ({x : B} {y : A} → x ＝ f y → g x ＝ y) → is-retraction f g
-  is-retraction-transpose-eq H x = H refl
+  is-retraction-eq-transpose H x = H refl
 
-  is-retraction-transpose-eq' :
+  is-retraction-eq-transpose' :
     ({x : A} {y : B} → f x ＝ y → x ＝ g y) → is-retraction f g
-  is-retraction-transpose-eq' H x = inv (H refl)
+  is-retraction-eq-transpose' H x = inv (H refl)
 
-  is-retraction-is-retraction-transpose-eq :
-    is-retraction-transpose-eq ∘ eq-transpose-is-retraction f g ~ id
-  is-retraction-is-retraction-transpose-eq H = refl
+  is-retraction-is-retraction-eq-transpose :
+    is-retraction-eq-transpose ∘ eq-transpose-is-retraction f g ~ id
+  is-retraction-is-retraction-eq-transpose H = refl
 
-  htpy-is-section-is-retraction-transpose-eq :
+  htpy-is-section-is-retraction-eq-transpose :
     (H : {x : B} {y : A} → x ＝ f y → g x ＝ y)
     (x : B) (y : A) →
-    eq-transpose-is-retraction f g (is-retraction-transpose-eq H) {x} {y} ~
+    eq-transpose-is-retraction f g (is-retraction-eq-transpose H) {x} {y} ~
     H {x} {y}
-  htpy-is-section-is-retraction-transpose-eq H x y refl = refl
+  htpy-is-section-is-retraction-eq-transpose H x y refl = refl
 
   abstract
-    is-section-is-retraction-transpose-eq :
-      eq-transpose-is-retraction f g ∘ is-retraction-transpose-eq ~ id
-    is-section-is-retraction-transpose-eq H =
+    is-section-is-retraction-eq-transpose :
+      eq-transpose-is-retraction f g ∘ is-retraction-eq-transpose ~ id
+    is-section-is-retraction-eq-transpose H =
       eq-htpy-implicit
         ( λ x →
           eq-htpy-implicit
-            ( λ y → eq-htpy (htpy-is-section-is-retraction-transpose-eq H x y)))
+            ( λ y → eq-htpy (htpy-is-section-is-retraction-eq-transpose H x y)))
 
   is-equiv-eq-transpose-is-retraction :
     is-equiv (eq-transpose-is-retraction f g)
   is-equiv-eq-transpose-is-retraction =
     is-equiv-is-invertible
-      ( is-retraction-transpose-eq)
-      ( is-section-is-retraction-transpose-eq)
-      ( is-retraction-is-retraction-transpose-eq)
+      ( is-retraction-eq-transpose)
+      ( is-section-is-retraction-eq-transpose)
+      ( is-retraction-is-retraction-eq-transpose)
 
   equiv-eq-transpose-is-retraction :
     is-retraction f g ≃ ({x : B} {y : A} → x ＝ f y → g x ＝ y)

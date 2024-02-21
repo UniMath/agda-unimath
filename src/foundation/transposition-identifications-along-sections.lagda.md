@@ -66,41 +66,41 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
 
-  is-section-transpose-eq :
+  is-section-eq-transpose :
     ({x : A} {y : B} → x ＝ g y → f x ＝ y) → f ∘ g ~ id
-  is-section-transpose-eq H x = H refl
+  is-section-eq-transpose H x = H refl
 
-  is-section-transpose-eq' :
+  is-section-eq-transpose' :
     ({x : B} {y : A} → g x ＝ y → x ＝ f y) → f ∘ g ~ id
-  is-section-transpose-eq' H x = inv (H refl)
+  is-section-eq-transpose' H x = inv (H refl)
 
-  is-retraction-is-section-transpose-eq :
-    is-section-transpose-eq ∘ eq-transpose-is-section f g ~ id
-  is-retraction-is-section-transpose-eq H = refl
+  is-retraction-is-section-eq-transpose :
+    is-section-eq-transpose ∘ eq-transpose-is-section f g ~ id
+  is-retraction-is-section-eq-transpose H = refl
 
-  htpy-is-section-is-section-transpose-eq :
+  htpy-is-section-is-section-eq-transpose :
     (H : {x : A} {y : B} → x ＝ g y → f x ＝ y) →
     (x : A) (y : B) →
-    eq-transpose-is-section f g (is-section-transpose-eq H) {x} {y} ~ H {x} {y}
-  htpy-is-section-is-section-transpose-eq H x y refl = refl
+    eq-transpose-is-section f g (is-section-eq-transpose H) {x} {y} ~ H {x} {y}
+  htpy-is-section-is-section-eq-transpose H x y refl = refl
 
   abstract
-    is-section-is-section-transpose-eq :
-      eq-transpose-is-section f g ∘ is-section-transpose-eq ~ id
-    is-section-is-section-transpose-eq H =
+    is-section-is-section-eq-transpose :
+      eq-transpose-is-section f g ∘ is-section-eq-transpose ~ id
+    is-section-is-section-eq-transpose H =
       eq-htpy-implicit
         ( λ x →
           eq-htpy-implicit
           ( λ y →
-            eq-htpy (htpy-is-section-is-section-transpose-eq H x y)))
+            eq-htpy (htpy-is-section-is-section-eq-transpose H x y)))
 
   is-equiv-eq-transpose-is-section :
     is-equiv (eq-transpose-is-section f g)
   is-equiv-eq-transpose-is-section =
     is-equiv-is-invertible
-      ( is-section-transpose-eq)
-      ( is-section-is-section-transpose-eq)
-      ( is-retraction-is-section-transpose-eq)
+      ( is-section-eq-transpose)
+      ( is-section-is-section-eq-transpose)
+      ( is-retraction-is-section-eq-transpose)
 
   equiv-eq-transpose-is-section :
     (f ∘ g ~ id) ≃ ({x : A} {y : B} → x ＝ g y → f x ＝ y)
