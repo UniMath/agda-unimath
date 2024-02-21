@@ -1089,7 +1089,7 @@ module _
         ( is-orthogonal-pullback-condition-is-orthogonal f g G))
 ```
 
-### A type is `f`-local if and only if the terminal map is `f`-orthogonal
+### A type is `f`-local if and only if its terminal map is `f`-orthogonal
 
 **Proof (forward direction):** If the terminal map is right orthogonal to `f`,
 that means we have a pullback square

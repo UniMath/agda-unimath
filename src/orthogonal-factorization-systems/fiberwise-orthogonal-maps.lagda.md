@@ -206,15 +206,29 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g')
   where
 
+  is-fiberwise-orthogonal-pullback-condition-htpy-left :
+    {f f' : A → B} (F' : f' ~ f) (g : X → Y) →
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f' g
+  is-fiberwise-orthogonal-pullback-condition-htpy-left F' g H f'' α =
+    H f'' (cartesian-hom-arrow-htpy refl-htpy F' α)
+
+  is-fiberwise-orthogonal-pullback-condition-htpy-right :
+    (f : A → B) {g g' : X → Y} (G : g ~ g') →
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f g'
+  is-fiberwise-orthogonal-pullback-condition-htpy-right f {g} G H f'' α =
+    is-orthogonal-pullback-condition-htpy-right f'' g G (H f'' α)
+
   is-fiberwise-orthogonal-pullback-condition-htpy :
+    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
     is-fiberwise-orthogonal-pullback-condition f g →
     is-fiberwise-orthogonal-pullback-condition f' g'
-  is-fiberwise-orthogonal-pullback-condition-htpy H f'' α =
-    is-orthogonal-pullback-condition-htpy-right f'' g G
-      ( H f'' (cartesian-hom-arrow-htpy refl-htpy F' α))
+  is-fiberwise-orthogonal-pullback-condition-htpy {f} {f'} F' {g} G H =
+    is-fiberwise-orthogonal-pullback-condition-htpy-right f' G
+      ( is-fiberwise-orthogonal-pullback-condition-htpy-left F' g H)
 ```
 
 ### Equivalences are fiberwise left and right orthogonal to every map
@@ -268,24 +282,118 @@ module _
       ( is-equiv-map-equiv g)
 ```
 
+### Closure properties of right fiberwise orthogonal maps
+
+#### The right class is closed under composition and left cancellation
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {Z : UU l5}
+  (f : A → B) (g : X → Y) (h : Y → Z)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-right-comp :
+    is-fiberwise-orthogonal-pullback-condition f h →
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f (h ∘ g)
+  is-fiberwise-orthogonal-pullback-condition-right-comp H G f' α =
+    is-orthogonal-pullback-condition-right-comp f' g h (H f' α) (G f' α)
+
+  is-fiberwise-orthogonal-pullback-condition-right-right-factor :
+    is-fiberwise-orthogonal-pullback-condition f h →
+    is-fiberwise-orthogonal-pullback-condition f (h ∘ g) →
+    is-fiberwise-orthogonal-pullback-condition f g
+  is-fiberwise-orthogonal-pullback-condition-right-right-factor H HG f' α  =
+    is-orthogonal-pullback-condition-right-right-factor f' g h
+      ( H f' α)
+      ( HG f' α)
+```
+
+#### The right class is closed under dependent products
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l1} {A : UU l2} {B : UU l3} {X : I → UU l4} {Y : I → UU l5}
+  (f : A → B) (g : (i : I) → X i → Y i)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-right-Π :
+    ((i : I) → is-fiberwise-orthogonal-pullback-condition f (g i)) →
+    is-fiberwise-orthogonal-pullback-condition f (map-Π g)
+  is-fiberwise-orthogonal-pullback-condition-right-Π G f' α =
+    is-orthogonal-pullback-condition-right-Π f' g (λ i → G i f' α)
+```
+
+#### The right class is closed under exponentiation
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} (S : UU l5)
+  (f : A → B) (g : X → Y)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-right-postcomp :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f (postcomp S g)
+  is-fiberwise-orthogonal-pullback-condition-right-postcomp G f' α =
+    is-orthogonal-pullback-condition-right-postcomp S f' g (G f' α)
+```
+
+#### The right class is closed under cartesian products
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
+  (f : A → B) (g : X → Y) (g' : X' → Y')
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-right-product :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f g' →
+    is-fiberwise-orthogonal-pullback-condition f (map-product g g')
+  is-fiberwise-orthogonal-pullback-condition-right-product G G' f' α =
+    is-orthogonal-pullback-condition-right-product f' g g' (G f' α) (G' f' α)
+```
+
+#### The right class is closed under base change
+
+Given a base change of `g`
+
+```text
+    X' -----> X
+    | ⌟       |
+  g'|         | g
+    v         v
+    Y' -----> Y,
+```
+
+if `f ⊥' g`, then `f ⊥' g'`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
+  (f : A → B) (g : X → Y) (g' : X' → Y') (β : cartesian-hom-arrow g' g)
+  where
+
+  is-fiberwise-orthogonal-pullback-condition-right-base-change :
+    is-fiberwise-orthogonal-pullback-condition f g →
+    is-fiberwise-orthogonal-pullback-condition f g'
+  is-fiberwise-orthogonal-pullback-condition-right-base-change G f' α =
+    is-orthogonal-pullback-condition-right-base-change f' g g' β (G f' α)
+```
+
 ### Fiberwise orthogonal maps are closed under composition and have the right cancellation property
 
 This remains to be formalized.
 
 ### Fiberwise orthogonal maps are closed under coproducts
 
-If `f ⊥' g` and `h ⊥' i` then `(f + h) ⊥' (g + i)`.
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  {C : UU l5} {D : UU l6} {Z : UU l7} {W : UU l8}
-  (f : A → B) (g : X → Y) (h : C → D) (i : Z → W)
-  where
-
-  -- TODO
-```
+This remains to be formalized.
 
 ### Fiberwise orthogonality is preserved under base change
 
@@ -318,3 +426,8 @@ This remains to be formalized.
 ### Fiberwise orthogonal maps are closed under taking image inclusions
 
 This remains to be formalized.
+
+## References
+
+- Reid Barton's note on _Internal cd-structures_
+  ([GitHub upload](https://github.com/UniMath/agda-unimath/files/13429800/cd1.pdf))
