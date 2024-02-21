@@ -140,9 +140,10 @@ lemma-add-cross-mul-diff-fraction-ℤ
     ∙ ap (mul-ℤ' c) (commutative-mul-ℤ a b)
     ∙ commutative-mul-ℤ (b *ℤ a) c
 
-lemma-left-sim-cross-mul-diff-fraction-ℤ : (a a' b : fraction-ℤ)
-  → sim-fraction-ℤ a a'
-  → Id
+lemma-left-sim-cross-mul-diff-fraction-ℤ :
+  (a a' b : fraction-ℤ) →
+  sim-fraction-ℤ a a' →
+  Id
     ( denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ a' b)
     ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
 lemma-left-sim-cross-mul-diff-fraction-ℤ a a' b H =
