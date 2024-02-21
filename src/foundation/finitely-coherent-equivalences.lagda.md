@@ -35,7 +35,7 @@ if it comes equipped with a map `g : B → A` and a family of maps
 indexed by `x : A` and `y : B`, such that each `r x y` is an `n`-coherent
 equivalence.
 
-By the equivalence of [retracting homotopies](foundeation-core.retractions.md)
+By the equivalence of [retracting homotopies](foundation-core.retractions.md)
 and
 [transposition operations of identifications](foundation.transposition-identifications-along-retractions.md)
 it therefore follows that a `1`-coherent equivalence is equivalently described
