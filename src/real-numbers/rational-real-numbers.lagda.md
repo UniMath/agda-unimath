@@ -220,7 +220,8 @@ module _
 The equivalence between rationals and rational reals
 
 ```agda
-is-section-rational-ℝ-rational : (q : ℚ) →
+is-section-rational-ℝ-rational :
+  (q : ℚ) →
   rational-rational-ℝ (rational-ℝ-rational q) ＝ q
 is-section-rational-ℝ-rational q = refl
 
