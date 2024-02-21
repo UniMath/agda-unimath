@@ -71,14 +71,17 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 
 ## Properties
 
-### Inequality on rational numbers is antisymmetric
+### Inequality on rational numbers is reflexive
 
 ```agda
 is-reflexive-leq-ℚ : (x : ℚ) → leq-ℚ x x
 is-reflexive-leq-ℚ x =
-  refl-leq-ℤ
-    ( numerator-ℚ x *ℤ denominator-ℚ x)
+  refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
+```
 
+### Inequality on rational numbers is antisymmetric
+
+```agda
 is-antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
 is-antisymmetric-leq-ℚ x y H H' =
   ( inv (in-fraction-fraction-ℚ x)) ∙
