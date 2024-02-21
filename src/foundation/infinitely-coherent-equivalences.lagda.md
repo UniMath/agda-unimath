@@ -68,6 +68,13 @@ stated an infinite hierarchy of coherence conditions. In other words, the
 infinite condition on infinitely coherent equivalences is a way of stating
 infinite coherence for equivalences.
 
+Being an infinitely coherent equivalence is an inverse sequential limit of the
+diagram
+
+```text
+  ... ---> is-finitely-coherent-equivalence 1 f ---> is-finitely-coherent-equivalence 0 f.
+```
+
 ## Definitions
 
 ### The predicate of being an infinitely coherent equivalence
@@ -172,7 +179,7 @@ is-∞-equiv-map-transpose-is-∞-equiv (is-∞-equiv-comp G F) x z =
     ( is-∞-equiv-map-transpose-is-∞-equiv F x _)
     ( is-∞-equiv-map-transpose-is-∞-equiv G _ z)
 
-comp-∞-equiv : 
+comp-∞-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   B ≃∞ C → A ≃∞ B → A ≃∞ C
 comp-∞-equiv f e =
@@ -258,7 +265,7 @@ commutes, and finally a homotopy of elements of type
 ```
 
 In other words, there are by the previous data two witnesses of the fact that
-`t x y` is an infinintely coherent equivalence. The second (easiest) element is
+`t x y` is an infinitely coherent equivalence. The second (easiest) element is
 the given element `K' x y`. The first element is from the homotopy witnessing
 that the above triangle commutes. On the left we compose two infinitely coherent
 equivalences, which results in an infinitely coherent equivalence, and the
