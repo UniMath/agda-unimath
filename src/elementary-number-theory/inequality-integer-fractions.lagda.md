@@ -221,13 +221,13 @@ module _
         le-ℤ
           ( numerator-fraction-ℤ x *ℤ k)
           ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x))
-      H
+      ( H)
       ( preserves-strict-order-mul-positive-ℤ'
         { numerator-fraction-ℤ x}
         { numerator-fraction-ℤ y}
         ( denominator-fraction-ℤ x)
         ( is-positive-denominator-fraction-ℤ x)
-        H')
+        ( H'))
 
   le-left-mediant-fraction-ℤ :
     le-fraction-ℤ x y →
