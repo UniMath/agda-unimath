@@ -434,7 +434,8 @@ decide-is-positive-ℤ {inl x} = inr star
 decide-is-positive-ℤ {inr (inl x)} = inr star
 decide-is-positive-ℤ {inr (inr x)} = inl star
 
-decide-is-positive-is-nonzero-ℤ : (x : ℤ) → (x ≠ zero-ℤ) →
+decide-is-positive-is-nonzero-ℤ :
+  (x : ℤ) → (x ≠ zero-ℤ) →
   (is-positive-ℤ x) + is-positive-ℤ (neg-ℤ x)
 decide-is-positive-is-nonzero-ℤ (inl x) H = inr star
 decide-is-positive-is-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
