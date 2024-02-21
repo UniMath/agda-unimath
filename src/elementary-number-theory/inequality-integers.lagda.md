@@ -187,7 +187,7 @@ reflects-order-add-ℤ {x} {y} {z} =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
-### ℤ addition preserves/reflects strict order
+### Addition on the integers preserves and reflects the strict ordering
 
 ```agda
 preserves-strict-order-add-ℤ' :
