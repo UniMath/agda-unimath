@@ -64,8 +64,8 @@ is-dedekind-cut-le-ℚ x =
         ( λ q → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop x q))
         ( le-ℚ-Prop x r)
         ( λ q (H , H') → transitive-le-ℚ x q r H' H)))
-  , ( λ (q : ℚ) (H , H') → is-asymmetric-le-ℚ q x H H')
-  , ( λ (q r : ℚ) → unit-trunc-Prop ∘ is-located-le-ℚ x q r)
+  , ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H')
+  , ( λ (q r : ℚ) → unit-trunc-Prop ∘ located-le-ℚ x q r)
   where
     α : (a b : ℚ)
       → ∃ ℚ (λ r → le-ℚ a r × le-ℚ r b)
@@ -121,8 +121,8 @@ Real rationals are rationals and rational reals are real rationals
 is-rational-real-rational : (p : ℚ) → is-rational-ℝ (real-rational p) p
 is-rational-real-rational p =
   pair
-    ( is-irreflexive-le-ℚ p)
-    ( is-irreflexive-le-ℚ p)
+    ( irreflexive-le-ℚ p)
+    ( irreflexive-le-ℚ p)
 
 eq-real-rational-is-rational-ℝ :
   (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) →

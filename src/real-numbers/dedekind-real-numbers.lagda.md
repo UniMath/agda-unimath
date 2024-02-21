@@ -221,7 +221,7 @@ module _
       ( λ I →
         tr
           ( is-in-lower-cut-ℝ x)
-          ( is-antisymmetric-leq-ℚ q p I H)
+          ( antisymmetric-leq-ℚ q p I H)
           H')
       ( decide-le-leq-ℚ p q)
 
@@ -245,7 +245,7 @@ module _
       ( λ I →
         tr
           ( is-in-upper-cut-ℝ x)
-          ( is-antisymmetric-leq-ℚ p q H I)
+          ( antisymmetric-leq-ℚ p q H I)
           ( H'))
       ( decide-le-leq-ℚ p q)
 ```

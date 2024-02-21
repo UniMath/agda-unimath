@@ -121,18 +121,18 @@ transitive-le-ℤ k l m p q =
     ( triangle-diff-ℤ m l k)
     ( is-positive-add-ℤ q p)
 
-is-asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
-is-asymmetric-le-ℤ x y p q =
+asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
+asymmetric-le-ℤ x y p q =
   empty-is-positive-is-nonnegative-neg-ℤ
   ( y -ℤ x)
-  p
+  ( p)
   ( is-nonnegative-is-positive-ℤ
     ( is-positive-eq-ℤ
       ( inv ( distributive-neg-diff-ℤ y x))
-      q))
+      ( q)))
 
-is-connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
-is-connected-le-ℤ x y H =
+connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
+connected-le-ℤ x y H =
   map-coproduct
     id
     ( is-positive-eq-ℤ ( distributive-neg-diff-ℤ y x))
@@ -143,14 +143,14 @@ le-pred-ℤ x =
   is-positive-eq-ℤ
     ( inv
       ( right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ ( is-zero-diff-ℤ' x)))
-    is-positive-one-ℤ
+    ( is-positive-one-ℤ)
 
 le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
 le-succ-ℤ x =
   is-positive-eq-ℤ
     ( inv
       ( left-successor-law-diff-ℤ x x ∙ ap succ-ℤ ( is-zero-diff-ℤ' x)))
-    is-positive-one-ℤ
+    ( is-positive-one-ℤ)
 ```
 
 ### ℤ is an ordered ring
