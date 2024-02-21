@@ -18,9 +18,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Any map `f : A → B` is said to be `0`-coherently invertible if it comes equipped
-with a map `g : B → A` Furthermore, a map `f : A → B` is said to be
-`n + 1`-coherently invertible if it comes equipped with map `g : B → A` and a
+We introduce the concept of being a {{#concept "finitely coherently invertible map" Agda=is-finitely-coherently-invertible}} by induction on the [natural numbers](elementary-number-theory.natural-numbers.md).
+In the base case, we say that a map `f : A → B` is a {{#concept "`0`-coherently invertible map" Agda=is-finitely-coherently-invertible}} if it comes equipped
+with a map `g : B → A`. Recursively, we say that a map `f : A → B` is an
+{{#concept "`n + 1`-coherently invertible map" Agda=is-finitely-coherently-invertible}} if it comes equipped with map `g : B → A` and a
 family of maps
 
 ```text
@@ -48,7 +49,7 @@ and for each `p : f x ＝ y` and `q : x ＝ g y` a map
 
 ```text
   t p q : (r p ＝ q) → (p ＝ s q)
-  u p q : (p ＝ s q) → (r p ＝ q)
+  u p q : (p ＝ s q) → (r p ＝ q).
 ```
 
 This data is equivalent to the data of
@@ -57,10 +58,10 @@ This data is equivalent to the data of
   r : (x : A) → g (f x) ＝ x
   s : (y : B) → f (g y) ＝ y
   t : (x : A) → ap f (r x) ＝ s (f x)
-  u : (y : B) → ap g (s y) ＝ r (f y)
+  u : (y : B) → ap g (s y) ＝ r (f y).
 ```
 
-The condition of being a `n`-coherently invertible map is not a proposition
+The condition of being a `n`-coherently invertible map is not a
 [proposition](foundation-core.propositions.md) for any `n`. In fact, for `n ≥ 1`
 the type of all `n`-coherently invertible maps in a universe `𝒰` is equivalent
 to the type of maps `sphere (n + 1) → 𝒰` of `n + 1`-spheres in the universe `𝒰`.

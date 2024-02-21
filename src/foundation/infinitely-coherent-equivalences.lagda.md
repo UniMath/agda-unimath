@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "infinitely coherent equivalence"}} `e : A ≃ᶜ B` from `A` to `B`
+An {{#concept "infinitely coherent equivalence" Agda=_≃∞_}} `e : A ≃∞ B` from `A` to `B`
 consists of maps
 
 ```text
@@ -34,10 +34,10 @@ consists of maps
   g : B → A
 ```
 
-and for each `x : A` and `y : B` a infinitely coherent equivalence
+and for each `x : A` and `y : B` an infinitely coherent equivalence
 
 ```text
-  transpose-eq : (f x ＝ y) ≃ᶜ (g y ＝ x).
+  ∞-equiv-transpose-eq-∞-equiv : (f x ＝ y) ≃∞ (x ＝ g y).
 ```
 
 Since this definition is infinite, it follows that for any `x : A` and `y : B`
@@ -48,17 +48,17 @@ we have maps
   g' : (g y ＝ x) → (f x ＝ y)
 ```
 
-and for each `p : f x ＝ y` and `q : g y ＝ x` a infinitely coherent equivalence
+and for each `p : f x ＝ y` and `q : g y ＝ x` an infinitely coherent equivalence
 
 ```text
-  transpose-eq : (f' p ＝ q) ≃ᶜ (g' q ＝ p).
+∞-equiv-transpose-eq-∞-equiv : (f' p ＝ q) ≃∞ (p ＝ g' q).
 ```
 
 In particular, we have identifications
 
 ```text
-  f' x (f x) refl : g (f x) ＝ x
-  g' y (g y) refl : f (g y) ＝ y,
+  inv (f' x (f x) refl) : x = g (f x)
+        g' y (g y) refl : f (g y) ＝ y,
 ```
 
 which are the usual homotopies witnessing that `g` is a retraction and a section
@@ -69,7 +69,7 @@ infinite coherence for equivalences.
 
 ## Definitions
 
-### The predicate of being a infinitely coherent equivalence
+### The predicate of being an infinitely coherent equivalence
 
 ```agda
 record is-∞-equiv
@@ -79,12 +79,9 @@ record is-∞-equiv
   field
     map-inv-is-∞-equiv : B → A
     map-transpose-is-∞-equiv :
-      (x : A) (y : B) →
-      (f x ＝ y) → (x ＝ map-inv-is-∞-equiv y)
+      (x : A) (y : B) → f x ＝ y → x ＝ map-inv-is-∞-equiv y
     is-∞-equiv-map-transpose-is-∞-equiv :
-      (x : A) (y : B) →
-      is-∞-equiv
-        ( map-transpose-is-∞-equiv x y)
+      (x : A) (y : B) → is-∞-equiv (map-transpose-is-∞-equiv x y)
 
 open is-∞-equiv public
 ```
@@ -100,7 +97,7 @@ record
   field
     map-∞-equiv : A → B
     map-inv-∞-equiv : B → A
-    ∞-equiv-transpose-∞-equiv :
+    ∞-equiv-transpose-eq-∞-equiv :
       (x : A) (y : B) → ∞-equiv (map-∞-equiv x ＝ y) (map-inv-∞-equiv y ＝ x)
 
 open ∞-equiv public
@@ -109,10 +106,10 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  infix 6 _≃ᶜᵒʰ_
+  infix 6 _≃∞_
 
-  _≃ᶜᵒʰ_ : UU (l1 ⊔ l2)
-  _≃ᶜᵒʰ_ = ∞-equiv A B
+  _≃∞_ : UU (l1 ⊔ l2)
+  _≃∞_ = ∞-equiv A B
 ```
 
 ### Composition of infinitely coherent equivalences
@@ -148,7 +145,7 @@ is-∞-equiv-map-transpose-is-∞-equiv (is-∞-equiv-is-equiv H) x y =
   is-∞-equiv-is-equiv (is-equiv-map-equiv (eq-transpose-equiv (_ , H) x y))
 ```
 
-### Being a infinitely coherent equivalence implies being an equivalence
+### Being an infinitely coherent equivalence implies being an equivalence
 
 ```agda
 module _
@@ -164,7 +161,7 @@ module _
       ( λ x → inv (map-transpose-is-∞-equiv H x (f x) refl))
 ```
 
-### Any map-∞-equiv homotopic to an infinitely coherent equivalence is an infinitely coherent equivalence
+### Any map homotopic to an infinitely coherent equivalence is an infinitely coherent equivalence
 
 ```agda
 is-∞-equiv-htpy :
@@ -183,7 +180,7 @@ is-∞-equiv-map-transpose-is-∞-equiv (is-∞-equiv-htpy H K) x y =
 
 ### Homotopies of elements of type `is-∞-equiv f`
 
-Consider a map-∞-equiv `f : A → B` and consider two elements
+Consider a map `f : A → B` and consider two elements
 
 ```text
   H K : is-∞-equiv f.
@@ -261,13 +258,13 @@ record
 
 ```agda
 inv-∞-equiv :
-  {l1 : Level} {A B : UU l1} → A ≃ᶜᵒʰ B → B ≃ᶜᵒʰ A
+  {l1 : Level} {A B : UU l1} → A ≃∞ B → B ≃∞ A
 map-∞-equiv (inv-∞-equiv e) =
   map-inv-∞-equiv e
 map-inv-∞-equiv (inv-∞-equiv e) =
   map-∞-equiv e
-∞-equiv-transpose-∞-equiv (inv-∞-equiv e) y x =
-  inv-∞-equiv (∞-equiv-transpose-∞-equiv e x y)
+∞-equiv-transpose-eq-∞-equiv (inv-∞-equiv e) y x =
+  inv-∞-equiv (∞-equiv-transpose-eq-∞-equiv e x y)
 ```
 
 ## Properties
@@ -301,7 +298,7 @@ pr2 (pr2 (map-inv-compute-is-∞-equiv f H) x y) =
   is-∞-equiv-map-transpose-is-∞-equiv H x y
 ```
 
-### Being a infinitely coherent equivalence is a property
+### Being an infinitely coherent equivalence is a property
 
 ```text
 is-prop-is-∞-equiv :
