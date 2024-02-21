@@ -111,7 +111,7 @@ is-prop-le-ℤ : (x y : ℤ) → is-prop (le-ℤ x y)
 is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 ```
 
-## Properties of strict integer inequality
+## Properties
 
 ```agda
 transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
