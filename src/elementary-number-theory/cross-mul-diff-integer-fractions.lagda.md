@@ -81,8 +81,9 @@ differences satisfy a transitive-additive property:
 `y * (m * b - a * n) = b * (m * y - x * n) + n * (x * b - a * y)`
 
 ```agda
-lemma-add-cross-mul-diff-fraction-ℤ : (p q r : fraction-ℤ)
-  → Id
+lemma-add-cross-mul-diff-fraction-ℤ :
+  (p q r : fraction-ℤ) →
+  Id
     ( add-ℤ
       ( denominator-fraction-ℤ p *ℤ cross-mul-diff-fraction-ℤ q r)
       ( denominator-fraction-ℤ r *ℤ cross-mul-diff-fraction-ℤ p q))
