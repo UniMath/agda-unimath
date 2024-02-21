@@ -227,7 +227,8 @@ decide-le-leq-ℚ x y =
           ( fraction-ℚ x)
           ( fraction-ℚ y)})
 
-trichotomy-le-ℚ : {l : Level} {A : UU l} (x y : ℚ) →
+trichotomy-le-ℚ :
+  {l : Level} {A : UU l} (x y : ℚ) →
   ( le-ℚ x y → A) →
   ( Id x y → A) →
   ( le-ℚ y x → A) →
