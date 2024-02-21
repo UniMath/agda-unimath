@@ -40,7 +40,9 @@ cross-mul-diff-fraction-ℤ x y =
     ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
 ```
 
-Swapping the fractions changes the sign of the cross-multiplication difference.
+## Properties
+
+### Swapping the fractions changes the sign of the cross-multiplication difference
 
 ```agda
 neg-cross-mul-diff-fraction-ℤ :
@@ -54,7 +56,7 @@ neg-cross-mul-diff-fraction-ℤ x y =
     ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
 ```
 
-Two fractions are similar when their cross-multiplication difference is zero.
+### Two fractions are similar when their cross-multiplication difference is zero
 
 ```agda
 module _
@@ -73,7 +75,7 @@ module _
   sim-is-zero-coss-mul-diff-fraction-ℤ H = inv (eq-diff-ℤ H)
 ```
 
-## Transitivity relations for the cross-multiplication difference
+## The transitive-additive property for the cross-multiplication difference
 
 Given three fractions `a/b`, `x/y` and `m/n`, the pairwise cross-multiplication
 differences satisfy a transitive-additive property:
