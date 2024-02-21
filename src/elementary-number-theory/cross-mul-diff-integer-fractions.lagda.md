@@ -24,9 +24,9 @@ open import foundation.propositions
 
 ## Idea
 
-The cross-multiplication difference of two fractions `a/b` and `p/q` is the
-difference of the products of the numerator of each fraction with the
-denominator of the other : `p * b - a * q`.
+The {{#concept "cross-multiplication difference" Agda=cross-mul-diff-fraction-ℤ}} of two [integer fractions](elementary-number-theory.integer-fractions.md) `a/b` and `c/d` is the
+[difference](elementary-number-theory.difference-integers.md) of the [products](elementary-number-theory.multiplication-integers.md) of the numerator of each fraction with the
+denominator of the other : `c * b - a * d`.
 
 ## Definitions
 
