@@ -6,7 +6,7 @@ on:
 
 # Don't cancel previous runs of the same branch
 concurrency:
-  group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
+  group: '${{ github.workflow }}'
   cancel-in-progress: false
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
           path: './benchmark-cache'
           key: ${{ matrix.os }}-benchmark-${{ github.event.before }}
 
-      - name: Process new profiling data for typechecking
+      - name: Process new profiling data
         run: |
           cd master
           python3 scripts/typechecking_profile_parser.py \
@@ -46,7 +46,7 @@ jobs:
             temp/benchmark-results.json benchmark-cache/data.csv \
             ${{ github.sha }}
 
-      - name: Merge JSON profiling data for typechecking
+      - name: Merge JSON profiling data
         uses: rhysd/github-action-benchmark@v1
         with:
           tool: 'customSmallerIsBetter'
@@ -55,13 +55,13 @@ jobs:
           # Location of the aggregate data
           external-data-json-path: './benchmark-cache/data.json'
 
-      - name: Save merged benchmark data
+      - name: Save merged profiling data
         uses: actions/cache/save@v4
         with:
           path: './benchmark-cache'
           key: ${{ matrix.os }}-benchmark-${{ github.event.after }}
 
-      - name: Publish the CSV as an artifact
+      - name: Publish the profiling CSV as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: 'Library profiling history'
