@@ -8,10 +8,10 @@ def parse_memory_profiling_data(filepath):
 
     # Define patterns to match each line and their corresponding unit
     patterns = {
-        "bytes_allocated_in_heap": (r"(\d+(?:,\d+)*) bytes allocated in the heap", "bytes"),
-        "bytes_copied_during_GC": (r"(\d+(?:,\d+)*) bytes copied during GC", "bytes"),
-        "maximum_residency": (r"(\d+(?:,\d+)*) bytes maximum residency", "bytes"),
-        "bytes_maximum_slop": (r"(\d+(?:,\d+)*) bytes maximum slop", "bytes"),
+        "bytes_allocated_in_heap": (r"(\d+(?:,\d+)*) bytes allocated in the heap", "B"),
+        "bytes_copied_during_GC": (r"(\d+(?:,\d+)*) bytes copied during GC", "B"),
+        "maximum_residency": (r"(\d+(?:,\d+)*) bytes maximum residency", "B"),
+        "bytes_maximum_slop": (r"(\d+(?:,\d+)*) bytes maximum slop", "B"),
         "total_memory_in_use": (r"(\d+) MiB total memory in use", "MiB")
     }
 
@@ -21,7 +21,7 @@ def parse_memory_profiling_data(filepath):
                 match = re.search(pattern, line)
                 if match:
                     value = int(match.group(1).replace(",", ""))
-                    if unit == "bytes":  # Convert byts to MiB for consistency, if needed
+                    if unit == "B":  # Convert byts to MiB for consistency, if needed
                         value /= 1024 * 1024
                         unit = "MiB"
                     results.append({"name": key, "value": value, "unit": unit})

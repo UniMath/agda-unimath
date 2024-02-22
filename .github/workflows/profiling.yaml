@@ -46,7 +46,7 @@ jobs:
 
       - name: Convert benchmark results to JSON
         run: |
-          python3 .github/workflows/benchmark_to_json.py benchmark-results.txt memory-results.txt benchmark-results.json
+          python3 scripts/benchmark_to_json.py benchmark-results.txt memory-results.txt benchmark-results.json
 
       - name: Benchmark
         uses: rhysd/github-action-benchmark@v1
