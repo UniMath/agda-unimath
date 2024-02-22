@@ -74,8 +74,7 @@ jobs:
           cd master
           mkdir benchmark-website
           cp website/benchmarks/index.html benchmark-website/
-          python3 scripts/benchmark_to_js.py \
-            ../benchmark-cache/data.json benchmark-website/data.js
+          echo 'window.BENCHMARK_DATA =' | cat - ../benchmark-cache/data.json >benchmark-website/data.js
 
       - name: Deploy the new benchmark
         run: |
