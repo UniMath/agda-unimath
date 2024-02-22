@@ -86,9 +86,9 @@ def update_csv_data(data_dict, benchmarks, memory_stats, commit_hash):
             data_dict[name] = {'name': name, 'unit': details['unit']}
         data_dict[name][commit_hash] = details['value']
 
-def write_csv_from_dict(csv_path, data_dict, fieldnames):
+def write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash):
     # Custom sort function: Sort by unit first, then capitalized names first, then alphabetical order
-    custom_sort = lambda item: (item['unit'] == "ms", item['unit'] != "ms" or item['name'][0].islower(), '' if item['unit'] != "ms" else item['name'])
+    custom_sort = lambda item: (item['unit'] == "ms", item['unit'] != "ms" or item['name'][0].islower(), 0 if item['unit'] != "ms" else -item[commit_hash])
 
     with open(csv_path, mode='w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -101,7 +101,7 @@ def write_csv_from_dict(csv_path, data_dict, fieldnames):
 def save_as_csv(benchmarks, memory_stats, csv_path, commit_hash):
     data_dict, fieldnames = read_existing_csv_to_dict(csv_path, commit_hash)
     update_csv_data(data_dict, benchmarks, memory_stats, commit_hash)
-    write_csv_from_dict(csv_path, data_dict, fieldnames)
+    write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash)
 
 if __name__ == "__main__":
     # Set up argument parsing
