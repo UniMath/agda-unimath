@@ -88,7 +88,7 @@ def update_csv_data(data_dict, benchmarks, memory_stats, commit_hash):
 
 def write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash):
     # Custom sort function: Sort by unit first, then capitalized names first, then alphabetical order
-    custom_sort = lambda item: (item['unit'] == "ms", item['unit'] != "ms" or item['name'][0].islower(), 0 if item['unit'] != "ms" else -item[commit_hash])
+    custom_sort = lambda item: (item['unit'] == "ms", item['unit'] != "ms" or item['name'][0].islower(), 0 if item['unit'] != "ms" or commit_hash not in item.keys() else -item[commit_hash])
 
     with open(csv_path, mode='w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
