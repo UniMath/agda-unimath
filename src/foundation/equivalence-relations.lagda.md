@@ -128,7 +128,8 @@ module _
 
   abstract
     is-partition-is-equivalence-class-inhabited-subtype-equivalence-relation :
-      is-partition (is-equivalence-class-inhabited-subtype-equivalence-relation R)
+      is-partition
+        ( is-equivalence-class-inhabited-subtype-equivalence-relation R)
     is-partition-is-equivalence-class-inhabited-subtype-equivalence-relation x =
       is-contr-equiv
         ( Σ ( Σ ( equivalence-class R)
