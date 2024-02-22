@@ -30,17 +30,15 @@ jobs:
       - name: Typecheck library with profiling
         run: |
           cd master
-          make check-profile > temp/benchmark-results.txt 2> temp/memory-results.txt
-        # Assume your make check-profile outputs a file `benchmark-results.txt`
-        # in a format compatible with github-action-benchmark or converted accordingly
+          make check-profile 2> temp/memory-results.txt | tee temp/benchmark-results.txt
 
-      - name: Download previous benchmark data
+      - name: Download previous typechecking profile
         uses: actions/cache/restore@v4
         with:
           path: './benchmark-cache'
           key: ${{ matrix.os }}-benchmark-${{ github.event.before }}
 
-      - name: Process the new benchmark data
+      - name: Process new profiling data for typechecking
         run: |
           cd master
           python3 scripts/typechecking_profile_parser.py \
@@ -48,7 +46,7 @@ jobs:
             temp/benchmark-results.json benchmark-cache/data.csv \
             ${{ github.sha }}
 
-      - name: Merge JSON benchmark data
+      - name: Merge JSON profiling data for typechecking
         uses: rhysd/github-action-benchmark@v1
         with:
           tool: 'customSmallerIsBetter'
@@ -63,19 +61,19 @@ jobs:
           path: './benchmark-cache'
           key: ${{ matrix.os }}-benchmark-${{ github.event.after }}
 
-      - name: Publish the CVS as an artifact
+      - name: Publish the CSV as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: 'Benchmark data'
+          name: 'Library profiling history'
           path: './benchmark-cache/data.csv'
 
-      - name: Prepare new revision of the benchmark website
+      - name: Prepare new revision of the profiling website
         run: |
           cd master
           mkdir benchmark-website
           cp website/benchmarks/index.html benchmark-website/
           echo 'window.BENCHMARK_DATA =' | cat - ../benchmark-cache/data.json >benchmark-website/data.js
 
-      - name: Deploy the new benchmark
+      - name: Deploy the new profiling website
         run: |
           npx netlify-cli deploy --dir=benchmark-website
