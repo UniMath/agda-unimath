@@ -7,7 +7,7 @@
 everythingOpts := --guardedness --cohesion --flat-split
 # use "$ export AGDAVERBOSE=-v20" if you want to see all
 AGDAVERBOSE ?= -v1
-AGDARTS := +RTS -M4.0G -RTS
+AGDARTS := +RTS -M6.0G -RTS
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 
@@ -20,6 +20,7 @@ CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 # at is at least in a proper code block with syntax highlighting, albeit without
 # the agda-unimath chrome.
 AGDAHTMLFLAGS ?= --html --html-highlight=auto --html-dir=docs --css=website/css/Agda.css --only-scope-checking
+AGDAPROFILEFLAGS ?= --profile=modules +RTS -s -RTS
 AGDA ?= agda $(AGDAVERBOSE) $(AGDARTS)
 TIME ?= time
 
@@ -69,6 +70,10 @@ src/everything.lagda.md: agdaFiles
 .PHONY: check
 check: ./src/everything.lagda.md
 	${TIME} ${AGDA} $?
+
+.PHONY: check-profile
+check-profile: ./src/everything.lagda.md
+	${AGDA} ${AGDAPROFILEFLAGS} $?
 
 agda-html: ./src/everything.lagda.md
 	@rm -rf ./docs/
