@@ -46,7 +46,7 @@ jobs:
           cd master
           python3 scripts/typechecking_profile_parser.py \
             temp/benchmark-results.txt temp/memory-results.txt \
-            temp/benchmark-results.json benchmark-cache/data.csv \
+            temp/benchmark-results.json ../benchmark-cache/data.csv \
             ${{ github.sha }}
 
       - name: Merge JSON profiling data
