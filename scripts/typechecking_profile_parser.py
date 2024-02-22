@@ -41,9 +41,8 @@ def parse_benchmark_results(input_path):
             if match:
                 name = match.group(1).strip()
                 # Correctly parse and combine the number groups to handle commas in numbers
-                milliseconds = int(match.groups()[1].replace(',',''))
+                milliseconds = int(match.group(2).replace(',',''))
                 benchmarks[name] = {'value': milliseconds, 'unit':'ms'}
-                # benchmarks.append({'name': name, 'value': milliseconds, 'unit':'ms'})
     return benchmarks
 
 
@@ -87,7 +86,7 @@ def update_csv_data(data_dict, benchmarks, memory_stats, commit_hash):
     for name, details in combined_data.items():
         if name not in data_dict:
             data_dict[name] = {'name': name, 'unit': details['unit']}
-        data_dict[name][commit_hash] = details['value']
+        data_dict[name][commit_hash] = int(details['value'])
 
 def write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash):
     def custom_sort(item):
@@ -96,10 +95,10 @@ def write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash):
 
         if is_not_ms_unit:
             # If the unit is not `ms`, preserve order
-            return (is_not_ms_unit, False, 0)
+            return (False, False, 0)
         else:
             # If the unit is `ms`, sort based on capitalization, then on newest benchmark
-            return (is_not_ms_unit , item['name'][0].islower(), 0 if commit_hash not in item.keys() else -item[commit_hash])
+            return (True , item['name'][0].islower(), 0 if commit_hash not in item.keys() else -item[commit_hash])
 
 
 
