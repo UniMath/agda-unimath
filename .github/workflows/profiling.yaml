@@ -38,7 +38,7 @@ jobs:
           mkdir benchmark-cache
           curl 'https://agda-unimath-benchmarks.netlify.app/data.json' -o benchmark-cache/data.json
           # Stop if there is no initial data (the server gave us an HTML instead of a JSON)
-          (head -1 benchmark-cache/data.json | grep -v DOCTYPE) || (rm benchmark-cache/data.json; exit 0)
+          (head -1 benchmark-cache/data.json | grep -v DOCTYPE) || {rm benchmark-cache/data.json; exit 0}
           curl 'https://agda-unimath-benchmarks.netlify.app/data.csv' -o benchmark-cache/data.csv
 
       - name: Process new profiling data
