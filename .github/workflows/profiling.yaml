@@ -1,13 +1,5 @@
 name: Profile library typechecking
 on:
-  # To run this workflow manually
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: the repository ref to build
-        required: true
-        default: master
-
   push:
     branches:
       - master
@@ -40,19 +32,19 @@ jobs:
       - name: Typecheck library with profiling
         run: |
           cd master
-          make check-profile > benchmark-results.txt 2> memory-results.txt
+          make check-profile > temp/benchmark-results.txt 2> temp/memory-results.txt
         # Assume your make check-profile outputs a file `benchmark-results.txt`
         # in a format compatible with github-action-benchmark or converted accordingly
 
-      - name: Convert benchmark results to JSON
+      - name: Parse typechecking profile
         run: |
-          python3 scripts/benchmark_to_json.py benchmark-results.txt memory-results.txt benchmark-results.json
+          python3 scripts/typechecking_profile_parser.py temp/benchmark-results.txt temp/memory-results.txt temp/benchmark-results.json YOUR_CSV_HERE.csv '${{ github.sha }}'
 
       - name: Benchmark
         uses: rhysd/github-action-benchmark@v1
         with:
           tool: 'customSmallerIsBetter'
-          output-file-path: './master/benchmark-results.json' # Adjust path to where your benchmark output is saved
+          output-file-path: './master/temp/benchmark-results.json' # Adjust path to where your benchmark output is saved
           gh-pages-branch: 'gh-pages' # or any branch you prefer to store your benchmark results
           benchmark-data-dir-path: 'benchmarks' # Directory in the gh-pages branch where benchmark data will be stored
           github-token: ${{ secrets.GITHUB_TOKEN }}
