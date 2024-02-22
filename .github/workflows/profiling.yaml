@@ -16,8 +16,6 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         agda: ['2.6.4']
-    permissions:
-      pages: write # to deploy to Pages
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
@@ -36,16 +34,49 @@ jobs:
         # Assume your make check-profile outputs a file `benchmark-results.txt`
         # in a format compatible with github-action-benchmark or converted accordingly
 
-      - name: Parse typechecking profile
-        run: |
-          python3 scripts/typechecking_profile_parser.py temp/benchmark-results.txt temp/memory-results.txt temp/benchmark-results.json YOUR_CSV_HERE.csv '${{ github.sha }}'
+      - name: Download previous benchmark data
+        uses: actions/cache/restore@v4
+        with:
+          path: './benchmark-cache'
+          key: ${{ matrix.os }}-benchmark-${{ github.event.before }}
 
-      - name: Benchmark
+      - name: Process the new benchmark data
+        run: |
+          cd master
+          python3 scripts/typechecking_profile_parser.py \
+            temp/benchmark-results.txt temp/memory-results.txt \
+            temp/benchmark-results.json benchmark-cache/data.csv \
+            ${{ github.sha }}
+
+      - name: Merge JSON benchmark data
         uses: rhysd/github-action-benchmark@v1
         with:
           tool: 'customSmallerIsBetter'
-          output-file-path: './master/temp/benchmark-results.json' # Adjust path to where your benchmark output is saved
-          gh-pages-branch: 'gh-pages' # or any branch you prefer to store your benchmark results
-          benchmark-data-dir-path: 'benchmarks' # Directory in the gh-pages branch where benchmark data will be stored
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          auto-push: true # Push and deploy GitHub pages branch automatically
+          # Location of the new data
+          output-file-path: './master/temp/benchmark-results.json'
+          # Location of the aggregate data
+          external-data-json-path: './benchmark-cache/data.json'
+
+      - name: Save merged benchmark data
+        uses: actions/cache/save@v4
+        with:
+          path: './benchmark-cache'
+          key: ${{ matrix.os }}-benchmark-${{ github.event.after }}
+
+      - name: Publish the CVS as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'Benchmark data'
+          path: './benchmark-cache/data.csv'
+
+      - name: Prepare new revision of the benchmark website
+        run: |
+          cd master
+          mkdir benchmark-website
+          cp website/benchmarks/index.html benchmark-website/
+          python3 scripts/benchmark_to_js.py \
+            ../benchmark-cache/data.json benchmark-website/data.js
+
+      - name: Deploy the new benchmark
+        run: |
+          npx netlify-cli deploy --dir=benchmark-website
