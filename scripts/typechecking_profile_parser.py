@@ -1,6 +1,5 @@
 import json
 import re
-import os
 import argparse
 import csv
 
@@ -38,41 +37,45 @@ def parse_benchmark_results(input_path):
     with open(input_path, 'r') as file:
         for line in file:
             # Match lines that end with "ms" indicating a timing result
-            match = re.fullmatch(r'^\s*(\S+)\s+(\d+)(,\d+)*ms\s*$', line)
+            match = re.fullmatch(r'^\s*(\S+)\s+(\d+(?:,\d+)*)ms\s*$', line)
             if match:
                 name = match.group(1).strip()
                 # Correctly parse and combine the number groups to handle commas in numbers
-                milliseconds = int("".join([x.replace(',', '') for x in match.groups()[1:] if x]))
+                milliseconds = int(match.groups()[1].replace(',',''))
                 benchmarks[name] = {'value': milliseconds, 'unit':'ms'}
                 # benchmarks.append({'name': name, 'value': milliseconds, 'unit':'ms'})
     return benchmarks
 
-subdict =\
-    lambda original_dict, keys_to_extract:\
-        original_dict if keys_to_extract is None else {key: original_dict[key] for key in keys_to_extract if key in original_dict}
 
+def subdict(original_dict, keys_to_extract):
+    if keys_to_extract is None:
+        return original_dict
+    else:
+        return {key: original_dict[key] for key in keys_to_extract if key in original_dict}
 
-convert_dict_to_list =\
-    lambda data, keys_to_extract=None: [{'name': name, **details} for name, details in subdict(data, keys_to_extract).items()]
+def convert_dict_to_list(data, keys_to_extract=None):
+    return [{'name': name, **details} for name, details in subdict(data, keys_to_extract).items()]
 
 def save_github_action_benchmark_json(output_path, benchmarks, memory_stats, benchmark_keys, memory_keys):
     with open(output_path, 'w') as file:
         json.dump(convert_dict_to_list(benchmarks, benchmark_keys) + convert_dict_to_list(memory_stats, memory_keys) , file, indent=2)
-
 
 def read_existing_csv_to_dict(csv_path, commit_hash):
     # Initialize a dictionary to hold the CSV data
     data_dict = {}
     fieldnames = ['name', 'unit', commit_hash]
 
-    # Check if the file exists and read its content
-    if os.path.exists(csv_path):
+    try:
+        # Attempt to open the file, which will fail if the file doesn't exist
         with open(csv_path, mode='r', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             # Update fieldnames with those found in the existing CSV, plus the new commit hash if necessary
             fieldnames = reader.fieldnames + [commit_hash] if commit_hash not in reader.fieldnames else reader.fieldnames
             for row in reader:
                 data_dict[row['name']] = row
+    except FileNotFoundError:
+        # File doesn't exist, proceed without modifying data_dict or fieldnames
+        pass
 
     return data_dict, fieldnames
 
@@ -87,8 +90,18 @@ def update_csv_data(data_dict, benchmarks, memory_stats, commit_hash):
         data_dict[name][commit_hash] = details['value']
 
 def write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash):
-    # Custom sort function: Sort by unit first, then capitalized names first, then alphabetical order
-    custom_sort = lambda item: (item['unit'] == "ms", item['unit'] != "ms" or item['name'][0].islower(), 0 if item['unit'] != "ms" or commit_hash not in item.keys() else -item[commit_hash])
+    def custom_sort(item):
+        # Sort all items that do not have unit "ms" first, then sort based on whether the name is capitalized, and then based on worst newest benchmark
+        is_not_ms_unit = item['unit'] != "ms"
+
+        if is_not_ms_unit:
+            # If the unit is not `ms`, preserve order
+            return (is_not_ms_unit, False, 0)
+        else:
+            # If the unit is `ms`, sort based on capitalization, then on newest benchmark
+            return (is_not_ms_unit , item['name'][0].islower(), 0 if commit_hash not in item.keys() else -item[commit_hash])
+
+
 
     with open(csv_path, mode='w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
