@@ -30,6 +30,7 @@ jobs:
       - name: Typecheck library with profiling
         run: |
           cd master
+          mkdir temp
           make check-profile 2> temp/memory-results.txt | tee temp/benchmark-results.txt
 
       - name: Download previous typechecking profile
