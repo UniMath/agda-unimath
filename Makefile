@@ -75,6 +75,44 @@ check: ./src/everything.lagda.md
 check-profile: ./src/everything.lagda.md
 	${AGDA} ${AGDAPROFILEFLAGS} $?
 
+# Base directory where Agda interface files are stored
+BUILD_DIR := ./_build
+# Directory for temporary files
+TEMP_DIR := ./temp
+# Convert module path to directory path (replace dots with slashes)
+MODULE_DIR = $(subst .,/,$(MODULE))
+
+# Target for profiling the typechecking a single module
+.PHONY: check-only-module
+check-only-module:
+	@if [ -z "$(MODULE)" ]; then \
+		echo "\033[0;31mError: MODULE variable is not set.\033[0m"; \
+		echo "\033[0;31mUsage: make check-module MODULE=\"YourModuleName\"\033[0m"; \
+		exit 1; \
+	fi
+	@# Attempt to delete the interface file only if the build directory exists
+	@echo "\033[0;32mAttempting to delete interface file for $(MODULE)\033[0m"
+	@find $(BUILD_DIR) -type f -path "*/agda/src/$(MODULE_DIR).agdai" -exec rm -f {} \+ 2>/dev/null || \
+		echo "\033[0;31m$(BUILD_DIR) directory does not exist, skipping deletion of interface files.\033[0m"
+	@# Ensure the temporary directory exists
+	@mkdir -p $(TEMP_DIR)
+	@# Profile typechecking the module and capture the output in the temp directory, also display on terminal
+	@echo "\033[0;32mProfiling typechecking of $(MODULE)\033[0m"
+	@$(AGDA) --profile=definitions src/$(MODULE_DIR).lagda.md 2>&1 | tee $(TEMP_DIR)/typecheck_output.txt
+	@# Check for additional modules being typechecked by looking for any indented "Checking" line
+	@if grep -E "^\s+Checking " $(TEMP_DIR)/typecheck_output.txt > /dev/null; then \
+		echo "\033[0;31mOther modules were also checked. Repeating profiling after deleting interface file again.\033[0m"; \
+		find $(BUILD_DIR) -type f -path "*/agda/src/$(MODULE_DIR).agdai" -exec rm -f {} \+; \
+		$(AGDA) --profile=definitions src/$(MODULE_DIR).lagda.md; \
+	else \
+		echo "\033[0;32mOnly $(MODULE) was checked. Profiling complete.\033[0m"; \
+	fi
+
+	@# Cleanup
+	@rm -f $(TEMP_DIR)/typecheck_output.txt
+
+
+
 agda-html: ./src/everything.lagda.md
 	@rm -rf ./docs/
 	@mkdir -p ./docs/
