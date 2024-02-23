@@ -712,11 +712,11 @@ module _
 
   inclusion-precomp-retract-map : hom-arrow (precomp f S) (precomp g S)
   inclusion-precomp-retract-map =
-    hom-arrow-precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+    precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
 
   hom-retraction-precomp-retract-map : hom-arrow (precomp g S) (precomp f S)
   hom-retraction-precomp-retract-map =
-    hom-arrow-precomp-hom-arrow f g (inclusion-retract-map f g R) S
+    precomp-hom-arrow f g (inclusion-retract-map f g R) S
 
   is-retraction-map-domain-precomp-retract-map :
     is-retraction
@@ -812,11 +812,11 @@ module _
 
   inclusion-postcomp-retract-map : hom-arrow (postcomp S f) (postcomp S g)
   inclusion-postcomp-retract-map =
-    hom-arrow-postcomp-hom-arrow f g (inclusion-retract-map f g R) S
+    postcomp-hom-arrow f g (inclusion-retract-map f g R) S
 
   hom-retraction-postcomp-retract-map : hom-arrow (postcomp S g) (postcomp S f)
   hom-retraction-postcomp-retract-map =
-    hom-arrow-postcomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+    postcomp-hom-arrow g f (hom-retraction-retract-map f g R) S
 
   is-retraction-map-domain-postcomp-retract-map :
     is-retraction

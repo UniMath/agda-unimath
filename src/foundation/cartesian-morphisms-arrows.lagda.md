@@ -8,8 +8,10 @@ module foundation.cartesian-morphisms-arrows where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-morphisms-arrows
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
@@ -18,6 +20,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.pullbacks
+open import foundation.postcomposition-functions
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -25,6 +28,7 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation.functoriality-dependent-pair-types
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -355,6 +359,72 @@ module _
       ( cone-hom-arrow f g α)
 ```
 
+### Dependent products of cartesian morphisms of arrows
+
+Given a family of cartesian morphisms of arrows `αᵢ : fᵢ → gᵢ`, then there is a
+cartesian morphism of arrows `map-Π f → map-Π g`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → cartesian-hom-arrow (f i) (g i))
+  where
+
+  hom-arrow-Π-cartesian-hom-arrow :
+    hom-arrow (map-Π f) (map-Π g)
+  hom-arrow-Π-cartesian-hom-arrow =
+    Π-hom-arrow f g (λ i → hom-arrow-cartesian-hom-arrow (f i) (g i) (α i))
+
+  is-cartesian-Π-cartesian-hom-arrow :
+    is-cartesian-hom-arrow (map-Π f) (map-Π g) hom-arrow-Π-cartesian-hom-arrow
+  is-cartesian-Π-cartesian-hom-arrow =
+    is-pullback-Π
+      ( λ i → map-codomain-cartesian-hom-arrow (f i) (g i) (α i))
+      ( g)
+      ( λ i → cone-cartesian-hom-arrow (f i) (g i) (α i))
+      ( λ i → is-cartesian-cartesian-hom-arrow (f i) (g i) (α i))
+
+  Π-cartesian-hom-arrow :
+    cartesian-hom-arrow (map-Π f) (map-Π g)
+  pr1 Π-cartesian-hom-arrow = hom-arrow-Π-cartesian-hom-arrow
+  pr2 Π-cartesian-hom-arrow = is-cartesian-Π-cartesian-hom-arrow
+```
+
+### Dependent sums of cartesian morphisms of arrows
+
+Given a family of cartesian morphisms of arrows `αᵢ : fᵢ → gᵢ`, then there is a
+cartesian morphism of arrows `tot f → tot g`.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → cartesian-hom-arrow (f i) (g i))
+  where
+
+  hom-arrow-tot-cartesian-hom-arrow :
+    hom-arrow (tot f) (tot g)
+  hom-arrow-tot-cartesian-hom-arrow =
+    tot-hom-arrow f g (λ i → hom-arrow-cartesian-hom-arrow (f i) (g i) (α i))
+
+  is-cartesian-tot-cartesian-hom-arrow :
+    is-cartesian-hom-arrow (tot f) (tot g) hom-arrow-tot-cartesian-hom-arrow
+  is-cartesian-tot-cartesian-hom-arrow =
+    is-pullback-tot-is-pullback-family-id-cone
+      ( λ i → map-codomain-cartesian-hom-arrow (f i) (g i) (α i))
+      ( g)
+      ( λ i → cone-cartesian-hom-arrow (f i) (g i) (α i))
+      ( λ i → is-cartesian-cartesian-hom-arrow (f i) (g i) (α i))
+
+  tot-cartesian-hom-arrow :
+    cartesian-hom-arrow (tot f) (tot g)
+  pr1 tot-cartesian-hom-arrow = hom-arrow-tot-cartesian-hom-arrow
+  pr2 tot-cartesian-hom-arrow = is-cartesian-tot-cartesian-hom-arrow
+```
+
 ### Cartesian morphisms of arrows are preserved under products
 
 ```agda
@@ -431,7 +501,164 @@ module _
       ( is-cartesian-coproduct-cartesian-hom-arrow))
 ```
 
+### Cartesian morphisms of arrows are preserved under exponentiation
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : cartesian-hom-arrow f g) (S : UU l5)
+  where
+
+  hom-arrow-postcomp-cartesian-hom-arrow :
+    hom-arrow (postcomp S f) (postcomp S g)
+  hom-arrow-postcomp-cartesian-hom-arrow =
+    postcomp-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α) S
+
+  is-cartesian-postcomp-cartesian-hom-arrow :
+    is-cartesian-hom-arrow
+      ( postcomp S f)
+      ( postcomp S g)
+      ( hom-arrow-postcomp-cartesian-hom-arrow)
+  is-cartesian-postcomp-cartesian-hom-arrow =
+    is-pullback-postcomp-is-pullback
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( g)
+      ( cone-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+      ( S)
+
+  postcomp-cartesian-hom-arrow :
+    cartesian-hom-arrow (postcomp S f) (postcomp S g)
+  pr1 postcomp-cartesian-hom-arrow =
+    hom-arrow-postcomp-cartesian-hom-arrow
+  pr2 postcomp-cartesian-hom-arrow = is-cartesian-postcomp-cartesian-hom-arrow
+```
+
+### The folding operation on cartesian morphisms of arrows
+
+A morphism of arrows
+
+```text
+         i
+    A ------> X
+    |         |
+  f |         | g
+    ∨         ∨
+    B ------> Y
+         j
+```
+
+is cartesian if and only if either of the folded morphisms
+
+```text
+          (f , i)                       (f , i)
+        A ------> B × X               A ------> B × X
+        |           |                 |           |
+  g ∘ i |           | j × g     j ∘ f |           | j × g
+        ∨           ∨                 ∨           ∨
+        Y ------> Y × Y               Y ------> Y × Y
+             Δ                             Δ
+```
+
+is.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  (α : hom-arrow f g)
+  where
+
+  transpose-fold-hom-arrow :
+    hom-arrow
+      ( λ x → (f x , map-domain-hom-arrow f g α x))
+      ( diagonal Y)
+  transpose-fold-hom-arrow =
+      hom-arrow-cone
+        ( map-product (map-codomain-hom-arrow f g α) g)
+        ( diagonal Y)
+        ( fold-cone (map-codomain-hom-arrow f g α) g (cone-hom-arrow f g α))
+
+  fold-hom-arrow :
+    hom-arrow
+      ( g ∘ map-domain-hom-arrow f g α)
+      ( map-product (map-codomain-hom-arrow f g α) g)
+  fold-hom-arrow =
+    transpose-hom-arrow
+      ( λ a → f a , map-domain-hom-arrow f g α a)
+      ( diagonal Y)
+      ( transpose-fold-hom-arrow)
+
+  is-cartesian-transpose-fold-hom-arrow :
+    is-cartesian-hom-arrow f g α →
+    is-cartesian-hom-arrow
+      ( λ x → (f x , map-domain-hom-arrow f g α x))
+      ( diagonal Y)
+      ( transpose-fold-hom-arrow)
+  is-cartesian-transpose-fold-hom-arrow =
+    is-pullback-fold-cone-is-pullback
+      ( map-codomain-hom-arrow f g α)
+      ( g)
+      ( cone-hom-arrow f g α)
+
+  is-cartesian-is-cartesian-transpose-fold-hom-arrow :
+    is-cartesian-hom-arrow
+      ( λ x → (f x , map-domain-hom-arrow f g α x))
+      ( diagonal Y)
+      ( transpose-fold-hom-arrow) →
+    is-cartesian-hom-arrow f g α
+  is-cartesian-is-cartesian-transpose-fold-hom-arrow =
+    is-pullback-is-pullback-fold-cone
+      ( map-codomain-hom-arrow f g α)
+      ( g)
+      ( cone-hom-arrow f g α)
+
+  is-cartesian-fold-hom-arrow :
+    is-cartesian-hom-arrow f g α →
+    is-cartesian-hom-arrow
+      ( g ∘ map-domain-hom-arrow f g α)
+      ( map-product (map-codomain-hom-arrow f g α) g)
+      ( fold-hom-arrow)
+  is-cartesian-fold-hom-arrow H =
+    is-cartesian-transpose-cartesian-hom-arrow
+      ( λ x → (f x , map-domain-hom-arrow f g α x))
+      ( diagonal Y)
+      ( transpose-fold-hom-arrow , is-cartesian-transpose-fold-hom-arrow H)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  (α : cartesian-hom-arrow f g)
+  where
+
+  transpose-fold-cartesian-hom-arrow :
+    cartesian-hom-arrow
+      ( λ x → (f x , map-domain-cartesian-hom-arrow f g α x))
+      ( diagonal Y)
+  pr1 transpose-fold-cartesian-hom-arrow =
+    transpose-fold-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α)
+  pr2 transpose-fold-cartesian-hom-arrow =
+    is-cartesian-transpose-fold-hom-arrow f g
+      ( hom-arrow-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+
+  fold-cartesian-hom-arrow :
+    cartesian-hom-arrow
+      ( g ∘ map-domain-cartesian-hom-arrow f g α)
+      ( map-product (map-codomain-cartesian-hom-arrow f g α) g)
+  pr1 fold-cartesian-hom-arrow =
+    fold-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α)
+  pr2 fold-cartesian-hom-arrow =
+    is-cartesian-fold-hom-arrow f g
+      ( hom-arrow-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+```
+
 ## See also
 
 - [Cocartesian morphisms of arrows](synthetic-homotopy-theory.cocartesian-morphisms-arrows.md)
   for the dual.
+- [Diagonals of morphisms of arrows](foundation.diagonals-of-morphisms-arrows.md)
+  is another operation that preserves cartesianess.

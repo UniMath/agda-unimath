@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -21,7 +22,6 @@ open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -409,6 +409,47 @@ module _
       ( triangle-standard-pullback-tot-cone-cone-family)
       ( is-equiv-map-Σ _ is-pb-c is-pb-c')
       ( is-equiv-map-standard-pullback-tot-cone-cone-family)
+```
+
+As a corollary, a dependent sum of squares over the constant diagram is a
+pullback square if and only if the family is.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → B i → Y i) (g : (i : I) → X i → Y i)
+  (c : (i : I) → cone (f i) (g i) (A i))
+  where
+
+  tot-cone : cone (tot f) (tot g) (Σ I A)
+  pr1 tot-cone = tot (λ i → vertical-map-cone (f i) (g i) (c i))
+  pr1 (pr2 tot-cone) = tot (λ i → horizontal-map-cone (f i) (g i) (c i))
+  pr2 (pr2 tot-cone) = tot-htpy (λ i → coherence-square-cone (f i) (g i) (c i))
+
+  is-pullback-tot-is-pullback-family-id-cone :
+    ((i : I) → is-pullback (f i) (g i) (c i)) →
+    is-pullback (tot f) (tot g) tot-cone
+  is-pullback-tot-is-pullback-family-id-cone =
+    is-pullback-tot-is-pullback-family Y f g
+      ( id-cone I)
+      ( c)
+      ( is-pullback-is-equiv-vertical-maps id id
+        ( id-cone I)
+        ( is-equiv-id)
+        ( is-equiv-id))
+
+  is-pullback-family-id-cone-is-pullback-tot :
+    is-pullback (tot f) (tot g) tot-cone →
+    (i : I) → is-pullback (f i) (g i) (c i)
+  is-pullback-family-id-cone-is-pullback-tot =
+    is-pullback-family-is-pullback-tot Y f g
+      ( id-cone I)
+      ( c)
+      ( is-pullback-is-equiv-vertical-maps id id
+        ( id-cone I)
+        ( is-equiv-id)
+        ( is-equiv-id))
 ```
 
 ### Commuting squares of maps on total spaces

@@ -15,6 +15,8 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
@@ -283,6 +285,44 @@ module _
   hom-arrow-htpy F' G (i , j , H) = (i , j , (j ·l F') ∙h H ∙h (G ·r i))
 ```
 
+### Dependent products of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → hom-arrow (f i) (g i))
+  where
+
+  Π-hom-arrow : hom-arrow (map-Π f) (map-Π g)
+  pr1 Π-hom-arrow =
+    map-Π (λ i → map-domain-hom-arrow (f i) (g i) (α i))
+  pr1 (pr2 Π-hom-arrow) =
+    map-Π (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
+  pr2 (pr2 Π-hom-arrow) =
+    htpy-map-Π (λ i → coh-hom-arrow (f i) (g i) (α i))
+```
+
+### Dependent sums of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → hom-arrow (f i) (g i))
+  where
+
+  tot-hom-arrow : hom-arrow (tot f) (tot g)
+  pr1 tot-hom-arrow =
+    tot (λ i → map-domain-hom-arrow (f i) (g i) (α i))
+  pr1 (pr2 tot-hom-arrow) =
+    tot (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
+  pr2 (pr2 tot-hom-arrow) =
+    tot-htpy (λ i → coh-hom-arrow (f i) (g i) (α i))
+```
+
 ### Morphisms of arrows give morphisms of precomposition arrows
 
 A morphism of arrows `α : f → g` gives a morphism of precomposition arrows
@@ -295,13 +335,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-precomp-hom-arrow :
+  precomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (precomp g S) (precomp f S)
-  pr1 (hom-arrow-precomp-hom-arrow S) =
+  pr1 (precomp-hom-arrow S) =
     precomp (map-codomain-hom-arrow f g α) S
-  pr1 (pr2 (hom-arrow-precomp-hom-arrow S)) =
+  pr1 (pr2 (precomp-hom-arrow S)) =
     precomp (map-domain-hom-arrow f g α) S
-  pr2 (pr2 (hom-arrow-precomp-hom-arrow S)) h =
+  pr2 (pr2 (precomp-hom-arrow S)) h =
     inv (eq-htpy (h ·l coh-hom-arrow f g α))
 ```
 
@@ -317,13 +357,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-postcomp-hom-arrow :
+  postcomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (postcomp S f) (postcomp S g)
-  pr1 (hom-arrow-postcomp-hom-arrow S) =
+  pr1 (postcomp-hom-arrow S) =
     postcomp S (map-domain-hom-arrow f g α)
-  pr1 (pr2 (hom-arrow-postcomp-hom-arrow S)) =
+  pr1 (pr2 (postcomp-hom-arrow S)) =
     postcomp S (map-codomain-hom-arrow f g α)
-  pr2 (pr2 (hom-arrow-postcomp-hom-arrow S)) h =
+  pr2 (pr2 (postcomp-hom-arrow S)) h =
     eq-htpy (coh-hom-arrow f g α ·r h)
 ```
 
