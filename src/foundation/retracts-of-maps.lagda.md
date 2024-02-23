@@ -9,6 +9,7 @@ module foundation.retracts-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-prisms-of-maps
+open import foundation.commuting-triangles-of-morphisms-arrows
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
@@ -105,10 +106,7 @@ module _
   where
 
   is-retraction-hom-arrow : UU (l1 ⊔ l2)
-  is-retraction-hom-arrow =
-    htpy-hom-arrow f f
-      ( comp-hom-arrow f g f r i)
-      ( id-hom-arrow)
+  is-retraction-hom-arrow = coherence-triangle-hom-arrow' f g f i id-hom-arrow r
 ```
 
 ### The type of retractions of a morphism of arrows

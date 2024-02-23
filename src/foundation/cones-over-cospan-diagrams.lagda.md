@@ -261,9 +261,7 @@ module _
 
 ```agda
 id-cone : {l : Level} (A : UU l) → cone (id {A = A}) (id {A = A}) A
-pr1 (id-cone A) = id
-pr1 (pr2 (id-cone A)) = id
-pr2 (pr2 (id-cone A)) = refl-htpy
+id-cone A = (id , id , refl-htpy)
 ```
 
 ## Table of files about pullbacks
