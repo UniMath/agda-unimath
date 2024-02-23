@@ -212,3 +212,8 @@ lemma-right-sim-cross-mul-diff-fraction-ℤ a b b' H =
       left-unit-law-add-ℤ
         ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b)
 ```
+
+## External links
+
+- [Cross-multiplication](https://en.wikipedia.org/wiki/Cross-multiplication) at
+  Wikipedia
