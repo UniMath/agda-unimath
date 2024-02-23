@@ -1,8 +1,6 @@
 # Equivalences on `Maybe`
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module foundation.equivalences-maybe where
 ```
 
