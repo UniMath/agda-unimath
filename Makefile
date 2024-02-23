@@ -82,9 +82,12 @@ TEMP_DIR := ./temp
 # Convert module path to directory path (replace dots with slashes)
 MODULE_DIR = $(subst .,/,$(MODULE))
 
+
+# Default agda arguments for `profile-module`
+PROFILE_MODULE_AGDA_ARGS ?= --profile=definitions
 # Target for profiling the typechecking a single module
-.PHONY: check-only-module
-check-only-module:
+.PHONY: profile-module
+profile-module:
 	@if [ -z "$(MODULE)" ]; then \
 		echo "\033[0;31mError: MODULE variable is not set.\033[0m"; \
 		echo "\033[0;31mUsage: make check-module MODULE=\"YourModuleName\"\033[0m"; \
@@ -98,12 +101,12 @@ check-only-module:
 	@mkdir -p $(TEMP_DIR)
 	@# Profile typechecking the module and capture the output in the temp directory, also display on terminal
 	@echo "\033[0;32mProfiling typechecking of $(MODULE)\033[0m"
-	@$(AGDA) --profile=definitions src/$(MODULE_DIR).lagda.md 2>&1 | tee $(TEMP_DIR)/typecheck_output.txt
+	@$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) src/$(MODULE_DIR).lagda.md 2>&1 | tee $(TEMP_DIR)/typecheck_output.txt
 	@# Check for additional modules being typechecked by looking for any indented "Checking" line
 	@if grep -E "^\s+Checking " $(TEMP_DIR)/typecheck_output.txt > /dev/null; then \
 		echo "\033[0;31mOther modules were also checked. Repeating profiling after deleting interface file again.\033[0m"; \
 		find $(BUILD_DIR) -type f -path "*/agda/src/$(MODULE_DIR).agdai" -exec rm -f {} \+; \
-		$(AGDA) --profile=definitions src/$(MODULE_DIR).lagda.md; \
+		$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) src/$(MODULE_DIR).lagda.md; \
 	else \
 		echo "\033[0;32mOnly $(MODULE) was checked. Profiling complete.\033[0m"; \
 	fi
