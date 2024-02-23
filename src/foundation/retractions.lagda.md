@@ -12,7 +12,6 @@ open import foundation-core.retractions public
 open import foundation.action-on-identifications-functions
 open import foundation.coslice
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -101,61 +100,4 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     retraction f → is-injective f
   is-injective-retraction f (h , H) {x} {y} p = inv (H x) ∙ (ap h p ∙ H y)
-```
-
-### Transposing identifications along retractions
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
-  where
-
-  transpose-eq-is-retraction :
-    g ∘ f ~ id → {x : B} {y : A} → x ＝ f y → g x ＝ y
-  transpose-eq-is-retraction H {x} {y} p = ap g p ∙ H y
-
-  transpose-eq-is-retraction' :
-    g ∘ f ~ id → {x : A} {y : B} → f x ＝ y → x ＝ g y
-  transpose-eq-is-retraction' H {x} refl = inv (H x)
-
-  is-retraction-transpose-eq :
-    ({x : B} {y : A} → x ＝ f y → g x ＝ y) → g ∘ f ~ id
-  is-retraction-transpose-eq H x = H refl
-
-  is-retraction-transpose-eq' :
-    ({x : A} {y : B} → f x ＝ y → x ＝ g y) → g ∘ f ~ id
-  is-retraction-transpose-eq' H x = inv (H refl)
-
-  is-retraction-is-retraction-transpose-eq :
-    is-retraction-transpose-eq ∘ transpose-eq-is-retraction ~ id
-  is-retraction-is-retraction-transpose-eq H = refl
-
-  htpy-is-section-is-retraction-transpose-eq :
-    (H : {x : B} {y : A} → x ＝ f y → g x ＝ y)
-    (x : B) (y : A) →
-    transpose-eq-is-retraction (is-retraction-transpose-eq H) {x} {y} ~
-    H {x} {y}
-  htpy-is-section-is-retraction-transpose-eq H x y refl = refl
-
-  abstract
-    is-section-is-retraction-transpose-eq :
-      transpose-eq-is-retraction ∘ is-retraction-transpose-eq ~ id
-    is-section-is-retraction-transpose-eq H =
-      eq-htpy-implicit
-        ( λ x →
-          eq-htpy-implicit
-            ( λ y → eq-htpy (htpy-is-section-is-retraction-transpose-eq H x y)))
-
-  is-equiv-transpose-eq-is-retraction :
-    is-equiv transpose-eq-is-retraction
-  is-equiv-transpose-eq-is-retraction =
-    is-equiv-is-invertible
-      ( is-retraction-transpose-eq)
-      ( is-section-is-retraction-transpose-eq)
-      ( is-retraction-is-retraction-transpose-eq)
-
-  equiv-transpose-eq-is-retraction :
-    (g ∘ f ~ id) ≃ ({x : B} {y : A} → x ＝ f y → g x ＝ y)
-  equiv-transpose-eq-is-retraction =
-    (transpose-eq-is-retraction , is-equiv-transpose-eq-is-retraction)
 ```

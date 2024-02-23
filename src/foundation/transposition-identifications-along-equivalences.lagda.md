@@ -109,6 +109,10 @@ It is sometimes useful to consider identifications `y ＝ e x` instead of
 `e x ＝ y`, so we include an inverted equivalence for that as well.
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
   eq-transpose-equiv-inv :
     (x : A) (y : B) → (y ＝ map-equiv e x) ≃ (map-inv-equiv e y ＝ x)
   eq-transpose-equiv-inv x y =
