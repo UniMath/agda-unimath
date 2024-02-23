@@ -91,6 +91,11 @@
     "editor.autoClosingBrackets": "never"
   },
 
+  "[makefile]": {
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": true
+  },
+
   "[markdown]": {
     "editor.rulers": [80],
     "editor.quickSuggestions": {
