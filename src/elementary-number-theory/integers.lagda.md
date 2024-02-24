@@ -428,6 +428,8 @@ is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
 
 ### Properties of positive integers
 
+#### The positivity predicate on integers is decidable
+
 ```agda
 decide-is-positive-ℤ : {x : ℤ} → (is-positive-ℤ x) + is-nonnegative-ℤ (neg-ℤ x)
 decide-is-positive-ℤ {inl x} = inr star
@@ -440,7 +442,13 @@ decide-is-positive-is-nonzero-ℤ :
 decide-is-positive-is-nonzero-ℤ (inl x) H = inr star
 decide-is-positive-is-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
 decide-is-positive-is-nonzero-ℤ (inr (inr x)) H = inl star
+```
 
+This remains to be fully formalized.
+
+#### Positive integers are not nonpositive
+
+```agda
 empty-is-positive-is-nonnegative-neg-ℤ :
   (x : ℤ) →
   is-positive-ℤ x →
