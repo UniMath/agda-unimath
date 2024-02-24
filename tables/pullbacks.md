@@ -6,6 +6,8 @@
 | The universal property of pullbacks (foundation-core) | [`foundation-core.universal-property-pullbacks`](foundation-core.universal-property-pullbacks.md)                               |
 | The universal property of pullbacks (foundation)      | [`foundation.universal-property-pullbacks`](foundation.universal-property-pullbacks.md)                                         |
 | The universal property of fiber products              | [`foundation.universal-property-fiber-products`](foundation.universal-property-fiber-products.md)                               |
+| Standard pullbacks (foundation-core)                  | [`foundation-core.standard-pullbacks`](foundation-core.standard-pullbacks.md)                                                   |
+| Standard pullbacks (foundation)                       | [`foundation.standard-pullbacks`](foundation.standard-pullbacks.md)                                                             |
 | Pullbacks (foundation-core)                           | [`foundation-core.pullbacks`](foundation-core.pullbacks.md)                                                                     |
 | Pullbacks (foundation)                                | [`foundation.pullbacks`](foundation.pullbacks.md)                                                                               |
 | Functoriality of pullbacks                            | [`foundation.functoriality-pullbacks`](foundation.functoriality-pullbacks.md)                                                   |
