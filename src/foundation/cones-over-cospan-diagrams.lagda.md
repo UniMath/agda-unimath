@@ -361,14 +361,14 @@ module _
     is-torsorial-htpy-parallel-cone :
       {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') (c : cone f g C) →
       is-torsorial (htpy-parallel-cone Hf Hg c)
-    is-torsorial-htpy-parallel-cone
-      {f'} Hf {g'} Hg =
+    is-torsorial-htpy-parallel-cone Hf {g'} =
       ind-htpy
         ( f)
         ( λ f'' Hf' → (g' : B → X) (Hg : g ~ g') (c : cone f g C) →
           is-contr (Σ (cone f'' g' C) (htpy-parallel-cone Hf' Hg c)))
         ( λ g' Hg → is-torsorial-htpy-parallel-cone-refl-htpy Hg)
-        Hf g' Hg
+        ( Hf)
+        ( g')
 
   tr-tr-refl-htpy-cone :
     (c : cone f g C) →
