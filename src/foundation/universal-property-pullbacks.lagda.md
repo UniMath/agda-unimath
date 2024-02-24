@@ -13,8 +13,8 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-function-types
 open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels

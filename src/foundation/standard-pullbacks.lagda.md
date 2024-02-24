@@ -261,14 +261,18 @@ module _
   map-coproduct-cone-standard-pullback :
     standard-pullback f g + standard-pullback f' g' →
     standard-pullback (map-coproduct f f') (map-coproduct g g')
-  map-coproduct-cone-standard-pullback (inl v) = inl-map-coproduct-cone-standard-pullback v
-  map-coproduct-cone-standard-pullback (inr u) = inr-map-coproduct-cone-standard-pullback u
+  map-coproduct-cone-standard-pullback (inl v) =
+    inl-map-coproduct-cone-standard-pullback v
+  map-coproduct-cone-standard-pullback (inr u) =
+    inr-map-coproduct-cone-standard-pullback u
 
   map-inv-coproduct-cone-standard-pullback :
     standard-pullback (map-coproduct f f') (map-coproduct g g') →
     standard-pullback f g + standard-pullback f' g'
-  map-inv-coproduct-cone-standard-pullback (inl x , inl y , p) = inl (x , y , is-injective-inl p)
-  map-inv-coproduct-cone-standard-pullback (inr x , inr y , p) = inr (x , y , is-injective-inr p)
+  map-inv-coproduct-cone-standard-pullback (inl x , inl y , p) =
+    inl (x , y , is-injective-inl p)
+  map-inv-coproduct-cone-standard-pullback (inr x , inr y , p) =
+    inr (x , y , is-injective-inr p)
 
   is-section-map-inv-coproduct-cone-standard-pullback :
     is-section map-coproduct-cone-standard-pullback map-inv-coproduct-cone-standard-pullback
@@ -289,7 +293,8 @@ module _
       ( eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-is-injective-inr p)))
 
   abstract
-    is-equiv-map-coproduct-cone-standard-pullback : is-equiv map-coproduct-cone-standard-pullback
+    is-equiv-map-coproduct-cone-standard-pullback :
+      is-equiv map-coproduct-cone-standard-pullback
     is-equiv-map-coproduct-cone-standard-pullback =
       is-equiv-is-invertible
         map-inv-coproduct-cone-standard-pullback
