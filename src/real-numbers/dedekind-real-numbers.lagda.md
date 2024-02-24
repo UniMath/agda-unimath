@@ -507,12 +507,11 @@ module _
   {l : Level} (x y : ℝ l)
   where
 
-  eq-ℝ-eq-lower-cut-ℝ : lower-cut-ℝ x ＝ lower-cut-ℝ y → x ＝ y
-  eq-ℝ-eq-lower-cut-ℝ = eq-type-subtype has-upper-cut-Prop
+  eq-eq-lower-cut-ℝ : lower-cut-ℝ x ＝ lower-cut-ℝ y → x ＝ y
+  eq-eq-lower-cut-ℝ = eq-type-subtype has-upper-cut-Prop
 
-  eq-ℝ-eq-upper-cut-ℝ : upper-cut-ℝ x ＝ upper-cut-ℝ y → x ＝ y
-  eq-ℝ-eq-upper-cut-ℝ =
-    eq-ℝ-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
+  eq-eq-upper-cut-ℝ : upper-cut-ℝ x ＝ upper-cut-ℝ y → x ＝ y
+  eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
 ```
 
 ## References

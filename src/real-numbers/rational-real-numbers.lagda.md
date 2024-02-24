@@ -188,7 +188,7 @@ eq-real-rational-is-rational-ℝ :
   (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) →
   real-rational q ＝ x
 eq-real-rational-is-rational-ℝ x q H =
-  eq-ℝ-eq-lower-cut-ℝ
+  eq-eq-lower-cut-ℝ
     ( real-rational q)
     ( x)
     ( eq-has-same-elements-subtype
