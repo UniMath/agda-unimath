@@ -22,6 +22,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
+open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
@@ -446,18 +447,34 @@ decide-is-positive-is-nonzero-ℤ (inr (inr x)) H = inl star
 
 This remains to be fully formalized.
 
+### The nonpositive integers
+
+```agda
+is-nonpositive-ℤ : ℤ → UU lzero
+is-nonpositive-ℤ x = is-nonnegative-ℤ (neg-ℤ x)
+```
+
 #### Positive integers are not nonpositive
 
 ```agda
-empty-is-positive-is-nonnegative-neg-ℤ :
-  (x : ℤ) →
-  is-positive-ℤ x →
-  is-nonnegative-ℤ (neg-ℤ x) →
-  empty
-empty-is-positive-is-nonnegative-neg-ℤ (inr (inl x)) x-is-pos _ = x-is-pos
-empty-is-positive-is-nonnegative-neg-ℤ (inr (inr x)) x-is-pos neg-x-is-nonneg =
+not-is-nonpositive-is-positive-ℤ :
+  (x : ℤ) → is-positive-ℤ x → ¬ (is-nonpositive-ℤ x)
+not-is-nonpositive-is-positive-ℤ (inr (inl x)) x-is-pos _ = x-is-pos
+not-is-nonpositive-is-positive-ℤ (inr (inr x)) x-is-pos neg-x-is-nonneg =
   neg-x-is-nonneg
 ```
+
+#### An integer that is not positive is nonpositive
+
+```agda
+is-nonpositive-not-is-positive-ℤ :
+  (x : ℤ) → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
+is-nonpositive-not-is-positive-ℤ x H with decide-is-positive-ℤ {x}
+... | inl K = ex-falso (H K)
+... | inr K = K
+```
+
+#### Relation between successors of natural numbers and integers
 
 ```agda
 succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
@@ -465,10 +482,16 @@ succ-int-ℕ zero-ℕ = refl
 succ-int-ℕ (succ-ℕ x) = refl
 ```
 
+#### The negative function is injective
+
 ```agda
 is-injective-neg-ℤ : is-injective neg-ℤ
 is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
+```
 
+#### An integer is zero if its negative is zero
+
+```agda
 is-zero-is-zero-neg-ℤ : (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
 is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 ```

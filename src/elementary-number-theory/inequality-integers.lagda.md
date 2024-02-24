@@ -122,7 +122,7 @@ transitive-le-ℤ k l m p q =
 
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p q =
-  empty-is-positive-is-nonnegative-neg-ℤ
+  not-is-nonpositive-is-positive-ℤ
   ( y -ℤ x)
   ( p)
   ( is-nonnegative-is-positive-ℤ
