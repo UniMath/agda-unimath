@@ -212,7 +212,7 @@ module _
     frac = succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
 ```
 
-### Decidability and trichotomy properties
+### Decidability of strict inequality on the rationals
 
 ```agda
 decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
@@ -227,7 +227,13 @@ decide-le-leq-ℚ x y =
       { cross-mul-diff-fraction-ℤ
         ( fraction-ℚ x)
         ( fraction-ℚ y)})
+```
 
+It remains to fully formalize that strict inequality is decidable.
+
+ ### Trichotomy on the rationals
+
+```agda
 trichotomy-le-ℚ :
   {l : Level} {A : UU l} (x y : ℚ) →
   ( le-ℚ x y → A) →
