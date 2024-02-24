@@ -259,14 +259,18 @@ module _
     inr (x , y , is-injective-inr p)
 
   is-section-map-inv-coproduct-cone-standard-pullback :
-    is-section map-coproduct-cone-standard-pullback map-inv-coproduct-cone-standard-pullback
+    is-section
+      ( map-coproduct-cone-standard-pullback)
+      ( map-inv-coproduct-cone-standard-pullback)
   is-section-map-inv-coproduct-cone-standard-pullback (inl x , inl y , p) =
     eq-pair-eq-fiber (eq-pair-eq-fiber (is-section-is-injective-inl p))
   is-section-map-inv-coproduct-cone-standard-pullback (inr x , inr y , p) =
     eq-pair-eq-fiber (eq-pair-eq-fiber (is-section-is-injective-inr p))
 
   is-retraction-map-inv-coproduct-cone-standard-pullback :
-    is-retraction map-coproduct-cone-standard-pullback map-inv-coproduct-cone-standard-pullback
+    is-retraction
+      ( map-coproduct-cone-standard-pullback)
+      ( map-inv-coproduct-cone-standard-pullback)
   is-retraction-map-inv-coproduct-cone-standard-pullback (inl (x , y , p)) =
     ap
       ( inl)
