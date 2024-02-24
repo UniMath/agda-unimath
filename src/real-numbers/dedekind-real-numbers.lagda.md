@@ -335,8 +335,8 @@ module _
     antisymmetric-leq-subtype
       ( lower-complement-upper-cut-ℝ x)
       ( lower-cut-ℝ x)
-      subset-lower-cut-lower-complement-upper-cut-ℝ
-      subset-lower-complement-upper-cut-lower-cut-ℝ
+      ( subset-lower-cut-lower-complement-upper-cut-ℝ)
+      ( subset-lower-complement-upper-cut-lower-cut-ℝ)
 ```
 
 #### The upper cut is the subtype of rationals bounded below by some element of the complement of the lower cut
@@ -397,8 +397,8 @@ module _
     antisymmetric-leq-subtype
       ( upper-complement-lower-cut-ℝ x)
       ( upper-cut-ℝ x)
-      subset-upper-cut-upper-complement-lower-cut-ℝ
-      subset-upper-complement-lower-cut-upper-cut-ℝ
+      ( subset-upper-cut-upper-complement-lower-cut-ℝ)
+      ( subset-upper-complement-lower-cut-upper-cut-ℝ)
 ```
 
 ### The lower/upper cut of a real determines the other
@@ -494,8 +494,7 @@ module _
               ( refl))))
 
 is-emb-lower-cut : {l : Level} → is-emb (lower-cut-ℝ {l})
-is-emb-lower-cut =
-  is-emb-inclusion-subtype has-upper-cut-Prop
+is-emb-lower-cut = is-emb-inclusion-subtype has-upper-cut-Prop
 ```
 
 ### Two real numbers with the same lower/upper cut are equal
