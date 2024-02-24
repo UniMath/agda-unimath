@@ -211,7 +211,7 @@ module _
       ( λ s → lower-cut-ℝ x p)
       ( rec-coproduct
           ( id)
-          ( λ I → ex-falso (is-disjoint-cut-ℝ x q ( H' , I))))
+          ( λ I → ex-falso (is-disjoint-cut-ℝ x q (H' , I))))
       ( is-located-lower-upper-cut-ℝ x p q H)
 
   leq-lower-cut-ℝ :
