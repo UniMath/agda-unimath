@@ -21,8 +21,10 @@ open import foundation.identity-types
 
 ## Idea
 
-The {{#concept "mediant" Disambiguation="integer fractions" Agda=mediant-fraction-ℤ}} of two fractions is the quotient of the sum of the numerators by the
-sum of the denominators.
+The
+{{#concept "mediant" Disambiguation="integer fractions" Agda=mediant-fraction-ℤ}}
+of two fractions is the quotient of the sum of the numerators by the sum of the
+denominators.
 
 ## Definitions
 
