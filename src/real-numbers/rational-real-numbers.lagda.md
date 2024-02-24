@@ -38,7 +38,7 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-The type of rationals `ℚ` embeds into the type of Dedekind reals `ℝ`
+The type of [rationals](elementary-number-theory.rational-numbers.md) `ℚ` [embeds](foundation-core.embeddings.md) into the type of [Dedekind reals](real-numbers.dedekind-real-numbers.md) `ℝ`. We call numbers in the [image](foundation.images.md) of this embedding {{#concept "rational real numbers" Agda=Rational-ℝ}}.
 
 ## Definitions
 
