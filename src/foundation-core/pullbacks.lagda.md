@@ -17,7 +17,6 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-squares-of-maps
@@ -34,6 +33,7 @@ open import foundation-core.sections
 open import foundation-core.standard-pullbacks
 open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.universal-property-pullbacks
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
