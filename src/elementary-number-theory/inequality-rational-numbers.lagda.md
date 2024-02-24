@@ -21,11 +21,13 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -231,7 +233,7 @@ decide-le-leq-ℚ x y =
 
 It remains to fully formalize that strict inequality is decidable.
 
- ### Trichotomy on the rationals
+### Trichotomy on the rationals
 
 ```agda
 trichotomy-le-ℚ :
@@ -283,10 +285,11 @@ module _
 ### The strict order on the rationals is located
 
 ```agda
-located-le-ℚ : (x y z : ℚ) → le-ℚ y z → le-ℚ y x + le-ℚ x z
+located-le-ℚ : (x y z : ℚ) → le-ℚ y z → (le-ℚ-Prop y x) ∨ (le-ℚ-Prop x z)
 located-le-ℚ x y z H =
-  map-coproduct
-    ( id)
-    ( λ p → concatenate-leq-le-ℚ x y z p H)
-    ( decide-le-leq-ℚ y x)
+  unit-trunc-Prop
+    ( map-coproduct
+      ( id)
+      ( λ p → concatenate-leq-le-ℚ x y z p H)
+      ( decide-le-leq-ℚ y x))
 ```

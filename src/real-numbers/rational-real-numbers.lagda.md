@@ -63,7 +63,7 @@ is-dedekind-cut-le-ℚ x =
         ( le-ℚ-Prop x r)
         ( λ q (H , H') → transitive-le-ℚ x q r H' H)))
   , ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H')
-  , ( λ (q r : ℚ) → unit-trunc-Prop ∘ located-le-ℚ x q r)
+  , ( located-le-ℚ x)
   where
     α : (a b : ℚ)
       → ∃ ℚ (λ r → le-ℚ a r × le-ℚ r b)
