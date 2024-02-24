@@ -138,12 +138,14 @@ module _
   is-inhabited-upper-cut-ℝ : exists ℚ upper-cut-ℝ
   is-inhabited-upper-cut-ℝ = pr2 (pr1 is-dedekind-cut-cut-ℝ)
 
-  is-rounded-lower-cut-ℝ : (q : ℚ) →
+  is-rounded-lower-cut-ℝ :
+    (q : ℚ) →
     is-in-lower-cut-ℝ q ↔ ∃ ℚ (λ r → (le-ℚ q r) × (is-in-lower-cut-ℝ r))
   is-rounded-lower-cut-ℝ =
     pr1 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
 
-  is-rounded-upper-cut-ℝ : (r : ℚ) →
+  is-rounded-upper-cut-ℝ :
+    (r : ℚ) →
     is-in-upper-cut-ℝ r ↔ ∃ ℚ (λ q → (le-ℚ q r) × (is-in-upper-cut-ℝ q))
   is-rounded-upper-cut-ℝ =
     pr2 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
@@ -152,9 +154,8 @@ module _
   is-disjoint-cut-ℝ =
     pr1 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
-  is-located-lower-upper-cut-ℝ : (q r : ℚ) →
-    le-ℚ q r →
-    (lower-cut-ℝ q) ∨ (upper-cut-ℝ r)
+  is-located-lower-upper-cut-ℝ :
+    (q r : ℚ) → le-ℚ q r → (lower-cut-ℝ q) ∨ (upper-cut-ℝ r)
   is-located-lower-upper-cut-ℝ =
     pr2 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
@@ -201,7 +202,8 @@ module _
   {l : Level} (x : ℝ l) (p q : ℚ)
   where
 
-  le-lower-cut-ℝ : le-ℚ p q →
+  le-lower-cut-ℝ :
+    le-ℚ p q →
     is-in-lower-cut-ℝ x q →
     is-in-lower-cut-ℝ x p
   le-lower-cut-ℝ H H' =
@@ -212,7 +214,8 @@ module _
           ( λ I → ex-falso (is-disjoint-cut-ℝ x q ( H' , I))))
       ( is-located-lower-upper-cut-ℝ x p q H)
 
-  leq-lower-cut-ℝ : leq-ℚ p q →
+  leq-lower-cut-ℝ :
+    leq-ℚ p q →
     is-in-lower-cut-ℝ x q →
     is-in-lower-cut-ℝ x p
   leq-lower-cut-ℝ H H' =
@@ -225,7 +228,8 @@ module _
           ( H'))
       ( decide-le-leq-ℚ p q)
 
-  le-upper-cut-ℝ : le-ℚ p q →
+  le-upper-cut-ℝ :
+    le-ℚ p q →
     is-in-upper-cut-ℝ x p →
     is-in-upper-cut-ℝ x q
   le-upper-cut-ℝ H H' =
@@ -407,8 +411,7 @@ module _
   where
 
   subset-lower-cut-upper-cut-ℝ :
-    upper-cut-ℝ y ⊆ upper-cut-ℝ x
-    → lower-cut-ℝ x ⊆ lower-cut-ℝ y
+    upper-cut-ℝ y ⊆ upper-cut-ℝ x → lower-cut-ℝ x ⊆ lower-cut-ℝ y
   subset-lower-cut-upper-cut-ℝ H =
     binary-tr
       ( _⊆_)
@@ -421,8 +424,7 @@ module _
           ( λ q → intro-∃ q ∘ tot (λ _ K → K ∘ H q)))
 
   subset-upper-cut-lower-cut-ℝ :
-    lower-cut-ℝ x ⊆ lower-cut-ℝ y
-    → upper-cut-ℝ y ⊆ upper-cut-ℝ x
+    lower-cut-ℝ x ⊆ lower-cut-ℝ y → upper-cut-ℝ y ⊆ upper-cut-ℝ x
   subset-upper-cut-lower-cut-ℝ H =
     binary-tr
       ( _⊆_)
@@ -438,10 +440,9 @@ module _
   {l : Level} (x y : ℝ l)
   where
 
-  eq-lower-cut-upper-cut-ℝ :
-    upper-cut-ℝ x ＝ upper-cut-ℝ y
-    → lower-cut-ℝ x ＝ lower-cut-ℝ y
-  eq-lower-cut-upper-cut-ℝ H =
+  eq-lower-cut-eq-upper-cut-ℝ :
+    upper-cut-ℝ x ＝ upper-cut-ℝ y → lower-cut-ℝ x ＝ lower-cut-ℝ y
+  eq-lower-cut-eq-upper-cut-ℝ H =
     antisymmetric-leq-subtype
       ( lower-cut-ℝ x)
       ( lower-cut-ℝ y)
@@ -456,10 +457,9 @@ module _
           ( upper-cut-ℝ y)
           ( H)))
 
-  eq-upper-cut-lower-cut-ℝ :
-    lower-cut-ℝ x ＝ lower-cut-ℝ y
-    → upper-cut-ℝ x ＝ upper-cut-ℝ y
-  eq-upper-cut-lower-cut-ℝ H =
+  eq-upper-cut-eq-lower-cut-ℝ :
+    lower-cut-ℝ x ＝ lower-cut-ℝ y → upper-cut-ℝ x ＝ upper-cut-ℝ y
+  eq-upper-cut-eq-lower-cut-ℝ H =
     antisymmetric-leq-subtype
       ( upper-cut-ℝ x)
       ( upper-cut-ℝ y)
@@ -490,7 +490,7 @@ module _
         ( λ U U' →
           eq-type-subtype
             ( is-dedekind-cut-Prop L)
-            ( eq-upper-cut-lower-cut-ℝ
+            ( eq-upper-cut-eq-lower-cut-ℝ
               ( pair L U)
               ( pair L U')
               ( refl))))
@@ -512,7 +512,7 @@ module _
 
   eq-ℝ-eq-upper-cut-ℝ : upper-cut-ℝ x ＝ upper-cut-ℝ y → x ＝ y
   eq-ℝ-eq-upper-cut-ℝ =
-    eq-ℝ-eq-lower-cut-ℝ ∘ (eq-lower-cut-upper-cut-ℝ x y)
+    eq-ℝ-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
 ```
 
 ## References
