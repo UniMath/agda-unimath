@@ -195,7 +195,7 @@ pr2 (ℝ-Set l) = is-set-ℝ l
 
 ## Properties of lower/upper Dedekind cuts
 
-Lower and upper Dedekind cuts are stable under `le-ℚ` and `leq-ℚ`
+### Lower and upper Dedekind cuts are closed under the standard ordering on the rationals
 
 ```agda
 module _
