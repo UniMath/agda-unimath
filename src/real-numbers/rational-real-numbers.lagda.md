@@ -93,7 +93,7 @@ real-rational x =
     ( is-dedekind-cut-le-ℚ x)
 ```
 
-### The rational real property
+### The property of being a rational real number
 
 ```agda
 module _
