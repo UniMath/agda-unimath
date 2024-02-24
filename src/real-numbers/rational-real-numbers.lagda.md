@@ -38,7 +38,11 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-The type of [rationals](elementary-number-theory.rational-numbers.md) `ℚ` [embeds](foundation-core.embeddings.md) into the type of [Dedekind reals](real-numbers.dedekind-real-numbers.md) `ℝ`. We call numbers in the [image](foundation.images.md) of this embedding {{#concept "rational real numbers" Agda=Rational-ℝ}}.
+The type of [rationals](elementary-number-theory.rational-numbers.md) `ℚ`
+[embeds](foundation-core.embeddings.md) into the type of
+[Dedekind reals](real-numbers.dedekind-real-numbers.md) `ℝ`. We call numbers in
+the [image](foundation.images.md) of this embedding
+{{#concept "rational real numbers" Agda=Rational-ℝ}}.
 
 ## Definitions
 
@@ -51,23 +55,26 @@ is-dedekind-cut-le-ℚ :
     (λ (q : ℚ) → le-ℚ-Prop q x)
     (λ (r : ℚ) → le-ℚ-Prop x r)
 is-dedekind-cut-le-ℚ x =
-  ( left-∃-le-ℚ x , right-∃-le-ℚ x)
-  , ( ( λ (q : ℚ) → dense-le-ℚ q x
-      , elim-exists-Prop
+  ( left-∃-le-ℚ x , right-∃-le-ℚ x) ,
+  ( ( λ (q : ℚ) →
+      dense-le-ℚ q x ,
+      elim-exists-Prop
         ( λ r → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop r x))
         ( le-ℚ-Prop q x)
-        ( λ r (H , H') → transitive-le-ℚ q r x H H'))
-    , ( λ (r : ℚ) → α x r ∘ dense-le-ℚ x r
-      , elim-exists-Prop
+        ( λ r (H , H') → transitive-le-ℚ q r x H H')) ,
+    ( λ (r : ℚ) →
+      α x r ∘ dense-le-ℚ x r ,
+      elim-exists-Prop
         ( λ q → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop x q))
         ( le-ℚ-Prop x r)
-        ( λ q (H , H') → transitive-le-ℚ x q r H' H)))
-  , ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H')
-  , ( located-le-ℚ x)
+        ( λ q (H , H') → transitive-le-ℚ x q r H' H))) ,
+  ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
+  ( located-le-ℚ x)
   where
-    α : (a b : ℚ)
-      → ∃ ℚ (λ r → le-ℚ a r × le-ℚ r b)
-      → ∃ ℚ (λ r → le-ℚ r b × le-ℚ a r)
+    α :
+      (a b : ℚ) →
+      ∃ ℚ (λ r → le-ℚ a r × le-ℚ r b) →
+      ∃ ℚ (λ r → le-ℚ r b × le-ℚ a r)
     α a b =
       elim-exists-Prop
         ( ( λ r →
@@ -175,18 +182,18 @@ module _
 
 ## Properties
 
-### Real rationals are rationals and rational reals are real rationals
+### The real embedding of a rational number is rational
 
 ```agda
 is-rational-real-rational : (p : ℚ) → is-rational-ℝ (real-rational p) p
-is-rational-real-rational p =
-  pair
-    ( irreflexive-le-ℚ p)
-    ( irreflexive-le-ℚ p)
+is-rational-real-rational p = irreflexive-le-ℚ p , irreflexive-le-ℚ p
+```
 
+### Rational real numbers are embedded rationals
+
+```agda
 eq-real-rational-is-rational-ℝ :
-  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) →
-  real-rational q ＝ x
+  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-rational q ＝ x
 eq-real-rational-is-rational-ℝ x q H =
   eq-eq-lower-cut-ℝ
     ( real-rational q)
