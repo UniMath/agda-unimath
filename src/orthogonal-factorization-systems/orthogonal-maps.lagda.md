@@ -719,7 +719,7 @@ module _
       ( up-product)
       ( up-product)
       ( up-product)
-      ( is-pullback-product-is-pullback-pair
+      ( is-pullback-product-is-pullback
         ( precomp f Y)
         ( postcomp A g)
         ( precomp f Y')
@@ -904,7 +904,7 @@ module _
       ( universal-property-coproduct Y)
       ( universal-property-coproduct X)
       ( universal-property-coproduct Y)
-      ( is-pullback-product-is-pullback-pair
+      ( is-pullback-product-is-pullback
         ( precomp f Y)
         ( postcomp A g)
         ( precomp f' Y)

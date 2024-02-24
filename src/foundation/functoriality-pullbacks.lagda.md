@@ -16,6 +16,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
+open import foundation-core.standard-pullbacks
 ```
 
 </details>

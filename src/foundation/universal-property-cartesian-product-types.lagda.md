@@ -20,6 +20,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
+open import foundation-core.standard-pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 

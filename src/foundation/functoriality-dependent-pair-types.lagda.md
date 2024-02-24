@@ -29,6 +29,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.pullbacks
+open import foundation-core.standard-pullbacks
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types

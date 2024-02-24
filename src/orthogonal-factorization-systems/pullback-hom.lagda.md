@@ -29,6 +29,7 @@ open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.retractions
 open import foundation.sections
+open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks

@@ -21,6 +21,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.pullbacks
+open import foundation-core.standard-pullbacks
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

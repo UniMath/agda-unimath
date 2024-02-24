@@ -8,6 +8,7 @@ module foundation.functoriality-coproduct-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospan-diagrams
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -88,7 +89,7 @@ module _
   preserves-comp-map-coproduct :
     map-coproduct (f' ∘ f) (g' ∘ g) ~ map-coproduct f' g' ∘ map-coproduct f g
   preserves-comp-map-coproduct (inl x) = refl
-  preserves-comp-map-coproduct (inr y) = refl
+  preserves-comp-map-coproduct (inr x) = refl
 ```
 
 ### Functoriality of coproducts preserves homotopies
@@ -537,6 +538,27 @@ module _
       map-inv-mutually-exclusive-coproduct
       is-retraction-map-inv-mutually-exclusive-coproduct
       is-section-map-inv-mutually-exclusive-coproduct
+```
+
+### Coproduct cones
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
+  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
+  where
+
+  coproduct-cone :
+    cone f g C → cone f' g' C' →
+    cone (map-coproduct f f') (map-coproduct g g') (C + C')
+  pr1 (coproduct-cone (p , q , H) (p' , q' , H')) = map-coproduct p p'
+  pr1 (pr2 (coproduct-cone (p , q , H) (p' , q' , H'))) = map-coproduct q q'
+  pr2 (pr2 (coproduct-cone (p , q , H) (p' , q' , H'))) =
+    ( inv-htpy (preserves-comp-map-coproduct p f p' f')) ∙h
+    ( htpy-map-coproduct H H') ∙h
+    ( preserves-comp-map-coproduct q g q' g')
 ```
 
 ## See also

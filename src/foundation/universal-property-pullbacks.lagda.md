@@ -13,6 +13,8 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
@@ -30,21 +32,21 @@ The {{#concept "universal property of pullbacks" Disambiguation="types"}}
 describes the optimal way to complete a diagram of the form
 
 ```text
-         B
-         |
-         |
-         V
-A -----> X
+          B
+          |
+          |
+          V
+  A -----> X
 ```
 
 to a square
 
 ```text
-C -----> B
-| ⌟      |
-|        |
-V        V
-A -----> X
+  C -----> B
+  | ⌟      |
+  |        |
+  V        V
+  A -----> X.
 ```
 
 ## Properties
@@ -260,7 +262,7 @@ module _
       ( map-product f f')
       ( map-product g g')
       ( product-cone f g f' g' c c')
-      ( is-pullback-product-is-pullback-pair f g f' g' c c'
+      ( is-pullback-product-is-pullback f g f' g' c c'
         ( is-pullback-universal-property-pullback f g c H)
         ( is-pullback-universal-property-pullback f' g' c' H'))
 ```
