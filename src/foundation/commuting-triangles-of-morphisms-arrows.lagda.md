@@ -42,8 +42,8 @@ by asking for a homotopy
 ```
 
 This is [equivalent](foundation-core.equivalences.md) to asking for a
-[commuting prism of maps](foundation-core.commuting-prism-of-maps.md), given the
-square faces in the diagram
+[commuting prism of maps](foundation-core.commuting-prisms-of-maps.md), given
+the square faces in the diagram
 
 ```text
         f
