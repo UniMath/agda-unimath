@@ -17,10 +17,12 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies-morphisms-arrows
 open import foundation.identity-types
 open import foundation.morphisms-arrows
-open import foundation.pullbacks
 open import foundation.postcomposition-functions
+open import foundation.pullbacks
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -28,7 +30,6 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation.functoriality-dependent-pair-types
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -134,7 +135,172 @@ module _
       ( is-cartesian-cartesian-hom-arrow)
 ```
 
-## Operations
+## Properties
+
+### Cartesian morphisms of arrows arising from fibers
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
+  where
+
+  fiber-cartesian-hom-arrow :
+    cartesian-hom-arrow (terminal-map (fiber f y)) f
+  pr1 fiber-cartesian-hom-arrow =
+    hom-arrow-cone (point y) f (swap-cone f (point y) (cone-fiber f y))
+  pr2 fiber-cartesian-hom-arrow =
+    is-pullback-swap-cone f (point y)
+      ( cone-fiber f y)
+      ( is-pullback-cone-fiber f y)
+```
+
+### Transposing cartesian morphisms of arrows
+
+The {{#concept "transposition" Disambiguation="cartesian morphism of arrows"}}
+of a cartesian morphism of arrows
+
+```text
+        i
+    A -----> X
+    | ⌟      |
+  f |        | g
+    V        V
+    B -----> Y
+        j
+```
+
+is the cartesian morphism of arrows
+
+```text
+        f
+    A -----> B
+    | ⌟      |
+  i |        | j
+    V        V
+    X -----> Y.
+        g
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : cartesian-hom-arrow f g)
+  where
+
+  is-cartesian-transpose-cartesian-hom-arrow :
+    is-cartesian-hom-arrow
+      ( map-domain-cartesian-hom-arrow f g α)
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( transpose-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α))
+  is-cartesian-transpose-cartesian-hom-arrow =
+    is-pullback-swap-cone
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( g)
+      ( cone-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+
+  transpose-cartesian-hom-arrow :
+    cartesian-hom-arrow
+      ( map-domain-cartesian-hom-arrow f g α)
+      ( map-codomain-cartesian-hom-arrow f g α)
+  transpose-cartesian-hom-arrow =
+    ( transpose-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α) ,
+      is-cartesian-transpose-cartesian-hom-arrow)
+```
+
+### If the target of a cartesian morphism is an equivalence then so is the source
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : cartesian-hom-arrow f g)
+  where
+
+  is-equiv-source-is-equiv-target-cartesian-hom-arrow : is-equiv g → is-equiv f
+  is-equiv-source-is-equiv-target-cartesian-hom-arrow G =
+    is-equiv-vertical-map-is-pullback
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( g)
+      ( cone-cartesian-hom-arrow f g α)
+      ( G)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+```
+
+### If the target and source of a morphism of arrows are equivalences then the morphism is cartesian
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  is-cartesian-hom-arrow-is-equiv-source-is-equiv-target :
+    is-equiv g → is-equiv f → is-cartesian-hom-arrow f g α
+  is-cartesian-hom-arrow-is-equiv-source-is-equiv-target =
+    is-pullback-is-equiv-vertical-maps
+      ( map-codomain-hom-arrow f g α)
+      ( g)
+      ( cone-hom-arrow f g α)
+```
+
+### Cartesian morphisms of arrows are preserved under homotopies of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  abstract
+    is-cartesian-hom-arrow-htpy :
+      {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g')
+      (α : hom-arrow f g) →
+      is-cartesian-hom-arrow f g α →
+      is-cartesian-hom-arrow f' g' (hom-arrow-htpy F' G α)
+    is-cartesian-hom-arrow-htpy {f} F' {g} G α =
+      is-pullback-htpy
+        ( refl-htpy)
+        ( inv-htpy G)
+        ( cone-hom-arrow f g α)
+        ( ( F') ,
+          ( refl-htpy) ,
+          ( ( assoc-htpy
+              ( map-codomain-hom-arrow f g α ·l F' ∙h coh-hom-arrow f g α)
+              ( G ·r map-domain-hom-arrow f g α)
+              ( inv-htpy (G ·r map-domain-hom-arrow f g α))) ∙h
+            ( ap-concat-htpy
+              ( map-codomain-hom-arrow f g α ·l F' ∙h coh-hom-arrow f g α)
+              ( right-inv-htpy G ·r map-domain-hom-arrow f g α)) ∙h
+            ( right-unit-htpy) ∙h
+            ( ap-concat-htpy' (coh-hom-arrow f g α) inv-htpy-right-unit-htpy)))
+
+  cartesian-hom-arrow-htpy :
+    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+    cartesian-hom-arrow f g → cartesian-hom-arrow f' g'
+  cartesian-hom-arrow-htpy F' G (α , H) =
+    ( hom-arrow-htpy F' G α , is-cartesian-hom-arrow-htpy F' G α H)
+```
+
+### Cartesian morphisms of arrows are preserved under homotopies of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  abstract
+    is-cartesian-hom-arrow-htpy-hom-arrow :
+      (α β : hom-arrow f g)
+      (H : htpy-hom-arrow f g β α) →
+      is-cartesian-hom-arrow f g α →
+      is-cartesian-hom-arrow f g β
+    is-cartesian-hom-arrow-htpy-hom-arrow α β H =
+      is-pullback-htpy
+        ( htpy-codomain-htpy-hom-arrow f g β α H)
+        ( refl-htpy)
+        ( cone-hom-arrow f g α)
+        ( htpy-parallell-cone-htpy-hom-arrow f g β α H)
+```
 
 ### The identity cartesian morphism of arrows
 
@@ -214,150 +380,66 @@ module _
       ( cone-hom-arrow f g a)
 ```
 
-### Cartesian morphisms of arrows arising from fibers
+### The left morphism in a commuting triangle of morphisms of arrows is cartesian if the other two are
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
-  where
-
-  fiber-cartesian-hom-arrow :
-    cartesian-hom-arrow (terminal-map (fiber f y)) f
-  pr1 fiber-cartesian-hom-arrow =
-    hom-arrow-cone (point y) f (swap-cone f (point y) (cone-fiber f y))
-  pr2 fiber-cartesian-hom-arrow =
-    is-pullback-swap-cone f (point y)
-      ( cone-fiber f y)
-      ( is-pullback-cone-fiber f y)
-```
-
-### Transposing cartesian morphisms of arrows
-
-The {{#concept "transposition" Disambiguation="cartesian morphism of arrows"}}
-of a cartesian morphism of arrows
-
-```text
-        i
-    A -----> X
-    | ⌟      |
-  f |        | g
-    V        V
-    B -----> Y
-        j
-```
-
-is the cartesian morphism of arrows
-
-```text
-        f
-    A -----> B
-    | ⌟      |
-  i |        | j
-    V        V
-    X -----> Y.
-        g
-```
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : cartesian-hom-arrow f g)
-  where
-
-  is-cartesian-transpose-cartesian-hom-arrow :
-    is-cartesian-hom-arrow
-      ( map-domain-cartesian-hom-arrow f g α)
-      ( map-codomain-cartesian-hom-arrow f g α)
-      ( transpose-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α))
-  is-cartesian-transpose-cartesian-hom-arrow =
-    is-pullback-swap-cone
-      ( map-codomain-cartesian-hom-arrow f g α)
-      ( g)
-      ( cone-cartesian-hom-arrow f g α)
-      ( is-cartesian-cartesian-hom-arrow f g α)
-
-  transpose-cartesian-hom-arrow :
-    cartesian-hom-arrow
-      ( map-domain-cartesian-hom-arrow f g α)
-      ( map-codomain-cartesian-hom-arrow f g α)
-  transpose-cartesian-hom-arrow =
-    ( transpose-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α) ,
-      is-cartesian-transpose-cartesian-hom-arrow)
-```
-
-## Properties
-
-### Cartesian morphisms of arrows are preserved under homotopies
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V)
+  (top : hom-arrow f g) (left : hom-arrow f h) (right : hom-arrow g h)
+  (H : coherence-triangle-hom-arrow f g h top left right)
   where
 
   abstract
-    is-cartesian-cartesian-hom-arrow-htpy :
-      {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g')
-      (α : hom-arrow f g) →
-      is-cartesian-hom-arrow f g α →
-      is-cartesian-hom-arrow f' g' (hom-arrow-htpy F' G α)
-    is-cartesian-cartesian-hom-arrow-htpy {f} F' {g} G α =
-      is-pullback-htpy
-        ( refl-htpy)
-        ( inv-htpy G)
-        ( cone-hom-arrow f g α)
-        ( ( F') ,
-          ( refl-htpy) ,
-          ( ( assoc-htpy
-              ( map-codomain-hom-arrow f g α ·l F' ∙h coh-hom-arrow f g α)
-              ( G ·r map-domain-hom-arrow f g α)
-              ( inv-htpy (G ·r map-domain-hom-arrow f g α))) ∙h
-            ( ap-concat-htpy
-              ( map-codomain-hom-arrow f g α ·l F' ∙h coh-hom-arrow f g α)
-              ( right-inv-htpy G ·r map-domain-hom-arrow f g α)) ∙h
-            ( right-unit-htpy) ∙h
-            ( ap-concat-htpy' (coh-hom-arrow f g α) inv-htpy-right-unit-htpy)))
-
-  cartesian-hom-arrow-htpy :
-    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
-    cartesian-hom-arrow f g → cartesian-hom-arrow f' g'
-  cartesian-hom-arrow-htpy F' G (α , H) =
-    ( hom-arrow-htpy F' G α , is-cartesian-cartesian-hom-arrow-htpy F' G α H)
+    is-cartesian-left-hom-arrow-triangle :
+      is-cartesian-hom-arrow g h right →
+      is-cartesian-hom-arrow f g top →
+      is-cartesian-hom-arrow f h left
+    is-cartesian-left-hom-arrow-triangle R T =
+      is-cartesian-hom-arrow-htpy-hom-arrow f h
+        ( comp-hom-arrow f g h right top)
+        ( left)
+        ( H)
+        ( is-cartesian-comp-hom-arrow f g h right top R T)
 ```
 
-### If the target of a cartesian morphism is an equivalence then so is the source
+### The top morphism in a commuting triangle of morphisms of arrows is cartesian if the other two are
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : cartesian-hom-arrow f g)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V)
+  (top : hom-arrow f g) (left : hom-arrow f h) (right : hom-arrow g h)
   where
 
-  is-equiv-source-is-equiv-target-cartesian-hom-arrow : is-equiv g → is-equiv f
-  is-equiv-source-is-equiv-target-cartesian-hom-arrow G =
-    is-equiv-vertical-map-is-pullback
-      ( map-codomain-cartesian-hom-arrow f g α)
-      ( g)
-      ( cone-cartesian-hom-arrow f g α)
-      ( G)
-      ( is-cartesian-cartesian-hom-arrow f g α)
+  abstract
+    is-cartesian-top-hom-arrow-triangle' :
+      (H : coherence-triangle-hom-arrow' f g h top left right) →
+      is-cartesian-hom-arrow g h right →
+      is-cartesian-hom-arrow f h left →
+      is-cartesian-hom-arrow f g top
+    is-cartesian-top-hom-arrow-triangle' H R L =
+      is-cartesian-right-factor-hom-arrow f g h right top R
+        ( is-cartesian-hom-arrow-htpy-hom-arrow f h
+          ( left)
+          ( comp-hom-arrow f g h right top)
+          ( H)
+          ( L))
+
+  abstract
+    is-cartesian-top-hom-arrow-triangle :
+      (H : coherence-triangle-hom-arrow f g h top left right) →
+      is-cartesian-hom-arrow g h right →
+      is-cartesian-hom-arrow f h left →
+      is-cartesian-hom-arrow f g top
+    is-cartesian-top-hom-arrow-triangle H =
+      is-cartesian-top-hom-arrow-triangle'
+        ( inv-htpy-hom-arrow f h left (comp-hom-arrow f g h right top) H)
 ```
 
-### If the target and source of a morphism of arrows are equivalences then the morphism is cartesian
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
-  where
-
-  is-cartesian-hom-arrow-is-equiv-source-is-equiv-target :
-    is-equiv g → is-equiv f → is-cartesian-hom-arrow f g α
-  is-cartesian-hom-arrow-is-equiv-source-is-equiv-target =
-    is-pullback-is-equiv-vertical-maps
-      ( map-codomain-hom-arrow f g α)
-      ( g)
-      ( cone-hom-arrow f g α)
-```
+### The top morphism in a commuting triangle of morphisms of arrows is cartesian of the other two are
 
 ### Dependent products of cartesian morphisms of arrows
 
@@ -561,6 +643,8 @@ is cartesian if and only if either of the folded morphisms
 ```
 
 is.
+
+It remains to formalize the right-hand version.
 
 ```agda
 module _

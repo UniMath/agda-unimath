@@ -423,6 +423,41 @@ module _
   eq-htpy-hom-arrow β = map-inv-equiv (extensionality-hom-arrow β)
 ```
 
+### Homotopies of morphisms of arrows give homotopies of their associated cones
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+      (α β : hom-arrow f g)
+  where
+
+  coh-htpy-parallell-cone-htpy-hom-arrow :
+    (H : htpy-hom-arrow f g α β) →
+    coherence-htpy-parallel-cone
+      ( htpy-codomain-htpy-hom-arrow f g α β H)
+      ( refl-htpy' g)
+      ( cone-hom-arrow f g α)
+      ( cone-hom-arrow f g β)
+      ( refl-htpy)
+      ( htpy-domain-htpy-hom-arrow f g α β H)
+  coh-htpy-parallell-cone-htpy-hom-arrow H =
+    ( ap-concat-htpy (coh-hom-arrow f g α) right-unit-htpy) ∙h
+    ( coh-htpy-hom-arrow f g α β H)
+
+  htpy-parallell-cone-htpy-hom-arrow :
+    (H : htpy-hom-arrow f g α β) →
+    htpy-parallel-cone
+      ( htpy-codomain-htpy-hom-arrow f g α β H)
+      ( refl-htpy' g)
+      ( cone-hom-arrow f g α)
+      ( cone-hom-arrow f g β)
+  htpy-parallell-cone-htpy-hom-arrow H =
+    ( refl-htpy ,
+      htpy-domain-htpy-hom-arrow f g α β H ,
+      coh-htpy-parallell-cone-htpy-hom-arrow H)
+```
+
 ### Associativity of composition of morphisms of arrows
 
 Consider a commuting diagram of the form
