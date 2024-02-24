@@ -53,18 +53,17 @@ Given a [cospan of types](foundation.cospans.md)
 
 we want to pose the question of whether a certain
 [cone](foundation.cones-over-cospan-diagrams.md) over it is a
-{{#concept "pullback cone" Disambiguation="types" Agda=is-pullback}}. This is
-concept is captured by
+{{#concept "pullback cone" Disambiguation="types" Agda=is-pullback}}. Although
+this concept is captured by
 [the universal property of the pullback](foundation-core.universal-property-pullbacks.md),
-however, the universal property is a large proposition so it is not suitable for
-all purposes.
+this is a large proposition, which is not suitable for all purposes.
 
-As an alternative, given the existence of the
+Therefore, as our main definition of a pullback cone we consider
+{{#concept "the small predicate of being a pullback" Agda=is-pullback}}: given
+the existence of the
 [standard pullback type](foundation-core.standard-pullbacks.md) `A ×_X B`, we
-can characterize pullback cones as those for which the gap map from the standard
-pullback is an [equivalence](foundation-core.equivalences.md). This predicate is
-a small [proposition](foundation-core.propositions.md) that we dub
-{{#concept "the small predicate of being a pullback" Agda=is-pullback}}.
+can characterize pullback cones as those for which the gap map into the standard
+pullback is an [equivalence](foundation-core.equivalences.md).
 
 ## Properties
 
