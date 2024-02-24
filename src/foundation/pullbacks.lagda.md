@@ -51,31 +51,20 @@ Given a [cospan of types](foundation.cospans.md)
   f : A → X ← B : g,
 ```
 
-we can form the
-{{#concept "standard pullback" Disambiguation="types" Agda=standard-pullback}}
-`A ×_X B` satisfying
-[the universal property of the pullback](foundation-core.universal-property-pullbacks.md)
-of the cospan, completing the diagram
+we want to pose the question of whether a certain
+[cone](foundation.cones-over-cospan-diagrams.md) over it is a
+{{#concept "pullback cone" Disambiguation="types" Agda=is-pullback}}. This is
+concept is captured by
+[the universal property of the pullback](foundation-core.universal-property-pullbacks.md),
+however, the universal property is a large proposition so it is not suitable for
+all purposes.
 
-```text
-  A ×_X B ------> B
-     | ⌟          |
-     |            | g
-     |            |
-     v            v
-     A ---------> X.
-           f
-```
-
-The standard pullback consists of [pairs](foundation.dependent-pair-types.md)
-`a : A` and `b : B` such that `f a ＝ g b` agree
-
-```text
-  A ×_X B := Σ (a : A) (b : B), (f a ＝ g b),
-```
-
-thus the standard [cone](foundation.cones-over-cospan-diagrams.md) consists of
-the canonical projections.
+As an alternative, given the existence of the
+[standard pullback type](foundation-core.standard-pullbacks.md) `A ×_X B`, we
+can characterize pullback cones as those for which the gap map from the standard
+pullback is an [equivalence](foundation-core.equivalences.md). This predicate is
+a small [proposition](foundation-core.propositions.md) that we dub
+{{#concept "the small predicate of being a pullback" Agda=is-pullback}}.
 
 ## Properties
 
