@@ -254,7 +254,7 @@ module _
       ( decide-le-leq-ℚ p q)
 ```
 
-Elements of the lower/upper cut are lower/upper bounds of the upper/upper cut
+### Elements of the lower cut are lower bounds of the upper cut
 
 ```agda
 module _
@@ -277,8 +277,7 @@ module _
 
 ### Characterisation of each cut by the other
 
-The lower cut is the subtype of rationals bounded above by some element of the
-complement of the upper cut.
+#### The lower cut is the subtype of rationals bounded above by some element of the complement of the upper cut
 
 ```agda
 module _
@@ -340,8 +339,7 @@ module _
       subset-lower-complement-upper-cut-lower-cut-ℝ
 ```
 
-The upper cut is the subtype of rationals bounded below by some element of the
-complement of the lower cut.
+#### The upper cut is the subtype of rationals bounded below by some element of the complement of the lower cut
 
 ```agda
 module _
