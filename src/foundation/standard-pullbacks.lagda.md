@@ -10,41 +10,25 @@ open import foundation-core.standard-pullbacks public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-cubes-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.descent-equivalences
 open import foundation.equality-coproduct-types
 open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-function-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.multivariable-homotopies
-open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.constant-maps
-open import foundation-core.contractible-types
-open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.postcomposition-functions
-open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.torsorial-type-families
-open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -116,28 +100,28 @@ then the exponentiated square given by postcomposition
 is a pullback square for any type `S`.
 
 ```agda
-map-standard-pullback-postcomp :
+map-postcomp-cone-standard-pullback :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   (T : UU l4) → standard-pullback (postcomp T f) (postcomp T g) → cone f g T
-map-standard-pullback-postcomp f g T = tot (λ _ → tot (λ _ → htpy-eq))
+map-postcomp-cone-standard-pullback f g T = tot (λ _ → tot (λ _ → htpy-eq))
 
 abstract
-  is-equiv-map-standard-pullback-postcomp :
+  is-equiv-map-postcomp-cone-standard-pullback :
     {l1 l2 l3 l4 : Level}
     {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-    (T : UU l4) → is-equiv (map-standard-pullback-postcomp f g T)
-  is-equiv-map-standard-pullback-postcomp f g T =
+    (T : UU l4) → is-equiv (map-postcomp-cone-standard-pullback f g T)
+  is-equiv-map-postcomp-cone-standard-pullback f g T =
     is-equiv-tot-is-fiberwise-equiv
       ( λ p → is-equiv-tot-is-fiberwise-equiv (λ q → funext (f ∘ p) (g ∘ q)))
 
-triangle-map-standard-pullback-postcomp :
+triangle-map-postcomp-cone-standard-pullback :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
   cone-map f g c {T} ~
-  map-standard-pullback-postcomp f g T ∘
+  map-postcomp-cone-standard-pullback f g T ∘
   gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
-triangle-map-standard-pullback-postcomp T f g c h =
+triangle-map-postcomp-cone-standard-pullback T f g c h =
   eq-pair-eq-fiber
     ( eq-pair-eq-fiber
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))

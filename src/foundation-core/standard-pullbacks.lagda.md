@@ -12,7 +12,6 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
@@ -23,8 +22,6 @@ open import foundation-core.commuting-squares-of-maps
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.families-of-equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -378,24 +375,30 @@ module _
   pr1 (pr2 (fold-cone c)) = g ∘ horizontal-map-cone f g c
   pr2 (pr2 (fold-cone c)) z = eq-pair (coherence-square-cone f g c z) refl
 
-  map-fold-cone :
+  map-fold-cone-standard-pullback :
     standard-pullback f g → standard-pullback (map-product f g) (diagonal X)
-  pr1 (pr1 (map-fold-cone x)) = vertical-map-standard-pullback x
-  pr2 (pr1 (map-fold-cone x)) = horizontal-map-standard-pullback x
-  pr1 (pr2 (map-fold-cone x)) = g (horizontal-map-standard-pullback x)
-  pr2 (pr2 (map-fold-cone x)) =
+  pr1 (pr1 (map-fold-cone-standard-pullback x)) =
+    vertical-map-standard-pullback x
+  pr2 (pr1 (map-fold-cone-standard-pullback x)) =
+    horizontal-map-standard-pullback x
+  pr1 (pr2 (map-fold-cone-standard-pullback x)) =
+    g (horizontal-map-standard-pullback x)
+  pr2 (pr2 (map-fold-cone-standard-pullback x)) =
     eq-pair (coherence-square-standard-pullback x) refl
 
-  inv-map-fold-cone :
+  map-inv-fold-cone-standard-pullback :
     standard-pullback (map-product f g) (diagonal X) → standard-pullback f g
-  pr1 (inv-map-fold-cone ((a , b) , x , α)) = a
-  pr1 (pr2 (inv-map-fold-cone ((a , b) , x , α))) = b
-  pr2 (pr2 (inv-map-fold-cone ((a , b) , x , α))) = ap pr1 α ∙ inv (ap pr2 α)
+  pr1 (map-inv-fold-cone-standard-pullback ((a , b) , x , α)) = a
+  pr1 (pr2 (map-inv-fold-cone-standard-pullback ((a , b) , x , α))) = b
+  pr2 (pr2 (map-inv-fold-cone-standard-pullback ((a , b) , x , α))) =
+    ap pr1 α ∙ inv (ap pr2 α)
 
   abstract
-    is-section-inv-map-fold-cone :
-      is-section (map-fold-cone) (inv-map-fold-cone)
-    is-section-inv-map-fold-cone ((a , b) , (x , α)) =
+    is-section-map-inv-fold-cone-standard-pullback :
+      is-section
+        ( map-fold-cone-standard-pullback)
+        ( map-inv-fold-cone-standard-pullback)
+    is-section-map-inv-fold-cone-standard-pullback ((a , b) , (x , α)) =
       map-extensionality-standard-pullback
         ( map-product f g)
         ( diagonal X)
@@ -420,9 +423,11 @@ module _
             ( inv (ap-diagonal (ap pr2 α)))))
 
   abstract
-    is-retraction-inv-map-fold-cone :
-      is-retraction (map-fold-cone) (inv-map-fold-cone)
-    is-retraction-inv-map-fold-cone (a , b , p) =
+    is-retraction-map-inv-fold-cone-standard-pullback :
+      is-retraction
+        ( map-fold-cone-standard-pullback)
+        ( map-inv-fold-cone-standard-pullback)
+    is-retraction-map-inv-fold-cone-standard-pullback (a , b , p) =
       map-extensionality-standard-pullback f g
         ( refl)
         ( refl)
@@ -437,18 +442,19 @@ module _
             ( right-unit)))
 
   abstract
-    is-equiv-map-fold-cone : is-equiv map-fold-cone
-    is-equiv-map-fold-cone =
+    is-equiv-map-fold-cone-standard-pullback :
+      is-equiv map-fold-cone-standard-pullback
+    is-equiv-map-fold-cone-standard-pullback =
       is-equiv-is-invertible
-        ( inv-map-fold-cone)
-        ( is-section-inv-map-fold-cone)
-        ( is-retraction-inv-map-fold-cone)
+        ( map-inv-fold-cone-standard-pullback)
+        ( is-section-map-inv-fold-cone-standard-pullback)
+        ( is-retraction-map-inv-fold-cone-standard-pullback)
 
-  triangle-map-fold-cone :
+  triangle-map-fold-cone-standard-pullback :
     {l4 : Level} {C : UU l4} (c : cone f g C) →
     gap (map-product f g) (diagonal X) (fold-cone c) ~
-    map-fold-cone ∘ gap f g c
-  triangle-map-fold-cone c = refl-htpy
+    map-fold-cone-standard-pullback ∘ gap f g c
+  triangle-map-fold-cone-standard-pullback c = refl-htpy
 ```
 
 ### Products of standard pullbacks are pullbacks
@@ -461,10 +467,10 @@ module _
   (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
   where
 
-  map-product-cone :
+  map-product-cone-standard-pullback :
     (standard-pullback f g) × (standard-pullback f' g') →
     standard-pullback (map-product f f') (map-product g g')
-  map-product-cone =
+  map-product-cone-standard-pullback =
     ( tot
       ( λ t →
         ( tot (λ s → eq-pair')) ∘
@@ -472,8 +478,9 @@ module _
     ( map-interchange-Σ-Σ (λ x t x' → Σ B' (λ y' → f' x' ＝ g' y')))
 
   abstract
-    is-equiv-map-product-cone : is-equiv map-product-cone
-    is-equiv-map-product-cone =
+    is-equiv-map-product-cone-standard-pullback :
+      is-equiv map-product-cone-standard-pullback
+    is-equiv-map-product-cone-standard-pullback =
       is-equiv-comp
         ( tot (λ t → tot (λ s → eq-pair') ∘ map-interchange-Σ-Σ _))
         ( map-interchange-Σ-Σ _)

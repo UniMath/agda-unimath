@@ -10,16 +10,11 @@ module foundation-core.pullbacks where
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
-open import foundation.structure-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -28,12 +23,8 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.retractions
-open import foundation-core.sections
 open import foundation-core.standard-pullbacks
-open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.universal-property-pullbacks
-open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -203,11 +194,11 @@ module _
     is-pullback-fold-cone-is-pullback c is-pb-c =
       is-equiv-left-map-triangle
         ( gap (map-product f g) (diagonal X) (fold-cone f g c))
-        ( map-fold-cone f g)
+        ( map-fold-cone-standard-pullback f g)
         ( gap f g c)
-        ( triangle-map-fold-cone f g c)
+        ( triangle-map-fold-cone-standard-pullback f g c)
         ( is-pb-c)
-        ( is-equiv-map-fold-cone f g)
+        ( is-equiv-map-fold-cone-standard-pullback f g)
 
   abstract
     is-pullback-is-pullback-fold-cone :
@@ -217,10 +208,10 @@ module _
     is-pullback-is-pullback-fold-cone c =
       is-equiv-top-map-triangle
         ( gap (map-product f g) (diagonal X) (fold-cone f g c))
-        ( map-fold-cone f g)
+        ( map-fold-cone-standard-pullback f g)
         ( gap f g c)
-        ( triangle-map-fold-cone f g c)
-        ( is-equiv-map-fold-cone f g)
+        ( triangle-map-fold-cone-standard-pullback f g c)
+        ( is-equiv-map-fold-cone-standard-pullback f g)
 ```
 
 ### Products of pullbacks are pullbacks
@@ -233,11 +224,12 @@ module _
   (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
   where
 
-  triangle-map-product-cone :
+  triangle-map-product-cone-standard-pullback :
     (c : cone f g C) (c' : cone f' g' C') →
-    gap (map-product f f') (map-product g g') (product-cone f g f' g' c c') ~
-    map-product-cone f g f' g' ∘ map-product (gap f g c) (gap f' g' c')
-  triangle-map-product-cone c c' z = refl
+    ( gap (map-product f f') (map-product g g') (product-cone f g f' g' c c')) ~
+    ( ( map-product-cone-standard-pullback f g f' g') ∘
+      ( map-product (gap f g c) (gap f' g' c')))
+  triangle-map-product-cone-standard-pullback c c' = refl-htpy
 
   abstract
     is-pullback-product-is-pullback :
@@ -254,11 +246,11 @@ module _
           ( map-product f f')
           ( map-product g g')
           ( product-cone f g f' g' c c'))
-        ( map-product-cone f g f' g')
+        ( map-product-cone-standard-pullback f g f' g')
         ( map-product (gap f g c) (gap f' g' c'))
-        ( triangle-map-product-cone c c')
+        ( triangle-map-product-cone-standard-pullback c c')
         ( is-equiv-map-product (gap f g c) (gap f' g' c') is-pb-c is-pb-c')
-        ( is-equiv-map-product-cone f g f' g')
+        ( is-equiv-map-product-cone-standard-pullback f g f' g')
 
   abstract
     is-pullback-left-factor-is-pullback-product :
@@ -279,10 +271,10 @@ module _
             ( map-product f f')
             ( map-product g g')
             ( product-cone f g f' g' c c'))
-        ( map-product-cone f g f' g')
+        ( map-product-cone-standard-pullback f g f' g')
           ( map-product (gap f g c) (gap f' g' c'))
-          ( triangle-map-product-cone c c')
-          ( is-equiv-map-product-cone f g f' g')
+          ( triangle-map-product-cone-standard-pullback c c')
+          ( is-equiv-map-product-cone-standard-pullback f g f' g')
           ( is-pb-cc'))
 
   abstract
@@ -304,10 +296,10 @@ module _
             ( map-product f f')
             ( map-product g g')
             ( product-cone f g f' g' c c'))
-          ( map-product-cone f g f' g')
+          ( map-product-cone-standard-pullback f g f' g')
           ( map-product (gap f g c) (gap f' g' c'))
-          ( triangle-map-product-cone c c')
-          ( is-equiv-map-product-cone f g f' g')
+          ( triangle-map-product-cone-standard-pullback c c')
+          ( is-equiv-map-product-cone-standard-pullback f g f' g')
           ( is-pb-cc'))
 ```
 
