@@ -99,7 +99,7 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
     ( PC x)
 ```
 
-### Identifications of cones over cospan diagram
+### Identifications of cones over cospan diagrams
 
 ```agda
 module _
@@ -295,13 +295,15 @@ module _
   pr1 (pr2 (refl-htpy-parallel-cone c)) = refl-htpy
   pr2 (pr2 (refl-htpy-parallel-cone c)) = right-unit-htpy
 
-  htpy-eq-square :
+  htpy-eq-parallel-cone :
     (c c' : cone f g C) →
-    c ＝ c' → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
-  htpy-eq-square c .c refl = refl-htpy-parallel-cone c
+    c ＝ c' →
+    htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
+  htpy-eq-parallel-cone c .c refl = refl-htpy-parallel-cone c
 
   htpy-parallel-cone-refl-htpy-htpy-cone :
-    (c c' : cone f g C) → htpy-cone f g c c' →
+    (c c' : cone f g C) →
+    htpy-cone f g c c' →
     htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
   htpy-parallel-cone-refl-htpy-htpy-cone (p , q , H) (p' , q' , H') =
     tot
@@ -370,116 +372,101 @@ module _
         ( Hf)
         ( g')
 
-  tr-tr-refl-htpy-cone :
-    (c : cone f g C) →
-    let
-      tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c
-      tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy' g)) tr-c
-    in
-    tr-tr-c ＝ c
-  tr-tr-refl-htpy-cone c =
-    let
-      tr-c = tr (λ f''' → cone f''' g C) (eq-htpy refl-htpy) c
-      tr-tr-c = tr (λ g'' → cone f g'' C) (eq-htpy refl-htpy) tr-c
-      α : tr-tr-c ＝ tr-c
-      α = ap (λ t → tr (λ g'' → cone f g'' C) t tr-c) (eq-htpy-refl-htpy g)
-      β : tr-c ＝ c
-      β = ap (λ t → tr (λ f''' → cone f''' g C) t c) (eq-htpy-refl-htpy f)
-    in
-    α ∙ β
+  tr-right-tr-left-cone-eq-htpy :
+    {f' : A → X} → f ~ f' → {g' : B → X} → g ~ g' → cone f g C → cone f' g' C
+  tr-right-tr-left-cone-eq-htpy {f'} Hf Hg c =
+    tr
+      ( λ y → cone f' y C)
+      ( eq-htpy Hg)
+      ( tr (λ x → cone x g C) (eq-htpy Hf) c)
 
-  htpy-eq-square-refl-htpy :
+
+  compute-tr-right-tr-left-cone-eq-htpy-refl-htpy :
+    (c : cone f g C) → tr-right-tr-left-cone-eq-htpy refl-htpy refl-htpy c ＝ c
+  compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c =
+    ( ap
+      ( λ t →
+        tr
+          ( λ g'' → cone f g'' C)
+          ( t)
+          ( tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c))
+      ( eq-htpy-refl-htpy g)) ∙
+    ( ap (λ t → tr (λ f''' → cone f''' g C) t c) (eq-htpy-refl-htpy f))
+
+  htpy-eq-parallel-cone-refl-htpy :
     (c c' : cone f g C) →
-    let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c
-        tr-tr-c = tr (λ y → cone f y C) (eq-htpy (refl-htpy' g)) tr-c
-    in
-    tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
-  htpy-eq-square-refl-htpy c c' =
+    tr-right-tr-left-cone-eq-htpy refl-htpy refl-htpy c ＝ c' →
+    htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
+  htpy-eq-parallel-cone-refl-htpy c c' =
     map-inv-is-equiv-precomp-Π-is-equiv
-      ( is-equiv-concat (tr-tr-refl-htpy-cone c) c')
+      ( is-equiv-concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
       ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
-      ( htpy-eq-square c c')
+      ( htpy-eq-parallel-cone c c')
 
-  left-map-triangle-eq-square-refl-htpy :
+  left-map-triangle-eq-parallel-cone-refl-htpy :
     (c c' : cone f g C) →
-    htpy-eq-square-refl-htpy c c' ∘ concat (tr-tr-refl-htpy-cone c) c' ~
-    htpy-eq-square c c'
-  left-map-triangle-eq-square-refl-htpy c c' =
+    ( ( htpy-eq-parallel-cone-refl-htpy c c') ∘
+      ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
+    ( htpy-eq-parallel-cone c c')
+  left-map-triangle-eq-parallel-cone-refl-htpy c c' =
     is-section-map-inv-is-equiv-precomp-Π-is-equiv
-      ( is-equiv-concat (tr-tr-refl-htpy-cone c) c')
+      ( is-equiv-concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
       ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
-      ( htpy-eq-square c c')
+      ( htpy-eq-parallel-cone c c')
 
   abstract
     htpy-parallel-cone-eq' :
       {g' : B → X} (Hg : g ~ g') →
       (c : cone f g C) (c' : cone f g' C) →
-      let
-        tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c
-        tr-tr-c = tr (λ y → cone f y C) (eq-htpy Hg) tr-c
-      in
-      tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) Hg c c'
+      tr-right-tr-left-cone-eq-htpy refl-htpy Hg c ＝ c' →
+      htpy-parallel-cone (refl-htpy' f) Hg c c'
     htpy-parallel-cone-eq' =
       ind-htpy g
         ( λ g'' Hg' →
           ( c : cone f g C) (c' : cone f g'' C) →
-          Id
-            ( tr
-              ( λ g'' → cone f g'' C)
-              ( eq-htpy Hg')
-              ( tr (λ f''' → cone f''' g C) (eq-htpy (refl-htpy' f)) c))
-            ( c') →
+          tr-right-tr-left-cone-eq-htpy refl-htpy Hg' c ＝ c' →
           htpy-parallel-cone refl-htpy Hg' c c')
-        ( htpy-eq-square-refl-htpy)
+        ( htpy-eq-parallel-cone-refl-htpy)
 
     left-map-triangle-parallel-cone-eq' :
       (c c' : cone f g C) →
       ( ( htpy-parallel-cone-eq' refl-htpy c c') ∘
-        ( concat (tr-tr-refl-htpy-cone c) c')) ~
-      ( htpy-eq-square c c')
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
+      ( htpy-eq-parallel-cone c c')
     left-map-triangle-parallel-cone-eq' c c' =
       ( right-whisker-comp
         ( multivariable-htpy-eq 3
           ( compute-ind-htpy g
             ( λ g'' Hg' →
               ( c : cone f g C) (c' : cone f g'' C) →
-              ( tr
-                ( λ g'' → cone f g'' C)
-                ( eq-htpy Hg')
-                ( tr (λ f''' → cone f''' g C) (eq-htpy (refl-htpy' f)) c)) ＝
-              ( c') →
+              tr-right-tr-left-cone-eq-htpy refl-htpy Hg' c ＝ c' →
               htpy-parallel-cone refl-htpy Hg' c c')
-            ( htpy-eq-square-refl-htpy))
+            ( htpy-eq-parallel-cone-refl-htpy))
           ( c)
           ( c'))
-        ( concat (tr-tr-refl-htpy-cone c) c')) ∙h
-      ( left-map-triangle-eq-square-refl-htpy c c')
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ∙h
+      ( left-map-triangle-eq-parallel-cone-refl-htpy c c')
 
   abstract
     htpy-parallel-cone-eq :
       {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
       (c : cone f g C) (c' : cone f' g' C) →
-      let tr-c = tr (λ x → cone x g C) (eq-htpy Hf) c
-          tr-tr-c = tr (λ y → cone f' y C) (eq-htpy Hg) tr-c
-      in
-      tr-tr-c ＝ c' → htpy-parallel-cone Hf Hg c c'
+      tr-right-tr-left-cone-eq-htpy Hf Hg c ＝ c' →
+      htpy-parallel-cone Hf Hg c c'
     htpy-parallel-cone-eq {f'} Hf {g'} Hg c c' p =
       ind-htpy f
       ( λ f'' Hf' →
         ( g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
-        ( Id
-          ( tr (λ g'' → cone f'' g'' C) (eq-htpy Hg)
-            ( tr (λ f''' → cone f''' g C) (eq-htpy Hf') c))
-          ( c')) →
+        ( tr-right-tr-left-cone-eq-htpy Hf' Hg c ＝ c') →
         htpy-parallel-cone Hf' Hg c c')
       ( λ g' → htpy-parallel-cone-eq' {g' = g'})
       Hf g' Hg c c' p
 
     left-map-triangle-parallel-cone-eq :
       (c c' : cone f g C) →
-      ( htpy-parallel-cone-eq refl-htpy refl-htpy c c') ∘
-        ( concat (tr-tr-refl-htpy-cone c) c') ~
-      ( htpy-eq-square c c')
+      ( ( htpy-parallel-cone-eq refl-htpy refl-htpy c c') ∘
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
+      ( htpy-eq-parallel-cone c c')
     left-map-triangle-parallel-cone-eq c c' =
       ( right-whisker-comp
         ( multivariable-htpy-eq 5
@@ -487,18 +474,14 @@ module _
             ( λ f'' Hf' →
               ( g' : B → X) (Hg : g ~ g')
               (c : cone f g C) (c' : cone f'' g' C) →
-              ( tr
-                  ( λ g'' → cone f'' g'' C)
-                  ( eq-htpy Hg)
-                  ( tr (λ f''' → cone f''' g C) (eq-htpy Hf') c) ＝
-                ( c')) →
+              ( tr-right-tr-left-cone-eq-htpy Hf' Hg c ＝ c') →
               htpy-parallel-cone Hf' Hg c c')
             ( λ g' → htpy-parallel-cone-eq' {g' = g'}))
           ( g)
           ( refl-htpy)
           ( c)
           ( c'))
-        ( concat (tr-tr-refl-htpy-cone c) c')) ∙h
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ∙h
       ( left-map-triangle-parallel-cone-eq' c c')
 
   abstract
@@ -518,28 +501,27 @@ module _
                 is-equiv (htpy-parallel-cone-eq refl-htpy Hg c c'))
             ( λ c c' →
               is-equiv-right-map-triangle
-                ( htpy-eq-square c c')
+                ( htpy-eq-parallel-cone c c')
                 ( htpy-parallel-cone-eq refl-htpy refl-htpy c c')
-                ( concat (tr-tr-refl-htpy-cone c) c')
+                ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
                 ( inv-htpy (left-map-triangle-parallel-cone-eq c c'))
                 ( fundamental-theorem-id
                   ( is-torsorial-htpy-parallel-cone
                     ( refl-htpy' f)
                     ( refl-htpy' g)
                     ( c))
-                  ( htpy-eq-square c) c')
-                ( is-equiv-concat (tr-tr-refl-htpy-cone c) c'))
+                  ( htpy-eq-parallel-cone c) c')
+                ( is-equiv-concat
+                  ( compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c)
+                  ( c')))
             Hg c c')
         Hf g' Hg c c'
 
   eq-htpy-parallel-cone :
     {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) (c' : cone f' g' C) →
-    let
-      tr-c = tr (λ x → cone x g C) (eq-htpy Hf) c
-      tr-tr-c = tr (λ y → cone f' y C) (eq-htpy Hg) tr-c
-    in
-    htpy-parallel-cone Hf Hg c c' → tr-tr-c ＝ c'
+    htpy-parallel-cone Hf Hg c c' →
+    tr-right-tr-left-cone-eq-htpy Hf Hg c ＝ c'
   eq-htpy-parallel-cone Hf Hg c c' =
     map-inv-is-equiv (is-fiberwise-equiv-htpy-parallel-cone-eq Hf Hg c c')
 ```
