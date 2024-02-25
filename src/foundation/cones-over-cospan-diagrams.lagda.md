@@ -295,11 +295,11 @@ module _
   pr1 (pr2 (refl-htpy-parallel-cone c)) = refl-htpy
   pr2 (pr2 (refl-htpy-parallel-cone c)) = right-unit-htpy
 
-  htpy-eq-parallel-cone :
+  htpy-eq-degenerate-parallel-cone :
     (c c' : cone f g C) →
     c ＝ c' →
     htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
-  htpy-eq-parallel-cone c .c refl = refl-htpy-parallel-cone c
+  htpy-eq-degenerate-parallel-cone c .c refl = refl-htpy-parallel-cone c
 
   htpy-parallel-cone-refl-htpy-htpy-cone :
     (c c' : cone f g C) →
@@ -380,9 +380,9 @@ module _
       ( eq-htpy Hg)
       ( tr (λ x → cone x g C) (eq-htpy Hf) c)
 
-
   compute-tr-right-tr-left-cone-eq-htpy-refl-htpy :
-    (c : cone f g C) → tr-right-tr-left-cone-eq-htpy refl-htpy refl-htpy c ＝ c
+    (c : cone f g C) →
+    tr-right-tr-left-cone-eq-htpy refl-htpy refl-htpy c ＝ c
   compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c =
     ( ap
       ( λ t →
@@ -401,26 +401,26 @@ module _
     map-inv-is-equiv-precomp-Π-is-equiv
       ( is-equiv-concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
       ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
-      ( htpy-eq-parallel-cone c c')
+      ( htpy-eq-degenerate-parallel-cone c c')
 
   left-map-triangle-eq-parallel-cone-refl-htpy :
     (c c' : cone f g C) →
     ( ( htpy-eq-parallel-cone-refl-htpy c c') ∘
       ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
-    ( htpy-eq-parallel-cone c c')
+    ( htpy-eq-degenerate-parallel-cone c c')
   left-map-triangle-eq-parallel-cone-refl-htpy c c' =
     is-section-map-inv-is-equiv-precomp-Π-is-equiv
       ( is-equiv-concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
       ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
-      ( htpy-eq-parallel-cone c c')
+      ( htpy-eq-degenerate-parallel-cone c c')
 
   abstract
-    htpy-parallel-cone-eq' :
+    htpy-parallel-cone-dependent-eq' :
       {g' : B → X} (Hg : g ~ g') →
       (c : cone f g C) (c' : cone f g' C) →
       tr-right-tr-left-cone-eq-htpy refl-htpy Hg c ＝ c' →
       htpy-parallel-cone (refl-htpy' f) Hg c c'
-    htpy-parallel-cone-eq' =
+    htpy-parallel-cone-dependent-eq' =
       ind-htpy g
         ( λ g'' Hg' →
           ( c : cone f g C) (c' : cone f g'' C) →
@@ -430,9 +430,9 @@ module _
 
     left-map-triangle-parallel-cone-eq' :
       (c c' : cone f g C) →
-      ( ( htpy-parallel-cone-eq' refl-htpy c c') ∘
+      ( ( htpy-parallel-cone-dependent-eq' refl-htpy c c') ∘
         ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
-      ( htpy-eq-parallel-cone c c')
+      ( htpy-eq-degenerate-parallel-cone c c')
     left-map-triangle-parallel-cone-eq' c c' =
       ( right-whisker-comp
         ( multivariable-htpy-eq 3
@@ -448,25 +448,25 @@ module _
       ( left-map-triangle-eq-parallel-cone-refl-htpy c c')
 
   abstract
-    htpy-parallel-cone-eq :
+    htpy-parallel-cone-dependent-eq :
       {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
       (c : cone f g C) (c' : cone f' g' C) →
       tr-right-tr-left-cone-eq-htpy Hf Hg c ＝ c' →
       htpy-parallel-cone Hf Hg c c'
-    htpy-parallel-cone-eq {f'} Hf {g'} Hg c c' p =
+    htpy-parallel-cone-dependent-eq {f'} Hf {g'} Hg c c' p =
       ind-htpy f
-      ( λ f'' Hf' →
-        ( g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
-        ( tr-right-tr-left-cone-eq-htpy Hf' Hg c ＝ c') →
-        htpy-parallel-cone Hf' Hg c c')
-      ( λ g' → htpy-parallel-cone-eq' {g' = g'})
-      Hf g' Hg c c' p
+        ( λ f'' Hf' →
+          ( g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
+          ( tr-right-tr-left-cone-eq-htpy Hf' Hg c ＝ c') →
+          htpy-parallel-cone Hf' Hg c c')
+        ( λ g' → htpy-parallel-cone-dependent-eq' {g' = g'})
+        Hf g' Hg c c' p
 
     left-map-triangle-parallel-cone-eq :
       (c c' : cone f g C) →
-      ( ( htpy-parallel-cone-eq refl-htpy refl-htpy c c') ∘
+      ( ( htpy-parallel-cone-dependent-eq refl-htpy refl-htpy c c') ∘
         ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
-      ( htpy-eq-parallel-cone c c')
+      ( htpy-eq-degenerate-parallel-cone c c')
     left-map-triangle-parallel-cone-eq c c' =
       ( right-whisker-comp
         ( multivariable-htpy-eq 5
@@ -476,7 +476,7 @@ module _
               (c : cone f g C) (c' : cone f'' g' C) →
               ( tr-right-tr-left-cone-eq-htpy Hf' Hg c ＝ c') →
               htpy-parallel-cone Hf' Hg c c')
-            ( λ g' → htpy-parallel-cone-eq' {g' = g'}))
+            ( λ g' → htpy-parallel-cone-dependent-eq' {g' = g'}))
           ( g)
           ( refl-htpy)
           ( c)
@@ -485,24 +485,24 @@ module _
       ( left-map-triangle-parallel-cone-eq' c c')
 
   abstract
-    is-fiberwise-equiv-htpy-parallel-cone-eq :
+    is-fiberwise-equiv-htpy-parallel-cone-dependent-eq :
       {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
       (c : cone f g C) (c' : cone f' g' C) →
-      is-equiv (htpy-parallel-cone-eq Hf Hg c c')
-    is-fiberwise-equiv-htpy-parallel-cone-eq {f'} Hf {g'} Hg c c' =
+      is-equiv (htpy-parallel-cone-dependent-eq Hf Hg c c')
+    is-fiberwise-equiv-htpy-parallel-cone-dependent-eq {f'} Hf {g'} Hg c c' =
       ind-htpy f
         ( λ f' Hf →
           ( g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f' g' C) →
-            is-equiv (htpy-parallel-cone-eq Hf Hg c c'))
+            is-equiv (htpy-parallel-cone-dependent-eq Hf Hg c c'))
         ( λ g' Hg c c' →
           ind-htpy g
             ( λ g' Hg →
               ( c : cone f g C) (c' : cone f g' C) →
-                is-equiv (htpy-parallel-cone-eq refl-htpy Hg c c'))
+                is-equiv (htpy-parallel-cone-dependent-eq refl-htpy Hg c c'))
             ( λ c c' →
               is-equiv-right-map-triangle
-                ( htpy-eq-parallel-cone c c')
-                ( htpy-parallel-cone-eq refl-htpy refl-htpy c c')
+                ( htpy-eq-degenerate-parallel-cone c c')
+                ( htpy-parallel-cone-dependent-eq refl-htpy refl-htpy c c')
                 ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
                 ( inv-htpy (left-map-triangle-parallel-cone-eq c c'))
                 ( fundamental-theorem-id
@@ -510,20 +510,21 @@ module _
                     ( refl-htpy' f)
                     ( refl-htpy' g)
                     ( c))
-                  ( htpy-eq-parallel-cone c) c')
+                  ( htpy-eq-degenerate-parallel-cone c) c')
                 ( is-equiv-concat
                   ( compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c)
                   ( c')))
             Hg c c')
         Hf g' Hg c c'
 
-  eq-htpy-parallel-cone :
+  dependent-eq-htpy-parallel-cone :
     {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) (c' : cone f' g' C) →
     htpy-parallel-cone Hf Hg c c' →
     tr-right-tr-left-cone-eq-htpy Hf Hg c ＝ c'
-  eq-htpy-parallel-cone Hf Hg c c' =
-    map-inv-is-equiv (is-fiberwise-equiv-htpy-parallel-cone-eq Hf Hg c c')
+  dependent-eq-htpy-parallel-cone Hf Hg c c' =
+    map-inv-is-equiv
+      ( is-fiberwise-equiv-htpy-parallel-cone-dependent-eq Hf Hg c c')
 ```
 
 ## Table of files about pullbacks
