@@ -138,7 +138,7 @@ transformations are equivalences.
 
 These operations are useful in proofs involving
 [path algebra](foundation.path-algebra.md), because taking
-`equiv-right-whisker-triangle-identicications` as an example, it provides us
+`equiv-right-whisker-triangle-identifications` as an example, it provides us
 with two maps: the forward direction states
 `(p ＝ q ∙ r) → (p ∙ s ＝ q ∙ (r ∙ s))`, which allows one to append an
 identification without needing to reassociate on the right, and the backwards

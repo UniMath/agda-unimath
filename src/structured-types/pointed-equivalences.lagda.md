@@ -606,6 +606,8 @@ pr2 (equiv-precomp-pointed-map C f) =
 
 ### Postcomposing by pointed equivalences is a pointed equivalence
 
+#### The predicate of being an equivalence by postcomposition of pointed maps
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
@@ -614,121 +616,145 @@ module _
   is-equiv-postcomp-pointed-map : UUω
   is-equiv-postcomp-pointed-map =
     {l : Level} (X : Pointed-Type l) → is-equiv (postcomp-pointed-map f X)
-
-  is-pointed-equiv-is-equiv-postcomp-pointed-map :
-    is-equiv-postcomp-pointed-map → is-pointed-equiv f
-  is-pointed-equiv-is-equiv-postcomp-pointed-map = {!!}
 ```
 
-```text
-  is-equiv-is-equiv-comp-pointed-map :
-    ({l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map {A = X} f)) →
-    is-pointed-equiv f
-  is-equiv-is-equiv-comp-pointed-map H = {!!}
+#### Any pointed map that is an equivalence by postcomposition is a pointed equivalence
 
-{-
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
+  (H : is-equiv-postcomp-pointed-map f)
+  where
+
+  pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map : B →∗ A
+  pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map =
+    map-inv-is-equiv (H B) id-pointed-map
+
+  map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map :
+    type-Pointed-Type B → type-Pointed-Type A
+  map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map =
+    map-pointed-map
+      ( pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+
+  is-pointed-section-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map :
+    is-pointed-section f
+      ( pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+  is-pointed-section-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map =
+    pointed-htpy-eq
+      ( f ∘∗ pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+      ( id-pointed-map)
+      ( is-section-map-inv-is-equiv (H B) id-pointed-map)
+
+  is-section-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map :
+    is-section
+      ( map-pointed-map f)
+      ( map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+  is-section-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map =
+    htpy-pointed-htpy
+      ( is-pointed-section-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+
+  is-pointed-retraction-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map :
+    is-pointed-retraction f
+      ( pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+  is-pointed-retraction-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map =
+    pointed-htpy-eq
+      ( pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map ∘∗ f)
+      ( id-pointed-map)
+      ( is-injective-is-equiv
+        ( H A)
+        ( eq-pointed-htpy
+          ( ( f) ∘∗
+            ( ( pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map) ∘∗
+              ( f)))
+          ( f ∘∗ id-pointed-map)
+          ( concat-pointed-htpy
+            ( inv-associative-comp-pointed-map f _ f)
+            ( concat-pointed-htpy
+              ( right-whisker-pointed-htpy
+                ( f ∘∗ _)
+                ( id-pointed-map)
+                ( is-pointed-section-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+                ( f))
+              ( concat-pointed-htpy
+                ( left-unit-law-comp-pointed-map f)
+                ( inv-pointed-htpy (right-unit-law-comp-pointed-map f)))))))
+
+  is-retraction-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map :
+    is-retraction
+      ( map-pointed-map f)
+      ( map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+  is-retraction-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map =
+    htpy-pointed-htpy
+      ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+    
+  is-pointed-equiv-is-equiv-postcomp-pointed-map : is-pointed-equiv f
+  is-pointed-equiv-is-equiv-postcomp-pointed-map =
     is-equiv-is-invertible
-      ( map-pointed-map g)
-      ( pr1 G)
-      ( htpy-eq
-        ( ap pr1
-          ( ap pr1
-            ( eq-is-contr
-              ( is-contr-map-is-equiv (H A) f)
-                { pair
-                  ( g ∘∗ f)
-                  ( eq-pointed-htpy
-                    ( f ∘∗ (g ∘∗ f))
-                    ( f)
-                    ( concat-pointed-htpy
-                      ( f ∘∗ (g ∘∗ f))
-                      ( (f ∘∗ g) ∘∗ f)
-                      ( f)
-                      ( inv-associative-comp-pointed-map f g f)
-                      ( concat-pointed-htpy
-                        ( (f ∘∗ g) ∘∗ f)
-                        ( id-pointed-map ∘∗ f)
-                        ( f)
-                        ( right-whisker-pointed-htpy
-                          ( f ∘∗ g)
-                          ( id-pointed-map)
-                          ( G)
-                          ( f))
-                        ( left-unit-law-comp-pointed-map f))))}
-                { pair
-                  ( id-pointed-map)
-                  ( eq-pointed-htpy
-                    ( f ∘∗ id-pointed-map)
-                    ( f)
-                    ( right-unit-law-comp-pointed-map f))}))))
-    where
-    g : B →∗ A
-    g = pr1 (center (is-contr-map-is-equiv (H B) id-pointed-map))
-    G : (f ∘∗ g) ~∗ id-pointed-map
-    G = map-equiv
-          ( extensionality-pointed-map
-            ( f ∘∗ g)
-            ( id-pointed-map))
-        ( pr2 (center (is-contr-map-is-equiv (H B) id-pointed-map))) -}
+      ( map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+      ( is-section-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+      ( is-retraction-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+```
 
-  is-equiv-comp-is-pointed-equiv :
-    is-pointed-equiv f →
-    {l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map {A = X} f)
-  is-equiv-comp-is-pointed-equiv E X = {!!}
+#### Any pointed equivalence is an equivalence by postcomposition
 
-{-
-    pair
-      ( pair
-        ( g ∘∗_)
-        ( λ k →
-          eq-pointed-htpy
-            ( f ∘∗ (g ∘∗ k))
-            ( k)
-            ( concat-pointed-htpy
-              ( f ∘∗ (g ∘∗ k))
-              ( (f ∘∗ g) ∘∗ k)
-              ( k)
-              ( inv-associative-comp-pointed-map f g k)
-              ( concat-pointed-htpy
-                ( (f ∘∗ g) ∘∗ k)
-                ( id-pointed-map ∘∗ k)
-                ( k)
-                ( right-whisker-pointed-htpy
-                  ( f ∘∗ g)
-                  ( id-pointed-map)
-                  ( G)
-                  ( k))
-                ( left-unit-law-comp-pointed-map k)))))
-      ( pair
-        ( h ∘∗_)
-        ( λ k →
-          eq-pointed-htpy
-            ( h ∘∗ (f ∘∗ k))
-            ( k)
-            ( concat-pointed-htpy
-              ( h ∘∗ (f ∘∗ k))
-              ( (h ∘∗ f) ∘∗ k)
-              ( k)
-              ( inv-associative-comp-pointed-map h f k)
-              ( concat-pointed-htpy
-                ( (h ∘∗ f) ∘∗ k)
-                ( id-pointed-map ∘∗ k)
-                ( k)
-                ( right-whisker-pointed-htpy
-                  ( h ∘∗ f)
-                  ( id-pointed-map)
-                  ( H)
-                  ( k))
-                ( left-unit-law-comp-pointed-map k)))))
-    where
-    I : is-pointed-iso f
-    I = is-iso-is-pointed-equiv f E
-    g : B →∗ A
-    g = pr1 (pr1 I)
-    G : (f ∘∗ g) ~∗ id-pointed-map
-    G = pr2 (pr1 I)
-    h : B →∗ A
-    h = pr1 (pr2 I)
-    H : (h ∘∗ f) ~∗ id-pointed-map
-    H = pr2 (pr2 I) -}
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
+  (H : is-pointed-equiv f)
+  where
+
+  map-inv-is-equiv-postcomp-is-pointed-equiv :
+    {l : Level} (X : Pointed-Type l) → (X →∗ B) → (X →∗ A)
+  map-inv-is-equiv-postcomp-is-pointed-equiv =
+    postcomp-pointed-map (pointed-map-inv-is-pointed-equiv f H)
+
+  is-section-map-inv-is-equiv-postcomp-is-pointed-equiv :
+    {l : Level} (X : Pointed-Type l) →
+    is-section
+      ( postcomp-pointed-map f X)
+      ( map-inv-is-equiv-postcomp-is-pointed-equiv X)
+  is-section-map-inv-is-equiv-postcomp-is-pointed-equiv X h =
+    eq-pointed-htpy
+      ( f ∘∗ (pointed-map-inv-is-pointed-equiv f H ∘∗ h))
+      ( h)
+      ( concat-pointed-htpy
+        ( inv-associative-comp-pointed-map f
+          ( pointed-map-inv-is-pointed-equiv f H)
+          ( h))
+        ( concat-pointed-htpy
+          ( right-whisker-pointed-htpy
+            ( f ∘∗ pointed-map-inv-is-pointed-equiv f H)
+            ( id-pointed-map)
+            ( is-pointed-section-pointed-map-inv-is-pointed-equiv f H)
+            ( h))
+          ( left-unit-law-comp-pointed-map h)))
+
+  is-retraction-map-inv-is-equiv-postcomp-is-pointed-equiv :
+    {l : Level} (X : Pointed-Type l) →
+    is-retraction
+      ( postcomp-pointed-map f X)
+      ( map-inv-is-equiv-postcomp-is-pointed-equiv X)
+  is-retraction-map-inv-is-equiv-postcomp-is-pointed-equiv X h =
+    eq-pointed-htpy
+      ( pointed-map-inv-is-pointed-equiv f H ∘∗ (f ∘∗ h))
+      ( h)
+      ( concat-pointed-htpy
+        ( inv-associative-comp-pointed-map
+          ( pointed-map-inv-is-pointed-equiv f H)
+          ( f)
+          ( h))
+        ( concat-pointed-htpy
+          ( right-whisker-pointed-htpy
+            ( pointed-map-inv-is-pointed-equiv f H ∘∗ f)
+            ( id-pointed-map)
+            ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv f H)
+            ( h))
+          ( left-unit-law-comp-pointed-map h)))
+
+  is-equiv-postcomp-is-pointed-equiv : is-equiv-postcomp-pointed-map f
+  is-equiv-postcomp-is-pointed-equiv X =
+    is-equiv-is-invertible
+      ( map-inv-is-equiv-postcomp-is-pointed-equiv X)
+      ( is-section-map-inv-is-equiv-postcomp-is-pointed-equiv X)
+      ( is-retraction-map-inv-is-equiv-postcomp-is-pointed-equiv X)
 ```

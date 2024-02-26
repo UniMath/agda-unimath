@@ -7,6 +7,7 @@ module foundation.yoneda-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -61,7 +62,7 @@ concretely, the reflexivity is given by the identity function, and path
 concatenation is given by function composition.
 
 In addition to these strictness laws, we can make the type satisfy the strict
-law `inv reflʸ ≐ reflʸ`. Moreover, while the induction principle of the Yoneda
+law `invʸ reflʸ ≐ reflʸ`. Moreover, while the induction principle of the Yoneda
 identity types does not in general satisfy the computation rule strictly, we can
 define its recursion principle such that does.
 
@@ -426,7 +427,7 @@ concatenation operation on the underlying identity type respectively. In
 contrast to the latter, the former enjoys the computational property
 
 ```text
-  inv reflʸ ≐ reflʸ,
+  invʸ reflʸ ≐ reflʸ,
 ```
 
 hence it will be preferred going forward.
@@ -438,17 +439,15 @@ module _
   {l : Level} {A : UU l}
   where
 
-  inv-yoneda-Id : {x y : A} → x ＝ʸ y → y ＝ʸ x
-  inv-yoneda-Id {x} f z p = p ∙ᵣ inv (f x refl)
+  invʸ : {x y : A} → x ＝ʸ y → y ＝ʸ x
+  invʸ {x} f z p = p ∙ᵣ inv (f x refl)
 
-  compute-inv-yoneda-Id-refl :
-    {x : A} →
-    inv-yoneda-Id (reflʸ {x = x}) ＝ reflʸ
-  compute-inv-yoneda-Id-refl = refl
+  compute-inv-refl-yoneda-Id :
+    {x : A} → invʸ (reflʸ {x = x}) ＝ reflʸ
+  compute-inv-refl-yoneda-Id = refl
 
   inv-inv-yoneda-Id :
-    {x y : A} (f : x ＝ʸ y) →
-    inv-yoneda-Id (inv-yoneda-Id f) ＝ f
+    {x y : A} (f : x ＝ʸ y) → invʸ (invʸ f) ＝ f
   inv-inv-yoneda-Id {x} f =
     eq-multivariable-htpy 2
       ( λ _ p →
@@ -467,20 +466,17 @@ module _
   where
 
   preserves-inv-yoneda-eq-eq' :
-    {x y : A} (p : x ＝ y) →
-    yoneda-eq-eq (inv p) ＝ inv-yoneda-Id (yoneda-eq-eq' p)
+    {x y : A} (p : x ＝ y) → yoneda-eq-eq (inv p) ＝ invʸ (yoneda-eq-eq' p)
   preserves-inv-yoneda-eq-eq' p = refl
 
   preserves-inv-yoneda-eq-eq :
-    {x y : A} (p : x ＝ y) →
-    yoneda-eq-eq (inv p) ＝ inv-yoneda-Id (yoneda-eq-eq p)
+    {x y : A} (p : x ＝ y) → yoneda-eq-eq (inv p) ＝ invʸ (yoneda-eq-eq p)
   preserves-inv-yoneda-eq-eq p =
     eq-multivariable-htpy 2
       ( λ _ q → ap (λ r → q ∙ᵣ inv r) (inv left-unit-right-strict-concat))
 
   preserves-inv-eq-yoneda-eq :
-    {x y : A} (f : x ＝ʸ y) →
-    eq-yoneda-eq (inv-yoneda-Id f) ＝ inv (eq-yoneda-eq f)
+    {x y : A} (f : x ＝ʸ y) → eq-yoneda-eq (invʸ f) ＝ inv (eq-yoneda-eq f)
   preserves-inv-eq-yoneda-eq f = left-unit-right-strict-concat
 ```
 
@@ -582,6 +578,8 @@ module _
 
 ### The groupoidal laws for the Yoneda identity types
 
+As we may now observe, associativity and the unit laws hold by `refl`.
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y : A}
@@ -599,9 +597,14 @@ module _
   right-unit-yoneda-Id :
     {f : x ＝ʸ y} → f ∙ʸ reflʸ ＝ f
   right-unit-yoneda-Id = refl
+```
 
+In addition, we show a range of basic algebraic laws for the Yoneda identity
+types.
+
+```agda
   left-inv-yoneda-Id :
-    (f : x ＝ʸ y) → inv-yoneda-Id f ∙ʸ f ＝ reflʸ
+    (f : x ＝ʸ y) → invʸ f ∙ʸ f ＝ reflʸ
   left-inv-yoneda-Id f =
     eq-multivariable-htpy 2
       ( λ _ p →
@@ -617,7 +620,7 @@ module _
         ( ap (p ∙_) (compute-inv-Id-yoneda-Id f) ∙ right-unit))
 
   right-inv-yoneda-Id :
-    (f : x ＝ʸ y) → f ∙ʸ inv-yoneda-Id f ＝ reflʸ
+    (f : x ＝ʸ y) → f ∙ʸ invʸ f ＝ reflʸ
   right-inv-yoneda-Id f =
     eq-multivariable-htpy 2
       ( λ _ p →
@@ -641,7 +644,7 @@ module _
 
   distributive-inv-concat-yoneda-Id :
     (f : x ＝ʸ y) {z : A} (g : y ＝ʸ z) →
-    inv-yoneda-Id (f ∙ʸ g) ＝ inv-yoneda-Id g ∙ʸ inv-yoneda-Id f
+    invʸ (f ∙ʸ g) ＝ invʸ g ∙ʸ invʸ f
   distributive-inv-concat-yoneda-Id f g =
     eq-multivariable-htpy 2
       ( λ _ p →
@@ -688,21 +691,60 @@ module _
   ap-yoneda-Id : {x y : A} → x ＝ʸ y → f x ＝ʸ f y
   ap-yoneda-Id = yoneda-eq-eq ∘ eq-ap-yoneda-Id
 
-  compute-ap-reflʸ :
-    {x : A} → ap-yoneda-Id (reflʸ {x = x}) ＝ reflʸ
-  compute-ap-reflʸ = refl
+  compute-ap-refl-yoneda-Id : {x : A} → ap-yoneda-Id (reflʸ {x = x}) ＝ reflʸ
+  compute-ap-refl-yoneda-Id = refl
 
 module _
   {l1 : Level} {A : UU l1}
   where
 
-  compute-ap-id-yoneda-Id :
-    {x y : A} (p : x ＝ʸ y) → ap-yoneda-Id id p ＝ p
+  compute-ap-id-yoneda-Id : {x y : A} (p : x ＝ʸ y) → ap-yoneda-Id id p ＝ p
   compute-ap-id-yoneda-Id {x} p =
     eq-multivariable-htpy 2
       ( λ _ q →
         ( ap (q ∙ᵣ_) (ap-id (p x refl))) ∙
         ( inv (commutative-preconcatr-refl-Id-yoneda-Id p q)))
+```
+
+### Action of binary functions on Yoneda identifications
+
+We obtain an action of binary functions on Yoneda identifications that computes
+on both arguments using one of the two sides in the Gray interchanger diagram
+
+```text
+                      ap (r ↦ f x r) q
+                 f x y -------------> f x y'
+                   |                    |
+                   |                    |
+  ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
+                   |                    |
+                   ∨                    ∨
+                 f x' y ------------> f x' y'.
+                      ap (r ↦ f x' r) q
+```
+
+and the fact that the concatenation operation on Yoneda identifications is
+two-sided strictly unital.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  where
+
+  ap-binary-yoneda-Id :
+    {x x' : A} (p : x ＝ʸ x') {y y' : B} (q : y ＝ʸ y') → f x y ＝ʸ f x' y'
+  ap-binary-yoneda-Id {x} {x'} p {y} {y'} q =
+    ap-yoneda-Id (λ z → f z y) p ∙ʸ ap-yoneda-Id (f x') q
+
+  left-unit-ap-binary-Id :
+    {x : A} {y y' : B} (q : y ＝ʸ y') →
+    ap-binary-yoneda-Id reflʸ q ＝ ap-yoneda-Id (f x) q
+  left-unit-ap-binary-Id q = refl
+
+  right-unit-ap-binary-Id :
+    {x x' : A} (p : x ＝ʸ x') {y : B} →
+    ap-binary-yoneda-Id p reflʸ ＝ ap-yoneda-Id (λ z → f z y) p
+  right-unit-ap-binary-Id p = refl
 ```
 
 ### Transport along Yoneda identifications
@@ -715,12 +757,11 @@ module _
   tr-yoneda-Id : {x y : A} → x ＝ʸ y → B x → B y
   tr-yoneda-Id = tr B ∘ eq-yoneda-eq
 
-  compute-tr-reflʸ :
-    {x : A} → tr-yoneda-Id (reflʸ {x = x}) ＝ id
-  compute-tr-reflʸ = refl
+  compute-tr-refl-yoneda-Id : {x : A} → tr-yoneda-Id (reflʸ {x = x}) ＝ id
+  compute-tr-refl-yoneda-Id = refl
 ```
 
-### Function extensionality with respect to Yoneda identifications
+### Standard function extensionality with respect to Yoneda identifications
 
 ```agda
 module _
@@ -743,7 +784,7 @@ module _
   funext-yoneda-Id = is-equiv-map-equiv equiv-htpy-yoneda-eq
 ```
 
-### Univalence with respect to Yoneda identifications
+### Standard univalence with respect to Yoneda identifications
 
 ```agda
 module _
@@ -770,6 +811,129 @@ module _
 
   is-equiv-yoneda-eq-equiv : is-equiv yoneda-eq-equiv
   is-equiv-yoneda-eq-equiv = is-equiv-map-equiv equiv-yoneda-eq-equiv
+```
+
+### Whiskering of Yoneda identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  left-whisker-concat-yoenda-Id :
+    (p : x ＝ʸ y) {q r : y ＝ʸ z} → q ＝ʸ r → p ∙ʸ q ＝ʸ p ∙ʸ r
+  left-whisker-concat-yoenda-Id p β = ap-yoneda-Id (p ∙ʸ_) β
+
+  right-whisker-concat-yoenda-Id :
+    {p q : x ＝ʸ y} → p ＝ʸ q → (r : y ＝ʸ z) → p ∙ʸ r ＝ʸ q ∙ʸ r
+  right-whisker-concat-yoenda-Id α r = ap-yoneda-Id (_∙ʸ r) α
+```
+
+### Horizontal concatenation of Yoneda identifications
+
+We define horizontal concatenation in such a way that it computes as left
+whiskering when the left-hand argument is `refl`, and computes as right
+whiskering when the right-hand argument is `refl`.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  horizontal-concat-yoneda-Id² :
+    {p q : x ＝ʸ y} → p ＝ʸ q → {u v : y ＝ʸ z} → u ＝ʸ v → p ∙ʸ u ＝ʸ q ∙ʸ v
+  horizontal-concat-yoneda-Id² = ap-binary-yoneda-Id (_∙ʸ_)
+
+  compute-left-horizontal-concat-yoneda-Id² :
+    {p : x ＝ʸ y} {u v : y ＝ʸ z} (β : u ＝ʸ v) →
+    horizontal-concat-yoneda-Id² reflʸ β ＝
+    left-whisker-concat-yoenda-Id p β
+  compute-left-horizontal-concat-yoneda-Id² β = refl
+
+  compute-right-horizontal-concat-yoneda-Id² :
+    {p q : x ＝ʸ y} (α : p ＝ʸ q) {u : y ＝ʸ z} →
+    horizontal-concat-yoneda-Id² α (reflʸ {x = u}) ＝
+    right-whisker-concat-yoenda-Id α u
+  compute-right-horizontal-concat-yoneda-Id² α = refl
+
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  left-unit-horizontal-concat-yoneda-Id² :
+    {p q : x ＝ʸ y} (α : p ＝ʸ q) →
+    horizontal-concat-yoneda-Id² reflʸ α ＝ α
+  left-unit-horizontal-concat-yoneda-Id² = compute-ap-id-yoneda-Id
+
+  right-unit-horizontal-concat-yoneda-Id² :
+    {p q : x ＝ʸ y} (α : p ＝ʸ q) →
+    horizontal-concat-yoneda-Id² α (reflʸ {x = reflʸ}) ＝ α
+  right-unit-horizontal-concat-yoneda-Id² = compute-ap-id-yoneda-Id
+```
+
+Since concatenation on Yoneda identifications is strictly associative, the
+composites
+
+```text
+  horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ
+```
+
+and
+
+```text
+  horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)
+```
+
+inhabit the same type. Therefore, we can pose the question of whether the
+horizontal concatenation operation is associative, which it is, albeit weakly:
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  where
+
+  assoc-horizontal-concat-yoneda-Id² :
+    {p p' : x ＝ʸ y} (α : p ＝ʸ p')
+    {q q' : y ＝ʸ z} (β : q ＝ʸ q')
+    {r r' : z ＝ʸ w} (γ : r ＝ʸ r') →
+    horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ ＝
+    horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)
+  assoc-horizontal-concat-yoneda-Id² α {q} β {r} =
+    ind-yoneda-Id
+      ( λ _ γ →
+        ( horizontal-concat-yoneda-Id² (horizontal-concat-yoneda-Id² α β) γ) ＝
+        ( horizontal-concat-yoneda-Id² α (horizontal-concat-yoneda-Id² β γ)))
+      ( ind-yoneda-Id
+        ( λ _ β →
+          ( horizontal-concat-yoneda-Id²
+            ( horizontal-concat-yoneda-Id² α β)
+            ( reflʸ {x = r})) ＝
+          ( horizontal-concat-yoneda-Id²
+            ( α)
+            ( horizontal-concat-yoneda-Id² β (reflʸ {x = r}))))
+        ( ind-yoneda-Id
+          ( λ _ α →
+            ( horizontal-concat-yoneda-Id²
+              ( horizontal-concat-yoneda-Id² α (reflʸ {x = q}))
+              ( reflʸ {x = r})) ＝
+            ( horizontal-concat-yoneda-Id²
+              ( α)
+              ( horizontal-concat-yoneda-Id² (reflʸ {x = q}) (reflʸ {x = r}))))
+          ( refl)
+          ( α))
+        ( β))
+```
+
+### Vertical concatenation of Yoneda identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  vertical-concat-yoneda-Id² :
+    {p q r : x ＝ʸ y} → p ＝ʸ q → q ＝ʸ r → p ＝ʸ r
+  vertical-concat-yoneda-Id² α β = α ∙ʸ β
 ```
 
 ## See also

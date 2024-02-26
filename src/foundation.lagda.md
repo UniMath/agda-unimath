@@ -1,5 +1,9 @@
 # Foundation
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Files in the foundation folder
 
 ```agda
@@ -161,6 +165,8 @@ open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.finitely-coherent-equivalences public
+open import foundation.finitely-coherently-invertible-maps public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
@@ -195,6 +201,7 @@ open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.infinitely-coherent-equivalences public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
@@ -363,6 +370,8 @@ open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
 open import foundation.transport-split-type-families public
 open import foundation.transposition-identifications-along-equivalences public
+open import foundation.transposition-identifications-along-retractions public
+open import foundation.transposition-identifications-along-sections public
 open import foundation.transposition-span-diagrams public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public

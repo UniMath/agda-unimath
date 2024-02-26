@@ -15,13 +15,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
-open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
@@ -31,6 +28,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
@@ -604,8 +602,8 @@ module _
       is-pullback-swap-cone' f g c
         ( is-pullback-is-equiv-vertical-maps g f
           ( swap-cone f g c)
-          is-equiv-f
-          is-equiv-q)
+          ( is-equiv-f)
+          ( is-equiv-q))
 ```
 
 ## See also
@@ -617,6 +615,12 @@ module _
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+- For the notion of finitely coherent equivalence, see
+  [`foundation.finitely-coherent-equivalence`)(foundation.finitely-coherent-equivalence.md).
+- For the notion of finitely coherently invertible map, see
+  [`foundation.finitely-coherently-invertible-map`)(foundation.finitely-coherently-invertible-map.md).
+- For the notion of infinitely coherent equivalence, see
+  [`foundation.infinitely-coherent-equivalences`](foundation.infinitely-coherent-equivalences.md).
 
 ### Table of files about function types, composition, and equivalences
 

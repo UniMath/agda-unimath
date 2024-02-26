@@ -336,11 +336,22 @@ module _
       ( ( map-sequential-colimit-hom-sequential-diagram up-c c''
           ( comp-hom-sequential-diagram A B C g f)) ·l
         ( coherence-cocone-sequential-diagram c n))
-      ( _)
+      ( coherence-cocone-sequential-diagram
+        ( map-cocone-hom-sequential-diagram
+          ( comp-hom-sequential-diagram A B C g f)
+          ( c''))
+        ( n))
+      ( ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+          ( up-c)
+          ( c'')
+          ( comp-hom-sequential-diagram A B C g f)
+          ( succ-ℕ n)) ·r
+        ( map-sequential-diagram A n))
       ( coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c
         ( c'')
         ( comp-hom-sequential-diagram A B C g f)
-        ( n))) ∙h
+        ( n))
+      ( _)) ∙h
     ( ap-concat-htpy
       ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
         ( comp-hom-sequential-diagram A B C g f)
