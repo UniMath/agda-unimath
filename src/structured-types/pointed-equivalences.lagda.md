@@ -21,6 +21,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.path-algebra
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
@@ -30,6 +31,7 @@ open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-isomorphisms
@@ -37,6 +39,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-retractions
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
+open import structured-types.postcomposition-pointed-maps
 open import structured-types.precomposition-pointed-maps
 open import structured-types.universal-property-pointed-equivalences
 open import structured-types.whiskering-pointed-homotopies
@@ -46,10 +49,10 @@ open import structured-types.whiskering-pointed-homotopies
 
 ## Idea
 
-A {{#concept "pointed equivalence" Agda=_≃∗_}} is an equivalence in the category
-of pointed spaces. Equivalently, a pointed equivalence is a
+A {{#concept "pointed equivalence" Agda=_≃∗_}} `e : A ≃∗ B` consists of an [equivalence](foundation-core.equivalences.md) `e : A ≃ B` equipped with an [identification](foundation-core.identity-types.md) `p : e * ＝ *` witnessing that the underlying map of `e` preserves the base point of `A`. In other words, a pointed equivalence is a
 [pointed map](structured-types.pointed-maps.md) of which the underlying function
-is an [equivalence](foundation-core.equivalences.md).
+is an [equivalence](foundation-core.equivalences.md). Equivalently, a pointed equivalence is an equivalence in the category
+of [pointed types](structured-types.pointed-types.md).
 
 ## Definitions
 
@@ -76,25 +79,44 @@ module _
     map-inv-is-pointed-equiv : type-Pointed-Type B → type-Pointed-Type A
     map-inv-is-pointed-equiv = map-inv-is-equiv H
 
-    inv-preserves-pointe-map-inv-is-pointed-equiv :
-      point-Pointed-Type A ＝ map-inv-is-pointed-equiv (point-Pointed-Type B)
-    inv-preserves-pointe-map-inv-is-pointed-equiv =
-      map-eq-transpose-equiv (_ , H) (preserves-point-pointed-map f)
+    is-section-map-inv-is-pointed-equiv :
+      is-section (map-pointed-map f) map-inv-is-pointed-equiv
+    is-section-map-inv-is-pointed-equiv = is-section-map-inv-is-equiv H
+
+    is-retraction-map-inv-is-pointed-equiv :
+      is-retraction (map-pointed-map f) map-inv-is-pointed-equiv
+    is-retraction-map-inv-is-pointed-equiv =
+      is-retraction-map-inv-is-equiv H
 
     preserves-point-map-inv-is-pointed-equiv :
       map-inv-is-pointed-equiv (point-Pointed-Type B) ＝ point-Pointed-Type A
     preserves-point-map-inv-is-pointed-equiv =
-      inv inv-preserves-pointe-map-inv-is-pointed-equiv
+      preserves-point-is-retraction-pointed-map f
+        ( map-inv-is-pointed-equiv)
+        ( is-retraction-map-inv-is-pointed-equiv)
 
     pointed-map-inv-is-pointed-equiv : B →∗ A
-    pr1 pointed-map-inv-is-pointed-equiv =
-      map-inv-is-pointed-equiv
-    pr2 pointed-map-inv-is-pointed-equiv =
-      preserves-point-map-inv-is-pointed-equiv
+    pointed-map-inv-is-pointed-equiv =
+      pointed-map-is-retraction-pointed-map f
+        ( map-inv-is-pointed-equiv)
+        ( is-retraction-map-inv-is-pointed-equiv)
 
-    is-section-map-inv-is-pointed-equiv :
-      is-section (map-pointed-map f) map-inv-is-pointed-equiv
-    is-section-map-inv-is-pointed-equiv = is-section-map-inv-is-equiv H
+    coherence-point-is-retraction-map-inv-is-pointed-equiv :
+      coherence-point-unpointed-htpy-pointed-Π
+        ( pointed-map-inv-is-pointed-equiv ∘∗ f)
+        ( id-pointed-map)
+        ( is-retraction-map-inv-is-pointed-equiv)
+    coherence-point-is-retraction-map-inv-is-pointed-equiv =
+      coherence-point-is-retraction-pointed-map f
+        ( map-inv-is-pointed-equiv)
+        ( is-retraction-map-inv-is-pointed-equiv)
+
+    is-pointed-retraction-pointed-map-inv-is-pointed-equiv :
+      is-pointed-retraction f pointed-map-inv-is-pointed-equiv
+    is-pointed-retraction-pointed-map-inv-is-pointed-equiv =
+      is-pointed-retraction-is-retraction-pointed-map f
+        ( map-inv-is-pointed-equiv)
+        ( is-retraction-map-inv-is-pointed-equiv)
 
     coherence-point-is-section-map-inv-is-pointed-equiv :
       coherence-point-unpointed-htpy-pointed-Π
@@ -102,7 +124,51 @@ module _
         ( id-pointed-map)
         ( is-section-map-inv-is-pointed-equiv)
     coherence-point-is-section-map-inv-is-pointed-equiv =
-      {!!}
+      ( right-whisker-concat
+        ( ap-concat
+          ( map-pointed-map f)
+          ( inv (ap _ (preserves-point-pointed-map f)))
+          ( _) ∙
+          ( horizontal-concat-Id²
+            ( ap-inv
+              ( map-pointed-map f)
+              ( ap _ (preserves-point-pointed-map f)) ∙
+              ( inv
+                ( ap
+                  ( inv)
+                  ( ap-comp
+                    ( map-pointed-map f)
+                    ( map-inv-is-pointed-equiv)
+                    ( preserves-point-pointed-map f)))))
+            ( inv (coherence-map-inv-is-equiv H (point-Pointed-Type A)))))
+        ( preserves-point-pointed-map f)) ∙
+      ( assoc
+        ( inv
+          ( ap
+            ( map-pointed-map f ∘ map-inv-is-pointed-equiv)
+            ( preserves-point-pointed-map f)))
+        ( is-section-map-inv-is-pointed-equiv _)
+        ( preserves-point-pointed-map f)) ∙
+      ( inv
+        ( ( right-unit) ∙
+          ( left-transpose-eq-concat
+            ( ap
+              ( map-pointed-map f ∘ map-inv-is-pointed-equiv)
+              ( preserves-point-pointed-map f))
+            ( is-section-map-inv-is-pointed-equiv _)
+            ( ( is-section-map-inv-is-pointed-equiv _) ∙
+              ( preserves-point-pointed-map f))
+            ( ( inv (nat-htpy is-section-map-inv-is-pointed-equiv _)) ∙
+              ( left-whisker-concat
+                ( is-section-map-inv-is-pointed-equiv _)
+                ( ap-id (preserves-point-pointed-map f)))))))
+
+    is-pointed-section-pointed-map-inv-is-pointed-equiv :
+      is-pointed-section f pointed-map-inv-is-pointed-equiv
+    pr1 is-pointed-section-pointed-map-inv-is-pointed-equiv =
+      is-section-map-inv-is-pointed-equiv
+    pr2 is-pointed-section-pointed-map-inv-is-pointed-equiv =
+      coherence-point-is-section-map-inv-is-pointed-equiv
 ```
 
 ### Pointed equivalences
@@ -128,9 +194,6 @@ module _
   map-pointed-equiv : type-Pointed-Type A → type-Pointed-Type B
   map-pointed-equiv = map-equiv equiv-pointed-equiv
 
-  is-equiv-map-pointed-equiv : is-equiv map-pointed-equiv
-  is-equiv-map-pointed-equiv = is-equiv-map-equiv equiv-pointed-equiv
-
   preserves-point-pointed-equiv :
     Id (map-pointed-equiv (point-Pointed-Type A)) (point-Pointed-Type B)
   preserves-point-pointed-equiv = pr2 e
@@ -139,9 +202,87 @@ module _
   pr1 pointed-map-pointed-equiv = map-pointed-equiv
   pr2 pointed-map-pointed-equiv = preserves-point-pointed-equiv
 
+  is-equiv-map-pointed-equiv : is-equiv map-pointed-equiv
+  is-equiv-map-pointed-equiv = is-equiv-map-equiv equiv-pointed-equiv
+
   is-pointed-equiv-pointed-equiv :
     is-pointed-equiv pointed-map-pointed-equiv
   is-pointed-equiv-pointed-equiv = is-equiv-map-pointed-equiv
+
+  pointed-map-inv-pointed-equiv : B →∗ A
+  pointed-map-inv-pointed-equiv =
+    pointed-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  map-inv-pointed-equiv : type-Pointed-Type B → type-Pointed-Type A
+  map-inv-pointed-equiv =
+    map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  preserves-point-map-inv-pointed-equiv :
+    map-inv-pointed-equiv (point-Pointed-Type B) ＝ point-Pointed-Type A
+  preserves-point-map-inv-pointed-equiv =
+    preserves-point-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  is-pointed-section-pointed-map-inv-pointed-equiv :
+    is-pointed-section
+      ( pointed-map-pointed-equiv)
+      ( pointed-map-inv-pointed-equiv)
+  is-pointed-section-pointed-map-inv-pointed-equiv =
+    is-pointed-section-pointed-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  is-section-map-inv-pointed-equiv :
+    is-section
+      ( map-pointed-equiv)
+      ( map-inv-pointed-equiv)
+  is-section-map-inv-pointed-equiv =
+    is-section-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  coherence-point-is-section-map-inv-pointed-equiv :
+    coherence-point-unpointed-htpy-pointed-Π
+      ( pointed-map-pointed-equiv ∘∗ pointed-map-inv-pointed-equiv)
+      ( id-pointed-map)
+      ( is-section-map-inv-pointed-equiv)
+  coherence-point-is-section-map-inv-pointed-equiv =
+    coherence-point-is-section-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  is-pointed-retraction-pointed-map-inv-pointed-equiv :
+    is-pointed-retraction
+      ( pointed-map-pointed-equiv)
+      ( pointed-map-inv-pointed-equiv)
+  is-pointed-retraction-pointed-map-inv-pointed-equiv =
+    is-pointed-retraction-pointed-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  is-retraction-map-inv-pointed-equiv :
+    is-retraction
+      ( map-pointed-equiv)
+      ( map-inv-pointed-equiv)
+  is-retraction-map-inv-pointed-equiv =
+    is-retraction-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
+
+  coherence-point-is-retraction-map-inv-pointed-equiv :
+    coherence-point-unpointed-htpy-pointed-Π
+      ( pointed-map-inv-pointed-equiv ∘∗ pointed-map-pointed-equiv)
+      ( id-pointed-map)
+      ( is-retraction-map-inv-pointed-equiv)
+  coherence-point-is-retraction-map-inv-pointed-equiv =
+    coherence-point-is-retraction-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv)
+      ( is-pointed-equiv-pointed-equiv)
 ```
 
 ### The equivalence between the total space of pointed equivalences and pointed equivalences
@@ -294,42 +435,42 @@ module _
   (H : universal-property-pointed-equiv f)
   where
 
-  pointed-map-inv-is-equiv-universal-property-pointed-equiv : B →∗ A
-  pointed-map-inv-is-equiv-universal-property-pointed-equiv =
-    map-inv-is-equiv (H A) (id-pointed-map)
+  pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv : B →∗ A
+  pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv =
+    map-inv-is-equiv (H A) id-pointed-map
 
-  map-inv-is-equiv-universal-property-pointed-equiv :
+  map-inv-is-pointed-equiv-universal-property-pointed-equiv :
     type-Pointed-Type B → type-Pointed-Type A
-  map-inv-is-equiv-universal-property-pointed-equiv =
+  map-inv-is-pointed-equiv-universal-property-pointed-equiv =
     map-pointed-map
-      pointed-map-inv-is-equiv-universal-property-pointed-equiv
+      pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv
 
-  preserves-point-map-inv-is-equiv-universal-property-pointed-equiv :
-    map-inv-is-equiv-universal-property-pointed-equiv
+  preserves-point-map-inv-is-pointed-equiv-universal-property-pointed-equiv :
+    map-inv-is-pointed-equiv-universal-property-pointed-equiv
       ( point-Pointed-Type B) ＝
     point-Pointed-Type A
-  preserves-point-map-inv-is-equiv-universal-property-pointed-equiv =
+  preserves-point-map-inv-is-pointed-equiv-universal-property-pointed-equiv =
     preserves-point-pointed-map
-      pointed-map-inv-is-equiv-universal-property-pointed-equiv
+      pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv
 
-  is-pointed-retraction-pointed-map-inv-is-equiv-universal-property-pointed-equiv :
+  is-pointed-retraction-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv :
     is-pointed-retraction f
-      pointed-map-inv-is-equiv-universal-property-pointed-equiv
-  is-pointed-retraction-pointed-map-inv-is-equiv-universal-property-pointed-equiv =
+      pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv
+  is-pointed-retraction-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv =
     pointed-htpy-eq _ _ (is-section-map-inv-is-equiv (H A) (id-pointed-map))
 
-  is-retraction-map-inv-is-equiv-universal-property-pointed-equiv :
+  is-retraction-map-inv-is-pointed-equiv-universal-property-pointed-equiv :
     is-retraction
       ( map-pointed-map f)
-      ( map-inv-is-equiv-universal-property-pointed-equiv)
-  is-retraction-map-inv-is-equiv-universal-property-pointed-equiv =
+      ( map-inv-is-pointed-equiv-universal-property-pointed-equiv)
+  is-retraction-map-inv-is-pointed-equiv-universal-property-pointed-equiv =
     htpy-pointed-htpy
-      ( is-pointed-retraction-pointed-map-inv-is-equiv-universal-property-pointed-equiv)
+      ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
 
-  is-pointed-section-pointed-map-inv-is-equiv-universal-property-pointed-equiv :
+  is-pointed-section-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv :
     is-pointed-section f
-      pointed-map-inv-is-equiv-universal-property-pointed-equiv
-  is-pointed-section-pointed-map-inv-is-equiv-universal-property-pointed-equiv =
+      pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv
+  is-pointed-section-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv =
     pointed-htpy-eq _ _
       ( is-injective-is-equiv (H B)
         ( eq-pointed-htpy ((f ∘∗ _) ∘∗ f) (id-pointed-map ∘∗ f)
@@ -337,25 +478,25 @@ module _
             ( associative-comp-pointed-map f _ f)
             ( concat-pointed-htpy
               ( left-whisker-pointed-htpy f _ _
-                ( is-pointed-retraction-pointed-map-inv-is-equiv-universal-property-pointed-equiv))
+                ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv))
               ( concat-pointed-htpy
                 ( right-unit-law-comp-pointed-map f)
                 ( inv-left-unit-law-comp-pointed-map f))))))
 
-  is-section-map-inv-is-equiv-universal-property-pointed-equiv :
+  is-section-map-inv-is-pointed-equiv-universal-property-pointed-equiv :
     is-section
       ( map-pointed-map f)
-      ( map-inv-is-equiv-universal-property-pointed-equiv)
-  is-section-map-inv-is-equiv-universal-property-pointed-equiv =
+      ( map-inv-is-pointed-equiv-universal-property-pointed-equiv)
+  is-section-map-inv-is-pointed-equiv-universal-property-pointed-equiv =
     htpy-pointed-htpy
-      ( is-pointed-section-pointed-map-inv-is-equiv-universal-property-pointed-equiv)
+      ( is-pointed-section-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
 
-  is-equiv-universal-property-pointed-equiv : is-pointed-equiv f
-  is-equiv-universal-property-pointed-equiv =
+  is-pointed-equiv-universal-property-pointed-equiv : is-pointed-equiv f
+  is-pointed-equiv-universal-property-pointed-equiv =
     is-equiv-is-invertible
-      ( map-inv-is-equiv-universal-property-pointed-equiv)
-      ( is-section-map-inv-is-equiv-universal-property-pointed-equiv)
-      ( is-retraction-map-inv-is-equiv-universal-property-pointed-equiv)
+      ( map-inv-is-pointed-equiv-universal-property-pointed-equiv)
+      ( is-section-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
+      ( is-retraction-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
 ```
 
 ### Any pointed equivalence satisfies the universal property of pointed equivalences
@@ -366,86 +507,90 @@ module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
-  map-section-precomp-universal-property-pointed-equiv-is-pointed-equiv :
+  map-inv-universal-property-pointed-equiv-is-pointed-equiv :
+    (H : is-pointed-equiv f) {l : Level} (C : Pointed-Type l) →
+    (A →∗ C) → (B →∗ C)
+  map-inv-universal-property-pointed-equiv-is-pointed-equiv H C =
+    precomp-pointed-map
+      ( pointed-map-inv-is-pointed-equiv f H)
+      ( C)
+
+  is-section-section-universal-property-pointed-equiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
     {l : Level} (C : Pointed-Type l) →
-    (A →∗ C) → (B →∗ C)
-  map-section-precomp-universal-property-pointed-equiv-is-pointed-equiv H C =
-    {!!}
+    is-section
+      ( precomp-pointed-map f C)
+      ( map-inv-universal-property-pointed-equiv-is-pointed-equiv
+        ( H)
+        ( C))
+  is-section-section-universal-property-pointed-equiv-is-pointed-equiv H C h =
+    eq-pointed-htpy
+      ( (h ∘∗ pointed-map-inv-is-pointed-equiv f H) ∘∗ f)
+      ( h)
+      ( concat-pointed-htpy
+        ( associative-comp-pointed-map h
+          ( pointed-map-inv-is-pointed-equiv f H)
+          ( f))
+        ( left-whisker-pointed-htpy h
+          ( pointed-map-inv-is-pointed-equiv f H ∘∗ f)
+          ( id-pointed-map)
+          ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv f H)))
+    
 
-  section-precomp-universal-property-pointed-equiv-is-pointed-equiv :
+  section-universal-property-pointed-equiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
     {l : Level} (C : Pointed-Type l) →
     section (precomp-pointed-map f C)
-  section-precomp-universal-property-pointed-equiv-is-pointed-equiv = {!!}
+  pr1 (section-universal-property-pointed-equiv-is-pointed-equiv H C) =
+    map-inv-universal-property-pointed-equiv-is-pointed-equiv H C
+  pr2 (section-universal-property-pointed-equiv-is-pointed-equiv H C) =
+    is-section-section-universal-property-pointed-equiv-is-pointed-equiv
+      ( H)
+      ( C)
 
-  retraction-precomp-universal-property-pointed-3quiv-is-pointed-equiv :
+  is-retraction-retraction-universal-property-pointed-equiv-is-pointed-equiv :
+    (H : is-pointed-equiv f) →
+    {l : Level} (C : Pointed-Type l) →
+    is-retraction
+      ( precomp-pointed-map f C)
+      ( map-inv-universal-property-pointed-equiv-is-pointed-equiv
+        ( H)
+        ( C))
+  is-retraction-retraction-universal-property-pointed-equiv-is-pointed-equiv
+    H C h =
+    eq-pointed-htpy
+      ( (h ∘∗ f) ∘∗ pointed-map-inv-is-pointed-equiv f H)
+      ( h)
+      ( concat-pointed-htpy
+        ( associative-comp-pointed-map h f
+          ( pointed-map-inv-is-pointed-equiv f H))
+        ( left-whisker-pointed-htpy h
+          ( f ∘∗ pointed-map-inv-is-pointed-equiv f H)
+          ( id-pointed-map)
+          ( is-pointed-section-pointed-map-inv-is-pointed-equiv f H)))
+
+  retraction-universal-property-pointed-3quiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
     {l : Level} (C : Pointed-Type l) →
     retraction (precomp-pointed-map f C)
-  retraction-precomp-universal-property-pointed-3quiv-is-pointed-equiv = {!!}
+  pr1
+    ( retraction-universal-property-pointed-3quiv-is-pointed-equiv H C)
+    =
+    map-inv-universal-property-pointed-equiv-is-pointed-equiv H C
+  pr2
+    ( retraction-universal-property-pointed-3quiv-is-pointed-equiv H C)
+    =
+    is-retraction-retraction-universal-property-pointed-equiv-is-pointed-equiv
+      ( H)
+      ( C)
 
   universal-property-pointed-equiv-is-pointed-equiv :
     is-pointed-equiv f →
     universal-property-pointed-equiv f
   pr1 (universal-property-pointed-equiv-is-pointed-equiv H C) =
-    section-precomp-universal-property-pointed-equiv-is-pointed-equiv H C
+    section-universal-property-pointed-equiv-is-pointed-equiv H C
   pr2 (universal-property-pointed-equiv-is-pointed-equiv H C) =
-    retraction-precomp-universal-property-pointed-3quiv-is-pointed-equiv H C
-
-{-
-    pair
-      ( pair
-        ( precomp-pointed-map C h)
-        ( λ k →
-          eq-pointed-htpy
-            ( (k ∘∗ h) ∘∗ f)
-            ( k)
-            ( concat-pointed-htpy
-              ( (k ∘∗ h) ∘∗ f)
-              ( k ∘∗ (h ∘∗ f))
-              ( k)
-              ( associative-comp-pointed-map k h f)
-              ( concat-pointed-htpy
-                ( k ∘∗ (h ∘∗ f))
-                ( k ∘∗ id-pointed-map)
-                ( k)
-                ( left-whisker-pointed-htpy k
-                  ( h ∘∗ f)
-                  ( id-pointed-map)
-                  ( H))
-                ( right-unit-law-comp-pointed-map k)))))
-      ( pair
-        ( precomp-pointed-map C g)
-        ( λ k →
-          eq-pointed-htpy
-            ( (k ∘∗ f) ∘∗ g)
-            ( k)
-            ( concat-pointed-htpy
-              ( (k ∘∗ f) ∘∗ g)
-              ( k ∘∗ (f ∘∗ g))
-              ( k)
-              ( associative-comp-pointed-map k f g)
-              ( concat-pointed-htpy
-                ( k ∘∗ (f ∘∗ g))
-                ( k ∘∗ id-pointed-map)
-                ( k)
-                ( left-whisker-pointed-htpy k
-                  ( f ∘∗ g)
-                  ( id-pointed-map)
-                  ( G))
-                ( right-unit-law-comp-pointed-map k)))))
-    where
-    I : is-pointed-iso f
-    I = is-iso-is-pointed-equiv f E
-    g : B →∗ A
-    g = pr1 (pr1 I)
-    G : (f ∘∗ g) ~∗ id-pointed-map
-    G = pr2 (pr1 I)
-    h : B →∗ A
-    h = pr1 (pr2 I)
-    H : (h ∘∗ f) ~∗ id-pointed-map
-    H = pr2 (pr2 I) -}
+    retraction-universal-property-pointed-3quiv-is-pointed-equiv H C
 
 equiv-precomp-pointed-map :
   {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
@@ -461,11 +606,21 @@ pr2 (equiv-precomp-pointed-map C f) =
 
 ### Postcomposing by pointed equivalences is a pointed equivalence
 
-```text
+```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
+  is-equiv-postcomp-pointed-map : UUω
+  is-equiv-postcomp-pointed-map =
+    {l : Level} (X : Pointed-Type l) → is-equiv (postcomp-pointed-map f X)
+
+  is-pointed-equiv-is-equiv-postcomp-pointed-map :
+    is-equiv-postcomp-pointed-map → is-pointed-equiv f
+  is-pointed-equiv-is-equiv-postcomp-pointed-map = {!!}
+```
+
+```text
   is-equiv-is-equiv-comp-pointed-map :
     ({l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map {A = X} f)) →
     is-pointed-equiv f
