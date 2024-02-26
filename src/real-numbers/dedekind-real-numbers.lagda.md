@@ -240,7 +240,8 @@ module _
         ( id))
       ( is-located-lower-upper-cut-ℝ x p q H)
 
-  leq-upper-cut-ℝ : leq-ℚ p q →
+  leq-upper-cut-ℝ :
+    leq-ℚ p q →
     is-in-upper-cut-ℝ x p →
     is-in-upper-cut-ℝ x q
   leq-upper-cut-ℝ H H' =
