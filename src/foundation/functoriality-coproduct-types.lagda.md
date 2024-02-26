@@ -89,7 +89,7 @@ module _
   preserves-comp-map-coproduct :
     map-coproduct (f' ∘ f) (g' ∘ g) ~ map-coproduct f' g' ∘ map-coproduct f g
   preserves-comp-map-coproduct (inl x) = refl
-  preserves-comp-map-coproduct (inr x) = refl
+  preserves-comp-map-coproduct (inr y) = refl
 ```
 
 ### Functoriality of coproducts preserves homotopies
