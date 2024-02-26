@@ -10,15 +10,16 @@ module orthogonal-factorization-systems.function-classes where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.cones-over-cospan-diagrams
 open import foundation.equivalence-induction
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
-open import foundation.pullback-squares
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.pullbacks
 open import foundation.univalence
 open import foundation.universe-levels
 ```
@@ -167,20 +168,20 @@ module _
   is-pullback-stable-function-class :
     UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)
   is-pullback-stable-function-class =
-    {A : UU l1} {B C : UU l2} (f : A → C) (g : B → C)
-    (p : Σ (UU l1) (pullback-cone f g)) →
+    {X A : UU l1} {B C : UU l2} (f : A → C) (g : B → C)
+    (c : cone f g X) (p : is-pullback f g c) →
     is-in-function-class P f →
-    is-in-function-class P (horizontal-map-pullback-cone f g (pr2 p))
+    is-in-function-class P (horizontal-map-cone f g c)
 
   is-prop-is-pullback-stable-function-class :
     is-prop (is-pullback-stable-function-class)
   is-prop-is-pullback-stable-function-class =
-    is-prop-iterated-implicit-Π 3
-    ( λ A B C →
-      is-prop-iterated-Π 4
-        ( λ f g p _ →
+    is-prop-iterated-implicit-Π 4
+    ( λ X A B C →
+      is-prop-iterated-Π 5
+        ( λ f g c p _ →
           is-prop-is-in-function-class P
-            ( horizontal-map-pullback-cone f g (pr2 p))))
+            ( horizontal-map-cone f g c)))
 
   is-pullback-stable-function-class-Prop : Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3)
   pr1 is-pullback-stable-function-class-Prop =

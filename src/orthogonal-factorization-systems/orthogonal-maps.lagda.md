@@ -59,7 +59,7 @@ The map `f : A → B` is said to be
    [lifting operation](orthogonal-factorization-systems.lifting-operations.md)
    between `f` and `g`.
 
-3. The following is a [pullback square](foundation.pullback-squares.md):
+3. The following is a [pullback](foundation.pullbacks.md) square:
 
    ```text
                 - ∘ f
