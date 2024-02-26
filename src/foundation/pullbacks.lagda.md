@@ -45,25 +45,28 @@ open import foundation-core.whiskering-identifications-concatenation
 
 ## Idea
 
-Given a [cospan of types](foundation.cospans.md)
+Consider a [cone](foundation.cones-over-cospan-diagrams.md) over a
+[cospan diagram of types](foundation.cospan-diagrams.md) `f : A -> X <- B : g,`
 
 ```text
-  f : A → X ← B : g,
+  C ------> B
+  |         |
+  |         | g
+  ∨         ∨
+  A ------> X.
+       f
 ```
 
-we want to pose the question of whether a certain
-[cone](foundation.cones-over-cospan-diagrams.md) over it is a
+we want to pose the question of whether this cone is a
 {{#concept "pullback cone" Disambiguation="types" Agda=is-pullback}}. Although
 this concept is captured by
 [the universal property of the pullback](foundation-core.universal-property-pullbacks.md),
-this is a large proposition, which is not suitable for all purposes.
-
-Therefore, as our main definition of a pullback cone we consider
-{{#concept "the small predicate of being a pullback" Agda=is-pullback}}: given
-the existence of the
-[standard pullback type](foundation-core.standard-pullbacks.md) `A ×_X B`, we
-can characterize pullback cones as those for which the gap map into the standard
-pullback is an [equivalence](foundation-core.equivalences.md).
+this is a large proposition, which is not suitable for all purposes. Therefore,
+as our main definition of a pullback cone we consider the
+{{#concept "small predicate of being a pullback" Agda=is-pullback}}: given the
+existence of the [standard pullback type](foundation-core.standard-pullbacks.md)
+`A ×_X B`, a cone is a _pullback_ if gap map into the standard pullback is an
+[equivalence](foundation-core.equivalences.md).
 
 ## Properties
 
