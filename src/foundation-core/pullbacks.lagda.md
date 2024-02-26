@@ -159,69 +159,6 @@ abstract
       ( is-equiv-map-commutative-standard-pullback f g)
 ```
 
-### Pullbacks can be "folded"
-
-Given a pullback square
-
-```text
-         f'
-    C -------> B
-    | ⌟        |
-  g'|          | g
-    v          v
-    A -------> X
-         f
-```
-
-we can "fold" the vertical edge onto the horizontal one and get a new pullback
-square
-
-```text
-            C ---------> X
-            | ⌟          |
-  (f' , g') |            |
-            v            v
-          A × B -----> X × X,
-                f × g
-```
-
-moreover, this folded square is a pullback if and only if the original one is.
-
-```agda
-module _
-  {l1 l2 l3 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X)
-  where
-
-  abstract
-    is-pullback-fold-cone-is-pullback :
-      {l4 : Level} {C : UU l4} (c : cone f g C) →
-      is-pullback f g c →
-      is-pullback (map-product f g) (diagonal X) (fold-cone f g c)
-    is-pullback-fold-cone-is-pullback c is-pb-c =
-      is-equiv-left-map-triangle
-        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
-        ( map-fold-cone-standard-pullback f g)
-        ( gap f g c)
-        ( triangle-map-fold-cone-standard-pullback f g c)
-        ( is-pb-c)
-        ( is-equiv-map-fold-cone-standard-pullback f g)
-
-  abstract
-    is-pullback-is-pullback-fold-cone :
-      {l4 : Level} {C : UU l4} (c : cone f g C) →
-      is-pullback (map-product f g) (diagonal X) (fold-cone f g c) →
-      is-pullback f g c
-    is-pullback-is-pullback-fold-cone c =
-      is-equiv-top-map-triangle
-        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
-        ( map-fold-cone-standard-pullback f g)
-        ( gap f g c)
-        ( triangle-map-fold-cone-standard-pullback f g c)
-        ( is-equiv-map-fold-cone-standard-pullback f g)
-```
-
 ### Products of pullbacks are pullbacks
 
 ```agda
@@ -663,6 +600,69 @@ module _
                   ( d)
                   ( is-pb-d)
                   ( pr1 t))))
+```
+
+### Pullbacks can be "folded"
+
+Given a pullback square
+
+```text
+         f'
+    C -------> B
+    | ⌟        |
+  g'|          | g
+    v          v
+    A -------> X
+         f
+```
+
+we can "fold" the vertical edge onto the horizontal one and get a new pullback
+square
+
+```text
+            C ---------> X
+            | ⌟          |
+  (f' , g') |            |
+            v            v
+          A × B -----> X × X,
+                f × g
+```
+
+moreover, this folded square is a pullback if and only if the original one is.
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  abstract
+    is-pullback-fold-cone-is-pullback :
+      {l4 : Level} {C : UU l4} (c : cone f g C) →
+      is-pullback f g c →
+      is-pullback (map-product f g) (diagonal X) (fold-cone f g c)
+    is-pullback-fold-cone-is-pullback c is-pb-c =
+      is-equiv-left-map-triangle
+        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
+        ( map-fold-cone-standard-pullback f g)
+        ( gap f g c)
+        ( triangle-map-fold-cone-standard-pullback f g c)
+        ( is-pb-c)
+        ( is-equiv-map-fold-cone-standard-pullback f g)
+
+  abstract
+    is-pullback-is-pullback-fold-cone :
+      {l4 : Level} {C : UU l4} (c : cone f g C) →
+      is-pullback (map-product f g) (diagonal X) (fold-cone f g c) →
+      is-pullback f g c
+    is-pullback-is-pullback-fold-cone c =
+      is-equiv-top-map-triangle
+        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
+        ( map-fold-cone-standard-pullback f g)
+        ( gap f g c)
+        ( triangle-map-fold-cone-standard-pullback f g c)
+        ( is-equiv-map-fold-cone-standard-pullback f g)
 ```
 
 ## Table of files about pullbacks
