@@ -232,8 +232,10 @@ pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 
 ### Parallel cones over cospan diagrams
 
-Two cones are considered {{#concept "parallel"}} here if they have the same
-domain and their cospans are homotopic keeping the cospanning type fixed.
+Two cones are considered
+{{#concept "parallel" Disambiguation="cones over cospan diagrams"}} here if they
+have the same domain and their cospans are homotopic keeping the cospanning type
+fixed.
 
 ```agda
 module _
