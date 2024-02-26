@@ -25,12 +25,14 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
+open import structured-types.commuting-squares-of-pointed-homotopies
 open import structured-types.commuting-squares-of-pointed-maps
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import structured-types.whiskering-pointed-homotopies
 ```
 
 </details>
@@ -124,8 +126,6 @@ module _
       ( map-codomain-hom-pointed-arrow h)
   htpy-coh-hom-pointed-arrow h =
     htpy-pointed-htpy
-      ( pointed-map-codomain-hom-pointed-arrow h ∘∗ f)
-      ( g ∘∗ pointed-map-domain-hom-pointed-arrow h)
       ( coh-hom-pointed-arrow h)
 ```
 
@@ -177,10 +177,6 @@ module _
       ( pointed-map-codomain-transpose-hom-pointed-arrow)
   coh-transpose-hom-pointed-arrow =
     inv-pointed-htpy
-      ( ( pointed-map-codomain-hom-pointed-arrow f g α) ∘∗
-        ( pointed-map-domain-transpose-hom-pointed-arrow))
-      ( ( pointed-map-codomain-transpose-hom-pointed-arrow) ∘∗
-        ( pointed-map-domain-hom-pointed-arrow f g α))
       ( coh-hom-pointed-arrow f g α)
 
   transpose-hom-pointed-arrow :
@@ -220,11 +216,8 @@ module _
   pr1 (pr2 id-hom-pointed-arrow) = id-pointed-map
   pr2 (pr2 id-hom-pointed-arrow) =
     concat-pointed-htpy
-      ( id-pointed-map ∘∗ f)
-      ( f)
-      ( f ∘∗ id-pointed-map)
       ( left-unit-law-comp-pointed-map f)
-      {!!}
+      ( inv-pointed-htpy (right-unit-law-comp-pointed-map f))
 ```
 
 ### Composition of morphisms of pointed arrows
@@ -303,445 +296,457 @@ module _
       ( pointed-map-domain-comp-hom-pointed-arrow)
       ( pointed-map-codomain-comp-hom-pointed-arrow)
   coh-comp-hom-pointed-arrow =
-    pasting-horizontal-coherence-square-pointed-maps
-      ( map-domain-hom-pointed-arrow f g a)
-      ( map-domain-hom-pointed-arrow g h b)
+    horizontal-pasting-coherence-square-pointed-maps
+      ( pointed-map-domain-hom-pointed-arrow f g a)
+      ( pointed-map-domain-hom-pointed-arrow g h b)
       ( f)
       ( g)
       ( h)
-      ( map-codomain-hom-pointed-arrow f g a)
-      ( map-codomain-hom-pointed-arrow g h b)
+      ( pointed-map-codomain-hom-pointed-arrow f g a)
+      ( pointed-map-codomain-hom-pointed-arrow g h b)
       ( coh-hom-pointed-arrow f g a)
       ( coh-hom-pointed-arrow g h b)
 
---   comp-hom-pointed-arrow : hom-pointed-arrow f h
---   pr1 comp-hom-pointed-arrow =
---     map-domain-comp-hom-pointed-arrow
---   pr1 (pr2 comp-hom-pointed-arrow) =
---     map-codomain-comp-hom-pointed-arrow
---   pr2 (pr2 comp-hom-pointed-arrow) =
---     coh-comp-hom-pointed-arrow
--- ```
+  comp-hom-pointed-arrow : hom-pointed-arrow f h
+  pr1 comp-hom-pointed-arrow = pointed-map-domain-comp-hom-pointed-arrow
+  pr1 (pr2 comp-hom-pointed-arrow) = pointed-map-codomain-comp-hom-pointed-arrow
+  pr2 (pr2 comp-hom-pointed-arrow) = coh-comp-hom-pointed-arrow
+```
 
--- ### Homotopies of morphisms of pointed arrows
+### Homotopies of morphisms of pointed arrows
 
--- A {{#concept "homotopy of morphisms of pointed arrows"}} from `(i , j , H)`
--- to `(i' , j' , H')` is a triple `(I , J , K)` consisting of homotopies
--- `I : i ~ i'` and `J : j ~ j'` and a homotopy `K` witnessing that the
--- [square of homotopies](foundation.commuting-squares-of-homotopies.md)
+A {{#concept "homotopy of morphisms of pointed arrows"}} from `(i , j , H)`
+to `(i' , j' , H')` is a triple `(I , J , K)` consisting of homotopies
+`I : i ~ i'` and `J : j ~ j'` and a homotopy `K` witnessing that the
+[square of homotopies](foundation.commuting-squares-of-homotopies.md)
 
--- ```text
---            J ·r f
---   (j ∘ f) --------> (j' ∘ f)
---      |                 |
---    H |                 | H'
---      V                 V
---   (g ∘ i) --------> (g ∘ i')
---            g ·l I
--- ```
+```text
+           J ·r f
+  (j ∘ f) --------> (j' ∘ f)
+     |                 |
+   H |                 | H'
+     V                 V
+  (g ∘ i) --------> (g ∘ i')
+           g ·l I
+```
 
--- commutes.
+commutes.
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   {X : Pointed-Type l3} {Y : Pointed-Type l4}
---   (f : A → B) (g : X → Y) (α : hom-pointed-arrow f g)
---   where
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  (f : A →∗ B) (g : X →∗ Y) (α : hom-pointed-arrow f g)
+  where
 
---   coherence-htpy-hom-pointed-arrow :
---     (β : hom-pointed-arrow f g)
---     (I :
---       map-domain-hom-pointed-arrow f g α ~ map-domain-hom-pointed-arrow f g β)
---     (J :
---       map-codomain-hom-pointed-arrow f g α ~
---       map-codomain-hom-pointed-arrow f g β) →
---     UU (l1 ⊔ l4)
---   coherence-htpy-hom-pointed-arrow β I J =
---     coherence-square-homotopies
---       ( J ·r f)
---       ( coh-hom-pointed-arrow f g α)
---       ( coh-hom-pointed-arrow f g β)
---       ( g ·l I)
+  coherence-htpy-hom-pointed-arrow :
+    (β : hom-pointed-arrow f g)
+    (I :
+      pointed-map-domain-hom-pointed-arrow f g α ~∗
+      pointed-map-domain-hom-pointed-arrow f g β)
+    (J :
+      pointed-map-codomain-hom-pointed-arrow f g α ~∗
+      pointed-map-codomain-hom-pointed-arrow f g β) →
+    UU (l1 ⊔ l4)
+  coherence-htpy-hom-pointed-arrow β I J =
+    coherence-square-pointed-homotopies
+      ( right-whisker-pointed-htpy _ _ J f)
+      ( coh-hom-pointed-arrow f g α)
+      ( coh-hom-pointed-arrow f g β)
+      ( left-whisker-pointed-htpy g _ _ I)
 
---   htpy-hom-pointed-arrow :
---     (β : hom-pointed-arrow f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
---   htpy-hom-pointed-arrow β =
---     Σ ( map-domain-hom-pointed-arrow f g α ~ map-domain-hom-pointed-arrow f g β)
---       ( λ I →
---         Σ ( map-codomain-hom-pointed-arrow f g α ~
---             map-codomain-hom-pointed-arrow f g β)
---           ( coherence-htpy-hom-pointed-arrow β I))
+  htpy-hom-pointed-arrow :
+    (β : hom-pointed-arrow f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-hom-pointed-arrow β =
+    Σ ( pointed-map-domain-hom-pointed-arrow f g α ~∗
+        pointed-map-domain-hom-pointed-arrow f g β)
+      ( λ I →
+        Σ ( pointed-map-codomain-hom-pointed-arrow f g α ~∗
+            pointed-map-codomain-hom-pointed-arrow f g β)
+          ( coherence-htpy-hom-pointed-arrow β I))
 
---   module _
---     (β : hom-pointed-arrow f g) (η : htpy-hom-pointed-arrow β)
---     where
+  module _
+    (β : hom-pointed-arrow f g) (η : htpy-hom-pointed-arrow β)
+    where
 
---     htpy-domain-htpy-hom-pointed-arrow :
---       map-domain-hom-pointed-arrow f g α ~ map-domain-hom-pointed-arrow f g β
---     htpy-domain-htpy-hom-pointed-arrow = pr1 η
+    pointed-htpy-domain-htpy-hom-pointed-arrow :
+      pointed-map-domain-hom-pointed-arrow f g α ~∗
+      pointed-map-domain-hom-pointed-arrow f g β
+    pointed-htpy-domain-htpy-hom-pointed-arrow = pr1 η
 
---     htpy-codomain-htpy-hom-pointed-arrow :
---       map-codomain-hom-pointed-arrow f g α ~
---       map-codomain-hom-pointed-arrow f g β
---     htpy-codomain-htpy-hom-pointed-arrow = pr1 (pr2 η)
+    pointed-htpy-codomain-htpy-hom-pointed-arrow :
+      pointed-map-codomain-hom-pointed-arrow f g α ~∗
+      pointed-map-codomain-hom-pointed-arrow f g β
+    pointed-htpy-codomain-htpy-hom-pointed-arrow = pr1 (pr2 η)
 
---     coh-htpy-hom-pointed-arrow :
---       coherence-square-homotopies
---         ( htpy-codomain-htpy-hom-pointed-arrow ·r f)
---         ( coh-hom-pointed-arrow f g α)
---         ( coh-hom-pointed-arrow f g β)
---         ( g ·l htpy-domain-htpy-hom-pointed-arrow)
---     coh-htpy-hom-pointed-arrow = pr2 (pr2 η)
+    coh-htpy-hom-pointed-arrow :
+      coherence-htpy-hom-pointed-arrow β
+        ( pointed-htpy-domain-htpy-hom-pointed-arrow)
+        ( pointed-htpy-codomain-htpy-hom-pointed-arrow)
+    coh-htpy-hom-pointed-arrow = pr2 (pr2 η)
 
---   refl-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow α
---   pr1 refl-htpy-hom-pointed-arrow = refl-htpy
---   pr1 (pr2 refl-htpy-hom-pointed-arrow) = refl-htpy
---   pr2 (pr2 refl-htpy-hom-pointed-arrow) = right-unit-htpy
+  refl-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow α
+  pr1 refl-htpy-hom-pointed-arrow = refl-pointed-htpy _
+  pr1 (pr2 refl-htpy-hom-pointed-arrow) = refl-pointed-htpy _
+  pr2 (pr2 refl-htpy-hom-pointed-arrow) = {!!}
 
---   is-torsorial-htpy-hom-pointed-arrow : is-torsorial htpy-hom-pointed-arrow
---   is-torsorial-htpy-hom-pointed-arrow =
---     is-torsorial-Eq-structure
---       ( λ i jH I → Σ _ _)
---       ( is-torsorial-htpy (map-domain-hom-pointed-arrow f g α))
---       ( map-domain-hom-pointed-arrow f g α , refl-htpy)
---       ( is-torsorial-Eq-structure
---         ( λ j H J → _)
---         ( is-torsorial-htpy (map-codomain-hom-pointed-arrow f g α))
---         ( map-codomain-hom-pointed-arrow f g α , refl-htpy)
---         ( is-torsorial-htpy (coh-hom-pointed-arrow f g α ∙h refl-htpy)))
+  is-torsorial-htpy-hom-pointed-arrow : is-torsorial htpy-hom-pointed-arrow
+  is-torsorial-htpy-hom-pointed-arrow =
+    is-torsorial-Eq-structure
+      {! !}
+      {!!}
+      {!!}
 
---   htpy-eq-hom-pointed-arrow :
---     (β : hom-pointed-arrow f g) → α ＝ β → htpy-hom-pointed-arrow β
---   htpy-eq-hom-pointed-arrow β refl = refl-htpy-hom-pointed-arrow
+{-
+    is-torsorial-Eq-structure
+      ( λ i jH I → Σ _ _)
+      ( is-torsorial-htpy (map-domain-hom-pointed-arrow f g α))
+      ( map-domain-hom-pointed-arrow f g α , refl-htpy)
+      ( is-torsorial-Eq-structure
+        ( λ j H J → _)
+        ( is-torsorial-htpy (map-codomain-hom-pointed-arrow f g α))
+        ( map-codomain-hom-pointed-arrow f g α , refl-htpy)
+        ( is-torsorial-htpy (coh-hom-pointed-arrow f g α ∙h refl-htpy))) -}
 
---   is-equiv-htpy-eq-hom-pointed-arrow :
---     (β : hom-pointed-arrow f g) → is-equiv (htpy-eq-hom-pointed-arrow β)
---   is-equiv-htpy-eq-hom-pointed-arrow =
---     fundamental-theorem-id
---       ( is-torsorial-htpy-hom-pointed-arrow)
---       ( htpy-eq-hom-pointed-arrow)
+  htpy-eq-hom-pointed-arrow :
+    (β : hom-pointed-arrow f g) → α ＝ β → htpy-hom-pointed-arrow β
+  htpy-eq-hom-pointed-arrow β refl = refl-htpy-hom-pointed-arrow
 
---   extensionality-hom-pointed-arrow :
---     (β : hom-pointed-arrow f g) → (α ＝ β) ≃ htpy-hom-pointed-arrow β
---   pr1 (extensionality-hom-pointed-arrow β) =
---     htpy-eq-hom-pointed-arrow β
---   pr2 (extensionality-hom-pointed-arrow β) =
---     is-equiv-htpy-eq-hom-pointed-arrow β
+  is-equiv-htpy-eq-hom-pointed-arrow :
+    (β : hom-pointed-arrow f g) → is-equiv (htpy-eq-hom-pointed-arrow β)
+  is-equiv-htpy-eq-hom-pointed-arrow =
+    fundamental-theorem-id
+      ( is-torsorial-htpy-hom-pointed-arrow)
+      ( htpy-eq-hom-pointed-arrow)
 
---   eq-htpy-hom-pointed-arrow :
---     (β : hom-pointed-arrow f g) → htpy-hom-pointed-arrow β → α ＝ β
---   eq-htpy-hom-pointed-arrow β =
---     map-inv-equiv (extensionality-hom-pointed-arrow β)
--- ```
+  extensionality-hom-pointed-arrow :
+    (β : hom-pointed-arrow f g) → (α ＝ β) ≃ htpy-hom-pointed-arrow β
+  pr1 (extensionality-hom-pointed-arrow β) =
+    htpy-eq-hom-pointed-arrow β
+  pr2 (extensionality-hom-pointed-arrow β) =
+    is-equiv-htpy-eq-hom-pointed-arrow β
 
--- ### Concatenation of homotopies of morphisms of pointed arrows
+  eq-htpy-hom-pointed-arrow :
+    (β : hom-pointed-arrow f g) → htpy-hom-pointed-arrow β → α ＝ β
+  eq-htpy-hom-pointed-arrow β =
+    map-inv-equiv (extensionality-hom-pointed-arrow β)
+```
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   {X : Pointed-Type l3} {Y : Pointed-Type l4}
---   (f : A → B) (g : X → Y) (α β γ : hom-pointed-arrow f g)
---   (H : htpy-hom-pointed-arrow f g α β)
---   (K : htpy-hom-pointed-arrow f g β γ)
---   where
+### Concatenation of homotopies of morphisms of pointed arrows
 
---   htpy-domain-concat-htpy-hom-pointed-arrow :
---     map-domain-hom-pointed-arrow f g α ~ map-domain-hom-pointed-arrow f g γ
---   htpy-domain-concat-htpy-hom-pointed-arrow =
---     htpy-domain-htpy-hom-pointed-arrow f g α β H ∙h
---     htpy-domain-htpy-hom-pointed-arrow f g β γ K
+```text
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  (f : A → B) (g : X → Y) (α β γ : hom-pointed-arrow f g)
+  (H : htpy-hom-pointed-arrow f g α β)
+  (K : htpy-hom-pointed-arrow f g β γ)
+  where
 
---   htpy-codomain-concat-htpy-hom-pointed-arrow :
---     map-codomain-hom-pointed-arrow f g α ~
---     map-codomain-hom-pointed-arrow f g γ
---   htpy-codomain-concat-htpy-hom-pointed-arrow =
---     htpy-codomain-htpy-hom-pointed-arrow f g α β H ∙h
---     htpy-codomain-htpy-hom-pointed-arrow f g β γ K
+  htpy-domain-concat-htpy-hom-pointed-arrow :
+    map-domain-hom-pointed-arrow f g α ~ map-domain-hom-pointed-arrow f g γ
+  htpy-domain-concat-htpy-hom-pointed-arrow =
+    htpy-domain-htpy-hom-pointed-arrow f g α β H ∙h
+    htpy-domain-htpy-hom-pointed-arrow f g β γ K
 
---   coh-concat-htpy-hom-pointed-arrow :
---     coherence-htpy-hom-pointed-arrow f g α γ
---       ( htpy-domain-concat-htpy-hom-pointed-arrow)
---       ( htpy-codomain-concat-htpy-hom-pointed-arrow)
---   coh-concat-htpy-hom-pointed-arrow a =
---     ( ap
---       ( concat
---         ( coh-hom-pointed-arrow f g α a)
---         ( g (map-domain-hom-pointed-arrow f g γ a)))
---       ( ap-concat g
---         ( htpy-domain-htpy-hom-pointed-arrow f g α β H a)
---         ( htpy-domain-htpy-hom-pointed-arrow f g β γ K a))) ∙
---     ( coherence-square-identifications-comp-horizontal
---       ( coh-hom-pointed-arrow f g α a)
---       ( coh-hom-pointed-arrow f g β a)
---       ( coh-hom-pointed-arrow f g γ a)
---       ( coh-htpy-hom-pointed-arrow f g α β H a)
---       ( coh-htpy-hom-pointed-arrow f g β γ K a))
+  htpy-codomain-concat-htpy-hom-pointed-arrow :
+    map-codomain-hom-pointed-arrow f g α ~
+    map-codomain-hom-pointed-arrow f g γ
+  htpy-codomain-concat-htpy-hom-pointed-arrow =
+    htpy-codomain-htpy-hom-pointed-arrow f g α β H ∙h
+    htpy-codomain-htpy-hom-pointed-arrow f g β γ K
 
---   concat-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow f g α γ
---   pr1 concat-htpy-hom-pointed-arrow =
---     htpy-domain-concat-htpy-hom-pointed-arrow
---   pr1 (pr2 concat-htpy-hom-pointed-arrow) =
---     htpy-codomain-concat-htpy-hom-pointed-arrow
---   pr2 (pr2 concat-htpy-hom-pointed-arrow) =
---     coh-concat-htpy-hom-pointed-arrow
--- ```
+  coh-concat-htpy-hom-pointed-arrow :
+    coherence-htpy-hom-pointed-arrow f g α γ
+      ( htpy-domain-concat-htpy-hom-pointed-arrow)
+      ( htpy-codomain-concat-htpy-hom-pointed-arrow)
+  coh-concat-htpy-hom-pointed-arrow a =
+    ( ap
+      ( concat
+        ( coh-hom-pointed-arrow f g α a)
+        ( g (map-domain-hom-pointed-arrow f g γ a)))
+      ( ap-concat g
+        ( htpy-domain-htpy-hom-pointed-arrow f g α β H a)
+        ( htpy-domain-htpy-hom-pointed-arrow f g β γ K a))) ∙
+    ( horizontal-pasting-coherence-square-identifications
+      ( coh-hom-pointed-arrow f g α a)
+      ( coh-hom-pointed-arrow f g β a)
+      ( coh-hom-pointed-arrow f g γ a)
+      ( coh-htpy-hom-pointed-arrow f g α β H a)
+      ( coh-htpy-hom-pointed-arrow f g β γ K a))
 
--- ### Inverses of homotopies of morphisms of pointed arrows
+  concat-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow f g α γ
+  pr1 concat-htpy-hom-pointed-arrow =
+    htpy-domain-concat-htpy-hom-pointed-arrow
+  pr1 (pr2 concat-htpy-hom-pointed-arrow) =
+    htpy-codomain-concat-htpy-hom-pointed-arrow
+  pr2 (pr2 concat-htpy-hom-pointed-arrow) =
+    coh-concat-htpy-hom-pointed-arrow
+```
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   {X : Pointed-Type l3} {Y : Pointed-Type l4}
---   (f : A → B) (g : X → Y) (α β : hom-pointed-arrow f g)
---   (H : htpy-hom-pointed-arrow f g α β)
---   where
+### Inverses of homotopies of morphisms of pointed arrows
 
---   htpy-domain-inv-htpy-hom-pointed-arrow :
---     map-domain-hom-pointed-arrow f g β ~ map-domain-hom-pointed-arrow f g α
---   htpy-domain-inv-htpy-hom-pointed-arrow =
---     inv-htpy (htpy-domain-htpy-hom-pointed-arrow f g α β H)
+```text
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  (f : A → B) (g : X → Y) (α β : hom-pointed-arrow f g)
+  (H : htpy-hom-pointed-arrow f g α β)
+  where
 
---   htpy-codomain-inv-htpy-hom-pointed-arrow :
---     map-codomain-hom-pointed-arrow f g β ~ map-codomain-hom-pointed-arrow f g α
---   htpy-codomain-inv-htpy-hom-pointed-arrow =
---     inv-htpy (htpy-codomain-htpy-hom-pointed-arrow f g α β H)
+  htpy-domain-inv-htpy-hom-pointed-arrow :
+    map-domain-hom-pointed-arrow f g β ~ map-domain-hom-pointed-arrow f g α
+  htpy-domain-inv-htpy-hom-pointed-arrow =
+    inv-htpy (htpy-domain-htpy-hom-pointed-arrow f g α β H)
 
---   coh-inv-htpy-hom-pointed-arrow :
---     coherence-htpy-hom-pointed-arrow f g β α
---       ( htpy-domain-inv-htpy-hom-pointed-arrow)
---       ( htpy-codomain-inv-htpy-hom-pointed-arrow)
---   coh-inv-htpy-hom-pointed-arrow a =
---     ( ap
---       ( concat (coh-hom-pointed-arrow f g β a) _)
---       ( ap-inv g (htpy-domain-htpy-hom-pointed-arrow f g α β H a))) ∙
---     ( double-transpose-eq-concat'
---       ( coh-hom-pointed-arrow f g α a)
---       ( htpy-codomain-htpy-hom-pointed-arrow f g α β H (f a))
---       ( ap g (htpy-domain-htpy-hom-pointed-arrow f g α β H a))
---       ( coh-hom-pointed-arrow f g β a)
---       ( inv (coh-htpy-hom-pointed-arrow f g α β H a)))
+  htpy-codomain-inv-htpy-hom-pointed-arrow :
+    map-codomain-hom-pointed-arrow f g β ~ map-codomain-hom-pointed-arrow f g α
+  htpy-codomain-inv-htpy-hom-pointed-arrow =
+    inv-htpy (htpy-codomain-htpy-hom-pointed-arrow f g α β H)
 
---   inv-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow f g β α
---   pr1 inv-htpy-hom-pointed-arrow =
---     htpy-domain-inv-htpy-hom-pointed-arrow
---   pr1 (pr2 inv-htpy-hom-pointed-arrow) =
---     htpy-codomain-inv-htpy-hom-pointed-arrow
---   pr2 (pr2 inv-htpy-hom-pointed-arrow) =
---     coh-inv-htpy-hom-pointed-arrow
--- ```
+  coh-inv-htpy-hom-pointed-arrow :
+    coherence-htpy-hom-pointed-arrow f g β α
+      ( htpy-domain-inv-htpy-hom-pointed-arrow)
+      ( htpy-codomain-inv-htpy-hom-pointed-arrow)
+  coh-inv-htpy-hom-pointed-arrow a =
+    ( ap
+      ( concat (coh-hom-pointed-arrow f g β a) _)
+      ( ap-inv g (htpy-domain-htpy-hom-pointed-arrow f g α β H a))) ∙
+    ( double-transpose-eq-concat'
+      ( coh-hom-pointed-arrow f g α a)
+      ( htpy-codomain-htpy-hom-pointed-arrow f g α β H (f a))
+      ( ap g (htpy-domain-htpy-hom-pointed-arrow f g α β H a))
+      ( coh-hom-pointed-arrow f g β a)
+      ( inv (coh-htpy-hom-pointed-arrow f g α β H a)))
 
--- ### Whiskering of homotopies of morphisms of pointed arrows
+  inv-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow f g β α
+  pr1 inv-htpy-hom-pointed-arrow =
+    htpy-domain-inv-htpy-hom-pointed-arrow
+  pr1 (pr2 inv-htpy-hom-pointed-arrow) =
+    htpy-codomain-inv-htpy-hom-pointed-arrow
+  pr2 (pr2 inv-htpy-hom-pointed-arrow) =
+    coh-inv-htpy-hom-pointed-arrow
+```
 
--- #### Left whiskering
+### Whiskering of homotopies of morphisms of pointed arrows
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 l5 l6 : Level}
---   {A : Pointed-Type l1} {B : Pointed-Type l2}
---   {X : Pointed-Type l3} {Y : Pointed-Type l4}
---   {U : UU l5} {V : UU l6}
---   (f : A → B) (g : X → Y) (h : U → V)
---   (γ : hom-pointed-arrow g h)
---   (α β : hom-pointed-arrow f g) (H : htpy-hom-pointed-arrow f g α β)
---   where
+#### Left whiskering
 
---   htpy-domain-left-whisker-htpy-hom-pointed-arrow :
---     map-domain-comp-hom-pointed-arrow f g h γ α ~
---     map-domain-comp-hom-pointed-arrow f g h γ β
---   htpy-domain-left-whisker-htpy-hom-pointed-arrow =
---     map-domain-hom-pointed-arrow g h γ ·l
---     htpy-domain-htpy-hom-pointed-arrow f g α β H
+```text
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V)
+  (γ : hom-pointed-arrow g h)
+  (α β : hom-pointed-arrow f g) (H : htpy-hom-pointed-arrow f g α β)
+  where
 
---   htpy-codomain-left-whisker-htpy-hom-pointed-arrow :
---     map-codomain-comp-hom-pointed-arrow f g h γ α ~
---     map-codomain-comp-hom-pointed-arrow f g h γ β
---   htpy-codomain-left-whisker-htpy-hom-pointed-arrow =
---     map-codomain-hom-pointed-arrow g h γ ·l
---     htpy-codomain-htpy-hom-pointed-arrow f g α β H
+  htpy-domain-left-whisker-htpy-hom-pointed-arrow :
+    map-domain-comp-hom-pointed-arrow f g h γ α ~
+    map-domain-comp-hom-pointed-arrow f g h γ β
+  htpy-domain-left-whisker-htpy-hom-pointed-arrow =
+    map-domain-hom-pointed-arrow g h γ ·l
+    htpy-domain-htpy-hom-pointed-arrow f g α β H
 
---   coh-left-whisker-htpy-hom-pointed-arrow :
---     coherence-htpy-hom-pointed-arrow f h
---       ( comp-hom-pointed-arrow f g h γ α)
---       ( comp-hom-pointed-arrow f g h γ β)
---       ( htpy-domain-left-whisker-htpy-hom-pointed-arrow)
---       ( htpy-codomain-left-whisker-htpy-hom-pointed-arrow)
---   coh-left-whisker-htpy-hom-pointed-arrow a =
---     ( left-whisk-triangle-identifications'
---       ( ap
---         ( map-codomain-hom-pointed-arrow g h γ)
---         ( coh-hom-pointed-arrow f g α a))
---       ( ( ap ?
---           {-
---           ( coh-hom-pointed-arrow g h γ
---             ( map-domain-hom-pointed-arrow f g α a)) -}
---           ( inv
---             ( ap-comp h
---               ( map-domain-hom-pointed-arrow g h γ)
---               ( htpy-domain-htpy-hom-pointed-arrow f g α β H a)))) ∙
---         ( nat-htpy
---           ( coh-hom-pointed-arrow g h γ)
---           ( htpy-domain-htpy-hom-pointed-arrow f g α β H a)))) ∙
---     ( right-whisk-square-identification
---       ( ap
---         ( map-codomain-hom-pointed-arrow g h γ)
---         ( htpy-codomain-htpy-hom-pointed-arrow f g α β H (f a)))
---       ( ap
---         ( map-codomain-hom-pointed-arrow g h γ)
---         ( coh-hom-pointed-arrow f g α a))
---       ( coh-hom-pointed-arrow g h γ (map-domain-hom-pointed-arrow f g β a))
---       ( ( ap ?
---           {-
---           ( ap
---             ( map-codomain-hom-pointed-arrow g h γ)
---             ( coh-hom-pointed-arrow f g α a) ∙*) -}
---           ( ap-comp
---             ( map-codomain-hom-pointed-arrow g h γ)
---             ( g)
---             ( htpy-domain-htpy-hom-pointed-arrow f g α β H a))) ∙
---         ( coherence-square-identifications-ap
---           ( map-codomain-hom-pointed-arrow g h γ)
---           ( htpy-codomain-htpy-hom-pointed-arrow f g α β H (f a))
---           ( coh-hom-pointed-arrow f g α a)
---           ( coh-hom-pointed-arrow f g β a)
---           ( ap g (htpy-domain-htpy-hom-pointed-arrow f g α β H a))
---           ( coh-htpy-hom-pointed-arrow f g α β H a))))
+  htpy-codomain-left-whisker-htpy-hom-pointed-arrow :
+    map-codomain-comp-hom-pointed-arrow f g h γ α ~
+    map-codomain-comp-hom-pointed-arrow f g h γ β
+  htpy-codomain-left-whisker-htpy-hom-pointed-arrow =
+    map-codomain-hom-pointed-arrow g h γ ·l
+    htpy-codomain-htpy-hom-pointed-arrow f g α β H
 
---   left-whisker-htpy-hom-pointed-arrow :
---     htpy-hom-pointed-arrow f h
---       ( comp-hom-pointed-arrow f g h γ α)
---       ( comp-hom-pointed-arrow f g h γ β)
---   pr1 left-whisker-htpy-hom-pointed-arrow =
---     htpy-domain-left-whisker-htpy-hom-pointed-arrow
---   pr1 (pr2 left-whisker-htpy-hom-pointed-arrow) =
---     htpy-codomain-left-whisker-htpy-hom-pointed-arrow
---   pr2 (pr2 left-whisker-htpy-hom-pointed-arrow) =
---     coh-left-whisker-htpy-hom-pointed-arrow
--- ```
+  coh-left-whisker-htpy-hom-pointed-arrow :
+    coherence-htpy-hom-pointed-arrow f h
+      ( comp-hom-pointed-arrow f g h γ α)
+      ( comp-hom-pointed-arrow f g h γ β)
+      ( htpy-domain-left-whisker-htpy-hom-pointed-arrow)
+      ( htpy-codomain-left-whisker-htpy-hom-pointed-arrow)
+  coh-left-whisker-htpy-hom-pointed-arrow a = ?
 
--- #### Right whiskering
+{-
+    ( left-whisk-triangle-identifications'
+      ( ap
+        ( map-codomain-hom-pointed-arrow g h γ)
+        ( coh-hom-pointed-arrow f g α a))
+      ( ( ap ?
+          {-
+          ( coh-hom-pointed-arrow g h γ
+            ( map-domain-hom-pointed-arrow f g α a)) -}
+          ( inv
+            ( ap-comp h
+              ( map-domain-hom-pointed-arrow g h γ)
+              ( htpy-domain-htpy-hom-pointed-arrow f g α β H a)))) ∙
+        ( nat-htpy
+          ( coh-hom-pointed-arrow g h γ)
+          ( htpy-domain-htpy-hom-pointed-arrow f g α β H a)))) ∙
+    ( right-whisk-square-identification
+      ( ap
+        ( map-codomain-hom-pointed-arrow g h γ)
+        ( htpy-codomain-htpy-hom-pointed-arrow f g α β H (f a)))
+      ( ap
+        ( map-codomain-hom-pointed-arrow g h γ)
+        ( coh-hom-pointed-arrow f g α a))
+      ( coh-hom-pointed-arrow g h γ (map-domain-hom-pointed-arrow f g β a))
+      ( ( ap ?
+          {-
+          ( ap
+            ( map-codomain-hom-pointed-arrow g h γ)
+            ( coh-hom-pointed-arrow f g α a) ∙*) -}
+          ( ap-comp
+            ( map-codomain-hom-pointed-arrow g h γ)
+            ( g)
+            ( htpy-domain-htpy-hom-pointed-arrow f g α β H a))) ∙
+        ( coherence-square-identifications-ap
+          ( map-codomain-hom-pointed-arrow g h γ)
+          ( htpy-codomain-htpy-hom-pointed-arrow f g α β H (f a))
+          ( coh-hom-pointed-arrow f g α a)
+          ( coh-hom-pointed-arrow f g β a)
+          ( ap g (htpy-domain-htpy-hom-pointed-arrow f g α β H a))
+          ( coh-htpy-hom-pointed-arrow f g α β H a)))) -}
 
--- Exercise for Fredrik.
+  left-whisker-htpy-hom-pointed-arrow :
+    htpy-hom-pointed-arrow f h
+      ( comp-hom-pointed-arrow f g h γ α)
+      ( comp-hom-pointed-arrow f g h γ β)
+  pr1 left-whisker-htpy-hom-pointed-arrow =
+    htpy-domain-left-whisker-htpy-hom-pointed-arrow
+  pr1 (pr2 left-whisker-htpy-hom-pointed-arrow) =
+    htpy-codomain-left-whisker-htpy-hom-pointed-arrow
+  pr2 (pr2 left-whisker-htpy-hom-pointed-arrow) =
+    coh-left-whisker-htpy-hom-pointed-arrow
+```
 
--- ### Associativity of composition of morphisms of pointed arrows
+#### Right whiskering
 
--- Consider a commuting diagram of the form
+Exercise for Fredrik.
 
--- ```text
---         α₀       β₀       γ₀
---     A -----> X -----> U -----> K
---     |        |        |        |
---   f |   α  g |   β  h |   γ    | i
---     V        V        V        V
---     B -----> Y -----> V -----> L
---         α₁       β₁       γ₁
--- ```
+### Associativity of composition of morphisms of pointed arrows
 
--- Then associativity of composition of morphisms of pointed arrows follows
--- directly from associativity of horizontal pasting of commutative squares of
--- maps.
+Consider a commuting diagram of the form
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   {X : Pointed-Type l3} {Y : Pointed-Type l4} {U : UU l5} {V : UU l6}
---   {K : UU l7} {L : UU l8} (f : A → B) (g : X → Y) (h : U → V) (i : K → L)
---   (γ : hom-pointed-arrow h i) (β : hom-pointed-arrow g h)
---   (α : hom-pointed-arrow f g)
---   where
+```text
+        α₀       β₀       γ₀
+    A -----> X -----> U -----> K
+    |        |        |        |
+  f |   α  g |   β  h |   γ    | i
+    V        V        V        V
+    B -----> Y -----> V -----> L
+        α₁       β₁       γ₁
+```
 
---   assoc-comp-hom-pointed-arrow :
---     htpy-hom-pointed-arrow f i
---       ( comp-hom-pointed-arrow f g i (comp-hom-pointed-arrow g h i γ β) α)
---       ( comp-hom-pointed-arrow f h i γ (comp-hom-pointed-arrow f g h β α))
---   pr1 assoc-comp-hom-pointed-arrow = refl-htpy
---   pr1 (pr2 assoc-comp-hom-pointed-arrow) = refl-htpy
---   pr2 (pr2 assoc-comp-hom-pointed-arrow) =
---     ( right-unit-htpy) ∙h
---     ( inv-htpy
---       ( assoc-pasting-horizontal-coherence-square-maps
---         ( map-domain-hom-pointed-arrow f g α)
---         ( map-domain-hom-pointed-arrow g h β)
---         ( map-domain-hom-pointed-arrow h i γ)
---         ( f)
---         ( g)
---         ( h)
---         ( i)
---         ( map-codomain-hom-pointed-arrow f g α)
---         ( map-codomain-hom-pointed-arrow g h β)
---         ( map-codomain-hom-pointed-arrow h i γ)
---         ( coh-hom-pointed-arrow f g α)
---         ( coh-hom-pointed-arrow g h β)
---         ( coh-hom-pointed-arrow h i γ)))
+Then associativity of composition of morphisms of pointed arrows follows
+directly from associativity of horizontal pasting of commutative squares of
+maps.
 
---   inv-assoc-comp-hom-pointed-arrow :
---     htpy-hom-pointed-arrow f i
---       ( comp-hom-pointed-arrow f h i γ (comp-hom-pointed-arrow f g h β α))
---       ( comp-hom-pointed-arrow f g i (comp-hom-pointed-arrow g h i γ β) α)
---   pr1 inv-assoc-comp-hom-pointed-arrow = refl-htpy
---   pr1 (pr2 inv-assoc-comp-hom-pointed-arrow) = refl-htpy
---   pr2 (pr2 inv-assoc-comp-hom-pointed-arrow) =
---     ( right-unit-htpy) ∙h
---     ( assoc-pasting-horizontal-coherence-square-maps
---       ( map-domain-hom-pointed-arrow f g α)
---       ( map-domain-hom-pointed-arrow g h β)
---       ( map-domain-hom-pointed-arrow h i γ)
---       ( f)
---       ( g)
---       ( h)
---       ( i)
---       ( map-codomain-hom-pointed-arrow f g α)
---       ( map-codomain-hom-pointed-arrow g h β)
---       ( map-codomain-hom-pointed-arrow h i γ)
---       ( coh-hom-pointed-arrow f g α)
---       ( coh-hom-pointed-arrow g h β)
---       ( coh-hom-pointed-arrow h i γ))
--- ```
+```text
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4} {U : UU l5} {V : UU l6}
+  {K : UU l7} {L : UU l8} (f : A → B) (g : X → Y) (h : U → V) (i : K → L)
+  (γ : hom-pointed-arrow h i) (β : hom-pointed-arrow g h)
+  (α : hom-pointed-arrow f g)
+  where
 
--- ### The left unit law for composition of morphisms of pointed arrows
+  assoc-comp-hom-pointed-arrow :
+    htpy-hom-pointed-arrow f i
+      ( comp-hom-pointed-arrow f g i (comp-hom-pointed-arrow g h i γ β) α)
+      ( comp-hom-pointed-arrow f h i γ (comp-hom-pointed-arrow f g h β α))
+  pr1 assoc-comp-hom-pointed-arrow = refl-htpy
+  pr1 (pr2 assoc-comp-hom-pointed-arrow) = refl-htpy
+  pr2 (pr2 assoc-comp-hom-pointed-arrow) = ?
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   {X : Pointed-Type l3} {Y : Pointed-Type l4}
---   (f : A → B) (g : X → Y) (α : hom-pointed-arrow f g)
---   where
+{-
+    ( right-unit-htpy) ∙h
+    ( inv-htpy
+      ( assoc-horizontal-pasting-coherence-square-maps
+        ( map-domain-hom-pointed-arrow f g α)
+        ( map-domain-hom-pointed-arrow g h β)
+        ( map-domain-hom-pointed-arrow h i γ)
+        ( f)
+        ( g)
+        ( h)
+        ( i)
+        ( map-codomain-hom-pointed-arrow f g α)
+        ( map-codomain-hom-pointed-arrow g h β)
+        ( map-codomain-hom-pointed-arrow h i γ)
+        ( coh-hom-pointed-arrow f g α)
+        ( coh-hom-pointed-arrow g h β)
+        ( coh-hom-pointed-arrow h i γ))) -}
 
---   left-unit-law-comp-hom-pointed-arrow :
---     htpy-hom-pointed-arrow f g
---       ( comp-hom-pointed-arrow f g g id-hom-pointed-arrow α)
---       ( α)
---   pr1 left-unit-law-comp-hom-pointed-arrow = refl-htpy
---   pr1 (pr2 left-unit-law-comp-hom-pointed-arrow) = refl-htpy
---   pr2 (pr2 left-unit-law-comp-hom-pointed-arrow) =
---     ( right-unit-htpy) ∙h
---     ( right-unit-law-pasting-horizontal-coherence-square-maps
---       ( map-domain-hom-pointed-arrow f g α)
---       ( f)
---       ( g)
---       ( map-codomain-hom-pointed-arrow f g α)
---       ( coh-hom-pointed-arrow f g α))
--- ```
+  inv-assoc-comp-hom-pointed-arrow :
+    htpy-hom-pointed-arrow f i
+      ( comp-hom-pointed-arrow f h i γ (comp-hom-pointed-arrow f g h β α))
+      ( comp-hom-pointed-arrow f g i (comp-hom-pointed-arrow g h i γ β) α)
+  pr1 inv-assoc-comp-hom-pointed-arrow = refl-htpy
+  pr1 (pr2 inv-assoc-comp-hom-pointed-arrow) = refl-htpy
+  pr2 (pr2 inv-assoc-comp-hom-pointed-arrow) = ?
 
--- ### The right unit law for composition of morphisms of pointed arrows
+{-
+    ( right-unit-htpy) ∙h
+    ( assoc-horizontal-pasting-coherence-square-maps
+      ( map-domain-hom-pointed-arrow f g α)
+      ( map-domain-hom-pointed-arrow g h β)
+      ( map-domain-hom-pointed-arrow h i γ)
+      ( f)
+      ( g)
+      ( h)
+      ( i)
+      ( map-codomain-hom-pointed-arrow f g α)
+      ( map-codomain-hom-pointed-arrow g h β)
+      ( map-codomain-hom-pointed-arrow h i γ)
+      ( coh-hom-pointed-arrow f g α)
+      ( coh-hom-pointed-arrow g h β)
+      ( coh-hom-pointed-arrow h i γ)) -}
+```
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   {X : Pointed-Type l3} {Y : Pointed-Type l4}
---   (f : A → B) (g : X → Y) (α : hom-pointed-arrow f g)
---   where
+### The left unit law for composition of morphisms of pointed arrows
 
---   right-unit-law-comp-hom-pointed-arrow :
---     htpy-hom-pointed-arrow f g
---       ( comp-hom-pointed-arrow f f g α id-hom-pointed-arrow)
---       ( α)
---   pr1 right-unit-law-comp-hom-pointed-arrow = refl-htpy
---   pr1 (pr2 right-unit-law-comp-hom-pointed-arrow) = refl-htpy
---   pr2 (pr2 right-unit-law-comp-hom-pointed-arrow) = right-unit-htpy
--- ```
+```text
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  (f : A → B) (g : X → Y) (α : hom-pointed-arrow f g)
+  where
 
--- ## See also
+  left-unit-law-comp-hom-pointed-arrow :
+    htpy-hom-pointed-arrow f g
+      ( comp-hom-pointed-arrow f g g id-hom-pointed-arrow α)
+      ( α)
+  pr1 left-unit-law-comp-hom-pointed-arrow = refl-htpy
+  pr1 (pr2 left-unit-law-comp-hom-pointed-arrow) = refl-htpy
+  pr2 (pr2 left-unit-law-comp-hom-pointed-arrow) = ?
 
--- - [Equivalences of pointed arrows](foundation.equivalences-pointed-arrows.md)
--- - [Morphisms of twisted pointed arrows](foundation.morphisms-twisted-pointed-arrows.md)
+{-
+    ( right-unit-htpy) ∙h
+    ( right-unit-law-horizontal-pasting-coherence-square-maps
+      ( map-domain-hom-pointed-arrow f g α)
+      ( f)
+      ( g)
+      ( map-codomain-hom-pointed-arrow f g α)
+      ( coh-hom-pointed-arrow f g α)) -}
+```
+
+### The right unit law for composition of morphisms of pointed arrows
+
+```text
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  (f : A → B) (g : X → Y) (α : hom-pointed-arrow f g)
+  where
+
+  right-unit-law-comp-hom-pointed-arrow :
+    htpy-hom-pointed-arrow f g
+      ( comp-hom-pointed-arrow f f g α id-hom-pointed-arrow)
+      ( α)
+  pr1 right-unit-law-comp-hom-pointed-arrow = refl-htpy
+  pr1 (pr2 right-unit-law-comp-hom-pointed-arrow) = refl-htpy
+  pr2 (pr2 right-unit-law-comp-hom-pointed-arrow) = right-unit-htpy
+```
+
+## See also
+
+- [Equivalences of pointed arrows](foundation.equivalences-pointed-arrows.md)
+- [Morphisms of twisted pointed arrows](foundation.morphisms-twisted-pointed-arrows.md)

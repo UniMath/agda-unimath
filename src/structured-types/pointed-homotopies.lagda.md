@@ -895,3 +895,43 @@ module _
   pr2 associative-concat-pointed-htpy =
     coherence-associative-concat-pointed-htpy
 ```
+
+### Concatenation of pointed 2-homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B} {H K L : f ~∗ g}
+  (α : pointed-2-htpy H K) (β : pointed-2-htpy K L)
+  where
+
+  htpy-concat-pointed-2-htpy :
+    unpointed-htpy-pointed-htpy H L
+  htpy-concat-pointed-2-htpy =
+    htpy-pointed-2-htpy H K α ∙h htpy-pointed-2-htpy K L β
+
+  coherence-point-concat-pointed-2-htpy :
+    coherence-point-unpointed-htpy-pointed-htpy H L htpy-concat-pointed-2-htpy
+  coherence-point-concat-pointed-2-htpy =
+    ( coherence-point-pointed-2-htpy K L β) ∙
+    ( ( right-whisker-concat
+        ( coherence-point-pointed-2-htpy H K α)
+        ( right-whisker-concat
+          ( htpy-pointed-2-htpy K L β (point-Pointed-Type A))
+          ( preserves-point-function-pointed-Π g))) ∙
+      ( ( assoc
+          ( coherence-point-pointed-htpy H)
+          ( _)
+          ( _)) ∙
+        ( inv
+          ( left-whisker-concat
+            ( coherence-point-pointed-htpy H)
+            ( ap-concat
+              ( _∙ pr2 g)
+              ( htpy-pointed-2-htpy H K α _)
+              ( htpy-pointed-2-htpy K L β _))))))
+
+  concat-pointed-2-htpy : pointed-2-htpy H L
+  pr1 concat-pointed-2-htpy = htpy-concat-pointed-2-htpy
+  pr2 concat-pointed-2-htpy = coherence-point-concat-pointed-2-htpy
+```

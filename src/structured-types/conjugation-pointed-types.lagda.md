@@ -98,8 +98,6 @@ module _
     conjugation-Ω p ~∗ action-on-loops-conjugation-Pointed-Type p
   compute-action-on-loops-conjugation-Pointed-Type p =
     concat-pointed-htpy
-      ( conjugation-Ω p) (conjugation-Ω' p)
-      ( action-on-loops-conjugation-Pointed-Type p)
       ( compute-conjugation-Ω p)
       ( compute-action-on-loops-conjugation-Pointed-Type' p)
 

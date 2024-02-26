@@ -70,7 +70,7 @@ module _
       ( map-pointed-map right)
       ( map-pointed-map bottom)
   coherence-square-maps-coherence-square-pointed-maps =
-    htpy-pointed-htpy (bottom ∘∗ left) (right ∘∗ top)
+    htpy-pointed-htpy
 ```
 
 ## Operations

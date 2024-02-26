@@ -82,8 +82,10 @@ module _
 
   preserves-point-compute-conjugation-Ω :
     {x y : A} (p : x ＝ y) →
-    ( htpy-compute-conjugation-Ω p refl) ＝
-    ( preserves-point-conjugation-Ω p ∙ inv (preserves-point-conjugation-Ω' p))
+    coherence-point-unpointed-htpy-pointed-Π
+      ( conjugation-Ω p)
+      ( conjugation-Ω' p)
+      ( htpy-compute-conjugation-Ω p)
   preserves-point-compute-conjugation-Ω refl = refl
 
   compute-conjugation-Ω :
