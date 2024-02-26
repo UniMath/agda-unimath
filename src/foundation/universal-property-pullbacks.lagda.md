@@ -127,7 +127,8 @@ module _
       universal-property-pullback j h c →
       universal-property-pullback i (vertical-map-cone j h c) d →
       universal-property-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d)
-    universal-property-pullback-rectangle-universal-property-pullback-left-square c d up-pb-c up-pb-d =
+    universal-property-pullback-rectangle-universal-property-pullback-left-square
+      c d up-pb-c up-pb-d =
       universal-property-pullback-is-pullback (j ∘ i) h
         ( pasting-horizontal-cone i j h c d)
         ( is-pullback-rectangle-is-pullback-left-square i j h c d
@@ -142,7 +143,8 @@ module _
       universal-property-pullback (j ∘ i) h
         ( pasting-horizontal-cone i j h c d) →
       universal-property-pullback i (vertical-map-cone j h c) d
-    universal-property-pullback-left-square-universal-property-pullback-rectangle c d up-pb-c up-pb-rect =
+    universal-property-pullback-left-square-universal-property-pullback-rectangle
+      c d up-pb-c up-pb-rect =
       universal-property-pullback-is-pullback
         ( i)
         ( vertical-map-cone j h c)
@@ -185,7 +187,8 @@ module _
       universal-property-pullback f g c →
       universal-property-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
       universal-property-pullback (horizontal-map-cone f g c) h d
-    universal-property-pullback-top-universal-property-pullback-rectangle c d up-pb-c up-pb-dc =
+    universal-property-pullback-top-universal-property-pullback-rectangle
+      c d up-pb-c up-pb-dc =
       universal-property-pullback-is-pullback
         ( horizontal-map-cone f g c)
         ( h)
@@ -202,7 +205,8 @@ module _
       universal-property-pullback f g c →
       universal-property-pullback (horizontal-map-cone f g c) h d →
       universal-property-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
-    universal-property-pullback-rectangle-universal-property-pullback-top c d up-pb-c up-pb-d =
+    universal-property-pullback-rectangle-universal-property-pullback-top
+      c d up-pb-c up-pb-d =
       universal-property-pullback-is-pullback
         ( f)
         ( g ∘ h)
