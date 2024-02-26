@@ -427,7 +427,7 @@ module _
     universal-property-orthogonal-maps f g →
     universal-property-orthogonal-maps f (h ∘ g)
   up-orthogonal-right-comp =
-    up-pullback-rectangle-up-pullback-top
+    universal-property-pullback-rectangle-universal-property-pullback-top
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
@@ -459,7 +459,7 @@ module _
     universal-property-orthogonal-maps f (h ∘ g) →
     universal-property-orthogonal-maps f g
   up-orthogonal-right-right-factor =
-    up-pullback-top-up-pullback-rectangle
+    universal-property-pullback-top-universal-property-pullback-rectangle
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
@@ -519,7 +519,7 @@ module _
     universal-property-orthogonal-maps h g →
     universal-property-orthogonal-maps (h ∘ f) g
   up-orthogonal-left-comp =
-    up-pullback-rectangle-up-pullback-left-square
+    universal-property-pullback-rectangle-universal-property-pullback-left-square
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
@@ -551,7 +551,7 @@ module _
     universal-property-orthogonal-maps (h ∘ f) g →
     universal-property-orthogonal-maps h g
   up-orthogonal-left-left-factor =
-    up-pullback-left-square-up-pullback-rectangle
+    universal-property-pullback-left-square-universal-property-pullback-rectangle
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
