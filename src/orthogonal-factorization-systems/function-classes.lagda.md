@@ -8,18 +8,18 @@ module orthogonal-factorization-systems.function-classes where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.cones-over-cospan-diagrams
 open import foundation.equivalence-induction
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.pullbacks
 open import foundation.univalence
 open import foundation.universe-levels
 ```

@@ -65,9 +65,7 @@ module _
   is-pullback c = is-equiv (gap f g c)
 ```
 
-## Properties
-
-### A cone satisfies the universal property of the pullback if and only if the gap map is an equivalence
+### A cone is a pullback if and only if it satisfies the universal property
 
 ```agda
 module _
@@ -99,6 +97,34 @@ module _
         ( is-pullback-c)
         ( universal-property-standard-pullback f g)
 ```
+
+### The gap map into a pullback
+
+The
+{{#concept "gap map" Disambiguation="cone over a cospan" Agda=gap-is-pullback}}
+of a [commuting square](foundation-core.commuting-squares-of-maps.md) is the map
+from the domain of the cone into the pullback.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C) (H : is-pullback f g c)
+  where
+
+  gap-is-pullback : {l5 : Level} {C' : UU l5} → cone f g C' → C' → C
+  gap-is-pullback =
+    map-universal-property-pullback f g c
+      ( universal-property-pullback-is-pullback f g c H)
+
+  compute-gap-is-pullback :
+    {l5 : Level} {C' : UU l5} (c' : cone f g C') →
+    cone-map f g c (gap-is-pullback c') ＝ c'
+  compute-gap-is-pullback =
+    compute-map-universal-property-pullback f g c
+      ( universal-property-pullback-is-pullback f g c H)
+```
+
+## Properties
 
 ### Pullbacks are symmetric
 

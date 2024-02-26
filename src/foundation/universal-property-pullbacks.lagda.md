@@ -81,13 +81,13 @@ module _
   where
 
   abstract
-    uniquely-unique-pullback :
+    uniquely-unique-up-pullback :
       ( c' : cone f g C') (c : cone f g C) →
       ( up-c' : universal-property-pullback f g c') →
       ( up-c : universal-property-pullback f g c) →
       is-contr
         ( Σ (C' ≃ C) (λ e → htpy-cone f g (cone-map f g c (map-equiv e)) c'))
-    uniquely-unique-pullback c' c up-c' up-c =
+    uniquely-unique-up-pullback c' c up-c' up-c =
       is-torsorial-Eq-subtype
         ( uniqueness-universal-property-pullback f g c up-c C' c')
         ( is-property-is-equiv)
