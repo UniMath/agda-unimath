@@ -117,7 +117,7 @@ pr1 (emb-postcomp f A) = postcomp A (map-emb f)
 pr2 (emb-postcomp f A) = is-emb-postcomp-is-emb (map-emb f) (is-emb-map-emb f) A
 ```
 
-### Postcomp cones
+### Postcomposition cones
 
 ```agda
 postcomp-cone :
