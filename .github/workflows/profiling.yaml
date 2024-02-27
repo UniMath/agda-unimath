@@ -74,5 +74,8 @@ jobs:
           echo 'window.BENCHMARK_DATA =' | cat - ../benchmark-cache/data.json > benchmark-website/data.js
 
       - name: Deploy the new profiling website
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.PERF_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.PERF_SITE_KEY }}
         run: |
-          npx netlify-cli deploy --dir=benchmark-website
+          npx netlify-cli deploy --prod --dir=benchmark-website
