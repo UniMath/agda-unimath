@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.dependent-sums-pullbacks
 open import foundation.descent-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -65,8 +66,8 @@ this is a large proposition, which is not suitable for all purposes. Therefore,
 as our main definition of a pullback cone we consider the
 {{#concept "small predicate of being a pullback" Agda=is-pullback}}: given the
 existence of the [standard pullback type](foundation-core.standard-pullbacks.md)
-`A ×_X B`, a cone is a _pullback_ if gap map into the standard pullback is an
-[equivalence](foundation-core.equivalences.md).
+`A ×_X B`, a cone is a _pullback_ if the gap map into the standard pullback is
+an [equivalence](foundation-core.equivalences.md).
 
 ## Properties
 

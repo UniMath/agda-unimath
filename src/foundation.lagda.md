@@ -109,6 +109,7 @@ open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-products-pullbacks public
 open import foundation.dependent-sequences public
+open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
 open import foundation.dependent-universal-property-equivalences public
 open import foundation.descent-coproduct-types public

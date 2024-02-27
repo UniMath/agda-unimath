@@ -215,74 +215,10 @@ module _
   pr2 (pr2 (htpy-cone-up-pullback-standard-pullback c)) = right-unit-htpy
 ```
 
-### The standard pullback of a Σ-type
-
-Squares of the form
-
-```text
-  Σ (x : A) (Q (f x)) ----> Σ (y : B) Q
-      |                          |
-      |                          |
-  pr1 |                          | pr1
-      |                          |
-      V                          V
-      A -----------------------> B
-                   f
-```
-
-are pullbacks.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (Q : B → UU l3)
-  where
-
-  standard-pullback-Σ : UU (l1 ⊔ l3)
-  standard-pullback-Σ = Σ A (λ x → Q (f x))
-
-  cone-standard-pullback-Σ : cone f pr1 standard-pullback-Σ
-  pr1 cone-standard-pullback-Σ = pr1
-  pr1 (pr2 cone-standard-pullback-Σ) = map-Σ-map-base f Q
-  pr2 (pr2 cone-standard-pullback-Σ) = refl-htpy
-
-  inv-gap-cone-standard-pullback-Σ :
-    standard-pullback f (pr1 {B = Q}) → standard-pullback-Σ
-  pr1 (inv-gap-cone-standard-pullback-Σ (x , _)) = x
-  pr2 (inv-gap-cone-standard-pullback-Σ (x , (.(f x) , q) , refl)) = q
-
-  abstract
-    is-section-inv-gap-cone-standard-pullback-Σ :
-      is-section
-        ( gap f pr1 cone-standard-pullback-Σ)
-        ( inv-gap-cone-standard-pullback-Σ)
-    is-section-inv-gap-cone-standard-pullback-Σ (x , (.(f x) , q) , refl) = refl
-
-  abstract
-    is-retraction-inv-gap-cone-standard-pullback-Σ :
-      is-retraction
-        ( gap f pr1 cone-standard-pullback-Σ)
-        ( inv-gap-cone-standard-pullback-Σ)
-    is-retraction-inv-gap-cone-standard-pullback-Σ = refl-htpy
-
-  abstract
-    is-pullback-cone-standard-pullback-Σ :
-      is-equiv (gap f pr1 cone-standard-pullback-Σ)
-    is-pullback-cone-standard-pullback-Σ =
-      is-equiv-is-invertible
-        inv-gap-cone-standard-pullback-Σ
-        is-section-inv-gap-cone-standard-pullback-Σ
-        is-retraction-inv-gap-cone-standard-pullback-Σ
-
-  compute-standard-pullback-Σ :
-    standard-pullback-Σ ≃ standard-pullback f pr1
-  pr1 compute-standard-pullback-Σ = gap f pr1 cone-standard-pullback-Σ
-  pr2 compute-standard-pullback-Σ = is-pullback-cone-standard-pullback-Σ
-```
-
 ### Standard pullbacks are symmetric
 
-The standard pullback of `f : A → X ← B : g` is equivalent to the standard
-pullback of `g : B → X ← A : f`.
+The standard pullback of `f : A -> X <- B : g` is equivalent to the standard
+pullback of `g : B -> X <- A : f`.
 
 ```agda
 map-commutative-standard-pullback :
@@ -323,7 +259,11 @@ pr1 (commutative-standard-pullback f g) =
   map-commutative-standard-pullback f g
 pr2 (commutative-standard-pullback f g) =
   is-equiv-map-commutative-standard-pullback f g
+```
 
+#### The gap map of the swapped cone computes as the underlying gap map followed by a swap
+
+```agda
 triangle-map-commutative-standard-pullback :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C) →

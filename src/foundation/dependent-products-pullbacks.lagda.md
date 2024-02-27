@@ -37,8 +37,29 @@ open import foundation-core.universal-property-pullbacks
 
 ## Idea
 
-Given a family of pullback squares, their dependent product is again a pullback
-square.
+Given a family of pullback squares
+
+```text
+    Cᵢ -----> Bᵢ
+    | ⌟       |
+    |         | gᵢ
+    ∨         ∨
+    Aᵢ -----> Xᵢ
+         fᵢ
+```
+
+indexed by `i : I`, their dependent product
+
+```text
+  Πᵢ Cᵢ -----> Πᵢ Bᵢ
+    | ⌟          |
+    |            | Πᵢ gᵢ
+    ∨            ∨
+  Πᵢ Aᵢ -----> Πᵢ Xᵢ
+         Πᵢ fᵢ
+```
+
+is again a pullback square.
 
 ## Definitions
 

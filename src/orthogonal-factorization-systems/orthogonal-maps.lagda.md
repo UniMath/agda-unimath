@@ -16,7 +16,8 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
-open import foundation.dependent-pullbacks
+open import foundation.dependent-products-pullbacks
+open import foundation.dependent-sums-pullbacks
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps

@@ -51,8 +51,8 @@ this is a large proposition, which is not suitable for all purposes. Therefore,
 as our main definition of a pullback cone we consider the
 {{#concept "small predicate of being a pullback" Agda=is-pullback}}: given the
 existence of the [standard pullback type](foundation-core.standard-pullbacks.md)
-`A ×_X B`, a cone is a _pullback_ if gap map into the standard pullback is an
-[equivalence](foundation-core.equivalences.md).
+`A ×_X B`, a cone is a _pullback_ if the gap map into the standard pullback is
+an [equivalence](foundation-core.equivalences.md).
 
 ## Definitions
 
@@ -160,73 +160,6 @@ abstract
       ( gap f g c)
       ( triangle-map-commutative-standard-pullback f g c)
       ( is-equiv-map-commutative-standard-pullback f g)
-```
-
-### A family of maps over a base map induces a pullback square if and only if it is a family of equivalences
-
-Given a map `f : A → B` with a family of maps over it
-`g : (x : A) → P x → Q (f x)`, then the square
-
-```text
-         map-Σ f g
-  Σ A P ----------> Σ B Q
-    |                |
-    |                |
-    v                v
-    A -------------> B
-             f
-```
-
-is a pullback if and only if `g` is a
-[fiberwise equivalence](foundation-core.families-of-equivalences.md).
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {P : A → UU l3}
-  (Q : B → UU l4) (f : A → B) (g : (x : A) → P x → Q (f x))
-  where
-
-  cone-map-Σ : cone f pr1 (Σ A P)
-  pr1 cone-map-Σ = pr1
-  pr1 (pr2 cone-map-Σ) = map-Σ Q f g
-  pr2 (pr2 cone-map-Σ) = refl-htpy
-
-  abstract
-    is-pullback-is-fiberwise-equiv :
-      is-fiberwise-equiv g → is-pullback f pr1 cone-map-Σ
-    is-pullback-is-fiberwise-equiv is-equiv-g =
-      is-equiv-comp
-        ( gap f pr1 (cone-standard-pullback-Σ f Q))
-        ( tot g)
-        ( is-equiv-tot-is-fiberwise-equiv is-equiv-g)
-        ( is-pullback-cone-standard-pullback-Σ f Q)
-
-  abstract
-    universal-property-pullback-is-fiberwise-equiv :
-      is-fiberwise-equiv g →
-      universal-property-pullback f pr1 cone-map-Σ
-    universal-property-pullback-is-fiberwise-equiv is-equiv-g =
-      universal-property-pullback-is-pullback f pr1 cone-map-Σ
-        ( is-pullback-is-fiberwise-equiv is-equiv-g)
-
-  abstract
-    is-fiberwise-equiv-is-pullback :
-      is-pullback f pr1 cone-map-Σ → is-fiberwise-equiv g
-    is-fiberwise-equiv-is-pullback is-pullback-cone-map-Σ =
-      is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-right-factor
-          ( gap f pr1 (cone-standard-pullback-Σ f Q))
-          ( tot g)
-          ( is-pullback-cone-standard-pullback-Σ f Q)
-          ( is-pullback-cone-map-Σ))
-
-  abstract
-    is-fiberwise-equiv-universal-property-pullback :
-      ( universal-property-pullback f pr1 cone-map-Σ) →
-      is-fiberwise-equiv g
-    is-fiberwise-equiv-universal-property-pullback up =
-      is-fiberwise-equiv-is-pullback
-        ( is-pullback-universal-property-pullback f pr1 cone-map-Σ up)
 ```
 
 ### A cone is a pullback if and only if it induces a family of equivalences between the fibers of the vertical maps
