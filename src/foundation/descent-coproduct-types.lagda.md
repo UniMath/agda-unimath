@@ -1,6 +1,8 @@
 # Descent for coproduct types
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.descent-coproduct-types where
 ```
 

@@ -55,7 +55,7 @@ modalities in their most general form only make sense for
 
 ### Closure under identity type formers
 
-We say that the [locally small type](foundation-core.identity-types.md) of a
+We say that the [identity types](foundation-core.identity-types.md) of a
 [locally small type](foundation.locally-small-types.md) are **modal** if their
 [small equivalent](foundation-core.small-types.md) is modal. We say that a
 modality is closed under [identity type](foundation-core.identity-types.md)
