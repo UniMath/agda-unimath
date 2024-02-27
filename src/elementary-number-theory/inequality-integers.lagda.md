@@ -148,7 +148,7 @@ le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
 le-succ-ℤ x =
   is-positive-eq-ℤ
     ( inv
-      ( left-successor-law-diff-ℤ x x ∙ ap succ-ℤ ( is-zero-diff-ℤ' x)))
+      ( left-successor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
     ( is-positive-one-ℤ)
 ```
 
