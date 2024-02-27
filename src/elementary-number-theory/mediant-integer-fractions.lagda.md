@@ -57,8 +57,8 @@ cross-mul-diff-left-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
         ( mul-ℤ nx dx))
   ＝ (nx +ℤ ny) *ℤ dx -ℤ nx *ℤ (dx +ℤ dy)
     by ap-diff-ℤ
-      ( inv ( right-distributive-mul-add-ℤ nx ny dx))
-      ( inv ( left-distributive-mul-add-ℤ nx dx dy))
+      ( inv (right-distributive-mul-add-ℤ nx ny dx))
+      ( inv (left-distributive-mul-add-ℤ nx dx dy))
 
 cross-mul-diff-right-mediant-fraction-ℤ :
   (x y : fraction-ℤ) →
