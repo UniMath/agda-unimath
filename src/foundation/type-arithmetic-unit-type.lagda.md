@@ -17,6 +17,8 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -35,7 +37,7 @@ module _
   where
 
   map-left-unit-law-Σ : Σ unit A → A star
-  map-left-unit-law-Σ (pair star a) = a
+  map-left-unit-law-Σ (_ , a) = a
 
   map-inv-left-unit-law-Σ : A star → Σ unit A
   pr1 (map-inv-left-unit-law-Σ a) = star
@@ -43,11 +45,11 @@ module _
 
   is-section-map-inv-left-unit-law-Σ :
     ( map-left-unit-law-Σ ∘ map-inv-left-unit-law-Σ) ~ id
-  is-section-map-inv-left-unit-law-Σ a = refl
+  is-section-map-inv-left-unit-law-Σ = refl-htpy
 
   is-retraction-map-inv-left-unit-law-Σ :
     ( map-inv-left-unit-law-Σ ∘ map-left-unit-law-Σ) ~ id
-  is-retraction-map-inv-left-unit-law-Σ (pair star a) = refl
+  is-retraction-map-inv-left-unit-law-Σ = refl-htpy
 
   is-equiv-map-left-unit-law-Σ : is-equiv map-left-unit-law-Σ
   is-equiv-map-left-unit-law-Σ =
@@ -83,16 +85,16 @@ module _
   map-left-unit-law-product = pr2
 
   map-inv-left-unit-law-product : A → unit × A
-  map-inv-left-unit-law-product = map-inv-left-unit-law-Σ (λ x → A)
+  map-inv-left-unit-law-product = map-inv-left-unit-law-Σ (λ _ → A)
 
   is-section-map-inv-left-unit-law-product :
-    ( map-left-unit-law-product ∘ map-inv-left-unit-law-product) ~ id
+    is-section map-left-unit-law-product map-inv-left-unit-law-product
   is-section-map-inv-left-unit-law-product =
-    is-section-map-inv-left-unit-law-Σ (λ x → A)
+    is-section-map-inv-left-unit-law-Σ (λ _ → A)
 
   is-retraction-map-inv-left-unit-law-product :
-    ( map-inv-left-unit-law-product ∘ map-left-unit-law-product) ~ id
-  is-retraction-map-inv-left-unit-law-product (pair star a) = refl
+    is-retraction map-left-unit-law-product map-inv-left-unit-law-product
+  is-retraction-map-inv-left-unit-law-product = refl-htpy
 
   is-equiv-map-left-unit-law-product : is-equiv map-left-unit-law-product
   is-equiv-map-left-unit-law-product =
@@ -129,12 +131,12 @@ module _
   pr2 (map-inv-right-unit-law-product a) = star
 
   is-section-map-inv-right-unit-law-product :
-    (map-right-unit-law-product ∘ map-inv-right-unit-law-product) ~ id
-  is-section-map-inv-right-unit-law-product a = refl
+    is-section map-right-unit-law-product map-inv-right-unit-law-product
+  is-section-map-inv-right-unit-law-product = refl-htpy
 
   is-retraction-map-inv-right-unit-law-product :
-    (map-inv-right-unit-law-product ∘ map-right-unit-law-product) ~ id
-  is-retraction-map-inv-right-unit-law-product (pair a star) = refl
+    is-retraction map-right-unit-law-product map-inv-right-unit-law-product
+  is-retraction-map-inv-right-unit-law-product = refl-htpy
 
   is-equiv-map-right-unit-law-product : is-equiv map-right-unit-law-product
   is-equiv-map-right-unit-law-product =
@@ -159,15 +161,15 @@ module _
   map-left-unit-law-Π f = f star
 
   map-inv-left-unit-law-Π : A star → ((t : unit) → A t)
-  map-inv-left-unit-law-Π a star = a
+  map-inv-left-unit-law-Π a _ = a
 
   is-section-map-inv-left-unit-law-Π :
-    ( map-left-unit-law-Π ∘ map-inv-left-unit-law-Π) ~ id
-  is-section-map-inv-left-unit-law-Π a = refl
+    is-section map-left-unit-law-Π map-inv-left-unit-law-Π
+  is-section-map-inv-left-unit-law-Π = refl-htpy
 
   is-retraction-map-inv-left-unit-law-Π :
-    ( map-inv-left-unit-law-Π ∘ map-left-unit-law-Π) ~ id
-  is-retraction-map-inv-left-unit-law-Π f = eq-htpy (λ star → refl)
+    is-retraction map-left-unit-law-Π map-inv-left-unit-law-Π
+  is-retraction-map-inv-left-unit-law-Π = refl-htpy
 
   is-equiv-map-left-unit-law-Π : is-equiv map-left-unit-law-Π
   is-equiv-map-left-unit-law-Π =
@@ -208,12 +210,12 @@ module _
   is-equiv-map-left-unit-law-function-type :
     is-equiv map-left-unit-law-function-type
   is-equiv-map-left-unit-law-function-type =
-    is-equiv-map-left-unit-law-Π λ _ → A
+    is-equiv-map-left-unit-law-Π (λ _ → A)
 
   is-equiv-map-inv-left-unit-law-function-type :
     is-equiv map-inv-left-unit-law-function-type
   is-equiv-map-inv-left-unit-law-function-type =
-    is-equiv-map-inv-left-unit-law-Π λ _ → A
+    is-equiv-map-inv-left-unit-law-Π (λ _ → A)
 
   left-unit-law-function-type : (unit → A) ≃ A
   left-unit-law-function-type = left-unit-law-Π (λ _ → A)
