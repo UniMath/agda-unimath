@@ -457,45 +457,6 @@ module _
   triangle-map-fold-cone-standard-pullback c = refl-htpy
 ```
 
-### Products of standard pullbacks are pullbacks
-
-```agda
-module _
-  {l1 l2 l3 l1' l2' l3' : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'}
-  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
-  where
-
-  map-product-cone-standard-pullback :
-    (standard-pullback f g) × (standard-pullback f' g') →
-    standard-pullback (map-product f f') (map-product g g')
-  map-product-cone-standard-pullback =
-    ( tot
-      ( λ t →
-        ( tot (λ s → eq-pair')) ∘
-        ( map-interchange-Σ-Σ (λ y p y' → f' (pr2 t) ＝ g' y')))) ∘
-    ( map-interchange-Σ-Σ (λ x t x' → Σ B' (λ y' → f' x' ＝ g' y')))
-
-  abstract
-    is-equiv-map-product-cone-standard-pullback :
-      is-equiv map-product-cone-standard-pullback
-    is-equiv-map-product-cone-standard-pullback =
-      is-equiv-comp
-        ( tot (λ t → tot (λ s → eq-pair') ∘ map-interchange-Σ-Σ _))
-        ( map-interchange-Σ-Σ _)
-        ( is-equiv-map-interchange-Σ-Σ _)
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ t →
-            is-equiv-comp
-              ( tot (λ s → eq-pair'))
-              ( map-interchange-Σ-Σ (λ y p y' → f' (pr2 t) ＝ g' y'))
-              ( is-equiv-map-interchange-Σ-Σ _)
-              ( is-equiv-tot-is-fiberwise-equiv
-                ( λ s →
-                  is-equiv-eq-pair (map-product f f' t) (map-product g g' s)))))
-```
-
 ## Table of files about pullbacks
 
 The following table lists files that are about pullbacks as a general concept.

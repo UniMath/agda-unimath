@@ -254,24 +254,6 @@ module _
             ( is-contr-map-is-equiv is-equiv-fg (c , y))))
 ```
 
-### Product cones
-
-```agda
-module _
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
-  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
-  where
-
-  product-cone :
-    cone f g C → cone f' g' C' →
-    cone (map-product f f') (map-product g g') (C × C')
-  pr1 (product-cone (p , q , H) (p' , q' , H')) = map-product p p'
-  pr1 (pr2 (product-cone (p , q , H) (p' , q' , H'))) = map-product q q'
-  pr2 (pr2 (product-cone (p , q , H) (p' , q' , H'))) = htpy-map-product H H'
-```
-
 ## See also
 
 - Arithmetical laws involving cartesian product types are recorded in

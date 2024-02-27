@@ -290,6 +290,7 @@ open import foundation.product-decompositions-subuniverse public
 open import foundation.products-binary-relations public
 open import foundation.products-equivalence-relations public
 open import foundation.products-of-tuples-of-types public
+open import foundation.products-pullbacks public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
 open import foundation.projective-types public

@@ -243,34 +243,6 @@ module _
           is-pullback-universal-property-pullback (f i) (g i) (c i) (H i)))
 ```
 
-### Pullbacks are closed under cartesian products
-
-```agda
-module _
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
-  (f : A → X) (g : B → X) (c : cone f g C)
-  (f' : A' → X') (g' : B' → X') (c' : cone f' g' C')
-  where
-
-  universal-property-pullback-product :
-    universal-property-pullback f g c →
-    universal-property-pullback f' g' c' →
-    universal-property-pullback
-      ( map-product f f')
-      ( map-product g g')
-      ( product-cone f g f' g' c c')
-  universal-property-pullback-product H H' =
-    universal-property-pullback-is-pullback
-      ( map-product f f')
-      ( map-product g g')
-      ( product-cone f g f' g' c c')
-      ( is-pullback-product-is-pullback f g f' g' c c'
-        ( is-pullback-universal-property-pullback f g c H)
-        ( is-pullback-universal-property-pullback f' g' c' H'))
-```
-
 ### Pullbacks are closed under exponentiation
 
 Given a pullback square
