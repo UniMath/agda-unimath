@@ -455,6 +455,31 @@ module _
 
 ### Identity types commute with pullbacks
 
+Given a pullback square
+
+```text
+         f'
+    C -------> B
+    | ⌟        |
+  g'|          | g
+    v          v
+    A -------> X
+         f
+```
+
+and two elements `u` and `v` of `C`, then the induced square
+
+```text
+                ap f'
+     (u ＝ v) --------> (f' u ＝ f' v)
+        |                     |
+  ap g' |                     |
+        ∨                     ∨
+  (g' u ＝ g' v) -> (f (g' u) ＝ g (f' v))
+```
+
+is also a pullback.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
@@ -462,87 +487,88 @@ module _
   where
 
   cone-ap :
-    (c1 c2 : C) →
+    (u v : C) →
     cone
-      ( λ (α : vertical-map-cone f g c c1 ＝ vertical-map-cone f g c c2) →
-        ap f α ∙ coherence-square-cone f g c c2)
-      ( λ (β : horizontal-map-cone f g c c1 ＝ horizontal-map-cone f g c c2) →
-        coherence-square-cone f g c c1 ∙ ap g β)
-      ( c1 ＝ c2)
-  pr1 (cone-ap c1 c2) = ap (vertical-map-cone f g c)
-  pr1 (pr2 (cone-ap c1 c2)) = ap (horizontal-map-cone f g c)
-  pr2 (pr2 (cone-ap c1 c2)) γ =
+      ( λ (α : vertical-map-cone f g c u ＝ vertical-map-cone f g c v) →
+        ap f α ∙ coherence-square-cone f g c v)
+      ( λ (β : horizontal-map-cone f g c u ＝ horizontal-map-cone f g c v) →
+        coherence-square-cone f g c u ∙ ap g β)
+      ( u ＝ v)
+  pr1 (cone-ap u v) = ap (vertical-map-cone f g c)
+  pr1 (pr2 (cone-ap u v)) = ap (horizontal-map-cone f g c)
+  pr2 (pr2 (cone-ap u v)) γ =
     ( right-whisker-concat
       ( inv (ap-comp f (vertical-map-cone f g c) γ))
-      ( coherence-square-cone f g c c2)) ∙
+      ( coherence-square-cone f g c v)) ∙
     ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
       ( left-whisker-concat
-        ( coherence-square-cone f g c c1)
+        ( coherence-square-cone f g c u)
         ( ap-comp g (horizontal-map-cone f g c) γ)))
 
   cone-ap' :
-    (c1 c2 : C) →
+    (u v : C) →
     cone
-      ( λ (α : vertical-map-cone f g c c1 ＝ vertical-map-cone f g c c2) →
+      ( λ (α : vertical-map-cone f g c u ＝ vertical-map-cone f g c v) →
         tr
-          ( f (vertical-map-cone f g c c1) ＝_)
-          ( coherence-square-cone f g c c2)
+          ( f (vertical-map-cone f g c u) ＝_)
+          ( coherence-square-cone f g c v)
           ( ap f α))
-      ( λ (β : horizontal-map-cone f g c c1 ＝ horizontal-map-cone f g c c2) →
-        coherence-square-cone f g c c1 ∙ ap g β)
-      ( c1 ＝ c2)
-  pr1 (cone-ap' c1 c2) = ap (vertical-map-cone f g c)
-  pr1 (pr2 (cone-ap' c1 c2)) = ap (horizontal-map-cone f g c)
-  pr2 (pr2 (cone-ap' c1 c2)) γ =
+      ( λ (β : horizontal-map-cone f g c u ＝ horizontal-map-cone f g c v) →
+        coherence-square-cone f g c u ∙ ap g β)
+      ( u ＝ v)
+  pr1 (cone-ap' u v) = ap (vertical-map-cone f g c)
+  pr1 (pr2 (cone-ap' u v)) = ap (horizontal-map-cone f g c)
+  pr2 (pr2 (cone-ap' u v)) γ =
     ( tr-Id-right
-      ( coherence-square-cone f g c c2)
+      ( coherence-square-cone f g c v)
       ( ap f (ap (vertical-map-cone f g c) γ))) ∙
     ( ( right-whisker-concat
         ( inv (ap-comp f (vertical-map-cone f g c) γ))
-        ( coherence-square-cone f g c c2)) ∙
+        ( coherence-square-cone f g c v)) ∙
       ( ( inv-nat-htpy (coherence-square-cone f g c) γ) ∙
         ( left-whisker-concat
-          ( coherence-square-cone f g c c1)
+          ( coherence-square-cone f g c u)
           ( ap-comp g (horizontal-map-cone f g c) γ))))
 
-  is-pullback-cone-ap :
-    is-pullback f g c →
-    (c1 c2 : C) →
-    is-pullback
-      ( λ (α : vertical-map-cone f g c c1 ＝ vertical-map-cone f g c c2) →
-        ap f α ∙ coherence-square-cone f g c c2)
-      ( λ (β : horizontal-map-cone f g c c1 ＝ horizontal-map-cone f g c c2) →
-        coherence-square-cone f g c c1 ∙ ap g β)
-      ( cone-ap c1 c2)
-  is-pullback-cone-ap is-pb-c c1 c2 =
-    is-pullback-htpy'
-      ( λ α → tr-Id-right (coherence-square-cone f g c c2) (ap f α))
-      ( refl-htpy)
-      ( cone-ap' c1 c2)
-      ( refl-htpy , refl-htpy , right-unit-htpy)
-      ( is-pullback-family-is-pullback-tot
-        ( f (vertical-map-cone f g c c1) ＝_)
-        ( λ a → ap f {x = vertical-map-cone f g c c1} {y = a})
-        ( λ b β → coherence-square-cone f g c c1 ∙ ap g β)
-        ( c)
-        ( cone-ap' c1)
-        ( is-pb-c)
-        ( is-pullback-is-equiv-vertical-maps
-          ( map-Σ _ f (λ a α → ap f α))
-          ( map-Σ _ g (λ b β → coherence-square-cone f g c c1 ∙ ap g β))
-          ( tot-cone-cone-family
-            ( f (vertical-map-cone f g c c1) ＝_)
-            ( λ a → ap f)
-            ( λ b β → coherence-square-cone f g c c1 ∙ ap g β)
-            ( c)
-            ( cone-ap' c1))
-          ( is-equiv-is-contr _
-            ( is-torsorial-Id (horizontal-map-cone f g c c1))
-            ( is-torsorial-Id (f (vertical-map-cone f g c c1))))
-          ( is-equiv-is-contr _
-            ( is-torsorial-Id c1)
-            ( is-torsorial-Id (vertical-map-cone f g c c1))))
-        ( c2))
+  abstract
+    is-pullback-cone-ap :
+      is-pullback f g c →
+      (u v : C) →
+      is-pullback
+        ( λ (α : vertical-map-cone f g c u ＝ vertical-map-cone f g c v) →
+          ap f α ∙ coherence-square-cone f g c v)
+        ( λ (β : horizontal-map-cone f g c u ＝ horizontal-map-cone f g c v) →
+          coherence-square-cone f g c u ∙ ap g β)
+        ( cone-ap u v)
+    is-pullback-cone-ap is-pb-c u v =
+      is-pullback-htpy'
+        ( λ α → tr-Id-right (coherence-square-cone f g c v) (ap f α))
+        ( refl-htpy)
+        ( cone-ap' u v)
+        ( refl-htpy , refl-htpy , right-unit-htpy)
+        ( is-pullback-family-is-pullback-tot
+          ( f (vertical-map-cone f g c u) ＝_)
+          ( λ a → ap f {x = vertical-map-cone f g c u} {y = a})
+          ( λ b β → coherence-square-cone f g c u ∙ ap g β)
+          ( c)
+          ( cone-ap' u)
+          ( is-pb-c)
+          ( is-pullback-is-equiv-vertical-maps
+            ( map-Σ _ f (λ a α → ap f α))
+            ( map-Σ _ g (λ b β → coherence-square-cone f g c u ∙ ap g β))
+            ( tot-cone-cone-family
+              ( f (vertical-map-cone f g c u) ＝_)
+              ( λ a → ap f)
+              ( λ b β → coherence-square-cone f g c u ∙ ap g β)
+              ( c)
+              ( cone-ap' u))
+            ( is-equiv-is-contr _
+              ( is-torsorial-Id (horizontal-map-cone f g c u))
+              ( is-torsorial-Id (f (vertical-map-cone f g c u))))
+            ( is-equiv-is-contr _
+              ( is-torsorial-Id u)
+              ( is-torsorial-Id (vertical-map-cone f g c u))))
+          ( v))
 ```
 
 ## Table of files about pullbacks
