@@ -40,13 +40,13 @@ triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`, and a
 [homotopy](foundation-core.homotopies.md) `H` witnessing that the square
 
 ```text
-      q
-  C -----> B
-  |        |
- p|        |g
-  V        V
-  A -----> X
-      f
+        q
+    C -----> B
+    |        |
+  p |        | g
+    ∨        ∨
+    A -----> X
+        f
 ```
 
 [commutes](foundation-core.commuting-squares-of-maps.md).
@@ -230,12 +230,13 @@ pr1 (pr2 (swap-cone f g c)) = vertical-map-cone f g c
 pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 ```
 
-### Parallel cones over cospan diagrams
+### Parallel cones over parallel cospan diagrams
 
-Two cones are considered
-{{#concept "parallel" Disambiguation="cones over cospan diagrams"}} here if they
-have the same domain and their cospans are homotopic keeping the cospanning type
-fixed.
+Two cones with the same domain over parallel cospans are considered
+{{#concept "parallel" Disambiguation="cones over cospan diagrams"}} if they are
+part of a fully coherent diagram. I.e., there is a fully coherent cube where all
+the vertical maps are identities, the top face is given by one cone, and the
+bottom face is given by the other.
 
 ```agda
 module _
@@ -283,8 +284,12 @@ pr2 (pr2 (id-cone A)) = refl-htpy
 ### Relating `htpy-parallel-cone` to the identity type of cones
 
 In the following part we will relate the type `htpy-parallel-cone` to the
-identity type of cones. Here we will rely on
+identity type of cones. We will show that `htpy-parallel-cone` characterizes
+[dependent identifications](foundation.dependent-identifications.md) of cones on
+the same domain over parallel cospans. The characterization relies on
 [function extensionality](foundation.function-extensionality.md).
+
+#### The type family of homotopies of parallel cones is torsorial
 
 ```agda
 module _
@@ -376,6 +381,16 @@ module _
         ( λ g' Hg → is-torsorial-htpy-parallel-cone-refl-htpy Hg)
         ( Hf)
         ( g')
+```
+
+#### The type family of homotopies of parallel cones characterizes dependent identifications of cones on the same domain over parallel cospans
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {f : A → X} {g : B → X}
+  where
 
   tr-right-tr-left-cone-eq-htpy :
     {f' : A → X} → f ~ f' → {g' : B → X} → g ~ g' → cone f g C → cone f' g' C
