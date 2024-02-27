@@ -48,12 +48,12 @@ cross-mul-diff-fraction-ℤ x y =
 ### Swapping the fractions changes the sign of the cross-multiplication difference
 
 ```agda
-neg-cross-mul-diff-fraction-ℤ :
+skew-commutative-cross-mul-diff-fraction-ℤ :
   (x y : fraction-ℤ) →
   Id
     ( neg-ℤ (cross-mul-diff-fraction-ℤ x y))
     ( cross-mul-diff-fraction-ℤ y x)
-neg-cross-mul-diff-fraction-ℤ x y =
+skew-commutative-cross-mul-diff-fraction-ℤ x y =
   distributive-neg-diff-ℤ
     ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
     ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)

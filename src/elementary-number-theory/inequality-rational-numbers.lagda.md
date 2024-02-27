@@ -222,7 +222,7 @@ decide-le-leq-ℚ x y =
   map-coproduct
     ( id)
     ( is-nonnegative-eq-ℤ
-      ( neg-cross-mul-diff-fraction-ℤ
+      ( skew-commutative-cross-mul-diff-fraction-ℤ
         ( fraction-ℚ x)
         ( fraction-ℚ y)))
     ( decide-is-positive-ℤ

@@ -83,7 +83,7 @@ module _
       ( is-zero-is-nonnegative-ℤ
         ( H)
         ( is-nonnegative-eq-ℤ
-            ( inv ( neg-cross-mul-diff-fraction-ℤ x y))
+            ( inv ( skew-commutative-cross-mul-diff-fraction-ℤ x y))
             ( H')))
 ```
 
