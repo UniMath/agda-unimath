@@ -183,3 +183,5 @@ is-preunivalent-inclusion-subuniverse S =
 
 - [Univalent type families](foundation.univalent-type-families.md)
 - [Transport-split type families](foundation.transport-split-type-families.md)
+- The [standard finite types](univalent-combinatorics.standard-finite-types.md)
+  is a type family which is preunivalent but not univalent.
