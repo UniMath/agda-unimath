@@ -17,9 +17,9 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The
-{{#concept "concatenation operation on identifications" Agda=_∙_ Agda=_∙'_ Agda=concat}}
-is a family of binary operations
+The concatenation operation on
+[identifications](foundation-core.identity-types.md) is a family of binary
+operations
 
 ```text
   _∙_ : x ＝ y → y ＝ z → x ＝ z
