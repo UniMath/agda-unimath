@@ -46,7 +46,7 @@ the [image](foundation.images.md) of this embedding
 
 ## Definitions
 
-### Strict inequality on rational gives Dedekind cuts
+### Strict inequality on rationals gives Dedekind cuts
 
 ```agda
 is-dedekind-cut-le-ℚ :
