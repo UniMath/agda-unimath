@@ -65,7 +65,7 @@ module _
 
 ## Properties
 
-### Products of standard pullbacks are pullbacks
+### Computing the standard pullback of a product
 
 ```agda
 module _

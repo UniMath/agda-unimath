@@ -102,64 +102,6 @@ module _
   pr2 equiv-standard-pullback-htpy = is-equiv-map-equiv-standard-pullback-htpy
 ```
 
-### Dependent products of standard pullbacks are pullbacks
-
-Given a family of pullback squares, their dependent product is again a pullback
-square.
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {I : UU l1}
-  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
-  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
-  where
-
-  map-standard-pullback-Π :
-    standard-pullback (map-Π f) (map-Π g) →
-    (i : I) → standard-pullback (f i) (g i)
-  pr1 (map-standard-pullback-Π (α , β , γ) i) = α i
-  pr1 (pr2 (map-standard-pullback-Π (α , β , γ) i)) = β i
-  pr2 (pr2 (map-standard-pullback-Π (α , β , γ) i)) = htpy-eq γ i
-
-  map-inv-standard-pullback-Π :
-    ((i : I) → standard-pullback (f i) (g i)) →
-    standard-pullback (map-Π f) (map-Π g)
-  pr1 (map-inv-standard-pullback-Π h) i = pr1 (h i)
-  pr1 (pr2 (map-inv-standard-pullback-Π h)) i = pr1 (pr2 (h i))
-  pr2 (pr2 (map-inv-standard-pullback-Π h)) = eq-htpy (λ i → pr2 (pr2 (h i)))
-
-  abstract
-    is-section-map-inv-standard-pullback-Π :
-      is-section (map-standard-pullback-Π) (map-inv-standard-pullback-Π)
-    is-section-map-inv-standard-pullback-Π h =
-      eq-htpy
-        ( λ i →
-          map-extensionality-standard-pullback (f i) (g i) refl refl
-            ( inv
-              ( ( right-unit) ∙
-                ( htpy-eq (is-section-eq-htpy (λ i → pr2 (pr2 (h i)))) i))))
-
-  abstract
-    is-retraction-map-inv-standard-pullback-Π :
-      is-retraction (map-standard-pullback-Π) (map-inv-standard-pullback-Π)
-    is-retraction-map-inv-standard-pullback-Π (α , β , γ) =
-      map-extensionality-standard-pullback
-        ( map-Π f)
-        ( map-Π g)
-        ( refl)
-        ( refl)
-        ( inv (right-unit ∙ is-retraction-eq-htpy γ))
-
-  abstract
-    is-equiv-map-standard-pullback-Π :
-      is-equiv (map-standard-pullback-Π)
-    is-equiv-map-standard-pullback-Π =
-      is-equiv-is-invertible
-        ( map-inv-standard-pullback-Π)
-        ( is-section-map-inv-standard-pullback-Π)
-        ( is-retraction-map-inv-standard-pullback-Π)
-```
-
 ### Coproducts of standard pullbacks are pullbacks
 
 ```agda

@@ -81,7 +81,7 @@ pr2 (pr2 (postcomp-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h
 
 ## Properties
 
-### Standard pullbacks are closed under postcomposition exponentiation
+### The standard pullback computes of a postcomposition exponential computes as the type of cones
 
 ```agda
 module _
@@ -90,28 +90,34 @@ module _
   (T : UU l4)
   where
 
-  map-postcomp-cone-standard-pullback :
+  map-standard-pullback-postcomp :
     standard-pullback (postcomp T f) (postcomp T g) → cone f g T
-  map-postcomp-cone-standard-pullback = tot (λ _ → tot (λ _ → htpy-eq))
+  map-standard-pullback-postcomp = tot (λ _ → tot (λ _ → htpy-eq))
 
   abstract
-    is-equiv-map-postcomp-cone-standard-pullback :
-      is-equiv map-postcomp-cone-standard-pullback
-    is-equiv-map-postcomp-cone-standard-pullback =
+    is-equiv-map-standard-pullback-postcomp :
+      is-equiv map-standard-pullback-postcomp
+    is-equiv-map-standard-pullback-postcomp =
       is-equiv-tot-is-fiberwise-equiv
         ( λ p → is-equiv-tot-is-fiberwise-equiv (λ q → funext (f ∘ p) (g ∘ q)))
+
+  compute-standard-pullback-postcomp :
+    standard-pullback (postcomp T f) (postcomp T g) ≃ cone f g T
+  compute-standard-pullback-postcomp =
+    ( map-standard-pullback-postcomp ,
+      is-equiv-map-standard-pullback-postcomp)
 ```
 
 ### The precomposition action on cones computes as the gap map of a postcomposition cone
 
 ```agda
-triangle-map-postcomp-cone-standard-pullback :
+triangle-map-standard-pullback-postcomp :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
   cone-map f g c {T} ~
-  map-postcomp-cone-standard-pullback f g T ∘
+  map-standard-pullback-postcomp f g T ∘
   gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
-triangle-map-postcomp-cone-standard-pullback T f g c h =
+triangle-map-standard-pullback-postcomp T f g c h =
   eq-pair-eq-fiber
     ( eq-pair-eq-fiber
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
@@ -129,10 +135,10 @@ abstract
   is-pullback-postcomp-is-pullback f g c is-pb-c T =
     is-equiv-top-map-triangle
       ( cone-map f g c)
-      ( map-postcomp-cone-standard-pullback f g T)
+      ( map-standard-pullback-postcomp f g T)
       ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
-      ( triangle-map-postcomp-cone-standard-pullback T f g c)
-      ( is-equiv-map-postcomp-cone-standard-pullback f g T)
+      ( triangle-map-standard-pullback-postcomp T f g c)
+      ( is-equiv-map-standard-pullback-postcomp f g T)
       ( universal-property-pullback-is-pullback f g c is-pb-c T)
 
 abstract
@@ -147,11 +153,11 @@ abstract
       ( λ T →
         is-equiv-left-map-triangle
           ( cone-map f g c)
-          ( map-postcomp-cone-standard-pullback f g T)
+          ( map-standard-pullback-postcomp f g T)
           ( gap (f ∘_) (g ∘_) (postcomp-cone T f g c))
-          ( triangle-map-postcomp-cone-standard-pullback T f g c)
+          ( triangle-map-standard-pullback-postcomp T f g c)
           ( is-pb-postcomp T)
-          ( is-equiv-map-postcomp-cone-standard-pullback f g T))
+          ( is-equiv-map-standard-pullback-postcomp f g T))
 ```
 
 ### Cones satisfying the universal property of pullbacks are closed under postcomposition exponentiation

@@ -218,46 +218,6 @@ module _
         ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
 ```
 
-### Dependent products of pullbacks are pullbacks
-
-Given a family of pullback squares, their dependent product is again a pullback
-square.
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level} {I : UU l1}
-  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4} {C : I → UU l5}
-  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
-  (c : (i : I) → cone (f i) (g i) (C i))
-  where
-
-  triangle-map-standard-pullback-Π :
-    map-Π (λ i → gap (f i) (g i) (c i)) ~
-    map-standard-pullback-Π f g ∘ gap (map-Π f) (map-Π g) (cone-Π f g c)
-  triangle-map-standard-pullback-Π h =
-    eq-htpy
-      ( λ i →
-        map-extensionality-standard-pullback
-          ( f i)
-          ( g i)
-          ( refl)
-          ( refl)
-          ( htpy-eq (is-section-eq-htpy _) i ∙ inv right-unit))
-
-  abstract
-    is-pullback-Π :
-      ((i : I) → is-pullback (f i) (g i) (c i)) →
-      is-pullback (map-Π f) (map-Π g) (cone-Π f g c)
-    is-pullback-Π is-pb-c =
-      is-equiv-top-map-triangle
-        ( map-Π (λ i → gap (f i) (g i) (c i)))
-        ( map-standard-pullback-Π f g)
-        ( gap (map-Π f) (map-Π g) (cone-Π f g c))
-        ( triangle-map-standard-pullback-Π)
-        ( is-equiv-map-standard-pullback-Π f g)
-        ( is-equiv-map-Π-is-fiberwise-equiv is-pb-c)
-```
-
 ### Coproducts of pullbacks are pullbacks
 
 ```agda

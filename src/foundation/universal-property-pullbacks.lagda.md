@@ -220,29 +220,6 @@ module _
             ( up-pb-d)))
 ```
 
-### Pullbacks are closed under dependent products
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level} {I : UU l1}
-  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
-  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
-  {C : I → UU l5} (c : (i : I) → cone (f i) (g i) (C i))
-  where
-
-  universal-property-pullback-Π :
-    ((i : I) → universal-property-pullback (f i) (g i) (c i)) →
-    universal-property-pullback (map-Π f) (map-Π g) (cone-Π f g c)
-  universal-property-pullback-Π H =
-    universal-property-pullback-is-pullback
-      ( map-Π f)
-      ( map-Π g)
-      ( cone-Π f g c)
-      ( is-pullback-Π f g c
-        ( λ i →
-          is-pullback-universal-property-pullback (f i) (g i) (c i) (H i)))
-```
-
 ## Table of files about pullbacks
 
 The following table lists files that are about pullbacks as a general concept.

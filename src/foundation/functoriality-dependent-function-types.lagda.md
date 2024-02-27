@@ -289,22 +289,6 @@ pr1 (automorphism-Π e f) = map-automorphism-Π e f
 pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
 ```
 
-### Dependent products of cones
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level} {I : UU l1}
-  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4} {C : I → UU l5}
-  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
-  (c : (i : I) → cone (f i) (g i) (C i))
-  where
-
-  cone-Π : cone (map-Π f) (map-Π g) ((i : I) → C i)
-  pr1 cone-Π = map-Π (λ i → pr1 (c i))
-  pr1 (pr2 cone-Π) = map-Π (λ i → pr1 (pr2 (c i)))
-  pr2 (pr2 cone-Π) = htpy-map-Π (λ i → pr2 (pr2 (c i)))
-```
-
 ## See also
 
 - Arithmetical laws involving dependent function types are recorded in
