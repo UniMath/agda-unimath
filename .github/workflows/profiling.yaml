@@ -67,11 +67,10 @@ jobs:
 
       - name: Prepare new revision of the profiling website
         run: |
-          cd repo
           mkdir -p benchmark-website
-          cp website/benchmarks/index.html benchmark-website/
-          cp ../benchmark-cache/data.* benchmark-website/
-          echo 'window.BENCHMARK_DATA =' | cat - ../benchmark-cache/data.json > benchmark-website/data.js
+          cp repo/website/benchmarks/index.html benchmark-website/
+          cp benchmark-cache/data.* benchmark-website/
+          echo 'window.BENCHMARK_DATA =' | cat - benchmark-cache/data.json > benchmark-website/data.js
 
       - name: Deploy the new profiling website
         env:
