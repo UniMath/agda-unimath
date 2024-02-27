@@ -108,9 +108,9 @@ Cartesian products are a special case of pullbacks.
   is-retraction-inv-gap-product (pair a b) = refl
 
   abstract
-    is-pullback-product :
+    is-pullback-cartesian-product :
       is-pullback (terminal-map A) (terminal-map B) cone-product
-    is-pullback-product =
+    is-pullback-cartesian-product =
       is-equiv-is-invertible
         inv-gap-product
         is-section-inv-gap-product
@@ -131,5 +131,5 @@ We conclude that cartesian products satisfy the universal property of pullbacks.
         ( terminal-map A)
         ( terminal-map B)
         ( cone-product)
-        ( is-pullback-product)
+        ( is-pullback-cartesian-product)
 ```
