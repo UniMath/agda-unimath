@@ -29,7 +29,7 @@ The
 two [integer fractions](elementary-number-theory.integer-fractions.md) `a/b` and
 `c/d` is the [difference](elementary-number-theory.difference-integers.md) of
 the [products](elementary-number-theory.multiplication-integers.md) of the
-numerator of each fraction with the denominator of the other : `c * b - a * d`.
+numerator of each fraction with the denominator of the other: `c * b - a * d`.
 
 ## Definitions
 
