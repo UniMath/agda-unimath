@@ -316,9 +316,9 @@ module _
 ### Homotopies of morphisms of pointed arrows
 
 A {{#concept "homotopy of morphisms of pointed arrows"}} from `(i , j , H)`
-to `(i' , j' , H')` is a triple `(I , J , K)` consisting of homotopies
-`I : i ~ i'` and `J : j ~ j'` and a homotopy `K` witnessing that the
-[square of homotopies](foundation.commuting-squares-of-homotopies.md)
+to `(i' , j' , H')` is a triple `(I , J , K)` consisting of pointed homotopies
+`I : i ~∗ i'` and `J : j ~∗ j'` and a pointed 2-homotopy `K` witnessing that the
+[square of pointed homotopies](structured-types.commuting-squares-of-pointed-homotopies.md)
 
 ```text
            J ·r f
@@ -388,7 +388,24 @@ module _
   refl-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow α
   pr1 refl-htpy-hom-pointed-arrow = refl-pointed-htpy _
   pr1 (pr2 refl-htpy-hom-pointed-arrow) = refl-pointed-htpy _
-  pr2 (pr2 refl-htpy-hom-pointed-arrow) = {!!}
+  pr2 (pr2 refl-htpy-hom-pointed-arrow) =
+    concat-pointed-2-htpy
+      ( right-unit-law-concat-pointed-htpy _)
+      ( inv-pointed-2-htpy
+        ( concat-pointed-2-htpy
+          {!!}
+          ( left-unit-law-concat-pointed-htpy _)))
+  
+  {-
+      coherence-square-pointed-homotopies
+      ( right-whisker-pointed-htpy _ _ J f)
+      ( coh-hom-pointed-arrow f g α)
+      ( coh-hom-pointed-arrow f g β)
+      ( left-whisker-pointed-htpy g _ _ I)
+
+    concat-pointed-2-htpy
+      ( right-unit-law-concat-pointed-htpy _)
+      ( {!!}) -}
 
   is-torsorial-htpy-hom-pointed-arrow : is-torsorial htpy-hom-pointed-arrow
   is-torsorial-htpy-hom-pointed-arrow =

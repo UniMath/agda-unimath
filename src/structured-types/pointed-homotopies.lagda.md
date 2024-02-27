@@ -194,7 +194,7 @@ module _
     coherence-point-unpointed-htpy-pointed-Π f g G →
     preserves-point-unpointed-htpy-pointed-Π
   preserves-point-coherence-point-unpointed-htpy-pointed-Π =
-    transpose-right-coherence-triangle-identifications _ _ _
+    transpose-right-coherence-triangle-identifications _ _ _ refl
 
   coherence-point-preserves-point-unpointed-htpy-pointed-Π :
     preserves-point-unpointed-htpy-pointed-Π →
@@ -447,11 +447,13 @@ module _
         ( htpy-pointed-2-htpy (point-Pointed-Type A))
         ( preserves-point-pointed-htpy K)
         ( preserves-point-pointed-htpy H)
+        ( refl)
         ( higher-transpose-right-coherence-triangle-identifications
           ( htpy-pointed-htpy H (point-Pointed-Type A))
           ( preserves-point-function-pointed-Π g)
           ( preserves-point-function-pointed-Π f)
           ( htpy-pointed-2-htpy (point-Pointed-Type A))
+          ( refl)
           ( coherence-point-pointed-htpy H)
           ( coherence-point-pointed-htpy K)
           ( coherence-point-pointed-2-htpy))
@@ -471,7 +473,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  (f g : pointed-Π A B) (H : f ~∗ g)
+  {f g : pointed-Π A B} (H : f ~∗ g)
   where
 
   htpy-refl-pointed-2-htpy : unpointed-htpy-pointed-htpy H H
@@ -589,7 +591,7 @@ module _
       ( is-torsorial-Id' _)
 
   pointed-2-htpy-eq : (K : f ~∗ g) → H ＝ K → pointed-2-htpy H K
-  pointed-2-htpy-eq .H refl = refl-pointed-2-htpy f g H
+  pointed-2-htpy-eq .H refl = refl-pointed-2-htpy H
 
   is-equiv-pointed-2-htpy-eq :
     (K : f ~∗ g) → is-equiv (pointed-2-htpy-eq K)
@@ -682,6 +684,7 @@ module _
       ( preserves-point-function-pointed-Π g)
       ( preserves-point-function-pointed-Π f)
       ( htpy-pointed-htpy H (point-Pointed-Type A))
+      ( refl)
       ( coherence-point-pointed-htpy H)
 
   inv-pointed-htpy : g ~∗ f
@@ -934,4 +937,116 @@ module _
   concat-pointed-2-htpy : pointed-2-htpy H L
   pr1 concat-pointed-2-htpy = htpy-concat-pointed-2-htpy
   pr2 concat-pointed-2-htpy = coherence-point-concat-pointed-2-htpy
+```
+
+### Inverses of pointed 2-homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B} {H K : f ~∗ g} (α : pointed-2-htpy H K)
+  where
+
+  htpy-inv-pointed-2-htpy :
+    unpointed-htpy-pointed-htpy K H
+  htpy-inv-pointed-2-htpy = inv-htpy (htpy-pointed-2-htpy _ _ α)
+
+  coherence-point-inv-pointed-2-htpy :
+    coherence-point-unpointed-htpy-pointed-htpy K H htpy-inv-pointed-2-htpy
+  coherence-point-inv-pointed-2-htpy =
+    transpose-right-coherence-triangle-identifications
+      ( coherence-point-pointed-htpy H)
+      ( right-whisker-concat (htpy-pointed-2-htpy H K α _) _)
+      ( coherence-point-pointed-htpy K)
+      ( inv (ap-inv _ (htpy-pointed-2-htpy H K α _)))
+      ( coherence-point-pointed-2-htpy H K α)
+
+  inv-pointed-2-htpy : pointed-2-htpy K H
+  pr1 inv-pointed-2-htpy = htpy-inv-pointed-2-htpy
+  pr2 inv-pointed-2-htpy = coherence-point-inv-pointed-2-htpy
+```
+
+Id (pr2 H) (pr2 K ∙ ap (_∙ pr2 g) (inv (pr1 α (pr2 A))))
+
+### The left unit law of concatenation of pointed homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B} (H : f ~∗ g)
+  where
+
+  htpy-left-unit-law-concat-pointed-htpy :
+    unpointed-htpy-pointed-htpy
+      ( concat-pointed-htpy (refl-pointed-htpy f) H)
+      ( H)
+  htpy-left-unit-law-concat-pointed-htpy = refl-htpy
+
+  inv-coherence-point-left-unit-law-concat-pointed-htpy :
+    ap id (coherence-point-pointed-htpy H) ∙ refl ∙ refl ＝
+    coherence-point-pointed-htpy H
+  inv-coherence-point-left-unit-law-concat-pointed-htpy =
+    right-unit ∙ right-unit ∙ ap-id (coherence-point-pointed-htpy H)
+
+  coherence-point-left-unit-law-concat-pointed-htpy :
+    coherence-point-unpointed-htpy-pointed-htpy
+      ( concat-pointed-htpy (refl-pointed-htpy f) H)
+      ( H)
+      ( htpy-left-unit-law-concat-pointed-htpy)
+  coherence-point-left-unit-law-concat-pointed-htpy =
+    inv inv-coherence-point-left-unit-law-concat-pointed-htpy
+
+  left-unit-law-concat-pointed-htpy :
+    pointed-2-htpy (concat-pointed-htpy (refl-pointed-htpy f) H) H
+  pr1 left-unit-law-concat-pointed-htpy =
+    htpy-left-unit-law-concat-pointed-htpy
+  pr2 left-unit-law-concat-pointed-htpy =
+    coherence-point-left-unit-law-concat-pointed-htpy
+```
+
+### The right unit law of concatenation of pointed homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B} (H : f ~∗ g)
+  where
+
+  htpy-right-unit-law-concat-pointed-htpy :
+    unpointed-htpy-pointed-htpy
+      ( concat-pointed-htpy H (refl-pointed-htpy g))
+      ( H)
+  htpy-right-unit-law-concat-pointed-htpy = right-unit-htpy
+
+  coherence-point-right-unit-law-concat-pointed-htpy :
+    coherence-point-unpointed-htpy-pointed-htpy
+      ( concat-pointed-htpy H (refl-pointed-htpy g))
+      ( H)
+      ( htpy-right-unit-law-concat-pointed-htpy)
+  coherence-point-right-unit-law-concat-pointed-htpy =
+    ( inv right-unit) ∙
+    ( ( left-whisker-concat
+        ( coherence-point-pointed-htpy H)
+        ( left-transpose-eq-concat
+          ( assoc (htpy-pointed-htpy H _) refl _)
+          ( refl)
+          ( right-whisker-concat
+            ( right-unit)
+            ( preserves-point-function-pointed-Π g))
+          ( ( right-unit) ∙
+            ( middle-unit-law-assoc _ _)))) ∙
+      ( inv
+        ( assoc
+          ( coherence-point-pointed-htpy H)
+          ( inv (assoc (htpy-pointed-htpy H _) refl _))
+          ( right-whisker-concat
+            ( right-unit)
+            ( preserves-point-function-pointed-Π g)))))
+
+  right-unit-law-concat-pointed-htpy :
+    pointed-2-htpy (concat-pointed-htpy H (refl-pointed-htpy g)) H
+  pr1 right-unit-law-concat-pointed-htpy =
+    htpy-right-unit-law-concat-pointed-htpy
+  pr2 right-unit-law-concat-pointed-htpy =
+    coherence-point-right-unit-law-concat-pointed-htpy
 ```

@@ -179,3 +179,22 @@ module _
   pr1 right-whisker-pointed-htpy = htpy-right-whisker-pointed-htpy
   pr2 right-whisker-pointed-htpy = coherence-point-right-whisker-pointed-htpy
 ```
+
+## Properties
+
+### Computing left whiskering the reflexive pointed homotopy
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
+  (g : B →∗ C) (f : A →∗ B)
+  where
+
+  compute-refl-left-whisker-pointed-htpy :
+    pointed-2-htpy
+      ( left-whisker-pointed-htpy g f f (refl-pointed-htpy f))
+      ( refl-pointed-htpy (comp-pointed-map g f))
+  compute-refl-left-whisker-pointed-htpy =
+    refl-pointed-2-htpy (refl-pointed-htpy (g ∘∗ f))
+```
