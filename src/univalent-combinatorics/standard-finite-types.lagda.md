@@ -147,23 +147,23 @@ is-decidable-is-inl-Fin k (inr star) = inr α
 map-equiv-Fin-one-ℕ : Fin 1 → unit
 map-equiv-Fin-one-ℕ (inr star) = star
 
-inv-map-equiv-Fin-one-ℕ : unit → Fin 1
-inv-map-equiv-Fin-one-ℕ star = inr star
+map-inv-equiv-Fin-one-ℕ : unit → Fin 1
+map-inv-equiv-Fin-one-ℕ star = inr star
 
-is-section-inv-map-equiv-Fin-one-ℕ :
-  ( map-equiv-Fin-one-ℕ ∘ inv-map-equiv-Fin-one-ℕ) ~ id
-is-section-inv-map-equiv-Fin-one-ℕ star = refl
+is-section-map-inv-equiv-Fin-one-ℕ :
+  ( map-equiv-Fin-one-ℕ ∘ map-inv-equiv-Fin-one-ℕ) ~ id
+is-section-map-inv-equiv-Fin-one-ℕ star = refl
 
-is-retraction-inv-map-equiv-Fin-one-ℕ :
-  ( inv-map-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
-is-retraction-inv-map-equiv-Fin-one-ℕ (inr star) = refl
+is-retraction-map-inv-equiv-Fin-one-ℕ :
+  ( map-inv-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
+is-retraction-map-inv-equiv-Fin-one-ℕ (inr star) = refl
 
 is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
 is-equiv-map-equiv-Fin-one-ℕ =
   is-equiv-is-invertible
-    inv-map-equiv-Fin-one-ℕ
-    is-section-inv-map-equiv-Fin-one-ℕ
-    is-retraction-inv-map-equiv-Fin-one-ℕ
+    map-inv-equiv-Fin-one-ℕ
+    is-section-map-inv-equiv-Fin-one-ℕ
+    is-retraction-map-inv-equiv-Fin-one-ℕ
 
 equiv-Fin-one-ℕ : Fin 1 ≃ unit
 pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ

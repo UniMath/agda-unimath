@@ -127,7 +127,7 @@ triangle-map-postcomp-cone-standard-pullback T f g c h =
       ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
 ```
 
-### The equivalence on canonical pullbacks induced by parallel cospans
+### The equivalence on standard pullbacks induced by parallel cospans
 
 ```agda
 module _
@@ -160,7 +160,7 @@ module _
   pr2 equiv-standard-pullback-htpy = is-equiv-map-equiv-standard-pullback-htpy
 ```
 
-### Dependent products of standard pullbacks are standard pullbacks
+### Dependent products of standard pullbacks are pullbacks
 
 Given a family of pullback squares, their dependent product is again a pullback
 square.
@@ -179,17 +179,17 @@ module _
   pr1 (pr2 (map-standard-pullback-Π (α , β , γ) i)) = β i
   pr2 (pr2 (map-standard-pullback-Π (α , β , γ) i)) = htpy-eq γ i
 
-  inv-map-standard-pullback-Π :
+  map-inv-standard-pullback-Π :
     ((i : I) → standard-pullback (f i) (g i)) →
     standard-pullback (map-Π f) (map-Π g)
-  pr1 (inv-map-standard-pullback-Π h) i = pr1 (h i)
-  pr1 (pr2 (inv-map-standard-pullback-Π h)) i = pr1 (pr2 (h i))
-  pr2 (pr2 (inv-map-standard-pullback-Π h)) = eq-htpy (λ i → pr2 (pr2 (h i)))
+  pr1 (map-inv-standard-pullback-Π h) i = pr1 (h i)
+  pr1 (pr2 (map-inv-standard-pullback-Π h)) i = pr1 (pr2 (h i))
+  pr2 (pr2 (map-inv-standard-pullback-Π h)) = eq-htpy (λ i → pr2 (pr2 (h i)))
 
   abstract
-    is-section-inv-map-standard-pullback-Π :
-      is-section (map-standard-pullback-Π) (inv-map-standard-pullback-Π)
-    is-section-inv-map-standard-pullback-Π h =
+    is-section-map-inv-standard-pullback-Π :
+      is-section (map-standard-pullback-Π) (map-inv-standard-pullback-Π)
+    is-section-map-inv-standard-pullback-Π h =
       eq-htpy
         ( λ i →
           map-extensionality-standard-pullback (f i) (g i) refl refl
@@ -198,9 +198,9 @@ module _
                 ( htpy-eq (is-section-eq-htpy (λ i → pr2 (pr2 (h i)))) i))))
 
   abstract
-    is-retraction-inv-map-standard-pullback-Π :
-      is-retraction (map-standard-pullback-Π) (inv-map-standard-pullback-Π)
-    is-retraction-inv-map-standard-pullback-Π (α , β , γ) =
+    is-retraction-map-inv-standard-pullback-Π :
+      is-retraction (map-standard-pullback-Π) (map-inv-standard-pullback-Π)
+    is-retraction-map-inv-standard-pullback-Π (α , β , γ) =
       map-extensionality-standard-pullback
         ( map-Π f)
         ( map-Π g)
@@ -213,9 +213,9 @@ module _
       is-equiv (map-standard-pullback-Π)
     is-equiv-map-standard-pullback-Π =
       is-equiv-is-invertible
-        ( inv-map-standard-pullback-Π)
-        ( is-section-inv-map-standard-pullback-Π)
-        ( is-retraction-inv-map-standard-pullback-Π)
+        ( map-inv-standard-pullback-Π)
+        ( is-section-map-inv-standard-pullback-Π)
+        ( is-retraction-map-inv-standard-pullback-Π)
 ```
 
 ### Coproducts of standard pullbacks are pullbacks

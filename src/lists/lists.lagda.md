@@ -365,29 +365,29 @@ map-algebra-list :
 map-algebra-list A (inl (a , x)) = cons a x
 map-algebra-list A (inr star) = nil
 
-inv-map-algebra-list :
+map-inv-algebra-list :
   {l1 : Level} (A : UU l1) →
   list A → Maybe (A × list A)
-inv-map-algebra-list A nil = inr star
-inv-map-algebra-list A (cons a x) = inl (pair a x)
+map-inv-algebra-list A nil = inr star
+map-inv-algebra-list A (cons a x) = inl (pair a x)
 
-is-section-inv-map-algebra-list :
+is-section-map-inv-algebra-list :
   {l1 : Level} (A : UU l1) →
-  (map-algebra-list A ∘ inv-map-algebra-list A) ~ id
-is-section-inv-map-algebra-list A nil = refl
-is-section-inv-map-algebra-list A (cons a x) = refl
+  (map-algebra-list A ∘ map-inv-algebra-list A) ~ id
+is-section-map-inv-algebra-list A nil = refl
+is-section-map-inv-algebra-list A (cons a x) = refl
 
-is-retraction-inv-map-algebra-list :
+is-retraction-map-inv-algebra-list :
   {l1 : Level} (A : UU l1) →
-  (inv-map-algebra-list A ∘ map-algebra-list A) ~ id
-is-retraction-inv-map-algebra-list A (inl (a , x)) = refl
-is-retraction-inv-map-algebra-list A (inr star) = refl
+  (map-inv-algebra-list A ∘ map-algebra-list A) ~ id
+is-retraction-map-inv-algebra-list A (inl (a , x)) = refl
+is-retraction-map-inv-algebra-list A (inr star) = refl
 
 is-equiv-map-algebra-list :
   {l1 : Level} (A : UU l1) → is-equiv (map-algebra-list A)
 is-equiv-map-algebra-list A =
   is-equiv-is-invertible
-    ( inv-map-algebra-list A)
-    ( is-section-inv-map-algebra-list A)
-    ( is-retraction-inv-map-algebra-list A)
+    ( map-inv-algebra-list A)
+    ( is-section-map-inv-algebra-list A)
+    ( is-retraction-map-inv-algebra-list A)
 ```

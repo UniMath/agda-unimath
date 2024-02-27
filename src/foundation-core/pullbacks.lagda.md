@@ -514,11 +514,11 @@ module _
               ( is-pb-c)
               ( vertical-map-cone f g c x))
             ( is-equiv-top-is-equiv-bottom-square
-              ( inv-map-compute-fiber-comp
+              ( map-inv-compute-fiber-comp
                 ( vertical-map-cone f g c)
                 ( vertical-map-cone (horizontal-map-cone f g c) h d)
                 ( vertical-map-cone f g c x))
-              ( inv-map-compute-fiber-comp g h (f (vertical-map-cone f g c x)))
+              ( map-inv-compute-fiber-comp g h (f (vertical-map-cone f g c x)))
               ( map-Σ
                 ( λ t → fiber h (pr1 t))
                 ( map-fiber-vertical-map-cone f g c (vertical-map-cone f g c x))
@@ -531,11 +531,11 @@ module _
                 ( vertical-map-cone f g c x))
               ( preserves-pasting-vertical-map-fiber-vertical-map-cone f g h c d
                 ( vertical-map-cone f g c x))
-              ( is-equiv-inv-map-compute-fiber-comp
+              ( is-equiv-map-inv-compute-fiber-comp
                 ( vertical-map-cone f g c)
                 ( vertical-map-cone (horizontal-map-cone f g c) h d)
                 ( vertical-map-cone f g c x))
-              ( is-equiv-inv-map-compute-fiber-comp g h
+              ( is-equiv-map-inv-compute-fiber-comp g h
                 ( f (vertical-map-cone f g c x)))
               ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f
                 ( g ∘ h)
@@ -557,11 +557,11 @@ module _
         ( pasting-vertical-cone f g h c d)
         ( λ x →
           is-equiv-bottom-is-equiv-top-square
-            ( inv-map-compute-fiber-comp
+            ( map-inv-compute-fiber-comp
               ( vertical-map-cone f g c)
               ( vertical-map-cone (horizontal-map-cone f g c) h d)
               ( x))
-            ( inv-map-compute-fiber-comp g h (f x))
+            ( map-inv-compute-fiber-comp g h (f x))
             ( map-Σ
               ( λ t → fiber h (pr1 t))
               ( map-fiber-vertical-map-cone f g c x)
@@ -583,11 +583,11 @@ module _
               ( c)
               ( d)
               ( x))
-            ( is-equiv-inv-map-compute-fiber-comp
+            ( is-equiv-map-inv-compute-fiber-comp
               ( vertical-map-cone f g c)
               ( vertical-map-cone (horizontal-map-cone f g c) h d)
               ( x))
-            ( is-equiv-inv-map-compute-fiber-comp g h (f x))
+            ( is-equiv-map-inv-compute-fiber-comp g h (f x))
             ( is-equiv-map-Σ
               ( λ t → fiber h (pr1 t))
               ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
