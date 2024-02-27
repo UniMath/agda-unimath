@@ -211,8 +211,8 @@ eq-real-rational-is-rational-ℝ x q H =
             ( is-located-lower-upper-cut-ℝ x r q I))
           ( trichotomy-le-ℚ r q
             ( λ I _ → I)
-            ( λ E H' → ex-falso ( pr1 ( tr ( is-rational-ℝ x) ( inv E) H) H'))
-            ( λ I H' → ex-falso ( pr1 H ( le-lower-cut-ℝ x q r I H'))))))
+            ( λ E H' → ex-falso (pr1 (tr (is-rational-ℝ x) (inv E) H) H'))
+            ( λ I H' → ex-falso (pr1 H (le-lower-cut-ℝ x q r I H'))))))
 ```
 
 ### The cannonical map from rationals to rational reals
