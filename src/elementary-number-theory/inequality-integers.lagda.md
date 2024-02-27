@@ -141,7 +141,7 @@ le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
 le-pred-ℤ x =
   is-positive-eq-ℤ
     ( inv
-      ( right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ ( is-zero-diff-ℤ' x)))
+      ( right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
     ( is-positive-one-ℤ)
 
 le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
