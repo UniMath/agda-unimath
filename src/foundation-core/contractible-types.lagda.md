@@ -19,6 +19,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.homotopies
 open import foundation-core.transport-along-identifications
 ```
 
@@ -105,9 +106,9 @@ module _
 
   abstract
     is-contr-retract-of : A retract-of B → is-contr B → is-contr A
-    pr1 (is-contr-retract-of (pair i (pair r is-retraction)) H) = r (center H)
-    pr2 (is-contr-retract-of (pair i (pair r is-retraction)) H) x =
-      ap r (contraction H (i x)) ∙ (is-retraction x)
+    pr1 (is-contr-retract-of (pair i (pair r is-retraction-r)) H) = r (center H)
+    pr2 (is-contr-retract-of (pair i (pair r is-retraction-r)) H) x =
+      ap r (contraction H (i x)) ∙ (is-retraction-r x)
 ```
 
 ### Contractible types are closed under equivalences
@@ -120,10 +121,8 @@ module _
   abstract
     is-contr-is-equiv :
       (f : A → B) → is-equiv f → is-contr B → is-contr A
-    pr1 (is-contr-is-equiv f H (pair b K)) = map-inv-is-equiv H b
-    pr2 (is-contr-is-equiv f H (pair b K)) x =
-      ( ap (map-inv-is-equiv H) (K (f x))) ∙
-      ( is-retraction-map-inv-is-equiv H x)
+    is-contr-is-equiv f is-equiv-f =
+      is-contr-retract-of B (f , retraction-is-equiv is-equiv-f)
 
   abstract
     is-contr-equiv : (e : A ≃ B) → is-contr B → is-contr A
@@ -186,7 +185,7 @@ module _
         ( A × B)
         ( pair
           ( λ x → pair x (pr2 (center is-contr-AB)))
-          ( pair pr1 (λ x → refl)))
+          ( pair pr1 refl-htpy))
         ( is-contr-AB)
 
 module _
@@ -200,7 +199,7 @@ module _
         ( A × B)
         ( pair
           ( pair (pr1 (center is-contr-AB)))
-          ( pair pr2 (λ x → refl)))
+          ( pair pr2 refl-htpy))
         ( is-contr-AB)
 
 module _
