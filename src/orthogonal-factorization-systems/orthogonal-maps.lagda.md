@@ -26,6 +26,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
+open import foundation.postcomposition-pullbacks
 open import foundation.precomposition-functions
 open import foundation.products-pullbacks
 open import foundation.propositions

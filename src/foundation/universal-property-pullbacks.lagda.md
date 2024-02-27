@@ -243,58 +243,6 @@ module _
           is-pullback-universal-property-pullback (f i) (g i) (c i) (H i)))
 ```
 
-### Pullbacks are closed under exponentiation
-
-Given a pullback square
-
-```text
-          f'
-    C ---------> B
-    | ⌟          |
-  g'|            | g
-    |            |
-    v            v
-    A ---------> X
-          f
-```
-
-then the exponentiated square given by postcomposition
-
-```text
-                f' ∘ -
-      (S → C) ---------> (S → B)
-         |                  |
-  g' ∘ - |                  | g ∘ -
-         |                  |
-         v                  v
-      (S → A) ---------> (S → X)
-                f ∘ -
-```
-
-is a pullback square for any type `S`.
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C)
-  where
-
-  universal-property-pullback-postcomp :
-    universal-property-pullback f g c →
-    universal-property-pullback
-      ( postcomp T f)
-      ( postcomp T g)
-      ( postcomp-cone T f g c)
-  universal-property-pullback-postcomp H =
-    universal-property-pullback-is-pullback
-      ( postcomp T f)
-      ( postcomp T g)
-      ( postcomp-cone T f g c)
-      ( is-pullback-postcomp-is-pullback f g c
-        ( is-pullback-universal-property-pullback f g c H)
-        ( T))
-```
-
 ## Table of files about pullbacks
 
 The following table lists files that are about pullbacks as a general concept.

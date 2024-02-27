@@ -69,64 +69,6 @@ the canonical projections.
 
 ## Properties
 
-### Standard pullbacks are closed under exponentiation
-
-Given a pullback square
-
-```text
-          f'
-    C ---------> B
-    | ⌟          |
-  g'|            | g
-    |            |
-    v            v
-    A ---------> X
-          f
-```
-
-then the exponentiated square given by postcomposition
-
-```text
-                f' ∘ -
-      (S → C) ---------> (S → B)
-         |                  |
-  g' ∘ - |                  | g ∘ -
-         |                  |
-         v                  v
-      (S → A) ---------> (S → X)
-                f ∘ -
-```
-
-is a pullback square for any type `S`.
-
-```agda
-map-postcomp-cone-standard-pullback :
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-  (T : UU l4) → standard-pullback (postcomp T f) (postcomp T g) → cone f g T
-map-postcomp-cone-standard-pullback f g T = tot (λ _ → tot (λ _ → htpy-eq))
-
-abstract
-  is-equiv-map-postcomp-cone-standard-pullback :
-    {l1 l2 l3 l4 : Level}
-    {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-    (T : UU l4) → is-equiv (map-postcomp-cone-standard-pullback f g T)
-  is-equiv-map-postcomp-cone-standard-pullback f g T =
-    is-equiv-tot-is-fiberwise-equiv
-      ( λ p → is-equiv-tot-is-fiberwise-equiv (λ q → funext (f ∘ p) (g ∘ q)))
-
-triangle-map-postcomp-cone-standard-pullback :
-  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
-  cone-map f g c {T} ~
-  map-postcomp-cone-standard-pullback f g T ∘
-  gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
-triangle-map-postcomp-cone-standard-pullback T f g c h =
-  eq-pair-eq-fiber
-    ( eq-pair-eq-fiber
-      ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
-```
-
 ### The equivalence on standard pullbacks induced by parallel cospans
 
 ```agda

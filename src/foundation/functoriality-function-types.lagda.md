@@ -117,19 +117,6 @@ pr1 (emb-postcomp f A) = postcomp A (map-emb f)
 pr2 (emb-postcomp f A) = is-emb-postcomp-is-emb (map-emb f) (is-emb-map-emb f) A
 ```
 
-### Postcomposition cones
-
-```agda
-postcomp-cone :
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} (T : UU l5)
-  (f : A → X) (g : B → X) (c : cone f g C) →
-  cone (postcomp T f) (postcomp T g) (T → C)
-pr1 (postcomp-cone T f g c) h = vertical-map-cone f g c ∘ h
-pr1 (pr2 (postcomp-cone T f g c)) h = horizontal-map-cone f g c ∘ h
-pr2 (pr2 (postcomp-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
-```
-
 ## See also
 
 - Functorial properties of dependent function types are recorded in
