@@ -38,10 +38,32 @@ open import foundation-core.whiskering-identifications-concatenation
 
 ## Idea
 
-Given two [commuting squares](foundation-core.commuting-squares-of-maps.md),
-their product is a [pullback](foundation-core.pullbacks.md) if each factor is.
-Conversely, if the product is a pullback and the standard pullback of each
-factor is inhabited, then each factor is also a pullback.
+Given two
+[commuting squares of maps](foundation-core.commuting-squares-of-maps.md),
+
+```text
+    C ------> B                  C' -----> B'
+    |         |                  |         |
+    |         |  g     and       |         | g'
+    ∨         ∨                  ∨         ∨
+    A ------> X                  A' -----> X'
+         f                            f'
+```
+
+then their product
+
+```text
+  C × C' ----> B × B'
+    |            |
+    |            | g × g'
+    ∨            ∨
+  A × A' ----> X × X'
+         f × f'
+```
+
+is a [pullback](foundation-core.pullbacks.md) if each factor is. Conversely, if
+the product is a pullback and the standard pullback of each factor is inhabited,
+then each factor is also a pullback.
 
 ## Definitions
 

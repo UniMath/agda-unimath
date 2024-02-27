@@ -36,7 +36,30 @@ open import foundation-core.universal-property-pullbacks
 
 ## Idea
 
-TODO
+Given two
+[commuting squares of maps](foundation-core.commuting-squares-of-maps.md),
+
+```text
+    C ------> B                  C' -----> B'
+    |         |                  |         |
+    |         |  g     and       |         | g'
+    ∨         ∨                  ∨         ∨
+    A ------> X                  A' -----> X',
+         f                            f'
+```
+
+then their coproduct
+
+```text
+  C + C' ----> B + B'
+    |            |
+    |            | g + g'
+    ∨            ∨
+  A + A' ----> X + X'
+         f + f'
+```
+
+is a [pullback](foundation-core.pullbacks.md) if each summand is.
 
 ## Definitions
 
@@ -135,8 +158,8 @@ module _
         is-retraction-map-inv-standard-pullback-coproduct
 
   compute-standard-pullback-coproduct :
-    ( standard-pullback f g + standard-pullback f' g') ≃
-    ( standard-pullback (map-coproduct f f') (map-coproduct g g'))
+    standard-pullback f g + standard-pullback f' g' ≃
+    standard-pullback (map-coproduct f f') (map-coproduct g g')
   compute-standard-pullback-coproduct =
     map-standard-pullback-coproduct , is-equiv-map-standard-pullback-coproduct
 ```
@@ -196,6 +219,36 @@ module _
         ( triangle-map-standard-pullback-coproduct f g f' g' c c')
         ( is-equiv-map-coproduct is-pb-c is-pb-c')
         ( is-equiv-map-standard-pullback-coproduct f g f' g')
+```
+
+### Coproducts of cones that satisfy the universal property of pullbacks satisfy the universal property of pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
+  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
+  where
+
+  abstract
+    universal-property-pullback-coproduct-universal-property-pullback :
+      (c : cone f g C) (c' : cone f' g' C') →
+      universal-property-pullback f g c →
+      universal-property-pullback f' g' c' →
+      universal-property-pullback
+        ( map-coproduct f f')
+        ( map-coproduct g g')
+        ( coproduct-cone f g f' g' c c')
+    universal-property-pullback-coproduct-universal-property-pullback
+      c c' up-pb-c up-pb-c' =
+      universal-property-pullback-is-pullback
+        ( map-coproduct f f')
+        ( map-coproduct g g')
+        ( coproduct-cone f g f' g' c c')
+        ( is-pullback-coproduct-is-pullback f g f' g' c c'
+          ( is-pullback-universal-property-pullback f g c up-pb-c)
+          ( is-pullback-universal-property-pullback f' g' c' up-pb-c'))
 ```
 
 ## Table of files about pullbacks
