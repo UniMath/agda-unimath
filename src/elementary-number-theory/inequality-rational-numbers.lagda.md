@@ -95,7 +95,7 @@ antisymmetric-leq-ℚ x y H H' =
       ( fraction-ℚ y)
       ( H)
       ( H'))) ∙
-    ( in-fraction-fraction-ℚ y)
+  ( in-fraction-fraction-ℚ y)
 ```
 
 ### Strict inequality on rationals is asymmetric
