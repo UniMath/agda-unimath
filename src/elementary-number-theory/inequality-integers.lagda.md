@@ -123,12 +123,12 @@ transitive-le-ℤ k l m p q =
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p q =
   not-is-nonpositive-is-positive-ℤ
-  ( y -ℤ x)
-  ( p)
-  ( is-nonnegative-is-positive-ℤ
-    ( is-positive-eq-ℤ
-      ( inv ( distributive-neg-diff-ℤ y x))
-      ( q)))
+    ( y -ℤ x)
+    ( p)
+    ( is-nonnegative-is-positive-ℤ
+      ( is-positive-eq-ℤ
+        ( inv ( distributive-neg-diff-ℤ y x))
+        ( q)))
 
 connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
 connected-le-ℤ x y H =
