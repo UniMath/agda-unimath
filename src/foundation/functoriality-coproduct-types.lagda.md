@@ -540,27 +540,6 @@ module _
       is-section-map-inv-mutually-exclusive-coproduct
 ```
 
-### Coproduct cones
-
-```agda
-module _
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
-  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
-  where
-
-  coproduct-cone :
-    cone f g C → cone f' g' C' →
-    cone (map-coproduct f f') (map-coproduct g g') (C + C')
-  pr1 (coproduct-cone (p , q , H) (p' , q' , H')) = map-coproduct p p'
-  pr1 (pr2 (coproduct-cone (p , q , H) (p' , q' , H'))) = map-coproduct q q'
-  pr2 (pr2 (coproduct-cone (p , q , H) (p' , q' , H'))) =
-    ( inv-htpy (preserves-comp-map-coproduct p f p' f')) ∙h
-    ( htpy-map-coproduct H H') ∙h
-    ( preserves-comp-map-coproduct q g q' g')
-```
-
 ## See also
 
 - Arithmetical laws involving coproduct types are recorded in

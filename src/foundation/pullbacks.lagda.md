@@ -218,38 +218,6 @@ module _
         ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
 ```
 
-### Coproducts of pullbacks are pullbacks
-
-```agda
-module _
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {C' : UU l4'}
-  (f : A → X) (g : B → X) (f' : A' → X') (g' : B' → X')
-  where
-
-  abstract
-    is-pullback-coproduct-is-pullback :
-      (c : cone f g C) (c' : cone f' g' C') →
-      is-pullback f g c →
-      is-pullback f' g' c' →
-      is-pullback
-        ( map-coproduct f f')
-        ( map-coproduct g g')
-        ( coproduct-cone f g f' g' c c')
-    is-pullback-coproduct-is-pullback c c' is-pb-c is-pb-c' =
-      is-equiv-left-map-triangle
-        ( gap
-          ( map-coproduct f f')
-          ( map-coproduct g g')
-          ( coproduct-cone f g f' g' c c'))
-        ( map-coproduct-cone-standard-pullback f g f' g')
-        ( map-coproduct (gap f g c) (gap f' g' c'))
-        ( triangle-map-coproduct-cone-standard-pullback f g f' g' c c')
-        ( is-equiv-map-coproduct is-pb-c is-pb-c')
-        ( is-equiv-map-coproduct-cone-standard-pullback f g f' g')
-```
-
 ### In a commuting cube where the front faces are pullbacks, either back face is a pullback iff the other back face is
 
 ```agda
