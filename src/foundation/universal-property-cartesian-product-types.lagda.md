@@ -121,12 +121,12 @@ We conclude that cartesian products satisfy the universal property of pullbacks.
 
 ```agda
   abstract
-    universal-property-pullback-product :
+    universal-property-pullback-cartesian-product :
       universal-property-pullback
         ( terminal-map A)
         ( terminal-map B)
         ( cone-product)
-    universal-property-pullback-product =
+    universal-property-pullback-cartesian-product =
       universal-property-pullback-is-pullback
         ( terminal-map A)
         ( terminal-map B)
