@@ -96,6 +96,5 @@ module _
   [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - Equality proofs in dependent pair types are characterized in
   [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
-
 - Function extensionality is postulated in
   [`foundation.function-extensionality`](foundation.function-extensionality.md).
