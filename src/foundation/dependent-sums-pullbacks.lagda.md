@@ -29,10 +29,6 @@ open import foundation-core.universal-property-pullbacks
 
 </details>
 
-## Idea
-
-TODO
-
 ## Properties
 
 ### Computing the standard pullback of a dependent sum
