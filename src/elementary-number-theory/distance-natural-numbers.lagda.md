@@ -281,7 +281,7 @@ leq-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
 
 ```agda
 strict-upper-bound-dist-ℕ :
-  (b x y : ℕ) → le-ℕ x b → le-ℕ y b → le-ℕ (dist-ℕ x y) b
+  (b x y : ℕ) → x <-ℕ b → y <-ℕ b → dist-ℕ x y <-ℕ b
 strict-upper-bound-dist-ℕ (succ-ℕ b) zero-ℕ y H K = K
 strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) zero-ℕ H K = H
 strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) (succ-ℕ y) H K =

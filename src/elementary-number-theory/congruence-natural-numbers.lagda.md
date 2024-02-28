@@ -61,7 +61,7 @@ is-indiscrete-cong-one-ℕ x y = div-one-ℕ (dist-ℕ x y)
 is-discrete-cong-zero-ℕ :
   (x y : ℕ) → cong-ℕ zero-ℕ x y → x ＝ y
 is-discrete-cong-zero-ℕ x y (pair k p) =
-  eq-dist-ℕ x y ((inv p) ∙ (right-zero-law-mul-ℕ k))
+  eq-dist-ℕ x y (inv p ∙ right-zero-law-mul-ℕ k)
 
 cong-zero-ℕ :
   (k : ℕ) → cong-ℕ k k zero-ℕ
@@ -114,14 +114,14 @@ concatenate-eq-cong-eq-cong-eq-ℕ k
 
 ```agda
 eq-cong-le-dist-ℕ :
-  (k x y : ℕ) → le-ℕ (dist-ℕ x y) k → cong-ℕ k x y → x ＝ y
+  (k x y : ℕ) → dist-ℕ x y <-ℕ k → cong-ℕ k x y → x ＝ y
 eq-cong-le-dist-ℕ k x y H K =
   eq-dist-ℕ x y (is-zero-div-ℕ k (dist-ℕ x y) H K)
 ```
 
 ```agda
 eq-cong-le-ℕ :
-  (k x y : ℕ) → le-ℕ x k → le-ℕ y k → cong-ℕ k x y → x ＝ y
+  (k x y : ℕ) → x <-ℕ k → y <-ℕ k → cong-ℕ k x y → x ＝ y
 eq-cong-le-ℕ k x y H K =
   eq-cong-le-dist-ℕ k x y (strict-upper-bound-dist-ℕ k x y H K)
 ```

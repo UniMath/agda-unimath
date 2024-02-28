@@ -152,7 +152,7 @@ Nontrivial divisors of a natural number are divisors strictly greater than `1`.
 
 ```agda
 is-nontrivial-divisor-ℕ : (n x : ℕ) → UU lzero
-is-nontrivial-divisor-ℕ n x = (le-ℕ 1 x) × (div-ℕ x n)
+is-nontrivial-divisor-ℕ n x = (1 <-ℕ x) × (div-ℕ x n)
 
 is-prop-is-nontrivial-divisor-ℕ :
   (n x : ℕ) → is-prop (is-nontrivial-divisor-ℕ n x)
@@ -171,7 +171,7 @@ is-decidable-is-nontrivial-divisor-ℕ n x =
   is-decidable-product (is-decidable-le-ℕ 1 x) (is-decidable-div-ℕ x n)
 
 is-nontrivial-divisor-diagonal-ℕ :
-  (n : ℕ) → le-ℕ 1 n → is-nontrivial-divisor-ℕ n n
+  (n : ℕ) → 1 <-ℕ n → is-nontrivial-divisor-ℕ n n
 pr1 (is-nontrivial-divisor-diagonal-ℕ n H) = H
 pr2 (is-nontrivial-divisor-diagonal-ℕ n H) = refl-div-ℕ n
 ```
@@ -277,29 +277,29 @@ is-list-of-nontrivial-divisors-is-prime-decomposition-list-ℕ x l D =
 
 ```agda
 least-nontrivial-divisor-ℕ :
-  (n : ℕ) → le-ℕ 1 n → minimal-element-ℕ (is-nontrivial-divisor-ℕ n)
+  (n : ℕ) → 1 <-ℕ n → minimal-element-ℕ (is-nontrivial-divisor-ℕ n)
 least-nontrivial-divisor-ℕ n H =
   well-ordering-principle-ℕ
     ( is-nontrivial-divisor-ℕ n)
     ( is-decidable-is-nontrivial-divisor-ℕ n)
     ( n , is-nontrivial-divisor-diagonal-ℕ n H)
 
-nat-least-nontrivial-divisor-ℕ : (n : ℕ) → le-ℕ 1 n → ℕ
+nat-least-nontrivial-divisor-ℕ : (n : ℕ) → 1 <-ℕ n → ℕ
 nat-least-nontrivial-divisor-ℕ n H = pr1 (least-nontrivial-divisor-ℕ n H)
 
 le-one-least-nontrivial-divisor-ℕ :
-  (n : ℕ) (H : le-ℕ 1 n) → le-ℕ 1 (nat-least-nontrivial-divisor-ℕ n H)
+  (n : ℕ) (H : 1 <-ℕ n) → 1 <-ℕ (nat-least-nontrivial-divisor-ℕ n H)
 le-one-least-nontrivial-divisor-ℕ n H =
   pr1 (pr1 (pr2 (least-nontrivial-divisor-ℕ n H)))
 
 div-least-nontrivial-divisor-ℕ :
-  (n : ℕ) (H : le-ℕ 1 n) → div-ℕ (nat-least-nontrivial-divisor-ℕ n H) n
+  (n : ℕ) (H : 1 <-ℕ n) → div-ℕ (nat-least-nontrivial-divisor-ℕ n H) n
 div-least-nontrivial-divisor-ℕ n H =
   pr2 (pr1 (pr2 (least-nontrivial-divisor-ℕ n H)))
 
 is-minimal-least-nontrivial-divisor-ℕ :
-  (n : ℕ) (H : le-ℕ 1 n) (x : ℕ) (K : le-ℕ 1 x) (d : div-ℕ x n) →
-  leq-ℕ (nat-least-nontrivial-divisor-ℕ n H) x
+  (n : ℕ) (H : 1 <-ℕ n) (x : ℕ) (K : 1 <-ℕ x) (d : div-ℕ x n) →
+  (nat-least-nontrivial-divisor-ℕ n H) ≤-ℕ x
 is-minimal-least-nontrivial-divisor-ℕ n H x K d =
   pr2 (pr2 (least-nontrivial-divisor-ℕ n H)) x (K , d)
 ```
@@ -309,7 +309,7 @@ is-minimal-least-nontrivial-divisor-ℕ n H x K d =
 ```agda
 abstract
   is-nonzero-least-nontrivial-divisor-ℕ :
-    (n : ℕ) (H : le-ℕ 1 n) → is-nonzero-ℕ (nat-least-nontrivial-divisor-ℕ n H)
+    (n : ℕ) (H : 1 <-ℕ n) → is-nonzero-ℕ (nat-least-nontrivial-divisor-ℕ n H)
   is-nonzero-least-nontrivial-divisor-ℕ n H =
     is-nonzero-div-ℕ
       ( nat-least-nontrivial-divisor-ℕ n H)
@@ -322,11 +322,11 @@ abstract
 
 ```agda
 is-prime-least-nontrivial-divisor-ℕ :
-  (n : ℕ) (H : le-ℕ 1 n) → is-prime-ℕ (nat-least-nontrivial-divisor-ℕ n H)
+  (n : ℕ) (H : 1 <-ℕ n) → is-prime-ℕ (nat-least-nontrivial-divisor-ℕ n H)
 pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
   map-right-unit-law-coproduct-is-empty
     ( is-one-ℕ x)
-    ( le-ℕ 1 x)
+    ( 1 <-ℕ x)
     ( λ p →
       contradiction-le-ℕ x l
         ( le-div-ℕ x l
@@ -351,23 +351,23 @@ pr2 (pr2 (is-prime-least-nontrivial-divisor-ℕ n H .1) refl) =
 ### The least prime divisor of a number `1 < n`
 
 ```agda
-nat-least-prime-divisor-ℕ : (x : ℕ) → le-ℕ 1 x → ℕ
+nat-least-prime-divisor-ℕ : (x : ℕ) → 1 <-ℕ x → ℕ
 nat-least-prime-divisor-ℕ x H = nat-least-nontrivial-divisor-ℕ x H
 
 is-prime-least-prime-divisor-ℕ :
-  (x : ℕ) (H : le-ℕ 1 x) → is-prime-ℕ (nat-least-prime-divisor-ℕ x H)
+  (x : ℕ) (H : 1 <-ℕ x) → is-prime-ℕ (nat-least-prime-divisor-ℕ x H)
 is-prime-least-prime-divisor-ℕ x H = is-prime-least-nontrivial-divisor-ℕ x H
 
-least-prime-divisor-ℕ : (x : ℕ) → le-ℕ 1 x → Prime-ℕ
+least-prime-divisor-ℕ : (x : ℕ) → 1 <-ℕ x → Prime-ℕ
 pr1 (least-prime-divisor-ℕ x H) = nat-least-prime-divisor-ℕ x H
 pr2 (least-prime-divisor-ℕ x H) = is-prime-least-prime-divisor-ℕ x H
 
 div-least-prime-divisor-ℕ :
-  (x : ℕ) (H : le-ℕ 1 x) → div-ℕ (nat-least-prime-divisor-ℕ x H) x
+  (x : ℕ) (H : 1 <-ℕ x) → div-ℕ (nat-least-prime-divisor-ℕ x H) x
 div-least-prime-divisor-ℕ x H = div-least-nontrivial-divisor-ℕ x H
 
 quotient-div-least-prime-divisor-ℕ :
-  (x : ℕ) (H : le-ℕ 1 x) → ℕ
+  (x : ℕ) (H : 1 <-ℕ x) → ℕ
 quotient-div-least-prime-divisor-ℕ x H =
   quotient-div-ℕ
     ( nat-least-prime-divisor-ℕ x H)
@@ -375,7 +375,7 @@ quotient-div-least-prime-divisor-ℕ x H =
     ( div-least-prime-divisor-ℕ x H)
 
 leq-quotient-div-least-prime-divisor-ℕ :
-  (x : ℕ) (H : le-ℕ 1 (succ-ℕ x)) →
+  (x : ℕ) (H : 1 <-ℕ (succ-ℕ x)) →
   leq-ℕ (quotient-div-least-prime-divisor-ℕ (succ-ℕ x) H) x
 leq-quotient-div-least-prime-divisor-ℕ x H =
   leq-quotient-div-is-prime-ℕ
@@ -704,7 +704,7 @@ pr2 (prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H) =
 le-one-is-nonempty-prime-decomposition-list-ℕ :
   (x : ℕ) (H : leq-ℕ 1 x) (y : ℕ) (l : list ℕ) →
   is-prime-decomposition-list-ℕ x (cons y l) →
-  le-ℕ 1 x
+  1 <-ℕ x
 le-one-is-nonempty-prime-decomposition-list-ℕ x H y l D =
   concatenate-le-leq-ℕ
     {x = 1}

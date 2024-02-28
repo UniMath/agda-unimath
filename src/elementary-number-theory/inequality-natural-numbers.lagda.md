@@ -28,19 +28,24 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.total-orders
 ```
 
 </details>
 
 ## Idea
 
-The relation `≤` on the natural numbers is the unique relation such that `0` is
-less than any natural number, and such that `m+1 ≤ n+1` is equivalent to
-`m ≤ n`.
+The {{#concept "standard ordering relation" Agda=leq-ℕ}} on the
+[natural numbers](elementary-number-theory.natural-numbers.md) is the
+[unique](foundation-core.contractible-types.md)
+[relation](foundation.binary-relations.md) such that `0` is less than any
+natural number and such that `m + 1 ≤ n + 1` is
+[equivalent](foundation-core.equivalences.md) to `m ≤ n` for all natural numbers
+`m` and `n`.
 
 ## Definitions
 
-### The partial ordering on ℕ
+### The standard ordering relation on ℕ
 
 ```agda
 leq-ℕ : ℕ → ℕ → UU lzero
@@ -52,17 +57,19 @@ infix 30 _≤-ℕ_
 _≤-ℕ_ = leq-ℕ
 ```
 
-### Alternative definition of the partial ordering on ℕ
+### Alternative definition of the standard ordering relation on ℕ
 
 ```agda
 data leq-ℕ' : ℕ → ℕ → UU lzero where
   refl-leq-ℕ' : (n : ℕ) → leq-ℕ' n n
-  propagate-leq-ℕ' : {x y z : ℕ} → succ-ℕ y ＝ z → (leq-ℕ' x y) → (leq-ℕ' x z)
+  propagate-leq-ℕ' : {x y z : ℕ} → succ-ℕ y ＝ z → leq-ℕ' x y → leq-ℕ' x z
 ```
+
+It remains to formalize that this is equivalent to the conventional definition.
 
 ## Properties
 
-### Inequality on ℕ is a proposition
+### Inequality of natural numbers is a proposition
 
 ```agda
 is-prop-leq-ℕ :
@@ -77,7 +84,7 @@ pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
 pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
 ```
 
-### The partial ordering on the natural numbers is decidable
+### Inequality is decidable
 
 ```agda
 is-decidable-leq-ℕ :
@@ -88,7 +95,7 @@ is-decidable-leq-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
 ```
 
-### The partial ordering on ℕ is a congruence
+### Inequality is a congruence
 
 ```agda
 concatenate-eq-leq-eq-ℕ :
@@ -104,7 +111,7 @@ concatenate-eq-leq-ℕ :
 concatenate-eq-leq-ℕ n refl H = H
 ```
 
-### Reflexivity
+### Inequality is reflexive
 
 ```agda
 refl-leq-ℕ : (n : ℕ) → n ≤-ℕ n
@@ -115,7 +122,7 @@ leq-eq-ℕ : (m n : ℕ) → m ＝ n → m ≤-ℕ n
 leq-eq-ℕ m .m refl = refl-leq-ℕ m
 ```
 
-### Transitivity
+### Inequality is transitive
 
 ```agda
 transitive-leq-ℕ : is-transitive leq-ℕ
@@ -124,7 +131,7 @@ transitive-leq-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-leq-ℕ n m l p q
 ```
 
-### Antisymmetry
+### Inequality is antisymmetric
 
 ```agda
 antisymmetric-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → n ≤-ℕ m → m ＝ n
@@ -133,7 +140,7 @@ antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
 ```
 
-### The poset of natural numbers
+### The preorder of natural numbers
 
 ```agda
 ℕ-Preorder : Preorder lzero lzero
@@ -141,7 +148,11 @@ pr1 ℕ-Preorder = ℕ
 pr1 (pr2 ℕ-Preorder) = leq-ℕ-Prop
 pr1 (pr2 (pr2 ℕ-Preorder)) = refl-leq-ℕ
 pr2 (pr2 (pr2 ℕ-Preorder)) = transitive-leq-ℕ
+```
 
+### The poset of natural numbers
+
+```agda
 ℕ-Poset : Poset lzero lzero
 pr1 ℕ-Poset = ℕ-Preorder
 pr2 ℕ-Poset = antisymmetric-leq-ℕ
@@ -196,7 +207,7 @@ leq-zero-ℕ :
 leq-zero-ℕ n = star
 ```
 
-### Any natural number less than zero is zero
+### Any natural number less than or equal to zero is zero
 
 ```agda
 is-zero-leq-zero-ℕ :
@@ -224,12 +235,12 @@ is-nonzero-leq-one-ℕ .zero-ℕ () refl
 ### Any natural number is less than or equal to its own successor
 
 ```agda
-succ-leq-ℕ : (n : ℕ) → n ≤-ℕ (succ-ℕ n)
+succ-leq-ℕ : (n : ℕ) → n ≤-ℕ succ-ℕ n
 succ-leq-ℕ zero-ℕ = star
 succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
 ```
 
-### An natural number less than `n+1` is either less than `n` or it is `n+1`
+### A natural number less than or equal to `n + 1` is either less than `n` or it is `n + 1`
 
 ```agda
 decide-leq-succ-ℕ :
@@ -242,11 +253,11 @@ decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
   map-coproduct id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
 ```
 
-### If `m` is less than `n`, then it is less than `n+1`
+### If `m` is less than or equal to `n`, then it is less than or equal to `n + 1`
 
 ```agda
 preserves-leq-succ-ℕ :
-  (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ (succ-ℕ n)
+  (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ succ-ℕ n
 preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
 ```
 
@@ -254,7 +265,7 @@ preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ
 
 ```agda
 neg-succ-leq-ℕ :
-  (n : ℕ) → ¬ (leq-ℕ (succ-ℕ n) n)
+  (n : ℕ) → ¬ (succ-ℕ n ≤-ℕ n)
 neg-succ-leq-ℕ zero-ℕ = id
 neg-succ-leq-ℕ (succ-ℕ n) = neg-succ-leq-ℕ n
 ```
@@ -349,7 +360,7 @@ leq-add-ℕ' m n =
   concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
 ```
 
-### We have `n ≤ m` if and only if there is a number `l` such that `l+n=m`
+### We have `n ≤ m` if and only if there is a number `l` such that `l + n = m`
 
 ```agda
 subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → l +ℕ n ＝ m)
@@ -428,7 +439,7 @@ reflects-order-mul-ℕ' k m n H =
 
 ```agda
 leq-mul-ℕ :
-  (k x : ℕ) → x ≤-ℕ (x *ℕ (succ-ℕ k))
+  (k x : ℕ) → x ≤-ℕ (x *ℕ succ-ℕ k)
 leq-mul-ℕ k x =
   concatenate-eq-leq-ℕ
     ( x *ℕ (succ-ℕ k))
@@ -436,7 +447,7 @@ leq-mul-ℕ k x =
     ( preserves-order-mul-ℕ' x 1 (succ-ℕ k) (leq-zero-ℕ k))
 
 leq-mul-ℕ' :
-  (k x : ℕ) → x ≤-ℕ ((succ-ℕ k) *ℕ x)
+  (k x : ℕ) → x ≤-ℕ (succ-ℕ k *ℕ x)
 leq-mul-ℕ' k x =
   concatenate-leq-eq-ℕ x
     ( leq-mul-ℕ k x)
@@ -455,5 +466,7 @@ leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
 
 ## See also
 
+- We show that the standard ordering is a decidable total order in
+  [`elementary-number-theory.decidable-total-order-natural-numbers`](elementary-number-theory.decidable-total-order-natural-numbers.md)
 - Strict inequality of the natural numbers is defined in
   [`strict-inequality-natural-numbers`](elementary-number-theory.strict-inequality-natural-numbers.md)

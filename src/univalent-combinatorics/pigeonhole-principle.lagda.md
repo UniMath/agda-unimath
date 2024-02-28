@@ -75,7 +75,7 @@ leq-is-injective-Fin k l H =
 
 ```agda
 is-not-emb-le-Fin :
-  (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
+  (k l : ℕ) (f : Fin k → Fin l) → l <-ℕ k → ¬ (is-emb f)
 is-not-emb-le-Fin k l f p =
   map-neg (leq-is-emb-Fin k l) (contradiction-le-ℕ l k p)
 ```
@@ -84,7 +84,7 @@ is-not-emb-le-Fin k l f p =
 
 ```agda
 is-not-injective-le-Fin :
-  (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → is-not-injective f
+  (k l : ℕ) (f : Fin k → Fin l) → l <-ℕ k → is-not-injective f
 is-not-injective-le-Fin k l f p =
   map-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin k l f p)
 ```
@@ -113,7 +113,7 @@ no-embedding-ℕ-Fin k e =
 
 ```agda
 module _
-  (k l : ℕ) (f : Fin k → Fin l) (p : le-ℕ l k)
+  (k l : ℕ) (f : Fin k → Fin l) (p : l <-ℕ k)
   where
 
   repetition-of-values-le-Fin : repetition-of-values f
@@ -197,7 +197,7 @@ module _
 ```agda
   is-not-emb-le-count :
     (f : A → B) →
-    le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
+    (number-of-elements-count eB) <-ℕ (number-of-elements-count eA) →
     ¬ (is-emb f)
   is-not-emb-le-count f p H =
     is-not-emb-le-Fin
@@ -218,7 +218,7 @@ module _
 ```agda
   is-not-injective-le-count :
     (f : A → B) →
-    le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
+    (number-of-elements-count eB) <-ℕ (number-of-elements-count eA) →
     is-not-injective f
   is-not-injective-le-count f p H =
     is-not-emb-le-count f p (is-emb-is-injective (is-set-count eB) H)
@@ -241,7 +241,7 @@ no-embedding-ℕ-count e f =
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (eA : count A) (eB : count B)
   (f : A → B)
-  (p : le-ℕ (number-of-elements-count eB) (number-of-elements-count eA))
+  (p : (number-of-elements-count eB) <-ℕ (number-of-elements-count eA))
   where
 
   repetition-of-values-le-count : repetition-of-values f
@@ -338,7 +338,7 @@ module _
 ```agda
   is-not-emb-le-is-finite :
     (f : A → B) →
-    le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
+    (number-of-elements-is-finite K) <-ℕ (number-of-elements-is-finite H) →
     ¬ (is-emb f)
   is-not-emb-le-is-finite f p E =
     apply-universal-property-trunc-Prop H empty-Prop
@@ -357,7 +357,7 @@ module _
 ```agda
   is-not-injective-le-is-finite :
     (f : A → B) →
-    le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
+    (number-of-elements-is-finite K) <-ℕ (number-of-elements-is-finite H) →
     is-not-injective f
   is-not-injective-le-is-finite f p I =
     is-not-emb-le-is-finite f p (is-emb-is-injective (is-set-is-finite K) I)

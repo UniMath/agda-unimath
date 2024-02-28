@@ -124,7 +124,7 @@ div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) =
   kxly-case-split (linear-leq-ℕ (k *ℕ x) (l *ℕ y))
   where
   kxly-case-split :
-    leq-ℕ (k *ℕ x) (l *ℕ y) + leq-ℕ (l *ℕ y) (k *ℕ x) →
+    (k *ℕ x) ≤-ℕ (l *ℕ y) + (l *ℕ y) ≤-ℕ (k *ℕ x) →
     div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)
   kxly-case-split (inl kxly) =
     ( mod-ℕ x l ,
@@ -825,7 +825,7 @@ minimal-positive-distance-nonzero x y nonzero =
 
 minimal-positive-distance-leq-sym :
   (x y : ℕ) →
-  leq-ℕ (minimal-positive-distance x y) (minimal-positive-distance y x)
+  (minimal-positive-distance x y) ≤-ℕ (minimal-positive-distance y x)
 minimal-positive-distance-leq-sym x y =
   minimal-positive-distance-is-minimal x y (minimal-positive-distance y x)
   (λ H →
@@ -1030,8 +1030,8 @@ remainder-min-dist-succ-x-is-distance x y =
   dist-sx-ty-eq-d = minimal-positive-distance-succ-eqn x y
 
   sx-ty-case-split :
-    ( leq-ℕ (s *ℕ (succ-ℕ x)) (t *ℕ y) +
-      leq-ℕ (t *ℕ y) (s *ℕ (succ-ℕ x))) →
+    ( (s *ℕ (succ-ℕ x)) ≤-ℕ (t *ℕ y) +
+      (t *ℕ y) ≤-ℕ (s *ℕ (succ-ℕ x))) →
     is-distance-between-multiples-ℕ (succ-ℕ x) y r
   sx-ty-case-split (inl sxty) =
     ((q *ℕ s) +ℕ 1 , q *ℕ t , inv (dist-eqn))
@@ -1309,10 +1309,10 @@ remainder-min-dist-succ-x-is-distance x y =
           ＝ r
             by (left-unit-law-add-ℕ r)
 
-      le-x-d : le-ℕ (succ-ℕ x) d
+      le-x-d : (succ-ℕ x) <-ℕ d
       le-x-d =
         tr
-          ( λ n → le-ℕ n d)
+          ( λ n → n <-ℕ d)
           ( inv (x-r-equality))
           ( remainder-min-dist-succ-x-le-min-dist x y)
 
@@ -1878,7 +1878,7 @@ gcd-ℕ-div-dist-between-mult x y z dist =
   t = is-distance-between-multiples-snd-coeff-ℕ dist
 
   sx-ty-case-split :
-    (leq-ℕ (s *ℕ x) (t *ℕ y) + leq-ℕ (t *ℕ y) (s *ℕ x)) →
+    ((s *ℕ x) ≤-ℕ (t *ℕ y) + (t *ℕ y) ≤-ℕ (s *ℕ x)) →
     div-ℕ (gcd-ℕ x y) z
   sx-ty-case-split (inl sxty) =
     div-right-summand-ℕ (gcd-ℕ x y) (s *ℕ x) z

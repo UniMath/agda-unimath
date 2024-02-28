@@ -63,7 +63,7 @@ sum-of-cubes-decomposition-ℕ x =
     ( λ y →
       Σ ( nonzero-ℕ)
         ( λ z →
-          ( leq-ℕ (nat-nonzero-ℕ y) (nat-nonzero-ℕ z)) ×
+          ( (nat-nonzero-ℕ y) ≤-ℕ (nat-nonzero-ℕ z)) ×
           ( cube-ℕ (nat-nonzero-ℕ y) +ℕ cube-ℕ (nat-nonzero-ℕ z) ＝ x)))
 ```
 

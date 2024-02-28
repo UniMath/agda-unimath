@@ -50,7 +50,7 @@ pr1 (is-proper-divisor-zero-succ-ℕ n) = is-nonzero-succ-ℕ n
 pr2 (is-proper-divisor-zero-succ-ℕ n) = div-zero-ℕ (succ-ℕ n)
 
 le-is-proper-divisor-ℕ :
-  (x y : ℕ) → is-nonzero-ℕ y → is-proper-divisor-ℕ y x → le-ℕ x y
+  (x y : ℕ) → is-nonzero-ℕ y → is-proper-divisor-ℕ y x → x <-ℕ y
 le-is-proper-divisor-ℕ x y H K =
   le-leq-neq-ℕ (leq-div-ℕ x y H (pr2 K)) (pr1 K)
 ```
@@ -84,11 +84,11 @@ pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
 ```agda
 le-one-quotient-div-is-proper-divisor-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
-  d ≠ x → le-ℕ 1 (quotient-div-ℕ d x H)
+  d ≠ x → 1 <-ℕ quotient-div-ℕ d x H
 le-one-quotient-div-is-proper-divisor-ℕ d x f H g =
   map-left-unit-law-coproduct-is-empty
     ( is-one-ℕ (quotient-div-ℕ d x H))
-    ( le-ℕ 1 (quotient-div-ℕ d x H))
+    ( 1 <-ℕ quotient-div-ℕ d x H)
     ( map-neg (eq-is-one-quotient-div-ℕ d x H) g)
     ( eq-or-le-leq-ℕ' 1
       ( quotient-div-ℕ d x H)

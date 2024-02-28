@@ -28,7 +28,7 @@ The computation rule should still be proven.
 ```agda
 □-<-ℕ :
   {l : Level} → (ℕ → UU l) → ℕ → UU l
-□-<-ℕ P n = (m : ℕ) → (le-ℕ m n) → P m
+□-<-ℕ P n = (m : ℕ) → m <-ℕ n → P m
 
 reflect-□-<-ℕ :
   {l : Level} (P : ℕ → UU l) →

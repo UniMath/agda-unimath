@@ -159,7 +159,7 @@ module _
       ( λ n →
         Σ ( ℕ)
           ( λ m →
-            ( le-ℕ m n) ×
+            ( m <-ℕ n) ×
             ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
   pr1 (two-points-iterate-ordered-ℕ (inl p)) = point2-iterate-ℕ
   pr1 (pr2 (two-points-iterate-ordered-ℕ (inl p))) = point1-iterate-ℕ
@@ -194,17 +194,17 @@ module _
         ( λ n →
           Σ ( ℕ)
             ( λ m →
-              ( le-ℕ m n) ×
+              ( m <-ℕ n) ×
               ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
     min-repeating =
       well-ordering-principle-ℕ
         ( λ n →
           Σ ( ℕ)
             ( λ m →
-              ( le-ℕ m n) ×
+              ( m <-ℕ n) ×
               ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
         ( λ n →
-          is-decidable-bounded-Σ-ℕ n ( λ m → le-ℕ m n)
+          is-decidable-bounded-Σ-ℕ n ( λ m → m <-ℕ n)
             ( λ m → Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))
             ( λ m → is-decidable-le-ℕ m n)
             ( λ m →
@@ -229,7 +229,7 @@ module _
         ( λ n →
           Σ ( ℕ)
             ( λ m →
-              ( le-ℕ m n) ×
+              ( m <-ℕ n) ×
               ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
         ( first-point-min-repeating)
     is-lower-bound-min-reporting = pr2 (pr2 min-repeating)
@@ -275,10 +275,10 @@ module _
             ( pred-second)
             ( pair
               ( tr
-                ( λ x → le-ℕ (succ-ℕ pred-second) x)
+                ( λ x → succ-ℕ pred-second <-ℕ x)
                 ( equality-pred-first)
                 ( tr
-                  ( λ x → le-ℕ x first-point-min-repeating)
+                  ( λ x → x <-ℕ first-point-min-repeating)
                   ( equality-pred-second)
                   ( le-min-reporting)))
               ( is-injective-equiv
@@ -874,7 +874,7 @@ module _
       neq-iterate-nonzero-le-minimal-element :
         ( pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b))
         ( k : ℕ) →
-        ( is-nonzero-ℕ k × le-ℕ k (pr1 (minimal-element-iterate g a b pa))) →
+        ( is-nonzero-ℕ k × (k <-ℕ pr1 (minimal-element-iterate g a b pa))) →
         ( iterate k (map-equiv g) a ≠ a) × (iterate k (map-equiv g) a ≠ b)
       pr1 (neq-iterate-nonzero-le-minimal-element pa k (pair nz ineq)) q =
         contradiction-le-ℕ
@@ -909,7 +909,7 @@ module _
             ineq (pr2 (pr2 (minimal-element-iterate g a b pa)) k r))
       equal-iterate-transposition-a :
         (pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) (k : ℕ) →
-        le-ℕ k (pr1 (minimal-element-iterate g a b pa)) →
+        k <-ℕ pr1 (minimal-element-iterate g a b pa) →
         ( Id
           ( iterate k (map-equiv (composition-transposition-a-b g)) a)
           ( iterate k (map-equiv g) a))
@@ -933,7 +933,7 @@ module _
         cases-equal-iterate-transposition-a :
           is-decidable (is-zero-ℕ k) →
           ( is-zero-ℕ k) +
-          ( is-nonzero-ℕ k × le-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+          ( is-nonzero-ℕ k × (k <-ℕ pr1 (minimal-element-iterate g a b pa)))
         cases-equal-iterate-transposition-a (inl s) = inl s
         cases-equal-iterate-transposition-a (inr s) = inr (pair s ineq)
       lemma2 :
@@ -1054,7 +1054,7 @@ module _
           quotient-euclidean-division-ℕ
             ( pr1 (minimal-element-iterate g a b pa))
             ( k)
-        ineq : le-ℕ r (pr1 (minimal-element-iterate g a b pa))
+        ineq : r <-ℕ pr1 (minimal-element-iterate g a b pa)
         ineq =
           strict-upper-bound-remainder-euclidean-division-ℕ
             ( pr1 (minimal-element-iterate g a b pa))
@@ -1166,7 +1166,7 @@ module _
               ( Id (iterate k (map-equiv g) x) a) +
               ( Id (iterate k (map-equiv g) x) b)))
         ( k : ℕ) →
-        ( le-ℕ k (pr1 (minimal-element-iterate-2-a-b g pa))) →
+        ( k <-ℕ pr1 (minimal-element-iterate-2-a-b g pa)) →
         Id
           ( iterate k (map-equiv (composition-transposition-a-b g)) x)
           ( iterate k (map-equiv g) x)
@@ -2185,7 +2185,7 @@ module _
           ( has-finite-orbits-permutation X eX g a)
       neq-iterate-nonzero-le-minimal-element :
         (k : ℕ) →
-        is-nonzero-ℕ k × le-ℕ k (pr1 minimal-element-iterate-repeating) →
+        is-nonzero-ℕ k × (k <-ℕ pr1 minimal-element-iterate-repeating) →
         (iterate k (map-equiv g) a ≠ a) × (iterate k (map-equiv g) a ≠ b)
       pr1 (neq-iterate-nonzero-le-minimal-element k (pair nz ineq)) Q =
         contradiction-le-ℕ k (pr1 minimal-element-iterate-repeating) ineq
@@ -2193,7 +2193,7 @@ module _
       pr2 (neq-iterate-nonzero-le-minimal-element k (pair nz ineq)) R =
         NP (unit-trunc-Prop (pair k R))
       equal-iterate-transposition-a :
-        (k : ℕ) → le-ℕ k (pr1 minimal-element-iterate-repeating) →
+        (k : ℕ) → k <-ℕ pr1 minimal-element-iterate-repeating →
         Id
           ( iterate k (map-equiv (composition-transposition-a-b g)) a)
           ( iterate k (map-equiv g) a)
@@ -2218,7 +2218,7 @@ module _
         cases-equal-iterate-transposition-a :
           is-decidable (is-zero-ℕ k) →
           ( is-zero-ℕ k) +
-          ( is-nonzero-ℕ k × le-ℕ k (pr1 minimal-element-iterate-repeating))
+          ( is-nonzero-ℕ k × (k <-ℕ pr1 minimal-element-iterate-repeating))
         cases-equal-iterate-transposition-a (inl s) = inl s
         cases-equal-iterate-transposition-a (inr s) = inr (pair s ineq)
       lemma :

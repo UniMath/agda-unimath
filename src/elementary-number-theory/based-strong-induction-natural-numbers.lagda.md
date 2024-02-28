@@ -53,7 +53,7 @@ satisfying
 
 ```agda
 based-□-≤-ℕ : {l : Level} (k : ℕ) → (ℕ → UU l) → ℕ → UU l
-based-□-≤-ℕ k P n = (m : ℕ) → (k ≤-ℕ m) → (m ≤-ℕ n) → P m
+based-□-≤-ℕ k P n = (m : ℕ) → k ≤-ℕ m → m ≤-ℕ n → P m
 
 η-based-□-≤-ℕ :
   {l : Level} (k : ℕ) {P : ℕ → UU l} → ((n : ℕ) → k ≤-ℕ n → P n) →
@@ -61,7 +61,8 @@ based-□-≤-ℕ k P n = (m : ℕ) → (k ≤-ℕ m) → (m ≤-ℕ n) → P m
 η-based-□-≤-ℕ k f n N m M p = f m M
 
 ε-based-□-≤-ℕ :
-  {l : Level} (k : ℕ) {P : ℕ → UU l} → ((n : ℕ) → k ≤-ℕ n → based-□-≤-ℕ k P n) →
+  {l : Level} (k : ℕ) {P : ℕ → UU l} →
+  ((n : ℕ) → k ≤-ℕ n → based-□-≤-ℕ k P n) →
   ((n : ℕ) → k ≤-ℕ n → P n)
 ε-based-□-≤-ℕ k f n N = f n N n N (refl-leq-ℕ n)
 ```
@@ -128,7 +129,7 @@ cases-eq-succ-based-strong-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l)
   (pS : (x : ℕ) → k ≤-ℕ x → based-□-≤-ℕ k P x → P (succ-ℕ x)) →
   (n : ℕ) (N : k ≤-ℕ n) (f : based-□-≤-ℕ k P n) (M : k ≤-ℕ succ-ℕ n)
-  (c : (leq-ℕ (succ-ℕ n) n) + (succ-ℕ n ＝ succ-ℕ n)) →
+  (c : (succ-ℕ n ≤-ℕ n) + (succ-ℕ n ＝ succ-ℕ n)) →
   cases-succ-based-strong-ind-ℕ k P pS n N f (succ-ℕ n) M c ＝ pS n N f
 cases-eq-succ-based-strong-ind-ℕ k P pS n N f M (inl H) =
   ex-falso (neg-succ-leq-ℕ n H)
@@ -141,7 +142,7 @@ eq-succ-based-strong-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l)
   (pS : (x : ℕ) → k ≤-ℕ x → (based-□-≤-ℕ k P x) → P (succ-ℕ x)) →
   (n : ℕ) (N : k ≤-ℕ n) (f : based-□-≤-ℕ k P n) (M : k ≤-ℕ succ-ℕ n)
-  (H : leq-ℕ (succ-ℕ n) (succ-ℕ n)) →
+  (H : succ-ℕ n ≤-ℕ succ-ℕ n) →
   succ-based-strong-ind-ℕ k P pS n N f (succ-ℕ n) M H ＝ pS n N f
 eq-succ-based-strong-ind-ℕ k P pS n N f M H =
   cases-eq-succ-based-strong-ind-ℕ k P pS n N f M (cases-leq-succ-ℕ H)

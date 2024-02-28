@@ -162,12 +162,12 @@ leq-div-ℕ d x f H with is-successor-is-nonzero-ℕ f
 ... | (pair y refl) = leq-div-succ-ℕ d y H
 
 leq-quotient-div-ℕ :
-  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → leq-ℕ (quotient-div-ℕ d x H) x
+  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → quotient-div-ℕ d x H ≤-ℕ x
 leq-quotient-div-ℕ d x f H =
   leq-div-ℕ (quotient-div-ℕ d x H) x f (div-quotient-div-ℕ d x H)
 
 leq-quotient-div-ℕ' :
-  (d x : ℕ) → is-nonzero-ℕ d → (H : div-ℕ d x) → leq-ℕ (quotient-div-ℕ d x H) x
+  (d x : ℕ) → is-nonzero-ℕ d → (H : div-ℕ d x) → quotient-div-ℕ d x H ≤-ℕ x
 leq-quotient-div-ℕ' d zero-ℕ f (zero-ℕ , p) = star
 leq-quotient-div-ℕ' d zero-ℕ f (succ-ℕ n , p) =
   f (is-zero-right-is-zero-add-ℕ _ d p)
@@ -179,10 +179,10 @@ leq-quotient-div-ℕ' d (succ-ℕ x) f H =
 
 ```agda
 le-div-succ-ℕ :
-  (d x : ℕ) → div-ℕ d (succ-ℕ x) → d ≠ succ-ℕ x → le-ℕ d (succ-ℕ x)
+  (d x : ℕ) → div-ℕ d (succ-ℕ x) → d ≠ succ-ℕ x → d <-ℕ succ-ℕ x
 le-div-succ-ℕ d x H f = le-leq-neq-ℕ (leq-div-succ-ℕ d x H) f
 
-le-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → d ≠ x → le-ℕ d x
+le-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → d ≠ x → d <-ℕ x
 le-div-ℕ d x H K f = le-leq-neq-ℕ (leq-div-ℕ d x H K) f
 ```
 
@@ -250,7 +250,7 @@ leq-one-div-ℕ d x H L =
 
 ```agda
 is-zero-div-ℕ :
-  (d x : ℕ) → le-ℕ x d → div-ℕ d x → is-zero-ℕ x
+  (d x : ℕ) → x <-ℕ d → div-ℕ d x → is-zero-ℕ x
 is-zero-div-ℕ d zero-ℕ H D = refl
 is-zero-div-ℕ d (succ-ℕ x) H (pair (succ-ℕ k) p) =
   ex-falso
@@ -512,11 +512,11 @@ is-one-divisor-ℕ d x f (.x , q) refl =
 ```agda
 le-quotient-div-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → ¬ (is-one-ℕ d) →
-  le-ℕ (quotient-div-ℕ d x H) x
+  (quotient-div-ℕ d x H) <-ℕ x
 le-quotient-div-ℕ d x f H g =
   map-left-unit-law-coproduct-is-empty
     ( quotient-div-ℕ d x H ＝ x)
-    ( le-ℕ (quotient-div-ℕ d x H) x)
+    ( quotient-div-ℕ d x H <-ℕ x)
     ( map-neg (is-one-divisor-ℕ d x f H) g)
     ( eq-or-le-leq-ℕ
       ( quotient-div-ℕ d x H)

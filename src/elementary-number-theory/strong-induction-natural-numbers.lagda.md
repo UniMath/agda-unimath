@@ -98,7 +98,7 @@ htpy-succ-strong-ind-ℕ P pS k H m p q =
 cases-eq-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   (k : ℕ) (H : □-≤-ℕ P k)
-  (c : (leq-ℕ (succ-ℕ k) k) + (succ-ℕ k ＝ succ-ℕ k)) →
+  (c : ((succ-ℕ k) ≤-ℕ k) + (succ-ℕ k ＝ succ-ℕ k)) →
   ( (cases-succ-strong-ind-ℕ P pS k H (succ-ℕ k) c)) ＝
   ( pS k H)
 cases-eq-succ-strong-ind-ℕ P pS k H (inl p) = ex-falso (neg-succ-leq-ℕ k p)
@@ -109,7 +109,7 @@ cases-eq-succ-strong-ind-ℕ P pS k H (inr α) =
 
 eq-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
-  (k : ℕ) (H : □-≤-ℕ P k) (p : leq-ℕ (succ-ℕ k) (succ-ℕ k)) →
+  (k : ℕ) (H : □-≤-ℕ P k) (p : (succ-ℕ k) ≤-ℕ (succ-ℕ k)) →
   ( (succ-strong-ind-ℕ P pS k H (succ-ℕ k) p)) ＝
   ( pS k H)
 eq-succ-strong-ind-ℕ P pS k H p =
