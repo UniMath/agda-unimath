@@ -102,7 +102,7 @@ contradiction by squaring both sides of the inequality
 
 ```agda
 greater-than-square-root-ℕ :
-  (n root : ℕ) → ¬ ((n +ℕ 2 ≤ℕ root) × (n +ℕ 2 ＝ square-ℕ root))
+  (n root : ℕ) → ¬ ((n +ℕ 2 ≤-ℕ root) × (n +ℕ 2 ＝ square-ℕ root))
 greater-than-square-root-ℕ n root (pf-leq , pf-eq) =
   reflects-order-add-ℕ
     ( square-ℕ root)
@@ -159,7 +159,7 @@ greater-than-square-root-ℕ n root (pf-leq , pf-eq) =
 
 ```agda
 is-decidable-big-root :
-  (n : ℕ) → is-decidable (Σ ℕ (λ root → (n ≤ℕ root) × (n ＝ square-ℕ root)))
+  (n : ℕ) → is-decidable (Σ ℕ (λ root → (n ≤-ℕ root) × (n ＝ square-ℕ root)))
 is-decidable-big-root 0 = inl (0 , star , refl)
 is-decidable-big-root 1 = inl (1 , star , refl)
 is-decidable-big-root (succ-ℕ (succ-ℕ n)) =

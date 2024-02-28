@@ -32,7 +32,7 @@ i.e., it is the type of natural numbers strictly less than n.
 
 ```agda
 classical-Fin : ℕ → UU lzero
-classical-Fin k = Σ ℕ (λ x → x <ℕ k)
+classical-Fin k = Σ ℕ (λ x → x <-ℕ k)
 ```
 
 ### The inclusion from `classical-Fin` to ℕ

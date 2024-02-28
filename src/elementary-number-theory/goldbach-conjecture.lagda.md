@@ -26,6 +26,6 @@ open import foundation.universe-levels
 ```agda
 Goldbach-conjecture : UU lzero
 Goldbach-conjecture =
-  ( n : ℕ) → 2 <ℕ n → is-even-ℕ n →
+  ( n : ℕ) → 2 <-ℕ n → is-even-ℕ n →
     Σ ℕ (λ p → (is-prime-ℕ p) × (Σ ℕ (λ q → (is-prime-ℕ q) × (p +ℕ q ＝ n))))
 ```

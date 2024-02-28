@@ -46,7 +46,7 @@ We begin by stating the infinitude of primes in type theory.
 
 ```agda
 Infinitude-Of-Primes-ℕ : UU lzero
-Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × n <ℕ p)
+Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × n <-ℕ p)
 ```
 
 ## Theorem
@@ -77,7 +77,7 @@ is-one-is-divisor-below-larger-prime-ℕ :
 is-one-is-divisor-below-larger-prime-ℕ n =
   pr2 (in-sieve-of-eratosthenes-larger-prime-ℕ n)
 
-le-larger-prime-ℕ : (n : ℕ) → n <ℕ larger-prime-ℕ n
+le-larger-prime-ℕ : (n : ℕ) → n <-ℕ larger-prime-ℕ n
 le-larger-prime-ℕ n = pr1 (in-sieve-of-eratosthenes-larger-prime-ℕ n)
 
 is-nonzero-larger-prime-ℕ : (n : ℕ) → is-nonzero-ℕ (larger-prime-ℕ n)

@@ -84,7 +84,7 @@ module _
       (y : type-Decidable-Total-Order X) →
       (p : leq-or-strict-greater-Decidable-Poset X x y) →
       (l : list (type-Decidable-Total-Order X)) →
-      length-list (helper-quicksort-list-divide-leq x y p l) ≤ℕ
+      length-list (helper-quicksort-list-divide-leq x y p l) ≤-ℕ
       length-list (cons y l)
     helper-inequality-length-quicksort-list-divide-leq x y (inl _) l =
       succ-leq-ℕ (length-list l)
@@ -94,7 +94,7 @@ module _
     inequality-length-quicksort-list-divide-leq :
       (x : type-Decidable-Total-Order X) →
       (l : list (type-Decidable-Total-Order X)) →
-      length-list (quicksort-list-divide-leq x l) ≤ℕ length-list l
+      length-list (quicksort-list-divide-leq x l) ≤-ℕ length-list l
     inequality-length-quicksort-list-divide-leq x nil = star
     inequality-length-quicksort-list-divide-leq x (cons y l) =
       transitive-leq-ℕ
@@ -113,7 +113,7 @@ module _
       (y : type-Decidable-Total-Order X) →
       (p : leq-or-strict-greater-Decidable-Poset X x y) →
       (l : list (type-Decidable-Total-Order X)) →
-      length-list (helper-quicksort-list-divide-strict-greater x y p l) ≤ℕ
+      length-list (helper-quicksort-list-divide-strict-greater x y p l) ≤-ℕ
       length-list (cons y l)
     helper-inequality-length-quicksort-list-divide-strict-greater
       ( x)
@@ -131,7 +131,7 @@ module _
     inequality-length-quicksort-list-divide-strict-greater :
       (x : type-Decidable-Total-Order X) →
       (l : list (type-Decidable-Total-Order X)) →
-      length-list (quicksort-list-divide-strict-greater x l) ≤ℕ length-list l
+      length-list (quicksort-list-divide-strict-greater x l) ≤-ℕ length-list l
     inequality-length-quicksort-list-divide-strict-greater x nil = star
     inequality-length-quicksort-list-divide-strict-greater x (cons y l) =
       transitive-leq-ℕ
