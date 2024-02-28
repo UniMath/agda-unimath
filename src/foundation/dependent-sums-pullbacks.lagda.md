@@ -164,8 +164,7 @@ module _
 
 ### Pullbacks are preserved by dependent sums
 
-A family of squares over a pullback square is a family of pullback squares if
-and only if the induced square of total spaces is a pullback square.
+#### A family of squares over a pullback square is a family of pullback squares if and only if the total square is
 
 ```agda
 module _
@@ -340,8 +339,10 @@ module _
       ( is-equiv-map-standard-pullback-tot-cone-cone-family)
 ```
 
-As a corollary, a dependent sum of squares over the constant diagram is a
-pullback square if and only if the family is.
+#### A family of squares is a family of pullback squares if and only if the total square is
+
+As a corollary of the previous result, a dependent sum of squares over the
+constant diagram is a pullback square if and only if the family is.
 
 ```agda
 module _
