@@ -20,6 +20,7 @@ open import foundation-core.commuting-squares-of-maps
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -270,6 +271,161 @@ triangle-map-commutative-standard-pullback :
 triangle-map-commutative-standard-pullback f g c = refl-htpy
 ```
 
+### Associativity of standard pullbacks with respect to ternary cospans
+
+Given a ternary cospan on a type `X`
+
+```text
+              B
+              |
+              | g
+              ∨
+    A ------> X <------ C
+         f         h
+```
+
+There are two ways to construct the limit using iterated standard pullbacks.
+Namely, we may first form the standard pullback of `f` and `g`
+
+```text
+          f'
+  A ×_X B ---> B
+     | ⌟       |
+  g' |         | g
+     ∨         ∨
+     A ------> X <------ C
+         f         h
+```
+
+and then form the standard pullback of `g ∘ f'` and `h`
+
+```text
+
+            A ×_X B <- (A ×_X B) ×_X C
+           /   |           ⌞ |
+      g' /     | g ∘ f'      |
+       ∨       ∨             ∨
+     A ------> X <---------- C.
+          f           h
+```
+
+Or, we may do it the other way around by first forming the standard pullback of
+`g` and `h` and then forming the standard pullback of `f` and the resulting
+`g ∘ h'`
+
+```text
+  A ×_X (B ×_X C) -> B ×_X C
+        | ⌟           |    \
+        |      g ∘ h' |      \ g'
+        ∨             ∨        ∨
+        A ----------> X <------ C.
+               f           h
+```
+
+We show that these two constructions are equivalent by considering the standard
+ternary pullback, and showing that they are both equivalent to this.
+
+#### The standard ternary pullback
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (h : C → X)
+  where
+
+  standard-ternary-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  standard-ternary-pullback =
+    Σ A (λ a → Σ B (λ b → Σ C (λ c → (f a ＝ g b) × (g b ＝ h c))))
+```
+
+#### Computing the left associated iterated standard pullback
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (h : C → X)
+  where
+
+  map-left-associative-standard-pullback :
+    standard-pullback (g ∘ horizontal-map-standard-pullback {f = f} {g = g}) h →
+    standard-ternary-pullback f g h
+  map-left-associative-standard-pullback ((a , b , p) , c , q) =
+    ( a , b , c , p , q)
+
+  map-inv-left-associative-standard-pullback :
+    standard-ternary-pullback f g h →
+    standard-pullback (g ∘ horizontal-map-standard-pullback {f = f} {g = g}) h
+  map-inv-left-associative-standard-pullback (a , b , c , p , q) =
+    ( ( a , b , p) , c , q)
+
+  is-equiv-map-left-associative-standard-pullback :
+    is-equiv map-left-associative-standard-pullback
+  is-equiv-map-left-associative-standard-pullback =
+    is-equiv-is-invertible
+      ( map-inv-left-associative-standard-pullback)
+      ( refl-htpy)
+      ( refl-htpy)
+
+  compute-left-associative-standard-pullback :
+    standard-pullback (g ∘ horizontal-map-standard-pullback {f = f} {g = g}) h ≃
+    standard-ternary-pullback f g h
+  compute-left-associative-standard-pullback =
+    ( map-left-associative-standard-pullback ,
+      is-equiv-map-left-associative-standard-pullback)
+```
+
+#### Computing the right associated iterated standard pullback
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (h : C → X)
+  where
+
+  map-right-associative-standard-pullback :
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = g} {g = h}) →
+    standard-ternary-pullback f g h
+  map-right-associative-standard-pullback (a , (b , c , p) , q) =
+    ( a , b , c , q , p)
+
+  map-inv-right-associative-standard-pullback :
+    standard-ternary-pullback f g h →
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = g} {g = h})
+  map-inv-right-associative-standard-pullback (a , b , c , p , q) =
+    ( a , (b , c , q) , p)
+
+  is-equiv-map-right-associative-standard-pullback :
+    is-equiv map-right-associative-standard-pullback
+  is-equiv-map-right-associative-standard-pullback =
+    is-equiv-is-invertible
+      ( map-inv-right-associative-standard-pullback)
+      ( refl-htpy)
+      ( refl-htpy)
+
+  compute-right-associative-standard-pullback :
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = g} {g = h}) ≃
+    standard-ternary-pullback f g h
+  compute-right-associative-standard-pullback =
+    ( map-right-associative-standard-pullback ,
+      is-equiv-map-right-associative-standard-pullback)
+```
+
+#### Standard pullbacks are associative with respect to ternary cospans
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (h : C → X)
+  where
+
+  associative-standard-pullback :
+    standard-pullback (g ∘ horizontal-map-standard-pullback {f = f} {g = g}) h ≃
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = g} {g = h})
+  associative-standard-pullback =
+    ( inv-equiv (compute-right-associative-standard-pullback f g h)) ∘e
+    ( compute-left-associative-standard-pullback f g h)
+```
+
 ### Pullbacks can be "folded"
 
 Given a standard pullback square
@@ -388,14 +544,17 @@ module _
         ( is-section-map-inv-fold-cone-standard-pullback)
         ( is-retraction-map-inv-fold-cone-standard-pullback)
 
+  compute-fold-standard-pullback :
+    standard-pullback f g ≃ standard-pullback (map-product f g) (diagonal X)
+  compute-fold-standard-pullback =
+    map-fold-cone-standard-pullback , is-equiv-map-fold-cone-standard-pullback
+
   triangle-map-fold-cone-standard-pullback :
     {l4 : Level} {C : UU l4} (c : cone f g C) →
     gap (map-product f g) (diagonal X) (fold-cone c) ~
     map-fold-cone-standard-pullback ∘ gap f g c
   triangle-map-fold-cone-standard-pullback c = refl-htpy
 ```
-
-## Properties
 
 ### The equivalence on standard pullbacks induced by parallel cospans
 
