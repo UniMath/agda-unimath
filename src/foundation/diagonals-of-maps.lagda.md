@@ -10,6 +10,7 @@ module foundation.diagonals-of-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-fibers-of-maps
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -20,7 +21,6 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
-open import foundation-core.standard-pullbacks
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

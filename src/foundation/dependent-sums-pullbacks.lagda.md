@@ -11,6 +11,7 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -23,7 +24,6 @@ open import foundation-core.homotopies
 open import foundation-core.pullbacks
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.standard-pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 

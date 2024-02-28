@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
@@ -23,7 +24,6 @@ open import foundation-core.homotopies
 open import foundation-core.pullbacks
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.standard-pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 

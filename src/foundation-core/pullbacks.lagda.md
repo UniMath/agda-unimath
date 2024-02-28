@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.diagonal-maps-of-types
@@ -23,7 +24,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.standard-pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -50,7 +50,7 @@ this concept is captured by
 this is a large proposition, which is not suitable for all purposes. Therefore,
 as our main definition of a pullback cone we consider the
 {{#concept "small predicate of being a pullback" Agda=is-pullback}}: given the
-existence of the [standard pullback type](foundation-core.standard-pullbacks.md)
+existence of the [standard pullback type](foundation.standard-pullbacks.md)
 `A ×_X B`, a cone is a _pullback_ if the gap map into the standard pullback is
 an [equivalence](foundation-core.equivalences.md).
 

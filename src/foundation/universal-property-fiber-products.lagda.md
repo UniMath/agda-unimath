@@ -10,6 +10,7 @@ module foundation.universal-property-fiber-products where
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -21,7 +22,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
-open import foundation-core.standard-pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 

@@ -65,7 +65,7 @@ this concept is captured by
 this is a large proposition, which is not suitable for all purposes. Therefore,
 as our main definition of a pullback cone we consider the
 {{#concept "small predicate of being a pullback" Agda=is-pullback}}: given the
-existence of the [standard pullback type](foundation-core.standard-pullbacks.md)
+existence of the [standard pullback type](foundation.standard-pullbacks.md)
 `A ×_X B`, a cone is a _pullback_ if the gap map into the standard pullback is
 an [equivalence](foundation-core.equivalences.md).
 
