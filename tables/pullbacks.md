@@ -11,6 +11,11 @@
 | Pullbacks (foundation)                                | [`foundation.pullbacks`](foundation.pullbacks.md)                                                                               |
 | Functoriality of pullbacks                            | [`foundation.functoriality-pullbacks`](foundation.functoriality-pullbacks.md)                                                   |
 | Cartesian morphisms of arrows                         | [`foundation.cartesian-morphisms-arrows`](foundation.cartesian-morphisms-arrows.md)                                             |
+| Dependent products of pullbacks                       | [`foundation.dependent-products-pullbacks`](foundation.dependent-products-pullbacks.md)                                         |
+| Dependent sums of pullbacks                           | [`foundation.dependent-sums-pullbacks`](foundation.dependent-sums-pullbacks.md)                                                 |
+| Products of pullbacks                                 | [`foundation.products-pullbacks`](foundation.products-pullbacks.md)                                                             |
+| Coroducts of pullbacks                                | [`foundation.coproducts-pullbacks`](foundation.coproducts-pullbacks.md)                                                         |
+| Postcomposition of pullbacks                          | [`foundation.postcomposition-pullbacks`](foundation.postcomposition-pullbacks.md)                                               |
 | Pullbacks of subtypes                                 | [`foundation.pullbacks-subtypes`](foundation.pullbacks-subtypes.md)                                                             |
 | The pullback-hom                                      | [`orthogonal-factorization-systems.pullback-hom`](orthogonal-factorization-systems.pullback-hom.md)                             |
 | Functoriality of the pullback-hom                     | [`orthogonal-factorization-systems.functoriality-pullback-hom`](orthogonal-factorization-systems.functoriality-pullback-hom.md) |
