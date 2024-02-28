@@ -75,7 +75,7 @@ abstract
           ( let e : is-even-ℕ k
                 e = is-even-is-odd-succ-ℕ k x
 
-                t : (pr1 e) ≤-ℕ k
+                t : (pr1 e) ≤ℕ k
                 t = leq-quotient-div-ℕ' 2 k is-nonzero-two-ℕ e
 
                 s : (pair-expansion (pr1 e))

@@ -85,7 +85,7 @@ leq-succ-Fin (succ-ℕ k) (inl x) = leq-succ-Fin k x
 leq-succ-Fin (succ-ℕ k) (inr star) = star
 
 preserves-leq-nat-Fin :
-  (k : ℕ) {x y : Fin k} → leq-Fin k x y → nat-Fin k x ≤-ℕ nat-Fin k y
+  (k : ℕ) {x y : Fin k} → leq-Fin k x y → nat-Fin k x ≤ℕ nat-Fin k y
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
   preserves-leq-nat-Fin k H
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H =
@@ -94,7 +94,7 @@ preserves-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H =
   refl-leq-ℕ k
 
 reflects-leq-nat-Fin :
-  (k : ℕ) {x y : Fin k} → nat-Fin k x ≤-ℕ nat-Fin k y → leq-Fin k x y
+  (k : ℕ) {x y : Fin k} → nat-Fin k x ≤ℕ nat-Fin k y → leq-Fin k x y
 reflects-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
   reflects-leq-nat-Fin k H
 reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inl y} H =

@@ -111,7 +111,7 @@ is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
 
 ```agda
 le-one-is-prime-ℕ :
-  (n : ℕ) → is-prime-ℕ n → 1 <-ℕ n
+  (n : ℕ) → is-prime-ℕ n → 1 <ℕ n
 le-one-is-prime-ℕ 0 x = ex-falso (is-nonzero-is-prime-ℕ 0 x refl)
 le-one-is-prime-ℕ 1 x = ex-falso (is-not-one-is-prime-ℕ 1 x refl)
 le-one-is-prime-ℕ (succ-ℕ (succ-ℕ n)) x = star
@@ -226,7 +226,7 @@ is-prime-two-ℕ =
 ```agda
 le-quotient-div-is-prime-ℕ :
   (p x : ℕ) → is-nonzero-ℕ x → is-prime-ℕ p →
-  (H : div-ℕ p x) → quotient-div-ℕ p x H <-ℕ x
+  (H : div-ℕ p x) → quotient-div-ℕ p x H <ℕ x
 le-quotient-div-is-prime-ℕ p x N P H =
   le-quotient-div-ℕ p x N H (is-not-one-is-prime-ℕ p P)
 ```

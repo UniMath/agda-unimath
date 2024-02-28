@@ -76,7 +76,7 @@ quotient-euclidean-division-ℕ' (succ-ℕ k) n =
 
 ```agda
 euclidean-division-ℕ :
-  (k x : ℕ) → Σ ℕ (λ r → (cong-ℕ k x r) × (is-nonzero-ℕ k → r <-ℕ k))
+  (k x : ℕ) → Σ ℕ (λ r → (cong-ℕ k x r) × (is-nonzero-ℕ k → r <ℕ k))
 pr1 (euclidean-division-ℕ zero-ℕ x) = x
 pr1 (pr2 (euclidean-division-ℕ zero-ℕ x)) = refl-cong-ℕ zero-ℕ x
 pr2 (pr2 (euclidean-division-ℕ zero-ℕ x)) f = ex-falso (f refl)
@@ -100,7 +100,7 @@ cong-euclidean-division-ℕ k x =
   pr1 (pr2 (euclidean-division-ℕ k x))
 
 strict-upper-bound-remainder-euclidean-division-ℕ :
-  (k x : ℕ) → is-nonzero-ℕ k → (remainder-euclidean-division-ℕ k x) <-ℕ k
+  (k x : ℕ) → is-nonzero-ℕ k → (remainder-euclidean-division-ℕ k x) <ℕ k
 strict-upper-bound-remainder-euclidean-division-ℕ k x =
   pr2 (pr2 (euclidean-division-ℕ k x))
 

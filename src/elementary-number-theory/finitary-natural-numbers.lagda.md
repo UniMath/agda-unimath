@@ -85,7 +85,7 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
 
 ```agda
 le-constant-unary-op-ℕ :
-  (k : ℕ) (x y : Fin k) (m : ℕ) → (constant-ℕ k x) <-ℕ (unary-op-ℕ k y m)
+  (k : ℕ) (x y : Fin k) (m : ℕ) → (constant-ℕ k x) <ℕ (unary-op-ℕ k y m)
 le-constant-unary-op-ℕ k x y m =
   concatenate-le-leq-ℕ {nat-Fin k x} {k} {unary-op-ℕ k y m}
     ( strict-upper-bound-nat-Fin k x)

@@ -44,10 +44,10 @@ is-one-is-divisor-below-ℕ n a =
 
 in-sieve-of-eratosthenes-ℕ : ℕ → ℕ → UU lzero
 in-sieve-of-eratosthenes-ℕ n a =
-  (n <-ℕ a) × (is-one-is-divisor-below-ℕ n a)
+  (n <ℕ a) × (is-one-is-divisor-below-ℕ n a)
 
 le-in-sieve-of-eratosthenes-ℕ :
-  (n a : ℕ) → in-sieve-of-eratosthenes-ℕ n a → n <-ℕ a
+  (n a : ℕ) → in-sieve-of-eratosthenes-ℕ n a → n <ℕ a
 le-in-sieve-of-eratosthenes-ℕ n a = pr1
 ```
 

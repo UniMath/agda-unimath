@@ -33,7 +33,7 @@ A strictly ordered pair of natural numbers consists of `x y : ℕ` such that
 
 ```agda
 strictly-ordered-pair-ℕ : UU lzero
-strictly-ordered-pair-ℕ = Σ ℕ (λ x → Σ ℕ (λ y → x <-ℕ y))
+strictly-ordered-pair-ℕ = Σ ℕ (λ x → Σ ℕ (λ y → x <ℕ y))
 
 module _
   (p : strictly-ordered-pair-ℕ)
@@ -74,7 +74,7 @@ strictly-ordered-pair-pair-of-distinct-elements-ℕ' (succ-ℕ a) zero-ℕ H =
   (0 , succ-ℕ a , star)
 strictly-ordered-pair-pair-of-distinct-elements-ℕ' (succ-ℕ a) (succ-ℕ b) H =
   map-Σ
-    ( λ x → Σ ℕ (λ y → x <-ℕ y))
+    ( λ x → Σ ℕ (λ y → x <ℕ y))
     ( succ-ℕ)
     ( λ x →
       map-Σ (le-ℕ (succ-ℕ x)) succ-ℕ (λ y → id))

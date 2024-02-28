@@ -114,14 +114,14 @@ concatenate-eq-cong-eq-cong-eq-ℕ k
 
 ```agda
 eq-cong-le-dist-ℕ :
-  (k x y : ℕ) → dist-ℕ x y <-ℕ k → cong-ℕ k x y → x ＝ y
+  (k x y : ℕ) → dist-ℕ x y <ℕ k → cong-ℕ k x y → x ＝ y
 eq-cong-le-dist-ℕ k x y H K =
   eq-dist-ℕ x y (is-zero-div-ℕ k (dist-ℕ x y) H K)
 ```
 
 ```agda
 eq-cong-le-ℕ :
-  (k x y : ℕ) → x <-ℕ k → y <-ℕ k → cong-ℕ k x y → x ＝ y
+  (k x y : ℕ) → x <ℕ k → y <ℕ k → cong-ℕ k x y → x ＝ y
 eq-cong-le-ℕ k x y H K =
   eq-cong-le-dist-ℕ k x y (strict-upper-bound-dist-ℕ k x y H K)
 ```

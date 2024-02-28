@@ -83,7 +83,7 @@ is-repetition-pair-of-distinct-elements-repetition-of-values-sequence-Fin k f =
 
 le-first-repetition-of-values-sequence-Fin :
   (k : ℕ) (f : sequence (Fin k)) →
-  (first-repetition-of-values-sequence-Fin k f) <-ℕ (succ-ℕ k)
+  (first-repetition-of-values-sequence-Fin k f) <ℕ (succ-ℕ k)
 le-first-repetition-of-values-sequence-Fin k f =
   strict-upper-bound-nat-Fin
     ( succ-ℕ k)
@@ -126,10 +126,10 @@ ordered-repetition-of-values-nat-to-count e f =
 
 minimal-element-repetition-of-values-sequence-Fin :
   (k : ℕ) (f : ℕ → Fin k) →
-  minimal-element-ℕ (λ x → Σ ℕ (λ y → (y <-ℕ x) × (f y ＝ f x)))
+  minimal-element-ℕ (λ x → Σ ℕ (λ y → (y <ℕ x) × (f y ＝ f x)))
 minimal-element-repetition-of-values-sequence-Fin k f =
   well-ordering-principle-ℕ
-    ( λ x → Σ ℕ (λ y → (y <-ℕ x) × (f y ＝ f x)))
+    ( λ x → Σ ℕ (λ y → (y <ℕ x) × (f y ＝ f x)))
     ( λ x →
       is-decidable-strictly-bounded-Σ-ℕ' x
         ( λ y → f y ＝ f x)
@@ -144,7 +144,7 @@ minimal-element-repetition-of-values-sequence-Fin k f =
 
 minimal-element-repetition-of-values-sequence-count :
   {l : Level} {A : UU l} (e : count A) (f : ℕ → A) →
-  minimal-element-ℕ (λ x → Σ ℕ (λ y → (y <-ℕ x) × (f y ＝ f x)))
+  minimal-element-ℕ (λ x → Σ ℕ (λ y → (y <ℕ x) × (f y ＝ f x)))
 minimal-element-repetition-of-values-sequence-count (k , e) f =
   ( ( n) ,
     ( ( u) ,

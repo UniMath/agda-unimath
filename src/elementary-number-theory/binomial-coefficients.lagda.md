@@ -49,7 +49,7 @@ binomial-coefficient-Fin n x = binomial-coefficient-ℕ n (nat-Fin (succ-ℕ n) 
 
 ```agda
 is-zero-binomial-coefficient-ℕ :
-  (n k : ℕ) → n <-ℕ k → is-zero-ℕ (binomial-coefficient-ℕ n k)
+  (n k : ℕ) → n <ℕ k → is-zero-ℕ (binomial-coefficient-ℕ n k)
 is-zero-binomial-coefficient-ℕ zero-ℕ (succ-ℕ k) _ = refl
 is-zero-binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) H =
   ap-add-ℕ

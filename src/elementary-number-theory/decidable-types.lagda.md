@@ -101,10 +101,10 @@ is-decidable-strictly-bounded-Σ-ℕ m P Q dP dQ H =
 
 is-decidable-strictly-bounded-Σ-ℕ' :
   {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-fam P) →
-  is-decidable (Σ ℕ (λ x → (x <-ℕ m) × (P x)))
+  is-decidable (Σ ℕ (λ x → (x <ℕ m) × (P x)))
 is-decidable-strictly-bounded-Σ-ℕ' m P d =
   is-decidable-strictly-bounded-Σ-ℕ m
-    ( λ x → x <-ℕ m)
+    ( λ x → x <ℕ m)
     ( P)
     ( λ x → is-decidable-le-ℕ x m)
     ( d)
@@ -171,10 +171,10 @@ is-decidable-strictly-bounded-Π-ℕ P Q dP dQ m H =
 
 is-decidable-strictly-bounded-Π-ℕ' :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) (m : ℕ) →
-  is-decidable ((x : ℕ) → x <-ℕ m → P x)
+  is-decidable ((x : ℕ) → x <ℕ m → P x)
 is-decidable-strictly-bounded-Π-ℕ' P d m =
   is-decidable-strictly-bounded-Π-ℕ
-    ( λ x → x <-ℕ m)
+    ( λ x → x <ℕ m)
     ( P)
     ( λ x → is-decidable-le-ℕ x m)
     ( d)

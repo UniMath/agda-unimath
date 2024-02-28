@@ -39,7 +39,7 @@ is-upper-bound-ℕ P n =
 is-strict-upper-bound-ℕ :
   {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
 is-strict-upper-bound-ℕ P n =
-  (m : ℕ) → P m → m <-ℕ n
+  (m : ℕ) → P m → m <ℕ n
 ```
 
 ## Properties

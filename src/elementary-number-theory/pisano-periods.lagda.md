@@ -136,7 +136,7 @@ has-ordered-repetition-fibonacci-pair-Fin k =
 
 is-ordered-repetition-fibonacci-pair-Fin : ℕ → ℕ → UU lzero
 is-ordered-repetition-fibonacci-pair-Fin k x =
-  Σ ℕ (λ y → (y <-ℕ x) × (fibonacci-pair-Fin k y ＝ fibonacci-pair-Fin k x))
+  Σ ℕ (λ y → (y <ℕ x) × (fibonacci-pair-Fin k y ＝ fibonacci-pair-Fin k x))
 
 minimal-ordered-repetition-fibonacci-pair-Fin :
   (k : ℕ) → minimal-element-ℕ (is-ordered-repetition-fibonacci-pair-Fin k)

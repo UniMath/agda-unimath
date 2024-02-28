@@ -63,7 +63,7 @@ sum-count-ℕ (pair k e) f = sum-Fin-ℕ k (f ∘ (map-equiv e))
 ### Bounded sums of natural numbers
 
 ```agda
-bounded-sum-ℕ : (u : ℕ) → ((x : ℕ) → x <-ℕ u → ℕ) → ℕ
+bounded-sum-ℕ : (u : ℕ) → ((x : ℕ) → x <ℕ u → ℕ) → ℕ
 bounded-sum-ℕ zero-ℕ f = zero-ℕ
 bounded-sum-ℕ (succ-ℕ u) f =
   add-ℕ
@@ -112,6 +112,6 @@ abstract
 
 ```text
 leq-sum-Fin-ℕ :
-  {k : ℕ} (f : Fin k → ℕ) (x : Fin k) → (f x) ≤-ℕ (sum-Fin-ℕ f)
+  {k : ℕ} (f : Fin k → ℕ) (x : Fin k) → (f x) ≤ℕ (sum-Fin-ℕ f)
 leq-sum-Fin-ℕ {succ-ℕ k} f x = {!leq-add-ℕ!}
 ```

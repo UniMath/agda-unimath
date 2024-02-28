@@ -57,7 +57,7 @@ the [identity type former `_＝_`](foundation-core.identity-types.md), and the
 [pairing operator `_,_`](foundation.dependent-pair-types.md). Examples of
 nonparametric operators are
 [difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md),
-[strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md),
+[strict inequality on natural numbers `_<ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md),
 and
 [multiplication of Eisenstein integers `_*ℤ[ω]_`](commutative-algebra.eisenstein-integers.md).
 
@@ -170,7 +170,7 @@ Below, we outline a list of general rules when assigning associativities.
 | 40               | Multiplicative arithmetic operators                                                                                                                                                         |
 | 36               | Subtractive arithmetic operators                                                                                                                                                            |
 | 35               | Additive arithmetic operators                                                                                                                                                               |
-| 30               | Relational arithmetic operators like`_≤-ℕ_` and `_<-ℕ_`                                                                                                                                     |
+| 30               | Relational arithmetic operators like`_≤ℕ_` and `_<-ℕ_`                                                                                                                                      |
 | 25               | Parametric unary operators. This class is currently empty                                                                                                                                   |
 | 20               | Parametric exponentiative operators. This class is currently empty                                                                                                                          |
 | 17               | Left homotopy whiskering `_·l_`                                                                                                                                                             |

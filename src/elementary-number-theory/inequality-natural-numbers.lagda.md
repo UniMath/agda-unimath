@@ -99,26 +99,26 @@ is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
 
 ```agda
 concatenate-eq-leq-eq-ℕ :
-  {x' x y y' : ℕ} → x' ＝ x → x ≤-ℕ y → y ＝ y' → x' ≤-ℕ y'
+  {x' x y y' : ℕ} → x' ＝ x → x ≤ℕ y → y ＝ y' → x' ≤ℕ y'
 concatenate-eq-leq-eq-ℕ refl H refl = H
 
 concatenate-leq-eq-ℕ :
-  (m : ℕ) {n n' : ℕ} → m ≤-ℕ n → n ＝ n' → m ≤-ℕ n'
+  (m : ℕ) {n n' : ℕ} → m ≤ℕ n → n ＝ n' → m ≤ℕ n'
 concatenate-leq-eq-ℕ m H refl = H
 
 concatenate-eq-leq-ℕ :
-  {m m' : ℕ} (n : ℕ) → m' ＝ m → m ≤-ℕ n → m' ≤-ℕ n
+  {m m' : ℕ} (n : ℕ) → m' ＝ m → m ≤ℕ n → m' ≤ℕ n
 concatenate-eq-leq-ℕ n refl H = H
 ```
 
 ### Inequality is reflexive
 
 ```agda
-refl-leq-ℕ : (n : ℕ) → n ≤-ℕ n
+refl-leq-ℕ : (n : ℕ) → n ≤ℕ n
 refl-leq-ℕ zero-ℕ = star
 refl-leq-ℕ (succ-ℕ n) = refl-leq-ℕ n
 
-leq-eq-ℕ : (m n : ℕ) → m ＝ n → m ≤-ℕ n
+leq-eq-ℕ : (m n : ℕ) → m ＝ n → m ≤ℕ n
 leq-eq-ℕ m .m refl = refl-leq-ℕ m
 ```
 
@@ -134,7 +134,7 @@ transitive-leq-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
 ### Inequality is antisymmetric
 
 ```agda
-antisymmetric-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → n ≤-ℕ m → m ＝ n
+antisymmetric-leq-ℕ : (m n : ℕ) → m ≤ℕ n → n ≤ℕ m → m ＝ n
 antisymmetric-leq-ℕ zero-ℕ zero-ℕ p q = refl
 antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
@@ -162,7 +162,7 @@ pr2 ℕ-Poset = antisymmetric-leq-ℕ
 
 ```agda
 linear-leq-ℕ :
-  (m n : ℕ) → (m ≤-ℕ n) + (n ≤-ℕ m)
+  (m n : ℕ) → (m ≤ℕ n) + (n ≤ℕ m)
 linear-leq-ℕ zero-ℕ zero-ℕ = inl star
 linear-leq-ℕ zero-ℕ (succ-ℕ n) = inl star
 linear-leq-ℕ (succ-ℕ m) zero-ℕ = inr star
@@ -203,7 +203,7 @@ order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
 
 ```agda
 leq-zero-ℕ :
-  (n : ℕ) → zero-ℕ ≤-ℕ n
+  (n : ℕ) → zero-ℕ ≤ℕ n
 leq-zero-ℕ n = star
 ```
 
@@ -211,11 +211,11 @@ leq-zero-ℕ n = star
 
 ```agda
 is-zero-leq-zero-ℕ :
-  (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ x
+  (x : ℕ) → x ≤ℕ zero-ℕ → is-zero-ℕ x
 is-zero-leq-zero-ℕ zero-ℕ star = refl
 
 is-zero-leq-zero-ℕ' :
-  (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ' x
+  (x : ℕ) → x ≤ℕ zero-ℕ → is-zero-ℕ' x
 is-zero-leq-zero-ℕ' zero-ℕ star = refl
 ```
 
@@ -235,7 +235,7 @@ is-nonzero-leq-one-ℕ .zero-ℕ () refl
 ### Any natural number is less than or equal to its own successor
 
 ```agda
-succ-leq-ℕ : (n : ℕ) → n ≤-ℕ succ-ℕ n
+succ-leq-ℕ : (n : ℕ) → n ≤ℕ succ-ℕ n
 succ-leq-ℕ zero-ℕ = star
 succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
 ```
@@ -244,7 +244,7 @@ succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
 
 ```agda
 decide-leq-succ-ℕ :
-  (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → (m ≤-ℕ n) + (m ＝ succ-ℕ n)
+  (m n : ℕ) → m ≤ℕ (succ-ℕ n) → (m ≤ℕ n) + (m ＝ succ-ℕ n)
 decide-leq-succ-ℕ zero-ℕ zero-ℕ l = inl star
 decide-leq-succ-ℕ zero-ℕ (succ-ℕ n) l = inl star
 decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
@@ -257,7 +257,7 @@ decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
 
 ```agda
 preserves-leq-succ-ℕ :
-  (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ succ-ℕ n
+  (m n : ℕ) → m ≤ℕ n → m ≤ℕ succ-ℕ n
 preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
 ```
 
@@ -265,7 +265,7 @@ preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ
 
 ```agda
 neg-succ-leq-ℕ :
-  (n : ℕ) → ¬ (succ-ℕ n ≤-ℕ n)
+  (n : ℕ) → ¬ (succ-ℕ n ≤ℕ n)
 neg-succ-leq-ℕ zero-ℕ = id
 neg-succ-leq-ℕ (succ-ℕ n) = neg-succ-leq-ℕ n
 ```
@@ -291,10 +291,10 @@ cases-leq-succ-reflexive-leq-ℕ {succ-ℕ n} =
 ### `m ≤ n` if and only if `n + 1 ≰ m`
 
 ```agda
-contradiction-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → ¬ ((succ-ℕ n) ≤-ℕ m)
+contradiction-leq-ℕ : (m n : ℕ) → m ≤ℕ n → ¬ ((succ-ℕ n) ≤ℕ m)
 contradiction-leq-ℕ (succ-ℕ m) (succ-ℕ n) H K = contradiction-leq-ℕ m n H K
 
-contradiction-leq-ℕ' : (m n : ℕ) → (succ-ℕ n) ≤-ℕ m → ¬ (m ≤-ℕ n)
+contradiction-leq-ℕ' : (m n : ℕ) → (succ-ℕ n) ≤ℕ m → ¬ (m ≤ℕ n)
 contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
 ```
 
@@ -302,11 +302,11 @@ contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
 
 ```agda
 left-law-leq-add-ℕ :
-  (k m n : ℕ) → m ≤-ℕ n → (m +ℕ k) ≤-ℕ (n +ℕ k)
+  (k m n : ℕ) → m ≤ℕ n → (m +ℕ k) ≤ℕ (n +ℕ k)
 left-law-leq-add-ℕ zero-ℕ m n = id
 left-law-leq-add-ℕ (succ-ℕ k) m n H = left-law-leq-add-ℕ k m n H
 
-right-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (k +ℕ m) ≤-ℕ (k +ℕ n)
+right-law-leq-add-ℕ : (k m n : ℕ) → m ≤ℕ n → (k +ℕ m) ≤ℕ (k +ℕ n)
 right-law-leq-add-ℕ k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-add-ℕ k m)
@@ -314,7 +314,7 @@ right-law-leq-add-ℕ k m n H =
     ( commutative-add-ℕ n k)
 
 preserves-leq-add-ℕ :
-  {m m' n n' : ℕ} → m ≤-ℕ m' → n ≤-ℕ n' → (m +ℕ n) ≤-ℕ (m' +ℕ n')
+  {m m' n n' : ℕ} → m ≤ℕ m' → n ≤ℕ n' → (m +ℕ n) ≤ℕ (m' +ℕ n')
 preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
   transitive-leq-ℕ
     ( m +ℕ n)
@@ -328,12 +328,12 @@ preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
 
 ```agda
 reflects-order-add-ℕ :
-  (k m n : ℕ) → (m +ℕ k) ≤-ℕ (n +ℕ k) → m ≤-ℕ n
+  (k m n : ℕ) → (m +ℕ k) ≤ℕ (n +ℕ k) → m ≤ℕ n
 reflects-order-add-ℕ zero-ℕ m n = id
 reflects-order-add-ℕ (succ-ℕ k) m n = reflects-order-add-ℕ k m n
 
 reflects-order-add-ℕ' :
-  (k m n : ℕ) → (k +ℕ m) ≤-ℕ (k +ℕ n) → m ≤-ℕ n
+  (k m n : ℕ) → (k +ℕ m) ≤ℕ (k +ℕ n) → m ≤ℕ n
 reflects-order-add-ℕ' k m n H =
   reflects-order-add-ℕ k m n
     ( concatenate-eq-leq-eq-ℕ
@@ -345,7 +345,7 @@ reflects-order-add-ℕ' k m n H =
 ### `m ≤ m + n` for any two natural numbers `m` and `n`
 
 ```agda
-leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (m +ℕ n)
+leq-add-ℕ : (m n : ℕ) → m ≤ℕ (m +ℕ n)
 leq-add-ℕ m zero-ℕ = refl-leq-ℕ m
 leq-add-ℕ m (succ-ℕ n) =
   transitive-leq-ℕ
@@ -355,7 +355,7 @@ leq-add-ℕ m (succ-ℕ n) =
     ( succ-leq-ℕ (m +ℕ n))
     ( leq-add-ℕ m n)
 
-leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (n +ℕ m)
+leq-add-ℕ' : (m n : ℕ) → m ≤ℕ (n +ℕ m)
 leq-add-ℕ' m n =
   concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
 ```
@@ -363,14 +363,14 @@ leq-add-ℕ' m n =
 ### We have `n ≤ m` if and only if there is a number `l` such that `l + n = m`
 
 ```agda
-subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → l +ℕ n ＝ m)
+subtraction-leq-ℕ : (n m : ℕ) → n ≤ℕ m → Σ ℕ (λ l → l +ℕ n ＝ m)
 subtraction-leq-ℕ zero-ℕ m p = pair m refl
 subtraction-leq-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (ap succ-ℕ (pr2 P))
   where
   P : Σ ℕ (λ l' → l' +ℕ n ＝ m)
   P = subtraction-leq-ℕ n m p
 
-leq-subtraction-ℕ : (n m l : ℕ) → l +ℕ n ＝ m → n ≤-ℕ m
+leq-subtraction-ℕ : (n m l : ℕ) → l +ℕ n ＝ m → n ≤ℕ m
 leq-subtraction-ℕ zero-ℕ m l p = leq-zero-ℕ m
 leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
   leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
@@ -380,7 +380,7 @@ leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
 
 ```agda
 preserves-order-mul-ℕ :
-  (k m n : ℕ) → m ≤-ℕ n → (m *ℕ k) ≤-ℕ (n *ℕ k)
+  (k m n : ℕ) → m ≤ℕ n → (m *ℕ k) ≤ℕ (n *ℕ k)
 preserves-order-mul-ℕ k zero-ℕ n p = star
 preserves-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
   left-law-leq-add-ℕ k
@@ -389,7 +389,7 @@ preserves-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
     ( preserves-order-mul-ℕ k m n p)
 
 preserves-order-mul-ℕ' :
-  (k m n : ℕ) → m ≤-ℕ n → (k *ℕ m) ≤-ℕ (k *ℕ n)
+  (k m n : ℕ) → m ≤ℕ n → (k *ℕ m) ≤ℕ (k *ℕ n)
 preserves-order-mul-ℕ' k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-mul-ℕ k m)
@@ -401,7 +401,7 @@ preserves-order-mul-ℕ' k m n H =
 
 ```agda
 preserves-leq-mul-ℕ :
-  (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → (m *ℕ n) ≤-ℕ (m' *ℕ n')
+  (m m' n n' : ℕ) → m ≤ℕ m' → n ≤ℕ n' → (m *ℕ n) ≤ℕ (m' *ℕ n')
 preserves-leq-mul-ℕ m m' n n' H K =
   transitive-leq-ℕ
     ( m *ℕ n)
@@ -415,7 +415,7 @@ preserves-leq-mul-ℕ m m' n n' H K =
 
 ```agda
 reflects-order-mul-ℕ :
-  (k m n : ℕ) → (m *ℕ (succ-ℕ k)) ≤-ℕ (n *ℕ (succ-ℕ k)) → m ≤-ℕ n
+  (k m n : ℕ) → (m *ℕ (succ-ℕ k)) ≤ℕ (n *ℕ (succ-ℕ k)) → m ≤ℕ n
 reflects-order-mul-ℕ k zero-ℕ n p = star
 reflects-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
   reflects-order-mul-ℕ k m n
@@ -426,7 +426,7 @@ reflects-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
       ( p))
 
 reflects-order-mul-ℕ' :
-  (k m n : ℕ) → ((succ-ℕ k) *ℕ m) ≤-ℕ ((succ-ℕ k) *ℕ n) → m ≤-ℕ n
+  (k m n : ℕ) → ((succ-ℕ k) *ℕ m) ≤ℕ ((succ-ℕ k) *ℕ n) → m ≤ℕ n
 reflects-order-mul-ℕ' k m n H =
   reflects-order-mul-ℕ k m n
     ( concatenate-eq-leq-eq-ℕ
@@ -439,7 +439,7 @@ reflects-order-mul-ℕ' k m n H =
 
 ```agda
 leq-mul-ℕ :
-  (k x : ℕ) → x ≤-ℕ (x *ℕ succ-ℕ k)
+  (k x : ℕ) → x ≤ℕ (x *ℕ succ-ℕ k)
 leq-mul-ℕ k x =
   concatenate-eq-leq-ℕ
     ( x *ℕ (succ-ℕ k))
@@ -447,19 +447,19 @@ leq-mul-ℕ k x =
     ( preserves-order-mul-ℕ' x 1 (succ-ℕ k) (leq-zero-ℕ k))
 
 leq-mul-ℕ' :
-  (k x : ℕ) → x ≤-ℕ (succ-ℕ k *ℕ x)
+  (k x : ℕ) → x ≤ℕ (succ-ℕ k *ℕ x)
 leq-mul-ℕ' k x =
   concatenate-leq-eq-ℕ x
     ( leq-mul-ℕ k x)
     ( commutative-mul-ℕ x (succ-ℕ k))
 
 leq-mul-is-nonzero-ℕ :
-  (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (x *ℕ k)
+  (k x : ℕ) → is-nonzero-ℕ k → x ≤ℕ (x *ℕ k)
 leq-mul-is-nonzero-ℕ k x H with is-successor-is-nonzero-ℕ H
 ... | pair l refl = leq-mul-ℕ l x
 
 leq-mul-is-nonzero-ℕ' :
-  (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (k *ℕ x)
+  (k x : ℕ) → is-nonzero-ℕ k → x ≤ℕ (k *ℕ x)
 leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
 ... | pair l refl = leq-mul-ℕ' l x
 ```

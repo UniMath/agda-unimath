@@ -232,7 +232,7 @@ div-gcd-is-common-divisor-ℕ a b x H with
 
 ```agda
 is-zero-is-common-divisor-le-gcd-ℕ :
-  (a b r : ℕ) → r <-ℕ gcd-ℕ a b →
+  (a b r : ℕ) → r <ℕ gcd-ℕ a b →
   ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x r) → is-zero-ℕ r
 is-zero-is-common-divisor-le-gcd-ℕ a b r l d with is-decidable-is-zero-ℕ r
 ... | inl H = H

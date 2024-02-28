@@ -82,7 +82,7 @@ abs-eq-ℤ .zero-ℤ refl = refl
 
 ```agda
 predecessor-law-abs-ℤ :
-  (x : ℤ) → (abs-ℤ (pred-ℤ x)) ≤-ℕ (succ-ℕ (abs-ℤ x))
+  (x : ℤ) → (abs-ℤ (pred-ℤ x)) ≤ℕ (succ-ℕ (abs-ℤ x))
 predecessor-law-abs-ℤ (inl x) =
   refl-leq-ℕ (succ-ℕ x)
 predecessor-law-abs-ℤ (inr (inl star)) =
@@ -97,7 +97,7 @@ predecessor-law-abs-ℤ (inr (inr (succ-ℕ x))) =
 
 ```agda
 successor-law-abs-ℤ :
-  (x : ℤ) → (abs-ℤ (succ-ℤ x)) ≤-ℕ (succ-ℕ (abs-ℤ x))
+  (x : ℤ) → (abs-ℤ (succ-ℤ x)) ≤ℕ (succ-ℕ (abs-ℤ x))
 successor-law-abs-ℤ (inl zero-ℕ) =
   star
 successor-law-abs-ℤ (inl (succ-ℕ x)) =
@@ -112,7 +112,7 @@ successor-law-abs-ℤ (inr (inr x)) =
 
 ```agda
 subadditive-abs-ℤ :
-  (x y : ℤ) → (abs-ℤ (x +ℤ y)) ≤-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))
+  (x y : ℤ) → (abs-ℤ (x +ℤ y)) ≤ℕ ((abs-ℤ x) +ℕ (abs-ℤ y))
 subadditive-abs-ℤ x (inl zero-ℕ) =
   concatenate-eq-leq-eq-ℕ
     ( ap abs-ℤ (right-add-neg-one-ℤ x))
