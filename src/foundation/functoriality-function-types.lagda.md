@@ -8,17 +8,13 @@ module foundation.functoriality-function-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.postcomposition-functions
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types

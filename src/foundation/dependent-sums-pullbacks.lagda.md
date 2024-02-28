@@ -7,21 +7,14 @@ module foundation.dependent-sums-pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
-open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.families-of-equivalences
 open import foundation-core.function-types
@@ -31,9 +24,7 @@ open import foundation-core.pullbacks
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.standard-pullbacks
-open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.universal-property-pullbacks
-open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>

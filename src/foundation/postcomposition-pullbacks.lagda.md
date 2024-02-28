@@ -7,14 +7,9 @@ module foundation.postcomposition-pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equality-coproduct-types
 open import foundation.function-extensionality
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -26,8 +21,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.postcomposition-functions
 open import foundation-core.pullbacks
-open import foundation-core.retractions
-open import foundation-core.sections
 open import foundation-core.standard-pullbacks
 open import foundation-core.universal-property-pullbacks
 ```

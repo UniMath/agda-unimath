@@ -18,8 +18,6 @@ open import foundation.descent-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.standard-pullbacks
 open import foundation.unit-type
@@ -32,6 +30,8 @@ open import foundation-core.contractible-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
