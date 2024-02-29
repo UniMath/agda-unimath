@@ -20,6 +20,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.function-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -85,7 +86,7 @@ leq-succ-Fin (succ-ℕ k) (inl x) = leq-succ-Fin k x
 leq-succ-Fin (succ-ℕ k) (inr star) = star
 
 preserves-leq-nat-Fin :
-  (k : ℕ) {x y : Fin k} → leq-Fin k x y → nat-Fin k x ≤-ℕ nat-Fin k y
+  (k : ℕ) {x y : Fin k} → leq-Fin k x y → (nat-Fin k x) ≤-ℕ (nat-Fin k y)
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
   preserves-leq-nat-Fin k H
 preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H =
@@ -94,7 +95,7 @@ preserves-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H =
   refl-leq-ℕ k
 
 reflects-leq-nat-Fin :
-  (k : ℕ) {x y : Fin k} → nat-Fin k x ≤-ℕ nat-Fin k y → leq-Fin k x y
+  (k : ℕ) {x y : Fin k} → (nat-Fin k x) ≤-ℕ (nat-Fin k y) → leq-Fin k x y
 reflects-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
   reflects-leq-nat-Fin k H
 reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inl y} H =
@@ -126,7 +127,7 @@ pr2 (Fin-Poset k) = antisymmetric-leq-Fin k
 is-decidable-leq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (leq-Fin k x y)
 is-decidable-leq-Fin (succ-ℕ k) (inl x) (inl y) = is-decidable-leq-Fin k x y
 is-decidable-leq-Fin (succ-ℕ k) (inl x) (inr y) = inl star
-is-decidable-leq-Fin (succ-ℕ k) (inr x) (inl y) = inr (λ x → x)
+is-decidable-leq-Fin (succ-ℕ k) (inr x) (inl y) = inr id
 is-decidable-leq-Fin (succ-ℕ k) (inr x) (inr y) = inl star
 
 leq-Fin-Decidable-Prop : (k : ℕ) → Fin k → Fin k → Decidable-Prop lzero
