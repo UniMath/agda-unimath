@@ -1,6 +1,8 @@
 # The universal cover of the circle
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module synthetic-homotopy-theory.universal-cover-circle where
 ```
 
