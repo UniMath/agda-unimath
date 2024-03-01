@@ -68,7 +68,6 @@ additional-css = [
 ]
 additional-js = [
   "website/js/custom.js",
-  "website/js/goatcounter.js",
   "theme/pagetoc.js"
 ]
 no-section-label = false
