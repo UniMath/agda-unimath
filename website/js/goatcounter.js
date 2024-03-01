@@ -274,8 +274,8 @@
       localStorage.setItem('skipgc', 't');
       alert(
         'GoatCounter tracking is now DISABLED in this browser until ' +
-        location +
-        ' is loaded again.'
+          location +
+          ' is loaded again.'
       );
     }
   }
