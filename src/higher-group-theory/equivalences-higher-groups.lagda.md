@@ -21,6 +21,7 @@ open import higher-group-theory.higher-groups
 open import higher-group-theory.homomorphisms-higher-groups
 
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-isomorphisms
 open import structured-types.pointed-types
 ```
 

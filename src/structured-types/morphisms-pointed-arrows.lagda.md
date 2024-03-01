@@ -1,6 +1,8 @@
 # Morphisms of pointed arrows
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module structured-types.morphisms-pointed-arrows where
 ```
 
