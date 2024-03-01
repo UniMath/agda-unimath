@@ -21,8 +21,10 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The universal property of dependent pair types gives us a characterization of
-maps out of a dependent pair types.
+The {{#concept "universal property of dependent pair types"}} characterizes of
+maps out of [dependent pair types](foundation-core.dependent-pair-types.md). It
+states that _uncurried_ maps `(x : Σ A B) → C x` are in correspondence with
+_curried_ maps `(a : A) (b : B a) → C (a , b)`.
 
 ## Theorem
 

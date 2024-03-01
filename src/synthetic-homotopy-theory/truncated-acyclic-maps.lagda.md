@@ -469,7 +469,7 @@ module _
         ( is-truncated-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
           ( terminal-map B)
-          ( cone-product A B)
+          ( cone-cartesian-product A B)
           ( is-pullback-cartesian-product A B)
           ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)))
 ```
