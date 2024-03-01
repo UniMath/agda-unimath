@@ -198,3 +198,33 @@ module _
   compute-refl-left-whisker-pointed-htpy =
     refl-pointed-2-htpy (refl-pointed-htpy (g ∘∗ f))
 ```
+
+### Computing right whiskering the reflexive pointed homotopy
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
+  (g : B →∗ C) (f : A →∗ B)
+  where
+
+  htpy-compute-refl-right-whisker-pointed-htpy :
+    unpointed-htpy-pointed-htpy
+      ( right-whisker-pointed-htpy g g (refl-pointed-htpy g) f)
+      ( refl-pointed-htpy (comp-pointed-map g f))
+  htpy-compute-refl-right-whisker-pointed-htpy = refl-htpy
+
+  coherence-point-compute-refl-right-whisker-pointed-htpy :
+    coherence-point-unpointed-htpy-pointed-htpy
+      ( right-whisker-pointed-htpy g g (refl-pointed-htpy g) f)
+      ( refl-pointed-htpy (comp-pointed-map g f))
+      ( htpy-compute-refl-right-whisker-pointed-htpy)
+  coherence-point-compute-refl-right-whisker-pointed-htpy =
+    {!!}
+
+  compute-refl-right-whisker-pointed-htpy :
+    pointed-2-htpy
+      ( right-whisker-pointed-htpy g g (refl-pointed-htpy g) f)
+      ( refl-pointed-htpy (comp-pointed-map g f))
+  compute-refl-right-whisker-pointed-htpy = {!!}
+```

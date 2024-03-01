@@ -384,30 +384,81 @@ module _
         ( pointed-htpy-domain-htpy-hom-pointed-arrow)
         ( pointed-htpy-codomain-htpy-hom-pointed-arrow)
     coh-htpy-hom-pointed-arrow = pr2 (pr2 η)
+```
 
-  refl-htpy-hom-pointed-arrow : htpy-hom-pointed-arrow α
-  pr1 refl-htpy-hom-pointed-arrow = refl-pointed-htpy _
-  pr1 (pr2 refl-htpy-hom-pointed-arrow) = refl-pointed-htpy _
-  pr2 (pr2 refl-htpy-hom-pointed-arrow) =
+### The reflexive homotopy of pointed arrows
+
+Consider a morphism of poitned arrows
+
+```text
+                α₀
+            A -----> X
+            |        |
+  (f₀ , f₁) |   α₂   | (g₀ , g₁)
+            ∨        ∨
+            B -----> Y
+                α₁
+```
+
+from `f : A →∗ B` to `g : X →∗ Y`. The reflexive homotopy `r := (r₀ , r₁ , r₂)` on `α := (α₀ , α₁ , α₂)` is given by
+
+```text
+  r₀ := refl-pointed-htpy : α₀ ~∗ α₀
+  r₁ := refl-pointed-htpy : α₁ ~∗ α₁
+```
+
+and a pointed 2-homotopy `r₂` witnessing that the square of homotopies
+
+```text
+            r₁ ·r f
+  (α₁ ∘ f) --------> (α₁ ∘ f)
+      |                  |
+   α₂ |                  | α₂
+      V                  V
+   (g ∘ α₀) --------> (g ∘ α₀)
+             g ·l r₀
+```
+
+commutes. Note that `r₁ ·r f ≐ refl-pointed-htpy` and `g ·l r₀ ≐ refl-pointed-htpy`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  where
+
+  refl-htpy-hom-pointed-arrow :
+    (f : A →∗ B) (g : X →∗ Y) (α : hom-pointed-arrow f g) → 
+    htpy-hom-pointed-arrow f g α α
+  pr1 (refl-htpy-hom-pointed-arrow f g α) = refl-pointed-htpy _
+  pr1 (pr2 (refl-htpy-hom-pointed-arrow f g α)) = refl-pointed-htpy _
+  pr2
+    ( pr2
+      ( refl-htpy-hom-pointed-arrow
+        ( f , refl)
+        ( g , refl)
+        ( (α , refl) , (β , s) , (γ , refl)))) = {!!}
+
+{-
     concat-pointed-2-htpy
       ( right-unit-law-concat-pointed-htpy _)
       ( inv-pointed-2-htpy
         ( concat-pointed-2-htpy
-          {!!}
-          ( left-unit-law-concat-pointed-htpy _)))
-  
-  {-
-      coherence-square-pointed-homotopies
-      ( right-whisker-pointed-htpy _ _ J f)
-      ( coh-hom-pointed-arrow f g α)
-      ( coh-hom-pointed-arrow f g β)
-      ( left-whisker-pointed-htpy g _ _ I)
+          ( refl-htpy , {!!})
+          ( left-unit-law-concat-pointed-htpy _))) -}
+```
 
-    concat-pointed-2-htpy
-      ( right-unit-law-concat-pointed-htpy _)
-      ( {!!}) -}
+### Characterization of the identity types of morphisms of pointed arrows
 
-  is-torsorial-htpy-hom-pointed-arrow : is-torsorial htpy-hom-pointed-arrow
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  (f : A →∗ B) (g : X →∗ Y) (α : hom-pointed-arrow f g)
+  where
+
+  is-torsorial-htpy-hom-pointed-arrow :
+    is-torsorial (htpy-hom-pointed-arrow f g α)
   is-torsorial-htpy-hom-pointed-arrow =
     is-torsorial-Eq-structure
       {! !}
@@ -426,8 +477,8 @@ module _
         ( is-torsorial-htpy (coh-hom-pointed-arrow f g α ∙h refl-htpy))) -}
 
   htpy-eq-hom-pointed-arrow :
-    (β : hom-pointed-arrow f g) → α ＝ β → htpy-hom-pointed-arrow β
-  htpy-eq-hom-pointed-arrow β refl = refl-htpy-hom-pointed-arrow
+    (β : hom-pointed-arrow f g) → α ＝ β → htpy-hom-pointed-arrow f g α β
+  htpy-eq-hom-pointed-arrow β refl = refl-htpy-hom-pointed-arrow f g α
 
   is-equiv-htpy-eq-hom-pointed-arrow :
     (β : hom-pointed-arrow f g) → is-equiv (htpy-eq-hom-pointed-arrow β)
@@ -437,14 +488,14 @@ module _
       ( htpy-eq-hom-pointed-arrow)
 
   extensionality-hom-pointed-arrow :
-    (β : hom-pointed-arrow f g) → (α ＝ β) ≃ htpy-hom-pointed-arrow β
+    (β : hom-pointed-arrow f g) → (α ＝ β) ≃ htpy-hom-pointed-arrow f g α β
   pr1 (extensionality-hom-pointed-arrow β) =
     htpy-eq-hom-pointed-arrow β
   pr2 (extensionality-hom-pointed-arrow β) =
     is-equiv-htpy-eq-hom-pointed-arrow β
 
   eq-htpy-hom-pointed-arrow :
-    (β : hom-pointed-arrow f g) → htpy-hom-pointed-arrow β → α ＝ β
+    (β : hom-pointed-arrow f g) → htpy-hom-pointed-arrow f g α β → α ＝ β
   eq-htpy-hom-pointed-arrow β =
     map-inv-equiv (extensionality-hom-pointed-arrow β)
 ```

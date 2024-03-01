@@ -268,6 +268,12 @@ nat-htpy :
   H x ∙ ap g p ＝ ap f p ∙ H y
 nat-htpy H refl = right-unit
 
+nat-refl-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {x y : A} (p : x ＝ y) →
+  nat-htpy (refl-htpy' f) p ＝ inv right-unit
+nat-refl-htpy f refl = refl
+
 inv-nat-htpy :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   {x y : A} (p : x ＝ y) →
