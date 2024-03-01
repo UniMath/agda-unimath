@@ -7,7 +7,14 @@
 everythingOpts := --guardedness --cohesion --flat-split
 # use "$ export AGDAVERBOSE=-v20" if you want to see all
 AGDAVERBOSE ?= -v1
-AGDARTS := +RTS -M6.0G -RTS
+
+ifeq ($(CI),)
+	AGDA_MIN_HEAP ?= 2G
+else
+	AGDA_MIN_HEAP ?= 4G
+endif
+
+AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M6G -RTS
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 
@@ -72,8 +79,11 @@ check: ./src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
 .PHONY: check-profile
-check-profile: ./src/everything.lagda.md
-	${AGDA} ${AGDAPROFILEFLAGS} $?
+# `clean` is specified second so that the $< variable stores the everything file.
+# We don't mind, because the `clean` target busts the typechecking and website cache,
+# but doesn't touch the everything file.
+check-profile: ./src/everything.lagda.md clean
+	${AGDA} ${AGDAPROFILEFLAGS} $<
 
 # Base directory where Agda interface files are stored
 BUILD_DIR := ./_build
