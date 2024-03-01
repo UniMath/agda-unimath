@@ -47,7 +47,7 @@ we want to pose the question of whether this cone is a
 {{#concept "pullback cone" Disambiguation="types" Agda=is-pullback}}. Although
 this concept is captured by
 [the universal property of the pullback](foundation-core.universal-property-pullbacks.md),
-this is a large proposition, which is not suitable for all purposes. Therefore,
+that is a large proposition, which is not suitable for all purposes. Therefore,
 as our main definition of a pullback cone we consider the
 {{#concept "small predicate of being a pullback" Agda=is-pullback}}: given the
 existence of the [standard pullback type](foundation.standard-pullbacks.md)

@@ -91,7 +91,7 @@ module _
 
 A different way to state the universal property of cartesian products as limits
 is to say that the canonical [cone](foundation.cones-over-cospan-diagrams.md)
-over the [unit type](foundation.unit-type.md)
+over the [terminal type `unit`](foundation.unit-type.md)
 
 ```text
            pr2
@@ -102,7 +102,22 @@ over the [unit type](foundation.unit-type.md)
      A -------> unit
 ```
 
-is a [pullback](foundation-core.pullbacks.md)
+is a [pullback](foundation-core.pullbacks.md). The
+[universal property of pullbacks](foundation-core.universal-property-pullbacks.md)
+states in this case that maps into `A × B` are in correspondence with pairs of
+maps into `A` and `B` such that the square
+
+```text
+     X --------> B
+     |           |
+     |           |
+     ∨           ∨
+     A -------> unit
+```
+
+[commutes](foundation-core.commuting-squares-of-maps.md). However, all parallel
+maps into the terminal type are [equal](foundation-core.identity-types.md),
+hence the coherence requirement is redundant.
 
 We start by constructing the cone for two maps into the unit type.
 
@@ -139,7 +154,7 @@ Next, we show that cartesian products are a special case of pullbacks.
         ( terminal-map B)
         ( refl)
         ( refl)
-        ( eq-is-contr (is-prop-is-contr is-contr-unit star star))
+        ( eq-is-contr (is-prop-unit star star))
 
   is-retraction-inv-gap-cartesian-product :
     is-retraction gap-cartesian-product inv-gap-cartesian-product

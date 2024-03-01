@@ -11,6 +11,9 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
+open import foundation.pullbacks
 open import foundation.standard-pullbacks
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -21,7 +24,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.pullbacks
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -174,7 +176,7 @@ module _
         ( is-equiv-map-product-cone-standard-pullback f g f' g')
 ```
 
-### Products of cones satisfying the universal property of pullbacks satisfies the universal property of pullbacks
+### Products of cones satisfying the universal property of pullbacks satisfy the universal property of pullbacks
 
 ```agda
 module _
@@ -185,14 +187,14 @@ module _
   (f' : A' → X') (g' : B' → X') (c' : cone f' g' C')
   where
 
-  universal-property-pullback-product :
+  universal-property-pullback-product-universal-property-pullback :
     universal-property-pullback f g c →
     universal-property-pullback f' g' c' →
     universal-property-pullback
       ( map-product f f')
       ( map-product g g')
       ( product-cone f g f' g' c c')
-  universal-property-pullback-product H H' =
+  universal-property-pullback-product-universal-property-pullback H H' =
     universal-property-pullback-is-pullback
       ( map-product f f')
       ( map-product g g')
@@ -214,15 +216,16 @@ module _
   where
 
   abstract
-    is-pullback-left-factor-is-pullback-product' :
+    is-pullback-left-factor-is-inhabited-standard-pullback-right-factor-is-pullback-product' :
       is-pullback
         ( map-product f f')
         ( map-product g g')
         ( product-cone f g f' g' c c') →
       standard-pullback f' g' →
       is-pullback f g c
-    is-pullback-left-factor-is-pullback-product' is-pb-cc' t =
-      is-equiv-left-factor-is-equiv-map-product
+    is-pullback-left-factor-is-inhabited-standard-pullback-right-factor-is-pullback-product'
+      H t =
+      is-equiv-left-factor-is-equiv-map-product-is-inhabited-right-factor'
         ( gap f g c)
         ( gap f' g' c')
         ( t)
@@ -235,28 +238,59 @@ module _
             ( map-product (gap f g c) (gap f' g' c'))
             ( triangle-map-product-cone-standard-pullback f g f' g' c c')
             ( is-equiv-map-product-cone-standard-pullback f g f' g')
-            ( is-pb-cc'))
+            ( H))
 
-  is-pullback-left-factor-is-pullback-product :
+  abstract
+    is-pullback-left-factor-is-inhabited-standard-pullback-right-factor-is-pullback-product :
+      is-pullback
+        ( map-product f f')
+        ( map-product g g')
+        ( product-cone f g f' g' c c') →
+      is-inhabited (standard-pullback f' g') →
+      is-pullback f g c
+    is-pullback-left-factor-is-inhabited-standard-pullback-right-factor-is-pullback-product
+      H =
+      rec-trunc-Prop
+        ( is-pullback-Prop f g c)
+        ( is-pullback-left-factor-is-inhabited-standard-pullback-right-factor-is-pullback-product'
+          ( H))
+
+  is-pullback-left-factor-is-inhabited-right-factor-is-pullback-product' :
     is-pullback
       ( map-product f f')
       ( map-product g g')
       ( product-cone f g f' g' c c') →
     C' →
     is-pullback f g c
-  is-pullback-left-factor-is-pullback-product is-pb-cc' t =
-    is-pullback-left-factor-is-pullback-product' is-pb-cc' (gap f' g' c' t)
+  is-pullback-left-factor-is-inhabited-right-factor-is-pullback-product' H t =
+    is-pullback-left-factor-is-inhabited-standard-pullback-right-factor-is-pullback-product'
+      ( H)
+      ( gap f' g' c' t)
+
+  is-pullback-left-factor-is-inhabited-right-factor-is-pullback-product :
+    is-pullback
+      ( map-product f f')
+      ( map-product g g')
+      ( product-cone f g f' g' c c') →
+    is-inhabited C' →
+    is-pullback f g c
+  is-pullback-left-factor-is-inhabited-right-factor-is-pullback-product H =
+      rec-trunc-Prop
+        ( is-pullback-Prop f g c)
+        ( is-pullback-left-factor-is-inhabited-right-factor-is-pullback-product'
+          ( H))
 
   abstract
-    is-pullback-right-factor-is-pullback-product' :
+    is-pullback-right-factor-is-inhabited-standard-pullback-left-factor-is-pullback-product' :
       is-pullback
         ( map-product f f')
         ( map-product g g')
         ( product-cone f g f' g' c c') →
       standard-pullback f g →
       is-pullback f' g' c'
-    is-pullback-right-factor-is-pullback-product' is-pb-cc' t =
-      is-equiv-right-factor-is-equiv-map-product
+    is-pullback-right-factor-is-inhabited-standard-pullback-left-factor-is-pullback-product'
+      H t =
+      is-equiv-right-factor-is-equiv-map-product-is-inhabited-left-factor'
         ( gap f g c)
         ( gap f' g' c')
         ( t)
@@ -269,17 +303,47 @@ module _
           ( map-product (gap f g c) (gap f' g' c'))
           ( triangle-map-product-cone-standard-pullback f g f' g' c c')
           ( is-equiv-map-product-cone-standard-pullback f g f' g')
-          ( is-pb-cc'))
+          ( H))
 
-  is-pullback-right-factor-is-pullback-product :
+  abstract
+    is-pullback-right-factor-is-inhabited-standard-pullback-left-factor-is-pullback-product :
+      is-pullback
+        ( map-product f f')
+        ( map-product g g')
+        ( product-cone f g f' g' c c') →
+      is-inhabited (standard-pullback f g) →
+      is-pullback f' g' c'
+    is-pullback-right-factor-is-inhabited-standard-pullback-left-factor-is-pullback-product
+      H =
+      rec-trunc-Prop
+        ( is-pullback-Prop f' g' c')
+        ( is-pullback-right-factor-is-inhabited-standard-pullback-left-factor-is-pullback-product'
+          ( H))
+
+  is-pullback-right-factor-is-inhabited-left-factor-is-pullback-product' :
     is-pullback
       ( map-product f f')
       ( map-product g g')
       ( product-cone f g f' g' c c') →
     C →
     is-pullback f' g' c'
-  is-pullback-right-factor-is-pullback-product is-pb-cc' t =
-    is-pullback-right-factor-is-pullback-product' is-pb-cc' (gap f g c t)
+  is-pullback-right-factor-is-inhabited-left-factor-is-pullback-product' H t =
+    is-pullback-right-factor-is-inhabited-standard-pullback-left-factor-is-pullback-product'
+      ( H)
+      ( gap f g c t)
+
+  is-pullback-right-factor-is-inhabited-left-factor-is-pullback-product :
+    is-pullback
+      ( map-product f f')
+      ( map-product g g')
+      ( product-cone f g f' g' c c') →
+    is-inhabited C →
+    is-pullback f' g' c'
+  is-pullback-right-factor-is-inhabited-left-factor-is-pullback-product H =
+      rec-trunc-Prop
+        ( is-pullback-Prop f' g' c')
+        ( is-pullback-right-factor-is-inhabited-left-factor-is-pullback-product'
+          ( H))
 ```
 
 ## Table of files about pullbacks

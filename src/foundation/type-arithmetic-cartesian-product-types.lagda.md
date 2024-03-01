@@ -73,27 +73,27 @@ module _
   where
 
   map-associative-product : (A × B) × C → A × (B × C)
-  map-associative-product = map-associative-Σ A (λ x → B) (λ w → C)
+  map-associative-product = map-associative-Σ A (λ _ → B) (λ _ → C)
 
   map-inv-associative-product : A × (B × C) → (A × B) × C
-  map-inv-associative-product = map-inv-associative-Σ A (λ x → B) (λ w → C)
+  map-inv-associative-product = map-inv-associative-Σ A (λ _ → B) (λ _ → C)
 
   is-section-map-inv-associative-product :
     (map-associative-product ∘ map-inv-associative-product) ~ id
   is-section-map-inv-associative-product =
-    is-section-map-inv-associative-Σ A (λ x → B) (λ w → C)
+    is-section-map-inv-associative-Σ A (λ _ → B) (λ _ → C)
 
   is-retraction-map-inv-associative-product :
     (map-inv-associative-product ∘ map-associative-product) ~ id
   is-retraction-map-inv-associative-product =
-    is-retraction-map-inv-associative-Σ A (λ x → B) (λ w → C)
+    is-retraction-map-inv-associative-Σ A (λ _ → B) (λ _ → C)
 
   is-equiv-map-associative-product : is-equiv map-associative-product
   is-equiv-map-associative-product =
-    is-equiv-map-associative-Σ A (λ x → B) (λ w → C)
+    is-equiv-map-associative-Σ A (λ _ → B) (λ _ → C)
 
   associative-product : ((A × B) × C) ≃ (A × (B × C))
-  associative-product = associative-Σ A (λ x → B) (λ w → C)
+  associative-product = associative-Σ A (λ _ → B) (λ _ → C)
 ```
 
 ### The unit laws of cartesian product types with respect to contractible types
@@ -104,7 +104,7 @@ module _
   where
 
   right-unit-law-product-is-contr : A × B ≃ A
-  right-unit-law-product-is-contr = right-unit-law-Σ-is-contr (λ a → is-contr-B)
+  right-unit-law-product-is-contr = right-unit-law-Σ-is-contr (λ _ → is-contr-B)
 
   inv-right-unit-law-product-is-contr : A ≃ A × B
   inv-right-unit-law-product-is-contr =
@@ -121,20 +121,20 @@ module _
   inv-left-unit-law-product-is-contr : B ≃ A × B
   inv-left-unit-law-product-is-contr = inv-equiv left-unit-law-product-is-contr
 
-  is-equiv-pr2-product-is-contr : is-equiv (pr2 {B = λ a → B})
+  is-equiv-pr2-product-is-contr : is-equiv (pr2 {B = λ _ → B})
   is-equiv-pr2-product-is-contr =
     is-equiv-comp
       ( pr1)
       ( map-commutative-product)
       ( is-equiv-map-commutative-product)
-      ( is-equiv-pr1-is-contr λ b → is-contr-A)
+      ( is-equiv-pr1-is-contr (λ _ → is-contr-A))
 
   equiv-pr2-product-is-contr : (A × B) ≃ B
   pr1 equiv-pr2-product-is-contr = pr2
   pr2 equiv-pr2-product-is-contr = is-equiv-pr2-product-is-contr
 ```
 
-### Adding redundant property
+### Adding redundant properties
 
 ```agda
 equiv-add-redundant-prop :
@@ -145,7 +145,7 @@ pr2 (equiv-add-redundant-prop is-prop-B f) =
   is-equiv-is-invertible
     ( pr1)
     ( λ p → eq-pair refl (eq-is-prop is-prop-B))
-    ( λ a → refl)
+    ( refl-htpy)
 ```
 
 ## See also

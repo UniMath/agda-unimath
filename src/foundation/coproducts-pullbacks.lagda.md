@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -172,12 +173,13 @@ module _
   triangle-map-standard-pullback-coproduct :
     {l4 l4' : Level} {C : UU l4} {C' : UU l4'}
     (c : cone f g C) (c' : cone f' g' C') →
-    ( gap
-      ( map-coproduct f f')
-      ( map-coproduct g g')
-      ( coproduct-cone f g f' g' c c')) ~
-    ( map-standard-pullback-coproduct f g f' g') ∘
-    ( map-coproduct (gap f g c) (gap f' g' c'))
+    coherence-triangle-maps
+      ( gap
+        ( map-coproduct f f')
+        ( map-coproduct g g')
+        ( coproduct-cone f g f' g' c c'))
+      ( map-standard-pullback-coproduct f g f' g')
+      ( map-coproduct (gap f g c) (gap f' g' c'))
   triangle-map-standard-pullback-coproduct c c' (inl _) =
     eq-pair-eq-fiber (eq-pair-eq-fiber right-unit)
   triangle-map-standard-pullback-coproduct c c' (inr _) =

@@ -15,6 +15,7 @@ open import foundation.standard-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -74,7 +75,7 @@ pr2 (pr2 (postcomp-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h
 
 ## Properties
 
-### The standard pullback computes of a postcomposition exponential computes as the type of cones
+### The standard pullback of a postcomposition exponential computes as the type of cones
 
 ```agda
 module _
@@ -107,9 +108,10 @@ module _
 triangle-map-standard-pullback-postcomp :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
-  cone-map f g c {T} ~
-  map-standard-pullback-postcomp f g T ∘
-  gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c)
+  coherence-triangle-maps
+    ( cone-map f g c {T})
+    ( map-standard-pullback-postcomp f g T)
+    ( gap (postcomp T f) (postcomp T g) (postcomp-cone T f g c))
 triangle-map-standard-pullback-postcomp T f g c h =
   eq-pair-eq-fiber
     ( eq-pair-eq-fiber
@@ -158,16 +160,16 @@ abstract
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C)
+  (f : A → X) (g : B → X) (c : cone f g C) (T : UU l5)
   where
 
-  universal-property-pullback-postcomp :
+  universal-property-pullback-postcomp-universal-property-pullback :
     universal-property-pullback f g c →
     universal-property-pullback
       ( postcomp T f)
       ( postcomp T g)
       ( postcomp-cone T f g c)
-  universal-property-pullback-postcomp H =
+  universal-property-pullback-postcomp-universal-property-pullback H =
     universal-property-pullback-is-pullback
       ( postcomp T f)
       ( postcomp T g)

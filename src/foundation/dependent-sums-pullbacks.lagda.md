@@ -139,7 +139,8 @@ module _
       is-fiberwise-equiv g →
       universal-property-pullback f pr1 cone-map-Σ
     universal-property-pullback-is-fiberwise-equiv is-equiv-g =
-      universal-property-pullback-is-pullback f pr1 cone-map-Σ
+      universal-property-pullback-is-pullback f pr1
+        ( cone-map-Σ)
         ( is-pullback-is-fiberwise-equiv is-equiv-g)
 
   abstract
@@ -164,7 +165,7 @@ module _
 
 ### Pullbacks are preserved by dependent sums
 
-#### A family of squares over a pullback square is a family of pullback squares if and only if the total square is
+#### A family of squares over a pullback square is a family of pullback squares if and only if the total square is a pullback
 
 ```agda
 module _
@@ -212,8 +213,9 @@ module _
           ( λ b' → tr PX (pr2 bα) (f' (pr1 aa') (pr2 aa')) ＝ g' (pr1 bα) b')))
   map-standard-pullback-tot-cone-cone-fam-right-factor =
     map-interchange-Σ-Σ
-      ( λ a bα a' → Σ (PB (pr1 bα))
-        ( λ b' → tr PX (pr2 bα) (f' a a') ＝ g' (pr1 bα) b'))
+      ( λ a bα a' →
+        Σ ( PB (pr1 bα))
+          ( λ b' → tr PX (pr2 bα) (f' a a') ＝ g' (pr1 bα) b'))
 
   map-standard-pullback-tot-cone-cone-fam-left-factor :
     (aa' : Σ A PA) →
@@ -232,8 +234,8 @@ module _
     Σ ( standard-pullback f g)
       ( λ t →
         standard-pullback
-          ( tr PX (coherence-square-standard-pullback t) ∘
-            f' (vertical-map-standard-pullback t))
+          ( ( tr PX (coherence-square-standard-pullback t)) ∘
+            ( f' (vertical-map-standard-pullback t)))
           ( g' (horizontal-map-standard-pullback t))) →
     standard-pullback (map-Σ PX f f') (map-Σ PX g g')
   map-standard-pullback-tot-cone-cone-family =
@@ -247,9 +249,10 @@ module _
     is-equiv map-standard-pullback-tot-cone-cone-family
   is-equiv-map-standard-pullback-tot-cone-cone-family =
     is-equiv-comp
-      ( tot (λ aa' →
-        ( tot (λ bb' → eq-pair-Σ')) ∘
-        ( map-standard-pullback-tot-cone-cone-fam-left-factor aa')))
+      ( tot
+        ( λ aa' →
+          ( tot (λ bb' → eq-pair-Σ')) ∘
+          ( map-standard-pullback-tot-cone-cone-fam-left-factor aa')))
       ( map-standard-pullback-tot-cone-cone-fam-right-factor)
       ( is-equiv-map-interchange-Σ-Σ
         ( λ a bα a' → Σ (PB (pr1 bα))
@@ -339,10 +342,11 @@ module _
       ( is-equiv-map-standard-pullback-tot-cone-cone-family)
 ```
 
-#### A family of squares is a family of pullback squares if and only if the total square is
+#### A family of squares is a family of pullback squares if and only if the total square is a pullback
 
 As a corollary of the previous result, a dependent sum of squares over the
-constant diagram is a pullback square if and only if the family is.
+constant diagram is a pullback square if and only if the family is a family of
+pullback squares.
 
 ```agda
 module _

@@ -233,9 +233,9 @@ pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 ### Parallel cones over parallel cospan diagrams
 
 Two cones with the same domain over parallel cospans are considered
-{{#concept "parallel" Disambiguation="cones over cospan diagrams"}} if they are
-part of a fully coherent diagram. I.e., there is a fully coherent cube where all
-the vertical maps are identities, the top face is given by one cone, and the
+{{#concept "parallel" Disambiguation="cones over parallel cospan diagrams"}} if
+they are part of a fully coherent diagram: there is a fully coherent cube where
+all the vertical maps are identities, the top face is given by one cone, and the
 bottom face is given by the other.
 
 ```agda
@@ -283,10 +283,12 @@ pr2 (pr2 (id-cone A)) = refl-htpy
 
 ### Relating `htpy-parallel-cone` to the identity type of cones
 
-In the following part we will relate the type `htpy-parallel-cone` to the
-identity type of cones. We will show that `htpy-parallel-cone` characterizes
+In the following part we relate the type `htpy-parallel-cone` to the identity
+type of cones. We show that `htpy-parallel-cone` characterizes
 [dependent identifications](foundation.dependent-identifications.md) of cones on
-the same domain over parallel cospans. The characterization relies on
+the same domain over parallel cospans.
+
+**Note.** The characterization relies heavily on
 [function extensionality](foundation.function-extensionality.md).
 
 #### The type family of homotopies of parallel cones is torsorial
@@ -363,7 +365,8 @@ module _
       {g' : B → X} (Hg : g ~ g') (c : cone f g C) →
       is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg c)
     is-torsorial-htpy-parallel-cone-refl-htpy =
-      ind-htpy g
+      ind-htpy
+        ( g)
         ( λ g'' Hg' →
           (c : cone f g C) →
           is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg' c))
@@ -376,7 +379,8 @@ module _
     is-torsorial-htpy-parallel-cone Hf {g'} =
       ind-htpy
         ( f)
-        ( λ f'' Hf' → (g' : B → X) (Hg : g ~ g') (c : cone f g C) →
+        ( λ f'' Hf' →
+          (g' : B → X) (Hg : g ~ g') (c : cone f g C) →
           is-contr (Σ (cone f'' g' C) (htpy-parallel-cone Hf' Hg c)))
         ( λ g' Hg → is-torsorial-htpy-parallel-cone-refl-htpy Hg)
         ( Hf)
@@ -534,8 +538,14 @@ module _
                 ( is-equiv-concat
                   ( compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c)
                   ( c')))
-            Hg c c')
-        Hf g' Hg c c'
+            ( Hg)
+            ( c)
+            ( c'))
+        ( Hf)
+        ( g')
+        ( Hg)
+        ( c)
+        ( c')
 
   dependent-eq-htpy-parallel-cone :
     {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →

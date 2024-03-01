@@ -58,7 +58,7 @@ of the cospan, completing the diagram
 ```
 
 The standard pullback consists of [pairs](foundation.dependent-pair-types.md)
-`a : A` and `b : B` such that `f a ＝ g b` agree
+`a : A` and `b : B` such that `f a` and `g b` agree:
 
 ```text
   A ×_X B := Σ (a : A) (b : B), (f a ＝ g b),
@@ -91,10 +91,10 @@ module _
 
   coherence-square-standard-pullback :
     coherence-square-maps
-      horizontal-map-standard-pullback
-      vertical-map-standard-pullback
-      g
-      f
+      ( horizontal-map-standard-pullback)
+      ( vertical-map-standard-pullback)
+      ( g)
+      ( f)
   coherence-square-standard-pullback t = pr2 (pr2 t)
 ```
 
