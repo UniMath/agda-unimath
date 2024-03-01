@@ -9,7 +9,7 @@
     window.goatcounter = window.goatcounter || {}
 
   // Load settings from data-goatcounter-settings.
-  var s = document.querySelector('script[data-goatcounter]')
+  var s = document.querySelector('script[dgc]')
   if (s && s.dataset.goatcounterSettings) {
     try { var set = JSON.parse(s.dataset.goatcounterSettings) }
     catch (err) { console.error('invalid JSON in data-goatcounter-settings: ' + err) }
@@ -83,7 +83,7 @@
 
   // Get the endpoint to send requests to.
   var get_endpoint = function () {
-    var s = document.querySelector('script[data-goatcounter]')
+    var s = document.querySelector('script[dgc]')
     if (s && s.dataset.goatcounter)
       return s.dataset.goatcounter
     return (goatcounter.endpoint || window.counter)  // counter is for compat; don't use.
