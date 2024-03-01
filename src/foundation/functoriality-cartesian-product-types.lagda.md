@@ -261,7 +261,6 @@ module _
   [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - The universal property of cartesian product types is treated in
   [`foundation.universal-property-cartesian-product-types`](foundation.universal-property-cartesian-product-types.md).
-
 - Functorial properties of dependent pair types are recorded in
   [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.md).
 - Functorial properties of dependent product types are recorded in
