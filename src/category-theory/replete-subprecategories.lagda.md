@@ -315,7 +315,6 @@ This remains to be formalized.
 ## See also
 
 - Every [subcategory](category-theory.subcategories.md) is replete.
-
 - Because of universe polymorphism,
   [large subcategories](category-theory.large-subcategories.md) are not large
   replete by construction, although they are levelwise replete.

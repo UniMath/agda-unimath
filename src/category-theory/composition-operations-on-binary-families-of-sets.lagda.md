@@ -266,7 +266,6 @@ module _
 
 - [Set-magmoids](category-theory.set-magmoids.md) capture the structure of
   composition operations on binary families of sets.
-
 - [Precategories](category-theory.precategories.md) are associative and unital
   composition operations on binary families of sets.
 - [Nonunital precategories](category-theory.nonunital-precategories.md) are

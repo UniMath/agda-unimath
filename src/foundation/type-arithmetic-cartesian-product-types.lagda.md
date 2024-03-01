@@ -156,7 +156,6 @@ pr2 (equiv-add-redundant-prop is-prop-B f) =
   [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - The universal property of cartesian product types is treated in
   [`foundation.universal-property-cartesian-product-types`](foundation.universal-property-cartesian-product-types.md).
-
 - Arithmetical laws involving dependent pair types are recorded in
   [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.md).
   - Arithmetical laws involving dependent product types are recorded in

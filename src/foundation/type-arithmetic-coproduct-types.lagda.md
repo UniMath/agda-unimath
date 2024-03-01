@@ -345,7 +345,6 @@ module _
   [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.md).
 - The universal property of coproducts is treated in
   [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.md).
-
 - Arithmetical laws involving dependent pair types are recorded in
   [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.md).
 - Arithmetical laws involving cartesian-product types are recorded in
