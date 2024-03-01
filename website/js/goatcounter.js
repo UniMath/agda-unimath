@@ -9,7 +9,7 @@
   else window.goatcounter = window.goatcounter || {};
 
   // Load settings from data-goatcounter-settings.
-  var s = document.querySelector('script[dgc]');
+  var s = document.querySelector('script[data-goatcounter]');
   if (s && s.dataset.goatcounterSettings) {
     try {
       var set = JSON.parse(s.dataset.goatcounterSettings);
@@ -105,7 +105,7 @@
 
   // Get the endpoint to send requests to.
   var get_endpoint = function () {
-    var s = document.querySelector('script[dgc]');
+    var s = document.querySelector('script[data-goatcounter]');
     if (s && s.dataset.goatcounter) return s.dataset.goatcounter;
     return goatcounter.endpoint || window.counter; // counter is for compat; don't use.
   };
@@ -274,8 +274,8 @@
       localStorage.setItem('skipgc', 't');
       alert(
         'GoatCounter tracking is now DISABLED in this browser until ' +
-          location +
-          ' is loaded again.'
+        location +
+        ' is loaded again.'
       );
     }
   }
