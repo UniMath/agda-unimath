@@ -79,8 +79,11 @@ check: ./src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
 .PHONY: check-profile
-check-profile: ./src/everything.lagda.md
-	${AGDA} ${AGDAPROFILEFLAGS} $?
+# `clean` is specified second so that the $< variable stores the everything file.
+# We don't mind, because the `clean` target busts the typechecking and website cache,
+# but doesn't touch the everything file.
+check-profile: ./src/everything.lagda.md clean
+	${AGDA} ${AGDAPROFILEFLAGS} $<
 
 # Base directory where Agda interface files are stored
 BUILD_DIR := ./_build
