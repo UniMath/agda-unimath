@@ -12,6 +12,7 @@ open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
+open import structured-types.morphisms-pointed-arrows
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.spans-pointed-types
@@ -61,7 +62,7 @@ module _
   where
 
   pointed-domain-span-diagram-Pointed-Type : Pointed-Type l1
-  pointed-domain-span-diagram-Pointed-Type = pr1 s
+  pointed-domain-span-diagram-Pointed-Type = pr1 𝒮
 
   domain-span-diagram-Pointed-Type : UU l1
   domain-span-diagram-Pointed-Type =
@@ -73,7 +74,7 @@ module _
     point-Pointed-Type pointed-domain-span-diagram-Pointed-Type
 
   pointed-codomain-span-diagram-Pointed-Type : Pointed-Type l2
-  pointed-codomain-span-diagram-Pointed-Type = pr1 (pr2 s)
+  pointed-codomain-span-diagram-Pointed-Type = pr1 (pr2 𝒮)
 
   codomain-span-diagram-Pointed-Type : UU l2
   codomain-span-diagram-Pointed-Type =
@@ -88,7 +89,7 @@ module _
     span-Pointed-Type l3
       ( pointed-domain-span-diagram-Pointed-Type)
       ( pointed-codomain-span-diagram-Pointed-Type)
-  span-pointed-type-span-diagram-Pointed-Type = pr2 (pr2 s)
+  span-pointed-type-span-diagram-Pointed-Type = pr2 (pr2 𝒮)
 
   spanning-pointed-type-span-diagram-Pointed-Type : Pointed-Type l3
   spanning-pointed-type-span-diagram-Pointed-Type =
@@ -147,10 +148,10 @@ module _
       ( span-pointed-type-span-diagram-Pointed-Type)
 ```
 
-### The span diagram obtained from a morphism of arrows
+### The span diagram obtained from a morphism of pointed arrows
 
-Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of arrows
-`α : f → g`, the span diagram associated to `α` is the span diagram
+Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of pointed arrows
+`α : f →∗ g`, the span diagram associated to `α` is the span diagram
 
 ```text
        f       α₀
@@ -159,40 +160,76 @@ Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of arrow
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  {l1 l2 l3 l4 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  (f : A →∗ B) (g : X →∗ Y) (α : hom-pointed-arrow f g)
   where
 
-  domain-span-diagram-Pointed-Type-hom-arrow : UU l2
-  domain-span-diagram-Pointed-Type-hom-arrow = B
+  domain-span-diagram-hom-pointed-arrow : Pointed-Type l2
+  domain-span-diagram-hom-pointed-arrow = B
 
-  codomain-span-diagram-Pointed-Type-hom-arrow : UU l3
-  codomain-span-diagram-Pointed-Type-hom-arrow = X
+  type-domain-span-diagram-hom-pointed-arrow : UU l2
+  type-domain-span-diagram-hom-pointed-arrow =
+    type-Pointed-Type domain-span-diagram-hom-pointed-arrow
 
-  spanning-type-hom-arrow : UU l1
-  spanning-type-hom-arrow = A
+  point-domain-span-diagram-hom-pointed-arrow :
+    type-domain-span-diagram-hom-pointed-arrow
+  point-domain-span-diagram-hom-pointed-arrow =
+    point-Pointed-Type domain-span-diagram-hom-pointed-arrow
 
-  left-map-span-diagram-Pointed-Type-hom-arrow :
-    spanning-type-hom-arrow → domain-span-diagram-Pointed-Type-hom-arrow
-  left-map-span-diagram-Pointed-Type-hom-arrow = f
+  codomain-span-diagram-hom-pointed-arrow : Pointed-Type l3
+  codomain-span-diagram-hom-pointed-arrow = X
 
-  right-map-span-diagram-Pointed-Type-hom-arrow :
-    spanning-type-hom-arrow → codomain-span-diagram-Pointed-Type-hom-arrow
-  right-map-span-diagram-Pointed-Type-hom-arrow = map-domain-hom-arrow f g α
+  type-codomain-span-diagram-hom-pointed-arrow : UU l3
+  type-codomain-span-diagram-hom-pointed-arrow =
+    type-Pointed-Type codomain-span-diagram-hom-pointed-arrow
 
-  span-hom-arrow :
+  point-codomain-span-diagram-hom-pointed-arrow :
+    type-codomain-span-diagram-hom-pointed-arrow
+  point-codomain-span-diagram-hom-pointed-arrow =
+    point-Pointed-Type codomain-span-diagram-hom-pointed-arrow  
+
+  pointed-spanning-type-hom-pointed-arrow : Pointed-Type l1
+  pointed-spanning-type-hom-pointed-arrow = A
+
+  spanning-type-hom-pointed-arrow : UU l1
+  spanning-type-hom-pointed-arrow =
+    type-Pointed-Type pointed-spanning-type-hom-pointed-arrow
+
+  point-spanning-type-hom-pointed-arrow :
+    spanning-type-hom-pointed-arrow
+  point-spanning-type-hom-pointed-arrow =
+    point-Pointed-Type pointed-spanning-type-hom-pointed-arrow
+
+  left-pointed-map-span-diagram-hom-pointed-arrow :
+    pointed-spanning-type-hom-pointed-arrow →∗
+    domain-span-diagram-hom-pointed-arrow
+  left-pointed-map-span-diagram-hom-pointed-arrow = ?
+
+  left-map-span-diagram-hom-pointed-arrow :
+    spanning-type-hom-pointed-arrow → type-domain-span-diagram-hom-pointed-arrow
+  left-map-span-diagram-hom-pointed-arrow = ?
+
+  right-pointed-map-span
+
+  right-map-span-diagram-hom-pointed-arrow :
+    spanning-type-hom-pointed-arrow → type-codomain-span-diagram-hom-pointed-arrow
+  right-map-span-diagram-hom-pointed-arrow = map-domain-hom-pointed-arrow f g α
+
+  span-hom-pointed-arrow :
     span-Pointed-Type l1 B X
-  pr1 span-hom-arrow = A
-  pr1 (pr2 span-hom-arrow) = left-map-span-diagram-Pointed-Type-hom-arrow
-  pr2 (pr2 span-hom-arrow) = right-map-span-diagram-Pointed-Type-hom-arrow
+  pr1 span-hom-pointed-arrow = A
+  pr1 (pr2 span-hom-pointed-arrow) = left-pointed-map-span-diagram-hom-pointed-arrow
+  pr2 (pr2 span-hom-pointed-arrow) = right-pointed-map-span-diagram-hom-pointed-arrow
 
-  span-diagram-Pointed-Type-hom-arrow : span-diagram-Pointed-Type l2 l3 l1
-  pr1 span-diagram-Pointed-Type-hom-arrow =
-    domain-span-diagram-Pointed-Type-hom-arrow
-  pr1 (pr2 span-diagram-Pointed-Type-hom-arrow) =
-    codomain-span-diagram-Pointed-Type-hom-arrow
-  pr2 (pr2 span-diagram-Pointed-Type-hom-arrow) =
-    span-hom-arrow
+  span-diagram-hom-pointed-arrow : span-diagram-Pointed-Type l2 l3 l1
+  pr1 span-diagram-hom-pointed-arrow =
+    domain-span-diagram-hom-pointed-arrow
+  pr1 (pr2 span-diagram-hom-pointed-arrow) =
+    codomain-span-diagram-hom-pointed-arrow
+  pr2 (pr2 span-diagram-hom-pointed-arrow) =
+    span-hom-pointed-arrow
 ```
 
 ## See also
