@@ -10,7 +10,10 @@ module foundation.cartesian-morphisms-arrows where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-morphisms-arrows
 open import foundation.cones-over-cospan-diagrams
+open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-pullbacks
+open import foundation.dependent-sums-pullbacks
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -22,7 +25,10 @@ open import foundation.homotopies-morphisms-arrows
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
+open import foundation.postcomposition-pullbacks
+open import foundation.products-pullbacks
 open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -441,6 +447,8 @@ module _
 
 ### The top morphism in a commuting triangle of morphisms of arrows is cartesian of the other two are
 
+TODO
+
 ### Dependent products of cartesian morphisms of arrows
 
 Given a family of cartesian morphisms of arrows `αᵢ : fᵢ → gᵢ`, then there is a
@@ -526,7 +534,7 @@ module _
         ( hom-arrow-cartesian-hom-arrow f g α)
         ( hom-arrow-cartesian-hom-arrow h i β))
   is-cartesian-product-cartesian-hom-arrow =
-    is-pullback-product-is-pullback-pair
+    is-pullback-product-is-pullback
       ( map-codomain-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α))
       ( g)
       ( map-codomain-hom-arrow h i (hom-arrow-cartesian-hom-arrow h i β))
@@ -564,7 +572,7 @@ module _
         ( hom-arrow-cartesian-hom-arrow f g α)
         ( hom-arrow-cartesian-hom-arrow h i β))
   is-cartesian-coproduct-cartesian-hom-arrow =
-    is-pullback-coproduct-is-pullback-pair
+    is-pullback-coproduct-is-pullback
       ( map-codomain-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α))
       ( g)
       ( map-codomain-hom-arrow h i (hom-arrow-cartesian-hom-arrow h i β))

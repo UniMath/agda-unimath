@@ -13,7 +13,10 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-pullbacks
+open import foundation.dependent-sums-pullbacks
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
@@ -25,9 +28,12 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
+open import foundation.postcomposition-pullbacks
 open import foundation.precomposition-functions
+open import foundation.products-pullbacks
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
