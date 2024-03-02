@@ -55,6 +55,20 @@ module _
 
 ### Associative composition operations on binary families of sets
 
+A composition operation on a binary family of sets
+
+```text
+  _∘_ : hom y z → hom x y → hom x z
+```
+
+is called
+{{#concept "associative" Disambiguation="composition operation on a binary family of sets" Agda=is-associative-composition-operation-binary-family-Set}}
+if, for every triple of composable morphisms we have
+
+```text
+  (h ∘ g) ∘ f ＝ h ∘ (g ∘ f).
+```
+
 We give a slightly nonstandard definition of associativity using the
 [strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
 rather than the standard [identity types](foundation-core.identity-types.md).
@@ -135,6 +149,23 @@ module _
 ```
 
 ### Unital composition operations on binary families of sets
+
+A composition operation on a binary family of sets
+
+```text
+  _∘_ : hom y z → hom x y → hom x z
+```
+
+is called
+{{#concept "unital" Disambiguation="composition operation on a binary family of sets" Agda=is-unital-composition-operation-binary-family-Set}}
+if there is a morphism `id_x : hom x x` for every element `x : A` such that
+
+```text
+  id_y ∘ f ＝ f   and f ∘ id_x = f.
+```
+
+As will be demonstrated momentarily, every composition operation on a binary
+family of sets is unital in [at most one](foundation.subterminal-types.md) way.
 
 ```agda
 module _
