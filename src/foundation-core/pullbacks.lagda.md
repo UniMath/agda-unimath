@@ -384,12 +384,12 @@ module _
   where
 
   abstract
-    is-pullback-top-is-pullback-rectangle :
+    is-pullback-top-square-is-pullback-rectangle :
       (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
       is-pullback (horizontal-map-cone f g c) h d
-    is-pullback-top-is-pullback-rectangle c d is-pb-c is-pb-dc =
+    is-pullback-top-square-is-pullback-rectangle c d is-pb-c is-pb-dc =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( horizontal-map-cone f g c)
         ( h)
@@ -442,12 +442,12 @@ module _
             ( x , refl))
 
   abstract
-    is-pullback-rectangle-is-pullback-top :
+    is-pullback-rectangle-is-pullback-top-square :
       (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback (horizontal-map-cone f g c) h d →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
-    is-pullback-rectangle-is-pullback-top c d is-pb-c is-pb-d =
+    is-pullback-rectangle-is-pullback-top-square c d is-pb-c is-pb-d =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( f)
         ( g ∘ h)
@@ -561,7 +561,7 @@ module _
       ( β)
       ( γ)
       ( is-pullback-β)
-      (is-pullback-top-is-pullback-rectangle
+      ( is-pullback-top-square-is-pullback-rectangle
         ( f)
         ( g)
         ( vertical-map-cone h i β)
@@ -580,7 +580,7 @@ module _
       ( g ∘ vertical-map-cone h i β)
       ( pasting-vertical-cone f g (vertical-map-cone h i β) α γ)
   is-pullback-inv-associative H =
-    is-pullback-rectangle-is-pullback-top
+    is-pullback-rectangle-is-pullback-top-square
         ( f)
         ( g)
         ( vertical-map-cone h i β)
