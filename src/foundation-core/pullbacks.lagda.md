@@ -127,9 +127,62 @@ module _
       ( universal-property-pullback-is-pullback f g c H)
 ```
 
+### The homotopy of cones obtained from the universal property of pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) {C : UU l4}
+  (c : cone f g C) (up : is-pullback f g c)
+  {l5 : Level} {C' : UU l5} (c' : cone f g C')
+  where
+
+  htpy-cone-gap-is-pullback :
+    htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+  htpy-cone-gap-is-pullback =
+    htpy-eq-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( compute-gap-is-pullback f g c up c')
+
+  htpy-vertical-map-gap-is-pullback :
+    vertical-map-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c')) ~
+      vertical-map-cone f g c'
+  htpy-vertical-map-gap-is-pullback =
+    htpy-vertical-map-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-gap-is-pullback)
+
+  htpy-horizontal-map-gap-is-pullback :
+    horizontal-map-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c')) ~
+      horizontal-map-cone f g c'
+  htpy-horizontal-map-gap-is-pullback =
+    htpy-horizontal-map-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-gap-is-pullback)
+
+  coh-htpy-cone-gap-is-pullback :
+    coherence-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-vertical-map-gap-is-pullback)
+      ( htpy-horizontal-map-gap-is-pullback)
+  coh-htpy-cone-gap-is-pullback =
+    coh-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-gap-is-pullback)
+```
+
 ## Properties
 
-### Parallel pullback squares
+### Pullbacks are preserved under homotopies of parallel cones
 
 ```agda
 module _
