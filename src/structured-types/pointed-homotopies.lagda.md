@@ -162,6 +162,17 @@ module _
   associative-comp-pointed-map
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
+
+  inv-associative-comp-pointed-map :
+    {A : Pointed-Type l1} {B : Pointed-Type l2}
+    {C : Pointed-Type l3} {D : Pointed-Type l4}
+    (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
+    htpy-pointed-map
+      ( comp-pointed-map h (comp-pointed-map g f))
+      ( comp-pointed-map (comp-pointed-map h g) f)
+  inv-associative-comp-pointed-map
+    (pair h refl) (pair g refl) (pair f refl) =
+    pair refl-htpy refl
 ```
 
 ### The groupoid laws for pointed homotopies
