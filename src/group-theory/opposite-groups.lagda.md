@@ -36,7 +36,7 @@ module _
   pr1 (pr2 is-unital-op-Group) = right-unit-law-mul-Group G
   pr2 (pr2 is-unital-op-Group) = left-unit-law-mul-Group G
 
-  is-group-op-Group : is-group (op-Semigroup (semigroup-Group G))
+  is-group-op-Group : is-group-Semigroup (op-Semigroup (semigroup-Group G))
   pr1 is-group-op-Group = is-unital-op-Group
   pr1 (pr2 is-group-op-Group) = inv-Group G
   pr1 (pr2 (pr2 is-group-op-Group)) = right-inverse-law-mul-Group G

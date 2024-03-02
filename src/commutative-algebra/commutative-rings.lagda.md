@@ -136,7 +136,7 @@ module _
   additive-semigroup-Commutative-Ring = semigroup-Ab ab-Commutative-Ring
 
   is-group-additive-semigroup-Commutative-Ring :
-    is-group additive-semigroup-Commutative-Ring
+    is-group-Semigroup additive-semigroup-Commutative-Ring
   is-group-additive-semigroup-Commutative-Ring =
     is-group-Ab ab-Commutative-Ring
 
@@ -287,7 +287,9 @@ module _
 
 ```agda
   has-negatives-Commutative-Ring :
-    is-group' additive-semigroup-Commutative-Ring has-zero-Commutative-Ring
+    is-group-is-unital-Semigroup
+      ( additive-semigroup-Commutative-Ring)
+      ( has-zero-Commutative-Ring)
   has-negatives-Commutative-Ring = has-negatives-Ab ab-Commutative-Ring
 
   neg-Commutative-Ring : type-Commutative-Ring → type-Commutative-Ring

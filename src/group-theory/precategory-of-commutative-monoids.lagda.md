@@ -7,16 +7,16 @@ module group-theory.precategory-of-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
-open import category-theory.large-precategories
 open import category-theory.full-large-subprecategories
+open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.precategory-of-monoids
 open import group-theory.homomorphisms-commutative-monoids
+open import group-theory.precategory-of-monoids
 ```
 
 </details>

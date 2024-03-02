@@ -11,8 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.interchange-law
-open import foundation.propositions
 open import foundation.iterated-dependent-product-types
+open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels

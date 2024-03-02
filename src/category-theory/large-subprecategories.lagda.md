@@ -100,7 +100,8 @@ record
       (M : is-in-obj-Large-Subprecategory Z) →
       is-in-hom-is-in-obj-Large-Subprecategory L M g →
       is-in-hom-is-in-obj-Large-Subprecategory K L f →
-      is-in-hom-is-in-obj-Large-Subprecategory K M (comp-hom-Large-Precategory C g f)
+      is-in-hom-is-in-obj-Large-Subprecategory K M
+        ( comp-hom-Large-Precategory C g f)
 
   hom-Large-Subprecategory :
     {l1 l2 : Level}
