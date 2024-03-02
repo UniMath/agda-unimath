@@ -210,7 +210,7 @@ module _
     map-equiv inv-equiv-iso-is-pseudomonic-functor-Precategory
 ```
 
-The previous entry records what is also known as "essential injectivity".
+The previous entry records what is also known as "essential injectivivty".
 
 ```agda
 module _
@@ -247,7 +247,7 @@ module _
     map-equiv inv-equiv-iso-pseudomonic-functor-Precategory
 ```
 
-The previous entry records what is also known as "essential injectivity".
+The previous entry records what is also known as "essential injectivivty".
 
 ### Pseudomonic functors are conservative
 
@@ -291,7 +291,7 @@ module _
 
 - Pseudomonic functors present
   [replete subprecategories](category-theory.replete-subprecategories.md).
-- [Fully faithful functors between precategories](category-theory.fully-faithful-functors-precategories.md)
+- [Fully faithful functors between precategories](category-theory.pseudomonic-functors-precategories.md)
 
 ## External links
 
