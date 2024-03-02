@@ -25,7 +25,8 @@ open import foundation.universe-levels
 
 Given a type `A`, a
 {{#concept "composition operation" Disambiguation="on binary families of sets" Agda=composition-operation-binary-family-Set}}
-on the binary family of sets `hom : A → A → Set ` is a map
+on a binary family of [sets](foundation-core.sets.md) `hom : A → A → Set` is a
+map
 
 ```text
   _∘_ : hom y z → hom x y → hom x z
@@ -34,12 +35,12 @@ on the binary family of sets `hom : A → A → Set ` is a map
 for every triple of elements `x y z : A`.
 
 For such operations, we can consider
-[properties](foundation-core.propositions.md) such as **associativity** and
-**unitality**.
+[properties](foundation-core.propositions.md) such as _associativity_ and
+_unitality_.
 
 ## Definitions
 
-### Composition operations in binary families of sets
+### Composition operations on binary families of sets
 
 ```agda
 module _
@@ -52,14 +53,14 @@ module _
     type-Set (hom-set y z) → type-Set (hom-set x y) → type-Set (hom-set x z)
 ```
 
-### Associative composition operations in binary families of sets
+### Associative composition operations on binary families of sets
 
 We give a slightly nonstandard definition of associativity using the
 [strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
 rather than the standard [identity types](foundation-core.identity-types.md).
-This is because, while the strictly involutive identity types are equivalent to
-the standard ones, they satisfy the computation rule `inv (inv p) ≐ p` which is
-practical in defining the
+This is because, while the strictly involutive identity types are always
+[equivalent](foundation-core.equivalences.md) to the standard ones, they satisfy
+the computation rule `inv (inv p) ≐ p` which is practical in defining the
 [opposite category](category-theory.opposite-categories.md), as this also makes
 the opposite construction strictly involutive: `(Cᵒᵖ)ᵒᵖ ≐ C`.
 
@@ -133,7 +134,7 @@ module _
           ( f)))
 ```
 
-### Unital composition operations in binary families of sets
+### Unital composition operations on binary families of sets
 
 ```agda
 module _
@@ -151,7 +152,7 @@ module _
 
 ## Properties
 
-### Being associative is a property of composition operations in binary families of sets
+### Being associative is a property of composition operations on binary families of sets
 
 ```agda
 module _
@@ -181,7 +182,7 @@ module _
     is-prop-is-associative-composition-operation-binary-family-Set
 ```
 
-### Being unital is a property of composition operations in binary families of sets
+### Being unital is a property of composition operations on binary families of sets
 
 **Proof:** Suppose `e e' : (x : A) → hom-set x x` are both right and left units
 with regard to composition. It is enough to show that `e ＝ e'` since the right
@@ -243,7 +244,8 @@ module _
 
 - [Set-magmoids](category-theory.set-magmoids.md) capture the structure of
   composition operations on binary families of sets.
-- [Precategories](category-theory.precategories.md) are associative and unital
-  composition operations on binary families of sets.
-- [Nonunital precategories](category-theory.nonunital-precategories.md) are
-  associative composition operations on binary families of sets.
+- [Precategories](category-theory.precategories.md) are the structure of an
+  associative and unital composition operation on a binary families of sets.
+- [Nonunital precategories](category-theory.nonunital-precategories.md) are the
+  structure of an associative composition operation on a binary families of
+  sets.
