@@ -34,7 +34,6 @@ be done with Σ-types, we must use a record type.)
 ```agda
 record
   Large-Precategory (α : Level → Level) (β : Level → Level → Level) : UUω where
-  constructor make-Large-Precategory
   field
     obj-Large-Precategory :
       (l : Level) → UU (α l)
@@ -117,6 +116,42 @@ record
       ( involutive-eq-associative-comp-hom-Large-Precategory h g f)
 
 open Large-Precategory public
+
+make-Large-Precategory :
+  {α : Level → Level} {β : Level → Level → Level}
+  ( obj : (l : Level) → UU (α l))
+  ( hom-set : {l1 l2 : Level} → obj l1 → obj l2 → Set (β l1 l2))
+  ( _∘_ :
+    {l1 l2 l3 : Level}
+    {X : obj l1} {Y : obj l2} {Z : obj l3} →
+    type-Set (hom-set Y Z) → type-Set (hom-set X Y) → type-Set (hom-set X Z))
+  ( id : {l : Level} {X : obj l} → type-Set (hom-set X X))
+  ( assoc-comp-hom :
+    {l1 l2 l3 l4 : Level}
+    {X : obj l1} {Y : obj l2} {Z : obj l3} {W : obj l4}
+    (h : type-Set (hom-set Z W))
+    (g : type-Set (hom-set Y Z))
+    (f : type-Set (hom-set X Y)) →
+    ( (h ∘ g) ∘ f) ＝ ( h ∘ (g ∘ f)))
+  ( left-unit-comp-hom :
+    {l1 l2 : Level} {X : obj l1} {Y : obj l2} (f : type-Set (hom-set X Y)) →
+    id ∘ f ＝ f)
+  ( right-unit-comp-hom :
+    {l1 l2 : Level} {X : obj l1} {Y : obj l2} (f : type-Set (hom-set X Y)) →
+    f ∘ id ＝ f) →
+  Large-Precategory α β
+make-Large-Precategory
+  obj hom-set _∘_ id assoc-comp-hom left-unit-comp-hom right-unit-comp-hom =
+  λ where
+    .obj-Large-Precategory → obj
+    .hom-set-Large-Precategory → hom-set
+    .comp-hom-Large-Precategory → _∘_
+    .id-hom-Large-Precategory → id
+    .involutive-eq-associative-comp-hom-Large-Precategory h g f →
+      involutive-eq-eq (assoc-comp-hom h g f)
+    .left-unit-law-comp-hom-Large-Precategory → left-unit-comp-hom
+    .right-unit-law-comp-hom-Large-Precategory → right-unit-comp-hom
+{-# INLINE make-Large-Precategory #-}
 ```
 
 ```agda
