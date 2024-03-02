@@ -13,9 +13,9 @@ open import category-theory.large-categories
 open import category-theory.large-precategories
 
 open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

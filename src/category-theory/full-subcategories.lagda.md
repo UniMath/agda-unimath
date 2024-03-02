@@ -19,9 +19,9 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
