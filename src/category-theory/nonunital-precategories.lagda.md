@@ -24,10 +24,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **nonunital precategory** is a [precategory](category-theory.precategories.md)
-that may not have identity maps. In other words, it is an associative
+A {{#concept "nonunital precategory" Agda=Nonunital-Precategory}} is a
+[precategory](category-theory.precategories.md) that may not have identity
+morphisms. In other words, it is an associative
 [composition operation on binary families of sets](category-theory.composition-operations-on-binary-families-of-sets.md).
-Such an object may also be called a **semiprecategory**.
+Such a structure may also be referred to as a _semiprecategory_.
+
+Perhaps surprisingly, there is [at most one](foundation.subterminal-types.md)
+way to equip nonunital precategories with identity morphisms, so precategories
+form a [subtype](foundation-core.subtypes.md) of nonunital precategories.
 
 ## Definition
 
