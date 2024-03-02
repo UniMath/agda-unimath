@@ -16,7 +16,6 @@ open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.decidable-equality
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types

@@ -15,7 +15,6 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

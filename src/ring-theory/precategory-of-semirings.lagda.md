@@ -10,8 +10,6 @@ module ring-theory.precategory-of-semirings where
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import ring-theory.homomorphisms-semirings

@@ -11,11 +11,9 @@ open import category-theory.full-large-subprecategories
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.homomorphisms-groups
 open import group-theory.precategory-of-semigroups
 ```
 

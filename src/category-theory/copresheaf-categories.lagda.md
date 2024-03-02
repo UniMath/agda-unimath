@@ -10,7 +10,6 @@ module category-theory.copresheaf-categories where
 open import category-theory.categories
 open import category-theory.category-of-functors-from-small-to-large-categories
 open import category-theory.functors-from-small-to-large-precategories
-open import category-theory.functors-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories

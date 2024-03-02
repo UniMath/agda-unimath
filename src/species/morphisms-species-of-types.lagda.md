@@ -14,7 +14,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 

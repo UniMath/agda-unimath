@@ -8,15 +8,10 @@ module ring-theory.category-of-cyclic-rings where
 
 ```agda
 open import category-theory.categories
-open import category-theory.full-large-subcategories
 open import category-theory.full-large-subprecategories
-open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import order-theory.large-posets
@@ -24,7 +19,6 @@ open import order-theory.large-posets
 open import ring-theory.category-of-rings
 open import ring-theory.cyclic-rings
 open import ring-theory.homomorphisms-cyclic-rings
-open import ring-theory.isomorphisms-rings
 open import ring-theory.precategory-of-rings
 ```
 
@@ -32,8 +26,9 @@ open import ring-theory.precategory-of-rings
 
 ## Idea
 
-The {{#concept "large category of cyclic rings"}} is the
-[large category](category-theory.large-categories.md) consisting of
+The
+{{#concept "large category of cyclic rings" Agda=Cyclic-Ring-Large-Category}} is
+the [large category](category-theory.large-categories.md) consisting of
 [cyclic rings](ring-theory.cyclic-rings.md) and
 [ring homomorphisms](ring-theory.homomorphisms-cyclic-rings.md).
 

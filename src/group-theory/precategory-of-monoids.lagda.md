@@ -12,7 +12,6 @@ open import category-theory.large-subprecategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids

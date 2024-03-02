@@ -8,7 +8,6 @@ module category-theory.terminal-category where
 
 ```agda
 open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.constant-functors
 open import category-theory.functors-categories
 open import category-theory.functors-precategories
@@ -27,7 +26,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

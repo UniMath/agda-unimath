@@ -19,7 +19,6 @@ open import foundation.involutions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 

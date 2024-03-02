@@ -13,7 +13,6 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import ring-theory.cyclic-rings

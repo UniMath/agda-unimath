@@ -9,7 +9,6 @@ module higher-group-theory.homomorphisms-higher-groups where
 ```agda
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups

@@ -10,7 +10,6 @@ module group-theory.homomorphisms-commutative-monoids where
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 

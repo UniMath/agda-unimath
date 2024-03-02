@@ -8,7 +8,6 @@ module order-theory.order-preserving-maps-large-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.function-types

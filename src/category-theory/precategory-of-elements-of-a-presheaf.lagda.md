@@ -15,10 +15,8 @@ open import category-theory.presheaf-categories
 open import foundation.action-on-identifications-functions
 open import foundation.category-of-sets
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```

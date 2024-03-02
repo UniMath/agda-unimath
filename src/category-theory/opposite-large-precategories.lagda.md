@@ -7,17 +7,13 @@ module category-theory.opposite-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.involutions
-open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels

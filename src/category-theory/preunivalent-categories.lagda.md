@@ -16,6 +16,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -119,6 +120,17 @@ module _
     comp-hom-Preunivalent-Category h (comp-hom-Preunivalent-Category g f)
   associative-comp-hom-Preunivalent-Category =
     associative-comp-hom-Precategory precategory-Preunivalent-Category
+
+  involutive-eq-associative-comp-hom-Preunivalent-Category :
+    {x y z w : obj-Preunivalent-Category}
+    (h : hom-Preunivalent-Category z w)
+    (g : hom-Preunivalent-Category y z)
+    (f : hom-Preunivalent-Category x y) →
+    comp-hom-Preunivalent-Category (comp-hom-Preunivalent-Category h g) f ＝ⁱ
+    comp-hom-Preunivalent-Category h (comp-hom-Preunivalent-Category g f)
+  involutive-eq-associative-comp-hom-Preunivalent-Category =
+    involutive-eq-associative-comp-hom-Precategory
+      ( precategory-Preunivalent-Category)
 
   associative-composition-operation-Preunivalent-Category :
     associative-composition-operation-binary-family-Set

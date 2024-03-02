@@ -578,21 +578,6 @@ module _
 
 ### Action of binary functions on strictly involutive identifications
 
-We define an action of binary functions on strictly involutive identifications
-using one of the two sides in the Gray interchanger diagram
-
-```text
-                      ap (r ↦ f x r) q
-                 f x y -------------> f x y'
-                   |                    |
-                   |                    |
-  ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
-                   |                    |
-                   ∨                    ∨
-                 f x' y ------------> f x' y'.
-                      ap (r ↦ f x' r) q
-```
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)

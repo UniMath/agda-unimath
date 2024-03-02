@@ -20,7 +20,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.strictly-involutive-identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types

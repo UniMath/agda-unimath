@@ -10,7 +10,6 @@ module order-theory.precategory-of-posets where
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-posets

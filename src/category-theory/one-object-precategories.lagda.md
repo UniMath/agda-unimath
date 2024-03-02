@@ -7,7 +7,6 @@ module category-theory.one-object-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.endomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -16,7 +15,6 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

@@ -12,7 +12,6 @@ open import category-theory.large-precategories
 open import category-theory.precategories
 
 open import commutative-algebra.commutative-semirings
-open import commutative-algebra.homomorphisms-commutative-semirings
 
 open import foundation.universe-levels
 

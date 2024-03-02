@@ -9,7 +9,6 @@ module group-theory.precategory-of-concrete-groups where
 ```agda
 open import category-theory.large-precategories
 
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups

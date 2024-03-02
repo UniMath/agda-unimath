@@ -7,11 +7,7 @@ module order-theory.order-preserving-maps-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
-
-open import foundation-core.function-types
-open import foundation-core.homotopies
 
 open import order-theory.large-posets
 open import order-theory.order-preserving-maps-large-preorders

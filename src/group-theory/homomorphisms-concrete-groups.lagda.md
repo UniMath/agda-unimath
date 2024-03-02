@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 

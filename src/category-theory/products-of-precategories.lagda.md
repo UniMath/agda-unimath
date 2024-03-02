@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 

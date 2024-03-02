@@ -7,30 +7,22 @@ module category-theory.indiscrete-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.fully-faithful-functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 open import category-theory.pregroupoids
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
 open import category-theory.subterminal-precategories
-open import category-theory.terminal-category
 
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
-open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

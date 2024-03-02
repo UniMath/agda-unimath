@@ -19,6 +19,7 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -127,6 +128,21 @@ module _
       ( comp-hom-Full-Subcategory {x} {y} {z} g f)
   associative-comp-hom-Full-Subcategory {x} {y} {z} {w} =
     associative-comp-hom-Full-Subprecategory
+      ( precategory-Category C) P {x} {y} {z} {w}
+
+  involutive-eq-associative-comp-hom-Full-Subcategory :
+    {x y z w : obj-Full-Subcategory C P}
+    (h : hom-Full-Subcategory z w)
+    (g : hom-Full-Subcategory y z)
+    (f : hom-Full-Subcategory x y) →
+    comp-hom-Full-Subcategory {x} {y} {w}
+      ( comp-hom-Full-Subcategory {y} {z} {w} h g)
+      ( f) ＝ⁱ
+    comp-hom-Full-Subcategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Full-Subcategory {x} {y} {z} g f)
+  involutive-eq-associative-comp-hom-Full-Subcategory {x} {y} {z} {w} =
+    involutive-eq-associative-comp-hom-Full-Subprecategory
       ( precategory-Category C) P {x} {y} {z} {w}
 
   left-unit-law-comp-hom-Full-Subcategory :

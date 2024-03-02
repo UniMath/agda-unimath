@@ -10,13 +10,10 @@ module group-theory.category-of-abelian-groups where
 open import category-theory.categories
 open import category-theory.full-large-subcategories
 open import category-theory.functors-large-categories
-open import category-theory.functors-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.function-types
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups

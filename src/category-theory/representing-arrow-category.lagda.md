@@ -8,7 +8,6 @@ module category-theory.representing-arrow-category where
 
 ```agda
 open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -18,7 +17,6 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels

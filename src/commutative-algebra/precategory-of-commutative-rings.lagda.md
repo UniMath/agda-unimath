@@ -12,9 +12,7 @@ open import category-theory.large-precategories
 open import category-theory.precategories
 
 open import commutative-algebra.commutative-rings
-open import commutative-algebra.homomorphisms-commutative-rings
 
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import ring-theory.precategory-of-rings
@@ -31,7 +29,7 @@ consists of [commutative rings](commutative-algebra.commutative-rings.md) and
 
 ## Definitions
 
-### The large precategory of commutative rings as a full large subprecategory of rings
+### The precategory of commutative rings as a full subprecategory of rings
 
 ```agda
 Commutative-Ring-Full-Large-Subprecategory :

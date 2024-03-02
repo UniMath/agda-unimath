@@ -7,7 +7,6 @@ module group-theory.precategory-of-orbits-monoid-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.precategories
 
 open import foundation.contractible-types
