@@ -38,7 +38,7 @@ The **category of abelian groups** is the
 ### The large category of abelian groups
 
 ```agda
-Ab-Large-Category : Large-Category lsuc _⊔_
+Ab-Large-Category : Large-Category lsuc (_⊔_)
 Ab-Large-Category =
   large-category-Full-Large-Subcategory
     ( Group-Large-Category)
@@ -48,7 +48,7 @@ Ab-Large-Category =
 ### The large precategory of abelian groups
 
 ```agda
-Ab-Large-Precategory : Large-Precategory lsuc _⊔_
+Ab-Large-Precategory : Large-Precategory lsuc (_⊔_)
 Ab-Large-Precategory =
   large-precategory-Large-Category Ab-Large-Category
 ```

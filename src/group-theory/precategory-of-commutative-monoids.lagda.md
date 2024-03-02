@@ -28,7 +28,7 @@ homomorphisms of monoids.
 ### The large precategory of commutative monoids
 
 ```agda
-Commutative-Monoid-Large-Precategory : Large-Precategory lsuc _⊔_
+Commutative-Monoid-Large-Precategory : Large-Precategory lsuc (_⊔_)
 obj-Large-Precategory
   Commutative-Monoid-Large-Precategory =
   Commutative-Monoid
