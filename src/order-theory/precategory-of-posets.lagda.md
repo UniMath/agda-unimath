@@ -37,10 +37,14 @@ parametric-Poset-Large-Precategory :
     ( λ l1 l2 → α l1 ⊔ β l1 ⊔ α l2 ⊔ β l2)
 parametric-Poset-Large-Precategory α β =
   λ where
-    .obj-Large-Precategory l → Poset (α l) (β l)
-    .hom-set-Large-Precategory → hom-set-Poset
-    .comp-hom-Large-Precategory {X = X} {Y} {Z} → comp-hom-Poset X Y Z
-    .id-hom-Large-Precategory {X = X} → id-hom-Poset X
+    .obj-Large-Precategory l →
+      Poset (α l) (β l)
+    .hom-set-Large-Precategory →
+      hom-set-Poset
+    .comp-hom-Large-Precategory {X = X} {Y} {Z} →
+      comp-hom-Poset X Y Z
+    .id-hom-Large-Precategory {X = X} →
+      id-hom-Poset X
     .involutive-eq-associative-comp-hom-Large-Precategory {X = X} {Y} {Z} {W} →
       involutive-eq-associative-comp-hom-Poset X Y Z W
     .left-unit-law-comp-hom-Large-Precategory {X = X} {Y} →

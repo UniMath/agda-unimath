@@ -217,12 +217,6 @@ module _
     comp-hom-Semigroup G H L (comp-hom-Semigroup H K L h g) f ＝
     comp-hom-Semigroup G K L h (comp-hom-Semigroup G H K g f)
   associative-comp-hom-Semigroup = eq-htpy-hom-Semigroup G L refl-htpy
-
-  involutive-eq-associative-comp-hom-Semigroup :
-    comp-hom-Semigroup G H L (comp-hom-Semigroup H K L h g) f ＝ⁱ
-    comp-hom-Semigroup G K L h (comp-hom-Semigroup G H K g f)
-  involutive-eq-associative-comp-hom-Semigroup =
-    involutive-eq-eq associative-comp-hom-Semigroup
 ```
 
 ### The left and right unit laws for composition of homomorphisms of semigroups

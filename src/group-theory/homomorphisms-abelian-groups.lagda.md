@@ -179,19 +179,6 @@ associative-comp-hom-Ab A B C D =
     ( semigroup-Ab B)
     ( semigroup-Ab C)
     ( semigroup-Ab D)
-
-involutive-eq-associative-comp-hom-Ab :
-  {l1 l2 l3 l4 : Level}
-  (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4)
-  (h : hom-Ab C D) (g : hom-Ab B C) (f : hom-Ab A B) →
-  comp-hom-Ab A B D (comp-hom-Ab B C D h g) f ＝ⁱ
-  comp-hom-Ab A C D h (comp-hom-Ab A B C g f)
-involutive-eq-associative-comp-hom-Ab A B C D =
-  involutive-eq-associative-comp-hom-Semigroup
-    ( semigroup-Ab A)
-    ( semigroup-Ab B)
-    ( semigroup-Ab C)
-    ( semigroup-Ab D)
 ```
 
 ### The unit laws for composition of abelian groups

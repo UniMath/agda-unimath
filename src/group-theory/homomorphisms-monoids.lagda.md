@@ -67,6 +67,13 @@ module _
   is-prop-preserves-unit-hom-Semigroup f =
     is-prop-type-Prop (preserves-unit-prop-hom-Semigroup f)
 
+  preserves-unit-hom-prop-Semigroup :
+    hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2) →
+    Prop l2
+  preserves-unit-hom-prop-Semigroup f =
+    ( preserves-unit-hom-Semigroup f ,
+      is-prop-preserves-unit-hom-Semigroup f)
+
   hom-set-Monoid : Set (l1 ⊔ l2)
   hom-set-Monoid =
     set-subset
@@ -235,13 +242,6 @@ module _
       ( comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f)
       ( comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f))
       ( refl-htpy)
-
-  involutive-eq-associative-comp-hom-Monoid :
-    (h : hom-Monoid M N) (g : hom-Monoid L M) (f : hom-Monoid K L) →
-    comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f ＝ⁱ
-    comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f)
-  involutive-eq-associative-comp-hom-Monoid h g f =
-    involutive-eq-eq (associative-comp-hom-Monoid h g f)
 ```
 
 ### Unit laws for composition of homomorphisms of monoids

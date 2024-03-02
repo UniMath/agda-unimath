@@ -336,12 +336,6 @@ module _
       ( comp-hom-Semiring R S U (comp-hom-Semiring S T U h g) f)
       ( comp-hom-Semiring R T U h (comp-hom-Semiring R S T g f))
       ( refl-htpy)
-
-  involutive-eq-associative-comp-hom-Semiring :
-    comp-hom-Semiring R S U (comp-hom-Semiring S T U h g) f ＝ⁱ
-    comp-hom-Semiring R T U h (comp-hom-Semiring R S T g f)
-  involutive-eq-associative-comp-hom-Semiring =
-    involutive-eq-eq associative-comp-hom-Semiring
 ```
 
 ### Unit laws for composition of homomorphisms of semirings
