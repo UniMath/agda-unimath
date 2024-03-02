@@ -31,7 +31,7 @@ A [functor](category-theory.functors-precategories.md) `F : C → D` is an
 
 ## Definition
 
-### The predicate of being an equivalence of precategories
+### The predicate on functors of being equivalences of precategories
 
 ```agda
 module _

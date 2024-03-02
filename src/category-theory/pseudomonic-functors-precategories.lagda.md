@@ -43,7 +43,7 @@ invariance under equivalences_.
 
 ## Definition
 
-### The predicate of being full on isomorphisms
+### The predicate on isomorphisms of being full
 
 ```agda
 module _

@@ -34,7 +34,7 @@ if its multiplicative operation is commutative, i.e., if `xy = yx` for all
 
 ## Definitions
 
-### The predicate of being commutative on semirings
+### The predicate on semirings of being commutative
 
 ```agda
 module _

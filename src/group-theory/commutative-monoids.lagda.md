@@ -31,7 +31,7 @@ A {{#concept "commutative monoid" Agda=Commutative-Monoid}} is a
 
 ## Definitions
 
-### The predicate of being commutative on monoids
+### The predicate on monoids of being commutative
 
 ```agda
 module _

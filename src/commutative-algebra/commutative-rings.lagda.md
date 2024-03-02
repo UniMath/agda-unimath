@@ -53,7 +53,7 @@ commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
 
 ## Definition
 
-### The predicate of being commutative on rings
+### The predicate on rings of being commutative
 
 ```agda
 module _
