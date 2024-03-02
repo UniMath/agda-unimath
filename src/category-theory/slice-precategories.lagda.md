@@ -411,14 +411,12 @@ module _
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
         ( eq-type-subtype
-          ( λ _ →
-            is-product-prop-Precategory
+          ( is-product-prop-Precategory
               ( Slice-Precategory C A)
               ( X , f)
               ( Y , g)
-              ( _)
-              ( {!   !})
-              ( {!   !}))
+              ( Z , comp-hom-Precategory C f h₁)
+              ( h₁ , refl))
           ( refl)))
 
   is-retraction-map-inv-pullback-product-Slice-Precategory :
@@ -430,7 +428,7 @@ module _
       ( eq-pair-eq-fiber
           ( eq-pair-eq-fiber
               ( eq-type-subtype
-                  (λ _ → is-pullback-prop-Precategory C A X Y f g _ _ _ α)
+                  ( λ _ → is-pullback-prop-Precategory C A X Y f g _ _ _ α)
                   ( refl))))
 
   equiv-pullback-product-Slice-Precategory :
