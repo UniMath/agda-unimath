@@ -23,11 +23,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a type `A`, a **composition operation on a binary family of sets**
-`hom : A → A → Set ` is a map
+Given a type `A`, a
+{{#concept "composition operation" Disambiguation="on binary families of sets" Agda=composition-operation-binary-family-Set}}
+on the binary family of sets `hom : A → A → Set ` is a map
 
 ```text
-  hom y z → hom x y → hom x z
+  _∘_ : hom y z → hom x y → hom x z
 ```
 
 for every triple of elements `x y z : A`.

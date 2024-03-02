@@ -89,6 +89,33 @@ Precategory l1 l2 =
                 ( hom-set)
                 ( comp-hom))))
 
+make-Precategory :
+  { l1 l2 : Level}
+  ( obj : UU l1)
+  ( hom-set : obj → obj → Set l2)
+  ( _∘_ : composition-operation-binary-family-Set hom-set)
+  ( id : (x : obj) → type-Set (hom-set x x))
+  ( assoc-comp-hom :
+    { x y z w : obj} →
+    ( h : type-Set (hom-set z w))
+    ( g : type-Set (hom-set y z))
+    ( f : type-Set (hom-set x y)) →
+    ( (h ∘ g) ∘ f ＝ h ∘ (g ∘ f)))
+  ( left-unit-comp-hom :
+    { x y : obj} (f : type-Set (hom-set x y)) → id y ∘ f ＝ f)
+  ( right-unit-comp-hom :
+    { x y : obj} (f : type-Set (hom-set x y)) → f ∘ id x ＝ f) →
+  Precategory l1 l2
+
+make-Precategory
+  obj hom-set _∘_ id assoc-comp-hom left-unit-comp-hom right-unit-comp-hom =
+  ( obj) ,
+  ( hom-set) ,
+  ( _∘_ , (λ h g f → involutive-eq-eq (assoc-comp-hom h g f))) ,
+  ( id) ,
+  ( left-unit-comp-hom) ,
+  ( right-unit-comp-hom)
+
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   where
