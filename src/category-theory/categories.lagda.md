@@ -29,7 +29,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **category** in Homotopy Type Theory is a
+A {{#concept "category" Agda=Category}} in Homotopy Type Theory is a
 [precategory](category-theory.precategories.md) for which the
 [identifications](foundation-core.identity-types.md) between the objects are the
 [isomorphisms](category-theory.isomorphisms-in-precategories.md). More
