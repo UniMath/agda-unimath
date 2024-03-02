@@ -11,6 +11,7 @@ open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -32,8 +33,7 @@ module _
   pr1 (pr2 discrete-precategory-Set) x y =
     set-Prop (x ＝ y , is-set-type-Set X x y)
   pr1 (pr1 (pr2 (pr2 discrete-precategory-Set))) = concat' _
-  pr1 (pr2 (pr1 (pr2 (pr2 discrete-precategory-Set))) refl refl refl) = refl
-  pr2 (pr2 (pr1 (pr2 (pr2 discrete-precategory-Set))) refl refl refl) = refl
+  pr2 (pr1 (pr2 (pr2 discrete-precategory-Set))) refl refl refl = reflⁱ
   pr1 (pr2 (pr2 (pr2 discrete-precategory-Set))) x = refl
   pr1 (pr2 (pr2 (pr2 (pr2 discrete-precategory-Set)))) _ = right-unit
   pr2 (pr2 (pr2 (pr2 (pr2 discrete-precategory-Set)))) _ = left-unit

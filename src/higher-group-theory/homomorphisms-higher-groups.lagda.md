@@ -9,6 +9,7 @@ module higher-group-theory.homomorphisms-higher-groups where
 ```agda
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
@@ -116,12 +117,6 @@ module _
       ( comp-hom-∞-Group G K L h (comp-hom-∞-Group G H K g f))
   associative-comp-hom-∞-Group = associative-comp-pointed-map
 
-  inv-associative-comp-hom-∞-Group :
-    (h : hom-∞-Group K L) (g : hom-∞-Group H K) (f : hom-∞-Group G H) →
-    htpy-hom-∞-Group G L
-      ( comp-hom-∞-Group G K L h (comp-hom-∞-Group G H K g f))
-      ( comp-hom-∞-Group G H L (comp-hom-∞-Group H K L h g) f)
-  inv-associative-comp-hom-∞-Group = inv-associative-comp-pointed-map
 module _
   {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2)
   where

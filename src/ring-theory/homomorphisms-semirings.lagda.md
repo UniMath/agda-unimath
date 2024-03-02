@@ -14,6 +14,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.torsorial-type-families
@@ -336,14 +337,11 @@ module _
       ( comp-hom-Semiring R T U h (comp-hom-Semiring R S T g f))
       ( refl-htpy)
 
-  inv-associative-comp-hom-Semiring :
-    comp-hom-Semiring R T U h (comp-hom-Semiring R S T g f) ＝
-    comp-hom-Semiring R S U (comp-hom-Semiring S T U h g) f
-  inv-associative-comp-hom-Semiring =
-    eq-htpy-hom-Semiring R U
-      ( comp-hom-Semiring R T U h (comp-hom-Semiring R S T g f))
-      ( comp-hom-Semiring R S U (comp-hom-Semiring S T U h g) f)
-      ( refl-htpy)
+  involutive-eq-associative-comp-hom-Semiring :
+    comp-hom-Semiring R S U (comp-hom-Semiring S T U h g) f ＝ⁱ
+    comp-hom-Semiring R T U h (comp-hom-Semiring R S T g f)
+  involutive-eq-associative-comp-hom-Semiring =
+    involutive-eq-eq associative-comp-hom-Semiring
 ```
 
 ### Unit laws for composition of homomorphisms of semirings

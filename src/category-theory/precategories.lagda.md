@@ -17,6 +17,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -126,6 +127,18 @@ module _
     hom-Precategory x z
   comp-hom-Precategory' f g = comp-hom-Precategory g f
 
+  involutive-eq-associative-comp-hom-Precategory :
+    {x y z w : obj-Precategory}
+    (h : hom-Precategory z w)
+    (g : hom-Precategory y z)
+    (f : hom-Precategory x y) →
+    ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝ⁱ
+    ( comp-hom-Precategory h (comp-hom-Precategory g f))
+  involutive-eq-associative-comp-hom-Precategory =
+    involutive-eq-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
+
   associative-comp-hom-Precategory :
     {x y z w : obj-Precategory}
     (h : hom-Precategory z w)
@@ -135,18 +148,6 @@ module _
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
   associative-comp-hom-Precategory =
     witness-associative-composition-operation-binary-family-Set
-      ( hom-set-Precategory)
-      ( associative-composition-operation-Precategory)
-
-  inv-associative-comp-hom-Precategory :
-    {x y z w : obj-Precategory}
-    (h : hom-Precategory z w)
-    (g : hom-Precategory y z)
-    (f : hom-Precategory x y) →
-    ( comp-hom-Precategory h (comp-hom-Precategory g f)) ＝
-    ( comp-hom-Precategory (comp-hom-Precategory h g) f)
-  inv-associative-comp-hom-Precategory =
-    inv-witness-associative-composition-operation-binary-family-Set
       ( hom-set-Precategory)
       ( associative-composition-operation-Precategory)
 

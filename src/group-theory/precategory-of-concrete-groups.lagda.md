@@ -9,6 +9,7 @@ module group-theory.precategory-of-concrete-groups where
 ```agda
 open import category-theory.large-precategories
 
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -35,14 +36,11 @@ comp-hom-Large-Precategory
 id-hom-Large-Precategory
   Concrete-Group-Large-Precategory {X = G} =
   id-hom-Concrete-Group G
-associative-comp-hom-Large-Precategory
+involutive-eq-associative-comp-hom-Large-Precategory
   Concrete-Group-Large-Precategory {X = G} {Y = H} {Z = K} {W = L} h g f =
-  eq-htpy-hom-Concrete-Group G L _ _
-    ( associative-comp-hom-Concrete-Group G H K L h g f)
-inv-associative-comp-hom-Large-Precategory
-  Concrete-Group-Large-Precategory {X = G} {Y = H} {Z = K} {W = L} h g f =
-  eq-htpy-hom-Concrete-Group G L _ _
-    ( inv-associative-comp-hom-Concrete-Group G H K L h g f)
+  involutive-eq-eq
+    ( eq-htpy-hom-Concrete-Group G L _ _
+      ( associative-comp-hom-Concrete-Group G H K L h g f))
 left-unit-law-comp-hom-Large-Precategory
   Concrete-Group-Large-Precategory {X = G} {Y = H} f =
   eq-htpy-hom-Concrete-Group G H _ _

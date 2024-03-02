@@ -10,6 +10,7 @@ module ring-theory.precategory-of-rings where
 open import category-theory.large-precategories
 open import category-theory.precategories
 
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import ring-theory.homomorphisms-rings
@@ -41,12 +42,9 @@ comp-hom-Large-Precategory
 id-hom-Large-Precategory
   Ring-Large-Precategory {X = R} =
   id-hom-Ring R
-associative-comp-hom-Large-Precategory
+involutive-eq-associative-comp-hom-Large-Precategory
   Ring-Large-Precategory {X = R} {S} {T} {U} =
-  associative-comp-hom-Ring R S T U
-inv-associative-comp-hom-Large-Precategory
-  Ring-Large-Precategory {X = R} {S} {T} {U} =
-  inv-associative-comp-hom-Ring R S T U
+  involutive-eq-associative-comp-hom-Ring R S T U
 left-unit-law-comp-hom-Large-Precategory
   Ring-Large-Precategory {X = R} {S} =
   left-unit-law-comp-hom-Ring R S

@@ -12,6 +12,7 @@ open import commutative-algebra.commutative-semirings
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
@@ -362,15 +363,15 @@ module _
       ( g)
       ( f)
 
-  inv-associative-comp-hom-Commutative-Semiring :
-    comp-hom-Commutative-Semiring A C D
-      ( h)
-      ( comp-hom-Commutative-Semiring A B C g f) ＝
+  involutive-eq-associative-comp-hom-Commutative-Semiring :
     comp-hom-Commutative-Semiring A B D
       ( comp-hom-Commutative-Semiring B C D h g)
-      ( f)
-  inv-associative-comp-hom-Commutative-Semiring =
-    inv-associative-comp-hom-Semiring
+      ( f) ＝ⁱ
+    comp-hom-Commutative-Semiring A C D
+      ( h)
+      ( comp-hom-Commutative-Semiring A B C g f)
+  involutive-eq-associative-comp-hom-Commutative-Semiring =
+    involutive-eq-associative-comp-hom-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
       ( semiring-Commutative-Semiring C)

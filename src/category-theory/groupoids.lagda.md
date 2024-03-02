@@ -25,6 +25,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
@@ -88,13 +89,13 @@ module _
   associative-comp-hom-Groupoid =
     associative-comp-hom-Category category-Groupoid
 
-  inv-associative-comp-hom-Groupoid :
+  involutive-eq-associative-comp-hom-Groupoid :
     {x y z w : obj-Groupoid}
     (h : hom-Groupoid z w) (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
-    comp-hom-Groupoid h (comp-hom-Groupoid g f) ＝
-    comp-hom-Groupoid (comp-hom-Groupoid h g) f
-  inv-associative-comp-hom-Groupoid =
-    inv-associative-comp-hom-Category category-Groupoid
+    comp-hom-Groupoid (comp-hom-Groupoid h g) f ＝ⁱ
+    comp-hom-Groupoid h (comp-hom-Groupoid g f)
+  involutive-eq-associative-comp-hom-Groupoid =
+    involutive-eq-associative-comp-hom-Category category-Groupoid
 
   left-unit-law-comp-hom-Groupoid :
     {x y : obj-Groupoid} (f : hom-Groupoid x y) →

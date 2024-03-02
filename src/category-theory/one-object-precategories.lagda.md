@@ -14,6 +14,7 @@ open import category-theory.precategories
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
@@ -64,7 +65,7 @@ module _
 
   hom-set-one-object-precategory-Monoid :
     unit → unit → Set l
-  hom-set-one-object-precategory-Monoid star star = set-Monoid M
+  hom-set-one-object-precategory-Monoid _ _ = set-Monoid M
 
   hom-one-object-precategory-Monoid :
     unit → unit → UU l
@@ -76,7 +77,7 @@ module _
     hom-one-object-precategory-Monoid y z →
     hom-one-object-precategory-Monoid x y →
     hom-one-object-precategory-Monoid x z
-  comp-hom-one-object-precategory-Monoid {star} {star} {star} =
+  comp-hom-one-object-precategory-Monoid =
     mul-Monoid M
 
   associative-comp-hom-one-object-precategory-Monoid :
@@ -90,8 +91,7 @@ module _
     comp-hom-one-object-precategory-Monoid
       ( h)
       ( comp-hom-one-object-precategory-Monoid g f)
-  associative-comp-hom-one-object-precategory-Monoid
-    {star} {star} {star} {star} =
+  associative-comp-hom-one-object-precategory-Monoid =
     associative-mul-Monoid M
 
   associative-composition-operation-one-object-precategory-Monoid :
@@ -99,11 +99,8 @@ module _
       hom-set-one-object-precategory-Monoid
   pr1 associative-composition-operation-one-object-precategory-Monoid =
     comp-hom-one-object-precategory-Monoid
-  pr2 associative-composition-operation-one-object-precategory-Monoid =
-    is-associative-witness-associative-composition-operation-binary-family-Set
-      ( hom-set-one-object-precategory-Monoid)
-      ( comp-hom-one-object-precategory-Monoid)
-      ( associative-comp-hom-one-object-precategory-Monoid)
+  pr2 associative-composition-operation-one-object-precategory-Monoid h g f =
+    involutive-eq-eq (associative-comp-hom-one-object-precategory-Monoid h g f)
 
   id-hom-one-object-precategory-Monoid :
     (x : unit) → hom-one-object-precategory-Monoid x x

@@ -14,6 +14,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
@@ -115,10 +116,11 @@ module _
     comp-hom-species-types h (comp-hom-species-types g f)
   associative-comp-hom-species-types = refl
 
-  inv-associative-comp-hom-species-types :
-    comp-hom-species-types h (comp-hom-species-types g f) ＝
-    comp-hom-species-types (comp-hom-species-types h g) f
-  inv-associative-comp-hom-species-types = refl
+  involutive-eq-associative-comp-hom-species-types :
+    comp-hom-species-types (comp-hom-species-types h g) f ＝ⁱ
+    comp-hom-species-types h (comp-hom-species-types g f)
+  involutive-eq-associative-comp-hom-species-types =
+    involutive-eq-eq associative-comp-hom-species-types
 ```
 
 ### Unit laws of composition

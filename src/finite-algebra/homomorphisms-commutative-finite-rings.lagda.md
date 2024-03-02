@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
@@ -419,15 +420,15 @@ module _
       ( g)
       ( f)
 
-  inv-associative-comp-hom-Commutative-Ring-𝔽 :
-    comp-hom-Commutative-Ring-𝔽 A C D
-      ( h)
-      ( comp-hom-Commutative-Ring-𝔽 A B C g f) ＝
+  involutive-eq-associative-comp-hom-Commutative-Ring-𝔽 :
     comp-hom-Commutative-Ring-𝔽 A B D
       ( comp-hom-Commutative-Ring-𝔽 B C D h g)
-      ( f)
-  inv-associative-comp-hom-Commutative-Ring-𝔽 =
-    inv-associative-comp-hom-Ring
+      ( f) ＝ⁱ
+    comp-hom-Commutative-Ring-𝔽 A C D
+      ( h)
+      ( comp-hom-Commutative-Ring-𝔽 A B C g f)
+  involutive-eq-associative-comp-hom-Commutative-Ring-𝔽 =
+    involutive-eq-associative-comp-hom-Ring
       ( ring-Commutative-Ring-𝔽 A)
       ( ring-Commutative-Ring-𝔽 B)
       ( ring-Commutative-Ring-𝔽 C)

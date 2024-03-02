@@ -29,6 +29,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -98,34 +99,16 @@ module _
       ( comp-hom-indiscrete-Precategory {x} {y} {z} g f)
   associative-comp-hom-indiscrete-Precategory h g f = refl
 
-  inv-associative-comp-hom-indiscrete-Precategory :
-    {x y z w : obj-indiscrete-Precategory X} →
-    (h : hom-indiscrete-Precategory X z w)
-    (g : hom-indiscrete-Precategory X y z)
-    (f : hom-indiscrete-Precategory X x y) →
-    comp-hom-indiscrete-Precategory {x} {z} {w}
-      ( h)
-      ( comp-hom-indiscrete-Precategory {x} {y} {z} g f) ＝
-    comp-hom-indiscrete-Precategory {x} {y} {w}
-      ( comp-hom-indiscrete-Precategory {y} {z} {w} h g)
-      ( f)
-  inv-associative-comp-hom-indiscrete-Precategory h g f = refl
-
   associative-composition-operation-indiscrete-Precategory :
     associative-composition-operation-binary-family-Set
       ( hom-set-indiscrete-Precategory X)
   pr1 associative-composition-operation-indiscrete-Precategory {x} {y} {z} =
     comp-hom-indiscrete-Precategory {x} {y} {z}
-  pr1
-    ( pr2
-        associative-composition-operation-indiscrete-Precategory
-          { x} {y} {z} {w} h g f) =
-    associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w} h g f
   pr2
-    ( pr2
         associative-composition-operation-indiscrete-Precategory
-          { x} {y} {z} {w} h g f) =
-    inv-associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w} h g f
+          { x} {y} {z} {w} h g f =
+   involutive-eq-eq
+    ( associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w} h g f)
 
   id-hom-indiscrete-Precategory :
     {x : obj-indiscrete-Precategory X} → hom-indiscrete-Precategory X x x

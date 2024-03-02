@@ -13,6 +13,7 @@ open import category-theory.precategories
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-rings
 
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -41,12 +42,9 @@ comp-hom-Large-Precategory
 id-hom-Large-Precategory
   Commutative-Ring-Large-Precategory {X = A} =
   id-hom-Commutative-Ring A
-associative-comp-hom-Large-Precategory
+involutive-eq-associative-comp-hom-Large-Precategory
   Commutative-Ring-Large-Precategory {X = A} {B} {C} {D} =
-  associative-comp-hom-Commutative-Ring A B C D
-inv-associative-comp-hom-Large-Precategory
-  Commutative-Ring-Large-Precategory {X = A} {B} {C} {D} =
-  inv-associative-comp-hom-Commutative-Ring A B C D
+  involutive-eq-associative-comp-hom-Commutative-Ring A B C D
 left-unit-law-comp-hom-Large-Precategory
   Commutative-Ring-Large-Precategory {X = A} {B} =
   left-unit-law-comp-hom-Commutative-Ring A B

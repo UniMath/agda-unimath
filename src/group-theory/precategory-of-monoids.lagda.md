@@ -10,6 +10,7 @@ module group-theory.precategory-of-monoids where
 open import category-theory.large-precategories
 open import category-theory.precategories
 
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids
@@ -40,12 +41,9 @@ comp-hom-Large-Precategory
 id-hom-Large-Precategory
   Monoid-Large-Precategory {X = M} =
   id-hom-Monoid M
-associative-comp-hom-Large-Precategory
+involutive-eq-associative-comp-hom-Large-Precategory
   Monoid-Large-Precategory {X = K} {L} {M} {N} =
-  associative-comp-hom-Monoid K L M N
-inv-associative-comp-hom-Large-Precategory
-  Monoid-Large-Precategory {X = K} {L} {M} {N} =
-  inv-associative-comp-hom-Monoid K L M N
+  involutive-eq-associative-comp-hom-Monoid K L M N
 left-unit-law-comp-hom-Large-Precategory
   Monoid-Large-Precategory {X = M} {N} =
   left-unit-law-comp-hom-Monoid M N

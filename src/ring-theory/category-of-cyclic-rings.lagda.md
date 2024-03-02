@@ -13,6 +13,7 @@ open import category-theory.large-categories
 open import category-theory.large-precategories
 
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
@@ -56,12 +57,9 @@ comp-hom-Large-Precategory
 id-hom-Large-Precategory
   Cyclic-Ring-Large-Precategory {X = R} =
   id-hom-Cyclic-Ring R
-associative-comp-hom-Large-Precategory
+involutive-eq-associative-comp-hom-Large-Precategory
   Cyclic-Ring-Large-Precategory {X = R} {Y = S} {Z = T} {W = U} =
-  associative-comp-hom-Cyclic-Ring R S T U
-inv-associative-comp-hom-Large-Precategory
-  Cyclic-Ring-Large-Precategory {X = R} {Y = S} {Z = T} {W = U} =
-  inv-associative-comp-hom-Cyclic-Ring R S T U
+  involutive-eq-associative-comp-hom-Cyclic-Ring R S T U
 left-unit-law-comp-hom-Large-Precategory
   Cyclic-Ring-Large-Precategory {X = R} {Y = S} =
   left-unit-law-comp-hom-Cyclic-Ring R S

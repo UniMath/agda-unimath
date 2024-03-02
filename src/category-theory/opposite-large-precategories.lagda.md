@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.involutions
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -64,6 +65,24 @@ module _
     hom-opposite-Large-Precategory X Z
   comp-hom-opposite-Large-Precategory g f = comp-hom-Large-Precategory C f g
 
+  involutive-eq-associative-comp-hom-opposite-Large-Precategory :
+    {l1 l2 l3 l4 : Level}
+    {X : obj-opposite-Large-Precategory l1}
+    {Y : obj-opposite-Large-Precategory l2}
+    {Z : obj-opposite-Large-Precategory l3}
+    {W : obj-opposite-Large-Precategory l4}
+    (h : hom-opposite-Large-Precategory Z W)
+    (g : hom-opposite-Large-Precategory Y Z)
+    (f : hom-opposite-Large-Precategory X Y) →
+    comp-hom-opposite-Large-Precategory
+      ( comp-hom-opposite-Large-Precategory h g)
+      ( f) ＝ⁱ
+    comp-hom-opposite-Large-Precategory
+      ( h)
+      ( comp-hom-opposite-Large-Precategory g f)
+  involutive-eq-associative-comp-hom-opposite-Large-Precategory h g f =
+    invⁱ (involutive-eq-associative-comp-hom-Large-Precategory C f g h)
+
   associative-comp-hom-opposite-Large-Precategory :
     {l1 l2 l3 l4 : Level}
     {X : obj-opposite-Large-Precategory l1}
@@ -80,25 +99,8 @@ module _
       ( h)
       ( comp-hom-opposite-Large-Precategory g f)
   associative-comp-hom-opposite-Large-Precategory h g f =
-    inv-associative-comp-hom-Large-Precategory C f g h
-
-  inv-associative-comp-hom-opposite-Large-Precategory :
-    {l1 l2 l3 l4 : Level}
-    {X : obj-opposite-Large-Precategory l1}
-    {Y : obj-opposite-Large-Precategory l2}
-    {Z : obj-opposite-Large-Precategory l3}
-    {W : obj-opposite-Large-Precategory l4}
-    (h : hom-opposite-Large-Precategory Z W)
-    (g : hom-opposite-Large-Precategory Y Z)
-    (f : hom-opposite-Large-Precategory X Y) →
-    comp-hom-opposite-Large-Precategory
-      ( h)
-      ( comp-hom-opposite-Large-Precategory g f) ＝
-    comp-hom-opposite-Large-Precategory
-      ( comp-hom-opposite-Large-Precategory h g)
-      ( f)
-  inv-associative-comp-hom-opposite-Large-Precategory h g f =
-    associative-comp-hom-Large-Precategory C f g h
+    eq-involutive-eq
+      ( involutive-eq-associative-comp-hom-opposite-Large-Precategory h g f)
 
   id-hom-opposite-Large-Precategory :
     {l1 : Level} {X : obj-opposite-Large-Precategory l1} →
@@ -132,10 +134,9 @@ module _
     comp-hom-opposite-Large-Precategory
   id-hom-Large-Precategory opposite-Large-Precategory =
     id-hom-opposite-Large-Precategory
-  associative-comp-hom-Large-Precategory opposite-Large-Precategory =
-    associative-comp-hom-opposite-Large-Precategory
-  inv-associative-comp-hom-Large-Precategory opposite-Large-Precategory =
-    inv-associative-comp-hom-opposite-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory
+    opposite-Large-Precategory =
+    involutive-eq-associative-comp-hom-opposite-Large-Precategory
   left-unit-law-comp-hom-Large-Precategory opposite-Large-Precategory =
     left-unit-law-comp-hom-opposite-Large-Precategory
   right-unit-law-comp-hom-Large-Precategory opposite-Large-Precategory =

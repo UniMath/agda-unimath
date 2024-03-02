@@ -24,6 +24,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -134,18 +135,15 @@ module _
       ( comp-hom-Slice-Precategory h (comp-hom-Slice-Precategory g f))
       ( associative-comp-hom-Precategory C (pr1 h) (pr1 g) (pr1 f))
 
-  inv-associative-comp-hom-Slice-Precategory :
+  involutive-eq-associative-comp-hom-Slice-Precategory :
     {A1 A2 A3 A4 : obj-Slice-Precategory} →
     (h : hom-Slice-Precategory A3 A4)
     (g : hom-Slice-Precategory A2 A3)
     (f : hom-Slice-Precategory A1 A2) →
-    comp-hom-Slice-Precategory h (comp-hom-Slice-Precategory g f) ＝
-    comp-hom-Slice-Precategory (comp-hom-Slice-Precategory h g) f
-  inv-associative-comp-hom-Slice-Precategory h g f =
-    eq-hom-Slice-Precategory
-      ( comp-hom-Slice-Precategory h (comp-hom-Slice-Precategory g f))
-      ( comp-hom-Slice-Precategory (comp-hom-Slice-Precategory h g) f)
-      ( inv-associative-comp-hom-Precategory C (pr1 h) (pr1 g) (pr1 f))
+    comp-hom-Slice-Precategory (comp-hom-Slice-Precategory h g) f ＝ⁱ
+    comp-hom-Slice-Precategory h (comp-hom-Slice-Precategory g f)
+  involutive-eq-associative-comp-hom-Slice-Precategory h g f =
+    involutive-eq-eq (associative-comp-hom-Slice-Precategory h g f)
 ```
 
 ### The left unit law for composition of morphisms in the slice category
@@ -181,10 +179,8 @@ module _
   pr1 Slice-Precategory = obj-Slice-Precategory
   pr1 (pr2 Slice-Precategory) = hom-set-Slice-Precategory
   pr1 (pr1 (pr2 (pr2 Slice-Precategory))) = comp-hom-Slice-Precategory
-  pr1 (pr2 (pr1 (pr2 (pr2 Slice-Precategory))) h g f) =
-    associative-comp-hom-Slice-Precategory h g f
-  pr2 (pr2 (pr1 (pr2 (pr2 Slice-Precategory))) h g f) =
-    inv-associative-comp-hom-Slice-Precategory h g f
+  pr2 (pr1 (pr2 (pr2 Slice-Precategory))) =
+    involutive-eq-associative-comp-hom-Slice-Precategory
   pr1 (pr2 (pr2 (pr2 Slice-Precategory))) = id-hom-Slice-Precategory
   pr1 (pr2 (pr2 (pr2 (pr2 Slice-Precategory)))) =
     left-unit-law-comp-hom-Slice-Precategory
@@ -421,8 +417,8 @@ module _
               ( X , f)
               ( Y , g)
               ( _)
-              ( _)
-              ( _))
+              ( {!   !})
+              ( {!   !}))
           ( refl)))
 
   is-retraction-map-inv-pullback-product-Slice-Precategory :

@@ -17,6 +17,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
@@ -217,10 +218,11 @@ module _
     comp-hom-Semigroup G K L h (comp-hom-Semigroup G H K g f)
   associative-comp-hom-Semigroup = eq-htpy-hom-Semigroup G L refl-htpy
 
-  inv-associative-comp-hom-Semigroup :
-    comp-hom-Semigroup G K L h (comp-hom-Semigroup G H K g f) ＝
-    comp-hom-Semigroup G H L (comp-hom-Semigroup H K L h g) f
-  inv-associative-comp-hom-Semigroup = eq-htpy-hom-Semigroup G L refl-htpy
+  involutive-eq-associative-comp-hom-Semigroup :
+    comp-hom-Semigroup G H L (comp-hom-Semigroup H K L h g) f ＝ⁱ
+    comp-hom-Semigroup G K L h (comp-hom-Semigroup G H K g f)
+  involutive-eq-associative-comp-hom-Semigroup =
+    involutive-eq-eq associative-comp-hom-Semigroup
 ```
 
 ### The left and right unit laws for composition of homomorphisms of semigroups

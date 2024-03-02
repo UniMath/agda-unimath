@@ -14,6 +14,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.torsorial-type-families
@@ -356,14 +357,11 @@ module _
       ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
       ( refl-htpy)
 
-  inv-associative-comp-hom-Ring :
-    comp-hom-Ring R T U h (comp-hom-Ring R S T g f) ＝
-    comp-hom-Ring R S U (comp-hom-Ring S T U h g) f
-  inv-associative-comp-hom-Ring =
-    eq-htpy-hom-Ring R U
-      ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
-      ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
-      ( refl-htpy)
+  involutive-eq-associative-comp-hom-Ring :
+    comp-hom-Ring R S U (comp-hom-Ring S T U h g) f ＝ⁱ
+    comp-hom-Ring R T U h (comp-hom-Ring R S T g f)
+  involutive-eq-associative-comp-hom-Ring =
+    involutive-eq-eq associative-comp-hom-Ring
 ```
 
 ### Unit laws for composition of ring homomorphisms

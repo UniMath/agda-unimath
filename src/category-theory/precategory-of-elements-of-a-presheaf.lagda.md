@@ -18,6 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -109,26 +110,21 @@ module _
         ( comp-hom-precategory-of-elements-presheaf-Precategory g f))
       ( associative-comp-hom-Precategory C (pr1 h) (pr1 g) (pr1 f))
 
-  inv-associative-comp-hom-precategory-of-elements-presheaf-Precategory :
+  involutive-eq-associative-comp-hom-precategory-of-elements-presheaf-Precategory :
     {X Y Z W : obj-precategory-of-elements-presheaf-Precategory} →
     (h : hom-precategory-of-elements-presheaf-Precategory Z W)
     (g : hom-precategory-of-elements-presheaf-Precategory Y Z)
     (f : hom-precategory-of-elements-presheaf-Precategory X Y) →
     comp-hom-precategory-of-elements-presheaf-Precategory
-      ( h)
-      ( comp-hom-precategory-of-elements-presheaf-Precategory g f) ＝
-    comp-hom-precategory-of-elements-presheaf-Precategory
       ( comp-hom-precategory-of-elements-presheaf-Precategory h g)
-      ( f)
-  inv-associative-comp-hom-precategory-of-elements-presheaf-Precategory h g f =
-    eq-hom-precategory-of-elements-presheaf-Precategory
-      ( comp-hom-precategory-of-elements-presheaf-Precategory
-        ( h)
-        ( comp-hom-precategory-of-elements-presheaf-Precategory g f))
-      ( comp-hom-precategory-of-elements-presheaf-Precategory
-        ( comp-hom-precategory-of-elements-presheaf-Precategory h g)
-        ( f))
-      ( inv-associative-comp-hom-Precategory C (pr1 h) (pr1 g) (pr1 f))
+      ( f) ＝ⁱ
+    comp-hom-precategory-of-elements-presheaf-Precategory
+      ( h)
+      ( comp-hom-precategory-of-elements-presheaf-Precategory g f)
+  involutive-eq-associative-comp-hom-precategory-of-elements-presheaf-Precategory
+    h g f =
+    involutive-eq-eq
+      ( associative-comp-hom-precategory-of-elements-presheaf-Precategory h g f)
 
   id-hom-precategory-of-elements-presheaf-Precategory :
     {X : obj-precategory-of-elements-presheaf-Precategory} →
@@ -175,12 +171,8 @@ module _
     hom-set-precategory-of-elements-presheaf-Precategory
   pr1 (pr1 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) =
     comp-hom-precategory-of-elements-presheaf-Precategory
-  pr1 (pr2 (pr1 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) h g f)
-    =
-    associative-comp-hom-precategory-of-elements-presheaf-Precategory h g f
-  pr2 (pr2 (pr1 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) h g f)
-    =
-    inv-associative-comp-hom-precategory-of-elements-presheaf-Precategory h g f
+  pr2 (pr1 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) =
+    involutive-eq-associative-comp-hom-precategory-of-elements-presheaf-Precategory
   pr1 (pr2 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) X =
     id-hom-precategory-of-elements-presheaf-Precategory
   pr1 (pr2 (pr2 (pr2 (pr2 precategory-of-elements-presheaf-Precategory)))) =

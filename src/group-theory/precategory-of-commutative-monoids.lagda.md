@@ -9,6 +9,7 @@ module group-theory.precategory-of-commutative-monoids where
 ```agda
 open import category-theory.large-precategories
 
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -40,12 +41,9 @@ comp-hom-Large-Precategory
 id-hom-Large-Precategory
   Commutative-Monoid-Large-Precategory {X = M} =
   id-hom-Commutative-Monoid M
-associative-comp-hom-Large-Precategory
+involutive-eq-associative-comp-hom-Large-Precategory
   Commutative-Monoid-Large-Precategory {X = K} {L} {M} {N} =
-  associative-comp-hom-Commutative-Monoid K L M N
-inv-associative-comp-hom-Large-Precategory
-  Commutative-Monoid-Large-Precategory {X = K} {L} {M} {N} =
-  inv-associative-comp-hom-Commutative-Monoid K L M N
+  involutive-eq-associative-comp-hom-Commutative-Monoid K L M N
 left-unit-law-comp-hom-Large-Precategory
   Commutative-Monoid-Large-Precategory {X = M} {N} =
   left-unit-law-comp-hom-Commutative-Monoid M N

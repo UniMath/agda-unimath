@@ -15,6 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.torsorial-type-families
@@ -235,15 +236,12 @@ module _
       ( comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f))
       ( refl-htpy)
 
-  inv-associative-comp-hom-Monoid :
+  involutive-eq-associative-comp-hom-Monoid :
     (h : hom-Monoid M N) (g : hom-Monoid L M) (f : hom-Monoid K L) →
-    comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f) ＝
-    comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f
-  inv-associative-comp-hom-Monoid h g f =
-    eq-htpy-hom-Monoid K N
-      ( comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f))
-      ( comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f)
-      ( refl-htpy)
+    comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f ＝ⁱ
+    comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f)
+  involutive-eq-associative-comp-hom-Monoid h g f =
+     involutive-eq-eq (associative-comp-hom-Monoid h g f)
 ```
 
 ### Unit laws for composition of homomorphisms of monoids

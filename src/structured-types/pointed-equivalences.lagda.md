@@ -20,6 +20,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.strictly-involutive-identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
@@ -432,7 +433,7 @@ module _
                       ( f ∘∗ (g ∘∗ f))
                       ( (f ∘∗ g) ∘∗ f)
                       ( f)
-                      ( inv-associative-comp-pointed-map f g f)
+                      ( inv (associative-comp-pointed-map f g f))
                       ( concat-htpy-pointed-map
                         ( (f ∘∗ g) ∘∗ f)
                         ( id-pointed-map ∘∗ f)
@@ -474,7 +475,7 @@ module _
               ( f ∘∗ (g ∘∗ k))
               ( (f ∘∗ g) ∘∗ k)
               ( k)
-              ( inv-associative-comp-pointed-map f g k)
+              ( inv (associative-comp-pointed-map f g k))
               ( concat-htpy-pointed-map
                 ( (f ∘∗ g) ∘∗ k)
                 ( id-pointed-map ∘∗ k)
@@ -495,7 +496,7 @@ module _
               ( h ∘∗ (f ∘∗ k))
               ( (h ∘∗ f) ∘∗ k)
               ( k)
-              ( inv-associative-comp-pointed-map h f k)
+              ( inv (associative-comp-pointed-map h f k))
               ( concat-htpy-pointed-map
                 ( (h ∘∗ f) ∘∗ k)
                 ( id-pointed-map ∘∗ k)

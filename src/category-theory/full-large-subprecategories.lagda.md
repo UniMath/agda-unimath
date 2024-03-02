@@ -18,6 +18,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -127,7 +128,7 @@ module _
   associative-comp-hom-Full-Large-Subprecategory X Y Z W =
     associative-comp-hom-Large-Precategory C
 
-  inv-associative-comp-hom-Full-Large-Subprecategory :
+  involutive-eq-associative-comp-hom-Full-Large-Subprecategory :
     {l1 l2 l3 l4 : Level}
     (X : obj-Full-Large-Subprecategory l1)
     (Y : obj-Full-Large-Subprecategory l2)
@@ -136,14 +137,14 @@ module _
     (h : hom-Full-Large-Subprecategory Z W)
     (g : hom-Full-Large-Subprecategory Y Z)
     (f : hom-Full-Large-Subprecategory X Y) →
-    comp-hom-Full-Large-Subprecategory X Z W
-      ( h)
-      ( comp-hom-Full-Large-Subprecategory X Y Z g f) ＝
     comp-hom-Full-Large-Subprecategory X Y W
       ( comp-hom-Full-Large-Subprecategory Y Z W h g)
-      ( f)
-  inv-associative-comp-hom-Full-Large-Subprecategory X Y Z W =
-    inv-associative-comp-hom-Large-Precategory C
+      ( f) ＝ⁱ
+    comp-hom-Full-Large-Subprecategory X Z W
+      ( h)
+      ( comp-hom-Full-Large-Subprecategory X Y Z g f)
+  involutive-eq-associative-comp-hom-Full-Large-Subprecategory X Y Z W =
+    involutive-eq-associative-comp-hom-Large-Precategory C
 
   left-unit-law-comp-hom-Full-Large-Subprecategory :
     {l1 l2 : Level}
@@ -184,14 +185,10 @@ module _
   id-hom-Large-Precategory
     large-precategory-Full-Large-Subprecategory {l1} {X} =
     id-hom-Full-Large-Subprecategory X
-  associative-comp-hom-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory
     large-precategory-Full-Large-Subprecategory
     {l1} {l2} {l3} {l4} {X} {Y} {Z} {W} =
-    associative-comp-hom-Full-Large-Subprecategory X Y Z W
-  inv-associative-comp-hom-Large-Precategory
-    large-precategory-Full-Large-Subprecategory
-    {l1} {l2} {l3} {l4} {X} {Y} {Z} {W} =
-    inv-associative-comp-hom-Full-Large-Subprecategory X Y Z W
+    involutive-eq-associative-comp-hom-Full-Large-Subprecategory X Y Z W
   left-unit-law-comp-hom-Large-Precategory
     large-precategory-Full-Large-Subprecategory {l1} {l2} {X} {Y} =
     left-unit-law-comp-hom-Full-Large-Subprecategory X Y

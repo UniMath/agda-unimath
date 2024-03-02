@@ -18,6 +18,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -141,10 +142,8 @@ module _
   pr1 (pr2 precategory-Preorder) x y = set-Prop (leq-Preorder-Prop X x y)
   pr1 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} =
     is-transitive-leq-Preorder X x y z
-  pr1 (pr2 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} {w} h g f) =
-    eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x w))
-  pr2 (pr2 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} {w} h g f) =
-    eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x w))
+  pr2 (pr1 (pr2 (pr2 precategory-Preorder))) {x} {y} {z} {w} h g f =
+    involutive-eq-eq (eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x w)))
   pr1 (pr2 (pr2 (pr2 precategory-Preorder))) = refl-leq-Preorder X
   pr1 (pr2 (pr2 (pr2 (pr2 precategory-Preorder)))) {x} {y} f =
     eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x y))

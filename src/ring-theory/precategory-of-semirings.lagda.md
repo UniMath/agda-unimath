@@ -11,6 +11,7 @@ open import category-theory.large-precategories
 open import category-theory.precategories
 
 open import foundation.identity-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import ring-theory.homomorphisms-semirings
@@ -42,12 +43,9 @@ comp-hom-Large-Precategory
 id-hom-Large-Precategory
   Semiring-Large-Precategory {X = R} =
   id-hom-Semiring R
-associative-comp-hom-Large-Precategory
+involutive-eq-associative-comp-hom-Large-Precategory
   Semiring-Large-Precategory {X = R} {S} {T} {U} =
-  associative-comp-hom-Semiring R S T U
-inv-associative-comp-hom-Large-Precategory
-  Semiring-Large-Precategory {X = R} {S} {T} {U} =
-  inv-associative-comp-hom-Semiring R S T U
+  involutive-eq-associative-comp-hom-Semiring R S T U
 left-unit-law-comp-hom-Large-Precategory
   Semiring-Large-Precategory {X = R} {S} =
   left-unit-law-comp-hom-Semiring R S

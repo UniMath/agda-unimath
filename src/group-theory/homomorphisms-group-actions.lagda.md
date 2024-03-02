@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
@@ -257,18 +258,11 @@ module _
         ( comp-hom-action-Group G X1 X2 X3 g f))
       ( refl-htpy)
 
-  inv-associative-comp-hom-action-Group :
-    comp-hom-action-Group G X1 X3 X4 h (comp-hom-action-Group G X1 X2 X3 g f) ＝
-    comp-hom-action-Group G X1 X2 X4 (comp-hom-action-Group G X2 X3 X4 h g) f
-  inv-associative-comp-hom-action-Group =
-    eq-htpy-hom-action-Group G X1 X4
-      ( comp-hom-action-Group G X1 X3 X4
-        ( h)
-        ( comp-hom-action-Group G X1 X2 X3 g f))
-      ( comp-hom-action-Group G X1 X2 X4
-        ( comp-hom-action-Group G X2 X3 X4 h g)
-        ( f))
-      ( refl-htpy)
+  involutive-eq-associative-comp-hom-action-Group :
+    comp-hom-action-Group G X1 X2 X4 (comp-hom-action-Group G X2 X3 X4 h g) f ＝ⁱ
+    comp-hom-action-Group G X1 X3 X4 h (comp-hom-action-Group G X1 X2 X3 g f)
+  involutive-eq-associative-comp-hom-action-Group =
+    involutive-eq-eq associative-comp-hom-action-Group
 ```
 
 ### Composition satisfies the left and right unit laws

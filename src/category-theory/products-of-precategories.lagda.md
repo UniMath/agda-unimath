@@ -13,6 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -44,16 +45,10 @@ module _
     comp-hom-Precategory C f' f
   pr2 (pr1 (pr1 (pr2 (pr2 product-Precategory))) (f' , g') (f , g)) =
     comp-hom-Precategory D g' g
-  pr1
-    ( pr2 (pr1 (pr2 (pr2 product-Precategory))) (f'' , g'') (f' , g') (f , g)) =
-    eq-pair
+  pr2 (pr1 (pr2 (pr2 product-Precategory))) (f'' , g'') (f' , g') (f , g) =
+    eq-pair -- !!
       ( associative-comp-hom-Precategory C f'' f' f)
       ( associative-comp-hom-Precategory D g'' g' g)
-  pr2
-    ( pr2 (pr1 (pr2 (pr2 product-Precategory))) (f'' , g'') (f' , g') (f , g)) =
-    eq-pair
-      ( inv-associative-comp-hom-Precategory C f'' f' f)
-      ( inv-associative-comp-hom-Precategory D g'' g' g)
   pr1 (pr1 (pr2 (pr2 (pr2 product-Precategory))) (x , y)) =
     id-hom-Precategory C {x}
   pr2 (pr1 (pr2 (pr2 (pr2 product-Precategory))) (x , y)) =

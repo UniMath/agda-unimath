@@ -17,6 +17,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
@@ -92,11 +93,12 @@ module _
     comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f)
   associative-comp-hom-species-𝔽 h g f = refl
 
-  inv-associative-comp-hom-species-𝔽 :
+  involutive-eq-associative-comp-hom-species-𝔽 :
     (h : hom-species-𝔽 H K) (g : hom-species-𝔽 G H) (f : hom-species-𝔽 F G) →
-    comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f) ＝
-    comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f
-  inv-associative-comp-hom-species-𝔽 h g f = refl
+    comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f ＝ⁱ
+    comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f)
+  involutive-eq-associative-comp-hom-species-𝔽 h g f =
+    involutive-eq-eq (associative-comp-hom-species-𝔽 h g f)
 ```
 
 ### The unit laws for composition of homomorphisms of finite species

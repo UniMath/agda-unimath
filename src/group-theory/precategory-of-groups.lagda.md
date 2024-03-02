@@ -9,6 +9,7 @@ module group-theory.precategory-of-groups where
 ```agda
 open import category-theory.large-precategories
 
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -28,12 +29,9 @@ instance
     comp-hom-Group G H K
   id-hom-Large-Precategory Group-Large-Precategory {X = G} =
     id-hom-Group G
-  associative-comp-hom-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory
     Group-Large-Precategory {X = G} {H} {K} {L} =
-    associative-comp-hom-Group G H K L
-  inv-associative-comp-hom-Large-Precategory
-    Group-Large-Precategory {X = G} {H} {K} {L} =
-    inv-associative-comp-hom-Group G H K L
+    involutive-eq-associative-comp-hom-Group G H K L
   left-unit-law-comp-hom-Large-Precategory
     Group-Large-Precategory {X = G} {H} =
     left-unit-law-comp-hom-Group G H

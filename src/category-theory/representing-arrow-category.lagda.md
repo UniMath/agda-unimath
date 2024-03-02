@@ -18,6 +18,7 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -77,29 +78,13 @@ associative-comp-hom-representing-arrow-Category
   refl
 associative-comp-hom-representing-arrow-Category {false} h g f = refl
 
-inv-associative-comp-hom-representing-arrow-Category :
-  {x y z w : obj-representing-arrow-Category} →
-  (h : hom-representing-arrow-Category z w)
-  (g : hom-representing-arrow-Category y z)
-  (f : hom-representing-arrow-Category x y) →
-  ( comp-hom-representing-arrow-Category
-    { x} h (comp-hom-representing-arrow-Category {x} g f)) ＝
-  ( comp-hom-representing-arrow-Category
-    { x} (comp-hom-representing-arrow-Category {y} h g) f)
-inv-associative-comp-hom-representing-arrow-Category
-  { true} {true} {true} {true} h g f =
-  refl
-inv-associative-comp-hom-representing-arrow-Category {false} h g f = refl
-
 associative-composition-operation-representing-arrow-Category :
   associative-composition-operation-binary-family-Set
     ( hom-set-representing-arrow-Category)
 pr1 associative-composition-operation-representing-arrow-Category {x} =
   comp-hom-representing-arrow-Category {x}
-pr1 (pr2 associative-composition-operation-representing-arrow-Category h g f) =
-  associative-comp-hom-representing-arrow-Category h g f
-pr2 (pr2 associative-composition-operation-representing-arrow-Category h g f) =
-  inv-associative-comp-hom-representing-arrow-Category h g f
+pr2 associative-composition-operation-representing-arrow-Category h g f =
+  involutive-eq-eq (associative-comp-hom-representing-arrow-Category h g f)
 
 id-hom-representing-arrow-Category :
   {x : obj-representing-arrow-Category} → hom-representing-arrow-Category x x

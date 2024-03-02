@@ -9,6 +9,7 @@ module group-theory.precategory-of-semigroups where
 ```agda
 open import category-theory.large-precategories
 
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
@@ -36,12 +37,9 @@ instance
   id-hom-Large-Precategory Semigroup-Large-Precategory
     {X = G} =
     id-hom-Semigroup G
-  associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
     {X = G} {H} {K} {L} =
-    associative-comp-hom-Semigroup G H K L
-  inv-associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
-    {X = G} {H} {K} {L} =
-    inv-associative-comp-hom-Semigroup G H K L
+    involutive-eq-associative-comp-hom-Semigroup G H K L
   left-unit-law-comp-hom-Large-Precategory Semigroup-Large-Precategory
     {X = G} {H} =
     left-unit-law-comp-hom-Semigroup G H

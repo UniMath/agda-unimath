@@ -8,6 +8,7 @@ module order-theory.order-preserving-maps-large-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -159,12 +160,6 @@ module _
       ( comp-hom-Large-Preorder P Q S (comp-hom-Large-Preorder Q R S h g) f)
       ( comp-hom-Large-Preorder P R S h (comp-hom-Large-Preorder P Q R g f))
   associative-comp-hom-Large-Preorder = refl-htpy
-
-  inv-associative-comp-hom-Large-Preorder :
-    htpy-hom-Large-Preorder P S
-      ( comp-hom-Large-Preorder P R S h (comp-hom-Large-Preorder P Q R g f))
-      ( comp-hom-Large-Preorder P Q S (comp-hom-Large-Preorder Q R S h g) f)
-  inv-associative-comp-hom-Large-Preorder = refl-htpy
 ```
 
 ### Composition of order preserving maps satisfies left and right unit laws
