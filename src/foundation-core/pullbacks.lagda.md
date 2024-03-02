@@ -512,19 +512,19 @@ Consider two cospans with a shared vertex `B`:
 ```
 
 and with pullback cones `α` and `β` respectively. Moreover, consider a cone `γ`
-over the pullbacks with domain `U` as in the following diagram
+over the pullbacks as in the following diagram
 
 ```text
-    U ------------> T ------------> C
-    |               | ⌟             |
-    |       γ       |       β       | i
-    |               ∨               ∨
-    S ------------> B ------------> Y
-    | ⌟             |       h
-    |       α       | g
-    ∨               ∨
-    A ------------> X.
-            f
+  ∙ ------------> ∙ ------------> C
+  |               | ⌟             |
+  |       γ       |       β       | i
+  |               ∨               ∨
+  ∙ ------------> B ------------> Y
+  | ⌟             |       h
+  |       α       | g
+  ∨               ∨
+  A ------------> X.
+          f
 ```
 
 Then the pasting `γ □ α` is a pullback if and only if `γ` is if and only if the
