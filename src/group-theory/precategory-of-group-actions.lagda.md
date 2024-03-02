@@ -40,27 +40,16 @@ module _
 
   action-Group-Large-Precategory :
     Large-Precategory (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
-  obj-Large-Precategory
-    action-Group-Large-Precategory =
-    action-Group G
-  hom-set-Large-Precategory
-    action-Group-Large-Precategory =
-    hom-set-action-Group G
-  comp-hom-Large-Precategory
-    action-Group-Large-Precategory {X = X} {Y} {Z} =
-    comp-hom-action-Group G X Y Z
-  id-hom-Large-Precategory
-    action-Group-Large-Precategory {X = X} =
-    id-hom-action-Group G X
-  involutive-eq-associative-comp-hom-Large-Precategory
-    action-Group-Large-Precategory {X = X} {Y} {Z} {W} =
-    involutive-eq-associative-comp-hom-action-Group G X Y Z W
-  left-unit-law-comp-hom-Large-Precategory
-    action-Group-Large-Precategory {X = X} {Y} =
-    left-unit-law-comp-hom-action-Group G X Y
-  right-unit-law-comp-hom-Large-Precategory
-    action-Group-Large-Precategory {X = X} {Y} =
-    right-unit-law-comp-hom-action-Group G X Y
+  action-Group-Large-Precategory =
+    make-Large-Precategory
+      ( action-Group G)
+      ( hom-set-action-Group G)
+      ( λ {l1} {l2} {l3} {X} {Y} {Z} → comp-hom-action-Group G X Y Z)
+      ( λ {l1} {X} → id-hom-action-Group G X)
+      ( λ {l1} {l2} {l3} {l4} {X} {Y} {Z} {W} →
+        associative-comp-hom-action-Group G X Y Z W)
+      ( λ {l1} {l2} {X} {Y} → left-unit-law-comp-hom-action-Group G X Y)
+      ( λ {l1} {l2} {X} {Y} → right-unit-law-comp-hom-action-Group G X Y)
 ```
 
 ### The small precategory of `G`-sets
