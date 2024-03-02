@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.morphisms-cospan-diagrams
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

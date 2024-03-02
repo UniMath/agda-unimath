@@ -270,20 +270,20 @@ module _
   (H : ((b , c) : Σ B C) → fiber (map-emb f) b)
   where
 
-  inv-map-Σ-emb-base : Σ B C → Σ A (C ∘ map-emb f)
-  pr1 (inv-map-Σ-emb-base u) = pr1 (H u)
-  pr2 (inv-map-Σ-emb-base u) = inv-tr C (pr2 (H u)) (pr2 u)
+  map-inv-Σ-emb-base : Σ B C → Σ A (C ∘ map-emb f)
+  pr1 (map-inv-Σ-emb-base u) = pr1 (H u)
+  pr2 (map-inv-Σ-emb-base u) = inv-tr C (pr2 (H u)) (pr2 u)
 
-  is-section-inv-map-Σ-emb-base :
-    is-section (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base
-  is-section-inv-map-Σ-emb-base (b , c) =
+  is-section-map-inv-Σ-emb-base :
+    is-section (map-Σ-map-base (map-emb f) C) map-inv-Σ-emb-base
+  is-section-map-inv-Σ-emb-base (b , c) =
     ap
       ( λ s → (pr1 s , inv-tr C (pr2 s) c))
       ( eq-is-contr (is-torsorial-Id' b))
 
-  is-retraction-inv-map-Σ-emb-base :
-    is-retraction (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base
-  is-retraction-inv-map-Σ-emb-base (a , c) =
+  is-retraction-map-inv-Σ-emb-base :
+    is-retraction (map-Σ-map-base (map-emb f) C) map-inv-Σ-emb-base
+  is-retraction-map-inv-Σ-emb-base (a , c) =
     ap
       ( λ s → (pr1 s , inv-tr C (pr2 s) c))
       ( eq-is-prop (is-prop-map-is-emb (pr2 f) (map-emb f a)))
@@ -292,9 +292,9 @@ module _
   pr1 equiv-Σ-emb-base = map-Σ-map-base (map-emb f) C
   pr2 equiv-Σ-emb-base =
     is-equiv-is-invertible
-      inv-map-Σ-emb-base
-      is-section-inv-map-Σ-emb-base
-      is-retraction-inv-map-Σ-emb-base
+      map-inv-Σ-emb-base
+      is-section-map-inv-Σ-emb-base
+      is-retraction-map-inv-Σ-emb-base
 ```
 
 ### The product of two embeddings is an embedding

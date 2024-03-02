@@ -133,7 +133,6 @@ module _
   [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
-
 - Functorial properties of function types are recorded in
   [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md).
 - Functorial properties of dependent pair types are recorded in

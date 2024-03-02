@@ -188,7 +188,7 @@ module _
     ( contraction-map-smash-product-wedge-Pointed-Type
       ( map-inl-wedge-Pointed-Type A B (point-Pointed-Type A)))
   coh-contraction-map-smash-product-wedge-Pointed-Type =
-    ( inv-map-compute-dependent-identification-eq-value-function
+    ( map-inv-compute-dependent-identification-eq-value-function
       ( map-smash-product-wedge-Pointed-Type)
       ( map-pointed-map
         ( constant-pointed-map (A ∨∗ B) (A ∧∗ B)))

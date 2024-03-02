@@ -225,9 +225,10 @@ module _
   (f : A → C) (g : B → D)
   where
 
-  is-equiv-left-factor-is-equiv-map-product :
+  is-equiv-left-factor-is-equiv-map-product-is-inhabited-right-factor' :
     (d : D) → is-equiv (map-product f g) → is-equiv f
-  is-equiv-left-factor-is-equiv-map-product d is-equiv-fg =
+  is-equiv-left-factor-is-equiv-map-product-is-inhabited-right-factor'
+    d is-equiv-fg =
     is-equiv-is-contr-map
       ( λ x →
         is-contr-left-factor-product
@@ -239,9 +240,10 @@ module _
             ( is-equiv-map-compute-fiber-map-product f g (x , d))
             ( is-contr-map-is-equiv is-equiv-fg (x , d))))
 
-  is-equiv-right-factor-is-equiv-map-product :
+  is-equiv-right-factor-is-equiv-map-product-is-inhabited-left-factor' :
     (c : C) → is-equiv (map-product f g) → is-equiv g
-  is-equiv-right-factor-is-equiv-map-product c is-equiv-fg =
+  is-equiv-right-factor-is-equiv-map-product-is-inhabited-left-factor'
+    c is-equiv-fg =
     is-equiv-is-contr-map
       ( λ y →
         is-contr-right-factor-product
@@ -286,7 +288,6 @@ module _
   [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - The universal property of cartesian product types is treated in
   [`foundation.universal-property-cartesian-product-types`](foundation.universal-property-cartesian-product-types.md).
-
 - Functorial properties of dependent pair types are recorded in
   [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.md).
 - Functorial properties of dependent product types are recorded in

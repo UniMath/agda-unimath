@@ -23,6 +23,8 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-dependent-functions
+open import foundation-core.precomposition-functions
+open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
@@ -79,7 +81,7 @@ abstract
         ( H x x u v))
 ```
 
-### The induction principle of propositional truncations
+### The induction principle for propositional truncations
 
 ```agda
 ind-trunc-Prop' :
@@ -95,23 +97,42 @@ ind-trunc-Prop' P f H =
     ( f)
 ```
 
-### Simplified form of the induction principle for propositional truncations
+### The propositional induction principle for propositional truncations
 
 ```agda
-abstract
-  ind-trunc-Prop :
-    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
-    ((x : A) → type-Prop (P (unit-trunc-Prop x))) →
-    (( y : type-trunc-Prop A) → type-Prop (P y))
-  ind-trunc-Prop P f =
-    ind-trunc-Prop' (type-Prop ∘ P) f
-      ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y)))
+module _
+  {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l)
+  where
 
-  compute-ind-trunc-Prop :
-    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
-    ((precomp-Π unit-trunc-Prop (type-Prop ∘ P)) ∘ ind-trunc-Prop P) ~ id
-  compute-ind-trunc-Prop P h =
-    eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
+  abstract
+    ind-trunc-Prop :
+      ((x : A) → type-Prop (P (unit-trunc-Prop x))) →
+      (( y : type-trunc-Prop A) → type-Prop (P y))
+    ind-trunc-Prop f =
+      ind-trunc-Prop' (type-Prop ∘ P) f
+        ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y)))
+
+    compute-ind-trunc-Prop :
+        is-section (precomp-Π unit-trunc-Prop (type-Prop ∘ P)) (ind-trunc-Prop)
+    compute-ind-trunc-Prop h =
+      eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
+```
+
+### The propositional recursion principle for propositional truncations
+
+```agda
+module _
+  {l l1 : Level} {A : UU l1} (P : Prop l)
+  where
+
+  abstract
+    rec-trunc-Prop :
+      (A → type-Prop P) → (type-trunc-Prop A → type-Prop P)
+    rec-trunc-Prop = ind-trunc-Prop (λ _ → P)
+
+    compute-rec-trunc-Prop :
+      is-section (precomp unit-trunc-Prop (type-Prop P)) (rec-trunc-Prop)
+    compute-rec-trunc-Prop = compute-ind-trunc-Prop (λ _ → P)
 ```
 
 ### The defined propositional truncations are propositional truncations

@@ -7,11 +7,9 @@ module orthogonal-factorization-systems.pullback-hom where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.cones-over-cospan-diagrams
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -21,6 +19,8 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.higher-homotopies-morphisms-arrows
 open import foundation.homotopies
 open import foundation.homotopies-morphisms-arrows
@@ -35,6 +35,7 @@ open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.standard-pullbacks
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
