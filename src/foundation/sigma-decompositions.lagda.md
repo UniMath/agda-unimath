@@ -928,7 +928,7 @@ module _
     htpy-matching-correspondence x =
       ( ap
         ( λ f → map-equiv (equiv-tot (inv-equiv ∘ t)) f)
-        ( inv-map-eq-transpose-equiv
+        ( map-inv-eq-transpose-equiv
           ( associative-Σ M P Y)
           ( inv
             ( map-eq-transpose-equiv

@@ -462,8 +462,8 @@ module _
     ( ( map-fiber-vertical-map-cone f (g ∘ h)
         ( pasting-vertical-cone f g h c d)
         ( x)) ∘
-      ( inv-map-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
-    ( ( inv-map-compute-fiber-comp g h (f x)) ∘
+      ( map-inv-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
+    ( ( map-inv-compute-fiber-comp g h (f x)) ∘
       ( map-Σ
         ( λ t → fiber h (pr1 t))
         ( map-fiber-vertical-map-cone f g c x)

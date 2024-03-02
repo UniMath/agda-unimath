@@ -20,7 +20,6 @@ open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
