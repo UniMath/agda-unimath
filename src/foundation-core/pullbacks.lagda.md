@@ -129,6 +129,59 @@ module _
 
 ## Properties
 
+### Parallel pullback squares
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
+  where
+
+  triangle-is-pullback-htpy :
+    {c : cone f g C} {c' : cone f' g' C} (Hc : htpy-parallel-cone Hf Hg c c') →
+    gap f g c ~ map-equiv-standard-pullback-htpy Hf Hg ∘ gap f' g' c'
+  triangle-is-pullback-htpy {p , q , H} {p' , q' , H'} (Hp , Hq , HH) z =
+    map-extensionality-standard-pullback f g
+      ( Hp z)
+      ( Hq z)
+      ( ( inv (assoc (ap f (Hp z)) (Hf (p' z) ∙ H' z) (inv (Hg (q' z))))) ∙
+        ( inv
+          ( right-transpose-eq-concat
+            ( H z ∙ ap g (Hq z))
+            ( Hg (q' z))
+            ( ap f (Hp z) ∙ (Hf (p' z) ∙ H' z))
+            ( ( assoc (H z) (ap g (Hq z)) (Hg (q' z))) ∙
+              ( HH z) ∙
+              ( assoc (ap f (Hp z)) (Hf (p' z)) (H' z))))))
+
+  abstract
+    is-pullback-htpy :
+      {c : cone f g C} (c' : cone f' g' C)
+      (Hc : htpy-parallel-cone Hf Hg c c') →
+      is-pullback f' g' c' → is-pullback f g c
+    is-pullback-htpy {c} c' H is-pb-c' =
+      is-equiv-left-map-triangle
+        ( gap f g c)
+        ( map-equiv-standard-pullback-htpy Hf Hg)
+        ( gap f' g' c')
+        ( triangle-is-pullback-htpy H)
+        ( is-pb-c')
+        ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
+
+  abstract
+    is-pullback-htpy' :
+      (c : cone f g C) {c' : cone f' g' C}
+      (Hc : htpy-parallel-cone Hf Hg c c') →
+      is-pullback f g c → is-pullback f' g' c'
+    is-pullback-htpy' c {c'} H =
+      is-equiv-top-map-triangle
+        ( gap f g c)
+        ( map-equiv-standard-pullback-htpy Hf Hg)
+        ( gap f' g' c')
+        ( triangle-is-pullback-htpy H)
+        ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
+```
+
 ### Pullbacks are symmetric
 
 The pullback of `f : A → X ← B : g` is also the pullback of `g : B → X ← A : f`.
