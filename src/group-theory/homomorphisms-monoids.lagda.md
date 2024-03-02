@@ -241,7 +241,7 @@ module _
     comp-hom-Monoid K L N (comp-hom-Monoid L M N h g) f ＝ⁱ
     comp-hom-Monoid K M N h (comp-hom-Monoid K L M g f)
   involutive-eq-associative-comp-hom-Monoid h g f =
-     involutive-eq-eq (associative-comp-hom-Monoid h g f)
+    involutive-eq-eq (associative-comp-hom-Monoid h g f)
 ```
 
 ### Unit laws for composition of homomorphisms of monoids

@@ -105,10 +105,10 @@ module _
   pr1 associative-composition-operation-indiscrete-Precategory {x} {y} {z} =
     comp-hom-indiscrete-Precategory {x} {y} {z}
   pr2
-        associative-composition-operation-indiscrete-Precategory
-          { x} {y} {z} {w} h g f =
-   involutive-eq-eq
-    ( associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w} h g f)
+    associative-composition-operation-indiscrete-Precategory
+    { x} {y} {z} {w} h g f =
+    involutive-eq-eq
+      ( associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w} h g f)
 
   id-hom-indiscrete-Precategory :
     {x : obj-indiscrete-Precategory X} → hom-indiscrete-Precategory X x x

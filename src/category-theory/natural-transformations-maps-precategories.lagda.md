@@ -307,5 +307,5 @@ module _
   involutive-eq-associative-comp-natural-transformation-map-Precategory
     F G H I α β γ =
     involutive-eq-eq
-     ( associative-comp-natural-transformation-map-Precategory F G H I α β γ)
+      ( associative-comp-natural-transformation-map-Precategory F G H I α β γ)
 ```
