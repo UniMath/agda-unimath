@@ -19,8 +19,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.higher-homotopies-morphisms-arrows
 open import foundation.homotopies
 open import foundation.homotopies-morphisms-arrows
@@ -32,10 +30,10 @@ open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.retractions
 open import foundation.sections
+open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.standard-pullbacks
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

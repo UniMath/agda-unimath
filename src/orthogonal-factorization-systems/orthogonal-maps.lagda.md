@@ -31,8 +31,8 @@ open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
-open import foundation.precomposition-dependent-functions
 open import foundation.postcomposition-pullbacks
+open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.products-pullbacks
 open import foundation.propositions
