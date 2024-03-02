@@ -440,6 +440,17 @@ module _
   associative-standard-pullback =
     ( inv-equiv (compute-right-associative-standard-pullback f g h i)) ∘e
     ( compute-left-associative-standard-pullback f g h i)
+
+  map-associative-standard-pullback :
+    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i →
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i})
+  map-associative-standard-pullback = map-equiv associative-standard-pullback
+
+  map-inv-associative-standard-pullback :
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i}) →
+    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i
+  map-inv-associative-standard-pullback =
+    map-inv-equiv associative-standard-pullback
 ```
 
 ### Pullbacks can be "folded"
