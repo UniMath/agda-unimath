@@ -131,16 +131,15 @@ module _
   obj-groupoid-1-Type = type-1-Type X
 
   precategory-Groupoid-1-Type : Precategory l l
-  pr1 precategory-Groupoid-1-Type = obj-groupoid-1-Type
-  pr1 (pr2 precategory-Groupoid-1-Type) = Id-Set X
-  pr1 (pr1 (pr2 (pr2 precategory-Groupoid-1-Type))) q p = p ∙ q
-  pr1 (pr2 (pr1 (pr2 (pr2 precategory-Groupoid-1-Type))) r q p) =
-    inv (assoc p q r)
-  pr2 (pr2 (pr1 (pr2 (pr2 precategory-Groupoid-1-Type))) r q p) =
-    assoc p q r
-  pr1 (pr2 (pr2 (pr2 precategory-Groupoid-1-Type))) x = refl
-  pr1 (pr2 (pr2 (pr2 (pr2 precategory-Groupoid-1-Type)))) p = right-unit
-  pr2 (pr2 (pr2 (pr2 (pr2 precategory-Groupoid-1-Type)))) p = left-unit
+  precategory-Groupoid-1-Type =
+    make-Precategory
+      ( obj-groupoid-1-Type)
+      ( Id-Set X)
+      ( λ q p → p ∙ q)
+      ( λ x → refl)
+      ( λ r q p → inv (assoc p q r))
+      ( λ p → right-unit)
+      ( λ p → left-unit)
 
   is-category-groupoid-1-Type :
     is-category-Precategory precategory-Groupoid-1-Type

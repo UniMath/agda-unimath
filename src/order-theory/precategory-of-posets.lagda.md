@@ -21,8 +21,8 @@ open import order-theory.posets
 
 ## Idea
 
-The **(large) precategory of posets** consists of
-[posets](order-theory.posets.md) and
+The {{#concept "(large) precategory of posets" Agda=Poset-Large-Precategory}}
+consists of [posets](order-theory.posets.md) and
 [order preserving maps](order-theory.order-preserving-maps-posets.md).
 
 ## Definitions

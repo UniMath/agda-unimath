@@ -205,19 +205,6 @@ module _
       ( ring-Cyclic-Ring S)
       ( ring-Cyclic-Ring T)
       ( ring-Cyclic-Ring U)
-
-  involutive-eq-associative-comp-hom-Cyclic-Ring :
-    (h : hom-Cyclic-Ring T U)
-    (g : hom-Cyclic-Ring S T)
-    (f : hom-Cyclic-Ring R S) →
-    comp-hom-Cyclic-Ring R S U (comp-hom-Cyclic-Ring S T U h g) f ＝ⁱ
-    comp-hom-Cyclic-Ring R T U h (comp-hom-Cyclic-Ring R S T g f)
-  involutive-eq-associative-comp-hom-Cyclic-Ring =
-    involutive-eq-associative-comp-hom-Ring
-      ( ring-Cyclic-Ring R)
-      ( ring-Cyclic-Ring S)
-      ( ring-Cyclic-Ring T)
-      ( ring-Cyclic-Ring U)
 ```
 
 ## See also

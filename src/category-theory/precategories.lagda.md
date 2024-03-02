@@ -106,7 +106,6 @@ make-Precategory :
   ( right-unit-comp-hom :
     { x y : obj} (f : type-Set (hom-set x y)) → f ∘ id x ＝ f) →
   Precategory l1 l2
-
 make-Precategory
   obj hom-set _∘_ id assoc-comp-hom left-unit-comp-hom right-unit-comp-hom =
   ( obj) ,
@@ -115,6 +114,7 @@ make-Precategory
   ( id) ,
   ( left-unit-comp-hom) ,
   ( right-unit-comp-hom)
+{-# INLINE make-Precategory #-}
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)

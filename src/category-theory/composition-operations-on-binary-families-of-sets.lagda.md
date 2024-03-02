@@ -54,14 +54,14 @@ module _
 
 ### Associative composition operations in binary families of sets
 
-We give a slightly nonstandard definition of associativity, using the
+We give a slightly nonstandard definition of associativity using the
 [strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
 rather than the standard [identity types](foundation-core.identity-types.md).
 This is because, while the strictly involutive identity types are equivalent to
-the standard ones, they satisfy the computation rule `inv (inv p) ≐ p`, which is
+the standard ones, they satisfy the computation rule `inv (inv p) ≐ p` which is
 practical in defining the
 [opposite category](category-theory.opposite-categories.md), as this also makes
-`(Cᵒᵖ)ᵒᵖ ≐ C`.
+the opposite construction strictly involutive: `(Cᵒᵖ)ᵒᵖ ≐ C`.
 
 ```agda
 module _

@@ -383,19 +383,6 @@ module _
       ( h)
       ( g)
       ( f)
-
-  involutive-eq-associative-comp-hom-Ring-𝔽 :
-    comp-hom-Ring-𝔽 A B D (comp-hom-Ring-𝔽 B C D h g) f ＝ⁱ
-    comp-hom-Ring-𝔽 A C D h (comp-hom-Ring-𝔽 A B C g f)
-  involutive-eq-associative-comp-hom-Ring-𝔽 =
-    involutive-eq-associative-comp-hom-Ring
-      ( ring-Ring-𝔽 A)
-      ( ring-Ring-𝔽 B)
-      ( ring-Ring-𝔽 C)
-      ( ring-Ring-𝔽 D)
-      ( h)
-      ( g)
-      ( f)
 ```
 
 ### Unit laws for composition of homomorphisms of commutative rings

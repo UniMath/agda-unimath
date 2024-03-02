@@ -25,7 +25,7 @@ open import foundation.universe-levels
 Given a type `I` and a
 [large precategory](category-theory.large-precategories.md) `C`, the **large
 function pre-category** `Cᴵ` consists of `I`-indexed families of objects of `C`
-and `I`-indexed familis of morphisms between them.
+and `I`-indexed families of morphisms between them.
 
 ## Definition
 

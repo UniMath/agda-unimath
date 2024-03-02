@@ -14,6 +14,7 @@ open import category-theory.large-categories
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -22,8 +23,9 @@ open import foundation.universe-levels
 ## Idea
 
 Given a type `I` and a [large category](category-theory.large-categories.md)
-`C`, the **large function category** `Cᴵ` consists of `I`-indexed families of
-objects of `C` and `I`-indexed familis of morphisms between them.
+`C`, the {{#concept "large function category" Agda=Large-Function-Category}}
+`Cᴵ` consists of `I`-indexed families of objects of `C` and `I`-indexed families
+of morphisms between them.
 
 ## Definition
 

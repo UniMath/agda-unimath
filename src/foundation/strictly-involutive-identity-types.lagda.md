@@ -603,15 +603,15 @@ module _
   ap-binary-involutive-Id (z , p1 , p2) (w , q1 , q2) =
     ( f z w , ap-binary f p1 q1 , ap-binary f p2 q2)
 
-  left-unit-ap-binary-Id :
+  left-unit-ap-binary-involutive-Id :
     {x : A} {y y' : B} (q : y ＝ⁱ y') →
     ap-binary-involutive-Id reflⁱ q ＝ ap-involutive-Id (f x) q
-  left-unit-ap-binary-Id (z , p , refl) = refl
+  left-unit-ap-binary-involutive-Id (z , p , refl) = refl
 
-  right-unit-ap-binary-Id :
+  right-unit-ap-binary-involutive-Id :
     {x x' : A} (p : x ＝ⁱ x') {y : B} →
     ap-binary-involutive-Id p reflⁱ ＝ ap-involutive-Id (λ z → f z y) p
-  right-unit-ap-binary-Id {.z} {x'} (z , p , refl) {y} =
+  right-unit-ap-binary-involutive-Id {.z} {x'} (z , p , refl) {y} =
     eq-pair-eq-fiber (eq-pair right-unit refl)
 ```
 
@@ -705,13 +705,13 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  left-whisker-concat-yoenda-Id :
+  left-whisker-concat-involutive-Id :
     (p : x ＝ⁱ y) {q r : y ＝ⁱ z} → q ＝ⁱ r → p ∙ⁱ q ＝ⁱ p ∙ⁱ r
-  left-whisker-concat-yoenda-Id p β = ap-involutive-Id (p ∙ⁱ_) β
+  left-whisker-concat-involutive-Id p β = ap-involutive-Id (p ∙ⁱ_) β
 
-  right-whisker-concat-yoenda-Id :
+  right-whisker-concat-involutive-Id :
     {p q : x ＝ⁱ y} → p ＝ⁱ q → (r : y ＝ⁱ z) → p ∙ⁱ r ＝ⁱ q ∙ⁱ r
-  right-whisker-concat-yoenda-Id α r = ap-involutive-Id (_∙ⁱ r) α
+  right-whisker-concat-involutive-Id α r = ap-involutive-Id (_∙ⁱ r) α
 ```
 
 ### Horizontal concatenation of strictly involutive identifications
