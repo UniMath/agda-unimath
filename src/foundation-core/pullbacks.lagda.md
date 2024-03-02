@@ -502,6 +502,101 @@ module _
                   ( pr1 t))))
 ```
 
+### Pullbacks are associative
+
+Consider two cospans with a shared vertex `B`:
+
+```text
+      f       g       h       i
+  A ----> X <---- B ----> Y <---- C,
+```
+
+and with pullback cones `α` and `β` respectively. Moreover, consider a cone `γ`
+over the pullbacks with domain `U` as in the following diagram
+
+```text
+    U ------------> T ------------> C
+    |               | ⌟             |
+    |       γ       |       β       | i
+    |               ∨               ∨
+    S ------------> B ------------> Y
+    | ⌟             |       h
+    |       α       | g
+    ∨               ∨
+    A ------------> X.
+            f
+```
+
+Then the pasting `γ □ α` is a pullback if and only if `γ` is if and only if the
+pasting `γ □ β` is. Thus, in particular, we have the equivalence
+
+\[ (A ×_X B) ×_Y C ≃ A ×_X (B ×_Y C). \]
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4} {C : UU l5}
+  (f : A → X) (g : B → X) (h : B → Y) (i : C → Y)
+  {S : UU l6} {T : UU l7} {U : UU l8}
+  (α : cone f g S) (β : cone h i T)
+  (γ : cone (horizontal-map-cone f g α) (vertical-map-cone h i β) U)
+  (is-pullback-α : is-pullback f g α)
+  (is-pullback-β : is-pullback h i β)
+  where
+
+  is-pullback-associative :
+    is-pullback
+      ( f)
+      ( g ∘ vertical-map-cone h i β)
+      ( pasting-vertical-cone f g (vertical-map-cone h i β) α γ) →
+    is-pullback
+      ( h ∘ horizontal-map-cone f g α)
+      ( i)
+      ( pasting-horizontal-cone (horizontal-map-cone f g α) h i β γ)
+  is-pullback-associative H =
+    is-pullback-rectangle-is-pullback-left-square
+      ( horizontal-map-cone f g α)
+      ( h)
+      ( i)
+      ( β)
+      ( γ)
+      ( is-pullback-β)
+      (is-pullback-top-is-pullback-rectangle
+        ( f)
+        ( g)
+        ( vertical-map-cone h i β)
+        ( α)
+        ( γ)
+        ( is-pullback-α)
+        ( H))
+
+  is-pullback-inv-associative :
+    is-pullback
+      ( h ∘ horizontal-map-cone f g α)
+      ( i)
+      ( pasting-horizontal-cone (horizontal-map-cone f g α) h i β γ) →
+    is-pullback
+      ( f)
+      ( g ∘ vertical-map-cone h i β)
+      ( pasting-vertical-cone f g (vertical-map-cone h i β) α γ)
+  is-pullback-inv-associative H =
+    is-pullback-rectangle-is-pullback-top
+        ( f)
+        ( g)
+        ( vertical-map-cone h i β)
+        ( α)
+        ( γ)
+        ( is-pullback-α)
+        ( is-pullback-left-square-is-pullback-rectangle
+          ( horizontal-map-cone f g α)
+          ( h)
+          ( i)
+          ( β)
+          ( γ)
+          ( is-pullback-β)
+          ( H))
+```
+
 ### Pullbacks can be "folded"
 
 Given a pullback square
