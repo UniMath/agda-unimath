@@ -27,21 +27,38 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **precategory** in Homotopy Type Theory consists of:
+A {{#concept "precategory" Agda=Precategory}} `𝒞` in Homotopy Type Theory is the
+structure of an associative and unital
+[composition operation](category-theory.composition-operations-binary-families-of-sets.md)
+on a binary familiy of sets.
 
-- a type `A` of objects,
-- for each pair of objects `x y : A`, a [set](foundation-core.sets.md) of
-  morphisms `hom x y : Set`, together with a composition operation
-  `_∘_ : hom y z → hom x y → hom x z` such that:
-- `(h ∘ g) ∘ f = h ∘ (g ∘ f)` for any morphisms `h : hom z w`, `g : hom y z` and
-  `f : hom x y`,
-- for each object `x : A` there is a morphism `id_x : hom x x` such that
-  `id_x ∘ f = f` and `g ∘ id_x = g` for any morphisms `f : hom x y` and
-  `g : hom z x`.
+This means a precategory consists of:
 
-The reason this is called a *pre*category and not a category in Homotopy Type
-Theory is that we want to reserve that name for precategories where the
-identities between the objects are exactly the isomorphisms.
+- **Objects.** A type `Ob 𝒞` of _objects_.
+- **Morphisms.** For each pair of objects `x y : Ob 𝒞`, a
+  [set](foundation-core.sets.md) of _morphisms_ `hom 𝒞 x y : Set`.
+- **Composition.** For every triple of objects `x y z : Ob 𝒞` there is a
+  _composition operation_ on morphisms
+  ```text
+    _∘_ : hom 𝒞 y z → hom 𝒞 x y → hom 𝒞 x z.
+  ```
+- **Associativity.** For every triple of composable morphisms, we have
+  ```text
+    (h ∘ g) ∘ f ＝ h ∘ (g ∘ f).
+  ```
+- **Identity morphisms.** For every object `x : Ob 𝒞`, there is a distinguished
+  _identity_ morphism `id_x : hom 𝒞 x x`.
+- **Unitality.** The identity morphisms are two-sided units for the composition
+  operation, meaning that for every `f : hom 𝒞 x y` we have
+  ```text
+    id_y ∘ f ＝ f   and   f ∘ id_x ＝ f.
+  ```
+
+**Note.** The reason this is called a *pre*category and not a _category_ in
+Homotopy Type Theory is that we reserve that name for precategories where the
+[identity types](foundation-core.identity-types.md) of the type of objects are
+characterized by the
+[isomorphism sets](category-theory.isomorphisms-in-precategories.md).
 
 ## Definitions
 
@@ -304,7 +321,7 @@ module _
 - [Functors between precategories](category-theory.categories.md) are
   [structure](foundation.structure.md)-preserving maps of precategories.
 - [Large precategories](category-theory.large-precategories.md) are
-  precategories whose collection of objects form a large type.
+  precategories whose collections of objects and morphisms form large types.
 
 ## External links
 
