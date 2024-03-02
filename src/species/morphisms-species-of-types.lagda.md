@@ -115,12 +115,6 @@ module _
     comp-hom-species-types (comp-hom-species-types h g) f ＝
     comp-hom-species-types h (comp-hom-species-types g f)
   associative-comp-hom-species-types = refl
-
-  involutive-eq-associative-comp-hom-species-types :
-    comp-hom-species-types (comp-hom-species-types h g) f ＝ⁱ
-    comp-hom-species-types h (comp-hom-species-types g f)
-  involutive-eq-associative-comp-hom-species-types =
-    involutive-eq-eq associative-comp-hom-species-types
 ```
 
 ### Unit laws of composition

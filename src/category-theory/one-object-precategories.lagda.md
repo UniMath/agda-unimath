@@ -94,17 +94,9 @@ module _
   associative-comp-hom-one-object-precategory-Monoid =
     associative-mul-Monoid M
 
-  associative-composition-operation-one-object-precategory-Monoid :
-    associative-composition-operation-binary-family-Set
-      hom-set-one-object-precategory-Monoid
-  pr1 associative-composition-operation-one-object-precategory-Monoid =
-    comp-hom-one-object-precategory-Monoid
-  pr2 associative-composition-operation-one-object-precategory-Monoid h g f =
-    involutive-eq-eq (associative-comp-hom-one-object-precategory-Monoid h g f)
-
   id-hom-one-object-precategory-Monoid :
     (x : unit) → hom-one-object-precategory-Monoid x x
-  id-hom-one-object-precategory-Monoid star = unit-Monoid M
+  id-hom-one-object-precategory-Monoid _ = unit-Monoid M
 
   left-unit-law-comp-hom-one-object-precategory-Monoid :
     {x y : unit} (f : hom-one-object-precategory-Monoid x y) →
@@ -112,7 +104,7 @@ module _
       ( id-hom-one-object-precategory-Monoid y)
       ( f) ＝
     f
-  left-unit-law-comp-hom-one-object-precategory-Monoid {star} {star} =
+  left-unit-law-comp-hom-one-object-precategory-Monoid =
     left-unit-law-mul-Monoid M
 
   right-unit-law-comp-hom-one-object-precategory-Monoid :
@@ -121,28 +113,19 @@ module _
       ( f)
       ( id-hom-one-object-precategory-Monoid x) ＝
     f
-  right-unit-law-comp-hom-one-object-precategory-Monoid {star} {star} =
+  right-unit-law-comp-hom-one-object-precategory-Monoid =
     right-unit-law-mul-Monoid M
 
-  is-unital-composition-operation-one-object-precategory-Monoid :
-    is-unital-composition-operation-binary-family-Set
-      hom-set-one-object-precategory-Monoid
-      comp-hom-one-object-precategory-Monoid
-  pr1 is-unital-composition-operation-one-object-precategory-Monoid =
-    id-hom-one-object-precategory-Monoid
-  pr1 (pr2 is-unital-composition-operation-one-object-precategory-Monoid) =
-    left-unit-law-comp-hom-one-object-precategory-Monoid
-  pr2 (pr2 is-unital-composition-operation-one-object-precategory-Monoid) =
-    right-unit-law-comp-hom-one-object-precategory-Monoid
-
   precategory-one-object-precategory-Monoid : Precategory lzero l
-  pr1 precategory-one-object-precategory-Monoid = unit
-  pr1 (pr2 precategory-one-object-precategory-Monoid) =
-    hom-set-one-object-precategory-Monoid
-  pr1 (pr2 (pr2 precategory-one-object-precategory-Monoid)) =
-    associative-composition-operation-one-object-precategory-Monoid
-  pr2 (pr2 (pr2 precategory-one-object-precategory-Monoid)) =
-    is-unital-composition-operation-one-object-precategory-Monoid
+  precategory-one-object-precategory-Monoid =
+    make-Precategory
+      ( unit)
+      ( hom-set-one-object-precategory-Monoid)
+      ( comp-hom-one-object-precategory-Monoid)
+      ( id-hom-one-object-precategory-Monoid)
+      ( associative-comp-hom-one-object-precategory-Monoid)
+      ( left-unit-law-comp-hom-one-object-precategory-Monoid)
+      ( right-unit-law-comp-hom-one-object-precategory-Monoid)
 
   one-object-precategory-Monoid : One-Object-Precategory lzero l
   pr1 one-object-precategory-Monoid = precategory-one-object-precategory-Monoid

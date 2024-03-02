@@ -78,14 +78,6 @@ associative-comp-hom-representing-arrow-Category
   refl
 associative-comp-hom-representing-arrow-Category {false} h g f = refl
 
-associative-composition-operation-representing-arrow-Category :
-  associative-composition-operation-binary-family-Set
-    ( hom-set-representing-arrow-Category)
-pr1 associative-composition-operation-representing-arrow-Category {x} =
-  comp-hom-representing-arrow-Category {x}
-pr2 associative-composition-operation-representing-arrow-Category h g f =
-  involutive-eq-eq (associative-comp-hom-representing-arrow-Category h g f)
-
 id-hom-representing-arrow-Category :
   {x : obj-representing-arrow-Category} → hom-representing-arrow-Category x x
 id-hom-representing-arrow-Category {true} = star
@@ -109,24 +101,17 @@ right-unit-law-comp-hom-representing-arrow-Category :
 right-unit-law-comp-hom-representing-arrow-Category {true} {true} f = refl
 right-unit-law-comp-hom-representing-arrow-Category {false} f = refl
 
-is-unital-composition-operation-representing-arrow-Category :
-  is-unital-composition-operation-binary-family-Set
+representing-arrow-Precategory : Precategory lzero lzero
+representing-arrow-Precategory =
+  make-Precategory
+    ( obj-representing-arrow-Category)
     ( hom-set-representing-arrow-Category)
     ( λ {x} {y} {z} → comp-hom-representing-arrow-Category {x} {y} {z})
-pr1 is-unital-composition-operation-representing-arrow-Category x =
-  id-hom-representing-arrow-Category {x}
-pr1 (pr2 is-unital-composition-operation-representing-arrow-Category) =
-  left-unit-law-comp-hom-representing-arrow-Category
-pr2 (pr2 is-unital-composition-operation-representing-arrow-Category) =
-  right-unit-law-comp-hom-representing-arrow-Category
-
-representing-arrow-Precategory : Precategory lzero lzero
-pr1 representing-arrow-Precategory = obj-representing-arrow-Category
-pr1 (pr2 representing-arrow-Precategory) = hom-set-representing-arrow-Category
-pr1 (pr2 (pr2 representing-arrow-Precategory)) =
-  associative-composition-operation-representing-arrow-Category
-pr2 (pr2 (pr2 representing-arrow-Precategory)) =
-  is-unital-composition-operation-representing-arrow-Category
+    ( λ x → id-hom-representing-arrow-Category {x})
+    ( λ {x} {y} {z} {w} →
+      associative-comp-hom-representing-arrow-Category {x} {y} {z} {w})
+    ( λ {x} {y} → left-unit-law-comp-hom-representing-arrow-Category {x} {y})
+    ( λ {x} {y} → right-unit-law-comp-hom-representing-arrow-Category {x} {y})
 ```
 
 ### The representing arrow category

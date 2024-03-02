@@ -76,13 +76,6 @@ associative-comp-hom-terminal-Category :
   comp-hom-terminal-Category {x} h (comp-hom-terminal-Category {x} g f)
 associative-comp-hom-terminal-Category h g f = refl
 
-associative-composition-operation-terminal-Category :
-  associative-composition-operation-binary-family-Set hom-set-terminal-Category
-pr1 associative-composition-operation-terminal-Category =
-  comp-hom-terminal-Category
-pr2 associative-composition-operation-terminal-Category h g f =
-  involutive-eq-eq (associative-comp-hom-terminal-Category h g f)
-
 id-hom-terminal-Category :
   {x : obj-terminal-Category} → hom-terminal-Category x x
 id-hom-terminal-Category = star
@@ -99,24 +92,16 @@ right-unit-law-comp-hom-terminal-Category :
   comp-hom-terminal-Category {x} f (id-hom-terminal-Category {x}) ＝ f
 right-unit-law-comp-hom-terminal-Category f = refl
 
-is-unital-composition-operation-terminal-Category :
-  is-unital-composition-operation-binary-family-Set
-    ( hom-set-terminal-Category)
-    ( λ {x} {y} {z} → comp-hom-terminal-Category {x} {y} {z})
-pr1 is-unital-composition-operation-terminal-Category _ =
-  id-hom-terminal-Category
-pr1 (pr2 is-unital-composition-operation-terminal-Category) =
-  left-unit-law-comp-hom-terminal-Category
-pr2 (pr2 is-unital-composition-operation-terminal-Category) =
-  right-unit-law-comp-hom-terminal-Category
-
 terminal-Precategory : Precategory lzero lzero
-pr1 terminal-Precategory = obj-terminal-Category
-pr1 (pr2 terminal-Precategory) = hom-set-terminal-Category
-pr1 (pr2 (pr2 terminal-Precategory)) =
-  associative-composition-operation-terminal-Category
-pr2 (pr2 (pr2 terminal-Precategory)) =
-  is-unital-composition-operation-terminal-Category
+terminal-Precategory =
+  make-Precategory
+    ( obj-terminal-Category)
+    ( hom-set-terminal-Category)
+    ( comp-hom-terminal-Category)
+    ( λ x → id-hom-terminal-Category {x})
+    ( associative-comp-hom-terminal-Category)
+    ( left-unit-law-comp-hom-terminal-Category)
+    ( right-unit-law-comp-hom-terminal-Category)
 ```
 
 ### The terminal category

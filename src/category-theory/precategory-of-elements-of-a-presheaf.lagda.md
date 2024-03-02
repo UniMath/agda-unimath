@@ -110,22 +110,6 @@ module _
         ( comp-hom-precategory-of-elements-presheaf-Precategory g f))
       ( associative-comp-hom-Precategory C (pr1 h) (pr1 g) (pr1 f))
 
-  involutive-eq-associative-comp-hom-precategory-of-elements-presheaf-Precategory :
-    {X Y Z W : obj-precategory-of-elements-presheaf-Precategory} →
-    (h : hom-precategory-of-elements-presheaf-Precategory Z W)
-    (g : hom-precategory-of-elements-presheaf-Precategory Y Z)
-    (f : hom-precategory-of-elements-presheaf-Precategory X Y) →
-    comp-hom-precategory-of-elements-presheaf-Precategory
-      ( comp-hom-precategory-of-elements-presheaf-Precategory h g)
-      ( f) ＝ⁱ
-    comp-hom-precategory-of-elements-presheaf-Precategory
-      ( h)
-      ( comp-hom-precategory-of-elements-presheaf-Precategory g f)
-  involutive-eq-associative-comp-hom-precategory-of-elements-presheaf-Precategory
-    h g f =
-    involutive-eq-eq
-      ( associative-comp-hom-precategory-of-elements-presheaf-Precategory h g f)
-
   id-hom-precategory-of-elements-presheaf-Precategory :
     {X : obj-precategory-of-elements-presheaf-Precategory} →
     hom-precategory-of-elements-presheaf-Precategory X X
@@ -165,20 +149,15 @@ module _
       ( right-unit-law-comp-hom-Precategory C (pr1 f))
 
   precategory-of-elements-presheaf-Precategory : Precategory (l1 ⊔ l3) (l2 ⊔ l3)
-  pr1 precategory-of-elements-presheaf-Precategory =
-    obj-precategory-of-elements-presheaf-Precategory
-  pr1 (pr2 precategory-of-elements-presheaf-Precategory) =
-    hom-set-precategory-of-elements-presheaf-Precategory
-  pr1 (pr1 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) =
-    comp-hom-precategory-of-elements-presheaf-Precategory
-  pr2 (pr1 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) =
-    involutive-eq-associative-comp-hom-precategory-of-elements-presheaf-Precategory
-  pr1 (pr2 (pr2 (pr2 precategory-of-elements-presheaf-Precategory))) X =
-    id-hom-precategory-of-elements-presheaf-Precategory
-  pr1 (pr2 (pr2 (pr2 (pr2 precategory-of-elements-presheaf-Precategory)))) =
-    left-unit-law-comp-hom-precategory-of-elements-presheaf-Precategory
-  pr2 (pr2 (pr2 (pr2 (pr2 precategory-of-elements-presheaf-Precategory)))) =
-    right-unit-law-comp-hom-precategory-of-elements-presheaf-Precategory
+  precategory-of-elements-presheaf-Precategory =
+    make-Precategory
+      ( obj-precategory-of-elements-presheaf-Precategory)
+      ( hom-set-precategory-of-elements-presheaf-Precategory)
+      ( comp-hom-precategory-of-elements-presheaf-Precategory)
+      ( λ X → id-hom-precategory-of-elements-presheaf-Precategory {X})
+      ( associative-comp-hom-precategory-of-elements-presheaf-Precategory)
+      ( left-unit-law-comp-hom-precategory-of-elements-presheaf-Precategory)
+      ( right-unit-law-comp-hom-precategory-of-elements-presheaf-Precategory)
 ```
 
 ### The projection from the category of elements of a presheaf to the base category

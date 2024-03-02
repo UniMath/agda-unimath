@@ -108,12 +108,12 @@ make-Precategory :
   Precategory l1 l2
 make-Precategory
   obj hom-set _∘_ id assoc-comp-hom left-unit-comp-hom right-unit-comp-hom =
-  ( obj) ,
-  ( hom-set) ,
-  ( _∘_ , (λ h g f → involutive-eq-eq (assoc-comp-hom h g f))) ,
-  ( id) ,
-  ( left-unit-comp-hom) ,
-  ( right-unit-comp-hom)
+  ( ( obj) ,
+    ( hom-set) ,
+    ( _∘_ , (λ h g f → involutive-eq-eq (assoc-comp-hom h g f))) ,
+    ( id) ,
+    ( left-unit-comp-hom) ,
+    ( right-unit-comp-hom))
 {-# INLINE make-Precategory #-}
 
 module _

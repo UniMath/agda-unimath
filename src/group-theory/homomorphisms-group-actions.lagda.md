@@ -257,12 +257,6 @@ module _
         ( h)
         ( comp-hom-action-Group G X1 X2 X3 g f))
       ( refl-htpy)
-
-  involutive-eq-associative-comp-hom-action-Group :
-    comp-hom-action-Group G X1 X2 X4 (comp-hom-action-Group G X2 X3 X4 h g) f ＝ⁱ
-    comp-hom-action-Group G X1 X3 X4 h (comp-hom-action-Group G X1 X2 X3 g f)
-  involutive-eq-associative-comp-hom-action-Group =
-    involutive-eq-eq associative-comp-hom-action-Group
 ```
 
 ### Composition satisfies the left and right unit laws
