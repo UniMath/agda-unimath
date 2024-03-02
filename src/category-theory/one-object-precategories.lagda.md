@@ -14,9 +14,9 @@ open import category-theory.precategories
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.strictly-involutive-identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

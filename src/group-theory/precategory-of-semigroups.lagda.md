@@ -37,7 +37,8 @@ instance
   id-hom-Large-Precategory Semigroup-Large-Precategory
     {X = G} =
     id-hom-Semigroup G
-  involutive-eq-associative-comp-hom-Large-Precategory Semigroup-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory
+    Semigroup-Large-Precategory
     {X = G} {H} {K} {L} =
     involutive-eq-associative-comp-hom-Semigroup G H K L
   left-unit-law-comp-hom-Large-Precategory Semigroup-Large-Precategory

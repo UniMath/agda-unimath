@@ -143,7 +143,8 @@ module _
     transitive-leq-Large-Preorder P x y z
   id-hom-Large-Precategory large-precategory-Large-Preorder {X = x} =
     refl-leq-Large-Preorder P x
-  involutive-eq-associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
+  involutive-eq-associative-comp-hom-Large-Precategory
+    large-precategory-Large-Preorder
     {X = x} {W = w} h g f =
     involutive-eq-eq (eq-is-prop (is-prop-leq-Large-Preorder P x w))
   left-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder

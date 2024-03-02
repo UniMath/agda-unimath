@@ -82,16 +82,32 @@ associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} =
     ( Fin-Poset r)
     ( Fin-Poset s)
 
+involutive-eq-associative-comp-hom-augmented-simplex-Category :
+  {n m r s : obj-augmented-simplex-Category}
+  (h : hom-augmented-simplex-Category r s)
+  (g : hom-augmented-simplex-Category m r)
+  (f : hom-augmented-simplex-Category n m) →
+  comp-hom-augmented-simplex-Category {n} {m} {s}
+    ( comp-hom-augmented-simplex-Category {m} {r} {s} h g)
+    ( f) ＝ⁱ
+  comp-hom-augmented-simplex-Category {n} {r} {s}
+    ( h)
+    ( comp-hom-augmented-simplex-Category {n} {m} {r} g f)
+involutive-eq-associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} =
+  involutive-eq-associative-comp-hom-Poset
+    ( Fin-Poset n)
+    ( Fin-Poset m)
+    ( Fin-Poset r)
+    ( Fin-Poset s)
+
 associative-composition-operation-augmented-simplex-Category :
   associative-composition-operation-binary-family-Set
     hom-set-augmented-simplex-Category
 pr1 associative-composition-operation-augmented-simplex-Category {n} {m} {r} =
   comp-hom-augmented-simplex-Category {n} {m} {r}
-pr2
-      associative-composition-operation-augmented-simplex-Category
-        { n} {m} {r} {s} h g f =
-  eq-involutive-eq
-    ( associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} h g f)
+pr2 associative-composition-operation-augmented-simplex-Category
+  { n} {m} {r} {s} =
+  involutive-eq-associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s}
 
 id-hom-augmented-simplex-Category :
   (n : obj-augmented-simplex-Category) → hom-augmented-simplex-Category n n

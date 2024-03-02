@@ -46,9 +46,10 @@ module _
   pr2 (pr1 (pr1 (pr2 (pr2 product-Precategory))) (f' , g') (f , g)) =
     comp-hom-Precategory D g' g
   pr2 (pr1 (pr2 (pr2 product-Precategory))) (f'' , g'') (f' , g') (f , g) =
-    eq-pair -- !!
-      ( associative-comp-hom-Precategory C f'' f' f)
-      ( associative-comp-hom-Precategory D g'' g' g)
+    involutive-eq-eq
+      ( eq-pair
+        ( associative-comp-hom-Precategory C f'' f' f)
+        ( associative-comp-hom-Precategory D g'' g' g))
   pr1 (pr1 (pr2 (pr2 (pr2 product-Precategory))) (x , y)) =
     id-hom-Precategory C {x}
   pr2 (pr1 (pr2 (pr2 (pr2 product-Precategory))) (x , y)) =

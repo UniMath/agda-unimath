@@ -93,7 +93,8 @@ module _
   pr2
     associative-composition-operation-functor-precategory-Precategory
       { F} {G} {H} {I} h g f =
-    involutive-eq-associative-comp-hom-functor-precategory-Precategory {F} {G} {H} {I} h g f
+    involutive-eq-associative-comp-hom-functor-precategory-Precategory
+      { F} {G} {H} {I} h g f
 
   id-hom-functor-precategory-Precategory :
     (F : functor-Precategory C D) → natural-transformation-Precategory C D F F

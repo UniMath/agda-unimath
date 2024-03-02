@@ -83,12 +83,30 @@ associative-comp-hom-simplex-Category {n} {m} {r} {s} =
     ( Fin-Poset (succ-ℕ r))
     ( Fin-Poset (succ-ℕ s))
 
+involutive-eq-associative-comp-hom-simplex-Category :
+  {n m r s : obj-simplex-Category}
+  (h : hom-simplex-Category r s)
+  (g : hom-simplex-Category m r)
+  (f : hom-simplex-Category n m) →
+  comp-hom-simplex-Category {n} {m} {s}
+    ( comp-hom-simplex-Category {m} {r} {s} h g)
+    ( f) ＝ⁱ
+  comp-hom-simplex-Category {n} {r} {s}
+    ( h)
+    ( comp-hom-simplex-Category {n} {m} {r} g f)
+involutive-eq-associative-comp-hom-simplex-Category {n} {m} {r} {s} =
+  involutive-eq-associative-comp-hom-Poset
+    ( Fin-Poset (succ-ℕ n))
+    ( Fin-Poset (succ-ℕ m))
+    ( Fin-Poset (succ-ℕ r))
+    ( Fin-Poset (succ-ℕ s))
+
 associative-composition-operation-simplex-Category :
   associative-composition-operation-binary-family-Set hom-set-simplex-Category
 pr1 associative-composition-operation-simplex-Category {n} {m} {r} =
   comp-hom-simplex-Category {n} {m} {r}
-pr2 associative-composition-operation-simplex-Category {n} {m} {r} {s} h g f =
-  involutive-eq-eq (associative-comp-hom-simplex-Category h g f)
+pr2 associative-composition-operation-simplex-Category {n} {m} {r} {s} =
+  involutive-eq-associative-comp-hom-simplex-Category {n} {m} {r} {s}
 
 id-hom-simplex-Category : (n : obj-simplex-Category) → hom-simplex-Category n n
 id-hom-simplex-Category n = id-hom-Poset (Fin-Poset (succ-ℕ n))
