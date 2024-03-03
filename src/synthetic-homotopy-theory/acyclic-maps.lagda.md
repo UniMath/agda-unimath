@@ -493,8 +493,8 @@ module _
         ( is-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
           ( terminal-map B)
-          ( cone-product A B)
-          ( is-pullback-product A B)
+          ( cone-cartesian-product A B)
+          ( is-pullback-cartesian-product A B)
           ( is-acyclic-map-terminal-map-is-acyclic A ac-A)))
 ```
 

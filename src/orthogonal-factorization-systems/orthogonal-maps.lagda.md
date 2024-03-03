@@ -14,7 +14,10 @@ open import foundation.composition-algebra
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-pullbacks
+open import foundation.dependent-sums-pullbacks
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
@@ -26,7 +29,9 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
+open import foundation.postcomposition-pullbacks
 open import foundation.precomposition-functions
+open import foundation.products-pullbacks
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-function-types
@@ -59,7 +64,7 @@ The map `f : A → B` is said to be
    [lifting operation](orthogonal-factorization-systems.lifting-operations.md)
    between `f` and `g`.
 
-3. The following is a [pullback square](foundation.pullback-squares.md):
+3. The following is a [pullback](foundation.pullbacks.md) square:
 
    ```text
                 - ∘ f
@@ -427,7 +432,7 @@ module _
     universal-property-orthogonal-maps f g →
     universal-property-orthogonal-maps f (h ∘ g)
   up-orthogonal-right-comp =
-    up-pullback-rectangle-up-pullback-top
+    universal-property-pullback-rectangle-universal-property-pullback-top
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
@@ -459,7 +464,7 @@ module _
     universal-property-orthogonal-maps f (h ∘ g) →
     universal-property-orthogonal-maps f g
   up-orthogonal-right-right-factor =
-    up-pullback-top-up-pullback-rectangle
+    universal-property-pullback-top-universal-property-pullback-rectangle
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
@@ -519,7 +524,7 @@ module _
     universal-property-orthogonal-maps h g →
     universal-property-orthogonal-maps (h ∘ f) g
   up-orthogonal-left-comp =
-    up-pullback-rectangle-up-pullback-left-square
+    universal-property-pullback-rectangle-universal-property-pullback-left-square
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
@@ -551,7 +556,7 @@ module _
     universal-property-orthogonal-maps (h ∘ f) g →
     universal-property-orthogonal-maps h g
   up-orthogonal-left-left-factor =
-    up-pullback-left-square-up-pullback-rectangle
+    universal-property-pullback-left-square-universal-property-pullback-rectangle
       ( precomp h Y)
       ( precomp f Y)
       ( postcomp A g)
@@ -719,7 +724,7 @@ module _
       ( up-product)
       ( up-product)
       ( up-product)
-      ( is-pullback-product-is-pullback-pair
+      ( is-pullback-product-is-pullback
         ( precomp f Y)
         ( postcomp A g)
         ( precomp f Y')
@@ -904,7 +909,7 @@ module _
       ( universal-property-coproduct Y)
       ( universal-property-coproduct X)
       ( universal-property-coproduct Y)
-      ( is-pullback-product-is-pullback-pair
+      ( is-pullback-product-is-pullback
         ( precomp f Y)
         ( postcomp A g)
         ( precomp f' Y)

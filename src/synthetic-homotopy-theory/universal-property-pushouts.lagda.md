@@ -32,6 +32,7 @@ open import foundation.morphisms-span-diagrams
 open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.span-diagrams
+open import foundation.standard-pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.transposition-span-diagrams

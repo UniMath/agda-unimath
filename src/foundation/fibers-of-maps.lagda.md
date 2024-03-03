@@ -73,7 +73,7 @@ module _
     (u : unit) → fiber (terminal-map A) u ≃ A
   equiv-fiber-terminal-map u =
     right-unit-law-Σ-is-contr
-      ( λ a → is-prop-is-contr is-contr-unit (terminal-map A a) u)
+      ( λ a → is-prop-unit (terminal-map A a) u)
 
   inv-equiv-fiber-terminal-map :
     (u : unit) → A ≃ fiber (terminal-map A) u

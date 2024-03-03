@@ -282,7 +282,7 @@ module _
             ( ap
               ( inl)
               ( inv
-                ( inv-map-eq-transpose-equiv
+                ( map-inv-eq-transpose-equiv
                   ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (inr star))
                   ( refl))))) ,
           refl)
@@ -345,7 +345,7 @@ module _
             ( ap
               ( inr)
               ( inv
-                  ( inv-map-eq-transpose-equiv
+                  ( map-inv-eq-transpose-equiv
                     ( left-unit-law-Σ-is-contr is-contr-unit star)
                     ( refl))))) ,
           refl)

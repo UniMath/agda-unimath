@@ -225,6 +225,5 @@ is-contr-is-inhabited-is-prop {A = A} p h =
 - The notion of _nonempty types_ is treated in
   [`foundation.empty-types`](foundation.empty-types.md). In particular, every
   inhabited type is nonempty.
-
 - For the notion of _pointed types_, see
   [`structured-types.pointed-types`](structured-types.pointed-types.md).

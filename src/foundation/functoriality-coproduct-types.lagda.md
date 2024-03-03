@@ -547,7 +547,6 @@ module _
   [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.md).
 - The universal property of coproducts is treated in
   [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.md).
-
 - Functorial properties of cartesian product types are recorded in
   [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.md).
 - Functorial properties of dependent pair types are recorded in
