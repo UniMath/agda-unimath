@@ -580,7 +580,8 @@ pullback if and only if the back square is.
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  (bottom-left : X → Y) (bottom-right : Y → Z) (right : C → Z) (bottom-back : X → Z)
+  (bottom-left : X → Y) (bottom-right : Y → Z)
+  (right : C → Z) (bottom-back : X → Z)
   (c : cone bottom-right right B)
   (d : cone bottom-left (vertical-map-cone bottom-right right c) A)
   (e : cone bottom-back right A)
