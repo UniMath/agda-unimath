@@ -560,12 +560,12 @@ Given a coherent diagram of the form
 
 ```text
     ∙ ----------> ∙
-    | \         ∧ |
-    |   \     /   |
-    |     ∨ /     |
-    |      ∙ ⌟    |
-    |      |      |
-    ∨      |      ∨
+   | |\         ∧ |
+   | |  \     /   |
+   | |    ∨ /     |
+   | |     ∙ ⌟    |
+   | ∨     |      |
+   ∨       |      ∨
     ∙ ---- | ---> ∙
       \    |     ∧
         \  |   /
@@ -574,40 +574,58 @@ Given a coherent diagram of the form
 ```
 
 where the front right square is a pullback. Then the front left square is a
-pullback if and only if the back rectangle is.
+pullback if and only if the back square is.
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  (i : X → Y) (j : Y → Z) (h : C → Z) (k : X → Z)
-  (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) (e : cone k h A)
-  (H : coherence-triangle-maps k j i)
+  (bottom-left : X → Y) (bottom-right : Y → Z) (right : C → Z) (bottom-back : X → Z)
+  (c : cone bottom-right right B)
+  (d : cone bottom-left (vertical-map-cone bottom-right right c) A)
+  (e : cone bottom-back right A)
+  (bottom-triangle :
+    coherence-triangle-maps bottom-back bottom-right bottom-left)
   (K :
-    htpy-parallel-cone H (refl-htpy' h) e (pasting-horizontal-cone i j h c d))
+    htpy-parallel-cone bottom-triangle
+      ( refl-htpy' right)
+      ( e)
+      ( pasting-horizontal-cone bottom-left bottom-right right c d))
   where
 
   abstract
     is-pullback-left-square-is-pullback-rectangle-htpy :
-      is-pullback j h c →
-      is-pullback k h e →
-      is-pullback i (vertical-map-cone j h c) d
+      is-pullback bottom-right right c →
+      is-pullback bottom-back right e →
+      is-pullback bottom-left (vertical-map-cone bottom-right right c) d
     is-pullback-left-square-is-pullback-rectangle-htpy pb-c pb-e =
-      is-pullback-left-square-is-pullback-rectangle i j h c d
+      is-pullback-left-square-is-pullback-rectangle
+        ( bottom-left)
+        ( bottom-right)
+        ( right)
+        ( c)
+        ( d)
         ( pb-c)
-        ( is-pullback-htpy' H refl-htpy e K pb-e)
+        ( is-pullback-htpy' bottom-triangle refl-htpy e K pb-e)
 
     is-pullback-rectangle-is-pullback-left-square-htpy :
-      is-pullback j h c →
-      is-pullback i (vertical-map-cone j h c) d →
-      is-pullback k h e
+      is-pullback bottom-right right c →
+      is-pullback bottom-left (vertical-map-cone bottom-right right c) d →
+      is-pullback bottom-back right e
     is-pullback-rectangle-is-pullback-left-square-htpy pb-c pb-dc =
       is-pullback-htpy
-        ( H)
+        ( bottom-triangle)
         ( refl-htpy)
-        ( pasting-horizontal-cone i j h c d)
+        ( pasting-horizontal-cone bottom-left bottom-right right c d)
         ( K)
-        ( is-pullback-rectangle-is-pullback-left-square i j h c d pb-c pb-dc)
+        ( is-pullback-rectangle-is-pullback-left-square
+          ( bottom-left)
+          ( bottom-right)
+          ( right)
+          ( c)
+          ( d)
+          ( pb-c)
+          ( pb-dc))
 ```
 
 ### The vertical pullback homotopy pasting property
@@ -616,7 +634,7 @@ Given a coherent diagram of the form
 
 ```text
   ∙ ---------> ∙
-  |\           |\
+  |\ --------->|\
   | \          | \
   |  \         |  \
   |   ∨        |   ∨
@@ -625,7 +643,7 @@ Given a coherent diagram of the form
   |  /         |  /
   | /          | /
   ∨∨           ∨∨
-  ∙ ---------> ∙.
+  ∙ ---------> ∙
 ```
 
 where the bottom front square is a pullback square, then the top front square is
