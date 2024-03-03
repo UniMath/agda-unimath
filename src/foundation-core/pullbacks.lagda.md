@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -338,14 +339,14 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (i : X → Y) (j : Y → Z) (h : C → Z)
+  (c : cone j h B) (d : cone i (vertical-map-cone j h c) A)
   where
 
   abstract
     is-pullback-rectangle-is-pullback-left-square :
-      (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
       is-pullback j h c → is-pullback i (vertical-map-cone j h c) d →
       is-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d)
-    is-pullback-rectangle-is-pullback-left-square c d is-pb-c is-pb-d =
+    is-pullback-rectangle-is-pullback-left-square is-pb-c is-pb-d =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone (j ∘ i) h
         ( pasting-horizontal-cone i j h c d)
         ( λ x →
@@ -376,11 +377,10 @@ module _
 
   abstract
     is-pullback-left-square-is-pullback-rectangle :
-      (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
       is-pullback j h c →
       is-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d) →
       is-pullback i (vertical-map-cone j h c) d
-    is-pullback-left-square-is-pullback-rectangle c d is-pb-c is-pb-rect =
+    is-pullback-left-square-is-pullback-rectangle is-pb-c is-pb-rect =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone i
         ( vertical-map-cone j h c)
         ( d)
@@ -413,7 +413,7 @@ module _
 
 ### The vertical pullback pasting property
 
-Given a diagram as follows where the lower square is a pullback
+Given a diagram as follows where the bottom square is a pullback
 
 ```text
   ∙ -------> ∙
@@ -427,22 +427,22 @@ Given a diagram as follows where the lower square is a pullback
   ∙ -------> ∙,
 ```
 
-then the upper square is a pullback if and only if the composite square is.
+then the top square is a pullback if and only if the composite square is.
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (f : C → Z) (g : Y → Z) (h : X → Y)
+  (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A)
   where
 
   abstract
     is-pullback-top-is-pullback-rectangle :
-      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
       is-pullback (horizontal-map-cone f g c) h d
-    is-pullback-top-is-pullback-rectangle c d is-pb-c is-pb-dc =
+    is-pullback-top-is-pullback-rectangle is-pb-c is-pb-dc =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( horizontal-map-cone f g c)
         ( h)
@@ -496,11 +496,10 @@ module _
 
   abstract
     is-pullback-rectangle-is-pullback-top :
-      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback (horizontal-map-cone f g c) h d →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
-    is-pullback-rectangle-is-pullback-top c d is-pb-c is-pb-d =
+    is-pullback-rectangle-is-pullback-top is-pb-c is-pb-d =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( f)
         ( g ∘ h)
@@ -553,6 +552,60 @@ module _
                   ( d)
                   ( is-pb-d)
                   ( pr1 t))))
+```
+
+### The vertical pullback homotopy pasting property
+
+Given a coherent diagram of the form
+
+```text
+  ∙ ---------> ∙
+  |\           |\
+  | \          | \
+  |  \         |  \
+  |   ∨        |   ∨
+  |    ∙ ---------> ∙
+  |   /  ⌟     |   /
+  |  /         |  /
+  | /          | /
+  ∨∨           ∨∨
+  ∙ ---------> ∙.
+```
+
+where the bottom front square is a pullback square, then the top front square is
+a pullback if and only if the back rectangle is.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (f : C → Z) (g : Y → Z) (h : X → Y) (i : X → Z)
+  (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) (e : cone f i A)
+  (H : coherence-triangle-maps i g h)
+  (K : htpy-parallel-cone (refl-htpy' f) H e (pasting-vertical-cone f g h c d))
+  where
+
+  abstract
+    is-pullback-top-square-is-pullback-rectangle-htpy :
+      is-pullback f g c →
+      is-pullback f i e →
+      is-pullback (horizontal-map-cone f g c) h d
+    is-pullback-top-square-is-pullback-rectangle-htpy is-pb-c is-pb-e =
+      is-pullback-top-is-pullback-rectangle f g h c d
+        ( is-pb-c)
+        ( is-pullback-htpy' refl-htpy H e K is-pb-e)
+
+    is-pullback-rectangle-is-pullback-top-square-htpy :
+      is-pullback f g c →
+      is-pullback (horizontal-map-cone f g c) h d →
+      is-pullback f i e
+    is-pullback-rectangle-is-pullback-top-square-htpy is-pb-c is-pb-dc =
+      is-pullback-htpy
+        ( refl-htpy)
+        ( H)
+        ( pasting-vertical-cone f g h c d)
+        ( K)
+        ( is-pullback-rectangle-is-pullback-top f g h c d is-pb-c is-pb-dc)
 ```
 
 ### Pullbacks can be "folded"
