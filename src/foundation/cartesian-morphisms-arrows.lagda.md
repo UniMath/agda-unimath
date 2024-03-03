@@ -144,6 +144,19 @@ module _
 
 ## Properties
 
+### Cartesian morphisms of arrows arising from standard pullbacks
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
+  where
+
+  standard-pullback-cartesian-hom-arrow :
+    cartesian-hom-arrow vertical-map-standard-pullback g
+  standard-pullback-cartesian-hom-arrow =
+    ( hom-arrow-cone f g (cone-standard-pullback f g) , is-equiv-id)
+```
+
 ### Cartesian morphisms of arrows arising from fibers
 
 ```agda
@@ -334,11 +347,11 @@ module _
   (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
   where
 
-  is-cartesian-comp-hom-arrow :
+  is-cartesian-hom-arrow-comp :
     is-cartesian-hom-arrow g h b →
     is-cartesian-hom-arrow f g a →
     is-cartesian-hom-arrow f h (comp-hom-arrow f g h b a)
-  is-cartesian-comp-hom-arrow =
+  is-cartesian-hom-arrow-comp =
     is-pullback-rectangle-is-pullback-left-square
       ( map-codomain-hom-arrow f g a)
       ( map-codomain-hom-arrow g h b)
@@ -358,7 +371,7 @@ module _
     ( ( comp-hom-arrow f g h
         ( hom-arrow-cartesian-hom-arrow g h b)
         ( hom-arrow-cartesian-hom-arrow f g a)) ,
-      ( is-cartesian-comp-hom-arrow f g h
+      ( is-cartesian-hom-arrow-comp f g h
         ( hom-arrow-cartesian-hom-arrow g h b)
         ( hom-arrow-cartesian-hom-arrow f g a)
         ( is-cartesian-cartesian-hom-arrow g h b)
@@ -374,11 +387,11 @@ module _
   (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
   where
 
-  is-cartesian-right-factor-hom-arrow :
+  is-cartesian-hom-arrow-right-factor :
     is-cartesian-hom-arrow g h b →
     is-cartesian-hom-arrow f h (comp-hom-arrow f g h b a) →
     is-cartesian-hom-arrow f g a
-  is-cartesian-right-factor-hom-arrow =
+  is-cartesian-hom-arrow-right-factor =
     is-pullback-left-square-is-pullback-rectangle
       ( map-codomain-hom-arrow f g a)
       ( map-codomain-hom-arrow g h b)
@@ -408,7 +421,7 @@ module _
         ( comp-hom-arrow f g h right top)
         ( left)
         ( H)
-        ( is-cartesian-comp-hom-arrow f g h right top R T)
+        ( is-cartesian-hom-arrow-comp f g h right top R T)
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -454,7 +467,7 @@ module _
       is-cartesian-hom-arrow f h left →
       is-cartesian-hom-arrow f g top
     is-cartesian-top-hom-arrow-triangle' H R L =
-      is-cartesian-right-factor-hom-arrow f g h right top R
+      is-cartesian-hom-arrow-right-factor f g h right top R
         ( is-cartesian-hom-arrow-htpy-hom-arrow f h
           ( left)
           ( comp-hom-arrow f g h right top)
@@ -737,10 +750,10 @@ module _
       ( λ x → (f x , map-domain-hom-arrow f g α x))
       ( diagonal Y)
   transpose-fold-hom-arrow =
-      hom-arrow-cone
-        ( map-product (map-codomain-hom-arrow f g α) g)
-        ( diagonal Y)
-        ( fold-cone (map-codomain-hom-arrow f g α) g (cone-hom-arrow f g α))
+    hom-arrow-cone
+      ( map-product (map-codomain-hom-arrow f g α) g)
+      ( diagonal Y)
+      ( fold-cone (map-codomain-hom-arrow f g α) g (cone-hom-arrow f g α))
 
   fold-hom-arrow :
     hom-arrow
@@ -918,13 +931,8 @@ module _
               ( pr2 β)
               ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow)))
           ( ap-concat-htpy'
-            ( ( coh-cartesian-hom-arrow g h β) ·r
-              ( gap-is-pullback
-                ( map-codomain-cartesian-hom-arrow g h β)
-                ( h)
-                ( cone-cartesian-hom-arrow g h β)
-                ( pr2 β)
-                ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow)))
+            ( coh-cartesian-hom-arrow g h β ·r
+              map-domain-hom-arrow-lift-map-codomain-cartesian-hom-arrow)
             ( left-whisker-inv-htpy
               ( map-codomain-cartesian-hom-arrow g h β)
               ( htpy-vertical-map-gap-is-pullback
@@ -942,13 +950,8 @@ module _
                 ( cone-cartesian-hom-arrow g h β)
                 ( pr2 β)
                 ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow))))
-          ( ( coh-cartesian-hom-arrow g h β) ·r
-            ( gap-is-pullback
-              ( map-codomain-cartesian-hom-arrow g h β)
-              ( h)
-              ( cone-cartesian-hom-arrow g h β)
-              ( pr2 β)
-              ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow)))
+          ( coh-cartesian-hom-arrow g h β ·r
+            map-domain-hom-arrow-lift-map-codomain-cartesian-hom-arrow)
           ( ( h) ·l
             ( htpy-horizontal-map-gap-is-pullback
               ( map-codomain-cartesian-hom-arrow g h β)
@@ -965,13 +968,8 @@ module _
               ( pr2 β)
               ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow)))
           ( H ·r f ∙h coh-hom-arrow f h α)
-          ( ( coh-cartesian-hom-arrow g h β) ·r
-            ( gap-is-pullback
-              ( map-codomain-cartesian-hom-arrow g h β)
-              ( h)
-              ( cone-cartesian-hom-arrow g h β)
-              ( is-cartesian-cartesian-hom-arrow g h β)
-              ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow)) ∙h
+          ( ( coh-cartesian-hom-arrow g h β ·r
+              map-domain-hom-arrow-lift-map-codomain-cartesian-hom-arrow) ∙h
             ( h) ·l
             ( htpy-horizontal-map-gap-is-pullback
               ( map-codomain-cartesian-hom-arrow g h β)

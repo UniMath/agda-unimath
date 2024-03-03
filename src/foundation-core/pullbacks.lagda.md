@@ -183,6 +183,18 @@ module _
 
 ## Properties
 
+### The standard pullbacks are pullbacks
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  is-pullback-standard-pullback : is-pullback f g (cone-standard-pullback f g)
+  is-pullback-standard-pullback = is-equiv-id
+```
+
 ### Pullbacks are preserved under homotopies of parallel cones
 
 ```agda
