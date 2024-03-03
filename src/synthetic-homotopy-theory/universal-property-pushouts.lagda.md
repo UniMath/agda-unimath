@@ -26,6 +26,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universal-property-equivalences

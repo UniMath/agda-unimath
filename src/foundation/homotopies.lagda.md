@@ -218,11 +218,11 @@ module _
   pr2 (compute-dependent-identification-eq-value p q r) =
     is-equiv-map-compute-dependent-identification-eq-value p q r
 
-  inv-map-compute-dependent-identification-eq-value :
+  map-inv-compute-dependent-identification-eq-value :
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
     dependent-identification (eq-value f g) p q r →
     coherence-square-identifications (ap (tr B p) q) (apd f p) (apd g p) r
-  inv-map-compute-dependent-identification-eq-value p q r =
+  map-inv-compute-dependent-identification-eq-value p q r =
     map-inv-equiv (compute-dependent-identification-eq-value p q r)
 ```
 
@@ -252,11 +252,11 @@ module _
   pr2 (compute-dependent-identification-eq-value-function p q r) =
     is-equiv-map-compute-dependent-identification-eq-value-function p q r
 
-  inv-map-compute-dependent-identification-eq-value-function :
+  map-inv-compute-dependent-identification-eq-value-function :
     {x y : A} (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
     dependent-identification (eq-value f g) p q r →
     coherence-square-identifications q (ap f p) (ap g p) r
-  inv-map-compute-dependent-identification-eq-value-function p q r =
+  map-inv-compute-dependent-identification-eq-value-function p q r =
     map-inv-equiv (compute-dependent-identification-eq-value-function p q r)
 ```
 
