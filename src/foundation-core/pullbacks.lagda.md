@@ -595,7 +595,7 @@ module _
     is-pullback-left-square-is-pullback-rectangle-htpy pb-c pb-e =
       is-pullback-left-square-is-pullback-rectangle i j h c d
         ( pb-c)
-        ( is-pullback-htpy' H refl-htpy  e K pb-e)
+        ( is-pullback-htpy' H refl-htpy e K pb-e)
 
     is-pullback-rectangle-is-pullback-left-square-htpy :
       is-pullback j h c →
