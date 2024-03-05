@@ -292,11 +292,32 @@ module _
       ( refl-pointed-htpy (h ∘∗ f))
       ( htpy-compute-refl-right-whisker-pointed-htpy)
   coherence-point-compute-refl-right-whisker-pointed-htpy =
-    ?
+    inv
+      ( ( right-unit) ∙
+        ( ( ap
+            ( λ t →
+              vertical-pasting-coherence-square-coherence-triangle-identifications
+                ( refl)
+                ( ap (map-pointed-map h) (preserves-point-pointed-map f))
+                ( ap (map-pointed-map h) (preserves-point-pointed-map f))
+                ( refl)
+                ( preserves-point-pointed-map h)
+                ( preserves-point-pointed-map h)
+                ( t)
+                ( refl))
+            ( inv-nat-refl-htpy
+              ( map-pointed-map h)
+              ( preserves-point-pointed-map f))) ∙
+          ( right-whisker-concat-horizontal-refl-coherence-square-identifications
+            ( ap (map-pointed-map h) (preserves-point-pointed-map f))
+            ( preserves-point-pointed-map h))))
 
   compute-refl-right-whisker-pointed-htpy :
     pointed-2-htpy
       ( right-whisker-pointed-htpy h h (refl-pointed-htpy h) f)
       ( refl-pointed-htpy (h ∘∗ f))
-  compute-refl-right-whisker-pointed-htpy = {!!}
+  pr1 compute-refl-right-whisker-pointed-htpy =
+    htpy-compute-refl-right-whisker-pointed-htpy
+  pr2 compute-refl-right-whisker-pointed-htpy =
+    coherence-point-compute-refl-right-whisker-pointed-htpy
 ```
