@@ -76,7 +76,7 @@ transitive-leq-ℤ k l m p q =
       ( q)
       ( p))
 
-decide-leq-ℤ : {x y : ℤ} → leq-ℤ x y + leq-ℤ y x
+decide-leq-ℤ : {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
 decide-leq-ℤ {x} {y} =
   map-coproduct
     ( λ H →
