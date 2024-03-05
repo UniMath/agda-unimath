@@ -49,11 +49,15 @@ subtype-nonpositive-ℤ (inl k) = unit-Prop
 subtype-nonpositive-ℤ (inr (inl x)) = unit-Prop
 subtype-nonpositive-ℤ (inr (inr x)) = empty-Prop
 
-*is-nonpositive-ℤ : ℤ → UU lzero
-*is-nonpositive-ℤ = is-in-subtype subtype-nonpositive-ℤ
+is-nonpositive-ℤ : ℤ → UU lzero
+is-nonpositive-ℤ = is-in-subtype subtype-nonpositive-ℤ
 
 nonpositive-ℤ : UU lzero
 nonpositive-ℤ = type-subtype subtype-nonpositive-ℤ
+
+is-nonpositive-eq-ℤ :
+  {x y : ℤ} → x ＝ y → is-nonpositive-ℤ x → is-nonpositive-ℤ y
+is-nonpositive-eq-ℤ {x} refl = id
 
 module _
   (p : nonpositive-ℤ)
@@ -62,7 +66,7 @@ module _
   int-nonpositive-ℤ : ℤ
   int-nonpositive-ℤ = pr1 p
 
-  is-nonpositive-int-nonpositive-ℤ : *is-nonpositive-ℤ int-nonpositive-ℤ
+  is-nonpositive-int-nonpositive-ℤ : is-nonpositive-ℤ int-nonpositive-ℤ
   is-nonpositive-int-nonpositive-ℤ = pr2 p
 ```
 
@@ -81,13 +85,13 @@ neg-one-nonpositive-ℤ = neg-one-ℤ , star
 ### The predecessor of a nonpositive integer is nonpositive
 
 ```agda
-is-nonpositive-pred-nonpositive-ℤ :
-  (x : ℤ) → *is-nonpositive-ℤ x → *is-nonpositive-ℤ (pred-ℤ x)
-is-nonpositive-pred-nonpositive-ℤ (inl x) H = H
-is-nonpositive-pred-nonpositive-ℤ (inr (inl x)) H = H
+is-nonpositive-pred-is-nonpositive-ℤ :
+  (x : ℤ) → is-nonpositive-ℤ x → is-nonpositive-ℤ (pred-ℤ x)
+is-nonpositive-pred-is-nonpositive-ℤ (inl x) H = H
+is-nonpositive-pred-is-nonpositive-ℤ (inr (inl x)) H = H
 
 pred-nonpositive-ℤ : nonpositive-ℤ → nonpositive-ℤ
-pred-nonpositive-ℤ (x , H) = pred-ℤ x , is-nonpositive-pred-nonpositive-ℤ x H
+pred-nonpositive-ℤ (x , H) = pred-ℤ x , is-nonpositive-pred-is-nonpositive-ℤ x H
 ```
 
 ### The canonical equivalence between natural numbers and positive integers

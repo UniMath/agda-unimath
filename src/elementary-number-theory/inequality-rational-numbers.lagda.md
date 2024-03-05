@@ -14,6 +14,10 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -221,14 +225,16 @@ decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
 decide-le-leq-ℚ x y =
   map-coproduct
     ( id)
-    ( is-nonnegative-eq-ℤ
-      ( skew-commutative-cross-mul-diff-fraction-ℤ
-        ( fraction-ℚ x)
-        ( fraction-ℚ y)))
-    ( decide-is-positive-ℤ
-      { cross-mul-diff-fraction-ℤ
-        ( fraction-ℚ x)
-        ( fraction-ℚ y)})
+    ( λ H →
+      is-nonnegative-eq-ℤ
+        ( skew-commutative-cross-mul-diff-fraction-ℤ
+          ( fraction-ℚ x)
+          ( fraction-ℚ y))
+        ( is-nonnegative-neg-is-nonnpositive-ℤ
+          ( cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
+          ( H)))
+    ( decide-is-positive-is-nonpositive-ℤ
+      ( cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
 ```
 
 It remains to fully formalize that strict inequality is decidable.

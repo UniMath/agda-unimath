@@ -14,6 +14,8 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types

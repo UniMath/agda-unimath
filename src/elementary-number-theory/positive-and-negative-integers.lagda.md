@@ -50,7 +50,7 @@ integers
 
 ```agda
 is-zero-is-nonnegative-is-nonpositive-ℤ :
-  (x : ℤ) → *is-nonnegative-ℤ x → *is-nonpositive-ℤ x → is-zero-ℤ x
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonpositive-ℤ x → is-zero-ℤ x
 is-zero-is-nonnegative-is-nonpositive-ℤ (inr (inl x)) H K = refl
 ```
 
@@ -60,7 +60,7 @@ is-zero-is-nonnegative-is-nonpositive-ℤ (inr (inl x)) H K = refl
 
 ```agda
 decide-sign-nonzero-ℤ :
-  (x : ℤ) → x ≠ zero-ℤ → is-negative-ℤ x + *is-positive-ℤ x
+  (x : ℤ) → x ≠ zero-ℤ → is-negative-ℤ x + is-positive-ℤ x
 decide-sign-nonzero-ℤ (inl x) H = inl star
 decide-sign-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
 decide-sign-nonzero-ℤ (inr (inr x)) H = inr star
@@ -70,7 +70,7 @@ decide-sign-nonzero-ℤ (inr (inr x)) H = inr star
 
 ```agda
 decide-is-positive-is-nonpositive-ℤ :
-  (x : ℤ) → *is-positive-ℤ x + *is-nonpositive-ℤ x
+  (x : ℤ) → is-positive-ℤ x + is-nonpositive-ℤ x
 decide-is-positive-is-nonpositive-ℤ (inl x) = inr star
 decide-is-positive-is-nonpositive-ℤ (inr (inl x)) = inr star
 decide-is-positive-is-nonpositive-ℤ (inr (inr x)) = inl star
@@ -80,9 +80,23 @@ decide-is-positive-is-nonpositive-ℤ (inr (inr x)) = inl star
 
 ```agda
 decide-is-negative-is-nonnegative-ℤ :
-  (x : ℤ) → is-negative-ℤ x + *is-nonnegative-ℤ x
+  (x : ℤ) → is-negative-ℤ x + is-nonnegative-ℤ x
 decide-is-negative-is-nonnegative-ℤ (inl x) = inl star
 decide-is-negative-is-nonnegative-ℤ (inr x) = inr star
+```
+
+Legacy :
+
+```agda
+decide-is-nonnegative-ℤ :
+  {x : ℤ} → (is-nonnegative-ℤ x) + (is-nonnegative-ℤ (neg-ℤ x))
+decide-is-nonnegative-ℤ {inl x} = inr star
+decide-is-nonnegative-ℤ {inr x} = inl star
+
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
+  refl
 ```
 
 ### Transitivity properties
@@ -90,14 +104,14 @@ decide-is-negative-is-nonnegative-ℤ (inr x) = inr star
 #### Positive integers are nonnegative
 
 ```agda
-*is-nonnegative-is-positive-ℤ : (x : ℤ) → *is-positive-ℤ x → *is-nonnegative-ℤ x
-*is-nonnegative-is-positive-ℤ (inr (inr x)) H = H
+is-nonnegative-is-positive-ℤ : (x : ℤ) → is-positive-ℤ x → is-nonnegative-ℤ x
+is-nonnegative-is-positive-ℤ (inr (inr x)) H = H
 ```
 
 #### Negative integers are nonpositive
 
 ```agda
-is-nonpositive-is-negative-ℤ : (x : ℤ) → is-negative-ℤ x → *is-nonpositive-ℤ x
+is-nonpositive-is-negative-ℤ : (x : ℤ) → is-negative-ℤ x → is-nonpositive-ℤ x
 is-nonpositive-is-negative-ℤ (inl x) H = H
 ```
 
@@ -106,19 +120,19 @@ is-nonpositive-is-negative-ℤ (inl x) H = H
 #### The successor of a nonnegative integer is positive
 
 ```agda
-*is-positive-succ-nonnegative-ℤ :
-  (x : ℤ) → *is-nonnegative-ℤ x → *is-positive-ℤ (succ-ℤ x)
-*is-positive-succ-nonnegative-ℤ (inr (inl x)) H = H
-*is-positive-succ-nonnegative-ℤ (inr (inr x)) H = H
+is-positive-succ-is-nonnegative-ℤ :
+  (x : ℤ) → is-nonnegative-ℤ x → is-positive-ℤ (succ-ℤ x)
+is-positive-succ-is-nonnegative-ℤ (inr (inl x)) H = H
+is-positive-succ-is-nonnegative-ℤ (inr (inr x)) H = H
 ```
 
 #### The successor of a negative integer is nonpositive
 
 ```agda
-is-non-positive-succ-negative-ℤ :
-  (x : ℤ) → is-negative-ℤ x → *is-nonpositive-ℤ (succ-ℤ x)
-is-non-positive-succ-negative-ℤ (inl zero-ℕ) H = H
-is-non-positive-succ-negative-ℤ (inl (succ-ℕ x)) H = H
+is-nonpositive-succ-is-negative-ℤ :
+  (x : ℤ) → is-negative-ℤ x → is-nonpositive-ℤ (succ-ℤ x)
+is-nonpositive-succ-is-negative-ℤ (inl zero-ℕ) H = H
+is-nonpositive-succ-is-negative-ℤ (inl (succ-ℕ x)) H = H
 ```
 
 ### Relations with `pred-ℤ`
@@ -126,19 +140,19 @@ is-non-positive-succ-negative-ℤ (inl (succ-ℕ x)) H = H
 #### The predecessor of a positive integer is nonnegative
 
 ```agda
-is-nonnegative-pred-positive-ℤ :
-  (x : ℤ) → *is-positive-ℤ x → *is-nonnegative-ℤ (pred-ℤ x)
-is-nonnegative-pred-positive-ℤ (inr (inr zero-ℕ)) H = H
-is-nonnegative-pred-positive-ℤ (inr (inr (succ-ℕ x))) H = H
+is-nonnegative-pred-is-positive-ℤ :
+  (x : ℤ) → is-positive-ℤ x → is-nonnegative-ℤ (pred-ℤ x)
+is-nonnegative-pred-is-positive-ℤ (inr (inr zero-ℕ)) H = H
+is-nonnegative-pred-is-positive-ℤ (inr (inr (succ-ℕ x))) H = H
 ```
 
 #### The predecessor of a nonnpositive integer is negative
 
 ```agda
-is-negative-pred-nonpositive-ℤ :
-  (x : ℤ) → *is-nonpositive-ℤ x → is-negative-ℤ (pred-ℤ x)
-is-negative-pred-nonpositive-ℤ (inl x) H = H
-is-negative-pred-nonpositive-ℤ (inr (inl x)) H = H
+is-negative-pred-is-nonpositive-ℤ :
+  (x : ℤ) → is-nonpositive-ℤ x → is-negative-ℤ (pred-ℤ x)
+is-negative-pred-is-nonpositive-ℤ (inl x) H = H
+is-negative-pred-is-nonpositive-ℤ (inr (inl x)) H = H
 ```
 
 ### Relations with `neg-ℤ`
@@ -147,7 +161,7 @@ is-negative-pred-nonpositive-ℤ (inr (inl x)) H = H
 
 ```agda
 is-nonpositive-neg-is-nonnegative-ℤ :
-  (x : ℤ) → *is-nonnegative-ℤ x → *is-nonpositive-ℤ (neg-ℤ x)
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonpositive-ℤ (neg-ℤ x)
 is-nonpositive-neg-is-nonnegative-ℤ (inr (inl x)) H = H
 is-nonpositive-neg-is-nonnegative-ℤ (inr (inr x)) H = H
 ```
@@ -155,17 +169,17 @@ is-nonpositive-neg-is-nonnegative-ℤ (inr (inr x)) H = H
 #### The negative of a nonpositive integer is nonnegative
 
 ```agda
-is-nonnegative-is-nonnpositive-neg-ℤ :
-  (x : ℤ) → *is-nonpositive-ℤ x → *is-nonnegative-ℤ (neg-ℤ x)
-is-nonnegative-is-nonnpositive-neg-ℤ (inl x) H = H
-is-nonnegative-is-nonnpositive-neg-ℤ (inr (inl x)) H = H
+is-nonnegative-neg-is-nonnpositive-ℤ :
+  (x : ℤ) → is-nonpositive-ℤ x → is-nonnegative-ℤ (neg-ℤ x)
+is-nonnegative-neg-is-nonnpositive-ℤ (inl x) H = H
+is-nonnegative-neg-is-nonnpositive-ℤ (inr (inl x)) H = H
 ```
 
 #### The negative of a positive integer is negative
 
 ```agda
 is-negative-neg-is-positive-ℤ :
-  (x : ℤ) → *is-positive-ℤ x → is-negative-ℤ (neg-ℤ x)
+  (x : ℤ) → is-positive-ℤ x → is-negative-ℤ (neg-ℤ x)
 is-negative-neg-is-positive-ℤ (inr (inr x)) H = H
 ```
 
@@ -173,7 +187,7 @@ is-negative-neg-is-positive-ℤ (inr (inr x)) H = H
 
 ```agda
 is-positive-neg-is-negative-ℤ :
-  (x : ℤ) → is-negative-ℤ x → *is-positive-ℤ (neg-ℤ x)
+  (x : ℤ) → is-negative-ℤ x → is-positive-ℤ (neg-ℤ x)
 is-positive-neg-is-negative-ℤ (inl x) H = H
 ```
 
@@ -183,13 +197,13 @@ is-positive-neg-is-negative-ℤ (inl x) H = H
 
 ```agda
 not-is-positive-is-nonpositive-ℤ :
-  (x : ℤ) → *is-nonpositive-ℤ x → ¬ (*is-positive-ℤ x)
+  (x : ℤ) → is-nonpositive-ℤ x → ¬ (is-positive-ℤ x)
 not-is-positive-is-nonpositive-ℤ (inr (inl x)) _ q = q
 not-is-positive-is-nonpositive-ℤ (inr (inr x)) p _ = p
 
-*is-nonpositive-not-is-positive-ℤ :
-  (x : ℤ) → ¬ (*is-positive-ℤ x) → *is-nonpositive-ℤ x
-*is-nonpositive-not-is-positive-ℤ x H with decide-is-positive-is-nonpositive-ℤ x
+is-nonpositive-not-is-positive-ℤ :
+  (x : ℤ) → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
+is-nonpositive-not-is-positive-ℤ x H with decide-is-positive-is-nonpositive-ℤ x
 ... | inl K = ex-falso (H K)
 ... | inr K = K
 ```
@@ -198,7 +212,7 @@ not-is-positive-is-nonpositive-ℤ (inr (inr x)) p _ = p
 
 ```agda
 not-is-negative-is-nonnegative-ℤ :
-  (x : ℤ) → *is-nonnegative-ℤ x → ¬ (is-negative-ℤ x)
+  (x : ℤ) → is-nonnegative-ℤ x → ¬ (is-negative-ℤ x)
 not-is-negative-is-nonnegative-ℤ x H K =
   not-is-positive-is-nonpositive-ℤ
     ( neg-ℤ x)
@@ -206,7 +220,7 @@ not-is-negative-is-nonnegative-ℤ x H K =
     ( is-positive-neg-is-negative-ℤ x K)
 
 is-nonnegative-not-is-negative-ℤ :
-  (x : ℤ) → ¬ (is-negative-ℤ x) → *is-nonnegative-ℤ x
+  (x : ℤ) → ¬ (is-negative-ℤ x) → is-nonnegative-ℤ x
 is-nonnegative-not-is-negative-ℤ x H with decide-is-negative-is-nonnegative-ℤ x
 ... | inl K = ex-falso (H K)
 ... | inr K = K

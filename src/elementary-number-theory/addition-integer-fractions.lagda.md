@@ -32,7 +32,7 @@ pr1 (add-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos)) =
 pr1 (pr2 (add-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos))) =
   n *ℤ n'
 pr2 (pr2 (add-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos))) =
-  is-positive-mul-ℤ n-pos n'-pos
+  is-positive-mul-ℤ {n} n-pos n'-pos
 
 add-fraction-ℤ' : fraction-ℤ → fraction-ℤ → fraction-ℤ
 add-fraction-ℤ' x y = add-fraction-ℤ y x

@@ -12,6 +12,11 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.negative-integers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -32,7 +37,7 @@ open import foundation.universe-levels
 
 ```agda
 leq-ℤ-Prop : ℤ → ℤ → Prop lzero
-leq-ℤ-Prop x y = is-nonnegative-ℤ-Prop (y -ℤ x)
+leq-ℤ-Prop x y = subtype-nonnegative-ℤ (y -ℤ x)
 
 leq-ℤ : ℤ → ℤ → UU lzero
 leq-ℤ x y = type-Prop (leq-ℤ-Prop x y)
@@ -53,8 +58,13 @@ refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
 antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
 antisymmetric-leq-ℤ {x} {y} H K =
   eq-diff-ℤ
-    ( is-zero-is-nonnegative-ℤ K
-      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
+    ( is-zero-is-nonnegative-is-nonpositive-ℤ
+        ( x -ℤ y)
+        ( K)
+        ( tr
+          ( is-nonpositive-ℤ)
+          ( distributive-neg-diff-ℤ y x)
+          ( is-nonpositive-neg-is-nonnegative-ℤ (y -ℤ x) H)))
 
 transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
 transitive-leq-ℤ k l m p q =
@@ -66,13 +76,17 @@ transitive-leq-ℤ k l m p q =
       ( q)
       ( p))
 
-decide-leq-ℤ :
-  {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
+decide-leq-ℤ : {x y : ℤ} → leq-ℤ x y + leq-ℤ y x
 decide-leq-ℤ {x} {y} =
   map-coproduct
+    ( λ H →
+      is-nonnegative-is-positive-ℤ
+        ( y -ℤ x)
+        ( is-positive-eq-ℤ
+          ( distributive-neg-diff-ℤ x y)
+          ( is-positive-neg-is-negative-ℤ (x -ℤ y) H)))
     ( id)
-    ( is-nonnegative-eq-ℤ (distributive-neg-diff-ℤ y x))
-    ( decide-is-nonnegative-ℤ {y -ℤ x})
+    ( decide-is-negative-is-nonnegative-ℤ (x -ℤ y))
 
 succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
 succ-leq-ℤ k =
@@ -102,7 +116,7 @@ concatenate-eq-leq-ℤ y refl H = H
 
 ```agda
 le-ℤ-Prop : ℤ → ℤ → Prop lzero
-le-ℤ-Prop x y = is-positive-ℤ-Prop (y -ℤ x)
+le-ℤ-Prop x y = subtype-positive-ℤ (y -ℤ x)
 
 le-ℤ : ℤ → ℤ → UU lzero
 le-ℤ x y = type-Prop (le-ℤ-Prop x y)
@@ -116,40 +130,43 @@ is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 ```agda
 transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
 transitive-le-ℤ k l m p q =
-  tr is-positive-ℤ
+  is-positive-eq-ℤ
     ( triangle-diff-ℤ m l k)
-    ( is-positive-add-ℤ q p)
+    ( is-positive-add-ℤ {m -ℤ l} {l -ℤ k} q p)
 
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
-asymmetric-le-ℤ x y p q =
-  not-is-nonpositive-is-positive-ℤ
-    ( y -ℤ x)
-    ( p)
-    ( is-nonnegative-is-positive-ℤ
-      ( is-positive-eq-ℤ
-        ( inv ( distributive-neg-diff-ℤ y x))
-        ( q)))
+asymmetric-le-ℤ x y p =
+  not-is-positive-is-nonpositive-ℤ
+    ( x -ℤ y)
+    ( is-nonpositive-eq-ℤ
+      ( distributive-neg-diff-ℤ y x)
+      ( is-nonpositive-neg-is-nonnegative-ℤ
+        ( y -ℤ x)
+        ( is-nonnegative-is-positive-ℤ (y -ℤ x) p)))
 
 connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
 connected-le-ℤ x y H =
   map-coproduct
+    ( λ K →
+      is-positive-eq-ℤ
+        ( distributive-neg-diff-ℤ x y)
+        ( is-positive-neg-is-negative-ℤ (x -ℤ y) K))
     ( id)
-    ( is-positive-eq-ℤ ( distributive-neg-diff-ℤ y x))
-    ( decide-is-positive-is-nonzero-ℤ (y -ℤ x) (H ∘ inv ∘ eq-diff-ℤ))
+    ( decide-sign-nonzero-ℤ (x -ℤ y) (H ∘ eq-diff-ℤ))
 
 le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
 le-pred-ℤ x =
   is-positive-eq-ℤ
     ( inv
       ( right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
-    ( is-positive-one-ℤ)
+    ( is-positive-int-positive-ℤ one-positive-ℤ)
 
 le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
 le-succ-ℤ x =
   is-positive-eq-ℤ
     ( inv
       ( left-successor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
-    ( is-positive-one-ℤ)
+    ( is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
 ### ℤ is an ordered ring

@@ -77,12 +77,12 @@ neg-one-negative-ℤ = neg-one-ℤ , star
 ### The predecessor of a negative integer is negative
 
 ```agda
-is-negative-pred-negative-ℤ :
+is-negative-pred-is-negative-ℤ :
   (x : ℤ) → is-negative-ℤ x → is-negative-ℤ (pred-ℤ x)
-is-negative-pred-negative-ℤ (inl x) H = H
+is-negative-pred-is-negative-ℤ (inl x) H = H
 
 pred-negative-ℤ : negative-ℤ → negative-ℤ
-pred-negative-ℤ (x , H) = pred-ℤ x , is-negative-pred-negative-ℤ x H
+pred-negative-ℤ (x , H) = pred-ℤ x , is-negative-pred-is-negative-ℤ x H
 ```
 
 ### The canonical equivalence between natural numbers and negative integers

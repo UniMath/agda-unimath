@@ -14,7 +14,10 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.positive-and-negative-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -674,6 +677,12 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
   ex-falso
     ( nz
-      ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
-          a H (tr is-nonnegative-ℤ (inv neg) H')))
+      (is-zero-is-nonnegative-is-nonpositive-ℤ
+        ( a)
+        ( H)
+        ( is-nonpositive-eq-ℤ
+          ( neg-neg-ℤ a)
+          ( is-nonpositive-neg-is-nonnegative-ℤ
+            ( neg-ℤ a)
+            ( is-nonnegative-eq-ℤ (inv neg) H')))))
 ```

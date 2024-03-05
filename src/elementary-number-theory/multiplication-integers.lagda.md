@@ -15,7 +15,9 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -26,6 +28,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -487,7 +490,7 @@ is-positive-left-factor-mul-ℤ {inr (inr x)} {inr (inr y)} H K = star
 is-positive-right-factor-mul-ℤ :
   {x y : ℤ} → is-positive-ℤ (x *ℤ y) → is-positive-ℤ x → is-positive-ℤ y
 is-positive-right-factor-mul-ℤ {x} {y} H =
-  is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
+  is-positive-left-factor-mul-ℤ {y} (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
 ```
 
 ### Lemmas about nonnegative integers
@@ -514,6 +517,7 @@ is-nonnegative-right-factor-mul-ℤ :
   is-nonnegative-ℤ (x *ℤ y) → is-positive-ℤ x → is-nonnegative-ℤ y
 is-nonnegative-right-factor-mul-ℤ {x} {y} H =
   is-nonnegative-left-factor-mul-ℤ
+    { y}
     ( is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
 ```
 
@@ -541,13 +545,13 @@ preserves-strict-order-mul-positive-ℤ' :
   {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (x *ℤ z) (y *ℤ z)
 preserves-strict-order-mul-positive-ℤ' {x} {y} z H p =
   is-positive-eq-ℤ
-    ( inv ( linear-diff-right-mul-ℤ y x z))
-    ( is-positive-mul-ℤ p H)
+    ( inv (linear-diff-right-mul-ℤ y x z))
+    ( is-positive-mul-ℤ {y -ℤ x} p H)
 
 preserves-strict-order-mul-positive-ℤ :
   {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (z *ℤ x) (z *ℤ y)
 preserves-strict-order-mul-positive-ℤ {x} {y} z H p =
   is-positive-eq-ℤ
-    ( inv ( linear-diff-left-mul-ℤ z y x))
-    ( is-positive-mul-ℤ H p)
+    ( inv (linear-diff-left-mul-ℤ z y x))
+    ( is-positive-mul-ℤ {z} H p)
 ```

@@ -9,6 +9,7 @@ module elementary-number-theory.nonzero-integers where
 ```agda
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-integers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

@@ -10,6 +10,9 @@ module elementary-number-theory.addition-integers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -23,6 +26,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 ```
 
@@ -516,12 +520,12 @@ is-nonnegative-add-ℤ (inr (inl star)) (inr (inl star)) p q = star
 is-nonnegative-add-ℤ (inr (inl star)) (inr (inr n)) p q = star
 is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inl star)) p q = star
 is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inl star)) star star =
-  is-nonnegative-succ-ℤ
+  is-nonnegative-succ-is-nonnegative-ℤ
     ( (inr (inr n)) +ℤ (inr (inl star)))
     ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inl star)) star star)
 is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inr m)) star star = star
 is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inr m)) star star =
-  is-nonnegative-succ-ℤ
+  is-nonnegative-succ-is-nonnegative-ℤ
     ( (inr (inr n)) +ℤ (inr (inr m)))
     ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inr m)) star star)
 ```
@@ -533,14 +537,16 @@ is-positive-add-ℤ :
   {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
 is-positive-add-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
 is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-succ-ℤ
+  is-positive-succ-is-nonnegative-ℤ
+    ( add-ℤ (inr (inr x)) (inr (inr y)))
     ( is-nonnegative-is-positive-ℤ
-      ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} star star))
+      ( add-ℤ (inr (inr x)) (inr (inr y)))
+      ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} H K))
 
 is-positive-add-nonnegative-positive-ℤ :
   {x y : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
 is-positive-add-nonnegative-positive-ℤ {inr (inl x)} {y} H H' =
-  is-positive-eq-ℤ refl H'
+  is-positive-eq-ℤ {y = y} refl H'
 is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H H' =
   is-positive-add-ℤ {inr (inr x)} {y} H H'
 
@@ -549,7 +555,7 @@ is-positive-add-positive-nonnegative-ℤ :
 is-positive-add-positive-nonnegative-ℤ {x} {y} H H' =
   is-positive-eq-ℤ
     ( commutative-add-ℤ y x)
-    ( is-positive-add-nonnegative-positive-ℤ H' H)
+    ( is-positive-add-nonnegative-positive-ℤ {y} {x} H' H)
 ```
 
 ### The inclusion of ℕ into ℤ preserves addition

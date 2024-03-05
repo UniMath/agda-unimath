@@ -15,6 +15,8 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.relatively-prime-integers
 
 open import foundation.action-on-identifications-functions
@@ -26,6 +28,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -107,6 +110,7 @@ is-positive-int-reduce-denominator-fraction-ℤ :
   (x : fraction-ℤ) → is-positive-ℤ (int-reduce-denominator-fraction-ℤ x)
 is-positive-int-reduce-denominator-fraction-ℤ x =
   is-positive-left-factor-mul-ℤ
+    { int-reduce-denominator-fraction-ℤ x}
     ( is-positive-eq-ℤ
       ( inv (eq-reduce-denominator-fraction-ℤ x))
       ( is-positive-denominator-fraction-ℤ x))
@@ -541,8 +545,10 @@ unique-denominator-reduce-fraction-ℤ :
 unique-denominator-reduce-fraction-ℤ x y H =
   eq-sim-unit-is-nonnegative-ℤ
     ( is-nonnegative-is-positive-ℤ
+      ( int-reduce-denominator-fraction-ℤ x)
       ( is-positive-int-reduce-denominator-fraction-ℤ x))
     ( is-nonnegative-is-positive-ℤ
+      ( int-reduce-denominator-fraction-ℤ y)
       ( is-positive-int-reduce-denominator-fraction-ℤ y))
     (sim-unique-denominator-reduce-fraction-ℤ x y H)
 
@@ -557,5 +563,7 @@ unique-reduce-fraction-ℤ x y H =
         ( pair
           (unique-denominator-reduce-fraction-ℤ x y H)
           (eq-is-prop
-            ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
+            ( is-prop-is-in-subtype
+              ( subtype-positive-ℤ)
+              ( int-reduce-denominator-fraction-ℤ y))))))
 ```

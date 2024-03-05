@@ -22,6 +22,9 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -194,18 +197,21 @@ bezouts-lemma-refactor-hypotheses x y H K =
   x-product-nonneg :
     is-nonnegative-ℤ
       ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ x)
-  x-product-nonneg = is-nonnegative-mul-ℤ
-    (is-nonnegative-int-ℕ
-      ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
-    (is-nonnegative-is-positive-ℤ H)
+  x-product-nonneg =
+    is-nonnegative-mul-ℤ
+      { int-ℕ ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P)}
+      ( is-nonnegative-int-ℕ
+        ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
+      ( is-nonnegative-is-positive-ℤ x H)
   y-product-nonneg :
     is-nonnegative-ℤ
       ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ y)
   y-product-nonneg =
     is-nonnegative-mul-ℤ
+      { int-ℕ ( minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P)}
       ( is-nonnegative-int-ℕ
         ( minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P))
-      ( is-nonnegative-is-positive-ℤ K)
+      ( is-nonnegative-is-positive-ℤ y K)
 
 bezouts-lemma-pos-ints :
   (x y : ℤ) (H : is-positive-ℤ x) (K : is-positive-ℤ y) →

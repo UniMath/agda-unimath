@@ -14,6 +14,9 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -234,7 +237,7 @@ div-gcd-is-common-divisor-ℤ x y k H =
 is-positive-gcd-is-positive-left-ℤ :
   (x y : ℤ) → is-positive-ℤ x → is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-is-positive-left-ℤ x y H =
-  is-positive-int-ℕ
+  is-positive-int-is-nonzero-ℕ
     ( gcd-ℕ (abs-ℤ x) (abs-ℤ y))
     ( is-nonzero-gcd-ℕ
       ( abs-ℤ x)
@@ -247,7 +250,7 @@ is-positive-gcd-is-positive-left-ℤ x y H =
 is-positive-gcd-is-positive-right-ℤ :
   (x y : ℤ) → is-positive-ℤ y → is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-is-positive-right-ℤ x y H =
-  is-positive-int-ℕ
+  is-positive-int-is-nonzero-ℕ
     ( gcd-ℕ (abs-ℤ x) (abs-ℤ y))
     ( is-nonzero-gcd-ℕ
       ( abs-ℤ x)

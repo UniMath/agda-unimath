@@ -12,6 +12,8 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.dependent-pair-types
@@ -22,6 +24,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -149,7 +152,7 @@ in-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
       ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
       ( eq-pair-Σ
         ( eq-quotient-div-is-one-ℤ _ _ p (div-right-gcd-ℤ m n))
-        ( eq-is-prop (is-prop-is-positive-ℤ n))))
+        ( eq-is-prop (is-prop-is-in-subtype subtype-positive-ℤ n))))
     ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (m , n , n-pos)))
 ```
 

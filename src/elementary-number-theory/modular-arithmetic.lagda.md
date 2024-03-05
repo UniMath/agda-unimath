@@ -19,6 +19,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -154,10 +155,10 @@ int-ℤ-Mod-bounded :
   (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) →
   leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
 int-ℤ-Mod-bounded zero-ℕ (inr x) = star
-int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ
+int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-is-nonnegative-ℤ
   ((inr (inr k)) +ℤ
   (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
-int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ
+int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-is-nonnegative-ℤ
   ((inr (inr k)) +ℤ (inl k))
   (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
 ```

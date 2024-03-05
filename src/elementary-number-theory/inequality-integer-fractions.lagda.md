@@ -15,6 +15,10 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -80,11 +84,14 @@ module _
     sim-fraction-ℤ x y
   is-sim-antisymmetric-leq-fraction-ℤ H H' =
     sim-is-zero-coss-mul-diff-fraction-ℤ x y
-      ( is-zero-is-nonnegative-ℤ
+      ( is-zero-is-nonnegative-is-nonpositive-ℤ
+        ( cross-mul-diff-fraction-ℤ x y)
         ( H)
-        ( is-nonnegative-eq-ℤ
-            ( inv ( skew-commutative-cross-mul-diff-fraction-ℤ x y))
-            ( H')))
+        ( is-nonpositive-eq-ℤ
+          ( skew-commutative-cross-mul-diff-fraction-ℤ y x)
+          ( is-nonpositive-neg-is-nonnegative-ℤ
+            ( cross-mul-diff-fraction-ℤ y x)
+            ( H'))))
 ```
 
 ### Strict inequality on integer fractions is asymmetric
@@ -116,17 +123,22 @@ transitive-leq-fraction-ℤ :
   leq-fraction-ℤ p r
 transitive-leq-fraction-ℤ p q r H H' =
   is-nonnegative-right-factor-mul-ℤ
+    { denominator-fraction-ℤ q}
     ( is-nonnegative-eq-ℤ
       ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
         (is-nonnegative-add-ℤ
           ( denominator-fraction-ℤ p *ℤ cross-mul-diff-fraction-ℤ q r)
           ( denominator-fraction-ℤ r *ℤ cross-mul-diff-fraction-ℤ p q)
           ( is-nonnegative-mul-ℤ
+            { denominator-fraction-ℤ p}
             ( is-nonnegative-is-positive-ℤ
+              ( denominator-fraction-ℤ p)
               ( is-positive-denominator-fraction-ℤ p))
             ( H'))
           ( is-nonnegative-mul-ℤ
+            { denominator-fraction-ℤ r}
             ( is-nonnegative-is-positive-ℤ
+              ( denominator-fraction-ℤ r)
               ( is-positive-denominator-fraction-ℤ r))
             ( H))))
     ( is-positive-denominator-fraction-ℤ q)
@@ -142,13 +154,20 @@ transitive-le-fraction-ℤ :
   le-fraction-ℤ p r
 transitive-le-fraction-ℤ p q r H H' =
   is-positive-right-factor-mul-ℤ
+    { denominator-fraction-ℤ q}
     ( is-positive-eq-ℤ
       ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
       ( is-positive-add-ℤ
+        { mul-ℤ (denominator-fraction-ℤ p) (cross-mul-diff-fraction-ℤ q r)}
+        { mul-ℤ (denominator-fraction-ℤ r) (cross-mul-diff-fraction-ℤ p q)}
         ( is-positive-mul-ℤ
+          { denominator-fraction-ℤ p}
+          { cross-mul-diff-fraction-ℤ q r}
           ( is-positive-denominator-fraction-ℤ p)
           ( H'))
         ( is-positive-mul-ℤ
+          { denominator-fraction-ℤ r}
+          { cross-mul-diff-fraction-ℤ p q}
           ( is-positive-denominator-fraction-ℤ r)
           ( H))))
       ( is-positive-denominator-fraction-ℤ q)
@@ -167,14 +186,20 @@ module _
     le-fraction-ℤ p r
   concatenate-le-leq-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
+      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
         ( is-positive-add-nonnegative-positive-ℤ
+          { mul-ℤ (denominator-fraction-ℤ p) (cross-mul-diff-fraction-ℤ q r)}
+          { mul-ℤ (denominator-fraction-ℤ r) (cross-mul-diff-fraction-ℤ p q)}
           ( is-nonnegative-mul-ℤ
+            { denominator-fraction-ℤ p}
             ( is-nonnegative-is-positive-ℤ
+              ( denominator-fraction-ℤ p)
               ( is-positive-denominator-fraction-ℤ p))
             ( H'))
           ( is-positive-mul-ℤ
+            { denominator-fraction-ℤ r}
             ( is-positive-denominator-fraction-ℤ r)
             ( H))))
       ( is-positive-denominator-fraction-ℤ q)
@@ -185,14 +210,20 @@ module _
     le-fraction-ℤ p r
   concatenate-leq-le-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
+      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
         ( is-positive-add-positive-nonnegative-ℤ
+          { mul-ℤ (denominator-fraction-ℤ p) (cross-mul-diff-fraction-ℤ q r)}
+          { mul-ℤ (denominator-fraction-ℤ r) (cross-mul-diff-fraction-ℤ p q)}
           ( is-positive-mul-ℤ
+            { denominator-fraction-ℤ p}
             ( is-positive-denominator-fraction-ℤ p)
             ( H'))
           ( is-nonnegative-mul-ℤ
+            { denominator-fraction-ℤ r}
             ( is-nonnegative-is-positive-ℤ
+              ( denominator-fraction-ℤ r)
               ( is-positive-denominator-fraction-ℤ r))
             ( H))))
       ( is-positive-denominator-fraction-ℤ q)
@@ -211,10 +242,13 @@ module _
     le-fraction-ℤ p r
   concatenate-sim-le-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
+      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
         ( is-positive-mul-ℤ
-          ( is-positive-denominator-fraction-ℤ p) H'))
+          { denominator-fraction-ℤ p}
+          ( is-positive-denominator-fraction-ℤ p)
+          ( H')))
       ( is-positive-denominator-fraction-ℤ q)
 
   concatenate-le-sim-fraction-ℤ :
@@ -223,9 +257,13 @@ module _
     le-fraction-ℤ p r
   concatenate-le-sim-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
+      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( inv ( lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
-        ( is-positive-mul-ℤ (is-positive-denominator-fraction-ℤ r) H))
+        ( is-positive-mul-ℤ
+          { denominator-fraction-ℤ r}
+          (is-positive-denominator-fraction-ℤ r)
+          ( H)))
       ( is-positive-denominator-fraction-ℤ q)
 ```
 

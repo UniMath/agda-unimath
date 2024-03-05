@@ -26,6 +26,8 @@ open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
@@ -336,7 +338,7 @@ is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
             ( tr
               ( is-nonnegative-ℤ)
               ( left-negative-law-mul-ℤ u (int-ℕ y) ∙ ap (neg-ℤ) p)
-              ( is-nonnegative-mul-ℤ neg (is-nonnegative-int-ℕ y))))))
+              ( is-nonnegative-mul-ℤ {neg-ℤ u} neg (is-nonnegative-int-ℕ y))))))
 
 is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
   uy-z-case-split (decide-is-nonnegative-ℤ
@@ -636,6 +638,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
     a-is-nonnegative-ℤ : is-nonnegative-ℤ a
     a-is-nonnegative-ℤ =
       is-nonnegative-left-factor-mul-ℤ
+        { pr1 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))}
         ( tr
           ( is-nonnegative-ℤ)
           ( inv
@@ -714,31 +717,39 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
         ＝ z by abs-int-ℕ z))
     where
     neg-a-is-nonnegative-ℤ : is-nonnegative-ℤ (neg-ℤ a)
-    neg-a-is-nonnegative-ℤ = (is-nonnegative-left-factor-mul-ℤ
-      (tr is-nonnegative-ℤ
-      (equational-reasoning
-        neg-ℤ (((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ
-          (neg-ℤ (int-ℕ z)))
-        ＝ (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
-          (neg-ℤ (neg-ℤ (int-ℕ z)))
-        by (distributive-neg-add-ℤ
-          ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))
-          (neg-ℤ (int-ℕ z)))
-        ＝ (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
-          (int-ℕ z)
-        by ap ((neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ_)
-          (neg-neg-ℤ (int-ℕ z))
-        ＝ add-ℤ (int-ℕ z)
-          (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
-        by commutative-add-ℤ
-          (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
-          (int-ℕ z)
-        ＝ (neg-ℤ a) *ℤ (int-ℕ (succ-ℕ x))
-        by inv (pr2
-          (symmetric-cong-ℤ (int-ℕ (succ-ℕ x))
-            ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) (int-ℕ z)
-            (cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))))
-        z-uy) (is-nonnegative-int-ℕ (succ-ℕ x)))
+    neg-a-is-nonnegative-ℤ =
+      is-nonnegative-left-factor-mul-ℤ
+        { neg-ℤ a}
+        ( tr is-nonnegative-ℤ
+          ( equational-reasoning
+            ( neg-ℤ (((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ
+              ( neg-ℤ (int-ℕ z))))
+            ＝ ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
+                ( neg-ℤ (neg-ℤ (int-ℕ z)))
+              by
+                ( distributive-neg-add-ℤ
+                  ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))
+                  ( neg-ℤ (int-ℕ z)))
+            ＝ ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
+                ( int-ℕ z)
+              by
+                ap
+                  ( (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ_)
+                  ( neg-neg-ℤ (int-ℕ z))
+            ＝ add-ℤ
+              ( int-ℕ z)
+              ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
+              by
+                commutative-add-ℤ
+                  ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
+                  ( int-ℕ z)
+            ＝ (neg-ℤ a) *ℤ (int-ℕ (succ-ℕ x))
+              by inv (pr2
+                ( symmetric-cong-ℤ (int-ℕ (succ-ℕ x))
+                ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) (int-ℕ z)
+                ( cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))))
+          ( z-uy))
+          ( is-nonnegative-int-ℕ (succ-ℕ x))
 ```
 
 ### The type `is-distance-between-multiples-ℕ x y z` is decidable
