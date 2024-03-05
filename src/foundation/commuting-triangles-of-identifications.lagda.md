@@ -740,3 +740,53 @@ module _
       ( s)
       ( bottom-right))
 ```
+
+### Vertical pasting of horizontally constant commuting squares of identifications and commuting triangles of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  vertical-pasting-coherence-horizontally-constant-square-coherence-triangle-identifications :
+    {a c e : A} (p : a ＝ c)
+    (bottom-left : c ＝ e) (bottom-right : c ＝ e) →
+    (t : coherence-triangle-identifications bottom-left bottom-right refl) →
+    ( vertical-pasting-coherence-square-coherence-triangle-identifications
+      ( refl)
+      ( p)
+      ( p)
+      ( refl)
+      ( bottom-left)
+      ( bottom-right)
+      ( horizontal-refl-coherence-square-identifications p)
+      ( t)) ＝
+    ( left-whisker-concat p t)
+  vertical-pasting-coherence-horizontally-constant-square-coherence-triangle-identifications
+    refl refl .refl refl =
+    refl
+```
+
+### Vertical pasting of verticaly constant commuting squares of identifications and commuting triangles of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  vertical-pasting-coherence-vertically-constant-square-coherence-triangle-identifications :
+    {a b c : A} (left : a ＝ c) (right : b ＝ c) (top : a ＝ b) →
+    (t : coherence-triangle-identifications left right top) →
+    ( vertical-pasting-coherence-square-coherence-triangle-identifications
+      ( top)
+      ( refl)
+      ( refl)
+      ( top)
+      ( left)
+      ( right)
+      ( vertical-refl-coherence-square-identifications top)
+      ( t)) ＝
+    t
+  vertical-pasting-coherence-vertically-constant-square-coherence-triangle-identifications
+    ._ refl refl refl = refl
+```

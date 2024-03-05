@@ -7,6 +7,7 @@ module structured-types.whiskering-pointed-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-identifications
@@ -26,6 +27,8 @@ open import structured-types.pointed-types
 </details>
 
 ## Idea
+
+The whiskering operations of pointed homotopies with respect to composition of pointed maps are two operations that produce pointed homotopies between composites of pointed maps from either a pointed homotopy on the left or on the right of the composition. There are two such whiskering operations.
 
 Consider a [pointed homotopy](structured-types.pointed-homotopies.md)
 `H : f ~∗ g` between [pointed maps](structured-types.pointed-maps.md)
@@ -50,33 +53,33 @@ pointed homotopy `H` and a pointed map `f` and returns a pointed homotopy
 
 ### Left whiskering of pointed homotopies
 
-Consider two pointed maps `f1 f2 : A →∗ B` equipped with a pointed homotopy
-`H : f1 ~∗ f2`, and a pointed map `g : B →∗ C`. Then we construct a pointed
+Consider two pointed maps `f := (f₀ , f₁) : A →∗ B` and `g := (g₀ , g₁) : A →∗ B` equipped with a pointed homotopy
+`H := (H₀ , H₁) : f ~∗ g`, and consider furthermore a pointed map `h := (h₀ , h₁) : B →∗ C`. Then we construct a pointed
 homotopy
 
 ```text
-  g ·l H : (g ∘∗ f1) ~∗ (g ∘∗ f2)
+  h ·l H : (h ∘∗ f) ~∗ (h ∘∗ g)
 ```
 
-**Proof.** The underlying homotopy of `g ·l H` is the whiskered homotpy
+**Construction.** The underlying homotopy of `h ·l H` is the whiskered homotpy
 
 ```text
-  map-pointed-map g ·l htpy-pointed-htpy f1 f2 H.
+  h₀ ·l H₀.
 ```
 
 For the coherence, we have to show that the triangle
 
 ```text
-                             ap g (H *)
-                   g (f1 *) ------------> g (f2 *)
-                           \             /
-  ap g (preserves-point f1) \           / ap g (preserves-point f2)
-                             ∨         ∨
-                            g *       g *
-                               \     /
-              preserves-point g \   / preserves-point g
-                                 ∨ ∨
-                                  ∗
+            ap h₀ (H₀ *)
+  h₀ (f₀ *) ------------> h₀ (g₀ *)
+           \             /
+   ap h₀ f₁ \           / ap h₀ g₁
+             ∨         ∨
+           h₀ *       h₀ *
+               \     /
+             h₁ \   / h₁
+                 ∨ ∨
+                  ∗
 ```
 
 commutes. By right whiskering of
@@ -84,26 +87,26 @@ commutes. By right whiskering of
 with respect to concatenation it suffices to show that the triangle
 
 ```text
-                            ap g (H *)
-                   g (f1 *) --------> g (f2 *)
-                           \         /
-  ap g (preserves-point f1) \       / ap g (preserves-point f2)
-                             \     /
-                              ∨   ∨
-                               g *
+           ap h₀ (H₀ *)
+  h₀ (f₀ *) ---------> h₀ (g₀ *)
+           \          /
+   ap h₀ f₁ \        / ap h₀ g₁
+             \      /
+              ∨    ∨
+               h₀ *
 ```
 
 commutes. By functoriality of commuting triangles of identifications, this
 follows from the fact that the triangle
 
 ```text
-                       H *
-                f1 * ------> f2 *
-                    \       /
-  preserves-point f1 \     / preserves-point f2
-                      \   /
-                       ∨ ∨
-                        *
+        H₀ *
+  f₀ * ------> g₀ *
+      \       /
+    f₁ \     / g₁
+        \   /
+         ∨ ∨
+          *
 ```
 
 commutes.
@@ -112,40 +115,71 @@ commutes.
 module _
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
-  (g : B →∗ C) (f1 f2 : A →∗ B) (H : f1 ~∗ f2)
+  (h : B →∗ C) (f g : A →∗ B) (H : f ~∗ g)
   where
 
   htpy-left-whisker-pointed-htpy :
-    map-comp-pointed-map g f1 ~ map-comp-pointed-map g f2
+    map-comp-pointed-map h f ~ map-comp-pointed-map h g
   htpy-left-whisker-pointed-htpy =
-    map-pointed-map g ·l htpy-pointed-htpy H
+    map-pointed-map h ·l htpy-pointed-htpy H
 
   coherence-point-left-whisker-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-Π
-      ( g ∘∗ f1)
-      ( g ∘∗ f2)
+      ( h ∘∗ f)
+      ( h ∘∗ g)
       ( htpy-left-whisker-pointed-htpy)
   coherence-point-left-whisker-pointed-htpy =
     right-whisker-concat-coherence-triangle-identifications
-      ( ap (map-pointed-map g) (preserves-point-pointed-map f1))
-      ( ap (map-pointed-map g) (preserves-point-pointed-map f2))
+      ( ap (map-pointed-map h) (preserves-point-pointed-map f))
+      ( ap (map-pointed-map h) (preserves-point-pointed-map g))
       ( ap
-        ( map-pointed-map g)
+        ( map-pointed-map h)
         ( htpy-pointed-htpy H (point-Pointed-Type A)))
-      ( preserves-point-pointed-map g)
+      ( preserves-point-pointed-map h)
       ( map-coherence-triangle-identifications
-        ( map-pointed-map g)
-        ( preserves-point-pointed-map f1)
-        ( preserves-point-pointed-map f2)
+        ( map-pointed-map h)
+        ( preserves-point-pointed-map f)
+        ( preserves-point-pointed-map g)
         ( htpy-pointed-htpy H (point-Pointed-Type A))
         ( coherence-point-pointed-htpy H))
 
-  left-whisker-pointed-htpy : g ∘∗ f1 ~∗ g ∘∗ f2
+  left-whisker-pointed-htpy : h ∘∗ f ~∗ h ∘∗ g
   pr1 left-whisker-pointed-htpy = htpy-left-whisker-pointed-htpy
   pr2 left-whisker-pointed-htpy = coherence-point-left-whisker-pointed-htpy
 ```
 
 ### Right whiskering of pointed homotopies
+
+Consider a pointed map `f := (f₀ , f₁) : A →∗ B` and two pointed maps `g := (g₀ , g₁) : B →∗ C` and `h := (h₀ , h₁) : B →∗ C` equipped with a pointed homotopy
+`H := (H₀ , H₁) : g ~∗ h`. Then we construct a pointed
+homotopy
+
+```text
+  H ·r f : (g ∘∗ f) ~∗ (h ∘∗ f).
+```
+
+**Construction.** The underlying homotopy of `H ·r f` is simply the homotopy
+
+```text
+  H₀ ·r f₀ : (g₀ ∘ f₀) ~ (h₀ ∘ f₀).
+```
+
+Then we have to show that the outer triangle in the diagram
+
+```text
+              H₀ (f₀ *)
+  g₀ (f₀ *) ------------> h₀ (f₀ *)
+           \             /
+   ap g₀ f₁ \           / ap h₀ f₁
+             ∨  H₀ *   ∨
+           g₀ * ----> h₀ *
+               \     /
+             g₁ \   / h₁
+                 ∨ ∨
+                  ∗
+```
+
+commutes. This is done by vertically pasting the upper square and the lower triangle. The upper square commutes by inverse naturality of the homotopy `H₀`. The lower triangle is the base point coherence `H₁` of the pointed homotopy `H ≐ (H₀ , H₁)`.
 
 ```agda
 module _
@@ -172,7 +206,7 @@ module _
       ( htpy-pointed-htpy H _)
       ( preserves-point-pointed-map g1)
       ( preserves-point-pointed-map g2)
-      ( inv (nat-htpy (htpy-pointed-htpy H) _))
+      ( inv-nat-htpy (htpy-pointed-htpy H) _)
       ( coherence-point-pointed-htpy H)
     
   right-whisker-pointed-htpy : g1 ∘∗ f ~∗ g2 ∘∗ f
@@ -188,43 +222,81 @@ module _
 module _
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
-  (g : B →∗ C) (f : A →∗ B)
+  (h : B →∗ C) (f : A →∗ B)
   where
 
   compute-refl-left-whisker-pointed-htpy :
     pointed-2-htpy
-      ( left-whisker-pointed-htpy g f f (refl-pointed-htpy f))
-      ( refl-pointed-htpy (comp-pointed-map g f))
+      ( left-whisker-pointed-htpy h f f (refl-pointed-htpy f))
+      ( refl-pointed-htpy (h ∘∗ f))
   compute-refl-left-whisker-pointed-htpy =
-    refl-pointed-2-htpy (refl-pointed-htpy (g ∘∗ f))
+    refl-pointed-2-htpy (refl-pointed-htpy (h ∘∗ f))
 ```
 
 ### Computing right whiskering the reflexive pointed homotopy
+
+Consider two pointed maps `f := (f₀ , f₁) : A →∗ B` and `g := (g₀ , g₁) : B →∗ C`. We will construct a pointed 2-homotopy
+
+```text
+  right-whisker-pointed-htpy (refl-pointed-htpy h) f ~∗
+  refl-pointed-htpy (g ∘∗ f)
+```
+
+The underlying homotopy of this pointed 2-homotopy is simply `refl-htpy`. The base point coherence of this homotopy is an identification witnessing that the triangle
+
+```text
+                   H₁
+  ap g₀ f₁ ∙ g₁ ------> refl ∙ (ap g₀ f₁ ∙ g₁)
+               \       /
+           refl \     / right-whisker-concat refl (ap g₀ f₁ ∙ g₁) ≐ refl
+                 \   /
+                  ∨ ∨
+       refl ∙ (ap g₀ f₁ ∙ g₁)
+```
+
+commutes. Here, the identification `H₁` is the vertical pasting of the upper square and the lower triangle in the diagram
+
+```text
+                refl
+  g₀ (f₀ *) ------------> g₀ (f₀ *)
+           \             /
+   ap g₀ f₁ \           / ap g₀ f₁
+             ∨  refl   ∨
+           g₀ * ----> g₀ *
+               \     /
+             g₁ \   / g₁
+                 ∨ ∨
+                  ∗.
+```
+
+The upper square in this diagram is the inverse naturality of the reflexive homotopy `refl-htpy` and the lower triangle in this diagram is the reflexive identification.
+
+Recall that the inverse naturality of the reflexive homotopy `inv-nat-htpy refl-htpy f₁` computes to the horizontally constant square of identifications. Furthermore, the vertical pasting of the horizontally constant square `right-unit` and any commuting triangle `refl` computes to `refl`. Therefore it follows that the identification `H₁` above is equal to `refl`, as was required to show.
 
 ```agda
 module _
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
-  (g : B →∗ C) (f : A →∗ B)
+  (h : B →∗ C) (f : A →∗ B)
   where
 
   htpy-compute-refl-right-whisker-pointed-htpy :
     unpointed-htpy-pointed-htpy
-      ( right-whisker-pointed-htpy g g (refl-pointed-htpy g) f)
-      ( refl-pointed-htpy (comp-pointed-map g f))
+      ( right-whisker-pointed-htpy h h (refl-pointed-htpy h) f)
+      ( refl-pointed-htpy (h ∘∗ f))
   htpy-compute-refl-right-whisker-pointed-htpy = refl-htpy
 
   coherence-point-compute-refl-right-whisker-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-htpy
-      ( right-whisker-pointed-htpy g g (refl-pointed-htpy g) f)
-      ( refl-pointed-htpy (comp-pointed-map g f))
+      ( right-whisker-pointed-htpy h h (refl-pointed-htpy h) f)
+      ( refl-pointed-htpy (h ∘∗ f))
       ( htpy-compute-refl-right-whisker-pointed-htpy)
   coherence-point-compute-refl-right-whisker-pointed-htpy =
-    {!!}
+    ?
 
   compute-refl-right-whisker-pointed-htpy :
     pointed-2-htpy
-      ( right-whisker-pointed-htpy g g (refl-pointed-htpy g) f)
-      ( refl-pointed-htpy (comp-pointed-map g f))
+      ( right-whisker-pointed-htpy h h (refl-pointed-htpy h) f)
+      ( refl-pointed-htpy (h ∘∗ f))
   compute-refl-right-whisker-pointed-htpy = {!!}
 ```
