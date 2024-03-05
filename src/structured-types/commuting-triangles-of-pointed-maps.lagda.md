@@ -113,9 +113,7 @@ module _
     coherence-triangle-pointed-maps (f ∘∗ left) (f ∘∗ right) top
   left-whisker-coherence-triangle-pointed-maps H =
     concat-pointed-htpy
-      ( f ∘∗ left)
-      ( f ∘∗ (right ∘∗ top))
-      ( (f ∘∗ right) ∘∗ top)
       ( left-whisker-comp-pointed-htpy f left (right ∘∗ top) H)
-      {! inv-assoc-pointed-htpy!}
+      ( inv-pointed-htpy
+        ( associative-comp-pointed-map f right top))
 ```
