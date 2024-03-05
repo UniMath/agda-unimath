@@ -54,7 +54,7 @@ def generate_bibliography(bib_database : pybtex.database.BibliographyData, style
     eprint(cited_keys)
     # Function to generate the bibliography section
     if cited_keys:
-        return "\n\n## References\n" + "\n\n" + render_references(bib_database, style, backend, cited_keys)
+        return render_references(bib_database, style, backend, cited_keys)
     else:
         return ""
 
@@ -67,18 +67,35 @@ def process_citations_chapter_rec_mut(chapter, bib_database : pybtex.database.Bi
         cited_keys.add(match.group(1))
     new_content = REFERENCE_REGEX.sub('', new_content)
 
-    if cited_keys: eprint("match!", cited_keys)
 
     if cited_keys:
         bibliography_section = generate_bibliography(bib_database, style, backend, cited_keys)
         eprint(bibliography_section)
         if bibliography_section:
-            new_content += bibliography_section
+            new_content = insert_bibliography_at_correct_location(new_content, bibliography_section)
 
-    chapter['content'] = new_content  # Update the chapter content
+    chapter['content'] = new_content
 
     process_citations_sections_rec_mut(chapter['sub_items'], bib_database, style, backend)
 
+def insert_bibliography_at_correct_location(content, bibliography_section):
+    references_heading = "## References"
+    pattern = re.compile(r'^## .+$')
+    start_index = content.find(references_heading)
+
+    if start_index != -1:
+        # Find end of the References section by locating the next heading
+        end_index = pattern.search(content, start_index + len(references_heading))
+        if end_index:
+            insertion_point = end_index.start()
+        else:
+            insertion_point = len(content)
+        new_content = content[:insertion_point] + "\n\n" + bibliography_section + "\n\n" + content[insertion_point:]
+    else:
+        # If there's no References section, append it at the end
+        new_content = content + "\n\n" + references_heading + "\n\n" + bibliography_section
+
+    return new_content
 
 def process_citations_sections_rec_mut(sections, bib_database, style: pybtex.style.formatting.BaseStyle, backend: pybtex.backends.BaseBackend):
     for section in sections:
