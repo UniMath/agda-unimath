@@ -15,7 +15,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 ```
 

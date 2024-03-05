@@ -1,7 +1,7 @@
 # Cocones under spans of pointed types
 
 ```agda
-module synthetic-homotopy-theory.cocones-under-spans-of-pointed-types where
+module synthetic-homotopy-theory.cocones-under-pointed-span-diagrams where
 ```
 
 <details><summary>Imports</summary>

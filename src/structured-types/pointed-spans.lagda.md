@@ -1,7 +1,7 @@
-# Spans of pointed types
+# Pointed spans
 
 ```agda
-module structured-types.spans-pointed-types where
+module structured-types.pointed-spans where
 ```
 
 <details><summary>Imports</summary>

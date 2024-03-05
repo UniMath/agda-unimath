@@ -1,7 +1,7 @@
-# Span diagrams
+# Pointed span diagrams
 
 ```agda
-module structured-types.span-diagrams-pointed-types where
+module structured-types.pointed-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +15,7 @@ open import foundation.universe-levels
 open import structured-types.morphisms-pointed-arrows
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.spans-pointed-types
+open import structured-types.pointed-spans
 ```
 
 </details>
@@ -32,8 +32,7 @@ A {{#concept "(binary) span diagram of pointed types"}} is a diagram of
 
 In other words, a span diagram of pointed types consists of two
 [pointed types](structured-types.pointed-types.md) `A` and `B` and a
-[span of pointed types](structured-types.spans-pointed-types.md) from `A` to
-`B`.
+[span of pointed types](structured-types.pointed-spans.md) from `A` to `B`.
 
 ### (Binary) span diagrams of pointed types
 
@@ -150,8 +149,8 @@ module _
 
 ### The span diagram obtained from a morphism of pointed arrows
 
-Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of pointed arrows
-`α : f →∗ g`, the span diagram associated to `α` is the span diagram
+Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of pointed
+arrows `α : f →∗ g`, the span diagram associated to `α` is the span diagram
 
 ```text
        f       α₀
@@ -188,7 +187,7 @@ module _
   point-codomain-span-diagram-hom-pointed-arrow :
     type-codomain-span-diagram-hom-pointed-arrow
   point-codomain-span-diagram-hom-pointed-arrow =
-    point-Pointed-Type codomain-span-diagram-hom-pointed-arrow  
+    point-Pointed-Type codomain-span-diagram-hom-pointed-arrow
 
   pointed-spanning-type-hom-pointed-arrow : Pointed-Type l1
   pointed-spanning-type-hom-pointed-arrow = A
@@ -239,7 +238,7 @@ module _
   preserves-point-right-map-span-diagram-hom-pointed-arrow =
     preserves-point-pointed-map
       ( right-pointed-map-span-diagram-hom-pointed-arrow)
-      
+
   span-hom-pointed-arrow :
     span-Pointed-Type l1 B X
   pr1 span-hom-pointed-arrow =
