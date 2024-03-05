@@ -34,7 +34,7 @@ open import structured-types.commuting-squares-of-pointed-maps
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.whiskering-pointed-homotopies
+open import structured-types.whiskering-pointed-homotopies-composition
 ```
 
 </details>
@@ -317,8 +317,8 @@ module _
 
 ### Homotopies of morphisms of pointed arrows
 
-A {{#concept "homotopy of morphisms of pointed arrows"}} from `(i , j , H)`
-to `(i' , j' , H')` is a triple `(I , J , K)` consisting of pointed homotopies
+A {{#concept "homotopy of morphisms of pointed arrows"}} from `(i , j , H)` to
+`(i' , j' , H')` is a triple `(I , J , K)` consisting of pointed homotopies
 `I : i ~∗ i'` and `J : j ~∗ j'` and a pointed 2-homotopy `K` witnessing that the
 [square of pointed homotopies](structured-types.commuting-squares-of-pointed-homotopies.md)
 
@@ -352,10 +352,10 @@ module _
     UU (l1 ⊔ l4)
   coherence-htpy-hom-pointed-arrow β I J =
     coherence-square-pointed-homotopies
-      ( right-whisker-pointed-htpy _ _ J f)
+      ( right-whisker-comp-pointed-htpy _ _ J f)
       ( coh-hom-pointed-arrow f g α)
       ( coh-hom-pointed-arrow f g β)
-      ( left-whisker-pointed-htpy g _ _ I)
+      ( left-whisker-comp-pointed-htpy g _ _ I)
 
   htpy-hom-pointed-arrow :
     (β : hom-pointed-arrow f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -402,7 +402,8 @@ Consider a morphism of poitned arrows
                 α₁
 ```
 
-from `f : A →∗ B` to `g : X →∗ Y`. The reflexive homotopy `r := (r₀ , r₁ , r₂)` on `α := (α₀ , α₁ , α₂)` is given by
+from `f : A →∗ B` to `g : X →∗ Y`. The reflexive homotopy `r := (r₀ , r₁ , r₂)`
+on `α := (α₀ , α₁ , α₂)` is given by
 
 ```text
   r₀ := refl-pointed-htpy : α₀ ~∗ α₀
@@ -421,7 +422,8 @@ and a pointed 2-homotopy `r₂` witnessing that the square of homotopies
              g ·l r₀
 ```
 
-commutes. Note that `r₁ ·r f ≐ refl-pointed-htpy` and `g ·l r₀ ≐ refl-pointed-htpy`.
+commutes. Note that `r₁ ·r f ≐ refl-pointed-htpy` and
+`g ·l r₀ ≐ refl-pointed-htpy`.
 
 ```agda
 module _
@@ -430,7 +432,7 @@ module _
   where
 
   refl-htpy-hom-pointed-arrow :
-    (f : A →∗ B) (g : X →∗ Y) (α : hom-pointed-arrow f g) → 
+    (f : A →∗ B) (g : X →∗ Y) (α : hom-pointed-arrow f g) →
     htpy-hom-pointed-arrow f g α α
   pr1 (refl-htpy-hom-pointed-arrow f g α) = refl-pointed-htpy _
   pr1 (pr2 (refl-htpy-hom-pointed-arrow f g α)) = refl-pointed-htpy _

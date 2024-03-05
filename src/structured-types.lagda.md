@@ -59,7 +59,7 @@ open import structured-types.symmetric-h-spaces public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
 open import structured-types.unpointed-maps public
-open import structured-types.whiskering-pointed-homotopies public
+open import structured-types.whiskering-pointed-homotopies-composition public
 open import structured-types.wild-groups public
 open import structured-types.wild-loops public
 open import structured-types.wild-monoids public

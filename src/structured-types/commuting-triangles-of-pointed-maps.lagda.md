@@ -12,7 +12,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.whiskering-pointed-homotopies
+open import structured-types.whiskering-pointed-homotopies-composition
 ```
 
 </details>
@@ -31,13 +31,17 @@ Consider a triangle of [pointed maps](structured-types.pointed-maps.md)
             C
 ```
 
-Such a triangle is said to be a {{#concept "commuting triangle of pointed maps" Agda=coherence-triangle-pointed-maps}} if there is a [pointed homotopy](structured-types.pointed-homotopies.md)
+Such a triangle is said to be a
+{{#concept "commuting triangle of pointed maps" Agda=coherence-triangle-pointed-maps}}
+if there is a [pointed homotopy](structured-types.pointed-homotopies.md)
 
 ```text
   left ~∗ right ∘∗ top.
 ```
 
-Such a homotopy is referred to as the {{#concept "coherence" Disambiguation="commuting triangles of pointed maps" Agda=coherence-triangle-pointed-maps}} of the commuting triangle of pointed maps.
+Such a homotopy is referred to as the
+{{#concept "coherence" Disambiguation="commuting triangles of pointed maps" Agda=coherence-triangle-pointed-maps}}
+of the commuting triangle of pointed maps.
 
 ## Definitions
 
@@ -75,7 +79,9 @@ Consider a commuting triangle of pointed maps
             C
 ```
 
-and consider a pointed map `f : C →∗ X`. The {{#concept "left whiskering" Disambiguation="commuting triangles of pointed maps" Agda=left-whisker-comp-coherence-triangle-pointed-maps}} is a coherence of the triangle of pointed maps
+and consider a pointed map `f : C →∗ X`. The
+{{#concept "left whiskering" Disambiguation="commuting triangles of pointed maps" Agda=left-whisker-comp-coherence-triangle-pointed-maps}}
+is a coherence of the triangle of pointed maps
 
 ```text
               top
@@ -87,7 +93,8 @@ and consider a pointed map `f : C →∗ X`. The {{#concept "left whiskering" Di
                X
 ```
 
-In other words, left whiskering of coherences of commuting triangles of pointed maps is an operation
+In other words, left whiskering of coherences of commuting triangles of pointed
+maps is an operation
 
 ```text
   (left ~∗ right ∘∗ top) → (f ∘∗ left ~ ∗ (f ∘∗ right) ∘∗ top).
@@ -109,6 +116,6 @@ module _
       ( f ∘∗ left)
       ( f ∘∗ (right ∘∗ top))
       ( (f ∘∗ right) ∘∗ top)
-      ( left-whisker-pointed-htpy f left (right ∘∗ top) H)
+      ( left-whisker-comp-pointed-htpy f left (right ∘∗ top) H)
       {! inv-assoc-pointed-htpy!}
 ```
