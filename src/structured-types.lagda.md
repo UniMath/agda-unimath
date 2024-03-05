@@ -9,7 +9,7 @@ open import structured-types.cartesian-products-types-equipped-with-endomorphism
 open import structured-types.central-h-spaces public
 open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.conjugation-pointed-types public
-open import structured-types.constant-maps-pointed-types public
+open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
 open import structured-types.cyclic-types public
 open import structured-types.dependent-products-h-spaces public

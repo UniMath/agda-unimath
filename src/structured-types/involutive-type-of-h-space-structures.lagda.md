@@ -23,7 +23,7 @@ open import foundation.symmetric-identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import structured-types.constant-maps-pointed-types
+open import structured-types.constant-pointed-maps
 open import structured-types.pointed-types
 
 open import univalent-combinatorics.2-element-types

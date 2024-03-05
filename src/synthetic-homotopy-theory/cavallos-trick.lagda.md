@@ -14,6 +14,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sections
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
@@ -39,23 +40,25 @@ module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
   where
 
-  cavallos-trick :
+  htpy-cavallos-trick :
     (f g : A →∗ B) → section (λ (H : id ~ id) → H (point-Pointed-Type B)) →
-    (map-pointed-map f ~ map-pointed-map g) → f ~∗ g
-  pr1 (cavallos-trick (f , refl) (g , q) (K , α) H) a =
+    (map-pointed-map f ~ map-pointed-map g) →
+    unpointed-htpy-pointed-map f g
+  htpy-cavallos-trick (f , refl) (g , q) (K , α) H a =
     K (inv q ∙ inv (H (point-Pointed-Type A))) (f a) ∙ H a
-  pr2 (cavallos-trick (f , refl) (g , q) (K , α) H) =
-    ( ap
-      ( concat' (f (point-Pointed-Type A)) (H (point-Pointed-Type A)))
-      ( α (inv q ∙ inv (H (point-Pointed-Type A))))) ∙
-    ( ( assoc
-        ( inv q)
-        ( inv (H (point-Pointed-Type A)))
-        ( H (point-Pointed-Type A))) ∙
-      ( ( ap
-          ( concat (inv q) (g (point-Pointed-Type A)))
-          ( left-inv (H (point-Pointed-Type A)))) ∙
-        ( right-unit)))
+
+  coherence-point-cavallos-trick :
+    (f g : A →∗ B) (s : section (λ (H : id ~ id) → H (point-Pointed-Type B))) →
+    (H : map-pointed-map f ~ map-pointed-map g) →
+    coherence-point-unpointed-htpy-pointed-Π f g
+      ( htpy-cavallos-trick f g s H)
+  coherence-point-cavallos-trick (f , refl) (g , q) (K , α) H =
+    inv
+      ( ( right-whisker-concat
+          ( ( right-whisker-concat (α _) (H _)) ∙
+            ( is-section-inv-concat' (H _) (inv q)))
+          ( q)) ∙
+        ( left-inv q))
 ```
 
 ## References
