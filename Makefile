@@ -46,10 +46,11 @@ METAFILES := \
 	MIXFIX-OPERATORS.md \
 	MAINTAINERS.md \
 	README.md \
+	references.bib \
 	STATEMENT-OF-INCLUSION.md \
 	SUMMARY.md \
 	TEMPLATE.lagda.md \
-	USERS.md \
+	USERS.md
 
 .PHONY: agdaFiles
 agdaFiles:

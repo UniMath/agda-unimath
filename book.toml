@@ -51,6 +51,13 @@ output-file = "docs/concept_index.json"
 mathswitch-template = "https://mathswitch.xyz/concept/Wd/{wikidata_id}"
 wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
 
+[preprocessor.citations]
+command = "python3 ./scripts/preprocessor_citations.py"
+bibtex = "references.bib"
+backend_format = "html"
+citation_style = "alpha"
+citation_label_style = "alpha"
+
 [output.linkcheck]
 follow-web-links = false
 

@@ -221,7 +221,6 @@ if __name__ == '__main__':
     metadata_config['suppress_processing'] = metadata_config.get(
         'suppress_processing', [])
 
-    start = time.time()
     if bool(metadata_config.get('enable')) == True:
         # Split the work between PROCESS_COUNT processes
         with Pool(PROCESS_COUNT) as p:
@@ -232,9 +231,6 @@ if __name__ == '__main__':
     else:
         eprint('Skipping git metadata, enable option was',
                metadata_config.get('enable'))
-
-    end = time.time()
-    eprint(end - start)
 
     # Pass the book back to mdbook
     json.dump(book, sys.stdout)

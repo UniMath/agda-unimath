@@ -63,7 +63,7 @@ is-uniquely-eliminating-modality-double-negation-modality {l} {A} P =
         ( z))
 ```
 
-This proof follows Example 1.9 in _Modalities in homotopy type theory_.
+This proof follows Example 1.9 in {{#cite RSS20}}.
 
 ## References
 

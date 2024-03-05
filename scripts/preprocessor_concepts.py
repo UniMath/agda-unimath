@@ -203,17 +203,13 @@ if __name__ == '__main__':
 
     # Thread the index through execution
     mut_index = []
-    start = time.time()
     if bool(concepts_config.get('enable', True)) == True:
         book['sections'] = list(map(
             lambda s: tag_concepts_root_section(s, concepts_config, mut_index),
             book['sections']))
     else:
-        eprint('Skipping concept tagging, enable option was',
+        eprint('Skipping concept tagging, enable option was set to',
                concepts_config.get('enable'))
-
-    end = time.time()
-    eprint(end - start)
 
     if mut_index != []:
         with open(concepts_config.get('output-file', 'concept_index.json'), 'w') as index_f:
