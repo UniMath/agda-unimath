@@ -65,6 +65,8 @@ is-uniquely-eliminating-modality-double-negation-modality {l} {A} P =
 
 This proof follows Example 1.9 in {{#cite RSS20}}.
 
+{{#reference UF13}} {{#cite Warn24 no-reference}}
+
 ## References
 
 - Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type

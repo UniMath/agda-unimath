@@ -20,6 +20,9 @@ import json
 
 # Regex to match citation macros
 CITE_REGEX = re.compile(r'\{\{#cite ([^\}\s]+)(?:\s(.*?))?\}\}')
+NO_REF_CITE_REGEX = re.compile(r'\bno-ref(erence)?\b')
+REFERENCE_REGEX = re.compile(r'\{\{#reference ([^\}\s]+)(?:\s(.*?))?\}\}')
+
 
 def render_references(bib_database : pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle , backend: pybtex.backends.BaseBackend, cited_keys):
     formatted_bibliography = style.format_bibliography(bib_database, sorted(cited_keys))
@@ -35,8 +38,10 @@ def render_references(bib_database : pybtex.database.BibliographyData, style: py
 
 
 
-def format_citation(bib_database : pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle , backend: pybtex.backends.BaseBackend, cite_key, cited_keys):
-    cited_keys.add(cite_key)
+def format_citation(bib_database : pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle , backend: pybtex.backends.BaseBackend, match, cited_keys):
+    cite_key = match.group(1)
+    if not NO_REF_CITE_REGEX.search(match.group(0)): # TODO: should be group 2
+        cited_keys.add(cite_key)
     # Function to format the citation and collect cited keys
     if cite_key in bib_database.entries:
         formatted_label = style.label_style.format_label(bib_database.entries[cite_key])
@@ -56,7 +61,12 @@ def generate_bibliography(bib_database : pybtex.database.BibliographyData, style
 def process_citations_chapter_rec_mut(chapter, bib_database : pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle , backend):
     cited_keys = set()  # Set to keep track of all cited keys
     content = chapter.get('content', '')
-    new_content = CITE_REGEX.sub(lambda match: format_citation(bib_database, style, backend, match.group(1), cited_keys) or match.group(0), content)
+    new_content = CITE_REGEX.sub(lambda match: format_citation(bib_database, style, backend, match, cited_keys) or match.group(0), content)
+
+    for match in REFERENCE_REGEX.finditer(content):
+        cited_keys.add(match.group(1))
+    new_content = REFERENCE_REGEX.sub('', new_content)
+
     if cited_keys: eprint("match!", cited_keys)
 
     if cited_keys:
