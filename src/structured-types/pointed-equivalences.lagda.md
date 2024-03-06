@@ -540,7 +540,6 @@ module _
           ( id-pointed-map)
           ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv f H)))
 
-
   section-universal-property-pointed-equiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
     {l : Level} (C : Pointed-Type l) →

@@ -28,7 +28,8 @@ open import structured-types.pointed-types
 A pointed map from a pointed type `A` to a pointed type `B` is a base point
 preserving function from `A` to `B`.
 
-The type `A →∗ B` of pointed maps from `A` to `B` is itself pointed by the [constant pointed map](structured-types.constant-pointed-maps.md).
+The type `A →∗ B` of pointed maps from `A` to `B` is itself pointed by the
+[constant pointed map](structured-types.constant-pointed-maps.md).
 
 ## Definitions
 

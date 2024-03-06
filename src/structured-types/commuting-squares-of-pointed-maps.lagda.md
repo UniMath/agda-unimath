@@ -8,9 +8,9 @@ module structured-types.commuting-squares-of-pointed-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-squares-of-maps
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels

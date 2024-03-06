@@ -194,7 +194,7 @@ The lower triangle is the base point coherence `H₁` of the pointed homotopy
 module _
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
-  (g1 g2 : B →∗ C) (H : g1  ~∗ g2) (f : A →∗ B)
+  (g1 g2 : B →∗ C) (H : g1 ~∗ g2) (f : A →∗ B)
   where
 
   htpy-right-whisker-comp-pointed-htpy :

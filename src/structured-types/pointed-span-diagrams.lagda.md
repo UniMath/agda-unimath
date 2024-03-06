@@ -14,8 +14,8 @@ open import foundation.universe-levels
 
 open import structured-types.morphisms-pointed-arrows
 open import structured-types.pointed-maps
-open import structured-types.pointed-types
 open import structured-types.pointed-spans
+open import structured-types.pointed-types
 ```
 
 </details>

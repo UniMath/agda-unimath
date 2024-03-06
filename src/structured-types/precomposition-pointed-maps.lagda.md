@@ -17,7 +17,10 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The {{#concept "precomposition operation" Disambiguation="pointed maps" Agda=precomp-pointed-map}} on [pointed maps](structured-types.pointed-maps.md) by a pointed map `f : A →∗ B` is a family of operations
+The
+{{#concept "precomposition operation" Disambiguation="pointed maps" Agda=precomp-pointed-map}}
+on [pointed maps](structured-types.pointed-maps.md) by a pointed map
+`f : A →∗ B` is a family of operations
 
 ```text
   - ∘∗ f : (B →∗ C) → (A →∗ C)

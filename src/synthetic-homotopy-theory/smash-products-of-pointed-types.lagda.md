@@ -353,7 +353,7 @@ module _
       ( map-pointed-map f)
       ( inl-glue-smash-product-Pointed-Type A B x)) ∙
     ( preserves-point-pointed-map f)
-  
+
   map-universal-property-smash-product-Pointed-Type :
     type-Pointed-Type A → (B →∗ C)
   pr1 (map-universal-property-smash-product-Pointed-Type x) =
@@ -402,7 +402,7 @@ module _
         ( point-Pointed-Type A))
       ( constant-pointed-map B C)
       ( pointed-htpy-preserves-point-map-universal-property-smash-product-Pointed-Type)
-  
+
   pointed-map-universal-property-smash-product-Pointed-Type :
     A →∗ (pointed-map-Pointed-Type B C)
   pr1 pointed-map-universal-property-smash-product-Pointed-Type =

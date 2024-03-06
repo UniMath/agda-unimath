@@ -8,6 +8,7 @@ module foundation.commuting-triangles-of-identifications where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.path-algebra
@@ -17,7 +18,6 @@ open import foundation.whiskering-identifications-concatenation
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation.commuting-squares-of-identifications
 ```
 
 </details>
@@ -540,7 +540,14 @@ module _
   higher-transpose-right-coherence-triangle-identifications
     left right top p q s t =
     map-equiv
-      ( equiv-higher-transpose-right-coherence-triangle-identifications left right top p q s t)
+      ( equiv-higher-transpose-right-coherence-triangle-identifications
+        ( left)
+        ( right)
+        ( top)
+        ( p)
+        ( q)
+        ( s)
+        ( t))
 ```
 
 ### Concatenating identifications on edges with coherences of commuting triangles of identifications
@@ -616,13 +623,17 @@ Consider a commuting diagram of identifications of the form
            d
 ```
 
-Then the outer triangle commutes too. Indeed, an identification `left ＝ top-left ∙ middle` is given. Then, an identification
+Then the outer triangle commutes too. Indeed, an identification
+`left ＝ top-left ∙ middle` is given. Then, an identification
 
 ```text
   top-left ∙ middle ＝ (top-left ∙ top-right) ∙ right
 ```
 
-is obtained immediately by left whiskering the right triangle with the identification `top-left`. Note that this direct construction of the coherence of the outer commuting triangle of identifications avoids any use of associativity.
+is obtained immediately by left whiskering the right triangle with the
+identification `top-left`. Note that this direct construction of the coherence
+of the outer commuting triangle of identifications avoids any use of
+associativity.
 
 ```agda
 module _
@@ -630,7 +641,7 @@ module _
   {a b c d : A} (left : a ＝ d) (middle : b ＝ d) (right : c ＝ d)
   (top-left : a ＝ b) (top-right : b ＝ c)
   where
-  
+
   horizontal-pasting-coherence-triangle-identifications :
     coherence-triangle-identifications left middle top-left →
     coherence-triangle-identifications middle right top-right →
@@ -712,7 +723,9 @@ Consider a diagram of the form
                  e
 ```
 
-with `s : top-left ∙ mid ＝ top ∙ top-right` witnessing that the square commutes, and with `t : bottom-left ＝ mid ∙ bottom-right` witnessing that the triangle commutes. Then the outer triangle commutes.
+with `s : top-left ∙ mid ＝ top ∙ top-right` witnessing that the square
+commutes, and with `t : bottom-left ＝ mid ∙ bottom-right` witnessing that the
+triangle commutes. Then the outer triangle commutes.
 
 ```agda
 module _

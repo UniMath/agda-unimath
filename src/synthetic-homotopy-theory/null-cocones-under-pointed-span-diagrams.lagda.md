@@ -28,14 +28,19 @@ open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 
 ## Idea
 
-The {{#concept "null cocone" Disambiguation="pointed span diagram}} under a [pointed span diagram](structured-types.pointed-span-diagrams.md) `𝒮` given by
+The {{#concept "null cocone" Disambiguation="pointed span diagram}} under a
+[pointed span diagram](structured-types.pointed-span-diagrams.md) `𝒮` given by
 
 ```text
       f       g
   A <---- S ----> B
 ```
 
-with codomain `X` is the [cocone](synthetic-homotopy-theory.cocones-under-pointed-span-diagrams.md) under `𝒮` consisting of the [constant pointed maps](structured-types.constant-pointed-maps.md) `A →∗ X` and `B →∗ X` and the canonical homotopy witnessing that the square of pointed maps
+with codomain `X` is the
+[cocone](synthetic-homotopy-theory.cocones-under-pointed-span-diagrams.md) under
+`𝒮` consisting of the
+[constant pointed maps](structured-types.constant-pointed-maps.md) `A →∗ X` and
+`B →∗ X` and the canonical homotopy witnessing that the square of pointed maps
 
 ```text
         g
@@ -47,7 +52,8 @@ with codomain `X` is the [cocone](synthetic-homotopy-theory.cocones-under-pointe
       const
 ```
 
-[commutes](structured-types.commuting-squares-pointed-maps.md). The null cocone under `𝒮` provides a canonical pointing of the type `cocone-Pointed-Type f g`.
+[commutes](structured-types.commuting-squares-pointed-maps.md). The null cocone
+under `𝒮` provides a canonical pointing of the type `cocone-Pointed-Type f g`.
 
 ## Definitions
 

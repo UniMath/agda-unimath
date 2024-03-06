@@ -53,39 +53,39 @@ module _
 
   pointed-retraction-is-pointed-iso : pointed-retraction f
   pointed-retraction-is-pointed-iso = pr2 H
-                                          
+
   pointed-map-pointed-section-is-pointed-iso : B →∗ A
   pointed-map-pointed-section-is-pointed-iso =
     pointed-map-pointed-section f pointed-section-is-pointed-iso
-                                  
+
   is-pointed-section-pointed-section-is-pointed-iso :
     is-pointed-section f pointed-map-pointed-section-is-pointed-iso
   is-pointed-section-pointed-section-is-pointed-iso =
     is-pointed-section-pointed-section f
       pointed-section-is-pointed-iso
-        
+
   map-pointed-section-is-pointed-iso :
     type-Pointed-Type B → type-Pointed-Type A
   map-pointed-section-is-pointed-iso =
     map-pointed-section f pointed-section-is-pointed-iso
-                          
+
   preserves-point-pointed-map-pointed-section-is-pointed-iso :
     map-pointed-section-is-pointed-iso (point-Pointed-Type B) ＝
     point-Pointed-Type A
   preserves-point-pointed-map-pointed-section-is-pointed-iso =
     preserves-point-pointed-map-pointed-section f
       pointed-section-is-pointed-iso
-        
+
   is-section-pointed-section-is-pointed-iso :
     is-section (map-pointed-map f) map-pointed-section-is-pointed-iso
   is-section-pointed-section-is-pointed-iso =
     is-section-pointed-section f pointed-section-is-pointed-iso
-                                 
+
   section-is-pointed-iso :
     section (map-pointed-map f)
   section-is-pointed-iso =
     section-pointed-section f pointed-section-is-pointed-iso
-                              
+
   coherence-point-is-section-pointed-section-is-pointed-iso :
     coherence-point-unpointed-htpy-pointed-Π
       ( f ∘∗ pointed-map-pointed-section-is-pointed-iso)
@@ -98,24 +98,24 @@ module _
   pointed-map-pointed-retraction-is-pointed-iso : B →∗ A
   pointed-map-pointed-retraction-is-pointed-iso =
     pr1 pointed-retraction-is-pointed-iso
-        
+
   is-pointed-retraction-pointed-retraction-is-pointed-iso :
     is-pointed-retraction f pointed-map-pointed-retraction-is-pointed-iso
   is-pointed-retraction-pointed-retraction-is-pointed-iso =
     pr2 pointed-retraction-is-pointed-iso
-        
+
   map-pointed-retraction-is-pointed-iso :
     type-Pointed-Type B → type-Pointed-Type A
   map-pointed-retraction-is-pointed-iso =
     map-pointed-map pointed-map-pointed-retraction-is-pointed-iso
-                    
+
   preserves-point-pointed-map-pointed-retraction-is-pointed-iso :
     map-pointed-retraction-is-pointed-iso (point-Pointed-Type B) ＝
     point-Pointed-Type A
   preserves-point-pointed-map-pointed-retraction-is-pointed-iso =
     preserves-point-pointed-map
       pointed-map-pointed-retraction-is-pointed-iso
-        
+
   is-retraction-pointed-retraction-is-pointed-iso :
     is-retraction
       ( map-pointed-map f)
@@ -217,7 +217,7 @@ module _
   section-pointed-iso =
     section-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-                                
+
   coherence-point-is-section-pointed-section-pointed-iso :
     coherence-point-unpointed-htpy-pointed-Π
       ( pointed-map-pointed-iso ∘∗ pointed-map-pointed-section-pointed-iso)
@@ -226,12 +226,12 @@ module _
   coherence-point-is-section-pointed-section-pointed-iso =
     coherence-point-is-section-pointed-section-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-        
+
   pointed-map-pointed-retraction-pointed-iso : B →∗ A
   pointed-map-pointed-retraction-pointed-iso =
     pointed-map-pointed-retraction-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-        
+
   is-pointed-retraction-pointed-retraction-pointed-iso :
     is-pointed-retraction
       ( pointed-map-pointed-iso)
@@ -239,20 +239,20 @@ module _
   is-pointed-retraction-pointed-retraction-pointed-iso =
     is-pointed-retraction-pointed-retraction-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-        
+
   map-pointed-retraction-pointed-iso :
     type-Pointed-Type B → type-Pointed-Type A
   map-pointed-retraction-pointed-iso =
     map-pointed-retraction-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-                    
+
   preserves-point-pointed-map-pointed-retraction-pointed-iso :
     map-pointed-retraction-pointed-iso (point-Pointed-Type B) ＝
     point-Pointed-Type A
   preserves-point-pointed-map-pointed-retraction-pointed-iso =
     preserves-point-pointed-map-pointed-retraction-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-        
+
   is-retraction-pointed-retraction-pointed-iso :
     is-retraction
       ( map-pointed-iso)
@@ -260,13 +260,13 @@ module _
   is-retraction-pointed-retraction-pointed-iso =
     is-retraction-pointed-retraction-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-        
+
   retraction-pointed-iso :
     retraction (map-pointed-iso)
   retraction-pointed-iso =
     retraction-is-pointed-iso
       ( is-pointed-iso-pointed-iso)
-                                    
+
   coherence-point-is-retraction-pointed-retraction-pointed-iso :
     coherence-point-unpointed-htpy-pointed-Π
       ( pointed-map-pointed-retraction-pointed-iso ∘∗ pointed-map-pointed-iso)
