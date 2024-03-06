@@ -85,6 +85,16 @@ one-nonnegative-ℤ = one-ℤ , star
 
 ## Properties
 
+### The nonnegative integers are a `Set`
+
+```agda
+is-set-nonnegative-ℤ : is-set nonnegative-ℤ
+is-set-nonnegative-ℤ =
+  is-set-emb
+    ( emb-subtype subtype-nonnegative-ℤ)
+    ( is-set-ℤ)
+```
+
 ### The successor of a nonnegative integer is nonnegative
 
 ```agda

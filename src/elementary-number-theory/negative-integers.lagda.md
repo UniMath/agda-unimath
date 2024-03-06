@@ -78,6 +78,16 @@ neg-one-negative-ℤ = neg-one-ℤ , star
 
 ## Properties
 
+### The negative integers are a `Set`
+
+```agda
+is-set-negative-ℤ : is-set negative-ℤ
+is-set-negative-ℤ =
+  is-set-emb
+    ( emb-subtype subtype-negative-ℤ)
+    ( is-set-ℤ)
+```
+
 ### The predecessor of a negative integer is negative
 
 ```agda

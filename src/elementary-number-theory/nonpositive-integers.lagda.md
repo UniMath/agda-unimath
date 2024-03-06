@@ -87,6 +87,16 @@ neg-one-nonpositive-ℤ = neg-one-ℤ , star
 
 ## Properties
 
+### The nonpositive integers are a `Set`
+
+```agda
+is-set-nonpositive-ℤ : is-set nonpositive-ℤ
+is-set-nonpositive-ℤ =
+  is-set-emb
+    ( emb-subtype subtype-nonpositive-ℤ)
+    ( is-set-ℤ)
+```
+
 ### The predecessor of a nonpositive integer is nonpositive
 
 ```agda
