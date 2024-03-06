@@ -37,7 +37,9 @@ def render_references(bib_database : pybtex.database.BibliographyData, style: py
         cite_entry = bib_database.entries[cite_key]
         label = style.label_style.format_label(cite_entry)
         formatted_label = format_label(bib_database.entries[cite_key], style)
-        html = html.replace(f'<dt>{label}</dt>', f'<dt class="reference-entry"><b><a name="reference-{formatted_label}">[{formatted_label}]</a></b></dt>')
+        html = html.replace(f'<dt>{label}</dt>', f'<dt class="reference-entry"><a name="reference-{formatted_label}">&#91;{formatted_label}&#93;</a></dt>')
+
+    html = html.replace("<body", "<body class='bibliography'")
 
     return html
 
@@ -59,7 +61,7 @@ def format_citation(bib_database : pybtex.database.BibliographyData, style: pybt
         label = style.label_style.format_label(cite_entry)
         formatted_label = format_label(cite_entry, style)
 
-        return f'<a  style="color: black; text-decoration: none;" class="citation-link" href="#reference-{label}">[{formatted_label}]</a>'
+        return f'<a class="citation-link" href="#reference-{label}">&#91;{formatted_label}&#93;</a>'
     else:
         eprint(f"Warning: Citation key '{cite_key}' not found in bibliography.")
         return None
@@ -81,7 +83,7 @@ def process_citations_chapter_rec_mut(chapter, bib_database : pybtex.database.Bi
         cited_keys.add(m.group(1))
         return ''
 
-    REFERENCE_REGEX.sub(sub_reference_regex_lambda, new_content)
+    new_content = REFERENCE_REGEX.sub(sub_reference_regex_lambda, new_content)
 
     if cited_keys:
         bibliography_section = generate_bibliography(bib_database, style, backend, cited_keys)

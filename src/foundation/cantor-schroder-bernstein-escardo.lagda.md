@@ -33,9 +33,10 @@ The classical Cantor–Schröder–Bernstein theorem asserts that from any pair 
 [injective maps](foundation-core.injective-maps.md) `f : A → B` and `g : B → A`
 we can construct a bijection between `A` and `B`. In a recent generalization,
 Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
-∞-groupoids. {{#cite escardoCantorSchroderBernstein2021}} His generalization
-asserts that given two types that [embed](foundation-core.embeddings.md) into
-each other, then the types are [equivalent](foundation-core.equivalences.md).
+∞-groupoids. His generalization asserts that given two types that
+[embed](foundation-core.embeddings.md) into each other, then the types are
+[equivalent](foundation-core.equivalences.md).
+{{#cite escardoCantorSchroderBernstein2021}}
 
 ## Statement
 

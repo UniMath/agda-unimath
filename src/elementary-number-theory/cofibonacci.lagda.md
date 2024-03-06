@@ -141,4 +141,4 @@ is-left-adjoint-cofibonacci m n = {!!}
 
 ## External links
 
-- [A001177](https://oeis.org/A001177) at OEIS
+[1]: https://oeis.org/A001177
