@@ -222,7 +222,7 @@ obtained by concatenation of the following three pointed homotopies:
 
 The first and third homotopy in this concatenation are the whiskerings of
 coherences of
-[commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
+[commuting triangles of pointed maps](structured-types.commuting-triangles-of-pointed-maps.md).
 
 ```agda
 module _
@@ -316,7 +316,7 @@ obtained by concatenation of the following three pointed homotopies:
 
 The first and third homotopy in this concatenation are the whiskerings of
 coherences of
-[commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
+[commuting triangles of pointed maps](structured-types.commuting-triangles-of-pointed-maps.md).
 
 ```agda
 module _
