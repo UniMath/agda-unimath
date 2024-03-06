@@ -9,8 +9,6 @@ module foundation-core.postcomposition-functions where
 ```agda
 open import foundation.postcomposition-dependent-functions
 open import foundation.universe-levels
-
-open import foundation-core.function-types
 ```
 
 </details>

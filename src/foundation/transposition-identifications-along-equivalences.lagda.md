@@ -86,9 +86,9 @@ module _
     {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
   map-eq-transpose-equiv {x} {y} = map-equiv (eq-transpose-equiv x y)
 
-  inv-map-eq-transpose-equiv :
+  map-inv-eq-transpose-equiv :
     {x : A} {y : B} → x ＝ map-inv-equiv e y → map-equiv e x ＝ y
-  inv-map-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
+  map-inv-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
 
   eq-transpose-equiv' :
     (x : A) (y : B) → (map-equiv e x ＝ y) ≃ (x ＝ map-inv-equiv e y)
@@ -123,9 +123,9 @@ module _
     {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
   map-eq-transpose-equiv-inv {a} {b} = map-equiv (eq-transpose-equiv-inv a b)
 
-  inv-map-eq-transpose-equiv-inv :
+  map-inv-eq-transpose-equiv-inv :
     {a : A} {b : B} → map-inv-equiv e b ＝ a → b ＝ map-equiv e a
-  inv-map-eq-transpose-equiv-inv {a} {b} =
+  map-inv-eq-transpose-equiv-inv {a} {b} =
     map-inv-equiv (eq-transpose-equiv-inv a b)
 ```
 
