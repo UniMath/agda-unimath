@@ -22,7 +22,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A {{#concept "(binary) span diagram of pointed types"}} is a diagram of
+A {{#concept "(binary) pointed span diagram"}} is a diagram of
 [pointed maps](structured-types.pointed-maps.md) of the form
 
 ```text
@@ -30,9 +30,9 @@ A {{#concept "(binary) span diagram of pointed types"}} is a diagram of
   A <----- S -----> B.
 ```
 
-In other words, a span diagram of pointed types consists of two
+In other words, a pointed span diagram consists of two
 [pointed types](structured-types.pointed-types.md) `A` and `B` and a
-[span of pointed types](structured-types.pointed-spans.md) from `A` to `B`.
+[pointed span](structured-types.pointed-spans.md) from `A` to `B`.
 
 ### (Binary) span diagrams of pointed types
 
@@ -147,10 +147,10 @@ module _
       ( pointed-span-pointed-span-diagram)
 ```
 
-### The span diagram obtained from a morphism of pointed arrows
+### The pointed span diagram obtained from a morphism of pointed arrows
 
 Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of pointed
-arrows `α : f →∗ g`, the span diagram associated to `α` is the span diagram
+arrows `α : f →∗ g`, the pointed span diagram associated to `α` is the pointed span diagram
 
 ```text
        f       α₀
@@ -259,9 +259,4 @@ module _
 
 ## See also
 
-- [Cospans](foundation.cospans.md)
-- [Diagonal spans](foundation.diagonal-spans.md)
-- [Operations on spans](foundation.operations-spans.md)
-- [Kernel spans of maps](foundation.kernel-spans-of-maps.md)
-- [Spans of families of types](foundation.spans-families-of-types.md)
-- [Transposition of span diagrams](foundation.transposition-pointed-span-diagrams.md)
+- [Transposition of pointed span diagrams](structured-types.transposition-pointed-span-diagrams.md)
