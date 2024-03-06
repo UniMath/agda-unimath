@@ -18,8 +18,10 @@ from utils import eprint
 import json
 
 
+CITEAS_FIELD = 'citeas'
+
 # Regex to match citation macros
-CITE_REGEX = re.compile(r'\{\{#cite ([^\}\s]+)(?:\s(.*?))?\}\}')
+CITE_REGEX = re.compile(r'\{\{#cite ([^\}\s]+)(?:\s(.*))?\}\}')
 NO_REF_CITE_REGEX = re.compile(r'\bno-ref(erence)?\b')
 REFERENCE_REGEX = re.compile(r'\{\{#reference ([^\}\s]+)(?:\s(.*?))?\}\}')
 
@@ -31,21 +33,32 @@ def render_references(bib_database : pybtex.database.BibliographyData, style: py
     html = output.getvalue()
 
     for cite_key in cited_keys:
-        formatted_label = style.label_style.format_label(bib_database.entries[cite_key])
-        html = html.replace(f'<dt>{formatted_label}</dt>', f'<dt><a name="{formatted_label}">[{formatted_label}]</a></dt>')
+        cite_entry = bib_database.entries[cite_key]
+        label = style.label_style.format_label(cite_entry)
+        formatted_label = format_label(bib_database.entries[cite_key], style)
+        html = html.replace(f'<dt>{label}</dt>', f'<dt class="reference-entry"><b><a name="reference-{formatted_label}">[{formatted_label}]</a></b></dt>')
 
     return html
 
+def format_label(entry : pybtex.database.Entry, style: pybtex.style.formatting.BaseStyle):
+    if CITEAS_FIELD in entry.fields.keys():
+        return entry.fields[CITEAS_FIELD]
+    else:
+        return style.label_style.format_label(entry)
 
 
 def format_citation(bib_database : pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle , backend: pybtex.backends.BaseBackend, match, cited_keys):
     cite_key = match.group(1)
-    if not NO_REF_CITE_REGEX.search(match.group(0)): # TODO: should be group 2
+    if not match.group(2) or not NO_REF_CITE_REGEX.search(match.group(2)):
         cited_keys.add(cite_key)
     # Function to format the citation and collect cited keys
     if cite_key in bib_database.entries:
-        formatted_label = style.label_style.format_label(bib_database.entries[cite_key])
-        return f'<a  style="color: black; text-decoration: none;" class="bib" href="#{formatted_label}">[{formatted_label}]</a>'
+        cite_entry = bib_database.entries[cite_key]
+
+        label = style.label_style.format_label(cite_entry)
+        formatted_label = format_label(cite_entry, style)
+
+        return f'<a  style="color: black; text-decoration: none;" class="citation-link" href="#reference-{label}">[{formatted_label}]</a>'
     else:
         eprint(f"Warning: Citation key '{cite_key}' not found in bibliography.")
         return None
