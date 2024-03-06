@@ -238,7 +238,7 @@ module _
       ( is-positive-eq-ℤ
         ( inv ( lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
         ( is-positive-mul-ℤ
-          (is-positive-denominator-fraction-ℤ r)
+          ( is-positive-denominator-fraction-ℤ r)
           ( H)))
       ( is-positive-denominator-fraction-ℤ q)
 ```

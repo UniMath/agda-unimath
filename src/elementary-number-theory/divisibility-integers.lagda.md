@@ -681,8 +681,6 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
         ( a)
         ( H)
         ( is-nonpositive-eq-ℤ
-          ( neg-neg-ℤ a)
-          ( is-nonpositive-neg-is-nonnegative-ℤ
-            ( neg-ℤ a)
-            ( is-nonnegative-eq-ℤ (inv neg) H')))))
+           ( inv (ap neg-ℤ neg) ∙ (neg-neg-ℤ a))
+           ( is-nonpositive-neg-is-nonnegative-ℤ b H'))))
 ```

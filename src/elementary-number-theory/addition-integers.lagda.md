@@ -537,11 +537,9 @@ is-positive-add-ℤ :
   {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
 is-positive-add-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
 is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-succ-is-nonnegative-ℤ
+  is-positive-succ-is-positive-ℤ
     ( add-ℤ (inr (inr x)) (inr (inr y)))
-    ( is-nonnegative-is-positive-ℤ
-      ( add-ℤ (inr (inr x)) (inr (inr y)))
-      ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} H K))
+    ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} H K)
 
 is-positive-add-nonnegative-positive-ℤ :
   {x y : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
