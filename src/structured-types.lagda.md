@@ -38,6 +38,7 @@ open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-h-spaces public
 open import structured-types.morphisms-magmas public
 open import structured-types.morphisms-pointed-arrows public
+open import structured-types.morphisms-twisted-pointed-arrows public
 open import structured-types.morphisms-types-equipped-with-automorphisms public
 open import structured-types.morphisms-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-wild-monoids public

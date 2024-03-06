@@ -47,7 +47,7 @@ consisting of [pointed equivalences](structured-types.pointed-equivalences.md)
 
 ## Definitions
 
-### Morphisms of pointed arrows
+### Equivalences of pointed arrows
 
 ```agda
 module _

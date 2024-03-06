@@ -820,5 +820,5 @@ module _
 
 ## See also
 
-- [Equivalences of pointed arrows](foundation.equivalences-pointed-arrows.md)
+- [Equivalences of pointed arrows](structured-types.equivalences-pointed-arrows.md)
 - [Morphisms of twisted pointed arrows](foundation.morphisms-twisted-pointed-arrows.md)
