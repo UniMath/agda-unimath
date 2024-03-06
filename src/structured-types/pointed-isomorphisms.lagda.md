@@ -25,8 +25,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A {{#concept "pointed isomorphism" Agda=pointed-isomorphism}} is an isomorphism
-in the wild category of pointed types, i.e., it is a
+A {{#concept "pointed isomorphism" Agda=pointed-iso}} is an isomorphism in the
+wild category of pointed types, i.e., it is a
 [pointed map](structured-types.pointed-types.md) equipped with a
 [pointed section](structured-types.pointed-sections.md) and a
 [pointed retraction](structured-types.pointed-retractions.md).

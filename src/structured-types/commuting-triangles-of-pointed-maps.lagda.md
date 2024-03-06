@@ -80,7 +80,7 @@ Consider a commuting triangle of pointed maps
 ```
 
 and consider a pointed map `f : C →∗ X`. The
-{{#concept "left whiskering" Disambiguation="commuting triangles of pointed maps" Agda=left-whisker-comp-coherence-triangle-pointed-maps}}
+{{#concept "left whiskering" Disambiguation="commuting triangles of pointed maps" Agda=left-whisker-coherence-triangle-pointed-maps}}
 is a coherence of the triangle of pointed maps
 
 ```text

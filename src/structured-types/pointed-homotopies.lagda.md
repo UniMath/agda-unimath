@@ -72,7 +72,7 @@ Note that since pointed homotopies are defined for pointed dependent functions,
 a pointed homotopy between pointed homotopies is just an instance of a pointed
 homotopy. For this reason, we will also refer to the above definition of pointed
 homotopies as
-{{#concept "uniform pointed homotopies" Agda=uniform-pointed-homotopy}}.
+{{#concept "uniform pointed homotopies" Agda=uniform-pointed-htpy}}.
 
 A significant complication of this approach to the definition of pointed
 homotopies is that identifications witnessing the commutativity of the triangle

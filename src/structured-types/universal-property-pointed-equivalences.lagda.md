@@ -22,7 +22,7 @@ open import structured-types.precomposition-pointed-maps
 Analogous to the
 [universal property of equivalences](foundation.universal-property-equivalences.md),
 the
-{{#concept "universal property of pointed equivalences" Agda=universal-property-pointed-equivalences}}
+{{#concept "universal property of pointed equivalences" Agda=universal-property-pointed-equiv}}
 asserts about a [pointed map](structured-types.pointed-maps.md) `f : A →∗ B`
 that the
 [precomposition function](structured-types.precomposition-pointed-maps.md)
