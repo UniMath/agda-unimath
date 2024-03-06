@@ -498,5 +498,4 @@ module _
 
 ## References
 
-- \[1\] Maria Balintne-Szendrei, Gabor Czedli, and Agnes Szendrei. _Absztrakt
-  algebrai feladatok (Exercises in Abstract Algebra)_. Polygon, Szeged, 2005.
+{{#bibliography}} {{#reference AbsztraktAlgebraiFeladatok}}

@@ -254,8 +254,10 @@ files:
 
 ## References
 
-- Two special cases of the extended fundamental theorem of identity types are
-  stated in the Introduction to Homotopy Type Theory textbook by Egbert Rijke:
-  The case where `P` is the subuniverse of `k`-truncated types is stated as
-  Theorem 19.6.2; and the case where `P` is the subuniverse of inhabited types
-  is stated as Exercise 19.14.
+Two special cases of the extended fundamental theorem of identity types are
+stated in the _Introduction to Homotopy Type Theory_ textbook by Egbert Rijke
+{{#cite rijkeIntroductionHomotopyType2022}}: The case where `P` is the
+subuniverse of `k`-truncated types is stated as Theorem 19.6.2; and the case
+where `P` is the subuniverse of inhabited types is stated as Exercise 19.14.
+
+{{#bibliography}}

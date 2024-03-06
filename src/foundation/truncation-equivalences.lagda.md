@@ -502,15 +502,10 @@ module _
 
 ## References
 
-The notion of `k`-equivalence is a special case of the notion of
-`L`-equivalence, where `L` is a reflective subuniverse. They were studied in the
-paper
+- The notion of `k`-equivalence is a special case of the notion of
+  `L`-equivalence, where `L` is a reflective subuniverse. They were studied in
+  the paper {{#cite christensenLocalizationHomotopyType2020}}.
+- The class of `k`-equivalences is left orthogonal to the class of `k`-étale
+  maps. This was shown in {{#cite cherubiniModalDescent2021}}.
 
-- \[CORS'20\]: J. D. Christensen, M. Opie, E. Rijke, and L. Scoccola.
-  Localization in Homotopy Type Theory. Higher Structures, 2020.
-
-The class of `k`-equivalences is left orthogonal to the class of `k`-étale maps.
-This was shown in
-
-- \[CR'21\]: F. Cherubini, and E. Rijke. Modal descent. Mathematical Structures
-  in Computer Science, 2021.
+{{#bibliography}}

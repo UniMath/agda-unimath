@@ -459,8 +459,8 @@ module _
 
 This result is known as
 [Vogt's lemma](https://ncatlab.org/nlab/show/homotopy+equivalence#vogts_lemma)
-in point-set topology. The construction follows Lemma 10.4.5 in _Introduction to
-Homotopy Type Theory_.
+in point-set topology. The construction follows Lemma 10.4.5 in
+{{#cite rijkeIntroductionHomotopyType2022}}.
 
 ```agda
 module _
@@ -624,8 +624,7 @@ module _
 
 ### Coherently invertible maps are transpose coherently invertible
 
-The proof follows Lemma 4.2.2 in _Homotopy Type Theory – Univalent Foundations
-of Mathematics_.
+The proof follows Lemma 4.2.2 in {{#cite UF13}}.
 
 **Proof.** By naturality of homotopies we have
 
@@ -1387,11 +1386,7 @@ module _
 
 ## References
 
-1. Egbert Rijke, _Introduction to Homotopy Type Theory_ (2022)
-   ([arXiv:2212.11082](https://arxiv.org/abs/2212.11082))
-2. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
+{{#bibliography}}
 
 ## See also
 

@@ -63,5 +63,6 @@ module _
 - Cavallo's trick was originally formalized in the
   [cubical agda library](https://agda.github.io/cubical/Cubical.Foundations.Pointed.Homogeneous.html).
 - The above generalization was found by Buchholtz, Christensen, Rijke, and
-  Taxerås Flaten, in
-  [Central H-spaces and banded types](https://arxiv.org/abs/2301.02636)
+  Taxerås Flaten, in {{#cite buchholtzCentralHspacesBanded2023}}
+
+{{#bibliography}} {{#reference buchholtzCentralHspacesBanded2023}}

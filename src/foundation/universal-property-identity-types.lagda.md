@@ -223,3 +223,5 @@ module _
   `Id : A → (A → 𝒰)` is an embedding was first observed and formalized by Martín
   Escardó,
   [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
+
+{{#bibliography}} {{#reference type-topology}}
