@@ -130,7 +130,7 @@ module _
   where
 
   cocone-product-wedge-Pointed-Type :
-    type-cocone-Pointed-Type
+    cocone-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
       ( A ×∗ B)

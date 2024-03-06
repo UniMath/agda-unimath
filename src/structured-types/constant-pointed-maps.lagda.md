@@ -25,6 +25,8 @@ every element of `X` to the base point of `A`.
 
 ## Definitions
 
+### Constant pointed maps
+
 ```agda
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
@@ -41,8 +43,16 @@ module _
   constant-pointed-map : A →∗ B
   pr1 constant-pointed-map = map-constant-pointed-map
   pr2 constant-pointed-map = preserves-point-constant-pointed-map
+```
+
+### The pointed type of pointed maps
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  where
 
   pointed-map-Pointed-Type : Pointed-Type (l1 ⊔ l2)
   pr1 pointed-map-Pointed-Type = A →∗ B
-  pr2 pointed-map-Pointed-Type = constant-pointed-map
+  pr2 pointed-map-Pointed-Type = constant-pointed-map A B
 ```
