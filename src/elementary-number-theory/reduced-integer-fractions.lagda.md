@@ -130,9 +130,10 @@ is-reduced-reduce-fraction-ℤ :
   (x : fraction-ℤ) → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
 is-reduced-reduce-fraction-ℤ x =
   is-zero-gcd-case-split
-    (is-decidable-is-zero-ℤ
-      (gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
-        (denominator-fraction-ℤ (reduce-fraction-ℤ x))))
+    ( is-decidable-is-zero-ℤ
+      ( gcd-ℤ
+        ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+        ( denominator-fraction-ℤ (reduce-fraction-ℤ x))))
   where
   is-zero-gcd-case-split :
     ( is-zero-ℤ
