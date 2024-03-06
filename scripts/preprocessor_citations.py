@@ -67,7 +67,6 @@ def format_citation(bib_database : pybtex.database.BibliographyData, style: pybt
         return None
 
 def generate_bibliography(bib_database : pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle , backend: pybtex.backends.BaseBackend, cited_keys):
-    eprint(cited_keys)
     # Function to generate the bibliography section
     if cited_keys:
         return render_references(bib_database, style, backend, cited_keys)
@@ -87,7 +86,6 @@ def process_citations_chapter_rec_mut(chapter, bib_database : pybtex.database.Bi
 
     if cited_keys:
         bibliography_section = generate_bibliography(bib_database, style, backend, cited_keys)
-        eprint(bibliography_section)
         if bibliography_section:
             new_content = insert_bibliography_at_correct_location(new_content, bibliography_section)
 
@@ -150,12 +148,12 @@ if __name__ == '__main__':
 
     backend: pybtex.backends.BaseBackend = pybtex.plugin.find_plugin('pybtex.backends', citations_config.get('backend_format'))()
 
-    # Format the bibliography in order to detect possible issues in it
+    # The following must be run in order to detect errors in the .bib file
     formatted_bibliography:pybtex.style.FormattedBibliography = style.format_bibliography(bib_database)
-
     output = io.StringIO()
     backend.write_to_stream(formatted_bibliography, output)
     html = output.getvalue()
+    # Optional: print to error stream
     eprint(html)
 
     if bool(citations_config.get('enable', True)) == True:
