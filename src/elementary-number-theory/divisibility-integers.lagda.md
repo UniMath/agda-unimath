@@ -666,14 +666,7 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg
   with is-decidable-is-zero-ℤ a
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
-  equational-reasoning
-    a
-    ＝ zero-ℤ
-      by z
-    ＝ neg-ℤ a
-      by inv (ap neg-ℤ z)
-    ＝ b
-      by neg
+  z ∙ inv (ap neg-ℤ z) ∙ neg
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
   ex-falso
     ( nz
@@ -681,6 +674,6 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
         ( a)
         ( H)
         ( is-nonpositive-eq-ℤ
-           ( inv (ap neg-ℤ neg) ∙ (neg-neg-ℤ a))
-           ( is-nonpositive-neg-is-nonnegative-ℤ b H'))))
+          ( inv (ap neg-ℤ neg) ∙ (neg-neg-ℤ a))
+          ( is-nonpositive-neg-is-nonnegative-ℤ b H'))))
 ```
