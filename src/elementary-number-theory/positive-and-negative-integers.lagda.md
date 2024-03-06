@@ -85,7 +85,7 @@ decide-is-negative-is-nonnegative-ℤ (inl x) = inl star
 decide-is-negative-is-nonnegative-ℤ (inr x) = inr star
 ```
 
-Legacy :
+Legacy (Used in Bezout's lemma)
 
 ```agda
 decide-is-nonnegative-ℤ :
