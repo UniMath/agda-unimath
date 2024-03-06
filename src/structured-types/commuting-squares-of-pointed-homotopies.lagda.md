@@ -32,10 +32,10 @@ A square of [pointed homotopies](structured-types.pointed-homotopies.md)
 ```
 
 is said to be a
-{{#concept "commuting square" Disambiguation="pointed homotopies"}} of pointed
-homotopies if there is a pointed homotopy `left ∙h bottom ~∗ top ∙h right `.
-Such a pointed homotopy is called a
-{{#concept "coherence" Disambiguation="commuting square of homotopies" Agda=coherence-square-homotopies}}
+{{#concept "commuting square" Disambiguation="pointed homotopies" Agda=coherence-square-pointed-homotopies}}
+of pointed homotopies if there is a pointed homotopy
+`left ∙h bottom ~∗ top ∙h right `. Such a pointed homotopy is called a
+{{#concept "coherence" Disambiguation="commuting square of homotopies" Agda=coherence-square-pointed-homotopies}}
 of the square.
 
 ## Definitions

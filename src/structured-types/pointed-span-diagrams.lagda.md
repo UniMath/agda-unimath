@@ -22,8 +22,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A {{#concept "(binary) pointed span diagram"}} is a diagram of
-[pointed maps](structured-types.pointed-maps.md) of the form
+A {{#concept "(binary) pointed span diagram" Agda=pointed-span-diagram}} is a
+diagram of [pointed maps](structured-types.pointed-maps.md) of the form
 
 ```text
        f       g

@@ -41,7 +41,7 @@ open import structured-types.whiskering-pointed-homotopies-composition
 
 ## Idea
 
-A {{#concept "morphism of pointed arrows"}} from a
+A {{#concept "morphism of pointed arrows" Agda=hom-pointed-arrow}} from a
 [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` to a pointed map
 `g : X →∗ Y` is a [triple](foundation.dependent-pair-types.md) `(i , j , H)`
 consisting of pointed maps `i : A →∗ X` and `j : B →∗ Y` and a
@@ -133,8 +133,9 @@ module _
 
 ### Transposing morphisms of pointed arrows
 
-The {{#concept "transposition" Disambiguation="morphism of pointed arrows"}} of
-a morphism of pointed arrows
+The
+{{#concept "transposition" Disambiguation="morphism of pointed arrows" Agda=transpose-hom-pointed-arrow}}
+of a morphism of pointed arrows
 
 ```text
         i
@@ -238,8 +239,8 @@ Consider a commuting diagram of the form
 
 Then the outer rectangle commutes by horizontal pasting of commuting squares of
 pointed maps. The
-{{#concept "composition" Disambiguation="morphism of pointed arrows"}} of
-`β : g → h` with `α : f → g` is therefore defined to be
+{{#concept "composition" Disambiguation="morphism of pointed arrows" Agda=comp-hom-pointed-arrow}}
+of `β : g → h` with `α : f → g` is therefore defined to be
 
 ```text
         β₀ ∘ α₀
@@ -317,9 +318,11 @@ module _
 
 ### Homotopies of morphisms of pointed arrows
 
-A {{#concept "homotopy of morphisms of pointed arrows"}} from `(i , j , H)` to
-`(i' , j' , H')` is a triple `(I , J , K)` consisting of pointed homotopies
-`I : i ~∗ i'` and `J : j ~∗ j'` and a pointed 2-homotopy `K` witnessing that the
+A
+{{#concept "homotopy of morphisms of pointed arrows" Agda=htpy-hom-pointed-arrow}}
+from `(i , j , H)` to `(i' , j' , H')` is a triple `(I , J , K)` consisting of
+pointed homotopies `I : i ~∗ i'` and `J : j ~∗ j'` and a pointed 2-homotopy `K`
+witnessing that the
 [square of pointed homotopies](structured-types.commuting-squares-of-pointed-homotopies.md)
 
 ```text
@@ -821,4 +824,4 @@ module _
 ## See also
 
 - [Equivalences of pointed arrows](structured-types.equivalences-pointed-arrows.md)
-- [Morphisms of twisted pointed arrows](foundation.morphisms-twisted-pointed-arrows.md)
+- [Morphisms of twisted pointed arrows](structured-types.morphisms-twisted-pointed-arrows.md)

@@ -39,7 +39,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A {{#concept "pointed homotopy"}} between
+A {{#concept "pointed homotopy" Agda=_~∗_}} between
 [pointed dependent functions](structured-types.pointed-dependent-functions.md)
 is a pointed dependent function of the
 [pointed family](structured-types.pointed-families-of-types.md) of
@@ -52,7 +52,7 @@ the family `x ↦ f₀ x ＝ g₀ x` over `A` is the identification
 
 A pointed homotopy `f ~∗ g` therefore consists of an unpointed homotopy
 `H₀ : f₀ ~ g₀` between the underlying dependent functions and a
-{{#concept "base point coherence" Disambiguation="pointed homotopy" Agda=preserves-base-point-uniform-pointed-htpy}},
+{{#concept "base point coherence" Disambiguation="pointed homotopy" Agda=coherence-point-unpointed-htpy-pointed-Π}},
 which is an [identification](foundation-core.identity-types.md) witnessing that
 the triangle of identifications
 

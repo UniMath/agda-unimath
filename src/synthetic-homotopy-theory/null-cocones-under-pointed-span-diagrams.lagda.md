@@ -52,8 +52,9 @@ with codomain `X` is the
       const
 ```
 
-[commutes](structured-types.commuting-squares-pointed-maps.md). The null cocone
-under `𝒮` provides a canonical pointing of the type `cocone-Pointed-Type f g`.
+[commutes](structured-types.commuting-squares-of-pointed-maps.md). The null
+cocone under `𝒮` provides a canonical pointing of the type
+`cocone-Pointed-Type f g`.
 
 ## Definitions
 

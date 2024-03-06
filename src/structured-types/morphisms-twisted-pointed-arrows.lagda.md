@@ -20,12 +20,13 @@ open import structured-types.pointed-types
 
 </details>
 
-A {{#concept "morphism of pointed arrows"}} from a
-[pointed map](structured-types.pointed-maps.md) `f : A →∗ B` to a pointed map
-`g : X →∗ Y` is a [triple](foundation.dependent-pair-types.md) `(i , j , H)`
+A
+{{#concept "morphism of twisted pointed arrows" Agda=hom-twisted-pointed-arrow}}
+from a [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` to a pointed
+map `g : X →∗ Y` is a [triple](foundation.dependent-pair-types.md) `(i , j , H)`
 consisting of pointed maps `i : X →∗ A` and `j : B →∗ Y` and a
 [pointed homotopy](structured-types.pointed-homotopies.md)
-`H : j ∘∗ f ~∗ g ∘∗ i` witnessing that the square
+`H : j ∘∗ f ~∗ g ∘∗ i` witnessing that the diagram
 
 ```text
          i

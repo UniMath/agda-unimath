@@ -25,7 +25,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-An {{#concept "equivalence of pointed arrows"}} from a
+An {{#concept "equivalence of pointed arrows" Agda=equiv-pointed-arrow}} from a
 [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` to a pointed map
 `g : X →∗ Y` is a [triple](foundation.dependent-pair-types.md) `(i , j , H)`
 consisting of [pointed equivalences](structured-types.pointed-equivalences.md)

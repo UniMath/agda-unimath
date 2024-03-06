@@ -45,8 +45,10 @@ diagram
       g
 ```
 
-The {{#concept "left whiskering operation on pointed homotopies"}} takes a
-pointed homotopy `H` and a pointed map `f` and returns a pointed homotopy
+The
+{{#concept "left whiskering operation on pointed homotopies" Agda=left-whisker-comp-pointed-htpy}}
+takes a pointed homotopy `H` and a pointed map `f` and returns a pointed
+homotopy
 
 ```text
   h ·l∗ H : h ∘∗ f ~∗ h ∘∗ g

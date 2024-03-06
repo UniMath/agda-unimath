@@ -22,9 +22,10 @@ open import structured-types.pointed-types
 ## Idea
 
 Consider two [pointed types](structured-types.pointed-types.md) `A` and `B`. A
-{{#concept "binary pointed span"}} from `A` to `B` consists of a
-{{#concept "spanning pointed type" Disambiguation="binary pointed span"}} `S`
-and a [pair](foundation.dependent-pair-types.md) of
+{{#concept "binary pointed span" Agda=pointed-span}} from `A` to `B` consists of
+a
+{{#concept "spanning pointed type" Disambiguation="binary pointed span" Agda=spanning-pointed-type-pointed-span}}
+`S` and a [pair](foundation.dependent-pair-types.md) of
 [pointed maps](structured-types.pointed-maps.md) `f : S →∗ A` and `g : S →∗ B`.
 The pointed types `A` and `B` in the specification of a binary span of pointed
 types are also referred to as the
