@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -77,6 +78,14 @@ neg-one-negative-ℤ = neg-one-ℤ , star
 ```
 
 ## Properties
+
+### Negativity is decidable
+
+```agda
+is-decidable-is-negative-ℤ : is-decidable-fam is-negative-ℤ
+is-decidable-is-negative-ℤ (inl x) = inl star
+is-decidable-is-negative-ℤ (inr x) = inr id
+```
 
 ### The negative integers are a `Set`
 

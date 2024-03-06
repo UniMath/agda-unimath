@@ -54,7 +54,7 @@ is-zero-is-nonnegative-is-nonpositive-ℤ :
 is-zero-is-nonnegative-is-nonpositive-ℤ (inr (inl x)) H K = refl
 ```
 
-### Decidability properties
+### Dichotomy properties
 
 #### A nonzero integer is either negative or positive
 
@@ -66,7 +66,7 @@ decide-sign-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
 decide-sign-nonzero-ℤ (inr (inr x)) H = inr star
 ```
 
-#### An integer is positive or nonpositive
+#### An integer is either positive or nonpositive
 
 ```agda
 decide-is-positive-is-nonpositive-ℤ :
@@ -76,7 +76,7 @@ decide-is-positive-is-nonpositive-ℤ (inr (inl x)) = inr star
 decide-is-positive-is-nonpositive-ℤ (inr (inr x)) = inl star
 ```
 
-#### An integer is negative or nonnegative
+#### An integer is either negative or nonnegative
 
 ```agda
 decide-is-negative-is-nonnegative-ℤ :
@@ -99,7 +99,7 @@ is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
   refl
 ```
 
-### Transitivity properties
+### Inclusion properties
 
 #### Positive integers are nonnegative
 

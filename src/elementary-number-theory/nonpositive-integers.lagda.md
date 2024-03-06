@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -86,6 +87,15 @@ neg-one-nonpositive-ℤ = neg-one-ℤ , star
 ```
 
 ## Properties
+
+### Nonpositivity is decidable
+
+```agda
+is-decidable-is-nonpositive-ℤ : is-decidable-fam is-nonpositive-ℤ
+is-decidable-is-nonpositive-ℤ (inl x) = inl star
+is-decidable-is-nonpositive-ℤ (inr (inl x)) = inl star
+is-decidable-is-nonpositive-ℤ (inr (inr x)) = inr id
+```
 
 ### The nonpositive integers are a `Set`
 

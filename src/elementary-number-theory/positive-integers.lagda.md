@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -82,6 +83,15 @@ one-positive-ℤ = one-ℤ , star
 ```
 
 ## Properties
+
+### Positivity is decidable
+
+```agda
+is-decidable-is-positive-ℤ : is-decidable-fam is-positive-ℤ
+is-decidable-is-positive-ℤ (inl x) = inr id
+is-decidable-is-positive-ℤ (inr (inl x)) = inr id
+is-decidable-is-positive-ℤ (inr (inr x)) = inl star
+```
 
 ### The positive integers are a `Set`
 
