@@ -141,7 +141,7 @@ record
   field
     is-pullback-p :
       (x y : obj-∫Ty) (f : hom-∫Ty x y) →
-      is-pullback-Precategory ctx-category _ _ _ _ _ _ _ _ (naturality-p f)
+      is-pullback-obj-Precategory ctx-category _ _ _ _ _ _ _ _ (naturality-p f)
 ```
 
 The terms are defined as sections to `ext`.

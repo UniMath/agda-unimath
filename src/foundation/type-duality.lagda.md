@@ -10,6 +10,7 @@ module foundation.type-duality where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
 open import foundation.slice
@@ -23,7 +24,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -119,7 +119,7 @@ is-emb-map-type-duality {l} {l1} {A} H (X , f) =
                 ( Σ Y (λ y → type-is-small (H (g y) a)))) ∘e
               ( equiv-univalence))) ∘e
           ( equiv-funext)))
-      ( is-torsorial-path (X , f)))
+      ( is-torsorial-Id (X , f)))
     ( λ Y → ap (map-type-duality H))
 
 emb-type-duality :
@@ -307,3 +307,9 @@ fiber-Σ {l1} {l2} X A =
     ( is-small-lmax l2 X)) ∘e
   ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A)
 ```
+
+## See also
+
+- In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we
+  show that [binary relations](foundation.binary-relations.md) are equivalently
+  described as [spans of types](foundation.spans.md).

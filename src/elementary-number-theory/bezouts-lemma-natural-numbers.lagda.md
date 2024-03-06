@@ -282,7 +282,7 @@ If `x = 0`, then we can simply argue in `ℤ`. Otherwise, if `[y] | [z]` in
 `x > u ≥ 0`. Therefore, there exists some integer `a ≥ 0` such that
 `ax = uy - z`, or `ax = z - uy`. In the first case, we can extract the distance
 condition we desire. In the other case, we have that `ax + uy = z`. This can be
-written as `(a + y)x + (u - x)y = z`, so that the second term is non-positive.
+written as `(a + y)x + (u - x)y = z`, so that the second term is nonpositive.
 Then, in this case, we again can extract the distance condition we desire.
 
 ```agda
@@ -789,7 +789,7 @@ minimal-pos-distance-between-multiples x y = well-ordering-principle-ℕ
   (pos-distance-between-multiples x y)
   (λ z → is-decidable-function-type
     (is-decidable-neg (is-decidable-is-zero-ℕ (x +ℕ y)))
-    (is-decidable-prod (is-decidable-neg (is-decidable-is-zero-ℕ z))
+    (is-decidable-product (is-decidable-neg (is-decidable-is-zero-ℕ z))
       (is-decidable-is-distance-between-multiples-ℕ x y z)))
   (is-inhabited-pos-distance-between-multiples x y)
 

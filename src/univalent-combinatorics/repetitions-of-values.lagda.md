@@ -91,7 +91,7 @@ is-decidable-is-repetition-of-values-Fin :
 is-decidable-is-repetition-of-values-Fin f x =
   is-decidable-Σ-Fin
     ( λ y →
-      is-decidable-prod
+      is-decidable-product
         ( is-decidable-neg (has-decidable-equality-Fin x y))
         ( has-decidable-equality-Fin (f x) (f y)))
 ```
@@ -105,7 +105,7 @@ is-decidable-is-repeated-value-Fin :
 is-decidable-is-repeated-value-Fin k l f x =
   is-decidable-Σ-Fin k
     ( λ y →
-      is-decidable-prod
+      is-decidable-product
         ( is-decidable-neg (has-decidable-equality-Fin k x y))
         ( has-decidable-equality-Fin l (f x) (f y)))
 ```
@@ -129,7 +129,7 @@ is-decidable-has-repetition-of-values-Fin k l f =
 ```text
 is-injective-map-Fin-zero-Fin :
   {k : ℕ} (f : Fin zero-ℕ → Fin k) → is-injective f
-is-injective-map-Fin-zero-Fin f {()} {y}
+is-injective-map-Fin-zero-Fin f {()}
 
 is-injective-map-Fin-one-Fin : {k : ℕ} (f : Fin 1 → Fin k) → is-injective f
 is-injective-map-Fin-one-Fin f {inr star} {inr star} p = refl

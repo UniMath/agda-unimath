@@ -33,7 +33,9 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 
 ## Idea
 
-The {{#concept "flattening lemma" Disambiguation="sequential colimits"}} for
+The
+{{#concept "flattening lemma" Disambiguation="sequential colimits" Agda=flattening-lemma-sequential-colimit}}
+for
 [sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
 states that sequential colimits commute with
 [dependent pair types](foundation.dependent-pair-types.md). Specifically, given

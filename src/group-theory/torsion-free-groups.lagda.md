@@ -18,9 +18,9 @@ open import foundation.existential-quantification
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.pullbacks
 open import foundation.sets
 open import foundation.singleton-subtypes
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import group-theory.groups

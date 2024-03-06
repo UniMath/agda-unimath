@@ -690,17 +690,17 @@ module _
   preserves-concat-add-list-Ring = preserves-concat-add-list-Ab (ab-Ring R)
 ```
 
-### Equip a type with a structure of a ring
+### Equipping a type with the structure of a ring
 
 ```agda
 structure-ring :
   {l1 : Level} → UU l1 → UU l1
 structure-ring X =
   Σ ( structure-abelian-group X)
-    ( λ p → has-mul-Ab (compute-structure-abelian-group X p))
+    ( λ p → has-mul-Ab (abelian-group-structure-abelian-group X p))
 
-compute-structure-ring :
+ring-structure-ring :
   {l1 : Level} → (X : UU l1) → structure-ring X → Ring l1
-pr1 (compute-structure-ring X (p , q)) = compute-structure-abelian-group X p
-pr2 (compute-structure-ring X (p , q)) = q
+pr1 (ring-structure-ring X (p , q)) = abelian-group-structure-abelian-group X p
+pr2 (ring-structure-ring X (p , q)) = q
 ```

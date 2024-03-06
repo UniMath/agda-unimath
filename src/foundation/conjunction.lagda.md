@@ -28,7 +28,7 @@ and `Q` is the proposition that both `P` and `Q` hold.
 ## Definition
 
 ```agda
-conjunction-Prop = prod-Prop
+conjunction-Prop = product-Prop
 
 type-conjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-conjunction-Prop P Q = type-Prop (conjunction-Prop P Q)
@@ -58,7 +58,7 @@ pr1 (conjunction-Decidable-Prop P Q) =
 pr1 (pr2 (conjunction-Decidable-Prop P Q)) =
   is-prop-type-conjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
 pr2 (pr2 (conjunction-Decidable-Prop P Q)) =
-  is-decidable-prod
+  is-decidable-product
     ( is-decidable-Decidable-Prop P)
     ( is-decidable-Decidable-Prop Q)
 ```

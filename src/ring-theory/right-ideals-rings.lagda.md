@@ -47,7 +47,7 @@ module _
   is-prop-is-right-ideal-subset-Ring :
     {l2 : Level} (S : subset-Ring l2 R) → is-prop (is-right-ideal-subset-Ring S)
   is-prop-is-right-ideal-subset-Ring S =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-additive-subgroup-subset-Ring R S)
       ( is-prop-is-closed-under-right-multiplication-subset-Ring R S)
 

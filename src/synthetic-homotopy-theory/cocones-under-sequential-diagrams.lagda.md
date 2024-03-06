@@ -25,7 +25,7 @@ open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -102,9 +102,9 @@ filling the "pinched cylinder" with the faces `Kₙ`, `Hₙ`, `Lₙ` and `Kₙ�
 
 The coherence datum may be better understood by viewing a cocone as a
 [morphism](synthetic-homotopy-theory.morphisms-sequential-diagrams.md) from
-`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)` — the two types are
-definitionally equal. Then a homotopy of cocones is a regular homotopy of
-morphisms of sequential diagrams.
+`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)` — the two types are strictly
+equal. Then a homotopy of cocones is a regular homotopy of morphisms of
+sequential diagrams.
 
 ```agda
 module _

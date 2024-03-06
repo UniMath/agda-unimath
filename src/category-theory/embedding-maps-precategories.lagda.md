@@ -36,7 +36,7 @@ considered in
 
 ## Definition
 
-### The predicate of being an embedding map on maps between precategories
+### The predicate on maps between precategories of being an embedding map
 
 ```agda
 module _
@@ -48,7 +48,7 @@ module _
 
   is-embedding-map-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-embedding-map-prop-map-Precategory =
-    prod-Prop
+    product-Prop
       ( is-emb-Prop (obj-map-Precategory C D F))
       ( is-fully-faithful-prop-map-Precategory C D F)
 

@@ -10,6 +10,7 @@ module foundation.universal-property-family-of-fibers-of-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.families-of-equivalences
+open import foundation.function-extensionality
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
@@ -18,7 +19,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -47,7 +47,7 @@ the type family `(fiber f) ∘ f : A → 𝒰`, which always has a section given
 
 We can uniquely characterize the family of fibers `fiber f : B → 𝒰` as the
 initial type family equipped with such a section. Explicitly, the
-{{#concept "universal property of the family of fibers" Disambiguation="maps"}}
+{{#concept "universal property of the family of fibers" Disambiguation="maps" Agda=universal-property-family-of-fibers}}
 `fiber f : B → 𝒰` of a map `f` is that the precomposition operation
 
 ```text
@@ -92,8 +92,8 @@ for any binary type family `X : (b : B) → F b → 𝒰`. This evaluation map t
 binary family of elements of `X` to a
 [double lift](orthogonal-factorization-systems.double-lifts-families-of-elements.md)
 of `f` and `δ`. The
-{{#concept "dependent universal property of the family of fibers of a map"}} `f`
-asserts that this evaluation map is an equivalence.
+{{#concept "dependent universal property of the family of fibers of a map" Agda=dependent-universal-property-family-of-fibers}}
+`f` asserts that this evaluation map is an equivalence.
 
 ```agda
 module _

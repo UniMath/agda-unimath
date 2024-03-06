@@ -105,7 +105,7 @@ module _
 
   standard-singleton-subtype : singleton-subtype l (type-Set X)
   pr1 standard-singleton-subtype = subtype-standard-singleton-subtype
-  pr2 standard-singleton-subtype = is-torsorial-path x
+  pr2 standard-singleton-subtype = is-torsorial-Id x
 
   inhabited-subtype-standard-singleton-subtype :
     inhabited-subtype l (type-Set X)
@@ -248,8 +248,8 @@ module _
             ( λ y →
               ( inv-equiv (equiv-unit-trunc-Prop (Id-Prop Y (f x) y))) ∘e
               ( equiv-trunc-Prop
-                ( left-unit-law-Σ-is-contr (is-torsorial-path x) (x , refl)))))
-        ( is-torsorial-path (f x))
+                ( left-unit-law-Σ-is-contr (is-torsorial-Id x) (x , refl)))))
+        ( is-torsorial-Id (f x))
 
   compute-im-singleton-subtype :
     has-same-elements-subtype
@@ -261,7 +261,7 @@ module _
       ( im-subtype f (subtype-standard-singleton-subtype X x))
       ( refl)
       ( unit-trunc-Prop ((x , refl) , refl))
-      ( is-torsorial-path (f x))
+      ( is-torsorial-Id (f x))
       ( is-singleton-im-singleton-subtype)
 ```
 

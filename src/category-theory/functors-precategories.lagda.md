@@ -40,7 +40,7 @@ precategory `D` consists of:
 
 ## Definition
 
-### The predicate of being a functor on maps between precategories
+### The predicate on maps between precategories of being a functor
 
 ```agda
 module _
@@ -91,7 +91,7 @@ module _
 
   is-functor-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   is-functor-prop-map-Precategory =
-    prod-Prop
+    product-Prop
       preserves-comp-hom-prop-map-Precategory
       preserves-id-hom-prop-map-Precategory
 

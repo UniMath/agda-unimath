@@ -49,7 +49,7 @@ module _
   is-sorted-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
-    prod-Prop
+    product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
       ( is-sorted-vec-Prop (y ∷ v))
 
@@ -66,7 +66,7 @@ module _
     vec (type-Decidable-Total-Order X) n → Prop l2
   is-least-element-vec-Prop {0} x v = raise-unit-Prop l2
   is-least-element-vec-Prop {succ-ℕ n} x (y ∷ v) =
-    prod-Prop
+    product-Prop
       ( leq-Decidable-Total-Order-Prop X x y)
       ( is-least-element-vec-Prop x v)
 
@@ -129,7 +129,7 @@ module _
   is-sorted-least-element-vec-Prop {0} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {1} v = raise-unit-Prop l2
   is-sorted-least-element-vec-Prop {succ-ℕ (succ-ℕ n)} (x ∷ v) =
-    prod-Prop
+    product-Prop
       ( is-least-element-vec-Prop x v)
       ( is-sorted-least-element-vec-Prop v)
 

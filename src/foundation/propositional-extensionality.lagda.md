@@ -142,7 +142,7 @@ abstract
                 ( raise-star)
                 ( is-contr-raise-unit)
                 ( type-Prop P)) ∘e
-              ( right-unit-law-prod-is-contr
+              ( right-unit-law-product-is-contr
                 ( is-contr-Π
                   ( λ x →
                     is-proof-irrelevant-is-prop
@@ -165,7 +165,7 @@ abstract
           inv-equiv
             ( ( inv-equiv
                 ( equiv-postcomp (type-Prop P) (compute-raise l1 empty))) ∘e
-              ( left-unit-law-prod-is-contr
+              ( left-unit-law-product-is-contr
                 ( universal-property-empty-is-empty
                   ( raise-empty l1)
                   ( is-empty-raise-empty)

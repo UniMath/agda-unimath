@@ -151,9 +151,8 @@ module _
   where
 
   is-essentially-surjective-is-split-essentially-surjective-functor-Precategory :
-    (F : functor-Precategory C D)
-    (is-split-ess-surj-F :
-        is-split-essentially-surjective-functor-Precategory C D F) →
+    (F : functor-Precategory C D) →
+    is-split-essentially-surjective-functor-Precategory C D F →
     is-essentially-surjective-functor-Precategory C D F
   is-essentially-surjective-is-split-essentially-surjective-functor-Precategory
     F is-split-ess-surj-F =
@@ -179,7 +178,7 @@ Rezk completion_.
    ([arXiv:1303.0584](https://arxiv.org/abs/1303.0584),
    [DOI:10.1017/S0960129514000486](https://doi.org/10.1017/S0960129514000486))
 
-## External link
+## External links
 
 - [Essential Fibres](https://1lab.dev/Cat.Functor.Properties.html#essential-fibres)
   at 1lab

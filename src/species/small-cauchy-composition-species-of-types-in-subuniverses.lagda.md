@@ -115,9 +115,9 @@ module _
   equiv-small-cauchy-composition-Σ-extension-species-subuniverse S T X =
     ( ( equiv-tot
         ( λ D →
-          ( ( equiv-prod id-equiv (inv-equiv distributive-Π-Σ)) ∘e
-          ( ( inv-equiv right-distributive-prod-Σ) ∘e
-          ( ( equiv-tot (λ _ → inv-equiv (left-distributive-prod-Σ)))))) ∘e
+          ( ( equiv-product id-equiv (inv-equiv distributive-Π-Σ)) ∘e
+          ( ( inv-equiv right-distributive-product-Σ) ∘e
+          ( ( equiv-tot (λ _ → inv-equiv (left-distributive-product-Σ)))))) ∘e
           ( ( associative-Σ _ _ _)))) ∘e
       ( ( associative-Σ
           ( Relaxed-Σ-Decomposition l1 l1 X)
@@ -144,7 +144,7 @@ module _
                         ( λ x →
                           ( cotype-Relaxed-Σ-Decomposition (pr1 D) x ,
                             pr2 (pr2 D) x)))))) ∘e
-              ( commutative-prod ∘e
+              ( commutative-product ∘e
               ( equiv-tot
                 ( λ p →
                   equiv-total-is-in-subuniverse-Σ-Decomposition
@@ -226,7 +226,7 @@ module _
             ( inclusion-subuniverse P X)) ∘e
           ( ( equiv-tot
               ( λ D →
-                equiv-prod
+                equiv-product
                   ( equiv-Σ-extension-small-cauchy-composition-unit-subuniverse
                     ( indexing-type-Relaxed-Σ-Decomposition D))
                   ( id-equiv))) ∘e
@@ -270,7 +270,7 @@ module _
             ( inclusion-subuniverse P X)) ∘e
           ( ( equiv-tot
               ( λ D →
-                equiv-prod
+                equiv-product
                   ( id-equiv)
                   ( equiv-Π
                     ( _)
@@ -336,7 +336,7 @@ module _
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
             ( λ D →
-              equiv-prod
+              equiv-product
                 ( inv-equiv
                   ( equiv-small-cauchy-composition-Σ-extension-species-subuniverse
                     ( S)
@@ -350,7 +350,7 @@ module _
               ( inclusion-subuniverse P X)) ∘e
             ( ( equiv-tot
                 ( λ D →
-                  equiv-prod
+                  equiv-product
                     ( id-equiv)
                     ( equiv-Π
                       ( λ y →

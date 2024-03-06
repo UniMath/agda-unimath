@@ -30,32 +30,32 @@ module _
   {l1 l2 : Level} (A : Semigroup l1) (B : Semigroup l2)
   where
 
-  set-prod-Semigroup : Set (l1 ⊔ l2)
-  set-prod-Semigroup = prod-Set (set-Semigroup A) (set-Semigroup B)
+  set-product-Semigroup : Set (l1 ⊔ l2)
+  set-product-Semigroup = product-Set (set-Semigroup A) (set-Semigroup B)
 
-  type-prod-Semigroup : UU (l1 ⊔ l2)
-  type-prod-Semigroup = type-Set set-prod-Semigroup
+  type-product-Semigroup : UU (l1 ⊔ l2)
+  type-product-Semigroup = type-Set set-product-Semigroup
 
-  is-set-type-prod-Semigroup : is-set type-prod-Semigroup
-  is-set-type-prod-Semigroup = is-set-type-Set set-prod-Semigroup
+  is-set-type-product-Semigroup : is-set type-product-Semigroup
+  is-set-type-product-Semigroup = is-set-type-Set set-product-Semigroup
 
-  mul-prod-Semigroup :
-    type-prod-Semigroup → type-prod-Semigroup → type-prod-Semigroup
-  pr1 (mul-prod-Semigroup (pair x1 y1) (pair x2 y2)) = mul-Semigroup A x1 x2
-  pr2 (mul-prod-Semigroup (pair x1 y1) (pair x2 y2)) = mul-Semigroup B y1 y2
+  mul-product-Semigroup :
+    type-product-Semigroup → type-product-Semigroup → type-product-Semigroup
+  pr1 (mul-product-Semigroup (pair x1 y1) (pair x2 y2)) = mul-Semigroup A x1 x2
+  pr2 (mul-product-Semigroup (pair x1 y1) (pair x2 y2)) = mul-Semigroup B y1 y2
 
-  associative-mul-prod-Semigroup :
-    (x y z : type-prod-Semigroup) →
+  associative-mul-product-Semigroup :
+    (x y z : type-product-Semigroup) →
     Id
-      ( mul-prod-Semigroup (mul-prod-Semigroup x y) z)
-      ( mul-prod-Semigroup x (mul-prod-Semigroup y z))
-  associative-mul-prod-Semigroup (pair x1 y1) (pair x2 y2) (pair x3 y3) =
+      ( mul-product-Semigroup (mul-product-Semigroup x y) z)
+      ( mul-product-Semigroup x (mul-product-Semigroup y z))
+  associative-mul-product-Semigroup (pair x1 y1) (pair x2 y2) (pair x3 y3) =
     eq-pair
       ( associative-mul-Semigroup A x1 x2 x3)
       ( associative-mul-Semigroup B y1 y2 y3)
 
-  prod-Semigroup : Semigroup (l1 ⊔ l2)
-  pr1 prod-Semigroup = set-prod-Semigroup
-  pr1 (pr2 prod-Semigroup) = mul-prod-Semigroup
-  pr2 (pr2 prod-Semigroup) = associative-mul-prod-Semigroup
+  product-Semigroup : Semigroup (l1 ⊔ l2)
+  pr1 product-Semigroup = set-product-Semigroup
+  pr1 (pr2 product-Semigroup) = mul-product-Semigroup
+  pr2 (pr2 product-Semigroup) = associative-mul-product-Semigroup
 ```

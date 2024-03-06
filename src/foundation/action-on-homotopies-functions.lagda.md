@@ -7,16 +7,17 @@ module foundation.action-on-homotopies-functions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
 
@@ -101,7 +102,7 @@ module _
   compute-action-htpy-function-refl-htpy :
     (f : (x : A) → B x) → action-htpy-function refl-htpy ＝ refl
   compute-action-htpy-function-refl-htpy f =
-    ap (ap F) (eq-htpy-refl-htpy f)
+    ap² F (eq-htpy-refl-htpy f)
 ```
 
 ## Properties
@@ -116,12 +117,12 @@ module _
   {f g h : (x : A) → B x}
   where
 
-  distributive-action-htpy-function-comp-htpy :
+  distributive-action-htpy-function-concat-htpy :
     (H : f ~ g) (H' : g ~ h) →
     action-htpy-function F (H ∙h H') ＝
     action-htpy-function F H ∙ action-htpy-function F H'
-  distributive-action-htpy-function-comp-htpy H H' =
-    ap (ap F) (eq-htpy-concat-htpy H H') ∙ ap-concat F (eq-htpy H) (eq-htpy H')
+  distributive-action-htpy-function-concat-htpy H H' =
+    ap² F (eq-htpy-concat-htpy H H') ∙ ap-concat F (eq-htpy H) (eq-htpy H')
 ```
 
 ### The action on homotopies preserves inverses
@@ -138,5 +139,5 @@ module _
     (H : f ~ g) →
     action-htpy-function F (inv-htpy H) ＝ inv (action-htpy-function F H)
   compute-action-htpy-function-inv-htpy H =
-    ap (ap F) (compute-inv-eq-htpy H) ∙ ap-inv F (eq-htpy H)
+    ap² F (compute-inv-eq-htpy H) ∙ ap-inv F (eq-htpy H)
 ```

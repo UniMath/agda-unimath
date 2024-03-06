@@ -22,7 +22,10 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
+open import foundation.negation
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -149,7 +152,7 @@ neg-ℤ (inr (inr x)) = inl x
 
 ```agda
 is-set-ℤ : is-set ℤ
-is-set-ℤ = is-set-coprod is-set-ℕ (is-set-coprod is-set-unit is-set-ℕ)
+is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
 
 ℤ-Set : Set lzero
 pr1 ℤ-Set = ℤ
@@ -160,17 +163,17 @@ pr2 ℤ-Set = is-set-ℤ
 
 ```agda
 abstract
-  is-retraction-pred-ℤ : (pred-ℤ ∘ succ-ℤ) ~ id
+  is-retraction-pred-ℤ : is-retraction succ-ℤ pred-ℤ
   is-retraction-pred-ℤ (inl zero-ℕ) = refl
   is-retraction-pred-ℤ (inl (succ-ℕ x)) = refl
-  is-retraction-pred-ℤ (inr (inl star)) = refl
+  is-retraction-pred-ℤ (inr (inl _)) = refl
   is-retraction-pred-ℤ (inr (inr zero-ℕ)) = refl
   is-retraction-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
-  is-section-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
+  is-section-pred-ℤ : is-section succ-ℤ pred-ℤ
   is-section-pred-ℤ (inl zero-ℕ) = refl
   is-section-pred-ℤ (inl (succ-ℕ x)) = refl
-  is-section-pred-ℤ (inr (inl star)) = refl
+  is-section-pred-ℤ (inr (inl _)) = refl
   is-section-pred-ℤ (inr (inr zero-ℕ)) = refl
   is-section-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
@@ -213,7 +216,7 @@ has-no-fixed-points-succ-ℤ (inr (inl star)) ()
 ### The negative function is an involution
 
 ```agda
-neg-neg-ℤ : (neg-ℤ ∘ neg-ℤ) ~ id
+neg-neg-ℤ : neg-ℤ ∘ neg-ℤ ~ id
 neg-neg-ℤ (inl n) = refl
 neg-neg-ℤ (inr (inl star)) = refl
 neg-neg-ℤ (inr (inr n)) = refl
@@ -419,10 +422,59 @@ decide-is-nonnegative-ℤ {inl x} = inr star
 decide-is-nonnegative-ℤ {inr x} = inl star
 
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
-  (x : ℤ) → (is-nonnegative-ℤ x) → (is-nonnegative-ℤ (neg-ℤ x)) → is-zero-ℤ x
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
 is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
   refl
 ```
+
+### Properties of positive integers
+
+#### The positivity predicate on integers is decidable
+
+```agda
+decide-is-positive-ℤ : {x : ℤ} → (is-positive-ℤ x) + is-nonnegative-ℤ (neg-ℤ x)
+decide-is-positive-ℤ {inl x} = inr star
+decide-is-positive-ℤ {inr (inl x)} = inr star
+decide-is-positive-ℤ {inr (inr x)} = inl star
+
+decide-is-positive-is-nonzero-ℤ :
+  (x : ℤ) → (x ≠ zero-ℤ) →
+  (is-positive-ℤ x) + is-positive-ℤ (neg-ℤ x)
+decide-is-positive-is-nonzero-ℤ (inl x) H = inr star
+decide-is-positive-is-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
+decide-is-positive-is-nonzero-ℤ (inr (inr x)) H = inl star
+```
+
+This remains to be fully formalized.
+
+### The nonpositive integers
+
+```agda
+is-nonpositive-ℤ : ℤ → UU lzero
+is-nonpositive-ℤ x = is-nonnegative-ℤ (neg-ℤ x)
+```
+
+#### Positive integers are not nonpositive
+
+```agda
+not-is-nonpositive-is-positive-ℤ :
+  (x : ℤ) → is-positive-ℤ x → ¬ (is-nonpositive-ℤ x)
+not-is-nonpositive-is-positive-ℤ (inr (inl x)) x-is-pos _ = x-is-pos
+not-is-nonpositive-is-positive-ℤ (inr (inr x)) x-is-pos neg-x-is-nonneg =
+  neg-x-is-nonneg
+```
+
+#### An integer that is not positive is nonpositive
+
+```agda
+is-nonpositive-not-is-positive-ℤ :
+  (x : ℤ) → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
+is-nonpositive-not-is-positive-ℤ x H with decide-is-positive-ℤ {x}
+... | inl K = ex-falso (H K)
+... | inr K = K
+```
+
+#### Relation between successors of natural numbers and integers
 
 ```agda
 succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
@@ -430,10 +482,16 @@ succ-int-ℕ zero-ℕ = refl
 succ-int-ℕ (succ-ℕ x) = refl
 ```
 
+#### The negative function is injective
+
 ```agda
 is-injective-neg-ℤ : is-injective neg-ℤ
 is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
+```
 
+#### An integer is zero if its negative is zero
+
+```agda
 is-zero-is-zero-neg-ℤ : (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
 is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 ```

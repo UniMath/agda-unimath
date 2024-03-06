@@ -446,7 +446,7 @@ is-injective-left-mul-ℤ :
   (x : ℤ) → is-nonzero-ℤ x → is-injective (x *ℤ_)
 is-injective-left-mul-ℤ x f {y} {z} p =
   eq-diff-ℤ
-    ( map-left-unit-law-coprod-is-empty
+    ( map-left-unit-law-coproduct-is-empty
       ( is-zero-ℤ x)
       ( is-zero-ℤ (y -ℤ z))
       ( f)
@@ -536,4 +536,18 @@ preserves-leq-right-mul-ℤ x y z H K =
     ( commutative-mul-ℤ x z)
     ( preserves-leq-left-mul-ℤ x y z H K)
     ( commutative-mul-ℤ z y)
+
+preserves-strict-order-mul-positive-ℤ' :
+  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (x *ℤ z) (y *ℤ z)
+preserves-strict-order-mul-positive-ℤ' {x} {y} z H p =
+  is-positive-eq-ℤ
+    ( inv ( linear-diff-right-mul-ℤ y x z))
+    ( is-positive-mul-ℤ p H)
+
+preserves-strict-order-mul-positive-ℤ :
+  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (z *ℤ x) (z *ℤ y)
+preserves-strict-order-mul-positive-ℤ {x} {y} z H p =
+  is-positive-eq-ℤ
+    ( inv ( linear-diff-left-mul-ℤ z y x))
+    ( is-positive-mul-ℤ H p)
 ```

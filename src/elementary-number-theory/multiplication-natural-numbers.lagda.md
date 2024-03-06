@@ -25,9 +25,9 @@ open import foundation.negated-equality
 
 ## Idea
 
-The {{#concept "multiplication" Disambiguation="natural numbers"}} operation on
-the [natural numbers](elementary-number-theory.natural-numbers.md) is defined by
-[iteratively](foundation.iterating-functions.md) applying
+The {{#concept "multiplication" Disambiguation="natural numbers" Agda=mul-ℕ}}
+operation on the [natural numbers](elementary-number-theory.natural-numbers.md)
+is defined by [iteratively](foundation.iterating-functions.md) applying
 [addition](elementary-number-theory.addition-natural-numbers.md) of a number to
 itself. More preciesly the number `m * n` is defined by adding the number `n` to
 itself `m` times:

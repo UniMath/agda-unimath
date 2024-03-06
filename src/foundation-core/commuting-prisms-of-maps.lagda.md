@@ -8,11 +8,11 @@ module foundation-core.commuting-prisms-of-maps where
 
 ```agda
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.homotopies
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -231,7 +231,7 @@ module _
         ( bottom ·r hA)
         ( ( ap-concat-htpy'
             ( inv-htpy inv-right ·r h)
-            ( left-whisk-inv-htpy g' inv-left)) ∙h
+            ( left-whisker-inv-htpy g' inv-left)) ∙h
           ( inv-htpy-distributive-inv-concat-htpy
             ( inv-right ·r h)
             ( g' ·l inv-left)))) ∙h
@@ -276,7 +276,7 @@ module _
         ( hC ·l inv-top)
         ( ( ap-concat-htpy'
             ( inv-htpy inv-right ·r h)
-            ( left-whisk-inv-htpy g' inv-left)) ∙h
+            ( left-whisker-inv-htpy g' inv-left)) ∙h
           ( inv-htpy-distributive-inv-concat-htpy
             ( inv-right ·r h)
             ( g' ·l inv-left)))) ∙h

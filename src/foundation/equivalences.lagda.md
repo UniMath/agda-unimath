@@ -10,12 +10,12 @@ open import foundation-core.equivalences public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
-open import foundation.identity-types
-open import foundation.path-algebra
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
@@ -25,10 +25,11 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
@@ -53,206 +54,12 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
+  is-emb-equiv : (e : A ≃ B) → is-emb (map-equiv e)
+  is-emb-equiv e = is-emb-is-equiv (is-equiv-map-equiv e)
+
   emb-equiv : (A ≃ B) → (A ↪ B)
   pr1 (emb-equiv e) = map-equiv e
-  pr2 (emb-equiv e) = is-emb-is-equiv (is-equiv-map-equiv e)
-```
-
-### Transposing equalities along equivalences
-
-We have two ways of showing that an application of an equivalence may be
-transposed to the other side of an
-[identification](foundation-core.identity-types.md), i.e. that the type
-`e x ＝ y` is equivalent to the type `x ＝ e⁻¹ y` — one uses the fact that `e⁻¹`
-is a [section](foundation-core.sections.md) of `e`, from which it follows that
-
-```text
- (e x ＝ y) ≃ (e x ＝ e e⁻¹ y) ≃ (x ＝ e⁻¹ y) ,
-```
-
-and the other using the fact that `e⁻¹` is a
-[retraction](foundation-core.retractions.md) of `e`, resulting in the
-equivalence
-
-```text
- (e x ＝ y) ≃ (e⁻¹ e x ＝ e⁻¹ y) ≃ (x ＝ e⁻¹ y) .
-```
-
-These two equivalences are [homotopic](foundation-core.homotopies.md), as is
-shown below.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
-  where
-
-  eq-transpose-equiv :
-    (x : A) (y : B) → (map-equiv e x ＝ y) ≃ (x ＝ map-inv-equiv e y)
-  eq-transpose-equiv x y =
-    ( inv-equiv (equiv-ap e x (map-inv-equiv e y))) ∘e
-    ( equiv-concat'
-      ( map-equiv e x)
-      ( inv (is-section-map-inv-equiv e y)))
-
-  map-eq-transpose-equiv :
-    {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
-  map-eq-transpose-equiv {x} {y} = map-equiv (eq-transpose-equiv x y)
-
-  inv-map-eq-transpose-equiv :
-    {x : A} {y : B} → x ＝ map-inv-equiv e y → map-equiv e x ＝ y
-  inv-map-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
-
-  eq-transpose-equiv' :
-    (x : A) (y : B) → (map-equiv e x ＝ y) ≃ (x ＝ map-inv-equiv e y)
-  eq-transpose-equiv' x y =
-    ( equiv-concat
-      ( inv (is-retraction-map-inv-equiv e x))
-      ( map-inv-equiv e y)) ∘e
-    ( equiv-ap (inv-equiv e) (map-equiv e x) y)
-
-  map-eq-transpose-equiv' :
-    {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
-  map-eq-transpose-equiv' {x} {y} = map-equiv (eq-transpose-equiv' x y)
-```
-
-It is sometimes useful to consider identifications `y ＝ e x` instead of
-`e x ＝ y`, so we include an inverted equivalence for that as well.
-
-```agda
-  eq-transpose-equiv-inv :
-    (x : A) (y : B) → (y ＝ map-equiv e x) ≃ (map-inv-equiv e y ＝ x)
-  eq-transpose-equiv-inv x y =
-    ( equiv-inv x (map-inv-equiv e y)) ∘e
-    ( eq-transpose-equiv x y) ∘e
-    ( equiv-inv y (map-equiv e x))
-
-  map-eq-transpose-equiv-inv :
-    {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
-  map-eq-transpose-equiv-inv {a} {b} = map-equiv (eq-transpose-equiv-inv a b)
-
-  inv-map-eq-transpose-equiv-inv :
-    {a : A} {b : B} → map-inv-equiv e b ＝ a → b ＝ map-equiv e a
-  inv-map-eq-transpose-equiv-inv {a} {b} =
-    map-inv-equiv (eq-transpose-equiv-inv a b)
-```
-
-#### Computation rules for transposing equivalences
-
-We begin by showing that the two equivalences stated above are homotopic.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
-  where
-
-  htpy-map-eq-transpose-equiv :
-    {x : A} {y : B} →
-    map-eq-transpose-equiv e {x} {y} ~ map-eq-transpose-equiv' e
-  htpy-map-eq-transpose-equiv {x} refl =
-    ( map-eq-transpose-equiv-inv
-      ( equiv-ap e x _)
-      ( ( ap inv (coherence-map-inv-equiv e x)) ∙
-        ( inv (ap-inv (map-equiv e) (is-retraction-map-inv-equiv e x))))) ∙
-    ( inv right-unit)
-```
-
-Transposing a composition of paths fits into a triangle with a transpose of the
-left factor.
-
-```agda
-  triangle-eq-transpose-equiv-concat :
-    {x : A} {y z : B} (p : map-equiv e x ＝ y) (q : y ＝ z) →
-    ( map-eq-transpose-equiv e (p ∙ q)) ＝
-    ( map-eq-transpose-equiv e p ∙ ap (map-inv-equiv e) q)
-  triangle-eq-transpose-equiv-concat refl refl = inv right-unit
-```
-
-Transposed identifications fit in
-[commuting triangles](foundation.commuting-triangles-of-identifications.md) with
-the original identifications.
-
-```agda
-  triangle-eq-transpose-equiv :
-    {x : A} {y : B} (p : map-equiv e x ＝ y) →
-    ( ( ap (map-equiv e) (map-eq-transpose-equiv e p)) ∙
-      ( is-section-map-inv-equiv e y)) ＝
-    ( p)
-  triangle-eq-transpose-equiv {x} {y} p =
-    ( ap
-      ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
-      ( is-section-map-inv-equiv
-        ( equiv-ap e x (map-inv-equiv e y))
-        ( p ∙ inv (is-section-map-inv-equiv e y)))) ∙
-    ( ( assoc
-        ( p)
-        ( inv (is-section-map-inv-equiv e y))
-        ( is-section-map-inv-equiv e y)) ∙
-      ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙
-        ( right-unit)))
-
-  triangle-eq-transpose-equiv-inv :
-    {x : A} {y : B} (p : y ＝ map-equiv e x) →
-    ( (is-section-map-inv-equiv e y) ∙ p) ＝
-    ( ap (map-equiv e) (map-eq-transpose-equiv-inv e p))
-  triangle-eq-transpose-equiv-inv {x} {y} p =
-    map-inv-equiv
-      ( equiv-ap
-        ( equiv-inv (map-equiv e (map-inv-equiv e y)) (map-equiv e x))
-        ( (is-section-map-inv-equiv e y) ∙ p)
-        ( ap (map-equiv e) (map-eq-transpose-equiv-inv e p)))
-      ( ( distributive-inv-concat (is-section-map-inv-equiv e y) p) ∙
-        ( ( inv
-            ( right-transpose-eq-concat
-              ( ap (map-equiv e) (inv (map-eq-transpose-equiv-inv e p)))
-              ( is-section-map-inv-equiv e y)
-              ( inv p)
-              ( ( ap
-                  ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
-                  ( ap
-                    ( ap (map-equiv e))
-                    ( inv-inv
-                      ( map-inv-equiv
-                        ( equiv-ap e x (map-inv-equiv e y))
-                        ( ( inv p) ∙
-                          ( inv (is-section-map-inv-equiv e y))))))) ∙
-                ( triangle-eq-transpose-equiv (inv p))))) ∙
-          ( ap-inv (map-equiv e) (map-eq-transpose-equiv-inv e p))))
-
-  triangle-eq-transpose-equiv' :
-    {x : A} {y : B} (p : map-equiv e x ＝ y) →
-    ( is-retraction-map-inv-equiv e x ∙ map-eq-transpose-equiv e p) ＝
-    ( ap (map-inv-equiv e) p)
-  triangle-eq-transpose-equiv' {x} refl =
-    ( ap
-      ( is-retraction-map-inv-equiv e x ∙_)
-      ( htpy-map-eq-transpose-equiv refl)) ∙
-    ( is-retraction-left-concat-inv (is-retraction-map-inv-equiv e x) refl)
-
-  triangle-eq-transpose-equiv-inv' :
-    {x : A} {y : B} (p : y ＝ map-equiv e x) →
-    ( map-eq-transpose-equiv-inv e p) ＝
-    ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x)
-  triangle-eq-transpose-equiv-inv' {x} refl =
-    inv
-      ( right-transpose-eq-concat
-        ( is-retraction-map-inv-equiv e x)
-        ( map-eq-transpose-equiv e refl)
-        ( refl)
-        ( triangle-eq-transpose-equiv' refl))
-
-  right-inverse-eq-transpose-equiv :
-    {x : A} {y : B} (p : y ＝ map-equiv e x) →
-    ( ( map-eq-transpose-equiv e (inv p)) ∙
-      ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x)) ＝
-    ( refl)
-  right-inverse-eq-transpose-equiv {x} p =
-    inv
-      ( map-inv-equiv
-        ( equiv-left-transpose-eq-concat'
-          ( refl)
-          ( map-eq-transpose-equiv e (inv p))
-          ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x))
-        ( right-unit ∙ triangle-eq-transpose-equiv-inv' p))
+  pr2 (emb-equiv e) = is-emb-equiv e
 ```
 
 ### Equivalences have a contractible type of sections
@@ -336,7 +143,7 @@ module _
 
   is-contr-is-equiv-is-equiv : {f : A → B} → is-equiv f → is-contr (is-equiv f)
   is-contr-is-equiv-is-equiv is-equiv-f =
-    is-contr-prod
+    is-contr-product
       ( is-contr-section-is-equiv is-equiv-f)
       ( is-contr-retraction-is-equiv is-equiv-f)
 
@@ -357,6 +164,10 @@ module _
     is-emb-map-equiv :
       is-emb (map-equiv {A = A} {B = B})
     is-emb-map-equiv = is-emb-inclusion-subtype is-equiv-Prop
+
+  is-injective-map-equiv :
+    is-injective (map-equiv {A = A} {B = B})
+  is-injective-map-equiv = is-injective-is-emb is-emb-map-equiv
 
   emb-map-equiv : (A ≃ B) ↪ (A → B)
   pr1 emb-map-equiv = map-equiv
@@ -753,20 +564,23 @@ module _
   where
 
   abstract
-    is-equiv-is-pullback : is-equiv g → is-pullback f g c → is-equiv (pr1 c)
-    is-equiv-is-pullback is-equiv-g pb =
+    is-equiv-vertical-map-is-pullback :
+      is-equiv g → is-pullback f g c → is-equiv (vertical-map-cone f g c)
+    is-equiv-vertical-map-is-pullback is-equiv-g pb =
       is-equiv-is-contr-map
-        ( is-trunc-is-pullback neg-two-𝕋 f g c pb
+        ( is-trunc-vertical-map-is-pullback neg-two-𝕋 f g c pb
           ( is-contr-map-is-equiv is-equiv-g))
 
   abstract
-    is-pullback-is-equiv : is-equiv g → is-equiv (pr1 c) → is-pullback f g c
-    is-pullback-is-equiv is-equiv-g is-equiv-p =
-      is-pullback-is-fiberwise-equiv-map-fiber-cone f g c
-        ( λ a → is-equiv-is-contr
-          ( map-fiber-cone f g c a)
-          ( is-contr-map-is-equiv is-equiv-p a)
-          ( is-contr-map-is-equiv is-equiv-g (f a)))
+    is-pullback-is-equiv-vertical-maps :
+      is-equiv g → is-equiv (vertical-map-cone f g c) → is-pullback f g c
+    is-pullback-is-equiv-vertical-maps is-equiv-g is-equiv-p =
+      is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone f g c
+        ( λ a →
+          is-equiv-is-contr
+            ( map-fiber-vertical-map-cone f g c a)
+            ( is-contr-map-is-equiv is-equiv-p a)
+            ( is-contr-map-is-equiv is-equiv-g (f a)))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -774,33 +588,39 @@ module _
   where
 
   abstract
-    is-equiv-is-pullback' :
-      is-equiv f → is-pullback f g c → is-equiv (pr1 (pr2 c))
-    is-equiv-is-pullback' is-equiv-f pb =
+    is-equiv-horizontal-map-is-pullback :
+      is-equiv f → is-pullback f g c → is-equiv (horizontal-map-cone f g c)
+    is-equiv-horizontal-map-is-pullback is-equiv-f pb =
       is-equiv-is-contr-map
-        ( is-trunc-is-pullback' neg-two-𝕋 f g c pb
+        ( is-trunc-horizontal-map-is-pullback neg-two-𝕋 f g c pb
           ( is-contr-map-is-equiv is-equiv-f))
 
   abstract
-    is-pullback-is-equiv' :
-      is-equiv f → is-equiv (pr1 (pr2 c)) → is-pullback f g c
-    is-pullback-is-equiv' is-equiv-f is-equiv-q =
+    is-pullback-is-equiv-horizontal-maps :
+      is-equiv f → is-equiv (horizontal-map-cone f g c) → is-pullback f g c
+    is-pullback-is-equiv-horizontal-maps is-equiv-f is-equiv-q =
       is-pullback-swap-cone' f g c
-        ( is-pullback-is-equiv g f
+        ( is-pullback-is-equiv-vertical-maps g f
           ( swap-cone f g c)
-          is-equiv-f
-          is-equiv-q)
+          ( is-equiv-f)
+          ( is-equiv-q))
 ```
 
 ## See also
 
-- For the notions of inverses and coherently invertible maps, also known as
-  half-adjoint equivalences, see
+- For the notion of coherently invertible maps, also known as half-adjoint
+  equivalences, see
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+- For the notion of finitely coherent equivalence, see
+  [`foundation.finitely-coherent-equivalence`)(foundation.finitely-coherent-equivalence.md).
+- For the notion of finitely coherently invertible map, see
+  [`foundation.finitely-coherently-invertible-map`)(foundation.finitely-coherently-invertible-map.md).
+- For the notion of infinitely coherent equivalence, see
+  [`foundation.infinitely-coherent-equivalences`](foundation.infinitely-coherent-equivalences.md).
 
 ### Table of files about function types, composition, and equivalences
 

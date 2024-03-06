@@ -139,7 +139,8 @@ module _
           ( λ q →
             ( ( pr1 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 3 A) q) ＝
               ( (ap (power-nat-Ω 5 A) p) ∙ pr1 (pr2 (pr2 t)))) ×
-            ( ( pr2 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 2 A) (ap-binary _∙_ p q)) ＝
+            ( ( pr2 (pr2 (pr2 s)) ∙
+                ap (power-nat-Ω 2 A) (horizontal-concat-Id² p q)) ＝
               ( ap (power-nat-Ω 3 A) q ∙ pr2 (pr2 (pr2 t))))))
 
   refl-Eq-structure-Hatcher-Acyclic-Type :
@@ -153,15 +154,15 @@ module _
     is-torsorial Eq-structure-Hatcher-Acyclic-Type
   is-torsorial-Eq-structure-Hatcher-Acyclic-Type =
     is-torsorial-Eq-structure
-      ( is-torsorial-path (pr1 s))
+      ( is-torsorial-Id (pr1 s))
       ( pr1 s , refl)
       ( is-torsorial-Eq-structure
-        ( is-torsorial-path (pr1 (pr2 s)))
+        ( is-torsorial-Id (pr1 (pr2 s)))
         ( pr1 (pr2 s) , refl)
         ( is-torsorial-Eq-structure
-          ( is-torsorial-path (pr1 (pr2 (pr2 s)) ∙ refl))
+          ( is-torsorial-Id (pr1 (pr2 (pr2 s)) ∙ refl))
           ( pr1 (pr2 (pr2 s)) , right-unit)
-          ( is-torsorial-path (pr2 (pr2 (pr2 s)) ∙ refl))))
+          ( is-torsorial-Id (pr2 (pr2 (pr2 s)) ∙ refl))))
 
   Eq-eq-structure-Hatcher-Acyclic-Type :
     (t : structure-Hatcher-Acyclic-Type A) →
@@ -216,7 +217,7 @@ module _
               ( ( inv (power-nat-mul-Ω 3 2 (Ω A) a)) ∙
                 ( power-nat-succ-Ω' 5 (Ω A) a)))) ∘e
           ( ( ( left-unit-law-Σ-is-contr
-                ( is-torsorial-path' (a ∙ a))
+                ( is-torsorial-Id' (a ∙ a))
                 ( a ∙ a , refl)) ∘e
               ( inv-associative-Σ
                 ( type-Ω (Ω A))
@@ -225,8 +226,8 @@ module _
                   power-nat-Ω 5 (Ω A) a ＝ power-nat-Ω 3 (Ω A) (pr1 bq)))) ∘e
             ( equiv-tot
               ( λ b →
-                ( commutative-prod) ∘e
-                ( equiv-prod
+                ( commutative-product) ∘e
+                ( equiv-product
                   ( id-equiv)
                   ( ( ( inv-equiv
                         ( equiv-ap
@@ -239,7 +240,7 @@ module _
                     ( equiv-concat'
                       ( power-nat-Ω 3 (Ω A) b)
                       ( interchange-concat-Ω² a b a b)))))))))
-        ( is-torsorial-path refl)
+        ( is-torsorial-Id refl)
 ```
 
 ### For a fixed pointed map, the `is-hom-pointed-map-algebra-Hatcher-Acyclic-Type` family is torsorial
@@ -291,7 +292,7 @@ module _
       ( λ p →
         equiv-tot
           ( λ q →
-            equiv-prod
+            equiv-product
               ( equiv-left-transpose-eq-concat' _ _ _ ∘e equiv-inv _ _)
               ( equiv-left-transpose-eq-concat' _ _ _ ∘e equiv-inv _ _)))
 
@@ -309,13 +310,13 @@ module _
         is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' (A , σ) (B , τ) f)
   is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type' =
     is-torsorial-Eq-structure
-      ( is-torsorial-path (map-Ω f a1)) ((map-Ω f a1) , refl)
+      ( is-torsorial-Id (map-Ω f a1)) ((map-Ω f a1) , refl)
       ( is-torsorial-Eq-structure
-        ( is-torsorial-path (map-Ω f a2)) ((map-Ω f a2) , refl)
+        ( is-torsorial-Id (map-Ω f a2)) ((map-Ω f a2) , refl)
         ( is-torsorial-Eq-structure
-          ( is-torsorial-path _)
+          ( is-torsorial-Id _)
           ( _ , refl)
-          ( is-torsorial-path _)))
+          ( is-torsorial-Id _)))
 
   abstract
     is-torsorial-is-hom-pointed-map-algebra-Hatcher-Acyclic-Type :

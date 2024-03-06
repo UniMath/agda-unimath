@@ -15,7 +15,6 @@ open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types

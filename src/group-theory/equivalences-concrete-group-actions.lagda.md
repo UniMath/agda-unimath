@@ -41,7 +41,7 @@ module _
   equiv-action-Concrete-Group :
     {l3 : Level} (Y : action-Concrete-Group l3 G) → UU (l1 ⊔ l2 ⊔ l3)
   equiv-action-Concrete-Group Y =
-    (u : classifying-type-Concrete-Group G) → type-equiv-Set (X u) (Y u)
+    (u : classifying-type-Concrete-Group G) → equiv-Set (X u) (Y u)
 
   id-equiv-action-Concrete-Group : equiv-action-Concrete-Group X
   id-equiv-action-Concrete-Group u = id-equiv
@@ -50,7 +50,7 @@ module _
     (Y : action-Concrete-Group l2 G) → (X ＝ Y) ≃ equiv-action-Concrete-Group Y
   extensionality-action-Concrete-Group =
     extensionality-Π X
-      ( λ u → type-equiv-Set (X u))
+      ( λ u → equiv-Set (X u))
       ( λ u → extensionality-Set (X u))
 
   equiv-eq-action-Concrete-Group :

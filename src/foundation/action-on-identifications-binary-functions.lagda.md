@@ -28,6 +28,23 @@ Given a binary operation `f : A → B → C` and
 we call this the
 {{#concept "binary action on identifications of binary functions" Agda=ap-binary}}.
 
+There are a few different ways we can define `ap-binary`. We could define it by
+pattern matching on both `p` and `q`, but this leads to restricted computational
+behaviour. Instead, we define it as the upper concatenation in the Gray
+interchanger diagram
+
+```text
+                      ap (r ↦ f x r) q
+                 f x y -------------> f x y'
+                   |                    |
+                   |                    |
+  ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
+                   |                    |
+                   ∨                    ∨
+                 f x' y ------------> f x' y'.
+                      ap (r ↦ f x' r) q
+```
+
 ## Definition
 
 ### The binary action on identifications of binary functions
@@ -39,7 +56,7 @@ module _
 
   ap-binary :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') → f x y ＝ f x' y'
-  ap-binary refl refl = refl
+  ap-binary {x} {x'} p {y} {y'} q = ap (λ r → f r y) p ∙ ap (f x') q
 ```
 
 ## Properties
@@ -51,13 +68,13 @@ of the
 [unary action on identifications of functions](foundation.action-on-identifications-functions.md):
 
 ```text
-  ap-binary f p q ＝ ap (f (-) y) p ∙ ap (f x' (-)) q
+  ap-binary f p q ＝ ap (r ↦ f r y) p ∙ ap (r ↦ f x' r) q
 ```
 
 and
 
 ```text
-  ap-binary f p q ＝ ap (f x (-)) q ∙ ap (f (-) y') p.
+  ap-binary f p q ＝ ap (r ↦ f x r) q ∙ ap (r ↦ f r y') p.
 ```
 
 ```agda
@@ -67,12 +84,12 @@ module _
 
   triangle-ap-binary :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
-    ap-binary f p q ＝ ap (λ z → f z y) p ∙ ap (f x') q
-  triangle-ap-binary refl refl = refl
+    ap-binary f p q ＝ ap (λ r → f r y) p ∙ ap (f x') q
+  triangle-ap-binary _ _ = refl
 
   triangle-ap-binary' :
     {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
-    ap-binary f p q ＝ ap (f x) q ∙ ap (λ z → f z y') p
+    ap-binary f p q ＝ ap (f x) q ∙ ap (λ r → f r y') p
   triangle-ap-binary' refl refl = refl
 ```
 
@@ -89,10 +106,10 @@ module _
 
   left-unit-ap-binary :
     {x : A} {y y' : B} (q : y ＝ y') → ap-binary f refl q ＝ ap (f x) q
-  left-unit-ap-binary refl = refl
+  left-unit-ap-binary _ = refl
 
   right-unit-ap-binary :
-    {x x' : A} (p : x ＝ x') {y : B} → ap-binary f p refl ＝ ap (λ z → f z y) p
+    {x x' : A} (p : x ＝ x') {y : B} → ap-binary f p refl ＝ ap (λ r → f r y) p
   right-unit-ap-binary refl = refl
 ```
 
@@ -120,7 +137,7 @@ module _
   where
 
   ap-binary-diagonal :
-    {x x' : A} (p : x ＝ x') → ap-binary f p p ＝ ap (λ a → f a a) p
+    {x x' : A} (p : x ＝ x') → ap-binary f p p ＝ ap (λ r → f r r) p
   ap-binary-diagonal refl = refl
 ```
 
@@ -178,3 +195,9 @@ module _
     ap-binary (λ y x → f x y) q p ＝ ap-binary f p q
   ap-binary-permute refl refl = refl
 ```
+
+## See also
+
+- [Action of functions on identifications](foundation.action-on-identifications-functions.md)
+- [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
+- [Action of dependent functions on identifications](foundation.action-on-identifications-dependent-functions.md).

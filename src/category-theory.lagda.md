@@ -96,6 +96,8 @@ open import category-theory.maps-from-small-to-large-categories public
 open import category-theory.maps-from-small-to-large-precategories public
 open import category-theory.maps-precategories public
 open import category-theory.maps-set-magmoids public
+open import category-theory.monads-on-categories public
+open import category-theory.monads-on-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
 open import category-theory.natural-isomorphisms-functors-categories public
 open import category-theory.natural-isomorphisms-functors-large-precategories public
@@ -118,6 +120,8 @@ open import category-theory.opposite-categories public
 open import category-theory.opposite-large-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.opposite-preunivalent-categories public
+open import category-theory.pointed-endofunctors-categories public
+open import category-theory.pointed-endofunctors-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-elements-of-a-presheaf public
 open import category-theory.precategory-of-functors public

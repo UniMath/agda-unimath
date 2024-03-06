@@ -28,7 +28,7 @@ and is composition closed. This means it is morally a wide sub-∞-category of t
 
 ## Definition
 
-### The predicate on a small function class of being wide
+### The predicate on small function classes of being wide
 
 ```agda
 module _
@@ -42,7 +42,7 @@ module _
 
   is-wide-function-class-Prop : Prop (lsuc l1 ⊔ l2)
   is-wide-function-class-Prop =
-    prod-Prop
+    product-Prop
       ( has-equivalences-function-class-Prop P)
       ( is-closed-under-composition-function-class-Prop P)
 

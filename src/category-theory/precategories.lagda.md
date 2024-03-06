@@ -44,7 +44,7 @@ identities between the objects are exactly the isomorphisms.
 
 ## Definitions
 
-### The predicate of being a precategory on composition operations on binary families of sets
+### The predicate on composition operations on binary families of sets of being a precategory
 
 ```agda
 module _
@@ -55,7 +55,7 @@ module _
 
   is-precategory-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
   is-precategory-prop-composition-operation-binary-family-Set =
-    prod-Prop
+    product-Prop
       ( is-unital-prop-composition-operation-binary-family-Set hom-set comp-hom)
       ( is-associative-prop-composition-operation-binary-family-Set
         ( hom-set)
@@ -248,7 +248,7 @@ module _
 
 ## Properties
 
-### If the objects of a precategory are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
+### If the objects of a precategory are `k`-truncated for nonnegative `k`, the total hom-type is `k`-truncated
 
 ```agda
 module _

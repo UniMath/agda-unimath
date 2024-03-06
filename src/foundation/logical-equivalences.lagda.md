@@ -10,6 +10,7 @@ module foundation.logical-equivalences where
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -18,7 +19,6 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -69,7 +69,7 @@ module _
 
   is-prop-iff-Prop : is-prop type-iff-Prop
   is-prop-iff-Prop =
-    is-prop-prod
+    is-prop-product
       ( is-prop-function-type (is-prop-type-Prop Q))
       ( is-prop-function-type (is-prop-type-Prop P))
 
@@ -124,7 +124,7 @@ module _
     ( backward-implication f ~ backward-implication g)
 
   ext-iff : (f g : A ↔ B) → (f ＝ g) ≃ htpy-iff f g
-  ext-iff f g = equiv-prod equiv-funext equiv-funext ∘e equiv-pair-eq f g
+  ext-iff f g = equiv-product equiv-funext equiv-funext ∘e equiv-pair-eq f g
 
   refl-htpy-iff : (f : A ↔ B) → htpy-iff f f
   pr1 (refl-htpy-iff f) = refl-htpy
@@ -170,7 +170,7 @@ compute-fiber-iff-equiv :
   fiber (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
 compute-fiber-iff-equiv {A = A} {B} (f , g) =
   ( equiv-tot (λ _ → equiv-funext)) ∘e
-  ( left-unit-law-Σ-is-contr (is-torsorial-path' f) (f , refl)) ∘e
+  ( left-unit-law-Σ-is-contr (is-torsorial-Id' f) (f , refl)) ∘e
   ( inv-associative-Σ (A → B) (_＝ f) _) ∘e
   ( equiv-tot (λ _ → equiv-left-swap-Σ)) ∘e
   ( associative-Σ (A → B) _ _) ∘e

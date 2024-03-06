@@ -83,7 +83,7 @@ module _
           ( is-set-quotient-is-set-truncation B f Sf))
 ```
 
-### The uniquely uniqueness of set truncations
+### The unique uniqueness of set truncations
 
 ```agda
 module _

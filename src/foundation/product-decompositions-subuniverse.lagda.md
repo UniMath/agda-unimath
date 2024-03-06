@@ -171,10 +171,10 @@ module _
         ( _)) ∘e
       ( ( equiv-Σ
           ( _)
-          ( commutative-prod)
+          ( commutative-product)
           ( λ x →
             equiv-postcomp-equiv
-              ( commutative-prod)
+              ( commutative-product)
               (inclusion-subuniverse P X))) ∘e
         ( ( inv-associative-Σ
             ( type-subuniverse P)
@@ -253,7 +253,7 @@ module _
     ( ( equiv-tot
         ( λ x →
           ( ( equiv-postcomp-equiv
-              ( commutative-prod)
+              ( commutative-product)
               ( inclusion-subuniverse P X)) ∘e
             ( ( left-unit-law-Σ-is-contr
                 ( is-torsorial-equiv-subuniverse'
@@ -365,7 +365,7 @@ module _
     ( ( equiv-tot
           ( λ x →
             ( ( equiv-postcomp-equiv
-                ( right-unit-law-prod-is-contr is-contr-raise-unit)
+                ( right-unit-law-product-is-contr is-contr-raise-unit)
                 ( inclusion-subuniverse P X)) ∘e
               ( ( left-unit-law-Σ-is-contr
                   ( ( ( ( raise-unit l1) ,
@@ -381,7 +381,7 @@ module _
                   ( ( raise-unit l1 , C1) ,
                     is-contr-raise-unit)) ∘e
                 ( ( inv-associative-Σ _ _ _) ∘e
-                  ( ( equiv-tot (λ _ → commutative-prod)) ∘e
+                  ( ( equiv-tot (λ _ → commutative-product)) ∘e
                     ( ( associative-Σ _ _ _)))))))) ∘e
         ( ( associative-Σ _ _ _)))
 ```

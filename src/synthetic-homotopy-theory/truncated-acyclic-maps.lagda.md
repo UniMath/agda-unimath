@@ -9,7 +9,7 @@ module synthetic-homotopy-theory.truncated-acyclic-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
@@ -408,8 +408,8 @@ module _
     is-truncated-acyclic-map k (vertical-map-cone f g c)
   is-truncated-acyclic-map-vertical-map-cone-is-pullback pb ac a =
     is-truncated-acyclic-equiv
-      ( map-fiber-cone f g c a ,
-        is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
+      ( map-fiber-vertical-map-cone f g c a ,
+        is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f g c pb a)
       ( ac (f a))
 
 module _
@@ -455,11 +455,11 @@ module _
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : UU l2)
   where
 
-  is-truncated-acyclic-prod :
+  is-truncated-acyclic-product :
     is-truncated-acyclic k A →
     is-truncated-acyclic k B →
     is-truncated-acyclic k (A × B)
-  is-truncated-acyclic-prod ac-A ac-B =
+  is-truncated-acyclic-product ac-A ac-B =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
       ( A × B)
       ( is-truncated-acyclic-map-comp
@@ -469,8 +469,8 @@ module _
         ( is-truncated-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
           ( terminal-map B)
-          ( cone-prod A B)
-          ( is-pullback-prod A B)
+          ( cone-cartesian-product A B)
+          ( is-pullback-cartesian-product A B)
           ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)))
 ```
 
@@ -607,7 +607,7 @@ module _
           equiv-left-swap-Σ
       ≃ (C → type-Truncated-Type X)
         by
-          equiv-pr1 (λ v → is-torsorial-path' (v ∘ horizontal-map-cocone f g c))
+          equiv-pr1 (λ v → is-torsorial-Id' (v ∘ horizontal-map-cocone f g c))
 
   is-truncated-acyclic-map-vertical-map-cocone-is-pushout :
     is-pushout f g c →

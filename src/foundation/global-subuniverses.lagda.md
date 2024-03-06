@@ -30,7 +30,7 @@ for homogeneous equivalences, i.e. equivalences in a single universe.
 
 ## Definitions
 
-### The predicate on a family of subuniverses of being closed under equivalences
+### The predicate on families of subuniverses of being closed under equivalences
 
 ```agda
 module _

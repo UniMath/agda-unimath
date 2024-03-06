@@ -8,6 +8,7 @@ module foundation.homotopy-induction where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-systems
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-identity-systems
@@ -17,7 +18,6 @@ open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -90,7 +90,7 @@ module _
       is-contr-equiv'
         ( Σ ((x : A) → B x) (Id f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-torsorial-path f)
+        ( is-torsorial-Id f)
 
   abstract
     is-torsorial-htpy' : is-torsorial (λ g → g ~ f)
@@ -98,7 +98,7 @@ module _
       is-contr-equiv'
         ( Σ ((x : A) → B x) (λ g → g ＝ f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-torsorial-path' f)
+        ( is-torsorial-Id' f)
 ```
 
 ### Homotopy induction is equivalent to function extensionality

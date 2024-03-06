@@ -7,7 +7,7 @@ module foundation.descent-empty-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
@@ -25,12 +25,14 @@ module _
   where
 
   cone-empty : is-empty C → (C → B) → cone ex-falso g C
-  cone-empty p q = triple p q (λ c → ex-falso (p c))
+  pr1 (cone-empty p q) = p
+  pr1 (pr2 (cone-empty p q)) = q
+  pr2 (pr2 (cone-empty p q)) c = ex-falso (p c)
 
   abstract
     descent-empty : (c : cone ex-falso g C) → is-pullback ex-falso g c
     descent-empty c =
-      is-pullback-is-fiberwise-equiv-map-fiber-cone _ g c ind-empty
+      is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone _ g c ind-empty
 
   abstract
     descent-empty' :
