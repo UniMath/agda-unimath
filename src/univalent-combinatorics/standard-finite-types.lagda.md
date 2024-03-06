@@ -191,7 +191,7 @@ nat-Fin-reverse : (k : ℕ) → Fin k → ℕ
 nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin k x)
 nat-Fin-reverse (succ-ℕ k) (inr x) = 0
 
-strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → nat-Fin k x <-ℕ k
+strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → (nat-Fin k x) <-ℕ k
 strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
   transitive-le-ℕ
     ( nat-Fin k x)
