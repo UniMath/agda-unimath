@@ -490,7 +490,7 @@ is-positive-left-factor-mul-ℤ {inr (inr x)} {inr (inr y)} H K = star
 is-positive-right-factor-mul-ℤ :
   {x y : ℤ} → is-positive-ℤ (x *ℤ y) → is-positive-ℤ x → is-positive-ℤ y
 is-positive-right-factor-mul-ℤ {x} {y} H =
-  is-positive-left-factor-mul-ℤ {y} (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
+  is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
 ```
 
 ### Lemmas about nonnegative integers
@@ -517,8 +517,7 @@ is-nonnegative-right-factor-mul-ℤ :
   is-nonnegative-ℤ (x *ℤ y) → is-positive-ℤ x → is-nonnegative-ℤ y
 is-nonnegative-right-factor-mul-ℤ {x} {y} H =
   is-nonnegative-left-factor-mul-ℤ
-    { y}
-    ( is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
+    (is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
 ```
 
 ```agda
@@ -528,8 +527,6 @@ preserves-leq-left-mul-ℤ x y (inr (inl star)) star K = star
 preserves-leq-left-mul-ℤ x y (inr (inr zero-ℕ)) star K = K
 preserves-leq-left-mul-ℤ x y (inr (inr (succ-ℕ n))) star K =
   preserves-leq-add-ℤ {x} {y}
-    { (inr (inr n)) *ℤ x}
-    { (inr (inr n)) *ℤ y}
     ( K)
     ( preserves-leq-left-mul-ℤ x y (inr (inr n)) star K)
 
@@ -546,12 +543,12 @@ preserves-strict-order-mul-positive-ℤ' :
 preserves-strict-order-mul-positive-ℤ' {x} {y} z H p =
   is-positive-eq-ℤ
     ( inv (linear-diff-right-mul-ℤ y x z))
-    ( is-positive-mul-ℤ {y -ℤ x} p H)
+    ( is-positive-mul-ℤ p H)
 
 preserves-strict-order-mul-positive-ℤ :
   {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (z *ℤ x) (z *ℤ y)
 preserves-strict-order-mul-positive-ℤ {x} {y} z H p =
   is-positive-eq-ℤ
     ( inv (linear-diff-left-mul-ℤ z y x))
-    ( is-positive-mul-ℤ {z} H p)
+    ( is-positive-mul-ℤ H p)
 ```

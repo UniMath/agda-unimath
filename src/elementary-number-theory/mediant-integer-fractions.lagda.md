@@ -33,7 +33,7 @@ denominators.
 ```agda
 mediant-fraction-ℤ : fraction-ℤ → fraction-ℤ → fraction-ℤ
 mediant-fraction-ℤ (a , b , p) (c , d , q) =
-  (a +ℤ c , b +ℤ d , is-positive-add-ℤ {b} {d} p q)
+  (a +ℤ c , b +ℤ d , is-positive-add-ℤ p q)
 ```
 
 ## Properties

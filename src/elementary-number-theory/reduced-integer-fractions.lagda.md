@@ -110,7 +110,6 @@ is-positive-int-reduce-denominator-fraction-ℤ :
   (x : fraction-ℤ) → is-positive-ℤ (int-reduce-denominator-fraction-ℤ x)
 is-positive-int-reduce-denominator-fraction-ℤ x =
   is-positive-left-factor-mul-ℤ
-    { int-reduce-denominator-fraction-ℤ x}
     ( is-positive-eq-ℤ
       ( inv (eq-reduce-denominator-fraction-ℤ x))
       ( is-positive-denominator-fraction-ℤ x))

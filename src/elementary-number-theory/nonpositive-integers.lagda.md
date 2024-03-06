@@ -44,13 +44,18 @@ The nonpositive integers are `zero-ℤ` and its predecessors.
 ### Nonnpositive integers
 
 ```agda
-subtype-nonpositive-ℤ : subtype lzero ℤ
-subtype-nonpositive-ℤ (inl k) = unit-Prop
-subtype-nonpositive-ℤ (inr (inl x)) = unit-Prop
-subtype-nonpositive-ℤ (inr (inr x)) = empty-Prop
-
 is-nonpositive-ℤ : ℤ → UU lzero
-is-nonpositive-ℤ = is-in-subtype subtype-nonpositive-ℤ
+is-nonpositive-ℤ (inl k) = unit
+is-nonpositive-ℤ (inr (inl x)) = unit
+is-nonpositive-ℤ (inr (inr x)) = empty
+
+is-prop-is-nonpositive-ℤ : (x : ℤ) → is-prop (is-nonpositive-ℤ x)
+is-prop-is-nonpositive-ℤ (inl x) = is-prop-unit
+is-prop-is-nonpositive-ℤ (inr (inl x)) = is-prop-unit
+is-prop-is-nonpositive-ℤ (inr (inr x)) = is-prop-empty
+
+subtype-nonpositive-ℤ : subtype lzero ℤ
+subtype-nonpositive-ℤ x = is-nonpositive-ℤ x , is-prop-is-nonpositive-ℤ x
 
 nonpositive-ℤ : UU lzero
 nonpositive-ℤ = type-subtype subtype-nonpositive-ℤ

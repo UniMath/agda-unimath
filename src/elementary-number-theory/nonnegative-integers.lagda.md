@@ -44,12 +44,16 @@ The nonnegative integers are `zero-ℤ` and its successors.
 ### Nonnegative integers
 
 ```agda
-subtype-nonnegative-ℤ : subtype lzero ℤ
-subtype-nonnegative-ℤ (inl x) = empty-Prop
-subtype-nonnegative-ℤ (inr x) = unit-Prop
-
 is-nonnegative-ℤ : ℤ → UU lzero
-is-nonnegative-ℤ = is-in-subtype subtype-nonnegative-ℤ
+is-nonnegative-ℤ (inl x) = empty
+is-nonnegative-ℤ (inr x) = unit
+
+is-prop-is-nonnegative-ℤ : (x : ℤ) → is-prop (is-nonnegative-ℤ x)
+is-prop-is-nonnegative-ℤ (inl x) = is-prop-empty
+is-prop-is-nonnegative-ℤ (inr x) = is-prop-unit
+
+subtype-nonnegative-ℤ : subtype lzero ℤ
+subtype-nonnegative-ℤ x = is-nonnegative-ℤ x , is-prop-is-nonnegative-ℤ x
 
 nonnegative-ℤ : UU lzero
 nonnegative-ℤ = type-subtype subtype-nonnegative-ℤ

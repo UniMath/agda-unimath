@@ -44,13 +44,18 @@ The positive integers are `one-ℤ` and its successors.
 ### Positive integers
 
 ```agda
-subtype-positive-ℤ : subtype lzero ℤ
-subtype-positive-ℤ (inl x) = empty-Prop
-subtype-positive-ℤ (inr (inl x)) = empty-Prop
-subtype-positive-ℤ (inr (inr x)) = unit-Prop
-
 is-positive-ℤ : ℤ → UU lzero
-is-positive-ℤ = is-in-subtype subtype-positive-ℤ
+is-positive-ℤ (inl x) = empty
+is-positive-ℤ (inr (inl x)) = empty
+is-positive-ℤ (inr (inr x)) = unit
+
+is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
+is-prop-is-positive-ℤ (inl x) = is-prop-empty
+is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
+is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
+
+subtype-positive-ℤ : subtype lzero ℤ
+subtype-positive-ℤ x = is-positive-ℤ x , is-prop-is-positive-ℤ x
 
 positive-ℤ : UU lzero
 positive-ℤ = type-subtype subtype-positive-ℤ

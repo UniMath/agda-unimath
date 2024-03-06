@@ -546,7 +546,7 @@ is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
 is-positive-add-nonnegative-positive-ℤ :
   {x y : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
 is-positive-add-nonnegative-positive-ℤ {inr (inl x)} {y} H H' =
-  is-positive-eq-ℤ {y = y} refl H'
+  is-positive-eq-ℤ refl H'
 is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H H' =
   is-positive-add-ℤ {inr (inr x)} {y} H H'
 
@@ -555,7 +555,7 @@ is-positive-add-positive-nonnegative-ℤ :
 is-positive-add-positive-nonnegative-ℤ {x} {y} H H' =
   is-positive-eq-ℤ
     ( commutative-add-ℤ y x)
-    ( is-positive-add-nonnegative-positive-ℤ {y} {x} H' H)
+    ( is-positive-add-nonnegative-positive-ℤ H' H)
 ```
 
 ### The inclusion of ℕ into ℤ preserves addition

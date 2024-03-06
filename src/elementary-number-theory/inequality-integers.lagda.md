@@ -132,7 +132,7 @@ transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
 transitive-le-ℤ k l m p q =
   is-positive-eq-ℤ
     ( triangle-diff-ℤ m l k)
-    ( is-positive-add-ℤ {m -ℤ l} {l -ℤ k} q p)
+    ( is-positive-add-ℤ q p)
 
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p =

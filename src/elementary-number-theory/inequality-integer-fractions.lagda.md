@@ -123,20 +123,17 @@ transitive-leq-fraction-ℤ :
   leq-fraction-ℤ p r
 transitive-leq-fraction-ℤ p q r H H' =
   is-nonnegative-right-factor-mul-ℤ
-    { denominator-fraction-ℤ q}
     ( is-nonnegative-eq-ℤ
       ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
         (is-nonnegative-add-ℤ
           ( denominator-fraction-ℤ p *ℤ cross-mul-diff-fraction-ℤ q r)
           ( denominator-fraction-ℤ r *ℤ cross-mul-diff-fraction-ℤ p q)
           ( is-nonnegative-mul-ℤ
-            { denominator-fraction-ℤ p}
             ( is-nonnegative-is-positive-ℤ
               ( denominator-fraction-ℤ p)
               ( is-positive-denominator-fraction-ℤ p))
             ( H'))
           ( is-nonnegative-mul-ℤ
-            { denominator-fraction-ℤ r}
             ( is-nonnegative-is-positive-ℤ
               ( denominator-fraction-ℤ r)
               ( is-positive-denominator-fraction-ℤ r))
@@ -154,20 +151,13 @@ transitive-le-fraction-ℤ :
   le-fraction-ℤ p r
 transitive-le-fraction-ℤ p q r H H' =
   is-positive-right-factor-mul-ℤ
-    { denominator-fraction-ℤ q}
     ( is-positive-eq-ℤ
       ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
       ( is-positive-add-ℤ
-        { mul-ℤ (denominator-fraction-ℤ p) (cross-mul-diff-fraction-ℤ q r)}
-        { mul-ℤ (denominator-fraction-ℤ r) (cross-mul-diff-fraction-ℤ p q)}
         ( is-positive-mul-ℤ
-          { denominator-fraction-ℤ p}
-          { cross-mul-diff-fraction-ℤ q r}
           ( is-positive-denominator-fraction-ℤ p)
           ( H'))
         ( is-positive-mul-ℤ
-          { denominator-fraction-ℤ r}
-          { cross-mul-diff-fraction-ℤ p q}
           ( is-positive-denominator-fraction-ℤ r)
           ( H))))
       ( is-positive-denominator-fraction-ℤ q)
@@ -186,12 +176,9 @@ module _
     le-fraction-ℤ p r
   concatenate-le-leq-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
-      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
         ( is-positive-add-nonnegative-positive-ℤ
-          { mul-ℤ (denominator-fraction-ℤ p) (cross-mul-diff-fraction-ℤ q r)}
-          { mul-ℤ (denominator-fraction-ℤ r) (cross-mul-diff-fraction-ℤ p q)}
           ( is-nonnegative-mul-ℤ
             { denominator-fraction-ℤ p}
             ( is-nonnegative-is-positive-ℤ
@@ -199,7 +186,6 @@ module _
               ( is-positive-denominator-fraction-ℤ p))
             ( H'))
           ( is-positive-mul-ℤ
-            { denominator-fraction-ℤ r}
             ( is-positive-denominator-fraction-ℤ r)
             ( H))))
       ( is-positive-denominator-fraction-ℤ q)
@@ -210,18 +196,13 @@ module _
     le-fraction-ℤ p r
   concatenate-leq-le-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
-      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
         ( is-positive-add-positive-nonnegative-ℤ
-          { mul-ℤ (denominator-fraction-ℤ p) (cross-mul-diff-fraction-ℤ q r)}
-          { mul-ℤ (denominator-fraction-ℤ r) (cross-mul-diff-fraction-ℤ p q)}
           ( is-positive-mul-ℤ
-            { denominator-fraction-ℤ p}
             ( is-positive-denominator-fraction-ℤ p)
             ( H'))
           ( is-nonnegative-mul-ℤ
-            { denominator-fraction-ℤ r}
             ( is-nonnegative-is-positive-ℤ
               ( denominator-fraction-ℤ r)
               ( is-positive-denominator-fraction-ℤ r))
@@ -242,7 +223,6 @@ module _
     le-fraction-ℤ p r
   concatenate-sim-le-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
-      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
         ( is-positive-mul-ℤ
@@ -257,11 +237,9 @@ module _
     le-fraction-ℤ p r
   concatenate-le-sim-fraction-ℤ H H' =
     is-positive-right-factor-mul-ℤ
-      { denominator-fraction-ℤ q}
       ( is-positive-eq-ℤ
         ( inv ( lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
         ( is-positive-mul-ℤ
-          { denominator-fraction-ℤ r}
           (is-positive-denominator-fraction-ℤ r)
           ( H)))
       ( is-positive-denominator-fraction-ℤ q)

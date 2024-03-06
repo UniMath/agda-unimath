@@ -199,7 +199,6 @@ bezouts-lemma-refactor-hypotheses x y H K =
       ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ x)
   x-product-nonneg =
     is-nonnegative-mul-ℤ
-      { int-ℕ ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P)}
       ( is-nonnegative-int-ℕ
         ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
       ( is-nonnegative-is-positive-ℤ x H)
@@ -208,7 +207,6 @@ bezouts-lemma-refactor-hypotheses x y H K =
       ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ y)
   y-product-nonneg =
     is-nonnegative-mul-ℤ
-      { int-ℕ ( minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P)}
       ( is-nonnegative-int-ℕ
         ( minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P))
       ( is-nonnegative-is-positive-ℤ y K)

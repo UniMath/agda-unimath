@@ -338,7 +338,7 @@ is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
             ( tr
               ( is-nonnegative-ℤ)
               ( left-negative-law-mul-ℤ u (int-ℕ y) ∙ ap (neg-ℤ) p)
-              ( is-nonnegative-mul-ℤ {neg-ℤ u} neg (is-nonnegative-int-ℕ y))))))
+              ( is-nonnegative-mul-ℤ neg (is-nonnegative-int-ℕ y))))))
 
 is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
   uy-z-case-split (decide-is-nonnegative-ℤ
@@ -638,7 +638,6 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
     a-is-nonnegative-ℤ : is-nonnegative-ℤ a
     a-is-nonnegative-ℤ =
       is-nonnegative-left-factor-mul-ℤ
-        { pr1 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))}
         ( tr
           ( is-nonnegative-ℤ)
           ( inv
@@ -719,7 +718,6 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
     neg-a-is-nonnegative-ℤ : is-nonnegative-ℤ (neg-ℤ a)
     neg-a-is-nonnegative-ℤ =
       is-nonnegative-left-factor-mul-ℤ
-        { neg-ℤ a}
         ( tr is-nonnegative-ℤ
           ( equational-reasoning
             ( neg-ℤ (((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ

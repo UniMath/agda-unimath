@@ -44,12 +44,16 @@ The negative integers are `neg-one-ℤ` and its predecessors.
 ### Negative integers
 
 ```agda
-subtype-negative-ℤ : subtype lzero ℤ
-subtype-negative-ℤ (inl k) = unit-Prop
-subtype-negative-ℤ (inr k) = empty-Prop
-
 is-negative-ℤ : ℤ → UU lzero
-is-negative-ℤ = is-in-subtype subtype-negative-ℤ
+is-negative-ℤ (inl k) = unit
+is-negative-ℤ (inr k) = empty
+
+is-prop-is-negative-ℤ : (x : ℤ) → is-prop (is-negative-ℤ x)
+is-prop-is-negative-ℤ (inl x) = is-prop-unit
+is-prop-is-negative-ℤ (inr x) = is-prop-empty
+
+subtype-negative-ℤ : subtype lzero ℤ
+subtype-negative-ℤ x = is-negative-ℤ x , is-prop-is-negative-ℤ x
 
 negative-ℤ : UU lzero
 negative-ℤ = type-subtype subtype-negative-ℤ
