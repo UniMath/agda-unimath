@@ -180,7 +180,6 @@ module _
         ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
         ( is-positive-add-nonnegative-positive-ℤ
           ( is-nonnegative-mul-ℤ
-            { denominator-fraction-ℤ p}
             ( is-nonnegative-is-positive-ℤ
               ( denominator-fraction-ℤ p)
               ( is-positive-denominator-fraction-ℤ p))
@@ -226,7 +225,6 @@ module _
       ( is-positive-eq-ℤ
         ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
         ( is-positive-mul-ℤ
-          { denominator-fraction-ℤ p}
           ( is-positive-denominator-fraction-ℤ p)
           ( H')))
       ( is-positive-denominator-fraction-ℤ q)

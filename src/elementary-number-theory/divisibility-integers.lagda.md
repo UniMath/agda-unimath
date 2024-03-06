@@ -677,7 +677,7 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
   ex-falso
     ( nz
-      (is-zero-is-nonnegative-is-nonpositive-ℤ
+      ( is-zero-is-nonnegative-is-nonpositive-ℤ
         ( a)
         ( H)
         ( is-nonpositive-eq-ℤ
