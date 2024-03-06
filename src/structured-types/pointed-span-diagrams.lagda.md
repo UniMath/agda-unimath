@@ -150,7 +150,8 @@ module _
 ### The pointed span diagram obtained from a morphism of pointed arrows
 
 Given pointed maps `f : A →∗ B` and `g : X →∗ Y` and a morphism of pointed
-arrows `α : f →∗ g`, the pointed span diagram associated to `α` is the pointed span diagram
+arrows `α : f →∗ g`, the pointed span diagram associated to `α` is the pointed
+span diagram
 
 ```text
        f       α₀
