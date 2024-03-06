@@ -205,23 +205,49 @@ module _
   left-pointed-map-span-diagram-hom-pointed-arrow :
     pointed-spanning-type-hom-pointed-arrow →∗
     domain-span-diagram-hom-pointed-arrow
-  left-pointed-map-span-diagram-hom-pointed-arrow = ?
+  left-pointed-map-span-diagram-hom-pointed-arrow = f
 
   left-map-span-diagram-hom-pointed-arrow :
     spanning-type-hom-pointed-arrow → type-domain-span-diagram-hom-pointed-arrow
-  left-map-span-diagram-hom-pointed-arrow = ?
+  left-map-span-diagram-hom-pointed-arrow =
+    map-pointed-map left-pointed-map-span-diagram-hom-pointed-arrow
 
-  right-pointed-map-span
+  preserves-point-left-map-span-diagram-hom-pointed-arrow :
+    left-map-span-diagram-hom-pointed-arrow
+      ( point-spanning-type-hom-pointed-arrow) ＝
+    point-domain-span-diagram-hom-pointed-arrow
+  preserves-point-left-map-span-diagram-hom-pointed-arrow =
+    preserves-point-pointed-map
+      ( left-pointed-map-span-diagram-hom-pointed-arrow)
+
+  right-pointed-map-span-diagram-hom-pointed-arrow :
+    pointed-spanning-type-hom-pointed-arrow →∗
+    codomain-span-diagram-hom-pointed-arrow
+  right-pointed-map-span-diagram-hom-pointed-arrow =
+    pointed-map-domain-hom-pointed-arrow f g α
 
   right-map-span-diagram-hom-pointed-arrow :
-    spanning-type-hom-pointed-arrow → type-codomain-span-diagram-hom-pointed-arrow
-  right-map-span-diagram-hom-pointed-arrow = map-domain-hom-pointed-arrow f g α
+    spanning-type-hom-pointed-arrow →
+    type-codomain-span-diagram-hom-pointed-arrow
+  right-map-span-diagram-hom-pointed-arrow =
+    map-pointed-map right-pointed-map-span-diagram-hom-pointed-arrow
 
+  preserves-point-right-map-span-diagram-hom-pointed-arrow :
+    right-map-span-diagram-hom-pointed-arrow
+      ( point-spanning-type-hom-pointed-arrow) ＝
+    point-codomain-span-diagram-hom-pointed-arrow
+  preserves-point-right-map-span-diagram-hom-pointed-arrow =
+    preserves-point-pointed-map
+      ( right-pointed-map-span-diagram-hom-pointed-arrow)
+      
   span-hom-pointed-arrow :
     span-Pointed-Type l1 B X
-  pr1 span-hom-pointed-arrow = A
-  pr1 (pr2 span-hom-pointed-arrow) = left-pointed-map-span-diagram-hom-pointed-arrow
-  pr2 (pr2 span-hom-pointed-arrow) = right-pointed-map-span-diagram-hom-pointed-arrow
+  pr1 span-hom-pointed-arrow =
+    A
+  pr1 (pr2 span-hom-pointed-arrow) =
+    left-pointed-map-span-diagram-hom-pointed-arrow
+  pr2 (pr2 span-hom-pointed-arrow) =
+    right-pointed-map-span-diagram-hom-pointed-arrow
 
   span-diagram-hom-pointed-arrow : span-diagram-Pointed-Type l2 l3 l1
   pr1 span-diagram-hom-pointed-arrow =

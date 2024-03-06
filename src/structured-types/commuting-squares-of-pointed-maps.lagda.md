@@ -19,7 +19,7 @@ open import foundation.whiskering-homotopies-composition
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import structured-types.whiskering-pointed-homotopies
+open import structured-types.whiskering-pointed-homotopies-composition
 ```
 
 </details>
@@ -38,13 +38,17 @@ Consider a square of [pointed maps](structured-types.pointed-maps.md)
           bottom
 ```
 
-Such a square is said to be a {{#concept "commuting square of pointed maps" Agda=coherence-square-pointed-maps}} if there is a [pointed homotopy](structured-types.pointed-homotopies.md)
+Such a square is said to be a
+{{#concept "commuting square of pointed maps" Agda=coherence-square-pointed-maps}}
+if there is a [pointed homotopy](structured-types.pointed-homotopies.md)
 
 ```text
   bottom ∘∗ left ~∗ right ∘∗ top.
 ```
 
-Such a homotopy is referred to as the {{#concept "coherence" Disambiguation="commuting squares of pointed maps" Agda=coherence-square-pointed-maps}} of the commuting square of pointed maps.
+Such a homotopy is referred to as the
+{{#concept "coherence" Disambiguation="commuting squares of pointed maps" Agda=coherence-square-pointed-maps}}
+of the commuting square of pointed maps.
 
 ## Definitions
 
@@ -112,14 +116,14 @@ module _
   (top : A →∗ X) (left : A →∗ B) (right : X →∗ Y) (bottom : B →∗ Y)
   (s : coherence-square-pointed-maps top left right bottom)
   where
- 
+
   left-whisker-comp-coherence-square-pointed-maps :
     coherence-square-pointed-maps top left (f ∘∗ right) (f ∘∗ bottom)
   left-whisker-comp-coherence-square-pointed-maps =
     concat-pointed-htpy
       ( associative-comp-pointed-map f bottom left)
       ( concat-pointed-htpy
-        ( left-whisker-pointed-htpy f _ _ s)
+        ( left-whisker-comp-pointed-htpy f _ _ s)
         ( inv-associative-comp-pointed-map f right top))
 ```
 
@@ -167,7 +171,7 @@ module _
     concat-pointed-htpy
       ( inv-associative-comp-pointed-map bottom left f)
       ( concat-pointed-htpy
-        ( right-whisker-pointed-htpy _ _ s f)
+        ( right-whisker-comp-pointed-htpy _ _ s f)
         ( associative-comp-pointed-map right top f))
 ```
 
@@ -192,7 +196,10 @@ with pointed homotopies
   K : bottom-right ∘∗ middle ~∗ right ∘∗ top-right
 ```
 
-The {{#concept "horizontal pasting" Disambiguation="commuting squares of pointed maps" Agda=horizontal-pasting-coherence-square-pointed-maps}} of these coherences of commuting squares of pointed maps is the coherence of the commuting square
+The
+{{#concept "horizontal pasting" Disambiguation="commuting squares of pointed maps" Agda=horizontal-pasting-coherence-square-pointed-maps}}
+of these coherences of commuting squares of pointed maps is the coherence of the
+commuting square
 
 ```text
              top-right ∘∗ top-left
@@ -213,7 +220,9 @@ obtained by concatenation of the following three pointed homotopies:
   ~∗ right ∘∗ (top-right ∘∗ top-left).
 ```
 
-The first and third homotopy in this concatenation are the whiskerings of coherences of [commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
+The first and third homotopy in this concatenation are the whiskerings of
+coherences of
+[commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
 
 ```agda
 module _
@@ -281,7 +290,10 @@ with pointed homotopies
   K : bottom ∘∗ bottom-left ~∗  bottom-right ∘∗ middle
 ```
 
-The {{#concept "vertical pasting" Disambiguation="commuting squares of pointed maps" Agda=vertical-pasting-coherence-square-pointed-maps}} of these coherences of commuting squares of pointed maps is the coherence of the commuting square
+The
+{{#concept "vertical pasting" Disambiguation="commuting squares of pointed maps" Agda=vertical-pasting-coherence-square-pointed-maps}}
+of these coherences of commuting squares of pointed maps is the coherence of the
+commuting square
 
 ```text
                                top
@@ -302,7 +314,9 @@ obtained by concatenation of the following three pointed homotopies:
   ~∗ (bottom-right ∘∗ top-right) ∘∗ top
 ```
 
-The first and third homotopy in this concatenation are the whiskerings of coherences of [commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
+The first and third homotopy in this concatenation are the whiskerings of
+coherences of
+[commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
 
 ```agda
 module _

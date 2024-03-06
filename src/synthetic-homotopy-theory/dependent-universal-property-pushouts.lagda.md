@@ -20,12 +20,9 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-<<<<<<< HEAD
 open import foundation.pullbacks
 open import foundation.span-diagrams
-=======
 open import foundation.standard-pullbacks
->>>>>>> e813812c5cad05e3f98be2ef25b27d0a03abd3d7
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

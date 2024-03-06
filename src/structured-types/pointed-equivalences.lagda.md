@@ -42,17 +42,22 @@ open import structured-types.pointed-types
 open import structured-types.postcomposition-pointed-maps
 open import structured-types.precomposition-pointed-maps
 open import structured-types.universal-property-pointed-equivalences
-open import structured-types.whiskering-pointed-homotopies
+open import structured-types.whiskering-pointed-homotopies-composition
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "pointed equivalence" Agda=_≃∗_}} `e : A ≃∗ B` consists of an [equivalence](foundation-core.equivalences.md) `e : A ≃ B` equipped with an [identification](foundation-core.identity-types.md) `p : e * ＝ *` witnessing that the underlying map of `e` preserves the base point of `A`. In other words, a pointed equivalence is a
-[pointed map](structured-types.pointed-maps.md) of which the underlying function
-is an [equivalence](foundation-core.equivalences.md). Equivalently, a pointed equivalence is an equivalence in the category
-of [pointed types](structured-types.pointed-types.md).
+A {{#concept "pointed equivalence" Agda=_≃∗_}} `e : A ≃∗ B` consists of an
+[equivalence](foundation-core.equivalences.md) `e : A ≃ B` equipped with an
+[identification](foundation-core.identity-types.md) `p : e * ＝ *` witnessing
+that the underlying map of `e` preserves the base point of `A`. In other words,
+a pointed equivalence is a [pointed map](structured-types.pointed-maps.md) of
+which the underlying function is an
+[equivalence](foundation-core.equivalences.md). Equivalently, a pointed
+equivalence is an equivalence in the category of
+[pointed types](structured-types.pointed-types.md).
 
 ## Definitions
 
@@ -75,7 +80,7 @@ module _
   module _
     (H : is-pointed-equiv)
     where
-    
+
     map-inv-is-pointed-equiv : type-Pointed-Type B → type-Pointed-Type A
     map-inv-is-pointed-equiv = map-inv-is-equiv H
 
@@ -291,10 +296,10 @@ module _
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
-  
+
   compute-pointed-equiv : (A ≃∗ B) ≃ Σ (A →∗ B) is-pointed-equiv
   compute-pointed-equiv = equiv-right-swap-Σ
-  
+
   inv-compute-pointed-equiv : Σ (A →∗ B) is-pointed-equiv ≃ (A ≃∗ B)
   inv-compute-pointed-equiv = equiv-right-swap-Σ
 ```
@@ -477,7 +482,7 @@ module _
           ( concat-pointed-htpy
             ( associative-comp-pointed-map f _ f)
             ( concat-pointed-htpy
-              ( left-whisker-pointed-htpy f _ _
+              ( left-whisker-comp-pointed-htpy f _ _
                 ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv))
               ( concat-pointed-htpy
                 ( right-unit-law-comp-pointed-map f)
@@ -500,7 +505,6 @@ module _
 ```
 
 ### Any pointed equivalence satisfies the universal property of pointed equivalences
-
 
 ```agda
 module _
@@ -531,11 +535,11 @@ module _
         ( associative-comp-pointed-map h
           ( pointed-map-inv-is-pointed-equiv f H)
           ( f))
-        ( left-whisker-pointed-htpy h
+        ( left-whisker-comp-pointed-htpy h
           ( pointed-map-inv-is-pointed-equiv f H ∘∗ f)
           ( id-pointed-map)
           ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv f H)))
-    
+
 
   section-universal-property-pointed-equiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
@@ -564,7 +568,7 @@ module _
       ( concat-pointed-htpy
         ( associative-comp-pointed-map h f
           ( pointed-map-inv-is-pointed-equiv f H))
-        ( left-whisker-pointed-htpy h
+        ( left-whisker-comp-pointed-htpy h
           ( f ∘∗ pointed-map-inv-is-pointed-equiv f H)
           ( id-pointed-map)
           ( is-pointed-section-pointed-map-inv-is-pointed-equiv f H)))
@@ -670,7 +674,7 @@ module _
           ( concat-pointed-htpy
             ( inv-associative-comp-pointed-map f _ f)
             ( concat-pointed-htpy
-              ( right-whisker-pointed-htpy
+              ( right-whisker-comp-pointed-htpy
                 ( f ∘∗ _)
                 ( id-pointed-map)
                 ( is-pointed-section-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
@@ -686,7 +690,7 @@ module _
   is-retraction-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map =
     htpy-pointed-htpy
       ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
-    
+
   is-pointed-equiv-is-equiv-postcomp-pointed-map : is-pointed-equiv f
   is-pointed-equiv-is-equiv-postcomp-pointed-map =
     is-equiv-is-invertible
@@ -722,7 +726,7 @@ module _
           ( pointed-map-inv-is-pointed-equiv f H)
           ( h))
         ( concat-pointed-htpy
-          ( right-whisker-pointed-htpy
+          ( right-whisker-comp-pointed-htpy
             ( f ∘∗ pointed-map-inv-is-pointed-equiv f H)
             ( id-pointed-map)
             ( is-pointed-section-pointed-map-inv-is-pointed-equiv f H)
@@ -744,7 +748,7 @@ module _
           ( f)
           ( h))
         ( concat-pointed-htpy
-          ( right-whisker-pointed-htpy
+          ( right-whisker-comp-pointed-htpy
             ( pointed-map-inv-is-pointed-equiv f H ∘∗ f)
             ( id-pointed-map)
             ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv f H)
