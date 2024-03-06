@@ -127,7 +127,7 @@ def process_citations_root_section(section, bib_database : pybtex.database.Bibli
     return section
 
 def does_support_backend(backend):
-    return backend == 'html'
+    return backend == 'html' or backend == "linkcheck"
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
