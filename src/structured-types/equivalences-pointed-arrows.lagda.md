@@ -28,7 +28,8 @@ open import structured-types.pointed-types
 An {{#concept "equivalence of pointed arrows"}} from a
 [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` to a pointed map
 `g : X →∗ Y` is a [triple](foundation.dependent-pair-types.md) `(i , j , H)`
-consisting of [pointed equivalences](structured-types.pointed-equivalences.md) `i : A ≃∗ X` and `j : B ≃∗ Y` and a
+consisting of [pointed equivalences](structured-types.pointed-equivalences.md)
+`i : A ≃∗ X` and `j : B ≃∗ Y` and a
 [pointed homotopy](structured-types.pointed-homotopies.md)
 `H : j ∘∗ f ~∗ g ∘∗ i` witnessing that the square
 
@@ -133,4 +134,3 @@ module _
     htpy-pointed-htpy
       ( coh-equiv-pointed-arrow h)
 ```
-
