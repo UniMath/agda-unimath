@@ -127,10 +127,10 @@ module _
   (X : Pointed-Type l4)
   where
 
-  type-pointed-cocone-Pointed-Type : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  type-pointed-cocone-Pointed-Type = cocone-Pointed-Type f g X
+  type-cocone-pointed-type-Pointed-Type : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  type-cocone-pointed-type-Pointed-Type = cocone-Pointed-Type f g X
 
-  pointed-cocone-Pointed-Type : Pointed-Type (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  pr1 pointed-cocone-Pointed-Type = type-pointed-cocone-Pointed-Type
-  pr2 pointed-cocone-Pointed-Type = null-cocone-Pointed-Type f g X
+  cocone-pointed-type-Pointed-Type : Pointed-Type (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pr1 cocone-pointed-type-Pointed-Type = type-cocone-pointed-type-Pointed-Type
+  pr2 cocone-pointed-type-Pointed-Type = null-cocone-Pointed-Type f g X
 ```
