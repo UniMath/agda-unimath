@@ -23,7 +23,8 @@ CITEAS_FIELD = 'citeas'
 # Regex to match citation macros
 CITE_REGEX = re.compile(r'\{\{#cite ([^\}\s]+)(?:\s(.*))?\}\}')
 NO_REF_CITE_REGEX = re.compile(r'\bno-ref(erence)?\b')
-REFERENCE_REGEX = re.compile(r'\{\{#reference ([^\}\s]+)(?:\s(.*?))?\}\}')
+REFERENCE_REGEX = re.compile(r'\{\{#reference ([^\}\s]+)(?:\s(.*))?\}\}')
+BIBLIOGRAPHY_REGEX = re.compile(r'\{\{#bibliography(?:\s(.*))?\}\}')
 
 
 def render_references(bib_database : pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle , backend: pybtex.backends.BaseBackend, cited_keys):
@@ -76,10 +77,11 @@ def process_citations_chapter_rec_mut(chapter, bib_database : pybtex.database.Bi
     content = chapter.get('content', '')
     new_content = CITE_REGEX.sub(lambda match: format_citation(bib_database, style, backend, match, cited_keys) or match.group(0), content)
 
-    for match in REFERENCE_REGEX.finditer(content):
-        cited_keys.add(match.group(1))
-    new_content = REFERENCE_REGEX.sub('', new_content)
+    def sub_reference_regex_lambda(m):
+        cited_keys.add(m)
+        return ''
 
+    REFERENCE_REGEX.sub(sub_reference_regex_lambda, new_content)
 
     if cited_keys:
         bibliography_section = generate_bibliography(bib_database, style, backend, cited_keys)
@@ -92,23 +94,19 @@ def process_citations_chapter_rec_mut(chapter, bib_database : pybtex.database.Bi
     process_citations_sections_rec_mut(chapter['sub_items'], bib_database, style, backend)
 
 def insert_bibliography_at_correct_location(content, bibliography_section):
-    references_heading = "## References"
-    pattern = re.compile(r'^## .+$')
-    start_index = content.find(references_heading)
 
-    if start_index != -1:
-        # Find end of the References section by locating the next heading
-        end_index = pattern.search(content, start_index + len(references_heading))
-        if end_index:
-            insertion_point = end_index.start()
-        else:
-            insertion_point = len(content)
-        new_content = content[:insertion_point] + "\n\n" + bibliography_section + "\n\n" + content[insertion_point:]
+    # Search for the placeholder in the content
+    match = BIBLIOGRAPHY_REGEX.search(content)
+
+    if match:
+        # Replace the placeholder with the bibliography section
+        new_content = BIBLIOGRAPHY_REGEX.sub(bibliography_section, content)
     else:
-        # If there's no References section, append it at the end
-        new_content = content + "\n\n" + references_heading + "\n\n" + bibliography_section
+        # If the placeholder isn't found, append the bibliography at the end of the content, with a `## References` header
+        new_content = content + "\n\n## References\n\n" + bibliography_section
 
     return new_content
+
 
 def process_citations_sections_rec_mut(sections, bib_database, style: pybtex.style.formatting.BaseStyle, backend: pybtex.backends.BaseBackend):
     for section in sections:
@@ -144,33 +142,19 @@ if __name__ == '__main__':
 
     bib_database: pybtex.database.BibliographyData = pybtex.database.parse_file(citations_config.get('bibtex'))
 
-    eprint("Bibliography read:", bib_database.to_string("yaml"))
-    eprint("Citation", bib_database.entries["RSS20"])
 
     style_class = pybtex.plugin.find_plugin('pybtex.style.formatting', citations_config.get('citations_style'))
     style: pybtex.style.formatting.BaseStyle = style_class(label_style = pybtex.plugin.find_plugin('pybtex.style.labels', 'alpha'))
-    # style.label_style = pybtex.plugin.find_plugin('pybtex.style.labels', 'alpha')
-
-    # style = pybtex.style.formatting.alpha.AlphaStyle(label_style = pybtex.plugin.find_plugin('pybtex.style.labels', 'alpha'))
 
     backend: pybtex.backends.BaseBackend = pybtex.plugin.find_plugin('pybtex.backends', citations_config.get('backend_format'))()
 
-    # Format the bibliography
+    # Format the bibliography in order to detect possible issues in it
     formatted_bibliography:pybtex.style.FormattedBibliography = style.format_bibliography(bib_database)
-
 
     output = io.StringIO()
     backend.write_to_stream(formatted_bibliography, output)
     html = output.getvalue()
     eprint(html)
-
-    # eprint(formatted_bibliography.get_longest_label())
-    # print(backend.render_sequence(formatted_bibliography))
-
-    # Print the formatted citation
-    for bibitem in formatted_bibliography:
-        eprint(bibitem.label)
-
 
     if bool(citations_config.get('enable', True)) == True:
         book['sections'] = list(map(
