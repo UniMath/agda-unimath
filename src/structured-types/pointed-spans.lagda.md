@@ -21,114 +21,94 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Consider two [pointed types](structured-types.pointed-types.md). A
-{{#concept "binary span" Disambiguation="pointed types"}} from `A` to `B`
-consists of a
-{{#concept "spanning pointed type" Disambiguation="binary span of pointed types"}}
-`S` and a [pair](foundation.dependent-pair-types.md) of
+Consider two [pointed types](structured-types.pointed-types.md) `A` and `B`. A
+{{#concept "binary pointed span"}} from `A` to `B` consists of a
+{{#concept "spanning pointed type" Disambiguation="binary pointed span"}} `S`
+and a [pair](foundation.dependent-pair-types.md) of
 [pointed maps](structured-types.pointed-maps.md) `f : S →∗ A` and `g : S →∗ B`.
 The pointed types `A` and `B` in the specification of a binary span of pointed
 types are also referred to as the
-{{#concept "domain" Disambiguation="binary span of pointed types"}} and
-{{#concept "codomain" Disambiguation="binary span of pointed types"}} of the
+{{#concept "domain" Disambiguation="binary pointed span"}} and
+{{#concept "codomain" Disambiguation="binary pointed span"}} of the pointed
 span, respectively.
 
 ## Definitions
 
-### (Binary) spans
+### (Binary) pointed spans
 
 ```agda
-span-Pointed-Type :
+pointed-span :
   {l1 l2 : Level} (l : Level) (A : Pointed-Type l1) (B : Pointed-Type l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
-span-Pointed-Type l A B = Σ (Pointed-Type l) (λ X → (X →∗ A) × (X →∗ B))
+pointed-span l A B = Σ (Pointed-Type l) (λ X → (X →∗ A) × (X →∗ B))
 
 module _
   {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  (c : span-Pointed-Type l3 A B)
+  (c : pointed-span l3 A B)
   where
 
-  spanning-pointed-type-span-Pointed-Type : Pointed-Type l3
-  spanning-pointed-type-span-Pointed-Type = pr1 c
+  spanning-pointed-type-pointed-span : Pointed-Type l3
+  spanning-pointed-type-pointed-span = pr1 c
 
-  spanning-type-span-Pointed-Type : UU l3
-  spanning-type-span-Pointed-Type =
-    type-Pointed-Type spanning-pointed-type-span-Pointed-Type
+  spanning-type-pointed-span : UU l3
+  spanning-type-pointed-span =
+    type-Pointed-Type spanning-pointed-type-pointed-span
 
-  point-spanning-type-span-Pointed-Type : spanning-type-span-Pointed-Type
-  point-spanning-type-span-Pointed-Type =
-    point-Pointed-Type spanning-pointed-type-span-Pointed-Type
+  point-spanning-type-pointed-span : spanning-type-pointed-span
+  point-spanning-type-pointed-span =
+    point-Pointed-Type spanning-pointed-type-pointed-span
 
-  left-pointed-map-span-Pointed-Type :
-    spanning-pointed-type-span-Pointed-Type →∗ A
-  left-pointed-map-span-Pointed-Type = pr1 (pr2 c)
+  left-pointed-map-pointed-span :
+    spanning-pointed-type-pointed-span →∗ A
+  left-pointed-map-pointed-span = pr1 (pr2 c)
 
-  left-map-span-Pointed-Type :
-    spanning-type-span-Pointed-Type → type-Pointed-Type A
-  left-map-span-Pointed-Type =
-    map-pointed-map left-pointed-map-span-Pointed-Type
+  left-map-pointed-span :
+    spanning-type-pointed-span → type-Pointed-Type A
+  left-map-pointed-span =
+    map-pointed-map left-pointed-map-pointed-span
 
-  preserves-point-left-map-span-Pointed-Type :
-    left-map-span-Pointed-Type point-spanning-type-span-Pointed-Type ＝
+  preserves-point-left-map-pointed-span :
+    left-map-pointed-span point-spanning-type-pointed-span ＝
     point-Pointed-Type A
-  preserves-point-left-map-span-Pointed-Type =
-    preserves-point-pointed-map left-pointed-map-span-Pointed-Type
+  preserves-point-left-map-pointed-span =
+    preserves-point-pointed-map left-pointed-map-pointed-span
 
-  right-pointed-map-span-Pointed-Type :
-    spanning-pointed-type-span-Pointed-Type →∗ B
-  right-pointed-map-span-Pointed-Type = pr2 (pr2 c)
+  right-pointed-map-pointed-span :
+    spanning-pointed-type-pointed-span →∗ B
+  right-pointed-map-pointed-span = pr2 (pr2 c)
 
-  right-map-span-Pointed-Type :
-    spanning-type-span-Pointed-Type → type-Pointed-Type B
-  right-map-span-Pointed-Type =
-    map-pointed-map right-pointed-map-span-Pointed-Type
+  right-map-pointed-span :
+    spanning-type-pointed-span → type-Pointed-Type B
+  right-map-pointed-span =
+    map-pointed-map right-pointed-map-pointed-span
 
-  preserves-point-right-map-span-Pointed-Type :
-    right-map-span-Pointed-Type point-spanning-type-span-Pointed-Type ＝
+  preserves-point-right-map-pointed-span :
+    right-map-pointed-span point-spanning-type-pointed-span ＝
     point-Pointed-Type B
-  preserves-point-right-map-span-Pointed-Type =
-    preserves-point-pointed-map right-pointed-map-span-Pointed-Type
+  preserves-point-right-map-pointed-span =
+    preserves-point-pointed-map right-pointed-map-pointed-span
 
-  span-span-Pointed-Type : span l3 (type-Pointed-Type A) (type-Pointed-Type B)
-  pr1 span-span-Pointed-Type = spanning-type-span-Pointed-Type
-  pr1 (pr2 span-span-Pointed-Type) = left-map-span-Pointed-Type
-  pr2 (pr2 span-span-Pointed-Type) = right-map-span-Pointed-Type
+  span-pointed-span : span l3 (type-Pointed-Type A) (type-Pointed-Type B)
+  pr1 span-pointed-span = spanning-type-pointed-span
+  pr1 (pr2 span-pointed-span) = left-map-pointed-span
+  pr2 (pr2 span-pointed-span) = right-map-pointed-span
 ```
 
-### Identity spans
+### Identity pointed spans
 
 ```agda
 module _
   {l1 : Level} {X : Pointed-Type l1}
   where
 
-  id-span-Pointed-Type : span-Pointed-Type l1 X X
-  pr1 id-span-Pointed-Type = X
-  pr1 (pr2 id-span-Pointed-Type) = id-pointed-map
-  pr2 (pr2 id-span-Pointed-Type) = id-pointed-map
-```
-
-### The opposite of a span
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  where
-
-  opposite-span-Pointed-Type :
-    span-Pointed-Type l3 A B → span-Pointed-Type l3 B A
-  pr1 (opposite-span-Pointed-Type s) =
-    spanning-pointed-type-span-Pointed-Type s
-  pr1 (pr2 (opposite-span-Pointed-Type s)) =
-    right-pointed-map-span-Pointed-Type s
-  pr2 (pr2 (opposite-span-Pointed-Type s)) =
-    left-pointed-map-span-Pointed-Type s
+  id-pointed-span : pointed-span l1 X X
+  pr1 id-pointed-span = X
+  pr1 (pr2 id-pointed-span) = id-pointed-map
+  pr2 (pr2 id-pointed-span) = id-pointed-map
 ```
 
 ## See also
 
-- [Binary type duality](foundation.binary-type-duality.md)
-- [Cospans](foundation.cospans.md)
-- [Span diagrams](foundation.span-diagrams.md)
+- [Opposite pointed spans](structured-types.opposite-pointed-spans.md)
+- [Pointed span diagrams](structured-types.pointed-span-diagrams.md)
 - [Spans](foundation.spans.md)
-- [Spans of families of types](foundation.spans-families-of-types.md)

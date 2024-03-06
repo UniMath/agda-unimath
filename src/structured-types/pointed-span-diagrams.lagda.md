@@ -37,114 +37,114 @@ In other words, a span diagram of pointed types consists of two
 ### (Binary) span diagrams of pointed types
 
 ```agda
-span-diagram-Pointed-Type :
+pointed-span-diagram :
   (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-span-diagram-Pointed-Type l1 l2 l3 =
+pointed-span-diagram l1 l2 l3 =
   Σ ( Pointed-Type l1)
-    ( λ A → Σ (Pointed-Type l2) (span-Pointed-Type l3 A))
+    ( λ A → Σ (Pointed-Type l2) (pointed-span l3 A))
 
 module _
   {l1 l2 l3 : Level} {S : Pointed-Type l1}
   {A : Pointed-Type l2} {B : Pointed-Type l3}
   where
 
-  make-span-diagram-Pointed-Type :
-    (S →∗ A) → (S →∗ B) → span-diagram-Pointed-Type l2 l3 l1
-  pr1 (make-span-diagram-Pointed-Type f g) = A
-  pr1 (pr2 (make-span-diagram-Pointed-Type f g)) = B
-  pr1 (pr2 (pr2 (make-span-diagram-Pointed-Type f g))) = S
-  pr1 (pr2 (pr2 (pr2 (make-span-diagram-Pointed-Type f g)))) = f
-  pr2 (pr2 (pr2 (pr2 (make-span-diagram-Pointed-Type f g)))) = g
+  make-pointed-span-diagram :
+    (S →∗ A) → (S →∗ B) → pointed-span-diagram l2 l3 l1
+  pr1 (make-pointed-span-diagram f g) = A
+  pr1 (pr2 (make-pointed-span-diagram f g)) = B
+  pr1 (pr2 (pr2 (make-pointed-span-diagram f g))) = S
+  pr1 (pr2 (pr2 (pr2 (make-pointed-span-diagram f g)))) = f
+  pr2 (pr2 (pr2 (pr2 (make-pointed-span-diagram f g)))) = g
 
 module _
-  {l1 l2 l3 : Level} (𝒮 : span-diagram-Pointed-Type l1 l2 l3)
+  {l1 l2 l3 : Level} (𝒮 : pointed-span-diagram l1 l2 l3)
   where
 
-  pointed-domain-span-diagram-Pointed-Type : Pointed-Type l1
-  pointed-domain-span-diagram-Pointed-Type = pr1 𝒮
+  pointed-domain-pointed-span-diagram : Pointed-Type l1
+  pointed-domain-pointed-span-diagram = pr1 𝒮
 
-  domain-span-diagram-Pointed-Type : UU l1
-  domain-span-diagram-Pointed-Type =
-    type-Pointed-Type pointed-domain-span-diagram-Pointed-Type
+  domain-pointed-span-diagram : UU l1
+  domain-pointed-span-diagram =
+    type-Pointed-Type pointed-domain-pointed-span-diagram
 
-  point-domain-span-diagram-Pointed-Type :
-    domain-span-diagram-Pointed-Type
-  point-domain-span-diagram-Pointed-Type =
-    point-Pointed-Type pointed-domain-span-diagram-Pointed-Type
+  point-domain-pointed-span-diagram :
+    domain-pointed-span-diagram
+  point-domain-pointed-span-diagram =
+    point-Pointed-Type pointed-domain-pointed-span-diagram
 
-  pointed-codomain-span-diagram-Pointed-Type : Pointed-Type l2
-  pointed-codomain-span-diagram-Pointed-Type = pr1 (pr2 𝒮)
+  pointed-codomain-pointed-span-diagram : Pointed-Type l2
+  pointed-codomain-pointed-span-diagram = pr1 (pr2 𝒮)
 
-  codomain-span-diagram-Pointed-Type : UU l2
-  codomain-span-diagram-Pointed-Type =
-    type-Pointed-Type pointed-codomain-span-diagram-Pointed-Type
+  codomain-pointed-span-diagram : UU l2
+  codomain-pointed-span-diagram =
+    type-Pointed-Type pointed-codomain-pointed-span-diagram
 
-  point-codomain-span-diagram-Pointed-Type :
-    codomain-span-diagram-Pointed-Type
-  point-codomain-span-diagram-Pointed-Type =
-    point-Pointed-Type pointed-codomain-span-diagram-Pointed-Type
+  point-codomain-pointed-span-diagram :
+    codomain-pointed-span-diagram
+  point-codomain-pointed-span-diagram =
+    point-Pointed-Type pointed-codomain-pointed-span-diagram
 
-  span-pointed-type-span-diagram-Pointed-Type :
-    span-Pointed-Type l3
-      ( pointed-domain-span-diagram-Pointed-Type)
-      ( pointed-codomain-span-diagram-Pointed-Type)
-  span-pointed-type-span-diagram-Pointed-Type = pr2 (pr2 𝒮)
+  pointed-span-pointed-span-diagram :
+    pointed-span l3
+      ( pointed-domain-pointed-span-diagram)
+      ( pointed-codomain-pointed-span-diagram)
+  pointed-span-pointed-span-diagram = pr2 (pr2 𝒮)
 
-  spanning-pointed-type-span-diagram-Pointed-Type : Pointed-Type l3
-  spanning-pointed-type-span-diagram-Pointed-Type =
-    spanning-pointed-type-span-Pointed-Type
-      ( span-pointed-type-span-diagram-Pointed-Type)
+  spanning-pointed-type-pointed-span-diagram : Pointed-Type l3
+  spanning-pointed-type-pointed-span-diagram =
+    spanning-pointed-type-pointed-span
+      ( pointed-span-pointed-span-diagram)
 
-  spanning-type-span-diagram-Pointed-Type : UU l3
-  spanning-type-span-diagram-Pointed-Type =
-    type-Pointed-Type spanning-pointed-type-span-diagram-Pointed-Type
+  spanning-type-pointed-span-diagram : UU l3
+  spanning-type-pointed-span-diagram =
+    type-Pointed-Type spanning-pointed-type-pointed-span-diagram
 
-  point-spanning-type-span-diagram-Pointed-Type :
-    spanning-type-span-diagram-Pointed-Type
-  point-spanning-type-span-diagram-Pointed-Type =
-    point-Pointed-Type spanning-pointed-type-span-diagram-Pointed-Type
+  point-spanning-type-pointed-span-diagram :
+    spanning-type-pointed-span-diagram
+  point-spanning-type-pointed-span-diagram =
+    point-Pointed-Type spanning-pointed-type-pointed-span-diagram
 
-  left-pointed-map-span-diagram-Pointed-Type :
-    spanning-pointed-type-span-diagram-Pointed-Type →∗
-    pointed-domain-span-diagram-Pointed-Type
-  left-pointed-map-span-diagram-Pointed-Type =
-    left-pointed-map-span-Pointed-Type
-      ( span-pointed-type-span-diagram-Pointed-Type)
+  left-pointed-map-pointed-span-diagram :
+    spanning-pointed-type-pointed-span-diagram →∗
+    pointed-domain-pointed-span-diagram
+  left-pointed-map-pointed-span-diagram =
+    left-pointed-map-pointed-span
+      ( pointed-span-pointed-span-diagram)
 
-  left-map-span-diagram-Pointed-Type :
-    spanning-type-span-diagram-Pointed-Type → domain-span-diagram-Pointed-Type
-  left-map-span-diagram-Pointed-Type =
-    left-map-span-Pointed-Type
-      ( span-pointed-type-span-diagram-Pointed-Type)
+  left-map-pointed-span-diagram :
+    spanning-type-pointed-span-diagram → domain-pointed-span-diagram
+  left-map-pointed-span-diagram =
+    left-map-pointed-span
+      ( pointed-span-pointed-span-diagram)
 
-  preserves-point-left-map-span-diagram-Pointed-Type :
-    left-map-span-diagram-Pointed-Type
-      ( point-spanning-type-span-diagram-Pointed-Type) ＝
-    point-domain-span-diagram-Pointed-Type
-  preserves-point-left-map-span-diagram-Pointed-Type =
-    preserves-point-left-map-span-Pointed-Type
-      ( span-pointed-type-span-diagram-Pointed-Type)
+  preserves-point-left-map-pointed-span-diagram :
+    left-map-pointed-span-diagram
+      ( point-spanning-type-pointed-span-diagram) ＝
+    point-domain-pointed-span-diagram
+  preserves-point-left-map-pointed-span-diagram =
+    preserves-point-left-map-pointed-span
+      ( pointed-span-pointed-span-diagram)
 
-  right-pointed-map-span-diagram-Pointed-Type :
-    spanning-pointed-type-span-diagram-Pointed-Type →∗
-    pointed-codomain-span-diagram-Pointed-Type
-  right-pointed-map-span-diagram-Pointed-Type =
-    right-pointed-map-span-Pointed-Type
-      ( span-pointed-type-span-diagram-Pointed-Type)
+  right-pointed-map-pointed-span-diagram :
+    spanning-pointed-type-pointed-span-diagram →∗
+    pointed-codomain-pointed-span-diagram
+  right-pointed-map-pointed-span-diagram =
+    right-pointed-map-pointed-span
+      ( pointed-span-pointed-span-diagram)
 
-  right-map-span-diagram-Pointed-Type :
-    spanning-type-span-diagram-Pointed-Type → codomain-span-diagram-Pointed-Type
-  right-map-span-diagram-Pointed-Type =
-    right-map-span-Pointed-Type
-      ( span-pointed-type-span-diagram-Pointed-Type)
+  right-map-pointed-span-diagram :
+    spanning-type-pointed-span-diagram → codomain-pointed-span-diagram
+  right-map-pointed-span-diagram =
+    right-map-pointed-span
+      ( pointed-span-pointed-span-diagram)
 
-  preserves-point-right-map-span-diagram-Pointed-Type :
-    right-map-span-diagram-Pointed-Type
-      ( point-spanning-type-span-diagram-Pointed-Type) ＝
-    point-codomain-span-diagram-Pointed-Type
-  preserves-point-right-map-span-diagram-Pointed-Type =
-    preserves-point-right-map-span-Pointed-Type
-      ( span-pointed-type-span-diagram-Pointed-Type)
+  preserves-point-right-map-pointed-span-diagram :
+    right-map-pointed-span-diagram
+      ( point-spanning-type-pointed-span-diagram) ＝
+    point-codomain-pointed-span-diagram
+  preserves-point-right-map-pointed-span-diagram =
+    preserves-point-right-map-pointed-span
+      ( pointed-span-pointed-span-diagram)
 ```
 
 ### The span diagram obtained from a morphism of pointed arrows
@@ -240,7 +240,7 @@ module _
       ( right-pointed-map-span-diagram-hom-pointed-arrow)
 
   span-hom-pointed-arrow :
-    span-Pointed-Type l1 B X
+    pointed-span l1 B X
   pr1 span-hom-pointed-arrow =
     A
   pr1 (pr2 span-hom-pointed-arrow) =
@@ -248,7 +248,7 @@ module _
   pr2 (pr2 span-hom-pointed-arrow) =
     right-pointed-map-span-diagram-hom-pointed-arrow
 
-  span-diagram-hom-pointed-arrow : span-diagram-Pointed-Type l2 l3 l1
+  span-diagram-hom-pointed-arrow : pointed-span-diagram l2 l3 l1
   pr1 span-diagram-hom-pointed-arrow =
     domain-span-diagram-hom-pointed-arrow
   pr1 (pr2 span-diagram-hom-pointed-arrow) =
@@ -264,4 +264,4 @@ module _
 - [Operations on spans](foundation.operations-spans.md)
 - [Kernel spans of maps](foundation.kernel-spans-of-maps.md)
 - [Spans of families of types](foundation.spans-families-of-types.md)
-- [Transposition of span diagrams](foundation.transposition-span-diagram-Pointed-Types.md)
+- [Transposition of span diagrams](foundation.transposition-pointed-span-diagrams.md)
