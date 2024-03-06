@@ -10,7 +10,6 @@ module real-numbers.dedekind-real-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 
-open import foundation.conjunction
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
@@ -146,7 +145,7 @@ module _
     pr1 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
   is-located-lower-upper-cut-ℝ :
-    (q r : ℚ) → le-ℚ q r → (lower-cut-ℝ q) ∨ (upper-cut-ℝ r)
+    (q r : ℚ) → le-ℚ q r → type-Prop ((lower-cut-ℝ q) ∨ (upper-cut-ℝ r))
   is-located-lower-upper-cut-ℝ =
     pr2 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 

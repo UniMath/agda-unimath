@@ -254,7 +254,7 @@ module _
 {-
   eq-equiv-Prop
     ( ( ( equiv-coproduct
-          ( ( ( left-unit-law-coprod (type-Prop (P ∧ (neg-Prop Q)))) ∘e
+          ( ( ( left-unit-law-coproduct (type-Prop (P ∧ (neg-Prop Q)))) ∘e
               ( equiv-coproduct
                 ( left-absorption-Σ
                   ( λ x →

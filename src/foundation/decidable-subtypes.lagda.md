@@ -246,7 +246,7 @@ module _
     (P ＝ Q) ≃ has-same-elements-decidable-subtype Q
   extensionality-decidable-subtype =
     extensionality-Π P
-      ( λ x Q → (prop-Decidable-Prop (P x)) iff (prop-Decidable-Prop Q))
+      ( λ x Q → (type-Decidable-Prop (P x)) ↔ (type-Decidable-Prop Q))
       ( λ x Q → extensionality-Decidable-Prop (P x) Q)
 
   has-same-elements-eq-decidable-subtype :

@@ -81,11 +81,6 @@ module _
 
   _⇔_ : Prop (l1 ⊔ l2)
   _⇔_ = iff-Prop
-
-  infix 6 _iff_
-
-  _iff_ : UU (l1 ⊔ l2)
-  _iff_ = type-iff-Prop
 ```
 
 ### Composition of logical equivalences
@@ -144,7 +139,7 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  equiv-iff' : (P iff Q) → (type-Prop P ≃ type-Prop Q)
+  equiv-iff' : type-Prop (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
   pr1 (equiv-iff' t) = pr1 t
   pr2 (equiv-iff' t) = is-equiv-is-prop (pr2 P) (pr2 Q) (pr2 t)
 
@@ -180,7 +175,7 @@ compute-fiber-iff-equiv {A = A} {B} (f , g) =
 ### Two equal propositions are logically equivalent
 
 ```agda
-iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → P iff Q
+iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → type-Prop (P ⇔ Q)
 pr1 (iff-eq refl) = id
 pr2 (iff-eq refl) = id
 ```
@@ -200,7 +195,7 @@ abstract
 
 equiv-equiv-iff :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  (P iff Q) ≃ (type-Prop P ≃ type-Prop Q)
+  type-Prop (P ⇔ Q) ≃ (type-Prop P ≃ type-Prop Q)
 pr1 (equiv-equiv-iff P Q) = equiv-iff' P Q
 pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
 ```

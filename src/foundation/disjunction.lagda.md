@@ -45,9 +45,6 @@ abstract
 
 infixr 10 _∨_
 _∨_ = disjunction-Prop
-
-infixr 10 _or_
-_or_ = type-disjunction-Prop
 ```
 
 **Note**: The symbol used for the disjunction `_∨_` is the
@@ -78,12 +75,12 @@ pr2 (pr2 (disjunction-Decidable-Prop P Q)) =
 ```agda
 inl-disjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  (P) implies (P ∨ Q)
+  type-Prop (P ⇒ (P ∨ Q))
 inl-disjunction-Prop P Q = unit-trunc-Prop ∘ inl
 
 inr-disjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  Q implies (P ∨ Q)
+  type-Prop (Q ⇒ (P ∨ Q))
 inr-disjunction-Prop P Q = unit-trunc-Prop ∘ inr
 ```
 
@@ -92,13 +89,13 @@ inr-disjunction-Prop P Q = unit-trunc-Prop ∘ inr
 ```agda
 ev-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  ((P ∨ Q) ⇒ R) implies ((P ⇒ R) ∧ (Q ⇒ R))
+  type-Prop (((P ∨ Q) ⇒ R) ⇒ ((P ⇒ R) ∧ (Q ⇒ R)))
 pr1 (ev-disjunction-Prop P Q R h) = h ∘ (inl-disjunction-Prop P Q)
 pr2 (ev-disjunction-Prop P Q R h) = h ∘ (inr-disjunction-Prop P Q)
 
 elim-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  ( (P ⇒ R) ∧ (Q ⇒ R)) implies ((P ∨ Q) ⇒ R)
+  type-Prop (((P ⇒ R) ∧ (Q ⇒ R)) ⇒ ((P ∨ Q) ⇒ R))
 elim-disjunction-Prop P Q R (f , g) =
   map-universal-property-trunc-Prop R (rec-coproduct f g)
 

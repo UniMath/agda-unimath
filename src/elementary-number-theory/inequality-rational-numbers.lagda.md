@@ -285,7 +285,8 @@ module _
 ### The strict order on the rationals is located
 
 ```agda
-located-le-ℚ : (x y z : ℚ) → le-ℚ y z → (le-ℚ-Prop y x) ∨ (le-ℚ-Prop x z)
+located-le-ℚ :
+  (x y z : ℚ) → le-ℚ y z → type-Prop ((le-ℚ-Prop y x) ∨ (le-ℚ-Prop x z))
 located-le-ℚ x y z H =
   unit-trunc-Prop
     ( map-coproduct

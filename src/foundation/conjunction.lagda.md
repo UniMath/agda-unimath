@@ -41,9 +41,6 @@ abstract
 
 infixr 15 _∧_
 _∧_ = conjunction-Prop
-
-infixr 15 _and_
-_and_ = type-conjunction-Prop
 ```
 
 **Note**: The symbol used for the conjunction `_∧_` is the
@@ -81,7 +78,7 @@ pr2 (intro-conjunction-Prop P Q p q) = q
 iff-universal-property-conjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
-  ((R ⇒ P) ∧ (R ⇒ Q)) iff (R ⇒ (P ∧ Q))
+  type-Prop (((R ⇒ P) ∧ (R ⇒ Q)) ⇔ (R ⇒ (P ∧ Q)))
 pr1 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = f r
 pr2 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = g r
 pr1 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr1 (h r)

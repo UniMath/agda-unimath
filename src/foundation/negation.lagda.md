@@ -80,6 +80,6 @@ no-fixed-points-neg A (pair f g) =
 ```agda
 abstract
   no-fixed-points-neg-Prop :
-    {l1 : Level} (P : Prop l1) → ¬ ((P) iff (neg-Prop P))
+    {l1 : Level} (P : Prop l1) → ¬ (type-Prop (P ⇔ neg-Prop P))
   no-fixed-points-neg-Prop P = no-fixed-points-neg (type-Prop P)
 ```

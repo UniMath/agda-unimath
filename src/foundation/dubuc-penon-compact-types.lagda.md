@@ -35,7 +35,7 @@ is-dubuc-penon-compact-Prop l1 l2 X =
         ( subtype l2 X)
         ( λ Q →
           function-Prop
-            ( (x : X) → P or (Q x))
+            ( (x : X) → type-Prop (P ∨ Q x))
             ( P ∨ (Π-Prop X Q))))
 
 is-dubuc-penon-compact :
