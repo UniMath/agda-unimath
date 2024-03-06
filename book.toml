@@ -70,6 +70,7 @@ additional-css = [
   "website/css/Agda.css",
   "website/css/Agda-highlight.css",
   "website/css/agda-logo.css",
+  "website/css/bibliography.css",
   "theme/catppuccin.css",
   "theme/catppuccin-admonish.css",
   "theme/pagetoc.css",
