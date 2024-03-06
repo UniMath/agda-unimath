@@ -78,7 +78,7 @@ def process_citations_chapter_rec_mut(chapter, bib_database : pybtex.database.Bi
     new_content = CITE_REGEX.sub(lambda match: format_citation(bib_database, style, backend, match, cited_keys) or match.group(0), content)
 
     def sub_reference_regex_lambda(m):
-        cited_keys.add(m)
+        cited_keys.add(m.group(1))
         return ''
 
     REFERENCE_REGEX.sub(sub_reference_regex_lambda, new_content)
@@ -100,7 +100,7 @@ def insert_bibliography_at_correct_location(content, bibliography_section):
 
     if match:
         # Replace the placeholder with the bibliography section
-        new_content = BIBLIOGRAPHY_REGEX.sub(bibliography_section, content)
+        new_content = BIBLIOGRAPHY_REGEX.sub(lambda _: bibliography_section, content)
     else:
         # If the placeholder isn't found, append the bibliography at the end of the content, with a `## References` header
         new_content = content + "\n\n## References\n\n" + bibliography_section
