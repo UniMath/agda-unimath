@@ -78,14 +78,17 @@ module _
       ( product-Prop
         ( product-Prop
           ( Π-Prop ℚ
-            ( λ q → (L q) ⇔₍₋₁₎ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧₍₋₁₎ (L r)))))
+            ( λ q →
+              (L q) ⇔₍₋₁₎ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧₍₋₁₎ (L r)))))
           ( Π-Prop ℚ
-            ( λ r → (U r) ⇔₍₋₁₎ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧₍₋₁₎ (U q))))))
+            ( λ r →
+              (U r) ⇔₍₋₁₎ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧₍₋₁₎ (U q))))))
         ( product-Prop
           ( Π-Prop ℚ
             ( λ q → ¬₍₋₁₎ ((L q) ∧₍₋₁₎ (U q))))
           ( Π-Prop ℚ
-            ( λ q → Π₍₋₁₎ ℚ (λ r → (le-ℚ-Prop q r) ⇒₍₋₁₎ ((L q) ∨₍₋₁₎ (U r)))))))
+            ( λ q →
+              Π₍₋₁₎ ℚ (λ r → (le-ℚ-Prop q r) ⇒₍₋₁₎ ((L q) ∨₍₋₁₎ (U r)))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
