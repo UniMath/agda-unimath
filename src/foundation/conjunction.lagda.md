@@ -22,8 +22,10 @@ open import foundation-core.propositions
 
 ## Idea
 
-The **conjunction** of two [propositions](foundation-core.propositions.md) `P`
-and `Q` is the proposition that both `P` and `Q` hold.
+The
+{{#concept "conjunction" Disambiguation="of propositions" Agda=conjunction-Prop}}
+of two [propositions](foundation-core.propositions.md) `P` and `Q` is the
+proposition that both `P` and `Q` hold.
 
 ## Definition
 
@@ -39,11 +41,17 @@ abstract
     is-prop (type-conjunction-Prop P Q)
   is-prop-type-conjunction-Prop P Q = is-prop-type-Prop (conjunction-Prop P Q)
 
-infixr 15 _∧₋₁_
-_∧₋₁_ = conjunction-Prop
+infixr 15 _∧₍₋₁₎_
+_∧₍₋₁₎_ = conjunction-Prop
 ```
 
-**Note**: The symbol used for the conjunction `_∧₋₁_` is the
+The indexing $-1$ for the infix binary operator `∧₍₋₁₎` is part of a general
+scheme, where `∧₍ₙ₎` takes as inputs
+$n$-[types](foundation-core.truncated-types.md), and spits out the propositional
+conjunction of their underlying types. This is in contrast to the cartesian
+product `×₍ₙ₎`, which would take values in $n$-types.
+
+**Note**: The symbol used for the conjunction `_∧₍₋₁₎_` is the
 [logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
 
 ```agda
@@ -78,7 +86,7 @@ pr2 (intro-conjunction-Prop P Q p q) = q
 iff-universal-property-conjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
-  type-Prop (((R ⇒₋₁ P) ∧₋₁ (R ⇒₋₁ Q)) ⇔₋₁ (R ⇒₋₁ (P ∧₋₁ Q)))
+  type-Prop (((R ⇒₍₋₁₎ P) ∧₍₋₁₎ (R ⇒₍₋₁₎ Q)) ⇔₍₋₁₎ (R ⇒₍₋₁₎ (P ∧₍₋₁₎ Q)))
 pr1 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = f r
 pr2 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = g r
 pr1 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr1 (h r)
@@ -87,10 +95,14 @@ pr2 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr2 (h r)
 equiv-universal-property-conjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
-  type-Prop ((R ⇒₋₁ P) ∧₋₁ (R ⇒₋₁ Q)) ≃ type-Prop (R ⇒₋₁ (P ∧₋₁ Q))
+  type-Prop ((R ⇒₍₋₁₎ P) ∧₍₋₁₎ (R ⇒₍₋₁₎ Q)) ≃ type-Prop (R ⇒₍₋₁₎ (P ∧₍₋₁₎ Q))
 equiv-universal-property-conjunction-Prop P Q R =
   equiv-iff'
-    ( (R ⇒₋₁ P) ∧₋₁ (R ⇒₋₁ Q))
-    ( R ⇒₋₁ (P ∧₋₁ Q))
+    ( (R ⇒₍₋₁₎ P) ∧₍₋₁₎ (R ⇒₍₋₁₎ Q))
+    ( R ⇒₍₋₁₎ (P ∧₍₋₁₎ Q))
     ( iff-universal-property-conjunction-Prop P Q R)
 ```
+
+## Table of files about propositional logic
+
+{{#include tables/propositional-logic.md}}

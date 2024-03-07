@@ -55,7 +55,7 @@ module _
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive =
-    (a b c : A) → type-Prop (R a b ⇒₋₁ (R a c ∨₋₁ R b c))
+    (a b c : A) → type-Prop (R a b ⇒₍₋₁₎ (R a c ∨₍₋₁₎ R b c))
 
   is-apartness-relation : UU (l1 ⊔ l2)
   is-apartness-relation =

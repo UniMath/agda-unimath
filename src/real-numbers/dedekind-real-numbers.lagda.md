@@ -74,18 +74,18 @@ module _
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
     product-Prop
-      ( (exists-Prop ℚ L) ∧₋₁ (exists-Prop ℚ U))
+      ( (exists-Prop ℚ L) ∧₍₋₁₎ (exists-Prop ℚ U))
       ( product-Prop
         ( product-Prop
           ( Π-Prop ℚ
-            ( λ q → (L q) ⇔₋₁ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧₋₁ (L r)))))
+            ( λ q → (L q) ⇔₍₋₁₎ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧₍₋₁₎ (L r)))))
           ( Π-Prop ℚ
-            ( λ r → (U r) ⇔₋₁ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧₋₁ (U q))))))
+            ( λ r → (U r) ⇔₍₋₁₎ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧₍₋₁₎ (U q))))))
         ( product-Prop
           ( Π-Prop ℚ
-            ( λ q → neg-Prop ((L q) ∧₋₁ (U q))))
+            ( λ q → neg-Prop ((L q) ∧₍₋₁₎ (U q))))
           ( Π-Prop ℚ
-            ( λ q → Π-Prop ℚ (λ r → (le-ℚ-Prop q r) ⇒₋₁ ((L q) ∨₋₁ (U r)))))))
+            ( λ q → Π-Prop ℚ (λ r → (le-ℚ-Prop q r) ⇒₍₋₁₎ ((L q) ∨₍₋₁₎ (U r)))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
@@ -145,7 +145,7 @@ module _
     pr1 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
   is-located-lower-upper-cut-ℝ :
-    (q r : ℚ) → le-ℚ q r → type-Prop ((lower-cut-ℝ q) ∨₋₁ (upper-cut-ℝ r))
+    (q r : ℚ) → le-ℚ q r → type-Prop ((lower-cut-ℝ q) ∨₍₋₁₎ (upper-cut-ℝ r))
   is-located-lower-upper-cut-ℝ =
     pr2 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 

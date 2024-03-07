@@ -286,7 +286,7 @@ module _
 
 ```agda
 located-le-ℚ :
-  (x y z : ℚ) → le-ℚ y z → type-Prop ((le-ℚ-Prop y x) ∨₋₁ (le-ℚ-Prop x z))
+  (x y z : ℚ) → le-ℚ y z → type-Prop ((le-ℚ-Prop y x) ∨₍₋₁₎ (le-ℚ-Prop x z))
 located-le-ℚ x y z H =
   unit-trunc-Prop
     ( map-coproduct

@@ -1,7 +1,7 @@
 # Impredicative encodings of the logical operations
 
 ```agda
-module foundation.impredicative-encodings where
+module foundation.impredicative-encodings-propositions where
 ```
 
 <details><summary>Imports</summary>
@@ -82,7 +82,7 @@ equiv-impredicative-trunc-Prop A =
 impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-conjunction-Prop {l1} {l2} P1 P2 =
-  Π-Prop (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒₋₁ (P2 ⇒₋₁ Q)) ⇒₋₁ Q)
+  Π-Prop (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒₍₋₁₎ (P2 ⇒₍₋₁₎ Q)) ⇒₍₋₁₎ Q)
 
 type-impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -97,14 +97,14 @@ map-impredicative-conjunction-Prop P1 P2 (p1 , p2) Q f = f p1 p2
 map-inv-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-conjunction-Prop P1 P2 → type-conjunction-Prop P1 P2
-map-inv-impredicative-conjunction-Prop P1 P2 H = H (P1 ∧₋₁ P2) pair
+map-inv-impredicative-conjunction-Prop P1 P2 H = H (P1 ∧₍₋₁₎ P2) pair
 
 equiv-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-conjunction-Prop P1 P2 ≃ type-impredicative-conjunction-Prop P1 P2
 equiv-impredicative-conjunction-Prop P1 P2 =
   equiv-iff
-    ( P1 ∧₋₁ P2)
+    ( P1 ∧₍₋₁₎ P2)
     ( impredicative-conjunction-Prop P1 P2)
     ( map-impredicative-conjunction-Prop P1 P2)
     ( map-inv-impredicative-conjunction-Prop P1 P2)
@@ -116,7 +116,7 @@ equiv-impredicative-conjunction-Prop P1 P2 =
 impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-disjunction-Prop {l1} {l2} P1 P2 =
-  Π-Prop (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒₋₁ Q) ⇒₋₁ ((P2 ⇒₋₁ Q) ⇒₋₁ Q))
+  Π-Prop (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒₍₋₁₎ Q) ⇒₍₋₁₎ ((P2 ⇒₍₋₁₎ Q) ⇒₍₋₁₎ Q))
 
 type-impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -137,7 +137,7 @@ map-inv-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-disjunction-Prop P1 P2 → type-disjunction-Prop P1 P2
 map-inv-impredicative-disjunction-Prop P1 P2 H =
-  H ( P1 ∨₋₁ P2)
+  H ( P1 ∨₍₋₁₎ P2)
     ( inl-disjunction-Prop P1 P2)
     ( inr-disjunction-Prop P1 P2)
 
@@ -146,7 +146,7 @@ equiv-impredicative-disjunction-Prop :
   type-disjunction-Prop P1 P2 ≃ type-impredicative-disjunction-Prop P1 P2
 equiv-impredicative-disjunction-Prop P1 P2 =
   equiv-iff
-    ( P1 ∨₋₁ P2)
+    ( P1 ∨₍₋₁₎ P2)
     ( impredicative-disjunction-Prop P1 P2)
     ( map-impredicative-disjunction-Prop P1 P2)
     ( map-inv-impredicative-disjunction-Prop P1 P2)

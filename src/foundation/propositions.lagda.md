@@ -70,8 +70,12 @@ equiv-is-prop-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A ≃ B → is-prop A ≃ is-prop B
 equiv-is-prop-equiv {A = A} {B = B} e =
   equiv-prop
-    (is-prop-is-prop A)
-    (is-prop-is-prop B)
-    (is-prop-equiv' e)
-    (is-prop-equiv e)
+    ( is-prop-is-prop A)
+    ( is-prop-is-prop B)
+    ( is-prop-equiv' e)
+    ( is-prop-equiv e)
 ```
+
+## Table of files about propositional logic
+
+{{#include tables/propositional-logic.md}}

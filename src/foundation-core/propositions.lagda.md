@@ -242,20 +242,20 @@ module _
   pr2 Π-Prop = is-prop-type-Π-Prop
 ```
 
-We also introduce the special syntax `Π₋₁` for `Π-Prop`.
+We also introduce the special syntax `Π₍₋₁₎` for `Π-Prop`.
 
 ```agda
-Π₋₁ : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-Π₋₁ = Π-Prop
+Π₍₋₁₎ : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
+Π₍₋₁₎ = Π-Prop
 ```
 
-This is part of a general scheme where `Πₙ` takes an indexing type and a family
-of $n$-[types](foundation-core.truncated-types.md) over it as inputs, and spits
-out the $n$-type of dependent functions into the family. Note in particular that
-`Πₙ` should be read differently from `∀ₙ`, which takes values in propositions
-irrespective of $n$.
+This is part of a general scheme where `Π₍ₙ₎` takes an indexing type and a
+family of $n$-[types](foundation-core.truncated-types.md) over it as inputs, and
+spits out the $n$-type of dependent functions into the family. Note in
+particular that `Π₍ₙ₎` should be read differently from `∀₍ₙ₎`, which takes
+values in propositions irrespective of $n$.
 
-We repeat the above for implicit Π-types.
+We now repeat the above for implicit Π-types.
 
 ```agda
 abstract
@@ -322,8 +322,8 @@ hom-Prop :
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
 pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
 
-infixr 5 _⇒₋₁_
-_⇒₋₁_ = hom-Prop
+infixr 5 _⇒₍₋₁₎_
+_⇒₍₋₁₎_ = hom-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition
@@ -391,3 +391,7 @@ is-prop-Prop : {l : Level} (A : UU l) → Prop l
 pr1 (is-prop-Prop A) = is-prop A
 pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```
+
+## Table of files about propositional logic
+
+{{#include tables/propositional-logic.md}}
