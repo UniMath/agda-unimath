@@ -21,9 +21,9 @@ import json
 CITEAS_FIELD = 'citeas'
 
 # Regex to match citation macros
-CITE_REGEX = re.compile(r'\{\{#cite ([^\}\s]+)(?:\s(.*))?\}\}')
-NO_REF_CITE_REGEX = re.compile(r'\bno-ref(erence)?\b')
-REFERENCE_REGEX = re.compile(r'\{\{#reference ([^\}\s]+)(?:\s(.*))?\}\}')
+CITE_REGEX = re.compile(r'\{\{#cite\s([^\}\s]+)(?:\s(.*))?\}\}')
+NO_REF_CITE_REGEX = re.compile(r'\bno-ref\b')
+REFERENCE_REGEX = re.compile(r'\{\{#reference\s([^\}\s]+)(?:\s(.*))?\}\}')
 BIBLIOGRAPHY_REGEX = re.compile(r'\{\{#bibliography(?:\s(.*))?\}\}')
 
 
@@ -61,7 +61,7 @@ def format_citation(bib_database : pybtex.database.BibliographyData, style: pybt
         label = style.label_style.format_label(cite_entry)
         formatted_label = format_label(cite_entry, style)
 
-        return f'<a class="citation-link" href="#reference-{label}">&#91;{formatted_label}&#93;</a>'
+        return f'&#91;<a class="citation-link" href="#reference-{label}">{formatted_label}</a>&#93;'
     else:
         eprint(f"Warning: Citation key '{cite_key}' not found in bibliography.")
         return None

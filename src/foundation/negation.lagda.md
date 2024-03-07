@@ -72,7 +72,7 @@ no-fixed-points-neg A (pair f g) =
 ```
 
 ```agda
-abstract
+abstract ∧₋₁ ∀₋₁ Π₋₁ Σ₋₁
   no-fixed-points-neg-Prop :
     {l1 : Level} (P : Prop l1) → ¬ (P ⇔ neg-Prop P)
   no-fixed-points-neg-Prop P = no-fixed-points-neg (type-Prop P)
