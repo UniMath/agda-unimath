@@ -52,6 +52,12 @@ abstract
 ∃₍₋₁₎ = exists-Prop
 ```
 
+The indexing $-1$ for the operator `∃₍₋₁₎` is part of a general scheme for
+operations of propositions and
+[truncated types](foundation-core.truncated-types.md). The existential `∃₍ₙ₎`
+will always take values in propositions regardless of this index, in contrast to
+the dependent sum `Σ₍ₙ₎`, which will take values in $n$-types.
+
 ### Existential quantification of arbitrary type families
 
 ```agda

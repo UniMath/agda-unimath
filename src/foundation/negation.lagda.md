@@ -48,6 +48,10 @@ type-neg-Prop P = type-Prop (neg-Prop P)
 ¬₍₋₁₎ = neg-Prop
 ```
 
+The indexing $-1$ for the operator `¬₍₋₁₎` is part of a general scheme, where
+`¬₍ₙ₎` takes as input an $n$-[type](foundation-core.truncated-types.md) `X`, and
+spits out the $-1$-type that is the negation of the underlying type of `X`.
+
 ### Reductio ad absurdum
 
 ```agda

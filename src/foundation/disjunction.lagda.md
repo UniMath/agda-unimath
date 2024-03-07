@@ -25,8 +25,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-The disjunction of two propositions `P` and `Q` is the proposition that `P`
-holds or `Q` holds.
+The {{#concept "disjunction" Agda=disjunction-Prop}} of two
+[propositions](foundation-core.propositions.md) `P` and `Q` is the proposition
+that `P` holds or `Q` holds.
 
 ## Definition
 
@@ -46,6 +47,12 @@ abstract
 infixr 10 _∨₍₋₁₎_
 _∨₍₋₁₎_ = disjunction-Prop
 ```
+
+The indexing $-1$ for the infix binary operator `∨₍₋₁₎` is part of a general
+scheme, where `∨₍ₙ₎` takes as inputs
+$n$-[types](foundation-core.truncated-types.md), and spits out the propositional
+disjunction of their underlying types. This is in contrast to the coproduct
+`+₍ₙ₎`, which would take values in $n$-types.
 
 **Note**: The symbol used for the disjunction `_∨₍₋₁₎_` is the
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
