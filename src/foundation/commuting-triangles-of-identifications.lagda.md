@@ -706,6 +706,192 @@ module _
     refl
 ```
 
+### Left whiskering of horizontal pasting of commuting triangles of identifications
+
+Consider two commuting triangles of identifications as in the diagram
+
+```text
+      s       t
+  a ----> b ----> c
+    \     |     /
+     \  L |  R /
+    l \   |m  / r
+       \  |  /
+        ∨ ∨ ∨
+          d,
+```
+
+and consider furthermore a commuting triangle of identifications
+
+```text
+             t'
+         b ----> c
+         |     /
+         | R' /
+       m |   / r
+         |  /
+         ∨ ∨
+         d
+```
+
+where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in the previous diagram. Finally, consider an identification `p : top-right ＝ top-right'` and an identification `q` witnessing that the triangle
+
+```text
+        R
+   m ------> t ∙ r
+    \       /
+  R' \     / right-whisker p r
+      \   /
+       ∨ ∨
+     t' ∙ r
+  
+```
+
+commutes. Then the triangle
+
+```text
+                      horizontal-pasting L R
+                      l ----------------> (s ∙ t) ∙ r
+                        \               /
+                         \             /
+  horizontal-pasting L R' \           / right-whisker (left-whisker s p) r
+                           \         /
+                            ∨       ∨
+                          (s ∙ t') ∙ r
+  
+```
+
+commutes.
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  where
+
+  left-whisker-horizontal-pasting-coherence-triangle-identifications :
+    (left : a ＝ d) (middle : b ＝ d) (right : c ＝ d)
+    (top-left : a ＝ b) (top-right top-right' : b ＝ c) →
+    (L : coherence-triangle-identifications left middle top-left)
+    (R : coherence-triangle-identifications middle right top-right)
+    (R' : coherence-triangle-identifications middle right top-right')
+    (p : top-right ＝ top-right') →
+    coherence-triangle-identifications R' (right-whisker-concat p right) R →
+    coherence-triangle-identifications
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( middle)
+        ( right)
+        ( top-left)
+        ( top-right')
+        ( L)
+        ( R'))
+      ( right-whisker-concat (left-whisker-concat top-left p) right)
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( middle)
+        ( right)
+        ( top-left)
+        ( top-right)
+        ( L)
+        ( R))
+  left-whisker-horizontal-pasting-coherence-triangle-identifications
+    ._ ._ refl refl refl .refl refl refl ._ refl refl =
+    refl
+```
+
+### Right whiskering of horizontal pasting of commuting triangles of identifications
+
+Consider two commuting triangles of identifications as in the diagram
+
+```text
+     s      t
+  a ----> b ----> c
+    \     |     /
+     \  L |  R /
+    l \   |m  / r
+       \  |  /
+        ∨ ∨ ∨
+          d,
+```
+
+and consider furthermore a commuting triangle of identifications
+
+```text
+      s'
+  a ----> b
+    \     |
+     \ L' |
+    l \   |m
+       \  |
+        ∨ ∨
+          d,
+```
+
+where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in the previous diagram. Finally, consider an identification `p : top-right ＝ top-right'` and an identification `q` witnessing that the triangle
+
+```text
+        L
+   l ------> s ∙ m
+    \       /
+  L' \     / right-whisker p m
+      \   /
+       ∨ ∨
+     s' ∙ r
+  
+```
+
+commutes. Then the triangle
+
+```text
+                      horizontal-pasting L R
+                      l ----------------> (s ∙ t) ∙ r
+                        \               /
+                         \             /
+  horizontal-pasting L R' \           / right-whisker (right-whisker p s) r
+                           \         /
+                            ∨       ∨
+                          (s ∙ t') ∙ r
+  
+```
+
+commutes.
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  where
+
+  right-whisker-horizontal-pasting-coherence-triangle-identifications :
+    (left : a ＝ d) (middle : b ＝ d) (right : c ＝ d)
+    (top-left top-left' : a ＝ b) (top-right : b ＝ c) →
+    (L : coherence-triangle-identifications left middle top-left)
+    (L' : coherence-triangle-identifications left middle top-left')
+    (R : coherence-triangle-identifications middle right top-right)
+    (p : top-left ＝ top-left') →
+    coherence-triangle-identifications L' (right-whisker-concat p middle) L →
+    coherence-triangle-identifications
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( middle)
+        ( right)
+        ( top-left')
+        ( top-right)
+        ( L')
+        ( R))
+      ( right-whisker-concat (right-whisker-concat p top-right) right)
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( middle)
+        ( right)
+        ( top-left)
+        ( top-right)
+        ( L)
+        ( R))
+  right-whisker-horizontal-pasting-coherence-triangle-identifications
+    refl .refl .refl refl .refl refl refl ._ refl refl refl =
+    refl
+```
+
 ### Vertically pasting commuting squares and commuting triangles of identifications
 
 Consider a diagram of the form

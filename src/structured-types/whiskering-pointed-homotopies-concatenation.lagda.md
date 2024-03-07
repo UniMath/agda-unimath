@@ -8,6 +8,7 @@ module structured-types.whiskering-pointed-homotopies-concatenation where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.path-algebra
@@ -94,55 +95,156 @@ commutes. Here, the identifications `(H ∙h K)₁` and `(H ∙h L)₁` are the 
          
 ```
 
+Then the triangle
+
+```text
+                   horizontal-pasting H₁ K₁
+                       f₁ --------> (H₀ * ∙ K₀ *) ∙ h₁
+                         \         /
+                          \       /
+  horizontal-pasting H₁ L₁ \     / right-whisker (left-whisker (H₀ *) (α₀ *)) h₁
+                            \   /
+                             ∨ ∨
+                        (H₀ * ∙ K₀ *) ∙ h₁
+```
+
+commutes by left whiskering of horizontal pasting of commuting triangles of identifications.
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {f g h : A →∗ B} (H : f ~∗ g) (K L : g ~∗ h) (α : pointed-2-htpy K L)
   where
 
   htpy-left-whisker-concat-pointed-2-htpy :
-    {f g h : A →∗ B} (H : f ~∗ g) (K L : g ~∗ h) (α : pointed-2-htpy K L) →
     unpointed-htpy-pointed-htpy
       ( concat-pointed-htpy H K)
       ( concat-pointed-htpy H L)
-  htpy-left-whisker-concat-pointed-2-htpy H K L α =
+  htpy-left-whisker-concat-pointed-2-htpy =
     left-whisker-concat-htpy (htpy-pointed-htpy H) (htpy-pointed-2-htpy K L α)
 
   coherence-point-left-whisker-concat-pointed-2-htpy :
-    {f g h : A →∗ B} (H : f ~∗ g) (K L : g ~∗ h) (α : pointed-2-htpy K L) →
     coherence-point-unpointed-htpy-pointed-htpy
       ( concat-pointed-htpy H K)
       ( concat-pointed-htpy H L)
-      ( htpy-left-whisker-concat-pointed-2-htpy H K L α)
-  coherence-point-left-whisker-concat-pointed-2-htpy {f₀ , .(H₀ (pr2 A) ∙ (K₀ (pr2 A) ∙ refl))} {g₀ , .(K₀ (pr2 A) ∙ refl)} {h₀ , refl} (H₀ , refl) (K₀ , refl) (L₀ , .(ap (_∙ refl) (α₀ (pr2 A)))) (α₀ , refl) =
-    ( left-whisker-concat _
-      ( ap inv (right-unit-law-assoc (H₀ (pr2 A)) (L₀ (pr2 A))))) ∙
-    ( {!!} ∙
-      ( inv
-        ( right-whisker-concat
-          ( ap inv (right-unit-law-assoc (H₀ (pr2 A)) (K₀ (pr2 A))))
-          ( _))))
-
-{-
-( ( ap ((H₀ (pr2 A)) ∙_) (ap (_∙ refl) (α₀ (pr2 A)))) ∙
-  ( inv (assoc (H₀ (pr2 A)) (L₀ (pr2 A)) refl))) ＝
-(inv (assoc (H₀ (pr2 A)) (K₀ (pr2 A)) refl) ∙
- ap (_∙ refl) (ap (_∙_ (H₀ (pr2 A))) (α₀ (pr2 A))))
- -}
+      ( htpy-left-whisker-concat-pointed-2-htpy)
+  coherence-point-left-whisker-concat-pointed-2-htpy =
+    left-whisker-horizontal-pasting-coherence-triangle-identifications
+      ( preserves-point-pointed-map f)
+      ( preserves-point-pointed-map g)
+      ( preserves-point-pointed-map h)
+      ( htpy-pointed-htpy H (point-Pointed-Type A))
+      ( htpy-pointed-htpy K (point-Pointed-Type A))
+      ( htpy-pointed-htpy L (point-Pointed-Type A))
+      ( coherence-point-pointed-htpy H)
+      ( coherence-point-pointed-htpy K)
+      ( coherence-point-pointed-htpy L)
+      ( htpy-pointed-2-htpy K L α (point-Pointed-Type A))
+      ( coherence-point-pointed-2-htpy K L α)
 
   left-whisker-concat-pointed-2-htpy :
-    {f g h : A →∗ B} (H : f ~∗ g) (K L : g ~∗ h) (α : pointed-2-htpy K L) →
     pointed-2-htpy (concat-pointed-htpy H K) (concat-pointed-htpy H L)
-  pr1 (left-whisker-concat-pointed-2-htpy H K L α) =
-    htpy-left-whisker-concat-pointed-2-htpy H K L α
-  pr2 (left-whisker-concat-pointed-2-htpy H K L α) =
-    coherence-point-left-whisker-concat-pointed-2-htpy H K L α
+  pr1 left-whisker-concat-pointed-2-htpy =
+    htpy-left-whisker-concat-pointed-2-htpy
+  pr2 left-whisker-concat-pointed-2-htpy =
+    coherence-point-left-whisker-concat-pointed-2-htpy
 ```
 
-Id
-(pr2 H ∙
- (ap (_∙_ (pr1 H (pr2 A))) (pr2 L) ∙
-  inv (assoc (pr1 H (pr2 A)) (pr1 L (pr2 A)) (pr2 h))))
-(pr2 H ∙
- (ap (_∙_ (pr1 H (pr2 A))) (pr2 K) ∙
-  inv (assoc (pr1 H (pr2 A)) (pr1 K (pr2 A)) (pr2 h)))
- ∙ ap (_∙ pr2 h) (ap (_∙_ (pr1 H (pr2 A))) (pr1 α (pr2 A))))
+### Right whiskering of pointed 2-homotopies with respect to concatenation
+
+Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and `h := (h₀ , h₁)` from `A` to `B`, a pointed 2-homotopy `α := (α₀ , α₁) : H ~∗ K` between two pointed homotopies `H := (H₀ , H₁)` and `K := (K₀ , K₁)` from `f` to `g` and a pointed homotopy `L := (L₀ , L₁) : g ~∗ h` as indicated in the diagram
+
+```text
+      H
+    -----> 
+  f -----> g -----> h.
+      K        L
+```
+
+The underlying homotopy of the right whiskering `α ·r L : H ∙h L ~∗ K ∙h L` is the homotopy
+
+```text
+  α₀ ·r L₀ : H₀ ∙h L₀ ~ K₀ ∙h L₀.
+```
+
+The base point coherence of this homotopy is an identification witnessing that the triangle
+
+```text
+           (H ∙h L)₁
+        f₁ --------> ((H₀ *) ∙ (L₀ *)) ∙ h₁
+           \       /
+  (K ∙h L)₁ \     / right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
+             \   /
+              ∨ ∨
+    ((K₀ *) ∙ (L₀ *)) ∙ h₁
+```
+
+commutes. Here, the identifications `(H ∙h L)₁` and `(K ∙h L)₁` are the horizontal pastings of the [commuting triangles of identifications](foundation-core.commuting-triangles-identifications.md)
+
+```text
+       H₀ *      L₀ *                   K₀ *      L₀ *
+  f₀ * ---> g₀ * ----> h₀ *        f₀ * ---> g₀ * ----> h₀ *
+       \      |      /                  \      |      /
+        \  H₁ |  L₁ /                    \  K₁ |  L₁ /
+     f₁  \    |g₁  / h₁               f₁  \    |g₁  / h₁
+          \   |   /                        \   |   /
+           \  |  /                          \  |  /
+            ∨ ∨ ∨                            ∨ ∨ ∨
+              *                                *.
+         
+```
+
+Then the triangle
+
+```text
+                   horizontal-pasting H₁ L₁
+                       f₁ --------> (H₀ * ∙ L₀ *) ∙ h₁
+                         \         /
+                          \       /
+  horizontal-pasting K₁ L₁ \     / right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
+                            \   /
+                             ∨ ∨
+                        (K₀ * ∙ L₀ *) ∙ h₁
+```
+
+commutes by right whiskering of horizontal pasting of commuting triangles of identifications.
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {f g h : A →∗ B} (H K : f ~∗ g) (L : g ~∗ h) (α : pointed-2-htpy H K)
+  where
+
+  htpy-right-whisker-concat-pointed-2-htpy :
+    unpointed-htpy-pointed-htpy
+      ( concat-pointed-htpy H L)
+      ( concat-pointed-htpy K L)
+  htpy-right-whisker-concat-pointed-2-htpy =
+    right-whisker-concat-htpy (htpy-pointed-2-htpy H K α) (htpy-pointed-htpy L)
+
+  coherence-point-right-whisker-concat-pointed-2-htpy :
+    coherence-point-unpointed-htpy-pointed-htpy
+      ( concat-pointed-htpy H L)
+      ( concat-pointed-htpy K L)
+      ( htpy-right-whisker-concat-pointed-2-htpy)
+  coherence-point-right-whisker-concat-pointed-2-htpy =
+    right-whisker-horizontal-pasting-coherence-triangle-identifications
+      ( preserves-point-pointed-map f)
+      ( preserves-point-pointed-map g)
+      ( preserves-point-pointed-map h)
+      ( htpy-pointed-htpy H (point-Pointed-Type A))
+      ( htpy-pointed-htpy K (point-Pointed-Type A))
+      ( htpy-pointed-htpy L (point-Pointed-Type A))
+      ( coherence-point-pointed-htpy H)
+      ( coherence-point-pointed-htpy K)
+      ( coherence-point-pointed-htpy L)
+      ( htpy-pointed-2-htpy H K α (point-Pointed-Type A))
+      ( coherence-point-pointed-2-htpy H K α)
+
+  right-whisker-concat-pointed-2-htpy :
+    pointed-2-htpy (concat-pointed-htpy H L) (concat-pointed-htpy K L)
+  pr1 right-whisker-concat-pointed-2-htpy =
+    htpy-right-whisker-concat-pointed-2-htpy
+  pr2 right-whisker-concat-pointed-2-htpy =
+    coherence-point-right-whisker-concat-pointed-2-htpy
+```
