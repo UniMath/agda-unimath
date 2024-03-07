@@ -531,4 +531,4 @@ The equivalent notions of
 
 ## References
 
-{{#bibliography}} {{#reference rijkeModalitiesHomotopyType2020}}
+{{#bibliography}} {{#reference RSS20}}

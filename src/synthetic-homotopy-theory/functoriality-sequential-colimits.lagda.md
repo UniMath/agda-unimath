@@ -792,4 +792,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference sojakovaSequentialColimitsHomotopy2020}}
+{{#bibliography}} {{#reference SDR20}}

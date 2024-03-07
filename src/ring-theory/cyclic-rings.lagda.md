@@ -498,4 +498,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference AbsztraktAlgebraiFeladatok}}
+{{#bibliography}} {{#reference BSCS05}}

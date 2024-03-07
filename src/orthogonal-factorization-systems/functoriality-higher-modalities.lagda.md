@@ -191,4 +191,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference cherubiniFelixwellenDCHoTTAgda2023}}
+{{#bibliography}} {{#reference Felixwellen/DCHoTT-Agda}}

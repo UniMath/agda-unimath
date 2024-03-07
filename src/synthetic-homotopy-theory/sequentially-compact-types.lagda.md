@@ -49,4 +49,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference rijkeClassifyingTypes2019}}
+{{#bibliography}} {{#reference Rij19}}

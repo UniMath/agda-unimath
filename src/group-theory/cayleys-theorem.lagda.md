@@ -63,8 +63,7 @@ module _
 
 ### Cayley's theorem as a corollary of the Yoneda lemma
 
-This is Corollary 2.2.10 of {{#cite riehlCategoryTheoryContext2017}}, and
-remains to be formalized.
+This is Corollary 2.2.10 of {{#cite Rie17}}, and remains to be formalized.
 
 ## References
 

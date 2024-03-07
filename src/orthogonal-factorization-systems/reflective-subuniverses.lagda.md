@@ -240,6 +240,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference UF13}}
-{{#reference rijkeModalitiesHomotopyType2020}}
-{{#reference rijkeClassifyingTypes2019}}
+{{#bibliography}} {{#reference UF13}} {{#reference RSS20}} {{#reference Rij19}}

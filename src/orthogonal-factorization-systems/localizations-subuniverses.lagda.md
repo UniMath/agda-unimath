@@ -116,5 +116,4 @@ This is Proposition 5.1.2 in _Classifying Types_, and remains to be formalized.
 
 ## References
 
-{{#bibliography}} {{#reference rijkeModalitiesHomotopyType2020}}
-{{#reference rijkeClassifyingTypes2019}}
+{{#bibliography}} {{#reference RSS20}} {{#reference Rij19}}

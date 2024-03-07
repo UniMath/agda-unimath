@@ -212,6 +212,5 @@ ap-sharp f = rec-sharp (unit-sharp ∘ f)
 
 ## References
 
-{{#bibliography}} {{#reference shulmanBrouwerFixedpointTheorem2018}}
-{{#reference licataDlicata335Cohesionagda2017}}
-{{#reference cherubiniFelixwellenDCHoTTAgda2023}}
+{{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}
+{{#reference Felixwellen/DCHoTT-Agda}}

@@ -391,4 +391,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference rijkeJoinConstruction2017}}
+{{#bibliography}} {{#reference Rij17}}

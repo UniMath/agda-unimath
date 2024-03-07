@@ -532,8 +532,7 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference UF13}}
-{{#reference ahrensUnivalentCategoriesRezk2015}}
+{{#bibliography}} {{#reference UF13}} {{#reference AKS15}}
 
 ## External links
 

@@ -288,5 +288,4 @@ is-uniquely-eliminating-sharp X P .pr2 .pr2 f =
 
 ## References
 
-{{#bibliography}} {{#reference shulmanBrouwerFixedpointTheorem2018}}
-{{#reference licataDlicata335Cohesionagda2017}}
+{{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}

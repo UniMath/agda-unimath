@@ -63,7 +63,7 @@ is-uniquely-eliminating-modality-double-negation-modality {l} {A} P =
         ( z))
 ```
 
-This proof follows Example 1.9 in {{#cite rijkeModalitiesHomotopyType2020}}.
+This proof follows Example 1.9 in {{#cite RSS20}}.
 
 ## References
 

@@ -762,5 +762,4 @@ needed.
 
 ## References
 
-{{#bibliography}} {{#reference UF13}}
-{{#reference dejongSetTheoreticTypeTheoreticOrdinals2023}}
+{{#bibliography}} {{#reference UF13}} {{#reference JKFC23}}

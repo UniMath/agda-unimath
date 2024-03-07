@@ -146,4 +146,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference rijkeModalitiesHomotopyType2020}}
+{{#bibliography}} {{#reference RSS20}}

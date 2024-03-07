@@ -75,4 +75,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference voevodskyUnstableMotivicHomotopy2010}}
+{{#bibliography}} {{#reference Voe10}}

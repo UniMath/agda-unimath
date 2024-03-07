@@ -72,4 +72,4 @@ map-Prespectrum A B =
 
 ## References
 
-{{#bibliography}} {{#reference mayConciseCourseAlgebraic1999}}
+{{#bibliography}} {{#reference May99}}

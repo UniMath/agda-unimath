@@ -459,8 +459,7 @@ module _
 
 This result is known as
 [Vogt's lemma](https://ncatlab.org/nlab/show/homotopy+equivalence#vogts_lemma)
-in point-set topology. The construction follows Lemma 10.4.5 in
-{{#cite rijkeIntroductionHomotopyType2022}}.
+in point-set topology. The construction follows Lemma 10.4.5 in {{#cite Rij22}}.
 
 ```agda
 module _

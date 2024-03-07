@@ -545,4 +545,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference ernePrimerGaloisConnections1993}}
+{{#bibliography}} {{#reference EKMS93}}

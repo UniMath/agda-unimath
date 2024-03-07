@@ -224,4 +224,4 @@ module _
   Escardó,
   [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
 
-{{#bibliography}} {{#reference type-topology}}
+{{#bibliography}} {{#reference TypeTopology}}

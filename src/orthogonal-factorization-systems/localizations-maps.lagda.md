@@ -89,5 +89,4 @@ It remains to construct a converse.
 
 ## References
 
-{{#bibliography}} {{#reference rijkeModalitiesHomotopyType2020}}
-{{#reference rijkeClassifyingTypes2019}}
+{{#bibliography}} {{#reference RSS20}} {{#reference Rij19}}

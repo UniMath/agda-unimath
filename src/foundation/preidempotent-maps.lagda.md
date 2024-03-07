@@ -46,5 +46,4 @@ is-prop-is-preidempotent-is-set is-set-A f =
 
 ## References
 
-{{#bibliography}} {{#reference shulmanIdempotentsIntensionalType2017}}
-{{#reference shulmanSplittingIdempotents2014}}
+{{#bibliography}} {{#reference Shu17}} {{#reference Shu14SplittingIdempotents}}

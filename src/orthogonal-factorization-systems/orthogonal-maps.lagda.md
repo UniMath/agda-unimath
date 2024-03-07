@@ -1081,4 +1081,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference buchholtzSyntheticFiberedInfty2023}}
+{{#bibliography}} {{#reference BW23}}

@@ -58,5 +58,4 @@ module _
 - Dan Licata, _cohesion-agda_, GitHub repository
   (<https://github.com/dlicata335/cohesion-agda>)
 
-{{#bibliography}} {{#reference shulmanBrouwerFixedpointTheorem2018}}
-{{#reference licataDlicata335Cohesionagda2017}}
+{{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}

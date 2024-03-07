@@ -202,4 +202,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference mangelDeloopingSignHomomorphism2023}}
+{{#bibliography}} {{#reference MR23}}

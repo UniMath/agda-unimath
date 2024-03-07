@@ -35,8 +35,7 @@ we can construct a bijection between `A` and `B`. In a recent generalization,
 Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
 ∞-groupoids. His generalization asserts that given two types that
 [embed](foundation-core.embeddings.md) into each other, then the types are
-[equivalent](foundation-core.equivalences.md).
-{{#cite escardoCantorSchroderBernstein2021}}
+[equivalent](foundation-core.equivalences.md). {{#cite Esc21}}
 
 ## Statement
 

@@ -240,7 +240,7 @@ This remains to be shown.
 
 ## References
 
-{{#bibliography}} {{#reference rijkeModalitiesHomotopyType2020}}
+{{#bibliography}} {{#reference RSS20}}
 
 ## External links
 

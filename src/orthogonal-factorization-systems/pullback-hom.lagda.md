@@ -522,5 +522,4 @@ A wikidata identifier for this concept is unavailable.
 
 ## References
 
-{{#bibliography}} {{#reference buchholtzSyntheticFiberedInfty2023}}
-{{#reference riehlElementsCategoryTheory2022}}
+{{#bibliography}} {{#reference BW23}} {{#reference Rie22}}

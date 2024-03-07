@@ -82,5 +82,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference UF13}}
-{{#reference shulmanUniversalPropertiesFunction2014}}
+{{#bibliography}} {{#reference UF13}} {{#reference Shu14UniversalProperties}}

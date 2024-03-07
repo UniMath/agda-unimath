@@ -157,8 +157,7 @@ module _
   groups in HoTT/UF in Agda.
   <https://www.cs.bham.ac.uk/~mhe/TypeTopology/Groups.Free.html>. 2021.
 
-{{#bibliography}} {{#reference minesCourseConstructiveAlgebra1988}}
-{{#reference warnPathSpacesPushouts2023}}
+{{#bibliography}} {{#reference MRR88}} {{#reference Warn24draft}}
 
 ## See also
 

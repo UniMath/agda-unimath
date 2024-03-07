@@ -114,7 +114,7 @@ Rezk completion_.
 
 ## References
 
-{{#bibliography}} {{#reference ahrensUnivalentCategoriesRezk2015}}
+{{#bibliography}} {{#reference AKS15}}
 
 ## External links
 

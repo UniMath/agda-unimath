@@ -504,8 +504,8 @@ module _
 
 - The notion of `k`-equivalence is a special case of the notion of
   `L`-equivalence, where `L` is a reflective subuniverse. They were studied in
-  the paper {{#cite christensenLocalizationHomotopyType2020}}.
+  the paper {{#cite CORS20}}.
 - The class of `k`-equivalences is left orthogonal to the class of `k`-étale
-  maps. This was shown in {{#cite cherubiniModalDescent2021}}.
+  maps. This was shown in {{#cite CR21}}.
 
 {{#bibliography}}

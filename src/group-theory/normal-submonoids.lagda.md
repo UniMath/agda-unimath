@@ -576,4 +576,4 @@ pr2 (equiv-normal-submonoid-saturated-congruence-Monoid l2 M) =
 
 ## References
 
-{{#bibliography}} {{#reference margolisInverseSemigroupsExtensions1987}}
+{{#bibliography}} {{#reference MP87}}

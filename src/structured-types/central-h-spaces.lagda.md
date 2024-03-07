@@ -41,4 +41,4 @@ is-central-h-space A =
 
 ## References
 
-{{#bibliography}} {{#reference buchholtzCentralHspacesBanded2023}}
+{{#bibliography}} {{#reference BCFR23}}
