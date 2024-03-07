@@ -660,20 +660,21 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
 ```agda
 eq-sim-unit-is-nonnegative-ℤ :
   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K
-  with is-plus-or-minus-sim-unit-ℤ K
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg
-  with is-decidable-is-zero-ℤ a
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
-  z ∙ inv (ap neg-ℤ z) ∙ neg
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
-  ex-falso
-    ( nz
-      ( is-zero-is-nonnegative-is-nonpositive-ℤ
-        ( a)
-        ( H)
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K with is-plus-or-minus-sim-unit-ℤ K
+...| inl p = p
+...| inr m = α ∙ inv β
+  where
+    α : is-zero-ℤ a
+    α =
+      is-zero-is-nonnegative-is-nonpositive-ℤ a H
         ( is-nonpositive-eq-ℤ
-          ( inv (ap neg-ℤ neg) ∙ (neg-neg-ℤ a))
-          ( is-nonpositive-neg-is-nonnegative-ℤ b H'))))
+          ( inv (ap neg-ℤ m) ∙ (neg-neg-ℤ a))
+          ( is-nonpositive-neg-is-nonnegative-ℤ b H'))
+
+    β : is-zero-ℤ b
+    β =
+      is-zero-is-nonnegative-is-nonpositive-ℤ b H'
+        ( is-nonpositive-eq-ℤ
+          ( m)
+          ( is-nonpositive-neg-is-nonnegative-ℤ a H))
 ```
