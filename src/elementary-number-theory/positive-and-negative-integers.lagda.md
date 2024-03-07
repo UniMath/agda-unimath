@@ -41,8 +41,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The relations between negativity, nonpositivity, nonnegativity and positivity of
-integers
+In this file, we outline basic relations between negative, nonpositive, nonnegative, and positive 
+integers.
 
 ## Properties
 
