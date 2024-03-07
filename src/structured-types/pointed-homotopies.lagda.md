@@ -400,7 +400,7 @@ A pointed homotopy `H ~∗ K` then consists of an unpointed homotopy
         H₁
   f₁ ------> (H₀ *) ∙ g₁
     \       /
-  K₁ \     / right-whisker-concat (α₀ *) ∙ g₁
+  K₁ \     / right-whisker-concat (α₀ *) g₁
       \   /
        ∨ ∨
    (K₀ *) ∙ g₁
