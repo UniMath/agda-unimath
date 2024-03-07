@@ -518,7 +518,7 @@ is-nonnegative-right-factor-mul-ℤ :
   is-nonnegative-ℤ (x *ℤ y) → is-positive-ℤ x → is-nonnegative-ℤ y
 is-nonnegative-right-factor-mul-ℤ {x} {y} H =
   is-nonnegative-left-factor-mul-ℤ
-    (is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
+    ( is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
 ```
 
 ```agda
