@@ -92,9 +92,7 @@ is-decidable-is-negative-ℤ (inr x) = inr id
 ```agda
 is-set-negative-ℤ : is-set negative-ℤ
 is-set-negative-ℤ =
-  is-set-emb
-    ( emb-subtype subtype-negative-ℤ)
-    ( is-set-ℤ)
+  is-set-type-subtype (subtype-negative-ℤ) (is-set-ℤ)
 ```
 
 ### The predecessor of a negative integer is negative
