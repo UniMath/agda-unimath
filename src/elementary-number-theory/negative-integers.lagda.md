@@ -59,6 +59,9 @@ subtype-negative-ℤ x = is-negative-ℤ x , is-prop-is-negative-ℤ x
 negative-ℤ : UU lzero
 negative-ℤ = type-subtype subtype-negative-ℤ
 
+is-negative-eq-ℤ : {x y : ℤ} → x ＝ y → is-negative-ℤ x → is-negative-ℤ y
+is-negative-eq-ℤ {x} refl = id
+
 module _
   (p : negative-ℤ)
   where

@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
@@ -79,9 +80,9 @@ is-positive-add-positive-positive-ℤ {inr (inr (succ-ℕ x))} {y} H K =
 ```agda
 is-positive-add-nonnegative-positive-ℤ :
   {x y : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-nonnegative-positive-ℤ {inr (inl x)} {y} H H' = H'
-is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H H' =
-  is-positive-add-positive-positive-ℤ {inr (inr x)} {y} H H'
+is-positive-add-nonnegative-positive-ℤ {inr (inl x)} {y} H K = K
+is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H K =
+  is-positive-add-positive-positive-ℤ {inr (inr x)} {y} H K
 ```
 
 ### The sum of a positive and a nonnegative integer is positive
@@ -89,10 +90,10 @@ is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H H' =
 ```agda
 is-positive-add-positive-nonnegative-ℤ :
   {x y : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-positive-nonnegative-ℤ {x} {y} H H' =
+is-positive-add-positive-nonnegative-ℤ {x} {y} H K =
   is-positive-eq-ℤ
     ( commutative-add-ℤ y x)
-    ( is-positive-add-nonnegative-positive-ℤ H' H)
+    ( is-positive-add-nonnegative-positive-ℤ K H)
 ```
 
 ### The sum of two nonnegative integers is nonnegative
@@ -100,12 +101,71 @@ is-positive-add-positive-nonnegative-ℤ {x} {y} H H' =
 ```agda
 is-nonnegative-add-nonnegative-nonnegative-ℤ : {x y : ℤ} →
   is-nonnegative-ℤ x → is-nonnegative-ℤ y → is-nonnegative-ℤ (x +ℤ y)
-is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inl x)} {y} H H' = H'
-is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr zero-ℕ)} {y} H H' =
-  is-nonnegative-succ-is-nonnegative-ℤ H'
-is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr (succ-ℕ x))} {y} H H' =
+is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inl x)} {y} H K = K
+is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr zero-ℕ)} {y} H K =
+  is-nonnegative-succ-is-nonnegative-ℤ K
+is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr (succ-ℕ x))} {y} H K =
   is-nonnegative-succ-is-nonnegative-ℤ
-    ( is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr x)} star H')
+    ( is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr x)} star K)
+```
+
+### The sum of two negative integers is negative
+
+```agda
+is-negative-add-negative-negative-ℤ :
+  {x y : ℤ} → is-negative-ℤ x → is-negative-ℤ y → is-negative-ℤ (x +ℤ y)
+is-negative-add-negative-negative-ℤ {x} {y} H K =
+  is-negative-eq-ℤ
+    ( neg-neg-ℤ (x +ℤ y))
+    ( is-negative-neg-is-positive-ℤ
+      ( is-positive-eq-ℤ
+        ( inv (distributive-neg-add-ℤ x y))
+        ( is-positive-add-positive-positive-ℤ
+          ( is-positive-neg-is-negative-ℤ H)
+          ( is-positive-neg-is-negative-ℤ K))))
+```
+
+### The sum of a nonpositive and a negative integer is negative
+
+```agda
+is-negative-add-nonpositive-negative-ℤ :
+  {x y : ℤ} → is-nonpositive-ℤ x → is-negative-ℤ y → is-negative-ℤ (x +ℤ y)
+is-negative-add-nonpositive-negative-ℤ {x} {y} H K =
+  is-negative-eq-ℤ
+    ( neg-neg-ℤ (x +ℤ y))
+    ( is-negative-neg-is-positive-ℤ
+      ( is-positive-eq-ℤ
+        ( inv (distributive-neg-add-ℤ x y))
+        ( is-positive-add-nonnegative-positive-ℤ
+          ( is-nonnegative-neg-is-nonnpositive-ℤ H)
+          ( is-positive-neg-is-negative-ℤ K))))
+```
+
+### The sum of a negative and a nonpositive integer is negative
+
+```agda
+is-negative-add-negative-nonnegative-ℤ :
+  {x y : ℤ} → is-negative-ℤ x → is-nonpositive-ℤ y → is-negative-ℤ (x +ℤ y)
+is-negative-add-negative-nonnegative-ℤ {x} {y} H K =
+  is-negative-eq-ℤ
+    ( commutative-add-ℤ y x)
+    ( is-negative-add-nonpositive-negative-ℤ K H)
+```
+
+### The sum of two nonpositive integers is nonpositive
+
+```agda
+is-nonpositive-add-nonpositive-nonpositive-ℤ : {x y : ℤ} →
+  is-nonpositive-ℤ x → is-nonpositive-ℤ y → is-nonpositive-ℤ (x +ℤ y)
+is-nonpositive-add-nonpositive-nonpositive-ℤ {x} {y} H K =
+  is-nonpositive-eq-ℤ
+    ( neg-neg-ℤ (x +ℤ y))
+    ( is-nonpositive-neg-is-nonnegative-ℤ
+      ( is-nonnegative-eq-ℤ
+        ( inv ( distributive-neg-add-ℤ x y))
+        ( is-nonnegative-add-nonnegative-nonnegative-ℤ
+          ( is-nonnegative-neg-is-nonnpositive-ℤ H)
+          ( is-nonnegative-neg-is-nonnpositive-ℤ K))))
 ```
 
 ## Definitions
@@ -124,4 +184,20 @@ add-positive-ℤ (x , H) (y , K) =
 add-nonnegative-ℤ : nonnegative-ℤ → nonnegative-ℤ → nonnegative-ℤ
 add-nonnegative-ℤ (x , H) (y , K) =
   add-ℤ x y , is-nonnegative-add-nonnegative-nonnegative-ℤ H K
+```
+
+### Addition of negative integers
+
+```agda
+add-negative-ℤ : negative-ℤ → negative-ℤ → negative-ℤ
+add-negative-ℤ (x , H) (y , K) =
+  add-ℤ x y , is-negative-add-negative-negative-ℤ H K
+```
+
+### Addition of nonpositive integers
+
+```agda
+add-nonpositive-ℤ : nonpositive-ℤ → nonpositive-ℤ → nonpositive-ℤ
+add-nonpositive-ℤ (x , H) (y , K) =
+  add-ℤ x y , is-nonpositive-add-nonpositive-nonpositive-ℤ H K
 ```
