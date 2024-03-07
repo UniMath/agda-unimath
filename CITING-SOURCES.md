@@ -6,11 +6,11 @@ a custom set of macros to work with them.
 
 The three macros are as follows:
 
-- `{{#cite labelXYZ}}` will insert a citation to the reference labeled
-  `labelXYZ` (which must be defined in the `references.bib` file) at the current
-  location, and add that reference to the current page's bibliography.
-- `{{#reference labelXYZ}}` will add the reference labeled `labelXYZ` to the
-  current page's bibliography without inserting a citation.
+- `{{#cite referenceXYZ}}` will insert a citation to the reference labeled
+  `referenceXYZ` (which must be defined in the `references.bib` file) at the
+  current location, and add that reference to the current page's bibliography.
+- `{{#reference referenceXYZ}}` will add the reference labeled `referenceXYZ` to
+  the current page's bibliography without inserting a citation.
 - `{{#bibliography}}` is a marker for where the bibliography of the current page
   should be inserted. If no such marker is found and the bibliography is
   inhabited, it will be inserted at the bottom of the page in a new section
@@ -25,3 +25,9 @@ If you are unsure about how to structure your BibLaTeX entry, it may be useful
 to know that the references are checked by the `linkcheck` GitHub workflow, so
 when you post your pull request to `agda-unimath` you can refer to the CI for
 possible issues.
+
+**Note:** If the citation label of your reference is not being generated
+properly, we have a custom `citeas` field that can be used to overwrite it. For
+instance, _Homotopy Type Theory: Univalent Foundations of Mathematics_ should be
+cited as {{#cite UF13}}, and to make this work we have set `citeas = {UF13},`
+for its BibLaTeX entry.
