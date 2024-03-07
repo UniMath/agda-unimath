@@ -135,7 +135,7 @@ identifications.
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  {f g h : A →∗ B} (H : f ~∗ g) (K L : g ~∗ h) (α : pointed-2-htpy K L)
+  {f g h : A →∗ B} (H : f ~∗ g) (K L : g ~∗ h) (α : K ~²∗ L)
   where
 
   htpy-left-whisker-concat-pointed-2-htpy :
@@ -165,7 +165,7 @@ module _
       ( coherence-point-pointed-2-htpy K L α)
 
   left-whisker-concat-pointed-2-htpy :
-    pointed-2-htpy (concat-pointed-htpy H K) (concat-pointed-htpy H L)
+    concat-pointed-htpy H K ~²∗ concat-pointed-htpy H L
   pr1 left-whisker-concat-pointed-2-htpy =
     htpy-left-whisker-concat-pointed-2-htpy
   pr2 left-whisker-concat-pointed-2-htpy =
@@ -241,7 +241,7 @@ identifications.
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  {f g h : A →∗ B} (H K : f ~∗ g) (α : pointed-2-htpy H K) (L : g ~∗ h)
+  {f g h : A →∗ B} (H K : f ~∗ g) (α : H ~²∗ K) (L : g ~∗ h)
   where
 
   htpy-right-whisker-concat-pointed-2-htpy :
@@ -271,7 +271,7 @@ module _
       ( coherence-point-pointed-2-htpy H K α)
 
   right-whisker-concat-pointed-2-htpy :
-    pointed-2-htpy (concat-pointed-htpy H L) (concat-pointed-htpy K L)
+    concat-pointed-htpy H L ~²∗ concat-pointed-htpy K L
   pr1 right-whisker-concat-pointed-2-htpy =
     htpy-right-whisker-concat-pointed-2-htpy
   pr2 right-whisker-concat-pointed-2-htpy =

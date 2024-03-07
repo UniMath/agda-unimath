@@ -41,43 +41,8 @@ open import structured-types.pointed-types
 
 A {{#concept "pointed homotopy" Agda=_~∗_}} between
 [pointed dependent functions](structured-types.pointed-dependent-functions.md)
-is a pointed dependent function of the
-[pointed family](structured-types.pointed-families-of-types.md) of
-[pointwise identifications](foundation-core.homotopies.md). The base point of
-the family `x ↦ f₀ x ＝ g₀ x` over `A` is the identification
-
-```text
-  f₁ ∙ inv g₁ : f₀ * ＝ g₀ *.
-```
-
-A pointed homotopy `f ~∗ g` therefore consists of an unpointed homotopy
-`H₀ : f₀ ~ g₀` between the underlying dependent functions and a
-{{#concept "base point coherence" Disambiguation="pointed homotopy" Agda=coherence-point-unpointed-htpy-pointed-Π}},
-which is an [identification](foundation-core.identity-types.md) witnessing that
-the triangle of identifications
-
-```text
-        H₀ *
-  f₀ * ------> g₀ *
-      \       ∧
-    f₀ \     / inv g₁
-        \   /
-         ∨ /
-          *
-```
-
-[commutes](foundation.commuting-triangles-of-identifications.md).
-
-Note that since pointed homotopies are defined for pointed dependent functions,
-a pointed homotopy between pointed homotopies is just an instance of a pointed
-homotopy. For this reason, we will also refer to the above definition of pointed
-homotopies as
-{{#concept "uniform pointed homotopies" Agda=uniform-pointed-htpy}}.
-
-A significant complication of this approach to the definition of pointed
-homotopies is that identifications witnessing the commutativity of the triangle
-in a pointed homotopy is more complicated to construct than an identification
-witnessing that the triangle
+`f := (f₀ , f₁)` and `g := (g₀ , g₁)` of type `pointed-Π A B` consists of an
+unpointed [homotopy](foundation-core.homotopies.md) `H₀ : f₀ ~ g₀` and an [identification](foundation-core.identity-types.md) `H₁ : f₁ ＝ (H₀ *) ∙ g₁` witnessing that the triangle of identifications
 
 ```text
         H₀ *
@@ -86,33 +51,54 @@ witnessing that the triangle
     f₁ \     / g₁
         \   /
          ∨ ∨
-          *.
+          *
 ```
 
-commutes. Therefore we also introduce the type `uniform-pointed-htpy` of pointed
-homotopies, where the base point coherence takes this simpler form. The
-(nonuniform definition of pointed homotopies from `f` to `g` is therefore
+[commutes](foundation.commuting-triangles-of-identifications.md). This identification is called the {{#concept "base point coherence" Disambiguation="pointed homotopy" Agda=coherence-point-unpointed-htpy-pointed-Π}} of the pointed homotopy `H := (H₀ , H₁)`.
+
+An equivalent way of defining pointed homotopies occurs when we consider the type family `x ↦ f₀ x ＝ g₀ x` over the base type `A`. This is a [pointed type family](structured-types.pointed-families-of-types.md), where the base point is the identification
 
 ```text
-  Σ (H₀ : f₀ ~ g₀), f₁ ＝ (H₀ *) ∙ g₁
+  f₁ ∙ inv g₁ : f₀ * ＝ g₀ *.
 ```
 
-By transposing the commuting triangle of identifications in a pointed homotopy
-we directly obtain from each pointed homotopy a uniform pointed homotopy. This
-construction is an equivalence. By convention we will construct every uniform
-pointed homotopy this way.
+A pointed homotopy `f ~∗ g` is therefore equivalently defined as a pointed dependent function of the pointed type family `x ↦ f₀ x ＝ g₀ x`. Such a pointed dependent function consists of an unpointed homotopy
+`H₀ : f₀ ~ g₀` between the underlying dependent functions and an identification witnessing that the triangle of identifications
 
-We will see below that for pointed 2-homotopies, i.e., pointed homotopies
-between pointed homotopies, a significant simplification is possible by making
-sure that every identification faces in its uninverted direction. The only
+```text
+        H₀ *
+  f₀ * ------> g₀ *
+      \       ∧
+    f₁ \     / inv g₁
+        \   /
+         ∨ /
+          *
+```
+
+[commutes](foundation.commuting-triangles-of-identifications.md). Notice that the identification on the right in this triangle goes up, in the inverse direction of the identification `g₁`.
+
+Note that in this second definition of pointed homotopies we defined pointed homotopies between pointed dependent functions to be certain pointed dependent functions. This implies that the second definition is a uniform definition that can easily be iterated in order to consider pointed higher homotopies. For this reason, we call the second definition of pointed homotopies {{#concept "uniform pointed homotopies" Agda=uniform-pointed-htpy}}.
+
+A complication of this approach to the definition of pointed
+homotopies is that identifications witnessing the commutativity of the triangle
+in a pointed homotopy is slightly more complicated to construct a base point coherence
+
+```text
+        H₀ *
+  f₀ * ------> g₀ *
+      \       /
+    f₁ \     / g₁
+        \   /
+         ∨ ∨
+          *,
+```
+
+ of the first definition, where the identification on the right goes down in the direction of `g₁`. This complication becomes more significant and bothersome when we are trying to construct a pointed 2-homotopy. For this reason, our first definition where pointed homotopies are defined to consist of unpointed homotopies and a base point coherence, is taken to be our main definition of pointed homotopy.  The only
 disadvantage of the nonuniform definition of pointed homotopies is that it does
 not easily iterate.
 
-We will write `f ~∗ g` for the nonuniform definition of pointed homotopies, and
+We will write `f ~∗ g` for the type of (nonuniform) pointed homotopies, and
 we will write `H ~²∗ K` for the nonuniform definition of pointed 2-homotopies.
-Note that the definition `_~∗_` of pointed homotopies applies to all pointed
-dependent functions, but pointed homotopies `H : f ~∗ g` are not by definition
-pointed dependent functions.
 
 ## Definitions
 
@@ -274,7 +260,7 @@ module _
 ### The uniform definition of pointed homotopies
 
 **Note.** The operation `htpy-uniform-pointed-htpy` that converts a uniform
-pointed homotopy to an unpoined homotopy is set up with the pointed functions as
+pointed homotopy to an unpointed homotopy is set up with the pointed functions as
 explicit arguments, because Agda has trouble inferring them.
 
 ```agda
@@ -406,9 +392,9 @@ A pointed homotopy `H ~∗ K` then consists of an unpointed homotopy
    (K₀ *) ∙ g₁
 ```
 
-commutes. Equivalently, following equivalence of pointed homotopies and uniform
+commutes. Equivalently, following the equivalence of pointed homotopies and uniform
 pointed homotopies, a uniform pointed 2-homotopy consists of an unpointed
-homotopy `α₀ : H₀ ~ K₀` is and an identification witnessing that `α₀` preserves
+homotopy `α₀ : H₀ ~ K₀` and an identification witnessing that `α₀` preserves
 the base point, i.e., witnessing that the triangle
 
 ```text
@@ -446,6 +432,11 @@ module _
   pointed-2-htpy : UU (l1 ⊔ l2)
   pointed-2-htpy =
     Σ unpointed-htpy-pointed-htpy coherence-point-unpointed-htpy-pointed-htpy
+
+  infix 6 _~²∗_
+
+  _~²∗_ : UU (l1 ⊔ l2)
+  _~²∗_ = pointed-2-htpy
 
   module _
     (α : pointed-2-htpy)
@@ -509,7 +500,7 @@ module _
       ( htpy-refl-pointed-2-htpy)
   coherence-point-refl-pointed-2-htpy = inv right-unit
 
-  refl-pointed-2-htpy : pointed-2-htpy H H
+  refl-pointed-2-htpy : H ~²∗ H
   pr1 refl-pointed-2-htpy = htpy-refl-pointed-2-htpy
   pr2 refl-pointed-2-htpy = coherence-point-refl-pointed-2-htpy
 ```
@@ -577,7 +568,7 @@ module _
   where
 
   uniform-extensionality-pointed-Π :
-    (g : pointed-Π A B) → Id f g ≃ uniform-pointed-htpy f g
+    (g : pointed-Π A B) → (f ＝ g) ≃ uniform-pointed-htpy f g
   uniform-extensionality-pointed-Π =
     extensionality-Σ
       ( λ {g} q H →
@@ -595,7 +586,7 @@ module _
         ( equiv-inv (preserves-point-function-pointed-Π f) p))
 
   eq-uniform-pointed-htpy :
-    (g : pointed-Π A B) → uniform-pointed-htpy f g → Id f g
+    (g : pointed-Π A B) → uniform-pointed-htpy f g → f ＝ g
   eq-uniform-pointed-htpy g = map-inv-equiv (uniform-extensionality-pointed-Π g)
 ```
 
@@ -604,7 +595,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  (f g : pointed-Π A B) (H : f ~∗ g)
+  {f g : pointed-Π A B} (H : f ~∗ g)
   where
 
   is-torsorial-pointed-2-htpy :
@@ -615,7 +606,7 @@ module _
       ( htpy-pointed-htpy H , refl-htpy)
       ( is-torsorial-Id' _)
 
-  pointed-2-htpy-eq : (K : f ~∗ g) → H ＝ K → pointed-2-htpy H K
+  pointed-2-htpy-eq : (K : f ~∗ g) → H ＝ K → H ~²∗ K
   pointed-2-htpy-eq .H refl = refl-pointed-2-htpy H
 
   is-equiv-pointed-2-htpy-eq :
@@ -626,12 +617,12 @@ module _
       ( pointed-2-htpy-eq)
 
   extensionality-pointed-htpy :
-    (K : f ~∗ g) → (H ＝ K) ≃ pointed-2-htpy H K
+    (K : f ~∗ g) → (H ＝ K) ≃ (H ~²∗ K)
   pr1 (extensionality-pointed-htpy K) = pointed-2-htpy-eq K
   pr2 (extensionality-pointed-htpy K) = is-equiv-pointed-2-htpy-eq K
 
   eq-pointed-2-htpy :
-    (K : f ~∗ g) → pointed-2-htpy H K → H ＝ K
+    (K : f ~∗ g) → H ~²∗ K → H ＝ K
   eq-pointed-2-htpy K = map-inv-equiv (extensionality-pointed-htpy K)
 ```
 
@@ -668,7 +659,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  (f g h : pointed-Π A B)
+  {f g h : pointed-Π A B}
   (G : uniform-pointed-htpy f g) (H : uniform-pointed-htpy g h)
   where
 
@@ -722,7 +713,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  (f g : pointed-Π A B) (H : uniform-pointed-htpy f g)
+  {f g : pointed-Π A B} (H : uniform-pointed-htpy f g)
   where
 
   htpy-inv-uniform-pointed-htpy : unpointed-htpy-pointed-Π g f
@@ -915,9 +906,8 @@ module _
       ( coherence-point-pointed-htpy K)
 
   associative-concat-pointed-htpy :
-    pointed-2-htpy
-      ( concat-pointed-htpy (concat-pointed-htpy G H) K)
-      ( concat-pointed-htpy G (concat-pointed-htpy H K))
+    concat-pointed-htpy (concat-pointed-htpy G H) K ~²∗
+    concat-pointed-htpy G (concat-pointed-htpy H K)
   pr1 associative-concat-pointed-htpy =
     htpy-associative-concat-pointed-htpy
   pr2 associative-concat-pointed-htpy =
@@ -929,8 +919,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  {f g : pointed-Π A B} {H K L : f ~∗ g}
-  (α : pointed-2-htpy H K) (β : pointed-2-htpy K L)
+  {f g : pointed-Π A B} {H K L : f ~∗ g} (α : H ~²∗ K) (β : K ~²∗ L)
   where
 
   htpy-concat-pointed-2-htpy :
@@ -959,7 +948,7 @@ module _
               ( htpy-pointed-2-htpy H K α _)
               ( htpy-pointed-2-htpy K L β _))))))
 
-  concat-pointed-2-htpy : pointed-2-htpy H L
+  concat-pointed-2-htpy : H ~²∗ L
   pr1 concat-pointed-2-htpy = htpy-concat-pointed-2-htpy
   pr2 concat-pointed-2-htpy = coherence-point-concat-pointed-2-htpy
 ```
@@ -969,7 +958,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  {f g : pointed-Π A B} {H K : f ~∗ g} (α : pointed-2-htpy H K)
+  {f g : pointed-Π A B} {H K : f ~∗ g} (α : H ~²∗ K)
   where
 
   htpy-inv-pointed-2-htpy :
@@ -986,12 +975,10 @@ module _
       ( inv (ap-inv _ (htpy-pointed-2-htpy H K α _)))
       ( coherence-point-pointed-2-htpy H K α)
 
-  inv-pointed-2-htpy : pointed-2-htpy K H
+  inv-pointed-2-htpy : K ~²∗ H
   pr1 inv-pointed-2-htpy = htpy-inv-pointed-2-htpy
   pr2 inv-pointed-2-htpy = coherence-point-inv-pointed-2-htpy
 ```
-
-Id (pr2 H) (pr2 K ∙ ap (\_∙ pr2 g) (inv (pr1 α (pr2 A))))
 
 ### The left unit law of concatenation of pointed homotopies
 
@@ -1022,7 +1009,7 @@ module _
     inv inv-coherence-point-left-unit-law-concat-pointed-htpy
 
   left-unit-law-concat-pointed-htpy :
-    pointed-2-htpy (concat-pointed-htpy (refl-pointed-htpy f) H) H
+    concat-pointed-htpy (refl-pointed-htpy f) H ~²∗  H
   pr1 left-unit-law-concat-pointed-htpy =
     htpy-left-unit-law-concat-pointed-htpy
   pr2 left-unit-law-concat-pointed-htpy =
@@ -1069,7 +1056,7 @@ module _
             ( preserves-point-function-pointed-Π g)))))
 
   right-unit-law-concat-pointed-htpy :
-    pointed-2-htpy (concat-pointed-htpy H (refl-pointed-htpy g)) H
+    concat-pointed-htpy H (refl-pointed-htpy g) ~²∗ H
   pr1 right-unit-law-concat-pointed-htpy =
     htpy-right-unit-law-concat-pointed-htpy
   pr2 right-unit-law-concat-pointed-htpy =

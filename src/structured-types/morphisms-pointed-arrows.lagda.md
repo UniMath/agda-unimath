@@ -1,6 +1,8 @@
 # Morphisms of pointed arrows
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module structured-types.morphisms-pointed-arrows where
 ```
 
@@ -494,9 +496,12 @@ module _
     is-torsorial (htpy-hom-pointed-arrow f g α)
   is-torsorial-htpy-hom-pointed-arrow =
     is-torsorial-Eq-structure
-      {! !}
-      {!!}
-      {!!}
+      ( is-torsorial-pointed-htpy _)
+      ( pointed-map-domain-hom-pointed-arrow f g α , refl-pointed-htpy _)
+      ( is-torsorial-Eq-structure
+        ( is-torsorial-pointed-htpy _)
+        ( pointed-map-codomain-hom-pointed-arrow f g α , refl-pointed-htpy _)
+        {!!})
 
 {-
     is-torsorial-Eq-structure
