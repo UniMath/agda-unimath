@@ -41,8 +41,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-In this file, we outline basic relations between negative, nonpositive, nonnegative, and positive 
-integers.
+In this file, we outline basic relations between negative, nonpositive,
+nonnegative, and positive integers.
 
 ## Properties
 
@@ -50,8 +50,8 @@ integers.
 
 ```agda
 is-zero-is-nonnegative-is-nonpositive-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → is-nonpositive-ℤ x → is-zero-ℤ x
-is-zero-is-nonnegative-is-nonpositive-ℤ (inr (inl x)) H K = refl
+  {x : ℤ} → is-nonnegative-ℤ x → is-nonpositive-ℤ x → is-zero-ℤ x
+is-zero-is-nonnegative-is-nonpositive-ℤ {inr (inl x)} H K = refl
 ```
 
 ### Dichotomy properties

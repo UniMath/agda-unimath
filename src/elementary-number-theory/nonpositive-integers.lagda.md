@@ -111,8 +111,8 @@ is-set-nonpositive-ℤ =
 
 ```agda
 is-zero-is-nonpositive-neg-is-nonpositive-ℤ :
-  (x : ℤ) → is-nonpositive-ℤ x → is-nonpositive-ℤ (neg-ℤ x) → is-zero-ℤ x
-is-zero-is-nonpositive-neg-is-nonpositive-ℤ (inr (inl star)) nonneg nonpos =
+  {x : ℤ} → is-nonpositive-ℤ x → is-nonpositive-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-nonpositive-neg-is-nonpositive-ℤ {inr (inl star)} nonneg nonpos =
   refl
 ```
 

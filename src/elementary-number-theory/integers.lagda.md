@@ -72,6 +72,9 @@ zero-ℤ = inr (inl star)
 
 is-zero-ℤ : ℤ → UU lzero
 is-zero-ℤ x = (x ＝ zero-ℤ)
+
+eq-is-zero-ℤ : {a b : ℤ} → is-zero-ℤ a → is-zero-ℤ b → a ＝ b
+eq-is-zero-ℤ {a} {b} H K = H ∙ inv K
 ```
 
 ### Inclusion of the positive integers

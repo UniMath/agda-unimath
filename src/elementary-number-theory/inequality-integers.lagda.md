@@ -59,17 +59,12 @@ refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
 antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
 antisymmetric-leq-ℤ {x} {y} H K =
   eq-diff-ℤ
-    ( is-zero-is-nonnegative-is-nonpositive-ℤ
-        ( x -ℤ y)
-        ( K)
-        ( tr
-          ( is-nonpositive-ℤ)
-          ( distributive-neg-diff-ℤ y x)
-          ( is-nonpositive-neg-is-nonnegative-ℤ (y -ℤ x) H)))
+    ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ K
+      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
 
 transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
 transitive-leq-ℤ k l m p q =
-  tr is-nonnegative-ℤ
+  is-nonnegative-eq-ℤ
     ( triangle-diff-ℤ m l k)
     ( is-nonnegative-add-nonnegative-nonnegative-ℤ q p)
 

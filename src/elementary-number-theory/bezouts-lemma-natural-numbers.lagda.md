@@ -333,7 +333,6 @@ is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
       is-injective-int-ℕ
         ( inv
           ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
-            ( int-ℕ z)
             ( is-nonnegative-int-ℕ z)
             ( tr
               ( is-nonnegative-ℤ)

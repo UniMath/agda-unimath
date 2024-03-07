@@ -660,21 +660,14 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
 ```agda
 eq-sim-unit-is-nonnegative-ℤ :
   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K with is-plus-or-minus-sim-unit-ℤ K
-...| inl p = p
-...| inr m = α ∙ inv β
-  where
-    α : is-zero-ℤ a
-    α =
-      is-zero-is-nonnegative-is-nonpositive-ℤ a H
-        ( is-nonpositive-eq-ℤ
-          ( inv (ap neg-ℤ m) ∙ (neg-neg-ℤ a))
-          ( is-nonpositive-neg-is-nonnegative-ℤ b H'))
-
-    β : is-zero-ℤ b
-    β =
-      is-zero-is-nonnegative-is-nonpositive-ℤ b H'
-        ( is-nonpositive-eq-ℤ
-          ( m)
-          ( is-nonpositive-neg-is-nonnegative-ℤ a H))
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K =
+  rec-coproduct
+    ( id)
+    ( λ K' →
+      eq-is-zero-ℤ
+        ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ H
+          ( is-nonnegative-eq-ℤ (inv K') H'))
+        ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ H'
+          ( is-nonnegative-eq-ℤ (inv (neg-neg-ℤ a) ∙ ap neg-ℤ K') H)))
+    ( is-plus-or-minus-sim-unit-ℤ K)
 ```

@@ -86,7 +86,6 @@ module _
   is-sim-antisymmetric-leq-fraction-ℤ H H' =
     sim-is-zero-coss-mul-diff-fraction-ℤ x y
       ( is-zero-is-nonnegative-is-nonpositive-ℤ
-        ( cross-mul-diff-fraction-ℤ x y)
         ( H)
         ( is-nonpositive-eq-ℤ
           ( skew-commutative-cross-mul-diff-fraction-ℤ y x)
