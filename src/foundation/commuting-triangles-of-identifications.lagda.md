@@ -734,7 +734,10 @@ and consider furthermore a commuting triangle of identifications
          d
 ```
 
-where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in the previous diagram. Finally, consider an identification `p : top-right ＝ top-right'` and an identification `q` witnessing that the triangle
+where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in
+the previous diagram. Finally, consider an identification
+`p : top-right ＝ top-right'` and an identification `q` witnessing that the
+triangle
 
 ```text
         R
@@ -744,7 +747,6 @@ where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in
       \   /
        ∨ ∨
      t' ∙ r
-  
 ```
 
 commutes. Then the triangle
@@ -758,7 +760,6 @@ commutes. Then the triangle
                            \         /
                             ∨       ∨
                           (s ∙ t') ∙ r
-  
 ```
 
 commutes.
@@ -827,7 +828,10 @@ and consider furthermore a commuting triangle of identifications
           d,
 ```
 
-where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in the previous diagram. Finally, consider an identification `p : top-right ＝ top-right'` and an identification `q` witnessing that the triangle
+where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in
+the previous diagram. Finally, consider an identification
+`p : top-right ＝ top-right'` and an identification `q` witnessing that the
+triangle
 
 ```text
         L
@@ -837,7 +841,6 @@ where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in
       \   /
        ∨ ∨
      s' ∙ r
-  
 ```
 
 commutes. Then the triangle
@@ -851,7 +854,6 @@ commutes. Then the triangle
                            \         /
                             ∨       ∨
                           (s ∙ t') ∙ r
-  
 ```
 
 commutes.

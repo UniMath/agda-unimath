@@ -16,8 +16,8 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-concatenation
 open import foundation.whiskering-identifications-concatenation
 
-open import structured-types.pointed-maps
 open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
 
@@ -25,24 +25,38 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The [whiskering operations](foundation.whiskering-operations.md) of [pointed homotopies](structured-types.pointed-homotopies.md) are operations that take a pointed `2`-homotopy between two pointed homotopies `H K : f ~∗ g` between [pointed maps](structured-types.pointed-maps.md) `f g : A →∗ B` and a pointed homotopy `α` either into `H` or out of `K` and return a pointed `2`-homotopy from the concatenation of `α` and `H` to the concatenation of `α` and `K`. There are two such operations: left whiskering and right whiskering.
+The [whiskering operations](foundation.whiskering-operations.md) of
+[pointed homotopies](structured-types.pointed-homotopies.md) are operations that
+take a pointed `2`-homotopy between two pointed homotopies `H K : f ~∗ g`
+between [pointed maps](structured-types.pointed-maps.md) `f g : A →∗ B` and a
+pointed homotopy `α` either into `H` or out of `K` and return a pointed
+`2`-homotopy from the concatenation of `α` and `H` to the concatenation of `α`
+and `K`. There are two such operations: left whiskering and right whiskering.
 
-The {{#concept "left whiskering" Disambiguation="pointed 2-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}} is an operation that takes a pointed homotopy `H : f ~∗ g` and a pointed 2-homotopy `α : K ~∗ L` between two pointed homotopies `K L : g ~∗ h` as indicated in the diagram
+The
+{{#concept "left whiskering" Disambiguation="pointed 2-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}}
+is an operation that takes a pointed homotopy `H : f ~∗ g` and a pointed
+2-homotopy `α : K ~∗ L` between two pointed homotopies `K L : g ~∗ h` as
+indicated in the diagram
 
 ```text
                K
-      H      -----> 
+      H      ----->
   f -----> g -----> h,
                L
 ```
 
 and returns a pointed 2-homotopy `H ∙h K ~∗ H ∙h K`.
 
-The {{#concept "right whiskering" Disambiguation="pointed 2-homotopies with respect to concatenation" Agda=right-whisker-concat-pointed-2-htpy}} is an operation that takes a pointed 2-homotopy `α : H ~∗ K` between two pointed homotopies `H K : f ~∗ g` and a pointed homotopy `L : g ~∗ h` as indicated in the diagram
+The
+{{#concept "right whiskering" Disambiguation="pointed 2-homotopies with respect to concatenation" Agda=right-whisker-concat-pointed-2-htpy}}
+is an operation that takes a pointed 2-homotopy `α : H ~∗ K` between two pointed
+homotopies `H K : f ~∗ g` and a pointed homotopy `L : g ~∗ h` as indicated in
+the diagram
 
 ```text
       H
-    -----> 
+    ----->
   f -----> g -----> h,
       K        L
 ```
@@ -53,22 +67,28 @@ and returns a pointed 2-homotopy `H ∙h L ~∗ K ∙h L`.
 
 ### Left whiskering of pointed 2-homotopies with respect to concatenation
 
-Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and `h := (h₀ , h₁)` from `A` to `B`, a pointed homotopy `H := (H₀ , H₁) : f ~∗ g` and a pointed 2-homotopy `α := (α₀ , α₁) : K ~∗ L` between two pointed homotopies `K := (K₀ , K₁)` and `L := (L₀ , L₁)` from `g` to `h` as indicated in the diagram
+Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
+`h := (h₀ , h₁)` from `A` to `B`, a pointed homotopy `H := (H₀ , H₁) : f ~∗ g`
+and a pointed 2-homotopy `α := (α₀ , α₁) : K ~∗ L` between two pointed
+homotopies `K := (K₀ , K₁)` and `L := (L₀ , L₁)` from `g` to `h` as indicated in
+the diagram
 
 ```text
                K
-      H      -----> 
+      H      ----->
   f -----> g -----> h.
                L
 ```
 
-The underlying homotopy of the left whiskering `H ·l α : H ∙h K ~∗ H ∙h L` is the homotopy
+The underlying homotopy of the left whiskering `H ·l α : H ∙h K ~∗ H ∙h L` is
+the homotopy
 
 ```text
   H₀ ·l α₀ : H₀ ∙h K₀ ~ H₀ ∙h L₀.
 ```
 
-The base point coherence of this homotopy is an identification witnessing that the triangle
+The base point coherence of this homotopy is an identification witnessing that
+the triangle
 
 ```text
            (H ∙h K)₁
@@ -80,7 +100,9 @@ The base point coherence of this homotopy is an identification witnessing that t
     ((H₀ *) ∙ (L₀ *)) ∙ h₁
 ```
 
-commutes. Here, the identifications `(H ∙h K)₁` and `(H ∙h L)₁` are the horizontal pastings of the [commuting triangles of identifications](foundation-core.commuting-triangles-identifications.md)
+commutes. Here, the identifications `(H ∙h K)₁` and `(H ∙h L)₁` are the
+horizontal pastings of the
+[commuting triangles of identifications](foundation-core.commuting-triangles-identifications.md)
 
 ```text
        H₀ *      K₀ *                   H₀ *      L₀ *
@@ -92,7 +114,6 @@ commutes. Here, the identifications `(H ∙h K)₁` and `(H ∙h L)₁` are the 
            \  |  /                          \  |  /
             ∨ ∨ ∨                            ∨ ∨ ∨
               *                                *.
-         
 ```
 
 Then the triangle
@@ -108,7 +129,8 @@ Then the triangle
                         (H₀ * ∙ K₀ *) ∙ h₁
 ```
 
-commutes by left whiskering of horizontal pasting of commuting triangles of identifications.
+commutes by left whiskering of horizontal pasting of commuting triangles of
+identifications.
 
 ```agda
 module _
@@ -152,22 +174,27 @@ module _
 
 ### Right whiskering of pointed 2-homotopies with respect to concatenation
 
-Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and `h := (h₀ , h₁)` from `A` to `B`, a pointed 2-homotopy `α := (α₀ , α₁) : H ~∗ K` between two pointed homotopies `H := (H₀ , H₁)` and `K := (K₀ , K₁)` from `f` to `g` and a pointed homotopy `L := (L₀ , L₁) : g ~∗ h` as indicated in the diagram
+Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
+`h := (h₀ , h₁)` from `A` to `B`, a pointed 2-homotopy `α := (α₀ , α₁) : H ~∗ K`
+between two pointed homotopies `H := (H₀ , H₁)` and `K := (K₀ , K₁)` from `f` to
+`g` and a pointed homotopy `L := (L₀ , L₁) : g ~∗ h` as indicated in the diagram
 
 ```text
       H
-    -----> 
+    ----->
   f -----> g -----> h.
       K        L
 ```
 
-The underlying homotopy of the right whiskering `α ·r L : H ∙h L ~∗ K ∙h L` is the homotopy
+The underlying homotopy of the right whiskering `α ·r L : H ∙h L ~∗ K ∙h L` is
+the homotopy
 
 ```text
   α₀ ·r L₀ : H₀ ∙h L₀ ~ K₀ ∙h L₀.
 ```
 
-The base point coherence of this homotopy is an identification witnessing that the triangle
+The base point coherence of this homotopy is an identification witnessing that
+the triangle
 
 ```text
            (H ∙h L)₁
@@ -179,7 +206,9 @@ The base point coherence of this homotopy is an identification witnessing that t
     ((K₀ *) ∙ (L₀ *)) ∙ h₁
 ```
 
-commutes. Here, the identifications `(H ∙h L)₁` and `(K ∙h L)₁` are the horizontal pastings of the [commuting triangles of identifications](foundation-core.commuting-triangles-identifications.md)
+commutes. Here, the identifications `(H ∙h L)₁` and `(K ∙h L)₁` are the
+horizontal pastings of the
+[commuting triangles of identifications](foundation-core.commuting-triangles-identifications.md)
 
 ```text
        H₀ *      L₀ *                   K₀ *      L₀ *
@@ -191,7 +220,6 @@ commutes. Here, the identifications `(H ∙h L)₁` and `(K ∙h L)₁` are the 
            \  |  /                          \  |  /
             ∨ ∨ ∨                            ∨ ∨ ∨
               *                                *.
-         
 ```
 
 Then the triangle
@@ -207,12 +235,13 @@ Then the triangle
                         (K₀ * ∙ L₀ *) ∙ h₁
 ```
 
-commutes by right whiskering of horizontal pasting of commuting triangles of identifications.
+commutes by right whiskering of horizontal pasting of commuting triangles of
+identifications.
 
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  {f g h : A →∗ B} (H K : f ~∗ g) (L : g ~∗ h) (α : pointed-2-htpy H K)
+  {f g h : A →∗ B} (H K : f ~∗ g) (α : pointed-2-htpy H K) (L : g ~∗ h)
   where
 
   htpy-right-whisker-concat-pointed-2-htpy :

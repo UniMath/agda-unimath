@@ -71,6 +71,7 @@ open import structured-types.types-equipped-with-endomorphisms public
 open import structured-types.universal-property-pointed-equivalences public
 open import structured-types.unpointed-maps public
 open import structured-types.whiskering-pointed-homotopies-composition public
+open import structured-types.whiskering-pointed-homotopies-concatenation public
 open import structured-types.wild-groups public
 open import structured-types.wild-loops public
 open import structured-types.wild-monoids public
