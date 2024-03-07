@@ -32,8 +32,21 @@ that `P` holds or `Q` holds.
 ## Definition
 
 ```agda
+disjunction-prop-Type : {l1 l2 : Level} → UU l1 → UU l2 → Prop (l1 ⊔ l2)
+disjunction-prop-Type A B = trunc-Prop (A + B)
+
+disjunction-Type : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+disjunction-Type A B = type-Prop (disjunction-prop-Type A B)
+
+-- _∨_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+-- _∨_ = disjunction-Type
+```
+
+### Disjunction of propositions
+
+```agda
 disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-disjunction-Prop P Q = trunc-Prop (type-Prop P + type-Prop Q)
+disjunction-Prop P Q = disjunction-prop-Type (type-Prop P) (type-Prop Q)
 
 type-disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-disjunction-Prop P Q = type-Prop (disjunction-Prop P Q)
