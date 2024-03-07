@@ -33,4 +33,6 @@ possible issues.
 properly, we have a custom `citeas` field that can be used to overwrite it. For
 instance, _Homotopy Type Theory: Univalent Foundations of Mathematics_ should be
 cited as {{#cite UF13}}, and to make this work we have set `citeas = {UF13}` for
-its BibLaTeX entry. Keep in mind
+its BibLaTeX entry. Keep in mind that if the citation label is not being
+generated properly, then it is probable that the author list is not being parsed
+properly either.
