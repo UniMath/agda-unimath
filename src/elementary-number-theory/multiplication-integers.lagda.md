@@ -9,6 +9,7 @@ module elementary-number-theory.multiplication-integers where
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.inequality-integers
@@ -338,7 +339,7 @@ is-positive-mul-ℤ :
   {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x *ℤ y)
 is-positive-mul-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
 is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-add-ℤ {inr (inr y)} K
+  is-positive-add-positive-positive-ℤ {inr (inr y)} K
     ( is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} H K)
 ```
 

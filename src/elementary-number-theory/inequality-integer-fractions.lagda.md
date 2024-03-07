@@ -8,6 +8,7 @@ module elementary-number-theory.inequality-integer-fractions where
 
 ```agda
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.inequality-integers
@@ -125,9 +126,7 @@ transitive-leq-fraction-ℤ p q r H H' =
   is-nonnegative-right-factor-mul-ℤ
     ( is-nonnegative-eq-ℤ
       ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
-        (is-nonnegative-add-ℤ
-          ( denominator-fraction-ℤ p *ℤ cross-mul-diff-fraction-ℤ q r)
-          ( denominator-fraction-ℤ r *ℤ cross-mul-diff-fraction-ℤ p q)
+        ( is-nonnegative-add-nonnegative-nonnegative-ℤ
           ( is-nonnegative-mul-ℤ
             ( is-nonnegative-is-positive-ℤ
               ( denominator-fraction-ℤ p)
@@ -153,7 +152,7 @@ transitive-le-fraction-ℤ p q r H H' =
   is-positive-right-factor-mul-ℤ
     ( is-positive-eq-ℤ
       ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
-      ( is-positive-add-ℤ
+      ( is-positive-add-positive-positive-ℤ
         ( is-positive-mul-ℤ
           ( is-positive-denominator-fraction-ℤ p)
           ( H'))

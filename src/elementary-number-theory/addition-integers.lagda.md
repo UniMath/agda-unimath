@@ -510,52 +510,6 @@ distributive-neg-add-ℤ (inr (inr (succ-ℕ n))) l =
       by ap pred-ℤ (distributive-neg-add-ℤ (inr (inr n)) l)
 ```
 
-### Addition of nonnegative integers is nonnegative
-
-```agda
-is-nonnegative-add-ℤ :
-  (k l : ℤ) →
-  is-nonnegative-ℤ k → is-nonnegative-ℤ l → is-nonnegative-ℤ (k +ℤ l)
-is-nonnegative-add-ℤ (inr (inl star)) (inr (inl star)) p q = star
-is-nonnegative-add-ℤ (inr (inl star)) (inr (inr n)) p q = star
-is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inl star)) p q = star
-is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inl star)) star star =
-  is-nonnegative-succ-is-nonnegative-ℤ
-    ( (inr (inr n)) +ℤ (inr (inl star)))
-    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inl star)) star star)
-is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inr m)) star star = star
-is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inr m)) star star =
-  is-nonnegative-succ-is-nonnegative-ℤ
-    ( (inr (inr n)) +ℤ (inr (inr m)))
-    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inr m)) star star)
-```
-
-### Addition of positive integers is positive
-
-```agda
-is-positive-add-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
-is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-succ-is-positive-ℤ
-    ( add-ℤ (inr (inr x)) (inr (inr y)))
-    ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} H K)
-
-is-positive-add-nonnegative-positive-ℤ :
-  {x y : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-nonnegative-positive-ℤ {inr (inl x)} {y} H H' =
-  is-positive-eq-ℤ refl H'
-is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H H' =
-  is-positive-add-ℤ {inr (inr x)} {y} H H'
-
-is-positive-add-positive-nonnegative-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-positive-nonnegative-ℤ {x} {y} H H' =
-  is-positive-eq-ℤ
-    ( commutative-add-ℤ y x)
-    ( is-positive-add-nonnegative-positive-ℤ H' H)
-```
-
 ### The inclusion of ℕ into ℤ preserves addition
 
 ```agda
