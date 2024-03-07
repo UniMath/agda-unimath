@@ -20,7 +20,6 @@ open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
@@ -294,7 +293,6 @@ pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
   [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
-
 - Functorial properties of function types are recorded in
   [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md).
 - Functorial properties of dependent pair types are recorded in

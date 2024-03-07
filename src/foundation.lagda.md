@@ -84,6 +84,7 @@ open import foundation.copartial-functions public
 open import foundation.coproduct-decompositions public
 open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
+open import foundation.coproducts-pullbacks public
 open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
@@ -106,7 +107,9 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-pullbacks public
 open import foundation.dependent-sequences public
+open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
 open import foundation.dependent-universal-property-equivalences public
 open import foundation.descent-coproduct-types public
@@ -275,6 +278,7 @@ open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
 open import foundation.postcomposition-dependent-functions public
 open import foundation.postcomposition-functions public
+open import foundation.postcomposition-pullbacks public
 open import foundation.powersets public
 open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
@@ -290,6 +294,7 @@ open import foundation.product-decompositions-subuniverse public
 open import foundation.products-binary-relations public
 open import foundation.products-equivalence-relations public
 open import foundation.products-of-tuples-of-types public
+open import foundation.products-pullbacks public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
 open import foundation.projective-types public
@@ -299,7 +304,6 @@ open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
-open import foundation.pullback-squares public
 open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.raising-universe-levels public
@@ -339,6 +343,7 @@ open import foundation.spans public
 open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.standard-pullbacks public
 open import foundation.strictly-involutive-identity-types public
 open import foundation.strictly-right-unital-concatenation-identifications public
 open import foundation.strongly-extensional-maps public
