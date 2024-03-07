@@ -46,32 +46,12 @@ integers.
 
 ## Properties
 
-### Characterisations of `zero-ℤ`
-
-#### The only nonnegative and nonpositive integer is `zero-ℤ`
+### The only nonnegative and nonpositive integer is `zero-ℤ`
 
 ```agda
 is-zero-is-nonnegative-is-nonpositive-ℤ :
   (x : ℤ) → is-nonnegative-ℤ x → is-nonpositive-ℤ x → is-zero-ℤ x
 is-zero-is-nonnegative-is-nonpositive-ℤ (inr (inl x)) H K = refl
-```
-
-#### The only nonnegative integer with a nonnegative negative is `zero-ℤ`
-
-```agda
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
-  refl
-```
-
-#### The only nonpositive integer with a nonpositive negative is zero-ℤ
-
-```agda
-is-zero-is-nonpositive-neg-is-nonpositive-ℤ :
-  (x : ℤ) → is-nonpositive-ℤ x → is-nonpositive-ℤ (neg-ℤ x) → is-zero-ℤ x
-is-zero-is-nonpositive-neg-is-nonpositive-ℤ (inr (inl star)) nonneg nonpos =
-  refl
 ```
 
 ### Dichotomy properties

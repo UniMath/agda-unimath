@@ -104,6 +104,15 @@ is-set-nonnegative-ℤ =
     ( is-set-ℤ)
 ```
 
+### The only nonnegative integer with a nonnegative negative is `zero-ℤ`
+
+```agda
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
+  refl
+```
+
 ### The successor of a nonnegative integer is nonnegative
 
 ```agda
