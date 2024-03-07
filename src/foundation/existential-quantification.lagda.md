@@ -145,3 +145,10 @@ module _
       ( ∃₍₋₁₎ A (λ a → P ∧₍₋₁₎ Q a))
       ( iff-distributive-conjunction-exists-Prop)
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

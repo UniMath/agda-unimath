@@ -83,3 +83,10 @@ abstract
     {l1 : Level} (P : Prop l1) → ¬ (type-Prop (P ⇔₍₋₁₎ neg-Prop P))
   no-fixed-points-neg-Prop P = no-fixed-points-neg (type-Prop P)
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

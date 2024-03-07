@@ -296,3 +296,10 @@ equiv-impredicative-id-Prop A x y =
     ( map-impredicative-id-Prop A x y)
     ( map-inv-impredicative-id-Prop A x y)
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

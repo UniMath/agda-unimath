@@ -411,3 +411,10 @@ pr2 (pr2 (xor-Decidable-Prop P Q)) =
       ( is-decidable-Decidable-Prop Q)
       ( is-decidable-neg (is-decidable-Decidable-Prop P)))
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

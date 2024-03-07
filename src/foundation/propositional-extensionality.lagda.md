@@ -37,8 +37,15 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-Propositional extensionality characterizes identifications of propositions. It
-asserts that for any two propositions `P` and `Q`, we have `(P ＝ Q) ≃ (P ⇔ Q)`.
+{{#concept "Propositional extensionality" Agda=propositional-extensionality}}
+characterizes [identifications](foundation-core.identity-types.md) of
+[propositions](foundation-core.propositions.md). It asserts that for any two
+propositions `P` and `Q`, we have `(P ＝ Q) ≃ (P ⇔ Q)`.
+
+We note that, while we derive propositional extensionality from the
+[univalence axiom](foundation-core.univalence.md), it is a strictly weaker
+principle, meaning that the principle of propositional extensionality does not
+imply univalence.
 
 ## Properties
 
@@ -66,9 +73,7 @@ module _
   abstract
     is-equiv-iff-eq : (P Q : Prop l1) → is-equiv (iff-eq {l1} {P} {Q})
     is-equiv-iff-eq P =
-      fundamental-theorem-id
-        ( is-torsorial-iff P)
-        ( λ Q → iff-eq {P = P} {Q})
+      fundamental-theorem-id (is-torsorial-iff P) (λ Q → iff-eq {P = P} {Q})
 
   propositional-extensionality :
     (P Q : Prop l1) → (P ＝ Q) ≃ type-Prop (P ⇔₍₋₁₎ Q)
@@ -93,8 +98,7 @@ module _
   equiv-eq-Prop {P} refl = id-equiv
 
   is-torsorial-equiv-Prop :
-    (P : Prop l1) →
-    is-torsorial (λ Q → type-Prop P ≃ type-Prop Q)
+    (P : Prop l1) → is-torsorial (λ Q → type-Prop P ≃ type-Prop Q)
   is-torsorial-equiv-Prop P =
     is-contr-equiv'
       ( Σ (Prop l1) (λ Q → type-Prop (P ⇔₍₋₁₎ Q)))
@@ -172,3 +176,15 @@ abstract
                   ( type-Prop P))))))
       ( is-torsorial-iff (raise-empty-Prop l1))
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}
+
+## External links
+
+- [propositional extensionality](https://ncatlab.org/nlab/show/propositional+extensionality)
+  at $n$Lab.

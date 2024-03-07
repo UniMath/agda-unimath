@@ -437,3 +437,10 @@ module _
   pr2 inv-equiv-trunc-Prop-diagonal-coproduct =
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

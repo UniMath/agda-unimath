@@ -394,4 +394,7 @@ pr2 (is-prop-Prop A) = is-prop-is-prop A
 
 ## Table of files about propositional logic
 
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
 {{#include tables/propositional-logic.md}}

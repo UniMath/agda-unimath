@@ -78,4 +78,7 @@ equiv-is-prop-equiv {A = A} {B = B} e =
 
 ## Table of files about propositional logic
 
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
 {{#include tables/propositional-logic.md}}

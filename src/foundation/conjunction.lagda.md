@@ -105,4 +105,7 @@ equiv-universal-property-conjunction-Prop P Q R =
 
 ## Table of files about propositional logic
 
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
 {{#include tables/propositional-logic.md}}
