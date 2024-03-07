@@ -267,7 +267,7 @@ is-injective-neg-ℤ : is-injective neg-ℤ
 is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
 ```
 
-### Relation between successors of natural numbers and integers
+### The integer successor of a natural number is the successor of the natural number
 
 ```agda
 succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
