@@ -39,11 +39,11 @@ abstract
     is-prop (type-conjunction-Prop P Q)
   is-prop-type-conjunction-Prop P Q = is-prop-type-Prop (conjunction-Prop P Q)
 
-infixr 15 _∧_
-_∧_ = conjunction-Prop
+infixr 15 _∧₋₁_
+_∧₋₁_ = conjunction-Prop
 ```
 
-**Note**: The symbol used for the conjunction `_∧_` is the
+**Note**: The symbol used for the conjunction `_∧₋₁_` is the
 [logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
 
 ```agda
@@ -78,7 +78,7 @@ pr2 (intro-conjunction-Prop P Q p q) = q
 iff-universal-property-conjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
-  type-Prop (((R ⇒ P) ∧ (R ⇒ Q)) ⇔ (R ⇒ (P ∧ Q)))
+  type-Prop (((R ⇒₋₁ P) ∧₋₁ (R ⇒₋₁ Q)) ⇔₋₁ (R ⇒₋₁ (P ∧₋₁ Q)))
 pr1 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = f r
 pr2 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = g r
 pr1 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr1 (h r)
@@ -87,10 +87,10 @@ pr2 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr2 (h r)
 equiv-universal-property-conjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   {l3 : Level} (R : Prop l3) →
-  type-Prop ((R ⇒ P) ∧ (R ⇒ Q)) ≃ type-Prop (R ⇒ (P ∧ Q))
+  type-Prop ((R ⇒₋₁ P) ∧₋₁ (R ⇒₋₁ Q)) ≃ type-Prop (R ⇒₋₁ (P ∧₋₁ Q))
 equiv-universal-property-conjunction-Prop P Q R =
   equiv-iff'
-    ( (R ⇒ P) ∧ (R ⇒ Q))
-    ( R ⇒ (P ∧ Q))
+    ( (R ⇒₋₁ P) ∧₋₁ (R ⇒₋₁ Q))
+    ( R ⇒₋₁ (P ∧₋₁ Q))
     ( iff-universal-property-conjunction-Prop P Q R)
 ```

@@ -18,7 +18,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.identity-types
-open import foundation-core.negation
+open import foundation.negation
 open import foundation-core.propositions
 ```
 
@@ -48,14 +48,14 @@ module _
   where
 
   is-antireflexive : UU (l1 ⊔ l2)
-  is-antireflexive = (a : A) → ¬ (type-Prop (R a a))
+  is-antireflexive = (a : A) → type-neg-Prop (R a a)
 
   is-consistent : UU (l1 ⊔ l2)
-  is-consistent = (a b : A) → (a ＝ b) → ¬ (type-Prop (R a b))
+  is-consistent = (a b : A) → (a ＝ b) → type-neg-Prop (R a b)
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive =
-    (a b c : A) → type-Prop (R a b ⇒ (R a c ∨ R b c))
+    (a b c : A) → type-Prop (R a b ⇒₋₁ (R a c ∨₋₁ R b c))
 
   is-apartness-relation : UU (l1 ⊔ l2)
   is-apartness-relation =

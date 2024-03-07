@@ -45,8 +45,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The exclusive disjunction of two propositions `P` and `Q` is the proposition
-that `P` holds and `Q` doesn't hold or `P` doesn't hold and `Q` holds.
+The {{#concept "exclusive disjunction" Agda=xor}} of two
+[propositions](foundation-core.propositions.md) `P` and `Q` is the
+[proposition](foundation-core.propositions.md) that `P` holds and `Q` doesn't
+hold or `P` doesn't hold and `Q` holds.
 
 ## Definitions
 
@@ -71,8 +73,8 @@ module _
   xor-Prop : Prop (l1 ⊔ l2)
   xor-Prop =
     coproduct-Prop
-      ( P ∧ (neg-Prop Q))
-      ( Q ∧ (neg-Prop P))
+      ( P ∧₋₁ (neg-Prop Q))
+      ( Q ∧₋₁ (neg-Prop P))
       ( λ p q → pr2 q (pr1 p))
 
   type-xor-Prop : UU (l1 ⊔ l2)
@@ -146,7 +148,7 @@ pr1 (symmetric-xor-Prop E) = type-symmetric-xor-Prop E
 pr2 (symmetric-xor-Prop E) = is-prop-type-symmetric-xor-Prop E
 ```
 
-### Second definition of exclusiove disjunction
+### Second definition of exclusive disjunction
 
 ```agda
 module _

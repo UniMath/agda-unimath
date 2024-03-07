@@ -43,11 +43,11 @@ abstract
     is-prop (type-disjunction-Prop P Q)
   is-prop-type-disjunction-Prop P Q = is-prop-type-Prop (disjunction-Prop P Q)
 
-infixr 10 _∨_
-_∨_ = disjunction-Prop
+infixr 10 _∨₋₁_
+_∨₋₁_ = disjunction-Prop
 ```
 
-**Note**: The symbol used for the disjunction `_∨_` is the
+**Note**: The symbol used for the disjunction `_∨₋₁_` is the
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
 not the [latin small letter v](https://codepoints.net/U+0076) `v`.
 
@@ -75,12 +75,12 @@ pr2 (pr2 (disjunction-Decidable-Prop P Q)) =
 ```agda
 inl-disjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-Prop (P ⇒ (P ∨ Q))
+  type-Prop (P ⇒₋₁ (P ∨₋₁ Q))
 inl-disjunction-Prop P Q = unit-trunc-Prop ∘ inl
 
 inr-disjunction-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-Prop (Q ⇒ (P ∨ Q))
+  type-Prop (Q ⇒₋₁ (P ∨₋₁ Q))
 inr-disjunction-Prop P Q = unit-trunc-Prop ∘ inr
 ```
 
@@ -89,13 +89,13 @@ inr-disjunction-Prop P Q = unit-trunc-Prop ∘ inr
 ```agda
 ev-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  type-Prop (((P ∨ Q) ⇒ R) ⇒ ((P ⇒ R) ∧ (Q ⇒ R)))
+  type-Prop (((P ∨₋₁ Q) ⇒₋₁ R) ⇒₋₁ ((P ⇒₋₁ R) ∧₋₁ (Q ⇒₋₁ R)))
 pr1 (ev-disjunction-Prop P Q R h) = h ∘ (inl-disjunction-Prop P Q)
 pr2 (ev-disjunction-Prop P Q R h) = h ∘ (inr-disjunction-Prop P Q)
 
 elim-disjunction-Prop :
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  type-Prop (((P ⇒ R) ∧ (Q ⇒ R)) ⇒ ((P ∨ Q) ⇒ R))
+  type-Prop (((P ⇒₋₁ R) ∧₋₁ (Q ⇒₋₁ R)) ⇒₋₁ ((P ∨₋₁ Q) ⇒₋₁ R))
 elim-disjunction-Prop P Q R (f , g) =
   map-universal-property-trunc-Prop R (rec-coproduct f g)
 
@@ -105,8 +105,8 @@ abstract
     is-equiv (ev-disjunction-Prop P Q R)
   is-equiv-ev-disjunction-Prop P Q R =
     is-equiv-is-prop
-      ( is-prop-type-Prop ((P ∨ Q) ⇒ R))
-      ( is-prop-type-Prop ((P ⇒ R) ∧ (Q ⇒ R)))
+      ( is-prop-type-Prop ((P ∨₋₁ Q) ⇒₋₁ R))
+      ( is-prop-type-Prop ((P ⇒₋₁ R) ∧₋₁ (Q ⇒₋₁ R)))
       ( elim-disjunction-Prop P Q R)
 ```
 

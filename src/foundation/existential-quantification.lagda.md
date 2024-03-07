@@ -47,6 +47,9 @@ abstract
   is-prop-exists :
     {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (exists A P)
   is-prop-exists A P = is-prop-type-Prop (exists-Prop A P)
+
+∃₋₁ : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
+∃₋₁ = exists-Prop
 ```
 
 ### Existential quantification of arbitrary type families
@@ -121,25 +124,24 @@ module _
 
   iff-distributive-conjunction-exists-Prop :
     type-iff-Prop
-      ( P ∧ (exists-Prop A Q))
-      ( exists-Prop A (λ a → P ∧ (Q a)))
+      ( P ∧₋₁ (∃₋₁ A Q))
+      ( ∃₋₁ A (λ a → P ∧₋₁ Q a))
   pr1 iff-distributive-conjunction-exists-Prop (p , e) =
     elim-exists-Prop Q
-      ( exists-Prop A (λ a → P ∧ (Q a)))
+      ( ∃₋₁ A (λ a → P ∧₋₁ (Q a)))
       ( λ x q → intro-∃ x (p , q))
       ( e)
   pr2 iff-distributive-conjunction-exists-Prop =
     elim-exists-Prop
-      ( λ x → P ∧ (Q x))
-      ( P ∧ (exists-Prop A Q))
+      ( λ x → P ∧₋₁ Q x)
+      ( P ∧₋₁ (∃₋₁ A Q))
       ( λ x (p , q) → (p , intro-∃ x q))
 
   distributive-conjunction-exists-Prop :
-    P ∧ (exists-Prop A Q) ＝
-    exists-Prop A (λ a → P ∧ (Q a))
+    P ∧₋₁ (∃₋₁ A Q) ＝ ∃₋₁ A (λ a → P ∧₋₁ Q a)
   distributive-conjunction-exists-Prop =
     eq-iff'
-      ( P ∧ (exists-Prop A Q))
-      ( exists-Prop A (λ a → P ∧ (Q a)))
+      ( P ∧₋₁ (∃₋₁ A Q))
+      ( ∃₋₁ A (λ a → P ∧₋₁ Q a))
       ( iff-distributive-conjunction-exists-Prop)
 ```

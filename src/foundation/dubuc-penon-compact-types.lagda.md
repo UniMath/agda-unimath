@@ -18,9 +18,12 @@ open import foundation-core.subtypes
 
 ## Idea
 
-A type is said to be Dubuc-Penon compact if for every proposition `P` and every
-subtype `Q` of `X` such that `P ∨ Q x` holds for all `x`, then either `P` is
-true or `Q` contains every element of `X`.
+A type is said to be
+{{#concept "Dubuc-Penon compact" Agda=is-dubuc-penon-compact}} if for every
+[proposition](foundation-core.propositions.md) `P` and every
+[subtype](foundation-core.subtypes.md) `Q` of `X` such that the
+[disjunction](foundation.disjunction.md) `P ∨ Q x` holds for all `x`, then
+either `P` is true or `Q` contains every element of `X`.
 
 ## Definition
 
@@ -35,8 +38,8 @@ is-dubuc-penon-compact-Prop l1 l2 X =
         ( subtype l2 X)
         ( λ Q →
           function-Prop
-            ( (x : X) → type-Prop (P ∨ Q x))
-            ( P ∨ (Π-Prop X Q))))
+            ( (x : X) → type-Prop (P ∨₋₁ Q x))
+            ( P ∨₋₁ (Π-Prop X Q))))
 
 is-dubuc-penon-compact :
   {l : Level} (l1 l2 : Level) → UU l → UU (l ⊔ lsuc l1 ⊔ lsuc l2)

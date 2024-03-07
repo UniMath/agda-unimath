@@ -51,7 +51,7 @@ module _
 
   abstract
     is-torsorial-iff :
-      (P : Prop l1) → is-torsorial (λ (Q : Prop l1) → type-Prop (P ⇔ Q))
+      (P : Prop l1) → is-torsorial (λ (Q : Prop l1) → type-Prop (P ⇔₋₁ Q))
     is-torsorial-iff P =
       is-contr-equiv
         ( Σ (Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
@@ -71,11 +71,11 @@ module _
         ( λ Q → iff-eq {P = P} {Q})
 
   propositional-extensionality :
-    (P Q : Prop l1) → (P ＝ Q) ≃ type-Prop (P ⇔ Q)
+    (P Q : Prop l1) → (P ＝ Q) ≃ type-Prop (P ⇔₋₁ Q)
   pr1 (propositional-extensionality P Q) = iff-eq
   pr2 (propositional-extensionality P Q) = is-equiv-iff-eq P Q
 
-  eq-iff' : (P Q : Prop l1) → type-Prop (P ⇔ Q) → P ＝ Q
+  eq-iff' : (P Q : Prop l1) → type-Prop (P ⇔₋₁ Q) → P ＝ Q
   eq-iff' P Q = map-inv-is-equiv (is-equiv-iff-eq P Q)
 
   eq-iff :
@@ -84,7 +84,7 @@ module _
   eq-iff {P} {Q} f g = eq-iff' P Q (pair f g)
 
   eq-equiv-Prop :
-    {P Q : Prop l1} → (type-Prop P ≃ type-Prop Q) → P ＝ Q
+    {P Q : Prop l1} → type-Prop P ≃ type-Prop Q → P ＝ Q
   eq-equiv-Prop e =
     eq-iff (map-equiv e) (map-inv-equiv e)
 
@@ -97,7 +97,7 @@ module _
     is-torsorial (λ Q → type-Prop P ≃ type-Prop Q)
   is-torsorial-equiv-Prop P =
     is-contr-equiv'
-      ( Σ (Prop l1) (λ Q → type-Prop (P ⇔ Q)))
+      ( Σ (Prop l1) (λ Q → type-Prop (P ⇔₋₁ Q)))
       ( equiv-tot (equiv-equiv-iff P))
       ( is-torsorial-iff P)
 ```
@@ -106,7 +106,7 @@ module _
 
 ```agda
 is-set-type-Prop : {l : Level} → is-set (Prop l)
-is-set-type-Prop {l} P Q =
+is-set-type-Prop P Q =
   is-prop-equiv
     ( propositional-extensionality P Q)
     ( is-prop-iff-Prop P Q)
@@ -134,7 +134,7 @@ abstract
     {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop P)
   is-torsorial-true-Prop {l1} =
     is-contr-equiv
-      ( Σ (Prop l1) (λ P → type-Prop (raise-unit-Prop l1 ⇔ P)))
+      ( Σ (Prop l1) (λ P → type-Prop (raise-unit-Prop l1 ⇔₋₁ P)))
       ( equiv-tot
         ( λ P →
           inv-equiv
@@ -144,7 +144,7 @@ abstract
                 ( type-Prop P)) ∘e
               ( right-unit-law-product-is-contr
                 ( is-contr-Π
-                  ( λ x →
+                  ( λ _ →
                     is-proof-irrelevant-is-prop
                       ( is-prop-raise-unit)
                       ( raise-star)))))))
@@ -159,7 +159,7 @@ abstract
     {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop (neg-Prop P))
   is-torsorial-false-Prop {l1} =
     is-contr-equiv
-      ( Σ (Prop l1) (λ P → type-Prop (raise-empty-Prop l1 ⇔ P)))
+      ( Σ (Prop l1) (λ P → type-Prop (raise-empty-Prop l1 ⇔₋₁ P)))
       ( equiv-tot
         ( λ P →
           inv-equiv
