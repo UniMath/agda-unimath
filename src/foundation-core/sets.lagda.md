@@ -48,6 +48,8 @@ module _
   Id-Prop : (x y : type-Set) → Prop l
   pr1 (Id-Prop x y) = (x ＝ y)
   pr2 (Id-Prop x y) = is-set-type-Set x y
+
+  Id₍₋₁₎ = Id-Prop
 ```
 
 ## Properties

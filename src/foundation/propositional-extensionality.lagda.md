@@ -160,7 +160,7 @@ abstract
 ```agda
 abstract
   is-torsorial-false-Prop :
-    {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop (neg-Prop P))
+    {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop (¬₍₋₁₎ P))
   is-torsorial-false-Prop {l1} =
     is-contr-equiv
       ( Σ (Prop l1) (λ P → type-Prop (raise-empty-Prop l1 ⇔₍₋₁₎ P)))

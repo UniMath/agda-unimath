@@ -109,9 +109,7 @@ module _
 
   is-rational-ℝ-Prop : Prop l
   is-rational-ℝ-Prop =
-    product-Prop
-      ( neg-Prop (lower-cut-ℝ x p))
-      ( neg-Prop (upper-cut-ℝ x p))
+    (¬₍₋₁₎ (lower-cut-ℝ x p)) ∧₍₋₁₎ (¬₍₋₁₎ (upper-cut-ℝ x p))
 
   is-rational-ℝ : UU l
   is-rational-ℝ = type-Prop is-rational-ℝ-Prop

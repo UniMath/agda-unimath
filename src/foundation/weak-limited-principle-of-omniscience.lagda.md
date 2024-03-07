@@ -23,17 +23,23 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Statement
 
-The **Weak Limited Principle of Omniscience** asserts that for any sequence
-`f : ℕ → Fin 2` either `f n ＝ 0` for all `n : ℕ` or not. In particular, it is a
-restricted form of the law of excluded middle.
+The {{#concept "Weak Limited Principle of Omniscience"}} asserts that for any
+[sequence](foundation.sequences.md) `f : ℕ → Fin 2` either `f n ＝ 0` for all
+`n : ℕ` or not. In particular, it is a restricted form of the
+[law of excluded middle](foundation.law-of-excluded-middle.md).
 
 ```agda
+WLPO-Prop : Prop lzero
+WLPO-Prop =
+  Π₍₋₁₎
+    ( ℕ → Fin 2)
+    ( λ f →
+      disjunction-Prop
+        ( Π₍₋₁₎ ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))
+        ( ¬₍₋₁₎ (Π₍₋₁₎ ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))))
+
 WLPO : UU lzero
-WLPO =
-  (f : ℕ → Fin 2) →
-  type-disjunction-Prop
-    ( Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
-    ( neg-Prop (Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1))))
+WLPO = type-Prop WLPO-Prop
 ```
 
 ## See also
