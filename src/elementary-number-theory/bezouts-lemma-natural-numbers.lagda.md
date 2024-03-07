@@ -313,7 +313,7 @@ is-distance-between-multiples-div-mod-ℕ :
   (x y z : ℕ) →
   div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z) → is-distance-between-multiples-ℕ x y z
 is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
-  u-nonneg-case-split (decide-is-nonnegative-ℤ {u})
+  u-nonneg-case-split (decide-is-nonnegative-is-nonnegative-neg-ℤ {u})
   where
   u-nonneg-case-split :
     (is-nonnegative-ℤ u + is-nonnegative-ℤ (neg-ℤ u)) →
@@ -341,7 +341,7 @@ is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
               ( is-nonnegative-mul-ℤ neg (is-nonnegative-int-ℕ y))))))
 
 is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
-  uy-z-case-split (decide-is-nonnegative-ℤ
+  uy-z-case-split (decide-is-nonnegative-is-nonnegative-neg-ℤ
     { ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ (neg-ℤ (int-ℕ z))})
   where
   a : ℤ

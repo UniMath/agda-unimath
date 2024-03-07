@@ -216,7 +216,7 @@ bezouts-lemma-pos-ints :
   Σ ℤ (λ s → Σ ℤ (λ t → (s *ℤ x) +ℤ (t *ℤ y) ＝ gcd-ℤ x y))
 bezouts-lemma-pos-ints x y H K =
   sx-ty-nonneg-case-split
-    ( decide-is-nonnegative-ℤ {(s *ℤ x) -ℤ (t *ℤ y)})
+    ( decide-is-nonnegative-is-nonnegative-neg-ℤ {(s *ℤ x) -ℤ (t *ℤ y)})
   where
   s : ℤ
   s = int-ℕ (minimal-positive-distance-x-coeff

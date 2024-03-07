@@ -46,12 +46,32 @@ integers
 
 ## Properties
 
-### The only nonnegative and nonpositive integer is `zero-ℤ`
+### Characterisations of `zero-ℤ`
+
+#### The only nonnegative and nonpositive integer is `zero-ℤ`
 
 ```agda
 is-zero-is-nonnegative-is-nonpositive-ℤ :
   (x : ℤ) → is-nonnegative-ℤ x → is-nonpositive-ℤ x → is-zero-ℤ x
 is-zero-is-nonnegative-is-nonpositive-ℤ (inr (inl x)) H K = refl
+```
+
+#### The only nonnegative integer with a nonnegative negative is `zero-ℤ`
+
+```agda
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
+  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
+  refl
+```
+
+#### The only nonpositive integer with a nonpositive negative is zero-ℤ
+
+```agda
+is-zero-is-nonpositive-neg-is-nonpositive-ℤ :
+  (x : ℤ) → is-nonpositive-ℤ x → is-nonpositive-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-nonpositive-neg-is-nonpositive-ℤ (inr (inl star)) nonneg nonpos =
+  refl
 ```
 
 ### Dichotomy properties
@@ -85,18 +105,23 @@ decide-is-negative-is-nonnegative-ℤ (inl x) = inl star
 decide-is-negative-is-nonnegative-ℤ (inr x) = inr star
 ```
 
-Legacy (Used in Bezout's lemma)
+#### An integer or its negative is nonnegative
 
 ```agda
-decide-is-nonnegative-ℤ :
+decide-is-nonnegative-is-nonnegative-neg-ℤ :
   {x : ℤ} → (is-nonnegative-ℤ x) + (is-nonnegative-ℤ (neg-ℤ x))
-decide-is-nonnegative-ℤ {inl x} = inr star
-decide-is-nonnegative-ℤ {inr x} = inl star
+decide-is-nonnegative-is-nonnegative-neg-ℤ {inl x} = inr star
+decide-is-nonnegative-is-nonnegative-neg-ℤ {inr x} = inl star
+```
 
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
-  refl
+#### An integer or its negative is nonpositive
+
+```agda
+decide-is-nonpositive-is-nonpositive-neg-ℤ :
+  {x : ℤ} → (is-nonpositive-ℤ x) + (is-nonpositive-ℤ (neg-ℤ x))
+decide-is-nonpositive-is-nonpositive-neg-ℤ {inl x} = inl star
+decide-is-nonpositive-is-nonpositive-neg-ℤ {inr (inl x)} = inl star
+decide-is-nonpositive-is-nonpositive-neg-ℤ {inr (inr x)} = inr star
 ```
 
 ### Inclusion properties
