@@ -107,11 +107,11 @@ is-set-positive-ℤ =
 
 ```agda
 is-positive-succ-is-positive-ℤ :
-  (x : ℤ) → is-positive-ℤ x → is-positive-ℤ (succ-ℤ x)
-is-positive-succ-is-positive-ℤ (inr (inr x)) H = H
+  {x : ℤ} → is-positive-ℤ x → is-positive-ℤ (succ-ℤ x)
+is-positive-succ-is-positive-ℤ {inr (inr x)} H = H
 
 succ-positive-ℤ : positive-ℤ → positive-ℤ
-succ-positive-ℤ (x , H) = succ-ℤ x , is-positive-succ-is-positive-ℤ x H
+succ-positive-ℤ (x , H) = succ-ℤ x , is-positive-succ-is-positive-ℤ H
 ```
 
 ### The integer image of a nonzero natural number is positive

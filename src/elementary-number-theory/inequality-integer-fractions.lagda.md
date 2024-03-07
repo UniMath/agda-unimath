@@ -90,7 +90,6 @@ module _
         ( is-nonpositive-eq-ℤ
           ( skew-commutative-cross-mul-diff-fraction-ℤ y x)
           ( is-nonpositive-neg-is-nonnegative-ℤ
-            ( cross-mul-diff-fraction-ℤ y x)
             ( H'))))
 ```
 
@@ -128,12 +127,10 @@ transitive-leq-fraction-ℤ p q r H H' =
         ( is-nonnegative-add-nonnegative-nonnegative-ℤ
           ( is-nonnegative-mul-ℤ
             ( is-nonnegative-is-positive-ℤ
-              ( denominator-fraction-ℤ p)
               ( is-positive-denominator-fraction-ℤ p))
             ( H'))
           ( is-nonnegative-mul-ℤ
             ( is-nonnegative-is-positive-ℤ
-              ( denominator-fraction-ℤ r)
               ( is-positive-denominator-fraction-ℤ r))
             ( H))))
     ( is-positive-denominator-fraction-ℤ q)
@@ -179,7 +176,6 @@ module _
         ( is-positive-add-nonnegative-positive-ℤ
           ( is-nonnegative-mul-ℤ
             ( is-nonnegative-is-positive-ℤ
-              ( denominator-fraction-ℤ p)
               ( is-positive-denominator-fraction-ℤ p))
             ( H'))
           ( is-positive-mul-ℤ
@@ -201,7 +197,6 @@ module _
             ( H'))
           ( is-nonnegative-mul-ℤ
             ( is-nonnegative-is-positive-ℤ
-              ( denominator-fraction-ℤ r)
               ( is-positive-denominator-fraction-ℤ r))
             ( H))))
       ( is-positive-denominator-fraction-ℤ q)

@@ -156,10 +156,8 @@ int-ℤ-Mod-bounded :
   leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
 int-ℤ-Mod-bounded zero-ℕ (inr x) = star
 int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-is-nonnegative-ℤ
-  ((inr (inr k)) +ℤ
-  (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
+  (int-ℤ-Mod-bounded k x)
 int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-is-nonnegative-ℤ
-  ((inr (inr k)) +ℤ (inl k))
   (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
 ```
 

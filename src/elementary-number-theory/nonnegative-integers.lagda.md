@@ -117,12 +117,12 @@ is-zero-is-nonnegative-neg-is-nonnegative-ℤ {inr (inl star)} nonneg nonpos =
 
 ```agda
 is-nonnegative-succ-is-nonnegative-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (succ-ℤ x)
-is-nonnegative-succ-is-nonnegative-ℤ (inr (inl x)) H = H
-is-nonnegative-succ-is-nonnegative-ℤ (inr (inr x)) H = H
+  {x : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ (succ-ℤ x)
+is-nonnegative-succ-is-nonnegative-ℤ {inr (inl x)} H = H
+is-nonnegative-succ-is-nonnegative-ℤ {inr (inr x)} H = H
 
 succ-nonnegative-ℤ : nonnegative-ℤ → nonnegative-ℤ
-succ-nonnegative-ℤ (x , H) = succ-ℤ x , is-nonnegative-succ-is-nonnegative-ℤ x H
+succ-nonnegative-ℤ (x , H) = succ-ℤ x , is-nonnegative-succ-is-nonnegative-ℤ H
 ```
 
 ### The integer image of a natural number is nonnegative

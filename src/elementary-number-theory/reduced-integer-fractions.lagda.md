@@ -545,10 +545,8 @@ unique-denominator-reduce-fraction-ℤ :
 unique-denominator-reduce-fraction-ℤ x y H =
   eq-sim-unit-is-nonnegative-ℤ
     ( is-nonnegative-is-positive-ℤ
-      ( int-reduce-denominator-fraction-ℤ x)
       ( is-positive-int-reduce-denominator-fraction-ℤ x))
     ( is-nonnegative-is-positive-ℤ
-      ( int-reduce-denominator-fraction-ℤ y)
       ( is-positive-int-reduce-denominator-fraction-ℤ y))
     (sim-unique-denominator-reduce-fraction-ℤ x y H)
 

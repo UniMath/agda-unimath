@@ -73,12 +73,11 @@ decide-leq-ℤ {x} {y} =
   map-coproduct
     ( λ H →
       is-nonnegative-is-positive-ℤ
-        ( y -ℤ x)
         ( is-positive-eq-ℤ
           ( distributive-neg-diff-ℤ x y)
-          ( is-positive-neg-is-negative-ℤ (x -ℤ y) H)))
+          ( is-positive-neg-is-negative-ℤ H)))
     ( id)
-    ( decide-is-negative-is-nonnegative-ℤ (x -ℤ y))
+    ( decide-is-negative-is-nonnegative-ℤ)
 
 succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
 succ-leq-ℤ k =
@@ -129,12 +128,10 @@ transitive-le-ℤ k l m p q =
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p =
   not-is-positive-is-nonpositive-ℤ
-    ( x -ℤ y)
     ( is-nonpositive-eq-ℤ
       ( distributive-neg-diff-ℤ y x)
       ( is-nonpositive-neg-is-nonnegative-ℤ
-        ( y -ℤ x)
-        ( is-nonnegative-is-positive-ℤ (y -ℤ x) p)))
+        ( is-nonnegative-is-positive-ℤ p)))
 
 connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
 connected-le-ℤ x y H =
@@ -142,9 +139,9 @@ connected-le-ℤ x y H =
     ( λ K →
       is-positive-eq-ℤ
         ( distributive-neg-diff-ℤ x y)
-        ( is-positive-neg-is-negative-ℤ (x -ℤ y) K))
+        ( is-positive-neg-is-negative-ℤ K))
     ( id)
-    ( decide-sign-nonzero-ℤ (x -ℤ y) (H ∘ eq-diff-ℤ))
+    ( decide-sign-nonzero-ℤ (H ∘ eq-diff-ℤ))
 
 le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
 le-pred-ℤ x =

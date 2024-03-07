@@ -53,18 +53,16 @@ square-root-ℤ _ (root , _) = root
 
 ```agda
 is-nonnegative-square-ℤ : (a : ℤ) → is-nonnegative-ℤ (square-ℤ a)
-is-nonnegative-square-ℤ a with decide-is-negative-is-nonnegative-ℤ a
-...| inl neg =
-  is-nonnegative-eq-ℤ
-    ( double-negative-law-mul-ℤ a a)
-    ( is-nonnegative-mul-ℤ α α)
-  where
-    α : is-nonnegative-ℤ (neg-ℤ a)
-    α =
-      is-nonnegative-is-positive-ℤ
-        ( neg-ℤ a)
-        ( is-positive-neg-is-negative-ℤ a neg)
-...| inr nonneg = is-nonnegative-mul-ℤ nonneg nonneg
+is-nonnegative-square-ℤ a =
+  rec-coproduct
+    ( λ H →
+      is-nonnegative-eq-ℤ
+        ( double-negative-law-mul-ℤ a a)
+        ( is-nonnegative-mul-ℤ
+          ( is-nonnegative-is-positive-ℤ (is-positive-neg-is-negative-ℤ H))
+          ( is-nonnegative-is-positive-ℤ (is-positive-neg-is-negative-ℤ H))))
+    ( λ H → is-nonnegative-mul-ℤ {a} {a} H H)
+    ( decide-is-negative-is-nonnegative-ℤ)
 ```
 
 ### The squares in ℤ are exactly the squares in ℕ

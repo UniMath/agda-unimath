@@ -120,12 +120,12 @@ is-zero-is-nonpositive-neg-is-nonpositive-ℤ {inr (inl star)} nonneg nonpos =
 
 ```agda
 is-nonpositive-pred-is-nonpositive-ℤ :
-  (x : ℤ) → is-nonpositive-ℤ x → is-nonpositive-ℤ (pred-ℤ x)
-is-nonpositive-pred-is-nonpositive-ℤ (inl x) H = H
-is-nonpositive-pred-is-nonpositive-ℤ (inr (inl x)) H = H
+  {x : ℤ} → is-nonpositive-ℤ x → is-nonpositive-ℤ (pred-ℤ x)
+is-nonpositive-pred-is-nonpositive-ℤ {inl x} H = H
+is-nonpositive-pred-is-nonpositive-ℤ {inr (inl x)} H = H
 
 pred-nonpositive-ℤ : nonpositive-ℤ → nonpositive-ℤ
-pred-nonpositive-ℤ (x , H) = pred-ℤ x , is-nonpositive-pred-is-nonpositive-ℤ x H
+pred-nonpositive-ℤ (x , H) = pred-ℤ x , is-nonpositive-pred-is-nonpositive-ℤ H
 ```
 
 ### The canonical equivalence between natural numbers and positive integers

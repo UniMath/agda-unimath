@@ -230,11 +230,8 @@ decide-le-leq-ℚ x y =
         ( skew-commutative-cross-mul-diff-fraction-ℤ
           ( fraction-ℚ x)
           ( fraction-ℚ y))
-        ( is-nonnegative-neg-is-nonnpositive-ℤ
-          ( cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
-          ( H)))
-    ( decide-is-positive-is-nonpositive-ℤ
-      ( cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))
+        ( is-nonnegative-neg-is-nonnpositive-ℤ H))
+    ( decide-is-positive-is-nonpositive-ℤ)
 ```
 
 It remains to fully formalize that strict inequality is decidable.

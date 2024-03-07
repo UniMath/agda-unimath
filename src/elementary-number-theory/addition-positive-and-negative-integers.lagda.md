@@ -68,10 +68,9 @@ where ?? marks undetermined cases.
 is-positive-add-positive-positive-ℤ :
   {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
 is-positive-add-positive-positive-ℤ {inr (inr zero-ℕ)} {y} H K =
-  is-positive-succ-is-positive-ℤ y K
+  is-positive-succ-is-positive-ℤ K
 is-positive-add-positive-positive-ℤ {inr (inr (succ-ℕ x))} {y} H K =
   is-positive-succ-is-positive-ℤ
-    ( add-ℤ (inr (inr x)) y)
     ( is-positive-add-positive-positive-ℤ {inr (inr x)} H K)
 ```
 
@@ -88,8 +87,8 @@ is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H H' =
 ### The sum of a positive and a nonnegative integer is positive
 
 ```agda
-is-positive-add-positive-nonnegative-ℤ : {x y : ℤ} →
-  is-positive-ℤ x → is-nonnegative-ℤ y → is-positive-ℤ (x +ℤ y)
+is-positive-add-positive-nonnegative-ℤ :
+  {x y : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ y → is-positive-ℤ (x +ℤ y)
 is-positive-add-positive-nonnegative-ℤ {x} {y} H H' =
   is-positive-eq-ℤ
     ( commutative-add-ℤ y x)
@@ -103,10 +102,9 @@ is-nonnegative-add-nonnegative-nonnegative-ℤ : {x y : ℤ} →
   is-nonnegative-ℤ x → is-nonnegative-ℤ y → is-nonnegative-ℤ (x +ℤ y)
 is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inl x)} {y} H H' = H'
 is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr zero-ℕ)} {y} H H' =
-  is-nonnegative-succ-is-nonnegative-ℤ y H'
+  is-nonnegative-succ-is-nonnegative-ℤ H'
 is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr (succ-ℕ x))} {y} H H' =
   is-nonnegative-succ-is-nonnegative-ℤ
-    ( add-ℤ (inr (inr x)) y)
     ( is-nonnegative-add-nonnegative-nonnegative-ℤ {inr (inr x)} star H')
 ```
 

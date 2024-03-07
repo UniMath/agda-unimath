@@ -99,11 +99,11 @@ is-set-negative-ℤ =
 
 ```agda
 is-negative-pred-is-negative-ℤ :
-  (x : ℤ) → is-negative-ℤ x → is-negative-ℤ (pred-ℤ x)
-is-negative-pred-is-negative-ℤ (inl x) H = H
+  {x : ℤ} → is-negative-ℤ x → is-negative-ℤ (pred-ℤ x)
+is-negative-pred-is-negative-ℤ {inl x} H = H
 
 pred-negative-ℤ : negative-ℤ → negative-ℤ
-pred-negative-ℤ (x , H) = pred-ℤ x , is-negative-pred-is-negative-ℤ x H
+pred-negative-ℤ (x , H) = pred-ℤ x , is-negative-pred-is-negative-ℤ H
 ```
 
 ### The canonical equivalence between natural numbers and negative integers
