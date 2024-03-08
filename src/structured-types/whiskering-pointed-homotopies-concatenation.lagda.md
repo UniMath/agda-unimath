@@ -102,7 +102,7 @@ the triangle
 
 commutes. Here, the identifications `(H ∙h K)₁` and `(H ∙h L)₁` are the
 horizontal pastings of the
-[commuting triangles of identifications](foundation-core.commuting-triangles-identifications.md)
+[commuting triangles of identifications](foundation-core.commuting-triangles-of-identifications.md)
 
 ```text
        H₀ *      K₀ *                   H₀ *      L₀ *
@@ -208,7 +208,7 @@ the triangle
 
 commutes. Here, the identifications `(H ∙h L)₁` and `(K ∙h L)₁` are the
 horizontal pastings of the
-[commuting triangles of identifications](foundation-core.commuting-triangles-identifications.md)
+[commuting triangles of identifications](foundation-core.commuting-triangles-of-identifications.md)
 
 ```text
        H₀ *      L₀ *                   K₀ *      L₀ *
