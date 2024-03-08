@@ -53,9 +53,13 @@ module _
   is-consistent : UU (l1 ⊔ l2)
   is-consistent = (a b : A) → (a ＝ b) → type-Prop (¬₍₋₁₎ (R a b))
 
+  is-cotransitive-Prop : Prop (l1 ⊔ l2)
+  is-cotransitive-Prop =
+    Π₍₋₁₎ A (λ a → Π₍₋₁₎ A (λ b → Π₍₋₁₎ A (λ c → R a b ⇒₍₋₁₎ (R a c ∨₍₋₁₎ R b c))))
+
   is-cotransitive : UU (l1 ⊔ l2)
-  is-cotransitive =
-    (a b c : A) → type-Prop (R a b ⇒₍₋₁₎ (R a c ∨₍₋₁₎ R b c))
+  is-cotransitive = type-Prop is-cotransitive-Prop
+
 
   is-apartness-relation : UU (l1 ⊔ l2)
   is-apartness-relation =

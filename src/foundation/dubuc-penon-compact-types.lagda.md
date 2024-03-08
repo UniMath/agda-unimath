@@ -31,15 +31,12 @@ either `P` is true or `Q` contains every element of `X`.
 is-dubuc-penon-compact-Prop :
   {l : Level} (l1 l2 : Level) → UU l → Prop (l ⊔ lsuc l1 ⊔ lsuc l2)
 is-dubuc-penon-compact-Prop l1 l2 X =
-  Π-Prop
+  Π₍₋₁₎
     ( Prop l1)
     ( λ P →
-      Π-Prop
+      Π₍₋₁₎
         ( subtype l2 X)
-        ( λ Q →
-          function-Prop
-            ( (x : X) → type-Prop (P ∨₍₋₁₎ Q x))
-            ( P ∨₍₋₁₎ (Π-Prop X Q))))
+        ( λ Q → (Π₍₋₁₎ X (λ x → P ∨₍₋₁₎ Q x)) ⇒₍₋₁₎ (P ∨₍₋₁₎ (Π₍₋₁₎ X Q))))
 
 is-dubuc-penon-compact :
   {l : Level} (l1 l2 : Level) → UU l → UU (l ⊔ lsuc l1 ⊔ lsuc l2)
