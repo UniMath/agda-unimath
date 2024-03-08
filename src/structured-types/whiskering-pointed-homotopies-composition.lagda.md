@@ -18,6 +18,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
+open import structured-types.pointed-2-homotopies
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps

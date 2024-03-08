@@ -13,7 +13,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-identifications
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
@@ -31,6 +33,7 @@ open import foundation-core.torsorial-type-families
 
 open import structured-types.commuting-squares-of-pointed-homotopies
 open import structured-types.commuting-squares-of-pointed-maps
+open import structured-types.pointed-2-homotopies
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
@@ -501,7 +504,13 @@ module _
       ( is-torsorial-Eq-structure
         ( is-torsorial-pointed-htpy _)
         ( pointed-map-codomain-hom-pointed-arrow f g α , refl-pointed-htpy _)
-        {! !})
+        ( is-contr-equiv _
+          ( equiv-tot
+            ( λ H → {!!}))
+          ( is-torsorial-pointed-2-htpy
+            ( concat-pointed-htpy
+              ( coh-hom-pointed-arrow f g α)
+              ( refl-pointed-htpy _)))))
 
 {-
     is-torsorial-Eq-structure

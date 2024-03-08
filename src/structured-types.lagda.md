@@ -44,6 +44,7 @@ open import structured-types.morphisms-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-wild-monoids public
 open import structured-types.noncoherent-h-spaces public
 open import structured-types.opposite-pointed-spans public
+open import structured-types.pointed-2-homotopies public
 open import structured-types.pointed-cartesian-product-types public
 open import structured-types.pointed-dependent-functions public
 open import structured-types.pointed-dependent-pair-types public
@@ -68,6 +69,7 @@ open import structured-types.symmetric-h-spaces public
 open import structured-types.transposition-pointed-span-diagrams public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
+open import structured-types.uniform-pointed-homotopies public
 open import structured-types.universal-property-pointed-equivalences public
 open import structured-types.unpointed-maps public
 open import structured-types.whiskering-pointed-homotopies-composition public
