@@ -76,14 +76,14 @@ not the [latin small letter v](https://codepoints.net/U+0076) `v`.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  inl-disjunction : A → A ∨ B
-  inl-disjunction = unit-trunc-Prop ∘ inl
+  inl-disjunction-Prop : type-Prop P → type-disjunction-Prop P Q
+  inl-disjunction-Prop = inl-disjunction (type-Prop P) (type-Prop Q)
 
-  inr-disjunction : B → A ∨ B
-  inr-disjunction = unit-trunc-Prop ∘ inr
+  inr-disjunction-Prop : type-Prop Q → type-disjunction-Prop P Q
+  inr-disjunction-Prop = inr-disjunction (type-Prop P) (type-Prop Q)
 ```
 
 ### The disjunction of decidable propositions
