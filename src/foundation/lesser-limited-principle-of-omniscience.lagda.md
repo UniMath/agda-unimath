@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps

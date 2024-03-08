@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.existential-quantification

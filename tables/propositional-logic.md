@@ -12,7 +12,8 @@
 | Negation                                             | [`foundation.negation`](foundation.negation.md)                                                                         |
 | Double negation                                      | [`foundation.double-negation`](foundation.double-negation.md)                                                           |
 | Conjunction                                          | [`foundation.conjunction`](foundation.conjunction.md)                                                                   |
-| Disjunction                                          | [`foundation.disjunction`](foundation.disjunction.md)                                                                   |
+| Disjunction of types                                 | [`foundation.disjunction`](foundation.disjunction.md)                                                                   |
+| Disjunction of propositions                          | [`foundation.disjunction-propositions`](foundation.disjunction-propositions.md)                                         |
 | Exclusive disjunction                                | [`foundation.exclusive-disjunction`](foundation.exclusive-disjunction.md)                                               |
 | Existential quantification                           | [`foundation.existential-quantification`](foundation.existential-quantification.md)                                     |
 | Propositional truncations                            | [`foundation.propositional-truncations`](foundation.propositional-truncations.md)                                       |

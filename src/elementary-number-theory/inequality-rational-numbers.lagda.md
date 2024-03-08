@@ -22,6 +22,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types

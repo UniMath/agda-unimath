@@ -8,6 +8,7 @@ module foundation.dubuc-penon-compact-types where
 
 ```agda
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.universe-levels
 
 open import foundation-core.propositions

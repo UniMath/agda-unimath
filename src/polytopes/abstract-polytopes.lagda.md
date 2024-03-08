@@ -13,6 +13,7 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions

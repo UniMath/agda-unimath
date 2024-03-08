@@ -10,6 +10,7 @@ module order-theory.total-preorders where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 

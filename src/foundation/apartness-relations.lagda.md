@@ -10,6 +10,7 @@ module foundation.apartness-relations where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.existential-quantification
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -48,10 +49,10 @@ module _
   where
 
   is-antireflexive : UU (l1 ⊔ l2)
-  is-antireflexive = (a : A) → type-Prop (¬₍₋₁₎ (R a a))
+  is-antireflexive = (a : A) → ¬ (type-Prop (R a a))
 
   is-consistent : UU (l1 ⊔ l2)
-  is-consistent = (a b : A) → (a ＝ b) → type-Prop (¬₍₋₁₎ (R a b))
+  is-consistent = (a b : A) → (a ＝ b) → ¬ (type-Prop (R a b))
 
   is-cotransitive-Prop : Prop (l1 ⊔ l2)
   is-cotransitive-Prop =

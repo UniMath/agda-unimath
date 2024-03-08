@@ -14,6 +14,7 @@ open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences

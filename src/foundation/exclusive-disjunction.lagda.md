@@ -73,8 +73,8 @@ module _
   xor-Prop : Prop (l1 ⊔ l2)
   xor-Prop =
     coproduct-Prop
-      ( P ∧₍₋₁₎ (¬₍₋₁₎ Q))
-      ( Q ∧₍₋₁₎ (¬₍₋₁₎ P))
+      ( P ×₍₋₁₎ (¬₍₋₁₎ Q))
+      ( Q ×₍₋₁₎ (¬₍₋₁₎ P))
       ( λ p q → pr2 q (pr1 p))
 
   type-xor-Prop : UU (l1 ⊔ l2)
@@ -256,7 +256,7 @@ module _
 {-
   eq-equiv-Prop
     ( ( ( equiv-coproduct
-          ( ( ( left-unit-law-coproduct (type-Prop (P ∧₍₋₁₎ (¬₍₋₁₎ Q)))) ∘e
+          ( ( ( left-unit-law-coproduct (type-Prop (P ×₍₋₁₎ (¬₍₋₁₎ Q)))) ∘e
               ( equiv-coproduct
                 ( left-absorption-Σ
                   ( λ x →

@@ -17,6 +17,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.existential-quantification
@@ -74,18 +75,18 @@ module _
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
     product-Prop
-      ( (exists-Prop ℚ L) ∧₍₋₁₎ (exists-Prop ℚ U))
+      ( (exists-Prop ℚ L) ×₍₋₁₎ (exists-Prop ℚ U))
       ( product-Prop
         ( product-Prop
           ( Π-Prop ℚ
             ( λ q →
-              (L q) ↔₍₋₁₎ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧₍₋₁₎ (L r)))))
+              (L q) ↔₍₋₁₎ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ×₍₋₁₎ (L r)))))
           ( Π-Prop ℚ
             ( λ r →
-              (U r) ↔₍₋₁₎ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧₍₋₁₎ (U q))))))
+              (U r) ↔₍₋₁₎ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ×₍₋₁₎ (U q))))))
         ( product-Prop
           ( Π-Prop ℚ
-            ( λ q → ¬₍₋₁₎ ((L q) ∧₍₋₁₎ (U q))))
+            ( λ q → ¬₍₋₁₎ ((L q) ×₍₋₁₎ (U q))))
           ( Π-Prop ℚ
             ( λ q →
               Π₍₋₁₎ ℚ (λ r → (le-ℚ-Prop q r) →₍₋₁₎ ((L q) ∨₍₋₁₎ (U r)))))))
@@ -280,7 +281,7 @@ module _
 
   is-lower-complement-upper-cut-ℝ-Prop : (p q : ℚ) → Prop l
   is-lower-complement-upper-cut-ℝ-Prop p q =
-    ( le-ℚ-Prop p q) ∧₍₋₁₎ (¬₍₋₁₎ ( upper-cut-ℝ x q))
+    ( le-ℚ-Prop p q) ×₍₋₁₎ (¬₍₋₁₎ ( upper-cut-ℝ x q))
 
   lower-complement-upper-cut-ℝ : subtype l ℚ
   lower-complement-upper-cut-ℝ p =
@@ -340,7 +341,7 @@ module _
 
   is-upper-complement-lower-cut-ℝ-Prop : (q p : ℚ) → Prop l
   is-upper-complement-lower-cut-ℝ-Prop q p =
-    (le-ℚ-Prop p q) ∧₍₋₁₎ (¬₍₋₁₎ (lower-cut-ℝ x p))
+    (le-ℚ-Prop p q) ×₍₋₁₎ (¬₍₋₁₎ (lower-cut-ℝ x p))
 
   upper-complement-lower-cut-ℝ : subtype l ℚ
   upper-complement-lower-cut-ℝ q =

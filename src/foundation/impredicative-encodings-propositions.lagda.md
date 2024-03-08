@@ -10,6 +10,7 @@ module foundation.impredicative-encodings-propositions where
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.disjunction-propositions
 open import foundation.existential-quantification
 open import foundation.homotopies
 open import foundation.logical-equivalences
