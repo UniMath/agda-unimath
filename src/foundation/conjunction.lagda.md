@@ -9,10 +9,10 @@ module foundation.conjunction where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.logical-equivalences
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
 open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -96,7 +96,6 @@ module _
   universal-property-conjunction : UUω
   universal-property-conjunction =
     {l : Level} (R : Prop l) → is-equiv (ev-conjunction R)
-
 ```
 
 ## Properties

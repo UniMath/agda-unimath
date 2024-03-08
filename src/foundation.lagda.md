@@ -70,6 +70,7 @@ open import foundation.computational-identity-types public
 open import foundation.cones-over-cospan-diagrams public
 open import foundation.cones-over-inverse-sequential-diagrams public
 open import foundation.conjunction public
+open import foundation.conjunction-propositions public
 open import foundation.connected-components public
 open import foundation.connected-components-universes public
 open import foundation.connected-maps public
