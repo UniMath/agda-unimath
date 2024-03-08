@@ -48,7 +48,7 @@ is an [equivalence](foundation.logical-equivalence.md).
 
 ## Definitions
 
-### Disjunction of types
+### The disjunction of types
 
 ```agda
 disjunction-prop-Type : {l1 l2 : Level} → UU l1 → UU l2 → Prop (l1 ⊔ l2)
@@ -61,9 +61,7 @@ _∨_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 _∨_ = disjunction-Type
 ```
 
-## Properties
-
-### The introduction rules for disjunction
+### The introduction rules for the disjunction
 
 ```agda
 module _
@@ -76,6 +74,8 @@ module _
   inr-disjunction : B → A ∨ B
   inr-disjunction = unit-trunc-Prop ∘ inr
 ```
+
+## Properties
 
 ### The universal property of disjunctions
 
@@ -118,7 +118,7 @@ module _
   rec-disjunction f g = elim-disjunction A B R (f , g)
 ```
 
-### The unit laws for disjunction
+### The unit laws for the disjunction
 
 ```agda
 module _

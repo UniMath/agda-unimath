@@ -52,7 +52,7 @@ hold or `P` doesn't hold and `Q` holds.
 
 ## Definitions
 
-### Exclusive disjunction of types
+### The exclusive disjunction of types
 
 ```agda
 module _
@@ -63,7 +63,7 @@ module _
   xor = (A × ¬ B) + (B × ¬ A)
 ```
 
-### Exclusive disjunction of propositions
+### The exclusive disjunction of propositions
 
 ```agda
 module _
@@ -97,7 +97,7 @@ symmetric-xor : {l : Level} → symmetric-operation (UU l) (UU l)
 symmetric-xor p = Σ (type-unordered-pair p) (predicate-symmetric-xor p)
 ```
 
-### The symmetric operation of exclusive disjunction of propositions
+### The symmetric operation of the exclusive disjunction of propositions
 
 ```agda
 predicate-symmetric-xor-Prop :
@@ -384,7 +384,7 @@ eq-commmutative-xor-xor P Q =
   eq-iff (xor-symmetric-xor-Prop P Q) (symmetric-xor-xor-Prop P Q)
 ```
 
-### Exclusive disjunction of decidable propositions
+### The exclusive disjunction of decidable propositions
 
 ```agda
 is-decidable-xor :

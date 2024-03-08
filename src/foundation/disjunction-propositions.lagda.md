@@ -43,7 +43,7 @@ is an [equivalence](foundation.logical-equivalence.md).
 
 ## Definitions
 
-### Disjunction of propositions
+### The disjunction of propositions
 
 ```agda
 disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
@@ -72,7 +72,21 @@ disjunction of their underlying types. This is in contrast to the coproduct
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
 not the [latin small letter v](https://codepoints.net/U+0076) `v`.
 
-### Disjunction of decidable propositions
+### The introduction rules for the disjunction of propositions
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  inl-disjunction : A → A ∨ B
+  inl-disjunction = unit-trunc-Prop ∘ inl
+
+  inr-disjunction : B → A ∨ B
+  inr-disjunction = unit-trunc-Prop ∘ inr
+```
+
+### The disjunction of decidable propositions
 
 ```agda
 module _
@@ -145,7 +159,7 @@ module _
   rec-disjunction-Prop = rec-disjunction (type-Prop P) (type-Prop Q) R
 ```
 
-### The unit laws for disjunction
+### The unit laws for the disjunction
 
 ```agda
 module _
