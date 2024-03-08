@@ -809,7 +809,7 @@ module _
   where
 
   htpy-left-unit-law-comp-pointed-map :
-    map-pointed-map f ~ map-pointed-map f
+    id ∘ map-pointed-map f ~ map-pointed-map f
   htpy-left-unit-law-comp-pointed-map = refl-htpy
 
   coherence-left-unit-law-comp-pointed-map :
@@ -825,7 +825,7 @@ module _
   pr2 left-unit-law-comp-pointed-map = coherence-left-unit-law-comp-pointed-map
 
   htpy-inv-left-unit-law-comp-pointed-map :
-    map-pointed-map f ~ map-pointed-map f
+    map-pointed-map f ~ id ∘ map-pointed-map f
   htpy-inv-left-unit-law-comp-pointed-map = refl-htpy
 
   coherence-point-inv-left-unit-law-comp-pointed-map :
@@ -851,7 +851,7 @@ module _
   where
 
   htpy-right-unit-law-comp-pointed-map :
-    map-pointed-map f ~ map-pointed-map f
+    map-pointed-map f ∘ id ~ map-pointed-map f
   htpy-right-unit-law-comp-pointed-map = refl-htpy
 
   coherence-right-unit-law-comp-pointed-map :
@@ -994,19 +994,13 @@ module _
       ( H)
   htpy-left-unit-law-concat-pointed-htpy = refl-htpy
 
-  inv-coherence-point-left-unit-law-concat-pointed-htpy :
-    ap id (coherence-point-pointed-htpy H) ∙ refl ∙ refl ＝
-    coherence-point-pointed-htpy H
-  inv-coherence-point-left-unit-law-concat-pointed-htpy =
-    right-unit ∙ right-unit ∙ ap-id (coherence-point-pointed-htpy H)
-
   coherence-point-left-unit-law-concat-pointed-htpy :
     coherence-point-unpointed-htpy-pointed-htpy
       ( concat-pointed-htpy (refl-pointed-htpy f) H)
       ( H)
       ( htpy-left-unit-law-concat-pointed-htpy)
   coherence-point-left-unit-law-concat-pointed-htpy =
-    inv inv-coherence-point-left-unit-law-concat-pointed-htpy
+    inv (right-unit ∙ right-unit ∙ ap-id (coherence-point-pointed-htpy H))
 
   left-unit-law-concat-pointed-htpy :
     concat-pointed-htpy (refl-pointed-htpy f) H ~²∗  H

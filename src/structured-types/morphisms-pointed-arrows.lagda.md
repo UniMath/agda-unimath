@@ -501,7 +501,7 @@ module _
       ( is-torsorial-Eq-structure
         ( is-torsorial-pointed-htpy _)
         ( pointed-map-codomain-hom-pointed-arrow f g α , refl-pointed-htpy _)
-        {!!})
+        {! !})
 
 {-
     is-torsorial-Eq-structure
