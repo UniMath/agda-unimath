@@ -51,6 +51,7 @@ open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
 open import foundation.coherently-invertible-maps public
+open import foundation.coinhabited-types public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
 open import foundation.commuting-pentagons-of-identifications public
@@ -160,6 +161,7 @@ open import foundation.equivalences-spans public
 open import foundation.equivalences-spans-families-of-types public
 open import foundation.evaluation-functions public
 open import foundation.exclusive-disjunction public
+open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
 open import foundation.extensions-types public

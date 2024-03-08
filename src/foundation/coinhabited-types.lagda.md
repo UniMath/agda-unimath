@@ -46,7 +46,7 @@ module _
   is-coinhabited-Prop = iff-Prop (is-inhabited-Prop A) (is-inhabited-Prop B)
 
   is-coinhabited : UU (l1 ⊔ l2)
-  is-coinhabited =  type-Prop is-coinhabited-Prop
+  is-coinhabited = type-Prop is-coinhabited-Prop
 ```
 
 ### Every type is coinhabited with itself

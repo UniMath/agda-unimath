@@ -67,7 +67,7 @@ $n$-[types](foundation-core.truncated-types.md), and spits out the propositional
 disjunction of their underlying types. This is in contrast to the coproduct
 `+₍ₙ₎`, which would take values in $n$-types.
 
-**Note**: The symbol used for the disjunction `_∨₍₋₁₎_` is the
+**Notation.** The symbol used for the disjunction `_∨₍₋₁₎_` is the
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
 not the [latin small letter v](https://codepoints.net/U+0076) `v`.
 
