@@ -3,9 +3,10 @@ intuitionistic logic. Below we give a structured overview of a notable selection
 of such operations and their notation in the library.
 
 The list is split into two sections, the first consists of operations that
-generalize to sufficiently nice [subuniverses](foundation.subuniverses.md), such
-as $n$-[types](foundation-core.truncated-types.md), and the second list consists
-of operations which generalize to give propositions for arbitrary types.
+generalize to arbitrary types and even sufficiently nice
+[subuniverses](foundation.subuniverses.md), such as
+$n$-[types](foundation-core.truncated-types.md), and the second section consists
+of operations that generalize to give propositions for arbitrary types.
 
 | Name                                                        | Operator on types | Operator on propositions |
 | ----------------------------------------------------------- | ----------------- | ------------------------ |
@@ -18,9 +19,9 @@ of operations which generalize to give propositions for arbitrary types.
 | [Exclusive sum](foundation.exclusive-sum.md)                | `exclusive-sum`   | `exclusive-sum-Prop`     |
 | [Coproduct](foundation-core.coproduct-types.md)             | `+`               | _N/A_                    |
 
-Note that for many operations in the second list, there is an equivalent
-operation on propositions in the first list. In these cases, the operation from
-the first list is usually preferred.
+Note that for many operations in the second section, there is an equivalent
+operation on propositions in the first. In these cases, the operation from the
+first list is usually preferred.
 
 | Name                                                                   | Operator on types | Operator on propositions                     |
 | ---------------------------------------------------------------------- | ----------------- | -------------------------------------------- |
