@@ -7,7 +7,6 @@ module foundation.intersections-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.large-locale-of-subtypes
@@ -15,6 +14,7 @@ open import foundation.powersets
 open import foundation.universe-levels
 
 open import foundation-core.propositions
+open import foundation-core.decidable-propositions
 open import foundation-core.subtypes
 
 open import order-theory.greatest-lower-bounds-large-posets
@@ -70,7 +70,7 @@ module _
   intersection-decidable-subtype :
     decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
-  intersection-decidable-subtype P Q x = conjunction-Decidable-Prop (P x) (Q x)
+  intersection-decidable-subtype P Q x = product-Decidable-Prop (P x) (Q x)
 ```
 
 ### The intersection of a family of subtypes

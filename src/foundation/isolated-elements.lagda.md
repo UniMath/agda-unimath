@@ -214,7 +214,7 @@ module _
 is-prop-is-isolated :
   {l1 : Level} {A : UU l1} (a : A) → is-prop (is-isolated a)
 is-prop-is-isolated a =
-  is-prop-is-inhabited
+  is-prop-has-element
     ( λ H → is-prop-Π (is-prop-is-decidable ∘ is-prop-eq-isolated-element a H))
 
 is-isolated-Prop :

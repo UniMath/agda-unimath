@@ -29,12 +29,18 @@ A type is considered to be a proposition if its identity types are contractible.
 This condition is equivalent to the condition that it has up to identification
 at most one element.
 
-## Definition
+## Definitions
+
+### The predicate of being a proposition
 
 ```agda
 is-prop : {l : Level} (A : UU l) → UU l
 is-prop A = (x y : A) → is-contr (x ＝ y)
+```
 
+### The type of propositions
+
+```agda
 Prop :
   (l : Level) → UU (lsuc l)
 Prop l = Σ (UU l) is-prop
@@ -56,20 +62,18 @@ module _
 We prove here only that any contractible type is a proposition. The fact that
 the empty type and the unit type are propositions can be found in
 
-```text
-foundation.empty-types
-foundation.unit-type
-```
+- [`foundation.empty-types`](foundation.empty-types.md), and
+- [`foundation.unit-type`](foundation.unit-type.md).
 
 ## Properties
 
-### To show that a type is a proposition, we may assume it is inhabited
+### To show that a type is a proposition we may assume it has an element
 
 ```agda
 abstract
-  is-prop-is-inhabited :
+  is-prop-has-element :
     {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X
-  is-prop-is-inhabited f x y = f x x y
+  is-prop-has-element f x y = f x x y
 ```
 
 ### Equivalent characterizations of propositions
@@ -224,10 +228,19 @@ abstract
     is-prop A → is-prop B → is-prop (A × B)
   is-prop-product H K = is-prop-Σ H (λ x → K)
 
-product-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (product-Prop P Q) = type-Prop P × type-Prop Q
-pr2 (product-Prop P Q) =
-  is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  type-product-Prop : UU (l1 ⊔ l2)
+  type-product-Prop = type-Prop P × type-Prop Q
+
+  is-prop-product-Prop : is-prop type-product-Prop
+  is-prop-product-Prop =
+    is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
+  product-Prop : Prop (l1 ⊔ l2)
+  product-Prop = (type-product-Prop , is-prop-product-Prop)
 ```
 
 We also introduce the special notation `×₍₋₁₎` for `product-Prop`.
@@ -328,16 +341,16 @@ type-function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)
 type-function-Prop A P = A → type-Prop P
 
-is-prop-type-function-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : Prop l2) →
+is-prop-function-Prop :
+  {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
   is-prop (type-function-Prop A P)
-is-prop-type-function-Prop A P =
+is-prop-function-Prop P =
   is-prop-function-type (is-prop-type-Prop P)
 
 function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (function-Prop A P) = type-function-Prop A P
-pr2 (function-Prop A P) = is-prop-type-function-Prop A P
+pr2 (function-Prop A P) = is-prop-function-Prop P
 
 type-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
@@ -346,7 +359,7 @@ type-hom-Prop P = type-function-Prop (type-Prop P)
 is-prop-type-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   is-prop (type-hom-Prop P Q)
-is-prop-type-hom-Prop P = is-prop-type-function-Prop (type-Prop P)
+is-prop-type-hom-Prop P = is-prop-function-Prop
 
 hom-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)

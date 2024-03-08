@@ -7,7 +7,6 @@ module foundation.existential-quantification where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction-propositions
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
@@ -121,35 +120,35 @@ pr1 (is-least-upper-bound-exists-Prop P Q) = elim-exists-Prop P Q
 pr2 (is-least-upper-bound-exists-Prop P Q) h a p = h (intro-∃ a p)
 ```
 
-### Conjunction distributes over existential quatification
+### product distributes over existential quatification
 
 ```agda
 module _
   {l1 l2 l3 : Level} (P : Prop l1) {A : UU l2} (Q : A → Prop l3)
   where
 
-  iff-distributive-conjunction-exists-Prop :
+  iff-distributive-product-exists-Prop :
     type-iff-Prop
-      ( P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
-      ( ∃₍₋₁₎ A (λ a → P ∧₍₋₁₎ Q a))
-  pr1 iff-distributive-conjunction-exists-Prop (p , e) =
+      ( P ×₍₋₁₎ (∃₍₋₁₎ A Q))
+      ( ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ Q a))
+  pr1 iff-distributive-product-exists-Prop (p , e) =
     elim-exists-Prop Q
-      ( ∃₍₋₁₎ A (λ a → P ∧₍₋₁₎ (Q a)))
+      ( ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ (Q a)))
       ( λ x q → intro-∃ x (p , q))
       ( e)
-  pr2 iff-distributive-conjunction-exists-Prop =
+  pr2 iff-distributive-product-exists-Prop =
     elim-exists-Prop
-      ( λ x → P ∧₍₋₁₎ Q x)
-      ( P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
+      ( λ x → P ×₍₋₁₎ Q x)
+      ( P ×₍₋₁₎ (∃₍₋₁₎ A Q))
       ( λ x (p , q) → (p , intro-∃ x q))
 
-  distributive-conjunction-exists-Prop :
-    P ∧₍₋₁₎ (∃₍₋₁₎ A Q) ＝ ∃₍₋₁₎ A (λ a → P ∧₍₋₁₎ Q a)
-  distributive-conjunction-exists-Prop =
+  distributive-product-exists-Prop :
+    P ×₍₋₁₎ (∃₍₋₁₎ A Q) ＝ ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ Q a)
+  distributive-product-exists-Prop =
     eq-iff'
-      ( P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
-      ( ∃₍₋₁₎ A (λ a → P ∧₍₋₁₎ Q a))
-      ( iff-distributive-conjunction-exists-Prop)
+      ( P ×₍₋₁₎ (∃₍₋₁₎ A Q))
+      ( ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ Q a))
+      ( iff-distributive-product-exists-Prop)
 ```
 
 ## Table of files about propositional logic

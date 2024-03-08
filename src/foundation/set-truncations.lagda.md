@@ -56,14 +56,17 @@ satisfies
 ## Definition
 
 ```agda
+trunc-Set : {l : Level} → UU l → Set l
+trunc-Set = trunc zero-𝕋
+
 type-trunc-Set : {l : Level} → UU l → UU l
 type-trunc-Set = type-trunc zero-𝕋
 
 is-set-type-trunc-Set : {l : Level} {A : UU l} → is-set (type-trunc-Set A)
 is-set-type-trunc-Set = is-trunc-type-trunc
 
-trunc-Set : {l : Level} → UU l → Set l
-trunc-Set = trunc zero-𝕋
+║_║₀ : {l : Level} → UU l → UU l
+║_║₀ = type-trunc-Set
 
 unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
 unit-trunc-Set = unit-trunc

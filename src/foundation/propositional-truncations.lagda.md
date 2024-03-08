@@ -9,6 +9,7 @@ module foundation.propositional-truncations where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.evaluation-functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.propositions
 open import foundation.truncations

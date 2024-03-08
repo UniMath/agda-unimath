@@ -62,12 +62,13 @@ is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 ### Merely decidable types
 
 A type `A` is said to be merely decidable if it comes equipped with an element
-of `type-trunc-Prop (is-decidable A)`.
+of `║ is-decidable A ║₋₁`, or equivalently, the
+[disjunction](foundation.disjunction.md) `A ∨ ¬ A` holds.
 
 ```agda
-is-merely-Decidable-Prop :
+is-merely-decidable-Prop :
   {l : Level} → UU l → Prop l
-is-merely-Decidable-Prop A = trunc-Prop (is-decidable A)
+is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
 
 is-merely-decidable : {l : Level} → UU l → UU l
 is-merely-decidable A = type-trunc-Prop (is-decidable A)
@@ -208,8 +209,7 @@ double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
 ```agda
 double-negation-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
 double-negation-is-decidable {P = P} f =
-  map-neg (inr {A = P} {B = ¬ P}) f
-    ( map-neg (inl {A = P} {B = ¬ P}) f)
+  map-neg (inr {A = P} {B = ¬ P}) f (map-neg (inl {A = P} {B = ¬ P}) f)
 ```
 
 ### Decidable types have ε-operators

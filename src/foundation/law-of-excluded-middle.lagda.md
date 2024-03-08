@@ -22,7 +22,7 @@ open import univalent-combinatorics.2-element-types
 
 ## Idea
 
-The **law of excluded middle** asserts that any
+The {{#concept "law of excluded middle" Agda=LEM}} asserts that any
 [proposition](foundation-core.propositions.md) `P` is
 [decidable](foundation.decidable-types.md).
 

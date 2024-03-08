@@ -7,10 +7,11 @@ module foundation.large-locale-of-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction-propositions
 open import foundation.existential-quantification
+open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.unit-type
+open import foundation.universal-property-cartesian-product-types
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -58,10 +59,9 @@ antisymmetric-leq-Large-Poset Prop-Large-Poset P Q = eq-iff
 ```agda
 has-meets-Prop-Large-Locale :
   has-meets-Large-Poset Prop-Large-Poset
-meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = conjunction-Prop
+meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = product-Prop
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
-  has-meets-Prop-Large-Locale =
-  iff-universal-property-conjunction-Prop
+  has-meets-Prop-Large-Locale P Q R = inv-iff iff-up-product
 ```
 
 ### The largest element in the large poset of propositions
@@ -113,7 +113,7 @@ is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
 is-large-suplattice-Large-Frame Prop-Large-Frame =
   is-large-suplattice-Prop-Large-Locale
 distributive-meet-sup-Large-Frame Prop-Large-Frame =
-  distributive-conjunction-exists-Prop
+  distributive-product-exists-Prop
 ```
 
 ### The large locale of propositions

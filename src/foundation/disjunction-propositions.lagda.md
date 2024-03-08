@@ -7,7 +7,6 @@ module foundation.disjunction-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -47,7 +46,7 @@ is an [equivalence](foundation.logical-equivalence.md).
 
 ```agda
 disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-disjunction-Prop P Q = disjunction-prop-Type (type-Prop P) (type-Prop Q)
+disjunction-Prop P Q = disjunction-prop (type-Prop P) (type-Prop Q)
 
 type-disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-disjunction-Prop P Q = type-Prop (disjunction-Prop P Q)
@@ -95,7 +94,7 @@ module _
 
   prop-ev-disjunction-Prop : {l3 : Level} (R : Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
   prop-ev-disjunction-Prop R =
-    ((P ∨₍₋₁₎ Q) →₍₋₁₎ R) →₍₋₁₎ ((P →₍₋₁₎ R) ∧₍₋₁₎ (Q →₍₋₁₎ R))
+    ((P ∨₍₋₁₎ Q) →₍₋₁₎ R) →₍₋₁₎ ((P →₍₋₁₎ R) ×₍₋₁₎ (Q →₍₋₁₎ R))
 
   ev-disjunction-Prop :
     {l3 : Level} (R : Prop l3) → type-Prop (prop-ev-disjunction-Prop R)

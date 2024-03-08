@@ -32,8 +32,10 @@ open import foundation-core.sets
 
 ## Idea
 
-The axiom of choice asserts that for every family of inhabited types indexed by
-a set, the type of sections of that family is inhabited.
+The {{#concept "axiom of choice" Agda=AC-0}} asserts that for every family of
+[inhabited](foundation.inhabited-types.md) types `B` indexed by a
+[set](foundation-core.sets.md) `A`, the type of sections of that family
+`(x : A) → B x` is inhabited.
 
 ## Definition
 
@@ -44,7 +46,7 @@ AC-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 AC-Set l1 l2 =
   (A : Set l1) (B : type-Set A → Set l2) →
   ((x : type-Set A) → type-trunc-Prop (type-Set (B x))) →
-  type-trunc-Prop ((x : type-Set A) → type-Set (B x))
+  ((x : type-Set A) → type-Set (B x))
 ```
 
 ### The axiom of choice

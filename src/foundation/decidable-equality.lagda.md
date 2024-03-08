@@ -223,7 +223,7 @@ abstract
   is-prop-has-decidable-equality :
     {l1 : Level} {X : UU l1} → is-prop (has-decidable-equality X)
   is-prop-has-decidable-equality {l1} {X} =
-    is-prop-is-inhabited
+    is-prop-has-element
       ( λ d →
         is-prop-Π
         ( λ x →

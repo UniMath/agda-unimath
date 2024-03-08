@@ -26,8 +26,7 @@ open import foundation-core.propositions
 
 ## Idea
 
-The
-{{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop-Type}}
+The {{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop}}
 of two types `A` and `B` is the [proposition](foundation-core.propositions.md)
 that either `A` or `B` are [inhabited](foundation.inhabited-types.md). It is
 defined as the
@@ -58,18 +57,18 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  disjunction-prop-Type : Prop (l1 ⊔ l2)
-  disjunction-prop-Type = trunc-Prop (A + B)
+  disjunction-prop : Prop (l1 ⊔ l2)
+  disjunction-prop = trunc-Prop (A + B)
 
-  disjunction-Type : UU (l1 ⊔ l2)
-  disjunction-Type = type-Prop disjunction-prop-Type
+  disjunction : UU (l1 ⊔ l2)
+  disjunction = type-Prop disjunction-prop
 
-  is-prop-disjunction-Type : is-prop disjunction-Type
-  is-prop-disjunction-Type = is-prop-type-Prop disjunction-prop-Type
+  is-prop-disjunction : is-prop disjunction
+  is-prop-disjunction = is-prop-type-Prop disjunction-prop
 
   infixr 10 _∨_
   _∨_ : UU (l1 ⊔ l2)
-  _∨_ = disjunction-Type
+  _∨_ = disjunction
 ```
 
 ### The introduction rules for the disjunction

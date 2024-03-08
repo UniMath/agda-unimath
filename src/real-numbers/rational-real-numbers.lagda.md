@@ -12,7 +12,6 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.conjunction-propositions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.disjunction-propositions

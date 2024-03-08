@@ -7,7 +7,6 @@ module foundation.exclusive-disjunction where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction-propositions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -126,7 +125,12 @@ all-elements-equal-type-symmetric-xor-Prop (pair X P) x y =
     eq-pair-Σ
       ( p)
       ( eq-is-prop
-        ( is-prop-product (is-prop-type-Prop (P (pr1 y))) is-prop-neg))
+        ( is-prop-product-Prop
+          ( P (pr1 y))
+          ( neg-Prop'
+            ( other-element-unordered-pair
+              ( map-unordered-pair (type-Prop) (X , P))
+              ( pr1 y)))))
   cases-is-prop-type-symmetric-xor-Prop (inr np) =
     ex-falso
       ( tr

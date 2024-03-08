@@ -57,18 +57,18 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  conjunction-prop-Type : Prop (l1 ⊔ l2)
-  conjunction-prop-Type = trunc-Prop (A × B)
+  conjunction-prop : Prop (l1 ⊔ l2)
+  conjunction-prop = trunc-Prop (A × B)
 
-  conjunction-Type : UU (l1 ⊔ l2)
-  conjunction-Type = type-Prop conjunction-prop-Type
+  conjunction : UU (l1 ⊔ l2)
+  conjunction = type-Prop conjunction-prop
 
-  is-conjunction-prop-Type : is-prop conjunction-Type
-  is-conjunction-prop-Type = is-prop-type-Prop conjunction-prop-Type
+  is-prop-conjunction : is-prop conjunction
+  is-prop-conjunction = is-prop-type-Prop conjunction-prop
 
   infixr 15 _∧_
   _∧_ : UU (l1 ⊔ l2)
-  _∧_ = conjunction-Type
+  _∧_ = conjunction
 ```
 
 **Note**: The symbol used for the conjunction `_∧_` is the
@@ -103,11 +103,15 @@ module _
 ### The conjunction satisfies the universal property of conjuntions
 
 ```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
   rec-conjunction :
     {l : Level} (R : Prop l) → (A → B → type-Prop R) → A ∧ B → type-Prop R
   rec-conjunction R f = rec-trunc-Prop R (λ (a , b) → f a b)
 
-  up-conjunction : universal-property-conjunction
+  up-conjunction : universal-property-conjunction A B
   up-conjunction R =
     is-equiv-is-prop
       ( is-prop-function-type (is-prop-type-Prop R))
@@ -116,25 +120,8 @@ module _
 
   equiv-ev-conjunction :
     {l : Level} (R : Prop l) → (A ∧ B → type-Prop R) ≃ (A → B → type-Prop R)
-  equiv-ev-conjunction R = (ev-conjunction R , up-conjunction R)
+  equiv-ev-conjunction R = (ev-conjunction A B R , up-conjunction R)
 ```
-
-### The conjuntion distributes over function types
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
-  where
-
-  map-inv-distributive-conjunction :
-    {l3 : Level} (C : UU l3) → ((C → A) ∧ (C → B)) → (C → A ∧ B)
-  map-inv-distributive-conjunction C =
-    rec-trunc-Prop
-      ( function-Prop C (conjunction-prop-Type A B))
-      ( λ (f , g) x → unit-trunc-Prop (f x , g x))
-```
-
-The rest remains to be formalized.
 
 ### If the conjunction holds, then both factors are inhabited
 
@@ -155,10 +142,73 @@ module _
 ### The conjunction is equivalent to the product `is-inhabited A × is-inhabited B`
 
 ```agda
-map-product-inhabited-conjunction :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  A ∧ B ≃ is-inhabited A × is-inhabited B
-map-product-inhabited-conjunction = distributive-trunc-product-Prop
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  equiv-product-inhabited-conjunction :
+    A ∧ B ≃ is-inhabited A × is-inhabited B
+  equiv-product-inhabited-conjunction =
+    distributive-trunc-product-Prop
+
+  map-product-inhabited-conjunction :
+    A ∧ B → is-inhabited A × is-inhabited B
+  map-product-inhabited-conjunction =
+    map-equiv equiv-product-inhabited-conjunction
+
+  map-inv-product-inhabited-conjunction :
+    is-inhabited A × is-inhabited B → A ∧ B
+  map-inv-product-inhabited-conjunction =
+    map-inv-equiv equiv-product-inhabited-conjunction
+```
+
+### Distributivity of conjunctions over function types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
+  where
+
+  map-distributive-conjunction :
+    ((C → A) ∧ (C → B)) → (C → A ∧ B)
+  map-distributive-conjunction =
+    rec-trunc-Prop
+      ( function-Prop C (conjunction-prop A B))
+      ( λ (f , g) x → unit-trunc-Prop (f x , g x))
+```
+
+The converse of this implication is an instance of
+[choice](foundation.axiom-of-choice.md), so we cannot hope to prove it in
+general in an intuitionistic setting. However, we can say something weaker:
+
+```agda
+  map-distributive-is-inhabited-conjunction :
+    (C → is-inhabited A) ∧ (C → is-inhabited B) → (C → A ∧ B)
+  map-distributive-is-inhabited-conjunction =
+    rec-trunc-Prop
+      ( function-Prop C (conjunction-prop A B))
+      λ (f , g) x → map-inv-product-inhabited-conjunction (f x , g x)
+
+  map-inv-distributive-is-inhabited-conjunction :
+    (C → A ∧ B) → (C → is-inhabited A) ∧ (C → is-inhabited B)
+  map-inv-distributive-is-inhabited-conjunction f =
+    unit-trunc-Prop
+      ( ( is-inhabited-left-factor-conjunction ∘ f) ,
+        ( is-inhabited-right-factor-conjunction ∘ f))
+
+  is-equiv-map-distributive-is-inhabited-conjunction :
+    is-equiv map-distributive-is-inhabited-conjunction
+  is-equiv-map-distributive-is-inhabited-conjunction =
+    is-equiv-is-prop
+      ( is-prop-conjunction (C → is-inhabited A) (C → is-inhabited B))
+      ( is-prop-function-type (is-prop-conjunction A B))
+      ( map-inv-distributive-is-inhabited-conjunction)
+
+  distributive-is-inhabited-conjunction :
+    (C → is-inhabited A) ∧ (C → is-inhabited B) ≃ (C → A ∧ B)
+  distributive-is-inhabited-conjunction =
+    ( map-distributive-is-inhabited-conjunction ,
+      is-equiv-map-distributive-is-inhabited-conjunction)
 ```
 
 ## See also
