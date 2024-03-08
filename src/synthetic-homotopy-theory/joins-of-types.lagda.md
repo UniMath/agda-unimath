@@ -332,9 +332,10 @@ module _
 
   map-join-disjunction-Prop : type-disjunction-Prop A B → type-join-Prop A B
   map-join-disjunction-Prop =
-    elim-disjunction-Prop A B
+    rec-disjunction-Prop A B
       ( join-Prop A B)
-      ( inl-join-Prop A B , inr-join-Prop A B)
+      ( inl-join-Prop A B)
+      ( inr-join-Prop A B)
 
   is-equiv-map-disjunction-join-Prop : is-equiv map-disjunction-join-Prop
   is-equiv-map-disjunction-join-Prop =

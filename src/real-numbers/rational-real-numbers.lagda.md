@@ -128,21 +128,23 @@ all-eq-is-rational-ℝ x p q H H' =
   left-case : le-ℚ p q → p ＝ q
   left-case I =
     ex-falso
-      ( elim-disjunction-Prop
+      ( rec-disjunction-Prop
         ( lower-cut-ℝ x p)
         ( upper-cut-ℝ x q)
         ( empty-Prop)
-        ( pr1 H , pr2 H')
+        ( pr1 H)
+        ( pr2 H')
         ( is-located-lower-upper-cut-ℝ x p q I))
 
   right-case : le-ℚ q p → p ＝ q
   right-case I =
     ex-falso
-      ( elim-disjunction-Prop
+      ( rec-disjunction-Prop
         ( lower-cut-ℝ x q)
         ( upper-cut-ℝ x p)
         ( empty-Prop)
-        ( pr1 H' , pr2 H)
+        ( pr1 H')
+        ( pr2 H)
         ( is-located-lower-upper-cut-ℝ x q p I))
 
 is-prop-rational-real : {l : Level} (x : ℝ l) → is-prop (Σ ℚ (is-rational-ℝ x))
@@ -202,11 +204,13 @@ eq-real-rational-is-rational-ℝ x q H =
       ( lower-cut-ℝ x)
       ( λ r →
         pair
-          ( λ I → elim-disjunction-Prop
+          ( λ I →
+            rec-disjunction-Prop
             ( lower-cut-ℝ x r)
             ( upper-cut-ℝ x q)
             ( lower-cut-ℝ x r)
-            ( id , λ H' → ex-falso (pr2 H H'))
+            ( id)
+            ( λ H' → ex-falso (pr2 H H'))
             ( is-located-lower-upper-cut-ℝ x r q I))
           ( trichotomy-le-ℚ r q
             ( λ I _ → I)

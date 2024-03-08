@@ -164,11 +164,12 @@ is-radical-prime-ideal-Commutative-Ring R P x zero-ℕ p =
     ( p)
     ( x)
 is-radical-prime-ideal-Commutative-Ring R P x (succ-ℕ n) p =
-  elim-disjunction-Prop
+  rec-disjunction-Prop
     ( subset-prime-ideal-Commutative-Ring R P (power-Commutative-Ring R n x))
     ( subset-prime-ideal-Commutative-Ring R P x)
     ( subset-prime-ideal-Commutative-Ring R P x)
-    ( is-radical-prime-ideal-Commutative-Ring R P x n , id)
+    ( is-radical-prime-ideal-Commutative-Ring R P x n)
+    ( id)
     ( is-prime-ideal-ideal-prime-ideal-Commutative-Ring R P
       ( power-Commutative-Ring R n x)
       ( x)

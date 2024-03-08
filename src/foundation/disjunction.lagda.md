@@ -9,6 +9,7 @@ module foundation.disjunction where
 ```agda
 open import foundation.conjunction
 open import foundation.decidable-types
+open import foundation.inhabited-types
 open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
@@ -16,6 +17,7 @@ open import foundation.universe-levels
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
+open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
@@ -25,11 +27,31 @@ open import foundation-core.propositions
 
 ## Idea
 
-The {{#concept "disjunction" Agda=disjunction-Prop}} of two
-[propositions](foundation-core.propositions.md) `P` and `Q` is the proposition
-that `P` holds or `Q` holds.
+The
+{{#concept "disjunction" Disambiguation="of propositions" Agda=disjunction-Prop}}
+of two [propositions](foundation-core.propositions.md) `P` and `Q` is the
+proposition that `P` holds or `Q` holds. More generally, the
+{{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop-Type}}
+of two types `A` and `B` is the
+[propositional truncation](foundation.propositional-truncations.md) of their
+[coproduct](foundation-core.coproduct-types.md).
 
-## Definition
+```text
+  A ∨ B := ║ A + B ║₋₁
+```
+
+The universal property of the disjunction states that, for every proposition
+`R`, the evaluation map
+
+```text
+  ev : ((A ∨ B) → R) ⇒ ((A → R) ∧ (B → R))
+```
+
+is an [equivalence](foundation.logical-equivalence.md).
+
+## Definitions
+
+### Disjunction of types
 
 ```agda
 disjunction-prop-Type : {l1 l2 : Level} → UU l1 → UU l2 → Prop (l1 ⊔ l2)
@@ -38,8 +60,8 @@ disjunction-prop-Type A B = trunc-Prop (A + B)
 disjunction-Type : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 disjunction-Type A B = type-Prop (disjunction-prop-Type A B)
 
--- _∨_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
--- _∨_ = disjunction-Type
+_∨_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+_∨_ = disjunction-Type
 ```
 
 ### Disjunction of propositions
@@ -71,21 +93,38 @@ disjunction of their underlying types. This is in contrast to the coproduct
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
 not the [latin small letter v](https://codepoints.net/U+0076) `v`.
 
+### Disjunction of decidable propositions
+
 ```agda
-disjunction-Decidable-Prop :
-  {l1 l2 : Level} →
-  Decidable-Prop l1 → Decidable-Prop l2 → Decidable-Prop (l1 ⊔ l2)
-pr1 (disjunction-Decidable-Prop P Q) =
-  type-disjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
-pr1 (pr2 (disjunction-Decidable-Prop P Q)) =
-  is-prop-type-disjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
-pr2 (pr2 (disjunction-Decidable-Prop P Q)) =
-  is-decidable-trunc-Prop-is-merely-decidable
-    ( type-Decidable-Prop P + type-Decidable-Prop Q)
-    ( unit-trunc-Prop
-      ( is-decidable-coproduct
-        ( is-decidable-Decidable-Prop P)
-        ( is-decidable-Decidable-Prop Q)))
+module _
+  {l1 l2 : Level} (P : Decidable-Prop l1) (Q : Decidable-Prop l2)
+  where
+
+  type-disjunction-Decidable-Prop : UU (l1 ⊔ l2)
+  type-disjunction-Decidable-Prop =
+    type-disjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+
+  is-prop-type-disjunction-Decidable-Prop :
+    is-prop type-disjunction-Decidable-Prop
+  is-prop-type-disjunction-Decidable-Prop =
+    is-prop-type-disjunction-Prop
+      ( prop-Decidable-Prop P)
+      ( prop-Decidable-Prop Q)
+
+  is-decidable-type-disjunction-Decidable-Prop : is-decidable type-disjunction-Decidable-Prop
+  is-decidable-type-disjunction-Decidable-Prop =
+    is-decidable-trunc-Prop-is-merely-decidable
+      ( type-Decidable-Prop P + type-Decidable-Prop Q)
+      ( unit-trunc-Prop
+        ( is-decidable-coproduct
+          ( is-decidable-Decidable-Prop P)
+          ( is-decidable-Decidable-Prop Q)))
+
+  disjunction-Decidable-Prop : Decidable-Prop (l1 ⊔ l2)
+  disjunction-Decidable-Prop =
+    ( type-disjunction-Decidable-Prop ,
+      is-prop-type-disjunction-Decidable-Prop ,
+      is-decidable-type-disjunction-Decidable-Prop)
 ```
 
 ## Properties
@@ -93,46 +132,117 @@ pr2 (pr2 (disjunction-Decidable-Prop P Q)) =
 ### The introduction rules for disjunction
 
 ```agda
-inl-disjunction-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-Prop (P ⇒₍₋₁₎ (P ∨₍₋₁₎ Q))
-inl-disjunction-Prop P Q = unit-trunc-Prop ∘ inl
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
 
-inr-disjunction-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-Prop (Q ⇒₍₋₁₎ (P ∨₍₋₁₎ Q))
-inr-disjunction-Prop P Q = unit-trunc-Prop ∘ inr
+  inl-disjunction : A → A ∨ B
+  inl-disjunction = unit-trunc-Prop ∘ inl
+
+  inr-disjunction : B →  A ∨ B
+  inr-disjunction = unit-trunc-Prop ∘ inr
+
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  inl-disjunction-Prop : type-Prop (P ⇒₍₋₁₎ (P ∨₍₋₁₎ Q))
+  inl-disjunction-Prop = inl-disjunction (type-Prop P) (type-Prop Q)
+
+  inr-disjunction-Prop : type-Prop (Q ⇒₍₋₁₎ (P ∨₍₋₁₎ Q))
+  inr-disjunction-Prop = inr-disjunction (type-Prop P) (type-Prop Q)
 ```
 
-### The elimination rule and universal property of disjunction
+### The universal property of disjunctions
 
 ```agda
-ev-disjunction-Prop :
-  {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  type-Prop (((P ∨₍₋₁₎ Q) ⇒₍₋₁₎ R) ⇒₍₋₁₎ ((P ⇒₍₋₁₎ R) ∧₍₋₁₎ (Q ⇒₍₋₁₎ R)))
-pr1 (ev-disjunction-Prop P Q R h) = h ∘ (inl-disjunction-Prop P Q)
-pr2 (ev-disjunction-Prop P Q R h) = h ∘ (inr-disjunction-Prop P Q)
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (R : Prop l3)
+  where
 
-elim-disjunction-Prop :
-  {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-  type-Prop (((P ⇒₍₋₁₎ R) ∧₍₋₁₎ (Q ⇒₍₋₁₎ R)) ⇒₍₋₁₎ ((P ∨₍₋₁₎ Q) ⇒₍₋₁₎ R))
-elim-disjunction-Prop P Q R (f , g) =
-  map-universal-property-trunc-Prop R (rec-coproduct f g)
+  ev-disjunction :
+    ((A ∨ B) → type-Prop R) → (A → type-Prop R) × (B → type-Prop R)
+  pr1 (ev-disjunction h) = h ∘ (inl-disjunction A B)
+  pr2 (ev-disjunction h) = h ∘ (inr-disjunction A B)
 
-abstract
-  is-equiv-ev-disjunction-Prop :
-    {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
-    is-equiv (ev-disjunction-Prop P Q R)
-  is-equiv-ev-disjunction-Prop P Q R =
-    is-equiv-is-prop
-      ( is-prop-type-Prop ((P ∨₍₋₁₎ Q) ⇒₍₋₁₎ R))
-      ( is-prop-type-Prop ((P ⇒₍₋₁₎ R) ∧₍₋₁₎ (Q ⇒₍₋₁₎ R)))
-      ( elim-disjunction-Prop P Q R)
+  elim-disjunction :
+    (A → type-Prop R) × (B → type-Prop R) → A ∨ B → type-Prop R
+  elim-disjunction (f , g) =
+    map-universal-property-trunc-Prop R (rec-coproduct f g)
+
+  abstract
+    is-equiv-ev-disjunction :
+      is-equiv ev-disjunction
+    is-equiv-ev-disjunction =
+      is-equiv-is-prop
+        ( is-prop-function-type (is-prop-type-Prop R))
+        ( is-prop-product
+          ( is-prop-function-type (is-prop-type-Prop R))
+          ( is-prop-function-type (is-prop-type-Prop R)))
+        ( elim-disjunction)
+```
+
+### The universal property of disjunction of propositions
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3)
+  where
+
+  prop-ev-disjunction-Prop : Prop (l1 ⊔ l2 ⊔ l3)
+  prop-ev-disjunction-Prop =
+    ((P ∨₍₋₁₎ Q) ⇒₍₋₁₎ R) ⇒₍₋₁₎ ((P ⇒₍₋₁₎ R) ∧₍₋₁₎ (Q ⇒₍₋₁₎ R))
+
+  ev-disjunction-Prop : type-Prop prop-ev-disjunction-Prop
+  ev-disjunction-Prop = ev-disjunction (type-Prop P) (type-Prop Q) R
+
+  abstract
+    is-equiv-ev-disjunction-Prop : is-equiv ev-disjunction-Prop
+    is-equiv-ev-disjunction-Prop =
+      is-equiv-ev-disjunction (type-Prop P) (type-Prop Q) R
+```
+
+### The recursion principle of disjunctions
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (R : Prop l3)
+  where
+
+  rec-disjunction :
+    (A → type-Prop R) → (B → type-Prop R) → A ∨ B → type-Prop R
+  rec-disjunction f g = elim-disjunction A B R (f , g)
+
+module _
+  {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3)
+  where
+
+  prop-rec-disjunction-Prop : Prop (l1 ⊔ l2 ⊔ l3)
+  prop-rec-disjunction-Prop =
+    (P ⇒₍₋₁₎ R) ⇒₍₋₁₎ (Q ⇒₍₋₁₎ R) ⇒₍₋₁₎ ((P ∨₍₋₁₎ Q) ⇒₍₋₁₎ R)
+
+  rec-disjunction-Prop :
+    type-Prop prop-rec-disjunction-Prop
+  rec-disjunction-Prop = rec-disjunction (type-Prop P) (type-Prop Q) R
 ```
 
 ### The unit laws for disjunction
 
 ```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  map-left-unit-law-disjunction-is-empty :
+    is-empty A → A ∨ B → is-inhabited B
+  map-left-unit-law-disjunction-is-empty f =
+    rec-disjunction A B (is-inhabited-Prop B) (ex-falso ∘ f) unit-trunc-Prop
+
+  map-right-unit-law-disjunction-is-empty :
+    is-empty B → A ∨ B → is-inhabited A
+  map-right-unit-law-disjunction-is-empty f =
+    rec-disjunction A B (is-inhabited-Prop A) unit-trunc-Prop (ex-falso ∘ f)
+
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
@@ -140,12 +250,12 @@ module _
   map-left-unit-law-disjunction-is-empty-Prop :
     is-empty (type-Prop P) → type-disjunction-Prop P Q → type-Prop Q
   map-left-unit-law-disjunction-is-empty-Prop f =
-    elim-disjunction-Prop P Q Q (ex-falso ∘ f , id)
+    rec-disjunction-Prop P Q Q (ex-falso ∘ f) id
 
   map-right-unit-law-disjunction-is-empty-Prop :
     is-empty (type-Prop Q) → type-disjunction-Prop P Q → type-Prop P
   map-right-unit-law-disjunction-is-empty-Prop f =
-    elim-disjunction-Prop P Q P (id , ex-falso ∘ f)
+    rec-disjunction-Prop P Q P id (ex-falso ∘ f)
 ```
 
 ## Table of files about propositional logic
