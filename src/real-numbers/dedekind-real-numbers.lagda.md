@@ -79,10 +79,10 @@ module _
         ( product-Prop
           ( Π-Prop ℚ
             ( λ q →
-              (L q) ⇔₍₋₁₎ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧₍₋₁₎ (L r)))))
+              (L q) ↔₍₋₁₎ (exists-Prop ℚ (λ r → (le-ℚ-Prop q r) ∧₍₋₁₎ (L r)))))
           ( Π-Prop ℚ
             ( λ r →
-              (U r) ⇔₍₋₁₎ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧₍₋₁₎ (U q))))))
+              (U r) ↔₍₋₁₎ (exists-Prop ℚ (λ q → (le-ℚ-Prop q r) ∧₍₋₁₎ (U q))))))
         ( product-Prop
           ( Π-Prop ℚ
             ( λ q → ¬₍₋₁₎ ((L q) ∧₍₋₁₎ (U q))))

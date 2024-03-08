@@ -58,7 +58,7 @@ module _
 
   abstract
     is-torsorial-iff :
-      (P : Prop l1) → is-torsorial (λ (Q : Prop l1) → type-Prop (P ⇔₍₋₁₎ Q))
+      (P : Prop l1) → is-torsorial (λ (Q : Prop l1) → type-Prop (P ↔₍₋₁₎ Q))
     is-torsorial-iff P =
       is-contr-equiv
         ( Σ (Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
@@ -76,11 +76,11 @@ module _
       fundamental-theorem-id (is-torsorial-iff P) (λ Q → iff-eq {P = P} {Q})
 
   propositional-extensionality :
-    (P Q : Prop l1) → (P ＝ Q) ≃ type-Prop (P ⇔₍₋₁₎ Q)
+    (P Q : Prop l1) → (P ＝ Q) ≃ type-Prop (P ↔₍₋₁₎ Q)
   pr1 (propositional-extensionality P Q) = iff-eq
   pr2 (propositional-extensionality P Q) = is-equiv-iff-eq P Q
 
-  eq-iff' : (P Q : Prop l1) → type-Prop (P ⇔₍₋₁₎ Q) → P ＝ Q
+  eq-iff' : (P Q : Prop l1) → type-Prop (P ↔₍₋₁₎ Q) → P ＝ Q
   eq-iff' P Q = map-inv-is-equiv (is-equiv-iff-eq P Q)
 
   eq-iff :
@@ -101,7 +101,7 @@ module _
     (P : Prop l1) → is-torsorial (λ Q → type-Prop P ≃ type-Prop Q)
   is-torsorial-equiv-Prop P =
     is-contr-equiv'
-      ( Σ (Prop l1) (λ Q → type-Prop (P ⇔₍₋₁₎ Q)))
+      ( Σ (Prop l1) (λ Q → type-Prop (P ↔₍₋₁₎ Q)))
       ( equiv-tot (equiv-equiv-iff P))
       ( is-torsorial-iff P)
 ```
@@ -138,7 +138,7 @@ abstract
     {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop P)
   is-torsorial-true-Prop {l1} =
     is-contr-equiv
-      ( Σ (Prop l1) (λ P → type-Prop (raise-unit-Prop l1 ⇔₍₋₁₎ P)))
+      ( Σ (Prop l1) (λ P → type-Prop (raise-unit-Prop l1 ↔₍₋₁₎ P)))
       ( equiv-tot
         ( λ P →
           inv-equiv
@@ -163,7 +163,7 @@ abstract
     {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop (¬₍₋₁₎ P))
   is-torsorial-false-Prop {l1} =
     is-contr-equiv
-      ( Σ (Prop l1) (λ P → type-Prop (raise-empty-Prop l1 ⇔₍₋₁₎ P)))
+      ( Σ (Prop l1) (λ P → type-Prop (raise-empty-Prop l1 ↔₍₋₁₎ P)))
       ( equiv-tot
         ( λ P →
           inv-equiv
