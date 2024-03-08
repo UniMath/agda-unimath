@@ -65,16 +65,20 @@ type-trunc-Set = type-trunc zero-𝕋
 is-set-type-trunc-Set : {l : Level} {A : UU l} → is-set (type-trunc-Set A)
 is-set-type-trunc-Set = is-trunc-type-trunc
 
-║_║₀ : {l : Level} → UU l → UU l
-║_║₀ = type-trunc-Set
-
 unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
 unit-trunc-Set = unit-trunc
 
 is-set-truncation-trunc-Set :
   {l1 : Level} (A : UU l1) → is-set-truncation (trunc-Set A) unit-trunc-Set
 is-set-truncation-trunc-Set A = is-truncation-trunc
+
+║_║₀ : {l : Level} → UU l → UU l
+║_║₀ = type-trunc-Set
 ```
+
+**Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
+`║` in the set truncation notation `║_║₀` can be inserted with `agda-input`
+using the escape sequence `\--=` and selecting the second item in the list.
 
 ## Properties
 
