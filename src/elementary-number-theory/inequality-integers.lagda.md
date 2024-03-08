@@ -66,7 +66,7 @@ transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k
 transitive-leq-ℤ k l m p q =
   is-nonnegative-eq-ℤ
     ( triangle-diff-ℤ m l k)
-    ( is-nonnegative-add-nonnegative-nonnegative-ℤ q p)
+    ( is-nonnegative-add-ℤ q p)
 
 decide-leq-ℤ : {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
 decide-leq-ℤ {x} {y} =
@@ -123,7 +123,7 @@ transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
 transitive-le-ℤ k l m p q =
   is-positive-eq-ℤ
     ( triangle-diff-ℤ m l k)
-    ( is-positive-add-positive-positive-ℤ q p)
+    ( is-positive-add-ℤ q p)
 
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p =

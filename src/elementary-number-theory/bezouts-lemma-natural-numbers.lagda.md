@@ -25,6 +25,7 @@ open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.positive-and-negative-integers

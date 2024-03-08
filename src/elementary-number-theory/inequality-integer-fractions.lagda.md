@@ -16,6 +16,7 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
@@ -253,10 +254,10 @@ module _
           ( numerator-fraction-ℤ x *ℤ k)
           ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x))
       ( H)
-      ( preserves-strict-order-mul-positive-ℤ'
+      ( preserves-le-left-mul-ℤ
         { numerator-fraction-ℤ x}
         { numerator-fraction-ℤ y}
-        ( denominator-fraction-ℤ x)
+        { denominator-fraction-ℤ x}
         ( is-positive-denominator-fraction-ℤ x)
         ( H'))
 ```

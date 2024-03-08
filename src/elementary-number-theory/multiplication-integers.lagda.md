@@ -332,17 +332,6 @@ double-negative-law-mul-ℤ k l =
       by neg-neg-ℤ (k *ℤ l)
 ```
 
-### Positivity of multiplication
-
-```agda
-is-positive-mul-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x *ℤ y)
-is-positive-mul-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
-is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-add-positive-positive-ℤ {inr (inr y)} K
-    ( is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} H K)
-```
-
 ### Computing multiplication of integers that come from natural numbers
 
 ```agda
@@ -477,79 +466,4 @@ is-emb-left-mul-ℤ x f =
 is-emb-right-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (_*ℤ x)
 is-emb-right-mul-ℤ x f =
   is-emb-is-injective is-set-ℤ (is-injective-right-mul-ℤ x f)
-```
-
-```agda
-is-positive-left-factor-mul-ℤ :
-  {x y : ℤ} → is-positive-ℤ (x *ℤ y) → is-positive-ℤ y → is-positive-ℤ x
-is-positive-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
-  is-positive-eq-ℤ (compute-mul-ℤ (inl x) (inr (inr y))) H
-is-positive-left-factor-mul-ℤ {inr (inl star)} {inr (inr y)} H K =
-  is-positive-eq-ℤ (compute-mul-ℤ zero-ℤ (inr (inr y))) H
-is-positive-left-factor-mul-ℤ {inr (inr x)} {inr (inr y)} H K = star
-
-is-positive-right-factor-mul-ℤ :
-  {x y : ℤ} → is-positive-ℤ (x *ℤ y) → is-positive-ℤ x → is-positive-ℤ y
-is-positive-right-factor-mul-ℤ {x} {y} H =
-  is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
-```
-
-### Lemmas about nonnegative integers
-
-```agda
-is-nonnegative-mul-ℤ :
-  {x y : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ y →
-  is-nonnegative-ℤ (x *ℤ y)
-is-nonnegative-mul-ℤ {inr (inl star)} {y} H K = star
-is-nonnegative-mul-ℤ {inr (inr x)} {inr (inl star)} H K =
-  is-nonnegative-eq-ℤ (inv (right-zero-law-mul-ℤ (inr (inr x)))) star
-is-nonnegative-mul-ℤ {inr (inr x)} {inr (inr y)} H K =
-  is-nonnegative-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y)))) star
-
-is-nonnegative-left-factor-mul-ℤ :
-  {x y : ℤ} →
-  is-nonnegative-ℤ (x *ℤ y) → is-positive-ℤ y → is-nonnegative-ℤ x
-is-nonnegative-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
-  ex-falso (is-nonnegative-eq-ℤ (compute-mul-ℤ (inl x) (inr (inr y))) H)
-is-nonnegative-left-factor-mul-ℤ {inr x} {inr y} H K = star
-
-is-nonnegative-right-factor-mul-ℤ :
-  {x y : ℤ} →
-  is-nonnegative-ℤ (x *ℤ y) → is-positive-ℤ x → is-nonnegative-ℤ y
-is-nonnegative-right-factor-mul-ℤ {x} {y} H =
-  is-nonnegative-left-factor-mul-ℤ
-    ( is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
-```
-
-```agda
-preserves-leq-left-mul-ℤ :
-  (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (z *ℤ x) (z *ℤ y)
-preserves-leq-left-mul-ℤ x y (inr (inl star)) star K = star
-preserves-leq-left-mul-ℤ x y (inr (inr zero-ℕ)) star K = K
-preserves-leq-left-mul-ℤ x y (inr (inr (succ-ℕ n))) star K =
-  preserves-leq-add-ℤ {x} {y}
-    ( K)
-    ( preserves-leq-left-mul-ℤ x y (inr (inr n)) star K)
-
-preserves-leq-right-mul-ℤ :
-  (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (x *ℤ z) (y *ℤ z)
-preserves-leq-right-mul-ℤ x y z H K =
-  concatenate-eq-leq-eq-ℤ
-    ( commutative-mul-ℤ x z)
-    ( preserves-leq-left-mul-ℤ x y z H K)
-    ( commutative-mul-ℤ z y)
-
-preserves-strict-order-mul-positive-ℤ' :
-  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (x *ℤ z) (y *ℤ z)
-preserves-strict-order-mul-positive-ℤ' {x} {y} z H p =
-  is-positive-eq-ℤ
-    ( inv (linear-diff-right-mul-ℤ y x z))
-    ( is-positive-mul-ℤ p H)
-
-preserves-strict-order-mul-positive-ℤ :
-  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (z *ℤ x) (z *ℤ y)
-preserves-strict-order-mul-positive-ℤ {x} {y} z H p =
-  is-positive-eq-ℤ
-    ( inv (linear-diff-left-mul-ℤ z y x))
-    ( is-positive-mul-ℤ H p)
 ```
