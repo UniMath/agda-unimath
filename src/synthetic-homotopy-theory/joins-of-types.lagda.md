@@ -323,7 +323,7 @@ module _
   pr1 (pr2 cocone-disjunction) = inr-disjunction-Prop A B
   pr2 (pr2 cocone-disjunction) (a , b) =
     eq-is-prop'
-      ( is-prop-type-disjunction-Prop A B)
+      ( is-prop-disjunction-Prop A B)
       ( inl-disjunction-Prop A B a)
       ( inr-disjunction-Prop A B b)
 
@@ -342,7 +342,7 @@ module _
   is-equiv-map-disjunction-join-Prop =
     is-equiv-is-prop
       ( is-prop-type-join-Prop A B)
-      ( is-prop-type-disjunction-Prop A B)
+      ( is-prop-disjunction-Prop A B)
       ( map-join-disjunction-Prop)
 
   equiv-disjunction-join-Prop :
@@ -353,7 +353,7 @@ module _
   is-equiv-map-join-disjunction-Prop : is-equiv map-join-disjunction-Prop
   is-equiv-map-join-disjunction-Prop =
     is-equiv-is-prop
-      ( is-prop-type-disjunction-Prop A B)
+      ( is-prop-disjunction-Prop A B)
       ( is-prop-type-join-Prop A B)
       ( map-disjunction-join-Prop)
 
@@ -371,10 +371,10 @@ module _
       ( cocone-join)
       ( cocone-disjunction)
       ( map-disjunction-join-Prop)
-      ( ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
-        ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
+      ( ( λ _ → eq-is-prop (is-prop-disjunction-Prop A B)) ,
+        ( λ _ → eq-is-prop (is-prop-disjunction-Prop A B)) ,
         ( λ (a , b) → eq-is-contr
-          ( is-prop-type-disjunction-Prop A B
+          ( is-prop-disjunction-Prop A B
             ( horizontal-map-cocone pr1 pr2
               ( cocone-map pr1 pr2
                 ( cocone-join)

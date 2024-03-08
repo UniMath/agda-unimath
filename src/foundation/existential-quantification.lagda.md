@@ -7,7 +7,7 @@ module foundation.existential-quantification where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality

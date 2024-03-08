@@ -7,7 +7,7 @@ module foundation.intersections-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.large-locale-of-subtypes

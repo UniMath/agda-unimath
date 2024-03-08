@@ -13,7 +13,7 @@ open import elementary-number-theory.rational-numbers
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction

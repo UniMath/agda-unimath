@@ -7,7 +7,6 @@ module foundation.disjunction where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
@@ -29,7 +28,9 @@ open import foundation-core.propositions
 
 The
 {{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop-Type}}
-of two types `A` and `B` is the
+of two types `A` and `B` is the [proposition](foundation-core.propositions.md)
+that either `A` or `B` are [inhabited](foundation.inhabited-types.md). It is
+defined as the
 [propositional truncation](foundation.propositional-truncations.md) of their
 [coproduct](foundation-core.coproduct-types.md).
 
@@ -37,7 +38,9 @@ of two types `A` and `B` is the
   A ∨ B := ║ A + B ║₋₁
 ```
 
-The universal property of the disjunction states that, for every
+The
+{{#concept "universal property" Disambiguation="of the disjunction of types"}}
+of the disjunction states that, for every
 [proposition](foundation-core.propositions.md) `R`, the evaluation map
 
 ```text
@@ -51,14 +54,22 @@ is an [equivalence](foundation.logical-equivalence.md).
 ### The disjunction of types
 
 ```agda
-disjunction-prop-Type : {l1 l2 : Level} → UU l1 → UU l2 → Prop (l1 ⊔ l2)
-disjunction-prop-Type A B = trunc-Prop (A + B)
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
 
-disjunction-Type : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-disjunction-Type A B = type-Prop (disjunction-prop-Type A B)
+  disjunction-prop-Type : Prop (l1 ⊔ l2)
+  disjunction-prop-Type = trunc-Prop (A + B)
 
-_∨_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-_∨_ = disjunction-Type
+  disjunction-Type : UU (l1 ⊔ l2)
+  disjunction-Type = type-Prop disjunction-prop-Type
+
+  is-prop-disjunction-Type : is-prop disjunction-Type
+  is-prop-disjunction-Type = is-prop-type-Prop disjunction-prop-Type
+
+  infixr 10 _∨_
+  _∨_ : UU (l1 ⊔ l2)
+  _∨_ = disjunction-Type
 ```
 
 ### The introduction rules for the disjunction

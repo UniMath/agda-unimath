@@ -7,7 +7,7 @@ module foundation.impredicative-encodings-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.disjunction-propositions

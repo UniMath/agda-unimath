@@ -7,7 +7,7 @@ module foundation.exclusive-disjunction where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types

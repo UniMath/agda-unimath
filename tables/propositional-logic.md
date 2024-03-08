@@ -11,7 +11,8 @@
 | Propositional extensionality                         | [`foundation.propositional-extensionality`](foundation.propositional-extensionality.md)                                 |
 | Negation                                             | [`foundation.negation`](foundation.negation.md)                                                                         |
 | Double negation                                      | [`foundation.double-negation`](foundation.double-negation.md)                                                           |
-| Conjunction                                          | [`foundation.conjunction`](foundation.conjunction.md)                                                                   |
+| Conjunction of types                                 | [`foundation.conjunction`](foundation.conjunction.md)                                                                   |
+| Conjunction of propositions                          | [`foundation.conjunction-propositions`](foundation.conjunction-propositions.md)                                         |
 | Disjunction of types                                 | [`foundation.disjunction`](foundation.disjunction.md)                                                                   |
 | Disjunction of propositions                          | [`foundation.disjunction-propositions`](foundation.disjunction-propositions.md)                                         |
 | Exclusive disjunction                                | [`foundation.exclusive-disjunction`](foundation.exclusive-disjunction.md)                                               |

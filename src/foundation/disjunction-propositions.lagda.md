@@ -7,7 +7,7 @@ module foundation.disjunction-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -53,10 +53,10 @@ type-disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l
 type-disjunction-Prop P Q = type-Prop (disjunction-Prop P Q)
 
 abstract
-  is-prop-type-disjunction-Prop :
+  is-prop-disjunction-Prop :
     {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
     is-prop (type-disjunction-Prop P Q)
-  is-prop-type-disjunction-Prop P Q = is-prop-type-Prop (disjunction-Prop P Q)
+  is-prop-disjunction-Prop P Q = is-prop-type-Prop (disjunction-Prop P Q)
 
 infixr 10 _∨₍₋₁₎_
 _∨₍₋₁₎_ = disjunction-Prop
@@ -97,10 +97,10 @@ module _
   type-disjunction-Decidable-Prop =
     type-disjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
 
-  is-prop-type-disjunction-Decidable-Prop :
+  is-prop-disjunction-Decidable-Prop :
     is-prop type-disjunction-Decidable-Prop
-  is-prop-type-disjunction-Decidable-Prop =
-    is-prop-type-disjunction-Prop
+  is-prop-disjunction-Decidable-Prop =
+    is-prop-disjunction-Prop
       ( prop-Decidable-Prop P)
       ( prop-Decidable-Prop Q)
 
@@ -117,7 +117,7 @@ module _
   disjunction-Decidable-Prop : Decidable-Prop (l1 ⊔ l2)
   disjunction-Decidable-Prop =
     ( type-disjunction-Decidable-Prop ,
-      is-prop-type-disjunction-Decidable-Prop ,
+      is-prop-disjunction-Decidable-Prop ,
       is-decidable-type-disjunction-Decidable-Prop)
 ```
 

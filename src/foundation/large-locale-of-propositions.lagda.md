@@ -7,7 +7,7 @@ module foundation.large-locale-of-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.existential-quantification
 open import foundation.propositional-extensionality
 open import foundation.unit-type

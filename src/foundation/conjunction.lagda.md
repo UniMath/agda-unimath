@@ -1,4 +1,4 @@
-# Conjunction of propositions
+# Conjunction of types
 
 ```agda
 module foundation.conjunction where
@@ -10,11 +10,15 @@ module foundation.conjunction where
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
+open import foundation.functoriality-propositional-truncation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.propositions
 ```
 
@@ -22,90 +26,142 @@ open import foundation-core.propositions
 
 ## Idea
 
+The {{#concept "conjunction" Disambiguation="of types" Agda=conjunction}} of two
+types `A` and `B` is the [proposition](foundation-core.propositions.md) that
+both `A` and `B` are [inhabited](foundation-inhabited-types.md). It is defined
+as the [propositional truncation](foundation.propositional-truncations.md) of
+the [cartesian product](foundation-core.cartesian-products.md) of `A` and `B`
+
+```text
+  A ∧ B := ║ A × B ║₋₁
+```
+
 The
-{{#concept "conjunction" Disambiguation="of propositions" Agda=conjunction-Prop}}
-of two [propositions](foundation-core.propositions.md) `P` and `Q` is the
-proposition that both `P` and `Q` hold.
+{{#concept "universal property" Disambiguation="of the conjunction of types" Agda=universal-property-conjunction}}
+of the conjunction states that, for every
+[proposition](foundation-core.propositions.md) `R`, the evaluation map
+
+```text
+  (A ∧ B → R) → (A → B → R)
+```
+
+is an [equivalence](foundation.logical-equivalences.md). Hence, the conjunction
+satisfies the following exponential law:
+
+\[ R^{(A ∧ B)} ≃ {(R^B)}^A. \]
 
 ## Definition
 
 ```agda
-conjunction-Prop = product-Prop
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
 
-type-conjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-type-conjunction-Prop P Q = type-Prop (conjunction-Prop P Q)
+  conjunction-prop-Type : Prop (l1 ⊔ l2)
+  conjunction-prop-Type = trunc-Prop (A × B)
 
-abstract
-  is-prop-type-conjunction-Prop :
-    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-    is-prop (type-conjunction-Prop P Q)
-  is-prop-type-conjunction-Prop P Q = is-prop-type-Prop (conjunction-Prop P Q)
+  conjunction-Type : UU (l1 ⊔ l2)
+  conjunction-Type = type-Prop conjunction-prop-Type
 
-infixr 15 _∧₍₋₁₎_
-_∧₍₋₁₎_ = conjunction-Prop
+  is-conjunction-prop-Type : is-prop conjunction-Type
+  is-conjunction-prop-Type = is-prop-type-Prop conjunction-prop-Type
+
+  infixr 15 _∧_
+  _∧_ : UU (l1 ⊔ l2)
+  _∧_ = conjunction-Type
 ```
 
-The indexing $-1$ for the infix binary operator `∧₍₋₁₎` is part of a general
-scheme, where `∧₍ₙ₎` takes as inputs
-$n$-[types](foundation-core.truncated-types.md), and spits out the propositional
-conjunction of their underlying types. This is in contrast to the cartesian
-product `×₍ₙ₎`, which would take values in $n$-types.
-
-**Note**: The symbol used for the conjunction `_∧₍₋₁₎_` is the
+**Note**: The symbol used for the conjunction `_∧_` is the
 [logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
 
+### The introduction rule for conjunction
+
 ```agda
-conjunction-Decidable-Prop :
-  {l1 l2 : Level} → Decidable-Prop l1 → Decidable-Prop l2 →
-  Decidable-Prop (l1 ⊔ l2)
-pr1 (conjunction-Decidable-Prop P Q) =
-  type-conjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
-pr1 (pr2 (conjunction-Decidable-Prop P Q)) =
-  is-prop-type-conjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
-pr2 (pr2 (conjunction-Decidable-Prop P Q)) =
-  is-decidable-product
-    ( is-decidable-Decidable-Prop P)
-    ( is-decidable-Decidable-Prop Q)
+intro-conjunction :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → A → B → A ∧ B
+intro-conjunction a b = unit-trunc-Prop (a , b)
+```
+
+### The universal property of conjuntions
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  ev-conjunction :
+    {l : Level} (R : Prop l) → (A ∧ B → type-Prop R) → A → B → type-Prop R
+  ev-conjunction R f a b = f (intro-conjunction a b)
+
+  universal-property-conjunction : UUω
+  universal-property-conjunction =
+    {l : Level} (R : Prop l) → is-equiv (ev-conjunction R)
+
 ```
 
 ## Properties
 
-### Introduction rule for conjunction
+### The conjunction satisfies the universal property of conjuntions
 
 ```agda
-intro-conjunction-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-Prop P → type-Prop Q → type-conjunction-Prop P Q
-pr1 (intro-conjunction-Prop P Q p q) = p
-pr2 (intro-conjunction-Prop P Q p q) = q
+  rec-conjunction :
+    {l : Level} (R : Prop l) → (A → B → type-Prop R) → A ∧ B → type-Prop R
+  rec-conjunction R f = rec-trunc-Prop R (λ (a , b) → f a b)
+
+  up-conjunction : universal-property-conjunction
+  up-conjunction R =
+    is-equiv-is-prop
+      ( is-prop-function-type (is-prop-type-Prop R))
+      ( is-prop-function-type (is-prop-function-type (is-prop-type-Prop R)))
+      ( rec-conjunction R)
+
+  equiv-ev-conjunction :
+    {l : Level} (R : Prop l) → (A ∧ B → type-Prop R) ≃ (A → B → type-Prop R)
+  equiv-ev-conjunction R = (ev-conjunction R , up-conjunction R)
 ```
 
-### The universal property of conjunction
+### The conjuntion distributes over function types
 
 ```agda
-iff-universal-property-conjunction-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
-  {l3 : Level} (R : Prop l3) →
-  type-Prop (((R →₍₋₁₎ P) ∧₍₋₁₎ (R →₍₋₁₎ Q)) ↔₍₋₁₎ (R →₍₋₁₎ (P ∧₍₋₁₎ Q)))
-pr1 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = f r
-pr2 (pr1 (iff-universal-property-conjunction-Prop P Q R) (f , g) r) = g r
-pr1 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr1 (h r)
-pr2 (pr2 (iff-universal-property-conjunction-Prop P Q R) h) r = pr2 (h r)
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
 
-equiv-universal-property-conjunction-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
-  {l3 : Level} (R : Prop l3) →
-  type-Prop ((R →₍₋₁₎ P) ∧₍₋₁₎ (R →₍₋₁₎ Q)) ≃ type-Prop (R →₍₋₁₎ (P ∧₍₋₁₎ Q))
-equiv-universal-property-conjunction-Prop P Q R =
-  equiv-iff'
-    ( (R →₍₋₁₎ P) ∧₍₋₁₎ (R →₍₋₁₎ Q))
-    ( R →₍₋₁₎ (P ∧₍₋₁₎ Q))
-    ( iff-universal-property-conjunction-Prop P Q R)
+  map-inv-distributive-conjunction :
+    {l3 : Level} (C : UU l3) → ((C → A) ∧ (C → B)) → (C → A ∧ B)
+  map-inv-distributive-conjunction C =
+    rec-trunc-Prop
+      ( function-Prop C (conjunction-prop-Type A B))
+      ( λ (f , g) x → unit-trunc-Prop (f x , g x))
 ```
 
-## Table of files about propositional logic
+The rest remains to be formalized.
 
-The following table gives an overview of basic constructions in propositional
-logic and related considerations.
+### If the conjunction holds, then both factors are inhabited
 
-{{#include tables/propositional-logic.md}}
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-inhabited-left-factor-conjunction : A ∧ B → is-inhabited A
+  is-inhabited-left-factor-conjunction =
+    rec-trunc-Prop (is-inhabited-Prop A) (unit-trunc-Prop ∘ pr1)
+
+  is-inhabited-right-factor-conjunction : A ∧ B → is-inhabited B
+  is-inhabited-right-factor-conjunction =
+    rec-trunc-Prop (is-inhabited-Prop B) (unit-trunc-Prop ∘ pr2)
+```
+
+### The conjunction is equivalent to the product `is-inhabited A × is-inhabited B`
+
+```agda
+map-product-inhabited-conjunction :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ∧ B ≃ is-inhabited A × is-inhabited B
+map-product-inhabited-conjunction = distributive-trunc-product-Prop
+```
+
+## See also
+
+- [Conjunction of propositions](foundation.conjunction-propositions.md)

@@ -8,7 +8,7 @@ module orthogonal-factorization-systems.factorizations-of-maps-function-classes 
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.conjunction
+open import foundation.conjunction-propositions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
