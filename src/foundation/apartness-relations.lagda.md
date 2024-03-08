@@ -55,7 +55,9 @@ module _
 
   is-cotransitive-Prop : Prop (l1 ⊔ l2)
   is-cotransitive-Prop =
-    Π₍₋₁₎ A (λ a → Π₍₋₁₎ A (λ b → Π₍₋₁₎ A (λ c → R a b ⇒₍₋₁₎ (R a c ∨₍₋₁₎ R b c))))
+    Π₍₋₁₎
+      ( A)
+      ( λ a → Π₍₋₁₎ A (λ b → Π₍₋₁₎ A (λ c → R a b ⇒₍₋₁₎ (R a c ∨₍₋₁₎ R b c))))
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive = type-Prop is-cotransitive-Prop
