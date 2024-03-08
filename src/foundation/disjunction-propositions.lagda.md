@@ -86,6 +86,26 @@ module _
   inr-disjunction-Prop = inr-disjunction (type-Prop P) (type-Prop Q)
 ```
 
+### The universal property of the disjunction of propositions
+
+```agda
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  prop-ev-disjunction-Prop : {l3 : Level} (R : Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
+  prop-ev-disjunction-Prop R =
+    ((P ∨₍₋₁₎ Q) →₍₋₁₎ R) →₍₋₁₎ ((P →₍₋₁₎ R) ∧₍₋₁₎ (Q →₍₋₁₎ R))
+
+  ev-disjunction-Prop :
+    {l3 : Level} (R : Prop l3) → type-Prop (prop-ev-disjunction-Prop R)
+  ev-disjunction-Prop = ev-disjunction (type-Prop P) (type-Prop Q)
+
+  universal-property-disjunction-Prop : UUω
+  universal-property-disjunction-Prop =
+    universal-property-disjunction (type-Prop P) (type-Prop Q)
+```
+
 ### The disjunction of decidable propositions
 
 ```agda
@@ -126,21 +146,12 @@ module _
 ### The universal property of disjunction of propositions
 
 ```agda
-module _
-  {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3)
-  where
-
-  prop-ev-disjunction-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  prop-ev-disjunction-Prop =
-    ((P ∨₍₋₁₎ Q) →₍₋₁₎ R) →₍₋₁₎ ((P →₍₋₁₎ R) ∧₍₋₁₎ (Q →₍₋₁₎ R))
-
-  ev-disjunction-Prop : type-Prop prop-ev-disjunction-Prop
-  ev-disjunction-Prop = ev-disjunction (type-Prop P) (type-Prop Q) R
-
-  abstract
-    is-equiv-ev-disjunction-Prop : is-equiv ev-disjunction-Prop
-    is-equiv-ev-disjunction-Prop =
-      is-equiv-ev-disjunction (type-Prop P) (type-Prop Q) R
+abstract
+  up-disjunction-Prop :
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+    universal-property-disjunction-Prop P Q
+  up-disjunction-Prop P Q =
+    up-disjunction (type-Prop P) (type-Prop Q)
 ```
 
 ### The recursion principle of disjunctions of propositions
