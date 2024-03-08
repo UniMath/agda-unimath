@@ -13,8 +13,8 @@ open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.universe-levels
 
-open import foundation-core.propositions
 open import foundation-core.decidable-propositions
+open import foundation-core.propositions
 open import foundation-core.subtypes
 
 open import order-theory.greatest-lower-bounds-large-posets

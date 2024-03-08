@@ -146,7 +146,8 @@ module _
   is-decidable-prop-product-Decidable-Prop :
     is-decidable-prop type-product-Decidable-Prop
   pr1 is-decidable-prop-product-Decidable-Prop = is-prop-product-Decidable-Prop
-  pr2 is-decidable-prop-product-Decidable-Prop = is-decidable-product-Decidable-Prop
+  pr2 is-decidable-prop-product-Decidable-Prop =
+    is-decidable-product-Decidable-Prop
 
   product-Decidable-Prop : Decidable-Prop (l1 ⊔ l2)
   pr1 product-Decidable-Prop = type-product-Decidable-Prop
