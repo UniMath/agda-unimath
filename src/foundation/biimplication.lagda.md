@@ -223,3 +223,5 @@ module _
 ## See also
 
 - [Implication of types](foundation.implication.md)
+- [Coinhabitedness](foundation.coinhabited-types.md) is a related but weaker
+  notion than biimplication.
