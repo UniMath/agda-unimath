@@ -86,35 +86,53 @@ module _
   inr-disjunction = unit-trunc-Prop ∘ inr
 ```
 
-## Properties
-
 ### The universal property of disjunctions
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (R : Prop l3)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
   ev-disjunction :
+    {l : Level} (R : Prop l) →
     ((A ∨ B) → type-Prop R) → (A → type-Prop R) × (B → type-Prop R)
-  pr1 (ev-disjunction h) = h ∘ (inl-disjunction A B)
-  pr2 (ev-disjunction h) = h ∘ (inr-disjunction A B)
+  pr1 (ev-disjunction R h) = h ∘ inl-disjunction A B
+  pr2 (ev-disjunction R h) = h ∘ inr-disjunction A B
+
+  universal-property-disjunction : UUω
+  universal-property-disjunction =
+    {l : Level} (R : Prop l) → is-equiv (ev-disjunction R)
+```
+
+## Properties
+
+### The disjunction satisfies the universal property of disjunctions
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
 
   elim-disjunction :
+    {l : Level} (R : Prop l) →
     (A → type-Prop R) × (B → type-Prop R) → A ∨ B → type-Prop R
-  elim-disjunction (f , g) =
+  elim-disjunction R (f , g) =
     map-universal-property-trunc-Prop R (rec-coproduct f g)
 
   abstract
-    is-equiv-ev-disjunction :
-      is-equiv ev-disjunction
-    is-equiv-ev-disjunction =
+    up-disjunction : universal-property-disjunction A B
+    up-disjunction R =
       is-equiv-is-prop
         ( is-prop-function-type (is-prop-type-Prop R))
         ( is-prop-product
           ( is-prop-function-type (is-prop-type-Prop R))
           ( is-prop-function-type (is-prop-type-Prop R)))
-        ( elim-disjunction)
+        ( elim-disjunction R)
+
+  equiv-ev-disjunction :
+    {l : Level} (R : Prop l) →
+    ((A ∨ B) → type-Prop R) ≃ (A → type-Prop R) × (B → type-Prop R)
+  equiv-ev-disjunction R = ev-disjunction A B R , up-disjunction R
 ```
 
 ### The recursion principle of disjunctions
