@@ -77,8 +77,9 @@ is-set-truncation-trunc-Set A = is-truncation-trunc
 ```
 
 **Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
-`║` in the set truncation notation `║_║₀` can be inserted with `agda-input`
-using the escape sequence `\--=` and selecting the second item in the list.
+symbol `║` in the set truncation notation `║_║₀` can be inserted with
+`agda-input` using the escape sequence `\--=` and selecting the second item in
+the list.
 
 ## Properties
 
