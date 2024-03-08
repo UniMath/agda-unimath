@@ -46,6 +46,9 @@ postulate of the existence of truncations at all levels, found in the file
 type-trunc-Prop : {l : Level} → UU l → UU l
 type-trunc-Prop = type-trunc neg-one-𝕋
 
+║_║₋₁ : {l : Level} → UU l → UU l
+║_║₋₁ = type-trunc-Prop
+
 unit-trunc-Prop : {l : Level} {A : UU l} → A → type-trunc-Prop A
 unit-trunc-Prop = unit-trunc
 
