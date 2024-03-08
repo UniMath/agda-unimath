@@ -133,50 +133,52 @@ module _
   _~²∗_ : UU (l1 ⊔ l2)
   _~²∗_ = pointed-2-htpy
 
-  module _
-    (α : pointed-2-htpy)
-    where
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B} {H K : pointed-htpy f g}
+  (α : pointed-2-htpy H K)
+  where
 
-    htpy-pointed-2-htpy : unpointed-htpy-pointed-htpy
-    htpy-pointed-2-htpy = pr1 α
+  htpy-pointed-2-htpy : unpointed-htpy-pointed-htpy H K
+  htpy-pointed-2-htpy = pr1 α
 
-    coherence-point-pointed-2-htpy :
-      coherence-point-unpointed-htpy-pointed-htpy htpy-pointed-2-htpy
-    coherence-point-pointed-2-htpy = pr2 α
+  coherence-point-pointed-2-htpy :
+    coherence-point-unpointed-htpy-pointed-htpy H K htpy-pointed-2-htpy
+  coherence-point-pointed-2-htpy = pr2 α
 
-    preserves-point-pointed-2-htpy :
-      preserves-point-unpointed-htpy-pointed-Π
-        ( make-uniform-pointed-htpy
-          ( htpy-pointed-htpy H)
-          ( coherence-point-pointed-htpy H))
-        ( make-uniform-pointed-htpy
-          ( htpy-pointed-htpy K)
-          ( coherence-point-pointed-htpy K))
-        ( htpy-pointed-2-htpy)
-    preserves-point-pointed-2-htpy =
-      transpose-right-coherence-triangle-identifications
+  preserves-point-pointed-2-htpy :
+    preserves-point-unpointed-htpy-pointed-Π
+      ( make-uniform-pointed-htpy
+        ( htpy-pointed-htpy H)
+        ( coherence-point-pointed-htpy H))
+      ( make-uniform-pointed-htpy
+        ( htpy-pointed-htpy K)
+        ( coherence-point-pointed-htpy K))
+      ( htpy-pointed-2-htpy)
+  preserves-point-pointed-2-htpy =
+    transpose-right-coherence-triangle-identifications
+      ( htpy-pointed-2-htpy (point-Pointed-Type A))
+      ( preserves-point-pointed-htpy K)
+      ( preserves-point-pointed-htpy H)
+      ( refl)
+      ( higher-transpose-right-coherence-triangle-identifications
+        ( htpy-pointed-htpy H (point-Pointed-Type A))
+        ( preserves-point-function-pointed-Π g)
+        ( preserves-point-function-pointed-Π f)
         ( htpy-pointed-2-htpy (point-Pointed-Type A))
-        ( preserves-point-pointed-htpy K)
-        ( preserves-point-pointed-htpy H)
         ( refl)
-        ( higher-transpose-right-coherence-triangle-identifications
-          ( htpy-pointed-htpy H (point-Pointed-Type A))
-          ( preserves-point-function-pointed-Π g)
-          ( preserves-point-function-pointed-Π f)
-          ( htpy-pointed-2-htpy (point-Pointed-Type A))
-          ( refl)
-          ( coherence-point-pointed-htpy H)
-          ( coherence-point-pointed-htpy K)
-          ( coherence-point-pointed-2-htpy))
+        ( coherence-point-pointed-htpy H)
+        ( coherence-point-pointed-htpy K)
+        ( coherence-point-pointed-2-htpy))
 
-    uniform-pointed-htpy-pointed-2-htpy :
-      uniform-pointed-htpy
-        ( uniform-pointed-htpy-pointed-htpy H)
-        ( uniform-pointed-htpy-pointed-htpy K)
-    pr1 uniform-pointed-htpy-pointed-2-htpy =
-      htpy-pointed-2-htpy
-    pr2 uniform-pointed-htpy-pointed-2-htpy =
-      preserves-point-pointed-2-htpy
+  uniform-pointed-htpy-pointed-2-htpy :
+    uniform-pointed-htpy
+      ( uniform-pointed-htpy-pointed-htpy H)
+      ( uniform-pointed-htpy-pointed-htpy K)
+  pr1 uniform-pointed-htpy-pointed-2-htpy =
+    htpy-pointed-2-htpy
+  pr2 uniform-pointed-htpy-pointed-2-htpy =
+    preserves-point-pointed-2-htpy
 ```
 
 ### The reflexive pointed 2-homotopy
@@ -202,6 +204,41 @@ module _
 
 ### Concatenation of pointed 2-homotopies
 
+Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)` and three pointed homotopies `H := (H₀ , H₁)`, `K := (K₀ , K₁)`, and `L := (L₀ , L₁)` between them. Furthermore, consider two pointed 2-homotopies `α := (α₀ , α₁) : H ~²∗ K` and `β := (β₀ , β₁) : K ~²∗ L`. The underlying homotopy of the concatenation `α ∙h β` is simply the concatenation of homotopies
+
+```text
+  (α ∙h β)₀ := α₀ ∙h β₀.
+```
+
+The base point coherence `(α ∙h β)₁`  is an identification witnessing that the triangle
+
+```text
+        H₁
+  f₁ ------> (H₀ *) ∙ h₁
+    \       /
+  L₁ \     / right-whisker-concat ((α₀ *) ∙h (β₀ *)) g₁
+      \   /
+       ∨ ∨
+   (L₀ *) ∙ h₁
+```
+
+commutes. Note that right whiskering of identifications with respect to concatenation distributes over concatenation. The identification witnessing the commutativity of the above triangle can therefore be constructed by constructing an identification witnessing that the triangle
+
+```text
+           H₁
+  f₁ ----------> (H₀ *) ∙ h₁
+    \             /
+     \           / right-whisker-concat (α₀ *) g₁
+      \         ∨
+    L₁ \    (K₀ *) ∙ h₁
+        \     /
+         \   / right-whisker-concat (β₀ *) g₁
+          ∨ ∨
+      (L₀ *) ∙ h₁
+```
+
+commutes. This triangle commutes by right pasting of commuting triangles of identifications.
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
@@ -211,28 +248,22 @@ module _
   htpy-concat-pointed-2-htpy :
     unpointed-htpy-pointed-htpy H L
   htpy-concat-pointed-2-htpy =
-    htpy-pointed-2-htpy H K α ∙h htpy-pointed-2-htpy K L β
+    htpy-pointed-2-htpy α ∙h htpy-pointed-2-htpy β
 
   coherence-point-concat-pointed-2-htpy :
     coherence-point-unpointed-htpy-pointed-htpy H L htpy-concat-pointed-2-htpy
   coherence-point-concat-pointed-2-htpy =
-    ( coherence-point-pointed-2-htpy K L β) ∙
-    ( ( right-whisker-concat
-        ( coherence-point-pointed-2-htpy H K α)
-        ( right-whisker-concat
-          ( htpy-pointed-2-htpy K L β (point-Pointed-Type A))
-          ( preserves-point-function-pointed-Π g))) ∙
-      ( ( assoc
-          ( coherence-point-pointed-htpy H)
-          ( _)
-          ( _)) ∙
-        ( inv
-          ( left-whisker-concat
-            ( coherence-point-pointed-htpy H)
-            ( ap-concat
-              ( _∙ pr2 g)
-              ( htpy-pointed-2-htpy H K α _)
-              ( htpy-pointed-2-htpy K L β _))))))
+    ( right-pasting-coherence-triangle-identifications _ _ _ _
+      ( coherence-point-pointed-htpy H)
+      ( coherence-point-pointed-2-htpy β)
+      ( coherence-point-pointed-2-htpy α)) ∙
+    ( inv
+      ( left-whisker-concat
+        ( coherence-point-pointed-htpy H)
+        ( distributive-right-whisker-concat-concat
+          ( htpy-pointed-2-htpy α _)
+          ( htpy-pointed-2-htpy β _)
+          ( preserves-point-function-pointed-Π g))))
 
   concat-pointed-2-htpy : H ~²∗ L
   pr1 concat-pointed-2-htpy = htpy-concat-pointed-2-htpy
@@ -249,17 +280,17 @@ module _
 
   htpy-inv-pointed-2-htpy :
     unpointed-htpy-pointed-htpy K H
-  htpy-inv-pointed-2-htpy = inv-htpy (htpy-pointed-2-htpy _ _ α)
+  htpy-inv-pointed-2-htpy = inv-htpy (htpy-pointed-2-htpy α)
 
   coherence-point-inv-pointed-2-htpy :
     coherence-point-unpointed-htpy-pointed-htpy K H htpy-inv-pointed-2-htpy
   coherence-point-inv-pointed-2-htpy =
     transpose-right-coherence-triangle-identifications
       ( coherence-point-pointed-htpy H)
-      ( right-whisker-concat (htpy-pointed-2-htpy H K α _) _)
+      ( right-whisker-concat (htpy-pointed-2-htpy α _) _)
       ( coherence-point-pointed-htpy K)
-      ( inv (ap-inv _ (htpy-pointed-2-htpy H K α _)))
-      ( coherence-point-pointed-2-htpy H K α)
+      ( inv (ap-inv _ (htpy-pointed-2-htpy α _)))
+      ( coherence-point-pointed-2-htpy α)
 
   inv-pointed-2-htpy : K ~²∗ H
   pr1 inv-pointed-2-htpy = htpy-inv-pointed-2-htpy

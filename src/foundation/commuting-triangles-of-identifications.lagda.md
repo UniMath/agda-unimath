@@ -1010,6 +1010,193 @@ module _
     refl
 ```
 
+### Right pasting of commuting triangles of identifications
+
+Consider a commuting diagram of identifications of the form
+
+```text
+          top
+   a ------------> b
+    \ ⎻⎽          /
+     \  ⎺⎽ mid   / top-right
+      \   ⎺⎽    ∨
+  left \    ⎺> c
+        \     /
+         \   / bottom-right
+          ∨ ∨
+           d
+
+```
+
+Then the outer triangle commutes too. Indeed, an identification
+`left ＝ mid ∙ bottom-right` is given. Then, an identification
+
+```text
+  mid ∙ bottom-right ＝ top ∙ (top-right ∙ bottom-right)
+```
+
+is obtained immediately by right whiskering the upper triangle with the
+identification `bottom-right`. Note that this direct construction of the
+coherence of the outer commuting triangle of identifications avoids any use of
+associativity.
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  (left : a ＝ d) (top-right : b ＝ c) (bottom-right : c ＝ d)
+  (middle : a ＝ c) (top : a ＝ b)
+  where
+
+  right-pasting-coherence-triangle-identifications :
+    (s : coherence-triangle-identifications left bottom-right middle) →
+    (t : coherence-triangle-identifications middle top-right top) →
+    coherence-triangle-identifications left (top-right ∙ bottom-right) top
+  right-pasting-coherence-triangle-identifications s t =
+    ( s) ∙
+    ( right-whisker-concat-coherence-triangle-identifications
+      ( middle)
+      ( top-right)
+      ( top)
+      ( bottom-right)
+      ( t))
+```
+
+### Right pasting commuting triangles of identifications is a binary equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c d : A}
+  (left : a ＝ d) (top-right : b ＝ c) (bottom-right : c ＝ d)
+  (middle : a ＝ c) (top : a ＝ b)
+  where
+
+  abstract
+    is-equiv-right-pasting-coherence-triangle-identifications :
+      (s : coherence-triangle-identifications left bottom-right middle) →
+      is-equiv
+        ( right-pasting-coherence-triangle-identifications
+          ( left)
+          ( top-right)
+          ( bottom-right)
+          ( middle)
+          ( top)
+          ( s))
+    is-equiv-right-pasting-coherence-triangle-identifications s =
+      is-equiv-comp _ _
+        ( is-equiv-right-whisker-concat-coherence-triangle-identifications
+          ( middle)
+          ( top-right)
+          ( top)
+          ( bottom-right))
+        ( is-equiv-concat s _)
+
+  equiv-right-pasting-coherence-triangle-identifications :
+    (s : coherence-triangle-identifications left bottom-right middle) →
+    coherence-triangle-identifications middle top-right top ≃
+    coherence-triangle-identifications left (top-right ∙ bottom-right) top
+  pr1 (equiv-right-pasting-coherence-triangle-identifications s) =
+    right-pasting-coherence-triangle-identifications
+      ( left)
+      ( top-right)
+      ( bottom-right)
+      ( middle)
+      ( top)
+      ( s)
+  pr2 (equiv-right-pasting-coherence-triangle-identifications s) =
+    is-equiv-right-pasting-coherence-triangle-identifications s
+
+  abstract
+    is-equiv-right-pasting-coherence-triangle-identifications' :
+      (t : coherence-triangle-identifications middle top-right top) →
+      is-equiv
+        ( λ (s : coherence-triangle-identifications left bottom-right middle) →
+          right-pasting-coherence-triangle-identifications
+            ( left)
+            ( top-right)
+            ( bottom-right)
+            ( middle)
+            ( top)
+            ( s)
+            ( t))
+    is-equiv-right-pasting-coherence-triangle-identifications' t =
+      is-equiv-concat' _
+        ( right-whisker-concat-coherence-triangle-identifications
+          ( middle)
+          ( top-right)
+          ( top)
+          ( bottom-right)
+          ( t))
+
+  equiv-right-pasting-coherence-triangle-identifications' :
+    (t : coherence-triangle-identifications middle top-right top) →
+    coherence-triangle-identifications left bottom-right middle ≃
+    coherence-triangle-identifications left (top-right ∙ bottom-right) top
+  pr1 (equiv-right-pasting-coherence-triangle-identifications' t) s =
+    right-pasting-coherence-triangle-identifications
+      ( left)
+      ( top-right)
+      ( bottom-right)
+      ( middle)
+      ( top)
+      ( s)
+      ( t)
+  pr2 (equiv-right-pasting-coherence-triangle-identifications' t) =
+    is-equiv-right-pasting-coherence-triangle-identifications' t
+
+  is-binary-equiv-right-pasting-coherence-triangle-identifications :
+    is-binary-equiv
+      ( right-pasting-coherence-triangle-identifications
+        ( left)
+        ( top-right)
+        ( bottom-right)
+        ( middle)
+        ( top))
+  pr1 is-binary-equiv-right-pasting-coherence-triangle-identifications =
+    is-equiv-right-pasting-coherence-triangle-identifications'
+  pr2 is-binary-equiv-right-pasting-coherence-triangle-identifications =
+    is-equiv-right-pasting-coherence-triangle-identifications
+```
+
+### Left pasting of commuting triangles of identifications
+
+**Note.** For left pasting there are two potential constructions. One takes a commuting diagram of identifications of the form
+
+```text
+                top
+         a ------------> b
+          \          ⎽⎻ /
+  top-left \     m ⎽⎺  /
+            ∨    ⎽⎺   /
+             c <⎺    / right
+              \     /
+   bottom-left \   /
+                ∨ ∨
+                 d
+
+```
+
+and returns an identification witnessing that the outer triangle commutes. In this case the top triangle is an ordinary commuting triangle of identifications, and the bottom triangle is inverted along the top edge `m`.
+
+The other left pasting of commuting triangles of identifications takes a commuting diagram of identifications of the form
+
+```text
+                top
+         a ------------> b
+          \         ⎽-> /
+  top-left \    m ⎽⎺   /
+            ∨   ⎽⎺    /
+             c ⎺     / right
+              \     /
+   bottom-left \   /
+                ∨ ∨
+                 d
+
+```
+
+and returns an identification witnessing that the outer rectangle commutes. In this case the bottom triangle of identifications is an ordinary commuting triangle of identifications, and the top triangle is inverted along the right edge `m`.
+
+Both constructions have yet to be formalized.
+
 ### Vertically pasting commuting squares and commuting triangles of identifications
 
 Consider a diagram of the form
