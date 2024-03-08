@@ -10,6 +10,7 @@ module structured-types.pointed-homotopies where
 open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.commuting-triangles-of-identifications
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -466,6 +467,58 @@ module _
     htpy-right-unit-law-comp-pointed-map
   pr2 right-unit-law-comp-pointed-map =
     coherence-right-unit-law-comp-pointed-map
+```
+
+### Concatenation of pointed homotopies is a binary equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g h : pointed-Π A B}
+  where
+
+  abstract
+    is-equiv-concat-pointed-htpy :
+      (G : f ~∗ g) → is-equiv (λ (H : g ~∗ h) → concat-pointed-htpy G H)
+    is-equiv-concat-pointed-htpy G =
+      is-equiv-map-Σ _
+        ( is-equiv-concat-htpy (htpy-pointed-htpy G) _)
+        ( λ H →
+          is-equiv-horizontal-pasting-coherence-triangle-identifications
+            ( preserves-point-function-pointed-Π f)
+            ( preserves-point-function-pointed-Π g)
+            ( preserves-point-function-pointed-Π h)
+            ( htpy-pointed-htpy G _)
+            ( H _)
+            ( coherence-point-pointed-htpy G))
+
+  equiv-concat-pointed-htpy : f ~∗ g → (g ~∗ h) ≃ (f ~∗ h)
+  pr1 (equiv-concat-pointed-htpy G) = concat-pointed-htpy G
+  pr2 (equiv-concat-pointed-htpy G) = is-equiv-concat-pointed-htpy G
+
+  abstract
+    is-equiv-concat-pointed-htpy' :
+      (H : g ~∗ h) → is-equiv (λ (G : f ~∗ g) → concat-pointed-htpy G H)
+    is-equiv-concat-pointed-htpy' H =
+      is-equiv-map-Σ _
+        ( is-equiv-concat-htpy' _ (htpy-pointed-htpy H))
+        ( λ G →
+          is-equiv-horizontal-pasting-coherence-triangle-identifications'
+            ( preserves-point-function-pointed-Π f)
+            ( preserves-point-function-pointed-Π g)
+            ( preserves-point-function-pointed-Π h)
+            ( G _)
+            ( htpy-pointed-htpy H _)
+            ( coherence-point-pointed-htpy H))
+
+  equiv-concat-pointed-htpy' : g ~∗ h → (f ~∗ g) ≃ (f ~∗ h)
+  pr1 (equiv-concat-pointed-htpy' H) G = concat-pointed-htpy G H
+  pr2 (equiv-concat-pointed-htpy' H) = is-equiv-concat-pointed-htpy' H
+
+  is-binary-equiv-concat-pointed-htpy :
+    is-binary-equiv (λ (G : f ~∗ g) (H : g ~∗ h) → concat-pointed-htpy G H)
+  pr1 is-binary-equiv-concat-pointed-htpy = is-equiv-concat-pointed-htpy'
+  pr2 is-binary-equiv-concat-pointed-htpy = is-equiv-concat-pointed-htpy
 ```
 
 ## See also

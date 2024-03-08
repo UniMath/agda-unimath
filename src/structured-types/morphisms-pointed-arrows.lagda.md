@@ -330,13 +330,13 @@ witnessing that the
 [square of pointed homotopies](structured-types.commuting-squares-of-pointed-homotopies.md)
 
 ```text
-           J ·r f
-  (j ∘ f) --------> (j' ∘ f)
-     |                 |
-   H |                 | H'
-     V                 V
-  (g ∘ i) --------> (g ∘ i')
-           g ·l I
+            J ·r f
+  (j ∘∗ f) --------> (j' ∘∗ f)
+     |                   |
+   H |                   | H'
+     ∨                   ∨
+  (g ∘∗ i) ---------> (g ∘∗ i')
+             g ·l I
 ```
 
 commutes.
@@ -504,9 +504,9 @@ module _
       ( is-torsorial-Eq-structure
         ( is-torsorial-pointed-htpy _)
         ( pointed-map-codomain-hom-pointed-arrow f g α , refl-pointed-htpy _)
-        ( is-contr-equiv _
+        ( is-contr-equiv' _
           ( equiv-tot
-            ( λ H → {!!}))
+            ( λ H → {!equiv-concat-pointed-htpy!}))
           ( is-torsorial-pointed-2-htpy
             ( concat-pointed-htpy
               ( coh-hom-pointed-arrow f g α)

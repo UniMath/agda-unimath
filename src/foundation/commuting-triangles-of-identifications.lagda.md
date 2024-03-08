@@ -8,6 +8,7 @@ module foundation.commuting-triangles-of-identifications where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -184,6 +185,13 @@ module _
   left-unwhisker-concat-coherence-triangle-identifications =
     map-inv-equiv equiv-left-whisker-concat-coherence-triangle-identifications
 
+  is-equiv-left-whisker-concat-coherence-triangle-identifications :
+    is-equiv
+      ( left-whisker-concat-coherence-triangle-identifications)
+  is-equiv-left-whisker-concat-coherence-triangle-identifications =
+    is-equiv-map-equiv
+      equiv-left-whisker-concat-coherence-triangle-identifications
+
   equiv-left-whisker-concat-coherence-triangle-identifications' :
     coherence-triangle-identifications' left right top ≃
     coherence-triangle-identifications' (p ∙ left) right (p ∙ top)
@@ -202,6 +210,12 @@ module _
     coherence-triangle-identifications' left right top
   left-unwhisker-concat-coherence-triangle-identifications' =
     map-inv-equiv equiv-left-whisker-concat-coherence-triangle-identifications'
+
+  is-equiv-left-whisker-concat-coherence-triangle-identifications' :
+    is-equiv left-whisker-concat-coherence-triangle-identifications'
+  is-equiv-left-whisker-concat-coherence-triangle-identifications' =
+    is-equiv-map-equiv
+      equiv-left-whisker-concat-coherence-triangle-identifications'
 ```
 
 #### Right whiskering commuting squares of identifications
@@ -244,6 +258,12 @@ module _
   right-unwhisker-concat-coherence-triangle-identifications =
     map-inv-equiv equiv-right-whisker-concat-coherence-triangle-identifications
 
+  is-equiv-right-whisker-concat-coherence-triangle-identifications :
+    is-equiv right-whisker-concat-coherence-triangle-identifications
+  is-equiv-right-whisker-concat-coherence-triangle-identifications =
+    is-equiv-map-equiv
+      equiv-right-whisker-concat-coherence-triangle-identifications
+
   equiv-right-whisker-concat-coherence-triangle-identifications' :
     coherence-triangle-identifications' left right top ≃
     coherence-triangle-identifications' (left ∙ p) (right ∙ p) top
@@ -262,6 +282,12 @@ module _
     coherence-triangle-identifications' left right top
   right-unwhisker-concat-coherence-triangle-identifications' =
     map-inv-equiv equiv-right-whisker-concat-coherence-triangle-identifications'
+
+  is-equiv-right-whisker-concat-coherence-triangle-identifications' :
+    is-equiv right-whisker-concat-coherence-triangle-identifications'
+  is-equiv-right-whisker-concat-coherence-triangle-identifications' =
+    is-equiv-map-equiv
+      equiv-right-whisker-concat-coherence-triangle-identifications'
 ```
 
 #### Splicing a pair of mutual inverse identifications in a commuting triangle of identifications
@@ -654,6 +680,96 @@ module _
       ( right)
       ( top-right)
       ( t))
+```
+
+### Horizontal pasting of commuting triangles of identifications is a binary equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  {a b c d : A} (left : a ＝ d) (middle : b ＝ d) (right : c ＝ d)
+  (top-left : a ＝ b) (top-right : b ＝ c)
+  where
+
+  abstract
+    is-equiv-horizontal-pasting-coherence-triangle-identifications :
+      (s : coherence-triangle-identifications left middle top-left) →
+      is-equiv
+        ( horizontal-pasting-coherence-triangle-identifications
+          ( left)
+          ( middle)
+          ( right)
+          ( top-left)
+          ( top-right)
+          ( s))
+    is-equiv-horizontal-pasting-coherence-triangle-identifications s =
+      is-equiv-comp _ _
+        ( is-equiv-left-whisker-concat-coherence-triangle-identifications
+          ( top-left)
+          ( middle)
+          ( right)
+          ( top-right))
+        ( is-equiv-concat s _)
+
+  equiv-horizontal-pasting-coherence-triangle-identifications :
+    (s : coherence-triangle-identifications left middle top-left) →
+    coherence-triangle-identifications middle right top-right ≃
+    coherence-triangle-identifications left right (top-left ∙ top-right)
+  pr1 (equiv-horizontal-pasting-coherence-triangle-identifications s) =
+    horizontal-pasting-coherence-triangle-identifications _ _ _ _ _ s
+  pr2 (equiv-horizontal-pasting-coherence-triangle-identifications s) =
+    is-equiv-horizontal-pasting-coherence-triangle-identifications s
+
+  abstract
+    is-equiv-horizontal-pasting-coherence-triangle-identifications' :
+      (t : coherence-triangle-identifications middle right top-right) →
+      is-equiv
+        ( λ s →
+          horizontal-pasting-coherence-triangle-identifications
+            ( left)
+            ( middle)
+            ( right)
+            ( top-left)
+            ( top-right)
+            ( s)
+            ( t))
+    is-equiv-horizontal-pasting-coherence-triangle-identifications' t =
+      is-equiv-concat' _
+        ( left-whisker-concat-coherence-triangle-identifications
+          ( top-left)
+          ( middle)
+          ( right)
+          ( top-right)
+          ( t))
+
+  equiv-horizontal-pasting-coherence-triangle-identifications' :
+    (t : coherence-triangle-identifications middle right top-right) →
+    coherence-triangle-identifications left middle top-left ≃
+    coherence-triangle-identifications left right (top-left ∙ top-right)
+  pr1 (equiv-horizontal-pasting-coherence-triangle-identifications' t) s =
+    horizontal-pasting-coherence-triangle-identifications
+      ( left)
+      ( middle)
+      ( right)
+      ( top-left)
+      ( top-right)
+      ( s)
+      ( t)
+  pr2 (equiv-horizontal-pasting-coherence-triangle-identifications' t) =
+    is-equiv-horizontal-pasting-coherence-triangle-identifications' t
+
+  is-binary-equiv-horizontal-pasting-coherence-triangle-identifications :
+    is-binary-equiv
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( middle)
+        ( right)
+        ( top-left)
+        ( top-right))
+  pr1 is-binary-equiv-horizontal-pasting-coherence-triangle-identifications =
+    is-equiv-horizontal-pasting-coherence-triangle-identifications'
+  pr2 is-binary-equiv-horizontal-pasting-coherence-triangle-identifications =
+    is-equiv-horizontal-pasting-coherence-triangle-identifications
 ```
 
 ### Associativity of horizontal pasting of coherences of commuting triangles of identifications
