@@ -336,8 +336,8 @@ hom-Prop :
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
 pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
 
-infixr 5 _⇒₍₋₁₎_
-_⇒₍₋₁₎_ = hom-Prop
+infixr 5 _→₍₋₁₎_
+_→₍₋₁₎_ = hom-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition

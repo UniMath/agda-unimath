@@ -88,7 +88,7 @@ module _
             ( λ q → ¬₍₋₁₎ ((L q) ∧₍₋₁₎ (U q))))
           ( Π-Prop ℚ
             ( λ q →
-              Π₍₋₁₎ ℚ (λ r → (le-ℚ-Prop q r) ⇒₍₋₁₎ ((L q) ∨₍₋₁₎ (U r)))))))
+              Π₍₋₁₎ ℚ (λ r → (le-ℚ-Prop q r) →₍₋₁₎ ((L q) ∨₍₋₁₎ (U r)))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop

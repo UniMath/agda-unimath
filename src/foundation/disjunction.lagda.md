@@ -147,10 +147,10 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  inl-disjunction-Prop : type-Prop (P ⇒₍₋₁₎ (P ∨₍₋₁₎ Q))
+  inl-disjunction-Prop : type-Prop (P →₍₋₁₎ (P ∨₍₋₁₎ Q))
   inl-disjunction-Prop = inl-disjunction (type-Prop P) (type-Prop Q)
 
-  inr-disjunction-Prop : type-Prop (Q ⇒₍₋₁₎ (P ∨₍₋₁₎ Q))
+  inr-disjunction-Prop : type-Prop (Q →₍₋₁₎ (P ∨₍₋₁₎ Q))
   inr-disjunction-Prop = inr-disjunction (type-Prop P) (type-Prop Q)
 ```
 
@@ -192,7 +192,7 @@ module _
 
   prop-ev-disjunction-Prop : Prop (l1 ⊔ l2 ⊔ l3)
   prop-ev-disjunction-Prop =
-    ((P ∨₍₋₁₎ Q) ⇒₍₋₁₎ R) ⇒₍₋₁₎ ((P ⇒₍₋₁₎ R) ∧₍₋₁₎ (Q ⇒₍₋₁₎ R))
+    ((P ∨₍₋₁₎ Q) →₍₋₁₎ R) →₍₋₁₎ ((P →₍₋₁₎ R) ∧₍₋₁₎ (Q →₍₋₁₎ R))
 
   ev-disjunction-Prop : type-Prop prop-ev-disjunction-Prop
   ev-disjunction-Prop = ev-disjunction (type-Prop P) (type-Prop Q) R
@@ -220,7 +220,7 @@ module _
 
   prop-rec-disjunction-Prop : Prop (l1 ⊔ l2 ⊔ l3)
   prop-rec-disjunction-Prop =
-    (P ⇒₍₋₁₎ R) ⇒₍₋₁₎ (Q ⇒₍₋₁₎ R) ⇒₍₋₁₎ ((P ∨₍₋₁₎ Q) ⇒₍₋₁₎ R)
+    (P →₍₋₁₎ R) →₍₋₁₎ (Q →₍₋₁₎ R) →₍₋₁₎ ((P ∨₍₋₁₎ Q) →₍₋₁₎ R)
 
   rec-disjunction-Prop :
     type-Prop prop-rec-disjunction-Prop

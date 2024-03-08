@@ -82,7 +82,7 @@ equiv-impredicative-trunc-Prop A =
 impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-conjunction-Prop {l1} {l2} P1 P2 =
-  Π₍₋₁₎ (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒₍₋₁₎ (P2 ⇒₍₋₁₎ Q)) ⇒₍₋₁₎ Q)
+  Π₍₋₁₎ (Prop (l1 ⊔ l2)) (λ Q → (P1 →₍₋₁₎ (P2 →₍₋₁₎ Q)) →₍₋₁₎ Q)
 
 type-impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -116,7 +116,7 @@ equiv-impredicative-conjunction-Prop P1 P2 =
 impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-disjunction-Prop {l1} {l2} P1 P2 =
-  Π₍₋₁₎ (Prop (l1 ⊔ l2)) (λ Q → (P1 ⇒₍₋₁₎ Q) ⇒₍₋₁₎ ((P2 ⇒₍₋₁₎ Q) ⇒₍₋₁₎ Q))
+  Π₍₋₁₎ (Prop (l1 ⊔ l2)) (λ Q → (P1 →₍₋₁₎ Q) →₍₋₁₎ ((P2 →₍₋₁₎ Q) →₍₋₁₎ Q))
 
 type-impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -194,7 +194,7 @@ impredicative-exists-Prop :
 impredicative-exists-Prop {l1} {l2} {A} P =
   Π₍₋₁₎
     ( Prop (l1 ⊔ l2))
-    ( λ Q → (Π₍₋₁₎ A (λ x → (P x) ⇒₍₋₁₎ Q)) ⇒₍₋₁₎ Q)
+    ( λ Q → (Π₍₋₁₎ A (λ x → (P x) →₍₋₁₎ Q)) →₍₋₁₎ Q)
 
 type-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) → UU (lsuc (l1 ⊔ l2))
@@ -232,7 +232,7 @@ equiv-impredicative-exists-Prop {A = A} P =
 impredicative-based-id-Prop :
   {l : Level} (A : Set l) (a x : type-Set A) → Prop (lsuc l)
 impredicative-based-id-Prop {l} A a x =
-  Π₍₋₁₎ (type-Set A → Prop l) (λ Q → (Q a) ⇒₍₋₁₎ (Q x))
+  Π₍₋₁₎ (type-Set A → Prop l) (λ Q → (Q a) →₍₋₁₎ (Q x))
 
 type-impredicative-based-id-Prop :
   {l : Level} (A : Set l) (a x : type-Set A) → UU (lsuc l)
@@ -269,7 +269,7 @@ impredicative-id-Prop :
 impredicative-id-Prop {l} A x y =
   Π₍₋₁₎
     ( type-Set A → type-Set A → Prop l)
-    ( λ Q → (Π₍₋₁₎ (type-Set A) (λ a → Q a a)) ⇒₍₋₁₎ (Q x y))
+    ( λ Q → (Π₍₋₁₎ (type-Set A) (λ a → Q a a)) →₍₋₁₎ (Q x y))
 
 type-impredicative-id-Prop :
   {l : Level} (A : Set l) (x y : type-Set A) → UU (lsuc l)
