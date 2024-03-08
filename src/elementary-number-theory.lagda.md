@@ -87,6 +87,7 @@ open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
+open import elementary-number-theory.multiplication-positive-and-negative-integers public
 open import elementary-number-theory.multiplication-rational-numbers public
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
 open import elementary-number-theory.multiplicative-units-integers public

@@ -44,20 +44,20 @@ open import foundation.universe-levels
 
 ## Idea
 
-Multiplication of positive, negative, nonnegative and nonpositive integers follows the
-following rules:
+Multiplication of positive, negative, nonnegative and nonpositive integers
+follows the following rules:
 
-| `p`         | `q`         | `p *ℤ q`    | operation           |
-|:-----------:|:-----------:|:-----------:|---------------------|
-| positive    | positive    | positive    | `mul-positive-ℤ`    |
-| positive    | nonnegative | nonnegative |                     |
-| positive    | negative    | negative    |                     |
-| positive    | nonpositive | nonpositive |                     |
+|     `p`     |     `q`     |  `p *ℤ q`   | operation           |
+| :---------: | :---------: | :---------: | ------------------- |
+|  positive   |  positive   |  positive   | `mul-positive-ℤ`    |
+|  positive   | nonnegative | nonnegative |                     |
+|  positive   |  negative   |  negative   |                     |
+|  positive   | nonpositive | nonpositive |                     |
 | nonnegative | nonnegative | nonnegative | `mul-nonnegative-ℤ` |
-| nonnegative | negative    | nonpositive |                     |
+| nonnegative |  negative   | nonpositive |                     |
 | nonnegative | nonpositive | nonpositive |                     |
-| negative    | negative    | positive    | `mul-negative-ℤ`    |
-| negative    | nonpositive | nonnegative |                     |
+|  negative   |  negative   |  positive   | `mul-negative-ℤ`    |
+|  negative   | nonpositive | nonnegative |                     |
 | nonpositive | nonpositive | nonnegative | `mul-nonpositive-ℤ` |
 
 ## Properties
