@@ -83,6 +83,13 @@ module _
   _↔₍₋₁₎_ = iff-Prop
 ```
 
+### The identity logical equivalence
+
+```agda
+id-iff : {l1 : Level} {A : UU l1} → A ↔ A
+id-iff = id , id
+```
+
 ### Composition of logical equivalences
 
 ```agda

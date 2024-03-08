@@ -49,11 +49,11 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-The **set truncation** of a type `A` is a map `η : A → trunc-Set A` that
-satisfies
+The {{#concept "set truncation" Agda=trunc-Set}} of a type `A` is a map
+`η : A → trunc-Set A` that satisfies
 [the universal property of set truncations](foundation.universal-property-set-truncation.md).
 
-## Definition
+## Definitions
 
 ```agda
 trunc-Set : {l : Level} → UU l → Set l

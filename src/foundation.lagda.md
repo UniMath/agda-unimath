@@ -29,6 +29,7 @@ open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
+open import foundation.biimplication public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public

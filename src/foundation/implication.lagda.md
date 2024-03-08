@@ -104,3 +104,7 @@ module _
           ( λ g → unit-trunc-Prop (g ∘ f))
           ( |g|))
 ```
+
+## See also
+
+- [Biimplication of types](foundation.biimplication.md)
