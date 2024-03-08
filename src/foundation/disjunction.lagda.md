@@ -9,15 +9,15 @@ module foundation.disjunction where
 ```agda
 open import foundation.conjunction
 open import foundation.decidable-types
-open import foundation.inhabited-types
 open import foundation.dependent-pair-types
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
-open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
@@ -111,7 +111,8 @@ module _
       ( prop-Decidable-Prop P)
       ( prop-Decidable-Prop Q)
 
-  is-decidable-type-disjunction-Decidable-Prop : is-decidable type-disjunction-Decidable-Prop
+  is-decidable-type-disjunction-Decidable-Prop :
+    is-decidable type-disjunction-Decidable-Prop
   is-decidable-type-disjunction-Decidable-Prop =
     is-decidable-trunc-Prop-is-merely-decidable
       ( type-Decidable-Prop P + type-Decidable-Prop Q)
@@ -139,7 +140,7 @@ module _
   inl-disjunction : A → A ∨ B
   inl-disjunction = unit-trunc-Prop ∘ inl
 
-  inr-disjunction : B →  A ∨ B
+  inr-disjunction : B → A ∨ B
   inr-disjunction = unit-trunc-Prop ∘ inr
 
 module _

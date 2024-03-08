@@ -60,7 +60,6 @@ module _
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive = type-Prop is-cotransitive-Prop
 
-
   is-apartness-relation : UU (l1 ⊔ l2)
   is-apartness-relation =
     ( is-antireflexive) ×
