@@ -26,12 +26,11 @@ open import foundation-core.propositions
 
 ## Idea
 
-The {{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop}}
-of two types `A` and `B` is the [proposition](foundation-core.propositions.md)
-that either `A` or `B` are [inhabited](foundation.inhabited-types.md). It is
-defined as the
-[propositional truncation](foundation.propositional-truncations.md) of their
-[coproduct](foundation-core.coproduct-types.md).
+The {{#concept "disjunction" Disambiguation="of types" Agda=disjunction}} of two
+types `A` and `B` is the [proposition](foundation-core.propositions.md) that
+either `A` or `B` are [inhabited](foundation.inhabited-types.md). It is defined
+as the [propositional truncation](foundation.propositional-truncations.md) of
+their [coproduct](foundation-core.coproduct-types.md).
 
 ```text
   A ∨ B := ║ A + B ║₋₁

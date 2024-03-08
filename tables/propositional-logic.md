@@ -13,6 +13,7 @@
 | Double negation                                      | [`foundation.double-negation`](foundation.double-negation.md)                                                           |
 | Conjunction of types                                 | [`foundation.conjunction`](foundation.conjunction.md)                                                                   |
 | Conjunction of propositions                          | [`foundation.conjunction-propositions`](foundation.conjunction-propositions.md)                                         |
+| Implication of types                                 | [`foundation.implication`](foundation.implication.md)                                                                   |
 | Disjunction of types                                 | [`foundation.disjunction`](foundation.disjunction.md)                                                                   |
 | Disjunction of propositions                          | [`foundation.disjunction-propositions`](foundation.disjunction-propositions.md)                                         |
 | Exclusive disjunction                                | [`foundation.exclusive-disjunction`](foundation.exclusive-disjunction.md)                                               |

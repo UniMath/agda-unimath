@@ -202,6 +202,7 @@ open import foundation.identity-truncated-types public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.images-subtypes public
+open import foundation.implication public
 open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings-propositions public
 open import foundation.impredicative-universes public
