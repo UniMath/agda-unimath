@@ -59,6 +59,12 @@ module _
             ( is-section-inv-concat' (H _) (inv q)))
           ( q)) ∙
         ( left-inv q))
+
+  cavallos-trick :
+    (f g : A →∗ B) → section (λ (H : id ~ id) → H (point-Pointed-Type B)) →
+    (map-pointed-map f ~ map-pointed-map g) → f ~∗ g
+  pr1 (cavallos-trick f g s H) = htpy-cavallos-trick f g s H
+  pr2 (cavallos-trick f g s H) = coherence-point-cavallos-trick f g s H
 ```
 
 ## References
