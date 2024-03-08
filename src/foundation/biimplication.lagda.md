@@ -9,6 +9,7 @@ module foundation.biimplication where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.implication
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -61,6 +62,49 @@ module _
   _⇔_ = biimplication
 ```
 
+### The identity biimplication
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  id-biimplication : A ⇔ A
+  id-biimplication = unit-trunc-Prop id-iff
+```
+
+### Composition of biimplications
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  comp-biimplication : B ⇔ C → A ⇔ B → A ⇔ C
+  comp-biimplication |g| =
+    rec-trunc-Prop
+      ( biimplication-prop A C)
+      ( λ f →
+        rec-trunc-Prop
+          ( biimplication-prop A C)
+          ( λ g → unit-trunc-Prop (g ∘iff f))
+          ( |g|))
+```
+
+### Biimplications are symmetric
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  inv-biimplication : A ⇔ B → B ⇔ A
+  inv-biimplication =
+    rec-trunc-Prop (biimplication-prop B A) (unit-trunc-Prop ∘ inv-iff)
+```
+
+## Properties
+
 ### Biimplied types are coinhabited
 
 If `A` and `B` are biimplied then they are coinhabited.
@@ -97,33 +141,83 @@ module _
     ( ev-forward-biimplication |f| , ev-backward-biimplication |f|)
 ```
 
-### The identity biimplication
+### Biimplied types are bidirectionally implied
+
+If `A ⇔ B` then `A ⇒ B` and `B ⇒ A`.
 
 ```agda
 module _
-  {l : Level} (A : UU l)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  id-biimplication : A ⇔ A
-  id-biimplication = unit-trunc-Prop id-iff
+  forward-implication-biimplication : A ⇔ B → A ⇒ B
+  forward-implication-biimplication =
+    rec-trunc-Prop
+      ( implication-prop A B)
+      ( unit-trunc-Prop ∘ forward-implication)
+
+  backward-implication-biimplication : A ⇔ B → B ⇒ A
+  backward-implication-biimplication =
+    rec-trunc-Prop
+      ( implication-prop B A)
+      ( unit-trunc-Prop ∘ backward-implication)
 ```
 
-### Composition of biimplications
+### Biimplication is equivalent to bidirectional implication
+
+For all types we have the equivalence
+
+```text
+  (A ⇔ B) ≃ (A ⇒ B) × (B ⇒ A).
+```
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  comp-biimplication : B ⇔ C → A ⇔ B → A ⇔ C
-  comp-biimplication |g| =
+  bidirectional-implication-biimplication : A ⇔ B → (A ⇒ B) × (B ⇒ A)
+  pr1 (bidirectional-implication-biimplication |f|) =
+    forward-implication-biimplication |f|
+  pr2 (bidirectional-implication-biimplication |f|) =
+    backward-implication-biimplication |f|
+
+  biimplication-bidirectional-implication : (A ⇒ B) × (B ⇒ A) → A ⇔ B
+  biimplication-bidirectional-implication (|f| , |g|) =
     rec-trunc-Prop
-      ( biimplication-prop A C)
+      ( biimplication-prop A B)
       ( λ f →
         rec-trunc-Prop
-          ( biimplication-prop A C)
-          ( λ g → unit-trunc-Prop (g ∘iff f))
+          ( biimplication-prop A B)
+          ( λ g → unit-trunc-Prop (f , g))
           ( |g|))
+      ( |f|)
+
+  is-equiv-bidirectional-implication-biimplication :
+    is-equiv bidirectional-implication-biimplication
+  is-equiv-bidirectional-implication-biimplication =
+    is-equiv-is-prop
+      ( is-prop-biimplication A B)
+      ( is-prop-product (is-prop-implication A B) (is-prop-implication B A))
+      ( biimplication-bidirectional-implication)
+
+  is-equiv-biimplication-bidirectional-implication :
+    is-equiv biimplication-bidirectional-implication
+  is-equiv-biimplication-bidirectional-implication =
+    is-equiv-is-prop
+      ( is-prop-product (is-prop-implication A B) (is-prop-implication B A))
+      ( is-prop-biimplication A B)
+      ( bidirectional-implication-biimplication)
+
+  equiv-bidirectional-implication-biimplication : (A ⇔ B) ≃ ((A ⇒ B) × (B ⇒ A))
+  equiv-bidirectional-implication-biimplication =
+    ( bidirectional-implication-biimplication ,
+      is-equiv-bidirectional-implication-biimplication)
+
+  equiv-biimplication-bidirectional-implication : ((A ⇒ B) × (B ⇒ A)) ≃ (A ⇔ B)
+  equiv-biimplication-bidirectional-implication =
+    ( biimplication-bidirectional-implication ,
+      is-equiv-biimplication-bidirectional-implication)
 ```
 
 ## See also
