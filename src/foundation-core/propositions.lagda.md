@@ -192,14 +192,28 @@ abstract
         ( λ p → K (pr1 y) (tr _ p (pr2 x)) (pr2 y)))
 
 Σ-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) →
-  Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) → Prop (l1 ⊔ l2)
 pr1 (Σ-Prop P Q) = Σ (type-Prop P) (λ p → type-Prop (Q p))
 pr2 (Σ-Prop P Q) =
   is-prop-Σ
     ( is-prop-type-Prop P)
     ( λ p → is-prop-type-Prop (Q p))
 ```
+
+We also introduce the special notation `Σ₍₋₁₎` for `Σ-Prop`.
+
+```agda
+Σ₍₋₁₎ :
+  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) → Prop (l1 ⊔ l2)
+Σ₍₋₁₎ = Σ-Prop
+```
+
+This is part of a general scheme where `Σ₍ₙ₎` takes an indexing
+$n$-[type](foundation-core.truncated-types.md) and a family of $n$-types over it
+as inputs, and spits out the $n$-type of dependent pairs. Note in particular
+that `Σ₍ₙ₎` should be read differently from the
+[existential quantification](fundation.existential-quantification.md)
+`∃₍ₙ₎`,whose underlying type is a proposition irrespective of $n$.
 
 ### Propositions are closed under cartesian product types
 
@@ -242,7 +256,7 @@ module _
   pr2 Π-Prop = is-prop-type-Π-Prop
 ```
 
-We also introduce the special syntax `Π₍₋₁₎` for `Π-Prop`.
+We also introduce the special notation `Π₍₋₁₎` for `Π-Prop`.
 
 ```agda
 Π₍₋₁₎ : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
@@ -252,8 +266,8 @@ We also introduce the special syntax `Π₍₋₁₎` for `Π-Prop`.
 This is part of a general scheme where `Π₍ₙ₎` takes an indexing type and a
 family of $n$-[types](foundation-core.truncated-types.md) over it as inputs, and
 spits out the $n$-type of dependent functions into the family. Note in
-particular that `Π₍ₙ₎` should be read differently from `∀₍ₙ₎`, which takes
-values in propositions irrespective of $n$.
+particular that `Π₍ₙ₎` should be read differently from the universal
+quantification `∀₍ₙ₎`, which takes values in propositions irrespective of $n$.
 
 We now repeat the above for implicit Π-types.
 
