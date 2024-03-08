@@ -95,7 +95,7 @@ homotopies between pointed dependent functions to be certain pointed dependent
 functions. This implies that the second definition is a uniform definition that
 can easily be iterated in order to consider pointed higher homotopies. For this
 reason, we call the second definition of pointed homotopies
-{{#concept "uniform pointed homotopies" Agda=uniform-pointed-htpy}}.
+{{#concept "uniform pointed homotopies"}}.
 
 A complication of this approach to the definition of pointed homotopies is that
 identifications witnessing the commutativity of the triangle in a pointed
