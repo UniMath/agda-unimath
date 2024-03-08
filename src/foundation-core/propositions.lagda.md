@@ -25,9 +25,11 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-A type is considered to be a proposition if its identity types are contractible.
-This condition is equivalent to the condition that it has up to identification
-at most one element.
+A type is a {{#concept "proposition"}} if its
+[identity types](foundation-core.identity-types.md) are
+[contractible](foundation-core.contractible-types.md). This condition is
+[equivalent](foundation-core.equivalences.md) to the condition that it has up to
+identification at most one element.
 
 ## Definitions
 
@@ -435,6 +437,10 @@ is-prop-Prop : {l : Level} (A : UU l) → Prop l
 pr1 (is-prop-Prop A) = is-prop A
 pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```
+
+## Operations on propositions
+
+{{#include tables/operations-propositions.md}}
 
 ## Table of files about propositional logic
 

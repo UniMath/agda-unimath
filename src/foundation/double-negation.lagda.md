@@ -61,6 +61,9 @@ double-negation-Prop P = double-negation-Prop' (type-Prop P)
 is-prop-double-negation :
   {l : Level} {A : UU l} → is-prop (¬¬ A)
 is-prop-double-negation = is-prop-neg
+
+¬¬₍₋₁₎ : {l : Level} (P : Prop l) → Prop l
+¬¬₍₋₁₎ = double-negation-Prop
 ```
 
 ### Double negations of classical laws

@@ -438,6 +438,7 @@ open import foundation.universal-property-set-quotients public
 open import foundation.universal-property-set-truncation public
 open import foundation.universal-property-truncation public
 open import foundation.universal-property-unit-type public
+open import foundation.universal-quantification public
 open import foundation.universe-levels public
 open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
