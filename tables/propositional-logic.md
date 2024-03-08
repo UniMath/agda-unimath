@@ -18,6 +18,7 @@
 | Disjunction of propositions                          | [`foundation.disjunction-propositions`](foundation.disjunction-propositions.md)                                         |
 | Exclusive disjunction                                | [`foundation.exclusive-disjunction`](foundation.exclusive-disjunction.md)                                               |
 | Existential quantification                           | [`foundation.existential-quantification`](foundation.existential-quantification.md)                                     |
+| Universal quantification                             | [`foundation.universal-quantification`](foundation.universal-quantification.md)                                         |
 | Propositional truncations                            | [`foundation.propositional-truncations`](foundation.propositional-truncations.md)                                       |
 | Universal property of propositional truncations      | [`foundation.universal-property-propositional-truncation`](foundation.universal-property-propositional-truncation.md)   |
 | The induction principle of propositional truncations | [`foundation.induction-principle-propositional-truncation`](foundation.induction-principle-propositional-truncation.md) |
