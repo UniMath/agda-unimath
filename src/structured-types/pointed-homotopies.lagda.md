@@ -42,7 +42,9 @@ open import structured-types.pointed-types
 A {{#concept "pointed homotopy" Agda=_~∗_}} between
 [pointed dependent functions](structured-types.pointed-dependent-functions.md)
 `f := (f₀ , f₁)` and `g := (g₀ , g₁)` of type `pointed-Π A B` consists of an
-unpointed [homotopy](foundation-core.homotopies.md) `H₀ : f₀ ~ g₀` and an [identification](foundation-core.identity-types.md) `H₁ : f₁ ＝ (H₀ *) ∙ g₁` witnessing that the triangle of identifications
+unpointed [homotopy](foundation-core.homotopies.md) `H₀ : f₀ ~ g₀` and an
+[identification](foundation-core.identity-types.md) `H₁ : f₁ ＝ (H₀ *) ∙ g₁`
+witnessing that the triangle of identifications
 
 ```text
         H₀ *
@@ -54,16 +56,25 @@ unpointed [homotopy](foundation-core.homotopies.md) `H₀ : f₀ ~ g₀` and an 
           *
 ```
 
-[commutes](foundation.commuting-triangles-of-identifications.md). This identification is called the {{#concept "base point coherence" Disambiguation="pointed homotopy" Agda=coherence-point-unpointed-htpy-pointed-Π}} of the pointed homotopy `H := (H₀ , H₁)`.
+[commutes](foundation.commuting-triangles-of-identifications.md). This
+identification is called the
+{{#concept "base point coherence" Disambiguation="pointed homotopy" Agda=coherence-point-unpointed-htpy-pointed-Π}}
+of the pointed homotopy `H := (H₀ , H₁)`.
 
-An equivalent way of defining pointed homotopies occurs when we consider the type family `x ↦ f₀ x ＝ g₀ x` over the base type `A`. This is a [pointed type family](structured-types.pointed-families-of-types.md), where the base point is the identification
+An equivalent way of defining pointed homotopies occurs when we consider the
+type family `x ↦ f₀ x ＝ g₀ x` over the base type `A`. This is a
+[pointed type family](structured-types.pointed-families-of-types.md), where the
+base point is the identification
 
 ```text
   f₁ ∙ inv g₁ : f₀ * ＝ g₀ *.
 ```
 
-A pointed homotopy `f ~∗ g` is therefore equivalently defined as a pointed dependent function of the pointed type family `x ↦ f₀ x ＝ g₀ x`. Such a pointed dependent function consists of an unpointed homotopy
-`H₀ : f₀ ~ g₀` between the underlying dependent functions and an identification witnessing that the triangle of identifications
+A pointed homotopy `f ~∗ g` is therefore equivalently defined as a pointed
+dependent function of the pointed type family `x ↦ f₀ x ＝ g₀ x`. Such a pointed
+dependent function consists of an unpointed homotopy `H₀ : f₀ ~ g₀` between the
+underlying dependent functions and an identification witnessing that the
+triangle of identifications
 
 ```text
         H₀ *
@@ -75,13 +86,20 @@ A pointed homotopy `f ~∗ g` is therefore equivalently defined as a pointed dep
           *
 ```
 
-[commutes](foundation.commuting-triangles-of-identifications.md). Notice that the identification on the right in this triangle goes up, in the inverse direction of the identification `g₁`.
+[commutes](foundation.commuting-triangles-of-identifications.md). Notice that
+the identification on the right in this triangle goes up, in the inverse
+direction of the identification `g₁`.
 
-Note that in this second definition of pointed homotopies we defined pointed homotopies between pointed dependent functions to be certain pointed dependent functions. This implies that the second definition is a uniform definition that can easily be iterated in order to consider pointed higher homotopies. For this reason, we call the second definition of pointed homotopies {{#concept "uniform pointed homotopies" Agda=uniform-pointed-htpy}}.
+Note that in this second definition of pointed homotopies we defined pointed
+homotopies between pointed dependent functions to be certain pointed dependent
+functions. This implies that the second definition is a uniform definition that
+can easily be iterated in order to consider pointed higher homotopies. For this
+reason, we call the second definition of pointed homotopies
+{{#concept "uniform pointed homotopies" Agda=uniform-pointed-htpy}}.
 
-A complication of this approach to the definition of pointed
-homotopies is that identifications witnessing the commutativity of the triangle
-in a pointed homotopy is slightly more complicated to construct a base point coherence
+A complication of this approach to the definition of pointed homotopies is that
+identifications witnessing the commutativity of the triangle in a pointed
+homotopy is slightly more complicated to construct a base point coherence
 
 ```text
         H₀ *
@@ -93,12 +111,16 @@ in a pointed homotopy is slightly more complicated to construct a base point coh
           *,
 ```
 
- of the first definition, where the identification on the right goes down in the direction of `g₁`. This complication becomes more significant and bothersome when we are trying to construct a pointed 2-homotopy. For this reason, our first definition where pointed homotopies are defined to consist of unpointed homotopies and a base point coherence, is taken to be our main definition of pointed homotopy.  The only
-disadvantage of the nonuniform definition of pointed homotopies is that it does
-not easily iterate.
+of the first definition, where the identification on the right goes down in the
+direction of `g₁`. This complication becomes more significant and bothersome
+when we are trying to construct a pointed 2-homotopy. For this reason, our first
+definition where pointed homotopies are defined to consist of unpointed
+homotopies and a base point coherence, is taken to be our main definition of
+pointed homotopy. The only disadvantage of the nonuniform definition of pointed
+homotopies is that it does not easily iterate.
 
-We will write `f ~∗ g` for the type of (nonuniform) pointed homotopies, and
-we will write `H ~²∗ K` for the nonuniform definition of pointed 2-homotopies.
+We will write `f ~∗ g` for the type of (nonuniform) pointed homotopies, and we
+will write `H ~²∗ K` for the nonuniform definition of pointed 2-homotopies.
 
 ## Definitions
 
@@ -260,8 +282,8 @@ module _
 ### The uniform definition of pointed homotopies
 
 **Note.** The operation `htpy-uniform-pointed-htpy` that converts a uniform
-pointed homotopy to an unpointed homotopy is set up with the pointed functions as
-explicit arguments, because Agda has trouble inferring them.
+pointed homotopy to an unpointed homotopy is set up with the pointed functions
+as explicit arguments, because Agda has trouble inferring them.
 
 ```agda
 module _
@@ -392,10 +414,10 @@ A pointed homotopy `H ~∗ K` then consists of an unpointed homotopy
    (K₀ *) ∙ g₁
 ```
 
-commutes. Equivalently, following the equivalence of pointed homotopies and uniform
-pointed homotopies, a uniform pointed 2-homotopy consists of an unpointed
-homotopy `α₀ : H₀ ~ K₀` and an identification witnessing that `α₀` preserves
-the base point, i.e., witnessing that the triangle
+commutes. Equivalently, following the equivalence of pointed homotopies and
+uniform pointed homotopies, a uniform pointed 2-homotopy consists of an
+unpointed homotopy `α₀ : H₀ ~ K₀` and an identification witnessing that `α₀`
+preserves the base point, i.e., witnessing that the triangle
 
 ```text
         α₀ *
@@ -1003,7 +1025,7 @@ module _
     inv (right-unit ∙ right-unit ∙ ap-id (coherence-point-pointed-htpy H))
 
   left-unit-law-concat-pointed-htpy :
-    concat-pointed-htpy (refl-pointed-htpy f) H ~²∗  H
+    concat-pointed-htpy (refl-pointed-htpy f) H ~²∗ H
   pr1 left-unit-law-concat-pointed-htpy =
     htpy-left-unit-law-concat-pointed-htpy
   pr2 left-unit-law-concat-pointed-htpy =
