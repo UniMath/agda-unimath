@@ -140,7 +140,6 @@ Given two cospans with a shared vertex `B`:
 
 we call the standard limit of the diagram the
 {{#concept "standard ternary pullback" Disambiguation="of types" Agda=standard-ternary-pullback}}.
-
 It is defined as the sum
 
 ```text
