@@ -136,6 +136,13 @@ concatenate-eq-leq-ℤ :
 concatenate-eq-leq-ℤ y refl H = H
 ```
 
+### Strict inequality implies inequality
+
+```agda
+leq-le-ℤ : {x y : ℤ} → le-ℤ x y → leq-ℤ x y
+leq-le-ℤ {x} {y} = is-nonnegative-is-positive-ℤ
+```
+
 ### Strict inequality on the integers is transitive and asymmetric
 
 ```agda
