@@ -184,6 +184,9 @@ is-nonpositive-neg-is-nonnegative-ℤ :
   {x : ℤ} → is-nonnegative-ℤ x → is-nonpositive-ℤ (neg-ℤ x)
 is-nonpositive-neg-is-nonnegative-ℤ {inr (inl x)} H = H
 is-nonpositive-neg-is-nonnegative-ℤ {inr (inr x)} H = H
+
+neg-nonnegative-ℤ : nonnegative-ℤ → nonpositive-ℤ
+neg-nonnegative-ℤ (x , H) = neg-ℤ x , is-nonpositive-neg-is-nonnegative-ℤ H
 ```
 
 #### The negative of a nonpositive integer is nonnegative
@@ -193,6 +196,9 @@ is-nonnegative-neg-is-nonpositive-ℤ :
   {x : ℤ} → is-nonpositive-ℤ x → is-nonnegative-ℤ (neg-ℤ x)
 is-nonnegative-neg-is-nonpositive-ℤ {inl x} H = H
 is-nonnegative-neg-is-nonpositive-ℤ {inr (inl x)} H = H
+
+neg-nonpositive-ℤ : nonpositive-ℤ → nonnegative-ℤ
+neg-nonpositive-ℤ (x , H) = neg-ℤ x , is-nonnegative-neg-is-nonpositive-ℤ H
 ```
 
 #### The negative of a positive integer is negative
@@ -201,6 +207,9 @@ is-nonnegative-neg-is-nonpositive-ℤ {inr (inl x)} H = H
 is-negative-neg-is-positive-ℤ :
   {x : ℤ} → is-positive-ℤ x → is-negative-ℤ (neg-ℤ x)
 is-negative-neg-is-positive-ℤ {inr (inr x)} H = H
+
+neg-positive-ℤ : positive-ℤ → negative-ℤ
+neg-positive-ℤ (x , H) = neg-ℤ x , is-negative-neg-is-positive-ℤ H
 ```
 
 #### The negative of a negative integer is positive
@@ -209,6 +218,9 @@ is-negative-neg-is-positive-ℤ {inr (inr x)} H = H
 is-positive-neg-is-negative-ℤ :
   {x : ℤ} → is-negative-ℤ x → is-positive-ℤ (neg-ℤ x)
 is-positive-neg-is-negative-ℤ {inl x} H = H
+
+neg-negative-ℤ : negative-ℤ → positive-ℤ
+neg-negative-ℤ (x , H) = neg-ℤ x , is-positive-neg-is-negative-ℤ H
 ```
 
 ### Negated properties
