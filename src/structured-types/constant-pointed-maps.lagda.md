@@ -1,4 +1,4 @@
-# Constant maps of pointed types
+# Constant pointed maps
 
 ```agda
 module structured-types.constant-pointed-maps where
@@ -20,8 +20,11 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given a type `X` and a pointed type `A`, the constant map from `X` to `A` maps
-every element of `X` to the base point of `A`.
+Given two [pointed types](structured-types.pointed-types.md) `A` and `B` the
+{{#concept "constant pointed map" Agda=constant-pointed-map}} from `A` to `B` is
+the [pointed map](structured-types.pointed-maps.md)
+`consant-pointed-map : A →∗ B` mapping every element in `A` to the base point of
+`B`.
 
 ## Definitions
 
@@ -56,3 +59,7 @@ module _
   pr1 pointed-map-Pointed-Type = A →∗ B
   pr2 pointed-map-Pointed-Type = constant-pointed-map A B
 ```
+
+## See also
+
+- [Constant maps](foundation.constant-maps.md)

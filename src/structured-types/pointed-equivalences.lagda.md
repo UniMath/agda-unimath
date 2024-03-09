@@ -200,7 +200,7 @@ module _
   map-pointed-equiv = map-equiv equiv-pointed-equiv
 
   preserves-point-pointed-equiv :
-    Id (map-pointed-equiv (point-Pointed-Type A)) (point-Pointed-Type B)
+    map-pointed-equiv (point-Pointed-Type A) ＝ point-Pointed-Type B
   preserves-point-pointed-equiv = pr2 e
 
   pointed-map-pointed-equiv : A →∗ B
@@ -290,7 +290,7 @@ module _
       ( is-pointed-equiv-pointed-equiv)
 ```
 
-### The equivalence between the total space of pointed equivalences and pointed equivalences
+### The equivalence between pointed equivalences and the type of pointed maps that are pointed equivalences
 
 ```agda
 module _
@@ -350,16 +350,16 @@ module _
       ( type-Pointed-Type A , id-equiv)
       ( is-torsorial-Id (point-Pointed-Type A))
 
-  extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃∗ B)
+  extensionality-Pointed-Type : (B : Pointed-Type l1) → (A ＝ B) ≃ (A ≃∗ B)
   extensionality-Pointed-Type =
     extensionality-Σ
-      ( λ b e → Id (map-equiv e (point-Pointed-Type A)) b)
+      ( λ b e → map-equiv e (point-Pointed-Type A) ＝ b)
       ( id-equiv)
       ( refl)
       ( λ B → equiv-univalence)
       ( λ a → id-equiv)
 
-  eq-pointed-equiv : (B : Pointed-Type l1) → A ≃∗ B → Id A B
+  eq-pointed-equiv : (B : Pointed-Type l1) → A ≃∗ B → A ＝ B
   eq-pointed-equiv B = map-inv-equiv (extensionality-Pointed-Type B)
 ```
 

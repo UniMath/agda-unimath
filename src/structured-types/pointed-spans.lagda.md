@@ -22,8 +22,8 @@ open import structured-types.pointed-types
 ## Idea
 
 Consider two [pointed types](structured-types.pointed-types.md) `A` and `B`. A
-{{#concept "(binary) pointed span" Agda=pointed-span}} from `A` to `B` consists of
-a
+{{#concept "(binary) pointed span" Agda=pointed-span}} from `A` to `B` consists
+of a
 {{#concept "spanning pointed type" Disambiguation="binary pointed span" Agda=spanning-pointed-type-pointed-span}}
 `S` and a [pair](foundation.dependent-pair-types.md) of
 [pointed maps](structured-types.pointed-maps.md) `f : S →∗ A` and `g : S →∗ B`.
@@ -41,15 +41,15 @@ span, respectively.
 pointed-span :
   {l1 l2 : Level} (l : Level) (A : Pointed-Type l1) (B : Pointed-Type l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
-pointed-span l A B = Σ (Pointed-Type l) (λ X → (X →∗ A) × (X →∗ B))
+pointed-span l A B = Σ (Pointed-Type l) (λ S → (S →∗ A) × (S →∗ B))
 
 module _
   {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  (c : pointed-span l3 A B)
+  (𝒮 : pointed-span l3 A B)
   where
 
   spanning-pointed-type-pointed-span : Pointed-Type l3
-  spanning-pointed-type-pointed-span = pr1 c
+  spanning-pointed-type-pointed-span = pr1 𝒮
 
   spanning-type-pointed-span : UU l3
   spanning-type-pointed-span =
@@ -61,7 +61,7 @@ module _
 
   left-pointed-map-pointed-span :
     spanning-pointed-type-pointed-span →∗ A
-  left-pointed-map-pointed-span = pr1 (pr2 c)
+  left-pointed-map-pointed-span = pr1 (pr2 𝒮)
 
   left-map-pointed-span :
     spanning-type-pointed-span → type-Pointed-Type A
@@ -76,7 +76,7 @@ module _
 
   right-pointed-map-pointed-span :
     spanning-pointed-type-pointed-span →∗ B
-  right-pointed-map-pointed-span = pr2 (pr2 c)
+  right-pointed-map-pointed-span = pr2 (pr2 𝒮)
 
   right-map-pointed-span :
     spanning-type-pointed-span → type-Pointed-Type B
