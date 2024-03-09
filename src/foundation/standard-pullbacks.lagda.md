@@ -129,6 +129,37 @@ module _
   pr2 (pr2 (gap c z)) = coherence-square-cone f g c z
 ```
 
+#### The standard ternary pullback
+
+Given two cospans with a shared vertex `B`:
+
+```text
+      f       g       h       i
+  A ----> X <---- B ----> Y <---- C,
+```
+
+we call the standard limit of the diagram the
+{{#concept "standard ternary pullback" Disambiguation="of types" Agda=standard-ternary-pullback}}.
+
+It is defined as the sum
+
+```text
+  standard-ternary-pullback f g h i :=
+    Σ (a : A) (b : B) (c : C), ((f a ＝ g b) × (h b ＝ i c)).
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4} {C : UU l5}
+  (f : A → X) (g : B → X) (h : B → Y) (i : C → Y)
+  where
+
+  standard-ternary-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  standard-ternary-pullback =
+    Σ A (λ a → Σ B (λ b → Σ C (λ c → (f a ＝ g b) × (h b ＝ i c))))
+```
+
 ## Properties
 
 ### Characterization of the identity type of the standard pullback
@@ -313,8 +344,8 @@ or we can first form the pullback of `h` and `i`, and then form the pullback of
                  f
 ```
 
-We show that both of these constructions are equivalent by giving a definition
-of the standard ternary pullback, and show that both are equivalent to it.
+We show that both of these constructions are equivalent by showing they are
+equivalent to the standard ternary pullback.
 
 **Note:** Associativity with respect to ternary cospans
 
@@ -336,20 +367,6 @@ is a special case of what we consider here that is recovered by using
 
 - See also the following relevant stack exchange question:
   [Associativity of pullbacks](https://math.stackexchange.com/questions/2046276/associativity-of-pullbacks).
-
-#### The standard ternary pullback
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4} {C : UU l5}
-  (f : A → X) (g : B → X) (h : B → Y) (i : C → Y)
-  where
-
-  standard-ternary-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  standard-ternary-pullback =
-    Σ A (λ a → Σ B (λ b → Σ C (λ c → (f a ＝ g b) × (h b ＝ i c))))
-```
 
 #### Computing the left associated iterated standard pullback
 
