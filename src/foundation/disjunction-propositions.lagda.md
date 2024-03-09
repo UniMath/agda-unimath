@@ -36,7 +36,7 @@ The universal property of the disjunction states that, for every proposition
   ev : ((P ∨ Q) ⇒ R) ⇒ ((P ⇒ R) ∧ (Q ⇒ R))
 ```
 
-is an [equivalence](foundation.logical-equivalence.md).
+is an [equivalence](foundation.logical-equivalences.md).
 
 ## Definitions
 

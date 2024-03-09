@@ -218,7 +218,7 @@ This is part of a general scheme where `Σ₍ₙ₎` takes an indexing
 $n$-[type](foundation-core.truncated-types.md) and a family of $n$-types over it
 as inputs, and spits out the $n$-type of dependent pairs. Note in particular
 that `Σ₍ₙ₎` should be read differently from the
-[existential quantification](fundation.existential-quantification.md) `∃₍ₙ₎`,
+[existential quantification](foundation.existential-quantification.md) `∃₍ₙ₎`,
 whose underlying type is a proposition irrespective of $n$.
 
 ### Propositions are closed under cartesian product types
@@ -259,7 +259,7 @@ This is part of a general scheme where `×₍ₙ₎` takes an indexing
 $n$-[type](foundation-core.truncated-types.md) and a family of $n$-types over it
 as inputs, and spits out the $n$-type of dependent pairs. Note in particular
 that `×₍ₙ₎` should be read differently from the
-[conjunction](fundation.conjunction.md) `∧₍ₙ₎`, whose underlying type is a
+[conjunction](foundation.conjunction.md) `∧₍ₙ₎`, whose underlying type is a
 proposition irrespective of $n$.
 
 ### Products of families of propositions are propositions

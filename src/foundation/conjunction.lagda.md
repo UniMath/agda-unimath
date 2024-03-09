@@ -28,9 +28,10 @@ open import foundation-core.propositions
 
 The {{#concept "conjunction" Disambiguation="of types" Agda=conjunction}} of two
 types `A` and `B` is the [proposition](foundation-core.propositions.md) that
-both `A` and `B` are [inhabited](foundation-inhabited-types.md). It is defined
+both `A` and `B` are [inhabited](foundation.inhabited-types.md). It is defined
 as the [propositional truncation](foundation.propositional-truncations.md) of
-the [cartesian product](foundation-core.cartesian-products.md) of `A` and `B`
+the [cartesian product](foundation-core.cartesian-product-types.md) of `A` and
+`B`
 
 ```text
   A ∧ B := ║ A × B ║₋₁

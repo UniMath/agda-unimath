@@ -43,7 +43,7 @@ of the disjunction states that, for every
   ev : ((A ∨ B) → R) → ((A → R) ∧ (B → R))
 ```
 
-is an [equivalence](foundation.logical-equivalence.md).
+is an [equivalence](foundation.logical-equivalences.md).
 
 ## Definitions
 

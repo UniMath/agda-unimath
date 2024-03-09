@@ -21,7 +21,7 @@ open import foundation-core.propositions
 
 Two types `A` and `B` are said to be
 {{#concept "coinhabited" Agda=is-coinhabited}} if `A` is
-[inhabited](foundation.inhabited.types.md)
+[inhabited](foundation.inhabited-types.md)
 [if and only if](foundation.logical-equivalences.md) `B` is.
 
 ## Definitions
