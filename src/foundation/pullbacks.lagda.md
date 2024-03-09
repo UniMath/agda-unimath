@@ -240,7 +240,7 @@ module _
     is-pullback h' k' (f' , g' , top)
   is-pullback-top-is-pullback-bottom-cube-is-equiv
     is-equiv-hA is-equiv-hB is-equiv-hC is-equiv-hD is-pb-bottom =
-    is-pullback-top-is-pullback-rectangle h hD k'
+    is-pullback-top-square-is-pullback-rectangle h hD k'
       ( hB , h' , front-left)
       ( f' , g' , top)
       ( is-pullback-is-equiv-vertical-maps h hD
@@ -262,7 +262,7 @@ module _
             ( ap-concat-htpy'
               ( (front-left ·r f') ∙h (hD ·l top))
               ( inv-htpy-right-unit-htpy {H = h ·l back-left}))))
-        ( is-pullback-rectangle-is-pullback-top h k hC
+        ( is-pullback-rectangle-is-pullback-top-square h k hC
           ( f , g , bottom)
           ( hA , g' , back-right)
           ( is-pb-bottom)
