@@ -80,7 +80,7 @@ module _
   where
 
   xor-prop : Prop (l1 ⊔ l2)
-  xor-prop = is-contr-Prop (║ A ║₋₁ + ║ B ║₋₁)
+  xor-prop = xor-Prop (trunc-Prop A) (trunc-Prop B)
 
   xor : UU (l1 ⊔ l2)
   xor = type-Prop xor-prop
