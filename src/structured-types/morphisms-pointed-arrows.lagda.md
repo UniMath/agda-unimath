@@ -209,7 +209,9 @@ The identity morphism of pointed arrows is defined as
         id
 ```
 
-where the pointed homotopy `id ∘∗ f ~∗ f ∘∗ id` is the concatenation of the left unit law pointed homotopy and the inverse pointed homotopy of the right unit law pointed homotopy.
+where the pointed homotopy `id ∘∗ f ~∗ f ∘∗ id` is the concatenation of the left
+unit law pointed homotopy and the inverse pointed homotopy of the right unit law
+pointed homotopy.
 
 ```agda
 module _
@@ -323,8 +325,8 @@ module _
 A
 {{#concept "homotopy of morphisms of pointed arrows" Agda=htpy-hom-pointed-arrow}}
 from `(i , j , H)` to `(i' , j' , H')` is a triple `(I , J , K)` consisting of
-pointed homotopies `I : i ~∗ i'` and `J : j ~∗ j'` and a pointed `2`-homotopy `K`
-witnessing that the
+pointed homotopies `I : i ~∗ i'` and `J : j ~∗ j'` and a pointed `2`-homotopy
+`K` witnessing that the
 [square of pointed homotopies](structured-types.commuting-squares-of-pointed-homotopies.md)
 
 ```text
@@ -407,8 +409,8 @@ Consider a morphism of pointed arrows
                 α₁
 ```
 
-from `f : A →∗ B` to `g : X →∗ Y`. The reflexive homotopy of morphisms of arrows `r := (r₀ , r₁ , r₂)`
-on `α := (α₀ , α₁ , α₂)` is given by
+from `f : A →∗ B` to `g : X →∗ Y`. The reflexive homotopy of morphisms of arrows
+`r := (r₀ , r₁ , r₂)` on `α := (α₀ , α₁ , α₂)` is given by
 
 ```text
   r₀ := refl-pointed-htpy : α₀ ~∗ α₀

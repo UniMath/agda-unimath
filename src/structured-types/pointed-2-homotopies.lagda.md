@@ -483,7 +483,8 @@ module _
 ### The left unit law of concatenation of pointed homotopies
 
 Consider a pointed homotopy `H := (H₀ , H₁)` between pointed dependent functions
-`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then there is a pointed `2`-homotopy of type
+`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then there is a pointed `2`-homotopy of
+type
 
 ```text
   refl-pointed-htpy ∙h H ~²∗ H.
