@@ -464,7 +464,7 @@ module _
       ( pointed-map-inv-is-pointed-equiv f H)
       ( C)
 
-  is-section-section-universal-property-pointed-equiv-is-pointed-equiv :
+  is-section-map-inv-universal-property-pointed-equiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
     {l : Level} (C : Pointed-Type l) →
     is-section
@@ -472,7 +472,7 @@ module _
       ( map-inv-universal-property-pointed-equiv-is-pointed-equiv
         ( H)
         ( C))
-  is-section-section-universal-property-pointed-equiv-is-pointed-equiv H C h =
+  is-section-map-inv-universal-property-pointed-equiv-is-pointed-equiv H C h =
     eq-pointed-htpy
       ( (h ∘∗ pointed-map-inv-is-pointed-equiv f H) ∘∗ f)
       ( h)
@@ -492,11 +492,11 @@ module _
   pr1 (section-universal-property-pointed-equiv-is-pointed-equiv H C) =
     map-inv-universal-property-pointed-equiv-is-pointed-equiv H C
   pr2 (section-universal-property-pointed-equiv-is-pointed-equiv H C) =
-    is-section-section-universal-property-pointed-equiv-is-pointed-equiv
+    is-section-map-inv-universal-property-pointed-equiv-is-pointed-equiv
       ( H)
       ( C)
 
-  is-retraction-retraction-universal-property-pointed-equiv-is-pointed-equiv :
+  is-retraction-map-inv-universal-property-pointed-equiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
     {l : Level} (C : Pointed-Type l) →
     is-retraction
@@ -504,7 +504,7 @@ module _
       ( map-inv-universal-property-pointed-equiv-is-pointed-equiv
         ( H)
         ( C))
-  is-retraction-retraction-universal-property-pointed-equiv-is-pointed-equiv
+  is-retraction-map-inv-universal-property-pointed-equiv-is-pointed-equiv
     H C h =
     eq-pointed-htpy
       ( (h ∘∗ f) ∘∗ pointed-map-inv-is-pointed-equiv f H)
@@ -524,7 +524,7 @@ module _
   pr1 (retraction-universal-property-pointed-equiv-is-pointed-equiv H C) =
     map-inv-universal-property-pointed-equiv-is-pointed-equiv H C
   pr2 (retraction-universal-property-pointed-equiv-is-pointed-equiv H C) =
-    is-retraction-retraction-universal-property-pointed-equiv-is-pointed-equiv
+    is-retraction-map-inv-universal-property-pointed-equiv-is-pointed-equiv
       ( H)
       ( C)
 

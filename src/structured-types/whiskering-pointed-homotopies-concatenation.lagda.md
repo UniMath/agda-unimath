@@ -35,9 +35,9 @@ pointed homotopy `α` either into `H` or out of `K` and return a pointed
 and `K`. There are two such operations: left whiskering and right whiskering.
 
 The
-{{#concept "left whiskering" Disambiguation="pointed 2-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}}
+{{#concept "left whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}}
 is an operation that takes a pointed homotopy `H : f ~∗ g` and a pointed
-2-homotopy `α : K ~∗ L` between two pointed homotopies `K L : g ~∗ h` as
+`2`-homotopy `α : K ~∗ L` between two pointed homotopies `K L : g ~∗ h` as
 indicated in the diagram
 
 ```text
@@ -47,13 +47,13 @@ indicated in the diagram
                L
 ```
 
-and returns a pointed 2-homotopy `H ∙h K ~∗ H ∙h K`.
+and returns a pointed `2`-homotopy `H ∙h K ~∗ H ∙h K`.
 
 The
-{{#concept "right whiskering" Disambiguation="pointed 2-homotopies with respect to concatenation" Agda=right-whisker-concat-pointed-2-htpy}}
-is an operation that takes a pointed 2-homotopy `α : H ~∗ K` between two pointed
-homotopies `H K : f ~∗ g` and a pointed homotopy `L : g ~∗ h` as indicated in
-the diagram
+{{#concept "right whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=right-whisker-concat-pointed-2-htpy}}
+is an operation that takes a pointed `2`-homotopy `α : H ~∗ K` between two
+pointed homotopies `H K : f ~∗ g` and a pointed homotopy `L : g ~∗ h` as
+indicated in the diagram
 
 ```text
       H
@@ -62,15 +62,15 @@ the diagram
       K        L
 ```
 
-and returns a pointed 2-homotopy `H ∙h L ~∗ K ∙h L`.
+and returns a pointed `2`-homotopy `H ∙h L ~∗ K ∙h L`.
 
 ## Definitions
 
-### Left whiskering of pointed 2-homotopies with respect to concatenation
+### Left whiskering of pointed `2`-homotopies with respect to concatenation
 
 Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
 `h := (h₀ , h₁)` from `A` to `B`, a pointed homotopy `H := (H₀ , H₁) : f ~∗ g`
-and a pointed 2-homotopy `α := (α₀ , α₁) : K ~∗ L` between two pointed
+and a pointed `2`-homotopy `α := (α₀ , α₁) : K ~∗ L` between two pointed
 homotopies `K := (K₀ , K₁)` and `L := (L₀ , L₁)` from `g` to `h` as indicated in
 the diagram
 
@@ -173,12 +173,13 @@ module _
     coherence-point-left-whisker-concat-pointed-2-htpy
 ```
 
-### Right whiskering of pointed 2-homotopies with respect to concatenation
+### Right whiskering of pointed `2`-homotopies with respect to concatenation
 
 Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
-`h := (h₀ , h₁)` from `A` to `B`, a pointed 2-homotopy `α := (α₀ , α₁) : H ~∗ K`
-between two pointed homotopies `H := (H₀ , H₁)` and `K := (K₀ , K₁)` from `f` to
-`g` and a pointed homotopy `L := (L₀ , L₁) : g ~∗ h` as indicated in the diagram
+`h := (h₀ , h₁)` from `A` to `B`, a pointed `2`-homotopy
+`α := (α₀ , α₁) : H ~∗ K` between two pointed homotopies `H := (H₀ , H₁)` and
+`K := (K₀ , K₁)` from `f` to `g` and a pointed homotopy
+`L := (L₀ , L₁) : g ~∗ h` as indicated in the diagram
 
 ```text
       H
@@ -271,7 +272,7 @@ module _
       ( htpy-pointed-2-htpy α (point-Pointed-Type A))
       ( coherence-point-pointed-2-htpy α)
 
-  right-whisker-concat-pointed-2-htpy :
+  right-whisker-concat-pointed-2-htpy
     concat-pointed-htpy H L ~²∗ concat-pointed-htpy K L
   pr1 right-whisker-concat-pointed-2-htpy =
     htpy-right-whisker-concat-pointed-2-htpy

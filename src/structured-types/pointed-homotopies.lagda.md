@@ -117,14 +117,14 @@ direction. This makes it slightly more complicated to construct an
 identification witnessing that the triangle commutes in the case of uniform
 pointed homotopies. Furthermore, this complication becomes more significant and
 bothersome when we are trying to construct a
-[pointed 2-homotopy](structured-types.pointed-2-homotopies.md). For this reason,
-our first definition where pointed homotopies are defined to consist of
+[pointed `2`-homotopy](structured-types.pointed-2-homotopies.md). For this
+reason, our first definition where pointed homotopies are defined to consist of
 unpointed homotopies and a base point coherence, is taken to be our main
 definition of pointed homotopy. The only disadvantage of the nonuniform
 definition of pointed homotopies is that it does not easily iterate.
 
 We will write `f ~∗ g` for the type of (nonuniform) pointed homotopies, and we
-will write `H ~²∗ K` for the nonuniform definition of pointed 2-homotopies.
+will write `H ~²∗ K` for the nonuniform definition of pointed `2`-homotopies.
 
 ## Definitions
 

@@ -209,7 +209,7 @@ The identity morphism of pointed arrows is defined as
         id
 ```
 
-where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
+where the pointed homotopy `id ∘∗ f ~∗ f ∘∗ id` is the concatenation of the left unit law pointed homotopy and the inverse pointed homotopy of the right unit law pointed homotopy.
 
 ```agda
 module _
@@ -323,7 +323,7 @@ module _
 A
 {{#concept "homotopy of morphisms of pointed arrows" Agda=htpy-hom-pointed-arrow}}
 from `(i , j , H)` to `(i' , j' , H')` is a triple `(I , J , K)` consisting of
-pointed homotopies `I : i ~∗ i'` and `J : j ~∗ j'` and a pointed 2-homotopy `K`
+pointed homotopies `I : i ~∗ i'` and `J : j ~∗ j'` and a pointed `2`-homotopy `K`
 witnessing that the
 [square of pointed homotopies](structured-types.commuting-squares-of-pointed-homotopies.md)
 
@@ -395,7 +395,7 @@ module _
 
 ### The reflexive homotopy of pointed arrows
 
-Consider a morphism of poitned arrows
+Consider a morphism of pointed arrows
 
 ```text
                 α₀
@@ -407,7 +407,7 @@ Consider a morphism of poitned arrows
                 α₁
 ```
 
-from `f : A →∗ B` to `g : X →∗ Y`. The reflexive homotopy `r := (r₀ , r₁ , r₂)`
+from `f : A →∗ B` to `g : X →∗ Y`. The reflexive homotopy of morphisms of arrows `r := (r₀ , r₁ , r₂)`
 on `α := (α₀ , α₁ , α₂)` is given by
 
 ```text
@@ -415,7 +415,7 @@ on `α := (α₀ , α₁ , α₂)` is given by
   r₁ := refl-pointed-htpy : α₁ ~∗ α₁
 ```
 
-and a pointed 2-homotopy `r₂` witnessing that the square of homotopies
+and a pointed `2`-homotopy `r₂` witnessing that the square of pointed homotopies
 
 ```text
             r₁ ·r f
@@ -429,7 +429,7 @@ and a pointed 2-homotopy `r₂` witnessing that the square of homotopies
 
 commutes. Note that `r₁ ·r f ~∗ refl-pointed-htpy` and
 `g ·l r₀ ≐ refl-pointed-htpy`. By
-[whiskering of pointed 2-homotopies](structured-types.whiskering-pointed-homotopies-concatenation.md)
+[whiskering of pointed `2`-homotopies](structured-types.whiskering-pointed-homotopies-concatenation.md)
 with respect to concatenation it follows that
 
 ```text

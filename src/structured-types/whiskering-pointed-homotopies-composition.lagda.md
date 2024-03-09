@@ -250,14 +250,14 @@ module _
 ### Computing right whiskering the reflexive pointed homotopy
 
 Consider two pointed maps `f := (f₀ , f₁) : A →∗ B` and
-`g := (g₀ , g₁) : B →∗ C`. We will construct a pointed 2-homotopy
+`g := (g₀ , g₁) : B →∗ C`. We will construct a pointed `2`-homotopy
 
 ```text
   right-whisker-comp-pointed-htpy (refl-pointed-htpy h) f ~∗
   refl-pointed-htpy (g ∘∗ f)
 ```
 
-The underlying homotopy of this pointed 2-homotopy is simply `refl-htpy`. The
+The underlying homotopy of this pointed `2`-homotopy is simply `refl-htpy`. The
 base point coherence of this homotopy is an identification witnessing that the
 triangle
 

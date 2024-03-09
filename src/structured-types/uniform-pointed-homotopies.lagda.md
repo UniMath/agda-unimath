@@ -87,8 +87,8 @@ homotopy is slightly more complicated to construct a base point coherence
 of the first definition, where the identification on the right goes down in the
 direction of `g₁`. This complication becomes more significant and bothersome
 when we are trying to construct a
-[pointed 2-homotopy](structured-types.pointed-2-homotopies.md). For this reason,
-our first definition where pointed homotopies are defined to consist of
+[pointed `2`-homotopy](structured-types.pointed-2-homotopies.md). For this
+reason, our first definition where pointed homotopies are defined to consist of
 unpointed homotopies and a base point coherence, is taken to be our main
 definition of pointed homotopy. The only disadvantage of the nonuniform
 definition of pointed homotopies is that it does not easily iterate.

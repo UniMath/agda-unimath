@@ -1,4 +1,4 @@
-# Pointed 2-homotopies
+# Pointed `2`-homotopies
 
 ```agda
 module structured-types.pointed-2-homotopies where
@@ -70,7 +70,7 @@ where
   K̃₁ := coherence-triangle-inv-right f₁ g₁ (K₀ *) K₁
 ```
 
-A {{#concept "pointed 2-homotopy" Agda=_~²∗_}} `H ~²∗ K` then consists of an
+A {{#concept "pointed `2`-homotopy" Agda=_~²∗_}} `H ~²∗ K` then consists of an
 unpointed [homotopy](foundation-core.homotopies.md) `α₀ : H₀ ~ K₀` and an
 [identification](foundation-core.identity-types.md) witnessing that the triangle
 
@@ -88,8 +88,8 @@ unpointed [homotopy](foundation-core.homotopies.md) `α₀ : H₀ ~ K₀` and an
 following the [equivalence](foundation-core.equivalences.md) of pointed
 homotopies and
 [uniform pointed homotopies](structured-types.uniform-pointed-homotopies.md), a
-uniform pointed 2-homotopy consists of an unpointed homotopy `α₀ : H₀ ~ K₀` and
-an identification witnessing that `α₀` preserves the base point, i.e.,
+uniform pointed `2`-homotopy consists of an unpointed homotopy `α₀ : H₀ ~ K₀`
+and an identification witnessing that `α₀` preserves the base point, i.e.,
 witnessing that the triangle
 
 ```text
@@ -103,7 +103,7 @@ witnessing that the triangle
 ```
 
 commutes. Note that such identifications are often much harder to construct. Our
-preferred definition of pointed 2-homotopies is therefore the non-uniform
+preferred definition of pointed `2`-homotopies is therefore the non-uniform
 definition described first.
 
 ```agda
@@ -183,7 +183,7 @@ module _
     preserves-point-pointed-2-htpy
 ```
 
-### The reflexive pointed 2-homotopy
+### The reflexive pointed `2`-homotopy
 
 ```agda
 module _
@@ -204,11 +204,11 @@ module _
   pr2 refl-pointed-2-htpy = coherence-point-refl-pointed-2-htpy
 ```
 
-### Concatenation of pointed 2-homotopies
+### Concatenation of pointed `2`-homotopies
 
 Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)`
 and three pointed homotopies `H := (H₀ , H₁)`, `K := (K₀ , K₁)`, and
-`L := (L₀ , L₁)` between them. Furthermore, consider two pointed 2-homotopies
+`L := (L₀ , L₁)` between them. Furthermore, consider two pointed `2`-homotopies
 `α := (α₀ , α₁) : H ~²∗ K` and `β := (β₀ , β₁) : K ~²∗ L`. The underlying
 homotopy of the concatenation `α ∙h β` is simply the concatenation of homotopies
 
@@ -281,7 +281,7 @@ module _
   pr2 concat-pointed-2-htpy = coherence-point-concat-pointed-2-htpy
 ```
 
-### Inverses of pointed 2-homotopies
+### Inverses of pointed `2`-homotopies
 
 ```agda
 module _
@@ -312,7 +312,7 @@ module _
 
 ### Extensionality of pointed homotopies
 
-Pointed 2-homotopies characterize identifications of pointed homotopies.
+Pointed `2`-homotopies characterize identifications of pointed homotopies.
 
 ```agda
 module _
@@ -348,7 +348,7 @@ module _
   eq-pointed-2-htpy K = map-inv-equiv (extensionality-pointed-htpy K)
 ```
 
-### Concatenation of pointed 2-homotopies is a binary equivalence
+### Concatenation of pointed `2`-homotopies is a binary equivalence
 
 ```agda
 module _
@@ -430,7 +430,7 @@ module _
 ### Associativity of concatenation of pointed homotopies
 
 Associativity of concatenation of three pointed homotopies `G`, `H`, and `K` is
-a pointed 2-homotopy
+a pointed `2`-homotopy
 
 ```text
   (G ∙h H) ∙h K ~²∗ G ∙h (H ∙h K).
@@ -483,8 +483,7 @@ module _
 ### The left unit law of concatenation of pointed homotopies
 
 Consider a pointed homotopy `H := (H₀ , H₁)` between pointed dependent functions
-`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then the reflexive pointed `2`-homotopy
-is a pointed 2-homotopy of type
+`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then there is a pointed `2`-homotopy of type
 
 ```text
   refl-pointed-htpy ∙h H ~²∗ H.
@@ -521,13 +520,13 @@ module _
 ### The right unit law of concatenation of pointed homotopies
 
 Consider a pointed homotopy `H := (H₀ , H₁)` between pointed dependent functions
-`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then there is a pointed 2-homotopy
+`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then there is a pointed `2`-homotopy
 
 ```text
   H ∙h refl-pointed-htpy ~²∗ H.
 ```
 
-The underlying homotopy of this pointed 2-homotopy is the homotopy
+The underlying homotopy of this pointed `2`-homotopy is the homotopy
 `right-unit-htpy`. The base point coherence of this homotopy is an
 identification witnessing that the triangle
 
@@ -553,11 +552,11 @@ commuting triangles of identifications
          \   |   /
           \  |  /
            ∨ ∨ ∨
-             *
+             *.
 ```
 
 The upper triangle therefore commutes by the right unit law of horizontal
-pasting of commuting triangles of identifications
+pasting of commuting triangles of identifications.
 
 ```agda
 module _
