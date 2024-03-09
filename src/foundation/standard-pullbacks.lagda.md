@@ -335,7 +335,7 @@ is a special case of what we consider here that is recovered by using
 ```
 
 - See also the following relevant stack exchange question:
-  [Assocaitivity of pullbacks](https://math.stackexchange.com/questions/2046276/associativity-of-pullbacks).
+  [Associativity of pullbacks](https://math.stackexchange.com/questions/2046276/associativity-of-pullbacks).
 
 #### The standard ternary pullback
 
