@@ -30,8 +30,8 @@ open import reflection.rewriting
 ## Idea
 
 The {{#concept "sharp modality" Agda=♯}} `♯` is an axiomatized
-[monadic modality](orthogonal-factorization-systems.higher-modalities.md) we
-postulate as a right adjoint to the
+[monadic modality](orthogonal-factorization-systems.higher-modalities.md) that
+we postulate as a right adjoint to the
 [flat modality](modal-type-theory.flat-modality.md).
 
 In this file, we only postulate that `♯` is a
@@ -80,8 +80,10 @@ postulate
 
 ### Crisp induction for the sharp modality
 
-The crisp induction principle for the sharp modality is the principle that sharp
-codiscrete types are local at the flat counit.
+The
+{{# "crisp induction principle" Disambiguation="for the sharp modality" Agda=crisp-ind-sharp}}
+for the sharp modality is the principle that sharp codiscrete types are local at
+the flat counit.
 
 ```agda
 postulate
@@ -99,12 +101,15 @@ postulate
 
 ### Recontextualizing
 
-```agda
+```text
 postulate
   pointwise-sharp :
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} → (@♭ A → UU l2) → A → UU l2
+```
 
-  intro-pointwise-sharp :
+```text
+postulate
+  unit-pointwise-sharp :
     {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level}
     {B : @♭ A → UU l2} (a : (@♭ x : A) → B x) →
     (x : A) → pointwise-sharp B x
@@ -116,58 +121,59 @@ postulate
   compute-pointwise-sharp :
     {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level}
     (B : A → UU l2) (x : A) → pointwise-sharp (λ a → B a) x ＝ ♯ (B x)
+
   {-# REWRITE compute-pointwise-sharp #-}
 
-  compute-intro-pointwise-sharp :
+  compute-unit-pointwise-sharp :
     {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level}
     {B : @♭ A → UU l2} (f : (@♭ x : A) → B x)
-    (@♭ x : A) → intro-pointwise-sharp f x ＝ unit-sharp (f x)
-  -- {-# REWRITE compute-intro-pointwise-sharp #-}
+    (@♭ x : A) → unit-pointwise-sharp f x ＝ unit-sharp (f x)
+
+  -- {-# REWRITE compute-unit-pointwise-sharp #-}
 
 syntax elim-pointwise-sharp (λ γ → a) ctx = let♯ γ ::= ctx in♯ a ↓↓♯
 ```
 
-**Warning:** When normalizing `λ B x → intro-pointwise-sharp f x`, the rewrite
-`compute-intro-pointwise-sharp` will fire turning it into `unit-sharp (f x)`,
-which is ill typed on cohesive `x : A` (and the typechecker complains).
-\[Myers\]
+**Warning:** When normalizing `λ B x → unit-pointwise-sharp f x`, the rewrite
+`compute-unit-pointwise-sharp` will fire turning it into `unit-sharp (f x)`,
+which is ill-typed on cohesive `x : A` (and the typechecker complains).
+\[Myers\] (May be outdated info)
 
-(May be outdated info)
-
-```agda
+```text
 postulate
   compute-elim-pointwise-sharp :
     {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : @♭ A → UU l2}
     (@♭ f : (@♭ x : A) → pointwise-sharp B x)
     (@♭ x : A) → elim-pointwise-sharp f x ＝ crisp-elim-sharp (f x)
+
   {-# REWRITE compute-elim-pointwise-sharp #-}
 ```
 
-### Uncrisp
+### Uncrispening contexts
 
-```agda
-record CTX-uncrisp {@♭ l1 l2 : Level} {@♭ A : UU l1} : UU (lsuc (l1 ⊔ l2)) where
+```text
+record context-uncrisp-sharp {@♭ l1 l2 : Level} {@♭ A : UU l1} : UU (lsuc (l1 ⊔ l2)) where
   constructor ctx
   field
     ᶜB : A → UU l2
     ᶜf : (@♭ x : A) → ♯ (ᶜB x)
     ᶜa : A
 
-open CTX-uncrisp
+open context-uncrisp-sharp
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1}
   where
 
-  uncrisp : (B : A → UU l2) (f : (@♭ x : A) → ♯ (B x)) → (x : A) → ♯ (B x)
-  uncrisp B f x =
-    intro-pointwise-sharp (λ γ → crisp-elim-sharp ((ᶜf γ) (ᶜa γ))) (ctx B f x)
+  uncrisp-sharp : (B : A → UU l2) (f : (@♭ x : A) → ♯ (B x)) → (x : A) → ♯ (B x)
+  uncrisp-sharp B f x =
+    unit-pointwise-sharp (λ γ → crisp-elim-sharp ((ᶜf γ) (ᶜa γ))) (ctx B f x)
 
-  compute-uncrisp :
+  compute-uncrisp-sharp :
     (@♭ B : A → UU l2) (@♭ f : (@♭ x : A) → ♯ (B x)) (@♭ x : A) →
-    uncrisp B f x ＝ f x
-  compute-uncrisp B f x =
-    compute-intro-pointwise-sharp
+    uncrisp-sharp B f x ＝ f x
+  compute-uncrisp-sharp B f x =
+    compute-unit-pointwise-sharp
       ( λ γ → crisp-elim-sharp ((ᶜf γ) (ᶜa γ)))
       ( ctx B f x)
 
@@ -176,24 +182,19 @@ module _
   {@♭ A : UU l1} {@♭ B : A → UU l2}
   where
 
-  uncrisp² :
+  uncrisp-sharp² :
     (C : (x : A) → B x → UU l3)
     (f : (@♭ x : A) (@♭ y : B x) → ♯ (C x y))
     (x : A) (y : B x) → ♯ (C x y)
-  uncrisp² C f x y =
-    uncrisp (λ (x , y) → C x y) (λ p → f (pr1 p) (pr2 p)) (x , y)
+  uncrisp-sharp² C f x y =
+    uncrisp-sharp (λ (x , y) → C x y) (λ p → f (pr1 p) (pr2 p)) (x , y)
 
-  compute-uncrisp² :
+  compute-uncrisp-sharp² :
     (@♭ C : (x : A) → B x → UU l3)
     (@♭ f : (@♭ x : A) (@♭ y : B x) → ♯ (C x y))
-    (@♭ x : A) (@♭ y : B x) → uncrisp² C f x y ＝ f x y
-  compute-uncrisp² C f x y =
-    compute-uncrisp (λ (x , y) → C x y) (λ p → f (pr1 p) (pr2 p)) (x , y)
-
-module _
-  {@♭ l1 l2 l3 l4 : Level}
-  {@♭ A : UU l1} {@♭ B : A → UU l2}
-  where
+    (@♭ x : A) (@♭ y : B x) → uncrisp-sharp² C f x y ＝ f x y
+  compute-uncrisp-sharp² C f x y =
+    compute-uncrisp-sharp (λ (x , y) → C x y) (λ p → f (pr1 p) (pr2 p)) (x , y)
 ```
 
 ### Sharp induction
@@ -226,11 +227,11 @@ postulate
     (f : (x : A) → ♯ (C (unit-sharp x))) →
     ind-sharp C f ∘ unit-sharp ~ f
 
-ind-sharp'' :
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ C : ♯ A → UU l2) →
-  ((x : A) → ♯ (C (unit-sharp x))) →
-  (x : ♯ A) → ♯ (C x)
-ind-sharp'' C f x = intro-pointwise-sharp {!   !} {!   !}
+-- ind-sharp'' :
+--   {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ C : ♯ A → UU l2) →
+--   ((x : A) → ♯ (C (unit-sharp x))) →
+--   (x : ♯ A) → ♯ (C x)
+-- ind-sharp'' C f x = unit-pointwise-sharp {!   !} {!   !}
 ```
 
 ## Definitions

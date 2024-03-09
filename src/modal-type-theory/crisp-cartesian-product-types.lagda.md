@@ -117,11 +117,9 @@ module _
       ( is-equiv-map-distributive-flat-product)
       ( is-equiv-map-product counit-flat counit-flat is-disc-A is-disc-B)
 
-  is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-product :
-    is-flat-discrete-crisp (A × B) →
-    (x : A) →
-    is-flat-discrete-crisp B
-  is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-product
+  is-flat-discrete-crisp-right-factor-product' :
+    is-flat-discrete-crisp (A × B) → A → is-flat-discrete-crisp B
+  is-flat-discrete-crisp-right-factor-product'
     is-disc-product-A-B x =
     is-equiv-right-factor-is-equiv-map-product
       ( counit-flat)
@@ -135,11 +133,9 @@ module _
         ( is-disc-product-A-B)
         ( is-equiv-map-distributive-flat-product))
 
-  is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-product :
-    is-flat-discrete-crisp (A × B) →
-    (x : B) →
-    is-flat-discrete-crisp A
-  is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-product
+  is-flat-discrete-crisp-left-factor-product' :
+    is-flat-discrete-crisp (A × B) → B → is-flat-discrete-crisp A
+  is-flat-discrete-crisp-left-factor-product'
     is-disc-product-A-B x =
     is-equiv-left-factor-is-equiv-map-product
       ( counit-flat)
@@ -152,6 +148,13 @@ module _
         ( λ where (cons-flat _) → refl)
         ( is-disc-product-A-B)
         ( is-equiv-map-distributive-flat-product))
+
+  is-flat-discrete-crisp-right-factor-product :
+    is-flat-discrete-crisp (A × B) →
+    is-inhabited A →
+    is-flat-discrete-crisp B
+  is-flat-discrete-crisp-right-factor-product
+    is-disc-product-A-B |x| = ?
 ```
 
 ## References

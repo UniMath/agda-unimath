@@ -42,7 +42,7 @@ weak-crisp-ind-Id :
   (@♭ y : A) (@♭ p : a ＝ y) → C y p
 weak-crisp-ind-Id C b _ refl = b
 
--- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-♯` (except for the universe level part if we assume `--level-universe`)
+-- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-♯` (except for the universe level part)
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1}
   (@♭ C : (@♭ x y : A) → @♭ (x ＝ y) → UU l2)
