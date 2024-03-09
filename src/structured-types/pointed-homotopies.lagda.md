@@ -227,6 +227,36 @@ module _
 
 ### Concatenation of pointed homotopies
 
+Consider three pointed dependent functions `f := (f₀ , f₁)`, `g := (g₀ , g₁)`,
+and `h := (h₀ , h₁)`, and pointed homotopies `G := (G₀ , G₁)` and
+`H := (H₀ , H₁)` between them as indicated in the diagram
+
+```text
+      G        H
+  f -----> g -----> h
+```
+
+The concatenation `(G ∙h H)` of `G` and `H` has underlying unpointed homotopy
+
+```text
+  (G ∙h H)₀ := G₀ ∙h H₀.
+```
+
+The base point coherence `(G ∙h H)₁` of `(G ∙h H)` is obtained by horizontally
+pasting the commuting triangles of identifications
+
+```text
+      G₀ *      H₀ *
+  f₀ * --> g₀ * ---> h₀ *
+      \      |      /
+       \     | g₁  /
+     f₁ \    |    / h₁
+         \   |   /
+          \  |  /
+           ∨ ∨ ∨
+             *.
+```
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}

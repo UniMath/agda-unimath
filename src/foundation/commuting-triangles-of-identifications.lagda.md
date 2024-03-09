@@ -56,6 +56,18 @@ module _
   coherence-triangle-identifications' left right top = top ∙ right ＝ left
 ```
 
+### The horizontally constant triangle of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  horizontal-refl-coherence-triangle-identifications :
+    (p : x ＝ y) → coherence-triangle-identifications p p refl
+  horizontal-refl-coherence-triangle-identifications p = refl
+```
+
 ## Properties
 
 ### Whiskering of triangles of identifications
@@ -770,6 +782,100 @@ module _
     is-equiv-horizontal-pasting-coherence-triangle-identifications'
   pr2 is-binary-equiv-horizontal-pasting-coherence-triangle-identifications =
     is-equiv-horizontal-pasting-coherence-triangle-identifications
+```
+
+### The left unit law for horizontal pastinf of commuting triangles of identifications
+
+Consider a commuting triangle of identifications
+
+```text
+         top
+     a ------> b
+      \       /
+  left \     / right
+        \   /
+         ∨ ∨
+          c
+```
+
+with `t : left ＝ top ∙ right`. Then we have an identification
+
+```text
+  horizontal-pasting left left right refl top refl t ＝ t
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c : A}
+  where
+
+  left-unit-law-horizontal-pasting-coherence-triangle-identifications :
+    (left : a ＝ c) (right : b ＝ c) (top : a ＝ b) →
+    (t : coherence-triangle-identifications left right top) →
+    horizontal-pasting-coherence-triangle-identifications
+      ( left)
+      ( left)
+      ( right)
+      ( refl)
+      ( top)
+      ( refl)
+      ( t) ＝
+    t
+  left-unit-law-horizontal-pasting-coherence-triangle-identifications
+    ._ right top refl =
+    refl
+```
+
+### The left unit law for horizontal pastinf of commuting triangles of identifications
+
+Consider a commuting triangle of identifications
+
+```text
+         top
+     a ------> b
+      \       /
+  left \     / right
+        \   /
+         ∨ ∨
+          c
+```
+
+with `t : left ＝ top ∙ right`. Then we have a commuting triangle of
+identifications
+
+```text
+      horizontal-pasting t refl
+  left ----------------------> (top ∙ refl) ∙ right
+       \                     /
+        \                   /
+       t \                 / right-whisker right-unit right
+          \               /
+           \             /
+            ∨           ∨
+             top ∙ right
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c : A}
+  where
+
+  right-unit-law-horizontal-pasting-coherence-triangle-identifications :
+    (left : a ＝ c) (right : b ＝ c) (top : a ＝ b) →
+    (t : coherence-triangle-identifications left right top) →
+    coherence-triangle-identifications
+      ( t)
+      ( right-whisker-concat right-unit right)
+      ( horizontal-pasting-coherence-triangle-identifications
+        ( left)
+        ( right)
+        ( right)
+        ( top)
+        ( refl)
+        ( t)
+        ( refl))
+  right-unit-law-horizontal-pasting-coherence-triangle-identifications
+    ._ right refl refl = refl
 ```
 
 ### Associativity of horizontal pasting of coherences of commuting triangles of identifications

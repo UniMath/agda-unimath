@@ -482,6 +482,14 @@ module _
 
 ### The left unit law of concatenation of pointed homotopies
 
+Consider a pointed homotopy `H := (H₀ , H₁)` between pointed dependent functions
+`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then the reflexive pointed `2`-homotopy
+is a pointed 2-homotopy of type
+
+```text
+  refl-pointed-htpy ∙h H ~²∗ H.
+```
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
@@ -512,6 +520,45 @@ module _
 
 ### The right unit law of concatenation of pointed homotopies
 
+Consider a pointed homotopy `H := (H₀ , H₁)` between pointed dependent functions
+`f := (f₀ , f₁)` and `g := (g₀ , g₁)`. Then there is a pointed 2-homotopy
+
+```text
+  H ∙h refl-pointed-htpy ~²∗ H.
+```
+
+The underlying homotopy of this pointed 2-homotopy is the homotopy
+`right-unit-htpy`. The base point coherence of this homotopy is an
+identification witnessing that the triangle
+
+```text
+     (H ∙h refl)₁
+  f₁ ------------> (H₀ * ∙ refl) ∙ g₁
+    \             /
+  H₁ \           / right-whisker-concat right-unit g₁
+      \         /
+       ∨       ∨
+      (H₀ *) ∙ g₁
+```
+
+commutes. Here, the identification `(H ∙h refl)₁` is the horizontal pasting of
+commuting triangles of identifications
+
+```text
+      H₀ *      refl
+  f₀ * --> g₀ * ---> g₀ *
+      \      |      /
+       \     | g₁  /
+     f₁ \    |    / g₁
+         \   |   /
+          \  |  /
+           ∨ ∨ ∨
+             *
+```
+
+The upper triangle therefore commutes by the right unit law of horizontal
+pasting of commuting triangles of identifications
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
@@ -530,24 +577,11 @@ module _
       ( H)
       ( htpy-right-unit-law-concat-pointed-htpy)
   coherence-point-right-unit-law-concat-pointed-htpy =
-    ( inv right-unit) ∙
-    ( ( left-whisker-concat
-        ( coherence-point-pointed-htpy H)
-        ( left-transpose-eq-concat
-          ( assoc (htpy-pointed-htpy H _) refl _)
-          ( refl)
-          ( right-whisker-concat
-            ( right-unit)
-            ( preserves-point-function-pointed-Π g))
-          ( ( right-unit) ∙
-            ( middle-unit-law-assoc _ _)))) ∙
-      ( inv
-        ( assoc
-          ( coherence-point-pointed-htpy H)
-          ( inv (assoc (htpy-pointed-htpy H _) refl _))
-          ( right-whisker-concat
-            ( right-unit)
-            ( preserves-point-function-pointed-Π g)))))
+    right-unit-law-horizontal-pasting-coherence-triangle-identifications
+      ( preserves-point-function-pointed-Π f)
+      ( preserves-point-function-pointed-Π g)
+      ( htpy-pointed-htpy H _)
+      ( coherence-point-pointed-htpy H)
 
   right-unit-law-concat-pointed-htpy :
     concat-pointed-htpy H (refl-pointed-htpy g) ~²∗ H
