@@ -51,11 +51,18 @@ open import structured-types.whiskering-pointed-homotopies-composition
 A {{#concept "pointed equivalence" Agda=_≃∗_}} `e : A ≃∗ B` consists of an
 [equivalence](foundation-core.equivalences.md) `e : A ≃ B` equipped with an
 [identification](foundation-core.identity-types.md) `p : e * ＝ *` witnessing
-that the underlying map of `e` preserves the base point of `A`. In other words,
-a pointed equivalence is a [pointed map](structured-types.pointed-maps.md) of
-which the underlying function is an
-[equivalence](foundation-core.equivalences.md). Equivalently, a pointed
-equivalence is an equivalence in the category of
+that the underlying map of `e` preserves the base point of `A`.
+
+The notion of pointed equivalence is described equivalently as a
+[pointed map](structured-types.pointed-maps.md) of which the underlying function
+is an [equivalence](foundation-core.equivalences.md), i.e.,
+
+```text
+  (A ≃∗ B) ≃ Σ (f : A →∗ B), is-equiv (map-pointed-map f)
+```
+
+Furthermore, a pointed equivalence can also be described equivalently as an
+equivalence in the category of
 [pointed types](structured-types.pointed-types.md).
 
 ## Definitions
