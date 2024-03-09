@@ -34,7 +34,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-homotopies
-open import structured-types.pointed-isomorphisms
 open import structured-types.pointed-maps
 open import structured-types.pointed-retractions
 open import structured-types.pointed-sections
@@ -361,67 +360,6 @@ module _
 
   eq-pointed-equiv : (B : Pointed-Type l1) → A ≃∗ B → A ＝ B
   eq-pointed-equiv B = map-inv-equiv (extensionality-Pointed-Type B)
-```
-
-### Being a pointed equivalence is equivalent to being a pointed isomorphism
-
-```agda
-module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
-  where
-
-  is-contr-section-is-pointed-equiv :
-    is-pointed-equiv f → is-contr (pointed-section f)
-  is-contr-section-is-pointed-equiv H =
-    is-torsorial-Eq-structure
-      ( is-contr-section-is-equiv H)
-      ( map-inv-is-equiv H , is-section-map-inv-is-equiv H)
-      ( is-contr-map-is-equiv
-        ( is-equiv-comp _ _
-          ( is-emb-is-equiv H _ _)
-          ( is-equiv-concat' _ (preserves-point-pointed-map f)))
-        ( _))
-
-  is-contr-retraction-is-pointed-equiv :
-    is-pointed-equiv f → is-contr (pointed-retraction f)
-  is-contr-retraction-is-pointed-equiv H =
-    is-torsorial-Eq-structure
-      ( is-contr-retraction-is-equiv H)
-      ( map-inv-is-equiv H , is-retraction-map-inv-is-equiv H)
-      ( is-contr-map-is-equiv
-        ( is-equiv-concat _ _)
-        ( _))
-
-  is-contr-is-iso-is-pointed-equiv :
-    is-pointed-equiv f → is-contr (is-pointed-iso f)
-  is-contr-is-iso-is-pointed-equiv H =
-    is-contr-product
-      ( is-contr-section-is-pointed-equiv H)
-      ( is-contr-retraction-is-pointed-equiv H)
-
-  is-iso-is-pointed-equiv :
-    is-pointed-equiv f → is-pointed-iso f
-  is-iso-is-pointed-equiv H =
-    center (is-contr-is-iso-is-pointed-equiv H)
-
-  is-equiv-is-pointed-iso :
-    is-pointed-iso f → is-pointed-equiv f
-  pr1 (is-equiv-is-pointed-iso H) = section-is-pointed-iso H
-  pr2 (is-equiv-is-pointed-iso H) = retraction-is-pointed-iso H
-
-  is-prop-is-pointed-iso : is-prop (is-pointed-iso f)
-  is-prop-is-pointed-iso =
-    is-prop-is-proof-irrelevant
-      ( λ H → is-contr-is-iso-is-pointed-equiv (is-equiv-is-pointed-iso H))
-
-  equiv-is-iso-is-pointed-equiv :
-    is-pointed-equiv f ≃ (is-pointed-iso f)
-  pr1 equiv-is-iso-is-pointed-equiv = is-iso-is-pointed-equiv
-  pr2 equiv-is-iso-is-pointed-equiv =
-    is-equiv-is-prop
-      ( is-property-is-equiv (map-pointed-map f))
-      ( is-prop-is-pointed-iso)
-      ( is-equiv-is-pointed-iso)
 ```
 
 ### Any pointed map satisfying the universal property of pointed equivalences is a pointed equivalence
