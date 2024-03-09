@@ -206,13 +206,18 @@ module _
 
 ### Concatenation of pointed 2-homotopies
 
-Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)` and three pointed homotopies `H := (H₀ , H₁)`, `K := (K₀ , K₁)`, and `L := (L₀ , L₁)` between them. Furthermore, consider two pointed 2-homotopies `α := (α₀ , α₁) : H ~²∗ K` and `β := (β₀ , β₁) : K ~²∗ L`. The underlying homotopy of the concatenation `α ∙h β` is simply the concatenation of homotopies
+Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)`
+and three pointed homotopies `H := (H₀ , H₁)`, `K := (K₀ , K₁)`, and
+`L := (L₀ , L₁)` between them. Furthermore, consider two pointed 2-homotopies
+`α := (α₀ , α₁) : H ~²∗ K` and `β := (β₀ , β₁) : K ~²∗ L`. The underlying
+homotopy of the concatenation `α ∙h β` is simply the concatenation of homotopies
 
 ```text
   (α ∙h β)₀ := α₀ ∙h β₀.
 ```
 
-The base point coherence `(α ∙h β)₁`  is an identification witnessing that the triangle
+The base point coherence `(α ∙h β)₁` is an identification witnessing that the
+triangle
 
 ```text
         H₁
@@ -224,7 +229,10 @@ The base point coherence `(α ∙h β)₁`  is an identification witnessing that
    (L₀ *) ∙ h₁
 ```
 
-commutes. Note that right whiskering of identifications with respect to concatenation distributes over concatenation. The identification witnessing the commutativity of the above triangle can therefore be constructed by constructing an identification witnessing that the triangle
+commutes. Note that right whiskering of identifications with respect to
+concatenation distributes over concatenation. The identification witnessing the
+commutativity of the above triangle can therefore be constructed by constructing
+an identification witnessing that the triangle
 
 ```text
            H₁
@@ -239,7 +247,8 @@ commutes. Note that right whiskering of identifications with respect to concaten
       (L₀ *) ∙ h₁
 ```
 
-commutes. This triangle commutes by right pasting of commuting triangles of identifications.
+commutes. This triangle commutes by right pasting of commuting triangles of
+identifications.
 
 ```agda
 module _

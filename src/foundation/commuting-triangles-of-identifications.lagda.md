@@ -1025,7 +1025,6 @@ Consider a commuting diagram of identifications of the form
          \   / bottom-right
           ∨ ∨
            d
-
 ```
 
 Then the outer triangle commutes too. Indeed, an identification
@@ -1159,7 +1158,8 @@ module _
 
 ### Left pasting of commuting triangles of identifications
 
-**Note.** For left pasting there are two potential constructions. One takes a commuting diagram of identifications of the form
+**Note.** For left pasting there are two potential constructions. One takes a
+commuting diagram of identifications of the form
 
 ```text
                 top
@@ -1172,12 +1172,14 @@ module _
    bottom-left \   /
                 ∨ ∨
                  d
-
 ```
 
-and returns an identification witnessing that the outer triangle commutes. In this case the top triangle is an ordinary commuting triangle of identifications, and the bottom triangle is inverted along the top edge `m`.
+and returns an identification witnessing that the outer triangle commutes. In
+this case the top triangle is an ordinary commuting triangle of identifications,
+and the bottom triangle is inverted along the top edge `m`.
 
-The other left pasting of commuting triangles of identifications takes a commuting diagram of identifications of the form
+The other left pasting of commuting triangles of identifications takes a
+commuting diagram of identifications of the form
 
 ```text
                 top
@@ -1190,10 +1192,12 @@ The other left pasting of commuting triangles of identifications takes a commuti
    bottom-left \   /
                 ∨ ∨
                  d
-
 ```
 
-and returns an identification witnessing that the outer rectangle commutes. In this case the bottom triangle of identifications is an ordinary commuting triangle of identifications, and the top triangle is inverted along the right edge `m`.
+and returns an identification witnessing that the outer rectangle commutes. In
+this case the bottom triangle of identifications is an ordinary commuting
+triangle of identifications, and the top triangle is inverted along the right
+edge `m`.
 
 Both constructions have yet to be formalized.
 
