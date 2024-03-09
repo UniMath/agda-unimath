@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
@@ -52,6 +53,20 @@ nonnegative, and positive integers.
 is-zero-is-nonnegative-is-nonpositive-ℤ :
   {x : ℤ} → is-nonnegative-ℤ x → is-nonpositive-ℤ x → is-zero-ℤ x
 is-zero-is-nonnegative-is-nonpositive-ℤ {inr (inl x)} H K = refl
+```
+
+### Positive integers are `nonzero`
+
+```agda
+is-nonzero-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonzero-ℤ x
+is-nonzero-is-positive-ℤ {inr (inr x)} H ()
+```
+
+### Negative integers are `nonzero`
+
+```agda
+is-nonzero-is-negative-ℤ : {x : ℤ} → is-negative-ℤ x → is-nonzero-ℤ x
+is-nonzero-is-negative-ℤ {inl x} H ()
 ```
 
 ### Dichotomy properties
