@@ -59,7 +59,7 @@ by the unit of the adjunction.
 
 ## Definition
 
-### The predicate of being an adjoint pair on functors
+### The predicate of being an adjoint pair of functors
 
 ```agda
 module _
