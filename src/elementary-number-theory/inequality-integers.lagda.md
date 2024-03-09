@@ -136,6 +136,40 @@ concatenate-eq-leq-ℤ :
 concatenate-eq-leq-ℤ y refl H = H
 ```
 
+### ℤ is an ordered ring
+
+```agda
+preserves-order-add-ℤ' :
+  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
+preserves-order-add-ℤ' {x} {y} z =
+  is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
+
+preserves-order-add-ℤ :
+  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
+preserves-order-add-ℤ {x} {y} z =
+  is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
+
+preserves-leq-add-ℤ :
+  {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
+preserves-leq-add-ℤ {a} {b} {c} {d} H K =
+  transitive-leq-ℤ
+    ( a +ℤ c)
+    ( b +ℤ c)
+    ( b +ℤ d)
+    ( preserves-order-add-ℤ' {a} {b} c H)
+    ( preserves-order-add-ℤ b K)
+
+reflects-order-add-ℤ' :
+  {x y z : ℤ} → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
+reflects-order-add-ℤ' {x} {y} {z} =
+  is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
+
+reflects-order-add-ℤ :
+  {x y z : ℤ} → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
+reflects-order-add-ℤ {x} {y} {z} =
+  is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
+```
+
 ### Strict inequality implies inequality
 
 ```agda
@@ -175,7 +209,7 @@ connected-le-ℤ x y H =
     ( decide-sign-nonzero-ℤ (H ∘ eq-diff-ℤ))
 ```
 
-### Predecessor and successor relations
+### Predecessor and successor relations with the strict ordering
 
 ```agda
 le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
@@ -191,40 +225,6 @@ le-succ-ℤ x =
     ( inv
       ( left-successor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
     ( is-positive-int-positive-ℤ one-positive-ℤ)
-```
-
-### ℤ is an ordered ring
-
-```agda
-preserves-order-add-ℤ' :
-  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
-preserves-order-add-ℤ' {x} {y} z =
-  is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
-
-preserves-order-add-ℤ :
-  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
-preserves-order-add-ℤ {x} {y} z =
-  is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
-
-preserves-leq-add-ℤ :
-  {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
-preserves-leq-add-ℤ {a} {b} {c} {d} H K =
-  transitive-leq-ℤ
-    ( a +ℤ c)
-    ( b +ℤ c)
-    ( b +ℤ d)
-    ( preserves-order-add-ℤ' {a} {b} c H)
-    ( preserves-order-add-ℤ b K)
-
-reflects-order-add-ℤ' :
-  {x y z : ℤ} → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
-reflects-order-add-ℤ' {x} {y} {z} =
-  is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
-
-reflects-order-add-ℤ :
-  {x y z : ℤ} → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
-reflects-order-add-ℤ {x} {y} {z} =
-  is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
 ### Addition on the integers preserves and reflects the strict ordering
