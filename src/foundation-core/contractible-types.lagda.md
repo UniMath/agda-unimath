@@ -10,6 +10,7 @@ module foundation-core.contractible-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.function-extensionality
 open import foundation.implicit-function-types
 open import foundation.retracts-of-types
 open import foundation.universe-levels
@@ -17,7 +18,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
 ```
@@ -82,16 +83,16 @@ module _
   where
 
   abstract
-    is-torsorial-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
-    pr1 (pr1 (is-torsorial-path a)) = a
-    pr2 (pr1 (is-torsorial-path a)) = refl
-    pr2 (is-torsorial-path a) (pair .a refl) = refl
+    is-torsorial-Id : (a : A) → is-contr (Σ A (λ x → a ＝ x))
+    pr1 (pr1 (is-torsorial-Id a)) = a
+    pr2 (pr1 (is-torsorial-Id a)) = refl
+    pr2 (is-torsorial-Id a) (pair .a refl) = refl
 
   abstract
-    is-torsorial-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
-    pr1 (pr1 (is-torsorial-path' a)) = a
-    pr2 (pr1 (is-torsorial-path' a)) = refl
-    pr2 (is-torsorial-path' a) (pair .a refl) = refl
+    is-torsorial-Id' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
+    pr1 (pr1 (is-torsorial-Id' a)) = a
+    pr2 (pr1 (is-torsorial-Id' a)) = refl
+    pr2 (is-torsorial-Id' a) (pair .a refl) = refl
 ```
 
 ## Properties
@@ -105,9 +106,9 @@ module _
 
   abstract
     is-contr-retract-of : A retract-of B → is-contr B → is-contr A
-    pr1 (is-contr-retract-of (pair i (pair r is-retraction)) H) = r (center H)
-    pr2 (is-contr-retract-of (pair i (pair r is-retraction)) H) x =
-      ap r (contraction H (i x)) ∙ (is-retraction x)
+    pr1 (is-contr-retract-of (pair i (pair r is-retraction-r)) H) = r (center H)
+    pr2 (is-contr-retract-of (pair i (pair r is-retraction-r)) H) x =
+      ap r (contraction H (i x)) ∙ (is-retraction-r x)
 ```
 
 ### Contractible types are closed under equivalences
@@ -120,10 +121,8 @@ module _
   abstract
     is-contr-is-equiv :
       (f : A → B) → is-equiv f → is-contr B → is-contr A
-    pr1 (is-contr-is-equiv f H (pair b K)) = map-inv-is-equiv H b
-    pr2 (is-contr-is-equiv f H (pair b K)) x =
-      ( ap (map-inv-is-equiv H) (K (f x))) ∙
-      ( is-retraction-map-inv-is-equiv H x)
+    is-contr-is-equiv f is-equiv-f =
+      is-contr-retract-of B (f , retraction-is-equiv is-equiv-f)
 
   abstract
     is-contr-equiv : (e : A ≃ B) → is-contr B → is-contr A
@@ -180,13 +179,13 @@ module _
   where
 
   abstract
-    is-contr-left-factor-prod : is-contr (A × B) → is-contr A
-    is-contr-left-factor-prod is-contr-AB =
+    is-contr-left-factor-product : is-contr (A × B) → is-contr A
+    is-contr-left-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
           ( λ x → pair x (pr2 (center is-contr-AB)))
-          ( pair pr1 (λ x → refl)))
+          ( pair pr1 refl-htpy))
         ( is-contr-AB)
 
 module _
@@ -194,13 +193,13 @@ module _
   where
 
   abstract
-    is-contr-right-factor-prod : is-contr (A × B) → is-contr B
-    is-contr-right-factor-prod is-contr-AB =
+    is-contr-right-factor-product : is-contr (A × B) → is-contr B
+    is-contr-right-factor-product is-contr-AB =
       is-contr-retract-of
         ( A × B)
         ( pair
           ( pair (pr1 (center is-contr-AB)))
-          ( pair pr2 (λ x → refl)))
+          ( pair pr2 refl-htpy))
         ( is-contr-AB)
 
 module _
@@ -208,10 +207,11 @@ module _
   where
 
   abstract
-    is-contr-prod : is-contr A → is-contr B → is-contr (A × B)
-    pr1 (pr1 (is-contr-prod (pair a C) (pair b D))) = a
-    pr2 (pr1 (is-contr-prod (pair a C) (pair b D))) = b
-    pr2 (is-contr-prod (pair a C) (pair b D)) (pair x y) = eq-pair (C x) (D y)
+    is-contr-product : is-contr A → is-contr B → is-contr (A × B)
+    pr1 (pr1 (is-contr-product (pair a C) (pair b D))) = a
+    pr2 (pr1 (is-contr-product (pair a C) (pair b D))) = b
+    pr2 (is-contr-product (pair a C) (pair b D)) (pair x y) =
+      eq-pair (C x) (D y)
 ```
 
 ### Contractibility of Σ-types
@@ -315,7 +315,7 @@ module _
     is-contr-Σ
       ( is-contr-function-type (pair b β))
       ( λ x → b)
-      ( is-contr-prod
+      ( is-contr-product
         ( is-contr-Σ
           ( is-contr-function-type (pair a α))
           ( λ y → a)

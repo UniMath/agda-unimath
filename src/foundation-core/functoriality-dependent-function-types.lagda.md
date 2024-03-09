@@ -8,6 +8,7 @@ module foundation-core.functoriality-dependent-function-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 
@@ -16,7 +17,6 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -52,8 +52,7 @@ compute-fiber-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) (h : (i : I) → B i) →
   ((i : I) → fiber (f i) (h i)) ≃ fiber (map-Π f) h
-compute-fiber-map-Π f h =
-  equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
+compute-fiber-map-Π f h = equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
 
 compute-fiber-map-Π' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
@@ -69,7 +68,7 @@ compute-fiber-map-Π' α f = compute-fiber-map-Π (f ∘ α)
 abstract
   is-equiv-map-Π-is-fiberwise-equiv :
     {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    {f : (i : I) → A i → B i} (is-equiv-f : is-fiberwise-equiv f) →
+    {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
     is-equiv (map-Π f)
   is-equiv-map-Π-is-fiberwise-equiv is-equiv-f =
     is-equiv-is-contr-map
@@ -81,15 +80,26 @@ abstract
 equiv-Π-equiv-family :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
-pr1 (equiv-Π-equiv-family e) = map-Π (λ i → map-equiv (e i))
+pr1 (equiv-Π-equiv-family e) =
+  map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =
-  is-equiv-map-Π-is-fiberwise-equiv
-    ( λ i → is-equiv-map-equiv (e i))
+  is-equiv-map-Π-is-fiberwise-equiv (λ i → is-equiv-map-equiv (e i))
 ```
 
 ### Families of equivalences induce equivalences of implicit dependent function types
 
 ```agda
+is-equiv-map-implicit-Π-is-fiberwise-equiv :
+    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+    {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
+    is-equiv (map-implicit-Π f)
+is-equiv-map-implicit-Π-is-fiberwise-equiv is-equiv-f =
+  is-equiv-comp _ _
+    ( is-equiv-explicit-implicit-Π)
+    ( is-equiv-comp _ _
+      ( is-equiv-map-Π-is-fiberwise-equiv is-equiv-f)
+      ( is-equiv-implicit-explicit-Π))
+
 equiv-implicit-Π-equiv-family :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
@@ -109,9 +119,9 @@ module _
   compute-inv-equiv-Π-equiv-family :
     (e : (x : A) → B x ≃ C x) →
     ( map-inv-equiv (equiv-Π-equiv-family e)) ~
-    ( map-equiv (equiv-Π-equiv-family λ x → (inv-equiv (e x))))
+    ( map-equiv (equiv-Π-equiv-family (λ x → inv-equiv (e x))))
   compute-inv-equiv-Π-equiv-family e f =
-    is-injective-map-equiv
+    is-injective-equiv
       ( equiv-Π-equiv-family e)
       ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
         ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
@@ -123,7 +133,6 @@ module _
   [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
-
 - Functorial properties of function types are recorded in
   [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md).
 - Functorial properties of dependent pair types are recorded in

@@ -34,7 +34,7 @@ precategories.
 
 ## Definition
 
-### The predicate of being fully faithful on maps between precategories
+### The predicate on maps between precategories of being fully faithful
 
 ```agda
 module _

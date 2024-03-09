@@ -9,7 +9,7 @@ module synthetic-homotopy-theory.acyclic-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -376,7 +376,7 @@ module _
           equiv-left-swap-Σ
       ≃ (C → X)
         by
-          equiv-pr1 (λ v → is-torsorial-path' (v ∘ horizontal-map-cocone f g c))
+          equiv-pr1 (λ v → is-torsorial-Id' (v ∘ horizontal-map-cocone f g c))
 
   is-acyclic-map-vertical-map-cocone-is-pushout :
     is-pushout f g c →
@@ -436,8 +436,8 @@ module _
     is-acyclic-map (vertical-map-cone f g c)
   is-acyclic-map-vertical-map-cone-is-pullback pb ac a =
     is-acyclic-equiv
-      ( map-fiber-cone f g c a ,
-        is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
+      ( map-fiber-vertical-map-cone f g c a ,
+        is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f g c pb a)
       ( ac (f a))
 
 module _
@@ -481,9 +481,9 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  is-acyclic-prod :
+  is-acyclic-product :
     is-acyclic A → is-acyclic B → is-acyclic (A × B)
-  is-acyclic-prod ac-A ac-B =
+  is-acyclic-product ac-A ac-B =
     is-acyclic-is-acyclic-map-terminal-map
       ( A × B)
       ( is-acyclic-map-comp
@@ -493,8 +493,8 @@ module _
         ( is-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
           ( terminal-map B)
-          ( cone-prod A B)
-          ( is-pullback-prod A B)
+          ( cone-cartesian-product A B)
+          ( is-pullback-cartesian-product A B)
           ( is-acyclic-map-terminal-map-is-acyclic A ac-A)))
 ```
 

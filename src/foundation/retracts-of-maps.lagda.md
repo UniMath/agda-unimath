@@ -9,22 +9,23 @@ module foundation.retracts-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-prisms-of-maps
-open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-fibers-of-maps
-open import foundation.homotopies
-open import foundation.identity-types
+open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.retracts-of-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -608,7 +609,7 @@ module _
               ( inclusion-retract-map f g R))
             ( b)))
         ( id-hom-arrow)
-        ( left-whisker-htpy-hom-arrow
+        ( left-whisker-comp-hom-arrow
           ( inclusion-fiber f)
           ( inclusion-fiber f)
           ( inclusion-fiber f)

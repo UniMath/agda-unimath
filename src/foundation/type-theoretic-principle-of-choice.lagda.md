@@ -10,12 +10,12 @@ open import foundation-core.type-theoretic-principle-of-choice public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.implicit-function-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications
@@ -36,6 +36,10 @@ Curry-Howard interpretation of (one formulation of) the
 In this file we record some further facts about the
 [structures](foundation.structure.md) introduced in
 [`foundation-core.type-theoretic-principle-of-choice`](foundation-core.type-theoretic-principle-of-choice.md).
+
+We relate precomposition of maps into a dependent pair type by a function with
+precomposition in dependent pair types of functions in the file
+[`orthogonal-factorization-systems.precomposition-lifts-families-of-elements`](orthogonal-factorization-systems.precomposition-lifts-families-of-elements.md).
 
 ## Lemma
 

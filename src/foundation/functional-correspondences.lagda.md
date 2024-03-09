@@ -11,13 +11,13 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
@@ -155,7 +155,7 @@ module _
     ((x : A) → B x) → functional-correspondence l2 A B
   pr1 (functional-correspondence-function f) x y = f x ＝ y
   pr2 (functional-correspondence-function f) x =
-    is-torsorial-path (f x)
+    is-torsorial-Id (f x)
 
   function-functional-correspondence :
     {l3 : Level} → functional-correspondence l3 A B → ((x : A) → B x)

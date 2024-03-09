@@ -11,6 +11,7 @@ open import foundation-core.contractible-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -18,7 +19,6 @@ open import foundation.universe-levels
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
@@ -59,7 +59,7 @@ equiv-Contr :
 equiv-Contr X Y = type-Contr X ≃ type-Contr Y
 
 equiv-eq-Contr :
-  {l1 : Level} (X Y : Contr l1) → (X ＝ Y) → equiv-Contr X Y
+  {l1 : Level} (X Y : Contr l1) → X ＝ Y → equiv-Contr X Y
 equiv-eq-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
 
 abstract
@@ -69,7 +69,7 @@ abstract
     is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
 
 eq-equiv-Contr :
-  {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → (X ＝ Y)
+  {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → X ＝ Y
 eq-equiv-Contr = eq-equiv-subuniverse is-contr-Prop
 
 abstract

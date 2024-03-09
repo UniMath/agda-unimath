@@ -8,23 +8,24 @@ module foundation.axiom-of-choice where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
+open import foundation.postcomposition-functions
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.sets
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -69,7 +70,7 @@ is-set-projective-AC-0 ac X A B f h =
     ( ( map-Σ
         ( λ g → ((map-surjection f) ∘ g) ＝ h)
         ( precomp h A)
-        ( λ s H → eq-htpy (H ·r h))) ∘
+        ( λ s H → htpy-postcomp X H h)) ∘
       ( section-is-split-surjective (map-surjection f)))
     ( ac B (fiber (map-surjection f)) (is-surjective-map-surjection f))
 

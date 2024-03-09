@@ -2,16 +2,17 @@
 
 ```agda
 module foundation.commuting-squares-of-identifications where
+
+open import foundation-core.commuting-squares-of-identifications public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.function-types
+open import foundation-core.equivalences
 open import foundation-core.identity-types
 ```
 
@@ -22,197 +23,550 @@ open import foundation-core.identity-types
 A square of [identifications](foundation-core.identity-types.md)
 
 ```text
-          top
-      x ------- y
-      |         |
- left |         | right
-      |         |
-      z ------- w
-         bottom
+           top
+       x -------> y
+       |          |
+  left |          | right
+       ∨          ∨
+       z -------> w
+          bottom
 ```
 
-is said to **commute** if there is an identification
-`left ∙ bottom ＝ top ∙ right`. Such an identification is called a **coherence**
+is said to be a
+{{#concept "commuting square" Disambiguation="identifications" Agda=coherence-square-identifications}}
+if there is an identification `left ∙ bottom ＝ top ∙ right`. Such an
+identification is called a
+{{#concept "coherence" Disambiguation="commuting square of identifications" Agda=coherence-square-identifications}}
 of the square.
 
-## Definition
+### Concatenating identifications of edges and coherences of commuting squares of identifications
+
+Consider a commuting square of identifications and an identification of one of
+the four sides with another identification, as for example in the diagram below:
+
+```text
+             top
+       a ---------> b
+       |           | |
+  left |     right |=| right'
+       ∨           ∨ ∨
+       c ---------> d.
+           bottom
+```
+
+Then any identification witnessing that the square commutes can be concatenated
+with the identification on the side, to obtain a new commuting square of
+identifications.
+
+#### Concatenating identifications of the top edge with a coherence of a commuting square of identifications
+
+Consider a commuting diagram of identifications
+
+```text
+           top'
+         ------->
+       x -------> y
+       |   top    |
+  left |          | right
+       ∨          ∨
+       z -------> w.
+          bottom
+```
+
+with an identification `top ＝ top'`. Then we get an equivalence
+
+```text
+           top                             top'
+       x -------> y                    x -------> y
+       |          |                    |          |
+  left |          | right    ≃    left |          | right
+       ∨          ∨                    ∨          ∨
+       z -------> w                    z -------> w.
+          bottom                          bottom
+```
 
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {top' : x ＝ y} (s : top ＝ top')
   where
 
-  coherence-square-identifications :
-    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) → UU l
-  coherence-square-identifications top left right bottom =
-    left ∙ bottom ＝ top ∙ right
-```
+  abstract
+    is-equiv-concat-top-identification-coherence-square-identifications :
+      is-equiv
+        ( concat-top-identification-coherence-square-identifications
+            top left right bottom s)
+    is-equiv-concat-top-identification-coherence-square-identifications =
+      is-equiv-is-invertible
+        ( inv-concat-top-identification-coherence-square-identifications
+            top left right bottom s)
+        ( is-section-inv-concat-top-identification-coherence-square-identifications
+            top left right bottom s)
+        ( is-retraction-inv-concat-top-identification-coherence-square-identifications
+            top left right bottom s)
 
-## Operations
-
-### Composing squares of identifications
-
-We can compose coherence squares that have an edge in common. This is also
-called _pasting_ of squares.
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y1 y2 z1 z2 w : A}
-  (p-left : x ＝ y1) {p-bottom : y1 ＝ z1}
-  {p-top : x ＝ y2} (middle : y2 ＝ z1)
-  {q-bottom : z1 ＝ w} {q-top : y2 ＝ z2}
-  (q-right : z2 ＝ w)
-  where
-
-  coherence-square-identifications-comp-horizontal :
-    coherence-square-identifications p-top p-left middle p-bottom →
-    coherence-square-identifications q-top middle q-right q-bottom →
-    coherence-square-identifications
-      (p-top ∙ q-top) p-left q-right (p-bottom ∙ q-bottom)
-  coherence-square-identifications-comp-horizontal p q =
-    ( ( ( inv (assoc p-left p-bottom q-bottom) ∙
-          ap-binary (_∙_) p (refl {x = q-bottom})) ∙
-        assoc p-top middle q-bottom) ∙
-      ap-binary (_∙_) (refl {x = p-top}) q) ∙
-    inv (assoc p-top q-top q-right)
-
-module _
-  {l : Level} {A : UU l} {x y1 y2 z1 z2 w : A}
-  {p-left : x ＝ y1} {middle : y1 ＝ z2}
-  {p-top : x ＝ y2} {p-right : y2 ＝ z2}
-  {q-left : y1 ＝ z1} {q-bottom : z1 ＝ w}
-  {q-right : z2 ＝ w}
-  where
-
-  coherence-square-identifications-comp-vertical :
-    coherence-square-identifications p-top p-left p-right middle →
-    coherence-square-identifications middle q-left q-right q-bottom →
-    coherence-square-identifications
-      p-top (p-left ∙ q-left) (p-right ∙ q-right) q-bottom
-  coherence-square-identifications-comp-vertical p q =
-    ( assoc p-left q-left q-bottom ∙
-      ( ( ap-binary (_∙_) (refl {x = p-left}) q ∙
-          inv (assoc p-left middle q-right)) ∙
-        ap-binary (_∙_) p (refl {x = q-right}))) ∙
-      assoc p-top p-right q-right
-```
-
-### Pasting of identifications along edges of squares of identifications
-
-Given a coherence square with an edge `p` and a new identification `s : p ＝ p'`
-then we may paste that identification onto the square to get a coherence square
-having `p'` as an edge instead of `p`.
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y z w : A}
-  (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w)
-  where
-
-  coherence-square-identifications-left-paste :
-    {left' : x ＝ z} (s : left ＝ left') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top left' right bottom
-  coherence-square-identifications-left-paste refl sq = sq
-
-  coherence-square-identifications-bottom-paste :
-    {bottom' : z ＝ w} (s : bottom ＝ bottom') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top left right bottom'
-  coherence-square-identifications-bottom-paste refl sq = sq
-
-  coherence-square-identifications-top-paste :
-    {top' : x ＝ y} (s : top ＝ top') →
-    coherence-square-identifications top left right bottom →
+  equiv-concat-top-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom ≃
     coherence-square-identifications top' left right bottom
-  coherence-square-identifications-top-paste refl sq = sq
+  pr1 equiv-concat-top-identification-coherence-square-identifications =
+    concat-top-identification-coherence-square-identifications
+      top left right bottom s
+  pr2 equiv-concat-top-identification-coherence-square-identifications =
+    is-equiv-concat-top-identification-coherence-square-identifications
+```
 
-  coherence-square-identifications-right-paste :
-    {right' : y ＝ w} (s : right ＝ right') →
-    coherence-square-identifications top left right bottom →
+#### Concatenating identifications of the left edge with a coherence of a commuting square of identifications
+
+Consider a commuting diagram of identifications
+
+```text
+              top
+         x -------> y
+        | |         |
+  left' | | left    | right
+        ∨ ∨         ∨
+         z -------> w.
+            bottom
+```
+
+with an identification `left ＝ left'`. Then we get an equivalence
+
+```text
+           top                              top
+       x -------> y                     x -------> y
+       |          |                     |          |
+  left |          | right    ≃    left' |          | right
+       ∨          ∨                     ∨          ∨
+       z -------> w                     z -------> w.
+          bottom                           bottom
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {left' : x ＝ z} (s : left ＝ left')
+  where
+
+  abstract
+    is-equiv-concat-left-identification-coherence-square-identifications :
+      is-equiv
+        ( concat-left-identification-coherence-square-identifications
+            top left right bottom s)
+    is-equiv-concat-left-identification-coherence-square-identifications =
+      is-equiv-is-invertible
+        ( inv-concat-left-identification-coherence-square-identifications
+            top left right bottom s)
+        ( is-section-inv-concat-left-identification-coherence-square-identifications
+            top left right bottom s)
+        ( is-retraction-inv-concat-left-identification-coherence-square-identifications
+            top left right bottom s)
+
+  equiv-concat-left-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top left' right bottom
+  pr1 equiv-concat-left-identification-coherence-square-identifications =
+    concat-left-identification-coherence-square-identifications
+        top left right bottom s
+  pr2 equiv-concat-left-identification-coherence-square-identifications =
+    is-equiv-concat-left-identification-coherence-square-identifications
+```
+
+#### Concatenating identifications of the right edge with a coherence of a commuting square of identifications
+
+Consider a commuting diagram of identifications
+
+```text
+            top
+       x -------> y
+       |         | |
+  left |   right | | right'
+       ∨         ∨ ∨
+       z -------> w.
+          bottom
+```
+
+with an identification `right ＝ right'`. Then we get an equivalence
+
+```text
+           top                             top
+       x -------> y                    x -------> y
+       |          |                    |          |
+  left |          | right    ≃    left |          | right'
+       ∨          ∨                    ∨          ∨
+       z -------> w                    z -------> w.
+          bottom                          bottom
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {right' : y ＝ w} (s : right ＝ right')
+  where
+
+  abstract
+    is-equiv-concat-right-identification-coherence-square-identifications :
+      is-equiv
+        ( concat-right-identification-coherence-square-identifications
+            top left right bottom s)
+    is-equiv-concat-right-identification-coherence-square-identifications =
+      is-equiv-is-invertible
+        ( inv-concat-right-identification-coherence-square-identifications
+            top left right bottom s)
+        ( is-section-inv-concat-right-identification-coherence-square-identifications
+            top left right bottom s)
+        ( is-retraction-inv-concat-right-identification-coherence-square-identifications
+            top left right bottom s)
+
+  equiv-concat-right-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom ≃
     coherence-square-identifications top left right' bottom
-  coherence-square-identifications-right-paste refl sq = sq
+  pr1 equiv-concat-right-identification-coherence-square-identifications =
+    concat-right-identification-coherence-square-identifications
+      top left right bottom s
+  pr2 equiv-concat-right-identification-coherence-square-identifications =
+    is-equiv-concat-right-identification-coherence-square-identifications
 ```
 
-### Whiskering squares of identifications
+#### Concatenating identifications of the bottom edge with a coherence of a commuting square of identifications
 
-Given an identification at one the vertices of a coherence square, then we may
-whisker the square by that identification.
+Consider a commuting diagram of identifications
+
+```text
+            top
+       x -------> y
+       |          |
+  left |          | right
+       ∨  bottom  ∨
+       z -------> w.
+         ------->
+          bottom'
+```
+
+with an identification `bottom ＝ bottom'`. Then we get an equivalence
+
+```text
+           top                             top
+       x -------> y                    x -------> y
+       |          |                    |          |
+  left |          | right    ≃    left |          | right
+       ∨          ∨                    ∨          ∨
+       z -------> w                    z -------> w.
+          bottom                          bottom'
+```
 
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
-  (left : x ＝ z) (bottom : z ＝ w) (top : x ＝ y) (right : y ＝ w)
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  {bottom' : z ＝ w} (s : bottom ＝ bottom')
   where
 
-  coherence-square-identifications-top-left-whisk' :
-    {x' : A} (p : x' ＝ x) →
-    coherence-square-identifications top left right bottom →
+  is-equiv-concat-bottom-identification-coherence-square-identifications :
+    is-equiv
+      ( concat-bottom-identification-coherence-square-identifications
+          top left right bottom s)
+  is-equiv-concat-bottom-identification-coherence-square-identifications =
+    is-equiv-is-invertible
+      ( inv-concat-bottom-identification-coherence-square-identifications
+          top left right bottom s)
+      ( is-section-inv-concat-bottom-identification-coherence-square-identifications
+          top left right bottom s)
+      ( is-retraction-inv-concat-bottom-identification-coherence-square-identifications
+          top left right bottom s)
+
+  equiv-concat-bottom-identification-coherence-square-identifications :
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top left right bottom'
+  pr1 equiv-concat-bottom-identification-coherence-square-identifications =
+    concat-bottom-identification-coherence-square-identifications
+        top left right bottom s
+  pr2 equiv-concat-bottom-identification-coherence-square-identifications =
+    is-equiv-concat-bottom-identification-coherence-square-identifications
+```
+
+### Whiskering and splicing coherences of commuting squares of identifications
+
+Given a commuting square of identifications
+
+```text
+           top
+       x -------> y
+       |          |
+  left |          | right
+       ∨          ∨
+       z -------> w,
+          bottom
+```
+
+we may consider four ways of attaching new identifications to it:
+
+1. Prepending `p : u ＝ x` to the left gives us a commuting square
+
+   ```text
+                p ∙ top
+              u -------> y
+              |          |
+     p ∙ left |          | right
+              ∨          ∨
+              z -------> w.
+                 bottom
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙ bottom ＝ top ∙ right) ≃ ((p ∙ left) ∙ bottom ＝ (p ∙ top) ∙ right).
+   ```
+
+2. Appending an identification `p : w ＝ u` to the right gives a commuting
+   square of identifications
+
+   ```text
+                   top
+           x ------------> y
+           |               |
+      left |               | right ∙ p
+           ∨               ∨
+           z ------------> u.
+              bottom ∙ p
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙ bottom ＝ top ∙ right) ≃ (left ∙ (bottom ∙ p) ＝ top ∙ (right ∙ p)).
+   ```
+
+3. Splicing an identification `p : z ＝ u` and its inverse into the middle gives
+   a commuting square of identifications
+
+   ```text
+                      top
+              x --------------> y
+              |                 |
+     left ∙ p |                 | right
+              ∨                 ∨
+              u --------------> w.
+                 p⁻¹ ∙ bottom
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙ bottom ＝ top ∙ right) ≃ ((left ∙ p) ∙ (p⁻¹ ∙ bottom) ＝ top ∙ right).
+   ```
+
+   Similarly, we have an equivalence
+
+   ```text
+     (left ∙ bottom ＝ top ∙ right) ≃ ((left ∙ p⁻¹) ∙ (p ∙ bottom) ＝ top ∙ right).
+   ```
+
+4. Splicing an identification `p : y ＝ u` and its inverse into the middle gives
+   a commuting square of identifications
+
+   ```text
+             top ∙ p
+          x --------> u
+          |           |
+     left |           | p⁻¹ ∙ right
+          ∨           ∨
+          z --------> w.
+             bottom
+   ```
+
+   More precisely, we have an equivalence
+
+   ```text
+     (left ∙ bottom ＝ top ∙ right) ≃ (left ∙ bottom ＝ (top ∙ p) ∙ (p⁻¹ ∙ right)).
+   ```
+
+   Similarly, we have an equivalence
+
+   ```text
+     (left ∙ bottom ＝ top ∙ right) ≃ (left ∙ bottom ＝ (top ∙ p⁻¹) ∙ (p ∙ right)).
+   ```
+
+These operations are useful in proofs involving path algebra, because taking
+`equiv-right-whisker-concat-coherence-square-identifications` as an example, it
+provides us with two maps: the forward direction states
+`(p ∙ r ＝ q ∙ s) → (p ∙ (r ∙ t)) ＝ q ∙ (s ∙ t))`, which allows one to append
+an identification without needing to reassociate on the right, and the backwards
+direction conversely allows one to cancel out an identification in parentheses.
+
+#### Left whiskering coherences of commuting squares of identifications
+
+For any identification `p : u ＝ x` we obtain an equivalence
+
+```text
+           top                                p ∙ top
+       x -------> y                         u -------> y
+       |          |                         |          |
+  left |          | right    ≃     p ∙ left |          | right
+       ∨          ∨                         ∨          ∨
+       z -------> w                         z -------> w
+          bottom                               bottom
+```
+
+of coherences of commuting squares of identifications.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w u : A}
+  where
+
+  equiv-left-whisker-concat-coherence-square-identifications :
+    (p : u ＝ x)
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
+    coherence-square-identifications top left right bottom ≃
     coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
-  coherence-square-identifications-top-left-whisk' refl sq = sq
-
-  coherence-square-identifications-top-left-whisk :
-    {x' : A} (p : x ＝ x') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications (inv p ∙ top) (inv p ∙ left) right bottom
-  coherence-square-identifications-top-left-whisk refl sq = sq
-
-  coherence-square-identifications-top-right-whisk :
-    {y' : A} (p : y ＝ y') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
-  coherence-square-identifications-top-right-whisk refl =
-    coherence-square-identifications-top-paste
-      left bottom top right (inv right-unit)
-
-  coherence-square-identifications-bottom-left-whisk :
-    {z' : A} (p : z ＝ z') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
-  coherence-square-identifications-bottom-left-whisk refl =
-    coherence-square-identifications-left-paste
-      left bottom top right (inv right-unit)
-
-  coherence-square-identifications-bottom-right-whisk :
-    {w' : A} (p : w ＝ w') →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
-  coherence-square-identifications-bottom-right-whisk refl =
-    ( coherence-square-identifications-bottom-paste
-      left bottom top (right ∙ refl) (inv right-unit)) ∘
-    ( coherence-square-identifications-right-paste
-      left bottom top right (inv right-unit))
+  equiv-left-whisker-concat-coherence-square-identifications
+    refl top left right bottom =
+    id-equiv
 ```
 
-### Inverting squares of identifications
+#### Right whiskering coherences of commuting squares of identifications
+
+For any identification `p : w ＝ u` we obtain an equivalence
+
+```text
+           top                                 top
+       x -------> y                     x ------------> y
+       |          |                     |               |
+  left |          | right    ≃     left |               | right ∙ p
+       ∨          ∨                     ∨               ∨
+       z -------> w                     z ------------> w
+          bottom                           bottom ∙ p
+```
+
+of coherences of commuting squares of identifications.
 
 ```agda
 module _
   {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-horizontal-inv :
-    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
-    coherence-square-identifications top left right bottom →
-    coherence-square-identifications (inv top) right left (inv bottom)
-  coherence-square-identifications-horizontal-inv refl refl right refl coh =
-    right-unit ∙ inv coh
+  equiv-right-whisker-concat-coherence-square-identifications :
+    {u : A} (p : w ＝ u) →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
+  equiv-right-whisker-concat-coherence-square-identifications refl =
+    ( equiv-concat-bottom-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right ∙ refl)
+      ( bottom)
+      ( inv right-unit)) ∘e
+    ( equiv-concat-right-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit))
 ```
 
-### Functions acting on squares of identifications
+#### Left splicing coherences of commuting squares of identifications
+
+For any inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped
+with `α : inv p ＝ q` we obtain an equivalence
+
+```text
+           top                                    top
+       x -------> y                         x -----------> y
+       |          |                         |              |
+  left |          | right    ≃     left ∙ p |              | right
+       ∨          ∨                         ∨              ∨
+       z -------> w                         u -----------> w
+          bottom                               q ∙ bottom
+```
+
+of coherences of commuting squares of identifications.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y z w : A} (f : A → B)
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
   where
 
-  coherence-square-identifications-ap :
-    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) →
-    coherence-square-identifications top left right bottom →
+  equiv-left-splice-coherence-square-identifications :
+    {u : A} (p : z ＝ u) (q : u ＝ z) (α : inv p ＝ q) →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications top (left ∙ p) right (q ∙ bottom)
+  equiv-left-splice-coherence-square-identifications refl .refl refl =
+    equiv-concat-left-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
+```
+
+#### Right splicing coherences of commuting squares of identifications
+
+For any inverse pair of identifications `p : y ＝ u` and `q : u ＝ y` equipped
+with `α : inv p ＝ q` we obtain an equivalence
+
+```text
+           top                             top ∙ p
+       x -------> y                     x --------> u
+       |          |                     |           |
+  left |          | right    ≃     left |           | q ∙ right
+       ∨          ∨                     ∨           ∨
+       z -------> w                     z --------> w
+          bottom                           bottom
+```
+
+of coherences of commuting squares of identifications.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
+
+  equiv-right-splice-coherence-square-identifications :
+    {u : A} (p : y ＝ u) (q : u ＝ y) (α : inv p ＝ q) →
+    coherence-square-identifications top left right bottom ≃
+    coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
+  equiv-right-splice-coherence-square-identifications refl .refl refl =
+    equiv-concat-top-identification-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( inv right-unit)
+```
+
+### Double whiskering of commuting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u v w : A}
+  where
+
+  equiv-double-whisker-coherence-square-identifications :
+    (p : x ＝ y)
+    (top : y ＝ u) (left : y ＝ z) (right : u ＝ v) (bottom : z ＝ v)
+    (s : v ＝ w) →
+    coherence-square-identifications top left right bottom ≃
     coherence-square-identifications
-      ( ap f top)
-      ( ap f left)
-      ( ap f right)
-      ( ap f bottom)
-  coherence-square-identifications-ap refl refl right refl coh = ap (ap f) coh
+      ( p ∙ top)
+      ( p ∙ left)
+      ( right ∙ s)
+      ( bottom ∙ s)
+  equiv-double-whisker-coherence-square-identifications
+    p top left right bottom q =
+    equiv-left-whisker-concat-coherence-square-identifications p top left
+      ( right ∙ q)
+      ( bottom ∙ q) ∘e
+    equiv-right-whisker-concat-coherence-square-identifications
+      ( top)
+      ( left)
+      ( right)
+      ( bottom)
+      ( q)
 ```

@@ -17,6 +17,7 @@ open import finite-algebra.homomorphisms-commutative-finite-rings
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -69,7 +70,7 @@ module _
 
 ## Properties
 
-### The number of ways to equip a finite type with a structure of semisimple commutative finite ring is finite
+### The number of ways to equip a finite type with the structure of a semisimple commutative ring is finite
 
 ```agda
 module _
@@ -85,19 +86,13 @@ module _
       ( λ r →
         is-semisimple-Commutative-Ring-𝔽
           ( l2)
-          ( compute-structure-commutative-ring-𝔽 X r))
+          ( finite-commutative-ring-structure-commutative-ring-𝔽 X r))
 
-  compute-structure-semisimple-commutative-ring-𝔽 :
+  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-𝔽 :
     structure-semisimple-commutative-ring-𝔽 →
     Semisimple-Commutative-Ring-𝔽 l1 l2
-  pr1 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) =
-    compute-structure-commutative-ring-𝔽 X p
-  pr2 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) = s
-
---   is-finite-structure-semisimple-commutative-ring-𝔽 :
---     is-finite structure-semisimple-commutative-ring-𝔽
---   is-finite-structure-semisimple-commutative-ring-𝔽 =
---     is-finite-Σ
---       ( is-finite-structure-commutative-ring-𝔽 X)
---       ( λ c → {!!})
+  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-𝔽 =
+    map-Σ-map-base
+      ( finite-commutative-ring-structure-commutative-ring-𝔽 X)
+      ( is-semisimple-Commutative-Ring-𝔽 l2)
 ```

@@ -13,13 +13,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
 open import foundation.implicit-function-types
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
@@ -194,7 +194,7 @@ abstract
   is-torsorial-multivariable-htpy :
     {l : Level} (n : ℕ) {{A : telescope l n}} (f : iterated-Π A) →
     is-torsorial (multivariable-htpy {{A}} f)
-  is-torsorial-multivariable-htpy .0 {{base-telescope A}} = is-torsorial-path
+  is-torsorial-multivariable-htpy .0 {{base-telescope A}} = is-torsorial-Id
   is-torsorial-multivariable-htpy ._ {{cons-telescope A}} f =
     is-torsorial-Eq-Π (λ x → is-torsorial-multivariable-htpy _ {{A x}} (f x))
 
@@ -206,7 +206,7 @@ abstract
     is-contr-equiv'
       ( Σ (iterated-implicit-Π A) (Id {A = iterated-implicit-Π A} f))
       ( equiv-tot (λ _ → equiv-iterated-funext-implicit _ {{A}}))
-      ( is-torsorial-path {A = iterated-implicit-Π A} f)
+      ( is-torsorial-Id {A = iterated-implicit-Π A} f)
 
 abstract
   is-torsorial-multivariable-implicit-htpy :

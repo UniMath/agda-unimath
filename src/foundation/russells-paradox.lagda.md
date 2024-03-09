@@ -129,13 +129,13 @@ paradox-Russell {l} H =
     β = ( equiv-precomp α empty) ∘e
         ( ( left-unit-law-Σ-is-contr
             { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
-            ( is-torsorial-path' R')
+            ( is-torsorial-Id' R')
             ( pair R' refl)) ∘e
           ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot
                 ( λ t →
-                  ( commutative-prod) ∘e
-                  ( equiv-prod
+                  ( commutative-product) ∘e
+                  ( equiv-product
                     ( id-equiv)
                     ( inv-equiv
                       ( ( equiv-concat'

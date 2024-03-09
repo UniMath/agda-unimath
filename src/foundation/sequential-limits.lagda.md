@@ -10,7 +10,6 @@ module foundation.sequential-limits where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
 open import foundation.cones-over-inverse-sequential-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -22,6 +21,7 @@ open import foundation.structure-identity-principle
 open import foundation.universal-property-sequential-limits
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -193,7 +193,7 @@ module _
     is-torsorial-Eq-structure
       ( is-torsorial-htpy (pr1 s))
       ( pr1 s , refl-htpy)
-      ( is-torsorial-Eq-Π (λ n → is-torsorial-path (pr2 s n ∙ refl)))
+      ( is-torsorial-Eq-Π (λ n → is-torsorial-Id (pr2 s n ∙ refl)))
 
   is-equiv-Eq-eq-standard-sequential-limit :
     (s t : standard-sequential-limit A) →

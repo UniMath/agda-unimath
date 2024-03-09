@@ -242,7 +242,7 @@ module _
       is-contr-equiv'
         ( Σ (Group l) (Id G))
         ( equiv-tot extensionality-Group')
-        ( is-torsorial-path G)
+        ( is-torsorial-Id G)
 ```
 
 ### Group isomorphisms are stable by composition

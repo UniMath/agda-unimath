@@ -115,7 +115,7 @@ module _
     is-prop-is-closed-under-composition-subtype-hom-wide-Precategory
 ```
 
-### The predicate on a subtype of the hom-sets of being a wide subprecategory
+### The predicate on subtypes of hom-sets of being a wide subprecategory
 
 ```agda
 module _
@@ -126,7 +126,7 @@ module _
 
   is-wide-subprecategory-Prop : Prop (l1 ⊔ l2 ⊔ l3)
   is-wide-subprecategory-Prop =
-    prod-Prop
+    product-Prop
       ( contains-id-prop-subtype-hom-wide-Precategory C P₁)
       ( is-closed-under-composition-prop-subtype-hom-wide-Precategory C P₁)
 
@@ -203,7 +203,7 @@ module _
     inclusion-subtype (subtype-hom-Wide-Subprecategory x y)
 ```
 
-The predicate on a morphism between any objects of being contained in the wide
+The predicate on morphisms between any objects of being contained in the wide
 subprecategory:
 
 ```agda

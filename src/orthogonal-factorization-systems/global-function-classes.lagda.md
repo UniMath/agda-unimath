@@ -7,12 +7,13 @@ module orthogonal-factorization-systems.global-function-classes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.propositions
-open import foundation.pullback-squares
+open import foundation.pullbacks
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -33,7 +34,7 @@ correct universe polymorphic definition.
 
 ## Definitions
 
-### The predicate on a family of function classes of being closed under composition with equivalences
+### The predicate on families of function classes of being closed under composition with equivalences
 
 ```agda
 module _
@@ -187,10 +188,10 @@ module _
     (l1 l2 l3 l4 : Level) →
     UU (β l1 l3 ⊔ β l4 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4)
   is-pullback-stable-global-function-class-Level l1 l2 l3 l4 =
-    {A : UU l1} {B : UU l2} {C : UU l3} (f : A → C) (g : B → C)
-    (c : Σ (UU l4) (pullback-cone f g)) →
+    {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} (f : A → C) (g : B → C)
+    (c : cone f g X) (p : is-pullback f g c) →
     is-in-global-function-class P f →
-    is-in-global-function-class P (horizontal-map-pullback-cone f g (pr2 c))
+    is-in-global-function-class P (horizontal-map-cone f g c)
 
   is-pullback-stable-global-function-class : UUω
   is-pullback-stable-global-function-class =

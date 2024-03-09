@@ -56,10 +56,10 @@ map-impredicative-trunc-Prop {l} A =
     ( impredicative-trunc-Prop A)
     ( λ x Q f → f x)
 
-inv-map-impredicative-trunc-Prop :
+map-inv-impredicative-trunc-Prop :
   {l : Level} (A : UU l) →
   type-impredicative-trunc-Prop A → type-trunc-Prop A
-inv-map-impredicative-trunc-Prop A H =
+map-inv-impredicative-trunc-Prop A H =
   H (trunc-Prop A) unit-trunc-Prop
 
 equiv-impredicative-trunc-Prop :
@@ -70,7 +70,7 @@ equiv-impredicative-trunc-Prop A =
     ( trunc-Prop A)
     ( impredicative-trunc-Prop A)
     ( map-impredicative-trunc-Prop A)
-    ( inv-map-impredicative-trunc-Prop A)
+    ( map-inv-impredicative-trunc-Prop A)
 ```
 
 ### The impredicative encoding of conjunction
@@ -94,10 +94,10 @@ map-impredicative-conjunction-Prop :
 map-impredicative-conjunction-Prop {l1} {l2} P1 P2 (pair p1 p2) Q f =
   f p1 p2
 
-inv-map-impredicative-conjunction-Prop :
+map-inv-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-conjunction-Prop P1 P2 → type-conjunction-Prop P1 P2
-inv-map-impredicative-conjunction-Prop P1 P2 H =
+map-inv-impredicative-conjunction-Prop P1 P2 H =
   H (conjunction-Prop P1 P2) (λ p1 p2 → pair p1 p2)
 
 equiv-impredicative-conjunction-Prop :
@@ -108,7 +108,7 @@ equiv-impredicative-conjunction-Prop P1 P2 =
     ( conjunction-Prop P1 P2)
     ( impredicative-conjunction-Prop P1 P2)
     ( map-impredicative-conjunction-Prop P1 P2)
-    ( inv-map-impredicative-conjunction-Prop P1 P2)
+    ( map-inv-impredicative-conjunction-Prop P1 P2)
 ```
 
 ### The impredicative encoding of disjunction
@@ -135,15 +135,14 @@ map-impredicative-disjunction-Prop :
 map-impredicative-disjunction-Prop {l1} {l2} P1 P2 =
   map-universal-property-trunc-Prop
     ( impredicative-disjunction-Prop P1 P2)
-    ( ind-coprod
-      ( λ x → type-impredicative-disjunction-Prop P1 P2)
+    ( rec-coproduct
       ( λ x Q f1 f2 → f1 x)
       ( λ y Q f1 f2 → f2 y))
 
-inv-map-impredicative-disjunction-Prop :
+map-inv-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-disjunction-Prop P1 P2 → type-disjunction-Prop P1 P2
-inv-map-impredicative-disjunction-Prop P1 P2 H =
+map-inv-impredicative-disjunction-Prop P1 P2 H =
   H ( disjunction-Prop P1 P2)
     ( inl-disjunction-Prop P1 P2)
     ( inr-disjunction-Prop P1 P2)
@@ -156,7 +155,7 @@ equiv-impredicative-disjunction-Prop P1 P2 =
     ( disjunction-Prop P1 P2)
     ( impredicative-disjunction-Prop P1 P2)
     ( map-impredicative-disjunction-Prop P1 P2)
-    ( inv-map-impredicative-disjunction-Prop P1 P2)
+    ( map-inv-impredicative-disjunction-Prop P1 P2)
 ```
 
 ### The impredicative encoding of negation
@@ -177,10 +176,10 @@ map-impredicative-neg-Prop :
   ¬ A → type-impredicative-neg-Prop A
 map-impredicative-neg-Prop A f Q a = ex-falso (f a)
 
-inv-map-impredicative-neg-Prop :
+map-inv-impredicative-neg-Prop :
   {l : Level} (A : UU l) →
   type-impredicative-neg-Prop A → ¬ A
-inv-map-impredicative-neg-Prop A H a = H (neg-Prop' A) a a
+map-inv-impredicative-neg-Prop A H a = H (neg-Prop' A) a a
 
 equiv-impredicative-neg-Prop :
   {l : Level} (A : UU l) →
@@ -190,7 +189,7 @@ equiv-impredicative-neg-Prop A =
     ( neg-Prop' A)
     ( impredicative-neg-Prop A)
     ( map-impredicative-neg-Prop A)
-    ( inv-map-impredicative-neg-Prop A)
+    ( map-inv-impredicative-neg-Prop A)
 ```
 
 ### The impredicative encoding of existential quantification
@@ -216,10 +215,10 @@ map-impredicative-exists-Prop {l1} {l2} {A} P =
     ( impredicative-exists-Prop P)
     ( ind-Σ (λ x y Q h → h x y))
 
-inv-map-impredicative-exists-Prop :
+map-inv-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
   type-impredicative-exists-Prop P → exists A P
-inv-map-impredicative-exists-Prop {A = A} P H =
+map-inv-impredicative-exists-Prop {A = A} P H =
   H ( exists-Prop A P)
     ( λ x y → unit-trunc-Prop (pair x y))
 
@@ -231,7 +230,7 @@ equiv-impredicative-exists-Prop {A = A} P =
     ( exists-Prop A P)
     ( impredicative-exists-Prop P)
     ( map-impredicative-exists-Prop P)
-    ( inv-map-impredicative-exists-Prop P)
+    ( map-inv-impredicative-exists-Prop P)
 ```
 
 ### The impredicative encoding of the based identity type of a set
@@ -252,10 +251,10 @@ map-impredicative-based-id-Prop :
   a ＝ x → type-impredicative-based-id-Prop A a x
 map-impredicative-based-id-Prop A a .a refl Q p = p
 
-inv-map-impredicative-based-id-Prop :
+map-inv-impredicative-based-id-Prop :
   {l : Level} (A : Set l) (a x : type-Set A) →
   type-impredicative-based-id-Prop A a x → a ＝ x
-inv-map-impredicative-based-id-Prop A a x H =
+map-inv-impredicative-based-id-Prop A a x H =
   H (λ x → pair (a ＝ x) (is-set-type-Set A a x)) refl
 
 equiv-impredicative-based-id-Prop :
@@ -266,7 +265,7 @@ equiv-impredicative-based-id-Prop A a x =
     ( pair (a ＝ x) (is-set-type-Set A a x))
     ( impredicative-based-id-Prop A a x)
     ( map-impredicative-based-id-Prop A a x)
-    ( inv-map-impredicative-based-id-Prop A a x)
+    ( map-inv-impredicative-based-id-Prop A a x)
 ```
 
 ### The impredicative encoding of Martin-Löf's identity type of a set
@@ -288,10 +287,10 @@ map-impredicative-id-Prop :
   x ＝ y → type-impredicative-id-Prop A x y
 map-impredicative-id-Prop A x .x refl Q r = r x
 
-inv-map-impredicative-id-Prop :
+map-inv-impredicative-id-Prop :
   {l : Level} (A : Set l) (x y : type-Set A) →
   type-impredicative-id-Prop A x y → x ＝ y
-inv-map-impredicative-id-Prop A x y H =
+map-inv-impredicative-id-Prop A x y H =
   H (λ a b → pair (a ＝ b) (is-set-type-Set A a b)) (λ a → refl)
 
 equiv-impredicative-id-Prop :
@@ -302,5 +301,5 @@ equiv-impredicative-id-Prop A x y =
     ( pair (x ＝ y) (is-set-type-Set A x y))
     ( impredicative-id-Prop A x y)
     ( map-impredicative-id-Prop A x y)
-    ( inv-map-impredicative-id-Prop A x y)
+    ( map-inv-impredicative-id-Prop A x y)
 ```

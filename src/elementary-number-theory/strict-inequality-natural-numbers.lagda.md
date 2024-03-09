@@ -169,7 +169,7 @@ linear-le-ℕ zero-ℕ zero-ℕ = inr (inl refl)
 linear-le-ℕ zero-ℕ (succ-ℕ y) = inl star
 linear-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
 linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
-  map-coprod id (map-coprod (ap succ-ℕ) id) (linear-le-ℕ x y)
+  map-coproduct id (map-coproduct (ap succ-ℕ) id) (linear-le-ℕ x y)
 ```
 
 ### `n < m` if and only if there exists a nonzero natural number `l` such that `n + l = m`
@@ -295,11 +295,11 @@ eq-or-le-leq-ℕ :
 eq-or-le-leq-ℕ zero-ℕ zero-ℕ H = inl refl
 eq-or-le-leq-ℕ zero-ℕ (succ-ℕ y) H = inr star
 eq-or-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) H =
-  map-coprod (ap succ-ℕ) id (eq-or-le-leq-ℕ x y H)
+  map-coproduct (ap succ-ℕ) id (eq-or-le-leq-ℕ x y H)
 
 eq-or-le-leq-ℕ' :
   (x y : ℕ) → leq-ℕ x y → ((y ＝ x) + (le-ℕ x y))
-eq-or-le-leq-ℕ' x y H = map-coprod inv id (eq-or-le-leq-ℕ x y H)
+eq-or-le-leq-ℕ' x y H = map-coproduct inv id (eq-or-le-leq-ℕ x y H)
 
 leq-eq-or-le-ℕ :
   (x y : ℕ) → ((x ＝ y) + (le-ℕ x y)) → leq-ℕ x y

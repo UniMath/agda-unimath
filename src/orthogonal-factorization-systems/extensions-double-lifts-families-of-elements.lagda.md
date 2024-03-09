@@ -36,8 +36,8 @@ over `B` and a
 ```
 
 of the lift `b` of `a`. An
-{{#concept "extension" Disambiguation="dependent double family of elements"}} of
-`b` to `A` consists of a family of elements
+{{#concept "extension" Disambiguation="dependent double family of elements" Agda=extension-dependent-double-lift-family-of-elements}}
+of `b` to `A` consists of a family of elements
 `f : (i : I) (x : A i) (y : B i x) → C i x y` equipped with a
 [homotopy](foundation-core.homotopies.md) witnessing that the
 [identification](foundation-core.identity-types.md) `f i (a i) (b i) ＝ c i`

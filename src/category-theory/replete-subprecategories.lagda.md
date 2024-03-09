@@ -249,7 +249,7 @@ module _
     ( inv-associative-Σ _ _ _) ∘e
     ( equiv-tot
       ( λ f →
-        ( commutative-prod) ∘e
+        ( commutative-product) ∘e
         ( inv-right-unit-law-Σ-is-contr
           ( λ is-iso-C-f → is-proof-irrelevant-is-prop
             ( is-prop-is-in-hom-obj-subprecategory-Subprecategory C P x y f)
@@ -315,7 +315,6 @@ This remains to be formalized.
 ## See also
 
 - Every [subcategory](category-theory.subcategories.md) is replete.
-
 - Because of universe polymorphism,
   [large subcategories](category-theory.large-subcategories.md) are not large
   replete by construction, although they are levelwise replete.

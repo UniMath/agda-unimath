@@ -28,7 +28,7 @@ hom-[sets](foundation-core.sets.md).
 
 ## Definition
 
-### The predicate of being full on functors between precategories
+### The predicate on functors between precategories of being full
 
 ```agda
 module _

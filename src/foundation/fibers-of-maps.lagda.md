@@ -10,14 +10,13 @@ open import foundation-core.fibers-of-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -51,7 +50,7 @@ module _
     is-pullback-cone-fiber : is-pullback f (point b) cone-fiber
     is-pullback-cone-fiber =
       is-equiv-tot-is-fiberwise-equiv
-        ( λ a → is-equiv-map-inv-left-unit-law-prod)
+        ( λ a → is-equiv-map-inv-left-unit-law-product)
 
   abstract
     universal-property-pullback-cone-fiber :
@@ -74,7 +73,7 @@ module _
     (u : unit) → fiber (terminal-map A) u ≃ A
   equiv-fiber-terminal-map u =
     right-unit-law-Σ-is-contr
-      ( λ a → is-prop-is-contr is-contr-unit (terminal-map A a) u)
+      ( λ a → is-prop-unit (terminal-map A a) u)
 
   inv-equiv-fiber-terminal-map :
     (u : unit) → A ≃ fiber (terminal-map A) u

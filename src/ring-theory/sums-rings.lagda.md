@@ -190,7 +190,7 @@ split-sum-Ring :
   (n m : ℕ) (f : functional-vec-Ring R (n +ℕ m)) →
   sum-Ring R (n +ℕ m) f ＝
   add-Ring R
-    ( sum-Ring R n (f ∘ inl-coprod-Fin n m))
-    ( sum-Ring R m (f ∘ inr-coprod-Fin n m))
+    ( sum-Ring R n (f ∘ inl-coproduct-Fin n m))
+    ( sum-Ring R m (f ∘ inr-coproduct-Fin n m))
 split-sum-Ring R = split-sum-Semiring (semiring-Ring R)
 ```

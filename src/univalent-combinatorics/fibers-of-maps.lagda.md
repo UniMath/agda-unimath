@@ -113,7 +113,7 @@ abstract
   is-finite-fiber-map-section-family {l1} {l2} {A} {B} b f g (pair y z) =
     is-finite-equiv'
       ( ( ( left-unit-law-Σ-is-contr
-            ( is-torsorial-path' y)
+            ( is-torsorial-Id' y)
             ( pair y refl)) ∘e
           ( inv-associative-Σ A
             ( λ x → Id x y)

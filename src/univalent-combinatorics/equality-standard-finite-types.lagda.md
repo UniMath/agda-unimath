@@ -91,7 +91,10 @@ is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-decidable-unit
 has-decidable-equality-Fin :
   (k : ℕ) (x y : Fin k) → is-decidable (Id x y)
 has-decidable-equality-Fin k x y =
-  map-coprod (eq-Eq-Fin k) (map-neg (Eq-Fin-eq k)) (is-decidable-Eq-Fin k x y)
+  map-coproduct
+    ( eq-Eq-Fin k)
+    ( map-neg (Eq-Fin-eq k))
+    ( is-decidable-Eq-Fin k x y)
 
 Fin-Discrete-Type : ℕ → Discrete-Type lzero
 pr1 (Fin-Discrete-Type k) = Fin k
@@ -127,7 +130,7 @@ is-prop-is-one-Fin k x = is-set-Fin (succ-ℕ k) x (one-Fin k)
 is-prop-is-zero-or-one-Fin-two-ℕ :
   (x : Fin 2) → is-prop ((is-zero-Fin 2 x) + (is-one-Fin 2 x))
 is-prop-is-zero-or-one-Fin-two-ℕ x =
-  is-prop-coprod
+  is-prop-coproduct
     ( λ p q → Eq-Fin-eq 2 (inv p ∙ q))
     ( is-prop-is-zero-Fin 1 x)
     ( is-prop-is-one-Fin 1 x)

@@ -18,6 +18,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.torsorial-type-families
@@ -26,7 +27,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.coalgebras-polynomial-endofunctors
@@ -294,7 +295,7 @@ compute-structure-htpy-hom-𝕎-Alg :
     ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
   ( ap
     ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
-    ( eq-htpy (H ·r α)))
+    ( htpy-postcomp (B x) H α))
 compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
   ind-htpy
     ( map-hom-𝕎-Alg X)
@@ -304,7 +305,7 @@ compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
         ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
       ( ap
         ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
-        ( eq-htpy (H ·r α))))
+        ( htpy-postcomp (B x) H α)))
     ( ap
       ( ap (pr2 X))
       ( coh-refl-htpy-polynomial-endofunctor A B

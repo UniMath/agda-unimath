@@ -70,7 +70,7 @@ module _
         ( star ＝ star)
         ( ap (terminal-map A))
         ( H x y)
-        ( is-prop-is-contr is-contr-unit star star)
+        ( is-prop-unit star star)
 
   abstract
     eq-is-subterminal : is-subterminal A → all-elements-equal A

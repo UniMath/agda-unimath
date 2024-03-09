@@ -8,10 +8,10 @@ module foundation.universal-property-dependent-pair-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -21,8 +21,10 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The universal property of dependent pair types gives us a characterization of
-maps out of a dependent pair types.
+The {{#concept "universal property of dependent pair types"}} characterizes of
+maps out of [dependent pair types](foundation.dependent-pair-types.md). It
+states that _uncurried_ maps `(x : Σ A B) → C x` are in correspondence with
+_curried_ maps `(a : A) (b : B a) → C (a , b)`.
 
 ## Theorem
 
@@ -42,7 +44,7 @@ module _
     is-equiv-ind-Σ : is-equiv (ind-Σ {C = C})
     is-equiv-ind-Σ = is-equiv-is-section is-equiv-ev-pair refl-htpy
 
-  equiv-ev-pair : ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (pair a b))
+  equiv-ev-pair : ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (a , b))
   pr1 equiv-ev-pair = ev-pair
   pr2 equiv-ev-pair = is-equiv-ev-pair
 
@@ -61,10 +63,8 @@ equiv-ev-pair² :
   { A : UU l1} {B : A → UU l2} {C : UU l3}
   { X : UU l4} {Y : X → UU l5}
   { Z : ( Σ A B → C) → Σ X Y → UU l6} →
-  Σ ( Σ A B → C)
-    ( λ k → ( xy : Σ X Y) → Z k xy) ≃
-  Σ ( (a : A) → B a → C)
-    ( λ k → (x : X) → (y : Y x) → Z (ind-Σ k) (x , y))
+  Σ ( Σ A B → C) (λ k → ( xy : Σ X Y) → Z k xy) ≃
+  Σ ( (a : A) → B a → C) (λ k → (x : X) → (y : Y x) → Z (ind-Σ k) (x , y))
 equiv-ev-pair² {X = X} {Y = Y} {Z = Z} =
   equiv-Σ
     ( λ k → (x : X) (y : Y x) → Z (ind-Σ k) (x , y))

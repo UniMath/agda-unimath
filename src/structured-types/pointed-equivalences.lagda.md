@@ -165,7 +165,7 @@ module _
     is-torsorial-Eq-structure
       ( is-torsorial-equiv (type-Pointed-Type A))
       ( pair (type-Pointed-Type A) id-equiv)
-      ( is-torsorial-path (point-Pointed-Type A))
+      ( is-torsorial-Id (point-Pointed-Type A))
 
   extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃∗ B)
   extensionality-Pointed-Type =
@@ -249,7 +249,7 @@ module _
   is-contr-is-iso-is-equiv-pointed-map :
     is-equiv-pointed-map f → is-contr (is-iso-pointed-map f)
   is-contr-is-iso-is-equiv-pointed-map H =
-    is-contr-prod
+    is-contr-product
       ( is-contr-section-is-equiv-pointed-map H)
       ( is-contr-retraction-is-equiv-pointed-map H)
 
@@ -313,7 +313,7 @@ module _
                       ( f ∘∗ (g ∘∗ f))
                       ( f ∘∗ id-pointed-map)
                       ( f)
-                      ( left-whisker-htpy-pointed-map f
+                      ( left-whisker-comp-pointed-map f
                         ( g ∘∗ f)
                         ( id-pointed-map)
                         ( G))
@@ -355,7 +355,7 @@ module _
                 ( k ∘∗ (h ∘∗ f))
                 ( k ∘∗ id-pointed-map)
                 ( k)
-                ( left-whisker-htpy-pointed-map k
+                ( left-whisker-comp-pointed-map k
                   ( h ∘∗ f)
                   ( id-pointed-map)
                   ( H))
@@ -375,7 +375,7 @@ module _
                 ( k ∘∗ (f ∘∗ g))
                 ( k ∘∗ id-pointed-map)
                 ( k)
-                ( left-whisker-htpy-pointed-map k
+                ( left-whisker-comp-pointed-map k
                   ( f ∘∗ g)
                   ( id-pointed-map)
                   ( G))
@@ -437,7 +437,7 @@ module _
                         ( (f ∘∗ g) ∘∗ f)
                         ( id-pointed-map ∘∗ f)
                         ( f)
-                        ( right-whisker-htpy-pointed-map
+                        ( right-whisker-comp-pointed-map
                           ( f ∘∗ g)
                           ( id-pointed-map)
                           ( G)
@@ -479,7 +479,7 @@ module _
                 ( (f ∘∗ g) ∘∗ k)
                 ( id-pointed-map ∘∗ k)
                 ( k)
-                ( right-whisker-htpy-pointed-map
+                ( right-whisker-comp-pointed-map
                   ( f ∘∗ g)
                   ( id-pointed-map)
                   ( G)
@@ -500,7 +500,7 @@ module _
                 ( (h ∘∗ f) ∘∗ k)
                 ( id-pointed-map ∘∗ k)
                 ( k)
-                ( right-whisker-htpy-pointed-map
+                ( right-whisker-comp-pointed-map
                   ( h ∘∗ f)
                   ( id-pointed-map)
                   ( H)

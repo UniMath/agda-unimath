@@ -29,10 +29,10 @@ open import orthogonal-factorization-systems.global-function-classes public
 open import orthogonal-factorization-systems.higher-modalities public
 open import orthogonal-factorization-systems.identity-modality public
 open import orthogonal-factorization-systems.lifting-operations public
-open import orthogonal-factorization-systems.lifting-squares public
+open import orthogonal-factorization-systems.lifting-structures-on-squares public
 open import orthogonal-factorization-systems.lifts-families-of-elements public
 open import orthogonal-factorization-systems.lifts-of-maps public
-open import orthogonal-factorization-systems.local-families public
+open import orthogonal-factorization-systems.local-families-of-types public
 open import orthogonal-factorization-systems.local-maps public
 open import orthogonal-factorization-systems.local-types public
 open import orthogonal-factorization-systems.localizations-maps public
@@ -46,6 +46,7 @@ open import orthogonal-factorization-systems.null-types public
 open import orthogonal-factorization-systems.open-modalities public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.orthogonal-maps public
+open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements public
 open import orthogonal-factorization-systems.pullback-hom public
 open import orthogonal-factorization-systems.raise-modalities public
 open import orthogonal-factorization-systems.reflective-modalities public

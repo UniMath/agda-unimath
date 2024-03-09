@@ -346,7 +346,7 @@ Here is a list of our naming conventions:
   [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
   as the standard equals sign is a reserved symbol in Agda.
 
-## <a name="formatting"></a>Formatting: Indentation, line breaks, and parentheses
+## Formatting: Indentation, line breaks, and parentheses { #formatting }
 
 Code formatting is like punctuation in a novel - it helps readers make sense of
 the story. Here's how we handle indentation and line breaks in the
@@ -498,8 +498,8 @@ the story. Here's how we handle indentation and line breaks in the
 - Lastly, we recommend not naming constructions after infix notation of
   operations included in them. Preferring primary prefix notation over infix
   notation can help keep our code consistent. For example, it's preferred to use
-  `commutative-prod` instead of `commutative-×` for denoting the commutativity
-  of cartesian products.
+  `commutative-product` instead of `commutative-×` for denoting the
+  commutativity of cartesian products.
 
 These guidelines are here to make everyone's coding experience more enjoyable
 and productive. As always, your contributions to the `agda-unimath` library are

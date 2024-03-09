@@ -10,11 +10,11 @@ module foundation.isomorphisms-of-sets where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -51,7 +51,7 @@ module _
   pr2 (is-proof-irrelevant-is-iso-Set f (g , p , q)) (g' , p' , q') =
     eq-type-subtype
       ( λ h →
-        prod-Prop
+        product-Prop
           ( Id-Prop (hom-set-Set B B) (f ∘ h) id)
           ( Id-Prop (hom-set-Set A A) (h ∘ f) id))
       ( ( ap (λ h → g ∘ h) (inv p')) ∙
@@ -73,15 +73,15 @@ module _
       ( htpy-eq (pr1 (pr2 H)))
       ( htpy-eq (pr2 (pr2 H)))
 
-  iso-equiv-Set : type-equiv-Set A B → iso-Set
+  iso-equiv-Set : equiv-Set A B → iso-Set
   pr1 (iso-equiv-Set e) = map-equiv e
   pr2 (iso-equiv-Set e) = is-iso-is-equiv-Set (is-equiv-map-equiv e)
 
-  equiv-iso-Set : iso-Set → type-equiv-Set A B
+  equiv-iso-Set : iso-Set → equiv-Set A B
   pr1 (equiv-iso-Set f) = map-iso-Set f
   pr2 (equiv-iso-Set f) = is-equiv-is-iso-Set (is-iso-map-iso-Set f)
 
-  equiv-iso-equiv-Set : type-equiv-Set A B ≃ iso-Set
+  equiv-iso-equiv-Set : equiv-Set A B ≃ iso-Set
   equiv-iso-equiv-Set =
     equiv-type-subtype
       ( is-property-is-equiv)

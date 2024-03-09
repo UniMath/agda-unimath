@@ -30,8 +30,8 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-The {{#concept "square" Disambiguation="natural number"}} `n²` of a
-[natural number](elementary-number-theory.natural-numbers.md) `n` is the
+The {{#concept "square" Disambiguation="natural number" Agda=square-ℕ}} `n²` of
+a [natural number](elementary-number-theory.natural-numbers.md) `n` is the
 [product](elementary-number-theory.multiplication-natural-numbers.md)
 
 ```text

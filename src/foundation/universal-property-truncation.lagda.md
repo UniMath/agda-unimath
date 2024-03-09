@@ -12,6 +12,7 @@ open import foundation-core.universal-property-truncation public
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
@@ -23,7 +24,6 @@ open import foundation.universe-levels
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.truncated-types
@@ -68,7 +68,7 @@ module _
                       ( K x' x)
                       ( Id-Truncated-Type C (g x') z)))) ∘e
               ( equiv-ev-pair)))
-          ( is-torsorial-path (g x)))
+          ( is-torsorial-Id (g x)))
 
   is-truncation-is-truncation-ap :
     is-truncation B f

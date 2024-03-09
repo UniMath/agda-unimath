@@ -12,13 +12,16 @@ open import foundation-core.commuting-triangles-of-maps public
 open import foundation.action-on-identifications-functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -174,4 +177,87 @@ module _
       ( postcomp S right)
       ( postcomp S top)
   postcomp-coherence-triangle-maps' S = htpy-postcomp S
+```
+
+### Coherences of commuting triangles of maps with fixed vertices
+
+This or its opposite should be the coherence in the characterization of
+identifications of commuting triangles of maps with fixed end vertices.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (left : A → X) (right : B → X) (top : A → B)
+  (left' : A → X) (right' : B → X) (top' : A → B)
+  (c : coherence-triangle-maps left right top)
+  (c' : coherence-triangle-maps left' right' top')
+  where
+
+  coherence-htpy-triangle-maps :
+    left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
+  coherence-htpy-triangle-maps L R T =
+    c ∙h horizontal-concat-htpy R T ~ L ∙h c'
+```
+
+### Pasting commuting triangles into commuting squares along homotopic diagonals
+
+Two [commuting triangles](foundation-core.commuting-triangles-of-maps.md)
+
+```text
+   A         A --> X
+  | \         \    |
+  |  \ H  L  K \   |
+  |   \         \  |
+  ∨    ∨         ∨ ∨
+  B --> Y         Y
+```
+
+with a [homotopic](foundation-core.homotopies.md) diagonal may be pasted into a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+  A -----> X
+  |        |
+  |        |
+  ∨        ∨
+  B -----> Y.
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (top : A → X) (left : A → B) (right : X → Y) (bottom : B → Y)
+  where
+
+  horizontal-pasting-htpy-coherence-triangle-maps :
+    {diagonal-left diagonal-right : A → Y} →
+    diagonal-left ~ diagonal-right →
+    coherence-triangle-maps' diagonal-left bottom left →
+    coherence-triangle-maps diagonal-right right top →
+    coherence-square-maps top left right bottom
+  horizontal-pasting-htpy-coherence-triangle-maps L H K = (H ∙h L) ∙h K
+
+  horizontal-pasting-htpy-coherence-triangle-maps' :
+    {diagonal-left diagonal-right : A → Y} →
+    diagonal-left ~ diagonal-right →
+    coherence-triangle-maps' diagonal-left bottom left →
+    coherence-triangle-maps diagonal-right right top →
+    coherence-square-maps top left right bottom
+  horizontal-pasting-htpy-coherence-triangle-maps' L H K = H ∙h (L ∙h K)
+
+  horizontal-pasting-coherence-triangle-maps :
+    (diagonal : A → Y) →
+    coherence-triangle-maps' diagonal bottom left →
+    coherence-triangle-maps diagonal right top →
+    coherence-square-maps top left right bottom
+  horizontal-pasting-coherence-triangle-maps diagonal H K = H ∙h K
+
+  compute-refl-htpy-horizontal-pasting-coherence-triangle-maps :
+    (diagonal : A → Y) →
+    (H : coherence-triangle-maps' diagonal bottom left) →
+    (K : coherence-triangle-maps diagonal right top) →
+    horizontal-pasting-htpy-coherence-triangle-maps refl-htpy H K ~
+    horizontal-pasting-coherence-triangle-maps diagonal H K
+  compute-refl-htpy-horizontal-pasting-coherence-triangle-maps diagonal H K x =
+    right-whisker-concat right-unit (K x)
 ```

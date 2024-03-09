@@ -278,7 +278,7 @@ equiv-type-Concrete-group-iterated-product-Concrete-Group zero-ℕ G =
         ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl)
     is-contr-raise-unit
 equiv-type-Concrete-group-iterated-product-Concrete-Group (succ-ℕ n) G =
-  equiv-prod
+  equiv-product
     ( id-equiv)
     ( equiv-type-Concrete-group-iterated-product-Concrete-Group n (G ∘ inl)) ∘e
   equiv-type-Concrete-Group-product-Concrete-Group

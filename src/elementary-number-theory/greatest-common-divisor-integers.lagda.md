@@ -33,7 +33,7 @@ open import foundation.universe-levels
 
 ## Definition
 
-### The predicate `is-gcd-ℤ`
+### The predicate of being a greatest common divisor
 
 ```agda
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero
@@ -63,13 +63,13 @@ is-common-divisor-int-is-common-divisor-ℕ :
   {x y d : ℕ} →
   is-common-divisor-ℕ x y d → is-common-divisor-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d)
 is-common-divisor-int-is-common-divisor-ℕ =
-  map-prod div-int-div-ℕ div-int-div-ℕ
+  map-product div-int-div-ℕ div-int-div-ℕ
 
 is-common-divisor-is-common-divisor-int-ℕ :
   {x y d : ℕ} →
   is-common-divisor-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d) → is-common-divisor-ℕ x y d
 is-common-divisor-is-common-divisor-int-ℕ {x} {y} {d} =
-  map-prod div-div-int-ℕ div-div-int-ℕ
+  map-product div-div-int-ℕ div-div-int-ℕ
 ```
 
 ### If `ux ＝ x'` and `vy ＝ y'` for two units `u` and `v`, then `d` is a common divisor of `x` and `y` if and only if `d` is a common divisor of `x'` and `y'`
@@ -79,7 +79,7 @@ is-common-divisor-sim-unit-ℤ :
   {x x' y y' d d' : ℤ} → sim-unit-ℤ x x' → sim-unit-ℤ y y' → sim-unit-ℤ d d' →
   is-common-divisor-ℤ x y d → is-common-divisor-ℤ x' y' d'
 is-common-divisor-sim-unit-ℤ H K L =
-  map-prod (div-sim-unit-ℤ L H) (div-sim-unit-ℤ L K)
+  map-product (div-sim-unit-ℤ L H) (div-sim-unit-ℤ L K)
 ```
 
 ### If `ux ＝ x'` and `vy ＝ y'` for two units `u` and `v`, then `d` is a greatest common divisor of `x` and `y` if and only if `c` is a greatest common divisor of `x'` and `y'`
@@ -108,13 +108,13 @@ is-common-divisor-int-abs-is-common-divisor-ℤ :
   {x y d : ℤ} →
   is-common-divisor-ℤ x y d → is-common-divisor-ℤ x y (int-abs-ℤ d)
 is-common-divisor-int-abs-is-common-divisor-ℤ =
-  map-prod div-int-abs-div-ℤ div-int-abs-div-ℤ
+  map-product div-int-abs-div-ℤ div-int-abs-div-ℤ
 
 is-common-divisor-is-common-divisor-int-abs-ℤ :
   {x y d : ℤ} →
   is-common-divisor-ℤ x y (int-abs-ℤ d) → is-common-divisor-ℤ x y d
 is-common-divisor-is-common-divisor-int-abs-ℤ =
-  map-prod div-div-int-abs-ℤ div-div-int-abs-ℤ
+  map-product div-div-int-abs-ℤ div-div-int-abs-ℤ
 
 is-common-divisor-is-gcd-ℤ :
   (a b d : ℤ) → is-gcd-ℤ a b d → is-common-divisor-ℤ a b d

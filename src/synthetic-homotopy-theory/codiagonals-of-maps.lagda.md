@@ -104,15 +104,15 @@ module _
       ( unit)
       ( inv-equiv
         ( terminal-map (fiber id b) ,
-        ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
+        ( is-equiv-terminal-map-is-contr (is-torsorial-Id' b))))
       ( inv-equiv
         ( terminal-map (fiber id b) ,
-          ( is-equiv-terminal-map-is-contr (is-torsorial-path' b))))
+          ( is-equiv-terminal-map-is-contr (is-torsorial-Id' b))))
       ( id-equiv)
       ( terminal-map (fiber f b))
       ( terminal-map (fiber f b))
-      ( λ _ → eq-is-contr (is-torsorial-path' b))
-      ( λ _ → eq-is-contr (is-torsorial-path' b))
+      ( λ _ → eq-is-contr (is-torsorial-Id' b))
+      ( λ _ → eq-is-contr (is-torsorial-Id' b))
 
   suspension-cocone-fiber :
     suspension-cocone (fiber f b) (fiber (codiagonal-map f) b)

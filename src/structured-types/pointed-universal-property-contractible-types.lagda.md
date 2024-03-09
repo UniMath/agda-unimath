@@ -73,7 +73,7 @@ module _
     is-contr-equiv
       ( Σ X (λ y → y ＝ x))
       ( equiv-Σ-equiv-base _ (equiv-universal-property-contr a c X))
-      ( is-torsorial-path' x)
+      ( is-torsorial-Id' x)
 
 module _
   {l1 : Level} {A : UU l1}
@@ -101,7 +101,7 @@ module _
           ( equivalence-reasoning
               (A → X)
               ≃ Σ (A → X) (λ f → Σ X (λ x → f a ＝ x))
-                by inv-right-unit-law-Σ-is-contr (λ f → is-torsorial-path (f a))
+                by inv-right-unit-law-Σ-is-contr (λ f → is-torsorial-Id (f a))
               ≃ Σ X (λ x → (A , a) →∗ (X , x))
                 by equiv-left-swap-Σ
               ≃ X
@@ -110,7 +110,7 @@ module _
               ap
                 ( pr1)
                 ( inv
-                  ( contraction (is-torsorial-path (f a)) (pair (f a) refl)))))
+                  ( contraction (is-torsorial-Id (f a)) (pair (f a) refl)))))
 
 module _
   {l1 : Level} (A : Pointed-Type l1)

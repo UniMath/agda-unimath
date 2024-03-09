@@ -10,8 +10,7 @@ open import foundation-core.embeddings public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
@@ -23,6 +22,7 @@ open import foundation.truncated-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.fibers-of-maps
@@ -270,20 +270,20 @@ module _
   (H : ((b , c) : Σ B C) → fiber (map-emb f) b)
   where
 
-  inv-map-Σ-emb-base : Σ B C → Σ A (C ∘ map-emb f)
-  pr1 (inv-map-Σ-emb-base u) = pr1 (H u)
-  pr2 (inv-map-Σ-emb-base u) = inv-tr C (pr2 (H u)) (pr2 u)
+  map-inv-Σ-emb-base : Σ B C → Σ A (C ∘ map-emb f)
+  pr1 (map-inv-Σ-emb-base u) = pr1 (H u)
+  pr2 (map-inv-Σ-emb-base u) = inv-tr C (pr2 (H u)) (pr2 u)
 
-  is-section-inv-map-Σ-emb-base :
-    is-section (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base
-  is-section-inv-map-Σ-emb-base (b , c) =
+  is-section-map-inv-Σ-emb-base :
+    is-section (map-Σ-map-base (map-emb f) C) map-inv-Σ-emb-base
+  is-section-map-inv-Σ-emb-base (b , c) =
     ap
       ( λ s → (pr1 s , inv-tr C (pr2 s) c))
-      ( eq-is-contr (is-torsorial-path' b))
+      ( eq-is-contr (is-torsorial-Id' b))
 
-  is-retraction-inv-map-Σ-emb-base :
-    is-retraction (map-Σ-map-base (map-emb f) C) inv-map-Σ-emb-base
-  is-retraction-inv-map-Σ-emb-base (a , c) =
+  is-retraction-map-inv-Σ-emb-base :
+    is-retraction (map-Σ-map-base (map-emb f) C) map-inv-Σ-emb-base
+  is-retraction-map-inv-Σ-emb-base (a , c) =
     ap
       ( λ s → (pr1 s , inv-tr C (pr2 s) c))
       ( eq-is-prop (is-prop-map-is-emb (pr2 f) (map-emb f a)))
@@ -292,9 +292,9 @@ module _
   pr1 equiv-Σ-emb-base = map-Σ-map-base (map-emb f) C
   pr2 equiv-Σ-emb-base =
     is-equiv-is-invertible
-      inv-map-Σ-emb-base
-      is-section-inv-map-Σ-emb-base
-      is-retraction-inv-map-Σ-emb-base
+      map-inv-Σ-emb-base
+      is-section-map-inv-Σ-emb-base
+      is-retraction-map-inv-Σ-emb-base
 ```
 
 ### The product of two embeddings is an embedding
@@ -304,13 +304,13 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  emb-prod : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
-  emb-prod f g = emb-Σ (λ _ → D) f (λ _ → g)
+  emb-product : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
+  emb-product f g = emb-Σ (λ _ → D) f (λ _ → g)
 
-  is-emb-map-prod :
-    (f : A → C) (g : B → D) → is-emb f → is-emb g → (is-emb (map-prod f g))
-  is-emb-map-prod f g is-emb-f is-emb-g =
-    is-emb-map-emb (emb-prod (f , is-emb-f) (g , is-emb-g))
+  is-emb-map-product :
+    (f : A → C) (g : B → D) → is-emb f → is-emb g → (is-emb (map-product f g))
+  is-emb-map-product f g is-emb-f is-emb-g =
+    is-emb-map-emb (emb-product (f , is-emb-f) (g , is-emb-g))
 ```
 
 ### If the action on identifications has a section, then `f` is an embedding
@@ -322,9 +322,9 @@ module _
 
   abstract
     is-emb-section-ap :
-      ((x y : A) → section (ap f {x = x} {y = y})) → is-emb f
-    is-emb-section-ap section-ap-f x y =
-      fundamental-theorem-id-section x (λ y → ap f {y = y}) (section-ap-f x) y
+      ((x y : A) → section (ap f {x} {y})) → is-emb f
+    is-emb-section-ap section-ap-f x =
+      fundamental-theorem-id-section x (λ y → ap f) (section-ap-f x)
 ```
 
 ### If there is an equivalence `(f x = f y) ≃ (x = y)` that sends `refl` to `refl`, then f is an embedding
@@ -361,14 +361,15 @@ module _
       is-pullback f g c → is-emb g → is-emb (vertical-map-cone f g c)
     is-emb-vertical-map-cone-is-pullback pb is-emb-g =
       is-emb-is-prop-map
-        ( is-trunc-is-pullback neg-one-𝕋 f g c pb (is-prop-map-is-emb is-emb-g))
+        ( is-trunc-vertical-map-is-pullback neg-one-𝕋 f g c pb
+          ( is-prop-map-is-emb is-emb-g))
 
   abstract
     is-emb-horizontal-map-cone-is-pullback :
       is-pullback f g c → is-emb f → is-emb (horizontal-map-cone f g c)
     is-emb-horizontal-map-cone-is-pullback pb is-emb-f =
       is-emb-is-prop-map
-        ( is-trunc-is-pullback' neg-one-𝕋 f g c pb
+        ( is-trunc-horizontal-map-is-pullback neg-one-𝕋 f g c pb
           ( is-prop-map-is-emb is-emb-f))
 ```
 
@@ -406,7 +407,7 @@ module _
       ( map-inv-is-equiv K)
       ( map-inv-is-equiv L)
       ( top)
-      ( coherence-square-inv-vertical
+      ( vertical-inv-equiv-coherence-square-maps
         ( top)
         ( left , K)
         ( right , L)

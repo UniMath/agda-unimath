@@ -12,7 +12,7 @@ module synthetic-homotopy-theory.universal-property-pushouts where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospans
+open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -26,11 +26,12 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pullback-property-pushouts
@@ -59,24 +60,10 @@ map is an equivalence:
 ```
 
 There are several ways of asserting a condition equivalent to the universal
-property of pushouts:
+property of pushouts. The statements and proofs of mutual equivalence may be
+found in the following table:
 
-1. The universal property of pushouts
-2. The
-   [pullback property of pushouts](synthetic-homotopy-theory.pullback-property-pushouts.md).
-   This is a restatement of the universal property of pushouts in terms of
-   pullbacks.
-3. The
-   [dependent universal property of pushouts](synthetic-homotopy-theory.dependent-universal-property-pushouts.md).
-   This property characterizes _dependent_ functions out of a pushout
-4. The
-   [dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md).
-   This is a restatement of the dependent universal property of pushouts in
-   terms of pullbacks
-5. The
-   [induction principle of pushouts](synthetic-homotopy-theory.induction-principle-pushouts.md).
-   This weaker form of the dependent universal property of pushouts expresses
-   the induction principle of pushouts seen as higher inductive types.
+{{#include tables/pushouts.md}}
 
 ## Definition
 
@@ -262,8 +249,8 @@ triangle-pullback-property-pushout-universal-property-pushout :
   ( ( tot (λ i' → tot (λ j' → htpy-eq))) ∘
     ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y)))
 triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
-    eq-pair-Σ refl
-      ( eq-pair-Σ refl
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( inv (is-section-eq-htpy (h ·l coherence-square-cocone f g c))))
 
 pullback-property-pushout-universal-property-pushout :
@@ -304,11 +291,12 @@ is-equiv-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv f →
-  ({l : Level} → universal-property-pushout l f g c) → is-equiv (pr1 (pr2 c))
+  ({l : Level} → universal-property-pushout l f g c) →
+  is-equiv (vertical-map-cocone f g c)
 is-equiv-universal-property-pushout f g (i , j , H) is-equiv-f up-c =
   is-equiv-is-equiv-precomp j
     ( λ T →
-      is-equiv-is-pullback'
+      is-equiv-horizontal-map-is-pullback
         ( _∘ f)
         ( _∘ g)
         ( cone-pullback-property-pushout f g (i , j , H) T)
@@ -336,14 +324,14 @@ pr2 (equiv-universal-property-pushout e g c up-c) =
 universal-property-pushout-is-equiv :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g C) →
-  is-equiv f → is-equiv (pr1 (pr2 c)) →
+  is-equiv f → is-equiv (vertical-map-cocone f g c) →
   ({l : Level} → universal-property-pushout l f g c)
 universal-property-pushout-is-equiv
   f g (i , j , H) is-equiv-f is-equiv-j {l} =
   let c = (i , j , H) in
   universal-property-pushout-pullback-property-pushout l f g c
     ( λ T →
-      is-pullback-is-equiv'
+      is-pullback-is-equiv-horizontal-maps
         ( _∘ f)
         ( _∘ g)
         ( cone-pullback-property-pushout f g c T)
@@ -364,7 +352,7 @@ is-equiv-universal-property-pushout' f g c is-equiv-g up-c =
   is-equiv-is-equiv-precomp
     ( horizontal-map-cocone f g c)
     ( λ T →
-      is-equiv-is-pullback
+      is-equiv-vertical-map-is-pullback
         ( precomp f T)
         ( precomp g T)
         ( cone-pullback-property-pushout f g c T)
@@ -394,7 +382,7 @@ universal-property-pushout-is-equiv' f g (i , j , H) is-equiv-g is-equiv-i {l} =
   let c = (i , j , H) in
   universal-property-pushout-pullback-property-pushout l f g c
     ( λ T →
-      is-pullback-is-equiv
+      is-pullback-is-equiv-vertical-maps
         ( precomp f T)
         ( precomp g T)
         ( cone-pullback-property-pushout f g c T)

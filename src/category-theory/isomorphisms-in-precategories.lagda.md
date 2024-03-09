@@ -201,7 +201,7 @@ module _
     (g , p , q) (g' , p' , q') =
     eq-type-subtype
       ( λ g →
-        prod-Prop
+        product-Prop
           ( Id-Prop
             ( hom-set-Precategory C y y)
             ( comp-hom-Precategory C f g)

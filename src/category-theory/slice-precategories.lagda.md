@@ -212,7 +212,7 @@ module _
       ( Σ (hom-Precategory C A X) (λ g → f ＝ g))
       ( equiv-tot
         ( λ g → equiv-concat' f (left-unit-law-comp-hom-Precategory C g)))
-      ( is-torsorial-path f)
+      ( is-torsorial-Id f)
 ```
 
 ### Products in slice precategories are pullbacks in the original category
@@ -233,8 +233,8 @@ module _
     where
 
     map-is-pullback-is-product-Slice-Precategory :
-      is-pullback-Precategory C A X Y f g W p₁ p₂ α →
-      is-product-Precategory
+      is-pullback-obj-Precategory C A X Y f g W p₁ p₂ α →
+      is-product-obj-Precategory
         (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂)
     map-is-pullback-is-product-Slice-Precategory
       ϕ (Z , .(comp-hom-Precategory C f h₁)) (h₁ , refl) (h₂ , β₂) =
@@ -273,7 +273,7 @@ module _
             ( comp-hom-Precategory
               (Slice-Precategory C A) (p₂ , α₂) k ＝ (h₂ , β₂)))
       q k =
-        is-prop-prod
+        is-prop-product
           ( is-set-hom-Slice-Precategory C A _ _ _ _)
           ( is-set-hom-Slice-Precategory C A _ _ _ _)
 
@@ -295,9 +295,9 @@ module _
           ( ap pr1 (pr2 (ϕ Z h₁ h₂ β₂) (k , (ap pr1 γ₁ , ap pr1 γ₂))))
 
     map-inv-is-pullback-is-product-Slice-Precategory :
-      is-product-Precategory
+      is-product-obj-Precategory
         (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂) →
-      is-pullback-Precategory C A X Y f g W p₁ p₂ α
+      is-pullback-obj-Precategory C A X Y f g W p₁ p₂ α
     map-inv-is-pullback-is-product-Slice-Precategory ψ W' p₁' p₂' α' =
       is-contr-Σ-is-prop k γ q σ
       where
@@ -339,7 +339,7 @@ module _
           (( comp-hom-Precategory C p₁ k' ＝ p₁') ×
           ( comp-hom-Precategory C p₂ k' ＝ p₂'))
       q k' =
-        is-prop-prod
+        is-prop-product
           ( is-set-hom-Precategory C _ _ _ _)
           ( is-set-hom-Precategory C _ _ _ _)
 
@@ -362,20 +362,20 @@ module _
               ( eq-hom-Slice-Precategory C A _ _ γ₂)))
 
     equiv-is-pullback-is-product-Slice-Precategory :
-      is-pullback-Precategory C A X Y f g W p₁ p₂ α ≃
-      is-product-Precategory
+      is-pullback-obj-Precategory C A X Y f g W p₁ p₂ α ≃
+      is-product-obj-Precategory
         (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂)
     equiv-is-pullback-is-product-Slice-Precategory =
       equiv-prop
-        ( is-prop-is-pullback-Precategory C A X Y f g W p₁ p₂ α)
-        ( is-prop-is-product-Precategory
+        ( is-prop-is-pullback-obj-Precategory C A X Y f g W p₁ p₂ α)
+        ( is-prop-is-product-obj-Precategory
           (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂))
         ( map-is-pullback-is-product-Slice-Precategory)
         ( map-inv-is-pullback-is-product-Slice-Precategory)
 
   map-pullback-product-Slice-Precategory :
-    pullback-Precategory C A X Y f g →
-    product-Precategory (Slice-Precategory C A) (X , f) (Y , g)
+    pullback-obj-Precategory C A X Y f g →
+    product-obj-Precategory (Slice-Precategory C A) (X , f) (Y , g)
   pr1 (map-pullback-product-Slice-Precategory (W , p₁ , p₂ , α , q)) =
     (W , comp-hom-Precategory C f p₁)
   pr1 (pr2 (map-pullback-product-Slice-Precategory (W , p₁ , p₂ , α , q))) =
@@ -391,8 +391,8 @@ module _
       p₁ p₂ (comp-hom-Precategory C f p₁) refl α α q
 
   map-inv-pullback-product-Slice-Precategory :
-    product-Precategory (Slice-Precategory C A) (X , f) (Y , g) →
-    pullback-Precategory C A X Y f g
+    product-obj-Precategory (Slice-Precategory C A) (X , f) (Y , g) →
+    pullback-obj-Precategory C A X Y f g
   pr1 (map-inv-pullback-product-Slice-Precategory
     ((Z , h) , (h₁ , β₁) , (h₂ , β₂) , q)) = Z
   pr1 (pr2 (map-inv-pullback-product-Slice-Precategory
@@ -412,10 +412,8 @@ module _
       map-inv-pullback-product-Slice-Precategory) ~ id
   is-section-map-inv-pullback-product-Slice-Precategory
     ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-        ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( eq-type-subtype
           ( λ _ →
             is-product-prop-Precategory
@@ -432,19 +430,16 @@ module _
       map-pullback-product-Slice-Precategory) ~ id
   is-retraction-map-inv-pullback-product-Slice-Precategory
     ( W , p₁ , p₂ , α , q) =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-          ( refl)
-          ( eq-pair-Σ
-              ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
+          ( eq-pair-eq-fiber
               ( eq-type-subtype
                   (λ _ → is-pullback-prop-Precategory C A X Y f g _ _ _ α)
                   ( refl))))
 
   equiv-pullback-product-Slice-Precategory :
-    pullback-Precategory C A X Y f g ≃
-    product-Precategory (Slice-Precategory C A) (X , f) (Y , g)
+    pullback-obj-Precategory C A X Y f g ≃
+    product-obj-Precategory (Slice-Precategory C A) (X , f) (Y , g)
   pr1 equiv-pullback-product-Slice-Precategory =
     map-pullback-product-Slice-Precategory
   pr2 equiv-pullback-product-Slice-Precategory =

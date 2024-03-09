@@ -34,7 +34,7 @@ module _
 
   is-binary-lower-bound-Poset-Prop : Prop l2
   is-binary-lower-bound-Poset-Prop =
-    prod-Prop (leq-Poset-Prop P x a) (leq-Poset-Prop P x b)
+    product-Prop (leq-Poset-Prop P x a) (leq-Poset-Prop P x b)
 
   is-binary-lower-bound-Poset : UU l2
   is-binary-lower-bound-Poset =

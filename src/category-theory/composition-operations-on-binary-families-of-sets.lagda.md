@@ -52,7 +52,7 @@ module _
 
 ### Associative composition operations in binary families of sets
 
-We give a slightly non-standard definition of associativity, requiring an
+We give a slightly nonstandard definition of associativity, requiring an
 associativity witness in each direction. This is of course redundant as `inv` is
 a [fibered involution](foundation.fibered-involutions.md) on
 [identity types](foundation-core.identity-types.md). However, by recording both
@@ -187,7 +187,7 @@ module _
       ( λ x y z w →
         is-prop-iterated-Π 3
           ( λ h g f →
-            is-prop-prod
+            is-prop-product
               ( is-set-type-Set
                 ( hom-set x w)
                 ( comp-hom (comp-hom h g) f)
@@ -229,7 +229,7 @@ module _
       ( e' , left-unit-law-e' , right-unit-law-e') =
       eq-type-subtype
         ( λ x →
-          prod-Prop
+          product-Prop
             ( implicit-Π-Prop A
               ( λ a →
                 implicit-Π-Prop A
@@ -266,7 +266,6 @@ module _
 
 - [Set-magmoids](category-theory.set-magmoids.md) capture the structure of
   composition operations on binary families of sets.
-
 - [Precategories](category-theory.precategories.md) are associative and unital
   composition operations on binary families of sets.
 - [Nonunital precategories](category-theory.nonunital-precategories.md) are

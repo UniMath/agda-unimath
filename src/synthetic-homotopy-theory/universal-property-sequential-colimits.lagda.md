@@ -58,14 +58,14 @@ diagram
 
 ```agda
 module _
-  { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
+  { l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
   ( c : cocone-sequential-diagram A X)
   where
 
   universal-property-sequential-colimit : UUω
   universal-property-sequential-colimit =
     {l : Level} → (Y : UU l) →
-    is-equiv (cocone-map-sequential-diagram A c {Y = Y})
+    is-equiv (cocone-map-sequential-diagram c {Y = Y})
 ```
 
 ### The map induced by the universal property of sequential colimits
@@ -75,10 +75,17 @@ providing a cocone under the sequential diagram.
 
 ```agda
 module _
-  { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
-  ( c : cocone-sequential-diagram A X) {Y : UU l3}
-  ( up-sequential-colimit : universal-property-sequential-colimit A c)
+  { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
+  { c : cocone-sequential-diagram A X} {Y : UU l3}
+  ( up-sequential-colimit : universal-property-sequential-colimit c)
   where
+
+  equiv-universal-property-sequential-colimit :
+    (X → Y) ≃ cocone-sequential-diagram A Y
+  pr1 equiv-universal-property-sequential-colimit =
+    cocone-map-sequential-diagram c
+  pr2 equiv-universal-property-sequential-colimit =
+    up-sequential-colimit Y
 
   map-universal-property-sequential-colimit :
     cocone-sequential-diagram A Y → (X → Y)
@@ -92,23 +99,23 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2}
-  ( c : cocone-sequential-diagram A X) {Y : UU l3}
-  ( up-sequential-colimit : universal-property-sequential-colimit A c)
+  { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
+  { c : cocone-sequential-diagram A X} {Y : UU l3}
+  ( up-sequential-colimit : universal-property-sequential-colimit c)
   ( c' : cocone-sequential-diagram A Y)
   where
 
   htpy-cocone-universal-property-sequential-colimit :
-    htpy-cocone-sequential-diagram A
-      ( cocone-map-sequential-diagram A c
-        ( map-universal-property-sequential-colimit A c
+    htpy-cocone-sequential-diagram
+      ( cocone-map-sequential-diagram c
+        ( map-universal-property-sequential-colimit
           ( up-sequential-colimit)
           ( c')))
       ( c')
   htpy-cocone-universal-property-sequential-colimit =
     htpy-eq-cocone-sequential-diagram A
-      ( cocone-map-sequential-diagram A c
-        ( map-universal-property-sequential-colimit A c
+      ( cocone-map-sequential-diagram c
+        ( map-universal-property-sequential-colimit
           ( up-sequential-colimit)
           ( c')))
       ( c')
@@ -119,16 +126,16 @@ module _
       is-contr
         ( Σ ( X → Y)
             ( λ h →
-              htpy-cocone-sequential-diagram A
-                ( cocone-map-sequential-diagram A c h)
+              htpy-cocone-sequential-diagram
+                ( cocone-map-sequential-diagram c h)
                 ( c')))
     uniqueness-map-universal-property-sequential-colimit =
       is-contr-equiv'
-        ( fiber (cocone-map-sequential-diagram A c) c')
+        ( fiber (cocone-map-sequential-diagram c) c')
         ( equiv-tot
           ( λ h →
             extensionality-cocone-sequential-diagram A
-              ( cocone-map-sequential-diagram A c h)
+              ( cocone-map-sequential-diagram c h)
               ( c')))
         ( is-contr-map-is-equiv (up-sequential-colimit Y) c')
 ```
@@ -142,7 +149,7 @@ has the universal property of coequalizers.
 
 ```agda
 module _
-  { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
+  { l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
   ( c : cocone-sequential-diagram A X)
   where
 
@@ -152,12 +159,12 @@ module _
         ( bottom-map-cofork-cocone-sequential-diagram A)
         ( top-map-cofork-cocone-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)) →
-    universal-property-sequential-colimit A c
+    universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
     ( Y) =
     is-equiv-left-map-triangle
-      ( cocone-map-sequential-diagram A c)
+      ( cocone-map-sequential-diagram c)
       ( cocone-sequential-diagram-cofork A)
       ( cofork-map
         ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -168,7 +175,7 @@ module _
       ( is-equiv-cocone-sequential-diagram-cofork A)
 
   universal-property-coequalizer-universal-property-sequential-colimit :
-    universal-property-sequential-colimit A c →
+    universal-property-sequential-colimit c →
     ( {l : Level} →
       universal-property-coequalizer l
         ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -178,7 +185,7 @@ module _
     ( up-sequential-colimit)
     ( Y) =
     is-equiv-top-map-triangle
-      ( cocone-map-sequential-diagram A c)
+      ( cocone-map-sequential-diagram c)
       ( cocone-sequential-diagram-cofork A)
       ( cofork-map
         ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -198,42 +205,42 @@ the other has the universal property if and only if the map is an
 
 ```agda
 module _
-  { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2} {Y : UU l3}
+  { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2} {Y : UU l3}
   ( c : cocone-sequential-diagram A X)
   ( c' : cocone-sequential-diagram A Y)
   ( h : X → Y)
   ( H :
-    htpy-cocone-sequential-diagram A (cocone-map-sequential-diagram A c h) c')
+    htpy-cocone-sequential-diagram (cocone-map-sequential-diagram c h) c')
   where
 
   inv-triangle-cocone-map-precomp-sequential-diagram :
     { l4 : Level} (Z : UU l4) →
     coherence-triangle-maps'
-      ( cocone-map-sequential-diagram A c')
-      ( cocone-map-sequential-diagram A c)
+      ( cocone-map-sequential-diagram c')
+      ( cocone-map-sequential-diagram c)
       ( precomp h Z)
   inv-triangle-cocone-map-precomp-sequential-diagram Z k =
     ( cocone-map-comp-sequential-diagram A c h k) ∙
     ( ap
-      ( λ d → cocone-map-sequential-diagram A d k)
+      ( λ d → cocone-map-sequential-diagram d k)
       ( eq-htpy-cocone-sequential-diagram A
-        ( cocone-map-sequential-diagram A c h)
+        ( cocone-map-sequential-diagram c h)
         ( c')
         ( H)))
 
   triangle-cocone-map-precomp-sequential-diagram :
     { l4 : Level} (Z : UU l4) →
     coherence-triangle-maps
-      ( cocone-map-sequential-diagram A c')
-      ( cocone-map-sequential-diagram A c)
+      ( cocone-map-sequential-diagram c')
+      ( cocone-map-sequential-diagram c)
       ( precomp h Z)
   triangle-cocone-map-precomp-sequential-diagram Z =
     inv-htpy (inv-triangle-cocone-map-precomp-sequential-diagram Z)
 
   abstract
     is-equiv-universal-property-sequential-colimit-universal-property-sequential-colimit :
-      universal-property-sequential-colimit A c →
-      universal-property-sequential-colimit A c' →
+      universal-property-sequential-colimit c →
+      universal-property-sequential-colimit c' →
       is-equiv h
     is-equiv-universal-property-sequential-colimit-universal-property-sequential-colimit
       ( up-sequential-colimit)
@@ -241,24 +248,24 @@ module _
       is-equiv-is-equiv-precomp h
         ( λ Z →
           is-equiv-top-map-triangle
-            ( cocone-map-sequential-diagram A c')
-            ( cocone-map-sequential-diagram A c)
+            ( cocone-map-sequential-diagram c')
+            ( cocone-map-sequential-diagram c)
             ( precomp h Z)
             ( triangle-cocone-map-precomp-sequential-diagram Z)
             ( up-sequential-colimit Z)
             ( up-sequential-colimit' Z))
 
     universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit :
-      universal-property-sequential-colimit A c →
+      universal-property-sequential-colimit c →
       is-equiv h →
-      universal-property-sequential-colimit A c'
+      universal-property-sequential-colimit c'
     universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit
       ( up-sequential-colimit)
       ( is-equiv-h)
       ( Z) =
       is-equiv-left-map-triangle
-        ( cocone-map-sequential-diagram A c')
-        ( cocone-map-sequential-diagram A c)
+        ( cocone-map-sequential-diagram c')
+        ( cocone-map-sequential-diagram c)
         ( precomp h Z)
         ( triangle-cocone-map-precomp-sequential-diagram Z)
         ( is-equiv-precomp-is-equiv h is-equiv-h Z)
@@ -266,15 +273,15 @@ module _
 
     universal-property-sequential-colimit-universal-property-sequential-colimit-is-equiv :
       is-equiv h →
-      universal-property-sequential-colimit A c' →
-      universal-property-sequential-colimit A c
+      universal-property-sequential-colimit c' →
+      universal-property-sequential-colimit c
     universal-property-sequential-colimit-universal-property-sequential-colimit-is-equiv
       ( is-equiv-h)
       ( up-sequential-colimit)
       ( Z) =
       is-equiv-right-map-triangle
-        ( cocone-map-sequential-diagram A c')
-        ( cocone-map-sequential-diagram A c)
+        ( cocone-map-sequential-diagram c')
+        ( cocone-map-sequential-diagram c)
         ( precomp h Z)
         ( triangle-cocone-map-precomp-sequential-diagram Z)
         ( up-sequential-colimit Z)
@@ -285,11 +292,11 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} (A : sequential-diagram l1) {X : UU l2} {Y : UU l3}
-  ( c : cocone-sequential-diagram A X)
-  ( c' : cocone-sequential-diagram A Y)
-  ( up-c : universal-property-sequential-colimit A c)
-  ( up-c' : universal-property-sequential-colimit A c')
+  { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2} {Y : UU l3}
+  { c : cocone-sequential-diagram A X}
+  ( up-c : universal-property-sequential-colimit c)
+  { c' : cocone-sequential-diagram A Y}
+  ( up-c' : universal-property-sequential-colimit c')
   where
 
   abstract
@@ -297,21 +304,20 @@ module _
       is-contr
         ( Σ ( X ≃ Y)
             ( λ e →
-              htpy-cocone-sequential-diagram A
-                ( cocone-map-sequential-diagram A c (map-equiv e))
+              htpy-cocone-sequential-diagram
+                ( cocone-map-sequential-diagram c (map-equiv e))
                 ( c')))
     uniquely-unique-sequential-colimit =
       is-torsorial-Eq-subtype
-        ( uniqueness-map-universal-property-sequential-colimit A c up-c c')
+        ( uniqueness-map-universal-property-sequential-colimit up-c c')
         ( is-property-is-equiv)
-        ( map-universal-property-sequential-colimit A c up-c c')
-        ( htpy-cocone-universal-property-sequential-colimit A c up-c c')
+        ( map-universal-property-sequential-colimit up-c c')
+        ( htpy-cocone-universal-property-sequential-colimit up-c c')
         ( is-equiv-universal-property-sequential-colimit-universal-property-sequential-colimit
-          ( A)
           ( c)
           ( c')
-          ( map-universal-property-sequential-colimit A c up-c c')
-          ( htpy-cocone-universal-property-sequential-colimit A c up-c c')
+          ( map-universal-property-sequential-colimit up-c c')
+          ( htpy-cocone-universal-property-sequential-colimit up-c c')
           ( up-c)
           ( up-c'))
 ```
