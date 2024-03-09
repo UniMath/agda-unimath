@@ -17,7 +17,6 @@ open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

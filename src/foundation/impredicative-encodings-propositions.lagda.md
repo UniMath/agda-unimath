@@ -8,7 +8,6 @@ module foundation.impredicative-encodings-propositions where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.disjunction-propositions
 open import foundation.existential-quantification
 open import foundation.homotopies

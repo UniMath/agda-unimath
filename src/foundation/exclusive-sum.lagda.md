@@ -7,7 +7,6 @@ module foundation.exclusive-sum where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -23,6 +22,7 @@ open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
 open import foundation-core.decidable-propositions
 open import foundation-core.embeddings
 open import foundation-core.empty-types
