@@ -572,17 +572,13 @@ module _
           ( id-pointed-map)
           ( is-pointed-section-pointed-map-inv-is-pointed-equiv f H)))
 
-  retraction-universal-property-pointed-3quiv-is-pointed-equiv :
+  retraction-universal-property-pointed-equiv-is-pointed-equiv :
     (H : is-pointed-equiv f) →
     {l : Level} (C : Pointed-Type l) →
     retraction (precomp-pointed-map f C)
-  pr1
-    ( retraction-universal-property-pointed-3quiv-is-pointed-equiv H C)
-    =
+  pr1 (retraction-universal-property-pointed-equiv-is-pointed-equiv H C) =
     map-inv-universal-property-pointed-equiv-is-pointed-equiv H C
-  pr2
-    ( retraction-universal-property-pointed-3quiv-is-pointed-equiv H C)
-    =
+  pr2 (retraction-universal-property-pointed-equiv-is-pointed-equiv H C) =
     is-retraction-retraction-universal-property-pointed-equiv-is-pointed-equiv
       ( H)
       ( C)
@@ -593,7 +589,7 @@ module _
   pr1 (universal-property-pointed-equiv-is-pointed-equiv H C) =
     section-universal-property-pointed-equiv-is-pointed-equiv H C
   pr2 (universal-property-pointed-equiv-is-pointed-equiv H C) =
-    retraction-universal-property-pointed-3quiv-is-pointed-equiv H C
+    retraction-universal-property-pointed-equiv-is-pointed-equiv H C
 
 equiv-precomp-pointed-map :
   {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
