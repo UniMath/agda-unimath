@@ -230,7 +230,7 @@ decide-le-leq-ℚ x y =
         ( skew-commutative-cross-mul-diff-fraction-ℤ
           ( fraction-ℚ x)
           ( fraction-ℚ y))
-        ( is-nonnegative-neg-is-nonnpositive-ℤ H))
+        ( is-nonnegative-neg-is-nonpositive-ℤ H))
     ( decide-is-positive-is-nonpositive-ℤ)
 ```
 

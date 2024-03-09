@@ -151,7 +151,7 @@ is-nonnegative-pred-is-positive-ℤ {inr (inr zero-ℕ)} H = H
 is-nonnegative-pred-is-positive-ℤ {inr (inr (succ-ℕ x))} H = H
 ```
 
-#### The predecessor of a nonnpositive integer is negative
+#### The predecessor of a nonpositive integer is negative
 
 ```agda
 is-negative-pred-is-nonpositive-ℤ :
@@ -174,10 +174,10 @@ is-nonpositive-neg-is-nonnegative-ℤ {inr (inr x)} H = H
 #### The negative of a nonpositive integer is nonnegative
 
 ```agda
-is-nonnegative-neg-is-nonnpositive-ℤ :
+is-nonnegative-neg-is-nonpositive-ℤ :
   {x : ℤ} → is-nonpositive-ℤ x → is-nonnegative-ℤ (neg-ℤ x)
-is-nonnegative-neg-is-nonnpositive-ℤ {inl x} H = H
-is-nonnegative-neg-is-nonnpositive-ℤ {inr (inl x)} H = H
+is-nonnegative-neg-is-nonpositive-ℤ {inl x} H = H
+is-nonnegative-neg-is-nonpositive-ℤ {inr (inl x)} H = H
 ```
 
 #### The negative of a positive integer is negative

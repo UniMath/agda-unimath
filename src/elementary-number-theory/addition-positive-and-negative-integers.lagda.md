@@ -147,7 +147,7 @@ is-negative-add-negative-nonnegative-ℤ {x} {y} H K =
         ( inv (distributive-neg-add-ℤ x y))
         ( is-positive-add-positive-nonnegative-ℤ
           ( is-positive-neg-is-negative-ℤ H)
-          ( is-nonnegative-neg-is-nonnpositive-ℤ K))))
+          ( is-nonnegative-neg-is-nonpositive-ℤ K))))
 ```
 
 ### The sum of a nonpositive and a negative integer is negative
@@ -174,8 +174,8 @@ is-nonpositive-add-ℤ {x} {y} H K =
       ( is-nonnegative-eq-ℤ
         ( inv ( distributive-neg-add-ℤ x y))
         ( is-nonnegative-add-ℤ
-          ( is-nonnegative-neg-is-nonnpositive-ℤ H)
-          ( is-nonnegative-neg-is-nonnpositive-ℤ K))))
+          ( is-nonnegative-neg-is-nonpositive-ℤ H)
+          ( is-nonnegative-neg-is-nonpositive-ℤ K))))
 ```
 
 ## Definitions
