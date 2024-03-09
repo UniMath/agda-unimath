@@ -4,20 +4,17 @@ All of the references and sources of the agda-unimath library are managed in a
 [BibLaTeX](https://www.ctan.org/pkg/biblatex) file `references.bib`, and we have
 a custom set of macros to work with them.
 
-The three macros are as follows:
+The macros are as follows:
 
-- `#cite referenceXYZ` encased in double curly braces `{{...}}` (which we can't
-  write out because it will trigger the macro) will insert a citation to the
-  reference labeled `referenceXYZ` (which must be defined in the
-  `references.bib` file) at the current location, and add that reference to the
-  current page's bibliography.
-- `#reference referenceXYZ` in double curly braces will add the reference
-  labeled `referenceXYZ` to the current page's bibliography without inserting a
-  citation.
-- `#bibliography` in double curly braces is a marker for where the bibliography
-  of the current page should be inserted. If no such marker is found and the
-  bibliography is inhabited, it will be inserted at the bottom of the page in a
-  new section titled `References`.
+- `{­{#cite referenceXYZ}}` will insert a citation to the reference labeled
+  `referenceXYZ` (which must be defined in the `references.bib` file) at the
+  current location, and add that reference to the current page's bibliography.
+- `{­{#reference referenceXYZ}}` will add the reference labeled `referenceXYZ`
+  to the current page's bibliography without inserting a citation.
+- `{­{#bibliography}}` is a marker for where the bibliography of the current
+  page should be inserted. If no such marker is found and the bibliography is
+  inhabited, it will be inserted at the bottom of the page in a new section
+  titled `References`.
 
 Note that entries in the BibLaTeX file are expected to have all of the
 apropriate fields defined according to their type. For instance, `@book`s _must_
@@ -30,9 +27,9 @@ when you post your pull request to `agda-unimath` you can refer to the CI for
 possible issues.
 
 **Note:** If the citation label of your reference is not being generated
-properly, we have a custom `citeas` field that can be used to overwrite it. For
-instance, _Homotopy Type Theory: Univalent Foundations of Mathematics_ should be
-cited as {{#cite UF13}}, and to make this work we have set `citeas = {UF13}` for
-its BibLaTeX entry. Keep in mind that if the citation label is not being
-generated properly, then it is probable that the author list is not being parsed
-properly either.
+properly, we support a custom `citeas` field that can be used to overwrite it.
+For instance, _Homotopy Type Theory: Univalent Foundations of Mathematics_
+should be cited as {{#cite UF13}}, and to make it so we have set
+`citeas = {UF13}` for its BibLaTeX entry. Keep in mind that if the citation
+label is not being generated properly, then it is likely that the author list is
+not being parsed properly either.
