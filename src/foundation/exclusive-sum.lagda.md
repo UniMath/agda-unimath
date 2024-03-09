@@ -10,26 +10,17 @@ module foundation.exclusive-sum where
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.equality-coproduct-types
-open import foundation.functoriality-coproduct-types
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.symmetric-operations
-open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
 open import foundation-core.decidable-propositions
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.transport-along-identifications

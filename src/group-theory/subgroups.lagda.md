@@ -13,13 +13,11 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.disjunction-propositions
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations

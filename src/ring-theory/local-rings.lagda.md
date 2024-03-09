@@ -8,7 +8,6 @@ module ring-theory.local-rings where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.disjunction-propositions
 open import foundation.propositions
 open import foundation.sets
