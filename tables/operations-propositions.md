@@ -20,8 +20,7 @@ of operations that generalize to give propositions for arbitrary types.
 | [Coproduct](foundation-core.coproduct-types.md)             | `+`               | _N/A_                    |
 
 Note that for many operations in the second section, there is an equivalent
-operation on propositions in the first. In these cases, the operation from the
-first list is usually preferred.
+operation on propositions in the first.
 
 | Name                                                                   | Operator on types | Operator on propositions                     |
 | ---------------------------------------------------------------------- | ----------------- | -------------------------------------------- |

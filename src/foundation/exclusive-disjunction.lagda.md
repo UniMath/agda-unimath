@@ -16,6 +16,7 @@ open import foundation.exclusive-sum
 open import foundation.functoriality-coproduct-types
 open import foundation.negation
 open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
 open import foundation.symmetric-operations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
@@ -63,7 +64,7 @@ module _
   where
 
   xor-prop : Prop (l1 ⊔ l2)
-  xor-prop = is-contr-Prop (A + B)
+  xor-prop = is-contr-Prop (║ A ║₋₁ + ║ B ║₋₁)
 
   xor : UU (l1 ⊔ l2)
   xor = type-Prop xor-prop
@@ -85,7 +86,7 @@ module _
   where
 
   xor-Prop : Prop (l1 ⊔ l2)
-  xor-Prop = xor-prop (type-Prop P) (type-Prop Q)
+  xor-Prop = is-contr-Prop (type-Prop P + type-Prop Q)
 
   type-xor-Prop : UU (l1 ⊔ l2)
   type-xor-Prop = type-Prop xor-Prop
