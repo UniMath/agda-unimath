@@ -506,7 +506,16 @@ module _
         ( pointed-map-codomain-hom-pointed-arrow f g α , refl-pointed-htpy _)
         ( is-contr-equiv' _
           ( equiv-tot
-            ( λ H → {!equiv-concat-pointed-htpy!}))
+            ( λ H →
+              equiv-concat-pointed-2-htpy'
+                ( inv-pointed-2-htpy
+                  ( concat-pointed-2-htpy
+                    ( right-whisker-concat-pointed-2-htpy _ _
+                      ( compute-refl-right-whisker-comp-pointed-htpy
+                        ( pointed-map-codomain-hom-pointed-arrow f g α)
+                        ( f))
+                      ( H))
+                    ( left-unit-law-concat-pointed-htpy H)))))
           ( is-torsorial-pointed-2-htpy
             ( concat-pointed-htpy
               ( coh-hom-pointed-arrow f g α)

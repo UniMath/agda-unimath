@@ -144,7 +144,7 @@ module _
       ( concat-pointed-htpy H K)
       ( concat-pointed-htpy H L)
   htpy-left-whisker-concat-pointed-2-htpy =
-    left-whisker-concat-htpy (htpy-pointed-htpy H) (htpy-pointed-2-htpy K L α)
+    left-whisker-concat-htpy (htpy-pointed-htpy H) (htpy-pointed-2-htpy α)
 
   coherence-point-left-whisker-concat-pointed-2-htpy :
     coherence-point-unpointed-htpy-pointed-htpy
@@ -162,8 +162,8 @@ module _
       ( coherence-point-pointed-htpy H)
       ( coherence-point-pointed-htpy K)
       ( coherence-point-pointed-htpy L)
-      ( htpy-pointed-2-htpy K L α (point-Pointed-Type A))
-      ( coherence-point-pointed-2-htpy K L α)
+      ( htpy-pointed-2-htpy α (point-Pointed-Type A))
+      ( coherence-point-pointed-2-htpy α)
 
   left-whisker-concat-pointed-2-htpy :
     concat-pointed-htpy H K ~²∗ concat-pointed-htpy H L
@@ -250,7 +250,7 @@ module _
       ( concat-pointed-htpy H L)
       ( concat-pointed-htpy K L)
   htpy-right-whisker-concat-pointed-2-htpy =
-    right-whisker-concat-htpy (htpy-pointed-2-htpy H K α) (htpy-pointed-htpy L)
+    right-whisker-concat-htpy (htpy-pointed-2-htpy α) (htpy-pointed-htpy L)
 
   coherence-point-right-whisker-concat-pointed-2-htpy :
     coherence-point-unpointed-htpy-pointed-htpy
@@ -268,8 +268,8 @@ module _
       ( coherence-point-pointed-htpy H)
       ( coherence-point-pointed-htpy K)
       ( coherence-point-pointed-htpy L)
-      ( htpy-pointed-2-htpy H K α (point-Pointed-Type A))
-      ( coherence-point-pointed-2-htpy H K α)
+      ( htpy-pointed-2-htpy α (point-Pointed-Type A))
+      ( coherence-point-pointed-2-htpy α)
 
   right-whisker-concat-pointed-2-htpy :
     concat-pointed-htpy H L ~²∗ concat-pointed-htpy K L
