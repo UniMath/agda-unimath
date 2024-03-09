@@ -8,10 +8,12 @@ module structured-types.pointed-2-homotopies where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.commuting-triangles-of-identifications
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
@@ -335,6 +337,85 @@ module _
   eq-pointed-2-htpy :
     (K : f ~∗ g) → H ~²∗ K → H ＝ K
   eq-pointed-2-htpy K = map-inv-equiv (extensionality-pointed-htpy K)
+```
+
+### Concatenation of pointed 2-homotopies is a binary equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  {f g : pointed-Π A B} {H K L : f ~∗ g}
+  where
+
+  abstract
+    is-equiv-concat-pointed-2-htpy :
+      (α : H ~²∗ K) → is-equiv (λ (β : K ~²∗ L) → concat-pointed-2-htpy α β)
+    is-equiv-concat-pointed-2-htpy α =
+      is-equiv-map-Σ _
+        ( is-equiv-concat-htpy (htpy-pointed-2-htpy α) _)
+        ( λ β →
+          is-equiv-comp _ _
+            ( is-equiv-right-pasting-coherence-triangle-identifications'
+              ( coherence-point-pointed-htpy L)
+              ( right-whisker-concat
+                ( htpy-pointed-2-htpy α _)
+                ( preserves-point-function-pointed-Π g))
+              ( right-whisker-concat
+                ( β _)
+                ( preserves-point-function-pointed-Π g))
+              ( coherence-point-pointed-htpy K)
+              ( coherence-point-pointed-htpy H)
+              ( coherence-point-pointed-2-htpy α))
+            ( is-equiv-concat' _
+              ( inv
+                ( left-whisker-concat
+                  ( coherence-point-pointed-htpy H)
+                  ( distributive-right-whisker-concat-concat
+                    ( htpy-pointed-2-htpy α _)
+                    ( β _)
+                    ( preserves-point-function-pointed-Π g))))))
+
+  equiv-concat-pointed-2-htpy : H ~²∗ K → (K ~²∗ L) ≃ (H ~²∗ L)
+  pr1 (equiv-concat-pointed-2-htpy α) = concat-pointed-2-htpy α
+  pr2 (equiv-concat-pointed-2-htpy α) = is-equiv-concat-pointed-2-htpy α
+
+  abstract
+    is-equiv-concat-pointed-2-htpy' :
+      (β : K ~²∗ L) → is-equiv (λ (α : H ~²∗ K) → concat-pointed-2-htpy α β)
+    is-equiv-concat-pointed-2-htpy' β =
+      is-equiv-map-Σ _
+        ( is-equiv-concat-htpy' _ (htpy-pointed-2-htpy β))
+        ( λ α →
+          is-equiv-comp _ _
+            ( is-equiv-right-pasting-coherence-triangle-identifications
+              ( coherence-point-pointed-htpy L)
+              ( right-whisker-concat
+                ( α _)
+                ( preserves-point-function-pointed-Π g))
+              ( right-whisker-concat
+                ( htpy-pointed-2-htpy β _)
+                ( preserves-point-function-pointed-Π g))
+              ( coherence-point-pointed-htpy K)
+              ( coherence-point-pointed-htpy H)
+              ( coherence-point-pointed-2-htpy β))
+            ( is-equiv-concat' _
+              ( inv
+                ( left-whisker-concat
+                  ( coherence-point-pointed-htpy H)
+                  ( distributive-right-whisker-concat-concat
+                    ( α _)
+                    ( htpy-pointed-2-htpy β _)
+                    ( preserves-point-function-pointed-Π g))))))
+
+  equiv-concat-pointed-2-htpy' :
+    K ~²∗ L → (H ~²∗ K) ≃ (H ~²∗ L)
+  pr1 (equiv-concat-pointed-2-htpy' β) α = concat-pointed-2-htpy α β
+  pr2 (equiv-concat-pointed-2-htpy' β) = is-equiv-concat-pointed-2-htpy' β
+
+  is-binary-equiv-concat-pointed-2-htpy :
+    is-binary-equiv (λ (α : H ~²∗ K) (β : K ~²∗ L) → concat-pointed-2-htpy α β)
+  pr1 is-binary-equiv-concat-pointed-2-htpy = is-equiv-concat-pointed-2-htpy'
+  pr2 is-binary-equiv-concat-pointed-2-htpy = is-equiv-concat-pointed-2-htpy
 ```
 
 ### Associativity of concatenation of pointed homotopies
