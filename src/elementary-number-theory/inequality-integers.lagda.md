@@ -136,7 +136,7 @@ concatenate-eq-leq-ℤ :
 concatenate-eq-leq-ℤ y refl H = H
 ```
 
-## Strict inequality on the integers is transitive and asymmetric
+### Strict inequality on the integers is transitive and asymmetric
 
 ```agda
 transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
