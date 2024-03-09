@@ -56,14 +56,9 @@ square-root-ℤ _ (root , _) = root
 is-nonnegative-square-ℤ : (a : ℤ) → is-nonnegative-ℤ (square-ℤ a)
 is-nonnegative-square-ℤ a =
   rec-coproduct
-    ( λ H →
-      is-nonnegative-eq-ℤ
-        ( double-negative-law-mul-ℤ a a)
-        ( is-nonnegative-mul-ℤ
-          ( is-nonnegative-is-positive-ℤ (is-positive-neg-is-negative-ℤ H))
-          ( is-nonnegative-is-positive-ℤ (is-positive-neg-is-negative-ℤ H))))
-    ( λ H → is-nonnegative-mul-ℤ {a} {a} H H)
-    ( decide-is-negative-is-nonnegative-ℤ)
+    ( λ H → is-nonnegative-is-positive-ℤ (is-positive-mul-negative-ℤ H H))
+    ( λ H → is-nonnegative-mul-ℤ H H)
+    ( decide-is-negative-is-nonnegative-ℤ {a})
 ```
 
 ### The squares in ℤ are exactly the squares in ℕ
