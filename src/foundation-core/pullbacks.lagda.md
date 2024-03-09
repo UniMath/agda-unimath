@@ -518,7 +518,7 @@ over the pullbacks as in the following diagram
   ∙ ------------> ∙ ------------> C
   |               | ⌟             |
   |       γ       |       β       | i
-  |               ∨               ∨
+  ∨               ∨               ∨
   ∙ ------------> B ------------> Y
   | ⌟             |       h
   |       α       | g
