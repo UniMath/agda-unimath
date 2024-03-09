@@ -420,7 +420,7 @@ module _
     is-orthogonal-pullback-condition f g →
     is-orthogonal-pullback-condition f (h ∘ g)
   is-orthogonal-pullback-condition-right-comp =
-    is-pullback-rectangle-is-pullback-top
+    is-pullback-rectangle-is-pullback-top-square
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
@@ -452,7 +452,7 @@ module _
     is-orthogonal-pullback-condition f (h ∘ g) →
     is-orthogonal-pullback-condition f g
   is-orthogonal-pullback-condition-right-right-factor =
-    is-pullback-top-is-pullback-rectangle
+    is-pullback-top-square-is-pullback-rectangle
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
