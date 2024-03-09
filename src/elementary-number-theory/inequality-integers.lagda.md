@@ -34,7 +34,13 @@ open import foundation.universe-levels
 
 </details>
 
+## Idea
+
+The comparison of two integers is given by the sign of their difference.
+
 ## Definition
+
+### The ordering on ℤ
 
 ```agda
 leq-ℤ-Prop : ℤ → ℤ → Prop lzero
@@ -48,59 +54,6 @@ is-prop-leq-ℤ x y = is-prop-type-Prop (leq-ℤ-Prop x y)
 
 infix 30 _≤-ℤ_
 _≤-ℤ_ = leq-ℤ
-```
-
-## Properties
-
-```agda
-refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
-refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
-
-antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
-antisymmetric-leq-ℤ {x} {y} H K =
-  eq-diff-ℤ
-    ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ K
-      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
-
-transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
-transitive-leq-ℤ k l m p q =
-  is-nonnegative-eq-ℤ
-    ( triangle-diff-ℤ m l k)
-    ( is-nonnegative-add-ℤ q p)
-
-decide-leq-ℤ : {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
-decide-leq-ℤ {x} {y} =
-  map-coproduct
-    ( λ H →
-      is-nonnegative-is-positive-ℤ
-        ( is-positive-eq-ℤ
-          ( distributive-neg-diff-ℤ x y)
-          ( is-positive-neg-is-negative-ℤ H)))
-    ( id)
-    ( decide-is-negative-is-nonnegative-ℤ)
-
-succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
-succ-leq-ℤ k =
-  is-nonnegative-eq-ℤ
-    ( inv
-      ( ( left-successor-law-add-ℤ k (neg-ℤ k)) ∙
-        ( ap succ-ℤ (right-inverse-law-add-ℤ k))))
-    ( star)
-
-leq-ℤ-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
-leq-ℤ-succ-leq-ℤ k l p = transitive-leq-ℤ k l (succ-ℤ l) p (succ-leq-ℤ l)
-
-concatenate-eq-leq-eq-ℤ :
-  {x' x y y' : ℤ} → x' ＝ x → leq-ℤ x y → y ＝ y' → leq-ℤ x' y'
-concatenate-eq-leq-eq-ℤ refl H refl = H
-
-concatenate-leq-eq-ℤ :
-  (x : ℤ) {y y' : ℤ} → leq-ℤ x y → y ＝ y' → leq-ℤ x y'
-concatenate-leq-eq-ℤ x H refl = H
-
-concatenate-eq-leq-ℤ :
-  {x x' : ℤ} (y : ℤ) → x' ＝ x → leq-ℤ x y → leq-ℤ x' y
-concatenate-eq-leq-ℤ y refl H = H
 ```
 
 ### The strict ordering on ℤ
@@ -118,6 +71,73 @@ is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 
 ## Properties
 
+### Inequality on the integers is reflexive, antisymmetric and transitive
+
+```agda
+refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
+refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
+
+antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
+antisymmetric-leq-ℤ {x} {y} H K =
+  eq-diff-ℤ
+    ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ K
+      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
+
+transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
+transitive-leq-ℤ k l m p q =
+  is-nonnegative-eq-ℤ
+    ( triangle-diff-ℤ m l k)
+    ( is-nonnegative-add-ℤ q p)
+```
+
+### The ordering of the integers is total
+
+```agda
+decide-leq-ℤ : {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
+decide-leq-ℤ {x} {y} =
+  map-coproduct
+    ( λ H →
+      is-nonnegative-is-positive-ℤ
+        ( is-positive-eq-ℤ
+          ( distributive-neg-diff-ℤ x y)
+          ( is-positive-neg-is-negative-ℤ H)))
+    ( id)
+    ( decide-is-negative-is-nonnegative-ℤ)
+```
+
+### An integer is inferior to its successor
+
+```agda
+succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
+succ-leq-ℤ k =
+  is-nonnegative-eq-ℤ
+    ( inv
+      ( ( left-successor-law-add-ℤ k (neg-ℤ k)) ∙
+        ( ap succ-ℤ (right-inverse-law-add-ℤ k))))
+    ( star)
+
+leq-ℤ-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
+leq-ℤ-succ-leq-ℤ k l p = transitive-leq-ℤ k l (succ-ℤ l) p (succ-leq-ℤ l)
+```
+
+### Chaining rules for equality and inequality
+
+```agda
+concatenate-eq-leq-eq-ℤ :
+  {x' x y y' : ℤ} → x' ＝ x → leq-ℤ x y → y ＝ y' → leq-ℤ x' y'
+concatenate-eq-leq-eq-ℤ refl H refl = H
+
+concatenate-leq-eq-ℤ :
+  (x : ℤ) {y y' : ℤ} → leq-ℤ x y → y ＝ y' → leq-ℤ x y'
+concatenate-leq-eq-ℤ x H refl = H
+
+concatenate-eq-leq-ℤ :
+  {x x' : ℤ} (y : ℤ) → x' ＝ x → leq-ℤ x y → leq-ℤ x' y
+concatenate-eq-leq-ℤ y refl H = H
+```
+
+## Strict inequality on the integers is transitive and asymmetric
+
 ```agda
 transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
 transitive-le-ℤ k l m p q =
@@ -132,7 +152,11 @@ asymmetric-le-ℤ x y p =
       ( distributive-neg-diff-ℤ y x)
       ( is-nonpositive-neg-is-nonnegative-ℤ
         ( is-nonnegative-is-positive-ℤ p)))
+```
 
+### The strict ordering on the integers is connected
+
+```agda
 connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
 connected-le-ℤ x y H =
   map-coproduct
@@ -142,7 +166,11 @@ connected-le-ℤ x y H =
         ( is-positive-neg-is-negative-ℤ K))
     ( id)
     ( decide-sign-nonzero-ℤ (H ∘ eq-diff-ℤ))
+```
 
+### Predecessor and successor relations
+
+```agda
 le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
 le-pred-ℤ x =
   is-positive-eq-ℤ
