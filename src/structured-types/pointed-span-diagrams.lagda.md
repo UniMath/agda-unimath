@@ -50,11 +50,7 @@ module _
 
   make-pointed-span-diagram :
     (S →∗ A) → (S →∗ B) → pointed-span-diagram l2 l3 l1
-  pr1 (make-pointed-span-diagram f g) = A
-  pr1 (pr2 (make-pointed-span-diagram f g)) = B
-  pr1 (pr2 (pr2 (make-pointed-span-diagram f g))) = S
-  pr1 (pr2 (pr2 (pr2 (make-pointed-span-diagram f g)))) = f
-  pr2 (pr2 (pr2 (pr2 (make-pointed-span-diagram f g)))) = g
+  make-pointed-span-diagram f g = (A , B , S , f , g)
 
 module _
   {l1 l2 l3 : Level} (𝒮 : pointed-span-diagram l1 l2 l3)

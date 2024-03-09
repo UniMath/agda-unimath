@@ -23,7 +23,7 @@ on [pointed maps](structured-types.pointed-maps.md) by a pointed map
 `f : A →∗ B` is a family of operations
 
 ```text
-  - ∘∗ f : (X →∗ A) → (X →∗ B)
+  f ∘∗ - : (X →∗ A) → (X →∗ B)
 ```
 
 indexed by a [pointed type](structured-types.pointed-types.md) `X`.

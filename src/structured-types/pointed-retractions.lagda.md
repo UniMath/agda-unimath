@@ -57,15 +57,15 @@ module _
     Σ (B →∗ A) (is-pointed-retraction f)
 
   module _
-    (s : pointed-retraction)
+    (r : pointed-retraction)
     where
 
     pointed-map-pointed-retraction : B →∗ A
-    pointed-map-pointed-retraction = pr1 s
+    pointed-map-pointed-retraction = pr1 r
 
     is-pointed-retraction-pointed-retraction :
       is-pointed-retraction f pointed-map-pointed-retraction
-    is-pointed-retraction-pointed-retraction = pr2 s
+    is-pointed-retraction-pointed-retraction = pr2 r
 
     map-pointed-retraction : type-Pointed-Type B → type-Pointed-Type A
     map-pointed-retraction = map-pointed-map pointed-map-pointed-retraction

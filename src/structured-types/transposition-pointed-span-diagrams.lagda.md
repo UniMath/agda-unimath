@@ -35,7 +35,7 @@ is the pointed span diagram
 ```
 
 In other words, the transposition of a pointed span diagram `(A , B , s)` is the
-pointed span diagram `(B , A , opposite-span s)` where `opposite-pointed-span s`
+pointed span diagram `(B , A , opposite-pointed-span s)` where `opposite-pointed-span s`
 is the [opposite](structured-types.opposite-pointed-spans.md) of the
 [pointed span](structured-types.pointed-spans.md) `s` from `A` to `B`.
 

@@ -19,6 +19,7 @@ open import structured-types.commuting-squares-of-pointed-maps
 open import structured-types.constant-pointed-maps
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
+open import structured-types.pointed-span-diagrams
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
@@ -28,7 +29,7 @@ open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 
 ## Idea
 
-The {{#concept "null cocone" Disambiguation="pointed span diagram}} under a
+The {{#concept "null cocone" Disambiguation="pointed span diagram"}} under a
 [pointed span diagram](structured-types.pointed-span-diagrams.md) `𝒮` given by
 
 ```text
@@ -62,45 +63,69 @@ cocone under `𝒮` provides a canonical pointing of the type
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  {S : Pointed-Type l1} {A : Pointed-Type l2}
-  {B : Pointed-Type l3}
-  (f : S →∗ A) (g : S →∗ B)
+  {l1 l2 l3 l4 : Level} (𝒮 : pointed-span-diagram l1 l2 l3)
   (X : Pointed-Type l4)
   where
 
-  left-pointed-map-null-cocone-Pointed-Type : A →∗ X
-  left-pointed-map-null-cocone-Pointed-Type = constant-pointed-map A X
+  left-pointed-map-null-cocone-Pointed-Type :
+    pointed-domain-pointed-span-diagram 𝒮 →∗ X
+  left-pointed-map-null-cocone-Pointed-Type = constant-pointed-map _ X
 
-  right-pointed-map-null-cocone-Pointed-Type : B →∗ X
-  right-pointed-map-null-cocone-Pointed-Type = constant-pointed-map B X
+  left-map-null-cocone-Pointed-Type :
+    domain-pointed-span-diagram 𝒮 → type-Pointed-Type X
+  left-map-null-cocone-Pointed-Type =
+    map-pointed-map left-pointed-map-null-cocone-Pointed-Type
+
+  preserves-point-left-map-null-cocone-Pointed-Type :
+    left-map-null-cocone-Pointed-Type (point-domain-pointed-span-diagram 𝒮) ＝
+    point-Pointed-Type X
+  preserves-point-left-map-null-cocone-Pointed-Type =
+    preserves-point-pointed-map left-pointed-map-null-cocone-Pointed-Type
+
+  right-pointed-map-null-cocone-Pointed-Type :
+    pointed-codomain-pointed-span-diagram 𝒮 →∗ X
+  right-pointed-map-null-cocone-Pointed-Type = constant-pointed-map _ X
+
+  right-map-null-cocone-Pointed-Type :
+    codomain-pointed-span-diagram 𝒮 → type-Pointed-Type X
+  right-map-null-cocone-Pointed-Type =
+    map-pointed-map right-pointed-map-null-cocone-Pointed-Type
+
+  preserves-point-right-map-null-cocone-Pointed-Type :
+    right-map-null-cocone-Pointed-Type
+      ( point-codomain-pointed-span-diagram 𝒮) ＝
+    point-Pointed-Type X
+  preserves-point-right-map-null-cocone-Pointed-Type =
+    preserves-point-pointed-map right-pointed-map-null-cocone-Pointed-Type
 
   htpy-coherence-square-null-cocone-Pointed-Type :
     coherence-square-maps
-      ( map-pointed-map g)
-      ( map-pointed-map f)
-      ( map-constant-pointed-map B X)
-      ( map-constant-pointed-map A X)
+      ( map-pointed-map (right-pointed-map-pointed-span-diagram 𝒮))
+      ( map-pointed-map (left-pointed-map-pointed-span-diagram 𝒮))
+      ( map-constant-pointed-map (pointed-codomain-pointed-span-diagram 𝒮) X)
+      ( map-constant-pointed-map (pointed-domain-pointed-span-diagram 𝒮) X)
   htpy-coherence-square-null-cocone-Pointed-Type = refl-htpy
 
   coherence-point-coherence-square-null-cocone-Pointed-Type :
     coherence-point-unpointed-htpy-pointed-Π
-      ( constant-pointed-map A X ∘∗ f)
-      ( constant-pointed-map B X ∘∗ g)
+      ( constant-pointed-map _ X ∘∗ (left-pointed-map-pointed-span-diagram 𝒮))
+      ( constant-pointed-map _ X ∘∗ (right-pointed-map-pointed-span-diagram 𝒮))
       ( htpy-coherence-square-null-cocone-Pointed-Type)
   coherence-point-coherence-square-null-cocone-Pointed-Type =
     right-whisker-concat
       ( ( ap-const
           ( point-Pointed-Type X)
-          ( preserves-point-pointed-map f)) ∙
+          ( preserves-point-left-map-pointed-span-diagram 𝒮)) ∙
         ( inv
           ( ap-const
             ( point-Pointed-Type X)
-            ( preserves-point-pointed-map g))))
+            ( preserves-point-right-map-pointed-span-diagram 𝒮))))
       ( refl)
 
   coherence-square-null-cocone-Pointed-Type :
-    coherence-square-pointed-maps g f
+    coherence-square-pointed-maps
+      ( right-pointed-map-pointed-span-diagram 𝒮)
+      ( left-pointed-map-pointed-span-diagram 𝒮)
       ( right-pointed-map-null-cocone-Pointed-Type)
       ( left-pointed-map-null-cocone-Pointed-Type)
   pr1 coherence-square-null-cocone-Pointed-Type =
@@ -108,7 +133,11 @@ module _
   pr2 coherence-square-null-cocone-Pointed-Type =
     coherence-point-coherence-square-null-cocone-Pointed-Type
 
-  null-cocone-Pointed-Type : cocone-Pointed-Type f g X
+  null-cocone-Pointed-Type :
+    cocone-Pointed-Type
+      ( left-pointed-map-pointed-span-diagram 𝒮)
+      ( right-pointed-map-pointed-span-diagram 𝒮)
+      ( X)
   pr1 null-cocone-Pointed-Type =
     left-pointed-map-null-cocone-Pointed-Type
   pr1 (pr2 null-cocone-Pointed-Type) =
@@ -121,17 +150,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  {S : Pointed-Type l1} {A : Pointed-Type l2}
-  {B : Pointed-Type l3}
-  (f : S →∗ A) (g : S →∗ B)
+  {l1 l2 l3 l4 : Level} (𝒮 : pointed-span-diagram l1 l2 l3)
   (X : Pointed-Type l4)
   where
 
   type-cocone-pointed-type-Pointed-Type : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  type-cocone-pointed-type-Pointed-Type = cocone-Pointed-Type f g X
+  type-cocone-pointed-type-Pointed-Type =
+    cocone-Pointed-Type
+      ( left-pointed-map-pointed-span-diagram 𝒮)
+      ( right-pointed-map-pointed-span-diagram 𝒮)
+      ( X)
 
   cocone-pointed-type-Pointed-Type : Pointed-Type (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pr1 cocone-pointed-type-Pointed-Type = type-cocone-pointed-type-Pointed-Type
-  pr2 cocone-pointed-type-Pointed-Type = null-cocone-Pointed-Type f g X
+  pr2 cocone-pointed-type-Pointed-Type = null-cocone-Pointed-Type 𝒮 X
 ```
