@@ -98,9 +98,9 @@ can easily be iterated in order to consider pointed higher homotopies. For this
 reason, we call the second definition of pointed homotopies
 {{#concept "uniform pointed homotopies"}}.
 
-A complication of this approach to the definition of pointed homotopies is that
-identifications witnessing the commutativity of the triangle in a pointed
-homotopy is slightly more complicated to construct a base point coherence
+Note that the difference between our main definition of pointed homotopies and
+the uniform definition of pointed homotopies is the direction of the
+identification on the right in the commuting triangle
 
 ```text
         H₀ *
@@ -109,12 +109,14 @@ homotopy is slightly more complicated to construct a base point coherence
     f₁ \     / g₁
         \   /
          ∨ ∨
-          *,
+          *.
 ```
 
-of the first definition, where the identification on the right goes down in the
-direction of `g₁`. This complication becomes more significant and bothersome
-when we are trying to construct a
+In the definition of uniform pointed homotopies it goes in the reverse
+direction. This makes it slightly more complicated to construct an
+identification witnessing that the triangle commutes in the case of uniform
+pointed homotopies. Furthermore, this complication becomes more significant and
+bothersome when we are trying to construct a
 [pointed 2-homotopy](structured-types.pointed-2-homotopies.md). For this reason,
 our first definition where pointed homotopies are defined to consist of
 unpointed homotopies and a base point coherence, is taken to be our main
@@ -152,8 +154,9 @@ module _
 
 ### The base point coherence of unpointed homotopies between pointed maps
 
-The coherence of pointed homotopies asserts that its underlying homotopy
-preserves the base point, in the sense that the triangle of identifications
+The base point coherence of pointed homotopies asserts that its underlying
+homotopy preserves the base point, in the sense that the triangle of
+identifications
 
 ```text
                       H *

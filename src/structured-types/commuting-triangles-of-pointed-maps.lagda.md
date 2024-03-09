@@ -97,7 +97,7 @@ In other words, left whiskering of coherences of commuting triangles of pointed
 maps is an operation
 
 ```text
-  (left ~∗ right ∘∗ top) → (f ∘∗ left ~ ∗ (f ∘∗ right) ∘∗ top).
+  (left ~∗ right ∘∗ top) → (f ∘∗ left ~∗ (f ∘∗ right) ∘∗ top).
 ```
 
 ```agda

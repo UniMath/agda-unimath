@@ -69,68 +69,63 @@ module _
   equiv-pointed-arrow =
     Σ (A ≃∗ X) (λ i → Σ (B ≃∗ Y) (coherence-equiv-pointed-arrow i))
 
-  pointed-equiv-domain-equiv-pointed-arrow :
-    equiv-pointed-arrow → A ≃∗ X
-  pointed-equiv-domain-equiv-pointed-arrow = pr1
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  {f : A →∗ B} {g : X →∗ Y} (e : equiv-pointed-arrow f g)
+  where
 
-  equiv-domain-equiv-pointed-arrow :
-    equiv-pointed-arrow → type-Pointed-Type A ≃ type-Pointed-Type X
-  equiv-domain-equiv-pointed-arrow e =
-    equiv-pointed-equiv (pointed-equiv-domain-equiv-pointed-arrow e)
+  pointed-equiv-domain-equiv-pointed-arrow : A ≃∗ X
+  pointed-equiv-domain-equiv-pointed-arrow = pr1 e
 
-  pointed-map-domain-equiv-pointed-arrow :
-    equiv-pointed-arrow → A →∗ X
-  pointed-map-domain-equiv-pointed-arrow e =
-    pointed-map-pointed-equiv (pointed-equiv-domain-equiv-pointed-arrow e)
+  equiv-domain-equiv-pointed-arrow : type-Pointed-Type A ≃ type-Pointed-Type X
+  equiv-domain-equiv-pointed-arrow =
+    equiv-pointed-equiv pointed-equiv-domain-equiv-pointed-arrow
 
-  map-domain-equiv-pointed-arrow :
-    equiv-pointed-arrow → type-Pointed-Type A → type-Pointed-Type X
-  map-domain-equiv-pointed-arrow h =
-    map-pointed-equiv (pointed-equiv-domain-equiv-pointed-arrow h)
+  pointed-map-domain-equiv-pointed-arrow : A →∗ X
+  pointed-map-domain-equiv-pointed-arrow =
+    pointed-map-pointed-equiv pointed-equiv-domain-equiv-pointed-arrow
+
+  map-domain-equiv-pointed-arrow : type-Pointed-Type A → type-Pointed-Type X
+  map-domain-equiv-pointed-arrow =
+    map-pointed-equiv pointed-equiv-domain-equiv-pointed-arrow
 
   preserves-point-map-domain-equiv-pointed-arrow :
-    (h : equiv-pointed-arrow) →
-    map-domain-equiv-pointed-arrow h (point-Pointed-Type A) ＝
+    map-domain-equiv-pointed-arrow (point-Pointed-Type A) ＝
     point-Pointed-Type X
-  preserves-point-map-domain-equiv-pointed-arrow h =
-    preserves-point-pointed-equiv (pointed-equiv-domain-equiv-pointed-arrow h)
+  preserves-point-map-domain-equiv-pointed-arrow =
+    preserves-point-pointed-equiv pointed-equiv-domain-equiv-pointed-arrow
 
-  pointed-equiv-codomain-equiv-pointed-arrow :
-    equiv-pointed-arrow → B ≃∗ Y
-  pointed-equiv-codomain-equiv-pointed-arrow = pr1 ∘ pr2
+  pointed-equiv-codomain-equiv-pointed-arrow : B ≃∗ Y
+  pointed-equiv-codomain-equiv-pointed-arrow = pr1 (pr2 e)
 
-  equiv-codomain-equiv-pointed-arrow :
-    equiv-pointed-arrow → type-Pointed-Type B ≃ type-Pointed-Type Y
-  equiv-codomain-equiv-pointed-arrow e =
-    equiv-pointed-equiv (pointed-equiv-codomain-equiv-pointed-arrow e)
+  equiv-codomain-equiv-pointed-arrow : type-Pointed-Type B ≃ type-Pointed-Type Y
+  equiv-codomain-equiv-pointed-arrow =
+    equiv-pointed-equiv pointed-equiv-codomain-equiv-pointed-arrow
 
-  map-codomain-equiv-pointed-arrow :
-    equiv-pointed-arrow → type-Pointed-Type B → type-Pointed-Type Y
-  map-codomain-equiv-pointed-arrow h =
-    map-pointed-equiv (pointed-equiv-codomain-equiv-pointed-arrow h)
+  map-codomain-equiv-pointed-arrow : type-Pointed-Type B → type-Pointed-Type Y
+  map-codomain-equiv-pointed-arrow =
+    map-pointed-equiv pointed-equiv-codomain-equiv-pointed-arrow
 
   preserves-point-map-codomain-equiv-pointed-arrow :
-    (h : equiv-pointed-arrow) →
-    map-codomain-equiv-pointed-arrow h (point-Pointed-Type B) ＝
+    map-codomain-equiv-pointed-arrow (point-Pointed-Type B) ＝
     point-Pointed-Type Y
-  preserves-point-map-codomain-equiv-pointed-arrow h =
-    preserves-point-pointed-equiv (pointed-equiv-codomain-equiv-pointed-arrow h)
+  preserves-point-map-codomain-equiv-pointed-arrow =
+    preserves-point-pointed-equiv pointed-equiv-codomain-equiv-pointed-arrow
 
   coh-equiv-pointed-arrow :
-    (h : equiv-pointed-arrow) →
     coherence-equiv-pointed-arrow
-      ( pointed-equiv-domain-equiv-pointed-arrow h)
-      ( pointed-equiv-codomain-equiv-pointed-arrow h)
-  coh-equiv-pointed-arrow = pr2 ∘ pr2
+      ( f)
+      ( g)
+      ( pointed-equiv-domain-equiv-pointed-arrow)
+      ( pointed-equiv-codomain-equiv-pointed-arrow)
+  coh-equiv-pointed-arrow = pr2 (pr2 e)
 
   htpy-coh-equiv-pointed-arrow :
-    (h : equiv-pointed-arrow) →
     coherence-equiv-arrow
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( equiv-domain-equiv-pointed-arrow h)
-      ( equiv-codomain-equiv-pointed-arrow h)
-  htpy-coh-equiv-pointed-arrow h =
-    htpy-pointed-htpy
-      ( coh-equiv-pointed-arrow h)
+      ( equiv-domain-equiv-pointed-arrow)
+      ( equiv-codomain-equiv-pointed-arrow)
+  htpy-coh-equiv-pointed-arrow = htpy-pointed-htpy coh-equiv-pointed-arrow
 ```

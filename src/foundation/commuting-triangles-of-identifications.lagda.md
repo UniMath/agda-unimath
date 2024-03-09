@@ -956,10 +956,9 @@ and consider furthermore a commuting triangle of identifications
          d
 ```
 
-where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in
-the previous diagram. Finally, consider an identification
-`p : top-right ＝ top-right'` and an identification `q` witnessing that the
-triangle
+where the identifications `m : b ＝ d` and `r : c ＝ d` are the same as in the
+previous diagram. Finally, consider an identification `p : t ＝ t'` and an
+identification `q` witnessing that the triangle
 
 ```text
         R
@@ -1050,10 +1049,9 @@ and consider furthermore a commuting triangle of identifications
           d,
 ```
 
-where the identifications `m : b ＝ d` and `right : c ＝ d` are the same as in
-the previous diagram. Finally, consider an identification
-`p : top-right ＝ top-right'` and an identification `q` witnessing that the
-triangle
+where the identifications `m : b ＝ d` and `l : a ＝ d` are the same as in the
+previous diagram. Finally, consider an identification `p : s ＝ s'` and an
+identification `q` witnessing that the triangle
 
 ```text
         L
@@ -1072,10 +1070,10 @@ commutes. Then the triangle
                       l ----------------> (s ∙ t) ∙ r
                         \               /
                          \             /
-  horizontal-pasting L R' \           / right-whisker (right-whisker p s) r
+  horizontal-pasting L R' \           / right-whisker (right-whisker p t) r
                            \         /
                             ∨       ∨
-                          (s ∙ t') ∙ r
+                          (s' ∙ t) ∙ r
 ```
 
 commutes.

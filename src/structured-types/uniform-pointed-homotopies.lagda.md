@@ -97,8 +97,8 @@ definition of pointed homotopies is that it does not easily iterate.
 
 ### Preservation of the base point of unpointed homotopies between pointed maps
 
-The coherence of pointed homotopies asserts that its underlying homotopy
-preserves the base point, in the sense that the triangle of identifications
+The underlying homotopy of a uniform pointed homotopy preserves the base point
+in the sense that the triangle of identifications
 
 ```text
                       H *

@@ -59,54 +59,55 @@ module _
   hom-twisted-pointed-arrow =
     Σ (X →∗ A) (λ i → Σ (B →∗ Y) (coherence-hom-twisted-pointed-arrow i))
 
-  pointed-map-domain-hom-twisted-pointed-arrow :
-    hom-twisted-pointed-arrow → X →∗ A
-  pointed-map-domain-hom-twisted-pointed-arrow = pr1
+module _
+  {l1 l2 l3 l4 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  {X : Pointed-Type l3} {Y : Pointed-Type l4}
+  {f : A →∗ B} {g : X →∗ Y} (h : hom-twisted-pointed-arrow f g)
+  where
+
+  pointed-map-domain-hom-twisted-pointed-arrow : X →∗ A
+  pointed-map-domain-hom-twisted-pointed-arrow = pr1 h
 
   map-domain-hom-twisted-pointed-arrow :
-    hom-twisted-pointed-arrow → type-Pointed-Type X → type-Pointed-Type A
-  map-domain-hom-twisted-pointed-arrow h =
-    map-pointed-map (pointed-map-domain-hom-twisted-pointed-arrow h)
+    type-Pointed-Type X → type-Pointed-Type A
+  map-domain-hom-twisted-pointed-arrow =
+    map-pointed-map pointed-map-domain-hom-twisted-pointed-arrow
 
   preserves-point-map-domain-hom-twisted-pointed-arrow :
-    (h : hom-twisted-pointed-arrow) →
-    map-domain-hom-twisted-pointed-arrow h (point-Pointed-Type X) ＝
+    map-domain-hom-twisted-pointed-arrow (point-Pointed-Type X) ＝
     point-Pointed-Type A
-  preserves-point-map-domain-hom-twisted-pointed-arrow h =
-    preserves-point-pointed-map (pointed-map-domain-hom-twisted-pointed-arrow h)
+  preserves-point-map-domain-hom-twisted-pointed-arrow =
+    preserves-point-pointed-map pointed-map-domain-hom-twisted-pointed-arrow
 
-  pointed-map-codomain-hom-twisted-pointed-arrow :
-    hom-twisted-pointed-arrow → B →∗ Y
-  pointed-map-codomain-hom-twisted-pointed-arrow = pr1 ∘ pr2
+  pointed-map-codomain-hom-twisted-pointed-arrow : B →∗ Y
+  pointed-map-codomain-hom-twisted-pointed-arrow = pr1 (pr2 h)
 
   map-codomain-hom-twisted-pointed-arrow :
-    hom-twisted-pointed-arrow → type-Pointed-Type B → type-Pointed-Type Y
-  map-codomain-hom-twisted-pointed-arrow h =
-    map-pointed-map (pointed-map-codomain-hom-twisted-pointed-arrow h)
+    type-Pointed-Type B → type-Pointed-Type Y
+  map-codomain-hom-twisted-pointed-arrow =
+    map-pointed-map pointed-map-codomain-hom-twisted-pointed-arrow
 
   preserves-point-map-codomain-hom-twisted-pointed-arrow :
-    (h : hom-twisted-pointed-arrow) →
-    map-codomain-hom-twisted-pointed-arrow h (point-Pointed-Type B) ＝
+    map-codomain-hom-twisted-pointed-arrow (point-Pointed-Type B) ＝
     point-Pointed-Type Y
-  preserves-point-map-codomain-hom-twisted-pointed-arrow h =
+  preserves-point-map-codomain-hom-twisted-pointed-arrow =
     preserves-point-pointed-map
-      ( pointed-map-codomain-hom-twisted-pointed-arrow h)
+      ( pointed-map-codomain-hom-twisted-pointed-arrow)
 
   coh-hom-twisted-pointed-arrow :
-    (h : hom-twisted-pointed-arrow) →
     coherence-hom-twisted-pointed-arrow
-      ( pointed-map-domain-hom-twisted-pointed-arrow h)
-      ( pointed-map-codomain-hom-twisted-pointed-arrow h)
-  coh-hom-twisted-pointed-arrow = pr2 ∘ pr2
+      ( f)
+      ( g)
+      ( pointed-map-domain-hom-twisted-pointed-arrow)
+      ( pointed-map-codomain-hom-twisted-pointed-arrow)
+  coh-hom-twisted-pointed-arrow = pr2 (pr2 h)
 
   htpy-coh-hom-twisted-pointed-arrow :
-    (h : hom-twisted-pointed-arrow) →
     coherence-hom-twisted-arrow
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( map-domain-hom-twisted-pointed-arrow h)
-      ( map-codomain-hom-twisted-pointed-arrow h)
-  htpy-coh-hom-twisted-pointed-arrow h =
-    htpy-pointed-htpy
-      ( coh-hom-twisted-pointed-arrow h)
+      ( map-domain-hom-twisted-pointed-arrow)
+      ( map-codomain-hom-twisted-pointed-arrow)
+  htpy-coh-hom-twisted-pointed-arrow =
+    htpy-pointed-htpy coh-hom-twisted-pointed-arrow
 ```
