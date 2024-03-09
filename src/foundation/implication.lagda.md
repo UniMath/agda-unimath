@@ -100,3 +100,5 @@ module _
 ## See also
 
 - [Biimplication of types](foundation.biimplication.md)
+- [Universal quantification](foundation.universal-quantification.md) for the
+  dependent variant of implication.

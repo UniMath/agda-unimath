@@ -82,5 +82,5 @@ module _
 
 ## See also
 
-- [Iimplication of types](foundation.implication.md) for the non-dependent
+- [Implication of types](foundation.implication.md) for the non-dependent
   variant of universal quantification.

@@ -109,8 +109,8 @@ abstract
     is-equiv (ev-intro-exists-Prop P Q)
   is-equiv-ev-intro-exists-Prop A P Q =
     is-equiv-is-prop
-      ( is-prop-type-hom-Prop (exists-Prop A P) Q)
-      ( is-prop-Π ((λ x → is-prop-type-hom-Prop (P x) Q)))
+      ( is-prop-hom-Prop (exists-Prop A P) Q)
+      ( is-prop-Π ((λ x → is-prop-hom-Prop (P x) Q)))
       ( elim-exists-Prop P Q)
 
 is-least-upper-bound-exists-Prop :

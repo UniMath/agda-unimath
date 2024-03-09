@@ -358,7 +358,7 @@ abstract
       ( is-equiv-comp
         ( λ h a a' → h a (f' a'))
         ( λ h a p' → h (f a) p')
-        ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))
+        ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-hom-Prop P' Q)))
         ( is-equiv-map-Π-is-fiberwise-equiv
           ( λ a → is-ptr-f' Q)))
 ```

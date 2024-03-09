@@ -280,12 +280,12 @@ module _
   type-Π-Prop : UU (l1 ⊔ l2)
   type-Π-Prop = (x : A) → type-Prop (P x)
 
-  is-prop-type-Π-Prop : is-prop type-Π-Prop
-  is-prop-type-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
+  is-prop-Π-Prop : is-prop type-Π-Prop
+  is-prop-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
 
   Π-Prop : Prop (l1 ⊔ l2)
   pr1 Π-Prop = type-Π-Prop
-  pr2 Π-Prop = is-prop-type-Π-Prop
+  pr2 Π-Prop = is-prop-Π-Prop
 ```
 
 We also introduce the special notation `Π₍₋₁₎` for `Π-Prop`.
@@ -298,8 +298,9 @@ We also introduce the special notation `Π₍₋₁₎` for `Π-Prop`.
 This is part of a general scheme where `Π₍ₙ₎` takes an indexing type and a
 family of $n$-[types](foundation-core.truncated-types.md) over it as inputs, and
 spits out the $n$-type of dependent functions into the family. Note in
-particular that `Π₍ₙ₎` should be read differently from the universal
-quantification `∀₍ₙ₎`, whose underlying type is a proposition of $n$.
+particular that `Π₍ₙ₎` should be read differently from the
+[universal quantification](foundation.universal-quantification.md) `∀₍ₙ₎`, whose
+underlying type is a proposition irrespective of $n$.
 
 We now repeat the above for implicit Π-types.
 
@@ -321,13 +322,13 @@ module _
   type-implicit-Π-Prop : UU (l1 ⊔ l2)
   type-implicit-Π-Prop = {x : A} → type-Prop (P x)
 
-  is-prop-type-implicit-Π-Prop : is-prop type-implicit-Π-Prop
-  is-prop-type-implicit-Π-Prop =
+  is-prop-implicit-Π-Prop : is-prop type-implicit-Π-Prop
+  is-prop-implicit-Π-Prop =
     is-prop-implicit-Π (λ x → is-prop-type-Prop (P x))
 
   implicit-Π-Prop : Prop (l1 ⊔ l2)
   pr1 implicit-Π-Prop = type-implicit-Π-Prop
-  pr2 implicit-Π-Prop = is-prop-type-implicit-Π-Prop
+  pr2 implicit-Π-Prop = is-prop-implicit-Π-Prop
 ```
 
 ### The type of functions into a proposition is a proposition
@@ -358,15 +359,15 @@ type-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
 type-hom-Prop P = type-function-Prop (type-Prop P)
 
-is-prop-type-hom-Prop :
+is-prop-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   is-prop (type-hom-Prop P Q)
-is-prop-type-hom-Prop P = is-prop-function-Prop
+is-prop-hom-Prop P = is-prop-function-Prop
 
 hom-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
-pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
+pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
 
 infixr 5 _→₍₋₁₎_
 _→₍₋₁₎_ = hom-Prop
