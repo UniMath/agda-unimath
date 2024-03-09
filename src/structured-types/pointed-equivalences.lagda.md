@@ -370,7 +370,7 @@ In other words, any pointed map `f : A →∗ B` such that precomposing by `f`
   - ∘∗ f : (B →∗ C) → (A →∗ C)
 ```
 
-is an equivalence for any pointed type `C` is an equivalence.
+is an equivalence for any pointed type `C`, is an equivalence.
 
 ```agda
 module _
