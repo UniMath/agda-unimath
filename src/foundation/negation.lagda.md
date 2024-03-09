@@ -50,7 +50,7 @@ type-neg-Prop P = type-Prop (neg-Prop P)
 
 The indexing $-1$ for the operator `¬₍₋₁₎` is part of a general scheme, where
 `¬₍ₙ₎` takes as input an $n$-[type](foundation-core.truncated-types.md) `X`, and
-spits out the $-1$-type that is the negation of the underlying type of `X`.
+spits out the $n$-type that is the negation of the underlying type of `X`.
 
 ### Reductio ad absurdum
 
@@ -76,7 +76,7 @@ equiv-neg {l1} {l2} {X} {Y} e =
 
 ```agda
 no-fixed-points-neg :
-  {l : Level} (A : UU l) → ¬ (A ↔ (¬ A))
+  {l : Level} (A : UU l) → ¬ (A ↔ ¬ A)
 no-fixed-points-neg A (pair f g) =
   ( λ (h : ¬ A) → h (g h)) (λ (a : A) → f a a)
 ```
@@ -84,7 +84,7 @@ no-fixed-points-neg A (pair f g) =
 ```agda
 abstract
   no-fixed-points-neg-Prop :
-    {l1 : Level} (P : Prop l1) → ¬ (type-Prop (P ↔₍₋₁₎ (¬₍₋₁₎ P)))
+    {l1 : Level} (P : Prop l1) → ¬ (type-Prop (P ↔₍₋₁₎ ¬₍₋₁₎ P))
   no-fixed-points-neg-Prop P = no-fixed-points-neg (type-Prop P)
 ```
 

@@ -23,7 +23,8 @@ We say that a universe `𝒱` satisfies `𝒰`-small
 [equipped](foundation.structure.md) with a
 [subtype](foundation-core.subtypes.md) `Q` such that for each proposition `P` in
 `𝒱` there is an element `u : Ω` such that `Q u ≃ P`. Such a type `Ω` is called
-an `𝒰`-small {{#concept "classifier"}} of `𝒱`-small subobjects.
+an `𝒰`-small {{#concept "classifier" Disambiguation="of small subobjects"}} of
+`𝒱`-small subobjects.
 
 ## Definition
 

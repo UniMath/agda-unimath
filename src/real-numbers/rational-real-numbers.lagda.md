@@ -206,12 +206,12 @@ eq-real-rational-is-rational-ℝ x q H =
         pair
           ( λ I →
             rec-disjunction-Prop
-            ( lower-cut-ℝ x r)
-            ( upper-cut-ℝ x q)
-            ( lower-cut-ℝ x r)
-            ( id)
-            ( λ H' → ex-falso (pr2 H H'))
-            ( is-located-lower-upper-cut-ℝ x r q I))
+              ( lower-cut-ℝ x r)
+              ( upper-cut-ℝ x q)
+              ( lower-cut-ℝ x r)
+              ( id)
+              ( λ H' → ex-falso (pr2 H H'))
+              ( is-located-lower-upper-cut-ℝ x r q I))
           ( trichotomy-le-ℚ r q
             ( λ I _ → I)
             ( λ E H' → ex-falso (pr1 (tr (is-rational-ℝ x) (inv E) H) H'))

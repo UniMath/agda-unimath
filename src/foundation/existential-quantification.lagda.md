@@ -22,10 +22,13 @@ open import foundation-core.propositions
 
 ## Idea
 
-Given a family of propositions `P` over `A`, the existential quantification of
-`P` over `A` is the proposition `∃ A P` asserting that there is an element
-`a : A` such that `P a` holds. We use the propositional truncation to define the
-existential quantification, because the Curry-Howard interpretation of the
+Given a family of [propositions](foundation-core.propositions.md) `P` over `A`,
+the
+{{#concept "existential quantification" Disambiguation="on a subtype" Agda=exists}}
+of `P` over `A` is the proposition `∃ A P` asserting that there is an element
+`a : A` such that `P a` holds. We use the
+[propositional truncation](foundation.propositional-truncations.md) to define
+the existential quantification, because the Curry-Howard interpretation of the
 existential quantification as `Σ A P` does not guarantee that existential
 quantifications are interpreted as propositions.
 
@@ -54,8 +57,8 @@ abstract
 The indexing $-1$ for the operator `∃₍₋₁₎` is part of a general scheme for
 operations of propositions and
 [truncated types](foundation-core.truncated-types.md). The existential `∃₍ₙ₎`
-will always take values in propositions regardless of this index, in contrast to
-the dependent sum `Σ₍ₙ₎`, which will take values in $n$-types.
+will always have an underlying type which is a proposition irrespective of $n$,
+in contrast to the dependent sum `Σ₍ₙ₎`, which will in general be an $n$-type.
 
 ### Existential quantification of arbitrary type families
 
@@ -120,7 +123,7 @@ pr1 (is-least-upper-bound-exists-Prop P Q) = elim-exists-Prop P Q
 pr2 (is-least-upper-bound-exists-Prop P Q) h a p = h (intro-∃ a p)
 ```
 
-### product distributes over existential quatification
+### Conjunction distributes over existential quatification
 
 ```agda
 module _

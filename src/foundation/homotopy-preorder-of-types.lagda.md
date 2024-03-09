@@ -42,8 +42,8 @@ of the function types:
 ### The large homotopy preorder of types
 
 ```agda
-Homotopy-Large-Preorder : Large-Preorder lsuc (_⊔_)
-Homotopy-Large-Preorder =
+Homotopy-Type-Large-Preorder : Large-Preorder lsuc (_⊔_)
+Homotopy-Type-Large-Preorder =
   λ where
   .type-Large-Preorder l → UU l
   .leq-prop-Large-Preorder → implication-prop
@@ -54,6 +54,6 @@ Homotopy-Large-Preorder =
 ### The small homotopy preorder of types
 
 ```agda
-Homotopy-Preorder : (l : Level) → Preorder (lsuc l) l
-Homotopy-Preorder = preorder-Large-Preorder Homotopy-Large-Preorder
+Homotopy-Type-Preorder : (l : Level) → Preorder (lsuc l) l
+Homotopy-Type-Preorder = preorder-Large-Preorder Homotopy-Type-Large-Preorder
 ```

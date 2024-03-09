@@ -42,7 +42,7 @@ characterizes [identifications](foundation-core.identity-types.md) of
 [propositions](foundation-core.propositions.md). It asserts that for any two
 propositions `P` and `Q`, we have `(P ＝ Q) ≃ (P ⇔ Q)`.
 
-We note that, while we derive propositional extensionality from the
+**Note.** While we derive propositional extensionality from the
 [univalence axiom](foundation-core.univalence.md), it is a strictly weaker
 principle, meaning that the principle of propositional extensionality does not
 imply univalence.
@@ -58,7 +58,7 @@ module _
 
   abstract
     is-torsorial-iff :
-      (P : Prop l1) → is-torsorial (λ (Q : Prop l1) → type-Prop (P ↔₍₋₁₎ Q))
+      (P : Prop l1) → is-torsorial (λ (Q : Prop l1) → type-Prop P ↔ type-Prop Q)
     is-torsorial-iff P =
       is-contr-equiv
         ( Σ (Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
@@ -76,11 +76,11 @@ module _
       fundamental-theorem-id (is-torsorial-iff P) (λ Q → iff-eq {P = P} {Q})
 
   propositional-extensionality :
-    (P Q : Prop l1) → (P ＝ Q) ≃ type-Prop (P ↔₍₋₁₎ Q)
+    (P Q : Prop l1) → (P ＝ Q) ≃ (type-Prop P ↔ type-Prop Q)
   pr1 (propositional-extensionality P Q) = iff-eq
   pr2 (propositional-extensionality P Q) = is-equiv-iff-eq P Q
 
-  eq-iff' : (P Q : Prop l1) → type-Prop (P ↔₍₋₁₎ Q) → P ＝ Q
+  eq-iff' : (P Q : Prop l1) → type-Prop P ↔ type-Prop Q → P ＝ Q
   eq-iff' P Q = map-inv-is-equiv (is-equiv-iff-eq P Q)
 
   eq-iff :
@@ -101,7 +101,7 @@ module _
     (P : Prop l1) → is-torsorial (λ Q → type-Prop P ≃ type-Prop Q)
   is-torsorial-equiv-Prop P =
     is-contr-equiv'
-      ( Σ (Prop l1) (λ Q → type-Prop (P ↔₍₋₁₎ Q)))
+      ( Σ (Prop l1) (λ Q → type-Prop P ↔ type-Prop Q))
       ( equiv-tot (equiv-equiv-iff P))
       ( is-torsorial-iff P)
 ```
@@ -124,7 +124,7 @@ pr2 (Prop-Set l) = is-set-type-Prop
 
 ```agda
 is-univalent-type-Prop : {l : Level} → is-univalent (type-Prop {l})
-is-univalent-type-Prop {l} P =
+is-univalent-type-Prop P =
   fundamental-theorem-id
     ( is-torsorial-equiv-Prop P)
     ( λ Q → equiv-tr type-Prop)
@@ -138,7 +138,7 @@ abstract
     {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop P)
   is-torsorial-true-Prop {l1} =
     is-contr-equiv
-      ( Σ (Prop l1) (λ P → type-Prop (raise-unit-Prop l1 ↔₍₋₁₎ P)))
+      ( Σ (Prop l1) (λ P → raise-unit l1 ↔ type-Prop P))
       ( equiv-tot
         ( λ P →
           inv-equiv
@@ -160,10 +160,10 @@ abstract
 ```agda
 abstract
   is-torsorial-false-Prop :
-    {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop (¬₍₋₁₎ P))
+    {l1 : Level} → is-torsorial (λ (P : Prop l1) → ¬ (type-Prop P))
   is-torsorial-false-Prop {l1} =
     is-contr-equiv
-      ( Σ (Prop l1) (λ P → type-Prop (raise-empty-Prop l1 ↔₍₋₁₎ P)))
+      ( Σ (Prop l1) (λ P → raise-empty l1 ↔ type-Prop P))
       ( equiv-tot
         ( λ P →
           inv-equiv
