@@ -46,39 +46,39 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-distributive-flat-prod : ♭ (A × B) → (♭ A) × (♭ B)
-  pr1 (map-distributive-flat-prod (cons-flat (x , y))) = cons-flat x
-  pr2 (map-distributive-flat-prod (cons-flat (x , y))) = cons-flat y
+  map-distributive-flat-product : ♭ (A × B) → (♭ A) × (♭ B)
+  pr1 (map-distributive-flat-product (cons-flat (x , y))) = cons-flat x
+  pr2 (map-distributive-flat-product (cons-flat (x , y))) = cons-flat y
 
-  map-inv-distributive-flat-prod : (♭ A) × (♭ B) → ♭ (A × B)
-  map-inv-distributive-flat-prod (cons-flat x , cons-flat y) = cons-flat (x , y)
+  map-inv-distributive-flat-product : (♭ A) × (♭ B) → ♭ (A × B)
+  map-inv-distributive-flat-product (cons-flat x , cons-flat y) = cons-flat (x , y)
 
-  is-section-map-distributive-flat-prod :
-    is-section map-inv-distributive-flat-prod map-distributive-flat-prod
-  is-section-map-distributive-flat-prod (cons-flat x) = refl
+  is-section-map-distributive-flat-product :
+    is-section map-inv-distributive-flat-product map-distributive-flat-product
+  is-section-map-distributive-flat-product (cons-flat x) = refl
 
-  is-retraction-map-distributive-flat-prod :
-    is-retraction map-inv-distributive-flat-prod map-distributive-flat-prod
-  is-retraction-map-distributive-flat-prod (cons-flat x , cons-flat y) = refl
+  is-retraction-map-distributive-flat-product :
+    is-retraction map-inv-distributive-flat-product map-distributive-flat-product
+  is-retraction-map-distributive-flat-product (cons-flat x , cons-flat y) = refl
 
-  section-distributive-flat-prod : section map-distributive-flat-prod
-  pr1 section-distributive-flat-prod = map-inv-distributive-flat-prod
-  pr2 section-distributive-flat-prod = is-retraction-map-distributive-flat-prod
+  section-distributive-flat-product : section map-distributive-flat-product
+  pr1 section-distributive-flat-product = map-inv-distributive-flat-product
+  pr2 section-distributive-flat-product = is-retraction-map-distributive-flat-product
 
-  retraction-distributive-flat-prod : retraction map-distributive-flat-prod
-  pr1 retraction-distributive-flat-prod = map-inv-distributive-flat-prod
-  pr2 retraction-distributive-flat-prod = is-section-map-distributive-flat-prod
+  retraction-distributive-flat-product : retraction map-distributive-flat-product
+  pr1 retraction-distributive-flat-product = map-inv-distributive-flat-product
+  pr2 retraction-distributive-flat-product = is-section-map-distributive-flat-product
 
-  is-equiv-map-distributive-flat-prod : is-equiv map-distributive-flat-prod
-  pr1 is-equiv-map-distributive-flat-prod = section-distributive-flat-prod
-  pr2 is-equiv-map-distributive-flat-prod = retraction-distributive-flat-prod
+  is-equiv-map-distributive-flat-product : is-equiv map-distributive-flat-product
+  pr1 is-equiv-map-distributive-flat-product = section-distributive-flat-product
+  pr2 is-equiv-map-distributive-flat-product = retraction-distributive-flat-product
 
-  distributive-flat-prod : ♭ (A × B) ≃ (♭ A) × (♭ B)
-  pr1 distributive-flat-prod = map-distributive-flat-prod
-  pr2 distributive-flat-prod = is-equiv-map-distributive-flat-prod
+  distributive-flat-product : ♭ (A × B) ≃ (♭ A) × (♭ B)
+  pr1 distributive-flat-product = map-distributive-flat-product
+  pr2 distributive-flat-product = is-equiv-map-distributive-flat-product
 
-  inv-distributive-flat-prod : (♭ A) × (♭ B) ≃ ♭ (A × B)
-  inv-distributive-flat-prod = inv-equiv distributive-flat-prod
+  inv-distributive-flat-product : (♭ A) × (♭ B) ≃ ♭ (A × B)
+  inv-distributive-flat-product = inv-equiv distributive-flat-product
 ```
 
 ### Computing the flat counit on a cartesian product type
@@ -91,10 +91,10 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  compute-counit-flat-prod :
+  compute-counit-flat-product :
     counit-flat {A = A × B} ~
-    ( map-prod counit-flat counit-flat ∘ map-distributive-flat-prod)
-  compute-counit-flat-prod (cons-flat x) = refl
+    ( map-product counit-flat counit-flat ∘ map-distributive-flat-product)
+  compute-counit-flat-product (cons-flat x) = refl
 ```
 
 ### A crisp cartesian product type is flat discrete if both factors are
@@ -104,54 +104,54 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  is-flat-discrete-crisp-prod :
+  is-flat-discrete-crisp-product :
     is-flat-discrete-crisp A →
     is-flat-discrete-crisp B →
     is-flat-discrete-crisp (A × B)
-  is-flat-discrete-crisp-prod is-disc-A is-disc-B =
+  is-flat-discrete-crisp-product is-disc-A is-disc-B =
     is-equiv-left-map-triangle
       ( counit-flat)
-      ( map-prod counit-flat counit-flat)
-      ( map-distributive-flat-prod)
+      ( map-product counit-flat counit-flat)
+      ( map-distributive-flat-product)
       ( λ where (cons-flat _) → refl)
-      ( is-equiv-map-distributive-flat-prod)
-      ( is-equiv-map-prod counit-flat counit-flat is-disc-A is-disc-B)
+      ( is-equiv-map-distributive-flat-product)
+      ( is-equiv-map-product counit-flat counit-flat is-disc-A is-disc-B)
 
-  is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-prod :
+  is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-product :
     is-flat-discrete-crisp (A × B) →
     (x : A) →
     is-flat-discrete-crisp B
-  is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-prod
-    is-disc-prod-A-B x =
-    is-equiv-right-factor-is-equiv-map-prod
+  is-flat-discrete-crisp-right-factor-is-flat-discrete-crisp-product
+    is-disc-product-A-B x =
+    is-equiv-right-factor-is-equiv-map-product
       ( counit-flat)
       ( counit-flat)
       ( x)
       ( is-equiv-right-map-triangle
         counit-flat
-        ( map-prod counit-flat counit-flat)
-        ( map-distributive-flat-prod)
+        ( map-product counit-flat counit-flat)
+        ( map-distributive-flat-product)
         ( λ where (cons-flat _) → refl)
-        ( is-disc-prod-A-B)
-        ( is-equiv-map-distributive-flat-prod))
+        ( is-disc-product-A-B)
+        ( is-equiv-map-distributive-flat-product))
 
-  is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-prod :
+  is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-product :
     is-flat-discrete-crisp (A × B) →
     (x : B) →
     is-flat-discrete-crisp A
-  is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-prod
-    is-disc-prod-A-B x =
-    is-equiv-left-factor-is-equiv-map-prod
+  is-flat-discrete-crisp-left-factor-is-flat-discrete-crisp-product
+    is-disc-product-A-B x =
+    is-equiv-left-factor-is-equiv-map-product
       ( counit-flat)
       ( counit-flat)
       ( x)
       ( is-equiv-right-map-triangle
         counit-flat
-        ( map-prod counit-flat counit-flat)
-        ( map-distributive-flat-prod)
+        ( map-product counit-flat counit-flat)
+        ( map-distributive-flat-product)
         ( λ where (cons-flat _) → refl)
-        ( is-disc-prod-A-B)
-        ( is-equiv-map-distributive-flat-prod))
+        ( is-disc-product-A-B)
+        ( is-equiv-map-distributive-flat-product))
 ```
 
 ## References
