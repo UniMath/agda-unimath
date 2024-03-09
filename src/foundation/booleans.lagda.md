@@ -262,12 +262,12 @@ pr2 equiv-neg-bool = is-equiv-neg-bool
 
 ```agda
 abstract
-  not-section-const : (b : bool) → ¬ (section (const bool bool b))
-  not-section-const true (g , G) = neq-true-false-bool (G false)
-  not-section-const false (g , G) = neq-false-true-bool (G true)
+  not-section-const-bool : (b : bool) → ¬ (section (const bool bool b))
+  not-section-const-bool true (g , G) = neq-true-false-bool (G false)
+  not-section-const-bool false (g , G) = neq-false-true-bool (G true)
 
 abstract
-  not-equiv-const :
+  not-equiv-const-bool :
     (b : bool) → ¬ (is-equiv (const bool bool b))
-  not-equiv-const b e = not-section-const b (section-is-equiv e)
+  not-equiv-const-bool b e = not-section-const-bool b (section-is-equiv e)
 ```

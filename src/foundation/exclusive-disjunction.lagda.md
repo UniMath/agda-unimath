@@ -41,28 +41,6 @@ captured by the notion of [exclusive sum](foundation.exclusive-sum.md).
 
 ## Definitions
 
-### The exclusive disjunction of types
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
-  where
-
-  xor-prop : Prop (l1 ⊔ l2)
-  xor-prop = is-contr-Prop (║ A ║₋₁ + ║ B ║₋₁)
-
-  xor : UU (l1 ⊔ l2)
-  xor = type-Prop xor-prop
-
-  infixr 10 _⊻_
-  _⊻_ : UU (l1 ⊔ l2)
-  _⊻_ = xor
-```
-
-**Notation.** The
-[symbol used for exclusive disjunction](https://codepoints.net/U+22BB?lang=en)
-`⊻` can be written with the escape sequence `\veebar`.
-
 ### The exclusive disjunction of propositions
 
 ```agda
@@ -81,12 +59,36 @@ module _
   _⊻₍₋₁₎_ = xor-Prop
 ```
 
-**Notation.** The index $-1$ in `⊻₍₋₁₎` should be understood as part of a
-general scheme where `⊻₍ₙ₎` is the exclusive disjunction that takes in
+**Notation.** The
+[symbol used for exclusive disjunction](https://codepoints.net/U+22BB?lang=en)
+`⊻` can be written with the escape sequence `\veebar`. Note that the index $-1$
+in `⊻₍₋₁₎` should be understood as part of a general scheme where `⊻₍ₙ₎` is the
+exclusive disjunction that takes in
 $n$-[types](foundation-core.truncated-types.md) as input and spits out the
 $n$-type whose underlying type is the exclusive disjunction (which is always a
 proposition). This is in contrast to the exclusive sum, which will in general
 only be $n$-truncated.
+
+### The exclusive disjunction of types
+
+We can generalize exclusive disjunction to arbitrary types, but in this case the
+"correct" definition requires us to propositionally truncate the types.
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  xor-prop : Prop (l1 ⊔ l2)
+  xor-prop = is-contr-Prop (║ A ║₋₁ + ║ B ║₋₁)
+
+  xor : UU (l1 ⊔ l2)
+  xor = type-Prop xor-prop
+
+  infixr 10 _⊻_
+  _⊻_ : UU (l1 ⊔ l2)
+  _⊻_ = xor
+```
 
 ## Properties
 

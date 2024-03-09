@@ -1,4 +1,4 @@
-# Biimplication of types
+# Biimplication
 
 ```agda
 module foundation.biimplication where
@@ -24,12 +24,10 @@ open import foundation-core.propositions
 
 ## Idea
 
-The type of
-{{#concept "biimplications" Disambiguation="of types" Agda=biimplication}}
-between two types `A` and `B` is the
-[proposition](foundation-core.propositions.md) that the type of
-[logical equivalences](foundation.logical-equivalences.md) between `A` and `B`
-is [inhabited](foundation.inhabited-types.md).
+Two types `A` and `B` are
+{{#concept "biimplied" Disambiguation="types" Agda=biimplication}} if the type
+of [logical equivalences](foundation.logical-equivalences.md) between `A` and
+`B` is [inhabited](foundation.inhabited-types.md).
 
 ```text
   A ⇔ B := ║(A ↔ B)║₋₁
@@ -37,7 +35,7 @@ is [inhabited](foundation.inhabited-types.md).
 
 ## Definitions
 
-### The type of biimplications between `A` and `B`
+### Biimplications of types
 
 ```agda
 module _
@@ -58,7 +56,9 @@ module _
   _⇔_ = biimplication
 ```
 
-### The identity biimplication
+## Properties
+
+### Biimplication is a reflexive relation
 
 ```agda
 module _
@@ -69,7 +69,7 @@ module _
   id-biimplication = unit-trunc-Prop id-iff
 ```
 
-### Composition of biimplications
+### Biimplication is a transitive relation
 
 ```agda
 module _
@@ -87,7 +87,7 @@ module _
           ( |g|))
 ```
 
-### Biimplications are symmetric
+### Biimplication is a symmetric relation
 
 ```agda
 module _
@@ -99,11 +99,10 @@ module _
     rec-trunc-Prop (biimplication-prop B A) (unit-trunc-Prop ∘ inv-iff)
 ```
 
-## Properties
-
 ### Biimplied types are coinhabited
 
-If `A` and `B` are biimplied then they are coinhabited.
+If `A` and `B` are biimplied then they are
+[coinhabited](foundation.coinhabited-types.md).
 
 ```agda
 module _

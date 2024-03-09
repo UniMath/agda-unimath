@@ -1,4 +1,4 @@
-# Implication of types
+# Implication
 
 ```agda
 module foundation.implication where
@@ -18,10 +18,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-The type of
-{{#concept "implications" Disambiguation="of types" Agda=implication}} between
-two types `A` and `B` is the [proposition](foundation-core.propositions.md) that
-the type of maps from `A` to `B` is [inhabited](foundation.inhabited-types.md).
+A type `A` {{#concept "implies" Disambiguation="types" Agda=implication}} the
+type `B` if the type of maps from `A` to `B` is
+[inhabited](foundation.inhabited-types.md).
 
 ```text
   A ⇒ B := ║(A → B)║₋₁
@@ -29,7 +28,7 @@ the type of maps from `A` to `B` is [inhabited](foundation.inhabited-types.md).
 
 ## Definitions
 
-### The type of implications from `A` to `B`
+### Implications between types
 
 ```agda
 module _
@@ -68,7 +67,7 @@ module _
     rec-trunc-Prop (trunc-Prop B) (ev-implication' |f|) (|a|)
 ```
 
-### The identity implication
+### Implication is a reflexive relation
 
 ```agda
 module _
@@ -79,7 +78,7 @@ module _
   id-implication = unit-trunc-Prop id
 ```
 
-### Composition of implications
+### Implication is a transitive relation
 
 ```agda
 module _
