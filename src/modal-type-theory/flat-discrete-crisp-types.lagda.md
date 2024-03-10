@@ -15,12 +15,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
@@ -35,6 +37,7 @@ open import foundation.universe-levels
 
 open import modal-type-theory.crisp-function-types
 open import modal-type-theory.crisp-identity-types
+open import modal-type-theory.flat-action-on-homotopies
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
 ```
@@ -143,6 +146,33 @@ module _
                     ( inv (is-section-map-inv-is-equiv is-disc-A x)))))
 ```
 
+### If the flat counit has a crisp section then it is an equivalence
+
+```agda
+module _
+  {@♭ l : Level} {@♭ A : UU l} (@♭ s : A → ♭ A) (@♭ H : counit-flat ∘ s ~ id)
+  where
+
+  htpy-retraction-counit-flat-has-crisp-section : s ∘ counit-flat ~ id
+  htpy-retraction-counit-flat-has-crisp-section (cons-flat x) =
+    inv (is-crisp-retraction-cons-flat (s x)) ∙ ap-flat-htpy H (cons-flat x)
+
+  retraction-counit-flat-has-crisp-section : retraction (counit-flat {A = A})
+  retraction-counit-flat-has-crisp-section =
+    ( s , htpy-retraction-counit-flat-has-crisp-section)
+
+  is-flat-discrete-crisp-has-crisp-section : is-flat-discrete-crisp A
+  pr1 is-flat-discrete-crisp-has-crisp-section = s , H
+  pr2 is-flat-discrete-crisp-has-crisp-section =
+    retraction-counit-flat-has-crisp-section
+
+is-flat-discrete-crisp-crisp-section :
+  {@♭ l : Level} {@♭ A : UU l} →
+  @♭ section (counit-flat {A = A}) → is-flat-discrete-crisp A
+is-flat-discrete-crisp-crisp-section (s , H) =
+  is-flat-discrete-crisp-has-crisp-section s H
+```
+
 ### Types `♭ A` are flat discrete
 
 This is Theorem 6.18 of {{#cite Shu17}}.
@@ -156,34 +186,67 @@ module _
   is-flat-discrete-crisp-flat = is-equiv-flat-counit-flat
 ```
 
-### The identity types of `♭ A` are flat discrete
+### The crisp identity types of flat discrete crisp types are flat discrete
+
+Given crisp elements `x` and `y` of `A` We have a
+[commuting triangle](foundation-core.commuting-triangles-maps.md)
+
+```text
+                               ♭ (x ＝ y)
+                                  ⌝   |
+                     Eq-eq-flat /     |
+                              /       |
+  (cons-flat x ＝ cons-flat y)        | counit-flat
+                              \       |
+               ap (counit-flat) \     |
+                                  ⌟   ∨
+                                 (x ＝ y)
+```
+
+where the top-left map `Eq-eq-flat` is an equivalence. Thus, the right map is an
+equivalence and `x ＝ y` is crisply flat discrete for all `x` and `y` if and
+only if the flat counit of `A` is a crisp
+[embedding](foundation-core.embeddings.md).
+
+In particular, if `A` is crisply flat discrete then its identity types are too.
 
 ```agda
 module _
   {@♭ l : Level} {@♭ A : UU l}
+  ( is-crisp-emb-counit-flat-A :
+    (@♭ x y : A) → is-equiv (ap (counit-flat) {cons-flat x} {cons-flat y}))
+  {@♭ x y : A}
   where
 
-  equiv-is-flat-discrete-crisp-flat-Id-flat :
-    {@♭ x y : ♭ A} → (x ＝ y) ≃ ♭ (x ＝ y)
-  equiv-is-flat-discrete-crisp-flat-Id-flat {cons-flat x} {cons-flat y} =
-    ( crisp-extensionality-flat (cons-flat x) (cons-flat y)) ∘e
-    ( equiv-ap equiv-diagonal-flat (cons-flat x) (cons-flat y))
-
-  is-flat-discrete-crisp-flat-Id-flat :
-    {@♭ x y : ♭ A} → is-flat-discrete-crisp (x ＝ y)
-  is-flat-discrete-crisp-flat-Id-flat {cons-flat x} {cons-flat y} =
-    is-equiv-htpy-equiv
-      ( inv-equiv equiv-is-flat-discrete-crisp-flat-Id-flat)
-      ( λ where
-        (cons-flat p) →
-          crisp-ind-Id (λ u v p → p ＝ map-equiv (inv-equiv equiv-is-flat-discrete-crisp-flat-Id-flat) (cons-flat p)) (λ where (cons-flat x) → {! refl  !}) p)
+  is-flat-discrete-crisp-Id' : is-flat-discrete-crisp (x ＝ y)
+  is-flat-discrete-crisp-Id' =
+    is-equiv-right-map-triangle
+      ( ap counit-flat {cons-flat x} {cons-flat y})
+      ( counit-flat)
+      ( Eq-eq-flat (cons-flat x) (cons-flat y))
+      ( λ where refl → refl)
+      ( is-crisp-emb-counit-flat-A x y)
+      ( is-equiv-Eq-eq-flat (cons-flat x) (cons-flat y))
 
 module _
-  {@♭ l : Level} {@♭ A : UU l} {@♭ x y : A}
+  {@♭ l : Level} {@♭ A : UU l}
+  (is-emb-counit-flat-A : is-emb (counit-flat {A = A}))
+  {@♭ x y : A}
   where
 
-  is-flat-discrete-crisp-flat-Id : is-flat-discrete-crisp (x ＝ y)
-  is-flat-discrete-crisp-flat-Id = {!   !}
+  is-flat-discrete-crisp-Id : is-flat-discrete-crisp (x ＝ y)
+  is-flat-discrete-crisp-Id =
+    is-flat-discrete-crisp-Id'
+      ( λ x y → is-emb-counit-flat-A (cons-flat x) (cons-flat y))
+
+module _
+  {@♭ l : Level} {@♭ A : UU l}
+  where
+
+  is-flat-discrete-crisp-flat-Id :
+    {@♭ u v : ♭ A} → is-flat-discrete-crisp (u ＝ v)
+  is-flat-discrete-crisp-flat-Id {cons-flat x} {cons-flat y} =
+    is-flat-discrete-crisp-Id (is-emb-is-equiv is-flat-discrete-crisp-flat)
 ```
 
 ### The empty type is flat discrete
