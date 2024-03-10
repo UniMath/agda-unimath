@@ -68,8 +68,8 @@ satisfies the following rules:
 | nonpositive | nonpositive | nonnegative | `mul-nonpositive-ℤ` |
 
 As a consequence, multiplication by a positive integer preserves and reflects
-strict inequality and multiplication by a nonpositive integer preserves and
-reflects inequality.
+strict inequality and multiplication by a nonpositive integer preserves
+inequality.
 
 ## Properties
 
@@ -276,25 +276,7 @@ is-nonnegative-mul-nonpositive-ℤ {x} {y} H K =
       ( is-nonnegative-neg-is-nonpositive-ℤ K))
 ```
 
-### Rules for inequalities
-
-#### Multiplication by a positive integer preserves the strict ordering
-
-```agda
-preserves-le-left-mul-ℤ :
-  {x y z : ℤ} → is-positive-ℤ z → le-ℤ x y → le-ℤ (x *ℤ z) (y *ℤ z)
-preserves-le-left-mul-ℤ {x} {y} {z} H p =
-  is-positive-eq-ℤ
-    ( inv (linear-diff-right-mul-ℤ y x z))
-    ( is-positive-mul-ℤ p H)
-
-preserves-le-right-mul-ℤ :
-  {x y z : ℤ} → is-positive-ℤ z → le-ℤ x y → le-ℤ (z *ℤ x) (z *ℤ y)
-preserves-le-right-mul-ℤ {x} {y} {z} H p =
-  is-positive-eq-ℤ
-    ( inv (linear-diff-left-mul-ℤ z y x))
-    ( is-positive-mul-ℤ H p)
-```
+### Factorization rules
 
 #### The left factor of a positive product with a positive right factor is positive
 
@@ -317,28 +299,7 @@ is-positive-right-factor-mul-ℤ {x} {y} H =
   is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
 ```
 
-#### Multiplication by a nonnegative integer preserves the ordering
-
-```agda
-preserves-leq-left-mul-ℤ :
-  {x y z : ℤ} → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (z *ℤ x) (z *ℤ y)
-preserves-leq-left-mul-ℤ {x} {y} {inr (inl star)} star K = star
-preserves-leq-left-mul-ℤ {x} {y} {inr (inr zero-ℕ)} star K = K
-preserves-leq-left-mul-ℤ {x} {y} {inr (inr (succ-ℕ n))} star K =
-  preserves-leq-add-ℤ {x} {y}
-    ( K)
-    ( preserves-leq-left-mul-ℤ {x} {y} {inr (inr n)} star K)
-
-preserves-leq-right-mul-ℤ :
-  {x y z : ℤ} → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (x *ℤ z) (y *ℤ z)
-preserves-leq-right-mul-ℤ {x} {y} {z} H K =
-  concatenate-eq-leq-eq-ℤ
-    ( commutative-mul-ℤ x z)
-    ( preserves-leq-left-mul-ℤ H K)
-    ( commutative-mul-ℤ z y)
-```
-
-#### The left factor of a nonnegative product with a nonnegative right factor is nonnegative
+#### The left factor of a nonnegative product with a positive right factor is nonnegative
 
 ```agda
 is-nonnegative-left-factor-mul-ℤ :
@@ -348,7 +309,7 @@ is-nonnegative-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
 is-nonnegative-left-factor-mul-ℤ {inr x} {inr y} H K = star
 ```
 
-#### The right factor of a nonnegative product with a nonnegative left factor is nonnegative
+#### The right factor of a nonnegative product with a positive left factor is nonnegative
 
 ```agda
 is-nonnegative-right-factor-mul-ℤ :
@@ -359,6 +320,34 @@ is-nonnegative-right-factor-mul-ℤ {x} {y} H =
 ```
 
 ## Definitions
+
+### Multiplication by a signed integer
+
+```agda
+int-mul-positive-ℤ : positive-ℤ → ℤ → ℤ
+int-mul-positive-ℤ x y = int-positive-ℤ x *ℤ y
+
+int-mul-positive-ℤ' : positive-ℤ → ℤ → ℤ
+int-mul-positive-ℤ' x y = y *ℤ int-positive-ℤ x
+
+int-mul-nonnegative-ℤ : nonnegative-ℤ → ℤ → ℤ
+int-mul-nonnegative-ℤ x y = int-nonnegative-ℤ x *ℤ y
+
+int-mul-nonnegative-ℤ' : nonnegative-ℤ → ℤ → ℤ
+int-mul-nonnegative-ℤ' x y = y *ℤ int-nonnegative-ℤ x
+
+int-mul-negative-ℤ : negative-ℤ → ℤ → ℤ
+int-mul-negative-ℤ x y = int-negative-ℤ x *ℤ y
+
+int-mul-negative-ℤ' : negative-ℤ → ℤ → ℤ
+int-mul-negative-ℤ' x y = y *ℤ int-negative-ℤ x
+
+int-mul-nonpositive-ℤ : nonpositive-ℤ → ℤ → ℤ
+int-mul-nonpositive-ℤ x y = int-nonpositive-ℤ x *ℤ y
+
+int-mul-nonpositive-ℤ' : nonpositive-ℤ → ℤ → ℤ
+int-mul-nonpositive-ℤ' x y = y *ℤ int-nonpositive-ℤ x
+```
 
 ### Multiplication of positive integers
 
@@ -387,4 +376,68 @@ mul-negative-ℤ (x , H) (y , K) = mul-ℤ x y , is-positive-mul-negative-ℤ H 
 mul-nonpositive-ℤ : nonpositive-ℤ → nonpositive-ℤ → nonnegative-ℤ
 mul-nonpositive-ℤ (x , H) (y , K) =
   mul-ℤ x y , is-nonnegative-mul-nonpositive-ℤ H K
+```
+
+## Rules for inequalities
+
+### Multiplication by a positive integer preserves and reflects the strict ordering
+
+```agda
+module _
+  {x y : ℤ} (z : positive-ℤ)
+  where
+
+  preserves-le-mul-positive-ℤ :
+    le-ℤ x y → le-ℤ (int-mul-positive-ℤ z x) (int-mul-positive-ℤ z y)
+  preserves-le-mul-positive-ℤ K =
+    is-positive-eq-ℤ
+      ( inv (linear-diff-left-mul-ℤ (int-positive-ℤ z) y x))
+      ( is-positive-mul-ℤ (is-positive-int-positive-ℤ z) K)
+
+  preserves-le-mul-positive-ℤ' :
+    le-ℤ x y → le-ℤ (int-mul-positive-ℤ' z x) (int-mul-positive-ℤ' z y)
+  preserves-le-mul-positive-ℤ' K =
+    is-positive-eq-ℤ
+      ( inv (linear-diff-right-mul-ℤ y x (int-positive-ℤ z)))
+      ( is-positive-mul-ℤ K (is-positive-int-positive-ℤ z))
+
+  reflects-le-mul-positive-ℤ :
+    le-ℤ (int-mul-positive-ℤ z x) (int-mul-positive-ℤ z y) → le-ℤ x y
+  reflects-le-mul-positive-ℤ K =
+    is-positive-right-factor-mul-ℤ
+      ( is-positive-eq-ℤ
+        ( linear-diff-left-mul-ℤ (int-positive-ℤ z) y x)
+        ( K))
+      ( is-positive-int-positive-ℤ z)
+
+  reflects-le-mul-positive-ℤ' :
+    le-ℤ (int-mul-positive-ℤ' z x) (int-mul-positive-ℤ' z y) → le-ℤ x y
+  reflects-le-mul-positive-ℤ' K =
+    is-positive-left-factor-mul-ℤ
+      ( is-positive-eq-ℤ
+        ( linear-diff-right-mul-ℤ y x (int-positive-ℤ z))
+        ( K))
+      ( is-positive-int-positive-ℤ z)
+```
+
+### Multiplication by a nonnegative integer preserves the ordering
+
+```agda
+module _
+  {x y : ℤ} (z : nonnegative-ℤ)
+  where
+
+  preserves-leq-mul-nonnegative-ℤ :
+    leq-ℤ x y → leq-ℤ (int-mul-nonnegative-ℤ z x) (int-mul-nonnegative-ℤ z y)
+  preserves-leq-mul-nonnegative-ℤ K =
+    is-nonnegative-eq-ℤ
+      ( inv (linear-diff-left-mul-ℤ (int-nonnegative-ℤ z) y x))
+      ( is-nonnegative-mul-ℤ (is-nonnegative-int-nonnegative-ℤ z) K)
+
+  preserves-leq-mul-nonnegative-ℤ' :
+    leq-ℤ x y → leq-ℤ (int-mul-nonnegative-ℤ' z x) (int-mul-nonnegative-ℤ' z y)
+  preserves-leq-mul-nonnegative-ℤ' K =
+    is-nonnegative-eq-ℤ
+      ( inv (linear-diff-right-mul-ℤ y x (int-nonnegative-ℤ z)))
+      ( is-nonnegative-mul-ℤ K (is-nonnegative-int-nonnegative-ℤ z))
 ```

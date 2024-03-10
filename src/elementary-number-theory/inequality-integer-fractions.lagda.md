@@ -254,11 +254,10 @@ module _
           ( numerator-fraction-ℤ x *ℤ k)
           ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x))
       ( H)
-      ( preserves-le-left-mul-ℤ
+      ( preserves-le-mul-positive-ℤ'
         { numerator-fraction-ℤ x}
         { numerator-fraction-ℤ y}
-        { denominator-fraction-ℤ x}
-        ( is-positive-denominator-fraction-ℤ x)
+        ( positive-denominator-fraction-ℤ x)
         ( H'))
 ```
 
