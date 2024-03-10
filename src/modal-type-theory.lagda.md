@@ -24,4 +24,5 @@ open import modal-type-theory.functoriality-flat-modality public
 open import modal-type-theory.sharp-codiscrete-maps public
 open import modal-type-theory.sharp-codiscrete-types public
 open import modal-type-theory.sharp-modality public
+open import modal-type-theory.transport-along-crisp-identifications public
 ```
